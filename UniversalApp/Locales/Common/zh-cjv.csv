@@ -447,7 +447,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,立即重生
 Authentication.SignUp.Action.SetupLater,稍后设置
 Authentication.SignUp.Action.StartOver,重新开始
-Authentication.SignUp.Action.StartPlay,开始游玩
 Authentication.SignUp.Action.UseEmail,使用电子邮箱地址
 Authentication.SignUp.Action.UsePhoneNumber,使用手机号码
 Authentication.SignUp.Button.OKCaptialized,
@@ -1204,6 +1203,19 @@ CoreScripts.TopBar.Music,音乐
 CoreScripts.TopBar.MusicLoading,没有正在播放的音频
 CoreScripts.TopBar.MusicNotVerified,正在播放的音频未验证
 CoreScripts.TopBar.Traversal.History,历史记录
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,持续游玩
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,传送
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Roblox 精选
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,首页其他
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,首页推荐
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,其他
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,传送门广告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,搜索广告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,赞助广告
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,向下滚动
 Feature.Accessibility.Action.ScrollUp,向上滚动
@@ -3788,7 +3800,7 @@ Feature.GameDetails.Label.ProvideFeedbackTitle,
 Feature.GameDetails.Label.Rating,评级
 Feature.GameDetails.Label.ReportAbuse,报告滥用行为
 Feature.GameDetails.Label.Servers,服务器
-Feature.GameDetails.Label.SomethingElse,其他
+Feature.GameDetails.Label.SomethingElse,
 Feature.GameDetails.Label.Store,
 Feature.GameDetails.Label.Subgenre,子类别
 Feature.GameDetails.Label.Supported,已支持

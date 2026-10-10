@@ -456,7 +456,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Respawn now
 Authentication.SignUp.Action.SetupLater,Setup later
 Authentication.SignUp.Action.StartOver,Start Over
-Authentication.SignUp.Action.StartPlay,Start play
 Authentication.SignUp.Action.UseEmail,Use email address
 Authentication.SignUp.Action.UsePhoneNumber,Use phone number
 Authentication.SignUp.Button.OKCaptialized,
@@ -1213,6 +1212,19 @@ CoreScripts.TopBar.Music,Music
 CoreScripts.TopBar.MusicLoading,No audio is playing
 CoreScripts.TopBar.MusicNotVerified,The audio playing is unverified
 CoreScripts.TopBar.Traversal.History,History
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Continue Play
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teleport
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Featured by Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Home Other
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Home Recommendation
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,Other
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portal Ads
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Search Ads
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Sponsored Ads
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Scroll Down
 Feature.Accessibility.Action.ScrollUp,Scroll Up
@@ -4485,7 +4497,7 @@ Feature.NotApproved.Label.AbuseType.NoneoftheAbove,None of the Above
 Feature.NotApproved.Label.AbuseType.NotRelatedtoRoblox,Not Related to Roblox
 Feature.NotApproved.Label.AbuseType.OffPlatformSpeechandBehavior,Off Platform Speech and Behavior
 Feature.NotApproved.Label.AbuseType.OffSiteLinks,Off-Site Links
-Feature.NotApproved.Label.AbuseType.Other,Other
+Feature.NotApproved.Label.AbuseType.Other,
 Feature.NotApproved.Label.AbuseType.PersonalAttackHarassmentBullying,Personal Attack/Harassment/Bullying
 Feature.NotApproved.Label.AbuseType.PhishingScam,Phishing/Scam
 Feature.NotApproved.Label.AbuseType.PlayersScreamingintoMicrophone,Players Screaming into Microphone

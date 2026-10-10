@@ -438,7 +438,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Nu respawnen
 Authentication.SignUp.Action.SetupLater,Later instellen
 Authentication.SignUp.Action.StartOver,Opnieuw beginnen
-Authentication.SignUp.Action.StartPlay,Beginnen met spelen
 Authentication.SignUp.Action.UseEmail,
 Authentication.SignUp.Action.UsePhoneNumber,
 Authentication.SignUp.Button.OKCaptialized,
@@ -1193,6 +1192,19 @@ CoreScripts.TopBar.Music,Muziek
 CoreScripts.TopBar.MusicLoading,Er wordt geen audio afgespeeld
 CoreScripts.TopBar.MusicNotVerified,De afgespeelde audio is niet geverifieerd
 CoreScripts.TopBar.Traversal.History,Geschiedenis
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Grafieken
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Doorgaan met spelen
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teleporteren
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Uitgelicht door Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Overige startpagina
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Aanbeveling voor startpagina
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,Overig
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portaaladvertenties
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Zoekadvertenties
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Gesponsorde advertenties
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Omlaag scrollen
 Feature.Accessibility.Action.ScrollUp,Omhoog scrollen
@@ -3467,7 +3479,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,Facial Animation is tijdelijk niet bes
 Feature.FaceChat.Subtitle.UnableToAccessCamera,"Ga naar de instellingen van je besturingssysteem en geef Roblox toestemming om je camera te gebruiken, zodat je avatar met je camera geanimeerd kan worden"
 Feature.Favorites.Label.Favorite,Markeren als favoriet
 Feature.Favorites.Label.Favorited,Als favoriet opgeslagen
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Doorgaan met spelen
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"Je profiel, content en instellingen zijn verplaatst."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> is verplaatst
 Feature.Friends.Action.AcceptFriend,Vriend accepteren
@@ -4436,7 +4448,7 @@ Feature.NotApproved.Label.AbuseType.NoneoftheAbove,Geen van de bovenstaande
 Feature.NotApproved.Label.AbuseType.NotRelatedtoRoblox,Niet gerelateerd aan Roblox
 Feature.NotApproved.Label.AbuseType.OffPlatformSpeechandBehavior,Uitingen of gedrag buiten het platform
 Feature.NotApproved.Label.AbuseType.OffSiteLinks,Externe links
-Feature.NotApproved.Label.AbuseType.Other,Overig
+Feature.NotApproved.Label.AbuseType.Other,
 Feature.NotApproved.Label.AbuseType.PersonalAttackHarassmentBullying,Persoonlijke aanval/intimidatie/pesten
 Feature.NotApproved.Label.AbuseType.PhishingScam,Phishing/oplichting
 Feature.NotApproved.Label.AbuseType.PlayersScreamingintoMicrophone,Spelers die in de microfoon schreeuwen

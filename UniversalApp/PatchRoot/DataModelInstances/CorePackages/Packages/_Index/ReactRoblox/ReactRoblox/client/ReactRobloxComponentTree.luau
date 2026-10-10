@@ -82,15 +82,23 @@ function t.getClosestInstanceFromNode(p1)
 end
 
 function t.getInstanceFromNode(p2)
-	-- upvalues: var1 (write), var2 (write), var3 (write), var4 (write), var5 (write), text (ref), text_1 (ref)
+	-- upvalues: var1 (write), var2 (write), sharedModule (ref), var3 (write), var4 (write), var5 (write), t_2 (ref), t_1 (ref), text (ref), text_1 (ref)
 	if var1 == nil then
 		var1 = require(script.Parent.Parent["ReactReconciler.roblox"]).ReactWorkTags
 		var2 = var1.HostComponent
-		var3 = var1.HostComponent
-		var4 = var1.HostComponent
-		var5 = var1.HostComponent
+		
+		if sharedModule.ReactFeatureFlags.fixGetInstanceFromNode then
+			var3 = var1.HostText
+			var4 = var1.HostRoot
+			var5 = var1.SuspenseComponent
+		else
+			var3 = var1.HostComponent
+			var4 = var1.HostComponent
+			var5 = var1.HostComponent
+		end
 	end
-	local var11 = p2[text] or p2[text_1]
+	local _ = nil
+	local var11 = if sharedModule.ReactFeatureFlags.fixGetInstanceFromNode then t_2[p2] or t_1[p2] else p2[text] or p2[text_1]
 	
 	return if var11 then if var11.tag == var2 or var11.tag == var3 or (var11.tag == var5 or var11.tag == var4) then var11 else nil else nil
 end

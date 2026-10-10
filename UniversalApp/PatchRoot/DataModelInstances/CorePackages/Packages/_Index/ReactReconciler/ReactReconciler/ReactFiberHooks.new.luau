@@ -15,6 +15,7 @@ local dEV = reactGlobalsModule.__DEV__
 local createRef = require(parent.React).createRef
 local createBinding = require(parent.React).createBinding
 local console = require(parent.Shared).console
+local memoValues = require(parent.Shared).MemoValues
 local _ = require(parent.Shared)
 local _ = require(script.Parent.ReactInternalTypes)
 local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
@@ -25,6 +26,8 @@ local enableDebugTracing = reactFeatureFlags.enableDebugTracing
 local enableSchedulingProfiler = reactFeatureFlags.enableSchedulingProfiler
 local enableNewReconciler = reactFeatureFlags.enableNewReconciler
 local enableDoubleInvokingEffects = reactFeatureFlags.enableDoubleInvokingEffects
+local enableAllocationTrims = reactFeatureFlags.enableAllocationTrims
+local enableHookDoubleBuffering = reactFeatureFlags.enableHookDoubleBuffering
 local debugTracingMode = require(script.Parent.ReactTypeOfMode).DebugTracingMode
 local noLane = reactFiberLaneModule.NoLane
 local noLanes = reactFiberLaneModule.NoLanes
@@ -92,7 +95,10 @@ if dEV then
 end
 local t_2 = {
 	bailoutHooks = function(p1, p2, p3)
-		-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), mountPassiveDev (ref), passive (ref), mountLayoutDev (ref), update (ref), removeLanes (ref)
+		-- upvalues: enableHookDoubleBuffering (ref), dEV (ref), enableDoubleInvokingEffects (ref), mountPassiveDev (ref), passive (ref), mountLayoutDev (ref), update (ref), removeLanes (ref)
+		if enableHookDoubleBuffering and p1.updateQueue ~= nil then
+			p1.updateQueue.alternate = nil
+		end
 		p2.updateQueue = p1.updateQueue
 		
 		if dEV and enableDoubleInvokingEffects then
@@ -107,11 +113,13 @@ local var2 = noLanes
 local var3 = nil
 local var4 = nil
 local var5 = nil
-local var6 = false
-local var7 = false
-local var8 = nil
-local var9 = nil
-local var10 = 0
+local var6 = nil
+local var7 = nil
+local var8 = false
+local var9 = false
+local var10 = nil
+local var11 = nil
+local var12 = 0
 local t_3 = nil
 local t_4 = nil
 local t_5 = nil
@@ -121,14 +129,14 @@ local t_8 = nil
 local t_9 = nil
 
 local _ = function(p1)
-	local var11 = 0
+	local var13 = 0
 	
 	for i, v in p1 do
-		if var11 < i then
-			var11 = i
+		if var13 < i then
+			var13 = i
 		end
 	end
-	return var11
+	return var13
 end
 
 local _ = function(p2)
@@ -144,71 +152,71 @@ local _ = function(p2)
 end
 
 local _ = function()
-	-- upvalues: dEV (ref), var8 (write), var9 (write)
+	-- upvalues: dEV (ref), var10 (write), var11 (write)
 	if dEV then
-		local var12 = var8
+		local var14 = var10
 		
-		if var9 == nil then
-			var9 = { var12 }
+		if var11 == nil then
+			var11 = { var14 }
 			
 			return
 		end
-		table.insert(var9, var12)
+		table.insert(var11, var14)
 	end
 end
 
 function updateHookTypesDev()
-	-- upvalues: dEV (ref), var8 (write), var9 (write), var10 (write)
+	-- upvalues: dEV (ref), var10 (write), var11 (write), var12 (write)
 	if dEV then
-		local var12 = var8
+		local var14 = var10
 		
-		if var9 ~= nil then
-			var10 += 1
+		if var11 ~= nil then
+			var12 += 1
 			
-			if var9[var10] ~= var12 then
-				warnOnHookMismatchInDev(var12)
+			if var11[var12] ~= var14 then
+				warnOnHookMismatchInDev(var14)
 			end
 		end
 	end
 end
 
 local _ = function(p3)
-	-- upvalues: dEV (ref), console (ref), var8 (write)
+	-- upvalues: dEV (ref), console (ref), var10 (write)
 	if dEV and p3 ~= nil then
-		local var12
+		local var14
 		if type(p3) == "table" then
 			for i, v in p3 do
 				if type(i) ~= "number" then
-					var12 = false
+					var14 = false
 				end
 			end
-			var12 = true
+			var14 = true
 		else
-			var12 = false
+			var14 = false
 		end
-		if not var12 then
-			console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var8, type(p3))
+		if not var14 then
+			console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var10, type(p3))
 		end
 	end
 end
 
 function warnOnHookMismatchInDev(p4)
-	-- upvalues: dEV (ref), getComponentName (ref), var3 (write), t (write), var9 (write), var10 (write), console (ref)
+	-- upvalues: dEV (ref), getComponentName (ref), var3 (write), t (write), var11 (write), var12 (write), console (ref)
 	if dEV then
 		local type = getComponentName(var3.type) or "Component"
 		
 		if not t[type] then
 			t[type] = true
 			
-			if var9 ~= nil then
-				local var13 = ""
+			if var11 ~= nil then
+				local var15 = ""
 				
-				for i = 1, var10 do
-					local var14 = var9[i]
-					local var15 = if i == var10 then p4 else var14
-					local text = tostring(i) .. ". " .. (var14 or "undefined")
+				for i = 1, var12 do
+					local var16 = var11[i]
+					local var17 = if i == var12 then p4 else var16
+					local text = tostring(i) .. ". " .. (var16 or "undefined")
 				end
-				console.error("React has detected a change in the order of Hooks called by %s. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://reactjs.org/link/rules-of-hooks\n\n   Previous render            Next render\n   ------------------------------------------------------\n%s   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n", type, var13)
+				console.error("React has detected a change in the order of Hooks called by %s. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://reactjs.org/link/rules-of-hooks\n\n   Previous render            Next render\n   ------------------------------------------------------\n%s   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n", type, var15)
 			end
 		end
 	end
@@ -220,46 +228,46 @@ local function throwInvalidHookError()
 end
 
 local function areHookInputsEqual(p5, p6)
-	-- upvalues: dEV (ref), console (ref), var8 (write)
+	-- upvalues: dEV (ref), console (ref), var10 (write)
 	if p6 == nil then
 		if dEV then
-			console.error("%s received a final argument during this render, but not during the previous render. Even though the final argument is optional, its type cannot change between renders.", var8)
+			console.error("%s received a final argument during this render, but not during the previous render. Even though the final argument is optional, its type cannot change between renders.", var10)
 		end
 		return false
 	else
-		local var16 = 0
+		local var18 = 0
 		
 		for i, v in p5 do
-			if var16 < i then
-				var16 = i
+			if var18 < i then
+				var18 = i
 			end
 		end
-		local var17 = 0
+		local var19 = 0
 		
 		for i_1, v_1 in p6 do
-			if var17 < i_1 then
-				var17 = i_1
+			if var19 < i_1 then
+				var19 = i_1
 			end
 		end
-		if var16 ~= var17 then
+		if var18 ~= var19 then
 			return false
 		end
-		for i_2 = 1, math.min(var17, var16) do
-			local var18
-			local var19 = p5[i_2]
-			local var20 = p6[i_2]
+		for i_2 = 1, math.min(var19, var18) do
+			local var20
+			local var21 = p5[i_2]
+			local var22 = p6[i_2]
 			
-			if var19 == var20 then
-				var18 = true
+			if var21 == var22 then
+				var20 = true
 				
-				if var19 == 0 then
-					var18 = true
+				if var21 == 0 then
+					var20 = true
 					
-					if 1 / var19 ~= 1 / var20 then
-						var18 = var19 ~= var19 and var20 ~= var20
+					if 1 / var21 ~= 1 / var22 then
+						var20 = var21 ~= var21 and var22 ~= var22
 					end
 				end
-				if var18 then
+				if var20 then
 					continue
 				end
 				return false
@@ -269,13 +277,13 @@ local function areHookInputsEqual(p5, p6)
 	end
 end
 
-local var21 = false
+local var23 = false
 
 function t_2.resetHooksAfterThrow()
-	-- upvalues: reactCurrentDispatcher (ref), t_2 (ref), var6 (write), var3 (write), var2 (write), noLanes (ref), var4 (write), var5 (write), dEV (ref), var9 (write), var10 (write), var8 (write), var21 (write), var7 (write)
+	-- upvalues: reactCurrentDispatcher (ref), t_2 (ref), var8 (write), var3 (write), var2 (write), noLanes (ref), var4 (write), var5 (write), enableHookDoubleBuffering (ref), var6 (write), var7 (write), dEV (ref), var11 (write), var12 (write), var10 (write), var23 (write), var9 (write)
 	reactCurrentDispatcher.current = t_2.ContextOnlyDispatcher
 	
-	if var6 then
+	if var8 then
 		local memoizedState = var3.memoizedState
 		while memoizedState ~= nil do
 			local queue = memoizedState.queue
@@ -285,25 +293,34 @@ function t_2.resetHooksAfterThrow()
 			end
 			memoizedState = memoizedState.next
 		end
-		var6 = false
+		var8 = false
 	end
 	var2 = noLanes
 	var3 = nil
 	var4 = nil
 	var5 = nil
 	
-	if dEV then
-		var9 = nil
-		var10 = 0
-		var8 = nil
-		var21 = false
+	if enableHookDoubleBuffering then
+		var6 = nil
+		var7 = nil
 	end
-	var7 = false
+	if dEV then
+		var11 = nil
+		var12 = 0
+		var10 = nil
+		var23 = false
+	end
+	var9 = false
 end
 
-local _ = function()
-	-- upvalues: var5 (write), var3 (write)
-	local t = {
+local function mountWorkInProgressHook()
+	-- upvalues: enableAllocationTrims (ref), var5 (write), var3 (write)
+	local var24 = if enableAllocationTrims then {
+		memoizedState = nil,
+		baseState = nil,
+		queue = nil,
+		next = nil
+	} else {
 		memoizedState = nil,
 		baseState = nil,
 		baseQueue = nil,
@@ -312,52 +329,108 @@ local _ = function()
 	}
 	
 	if var5 == nil then
-		var3.memoizedState = t
-		var5 = t
+		var3.memoizedState = var24
+		var5 = var24
 	else
-		var5.next = t
-		var5 = t
+		var5.next = var24
+		var5 = var24
 	end
 	return var5
 end
 
 local function updateWorkInProgressHook()
-	-- upvalues: var4 (write), var3 (write), var5 (write), error (ref)
-	local var22
+	-- upvalues: var4 (write), var3 (write), var5 (write), error (ref), enableHookDoubleBuffering (ref), enableAllocationTrims (ref)
+	local var24
 	local _ = nil
 	
 	if var4 == nil then
 		local alternate = var3.alternate
-		var22 = if alternate ~= nil then nil else alternate.memoizedState
+		var24 = if alternate ~= nil then nil else alternate.memoizedState
 	else
-		var22 = var4.next
+		var24 = var4.next
 	end
-	local var23 = if var5 == nil then var3.memoizedState else var5.next
+	local var25 = if var5 == nil then var3.memoizedState else var5.next
 	
-	if var23 == nil then
-		if var22 == nil then
+	if var25 == nil then
+		if var24 == nil then
 			error(error.new("Rendered more hooks than during the previous render."))
 		end
-		var4 = var22
-		local t = {
-			next = nil,
-			memoizedState = var4.memoizedState,
-			baseState = var4.baseState,
-			baseQueue = var4.baseQueue,
-			queue = var4.queue
-		}
+		local alternate
+		var4 = var24
+		local _ = nil
 		
-		if var5 == nil then
-			var5 = t
-			var3.memoizedState = t
+		if enableHookDoubleBuffering then
+			alternate = var4.alternate
+			
+			if alternate == nil then
+				alternate = {
+					next = nil,
+					memoizedState = var4.memoizedState,
+					baseState = var4.baseState,
+					baseQueue = var4.baseQueue,
+					queue = var4.queue,
+					alternate = var4
+				}
+				var4.alternate = alternate
+			else
+				local memoizedState = var4.memoizedState
+				
+				if memoizedState ~= nil or alternate.memoizedState ~= nil then
+					alternate.memoizedState = memoizedState
+				end
+				memoizedState = var4.baseState
+				
+				if memoizedState ~= nil or alternate.baseState ~= nil then
+					alternate.baseState = memoizedState
+				end
+				memoizedState = var4.baseQueue
+				
+				if memoizedState ~= nil or alternate.baseQueue ~= nil then
+					alternate.baseQueue = memoizedState
+				end
+				memoizedState = var4.queue
+				
+				if memoizedState ~= nil or alternate.queue ~= nil then
+					alternate.queue = memoizedState
+				end
+				if alternate.next ~= nil then
+					alternate.next = nil
+				end
+			end
+		elseif enableAllocationTrims then
+			local baseQueue = var4.baseQueue
+			alternate = if baseQueue == nil then {
+				next = nil,
+				memoizedState = var4.memoizedState,
+				baseState = var4.baseState,
+				queue = var4.queue
+			} else {
+				next = nil,
+				memoizedState = var4.memoizedState,
+				baseState = var4.baseState,
+				baseQueue = baseQueue,
+				queue = var4.queue
+			}
 		else
-			var5.next = t
-			var5 = t
+			alternate = {
+				next = nil,
+				memoizedState = var4.memoizedState,
+				baseState = var4.baseState,
+				baseQueue = var4.baseQueue,
+				queue = var4.queue
+			}
+		end
+		if var5 == nil then
+			var5 = alternate
+			var3.memoizedState = alternate
+		else
+			var5.next = alternate
+			var5 = alternate
 		end
 	else
-		var5 = var23
-		var23 = var5.next
-		var4 = var22
+		var5 = var25
+		var25 = var5.next
+		var4 = var24
 	end
 	return var5
 end
@@ -367,48 +440,33 @@ function basicStateReducer(p7, p8)
 end
 
 function mountReducer(p7, p8, p9)
-	-- upvalues: var5 (write), var3 (write)
+	-- upvalues: mountWorkInProgressHook (ref), var3 (write)
+	local var24 = mountWorkInProgressHook()
+	local var25 = if p9 ~= nil then p8 else p9(p8)
+	var24.baseState = var25
+	var24.memoizedState = var24.baseState
 	local t = {
-		memoizedState = nil,
-		baseState = nil,
-		baseQueue = nil,
-		queue = nil,
-		next = nil
-	}
-	
-	if var5 == nil then
-		var3.memoizedState = t
-		var5 = t
-	else
-		var5.next = t
-		var5 = t
-	end
-	local var22 = var5
-	local var23 = if p9 ~= nil then p8 else p9(p8)
-	var22.baseState = var23
-	var22.memoizedState = var22.baseState
-	local t_1 = {
 		pending = nil,
 		dispatch = nil,
 		lastRenderedReducer = p7,
-		lastRenderedState = var23
+		lastRenderedState = var25
 	}
-	var22.queue = t_1
+	var24.queue = t
 	
-	local var24 = function(p10, ...)
-		-- upvalues: var3 (ref), t_1 (ref)
-		dispatchAction(var3, t_1, p10, ...)
+	local var26 = function(p10, ...)
+		-- upvalues: var3 (ref), t (ref)
+		dispatchAction(var3, t, p10, ...)
 	end
 	
-	t_1.dispatch = var24
+	t.dispatch = var26
 	
-	return var22.memoizedState, var24
+	return var24.memoizedState, var26
 end
 
 function updateReducer(p7, _, _)
 	-- upvalues: updateWorkInProgressHook (ref), var4 (write), var2 (write), var3 (write), mergeLanes (ref), markSkippedUpdateLanes (ref), noLane (ref), markWorkInProgressReceivedUpdate (ref)
-	local var22 = updateWorkInProgressHook()
-	local queue = var22.queue
+	local var24 = updateWorkInProgressHook()
+	local queue = var24.queue
 	assert(queue ~= nil, "Should have a queue. This is likely a bug in React. Please file an issue.")
 	queue.lastRenderedReducer = p7
 	local baseQueue = var4.baseQueue
@@ -427,115 +485,115 @@ function updateReducer(p7, _, _)
 	if baseQueue ~= nil then
 		local next = baseQueue.next
 		local baseState = var4.baseState
-		local var23 = nil
-		local var24 = nil
+		local var25 = nil
+		local var26 = nil
 		local next_1 = nil
-		local var25 = next
+		local var27 = next
 		repeat
-			local lane = var25.lane
+			local lane = var27.lane
 			if bit32.band(var2, lane) == lane then
 				if next_1 ~= nil then
 					next_1.next = {
 						next = nil,
 						lane = noLane,
-						action = var25.action,
-						eagerReducer = var25.eagerReducer,
-						eagerState = var25.eagerState
+						action = var27.action,
+						eagerReducer = var27.eagerReducer,
+						eagerState = var27.eagerState
 					}
 					next_1 = next_1.next
 				end
-				baseState = if var25.eagerReducer == p7 then var25.eagerState else p7(baseState, var25.action)
-				var25 = var25.next
+				baseState = if var27.eagerReducer == p7 then var27.eagerState else p7(baseState, var27.action)
+				var27 = var27.next
 			end
 			local t = {
 				next = nil,
 				lane = lane,
-				action = var25.action,
-				eagerReducer = var25.eagerReducer,
-				eagerState = var25.eagerState
+				action = var27.action,
+				eagerReducer = var27.eagerReducer,
+				eagerState = var27.eagerState
 			}
 			
 			if next_1 == nil then
 				next_1 = t
-				var24 = next_1
-				var23 = baseState
+				var26 = next_1
+				var25 = baseState
 			else
 				next_1.next = t
 				next_1 = next_1.next
 			end
 			var3.lanes = mergeLanes(var3.lanes, lane)
 			markSkippedUpdateLanes(lane)
-		until var25 == nil or var25 == next
+		until var27 == nil or var27 == next
 		if next_1 == nil then
-			var23 = baseState
+			var25 = baseState
 		else
-			next_1.next = var24
+			next_1.next = var26
 		end
-		local var26
-		local var27 = baseState
-		local memoizedState = var22.memoizedState
+		local var28
+		local var29 = baseState
+		local memoizedState = var24.memoizedState
 		
-		if var27 == memoizedState then
+		if var29 == memoizedState then
+			var28 = true
+			
+			if var29 == 0 then
+				var28 = true
+				
+				if 1 / var29 ~= 1 / memoizedState then
+					var28 = var29 ~= var29 and memoizedState ~= memoizedState
+				end
+			end
+			if not var28 then
+				markWorkInProgressReceivedUpdate()
+			end
+			var24.memoizedState = baseState
+			var24.baseState = var25
+			var24.baseQueue = next_1
+			queue.lastRenderedState = baseState
+		end
+	end
+	return var24.memoizedState, queue.dispatch
+end
+
+function rerenderReducer(p7, _, _)
+	-- upvalues: updateWorkInProgressHook (ref), markWorkInProgressReceivedUpdate (ref)
+	local var24 = updateWorkInProgressHook()
+	local queue = var24.queue
+	assert(queue ~= nil, "Should have a queue. This is likely a bug in React. Please file an issue.")
+	queue.lastRenderedReducer = p7
+	local dispatch = queue.dispatch
+	local pending = queue.pending
+	local memoizedState = var24.memoizedState
+	
+	if pending ~= nil then
+		queue.pending = nil
+		local next = pending.next
+		local var25 = next
+		repeat
+			memoizedState = p7(memoizedState, var25.action)
+			var25 = var25.next
+		until var25 == next
+		local var26
+		local var27 = memoizedState
+		local memoizedState_1 = var24.memoizedState
+		
+		if var27 == memoizedState_1 then
 			var26 = true
 			
 			if var27 == 0 then
 				var26 = true
 				
-				if 1 / var27 ~= 1 / memoizedState then
-					var26 = var27 ~= var27 and memoizedState ~= memoizedState
+				if 1 / var27 ~= 1 / memoizedState_1 then
+					var26 = var27 ~= var27 and memoizedState_1 ~= memoizedState_1
 				end
 			end
 			if not var26 then
 				markWorkInProgressReceivedUpdate()
 			end
-			var22.memoizedState = baseState
-			var22.baseState = var23
-			var22.baseQueue = next_1
-			queue.lastRenderedState = baseState
-		end
-	end
-	return var22.memoizedState, queue.dispatch
-end
-
-function rerenderReducer(p7, _, _)
-	-- upvalues: updateWorkInProgressHook (ref), markWorkInProgressReceivedUpdate (ref)
-	local var22 = updateWorkInProgressHook()
-	local queue = var22.queue
-	assert(queue ~= nil, "Should have a queue. This is likely a bug in React. Please file an issue.")
-	queue.lastRenderedReducer = p7
-	local dispatch = queue.dispatch
-	local pending = queue.pending
-	local memoizedState = var22.memoizedState
-	
-	if pending ~= nil then
-		queue.pending = nil
-		local next = pending.next
-		local var23 = next
-		repeat
-			memoizedState = p7(memoizedState, var23.action)
-			var23 = var23.next
-		until var23 == next
-		local var24
-		local var25 = memoizedState
-		local memoizedState_1 = var22.memoizedState
-		
-		if var25 == memoizedState_1 then
-			var24 = true
+			var24.memoizedState = memoizedState
 			
-			if var25 == 0 then
-				var24 = true
-				
-				if 1 / var25 ~= 1 / memoizedState_1 then
-					var24 = var25 ~= var25 and memoizedState_1 ~= memoizedState_1
-				end
-			end
-			if not var24 then
-				markWorkInProgressReceivedUpdate()
-			end
-			var22.memoizedState = memoizedState
-			
-			if var22.baseQueue == nil then
-				var22.baseState = memoizedState
+			if var24.baseQueue == nil then
+				var24.baseState = memoizedState
 			end
 			queue.lastRenderedState = memoizedState
 		end
@@ -548,113 +606,113 @@ function readFromUnsubcribedMutableSource(p7, p8, p9)
 	if dEV then
 		warnAboutMultipleRenderersDEV(p8)
 	end
-	local var22
+	local var24
 	local version = p8._getVersion(p8._source)
 	local _ = false
-	local var23 = getWorkInProgressVersion(p8)
+	local var25 = getWorkInProgressVersion(p8)
 	
-	if var23 == nil then
-		var22 = isSubsetOfLanes(var2, p7.mutableReadLanes)
+	if var25 == nil then
+		var24 = isSubsetOfLanes(var2, p7.mutableReadLanes)
 		
-		if var22 then
+		if var24 then
 			setWorkInProgressVersion(p8, version)
 		end
 	else
-		local _ = var23 == version
+		local _ = var25 == version
 	end
-	if not var22 then
+	if not var24 then
 		markSourceAsDirty(p8)
 		error(error.new("Cannot read from mutable source during the current render without tearing. This is a bug in React. Please file an issue."))
 		
 		return
 	end
-	local var24 = p9(p8._source)
+	local var26 = p9(p8._source)
 	
-	if dEV and type(var24) == "function" then
+	if dEV and type(var26) == "function" then
 		console.error("Mutable source should not return a function as the snapshot value. Functions may close over mutable values and cause tearing.")
 	end
-	return var24
+	return var26
 end
 
 function useMutableSource(p7, p8, p9, p10)
 	-- upvalues: getWorkInProgressRoot (ref), invariant (ref), reactCurrentDispatcher (ref), var5 (write), var3 (write), dEV (ref), console (ref), requestUpdateLane (ref), markRootMutableRead (ref), markRootEntangled (ref)
-	local var22 = getWorkInProgressRoot()
-	invariant(var22 ~= nil, "Expected a work-in-progress root. This is a bug in React. Please file an issue.")
+	local var24 = getWorkInProgressRoot()
+	invariant(var24 ~= nil, "Expected a work-in-progress root. This is a bug in React. Please file an issue.")
 	local getVersion = p8._getVersion
-	local var23 = getVersion(p8._source)
+	local var25 = getVersion(p8._source)
 	local current = reactCurrentDispatcher.current
 	assert(current ~= nil, "dispatcher was nil, this is a bug in React")
-	local var24, var25 = current.useState(function()
-		-- upvalues: var22 (ref), p8 (ref), p9 (ref)
-		return readFromUnsubcribedMutableSource(var22, p8, p9)
+	local var26, var27 = current.useState(function()
+		-- upvalues: var24 (ref), p8 (ref), p9 (ref)
+		return readFromUnsubcribedMutableSource(var24, p8, p9)
 	end)
-	local var26 = var24
+	local var28 = var26
 	local memoizedState = p7.memoizedState
 	
 	if memoizedState.refs == nil then
 		error(tostring(debug.traceback()))
 	end
-	local var27
+	local var29
 	local refs = memoizedState.refs
 	local getSnapshot = refs.getSnapshot
 	local source = memoizedState.source
 	local subscribe = memoizedState.subscribe
 	p7.memoizedState = { refs = refs, source = p8, subscribe = p10 }
 	current.useEffect(function()
-		-- upvalues: refs (ref), p9 (ref), var25 (write), getVersion (ref), p8 (ref), var23 (ref), dEV (copy), console (copy), var26 (write), requestUpdateLane (copy), var3 (ref), markRootMutableRead (copy), var22 (ref), markRootEntangled (copy)
-		local var28
+		-- upvalues: refs (ref), p9 (ref), var27 (write), getVersion (ref), p8 (ref), var25 (ref), dEV (copy), console (copy), var28 (write), requestUpdateLane (copy), var3 (ref), markRootMutableRead (copy), var24 (ref), markRootEntangled (copy)
+		local var30
 		refs.getSnapshot = p9
-		refs.setSnapshot = var25
-		local var29 = getVersion(p8._source)
-		local var30 = var23
+		refs.setSnapshot = var27
+		local var31 = getVersion(p8._source)
+		local var32 = var25
 		
-		if var30 == var29 then
-			var28 = true
+		if var32 == var31 then
+			var30 = true
 			
-			if var30 == 0 then
-				var28 = true
+			if var32 == 0 then
+				var30 = true
 				
-				if 1 / var30 ~= 1 / var29 then
-					var28 = var30 ~= var30 and var29 ~= var29
+				if 1 / var32 ~= 1 / var31 then
+					var30 = var32 ~= var32 and var31 ~= var31
 				end
 			end
-			if not var28 then
-				var28 = p9(p8._source)
+			if not var30 then
+				var30 = p9(p8._source)
 				
-				if dEV and type(var28) == "function" then
+				if dEV and type(var30) == "function" then
 					console.error("Mutable source should not return a function as the snapshot value. Functions may close over mutable values and cause tearing.")
 				end
-				local var31 = var26
+				local var33 = var28
 				
-				if var31 == var28 then
-					var30 = true
+				if var33 == var30 then
+					var32 = true
 					
-					if var31 == 0 then
-						var30 = true
+					if var33 == 0 then
+						var32 = true
 						
-						if 1 / var31 ~= 1 / var28 then
-							var30 = var31 ~= var31 and var28 ~= var28
+						if 1 / var33 ~= 1 / var30 then
+							var32 = var33 ~= var33 and var30 ~= var30
 						end
 					end
-					if not var30 then
-						var25(var28)
-						markRootMutableRead(var22, requestUpdateLane(var3))
+					if not var32 then
+						var27(var30)
+						markRootMutableRead(var24, requestUpdateLane(var3))
 					end
-					markRootEntangled(var22, var22.mutableReadLanes)
+					markRootEntangled(var24, var24.mutableReadLanes)
 				end
 			end
 		end
 	end, { p9, p8, p10 })
 	current.useEffect(function()
-		-- upvalues: refs (ref), p8 (ref), requestUpdateLane (copy), var3 (ref), markRootMutableRead (copy), var22 (ref), p10 (ref), dEV (copy), console (copy)
-		local var28 = p10(p8._source, function()
-			-- upvalues: refs (copy), p8 (copy), requestUpdateLane (copy), var3 (copy), markRootMutableRead (copy), var22 (copy)
+		-- upvalues: refs (ref), p8 (ref), requestUpdateLane (copy), var3 (ref), markRootMutableRead (copy), var24 (ref), p10 (ref), dEV (copy), console (copy)
+		local var30 = p10(p8._source, function()
+			-- upvalues: refs (copy), p8 (copy), requestUpdateLane (copy), var3 (copy), markRootMutableRead (copy), var24 (copy)
 			local getSnapshot = refs.getSnapshot
 			local setSnapshot = refs.setSnapshot
 			local ok, status = pcall(function()
-				-- upvalues: setSnapshot (ref), getSnapshot (ref), p8 (copy), requestUpdateLane (copy), var3 (copy), markRootMutableRead (copy), var22 (copy)
+				-- upvalues: setSnapshot (ref), getSnapshot (ref), p8 (copy), requestUpdateLane (copy), var3 (copy), markRootMutableRead (copy), var24 (copy)
 				setSnapshot(getSnapshot(p8._source))
-				markRootMutableRead(var22, requestUpdateLane(var3))
+				markRootMutableRead(var24, requestUpdateLane(var3))
 			end)
 			
 			if not ok then
@@ -665,65 +723,65 @@ function useMutableSource(p7, p8, p9, p10)
 			end
 		end)
 		
-		if dEV and type(var28) ~= "function" then
+		if dEV and type(var30) ~= "function" then
 			console.error("Mutable source subscribe function must return an unsubscribe function.")
 		end
-		return var28
+		return var30
 	end, { p8, p10 })
 	
 	if getSnapshot == p9 then
-		var27 = true
+		var29 = true
 		
 		if getSnapshot == 0 then
-			var27 = true
+			var29 = true
 			
 			if 1 / getSnapshot ~= 1 / p9 then
-				var27 = getSnapshot ~= getSnapshot and p9 ~= p9
+				var29 = getSnapshot ~= getSnapshot and p9 ~= p9
 			end
 		end
-		if var27 then
+		if var29 then
 			if source == p8 then
-				var27 = true
+				var29 = true
 				
 				if source == 0 then
-					var27 = true
+					var29 = true
 					
 					if 1 / source ~= 1 / p8 then
-						var27 = source ~= source and p8 ~= p8
+						var29 = source ~= source and p8 ~= p8
 					end
 				end
-				if var27 then
+				if var29 then
 					if subscribe == p10 then
-						var27 = true
+						var29 = true
 						
 						if subscribe == 0 then
-							var27 = true
+							var29 = true
 							
 							if 1 / subscribe ~= 1 / p10 then
-								var27 = subscribe ~= subscribe and p10 ~= p10
+								var29 = subscribe ~= subscribe and p10 ~= p10
 							end
 						end
-						if not var27 then
-							var27 = {
+						if not var29 then
+							var29 = {
 								pending = nil,
 								dispatch = nil,
 								lastRenderedReducer = basicStateReducer,
-								lastRenderedState = var26
+								lastRenderedState = var28
 							}
-							local var28 = var3
+							local var30 = var3
 							
-							function var86.dispatch(...)
-								-- upvalues: var28 (ref), var27 (ref)
-								dispatchAction(var28, var27, ...)
+							function var89.dispatch(...)
+								-- upvalues: var30 (ref), var29 (ref)
+								dispatchAction(var30, var29, ...)
 							end
 							
-							var5.queue = var27
+							var5.queue = var29
 							var5.baseQueue = nil
-							var26 = readFromUnsubcribedMutableSource(var22, p8, p9)
-							var5.baseState = var26
+							var28 = readFromUnsubcribedMutableSource(var24, p8, p9)
+							var5.baseState = var28
 							var5.memoizedState = var5.baseState
 						end
-						return var26
+						return var28
 					end
 				end
 			end
@@ -732,30 +790,15 @@ function useMutableSource(p7, p8, p9, p10)
 end
 
 function mountMutableSource(p7, p8, p9)
-	-- upvalues: var5 (write), var3 (write)
-	local t = {
-		memoizedState = nil,
-		baseState = nil,
-		baseQueue = nil,
-		queue = nil,
-		next = nil
-	}
-	
-	if var5 == nil then
-		var3.memoizedState = t
-		var5 = t
-	else
-		var5.next = t
-		var5 = t
-	end
-	local var22 = var5
-	var22.memoizedState = {
+	-- upvalues: mountWorkInProgressHook (ref)
+	local var24 = mountWorkInProgressHook()
+	var24.memoizedState = {
 		refs = { setSnapshot = nil, getSnapshot = p8 },
 		source = p7,
 		subscribe = p9
 	}
 	
-	return useMutableSource(var22, p7, p8, p9)
+	return useMutableSource(var24, p7, p8, p9)
 end
 
 function updateMutableSource(p7, p8, p9)
@@ -764,46 +807,31 @@ function updateMutableSource(p7, p8, p9)
 end
 
 function mountState(p7)
-	-- upvalues: var5 (write), var3 (write)
-	local t = {
-		memoizedState = nil,
-		baseState = nil,
-		baseQueue = nil,
-		queue = nil,
-		next = nil
-	}
-	
-	if var5 == nil then
-		var3.memoizedState = t
-		var5 = t
-	else
-		var5.next = t
-		var5 = t
-	end
-	local var22 = var5
+	-- upvalues: mountWorkInProgressHook (ref), var3 (write)
+	local var24 = mountWorkInProgressHook()
 	
 	if type(p7) == "function" then
 		p7 = p7()
 	end
-	var22.baseState = p7
-	var22.memoizedState = var22.baseState
-	local t_1 = {
+	var24.baseState = p7
+	var24.memoizedState = var24.baseState
+	local t = {
 		pending = nil,
 		dispatch = nil,
 		lastRenderedReducer = nil,
 		lastRenderedState = p7,
 		lastRenderedReducer = basicStateReducer
 	}
-	var22.queue = t_1
+	var24.queue = t
 	
-	local var23 = function(p8, ...)
-		-- upvalues: var3 (ref), t_1 (ref)
-		dispatchAction(var3, t_1, p8, ...)
+	local var25 = function(p8, ...)
+		-- upvalues: var3 (ref), t (ref)
+		dispatchAction(var3, t, p8, ...)
 	end
 	
-	t_1.dispatch = var23
+	t.dispatch = var25
 	
-	return var22.memoizedState, var23
+	return var24.memoizedState, var25
 end
 
 function updateState(p7)
@@ -814,93 +842,142 @@ function rerenderState(p7)
 	return rerenderReducer(basicStateReducer, p7)
 end
 
-local function pushEffect(p7, p8, p9, p10)
-	-- upvalues: var3 (write)
-	local t = {
-		next = nil,
-		tag = p7,
-		create = p8,
-		destroy = p9,
-		deps = p10
-	}
-	local updateQueue = var3.updateQueue
+local function reuseFunctionComponentUpdateQueue()
+	-- upvalues: var3 (write), var7 (write), var6 (write)
+	local alternate = var3.alternate
+	local var24 = if alternate ~= nil then nil else alternate.updateQueue
+	local var25 = if var24 ~= nil then nil else var24.alternate
 	
-	if updateQueue == nil then
-		updateQueue = { lastEffect = nil }
-		var3.updateQueue = updateQueue
-		t.next = t
-		updateQueue.lastEffect = t
+	if var25 ~= nil then
+		local lastEffect = var25.lastEffect
+		var7 = lastEffect
+		var6 = if lastEffect ~= nil then nil else lastEffect.next
+		var25.lastEffect = nil
 		
-		return t
+		return var25
 	end
-	local lastEffect = updateQueue.lastEffect
+	var6 = nil
+	var7 = nil
+	local _ = nil
 	
-	if lastEffect == nil then
-		updateQueue.lastEffect = t
-		t.next = t
-		
-		return t
+	if var24 == nil then
+		return { lastEffect = nil }
 	end
-	local next = lastEffect.next
-	lastEffect.next = t
-	t.next = next
-	updateQueue.lastEffect = t
+	local t = { lastEffect = nil, alternate = var24 }
+	var24.alternate = t
 	
 	return t
 end
 
-function mountBinding(p7)
-	-- upvalues: var5 (write), var3 (write), createBinding (ref)
-	local t = {
-		memoizedState = nil,
-		baseState = nil,
-		baseQueue = nil,
-		queue = nil,
-		next = nil
-	}
-	
-	if var5 == nil then
-		var3.memoizedState = t
-		var5 = t
+local function pushEffect(p7, p8, p9, p10)
+	-- upvalues: enableHookDoubleBuffering (ref), var3 (write), reuseFunctionComponentUpdateQueue (ref), var6 (write), var7 (write)
+	if enableHookDoubleBuffering then
+		local updateQueue = var3.updateQueue
+		
+		if updateQueue == nil then
+			updateQueue = reuseFunctionComponentUpdateQueue()
+			var3.updateQueue = updateQueue
+		end
+		local var24 = var6
+		
+		if var24 == nil then
+			var24 = {
+				next = nil,
+				tag = p7,
+				create = p8,
+				destroy = p9,
+				deps = p10
+			}
+		else
+			var6 = if var24 == var7 then nil else var24.next
+			var24.tag = p7
+			var24.create = p8
+			
+			if p9 ~= nil or var24.destroy ~= nil then
+				var24.destroy = p9
+			end
+			var24.deps = p10
+		end
+		local lastEffect = updateQueue.lastEffect
+		
+		if lastEffect == nil then
+			var24.next = var24
+		else
+			var24.next = lastEffect.next
+			lastEffect.next = var24
+		end
+		updateQueue.lastEffect = var24
+		
+		return var24
 	else
-		var5.next = t
-		var5 = t
+		local t = {
+			next = nil,
+			tag = p7,
+			create = p8,
+			destroy = p9,
+			deps = p10
+		}
+		local updateQueue = var3.updateQueue
+		
+		if updateQueue == nil then
+			updateQueue = { lastEffect = nil }
+			var3.updateQueue = updateQueue
+			t.next = t
+			updateQueue.lastEffect = t
+			
+			return t
+		end
+		local lastEffect = updateQueue.lastEffect
+		
+		if lastEffect == nil then
+			updateQueue.lastEffect = t
+			t.next = t
+			
+			return t
+		end
+		local next = lastEffect.next
+		lastEffect.next = t
+		t.next = next
+		updateQueue.lastEffect = t
+		
+		return t
 	end
-	local var22 = var5
-	local var23, var24 = createBinding(p7)
-	var22.memoizedState = { var23, var24 }
+end
+
+function mountBinding(p7)
+	-- upvalues: mountWorkInProgressHook (ref), createBinding (ref), enableAllocationTrims (ref)
+	local var24 = mountWorkInProgressHook()
+	local var25, var26 = createBinding(p7)
 	
-	return var23, var24
+	if enableAllocationTrims then
+		var24.memoizedState = var25
+		var24.baseState = var26
+		
+		return var25, var26
+	end
+	var24.memoizedState = { var25, var26 }
+	
+	return var25, var26
 end
 
 function updateBinding(_)
-	-- upvalues: updateWorkInProgressHook (ref)
-	return unpack(updateWorkInProgressHook().memoizedState)
+	-- upvalues: updateWorkInProgressHook (ref), enableAllocationTrims (ref)
+	local var24 = updateWorkInProgressHook()
+	
+	if enableAllocationTrims then
+		return var24.memoizedState, var24.baseState
+	end
+	return unpack(var24.memoizedState)
 end
 
 function mountRef(p7)
-	-- upvalues: var5 (write), var3 (write), createRef (ref)
-	local t = {
-		memoizedState = nil,
-		baseState = nil,
-		baseQueue = nil,
-		queue = nil,
-		next = nil
-	}
+	-- upvalues: mountWorkInProgressHook (ref), createRef (ref)
+	local var24 = mountWorkInProgressHook()
+	local var25 = createRef()
+	var25.current = p7
+	var24.memoizedState = var25
 	
-	if var5 == nil then
-		var3.memoizedState = t
-		var5 = t
-	else
-		var5.next = t
-		var5 = t
-	end
-	local var22 = var5
-	local var23 = createRef()
-	var23.current = p7
-	var22.memoizedState = var23
-	
-	return var23
+	return var25
 end
 
 function updateRef(_)
@@ -909,30 +986,15 @@ function updateRef(_)
 end
 
 local function mountEffectImpl(p7, p8, p9, p10)
-	-- upvalues: var5 (write), var3 (write), pushEffect (ref), hasEffect (ref)
-	local t = {
-		memoizedState = nil,
-		baseState = nil,
-		baseQueue = nil,
-		queue = nil,
-		next = nil
-	}
-	
-	if var5 == nil then
-		var3.memoizedState = t
-		var5 = t
-	else
-		var5.next = t
-		var5 = t
-	end
-	local var22 = var5
+	-- upvalues: mountWorkInProgressHook (ref), var3 (write), pushEffect (ref), hasEffect (ref)
+	local var24 = mountWorkInProgressHook()
 	var3.flags = bit32.bor(var3.flags, p7)
-	var22.memoizedState = pushEffect(bit32.bor(hasEffect, p8), p9, nil, p10)
+	var24.memoizedState = pushEffect(bit32.bor(hasEffect, p8), p9, nil, p10)
 end
 
 function updateEffectImpl(p7, p8, p9, p10)
 	-- upvalues: updateWorkInProgressHook (ref), var4 (write), areHookInputsEqual (ref), pushEffect (ref), var3 (write), hasEffect (ref)
-	local var22 = updateWorkInProgressHook()
+	local var24 = updateWorkInProgressHook()
 	local destroy = nil
 	
 	if var4 ~= nil then
@@ -941,64 +1003,32 @@ function updateEffectImpl(p7, p8, p9, p10)
 		
 		if p10 == nil or not areHookInputsEqual(p10, memoizedState.deps) then
 			var3.flags = bit32.bor(var3.flags, p7)
-			var22.memoizedState = pushEffect(bit32.bor(hasEffect, p8), p9, destroy, p10)
+			var24.memoizedState = pushEffect(bit32.bor(hasEffect, p8), p9, destroy, p10)
 			
 			return
 		else
-			var22.memoizedState = pushEffect(p8, p9, destroy, p10)
+			var24.memoizedState = pushEffect(p8, p9, destroy, p10)
 		end
 	end
 end
 
 local function mountEffect(p7, p8)
-	-- upvalues: dEV (ref), reactGlobalsModule (ref), warnIfNotCurrentlyActingEffectsInDEV (ref), var3 (write), enableDoubleInvokingEffects (ref), mountPassiveDev (ref), passive (ref), passiveStatic (ref), passive_1 (ref), var5 (write), pushEffect (ref), hasEffect (ref)
+	-- upvalues: dEV (ref), reactGlobalsModule (ref), warnIfNotCurrentlyActingEffectsInDEV (ref), var3 (write), enableDoubleInvokingEffects (ref), mountPassiveDev (ref), passive (ref), passiveStatic (ref), passive_1 (ref), mountWorkInProgressHook (ref), pushEffect (ref), hasEffect (ref)
 	if dEV and (type(_G.jest) ~= "nil" or reactGlobalsModule.__TESTEZ_RUNNING_TEST__) then
 		warnIfNotCurrentlyActingEffectsInDEV(var3)
 	end
 	if dEV and enableDoubleInvokingEffects then
 		local bits = bit32.bor(mountPassiveDev, passive, passiveStatic)
-		local var22 = passive_1
-		local t = {
-			memoizedState = nil,
-			baseState = nil,
-			baseQueue = nil,
-			queue = nil,
-			next = nil
-		}
-		
-		if var5 == nil then
-			var3.memoizedState = t
-			var5 = t
-		else
-			var5.next = t
-			var5 = t
-		end
-		local var23 = var5
+		local var24 = passive_1
+		local var25 = mountWorkInProgressHook()
 		var3.flags = bit32.bor(var3.flags, bits)
-		var23.memoizedState = pushEffect(bit32.bor(hasEffect, var22), p7, nil, p8)
+		var25.memoizedState = pushEffect(bit32.bor(hasEffect, var24), p7, nil, p8)
 		
 		return
-	else
-		local bits = bit32.bor(passive, passiveStatic)
-		local t = {
-			memoizedState = nil,
-			baseState = nil,
-			baseQueue = nil,
-			queue = nil,
-			next = nil
-		}
-		
-		if var5 == nil then
-			var3.memoizedState = t
-			var5 = t
-		else
-			var5.next = t
-			var5 = t
-		end
-		local var24 = var5
-		var3.flags = bit32.bor(var3.flags, bits)
-		var24.memoizedState = pushEffect(bit32.bor(hasEffect, passive_1), p7, nil, p8)
 	end
+	local var26 = mountWorkInProgressHook()
+	var3.flags = bit32.bor(var3.flags, bit32.bor(passive, passiveStatic))
+	var26.memoizedState = pushEffect(bit32.bor(hasEffect, passive_1), p7, nil, p8)
 end
 
 local function updateEffect(p7, p8)
@@ -1010,50 +1040,19 @@ local function updateEffect(p7, p8)
 end
 
 local function mountLayoutEffect(p7, p8)
-	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), mountLayoutDev (ref), update (ref), layout (ref), var5 (write), var3 (write), pushEffect (ref), hasEffect (ref)
+	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), mountLayoutDev (ref), update (ref), layout (ref), mountWorkInProgressHook (ref), var3 (write), pushEffect (ref), hasEffect (ref)
 	if dEV and enableDoubleInvokingEffects then
 		local bits = bit32.bor(mountLayoutDev, update)
-		local var22 = layout
-		local t = {
-			memoizedState = nil,
-			baseState = nil,
-			baseQueue = nil,
-			queue = nil,
-			next = nil
-		}
-		
-		if var5 == nil then
-			var3.memoizedState = t
-			var5 = t
-		else
-			var5.next = t
-			var5 = t
-		end
-		local var23 = var5
+		local var24 = layout
+		local var25 = mountWorkInProgressHook()
 		var3.flags = bit32.bor(var3.flags, bits)
-		var23.memoizedState = pushEffect(bit32.bor(hasEffect, var22), p7, nil, p8)
+		var25.memoizedState = pushEffect(bit32.bor(hasEffect, var24), p7, nil, p8)
 		
 		return
-	else
-		local t = {
-			memoizedState = nil,
-			baseState = nil,
-			baseQueue = nil,
-			queue = nil,
-			next = nil
-		}
-		
-		if var5 == nil then
-			var3.memoizedState = t
-			var5 = t
-		else
-			var5.next = t
-			var5 = t
-		end
-		local var24 = var5
-		var3.flags = bit32.bor(var3.flags, update)
-		var24.memoizedState = pushEffect(bit32.bor(hasEffect, layout), p7, nil, p8)
 	end
+	local var26 = mountWorkInProgressHook()
+	var3.flags = bit32.bor(var3.flags, update)
+	var26.memoizedState = pushEffect(bit32.bor(hasEffect, layout), p7, nil, p8)
 end
 
 local function updateLayoutEffect(p7, p8)
@@ -1090,15 +1089,15 @@ function mountImperativeHandle(p7, p8, p9)
 	if dEV and type(p8) ~= "function" then
 		console.error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", if p8 ~= nil then "nil" else type(p8))
 	end
-	local var22 = if p9 ~= nil then nil else array.concat(p9, { p7 })
+	local var24 = if p9 ~= nil then nil else array.concat(p9, { p7 })
 	
 	return if dEV and enableDoubleInvokingEffects then mountEffectImpl(bit32.bor(mountLayoutDev, update), layout, function()
 		-- upvalues: p8 (ref), p7 (ref)
 		return imperativeHandleEffect(p8, p7)
-	end, var22) else mountEffectImpl(update, layout, function()
+	end, var24) else mountEffectImpl(update, layout, function()
 		-- upvalues: p8 (ref), p7 (ref)
 		return imperativeHandleEffect(p8, p7)
-	end, var22)
+	end, var24)
 end
 
 function updateImperativeHandle(p7, p8, p9)
@@ -1123,75 +1122,85 @@ function mountDebugValue(_, _) end
 local _mountDebugValue = mountDebugValue
 
 function mountCallback(p7, p8)
-	-- upvalues: var5 (write), var3 (write)
-	local t = {
-		memoizedState = nil,
-		baseState = nil,
-		baseQueue = nil,
-		queue = nil,
-		next = nil
-	}
+	-- upvalues: mountWorkInProgressHook (ref), enableAllocationTrims (ref)
+	local var24 = mountWorkInProgressHook()
 	
-	if var5 == nil then
-		var3.memoizedState = t
-		var5 = t
-	else
-		var5.next = t
-		var5 = t
+	if enableAllocationTrims then
+		var24.memoizedState = p7
+		var24.baseState = p8
+		
+		return p7
 	end
-	var5.memoizedState = { p7, p8 }
+	var24.memoizedState = { p7, p8 }
 	
 	return p7
 end
 
 function updateCallback(p7, p8)
-	-- upvalues: updateWorkInProgressHook (ref), areHookInputsEqual (ref)
-	local var22 = updateWorkInProgressHook()
-	local memoizedState = var22.memoizedState
+	-- upvalues: updateWorkInProgressHook (ref), enableAllocationTrims (ref), areHookInputsEqual (ref)
+	local var24 = updateWorkInProgressHook()
 	
-	if memoizedState == nil or p8 == nil or not areHookInputsEqual(p8, memoizedState[2]) then
-		var22.memoizedState = { p7, p8 }
+	if enableAllocationTrims then
+		if p8 == nil or not areHookInputsEqual(p8, var24.baseState) then
+			var24.memoizedState = p7
+			var24.baseState = p8
+			
+			return p7
+		end
+		return var24.memoizedState
+	else
+		local memoizedState = var24.memoizedState
 		
-		return p7
+		if memoizedState == nil or p8 == nil or not areHookInputsEqual(p8, memoizedState[2]) then
+			var24.memoizedState = { p7, p8 }
+			
+			return p7
+		end
+		return memoizedState[1]
 	end
-	return memoizedState[1]
 end
 
 function mountMemo(p7, p8)
-	-- upvalues: var5 (write), var3 (write)
-	local t = {
-		memoizedState = nil,
-		baseState = nil,
-		baseQueue = nil,
-		queue = nil,
-		next = nil
-	}
+	-- upvalues: mountWorkInProgressHook (ref), enableAllocationTrims (ref), memoValues (ref)
+	local var24 = mountWorkInProgressHook()
 	
-	if var5 == nil then
-		var3.memoizedState = t
-		var5 = t
-	else
-		var5.next = t
-		var5 = t
+	if enableAllocationTrims then
+		local var25 = memoValues.pack(p7())
+		var24.memoizedState = var25
+		var24.baseState = p8
+		
+		return memoValues.unpack(var25)
 	end
 	local list = { p7() }
-	var5.memoizedState = { list, p8 }
+	var24.memoizedState = { list, p8 }
 	
 	return unpack(list)
 end
 
 function updateMemo(p7, p8)
-	-- upvalues: updateWorkInProgressHook (ref), areHookInputsEqual (ref)
-	local var22 = updateWorkInProgressHook()
-	local memoizedState = var22.memoizedState
+	-- upvalues: updateWorkInProgressHook (ref), enableAllocationTrims (ref), areHookInputsEqual (ref), memoValues (ref)
+	local var24 = updateWorkInProgressHook()
 	
-	if memoizedState == nil or p8 == nil or not areHookInputsEqual(p8, memoizedState[2]) then
-		local list = { p7() }
-		var22.memoizedState = { list, p8 }
+	if enableAllocationTrims then
+		if p8 == nil or not areHookInputsEqual(p8, var24.baseState) then
+			local var25 = memoValues.pack(p7())
+			var24.memoizedState = var25
+			var24.baseState = p8
+			
+			return memoValues.unpack(var25)
+		end
+		return memoValues.unpack(var24.memoizedState)
+	else
+		local memoizedState = var24.memoizedState
 		
-		return unpack(list)
+		if memoizedState == nil or p8 == nil or not areHookInputsEqual(p8, memoizedState[2]) then
+			local list = { p7() }
+			var24.memoizedState = { list, p8 }
+			
+			return unpack(list)
+		end
+		return unpack(memoizedState[1])
 	end
-	return unpack(memoizedState[1])
 end
 
 function t_2.getIsUpdatingOpaqueValueInRenderPhaseInDEV()
@@ -1201,12 +1210,12 @@ end
 
 function mountOpaqueIdentifier()
 	-- upvalues: dEV (ref), console (ref), makeClientId (ref), getIsHydrating (ref)
-	local var22 = nil
+	local var24 = nil
 	
 	if dEV then
 		console.warn("!!! unimplemented: warnOnOpaqueIdentifierAccessInDEV")
 	else
-		var22 = makeClientId
+		var24 = makeClientId
 	end
 	if getIsHydrating() then
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -1216,36 +1225,36 @@ function mountOpaqueIdentifier()
 		
 		return nil
 	end
-	local var23 = var22()
-	mountState(var23)
+	local var25 = var24()
+	mountState(var25)
 	
-	return var23
+	return var25
 end
 
 function updateOpaqueIdentifier()
-	local var22, _ = updateState(nil)
+	local var24, _ = updateState(nil)
 	
-	return var22
+	return var24
 end
 
 function rerenderOpaqueIdentifier()
-	local var22, _ = rerenderState(nil)
+	local var24, _ = rerenderState(nil)
 	
-	return var22
+	return var24
 end
 
 function dispatchAction(p7, p8, p9, ...)
-	-- upvalues: dEV (ref), console (ref), requestEventTime (ref), requestUpdateLane (ref), var3 (write), var6 (write), var7 (write), noLanes (ref), reactCurrentDispatcher (ref), t_8 (write), var1 (ref), reactGlobalsModule (ref), warnIfNotScopedWithMatchingAct (ref), warnIfNotCurrentlyActingUpdatesInDEV (ref), scheduleUpdateOnFiber (ref), enableDebugTracing (ref), debugTracingMode (ref), getComponentName (ref), logStateUpdateScheduled (ref), enableSchedulingProfiler (ref), markStateUpdateScheduled (ref)
+	-- upvalues: dEV (ref), console (ref), requestEventTime (ref), requestUpdateLane (ref), var3 (write), var8 (write), var9 (write), noLanes (ref), reactCurrentDispatcher (ref), t_8 (write), reactFeatureFlags (ref), var1 (ref), reactGlobalsModule (ref), warnIfNotScopedWithMatchingAct (ref), warnIfNotCurrentlyActingUpdatesInDEV (ref), scheduleUpdateOnFiber (ref), enableDebugTracing (ref), debugTracingMode (ref), getComponentName (ref), logStateUpdateScheduled (ref), enableSchedulingProfiler (ref), markStateUpdateScheduled (ref)
 	if dEV and type(if select("#", ...) == 1 then select(1, ...) else nil) == "function" then
 		console.error("State updates from the useState() and useReducer() Hooks don't support the second callback argument. To execute a side effect after rendering, declare it in the component body with useEffect().")
 	end
-	local var22 = requestEventTime()
-	local var23 = requestUpdateLane(p7)
+	local var24 = requestEventTime()
+	local var25 = requestUpdateLane(p7)
 	local t = {
 		eagerReducer = nil,
 		eagerState = nil,
 		next = nil,
-		lane = var23,
+		lane = var25,
 		action = p9
 	}
 	local pending = p8.pending
@@ -1260,8 +1269,8 @@ function dispatchAction(p7, p8, p9, ...)
 	local alternate = p7.alternate
 	
 	if p7 == var3 or alternate ~= nil and alternate == var3 then
-		var6 = true
-		var7 = true
+		var8 = true
+		var9 = true
 	elseif p7.lanes == noLanes and (alternate == nil or alternate.lanes == noLanes) then
 		local lastRenderedReducer = p8.lastRenderedReducer
 		
@@ -1272,7 +1281,6 @@ function dispatchAction(p7, p8, p9, ...)
 				current = reactCurrentDispatcher.current
 				reactCurrentDispatcher.current = t_8
 			end
-			local var24
 			local lastRenderedState = p8.lastRenderedState
 			local ok, status = pcall(lastRenderedReducer, lastRenderedState, p9)
 			
@@ -1283,27 +1291,55 @@ function dispatchAction(p7, p8, p9, ...)
 			if dEV then
 				reactCurrentDispatcher.current = current
 			end
-			if status == lastRenderedState then
-				var24 = true
-				
-				if status == 0 then
-					var24 = true
+			if not reactFeatureFlags.fixEagerReducerError then
+				local var26
+				if status == lastRenderedState then
+					var26 = true
 					
-					if 1 / status ~= 1 / lastRenderedState then
-						var24 = status ~= status and lastRenderedState ~= lastRenderedState
+					if status == 0 then
+						var26 = true
+						
+						if 1 / status ~= 1 / lastRenderedState then
+							var26 = status ~= status and lastRenderedState ~= lastRenderedState
+						end
+					end
+					if var26 then
+						if var1 then
+							if pending == nil then
+								p8.pending = nil
+								
+								return
+							end
+							pending.next = t.next
+							p8.pending = pending
+						end
+						return
 					end
 				end
-				if var24 then
-					if var1 then
-						if pending == nil then
-							p8.pending = nil
-							
-							return
+			elseif ok then
+				local var27
+				if status == lastRenderedState then
+					var27 = true
+					
+					if status == 0 then
+						var27 = true
+						
+						if 1 / status ~= 1 / lastRenderedState then
+							var27 = status ~= status and lastRenderedState ~= lastRenderedState
 						end
-						pending.next = t.next
-						p8.pending = pending
 					end
-					return
+					if var27 then
+						if var1 then
+							if pending == nil then
+								p8.pending = nil
+								
+								return
+							end
+							pending.next = t.next
+							p8.pending = pending
+						end
+						return
+					end
 				end
 			end
 		end
@@ -1312,12 +1348,12 @@ function dispatchAction(p7, p8, p9, ...)
 		warnIfNotScopedWithMatchingAct(p7)
 		warnIfNotCurrentlyActingUpdatesInDEV(p7)
 	end
-	scheduleUpdateOnFiber(p7, var23, var22)
+	scheduleUpdateOnFiber(p7, var25, var24)
 	if dEV and enableDebugTracing and bit32.band(p7.mode, debugTracingMode) ~= 0 then
-		logStateUpdateScheduled(getComponentName(p7.type) or "Unknown", var23, p9)
+		logStateUpdateScheduled(getComponentName(p7.type) or "Unknown", var25, p9)
 	end
 	if enableSchedulingProfiler then
-		markStateUpdateScheduled(p7, var23)
+		markStateUpdateScheduled(p7, var25)
 	end
 end
 
@@ -1397,73 +1433,37 @@ if dEV then
 		console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")
 	end
 	
+	local function restoreDispatcherAndReturn(p7, p8, ...)
+		-- upvalues: reactCurrentDispatcher (ref)
+		reactCurrentDispatcher.current = p7
+		
+		if not p8 then
+			error(...)
+		end
+		return ...
+	end
+	
 	local _ = function()
 		-- upvalues: console (ref)
 		console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 	end
 	
 	t_3 = {
-		readContext = function(p7, p8)
+		readContext = function(p9, p10)
 			-- upvalues: readContext (ref)
-			return readContext(p7, p8)
-		end,
-		useCallback = function(p7, p8)
-			-- upvalues: var8 (write), dEV (ref), var9 (write), console (ref)
-			var8 = "useCallback"
-			
-			if dEV then
-				local var22 = var8
-				
-				if var9 == nil then
-					var9 = { var22 }
-				else
-					table.insert(var9, var22)
-				end
-			end
-			if dEV and p8 ~= nil then
-				local var23
-				if type(p8) == "table" then
-					for i, v in p8 do
-						if type(i) ~= "number" then
-							var23 = false
-						end
-					end
-					var23 = true
-				else
-					var23 = false
-				end
-				if not var23 then
-					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var8, type(p8))
-				end
-			end
-			return mountCallback(p7, p8)
-		end,
-		useContext = function(p9, p10)
-			-- upvalues: var8 (write), dEV (ref), var9 (write), readContext (ref)
-			var8 = "useContext"
-			
-			if dEV then
-				local var24 = var8
-				
-				if var9 == nil then
-					var9 = { var24 }
-				else
-					table.insert(var9, var24)
-				end
-			end
 			return readContext(p9, p10)
 		end,
-		useEffect = function(p9, p10)
-			-- upvalues: var8 (write), dEV (ref), var9 (write), console (ref), mountEffect (ref)
-			var8 = "useEffect"
+		useCallback = function(p9, p10)
+			-- upvalues: var10 (write), dEV (ref), var11 (write), console (ref)
+			var10 = "useCallback"
 			
 			if dEV then
-				local var24 = var8
+				local var24 = var10
 				
-				if var9 == nil then
-					var9 = { var24 }
+				if var11 == nil then
+					var11 = { var24 }
 				else
-					table.insert(var9, var24)
+					table.insert(var11, var24)
 				end
 			end
 			if dEV and p10 ~= nil then
@@ -1479,28 +1479,43 @@ if dEV then
 					var25 = false
 				end
 				if not var25 then
-					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var8, type(p10))
+					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var10, type(p10))
 				end
 			end
-			return mountEffect(p9, p10)
+			return mountCallback(p9, p10)
 		end,
-		useImperativeHandle = function(p11, p12, p13)
-			-- upvalues: var8 (write), dEV (ref), var9 (write), console (ref)
-			var8 = "useImperativeHandle"
+		useContext = function(p11, p12)
+			-- upvalues: var10 (write), dEV (ref), var11 (write), readContext (ref)
+			var10 = "useContext"
 			
 			if dEV then
-				local var26 = var8
+				local var26 = var10
 				
-				if var9 == nil then
-					var9 = { var26 }
+				if var11 == nil then
+					var11 = { var26 }
 				else
-					table.insert(var9, var26)
+					table.insert(var11, var26)
 				end
 			end
-			if dEV and p13 ~= nil then
+			return readContext(p11, p12)
+		end,
+		useEffect = function(p11, p12)
+			-- upvalues: var10 (write), dEV (ref), var11 (write), console (ref), mountEffect (ref)
+			var10 = "useEffect"
+			
+			if dEV then
+				local var26 = var10
+				
+				if var11 == nil then
+					var11 = { var26 }
+				else
+					table.insert(var11, var26)
+				end
+			end
+			if dEV and p12 ~= nil then
 				local var27
-				if type(p13) == "table" then
-					for i, v in p13 do
+				if type(p12) == "table" then
+					for i, v in p12 do
 						if type(i) ~= "number" then
 							var27 = false
 						end
@@ -1510,22 +1525,22 @@ if dEV then
 					var27 = false
 				end
 				if not var27 then
-					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var8, type(p13))
+					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var10, type(p12))
 				end
 			end
-			return mountImperativeHandle(p11, p12, p13)
+			return mountEffect(p11, p12)
 		end,
-		useLayoutEffect = function(p14, p15)
-			-- upvalues: var8 (write), dEV (ref), var9 (write), console (ref), mountLayoutEffect (ref)
-			var8 = "useLayoutEffect"
+		useImperativeHandle = function(p13, p14, p15)
+			-- upvalues: var10 (write), dEV (ref), var11 (write), console (ref)
+			var10 = "useImperativeHandle"
 			
 			if dEV then
-				local var28 = var8
+				local var28 = var10
 				
-				if var9 == nil then
-					var9 = { var28 }
+				if var11 == nil then
+					var11 = { var28 }
 				else
-					table.insert(var9, var28)
+					table.insert(var11, var28)
 				end
 			end
 			if dEV and p15 ~= nil then
@@ -1541,22 +1556,22 @@ if dEV then
 					var29 = false
 				end
 				if not var29 then
-					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var8, type(p15))
+					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var10, type(p15))
 				end
 			end
-			return mountLayoutEffect(p14, p15)
+			return mountImperativeHandle(p13, p14, p15)
 		end,
-		useMemo = function(p16, p17)
-			-- upvalues: var8 (write), dEV (ref), var9 (write), console (ref), reactCurrentDispatcher (ref), t_7 (write)
-			var8 = "useMemo"
+		useLayoutEffect = function(p16, p17)
+			-- upvalues: var10 (write), dEV (ref), var11 (write), console (ref), mountLayoutEffect (ref)
+			var10 = "useLayoutEffect"
 			
 			if dEV then
-				local var30 = var8
+				local var30 = var10
 				
-				if var9 == nil then
-					var9 = { var30 }
+				if var11 == nil then
+					var11 = { var30 }
 				else
-					table.insert(var9, var30)
+					table.insert(var11, var30)
 				end
 			end
 			if dEV and p17 ~= nil then
@@ -1572,12 +1587,47 @@ if dEV then
 					var31 = false
 				end
 				if not var31 then
-					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var8, type(p17))
+					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var10, type(p17))
+				end
+			end
+			return mountLayoutEffect(p16, p17)
+		end,
+		useMemo = function(p18, p19)
+			-- upvalues: var10 (write), dEV (ref), var11 (write), console (ref), reactCurrentDispatcher (ref), t_7 (write), enableAllocationTrims (ref), restoreDispatcherAndReturn (ref)
+			var10 = "useMemo"
+			
+			if dEV then
+				local var32 = var10
+				
+				if var11 == nil then
+					var11 = { var32 }
+				else
+					table.insert(var11, var32)
+				end
+			end
+			if dEV and p19 ~= nil then
+				local var33
+				if type(p19) == "table" then
+					for i, v in p19 do
+						if type(i) ~= "number" then
+							var33 = false
+						end
+					end
+					var33 = true
+				else
+					var33 = false
+				end
+				if not var33 then
+					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var10, type(p19))
 				end
 			end
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_7
-			local list = { pcall(mountMemo, p16, p17) }
+			
+			if enableAllocationTrims then
+				return restoreDispatcherAndReturn(current, pcall(mountMemo, p18, p19))
+			end
+			local list = { pcall(mountMemo, p18, p19) }
 			reactCurrentDispatcher.current = current
 			
 			if not list[1] then
@@ -1585,123 +1635,123 @@ if dEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p18, p19, p20)
-			-- upvalues: var8 (write), dEV (ref), var9 (write), reactCurrentDispatcher (ref), t_7 (write)
-			var8 = "useReducer"
+		useReducer = function(p20, p21, p22)
+			-- upvalues: var10 (write), dEV (ref), var11 (write), reactCurrentDispatcher (ref), t_7 (write)
+			var10 = "useReducer"
 			
 			if dEV then
-				local var32 = var8
+				local var34 = var10
 				
-				if var9 == nil then
-					var9 = { var32 }
+				if var11 == nil then
+					var11 = { var34 }
 				else
-					table.insert(var9, var32)
+					table.insert(var11, var34)
 				end
 			end
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_7
-			local ok, status, var33 = pcall(mountReducer, p18, p19, p20)
+			local ok, status, var35 = pcall(mountReducer, p20, p21, p22)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useRef = function(p18)
-			-- upvalues: var8 (write), dEV (ref), var9 (write)
-			var8 = "useRef"
+		useRef = function(p20)
+			-- upvalues: var10 (write), dEV (ref), var11 (write)
+			var10 = "useRef"
 			
 			if dEV then
-				local var32 = var8
+				local var34 = var10
 				
-				if var9 == nil then
-					var9 = { var32 }
+				if var11 == nil then
+					var11 = { var34 }
 				else
-					table.insert(var9, var32)
+					table.insert(var11, var34)
 				end
 			end
-			return mountRef(p18)
+			return mountRef(p20)
 		end,
-		useBinding = function(p18)
-			-- upvalues: var8 (write), dEV (ref), var9 (write)
-			var8 = "useBinding"
+		useBinding = function(p20)
+			-- upvalues: var10 (write), dEV (ref), var11 (write)
+			var10 = "useBinding"
 			
 			if dEV then
-				local var32 = var8
+				local var34 = var10
 				
-				if var9 == nil then
-					var9 = { var32 }
+				if var11 == nil then
+					var11 = { var34 }
 				else
-					table.insert(var9, var32)
+					table.insert(var11, var34)
 				end
 			end
-			return mountBinding(p18)
+			return mountBinding(p20)
 		end,
-		useState = function(p18)
-			-- upvalues: var8 (write), dEV (ref), var9 (write), reactCurrentDispatcher (ref), t_7 (write)
-			var8 = "useState"
+		useState = function(p20)
+			-- upvalues: var10 (write), dEV (ref), var11 (write), reactCurrentDispatcher (ref), t_7 (write)
+			var10 = "useState"
 			
 			if dEV then
-				local var32 = var8
+				local var34 = var10
 				
-				if var9 == nil then
-					var9 = { var32 }
+				if var11 == nil then
+					var11 = { var34 }
 				else
-					table.insert(var9, var32)
+					table.insert(var11, var34)
 				end
 			end
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_7
-			local ok, status, var33 = pcall(mountState, p18)
+			local ok, status, var35 = pcall(mountState, p20)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useDebugValue = function(p18, p19)
-			-- upvalues: var8 (write), dEV (ref), var9 (write)
-			var8 = "useDebugValue"
+		useDebugValue = function(p20, p21)
+			-- upvalues: var10 (write), dEV (ref), var11 (write)
+			var10 = "useDebugValue"
 			
 			if dEV then
-				local var32 = var8
+				local var34 = var10
 				
-				if var9 == nil then
-					var9 = { var32 }
+				if var11 == nil then
+					var11 = { var34 }
 				else
-					table.insert(var9, var32)
+					table.insert(var11, var34)
 				end
 			end
-			return mountDebugValue(p18, p19)
+			return mountDebugValue(p20, p21)
 		end,
-		useMutableSource = function(p18, p19, p20)
-			-- upvalues: var8 (write), dEV (ref), var9 (write)
-			var8 = "useMutableSource"
+		useMutableSource = function(p20, p21, p22)
+			-- upvalues: var10 (write), dEV (ref), var11 (write)
+			var10 = "useMutableSource"
 			
 			if dEV then
-				local var32 = var8
+				local var34 = var10
 				
-				if var9 == nil then
-					var9 = { var32 }
+				if var11 == nil then
+					var11 = { var34 }
 				else
-					table.insert(var9, var32)
+					table.insert(var11, var34)
 				end
 			end
-			return mountMutableSource(p18, p19, p20)
+			return mountMutableSource(p20, p21, p22)
 		end,
 		useOpaqueIdentifier = function()
-			-- upvalues: var8 (write), dEV (ref), var9 (write)
-			var8 = "useOpaqueIdentifier"
+			-- upvalues: var10 (write), dEV (ref), var11 (write)
+			var10 = "useOpaqueIdentifier"
 			
 			if dEV then
-				local var32 = var8
+				local var34 = var10
 				
-				if var9 == nil then
-					var9 = { var32 }
+				if var11 == nil then
+					var11 = { var34 }
 				else
-					table.insert(var9, var32)
+					table.insert(var11, var34)
 				end
 			end
 			return mountOpaqueIdentifier()
@@ -1709,68 +1759,72 @@ if dEV then
 		unstable_isNewReconciler = enableNewReconciler
 	}
 	t_4 = {
-		readContext = function(p18, p19)
+		readContext = function(p20, p21)
 			-- upvalues: readContext (ref)
-			return readContext(p18, p19)
-		end,
-		useCallback = function(p18, p19)
-			-- upvalues: var8 (write), dEV (ref), console (ref)
-			var8 = "useCallback"
-			updateHookTypesDev()
-			
-			if dEV and p19 ~= nil then
-				local var32
-				if type(p19) == "table" then
-					for i, v in p19 do
-						if type(i) ~= "number" then
-							var32 = false
-						end
-					end
-					var32 = true
-				else
-					var32 = false
-				end
-				if not var32 then
-					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var8, type(p19))
-				end
-			end
-			return mountCallback(p18, p19)
-		end,
-		useContext = function(p20, p21)
-			-- upvalues: var8 (write), readContext (ref)
-			var8 = "useContext"
-			updateHookTypesDev()
-			
 			return readContext(p20, p21)
 		end,
-		useEffect = function(p20, p21)
-			-- upvalues: var8 (write), mountEffect (ref)
-			var8 = "useEffect"
+		useCallback = function(p20, p21)
+			-- upvalues: var10 (write), dEV (ref), console (ref)
+			var10 = "useCallback"
 			updateHookTypesDev()
 			
-			return mountEffect(p20, p21)
+			if dEV and p21 ~= nil then
+				local var34
+				if type(p21) == "table" then
+					for i, v in p21 do
+						if type(i) ~= "number" then
+							var34 = false
+						end
+					end
+					var34 = true
+				else
+					var34 = false
+				end
+				if not var34 then
+					console.error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", var10, type(p21))
+				end
+			end
+			return mountCallback(p20, p21)
 		end,
-		useImperativeHandle = function(p20, p21, p22)
-			-- upvalues: var8 (write)
-			var8 = "useImperativeHandle"
+		useContext = function(p22, p23)
+			-- upvalues: var10 (write), readContext (ref)
+			var10 = "useContext"
 			updateHookTypesDev()
 			
-			return mountImperativeHandle(p20, p21, p22)
+			return readContext(p22, p23)
 		end,
-		useLayoutEffect = function(p20, p21)
-			-- upvalues: var8 (write), mountLayoutEffect (ref)
-			var8 = "useLayoutEffect"
+		useEffect = function(p22, p23)
+			-- upvalues: var10 (write), mountEffect (ref)
+			var10 = "useEffect"
 			updateHookTypesDev()
 			
-			return mountLayoutEffect(p20, p21)
+			return mountEffect(p22, p23)
 		end,
-		useMemo = function(p20, p21)
-			-- upvalues: var8 (write), reactCurrentDispatcher (ref), t_7 (write)
-			var8 = "useMemo"
+		useImperativeHandle = function(p22, p23, p24)
+			-- upvalues: var10 (write)
+			var10 = "useImperativeHandle"
+			updateHookTypesDev()
+			
+			return mountImperativeHandle(p22, p23, p24)
+		end,
+		useLayoutEffect = function(p22, p23)
+			-- upvalues: var10 (write), mountLayoutEffect (ref)
+			var10 = "useLayoutEffect"
+			updateHookTypesDev()
+			
+			return mountLayoutEffect(p22, p23)
+		end,
+		useMemo = function(p22, p23)
+			-- upvalues: var10 (write), reactCurrentDispatcher (ref), t_7 (write), enableAllocationTrims (ref), restoreDispatcherAndReturn (ref)
+			var10 = "useMemo"
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_7
-			local list = { pcall(mountMemo, p20, p21) }
+			
+			if enableAllocationTrims then
+				return restoreDispatcherAndReturn(current, pcall(mountMemo, p22, p23))
+			end
+			local list = { pcall(mountMemo, p22, p23) }
 			reactCurrentDispatcher.current = current
 			
 			if not list[1] then
@@ -1778,65 +1832,65 @@ if dEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p20, p21, p22)
-			-- upvalues: var8 (write), reactCurrentDispatcher (ref), t_7 (write)
-			var8 = "useReducer"
+		useReducer = function(p22, p23, p24)
+			-- upvalues: var10 (write), reactCurrentDispatcher (ref), t_7 (write)
+			var10 = "useReducer"
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_7
-			local ok, status, var33 = pcall(mountReducer, p20, p21, p22)
+			local ok, status, var35 = pcall(mountReducer, p22, p23, p24)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useRef = function(p20)
-			-- upvalues: var8 (write)
-			var8 = "useRef"
+		useRef = function(p22)
+			-- upvalues: var10 (write)
+			var10 = "useRef"
 			updateHookTypesDev()
 			
-			return mountRef(p20)
+			return mountRef(p22)
 		end,
-		useBinding = function(p20)
-			-- upvalues: var8 (write)
-			var8 = "useBinding"
+		useBinding = function(p22)
+			-- upvalues: var10 (write)
+			var10 = "useBinding"
 			updateHookTypesDev()
 			
-			return mountBinding(p20)
+			return mountBinding(p22)
 		end,
-		useState = function(p20)
-			-- upvalues: var8 (write), reactCurrentDispatcher (ref), t_7 (write)
-			var8 = "useState"
+		useState = function(p22)
+			-- upvalues: var10 (write), reactCurrentDispatcher (ref), t_7 (write)
+			var10 = "useState"
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_7
-			local ok, status, var33 = pcall(mountState, p20)
+			local ok, status, var35 = pcall(mountState, p22)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useDebugValue = function(p20, p21)
-			-- upvalues: var8 (write)
-			var8 = "useDebugValue"
+		useDebugValue = function(p22, p23)
+			-- upvalues: var10 (write)
+			var10 = "useDebugValue"
 			updateHookTypesDev()
 			
-			return mountDebugValue(p20, p21)
+			return mountDebugValue(p22, p23)
 		end,
-		useMutableSource = function(p20, p21, p22)
-			-- upvalues: var8 (write)
-			var8 = "useMutableSource"
+		useMutableSource = function(p22, p23, p24)
+			-- upvalues: var10 (write)
+			var10 = "useMutableSource"
 			updateHookTypesDev()
 			
-			return mountMutableSource(p20, p21, p22)
+			return mountMutableSource(p22, p23, p24)
 		end,
 		useOpaqueIdentifier = function()
-			-- upvalues: var8 (write)
-			var8 = "useOpaqueIdentifier"
+			-- upvalues: var10 (write)
+			var10 = "useOpaqueIdentifier"
 			updateHookTypesDev()
 			
 			return mountOpaqueIdentifier()
@@ -1844,52 +1898,56 @@ if dEV then
 		unstable_isNewReconciler = enableNewReconciler
 	}
 	t_5 = {
-		readContext = function(p20, p21)
+		readContext = function(p22, p23)
 			-- upvalues: readContext (ref)
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useCallback = function(p20, p21)
-			-- upvalues: var8 (write)
-			var8 = "useCallback"
+		useCallback = function(p22, p23)
+			-- upvalues: var10 (write)
+			var10 = "useCallback"
 			updateHookTypesDev()
 			
-			return updateCallback(p20, p21)
+			return updateCallback(p22, p23)
 		end,
-		useContext = function(p20, p21)
-			-- upvalues: var8 (write), readContext (ref)
-			var8 = "useContext"
+		useContext = function(p22, p23)
+			-- upvalues: var10 (write), readContext (ref)
+			var10 = "useContext"
 			updateHookTypesDev()
 			
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useEffect = function(p20, p21)
-			-- upvalues: var8 (write), updateEffect (ref)
-			var8 = "useEffect"
+		useEffect = function(p22, p23)
+			-- upvalues: var10 (write), updateEffect (ref)
+			var10 = "useEffect"
 			updateHookTypesDev()
 			
-			return updateEffect(p20, p21)
+			return updateEffect(p22, p23)
 		end,
-		useImperativeHandle = function(p20, p21, p22)
-			-- upvalues: var8 (write)
-			var8 = "useImperativeHandle"
+		useImperativeHandle = function(p22, p23, p24)
+			-- upvalues: var10 (write)
+			var10 = "useImperativeHandle"
 			updateHookTypesDev()
 			
-			return updateImperativeHandle(p20, p21, p22)
+			return updateImperativeHandle(p22, p23, p24)
 		end,
-		useLayoutEffect = function(p20, p21)
-			-- upvalues: var8 (write), updateLayoutEffect (ref)
-			var8 = "useLayoutEffect"
+		useLayoutEffect = function(p22, p23)
+			-- upvalues: var10 (write), updateLayoutEffect (ref)
+			var10 = "useLayoutEffect"
 			updateHookTypesDev()
 			
-			return updateLayoutEffect(p20, p21)
+			return updateLayoutEffect(p22, p23)
 		end,
-		useMemo = function(p20, p21)
-			-- upvalues: var8 (write), reactCurrentDispatcher (ref), t_8 (write)
-			var8 = "useMemo"
+		useMemo = function(p22, p23)
+			-- upvalues: var10 (write), reactCurrentDispatcher (ref), t_8 (write), enableAllocationTrims (ref), restoreDispatcherAndReturn (ref)
+			var10 = "useMemo"
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_8
-			local list = { pcall(updateMemo, p20, p21) }
+			
+			if enableAllocationTrims then
+				return restoreDispatcherAndReturn(current, pcall(updateMemo, p22, p23))
+			end
+			local list = { pcall(updateMemo, p22, p23) }
 			reactCurrentDispatcher.current = current
 			
 			if not list[1] then
@@ -1897,65 +1955,65 @@ if dEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p20, p21, p22)
-			-- upvalues: var8 (write), reactCurrentDispatcher (ref), t_8 (write)
-			var8 = "useReducer"
+		useReducer = function(p22, p23, p24)
+			-- upvalues: var10 (write), reactCurrentDispatcher (ref), t_8 (write)
+			var10 = "useReducer"
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_8
-			local ok, status, var33 = pcall(updateReducer, p20, p21, p22)
+			local ok, status, var35 = pcall(updateReducer, p22, p23, p24)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useRef = function(p20)
-			-- upvalues: var8 (write)
-			var8 = "useRef"
+		useRef = function(p22)
+			-- upvalues: var10 (write)
+			var10 = "useRef"
 			updateHookTypesDev()
 			
-			return updateRef(p20)
+			return updateRef(p22)
 		end,
-		useBinding = function(p20)
-			-- upvalues: var8 (write)
-			var8 = "useBinding"
+		useBinding = function(p22)
+			-- upvalues: var10 (write)
+			var10 = "useBinding"
 			updateHookTypesDev()
 			
-			return updateBinding(p20)
+			return updateBinding(p22)
 		end,
-		useState = function(p20)
-			-- upvalues: var8 (write), reactCurrentDispatcher (ref), t_8 (write)
-			var8 = "useState"
+		useState = function(p22)
+			-- upvalues: var10 (write), reactCurrentDispatcher (ref), t_8 (write)
+			var10 = "useState"
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_8
-			local ok, status, var33 = pcall(updateState, p20)
+			local ok, status, var35 = pcall(updateState, p22)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useDebugValue = function(p20, p21)
-			-- upvalues: var8 (write), _mountDebugValue (ref)
-			var8 = "useDebugValue"
+		useDebugValue = function(p22, p23)
+			-- upvalues: var10 (write), _mountDebugValue (ref)
+			var10 = "useDebugValue"
 			updateHookTypesDev()
 			
-			return _mountDebugValue(p20, p21)
+			return _mountDebugValue(p22, p23)
 		end,
-		useMutableSource = function(p20, p21, p22)
-			-- upvalues: var8 (write)
-			var8 = "useMutableSource"
+		useMutableSource = function(p22, p23, p24)
+			-- upvalues: var10 (write)
+			var10 = "useMutableSource"
 			updateHookTypesDev()
 			
-			return updateMutableSource(p20, p21, p22)
+			return updateMutableSource(p22, p23, p24)
 		end,
 		useOpaqueIdentifier = function()
-			-- upvalues: var8 (write)
-			var8 = "useOpaqueIdentifier"
+			-- upvalues: var10 (write)
+			var10 = "useOpaqueIdentifier"
 			updateHookTypesDev()
 			
 			return updateOpaqueIdentifier()
@@ -1963,52 +2021,56 @@ if dEV then
 		unstable_isNewReconciler = enableNewReconciler
 	}
 	t_6 = {
-		readContext = function(p20, p21)
+		readContext = function(p22, p23)
 			-- upvalues: readContext (ref)
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useCallback = function(p20, p21)
-			-- upvalues: var8 (write)
-			var8 = "useCallback"
+		useCallback = function(p22, p23)
+			-- upvalues: var10 (write)
+			var10 = "useCallback"
 			updateHookTypesDev()
 			
-			return updateCallback(p20, p21)
+			return updateCallback(p22, p23)
 		end,
-		useContext = function(p20, p21)
-			-- upvalues: var8 (write), readContext (ref)
-			var8 = "useContext"
+		useContext = function(p22, p23)
+			-- upvalues: var10 (write), readContext (ref)
+			var10 = "useContext"
 			updateHookTypesDev()
 			
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useEffect = function(p20, p21)
-			-- upvalues: var8 (write), updateEffect (ref)
-			var8 = "useEffect"
+		useEffect = function(p22, p23)
+			-- upvalues: var10 (write), updateEffect (ref)
+			var10 = "useEffect"
 			updateHookTypesDev()
 			
-			return updateEffect(p20, p21)
+			return updateEffect(p22, p23)
 		end,
-		useImperativeHandle = function(p20, p21, p22)
-			-- upvalues: var8 (write)
-			var8 = "useImperativeHandle"
+		useImperativeHandle = function(p22, p23, p24)
+			-- upvalues: var10 (write)
+			var10 = "useImperativeHandle"
 			updateHookTypesDev()
 			
-			return updateImperativeHandle(p20, p21, p22)
+			return updateImperativeHandle(p22, p23, p24)
 		end,
-		useLayoutEffect = function(p20, p21)
-			-- upvalues: var8 (write), updateLayoutEffect (ref)
-			var8 = "useLayoutEffect"
+		useLayoutEffect = function(p22, p23)
+			-- upvalues: var10 (write), updateLayoutEffect (ref)
+			var10 = "useLayoutEffect"
 			updateHookTypesDev()
 			
-			return updateLayoutEffect(p20, p21)
+			return updateLayoutEffect(p22, p23)
 		end,
-		useMemo = function(p20, p21)
-			-- upvalues: var8 (write), reactCurrentDispatcher (ref), t_9 (write)
-			var8 = "useMemo"
+		useMemo = function(p22, p23)
+			-- upvalues: var10 (write), reactCurrentDispatcher (ref), t_9 (write), enableAllocationTrims (ref), restoreDispatcherAndReturn (ref)
+			var10 = "useMemo"
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_9
-			local list = { pcall(updateMemo, p20, p21) }
+			
+			if enableAllocationTrims then
+				return restoreDispatcherAndReturn(current, pcall(updateMemo, p22, p23))
+			end
+			local list = { pcall(updateMemo, p22, p23) }
 			reactCurrentDispatcher.current = current
 			
 			if not list[1] then
@@ -2016,65 +2078,65 @@ if dEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p20, p21, p22)
-			-- upvalues: var8 (write), reactCurrentDispatcher (ref), t_9 (write)
-			var8 = "useReducer"
+		useReducer = function(p22, p23, p24)
+			-- upvalues: var10 (write), reactCurrentDispatcher (ref), t_9 (write)
+			var10 = "useReducer"
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_9
-			local ok, status, var33 = pcall(rerenderReducer, p20, p21, p22)
+			local ok, status, var35 = pcall(rerenderReducer, p22, p23, p24)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useRef = function(p20)
-			-- upvalues: var8 (write)
-			var8 = "useRef"
+		useRef = function(p22)
+			-- upvalues: var10 (write)
+			var10 = "useRef"
 			updateHookTypesDev()
 			
-			return updateRef(p20)
+			return updateRef(p22)
 		end,
-		useBinding = function(p20)
-			-- upvalues: var8 (write)
-			var8 = "useBinding"
+		useBinding = function(p22)
+			-- upvalues: var10 (write)
+			var10 = "useBinding"
 			updateHookTypesDev()
 			
-			return updateBinding(p20)
+			return updateBinding(p22)
 		end,
-		useState = function(p20)
-			-- upvalues: var8 (write), reactCurrentDispatcher (ref), t_9 (write)
-			var8 = "useState"
+		useState = function(p22)
+			-- upvalues: var10 (write), reactCurrentDispatcher (ref), t_9 (write)
+			var10 = "useState"
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_9
-			local ok, status, var33 = pcall(rerenderState, p20)
+			local ok, status, var35 = pcall(rerenderState, p22)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useDebugValue = function(p20, p21)
-			-- upvalues: var8 (write), _mountDebugValue (ref)
-			var8 = "useDebugValue"
+		useDebugValue = function(p22, p23)
+			-- upvalues: var10 (write), _mountDebugValue (ref)
+			var10 = "useDebugValue"
 			updateHookTypesDev()
 			
-			return _mountDebugValue(p20, p21)
+			return _mountDebugValue(p22, p23)
 		end,
-		useMutableSource = function(p20, p21, p22)
-			-- upvalues: var8 (write)
-			var8 = "useMutableSource"
+		useMutableSource = function(p22, p23, p24)
+			-- upvalues: var10 (write)
+			var10 = "useMutableSource"
 			updateHookTypesDev()
 			
-			return updateMutableSource(p20, p21, p22)
+			return updateMutableSource(p22, p23, p24)
 		end,
 		useOpaqueIdentifier = function()
-			-- upvalues: var8 (write)
-			var8 = "useOpaqueIdentifier"
+			-- upvalues: var10 (write)
+			var10 = "useOpaqueIdentifier"
 			updateHookTypesDev()
 			
 			return rerenderOpaqueIdentifier()
@@ -2082,109 +2144,113 @@ if dEV then
 		unstable_isNewReconciler = enableNewReconciler
 	}
 	t_7 = {
-		readContext = function(p20, p21)
+		readContext = function(p22, p23)
 			-- upvalues: console (ref), readContext (ref)
 			console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")
 			
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useCallback = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write)
-			var8 = "useCallback"
+		useCallback = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write)
+			var10 = "useCallback"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
-			return mountCallback(p20, p21)
+			return mountCallback(p22, p23)
 		end,
-		useContext = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write), readContext (ref)
-			var8 = "useContext"
+		useContext = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write), readContext (ref)
+			var10 = "useContext"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useEffect = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write), mountEffect (ref)
-			var8 = "useEffect"
+		useEffect = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write), mountEffect (ref)
+			var10 = "useEffect"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
-			return mountEffect(p20, p21)
+			return mountEffect(p22, p23)
 		end,
-		useImperativeHandle = function(p20, p21, p22)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write)
-			var8 = "useImperativeHandle"
+		useImperativeHandle = function(p22, p23, p24)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write)
+			var10 = "useImperativeHandle"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
-			return mountImperativeHandle(p20, p21, p22)
+			return mountImperativeHandle(p22, p23, p24)
 		end,
-		useLayoutEffect = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write), mountLayoutEffect (ref)
-			var8 = "useLayoutEffect"
+		useLayoutEffect = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write), mountLayoutEffect (ref)
+			var10 = "useLayoutEffect"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
-			return mountLayoutEffect(p20, p21)
+			return mountLayoutEffect(p22, p23)
 		end,
-		useMemo = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write), reactCurrentDispatcher (ref), t_7 (write)
-			var8 = "useMemo"
+		useMemo = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write), reactCurrentDispatcher (ref), t_7 (write), enableAllocationTrims (ref), restoreDispatcherAndReturn (ref)
+			var10 = "useMemo"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_7
-			local list = { pcall(mountMemo, p20, p21) }
+			
+			if enableAllocationTrims then
+				return restoreDispatcherAndReturn(current, pcall(mountMemo, p22, p23))
+			end
+			local list = { pcall(mountMemo, p22, p23) }
 			reactCurrentDispatcher.current = current
 			
 			if not list[1] then
@@ -2192,130 +2258,130 @@ if dEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p20, p21, p22)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write), reactCurrentDispatcher (ref), t_7 (write)
-			var8 = "useReducer"
+		useReducer = function(p22, p23, p24)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write), reactCurrentDispatcher (ref), t_7 (write)
+			var10 = "useReducer"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_7
-			local ok, status, var34 = pcall(mountReducer, p20, p21, p22)
+			local ok, status, var36 = pcall(mountReducer, p22, p23, p24)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var34
+			return status, var36
 		end,
-		useRef = function(p20)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write)
-			var8 = "useRef"
+		useRef = function(p22)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write)
+			var10 = "useRef"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
-			return mountRef(p20)
+			return mountRef(p22)
 		end,
-		useBinding = function(p20)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write)
-			var8 = "useBinding"
+		useBinding = function(p22)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write)
+			var10 = "useBinding"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
-			return mountBinding(p20)
+			return mountBinding(p22)
 		end,
-		useState = function(p20)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write), reactCurrentDispatcher (ref), t_7 (write)
-			var8 = "useState"
+		useState = function(p22)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write), reactCurrentDispatcher (ref), t_7 (write)
+			var10 = "useState"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_7
-			local ok, status, var34 = pcall(mountState, p20)
+			local ok, status, var36 = pcall(mountState, p22)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var34
+			return status, var36
 		end,
-		useDebugValue = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write)
-			var8 = "useDebugValue"
+		useDebugValue = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write)
+			var10 = "useDebugValue"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
-			return mountDebugValue(p20, p21)
+			return mountDebugValue(p22, p23)
 		end,
-		useMutableSource = function(p20, p21, p22)
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write)
-			var8 = "useMutableSource"
+		useMutableSource = function(p22, p23, p24)
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write)
+			var10 = "useMutableSource"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
-			return mountMutableSource(p20, p21, p22)
+			return mountMutableSource(p22, p23, p24)
 		end,
 		useOpaqueIdentifier = function()
-			-- upvalues: var8 (write), console (ref), dEV (ref), var9 (write)
-			var8 = "useOpaqueIdentifier"
+			-- upvalues: var10 (write), console (ref), dEV (ref), var11 (write)
+			var10 = "useOpaqueIdentifier"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			
 			if dEV then
-				local var33 = var8
+				local var35 = var10
 				
-				if var9 == nil then
-					var9 = { var33 }
+				if var11 == nil then
+					var11 = { var35 }
 				else
-					table.insert(var9, var33)
+					table.insert(var11, var35)
 				end
 			end
 			return mountOpaqueIdentifier()
@@ -2323,60 +2389,64 @@ if dEV then
 		unstable_isNewReconciler = enableNewReconciler
 	}
 	t_8 = {
-		readContext = function(p20, p21)
+		readContext = function(p22, p23)
 			-- upvalues: console (ref), readContext (ref)
 			console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")
 			
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useCallback = function(p20, p21)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useCallback"
+		useCallback = function(p22, p23)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useCallback"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return mountCallback(p20, p21)
+			return mountCallback(p22, p23)
 		end,
-		useContext = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), readContext (ref)
-			var8 = "useContext"
+		useContext = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), readContext (ref)
+			var10 = "useContext"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useEffect = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), updateEffect (ref)
-			var8 = "useEffect"
+		useEffect = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), updateEffect (ref)
+			var10 = "useEffect"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateEffect(p20, p21)
+			return updateEffect(p22, p23)
 		end,
-		useImperativeHandle = function(p20, p21, p22)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useImperativeHandle"
+		useImperativeHandle = function(p22, p23, p24)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useImperativeHandle"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateImperativeHandle(p20, p21, p22)
+			return updateImperativeHandle(p22, p23, p24)
 		end,
-		useLayoutEffect = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), updateLayoutEffect (ref)
-			var8 = "useLayoutEffect"
+		useLayoutEffect = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), updateLayoutEffect (ref)
+			var10 = "useLayoutEffect"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateLayoutEffect(p20, p21)
+			return updateLayoutEffect(p22, p23)
 		end,
-		useMemo = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
-			var8 = "useMemo"
+		useMemo = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write), enableAllocationTrims (ref), restoreDispatcherAndReturn (ref)
+			var10 = "useMemo"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_8
-			local list = { pcall(updateMemo, p20, p21) }
+			
+			if enableAllocationTrims then
+				return restoreDispatcherAndReturn(current, pcall(updateMemo, p22, p23))
+			end
+			local list = { pcall(updateMemo, p22, p23) }
 			reactCurrentDispatcher.current = current
 			
 			if not list[1] then
@@ -2384,71 +2454,71 @@ if dEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p20, p21, p22)
-			-- upvalues: var8 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
-			var8 = "useReducer"
+		useReducer = function(p22, p23, p24)
+			-- upvalues: var10 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
+			var10 = "useReducer"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_8
-			local ok, status, var33 = pcall(updateReducer, p20, p21, p22)
+			local ok, status, var35 = pcall(updateReducer, p22, p23, p24)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useRef = function(p20)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useRef"
+		useRef = function(p22)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useRef"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateRef(p20)
+			return updateRef(p22)
 		end,
-		useBinding = function(p20)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useBinding"
+		useBinding = function(p22)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useBinding"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateBinding(p20)
+			return updateBinding(p22)
 		end,
-		useState = function(p20)
-			-- upvalues: var8 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
-			var8 = "useState"
+		useState = function(p22)
+			-- upvalues: var10 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
+			var10 = "useState"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_8
-			local ok, status, var33 = pcall(updateState, p20)
+			local ok, status, var35 = pcall(updateState, p22)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useDebugValue = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), _mountDebugValue (ref)
-			var8 = "useDebugValue"
+		useDebugValue = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), _mountDebugValue (ref)
+			var10 = "useDebugValue"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return _mountDebugValue(p20, p21)
+			return _mountDebugValue(p22, p23)
 		end,
-		useMutableSource = function(p20, p21, p22)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useMutableSource"
+		useMutableSource = function(p22, p23, p24)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useMutableSource"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateMutableSource(p20, p21, p22)
+			return updateMutableSource(p22, p23, p24)
 		end,
 		useOpaqueIdentifier = function()
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useOpaqueIdentifier"
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useOpaqueIdentifier"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
@@ -2457,60 +2527,64 @@ if dEV then
 		unstable_isNewReconciler = enableNewReconciler
 	}
 	t_9 = {
-		readContext = function(p20, p21)
+		readContext = function(p22, p23)
 			-- upvalues: console (ref), readContext (ref)
 			console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")
 			
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useCallback = function(p20, p21)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useCallback"
+		useCallback = function(p22, p23)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useCallback"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateCallback(p20, p21)
+			return updateCallback(p22, p23)
 		end,
-		useContext = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), readContext (ref)
-			var8 = "useContext"
+		useContext = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), readContext (ref)
+			var10 = "useContext"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return readContext(p20, p21)
+			return readContext(p22, p23)
 		end,
-		useEffect = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), updateEffect (ref)
-			var8 = "useEffect"
+		useEffect = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), updateEffect (ref)
+			var10 = "useEffect"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateEffect(p20, p21)
+			return updateEffect(p22, p23)
 		end,
-		useImperativeHandle = function(p20, p21, p22)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useImperativeHandle"
+		useImperativeHandle = function(p22, p23, p24)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useImperativeHandle"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateImperativeHandle(p20, p21, p22)
+			return updateImperativeHandle(p22, p23, p24)
 		end,
-		useLayoutEffect = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), updateLayoutEffect (ref)
-			var8 = "useLayoutEffect"
+		useLayoutEffect = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), updateLayoutEffect (ref)
+			var10 = "useLayoutEffect"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateLayoutEffect(p20, p21)
+			return updateLayoutEffect(p22, p23)
 		end,
-		useMemo = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
-			var8 = "useMemo"
+		useMemo = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write), enableAllocationTrims (ref), restoreDispatcherAndReturn (ref)
+			var10 = "useMemo"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_8
-			local list = { pcall(updateMemo, p20, p21) }
+			
+			if enableAllocationTrims then
+				return restoreDispatcherAndReturn(current, pcall(updateMemo, p22, p23))
+			end
+			local list = { pcall(updateMemo, p22, p23) }
 			reactCurrentDispatcher.current = current
 			
 			if not list[1] then
@@ -2518,71 +2592,71 @@ if dEV then
 			end
 			return unpack(list, 2)
 		end,
-		useReducer = function(p20, p21, p22)
-			-- upvalues: var8 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
-			var8 = "useReducer"
+		useReducer = function(p22, p23, p24)
+			-- upvalues: var10 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
+			var10 = "useReducer"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_8
-			local ok, status, var33 = pcall(rerenderReducer, p20, p21, p22)
+			local ok, status, var35 = pcall(rerenderReducer, p22, p23, p24)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useRef = function(p20)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useRef"
+		useRef = function(p22)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useRef"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateRef(p20)
+			return updateRef(p22)
 		end,
-		useBinding = function(p20)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useBinding"
+		useBinding = function(p22)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useBinding"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateBinding(p20)
+			return updateBinding(p22)
 		end,
-		useState = function(p20)
-			-- upvalues: var8 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
-			var8 = "useState"
+		useState = function(p22)
+			-- upvalues: var10 (write), console (ref), reactCurrentDispatcher (ref), t_8 (write)
+			var10 = "useState"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			local current = reactCurrentDispatcher.current
 			reactCurrentDispatcher.current = t_8
-			local ok, status, var33 = pcall(rerenderState, p20)
+			local ok, status, var35 = pcall(rerenderState, p22)
 			reactCurrentDispatcher.current = current
 			
 			if not ok then
 				error(status)
 			end
-			return status, var33
+			return status, var35
 		end,
-		useDebugValue = function(p20, p21)
-			-- upvalues: var8 (write), console (ref), _mountDebugValue (ref)
-			var8 = "useDebugValue"
+		useDebugValue = function(p22, p23)
+			-- upvalues: var10 (write), console (ref), _mountDebugValue (ref)
+			var10 = "useDebugValue"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return _mountDebugValue(p20, p21)
+			return _mountDebugValue(p22, p23)
 		end,
-		useMutableSource = function(p20, p21, p22)
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useMutableSource"
+		useMutableSource = function(p22, p23, p24)
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useMutableSource"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
-			return updateMutableSource(p20, p21, p22)
+			return updateMutableSource(p22, p23, p24)
 		end,
 		useOpaqueIdentifier = function()
-			-- upvalues: var8 (write), console (ref)
-			var8 = "useOpaqueIdentifier"
+			-- upvalues: var10 (write), console (ref)
+			var10 = "useOpaqueIdentifier"
 			console.error("Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. You can only call Hooks at the top level of your React function. For more information, see https://reactjs.org/link/rules-of-hooks")
 			updateHookTypesDev()
 			
@@ -2591,81 +2665,94 @@ if dEV then
 		unstable_isNewReconciler = enableNewReconciler
 	}
 end
-function t_2.renderWithHooks(p18, p19, p20, p21, p22, p23)
-	-- upvalues: var2 (write), var3 (write), dEV (ref), var9 (write), var10 (write), noLanes (ref), reactCurrentDispatcher (ref), t_5 (write), t_4 (write), t_3 (write), t_11 (ref), t_12 (ref), var7 (write), error (ref), var4 (write), var5 (write), t_6 (write), t_13 (ref), t_10 (ref), var8 (write), var6 (write), getComponentName (ref)
-	var2 = p23
-	var3 = p19
+function t_2.renderWithHooks(p20, p21, p22, p23, p24, p25)
+	-- upvalues: var2 (write), var3 (write), dEV (ref), var11 (write), var12 (write), reactFeatureFlags (ref), noLanes (ref), reactCurrentDispatcher (ref), t_5 (write), t_4 (write), t_3 (write), t_11 (ref), t_12 (ref), var9 (write), error (ref), var4 (write), var5 (write), t_6 (write), t_13 (ref), t_10 (ref), enableHookDoubleBuffering (ref), var6 (write), var7 (write), var10 (write), var8 (write), getComponentName (ref)
+	var2 = p25
+	var3 = p21
 	
 	if dEV then
-		var9 = if p18 ~= nil then nil else p18._debugHookTypes
-		var10 = 0
+		var11 = if p20 ~= nil then nil else p20._debugHookTypes
+		var12 = 0
 	end
-	p19.memoizedState = nil
-	p19.updateQueue = nil
-	p19.lanes = noLanes
+	if reactFeatureFlags.enableWorkLoopTrims then
+		if p21.memoizedState ~= nil then
+			p21.memoizedState = nil
+		end
+		if p21.updateQueue ~= nil then
+			p21.updateQueue = nil
+		end
+	else
+		p21.memoizedState = nil
+		p21.updateQueue = nil
+	end
+	p21.lanes = noLanes
 	
 	if not dEV then
 		local t_11_1
-		local var32 = reactCurrentDispatcher
+		local var34 = reactCurrentDispatcher
 		
-		if p18 ~= nil then
-			t_11_1 = p18.memoizedState == nil and (t_11 or t_12)
+		if p20 ~= nil then
+			t_11_1 = p20.memoizedState == nil and (t_11 or t_12)
 		end
-		var32.current = t_11_1
-	elseif p18 ~= nil and p18.memoizedState ~= nil then
+		var34.current = t_11_1
+	elseif p20 ~= nil and p20.memoizedState ~= nil then
 		reactCurrentDispatcher.current = t_5
-	elseif var9 == nil then
+	elseif var11 == nil then
 		reactCurrentDispatcher.current = t_3
 	else
 		reactCurrentDispatcher.current = t_4
 	end
-	local var33 = p20(p21, p22)
+	local var35 = p22(p23, p24)
 	
-	if var7 then
-		local var34 = 0
-		var7 = false
+	if var9 then
+		local var36 = 0
+		var9 = false
 		
-		if var34 >= 25 then
+		if var36 >= 25 then
 			error(error.new("Too many re-renders. React limits the number of renders to prevent an infinite loop."))
 		end
-		var34 += 1
+		var36 += 1
 		var4 = nil
 		var5 = nil
-		p19.updateQueue = nil
+		p21.updateQueue = nil
 		
 		if dEV then
-			var10 = 0
+			var12 = 0
 		end
 		reactCurrentDispatcher.current = if dEV then t_6 else t_13
-		var33 = p20(p21, p22)
+		var35 = p22(p23, p24)
 	end
 	reactCurrentDispatcher.current = t_10
 	
 	if dEV then
-		p19._debugHookTypes = var9
+		p21._debugHookTypes = var11
 	end
-	local var35 = var4 ~= nil and var4.next ~= nil
+	local var37 = var4 ~= nil and var4.next ~= nil
 	var2 = noLanes
 	var3 = nil
 	var4 = nil
 	var5 = nil
 	
+	if enableHookDoubleBuffering then
+		var6 = nil
+		var7 = nil
+	end
 	if dEV then
-		var8 = nil
-		var9 = nil
-		var10 = 0
+		var10 = nil
+		var11 = nil
+		var12 = 0
 	end
-	var6 = false
+	var8 = false
 	
-	if var35 then
-		local var36 = "unknown"
+	if var37 then
+		local var38 = "unknown"
 		
-		if var33 and var33.type then
-			var36 = getComponentName(var33.type) or var36
+		if var35 and var35.type then
+			var38 = getComponentName(var35.type) or var38
 		end
-		error(error.new("Rendered fewer hooks than expected. This may be caused by an accidental " .. "early return statement. Inside '" .. var197 .. "'"))
+		error(error.new("Rendered fewer hooks than expected. This may be caused by an accidental " .. "early return statement. Inside '" .. var198 .. "'"))
 	end
-	return var33
+	return var35
 end
 
 return t_2

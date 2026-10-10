@@ -168,6 +168,7 @@ return {
 	endTimerSampling = endTimerSampling,
 	profileRootBeforeUnitOfWork = if status >= 1 then profileRootBeforeUnitOfWork else noop,
 	profileRootAfterYielding = if status >= 1 then profileRootAfterYielding else noop,
+	enableUnitOfWorkProfiling = status >= 10,
 	profileUnitOfWorkBefore = if status >= 10 then profileUnitOfWorkBefore else noop,
 	profileUnitOfWorkAfter = if status >= 10 then profileUnitOfWorkAfter else noop,
 	profileCommitBefore = if status >= 5 then profileCommitBefore else noop,

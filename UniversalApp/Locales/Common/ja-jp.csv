@@ -455,7 +455,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,今すぐリスポーン
 Authentication.SignUp.Action.SetupLater,あとで設定
 Authentication.SignUp.Action.StartOver,
-Authentication.SignUp.Action.StartPlay,プレイ開始
 Authentication.SignUp.Action.UseEmail,メールアドレスを使う
 Authentication.SignUp.Action.UsePhoneNumber,電話番号を使う
 Authentication.SignUp.Button.OKCaptialized,
@@ -1211,6 +1210,19 @@ CoreScripts.TopBar.Music,音楽
 CoreScripts.TopBar.MusicLoading,再生中のオーディオはありません
 CoreScripts.TopBar.MusicNotVerified,再生中のオーディオを確認できません
 CoreScripts.TopBar.Traversal.History,履歴
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,プレイを続ける
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,テレポート
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Robloxの注目事項
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,ホーム以外
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,ホームでのおすすめ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,ポータル広告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,広告をサーチ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,スポンサー広告
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,下スクロール
 Feature.Accessibility.Action.ScrollUp,上スクロール
@@ -3485,7 +3497,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,表情アニメーションが一時�
 Feature.FaceChat.Subtitle.UnableToAccessCamera,カメラを使用してアバターを動かすには、OS設定ページでRobloxがカメラを使えるように許可を出してください。
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,お気に入りに登録済み
-Feature.FlyoutSidePanel.Action.ContinuePlaying,プレイを続ける
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,プロフィール、コンテンツ、設定が新しい場所に移動しました。
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b>は移動しました
 Feature.Friends.Action.AcceptFriend,
@@ -3818,7 +3830,7 @@ Feature.GameJoin.Label.PlayTogether,一緒にプレイできます
 Feature.GameJoin.Label.PlayTogetherSoon,もうすぐ一緒にプレイできるようになります
 Feature.GamePage.Action.BackToTop,トップに戻る
 Feature.GamePage.Label.Ad,
-Feature.GamePage.Label.Sponsored,スポンサー広告
+Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,スポンサー広告アイテムは、クリエーターによって支払われています。EU圏のユーザーには、お持ちのデバイスの種類やご利用の地域、ユーザーのみなさんの属性データ全般に関する一般的な情報に基づいて表示されるかもしれません。EU圏以外では、その他の追加情報に基づいて広告が表示されるかもしれません。
 Feature.GamePage.LabelCancelField,
 Feature.GamePage.LabelNoSearchResults,結果が見つかりませんでした

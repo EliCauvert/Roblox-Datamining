@@ -455,7 +455,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Réapparaître
 Authentication.SignUp.Action.SetupLater,Configurer plus tard
 Authentication.SignUp.Action.StartOver,Recommencer
-Authentication.SignUp.Action.StartPlay,Jouer
 Authentication.SignUp.Action.UseEmail,Utiliser une adresse e-mail
 Authentication.SignUp.Action.UsePhoneNumber,Utiliser un numéro de téléphone
 Authentication.SignUp.Button.OKCaptialized,
@@ -1211,6 +1210,19 @@ CoreScripts.TopBar.Music,Musique
 CoreScripts.TopBar.MusicLoading,Aucun audio en cours de lecture
 CoreScripts.TopBar.MusicNotVerified,La lecture audio n'est pas vérifiée
 CoreScripts.TopBar.Traversal.History,Historique
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Continuer à jouer
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Téléportation
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Mis à la une par Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Accueil Autre
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Accueil Recommandation
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,Autre
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Annonces sur le portail
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,Chercher
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Rechercher dans les annonces
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Annonces sponsorisées
 Feature.AbuseReportDialog.Label.GeneralError,Une erreur est survenue. Réessaie plus tard.
 Feature.Accessibility.Action.ScrollDown,Défiler vers le bas
 Feature.Accessibility.Action.ScrollUp,Défiler vers le haut
@@ -2500,7 +2512,7 @@ Feature.Build.Label.ResetsWeekly,Réinitialisation hebdomadaire
 Feature.Build.Label.RestoredVersion,{VERSION} restaurée
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.SalesOptions,Options de vente
-Feature.Build.Label.Search,Chercher
+Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Rechercher des jeux
 Feature.Build.Label.SearchTasks,Rechercher des tâches
 Feature.Build.Label.SelectOption,Sélectionner une option
@@ -3485,7 +3497,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,L'animation faciale est temporairement
 Feature.FaceChat.Subtitle.UnableToAccessCamera,"Pour animer ton avatar avec une caméra, va dans les paramètres du système d'exploitation pour permettre à Roblox d'utiliser la caméra"
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,En favoris
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Continuer à jouer
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"Votre profil, votre contenu et vos paramètres ont été déplacés vers un nouvel emplacement."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> a été déplacé
 Feature.Friends.Action.AcceptFriend,Accepter la demande d'ami
@@ -4051,7 +4063,7 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} secondes
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Tu confirmes vouloir supprimer définitivement cet item de ton inventaire ? Si tu changes d'avis, tu devras l'obtenir à nouveau dans une expérience."
 Feature.Item.Label.DeleteItemUndercase,Supprimer l'item
-Feature.Landing.Action.PlayNow,
+Feature.Landing.Action.PlayNow,Jouer
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"En continuant, tu acceptes nos {startTermsTag}Conditions{endTermsTag}, y compris la clause d'arbitrage, et reconnais avoir pris connaissance de notre {startPrivacyTag}Politique de confidentialité{endPrivacyTag}. Si tu as moins de 18 ans, ton parent ou tuteur légal doit autoriser ton compte et accepter nos Conditions."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Langue inappropriée
@@ -4454,7 +4466,7 @@ Feature.NotApproved.Label.AbuseType.NoneoftheAbove,Aucun des éléments ci-dessu
 Feature.NotApproved.Label.AbuseType.NotRelatedtoRoblox,Non lié à Roblox
 Feature.NotApproved.Label.AbuseType.OffPlatformSpeechandBehavior,Discours et comportement hors plateforme
 Feature.NotApproved.Label.AbuseType.OffSiteLinks,Liens hors site
-Feature.NotApproved.Label.AbuseType.Other,Autre
+Feature.NotApproved.Label.AbuseType.Other,
 Feature.NotApproved.Label.AbuseType.PersonalAttackHarassmentBullying,Attaque personnelle/harcèlement/brimade
 Feature.NotApproved.Label.AbuseType.PhishingScam,Phishing/scam
 Feature.NotApproved.Label.AbuseType.PlayersScreamingintoMicrophone,Joueurs hurlant dans le microphone

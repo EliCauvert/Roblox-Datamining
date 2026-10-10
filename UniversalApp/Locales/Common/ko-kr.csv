@@ -456,7 +456,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,지금 리스폰
 Authentication.SignUp.Action.SetupLater,나중에 설정
 Authentication.SignUp.Action.StartOver,처음부터 다시 시작
-Authentication.SignUp.Action.StartPlay,플레이 시작
 Authentication.SignUp.Action.UseEmail,이메일 주소 사용
 Authentication.SignUp.Action.UsePhoneNumber,
 Authentication.SignUp.Button.OKCaptialized,
@@ -1212,6 +1211,19 @@ CoreScripts.TopBar.Music,음악
 CoreScripts.TopBar.MusicLoading,재생 중인 음악이 없습니다
 CoreScripts.TopBar.MusicNotVerified,재생 중인 오디오가 인증되지 않았습니다
 CoreScripts.TopBar.Traversal.History,기록
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,계속 플레이
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,텔레포트
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Roblox 추천 게임
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,홈 이외
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,홈 화면 추천
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,기타
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,포털 광고
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,검색 광고
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,스폰서 광고
 Feature.AbuseReportDialog.Label.GeneralError,오류가 발생했습니다. 나중에 다시 시도하세요.
 Feature.Accessibility.Action.ScrollDown,아래로 스크롤
 Feature.Accessibility.Action.ScrollUp,위로 스크롤
@@ -3487,7 +3499,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,얼굴 애니메이션을 일시적으
 Feature.FaceChat.Subtitle.UnableToAccessCamera,"카메라를 사용해 아바타를 애니메이션화하려면, OS 설정으로 이동해 Roblox에서의 카메라 사용을 허용하세요"
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,즐겨찾기 완료
-Feature.FlyoutSidePanel.Action.ContinuePlaying,계속 플레이
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"프로필, 콘텐츠 및 설정이 새 위치로 옮겨졌습니다."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> 옮겨짐
 Feature.Friends.Action.AcceptFriend,
@@ -3775,7 +3787,7 @@ Feature.GameDetails.Label.ProvideFeedbackTitle,
 Feature.GameDetails.Label.Rating,평점
 Feature.GameDetails.Label.ReportAbuse,
 Feature.GameDetails.Label.Servers,서버
-Feature.GameDetails.Label.SomethingElse,기타
+Feature.GameDetails.Label.SomethingElse,
 Feature.GameDetails.Label.Store,
 Feature.GameDetails.Label.Subgenre,하위 장르
 Feature.GameDetails.Label.Supported,지원

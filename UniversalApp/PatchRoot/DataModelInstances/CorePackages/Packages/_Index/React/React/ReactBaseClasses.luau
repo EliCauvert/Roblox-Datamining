@@ -2,7 +2,7 @@
 local reactGlobalsModule = require(parent.ReactGlobals)
 local object = require(parent.LuauPolyfill).Object
 local console = require(parent.Shared).console
-local _ = require(parent.Shared)
+local enableAllocationTrims = require(parent.Shared).ReactFeatureFlags.enableAllocationTrims
 local reactNoopUpdateQueueModule = require(script.Parent.ReactNoopUpdateQueue)
 local t = {}
 local dEV = reactGlobalsModule.__DEV__
@@ -88,7 +88,7 @@ for i = 1, var1 do
 	})
 end
 local function setStateInInit(value, p1, p2)
-	-- upvalues: dEV (ref), console (ref), object (ref)
+	-- upvalues: dEV (ref), console (ref), enableAllocationTrims (ref), object (ref)
 	if dEV and p2 ~= nil then
 		console.warn("Received a `callback` argument to `setState` during initialization of \"%s\". The callback behavior is not supported when using `setState` in `init`.\n\nConsider defining similar behavior in a `compontentDidMount` method instead.", value.__componentName)
 	end
@@ -98,7 +98,14 @@ local function setStateInInit(value, p1, p2)
 		error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.")
 	end
 	local state = value.state
-	value.state = object.assign({}, state, if var3 == "function" then p1(state, value.props) else p1)
+	local var4 = if var3 == "function" then p1(state, value.props) else p1
+	
+	if not enableAllocationTrims then
+		value.state = object.assign({}, state, var4)
+		
+		return
+	end
+	value.state = if type(state) == "table" and getmetatable(state) == nil then object.assign(table.clone(state), var4) else object.assign({}, state, var4)
 end
 
 function tbl.extend(p1, p2)

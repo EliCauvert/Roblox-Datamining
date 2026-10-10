@@ -439,7 +439,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Rigenera ora
 Authentication.SignUp.Action.SetupLater,Configura più tardi
 Authentication.SignUp.Action.StartOver,Ricomincia
-Authentication.SignUp.Action.StartPlay,Inizia a giocare
 Authentication.SignUp.Action.UseEmail,Usa indirizzo email
 Authentication.SignUp.Action.UsePhoneNumber,
 Authentication.SignUp.Button.OKCaptialized,
@@ -1193,6 +1192,19 @@ CoreScripts.TopBar.Music,Musica
 CoreScripts.TopBar.MusicLoading,Nessun audio in riproduzione
 CoreScripts.TopBar.MusicNotVerified,L'audio in riproduzione non è verificato
 CoreScripts.TopBar.Traversal.History,Cronologia
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Continua a giocare
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teletrasporto
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,In primo piano su Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Inizio altro
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Consigli pagina iniziale
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portale di annunci
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Cerca annunci
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Annunci sponsorizzati
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Scorri giù
 Feature.Accessibility.Action.ScrollUp,Scorri su
@@ -3467,7 +3479,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,L'animazione facciale è temporaneamen
 Feature.FaceChat.Subtitle.UnableToAccessCamera,"Per animare il tuo avatar usando la fotocamera, vai alle Impostazioni del tuo sistema operativo per permettere a Roblox di usare la fotocamera"
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Continua a giocare
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"Il tuo profilo, i contenuti e le impostazioni sono stati spostati in una nuova posizione."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> è stato spostato
 Feature.Friends.Action.AcceptFriend,Accetta amicizia

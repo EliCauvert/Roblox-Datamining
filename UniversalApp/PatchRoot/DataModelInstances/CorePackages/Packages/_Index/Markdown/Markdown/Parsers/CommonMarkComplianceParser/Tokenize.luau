@@ -80,6 +80,8 @@ local t_1 = {
 	},
 	["`"] = list_6
 }
+local list_7 = { { "LINE_BREAK", "^[ \t\r]+\n", 1 } }
+table.move(t_1["\n"], 1, #t_1["\n"], #list_7 + 1, list_7)
 local t_2 = {
 	LINK = {
 		startToken = "LINK_START",
@@ -90,18 +92,19 @@ local t_2 = {
 		end
 	}
 }
-local list_7 = { { "HEADING", "^  ? ?(#+)%s*\n", 1 } }
+local list_8 = { { "HEADING", "^  ? ?(#+)%s*\n", 1 } }
 
 local function tokenizeTextSpan(p1, p2, p3, p4)
-	-- upvalues: t (ref), t_1 (ref), list_7 (ref), utilsModule (ref), constantsModule (ref), insert (ref), postProcessTokensModule (ref)
+	-- upvalues: t (ref), list_7 (ref), t_1 (ref), list_8 (ref), utilsModule (ref), constantsModule (ref), insert (ref), postProcessTokensModule (ref)
 	local var1, var2, var3, substring, var4, var5, characterContext, matchIndex_2
 	local var6 = 0
 	local var7 = 0
 	local var8 = 0
 	local t_2 = {}
+	local var9 = nil
 	while var6 <= #p1 do
 		var1 = if var6 == 0 and not p3 then "\n" else string.sub(p1, var6, var6)
-		local var9 = if p3 then t[var1] or {} else t_1[var1] or list_7
+		local var10 = if p3 then t[var1] or {} elseif var1 == "\n" and var9 == "QUOTE" then list_7 else t_1[var1] or list_8
 		var2 = false
 		var3 = 0
 		
@@ -109,9 +112,9 @@ local function tokenizeTextSpan(p1, p2, p3, p4)
 			var3 = 1
 			var8 = var6
 		end
-		for i, v in var9 do
-			local var10 = v[2]
-			local matchIndex, matchIndex_1 = string.find(p1, var10, var6 + var3)
+		for i, v in var10 do
+			local var11 = v[2]
+			local matchIndex, matchIndex_1 = string.find(p1, var11, var6 + var3)
 			
 			if matchIndex and matchIndex_1 then
 				substring = string.sub(p1, matchIndex, matchIndex_1)
@@ -130,7 +133,7 @@ local function tokenizeTextSpan(p1, p2, p3, p4)
 					if constantsModule.STYLED_TEXT[var4] then
 						characterContext = utilsModule.getCharacterContext(p1, var6, var3 + var5)
 					end
-					matchIndex_2 = { string.match(p1, var10, var6 + var3) }
+					matchIndex_2 = { string.match(p1, var11, var6 + var3) }
 					
 					if not p3 or var1 ~= "<" or (#matchIndex_2 <= 0 or p4.inlineTags[matchIndex_2[1]]) then
 						if var6 ~= var7 then
@@ -140,11 +143,16 @@ local function tokenizeTextSpan(p1, p2, p3, p4)
 								offset = var7 + p2
 							})
 						end
+						local var12 = not p3 and var1 == "\n"
+						
+						if var12 then
+							var9 = var4
+						end
 						insert(t_2, {
 							name = var4,
 							text = substring,
 							capture = if #matchIndex_2 > 0 then matchIndex_2 else nil,
-							isBlock = not p3 and var1 == "\n",
+							isBlock = var12,
 							offset = var6 + p2,
 							context = characterContext
 						})
@@ -186,14 +194,14 @@ return function(p5, p6)
 					capture = v.capture
 				}
 			}
-			local var11 = name.mapToText(v)
-			local var12 = tokenizeTextSpan(var11, v.offset + name.textStartOffset, true, p6)
-			table.move(var12, 1, #var12, 2, list)
-			local var13 = v.offset + name.textStartOffset + #var11
+			local var13 = name.mapToText(v)
+			local var14 = tokenizeTextSpan(var13, v.offset + name.textStartOffset, true, p6)
+			table.move(var14, 1, #var14, 2, list)
+			local var15 = v.offset + name.textStartOffset + #var13
 			insert(list, {
 				name = name.endToken,
-				offset = var13,
-				text = string.sub(p5, var13, v.offset + #v.text - 1)
+				offset = var15,
+				text = string.sub(p5, var15, v.offset + #v.text - 1)
 			})
 			table.move(list, 1, #list, #t + 1, t)
 		else

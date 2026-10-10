@@ -15,6 +15,7 @@ function scrollContentViewNativeComponent.render(p1)
 	return reactModule.createElement("Frame", object.assign({
 		Name = "RCTScrollContentView",
 		[change.AbsoluteSize] = p1.props.onLayout,
+		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, if p1.props.AutomaticSize then { AutomaticSize = p1.props.AutomaticSize } else nil, if array.isArray(p1.props.style) then array.reduce(p1.props.style, function(p2, p3)
 		-- upvalues: object (copy)

@@ -32,7 +32,9 @@ local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
 local callback = reactFiberFlagsModule.Callback
 local shouldCapture = reactFiberFlagsModule.ShouldCapture
 local didCapture = reactFiberFlagsModule.DidCapture
-local debugRenderPhaseSideEffectsForStrictMode = require(parent.Shared).ReactFeatureFlags.debugRenderPhaseSideEffectsForStrictMode
+local reactFeatureFlags = require(parent.Shared).ReactFeatureFlags
+local debugRenderPhaseSideEffectsForStrictMode = reactFeatureFlags.debugRenderPhaseSideEffectsForStrictMode
+local enableAllocationTrims = reactFeatureFlags.enableAllocationTrims
 local strictMode = require(script.Parent.ReactTypeOfMode).StrictMode
 local markSkippedUpdateLanes = require(script.Parent.ReactFiberWorkInProgress).markSkippedUpdateLanes
 local describeError = require(parent.Shared).describeError
@@ -202,7 +204,7 @@ function t.enqueueCapturedUpdate(p1, p2)
 end
 
 local function getStateFromUpdate(p1, _, p2, p3, p4, _)
-	-- upvalues: dEV (ref), var1 (write), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), yOLO (ref), describeError (ref), reenableLogs (ref), shouldCapture (ref), didCapture (ref), object (ref), var2 (write)
+	-- upvalues: dEV (ref), var1 (write), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), yOLO (ref), describeError (ref), reenableLogs (ref), shouldCapture (ref), didCapture (ref), enableAllocationTrims (ref), object (ref), var2 (write)
 	local tag = p2.tag
 	
 	if tag == 1 then
@@ -291,7 +293,7 @@ local function getStateFromUpdate(p1, _, p2, p3, p4, _)
 		else
 			var9 = payload
 		end
-		return if var9 == nil then p3 else object.assign({}, p3, var9)
+		return if var9 == nil then p3 elseif enableAllocationTrims then object.assign(if type(p3) == "table" and getmetatable(p3) == nil then table.clone(p3) else object.assign({}, p3), var9) else object.assign({}, p3, var9)
 	elseif tag == 2 then
 		var2 = true
 		

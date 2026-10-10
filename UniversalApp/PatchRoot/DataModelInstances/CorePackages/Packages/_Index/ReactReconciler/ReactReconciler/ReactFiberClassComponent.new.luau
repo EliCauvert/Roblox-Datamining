@@ -18,6 +18,7 @@ local enableDebugTracing = reactFeatureFlags.enableDebugTracing
 local enableSchedulingProfiler = reactFeatureFlags.enableSchedulingProfiler
 local warnAboutDeprecatedLifecycles = reactFeatureFlags.warnAboutDeprecatedLifecycles
 local enableDoubleInvokingEffects = reactFeatureFlags.enableDoubleInvokingEffects
+local enableAllocationTrims = reactFeatureFlags.enableAllocationTrims
 local unknownModule_1 = require(script.Parent["ReactStrictModeWarnings.new"])
 local isMounted = require(script.Parent.ReactFiberTreeReflection).isMounted
 local reactInstanceMap = require(parent.Shared).ReactInstanceMap
@@ -98,7 +99,7 @@ if dEV then
 	warnOnUndefinedDerivedState = function(_, _) end
 end
 local function applyDerivedStateFromProps(p1, p2, p3, p4)
-	-- upvalues: dEV (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), warnOnUndefinedDerivedState (write), object (ref), noLanes (ref)
+	-- upvalues: dEV (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), warnOnUndefinedDerivedState (write), enableAllocationTrims (ref), object (ref), noLanes (ref)
 	local memoizedState = p1.memoizedState
 	
 	if dEV and debugRenderPhaseSideEffectsForStrictMode and bit32.band(p1.mode, strictMode) ~= 0 then
@@ -115,7 +116,8 @@ local function applyDerivedStateFromProps(p1, p2, p3, p4)
 	if dEV then
 		warnOnUndefinedDerivedState(p2, var1)
 	end
-	local var2 = if var1 == nil then memoizedState else object.assign({}, memoizedState, var1)
+	local _ = nil
+	local var2 = if not enableAllocationTrims then if var1 == nil then memoizedState elseif type(memoizedState) == "table" and getmetatable(memoizedState) == nil then object.assign(table.clone(memoizedState), var1) else object.assign({}, memoizedState, var1) elseif var1 == nil then memoizedState else object.assign({}, memoizedState, var1)
 	p1.memoizedState = var2
 	
 	if p1.lanes == noLanes then

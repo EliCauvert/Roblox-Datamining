@@ -11,7 +11,11 @@ local t = {
 
 function mapProps(p1)
 	-- upvalues: dashModule (ref)
-	return dashModule.omit(p1, { "id", "EngineTags" })
+	return dashModule.join(dashModule.omit(p1, { "id", "EngineTags" }), {
+		TextXAlignment = Enum.TextXAlignment.Left,
+		Size = UDim2.fromScale(1, 0),
+		AutomaticSize = Enum.AutomaticSize.Y
+	})
 end
 
 return t

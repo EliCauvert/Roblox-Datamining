@@ -1,9 +1,8 @@
 ﻿local parent = script.Parent.Parent
 local reactGlobalsModule = require(parent.ReactGlobals)
-local _ = require(parent.Shared)
+local enableAllocationTrims = require(parent.Shared).ReactFeatureFlags.enableAllocationTrims
 local unknownModule = require(script.Parent["ReactBinding.roblox"])
-
-return {
+local t = {
 	createRef = function()
 		-- upvalues: unknownModule (ref), reactGlobalsModule (ref)
 		local var1, _ = unknownModule.create(nil)
@@ -33,3 +32,31 @@ return {
 		return t
 	end
 }
+
+local function refNewIndex(p1, p2, p3)
+	-- upvalues: unknownModule (ref)
+	local index = getmetatable(p1).__index
+	index[p2] = p3
+	
+	if p2 == "current" then
+		unknownModule.update(index, p3)
+	end
+end
+
+local function refToString(p1)
+	return string.format("Ref(%s)", tostring(getmetatable(p1).__index:getValue()))
+end
+
+local function createRefWithoutClosures()
+	-- upvalues: reactGlobalsModule (ref), unknownModule (ref), refNewIndex (ref), refToString (ref)
+	return setmetatable({}, {
+		__index = unknownModule.createWithoutUpdater(nil, if reactGlobalsModule.__DEV__ then debug.traceback("Ref created at:", 1) else nil),
+		__newindex = refNewIndex,
+		__tostring = refToString
+	})
+end
+
+if enableAllocationTrims then
+	t.createRef = createRefWithoutClosures
+end
+return t

@@ -455,7 +455,6 @@ Authentication.SignUp.Action.NextWord,Berikutnya
 Authentication.SignUp.Action.RespawnNow,Respawn sekarang
 Authentication.SignUp.Action.SetupLater,Atur nanti
 Authentication.SignUp.Action.StartOver,Mulai Ulang
-Authentication.SignUp.Action.StartPlay,Mulai bermain
 Authentication.SignUp.Action.UseEmail,Gunakan alamat email
 Authentication.SignUp.Action.UsePhoneNumber,Gunakan nomor ponsel
 Authentication.SignUp.Button.OKCaptialized,
@@ -1211,6 +1210,19 @@ CoreScripts.TopBar.Music,Musik
 CoreScripts.TopBar.MusicLoading,Tidak ada audio yang diputar
 CoreScripts.TopBar.MusicNotVerified,Audio yang diputar belum diverifikasi
 CoreScripts.TopBar.Traversal.History,Riwayat
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Grafik
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Lanjutkan Bermain
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Berteleportasi
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Ditampilkan oleh Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Beranda Lainnya
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Rekomendasi Beranda
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portal Iklan
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Iklan Pencarian
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Iklan Bersponsor
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Scroll ke Bawah
 Feature.Accessibility.Action.ScrollUp,Scroll ke Atas
@@ -3483,7 +3495,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,Animasi wajah tidak tersedia untuk sem
 Feature.FaceChat.Subtitle.UnableToAccessCamera,"Untuk menganimasi avatarmu, buka Pengaturan perangkat untuk memungkinkan Roblox menggunakan camera"
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,Difavoritkan
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Lanjutkan Bermain
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"Profil, konten, dan pengaturanmu telah dipindahkan ke lokasi baru."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> telah dipindahkan
 Feature.Friends.Action.AcceptFriend,Terima teman

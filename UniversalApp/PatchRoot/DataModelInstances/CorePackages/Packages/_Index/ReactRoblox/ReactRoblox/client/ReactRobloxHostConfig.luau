@@ -142,6 +142,7 @@ t.scheduleTimeout = setTimeout
 t.cancelTimeout = clearTimeout
 t.noTimeout = -1
 t.supportsMutation = true
+t.supportsChildOrdering = false
 
 function t.commitMount(_, _, _, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")

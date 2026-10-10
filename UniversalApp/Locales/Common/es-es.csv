@@ -455,7 +455,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Reaparecer ahora
 Authentication.SignUp.Action.SetupLater,Configurar más tarde
 Authentication.SignUp.Action.StartOver,Empezar de nuevo
-Authentication.SignUp.Action.StartPlay,Comenzar a jugar
 Authentication.SignUp.Action.UseEmail,Usar dirección de correo electrónico
 Authentication.SignUp.Action.UsePhoneNumber,Usar número de teléfono
 Authentication.SignUp.Button.OKCaptialized,
@@ -1212,6 +1211,19 @@ CoreScripts.TopBar.Music,Música
 CoreScripts.TopBar.MusicLoading,No hay audio
 CoreScripts.TopBar.MusicNotVerified,El audio no está verificado
 CoreScripts.TopBar.Traversal.History,Historia
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Continuar a jugar
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teletransporte
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Destacado por Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Otro Inicio
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Recomendación de Inicio
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,Otro
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Anuncios de portal
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Buscar anuncios
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Anuncios patrocinados
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Ir hacia abajo
 Feature.Accessibility.Action.ScrollUp,Ir hacia arriba
@@ -4451,7 +4463,7 @@ Feature.NotApproved.Label.AbuseType.NoneoftheAbove,Ninguno de los anteriores
 Feature.NotApproved.Label.AbuseType.NotRelatedtoRoblox,No relacionado con Roblox
 Feature.NotApproved.Label.AbuseType.OffPlatformSpeechandBehavior,Discursos y conductas fuera de la plataforma
 Feature.NotApproved.Label.AbuseType.OffSiteLinks,Enlaces fuera del sitio
-Feature.NotApproved.Label.AbuseType.Other,Otro
+Feature.NotApproved.Label.AbuseType.Other,
 Feature.NotApproved.Label.AbuseType.PersonalAttackHarassmentBullying,"Ataques personales, acoso o bullying"
 Feature.NotApproved.Label.AbuseType.PhishingScam,Phishing o estafa
 Feature.NotApproved.Label.AbuseType.PlayersScreamingintoMicrophone,Jugadores que gritan en el micrófono

@@ -455,7 +455,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Hồi sinh ngay
 Authentication.SignUp.Action.SetupLater,Thiết lập sau
 Authentication.SignUp.Action.StartOver,Bắt Đầu Lại
-Authentication.SignUp.Action.StartPlay,Bắt đầu chơi
 Authentication.SignUp.Action.UseEmail,Sử dụng địa chỉ email
 Authentication.SignUp.Action.UsePhoneNumber,Sử dụng số điện thoại
 Authentication.SignUp.Button.OKCaptialized,
@@ -1211,6 +1210,19 @@ CoreScripts.TopBar.Music,Âm Nhạc
 CoreScripts.TopBar.MusicLoading,Không có âm thanh nào đang được phát
 CoreScripts.TopBar.MusicNotVerified,Âm thanh đang phát chưa được xác minh
 CoreScripts.TopBar.Traversal.History,Lịch sử
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Biểu Đồ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Tiếp Tục Chơi
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Dịch chuyển
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Được Roblox đề xuất
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,Bạn Bè
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Trang Chủ Khác
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Đề Xuất Trang Chủ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,Khác
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Quảng Cáo Trên Cổng Thông Tin
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,Tìm Kiếm
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Quảng Cáo Tìm Kiếm
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Quảng Cáo Được Tài Trợ
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Cuộn xuống
 Feature.Accessibility.Action.ScrollUp,Cuộn lên
@@ -1392,7 +1404,7 @@ Feature.AccountSettings.Label.Discord,Discord
 Feature.AccountSettings.Label.DropDown.Everyone,Mọi Người
 Feature.AccountSettings.Label.DropDown.FollowersV3,"Bạn bè, đang theo dõi, người theo dõi"
 Feature.AccountSettings.Label.DropDown.FollowingV2,Bạn bè và người chơi tôi theo dõi
-Feature.AccountSettings.Label.DropDown.Friends,Bạn Bè
+Feature.AccountSettings.Label.DropDown.Friends,
 Feature.AccountSettings.Label.DropDown.NoOne,Không có ai
 Feature.AccountSettings.Label.Facebook,Facebook
 Feature.AccountSettings.Label.Guilded,Guilded
@@ -2993,7 +3005,7 @@ Feature.Catalog.Label.Sale,Giảm Giá
 Feature.Catalog.Label.SalePrice,Giá Bán:
 Feature.Catalog.Label.SaveAsCharacter,Lưu Dưới Dạng Nhân Vật
 Feature.Catalog.Label.SaveOptions,Tùy chọn lưu
-Feature.Catalog.Label.Search,Tìm Kiếm
+Feature.Catalog.Label.Search,
 Feature.Catalog.Label.SearchSuggestions,Có thể bạn đang tìm kiếm
 Feature.Catalog.Label.SellCut,Bạn Kiếm Được:
 Feature.Catalog.Label.SellPageUpsell,Chỉ người dùng có gói thành viên Roblox Plus mới có thể bán hàng.
@@ -4454,7 +4466,7 @@ Feature.NotApproved.Label.AbuseType.NoneoftheAbove,Không Lựa Chọn Nào Ở 
 Feature.NotApproved.Label.AbuseType.NotRelatedtoRoblox,Không Liên Quan Đến Roblox
 Feature.NotApproved.Label.AbuseType.OffPlatformSpeechandBehavior,Ngôn Từ Và Hành Vi Bên Ngoài Roblox
 Feature.NotApproved.Label.AbuseType.OffSiteLinks,Liên Kết Trang Web Ngoài
-Feature.NotApproved.Label.AbuseType.Other,Khác
+Feature.NotApproved.Label.AbuseType.Other,
 Feature.NotApproved.Label.AbuseType.PersonalAttackHarassmentBullying,Công Kích Cá Nhân/Quấy Rối/Bắt Nạt
 Feature.NotApproved.Label.AbuseType.PhishingScam,Giả Mạo/Lừa Đảo
 Feature.NotApproved.Label.AbuseType.PlayersScreamingintoMicrophone,Người Chơi Hét Vào Micro
@@ -5690,7 +5702,7 @@ IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,Giao dịch mua này có sử dụng tiền thật. Tôi đồng ý rằng tôi từ 18 tuổi trở lên và là phụ huynh hoặc người giám hộ hợp pháp của chủ sở hữu tài khoản. Tôi ủy quyền giao dịch mua này và đồng ý với Điều Khoản Sử Dụng.
 IAPExperience.U13Confirm.Title.Warning,Cảnh Báo!
-InGame.CommonUI.Button.KeepPlaying,Tiếp Tục Chơi
+InGame.CommonUI.Button.KeepPlaying,
 InGame.CommonUI.Button.Retry,
 InGame.CommonUI.Label.FAQWebviewTitle,Câu Hỏi Thường Gặp về Giọng Nói
 InGame.ConnectionError.Action.JoinNewServer,Tham gia máy chủ mới

@@ -4,7 +4,6 @@ local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local curveAnimationHierarchyUtilsModule = require(parent.util.CurveAnimationHierarchyUtils)
 local getFFlagUGCValidateMaxTotalInstancesModule = require(parent.flags.getFFlagUGCValidateMaxTotalInstances)
-local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
 
 return {
 	categories = {
@@ -17,7 +16,7 @@ return {
 		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
 	run = function(p1, p2)
-		-- upvalues: getFFlagUGCValidateMaxTotalInstancesModule (ref), errorSourceStringsModule (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateEmotesBonesAllowedModule (ref)
+		-- upvalues: getFFlagUGCValidateMaxTotalInstancesModule (ref), errorSourceStringsModule (ref), curveAnimationHierarchyUtilsModule (ref)
 		for i, v in p2.curveAnimations do
 			local count = #v:GetDescendants()
 			
@@ -43,22 +42,11 @@ return {
 								
 								return
 							end
-						end
-						if v_1:IsA("Folder") then
-							if curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) or getFFlagUGCValidateEmotesBonesAllowedModule() then
-								if not getFFlagUGCValidateEmotesBonesAllowedModule() and not curveAnimationHierarchyUtilsModule.validateCurveAnimationBodyPartFolder(v_1) then
-									p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBodyPartHierarchy, { folderName = v_1.Name })
-									
-									return
-								end
-							end
+						elseif not v_1:IsA("Folder") then
 							p1:fail(errorSourceStringsModule.Keys.CurveAnim_UnexpectedChild, { childName = v_1.Name })
 							
 							return
 						end
-						p1:fail(errorSourceStringsModule.Keys.CurveAnim_UnexpectedChild, { childName = v_1.Name })
-						
-						return
 					end
 				end
 				p1:fail(errorSourceStringsModule.Keys.CurveAnim_NoBodyRoot)

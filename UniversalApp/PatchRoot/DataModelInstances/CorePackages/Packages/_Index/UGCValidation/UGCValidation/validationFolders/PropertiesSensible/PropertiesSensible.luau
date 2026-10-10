@@ -9,6 +9,7 @@ local getFIntUGCValidateMaxHSRDataLenModule = require(parent.flags.getFIntUGCVal
 local getFFlagUGCValidateWrapDataCapsModule = require(parent.flags.getFFlagUGCValidateWrapDataCaps)
 local getFIntUGCValidateMaxHSRMeshIdDataLenModule = require(parent.flags.getFIntUGCValidateMaxHSRMeshIdDataLen)
 local getFFlagUGCValidateDisallowAeroMeshDataModule = require(parent.flags.getFFlagUGCValidateDisallowAeroMeshData)
+local getFFlagUGCValidateTemporaryIdsBackendOnlyModule = require(parent.flags.getFFlagUGCValidateTemporaryIdsBackendOnly)
 local describeProblematicPropertiesModule = require(script.Parent.describeProblematicProperties)
 local list = {
 	validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
@@ -47,7 +48,7 @@ local function walkInstanceTree(p1, p2, p3)
 end
 
 function t.run(p4, p5)
-	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), getFIntUGCValidateMaxHSRDataLenModule (ref), getFFlagUGCValidateDisallowAeroMeshDataModule (ref), getFFlagUGCValidateWrapDataCapsModule (ref), validationEnumsModule (ref), list (ref), getFIntUGCValidateMaxHSRMeshIdDataLenModule (ref), walkInstanceTree (ref)
+	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), getFIntUGCValidateMaxHSRDataLenModule (ref), getFFlagUGCValidateDisallowAeroMeshDataModule (ref), getFFlagUGCValidateWrapDataCapsModule (ref), validationEnumsModule (ref), getFFlagUGCValidateTemporaryIdsBackendOnlyModule (ref), list (ref), getFIntUGCValidateMaxHSRMeshIdDataLenModule (ref), walkInstanceTree (ref)
 	if not getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then return end
 	local t = {
 		HiddenSurfaceRemovalAsset = { HSRData = getFIntUGCValidateMaxHSRDataLenModule() }
@@ -57,9 +58,17 @@ function t.run(p4, p5)
 		t.MeshPart = { AeroMeshData = 0 }
 	end
 	if getFFlagUGCValidateWrapDataCapsModule() then
+		local var3
 		local consumerEnv = p5.consumerConfig.consumerEnv
-		local var3 = consumerEnv == validationEnumsModule.ConsumerEnv.Backend
-		local var4 = consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC and table.find(list, p5.uploadCategory) ~= nil
+		local var4 = consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+		
+		if getFFlagUGCValidateTemporaryIdsBackendOnlyModule() then
+			var3 = consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+			var3 = nil
+		else
+			var3 = consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC
+		end
+		var3 = var3 and table.find(list, p5.uploadCategory) ~= nil
 		local t_1 = {
 			HSRMeshIdData = getFIntUGCValidateMaxHSRMeshIdDataLenModule()
 		}
@@ -67,11 +76,11 @@ function t.run(p4, p5)
 			HSRMeshIdData = getFIntUGCValidateMaxHSRMeshIdDataLenModule()
 		}
 		
-		if var3 then
+		if var4 then
 			t_1.HSRData = 0
 			t_2.HSRData = 0
 		end
-		if var4 then
+		if var3 then
 			t_1.TemporaryCageMeshId = 0
 			t_2.TemporaryCageMeshId = 0
 			t_2.TemporaryReferenceId = 0

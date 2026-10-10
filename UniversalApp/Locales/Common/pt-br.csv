@@ -455,7 +455,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Regenerar agora
 Authentication.SignUp.Action.SetupLater,Configurar mais tarde
 Authentication.SignUp.Action.StartOver,Recomeçar
-Authentication.SignUp.Action.StartPlay,Começar a jogar
 Authentication.SignUp.Action.UseEmail,Usar endereço de e-mail
 Authentication.SignUp.Action.UsePhoneNumber,Usar número de telefone
 Authentication.SignUp.Button.OKCaptialized,
@@ -1211,6 +1210,19 @@ CoreScripts.TopBar.Music,Música
 CoreScripts.TopBar.MusicLoading,Nenhuma música está tocando
 CoreScripts.TopBar.MusicNotVerified,A música sendo reproduzida não foi verificada
 CoreScripts.TopBar.Traversal.History,Histórico
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Gráficos
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Continuar jogando
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teletransporte
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Em destaque na Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Outras que não a página inicial
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Recomendação da página inicial
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,Outro
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Anúncios de portal
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,Busca
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Pesquisar anúncios
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Anúncios patrocinados
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Rolar para baixo
 Feature.Accessibility.Action.ScrollUp,Rolar para cima
@@ -3485,7 +3497,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,A animação facial está temporariame
 Feature.FaceChat.Subtitle.UnableToAccessCamera,"Para animar seu avatar usando a câmera, vá para as configurações do seu sistema operacional para permitir que o aplicativo Roblox use a câmera"
 Feature.Favorites.Label.Favorite,Favorito
 Feature.Favorites.Label.Favorited,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Continuar jogando
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"Seu perfil, conteúdo e configurações foram movidos para um novo local."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> foi movido
 Feature.Friends.Action.AcceptFriend,Aceitar amizade
@@ -4454,7 +4466,7 @@ Feature.NotApproved.Label.AbuseType.NoneoftheAbove,Nenhuma das opções acima
 Feature.NotApproved.Label.AbuseType.NotRelatedtoRoblox,Não relacionado com a Roblox
 Feature.NotApproved.Label.AbuseType.OffPlatformSpeechandBehavior,
 Feature.NotApproved.Label.AbuseType.OffSiteLinks,Links externos
-Feature.NotApproved.Label.AbuseType.Other,Outro
+Feature.NotApproved.Label.AbuseType.Other,
 Feature.NotApproved.Label.AbuseType.PersonalAttackHarassmentBullying,Ataque pessoal/Assédio/Bullying
 Feature.NotApproved.Label.AbuseType.PhishingScam,Phishing/Scam
 Feature.NotApproved.Label.AbuseType.PlayersScreamingintoMicrophone,Jogadores gritando no microfone

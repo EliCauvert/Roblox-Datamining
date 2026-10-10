@@ -438,7 +438,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,เกิดใหม่ตอนนี้เลย
 Authentication.SignUp.Action.SetupLater,ตั้งค่าภายหลัง
 Authentication.SignUp.Action.StartOver,เริ่มต้นใหม่หมด
-Authentication.SignUp.Action.StartPlay,เริ่มเล่น
 Authentication.SignUp.Action.UseEmail,ใช้ที่อยู่อีเมล
 Authentication.SignUp.Action.UsePhoneNumber,ใช้หมายเลขโทรศัพท์
 Authentication.SignUp.Button.OKCaptialized,
@@ -1194,6 +1193,19 @@ CoreScripts.TopBar.Music,ดนตรี
 CoreScripts.TopBar.MusicLoading,ไม่มีเสียงกำลังเล่นอยู่
 CoreScripts.TopBar.MusicNotVerified,เสียงที่เล่นยังไม่ได้รับการตรวจสอบยืนยัน
 CoreScripts.TopBar.Traversal.History,ประวัติ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,แผนภูมิ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,เล่นต่อ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,เทเลพอร์ต
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,แนะนำโดย Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,อื่นๆ ในหน้าหลัก
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,การแนะนำในหน้าหลัก
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,อื่นๆ
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,พอร์ทัลโฆษณา
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,โฆษณาผ่านผลการค้นหา
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,โฆษณาที่ได้รับการสนับสนุน
 Feature.AbuseReportDialog.Label.GeneralError,มีบางอย่างผิดปกติ กรุณาลองใหม่อีกครั้ง
 Feature.Accessibility.Action.ScrollDown,เลื่อนลง
 Feature.Accessibility.Action.ScrollUp,เลื่อนขึ้น
@@ -3468,7 +3480,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,ไม่สามารถใช้�
 Feature.FaceChat.Subtitle.UnableToAccessCamera,หากต้องการเคลื่อนไหวอวาตาร์ของคุณโดยใช้กล้อง โปรดไปที่การตั้งค่าระบบปฏิบัติการ (OS) เพื่ออนุญาตให้ Roblox ใช้กล้อง
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,อยู่ในรายการโปรด
-Feature.FlyoutSidePanel.Action.ContinuePlaying,เล่นต่อ
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,โปรไฟล์ เนื้อหา และการตั้งค่าของคุณได้ย้ายไปที่ใหม่แล้ว
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b>ย้ายไปแล้ว
 Feature.Friends.Action.AcceptFriend,
@@ -3756,7 +3768,7 @@ Feature.GameDetails.Label.ProvideFeedbackTitle,ระบุข้อเสนอ
 Feature.GameDetails.Label.Rating,เรตติ้ง
 Feature.GameDetails.Label.ReportAbuse,รายงานการกระทำผิด
 Feature.GameDetails.Label.Servers,เซิร์ฟเวอร์
-Feature.GameDetails.Label.SomethingElse,อื่นๆ
+Feature.GameDetails.Label.SomethingElse,
 Feature.GameDetails.Label.Store,ร้านค้า
 Feature.GameDetails.Label.Subgenre,ประเภทย่อย
 Feature.GameDetails.Label.Supported,รองรับ

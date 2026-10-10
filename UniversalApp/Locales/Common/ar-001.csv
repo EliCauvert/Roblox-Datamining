@@ -437,7 +437,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,إعادة الظهور الآن
 Authentication.SignUp.Action.SetupLater,الإعداد لاحقًا
 Authentication.SignUp.Action.StartOver,البدء من جديد
-Authentication.SignUp.Action.StartPlay,بدء اللعب
 Authentication.SignUp.Action.UseEmail,استخدام عنوان البريد الإلكتروني
 Authentication.SignUp.Action.UsePhoneNumber,استخدام رقم الهاتف
 Authentication.SignUp.Button.OKCaptialized,

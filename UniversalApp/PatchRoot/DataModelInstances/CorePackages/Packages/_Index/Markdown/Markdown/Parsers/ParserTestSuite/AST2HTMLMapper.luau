@@ -214,7 +214,7 @@ t_1 = {
 			return var28:format(var27)
 		elseif var21 == "STRIKE" then
 			local var32
-			local var33 = "<u>%*</u>"
+			local var33 = "<s>%*</s>"
 			local children = p7.children
 			
 			if children then

@@ -4,26 +4,17 @@ local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local curveAnimBoneHierarchyUtilsModule = require(parent.util.CurveAnimBoneHierarchyUtils)
-local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
-local getFFlagUGCValidateAnimBonesSupportModule = require(parent.flags.getFFlagUGCValidateAnimBonesSupport)
 local t = {
-	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
-}
-
-if getFFlagUGCValidateAnimBonesSupportModule() then
-	table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
-end
-t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }
-t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
-
-function t.fflag()
-	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimBonesSupportModule (ref)
-	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimBonesSupportModule()
-end
-
-t.expectedFailures = {}
-t.prereqTests = {
-	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	categories = {
+		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		validationEnumsModule.UploadCategory.ANIMATION
+	},
+	requiredData = { validationEnumsModule.SharedDataMember.curveAnimations },
+	conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData },
+	expectedFailures = {},
+	prereqTests = {
+		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	}
 }
 local list = {
 	"Head", "UpperTorso", "LeftFoot", "RightFoot", "LeftHand", "RightHand"

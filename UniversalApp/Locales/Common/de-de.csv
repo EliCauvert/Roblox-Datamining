@@ -455,7 +455,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Jetzt respawnen
 Authentication.SignUp.Action.SetupLater,Später einrichten
 Authentication.SignUp.Action.StartOver,Von vorne anfangen
-Authentication.SignUp.Action.StartPlay,Jetzt spielen
 Authentication.SignUp.Action.UseEmail,E-Mail-Adresse benutzen
 Authentication.SignUp.Action.UsePhoneNumber,Telefonnummer benutzen
 Authentication.SignUp.Button.OKCaptialized,
@@ -1205,6 +1204,19 @@ CoreScripts.TopBar.Music,Musik
 CoreScripts.TopBar.MusicLoading,Es wird kein Audio abgespielt
 CoreScripts.TopBar.MusicNotVerified,Das aktuelle Audio ist nicht verifiziert
 CoreScripts.TopBar.Traversal.History,Verlauf
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Weiter spielen
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teleport
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Präsentiert von Roblox
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Nicht Home
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Empfehlung auf der Startseite
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,Sonstige
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portalwerbung
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,Suche
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Suchanzeigen
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Gesponserte Werbung
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Nach unten scrollen
 Feature.Accessibility.Action.ScrollUp,Nach oben scrollen
@@ -4045,7 +4057,7 @@ Feature.InExperienceShop.Label.Timer.Second.Plural,{number} Sekunden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 Sekunde
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Möchtest du diesen Artikel wirklich dauerhaft aus deinem Inventar löschen? Wenn du deine Meinung änderst, musst du ihn erneut in einer Experience verdienen."
 Feature.Item.Label.DeleteItemUndercase,Artikel löschen
-Feature.Landing.Action.PlayNow,
+Feature.Landing.Action.PlayNow,Jetzt spielen
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"Wenn du fortfährst, stimmst du unseren {startTermsTag}Bedingungen{endTermsTag}, einschließlich Schiedsverfahren, zu und erkennst unsere {startPrivacyTag}Datenschutzrichtlinie{endPrivacyTag} an. Wenn du unter 18 Jahre alt bist, muss ein Elternteil oder Erziehungsberechtigter dein Konto genehmigen und unseren Bedingungen zustimmen."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Unangemessene Sprache
@@ -5679,7 +5691,7 @@ IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,"Du hast diesen Monat vi
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,"Dieser Kauf enthält den Austausch von echtem Geld. Ich bestätige, dass ich mindestens 18 Jahre alt bin und dass ich ein Elternteil oder Erziehungsberechtigter des Kontoinhabers bin. Ich genehmige diesen Kauf und stimme den Nutzungsbedingungen zu."
 IAPExperience.U13Confirm.Title.Warning,Achtung!
-InGame.CommonUI.Button.KeepPlaying,Weiter spielen
+InGame.CommonUI.Button.KeepPlaying,
 InGame.CommonUI.Button.Retry,
 InGame.CommonUI.Label.FAQWebviewTitle,Sprach-FAQ
 InGame.ConnectionError.Action.JoinNewServer,Neuem Server beitreten

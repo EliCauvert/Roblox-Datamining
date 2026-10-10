@@ -1,8 +1,4 @@
-﻿local parent = script.Parent.Parent
-local assetCalculatorModule = require(parent.util.AssetCalculator)
-local flags = parent.flags
-local getFFlagUGCValidateRestrictNumFaceControlsModule = require(flags.getFFlagUGCValidateRestrictNumFaceControls)
-local getFIntUGCValidateMaxTotalFaceControlsModule = require(flags.getFIntUGCValidateMaxTotalFaceControls)
+﻿local assetCalculatorModule = require(script.Parent.Parent.util.AssetCalculator)
 local t = {}
 local var1 = nil
 
@@ -83,27 +79,6 @@ function t.calculateAcceptableChildBodyPartFolders(p5)
 	return t_1
 end
 
-function t.calculateAcceptableBodyPartFolderChildrenArray(p6, p7)
-	-- upvalues: t (ref)
-	local var2 = t.calculateAcceptableChildBodyPartFolders(p6.Name)
-	
-	if p6.Name == t.humanoidRootPartName then
-		return var2
-	end
-	table.insert(var2, { ClassName = "Vector3Curve", Name = "Position" })
-	table.insert(var2, {
-		Name = "Rotation",
-		ClassName = if p7 then "EulerRotationCurve" else "RotationCurve"
-	})
-	
-	if p6.Name == "Head" then
-		table.insert(var2, { ClassName = "Folder", Name = t.FaceControlsName })
-		
-		return var2
-	end
-	return var2
-end
-
 function t.calculateAcceptableCurveChildrenArray()
 	return {
 		{ ClassName = "FloatCurve", Name = "X" },
@@ -114,50 +89,6 @@ end
 
 function t.containsGrandChildren(p6)
 	return if p6 then #p6:GetChildren() < #p6:GetDescendants() else false
-end
-
-function t.validateBodyPartFolderChildren(p6)
-	-- upvalues: t (ref), getFFlagUGCValidateRestrictNumFaceControlsModule (ref), getFIntUGCValidateMaxTotalFaceControlsModule (ref)
-	if not t.areChildrenAcceptable(p6, t.calculateAcceptableBodyPartFolderChildrenArray(p6, true)) then
-		return false
-	elseif not t.areChildrenAcceptable(p6:FindFirstChild("Position"), t.calculateAcceptableCurveChildrenArray()) then
-		return false
-	elseif not t.areChildrenAcceptable(p6:FindFirstChild("Rotation"), t.calculateAcceptableCurveChildrenArray()) then
-		return false
-	end
-	local faceControlsName = p6:FindFirstChild(t.FaceControlsName)
-	
-	if faceControlsName then
-		local children = faceControlsName:GetChildren()
-		
-		if getFFlagUGCValidateRestrictNumFaceControlsModule() and getFIntUGCValidateMaxTotalFaceControlsModule() < #children then
-			return false
-		end
-		for i, v in children do
-			if not v:IsA("FloatCurve") then
-				return false
-			end
-		end
-	end
-	return if t.containsGrandChildren(p6:FindFirstChild("Position")) then false elseif t.containsGrandChildren(p6:FindFirstChild("Rotation")) then false else t.containsGrandChildren(faceControlsName)
-end
-
-function t.validateCurveAnimationBodyPartFolder(p7)
-	-- upvalues: t (ref)
-	local function validateBodyPartFolderInternal(p8)
-		-- upvalues: t (copy), validateBodyPartFolderInternal (ref)
-		if not t.validateBodyPartFolderChildren(p8) then
-			return false
-		end
-		for i, v in p8:GetChildren() do
-			if v:IsA("Folder") and v.Name ~= t.FaceControlsName and not validateBodyPartFolderInternal(v) then
-				return false
-			end
-		end
-		return true
-	end
-	
-	return if t.isBodyPartFolderNameValid(p7.Name) then validateBodyPartFolderInternal(p7) else true
 end
 
 return t

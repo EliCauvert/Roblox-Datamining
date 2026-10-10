@@ -454,7 +454,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,立即重生
 Authentication.SignUp.Action.SetupLater,稍後設定
 Authentication.SignUp.Action.StartOver,重新開始
-Authentication.SignUp.Action.StartPlay,開始遊玩
 Authentication.SignUp.Action.UseEmail,
 Authentication.SignUp.Action.UsePhoneNumber,使用手機號碼
 Authentication.SignUp.Button.OKCaptialized,
@@ -1210,6 +1209,19 @@ CoreScripts.TopBar.Music,音樂
 CoreScripts.TopBar.MusicLoading,沒有播放中的音訊
 CoreScripts.TopBar.MusicNotVerified,播放中的音訊未經驗證
 CoreScripts.TopBar.Traversal.History,紀錄
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,持續遊玩
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Roblox 精選
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,首頁其他
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,首頁推薦
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,其他
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,平台廣告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,搜尋廣告
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,贊助廣告
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,往下捲動
 Feature.Accessibility.Action.ScrollUp,往上捲動
@@ -3772,7 +3784,7 @@ Feature.GameDetails.Label.ProvideFeedbackTitle,提供回饋
 Feature.GameDetails.Label.Rating,評分
 Feature.GameDetails.Label.ReportAbuse,檢舉濫用
 Feature.GameDetails.Label.Servers,伺服器
-Feature.GameDetails.Label.SomethingElse,其他
+Feature.GameDetails.Label.SomethingElse,
 Feature.GameDetails.Label.Store,
 Feature.GameDetails.Label.Subgenre,子類別
 Feature.GameDetails.Label.Supported,已支援

@@ -455,7 +455,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Odrodź się teraz
 Authentication.SignUp.Action.SetupLater,Skonfiguruj później
 Authentication.SignUp.Action.StartOver,Rozpocznij od nowa
-Authentication.SignUp.Action.StartPlay,Rozpocznij grę
 Authentication.SignUp.Action.UseEmail,
 Authentication.SignUp.Action.UsePhoneNumber,
 Authentication.SignUp.Button.OKCaptialized,
@@ -1211,6 +1210,19 @@ CoreScripts.TopBar.Music,Muzyka
 CoreScripts.TopBar.MusicLoading,Nie jest odtwarzany dźwięk
 CoreScripts.TopBar.MusicNotVerified,Odtwarzany dźwięk nie jest zweryfikowany
 CoreScripts.TopBar.Traversal.History,Historia
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Wyróżnione
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Kontynuuj grę
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teleportacje
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Polecane przez Robloxa
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Strona główna – inne
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Strona główna – polecane
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,Inne
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Reklamy na portalu
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,Wyszukiwarka
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Wyszukiwanie reklam
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Reklamy sponsorowane
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Przewiń w dół
 Feature.Accessibility.Action.ScrollUp,Przewiń w górę
@@ -3485,7 +3497,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,Animacja twarzy jest tymczasowo niedos
 Feature.FaceChat.Subtitle.UnableToAccessCamera,"Aby animować awatara przy użyciu kamery, przejdź do ustawień systemu operacyjnego w celu zezwolenia na użycie kamery przez aplikację Roblox"
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,Kontynuuj grę
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,Twój profil oraz Twoje treści i ustawienia zostały przeniesione do nowej lokalizacji.
 Feature.FlyoutSidePanel.Label.TooltipTitle,Przeniesiono <b>{itemName}</b>
 Feature.Friends.Action.AcceptFriend,
@@ -4454,7 +4466,7 @@ Feature.NotApproved.Label.AbuseType.NoneoftheAbove,Żadne z powyższych
 Feature.NotApproved.Label.AbuseType.NotRelatedtoRoblox,Treści niezwiązane z platformą Roblox
 Feature.NotApproved.Label.AbuseType.OffPlatformSpeechandBehavior,Wyrażanie się i zachowywanie poza platformą
 Feature.NotApproved.Label.AbuseType.OffSiteLinks,Linki spoza platformy
-Feature.NotApproved.Label.AbuseType.Other,Inne
+Feature.NotApproved.Label.AbuseType.Other,
 Feature.NotApproved.Label.AbuseType.PersonalAttackHarassmentBullying,Atakowanie/nękanie/gnębienie osób
 Feature.NotApproved.Label.AbuseType.PhishingScam,Phishing/oszukiwanie innych
 Feature.NotApproved.Label.AbuseType.PlayersScreamingintoMicrophone,Gracz krzyczący do mikrofonu

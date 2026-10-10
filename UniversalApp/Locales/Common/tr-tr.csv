@@ -455,7 +455,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Şimdi sıfırla
 Authentication.SignUp.Action.SetupLater,Daha sonra kur
 Authentication.SignUp.Action.StartOver,Baştan Başla
-Authentication.SignUp.Action.StartPlay,Oynamaya başla
 Authentication.SignUp.Action.UseEmail,E-posta adresi kullan
 Authentication.SignUp.Action.UsePhoneNumber,Telefon numarası kullan
 Authentication.SignUp.Button.OKCaptialized,
