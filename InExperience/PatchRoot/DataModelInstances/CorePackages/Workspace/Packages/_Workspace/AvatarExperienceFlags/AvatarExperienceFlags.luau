@@ -395,6 +395,7 @@
 	FFlagAXActionButtonRoundedRectCursor = require(script.FFlagAXActionButtonRoundedRectCursor),
 	FFlagAXMarketplaceLicensing = require(script.FFlagAXMarketplaceLicensing),
 	FFlagAXMarketplaceLicensingItemDetails = require(script.FFlagAXMarketplaceLicensingItemDetails),
+	FFlagAXPopulateSupportsHeadShapesFromAvatarData = require(script.FFlagAXPopulateSupportsHeadShapesFromAvatarData),
 	FFlagAXMarketplaceLicensingItemCards = require(script.FFlagAXMarketplaceLicensingItemCards),
 	FFlagAXUnifiedEventCounters = require(script.FFlagAXUnifiedEventCounters),
 	FFlagAXUnifiedEventCounterDebugLogs = require(script.FFlagAXUnifiedEventCounterDebugLogs),

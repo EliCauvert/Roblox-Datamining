@@ -30,6 +30,7 @@ local REPORT_MENU_ITEM_ID = shopOverflowConstantsModule.REPORT_MENU_ITEM_ID
 local t = {
 	owned = "Feature.Catalog.Label.Owned",
 	buy = "Feature.Catalog.Action.Buy",
+	try = "Feature.Catalog.Action.Try",
 	total = "Feature.Catalog.Label.TotalUnformatted",
 	category = "Feature.Catalog.Label.Category",
 	updated = "Feature.GameDetails.Label.Updated",
@@ -163,8 +164,16 @@ return function(p1)
 				isDisabled = var3 or var4,
 				onActivated = p1.onBuyActivated
 			}),
-			Overflow = if p1.isReportingEnabled then reactModule.createElement(menu, {
+			Try = if p1.showTry and not var3 then reactModule.createElement(button, {
 				LayoutOrder = 2,
+				text = var1.try,
+				variant = buttonVariant.Standard,
+				size = inputSize.Medium,
+				fillBehavior = fillBehavior.Fill,
+				onActivated = function() end
+			}) else nil,
+			Overflow = if p1.isReportingEnabled then reactModule.createElement(menu, {
+				LayoutOrder = 3,
 				testId = "ItemDetailsView_OverflowMenu",
 				isOpen = p1.isOverflowMenuOpen,
 				items = t_2,
@@ -182,7 +191,7 @@ return function(p1)
 					onActivated = p1.onOverflowActivated
 				})
 			}) else reactModule.createElement(iconButton, {
-				LayoutOrder = 2,
+				LayoutOrder = 3,
 				testId = "ItemDetailsView_OverflowButton",
 				icon = OVERFLOW_ICON,
 				size = inputSize.Medium,

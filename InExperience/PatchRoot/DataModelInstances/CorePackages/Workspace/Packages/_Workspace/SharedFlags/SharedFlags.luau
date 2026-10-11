@@ -1837,6 +1837,7 @@ return {
 	FFlagComposerControlAlignment = game:DefineFastFlag("ComposerControlAlignment", false),
 	FFlagBuildExperiencePinForBuild = game:DefineFastFlag("BuildExperiencePinForBuild", false),
 	FFlagBuildExperiencePromptFailureTelemetry = game:DefineFastFlag("BuildExperiencePromptFailureTelemetry", false),
+	FFlagBuildWithGroups = game:DefineFastFlag("BuildWithGroups", false),
 	FFlagMyStatsMediaSelector = game:DefineFastFlag("MyStatsMediaSelector3", false),
 	FFlagAndroidTVExitWithB = game:DefineFastFlag("AndroidTVExitWithB2", false) and game:GetEngineFeature("PTFBackButtonAlwaysAsButtonB"),
 	FFlagEnableMeTabProfile = enableMeTabProfile,
