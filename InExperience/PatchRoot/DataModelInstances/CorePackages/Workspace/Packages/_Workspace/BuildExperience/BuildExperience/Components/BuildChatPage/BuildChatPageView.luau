@@ -6,6 +6,7 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
+local fFlagBuildAdsManagerUniverseUrlModule = require(buildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local chatConstantsModule = require(buildExperience.Chat.chatConstants)
 local chatScrollAnchorContextModule = require(buildExperience.Chat.ChatScrollAnchorContext)
@@ -30,7 +31,6 @@ local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore)
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local fFlagBuildExperienceLibrary = require(parent.SharedFlags).FFlagBuildExperienceLibrary
 local _ = require(buildExperience.Chat.useChatSessionCore)
-local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local fFlagBuildExperienceRemoveAgentTaskUiModule = require(buildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
 local fFlagEnableBuildOverflowMenuForNewGamesModule = require(buildExperience.Flags.FFlagEnableBuildOverflowMenuForNewGames)
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
@@ -96,7 +96,7 @@ local function groupAdUpsellCardsByAnchorIndex(p4)
 end
 
 return function(p5)
-	-- upvalues: var1 (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), groupAdUpsellCardsByAnchorIndex (ref), var3 (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisPositionProviderModule (ref), view (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceLibrary (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), playButtonModule (ref), agentDetailMenuModule (ref), iconVariant (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagEnableBuildAdPromotionModule (ref), scrollView (ref), foundationModule (ref), divider (ref), var2 (ref), toTodoItems (ref), var4 (ref), var5 (ref)
+	-- upvalues: var1 (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), groupAdUpsellCardsByAnchorIndex (ref), var3 (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisPositionProviderModule (ref), view (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceLibrary (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), playButtonModule (ref), agentDetailMenuModule (ref), iconVariant (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagEnableBuildAdPromotionModule (ref), scrollView (ref), foundationModule (ref), divider (ref), var2 (ref), toTodoItems (ref), var4 (ref), fFlagBuildAdsManagerUniverseUrlModule (ref), var5 (ref)
 	local var6 = false
 	local var7 = nil
 	
@@ -235,43 +235,6 @@ return function(p5)
 			})
 		end
 	end
-	local var17 = reactModule.createElement(view, {
-		testId = "BuildChatPage.ActionBody",
-		LayoutOrder = if fFlagBuildDesktopReadinessModule then nil else 3,
-		tag = {
-			["composition-content-body size-full-0 auto-y"] = true,
-			["col gap-medium"] = p5.showBuyMoreRobuxCard
-		}
-	}, {
-		BuyMoreRobux = if p5.showBuyMoreRobuxCard then reactModule.createElement(buyMoreRobuxCardModule, {
-			LayoutOrder = 1,
-			title = p5.buyMoreRobuxCardTitle,
-			description = p5.buyMoreRobuxCardDescription,
-			primaryActionText = p5.buyMoreRobuxCardPrimaryActionText,
-			onPrimaryAction = p5.onBuyMoreRobuxCardPrimaryAction,
-			secondaryActionText = p5.buyMoreRobuxCardSecondaryActionText,
-			onSecondaryAction = p5.onBuyMoreRobuxCardSecondaryAction
-		}) else nil,
-		Footer = reactModule.createElement(chatActionsModule, {
-			LayoutOrder = if p5.showBuyMoreRobuxCard then 2 else nil,
-			composerText = p5.composerText,
-			composerErrorText = p5.composerErrorText,
-			onComposerChanged = p5.onComposerChanged,
-			images = if fFlagBuildExperienceChatImageAttachmentsModule then p5.composerImages else nil,
-			onImagesChanged = if fFlagBuildExperienceChatImageAttachmentsModule then p5.onComposerImagesChanged else nil,
-			onRetryImage = if fFlagBuildExperienceChatImageAttachmentsModule then p5.onRetryComposerImage else nil,
-			isSendBlocked = p5.isComposerSendBlocked,
-			resourceAttachments = if fFlagBuildExperienceChatResourceAttachments then p5.composerResourceAttachments else nil,
-			onRemoveResourceAttachment = if fFlagBuildExperienceChatResourceAttachments then p5.onRemoveComposerResourceAttachment else nil,
-			placeholder = var11.composerPlaceholder,
-			textBoxRef = p5.textBoxRef,
-			isAssistantResponding = p5.isAssistantResponding,
-			canStopAssistantResponse = p5.canStopAssistantResponse,
-			canSendWhileResponding = p5.canSendWhileResponding,
-			onSend = p5.onSend,
-			onStop = p5.onStop
-		})
-	})
 	v = reactModule.createElement
 	
 	return v(view, {
@@ -296,7 +259,7 @@ return function(p5)
 					icon = iconName.SquaresGridPlus,
 					isDisabled = p5.isLibraryDisabled,
 					onActivated = p5.onOpenLibrary,
-					size = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium,
+					size = inputSize.Large,
 					variant = buttonVariant.Utility
 				}) else nil,
 				Back = reactModule.createElement(iconButton, {
@@ -305,7 +268,7 @@ return function(p5)
 					testId = "BuildChatPage.BackButton",
 					icon = iconName.ChevronLargeLeft,
 					onActivated = p5.onClose,
-					size = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium
+					size = inputSize.Large
 				}),
 				Title = reactModule.createElement(text, {
 					LayoutOrder = 2,
@@ -334,7 +297,7 @@ return function(p5)
 						-- upvalues: var7 (write)
 						var7(true)
 					end,
-					size = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium,
+					size = inputSize.Large,
 					variant = buttonVariant.Utility
 				}) else nil,
 				Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
@@ -384,7 +347,7 @@ return function(p5)
 			onAbsoluteCanvasSizeChanged = p5.onChatViewportChanged,
 			onAbsoluteWindowSizeChanged = p5.onChatViewportChanged,
 			tag = {
-				["composition-layout-detail"] = fFlagBuildDesktopReadinessModule,
+				["composition-layout-detail"] = true,
 				["fill size-full-0"] = true
 			},
 			scroll = {
@@ -414,14 +377,51 @@ return function(p5)
 				var7(false)
 			end
 		}) else nil,
-		Actions = if fFlagBuildDesktopReadinessModule then reactModule.createElement(view, {
+		Actions = reactModule.createElement(view, {
 			LayoutOrder = 3,
 			testId = "BuildChatPage.ActionLayout",
 			tag = {
 				["composition-layout-detail"] = true,
 				["size-full-0 auto-y"] = true
 			}
-		}, { ActionBody = var17 }) else var17,
+		}, {
+			ActionBody = reactModule.createElement(view, {
+				testId = "BuildChatPage.ActionBody",
+				tag = {
+					["composition-content-body size-full-0 auto-y"] = true,
+					["col gap-medium"] = p5.showBuyMoreRobuxCard
+				}
+			}, {
+				BuyMoreRobux = if p5.showBuyMoreRobuxCard then reactModule.createElement(buyMoreRobuxCardModule, {
+					LayoutOrder = 1,
+					title = p5.buyMoreRobuxCardTitle,
+					description = p5.buyMoreRobuxCardDescription,
+					primaryActionText = p5.buyMoreRobuxCardPrimaryActionText,
+					onPrimaryAction = p5.onBuyMoreRobuxCardPrimaryAction,
+					secondaryActionText = p5.buyMoreRobuxCardSecondaryActionText,
+					onSecondaryAction = p5.onBuyMoreRobuxCardSecondaryAction
+				}) else nil,
+				Footer = reactModule.createElement(chatActionsModule, {
+					LayoutOrder = if p5.showBuyMoreRobuxCard then 2 else nil,
+					composerText = p5.composerText,
+					composerErrorText = p5.composerErrorText,
+					onComposerChanged = p5.onComposerChanged,
+					images = if fFlagBuildExperienceChatImageAttachmentsModule then p5.composerImages else nil,
+					onImagesChanged = if fFlagBuildExperienceChatImageAttachmentsModule then p5.onComposerImagesChanged else nil,
+					onRetryImage = if fFlagBuildExperienceChatImageAttachmentsModule then p5.onRetryComposerImage else nil,
+					isSendBlocked = p5.isComposerSendBlocked,
+					resourceAttachments = if fFlagBuildExperienceChatResourceAttachments then p5.composerResourceAttachments else nil,
+					onRemoveResourceAttachment = if fFlagBuildExperienceChatResourceAttachments then p5.onRemoveComposerResourceAttachment else nil,
+					placeholder = var11.composerPlaceholder,
+					textBoxRef = p5.textBoxRef,
+					isAssistantResponding = p5.isAssistantResponding,
+					canStopAssistantResponse = p5.canStopAssistantResponse,
+					canSendWhileResponding = p5.canSendWhileResponding,
+					onSend = p5.onSend,
+					onStop = p5.onStop
+				})
+			})
+		}),
 		TodoBottomSheet = if taskState then reactModule.createElement(subagentStatusModule.TodoBottomSheet, {
 			title = if var10 ~= nil then "" else var10.name,
 			items = toTodoItems(var10),
@@ -431,6 +431,7 @@ return function(p5)
 		AdCampaignSheet = if fFlagBuildAdUpsellModule and p5.isAdUpsellVisible then reactModule.createElement(var4, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
+			universeId = if fFlagBuildAdsManagerUniverseUrlModule then p5.target.universeId else nil,
 			isOpen = p5.isAdCampaignSheetOpen,
 			onClose = p5.onAdCampaignSheetClose,
 			onCreate = p5.onAdCampaignSheetCreate,
@@ -446,6 +447,7 @@ return function(p5)
 		AgentAdCampaignSheet = if fFlagBuildAgentAdCampaignCardModule then reactModule.createElement(var4, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
+			universeId = if fFlagBuildAdsManagerUniverseUrlModule then p5.target.universeId else nil,
 			isOpen = p5.isAgentAdCampaignSheetOpen,
 			onClose = p5.onAgentAdCampaignSheetClose,
 			onCreate = p5.onAgentAdCampaignSheetCreate,

@@ -341,7 +341,7 @@ return function(p2, p3)
 	end
 	
 	local var16 = function()
-		-- upvalues: playersService (copy), textChatService (copy), p2 (ref), localTextChannelParticipantAddedModule (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy)
+		-- upvalues: playersService (copy), textChatService (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), p2 (ref), localTextChannelParticipantAddedModule (copy)
 		local localPlayer = playersService.LocalPlayer
 		
 		if not localPlayer then return end
@@ -350,10 +350,10 @@ return function(p2, p3)
 				local parent = v.Parent
 				
 				if parent and parent:IsA("TextChannel") then
-					p2:dispatch(localTextChannelParticipantAddedModule(parent))
-					
 					if fFlagExpChatUseChannelTabsStore then
 						getChannelTabsStoreModule(false).handleLocalTextChannelParticipantAdded(parent)
+					else
+						p2:dispatch(localTextChannelParticipantAddedModule(parent))
 					end
 				end
 			end

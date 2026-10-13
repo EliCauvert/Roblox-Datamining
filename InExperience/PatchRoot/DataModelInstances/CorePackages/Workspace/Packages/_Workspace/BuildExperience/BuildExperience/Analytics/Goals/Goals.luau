@@ -2,6 +2,7 @@
 local experienceAnalyticsModule = require(buildExperience.Parent.DataHydration.ExperienceAnalytics)
 local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
 local analyticsUnitModule = require(buildExperience.Analytics.AnalyticsUnit)
+local goalLockedActionIdModule = require(buildExperience.Analytics.Goals.GoalLockedActionId)
 local goalMetricSummarySourcesModule = require(buildExperience.Analytics.Goals.GoalMetricSummarySources)
 local _ = require(buildExperience.Analytics.Goals.GoalTypes)
 local metricId = experienceAnalyticsModule.MetricId
@@ -49,6 +50,19 @@ return {
 						end
 					}
 				}
+			},
+			locked = {
+				messageKey = analyticsKeysModule.ANALYTICS_GOAL_LOCKED_GET_MORE_PLAYERS,
+				actions = {
+					primary = {
+						id = goalLockedActionIdModule.CreateAd,
+						textKey = analyticsKeysModule.ANALYTICS_GOAL_ACTION_CREATE_AD
+					},
+					secondary = {
+						id = goalLockedActionIdModule.ShareWithFriends,
+						textKey = analyticsKeysModule.ANALYTICS_GOAL_ACTION_SHARE_WITH_FRIENDS
+					}
+				}
 			}
 		},
 		{
@@ -88,6 +102,9 @@ return {
 					}),
 					format = {}
 				}
+			},
+			locked = {
+				messageKey = analyticsKeysModule.ANALYTICS_GOAL_LOCKED_FIRST_IMPRESSION
 			}
 		},
 		{
@@ -108,6 +125,9 @@ return {
 					source = goalMetricSummarySourcesModule.summary({ metric = metricId.ForwardD7Retention }),
 					format = { unit = analyticsUnitModule.Percent }
 				}
+			},
+			locked = {
+				messageKey = analyticsKeysModule.ANALYTICS_GOAL_LOCKED_KEEP_PLAYERS_COMING_BACK
 			}
 		},
 		{
@@ -127,6 +147,15 @@ return {
 					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_PAYER_CONVERSION,
 					source = goalMetricSummarySourcesModule.summary({ metric = metricId.PayingUsersCVR }),
 					format = { unit = analyticsUnitModule.Percent }
+				}
+			},
+			locked = {
+				messageKey = analyticsKeysModule.ANALYTICS_GOAL_LOCKED_EARN_ROBUX,
+				actions = {
+					primary = {
+						id = goalLockedActionIdModule.SellItems,
+						textKey = analyticsKeysModule.ANALYTICS_GOAL_ACTION_SELL_ITEMS
+					}
 				}
 			}
 		}

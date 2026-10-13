@@ -8,7 +8,6 @@ local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSaf
 local accountUpgradeFieldsModule = require(accountUpgrade.Components.AccountUpgradeFields)
 local accountUpgradeFieldErrorModule = require(accountUpgrade.Components.AccountUpgradeFieldError)
 local closeConfirmationDialogModule = require(accountUpgrade.Components.CloseConfirmationDialog)
-local accountUpgradeDialogActionsModule = require(accountUpgrade.SuccessModal.AccountUpgradeDialogActions)
 local accountUpgradeFieldModule = require(accountUpgrade.AccountUpgradeField)
 local birthdaySheetModule = require(script.Parent.BirthdaySheet)
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
@@ -17,9 +16,11 @@ local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
 local useLastInputMode = focusNavigationUtilsModule.useLastInputMode
 local view = foundationModule.View
 local text = foundationModule.Text
+local button = foundationModule.Button
 local scrollView = foundationModule.ScrollView
 local headerBar = foundationModule.HeaderBar
 local buttonVariant = foundationModule.Enums.ButtonVariant
+local inputSize = foundationModule.Enums.InputSize
 local iconName = foundationModule.Enums.IconName
 local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local t = {
@@ -28,7 +29,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: foundationModule (ref), useLastInputMode (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), fullscreenPageWithSafeArea (ref), view (ref), headerBar (ref), text (ref), iconName (ref), scrollView (ref), scrollBarVisibility (ref), accountUpgradeFieldsModule (ref), accountUpgradeDialogActionsModule (ref), buttonVariant (ref), accountUpgradeFieldErrorModule (ref), accountUpgradeFieldModule (ref), birthdaySheetModule (ref), closeConfirmationDialogModule (ref)
+	-- upvalues: foundationModule (ref), useLastInputMode (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), fullscreenPageWithSafeArea (ref), view (ref), headerBar (ref), text (ref), iconName (ref), scrollView (ref), scrollBarVisibility (ref), accountUpgradeFieldsModule (ref), inputSize (ref), button (ref), buttonVariant (ref), accountUpgradeFieldErrorModule (ref), accountUpgradeFieldModule (ref), birthdaySheetModule (ref), closeConfirmationDialogModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = not p1.isSaveEnabled and not p1.isSubmitting
 	local onClose = p1.onClose
@@ -106,23 +107,27 @@ return function(p1)
 						testId = "AccountUpgradeSubtitle",
 						Text = p1.subtitleText
 					}),
-					Fields = reactModule.createElement(accountUpgradeFieldsModule, { LayoutOrder = 2, form = p1 }),
+					Fields = reactModule.createElement(accountUpgradeFieldsModule, {
+						boldLabels = true,
+						LayoutOrder = 2,
+						form = p1,
+						size = inputSize.Large
+					}),
 					Actions = reactModule.createElement(view, {
 						tag = "col gap-small size-full-0 auto-y",
 						LayoutOrder = 3,
 						testId = "AccountUpgradePageActions"
 					}, {
-						Buttons = reactModule.createElement(accountUpgradeDialogActionsModule, {
+						Save = reactModule.createElement(button, {
 							LayoutOrder = 1,
-							buttons = {
-								{
-									text = p1.saveText,
-									variant = if var2 then buttonVariant.Standard else buttonVariant.Emphasis,
-									onActivated = p1.onSaveActivated,
-									isDisabled = var2,
-									isLoading = p1.isSubmitting
-								}
-							}
+							testId = "AccountUpgradePageSaveButton",
+							text = p1.saveText,
+							variant = if var2 then buttonVariant.Standard else buttonVariant.Emphasis,
+							size = inputSize.Large,
+							width = UDim.new(1, 0),
+							onActivated = p1.onSaveActivated,
+							isDisabled = var2,
+							isLoading = p1.isSubmitting
 						}),
 						Error = reactModule.createElement(accountUpgradeFieldErrorModule, {
 							LayoutOrder = 2,

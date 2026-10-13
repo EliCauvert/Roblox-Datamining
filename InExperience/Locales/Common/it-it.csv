@@ -102,7 +102,6 @@ Authentication.SignUp.Description.Try,Prova
 Authentication.SignUp.Description.UsernameChanged,"Tutto in ordine! Il tuo account è pronto e collegato alla piattaforma {platform}. Ricarica per visualizzare il tuo nome utente aggiornato nel gioco. In caso contrario, la modifica verrà applicata alla prossima sessione."
 Authentication.SignUp.Description.UsernameUnchanged,Ci sei! Il tuo account è pronto e collegato alla piattaforma {platform}. Chatta con gli amici e gioca a milioni di giochi Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Il tuo account Roblox sarà collegato al tuo account per {platform}. Puoi scollegarli dalla schermata Impostazioni in qualsiasi momento. Ci potrebbe essere una pausa prima di essere in grado di collegare a un altro account per {platform}. Facendo clic su {ctaButton}, accetti i Termini di Utilizzo, compresa la clausola di arbitrato e stai riconoscendo l'Informativa sulla privacy."
-Authentication.SignUp.Header.CloseWithoutFinishing,Vuoi chiudere senza completare?
 Authentication.SignUp.Header.OneLastThing,Un'ultima cosa
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Configura il tuo account Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,Seleziona paese
@@ -418,6 +417,7 @@ CommonUI.Features.Label.ControllerBar.ToPlaySuffix,per giocare
 CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Esperienze
+CommonUI.Features.Label.Games,Giochi
 CommonUI.Features.Label.GiftCards,Compra Carte regalo
 CommonUI.Features.Label.Groups,Community
 CommonUI.Features.Label.HelpAndSafety,Aiuto & Assistenza
@@ -658,15 +658,18 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,Testo originale ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Qual è il problema con questa traduzione?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Problema di precisione
+CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,Qualità dell'immagine
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Inappropriato o Derogatorio
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,Problema di ortografia o grammatica
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,Non tradotto
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,Testo selezionato
 CoreScripts.Feedback.Help.Instructions,Seleziona qualsiasi testo per dare un feedback sulle traduzioni errate o mancanti.
+CoreScripts.Feedback.Help.InstructionsWithImage,Seleziona qualsiasi testo o immagine per dare un feedback sulle traduzioni errate o mancanti.
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
+CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,Dicci cosa c'è che non va
 CoreScripts.Feedback.Onboarding.Start,Inizia
 CoreScripts.Feedback.SubmissionToastBody,Roblox utilizzerà queste informazioni per contribuire a migliorare la qualità della traduzione di questa esperienza
@@ -2033,6 +2036,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,Durata sessione nuovi utenti
 Feature.Build.Analytics.Title.PayerConversion,Conversione pagante
 Feature.Build.Analytics.Title.PlaythroughRate,Tasso di completamento (playthrough)
 Feature.Build.Analytics.Title.RobuxSpent,
+Feature.Build.Analytics.Title.TopAcquisitionSource,Fonte principale
+Feature.Build.Analytics.Title.TopDropOffStep,Calo maggiore
 Feature.Build.Analytics.Title.TotalPlaytime,Tempo di gioco totale
 Feature.Build.Analytics.Visits,Visite
 Feature.Build.Content.NewGame,Nuovo gioco
@@ -2076,7 +2081,6 @@ Feature.Build.Description.PlaytestLatest,Stai testando la tua ultima versione. P
 Feature.Build.Description.PlaytestLocked,Puoi iniziare il playtest dopo aver creato il tuo primo gioco.
 Feature.Build.Description.PlaytesterAccess,Invita amici come early tester o modifica l'impostazione Pubblico del tuo gioco per consentire a più persone di giocare.
 Feature.Build.Description.PricingRules,Imposta regole di prezzo
-Feature.Build.Description.PrivateShare,Modifica l'impostazione Pubblico del tuo gioco per condividerlo.
 Feature.Build.Description.PromoteGameFree,Fai conoscere il tuo gioco a più giocatori con un solo tocco.
 Feature.Build.Description.PromoteGamePaid,Crea un annuncio per far conoscere il tuo gioco a milioni di giocatori.
 Feature.Build.Description.PromoteGameWithAdCampaign,Aumenta il tuo pubblico con una campagna pubblicitaria di {durationDays} giorni e fai scoprire il tuo gioco.
@@ -2202,6 +2206,15 @@ Feature.Build.Label.Thinking,Sto pensando...
 Feature.Build.Label.Title,Titolo
 Feature.Build.Label.TitleDescription,Titolo e descrizione
 Feature.Build.Label.Tool,strumento
+Feature.Build.Label.ToolAdEligibilityDone,Idoneità dell'annuncio verificata
+Feature.Build.Label.ToolAdEligibilityFailed,Impossibile verificare l'idoneità dell'annuncio
+Feature.Build.Label.ToolAdEligibilityRunning,Verifica dell'idoneità dell'annuncio in corso
+Feature.Build.Label.ToolAnalyticsDone,Statistiche analizzate
+Feature.Build.Label.ToolAnalyticsFailed,Impossibile analizzare le statistiche
+Feature.Build.Label.ToolAnalyticsRunning,Analisi delle statistiche in corso
+Feature.Build.Label.ToolApiDocsDone,Documenti API consultati
+Feature.Build.Label.ToolApiDocsFailed,Impossibile cercare i documenti API
+Feature.Build.Label.ToolApiDocsRunning,Ricerca dei documenti API in corso
 Feature.Build.Label.ToolAssetDone,Risorsa inserita
 Feature.Build.Label.ToolAssetFailed,Impossibile inserire la risorsa
 Feature.Build.Label.ToolAssetRunning,Inserimento della risorsa
@@ -2211,6 +2224,9 @@ Feature.Build.Label.ToolAssetSearchRunning,Ricerca nella libreria delle risorse 
 Feature.Build.Label.ToolClientDMDone,Ricerca nel DataModel del client effettuata
 Feature.Build.Label.ToolClientDMFailed,Impossibile effettuare la ricerca nel DataModel del client
 Feature.Build.Label.ToolClientDMRunning,Ricerca nel DataModel del client in corso
+Feature.Build.Label.ToolCompileDone,Codice compilato
+Feature.Build.Label.ToolCompileFailed,Impossibile compilare il codice
+Feature.Build.Label.ToolCompileRunning,Compilazione del codice in corso
 Feature.Build.Label.ToolGameInfoDone,Informazioni sul gioco aggiornate
 Feature.Build.Label.ToolGameInfoFailed,Impossibile aggiornare le informazioni sul gioco
 Feature.Build.Label.ToolGameInfoRunning,Aggiornamento delle informazioni di gioco in corso
@@ -2247,6 +2263,9 @@ Feature.Build.Label.ToolQuestionRunning,Sta facendo una domanda
 Feature.Build.Label.ToolReqUpdateDone,Requisiti aggiornati
 Feature.Build.Label.ToolReqUpdateFailed,Impossibile aggiornare i requisiti
 Feature.Build.Label.ToolReqUpdateRunning,Aggiornamento dei requisiti in corso
+Feature.Build.Label.ToolRestoreVersionDone,Versione ripristinata
+Feature.Build.Label.ToolRestoreVersionFailed,Impossibile ripristinare la versione
+Feature.Build.Label.ToolRestoreVersionRunning,Ripristino della versione in corso
 Feature.Build.Label.ToolScriptDone,Script eseguito
 Feature.Build.Label.ToolScriptFailed,Impossibile eseguire lo script
 Feature.Build.Label.ToolScriptRunning,Esecuzione dello script
@@ -2262,6 +2281,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Pianificazione delle tue attività
 Feature.Build.Label.ToolThumbnailDone,Imposta miniatura del gioco
 Feature.Build.Label.ToolThumbnailFailed,Impossibile impostare la miniatura del gioco
 Feature.Build.Label.ToolThumbnailRunning,Impostazione miniatura del gioco in corso
+Feature.Build.Label.ToolVerifyDone,Verifica degli errori eseguita
+Feature.Build.Label.ToolVerifyFailed,Impossibile controllare gli errori
+Feature.Build.Label.ToolVerifyRunning,Controllo degli errori in corso
 Feature.Build.Label.UniverseNumber,Universo {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Sconosciuto
 Feature.Build.Label.UnlimitedUsed,{USED} utilizzati • Senza limiti
@@ -2392,7 +2414,6 @@ Feature.Build.Title.ExperienceAudience,Pubblico dell'esperienza
 Feature.Build.Title.FreeUsageReached,Limite di utilizzo gratuito di Build raggiunto
 Feature.Build.Title.FriendsOnlyPlay,Solo gli amici possono giocare
 Feature.Build.Title.GameCreationDone,Creazione del gioco completata
-Feature.Build.Title.GamePrivate,Questo gioco è privato
 Feature.Build.Title.GenericError,Si è verificato un errore
 Feature.Build.Title.GetUsers,Ottieni utenti
 Feature.Build.Title.ManagedPricingAcknowledgement,Attivare i prezzi gestiti?
@@ -3690,6 +3711,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,Impossibile pubblicare il Momento
 Feature.Moments.Label.MomentNoLongerAvailable,Questo Momento non è più disponibile.
 Feature.Moments.Label.MomentPublishedBody,Il tuo Momento è stato pubblicato con successo.
 Feature.Moments.Label.MomentPublishedTitle,Momento pubblicato
+Feature.Moments.Label.MomentRemovedBody,"Ha infranto le nostre regole di sicurezza, quindi non è più disponibile."
+Feature.Moments.Label.MomentRemovedTitle,Abbiamo rimosso questo Momento
 Feature.Moments.Label.MomentUnavailable,Momento non disponibile
 Feature.Moments.Label.MomentUnavailableDefault,Questo Momento non è disponibile.
 Feature.Moments.Label.MomentsExperienceName,
@@ -4101,7 +4124,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% di sconto nei pri
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% di sconto per i primi {trialUnlockDays} giorni, poi 20% di sconto su articoli e avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Più divertimento con meno Robux. Abbonati a Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Unisciti in anticipo con il piano Plus
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,Questo link di invito non è più valido.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} ti ha invitato a unirti a Plus. Entrambi riceverete {amount} Robux se deciderai di acquistarlo.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"Cliccando su \u{201C}{ctaText}\u{201D}, accetti le <a href=""{referralTermsUrl}"">Condizioni del programma di invito</a> e le <a href=""{termsUrl}"">Condizioni di abbonamento di Roblox</a>. Ti verrà addebitato automaticamente un importo a cadenza mensile fino all'eventuale disdetta."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Cliccando su \u{201C}{ctaText}\u{201D}, accetti le <a href=""{termsUrl}"">Condizioni di abbonamento di Roblox</a>. Ti verrà addebitato automaticamente un importo a cadenza mensile fino all'eventuale disdetta."
 Feature.RobloxSubscription.Heading.ReferralEntry,Condividi il piano Plus per ottenere {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Iscriviti al piano Plus per ottenere {amount} Robux

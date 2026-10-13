@@ -11,7 +11,7 @@ local tileModule = require(socialCarousel.BaseComponents.Tile)
 local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 local fFlagSocialCarouselInGameTitleMarquee = require(parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
 
-local function renderUserTile(p1, p2, p3, p4, p5, p6, p7, p8)
+local function renderUserTile(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 	-- upvalues: fFlagSocialCarouselInGameTitleMarquee (ref), reactModule (ref), userTileModule (ref)
 	local t = {
 		item = p1,
@@ -25,6 +25,8 @@ local function renderUserTile(p1, p2, p3, p4, p5, p6, p7, p8)
 		t.playStatus = p6
 		t.onMarqueeFinished = p7
 		t.marqueeRunId = p8
+		t.onMarqueeHover = p9
+		t.onMarqueeHoverEnd = p10
 	end
 	return reactModule.createElement(userTileModule, t)
 end

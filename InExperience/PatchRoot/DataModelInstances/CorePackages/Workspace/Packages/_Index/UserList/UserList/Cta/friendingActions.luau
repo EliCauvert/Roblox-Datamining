@@ -1,8 +1,11 @@
-﻿local parent = script:FindFirstAncestor("UserList").Parent
+﻿local userList = script:FindFirstAncestor("UserList")
+local parent = userList.Parent
 local dataHydrationModule = require(parent.DataHydration)
 local profileCTAStore = dataHydrationModule.Profile.ProfileCTAStore
 local requests = dataHydrationModule.Friends.Requests
 local friendsStore = dataHydrationModule.Friends.FriendsStore
+local friendsStoreChallengeNetworkModule = require(userList.Networking.friendsStoreChallengeNetwork)
+local fFlagEnableFriendsStoreChallengeInterceptor = require(parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local images = require(parent.UIBlox).App.ImageSet.Images
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
 local friendingErrorCodesModule = require(script.Parent.FriendingErrorCodes)
@@ -47,8 +50,8 @@ end
 
 return {
 	executeAddFriend = function(p1)
-		-- upvalues: requests (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return requests.RequestFriendshipFromUserId(p1.targetUserId, p1.friendshipOriginSourceType):andThen(function()
+		-- upvalues: requests (ref), fFlagEnableFriendsStoreChallengeInterceptor (ref), friendsStoreChallengeNetworkModule (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
+		return requests.RequestFriendshipFromUserId(p1.targetUserId, p1.friendshipOriginSourceType, if fFlagEnableFriendsStoreChallengeInterceptor then friendsStoreChallengeNetworkModule else nil):andThen(function()
 			-- upvalues: p1 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
 			profileCTAStore.get().getCTA(p1.targetUserId, true)
 			p1.dispatch(setCurrentToastMessage({

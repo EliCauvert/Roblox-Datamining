@@ -11,6 +11,8 @@ local firePlayerFriendAddTelemetryModule = require(socialServerDrivenUi.Analytic
 local sduiRequestFriendshipActionModule = require(socialServerDrivenUi.Actions.SduiRequestFriendshipAction)
 local getCurrentUserIdModule = require(socialServerDrivenUi.Common.getCurrentUserId)
 local friendsStore = require(parent.DataHydration).Friends.FriendsStore
+local friendsStoreChallengeNetworkModule = require(socialServerDrivenUi.Networking.friendsStoreChallengeNetwork)
+local fFlagEnableFriendsStoreChallengeInterceptor = require(parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
 local enums = require(parent.FriendsNetworking).Enums
 local sduiActionType = sduiCoreSystemModule.SduiActionType
@@ -23,14 +25,14 @@ local small = enums_1.InputSize.Small
 local var1 = enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
 
 return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), signalsReactModule (ref), friendsStore (ref), reactModule (ref), fFlagSduiRequestFriendshipActionHandler (ref), sduiRequestFriendshipActionModule (ref), sduiActionType (ref), var1 (ref), setCurrentToastMessage (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), firePlayerFriendAddTelemetryModule (ref), fFlagSduiFriendRequestButtonHideForSelfModule (ref), getCurrentUserIdModule (ref), iconButton (ref), enums_1 (ref), small (ref)
+	-- upvalues: useDispatch (ref), signalsReactModule (ref), friendsStore (ref), reactModule (ref), fFlagSduiRequestFriendshipActionHandler (ref), sduiRequestFriendshipActionModule (ref), sduiActionType (ref), var1 (ref), fFlagEnableFriendsStoreChallengeInterceptor (ref), friendsStoreChallengeNetworkModule (ref), setCurrentToastMessage (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), firePlayerFriendAddTelemetryModule (ref), fFlagSduiFriendRequestButtonHideForSelfModule (ref), getCurrentUserIdModule (ref), iconButton (ref), enums_1 (ref), small (ref)
 	local userId = p1.userId
 	local var2 = useDispatch()
 	local var3 = signalsReactModule.useSignalState(friendsStore.get().GetFriendshipStatus(userId or "").data)
 	local var4 = if var3 ~= Enum.FriendStatus.FriendRequestSent then var3 == Enum.FriendStatus.FriendRequestReceived else true
 	local useCallback = reactModule.useCallback
 	useCallback = useCallback(function()
-		-- upvalues: var4 (ref), userId (ref), fFlagSduiRequestFriendshipActionHandler (copy), p1 (ref), sduiRequestFriendshipActionModule (copy), sduiActionType (copy), var1 (copy), friendsStore (copy), var2 (ref), setCurrentToastMessage (copy), fFlagSduiSearchPeoplePlayerTileTelemetry (copy), firePlayerFriendAddTelemetryModule (copy)
+		-- upvalues: var4 (ref), userId (ref), fFlagSduiRequestFriendshipActionHandler (copy), p1 (ref), sduiRequestFriendshipActionModule (copy), sduiActionType (copy), var1 (copy), friendsStore (copy), fFlagEnableFriendsStoreChallengeInterceptor (copy), friendsStoreChallengeNetworkModule (copy), var2 (ref), setCurrentToastMessage (copy), fFlagSduiSearchPeoplePlayerTileTelemetry (copy), firePlayerFriendAddTelemetryModule (copy)
 		if var4 or userId == nil then return end
 		if fFlagSduiRequestFriendshipActionHandler and p1.sduiContext then
 			sduiRequestFriendshipActionModule({
@@ -40,7 +42,7 @@ return reactModule.memo(function(p1)
 			
 			return
 		end
-		friendsStore.get().RequestFriendship(userId, if typeof(p1.source) == "string" and p1.source ~= "" then p1.source else var1):andThen(function()
+		friendsStore.get().RequestFriendship(userId, if typeof(p1.source) == "string" and p1.source ~= "" then p1.source else var1, nil, if fFlagEnableFriendsStoreChallengeInterceptor then friendsStoreChallengeNetworkModule else nil):andThen(function()
 			-- upvalues: var2 (copy), setCurrentToastMessage (copy)
 			var2(setCurrentToastMessage({
 				toastMessage = "Feature.Friends.Action.FriendRequestSent",

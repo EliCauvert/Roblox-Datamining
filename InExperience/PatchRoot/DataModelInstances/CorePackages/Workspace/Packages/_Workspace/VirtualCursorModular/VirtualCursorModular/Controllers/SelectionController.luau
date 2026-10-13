@@ -31,7 +31,6 @@ function t.new(p1, p2, p3)
 		_inputController = p1,
 		_cursorController = p2,
 		_moveAssistController = p3,
-		_targetingRadius = propertiesModule.MoveAssistRadius,
 		_selectionRadius = propertiesModule.SelectionRadius,
 		_scrolled = {}
 	}, t)
@@ -242,13 +241,11 @@ end
 function t:onRenderStep(p14)
 	-- upvalues: gamepadService (ref), playersService (ref), coreGuiService (ref), guiService (ref)
 	self:processMoving(p14)
-	local var15, var16 = self:processCandidates(gamepadService:GetGamepadCursorPosition(), self._targetingRadius, p14)
+	local var15 = self:processCandidates(gamepadService:GetGamepadCursorPosition(), self._selectionRadius, p14)
 	
-	if self._selectionRadius < var16 then
-		var15 = nil
-	end
 	if var15 ~= self._selectedObject then
-		local playerGui = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
+		local localPlayer = playersService.LocalPlayer
+		local var16 = if localPlayer then localPlayer:FindFirstChildOfClass("PlayerGui") else nil
 		
 		if var15 then
 			self._cursorController:SetHighlight(true)
@@ -256,7 +253,7 @@ function t:onRenderStep(p14)
 			if var15:IsDescendantOf(coreGuiService) then
 				guiService.SelectedCoreObject = var15
 				guiService.SelectedObject = nil
-			elseif playerGui and var15:IsDescendantOf(playerGui) then
+			elseif var16 and var15:IsDescendantOf(var16) then
 				guiService.SelectedObject = var15
 				guiService.SelectedCoreObject = nil
 			end

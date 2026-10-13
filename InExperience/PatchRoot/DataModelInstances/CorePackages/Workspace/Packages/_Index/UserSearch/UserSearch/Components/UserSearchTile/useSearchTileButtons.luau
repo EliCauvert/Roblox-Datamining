@@ -24,12 +24,14 @@ local fFlagFixUserSearchAddFriendFocusActionModule = require(userSearch.Flags.FF
 local fFlagUserSearchHideFriendActionsForBlockedUsersModule = require(userSearch.Flags.FFlagUserSearchHideFriendActionsForBlockedUsers)
 local fFlagMigrateFriendshipStatusesUserSearchModule = require(userSearch.Flags.FFlagMigrateFriendshipStatusesUserSearch)
 local var1 = if fFlagUserSearchHideFriendActionsForBlockedUsersModule then require(script.Parent.useIsUserBlocked) else nil
+local friendsStoreChallengeNetworkModule = require(userSearch.Networking.friendsStoreChallengeNetwork)
+local fFlagEnableFriendsStoreChallengeInterceptor = require(parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local var2 = require(parent.DataHydration).Friends.FriendsStore.get()
 local enums_1 = require(parent.DataHydration).Friends.Enums
 local fFlagMigrateFriendshipStatusesUserSearchModule_1 = fFlagMigrateFriendshipStatusesUserSearchModule or fFlagSduiUserSearchTile
 
 return function(p1, p2)
-	-- upvalues: useLocalUserId (ref), useDispatch (ref), useRelationshipSelectorModule (ref), useStyle (ref), fFlagUserSearchHideFriendActionsForBlockedUsersModule (ref), var1 (ref), useJoinUserInExperience (ref), contexts (ref), images (ref), presenceHelpersModule (ref), fFlagUserSearchAddFocusActionsSupport (ref), focusNavigationEventNameEnum (ref), fFlagMigrateFriendshipStatusesUserSearchModule_1 (ref), var2 (ref), friendsNetworkingModule (ref), setCurrentToastMessage (ref), fFlagConnectionsToFriendsRename (ref), eventNamesModule (ref), dashModule (ref), fFlagFixUserSearchAddFriendFocusActionModule (ref), enums_1 (ref), enums (ref)
+	-- upvalues: useLocalUserId (ref), useDispatch (ref), useRelationshipSelectorModule (ref), useStyle (ref), fFlagUserSearchHideFriendActionsForBlockedUsersModule (ref), var1 (ref), useJoinUserInExperience (ref), contexts (ref), images (ref), presenceHelpersModule (ref), fFlagUserSearchAddFocusActionsSupport (ref), focusNavigationEventNameEnum (ref), fFlagMigrateFriendshipStatusesUserSearchModule_1 (ref), var2 (ref), friendsNetworkingModule (ref), setCurrentToastMessage (ref), fFlagConnectionsToFriendsRename (ref), eventNamesModule (ref), dashModule (ref), fFlagFixUserSearchAddFriendFocusActionModule (ref), enums_1 (ref), fFlagEnableFriendsStoreChallengeInterceptor (ref), friendsStoreChallengeNetworkModule (ref), enums (ref)
 	local var3 = useLocalUserId()
 	local var4 = useDispatch()
 	local var5 = useRelationshipSelectorModule(p1.userId)
@@ -92,8 +94,8 @@ return function(p1, p2)
 			icon = var9,
 			focusEventName = if fFlagUserSearchAddFocusActionsSupport and p1.shouldAddFocusEventName then if fFlagFixUserSearchAddFriendFocusActionModule then focusNavigationEventNameEnum.HoldToAddFriend else focusNavigationEventNameEnum.HoldToAcceptFriendRequest else nil,
 			onActivated = function()
-				-- upvalues: fFlagMigrateFriendshipStatusesUserSearchModule_1 (copy), var2 (copy), p1 (ref), enums_1 (copy), var4 (ref), friendsNetworkingModule (copy), var3 (ref), enums (copy), setCurrentToastMessage (copy), fFlagConnectionsToFriendsRename (copy), p2 (ref), eventNamesModule (copy)
-				;(if fFlagMigrateFriendshipStatusesUserSearchModule_1 then var2.RequestFriendship(p1.userId, enums_1.FriendshipOriginSourceType.PlayerSearch) else var4(friendsNetworkingModule.RequestFriendshipFromUserId.API({
+				-- upvalues: fFlagMigrateFriendshipStatusesUserSearchModule_1 (copy), var2 (copy), p1 (ref), enums_1 (copy), fFlagEnableFriendsStoreChallengeInterceptor (copy), friendsStoreChallengeNetworkModule (copy), var4 (ref), friendsNetworkingModule (copy), var3 (ref), enums (copy), setCurrentToastMessage (copy), fFlagConnectionsToFriendsRename (copy), p2 (ref), eventNamesModule (copy)
+				;(if fFlagMigrateFriendshipStatusesUserSearchModule_1 then var2.RequestFriendship(p1.userId, enums_1.FriendshipOriginSourceType.PlayerSearch, nil, if fFlagEnableFriendsStoreChallengeInterceptor then friendsStoreChallengeNetworkModule else nil) else var4(friendsNetworkingModule.RequestFriendshipFromUserId.API({
 					targetUserId = p1.userId,
 					currentUserId = var3,
 					friendshipOriginSourceType = enums.FriendshipOriginSourceType.PlayerSearch.rawValue()

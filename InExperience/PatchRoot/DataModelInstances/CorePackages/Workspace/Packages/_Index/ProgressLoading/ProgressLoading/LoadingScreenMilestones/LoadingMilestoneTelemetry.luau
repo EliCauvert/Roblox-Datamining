@@ -6,6 +6,40 @@ local constantsModule = require(script.Parent.Constants)
 local tryMilestoneOperationModule = require(script.Parent.tryMilestoneOperation)
 
 return {
+	reportHoldGateHit = function(p1, p2)
+		-- upvalues: tryMilestoneOperationModule (ref), constantsModule (ref), telemetryService (ref)
+		return tryMilestoneOperationModule(function()
+			-- upvalues: p1 (ref), constantsModule (copy), p2 (ref), telemetryService (copy)
+			local cloned = table.clone(p1)
+			cloned.dismissSource = constantsModule.DismissSource.NormalReady
+			cloned.holdGateHit = p2
+			telemetryService:LogCounter({
+				description = "Completed normal-first HoldOn screens without reduced motion, with readiness and gate-release observations, split by whether readiness preceded gate release.",
+				links = "https://roblox.atlassian.net/wiki/x/AAPROQE",
+				eventName = constantsModule.EVENT_NAME .. "_HoldGateHit",
+				backends = { "RobloxTelemetryCounter" },
+				lastUpdated = { 2026, 10, 12 }
+			}, { customFields = cloned }, 1)
+		end)
+	end,
+	reportContentVisibility = function(p1, p2, p3, p4)
+		-- upvalues: tryMilestoneOperationModule (ref), telemetryService (ref), constantsModule (ref)
+		return tryMilestoneOperationModule(function()
+			-- upvalues: p1 (ref), p2 (ref), p3 (ref), p4 (ref), telemetryService (copy), constantsModule (copy)
+			local cloned = table.clone(p1)
+			cloned.titleVisible = p2
+			cloned.creatorVisible = p3
+			cloned.thumbnailVisible = p4
+			cloned.allContentVisible = p2 and (p3 and p4)
+			telemetryService:LogCounter({
+				description = "Completed loading screens with mount and dismissal-start observations, split by title, creator, thumbnail, and all-content visibility before dismissal.",
+				links = "https://roblox.atlassian.net/wiki/x/AAPROQE",
+				eventName = constantsModule.EVENT_NAME .. "_ContentVisibility",
+				backends = { "RobloxTelemetryCounter" },
+				lastUpdated = { 2026, 10, 11 }
+			}, { customFields = cloned }, 1)
+		end)
+	end,
 	reportAddedWait = function(p1, p2, p3)
 		-- upvalues: tryMilestoneOperationModule (ref), telemetryService (ref)
 		return tryMilestoneOperationModule(function()

@@ -1,9 +1,15 @@
 ﻿local expChat = script:FindFirstAncestor("ExpChat")
 local parent = expChat.Parent
 local roactModule = require(parent.Roact)
+local reactModule = require(parent.React)
 local roactRoduxModule = require(parent.RoactRodux)
+local cryoModule = require(parent.Cryo)
+local signalsModule = require(parent.Signals)
+local signalsReactModule = require(parent.SignalsReact)
+local tutilsModule = require(parent.tutils)
 local sharedFlagsModule = require(parent.SharedFlags)
 local expChatSharedModule = require(parent.ExpChatShared)
+local friendsChatTabNameModule = require(parent.FriendsChat.FriendsChatTabName)
 local clientSettingsModule = require(expChat.ClientSettings)
 local mapStateToPropsModule = require(script.Parent.mapStateToProps)
 local mapDispatchToPropsModule = require(script.Parent.mapDispatchToProps)
@@ -15,6 +21,8 @@ local getFFlagChatTranslationShowFTUXModule = require(expChat.Flags.getFFlagChat
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local fFlagExpChatNewInputBarModule = require(expChat.Flags.FFlagExpChatNewInputBar)
 local getFFlagExpChatAlwaysRunTCS = sharedFlagsModule.getFFlagExpChatAlwaysRunTCS
+local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
+local var1 = if fFlagExpChatUseChannelTabsStore then require(expChat.Stores.GetChannelTabsStore) else nil
 
 function getChatWindowEnabled()
 	-- upvalues: textChatService (ref)
@@ -61,7 +69,7 @@ function shouldShowChatTranslationFTUX()
 	return true
 end
 
-local var1 = shouldShowChatTranslationFTUX()
+local var2 = shouldShowChatTranslationFTUX()
 local chatTranslationFTUXModule = require(script.Parent.Parent.ChatTranslationFTUX)
 local appContainer = roactModule.PureComponent:extend("AppContainer")
 appContainer.defaultProps = {
@@ -76,7 +84,7 @@ appContainer.defaultProps = {
 	textChatService = textChatService,
 	chat = game:GetService("Chat")
 }
-local var2 = nil
+local var3 = nil
 
 function appContainer.init(p1)
 	p1:setState({
@@ -86,12 +94,12 @@ function appContainer.init(p1)
 end
 
 function appContainer.willUnmount(_)
-	-- upvalues: var2 (write)
-	var2:Disconnect()
+	-- upvalues: var3 (write)
+	var3:Disconnect()
 end
 
 function appContainer.didMount(p1)
-	-- upvalues: textChatService (ref), var2 (write), getFFlagExpChatAlwaysRunTCS (ref)
+	-- upvalues: textChatService (ref), var3 (write), getFFlagExpChatAlwaysRunTCS (ref)
 	p1.migrationConnection = p1.props.chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function()
 		-- upvalues: p1 (ref)
 		if p1.props.chat.IsAutoMigrated then
@@ -136,8 +144,8 @@ function appContainer.didMount(p1)
 		end
 	end
 	
-	if not var2 then
-		var2 = textChatService.Changed:Connect(onTextChatServicePropertyChanged)
+	if not var3 then
+		var3 = textChatService.Changed:Connect(onTextChatServicePropertyChanged)
 	end
 	p1:setState({
 		showTranslationButton = getChatTranslationEnabled() and getChatTranslationToggleEnabled(),
@@ -146,9 +154,9 @@ function appContainer.didMount(p1)
 end
 
 function appContainer.render(p1)
-	-- upvalues: roactModule (ref), bubbleChatModule (ref), clientSettingsModule (ref), appLayoutModule (ref), isChatRegionLockedModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref), getFFlagChatTranslationShowFTUXModule (ref), var1 (ref), chatTranslationFTUXModule (ref)
+	-- upvalues: roactModule (ref), bubbleChatModule (ref), clientSettingsModule (ref), appLayoutModule (ref), isChatRegionLockedModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref), getFFlagChatTranslationShowFTUXModule (ref), var2 (ref), chatTranslationFTUXModule (ref)
 	local isTextChatServiceEnabled = p1.state.isTextChatServiceEnabled
-	local var3 = roactModule.createElement(bubbleChatModule, {
+	local var4 = roactModule.createElement(bubbleChatModule, {
 		getIconVoiceIndicator = p1.props.getIconVoiceIndicator,
 		onClickedVoiceIndicator = p1.props.onClickedVoiceIndicator,
 		onClickedCameraIndicator = p1.props.onClickedCameraIndicator,
@@ -188,10 +196,29 @@ function appContainer.render(p1)
 				isSpatialUIEnabled = p1.props.isSpatialUIEnabled,
 				targetTextChannel = if fFlagExpChatPresetChatEnabled or fFlagExpChatNewInputBarModule then p1.props.targetTextChannel else nil
 			}),
-			bubbleChat = var3,
-			ChatTranslationFTUX = if getFFlagChatTranslationShowFTUXModule() and var1 and (getChatTranslationEnabled() and getChatWindowEnabled()) then roactModule.createElement(chatTranslationFTUXModule, {}) else nil
+			bubbleChat = var4,
+			ChatTranslationFTUX = if getFFlagChatTranslationShowFTUXModule() and var2 and (getChatTranslationEnabled() and getChatWindowEnabled()) then roactModule.createElement(chatTranslationFTUXModule, {}) else nil
 		})
-	}) else roactModule.createElement(clientSettingsModule.Provider, { value = p1.props.clientSettings }, { bubbleChat = var3 })
+	}) else roactModule.createElement(clientSettingsModule.Provider, { value = p1.props.clientSettings }, { bubbleChat = var4 })
 end
 
-return roactRoduxModule.connect(mapStateToPropsModule, mapDispatchToPropsModule)(appContainer)
+appContainer = roactRoduxModule.connect(mapStateToPropsModule, mapDispatchToPropsModule)(appContainer)
+
+return if fFlagExpChatUseChannelTabsStore then function(value)
+	-- upvalues: reactModule (ref), signalsModule (ref), var1 (ref), friendsChatTabNameModule (ref), tutilsModule (ref), signalsReactModule (ref), appContainer (write), cryoModule (ref)
+	return reactModule.createElement(appContainer, cryoModule.Dictionary.union(value, signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var1 (copy), friendsChatTabNameModule (copy), tutilsModule (copy)
+		return signalsModule.createComputed(function(p1)
+			-- upvalues: var1 (copy), friendsChatTabNameModule (copy)
+			local channelTabsState = var1(false).getChannelTabsState(p1)
+			local var4 = if channelTabsState.selectedTabName then channelTabsState.allChannelTabs[channelTabsState.selectedTabName] else nil
+			
+			return {
+				isGlobalTabSelected = channelTabsState.selectedTabName == "RBXGlobal",
+				selectedTabType = if var4 then var4.type else nil,
+				hasGlobalChannelTab = channelTabsState.allChannelTabs.RBXGlobal ~= nil,
+				hasFriendsChannelTab = channelTabsState.allChannelTabs[friendsChatTabNameModule] ~= nil
+			}
+		end, tutilsModule.deepEqual)
+	end, {}))))
+end else appContainer

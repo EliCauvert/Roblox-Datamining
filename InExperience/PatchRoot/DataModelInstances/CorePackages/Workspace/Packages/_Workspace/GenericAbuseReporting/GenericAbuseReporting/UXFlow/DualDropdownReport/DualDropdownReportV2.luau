@@ -21,10 +21,9 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
-local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), fFlagUpdateInGameAssetReportingCTAs (ref), dashModule (ref), sheet (ref), view (ref), iconButton (ref), buttonVariant (ref), iconName (ref), text (ref), inputLabel (ref), inputSize (ref), sideModalDropdownButtonModule (ref), textArea (ref), button (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), optionSelectorGroup (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), dashModule (ref), sheet (ref), view (ref), iconButton (ref), buttonVariant (ref), iconName (ref), text (ref), inputLabel (ref), inputSize (ref), sideModalDropdownButtonModule (ref), textArea (ref), button (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), optionSelectorGroup (ref)
 	local selectOnePrompt
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(true)
@@ -39,9 +38,9 @@ return reactModule.memo(function(p1)
 		selectOnePrompt = "Feature.ReportAbuse.Label.PleaseSelectOne",
 		commentHeading = "Feature.ReportAbuse.Label.TellUsWhatHappenedNoOptional",
 		textAreaPlaceholder = "Feature.SettingsHub.Label.ReportComment",
+		submitButton = "Feature.ReportAbuse.Label.Report",
 		continueButton = "Feature.ReportAbuse.Action.Continue",
-		titleIpInfringement = "Feature.ReportAbuse.Title.SelectInSceneContinueYourReport",
-		submitButton = if fFlagUpdateInGameAssetReportingCTAs then "Feature.ReportAbuse.Label.Report" else "Feature.ReportAbuse.Action.Submit"
+		titleIpInfringement = "Feature.ReportAbuse.Title.SelectInSceneContinueYourReport"
 	})
 	local var11 = reactModule.useCallback(function(p2)
 		-- upvalues: var9 (ref)

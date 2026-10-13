@@ -8,10 +8,12 @@ local text = foundationModule.Text
 local _ = require(parent.DataHydration.ExperienceAnalytics)
 local _ = require(buildExperience.Analytics.AnalyticsWindow)
 local _ = require(buildExperience.Analytics.Goals.GoalTypes)
+local _ = require(buildExperience.Analytics.Goals.GoalLockedActionId)
+local goalLockedContentModule = require(script.Parent.GoalLockedContent)
 local goalMetricRowModule = require(script.Parent.GoalMetricRow)
 
 return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), goalMetricRowModule (ref), view (ref), text (ref)
+	-- upvalues: useLocalization (ref), reactModule (ref), goalMetricRowModule (ref), view (ref), text (ref), goalLockedContentModule (ref)
 	local testId = p1.testId or "GoalCard"
 	local goal = p1.goal
 	local t = { title = goal.titleKey }
@@ -49,6 +51,12 @@ return function(p1)
 			LayoutOrder = 2,
 			tag = "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
 			testId = `{testId}.Card`
-		}, t_1)
+		}, if p1.isLocked then {
+			Locked = reactModule.createElement(goalLockedContentModule, {
+				locked = goal.locked,
+				onAction = p1.onLockedAction,
+				testId = `{testId}.Locked`
+			})
+		} else t_1)
 	})
 end

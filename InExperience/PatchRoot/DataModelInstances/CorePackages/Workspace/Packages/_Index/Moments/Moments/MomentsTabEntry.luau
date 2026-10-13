@@ -13,7 +13,6 @@ local getDeepLinkStoreModule = require(moments.Stores.GetDeepLinkStore)
 local createMomentsStoreModule = require(moments.Stores.GetMomentsStore.createMomentsStore)
 local getImmersiveChromeStoreModule = require(moments.Stores.GetImmersiveChromeStore)
 local getFFlagMomentsFixDeeplinkRefocusModule = require(moments.Flags.GetFFlagMomentsFixDeeplinkRefocus)
-local getFFlagMomentsFixPeekReturnChromeModule = require(moments.Flags.GetFFlagMomentsFixPeekReturnChrome)
 local fFlagMomentsEmojiSetsApiModule = require(moments.Flags.FFlagMomentsEmojiSetsApi)
 local fStringMomentsExperienceJoinActionTextIxpLayerModule = require(moments.Flags.FStringMomentsExperienceJoinActionTextIxpLayer)
 local useMomentsTabIsVisibleModule = require(moments.Hooks.useMomentsTabIsVisible)
@@ -218,7 +217,7 @@ local _ = function(p4, p5, p6)
 end
 
 local function MomentsTabEntry(p4)
-	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), useResetTeleportingOnGameLeaveModule (ref), getFFlagMomentsFixDeeplinkRefocusModule (ref), getDeepLinkRequest (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), robloxAppEventsModule (ref), appPage (ref), consumeEntrySourceModule (ref), logMomentsLayerExposure (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), moments (ref), fFlagMomentsEmojiSetsApiModule (ref), momentsGetMomentsReactionsStoreModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), t (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), momentsSurfaceLoadManager (ref), getExperienceDetailsSheetStoreModule (ref), getImmersiveChromeStoreModule (ref), roactNavigationModule (ref), useMomentsTabIsVisibleModule (ref), getFFlagMomentsFixPeekReturnChromeModule (ref), fFlagMomentsAvatarLookTryOn (ref), useMomentsGating (ref), canRenderNativeMoments (ref), momentsHostShellModule (ref), innerNavigatorModule (ref)
+	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), useResetTeleportingOnGameLeaveModule (ref), getFFlagMomentsFixDeeplinkRefocusModule (ref), getDeepLinkRequest (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), robloxAppEventsModule (ref), appPage (ref), consumeEntrySourceModule (ref), logMomentsLayerExposure (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), moments (ref), fFlagMomentsEmojiSetsApiModule (ref), momentsGetMomentsReactionsStoreModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), t (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), momentsSurfaceLoadManager (ref), getExperienceDetailsSheetStoreModule (ref), getImmersiveChromeStoreModule (ref), roactNavigationModule (ref), useMomentsTabIsVisibleModule (ref), fFlagMomentsAvatarLookTryOn (ref), useMomentsGating (ref), canRenderNativeMoments (ref), momentsHostShellModule (ref), innerNavigatorModule (ref)
 	local var9 = reactModule.useRef(p4)
 	var9.current = p4
 	local var10 = reactModule.useRef(false)
@@ -385,8 +384,8 @@ local function MomentsTabEntry(p4)
 	end, { var21, var22, var23 })
 	local var24 = useMomentsTabIsVisibleModule()
 	reactModule.useEffect(function()
-		-- upvalues: getFFlagMomentsFixPeekReturnChromeModule (copy), var24 (ref), var23 (ref)
-		if getFFlagMomentsFixPeekReturnChromeModule() and var24 then
+		-- upvalues: var24 (ref), var23 (ref)
+		if var24 then
 			var23()
 		end
 	end, { var24, var23 })

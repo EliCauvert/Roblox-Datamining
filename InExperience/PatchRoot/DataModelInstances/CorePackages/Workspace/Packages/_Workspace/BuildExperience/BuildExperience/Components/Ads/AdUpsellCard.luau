@@ -5,6 +5,7 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local fFlagBuildAgentAdCampaignRefreshEligibilityModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
 local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local chatCardPriorityModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
 local useChatCardEmphasisModule = require(buildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
@@ -18,7 +19,7 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: foundationModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
+	-- upvalues: foundationModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), fFlagBuildAgentAdCampaignRefreshEligibilityModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = useLocalization({
 		title = localizationStringsModule.AD_UPSELL_CARD_TITLE,
@@ -32,7 +33,8 @@ return function(p1)
 		noFreeTitle = if fFlagBuildAgentAdCampaignCardModule then localizationStringsModule.AD_UPSELL_NO_FREE_TITLE else nil,
 		noFreeDescription = if fFlagBuildAgentAdCampaignCardModule then localizationStringsModule.AD_UPSELL_NO_FREE_DESC else nil,
 		create = localizationStringsModule.AD_UPSELL_CARD_CREATE,
-		dontShowAgain = localizationStringsModule.AD_UPSELL_CARD_DONT_SHOW_AGAIN
+		dontShowAgain = localizationStringsModule.AD_UPSELL_CARD_DONT_SHOW_AGAIN,
+		eligibilityError = if fFlagBuildAgentAdCampaignRefreshEligibilityModule then if p1.eligibilityError == "unavailable" then localizationStringsModule.AD_CAMPAIGN_SHEET_FORBIDDEN_ERROR else localizationStringsModule.AD_CAMPAIGN_SHEET_INTERNAL_ERROR else nil
 	})
 	local title = var2.title
 	local description = var2.description
@@ -82,7 +84,13 @@ return function(p1)
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
 				Text = description
-			})
+			}),
+			EligibilityError = if fFlagBuildAgentAdCampaignRefreshEligibilityModule and p1.eligibilityError ~= nil then reactModule.createElement(text, {
+				LayoutOrder = 3,
+				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-alert",
+				testId = "AdUpsellCard.EligibilityError",
+				Text = var2.eligibilityError
+			}) else nil
 		}),
 		Actions = reactModule.createElement(view, {
 			LayoutOrder = 2,

@@ -20,11 +20,10 @@ local inputSize = foundationModule.Enums.InputSize
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 local useTokens = foundationModule.Hooks.useTokens
-local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local _ = require(script.Parent.types)
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), menu (ref), popoverSide (ref), popoverAlign (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), icon (ref), iconName (ref), iconSize (ref), inputSize (ref), image (ref), iconButton (ref), badge (ref), iconPosition (ref), badgeVariant (ref), badgeShape (ref), badgeSize (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), menu (ref), popoverSide (ref), popoverAlign (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), inputSize (ref), image (ref), iconButton (ref), badge (ref), iconPosition (ref), badgeVariant (ref), badgeShape (ref), badgeSize (ref)
 	local video = useLocalization({ video = localizationStringsModule.MEDIA_SELECTION_VIDEO }).video
 	local var1 = useTokens()
 	local var2 = if p1.isSelected then var1.Color.Content.Emphasis.Color3 else var1.Color.Stroke.Default.Color3
@@ -43,8 +42,7 @@ return function(p1)
 	}, reactModule.createElement(view, {
 		tag = {
 			["radius-large"] = true,
-			["size-full-2400"] = not fFlagBuildDesktopReadinessModule,
-			["size-full-2700"] = fFlagBuildDesktopReadinessModule,
+			["size-full-2700"] = true,
 			["aspect-1-1"] = p1.aspectRatio == "square",
 			["aspect-16-9"] = p1.aspectRatio == "wide"
 		},
@@ -114,8 +112,7 @@ return function(p1)
 		tag = {
 			["radius-large"] = true,
 			["bg-surface-200"] = true,
-			["size-full-2400"] = not fFlagBuildDesktopReadinessModule,
-			["size-full-2700"] = fFlagBuildDesktopReadinessModule,
+			["size-full-2700"] = true,
 			["aspect-1-1"] = p1.aspectRatio == "square",
 			["aspect-16-9"] = p1.aspectRatio == "wide"
 		}

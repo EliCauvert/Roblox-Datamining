@@ -102,7 +102,6 @@ Authentication.SignUp.Description.Try,试一试
 Authentication.SignUp.Description.UsernameChanged,一切就绪！你的帐户已准备就绪并已连接至 {platform}。立即重生即可在游戏中看到更新后的用户名，否则更新将在下次重生时应用。
 Authentication.SignUp.Description.UsernameUnchanged,大功告成！你的帐户已准备就绪并已连接至 {platform}。与朋友聊天，畅玩数百万款 Roblox 游戏。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"您的 Roblox 帐户将链接到您的访问{platform}的账号。你可以随时在“设置”页面取消关联。在能够链接到另一个帐户之前,可能会有一个访问{platform}的账号。点按 {ctaButton} 即表示你同意《使用条款》（包括其中的仲裁条款），并确认已阅读《隐私政策》。"
-Authentication.SignUp.Header.CloseWithoutFinishing,是否在未完成的情况下关闭？
 Authentication.SignUp.Header.OneLastThing,最后一步
 Authentication.SignUp.Header.SetUpYourRobloxAccount,设置你的 Roblox 帐户
 Authentication.SignUp.Heading.CountryCodeSelector,选择国家/地区
@@ -418,6 +417,7 @@ CommonUI.Features.Label.ControllerBar.ToPlaySuffix,以开始游戏
 CommonUI.Features.Label.CreateGames,创作
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,作品
+CommonUI.Features.Label.Games,游戏
 CommonUI.Features.Label.GiftCards,购买礼品卡
 CommonUI.Features.Label.Groups,社区
 CommonUI.Features.Label.HelpAndSafety,帮助和安全
@@ -2036,6 +2036,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,新用户会话时长
 Feature.Build.Analytics.Title.PayerConversion,付费用户转化率
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,
+Feature.Build.Analytics.Title.TopAcquisitionSource,热门来源
+Feature.Build.Analytics.Title.TopDropOffStep,最大流失
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,访问次数
 Feature.Build.Content.NewGame,新游戏
@@ -2079,7 +2081,6 @@ Feature.Build.Description.PlaytestLatest,你正在对最新版本进行游戏测
 Feature.Build.Description.PlaytestLocked,创建你的第一款游戏后，你就可以开始游戏测试。
 Feature.Build.Description.PlaytesterAccess,邀请好友成为初期测试玩家，或更改游戏的受众设置，允许更多人游玩。
 Feature.Build.Description.PricingRules,设置定价规则
-Feature.Build.Description.PrivateShare,更改游戏的受众设置以分享该游戏。
 Feature.Build.Description.PromoteGameFree,只需轻点一下，即可让你的游戏面向更多玩家展示。
 Feature.Build.Description.PromoteGamePaid,创建广告，让你的游戏面向数百万玩家展示。
 Feature.Build.Description.PromoteGameWithAdCampaign,通过为期 {durationDays} 天的广告活动扩大受众群体，让你的游戏被他人发现。
@@ -2413,7 +2414,6 @@ Feature.Build.Title.ExperienceAudience,体验受众
 Feature.Build.Title.FreeUsageReached,已达到免费 Build 使用额度上限
 Feature.Build.Title.FriendsOnlyPlay,只有好友可以游玩
 Feature.Build.Title.GameCreationDone,游戏创建已完成
-Feature.Build.Title.GamePrivate,此游戏为私密游戏
 Feature.Build.Title.GenericError,出错了
 Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
@@ -3117,7 +3117,7 @@ Feature.ExperienceDetails.Label.NotPlayable,无法开始游戏
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,游玩此体验即表示我同意注意事项
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
-Feature.ExperienceDetails.PlayButtonText.Play,游戏
+Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,游玩演示
 Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,无法使用

@@ -6,10 +6,10 @@ local signalsReactModule = require(parent.SignalsReact)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local userProfileModule = require(parent.DataHydration.UserProfile)
 local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
-local _ = require(shareSheet.Components.ShareSheetSocialRow)
 local conversationUtilsModule = require(shareSheet.Utils.ConversationUtils)
 local filterConversationsByQueryModule = require(shareSheet.Utils.filterConversationsByQuery)
 local formatPeoplePickerUserInfoModule = require(shareSheet.Utils.formatPeoplePickerUserInfo)
+local _ = require(shareSheet.Types)
 local playersService = game:GetService("Players")
 
 local function _(p1)

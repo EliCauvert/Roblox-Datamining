@@ -5,16 +5,18 @@ local profileCtaServiceModule = require(parent.ProfileCtaService)
 local enumsModule = require(userList.Common.Enums)
 local _ = require(userList.Common.Types)
 local ctaRowModule = require(userList.Cta.CtaRow)
+local surfaceJoinCtaRowModule = require(userList.Cta.SurfaceJoinCtaRow)
 local useCtaActionHandlersModule = require(script.Parent.useCtaActionHandlers)
 local constantsModule = require(userList.Common.Constants)
 local fFlagUserListCanonicalCtaAnalyticsModule = require(userList.Flags.FFlagUserListCanonicalCtaAnalytics)
 local fFlagUserListDefaultCtaWidths = require(parent.SharedFlags).FFlagUserListDefaultCtaWidths
 local fFlagUserListComposeRenderRowWithCta = require(parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
+local fFlagUserListSurfaceJoin = require(parent.SharedFlags).FFlagUserListSurfaceJoin
 local profileCTAService = profileCtaServiceModule.ProfileCTAService
 local t = {}
 
 return function(p1, p2)
-	-- upvalues: reactModule (ref), profileCTAService (ref), useCtaActionHandlersModule (ref), fFlagUserListComposeRenderRowWithCta (ref), fFlagUserListDefaultCtaWidths (ref), constantsModule (ref), enumsModule (ref), t (ref), ctaRowModule (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref)
+	-- upvalues: reactModule (ref), profileCTAService (ref), useCtaActionHandlersModule (ref), fFlagUserListComposeRenderRowWithCta (ref), fFlagUserListDefaultCtaWidths (ref), constantsModule (ref), fFlagUserListSurfaceJoin (ref), surfaceJoinCtaRowModule (ref), ctaRowModule (ref), enumsModule (ref), t (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref)
 	reactModule.useEffect(function()
 		-- upvalues: profileCTAService (copy)
 		local var1 = profileCTAService.connectRealTimeUpdates()
@@ -39,10 +41,12 @@ return function(p1, p2)
 	end, { p1 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: enumsModule (copy), var2 (ref), t (copy), reactModule (copy), ctaRowModule (copy), var1 (ref), var3 (ref), fFlagUserListCanonicalCtaAnalyticsModule (copy), fFlagUserListComposeRenderRowWithCta (copy)
+		-- upvalues: fFlagUserListSurfaceJoin (copy), var3 (ref), surfaceJoinCtaRowModule (copy), ctaRowModule (copy), enumsModule (copy), var2 (ref), t (copy), reactModule (copy), var1 (ref), fFlagUserListCanonicalCtaAnalyticsModule (copy), fFlagUserListComposeRenderRowWithCta (copy)
+		local var4 = if fFlagUserListSurfaceJoin and var3 and var3.join then surfaceJoinCtaRowModule else ctaRowModule
+		
 		return function(p3, p4, p5)
-			-- upvalues: enumsModule (copy), var2 (copy), t (copy), reactModule (copy), ctaRowModule (copy), var1 (copy), var3 (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), fFlagUserListComposeRenderRowWithCta (copy)
-			return if p4.type == enumsModule.EntityType.User then reactModule.createElement(ctaRowModule, {
+			-- upvalues: enumsModule (copy), var2 (copy), t (copy), reactModule (copy), var4 (ref), var1 (copy), var3 (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), fFlagUserListComposeRenderRowWithCta (copy)
+			return if p4.type == enumsModule.EntityType.User then reactModule.createElement(var4, {
 				createRow = p3,
 				entity = p4,
 				actionHandlers = var1,

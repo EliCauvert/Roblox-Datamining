@@ -23,9 +23,8 @@ return {
 		local t = nil
 		local var3 = nil
 		local t_1 = {}
-		local t_2 = {}
 		local text = (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
-		local t_3 = {
+		local t_2 = {
 			category = constantsModule.CATEGORY,
 			page = constantsModule.PAGE,
 			subcategory = text
@@ -39,19 +38,17 @@ return {
 		end
 		
 		local _ = function(p2)
-			-- upvalues: loadingMilestoneTelemetryModule (copy), t_3 (write)
-			loadingMilestoneTelemetryModule.countMilestonesOutcome(t_3, p2)
+			-- upvalues: loadingMilestoneTelemetryModule (copy), t_2 (write)
+			loadingMilestoneTelemetryModule.countMilestonesOutcome(t_2, p2)
 		end
 		
-		local function record(p2, p3)
-			-- upvalues: t_1 (ref), t_2 (ref), var1 (copy), t (write), var3 (write), var2 (write), loadingMilestoneTrackerModule (copy), outcome (copy), loadingMilestoneTelemetryModule (copy), t_3 (write)
-			if var1 ~= t or (if p3 then t_1[p3] else t_2[p2]) then return end
-			if p3 then
-				var3 = var3 or p3
-				t_1[p3] = true
-			else
-				t_2[p2] = true
-			end
+		local _ = function(p2, p3)
+			-- upvalues: var1 (copy), t (write), t_1 (ref), var2 (write), loadingMilestoneTrackerModule (copy), outcome (copy), loadingMilestoneTelemetryModule (copy), t_2 (write)
+			local var4 = if p3 then p2 .. "/" .. p4 else p2
+			
+			if var1 ~= t or t_1[var4] then return end
+			t_1[var4] = true
+			
 			if var2 and not loadingMilestoneTrackerModule.recordMilestone(var2, p2, p3) then
 				var1 = nil
 				var2 = nil
@@ -59,47 +56,94 @@ return {
 				if var2 then
 					local _ = loadingMilestoneTrackerModule.discardMilestoneTracker(var2)
 				end
-				loadingMilestoneTelemetryModule.countMilestonesOutcome(t_3, outcome.InstrumentationError)
+				loadingMilestoneTelemetryModule.countMilestonesOutcome(t_2, outcome.InstrumentationError)
 			end
 		end
 		
 		t = {
 			dismissRequested = function(p2)
-				-- upvalues: record (ref), milestone (copy)
-				record(milestone.DismissRequested, p2)
-			end,
-			record = function(p2)
-				-- upvalues: t_2 (ref), var1 (copy), t (write), var2 (write), loadingMilestoneTrackerModule (copy), outcome (copy), loadingMilestoneTelemetryModule (copy), t_3 (write)
-				local var4 = t_2[p2]
+				-- upvalues: var1 (copy), t (write), var3 (write), milestone (copy), t_1 (ref), var2 (write), loadingMilestoneTrackerModule (copy), outcome (copy), loadingMilestoneTelemetryModule (copy), t_2 (write)
+				if var1 == t then
+					var3 = var3 or p2
+				end
+				local dismissRequested = milestone.DismissRequested
+				local var4 = if p2 then dismissRequested .. "/" .. p5 else dismissRequested
 				
 				if var1 == t then
-					if var4 then return end
-					t_2[p2] = true
+					if t_1[var4] then return end
+					t_1[var4] = true
 					local var5 = var2
 					
-					if var5 and not loadingMilestoneTrackerModule.recordMilestone(var5, p2, nil) then
+					if var5 and not loadingMilestoneTrackerModule.recordMilestone(var5, dismissRequested, p2) then
 						var1 = nil
 						var2 = nil
 						
 						if var2 then
 							local _ = loadingMilestoneTrackerModule.discardMilestoneTracker(var2)
 						end
-						loadingMilestoneTelemetryModule.countMilestonesOutcome(t_3, outcome.InstrumentationError)
+						loadingMilestoneTelemetryModule.countMilestonesOutcome(t_2, outcome.InstrumentationError)
+					end
+				end
+			end,
+			contentVisible = function(p2)
+				-- upvalues: t_1 (ref), milestone (copy), var1 (copy), t (write), var2 (write), loadingMilestoneTrackerModule (copy), outcome (copy), loadingMilestoneTelemetryModule (copy), t_2 (write)
+				if not t_1[milestone.ScreenVisible] or t_1[milestone.DismissStarted] then return end
+				local contentVisible = milestone.ContentVisible
+				local var4 = if p2 then contentVisible .. "/" .. p6 else contentVisible
+				
+				if var1 == t then
+					if t_1[var4] then return end
+					t_1[var4] = true
+					local var5 = var2
+					
+					if var5 and not loadingMilestoneTrackerModule.recordMilestone(var5, contentVisible, p2) then
+						var1 = nil
+						var2 = nil
+						
+						if var2 then
+							local _ = loadingMilestoneTrackerModule.discardMilestoneTracker(var2)
+						end
+						loadingMilestoneTelemetryModule.countMilestonesOutcome(t_2, outcome.InstrumentationError)
+					end
+				end
+			end,
+			record = function(p2)
+				-- upvalues: var1 (copy), t (write), t_1 (ref), var2 (write), loadingMilestoneTrackerModule (copy), outcome (copy), loadingMilestoneTelemetryModule (copy), t_2 (write)
+				if var1 == t then
+					if t_1[p2] then return end
+					t_1[p2] = true
+					local var4 = var2
+					
+					if var4 and not loadingMilestoneTrackerModule.recordMilestone(var4, p2, nil) then
+						var1 = nil
+						var2 = nil
+						
+						if var2 then
+							local _ = loadingMilestoneTrackerModule.discardMilestoneTracker(var2)
+						end
+						loadingMilestoneTelemetryModule.countMilestonesOutcome(t_2, outcome.InstrumentationError)
 					end
 				end
 			end,
 			complete = function()
-				-- upvalues: var1 (copy), t (write), outcome (copy), var2 (write), loadingMilestoneTrackerModule (copy), var3 (write), t_2 (ref), milestone (copy), loadingMilestoneTelemetryModule (copy), t_3 (write)
+				-- upvalues: var1 (copy), t (write), outcome (copy), var2 (write), loadingMilestoneTrackerModule (copy), var3 (write), t_1 (ref), milestone (copy), text (ref), constantsModule (copy), loadingMilestoneTelemetryModule (copy), t_2 (write)
 				if var1 ~= t then return end
 				var1 = nil
 				local completed = outcome.Completed
 				
 				if var2 then
 					local completeMilestoneTracker = loadingMilestoneTrackerModule.completeMilestoneTracker
-					completeMilestoneTracker, var16 = completeMilestoneTracker(var2, var3 ~= nil and t_2[milestone.DismissStarted] == true)
+					local var4 = var3 ~= nil and t_1[milestone.DismissStarted] == true
+					completeMilestoneTracker, var19, var18 = completeMilestoneTracker(var2, var4, var3, text == "HoldOn" and var3 == constantsModule.DismissSource.NormalReady)
 					
-					if completeMilestoneTracker and var16 ~= nil and var3 then
-						completeMilestoneTracker = loadingMilestoneTelemetryModule.reportAddedWait(t_3, var16, var3)
+					if completeMilestoneTracker and var19 ~= nil and var3 then
+						completeMilestoneTracker = loadingMilestoneTelemetryModule.reportAddedWait(t_2, var19, var3)
+					end
+					if completeMilestoneTracker and t_1[milestone.ScreenVisible] and t_1[milestone.DismissStarted] then
+						completeMilestoneTracker = loadingMilestoneTelemetryModule.reportContentVisibility(t_2, t_1[milestone.ContentVisible .. "/" .. constantsModule.ContentId.Title] == true, t_1[milestone.ContentVisible .. "/" .. constantsModule.ContentId.Creator] == true, t_1[milestone.ContentVisible .. "/" .. constantsModule.ContentId.Thumbnail] == true)
+					end
+					if completeMilestoneTracker and var4 ~= nil then
+						completeMilestoneTracker = loadingMilestoneTelemetryModule.reportHoldGateHit(t_2, var4)
 					end
 					if not completeMilestoneTracker then
 						var2 = nil
@@ -111,14 +155,14 @@ return {
 					end
 				end
 				var2 = nil
-				loadingMilestoneTelemetryModule.countMilestonesOutcome(t_3, completed)
+				loadingMilestoneTelemetryModule.countMilestonesOutcome(t_2, completed)
 			end,
 			abort = function(p2)
-				-- upvalues: var1 (copy), t (write), var2 (write), loadingMilestoneTrackerModule (copy), outcome (copy), loadingMilestoneTelemetryModule (copy), t_3 (write)
+				-- upvalues: var1 (copy), t (write), var2 (write), loadingMilestoneTrackerModule (copy), outcome (copy), loadingMilestoneTelemetryModule (copy), t_2 (write)
 				if var1 == t then
 					var1 = nil
 					var2 = nil
-					loadingMilestoneTelemetryModule.countMilestonesOutcome(t_3, if if var2 then loadingMilestoneTrackerModule.discardMilestoneTracker(var2) else true then p2 else outcome.InstrumentationError)
+					loadingMilestoneTelemetryModule.countMilestonesOutcome(t_2, if if var2 then loadingMilestoneTrackerModule.discardMilestoneTracker(var2) else true then p2 else outcome.InstrumentationError)
 					
 					return
 				end

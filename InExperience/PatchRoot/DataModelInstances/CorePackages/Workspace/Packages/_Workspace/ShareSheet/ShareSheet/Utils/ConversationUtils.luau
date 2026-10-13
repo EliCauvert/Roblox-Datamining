@@ -1,4 +1,4 @@
-﻿local _ = require(script:FindFirstAncestor("ShareSheet").Parent.AppChat.GetConversationListStore)
+﻿local _ = require(script:FindFirstAncestor("ShareSheet").Types)
 
 return {
 	getDisplayName = function(p1)

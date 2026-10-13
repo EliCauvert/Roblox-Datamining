@@ -12,9 +12,7 @@ local usePageSideMargin = collectionViewsModule.usePageSideMargin
 local collectionItemSize = collectionViewsModule.CollectionViewTypes.CollectionItemSize
 local useLocalization = localizationModule.Hooks.useLocalization
 local tileComponentsModule = require(socialCarousel.Common.TileComponents)
-local enumsModule = require(socialCarousel.Common.Enums)
-local tile = enumsModule.Tile
-local marqueePlayStatus = enumsModule.MarqueePlayStatus
+local tile = require(socialCarousel.Common.Enums).Tile
 local constantsModule = require(socialCarousel.Common.Constants)
 local useSocialCarouselContextModule = require(socialCarousel.Contexts.useSocialCarouselContext)
 local useColdStartLayoutReadyModule = require(socialCarousel.Hooks.useColdStartLayoutReady)
@@ -46,10 +44,33 @@ local function _(p1, p2)
 	return if p1 == true then p2 ~= nil else true
 end
 
+local _ = function(p1)
+	-- upvalues: robloxAppEnumsModule (write)
+	return if robloxAppEnumsModule == nil then false elseif p1 ~= robloxAppEnumsModule.DeviceType.Phone then p1 == robloxAppEnumsModule.DeviceType.Tablet else true
+end
+
+local _ = function(p1, p2, p3)
+	-- upvalues: robloxAppEnumsModule (write)
+	return if robloxAppEnumsModule == nil then false else p1 == robloxAppEnumsModule.DeviceType.Desktop and (p2 == true and p3 == nil)
+end
+
+local _ = function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
+	-- upvalues: tile (ref)
+	if p1 == tile.Friend and p3 ~= nil then
+		return if p3[p2] ~= true then if p4 then "Paused" else "Playing" else "Idle", if p9 then p6 else nil, p5, if p10 then p7 else nil, if p10 then p8 else nil
+	end
+	return nil, nil, nil, nil, nil
+end
+
+local _ = function(p1)
+	-- upvalues: fFlagSocialCarouselInGameTitleMarquee (ref)
+	return if fFlagSocialCarouselInGameTitleMarquee then p1 else nil
+end
+
 local t = {}
 
 return function(p1)
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), fixCarouselTileSizeScaling (ref), useTokens (ref), useSocialCarouselContextModule (ref), useTilesSeenCollectionModule (ref), reactModule (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule (ref), useLocalization (ref), usePageSideMargin (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), useCollectionLayout (ref), fFlagSocialCarouselFixColdStartJitterModule (ref), robloxAppHooksModule (ref), useColdStartLayoutReadyModule (ref), fFlagSocialCarouselInGameTitleMarquee (ref), foundationModule (ref), robloxAppEnumsModule (write), useNavigationFocus (write), tile (ref), marqueeTextMotionModule (write), collectionViewsModule (ref), useMarqueeActiveTiles (write), marqueePlayStatus (ref), tileComponentsModule (ref), t (ref), collectionCarousel (ref), fFlagLuaAppFriendsSortHeaderByPosition (ref), fFlagFlyoutHideFriendsHeaderModule (ref), fFlagEnableFlyoutFriendsHeaderFix (ref), flyoutSidePanelIXP (ref)
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), fixCarouselTileSizeScaling (ref), useTokens (ref), useSocialCarouselContextModule (ref), useTilesSeenCollectionModule (ref), reactModule (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule (ref), useLocalization (ref), usePageSideMargin (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), useCollectionLayout (ref), fFlagSocialCarouselFixColdStartJitterModule (ref), robloxAppHooksModule (ref), useColdStartLayoutReadyModule (ref), fFlagSocialCarouselInGameTitleMarquee (ref), foundationModule (ref), robloxAppEnumsModule (write), useNavigationFocus (write), tile (ref), marqueeTextMotionModule (write), collectionViewsModule (ref), useMarqueeActiveTiles (write), tileComponentsModule (ref), t (ref), collectionCarousel (ref), fFlagLuaAppFriendsSortHeaderByPosition (ref), fFlagFlyoutHideFriendsHeaderModule (ref), fFlagEnableFlyoutFriendsHeaderFix (ref), flyoutSidePanelIXP (ref)
 	local var1
 	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p1.appCompositionEnabled
 	local var2 = if fixCarouselTileSizeScaling then useTokens() else nil
@@ -131,15 +152,21 @@ return function(p1)
 	local activeByIndex = nil
 	local isPaused = false
 	local onMarqueeFinished = nil
+	local onMarqueeHover = nil
+	local onMarqueeHoverEnd = nil
 	local marqueeRunId = nil
+	local var21 = false
+	local var22 = false
 	
 	if fFlagSocialCarouselInGameTitleMarquee then
-		local var21 = robloxAppHooksModule.useDeviceType()
+		local var23 = robloxAppHooksModule.useDeviceType()
 		local reducedMotion = foundationModule.Hooks.usePreferences().reducedMotion
-		local var22 = if var21 ~= robloxAppEnumsModule.DeviceType.Phone then var21 == robloxAppEnumsModule.DeviceType.Tablet else true
-		local var23 = if useNavigationFocus() == true then var3.openGameJoinCardUserId ~= nil else true
+		local var24 = if robloxAppEnumsModule == nil then false elseif var23 ~= robloxAppEnumsModule.DeviceType.Phone then var23 == robloxAppEnumsModule.DeviceType.Tablet else true
+		local var25 = useNavigationFocus()
+		local var26 = if var25 == true then var3.openGameJoinCardUserId ~= nil else true
+		local var27 = if robloxAppEnumsModule == nil then false else var23 == robloxAppEnumsModule.DeviceType.Desktop and (var25 == true and var3.openGameJoinCardUserId == nil)
 		local tiles = var3.tiles
-		local var24 = reactModule.useMemo(function()
+		local var28 = reactModule.useMemo(function()
 			-- upvalues: tiles (ref), tile (copy)
 			local t = {}
 			
@@ -160,25 +187,30 @@ return function(p1)
 			end
 			return t
 		end, { tiles })
-		local var25 = marqueeTextMotionModule.textDirectionFromLocale(game:GetService("LocalizationService").RobloxLocaleId)
-		local var26 = if var5 then var5.AbsoluteSize.X else 0
-		local var27 = if fFlagLuaAppCompositionAlways_1 then var14.gutter else var13.columnGap
-		local var28 = if fFlagLuaAppCompositionAlways_1 then 0 else var13.sideMargin
-		local var29 = if fFlagSocialCarouselFixColdStartJitterModule and not var16 then 0 elseif isLoading then (var15 or 5) + 1 elseif var3.tiles then #var3.tiles else 0
-		local var30 = useMarqueeActiveTiles(var7, {
+		local var29 = marqueeTextMotionModule.textDirectionFromLocale(game:GetService("LocalizationService").RobloxLocaleId)
+		local var30 = if var5 then var5.AbsoluteSize.X else 0
+		local var31 = if fFlagLuaAppCompositionAlways_1 then var14.gutter else var13.columnGap
+		local var32 = if fFlagLuaAppCompositionAlways_1 then 0 else var13.sideMargin
+		local var33 = if fFlagSocialCarouselFixColdStartJitterModule and not var16 then 0 elseif isLoading then (var15 or 5) + 1 elseif var3.tiles then #var3.tiles else 0
+		local var34 = useMarqueeActiveTiles(var7, {
 			tileCount = if isLoading or not var3.tiles then 0 else #var3.tiles,
-			containerWidth = math.max(0, var26 - 2 * (var28 or 0)),
-			tileWidth = if var15 > 0 and var26 > 0 then collectionViewsModule.calculateItemWidth(var15, var27 or 0, var28 or 0, var26, (if (var15 or 0) < math.min(var13.maxTilesToShow or var29, var29) then if fFlagLuaAppCompositionAlways_1 then 0 else var13.fractionalItemAmount or 0 else 0) or 0, (if fFlagLuaAppCompositionAlways_1 then var14.carouselPeek else 0) or 0) else 0,
-			columnGap = var27 or 0,
-			tiles = var24,
-			direction = var25,
+			containerWidth = math.max(0, var30 - 2 * (var32 or 0)),
+			tileWidth = if var15 > 0 and var30 > 0 then collectionViewsModule.calculateItemWidth(var15, var31 or 0, var32 or 0, var30, (if (var15 or 0) < math.min(var13.maxTilesToShow or var33, var33) then if fFlagLuaAppCompositionAlways_1 then 0 else var13.fractionalItemAmount or 0 else 0) or 0, (if fFlagLuaAppCompositionAlways_1 then var14.carouselPeek else 0) or 0) else 0,
+			columnGap = var31 or 0,
+			tiles = var28,
+			direction = var29,
 			reducedMotion = reducedMotion,
-			idleSequenceEnabled = var22
+			idleSequenceEnabled = var24,
+			hoverEnabled = var27
 		})
-		activeByIndex = var30.activeByIndex
-		isPaused = var30.isPaused or var23
-		onMarqueeFinished = var30.onMarqueeFinished
-		marqueeRunId = var30.marqueeRunId
+		activeByIndex = var34.activeByIndex
+		isPaused = var34.isPaused or var26
+		onMarqueeFinished = var34.onMarqueeFinished
+		onMarqueeHover = var34.onMarqueeHover
+		onMarqueeHoverEnd = var34.onMarqueeHoverEnd
+		marqueeRunId = var34.marqueeRunId
+		var21 = var24
+		var22 = var27
 	end
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		UIPadding = reactModule.createElement("UIPadding", {
@@ -204,29 +236,65 @@ return function(p1)
 				return t
 			end, { var15 }) else var3.tiles,
 			renderItem = reactModule.useCallback(function(p2, p3, p4)
-				-- upvalues: selectionOrderBase (ref), fFlagSocialCarouselInGameTitleMarquee (copy), tile (copy), activeByIndex (write), marqueePlayStatus (copy), isPaused (write), onMarqueeFinished (write), marqueeRunId (write), tileComponentsModule (copy), p1 (ref)
-				local var25 = if selectionOrderBase then selectionOrderBase + p3 else nil
-				local var26 = nil
-				local var27 = nil
-				local var28 = nil
+				-- upvalues: selectionOrderBase (ref), fFlagSocialCarouselInGameTitleMarquee (copy), activeByIndex (write), isPaused (write), marqueeRunId (write), onMarqueeFinished (write), onMarqueeHover (write), onMarqueeHoverEnd (write), var21 (write), var22 (write), tile (copy), tileComponentsModule (copy), p1 (ref)
+				local var29 = if selectionOrderBase then selectionOrderBase + p3 else nil
+				local var30 = nil
+				local var31 = nil
+				local var32 = nil
+				local var33 = nil
+				local var34 = nil
 				
-				if fFlagSocialCarouselInGameTitleMarquee and p2.tileType == tile.Friend and activeByIndex then
-					var26 = if activeByIndex[p3] ~= true then if isPaused then marqueePlayStatus.Paused else marqueePlayStatus.Playing else marqueePlayStatus.Idle
-					var27 = onMarqueeFinished
-					var28 = marqueeRunId
+				if fFlagSocialCarouselInGameTitleMarquee then
+					local var35, var36, var37, var38, var39
+					local tileType = p2.tileType
+					local var40 = activeByIndex
+					local var41 = isPaused
+					local var42 = marqueeRunId
+					local var43 = onMarqueeFinished
+					local var44 = onMarqueeHover
+					local var45 = onMarqueeHoverEnd
+					local var46 = var21
+					local var47 = var22
+					
+					if tileType == tile.Friend and var40 ~= nil then
+						local var48 = if var40[p3] ~= true then if var41 then "Paused" else "Playing" else "Idle"
+						local var49 = if var46 then var43 else nil
+						local var50 = if var47 then var44 else nil
+						local var51 = if var47 then var45 else nil
+						var35 = var48
+						var36 = var49
+						var37 = var42
+						var38 = var50
+						var39 = var51
+					else
+						var35 = nil
+						var36 = nil
+						var37 = nil
+						var38 = nil
+						var39 = nil
+					end
+					var30 = var35
+					var31 = var36
+					var32 = var37
+					var33 = var38
+					var34 = var39
 				end
-				return tileComponentsModule[p2.tileType](p2, p3, p4, var25, function(p5, p6)
+				return tileComponentsModule[p2.tileType](p2, p3, p4, var29, function(p5, p6)
 					-- upvalues: p1 (copy), p2 (ref)
 					if p1.onTileContentChanged then
 						p1.onTileContentChanged(p5, p6, p2)
 					end
-				end, var26, var27, var28), p2.tileType
+				end, if fFlagSocialCarouselInGameTitleMarquee then var30 else nil, if fFlagSocialCarouselInGameTitleMarquee then var31 else nil, if fFlagSocialCarouselInGameTitleMarquee then var32 else nil, if fFlagSocialCarouselInGameTitleMarquee then var33 else nil, if fFlagSocialCarouselInGameTitleMarquee then var34 else nil), p2.tileType
 			end, {
 				selectionOrderBase, p1.onTileContentChanged,
 				if fFlagSocialCarouselInGameTitleMarquee then activeByIndex else nil,
 				if fFlagSocialCarouselInGameTitleMarquee then isPaused else nil,
 				if fFlagSocialCarouselInGameTitleMarquee then onMarqueeFinished else nil,
-				if fFlagSocialCarouselInGameTitleMarquee then marqueeRunId else nil
+				if fFlagSocialCarouselInGameTitleMarquee then marqueeRunId else nil,
+				if fFlagSocialCarouselInGameTitleMarquee then onMarqueeHover else nil,
+				if fFlagSocialCarouselInGameTitleMarquee then onMarqueeHoverEnd else nil,
+				if fFlagSocialCarouselInGameTitleMarquee then var21 else nil,
+				if fFlagSocialCarouselInGameTitleMarquee then var22 else nil
 			}),
 			getItemHeight = var20,
 			collectionItemSize = if fFlagLuaAppCompositionAlways_1 then collectionItemSize.XSmall else nil,
@@ -243,17 +311,17 @@ return function(p1)
 				end
 				if var3.tiles and var5 and (var7.current and var9.current) then
 					local absoluteSize = var5.AbsoluteSize
-					local var25 = absoluteSize.X / var15
+					local var29 = absoluteSize.X / var15
 					local x = var7.current.CanvasPosition.X
-					local maxValue = math.max(1, math.floor(x / var25) + 1)
-					local minValue = math.min(#var3.tiles, math.ceil((x + absoluteSize.X) / var25))
+					local maxValue = math.max(1, math.floor(x / var29) + 1)
+					local minValue = math.min(#var3.tiles, math.ceil((x + absoluteSize.X) / var29))
 					var8.current = { startIndex = maxValue, endIndex = minValue }
 					
 					for i = maxValue, minValue do
-						local var26 = var3.tiles[i]
+						local var30 = var3.tiles[i]
 						
-						if var26 and var26.id then
-							var4.addTileToCollection(var26.id, i, var26)
+						if var30 and var30.id then
+							var4.addTileToCollection(var30.id, i, var30)
 						end
 					end
 				end

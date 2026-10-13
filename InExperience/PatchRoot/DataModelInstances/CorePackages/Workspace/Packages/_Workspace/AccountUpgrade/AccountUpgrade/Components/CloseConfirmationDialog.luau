@@ -19,10 +19,10 @@ return function(p1)
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
 	})
 	local var3 = useLocalization({
-		titleText = "Authentication.SignUp.Header.CloseWithoutFinishing",
+		titleText = "Authentication.SignUp.Header.CancelAccountCreation",
 		bodyText = "Authentication.SignUp.Subtitle.YoureAlmostThere",
-		backText = "CommonUI.Controls.Action.Back",
-		closeText = "CommonUI.Features.Action.Close"
+		continueSetupText = "Authentication.SignUp.Action.ContinueSetup",
+		cancelText = "Authentication.SignUp.Action.Cancel"
 	})
 	local var4, var5 = reactModule.useState(false)
 	local var6 = reactModule.useRef(false)
@@ -57,7 +57,7 @@ return function(p1)
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var3.backText,
+					text = var3.continueSetupText,
 					variant = buttonVariant.Emphasis,
 					onActivated = reactModule.useCallback(function()
 						-- upvalues: var6 (ref), onBack (ref)
@@ -68,7 +68,7 @@ return function(p1)
 					isDisabled = var4
 				},
 				{
-					text = var3.closeText,
+					text = var3.cancelText,
 					variant = buttonVariant.Standard,
 					onActivated = reactModule.useCallback(function()
 						-- upvalues: var6 (ref), var5 (ref), onSignOut (ref)

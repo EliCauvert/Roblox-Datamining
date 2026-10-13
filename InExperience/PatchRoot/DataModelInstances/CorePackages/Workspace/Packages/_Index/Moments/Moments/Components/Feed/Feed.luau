@@ -14,7 +14,6 @@ local momentsSurfaceLoadManager = momentsCommonModule.Performance.MomentsSurface
 local fFlagMomentsRemoveDeletedFromProfile = sharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
 local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local fFlagMomentsFeedMediaLoadAttemptedEvent = momentsCommonModule.Flags.FFlagMomentsFeedMediaLoadAttemptedEvent
-local fFlagMomentsFeedHealthAnalytics = momentsCommonModule.Flags.FFlagMomentsFeedHealthAnalytics
 local fFlagMomentsMediaSmoothnessTelemetry = momentsCommonModule.Flags.FFlagMomentsMediaSmoothnessTelemetry
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
@@ -121,7 +120,7 @@ local _ = function()
 end
 
 return function(p1)
-	-- upvalues: var2 (ref), fFlagMomentsComments (ref), var1 (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), useLocalization (ref), t (ref), useMomentsSession (ref), getToastStoreModule (ref), reactModule (ref), getFeedScrollLimitModule (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), getFFlagMomentsNonInfiniteScroll (ref), getMomentsCapabilities (ref), createFeedStoreModule (ref), feedItemDedupeKey (ref), fFlagMomentsMediaSmoothnessTelemetry (ref), fFlagMomentsNavigationEventModule (ref), logMomentViewBeganModule (ref), moments (ref), fireAnalyticsEvent (ref), eventNames (ref), logFeedEndStateReachedModule (ref), useFeedTelemetryModule (ref), feedItemAttribution (ref), fFlagMomentsOptimisticProfilePending (ref), momentsSurfaceLoadManager (ref), fFlagMomentsFeedHealthAnalytics (ref), feedItemRegistryModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), deleteMomentModule (ref), var3 (write), parent (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref), makeFeedActionFieldsModule (ref), fFlagMomentsFixDeleteToastCopyModule (ref), makeMediaLoadEventFields (ref), analytics (ref), fFlagMomentsFeedMediaLoadAttemptedEvent (ref), feedContext (ref), verticalPager (ref), renderFeedItem (ref), feedItemKey (ref), feedStateViewModule (ref), feedNavigationBarModule (ref), immersiveChromeControllerModule (ref), swipeLatencyTrackerModule (ref), deletionConfirmationDialogModule (ref), momentMediaCoordinatorProviderModule (ref), surfaceReadyTrackerModule (ref)
+	-- upvalues: var2 (ref), fFlagMomentsComments (ref), var1 (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), useLocalization (ref), t (ref), useMomentsSession (ref), getToastStoreModule (ref), reactModule (ref), getFeedScrollLimitModule (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), getFFlagMomentsNonInfiniteScroll (ref), getMomentsCapabilities (ref), createFeedStoreModule (ref), feedItemDedupeKey (ref), fFlagMomentsMediaSmoothnessTelemetry (ref), fFlagMomentsNavigationEventModule (ref), logMomentViewBeganModule (ref), moments (ref), fireAnalyticsEvent (ref), eventNames (ref), logFeedEndStateReachedModule (ref), useFeedTelemetryModule (ref), feedItemAttribution (ref), fFlagMomentsOptimisticProfilePending (ref), momentsSurfaceLoadManager (ref), feedItemRegistryModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), deleteMomentModule (ref), var3 (write), parent (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref), makeFeedActionFieldsModule (ref), fFlagMomentsFixDeleteToastCopyModule (ref), makeMediaLoadEventFields (ref), analytics (ref), fFlagMomentsFeedMediaLoadAttemptedEvent (ref), feedContext (ref), verticalPager (ref), renderFeedItem (ref), feedItemKey (ref), feedStateViewModule (ref), feedNavigationBarModule (ref), immersiveChromeControllerModule (ref), swipeLatencyTrackerModule (ref), deletionConfirmationDialogModule (ref), momentMediaCoordinatorProviderModule (ref), surfaceReadyTrackerModule (ref)
 	local source = p1.source
 	local var4 = p1.active ~= nil or p1.active
 	local var5 = if p1.playbackActive ~= nil then var4 else p1.playbackActive
@@ -360,8 +359,7 @@ return function(p1)
 	end, { var35 })
 	local var42 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagMomentsFeedHealthAnalytics (copy), var35 (ref), var42 (ref), fireAnalyticsEvent (copy), eventNames (copy), source (ref), var17 (ref)
-		if not fFlagMomentsFeedHealthAnalytics then return end
+		-- upvalues: var35 (ref), var42 (ref), fireAnalyticsEvent (copy), eventNames (copy), source (ref), var17 (ref)
 		if var35 ~= var42.current then
 			if var35 == "Failed" then
 				fireAnalyticsEvent(eventNames.FeedLoadFailed, {
@@ -380,8 +378,7 @@ return function(p1)
 	end, { var35 })
 	local var43 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagMomentsFeedHealthAnalytics (copy), var38 (ref), var43 (ref), var17 (ref), feedItemRegistryModule (copy), fireAnalyticsEvent (copy), eventNames (copy), source (ref)
-		if not fFlagMomentsFeedHealthAnalytics then return end
+		-- upvalues: var38 (ref), var43 (ref), var17 (ref), feedItemRegistryModule (copy), fireAnalyticsEvent (copy), eventNames (copy), source (ref)
 		if var38 and not var43.current then
 			local var44
 			local var45 = var17.pager.getItems(false)[var17.pager.getCurrentIndex(false)]

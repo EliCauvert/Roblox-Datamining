@@ -14,12 +14,13 @@ local useGetAdCampaignsModule = require(buildExperience.Components.Ads.useGetAdC
 local adUpsellPublishUtilsModule = require(script.Parent.adUpsellPublishUtils)
 local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
 local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
+local fFlagBuildAdsNotificationRouting = require(parent.SharedFlags).FFlagBuildAdsNotificationRouting
 local useAdsCampaignDeepLinkModule = require(buildExperience.Components.Ads.useAdsCampaignDeepLink)
 local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
 local var1 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
 
 return function(p1)
-	-- upvalues: getAdUpsellEventStoreModule (ref), signalsReactModule (ref), reactModule (ref), useGetAdCampaignEligibilityModule (ref), adCampaignEligibilityUtilsModule (ref), useCreateAdCampaignModule (ref), fFlagEnablePaidAdsModule (ref), useGetAdCampaignsModule (ref), adCampaignScheduleUtilsModule (ref), fFlagBuildAdUpsellModule (ref), useAdsCampaignDeepLinkModule (ref), buildAppStorageKeyEngineFeature (ref), var1 (ref), adUpsellPublishUtilsModule (ref), sendBuildExperienceEventModule (ref)
+	-- upvalues: getAdUpsellEventStoreModule (ref), signalsReactModule (ref), reactModule (ref), useGetAdCampaignEligibilityModule (ref), adCampaignEligibilityUtilsModule (ref), useCreateAdCampaignModule (ref), fFlagEnablePaidAdsModule (ref), useGetAdCampaignsModule (ref), adCampaignScheduleUtilsModule (ref), fFlagBuildAdUpsellModule (ref), useAdsCampaignDeepLinkModule (ref), fFlagBuildAdsNotificationRouting (ref), buildAppStorageKeyEngineFeature (ref), var1 (ref), adUpsellPublishUtilsModule (ref), sendBuildExperienceEventModule (ref)
 	local var2 = getAdUpsellEventStoreModule(false)
 	local var3 = signalsReactModule.useSignalState(var2.getRevision)
 	local var4 = reactModule.useRef(nil)
@@ -58,6 +59,7 @@ return function(p1)
 		sessionId = p1.sessionId,
 		isPageVisible = p1.isPageVisible,
 		eligibilityStore = p1.eligibilityStore,
+		canPresent = if fFlagBuildAdsNotificationRouting then not isCreatePending and not var17 else nil,
 		onOpen = function(p2)
 			-- upvalues: var10 (ref), isCreatePending (ref), var17 (ref), var24 (ref)
 			if var10 or isCreatePending or var17 then

@@ -8,8 +8,8 @@ local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local expChatSharedModule = require(parent.ExpChatShared)
 local focusUtils = require(parent.Chrome).FocusUtils
-local chatTabNavigationSignal = require(parent.ChatUIPrimitives).chatTabNavigationSignal
 local useFocusInputBar = require(parent.ChatUIPrimitives).Hooks.useFocusInputBar
+local useInputBarTabNavigation = require(parent.ChatUIPrimitives).Hooks.useInputBarTabNavigation
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
 local IXPServiceWrapper = require(parent.IxpServiceWrapper).IXPServiceWrapper
 local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
@@ -248,7 +248,7 @@ return reactModule.memo(localizationModule.connect(function(p4)
 	end
 	return { targetTextChannelDisplayName = list }
 end)(function(p5)
-	-- upvalues: reactModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStoreModule (ref), expChatMainInputBarClickAnalytics (ref), fFlagExpChatDictation_1 (ref), useSendTelemetryModule (ref), reactFocusNavigationModule (ref), signalsReactModule (ref), var2 (ref), getMessagesStoreModule (ref), fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), fFlagExpChatTabShortcutNav (ref), useFocusInputBar (ref), chatTabNavigationSignal (ref), signalsModule (ref), textChatService (ref), var5 (write), autocompleteTextModule (ref), initializeCommandsModule (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), var4 (write), initializeEmojisModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), var6 (write), initializeGlobalCommandsModule (ref), initialCommandsModule (ref), var1 (ref), fFlagExpChatDictation (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), guiService (ref), fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (ref), usePresetAutocompleteAnalyticsModule (ref), presetSearchModule (ref), var3 (ref), sendPresetModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), presetEntryTextModule (ref), expChatDoNotSetCursorPosition (ref), expChatPresetChatIXPExposure (ref), IXPServiceWrapper (ref), expChatPresetChatIXPLayerName (ref), fFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), playersService (ref), fFlagEnableConsoleExpControls (ref), fFlagChromeChatGamepadSupportFix (ref), onChatInputBarFocusLost (ref), actionBindableEvent (ref), useEffectChatInputBarFocus (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), expChatPresetAutocompleteSearchVariants (ref), expChatPresetChatAutocompleteExperimentation (ref), sortCommandResultsCallbackModule (ref), sortEmojiResultsCallbackModule (ref), list (ref), var7 (write), RBXTeamCommand (ref), var8 (write), RBXWhisperCommand (ref), chatOptimizeCommandProcessing (ref), autoCastCommand (ref), promiseModule (ref), useCursor (ref), expChatDictationIXPExposure (ref), expChatDictationIXPLayerName (ref), expChatPresetAutocompleteIxpEnabled (ref), expChatPresetAutocompleteIxpLayer (ref), fFlagExpChatPresetChatSendEnabled (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatNewInputBarModule (ref), autocompleteDropdownModule (ref), setTransparency (ref), fFlagExpChatNewInputBarDictationModule (ref), chatInputBarV2DictationModule (ref), chatInputBarV2Module (ref), dictationInputBarModule (ref), channelChipModule (ref), imageSetLabel (ref), images (ref)
+	-- upvalues: reactModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStoreModule (ref), expChatMainInputBarClickAnalytics (ref), fFlagExpChatDictation_1 (ref), useSendTelemetryModule (ref), reactFocusNavigationModule (ref), signalsReactModule (ref), var2 (ref), getMessagesStoreModule (ref), fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), fFlagExpChatTabShortcutNav (ref), useFocusInputBar (ref), useInputBarTabNavigation (ref), signalsModule (ref), textChatService (ref), var5 (write), autocompleteTextModule (ref), initializeCommandsModule (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), var4 (write), initializeEmojisModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), var6 (write), initializeGlobalCommandsModule (ref), initialCommandsModule (ref), var1 (ref), fFlagExpChatDictation (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), guiService (ref), fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (ref), usePresetAutocompleteAnalyticsModule (ref), presetSearchModule (ref), var3 (ref), sendPresetModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), presetEntryTextModule (ref), expChatDoNotSetCursorPosition (ref), expChatPresetChatIXPExposure (ref), IXPServiceWrapper (ref), expChatPresetChatIXPLayerName (ref), fFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), playersService (ref), fFlagEnableConsoleExpControls (ref), fFlagChromeChatGamepadSupportFix (ref), onChatInputBarFocusLost (ref), actionBindableEvent (ref), useEffectChatInputBarFocus (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), expChatPresetAutocompleteSearchVariants (ref), expChatPresetChatAutocompleteExperimentation (ref), sortCommandResultsCallbackModule (ref), sortEmojiResultsCallbackModule (ref), list (ref), var7 (write), RBXTeamCommand (ref), var8 (write), RBXWhisperCommand (ref), chatOptimizeCommandProcessing (ref), autoCastCommand (ref), promiseModule (ref), useCursor (ref), expChatDictationIXPExposure (ref), expChatDictationIXPLayerName (ref), expChatPresetAutocompleteIxpEnabled (ref), expChatPresetAutocompleteIxpLayer (ref), fFlagExpChatPresetChatSendEnabled (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatNewInputBarModule (ref), autocompleteDropdownModule (ref), setTransparency (ref), fFlagExpChatNewInputBarDictationModule (ref), chatInputBarV2DictationModule (ref), chatInputBarV2Module (ref), dictationInputBarModule (ref), channelChipModule (ref), imageSetLabel (ref), images (ref)
 	local var11 = reactModule.useRef("")
 	
 	if fFlagExpChatUseUnifiedTooltipStore then
@@ -306,45 +306,28 @@ end)(function(p5)
 	end, {
 		if p5.chatInputBarSettings.TextBox ~= nil then "nil" else p5.chatInputBarSettings.TextBox
 	})
-	local var43 = if fFlagExpChatTabShortcutNav then useFocusInputBar(if p5.chatInputBarSettings.TextBox ~= nil then var29 else var30).focus else nil
+	local focus = nil
+	
+	if fFlagExpChatTabShortcutNav then
+		local var43 = if p5.chatInputBarSettings.TextBox ~= nil then var29 else var30
+		focus = useFocusInputBar(var43).focus
+		useInputBarTabNavigation(var43, p5.userInputService)
+	end
 	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), var23 (ref), p5 (ref), var30 (ref), var29 (ref), chatTabNavigationSignal (copy)
-		if fFlagExpChatTabShortcutNav and var23 then
-			local inputBeganConnection = p5.userInputService.InputBegan:connect(function(p6)
-				-- upvalues: var30 (copy), var29 (copy), chatTabNavigationSignal (copy)
-				if p6.UserInputType ~= Enum.UserInputType.Keyboard then return end
-				if p6.KeyCode ~= Enum.KeyCode.Tab then return end
-				local current = var30.current or var29.current
-				
-				if current == nil or not current:IsFocused() then return end
-				if string.gsub(current.Text, "\t", "") == "" then
-					chatTabNavigationSignal:fire(if p6:IsModifierKeyDown(Enum.ModifierKey.Shift) then -1 else 1)
-					
-					return
-				end
-			end)
-			
-			return function()
-				-- upvalues: inputBeganConnection (ref)
-				inputBeganConnection:Disconnect()
-			end
-		end
-	end, { var23, p5.userInputService })
-	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), signalsModule (copy), var2 (copy), var43 (write)
+		-- upvalues: fFlagExpChatTabShortcutNav (copy), signalsModule (copy), var2 (copy), focus (write)
 		if fFlagExpChatTabShortcutNav then
 			return signalsModule.createEffect(function(p6)
-				-- upvalues: var2 (copy), var43 (copy)
+				-- upvalues: var2 (copy), focus (copy)
 				local chatInputBarFocusRequestTime = var2.getChatInputBarFocusRequestTime(p6)
 				
 				if chatInputBarFocusRequestTime == nil then return end
 				if os.clock() - chatInputBarFocusRequestTime <= 5 then
-					var43()
+					focus()
 				end
 				var2.clearChatInputBarFocusRequest()
 			end)
 		end
-	end, { var43 })
+	end, { focus })
 	reactModule.useEffect(function()
 		-- upvalues: p5 (ref), textChatService (copy), var5 (copy), autocompleteTextModule (copy), initializeCommandsModule (copy), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), var4 (copy), initializeEmojisModule (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var6 (copy), initializeGlobalCommandsModule (copy), initialCommandsModule (copy)
 		if not p5.autocompleteEnabled then return end
@@ -1039,110 +1022,95 @@ end)(function(p5)
 		end
 	end, {})
 	local var58 = reactModule.useCallback(function(p11)
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), var13 (ref), p5 (ref), var1 (copy), var12 (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), handleAutocomplete (ref), var36 (ref), chatOptimizeCommandProcessing (copy), var11 (ref), var7 (copy), autoCastCommand (copy), RBXTeamCommand (copy), var8 (copy), RBXWhisperCommand (copy), promiseModule (copy)
+		-- upvalues: p5 (ref), var13 (ref), var1 (copy), var12 (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), handleAutocomplete (ref), var36 (ref), chatOptimizeCommandProcessing (copy), var11 (ref), var7 (copy), autoCastCommand (copy), RBXTeamCommand (copy), var8 (copy), RBXWhisperCommand (copy), promiseModule (copy)
 		local text = p11.Text
 		
-		if fFlagExpChatTabShortcutNav then
-			local replaced = string.gsub(text, "\t", "")
+		if p5.autocompleteEnabled then
+			local var59 = p11.CursorPosition < #text + 1
 			
-			if replaced == text then
-				if p5.autocompleteEnabled then
-					local var59 = p11.CursorPosition < #text + 1
+			if string.find(text, "\r") then
+				local replaced = string.gsub(text, "\r", "")
+				p11.Text = replaced
+				var13(replaced)
+				
+				if var59 then
+					p11.CursorPosition -= 1
+				end
+				return
+			else
+				local substring = string.sub(text, p11.CursorPosition - 1, p11.CursorPosition - 1)
+				var1:trace("Input: {}", text)
+				local var60 = if utf8.len(text) then utf8.len(utf8.nfcnormalize(text)) else string.len(text)
+				
+				if var60 and p5.messageCharacterLimit < var60 then
+					var1:debug("Message is over the character limit of {}", tostring(p5.messageCharacterLimit))
+					p11.Text = var12
 					
-					if string.find(text, "\r") then
-						local replaced = string.gsub(text, "\r", "")
-						p11.Text = replaced
-						var13(replaced)
+					return
+				end
+				var13(text)
+				
+				if getEnableChatInputBarConfigurationAutocompleteEnabledModule() and p5.autocompleteEnabled then
+					handleAutocomplete(p11, text, substring)
+				end
+				var36.current = #text == 0 and var36.current
+				
+				if chatOptimizeCommandProcessing then
+					if string.sub(text, 1, 1) == "/" and p5.localPlayer and text ~= var11.current then
+						var11.current = text
+						local userId = p5.localPlayer.UserId
+						local t = {}
 						
-						if var59 then
-							p11.CursorPosition -= 1
+						if var7 and var7.Enabled then
+							table.insert(t, autoCastCommand(RBXTeamCommand, userId, text))
 						end
+						if var8 and var8.Enabled then
+							table.insert(t, autoCastCommand(RBXWhisperCommand, userId, text))
+						end
+						if #t == 0 then
+							t = { promiseModule.reject() }
+						end
+						promiseModule.any(t):andThen(function()
+							-- upvalues: p11 (ref), var13 (copy), var36 (copy)
+							p11.Text = ""
+							var13("")
+							var36.current = true
+						end):catch(function(p12)
+							-- upvalues: var1 (copy)
+							var1:trace("Could not send autoCastCommand. Error: {}", p12)
+						end)
+						
+						return
+					elseif string.sub(text, 1, 1) == "/" then
 						return
 					else
-						local substring = string.sub(text, p11.CursorPosition - 1, p11.CursorPosition - 1)
-						var1:trace("Input: {}", text)
-						local var60 = if utf8.len(text) then utf8.len(utf8.nfcnormalize(text)) else string.len(text)
+						var11.current = ""
 						
-						if var60 and p5.messageCharacterLimit < var60 then
-							var1:debug("Message is over the character limit of {}", tostring(p5.messageCharacterLimit))
-							p11.Text = var12
-							
-							return
-						end
-						var13(text)
-						
-						if getEnableChatInputBarConfigurationAutocompleteEnabledModule() and p5.autocompleteEnabled then
-							handleAutocomplete(p11, text, substring)
-						end
-						var36.current = #text == 0 and var36.current
-						
-						if chatOptimizeCommandProcessing then
-							if string.sub(text, 1, 1) == "/" and p5.localPlayer and text ~= var11.current then
-								var11.current = text
-								local userId = p5.localPlayer.UserId
-								local t = {}
-								
-								if var7 and var7.Enabled then
-									table.insert(t, autoCastCommand(RBXTeamCommand, userId, text))
-								end
-								if var8 and var8.Enabled then
-									table.insert(t, autoCastCommand(RBXWhisperCommand, userId, text))
-								end
-								if #t == 0 then
-									t = { promiseModule.reject() }
-								end
-								promiseModule.any(t):andThen(function()
-									-- upvalues: p11 (ref), var13 (copy), var36 (copy)
-									p11.Text = ""
-									var13("")
-									var36.current = true
-								end):catch(function(p12)
-									-- upvalues: var1 (copy)
-									var1:trace("Could not send autoCastCommand. Error: {}", p12)
-								end)
-								
-								return
-							elseif string.sub(text, 1, 1) == "/" then
-								return
-							else
-								var11.current = ""
-								
-								return
-							end
-						elseif p5.localPlayer then
-							local userId = p5.localPlayer.UserId
-							local t = {}
-							
-							if var7 and var7.Enabled then
-								table.insert(t, autoCastCommand(RBXTeamCommand, userId, text))
-							end
-							if var8 and var8.Enabled then
-								table.insert(t, autoCastCommand(RBXWhisperCommand, userId, text))
-							end
-							if #t == 0 then
-								t = { promiseModule.reject() }
-							end
-							promiseModule.any(t):andThen(function()
-								-- upvalues: p11 (ref), var13 (copy), var36 (copy)
-								p11.Text = ""
-								var13("")
-								var36.current = true
-							end):catch(function(p12)
-								-- upvalues: var1 (copy)
-								var1:trace("Could not send autoCastCommand. Error: {}", p12)
-							end)
-						end
+						return
 					end
+				elseif p5.localPlayer then
+					local userId = p5.localPlayer.UserId
+					local t = {}
+					
+					if var7 and var7.Enabled then
+						table.insert(t, autoCastCommand(RBXTeamCommand, userId, text))
+					end
+					if var8 and var8.Enabled then
+						table.insert(t, autoCastCommand(RBXWhisperCommand, userId, text))
+					end
+					if #t == 0 then
+						t = { promiseModule.reject() }
+					end
+					promiseModule.any(t):andThen(function()
+						-- upvalues: p11 (ref), var13 (copy), var36 (copy)
+						p11.Text = ""
+						var13("")
+						var36.current = true
+					end):catch(function(p12)
+						-- upvalues: var1 (copy)
+						var1:trace("Could not send autoCastCommand. Error: {}", p12)
+					end)
 				end
-			else
-				local cursorPosition = p11.CursorPosition
-				p11.Text = replaced
-				
-				if cursorPosition > 0 then
-					local _, replaced_1 = string.gsub(string.sub(text, 1, cursorPosition - 1), "\t", "")
-					p11.CursorPosition = cursorPosition - replaced_1
-				end
-				var13(replaced)
 			end
 		end
 	end)

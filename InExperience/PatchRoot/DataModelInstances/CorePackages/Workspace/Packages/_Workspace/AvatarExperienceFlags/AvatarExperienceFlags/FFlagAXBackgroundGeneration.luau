@@ -1,9 +1,9 @@
 ﻿local fFlagAXBackgroundsCustomizeHydrationModule_1
 local fFlagAXBackgroundsRootModule = require(script.Parent.FFlagAXBackgroundsRoot)
 local fFlagAXBackgroundsCustomizeHydrationModule = require(script.Parent.FFlagAXBackgroundsCustomizeHydration)
-local AXBackgroundGenerationBuildGate = game:DefineFastFlag("AXBackgroundGenerationBuildGate", false)
+local fFlagAXBackgroundGenerationResultActionButtonsModule = require(script.Parent.FFlagAXBackgroundGenerationResultActionButtons)
 
-if not game:DefineFastFlag("AXBackgroundGenerationV2", false) then
-	fFlagAXBackgroundsCustomizeHydrationModule_1 = AXBackgroundGenerationBuildGate and (fFlagAXBackgroundsRootModule and fFlagAXBackgroundsCustomizeHydrationModule)
+if not game:DefineFastFlag("AXBackgroundGenerationV2", false) and not game:DefineFastFlag("AXBackgroundGenerationBuildGate", false) then
+	fFlagAXBackgroundsCustomizeHydrationModule_1 = fFlagAXBackgroundGenerationResultActionButtonsModule and (fFlagAXBackgroundsRootModule and fFlagAXBackgroundsCustomizeHydrationModule)
 end
 return fFlagAXBackgroundsCustomizeHydrationModule_1

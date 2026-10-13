@@ -85,8 +85,8 @@ return function(p2)
 			pillClicked = p2.pillClicked,
 			resetPillClicked = p2.resetPillClicked,
 			useFoundationTextInput = p2.useFoundationTextInput,
-			foundationInputSize = inputSize.Medium,
-			foundationTitleSize = inputLabelSize.Medium,
+			foundationInputSize = p2.inputSize or inputSize.Medium,
+			foundationTitleSize = p2.titleSize or inputLabelSize.Medium,
 			foundationTitleIsBold = p2.isTitleBold,
 			contentGapOverride = p2.contentGap,
 			colorContentOverride = p2.colorContentOverride

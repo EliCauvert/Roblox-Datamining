@@ -9,7 +9,7 @@ local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
 local fetchConversationListPageToSignalsModule = require(parent.AppChat.fetchConversationListPageToSignals)
 local useExternalChatConversationEligibilityModule = require(parent.AppChat.useExternalChatConversationEligibility)
 local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
-local _ = require(script.Parent.ShareSheetSocialRow)
+local _ = require(shareSheet.Types)
 local useConversationList = appChatModule.Hooks.useConversationList
 
 local function getCompactConversations(p1, p2, p3, p4)

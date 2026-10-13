@@ -6,8 +6,8 @@
 	FoundationPopoverPluginOverlayMeasurement = "FoundationPopoverPluginOverlayMeasurement2",
 	FoundationProgressBarBetaUpdate = "FoundationProgressBarBetaUpdate2",
 	FoundationSliderBeta = "FoundationSliderBeta3",
-	FoundationSliderOffloadDraggingMath = "FoundationSliderOffloadDraggingMath2",
 	FoundationTooltipBeta = "FoundationTooltipBeta3",
+	FoundationUnifiedScrimScrolling = "FoundationUnifiedScrimScrolling2",
 	FoundationEducationalTooltipMinMediaWidth = "FoundationEducationalTooltipMinMediaWidth3",
 	FoundationEducationalTooltipRefresh = "FoundationEducationalTooltipRefresh2"
 }

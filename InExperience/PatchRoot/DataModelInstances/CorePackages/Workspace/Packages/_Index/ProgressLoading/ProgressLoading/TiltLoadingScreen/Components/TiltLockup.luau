@@ -9,8 +9,10 @@ local tiltKeyartModule = require(tiltLoadingScreen.Components.TiltKeyart)
 local verifiedBadgeModule = require(tiltLoadingScreen.Components.VerifiedBadge)
 local verifiedBadgeModule_1 = require(parent.VerifiedBadges.VerifiedBadge)
 local fFlagUnifyVerifiedBadgeComponent = require(parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
+local constantsModule = require(tiltLoadingScreen.Constants)
+local fFlagLoadingScreenMilestones = require(parent.SharedFlags).FFlagLoadingScreenMilestones
 local _ = require(tiltLoadingScreen.Types)
-local TILT_DEGREES = require(tiltLoadingScreen.Constants).KEYART.TILT_DEGREES
+local TILT_DEGREES = constantsModule.KEYART.TILT_DEGREES
 local t = {
 	keyart = {
 		rotation = reactModule.createBinding(TILT_DEGREES),
@@ -48,7 +50,7 @@ local _ = function(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), t (ref), reactModule (ref), view (ref), tiltKeyartModule (ref), text (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule_1 (ref), verifiedBadgeModule (ref)
+	-- upvalues: useTokens (ref), t (ref), fFlagLoadingScreenMilestones (ref), reactModule (ref), view (ref), tiltKeyartModule (ref), text (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule_1 (ref), verifiedBadgeModule (ref)
 	local var1 = useTokens()
 	local animation = p1.animation or t
 	local color3 = var1.Color.Content.Emphasis.Color3
@@ -89,6 +91,7 @@ return reactModule.memo(function(p1)
 			Transparency = 1 - math.clamp(p2, 0, 1)
 		}
 	end)
+	local thumbnailUrl = p1.thumbnailUrl or ""
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center gap-large size-full-0 auto-y",
@@ -99,7 +102,9 @@ return reactModule.memo(function(p1)
 			LayoutOrder = 1
 		}, {
 			Card = reactModule.createElement(tiltKeyartModule, {
-				thumbnailUrl = p1.thumbnailUrl or "",
+				key = if fFlagLoadingScreenMilestones then "Card_" .. thumbnailUrl else "Card",
+				thumbnailUrl = thumbnailUrl,
+				onThumbnailLoaded = p1.onThumbnailLoaded,
 				keyart = animation.keyart,
 				frame = animation.frame
 			}),

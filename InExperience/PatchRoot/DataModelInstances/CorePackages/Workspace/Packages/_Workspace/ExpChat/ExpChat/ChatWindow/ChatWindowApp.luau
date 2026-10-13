@@ -4,28 +4,34 @@ local getTransparencyStoreModule = require(expChat.Stores.GetTransparencyStore)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
 local fFlagExpChatGlobalTabDefaultModule = require(expChat.Flags.FFlagExpChatGlobalTabDefault)
 local roactModule = require(parent.Roact)
+local reactModule = require(parent.React)
 local roactRoduxModule = require(parent.RoactRodux)
+local cryoModule = require(parent.Cryo)
+local signalsReactModule = require(parent.SignalsReact)
 local list = require(parent.llama).List
 local expChatSharedModule = require(parent.ExpChatShared)
 local memoizeModule = require(expChat.memoize)
-local createEffect = require(parent.Signals).createEffect
+local signalsModule = require(parent.Signals)
+local createEffect = signalsModule.createEffect
 local fFlagExpChatEnableV2ChatWindowModule = require(expChat.Flags.FFlagExpChatEnableV2ChatWindow)
 local fFlagEnableVerifiedBadgeStore = require(parent.SharedFlags).FFlagEnableVerifiedBadgeStore
 local chatWindowMessageSourceModule = require(script.Parent.UI.ChatWindow.ChatWindowMessageSource)
+local fFlagExpChatUseChannelTabsStore = require(parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+local var1 = if fFlagExpChatUseChannelTabsStore then require(expChat.Stores.GetChannelTabsStore) else nil
 local expChatMoveMessagesStoreToInit = game:DefineFastFlag("ExpChatMoveMessagesStoreToInit", false)
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local fFlagExpChatMessagesStoreUseProxyModule = require(expChat.Flags.FFlagExpChatMessagesStoreUseProxy)
 
 local function readByMessageIdAsTable(p1, p2)
 	-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (ref)
-	local var1 = if p2 then p1.getByMessageId(p2) else p1.getByMessageId(false)
+	local var2 = if p2 then p1.getByMessageId(p2) else p1.getByMessageId(false)
 	
 	if not fFlagExpChatMessagesStoreUseProxyModule then
-		return var1
+		return var2
 	end
 	local t = {}
 	
-	for i, v in var1 do
+	for i, v in var2 do
 		t[i] = v
 	end
 	return t
@@ -37,7 +43,7 @@ chatWindowApp.defaultProps = {
 	messages = if fFlagExpChatEnableV2ChatWindowModule then nil else {},
 	size = UDim2.fromScale(1, 1)
 }
-local var2 = if getFFlagTextChatEnableUniverseChatTabs() then memoizeModule(function(p3, p4, p5, p6)
+local var3 = if getFFlagTextChatEnableUniverseChatTabs() then memoizeModule(function(p3, p4, p5, p6)
 	-- upvalues: list (ref), fFlagExpChatGlobalTabDefaultModule (ref)
 	if not p4 then
 		return list.map(p3.windowMessagesInOrder, function(p7)
@@ -45,16 +51,16 @@ local var2 = if getFFlagTextChatEnableUniverseChatTabs() then memoizeModule(func
 			return p3.byMessageId[p7]
 		end)
 	end
-	local var3 = p6
+	local var4 = p6
 	
 	if fFlagExpChatGlobalTabDefaultModule then
 		if p5 and p3.windowMessagesInOrderByTabId[p5.Name] and p6 ~= "RBXGlobal" then
-			var3 = p5.Name
+			var4 = p5.Name
 		end
 	elseif p5 and p3.windowMessagesInOrderByTabId[p5.Name] then
-		var3 = p5.Name
+		var4 = p5.Name
 	end
-	return if var3 then list.map(p3.windowMessagesInOrderByTabId[var3] or {}, function(p7)
+	return if var4 then list.map(p3.windowMessagesInOrderByTabId[var4] or {}, function(p7)
 		-- upvalues: p3 (ref)
 		return p3.byMessageId[p7]
 	end) else {}
@@ -105,14 +111,14 @@ if not fFlagExpChatEnableV2ChatWindowModule then
 			end
 			table.insert(p3.disposeEffects, createEffect(function(p4)
 				-- upvalues: readByMessageIdAsTable (copy), p3 (ref)
-				local var3 = readByMessageIdAsTable(p3.MessagesStore, p4)
+				local var4 = readByMessageIdAsTable(p3.MessagesStore, p4)
 				local windowMessagesInOrder = p3.MessagesStore.getWindowMessagesInOrder(p4)
 				local windowMessagesInOrderByTabId = p3.MessagesStore.getWindowMessagesInOrderByTabId(p4)
 				
-				if var3 or windowMessagesInOrder or windowMessagesInOrderByTabId then
+				if var4 or windowMessagesInOrder or windowMessagesInOrderByTabId then
 					p3:setState({
 						messagesState = {
-							byMessageId = var3,
+							byMessageId = var4,
 							windowMessagesInOrder = windowMessagesInOrder,
 							windowMessagesInOrderByTabId = windowMessagesInOrderByTabId
 						}
@@ -132,16 +138,16 @@ if not fFlagExpChatEnableV2ChatWindowModule then
 	end
 end
 function chatWindowApp.render(p3)
-	-- upvalues: fFlagExpChatEnableV2ChatWindowModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), var2 (write), roactModule (ref), chatWindowMessageSourceModule (ref)
-	local var3 = nil
+	-- upvalues: fFlagExpChatEnableV2ChatWindowModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), var3 (write), roactModule (ref), chatWindowMessageSourceModule (ref)
+	local var4 = nil
 	
 	if not fFlagExpChatEnableV2ChatWindowModule then
 		local messagesState = p3.state.messagesState
-		var3 = if messagesState then if getFFlagTextChatEnableUniverseChatTabs() then var2(messagesState, p3.props.isChannelBarVisible, p3.props.targetTextChannel, p3.props.selectedChannelName) else var2(messagesState, p3.props.isChannelBarVisible, p3.props.targetTextChannel) else {}
+		var4 = if messagesState then if getFFlagTextChatEnableUniverseChatTabs() then var3(messagesState, p3.props.isChannelBarVisible, p3.props.targetTextChannel, p3.props.selectedChannelName) else var3(messagesState, p3.props.isChannelBarVisible, p3.props.targetTextChannel) else {}
 	end
 	return roactModule.createElement(chatWindowMessageSourceModule, {
 		LayoutOrder = p3.props.LayoutOrder,
-		messages = if fFlagExpChatEnableV2ChatWindowModule then nil else var3,
+		messages = if fFlagExpChatEnableV2ChatWindowModule then nil else var4,
 		size = p3.props.size,
 		transparencyValue = p3.props.transparencyValue,
 		textTransparency = p3.props.textTransparency,
@@ -164,16 +170,40 @@ function chatWindowApp.render(p3)
 	})
 end
 
-return roactRoduxModule.connect(function(p3)
-	-- upvalues: fFlagEnableVerifiedBadgeStore (ref)
-	local _ = nil
-	local selectedChannelName = p3.TextChannels.selectedChannelName
+local function _(p3, p4)
+	if p3 == p4 then
+		return true
+	end
+	for i in p3 do
+		if p4[i] == nil then
+			return false
+		end
+	end
+	for i in p4 do
+		if p3[i] == nil then
+			return false
+		end
+	end
+	return true
+end
+
+local var4 = reactModule.memo(chatWindowApp)
+
+return roactRoduxModule.connect(function(p5)
+	-- upvalues: fFlagExpChatUseChannelTabsStore (ref), fFlagEnableVerifiedBadgeStore (ref)
+	local var5 = nil
 	
+	if not fFlagExpChatUseChannelTabsStore then
+		local channelTabs = p5.ChannelTabs
+		local selectedChannelName = p5.TextChannels.selectedChannelName
+		var5 = if selectedChannelName and channelTabs and channelTabs.allChannelTabs[selectedChannelName] then selectedChannelName elseif channelTabs then channelTabs.selectedTabName or "RBXGeneral" else "RBXGeneral"
+	end
 	return {
-		chatIntervention = p3.ChatIntervention,
-		verifiedUserIds = if fFlagEnableVerifiedBadgeStore then nil else p3.VerifiedUsers,
-		targetTextChannel = p3.TextChannels.targetTextChannel,
-		selectedChannelName = if selectedChannelName and p3.ChannelTabs and p3.ChannelTabs.allChannelTabs[selectedChannelName] then selectedChannelName elseif p3.ChannelTabs then p3.ChannelTabs.selectedTabName or "RBXGeneral" else "RBXGeneral"
+		chatIntervention = p5.ChatIntervention,
+		verifiedUserIds = if fFlagEnableVerifiedBadgeStore then nil else p5.VerifiedUsers,
+		targetTextChannel = p5.TextChannels.targetTextChannel,
+		selectedChannelName = var5,
+		roduxSelectedChannelName = if fFlagExpChatUseChannelTabsStore then p5.TextChannels.selectedChannelName else nil
 	}
 end, function(_)
 	-- upvalues: getTransparencyStoreModule (ref)
@@ -187,4 +217,46 @@ end, function(_)
 			return getTransparencyStoreModule(false).clearContextMenuOpen()
 		end
 	}
-end)(chatWindowApp)
+end)(if fFlagExpChatUseChannelTabsStore then function(value)
+	-- upvalues: reactModule (ref), signalsModule (ref), var1 (ref), signalsReactModule (ref), var4 (ref), cryoModule (ref)
+	local var5 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var1 (copy)
+		return signalsModule.createComputed(function(p5)
+			-- upvalues: var1 (copy)
+			local channelTabsState = var1(false).getChannelTabsState(p5)
+			
+			return {
+				allChannelTabs = channelTabsState.allChannelTabs,
+				selectedTabName = channelTabsState.selectedTabName
+			}
+		end, function(p5, p6)
+			local var6 = false
+			
+			if p5.selectedTabName == p6.selectedTabName then
+				local allChannelTabs = p5.allChannelTabs
+				local allChannelTabs_1 = p6.allChannelTabs
+				
+				if allChannelTabs == allChannelTabs_1 then
+					return true
+				end
+				for i in allChannelTabs do
+					if allChannelTabs_1[i] == nil then
+						return false
+					end
+				end
+				for i in allChannelTabs_1 do
+					if allChannelTabs[i] == nil then
+						return false
+					end
+				end
+				var6 = true
+			end
+			return var6
+		end)
+	end, {}))
+	local roduxSelectedChannelName = value.roduxSelectedChannelName
+	
+	return reactModule.createElement(var4, cryoModule.Dictionary.union(value, {
+		selectedChannelName = if roduxSelectedChannelName and var5.allChannelTabs[roduxSelectedChannelName] then roduxSelectedChannelName else var5.selectedTabName or "RBXGeneral"
+	}))
+end else chatWindowApp)

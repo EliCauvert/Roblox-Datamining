@@ -119,7 +119,6 @@ Authentication.SignUp.Description.Try,Coba
 Authentication.SignUp.Description.UsernameChanged,"Semua siap. Akunmu sudah siap dan terhubung ke {platform}. Respawn sekarang untuk melihat nama pengguna terbarumu dalam game, atau nama pengguna akan diterapkan pada lain waktu."
 Authentication.SignUp.Description.UsernameUnchanged,Kamu sudah masuk. Akunmu sudah siap dan terhubung ke {platform}. Chat dengan teman dan mainkan jutaan game Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Akun Roblox-mu akan dihubungkan ke akunmu di {platform}. Kamu dapat memutus hubungan dari layar Pengaturan kapan saja. Kamu mungkin harus menunggu beberapa saat sebelum dapat terhubung ke akun lain di {platform}. Dengan mengklik {ctaButton}, kamu menyetujui Ketentuan Penggunaan termasuk klausa arbitrase dan menerima Kebijakan Privasi."
-Authentication.SignUp.Header.CloseWithoutFinishing,Tutup tanpa menyelesaikan?
 Authentication.SignUp.Header.OneLastThing,Satu hal terakhir
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Siapkan akun Roblox-mu
 Authentication.SignUp.Heading.CountryCodeSelector,Pilih negara
@@ -435,6 +434,7 @@ CommonUI.Features.Label.ControllerBar.ToPlaySuffix,untuk bermain
 CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,Teman
 CommonUI.Features.Label.Game,Pengalaman Virtual
+CommonUI.Features.Label.Games,Game
 CommonUI.Features.Label.GiftCards,Beli Gift Card
 CommonUI.Features.Label.Groups,Komunitas
 CommonUI.Features.Label.HelpAndSafety,Bantuan & Keamanan
@@ -675,15 +675,18 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,Teks Asli ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Apa yang bermasalah dengan terjemahan ini? (opsional)
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Tidak Tepat
+CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,Kualitas Gambar
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Tidak Pantas atau Merendahkan
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,Masalah Ejaan atau Tata Bahasa
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,Tidak Diterjemahkan
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,Teks yang Dipilih
 CoreScripts.Feedback.Help.Instructions,Pilih teks apa pun untuk memberi masukan tentang terjemahan yang salah atau tidak ada.
+CoreScripts.Feedback.Help.InstructionsWithImage,Pilih teks atau gambar untuk memberi masukan tentang terjemahan yang salah atau tidak ada.
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
+CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,Beri Tahu Kami Masalahnya
 CoreScripts.Feedback.Onboarding.Start,Mulai
 CoreScripts.Feedback.SubmissionToastBody,Roblox akan menggunakan informasi ini untuk membantu meningkatkan kualitas terjemahan pengalaman virtual ini
@@ -2052,6 +2055,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,Waktu sesi pengguna baru
 Feature.Build.Analytics.Title.PayerConversion,Konversi pengguna nongratis
 Feature.Build.Analytics.Title.PlaythroughRate,Tingkat penyelesaian
 Feature.Build.Analytics.Title.RobuxSpent,
+Feature.Build.Analytics.Title.TopAcquisitionSource,Sumber teratas
+Feature.Build.Analytics.Title.TopDropOffStep,Dropoff terbesar
 Feature.Build.Analytics.Title.TotalPlaytime,Total waktu main
 Feature.Build.Analytics.Visits,Kunjungan
 Feature.Build.Content.NewGame,Game baru
@@ -2095,7 +2100,6 @@ Feature.Build.Description.PlaytestLatest,Kamu sedang melakukan playtest pada ver
 Feature.Build.Description.PlaytestLocked,Kamu dapat memulai playtest setelah membuat game pertamamu.
 Feature.Build.Description.PlaytesterAccess,Undang teman sebagai penguji tahap awal atau ubah pengaturan Audiens game-mu agar lebih banyak pengguna dapat memainkannya.
 Feature.Build.Description.PricingRules,Tetapkan aturan harga
-Feature.Build.Description.PrivateShare,Ubah pengaturan Audiens game-mu untuk membagikannya.
 Feature.Build.Description.PromoteGameFree,Tampilkan game-mu kepada lebih banyak pemain dengan sekali ketuk.
 Feature.Build.Description.PromoteGamePaid,Buat iklan untuk menampilkan game-mu kepada jutaan pemain.
 Feature.Build.Description.PromoteGameWithAdCampaign,Jangkau lebih banyak audiens dengan kampanye iklan {durationDays} hari agar game-mu lebih mudah ditemukan.
@@ -2221,6 +2225,15 @@ Feature.Build.Label.Thinking,Sedang memproses
 Feature.Build.Label.Title,Judul
 Feature.Build.Label.TitleDescription,Judul & deskripsi
 Feature.Build.Label.Tool,alat
+Feature.Build.Label.ToolAdEligibilityDone,Sudah memeriksa kelayakan iklan
+Feature.Build.Label.ToolAdEligibilityFailed,Tidak dapat memeriksa kelayakan iklan
+Feature.Build.Label.ToolAdEligibilityRunning,Memeriksa kelayakan iklan
+Feature.Build.Label.ToolAnalyticsDone,Sudah menganalisis statistik
+Feature.Build.Label.ToolAnalyticsFailed,Tidak dapat menganalisis statistik
+Feature.Build.Label.ToolAnalyticsRunning,Menganalisis statistik
+Feature.Build.Label.ToolApiDocsDone,Sudah mencari dokumen API
+Feature.Build.Label.ToolApiDocsFailed,Tidak dapat mencari dokumen API
+Feature.Build.Label.ToolApiDocsRunning,Mencari dokumen API
 Feature.Build.Label.ToolAssetDone,Selesai memasukkan aset
 Feature.Build.Label.ToolAssetFailed,Tidak dapat memasukkan aset
 Feature.Build.Label.ToolAssetRunning,Memasukkan aset
@@ -2230,6 +2243,9 @@ Feature.Build.Label.ToolAssetSearchRunning,Mencari daftar aset
 Feature.Build.Label.ToolClientDMDone,Selesai mencari DataModel klien
 Feature.Build.Label.ToolClientDMFailed,Tidak dapat mencari DataModel klien
 Feature.Build.Label.ToolClientDMRunning,Mencari DataModel klien
+Feature.Build.Label.ToolCompileDone,Sudah mengompilasi kode
+Feature.Build.Label.ToolCompileFailed,Tidak dapat mengompilasi kode
+Feature.Build.Label.ToolCompileRunning,Mengompilasi kode
 Feature.Build.Label.ToolGameInfoDone,Selesai memperbarui info game
 Feature.Build.Label.ToolGameInfoFailed,Tidak dapat memperbarui info game
 Feature.Build.Label.ToolGameInfoRunning,Memperbarui info game
@@ -2266,6 +2282,9 @@ Feature.Build.Label.ToolQuestionRunning,Mengajukan pertanyaan
 Feature.Build.Label.ToolReqUpdateDone,Selesai memperbarui persyaratan
 Feature.Build.Label.ToolReqUpdateFailed,Tidak dapat memperbarui persyaratan
 Feature.Build.Label.ToolReqUpdateRunning,Memperbarui persyaratan
+Feature.Build.Label.ToolRestoreVersionDone,Sudah memulihkan versi
+Feature.Build.Label.ToolRestoreVersionFailed,Tidak dapat memulihkan versi
+Feature.Build.Label.ToolRestoreVersionRunning,Memulihkan versi
 Feature.Build.Label.ToolScriptDone,Selesai menjalankan skrip
 Feature.Build.Label.ToolScriptFailed,Tidak dapat menjalankan skrip
 Feature.Build.Label.ToolScriptRunning,Menjalankan skrip
@@ -2281,6 +2300,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Merencanakan tugas
 Feature.Build.Label.ToolThumbnailDone,Selesai mengatur thumbnail game
 Feature.Build.Label.ToolThumbnailFailed,Tidak dapat mengatur thumbnail game
 Feature.Build.Label.ToolThumbnailRunning,Mengatur thumbnail game
+Feature.Build.Label.ToolVerifyDone,Sudah memeriksa kesalahan
+Feature.Build.Label.ToolVerifyFailed,Tidak dapat memeriksa kesalahan
+Feature.Build.Label.ToolVerifyRunning,Memeriksa kesalahan
 Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Tidak Diketahui
 Feature.Build.Label.UnlimitedUsed,{USED} digunakan • Tidak ada batas
@@ -2411,7 +2433,6 @@ Feature.Build.Title.ExperienceAudience,Audiens pengalaman virtual
 Feature.Build.Title.FreeUsageReached,Batas penggunaan Build gratis tercapai
 Feature.Build.Title.FriendsOnlyPlay,Hanya teman yang bisa memainkannya
 Feature.Build.Title.GameCreationDone,Pembuatan game selesai
-Feature.Build.Title.GamePrivate,Game ini privat
 Feature.Build.Title.GenericError,Terjadi kesalahan
 Feature.Build.Title.GetUsers,Dapatkan pengguna
 Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
@@ -3707,6 +3728,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,Moment gagal diposting
 Feature.Moments.Label.MomentNoLongerAvailable,Moment ini tidak lagi tersedia.
 Feature.Moments.Label.MomentPublishedBody,Momen-mu berhasil dipublikasikan.
 Feature.Moments.Label.MomentPublishedTitle,Momen dipublikasikan
+Feature.Moments.Label.MomentRemovedBody,Moment ini melanggar aturan keamanan kami sehingga tidak lagi tersedia.
+Feature.Moments.Label.MomentRemovedTitle,Kami menghapus Moment ini
 Feature.Moments.Label.MomentUnavailable,Moment tidak tersedia
 Feature.Moments.Label.MomentUnavailableDefault,Moment ini tidak tersedia.
 Feature.Moments.Label.MomentsExperienceName,
@@ -4118,7 +4141,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Diskon 10% selama 60 
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"Diskon 10% selama {trialUnlockDays} hari pertama, lalu diskon 20% untuk item dan avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Lebih seru, lebih hemat Robux. Subscribe Roblox Plus."
 Feature.RobloxSubscription.Description.JoinEarly,Bergabung lebih awal dengan Plus
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,Link referensi ini sudah tidak valid.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} mengundangmu untuk bergabung dengan Plus. Kamu berdua akan mendapatkan {amount} Robux saat kamu membeli Plus.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"Dengan mengeklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{referralTermsUrl}"">Ketentuan Program Referensi</a> dan <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Heading.ReferralEntry,Bagikan Plus untuk mendapatkan {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Bergabunglah dengan Plus untuk mendapatkan {amount} Robux

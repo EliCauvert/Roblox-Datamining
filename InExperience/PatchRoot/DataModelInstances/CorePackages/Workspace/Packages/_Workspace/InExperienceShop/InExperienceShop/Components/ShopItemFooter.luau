@@ -5,6 +5,7 @@ local foundationModule = require(parent.Foundation)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local _ = require(inExperienceShop.Types)
 local initiateShopItemPurchaseModule = require(inExperienceShop.initiateShopItemPurchase)
+local fFlagCategoryLoggingInShopPurchaseModule = require(inExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
@@ -16,8 +17,9 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), button (ref), buttonVariant (ref), inputSize (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), fFlagCategoryLoggingInShopPurchaseModule (ref), initiateShopItemPurchaseModule (ref), button (ref), buttonVariant (ref), inputSize (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref)
 	local var1 = useLocalization(t)
+	local purchaseCategoryLocation = p1.purchaseCategoryLocation
 	
 	return if p1.isOwned or false then reactModule.createElement(button, {
 		isDisabled = true,
@@ -40,9 +42,19 @@ return reactModule.memo(function(p1)
 		size = inputSize.Small,
 		width = UDim.new(1, 0),
 		onActivated = reactModule.useCallback(function()
-			-- upvalues: initiateShopItemPurchaseModule (copy), p1 (ref)
+			-- upvalues: fFlagCategoryLoggingInShopPurchaseModule (copy), purchaseCategoryLocation (ref), initiateShopItemPurchaseModule (copy), p1 (ref)
+			if fFlagCategoryLoggingInShopPurchaseModule and purchaseCategoryLocation ~= nil then
+				initiateShopItemPurchaseModule(p1.itemId, p1.itemType, p1.shopPageType, purchaseCategoryLocation)
+				
+				return
+			end
 			initiateShopItemPurchaseModule(p1.itemId, p1.itemType, p1.shopPageType)
-		end, { p1.itemId, p1.itemType, p1.shopPageType }),
+		end, {
+			p1.itemId,
+			p1.itemType,
+			p1.shopPageType,
+			purchaseCategoryLocation
+		}),
 		LayoutOrder = p1.LayoutOrder
 	})
 end)

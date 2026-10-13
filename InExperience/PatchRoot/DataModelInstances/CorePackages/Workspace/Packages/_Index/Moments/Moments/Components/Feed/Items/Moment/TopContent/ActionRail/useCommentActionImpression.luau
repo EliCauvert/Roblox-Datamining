@@ -14,9 +14,11 @@ local useFeedOptional = require(moments.Components.Feed.FeedContext).useFeedOpti
 local fStringMomentsCommentsIxpLayerModule = require(moments.Flags.FStringMomentsCommentsIxpLayer)
 local fFlagMomentsCommentsCountAnalyticsModule = require(moments.Flags.FFlagMomentsCommentsCountAnalytics)
 local makeCommentCountFieldsModule = require(moments.Analytics.makeCommentCountFields)
+local momentImpressionMemoryModule = require(moments.Components.Feed.Items.Moment.MomentImpressionMemory)
+local fFlagMomentsFixOverlayRemountImpressionsModule = require(moments.Flags.FFlagMomentsFixOverlayRemountImpressions)
 
 return function(p1)
-	-- upvalues: useVerticalPager (ref), usePagerItem (ref), useFeedOptional (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagMomentsComments (ref), fFlagMomentsCommentsCountAnalyticsModule (ref), makeCommentCountFieldsModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsCommonModule (ref), fFlagMomentsCommentsIxpEnabled (ref), fStringMomentsCommentsIxpLayerModule (ref)
+	-- upvalues: useVerticalPager (ref), usePagerItem (ref), useFeedOptional (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagMomentsFixOverlayRemountImpressionsModule (ref), momentImpressionMemoryModule (ref), fFlagMomentsComments (ref), fFlagMomentsCommentsCountAnalyticsModule (ref), makeCommentCountFieldsModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsCommonModule (ref), fFlagMomentsCommentsIxpEnabled (ref), fStringMomentsCommentsIxpLayerModule (ref)
 	local var1 = useVerticalPager()
 	local var2 = useFeedOptional()
 	local item = usePagerItem().item
@@ -28,7 +30,7 @@ return function(p1)
 		end)
 	end, { var1, item }))
 	local var4 = p1 and (var3 and (var2 ~= nil and var2.isActiveFeed))
-	local var5 = reactModule.useRef(false)
+	local var5 = if fFlagMomentsFixOverlayRemountImpressionsModule then momentImpressionMemoryModule.useImpressionRef("commentAction") else reactModule.useRef(false)
 	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var4 (ref), item (ref), fFlagMomentsComments (copy), fFlagMomentsCommentsCountAnalyticsModule (copy), makeCommentCountFieldsModule (copy), momentsGetMomentsCommentsStoreModule (copy), momentsCommonModule (copy), fFlagMomentsCommentsIxpEnabled (copy), fStringMomentsCommentsIxpLayerModule (copy)
 		local current = var5.current

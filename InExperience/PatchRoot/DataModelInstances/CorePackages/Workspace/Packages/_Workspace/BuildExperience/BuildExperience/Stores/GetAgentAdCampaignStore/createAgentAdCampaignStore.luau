@@ -5,6 +5,7 @@ local _ = require(parent.Signals)
 local signalsUtilsModule = require(parent.SignalsUtils)
 local _ = require(parent.DataHydration.CreatorAgentChat)
 local _ = require(buildExperience.Storage.createAdCampaignCardStorage)
+local fFlagBuildAgentAdCampaignRefreshEligibilityModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
 
 local function _(p1)
 	return p1.idempotencyKey == p1.toolCallId
@@ -18,6 +19,10 @@ end
 
 local _ = function(p1)
 	return not p1.isPending and (p1.hasAmbiguousFailure == false and (p1.failureKind ~= nil and p1.failureKind ~= "unknown"))
+end
+
+local function canReplaceRejectedAttempt(p1)
+	return (not p1.isPending and (p1.hasAmbiguousFailure == false and (p1.failureKind ~= nil and p1.failureKind ~= "unknown"))) and p1.failureKind ~= "payment_required"
 end
 
 local function getRetrySelection(p1, p2)
@@ -53,6 +58,17 @@ local function getRetrySelection(p1, p2)
 	end
 end
 
+local function getRetryOffers(p1, p2)
+	if (not p1.isPending and (p1.hasAmbiguousFailure == false and (p1.failureKind ~= nil and p1.failureKind ~= "unknown"))) and p1.failureKind ~= "payment_required" then
+		return p2
+	end
+	local campaignOption = p1.selectedOption.campaignOption
+	local var1 = p1.offers[campaignOption]
+	local var2 = p2[campaignOption]
+	
+	return if var1 == nil or var2 == nil or (var2.fundingType ~= p1.selectedOption.paymentType or var2.durationDays ~= var1.durationDays) or var2.priceRobux ~= var1.priceRobux then nil else { [campaignOption] = var2 }
+end
+
 local function toRecord(p1)
 	local selectedOption = p1.selectedOption
 	local var1 = if selectedOption.campaignOption == "feedback" then p1.offers.feedback else p1.offers.plays
@@ -78,7 +94,7 @@ local function toRecord(p1)
 end
 
 return function()
-	-- upvalues: signalsUtilsModule (ref), httpService (ref), getRetrySelection (ref), toRecord (ref)
+	-- upvalues: signalsUtilsModule (ref), httpService (ref), fFlagBuildAgentAdCampaignRefreshEligibilityModule (ref), getRetrySelection (ref), toRecord (ref), getRetryOffers (ref), canReplaceRejectedAttempt (ref)
 	local var1, var2 = signalsUtilsModule.createSessionScopedSignal({})
 	local var3, var4 = signalsUtilsModule.createSessionScopedSignal({})
 	
@@ -197,6 +213,8 @@ return function()
 	return {
 		getAttempts = var1,
 		getRetrySelection = getRetrySelection,
+		getRetryOffers = getRetryOffers,
+		canReplaceRejectedAttempt = canReplaceRejectedAttempt,
 		start = start,
 		finish = function(p1, p2, p3, p4)
 			-- upvalues: var1 (ref), var2 (ref)
@@ -225,7 +243,7 @@ return function()
 		end,
 		restore = restore,
 		startDurable = function(p1, p2, p3, p4)
-			-- upvalues: restore (ref), var1 (ref), getRetrySelection (copy), start (ref), toRecord (copy), var2 (ref)
+			-- upvalues: restore (ref), var1 (ref), fFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), getRetrySelection (copy), start (ref), toRecord (copy), var2 (ref)
 			if not restore(p1, p3, p4) then
 				return nil
 			end
@@ -233,6 +251,17 @@ return function()
 			local var5 = false
 			
 			if toolCallId ~= nil then
+				local isNotPaymentRequired = false
+				local hasAmbiguousFailure = toolCallId.hasAmbiguousFailure
+				
+				if fFlagBuildAgentAdCampaignRefreshEligibilityModule then
+					isNotPaymentRequired = not toolCallId.isPending and (toolCallId.hasAmbiguousFailure == false and (toolCallId.failureKind ~= nil and toolCallId.failureKind ~= "unknown"))
+					
+					if isNotPaymentRequired then
+						isNotPaymentRequired = toolCallId.failureKind ~= "payment_required"
+					end
+					hasAmbiguousFailure = not isNotPaymentRequired
+				end
 				if toolCallId.idempotencyKey ~= toolCallId.toolCallId then
 					local var6 = DateTime.now().UnixTimestampMillis - (toolCallId.attemptStartedAtMs or 0)
 					
@@ -245,8 +274,10 @@ return function()
 						var5 = true
 					end
 				end
-				if toolCallId.hasAmbiguousFailure and (toolCallId.selectedOption.campaignOption ~= p2.campaignOption or toolCallId.selectedOption.paymentType ~= p2.paymentType) then
+				if hasAmbiguousFailure and (toolCallId.selectedOption.campaignOption ~= p2.campaignOption or toolCallId.selectedOption.paymentType ~= p2.paymentType) then
 					return nil
+				elseif isNotPaymentRequired then
+					var5 = true
 				end
 			end
 			local var7 = start(p1, p2, p3, var5)

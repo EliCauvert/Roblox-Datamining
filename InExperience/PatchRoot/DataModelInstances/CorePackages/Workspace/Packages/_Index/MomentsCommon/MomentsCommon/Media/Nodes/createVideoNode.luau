@@ -5,9 +5,7 @@ local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local _ = require(momentsCommon.Media.MediaTypes)
 local _ = require(momentsCommon.Media.mediaNodeRegistry)
-local getCropSizeModule = require(momentsCommon.Utils.getCropSize)
 local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
-local fFlagMomentsVideoCropRoundedCornersModule = require(momentsCommon.Flags.FFlagMomentsVideoCropRoundedCorners)
 local fFlagMomentsPreloadVideoPlayerInstanceModule = require(momentsCommon.Flags.FFlagMomentsPreloadVideoPlayerInstance)
 local fFlagMomentsVideoPermissionContextFixModule = require(momentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
 local fFlagMomentsVideoLoadAsyncLoadingFixModule = require(momentsCommon.Flags.FFlagMomentsVideoLoadAsyncLoadingFix)
@@ -18,7 +16,7 @@ local createComputed = signalsModule.createComputed
 local var1 = createSignal(Enum.ScaleType.Crop)
 
 local function VideoSurface(p1)
-	-- upvalues: useSignalState (ref), reactModule (ref), createComputed (ref), var1 (ref), fFlagMomentsVideoCropRoundedCornersModule (ref), getFitSizeModule (ref), getCropSizeModule (ref)
+	-- upvalues: useSignalState (ref), reactModule (ref), createComputed (ref), var1 (ref), getFitSizeModule (ref)
 	local var2 = useSignalState(p1.getItemSize)
 	local getResolution = p1.getResolution
 	local var3 = useSignalState(reactModule.useMemo(function()
@@ -32,10 +30,10 @@ local function VideoSurface(p1)
 	local uDim2 = UDim2.fromScale(1, 1)
 	local stretch = Enum.ScaleType.Stretch
 	
-	if fFlagMomentsVideoCropRoundedCornersModule and var4 ~= Enum.ScaleType.Fit then
+	if var4 ~= Enum.ScaleType.Fit then
 		stretch = Enum.ScaleType.Crop
 	elseif var3 ~= nil and var3.X > 0 and var3.Y > 0 then
-		uDim2 = if var4 == Enum.ScaleType.Fit then getFitSizeModule(var2, var3) else getCropSizeModule(var2, var3)
+		uDim2 = getFitSizeModule(var2, var3)
 	end
 	return reactModule.createElement("VideoDisplay", {
 		BackgroundTransparency = 1,

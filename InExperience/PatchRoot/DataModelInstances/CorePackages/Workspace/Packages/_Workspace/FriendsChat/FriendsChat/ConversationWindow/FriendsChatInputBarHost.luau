@@ -33,6 +33,7 @@ local fFlagFriendsChatEnforceInputCharacterLimitModule = require(friendsChat.Fla
 local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local fFlagExpChatComposerFigmaParity = require(parent.SharedFlags).FFlagExpChatComposerFigmaParity
 local fFlagAppChatUniversalFeatureRestriction = require(parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
+local fFlagExpChatTabShortcutNav = require(parent.SharedFlags).FFlagExpChatTabShortcutNav
 local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 local getFriendsChatNavigationStoreModule = require(friendsChat.Stores.GetFriendsChatNavigationStore)
 local useConsumeFocusInputBarRequestModule = require(script.Parent.useConsumeFocusInputBarRequest)
@@ -74,7 +75,7 @@ local function isSendResponseAccepted(p1)
 end
 
 return function(p1)
-	-- upvalues: foundationModule (ref), expChatConversationListAdapterModule (ref), useChatTimeoutDetailsFromHydrationModule (ref), signalsReactModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useChatInputBarSettingsModule (ref), useInExperienceLocalization (ref), chatUIPrimitivesModule (ref), inputTypeConstants (ref), getConversationInputPlaceholderModule (ref), userInputService (ref), useLocalization (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useInterpolatedClientSettingsModule (ref), useChatInputBarOnFocusModule (ref), getFriendsChatNavigationStoreModule (ref), fFlagFriendsChatConversationListFocusNav (ref), useFocusConversationInputModule (ref), useConsumeFocusInputBarRequestModule (ref), useFocusBackButtonOnUpModule (ref), interventionTreatmentShownSignal (ref), constants (ref), httpService (ref), fFlagFriendsChatMessageSendPerfTrackingModule (ref), expChatPerfTracker (ref), friendsChatTabNameModule (ref), playersService (ref), name (ref), createConversationFromFriendPlaceholderModule (ref), getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), serializeParticipantIdsForTelemetryModule (ref), appChatNetworkingModule (ref), chatConversationTelemetryEventsModule (ref), getConversationMessageSentInfoModule (ref), isSendResponseAccepted (ref), signalsExperimentalModule (ref), ingestNewerMessagesModule (ref), sendMessageErrorModule (ref), fFlagAppChatUniversalFeatureRestriction (ref), parent (ref), fFlagAppChatReactiveFeatureRestrictions (ref), interventionSharedModule (ref), chatInputBoxDisabledPressedSignal (ref), chatInputBoxDisabledModule (ref), resolveFadeModule (ref), layoutConstantsModule (ref), chatInputBarView (ref), fFlagExpChatComposerFigmaParity (ref), t (ref), fFlagFriendsChatEnforceInputCharacterLimitModule (ref), messageCharacterLimitModule (ref)
+	-- upvalues: foundationModule (ref), expChatConversationListAdapterModule (ref), useChatTimeoutDetailsFromHydrationModule (ref), signalsReactModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useChatInputBarSettingsModule (ref), useInExperienceLocalization (ref), chatUIPrimitivesModule (ref), inputTypeConstants (ref), getConversationInputPlaceholderModule (ref), userInputService (ref), useLocalization (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useInterpolatedClientSettingsModule (ref), useChatInputBarOnFocusModule (ref), getFriendsChatNavigationStoreModule (ref), fFlagFriendsChatConversationListFocusNav (ref), useFocusConversationInputModule (ref), useConsumeFocusInputBarRequestModule (ref), fFlagExpChatTabShortcutNav (ref), useFocusBackButtonOnUpModule (ref), interventionTreatmentShownSignal (ref), constants (ref), httpService (ref), fFlagFriendsChatMessageSendPerfTrackingModule (ref), expChatPerfTracker (ref), friendsChatTabNameModule (ref), playersService (ref), name (ref), createConversationFromFriendPlaceholderModule (ref), getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), serializeParticipantIdsForTelemetryModule (ref), appChatNetworkingModule (ref), chatConversationTelemetryEventsModule (ref), getConversationMessageSentInfoModule (ref), isSendResponseAccepted (ref), signalsExperimentalModule (ref), ingestNewerMessagesModule (ref), sendMessageErrorModule (ref), fFlagAppChatUniversalFeatureRestriction (ref), parent (ref), fFlagAppChatReactiveFeatureRestrictions (ref), interventionSharedModule (ref), chatInputBoxDisabledPressedSignal (ref), chatInputBoxDisabledModule (ref), resolveFadeModule (ref), layoutConstantsModule (ref), chatInputBarView (ref), fFlagExpChatComposerFigmaParity (ref), t (ref), fFlagFriendsChatEnforceInputCharacterLimitModule (ref), messageCharacterLimitModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local conversationId = p1.conversationId
 	local var2 = expChatConversationListAdapterModule.isFriendPlaceholder(conversationId)
@@ -133,6 +134,9 @@ return function(p1)
 	local ref = var25.ref
 	useConsumeFocusInputBarRequestModule(var25.focus)
 	
+	if fFlagExpChatTabShortcutNav then
+		chatUIPrimitivesModule.Hooks.useInputBarTabNavigation(ref)
+	end
 	if fFlagFriendsChatConversationListFocusNav then
 		useFocusBackButtonOnUpModule(ref, p1.backButtonRef)
 	end

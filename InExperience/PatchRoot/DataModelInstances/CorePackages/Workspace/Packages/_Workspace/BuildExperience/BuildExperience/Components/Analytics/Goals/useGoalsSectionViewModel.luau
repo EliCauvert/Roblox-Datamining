@@ -4,7 +4,7 @@ return function(p1)
 	local t = {}
 	
 	for i, v in p1.goals do
-		table.insert(t, { goal = v, layoutOrder = i })
+		table.insert(t, { isLocked = false, goal = v, layoutOrder = i })
 	end
 	return t
 end

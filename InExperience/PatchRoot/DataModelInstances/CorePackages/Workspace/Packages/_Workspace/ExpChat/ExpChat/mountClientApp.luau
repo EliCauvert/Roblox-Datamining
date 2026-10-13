@@ -1032,10 +1032,10 @@ return function(p4)
 	
 	for i_1, v_1 in pairs(textChatService:GetDescendants()) do
 		if v_1.Parent and v_1.Parent:IsA("TextChannel") and (v_1 and (v_1:IsA("TextSource") and (playersService.LocalPlayer and playersService.LocalPlayer.UserId == v_1.UserId))) then
-			var4:dispatch(localTextChannelParticipantAddedModule(v_1.Parent))
-			
 			if fFlagExpChatUseChannelTabsStore and var6 then
 				var6.handleLocalTextChannelParticipantAdded(v_1.Parent)
+			else
+				var4:dispatch(localTextChannelParticipantAddedModule(v_1.Parent))
 			end
 		end
 		if v_1:IsA("TextChannel") then
@@ -1052,12 +1052,12 @@ return function(p4)
 		end
 	end
 	textChatService.DescendantAdded:Connect(function(p5)
-		-- upvalues: playersService (copy), var4 (ref), localTextChannelParticipantAddedModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), localTextChannelParticipantRemoved (copy)
+		-- upvalues: playersService (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), var4 (ref), localTextChannelParticipantAddedModule (copy), localTextChannelParticipantRemoved (copy)
 		if p5.Parent and p5.Parent:IsA("TextChannel") and (p5 and (p5:IsA("TextSource") and (playersService.LocalPlayer and playersService.LocalPlayer.UserId == p5.UserId))) then
-			var4:dispatch(localTextChannelParticipantAddedModule(p5.Parent))
-			
 			if fFlagExpChatUseChannelTabsStore and var6 then
 				var6.handleLocalTextChannelParticipantAdded(p5.Parent)
+			else
+				var4:dispatch(localTextChannelParticipantAddedModule(p5.Parent))
 			end
 		end
 		if p5:IsA("TextChannel") then
@@ -1078,7 +1078,7 @@ return function(p4)
 		local t_5 = {}
 		
 		local function handleUniverseChatChannelAllocated(p5)
-			-- upvalues: t_5 (ref), textChatService (copy), fFlagExpChatUseUnifiedTooltipStore (copy), getChatTooltipStoreModule (copy), fFlagExpChatGlobalTabDefaultModule (copy), expChatGlobalTabDefaultExperimentation (copy), var4 (ref), universeChatChannelAddedModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), isGlobalTabFirstModule (copy), hasUserSelectedTabModule (copy), universeChatChannelSelected (copy), getFFlagEnableExpChatUniverseChatTabNames (copy), p4 (write), getGlobalWelcomeMessageKeyModule (copy), getFFlagExpChatSuppressWelcomeMessageTabUnread (copy), var5 (ref), fFlagExpChatUnreadTabIndicatorV2WindowModule (copy), markChannelUnreadForSystemMessageModule (copy), tryAddThirdPartySummaryGlobalSystemMessage (ref)
+			-- upvalues: t_5 (ref), textChatService (copy), fFlagExpChatUseUnifiedTooltipStore (copy), getChatTooltipStoreModule (copy), fFlagExpChatGlobalTabDefaultModule (copy), expChatGlobalTabDefaultExperimentation (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), var4 (ref), universeChatChannelAddedModule (copy), isGlobalTabFirstModule (copy), hasUserSelectedTabModule (copy), universeChatChannelSelected (copy), getFFlagEnableExpChatUniverseChatTabNames (copy), p4 (write), getGlobalWelcomeMessageKeyModule (copy), getFFlagExpChatSuppressWelcomeMessageTabUnread (copy), var5 (ref), fFlagExpChatUnreadTabIndicatorV2WindowModule (copy), markChannelUnreadForSystemMessageModule (copy), tryAddThirdPartySummaryGlobalSystemMessage (ref)
 			if t_5[p5] then return end
 			t_5[p5] = true
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
@@ -1097,11 +1097,11 @@ return function(p4)
 					expChatGlobalTabDefaultExperimentation.logExposure()
 				end
 			end
-			local var14 = var13
-			var4:dispatch(universeChatChannelAddedModule(var13, if var14 == "RBXGeneral" then 1 elseif var14 == "RBXGlobal" then 2 else 3))
-			
 			if fFlagExpChatUseChannelTabsStore and var6 then
 				var6.addChannelTab({ type = "UniverseChat", name = var13 }, nil)
+			else
+				local var14 = var13
+				var4:dispatch(universeChatChannelAddedModule(var13, if var14 == "RBXGeneral" then 1 elseif var14 == "RBXGlobal" then 2 else 3))
 			end
 			if fFlagExpChatGlobalTabDefaultModule and isGlobalTabFirstModule() and (var13 == "RBXGlobal" and not hasUserSelectedTabModule(var4)) then
 				var4:dispatch(universeChatChannelSelected(var13))

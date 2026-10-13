@@ -48,7 +48,8 @@ local t_4 = {
 	UserManual = "user_manual",
 	TimeUp = "time_up",
 	AutoPause = "auto_pause",
-	AutoChunk = "auto_chunk"
+	AutoChunk = "auto_chunk",
+	SafetyIntervention = "safety_intervention"
 }
 local t_5 = {
 	Granted = "granted",

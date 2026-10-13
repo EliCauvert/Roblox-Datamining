@@ -14,6 +14,7 @@ local searchIntroducedConversationIdsModule = require(parent.AppChat.searchIntro
 local fFlagFriendsChatConversationListFadeScrollbarModule = require(friendsChat.Flags.FFlagFriendsChatConversationListFadeScrollbar)
 local fFlagFriendsChatServerSideConversationSearchModule = require(friendsChat.Flags.FFlagFriendsChatServerSideConversationSearch)
 local fFlagFriendsChatConversationListFocusNav = require(parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
+local fFlagExpChatTabShortcutNav = require(parent.SharedFlags).FFlagExpChatTabShortcutNav
 local bidirectionalFlatList = require(parent.VirtualizedList).BidirectionalFlatList
 local useChatPlatformModule = require(parent.ExpChatIntegration.useChatPlatform)
 local useChatInputBarSettingsModule = require(parent.ExpChatIntegration.useChatInputBarSettings)
@@ -122,7 +123,7 @@ local _ = function(p3, p4)
 end
 
 return reactModule.memo(function(p3)
-	-- upvalues: useTokens (ref), fFlagFriendsChatScaleConversationRowHeightModule (ref), useTextSizeOffset (ref), useChatPlatformModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useLocalization (ref), t_1 (ref), useInterpolatedClientSettingsModule (ref), reactIsModule (ref), mergeTransparency (ref), getConversationRowHeightModule (ref), useChatInputBarSettingsModule (ref), layoutConstantsModule (ref), useFocusConversationListModule (ref), useConversationList (ref), useConversationListPaginationModule (ref), fFlagFriendsChatServerSideConversationSearchModule (ref), getConversationTitle (ref), useConversationSearchModule (ref), fFlagAppChatSearchSessionTelemetryModule (ref), useChatSearchResultsTelemetryModule (ref), resolveListStateModule (ref), fFlagFriendsChatLandingTelemetryFieldsModule (ref), getLandingEmptyStateTypeModule (ref), useChatSearchSessionModule (ref), useFriendsChatLandingTelemetryModule (ref), searchIntroducedConversationIdsModule (ref), textChatService (ref), var1 (ref), reactOtterModule (ref), var2 (ref), t (ref), fFlagFriendsChatConversationListFocusNav (ref), conversationRow (ref), promiseModule (ref), fFlagAppChatUseUltimateListConversationListModule (ref), conversationListUltimate (ref), bidirectionalFlatList (ref), friendsChatConversationListScrollbarThickness (ref), friendsChatConversationListWindowSize (ref), friendsChatConversationListInitialNumToRender (ref), friendsChatConversationListPaginationThresholdRows (ref), friendsChatConversationListAutoscrollToTopThreshold (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), text (ref), iconButton (ref), inputSize (ref), buttonVariant (ref)
+	-- upvalues: useTokens (ref), fFlagFriendsChatScaleConversationRowHeightModule (ref), useTextSizeOffset (ref), useChatPlatformModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useLocalization (ref), t_1 (ref), useInterpolatedClientSettingsModule (ref), reactIsModule (ref), mergeTransparency (ref), getConversationRowHeightModule (ref), useChatInputBarSettingsModule (ref), layoutConstantsModule (ref), fFlagExpChatTabShortcutNav (ref), foundationModule (ref), useFocusConversationListModule (ref), useConversationList (ref), useConversationListPaginationModule (ref), fFlagFriendsChatServerSideConversationSearchModule (ref), getConversationTitle (ref), useConversationSearchModule (ref), fFlagAppChatSearchSessionTelemetryModule (ref), useChatSearchResultsTelemetryModule (ref), resolveListStateModule (ref), fFlagFriendsChatLandingTelemetryFieldsModule (ref), getLandingEmptyStateTypeModule (ref), useChatSearchSessionModule (ref), useFriendsChatLandingTelemetryModule (ref), searchIntroducedConversationIdsModule (ref), textChatService (ref), var1 (ref), reactOtterModule (ref), var2 (ref), t (ref), fFlagFriendsChatConversationListFocusNav (ref), conversationRow (ref), promiseModule (ref), fFlagAppChatUseUltimateListConversationListModule (ref), conversationListUltimate (ref), bidirectionalFlatList (ref), friendsChatConversationListScrollbarThickness (ref), friendsChatConversationListWindowSize (ref), friendsChatConversationListInitialNumToRender (ref), friendsChatConversationListPaginationThresholdRows (ref), friendsChatConversationListAutoscrollToTopThreshold (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), text (ref), iconButton (ref), inputSize (ref), buttonVariant (ref)
 	local var4
 	local var5 = useTokens()
 	local var6 = if fFlagFriendsChatScaleConversationRowHeightModule then useTextSizeOffset() else nil
@@ -161,14 +162,15 @@ return reactModule.memo(function(p3)
 	local var15 = useChatInputBarSettingsModule()
 	local var16 = layoutConstantsModule.InputBarTopPadding + layoutConstantsModule.InputBarBottomPadding + layoutConstantsModule.InputBarTextVerticalPadding + ((if p3.isSpatialUIEnabled and var15 and var15.SpatialPanelTextSize then var15.SpatialPanelTextSize elseif var15 then var15.TextSize else var5.Typography.CaptionMedium.FontSize) or var5.Typography.CaptionMedium.FontSize)
 	local var17, var18 = reactModule.useState("")
-	local var19 = reactModule.useRef(nil)
-	local var20, var21 = useFocusConversationListModule(getTransparencyStore)
-	local var22 = p3.visible ~= false
-	local var23 = useConversationList(var22)
-	local var24 = useConversationListPaginationModule(var22, var23.listStatus)
-	local listStatus = var23.listStatus
-	local items = var23.items
-	local var25 = reactModule.useMemo(function()
+	local var19 = if fFlagExpChatTabShortcutNav then foundationModule.Hooks.useCursor(foundationModule.Enums.CursorType.RoundedRect) else nil
+	local var20 = reactModule.useRef(nil)
+	local var21, var22 = useFocusConversationListModule(getTransparencyStore)
+	local var23 = p3.visible ~= false
+	local var24 = useConversationList(var23)
+	local var25 = useConversationListPaginationModule(var23, var24.listStatus)
+	local listStatus = var24.listStatus
+	local items = var24.items
+	local var26 = reactModule.useMemo(function()
 		-- upvalues: fFlagFriendsChatServerSideConversationSearchModule (copy), items (ref), var17 (ref), getConversationTitle (copy)
 		if fFlagFriendsChatServerSideConversationSearchModule then
 			return items
@@ -183,49 +185,49 @@ return reactModule.memo(function(p3)
 		end
 		return t
 	end, { items, var17 })
-	local var26 = nil
+	local var27 = nil
 	
 	if fFlagFriendsChatServerSideConversationSearchModule then
-		local var27 = useConversationSearchModule(var17, var22)
-		var26 = var27
+		local var28 = useConversationSearchModule(var17, var23)
+		var27 = var28
 		
 		if fFlagAppChatSearchSessionTelemetryModule then
-			useChatSearchResultsTelemetryModule(var27)
+			useChatSearchResultsTelemetryModule(var28)
 		end
 	end
-	local var28
-	local var29 = if var26 == nil or not var26.isActive then nil else var26
-	local var30 = resolveListStateModule({
-		items = if fFlagFriendsChatServerSideConversationSearchModule then items else var25,
+	local var29
+	local var30 = if var27 == nil or not var27.isActive then nil else var27
+	local var31 = resolveListStateModule({
+		items = if fFlagFriendsChatServerSideConversationSearchModule then items else var26,
 		totalCount = #items,
 		isFetching = listStatus.isFetchingConversations == true,
 		hasError = listStatus.error ~= nil,
 		hasFetchedInitialPage = listStatus.hasFetchedInitialPage == true,
 		isFetchingNextPage = listStatus.isFetchingNextPage == true,
 		oldestConversationIsFetched = if listStatus.oldestConversationIsFetched ~= true then listStatus.isExhausted == true else true,
-		loadNext = var24.loadNext
-	}, var29)
-	local items_1 = var30.items
-	local shouldOfferRetry = var30.shouldOfferRetry
-	local var31 = var17 ~= ""
+		loadNext = var25.loadNext
+	}, var30)
+	local items_1 = var31.items
+	local shouldOfferRetry = var31.shouldOfferRetry
+	local var32 = var17 ~= ""
 	
 	if fFlagFriendsChatServerSideConversationSearchModule then
-		var28 = var29 ~= nil
-		var28 = nil
+		var29 = var30 ~= nil
+		var29 = nil
 	else
-		var28 = var31
+		var29 = var32
 	end
-	local var32 = if fFlagFriendsChatLandingTelemetryFieldsModule then getLandingEmptyStateTypeModule(var30, var31) else nil
+	local var33 = if fFlagFriendsChatLandingTelemetryFieldsModule then getLandingEmptyStateTypeModule(var31, var32) else nil
 	
 	if fFlagAppChatSearchSessionTelemetryModule then
-		useChatSearchSessionModule(var28 and p3.visible ~= false, fFlagFriendsChatServerSideConversationSearchModule)
+		useChatSearchSessionModule(var29 and p3.visible ~= false, fFlagFriendsChatServerSideConversationSearchModule)
 	end
-	local var33
-	local var34 = useFriendsChatLandingTelemetryModule({
+	local var34
+	local var35 = useFriendsChatLandingTelemetryModule({
 		conversations = items,
 		displayedConversations = items_1,
-		isFiltered = var28,
-		emptyStateType = var32
+		isFiltered = var29,
+		emptyStateType = var33
 	})
 	local t_2 = {
 		searchPlaceholder = var8.SearchPlaceholder,
@@ -234,8 +236,8 @@ return reactModule.memo(function(p3)
 		noLoadedConversationsFound = var8.NoChatFound,
 		noFriends = var8.NoFriends
 	}
-	local var35 = if var30.isInitialLoading then t_2.loadingConversations elseif var30.shouldShowBlockingError then t_2.loadConversationsError elseif var30.shouldShowEmptyState then if var30.hasNoFriends then t_2.noFriends else t_2.noLoadedConversationsFound else nil
-	local var36 = reactModule.useCallback(function(p4)
+	local var36 = if var31.isInitialLoading then t_2.loadingConversations elseif var31.shouldShowBlockingError then t_2.loadConversationsError elseif var31.shouldShowEmptyState then if var31.hasNoFriends then t_2.noFriends else t_2.noLoadedConversationsFound else nil
+	local var37 = reactModule.useCallback(function(p4)
 		-- upvalues: p3 (ref), fFlagFriendsChatServerSideConversationSearchModule (copy), searchIntroducedConversationIdsModule (copy)
 		if p3.onConversationActivated == nil or p4 == nil or p4.id == nil then return end
 		if fFlagFriendsChatServerSideConversationSearchModule then
@@ -243,7 +245,7 @@ return reactModule.memo(function(p3)
 		end
 		p3.onConversationActivated(p4.id)
 	end, { p3.onConversationActivated })
-	local var37 = reactModule.useCallback(function(p4)
+	local var38 = reactModule.useCallback(function(p4)
 		-- upvalues: textChatService (copy), p3 (ref)
 		local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 		
@@ -251,7 +253,7 @@ return reactModule.memo(function(p3)
 			p3.onAbsoluteSizeChanged(p4, chatWindowConfiguration)
 		end
 	end, { p3.onAbsoluteSizeChanged })
-	local var38 = reactModule.useCallback(function(p4)
+	local var39 = reactModule.useCallback(function(p4)
 		-- upvalues: textChatService (copy), p3 (ref)
 		local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 		
@@ -259,12 +261,12 @@ return reactModule.memo(function(p3)
 			p3.onAbsolutePositionChanged(p4, chatWindowConfiguration)
 		end
 	end, { p3.onAbsolutePositionChanged })
-	local var39 = reactModule.useCallback(function()
-		-- upvalues: var34 (ref), getTransparencyStore (ref)
-		var34.fireSearchActivatedEvent()
-		getTransparencyStore(false).setTextboxFocus()
-	end, { getTransparencyStore, var34.fireSearchActivatedEvent })
 	local var40 = reactModule.useCallback(function()
+		-- upvalues: var35 (ref), getTransparencyStore (ref)
+		var35.fireSearchActivatedEvent()
+		getTransparencyStore(false).setTextboxFocus()
+	end, { getTransparencyStore, var35.fireSearchActivatedEvent })
+	local var41 = reactModule.useCallback(function()
 		-- upvalues: getTransparencyStore (ref)
 		getTransparencyStore(false).clearTextboxFocus()
 	end, { getTransparencyStore })
@@ -275,122 +277,122 @@ return reactModule.memo(function(p3)
 			getTransparencyStore(false).clearTextboxFocus()
 		end
 	end, { getTransparencyStore })
-	local var41 = nil
 	local var42 = nil
+	local var43 = nil
 	
 	if var1 then
-		local var43 = reactModule.useRef(nil)
+		local var44 = reactModule.useRef(nil)
 		local _ = nil
-		local var44, var45 = reactOtterModule.useAnimatedBinding(1)
-		var41 = var44
-		var33 = var45
-		var42 = reactModule.useCallback(function()
-			-- upvalues: var43 (ref), var33 (write), reactOtterModule (copy), var2 (copy), t (copy)
-			if var43.current ~= nil then
-				pcall(task.cancel, var43.current)
-				var43.current = nil
+		local var45, var46 = reactOtterModule.useAnimatedBinding(1)
+		var42 = var45
+		var34 = var46
+		var43 = reactModule.useCallback(function()
+			-- upvalues: var44 (ref), var34 (write), reactOtterModule (copy), var2 (copy), t (copy)
+			if var44.current ~= nil then
+				pcall(task.cancel, var44.current)
+				var44.current = nil
 			end
-			var33(reactOtterModule.instant(0))
-			var43.current = task.delay(var2, function()
-				-- upvalues: var43 (copy), var33 (copy), reactOtterModule (copy), t (copy)
-				var43.current = nil
-				var33(reactOtterModule.spring(1, t))
+			var34(reactOtterModule.instant(0))
+			var44.current = task.delay(var2, function()
+				-- upvalues: var44 (copy), var34 (copy), reactOtterModule (copy), t (copy)
+				var44.current = nil
+				var34(reactOtterModule.spring(1, t))
 			end)
-		end, { var33 })
+		end, { var34 })
 		reactModule.useEffect(function()
-			-- upvalues: var43 (ref)
+			-- upvalues: var44 (ref)
 			return function()
-				-- upvalues: var43 (copy)
-				if var43.current ~= nil then
-					pcall(task.cancel, var43.current)
-					var43.current = nil
+				-- upvalues: var44 (copy)
+				if var44.current ~= nil then
+					pcall(task.cancel, var44.current)
+					var44.current = nil
 				end
 			end
 		end, {})
 	end
 	local createElement_3
-	local var46 = reactModule.useCallback(function(_)
-		-- upvalues: var1 (copy), var42 (write), getTransparencyStore (ref)
+	local var47 = reactModule.useCallback(function(_)
+		-- upvalues: var1 (copy), var43 (write), getTransparencyStore (ref)
 		if var1 then
-			var42()
+			var43()
 		end
 		getTransparencyStore(false).resetAllTransparency()
-	end, { getTransparencyStore, if var1 then var42 else nil })
-	var33 = if fFlagFriendsChatConversationListFocusNav and items_1[1] ~= nil then tostring(items_1[1].id) else nil
-	local var47 = reactModule.useCallback(function(p4)
-		-- upvalues: reactModule (copy), conversationRow (copy), var14 (ref), var36 (ref), var34 (ref), p3 (ref), fFlagFriendsChatConversationListFocusNav (copy), var33 (write), var21 (ref)
-		local var48 = tostring(p4.item.id)
+	end, { getTransparencyStore, if var1 then var43 else nil })
+	var34 = if fFlagFriendsChatConversationListFocusNav and items_1[1] ~= nil then tostring(items_1[1].id) else nil
+	local var48 = reactModule.useCallback(function(p4)
+		-- upvalues: reactModule (copy), conversationRow (copy), var14 (ref), var37 (ref), var35 (ref), p3 (ref), fFlagFriendsChatConversationListFocusNav (copy), var34 (write), var22 (ref)
+		local var49 = tostring(p4.item.id)
 		
 		return reactModule.createElement(conversationRow, {
 			isWideMode = false,
 			showBackground = false,
-			conversationId = var48,
+			conversationId = var49,
 			entryHeight = var14,
-			onActivated = var36,
-			fireClickEvent = var34.fireConversationClickedEvent,
-			fireImpressionEvent = var34.fireConversationImpressionEvent,
+			onActivated = var37,
+			fireClickEvent = var35.fireConversationClickedEvent,
+			fireImpressionEvent = var35.fireConversationImpressionEvent,
 			localUserId = p3.localUserId,
-			ref = if fFlagFriendsChatConversationListFocusNav and var48 == var33 then var21 else nil
+			ref = if fFlagFriendsChatConversationListFocusNav and var49 == var34 then var22 else nil
 		})
 	end, {
-		var14, var34.fireConversationClickedEvent,
-		var34.fireConversationImpressionEvent, var36, p3.localUserId, var33, var21
+		var14, var35.fireConversationClickedEvent,
+		var35.fireConversationImpressionEvent, var37, p3.localUserId, var34, var22
 	})
-	local var48 = reactModule.useCallback(function(_, p4)
+	local var49 = reactModule.useCallback(function(_, p4)
 		-- upvalues: var14 (ref)
 		return { length = var14, offset = var14 * (p4 - 1), index = p4 }
 	end, { var14 })
-	local var49 = reactModule.useCallback(function()
-		-- upvalues: var30 (ref)
-		var30.loadNext()
-	end, { var30.loadNext })
-	local var50 = reactModule.useCallback(function(_, p4)
-		-- upvalues: var19 (ref), var49 (ref)
-		local current = var19.current
+	local var50 = reactModule.useCallback(function()
+		-- upvalues: var31 (ref)
+		var31.loadNext()
+	end, { var31.loadNext })
+	local var51 = reactModule.useCallback(function(_, p4)
+		-- upvalues: var20 (ref), var50 (ref)
+		local current = var20.current
 		
 		if current ~= nil and p4 <= current.AbsoluteSize.Y then
-			var49()
+			var50()
 		end
-	end, { var49 })
-	local var51 = reactModule.useCallback(function()
-		-- upvalues: var49 (ref), promiseModule (copy)
-		var49()
+	end, { var50 })
+	local var52 = reactModule.useCallback(function()
+		-- upvalues: var50 (ref), promiseModule (copy)
+		var50()
 		
 		return promiseModule.resolve()
-	end, { var49 })
-	local var52 = reactModule.useCallback(function(p4)
+	end, { var50 })
+	local var53 = reactModule.useCallback(function(p4)
 		-- upvalues: var18 (ref)
 		var18(p4.Text)
 	end, {})
-	local var53 = reactModule.useCallback(function()
+	local var54 = reactModule.useCallback(function()
 		-- upvalues: var18 (ref)
 		var18("")
 	end, {})
-	local var54 = if fFlagFriendsChatServerSideConversationSearchModule then var30.listKey else nil
-	local var55 = if fFlagAppChatUseUltimateListConversationListModule then reactModule.createElement(conversationListUltimate, {
+	local var55 = if fFlagFriendsChatServerSideConversationSearchModule then var31.listKey else nil
+	local var56 = if fFlagAppChatUseUltimateListConversationListModule then reactModule.createElement(conversationListUltimate, {
 		isWideMode = false,
 		showScrollbarOnScroll = true,
 		showHeaderEntries = false,
 		shouldLogHeaderEntryExposures = false,
-		key = var54,
+		key = var55,
 		Size = UDim2.fromScale(1, 1),
 		entryHeight = var14,
 		itemList = items_1,
-		loadNext = var49,
-		isLoadingNext = var30.isLoadingNextPage,
-		oldestConversationIsFetched = var30.oldestConversationIsFetched,
-		onScrollUpdate = var46,
+		loadNext = var50,
+		isLoadingNext = var31.isLoadingNextPage,
+		oldestConversationIsFetched = var31.oldestConversationIsFetched,
+		onScrollUpdate = var47,
 		rowProps = { showBackground = false, localUserId = p3.localUserId },
 		localUserId = p3.localUserId,
-		onActivated = var36,
-		fireConversationClickedEvent = var34.fireConversationClickedEvent,
-		fireConversationImpressionEvent = var34.fireConversationImpressionEvent
+		onActivated = var37,
+		fireConversationClickedEvent = var35.fireConversationClickedEvent,
+		fireConversationImpressionEvent = var35.fireConversationImpressionEvent
 	}) else reactModule.createElement(bidirectionalFlatList, {
 		enableAutoscrollToTop = true,
-		key = var54,
+		key = var55,
 		data = items_1,
-		renderItem = var47,
-		getItemLayout = var48,
+		renderItem = var48,
+		getItemLayout = var49,
 		keyExtractor = function(p4)
 			return tostring(p4.id)
 		end,
@@ -401,22 +403,22 @@ return reactModule.memo(function(p3)
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Selectable = false,
-			ScrollBarImageTransparency = if var1 then var41 else nil,
+			ScrollBarImageTransparency = if var1 then var42 else nil,
 			ScrollBarThickness = friendsChatConversationListScrollbarThickness
 		},
 		contentContainerStyle = { BackgroundTransparency = 1, BorderSizePixel = 0 },
 		windowSize = friendsChatConversationListWindowSize,
 		initialNumToRender = friendsChatConversationListInitialNumToRender,
-		onScroll = var46,
-		onContentSizeChange = var50,
-		onEndReached = var51,
+		onScroll = var47,
+		onContentSizeChange = var51,
+		onEndReached = var52,
 		onEndReachedThreshold = var14 * friendsChatConversationListPaginationThresholdRows,
 		AutomaticCanvasSize = Enum.AutomaticSize.XY,
 		CanvasSize = UDim2.fromScale(0, 0),
 		autoscrollToTopThreshold = friendsChatConversationListAutoscrollToTopThreshold
 	})
 	local createElement = reactModule.createElement
-	local var56 = "Frame"
+	local var57 = "Frame"
 	local t_3 = {
 		Name = "chatWindow",
 		Active = true,
@@ -429,10 +431,10 @@ return reactModule.memo(function(p3)
 		ClipsDescendants = true,
 		LayoutOrder = p3.LayoutOrder or 1,
 		Size = p3.size or UDim2.new(1, 0, 1, layoutConstantsModule.PanelTopSpacerHeight + var16 + layoutConstantsModule.PanelBottomCornerRadius),
-		Visible = var22,
-		ref = var20,
-		[reactModule.Change.AbsoluteSize] = var37,
-		[reactModule.Change.AbsolutePosition] = var38,
+		Visible = var23,
+		ref = var21,
+		[reactModule.Change.AbsoluteSize] = var38,
+		[reactModule.Change.AbsolutePosition] = var39,
 		[reactModule.Event.MouseEnter] = p3.onHovered,
 		[reactModule.Event.MouseLeave] = p3.onUnhovered
 	}
@@ -486,6 +488,7 @@ return reactModule.memo(function(p3)
 					SearchBox = reactModule.createElement("TextBox", {
 						Name = "FriendsChatConversationListSearchBox",
 						BackgroundTransparency = 1,
+						SelectionImageObject = var19,
 						ClearTextOnFocus = false,
 						ClipsDescendants = true,
 						Font = if foundationFontFaceMigration then nil else var5.Typography.BodySmall.Font,
@@ -501,17 +504,17 @@ return reactModule.memo(function(p3)
 						TextTransparency = var12,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Center,
-						[reactModule.Event.Focused] = var39,
-						[reactModule.Event.FocusLost] = var40,
-						[reactModule.Change.Text] = var52
+						[reactModule.Event.Focused] = var40,
+						[reactModule.Event.FocusLost] = var41,
+						[reactModule.Change.Text] = var53
 					}, {
 						Flex = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill })
 					}),
-					ClearButton = if var31 then reactModule.createElement(view, {
+					ClearButton = if var32 then reactModule.createElement(view, {
 						Name = "FriendsChatConversationListSearchClear",
 						LayoutOrder = 3,
 						tag = "auto-xy",
-						onActivated = var53
+						onActivated = var54
 					}, {
 						Icon = reactModule.createElement(icon, {
 							name = iconName.CircleX,
@@ -535,7 +538,7 @@ return reactModule.memo(function(p3)
 	}
 	local t_6 = {}
 	local createElement_2 = reactModule.createElement
-	local var57 = "CanvasGroup"
+	local var58 = "CanvasGroup"
 	local t_7 = {
 		Name = "ListContent",
 		BackgroundTransparency = 1,
@@ -550,13 +553,13 @@ return reactModule.memo(function(p3)
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
 			Size = UDim2.fromScale(1, 1),
-			ref = var19
-		}, { List = var55 })
+			ref = var20
+		}, { List = var56 })
 	}
 	
-	if var35 ~= nil then
+	if var36 ~= nil then
 		createElement_3 = reactModule.createElement
-		local var58 = view
+		local var59 = view
 		local t_9 = {
 			tag = "col align-x-center align-y-center gap-small size-full padding-large",
 			BorderSizePixel = 0,
@@ -564,10 +567,10 @@ return reactModule.memo(function(p3)
 		}
 		local t_10 = {}
 		local createElement_4 = reactModule.createElement
-		local var59 = text
+		local var60 = text
 		local t_11 = {
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
-			Text = var35
+			Text = var36
 		}
 		local transparency = var5.Color.Content.Default.Transparency
 		t_11.textStyle = {
@@ -577,18 +580,18 @@ return reactModule.memo(function(p3)
 				return transparency + p4 * (1 - transparency)
 			end) else transparency
 		}
-		t_10.Message = createElement_4(var59, t_11)
+		t_10.Message = createElement_4(var60, t_11)
 		t_10.Retry = shouldOfferRetry and reactModule.createElement(iconButton, {
 			icon = iconName.ArrowSpinClockwise,
-			onActivated = var24.retryInitialFetch,
+			onActivated = var25.retryInitialFetch,
 			size = inputSize.Small,
 			variant = buttonVariant.Standard
 		}) or nil
-		createElement_3 = createElement_3(var58, t_9, t_10) or nil
+		createElement_3 = createElement_3(var59, t_9, t_10) or nil
 	end
 	t_8.Status = createElement_3
-	t_6.ListContent = createElement_2(var57, t_7, t_8)
+	t_6.ListContent = createElement_2(var58, t_7, t_8)
 	t_4.ListArea = createElement_1(view, t_5, t_6)
 	
-	return createElement(var56, t_3, t_4)
+	return createElement(var57, t_3, t_4)
 end)

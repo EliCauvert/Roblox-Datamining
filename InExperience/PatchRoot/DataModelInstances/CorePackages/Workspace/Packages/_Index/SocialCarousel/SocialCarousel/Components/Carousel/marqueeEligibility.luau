@@ -28,8 +28,8 @@ local function recordFinishedLoop(p1, p2, p3)
 	p1[text] = var1 - 1
 end
 
-local function isEligible(p1, p2, p3)
-	-- upvalues: tile (ref), presenceTypes (ref), tileVisibilityModule (ref)
+local function isHoverEligible(p1)
+	-- upvalues: tile (ref), presenceTypes (ref)
 	if p1.tileType ~= tile.Friend then
 		return false
 	end
@@ -40,20 +40,46 @@ local function isEligible(p1, p2, p3)
 	end
 	local lastLocation = presence.lastLocation
 	
-	if lastLocation == nil or lastLocation == "" or p1.subtitle ~= lastLocation then
+	return lastLocation == nil or lastLocation == "" or p1.subtitle ~= lastLocation
+end
+
+local function isEligible(p1, p2, p3)
+	-- upvalues: tile (ref), presenceTypes (ref), tileVisibilityModule (ref)
+	local var1, presence
+	if p1.tileType == tile.Friend then
+		presence = p1.presence
+		
+		if presence == nil or presence.userPresenceType ~= presenceTypes.InGame then
+			var1 = false
+		else
+			local lastLocation = presence.lastLocation
+			
+			if lastLocation ~= nil and lastLocation ~= "" then
+				var1 = p1.subtitle == lastLocation
+			end
+		end
+	else
+		var1 = false
+	end
+	if not var1 then
 		return false
 	end
-	local var1
-	local id = p1.id
-	local loopsRemaining = p3.loopsRemaining
+	local presence_1 = p1.presence
+	presence = if presence_1 ~= nil then nil else presence_1.lastLocation
 	
-	if loopsRemaining == nil then
-		var1 = 2
-	else
-		local var2 = loopsRemaining[id .. "\0" .. lastLocation]
-		var1 = if var2 == nil then 2 else var2
+	if presence ~= nil then
+		local var2
+		local id = p1.id
+		local loopsRemaining = p3.loopsRemaining
+		
+		if loopsRemaining == nil then
+			var2 = 2
+		else
+			local var3 = loopsRemaining[id .. "\0" .. presence]
+			var2 = if var3 == nil then 2 else var3
+		end
+		return if var2 <= 0 then false else tileVisibilityModule.isAtLeast70PercentVisible(p2, p3.canvasX, p3.containerWidth, p3.tileWidth, p3.gap)
 	end
-	return if var1 <= 0 then false else tileVisibilityModule.isAtLeast70PercentVisible(p2, p3.canvasX, p3.containerWidth, p3.tileWidth, p3.gap)
 end
 
 local function scanRow(p1, p2, p3)
@@ -76,22 +102,22 @@ local function scanRow(p1, p2, p3)
 end
 
 local _ = function(p4, p5)
-	local p14Count = #p4
+	local p15Count = #p4
 	
-	return if p14Count == 0 then nil elseif p5 == Enum.TextDirection.RightToLeft then p4[p14Count] else p4[1]
+	return if p15Count == 0 then nil elseif p5 == Enum.TextDirection.RightToLeft then p4[p15Count] else p4[1]
 end
 
 local function nextIndex(p4, p5, p6)
-	local p16Count = #p4
+	local p17Count = #p4
 	
-	if p16Count == 0 then
+	if p17Count == 0 then
 		return nil
 	elseif p5 == nil then
-		local p16Count_1 = #p4
+		local p17Count_1 = #p4
 		
-		return if p16Count_1 == 0 then nil elseif p6 == Enum.TextDirection.RightToLeft then p4[p16Count_1] else p4[1]
+		return if p17Count_1 == 0 then nil elseif p6 == Enum.TextDirection.RightToLeft then p4[p17Count_1] else p4[1]
 	elseif p6 == Enum.TextDirection.RightToLeft then
-		for i = p16Count, 1, -1 do
+		for i = p17Count, 1, -1 do
 			local var2 = p4[i]
 			
 			if var2 >= p5 then
@@ -99,7 +125,7 @@ local function nextIndex(p4, p5, p6)
 			end
 			return var2
 		end
-		return p4[p16Count]
+		return p4[p17Count]
 	else
 		for var2, v in ipairs(p4) do
 			if p5 < v then
@@ -114,19 +140,20 @@ return {
 	DEFAULT_LOOPS = 2,
 	loopKey = loopKey,
 	recordFinishedLoop = recordFinishedLoop,
+	isHoverEligible = isHoverEligible,
 	leadingEligible = function(p7, p8)
 		-- upvalues: scanRow (ref)
 		local var3 = scanRow(p7, p8, nil)
-		local var20Count = #var3
-		local var4 = if var20Count == 0 then nil elseif p8.direction == Enum.TextDirection.RightToLeft then var3[var20Count] else var3[1]
+		local var22Count = #var3
+		local var4 = if var22Count == 0 then nil elseif p8.direction == Enum.TextDirection.RightToLeft then var3[var22Count] else var3[1]
 		
 		return if var4 == nil then nil else p7[var4].id
 	end,
 	resolveActiveTileId = function(p7, p8, _)
 		-- upvalues: scanRow (ref)
 		local var3 = scanRow(p7, p8, nil)
-		local var23Count = #var3
-		local var4 = if var23Count == 0 then nil elseif p8.direction == Enum.TextDirection.RightToLeft then var3[var23Count] else var3[1]
+		local var25Count = #var3
+		local var4 = if var25Count == 0 then nil elseif p8.direction == Enum.TextDirection.RightToLeft then var3[var25Count] else var3[1]
 		
 		return if var4 == nil then nil else p7[var4].id
 	end,

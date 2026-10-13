@@ -7,6 +7,7 @@ local notificationService = game:GetService("NotificationService")
 local reactModule = require(parent.React)
 local chatInputBoxDisabledPressedSignal = require(parent.InterventionShared).Signals.chatInputBoxDisabledPressedSignal
 local dictationSafetyReminderSignal = require(parent.InterventionShared).Signals.dictationSafetyReminderSignal
+local experienceChatInterventionShownSignal = require(parent.InterventionShared).Signals.experienceChatInterventionShownSignal
 local constants = require(parent.InterventionShared).Utils.Constants
 local determineUFRInterventionType = require(parent.InterventionShared).Utils.determineUFRInterventionType
 local featureRestrictionDisplayDirectSignalModule = require(parent.UniversalFeatureRestrictions.featureRestrictionDisplayDirectSignal)
@@ -22,11 +23,12 @@ local fFlagUFRImprovementsModule = require(parent.InterventionShared.FFlagUFRImp
 local fFlagUFRAppealsAndModNoteFixModule = require(parent.InterventionShared.FFlagUFRAppealsAndModNoteFix)
 local fFlagTemporaryAvatarKickWarningDialogModule = require(parent.InterventionShared.FFlagTemporaryAvatarKickWarningDialog)
 local fFlagExpChatDictationContinuousSafetyReminder = require(parent.SharedFlags).FFlagExpChatDictationContinuousSafetyReminder
+local fFlagExpChatDictationStopOnSafetyIntervention = require(parent.SharedFlags).FFlagExpChatDictationStopOnSafetyIntervention
 
 function InExperienceInterventionEventReceiver(p1)
-	-- upvalues: reactModule (ref), notificationService (ref), constants (ref), httpService (ref), interventionTreatmentConfigListModule (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), chatService (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), featureRestrictionManagerService (ref), getModerationDetail (ref), inExperienceInterventionAnalyticsModule (ref), fFlagUFRImprovementsModule (ref), determineUFRInterventionType (ref), interventionTypes (ref), fFlagAppChatUniversalFeatureRestriction (ref), chatInputBoxDisabledPressedSignal (ref), fFlagExpChatDictationContinuousSafetyReminder (ref), dictationSafetyReminderSignal (ref), featureRestrictionDisplaySignalModule (ref), interventionAnalytics (ref), fFlagUFRAppealsAndModNoteFixModule (ref), featureRestrictionDisplayDirectSignalModule (ref)
+	-- upvalues: reactModule (ref), notificationService (ref), constants (ref), httpService (ref), interventionTreatmentConfigListModule (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), chatService (ref), fFlagExpChatDictationStopOnSafetyIntervention (ref), experienceChatInterventionShownSignal (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), featureRestrictionManagerService (ref), getModerationDetail (ref), inExperienceInterventionAnalyticsModule (ref), fFlagUFRImprovementsModule (ref), determineUFRInterventionType (ref), interventionTypes (ref), fFlagAppChatUniversalFeatureRestriction (ref), chatInputBoxDisabledPressedSignal (ref), fFlagExpChatDictationContinuousSafetyReminder (ref), dictationSafetyReminderSignal (ref), featureRestrictionDisplaySignalModule (ref), interventionAnalytics (ref), fFlagUFRAppealsAndModNoteFixModule (ref), featureRestrictionDisplayDirectSignalModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: notificationService (copy), constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p1 (ref), fFlagTemporaryAvatarKickWarningDialogModule (copy), chatService (copy), getFFlagGameJoinTimeoutChatAttemptEnabled (copy), featureRestrictionManagerService (copy), getModerationDetail (copy), inExperienceInterventionAnalyticsModule (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), fFlagAppChatUniversalFeatureRestriction (copy), chatInputBoxDisabledPressedSignal (copy), fFlagExpChatDictationContinuousSafetyReminder (copy), dictationSafetyReminderSignal (copy), featureRestrictionDisplaySignalModule (copy), interventionAnalytics (copy), fFlagUFRAppealsAndModNoteFixModule (copy), featureRestrictionDisplayDirectSignalModule (copy)
+		-- upvalues: notificationService (copy), constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p1 (ref), fFlagTemporaryAvatarKickWarningDialogModule (copy), chatService (copy), fFlagExpChatDictationStopOnSafetyIntervention (copy), experienceChatInterventionShownSignal (copy), getFFlagGameJoinTimeoutChatAttemptEnabled (copy), featureRestrictionManagerService (copy), getModerationDetail (copy), inExperienceInterventionAnalyticsModule (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), fFlagAppChatUniversalFeatureRestriction (copy), chatInputBoxDisabledPressedSignal (copy), fFlagExpChatDictationContinuousSafetyReminder (copy), dictationSafetyReminderSignal (copy), featureRestrictionDisplaySignalModule (copy), interventionAnalytics (copy), fFlagUFRAppealsAndModNoteFixModule (copy), featureRestrictionDisplayDirectSignalModule (copy)
 		local robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(function(p2)
 			-- upvalues: constants (copy), httpService (copy), interventionTreatmentConfigListModule (copy), p1 (copy), fFlagTemporaryAvatarKickWarningDialogModule (copy)
 			if p2.namespace == constants.FEATURE_INTERV_SIGNAL_NAMESPACE then
@@ -70,25 +72,33 @@ function InExperienceInterventionEventReceiver(p1)
 			end
 		end)
 		local timeoutChatAttemptConnection = chatService.TimeoutChatAttempt:Connect(function(_, p3)
-			-- upvalues: p1 (copy), constants (copy)
+			-- upvalues: p1 (copy), constants (copy), fFlagExpChatDictationStopOnSafetyIntervention (copy), experienceChatInterventionShownSignal (copy)
 			p1.uiStateDispatch({
 				isShown = true,
 				type = constants.UIStateActions.ToggleNotificationDialog,
 				treatmentType = constants.TreatmentType.ChatTimeoutChatAttempt,
 				endTime = p3
 			})
+			
+			if fFlagExpChatDictationStopOnSafetyIntervention then
+				experienceChatInterventionShownSignal:fire()
+			end
 		end)
 		local var1 = if getFFlagGameJoinTimeoutChatAttemptEnabled() then featureRestrictionManagerService.TimeoutChatAttempt:Connect(function(_, p3)
-			-- upvalues: p1 (copy), constants (copy)
+			-- upvalues: p1 (copy), constants (copy), fFlagExpChatDictationStopOnSafetyIntervention (copy), experienceChatInterventionShownSignal (copy)
 			p1.uiStateDispatch({
 				isShown = true,
 				type = constants.UIStateActions.ToggleNotificationDialog,
 				treatmentType = constants.TreatmentType.ChatTimeoutGameJoin,
 				endTime = p3
 			})
+			
+			if fFlagExpChatDictationStopOnSafetyIntervention then
+				experienceChatInterventionShownSignal:fire()
+			end
 		end) else nil
 		local featureTimeoutAttemptConnection = featureRestrictionManagerService.FeatureTimeoutAttempt:Connect(function(_, p3, p4, p5)
-			-- upvalues: p1 (copy), constants (copy)
+			-- upvalues: p1 (copy), constants (copy), fFlagExpChatDictationStopOnSafetyIntervention (copy), experienceChatInterventionShownSignal (copy)
 			if p5 == Enum.FeatureRestrictionAbuseVector.ExperienceChat then
 				p1.uiStateDispatch({
 					isShown = true,
@@ -96,10 +106,14 @@ function InExperienceInterventionEventReceiver(p1)
 					treatmentType = constants.TreatmentType.ChatTimeoutChatAttempt,
 					endTime = p3 + p4
 				})
+				
+				if fFlagExpChatDictationStopOnSafetyIntervention then
+					experienceChatInterventionShownSignal:fire()
+				end
 			end
 		end)
 		local showFeatureInterventionDetailsConnection = featureRestrictionManagerService.ShowFeatureInterventionDetails:Connect(function(p3)
-			-- upvalues: getModerationDetail (copy), constants (copy), inExperienceInterventionAnalyticsModule (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), p1 (copy)
+			-- upvalues: getModerationDetail (copy), constants (copy), inExperienceInterventionAnalyticsModule (copy), fFlagExpChatDictationStopOnSafetyIntervention (copy), experienceChatInterventionShownSignal (copy), fFlagUFRImprovementsModule (copy), determineUFRInterventionType (copy), interventionTypes (copy), p1 (copy)
 			if p3 == Enum.FeatureRestrictionAbuseVector.ExperienceChat then
 				local var2 = nil
 				getModerationDetail({ abuseVector = constants.AbuseVectorType.ExperienceChat }):andThen(function(p4)

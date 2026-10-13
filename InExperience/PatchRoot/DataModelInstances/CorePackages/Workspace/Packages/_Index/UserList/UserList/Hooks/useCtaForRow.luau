@@ -10,6 +10,7 @@ local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local fFlagUserListCtaAnalyticsEnabled = require(parent.SharedFlags).FFlagUserListCtaAnalyticsEnabled
 local fFlagGameJoinCardSourceAttribution = require(parent.SharedFlags).FFlagGameJoinCardSourceAttribution
+local fFlagUserListSurfaceJoin = require(parent.SharedFlags).FFlagUserListSurfaceJoin
 local fFlagUserListCanonicalCtaAnalyticsModule = require(userList.Flags.FFlagUserListCanonicalCtaAnalytics)
 local fFlagUserListViewCtaAnalyticsModule = require(userList.Flags.FFlagUserListViewCtaAnalytics)
 local reportCtaActivatedModule = require(userList.Analytics.reportCtaActivated)
@@ -33,7 +34,7 @@ local function _(p1, p2, p3)
 end
 
 return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), appPage (ref), fFlagGameJoinCardSourceAttribution (ref), fFlagSignalsNavP3Dispatch (ref), navigationCommands (ref), navigateDown (ref), enumsModule (ref), fFlagUserListViewCtaAnalyticsModule (ref), reportViewCtaModule (ref), buttonTypes (ref), buttonVariant (ref), dataStatus (ref), t (ref), mapServerActionsToRowCtaModule (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), fFlagUserListCtaAnalyticsEnabled (ref), reportCtaActivatedModule (ref)
+	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), appPage (ref), fFlagGameJoinCardSourceAttribution (ref), fFlagSignalsNavP3Dispatch (ref), navigationCommands (ref), navigateDown (ref), enumsModule (ref), fFlagUserListViewCtaAnalyticsModule (ref), reportViewCtaModule (ref), buttonTypes (ref), buttonVariant (ref), dataStatus (ref), t (ref), mapServerActionsToRowCtaModule (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), fFlagUserListCtaAnalyticsEnabled (ref), reportCtaActivatedModule (ref), fFlagUserListSurfaceJoin (ref)
 	local var1 = useDispatch()
 	local var2 = useLocalUserId()
 	local var3 = reactModule.useCallback(function(p8, p9)
@@ -68,7 +69,7 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 	end, { var1, p4 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: p5 (ref), p4 (ref), var2 (ref), var4 (ref), fFlagUserListViewCtaAnalyticsModule (copy), reportViewCtaModule (copy), buttonTypes (copy), buttonVariant (copy), p2 (ref), dataStatus (copy), t (copy), mapServerActionsToRowCtaModule (copy), p1 (ref), p3 (ref), fFlagUserListCanonicalCtaAnalyticsModule (copy), p7 (ref), p6 (ref), fFlagUserListCtaAnalyticsEnabled (copy), reportCtaActivatedModule (copy), var3 (ref), fFlagGameJoinCardSourceAttribution (copy)
+		-- upvalues: p5 (ref), p4 (ref), var2 (ref), var4 (ref), fFlagUserListViewCtaAnalyticsModule (copy), reportViewCtaModule (copy), buttonTypes (copy), buttonVariant (copy), p2 (ref), dataStatus (copy), t (copy), mapServerActionsToRowCtaModule (copy), p1 (ref), p3 (ref), fFlagUserListCanonicalCtaAnalyticsModule (copy), p7 (ref), p6 (ref), fFlagUserListCtaAnalyticsEnabled (copy), reportCtaActivatedModule (copy), fFlagUserListSurfaceJoin (copy), var3 (ref), fFlagGameJoinCardSourceAttribution (copy)
 		if p5 and p5.showSelfProfileCta and p4 == var2 then
 			local var5 = var4
 			
@@ -103,7 +104,7 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 			local cloned = table.clone(primaryCta)
 			
 			function cloned.onActivated()
-				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), p5 (copy), buttonTypes (copy), p4 (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), p7 (copy), var3 (copy), fFlagGameJoinCardSourceAttribution (copy)
+				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), p5 (copy), buttonTypes (copy), p4 (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), p7 (copy), fFlagUserListSurfaceJoin (copy), var3 (copy), fFlagGameJoinCardSourceAttribution (copy)
 				if fFlagUserListCtaAnalyticsEnabled then
 					local var8 = if p5 then p5.onCtaActivated else nil
 					
@@ -115,6 +116,11 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 				
 				if fFlagUserListCanonicalCtaAnalyticsModule then
 					reportCtaActivatedModule(var9, buttonTypes.Join, p4, p7)
+				end
+				if fFlagUserListSurfaceJoin and p5 and p5.join then
+					p5.join.onActivated(p4)
+					
+					return
 				end
 				var3(p4, if fFlagGameJoinCardSourceAttribution then var9 else nil)
 			end

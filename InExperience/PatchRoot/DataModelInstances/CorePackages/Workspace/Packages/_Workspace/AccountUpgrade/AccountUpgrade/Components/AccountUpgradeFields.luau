@@ -28,21 +28,25 @@ local userGender = authCommonModule.Enums.UserGender
 local formatBoldRichText = authCommonModule.Utils.formatBoldRichText
 
 return function(p1)
-	-- upvalues: foundationModule (ref), userGender (ref), getFFlagAuthCollapsingValidatorFoundationInput (ref), formatBoldRichText (ref), reactModule (ref), view (ref), accountUpgradeFieldModule (ref), inputLabel (ref), inputLabelSize (ref), text (ref), icon (ref), iconName (ref), iconSize (ref), accountUpgradeFieldErrorModule (ref), usernameFieldWithSuggestionsModule (ref), collapsingTextInputValidator (ref), passwordValidator (ref), inputSize (ref), UIConstants (ref), textInput (ref), chip (ref), chipSize (ref)
+	-- upvalues: inputSize (ref), inputLabelSize (ref), chipSize (ref), foundationModule (ref), userGender (ref), getFFlagAuthCollapsingValidatorFoundationInput (ref), formatBoldRichText (ref), reactModule (ref), view (ref), accountUpgradeFieldModule (ref), inputLabel (ref), text (ref), icon (ref), iconName (ref), iconSize (ref), accountUpgradeFieldErrorModule (ref), usernameFieldWithSuggestionsModule (ref), collapsingTextInputValidator (ref), passwordValidator (ref), UIConstants (ref), textInput (ref), chip (ref)
 	local createElement_1
 	local form = p1.form
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = form.gender == userGender.Female
-	local var3 = form.gender == userGender.Male
-	local var4 = getFFlagAuthCollapsingValidatorFoundationInput()
-	local color3 = var1.Color.Content.Default.Color3
-	local var5 = form.birthdayError ~= nil and form.birthdayError ~= ""
+	local var1 = p1.size == inputSize.Large
+	local var2 = if var1 then inputSize.Large else inputSize.Medium
+	local var3 = if var1 then inputLabelSize.Large else inputLabelSize.Medium
+	local var4 = if var1 then chipSize.Large else chipSize.Medium
+	local var5 = foundationModule.Hooks.useTokens()
+	local var6 = form.gender == userGender.Female
+	local var7 = form.gender == userGender.Male
+	local var8 = getFFlagAuthCollapsingValidatorFoundationInput()
+	local color3 = var5.Color.Content.Default.Color3
+	local var9 = form.birthdayError ~= nil and form.birthdayError ~= ""
 	local fieldStates = form.fieldStates
-	local var6 = form.boldFieldLabels == true
+	local var10 = if p1.boldLabels ~= true then form.boldFieldLabels == true else true
 	
 	local function _(p2)
-		-- upvalues: var6 (ref), formatBoldRichText (copy)
-		return if var6 then formatBoldRichText(p2) else p2
+		-- upvalues: var10 (ref), formatBoldRichText (copy)
+		return if var10 then formatBoldRichText(p2) else p2
 	end
 	
 	local createElement = reactModule.createElement
@@ -56,7 +60,7 @@ return function(p1)
 		createElement_1 = nil
 	else
 		createElement_1 = reactModule.createElement
-		local var7 = view
+		local var11 = view
 		local t_2 = {
 			tag = "col gap-small size-full-0 auto-y",
 			LayoutOrder = 1
@@ -69,17 +73,19 @@ return function(p1)
 			testId = "AccountUpgradeBirthdayLabel"
 		}
 		local birthdayLabel = form.birthdayLabel
-		t_4.Text = if var6 then formatBoldRichText(birthdayLabel) else birthdayLabel
-		t_4.RichText = var6
-		t_4.size = inputLabelSize.Medium
+		t_4.Text = if var10 then formatBoldRichText(birthdayLabel) else birthdayLabel
+		t_4.RichText = var10
+		t_4.size = var3
 		t_3.Label = createElement_2(inputLabel, t_4)
 		t_3.BirthdayButton = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			testId = "AccountUpgradeBirthdayField",
 			tag = {
-				["row flex-between align-y-center size-full-1000 padding-medium stroke-standard stroke-position-inner radius-medium"] = true,
-				["stroke-system-alert"] = var5,
-				["stroke-emphasis"] = not var5
+				["row flex-between align-y-center padding-medium stroke-standard stroke-position-inner radius-medium"] = true,
+				["size-full-1000"] = not var1,
+				["size-full-1200"] = var1,
+				["stroke-system-alert"] = var9,
+				["stroke-emphasis"] = not var9
 			},
 			onActivated = form.onBirthdayActivated
 		}, {
@@ -87,7 +93,9 @@ return function(p1)
 				LayoutOrder = 1,
 				Text = if form.birthdayText ~= "" then form.birthdayPlaceholder else form.birthdayText,
 				tag = {
-					["auto-xy text-body-medium text-align-x-left"] = true,
+					["auto-xy text-align-x-left"] = true,
+					["text-body-medium"] = not var1,
+					["text-body-large"] = var1,
 					["content-emphasis"] = form.birthdayText ~= "",
 					["content-muted"] = form.birthdayText == ""
 				}
@@ -97,7 +105,7 @@ return function(p1)
 				testId = "AccountUpgradeBirthdayIcon",
 				name = iconName.Calendar,
 				size = iconSize.Small,
-				style = var1.Color.Content.Muted
+				style = var5.Color.Content.Muted
 			})
 		})
 		t_3.Error = reactModule.createElement(accountUpgradeFieldErrorModule, {
@@ -105,14 +113,16 @@ return function(p1)
 			testId = "AccountUpgradeBirthdayError",
 			text = form.birthdayError
 		})
-		createElement_1 = createElement_1(var7, t_2, t_3)
+		createElement_1 = createElement_1(var11, t_2, t_3)
 	end
 	local createElement_2
 	t_1.BirthdayField = createElement_1
 	t_1.UsernameField = if fieldStates[accountUpgradeFieldModule.Username] ~= nil then nil else reactModule.createElement(usernameFieldWithSuggestionsModule, {
 		LayoutOrder = 2,
 		titleTextKey = form.usernameTitleTextKey,
-		isTitleBold = var6,
+		isTitleBold = var10,
+		inputSize = var2,
+		titleSize = var3,
 		summaryErrorTextKey = form.usernameSummaryErrorTextKey,
 		isPrerequisiteMet = form.isUsernamePrerequisiteMet,
 		validatorAdditionalProps = form.usernameValidatorAdditionalProps,
@@ -129,8 +139,8 @@ return function(p1)
 		onTextValidated = form.onUsernameValidated,
 		onFocused = form.onUsernameFocused,
 		onIssueConditionChanged = form.onUsernameIssueConditionChanged,
-		useFoundationTextInput = var4,
-		contentGap = var1.Gap.Small,
+		useFoundationTextInput = var8,
+		contentGap = var5.Gap.Small,
 		colorContentOverride = color3
 	})
 	t_1.PasswordField = if fieldStates[accountUpgradeFieldModule.Password] ~= nil then nil else reactModule.createElement(view, {
@@ -155,15 +165,15 @@ return function(p1)
 			onInputTextChanged = form.onPasswordChanged,
 			onInputTextValidated = form.onPasswordValidated,
 			textBoxFocusedCallback = form.onPasswordFocused,
-			useFoundationTextInput = var4,
-			foundationInputSize = inputSize.Medium,
-			foundationTitleSize = inputLabelSize.Medium,
-			foundationTitleIsBold = var6,
+			useFoundationTextInput = var8,
+			foundationInputSize = var2,
+			foundationTitleSize = var3,
+			foundationTitleIsBold = var10,
 			foundationIconTrailing = {
 				name = if form.hidePassword then UIConstants.HIDE_PASSWORD_ICON else UIConstants.SHOW_PASSWORD_ICON,
 				onActivated = form.onPasswordVisibilityToggle
 			},
-			contentGapOverride = var1.Gap.Small,
+			contentGapOverride = var5.Gap.Small,
 			colorContentOverride = color3
 		})
 	})
@@ -172,7 +182,7 @@ return function(p1)
 		createElement_2 = nil
 	else
 		createElement_2 = reactModule.createElement
-		local var8 = view
+		local var12 = view
 		local t_2 = {
 			tag = "col gap-small size-full-0 auto-y",
 			LayoutOrder = 4
@@ -181,9 +191,9 @@ return function(p1)
 		local createElement_3 = reactModule.createElement
 		local t_4 = { LayoutOrder = 1, testId = "AccountUpgradeEmailLabel" }
 		local emailLabel = form.emailLabel
-		t_4.Text = if var6 then formatBoldRichText(emailLabel) else emailLabel
-		t_4.RichText = var6
-		t_4.size = inputLabelSize.Medium
+		t_4.Text = if var10 then formatBoldRichText(emailLabel) else emailLabel
+		t_4.RichText = var10
+		t_4.size = var3
 		t_3.Label = createElement_3(inputLabel, t_4)
 		t_3.Input = reactModule.createElement(textInput, {
 			label = "",
@@ -195,10 +205,10 @@ return function(p1)
 			onChanged = form.onEmailChanged,
 			hasError = form.emailError ~= nil and form.emailError ~= "",
 			width = UDim.new(1, 0),
-			size = inputSize.Medium
+			size = var2
 		})
 		t_3.Error = reactModule.createElement(accountUpgradeFieldErrorModule, { LayoutOrder = 3, text = form.emailError })
-		createElement_2 = createElement_2(var8, t_2, t_3)
+		createElement_2 = createElement_2(var12, t_2, t_3)
 	end
 	local createElement_3
 	t_1.EmailField = createElement_2
@@ -207,7 +217,7 @@ return function(p1)
 		createElement_3 = nil
 	else
 		createElement_3 = reactModule.createElement
-		local var9 = view
+		local var13 = view
 		local t_2 = {
 			tag = "col gap-small size-full-0 auto-y",
 			LayoutOrder = 5
@@ -216,9 +226,9 @@ return function(p1)
 		local createElement_4 = reactModule.createElement
 		local t_4 = { LayoutOrder = 1, testId = "AccountUpgradeGenderLabel" }
 		local genderLabel = form.genderLabel
-		t_4.Text = if var6 then formatBoldRichText(genderLabel) else genderLabel
-		t_4.RichText = var6
-		t_4.size = inputLabelSize.Medium
+		t_4.Text = if var10 then formatBoldRichText(genderLabel) else genderLabel
+		t_4.RichText = var10
+		t_4.size = var3
 		t_3.Label = createElement_4(inputLabel, t_4)
 		t_3.Options = reactModule.createElement(view, {
 			tag = "row gap-small size-full-0 auto-y",
@@ -229,11 +239,11 @@ return function(p1)
 				testId = "AccountUpgradeGenderFemale",
 				text = form.femaleText,
 				leading = iconName.HeadFemale,
-				size = chipSize.Medium,
-				isChecked = var2,
+				size = var4,
+				isChecked = var6,
 				onActivated = function()
-					-- upvalues: form (ref), var2 (ref), userGender (copy)
-					form.onGenderChanged(if var2 then userGender.Unknown else userGender.Female)
+					-- upvalues: form (ref), var6 (ref), userGender (copy)
+					form.onGenderChanged(if var6 then userGender.Unknown else userGender.Female)
 				end
 			}),
 			Male = reactModule.createElement(chip, {
@@ -241,15 +251,15 @@ return function(p1)
 				testId = "AccountUpgradeGenderMale",
 				text = form.maleText,
 				leading = iconName.HeadMale,
-				size = chipSize.Medium,
-				isChecked = var3,
+				size = var4,
+				isChecked = var7,
 				onActivated = function()
-					-- upvalues: form (ref), var3 (ref), userGender (copy)
-					form.onGenderChanged(if var3 then userGender.Unknown else userGender.Male)
+					-- upvalues: form (ref), var7 (ref), userGender (copy)
+					form.onGenderChanged(if var7 then userGender.Unknown else userGender.Male)
 				end
 			})
 		})
-		createElement_3 = createElement_3(var9, t_2, t_3)
+		createElement_3 = createElement_3(var13, t_2, t_3)
 	end
 	t_1.GenderField = createElement_3
 	

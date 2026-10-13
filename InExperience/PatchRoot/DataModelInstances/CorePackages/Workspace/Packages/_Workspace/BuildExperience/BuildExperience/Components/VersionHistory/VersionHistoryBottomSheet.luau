@@ -4,7 +4,6 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local fFlagBuildExperienceVersionHistoryPaginationModule = require(buildExperience.Flags.FFlagBuildExperienceVersionHistoryPagination)
 local fIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule = require(buildExperience.Flags.FIntBuildExperienceVersionHistoryLoadMoreViewportPercent)
 local latestVersionCardViewModule = require(script.Parent.LatestVersionCard.LatestVersionCardView)
@@ -32,7 +31,7 @@ local function VersionHistoryContent(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), VERSION_HISTORY_VERSIONS_TITLE (ref), fFlagBuildAgentRollbackModule (ref), latestVersionCardViewModule (ref), versionHistoryCardModule (ref), view (ref), checkbox (ref), text (ref), useScaledValue (ref), versionHistorySectionModule (ref), liveVersionCardViewModule (ref), sheet (ref), VersionHistoryContent (ref), fFlagBuildExperienceVersionHistoryPaginationModule (ref), restoreVersionDialogModule (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), VERSION_HISTORY_VERSIONS_TITLE (ref), latestVersionCardViewModule (ref), versionHistoryCardModule (ref), view (ref), checkbox (ref), text (ref), useScaledValue (ref), versionHistorySectionModule (ref), liveVersionCardViewModule (ref), sheet (ref), VersionHistoryContent (ref), fFlagBuildExperienceVersionHistoryPaginationModule (ref), restoreVersionDialogModule (ref)
 	local testId = p1.testId or "version-history-bottom-sheet"
 	local scrollingFrameRef = p1.scrollingFrameRef or reactModule.useRef(nil)
 	local var1, var2 = reactModule.useState(nil)
@@ -148,42 +147,31 @@ return function(p1)
 			isOpen = true,
 			title = var1.versionLabel,
 			description = var1.description,
-			isLoading = if fFlagBuildAgentRollbackModule then var3 else nil,
+			isLoading = var3,
 			onRestore = reactModule.useCallback(function()
-				-- upvalues: var1 (ref), fFlagBuildAgentRollbackModule (copy), var2 (ref), p1 (ref), var3 (ref), var4 (ref)
+				-- upvalues: var1 (ref), p1 (ref), var3 (ref), var4 (ref), var2 (ref)
 				if var1 == nil then return end
-				if fFlagBuildAgentRollbackModule then
-					if p1.isRestoreDisabled or var3 then return end
-					var4(true)
-					local var10 = p1.onRestore(var1)
-					
-					if var10 == nil then
-						var4(false)
-						
-						return
-					end
-					var10:andThen(function()
-						-- upvalues: var4 (copy), var2 (copy), p1 (copy)
-						var4(false)
-						var2(nil)
-						
-						if p1.onRestoreStarted ~= nil then
-							p1.onRestoreStarted()
-						end
-					end):catch(function()
-						-- upvalues: var4 (copy)
-						var4(false)
-					end)
+				if p1.isRestoreDisabled or var3 then return end
+				var4(true)
+				local var10 = p1.onRestore(var1)
+				
+				if var10 == nil then
+					var4(false)
 					
 					return
-				else
+				end
+				var10:andThen(function()
+					-- upvalues: var4 (copy), var2 (copy), p1 (copy)
+					var4(false)
 					var2(nil)
 					
-					if p1.isRestoreDisabled then
-						return
+					if p1.onRestoreStarted ~= nil then
+						p1.onRestoreStarted()
 					end
-					p1.onRestore(var1)
-				end
+				end):catch(function()
+					-- upvalues: var4 (copy)
+					var4(false)
+				end)
 			end, {
 				var1,
 				p1.isRestoreDisabled,

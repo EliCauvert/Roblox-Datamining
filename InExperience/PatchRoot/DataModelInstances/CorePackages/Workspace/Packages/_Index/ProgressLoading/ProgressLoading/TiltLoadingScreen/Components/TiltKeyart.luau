@@ -6,6 +6,7 @@ local view = foundationModule.View
 local image = foundationModule.Image
 local skeleton = foundationModule.Skeleton
 local useTokens = foundationModule.Hooks.useTokens
+local fFlagLoadingScreenMilestones = require(parent.SharedFlags).FFlagLoadingScreenMilestones
 local TILT_DEGREES = require(tiltLoadingScreen.Constants).KEYART.TILT_DEGREES
 local _ = require(tiltLoadingScreen.Types)
 local t = {
@@ -20,14 +21,35 @@ local t_1 = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), t (ref), t_1 (ref), TILT_DEGREES (ref), view (ref), skeleton (ref), image (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), t (ref), t_1 (ref), TILT_DEGREES (ref), fFlagLoadingScreenMilestones (ref), view (ref), skeleton (ref), image (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
 	local keyart = p1.keyart or t
 	local frame = p1.frame or t_1
 	local var4 = var1.Size.Size_2400 * 2
 	local var5 = var4 / (math.cos(math.rad(TILT_DEGREES)) + math.sin(math.rad(TILT_DEGREES)))
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref)
+		if p2 == Enum.AssetFetchStatus.Success then
+			var3(true)
+		end
+	end, {})
 	
+	if fFlagLoadingScreenMilestones then
+		reactModule.useEffect(function()
+			-- upvalues: p1 (ref), var2 (ref)
+			local onThumbnailLoaded = p1.onThumbnailLoaded
+			
+			if not onThumbnailLoaded then return end
+			if var2 and p1.thumbnailUrl ~= "" then
+				onThumbnailLoaded(p1.thumbnailUrl)
+			end
+			return function()
+				-- upvalues: onThumbnailLoaded (ref)
+				onThumbnailLoaded(nil)
+			end
+		end, { var2, p1.thumbnailUrl, p1.onThumbnailLoaded })
+	end
 	return reactModule.createElement(view, {
 		testId = "tilt-keyart",
 		Size = UDim2.fromOffset(var4, var4)
@@ -68,12 +90,7 @@ return reactModule.memo(function(p1)
 				Image = p1.thumbnailUrl,
 				ScaleType = Enum.ScaleType.Crop,
 				ImageTransparency = if var2 then 0 else 1,
-				onLoaded = reactModule.useCallback(function(p2)
-					-- upvalues: var3 (ref)
-					if p2 == Enum.AssetFetchStatus.Success then
-						var3(true)
-					end
-				end, {})
+				onLoaded = var6
 			}),
 			RevealCover = reactModule.createElement(view, {
 				tag = "size-full",

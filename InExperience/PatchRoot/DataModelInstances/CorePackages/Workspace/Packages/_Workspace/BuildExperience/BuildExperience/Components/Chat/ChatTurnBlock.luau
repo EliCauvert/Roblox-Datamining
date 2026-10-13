@@ -17,6 +17,7 @@ local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperie
 local fFlagBuildExperienceCopyChatMessagesModule = require(buildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local fFlagBuildAgentAdCampaignRefreshEligibilityModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
 local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
 local fFlagBuildExperiencePlaytestCardPublishCtaModule = require(buildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
@@ -385,7 +386,7 @@ local function TurnWorkSegment(p1)
 end
 
 return reactModule.memo(function(p2)
-	-- upvalues: reactModule (ref), turnProjectionModule (ref), reportTurnActivityGapModule (ref), useReactiveValue (ref), t (ref), fFlagBuildAgentAdCampaignCardModule (ref), var5 (ref), t_1 (ref), foundationModule (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), renderWorkSegment (ref), TurnWorkSegment (ref), fFlagBuildExperiencePlaytestCardPublishCtaModule (ref), PlaytestCardSection (ref), playtestCompletedCardModule (ref), var4 (ref), var3 (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisPositionProviderModule (ref), view (ref), agentTurnFeedbackModule (ref)
+	-- upvalues: reactModule (ref), turnProjectionModule (ref), reportTurnActivityGapModule (ref), useReactiveValue (ref), t (ref), fFlagBuildAgentAdCampaignCardModule (ref), var5 (ref), t_1 (ref), foundationModule (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), renderWorkSegment (ref), TurnWorkSegment (ref), fFlagBuildExperiencePlaytestCardPublishCtaModule (ref), PlaytestCardSection (ref), playtestCompletedCardModule (ref), fFlagBuildAgentAdCampaignRefreshEligibilityModule (ref), var4 (ref), var3 (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisPositionProviderModule (ref), view (ref), agentTurnFeedbackModule (ref)
 	local turn = p2.turn
 	local turnState = turn.turnState
 	local turnKey = turn.turnKey
@@ -509,13 +510,17 @@ return reactModule.memo(function(p2)
 		elseif v.kind == "agent_ad_campaign_card" and fFlagBuildAgentAdCampaignCardModule then
 			local toolCallId = var23[v.toolCallId]
 			local state = toolCallId.state
+			local var30 = state
 			
-			if state ~= nil then
+			if fFlagBuildAgentAdCampaignRefreshEligibilityModule and var30 ~= nil and var30.campaignId == nil then
+				var30 = nil
+			end
+			if var30 ~= nil then
 				var29 = reactModule.createElement(var4, {
 					LayoutOrder = var28,
-					variant = state.variant,
-					campaignStartDate = state.campaignStartDate,
-					campaignEndDate = state.campaignEndDate,
+					variant = var30.variant,
+					campaignStartDate = var30.campaignStartDate,
+					campaignEndDate = var30.campaignEndDate,
 					isDisabled = p2.onAgentAdCampaignActive == nil,
 					onActivated = function()
 						-- upvalues: p2 (ref)
@@ -525,14 +530,27 @@ return reactModule.memo(function(p2)
 					end
 				})
 			elseif v.offers ~= nil and not toolCallId.isPending then
-				var29 = reactModule.createElement(var3, {
+				local isLoading
+				local createElement = reactModule.createElement
+				local var31 = var3
+				local t_3 = {
 					LayoutOrder = var28,
-					freePromotionsRemaining = v.availableCreditsSnapshot,
-					fundingType = toolCallId.fundingType,
-					containerRef = toolCallId.cardRef,
-					isCreateDisabled = toolCallId.isCreateDisabled,
-					onCreate = toolCallId.onCreate
-				})
+					freePromotionsRemaining = v.availableCreditsSnapshot
+				}
+				
+				if fFlagBuildAgentAdCampaignRefreshEligibilityModule and state ~= nil then
+					isLoading = state.eligibilityStatus == "loading"
+					isLoading = nil
+				else
+					isLoading = nil
+				end
+				t_3.isCreatePending = isLoading
+				t_3.eligibilityError = if fFlagBuildAgentAdCampaignRefreshEligibilityModule and state ~= nil and state.eligibilityStatus ~= "loading" then state.eligibilityStatus else nil
+				t_3.fundingType = toolCallId.fundingType
+				t_3.containerRef = toolCallId.cardRef
+				t_3.isCreateDisabled = toolCallId.isCreateDisabled
+				t_3.onCreate = toolCallId.onCreate
+				var29 = createElement(var31, t_3)
 			end
 		end
 		if var29 ~= nil then

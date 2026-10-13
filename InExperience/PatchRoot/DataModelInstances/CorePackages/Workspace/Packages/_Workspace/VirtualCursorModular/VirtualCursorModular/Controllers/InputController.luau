@@ -116,6 +116,11 @@ function t:OnDirectionalButtons(p1, p2)
 	if self._behavior ~= enumsModule.Behavior.VirtualCursor or not p2 then
 		return Enum.ContextActionResult.Pass
 	end
+	local keyCode = p2.KeyCode
+	
+	if keyCode ~= Enum.KeyCode.ButtonUp and keyCode ~= Enum.KeyCode.ButtonDown and (keyCode ~= Enum.KeyCode.ButtonLeft and keyCode ~= Enum.KeyCode.ButtonRight) then
+		return Enum.ContextActionResult.Pass
+	end
 	local pass = Enum.ContextActionResult.Pass
 	
 	if p1 == Enum.UserInputState.Begin or p1 == Enum.UserInputState.Change then

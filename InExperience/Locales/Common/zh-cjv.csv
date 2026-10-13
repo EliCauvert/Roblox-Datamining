@@ -97,6 +97,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,你的电子邮�
 Authentication.Login.WeChat.AntiAddictionText,抵制不良作品，拒绝盗版作品。注意自我保护，谨防受骗上当。适度娱乐益脑，过度沉迷伤身。合理安排时间，享受健康生活。
 Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生时应用
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,创建
 Authentication.SignUp.Action.CreateAccountSentenceCase,创建帐户
 Authentication.SignUp.Action.ExitModalLeave,离开
@@ -110,7 +111,7 @@ Authentication.SignUp.Description.Try,试一试
 Authentication.SignUp.Description.UsernameChanged,一切就绪！你的帐户已准备就绪并已连接至 {platform}。立即重生即可在游戏中看到更新后的用户名，否则更新将在下次重生时应用。
 Authentication.SignUp.Description.UsernameUnchanged,大功告成！你的帐户已准备就绪并已连接至 {platform}。与朋友聊天，畅玩数百万款 Roblox 游戏。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"您的 Roblox 帐户将链接到您的访问{platform}的账号。你可以随时在“设置”页面取消关联。在能够链接到另一个帐户之前,可能会有一个访问{platform}的账号。点按 {ctaButton} 即表示你同意《使用条款》（包括其中的仲裁条款），并确认已阅读《隐私政策》。"
-Authentication.SignUp.Header.CloseWithoutFinishing,是否在未完成的情况下关闭？
+Authentication.SignUp.Header.CancelAccountCreation,
 Authentication.SignUp.Header.OneLastThing,最后一步
 Authentication.SignUp.Header.SetUpYourRobloxAccount,设置你的 Roblox 帐户
 Authentication.SignUp.Heading.CountryCodeSelector,选择国家/地区
@@ -427,6 +428,7 @@ CommonUI.Features.Label.ControllerBar.ToPlaySuffix,以开始游戏
 CommonUI.Features.Label.CreateGames,创作
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,作品
+CommonUI.Features.Label.Games,游戏
 CommonUI.Features.Label.GiftCards,购买礼品卡
 CommonUI.Features.Label.Groups,社区
 CommonUI.Features.Label.HelpAndSafety,帮助和安全
@@ -1953,6 +1955,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,复制文本
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,不再询问
@@ -2006,10 +2009,17 @@ Feature.Build.Analytics.Description.PayerConversion,付费用户转化率是指�
 Feature.Build.Analytics.Description.PlaythroughRate,通关率是完成完整游戏会话的访问次数占比。通关率越高，表明玩家越容易上手游戏体验，并且更愿意游玩至结束。
 Feature.Build.Analytics.Description.TotalPlaytime,总游戏时间是该时间段内所有玩家在你的游戏体验中花费的时间总和。游戏时间增加通常表明游戏过程更具吸引力。
 Feature.Build.Analytics.DurationHours,{number} 小时
+Feature.Build.Analytics.Goal.Action.CreateAd,
+Feature.Build.Analytics.Goal.Action.SellItems,
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,留下良好的第一印象
 Feature.Build.Analytics.Goal.GetMorePlayers,吸引更多玩家
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,让玩家持续回归
+Feature.Build.Analytics.Goal.Locked.EarnRobux,
+Feature.Build.Analytics.Goal.Locked.FirstImpression,
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,
 Feature.Build.Analytics.KeyStats,关键统计数据
 Feature.Build.Analytics.LastMonth,上个月
 Feature.Build.Analytics.LastWeek,
@@ -2047,6 +2057,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,新用户会话时长
 Feature.Build.Analytics.Title.PayerConversion,付费用户转化率
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,
+Feature.Build.Analytics.Title.TopAcquisitionSource,热门来源
+Feature.Build.Analytics.Title.TopDropOffStep,最大流失
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,访问次数
 Feature.Build.Content.NewGame,新游戏
@@ -2090,7 +2102,6 @@ Feature.Build.Description.PlaytestLatest,你正在对最新版本进行游戏测
 Feature.Build.Description.PlaytestLocked,创建你的第一款游戏后，你就可以开始游戏测试。
 Feature.Build.Description.PlaytesterAccess,邀请好友成为初期测试玩家，或更改游戏的受众设置，允许更多人游玩。
 Feature.Build.Description.PricingRules,设置定价规则
-Feature.Build.Description.PrivateShare,更改游戏的受众设置以分享该游戏。
 Feature.Build.Description.PromoteGameFree,只需轻点一下，即可让你的游戏面向更多玩家展示。
 Feature.Build.Description.PromoteGamePaid,创建广告，让你的游戏面向数百万玩家展示。
 Feature.Build.Description.PromoteGameWithAdCampaign,通过为期 {durationDays} 天的广告活动扩大受众群体，让你的游戏被他人发现。
@@ -2134,6 +2145,7 @@ Feature.Build.Label.AdditionalUsage,额外的 Build 使用额度
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，共 {LIMIT}
 Feature.Build.Label.AdsManager,广告管理器
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,
 Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
 Feature.Build.Label.Autosaved,自动保存版本
 Feature.Build.Label.Available,可用
@@ -2158,12 +2170,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,轻松获得效果报告
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,免费
 Feature.Build.Label.FreeBuildUsage,免费 Build 使用额度
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,仅限好友
 Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
+Feature.Build.Label.GroupGames,
+Feature.Build.Label.Groups,
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
 Feature.Build.Label.Images2D,2D 图像
@@ -2177,6 +2192,7 @@ Feature.Build.Label.ManagedPricing,托管定价
 Feature.Build.Label.ManagedPricingMixed,对当前商品使用混合定价
 Feature.Build.Label.MaximizeForGamePlays,最大化游戏游玩次数
 Feature.Build.Label.Models3D,3D 模型
+Feature.Build.Label.MyGames,
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,无限额
 Feature.Build.Label.NotStarted,未开始
@@ -2324,6 +2340,7 @@ Feature.Build.Message.BuildInternalError,Build 遇到问题。请重试。
 Feature.Build.Message.BuildResponseFailed,Build 无法响应。请重试。
 Feature.Build.Message.BuildStillWorking,正在处理。在等待期间，你可以离开 App、在 Roblox 中游玩或开始另一个项目。
 Feature.Build.Message.BuildStopped,你已停止 Build。
+Feature.Build.Message.BuildTakingLonger,
 Feature.Build.Message.BuildTemporarilyDown,Build 暂不可用。请在一分钟后重试。
 Feature.Build.Message.CompletedTasks,{COUNT} 个已完成任务
 Feature.Build.Message.ConversationGone,此对话已不可用。请开始新的对话。
@@ -2424,7 +2441,6 @@ Feature.Build.Title.ExperienceAudience,体验受众
 Feature.Build.Title.FreeUsageReached,已达到免费 Build 使用额度上限
 Feature.Build.Title.FriendsOnlyPlay,只有好友可以游玩
 Feature.Build.Title.GameCreationDone,游戏创建已完成
-Feature.Build.Title.GamePrivate,此游戏为私密游戏
 Feature.Build.Title.GenericError,出错了
 Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
@@ -3129,7 +3145,7 @@ Feature.ExperienceDetails.Label.NotPlayable,无法开始游戏
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,游玩此体验即表示我同意注意事项
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
-Feature.ExperienceDetails.PlayButtonText.Play,游戏
+Feature.ExperienceDetails.PlayButtonText.Play,
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,游玩演示
 Feature.ExperienceDetails.PlayButtonText.Playtest,
 Feature.ExperienceDetails.PlayButtonText.Unavailable,无法使用

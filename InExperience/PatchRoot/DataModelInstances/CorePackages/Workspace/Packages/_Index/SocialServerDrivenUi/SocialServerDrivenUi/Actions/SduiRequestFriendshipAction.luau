@@ -4,6 +4,8 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local friendsStore = require(parent.DataHydration).Friends.FriendsStore
+local friendsStoreChallengeNetworkModule = require(socialServerDrivenUi.Networking.friendsStoreChallengeNetwork)
+local fFlagEnableFriendsStoreChallengeInterceptor = require(parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
 local enums = require(parent.FriendsNetworking).Enums
 local firePlayerFriendAddTelemetryModule = require(socialServerDrivenUi.Analytics.firePlayerFriendAddTelemetry)
@@ -11,7 +13,7 @@ local fFlagSduiSearchPeoplePlayerTileTelemetry = require(parent.SharedFlags).FFl
 local var1 = enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
 
 return function(p1, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), var1 (ref), friendsStore (ref), setCurrentToastMessage (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), firePlayerFriendAddTelemetryModule (ref)
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), var1 (ref), friendsStore (ref), fFlagEnableFriendsStoreChallengeInterceptor (ref), friendsStoreChallengeNetworkModule (ref), setCurrentToastMessage (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), firePlayerFriendAddTelemetryModule (ref)
 	local var2 = if p1 then p1.actionParams else nil
 	
 	if var2 == nil then
@@ -34,7 +36,7 @@ return function(p1, p2, p3)
 		return
 	end
 	local source = var2.source
-	friendsStore.get().RequestFriendship(targetUserId, if typeof(source) == "string" and source ~= "" then source else var1):andThen(function()
+	friendsStore.get().RequestFriendship(targetUserId, if typeof(source) == "string" and source ~= "" then source else var1, nil, if fFlagEnableFriendsStoreChallengeInterceptor then friendsStoreChallengeNetworkModule else nil):andThen(function()
 		-- upvalues: p3 (ref), setCurrentToastMessage (copy)
 		p3.dependencies.dispatch(setCurrentToastMessage({
 			toastMessage = "Feature.Friends.Action.FriendRequestSent",

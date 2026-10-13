@@ -11,7 +11,6 @@ return {
 		GetFFlagMomentsNonInfiniteScroll = require(script.Flags.GetFFlagMomentsNonInfiniteScroll),
 		GetFFlagMomentsStickerButton = require(script.Flags.GetFFlagMomentsStickerButton),
 		FFlagMomentsFeedMediaLoadAttemptedEvent = require(script.Flags.FFlagMomentsFeedMediaLoadAttemptedEvent),
-		FFlagMomentsFeedHealthAnalytics = require(script.Flags.FFlagMomentsFeedHealthAnalytics),
 		FFlagMomentsVideoPermissionContextFix = require(script.Flags.FFlagMomentsVideoPermissionContextFix),
 		FFlagMomentsEngagementMetricsFeature = require(script.Flags.FFlagMomentsEngagementMetricsFeature),
 		FFlagMomentsMediaSmoothnessTelemetry = require(script.Flags.FFlagMomentsMediaSmoothnessTelemetry),

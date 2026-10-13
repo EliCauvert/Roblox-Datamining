@@ -1,5 +1,6 @@
 ﻿local socialContextToasts = script:FindFirstAncestor("SocialContextToasts")
 local parent = socialContextToasts.Parent
+local fFlagUserProfilePlatformProfile = require(parent.SharedFlags).FFlagUserProfilePlatformProfile
 local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local promiseModule = require(parent.Promise)
@@ -30,16 +31,16 @@ local var1 = if getFFlagEnableReferredPlayerJoinRemoteEvent() then function()
 end else nil
 
 local function getNames(p1, p2)
-	-- upvalues: promiseModule (ref), userProfilesModule (ref), getCombinedNameFromId (ref)
+	-- upvalues: promiseModule (ref), fFlagUserProfilePlatformProfile (ref), userProfilesModule (ref), getCombinedNameFromId (ref)
 	local t = {}
 	
 	for i = 1, #p2 do
 		t[i] = tostring(p2[i])
 	end
 	return promiseModule.new(function(p3, _)
-		-- upvalues: p1 (ref), userProfilesModule (copy), t (ref), p2 (ref), getCombinedNameFromId (copy)
+		-- upvalues: p1 (ref), fFlagUserProfilePlatformProfile (copy), userProfilesModule (copy), t (ref), p2 (ref), getCombinedNameFromId (copy)
 		p1:query({
-			query = userProfilesModule.Queries.userProfilesAllNamesByUserIds,
+			query = if fFlagUserProfilePlatformProfile then userProfilesModule.Queries.userProfilesBasicNamesByUserIds else userProfilesModule.Queries.userProfilesAllNamesByUserIds,
 			variables = { userIds = t }
 		}):andThen(function(p4)
 			-- upvalues: p2 (copy), getCombinedNameFromId (copy), p3 (ref)

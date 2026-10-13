@@ -14,6 +14,7 @@ local fFlagExpChatLongPressContinuousDictation = sharedFlagsModule.FFlagExpChatL
 local fFlagExpChatContinuousDictation = sharedFlagsModule.FFlagExpChatContinuousDictation or fFlagExpChatLongPressContinuousDictation
 local fFlagExpChatDictationVoiceTypingModeSetting = sharedFlagsModule.FFlagExpChatDictationVoiceTypingModeSetting
 local fFlagExpChatDictationContinuousSafetyReminder = sharedFlagsModule.FFlagExpChatDictationContinuousSafetyReminder
+local fFlagExpChatDictationStopOnSafetyIntervention = sharedFlagsModule.FFlagExpChatDictationStopOnSafetyIntervention
 local fFlagEnableRetryForLinkingProtocolFetch = sharedFlagsModule.FFlagEnableRetryForLinkingProtocolFetch
 local fIntLinkingProtocolFetchRetries = sharedFlagsModule.FIntLinkingProtocolFetchRetries
 local fIntLinkingProtocolFetchTimeoutMS = sharedFlagsModule.FIntLinkingProtocolFetchTimeoutMS
@@ -31,6 +32,7 @@ local linkingResumeOnDataModelThread = fFlagExpChatDictationMicToastFixModule an
 local localizationModule = require(expChat.Localization)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
 local getDictationModeSettingStoreModule = require(expChat.Stores.GetDictationModeSettingStore)
+local experienceChatInterventionShownSignalModule = require(parent.InterventionShared.experienceChatInterventionShownSignal)
 local parentModule = require(script.Parent)
 local dictationModeModule = require(script.Parent.DictationMode)
 local dictationAnalyticsModule = require(script.Parent.DictationAnalytics)
@@ -63,7 +65,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatDictationFTUXModule (ref), useDictationTelemetryModule (ref), expChatDictationMicToastAnalytics (ref), useDictationEligibilityModule (ref), useIsLocalUserUnder13Module (ref), u13PolicyToastStorageModule (ref), useAsync (ref), linkingResumeOnDataModelThread (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), localizationModule (ref), expChatDictationNoMicAccessToastBodyKeyIndex (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getMessagesStoreModule (ref), dictationErrorReason (ref), dictationAnalyticsModule (ref), setUIBloxToast (ref), useTranscribedSamplesModule (ref), dictationModeModule (ref), fFlagExpChatDictationContinuousSafetyReminder (ref), dictationSafetyReminderModule (ref), fFlagExpChatDictationU13PolicyToastModule (ref), permissionStatus (ref), useDictation (ref), signalsReactModule (ref), dictationState (ref), fFlagExpChatLongPressContinuousDictation (ref), fFlagExpChatContinuousDictation (ref), fFlagExpChatDictationVoiceTypingModeSetting (ref), getDictationModeSettingStoreModule (ref), useDictationFTUXModule (ref), useLongPressModule (ref)
+	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatDictationFTUXModule (ref), useDictationTelemetryModule (ref), expChatDictationMicToastAnalytics (ref), useDictationEligibilityModule (ref), useIsLocalUserUnder13Module (ref), u13PolicyToastStorageModule (ref), useAsync (ref), linkingResumeOnDataModelThread (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), localizationModule (ref), expChatDictationNoMicAccessToastBodyKeyIndex (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getMessagesStoreModule (ref), dictationErrorReason (ref), dictationAnalyticsModule (ref), setUIBloxToast (ref), useTranscribedSamplesModule (ref), dictationModeModule (ref), fFlagExpChatDictationContinuousSafetyReminder (ref), dictationSafetyReminderModule (ref), fFlagExpChatDictationU13PolicyToastModule (ref), permissionStatus (ref), useDictation (ref), signalsReactModule (ref), dictationState (ref), fFlagExpChatDictationStopOnSafetyIntervention (ref), experienceChatInterventionShownSignalModule (ref), fFlagExpChatLongPressContinuousDictation (ref), fFlagExpChatContinuousDictation (ref), fFlagExpChatDictationVoiceTypingModeSetting (ref), getDictationModeSettingStoreModule (ref), useDictationFTUXModule (ref), useLongPressModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = foundationModule.Hooks.useCursor({
 		radius = UDim.new(0, var1.Radius.Circle),
@@ -89,7 +91,7 @@ return function(p1)
 		if not linkingResumeOnDataModelThread then
 			return false
 		elseif not fFlagEnableRetryForLinkingProtocolFetch then
-			var14, var68 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
+			var14, var69 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
 			
 			return var14 and var15 == true
 		end
@@ -338,6 +340,23 @@ return function(p1)
 	local var36 = var33 == dictationState.Listening
 	local startDictation = var32.startDictation
 	local stopDictation = var32.stopDictation
+	
+	if fFlagExpChatDictationStopOnSafetyIntervention then
+		reactModule.useEffect(function()
+			-- upvalues: experienceChatInterventionShownSignalModule (copy), var32 (ref), dictationState (copy), stopDictation (ref), dictationAnalyticsModule (copy)
+			local var37 = experienceChatInterventionShownSignalModule:connect(function()
+				-- upvalues: var32 (copy), dictationState (copy), stopDictation (copy), dictationAnalyticsModule (copy)
+				if var32.getDictationState(false) == dictationState.Listening then
+					stopDictation(dictationAnalyticsModule.TriggerTypes.SafetyIntervention)
+				end
+			end)
+			
+			return function()
+				-- upvalues: var37 (ref)
+				var37:disconnect()
+			end
+		end, { var32.getDictationState, stopDictation })
+	end
 	local var37 = if fFlagExpChatDictationVoiceTypingModeSetting then signalsReactModule.useSignalState(getDictationModeSettingStoreModule(false).getMode) elseif fFlagExpChatLongPressContinuousDictation then dictationModeModule.Standard elseif fFlagExpChatContinuousDictation then dictationModeModule.Continuous else dictationModeModule.Standard
 	local var38 = if fFlagExpChatDictationVoiceTypingModeSetting then nil elseif fFlagExpChatLongPressContinuousDictation then dictationModeModule.Continuous else nil
 	local var39 = if fFlagExpChatDictationFTUXModule and fFlagExpChatLongPressContinuousDictation and not fFlagExpChatDictationVoiceTypingModeSetting then useDictationFTUXModule({

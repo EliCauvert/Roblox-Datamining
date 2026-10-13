@@ -20,6 +20,7 @@ local useFriendsListOrderedByPresence = friendsCommonModule.Hooks.useFriendsList
 local useDecoratedTrustedConnections = friendsCommonModule.Hooks.useDecoratedTrustedConnections
 local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local filterStatesModule = require(friendsLanding.Friends.filterStates)
+local fFlagFriendsLandingLayerExposureModule = require(friendsLanding.Flags.FFlagFriendsLandingLayerExposure)
 local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
 local fFlagFixCohubExposureLayer = require(parent.SharedFlags).FFlagFixCohubExposureLayer
 local fFlagConnectionManagementChips = require(parent.SharedFlags).FFlagConnectionManagementChips
@@ -36,15 +37,17 @@ local t_1 = {
 }
 
 function FriendsLandingContainer(_)
-	-- upvalues: reactModule (ref), fFlagFixCohubExposureLayer (ref), IXPServiceWrapper (ref), appUserLayers (ref), IXPService (ref), useLocalUserId (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), useGetFriendsCountByUserId (ref), t (ref), useSelector (ref), getDeepValue (ref), useAppPolicy (ref), friendsLandingContextModule (ref), useFriendsListOrderedByPresence (ref), friendsLandingPageSize (ref), fFlagConnectionManagementChips (ref), useDecoratedTrustedConnections (ref), filterStatesModule (ref), cryoModule (ref), presenceType_1 (ref), getRbxthumbWithTypeSizeAndOptions (ref), userLibConstants (ref), t_1 (ref), presenceType (ref), fFlagFriendsPageUserListCtaEnabledModule (ref), var1 (ref), friendsLandingPageModule (ref)
+	-- upvalues: reactModule (ref), fFlagFixCohubExposureLayer (ref), IXPServiceWrapper (ref), appUserLayers (ref), IXPService (ref), fFlagFriendsLandingLayerExposureModule (ref), useLocalUserId (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), useGetFriendsCountByUserId (ref), t (ref), useSelector (ref), getDeepValue (ref), useAppPolicy (ref), friendsLandingContextModule (ref), useFriendsListOrderedByPresence (ref), friendsLandingPageSize (ref), fFlagConnectionManagementChips (ref), useDecoratedTrustedConnections (ref), filterStatesModule (ref), cryoModule (ref), presenceType_1 (ref), getRbxthumbWithTypeSizeAndOptions (ref), userLibConstants (ref), t_1 (ref), presenceType (ref), fFlagFriendsPageUserListCtaEnabledModule (ref), var1 (ref), friendsLandingPageModule (ref)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagFixCohubExposureLayer (copy), IXPServiceWrapper (copy), appUserLayers (copy), IXPService (copy)
+		-- upvalues: fFlagFixCohubExposureLayer (copy), IXPServiceWrapper (copy), appUserLayers (copy), IXPService (copy), fFlagFriendsLandingLayerExposureModule (copy)
 		if fFlagFixCohubExposureLayer then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(appUserLayers.ConnectionsHubExposureLayer)
-			
-			return
+		else
+			IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.ConnectionsHubExposureLayer)
 		end
-		IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.ConnectionsHubExposureLayer)
+		if fFlagFriendsLandingLayerExposureModule then
+			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(appUserLayers.SocialFriendsLandingLayer)
+		end
 	end, {})
 	local var2 = useLocalUserId()
 	local var3 = if fFlagFriendsCountDataHydrationMigrationEnabled then useGetFriendsCountByUserId(if var2 then tostring(var2) else nil, t) or 0 else useSelector(function(p1)

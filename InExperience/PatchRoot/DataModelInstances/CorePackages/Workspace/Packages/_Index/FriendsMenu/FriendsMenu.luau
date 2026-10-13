@@ -4,6 +4,7 @@
 	FriendsMenuContextWrapper = require(script.Context.FriendsMenuContextWrapper),
 	FriendsMenuFriendsList = require(script.Components.FriendsMenuFriendsList),
 	FriendsMenuSearch = require(script.Components.FriendsMenuSearch),
+	FriendsMenuShareGameInviteLink = require(script.Components.FriendsMenuShareGameInviteLink),
 	InviteFriendContext = require(script.Context.InviteFriendContext),
 	InviteCallbackContext = require(script.Context.InviteCallbackContext),
 	FriendsListContextProvider = if require(script.Flags.FFlagUpdateInvitesToUsePaginatedFriends) then require(script.Context.FriendsListContextProvider2) else require(script.Context.FriendsListContextProvider),

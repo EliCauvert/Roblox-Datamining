@@ -21,6 +21,7 @@ local fFlagMomentsTTSVoiceSelectorModule = require(momentsCreation.Flags.FFlagMo
 local fFlagMomentsTTSPublishMetadataEditsModule = require(momentsCreation.Flags.FFlagMomentsTTSPublishMetadataEdits)
 local fFlagMomentsTTSDraftRestoreModule = require(momentsCreation.Flags.FFlagMomentsTTSDraftRestore)
 local getFFlagMomentsGenerateTextInTextOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsGenerateTextInTextOverlay)
+local fFlagMomentsTextOverlayOnPhotosModule = require(momentsCreation.Flags.FFlagMomentsTextOverlayOnPhotos)
 local momentsDraftStorageModule = require(momentsCreation.Storage.MomentsDraftStorage)
 local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
 local momentsCommonModule = require(parent.MomentsCommon)
@@ -37,7 +38,7 @@ local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 
 return function(p1)
-	-- upvalues: defaultCreationToolsModule (ref), creationToolRegistryModule (ref), sessionManager (ref), funnelEventNames (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), clampTtsStartTimeModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), fFlagMomentsTTSDraftRestoreModule (ref), fFlagMomentsCommentsCreatorControlModule (ref), fFlagMomentsTTSPublishMetadataEditsModule (ref), fFlagMomentsTTSVoiceSelectorModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
+	-- upvalues: defaultCreationToolsModule (ref), creationToolRegistryModule (ref), sessionManager (ref), funnelEventNames (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), clampTtsStartTimeModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), fFlagMomentsTTSDraftRestoreModule (ref), fFlagMomentsCommentsCreatorControlModule (ref), fFlagMomentsTTSPublishMetadataEditsModule (ref), fFlagMomentsTTSVoiceSelectorModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), fFlagMomentsTextOverlayOnPhotosModule (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
 	local store = p1.store
 	local host = p1.host or {}
 	local var1 = defaultCreationToolsModule
@@ -780,8 +781,15 @@ return function(p1)
 		end,
 		getIsGenerating = getIsGenerating,
 		getCanGenerateText = function(_)
-			-- upvalues: host (ref)
-			return host.generateMomentText ~= nil
+			-- upvalues: host (ref), fFlagMomentsTextOverlayOnPhotosModule (copy), store (ref)
+			if host.generateMomentText == nil then
+				return false
+			elseif not fFlagMomentsTextOverlayOnPhotosModule then
+				return true
+			end
+			local selectedCapture = store.getSelectedCapture(false)
+			
+			return selectedCapture ~= nil and selectedCapture.CaptureType == Enum.CaptureType.Video
 		end,
 		submitGeneratedTextFeedback = submitGeneratedTextFeedback,
 		preview = preview,

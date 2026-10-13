@@ -8,6 +8,7 @@ local statsCardContainerModule = require(buildExperience.Components.Analytics.St
 local pastCampaignsListModule = require(script.Parent.PastCampaignsList)
 local _ = require(script.Parent.PastCampaignRow)
 local createAdCampaignSheetContainerModule = require(script.Parent.CreateAdCampaignSheet.CreateAdCampaignSheetContainer)
+local fFlagBuildAdsManagerUniverseUrlModule = require(buildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
 local icon = foundationModule.Icon
 local text = foundationModule.Text
 local view = foundationModule.View
@@ -146,12 +147,13 @@ local function EmptyState(p3)
 end
 
 return function(p3)
-	-- upvalues: reactModule (ref), createAdCampaignSheetContainerModule (ref), text (ref), LoadingSkeleton (ref), EmptyState (ref), renderActiveCampaign (ref), view (ref), pastCampaignsListModule (ref)
+	-- upvalues: reactModule (ref), createAdCampaignSheetContainerModule (ref), fFlagBuildAdsManagerUniverseUrlModule (ref), text (ref), LoadingSkeleton (ref), EmptyState (ref), renderActiveCampaign (ref), view (ref), pastCampaignsListModule (ref)
 	local testId = p3.testId or "AdsStatsView"
 	local t = {
 		PromotionSheet = reactModule.createElement(createAdCampaignSheetContainerModule, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
+			universeId = if fFlagBuildAdsManagerUniverseUrlModule then p3.universeId else nil,
 			isOpen = p3.isPromotionSheetOpen,
 			onClose = p3.onClosePromotionSheet,
 			onCreate = p3.onCreateCampaign,

@@ -13,10 +13,11 @@ local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local responsiveModule = require(parent.Responsive)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useOpenWebView = require(parent.WebViewUtils).useOpenWebView
 local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
+local fFlagBuildAdsManagerUniverseUrlModule = require(buildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
+local getAdsManagerUrlModule = require(script.Parent.Parent.getAdsManagerUrl)
 local adCampaignEligibilityUtilsModule = require(script.Parent.Parent.adCampaignEligibilityUtils)
 local adCampaignScheduleUtilsModule = require(script.Parent.Parent.adCampaignScheduleUtils)
 local createAdCampaignSheetConfigModule = require(script.Parent.CreateAdCampaignSheetConfig)
@@ -41,7 +42,6 @@ local t = {
 	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
-local var2 = urlBuilder.fromString("create:advertise")
 
 local function _(p1)
 	-- upvalues: numberLocalization (ref), localizationService (ref)
@@ -80,73 +80,73 @@ local function toCampaignOption(p3, p4, p5, p6, p7)
 	}
 end
 
-local function useTwoOptionsControls(value, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: responsiveModule (ref), creatorAgentChatModule (ref), adCampaignEligibilityUtilsModule (ref), reactModule (ref), signalsReactModule (ref), var1 (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useDefaultFocusBehavior (ref), useOpenBuyRobuxWebViewModule (ref), useOpenWebViewWithResumeRefreshModule (ref), var2 (ref)
-	local var3 = responsiveModule.usePreferredInput()
+local function useTwoOptionsControls(value, p3, p4, p5, p6, p7, p8, p9, p10, p11)
+	-- upvalues: responsiveModule (ref), creatorAgentChatModule (ref), adCampaignEligibilityUtilsModule (ref), reactModule (ref), signalsReactModule (ref), var1 (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useDefaultFocusBehavior (ref), useOpenBuyRobuxWebViewModule (ref), fFlagBuildAdsManagerUniverseUrlModule (ref), getAdsManagerUrlModule (ref), useOpenWebViewWithResumeRefreshModule (ref)
+	local var2 = responsiveModule.usePreferredInput()
 	local adCampaignCheckFunds = creatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCheckFunds
-	local var4 = if p9 ~= nil then adCampaignEligibilityUtilsModule.getDefaultOffer(p5).campaignOption else p9.campaignOption
-	local var5, var6 = reactModule.useState(var4)
-	local var7 = reactModule.useRef(nil)
-	local var8, var9 = reactModule.useState(nil)
-	local var10 = signalsReactModule.useSignalState(if var8 ~= nil then var1 else var8.state)
-	local var11 = reactModule.useCallback(function(p11)
-		-- upvalues: var9 (ref), adCampaignCheckFunds (ref)
-		if p11 == nil or p11.fundingType ~= "paid" then
-			var9(nil)
+	local var3 = if p9 ~= nil then adCampaignEligibilityUtilsModule.getDefaultOffer(p5).campaignOption else p9.campaignOption
+	local var4, var5 = reactModule.useState(var3)
+	local var6 = reactModule.useRef(nil)
+	local var7, var8 = reactModule.useState(nil)
+	local var9 = signalsReactModule.useSignalState(if var7 ~= nil then var1 else var7.state)
+	local var10 = reactModule.useCallback(function(p12)
+		-- upvalues: var8 (ref), adCampaignCheckFunds (ref)
+		if p12 == nil or p12.fundingType ~= "paid" then
+			var8(nil)
 			
 			return
 		end
-		var9(adCampaignCheckFunds({ campaignOption = p11.campaignOption }))
+		var8(adCampaignCheckFunds({ campaignOption = p12.campaignOption }))
 	end, { adCampaignCheckFunds })
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref)
-		if var8 == nil then
+		-- upvalues: var7 (ref)
+		if var7 == nil then
 			return
 		end
 		return function()
-			-- upvalues: var8 (copy)
-			var8.dispose()
+			-- upvalues: var7 (copy)
+			var7.dispose()
 		end
-	end, { var8 or false })
+	end, { var7 or false })
 	reactModule.useEffect(function()
-		-- upvalues: value (ref), p7 (ref), var6 (ref), var4 (ref), var9 (ref), p6 (ref), p5 (ref)
+		-- upvalues: value (ref), p7 (ref), var5 (ref), var3 (ref), var8 (ref), p6 (ref), p5 (ref)
 		if value then
-			var6(function(p11)
-				-- upvalues: p6 (copy), p7 (copy), p5 (copy), var4 (copy)
+			var5(function(p12)
+				-- upvalues: p6 (copy), p7 (copy), p5 (copy), var3 (copy)
 				if p6 or p7 then
-					local var12 = p5
+					local var11 = p5
 					
-					return if (if p11 == "feedback" then var12.feedback elseif p11 == "plays" then var12.plays else nil) == nil then var4 else p11
+					return if (if p12 == "feedback" then var11.feedback elseif p12 == "plays" then var11.plays else nil) == nil then var3 else p12
 				end
 			end)
 			
 			return
 		elseif not p7 then
-			var6(var4)
+			var5(var3)
 		end
-		var9(nil)
+		var8(nil)
 	end, {
 		value,
 		p6,
 		p7,
-		var4,
+		var3,
 		p5
 	})
-	local var12 = if var5 == "feedback" then p5.feedback elseif var5 == "plays" then p5.plays else nil
-	local var13 = p7 and (if var7.current ~= nil then var7.current == var5 else true)
+	local var11 = if var4 == "feedback" then p5.feedback elseif var4 == "plays" then p5.plays else nil
+	local var12 = p7 and (if var6.current ~= nil then var6.current == var4 else true)
 	reactModule.useEffect(function()
-		-- upvalues: value (ref), var13 (ref), p6 (ref), var11 (ref), var12 (ref)
-		if value and not var13 and not p6 then
-			var11(var12)
+		-- upvalues: value (ref), var12 (ref), p6 (ref), var10 (ref), var11 (ref)
+		if value and not var12 and not p6 then
+			var10(var11)
 		end
 	end, {
 		value,
 		p6,
-		var13,
 		var12,
-		var11
+		var11,
+		var10
 	})
-	local var14, var15 = useDefaultFocusBehavior(useFocusRoot({
+	local var13, var14 = useDefaultFocusBehavior(useFocusRoot({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
@@ -156,90 +156,90 @@ local function useTwoOptionsControls(value, p3, p4, p5, p6, p7, p8, p9, p10)
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p3 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p11)
+					handler = inputHandlersModule.onRelease(function(p12)
 						-- upvalues: p3 (copy)
 						p3()
-						p11:cancel()
+						p12:cancel()
 					end)
 				}
 			}
 		end, { p3 })
 	}))
-	local var16 = reactModule.useCallback(function(p11)
-		-- upvalues: var6 (ref)
-		var6(p11)
+	local var15 = reactModule.useCallback(function(p12)
+		-- upvalues: var5 (ref)
+		var5(p12)
 	end, {})
-	local result = var10.result
-	local var17 = var12 ~= nil and var12.fundingType == "paid"
-	local var18 = not p6 and (not var13 and (var17 and (if var8 ~= nil then var10.status == "pending" else true)))
-	local var19 = not p6 and (not var13 and (var17 and var10.status == "failed"))
-	local var20 = var17 and (var10.status == "succeeded" and (result ~= nil and result.canFund))
-	local var21 = not p6 and (not var13 and (var17 and (var10.status == "succeeded" and (result ~= nil and not result.canFund))))
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: p8 (ref), value (ref), var17 (ref), var11 (ref), var12 (ref)
+	local result = var9.result
+	local var16 = var11 ~= nil and var11.fundingType == "paid"
+	local var17 = not p6 and (not var12 and (var16 and (if var7 ~= nil then var9.status == "pending" else true)))
+	local var18 = not p6 and (not var12 and (var16 and var9.status == "failed"))
+	local var19 = var16 and (var9.status == "succeeded" and (result ~= nil and result.canFund))
+	local var20 = not p6 and (not var12 and (var16 and (var9.status == "succeeded" and (result ~= nil and not result.canFund))))
+	local var21 = reactModule.useCallback(function()
+		-- upvalues: p8 (ref), value (ref), var16 (ref), var10 (ref), var11 (ref)
 		p8()
 		
-		if value and var17 then
-			var11(var12)
+		if value and var16 then
+			var10(var11)
 		end
 	end, {
 		value,
-		var17,
-		var12,
+		var16,
 		var11,
+		var10,
 		p8
 	})
-	local var23 = useOpenBuyRobuxWebViewModule(var22)
+	local var22 = useOpenBuyRobuxWebViewModule(var21)
 	
 	return {
-		sheetRootRef = var15,
-		defaultOptionRef = var14,
-		selectedOption = var5,
-		showCloseButton = var3 ~= responsiveModule.Input.Directional,
-		isFundingCheckPending = var18,
-		isPrimaryActionDisabled = if var12 ~= nil then not var13 and (var17 and (not var20 and (not var21 and not var19))) else true,
-		shouldBuyRobux = var21,
-		showAdCreditsCallout = not p6 and (var20 and result.fundingSource == "ad_credit"),
-		isErrorForSelectedOption = var13,
-		onOptionChanged = var16,
-		onOpenBuyRobux = var23,
-		onOpenAdsManager = useOpenWebViewWithResumeRefreshModule(var2(), p10, var22),
+		sheetRootRef = var14,
+		defaultOptionRef = var13,
+		selectedOption = var4,
+		showCloseButton = var2 ~= responsiveModule.Input.Directional,
+		isFundingCheckPending = var17,
+		isPrimaryActionDisabled = if var11 ~= nil then not var12 and (var16 and (not var19 and (not var20 and not var18))) else true,
+		shouldBuyRobux = var20,
+		showAdCreditsCallout = not p6 and (var19 and result.fundingSource == "ad_credit"),
+		isErrorForSelectedOption = var12,
+		onOptionChanged = var15,
+		onOpenBuyRobux = var22,
+		onOpenAdsManager = if fFlagBuildAdsManagerUniverseUrlModule then useOpenWebViewWithResumeRefreshModule(getAdsManagerUrlModule.getAdsManagerUrl(p11), p10, var21) else useOpenWebViewWithResumeRefreshModule(getAdsManagerUrlModule.getDefaultAdsManagerUrl(), p10, var21),
 		onCreate = reactModule.useCallback(function()
-			-- upvalues: var21 (ref), var23 (ref), var19 (ref), var11 (ref), var12 (ref), var17 (ref), var13 (ref), var20 (ref), var7 (ref), p4 (ref)
-			if var21 then
-				var23()
+			-- upvalues: var20 (ref), var22 (ref), var18 (ref), var10 (ref), var11 (ref), var16 (ref), var12 (ref), var19 (ref), var6 (ref), p4 (ref)
+			if var20 then
+				var22()
 				
 				return
-			elseif var19 then
-				var11(var12)
+			elseif var18 then
+				var10(var11)
 				
 				return
-			elseif var17 and not var13 and not var20 then return end
-			if var12 == nil then
+			elseif var16 and not var12 and not var19 then return end
+			if var11 == nil then
 				return
 			end
-			var7.current = var12.campaignOption
+			var6.current = var11.campaignOption
 			p4({
-				paymentType = var12.fundingType,
-				campaignOption = var12.campaignOption
+				paymentType = var11.fundingType,
+				campaignOption = var11.campaignOption
 			})
 		end, {
-			p4, var12, var21, var23, var17, var13, var20, var19, var11
+			p4, var11, var20, var22, var16, var12, var19, var18, var10
 		})
 	}
 end
 
 return function(p3)
-	-- upvalues: creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), useOpenWebView (ref), fFlagEnablePaidAdsModule (ref), createAdCampaignSheetConfigModule (ref), campaignEndMs (ref), localizationStringsModule (ref), useLocalization (ref), useTwoOptionsControls (ref), numberLocalization (ref), localizationService (ref), dataStatus (ref), toCampaignOption (ref), iconName (ref)
-	local campaignOffers, var3
+	-- upvalues: creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), useOpenWebView (ref), fFlagEnablePaidAdsModule (ref), createAdCampaignSheetConfigModule (ref), campaignEndMs (ref), localizationStringsModule (ref), useLocalization (ref), useTwoOptionsControls (ref), fFlagBuildAdsManagerUniverseUrlModule (ref), numberLocalization (ref), localizationService (ref), dataStatus (ref), toCampaignOption (ref), iconName (ref)
+	local campaignOffers, var2
 	local creatorCreditStore = creatorCreditModule.getCreatorCreditStore(false)
-	local var4 = reactModule.useMemo(function()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: creatorCreditStore (ref)
 		return creatorCreditStore.getQuotaSummary()
 	end, { creatorCreditStore })
-	local var5 = signalsReactModule.useSignalState(var4.data)
-	local var6 = signalsReactModule.useSignalState(var4.status)
-	local var7 = useOpenWebView()
+	local var4 = signalsReactModule.useSignalState(var3.data)
+	local var5 = signalsReactModule.useSignalState(var3.status)
+	local var6 = useOpenWebView()
 	
 	if fFlagEnablePaidAdsModule then
 		campaignOffers = p3.campaignOffers
@@ -247,15 +247,15 @@ return function(p3)
 		if campaignOffers == nil or campaignOffers.feedback == nil and campaignOffers.plays == nil then
 			error("campaignOffers is required for the two-option ad campaign sheet")
 		end
-		var3 = campaignOffers
+		var2 = campaignOffers
 	else
-		var3 = nil
+		var2 = nil
 	end
 	local runStartTimeMs
-	campaignOffers = if var3 ~= nil then nil else var3.feedback
-	local var8 = if var3 ~= nil then nil else var3.plays
-	local var9 = if fFlagEnablePaidAdsModule and campaignOffers ~= nil then campaignOffers.durationDays else p3.campaignDurationDays or createAdCampaignSheetConfigModule.DEFAULT_CAMPAIGN_DURATION_DAYS
-	local var10 = if fFlagEnablePaidAdsModule and campaignOffers ~= nil then campaignOffers.priceRobux else p3.estimatedPriceRobux or createAdCampaignSheetConfigModule.DEFAULT_ESTIMATED_PRICE_ROBUX
+	campaignOffers = if var2 ~= nil then nil else var2.feedback
+	local var7 = if var2 ~= nil then nil else var2.plays
+	local var8 = if fFlagEnablePaidAdsModule and campaignOffers ~= nil then campaignOffers.durationDays else p3.campaignDurationDays or createAdCampaignSheetConfigModule.DEFAULT_CAMPAIGN_DURATION_DAYS
+	local var9 = if fFlagEnablePaidAdsModule and campaignOffers ~= nil then campaignOffers.priceRobux else p3.estimatedPriceRobux or createAdCampaignSheetConfigModule.DEFAULT_ESTIMATED_PRICE_ROBUX
 	
 	if fFlagEnablePaidAdsModule then
 		local runStartTimeMs_1 = p3.runStartTimeMs
@@ -267,23 +267,23 @@ return function(p3)
 	else
 		runStartTimeMs = p3.runStartTimeMs or createAdCampaignSheetConfigModule.DEFAULT_RUN_START_TIME_MS
 	end
-	local var11 = if fFlagEnablePaidAdsModule then campaignEndMs(runStartTimeMs, var9) elseif p3.runEndTimeMs ~= nil then createAdCampaignSheetConfigModule.DEFAULT_RUN_END_TIME_MS else p3.runEndTimeMs
-	local var12 = if p3.useLocalRunDates == true then localizationStringsModule.formatAdCampaignSheetLocalDate else localizationStringsModule.formatAdCampaignSheetDate
-	local var13 = var12(runStartTimeMs)
+	local var10 = if fFlagEnablePaidAdsModule then campaignEndMs(runStartTimeMs, var8) elseif p3.runEndTimeMs ~= nil then createAdCampaignSheetConfigModule.DEFAULT_RUN_END_TIME_MS else p3.runEndTimeMs
+	local var11 = if p3.useLocalRunDates == true then localizationStringsModule.formatAdCampaignSheetLocalDate else localizationStringsModule.formatAdCampaignSheetDate
+	local var12 = var11(runStartTimeMs)
 	local t = {
 		title = if fFlagEnablePaidAdsModule then localizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_TITLE else localizationStringsModule.AD_CAMPAIGN_SHEET_TITLE,
 		description = {
 			localizationStringsModule.AD_CAMPAIGN_SHEET_DESCRIPTION,
-			durationDays = var9
+			durationDays = var8
 		},
 		campaignTitle = {
 			localizationStringsModule.AD_CAMPAIGN_SHEET_CAMPAIGN_TITLE,
-			durationDays = var9
+			durationDays = var8
 		},
 		runDates = {
 			localizationStringsModule.AD_CAMPAIGN_SHEET_RUN_DATES,
-			startDate = var13,
-			endDate = var12(var11)
+			startDate = var12,
+			endDate = var11(var10)
 		},
 		free = localizationStringsModule.AD_CAMPAIGN_SHEET_FREE,
 		earnedRobuxDisclaimer = localizationStringsModule.AD_CAMPAIGN_SHEET_EARNED_ROBUX_DISCLAIMER,
@@ -318,20 +318,20 @@ return function(p3)
 			}
 			t.feedbackRunDates = {
 				localizationStringsModule.AD_CAMPAIGN_SHEET_RUN_DATES,
-				startDate = var13,
-				endDate = var12(campaignEndMs(runStartTimeMs, campaignOffers.durationDays))
+				startDate = var12,
+				endDate = var11(campaignEndMs(runStartTimeMs, campaignOffers.durationDays))
 			}
 			t.feedbackDescription = localizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_SHORT_DESCRIPTION
 		end
-		if var8 ~= nil then
+		if var7 ~= nil then
 			t.playsOptionTitle = {
 				localizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_OPTION_TITLE,
-				durationDays = var8.durationDays
+				durationDays = var7.durationDays
 			}
 			t.playsRunDates = {
 				localizationStringsModule.AD_CAMPAIGN_SHEET_RUN_DATES,
-				startDate = var13,
-				endDate = var12(campaignEndMs(runStartTimeMs, var8.durationDays))
+				startDate = var12,
+				endDate = var11(campaignEndMs(runStartTimeMs, var7.durationDays))
 			}
 			t.playsDescription = localizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_LONG_DESCRIPTION
 		end
@@ -340,124 +340,124 @@ return function(p3)
 		t.adCreditsAction = localizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_AD_CREDITS_ACTION
 		t.adsManager = localizationStringsModule.ADS_STATS_ADS_MANAGER
 	end
-	local var14 = useLocalization(t)
-	local var15 = p3.waitForCreateResult == true
-	local var16 = var15 and p3.isCreatePending == true
-	local var17 = var15 and p3.hasCreateError == true
-	local createError = var14.createError
+	local var13 = useLocalization(t)
+	local var14 = p3.waitForCreateResult == true
+	local var15 = var14 and p3.isCreatePending == true
+	local var16 = var14 and p3.hasCreateError == true
+	local createError = var13.createError
 	
-	if fFlagEnablePaidAdsModule and var17 then
+	if fFlagEnablePaidAdsModule and var16 then
 		local createErrorKind = p3.createErrorKind
-		createError = if createErrorKind == "payment_required" then var14.insufficientFundsError elseif createErrorKind == "ineligible" then var14.forbiddenError elseif createErrorKind == "missing_thumbnail" then var14.missingThumbnailError else var14.internalError
+		createError = if createErrorKind == "payment_required" then var13.insufficientFundsError elseif createErrorKind == "ineligible" then var13.forbiddenError elseif createErrorKind == "missing_thumbnail" then var13.missingThumbnailError else var13.internalError
 	end
-	local var18, var19
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref), p3 (ref)
-		if var16 then
+	local var17, var18
+	local var19 = reactModule.useCallback(function()
+		-- upvalues: var15 (ref), p3 (ref)
+		if var15 then
 			return
 		end
 		p3.onClose()
-	end, { p3.onClose, var16 })
-	local var21 = reactModule.useCallback(function(p4)
-		-- upvalues: p3 (ref), var15 (ref), var20 (ref)
+	end, { p3.onClose, var15 })
+	local var20 = reactModule.useCallback(function(p4)
+		-- upvalues: p3 (ref), var14 (ref), var19 (ref)
 		p3.onCreate(p4)
 		
-		if not var15 then
-			var20()
+		if not var14 then
+			var19()
 		end
-	end, { p3.onCreate, var20, var15 })
+	end, { p3.onCreate, var19, var14 })
+	local var21 = reactModule.useCallback(function(p4)
+		-- upvalues: var6 (ref), createAdCampaignSheetConfigModule (copy)
+		var6(createAdCampaignSheetConfigModule.ADVERTISING_TERMS_URL, p4)
+	end, { var6 })
 	local var22 = reactModule.useCallback(function(p4)
-		-- upvalues: var7 (ref), createAdCampaignSheetConfigModule (copy)
-		var7(createAdCampaignSheetConfigModule.ADVERTISING_TERMS_URL, p4)
-	end, { var7 })
-	local var23 = reactModule.useCallback(function(p4)
-		-- upvalues: var7 (ref), createAdCampaignSheetConfigModule (copy)
-		var7(createAdCampaignSheetConfigModule.ADVERTISING_STANDARDS_URL, p4)
-	end, { var7 })
-	local var24 = if fFlagEnablePaidAdsModule then useTwoOptionsControls(p3.isOpen, var20, var21, var3, var16, var17, reactModule.useCallback(function()
+		-- upvalues: var6 (ref), createAdCampaignSheetConfigModule (copy)
+		var6(createAdCampaignSheetConfigModule.ADVERTISING_STANDARDS_URL, p4)
+	end, { var6 })
+	local var23 = if fFlagEnablePaidAdsModule then useTwoOptionsControls(p3.isOpen, var19, var20, var2, var15, var16, reactModule.useCallback(function()
 		-- upvalues: creatorCreditStore (ref)
 		creatorCreditStore.refreshQuotaSummary():catch(function() end)
-	end, { creatorCreditStore }), p3.attemptedOption, var14.adsManager) else nil
+	end, { creatorCreditStore }), p3.attemptedOption, var13.adsManager, if fFlagBuildAdsManagerUniverseUrlModule then p3.universeId else nil) else nil
 	local _ = nil
 	local _ = nil
 	
-	if var5 ~= nil then
-		var18 = "ready"
-		var19 = numberLocalization.localize(string.format("%.0f", math.floor(var5.robuxBalance)), localizationService.RobloxLocaleId)
-	elseif var6 == dataStatus.Failed then
-		var18 = "failed"
-		var19 = createAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
+	if var4 ~= nil then
+		var17 = "ready"
+		var18 = numberLocalization.localize(string.format("%.0f", math.floor(var4.robuxBalance)), localizationService.RobloxLocaleId)
+	elseif var5 == dataStatus.Failed then
+		var17 = "failed"
+		var18 = createAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
 	else
-		var18 = "loading"
-		var19 = createAdCampaignSheetConfigModule.BALANCE_LOADING
+		var17 = "loading"
+		var18 = createAdCampaignSheetConfigModule.BALANCE_LOADING
 	end
 	if fFlagEnablePaidAdsModule then
-		local var25 = var24
+		local var24 = var23
 		
 		return {
 			variant = "twoOptions",
 			isOpen = p3.isOpen,
-			sheetRootRef = var25.sheetRootRef,
-			title = var14.title,
-			description = var14.introduction,
-			startCampaignTitle = var14.startCampaignTitle,
-			selectedOption = var25.selectedOption,
-			defaultOptionRef = var25.defaultOptionRef,
-			feedbackOption = if campaignOffers ~= nil then nil else toCampaignOption(campaignOffers, var14.feedbackOptionTitle, var14.feedbackRunDates, var14.feedbackDescription, var14.free),
-			playsOption = if var8 ~= nil then nil else toCampaignOption(var8, var14.playsOptionTitle, var14.playsRunDates, var14.playsDescription, var14.free),
-			legalText = var14.legal,
-			createText = if var25.shouldBuyRobux then var14.buyRobux else var14.create,
-			moderationNotice = var14.moderationNotice,
-			isCreatePending = var16,
-			isFundingCheckPending = var25.isFundingCheckPending,
-			isCreateDisabled = var25.isPrimaryActionDisabled,
-			showAdCreditsCallout = var25.showAdCreditsCallout,
-			adCreditsTitle = var14.adCreditsTitle,
-			adCreditsAction = var14.adCreditsAction,
-			hasCreateError = var25.isErrorForSelectedOption,
+			sheetRootRef = var24.sheetRootRef,
+			title = var13.title,
+			description = var13.introduction,
+			startCampaignTitle = var13.startCampaignTitle,
+			selectedOption = var24.selectedOption,
+			defaultOptionRef = var24.defaultOptionRef,
+			feedbackOption = if campaignOffers ~= nil then nil else toCampaignOption(campaignOffers, var13.feedbackOptionTitle, var13.feedbackRunDates, var13.feedbackDescription, var13.free),
+			playsOption = if var7 ~= nil then nil else toCampaignOption(var7, var13.playsOptionTitle, var13.playsRunDates, var13.playsDescription, var13.free),
+			legalText = var13.legal,
+			createText = if var24.shouldBuyRobux then var13.buyRobux else var13.create,
+			moderationNotice = var13.moderationNotice,
+			isCreatePending = var15,
+			isFundingCheckPending = var24.isFundingCheckPending,
+			isCreateDisabled = var24.isPrimaryActionDisabled,
+			showAdCreditsCallout = var24.showAdCreditsCallout,
+			adCreditsTitle = var13.adCreditsTitle,
+			adCreditsAction = var13.adCreditsAction,
+			hasCreateError = var24.isErrorForSelectedOption,
 			createErrorText = createError,
-			balanceState = var18,
-			balanceText = var19,
-			showCloseButton = var25.showCloseButton,
-			onOptionChanged = var25.onOptionChanged,
-			onOpenBuyRobux = var25.onOpenBuyRobux,
-			onOpenAdsManager = var25.onOpenAdsManager,
-			onClose = var20,
-			onCreate = var25.onCreate,
-			onAdvertisingTerms = var22,
-			onAdvertisingStandards = var23
+			balanceState = var17,
+			balanceText = var18,
+			showCloseButton = var24.showCloseButton,
+			onOptionChanged = var24.onOptionChanged,
+			onOpenBuyRobux = var24.onOpenBuyRobux,
+			onOpenAdsManager = var24.onOpenAdsManager,
+			onClose = var19,
+			onCreate = var24.onCreate,
+			onAdvertisingTerms = var21,
+			onAdvertisingStandards = var22
 		}
 	end
 	return {
 		variant = "freeOptionOnly",
 		isOpen = p3.isOpen,
-		title = var14.title,
-		description = var14.description,
-		campaignTitle = var14.campaignTitle,
-		estimatedPriceText = numberLocalization.localize(string.format("%.0f", math.floor(var10)), localizationService.RobloxLocaleId),
-		freeText = var14.free,
-		earnedRobuxDisclaimer = var14.earnedRobuxDisclaimer,
-		includedTitle = var14.includedTitle,
+		title = var13.title,
+		description = var13.description,
+		campaignTitle = var13.campaignTitle,
+		estimatedPriceText = numberLocalization.localize(string.format("%.0f", math.floor(var9)), localizationService.RobloxLocaleId),
+		freeText = var13.free,
+		earnedRobuxDisclaimer = var13.earnedRobuxDisclaimer,
+		includedTitle = var13.includedTitle,
 		benefits = {
-			{ icon = iconName.Calendar, text = var14.runDates },
-			{ icon = iconName.CirclePlay, text = var14.maximizePlays },
-			{ icon = iconName.ThreePeople, text = var14.targetPlayers },
+			{ icon = iconName.Calendar, text = var13.runDates },
+			{ icon = iconName.CirclePlay, text = var13.maximizePlays },
+			{ icon = iconName.ThreePeople, text = var13.targetPlayers },
 			{
 				icon = iconName.ChartScatterPlot,
-				text = var14.performanceReport
+				text = var13.performanceReport
 			}
 		},
-		legalText = var14.legal,
-		createText = var14.create,
-		moderationNotice = var14.moderationNotice,
-		balanceState = var18,
-		balanceText = var19,
-		isCreatePending = var16,
-		hasCreateError = var17,
+		legalText = var13.legal,
+		createText = var13.create,
+		moderationNotice = var13.moderationNotice,
+		balanceState = var17,
+		balanceText = var18,
+		isCreatePending = var15,
+		hasCreateError = var16,
 		createErrorText = createError,
-		onClose = var20,
-		onCreate = var21,
-		onAdvertisingTerms = var22,
-		onAdvertisingStandards = var23
+		onClose = var19,
+		onCreate = var20,
+		onAdvertisingTerms = var21,
+		onAdvertisingStandards = var22
 	}
 end

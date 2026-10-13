@@ -8,16 +8,22 @@ local useGetPresenceByUserId = friendsCommonModule.Hooks.useGetPresenceByUserId
 local useJoinUserInExperience = socialExperienceJoinModule.useJoinUserInExperience
 local useCtaForRowModule = require(userList.Hooks.useCtaForRow)
 local useProfileCtaModule = require(userList.Hooks.useProfileCta)
+local composeCtaRowModule = require(script.Parent.composeCtaRow)
 local fFlagUserListCanonicalCtaAnalyticsModule = require(userList.Flags.FFlagUserListCanonicalCtaAnalytics)
 local fFlagUserListComposeRenderRowWithCta = require(parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
+local fFlagUserListSurfaceJoin = require(parent.SharedFlags).FFlagUserListSurfaceJoin
 local fFlagUserListSurfacePresenceWins = require(parent.SharedFlags).FFlagUserListSurfacePresenceWins
 
 return reactModule.memo(function(p1)
-	-- upvalues: useProfileCtaModule (ref), useGetPresenceByUserId (ref), useJoinUserInExperience (ref), useCtaForRowModule (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), fFlagUserListComposeRenderRowWithCta (ref), fFlagUserListSurfacePresenceWins (ref)
+	-- upvalues: useProfileCtaModule (ref), useGetPresenceByUserId (ref), useJoinUserInExperience (ref), useCtaForRowModule (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), fFlagUserListSurfaceJoin (ref), composeCtaRowModule (ref), fFlagUserListComposeRenderRowWithCta (ref), fFlagUserListSurfacePresenceWins (ref)
 	local id = p1.entity.id
 	local var1, var2 = useProfileCtaModule(id)
 	local var3 = useGetPresenceByUserId(id)
 	local var4 = useCtaForRowModule(var1, var2, p1.actionHandlers, id, p1.ctaConfig, useJoinUserInExperience(id, { presence = var3 }), if fFlagUserListCanonicalCtaAnalyticsModule then p1.index else nil)
+	
+	if fFlagUserListSurfaceJoin then
+		return composeCtaRowModule(p1, p1.ctaConfig, var3, var4)
+	end
 	local ctaConfig = p1.ctaConfig
 	local var5 = if var4.isLoading and (ctaConfig ~= nil and (ctaConfig.showLoadingPlaceholder ~= false and ctaConfig.primaryCtaMinWidth ~= nil)) and ctaConfig then {
 		minWidth = ctaConfig.primaryCtaMinWidth,

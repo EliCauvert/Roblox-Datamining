@@ -19,6 +19,7 @@ local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Pare
 local fFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
 local fFlagExpChatExpressionTrayReducedMotion = chatUIPrimitivesModule.Flags.FFlagExpChatExpressionTrayReducedMotion
 local expChatTCWAllowKeyboardNav = game:DefineFastFlag("ExpChatTCWAllowKeyboardNav", false)
+local fFlagExpChatTCWMemoizeChatWindowBodyModule = require(script.Parent.Flags.FFlagExpChatTCWMemoizeChatWindowBody)
 local guiService = game:GetService("GuiService")
 local userInputService = game:GetService("UserInputService")
 local userGameSettingsService = UserSettings():GetService("UserGameSettings")
@@ -102,23 +103,25 @@ local function ChatWindowBody(p1)
 	})
 end
 
+local var2 = if fFlagExpChatTCWMemoizeChatWindowBodyModule then reactModule.memo(ChatWindowBody) else ChatWindowBody
+
 local function ChatAppFocusNav(p1)
-	-- upvalues: reactModule (ref), responsiveModule (ref), expChatTCWAllowKeyboardNav (ref), foundationModule (ref), guiService (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), userInputService (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t_1 (ref), t (ref), useChatWindowEntryHandoffModule (ref), ChatWindowBody (ref)
-	local var2
-	local var3 = reactModule.useRef(nil)
-	local var4 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
+	-- upvalues: reactModule (ref), responsiveModule (ref), expChatTCWAllowKeyboardNav (ref), foundationModule (ref), guiService (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), userInputService (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t_1 (ref), t (ref), useChatWindowEntryHandoffModule (ref), var2 (ref)
+	local var3
+	local var4 = reactModule.useRef(nil)
+	local var5 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
 	
 	if expChatTCWAllowKeyboardNav then
-		var2 = p1.windowInstance ~= nil
-		var2 = nil
+		var3 = p1.windowInstance ~= nil
+		var3 = nil
 	else
-		var2 = var4 and p1.windowInstance ~= nil
+		var3 = var5 and p1.windowInstance ~= nil
 	end
-	local var5 = foundationModule.Hooks.useCursor(foundationModule.Enums.CursorType.RoundedRect)
-	local var6, var7 = reactModule.useState(false)
-	local var8, var9 = reactModule.useState(false)
+	local var6 = foundationModule.Hooks.useCursor(foundationModule.Enums.CursorType.RoundedRect)
+	local var7, var8 = reactModule.useState(false)
+	local var9, var10 = reactModule.useState(false)
 	local windowInstance = p1.windowInstance
-	local var10 = reactModule.useCallback(function()
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: guiService (copy), windowInstance (ref)
 		guiService.SelectedCoreObject = nil
 		
@@ -126,19 +129,19 @@ local function ChatAppFocusNav(p1)
 			guiService.SelectedObject = windowInstance
 		end
 	end, { windowInstance })
-	local var11 = useFocusRoot({
+	local var12 = useFocusRoot({
 		isAutoFocusRoot = false,
 		shouldRestoreFocus = false,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		eventMap = if var6 or var8 then t_1 else t,
+		eventMap = if var7 or var9 then t_1 else t,
 		eventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), userInputService (copy), var10 (ref)
+			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), userInputService (copy), var11 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
 					handler = inputHandlersModule.onRelease(function(p2)
-						-- upvalues: userInputService (copy), var10 (copy)
+						-- upvalues: userInputService (copy), var11 (copy)
 						if userInputService:GetFocusedTextBox() == nil then
-							var10()
+							var11()
 							p2:cancel()
 							
 							return
@@ -146,24 +149,24 @@ local function ChatAppFocusNav(p1)
 					end)
 				}
 			}
-		end, { var10 })
+		end, { var11 })
 	})
 	useChatWindowEntryHandoffModule({
-		enabled = var2,
+		enabled = var3,
 		windowInstance = p1.windowInstance,
-		focusTargetRef = var3,
+		focusTargetRef = var4,
 		setSelection = reactFocusNavigationModule.useFocusGuiObject()
 	})
-	local var12 = reactModule.useRef(nil)
-	local var13 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var12 (ref)
-		local current = var3.current
-		local current_1 = var12.current
+	local var13 = reactModule.useRef(nil)
+	local var14 = reactModule.useCallback(function(p2)
+		-- upvalues: var4 (ref), var13 (ref)
+		local current = var4.current
+		local current_1 = var13.current
 		
 		if current_1 ~= nil and current_1 ~= p2 then
 			current_1.NextSelectionDown = nil
 		end
-		var12.current = p2
+		var13.current = p2
 		
 		if current == nil then return end
 		current.NextSelectionUp = p2
@@ -171,57 +174,57 @@ local function ChatAppFocusNav(p1)
 		if p2 ~= nil then
 			p2.NextSelectionDown = current
 		end
-	end, { var3 })
+	end, { var4 })
 	local cloned = table.clone(p1)
-	cloned.focusNavEnabled = var2
-	cloned.selectionCursor = var5
-	cloned.focusRootRef = var11
-	cloned.onLatestUsernameChanged = var13
-	cloned.inputTextBoxRef = var3
-	cloned.setReportMenuOpen = var7
-	cloned.setExpressionTrayOpen = var9
+	cloned.focusNavEnabled = var3
+	cloned.selectionCursor = var6
+	cloned.focusRootRef = var12
+	cloned.onLatestUsernameChanged = var14
+	cloned.inputTextBoxRef = var4
+	cloned.setReportMenuOpen = var8
+	cloned.setExpressionTrayOpen = var10
 	
-	return reactModule.createElement(ChatWindowBody, cloned)
+	return reactModule.createElement(var2, cloned)
 end
 
 local function useReducedMotion()
 	-- upvalues: reactModule (ref), userGameSettingsService (ref)
-	local var2, var3 = reactModule.useState(userGameSettingsService.ReducedMotion)
+	local var3, var4 = reactModule.useState(userGameSettingsService.ReducedMotion)
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), userGameSettingsService (copy)
-		var3(userGameSettingsService.ReducedMotion)
-		local var4 = userGameSettingsService:GetPropertyChangedSignal("ReducedMotion"):Connect(function()
-			-- upvalues: var3 (copy), userGameSettingsService (copy)
-			var3(userGameSettingsService.ReducedMotion)
+		-- upvalues: var4 (ref), userGameSettingsService (copy)
+		var4(userGameSettingsService.ReducedMotion)
+		local var5 = userGameSettingsService:GetPropertyChangedSignal("ReducedMotion"):Connect(function()
+			-- upvalues: var4 (copy), userGameSettingsService (copy)
+			var4(userGameSettingsService.ReducedMotion)
 		end)
 		
 		return function()
-			-- upvalues: var4 (ref)
-			var4:Disconnect()
+			-- upvalues: var5 (ref)
+			var5:Disconnect()
 		end
 	end, {})
 	
-	return var2
+	return var3
 end
 
 return function(p1)
-	-- upvalues: fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref), themeFromBackgroundColorModule (ref), foundationModule (ref), fFlagExpChatExpressionTrayReducedMotion (ref), useReducedMotion (ref), fFlagExpChatTextChannelWindowFocusNavModule (ref), reactModule (ref), reactFocusNavigationModule (ref), var1 (ref), provider (ref), ChatAppFocusNav (ref), ChatWindowBody (ref)
-	local var2
-	local var3 = if fFlagExpChatTextChannelWindowThemeByBackgroundModule and p1.backgroundColor then themeFromBackgroundColorModule(p1.backgroundColor) else foundationModule.Enums.ColorMode.Dark
-	local var4 = if fFlagExpChatExpressionTrayReducedMotion then useReducedMotion() else false
+	-- upvalues: fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref), themeFromBackgroundColorModule (ref), foundationModule (ref), fFlagExpChatExpressionTrayReducedMotion (ref), useReducedMotion (ref), fFlagExpChatTextChannelWindowFocusNavModule (ref), reactModule (ref), reactFocusNavigationModule (ref), var1 (ref), provider (ref), ChatAppFocusNav (ref), var2 (ref)
+	local var3
+	local var4 = if fFlagExpChatTextChannelWindowThemeByBackgroundModule and p1.backgroundColor then themeFromBackgroundColorModule(p1.backgroundColor) else foundationModule.Enums.ColorMode.Dark
+	local var5 = if fFlagExpChatExpressionTrayReducedMotion then useReducedMotion() else false
 	local _ = nil
 	
 	if fFlagExpChatTextChannelWindowFocusNavModule then
-		var2 = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
+		var3 = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
 			registryProvider = reactModule.createElement(provider, nil, { inner = reactModule.createElement(ChatAppFocusNav, p1) })
 		})
 	else
 		local cloned = table.clone(p1)
 		cloned.focusNavEnabled = false
-		var2 = reactModule.createElement(ChatWindowBody, cloned)
+		var3 = reactModule.createElement(var2, cloned)
 	end
 	return reactModule.createElement(foundationModule.FoundationProvider, {
-		colorMode = var3,
-		preferences = if fFlagExpChatExpressionTrayReducedMotion then { reducedMotion = var4 } else nil
-	}, { inner = var2 })
+		colorMode = var4,
+		preferences = if fFlagExpChatExpressionTrayReducedMotion then { reducedMotion = var5 } else nil
+	}, { inner = var3 })
 end

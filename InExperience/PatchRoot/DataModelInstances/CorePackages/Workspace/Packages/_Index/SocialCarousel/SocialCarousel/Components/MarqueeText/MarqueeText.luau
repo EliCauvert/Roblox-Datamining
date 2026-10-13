@@ -38,9 +38,10 @@ return function(p1)
 	local var13 = reactModule.useRef(0)
 	local var14 = reactModule.useRef(false)
 	local var15 = marqueeTextMotionModule.travelDistance(var5, var7)
-	local var16 = playStatus ~= marqueePlayStatus.Idle and (not var4 and (not var9 and var15 > 0))
-	local var17 = var16 and playStatus == marqueePlayStatus.Playing
-	local var18 = not var16 and marqueeTextMotionModule.overflows(var5, var7)
+	local var16 = marqueeTextMotionModule.overflows(var5, var7)
+	local var17 = playStatus ~= marqueePlayStatus.Idle and (not var4 and (not var9 and (var15 > 0 and (if p1.requiresOverflow == true then var16 else true))))
+	local var18 = var17 and playStatus == marqueePlayStatus.Playing
+	local var19 = not var17 and var16
 	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), var14 (ref), var12 (ref), var10 (ref)
 		var13.current = 0
@@ -48,17 +49,17 @@ return function(p1)
 		var12(0)
 		var10(false)
 	end, { p1.text, var3, var4, p1.runId })
-	local var19 = reactModule.useCallback(function(p2)
-		-- upvalues: var17 (ref), marqueeTextMotionModule (copy), var11 (ref), var13 (ref), var15 (ref), var2 (ref), var3 (ref), var14 (ref), var12 (ref), var10 (ref), p1 (ref)
-		if not var17 then return end
-		local var20 = marqueeTextMotionModule.advance({
+	local var20 = reactModule.useCallback(function(p2)
+		-- upvalues: var18 (ref), marqueeTextMotionModule (copy), var11 (ref), var13 (ref), var15 (ref), var2 (ref), var3 (ref), var14 (ref), var12 (ref), var10 (ref), p1 (ref)
+		if not var18 then return end
+		local var21 = marqueeTextMotionModule.advance({
 			finished = false,
 			offset = var11:getValue(),
 			loopsCompleted = var13.current
 		}, var15, var2, p2, var3)
-		var13.current = var20.loopsCompleted
+		var13.current = var21.loopsCompleted
 		
-		if var20.finished then
+		if var21.finished then
 			if var14.current then return end
 			var14.current = true
 			var12(0)
@@ -70,24 +71,24 @@ return function(p1)
 				return
 			end
 		else
-			var12(var20.offset)
+			var12(var21.offset)
 		end
 	end, {
-		var17, var15, var2, var3, p1.onFinished, var11
+		var18, var15, var2, var3, p1.onFinished, var11
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), heartbeat (ref), var19 (ref)
-		if var17 then
-			local var20 = heartbeat:Connect(var19)
+		-- upvalues: var18 (ref), heartbeat (ref), var20 (ref)
+		if var18 then
+			local var21 = heartbeat:Connect(var20)
 			
 			return function()
-				-- upvalues: var20 (ref)
-				var20:Disconnect()
+				-- upvalues: var21 (ref)
+				var21:Disconnect()
 			end
 		end
 		return function() end
-	end, { var17, heartbeat, var19 })
-	local var20 = direction == Enum.TextDirection.RightToLeft
+	end, { var18, heartbeat, var20 })
+	local var21 = direction == Enum.TextDirection.RightToLeft
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y clip",
@@ -108,30 +109,30 @@ return function(p1)
 				var6(value.AbsoluteSize.X)
 			end
 		}),
-		Content = if var16 then reactModule.createElement(view, {
+		Content = if var17 then reactModule.createElement(view, {
 			tag = "auto-y no-clip",
 			Size = UDim2.fromOffset(var15 + var5, 0),
-			AnchorPoint = if var20 then Vector2.new(1, 0) else Vector2.new(0, 0),
+			AnchorPoint = if var21 then Vector2.new(1, 0) else Vector2.new(0, 0),
 			Position = var11:map(function(p2)
-				-- upvalues: var16 (ref), marqueeTextMotionModule (copy), direction (ref), var20 (ref)
-				if not var16 then
+				-- upvalues: var17 (ref), marqueeTextMotionModule (copy), direction (ref), var21 (ref)
+				if not var17 then
 					return UDim2.fromOffset(0, 0)
 				end
-				local var21 = marqueeTextMotionModule.signedOffset(p2, direction)
+				local var22 = marqueeTextMotionModule.signedOffset(p2, direction)
 				
-				return if var20 then UDim2.new(1, var21, 0, 0) else UDim2.fromOffset(var21, 0)
+				return if var21 then UDim2.new(1, var22, 0, 0) else UDim2.fromOffset(var22, 0)
 			end)
 		}, {
-			Leading = renderCopy(p1.text, fontStyle, if var20 then var15 else 0, var5),
-			Trailing = renderCopy(p1.text, fontStyle, if var20 then 0 else var15, var5)
+			Leading = renderCopy(p1.text, fontStyle, if var21 then var15 else 0, var5),
+			Trailing = renderCopy(p1.text, fontStyle, if var21 then 0 else var15, var5)
 		}) else reactModule.createElement(text, {
 			testId = "marquee-text",
 			Text = p1.text,
 			fontStyle = fontStyle,
-			TextTruncate = if var18 then Enum.TextTruncate.AtEnd else Enum.TextTruncate.None,
+			TextTruncate = if var19 then Enum.TextTruncate.AtEnd else Enum.TextTruncate.None,
 			tag = {
-				["size-full-0 auto-y text-align-x-center text-truncate-end content-default"] = var18,
-				["size-full-0 auto-y text-align-x-center content-default"] = not var18
+				["size-full-0 auto-y text-align-x-center text-truncate-end content-default"] = var19,
+				["size-full-0 auto-y text-align-x-center content-default"] = not var19
 			}
 		})
 	})

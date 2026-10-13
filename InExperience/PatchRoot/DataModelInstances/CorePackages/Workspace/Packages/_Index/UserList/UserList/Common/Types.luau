@@ -2,5 +2,6 @@
 local _ = require(parent.React)
 local _ = require(parent.Foundation)
 local _ = require(parent.SocialCommon)
+local _ = require(parent.DataHydration)
 
 return nil

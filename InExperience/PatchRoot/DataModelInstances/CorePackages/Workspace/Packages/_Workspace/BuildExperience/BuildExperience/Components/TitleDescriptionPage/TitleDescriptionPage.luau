@@ -4,7 +4,6 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigurationActions)
 local iconButton = foundationModule.IconButton
 local text = foundationModule.Text
@@ -16,7 +15,7 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), gameConfigurationActionsModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), textInput (ref), textArea (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), gameConfigurationActionsModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), textInput (ref), textArea (ref)
 	local testId = p1.testId or "title-description-page"
 	local titleText = p1.titleText or ""
 	local descriptionText = p1.descriptionText or ""
@@ -59,7 +58,7 @@ return function(p1)
 	return reactModule.createElement(view, {
 		LayoutOrder = p1.layoutOrder,
 		tag = {
-			["composition-layout-detail"] = fFlagBuildDesktopReadinessModule,
+			["composition-layout-detail"] = true,
 			["col align-x-center size-full bg-surface-0"] = true
 		},
 		testId = testId

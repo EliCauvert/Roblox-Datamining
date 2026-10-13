@@ -119,7 +119,6 @@ Authentication.SignUp.Description.Try,Thử
 Authentication.SignUp.Description.UsernameChanged,"Mọi thứ đã sẵn sàng! Tài khoản của bạn đã sẵn sàng và được liên kết với {platform}. Hãy hồi sinh ngay để xem tên tài khoản mới của bạn trong trò chơi, nếu không thay đổi sẽ áp dụng cho lần tới."
 Authentication.SignUp.Description.UsernameUnchanged,Thành công rồi! Tài khoản của bạn đã sẵn sàng và được liên kết với {platform}. Hãy thỏa sức trò chuyện cùng bạn bè và khám phá hàng triệu trò chơi trên Roblox nhé.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Tài khoản Roblox của bạn sẽ được liên kết với tài khoản dùng cho {platform}. Bạn có thể hủy liên kết từ màn hình Cài đặt bất kỳ lúc nào. Bạn có thể phải chờ một lúc trước khi có thể liên kết với một tài khoản dùng cho {platform}. Bằng việc nhấp chuột vào {ctaButton}, bạn đồng ý với Điều khoản sử dụng, bao gồm điều khoản trọng tài, và bạn cũng xác nhận Chính sách quyền riêng tư."
-Authentication.SignUp.Header.CloseWithoutFinishing,Đóng khi chưa nâng cấp xong?
 Authentication.SignUp.Header.OneLastThing,Một bước cuối cùng
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Thiết lập tài khoản Roblox của bạn
 Authentication.SignUp.Heading.CountryCodeSelector,Chọn quốc gia
@@ -435,6 +434,7 @@ CommonUI.Features.Label.ControllerBar.ToPlaySuffix,để chơi
 CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Trải nghiệm
+CommonUI.Features.Label.Games,Trò chơi
 CommonUI.Features.Label.GiftCards,Mua thẻ quà tặng
 CommonUI.Features.Label.Groups,Cộng Đồng
 CommonUI.Features.Label.HelpAndSafety,Trợ Giúp & An Toàn
@@ -675,15 +675,18 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,Văn bản gốc ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Bản dịch này gặp vấn đề gì? (không bắt buộc)
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Vấn Đề về Độ Chính Xác
+CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,Chất lượng hình ảnh
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Không Phù Hợp hoặc Xúc Phạm
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,Vấn Đề về Chính Tả hoặc Ngữ pháp
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,Chưa dịch
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,Văn Bản Đã Chọn
 CoreScripts.Feedback.Help.Instructions,Chọn các văn bản để phản hồi về các bản dịch sai hoặc bị thiếu.
+CoreScripts.Feedback.Help.InstructionsWithImage,Chọn các văn bản hoặc hình ảnh bất kỳ để phản hồi về bản dịch sai hoặc thiếu.
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
+CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,Hãy Thông Báo Sự Cố
 CoreScripts.Feedback.Onboarding.Start,Bắt đầu
 CoreScripts.Feedback.SubmissionToastBody,Roblox sẽ sử dụng thông tin này để cải thiện chất lượng bản dịch của trải nghiệm này
@@ -2052,6 +2055,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,Thời gian phiên của ngư�
 Feature.Build.Analytics.Title.PayerConversion,Tỷ lệ chuyển đổi thành người dùng trả phí
 Feature.Build.Analytics.Title.PlaythroughRate,Tỷ lệ hoàn thành lượt chơi
 Feature.Build.Analytics.Title.RobuxSpent,
+Feature.Build.Analytics.Title.TopAcquisitionSource,Nguồn hàng đầu
+Feature.Build.Analytics.Title.TopDropOffStep,Mức sụt giảm lớn nhất
 Feature.Build.Analytics.Title.TotalPlaytime,Tổng thời gian chơi
 Feature.Build.Analytics.Visits,Lượt truy cập
 Feature.Build.Content.NewGame,Trò chơi mới
@@ -2095,7 +2100,6 @@ Feature.Build.Description.PlaytestLatest,Bạn đang chơi thử phiên bản m�
 Feature.Build.Description.PlaytestLocked,Bạn có thể bắt đầu chơi thử sau khi tạo trò chơi đầu tiên.
 Feature.Build.Description.PlaytesterAccess,Hãy mời bạn bè tham gia thử nghiệm sớm hoặc thay đổi cài đặt Đối tượng của trò chơi để cho phép nhiều người vào chơi hơn.
 Feature.Build.Description.PricingRules,Thiết lập quy tắc định giá
-Feature.Build.Description.PrivateShare,Hãy thay đổi cài đặt Đối tượng của trò chơi để chia sẻ.
 Feature.Build.Description.PromoteGameFree,Giúp trò chơi của bạn tiếp cận nhiều người chơi hơn chỉ với một thao tác nhấn.
 Feature.Build.Description.PromoteGamePaid,Tạo quảng cáo để giúp trò chơi của bạn tiếp cận hàng triệu người chơi.
 Feature.Build.Description.PromoteGameWithAdCampaign,Thu hút thêm người chơi bằng chiến dịch quảng cáo dài {durationDays} ngày và giúp trò chơi của bạn tiếp cận được nhiều người hơn.
@@ -2221,6 +2225,15 @@ Feature.Build.Label.Thinking,Đang tư duy
 Feature.Build.Label.Title,Tiêu đề
 Feature.Build.Label.TitleDescription,Tiêu đề và mô tả
 Feature.Build.Label.Tool,công cụ
+Feature.Build.Label.ToolAdEligibilityDone,Đã kiểm tra điều kiện của quảng cáo
+Feature.Build.Label.ToolAdEligibilityFailed,Không thể kiểm tra điều kiện của quảng cáo
+Feature.Build.Label.ToolAdEligibilityRunning,Đang kiểm tra điều kiện của quảng cáo
+Feature.Build.Label.ToolAnalyticsDone,Đã phân tích số liệu thống kê
+Feature.Build.Label.ToolAnalyticsFailed,Không thể phân tích số liệu thống kê
+Feature.Build.Label.ToolAnalyticsRunning,Đang phân tích số liệu thống kê
+Feature.Build.Label.ToolApiDocsDone,Đã tra cứu tài liệu API
+Feature.Build.Label.ToolApiDocsFailed,Không thể tra cứu tài liệu API
+Feature.Build.Label.ToolApiDocsRunning,Đang tra cứu tài liệu API
 Feature.Build.Label.ToolAssetDone,Đã chèn tài sản
 Feature.Build.Label.ToolAssetFailed,Không thể chèn tài sản
 Feature.Build.Label.ToolAssetRunning,Đang chèn tài sản
@@ -2230,6 +2243,9 @@ Feature.Build.Label.ToolAssetSearchRunning,Đang tìm kiếm trong thư viện t
 Feature.Build.Label.ToolClientDMDone,Đã tìm kiếm DataModel của máy khách
 Feature.Build.Label.ToolClientDMFailed,Không tìm được DataModel của máy khách
 Feature.Build.Label.ToolClientDMRunning,Đang tìm kiếm DataModel của máy khách
+Feature.Build.Label.ToolCompileDone,Đã biên dịch mã
+Feature.Build.Label.ToolCompileFailed,Không thể biên dịch mã
+Feature.Build.Label.ToolCompileRunning,Đang biên dịch mã
 Feature.Build.Label.ToolGameInfoDone,Đã cập nhật thông tin trò chơi
 Feature.Build.Label.ToolGameInfoFailed,Không thể cập nhật thông tin trò chơi
 Feature.Build.Label.ToolGameInfoRunning,Đang cập nhật thông tin trò chơi
@@ -2266,6 +2282,9 @@ Feature.Build.Label.ToolQuestionRunning,Đang đặt câu hỏi
 Feature.Build.Label.ToolReqUpdateDone,Đã cập nhật yêu cầu
 Feature.Build.Label.ToolReqUpdateFailed,Không thể cập nhật yêu cầu
 Feature.Build.Label.ToolReqUpdateRunning,Đang cập nhật yêu cầu
+Feature.Build.Label.ToolRestoreVersionDone,Đã khôi phục phiên bản
+Feature.Build.Label.ToolRestoreVersionFailed,Không thể khôi phục phiên bản
+Feature.Build.Label.ToolRestoreVersionRunning,Đang khôi phục phiên bản
 Feature.Build.Label.ToolScriptDone,Đã chạy tập lệnh
 Feature.Build.Label.ToolScriptFailed,Không thể chạy tập lệnh
 Feature.Build.Label.ToolScriptRunning,Đang chạy tập lệnh
@@ -2281,6 +2300,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Đang lên kế hoạch cho tác vụ
 Feature.Build.Label.ToolThumbnailDone,Đã đặt hình nhỏ cho trò chơi
 Feature.Build.Label.ToolThumbnailFailed,Không thể đặt hình nhỏ cho trò chơi
 Feature.Build.Label.ToolThumbnailRunning,Đang đặt hình nhỏ cho trò chơi
+Feature.Build.Label.ToolVerifyDone,Đã soát lỗi
+Feature.Build.Label.ToolVerifyFailed,Không thể soát lỗi
+Feature.Build.Label.ToolVerifyRunning,Đang soát lỗi
 Feature.Build.Label.UniverseNumber,Vũ trụ {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Không xác định
 Feature.Build.Label.UnlimitedUsed,Đã dùng {USED} • Không giới hạn
@@ -2411,7 +2433,6 @@ Feature.Build.Title.ExperienceAudience,Đối tượng của trải nghiệm
 Feature.Build.Title.FreeUsageReached,Đã hết lượt sử dụng Build miễn phí
 Feature.Build.Title.FriendsOnlyPlay,Chỉ bạn bè mới có thể chơi
 Feature.Build.Title.GameCreationDone,Đã tạo xong trò chơi
-Feature.Build.Title.GamePrivate,Trò chơi này ở chế độ riêng tư
 Feature.Build.Title.GenericError,Đã xảy ra lỗi
 Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được quản lý?
@@ -3709,6 +3730,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,Không đăng được Khoảnh kh
 Feature.Moments.Label.MomentNoLongerAvailable,Khoảnh khắc này không còn nữa.
 Feature.Moments.Label.MomentPublishedBody,Khoảnh khắc của bạn đã được đăng.
 Feature.Moments.Label.MomentPublishedTitle,Khoảnh khắc đã được đăng
+Feature.Moments.Label.MomentRemovedBody,Khoảnh khắc này đã vi phạm quy tắc an toàn của chúng tôi nên không còn được giữ lại.
+Feature.Moments.Label.MomentRemovedTitle,Chúng tôi đã xóa Khoảnh khắc này
 Feature.Moments.Label.MomentUnavailable,Khoảnh khắc không tồn tại
 Feature.Moments.Label.MomentUnavailableDefault,Khoảnh khắc này không tồn tại.
 Feature.Moments.Label.MomentsExperienceName,
@@ -4120,7 +4143,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Giảm 10% trong 60 n
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"Giảm 10% trong {trialUnlockDays} ngày đầu tiên, sau đó giảm 20% cho vật phẩm và avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Vui hơn, tốn ít Robux hơn. Đăng ký Roblox Plus ngay."
 Feature.RobloxSubscription.Description.JoinEarly,Mua gói Plus để được tham gia sớm
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,Đường liên kết giới thiệu này không còn hợp lệ.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} đã mời bạn tham gia Plus. Cả hai sẽ nhận được {amount} Robux khi bạn mua gói Plus.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{referralTermsUrl}"">Điều khoản của Chương trình giới thiệu</a> và <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Heading.ReferralEntry,Chia sẻ Plus để nhận {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Tham gia Plus để nhận {amount} Robux

@@ -19,6 +19,7 @@ local formFactor = momentsCommonModule.Enums.FormFactor
 local gradientBackdrop = momentsCommonModule.Components.GradientBackdrop
 local momentLayoutModule = require(script.Parent.momentLayout)
 local momentContextModule = require(script.Parent.MomentContext)
+local momentImpressionMemoryModule = require(script.Parent.MomentImpressionMemory)
 local useMomentsHost = require(moments.MomentsHostContext).useMomentsHost
 local avatarActionBarModule = require(script.Parent.AvatarActionBar)
 local callToActionModule = require(script.Parent.CallToAction)
@@ -37,6 +38,7 @@ local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomen
 local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local fFlagMomentsAvatarLookTryOn = require(parent.SharedFlags).FFlagMomentsAvatarLookTryOn
 local getFFlagMomentsDisplayWakeLockModule = require(moments.Flags.GetFFlagMomentsDisplayWakeLock)
+local fFlagMomentsFixOverlayRemountImpressionsModule = require(moments.Flags.FFlagMomentsFixOverlayRemountImpressions)
 local useDisplayWakeLockModule = require(moments.Hooks.useDisplayWakeLock)
 local useIsPlayingModule = require(moments.Hooks.useIsPlaying)
 local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
@@ -79,7 +81,7 @@ local function OverlayInfoFrame(p1)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), useFormFactor (ref), reactUtilsModule (ref), momentPushedFeedSafeAreaContextModule (ref), getFFlagMomentsRenderPostAssetsModule (ref), reactModule (ref), signalsModule (ref), momentsGetPostAssetStoreModule (ref), signalsReactModule (ref), deriveMomentFromPostModule (ref), fFlagMomentsAvatarLookTryOn (ref), useMomentsHost (ref), fFlagMomentsComments (ref), var1 (ref), var2 (ref), var3 (ref), useMomentsSession (ref), fFlagMomentsImmersiveChromeModule (ref), topContentModule (ref), scrubberModule (ref), avatarActionBarModule (ref), callToActionModule (ref), momentLayoutModule (ref), formFactor (ref), OverlayInfoFrame (ref), view (ref), momentContextModule (ref), text (ref), videoScrimModule (ref), momentGestureLayerModule (ref), gradientBackdrop (ref), playbackToggleIndicatorModule (ref), reactionExplosionLayerModule (ref), getFFlagMomentsDisplayWakeLockModule (ref), DisplayWakeLockEffect (ref), reactionEffectsContextModule (ref)
+	-- upvalues: useTokens (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), useFormFactor (ref), reactUtilsModule (ref), momentPushedFeedSafeAreaContextModule (ref), getFFlagMomentsRenderPostAssetsModule (ref), reactModule (ref), signalsModule (ref), momentsGetPostAssetStoreModule (ref), signalsReactModule (ref), deriveMomentFromPostModule (ref), fFlagMomentsAvatarLookTryOn (ref), useMomentsHost (ref), fFlagMomentsComments (ref), var1 (ref), var2 (ref), var3 (ref), useMomentsSession (ref), fFlagMomentsImmersiveChromeModule (ref), topContentModule (ref), scrubberModule (ref), avatarActionBarModule (ref), callToActionModule (ref), momentLayoutModule (ref), formFactor (ref), OverlayInfoFrame (ref), view (ref), momentContextModule (ref), text (ref), videoScrimModule (ref), momentGestureLayerModule (ref), gradientBackdrop (ref), playbackToggleIndicatorModule (ref), reactionExplosionLayerModule (ref), getFFlagMomentsDisplayWakeLockModule (ref), DisplayWakeLockEffect (ref), fFlagMomentsFixOverlayRemountImpressionsModule (ref), momentImpressionMemoryModule (ref), reactionEffectsContextModule (ref)
 	local var4 = useTokens()
 	local var5 = nil
 	local var6 = nil
@@ -166,8 +168,7 @@ return function(p1)
 		CallToAction = reactModule.createElement(if var16 then avatarActionBarModule else callToActionModule, { LayoutOrder = var8() })
 	}
 	local var24 = if fFlagMomentsUseCompositionLibraryModule then momentLayoutModule.BOTTOM_UI_MAX_SIZE elseif var7 ~= formFactor.Wide then momentLayoutModule.BOTTOM_UI_MAX_SIZE else nil
-	
-	return reactModule.createElement(reactionEffectsContextModule.Provider, nil, reactModule.createElement(momentContextModule.Provider, { data = data, dataVersion = var12 }, {
+	local var25 = reactModule.createElement(momentContextModule.Provider, { data = data, dataVersion = var12 }, {
 		Root = reactModule.createElement(view, {
 			tag = "size-full clip bg-surface-0",
 			testId = "--moments-item-root",
@@ -234,5 +235,10 @@ return function(p1)
 			ReactionExplosionLayer = reactModule.createElement(reactionExplosionLayerModule)
 		}),
 		DisplayWakeLock = if getFFlagMomentsDisplayWakeLockModule() then reactModule.createElement(DisplayWakeLockEffect) else nil
-	}))
+	})
+	
+	if fFlagMomentsFixOverlayRemountImpressionsModule then
+		var25 = reactModule.createElement(momentImpressionMemoryModule.Provider, nil, var25)
+	end
+	return reactModule.createElement(reactionEffectsContextModule.Provider, nil, var25)
 end

@@ -18,6 +18,7 @@ return {
 		usePropSignal = require(script.Hooks.usePropSignal),
 		useFinishChatWindowMessageRenderIntervals = require(script.Hooks.useFinishChatWindowMessageRenderIntervals),
 		useFocusInputBar = require(script.Hooks.useFocusInputBar),
+		useInputBarTabNavigation = require(script.Hooks.useInputBarTabNavigation),
 		useInExperienceLocalization = require(script.Hooks.useInExperienceLocalization),
 		useLastInputGroup = require(script.Hooks.useLastInputGroup),
 		usePortalSelectionLinks = require(script.Hooks.usePortalSelectionLinks)

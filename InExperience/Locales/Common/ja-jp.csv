@@ -119,7 +119,6 @@ Authentication.SignUp.Description.Try,こちらをお試しください
 Authentication.SignUp.Description.UsernameChanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。更新したユーザー名を今すぐゲーム内に反映させるには、リスポーンしてください。何もしなくても、次回から適用されます。
 Authentication.SignUp.Description.UsernameUnchanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。友達とチャットしたり、何百万ものRobloxゲームをプレイしたりしましょう。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,お持ちのRoblox（ロブロックス）アカウントは {platform} 上のアカウントに紐づけられます。設定画面からいつでも紐づけを解除できます。また {platform} 上の他のアカウントとの紐づけができるようになるまでには、クールダウン期間があるかもしれません。{ctaButton} をクリックすると、仲裁条項を含む利用規約に同意し、プライバシーポリシーを承認したことになります。
-Authentication.SignUp.Header.CloseWithoutFinishing,完了せずに閉じますか？
 Authentication.SignUp.Header.OneLastThing,最後のステップ
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Robloxアカウントを設定
 Authentication.SignUp.Heading.CountryCodeSelector,国を選択
@@ -435,6 +434,7 @@ CommonUI.Features.Label.ControllerBar.ToPlaySuffix,プレイ
 CommonUI.Features.Label.CreateGames,制作
 CommonUI.Features.Label.Friends,友達
 CommonUI.Features.Label.Game,バーチャル空間
+CommonUI.Features.Label.Games,ゲーム
 CommonUI.Features.Label.GiftCards,ギフトカードを購入
 CommonUI.Features.Label.Groups,コミュニティ
 CommonUI.Features.Label.HelpAndSafety,ヘルプと安全
@@ -675,15 +675,18 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,元のテキスト（{SourceLanguage}）
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,この翻訳内容の問題点は何ですか？
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,誤訳
+CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,画質
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,不適切な内容や暴言がある
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,誤字や文法の問題
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,翻訳されていない
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,選択済みテキスト
 CoreScripts.Feedback.Help.Instructions,任意の文章を選択して誤訳や翻訳されていない部分についてのフィードバックを送信してください。
+CoreScripts.Feedback.Help.InstructionsWithImage,任意の文章または画像を選択して、誤訳や翻訳されていない部分についてのフィードバックを送信してください。
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
+CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,問題点を教えてください
 CoreScripts.Feedback.Onboarding.Start,開始
 CoreScripts.Feedback.SubmissionToastBody,Roblox（ロブロックス）は、この情報を利用してこのバーチャル空間での翻訳のクオリティの改善に努めます
@@ -2052,6 +2055,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,新規ユーザーのセッシ�
 Feature.Build.Analytics.Title.PayerConversion,有料ユーザーコンバージョン
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,
+Feature.Build.Analytics.Title.TopAcquisitionSource,上位のソース
+Feature.Build.Analytics.Title.TopDropOffStep,最大離脱数
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,訪問数
 Feature.Build.Content.NewGame,新規のゲーム
@@ -2095,7 +2100,6 @@ Feature.Build.Description.PlaytestLatest,最新バージョンのプレイテス
 Feature.Build.Description.PlaytestLocked,プレイテストは、最初のゲームを制作した後に開始可能です。
 Feature.Build.Description.PlaytesterAccess,友達を早期テスターとして招待するか、ゲームのオーディエンス設定を変更して、より多くの人にプレイしてもらいましょう。
 Feature.Build.Description.PricingRules,価格設定ルールを設定
-Feature.Build.Description.PrivateShare,ゲームのオーディエンス設定を変更してシェアしてください。
 Feature.Build.Description.PromoteGameFree,ワンタップで、より多くのプレイヤーにゲームをアピールしましょう。
 Feature.Build.Description.PromoteGamePaid,広告を作成して、数百万人のプレイヤーにゲームをアピールしましょう。
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}日間の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう。
@@ -2221,6 +2225,15 @@ Feature.Build.Label.Thinking,考え中
 Feature.Build.Label.Title,タイトル
 Feature.Build.Label.TitleDescription,タイトルと詳細
 Feature.Build.Label.Tool,ツール
+Feature.Build.Label.ToolAdEligibilityDone,広告の適格性を確認しました
+Feature.Build.Label.ToolAdEligibilityFailed,広告の適格性を確認できませんでした
+Feature.Build.Label.ToolAdEligibilityRunning,広告の適格性を確認中
+Feature.Build.Label.ToolAnalyticsDone,統計を解析しました
+Feature.Build.Label.ToolAnalyticsFailed,統計を解析できませんでした
+Feature.Build.Label.ToolAnalyticsRunning,統計を解析中
+Feature.Build.Label.ToolApiDocsDone,APIドキュメントを検索しました
+Feature.Build.Label.ToolApiDocsFailed,APIドキュメントを検索できませんでした
+Feature.Build.Label.ToolApiDocsRunning,APIドキュメントを検索中
 Feature.Build.Label.ToolAssetDone,アセットを挿入しました
 Feature.Build.Label.ToolAssetFailed,アセットを挿入できませんでした
 Feature.Build.Label.ToolAssetRunning,アセットを挿入しています
@@ -2230,6 +2243,9 @@ Feature.Build.Label.ToolAssetSearchRunning,アセットライブラリをサー�
 Feature.Build.Label.ToolClientDMDone,クライアントDataModelをサーチしました
 Feature.Build.Label.ToolClientDMFailed,クライアントDataModelをサーチできませんでした
 Feature.Build.Label.ToolClientDMRunning,クライアントDataModelをサーチしています
+Feature.Build.Label.ToolCompileDone,コードをコンパイルしました
+Feature.Build.Label.ToolCompileFailed,コードをコンパイルできませんでした
+Feature.Build.Label.ToolCompileRunning,コードをコンパイル中
 Feature.Build.Label.ToolGameInfoDone,ゲーム情報を更新しました
 Feature.Build.Label.ToolGameInfoFailed,ゲーム情報を更新できませんでした
 Feature.Build.Label.ToolGameInfoRunning,ゲーム情報を更新しています
@@ -2266,6 +2282,9 @@ Feature.Build.Label.ToolQuestionRunning,質問しています
 Feature.Build.Label.ToolReqUpdateDone,要件を更新しました
 Feature.Build.Label.ToolReqUpdateFailed,要件を更新できませんでした
 Feature.Build.Label.ToolReqUpdateRunning,要件を更新しています
+Feature.Build.Label.ToolRestoreVersionDone,バージョンを復元しました
+Feature.Build.Label.ToolRestoreVersionFailed,バージョンを復元できませんでした
+Feature.Build.Label.ToolRestoreVersionRunning,バージョンを復元中
 Feature.Build.Label.ToolScriptDone,スクリプトを実行しました
 Feature.Build.Label.ToolScriptFailed,スクリプトを実行できませんでした
 Feature.Build.Label.ToolScriptRunning,スクリプトを実行しています
@@ -2281,6 +2300,9 @@ Feature.Build.Label.ToolTasksPlanRunning,タスクを計画しています
 Feature.Build.Label.ToolThumbnailDone,ゲームのサムネイルを設定しました
 Feature.Build.Label.ToolThumbnailFailed,ゲームのサムネイルを設定できませんでした
 Feature.Build.Label.ToolThumbnailRunning,ゲームのサムネイルを設定しています
+Feature.Build.Label.ToolVerifyDone,エラーを確認しました
+Feature.Build.Label.ToolVerifyFailed,エラーを確認できませんでした
+Feature.Build.Label.ToolVerifyRunning,エラーを確認中
 Feature.Build.Label.UniverseNumber,ユニバース{UNIVERSE_ID}
 Feature.Build.Label.Unknown,不明
 Feature.Build.Label.UnlimitedUsed,{USED}使用済み • 制限なし
@@ -2411,7 +2433,6 @@ Feature.Build.Title.ExperienceAudience,バーチャル空間のオーディエ�
 Feature.Build.Title.FreeUsageReached,無料のビルド使用量の限度額に達しました
 Feature.Build.Title.FriendsOnlyPlay,友達だけがプレイできます
 Feature.Build.Title.GameCreationDone,ゲームの作成が完了しました
-Feature.Build.Title.GamePrivate,このゲームは非公開です
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,ユーザーを獲得
 Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
@@ -3709,6 +3730,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,モーメントを投稿できま�
 Feature.Moments.Label.MomentNoLongerAvailable,このモーメントはもう利用できません。
 Feature.Moments.Label.MomentPublishedBody,モーメントが正常に公開されました。
 Feature.Moments.Label.MomentPublishedTitle,モーメントが公開されました
+Feature.Moments.Label.MomentRemovedBody,安全に関するルールに違反したため、ご利用いただけなくなりました。
+Feature.Moments.Label.MomentRemovedTitle,このモーメントは削除されました
 Feature.Moments.Label.MomentUnavailable,モーメントは使用できません
 Feature.Moments.Label.MomentUnavailableDefault,このモーメントは使用できません。
 Feature.Moments.Label.MomentsExperienceName,
@@ -4119,7 +4142,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,最初の60日間は10
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,最初の{trialUnlockDays}日間は10%オフ、その後はアイテムとアバターが20%オフ
 Feature.RobloxSubscription.Description.ExclusiveBenefits,少ないRobuxでもっと楽しく。Roblox Plusを定期購入しましょう。
 Feature.RobloxSubscription.Description.JoinEarly,Plusで先行参加
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,この紹介リンクは有効期限が切れています。
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username}さんからPlusへの招待状が届いています。Plusを購入すると、お互いに{amount}Robuxを獲得できます。
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{referralTermsUrl}"">紹介プログラム規約</a>および<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
 Feature.RobloxSubscription.Heading.ReferralEntry,Plusをシェアして、{amount} Robuxを獲得
 Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Plusに参加して、{amount} Robuxを獲得

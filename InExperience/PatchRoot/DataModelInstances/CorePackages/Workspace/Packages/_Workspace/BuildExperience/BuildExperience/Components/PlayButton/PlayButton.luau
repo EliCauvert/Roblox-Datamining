@@ -1,5 +1,4 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
+﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local iconButton = foundationModule.IconButton
@@ -7,10 +6,9 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 local disabledPlaytestTooltipModule = require(script.Parent.DisabledPlaytestTooltip)
-local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
 
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), buttonVariant (ref), inputSize (ref), iconButton (ref), disabledPlaytestTooltipModule (ref), view (ref)
+	-- upvalues: reactModule (ref), buttonVariant (ref), inputSize (ref), iconButton (ref), disabledPlaytestTooltipModule (ref), view (ref)
 	local var1 = if p1.isActive then p1.activeIcon else p1.inActiveIcon
 	local var2 = p1.isDisabled == true
 	local var3, var4 = reactModule.useState(false)
@@ -39,10 +37,10 @@ return function(p1)
 	return if var2 then reactModule.createElement(disabledPlaytestTooltipModule, {
 		LayoutOrder = p1.LayoutOrder,
 		isOpen = var3,
-		onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
+		onPressedOutside = reactModule.useCallback(function()
 			-- upvalues: var4 (ref)
 			var4(false)
-		end, {}) else nil
+		end, {})
 	}, {
 		PlayButtonAnchor = reactModule.createElement(view, {
 			tag = "auto-xy",

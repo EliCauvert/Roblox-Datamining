@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("GameInviteInExpUserListRenderer", false) and require(script:FindFirstAncestor("GameInvite").Parent.SharedFlags).FFlagUserListSurfaceExtensions

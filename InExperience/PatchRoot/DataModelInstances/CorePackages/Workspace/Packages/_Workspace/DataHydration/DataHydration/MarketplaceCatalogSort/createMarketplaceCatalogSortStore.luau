@@ -8,6 +8,7 @@ local createDataResolverModule = require(dataHydration.createDataResolver)
 local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceCatalogSortStoreTypes)
 local fFlagMarketplaceCatalogSortTrackLastReceived = sharedFlagsModule.FFlagMarketplaceCatalogSortTrackLastReceived
+local fFlagAXSduiNilEmptyTagIdModule = require(dataHydration.Flags.FFlagAXSduiNilEmptyTagId)
 
 local function normalizeCardFooters(p1)
 	if not p1 then
@@ -46,9 +47,19 @@ local _ = function(p2)
 	return cloned
 end
 
+local function clearEmptyTagId(p2)
+	if p2.tagId == "" then
+		local cloned = table.clone(p2)
+		cloned.tagId = nil
+		
+		return cloned
+	end
+	return p2
+end
+
 return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), fFlagMarketplaceCatalogSortTrackLastReceived (ref), signalsModule (ref), normalizeCardFooters (ref)
-	local var1 = createDataCacheModule()
+	-- upvalues: fFlagAXSduiNilEmptyTagIdModule (ref), createDataCacheModule (ref), clearEmptyTagId (ref), createDataResolverModule (ref), promiseModule (ref), fFlagMarketplaceCatalogSortTrackLastReceived (ref), signalsModule (ref), normalizeCardFooters (ref)
+	local var1 = if fFlagAXSduiNilEmptyTagIdModule then createDataCacheModule(nil, nil, { sanitizeItem = clearEmptyTagId }) else createDataCacheModule()
 	local var2 = createDataResolverModule({
 		cache = var1,
 		fetchFn = function(_)

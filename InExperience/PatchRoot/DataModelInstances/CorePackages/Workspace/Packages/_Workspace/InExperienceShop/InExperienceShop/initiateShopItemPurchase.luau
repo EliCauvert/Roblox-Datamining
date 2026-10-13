@@ -3,15 +3,16 @@ local parent = inExperienceShop.Parent
 local purchasePromptModule = require(parent.PurchasePrompt)
 local sharedFlagsModule = require(parent.SharedFlags)
 local getShopPurchasePayloadModule = require(inExperienceShop.Utils.getShopPurchasePayload)
+local fFlagCategoryLoggingInShopPurchaseModule = require(inExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
 local fFlagEnablePurchasePayloadInExperienceShop = sharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
 local fFlagPassShopPurchaseSurfaceToBuyModal = sharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
 local fFlagSkipBuyDelayForExperienceShop = sharedFlagsModule.FFlagSkipBuyDelayForExperienceShop
 local _ = require(inExperienceShop.Types)
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagEnablePurchasePayloadInExperienceShop (ref), getShopPurchasePayloadModule (ref), purchasePromptModule (ref), fFlagPassShopPurchaseSurfaceToBuyModal (ref), inExperienceShop (ref), fFlagSkipBuyDelayForExperienceShop (ref)
+return function(p1, p2, p3, p4)
+	-- upvalues: fFlagEnablePurchasePayloadInExperienceShop (ref), getShopPurchasePayloadModule (ref), fFlagCategoryLoggingInShopPurchaseModule (ref), purchasePromptModule (ref), fFlagPassShopPurchaseSurfaceToBuyModal (ref), inExperienceShop (ref), fFlagSkipBuyDelayForExperienceShop (ref)
 	if tonumber(p1) == nil then return end
-	local var1 = if fFlagEnablePurchasePayloadInExperienceShop then getShopPurchasePayloadModule() else nil
+	local var1 = if fFlagEnablePurchasePayloadInExperienceShop then getShopPurchasePayloadModule(if fFlagCategoryLoggingInShopPurchaseModule then p4 else nil) else nil
 	local initiatePurchaseForProductPayload = purchasePromptModule.initiatePurchaseForProductPayload
 	
 	if fFlagPassShopPurchaseSurfaceToBuyModal and p3 ~= nil then
@@ -19,9 +20,9 @@ return function(p1, p2, p3)
 			surface = require(inExperienceShop.Analytics.getShopPurchaseAnalyticsSurface)(p3)
 		}
 		
-		initiatePurchaseForProductPayload = function(p4)
+		initiatePurchaseForProductPayload = function(p5)
 			-- upvalues: purchasePromptModule (copy), t (ref)
-			purchasePromptModule.initiatePurchaseForProductPayload(p4, t)
+			purchasePromptModule.initiatePurchaseForProductPayload(p5, t)
 		end
 	end
 	if p2 == "GamePass" then

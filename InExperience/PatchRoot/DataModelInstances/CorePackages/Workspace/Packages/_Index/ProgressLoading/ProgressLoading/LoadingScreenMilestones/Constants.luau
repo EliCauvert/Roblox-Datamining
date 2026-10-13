@@ -6,8 +6,14 @@
 		NormalReady = "NormalReady",
 		DeveloperOverride = "DeveloperOverride"
 	}),
+	ContentId = table.freeze({
+		Title = "Title",
+		Creator = "Creator",
+		Thumbnail = "Thumbnail"
+	}),
 	Milestone = table.freeze({
 		ScreenVisible = "ScreenVisible",
+		ContentVisible = "ContentVisible",
 		DismissRequested = "DismissRequested",
 		DismissGateReleased = "DismissGateReleased",
 		DismissStarted = "DismissStarted",

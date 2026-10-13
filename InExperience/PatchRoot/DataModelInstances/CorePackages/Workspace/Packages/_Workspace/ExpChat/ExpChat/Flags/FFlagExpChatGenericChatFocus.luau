@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatGenericChatFocusRC1", false) and require(script:FindFirstAncestor("ExpChat").Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav

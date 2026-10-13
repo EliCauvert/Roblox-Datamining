@@ -10,26 +10,26 @@ local friendsChatTabNameModule = require(parent.FriendsChat.FriendsChatTabName)
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
 return function(p1)
-	-- upvalues: getFriendsTabVisibilityStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), signalsModule (ref), friendsChatChannelAddedModule (ref), friendsChatTabNameModule (ref), friendsChatChannelRemovedModule (ref)
+	-- upvalues: getFriendsTabVisibilityStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), signalsModule (ref), friendsChatTabNameModule (ref), friendsChatChannelAddedModule (ref), friendsChatChannelRemovedModule (ref)
 	local var1 = getFriendsTabVisibilityStoreModule(false)
 	local var2 = if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false) else nil
 	
 	return signalsModule.createEffect(function(p2)
-		-- upvalues: var1 (ref), p1 (ref), friendsChatChannelAddedModule (copy), friendsChatTabNameModule (copy), var2 (ref), friendsChatChannelRemovedModule (copy)
+		-- upvalues: var1 (ref), var2 (ref), friendsChatTabNameModule (copy), p1 (ref), friendsChatChannelAddedModule (copy), friendsChatChannelRemovedModule (copy)
 		if var1.getIsFriendsTabVisible(p2) then
-			p1:dispatch(friendsChatChannelAddedModule(friendsChatTabNameModule))
-			
 			if var2 then
 				var2.addChannelTab({ type = "FriendsChat", name = friendsChatTabNameModule }, nil)
 				
 				return
 			end
-		else
-			p1:dispatch(friendsChatChannelRemovedModule(friendsChatTabNameModule))
+			p1:dispatch(friendsChatChannelAddedModule(friendsChatTabNameModule))
 			
-			if var2 then
-				var2.handleChannelRemoved(friendsChatTabNameModule)
-			end
+			return
+		elseif var2 then
+			var2.handleChannelRemoved(friendsChatTabNameModule)
+			
+			return
 		end
+		p1:dispatch(friendsChatChannelRemovedModule(friendsChatTabNameModule))
 	end)
 end

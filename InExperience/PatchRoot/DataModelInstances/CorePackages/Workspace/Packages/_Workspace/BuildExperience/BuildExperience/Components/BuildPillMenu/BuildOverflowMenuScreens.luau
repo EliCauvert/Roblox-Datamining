@@ -6,7 +6,6 @@ local reactModule = require(parent.React)
 local sharedFlagsModule = require(parent.SharedFlags)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
 local fFlagBuildExperienceAnalytics = sharedFlagsModule.FFlagBuildExperienceAnalytics
 local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSafeArea
 local view = foundationModule.View
@@ -114,7 +113,7 @@ local function BuildSheetPage(p1)
 end
 
 local function ConfigurationScreen(p1, p2, p3)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), buildNavigationParamsModule (ref), gameInfoUtilsModule (ref), getTargetWithGameInfo (ref), reactModule (ref), t (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), fFlagBuildAgentRollbackModule (ref), buildOverflowMenuPageModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref), privateInvitesPickerHostModule (ref), buildExperience (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), buildNavigationParamsModule (ref), gameInfoUtilsModule (ref), getTargetWithGameInfo (ref), reactModule (ref), t (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), buildOverflowMenuPageModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref), privateInvitesPickerHostModule (ref), buildExperience (ref)
 	local var1
 	local loading = useLocalization({ loading = localizationStringsModule.BUILD_MENU_LOADING }).loading
 	local navigation = p1.navigation
@@ -206,11 +205,11 @@ local function ConfigurationScreen(p1, p2, p3)
 		-- upvalues: var9 (ref)
 		var9(false)
 	end, {})
-	local var18 = if fFlagBuildAgentRollbackModule then reactModule.useCallback(function()
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref), var10 (ref)
 		var9(false)
 		var10()
-	end, { var10 }) else nil
+	end, { var10 })
 	local var19 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref)
 		var7(true)
@@ -263,7 +262,7 @@ local function ConfigurationScreen(p1, p2, p3)
 			universeId = var5.universeId,
 			placeId = var5.placeId,
 			onClose = var17,
-			onAgentRollbackStarted = if fFlagBuildAgentRollbackModule then var18 else nil
+			onAgentRollbackStarted = var18
 		}) else nil
 	})
 end
@@ -310,7 +309,7 @@ return {
 	BuildMonetizationScreen = function(_)
 		-- upvalues: buildNavigationParamsModule (ref), fFlagBuildPublishNavigationSheetModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), reactModule (ref), monetizationPageContainerModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref)
 -- FATAL: Failed to generate AST for `BuildMonetizationScreen` function:
-runtime : [KeyError] :11990: 179
+runtime : [KeyError] :11990: 177
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

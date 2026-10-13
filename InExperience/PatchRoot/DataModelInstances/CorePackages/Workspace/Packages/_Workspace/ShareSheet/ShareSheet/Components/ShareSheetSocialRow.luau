@@ -13,7 +13,7 @@ local shareSheetRowModule = require(script.Parent.ShareSheetRow)
 local shareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
 local var1 = if fFlagShareSheetPeoplePickerEnabledModule then require(shareSheet.Utils.ConversationUtils) else nil
 local playersService = game:GetService("Players")
-local _ = require(parent.AppChat.GetConversationListStore)
+local _ = require(shareSheet.Types)
 
 local function _(p1, p2)
 	local t = {}

@@ -102,7 +102,6 @@ Authentication.SignUp.Description.Try,جرب
 Authentication.SignUp.Description.UsernameChanged,كل شيء جاهز! حسابك جاهز ومرتبط بمنصّة {platform}. أعد الظهور الآن لرؤية اسم المستخدم المحدث في اللعبة، أو سيُطبق التغيير في المرة القادمة.
 Authentication.SignUp.Description.UsernameUnchanged,لقد انضممت! حسابك جاهز ومرتبط بمنصّة {platform}. يمكنك الدردشة مع الأصدقاء وتشغيل الملايين من ألعاب منصّة Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,سيتم ربط حسابك في منصة Roblox بحسابك على حساب {platform}. يمكنك إلغاء الربط من شاشة الإعدادات في أي وقت. قد تكون هناك فترة انتظار قبل أن تتمكن من ربط الحساب بحساب آخر على حساب {platform}. من خلال النقر على {ctaButton}، أنت توافق على شروط الاستخدام بما في ذلك شرط التحكيم وأنت تُقِر بسياسة الخصوصية.
-Authentication.SignUp.Header.CloseWithoutFinishing,هل تريد الإغلاق دون الانتهاء؟
 Authentication.SignUp.Header.OneLastThing,شيء أخير
 Authentication.SignUp.Header.SetUpYourRobloxAccount,إعداد حسابك على منصّة Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,حدد البلد
@@ -418,6 +417,7 @@ CommonUI.Features.Label.ControllerBar.ToPlaySuffix,للعب
 CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,الخبرات
+CommonUI.Features.Label.Games,الألعاب
 CommonUI.Features.Label.GiftCards,شراء بطاقات الهدايا
 CommonUI.Features.Label.Groups,المجتمعات
 CommonUI.Features.Label.HelpAndSafety,المساعدة والأمان
@@ -658,15 +658,18 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,النص الأصلي ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,ما هي المشكلة في هذه الترجمة؟
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,مشكلة في الدقة
+CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,جودة الصورة
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,غير لائق أو فيه استهزاء
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,مشكلة في الكتابة أو الإعراب
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,غير مترجم
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,النص المحدد
 CoreScripts.Feedback.Help.Instructions,حدد أي نص لتقديم تعليقات على الترجمات غير الصحيحة أو الناقصة.
+CoreScripts.Feedback.Help.InstructionsWithImage,حدد أي نص أو صورة لتقديم ملاحظات بشأن الترجمات غير الدقيقة أو الناقصة.
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
+CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,أخبرنا ما الذي حصل
 CoreScripts.Feedback.Onboarding.Start,البدء
 CoreScripts.Feedback.SubmissionToastBody,سوف تستخدم Roblox هذه المعلومات لتحسين جودة الترجمة لهذه التجربة
@@ -2019,6 +2022,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,مدة جلسة المستخد�
 Feature.Build.Analytics.Title.PayerConversion,تحويل إلى دافعين
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,عملات Robux التي تم إنفاقها
+Feature.Build.Analytics.Title.TopAcquisitionSource,أفضل مصدر
+Feature.Build.Analytics.Title.TopDropOffStep,أكبر تراجع
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,الزيارات
 Feature.Build.Content.NewGame,لعبة جديدة
@@ -2062,7 +2067,6 @@ Feature.Build.Description.PlaytestLatest,أنت تختبر اللعب لأحدث
 Feature.Build.Description.PlaytestLocked,يمكنك بدء اختبار اللعب بعد إنشاء لعبتك الأولى.
 Feature.Build.Description.PlaytesterAccess,يمكنك دعوة الأصدقاء كمختبري لعب مبكرين أو تغيير إعدادات جمهور لعبتك للسماح لمزيد من الأشخاص باللعب.
 Feature.Build.Description.PricingRules,إعداد قواعد التسعير
-Feature.Build.Description.PrivateShare,غيّر إعدادات الجمهور للعبتك لمشاركتها.
 Feature.Build.Description.PromoteGameFree,اعرض لعبتك أمام عدد أكبر من اللاعبين بضغطة واحدة.
 Feature.Build.Description.PromoteGamePaid,أنشئ إعلانًا لعرض لعبتك أمام الملايين من اللاعبين.
 Feature.Build.Description.PromoteGameWithAdCampaign,زوِّد أعداد جمهورك من خلال حملة إعلانية لمدة {durationDays} من الأيام واجعل لعبتك متاحة للاكتشاف.
@@ -2188,6 +2192,15 @@ Feature.Build.Label.Thinking,جارٍ التفكير
 Feature.Build.Label.Title,العنوان
 Feature.Build.Label.TitleDescription,العنوان والوصف
 Feature.Build.Label.Tool,أداة
+Feature.Build.Label.ToolAdEligibilityDone,تم التحقُّق من أهلية الإعلان
+Feature.Build.Label.ToolAdEligibilityFailed,تعذَّر التحقُّق من أهلية الإعلان
+Feature.Build.Label.ToolAdEligibilityRunning,جارٍ التحقُّق من أهلية الإعلان
+Feature.Build.Label.ToolAnalyticsDone,تم تحليل الإحصائيات
+Feature.Build.Label.ToolAnalyticsFailed,تعذَّر تحليل الإحصائيات
+Feature.Build.Label.ToolAnalyticsRunning,جارٍ تحليل الإحصائيات
+Feature.Build.Label.ToolApiDocsDone,تم البحث في مستندات واجهة برمجة التطبيقات (API)
+Feature.Build.Label.ToolApiDocsFailed,تعذّر البحث في مستندات واجهة برمجة التطبيقات (API)
+Feature.Build.Label.ToolApiDocsRunning,جارٍ البحث في مستندات واجهة برمجة التطبيقات (API)
 Feature.Build.Label.ToolAssetDone,تم إدراج الأصل
 Feature.Build.Label.ToolAssetFailed,تعذَّر إدراج الأصل
 Feature.Build.Label.ToolAssetRunning,جارٍ إدراج الأصل
@@ -2197,6 +2210,9 @@ Feature.Build.Label.ToolAssetSearchRunning,جارٍ البحث في مكتبة �
 Feature.Build.Label.ToolClientDMDone,تم البحث في DataModel للعميل
 Feature.Build.Label.ToolClientDMFailed,تعذَّر البحث في DataModel للعميل
 Feature.Build.Label.ToolClientDMRunning,جارٍ البحث في DataModel للعميل
+Feature.Build.Label.ToolCompileDone,تم تجميع الكود
+Feature.Build.Label.ToolCompileFailed,تعذَّر تجميع الكود
+Feature.Build.Label.ToolCompileRunning,جارٍ تجميع الكود
 Feature.Build.Label.ToolGameInfoDone,تم تحديث معلومات اللعبة
 Feature.Build.Label.ToolGameInfoFailed,تعذَّر تحديث معلومات اللعبة
 Feature.Build.Label.ToolGameInfoRunning,جارٍ تحديث معلومات اللعبة
@@ -2233,6 +2249,9 @@ Feature.Build.Label.ToolQuestionRunning,جارٍ طرح سؤال
 Feature.Build.Label.ToolReqUpdateDone,تم تحديث المتطلبات
 Feature.Build.Label.ToolReqUpdateFailed,تعذَّر تحديث المتطلبات
 Feature.Build.Label.ToolReqUpdateRunning,جارٍ تحديث المتطلبات
+Feature.Build.Label.ToolRestoreVersionDone,تمت استعادة الإصدار
+Feature.Build.Label.ToolRestoreVersionFailed,تعذَّرت استعادة الإصدار
+Feature.Build.Label.ToolRestoreVersionRunning,جارٍ استعادة الإصدار
 Feature.Build.Label.ToolScriptDone,تم تشغيل النص البرمجي
 Feature.Build.Label.ToolScriptFailed,تعذَّر تشغيل النص البرمجي
 Feature.Build.Label.ToolScriptRunning,جارٍ تشغيل النص البرمجي
@@ -2248,6 +2267,9 @@ Feature.Build.Label.ToolTasksPlanRunning,جارٍ التخطيط لمهامك
 Feature.Build.Label.ToolThumbnailDone,تم إعداد الصورة المصغرة للعبة
 Feature.Build.Label.ToolThumbnailFailed,تعذّر إعداد الصورة المصغرة للعبة
 Feature.Build.Label.ToolThumbnailRunning,جارٍ إعداد الصورة المصغرة للعبة
+Feature.Build.Label.ToolVerifyDone,تم التحقُّق من الأخطاء
+Feature.Build.Label.ToolVerifyFailed,تعذَّر التحقُّق من الأخطاء
+Feature.Build.Label.ToolVerifyRunning,جارٍ التحقُّق من الأخطاء
 Feature.Build.Label.UniverseNumber,الكون {UNIVERSE_ID}
 Feature.Build.Label.Unknown,غير معروف
 Feature.Build.Label.UnlimitedUsed,تم استخدام {USED} • بلا حد أقصى
@@ -2378,7 +2400,6 @@ Feature.Build.Title.ExperienceAudience,جمهور التجربة
 Feature.Build.Title.FreeUsageReached,تم الوصول إلى حد استخدام ميزة Build المجاني
 Feature.Build.Title.FriendsOnlyPlay,يمكن للأصدقاء فقط اللعب
 Feature.Build.Title.GameCreationDone,اكتمل إنشاء اللعبة
-Feature.Build.Title.GamePrivate,هذه اللعبة خاصة
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,الحصول على المستخدمين
 Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل التسعير المُدار؟
@@ -3676,6 +3697,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,تعذَّر نشر اللحظة
 Feature.Moments.Label.MomentNoLongerAvailable,لم تعد هذه اللحظة متاحة.
 Feature.Moments.Label.MomentPublishedBody,تم نشر لحظتك بنجاح.
 Feature.Moments.Label.MomentPublishedTitle,تم نشر اللحظة
+Feature.Moments.Label.MomentRemovedBody,لقد انتهكت قواعد السلامة السارية لدينا، لذا لم تعد متاحة.
+Feature.Moments.Label.MomentRemovedTitle,أزلنا هذه اللحظة
 Feature.Moments.Label.MomentUnavailable,اللحظة غير متاحة
 Feature.Moments.Label.MomentUnavailableDefault,هذه اللحظة غير متاحة.
 Feature.Moments.Label.MomentsExperienceName,
@@ -4087,7 +4110,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,خصم بنسبة 10% 
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,خصم بنسبة 10% في أول {trialUnlockDays} من الأيام، ثم خصم بنسبة 20% على العناصر والأفاتارات
 Feature.RobloxSubscription.Description.ExclusiveBenefits,متعة أكثر مقابل عدد أقل من عملات Robux. اشترِك في Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,انضم مبكرًا مع اشتراك Plus
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,لم يعد رابط الإحالة هذا صالحًا.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,تمت دعوتك من قِبَل {username} للانضمام إلى Plus. سيحصل كلاكما على {amount} من عملات Robux عندما تشترك Plus.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{referralTermsUrl}"">شروط برنامج الإحالة</a> و<a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Heading.ReferralEntry,شارك Plus للحصول على {amount} من عملات Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientEntry,انضم إلى اشتراك Plus للحصول على {amount} من عملات Robux

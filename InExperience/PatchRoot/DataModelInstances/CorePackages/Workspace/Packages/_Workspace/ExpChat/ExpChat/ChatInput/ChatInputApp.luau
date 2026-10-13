@@ -9,6 +9,9 @@ local expChatSharedModule = require(parent.ExpChatShared)
 local roactModule = require(parent.Roact)
 local reactModule = require(parent.React)
 local roactRoduxModule = require(parent.RoactRodux)
+local signalsModule = require(parent.Signals)
+local signalsReactModule = require(parent.SignalsReact)
+local tutilsModule = require(parent.tutils)
 local configModule = require(expChat.Config)
 local inputTypeModule = require(parent.InputType)
 local getInputGroup = require(parent.InputType).getInputGroup
@@ -22,7 +25,9 @@ local autocompleteDropdownDeactivatedModule = require(expChat.Actions.Autocomple
 local memoizeChatInputApp = game:DefineFastFlag("MemoizeChatInputApp", false)
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local fFlagLuaSupportMicroGamepadPreferredInput = sharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
+local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
+local var1 = if fFlagExpChatUseChannelTabsStore then require(expChat.Stores.GetChannelTabsStore) else nil
 local flags = expChat.Flags
 local getFFlagUnreduxLastInputTypeChangedModule = require(flags.getFFlagUnreduxLastInputTypeChanged)
 local fFlagExpChatDictationFadeOverrideModule = require(flags.FFlagExpChatDictationFadeOverride)
@@ -47,10 +52,10 @@ if getFFlagUnreduxLastInputTypeChangedModule() then
 		})
 		p1.connection = userInputService.LastInputTypeChanged:Connect(function(p2)
 			-- upvalues: getInputGroup (copy), p1 (ref), inputTypeModule (copy)
-			local var1 = getInputGroup(p2)
+			local var2 = getInputGroup(p2)
 			p1:setState({
-				isUsingTouch = var1 == inputTypeModule.InputTypeConstants.Touch,
-				isUsingGamepad = var1 == inputTypeModule.InputTypeConstants.Gamepad
+				isUsingTouch = var2 == inputTypeModule.InputTypeConstants.Touch,
+				isUsingGamepad = var2 == inputTypeModule.InputTypeConstants.Gamepad
 			})
 		end)
 	end
@@ -118,10 +123,16 @@ function chatInputBarApp.render(p1)
 	})
 end
 
-local var1 = roactRoduxModule.connect(function(p1)
-	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), playersService (ref), getFFlagUnreduxLastInputTypeChangedModule (ref), selectSelectedTabNameModule (ref)
-	local channelTabs = p1.ChannelTabs
+local var2 = roactRoduxModule.connect(function(p1)
+	-- upvalues: fFlagExpChatUseChannelTabsStore (ref), getFFlagTextChatEnableUniverseChatTabs (ref), selectSelectedTabNameModule (ref), playersService (ref), getFFlagUnreduxLastInputTypeChangedModule (ref)
+	local var3 = nil
+	local var4 = nil
 	
+	if not fFlagExpChatUseChannelTabsStore then
+		local channelTabs = p1.ChannelTabs
+		var3 = getFFlagTextChatEnableUniverseChatTabs() and selectSelectedTabNameModule(p1) == "RBXGlobal"
+		var4 = if getFFlagTextChatEnableUniverseChatTabs() and channelTabs then channelTabs.channelTabsConfigurationEnabled else false
+	end
 	return {
 		targetTextChannel = p1.TextChannels.targetTextChannel,
 		localPlayer = playersService.LocalPlayer,
@@ -136,12 +147,12 @@ local var1 = roactRoduxModule.connect(function(p1)
 		isChatHotkeyEnabled = p1.ChatVisibility.isChatHotkeyEnabled.value,
 		autocompleteDropdownReducer = p1.AutocompleteDropdown,
 		autocompleteEnabled = p1.ChatLayout.ChatInputBarSettings.AutocompleteEnabled,
-		isGlobalChatTabActive = getFFlagTextChatEnableUniverseChatTabs() and selectSelectedTabNameModule(p1) == "RBXGlobal",
-		developerChannelTabsEnabled = if getFFlagTextChatEnableUniverseChatTabs() and channelTabs then channelTabs.channelTabsConfigurationEnabled else false
+		isGlobalChatTabActive = var3,
+		developerChannelTabsEnabled = var4
 	}
 end, function(p1)
 	-- upvalues: getTransparencyStoreModule (ref), focusChatHotKeyActivatedModule (ref), fFlagExpChatDictationFadeOverrideModule (ref), autocompleteDropdownActivatedModule (ref), autocompleteDropdownResultsChangedModule (ref), autocompleteDropdownSelectionChangedModule (ref), autocompleteDropdownTypeChangedModule (ref), autocompleteDropdownDeactivatedModule (ref)
-	local var2 = getTransparencyStoreModule(false)
+	local var3 = getTransparencyStoreModule(false)
 	
 	return {
 		focusChatHotKeyActivated = function()
@@ -149,29 +160,29 @@ end, function(p1)
 			return p1(focusChatHotKeyActivatedModule())
 		end,
 		onFocus = function()
-			-- upvalues: var2 (ref)
-			return var2.setTextboxFocus()
+			-- upvalues: var3 (ref)
+			return var3.setTextboxFocus()
 		end,
 		onUnfocus = function()
-			-- upvalues: var2 (ref)
-			return var2.clearTextboxFocus()
+			-- upvalues: var3 (ref)
+			return var3.clearTextboxFocus()
 		end,
 		onHovered = function()
-			-- upvalues: var2 (ref)
-			return var2.resetAllTransparency()
+			-- upvalues: var3 (ref)
+			return var3.resetAllTransparency()
 		end,
 		onUnhovered = function()
-			-- upvalues: var2 (ref)
-			return var2.resetAllTransparency()
+			-- upvalues: var3 (ref)
+			return var3.resetAllTransparency()
 		end,
 		onDictationActivityChanged = if fFlagExpChatDictationFadeOverrideModule then function(p2)
-			-- upvalues: var2 (ref)
+			-- upvalues: var3 (ref)
 			if p2 then
-				var2.setDictationActive()
+				var3.setDictationActive()
 				
 				return
 			end
-			var2.clearDictationActive()
+			var3.clearDictationActive()
 		end else nil,
 		autocompleteDropdownActivated = function(p2)
 			-- upvalues: p1 (ref), autocompleteDropdownActivatedModule (copy)
@@ -207,17 +218,32 @@ end)(localizationModule.connect(function(p1)
 		}
 	}
 end)(chatInputBarApp))
+local var3 = if fFlagExpChatUseChannelTabsStore then function(value)
+	-- upvalues: reactModule (ref), signalsModule (ref), var1 (ref), getFFlagTextChatEnableUniverseChatTabs (ref), tutilsModule (ref), signalsReactModule (ref), var2 (ref), cryoModule (ref)
+	return reactModule.createElement(var2, cryoModule.Dictionary.union(value, signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var1 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), tutilsModule (copy)
+		return signalsModule.createComputed(function(p1)
+			-- upvalues: var1 (copy), getFFlagTextChatEnableUniverseChatTabs (copy)
+			local channelTabsState = var1(false).getChannelTabsState(p1)
+			
+			return {
+				developerChannelTabsEnabled = if getFFlagTextChatEnableUniverseChatTabs() then channelTabsState.channelTabsConfigurationEnabled else false,
+				isGlobalChatTabActive = getFFlagTextChatEnableUniverseChatTabs() and channelTabsState.selectedTabName == "RBXGlobal"
+			}
+		end, tutilsModule.deepEqual)
+	end, {}))))
+end else var2
 
-local var2 = function(p1)
-	-- upvalues: localization (ref), localizationService (ref), fFlagEnableConsoleExpControls (ref), cryoModule (ref), reactModule (ref), var1 (ref)
-	local var3 = localization.new(localizationService.RobloxLocaleId)
+local var4 = function(p1)
+	-- upvalues: localization (ref), localizationService (ref), fFlagEnableConsoleExpControls (ref), cryoModule (ref), reactModule (ref), var3 (ref)
+	local var5 = localization.new(localizationService.RobloxLocaleId)
 	local _ = nil
 	
-	return reactModule.createElement(var1, cryoModule.Dictionary.join(p1, {
-		placeholderGamepadText = if fFlagEnableConsoleExpControls then var3:Format("CoreScripts.TextChat.InputBar.Hint.GamepadConnected", {
-			CONFIRM_KEY = var3:Format("CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm")
-		}) else var3:Format("CoreScripts.TextChat.InputBar.Hint.Gamepad", { CHAT_BUTTON = var3:Format("CoreScripts.TopBar.Chat") })
+	return reactModule.createElement(var3, cryoModule.Dictionary.join(p1, {
+		placeholderGamepadText = if fFlagEnableConsoleExpControls then var5:Format("CoreScripts.TextChat.InputBar.Hint.GamepadConnected", {
+			CONFIRM_KEY = var5:Format("CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm")
+		}) else var5:Format("CoreScripts.TextChat.InputBar.Hint.Gamepad", { CHAT_BUTTON = var5:Format("CoreScripts.TopBar.Chat") })
 	}))
 end
 
-return if memoizeChatInputApp then reactModule.memo(var2) else var2
+return if memoizeChatInputApp then reactModule.memo(var4) else var4
