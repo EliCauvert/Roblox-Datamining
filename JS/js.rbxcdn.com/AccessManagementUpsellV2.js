@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "5832c5014563a3efc71d68689fd842f752f54a42"
+            id: "dabf94c779d23bd01548062772a4e02b66872921"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "186ab4ad-eabd-4ac2-a6b9-783b265afc5c", e._sentryDebugIdIdentifier = "sentry-dbid-186ab4ad-eabd-4ac2-a6b9-783b265afc5c")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "274b4632-12c6-4b2b-95c4-34d23f9cd13d", e._sentryDebugIdIdentifier = "sentry-dbid-274b4632-12c6-4b2b-95c4-34d23f9cd13d")
     } catch (e) {}
 }(),
 function() {
@@ -4536,7 +4536,7 @@ function() {
                 }
             }
             "u" > typeof window && window.document && window.document.createElement;
-            var eh = (null == (fA = globalThis) ? void 0 : fA.document) ? I.useLayoutEffect : function() {};
+            var eh = (null == (fT = globalThis) ? void 0 : fT.document) ? I.useLayoutEffect : function() {};
 
             function ev(e, t) {
                 (null == t || t > e.length) && (t = e.length);
@@ -5734,7 +5734,7 @@ function() {
                 var t;
                 return null != e && (void 0 === e ? "undefined" : tS(e)) === "object" && "$$typeof" in e && e.$$typeof === tO && "_payload" in e && (void 0 === (t = e._payload) ? "undefined" : tS(t)) === "object" && null !== t && "then" in t
             }
-            var tj = ((fd = I.forwardRef(function(e, t) {
+            var tj = ((fp = I.forwardRef(function(e, t) {
                     var n = e.children,
                         r = tg(e, ["children"]);
                     if (tP(n) && "function" == typeof tx && (n = tx(n._payload)), I.isValidElement(n)) {
@@ -5755,7 +5755,7 @@ function() {
                         return n.type !== I.Fragment && (s.ref = t ? ei(t, u) : u), I.cloneElement(n, s)
                     }
                     return I.Children.count(n) > 1 ? I.Children.only(null) : null
-                })).displayName = "".concat("Slot", ".SlotClone"), fp = fd, (fy = I.forwardRef(function(e, t) {
+                })).displayName = "".concat("Slot", ".SlotClone"), fy = fp, (fm = I.forwardRef(function(e, t) {
                     var n = e.children,
                         r = tg(e, ["children"]);
                     tP(n) && "function" == typeof tx && (n = tx(n._payload));
@@ -5766,16 +5766,16 @@ function() {
                             l = o.map(function(e) {
                                 return e !== a ? e : I.Children.count(i) > 1 ? I.Children.only(null) : I.isValidElement(i) ? i.props.children : null
                             });
-                        return (0, P.jsx)(fp, tb(tv({}, r), {
+                        return (0, P.jsx)(fy, tb(tv({}, r), {
                             ref: t,
                             children: I.isValidElement(i) ? I.cloneElement(i, void 0, l) : null
                         }))
                     }
-                    return (0, P.jsx)(fp, tb(tv({}, r), {
+                    return (0, P.jsx)(fy, tb(tv({}, r), {
                         ref: t,
                         children: n
                     }))
-                })).displayName = "".concat("Slot", ".Slot"), fy),
+                })).displayName = "".concat("Slot", ".Slot"), fm),
                 tC = Symbol("radix.slottable");
 
             function tE(e) {
@@ -6579,42 +6579,42 @@ function() {
             }
             var ny = "u" > typeof window ? I.useLayoutEffect : I.useEffect,
                 nm = new WeakMap,
-                nh = (void 0 === fm && (fm = {}), (void 0 === fh && (fh = function(e) {
+                nh = (void 0 === fh && (fh = {}), (void 0 === fv && (fv = function(e) {
                     return e
-                }), fv = [], fb = !1, fg = {
+                }), fb = [], fg = !1, fw = {
                     read: function() {
-                        if (fb) throw Error("Sidecar: could not `read` from an `assigned` medium. `read` could be used only with `useMedium`.");
-                        return fv.length ? fv[fv.length - 1] : null
+                        if (fg) throw Error("Sidecar: could not `read` from an `assigned` medium. `read` could be used only with `useMedium`.");
+                        return fb.length ? fb[fb.length - 1] : null
                     },
                     useMedium: function(e) {
-                        var t = fh(e, fb);
-                        return fv.push(t),
+                        var t = fv(e, fg);
+                        return fb.push(t),
                             function() {
-                                fv = fv.filter(function(e) {
+                                fb = fb.filter(function(e) {
                                     return e !== t
                                 })
                             }
                     },
                     assignSyncMedium: function(e) {
-                        for (fb = !0; fv.length;) {
-                            var t = fv;
-                            fv = [], t.forEach(e)
+                        for (fg = !0; fb.length;) {
+                            var t = fb;
+                            fb = [], t.forEach(e)
                         }
-                        fv = {
+                        fb = {
                             push: function(t) {
                                 return e(t)
                             },
                             filter: function() {
-                                return fv
+                                return fb
                             }
                         }
                     },
                     assignMedium: function(e) {
-                        fb = !0;
+                        fg = !0;
                         var t = [];
-                        if (fv.length) {
-                            var n = fv;
-                            fv = [], n.forEach(e), t = fv
+                        if (fb.length) {
+                            var n = fb;
+                            fb = [], n.forEach(e), t = fb
                         }
                         var r = function() {
                                 var n = t;
@@ -6623,19 +6623,19 @@ function() {
                             o = function() {
                                 return Promise.resolve().then(r)
                             };
-                        o(), fv = {
+                        o(), fb = {
                             push: function(e) {
                                 t.push(e), o()
                             },
                             filter: function(e) {
-                                return t = t.filter(e), fv
+                                return t = t.filter(e), fb
                             }
                         }
                     }
                 }).options = nu({
                     async: !0,
                     ssr: !1
-                }, fm), fg),
+                }, fh), fw),
                 nv = function() {},
                 nb = I.forwardRef(function(e, t) {
                     var n, r, o, a, i = I.useRef(null),
@@ -6737,7 +6737,7 @@ function() {
                                     if (!document) return null;
                                     var e = document.createElement("style");
                                     e.type = "text/css";
-                                    var t = fT || n.nc;
+                                    var t = fI || n.nc;
                                     return t && e.setAttribute("nonce", t), e
                                 }())) {
                                 var o, a;
@@ -6902,7 +6902,7 @@ function() {
                 },
                 nq = 0,
                 nH = [],
-                nG = (fw = function(e) {
+                nG = (fS = function(e) {
                     var t = I.useRef([]),
                         n = I.useRef([0, 0]),
                         r = I.useRef(),
@@ -7010,7 +7010,7 @@ function() {
                         noRelative: e.noRelative,
                         gapMode: e.gapMode
                     }) : null)
-                }, nh.useMedium(fw), ng),
+                }, nh.useMedium(fS), ng),
                 n$ = I.forwardRef(function(e, t) {
                     return I.createElement(nb, nu({}, e, {
                         ref: t,
@@ -7436,24 +7436,24 @@ function() {
             }
             rx.displayName = rO;
             var rj = "DialogTitleWarning",
-                rC = n8((fS = {
+                rC = n8((fO = {
                     contentName: ry,
                     titleName: rg,
                     docsSlug: "dialog"
-                }, fO = I.createContext(fS), (fx = function(e) {
+                }, fx = I.createContext(fO), (fP = function(e) {
                     var t = e.children,
                         n = ef(e, ["children"]),
                         r = I.useMemo(function() {
                             return n
                         }, Object.values(n));
-                    return (0, P.jsx)(fO.Provider, {
+                    return (0, P.jsx)(fx.Provider, {
                         value: r,
                         children: t
                     })
-                }).displayName = rj + "Provider", [fx, function(e) {
-                    var t = I.useContext(fO);
+                }).displayName = rj + "Provider", [fP, function(e) {
+                    var t = I.useContext(fx);
                     if (t) return t;
-                    if (void 0 !== fS) return fS;
+                    if (void 0 !== fO) return fO;
                     throw Error("`".concat(e, "` must be used within `").concat(rj, "`"))
                 }]), 2),
                 rE = (rC[0], rC[1]),
@@ -9448,9 +9448,9 @@ function() {
                     }
                 }, [e.analyticsStrings, e.analyticsSessionId, e.odpEventSurface])
             }
-            var an = ((fP = {}).Fae = "FAE", fP.Idv = "IDV", fP),
-                ar = ((fj = {}).StartFailed = "StartFailed", fj.VendorError = "VendorError", fj),
-                ao = ((fC = {}).Submitted = "Submitted", fC.Cancelled = "Cancelled", fC.Failed = "Failed", fC),
+            var an = ((fj = {}).Fae = "FAE", fj.Idv = "IDV", fj),
+                ar = ((fC = {}).StartFailed = "StartFailed", fC.VendorError = "VendorError", fC),
+                ao = ((fE = {}).Submitted = "Submitted", fE.Cancelled = "Cancelled", fE.Failed = "Failed", fE),
                 aa = n(2855),
                 ai = n.n(aa),
                 al = window.Roblox["core-scripts"].intl.intl,
@@ -10504,7 +10504,7 @@ function() {
                 return o.scopeName = r.scopeName, o
             }
             aL.ownsLoadingState = !0;
-            var aJ = (null == (fI = globalThis) ? void 0 : fI.document) ? I.useLayoutEffect : function() {};
+            var aJ = (null == (fk = globalThis) ? void 0 : fk.document) ? I.useLayoutEffect : function() {};
 
             function aY(e, t) {
                 (null == t || t > e.length) && (t = e.length);
@@ -14235,7 +14235,26 @@ function() {
                 }
             }
 
-            function uv(e, t) {
+            function uv(e) {
+                for (var t = 1; t < arguments.length; t++) {
+                    var n = null != arguments[t] ? arguments[t] : {},
+                        r = Object.keys(n);
+                    "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
+                        return Object.getOwnPropertyDescriptor(n, e).enumerable
+                    }))), r.forEach(function(t) {
+                        var r;
+                        r = n[t], t in e ? Object.defineProperty(e, t, {
+                            value: r,
+                            enumerable: !0,
+                            configurable: !0,
+                            writable: !0
+                        }) : e[t] = r
+                    })
+                }
+                return e
+            }
+
+            function ub(e, t) {
                 var n, r, o, a = {
                         label: 0,
                         sent: function() {
@@ -14316,25 +14335,25 @@ function() {
                 }
             }
             uy.displayName = "TextInput";
-            var ub = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/access-management/v1/upsell-feature-access?featureName=IsChildSubjectToParentalControls"),
-                ug = "".concat(au.EnvironmentUrls.userSettingsApi, "/v1/account-insights/parent-emails"),
-                uw = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/child-requests-api/v1/send-request-to-all-parents"),
-                uS = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/child-requests-api/v1/send-request-to-new-parent");
+            var ug = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/access-management/v1/upsell-feature-access?featureName=IsChildSubjectToParentalControls"),
+                uw = "".concat(au.EnvironmentUrls.userSettingsApi, "/v1/account-insights/parent-emails"),
+                uS = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/child-requests-api/v1/send-request-to-all-parents"),
+                uO = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/child-requests-api/v1/send-request-to-new-parent");
 
-            function uO(e, t) {
+            function ux(e, t) {
                 var n = null == e ? void 0 : Object.keys(e)[0];
                 if (void 0 !== n) try {
                     window.localStorage.setItem("Roblox.ParentalRequest.".concat(n, "CooldownExpirationTime"), JSON.stringify(t))
                 } catch (e) {}
             }
-            var ux = {
+            var uP = {
                 isChildSubjectToParentalControls: function() {
                     return uh(function() {
-                        return uv(this, function(e) {
+                        return ub(this, function(e) {
                             switch (e.label) {
                                 case 0:
                                     return [4, (0, oR.get)({
-                                        url: ub,
+                                        url: ug,
                                         withCredentials: !0,
                                         retryable: !0
                                     })];
@@ -14347,11 +14366,11 @@ function() {
                 getLinkedParentEmails: function() {
                     return uh(function() {
                         var e;
-                        return uv(this, function(t) {
+                        return ub(this, function(t) {
                             switch (t.label) {
                                 case 0:
                                     return [4, (0, oR.get)({
-                                        url: ug,
+                                        url: uw,
                                         withCredentials: !0
                                     })];
                                 case 1:
@@ -14360,57 +14379,61 @@ function() {
                         })
                     })()
                 },
-                sendToAllParents: function(e, t) {
+                sendToAllParents: function(e, t, n) {
                     return uh(function() {
-                        var n;
-                        return uv(this, function(r) {
-                            switch (r.label) {
+                        var r;
+                        return ub(this, function(o) {
+                            switch (o.label) {
                                 case 0:
                                     return [4, (0, oR.post)({
-                                        url: uw,
+                                        url: uS,
                                         withCredentials: !0
-                                    }, {
+                                    }, uv({
                                         requestType: e,
                                         requestDetails: t
-                                    })];
+                                    }, n ? {
+                                        analyticsSessionId: n
+                                    } : {}))];
                                 case 1:
-                                    return uO(t, (n = r.sent()).data.lockedUntil), [2, n.data]
+                                    return ux(t, (r = o.sent()).data.lockedUntil), [2, r.data]
                             }
                         })
                     })()
                 },
-                sendToNewParent: function(e, t, n, r) {
+                sendToNewParent: function(e, t, n, r, o) {
                     return uh(function() {
-                        var o;
-                        return uv(this, function(a) {
-                            switch (a.label) {
+                        var a;
+                        return ub(this, function(i) {
+                            switch (i.label) {
                                 case 0:
                                     return [4, (0, oR.post)({
-                                        url: uS,
+                                        url: uO,
                                         withCredentials: !0,
                                         headers: {
                                             "rbx-audit-data": r
                                         }
-                                    }, {
+                                    }, uv({
                                         email: e,
                                         requestType: t,
                                         requestDetails: n
-                                    })];
+                                    }, o ? {
+                                        analyticsSessionId: o
+                                    } : {}))];
                                 case 1:
-                                    return uO(n, (o = a.sent()).data.lockedUntil), [2, o.data]
+                                    return ux(n, (a = i.sent()).data.lockedUntil), [2, a.data]
                             }
                         })
                     })()
                 }
             };
 
-            function uP(e, t) {
+            function uj(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function uj(e, t, n, r, o, a, i) {
+            function uC(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -14421,7 +14444,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function uC(e) {
+            function uE(e) {
                 return function() {
                     var t = this,
                         n = arguments;
@@ -14429,18 +14452,18 @@ function() {
                         var a = e.apply(t, n);
 
                         function i(e) {
-                            uj(a, r, o, i, l, "next", e)
+                            uC(a, r, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            uj(a, r, o, i, l, "throw", e)
+                            uC(a, r, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 }
             }
 
-            function uE(e, t) {
+            function uA(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -14464,21 +14487,21 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return uP(e, t);
+                        if ("string" == typeof e) return uj(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return uP(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return uj(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function uA(e) {
+            function uT(e) {
                 return e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
             }
 
-            function uT(e, t) {
+            function uI(e, t) {
                 var n, r, o, a = {
                         label: 0,
                         sent: function() {
@@ -14558,10 +14581,10 @@ function() {
                     }
                 }
             }
-            var uI = "ParentConsent",
-                uk = "Cancel",
-                uN = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-                uD = {
+            var uk = "ParentConsent",
+                uN = "Cancel",
+                uD = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+                uM = {
                     translate: function(e, t, n) {
                         return null != n ? n : e
                     },
@@ -14574,14 +14597,14 @@ function() {
                     }
                 };
 
-            function uM(e) {
-                if ((void 0 === e ? "undefined" : uA(e)) === "object" && null !== e && "data" in e) {
+            function uR(e) {
+                if ((void 0 === e ? "undefined" : uT(e)) === "object" && null !== e && "data" in e) {
                     var t = e.data;
-                    if ((void 0 === t ? "undefined" : uA(t)) === "object" && null !== t && "code" in t) return "string" == typeof t.code ? t.code : void 0
+                    if ((void 0 === t ? "undefined" : uT(t)) === "object" && null !== t && "code" in t) return "string" == typeof t.code ? t.code : void 0
                 }
             }
 
-            function uR(e) {
+            function uU(e) {
                 switch (e) {
                     case "ChildAtLinkLimit":
                         return "Message.ExistAccountWithEmail";
@@ -14601,45 +14624,45 @@ function() {
                         return "Message.SomethingWentWrong"
                 }
             }
-            var uU = function(e) {
+            var uL = function(e) {
                 var t, n, r, o, a, i, l = e.props,
                     c = e.ctx,
                     u = e.report,
                     s = c.config.remoteParentRequest,
-                    f = (void 0 === s ? "undefined" : uA(s)) === "object" && null !== s && "translate" in s && "function" == typeof s.translate && "useLegallySensitiveContent" in s && "function" == typeof s.useLegallySensitiveContent,
-                    d = f ? s : uD,
+                    f = (void 0 === s ? "undefined" : uT(s)) === "object" && null !== s && "translate" in s && "function" == typeof s.translate && "useLegallySensitiveContent" in s && "function" == typeof s.useLegallySensitiveContent,
+                    d = f ? s : uM,
                     p = d.translate,
                     y = d.useLegallySensitiveContent,
                     m = d.api,
-                    h = void 0 === m ? ux : m,
-                    v = l.action === uI ? uI : "ParentLink",
+                    h = void 0 === m ? uP : m,
+                    v = l.action === uk ? uk : "ParentLink",
                     b = "string" == typeof l.requestType && l.requestType.length > 0 ? l.requestType : void 0,
                     g = function(e) {
-                        if (!((void 0 === e ? "undefined" : uA(e)) !== "object" || null === e || Array.isArray(e))) return Object.fromEntries(Object.entries(e))
+                        if (!((void 0 === e ? "undefined" : uT(e)) !== "object" || null === e || Array.isArray(e))) return Object.fromEntries(Object.entries(e))
                     }(l.requestDetails),
-                    w = uE((0, I.useState)("loading"), 2),
+                    w = uA((0, I.useState)("loading"), 2),
                     S = w[0],
                     O = w[1],
-                    x = uE((0, I.useState)(""), 2),
+                    x = uA((0, I.useState)(""), 2),
                     j = x[0],
                     C = x[1],
-                    E = uE((0, I.useState)([]), 2),
+                    E = uA((0, I.useState)([]), 2),
                     A = E[0],
                     T = E[1],
-                    k = uE((0, I.useState)(), 2),
+                    k = uA((0, I.useState)(), 2),
                     N = k[0],
                     D = k[1],
-                    M = uE((0, I.useState)(!1), 2),
+                    M = uA((0, I.useState)(!1), 2),
                     R = M[0],
                     U = M[1],
-                    L = uE((0, I.useState)("Message.SomethingWentWrong"), 2),
+                    L = uA((0, I.useState)("Message.SomethingWentWrong"), 2),
                     F = L[0],
                     V = L[1],
                     _ = (0, I.useRef)(!1),
                     W = (0, I.useRef)(!1),
                     K = (0, I.useRef)(!1),
                     B = at(c),
-                    z = uE(y(void 0 === N ? "vpcRequestLinkDefault" : N ? "vpcRequestLinkSubjectToPC" : "vpcRequestLinkNotSubjectToPC", "vpc-upsell-web"), 2),
+                    z = uA(y(void 0 === N ? "vpcRequestLinkDefault" : N ? "vpcRequestLinkSubjectToPC" : "vpcRequestLinkNotSubjectToPC", "vpc-upsell-web"), 2),
                     q = z[0],
                     H = z[1],
                     G = null != (t = q.wordsOfConsent) ? t : {},
@@ -14647,31 +14670,31 @@ function() {
                         W.current || (W.current = !0, u(e))
                     }, [u]),
                     X = (0, I.useCallback)(function() {
-                        return uC(function() {
+                        return uE(function() {
                             var e;
-                            return uT(this, function(t) {
+                            return uI(this, function(t) {
                                 switch (t.label) {
                                     case 0:
-                                        if (void 0 === b) return $(uk), [2];
+                                        if (void 0 === b) return $(uN), [2];
                                         O("sending"), t.label = 1;
                                     case 1:
                                         return t.trys.push([1, 3, , 4]), [4, Promise.all([h.getLinkedParentEmails().catch(function() {
                                             return []
-                                        }), h.sendToAllParents(b, g)])];
+                                        }), h.sendToAllParents(b, g, c.analyticsSessionId)])];
                                     case 2:
-                                        return T(uE.apply(void 0, [t.sent(), 1])[0]), O("confirmation"), [3, 4];
+                                        return T(uA.apply(void 0, [t.sent(), 1])[0]), O("confirmation"), [3, 4];
                                     case 3:
-                                        if ("SenderFloodedRequestCreated" === uM(e = t.sent())) return U(!0), O("confirmation"), [2];
-                                        return V(uR(uM(e))), O("error"), [3, 4];
+                                        if ("SenderFloodedRequestCreated" === uR(e = t.sent())) return U(!0), O("confirmation"), [2];
+                                        return V(uU(uR(e))), O("error"), [3, 4];
                                     case 4:
                                         return [2]
                                 }
                             })
                         })()
-                    }, [h, $, g, b]),
+                    }, [h, c.analyticsSessionId, $, g, b]),
                     J = (0, I.useCallback)(function() {
-                        return uC(function() {
-                            return uT(this, function(e) {
+                        return uE(function() {
+                            return uI(this, function(e) {
                                 switch (e.label) {
                                     case 0:
                                         return e.trys.push([0, 2, , 3]), [4, h.isChildSubjectToParentalControls()];
@@ -14687,8 +14710,8 @@ function() {
                     }, [h]);
                 (0, I.useEffect)(function() {
                     if (!_.current) {
-                        if (_.current = !0, !f || void 0 === b) return void $(uk);
-                        v === uI ? X().catch(function() {
+                        if (_.current = !0, !f || void 0 === b) return void $(uN);
+                        v === uk ? X().catch(function() {
                             O("error")
                         }) : J().catch(function() {
                             O("error")
@@ -14750,7 +14773,7 @@ function() {
                             size: "Medium",
                             className: "w-full",
                             onClick: function() {
-                                v === uI ? X().catch(function() {
+                                v === uk ? X().catch(function() {
                                     O("error")
                                 }) : O("email")
                             },
@@ -14760,13 +14783,13 @@ function() {
                             size: "Medium",
                             className: "w-full",
                             onClick: function() {
-                                $(uk)
+                                $(uN)
                             },
                             children: p("Action.Cancel")
                         })]
                     })]
                 });
-                var Q = j.length > 0 && !uN.test(j) ? p("Message.InvalidEmail") : void 0;
+                var Q = j.length > 0 && !uD.test(j) ? p("Message.InvalidEmail") : void 0;
                 return (0, P.jsxs)("div", {
                     className: "gap-large flex flex-col",
                     "data-testid": "remote-parent-request-email",
@@ -14808,20 +14831,20 @@ function() {
                             className: "w-full",
                             isDisabled: 0 === j.length || void 0 !== Q,
                             onClick: function() {
-                                uC(function() {
+                                uE(function() {
                                     var e;
-                                    return uT(this, function(t) {
+                                    return uI(this, function(t) {
                                         switch (t.label) {
                                             case 0:
-                                                if (void 0 === b || !uN.test(j)) return [2];
+                                                if (void 0 === b || !uD.test(j)) return [2];
                                                 O("sending"), t.label = 1;
                                             case 1:
-                                                return t.trys.push([1, 3, , 4]), [4, h.sendToNewParent(j, b, g, H.getBase64EncodedAuditHeader())];
+                                                return t.trys.push([1, 3, , 4]), [4, h.sendToNewParent(j, b, g, H.getBase64EncodedAuditHeader(), c.analyticsSessionId)];
                                             case 2:
                                                 return t.sent(), T([j]), O("confirmation"), [3, 4];
                                             case 3:
-                                                if ("SenderFloodedRequestCreated" === uM(e = t.sent())) return U(!0), O("confirmation"), [2];
-                                                return C(""), V(uR(uM(e))), O("error"), [3, 4];
+                                                if ("SenderFloodedRequestCreated" === uR(e = t.sent())) return U(!0), O("confirmation"), [2];
+                                                return C(""), V(uU(uR(e))), O("error"), [3, 4];
                                             case 4:
                                                 return [2]
                                         }
@@ -14841,7 +14864,7 @@ function() {
                 })
             };
 
-            function uL(e) {
+            function uF(e) {
                 var t, n = e.props,
                     r = e.report,
                     o = "number" == typeof(t = n.pollIntervalMs) && Number.isFinite(t) ? t : void 0,
@@ -14862,8 +14885,8 @@ function() {
                     })
                 })
             }
-            uU.ownsLoadingState = !0, uU.dismissesOnCancel = !0, uL.ownsLoadingState = !0;
-            var uF = new Map([
+            uL.ownsLoadingState = !0, uL.dismissesOnCancel = !0, uF.ownsLoadingState = !0;
+            var uV = new Map([
                     ["Prologue", function(e) {
                         return {
                             shown: e.prologueShown,
@@ -14881,19 +14904,19 @@ function() {
                         }
                     }]
                 ]),
-                uV = function() {},
-                u_ = {
-                    shown: uV,
-                    buttonClick: uV,
-                    close: uV
+                u_ = function() {},
+                uW = {
+                    shown: u_,
+                    buttonClick: u_,
+                    close: u_
                 };
 
-            function uW(e, t) {
-                var n = null == t ? void 0 : uF.get(t);
-                return null == n ? u_ : n(e)
+            function uK(e, t) {
+                var n = null == t ? void 0 : uV.get(t);
+                return null == n ? uW : n(e)
             }
 
-            function uK(e) {
+            function uB(e) {
                 var t, n, r, o, a, i, l, c = e.props,
                     u = e.ctx,
                     s = e.report,
@@ -14932,7 +14955,7 @@ function() {
                     }(c.buttons)) ? l : [],
                     m = ov(c.footerText),
                     h = (t = at(u), n = u.analytics.node, r = (0, I.useMemo)(function() {
-                        return uW(t, n)
+                        return uK(t, n)
                     }, [t, n]), o = (0, I.useRef)(void 0), (0, I.useEffect)(function() {
                         o.current !== n && (o.current = n, r.shown())
                     }, [n, r]), r);
@@ -14975,21 +14998,21 @@ function() {
                 })
             }
 
-            function uB(e, t) {
+            function uz(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function uz(e) {
+            function uq(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function uq() {
+            function uH() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function uH(e) {
+            function uG(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
@@ -15008,40 +15031,40 @@ function() {
                 return e
             }
 
-            function uG(e, t) {
+            function u$(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return uB(e, t);
+                    if ("string" == typeof e) return uz(e, t);
                     var n = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                    if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return uB(e, t)
+                    if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return uz(e, t)
                 }
             }
-            uK.dismissesOnCancel = !0;
-            var u$ = (0, I.createContext)(null),
-                uX = function() {
-                    var e = (0, I.useContext)(u$);
+            uB.dismissesOnCancel = !0;
+            var uX = (0, I.createContext)(null),
+                uJ = function() {
+                    var e = (0, I.useContext)(uX);
                     if (!e) throw Error("useListItemProvider must be used within a ListItem");
                     return e
                 },
-                uJ = {
+                uY = {
                     XSmall: "text-body-small",
                     Small: "text-body-small",
                     Medium: "text-body-medium",
                     Large: "text-body-medium"
                 },
-                uY = {
+                uQ = {
                     XSmall: "text-title-small",
                     Small: "text-title-medium",
                     Medium: "text-title-medium",
                     Large: "text-title-large"
                 },
-                uQ = {
+                uZ = {
                     XSmall: "text-body-small",
                     Small: "text-body-medium",
                     Medium: "text-body-medium",
                     Large: "text-body-large"
                 },
-                uZ = (0, I.forwardRef)(function(e, t) {
+                u0 = (0, I.forwardRef)(function(e, t) {
                     var n = e.isContained,
                         r = e.size,
                         o = e.divider,
@@ -15064,7 +15087,7 @@ function() {
                         w = !!h && u,
                         S = "Top" === a ? "justify-start" : "justify-center";
                     w && (S = "justify-start");
-                    var O = k().createElement(g, uH({
+                    var O = k().createElement(g, uG({
                             className: Z("bg-none width-full flex gap-medium stroke-none foundation-web-list-item padding-y-none", n ? "padding-x-medium" : "padding-x-xlarge", "Full" === o && "foundation-web-list-item-bottom-divider", b && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", b && "cursor-pointer", m)
                         }, b && {
                             onClick: function() {
@@ -15077,13 +15100,13 @@ function() {
                         }, k().createElement("div", {
                             className: Z("flex flex-col fill clip-x justify-center", w && "gap-xsmall")
                         }, i && k().createElement("div", {
-                            className: Z("content-emphasis text-align-x-start", void 0 === l || l ? uY[v] : uQ[v])
+                            className: Z("content-emphasis text-align-x-start", void 0 === l || l ? uQ[v] : uZ[v])
                         }, i), h && c && k().createElement("div", {
-                            className: Z("content-default text-align-x-start", uJ[v], !u && "text-truncate-split text-no-wrap")
+                            className: Z("content-default text-align-x-start", uY[v], !u && "text-truncate-split text-no-wrap")
                         }, c), !h && s && k().createElement("div", {
-                            className: Z("content-default text-align-x-start text-truncate-split text-no-wrap", uJ[v])
+                            className: Z("content-default text-align-x-start text-truncate-split text-no-wrap", uY[v])
                         }, s), !h && f && k().createElement("div", {
-                            className: Z("content-default text-align-x-start padding-top-xsmall", uJ[v])
+                            className: Z("content-default text-align-x-start padding-top-xsmall", uY[v])
                         }, f)), p && k().createElement("div", {
                             className: Z("flex flex-col", S)
                         }, p), "Inset" === o && k().createElement("div", {
@@ -15099,15 +15122,15 @@ function() {
                         style: {
                             listStyle: "none"
                         }
-                    }, k().createElement(u$.Provider, {
+                    }, k().createElement(uX.Provider, {
                         value: x
                     }, O))
                 });
-            uZ.displayName = "ListItem";
-            var u0 = (0, I.forwardRef)(function(e, t) {
-                var n, r = uz(n = [e, t]) || function(e) {
+            u0.displayName = "ListItem";
+            var u1 = (0, I.forwardRef)(function(e, t) {
+                var n, r = uq(n = [e, t]) || function(e) {
                         if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                    }(n) || uG(n) || uq(),
+                    }(n) || u$(n) || uH(),
                     o = r[0],
                     a = r.slice(1),
                     i = o.children,
@@ -15130,7 +15153,7 @@ function() {
                             for (o = 0, n = Object.getOwnPropertySymbols(e); o < n.length; o++) r = n[o], !(t.indexOf(r) >= 0) && Object.prototype.propertyIsEnumerable.call(e, r) && (a[r] = e[r]);
                         return a
                     }(o, ["children", "className", "as"]),
-                    s = (uz(a) || function(e) {
+                    s = (uq(a) || function(e) {
                         var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                         if (null != r) {
                             var o = [],
@@ -15149,15 +15172,15 @@ function() {
                             }
                             return o
                         }
-                    }(a) || uG(a, 1) || uq())[0];
-                return k().createElement(void 0 === c ? "ul" : c, uH({
+                    }(a) || u$(a, 1) || uH())[0];
+                return k().createElement(void 0 === c ? "ul" : c, uG({
                     ref: s,
                     className: Z("foundation-web-list", l)
                 }, u), i)
             });
 
-            function u1() {
-                return (u1 = Object.assign || function(e) {
+            function u2() {
+                return (u2 = Object.assign || function(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var n = arguments[t];
                         for (var r in n) Object.prototype.hasOwnProperty.call(n, r) && (e[r] = n[r])
@@ -15165,18 +15188,18 @@ function() {
                     return e
                 }).apply(this, arguments)
             }
-            u0.displayName = "List";
-            var u2 = {
+            u1.displayName = "List";
+            var u3 = {
                     XSmall: "Small",
                     Small: "Medium",
                     Medium: "Large",
                     Large: "Large"
                 },
-                u3 = function(e) {
+                u5 = function(e) {
                     var t = e;
                     if (null == t) throw TypeError("Cannot destructure " + t);
-                    var n, r, o = u1({}, e),
-                        a = uX().size;
+                    var n, r, o = u2({}, e),
+                        a = uJ().size;
                     return k().createElement(tm, (n = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var n = null != arguments[t] ? arguments[t] : {},
@@ -15195,7 +15218,7 @@ function() {
                         }
                         return e
                     }({}, o), r = r = {
-                        size: u2[a]
+                        size: u3[a]
                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(n, Object.getOwnPropertyDescriptors(r)) : (function(e) {
                         var t = Object.keys(e);
                         if (Object.getOwnPropertySymbols) {
@@ -15207,34 +15230,34 @@ function() {
                         Object.defineProperty(n, e, Object.getOwnPropertyDescriptor(r, e))
                     }), n))
                 },
-                u5 = {
+                u6 = {
                     XSmall: "width-600",
                     Small: "width-800",
                     Medium: "width-1000",
                     Large: "width-1400"
                 },
-                u6 = function(e) {
+                u8 = function(e) {
                     var t = e.children,
-                        n = uX().size;
+                        n = uJ().size;
                     return k().createElement("div", {
-                        className: Z("flex items-center justify-center", u5[n])
+                        className: Z("flex items-center justify-center", u6[n])
                     }, t)
                 },
-                u8 = {
+                u4 = {
                     Tilt: "icon-regular-tilt",
                     ShieldCheck: "icon-regular-shield-check",
                     PersonWithSmallerPerson: "icon-regular-person-with-smaller-person"
                 };
 
-            function u4(e) {
+            function u7(e) {
                 var t = e.bullet,
-                    n = t.icon ? u8[t.icon] : void 0;
-                return n ? (0, P.jsx)(u6, {
-                    children: (0, P.jsx)(u3, {
+                    n = t.icon ? u4[t.icon] : void 0;
+                return n ? (0, P.jsx)(u8, {
+                    children: (0, P.jsx)(u5, {
                         name: n,
                         className: "content-emphasis"
                     })
-                }) : t.icon ? (0, P.jsx)(u6, {
+                }) : t.icon ? (0, P.jsx)(u8, {
                     children: (0, P.jsx)("img", {
                         src: t.icon,
                         alt: "",
@@ -15243,20 +15266,20 @@ function() {
                 }) : null
             }
 
-            function u7(e) {
+            function u9(e) {
                 var t = e.bullet;
-                return (0, P.jsx)(uZ, {
+                return (0, P.jsx)(u0, {
                     isContained: !0,
                     size: "Large",
                     divider: "None",
                     title: t.title,
                     description: t.description,
-                    leading: (0, P.jsx)(u4, {
+                    leading: (0, P.jsx)(u7, {
                         bullet: t
                     })
                 })
             }
-            var u9 = function(e) {
+            var se = function(e) {
                 var t, n, r, o, a = e.props,
                     i = e.ctx,
                     l = e.report,
@@ -15330,11 +15353,11 @@ function() {
                                     className: "text-body-large content-default margin-none",
                                     children: f
                                 }) : null]
-                            }), b.length > 0 ? (0, P.jsx)(u0, {
+                            }), b.length > 0 ? (0, P.jsx)(u1, {
                                 className: "flex flex-col gap-large",
                                 children: b.map(function(e) {
                                     var t, n;
-                                    return (0, P.jsx)(u7, {
+                                    return (0, P.jsx)(u9, {
                                         bullet: e
                                     }, "".concat(null != (t = e.icon) ? t : "", "-").concat(e.title, "-").concat(null != (n = e.description) ? n : ""))
                                 })
@@ -15357,48 +15380,48 @@ function() {
                     })
                 })
             };
-            u9.ownsOverlay = !0, u9.ownsLoadingState = !0;
-            var se = {
+            se.ownsOverlay = !0, se.ownsLoadingState = !0;
+            var st = {
                     XSmall: "size-400",
                     Small: "size-500",
                     Medium: "size-600"
                 },
-                st = {
+                sn = {
                     XSmall: "size-150",
                     Small: "size-200",
                     Medium: "size-250"
                 },
-                sn = {
+                sr = {
                     XSmall: "size-1200",
                     Small: "size-1400",
                     Medium: "size-1600"
                 },
-                sr = {
+                so = {
                     XSmall: "text-title-small",
                     Small: "text-title-small",
                     Medium: "text-title-medium"
                 },
-                so = {
+                sa = {
                     XSmall: void 0,
                     Small: "padding-top-xxsmall",
                     Medium: "padding-y-xxsmall"
                 },
-                sa = {
+                si = {
                     XSmall: "text-body-small",
                     Small: "text-body-small",
                     Medium: "text-body-medium"
                 },
-                si = {
+                sl = {
                     XSmall: "padding-medium",
                     Small: "padding-large",
                     Medium: "padding-xlarge"
                 },
-                sl = {
+                sc = {
                     XSmall: "Small",
                     Small: "Medium",
                     Medium: "Large"
                 },
-                sc = (0, I.forwardRef)(function(e, t) {
+                su = (0, I.forwardRef)(function(e, t) {
                     var n = e.layout,
                         r = e.size,
                         o = e.type,
@@ -15414,7 +15437,7 @@ function() {
                         y = void 0 !== p && p,
                         m = (0, I.useMemo)(function() {
                             return i && k().createElement("div", {
-                                className: Z(sr[r], so[r], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
+                                className: Z(so[r], sa[r], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
                             }, i)
                         }, [i, r]),
                         h = (0, I.useMemo)(function() {
@@ -15424,13 +15447,13 @@ function() {
                         }, [s]),
                         v = (0, I.useMemo)(function() {
                             return l && k().createElement("div", {
-                                className: Z(sa[r], "content-default text-align-x-start")
+                                className: Z(si[r], "content-default text-align-x-start")
                             }, l)
                         }, [l, r]),
                         b = (0, I.useMemo)(function() {
                             return u && k().createElement(tm, {
                                 name: u,
-                                size: sl[r]
+                                size: sc[r]
                             })
                         }, [u, r]),
                         g = (0, I.useMemo)(function() {
@@ -15438,19 +15461,19 @@ function() {
                                 case "Checkmark":
                                     return f && k().createElement(tm, {
                                         name: "icon-filled-check",
-                                        size: sl[r]
+                                        size: sc[r]
                                     });
                                 case "Checkbox":
                                     return k().createElement("div", {
-                                        className: Z(se[r], "flex items-center justify-center radius-small padding-none content-default", f ? "stroke-none" : "stroke-standard stroke-emphasis", f ? "bg-system-contrast" : "bg-none")
+                                        className: Z(st[r], "flex items-center justify-center radius-small padding-none content-default", f ? "stroke-none" : "stroke-standard stroke-emphasis", f ? "bg-system-contrast" : "bg-none")
                                     }, f && k().createElement("div", {
-                                        className: Z(se[r], "content-inverse-emphasis icon icon-filled-check")
+                                        className: Z(st[r], "content-inverse-emphasis icon icon-filled-check")
                                     }));
                                 case "Radio":
                                     return k().createElement("div", {
-                                        className: Z(se[r], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", f ? "bg-system-contrast" : "bg-none")
+                                        className: Z(st[r], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", f ? "bg-system-contrast" : "bg-none")
                                     }, f && k().createElement("div", {
-                                        className: Z("radius-circle bg-inverse-action-sub-emphasis", st[r])
+                                        className: Z("radius-circle bg-inverse-action-sub-emphasis", sn[r])
                                     }));
                                 default:
                                     return console.error("Invalid OptionSelector type ".concat(o)), null
@@ -15458,12 +15481,12 @@ function() {
                         }, [o, r, f]),
                         w = (0, I.useMemo)(function() {
                             return c && k().createElement("div", {
-                                className: Z(sn[r], "flex items-center justify-center clip shrink-0")
+                                className: Z(sr[r], "flex items-center justify-center clip shrink-0")
                             }, c)
                         }, [c, r]),
                         S = (0, I.useMemo)(function() {
                             var e = !y && k().createElement("div", {
-                                className: se[r]
+                                className: st[r]
                             }, g);
                             switch (n) {
                                 case "Horizontal":
@@ -15494,7 +15517,7 @@ function() {
                         }, [n, w, b, m, v, g, r, h, y]);
                     return k().createElement("button", {
                         type: "button",
-                        className: Z(ee, "focus:outline-focus bg-none width-full radius-medium stroke-standard", f ? "stroke-system-contrast" : "stroke-emphasis", si[r], a && "opacity-[0.5]", !a && "cursor-pointer"),
+                        className: Z(ee, "focus:outline-focus bg-none width-full radius-medium stroke-standard", f ? "stroke-system-contrast" : "stroke-emphasis", sl[r], a && "opacity-[0.5]", !a && "cursor-pointer"),
                         disabled: a,
                         ref: t,
                         onClick: function() {
@@ -15503,13 +15526,13 @@ function() {
                     }, !a && k().createElement(et, null), S)
                 });
 
-            function su(e, t) {
+            function ss(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function ss(e, t) {
+            function sf(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -15533,23 +15556,23 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return su(e, t);
+                        if ("string" == typeof e) return ss(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return su(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ss(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            sc.displayName = "OptionSelector";
-            var sf = {
+            su.displayName = "OptionSelector";
+            var sd = {
                 FAE: "icon-regular-square-person",
                 IDV: "icon-regular-rectangle-person-with-three-horizontal-lines",
                 CCV: "icon-regular-credit-card"
             };
 
-            function sd(e) {
+            function sp(e) {
                 var t, n, r, o, a, i, l = e.props,
                     c = e.ctx,
                     u = e.report,
@@ -15594,10 +15617,10 @@ function() {
                         }
                     }(l.methods)) ? a : [],
                     v = at(c),
-                    b = ss((0, I.useState)(null == (i = h[0]) ? void 0 : i.id), 2),
+                    b = sf((0, I.useState)(null == (i = h[0]) ? void 0 : i.id), 2),
                     g = b[0],
                     w = b[1],
-                    S = ss((0, I.useState)(!1), 2),
+                    S = sf((0, I.useState)(!1), 2),
                     O = S[0],
                     x = S[1];
                 (0, I.useEffect)(function() {
@@ -15636,13 +15659,13 @@ function() {
                                     role: "group",
                                     "aria-label": y,
                                     children: h.map(function(e) {
-                                        return (0, P.jsx)(sc, {
+                                        return (0, P.jsx)(su, {
                                             layout: "Horizontal",
                                             size: "Medium",
                                             type: "Checkmark",
                                             label: e.label,
                                             description: e.description,
-                                            icon: sf[e.id],
+                                            icon: sd[e.id],
                                             isSelected: g === e.id,
                                             onSelect: function() {
                                                 v.verificationMethodSelected(e.id), w(e.id)
@@ -15675,8 +15698,8 @@ function() {
                     })
                 })
             }
-            sd.ownsOverlay = !0, sd.ownsLoadingState = !0;
-            var sp = {
+            sp.ownsOverlay = !0, sp.ownsLoadingState = !0;
+            var sy = {
                     AgreementConsents: oO,
                     CreateOdpSession: oB,
                     DeeplinkRedirect: oM,
@@ -15685,15 +15708,15 @@ function() {
                     OdpHandoff: aO,
                     PinEntry: aN,
                     Redirect: aL,
-                    RemoteParentRequest: uU,
-                    SessionPolling: uL,
-                    TextScreen: uK,
-                    UserAgreement: u9,
-                    VerificationMethodSelection: sd
+                    RemoteParentRequest: uL,
+                    SessionPolling: uF,
+                    TextScreen: uB,
+                    UserAgreement: se,
+                    VerificationMethodSelection: sp
                 },
-                sy = window.CoreUtilities;
+                sm = window.CoreUtilities;
 
-            function sm(e, t, n, r, o, a, i) {
+            function sh(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -15704,7 +15727,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function sh(e, t) {
+            function sv(e, t) {
                 var n;
                 return (n = function() {
                     return function(e, t) {
@@ -15789,7 +15812,7 @@ function() {
                     }(this, function(n) {
                         switch (n.label) {
                             case 0:
-                                return [4, sy.httpService.post({
+                                return [4, sm.httpService.post({
                                     url: e,
                                     withCredentials: !0
                                 }, t)];
@@ -15804,33 +15827,33 @@ function() {
                         var a = n.apply(e, t);
 
                         function i(e) {
-                            sm(a, r, o, i, l, "next", e)
+                            sh(a, r, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            sm(a, r, o, i, l, "throw", e)
+                            sh(a, r, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 })()
             }
-            var sv = {
+            var sb = {
                     entrypoint: function(e) {
-                        return sh(oL, e)
+                        return sv(oL, e)
                     },
                     continue: function(e) {
-                        return sh(oF, e)
+                        return sv(oF, e)
                     }
                 },
-                sb = "Continue";
+                sg = "Continue";
 
-            function sg(e, t) {
+            function sw(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function sw(e) {
+            function sS(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
@@ -15849,7 +15872,7 @@ function() {
                 return e
             }
 
-            function sS(e, t) {
+            function sO(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -15861,13 +15884,13 @@ function() {
                     Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
                 }), e
             }
-            var sO = "ReportOutcome",
-                sx = "FragmentLoaded",
-                sP = "ContinueFailed",
-                sj = "AcknowledgeError";
+            var sx = "ReportOutcome",
+                sP = "FragmentLoaded",
+                sj = "ContinueFailed",
+                sC = "AcknowledgeError";
 
-            function sC(e, t, n) {
-                return sS(sw({}, e), {
+            function sE(e, t, n) {
+                return sO(sS({}, e), {
                     history: t,
                     isLoading: !1,
                     presentingError: !1,
@@ -15880,7 +15903,7 @@ function() {
                 })
             }
 
-            function sE(e, t, n, r, o, a) {
+            function sA(e, t, n, r, o, a) {
                 var i, l, c, u, s, f = "" !== e.entry,
                     d = f && null != e.nodes[e.entry],
                     p = !f && "Error" === e.outcome;
@@ -15903,7 +15926,7 @@ function() {
                     history: t,
                     flowState: null != (c = e.state) ? c : null == a ? void 0 : a.flowState,
                     flowInputs: null != (u = e.flowInputs) ? u : null == a ? void 0 : a.flowInputs,
-                    analyticsStrings: (i = null == a ? void 0 : a.analyticsStrings, null == (l = e.analytics) ? i : null == i ? l : sw({}, i, l)),
+                    analyticsStrings: (i = null == a ? void 0 : a.analyticsStrings, null == (l = e.analytics) ? i : null == i ? l : sS({}, i, l)),
                     isLoading: !1,
                     presentingError: p,
                     exited: !d && !p,
@@ -15911,14 +15934,14 @@ function() {
                 }
             }
 
-            function sA(e) {
+            function sT(e) {
                 var t;
-                return sE(e, [], e.flowId, null != (t = e.analyticsSessionId) ? t : "", e.chosenFlow)
+                return sA(e, [], e.flowId, null != (t = e.analyticsSessionId) ? t : "", e.chosenFlow)
             }
 
-            function sT(e, t) {
+            function sI(e, t) {
                 switch (t.type) {
-                    case sO:
+                    case sx:
                         return function(e, t) {
                             var n, r = e.currentNodeId;
                             if (null == r) return e;
@@ -15931,25 +15954,25 @@ function() {
                                     data: t.data
                                 },
                                 l = (n = e.history, ((function(e) {
-                                    if (Array.isArray(e)) return sg(e)
+                                    if (Array.isArray(e)) return sw(e)
                                 })(n) || function(e) {
                                     if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                                 }(n) || function(e) {
                                     if (e) {
-                                        if ("string" == typeof e) return sg(e, void 0);
+                                        if ("string" == typeof e) return sw(e, void 0);
                                         var t = Object.prototype.toString.call(e).slice(8, -1);
                                         if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return sg(e, void 0)
+                                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return sw(e, void 0)
                                     }
                                 }(n) || function() {
                                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                                 }()).concat([i]));
-                            if (null == a) return sC(e, l, t.outcome);
+                            if (null == a) return sE(e, l, t.outcome);
                             switch (a.kind) {
                                 case "Goto":
                                     var c = a.node;
-                                    if (null == c || null == e.nodes[c]) return sC(e, l, t.outcome);
-                                    return sS(sw({}, e), {
+                                    if (null == c || null == e.nodes[c]) return sE(e, l, t.outcome);
+                                    return sO(sS({}, e), {
                                         currentNodeId: c,
                                         history: l,
                                         isLoading: !1,
@@ -15957,8 +15980,8 @@ function() {
                                         exited: !1,
                                         exitResult: void 0
                                     });
-                                case sb:
-                                    return sS(sw({}, e), {
+                                case sg:
+                                    return sO(sS({}, e), {
                                         history: l,
                                         isLoading: !0,
                                         presentingError: !1,
@@ -15966,7 +15989,7 @@ function() {
                                         exitResult: void 0
                                     });
                                 default:
-                                    return sS(sw({}, e), {
+                                    return sO(sS({}, e), {
                                         history: l,
                                         isLoading: !1,
                                         presentingError: !1,
@@ -15979,11 +16002,11 @@ function() {
                                     })
                             }
                         }(e, t);
-                    case sx:
-                        var n, r, o, a;
-                        return r = "" !== (n = t.response).flowId ? n.flowId : e.flowId, o = void 0 !== n.analyticsSessionId && "" !== n.analyticsSessionId ? n.analyticsSessionId : e.analyticsSessionId, a = "" !== n.chosenFlow ? n.chosenFlow : e.chosenFlow, sE(n, e.history, r, o, a, e);
                     case sP:
-                        return sS(sw({}, e), {
+                        var n, r, o, a;
+                        return r = "" !== (n = t.response).flowId ? n.flowId : e.flowId, o = void 0 !== n.analyticsSessionId && "" !== n.analyticsSessionId ? n.analyticsSessionId : e.analyticsSessionId, a = "" !== n.chosenFlow ? n.chosenFlow : e.chosenFlow, sA(n, e.history, r, o, a, e);
+                    case sj:
+                        return sO(sS({}, e), {
                             isLoading: !1,
                             presentingError: !1,
                             exited: !0,
@@ -15992,8 +16015,8 @@ function() {
                                 flowId: e.flowId
                             }
                         });
-                    case sj:
-                        return e.presentingError ? sS(sw({}, e), {
+                    case sC:
+                        return e.presentingError ? sO(sS({}, e), {
                             presentingError: !1,
                             exited: !0
                         }) : e;
@@ -16002,14 +16025,14 @@ function() {
                 }
             }
 
-            function sI(e, t) {
+            function sk(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var sk = (fE = oz.sendEventWithTarget, function(e, t) {
+            var sN = (fA = oz.sendEventWithTarget, function(e, t) {
                 var n;
-                fE(e, "ampV2Wizard", (n = {}, null == t || Object.entries(t).forEach(function(e) {
+                fA(e, "ampV2Wizard", (n = {}, null == t || Object.entries(t).forEach(function(e) {
                     var t = function(e) {
                             if (Array.isArray(e)) return e
                         }(e) || function(e) {
@@ -16033,10 +16056,10 @@ function() {
                             }
                         }(e) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return sI(e, 2);
+                                if ("string" == typeof e) return sk(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return sI(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return sk(e, 2)
                             }
                         }(e) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -16047,13 +16070,13 @@ function() {
                 }), n))
             });
 
-            function sN(e, t) {
+            function sD(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function sD(e) {
+            function sM(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
@@ -16072,7 +16095,7 @@ function() {
                 return e
             }
 
-            function sM(e, t) {
+            function sR(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -16085,16 +16108,16 @@ function() {
                 }), e
             }
 
-            function sR(e, t) {
+            function sU(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return sN(e, t);
+                    if ("string" == typeof e) return sD(e, t);
                     var n = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                    if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return sN(e, t)
+                    if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return sD(e, t)
                 }
             }
 
-            function sU(e, t, n) {
+            function sL(e, t, n) {
                 var r = e.currentNodeId,
                     o = null != r ? e.nodes[r] : void 0;
                 return {
@@ -16106,10 +16129,10 @@ function() {
                     nodeType: null == o ? void 0 : o.type
                 }
             }
-            var sL = function() {};
+            var sF = function() {};
 
-            function sF(e) {
-                var t, n, r, o, a, i, l, c, u, s, f, d, p, y, m, h, v, b, g, w, S, O, x, j, C, A, T, k, N, D = null != (A = e.registry) ? A : sp,
+            function sV(e) {
+                var t, n, r, o, a, i, l, c, u, s, f, d, p, y, m, h, v, b, g, w, S, O, x, j, C, A, T, k, N, D = null != (A = e.registry) ? A : sy,
                     M = null != (T = e.config) ? T : {},
                     R = (r = (t = {
                         initialFragment: e.initialFragment,
@@ -16119,9 +16142,9 @@ function() {
                         api: e.api,
                         onExit: e.onExit,
                         onEvent: e.onEvent
-                    }).api, o = t.target, a = t.rootFlow, i = t.surface, l = t.onExit, c = t.onEvent, u = null != (n = t.sendEvent) ? n : sk, d = (f = function(e) {
+                    }).api, o = t.target, a = t.rootFlow, i = t.surface, l = t.onExit, c = t.onEvent, u = null != (n = t.sendEvent) ? n : sN, d = (f = function(e) {
                         if (Array.isArray(e)) return e
-                    }(s = (0, I.useReducer)(sT, t.initialFragment, sA)) || function(e) {
+                    }(s = (0, I.useReducer)(sI, t.initialFragment, sT)) || function(e) {
                         var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                         if (null != r) {
                             var o = [],
@@ -16140,15 +16163,15 @@ function() {
                             }
                             return o
                         }
-                    }(s) || sR(s, 2) || function() {
+                    }(s) || sU(s, 2) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                     }())[0], p = f[1], (y = (0, I.useRef)(d)).current = d, m = (0, I.useRef)(!1), h = (0, I.useRef)(!1), (0, I.useEffect)(function() {
                         return h.current = !1,
                             function() {
                                 h.current = !0
                             }
-                    }, []), v = d.currentNodeId ? d.nodes[d.currentNodeId] : void 0, b = sU(d, i, a), g = (0, I.useCallback)(function(e, t) {
-                        u(e, sD({}, sU(y.current, i, a), t))
+                    }, []), v = d.currentNodeId ? d.nodes[d.currentNodeId] : void 0, b = sL(d, i, a), g = (0, I.useCallback)(function(e, t) {
+                        u(e, sM({}, sL(y.current, i, a), t))
                     }, [u, i, a]), w = (0, I.useRef)(!1), (0, I.useEffect)(function() {
                         w.current || null == y.current.currentNodeId || (w.current = !0, g("ampWizardFlowStart"))
                     }, []), (0, I.useEffect)(function() {
@@ -16163,8 +16186,8 @@ function() {
                             s = l.currentNodeId;
                         if (null != s && !l.exited && !l.isLoading && !m.current) {
                             var f = null == (n = l.nodes[s]) ? void 0 : n.transitions[e],
-                                d = sU(l, i, a);
-                            if (u("ampWizardNodeOutcome", sM(sD({}, d), {
+                                d = sL(l, i, a);
+                            if (u("ampWizardNodeOutcome", sR(sM({}, d), {
                                     outcome: e,
                                     transitionKind: null == f ? void 0 : f.kind
                                 })), c && c({
@@ -16173,16 +16196,16 @@ function() {
                                     outcome: e,
                                     transitionKind: null == f ? void 0 : f.kind
                                 }), p({
-                                    type: sO,
+                                    type: sx,
                                     outcome: e,
                                     data: t
-                                }), (null == f ? void 0 : f.kind) === sb) {
+                                }), (null == f ? void 0 : f.kind) === sg) {
                                 m.current = !0;
                                 var v, b = ((function(e) {
-                                    if (Array.isArray(e)) return sN(e)
+                                    if (Array.isArray(e)) return sD(e)
                                 })(v = l.history) || function(e) {
                                     if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                                }(v) || sR(v) || function() {
+                                }(v) || sU(v) || function() {
                                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                                 }()).concat([{
                                     flow: l.chosenFlow,
@@ -16201,14 +16224,14 @@ function() {
                                     payload: t
                                 }).then(function(e) {
                                     m.current = !1, h.current || p({
-                                        type: sx,
+                                        type: sP,
                                         response: e
                                     })
                                 }).catch(function(e) {
-                                    m.current = !1, h.current || (u("ampWizardContinueFailed", sM(sD({}, d), {
+                                    m.current = !1, h.current || (u("ampWizardContinueFailed", sR(sM({}, d), {
                                         errorMessage: String(e)
                                     })), p({
-                                        type: sP,
+                                        type: sj,
                                         message: String(e)
                                     }))
                                 })
@@ -16216,7 +16239,7 @@ function() {
                         }
                     }, [r, o, a, i, c, u]), C = (0, I.useCallback)(function() {
                         p({
-                            type: sj
+                            type: sC
                         })
                     }, []), {
                         currentNode: v,
@@ -16245,7 +16268,7 @@ function() {
                     B = R.acknowledgeError,
                     z = R.eventContext,
                     q = (0, I.useCallback)(function() {
-                        uW(U, z.node).close(), V("Cancel")
+                        uK(U, z.node).close(), V("Cancel")
                     }, [z.node, U, V]),
                     H = F ? D[F.type] : void 0,
                     G = function(e, t) {
@@ -16296,7 +16319,7 @@ function() {
                             children: (0, P.jsx)(X, {
                                 props: J.details,
                                 ctx: $,
-                                report: G ? sL : V,
+                                report: G ? sF : V,
                                 transitions: J.transitions
                             })
                         }), G ? (0, P.jsx)("div", {
@@ -16330,15 +16353,15 @@ function() {
                     children: Q
                 })
             }
-            var sV = "AmpV2Wizard.StartWizard";
+            var s_ = "AmpV2Wizard.StartWizard";
 
-            function s_(e, t) {
+            function sW(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function sW() {
+            function sK() {
                 var e, t, n, r = function(e) {
                         if (Array.isArray(e)) return e
                     }(t = (0, I.useState)(null)) || function(e) {
@@ -16362,10 +16385,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return s_(e, 2);
+                            if ("string" == typeof e) return sW(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return s_(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return sW(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -16380,13 +16403,13 @@ function() {
                         i.current ? m.closeCallback({
                             reason: "Error",
                             flowId: ""
-                        }) : (i.current = !0, (null != (y = m.api) ? y : sv).entrypoint((t = m.target, n = m.flow, r = m.surface, o = m.registry, c = m.extraProps, s = (null == (u = (0, Q.getDeviceMeta)()) ? void 0 : u.isInApp) === !0, {
+                        }) : (i.current = !0, (null != (y = m.api) ? y : sb).entrypoint((t = m.target, n = m.flow, r = m.surface, o = m.registry, c = m.extraProps, s = (null == (u = (0, Q.getDeviceMeta)()) ? void 0 : u.isInApp) === !0, {
                             target: t,
                             flow: n,
                             surface: r,
                             client: {
                                 clientCapabilities: f = (function() {
-                                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : sp;
+                                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : sy;
                                     return Object.keys(e).sort()
                                 })(o).filter(function(e) {
                                     return "DeeplinkRedirect" !== e || s
@@ -16440,9 +16463,9 @@ function() {
                             })
                         }))
                     };
-                    return window.addEventListener(sV, e),
+                    return window.addEventListener(s_, e),
                         function() {
-                            window.removeEventListener(sV, e)
+                            window.removeEventListener(s_, e)
                         }
                 }, []);
                 var c = (0, I.useCallback)(function(e) {
@@ -16452,7 +16475,7 @@ function() {
                 if (null == o) return null;
                 var u = o.detail,
                     s = o.fragment;
-                return (0, P.jsx)(sF, {
+                return (0, P.jsx)(sV, {
                     initialFragment: s,
                     target: u.target,
                     rootFlow: null != (e = u.flow) && "" !== e.name ? e.name : void 0,
@@ -16475,88 +16498,88 @@ function() {
                         }
                     }(u.flow),
                     surface: u.surface,
-                    api: null != (n = u.api) ? n : sv,
+                    api: null != (n = u.api) ? n : sb,
                     config: u.config,
                     registry: u.registry,
                     onExit: c,
                     onEvent: u.onEvent
                 })
             }
-            var sK = window.ReactStyleGuide;
+            var sB = window.ReactStyleGuide;
 
-            function sB(e, t) {
+            function sz(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
 
-            function sz(e) {
+            function sq(e) {
                 return e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
             }
 
-            function sq(e) {
+            function sH(e) {
                 for (var t = arguments.length, n = Array(t > 1 ? t - 1 : 0), r = 1; r < t; r++) n[r - 1] = arguments[r];
                 throw Error("[Immer] minified error nr: " + e + (n.length ? " " + n.map(function(e) {
                     return "'" + e + "'"
                 }).join(",") : "") + ". Find the full error at: https://bit.ly/3cXEKWf")
             }
 
-            function sH(e) {
-                return !!e && !!e[fV]
+            function sG(e) {
+                return !!e && !!e[f_]
             }
 
-            function sG(e) {
+            function s$(e) {
                 var t;
                 return !!e && (function(e) {
-                    if (!e || "object" != (void 0 === e ? "undefined" : sz(e))) return !1;
+                    if (!e || "object" != (void 0 === e ? "undefined" : sq(e))) return !1;
                     var t = Object.getPrototypeOf(e);
                     if (null === t) return !0;
                     var n = Object.hasOwnProperty.call(t, "constructor") && t.constructor;
-                    return n === Object || "function" == typeof n && Function.toString.call(n) === f_
-                }(e) || Array.isArray(e) || !!e[fF] || !!(null == (t = e.constructor) ? void 0 : t[fF]) || sZ(e) || s0(e))
+                    return n === Object || "function" == typeof n && Function.toString.call(n) === fW
+                }(e) || Array.isArray(e) || !!e[fV] || !!(null == (t = e.constructor) ? void 0 : t[fV]) || s0(e) || s1(e))
             }
 
-            function s$(e, t, n) {
-                void 0 === n && (n = !1), 0 === sX(e) ? (n ? Object.keys : fW)(e).forEach(function(r) {
-                    n && "symbol" == (void 0 === r ? "undefined" : sz(r)) || t(r, e[r], e)
+            function sX(e, t, n) {
+                void 0 === n && (n = !1), 0 === sJ(e) ? (n ? Object.keys : fK)(e).forEach(function(r) {
+                    n && "symbol" == (void 0 === r ? "undefined" : sq(r)) || t(r, e[r], e)
                 }) : e.forEach(function(n, r) {
                     return t(r, n, e)
                 })
             }
 
-            function sX(e) {
-                var t = e[fV];
-                return t ? t.i > 3 ? t.i - 4 : t.i : Array.isArray(e) ? 1 : sZ(e) ? 2 : 3 * !!s0(e)
+            function sJ(e) {
+                var t = e[f_];
+                return t ? t.i > 3 ? t.i - 4 : t.i : Array.isArray(e) ? 1 : s0(e) ? 2 : 3 * !!s1(e)
             }
 
-            function sJ(e, t) {
-                return 2 === sX(e) ? e.has(t) : Object.prototype.hasOwnProperty.call(e, t)
+            function sY(e, t) {
+                return 2 === sJ(e) ? e.has(t) : Object.prototype.hasOwnProperty.call(e, t)
             }
 
-            function sY(e, t, n) {
-                var r = sX(e);
+            function sQ(e, t, n) {
+                var r = sJ(e);
                 2 === r ? e.set(t, n) : 3 === r ? e.add(n) : e[t] = n
             }
 
-            function sQ(e, t) {
+            function sZ(e, t) {
                 return e === t ? 0 !== e || 1 / e == 1 / t : e != e && t != t
             }
 
-            function sZ(e) {
-                return fM && sB(e, Map)
-            }
-
             function s0(e) {
-                return fR && sB(e, Set)
+                return fR && sz(e, Map)
             }
 
             function s1(e) {
-                return e.o || e.t
+                return fU && sz(e, Set)
             }
 
             function s2(e) {
+                return e.o || e.t
+            }
+
+            function s3(e) {
                 if (Array.isArray(e)) return Array.prototype.slice.call(e);
-                var t = fK(e);
-                delete t[fV];
-                for (var n = fW(t), r = 0; r < n.length; r++) {
+                var t = fB(e);
+                delete t[f_];
+                for (var n = fK(t), r = 0; r < n.length; r++) {
                     var o = n[r],
                         a = t[o];
                     !1 === a.writable && (a.writable = !0, a.configurable = !0), (a.get || a.set) && (t[o] = {
@@ -16569,101 +16592,101 @@ function() {
                 return Object.create(Object.getPrototypeOf(e), t)
             }
 
-            function s3(e, t) {
-                return void 0 === t && (t = !1), s6(e) || sH(e) || !sG(e) || (sX(e) > 1 && (e.set = e.add = e.clear = e.delete = s5), Object.freeze(e), t && s$(e, function(e, t) {
-                    return s3(t, !0)
+            function s5(e, t) {
+                return void 0 === t && (t = !1), s8(e) || sG(e) || !s$(e) || (sJ(e) > 1 && (e.set = e.add = e.clear = e.delete = s6), Object.freeze(e), t && sX(e, function(e, t) {
+                    return s5(t, !0)
                 }, !0)), e
             }
 
-            function s5() {
-                sq(2)
-            }
-
-            function s6(e) {
-                return null == e || "object" != (void 0 === e ? "undefined" : sz(e)) || Object.isFrozen(e)
+            function s6() {
+                sH(2)
             }
 
             function s8(e) {
-                var t = fB[e];
-                return t || sq(18, e), t
+                return null == e || "object" != (void 0 === e ? "undefined" : sq(e)) || Object.isFrozen(e)
             }
 
-            function s4(e, t) {
-                t && (s8("Patches"), e.u = [], e.s = [], e.v = t)
+            function s4(e) {
+                var t = fz[e];
+                return t || sH(18, e), t
             }
 
-            function s7(e) {
-                s9(e), e.p.forEach(ft), e.p = null
+            function s7(e, t) {
+                t && (s4("Patches"), e.u = [], e.s = [], e.v = t)
             }
 
             function s9(e) {
-                e === fN && (fN = e.l)
+                fe(e), e.p.forEach(fn), e.p = null
             }
 
             function fe(e) {
-                return fN = {
+                e === fD && (fD = e.l)
+            }
+
+            function ft(e) {
+                return fD = {
                     p: [],
-                    l: fN,
+                    l: fD,
                     h: e,
                     m: !0,
                     _: 0
                 }
             }
 
-            function ft(e) {
-                var t = e[fV];
+            function fn(e) {
+                var t = e[f_];
                 0 === t.i || 1 === t.i ? t.j() : t.g = !0
             }
 
-            function fn(e, t) {
+            function fr(e, t) {
                 t._ = t.p.length;
                 var n = t.p[0],
                     r = void 0 !== e && e !== n;
-                return t.h.O || s8("ES5").S(t, e, r), r ? (n[fV].P && (s7(t), sq(4)), sG(e) && (e = fr(t, e), t.l || fa(t, e)), t.u && s8("Patches").M(n[fV].t, e, t.u, t.s)) : e = fr(t, n, []), s7(t), t.u && t.v(t.u, t.s), e !== fL ? e : void 0
+                return t.h.O || s4("ES5").S(t, e, r), r ? (n[f_].P && (s9(t), sH(4)), s$(e) && (e = fo(t, e), t.l || fi(t, e)), t.u && s4("Patches").M(n[f_].t, e, t.u, t.s)) : e = fo(t, n, []), s9(t), t.u && t.v(t.u, t.s), e !== fF ? e : void 0
             }
 
-            function fr(e, t, n) {
-                if (s6(t)) return t;
-                var r = t[fV];
-                if (!r) return s$(t, function(o, a) {
-                    return fo(e, r, t, o, a, n)
+            function fo(e, t, n) {
+                if (s8(t)) return t;
+                var r = t[f_];
+                if (!r) return sX(t, function(o, a) {
+                    return fa(e, r, t, o, a, n)
                 }, !0), t;
                 if (r.A !== e) return t;
-                if (!r.P) return fa(e, r.t, !0), r.t;
+                if (!r.P) return fi(e, r.t, !0), r.t;
                 if (!r.I) {
                     r.I = !0, r.A._--;
-                    var o = 4 === r.i || 5 === r.i ? r.o = s2(r.k) : r.o,
+                    var o = 4 === r.i || 5 === r.i ? r.o = s3(r.k) : r.o,
                         a = o,
                         i = !1;
-                    3 === r.i && (a = new Set(o), o.clear(), i = !0), s$(a, function(t, a) {
-                        return fo(e, r, o, t, a, n, i)
-                    }), fa(e, o, !1), n && e.u && s8("Patches").N(r, n, e.u, e.s)
+                    3 === r.i && (a = new Set(o), o.clear(), i = !0), sX(a, function(t, a) {
+                        return fa(e, r, o, t, a, n, i)
+                    }), fi(e, o, !1), n && e.u && s4("Patches").N(r, n, e.u, e.s)
                 }
                 return r.o
             }
 
-            function fo(e, t, n, r, o, a, i) {
-                if (sH(o)) {
-                    var l = fr(e, o, a && t && 3 !== t.i && !sJ(t.R, r) ? a.concat(r) : void 0);
-                    if (sY(n, r, l), !sH(l)) return;
+            function fa(e, t, n, r, o, a, i) {
+                if (sG(o)) {
+                    var l = fo(e, o, a && t && 3 !== t.i && !sY(t.R, r) ? a.concat(r) : void 0);
+                    if (sQ(n, r, l), !sG(l)) return;
                     e.m = !1
                 } else i && n.add(o);
-                if (sG(o) && !s6(o)) {
+                if (s$(o) && !s8(o)) {
                     if (!e.h.D && e._ < 1) return;
-                    fr(e, o), t && t.A.l || fa(e, o)
+                    fo(e, o), t && t.A.l || fi(e, o)
                 }
             }
 
-            function fa(e, t, n) {
-                void 0 === n && (n = !1), !e.l && e.h.D && e.m && s3(t, n)
-            }
-
-            function fi(e, t) {
-                var n = e[fV];
-                return (n ? s1(n) : e)[t]
+            function fi(e, t, n) {
+                void 0 === n && (n = !1), !e.l && e.h.D && e.m && s5(t, n)
             }
 
             function fl(e, t) {
+                var n = e[f_];
+                return (n ? s2(n) : e)[t]
+            }
+
+            function fc(e, t) {
                 if (t in e)
                     for (var n = Object.getPrototypeOf(e); n;) {
                         var r = Object.getOwnPropertyDescriptor(n, t);
@@ -16672,18 +16695,18 @@ function() {
                     }
             }
 
-            function fc(e) {
-                e.P || (e.P = !0, e.l && fc(e.l))
-            }
-
             function fu(e) {
-                e.o || (e.o = s2(e.t))
+                e.P || (e.P = !0, e.l && fu(e.l))
             }
 
-            function fs(e, t, n) {
-                var r, o, a, i, l, c, u, s = sZ(t) ? s8("MapSet").F(t, n) : s0(t) ? s8("MapSet").T(t, n) : e.O ? (a = o = {
+            function fs(e) {
+                e.o || (e.o = s3(e.t))
+            }
+
+            function ff(e, t, n) {
+                var r, o, a, i, l, c, u, s = s0(t) ? s4("MapSet").F(t, n) : s1(t) ? s4("MapSet").T(t, n) : e.O ? (a = o = {
                     i: +!!(r = Array.isArray(t)),
-                    A: n ? n.A : fN,
+                    A: n ? n.A : fD,
                     P: !1,
                     I: !1,
                     R: {},
@@ -16693,68 +16716,68 @@ function() {
                     o: null,
                     j: null,
                     C: !1
-                }, i = fz, r && (a = [o], i = fq), c = (l = Proxy.revocable(a, i)).revoke, o.k = u = l.proxy, o.j = c, u) : s8("ES5").J(t, n);
-                return (n ? n.A : fN).p.push(s), s
+                }, i = fq, r && (a = [o], i = fH), c = (l = Proxy.revocable(a, i)).revoke, o.k = u = l.proxy, o.j = c, u) : s4("ES5").J(t, n);
+                return (n ? n.A : fD).p.push(s), s
             }
 
-            function ff(e, t) {
+            function fd(e, t) {
                 switch (t) {
                     case 2:
                         return new Map(e);
                     case 3:
                         return Array.from(e)
                 }
-                return s2(e)
+                return s3(e)
             }
-            var fd, fp, fy, fm, fh, fv, fb, fg, fw, fS, fO, fx, fP, fj, fC, fE, fA, fT, fI, fk, fN, fD = "u" > typeof Symbol && "symbol" == sz(Symbol("x")),
-                fM = "u" > typeof Map,
-                fR = "u" > typeof Set,
-                fU = "u" > typeof Proxy && void 0 !== Proxy.revocable && "u" > typeof Reflect,
-                fL = fD ? Symbol.for("immer-nothing") : ((fk = {})["immer-nothing"] = !0, fk),
-                fF = fD ? Symbol.for("immer-draftable") : "__$immer_draftable",
-                fV = fD ? Symbol.for("immer-state") : "__$immer_state",
-                f_ = "" + Object.prototype.constructor,
-                fW = "u" > typeof Reflect && Reflect.ownKeys ? Reflect.ownKeys : void 0 !== Object.getOwnPropertySymbols ? function(e) {
+            var fp, fy, fm, fh, fv, fb, fg, fw, fS, fO, fx, fP, fj, fC, fE, fA, fT, fI, fk, fN, fD, fM = "u" > typeof Symbol && "symbol" == sq(Symbol("x")),
+                fR = "u" > typeof Map,
+                fU = "u" > typeof Set,
+                fL = "u" > typeof Proxy && void 0 !== Proxy.revocable && "u" > typeof Reflect,
+                fF = fM ? Symbol.for("immer-nothing") : ((fN = {})["immer-nothing"] = !0, fN),
+                fV = fM ? Symbol.for("immer-draftable") : "__$immer_draftable",
+                f_ = fM ? Symbol.for("immer-state") : "__$immer_state",
+                fW = "" + Object.prototype.constructor,
+                fK = "u" > typeof Reflect && Reflect.ownKeys ? Reflect.ownKeys : void 0 !== Object.getOwnPropertySymbols ? function(e) {
                     return Object.getOwnPropertyNames(e).concat(Object.getOwnPropertySymbols(e))
                 } : Object.getOwnPropertyNames,
-                fK = Object.getOwnPropertyDescriptors || function(e) {
+                fB = Object.getOwnPropertyDescriptors || function(e) {
                     var t = {};
-                    return fW(e).forEach(function(n) {
+                    return fK(e).forEach(function(n) {
                         t[n] = Object.getOwnPropertyDescriptor(e, n)
                     }), t
                 },
-                fB = {},
-                fz = {
+                fz = {},
+                fq = {
                     get: function(e, t) {
-                        if (t === fV) return e;
-                        var n, r, o = s1(e);
-                        if (!sJ(o, t)) return (r = fl(o, t)) ? "value" in r ? r.value : null == (n = r.get) ? void 0 : n.call(e.k) : void 0;
+                        if (t === f_) return e;
+                        var n, r, o = s2(e);
+                        if (!sY(o, t)) return (r = fc(o, t)) ? "value" in r ? r.value : null == (n = r.get) ? void 0 : n.call(e.k) : void 0;
                         var a = o[t];
-                        return e.I || !sG(a) ? a : a === fi(e.t, t) ? (fu(e), e.o[t] = fs(e.A.h, a, e)) : a
+                        return e.I || !s$(a) ? a : a === fl(e.t, t) ? (fs(e), e.o[t] = ff(e.A.h, a, e)) : a
                     },
                     has: function(e, t) {
-                        return t in s1(e)
+                        return t in s2(e)
                     },
                     ownKeys: function(e) {
-                        return Reflect.ownKeys(s1(e))
+                        return Reflect.ownKeys(s2(e))
                     },
                     set: function(e, t, n) {
-                        var r = fl(s1(e), t);
+                        var r = fc(s2(e), t);
                         if (null == r ? void 0 : r.set) return r.set.call(e.k, n), !0;
                         if (!e.P) {
-                            var o = fi(s1(e), t),
-                                a = null == o ? void 0 : o[fV];
+                            var o = fl(s2(e), t),
+                                a = null == o ? void 0 : o[f_];
                             if (a && a.t === n) return e.o[t] = n, e.R[t] = !1, !0;
-                            if (sQ(n, o) && (void 0 !== n || sJ(e.t, t))) return !0;
-                            fu(e), fc(e)
+                            if (sZ(n, o) && (void 0 !== n || sY(e.t, t))) return !0;
+                            fs(e), fu(e)
                         }
                         return e.o[t] === n && (void 0 !== n || t in e.o) || Number.isNaN(n) && Number.isNaN(e.o[t]) || (e.o[t] = n, e.R[t] = !0), !0
                     },
                     deleteProperty: function(e, t) {
-                        return void 0 !== fi(e.t, t) || t in e.t ? (e.R[t] = !1, fu(e), fc(e)) : delete e.R[t], e.o && delete e.o[t], !0
+                        return void 0 !== fl(e.t, t) || t in e.t ? (e.R[t] = !1, fs(e), fu(e)) : delete e.R[t], e.o && delete e.o[t], !0
                     },
                     getOwnPropertyDescriptor: function(e, t) {
-                        var n = s1(e),
+                        var n = s2(e),
                             r = Reflect.getOwnPropertyDescriptor(n, t);
                         return r ? {
                             writable: !0,
@@ -16764,29 +16787,29 @@ function() {
                         } : r
                     },
                     defineProperty: function() {
-                        sq(11)
+                        sH(11)
                     },
                     getPrototypeOf: function(e) {
                         return Object.getPrototypeOf(e.t)
                     },
                     setPrototypeOf: function() {
-                        sq(12)
+                        sH(12)
                     }
                 },
-                fq = {};
-            s$(fz, function(e, t) {
-                fq[e] = function() {
+                fH = {};
+            sX(fq, function(e, t) {
+                fH[e] = function() {
                     return arguments[0] = arguments[0][0], t.apply(this, arguments)
                 }
-            }), fq.deleteProperty = function(e, t) {
-                return fq.set.call(this, e, t, void 0)
-            }, fq.set = function(e, t, n) {
-                return fz.set.call(this, e[0], t, n, e[0])
+            }), fH.deleteProperty = function(e, t) {
+                return fH.set.call(this, e, t, void 0)
+            }, fH.set = function(e, t, n) {
+                return fq.set.call(this, e[0], t, n, e[0])
             };
-            var fH = new(function() {
+            var fG = new(function() {
                     function e(e) {
                         var t = this;
-                        this.O = fU, this.D = !0, this.produce = function(e, n, r) {
+                        this.O = fL, this.D = !0, this.produce = function(e, n, r) {
                             if ("function" == typeof e && "function" != typeof n) {
                                 var o, a = n;
                                 return n = e,
@@ -16800,30 +16823,30 @@ function() {
                                         })
                                     }
                             }
-                            if ("function" != typeof n && sq(6), void 0 !== r && "function" != typeof r && sq(7), sG(e)) {
-                                var i = fe(t),
-                                    l = fs(t, e, void 0),
+                            if ("function" != typeof n && sH(6), void 0 !== r && "function" != typeof r && sH(7), s$(e)) {
+                                var i = ft(t),
+                                    l = ff(t, e, void 0),
                                     c = !0;
                                 try {
                                     o = n(l), c = !1
                                 } finally {
-                                    c ? s7(i) : s9(i)
+                                    c ? s9(i) : fe(i)
                                 }
-                                return "u" > typeof Promise && sB(o, Promise) ? o.then(function(e) {
-                                    return s4(i, r), fn(e, i)
+                                return "u" > typeof Promise && sz(o, Promise) ? o.then(function(e) {
+                                    return s7(i, r), fr(e, i)
                                 }, function(e) {
-                                    throw s7(i), e
-                                }) : (s4(i, r), fn(o, i))
+                                    throw s9(i), e
+                                }) : (s7(i, r), fr(o, i))
                             }
-                            if (!e || "object" != (void 0 === e ? "undefined" : sz(e))) {
-                                if (void 0 === (o = n(e)) && (o = e), o === fL && (o = void 0), t.D && s3(o, !0), r) {
+                            if (!e || "object" != (void 0 === e ? "undefined" : sq(e))) {
+                                if (void 0 === (o = n(e)) && (o = e), o === fF && (o = void 0), t.D && s5(o, !0), r) {
                                     var u = [],
                                         s = [];
-                                    s8("Patches").M(e, o, u, s), r(u, s)
+                                    s4("Patches").M(e, o, u, s), r(u, s)
                                 }
                                 return o
                             }
-                            sq(21, e)
+                            sH(21, e)
                         }, this.produceWithPatches = function(e, n) {
                             if ("function" == typeof e) return function(n) {
                                 for (var r = arguments.length, o = Array(r > 1 ? r - 1 : 0), a = 1; a < r; a++) o[a - 1] = arguments[a];
@@ -16834,36 +16857,36 @@ function() {
                             var r, o, a = t.produce(e, n, function(e, t) {
                                 r = e, o = t
                             });
-                            return "u" > typeof Promise && sB(a, Promise) ? a.then(function(e) {
+                            return "u" > typeof Promise && sz(a, Promise) ? a.then(function(e) {
                                 return [e, r, o]
                             }) : [a, r, o]
                         }, "boolean" == typeof(null == e ? void 0 : e.useProxies) && this.setUseProxies(e.useProxies), "boolean" == typeof(null == e ? void 0 : e.autoFreeze) && this.setAutoFreeze(e.autoFreeze)
                     }
                     var t = e.prototype;
                     return t.createDraft = function(e) {
-                        sG(e) || sq(8), sH(e) && (sH(t = e) || sq(22, t), e = function e(t) {
-                            if (!sG(t)) return t;
-                            var n, r = t[fV],
-                                o = sX(t);
+                        s$(e) || sH(8), sG(e) && (sG(t = e) || sH(22, t), e = function e(t) {
+                            if (!s$(t)) return t;
+                            var n, r = t[f_],
+                                o = sJ(t);
                             if (r) {
-                                if (!r.P && (r.i < 4 || !s8("ES5").K(r))) return r.t;
-                                r.I = !0, n = ff(t, o), r.I = !1
-                            } else n = ff(t, o);
-                            return s$(n, function(t, o) {
+                                if (!r.P && (r.i < 4 || !s4("ES5").K(r))) return r.t;
+                                r.I = !0, n = fd(t, o), r.I = !1
+                            } else n = fd(t, o);
+                            return sX(n, function(t, o) {
                                 var a;
-                                r && (a = r.t, (2 === sX(a) ? a.get(t) : a[t]) === o) || sY(n, t, e(o))
+                                r && (a = r.t, (2 === sJ(a) ? a.get(t) : a[t]) === o) || sQ(n, t, e(o))
                             }), 3 === o ? new Set(n) : n
                         }(t));
-                        var t, n = fe(this),
-                            r = fs(this, e, void 0);
-                        return r[fV].C = !0, s9(n), r
+                        var t, n = ft(this),
+                            r = ff(this, e, void 0);
+                        return r[f_].C = !0, fe(n), r
                     }, t.finishDraft = function(e, t) {
-                        var n = (e && e[fV]).A;
-                        return s4(n, t), fn(void 0, n)
+                        var n = (e && e[f_]).A;
+                        return s7(n, t), fr(void 0, n)
                     }, t.setAutoFreeze = function(e) {
                         this.D = e
                     }, t.setUseProxies = function(e) {
-                        e && !fU && sq(20), this.O = e
+                        e && !fL && sH(20), this.O = e
                     }, t.applyPatches = function(e, t) {
                         for (n = t.length - 1; n >= 0; n--) {
                             var n, r = t[n];
@@ -16873,23 +16896,23 @@ function() {
                             }
                         }
                         n > -1 && (t = t.slice(n + 1));
-                        var o = s8("Patches").$;
-                        return sH(e) ? o(e, t) : this.produce(e, function(e) {
+                        var o = s4("Patches").$;
+                        return sG(e) ? o(e, t) : this.produce(e, function(e) {
                             return o(e, t)
                         })
                     }, e
                 }()),
-                fG = fH.produce;
+                f$ = fG.produce;
 
-            function f$(e) {
-                return (f$ = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+            function fX(e) {
+                return (fX = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
                     return typeof e
                 } : function(e) {
                     return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e
                 })(e)
             }
 
-            function fX(e, t) {
+            function fJ(e, t) {
                 var n = Object.keys(e);
                 if (Object.getOwnPropertySymbols) {
                     var r = Object.getOwnPropertySymbols(e);
@@ -16900,56 +16923,56 @@ function() {
                 return n
             }
 
-            function fJ(e) {
+            function fY(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {};
-                    t % 2 ? fX(Object(n), !0).forEach(function(t) {
+                    t % 2 ? fJ(Object(n), !0).forEach(function(t) {
                         ! function(e, t, n) {
                             var r;
                             (r = function(e, t) {
-                                if ("object" != f$(e) || !e) return e;
+                                if ("object" != fX(e) || !e) return e;
                                 var n = e[Symbol.toPrimitive];
                                 if (void 0 !== n) {
                                     var r = n.call(e, t || "default");
-                                    if ("object" != f$(r)) return r;
+                                    if ("object" != fX(r)) return r;
                                     throw TypeError("@@toPrimitive must return a primitive value.")
                                 }
                                 return ("string" === t ? String : Number)(e)
-                            }(t, "string"), (t = "symbol" == f$(r) ? r : r + "") in e) ? Object.defineProperty(e, t, {
+                            }(t, "string"), (t = "symbol" == fX(r) ? r : r + "") in e) ? Object.defineProperty(e, t, {
                                 value: n,
                                 enumerable: !0,
                                 configurable: !0,
                                 writable: !0
                             }): e[t] = n
                         }(e, t, n[t])
-                    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : fX(Object(n)).forEach(function(t) {
+                    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : fJ(Object(n)).forEach(function(t) {
                         Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(n, t))
                     })
                 }
                 return e
             }
 
-            function fY(e) {
+            function fQ(e) {
                 return e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
             }
 
-            function fQ(e) {
+            function fZ(e) {
                 return "Minified Redux error #" + e + "; visit https://redux.js.org/Errors?code=" + e + " for the full message or use the non-minified dev environment for full errors. "
             }
-            fH.produceWithPatches.bind(fH), fH.setAutoFreeze.bind(fH), fH.setUseProxies.bind(fH), fH.applyPatches.bind(fH), fH.createDraft.bind(fH), fH.finishDraft.bind(fH);
-            var fZ = "function" == typeof Symbol && Symbol.observable || "@@observable",
-                f0 = function() {
+            fG.produceWithPatches.bind(fG), fG.setAutoFreeze.bind(fG), fG.setUseProxies.bind(fG), fG.applyPatches.bind(fG), fG.createDraft.bind(fG), fG.finishDraft.bind(fG);
+            var f0 = "function" == typeof Symbol && Symbol.observable || "@@observable",
+                f1 = function() {
                     return Math.random().toString(36).substring(7).split("").join(".")
                 },
-                f1 = {
-                    INIT: "@@redux/INIT" + f0(),
-                    REPLACE: "@@redux/REPLACE" + f0(),
+                f2 = {
+                    INIT: "@@redux/INIT" + f1(),
+                    REPLACE: "@@redux/REPLACE" + f1(),
                     PROBE_UNKNOWN_ACTION: function() {
-                        return "@@redux/PROBE_UNKNOWN_ACTION" + f0()
+                        return "@@redux/PROBE_UNKNOWN_ACTION" + f1()
                     }
                 };
 
-            function f2() {
+            function f3() {
                 for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n];
                 return 0 === t.length ? function(e) {
                     return e
@@ -16960,13 +16983,13 @@ function() {
                 })
             }
 
-            function f3() {
+            function f5() {
                 for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n];
                 return function(e) {
                     return function() {
                         var n = e.apply(void 0, arguments),
                             r = function() {
-                                throw Error(fQ(15))
+                                throw Error(fZ(15))
                             },
                             o = {
                                 getState: n.getState,
@@ -16977,14 +17000,14 @@ function() {
                             a = t.map(function(e) {
                                 return e(o)
                             });
-                        return r = f2.apply(void 0, a)(n.dispatch), fJ(fJ({}, n), {}, {
+                        return r = f3.apply(void 0, a)(n.dispatch), fY(fY({}, n), {}, {
                             dispatch: r
                         })
                     }
                 }
             }
 
-            function f5(e) {
+            function f6(e) {
                 return function(t) {
                     var n = t.dispatch,
                         r = t.getState;
@@ -16995,18 +17018,18 @@ function() {
                     }
                 }
             }
-            var f6 = f5();
+            var f8 = f6();
 
-            function f8(e, t) {
+            function f4(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
 
-            function f4(e) {
+            function f7(e) {
                 return e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
             }
-            f6.withExtraArgument = f5, n(6773);
-            var f7 = (e = function(t, n) {
-                    return (e = Object.setPrototypeOf || f8({
+            f8.withExtraArgument = f6, n(6773);
+            var f9 = (e = function(t, n) {
+                    return (e = Object.setPrototypeOf || f4({
                         __proto__: []
                     }, Array) && function(e, t) {
                         e.__proto__ = t
@@ -17021,7 +17044,7 @@ function() {
                     }
                     e(t, n), t.prototype = null === n ? Object.create(n) : (r.prototype = n.prototype, new r)
                 }),
-                f9 = function(e, t) {
+                de = function(e, t) {
                     var n, r, o, a, i = {
                         label: 0,
                         sent: function() {
@@ -17095,47 +17118,47 @@ function() {
                         }
                     }
                 },
-                de = function(e, t) {
+                dt = function(e, t) {
                     for (var n = 0, r = t.length, o = e.length; n < r; n++, o++) e[o] = t[n];
                     return e
                 },
-                dt = Object.defineProperty,
-                dn = Object.defineProperties,
-                dr = Object.getOwnPropertyDescriptors,
-                da = Object.getOwnPropertySymbols,
-                di = Object.prototype.hasOwnProperty,
-                dl = Object.prototype.propertyIsEnumerable,
-                dc = function(e, t, n) {
-                    return t in e ? dt(e, t, {
+                dn = Object.defineProperty,
+                dr = Object.defineProperties,
+                da = Object.getOwnPropertyDescriptors,
+                di = Object.getOwnPropertySymbols,
+                dl = Object.prototype.hasOwnProperty,
+                dc = Object.prototype.propertyIsEnumerable,
+                du = function(e, t, n) {
+                    return t in e ? dn(e, t, {
                         enumerable: !0,
                         configurable: !0,
                         writable: !0,
                         value: n
                     }) : e[t] = n
                 },
-                du = function(e, t) {
-                    for (var n in t || (t = {})) di.call(t, n) && dc(e, n, t[n]);
-                    if (da)
-                        for (var r = 0, o = da(t); r < o.length; r++) {
+                ds = function(e, t) {
+                    for (var n in t || (t = {})) dl.call(t, n) && du(e, n, t[n]);
+                    if (di)
+                        for (var r = 0, o = di(t); r < o.length; r++) {
                             var n = o[r];
-                            dl.call(t, n) && dc(e, n, t[n])
+                            dc.call(t, n) && du(e, n, t[n])
                         }
                     return e
                 },
-                ds = function(e, t) {
-                    return dn(e, dr(t))
+                df = function(e, t) {
+                    return dr(e, da(t))
                 },
-                df = "u" > typeof window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : function() {
-                    if (0 != arguments.length) return "object" === f4(arguments[0]) ? f2 : f2.apply(null, arguments)
+                dd = "u" > typeof window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : function() {
+                    if (0 != arguments.length) return "object" === f7(arguments[0]) ? f3 : f3.apply(null, arguments)
                 };
 
-            function dd(e, t) {
+            function dp(e, t) {
                 function n() {
                     for (var n = [], r = 0; r < arguments.length; r++) n[r] = arguments[r];
                     if (t) {
                         var o = t.apply(void 0, n);
                         if (!o) throw Error("prepareAction did not return an object");
-                        return du(du({
+                        return ds(ds({
                             type: e,
                             payload: o.payload
                         }, "meta" in o && {
@@ -17156,13 +17179,13 @@ function() {
                 }, n
             }
             "u" > typeof window && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__;
-            var dp = function(e) {
+            var dy = function(e) {
                     function t() {
                         for (var n = [], r = 0; r < arguments.length; r++) n[r] = arguments[r];
                         var o = e.apply(this, n) || this;
                         return Object.setPrototypeOf(o, t.prototype), o
                     }
-                    return f7(t, e), Object.defineProperty(t, Symbol.species, {
+                    return f9(t, e), Object.defineProperty(t, Symbol.species, {
                         get: function() {
                             return t
                         },
@@ -17173,16 +17196,16 @@ function() {
                         return e.prototype.concat.apply(this, t)
                     }, t.prototype.prepend = function() {
                         for (var e = [], n = 0; n < arguments.length; n++) e[n] = arguments[n];
-                        return 1 === e.length && Array.isArray(e[0]) ? new(t.bind.apply(t, de([void 0], e[0].concat(this)))) : new(t.bind.apply(t, de([void 0], e.concat(this))))
+                        return 1 === e.length && Array.isArray(e[0]) ? new(t.bind.apply(t, dt([void 0], e[0].concat(this)))) : new(t.bind.apply(t, dt([void 0], e.concat(this))))
                     }, t
                 }(Array),
-                dy = function(e) {
+                dm = function(e) {
                     function t() {
                         for (var n = [], r = 0; r < arguments.length; r++) n[r] = arguments[r];
                         var o = e.apply(this, n) || this;
                         return Object.setPrototypeOf(o, t.prototype), o
                     }
-                    return f7(t, e), Object.defineProperty(t, Symbol.species, {
+                    return f9(t, e), Object.defineProperty(t, Symbol.species, {
                         get: function() {
                             return t
                         },
@@ -17193,15 +17216,15 @@ function() {
                         return e.prototype.concat.apply(this, t)
                     }, t.prototype.prepend = function() {
                         for (var e = [], n = 0; n < arguments.length; n++) e[n] = arguments[n];
-                        return 1 === e.length && Array.isArray(e[0]) ? new(t.bind.apply(t, de([void 0], e[0].concat(this)))) : new(t.bind.apply(t, de([void 0], e.concat(this))))
+                        return 1 === e.length && Array.isArray(e[0]) ? new(t.bind.apply(t, dt([void 0], e[0].concat(this)))) : new(t.bind.apply(t, dt([void 0], e.concat(this))))
                     }, t
                 }(Array);
 
-            function dm(e) {
-                return sG(e) ? fG(e, function() {}) : e
+            function dh(e) {
+                return s$(e) ? f$(e, function() {}) : e
             }
 
-            function dh(e) {
+            function dv(e) {
                 var t, n = {},
                     r = [],
                     o = {
@@ -17224,10 +17247,10 @@ function() {
                 return e(o), [n, r, t]
             }
 
-            function dv(e) {
+            function db(e) {
                 var t, n = e.name;
                 if (!n) throw Error("`name` is a required option for createSlice");
-                var r = "function" == typeof e.initialState ? e.initialState : dm(e.initialState),
+                var r = "function" == typeof e.initialState ? e.initialState : dh(e.initialState),
                     o = e.reducers || {},
                     a = Object.keys(o),
                     i = {},
@@ -17235,24 +17258,24 @@ function() {
                     c = {};
 
                 function u() {
-                    var t = "function" == typeof e.extraReducers ? dh(e.extraReducers) : [e.extraReducers],
+                    var t = "function" == typeof e.extraReducers ? dv(e.extraReducers) : [e.extraReducers],
                         n = t[0],
                         o = t[1],
                         a = void 0 === o ? [] : o,
                         i = t[2],
                         c = void 0 === i ? void 0 : i,
-                        u = du(du({}, void 0 === n ? {} : n), l);
+                        u = ds(ds({}, void 0 === n ? {} : n), l);
                     return function(e, t, n) {
                         void 0 === n && (n = []);
-                        var r, o = "function" == typeof t ? dh(t) : [t, n, void 0],
+                        var r, o = "function" == typeof t ? dv(t) : [t, n, void 0],
                             a = o[0],
                             i = o[1],
                             l = o[2];
                         if ("function" == typeof e) r = function() {
-                            return dm(e())
+                            return dh(e())
                         };
                         else {
-                            var c = dm(e);
+                            var c = dh(e);
                             r = function() {
                                 return c
                             }
@@ -17260,7 +17283,7 @@ function() {
 
                         function u(e, t) {
                             void 0 === e && (e = r());
-                            var n = de([a[t.type]], i.filter(function(e) {
+                            var n = dt([a[t.type]], i.filter(function(e) {
                                 return (0, e.matcher)(t)
                             }).map(function(e) {
                                 return e.reducer
@@ -17269,11 +17292,11 @@ function() {
                                 return !!e
                             }).length && (n = [l]), n.reduce(function(e, n) {
                                 if (n)
-                                    if (sH(e)) {
+                                    if (sG(e)) {
                                         var r = n(e, t);
                                         return void 0 === r ? e : r
                                     } else {
-                                        if (sG(e)) return fG(e, function(e) {
+                                        if (s$(e)) return f$(e, function(e) {
                                             return n(e, t)
                                         });
                                         var r = n(e, t);
@@ -17298,7 +17321,7 @@ function() {
                 return a.forEach(function(e) {
                     var t, r, a = o[e],
                         u = n + "/" + e;
-                    "reducer" in a ? (t = a.reducer, r = a.prepare) : t = a, i[e] = t, l[u] = t, c[e] = r ? dd(u, r) : dd(u)
+                    "reducer" in a ? (t = a.reducer, r = a.prepare) : t = a, i[e] = t, l[u] = t, c[e] = r ? dp(u, r) : dp(u)
                 }), {
                     name: n,
                     reducer: function(e, n) {
@@ -17311,22 +17334,22 @@ function() {
                     }
                 }
             }
-            var db = function(e) {
+            var dg = function(e) {
                     void 0 === e && (e = 21);
                     for (var t = "", n = e; n--;) t += "ModuleSymbhasOwnPr-0123456789ABCDEFGHNRVfgctiUvz_KqYTJkLxpZXIjQW" [64 * Math.random() | 0];
                     return t
                 },
-                dg = ["name", "message", "stack", "code"],
-                dw = function(e, t) {
-                    this.payload = e, this.meta = t
-                },
+                dw = ["name", "message", "stack", "code"],
                 dS = function(e, t) {
                     this.payload = e, this.meta = t
                 },
-                dO = function(e) {
-                    if ((void 0 === e ? "undefined" : f4(e)) === "object" && null !== e) {
-                        for (var t = {}, n = 0; n < dg.length; n++) {
-                            var r = dg[n];
+                dO = function(e, t) {
+                    this.payload = e, this.meta = t
+                },
+                dx = function(e) {
+                    if ((void 0 === e ? "undefined" : f7(e)) === "object" && null !== e) {
+                        for (var t = {}, n = 0; n < dw.length; n++) {
+                            var r = dw[n];
                             "string" == typeof e[r] && (t[r] = e[r])
                         }
                         return t
@@ -17335,33 +17358,33 @@ function() {
                         message: String(e)
                     }
                 },
-                dx = function() {
+                dP = function() {
                     function e(e, t, n) {
-                        var r = dd(e + "/fulfilled", function(e, t, n, r) {
+                        var r = dp(e + "/fulfilled", function(e, t, n, r) {
                                 return {
                                     payload: e,
-                                    meta: ds(du({}, r || {}), {
+                                    meta: df(ds({}, r || {}), {
                                         arg: n,
                                         requestId: t,
                                         requestStatus: "fulfilled"
                                     })
                                 }
                             }),
-                            o = dd(e + "/pending", function(e, t, n) {
+                            o = dp(e + "/pending", function(e, t, n) {
                                 return {
                                     payload: void 0,
-                                    meta: ds(du({}, n || {}), {
+                                    meta: df(ds({}, n || {}), {
                                         arg: t,
                                         requestId: e,
                                         requestStatus: "pending"
                                     })
                                 }
                             }),
-                            a = dd(e + "/rejected", function(e, t, r, o, a) {
+                            a = dp(e + "/rejected", function(e, t, r, o, a) {
                                 return {
                                     payload: o,
-                                    error: (n && n.serializeError || dO)(e || "Rejected"),
-                                    meta: ds(du({}, a || {}), {
+                                    error: (n && n.serializeError || dx)(e || "Rejected"),
+                                    meta: df(ds({}, a || {}), {
                                         arg: r,
                                         requestId: t,
                                         rejectedWithValue: !!o,
@@ -17389,7 +17412,7 @@ function() {
                             }();
                         return Object.assign(function(e) {
                             return function(l, c, u) {
-                                var s, f = (null == n ? void 0 : n.idGenerator) ? n.idGenerator(e) : db(),
+                                var s, f = (null == n ? void 0 : n.idGenerator) ? n.idGenerator(e) : dg(),
                                     d = new i;
 
                                 function p(e) {
@@ -17399,14 +17422,14 @@ function() {
                                     var i, y;
                                     return i = this, y = function() {
                                         var i, y, m, h, v, b;
-                                        return f9(this, function(g) {
+                                        return de(this, function(g) {
                                             switch (g.label) {
                                                 case 0:
                                                     var w;
                                                     if (g.trys.push([0, 4, , 5]), null === (w = h = null == (i = null == n ? void 0 : n.condition) ? void 0 : i.call(n, e, {
                                                             getState: c,
                                                             extra: u
-                                                        })) || (void 0 === w ? "undefined" : f4(w)) !== "object" || "function" != typeof w.then) return [3, 2];
+                                                        })) || (void 0 === w ? "undefined" : f7(w)) !== "object" || "function" != typeof w.then) return [3, 2];
                                                     return [4, h];
                                                 case 1:
                                                     h = g.sent(), g.label = 2;
@@ -17436,19 +17459,19 @@ function() {
                                                         signal: d.signal,
                                                         abort: p,
                                                         rejectWithValue: function(e, t) {
-                                                            return new dw(e, t)
+                                                            return new dS(e, t)
                                                         },
                                                         fulfillWithValue: function(e, t) {
-                                                            return new dS(e, t)
+                                                            return new dO(e, t)
                                                         }
                                                     })).then(function(t) {
-                                                        if (f8(t, dw)) throw t;
-                                                        return f8(t, dS) ? r(t.payload, f, e, t.meta) : r(t, f, e)
+                                                        if (f4(t, dS)) throw t;
+                                                        return f4(t, dO) ? r(t.payload, f, e, t.meta) : r(t, f, e)
                                                     })])];
                                                 case 3:
                                                     return m = g.sent(), [3, 5];
                                                 case 4:
-                                                    return m = f8(b = g.sent(), dw) ? a(null, f, e, b.payload, b.meta) : a(b, f, e), [3, 5];
+                                                    return m = f4(b = g.sent(), dS) ? a(null, f, e, b.payload, b.meta) : a(b, f, e), [3, 5];
                                                 case 5:
                                                     return n && !n.dispatchConditionRejection && a.match(m) && m.meta.condition || l(m), [2, m]
                                             }
@@ -17479,7 +17502,7 @@ function() {
                                     requestId: f,
                                     arg: e,
                                     unwrap: function() {
-                                        return y.then(dP)
+                                        return y.then(dj)
                                     }
                                 })
                             }
@@ -17495,13 +17518,13 @@ function() {
                     }, e
                 }();
 
-            function dP(e) {
+            function dj(e) {
                 if (e.meta && e.meta.rejectedWithValue) throw e.payload;
                 if (e.error) throw e.error;
                 return e.payload
             }
-            var dj = "listenerMiddleware";
-            dd(dj + "/add"), dd(dj + "/removeAll"), dd(dj + "/remove"), "function" == typeof queueMicrotask && queueMicrotask.bind("u" > typeof window ? window : void 0 !== n.g ? n.g : globalThis), "u" > typeof window && window.requestAnimationFrame && window.requestAnimationFrame,
+            var dC = "listenerMiddleware";
+            dp(dC + "/add"), dp(dC + "/removeAll"), dp(dC + "/remove"), "function" == typeof queueMicrotask && queueMicrotask.bind("u" > typeof window ? window : void 0 !== n.g ? n.g : globalThis), "u" > typeof window && window.requestAnimationFrame && window.requestAnimationFrame,
                 function() {
                     function e(e, t) {
                         var n = o[e];
@@ -17509,42 +17532,42 @@ function() {
                             configurable: !0,
                             enumerable: t,
                             get: function() {
-                                var t = this[fV];
-                                return fz.get(t, e)
+                                var t = this[f_];
+                                return fq.get(t, e)
                             },
                             set: function(t) {
-                                var n = this[fV];
-                                fz.set(n, e, t)
+                                var n = this[f_];
+                                fq.set(n, e, t)
                             }
                         }, n
                     }
 
                     function t(e) {
                         for (var t = e.length - 1; t >= 0; t--) {
-                            var o = e[t][fV];
+                            var o = e[t][f_];
                             if (!o.P) switch (o.i) {
                                 case 5:
-                                    r(o) && fc(o);
+                                    r(o) && fu(o);
                                     break;
                                 case 4:
-                                    n(o) && fc(o)
+                                    n(o) && fu(o)
                             }
                         }
                     }
 
                     function n(e) {
-                        for (var t = e.t, n = e.k, r = fW(n), o = r.length - 1; o >= 0; o--) {
+                        for (var t = e.t, n = e.k, r = fK(n), o = r.length - 1; o >= 0; o--) {
                             var a = r[o];
-                            if (a !== fV) {
+                            if (a !== f_) {
                                 var i = t[a];
-                                if (void 0 === i && !sJ(t, a)) return !0;
+                                if (void 0 === i && !sY(t, a)) return !0;
                                 var l = n[a],
-                                    c = l && l[fV];
-                                if (c ? c.t !== i : !sQ(l, i)) return !0
+                                    c = l && l[f_];
+                                if (c ? c.t !== i : !sZ(l, i)) return !0
                             }
                         }
-                        var u = !!t[fV];
-                        return r.length !== fW(t).length + +!u
+                        var u = !!t[f_];
+                        return r.length !== fK(t).length + +!u
                     }
 
                     function r(e) {
@@ -17557,7 +17580,7 @@ function() {
                         return !1
                     }
                     var o = {};
-                    fB.ES5 || (fB.ES5 = {
+                    fz.ES5 || (fz.ES5 = {
                         J: function(t, n) {
                             var r = Array.isArray(t),
                                 o = function(t, n) {
@@ -17565,9 +17588,9 @@ function() {
                                         for (var r = Array(n.length), o = 0; o < n.length; o++) Object.defineProperty(r, "" + o, e(o, !0));
                                         return r
                                     }
-                                    var a = fK(n);
-                                    delete a[fV];
-                                    for (var i = fW(a), l = 0; l < i.length; l++) {
+                                    var a = fB(n);
+                                    delete a[f_];
+                                    for (var i = fK(a), l = 0; l < i.length; l++) {
                                         var c = i[l];
                                         a[c] = e(c, t || !!a[c].enumerable)
                                     }
@@ -17575,7 +17598,7 @@ function() {
                                 }(r, t),
                                 a = {
                                     i: r ? 5 : 4,
-                                    A: n ? n.A : fN,
+                                    A: n ? n.A : fD,
                                     P: !1,
                                     I: !1,
                                     R: {},
@@ -17586,27 +17609,27 @@ function() {
                                     g: !1,
                                     C: !1
                                 };
-                            return Object.defineProperty(o, fV, {
+                            return Object.defineProperty(o, f_, {
                                 value: a,
                                 writable: !0
                             }), o
                         },
                         S: function(e, n, o) {
-                            o ? sH(n) && n[fV].A === e && t(e.p) : (e.u && function e(t) {
-                                if (t && "object" == (void 0 === t ? "undefined" : sz(t))) {
-                                    var n = t[fV];
+                            o ? sG(n) && n[f_].A === e && t(e.p) : (e.u && function e(t) {
+                                if (t && "object" == (void 0 === t ? "undefined" : sq(t))) {
+                                    var n = t[f_];
                                     if (n) {
                                         var o = n.t,
                                             a = n.k,
                                             i = n.R,
                                             l = n.i;
-                                        if (4 === l) s$(a, function(t) {
-                                            t !== fV && (void 0 !== o[t] || sJ(o, t) ? i[t] || e(a[t]) : (i[t] = !0, fc(n)))
-                                        }), s$(o, function(e) {
-                                            void 0 !== a[e] || sJ(a, e) || (i[e] = !1, fc(n))
+                                        if (4 === l) sX(a, function(t) {
+                                            t !== f_ && (void 0 !== o[t] || sY(o, t) ? i[t] || e(a[t]) : (i[t] = !0, fu(n)))
+                                        }), sX(o, function(e) {
+                                            void 0 !== a[e] || sY(a, e) || (i[e] = !1, fu(n))
                                         });
                                         else if (5 === l) {
-                                            if (r(n) && (fc(n), i.length = !0), a.length < o.length)
+                                            if (r(n) && (fu(n), i.length = !0), a.length < o.length)
                                                 for (var c = a.length; c < o.length; c++) i[c] = !1;
                                             else
                                                 for (var u = o.length; u < a.length; u++) i[u] = !0;
@@ -17621,22 +17644,22 @@ function() {
                         }
                     })
                 }();
-            var dC = ((t = {}).VerificationStarted = "VERIFICATION_STARTED", t.verificationInProgress = "VERIFICATION_IN_PROGRESS", t.VerificationPending = "VERIFICATION_PENDING", t.VerificationFailed = "VERIFICATION_FAILED", t.VerificationSucceded = "VERIFICATION_SUCCEEDED", t.AMPCheckFailed = "AMP_CHECK_FAILED", t.EmailUpdateFailed = "EMAIL_UPDATE_FAILED", t),
-                dE = ((r = {}).Granted = "Granted", r.Denied = "Denied", r.Actionable = "Actionable", r),
-                dA = window.CoreRobloxUtilities,
-                dT = function(e, t, n) {
-                    dA.eventStreamService.sendEventWithTarget(e, t, n)
+            var dE = ((t = {}).VerificationStarted = "VERIFICATION_STARTED", t.verificationInProgress = "VERIFICATION_IN_PROGRESS", t.VerificationPending = "VERIFICATION_PENDING", t.VerificationFailed = "VERIFICATION_FAILED", t.VerificationSucceded = "VERIFICATION_SUCCEEDED", t.AMPCheckFailed = "AMP_CHECK_FAILED", t.EmailUpdateFailed = "EMAIL_UPDATE_FAILED", t),
+                dA = ((r = {}).Granted = "Granted", r.Denied = "Denied", r.Actionable = "Actionable", r),
+                dT = window.CoreRobloxUtilities,
+                dI = function(e, t, n) {
+                    dT.eventStreamService.sendEventWithTarget(e, t, n)
                 },
-                dI = au.EnvironmentUrls.apiGatewayUrl,
-                dk = function(e, t, n, r) {
+                dk = au.EnvironmentUrls.apiGatewayUrl,
+                dN = function(e, t, n, r) {
                     var o, a = t ? btoa(JSON.stringify(t)) : null,
                         i = (o = null != a ? a : void 0, {
                             retryable: !0,
                             withCredentials: !0,
-                            url: "".concat(dI, "/access-management/v1/upsell-feature-access?featureName=").concat(e).concat(o ? "&extraParameters=".concat(o) : "").concat(n ? "&successfulActions=".concat(n) : "").concat(r ? "&namespace=".concat(encodeURIComponent(r)) : "")
+                            url: "".concat(dk, "/access-management/v1/upsell-feature-access?featureName=").concat(e).concat(o ? "&extraParameters=".concat(o) : "").concat(n ? "&successfulActions=".concat(n) : "").concat(r ? "&namespace=".concat(encodeURIComponent(r)) : "")
                         });
                     return new Promise(function(e) {
-                        sy.httpService.get(i).then(function(t) {
+                        sm.httpService.get(i).then(function(t) {
                             e(t.data)
                         }, function(e) {
                             throw e
@@ -17644,7 +17667,7 @@ function() {
                     })
                 };
 
-            function dN(e, t, n, r, o, a, i) {
+            function dD(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -17655,7 +17678,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function dD(e) {
+            function dM(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
@@ -17674,7 +17697,7 @@ function() {
                 return e
             }
 
-            function dM(e, t) {
+            function dR(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -17686,7 +17709,7 @@ function() {
                     Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
                 }), e
             }
-            var dR = {
+            var dU = {
                     featureName: null,
                     ampFeatureCheckData: void 0,
                     stage: null,
@@ -17702,7 +17725,7 @@ function() {
                     prologueUsed: !1,
                     namespace: null
                 },
-                dU = dx("accessManagement/fetchFeatureAccess", function(e, t) {
+                dL = dP("accessManagement/fetchFeatureAccess", function(e, t) {
                     var n;
                     return (n = function() {
                         var n, r, o;
@@ -17788,11 +17811,11 @@ function() {
                         }(this, function(a) {
                             switch (a.label) {
                                 case 0:
-                                    return a.trys.push([0, 2, , 3]), n = e.featureName, r = e.ampFeatureCheckData, [4, dk(n, r, e.successfulAction, e.namespace)];
+                                    return a.trys.push([0, 2, , 3]), n = e.featureName, r = e.ampFeatureCheckData, [4, dN(n, r, e.successfulAction, e.namespace)];
                                 case 1:
                                     return [2, a.sent()];
                                 case 2:
-                                    return o = a.sent(), dT(dC.AMPCheckFailed, null, {
+                                    return o = a.sent(), dI(dE.AMPCheckFailed, null, {
                                         error: JSON.stringify(o)
                                     }), [2, t.rejectWithValue("Failed to fetch AMP response")];
                                 case 3:
@@ -17806,22 +17829,22 @@ function() {
                             var a = n.apply(e, t);
 
                             function i(e) {
-                                dN(a, r, o, i, l, "next", e)
+                                dD(a, r, o, i, l, "next", e)
                             }
 
                             function l(e) {
-                                dN(a, r, o, i, l, "throw", e)
+                                dD(a, r, o, i, l, "throw", e)
                             }
                             i(void 0)
                         })
                     })()
                 }),
-                dL = dv({
+                dF = db({
                     name: "accessManagement",
-                    initialState: dR,
+                    initialState: dU,
                     reducers: {
                         resetAccessManagementStore: function() {
-                            return dR
+                            return dU
                         },
                         setFeatureName: function(e, t) {
                             e.featureName = t.payload
@@ -17855,69 +17878,69 @@ function() {
                         }
                     },
                     extraReducers: function(e) {
-                        e.addCase(dU.pending, function(e) {
+                        e.addCase(dL.pending, function(e) {
                             e.featureAccess.loading = !0
-                        }).addCase(dU.fulfilled, function(e, t) {
+                        }).addCase(dL.fulfilled, function(e, t) {
                             var n, r = t.payload;
-                            e.featureAccess = dM(dD({}, e.featureAccess), {
+                            e.featureAccess = dR(dM({}, e.featureAccess), {
                                 loading: !1,
                                 data: r
-                            }), e.featureName = r.featureName, r.access !== dE.Granted && (e.showUpsell = !0), r.access === dE.Actionable && (e.verificationStageRecourse = null != (n = r.recourses[0]) ? n : null)
-                        }).addCase(dU.rejected, function(e, t) {
-                            e.featureAccess = dM(dD({}, e.featureAccess), {
+                            }), e.featureName = r.featureName, r.access !== dA.Granted && (e.showUpsell = !0), r.access === dA.Actionable && (e.verificationStageRecourse = null != (n = r.recourses[0]) ? n : null)
+                        }).addCase(dL.rejected, function(e, t) {
+                            e.featureAccess = dR(dM({}, e.featureAccess), {
                                 loading: !1,
                                 error: t.error.message || "Something went wrong"
                             })
                         })
                     }
                 }),
-                dF = dL.actions,
-                dV = dF.resetAccessManagementStore,
-                d_ = (dF.setFeatureAccess, dF.setFeatureName, dF.setAmpFeatureCheckData),
-                dW = dF.setRedirectLink,
-                dK = dF.setVerificationStageRecourse,
-                dB = (dF.showUpsell, dF.setStage),
-                dz = dF.setPrologueUsed,
-                dq = dF.setNamespace,
-                dH = function(e) {
+                dV = dF.actions,
+                d_ = dV.resetAccessManagementStore,
+                dW = (dV.setFeatureAccess, dV.setFeatureName, dV.setAmpFeatureCheckData),
+                dK = dV.setRedirectLink,
+                dB = dV.setVerificationStageRecourse,
+                dz = (dV.showUpsell, dV.setStage),
+                dq = dV.setPrologueUsed,
+                dH = dV.setNamespace,
+                dG = function(e) {
                     return e.accessManagement
                 },
-                dG = function(e) {
+                d$ = function(e) {
                     return e.accessManagement.showUpsell
                 },
-                d$ = function(e) {
+                dX = function(e) {
                     return e.accessManagement.featureName
                 },
-                dX = function(e) {
+                dJ = function(e) {
                     return e.accessManagement.ampFeatureCheckData
                 },
-                dJ = function(e) {
+                dY = function(e) {
                     return e.accessManagement.featureAccess
                 },
-                dY = function(e) {
+                dQ = function(e) {
                     return e.accessManagement.stage
                 },
-                dQ = function(e) {
+                dZ = function(e) {
                     return e.accessManagement.verificationStageRecourse
                 },
-                dZ = function(e) {
+                d0 = function(e) {
                     return e.accessManagement.prologueUsed
                 },
-                d0 = function(e) {
+                d1 = function(e) {
                     return e.accessManagement.namespace
                 },
-                d1 = dL.reducer,
-                d2 = ((o = {})[o.Unknown = 0] = "Unknown", o[o.Success = 1] = "Success", o[o.Failure = 2] = "Failure", o[o.RequiresManualReview = 3] = "RequiresManualReview", o[o.RequiresRetry = 4] = "RequiresRetry", o[o.Started = 5] = "Started", o[o.Submitted = 6] = "Submitted", o[o.Stored = 7] = "Stored", o[o.Expired = 8] = "Expired", o),
-                d3 = ((a = {})[a.NoError = 0] = "NoError", a[a.UnknownError = 1] = "UnknownError", a[a.InvalidDocument = 2] = "InvalidDocument", a[a.InvalidSelfie = 3] = "InvalidSelfie", a[a.BelowMinimumAge = 4] = "BelowMinimumAge", a[a.LowQualityMedia = 5] = "LowQualityMedia", a[a.DocumentUnsupported = 6] = "DocumentUnsupported", a),
-                d5 = ((i = {})[i.LANDING = 0] = "LANDING", i[i.EMAIL = 1] = "EMAIL", i[i.MODAL = 2] = "MODAL", i[i.SUCCESS_GENERIC = 3] = "SUCCESS_GENERIC", i[i.FAILURE = 4] = "FAILURE", i[i.PENDING = 5] = "PENDING", i[i.POLLING = 6] = "POLLING", i[i.EMAIL_CONTINUE = 7] = "EMAIL_CONTINUE", i[i.EXTERNAL_EMAIL = 8] = "EXTERNAL_EMAIL", i[i.ERROR = 9] = "ERROR", i[i.TEMP_BAN = 10] = "TEMP_BAN", i[i.VENDOR_LINK = 11] = "VENDOR_LINK", i);
+                d2 = dF.reducer,
+                d3 = ((o = {})[o.Unknown = 0] = "Unknown", o[o.Success = 1] = "Success", o[o.Failure = 2] = "Failure", o[o.RequiresManualReview = 3] = "RequiresManualReview", o[o.RequiresRetry = 4] = "RequiresRetry", o[o.Started = 5] = "Started", o[o.Submitted = 6] = "Submitted", o[o.Stored = 7] = "Stored", o[o.Expired = 8] = "Expired", o),
+                d5 = ((a = {})[a.NoError = 0] = "NoError", a[a.UnknownError = 1] = "UnknownError", a[a.InvalidDocument = 2] = "InvalidDocument", a[a.InvalidSelfie = 3] = "InvalidSelfie", a[a.BelowMinimumAge = 4] = "BelowMinimumAge", a[a.LowQualityMedia = 5] = "LowQualityMedia", a[a.DocumentUnsupported = 6] = "DocumentUnsupported", a),
+                d6 = ((i = {})[i.LANDING = 0] = "LANDING", i[i.EMAIL = 1] = "EMAIL", i[i.MODAL = 2] = "MODAL", i[i.SUCCESS_GENERIC = 3] = "SUCCESS_GENERIC", i[i.FAILURE = 4] = "FAILURE", i[i.PENDING = 5] = "PENDING", i[i.POLLING = 6] = "POLLING", i[i.EMAIL_CONTINUE = 7] = "EMAIL_CONTINUE", i[i.EXTERNAL_EMAIL = 8] = "EXTERNAL_EMAIL", i[i.ERROR = 9] = "ERROR", i[i.TEMP_BAN = 10] = "TEMP_BAN", i[i.VENDOR_LINK = 11] = "VENDOR_LINK", i);
 
-            function d6(e, t) {
+            function d8(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function d8(e) {
+            function d4(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
@@ -17936,7 +17959,7 @@ function() {
                 return e
             }
 
-            function d4(e, t) {
+            function d7(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -17949,36 +17972,36 @@ function() {
                 }), e
             }
 
-            function d7(e) {
+            function d9(e) {
                 return function(e) {
-                    if (Array.isArray(e)) return d6(e)
+                    if (Array.isArray(e)) return d8(e)
                 }(e) || function(e) {
                     if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                 }(e) || function(e) {
                     if (e) {
-                        if ("string" == typeof e) return d6(e, void 0);
+                        if ("string" == typeof e) return d8(e, void 0);
                         var t = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return d6(e, void 0)
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return d8(e, void 0)
                     }
                 }(e) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var d9 = [{
+            var pe = [{
                     label: "Label.ConnectingToMobile",
-                    statusCode: [d2.Unknown]
+                    statusCode: [d3.Unknown]
                 }, {
                     label: "Label.VerifyingYou",
-                    statusCode: [d2.Started]
+                    statusCode: [d3.Started]
                 }, {
                     label: "Label.VerificationWaitingForResults",
-                    statusCode: [d2.Submitted]
+                    statusCode: [d3.Submitted]
                 }, {
                     label: "Label.UpdatingRoblox",
-                    statusCode: [d2.Success, d2.Stored]
+                    statusCode: [d3.Success, d3.Stored]
                 }],
-                pe = function(e) {
+                pt = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [],
                         n = {
                             heading: "Heading.VerificationSuccessful",
@@ -17988,55 +18011,55 @@ function() {
                             footerText: null
                         };
                     switch (e) {
-                        case d5.SUCCESS_GENERIC:
+                        case d6.SUCCESS_GENERIC:
                             break;
-                        case d5.FAILURE:
-                            n = d4(d8({}, n), {
+                        case d6.FAILURE:
+                            n = d7(d4({}, n), {
                                 heading: "Heading.VerificationFailed",
                                 icon: "failure-icon",
                                 bodyText: ["Label.FailedVerification"],
                                 buttonText: "Action.Close"
                             });
                             break;
-                        case d5.PENDING:
-                            n = d4(d8({}, n), {
+                        case d6.PENDING:
+                            n = d7(d4({}, n), {
                                 heading: "Heading.VerificationPending",
                                 icon: "failure-icon",
                                 bodyText: ["Label.PendingVerification"],
                                 buttonText: "Action.Close"
                             });
                             break;
-                        case d5.ERROR:
-                            n = d4(d8({}, n), {
+                        case d6.ERROR:
+                            n = d7(d4({}, n), {
                                 heading: "Heading.Error",
                                 icon: "failure-icon",
                                 bodyText: ["Modal.Failed.Text"]
                             });
                             break;
-                        case d5.TEMP_BAN:
-                            n = d4(d8({}, n), {
+                        case d6.TEMP_BAN:
+                            n = d7(d4({}, n), {
                                 heading: "Heading.Error",
                                 icon: "failure-icon",
                                 bodyText: ["Label.VerificationDeclined"]
                             });
-                        case d5.LANDING:
-                        case d5.EMAIL:
-                        case d5.MODAL:
-                        case d5.POLLING:
-                        case d5.EMAIL_CONTINUE:
-                        case d5.EXTERNAL_EMAIL:
-                        case d5.VENDOR_LINK:
+                        case d6.LANDING:
+                        case d6.EMAIL:
+                        case d6.MODAL:
+                        case d6.POLLING:
+                        case d6.EMAIL_CONTINUE:
+                        case d6.EXTERNAL_EMAIL:
+                        case d6.VENDOR_LINK:
                     }
-                    return n.bodyText = d7(n.bodyText).concat(d7(t)), n
+                    return n.bodyText = d9(n.bodyText).concat(d9(t)), n
                 },
-                pt = "Heading.CheckAgeOnMobileApp",
-                pn = "Label.ScanQRCodeToAgeCheck",
-                pr = "Label.DownloadAppFallback",
-                po = ((l = {}).Prologue = "PROLOGUE", l.Verification = "VERIFICATION", l.Epilogue = "EPILOGUE", l),
-                pa = ((c = {})[c.VendorLink = 0] = "VendorLink", c[c.Checklist = 1] = "Checklist", c[c.Complete = 2] = "Complete", c),
-                pi = ((u = pi || {}).GovernmentId = "GovernmentId", u.Phone = "PHONE", u.Email = "EMAIL", u.AddedEmail = "AddedEmail", u.ParentConsentRequest = "ParentConsent", u.ParentLinkRequest = "ParentLink", u.AgeEstimation = "AgeEstimation", u.UserSettings = "UserSettings", u),
-                pl = au.EnvironmentUrls.apiGatewayUrl,
-                pc = function(e, t, n) {
+                pn = "Heading.CheckAgeOnMobileApp",
+                pr = "Label.ScanQRCodeToAgeCheck",
+                po = "Label.DownloadAppFallback",
+                pa = ((l = {}).Prologue = "PROLOGUE", l.Verification = "VERIFICATION", l.Epilogue = "EPILOGUE", l),
+                pi = ((c = {})[c.VendorLink = 0] = "VendorLink", c[c.Checklist = 1] = "Checklist", c[c.Complete = 2] = "Complete", c),
+                pl = ((u = pl || {}).GovernmentId = "GovernmentId", u.Phone = "PHONE", u.Email = "EMAIL", u.AddedEmail = "AddedEmail", u.ParentConsentRequest = "ParentConsent", u.ParentLinkRequest = "ParentLink", u.AgeEstimation = "AgeEstimation", u.UserSettings = "UserSettings", u),
+                pc = au.EnvironmentUrls.apiGatewayUrl,
+                pu = function(e, t, n) {
                     var r = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var n = null != arguments[t] ? arguments[t] : {},
@@ -18061,19 +18084,19 @@ function() {
                     }, n && {
                         template: n
                     });
-                    return sy.httpService.post({
+                    return sm.httpService.post({
                         retryable: !0,
                         withCredentials: !0,
-                        url: "".concat(pl, "/age-verification-service/v1/persona-id-verification/start-verification")
+                        url: "".concat(pc, "/age-verification-service/v1/persona-id-verification/start-verification")
                     }, r).then(function(e) {
                         return e.data
                     }).catch(function(e) {
-                        var t = sy.httpService.parseErrorCode(e);
+                        var t = sm.httpService.parseErrorCode(e);
                         throw Error("Error to start ID verification: ".concat(t || "unknown"))
                     })
                 };
 
-            function pu(e, t, n, r, o, a, i) {
+            function ps(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -18084,7 +18107,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function ps(e) {
+            function pf(e) {
                 return function() {
                     var t = this,
                         n = arguments;
@@ -18092,18 +18115,18 @@ function() {
                         var a = e.apply(t, n);
 
                         function i(e) {
-                            pu(a, r, o, i, l, "next", e)
+                            ps(a, r, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            pu(a, r, o, i, l, "throw", e)
+                            ps(a, r, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 }
             }
 
-            function pf(e) {
+            function pd(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
@@ -18122,7 +18145,7 @@ function() {
                 return e
             }
 
-            function pd(e, t) {
+            function pp(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -18135,7 +18158,7 @@ function() {
                 }), e
             }
 
-            function pp(e, t) {
+            function py(e, t) {
                 var n, r, o, a = {
                         label: 0,
                         sent: function() {
@@ -18215,10 +18238,10 @@ function() {
                     }
                 }
             }
-            var py = {
+            var pm = {
                     verified: null,
                     IDVerificationState: {
-                        page: pa.VendorLink,
+                        page: pi.VendorLink,
                         vendorVerificationData: {
                             daysUntilNextVerification: 0,
                             sessionIdentifier: null,
@@ -18235,27 +18258,27 @@ function() {
                     },
                     loading: null
                 },
-                pm = function(e) {
+                ph = function(e) {
                     return e.verification.IDVerificationState
                 },
-                ph = function(e) {
+                pv = function(e) {
                     return e.verification.loading
                 },
-                pv = dx("verification/startIDVerification", function(e, t) {
+                pb = dP("verification/startIDVerification", function(e, t) {
                     var n = e.ageEstimation,
                         r = e.parentVerification,
                         o = void 0 !== r && r,
                         a = e.template;
-                    return ps(function() {
+                    return pf(function() {
                         var e, r;
-                        return pp(this, function(i) {
+                        return py(this, function(i) {
                             switch (i.label) {
                                 case 0:
-                                    return i.trys.push([0, 2, , 3]), [4, pc(n, o, a)];
+                                    return i.trys.push([0, 2, , 3]), [4, pu(n, o, a)];
                                 case 1:
                                     return [2, i.sent()];
                                 case 2:
-                                    return e = i.sent(), r = n ? pi.AgeEstimation : pi.GovernmentId, dT(dC.VerificationFailed, r, {
+                                    return e = i.sent(), r = n ? pl.AgeEstimation : pl.GovernmentId, dI(dE.VerificationFailed, r, {
                                         error: JSON.stringify(e)
                                     }), [2, t.rejectWithValue("Failed to start ID Verification")];
                                 case 3:
@@ -18264,28 +18287,28 @@ function() {
                         })
                     })()
                 }),
-                pb = dx("verification/fetchIDVerificationStatus", function(e, t) {
-                    return ps(function() {
+                pg = dP("verification/fetchIDVerificationStatus", function(e, t) {
+                    return pf(function() {
                         var n, r;
-                        return pp(this, function(o) {
+                        return py(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    return o.trys.push([0, 2, , 3]), [4, sy.httpService.get({
+                                    return o.trys.push([0, 2, , 3]), [4, sm.httpService.get({
                                         retryable: !0,
                                         withCredentials: !0,
-                                        url: "".concat(pl, "/age-verification-service/v1/persona-id-verification/verified-status")
+                                        url: "".concat(pc, "/age-verification-service/v1/persona-id-verification/verified-status")
                                     }, {
                                         token: e
                                     }).then(function(e) {
                                         return e.data
                                     }).catch(function(e) {
-                                        var t = sy.httpService.parseErrorCode(e);
+                                        var t = sm.httpService.parseErrorCode(e);
                                         throw Error("Error to get ID verification status: ".concat(t || "unknown"))
                                     })];
                                 case 1:
                                     return [2, o.sent()];
                                 case 2:
-                                    return n = o.sent(), r = t.getState().verification.IDVerificationState.isAgeEstimation ? pi.AgeEstimation : pi.GovernmentId, dT(dC.VerificationFailed, r, {
+                                    return n = o.sent(), r = t.getState().verification.IDVerificationState.isAgeEstimation ? pl.AgeEstimation : pl.GovernmentId, dI(dE.VerificationFailed, r, {
                                         error: JSON.stringify(n)
                                     }), [2, t.rejectWithValue("Failed to fetch ID Verification status")];
                                 case 3:
@@ -18294,18 +18317,18 @@ function() {
                         })
                     })()
                 }),
-                pg = dv({
+                pw = db({
                     name: "verification",
-                    initialState: py,
+                    initialState: pm,
                     reducers: {
                         resetVerificationStore: function() {
-                            return py
+                            return pm
                         },
                         setVerified: function(e, t) {
                             e.verified = t.payload
                         },
                         setIDVerificationState: function(e, t) {
-                            e.IDVerificationState = pf({}, t.payload)
+                            e.IDVerificationState = pd({}, t.payload)
                         },
                         setIDVPage: function(e, t) {
                             e.IDVerificationState.page = t.payload
@@ -18315,41 +18338,41 @@ function() {
                         }
                     },
                     extraReducers: function(e) {
-                        e.addCase(pv.pending, function(e, t) {
+                        e.addCase(pb.pending, function(e, t) {
                             var n = e.IDVerificationState.vendorVerificationData;
-                            n.loading = !0, e.IDVerificationState = pd(pf({}, e.IDVerificationState), {
+                            n.loading = !0, e.IDVerificationState = pp(pd({}, e.IDVerificationState), {
                                 vendorVerificationData: n,
                                 loading: !0
                             }), e.loading = !0
-                        }).addCase(pv.fulfilled, function(e, t) {
+                        }).addCase(pb.fulfilled, function(e, t) {
                             var n = t.payload,
                                 r = n.daysUntilNextVerification,
                                 o = t.meta.arg.ageEstimation,
                                 a = null,
                                 i = e.IDVerificationState.page;
-                            n.loading = !1, null != r && r > 0 && (a = pe(d5.TEMP_BAN), i = pa.Complete, e.loading = !1), e.IDVerificationState = pd(pf({}, e.IDVerificationState), {
+                            n.loading = !1, null != r && r > 0 && (a = pt(d6.TEMP_BAN), i = pi.Complete, e.loading = !1), e.IDVerificationState = pp(pd({}, e.IDVerificationState), {
                                 vendorVerificationData: n,
                                 completionPageState: a,
                                 page: i,
                                 loading: !1,
                                 isAgeEstimation: o
                             })
-                        }).addCase(pv.rejected, function(e, t) {
+                        }).addCase(pb.rejected, function(e, t) {
                             var n = e.IDVerificationState.vendorVerificationData;
-                            n.loading = !1, e.IDVerificationState = pd(pf({}, e.IDVerificationState), {
+                            n.loading = !1, e.IDVerificationState = pp(pd({}, e.IDVerificationState), {
                                 vendorVerificationData: n,
-                                completionPageState: pe(d5.ERROR),
+                                completionPageState: pt(d6.ERROR),
                                 loading: !1,
                                 error: t.error.message || "Something went wrong"
                             }), e.loading = !1
-                        }).addCase(pb.pending, function(e) {
-                            e.IDVerificationState = pd(pf({}, e.IDVerificationState), {
+                        }).addCase(pg.pending, function(e) {
+                            e.IDVerificationState = pp(pd({}, e.IDVerificationState), {
                                 loading: !0
                             })
-                        }).addCase(pb.fulfilled, function(e, t) {
+                        }).addCase(pg.fulfilled, function(e, t) {
                             if (e.IDVerificationState.isAgeEstimation) {
                                 var n = t.payload;
-                                e.IDVerificationState = pd(pf({}, e.IDVerificationState), {
+                                e.IDVerificationState = pp(pd({}, e.IDVerificationState), {
                                     loading: !1,
                                     status: n
                                 })
@@ -18357,88 +18380,88 @@ function() {
                                 var r, o = t.payload,
                                     a = e.IDVerificationState.page;
                                 switch (o.sessionStatus) {
-                                    case d2.RequiresRetry:
-                                    case d2.Failure:
-                                        switch (a = pa.Complete, o.sessionErrorCode) {
-                                            case d3.InvalidDocument:
-                                            case d3.BelowMinimumAge:
-                                                r = pe(d5.FAILURE, ["Label.FailedVerificationInvalidDocument"]);
+                                    case d3.RequiresRetry:
+                                    case d3.Failure:
+                                        switch (a = pi.Complete, o.sessionErrorCode) {
+                                            case d5.InvalidDocument:
+                                            case d5.BelowMinimumAge:
+                                                r = pt(d6.FAILURE, ["Label.FailedVerificationInvalidDocument"]);
                                                 break;
-                                            case d3.LowQualityMedia:
-                                            case d3.InvalidSelfie:
-                                                r = pe(d5.FAILURE, ["Label.FailedVerificationLowQuality"]);
+                                            case d5.LowQualityMedia:
+                                            case d5.InvalidSelfie:
+                                                r = pt(d6.FAILURE, ["Label.FailedVerificationLowQuality"]);
                                                 break;
-                                            case d3.DocumentUnsupported:
-                                                r = pe(d5.FAILURE, ["Label.FailedVerificationUnsupportedDocument"]);
+                                            case d5.DocumentUnsupported:
+                                                r = pt(d6.FAILURE, ["Label.FailedVerificationUnsupportedDocument"]);
                                                 break;
                                             default:
-                                                r = pe(d5.FAILURE)
+                                                r = pt(d6.FAILURE)
                                         }
                                         break;
-                                    case d2.RequiresManualReview:
-                                        a = pa.Complete, r = pe(d5.PENDING);
+                                    case d3.RequiresManualReview:
+                                        a = pi.Complete, r = pt(d6.PENDING);
                                         break;
-                                    case d2.Success:
-                                    case d2.Stored:
-                                        a = pa.Complete, r = pe(d5.SUCCESS_GENERIC);
+                                    case d3.Success:
+                                    case d3.Stored:
+                                        a = pi.Complete, r = pt(d6.SUCCESS_GENERIC);
                                         break;
-                                    case d2.Started:
-                                        a = pa.Checklist, dT(dC.VerificationStarted, pi.GovernmentId, {
+                                    case d3.Started:
+                                        a = pi.Checklist, dI(dE.VerificationStarted, pl.GovernmentId, {
                                             session: e.IDVerificationState.vendorVerificationData.sessionIdentifier
                                         });
                                         break;
-                                    case d2.Submitted:
-                                        dT(dC.verificationInProgress, pi.GovernmentId, {
+                                    case d3.Submitted:
+                                        dI(dE.verificationInProgress, pl.GovernmentId, {
                                             session: e.IDVerificationState.vendorVerificationData.sessionIdentifier
                                         })
                                 }
-                                e.IDVerificationState = pd(pf({}, e.IDVerificationState), {
+                                e.IDVerificationState = pp(pd({}, e.IDVerificationState), {
                                     loading: !1,
                                     status: o,
                                     completionPageState: r,
                                     page: a
                                 })
                             }
-                        }).addCase(pb.rejected, function(e, t) {
-                            e.IDVerificationState = pd(pf({}, e.IDVerificationState), {
+                        }).addCase(pg.rejected, function(e, t) {
+                            e.IDVerificationState = pp(pd({}, e.IDVerificationState), {
                                 loading: !1,
                                 error: t.error.message || "Something went wrong"
                             })
                         })
                     }
                 }),
-                pw = pg.actions,
-                pS = pw.resetVerificationStore,
-                pO = (pw.setVerified, pw.setIDVerificationState, pw.setIDVPage, pw.setLoading),
-                px = pg.reducer;
+                pS = pw.actions,
+                pO = pS.resetVerificationStore,
+                px = (pS.setVerified, pS.setIDVerificationState, pS.setIDVPage, pS.setLoading),
+                pP = pw.reducer;
             au.EnvironmentUrls.apiGatewayUrl;
-            var pP = au.EnvironmentUrls.accountSettingsApi;
+            var pj = au.EnvironmentUrls.accountSettingsApi;
             au.EnvironmentUrls.voiceApi;
-            var pj = function() {
+            var pC = function() {
                     return {
                         retryable: !0,
                         withCredentials: !0,
-                        url: "".concat(pP, "/v1/email")
+                        url: "".concat(pj, "/v1/email")
                     }
                 },
-                pC = function(e) {
-                    var t = pj();
-                    return sy.httpService.post(t, e).then(function() {
+                pE = function(e) {
+                    var t = pC();
+                    return sm.httpService.post(t, e).then(function() {
                         return !0
                     }).catch(function(e) {
                         throw Error("Error to update email address: ".concat(JSON.stringify(e)))
                     })
                 },
-                pE = function() {
-                    var e = pj();
-                    return sy.httpService.get(e).then(function(e) {
+                pA = function() {
+                    var e = pC();
+                    return sm.httpService.get(e).then(function(e) {
                         return e.data
                     }).catch(function(e) {
                         throw Error("Error to get email address: ".concat(JSON.stringify(e)))
                     })
                 };
 
-            function pA(e, t, n, r, o, a, i) {
+            function pT(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -18449,7 +18472,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function pT(e) {
+            function pI(e) {
                 return function() {
                     var t = this,
                         n = arguments;
@@ -18457,18 +18480,18 @@ function() {
                         var a = e.apply(t, n);
 
                         function i(e) {
-                            pA(a, r, o, i, l, "next", e)
+                            pT(a, r, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            pA(a, r, o, i, l, "throw", e)
+                            pT(a, r, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 }
             }
 
-            function pI(e, t) {
+            function pk(e, t) {
                 var n, r, o, a = {
                         label: 0,
                         sent: function() {
@@ -18548,26 +18571,26 @@ function() {
                     }
                 }
             }
-            var pk = {
+            var pN = {
                     emailAddress: null,
                     isEmailVerified: !1,
                     isEmailAdded: !1,
                     loading: !1,
                     error: !1
                 },
-                pN = dx("emailVerification/updateUserEmail", function(e, t) {
-                    return pT(function() {
+                pD = dP("emailVerification/updateUserEmail", function(e, t) {
+                    return pI(function() {
                         var n;
-                        return pI(this, function(r) {
+                        return pk(this, function(r) {
                             switch (r.label) {
                                 case 0:
-                                    return r.trys.push([0, 2, , 3]), [4, pC({
+                                    return r.trys.push([0, 2, , 3]), [4, pE({
                                         emailAddress: e
                                     })];
                                 case 1:
                                     return [2, r.sent()];
                                 case 2:
-                                    return n = r.sent(), dT(dC.EmailUpdateFailed, pi.AddedEmail, {
+                                    return n = r.sent(), dI(dE.EmailUpdateFailed, pl.AddedEmail, {
                                         error: JSON.stringify(n)
                                     }), [2, t.rejectWithValue("Failed to update email address")];
                                 case 3:
@@ -18576,17 +18599,17 @@ function() {
                         })
                     })()
                 }),
-                pD = dx("emailVerification/getUserEmailStatus", function(e, t) {
-                    return pT(function() {
+                pM = dP("emailVerification/getUserEmailStatus", function(e, t) {
+                    return pI(function() {
                         var e;
-                        return pI(this, function(n) {
+                        return pk(this, function(n) {
                             switch (n.label) {
                                 case 0:
-                                    return n.trys.push([0, 2, , 3]), [4, pE()];
+                                    return n.trys.push([0, 2, , 3]), [4, pA()];
                                 case 1:
                                     return [2, n.sent()];
                                 case 2:
-                                    return e = n.sent(), dT(dC.EmailUpdateFailed, pi.AddedEmail, {
+                                    return e = n.sent(), dI(dE.EmailUpdateFailed, pl.AddedEmail, {
                                         error: JSON.stringify(e)
                                     }), [2, t.rejectWithValue("Failed to fetch email address")];
                                 case 3:
@@ -18595,44 +18618,44 @@ function() {
                         })
                     })()
                 }),
-                pM = dv({
+                pR = db({
                     name: "emailVerification",
-                    initialState: pk,
+                    initialState: pN,
                     reducers: {
                         resetEmailVerificationStore: function() {
-                            return pk
+                            return pN
                         },
                         setUserEmailData: function(e, t) {
                             e.emailAddress = t.payload
                         }
                     },
                     extraReducers: function(e) {
-                        e.addCase(pN.pending, function(e) {
-                            e.loading = !0
-                        }).addCase(pN.fulfilled, function(e, t) {
-                            e.isEmailAdded = !0, e.loading = !1
-                        }).addCase(pN.rejected, function(e, t) {
-                            e.loading = !1, e.error = !0
-                        }).addCase(pD.pending, function(e) {
+                        e.addCase(pD.pending, function(e) {
                             e.loading = !0
                         }).addCase(pD.fulfilled, function(e, t) {
+                            e.isEmailAdded = !0, e.loading = !1
+                        }).addCase(pD.rejected, function(e, t) {
+                            e.loading = !1, e.error = !0
+                        }).addCase(pM.pending, function(e) {
+                            e.loading = !0
+                        }).addCase(pM.fulfilled, function(e, t) {
                             var n = t.payload;
                             e.emailAddress = n.emailAddress, e.isEmailVerified = n.isEmailVerified, e.loading = !1
-                        }).addCase(pD.rejected, function(e) {
+                        }).addCase(pM.rejected, function(e) {
                             e.loading = !1
                         })
                     }
                 }),
-                pR = pM.actions,
-                pU = pR.resetEmailVerificationStore;
-            pR.setUserEmailData;
-            var pL = function(e) {
+                pU = pR.actions,
+                pL = pU.resetEmailVerificationStore;
+            pU.setUserEmailData;
+            var pF = function(e) {
                     return e.emailVerification
                 },
-                pF = function(e) {
+                pV = function(e) {
                     var t, n = function(e) {
                             var t, n, r, o;
-                            return void 0 === (t = e) && (t = {}), r = void 0 === (n = t.thunk) || n, o = (t.immutableCheck, t.serializableCheck, t.actionCreatorCheck, new dp), r && ("boolean" == typeof r ? o.push(f6) : o.push(f6.withExtraArgument(r.extraArgument))), o
+                            return void 0 === (t = e) && (t = {}), r = void 0 === (n = t.thunk) || n, o = (t.immutableCheck, t.serializableCheck, t.actionCreatorCheck, new dy), r && ("boolean" == typeof r ? o.push(f8) : o.push(f8.withExtraArgument(r.extraArgument))), o
                         },
                         r = e || {},
                         o = r.reducer,
@@ -18646,7 +18669,7 @@ function() {
                         d = void 0 === f ? void 0 : f;
                     if ("function" == typeof a) t = a;
                     else if (function(e) {
-                            if ((void 0 === e ? "undefined" : f4(e)) !== "object" || null === e) return !1;
+                            if ((void 0 === e ? "undefined" : f7(e)) !== "object" || null === e) return !1;
                             var t = Object.getPrototypeOf(e);
                             if (null === t) return !0;
                             for (var n = t; null !== Object.getPrototypeOf(n);) n = Object.getPrototypeOf(n);
@@ -18661,11 +18684,11 @@ function() {
                             Object.keys(r).forEach(function(e) {
                                 var t = r[e];
                                 if (void 0 === t(void 0, {
-                                        type: f1.INIT
-                                    })) throw Error(fQ(12));
+                                        type: f2.INIT
+                                    })) throw Error(fZ(12));
                                 if (void 0 === t(void 0, {
-                                        type: f1.PROBE_UNKNOWN_ACTION()
-                                    })) throw Error(fQ(13))
+                                        type: f2.PROBE_UNKNOWN_ACTION()
+                                    })) throw Error(fZ(13))
                             })
                         } catch (e) {
                             t = e
@@ -18677,7 +18700,7 @@ function() {
                                     u = r[c],
                                     s = e[c],
                                     f = u(s, n);
-                                if (void 0 === f) throw n && n.type, Error(fQ(14));
+                                if (void 0 === f) throw n && n.type, Error(fZ(14));
                                 a[c] = f, o = o || f !== s
                             }
                             return (o = o || i.length !== Object.keys(e).length) ? a : e
@@ -18686,21 +18709,21 @@ function() {
                     else throw Error('"reducer" is a required argument, and must be a function or an object of functions that can be passed to combineReducers');
                     var p = l;
                     "function" == typeof p && (p = p(n));
-                    var y = f3.apply(void 0, p),
-                        m = f2;
-                    u && (m = df(du({
+                    var y = f5.apply(void 0, p),
+                        m = f3;
+                    u && (m = dd(ds({
                         trace: !1
-                    }, (void 0 === u ? "undefined" : f4(u)) === "object" && u)));
-                    var h = new dy(y),
+                    }, (void 0 === u ? "undefined" : f7(u)) === "object" && u)));
+                    var h = new dm(y),
                         v = h;
-                    return Array.isArray(d) ? v = de([y], d) : "function" == typeof d && (v = d(h)),
+                    return Array.isArray(d) ? v = dt([y], d) : "function" == typeof d && (v = d(h)),
                         function e(t, n, r) {
-                            if ("function" == typeof n && "function" == typeof r || "function" == typeof r && "function" == typeof arguments[3]) throw Error(fQ(0));
+                            if ("function" == typeof n && "function" == typeof r || "function" == typeof r && "function" == typeof arguments[3]) throw Error(fZ(0));
                             if ("function" == typeof n && void 0 === r && (r = n, n = void 0), void 0 !== r) {
-                                if ("function" != typeof r) throw Error(fQ(1));
+                                if ("function" != typeof r) throw Error(fZ(1));
                                 return r(e)(t, n)
                             }
-                            if ("function" != typeof t) throw Error(fQ(2));
+                            if ("function" != typeof t) throw Error(fZ(2));
                             var o, a = t,
                                 i = n,
                                 l = [],
@@ -18712,18 +18735,18 @@ function() {
                             }
 
                             function f() {
-                                if (u) throw Error(fQ(3));
+                                if (u) throw Error(fZ(3));
                                 return i
                             }
 
                             function d(e) {
-                                if ("function" != typeof e) throw Error(fQ(4));
-                                if (u) throw Error(fQ(5));
+                                if ("function" != typeof e) throw Error(fZ(4));
+                                if (u) throw Error(fZ(5));
                                 var t = !0;
                                 return s(), c.push(e),
                                     function() {
                                         if (t) {
-                                            if (u) throw Error(fQ(6));
+                                            if (u) throw Error(fZ(6));
                                             t = !1, s();
                                             var n = c.indexOf(e);
                                             c.splice(n, 1), l = null
@@ -18733,12 +18756,12 @@ function() {
 
                             function p(e) {
                                 if (! function(e) {
-                                        if ((void 0 === e ? "undefined" : fY(e)) !== "object" || null === e) return !1;
+                                        if ((void 0 === e ? "undefined" : fQ(e)) !== "object" || null === e) return !1;
                                         for (var t = e; null !== Object.getPrototypeOf(t);) t = Object.getPrototypeOf(t);
                                         return Object.getPrototypeOf(e) === t
-                                    }(e)) throw Error(fQ(7));
-                                if (void 0 === e.type) throw Error(fQ(8));
-                                if (u) throw Error(fQ(9));
+                                    }(e)) throw Error(fZ(7));
+                                if (void 0 === e.type) throw Error(fZ(8));
+                                if (u) throw Error(fZ(9));
                                 try {
                                     u = !0, i = a(i, e)
                                 } finally {
@@ -18748,22 +18771,22 @@ function() {
                                 return e
                             }
                             return p({
-                                type: f1.INIT
+                                type: f2.INIT
                             }), (o = {
                                 dispatch: p,
                                 subscribe: d,
                                 getState: f,
                                 replaceReducer: function(e) {
-                                    if ("function" != typeof e) throw Error(fQ(10));
+                                    if ("function" != typeof e) throw Error(fZ(10));
                                     a = e, p({
-                                        type: f1.REPLACE
+                                        type: f2.REPLACE
                                     })
                                 }
-                            })[fZ] = function() {
+                            })[f0] = function() {
                                 var e;
                                 return (e = {
                                     subscribe: function(e) {
-                                        if ((void 0 === e ? "undefined" : fY(e)) !== "object" || null === e) throw Error(fQ(11));
+                                        if ((void 0 === e ? "undefined" : fQ(e)) !== "object" || null === e) throw Error(fZ(11));
 
                                         function t() {
                                             e.next && e.next(f())
@@ -18772,56 +18795,56 @@ function() {
                                             unsubscribe: d(t)
                                         }
                                     }
-                                })[fZ] = function() {
+                                })[f0] = function() {
                                     return this
                                 }, e
                             }, o
                         }(t, void 0 === s ? void 0 : s, m.apply(void 0, v))
                 }({
                     reducer: {
-                        accessManagement: d1,
-                        verification: px,
-                        emailVerification: pM.reducer
+                        accessManagement: d2,
+                        verification: pP,
+                        emailVerification: pR.reducer
                     }
                 }),
-                pV = function() {
+                p_ = function() {
                     return Y()
                 },
-                p_ = "StartAccessManagementUpsell",
-                pW = "ShowDownloadAppModal",
-                pK = "Action.Continue",
-                pB = "Action.Cancel",
-                pz = "Action.EmailMyParent",
-                pq = "Action.VerifyID",
-                pH = "Action.AskNowLowercase",
-                pG = "Title.AskYourParent",
-                p$ = "Title.VerifyYourAge",
-                pX = "Title.CheckYourAge",
-                pJ = "Label.AddFriendVPC",
-                pY = "Description.PrologueTextVpc",
-                pQ = "Description.PrologueTextIdv",
-                pZ = "Description.PrologueTextFae",
-                p0 = "Description.PrologueTextIdvAndVpc",
-                p1 = "Description.PrologueIdvAndVpcAgeCorrection",
-                p2 = "Description.PrologueEnablePurchase",
-                p3 = "Description.PrologueUnblockUser",
-                p5 = "Description.PrologueUnblockExperience",
-                p6 = "Description.CommsAgeCheck.VPCForFAEModal",
-                p8 = "Description.PrologueJoinExperience",
-                p4 = "Description.CommsAgeCheck.VPCForExperienceDirectChatModal",
-                p7 = "Description.CommsAgeCheck.VPCForExperienceChatModal",
-                p9 = "Description.CommsAgeCheck.VPCForStudioCollaborationModal",
-                ye = "Description.CommsAgeCheck.FaeForExperienceChatModal",
-                yt = "Description.CommsAgeCheck.FaeForExperienceWhisperChatModal",
-                yn = "Description.CommsAgeCheck.FaeForStudioCollaborationModal",
-                yr = "Description.PrologueFetchParentExperiment",
-                yo = "Action.LearnMore",
-                ya = "Title.VerifyYourAge",
-                yi = "Description.PrologueTextVpcNotEligible",
-                yl = "access-management-upsell-container",
-                yc = dA.eventStreamService.eventTypes,
-                yu = "ageVerification",
-                ys = {
+                pW = "StartAccessManagementUpsell",
+                pK = "ShowDownloadAppModal",
+                pB = "Action.Continue",
+                pz = "Action.Cancel",
+                pq = "Action.EmailMyParent",
+                pH = "Action.VerifyID",
+                pG = "Action.AskNowLowercase",
+                p$ = "Title.AskYourParent",
+                pX = "Title.VerifyYourAge",
+                pJ = "Title.CheckYourAge",
+                pY = "Label.AddFriendVPC",
+                pQ = "Description.PrologueTextVpc",
+                pZ = "Description.PrologueTextIdv",
+                p0 = "Description.PrologueTextFae",
+                p1 = "Description.PrologueTextIdvAndVpc",
+                p2 = "Description.PrologueIdvAndVpcAgeCorrection",
+                p3 = "Description.PrologueEnablePurchase",
+                p5 = "Description.PrologueUnblockUser",
+                p6 = "Description.PrologueUnblockExperience",
+                p8 = "Description.CommsAgeCheck.VPCForFAEModal",
+                p4 = "Description.PrologueJoinExperience",
+                p7 = "Description.CommsAgeCheck.VPCForExperienceDirectChatModal",
+                p9 = "Description.CommsAgeCheck.VPCForExperienceChatModal",
+                ye = "Description.CommsAgeCheck.VPCForStudioCollaborationModal",
+                yt = "Description.CommsAgeCheck.FaeForExperienceChatModal",
+                yn = "Description.CommsAgeCheck.FaeForExperienceWhisperChatModal",
+                yr = "Description.CommsAgeCheck.FaeForStudioCollaborationModal",
+                yo = "Description.PrologueFetchParentExperiment",
+                ya = "Action.LearnMore",
+                yi = "Title.VerifyYourAge",
+                yl = "Description.PrologueTextVpcNotEligible",
+                yc = "access-management-upsell-container",
+                yu = dT.eventStreamService.eventTypes,
+                ys = "ageVerification",
+                yf = {
                     emailRegex: "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$",
                     translationKeys: {
                         addEmailToAccountKeys: {
@@ -18841,8 +18864,8 @@ function() {
                     events: {
                         showAddEmailModal: {
                             name: "showAddEmailModal",
-                            type: yc.modalAction,
-                            context: yu,
+                            type: yu.modalAction,
+                            context: ys,
                             params: {
                                 aType: "shown",
                                 field: "addEmail"
@@ -18850,8 +18873,8 @@ function() {
                         },
                         useAddEmailField: {
                             name: "useAddEmailField",
-                            type: yc.formInteraction,
-                            context: yu,
+                            type: yu.formInteraction,
+                            context: ys,
                             params: {
                                 btn: "emailAddress",
                                 field: "addEmail"
@@ -18859,8 +18882,8 @@ function() {
                         },
                         addEmailConfirm: {
                             name: "addEmailConfirm",
-                            type: yc.buttonClick,
-                            context: yu,
+                            type: yu.buttonClick,
+                            context: ys,
                             params: {
                                 btn: "continue",
                                 field: "addEmail"
@@ -18868,10 +18891,10 @@ function() {
                         }
                     }
                 },
-                yf = ys.events,
-                yd = function(e) {
-                    var t, n, r = yf.useAddEmailField;
-                    dA.eventStreamService.sendEventWithTarget(r.type, r.context, (t = function(e) {
+                yd = yf.events,
+                yp = function(e) {
+                    var t, n, r = yd.useAddEmailField;
+                    dT.eventStreamService.sendEventWithTarget(r.type, r.context, (t = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var n = null != arguments[t] ? arguments[t] : {},
                                 r = Object.keys(n);
@@ -18902,13 +18925,13 @@ function() {
                     }), t))
                 };
 
-            function yp(e, t) {
+            function yy(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function yy(e, t) {
+            function ym(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -18932,30 +18955,30 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return yp(e, t);
+                        if ("string" == typeof e) return yy(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return yp(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return yy(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var ym = function(e, t) {
-                var n = pV(),
-                    r = yy((0, I.useState)(!1), 2),
+            var yh = function(e, t) {
+                var n = p_(),
+                    r = ym((0, I.useState)(!1), 2),
                     o = r[0],
                     a = r[1],
-                    i = yy((0, I.useState)(!1), 2),
+                    i = ym((0, I.useState)(!1), 2),
                     l = i[0];
                 i[1];
-                var c = yy((0, I.useState)(!0), 2),
+                var c = ym((0, I.useState)(!0), 2),
                     u = c[0],
                     s = c[1],
-                    f = yy((0, I.useState)(""), 2),
+                    f = ym((0, I.useState)(""), 2),
                     d = f[0],
                     p = f[1],
-                    y = yy((0, I.useState)(""), 2),
+                    y = ym((0, I.useState)(""), 2),
                     m = y[0],
                     h = y[1],
                     v = (0, I.useMemo)(function() {
@@ -18964,21 +18987,21 @@ function() {
                                 return a(!0)
                             },
                             close: function() {
-                                n(pU()), a(!1)
+                                n(pL()), a(!1)
                             }
                         }
                     }, []),
-                    b = ys.emailRegex,
-                    g = ys.translationKeys.addEmailToAccountKeys,
-                    w = yy((0, I.useState)(""), 2),
+                    b = yf.emailRegex,
+                    g = yf.translationKeys.addEmailToAccountKeys,
+                    w = ym((0, I.useState)(""), 2),
                     S = w[0],
                     O = w[1],
                     x = new RegExp(b),
                     j = function() {
-                        n(pU()), a(!1), t()
+                        n(pL()), a(!1), t()
                     },
                     C = function() {
-                        O(""), n(pN(d))
+                        O(""), n(pD(d))
                     },
                     E = function(t) {
                         p(t), O("");
@@ -19001,7 +19024,7 @@ function() {
                             placeholder: e(g.LabelEmailInputPlaceholderOver13),
                             value: d,
                             onFocus: function() {
-                                return yd("")
+                                return yp("")
                             },
                             onChange: function(e) {
                                 return E(e.target.value)
@@ -19011,7 +19034,7 @@ function() {
                             children: e(m)
                         })]
                     });
-                return [(0, P.jsxs)(sK.Modal, {
+                return [(0, P.jsxs)(sB.Modal, {
                     show: o,
                     onHide: j,
                     backdrop: !0,
@@ -19020,7 +19043,7 @@ function() {
                     "aria-labelledby": "contained-modal-title-vcenter",
                     scrollable: "true",
                     centered: !0,
-                    children: [(0, P.jsx)(sK.Modal.Header, {
+                    children: [(0, P.jsx)(sB.Modal.Header, {
                         useBaseBootstrapComponent: !0,
                         children: (0, P.jsxs)("div", {
                             className: "email-upsell-title-container",
@@ -19031,18 +19054,18 @@ function() {
                                 children: (0, P.jsx)("span", {
                                     className: "close icon-close"
                                 })
-                            }), (0, P.jsx)(sK.Modal.Title, {
+                            }), (0, P.jsx)(sB.Modal.Title, {
                                 id: "contained-modal-title-vcenter",
                                 children: e(g.HeadingAddEmail)
                             })]
                         })
-                    }), (0, P.jsx)(sK.Modal.Body, {
+                    }), (0, P.jsx)(sB.Modal.Body, {
                         children: A
-                    }), (0, P.jsx)(sK.Modal.Footer, {
-                        children: (0, P.jsx)(sK.Button, {
+                    }), (0, P.jsx)(sB.Modal.Footer, {
+                        children: (0, P.jsx)(sB.Button, {
                             className: "modal-button email-upsell-btn",
-                            variant: sK.Button.variants.cta,
-                            size: sK.Button.sizes.medium,
+                            variant: sB.Button.variants.cta,
+                            size: sB.Button.sizes.medium,
                             isDisabled: u,
                             onClick: function() {
                                 C()
@@ -19053,21 +19076,21 @@ function() {
                 }), v]
             };
 
-            function yh(e, t) {
+            function yv(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var yv = (0, N.withTranslations)(function(e) {
+            var yb = (0, N.withTranslations)(function(e) {
                 var t, n = e.translate,
                     r = e.onHide,
-                    o = pV(),
-                    a = q(pL),
-                    i = q(d$),
-                    l = q(dX),
+                    o = p_(),
+                    a = q(pF),
+                    i = q(dX),
+                    l = q(dJ),
                     c = function(e) {
                         if (Array.isArray(e)) return e
-                    }(t = ym(n, r)) || function(e) {
+                    }(t = yh(n, r)) || function(e) {
                         var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                         if (null != r) {
                             var o = [],
@@ -19088,10 +19111,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return yh(e, 2);
+                            if ("string" == typeof e) return yv(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return yh(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return yv(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -19103,7 +19126,7 @@ function() {
                 }, []), (0, I.useEffect)(function() {
                     a.error && (s.close(), r())
                 }, [s, a]), (0, I.useEffect)(function() {
-                    a.isEmailAdded && (s.close(), o(dU({
+                    a.isEmailAdded && (s.close(), o(dL({
                         featureName: i,
                         ampFeatureCheckData: l,
                         successfulAction: "AddedEmail"
@@ -19116,21 +19139,21 @@ function() {
                 feature: "Feature.VerificationUpsell"
             });
 
-            function yb(e, t) {
+            function yg(e, t) {
                 if (e) {
                     var n = new A.Intl().getLocale(),
                         r = e;
                     n && (r = "".concat(e, "&language=").concat(n)), t && (r = "".concat(r, "&style-variant=").concat(t)), window.location.href = r
                 }
             }
-            var yg = function() {
-                    return (0, P.jsx)(sK.Loading, {})
+            var yw = function() {
+                    return (0, P.jsx)(sB.Loading, {})
                 },
-                yw = ((s = yw || {}).IdvAppeal = "IdvAppeal", s),
-                yS = function(e) {
+                yS = ((s = yS || {}).IdvAppeal = "IdvAppeal", s),
+                yO = function(e) {
                     var t = e.translate,
                         n = e.onHide,
-                        r = q(pm),
+                        r = q(ph),
                         o = r.completionPageState,
                         a = r.status,
                         i = r.vendorVerificationData,
@@ -19141,9 +19164,9 @@ function() {
                         f = o.icon,
                         d = o.footerText,
                         p = o.buttonText,
-                        y = (null == a ? void 0 : a.sessionStatus) === d2.Failure || l;
+                        y = (null == a ? void 0 : a.sessionStatus) === d3.Failure || l;
                     return (0, P.jsxs)(k().Fragment, {
-                        children: [(0, P.jsx)(sK.Modal.Header, {
+                        children: [(0, P.jsx)(sB.Modal.Header, {
                             useBaseBootstrapComponent: !0,
                             children: (0, P.jsxs)("div", {
                                 className: "email-upsell-title-container",
@@ -19154,12 +19177,12 @@ function() {
                                     children: (0, P.jsx)("span", {
                                         className: "close icon-close"
                                     })
-                                }), (0, P.jsx)(sK.Modal.Title, {
+                                }), (0, P.jsx)(sB.Modal.Title, {
                                     id: "contained-modal-title-vcenter",
                                     children: t(u)
                                 })]
                             })
-                        }), (0, P.jsxs)(sK.Modal.Body, {
+                        }), (0, P.jsxs)(sB.Modal.Body, {
                             children: [f && (0, P.jsx)("div", {
                                 className: f
                             }), (0, P.jsx)("ul", {
@@ -19173,17 +19196,17 @@ function() {
                                     })
                                 })
                             })]
-                        }), (0, P.jsxs)(sK.Modal.Footer, {
+                        }), (0, P.jsxs)(sB.Modal.Footer, {
                             children: [d && (0, P.jsx)("p", {
                                 className: "small",
                                 children: (0, P.jsx)("b", {
                                     children: t(d)
                                 })
                             }), (0, P.jsx)("span", {
-                                children: (0, P.jsx)(sK.Button, {
+                                children: (0, P.jsx)(sB.Button, {
                                     className: "button-stack-button primary-link",
-                                    variant: sK.Button.variants.primary,
-                                    size: sK.Button.sizes.medium,
+                                    variant: sB.Button.variants.primary,
+                                    size: sB.Button.sizes.medium,
                                     onClick: n,
                                     children: t(p)
                                 })
@@ -19191,18 +19214,18 @@ function() {
                         })]
                     })
                 },
-                yO = function(e) {
+                yx = function(e) {
                     var t = e.translate,
                         n = e.onHide,
-                        r = q(pm),
+                        r = q(ph),
                         o = r.status,
                         a = r.vendorVerificationData,
                         i = o.sessionStatus,
-                        l = d9.findIndex(function(e) {
+                        l = pe.findIndex(function(e) {
                             return e.statusCode.includes(i)
                         });
                     return (0, P.jsxs)(k().Fragment, {
-                        children: [(0, P.jsx)(sK.Modal.Header, {
+                        children: [(0, P.jsx)(sB.Modal.Header, {
                             useBaseBootstrapComponent: !0,
                             children: (0, P.jsxs)("div", {
                                 className: "email-upsell-title-container",
@@ -19213,19 +19236,19 @@ function() {
                                     children: (0, P.jsx)("span", {
                                         className: "close icon-close"
                                     })
-                                }), (0, P.jsx)(sK.Modal.Title, {
+                                }), (0, P.jsx)(sB.Modal.Title, {
                                     id: "contained-modal-title-vcenter",
                                     children: t("Heading.IdentityVerification")
                                 })]
                             })
-                        }), (0, P.jsxs)(sK.Modal.Body, {
+                        }), (0, P.jsxs)(sB.Modal.Body, {
                             className: "verification-checklist-page-content",
                             children: [(0, P.jsx)("div", {
                                 className: "cta",
-                                children: t(i === d2.Success || i === d2.Stored || i === d2.Submitted ? "Label.VerificationDataSubmitted" : "Label.VerifyInBrowser")
+                                children: t(i === d3.Success || i === d3.Stored || i === d3.Submitted ? "Label.VerificationDataSubmitted" : "Label.VerifyInBrowser")
                             }), (0, P.jsx)("ul", {
                                 className: "checklist-wrapper",
-                                children: d9.map(function(e, n) {
+                                children: pe.map(function(e, n) {
                                     return n <= l ? (0, P.jsxs)("li", {
                                         className: "checklist-item",
                                         children: [(0, P.jsx)("span", {
@@ -19243,16 +19266,16 @@ function() {
                                 href: a.verificationLink,
                                 target: "_blank",
                                 rel: "noreferrer",
-                                children: (0, P.jsx)(sK.Button, {
+                                children: (0, P.jsx)(sB.Button, {
                                     onClick: function() {
-                                        dT(dC.VerificationStarted, pi.GovernmentId, {
+                                        dI(dE.VerificationStarted, pl.GovernmentId, {
                                             session: a.sessionIdentifier
                                         })
                                     },
                                     className: "primary-link",
-                                    variant: sK.Button.variants.primary,
-                                    size: sK.Button.sizes.medium,
-                                    width: sK.Button.widths.full,
+                                    variant: sB.Button.variants.primary,
+                                    size: sB.Button.sizes.medium,
+                                    width: sB.Button.widths.full,
                                     children: t("Action.RestartSession")
                                 })
                             }), (0, P.jsx)("div", {
@@ -19262,7 +19285,7 @@ function() {
                         })]
                     })
                 },
-                yx = function(e) {
+                yP = function(e) {
                     var t, n, r = e.translate,
                         o = e.onHidecallback,
                         a = e.ageEstimation,
@@ -19270,14 +19293,14 @@ function() {
                         l = e.featureSpecificParams,
                         c = (0, I.useRef)(Number(new Date) + 18e5),
                         u = (null == l ? void 0 : l.source) === "parent",
-                        s = pV(),
-                        f = q(pm),
-                        d = q(ph),
-                        p = q(d$),
-                        y = q(d0),
-                        m = q(dX),
-                        h = q(dJ),
-                        v = q(pm).page,
+                        s = p_(),
+                        f = q(ph),
+                        d = q(pv),
+                        p = q(dX),
+                        y = q(d1),
+                        m = q(dJ),
+                        h = q(dY),
+                        v = q(ph).page,
                         b = (0, I.useRef)(v),
                         g = (0, I.useRef)(!1),
                         w = (0, I.useRef)(!1),
@@ -19291,15 +19314,15 @@ function() {
                         D = C.sessionIdentifier,
                         M = C.sessionToken,
                         R = C.verificationLink,
-                        U = i === yw.IdvAppeal,
-                        L = (null == T ? void 0 : T.sessionStatus) === d2.Success || (null == T ? void 0 : T.sessionStatus) === d2.Stored,
+                        U = i === yS.IdvAppeal,
+                        L = (null == T ? void 0 : T.sessionStatus) === d3.Success || (null == T ? void 0 : T.sessionStatus) === d3.Stored,
                         F = (0, N.useTheme)();
 
                     function V() {
                         var e;
-                        s(pS()), clearTimeout(null != (e = S.current) ? e : void 0), o()
+                        s(pO()), clearTimeout(null != (e = S.current) ? e : void 0), o()
                     }(0, I.useEffect)(function() {
-                        return s(pO(!0)), s(pv({
+                        return s(px(!0)), s(pb({
                                 ageEstimation: a,
                                 parentVerification: u,
                                 template: i
@@ -19313,40 +19336,40 @@ function() {
                             }
                     }, []);
                     var _ = null;
-                    if (j || v === pa.Complete) switch (v) {
-                        case pa.VendorLink:
-                            _ = (0, P.jsx)(yg, {});
+                    if (j || v === pi.Complete) switch (v) {
+                        case pi.VendorLink:
+                            _ = (0, P.jsx)(yw, {});
                             break;
-                        case pa.Checklist:
-                            _ = (0, P.jsx)(yO, {
+                        case pi.Checklist:
+                            _ = (0, P.jsx)(yx, {
                                 translate: r,
                                 onHide: V
                             });
                             break;
-                        case pa.Complete:
-                            _ = U && L ? (0, P.jsx)(yg, {}) : (0, P.jsx)(yS, {
+                        case pi.Complete:
+                            _ = U && L ? (0, P.jsx)(yw, {}) : (0, P.jsx)(yO, {
                                 translate: r,
                                 onHide: V
                             });
                             break;
                         default:
-                            _ = (0, P.jsx)(yg, {})
+                            _ = (0, P.jsx)(yw, {})
                     }
                     return ((0, I.useEffect)(function() {
-                        j && D && null != R && !w.current && (w.current = !0, yb(R))
+                        j && D && null != R && !w.current && (w.current = !0, yg(R))
                     }, [j, D, R]), (0, I.useEffect)(function() {
-                        j && !f.loading && null != C.verificationLink && f.page !== pa.Complete && Number(new Date) < c.current && setTimeout(function() {
-                            s(pb(C.sessionIdentifier))
+                        j && !f.loading && null != C.verificationLink && f.page !== pi.Complete && Number(new Date) < c.current && setTimeout(function() {
+                            s(pg(C.sessionIdentifier))
                         }, 1e4)
                     }, [f]), (0, I.useEffect)(function() {
-                        v === pa.Complete && s(dU({
+                        v === pi.Complete && s(dL({
                             featureName: p,
                             ampFeatureCheckData: m,
                             namespace: y
                         }))
                     }, [v]), (0, I.useEffect)(function() {
                         var e;
-                        U && v === pa.Complete && (null == h || null == (e = h.data) ? void 0 : e.access) === dE.Granted && !O.current && (O.current = !0, V())
+                        U && v === pi.Complete && (null == h || null == (e = h.data) ? void 0 : e.access) === dA.Granted && !O.current && (O.current = !0, V())
                     }, [U, v, h]), (0, I.useEffect)(function() {
                         if (!j && D) {
                             var e, t, n = new A.Intl().getLocale();
@@ -19377,16 +19400,16 @@ function() {
                             }), t = t = {
                                 onReady: function() {
                                     var e;
-                                    null == (e = x.current) || e.open(), s(pO(!1))
+                                    null == (e = x.current) || e.open(), s(px(!1))
                                 },
                                 onComplete: function(e) {
                                     if (e.inquiryId, e.status, e.fields, !g.current) {
-                                        s(pO(!0)), g.current = !0;
+                                        s(px(!0)), g.current = !0;
                                         var t = setInterval(function() {
-                                            b.current !== pa.Complete && s(pb(D))
+                                            b.current !== pi.Complete && s(pg(D))
                                         }, 5e3);
                                         S.current = setTimeout(function() {
-                                            clearInterval(t), s(pO(!1))
+                                            clearInterval(t), s(px(!1))
                                         }, 3e4)
                                     }
                                 },
@@ -19394,7 +19417,7 @@ function() {
                                     V()
                                 },
                                 onError: function(e) {
-                                    s(pb(C.sessionIdentifier)), console.error(e)
+                                    s(pg(C.sessionIdentifier)), console.error(e)
                                 }
                             }, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                                 var t = Object.keys(e);
@@ -19407,16 +19430,16 @@ function() {
                                 Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
                             }), e))
                         }
-                    }, [D]), E && !d) ? (0, P.jsx)(yS, {
+                    }, [D]), E && !d) ? (0, P.jsx)(yO, {
                         translate: r,
                         onHide: V
                     }) : (0, P.jsx)(k().Fragment, {
-                        children: j || v === pa.Complete ? _ : d && (0, P.jsx)(yg, {})
+                        children: j || v === pi.Complete ? _ : d && (0, P.jsx)(yw, {})
                     })
                 },
-                yP = n(5741),
-                yj = function(e) {
-                    for (var t = (0, yP.create)(e, {
+                yj = n(5741),
+                yC = function(e) {
+                    for (var t = (0, yj.create)(e, {
                             errorCorrectionLevel: "H"
                         }), n = t.modules.size, r = "", o = 0; o < n; o += 1)
                         for (var a = 0; a < n; a += 1) t.modules.get(o, a) && (r += "M".concat(a, " ").concat(o, "h1v1h-1z"));
@@ -19426,12 +19449,12 @@ function() {
                     }
                 };
 
-            function yC(e, t) {
+            function yE(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var yE = function(e) {
+            var yA = function(e) {
                     var t = Math.round(.25 * e),
                         n = Math.max(7, t % 2 == 0 ? t - 1 : t),
                         r = Math.max(1, Math.min(Math.floor((n - 5) / 2), Math.round(5 * e / 176))),
@@ -19442,7 +19465,7 @@ function() {
                         glyph: o - 2
                     }
                 },
-                yA = function(e) {
+                yT = function(e) {
                     var t, n = e.open,
                         r = e.onOpenChange,
                         o = e.deeplink,
@@ -19474,10 +19497,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return yC(e, 2);
+                                if ("string" == typeof e) return yE(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return yC(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return yE(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -19486,12 +19509,12 @@ function() {
                         d = s[1];
                     if ((0, I.useEffect)(function() {
                             try {
-                                d(yj(o))
+                                d(yC(o))
                             } catch (e) {
                                 console.error("Failed to generate QRDeepLinkDialog QR code", e), d(null)
                             }
                         }, [o]), null === f) return null;
-                    var p = yE(f.moduleCount);
+                    var p = yA(f.moduleCount);
                     return (0, P.jsx)(r_, {
                         open: n,
                         onOpenChange: r,
@@ -19553,62 +19576,62 @@ function() {
                         })
                     })
                 },
-                yT = "authPageload",
-                yI = "authButtonClick",
-                yk = "authFormInteraction",
-                yN = "authMsgShown",
-                yD = "authModalShown",
-                yM = "webEmbededFaeStart",
-                yR = "webEmbededFaeError",
-                yU = "webEmbededFaeCancel",
-                yL = "webFaeStatus",
-                yF = "webHostedFaeStart",
-                yV = "webQrCodeFaeStart",
-                y_ = "webQrCodeFaeComplete",
-                yW = "webQrCodeFaeTimeout",
-                yK = "webQrCodeFaeClose",
-                yB = "cancelFae",
-                yz = function(e, t, n) {
+                yI = "authPageload",
+                yk = "authButtonClick",
+                yN = "authFormInteraction",
+                yD = "authMsgShown",
+                yM = "authModalShown",
+                yR = "webEmbededFaeStart",
+                yU = "webEmbededFaeError",
+                yL = "webEmbededFaeCancel",
+                yF = "webFaeStatus",
+                yV = "webHostedFaeStart",
+                y_ = "webQrCodeFaeStart",
+                yW = "webQrCodeFaeComplete",
+                yK = "webQrCodeFaeTimeout",
+                yB = "webQrCodeFaeClose",
+                yz = "cancelFae",
+                yq = function(e, t, n) {
                     try {
-                        dA.eventStreamService.sendEventWithTarget(e, t, n)
+                        dT.eventStreamService.sendEventWithTarget(e, t, n)
                     } catch (e) {}
                 },
-                yq = function(e, t, n) {
-                    yz(yD, e, {
+                yH = function(e, t, n) {
+                    yq(yM, e, {
                         state: t,
                         field: n,
                         os_time: Date.now()
                     })
                 },
-                yH = function(e, t, n, r) {
-                    yz(yI, e, {
+                yG = function(e, t, n, r) {
+                    yq(yk, e, {
                         btn: n,
                         state: t,
                         origin: r,
                         os_time: Date.now()
                     })
                 },
-                yG = function(e, t, n) {
-                    yz(yk, e, {
+                y$ = function(e, t, n) {
+                    yq(yN, e, {
                         state: t,
                         field: n
                     })
                 },
-                y$ = function(e, t, n, r) {
-                    yz(yN, e, {
+                yX = function(e, t, n, r) {
+                    yq(yD, e, {
                         state: t,
                         field: n,
                         errorCode: r
                     })
                 },
-                yX = function(e, t, n) {
-                    yz(yT, e, {
+                yJ = function(e, t, n) {
+                    yq(yI, e, {
                         state: t,
                         origin: n,
                         os_time: Date.now()
                     })
                 },
-                yJ = function(e) {
+                yY = function(e) {
                     var t = e.qrDataUrl,
                         n = e.translate,
                         r = e.onHide;
@@ -19627,7 +19650,7 @@ function() {
                                     className: "fae-qr-code-header",
                                     children: [(0, P.jsx)("h5", {
                                         className: "fae-qr-code-heading",
-                                        children: n(pt) || "Let's check your age on the mobile app"
+                                        children: n(pn) || "Let's check your age on the mobile app"
                                     }), (0, P.jsx)("p", {
                                         className: "fae-qr-code-subheading",
                                         children: n("Label.AgeCheckBenefit") || "Get an age check to enjoy more content and features."
@@ -19642,7 +19665,7 @@ function() {
                                         className: "fae-qr-code-card-text",
                                         children: [(0, P.jsx)("p", {
                                             className: "fae-qr-code-scan-instruction",
-                                            children: n(pn) || "Scan this QR code with your phone or tablet camera to complete an age check"
+                                            children: n(pr) || "Scan this QR code with your phone or tablet camera to complete an age check"
                                         }), (0, P.jsx)("div", {
                                             className: "fae-qr-code-divider"
                                         }), (0, P.jsxs)("p", {
@@ -19650,7 +19673,7 @@ function() {
                                             children: [(0, P.jsx)("span", {
                                                 className: "fae-qr-code-fallback-bold",
                                                 children: n("Label.NotScanning") || "Not scanning?"
-                                            }), " ", n(pr) || "Download the Roblox app on your mobile device and go to Settings > Account Info"]
+                                            }), " ", n(po) || "Download the Roblox app on your mobile device and go to Settings > Account Info"]
                                         })]
                                     })]
                                 })]
@@ -19659,13 +19682,13 @@ function() {
                     })
                 };
 
-            function yY(e, t) {
+            function yQ(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function yQ(e, t, n, r, o, a, i) {
+            function yZ(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -19676,7 +19699,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function yZ(e, t) {
+            function y0(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -19700,33 +19723,33 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return yY(e, t);
+                        if ("string" == typeof e) return yQ(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return yY(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return yQ(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var y0 = "AgeEstimation",
-                y1 = function(e) {
+            var y1 = "AgeEstimation",
+                y2 = function(e) {
                     var t = e.translate,
                         n = e.onHidecallback,
                         r = e.featureSpecificParams,
-                        o = pV(),
-                        a = q(d$),
-                        i = q(d0),
-                        l = q(dX),
-                        c = q(dJ),
+                        o = p_(),
+                        a = q(dX),
+                        i = q(d1),
+                        l = q(dJ),
+                        c = q(dY),
                         u = (0, I.useRef)(c);
                     u.current = c;
                     var s = (0, I.useRef)(null),
                         f = (0, I.useRef)(Date.now() + 18e5),
-                        d = yZ((0, I.useState)(null), 2),
+                        d = y0((0, I.useState)(null), 2),
                         p = d[0],
                         y = d[1],
-                        m = yZ((0, I.useState)(!1), 2),
+                        m = y0((0, I.useState)(!1), 2),
                         h = m[0],
                         v = m[1],
                         b = (r || {}).context,
@@ -19819,13 +19842,13 @@ function() {
                                 }(this, function(e) {
                                     switch (e.label) {
                                         case 0:
-                                            return e.trys.push([0, 2, , 3]), [4, (0, yP.toDataURL)("https://ro.blox.com/Ebh5/fae", {
+                                            return e.trys.push([0, 2, , 3]), [4, (0, yj.toDataURL)("https://ro.blox.com/Ebh5/fae", {
                                                 errorCorrectionLevel: "H",
                                                 margin: 1,
                                                 width: 268
                                             })];
                                         case 1:
-                                            return y(e.sent()), yX(g, "", yV), [3, 3];
+                                            return y(e.sent()), yJ(g, "", y_), [3, 3];
                                         case 2:
                                             return console.error("Failed to generate FAE QR code:", e.sent()), v(!0), [3, 3];
                                         case 3:
@@ -19839,11 +19862,11 @@ function() {
                                     var a = e.apply(t, n);
 
                                     function i(e) {
-                                        yQ(a, r, o, i, l, "next", e)
+                                        yZ(a, r, o, i, l, "next", e)
                                     }
 
                                     function l(e) {
-                                        yQ(a, r, o, i, l, "throw", e)
+                                        yZ(a, r, o, i, l, "throw", e)
                                     }
                                     i(void 0)
                                 })
@@ -19855,43 +19878,43 @@ function() {
                         if (p && !s.current) {
                             f.current = Date.now() + 18e5;
                             var e = function() {
-                                o(dU({
+                                o(dL({
                                     featureName: a,
                                     ampFeatureCheckData: l,
                                     namespace: i,
-                                    successfulAction: y0
+                                    successfulAction: y1
                                 }))
                             };
                             e(), s.current = setInterval(function() {
                                 if (Date.now() >= f.current) {
-                                    w(), yX(g, "", yW), n();
+                                    w(), yJ(g, "", yK), n();
                                     return
                                 }
                                 var t, r, o, a = u.current,
-                                    i = (null == a || null == (t = a.data) ? void 0 : t.access) === dE.Actionable;
+                                    i = (null == a || null == (t = a.data) ? void 0 : t.access) === dA.Actionable;
                                 (null == a || null == (o = a.data) || null == (r = o.recourses) ? void 0 : r.find(function(e) {
-                                    return e.action === y0
-                                })) && i ? e() : (w(), yX(g, "", y_), n())
+                                    return e.action === y1
+                                })) && i ? e() : (w(), yJ(g, "", yW), n())
                             }, 5e3)
                         }
                     }, [p]), (0, I.useEffect)(function() {
                         h && n()
-                    }, [h]), h) ? null : p ? (0, P.jsx)(yJ, {
+                    }, [h]), h) ? null : p ? (0, P.jsx)(yY, {
                         qrDataUrl: p,
                         translate: t,
                         onHide: function() {
-                            w(), yX(g, "", yK), n()
+                            w(), yJ(g, "", yB), n()
                         }
-                    }) : (0, P.jsx)(yg, {})
+                    }) : (0, P.jsx)(yw, {})
                 };
 
-            function y2(e, t) {
+            function y3(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function y3(e, t, n, r, o, a, i) {
+            function y5(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -19901,7 +19924,7 @@ function() {
                 }
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
-            var y5 = function(e) {
+            var y6 = function(e) {
                     var t;
                     return (t = function() {
                         return function(e, t) {
@@ -20001,17 +20024,17 @@ function() {
                             var a = t.apply(e, n);
 
                             function i(e) {
-                                y3(a, r, o, i, l, "next", e)
+                                y5(a, r, o, i, l, "next", e)
                             }
 
                             function l(e) {
-                                y3(a, r, o, i, l, "throw", e)
+                                y5(a, r, o, i, l, "throw", e)
                             }
                             i(void 0)
                         })
                     })()
                 },
-                y6 = function(e) {
+                y8 = function(e) {
                     var t, n = function(e) {
                             if (Array.isArray(e)) return e
                         }(t = (0, I.useState)(null)) || function(e) {
@@ -20035,10 +20058,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return y2(e, 2);
+                                if ("string" == typeof e) return y3(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return y2(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return y3(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -20046,23 +20069,23 @@ function() {
                         r = n[0],
                         o = n[1];
                     return (0, I.useEffect)(function() {
-                        y5(e).then(function(e) {
+                        y6(e).then(function(e) {
                             o(e)
                         }, function() {
                             o({})
                         })
                     }, [e]), r
                 },
-                y8 = "Safety.Identity.FAEHandOff.V1",
-                y4 = ((f = y4 || {}).Embedded = "EMBEDDED", f.Hosted = "HOSTED", f);
+                y4 = "Safety.Identity.FAEHandOff.V1",
+                y7 = ((f = y7 || {}).Embedded = "EMBEDDED", f.Hosted = "HOSTED", f);
 
-            function y7(e, t) {
+            function y9(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function y9(e, t, n, r, o, a, i) {
+            function me(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -20072,21 +20095,21 @@ function() {
                 }
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
-            var me = "dark",
-                mt = "AgeEstimation";
+            var mt = "dark",
+                mn = "AgeEstimation";
 
-            function mn(e) {
+            function mr(e) {
                 var t, n, r = e.translate,
                     o = e.onHidecallback,
                     a = e.ageEstimation,
                     i = e.featureSpecificParams,
-                    l = pV(),
-                    c = q(pm),
-                    u = q(ph),
-                    s = q(d$),
-                    f = q(d0),
-                    d = q(dX),
-                    p = q(dJ),
+                    l = p_(),
+                    c = q(ph),
+                    u = q(pv),
+                    s = q(dX),
+                    f = q(d1),
+                    d = q(dJ),
+                    p = q(dY),
                     y = c.vendorVerificationData,
                     m = c.status,
                     h = c.error,
@@ -20109,7 +20132,7 @@ function() {
                     U = y.sessionIdentifier,
                     L = y.verificationLink,
                     F = (0, N.useTheme)(),
-                    V = null != (t = null == (n = (0, Q.getDeviceMeta)()) ? void 0 : n.isInApp) && t ? y4.Hosted : y4.Embedded,
+                    V = null != (t = null == (n = (0, Q.getDeviceMeta)()) ? void 0 : n.isInApp) && t ? y7.Hosted : y7.Embedded,
                     _ = function() {
                         O.current && (clearInterval(O.current), O.current = null)
                     },
@@ -20118,30 +20141,30 @@ function() {
                     };
 
                 function K(e) {
-                    return !!e && (e.sessionStatus === d2.Stored || e.sessionStatus === d2.RequiresRetry || e.sessionStatus === d2.Failure)
+                    return !!e && (e.sessionStatus === d3.Stored || e.sessionStatus === d3.RequiresRetry || e.sessionStatus === d3.Failure)
                 }
 
                 function B() {
                     var e;
-                    _(), W(), l(pS()), clearTimeout(null != (e = x.current) ? e : void 0)
+                    _(), W(), l(pO()), clearTimeout(null != (e = x.current) ? e : void 0)
                 }
 
                 function z() {
                     B(), o()
                 }
                 return (0, I.useEffect)(function() {
-                    return l(pO(!0)), l(pv({
+                    return l(px(!0)), l(pb({
                             ageEstimation: a,
                             parentVerification: w
-                        })), V === y4.Embedded && ai().Client.preload().catch(function(e) {
+                        })), V === y7.Embedded && ai().Client.preload().catch(function(e) {
                             console.error("Failed to preload Persona client:", e)
-                        }), V === y4.Hosted && (T.current = Number(new Date) + 18e5),
+                        }), V === y7.Hosted && (T.current = Number(new Date) + 18e5),
                         function() {
                             B(), _(), R.current && (R.current.destroy(), R.current = null)
                         }
                 }, []), (0, I.useEffect)(function() {
                     var e, t, n, r;
-                    V === y4.Embedded && U ? (e = new A.Intl().getLocale(), R.current = new(ai()).Client((t = function(e) {
+                    V === y7.Embedded && U ? (e = new A.Intl().getLocale(), R.current = new(ai()).Client((t = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var n = null != arguments[t] ? arguments[t] : {},
                                 r = Object.keys(n);
@@ -20160,31 +20183,31 @@ function() {
                         return e
                     }({
                         inquiryId: U,
-                        styleVariant: F || me
+                        styleVariant: F || mt
                     }, e && {
                         language: e
                     }), n = n = {
                         onReady: function() {
                             var e;
-                            null == (e = R.current) || e.open(), yq(g, U, yM), l(pO(!1))
+                            null == (e = R.current) || e.open(), yH(g, U, yR), l(px(!1))
                         },
                         onComplete: function(e) {
                             if (e.inquiryId, e.status, e.fields, !S.current) {
-                                l(pO(!0)), S.current = !0;
+                                l(px(!0)), S.current = !0;
                                 var t = setInterval(function() {
-                                    K(D.current) ? clearInterval(t) : l(pb(U))
+                                    K(D.current) ? clearInterval(t) : l(pg(U))
                                 }, 200);
                                 x.current = setTimeout(function() {
-                                    clearInterval(t), l(pS()), z()
+                                    clearInterval(t), l(pO()), z()
                                 }, 3e4)
                             }
                         },
                         onCancel: function(e) {
                             var t = e.inquiryId;
-                            e.sessionToken, yH(g, t, yB, yU), z()
+                            e.sessionToken, yG(g, t, yz, yL), z()
                         },
                         onError: function(e) {
-                            l(pb(y.sessionIdentifier)), yG(g, U, yR), console.error(e)
+                            l(pg(y.sessionIdentifier)), y$(g, U, yU), console.error(e)
                         }
                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n)) : (function(e) {
                         var t = Object.keys(e);
@@ -20195,30 +20218,30 @@ function() {
                         return t
                     })(Object(n)).forEach(function(e) {
                         Object.defineProperty(t, e, Object.getOwnPropertyDescriptor(n, e))
-                    }), t))) : V === y4.Hosted && U && null != L && (O.current = r = setInterval(function() {
-                        Number(new Date) < T.current ? l(pb(y.sessionIdentifier)) : (clearInterval(r), o())
-                    }, 1e4), y.verificationLink && (yX(g, U, yF), yb(y.verificationLink, F || me)))
+                    }), t))) : V === y7.Hosted && U && null != L && (O.current = r = setInterval(function() {
+                        Number(new Date) < T.current ? l(pg(y.sessionIdentifier)) : (clearInterval(r), o())
+                    }, 1e4), y.verificationLink && (yJ(g, U, yV), yg(y.verificationLink, F || mt)))
                 }, [U, L]), (0, I.useEffect)(function() {
                     K(m) && function() {
                         if (!E.current) {
-                            E.current = !0, C.current = Number(new Date) + 1e4, l(pO(!0)), y$(g, U, yL, d2[m.sessionStatus]);
+                            E.current = !0, C.current = Number(new Date) + 1e4, l(px(!0)), yX(g, U, yF, d3[m.sessionStatus]);
                             var e = function() {
-                                l(dU({
+                                l(dL({
                                     featureName: s,
                                     ampFeatureCheckData: d,
                                     namespace: f,
-                                    successfulAction: mt
+                                    successfulAction: mn
                                 }))
                             };
                             e();
                             var t = setInterval(function() {
                                 var n, r, o, a = M.current,
-                                    i = (null == a || null == (n = a.data) ? void 0 : n.access) === dE.Actionable,
+                                    i = (null == a || null == (n = a.data) ? void 0 : n.access) === dA.Actionable,
                                     c = null == a || null == (o = a.data) || null == (r = o.recourses) ? void 0 : r.find(function(e) {
-                                        return e.action === mt
+                                        return e.action === mn
                                     }),
                                     u = Number(new Date) >= C.current;
-                                c ? !i || u ? (clearInterval(t), j.current = null, l(pO(!1)), z()) : e() : (clearInterval(t), j.current = null, l(pO(!1)), B())
+                                c ? !i || u ? (clearInterval(t), j.current = null, l(px(!1)), z()) : e() : (clearInterval(t), j.current = null, l(px(!1)), B())
                             }, 1e3);
                             j.current = t
                         }
@@ -20226,27 +20249,27 @@ function() {
                 }, [m]), (0, I.useEffect)(function() {
                     if (E.current && (null == p || !p.loading)) {
                         var e, t = null == p || null == (e = p.data) ? void 0 : e.access;
-                        j.current && t && t !== dE.Actionable && (W(), l(pO(!1)), z())
+                        j.current && t && t !== dA.Actionable && (W(), l(px(!1)), z())
                     }
                 }, [p]), (0, P.jsx)(k().Fragment, {
-                    children: y.daysUntilNextVerification > 0 && v || h && !u ? (0, P.jsx)(yS, {
+                    children: y.daysUntilNextVerification > 0 && v || h && !u ? (0, P.jsx)(yO, {
                         translate: r,
                         onHide: z
-                    }) : u ? (0, P.jsx)(yg, {}) : null
+                    }) : u ? (0, P.jsx)(yw, {}) : null
                 })
             }
-            var mr = function(e) {
+            var mo = function(e) {
                     var t, n, r, o = e.translate,
                         a = e.onHidecallback,
                         i = e.ageEstimation,
                         l = e.featureSpecificParams,
-                        c = pV(),
+                        c = p_(),
                         u = null != (n = null == (r = (0, Q.getDeviceMeta)()) ? void 0 : r.isInApp) && n,
-                        s = q(d$),
-                        f = q(d0),
-                        d = q(dX),
-                        p = q(dJ),
-                        y = y6(y8),
+                        s = q(dX),
+                        f = q(d1),
+                        d = q(dJ),
+                        p = q(dY),
+                        y = y8(y4),
                         m = null !== y,
                         h = !!(null == y ? void 0 : y.isFaeQrCodeEnabled),
                         v = (null == l ? void 0 : l.source) === "accountInfo",
@@ -20273,10 +20296,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return y7(e, 2);
+                                if ("string" == typeof e) return y9(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return y7(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return y9(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -20386,7 +20409,7 @@ function() {
                                         if (t = m.sent(), r = (n = (0, Q.getDeviceMeta)()) && (n.isPhone || n.isTablet), o = n && (n.isDesktop || n.isConsole), i = null != (e = null == n ? void 0 : n.isAmazonApp) && e, !(r && !i && (null == t ? void 0 : t.faeMobileWebDeeplinkEnabled))) return [3, 4];
                                         return c = f ? "&namespace=".concat(f) : "", u = "roblox://navigation/amp_wizard?feature_name=".concat(s).concat(c, "&entry_point=web"), [4, A.DeepLinkService.navigateToDeepLink(u)];
                                     case 3:
-                                        return m.sent(), window.dispatchEvent(new Event(pW)), a(), [2];
+                                        return m.sent(), window.dispatchEvent(new Event(pK)), a(), [2];
                                     case 4:
                                         return (o || i) && (null == t ? void 0 : t.faeDesktopDeeplinkEnabled) && (d = new URLSearchParams({
                                             feature_name: s,
@@ -20412,72 +20435,72 @@ function() {
                                 var a = e.apply(t, n);
 
                                 function i(e) {
-                                    y9(a, r, o, i, l, "next", e)
+                                    me(a, r, o, i, l, "next", e)
                                 }
 
                                 function l(e) {
-                                    y9(a, r, o, i, l, "throw", e)
+                                    me(a, r, o, i, l, "throw", e)
                                 }
                                 i(void 0)
                             })
                         })()
                     }, []), (0, I.useEffect)(function() {
-                        m && (null === A.ExperimentationService || void 0 === A.ExperimentationService ? void 0 : A.ExperimentationService.logLayerExposure) && A.ExperimentationService.logLayerExposure(y8)
+                        m && (null === A.ExperimentationService || void 0 === A.ExperimentationService ? void 0 : A.ExperimentationService.logLayerExposure) && A.ExperimentationService.logLayerExposure(y4)
                     }, [m]), (0, I.useEffect)(function() {
                         if (g && !j.current) {
-                            yX(O, "", yV), C.current = Date.now() + 18e5;
+                            yJ(O, "", y_), C.current = Date.now() + 18e5;
                             var e = function() {
-                                c(dU({
+                                c(dL({
                                     featureName: s,
                                     ampFeatureCheckData: d,
                                     namespace: f,
-                                    successfulAction: mt
+                                    successfulAction: mn
                                 }))
                             };
                             return e(), j.current = setInterval(function() {
                                     if (Date.now() >= C.current) {
-                                        E(), yX(O, "", yW), a();
+                                        E(), yJ(O, "", yK), a();
                                         return
                                     }
                                     var t, n, r, o = x.current,
-                                        i = (null == o || null == (t = o.data) ? void 0 : t.access) === dE.Actionable;
+                                        i = (null == o || null == (t = o.data) ? void 0 : t.access) === dA.Actionable;
                                     (null == o || null == (r = o.data) || null == (n = r.recourses) ? void 0 : n.find(function(e) {
-                                        return e.action === mt
-                                    })) && i ? e() : (E(), yX(O, "", y_), a())
+                                        return e.action === mn
+                                    })) && i ? e() : (E(), yJ(O, "", yW), a())
                                 }, 5e3),
                                 function() {
                                     return E()
                                 }
                         }
-                    }, [g]), g) ? (0, P.jsx)(yA, {
+                    }, [g]), g) ? (0, P.jsx)(yT, {
                         open: !0,
                         onOpenChange: function(e) {
-                            e || (E(), yX(O, "", yK), a())
+                            e || (E(), yJ(O, "", yB), a())
                         },
                         deeplink: g,
-                        title: o(pt) || "Let's check your age on the mobile app",
-                        description: o(pn) || "Scan this QR code with your phone or tablet camera to complete an age check",
-                        footer: o(pr) || "Download the Roblox app on your mobile device and go to Settings > Account Info",
+                        title: o(pn) || "Let's check your age on the mobile app",
+                        description: o(pr) || "Scan this QR code with your phone or tablet camera to complete an age check",
+                        footer: o(po) || "Download the Roblox app on your mobile device and go to Settings > Account Info",
                         closeAffordance: o("Action.Close") || "Close"
-                    }) : m ? !u && h && v ? (0, P.jsx)(y1, {
+                    }) : m ? !u && h && v ? (0, P.jsx)(y2, {
                         translate: o,
                         onHidecallback: a,
                         featureSpecificParams: l
-                    }) : (0, P.jsx)(mn, {
+                    }) : (0, P.jsx)(mr, {
                         translate: o,
                         onHidecallback: a,
                         ageEstimation: i,
                         featureSpecificParams: l
-                    }) : (0, P.jsx)(yg, {})
+                    }) : (0, P.jsx)(yw, {})
                 },
-                mo = ((d = mo || {}).Appeals = "appeals", d);
+                ma = ((d = ma || {}).Appeals = "appeals", d);
 
-            function ma(e, t) {
+            function mi(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var mi = function(e) {
+            var ml = function(e) {
                     var t, n = e.translate,
                         r = e.title,
                         o = e.body,
@@ -20516,10 +20539,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return ma(e, 2);
+                                if ("string" == typeof e) return mi(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return ma(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return mi(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -20540,7 +20563,7 @@ function() {
                             "modal-half-width-button": l,
                             "modal-full-width-button": !l
                         });
-                    return [(0, P.jsxs)(sK.Modal, {
+                    return [(0, P.jsxs)(sB.Modal, {
                         show: b,
                         onHide: function() {
                             w.close(), m()
@@ -20551,11 +20574,11 @@ function() {
                         "aria-labelledby": "access-management-upsell-inner-modal-title",
                         scrollable: !0,
                         centered: !0,
-                        children: [(0, P.jsxs)(sK.Modal.Header, {
+                        children: [(0, P.jsxs)(sB.Modal.Header, {
                             useBaseBootstrapComponent: !0,
                             children: [(0, P.jsx)("div", {
                                 className: "access-management-upsell-inner-modal-title-container",
-                                children: (0, P.jsx)(sK.Modal.Title, {
+                                children: (0, P.jsx)(sB.Modal.Title, {
                                     id: "access-management-upsell-inner-modal-title",
                                     children: r
                                 })
@@ -20569,22 +20592,22 @@ function() {
                                     className: "icon-close"
                                 })
                             })]
-                        }), (0, P.jsx)(sK.Modal.Body, {
+                        }), (0, P.jsx)(sB.Modal.Body, {
                             children: o
-                        }), (0, P.jsxs)(sK.Modal.Footer, {
-                            children: [i && (0, P.jsx)(sK.Button, {
+                        }), (0, P.jsxs)(sB.Modal.Footer, {
+                            children: [i && (0, P.jsx)(sB.Button, {
                                 className: S,
-                                variant: sK.Button.variants.primary,
-                                size: sK.Button.sizes.medium,
+                                variant: sB.Button.variants.primary,
+                                size: sB.Button.sizes.medium,
                                 isDisabled: f,
                                 onClick: function() {
                                     null == s || s(), w.close()
                                 },
                                 children: n(i)
-                            }), l && (0, P.jsx)(sK.Button, {
+                            }), l && (0, P.jsx)(sB.Button, {
                                 className: S,
-                                variant: void 0 !== p && p ? sK.Button.variants.primary : sK.Button.variants.secondary,
-                                size: sK.Button.sizes.medium,
+                                variant: void 0 !== p && p ? sB.Button.variants.primary : sB.Button.variants.secondary,
+                                size: sB.Button.sizes.medium,
                                 isDisabled: d,
                                 onClick: function() {
                                     null == h || h(), w.close()
@@ -20597,192 +20620,192 @@ function() {
                         })]
                     }), w]
                 },
-                ml = "U13To18",
-                mc = "U13To1318",
-                mu = "U13ToU13",
-                ms = "U13ToU13NotEligible",
-                mf = "Verify Your Age/Parent Permission Needed",
-                md = "Parent Permission Needed",
-                mp = "Parent Permission Not Eligible",
-                my = "Ask Your Parent",
-                mm = "Verify ID",
-                mh = "Email My Parent",
-                mv = "Ask Now",
-                mb = 'X icon or "Cancel"',
-                mg = "We need to check your age",
-                mw = "verifyId",
-                mS = "emailParent",
-                mO = "verifyCancel",
-                mx = "vpcNotEligibleModalClose",
-                mP = "vpcNotEligibleLearnMore",
-                mj = "askParent",
-                mC = "cancel",
-                mE = "settingsAgeChangeVerify",
-                mA = "settingsAgeChangeVpcNotEligible",
-                mT = "parentalEntrySettings",
-                mI = "vpcPrologue",
-                mk = "faePrologue",
-                mN = "authPageload",
-                mD = "authButtonClick",
-                mM = function(e, t) {
+                mc = "U13To18",
+                mu = "U13To1318",
+                ms = "U13ToU13",
+                mf = "U13ToU13NotEligible",
+                md = "Verify Your Age/Parent Permission Needed",
+                mp = "Parent Permission Needed",
+                my = "Parent Permission Not Eligible",
+                mm = "Ask Your Parent",
+                mh = "Verify ID",
+                mv = "Email My Parent",
+                mb = "Ask Now",
+                mg = 'X icon or "Cancel"',
+                mw = "We need to check your age",
+                mS = "verifyId",
+                mO = "emailParent",
+                mx = "verifyCancel",
+                mP = "vpcNotEligibleModalClose",
+                mj = "vpcNotEligibleLearnMore",
+                mC = "askParent",
+                mE = "cancel",
+                mA = "settingsAgeChangeVerify",
+                mT = "settingsAgeChangeVpcNotEligible",
+                mI = "parentalEntrySettings",
+                mk = "vpcPrologue",
+                mN = "faePrologue",
+                mD = "authPageload",
+                mM = "authButtonClick",
+                mR = function(e, t) {
                     return "".concat(e ? "".concat(e, ", ") : "").concat(t ? "settingName: ".concat(t, ", ") : "")
                 };
 
-            function mR(e, t) {
-                "CanCorrectAge" === e && dA.eventStreamService.sendEventWithTarget(mD, mE, {
-                    btn: mw,
-                    state: t ? ml : mc,
-                    associatedText: mm
+            function mU(e, t) {
+                "CanCorrectAge" === e && dT.eventStreamService.sendEventWithTarget(mM, mA, {
+                    btn: mS,
+                    state: t ? mc : mu,
+                    associatedText: mh
                 })
             }
 
-            function mU(e, t, n, r, o) {
-                "CanCorrectAge" === e ? dA.eventStreamService.sendEventWithTarget(mD, mE, {
-                    btn: mS,
-                    state: t ? mu : mc,
-                    associatedText: mh
-                }) : "CanChangeSetting" === e ? dA.eventStreamService.sendEventWithTarget(mD, mT, {
-                    btn: mS,
-                    state: mM(void 0, n),
-                    associatedText: mh
-                }) : "CanRemoveParentManagedUserBlocks" === e ? dA.eventStreamService.sendEventWithTarget(mD, mT, {
-                    btn: mS,
+            function mL(e, t, n, r, o) {
+                "CanCorrectAge" === e ? dT.eventStreamService.sendEventWithTarget(mM, mA, {
+                    btn: mO,
+                    state: t ? ms : mu,
+                    associatedText: mv
+                }) : "CanChangeSetting" === e ? dT.eventStreamService.sendEventWithTarget(mM, mI, {
+                    btn: mO,
+                    state: mR(void 0, n),
+                    associatedText: mv
+                }) : "CanRemoveParentManagedUserBlocks" === e ? dT.eventStreamService.sendEventWithTarget(mM, mI, {
+                    btn: mO,
                     state: "unblockUser ".concat(null == r ? void 0 : r.friendUserId),
-                    associatedText: mv
-                }) : "CanRemoveParentManagedExperienceBlocks" === e && dA.eventStreamService.sendEventWithTarget(mD, mT, {
-                    btn: mS,
+                    associatedText: mb
+                }) : "CanRemoveParentManagedExperienceBlocks" === e && dT.eventStreamService.sendEventWithTarget(mM, mI, {
+                    btn: mO,
                     state: "unblockExperience ".concat(null == r ? void 0 : r.universeId),
-                    associatedText: mv
-                }), t && n && dA.eventStreamService.sendEventWithTarget(mD, mI, {
-                    btn: mj,
-                    state: mM(o, n),
-                    associatedText: mv
+                    associatedText: mb
+                }), t && n && dT.eventStreamService.sendEventWithTarget(mM, mk, {
+                    btn: mC,
+                    state: mR(o, n),
+                    associatedText: mb
                 })
             }
 
-            function mL(e) {
+            function mF(e) {
                 var t;
                 switch (e) {
                     case "Idv":
-                        t = ml;
-                        break;
-                    case "Vpc":
-                        t = mu;
-                        break;
-                    case "IdvOrVpc":
                         t = mc;
                         break;
+                    case "Vpc":
+                        t = ms;
+                        break;
+                    case "IdvOrVpc":
+                        t = mu;
+                        break;
                     case "VpcNotEligible":
-                        t = ms
+                        t = mf
                 }
                 return t
             }
 
-            function mF(e, t, n, r, o) {
+            function mV(e, t, n, r, o) {
                 if ("CanCorrectAge" === e) {
-                    var a, i = mL(t);
-                    dA.eventStreamService.sendEventWithTarget(mD, mE, {
-                        btn: mO,
+                    var a, i = mF(t);
+                    dT.eventStreamService.sendEventWithTarget(mM, mA, {
+                        btn: mx,
                         state: i,
-                        associatedText: mb
+                        associatedText: mg
                     })
-                } else "CanChangeSetting" === e ? dA.eventStreamService.sendEventWithTarget(mD, mT, {
-                    btn: mO,
-                    state: mM(void 0, n),
-                    associatedText: mb
-                }) : "CanRemoveParentManagedUserBlocks" === e ? dA.eventStreamService.sendEventWithTarget(mD, mT, {
-                    btn: mO,
+                } else "CanChangeSetting" === e ? dT.eventStreamService.sendEventWithTarget(mM, mI, {
+                    btn: mx,
+                    state: mR(void 0, n),
+                    associatedText: mg
+                }) : "CanRemoveParentManagedUserBlocks" === e ? dT.eventStreamService.sendEventWithTarget(mM, mI, {
+                    btn: mx,
                     state: "unblockUser ".concat(null == r ? void 0 : r.friendUserId),
-                    associatedText: mb
-                }) : "CanRemoveParentManagedExperienceBlocks" === e && dA.eventStreamService.sendEventWithTarget(mD, mT, {
-                    btn: mO,
+                    associatedText: mg
+                }) : "CanRemoveParentManagedExperienceBlocks" === e && dT.eventStreamService.sendEventWithTarget(mM, mI, {
+                    btn: mx,
                     state: "unblockExperience ".concat(null == r ? void 0 : r.universeId),
-                    associatedText: mb
+                    associatedText: mg
                 });
                 if (n) {
                     switch (t) {
                         case "Vpc":
-                            a = mI;
+                            a = mk;
                             break;
                         case "Fae":
-                            a = mk
+                            a = mN
                     }
-                    a && dA.eventStreamService.sendEventWithTarget(mD, a, {
-                        btn: mC,
-                        state: mM(o, n),
-                        associatedText: mb
+                    a && dT.eventStreamService.sendEventWithTarget(mM, a, {
+                        btn: mE,
+                        state: mR(o, n),
+                        associatedText: mg
                     })
                 }
             }
 
-            function mV(e, t, n, r, o) {
+            function m_(e, t, n, r, o) {
                 if ("CanCorrectAge" === e) {
-                    var a, i, l = mL(t);
-                    dA.eventStreamService.sendEventWithTarget(mN, mE, {
+                    var a, i, l = mF(t);
+                    dT.eventStreamService.sendEventWithTarget(mD, mA, {
                         state: l,
-                        associatedText: mf
+                        associatedText: md
                     })
-                } else "CanChangeSetting" === e ? dA.eventStreamService.sendEventWithTarget(mN, mT, {
-                    state: mM(void 0, n),
-                    associatedText: md
-                }) : "CanRemoveParentManagedUserBlocks" === e ? dA.eventStreamService.sendEventWithTarget(mN, mT, {
+                } else "CanChangeSetting" === e ? dT.eventStreamService.sendEventWithTarget(mD, mI, {
+                    state: mR(void 0, n),
+                    associatedText: mp
+                }) : "CanRemoveParentManagedUserBlocks" === e ? dT.eventStreamService.sendEventWithTarget(mD, mI, {
                     state: "unblockUser ".concat(null == r ? void 0 : r.friendUserId),
-                    associatedText: my
-                }) : "CanRemoveParentManagedExperienceBlocks" === e && dA.eventStreamService.sendEventWithTarget(mN, mT, {
+                    associatedText: mm
+                }) : "CanRemoveParentManagedExperienceBlocks" === e && dT.eventStreamService.sendEventWithTarget(mD, mI, {
                     state: "unblockExperience ".concat(null == r ? void 0 : r.experienceId),
-                    associatedText: my
+                    associatedText: mm
                 });
                 if (n) {
                     switch (t) {
                         case "Vpc":
-                            a = mI, i = my;
+                            a = mk, i = mm;
                             break;
                         case "Fae":
-                            a = mk, i = mg
+                            a = mN, i = mw
                     }
-                    a && dA.eventStreamService.sendEventWithTarget(mN, a, {
-                        state: mM(o, n),
+                    a && dT.eventStreamService.sendEventWithTarget(mD, a, {
+                        state: mR(o, n),
                         associatedText: i
                     })
                 }
             }
 
-            function m_(e, t) {
+            function mW(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var mW = function(e) {
+            var mK = function(e) {
                 var t, n = e.translate,
                     r = e.onHide,
-                    o = q(d$),
-                    a = n(ya),
+                    o = q(dX),
+                    a = n(yi),
                     i = (0, P.jsx)("div", {
                         children: (0, P.jsx)("div", {
                             className: "text-description",
-                            children: n(yi)
+                            children: n(yl)
                         })
                     }),
                     l = function(e) {
                         if (Array.isArray(e)) return e
-                    }(t = mi({
+                    }(t = ml({
                         translate: n,
                         title: a,
                         body: i,
-                        actionButtonTranslateKey: yo,
+                        actionButtonTranslateKey: ya,
                         onAction: function() {
-                            "CanCorrectAge" === o && dA.eventStreamService.sendEventWithTarget(mD, mA, {
-                                btn: mP,
-                                state: mu,
-                                associatedText: mp
+                            "CanCorrectAge" === o && dT.eventStreamService.sendEventWithTarget(mM, mT, {
+                                btn: mj,
+                                state: ms,
+                                associatedText: my
                             }), window.open("https://help.roblox.com/hc/articles/30428367965460", "_blank")
                         },
                         size: "sm",
                         onHide: function() {
-                            r(), "CanCorrectAge" === o && dA.eventStreamService.sendEventWithTarget(mD, mA, {
-                                btn: mx,
-                                state: mu,
-                                associatedText: mp
+                            r(), "CanCorrectAge" === o && dT.eventStreamService.sendEventWithTarget(mM, mT, {
+                                btn: mP,
+                                state: ms,
+                                associatedText: my
                             }), u.close()
                         }
                     })) || function(e) {
@@ -20806,10 +20829,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return m_(e, 2);
+                            if ("string" == typeof e) return mW(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return m_(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return mW(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -20817,24 +20840,24 @@ function() {
                     c = l[0],
                     u = l[1];
                 return (0, I.useEffect)(function() {
-                    u.open(), mV(o, "VpcNotEligible")
+                    u.open(), m_(o, "VpcNotEligible")
                 }, [o, u]), [c, u]
             };
 
-            function mK(e, t) {
+            function mB(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var mB = function(e) {
+            var mz = function(e) {
                     var t, n, r, o = e.translate,
                         a = e.onHide,
                         i = null,
                         l = null,
-                        c = q(dJ);
+                        c = q(dY);
                     return (null == c || null == (n = c.data) ? void 0 : n.featureName) === "CanCorrectAge" && (i = (r = function(e) {
                         if (Array.isArray(e)) return e
-                    }(t = mW({
+                    }(t = mK({
                         translate: o,
                         onHide: a
                     })) || function(e) {
@@ -20858,10 +20881,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return mK(e, 2);
+                            if ("string" == typeof e) return mB(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return mK(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return mB(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -20869,11 +20892,11 @@ function() {
                         l.open()
                     }, [i, l]), i
                 },
-                mz = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/child-requests-api/v1/send-request-to-new-parent"),
-                mq = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/child-requests-api/v1/send-request-to-all-parents"),
-                mH = "".concat(au.EnvironmentUrls.userSettingsApi, "/v1/account-insights/parent-emails");
+                mq = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/child-requests-api/v1/send-request-to-new-parent"),
+                mH = "".concat(au.EnvironmentUrls.apiGatewayUrl, "/child-requests-api/v1/send-request-to-all-parents"),
+                mG = "".concat(au.EnvironmentUrls.userSettingsApi, "/v1/account-insights/parent-emails");
 
-            function mG(e, t, n, r, o, a, i) {
+            function m$(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -20884,7 +20907,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function m$(e) {
+            function mX(e) {
                 return function() {
                     var t = this,
                         n = arguments;
@@ -20892,18 +20915,18 @@ function() {
                         var a = e.apply(t, n);
 
                         function i(e) {
-                            mG(a, r, o, i, l, "next", e)
+                            m$(a, r, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            mG(a, r, o, i, l, "throw", e)
+                            m$(a, r, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 }
             }
 
-            function mX(e, t) {
+            function mJ(e, t) {
                 var n, r, o, a = {
                         label: 0,
                         sent: function() {
@@ -20983,7 +21006,7 @@ function() {
                     }
                 }
             }
-            var mJ = {
+            var mY = {
                     privacyPolicyUrl: "".concat(au.EnvironmentUrls.websiteUrl, "/info/privacy"),
                     defaultCooldownTimeInMs: 9e5,
                     emailRegex: "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$",
@@ -21089,43 +21112,43 @@ function() {
                         enablePurchases: "enablePurchases"
                     }
                 },
-                mY = ((p = mY || {}).Unknown = "Unknown", p.InvalidUserID = "InvalidUserID", p.InvalidParameter = "InvalidParameter", p.ServiceUnavailable = "ServiceUnavailable", p.NoLinkedParents = "NoLinkedParents", p.ConsentAlreadyApplied = "ConsentAlreadyApplied", p.SenderFlooded = "SenderFlooded", p.ReceiverFlooded = "ReceiverFlooded", p.SenderFloodedRequestCreated = "SenderFloodedRequestCreated", p.IllegalState = "IllegalState", p.InvalidEmailAddress = "InvalidEmailAddress", p.EmailNotUnique = "EmailNotUnique", p.LinkingIneligible = "LinkingIneligible", p.AlreadyLinked = "AlreadyLinked", p.ChildAtLinkLimit = "ChildAtLinkLimit", p.ParentAtLinkLimit = "ParentAtLinkLimit", p.UpdateUserSettingRequestInvalid = "UpdateUserSettingRequestInvalid", p.ConsentAlreadyRequestedConflictingData = "ConsentAlreadyRequestedConflictingData", p.ReceiverNotWhitelisted = "ReceiverNotWhitelisted", p.InvalidComplianceFeature = "InvalidComplianceFeature", p.ChildTooOld = "ChildTooOld", p.UserForgotten = "UserForgotten", p),
-                mQ = {
+                mQ = ((p = mQ || {}).Unknown = "Unknown", p.InvalidUserID = "InvalidUserID", p.InvalidParameter = "InvalidParameter", p.ServiceUnavailable = "ServiceUnavailable", p.NoLinkedParents = "NoLinkedParents", p.ConsentAlreadyApplied = "ConsentAlreadyApplied", p.SenderFlooded = "SenderFlooded", p.ReceiverFlooded = "ReceiverFlooded", p.SenderFloodedRequestCreated = "SenderFloodedRequestCreated", p.IllegalState = "IllegalState", p.InvalidEmailAddress = "InvalidEmailAddress", p.EmailNotUnique = "EmailNotUnique", p.LinkingIneligible = "LinkingIneligible", p.AlreadyLinked = "AlreadyLinked", p.ChildAtLinkLimit = "ChildAtLinkLimit", p.ParentAtLinkLimit = "ParentAtLinkLimit", p.UpdateUserSettingRequestInvalid = "UpdateUserSettingRequestInvalid", p.ConsentAlreadyRequestedConflictingData = "ConsentAlreadyRequestedConflictingData", p.ReceiverNotWhitelisted = "ReceiverNotWhitelisted", p.InvalidComplianceFeature = "InvalidComplianceFeature", p.ChildTooOld = "ChildTooOld", p.UserForgotten = "UserForgotten", p),
+                mZ = {
                     data: {
                         code: "UnknownError"
                     }
                 },
-                mZ = mJ.translationKeys.gatherParentEmail,
-                m0 = function(e) {
+                m0 = mY.translationKeys.gatherParentEmail,
+                m1 = function(e) {
                     switch (e) {
-                        case mY.ChildAtLinkLimit:
-                            return mZ.childTooManyParentsError;
-                        case mY.ParentAtLinkLimit:
-                            return mZ.emailTooManyChildrenError;
-                        case mY.SenderFlooded:
-                            return mZ.senderFlooded;
-                        case mY.ReceiverFlooded:
-                            return mZ.emailTooManyRequest;
-                        case mY.ConsentAlreadyApplied:
-                            return mZ.alreadyApplied;
-                        case mY.AlreadyLinked:
-                            return mZ.alreadyLinked;
-                        case mY.InvalidEmailAddress:
-                            return mZ.invalidEmailError;
+                        case mQ.ChildAtLinkLimit:
+                            return m0.childTooManyParentsError;
+                        case mQ.ParentAtLinkLimit:
+                            return m0.emailTooManyChildrenError;
+                        case mQ.SenderFlooded:
+                            return m0.senderFlooded;
+                        case mQ.ReceiverFlooded:
+                            return m0.emailTooManyRequest;
+                        case mQ.ConsentAlreadyApplied:
+                            return m0.alreadyApplied;
+                        case mQ.AlreadyLinked:
+                            return m0.alreadyLinked;
+                        case mQ.InvalidEmailAddress:
+                            return m0.invalidEmailError;
                         default:
-                            return mZ.unknownError
+                            return m0.unknownError
                     }
                 },
-                m1 = ((y = m1 || {}).LiftPunishment = "LiftPunishment", y.SavePaymentMethods = "SavePaymentMethods", y.UpdateUserSetting = "UpdateUserSetting", y.UpdateBirthdate = "UpdateBirthdate", y.LinkToChild = "LinkToChild", y.AddTrustedConnection = "AddTrustedConnection", y.LiftRestriction = "LiftRestriction", y.Unknown = "Unknown", y),
-                m2 = ((m = m2 || {}).Chargeback = "Chargeback", m);
+                m2 = ((y = m2 || {}).LiftPunishment = "LiftPunishment", y.SavePaymentMethods = "SavePaymentMethods", y.UpdateUserSetting = "UpdateUserSetting", y.UpdateBirthdate = "UpdateBirthdate", y.LinkToChild = "LinkToChild", y.AddTrustedConnection = "AddTrustedConnection", y.LiftRestriction = "LiftRestriction", y.Unknown = "Unknown", y),
+                m3 = ((m = m3 || {}).Chargeback = "Chargeback", m);
 
-            function m3(e, t) {
+            function m5(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var m5 = mJ.events,
-                m6 = function(e, t, n, r) {
+            var m6 = mY.events,
+                m8 = function(e, t, n, r) {
                     var o = n ? "".concat(n, ", ") : "",
                         a = t ? "sessionId: ".concat(t, ", ") : "",
                         i = r ? "settingName: ".concat(Object.keys(r)[0], ", ") : "",
@@ -21153,10 +21176,10 @@ function() {
                                     }
                                 }(e) || function(e) {
                                     if (e) {
-                                        if ("string" == typeof e) return m3(e, 2);
+                                        if ("string" == typeof e) return m5(e, 2);
                                         var t = Object.prototype.toString.call(e).slice(8, -1);
                                         if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return m3(e, 2)
+                                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return m5(e, 2)
                                     }
                                 }(e) || function() {
                                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -21165,94 +21188,94 @@ function() {
                                 r = t[1];
                             return "".concat(n, ": ").concat(String(r))
                         }).join(", ") : "";
-                    return e === m1.UpdateUserSetting ? "".concat(o).concat(i).concat(a) : "".concat(o).concat(l).concat(a)
+                    return e === m2.UpdateUserSetting ? "".concat(o).concat(i).concat(a) : "".concat(o).concat(l).concat(a)
                 },
-                m8 = function(e, t) {
+                m4 = function(e, t) {
                     var n;
                     switch (e) {
-                        case m1.LiftPunishment:
-                            (null == t ? void 0 : t.punishmentType) === m2.Chargeback && (n = m5.chargebackContext);
+                        case m2.LiftPunishment:
+                            (null == t ? void 0 : t.punishmentType) === m3.Chargeback && (n = m6.chargebackContext);
                             break;
-                        case m1.SavePaymentMethods:
-                            n = m5.savePaymentMethodsContext;
+                        case m2.SavePaymentMethods:
+                            n = m6.savePaymentMethodsContext;
                             break;
-                        case m1.UpdateBirthdate:
-                            n = m5.changeBirthdayContext;
+                        case m2.UpdateBirthdate:
+                            n = m6.changeBirthdayContext;
                             break;
-                        case m1.UpdateUserSetting:
-                            n = m5.updateUserSettingContext;
+                        case m2.UpdateUserSetting:
+                            n = m6.updateUserSettingContext;
                             break;
-                        case m1.AddTrustedConnection:
-                            n = m5.addTrustedFriendVpcContext;
+                        case m2.AddTrustedConnection:
+                            n = m6.addTrustedFriendVpcContext;
                             break;
                         default:
-                            n = m5.chargebackContext
+                            n = m6.chargebackContext
                     }
                     return n
                 },
-                m4 = function(e, t, n) {
+                m7 = function(e, t, n) {
                     try {
-                        dA.eventStreamService.sendEventWithTarget(e, t, n)
+                        dT.eventStreamService.sendEventWithTarget(e, t, n)
                     } catch (e) {}
-                },
-                m7 = function(e) {
-                    var t = e.requestType,
-                        n = e.sessionId,
-                        r = e.extraState,
-                        o = e.details,
-                        a = m8(t, o);
-                    m4(m5.eventName.authPageLoad, a.settingsRequestSent, {
-                        state: m6(t, n, r, o),
-                        associatedText: m5.text.requestSent
-                    })
                 },
                 m9 = function(e) {
                     var t = e.requestType,
                         n = e.sessionId,
                         r = e.extraState,
                         o = e.details,
-                        a = m8(t, o);
-                    m4(m5.eventName.authButtonClick, a.parentalEntry, {
-                        btn: m5.btn.continue,
-                        associatedText: m5.text.ok,
-                        state: m6(t, n, r, o)
+                        a = m4(t, o);
+                    m7(m6.eventName.authPageLoad, a.settingsRequestSent, {
+                        state: m8(t, n, r, o),
+                        associatedText: m6.text.requestSent
                     })
                 },
                 he = function(e) {
                     var t = e.requestType,
-                        n = e.extraState,
-                        r = e.sessionId,
+                        n = e.sessionId,
+                        r = e.extraState,
                         o = e.details,
-                        a = m8(t, o);
-                    m4(m5.eventName.authButtonClick, a.parentalEntry, {
-                        btn: m5.btn.submit,
-                        associatedText: m5.text.sendEmail,
-                        state: m6(t, r, n, o)
+                        a = m4(t, o);
+                    m7(m6.eventName.authButtonClick, a.parentalEntry, {
+                        btn: m6.btn.continue,
+                        associatedText: m6.text.ok,
+                        state: m8(t, n, r, o)
                     })
                 },
                 ht = function(e) {
                     var t = e.requestType,
                         n = e.extraState,
-                        r = e.details,
-                        o = m8(t, r);
-                    m4(m5.eventName.authFormInteraction, o.parentalEntry, {
-                        field: m5.field.email,
-                        associatedText: m5.text.enterParentEmail,
-                        state: m6(t, void 0, n, r)
+                        r = e.sessionId,
+                        o = e.details,
+                        a = m4(t, o);
+                    m7(m6.eventName.authButtonClick, a.parentalEntry, {
+                        btn: m6.btn.submit,
+                        associatedText: m6.text.sendEmail,
+                        state: m8(t, r, n, o)
                     })
                 },
                 hn = function(e) {
                     var t = e.requestType,
                         n = e.extraState,
                         r = e.details,
-                        o = m8(t, r);
-                    m4(m5.eventName.authModalShown, o.parentalEntry, {
-                        field: m5.field.emailModal,
-                        associatedText: m5.text.enterParentEmail,
-                        state: m6(t, void 0, n, r)
+                        o = m4(t, r);
+                    m7(m6.eventName.authFormInteraction, o.parentalEntry, {
+                        field: m6.field.email,
+                        associatedText: m6.text.enterParentEmail,
+                        state: m8(t, void 0, n, r)
                     })
                 },
-                hr = {
+                hr = function(e) {
+                    var t = e.requestType,
+                        n = e.extraState,
+                        r = e.details,
+                        o = m4(t, r);
+                    m7(m6.eventName.authModalShown, o.parentalEntry, {
+                        field: m6.field.emailModal,
+                        associatedText: m6.text.enterParentEmail,
+                        state: m8(t, void 0, n, r)
+                    })
+                },
+                ho = {
                     dateInUTCToBirthdate: function(e) {
                         var t = e.getUTCFullYear(),
                             n = e.getUTCMonth() + 1;
@@ -21265,23 +21288,23 @@ function() {
                     calculateAge: function(e) {
                         if (!(null == e ? void 0 : e.birthYear) || 0 === e.birthYear) return 0;
                         var t = new Date,
-                            n = hr.dateInUTCToBirthdate(t);
+                            n = ho.dateInUTCToBirthdate(t);
                         return n.birthDay - e.birthDay < 0 && (n.birthMonth -= 1), n.birthMonth - e.birthMonth < 0 && (n.birthYear -= 1), n.birthYear - e.birthYear
                     },
                     getAgeRange: function(e) {
-                        var t = mJ.events.state.changeBirthday,
-                            n = hr.dateInUTCToBirthdate(e);
-                        return 13 > hr.calculateAge(n) ? t.U13ToU13 : t.U13To1318
+                        var t = mY.events.state.changeBirthday,
+                            n = ho.dateInUTCToBirthdate(e);
+                        return 13 > ho.calculateAge(n) ? t.U13ToU13 : t.U13To1318
                     }
                 };
 
-            function ho(e, t) {
+            function ha(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function ha(e, t, n, r, o, a, i) {
+            function hi(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -21292,7 +21315,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function hi(e, t) {
+            function hl(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -21316,29 +21339,29 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return ho(e, t);
+                        if ("string" == typeof e) return ha(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ho(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return ha(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var hl = function(e) {
+            var hc = function(e) {
                 var t = e.translate,
                     n = e.consentType,
                     r = e.successCallBack,
                     o = e.onHideCallback,
                     a = e.value,
                     i = void 0 === a ? null : a,
-                    l = hi((0, I.useState)(mJ.translationKeys.gatherParentEmail.unknownError), 2),
+                    l = hl((0, I.useState)(mY.translationKeys.gatherParentEmail.unknownError), 2),
                     c = l[0],
                     u = l[1],
-                    s = mJ.translationKeys.emailSentConfirmation,
-                    f = hi(mi({
+                    s = mY.translationKeys.emailSentConfirmation,
+                    f = hl(ml({
                         translate: t,
-                        title: t(mJ.translationKeys.gatherParentEmail.unknownError),
+                        title: t(mY.translationKeys.gatherParentEmail.unknownError),
                         body: (0, P.jsx)("p", {
                             children: t(c)
                         }),
@@ -21440,29 +21463,29 @@ function() {
                                         return s.trys.push([0, 2, , 3]), [4, (f = {
                                             requestType: n,
                                             requestDetails: null != i ? i : void 0
-                                        }, m$(function() {
+                                        }, mX(function() {
                                             var e, t, n, r;
-                                            return mX(this, function(o) {
+                                            return mJ(this, function(o) {
                                                 switch (o.label) {
                                                     case 0:
                                                         return e = {
-                                                            url: mq,
+                                                            url: mH,
                                                             withCredentials: !0
-                                                        }, t = f.requestDetails, [4, sy.httpService.post(e, f)];
+                                                        }, t = f.requestDetails, [4, sm.httpService.post(e, f)];
                                                     case 1:
-                                                        return n = o.sent(), t && (r = Object.keys(t)[0], dA.localStorageService.setLocalStorage("Roblox.ParentalRequest.".concat(r, "CooldownExpirationTime"), n.data.lockedUntil)), [2, n.data]
+                                                        return n = o.sent(), t && (r = Object.keys(t)[0], dT.localStorageService.setLocalStorage("Roblox.ParentalRequest.".concat(r, "CooldownExpirationTime"), n.data.lockedUntil)), [2, n.data]
                                                 }
                                             })
                                         })())];
                                     case 1:
-                                        return e = s.sent(), t = new Date(null == i ? void 0 : i.newBirthdate), o = n === m1.UpdateBirthdate ? hr.getAgeRange(t) : void 0, m7({
+                                        return e = s.sent(), t = new Date(null == i ? void 0 : i.newBirthdate), o = n === m2.UpdateBirthdate ? ho.getAgeRange(t) : void 0, m9({
                                             requestType: n,
                                             extraState: o,
                                             sessionId: e.sessionId,
                                             details: null != i ? i : void 0
                                         }), r(e.sessionId), [3, 3];
                                     case 2:
-                                        return (c = m0((l = null != (a = s.sent()) ? a : mQ).data.code)) === mY.SenderFloodedRequestCreated ? r(l.data.sessionId, void 0, !0) : (u(c), p.open()), [3, 3];
+                                        return (c = m1((l = null != (a = s.sent()) ? a : mZ).data.code)) === mQ.SenderFloodedRequestCreated ? r(l.data.sessionId, void 0, !0) : (u(c), p.open()), [3, 3];
                                     case 3:
                                         return [2]
                                 }
@@ -21474,11 +21497,11 @@ function() {
                                 var a = e.apply(t, n);
 
                                 function i(e) {
-                                    ha(a, r, o, i, l, "next", e)
+                                    hi(a, r, o, i, l, "next", e)
                                 }
 
                                 function l(e) {
-                                    ha(a, r, o, i, l, "throw", e)
+                                    hi(a, r, o, i, l, "throw", e)
                                 }
                                 i(void 0)
                             })
@@ -21491,13 +21514,13 @@ function() {
                 })
             };
 
-            function hc(e, t) {
+            function hu(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function hu(e, t, n, r, o, a, i) {
+            function hs(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -21508,7 +21531,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function hs(e) {
+            function hf(e) {
                 return function() {
                     var t = this,
                         n = arguments;
@@ -21516,18 +21539,18 @@ function() {
                         var a = e.apply(t, n);
 
                         function i(e) {
-                            hu(a, r, o, i, l, "next", e)
+                            hs(a, r, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            hu(a, r, o, i, l, "throw", e)
+                            hs(a, r, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 }
             }
 
-            function hf(e, t) {
+            function hd(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -21551,17 +21574,17 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return hc(e, t);
+                        if ("string" == typeof e) return hu(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return hc(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return hu(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function hd(e, t) {
+            function hp(e, t) {
                 var n, r, o, a = {
                         label: 0,
                         sent: function() {
@@ -21641,23 +21664,23 @@ function() {
                     }
                 }
             }
-            var hp = function(e, t, n, r, o, a) {
-                mJ.privacyPolicyUrl;
-                var i, l = mJ.emailRegex,
-                    c = mJ.translationKeys.gatherParentEmail,
-                    u = hf((0, I.useState)(!1), 2),
+            var hy = function(e, t, n, r, o, a) {
+                mY.privacyPolicyUrl;
+                var i, l = mY.emailRegex,
+                    c = mY.translationKeys.gatherParentEmail,
+                    u = hd((0, I.useState)(!1), 2),
                     s = u[0],
                     f = u[1],
-                    d = hf((0, I.useState)(!1), 2),
+                    d = hd((0, I.useState)(!1), 2),
                     p = d[0],
                     y = d[1],
-                    m = hf((0, I.useState)("pending"), 2),
+                    m = hd((0, I.useState)("pending"), 2),
                     h = m[0],
                     v = m[1],
-                    b = hf((0, I.useState)(!1), 2),
+                    b = hd((0, I.useState)(!1), 2),
                     g = b[0],
                     w = b[1],
-                    S = hf((0, I.useState)(""), 2),
+                    S = hd((0, I.useState)(""), 2),
                     O = S[0],
                     x = S[1],
                     j = (0, I.useMemo)(function() {
@@ -21670,23 +21693,23 @@ function() {
                             }
                         }
                     }, []),
-                    C = hf((0, I.useState)(""), 2),
+                    C = hd((0, I.useState)(""), 2),
                     E = C[0],
                     T = C[1];
                 (0, I.useEffect)(function() {
-                    hn({
+                    hr({
                         requestType: t,
                         details: null != o ? o : void 0,
                         extraState: a
                     })
                 }, []), (0, I.useEffect)(function() {
-                    hs(function() {
-                        return hd(this, function(e) {
+                    hf(function() {
+                        return hp(this, function(e) {
                             switch (e.label) {
                                 case 0:
-                                    return e.trys.push([0, 2, , 3]), [4, dk(mJ.isChildSubjectToPCFeatureName)];
+                                    return e.trys.push([0, 2, , 3]), [4, dN(mY.isChildSubjectToPCFeatureName)];
                                 case 1:
-                                    return y(e.sent().access === dE.Granted), v("success"), [3, 3];
+                                    return y(e.sent().access === dA.Granted), v("success"), [3, 3];
                                 case 2:
                                     return e.sent(), v("failed"), [3, 3];
                                 case 3:
@@ -21698,7 +21721,7 @@ function() {
                 var N = (0, I.useMemo)(function() {
                         return "success" !== h ? "vpcRequestLinkDefault" : p ? "vpcRequestLinkSubjectToPC" : "vpcRequestLinkNotSubjectToPC"
                     }, [p, h]),
-                    D = hf(A.LegallySensitiveContentService.useLegallySensitiveContentAndActions(N, "vpc-upsell-web"), 2),
+                    D = hd(A.LegallySensitiveContentService.useLegallySensitiveContentAndActions(N, "vpc-upsell-web"), 2),
                     M = D[0],
                     R = D[1],
                     U = null != (i = null == M ? void 0 : M.wordsOfConsent) ? i : {},
@@ -21739,7 +21762,7 @@ function() {
                                         x(e.target.value), T("")
                                     },
                                     onFocus: function() {
-                                        return ht({
+                                        return hn({
                                             requestType: t,
                                             details: null != o ? o : void 0,
                                             extraState: a
@@ -21769,7 +21792,7 @@ function() {
                             }
                         })]
                     });
-                return [(0, P.jsxs)(sK.Modal, {
+                return [(0, P.jsxs)(sB.Modal, {
                     show: s,
                     onHide: function() {
                         j.close(), r()
@@ -21779,11 +21802,11 @@ function() {
                     size: "sm",
                     "aria-labelledby": "access-management-upsell-inner-modal-title",
                     centered: !0,
-                    children: [(0, P.jsxs)(sK.Modal.Header, {
+                    children: [(0, P.jsxs)(sB.Modal.Header, {
                         useBaseBootstrapComponent: !0,
                         children: [(0, P.jsx)("div", {
                             className: "access-management-upsell-inner-modal-title-container",
-                            children: (0, P.jsx)(sK.Modal.Title, {
+                            children: (0, P.jsx)(sB.Modal.Title, {
                                 id: "access-management-upsell-inner-modal-title",
                                 children: U.title
                             })
@@ -21797,23 +21820,23 @@ function() {
                                 className: "icon-close"
                             })
                         })]
-                    }), (0, P.jsx)(sK.Modal.Body, {
+                    }), (0, P.jsx)(sB.Modal.Body, {
                         children: _
-                    }), (0, P.jsx)(sK.Modal.Footer, {
-                        children: (0, P.jsx)(sK.Button, {
-                            variant: sK.Button.variants.primary,
-                            size: sK.Button.sizes.medium,
-                            width: sK.Button.widths.full,
+                    }), (0, P.jsx)(sB.Modal.Footer, {
+                        children: (0, P.jsx)(sB.Button, {
+                            variant: sB.Button.variants.primary,
+                            size: sB.Button.sizes.medium,
+                            width: sB.Button.widths.full,
                             isDisabled: "" === O || "" !== V(),
                             isLoading: g,
                             onClick: function() {
-                                return hs(function() {
-                                    return hd(this, function(e) {
+                                return hf(function() {
+                                    return hp(this, function(e) {
                                         switch (e.label) {
                                             case 0:
-                                                return w(!0), [4, hs(function() {
+                                                return w(!0), [4, hf(function() {
                                                     var e, r, i, l;
-                                                    return hd(this, function(c) {
+                                                    return hp(this, function(c) {
                                                         switch (c.label) {
                                                             case 0:
                                                                 T(""), c.label = 1;
@@ -21824,9 +21847,9 @@ function() {
                                                                     requestType: t,
                                                                     requestDetails: null != o ? o : void 0,
                                                                     auditData: R.getBase64EncodedAuditHeader()
-                                                                }, m$(function() {
+                                                                }, mX(function() {
                                                                     var e, t, n, r, o, a;
-                                                                    return mX(this, function(i) {
+                                                                    return mJ(this, function(i) {
                                                                         switch (i.label) {
                                                                             case 0:
                                                                                 return e = u.auditData, t = function(e, t) {
@@ -21863,27 +21886,27 @@ function() {
                                                                                     }
                                                                                     return e
                                                                                 }({
-                                                                                    url: mz,
+                                                                                    url: mq,
                                                                                     withCredentials: !0
                                                                                 }, e ? {
                                                                                     headers: {
                                                                                         "rbx-audit-data": e
                                                                                     }
-                                                                                } : {}), r = t.requestDetails, [4, sy.httpService.post(n, t)];
+                                                                                } : {}), r = t.requestDetails, [4, sm.httpService.post(n, t)];
                                                                             case 1:
-                                                                                return o = i.sent(), r && (a = Object.keys(r)[0], dA.localStorageService.setLocalStorage("Roblox.ParentalRequest.".concat(a, "CooldownExpirationTime"), o.data.lockedUntil)), [2, o.data]
+                                                                                return o = i.sent(), r && (a = Object.keys(r)[0], dT.localStorageService.setLocalStorage("Roblox.ParentalRequest.".concat(a, "CooldownExpirationTime"), o.data.lockedUntil)), [2, o.data]
                                                                         }
                                                                     })
                                                                 })())];
                                                             case 2:
-                                                                return he({
+                                                                return ht({
                                                                     requestType: t,
                                                                     sessionId: (e = c.sent()).sessionId,
                                                                     details: null != o ? o : void 0,
                                                                     extraState: a
                                                                 }), w(!1), j.close(), n(e.sessionId, O), [3, 4];
                                                             case 3:
-                                                                return r = c.sent(), x(""), w(!1), (l = m0((i = null != r ? r : mQ).data.code)) === mY.SenderFloodedRequestCreated && n(i.data.sessionId, void 0, !0), T(l), [3, 4];
+                                                                return r = c.sent(), x(""), w(!1), (l = m1((i = null != r ? r : mZ).data.code)) === mQ.SenderFloodedRequestCreated && n(i.data.sessionId, void 0, !0), T(l), [3, 4];
                                                             case 4:
                                                                 return [2]
                                                         }
@@ -21901,12 +21924,12 @@ function() {
                 }), j]
             };
 
-            function hy(e, t) {
+            function hm(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var hm = function(e) {
+            var hh = function(e) {
                 var t, n = e.translate,
                     r = e.consentType,
                     o = e.successCallback,
@@ -21914,10 +21937,10 @@ function() {
                     i = e.isPrologueUsed,
                     l = e.value,
                     c = e.source,
-                    u = q(d$),
+                    u = q(dX),
                     s = function(e) {
                         if (Array.isArray(e)) return e
-                    }(t = hp(n, r, o, a, l, c)) || function(e) {
+                    }(t = hy(n, r, o, a, l, c)) || function(e) {
                         var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                         if (null != r) {
                             var o = [],
@@ -21938,10 +21961,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return hy(e, 2);
+                            if ("string" == typeof e) return hm(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hy(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hm(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -21951,7 +21974,7 @@ function() {
                 return (0, I.useEffect)(function() {
                     if (!i) {
                         var e = Object.keys(null != l ? l : {})[0];
-                        mV(u, mJ.events.vpc, e, l)
+                        m_(u, mY.events.vpc, e, l)
                     }
                     d.open()
                 }, []), (0, P.jsx)(k().Fragment, {
@@ -21959,7 +21982,7 @@ function() {
                 })
             };
 
-            function hh(e, t, n, r, o, a, i) {
+            function hv(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -21969,7 +21992,7 @@ function() {
                 }
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
-            var hv = function() {
+            var hb = function() {
                 var e;
                 return (e = function() {
                     var e;
@@ -22056,9 +22079,9 @@ function() {
                         switch (t.label) {
                             case 0:
                                 return e = {
-                                    url: mH,
+                                    url: mG,
                                     withCredentials: !0
-                                }, [4, sy.httpService.get(e)];
+                                }, [4, sm.httpService.get(e)];
                             case 1:
                                 return [2, t.sent().data]
                         }
@@ -22070,24 +22093,24 @@ function() {
                         var a = e.apply(t, n);
 
                         function i(e) {
-                            hh(a, r, o, i, l, "next", e)
+                            hv(a, r, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            hh(a, r, o, i, l, "throw", e)
+                            hv(a, r, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 })()
             };
 
-            function hb(e, t) {
+            function hg(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function hg(e, t, n, r, o, a, i) {
+            function hw(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -22098,7 +22121,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function hw(e, t) {
+            function hS(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -22122,16 +22145,16 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return hb(e, t);
+                        if ("string" == typeof e) return hg(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return hb(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return hg(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var hS = (0, N.withTranslations)(function(e) {
+            var hO = (0, N.withTranslations)(function(e) {
                     var t = e.translate,
                         n = e.recourse,
                         r = e.onHidecallback,
@@ -22140,14 +22163,14 @@ function() {
                         i = e.value,
                         l = void 0 === i ? null : i,
                         c = e.source,
-                        u = mJ.translationKeys.emailSentConfirmation,
+                        u = mY.translationKeys.emailSentConfirmation,
                         s = n.action,
                         f = n.parentConsentTypes,
                         d = null == f ? void 0 : f[0],
-                        p = hw((0, I.useState)([]), 2),
+                        p = hS((0, I.useState)([]), 2),
                         y = p[0],
                         m = p[1],
-                        h = hw((0, I.useState)(!0), 2),
+                        h = hS((0, I.useState)(!0), 2),
                         v = h[0],
                         b = h[1],
                         g = (0, I.useRef)(!1),
@@ -22173,7 +22196,7 @@ function() {
                         C = (0, I.useMemo)(function() {
                             return v ? 1 === y.length ? O : x : j
                         }, [v, y]),
-                        E = hw(mi({
+                        E = hS(ml({
                             translate: t,
                             title: t(u.title),
                             body: C,
@@ -22270,7 +22293,7 @@ function() {
                                 }(this, function(e) {
                                     switch (e.label) {
                                         case 0:
-                                            return [4, hv().then(function(e) {
+                                            return [4, hb().then(function(e) {
                                                 m(e.parentEmails)
                                             })];
                                         case 1:
@@ -22284,42 +22307,42 @@ function() {
                                     var a = e.apply(t, n);
 
                                     function i(e) {
-                                        hg(a, r, o, i, l, "next", e)
+                                        hw(a, r, o, i, l, "next", e)
                                     }
 
                                     function l(e) {
-                                        hg(a, r, o, i, l, "throw", e)
+                                        hw(a, r, o, i, l, "throw", e)
                                     }
                                     i(void 0)
                                 })
                             })()
                         };
                     (0, I.useEffect)(function() {
-                        s === pi.ParentConsentRequest && k()
+                        s === pl.ParentConsentRequest && k()
                     }, [s]);
                     var N = function(e, t, n) {
-                        if (w(!0), t && m([t]), n && b(!1), T.open(), d === m1.UpdateBirthdate) {
+                        if (w(!0), t && m([t]), n && b(!1), T.open(), d === m2.UpdateBirthdate) {
                             var r = new Date(null == l ? void 0 : l.newBirthdate),
-                                o = hr.getAgeRange(r);
-                            m9({
-                                requestType: m1.UpdateBirthdate,
+                                o = ho.getAgeRange(r);
+                            he({
+                                requestType: m2.UpdateBirthdate,
                                 extraState: o,
                                 sessionId: e
                             })
-                        } else m9({
+                        } else he({
                             requestType: d,
                             sessionId: e,
                             details: null != l ? l : void 0
                         })
                     };
                     return (0, P.jsxs)("div", {
-                        children: [s === pi.ParentConsentRequest && (0, P.jsx)(hl, {
+                        children: [s === pl.ParentConsentRequest && (0, P.jsx)(hc, {
                             translate: t,
                             consentType: d,
                             successCallBack: N,
                             onHideCallback: S,
                             value: l
-                        }), s === pi.ParentLinkRequest && (0, P.jsx)(hm, {
+                        }), s === pl.ParentLinkRequest && (0, P.jsx)(hh, {
                             translate: t,
                             consentType: d,
                             successCallback: N,
@@ -22333,58 +22356,58 @@ function() {
                     common: ["CommonUI.Controls", "CommonUI.Features", "Amp.Upsell"],
                     feature: "Feature.Parents"
                 }),
-                hO = ((h = hO || {}).control = "control", h.askYourParentTitle = "askYourParentTitle", h.permissionNeededTitle = "permissionNeededTitle", h.visualized = "visualized", h.newPrologueNoVisual = "newPrologueNoVisual", h.newPrologueVisual = "newPrologueVisual", h.newOneScreenVisual = "newOneScreenVisual", h),
-                hx = {};
+                hx = ((h = hx || {}).control = "control", h.askYourParentTitle = "askYourParentTitle", h.permissionNeededTitle = "permissionNeededTitle", h.visualized = "visualized", h.newPrologueNoVisual = "newPrologueNoVisual", h.newPrologueVisual = "newPrologueVisual", h.newOneScreenVisual = "newOneScreenVisual", h),
+                hP = {};
 
-            function hP(e, t, n, r, o, a) {
+            function hj(e, t, n, r, o, a) {
                 var i = n(t);
-                if (r.includes(pi.GovernmentId) && r.includes(pi.ParentConsentRequest) && (i = n("CanCorrectAge" === e ? p1 : t)), 1 === r.length && r.includes(pi.ParentConsentRequest)) {
+                if (r.includes(pl.GovernmentId) && r.includes(pl.ParentConsentRequest) && (i = n("CanCorrectAge" === e ? p2 : t)), 1 === r.length && r.includes(pl.ParentConsentRequest)) {
                     switch (!0) {
                         case "TriggerTrustedFriendVPCRecourse" === e:
-                            i = n(pJ);
+                            i = n(pY);
                             break;
                         case (null == o ? void 0 : o.enablePurchases) !== void 0:
-                            i = n(p2);
+                            i = n(p3);
                             break;
                         case (null == o ? void 0 : o.friendManagementAction) === "Unblock":
-                            i = n(p3, {
+                            i = n(p5, {
                                 displayName: o.displayName
                             });
                             break;
                         case (null == o ? void 0 : o.experienceManagementAction) === "Unblock":
-                            i = n(p5, {
+                            i = n(p6, {
                                 experienceName: o.experienceName
                             });
                             break;
                         case (null == o ? void 0 : o.allowFacialAgeEstimation) !== void 0:
-                            i = n(p6);
-                            break;
-                        case (null == o ? void 0 : o.contentAgeRestriction) !== void 0:
                             i = n(p8);
                             break;
-                        case (null == o ? void 0 : o.whoCanWhisperChatWithMeInExperiences) !== void 0:
+                        case (null == o ? void 0 : o.contentAgeRestriction) !== void 0:
                             i = n(p4);
                             break;
-                        case (null == o ? void 0 : o.whoCanChatWithMeInExperiences) !== void 0:
+                        case (null == o ? void 0 : o.whoCanWhisperChatWithMeInExperiences) !== void 0:
                             i = n(p7);
                             break;
-                        case (null == o ? void 0 : o.allowCrossAgeGroupStudioCollaboration) !== void 0:
+                        case (null == o ? void 0 : o.whoCanChatWithMeInExperiences) !== void 0:
                             i = n(p9);
+                            break;
+                        case (null == o ? void 0 : o.allowCrossAgeGroupStudioCollaboration) !== void 0:
+                            i = n(ye);
                             break;
                         default:
                             i = n(t)
                     }
-                    if (a === hO.newPrologueNoVisual || a === hO.newPrologueVisual) return "".concat(i, "<br /><br />").concat(n(yr))
+                    if (a === hx.newPrologueNoVisual || a === hx.newPrologueVisual) return "".concat(i, "<br /><br />").concat(n(yo))
                 }
-                if (1 === r.length && r.includes(pi.AgeEstimation)) switch (!0) {
+                if (1 === r.length && r.includes(pl.AgeEstimation)) switch (!0) {
                     case (null == o ? void 0 : o.whoCanChatWithMeInExperiences) !== void 0:
-                        i = n(ye);
-                        break;
-                    case (null == o ? void 0 : o.whoCanWhisperChatWithMeInExperiences) !== void 0:
                         i = n(yt);
                         break;
-                    case (null == o ? void 0 : o.allowCrossAgeGroupStudioCollaboration) !== void 0:
+                    case (null == o ? void 0 : o.whoCanWhisperChatWithMeInExperiences) !== void 0:
                         i = n(yn);
+                        break;
+                    case (null == o ? void 0 : o.allowCrossAgeGroupStudioCollaboration) !== void 0:
+                        i = n(yr);
                         break;
                     default:
                         i = n(t)
@@ -22392,25 +22415,25 @@ function() {
                 return i
             }
 
-            function hj(e, t) {
+            function hC(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var hC = function(e) {
+            var hE = function(e) {
                 var t, n, r, o = e.translate,
                     a = e.onHide,
                     i = e.recourseParameters,
                     l = e.expChildModalType,
                     c = e.source,
                     u = e.onProceed,
-                    s = pV(),
-                    f = q(d$),
-                    d = q(dJ).data.recourses,
+                    s = p_(),
+                    f = q(dX),
+                    d = q(dY).data.recourses,
                     p = i ? Object.keys(i)[0] : void 0,
-                    y = hP(f, pY, o, [pi.ParentConsentRequest], i, l),
+                    y = hj(f, pQ, o, [pl.ParentConsentRequest], i, l),
                     m = (0, P.jsxs)("div", {
-                        children: [l === hO.newPrologueVisual && (0, P.jsx)("div", {
+                        children: [l === hx.newPrologueVisual && (0, P.jsx)("div", {
                             className: "ask-your-parent-lock"
                         }), (0, P.jsx)("div", {
                             className: "text-description",
@@ -22419,24 +22442,24 @@ function() {
                             }
                         })]
                     }),
-                    h = (t = f, n = pG, o(hx[t] || n)),
+                    h = (t = f, n = p$, o(hP[t] || n)),
                     v = function(e) {
                         if (Array.isArray(e)) return e
-                    }(r = mi({
+                    }(r = ml({
                         translate: o,
                         title: h,
                         body: m,
-                        actionButtonTranslateKey: pH,
-                        neutralButtonTranslateKey: pB,
+                        actionButtonTranslateKey: pG,
+                        neutralButtonTranslateKey: pz,
                         onAction: function() {
-                            mU(f, !0, p, null != i ? i : void 0), u ? (g.close(), u()) : (s(dK(d[0])), s(dB(po.Verification)), g.close())
+                            mL(f, !0, p, null != i ? i : void 0), u ? (g.close(), u()) : (s(dB(d[0])), s(dz(pa.Verification)), g.close())
                         },
                         size: "sm",
                         onHide: function() {
-                            mF(f, "Vpc", p, null != i ? i : void 0, c), a()
+                            mV(f, "Vpc", p, null != i ? i : void 0, c), a()
                         },
                         onNeutral: function() {
-                            mF(f, "Vpc", p, null != i ? i : void 0, c), a()
+                            mV(f, "Vpc", p, null != i ? i : void 0, c), a()
                         }
                     })) || function(e) {
                         var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
@@ -22459,10 +22482,10 @@ function() {
                         }
                     }(r) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return hj(e, 2);
+                            if ("string" == typeof e) return hC(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hj(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hC(e, 2)
                         }
                     }(r) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -22470,54 +22493,54 @@ function() {
                     b = v[0],
                     g = v[1];
                 return (0, I.useEffect)(function() {
-                    g.open(), mV(f, "Vpc", p, null != i ? i : void 0, c)
+                    g.open(), m_(f, "Vpc", p, null != i ? i : void 0, c)
                 }, []), [b, g]
             };
 
-            function hE(e, t) {
+            function hA(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var hA = function(e) {
+            var hT = function(e) {
                 var t, n, r, o = e.translate,
                     a = e.onHide,
                     i = e.onVpcSelected,
-                    l = pV(),
-                    c = q(d$),
-                    u = q(dJ).data.recourses,
-                    s = hP(c, p0, o, [pi.GovernmentId, pi.ParentConsentRequest]),
+                    l = p_(),
+                    c = q(dX),
+                    u = q(dY).data.recourses,
+                    s = hj(c, p1, o, [pl.GovernmentId, pl.ParentConsentRequest]),
                     f = (0, P.jsx)("div", {
                         children: (0, P.jsxs)("div", {
                             className: "text-description",
                             children: [" ", s, " "]
                         })
                     }),
-                    d = (t = c, n = p$, o(hx[t] || n)),
+                    d = (t = c, n = pX, o(hP[t] || n)),
                     p = function(e) {
                         if (Array.isArray(e)) return e
-                    }(r = mi({
+                    }(r = ml({
                         translate: o,
                         title: d,
                         body: f,
                         dualActionButton: !0,
-                        actionButtonTranslateKey: pq,
-                        neutralButtonTranslateKey: pz,
+                        actionButtonTranslateKey: pH,
+                        neutralButtonTranslateKey: pq,
                         onAction: function() {
-                            mR(c, !1), l(dK(u.find(function(e) {
-                                return e.action === pi.GovernmentId
-                            }))), l(dB(po.Verification)), m.close()
+                            mU(c, !1), l(dB(u.find(function(e) {
+                                return e.action === pl.GovernmentId
+                            }))), l(dz(pa.Verification)), m.close()
                         },
                         size: "sm",
                         onHide: function() {
-                            mF(c, "IdvOrVpc"), a()
+                            mV(c, "IdvOrVpc"), a()
                         },
                         onNeutral: function() {
-                            mU(c, !1);
+                            mL(c, !1);
                             var e = u.find(function(e) {
-                                return e.action !== pi.GovernmentId
+                                return e.action !== pl.GovernmentId
                             });
-                            m.close(), i ? i() : (l(dK(e)), l(dB(po.Verification)))
+                            m.close(), i ? i() : (l(dB(e)), l(dz(pa.Verification)))
                         }
                     })) || function(e) {
                         var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
@@ -22540,10 +22563,10 @@ function() {
                         }
                     }(r) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return hE(e, 2);
+                            if ("string" == typeof e) return hA(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hE(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hA(e, 2)
                         }
                     }(r) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -22551,46 +22574,46 @@ function() {
                     y = p[0],
                     m = p[1];
                 return (0, I.useEffect)(function() {
-                    m.open(), mV(c, "IdvOrVpc")
+                    m.open(), m_(c, "IdvOrVpc")
                 }, []), [y, m]
             };
 
-            function hT(e, t) {
+            function hI(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var hI = function(e) {
+            var hk = function(e) {
                 var t, n, r, o = e.translate,
                     a = e.onHide,
-                    i = pV(),
-                    l = q(d$),
-                    c = q(dJ).data.recourses,
-                    u = hP(l, pQ, o, [pi.GovernmentId]),
+                    i = p_(),
+                    l = q(dX),
+                    c = q(dY).data.recourses,
+                    u = hj(l, pZ, o, [pl.GovernmentId]),
                     s = (0, P.jsx)("div", {
                         children: (0, P.jsxs)("div", {
                             className: "text-description",
                             children: [" ", u, " "]
                         })
                     }),
-                    f = (t = l, n = p$, o(hx[t] || n)),
+                    f = (t = l, n = pX, o(hP[t] || n)),
                     d = function(e) {
                         if (Array.isArray(e)) return e
-                    }(r = mi({
+                    }(r = ml({
                         translate: o,
                         title: f,
                         body: s,
-                        actionButtonTranslateKey: pq,
-                        neutralButtonTranslateKey: pB,
+                        actionButtonTranslateKey: pH,
+                        neutralButtonTranslateKey: pz,
                         onAction: function() {
-                            mR(l, !0), i(dK(c[0])), i(dB(po.Verification)), y.close()
+                            mU(l, !0), i(dB(c[0])), i(dz(pa.Verification)), y.close()
                         },
                         size: "sm",
                         onHide: function() {
-                            mF(l, "Idv"), a()
+                            mV(l, "Idv"), a()
                         },
                         onNeutral: function() {
-                            mF(l, "Idv"), a()
+                            mV(l, "Idv"), a()
                         }
                     })) || function(e) {
                         var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
@@ -22613,10 +22636,10 @@ function() {
                         }
                     }(r) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return hT(e, 2);
+                            if ("string" == typeof e) return hI(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hT(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hI(e, 2)
                         }
                     }(r) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -22624,49 +22647,49 @@ function() {
                     p = d[0],
                     y = d[1];
                 return (0, I.useEffect)(function() {
-                    y.open(), mV(l, "Idv")
+                    y.open(), m_(l, "Idv")
                 }, []), [p, y]
             };
 
-            function hk(e, t) {
+            function hN(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var hN = function(e) {
+            var hD = function(e) {
                 var t, n, r, o = e.translate,
                     a = e.onHide,
                     i = e.recourseParameters,
                     l = e.source,
-                    c = pV(),
-                    u = q(d$),
-                    s = q(dJ).data.recourses,
+                    c = p_(),
+                    u = q(dX),
+                    s = q(dY).data.recourses,
                     f = i ? Object.keys(i)[0] : void 0,
-                    d = hP(u, pZ, o, [pi.AgeEstimation], i),
+                    d = hj(u, p0, o, [pl.AgeEstimation], i),
                     p = (0, P.jsx)("div", {
                         className: "text-description",
                         dangerouslySetInnerHTML: {
                             __html: d
                         }
                     }),
-                    y = (t = u, n = pX, o(hx[t] || n)),
+                    y = (t = u, n = pJ, o(hP[t] || n)),
                     m = function(e) {
                         if (Array.isArray(e)) return e
-                    }(r = mi({
+                    }(r = ml({
                         translate: o,
                         title: y,
                         body: p,
-                        actionButtonTranslateKey: pK,
-                        neutralButtonTranslateKey: pB,
+                        actionButtonTranslateKey: pB,
+                        neutralButtonTranslateKey: pz,
                         onAction: function() {
-                            c(dK(s[0])), c(dB(po.Verification)), v.close()
+                            c(dB(s[0])), c(dz(pa.Verification)), v.close()
                         },
                         size: "sm",
                         onHide: function() {
-                            mF(u, "Fae", f, null != i ? i : void 0, l), a()
+                            mV(u, "Fae", f, null != i ? i : void 0, l), a()
                         },
                         onNeutral: function() {
-                            mF(u, "Fae", f, null != i ? i : void 0, l), a()
+                            mV(u, "Fae", f, null != i ? i : void 0, l), a()
                         }
                     })) || function(e) {
                         var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
@@ -22689,10 +22712,10 @@ function() {
                         }
                     }(r) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return hk(e, 2);
+                            if ("string" == typeof e) return hN(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hk(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hN(e, 2)
                         }
                     }(r) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -22700,17 +22723,17 @@ function() {
                     h = m[0],
                     v = m[1];
                 return (0, I.useEffect)(function() {
-                    v.open(), mV(u, "Fae", f, null != i ? i : void 0, l)
+                    v.open(), m_(u, "Fae", f, null != i ? i : void 0, l)
                 }, []), [h, v]
             };
 
-            function hD(e, t) {
+            function hM(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function hM(e, t) {
+            function hR(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -22734,33 +22757,33 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return hD(e, t);
+                        if ("string" == typeof e) return hM(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return hD(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return hM(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var hR = function(e) {
+            var hU = function(e) {
                     var t, n, r, o, a = e.translate,
                         i = e.onHide,
                         l = e.recourseParameters,
                         c = e.expChildModalType,
                         u = e.featureSpecificParams,
                         s = e.onVpcSelected,
-                        f = pV(),
+                        f = p_(),
                         d = null,
                         p = null,
-                        y = q(dJ).data.recourses,
+                        y = q(dY).data.recourses,
                         m = y.map(function(e) {
                             return e.action
                         });
                     if (1 === m.length) switch (m[0]) {
-                        case pi.ParentConsentRequest:
-                        case pi.ParentLinkRequest:
-                            d = (t = hM(hC({
+                        case pl.ParentConsentRequest:
+                        case pl.ParentLinkRequest:
+                            d = (t = hR(hE({
                                 translate: a,
                                 onHide: i,
                                 recourseParameters: null != l ? l : null,
@@ -22768,31 +22791,31 @@ function() {
                                 source: null == u ? void 0 : u.source
                             }), 2))[0], p = t[1];
                             break;
-                        case pi.GovernmentId:
-                            d = (n = hM(hI({
+                        case pl.GovernmentId:
+                            d = (n = hR(hk({
                                 translate: a,
                                 onHide: i
                             }), 2))[0], p = n[1];
                             break;
-                        case pi.AgeEstimation:
-                            d = (r = hM(hN({
+                        case pl.AgeEstimation:
+                            d = (r = hR(hD({
                                 translate: a,
                                 onHide: i,
                                 recourseParameters: null != l ? l : null,
                                 source: null == u ? void 0 : u.source
                             }), 2))[0], p = r[1]
                     }
-                    return 2 === m.length && m.includes(pi.GovernmentId) && (m.includes(pi.ParentConsentRequest) || m.includes(pi.ParentLinkRequest)) && (d = (o = hM(hA({
+                    return 2 === m.length && m.includes(pl.GovernmentId) && (m.includes(pl.ParentConsentRequest) || m.includes(pl.ParentLinkRequest)) && (d = (o = hR(hT({
                         translate: a,
                         onHide: i,
                         onVpcSelected: s
                     }), 2))[0], p = o[1]), (0, I.useEffect)(function() {
-                        d ? p.open() : f(dB(po.Verification))
+                        d ? p.open() : f(dz(pa.Verification))
                     }, [f, d, p, y]), d
                 },
-                hU = ((v = {}).Checkbox = "checkbox", v.Toggle = "toggle", v.Notice = "notice", v);
+                hL = ((v = {}).Checkbox = "checkbox", v.Toggle = "toggle", v.Notice = "notice", v);
 
-            function hL(e, t, n) {
+            function hF(e, t, n) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -22800,7 +22823,7 @@ function() {
                     writable: !0
                 }) : e[t] = n, e
             }
-            var hF = function(e) {
+            var hV = function(e) {
                 var t = e.isChecked,
                     n = e.setIsChecked,
                     r = e.wordsOfConsent;
@@ -22820,34 +22843,34 @@ function() {
                     })]
                 })
             };
-            hF.displayName = "CheckboxConsentForm";
-            var hV = function() {
+            hV.displayName = "CheckboxConsentForm";
+            var h_ = function() {
                 return null
             };
-            hV.displayName = "ToggleConsentForm";
-            var h_ = function(e) {
+            h_.displayName = "ToggleConsentForm";
+            var hW = function(e) {
                 var t = e.wordsOfConsent;
                 return (0, P.jsx)(k().Fragment, {
                     children: t
                 })
             };
-            h_.displayName = "NoticeConsentForm";
-            var hW = (hL(S = {}, hU.Checkbox, hF), hL(S, hU.Toggle, hV), hL(S, hU.Notice, h_), S),
-                hK = ((b = {}).contentAgeRestriction = "contentAgeRestriction", b.phoneNumberDiscoverability = "phoneNumberDiscoverability", b.whoCanChatWithMe = "whoCanChatWithMe", b.whoCanChatWithMeInApp = "whoCanChatWithMeInApp", b.whoCanJoinMeInExperiences = "whoCanJoinMeInExperiences", b.whoCanSeeMyInventory = "whoCanSeeMyInventory", b.whoCanTradeWithMe = "whoCanTradeWithMe", b.themeType = "themeType", b.canUploadContacts = "canUploadContacts", b.updateFriendsAboutMyActivity = "updateFriendsAboutMyActivity", b.privateServerPrivacy = "privateServerPrivacy", b.allowSellShareData = "allowSellShareData", b.allowPersonalizedAdvertising = "allowPersonalizedAdvertising", b.monthlySpendLimit = "monthlySpendLimit", b.monthlySpendLimitCurrencyCode = "monthlySpendLimitCurrencyCode", b.monthlySpendLimitNotificationType = "monthlySpendLimitNotificationType", b.enablePurchases = "enablePurchases", b.whoCanGroupChatWithMeInApp = "whoCanGroupChatWithMeInApp", b.whoCanWhisperChatWithMeInExperiences = "whoCanWhisperChatWithMeInExperiences", b.whoCanChatWithMeInExperiences = "whoCanChatWithMeInExperiences", b.dailyScreenTimeLimit = "dailyScreenTimeLimit", b.whoCanSeeMySocialNetworks = "whoCanSeeMySocialNetworks", b.allowThirdPartyAppPermissions = "allowThirdPartyAppPermissions", b.allowEnablePushNotifications = "allowEnablePushNotifications", b.allowEnableEmailNotifications = "allowEnableEmailNotifications", b.allowEnableGroupNotifications = "allowEnableGroupNotifications", b.allowEnableExperienceNotifications = "allowEnableExperienceNotifications", b.whoCanOneOnOnePartyWithMe = "whoCanOneOnOnePartyWithMe", b.whoCanGroupPartyWithMe = "whoCanGroupPartyWithMe", b.phoneNumberDiscoverabilityV2 = "phoneNumberDiscoverabilityV2", b.whoCanPartyWithMe = "whoCanPartyWithMe", b.whoCanUsePartyChatWithMe = "whoCanUsePartyChatWithMe", b.whoCanUsePartyVoiceWithMe = "whoCanUsePartyVoiceWithMe", b.allowFacialAgeEstimation = "allowFacialAgeEstimation", b),
-                hB = ((g = {}).phoneNumberDiscoverabilitySetting = "phoneNumberDiscoverabilitySetting", g.phoneNumberDiscoverabilitySettingParentSide = "phoneNumberDiscoverabilitySettingParentSide", g.phoneNumberDiscoverabilityUpsell = "phoneNumberDiscoverabilityUpsell", g.personalizedAdsSetting = "personalizedAdsSetting", g.sellShareDataSetting = "sellShareDataSetting", g.allowMarketingEmailCheckboxEmailVerification = "allowMarketingEmailCheckboxEmailVerification", g.voiceDataConsentSetting = "voiceDataConsentSetting", g.voiceDataConsentSettingParentSide = "voiceDataConsentSettingParentSide", g.whoCanPartyWithMe = "whoCanPartyWithMe", g.whoCanPartyWithMeV2 = "whoCanPartyWithMeV2", g.whoCanPartyWithMeParentSide = "whoCanPartyWithMeParentSide", g.whoCanPartyWithMeParentSideV2 = "whoCanPartyWithMeParentSideV2", g.whoCanUsePartyChatWithMe = "whoCanUsePartyChatWithMe", g.whoCanUsePartyChatWithMeV2 = "whoCanUsePartyChatWithMeV2", g.whoCanUsePartyChatWithMeParentSide = "whoCanUsePartyChatWithMeParentSide", g.whoCanUsePartyChatWithMeParentSideV2 = "whoCanUsePartyChatWithMeParentSideV2", g.whoCanUsePartyVoiceWithMe = "whoCanUsePartyVoiceWithMe", g.whoCanUsePartyVoiceWithMeV2 = "whoCanUsePartyVoiceWithMeV2", g.whoCanUsePartyVoiceWithMeParentSide = "whoCanUsePartyVoiceWithMeParentSide", g.whoCanUsePartyVoiceWithMeParentSideV2 = "whoCanUsePartyVoiceWithMeParentSideV2", g.allowMarketingEmailNotifications = "allowMarketingEmailNotifications", g.receiveRobuxTransferConsentCard = "receiveRobuxTransferConsentCard", g.sendRobuxTransferConsentCard = "sendRobuxTransferConsentCard", g.vpcRequestLinkSubjectToPC = "vpcRequestLinkSubjectToPC", g.vpcRequestLinkNotSubjectToPC = "vpcRequestLinkNotSubjectToPC", g.vpcRequestLinkDefault = "vpcRequestLinkDefault", g.consentCenterAllowAction = "consentCenterAllowAction", g.consentCenterUpdateSettingNoValue = "consentCenterUpdateSettingNoValue", g.consentCenterUpdateSettingWithValue = "consentCenterUpdateSettingWithValue", g.whoCanPartyWithMeTrustedFriends = "whoCanPartyWithMeTrustedFriends", g.whoCanPartyWithMeTrustedFriendsV2 = "whoCanPartyWithMeTrustedFriendsV2", g.whoCanPartyWithMeParentSideRemovedComms = "whoCanPartyWithMeParentSideRemovedComms", g.whoCanPartyWithMeParentSideRemovedCommsV2 = "whoCanPartyWithMeParentSideRemovedCommsV2", g.whoCanUsePartyChatWithMeTrustedFriends = "whoCanUsePartyChatWithMeTrustedFriends", g.whoCanUsePartyChatWithMeTrustedFriendsV2 = "whoCanUsePartyChatWithMeTrustedFriendsV2", g.whoCanUsePartyChatWithMeParentSideTrustedFriends = "whoCanUsePartyChatWithMeParentSideTrustedFriends", g.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2 = "whoCanUsePartyChatWithMeParentSideTrustedFriendsV2", g.whoCanUsePartyVoiceWithMeTrustedFriends = "whoCanUsePartyVoiceWithMeTrustedFriends", g.whoCanUsePartyVoiceWithMeTrustedFriendsV2 = "whoCanUsePartyVoiceWithMeTrustedFriendsV2", g.whoCanUsePartyVoiceWithMeParentSideTrustedFriends = "whoCanUsePartyVoiceWithMeParentSideTrustedFriends", g.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2 = "whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2", g),
-                hz = {
-                    phoneNumberDiscoverabilityV2: hB.phoneNumberDiscoverabilityUpsell
+            hW.displayName = "NoticeConsentForm";
+            var hK = (hF(S = {}, hL.Checkbox, hV), hF(S, hL.Toggle, h_), hF(S, hL.Notice, hW), S),
+                hB = ((b = {}).contentAgeRestriction = "contentAgeRestriction", b.phoneNumberDiscoverability = "phoneNumberDiscoverability", b.whoCanChatWithMe = "whoCanChatWithMe", b.whoCanChatWithMeInApp = "whoCanChatWithMeInApp", b.whoCanJoinMeInExperiences = "whoCanJoinMeInExperiences", b.whoCanSeeMyInventory = "whoCanSeeMyInventory", b.whoCanTradeWithMe = "whoCanTradeWithMe", b.themeType = "themeType", b.canUploadContacts = "canUploadContacts", b.updateFriendsAboutMyActivity = "updateFriendsAboutMyActivity", b.privateServerPrivacy = "privateServerPrivacy", b.allowSellShareData = "allowSellShareData", b.allowPersonalizedAdvertising = "allowPersonalizedAdvertising", b.monthlySpendLimit = "monthlySpendLimit", b.monthlySpendLimitCurrencyCode = "monthlySpendLimitCurrencyCode", b.monthlySpendLimitNotificationType = "monthlySpendLimitNotificationType", b.enablePurchases = "enablePurchases", b.whoCanGroupChatWithMeInApp = "whoCanGroupChatWithMeInApp", b.whoCanWhisperChatWithMeInExperiences = "whoCanWhisperChatWithMeInExperiences", b.whoCanChatWithMeInExperiences = "whoCanChatWithMeInExperiences", b.dailyScreenTimeLimit = "dailyScreenTimeLimit", b.whoCanSeeMySocialNetworks = "whoCanSeeMySocialNetworks", b.allowThirdPartyAppPermissions = "allowThirdPartyAppPermissions", b.allowEnablePushNotifications = "allowEnablePushNotifications", b.allowEnableEmailNotifications = "allowEnableEmailNotifications", b.allowEnableGroupNotifications = "allowEnableGroupNotifications", b.allowEnableExperienceNotifications = "allowEnableExperienceNotifications", b.whoCanOneOnOnePartyWithMe = "whoCanOneOnOnePartyWithMe", b.whoCanGroupPartyWithMe = "whoCanGroupPartyWithMe", b.phoneNumberDiscoverabilityV2 = "phoneNumberDiscoverabilityV2", b.whoCanPartyWithMe = "whoCanPartyWithMe", b.whoCanUsePartyChatWithMe = "whoCanUsePartyChatWithMe", b.whoCanUsePartyVoiceWithMe = "whoCanUsePartyVoiceWithMe", b.allowFacialAgeEstimation = "allowFacialAgeEstimation", b),
+                hz = ((g = {}).phoneNumberDiscoverabilitySetting = "phoneNumberDiscoverabilitySetting", g.phoneNumberDiscoverabilitySettingParentSide = "phoneNumberDiscoverabilitySettingParentSide", g.phoneNumberDiscoverabilityUpsell = "phoneNumberDiscoverabilityUpsell", g.personalizedAdsSetting = "personalizedAdsSetting", g.sellShareDataSetting = "sellShareDataSetting", g.allowMarketingEmailCheckboxEmailVerification = "allowMarketingEmailCheckboxEmailVerification", g.voiceDataConsentSetting = "voiceDataConsentSetting", g.voiceDataConsentSettingParentSide = "voiceDataConsentSettingParentSide", g.whoCanPartyWithMe = "whoCanPartyWithMe", g.whoCanPartyWithMeV2 = "whoCanPartyWithMeV2", g.whoCanPartyWithMeParentSide = "whoCanPartyWithMeParentSide", g.whoCanPartyWithMeParentSideV2 = "whoCanPartyWithMeParentSideV2", g.whoCanUsePartyChatWithMe = "whoCanUsePartyChatWithMe", g.whoCanUsePartyChatWithMeV2 = "whoCanUsePartyChatWithMeV2", g.whoCanUsePartyChatWithMeParentSide = "whoCanUsePartyChatWithMeParentSide", g.whoCanUsePartyChatWithMeParentSideV2 = "whoCanUsePartyChatWithMeParentSideV2", g.whoCanUsePartyVoiceWithMe = "whoCanUsePartyVoiceWithMe", g.whoCanUsePartyVoiceWithMeV2 = "whoCanUsePartyVoiceWithMeV2", g.whoCanUsePartyVoiceWithMeParentSide = "whoCanUsePartyVoiceWithMeParentSide", g.whoCanUsePartyVoiceWithMeParentSideV2 = "whoCanUsePartyVoiceWithMeParentSideV2", g.allowMarketingEmailNotifications = "allowMarketingEmailNotifications", g.receiveRobuxTransferConsentCard = "receiveRobuxTransferConsentCard", g.sendRobuxTransferConsentCard = "sendRobuxTransferConsentCard", g.vpcRequestLinkSubjectToPC = "vpcRequestLinkSubjectToPC", g.vpcRequestLinkNotSubjectToPC = "vpcRequestLinkNotSubjectToPC", g.vpcRequestLinkDefault = "vpcRequestLinkDefault", g.consentCenterAllowAction = "consentCenterAllowAction", g.consentCenterUpdateSettingNoValue = "consentCenterUpdateSettingNoValue", g.consentCenterUpdateSettingWithValue = "consentCenterUpdateSettingWithValue", g.whoCanPartyWithMeTrustedFriends = "whoCanPartyWithMeTrustedFriends", g.whoCanPartyWithMeTrustedFriendsV2 = "whoCanPartyWithMeTrustedFriendsV2", g.whoCanPartyWithMeParentSideRemovedComms = "whoCanPartyWithMeParentSideRemovedComms", g.whoCanPartyWithMeParentSideRemovedCommsV2 = "whoCanPartyWithMeParentSideRemovedCommsV2", g.whoCanUsePartyChatWithMeTrustedFriends = "whoCanUsePartyChatWithMeTrustedFriends", g.whoCanUsePartyChatWithMeTrustedFriendsV2 = "whoCanUsePartyChatWithMeTrustedFriendsV2", g.whoCanUsePartyChatWithMeParentSideTrustedFriends = "whoCanUsePartyChatWithMeParentSideTrustedFriends", g.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2 = "whoCanUsePartyChatWithMeParentSideTrustedFriendsV2", g.whoCanUsePartyVoiceWithMeTrustedFriends = "whoCanUsePartyVoiceWithMeTrustedFriends", g.whoCanUsePartyVoiceWithMeTrustedFriendsV2 = "whoCanUsePartyVoiceWithMeTrustedFriendsV2", g.whoCanUsePartyVoiceWithMeParentSideTrustedFriends = "whoCanUsePartyVoiceWithMeParentSideTrustedFriends", g.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2 = "whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2", g),
+                hq = {
+                    phoneNumberDiscoverabilityV2: hz.phoneNumberDiscoverabilityUpsell
                 },
-                hq = ((w = {}).ModalShown = "ModalShown", w.Confirm = "Confirm", w.Cancel = "Cancel", w.CloseModal = "CloseModal", w),
-                hH = "authButtonClick";
+                hH = ((w = {}).ModalShown = "ModalShown", w.Confirm = "Confirm", w.Cancel = "Cancel", w.CloseModal = "CloseModal", w),
+                hG = "authButtonClick";
 
-            function hG(e, t) {
+            function h$(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function h$(e, t, n) {
+            function hX(e, t, n) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -22855,20 +22878,20 @@ function() {
                     writable: !0
                 }) : e[t] = n, e
             }
-            var hX = function(e) {
+            var hJ = function(e) {
                     return function() {
                         for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
                         try {
                             e.apply(void 0, function(e) {
-                                if (Array.isArray(e)) return hG(e)
+                                if (Array.isArray(e)) return h$(e)
                             }(n) || function(e) {
                                 if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                             }(n) || function(e) {
                                 if (e) {
-                                    if ("string" == typeof e) return hG(e, void 0);
+                                    if ("string" == typeof e) return h$(e, void 0);
                                     var t = Object.prototype.toString.call(e).slice(8, -1);
                                     if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return hG(e, void 0)
+                                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return h$(e, void 0)
                                 }
                             }(n) || function() {
                                 throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -22876,55 +22899,55 @@ function() {
                         } catch (e) {}
                     }
                 },
-                hJ = hX(function(e) {
+                hY = hJ(function(e) {
                     var t = "authModalShown",
                         n = e,
                         r = {
                             field: "phoneDiscoverability",
                             associatedText: "Turn on friend discovery"
                         };
-                    dA.eventStreamService.sendEventWithTarget(t, n, r)
+                    dT.eventStreamService.sendEventWithTarget(t, n, r)
                 }),
-                hY = hX(function(e) {
-                    var t = hH,
+                hQ = hJ(function(e) {
+                    var t = hG,
                         n = e,
                         r = {
                             btn: "phoneDiscoverabilityConfirm",
                             associatedText: "Turn on"
                         };
-                    dA.eventStreamService.sendEventWithTarget(t, n, r)
+                    dT.eventStreamService.sendEventWithTarget(t, n, r)
                 }),
-                hQ = hX(function(e) {
-                    var t = hH,
+                hZ = hJ(function(e) {
+                    var t = hG,
                         n = e,
                         r = {
                             btn: "phoneDiscoverabilityNotNow",
                             associatedText: "Not now"
                         };
-                    dA.eventStreamService.sendEventWithTarget(t, n, r)
+                    dT.eventStreamService.sendEventWithTarget(t, n, r)
                 }),
-                hZ = hX(function(e) {
-                    var t = hH,
+                h0 = hJ(function(e) {
+                    var t = hG,
                         n = e,
                         r = {
                             btn: "phoneDiscoverabilityClose",
                             associatedText: "X"
                         };
-                    dA.eventStreamService.sendEventWithTarget(t, n, r)
+                    dT.eventStreamService.sendEventWithTarget(t, n, r)
                 }),
-                h0 = h$({}, hK.phoneNumberDiscoverabilityV2, (h$(O = {}, hq.ModalShown, hJ), h$(O, hq.Confirm, hY), h$(O, hq.Cancel, hQ), h$(O, hq.CloseModal, hZ), O)),
-                h1 = function(e, t, n) {
-                    var r = h0[t];
+                h1 = hX({}, hB.phoneNumberDiscoverabilityV2, (hX(O = {}, hH.ModalShown, hY), hX(O, hH.Confirm, hQ), hX(O, hH.Cancel, hZ), hX(O, hH.CloseModal, h0), O)),
+                h2 = function(e, t, n) {
+                    var r = h1[t];
                     return r && r[e] && r[e](n), null
                 };
 
-            function h2(e, t) {
+            function h3(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function h3(e, t) {
+            function h5(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -22948,16 +22971,16 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return h2(e, t);
+                        if ("string" == typeof e) return h3(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return h2(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return h3(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var h5 = function(e, t, n) {
+            var h6 = function(e, t, n) {
                 var r, o = t.title,
                     a = t.body,
                     i = t.actionButtonText,
@@ -22968,11 +22991,11 @@ function() {
                     f = t.consentFormType,
                     d = t.surface,
                     p = t.context,
-                    y = hz[n.settingName],
-                    m = h3(A.LegallySensitiveContentService.useLegallySensitiveContentAndActions(y, d), 2),
+                    y = hq[n.settingName],
+                    m = h5(A.LegallySensitiveContentService.useLegallySensitiveContentAndActions(y, d), 2),
                     h = m[0],
                     v = m[1],
-                    b = h3((0, I.useState)(!1), 2),
+                    b = h5((0, I.useState)(!1), 2),
                     g = b[0],
                     w = b[1],
                     S = (0, I.useMemo)(function() {
@@ -22985,12 +23008,12 @@ function() {
                             }
                         }
                     }, []),
-                    O = h3((0, I.useState)(!1), 2),
+                    O = h5((0, I.useState)(!1), 2),
                     x = O[0],
                     j = O[1];
                 return (0, I.useEffect)(function() {
-                    f === hU.Notice && j(!0)
-                }, [f]), [(0, P.jsxs)(sK.Modal, {
+                    f === hL.Notice && j(!0)
+                }, [f]), [(0, P.jsxs)(sB.Modal, {
                     show: g,
                     onHide: function() {
                         S.close(), null == u || u()
@@ -23001,11 +23024,11 @@ function() {
                     "aria-labelledby": "user-settings-modal-title",
                     scrollable: !0,
                     centered: !0,
-                    children: [(0, P.jsxs)(sK.Modal.Header, {
+                    children: [(0, P.jsxs)(sB.Modal.Header, {
                         useBaseBootstrapComponent: !0,
                         children: [(0, P.jsx)("div", {
                             className: "user-settings-modal-title-container",
-                            children: (0, P.jsx)(sK.Modal.Title, {
+                            children: (0, P.jsx)(sB.Modal.Title, {
                                 id: "user-settings-modal-title",
                                 children: h.wordsOfConsent.title || o
                             })
@@ -23015,14 +23038,14 @@ function() {
                             title: e("Action.Close"),
                             onClick: function() {
                                 var e;
-                                e = n.settingName, h1(hq.CloseModal, e, p), S.close(), null == u || u()
+                                e = n.settingName, h2(hH.CloseModal, e, p), S.close(), null == u || u()
                             },
                             children: (0, P.jsx)("span", {
                                 className: "icon-close"
                             })
                         })]
-                    }), (0, P.jsxs)(sK.Modal.Body, {
-                        children: [a, (r = hW[f]) ? (0, P.jsx)("div", {
+                    }), (0, P.jsxs)(sB.Modal.Body, {
+                        children: [a, (r = hK[f]) ? (0, P.jsx)("div", {
                             className: "consent-form",
                             children: (0, P.jsx)(r, {
                                 isChecked: x,
@@ -23030,14 +23053,14 @@ function() {
                                 wordsOfConsent: h.wordsOfConsent.consent
                             })
                         }) : (0, P.jsx)(k().Fragment, {})]
-                    }), (0, P.jsxs)(sK.Modal.Footer, {
+                    }), (0, P.jsxs)(sB.Modal.Footer, {
                         children: [(0, P.jsx)(tV, {
                             className: "modal-half-width-button",
                             variant: "Standard",
                             size: "Medium",
                             onClick: function() {
                                 var e;
-                                e = n.settingName, h1(hq.Cancel, e, p), S.close(), null == s || s(), null == u || u()
+                                e = n.settingName, h2(hH.Cancel, e, p), S.close(), null == s || s(), null == u || u()
                             },
                             children: h.wordsOfConsent.neutralButtonText || l
                         }), (0, P.jsx)(tV, {
@@ -23047,7 +23070,7 @@ function() {
                             isDisabled: !x,
                             onClick: function() {
                                 var e, t;
-                                e = n.settingName, h1(hq.Confirm, e, p), S.close(), v.updateSettingWithAuditing((t = n.settingName) === hK.phoneNumberDiscoverabilityV2 ? hK.phoneNumberDiscoverability : t, n.settingValue), null == c || c(), null == u || u()
+                                e = n.settingName, h2(hH.Confirm, e, p), S.close(), v.updateSettingWithAuditing((t = n.settingName) === hB.phoneNumberDiscoverabilityV2 ? hB.phoneNumberDiscoverability : t, n.settingValue), null == c || c(), null == u || u()
                             },
                             children: h.wordsOfConsent.actionButtonText || i
                         })]
@@ -23055,17 +23078,17 @@ function() {
                 }), S]
             };
 
-            function h6(e, t) {
+            function h8(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var h8 = (0, N.withTranslations)(function(e) {
+            var h4 = (0, N.withTranslations)(function(e) {
                 var t, n = e.translate,
                     r = e.recourse,
                     o = function(e) {
                         if (Array.isArray(e)) return e
-                    }(t = h5(n, e.updateSettingsModalProps, r.userSettings)) || function(e) {
+                    }(t = h6(n, e.updateSettingsModalProps, r.userSettings)) || function(e) {
                         var t, n, r = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                         if (null != r) {
                             var o = [],
@@ -23086,10 +23109,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return h6(e, 2);
+                            if ("string" == typeof e) return h8(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return h6(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return h8(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -23098,7 +23121,7 @@ function() {
                     i = o[1];
                 return (0, I.useEffect)(function() {
                     var e, t;
-                    e = r.userSettings.settingName, t = r.userSettings.settingValue, h1(hq.ModalShown, e, t), i.open()
+                    e = r.userSettings.settingName, t = r.userSettings.settingValue, h2(hH.ModalShown, e, t), i.open()
                 }, []), (0, P.jsx)("div", {
                     children: a
                 })
@@ -23107,13 +23130,13 @@ function() {
                 feature: "Feature.LegallySensitiveContent"
             });
 
-            function h4(e, t) {
+            function h7(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function h7(e, t) {
+            function h9(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -23137,18 +23160,18 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return h4(e, t);
+                        if ("string" == typeof e) return h7(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return h4(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return h7(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function h9(e) {
-                return h7(hC({
+            function ve(e) {
+                return h9(hE({
                     translate: e.translate,
                     onHide: e.onHide,
                     recourseParameters: e.recourseParameters,
@@ -23156,31 +23179,31 @@ function() {
                     source: e.source
                 }), 1)[0]
             }
-            var ve = function(e) {
+            var vt = function(e) {
                 var t, n, r = e.translate,
                     o = e.onHidecallback,
                     a = e.value,
                     i = (e.isPrologueUsed, e.source),
-                    l = h7((0, I.useState)(null), 2),
+                    l = h9((0, I.useState)(null), 2),
                     c = l[0],
                     u = l[1],
-                    s = h7((0, I.useState)(!1), 2),
+                    s = h9((0, I.useState)(!1), 2),
                     f = s[0],
                     d = s[1];
                 if ((0, I.useEffect)(function() {
-                        hv().then(function(e) {
+                        hb().then(function(e) {
                             var t;
                             u({
-                                action: (null == (t = e.parentEmails) ? void 0 : t.length) > 0 ? pi.ParentConsentRequest : pi.ParentLinkRequest,
-                                parentConsentTypes: [m1.UpdateUserSetting]
+                                action: (null == (t = e.parentEmails) ? void 0 : t.length) > 0 ? pl.ParentConsentRequest : pl.ParentLinkRequest,
+                                parentConsentTypes: [m2.UpdateUserSetting]
                             })
                         }).catch(function() {
                             u({
-                                action: pi.ParentLinkRequest,
-                                parentConsentTypes: [m1.UpdateUserSetting]
+                                action: pl.ParentLinkRequest,
+                                parentConsentTypes: [m2.UpdateUserSetting]
                             })
                         })
-                    }, []), !c) return (0, P.jsx)(yg, {});
+                    }, []), !c) return (0, P.jsx)(yw, {});
                 var p = (t = function(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var n = null != arguments[t] ? arguments[t] : {},
@@ -23210,14 +23233,14 @@ function() {
                 })(Object(n)).forEach(function(e) {
                     Object.defineProperty(t, e, Object.getOwnPropertyDescriptor(n, e))
                 }), t);
-                return f ? (0, P.jsx)(hS, {
+                return f ? (0, P.jsx)(hO, {
                     translate: r,
                     recourse: c,
                     onHidecallback: o,
                     value: p,
                     isPrologueUsed: !0,
                     source: i
-                }) : (0, P.jsx)(h9, {
+                }) : (0, P.jsx)(ve, {
                     translate: r,
                     onHide: o,
                     recourseParameters: p,
@@ -23228,20 +23251,20 @@ function() {
                 })
             };
 
-            function vt(e) {
-                return e.action === pi.ParentConsentRequest || e.action === pi.ParentLinkRequest
+            function vn(e) {
+                return e.action === pl.ParentConsentRequest || e.action === pl.ParentLinkRequest
             }
 
-            function vn(e) {
+            function vr(e) {
                 var t = (null == e ? void 0 : e.length) === 1 ? e[0] : void 0;
-                if (t && vt(t)) return {
+                if (t && vn(t)) return {
                     kind: "SingleVpc",
                     vpcRecourse: t
                 };
                 if ((null == e ? void 0 : e.length) === 2 && e.some(function(e) {
-                        return e.action === pi.GovernmentId
+                        return e.action === pl.GovernmentId
                     })) {
-                    var n = e.find(vt);
+                    var n = e.find(vn);
                     if (n) return {
                         kind: "IdvAndVpc",
                         vpcRecourse: n
@@ -23249,18 +23272,18 @@ function() {
                 }
             }
 
-            function vr(e, t) {
+            function vo(e, t) {
                 var n, r = null == e || null == (n = e.vpcRecourse.parentConsentTypes) ? void 0 : n[0];
                 return void 0 !== t && void 0 !== r && t.includes(r)
             }
 
-            function vo(e, t) {
+            function va(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
 
-            function va(e, t, n, r, o, a, i) {
+            function vi(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -23271,7 +23294,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function vi(e, t) {
+            function vl(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -23295,58 +23318,58 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return vo(e, t);
+                        if ("string" == typeof e) return va(e, t);
                         var n = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return vo(e, t)
+                        if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return va(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var vl = function(e) {
+            var vc = function(e) {
                 var t, n, r, o, a, i = e.translate,
                     l = e.vpcV2Handoff,
-                    c = pV(),
-                    u = q(dY),
-                    s = q(dJ),
-                    f = q(dG),
-                    d = q(dZ),
-                    p = q(dH).loading,
-                    y = q(dQ),
-                    m = q(d$),
-                    h = vi((0, I.useState)(), 2),
+                    c = p_(),
+                    u = q(dQ),
+                    s = q(dY),
+                    f = q(d$),
+                    d = q(d0),
+                    p = q(dG).loading,
+                    y = q(dZ),
+                    m = q(dX),
+                    h = vl((0, I.useState)(), 2),
                     v = h[0],
                     b = h[1],
-                    g = vi((0, I.useState)(function(e) {
+                    g = vl((0, I.useState)(function(e) {
                         return e
                     }), 2),
                     w = g[0],
                     S = g[1],
-                    O = vi((0, I.useState)({}), 2),
+                    O = vl((0, I.useState)({}), 2),
                     x = O[0],
                     j = O[1],
-                    C = vi((0, I.useState)(), 2),
+                    C = vl((0, I.useState)(), 2),
                     E = C[0],
                     A = C[1],
-                    T = vi((0, I.useState)(!1), 2),
+                    T = vl((0, I.useState)(!1), 2),
                     k = T[0],
                     N = T[1],
-                    D = vi((0, I.useState)(!1), 2),
+                    D = vl((0, I.useState)(!1), 2),
                     M = D[0],
                     R = D[1],
-                    U = vi((0, I.useState)(void 0), 2),
+                    U = vl((0, I.useState)(void 0), 2),
                     L = U[0],
                     F = U[1],
-                    V = vi((0, I.useState)(void 0), 2),
+                    V = vl((0, I.useState)(void 0), 2),
                     _ = V[0],
                     W = V[1],
-                    K = vi((0, I.useState)(null), 2),
+                    K = vl((0, I.useState)(null), 2),
                     B = K[0],
                     z = K[1],
                     H = (0, I.useRef)(!1),
                     G = (0, I.useRef)(null),
-                    $ = null != (t = null == (n = y6("AccountManagement.VerifiedParentalConsent.ChildExperience")) ? void 0 : n.expNewChildModal) ? t : hO.control;
+                    $ = null != (t = null == (n = y8("AccountManagement.VerifiedParentalConsent.ChildExperience")) ? void 0 : n.expNewChildModal) ? t : hx.control;
 
                 function X(e) {
                     var t;
@@ -23440,7 +23463,7 @@ function() {
                                         }
                                     }), F(void 0), W(void 0), z(null), H.current = !1, m.label = 1;
                                 case 1:
-                                    return m.trys.push([1, 3, , 4]), [4, c(dU({
+                                    return m.trys.push([1, 3, , 4]), [4, c(dL({
                                         featureName: n,
                                         ampFeatureCheckData: o,
                                         namespace: f
@@ -23449,12 +23472,12 @@ function() {
                                 case 3:
                                     return m.sent(), [3, 4];
                                 case 4:
-                                    return c(dW(r)), N(a), o && c(d_(o)), f && c(dq(f)), l && j(l), u && A(u), d && b(d), p = $ === hO.control || $ === hO.newPrologueNoVisual || $ === hO.newPrologueVisual, G.current = {
+                                    return c(dK(r)), N(a), o && c(dW(o)), f && c(dH(f)), l && j(l), u && A(u), d && b(d), p = $ === hx.control || $ === hx.newPrologueNoVisual || $ === hx.newPrologueVisual, G.current = {
                                         isAsyncCall: a,
                                         requestDetails: null != l ? l : {},
                                         closeCallback: s,
                                         usePrologue: y = i && p
-                                    }, y ? (c(dz(!0)), R(!0)) : c(dB(po.Verification)), [2]
+                                    }, y ? (c(dq(!0)), R(!0)) : c(dz(pa.Verification)), [2]
                             }
                         })
                     }, function() {
@@ -23464,11 +23487,11 @@ function() {
                             var a = t.apply(e, n);
 
                             function i(e) {
-                                va(a, r, o, i, l, "next", e)
+                                vi(a, r, o, i, l, "next", e)
                             }
 
                             function l(e) {
-                                va(a, r, o, i, l, "throw", e)
+                                vi(a, r, o, i, l, "throw", e)
                             }
                             i(void 0)
                         })
@@ -23476,62 +23499,62 @@ function() {
                 }
 
                 function J() {
-                    w(s.data.access), c(dV())
+                    w(s.data.access), c(d_())
                 }(0, I.useEffect)(function() {
-                    return window.addEventListener(p_, X),
+                    return window.addEventListener(pW, X),
                         function() {
-                            return window.removeEventListener(p_, X)
+                            return window.removeEventListener(pW, X)
                         }
                 }, [$]), (0, I.useEffect)(function() {
-                    var e, t, n, r, o, a, i, l, u, f, d, p = [dE.Granted, dE.Denied];
+                    var e, t, n, r, o, a, i, l, u, f, d, p = [dA.Granted, dA.Denied];
                     if (null == s || !s.loading) {
-                        if ((null == s || null == (t = s.data) ? void 0 : t.access) && p.includes(s.data.access) && (null == s || null == (d = s.data) ? void 0 : d.featureName) !== "CanCorrectAge" && v !== mo.Appeals && w(s.data.access), (null != (e = null == s || null == (r = s.data) || null == (n = r.recourses) ? void 0 : n.length) ? e : 0) > 0 && M) {
-                            var y = vn(s.data.recourses),
-                                m = vr(y, _);
+                        if ((null == s || null == (t = s.data) ? void 0 : t.access) && p.includes(s.data.access) && (null == s || null == (d = s.data) ? void 0 : d.featureName) !== "CanCorrectAge" && v !== ma.Appeals && w(s.data.access), (null != (e = null == s || null == (r = s.data) || null == (n = r.recourses) ? void 0 : n.length) ? e : 0) > 0 && M) {
+                            var y = vr(s.data.recourses),
+                                m = vo(y, _);
                             if (y && (void 0 === L || void 0 === _)) return;
                             if ((null == y ? void 0 : y.kind) === "SingleVpc" && !0 === L && !m) {
-                                R(!1), c(dB(po.Verification));
+                                R(!1), c(dz(pa.Verification));
                                 return
                             }
-                            c(dB(po.Prologue)), R(!1)
-                        }(null == s || null == (o = s.data) ? void 0 : o.featureName) === "CanCorrectAge" && s.data.access === dE.Denied && ((null == s || null == (a = s.data) ? void 0 : a.recourses) === null || (null == s || null == (l = s.data) || null == (i = l.recourses) ? void 0 : i.length) === 0) ? c(dB(po.Epilogue)) : (null == s || null == (u = s.data) ? void 0 : u.featureName) === "CanCorrectAge" && (null == s || null == (f = s.data) ? void 0 : f.access) === dE.Granted && w(s.data.access)
+                            c(dz(pa.Prologue)), R(!1)
+                        }(null == s || null == (o = s.data) ? void 0 : o.featureName) === "CanCorrectAge" && s.data.access === dA.Denied && ((null == s || null == (a = s.data) ? void 0 : a.recourses) === null || (null == s || null == (l = s.data) || null == (i = l.recourses) ? void 0 : i.length) === 0) ? c(dz(pa.Epilogue)) : (null == s || null == (u = s.data) ? void 0 : u.featureName) === "CanCorrectAge" && (null == s || null == (f = s.data) ? void 0 : f.access) === dA.Granted && w(s.data.access)
                     }
                 }, [s, M, L, _]);
                 var Y = k ? function() {
-                        c(dV()), w(dE.Denied)
+                        c(d_()), w(dA.Denied)
                     } : J,
-                    Q = vn(null == s || null == (r = s.data) ? void 0 : r.recourses),
+                    Q = vr(null == s || null == (r = s.data) ? void 0 : r.recourses),
                     Z = void 0 !== Q,
-                    ee = vr(Q, _),
+                    ee = vo(Q, _),
                     et = (null == Q ? void 0 : Q.kind) === "SingleVpc" && !0 === L && void 0 !== _ && !ee,
                     en = (null == Q ? void 0 : Q.kind) === "IdvAndVpc" && !0 === L && void 0 !== _ && !ee,
                     er = Z && (void 0 === L || void 0 === _);
 
                 function eo() {
                     if (y) switch (y.action) {
-                        case pi.AddedEmail:
-                            return (0, P.jsx)(yv, {
+                        case pl.AddedEmail:
+                            return (0, P.jsx)(yb, {
                                 translate: i,
                                 onHide: J
                             });
-                        case pi.AgeEstimation:
-                            return (0, P.jsx)(mr, {
+                        case pl.AgeEstimation:
+                            return (0, P.jsx)(mo, {
                                 translate: i,
                                 onHidecallback: Y,
                                 featureSpecificParams: E,
                                 ageEstimation: !0
                             });
-                        case pi.GovernmentId:
-                            return (0, P.jsx)(yx, {
+                        case pl.GovernmentId:
+                            return (0, P.jsx)(yP, {
                                 translate: i,
                                 onHidecallback: Y,
                                 ageEstimation: !1,
                                 featureSpecificParams: E,
-                                template: v === mo.Appeals ? yw.IdvAppeal : void 0
+                                template: v === ma.Appeals ? yS.IdvAppeal : void 0
                             });
-                        case pi.ParentConsentRequest:
-                        case pi.ParentLinkRequest:
-                            return (0, P.jsx)(hS, {
+                        case pl.ParentConsentRequest:
+                        case pl.ParentLinkRequest:
+                            return (0, P.jsx)(hO, {
                                 recourse: y,
                                 translate: i,
                                 onHidecallback: Y,
@@ -23539,16 +23562,16 @@ function() {
                                 isPrologueUsed: null != d && d,
                                 source: null == E ? void 0 : E.source
                             });
-                        case pi.UserSettings:
+                        case pl.UserSettings:
                             var e;
-                            if ((null == (e = y.userSettings) ? void 0 : e.settingName) === hK.allowFacialAgeEstimation) return (0, P.jsx)(ve, {
+                            if ((null == (e = y.userSettings) ? void 0 : e.settingName) === hB.allowFacialAgeEstimation) return (0, P.jsx)(vt, {
                                 translate: i,
                                 onHidecallback: Y,
                                 value: x,
                                 isPrologueUsed: null != d && d,
                                 source: null == E ? void 0 : E.source
                             });
-                            return (0, P.jsx)(h8, {
+                            return (0, P.jsx)(h4, {
                                 translate: i,
                                 recourse: y,
                                 updateSettingsModalProps: function(e) {
@@ -23576,7 +23599,7 @@ function() {
                                 }, E)
                             })
                     }
-                    return (0, P.jsx)(mB, {
+                    return (0, P.jsx)(mz, {
                         translate: i
                     })
                 }
@@ -23593,7 +23616,7 @@ function() {
                             n = et ? null == Q ? void 0 : Q.vpcRecourse : B;
                         if (n && t && (null == s ? void 0 : s.data) && !H.current) {
                             H.current = !0;
-                            var r, o, a, u, f, d, p = t.isAsyncCall ? dE.Denied : s.data.access,
+                            var r, o, a, u, f, d, p = t.isAsyncCall ? dA.Denied : s.data.access,
                                 y = null === B && t.usePrologue;
                             l.launch({
                                 recourseAction: n.action,
@@ -23603,22 +23626,22 @@ function() {
                                 requestDetails: t.requestDetails,
                                 usePrologue: y,
                                 prologueCopy: y && m ? (r = m, o = i, a = t.requestDetails, u = $, {
-                                    title: (f = r, d = pG, o(hx[f] || d)),
-                                    description: hP(r, pY, o, [pi.ParentConsentRequest], a, u).replace(/<br\s*\/?>/gi, "\n\n"),
-                                    confirmLabel: o(pH)
+                                    title: (f = r, d = p$, o(hP[f] || d)),
+                                    description: hj(r, pQ, o, [pl.ParentConsentRequest], a, u).replace(/<br\s*\/?>/gi, "\n\n"),
+                                    confirmLabel: o(pG)
                                 }) : void 0,
                                 onClose: function() {
-                                    c(dV()), t.closeCallback(p)
+                                    c(d_()), t.closeCallback(p)
                                 }
                             })
                         }
                     }, [c, $, null == (o = s.data) ? void 0 : o.access, m, i, B, Q, et, l]), (0, I.useEffect)(function() {
                         a = eo()
                     }, [y]), et || null !== B) return null;
-                if (p) a = (0, P.jsx)(yg, {});
+                if (p) a = (0, P.jsx)(yw, {});
                 else switch (u) {
-                    case po.Prologue:
-                        null != s.data && (a = (0, P.jsx)(hR, {
+                    case pa.Prologue:
+                        null != s.data && (a = (0, P.jsx)(hU, {
                             translate: i,
                             onHide: Y,
                             recourseParameters: x,
@@ -23629,19 +23652,19 @@ function() {
                             } : void 0
                         }));
                         break;
-                    case po.Verification:
+                    case pa.Verification:
                         null != s.data && (a = eo());
                         break;
-                    case po.Epilogue:
-                        a = (0, P.jsx)(mB, {
+                    case pa.Epilogue:
+                        a = (0, P.jsx)(mz, {
                             translate: i,
                             onHide: Y
                         });
                         break;
                     default:
-                        a = (0, P.jsx)(yg, {})
+                        a = (0, P.jsx)(yw, {})
                 }
-                return (0, P.jsx)(sK.Modal, {
+                return (0, P.jsx)(sB.Modal, {
                     backdrop: "static",
                     keyboard: !1,
                     show: f && !er,
@@ -23655,12 +23678,12 @@ function() {
                 })
             };
 
-            function vc(e, t) {
+            function vu(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
                 return r
             }
-            var vu = function(e) {
+            var vs = function(e) {
                 var t, n = e.translate,
                     r = function(e) {
                         if (Array.isArray(e)) return e
@@ -23685,10 +23708,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return vc(e, 2);
+                            if ("string" == typeof e) return vu(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return vc(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return vu(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -23706,9 +23729,9 @@ function() {
                     var e = function() {
                         a(!0)
                     };
-                    return window.addEventListener(pW, e),
+                    return window.addEventListener(pK, e),
                         function() {
-                            return window.removeEventListener(pW, e)
+                            return window.removeEventListener(pK, e)
                         }
                 }, []), (0, P.jsx)(r_, {
                     open: o,
@@ -23772,7 +23795,7 @@ function() {
                 })
             };
 
-            function vs(e, t, n) {
+            function vf(e, t, n) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -23781,20 +23804,20 @@ function() {
                 }) : e[t] = n, e
             }
 
-            function vf(e) {
+            function vd(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
                     "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
                         return Object.getOwnPropertyDescriptor(n, e).enumerable
                     }))), r.forEach(function(t) {
-                        vs(e, t, n[t])
+                        vf(e, t, n[t])
                     })
                 }
                 return e
             }
 
-            function vd(e, t) {
+            function vp(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -23806,7 +23829,7 @@ function() {
                     Object.defineProperty(e, n, Object.getOwnPropertyDescriptor(t, n))
                 }), e
             }
-            var vp = {
+            var vy = {
                     titleTranslationKey: "Title.EnterParentEmailV2",
                     titleSourceContentId: "1400648",
                     parentEmailLabelTranslationKey: "Label.ParentEmail",
@@ -23824,17 +23847,17 @@ function() {
                     lineBreak: "<br /><br />",
                     lineBreakParam: "{lineBreak}"
                 },
-                vy = (vs(x = {}, hB.phoneNumberDiscoverabilitySetting, {
+                vm = (vf(x = {}, hz.phoneNumberDiscoverabilitySetting, {
                     titleTranslationKey: "Heading.FriendDiscovery",
                     titleSourceContentId: "4063304",
                     consentTranslationKey: "Description.PhoneNumberDiscoverabilityConsent.FriendsRename",
                     consentSourceContentId: "7216456"
-                }), vs(x, hB.phoneNumberDiscoverabilitySettingParentSide, {
+                }), vf(x, hz.phoneNumberDiscoverabilitySettingParentSide, {
                     titleTranslationKey: "Heading.FriendDiscovery",
                     titleSourceContentId: "4063304",
                     consentTranslationKey: "Description.ParentSide.PhoneNumberDiscoverabilityConsent.TFR",
                     consentSourceContentId: "7237448"
-                }), vs(x, hB.phoneNumberDiscoverabilityUpsell, {
+                }), vf(x, hz.phoneNumberDiscoverabilityUpsell, {
                     titleTranslationKey: "Heading.TurnOnFriendDiscovery",
                     titleSourceContentId: "4123720",
                     consentTranslationKey: "Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm",
@@ -23843,7 +23866,7 @@ function() {
                     actionButtonTextSourceContentId: "4123208",
                     neutralButtonTextTranslationKey: "Action.FriendDiscovery.NotNow",
                     neutralButtonTextSourceContentId: "4122952"
-                }), vs(x, hB.personalizedAdsSetting, {
+                }), vf(x, hz.personalizedAdsSetting, {
                     titleTranslationKey: "Heading.PersonalizeYourAds",
                     titleSourceContentId: "4190024",
                     consentTranslationKey: "Description.PersonalizeAds",
@@ -23852,7 +23875,7 @@ function() {
                     linkEnd: "</a>",
                     linkStartParam: "{linkStart}",
                     linkEndParam: "{linkEnd}"
-                }), vs(x, hB.sellShareDataSetting, {
+                }), vf(x, hz.sellShareDataSetting, {
                     titleTranslationKey: "Heading.DataSellingAndSharing",
                     titleSourceContentId: "4190280",
                     consentTranslationKey: "Description.DataSellingAndSharing",
@@ -23861,10 +23884,10 @@ function() {
                     linkEnd: "</a>",
                     linkStartParam: "{linkStart}",
                     linkEndParam: "{linkEnd}"
-                }), vs(x, hB.allowMarketingEmailCheckboxEmailVerification, {
+                }), vf(x, hz.allowMarketingEmailCheckboxEmailVerification, {
                     consentTranslationKey: "Description.EmailNotificationsOptIn",
                     consentSourceContentId: "4557640"
-                }), vs(x, hB.allowMarketingEmailNotifications, {
+                }), vf(x, hz.allowMarketingEmailNotifications, {
                     pageHeadingTranslationKey: "Label.LSC.NewsAndAnnouncements",
                     pageHeadingSourceContentId: "8125000",
                     pageDescriptionTranslationKey: "Description.LSC.ChooseNotificationTypes",
@@ -23873,7 +23896,7 @@ function() {
                     labelSourceContentId: "8125512",
                     labelDescriptionTranslationKey: "Description.LSC.TurnOnEmail",
                     labelDescriptionSourceContentId: "8125768"
-                }), vs(x, hB.voiceDataConsentSetting, {
+                }), vf(x, hz.voiceDataConsentSetting, {
                     titleTranslationKey: "Heading.VoiceDataConsent",
                     titleSourceContentId: "4565320",
                     consentTranslationKey: "Description.VoiceDataConsent",
@@ -23882,7 +23905,7 @@ function() {
                     linkEnd: "</a>",
                     linkStartParam: "{linkStart}",
                     linkEndParam: "{linkEnd}"
-                }), vs(x, hB.voiceDataConsentSettingParentSide, {
+                }), vf(x, hz.voiceDataConsentSettingParentSide, {
                     titleTranslationKey: "Heading.VoiceDataConsent",
                     titleSourceContentId: "4565320",
                     consentTranslationKey: "Description.ParentSide.VoiceDataConsent",
@@ -23891,7 +23914,7 @@ function() {
                     linkEnd: "</a>",
                     linkStartParam: "{linkStart}",
                     linkEndParam: "{linkEnd}"
-                }), vs(x, hB.whoCanPartyWithMe, {
+                }), vf(x, hz.whoCanPartyWithMe, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChat",
@@ -23900,7 +23923,7 @@ function() {
                     titleSourceContentId: "2137161",
                     consentTranslationKey: "Description.PlayGamesTogetherWithYourFriends",
                     consentSourceContentId: "9550152"
-                }), vs(x, hB.whoCanPartyWithMeV2, {
+                }), vf(x, hz.whoCanPartyWithMeV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.ManagePartyAndCommunications",
@@ -23909,7 +23932,7 @@ function() {
                     titleSourceContentId: "9225544",
                     consentTranslationKey: "Description.JoinGamesAndChatWithFriends",
                     consentSourceContentId: "9447241"
-                }), vs(x, hB.whoCanPartyWithMeParentSide, {
+                }), vf(x, hz.whoCanPartyWithMeParentSide, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -23918,7 +23941,7 @@ function() {
                     titleSourceContentId: "2137161",
                     consentTranslationKey: "Description.ParentSide.AllowYourChildToJoinGameWithFriends",
                     consentSourceContentId: "9535560"
-                }), vs(x, hB.whoCanPartyWithMeParentSideV2, {
+                }), vf(x, hz.whoCanPartyWithMeParentSideV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -23927,7 +23950,7 @@ function() {
                     titleSourceContentId: "9225544",
                     consentTranslationKey: "Description.ParentSide.AllowYourChildGamesChatWithFriends",
                     consentSourceContentId: "9620552"
-                }), vs(x, hB.whoCanUsePartyChatWithMe, {
+                }), vf(x, hz.whoCanUsePartyChatWithMe, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChat",
@@ -23936,7 +23959,7 @@ function() {
                     titleSourceContentId: "7180616",
                     consentTranslationKey: "Description.PartyChat",
                     consentSourceContentId: "7182152"
-                }), vs(x, hB.whoCanUsePartyChatWithMeV2, {
+                }), vf(x, hz.whoCanUsePartyChatWithMeV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.ManagePartyAndCommunications",
@@ -23945,7 +23968,7 @@ function() {
                     titleSourceContentId: "9315144",
                     consentTranslationKey: "Description.FriendsChat",
                     consentSourceContentId: "9315400"
-                }), vs(x, hB.whoCanUsePartyChatWithMeParentSide, {
+                }), vf(x, hz.whoCanUsePartyChatWithMeParentSide, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -23954,7 +23977,7 @@ function() {
                     titleSourceContentId: "7180616",
                     consentTranslationKey: "Description.PartyChatConsent",
                     consentSourceContentId: "7194184"
-                }), vs(x, hB.whoCanUsePartyChatWithMeParentSideV2, {
+                }), vf(x, hz.whoCanUsePartyChatWithMeParentSideV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -23963,7 +23986,7 @@ function() {
                     titleSourceContentId: "9315144",
                     consentTranslationKey: "Description.ParentSide.FriendsChat",
                     consentSourceContentId: "9620808"
-                }), vs(x, hB.whoCanUsePartyVoiceWithMe, {
+                }), vf(x, hz.whoCanUsePartyVoiceWithMe, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChat",
@@ -23972,7 +23995,7 @@ function() {
                     titleSourceContentId: "7181384",
                     consentTranslationKey: "Description.PartyVoiceChat",
                     consentSourceContentId: "7182408"
-                }), vs(x, hB.whoCanUsePartyVoiceWithMeV2, {
+                }), vf(x, hz.whoCanUsePartyVoiceWithMeV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.ManagePartyAndCommunications",
@@ -23981,7 +24004,7 @@ function() {
                     titleSourceContentId: "9315656",
                     consentTranslationKey: "Description.VoiceChatWithFriends",
                     consentSourceContentId: "9315912"
-                }), vs(x, hB.whoCanUsePartyVoiceWithMeParentSide, {
+                }), vf(x, hz.whoCanUsePartyVoiceWithMeParentSide, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -23990,7 +24013,7 @@ function() {
                     titleSourceContentId: "7181384",
                     consentTranslationKey: "Description.PartyVoiceChatConsent",
                     consentSourceContentId: "7194440"
-                }), vs(x, hB.whoCanUsePartyVoiceWithMeParentSideV2, {
+                }), vf(x, hz.whoCanUsePartyVoiceWithMeParentSideV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -23999,7 +24022,7 @@ function() {
                     titleSourceContentId: "9315656",
                     consentTranslationKey: "Description.PartyVoiceChatConsent",
                     consentSourceContentId: "7194440"
-                }), vs(x, hB.whoCanPartyWithMeTrustedFriends, {
+                }), vf(x, hz.whoCanPartyWithMeTrustedFriends, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartySetting.AddToParty",
@@ -24008,7 +24031,7 @@ function() {
                     titleSourceContentId: "2137161",
                     consentTranslationKey: "Description.PlayGamesTogetherWithYourFriends",
                     consentSourceContentId: "9550152"
-                }), vs(x, hB.whoCanPartyWithMeTrustedFriendsV2, {
+                }), vf(x, hz.whoCanPartyWithMeTrustedFriendsV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.PartySetting.AddToParty",
@@ -24017,7 +24040,7 @@ function() {
                     titleSourceContentId: "9225544",
                     consentTranslationKey: "Description.PlayGamesTogetherWithYourFriends",
                     consentSourceContentId: "9550152"
-                }), vs(x, hB.whoCanPartyWithMeParentSideRemovedComms, {
+                }), vf(x, hz.whoCanPartyWithMeParentSideRemovedComms, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartySettingConsent.AddToParty",
@@ -24026,7 +24049,7 @@ function() {
                     titleSourceContentId: "2137161",
                     consentTranslationKey: "Description.PartySettingConsent.AddToParty",
                     consentSourceContentId: "8316744"
-                }), vs(x, hB.whoCanPartyWithMeParentSideRemovedCommsV2, {
+                }), vf(x, hz.whoCanPartyWithMeParentSideRemovedCommsV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.PartySettingConsent.AddToParty",
@@ -24035,7 +24058,7 @@ function() {
                     titleSourceContentId: "9225544",
                     consentTranslationKey: "Description.PartySettingConsent.AddToParty",
                     consentSourceContentId: "8316744"
-                }), vs(x, hB.whoCanUsePartyChatWithMeTrustedFriends, {
+                }), vf(x, hz.whoCanUsePartyChatWithMeTrustedFriends, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChat",
@@ -24044,7 +24067,7 @@ function() {
                     titleSourceContentId: "7180616",
                     consentTranslationKey: "Description.PartyChat.TrustedFriendsOnly",
                     consentSourceContentId: "8313416"
-                }), vs(x, hB.whoCanUsePartyChatWithMeTrustedFriendsV2, {
+                }), vf(x, hz.whoCanUsePartyChatWithMeTrustedFriendsV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.ManagePartyAndCommunications",
@@ -24053,7 +24076,7 @@ function() {
                     titleSourceContentId: "9315144",
                     consentTranslationKey: "Description.PartyChat.TrustedFriendsOnly",
                     consentSourceContentId: "8313416"
-                }), vs(x, hB.whoCanUsePartyChatWithMeParentSideTrustedFriends, {
+                }), vf(x, hz.whoCanUsePartyChatWithMeParentSideTrustedFriends, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -24062,7 +24085,7 @@ function() {
                     titleSourceContentId: "7180616",
                     consentTranslationKey: "Description.PartyChatConsent.TrustedFriends",
                     consentSourceContentId: "8314952"
-                }), vs(x, hB.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2, {
+                }), vf(x, hz.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -24071,7 +24094,7 @@ function() {
                     titleSourceContentId: "9315144",
                     consentTranslationKey: "Description.PartyChatConsent.TrustedFriends",
                     consentSourceContentId: "8314952"
-                }), vs(x, hB.whoCanUsePartyVoiceWithMeTrustedFriends, {
+                }), vf(x, hz.whoCanUsePartyVoiceWithMeTrustedFriends, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChat",
@@ -24080,7 +24103,7 @@ function() {
                     titleSourceContentId: "7181384",
                     consentTranslationKey: "Description.PartyVoiceChat.TrustedFriendsOnly",
                     consentSourceContentId: "8313672"
-                }), vs(x, hB.whoCanUsePartyVoiceWithMeTrustedFriendsV2, {
+                }), vf(x, hz.whoCanUsePartyVoiceWithMeTrustedFriendsV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.ManagePartyAndCommunications",
@@ -24089,7 +24112,7 @@ function() {
                     titleSourceContentId: "9315656",
                     consentTranslationKey: "Description.PartyVoiceChat.TrustedFriendsOnly",
                     consentSourceContentId: "8313672"
-                }), vs(x, hB.whoCanUsePartyVoiceWithMeParentSideTrustedFriends, {
+                }), vf(x, hz.whoCanUsePartyVoiceWithMeParentSideTrustedFriends, {
                     pageTitleTranslationKey: "Heading.PartyAndPartyChat",
                     pageTitleSourceContentId: "7180360",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -24098,7 +24121,7 @@ function() {
                     titleSourceContentId: "7181384",
                     consentTranslationKey: "Description.PartyVoiceChatConsent",
                     consentSourceContentId: "7194440"
-                }), vs(x, hB.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2, {
+                }), vf(x, hz.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2, {
                     pageTitleTranslationKey: "Heading.ChatAndPartyWithFriends",
                     pageTitleSourceContentId: "9225544",
                     pageDescriptionTranslationKey: "Description.PartyAndPartyChatParentSide",
@@ -24107,7 +24130,7 @@ function() {
                     titleSourceContentId: "9315656",
                     consentTranslationKey: "Description.PartyVoiceChatConsent",
                     consentSourceContentId: "7194440"
-                }), vs(x, hB.receiveRobuxTransferConsentCard, {
+                }), vf(x, hz.receiveRobuxTransferConsentCard, {
                     titleTranslationKey: "Heading.ConversationalRequest.ReceiveTransfer.Robux",
                     titleSourceContentId: "7140680",
                     descriptionTranslationKey: "Description.ReceiveRobuxTransfer",
@@ -24115,7 +24138,7 @@ function() {
                     usernameParam: "{username}",
                     amountParam: "{amount}",
                     robuxAmountParam: "{robuxAmount}"
-                }), vs(x, hB.sendRobuxTransferConsentCard, {
+                }), vf(x, hz.sendRobuxTransferConsentCard, {
                     titleTranslationKey: "Heading.ConversationalRequest.SendTransfer.Robux",
                     titleSourceContentId: "7140424",
                     descriptionTranslationKey: "Description.SendRobuxTransfer",
@@ -24123,33 +24146,33 @@ function() {
                     usernameParam: "{username}",
                     amountParam: "{amount}",
                     robuxAmountParam: "{robuxAmount}"
-                }), vs(x, hB.vpcRequestLinkSubjectToPC, vd(vf({}, vp), {
+                }), vf(x, hz.vpcRequestLinkSubjectToPC, vp(vd({}, vy), {
                     descriptionTranslationKey: "Description.EnterParentEmailV5",
                     descriptionSourceContentId: "3710792"
-                })), vs(x, hB.vpcRequestLinkNotSubjectToPC, vd(vf({}, vp), {
+                })), vf(x, hz.vpcRequestLinkNotSubjectToPC, vp(vd({}, vy), {
                     descriptionTranslationKey: "Description.EnterParentEmailWithoutParentalControlV2",
                     descriptionSourceContentId: "3618888"
-                })), vs(x, hB.vpcRequestLinkDefault, vd(vf({}, vp), {
+                })), vf(x, hz.vpcRequestLinkDefault, vp(vd({}, vy), {
                     descriptionTranslationKey: "Description.EnterParentEmailWithoutParentalControl",
                     descriptionSourceContentId: "2540872"
-                })), vs(x, hB.consentCenterAllowAction, {
+                })), vf(x, hz.consentCenterAllowAction, {
                     textTranslationKey: "Description.AllowYourChild",
                     textSourceContentId: "1844552",
                     actionNameParam: "{actionName}"
-                }), vs(x, hB.consentCenterUpdateSettingNoValue, {
+                }), vf(x, hz.consentCenterUpdateSettingNoValue, {
                     textTranslationKey: "Description.UpdateChildSetting",
                     textSourceContentId: "1566280",
                     settingNameParam: "{settingName}"
-                }), vs(x, hB.consentCenterUpdateSettingWithValue, {
+                }), vf(x, hz.consentCenterUpdateSettingWithValue, {
                     textTranslationKey: "Description.UpdateChildSettingFromTo",
                     textSourceContentId: "1566536",
                     settingNameParam: "{settingName}",
                     currentValueParam: "{currentValue}",
                     proposedValueParam: "{proposedValue}"
                 }), x),
-                vm = au.EnvironmentUrls.userSettingsApi;
+                vh = au.EnvironmentUrls.userSettingsApi;
 
-            function vh(e, t, n, r, o, a, i) {
+            function vv(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -24160,7 +24183,7 @@ function() {
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
 
-            function vv(e, t, n) {
+            function vb(e, t, n) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -24168,7 +24191,7 @@ function() {
                     writable: !0
                 }) : e[t] = n, e
             }
-            var vb = function(e, t, n) {
+            var vg = function(e, t, n) {
                 var r;
                 return (r = function() {
                     var r;
@@ -24260,14 +24283,14 @@ function() {
                                 "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
                                     return Object.getOwnPropertyDescriptor(n, e).enumerable
                                 }))), r.forEach(function(t) {
-                                    vv(e, t, n[t])
+                                    vb(e, t, n[t])
                                 })
                             }
                             return e
                         }({}, {
                             retryable: !0,
                             withCredentials: !0,
-                            url: "".concat(vm, "/v1/user-settings")
+                            url: "".concat(vh, "/v1/user-settings")
                         }), i = i = {
                             headers: {
                                 "rbx-audit-data": n
@@ -24281,7 +24304,7 @@ function() {
                             return t
                         })(Object(i)).forEach(function(e) {
                             Object.defineProperty(a, e, Object.getOwnPropertyDescriptor(i, e))
-                        }), r = a, [2, sy.httpService.post(r, vv({}, e, t))]
+                        }), r = a, [2, sm.httpService.post(r, vb({}, e, t))]
                     })
                 }, function() {
                     var e = this,
@@ -24290,18 +24313,18 @@ function() {
                         var a = r.apply(e, t);
 
                         function i(e) {
-                            vh(a, n, o, i, l, "next", e)
+                            vv(a, n, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            vh(a, n, o, i, l, "throw", e)
+                            vv(a, n, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 })()
             };
 
-            function vg(e, t, n) {
+            function vw(e, t, n) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: n,
                     enumerable: !0,
@@ -24310,141 +24333,141 @@ function() {
                 }) : e[t] = n, e
             }
 
-            function vw(e) {
+            function vS(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var n = null != arguments[t] ? arguments[t] : {},
                         r = Object.keys(n);
                     "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
                         return Object.getOwnPropertyDescriptor(n, e).enumerable
                     }))), r.forEach(function(t) {
-                        vg(e, t, n[t])
+                        vw(e, t, n[t])
                     })
                 }
                 return e
             }
-            var vS = function(e, t, n) {
+            var vO = function(e, t, n) {
                     var r;
                     switch (e) {
-                        case hB.phoneNumberDiscoverabilitySetting:
+                        case hz.phoneNumberDiscoverabilitySetting:
                             return [{
-                                consentStringTemplate: t(vy.phoneNumberDiscoverabilitySetting.titleTranslationKey),
-                                sourceContentId: vy.phoneNumberDiscoverabilitySetting.titleSourceContentId
+                                consentStringTemplate: t(vm.phoneNumberDiscoverabilitySetting.titleTranslationKey),
+                                sourceContentId: vm.phoneNumberDiscoverabilitySetting.titleSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.phoneNumberDiscoverabilitySetting.consentTranslationKey),
-                                sourceContentId: vy.phoneNumberDiscoverabilitySetting.consentSourceContentId
+                                consentStringTemplate: t(vm.phoneNumberDiscoverabilitySetting.consentTranslationKey),
+                                sourceContentId: vm.phoneNumberDiscoverabilitySetting.consentSourceContentId
                             }];
-                        case hB.phoneNumberDiscoverabilitySettingParentSide:
+                        case hz.phoneNumberDiscoverabilitySettingParentSide:
                             return [{
-                                consentStringTemplate: t(vy.phoneNumberDiscoverabilitySettingParentSide.titleTranslationKey),
-                                sourceContentId: vy.phoneNumberDiscoverabilitySettingParentSide.titleSourceContentId
+                                consentStringTemplate: t(vm.phoneNumberDiscoverabilitySettingParentSide.titleTranslationKey),
+                                sourceContentId: vm.phoneNumberDiscoverabilitySettingParentSide.titleSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.phoneNumberDiscoverabilitySettingParentSide.consentTranslationKey),
-                                sourceContentId: vy.phoneNumberDiscoverabilitySettingParentSide.consentSourceContentId
+                                consentStringTemplate: t(vm.phoneNumberDiscoverabilitySettingParentSide.consentTranslationKey),
+                                sourceContentId: vm.phoneNumberDiscoverabilitySettingParentSide.consentSourceContentId
                             }];
-                        case hB.phoneNumberDiscoverabilityUpsell:
+                        case hz.phoneNumberDiscoverabilityUpsell:
                             return [{
-                                consentStringTemplate: t(vy.phoneNumberDiscoverabilityUpsell.titleTranslationKey),
-                                sourceContentId: vy.phoneNumberDiscoverabilityUpsell.titleSourceContentId
+                                consentStringTemplate: t(vm.phoneNumberDiscoverabilityUpsell.titleTranslationKey),
+                                sourceContentId: vm.phoneNumberDiscoverabilityUpsell.titleSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.phoneNumberDiscoverabilityUpsell.consentTranslationKey),
-                                sourceContentId: vy.phoneNumberDiscoverabilityUpsell.consentSourceContentId
+                                consentStringTemplate: t(vm.phoneNumberDiscoverabilityUpsell.consentTranslationKey),
+                                sourceContentId: vm.phoneNumberDiscoverabilityUpsell.consentSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.phoneNumberDiscoverabilityUpsell.actionButtonTextTranslationKey),
-                                sourceContentId: vy.phoneNumberDiscoverabilityUpsell.actionButtonTextSourceContentId
+                                consentStringTemplate: t(vm.phoneNumberDiscoverabilityUpsell.actionButtonTextTranslationKey),
+                                sourceContentId: vm.phoneNumberDiscoverabilityUpsell.actionButtonTextSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.phoneNumberDiscoverabilityUpsell.neutralButtonTextTranslationKey),
-                                sourceContentId: vy.phoneNumberDiscoverabilityUpsell.neutralButtonTextSourceContentId
+                                consentStringTemplate: t(vm.phoneNumberDiscoverabilityUpsell.neutralButtonTextTranslationKey),
+                                sourceContentId: vm.phoneNumberDiscoverabilityUpsell.neutralButtonTextSourceContentId
                             }];
-                        case hB.personalizedAdsSetting:
+                        case hz.personalizedAdsSetting:
                             return [{
-                                consentStringTemplate: t(vy.personalizedAdsSetting.titleTranslationKey),
-                                sourceContentId: vy.personalizedAdsSetting.titleSourceContentId
+                                consentStringTemplate: t(vm.personalizedAdsSetting.titleTranslationKey),
+                                sourceContentId: vm.personalizedAdsSetting.titleSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.personalizedAdsSetting.consentTranslationKey, {
-                                    linkStart: vy.personalizedAdsSetting.linkStartParam,
-                                    linkEnd: vy.personalizedAdsSetting.linkEndParam
+                                consentStringTemplate: t(vm.personalizedAdsSetting.consentTranslationKey, {
+                                    linkStart: vm.personalizedAdsSetting.linkStartParam,
+                                    linkEnd: vm.personalizedAdsSetting.linkEndParam
                                 }),
-                                sourceContentId: vy.personalizedAdsSetting.consentSourceContentId,
+                                sourceContentId: vm.personalizedAdsSetting.consentSourceContentId,
                                 vars: {
-                                    linkStart: vy.personalizedAdsSetting.linkStart,
-                                    linkEnd: vy.personalizedAdsSetting.linkEnd
+                                    linkStart: vm.personalizedAdsSetting.linkStart,
+                                    linkEnd: vm.personalizedAdsSetting.linkEnd
                                 }
                             }];
-                        case hB.sellShareDataSetting:
+                        case hz.sellShareDataSetting:
                             return [{
-                                consentStringTemplate: t(vy.sellShareDataSetting.titleTranslationKey),
-                                sourceContentId: vy.sellShareDataSetting.titleSourceContentId
+                                consentStringTemplate: t(vm.sellShareDataSetting.titleTranslationKey),
+                                sourceContentId: vm.sellShareDataSetting.titleSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.sellShareDataSetting.consentTranslationKey, {
-                                    linkStart: vy.sellShareDataSetting.linkStartParam,
-                                    linkEnd: vy.sellShareDataSetting.linkEndParam
+                                consentStringTemplate: t(vm.sellShareDataSetting.consentTranslationKey, {
+                                    linkStart: vm.sellShareDataSetting.linkStartParam,
+                                    linkEnd: vm.sellShareDataSetting.linkEndParam
                                 }),
-                                sourceContentId: vy.sellShareDataSetting.consentSourceContentId,
+                                sourceContentId: vm.sellShareDataSetting.consentSourceContentId,
                                 vars: {
-                                    linkStart: vy.sellShareDataSetting.linkStart,
-                                    linkEnd: vy.sellShareDataSetting.linkEnd
+                                    linkStart: vm.sellShareDataSetting.linkStart,
+                                    linkEnd: vm.sellShareDataSetting.linkEnd
                                 }
                             }];
-                        case hB.allowMarketingEmailCheckboxEmailVerification:
+                        case hz.allowMarketingEmailCheckboxEmailVerification:
                             return [{
-                                consentStringTemplate: t(vy.allowMarketingEmailCheckboxEmailVerification.consentTranslationKey),
-                                sourceContentId: vy.allowMarketingEmailCheckboxEmailVerification.consentSourceContentId
+                                consentStringTemplate: t(vm.allowMarketingEmailCheckboxEmailVerification.consentTranslationKey),
+                                sourceContentId: vm.allowMarketingEmailCheckboxEmailVerification.consentSourceContentId
                             }];
-                        case hB.voiceDataConsentSetting:
+                        case hz.voiceDataConsentSetting:
                             return [{
-                                consentStringTemplate: t(vy.voiceDataConsentSetting.titleTranslationKey),
-                                sourceContentId: vy.voiceDataConsentSetting.titleSourceContentId
+                                consentStringTemplate: t(vm.voiceDataConsentSetting.titleTranslationKey),
+                                sourceContentId: vm.voiceDataConsentSetting.titleSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.voiceDataConsentSetting.consentTranslationKey, {
-                                    linkStart: vy.voiceDataConsentSetting.linkStartParam,
-                                    linkEnd: vy.voiceDataConsentSetting.linkEndParam
+                                consentStringTemplate: t(vm.voiceDataConsentSetting.consentTranslationKey, {
+                                    linkStart: vm.voiceDataConsentSetting.linkStartParam,
+                                    linkEnd: vm.voiceDataConsentSetting.linkEndParam
                                 }),
-                                sourceContentId: vy.voiceDataConsentSetting.consentSourceContentId,
+                                sourceContentId: vm.voiceDataConsentSetting.consentSourceContentId,
                                 vars: {
-                                    linkStart: vy.voiceDataConsentSetting.linkStart,
-                                    linkEnd: vy.voiceDataConsentSetting.linkEnd
+                                    linkStart: vm.voiceDataConsentSetting.linkStart,
+                                    linkEnd: vm.voiceDataConsentSetting.linkEnd
                                 }
                             }];
-                        case hB.voiceDataConsentSettingParentSide:
+                        case hz.voiceDataConsentSettingParentSide:
                             return [{
-                                consentStringTemplate: t(vy.voiceDataConsentSettingParentSide.titleTranslationKey),
-                                sourceContentId: vy.voiceDataConsentSettingParentSide.titleSourceContentId
+                                consentStringTemplate: t(vm.voiceDataConsentSettingParentSide.titleTranslationKey),
+                                sourceContentId: vm.voiceDataConsentSettingParentSide.titleSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.voiceDataConsentSettingParentSide.consentTranslationKey, {
-                                    linkStart: vy.voiceDataConsentSettingParentSide.linkStartParam,
-                                    linkEnd: vy.voiceDataConsentSettingParentSide.linkEndParam
+                                consentStringTemplate: t(vm.voiceDataConsentSettingParentSide.consentTranslationKey, {
+                                    linkStart: vm.voiceDataConsentSettingParentSide.linkStartParam,
+                                    linkEnd: vm.voiceDataConsentSettingParentSide.linkEndParam
                                 }),
-                                sourceContentId: vy.voiceDataConsentSettingParentSide.consentSourceContentId,
+                                sourceContentId: vm.voiceDataConsentSettingParentSide.consentSourceContentId,
                                 vars: {
-                                    linkStart: vy.voiceDataConsentSettingParentSide.linkStart,
-                                    linkEnd: vy.voiceDataConsentSettingParentSide.linkEnd
+                                    linkStart: vm.voiceDataConsentSettingParentSide.linkStart,
+                                    linkEnd: vm.voiceDataConsentSettingParentSide.linkEnd
                                 }
                             }];
-                        case hB.whoCanPartyWithMe:
-                        case hB.whoCanPartyWithMeV2:
-                        case hB.whoCanPartyWithMeParentSide:
-                        case hB.whoCanPartyWithMeParentSideV2:
-                        case hB.whoCanPartyWithMeTrustedFriends:
-                        case hB.whoCanPartyWithMeTrustedFriendsV2:
-                        case hB.whoCanPartyWithMeParentSideRemovedComms:
-                        case hB.whoCanPartyWithMeParentSideRemovedCommsV2:
-                        case hB.whoCanUsePartyChatWithMe:
-                        case hB.whoCanUsePartyChatWithMeV2:
-                        case hB.whoCanUsePartyChatWithMeParentSide:
-                        case hB.whoCanUsePartyChatWithMeParentSideV2:
-                        case hB.whoCanUsePartyChatWithMeTrustedFriends:
-                        case hB.whoCanUsePartyChatWithMeTrustedFriendsV2:
-                        case hB.whoCanUsePartyChatWithMeParentSideTrustedFriends:
-                        case hB.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2:
-                        case hB.whoCanUsePartyVoiceWithMe:
-                        case hB.whoCanUsePartyVoiceWithMeV2:
-                        case hB.whoCanUsePartyVoiceWithMeParentSide:
-                        case hB.whoCanUsePartyVoiceWithMeParentSideV2:
-                        case hB.whoCanUsePartyVoiceWithMeTrustedFriends:
-                        case hB.whoCanUsePartyVoiceWithMeTrustedFriendsV2:
-                        case hB.whoCanUsePartyVoiceWithMeParentSideTrustedFriends:
-                        case hB.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2:
-                            var o = vy[e];
+                        case hz.whoCanPartyWithMe:
+                        case hz.whoCanPartyWithMeV2:
+                        case hz.whoCanPartyWithMeParentSide:
+                        case hz.whoCanPartyWithMeParentSideV2:
+                        case hz.whoCanPartyWithMeTrustedFriends:
+                        case hz.whoCanPartyWithMeTrustedFriendsV2:
+                        case hz.whoCanPartyWithMeParentSideRemovedComms:
+                        case hz.whoCanPartyWithMeParentSideRemovedCommsV2:
+                        case hz.whoCanUsePartyChatWithMe:
+                        case hz.whoCanUsePartyChatWithMeV2:
+                        case hz.whoCanUsePartyChatWithMeParentSide:
+                        case hz.whoCanUsePartyChatWithMeParentSideV2:
+                        case hz.whoCanUsePartyChatWithMeTrustedFriends:
+                        case hz.whoCanUsePartyChatWithMeTrustedFriendsV2:
+                        case hz.whoCanUsePartyChatWithMeParentSideTrustedFriends:
+                        case hz.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2:
+                        case hz.whoCanUsePartyVoiceWithMe:
+                        case hz.whoCanUsePartyVoiceWithMeV2:
+                        case hz.whoCanUsePartyVoiceWithMeParentSide:
+                        case hz.whoCanUsePartyVoiceWithMeParentSideV2:
+                        case hz.whoCanUsePartyVoiceWithMeTrustedFriends:
+                        case hz.whoCanUsePartyVoiceWithMeTrustedFriendsV2:
+                        case hz.whoCanUsePartyVoiceWithMeParentSideTrustedFriends:
+                        case hz.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2:
+                            var o = vm[e];
                             return [{
                                 consentStringTemplate: t(o.pageTitleTranslationKey),
                                 sourceContentId: o.pageTitleSourceContentId
@@ -24458,50 +24481,50 @@ function() {
                                 consentStringTemplate: t(o.consentTranslationKey),
                                 sourceContentId: o.consentSourceContentId
                             }];
-                        case hB.receiveRobuxTransferConsentCard:
+                        case hz.receiveRobuxTransferConsentCard:
                             return [{
-                                consentStringTemplate: t(vy.receiveRobuxTransferConsentCard.titleTranslationKey, {
-                                    username: vy.receiveRobuxTransferConsentCard.usernameParam,
-                                    amount: vy.receiveRobuxTransferConsentCard.amountParam
+                                consentStringTemplate: t(vm.receiveRobuxTransferConsentCard.titleTranslationKey, {
+                                    username: vm.receiveRobuxTransferConsentCard.usernameParam,
+                                    amount: vm.receiveRobuxTransferConsentCard.amountParam
                                 }),
-                                sourceContentId: vy.receiveRobuxTransferConsentCard.titleSourceContentId,
+                                sourceContentId: vm.receiveRobuxTransferConsentCard.titleSourceContentId,
                                 vars: {
                                     username: null == n ? void 0 : n.username,
                                     amount: null == n ? void 0 : n.amount
                                 }
                             }, {
-                                consentStringTemplate: t(vy.receiveRobuxTransferConsentCard.descriptionTranslationKey, {
-                                    robuxAmount: vy.receiveRobuxTransferConsentCard.robuxAmountParam
+                                consentStringTemplate: t(vm.receiveRobuxTransferConsentCard.descriptionTranslationKey, {
+                                    robuxAmount: vm.receiveRobuxTransferConsentCard.robuxAmountParam
                                 }),
-                                sourceContentId: vy.receiveRobuxTransferConsentCard.descriptionSourceContentId,
+                                sourceContentId: vm.receiveRobuxTransferConsentCard.descriptionSourceContentId,
                                 vars: {
                                     robuxAmount: null == n ? void 0 : n.amount
                                 }
                             }];
-                        case hB.sendRobuxTransferConsentCard:
+                        case hz.sendRobuxTransferConsentCard:
                             return [{
-                                consentStringTemplate: t(vy.sendRobuxTransferConsentCard.titleTranslationKey, {
-                                    username: vy.sendRobuxTransferConsentCard.usernameParam,
-                                    amount: vy.sendRobuxTransferConsentCard.amountParam
+                                consentStringTemplate: t(vm.sendRobuxTransferConsentCard.titleTranslationKey, {
+                                    username: vm.sendRobuxTransferConsentCard.usernameParam,
+                                    amount: vm.sendRobuxTransferConsentCard.amountParam
                                 }),
-                                sourceContentId: vy.sendRobuxTransferConsentCard.titleSourceContentId,
+                                sourceContentId: vm.sendRobuxTransferConsentCard.titleSourceContentId,
                                 vars: {
                                     username: null == n ? void 0 : n.username,
                                     amount: null == n ? void 0 : n.amount
                                 }
                             }, {
-                                consentStringTemplate: t(vy.sendRobuxTransferConsentCard.descriptionTranslationKey, {
-                                    robuxAmount: vy.sendRobuxTransferConsentCard.robuxAmountParam
+                                consentStringTemplate: t(vm.sendRobuxTransferConsentCard.descriptionTranslationKey, {
+                                    robuxAmount: vm.sendRobuxTransferConsentCard.robuxAmountParam
                                 }),
-                                sourceContentId: vy.sendRobuxTransferConsentCard.descriptionSourceContentId,
+                                sourceContentId: vm.sendRobuxTransferConsentCard.descriptionSourceContentId,
                                 vars: {
                                     robuxAmount: null == n ? void 0 : n.amount
                                 }
                             }];
-                        case hB.vpcRequestLinkSubjectToPC:
-                        case hB.vpcRequestLinkNotSubjectToPC:
-                        case hB.vpcRequestLinkDefault:
-                            return r = vy.vpcRequestLinkDefault, e === hB.vpcRequestLinkSubjectToPC ? r = vy.vpcRequestLinkSubjectToPC : e === hB.vpcRequestLinkNotSubjectToPC && (r = vy.vpcRequestLinkNotSubjectToPC), [{
+                        case hz.vpcRequestLinkSubjectToPC:
+                        case hz.vpcRequestLinkNotSubjectToPC:
+                        case hz.vpcRequestLinkDefault:
+                            return r = vm.vpcRequestLinkDefault, e === hz.vpcRequestLinkSubjectToPC ? r = vm.vpcRequestLinkSubjectToPC : e === hz.vpcRequestLinkNotSubjectToPC && (r = vm.vpcRequestLinkNotSubjectToPC), [{
                                 consentStringTemplate: t(r.titleTranslationKey),
                                 sourceContentId: r.titleSourceContentId
                             }, {
@@ -24532,9 +24555,9 @@ function() {
                                 consentStringTemplate: t(r.buttonTranslationKey),
                                 sourceContentId: r.buttonSourceContentId
                             }];
-                        case hB.consentCenterAllowAction:
+                        case hz.consentCenterAllowAction:
                             return [{
-                                consentStringTemplate: t((r = vy.consentCenterAllowAction).textTranslationKey, {
+                                consentStringTemplate: t((r = vm.consentCenterAllowAction).textTranslationKey, {
                                     actionName: r.actionNameParam
                                 }),
                                 sourceContentId: r.textSourceContentId,
@@ -24542,9 +24565,9 @@ function() {
                                     actionName: null == n ? void 0 : n.actionName
                                 }
                             }];
-                        case hB.consentCenterUpdateSettingNoValue:
+                        case hz.consentCenterUpdateSettingNoValue:
                             return [{
-                                consentStringTemplate: t((r = vy.consentCenterUpdateSettingNoValue).textTranslationKey, {
+                                consentStringTemplate: t((r = vm.consentCenterUpdateSettingNoValue).textTranslationKey, {
                                     settingName: r.settingNameParam
                                 }),
                                 sourceContentId: r.textSourceContentId,
@@ -24552,9 +24575,9 @@ function() {
                                     settingName: null == n ? void 0 : n.settingName
                                 }
                             }];
-                        case hB.consentCenterUpdateSettingWithValue:
+                        case hz.consentCenterUpdateSettingWithValue:
                             return [{
-                                consentStringTemplate: t((r = vy.consentCenterUpdateSettingWithValue).textTranslationKey, {
+                                consentStringTemplate: t((r = vm.consentCenterUpdateSettingWithValue).textTranslationKey, {
                                     settingName: r.settingNameParam,
                                     currentValue: r.currentValueParam,
                                     proposedValue: r.proposedValueParam
@@ -24566,30 +24589,30 @@ function() {
                                     proposedValue: null == n ? void 0 : n.proposedValue
                                 }
                             }];
-                        case hB.allowMarketingEmailNotifications:
+                        case hz.allowMarketingEmailNotifications:
                             return [{
-                                consentStringTemplate: t(vy.allowMarketingEmailNotifications.pageHeadingTranslationKey),
-                                sourceContentId: vy.allowMarketingEmailNotifications.pageHeadingSourceContentId
+                                consentStringTemplate: t(vm.allowMarketingEmailNotifications.pageHeadingTranslationKey),
+                                sourceContentId: vm.allowMarketingEmailNotifications.pageHeadingSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.allowMarketingEmailNotifications.pageDescriptionTranslationKey),
-                                sourceContentId: vy.allowMarketingEmailNotifications.pageDescriptionSourceContentId
+                                consentStringTemplate: t(vm.allowMarketingEmailNotifications.pageDescriptionTranslationKey),
+                                sourceContentId: vm.allowMarketingEmailNotifications.pageDescriptionSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.allowMarketingEmailNotifications.labelTranslationKey),
-                                sourceContentId: vy.allowMarketingEmailNotifications.labelSourceContentId
+                                consentStringTemplate: t(vm.allowMarketingEmailNotifications.labelTranslationKey),
+                                sourceContentId: vm.allowMarketingEmailNotifications.labelSourceContentId
                             }, {
-                                consentStringTemplate: t(vy.allowMarketingEmailNotifications.labelDescriptionTranslationKey),
-                                sourceContentId: vy.allowMarketingEmailNotifications.labelDescriptionSourceContentId
+                                consentStringTemplate: t(vm.allowMarketingEmailNotifications.labelDescriptionTranslationKey),
+                                sourceContentId: vm.allowMarketingEmailNotifications.labelDescriptionSourceContentId
                             }];
                         default:
                             return []
                     }
                 },
-                vO = function(e, t, n) {
-                    var r = JSON.stringify(vw({
+                vx = function(e, t, n) {
+                    var r = JSON.stringify(vS({
                         content: e.reduce(function(e, t) {
                             var n, r;
-                            return n = vw({}, e), r = null != (r = vg({}, t.sourceContentId, vw({
-                                hash: dA.cryptoUtil.hashStringWithFnv1a32(t.consentStringTemplate)
+                            return n = vS({}, e), r = null != (r = vw({}, t.sourceContentId, vS({
+                                hash: dT.cryptoUtil.hashStringWithFnv1a32(t.consentStringTemplate)
                             }, t.vars))) ? r : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(n, Object.getOwnPropertyDescriptors(r)) : (function(e) {
                                 var t = Object.keys(e);
                                 if (Object.getOwnPropertySymbols) {
@@ -24603,10 +24626,10 @@ function() {
                         }, {}),
                         surface: t
                     }, n));
-                    return dA.cryptoUtil.stringToUrlSafeBase64(r)
+                    return dT.cryptoUtil.stringToUrlSafeBase64(r)
                 };
 
-            function vx(e, t, n, r, o, a, i) {
+            function vP(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -24616,7 +24639,7 @@ function() {
                 }
                 l.done ? t(c) : Promise.resolve(c).then(r, o)
             }
-            var vP = (0, N.withTranslations)(function(e) {
+            var vj = (0, N.withTranslations)(function(e) {
                     var t = e.translate;
                     return (0, I.useEffect)(function() {
                         T().LegallySensitiveContentService = {
@@ -24625,295 +24648,295 @@ function() {
                                 return o = t, a = e, i = n, l = r, [function() {
                                     var e;
                                     switch (a) {
-                                        case hB.phoneNumberDiscoverabilitySetting:
+                                        case hz.phoneNumberDiscoverabilitySetting:
                                             return {
                                                 wordsOfConsent: {
-                                                    title: o((e = vy.phoneNumberDiscoverabilitySetting).titleTranslationKey),
+                                                    title: o((e = vm.phoneNumberDiscoverabilitySetting).titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.phoneNumberDiscoverabilitySettingParentSide:
+                                        case hz.phoneNumberDiscoverabilitySettingParentSide:
                                             return {
                                                 wordsOfConsent: {
-                                                    title: o((e = vy.phoneNumberDiscoverabilitySettingParentSide).titleTranslationKey),
+                                                    title: o((e = vm.phoneNumberDiscoverabilitySettingParentSide).titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.phoneNumberDiscoverabilityUpsell:
+                                        case hz.phoneNumberDiscoverabilityUpsell:
                                             return {
                                                 wordsOfConsent: {
-                                                    title: o((e = vy.phoneNumberDiscoverabilityUpsell).titleTranslationKey),
+                                                    title: o((e = vm.phoneNumberDiscoverabilityUpsell).titleTranslationKey),
                                                     consent: o(e.consentTranslationKey),
                                                     actionButtonText: o(e.actionButtonTextTranslationKey),
                                                     neutralButtonText: o(e.neutralButtonTextTranslationKey)
                                                 }
                                             };
-                                        case hB.personalizedAdsSetting:
+                                        case hz.personalizedAdsSetting:
                                             return {
                                                 wordsOfConsent: {
-                                                    title: o((e = vy.personalizedAdsSetting).titleTranslationKey),
+                                                    title: o((e = vm.personalizedAdsSetting).titleTranslationKey),
                                                     consent: o(e.consentTranslationKey, {
                                                         linkStart: e.linkStart,
                                                         linkEnd: e.linkEnd
                                                     })
                                                 }
                                             };
-                                        case hB.sellShareDataSetting:
+                                        case hz.sellShareDataSetting:
                                             return {
                                                 wordsOfConsent: {
-                                                    title: o((e = vy.sellShareDataSetting).titleTranslationKey),
+                                                    title: o((e = vm.sellShareDataSetting).titleTranslationKey),
                                                     consent: o(e.consentTranslationKey, {
                                                         linkStart: e.linkStart,
                                                         linkEnd: e.linkEnd
                                                     })
                                                 }
                                             };
-                                        case hB.allowMarketingEmailCheckboxEmailVerification:
+                                        case hz.allowMarketingEmailCheckboxEmailVerification:
                                             return {
                                                 wordsOfConsent: {
-                                                    consent: o((e = vy.allowMarketingEmailCheckboxEmailVerification).consentTranslationKey)
+                                                    consent: o((e = vm.allowMarketingEmailCheckboxEmailVerification).consentTranslationKey)
                                                 }
                                             };
-                                        case hB.voiceDataConsentSetting:
+                                        case hz.voiceDataConsentSetting:
                                             return {
                                                 wordsOfConsent: {
-                                                    title: o((e = vy.voiceDataConsentSetting).titleTranslationKey),
+                                                    title: o((e = vm.voiceDataConsentSetting).titleTranslationKey),
                                                     consent: o(e.consentTranslationKey, {
                                                         linkStart: e.linkStart,
                                                         linkEnd: e.linkEnd
                                                     })
                                                 }
                                             };
-                                        case hB.voiceDataConsentSettingParentSide:
+                                        case hz.voiceDataConsentSettingParentSide:
                                             return {
                                                 wordsOfConsent: {
-                                                    title: o((e = vy.voiceDataConsentSettingParentSide).titleTranslationKey),
+                                                    title: o((e = vm.voiceDataConsentSettingParentSide).titleTranslationKey),
                                                     consent: o(e.consentTranslationKey, {
                                                         linkStart: e.linkStart,
                                                         linkEnd: e.linkEnd
                                                     })
                                                 }
                                             };
-                                        case hB.whoCanPartyWithMe:
+                                        case hz.whoCanPartyWithMe:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanPartyWithMe).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanPartyWithMe).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanPartyWithMeV2:
+                                        case hz.whoCanPartyWithMeV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanPartyWithMeV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanPartyWithMeV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanPartyWithMeParentSide:
+                                        case hz.whoCanPartyWithMeParentSide:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanPartyWithMeParentSide).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanPartyWithMeParentSide).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanPartyWithMeParentSideV2:
+                                        case hz.whoCanPartyWithMeParentSideV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanPartyWithMeParentSideV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanPartyWithMeParentSideV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyChatWithMe:
+                                        case hz.whoCanUsePartyChatWithMe:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyChatWithMe).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyChatWithMe).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyChatWithMeV2:
+                                        case hz.whoCanUsePartyChatWithMeV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyChatWithMeV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyChatWithMeV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyChatWithMeParentSide:
+                                        case hz.whoCanUsePartyChatWithMeParentSide:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyChatWithMeParentSide).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyChatWithMeParentSide).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyChatWithMeParentSideV2:
+                                        case hz.whoCanUsePartyChatWithMeParentSideV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyChatWithMeParentSideV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyChatWithMeParentSideV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyVoiceWithMe:
+                                        case hz.whoCanUsePartyVoiceWithMe:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyVoiceWithMe).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyVoiceWithMe).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyVoiceWithMeV2:
+                                        case hz.whoCanUsePartyVoiceWithMeV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyVoiceWithMeV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyVoiceWithMeV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyVoiceWithMeParentSide:
+                                        case hz.whoCanUsePartyVoiceWithMeParentSide:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyVoiceWithMeParentSide).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyVoiceWithMeParentSide).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyVoiceWithMeParentSideV2:
+                                        case hz.whoCanUsePartyVoiceWithMeParentSideV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyVoiceWithMeParentSideV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyVoiceWithMeParentSideV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanPartyWithMeTrustedFriends:
+                                        case hz.whoCanPartyWithMeTrustedFriends:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanPartyWithMeTrustedFriends).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanPartyWithMeTrustedFriends).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanPartyWithMeTrustedFriendsV2:
+                                        case hz.whoCanPartyWithMeTrustedFriendsV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanPartyWithMeTrustedFriendsV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanPartyWithMeTrustedFriendsV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanPartyWithMeParentSideRemovedComms:
+                                        case hz.whoCanPartyWithMeParentSideRemovedComms:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanPartyWithMeParentSideRemovedComms).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanPartyWithMeParentSideRemovedComms).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanPartyWithMeParentSideRemovedCommsV2:
+                                        case hz.whoCanPartyWithMeParentSideRemovedCommsV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanPartyWithMeParentSideRemovedCommsV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanPartyWithMeParentSideRemovedCommsV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyChatWithMeTrustedFriends:
+                                        case hz.whoCanUsePartyChatWithMeTrustedFriends:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyChatWithMeTrustedFriends).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyChatWithMeTrustedFriends).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyChatWithMeTrustedFriendsV2:
+                                        case hz.whoCanUsePartyChatWithMeTrustedFriendsV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyChatWithMeTrustedFriendsV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyChatWithMeTrustedFriendsV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyChatWithMeParentSideTrustedFriends:
+                                        case hz.whoCanUsePartyChatWithMeParentSideTrustedFriends:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyChatWithMeParentSideTrustedFriends).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyChatWithMeParentSideTrustedFriends).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2:
+                                        case hz.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyChatWithMeParentSideTrustedFriendsV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyVoiceWithMeTrustedFriends:
+                                        case hz.whoCanUsePartyVoiceWithMeTrustedFriends:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyVoiceWithMeTrustedFriends).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyVoiceWithMeTrustedFriends).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyVoiceWithMeTrustedFriendsV2:
+                                        case hz.whoCanUsePartyVoiceWithMeTrustedFriendsV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyVoiceWithMeTrustedFriendsV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyVoiceWithMeTrustedFriendsV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyVoiceWithMeParentSideTrustedFriends:
+                                        case hz.whoCanUsePartyVoiceWithMeParentSideTrustedFriends:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyVoiceWithMeParentSideTrustedFriends).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyVoiceWithMeParentSideTrustedFriends).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2:
+                                        case hz.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2).pageTitleTranslationKey),
+                                                    pageTitle: o((e = vm.whoCanUsePartyVoiceWithMeParentSideTrustedFriendsV2).pageTitleTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.titleTranslationKey),
                                                     consent: o(e.consentTranslationKey)
                                                 }
                                             };
-                                        case hB.receiveRobuxTransferConsentCard:
+                                        case hz.receiveRobuxTransferConsentCard:
                                             return {
                                                 wordsOfConsent: {
-                                                    title: o((e = vy.receiveRobuxTransferConsentCard).titleTranslationKey, {
+                                                    title: o((e = vm.receiveRobuxTransferConsentCard).titleTranslationKey, {
                                                         username: null == l ? void 0 : l.username,
                                                         amount: null == l ? void 0 : l.amount
                                                     }),
@@ -24922,10 +24945,10 @@ function() {
                                                     })
                                                 }
                                             };
-                                        case hB.sendRobuxTransferConsentCard:
+                                        case hz.sendRobuxTransferConsentCard:
                                             return {
                                                 wordsOfConsent: {
-                                                    title: o((e = vy.sendRobuxTransferConsentCard).titleTranslationKey, {
+                                                    title: o((e = vm.sendRobuxTransferConsentCard).titleTranslationKey, {
                                                         username: null == l ? void 0 : l.username,
                                                         amount: null == l ? void 0 : l.amount
                                                     }),
@@ -24934,10 +24957,10 @@ function() {
                                                     })
                                                 }
                                             };
-                                        case hB.vpcRequestLinkSubjectToPC:
-                                        case hB.vpcRequestLinkNotSubjectToPC:
-                                        case hB.vpcRequestLinkDefault:
-                                            return e = vy.vpcRequestLinkDefault, a === hB.vpcRequestLinkSubjectToPC ? e = vy.vpcRequestLinkSubjectToPC : a === hB.vpcRequestLinkNotSubjectToPC && (e = vy.vpcRequestLinkNotSubjectToPC), {
+                                        case hz.vpcRequestLinkSubjectToPC:
+                                        case hz.vpcRequestLinkNotSubjectToPC:
+                                        case hz.vpcRequestLinkDefault:
+                                            return e = vm.vpcRequestLinkDefault, a === hz.vpcRequestLinkSubjectToPC ? e = vm.vpcRequestLinkSubjectToPC : a === hz.vpcRequestLinkNotSubjectToPC && (e = vm.vpcRequestLinkNotSubjectToPC), {
                                                 wordsOfConsent: {
                                                     title: o(e.titleTranslationKey),
                                                     description: o(e.descriptionTranslationKey, {
@@ -24952,36 +24975,36 @@ function() {
                                                     button: o(e.buttonTranslationKey)
                                                 }
                                             };
-                                        case hB.consentCenterAllowAction:
+                                        case hz.consentCenterAllowAction:
                                             return {
                                                 wordsOfConsent: {
-                                                    text: o((e = vy.consentCenterAllowAction).textTranslationKey, {
+                                                    text: o((e = vm.consentCenterAllowAction).textTranslationKey, {
                                                         actionName: null == l ? void 0 : l.actionName
                                                     })
                                                 }
                                             };
-                                        case hB.consentCenterUpdateSettingNoValue:
+                                        case hz.consentCenterUpdateSettingNoValue:
                                             return {
                                                 wordsOfConsent: {
-                                                    text: o((e = vy.consentCenterUpdateSettingNoValue).textTranslationKey, {
+                                                    text: o((e = vm.consentCenterUpdateSettingNoValue).textTranslationKey, {
                                                         settingName: null == l ? void 0 : l.settingName
                                                     })
                                                 }
                                             };
-                                        case hB.consentCenterUpdateSettingWithValue:
+                                        case hz.consentCenterUpdateSettingWithValue:
                                             return {
                                                 wordsOfConsent: {
-                                                    text: o((e = vy.consentCenterUpdateSettingWithValue).textTranslationKey, {
+                                                    text: o((e = vm.consentCenterUpdateSettingWithValue).textTranslationKey, {
                                                         settingName: null == l ? void 0 : l.settingName,
                                                         currentValue: null == l ? void 0 : l.currentValue,
                                                         proposedValue: null == l ? void 0 : l.proposedValue
                                                     })
                                                 }
                                             };
-                                        case hB.allowMarketingEmailNotifications:
+                                        case hz.allowMarketingEmailNotifications:
                                             return {
                                                 wordsOfConsent: {
-                                                    pageTitle: o((e = vy.allowMarketingEmailNotifications).pageHeadingTranslationKey),
+                                                    pageTitle: o((e = vm.allowMarketingEmailNotifications).pageHeadingTranslationKey),
                                                     pageDescription: o(e.pageDescriptionTranslationKey),
                                                     title: o(e.labelTranslationKey),
                                                     consent: o(e.labelDescriptionTranslationKey)
@@ -25077,9 +25100,9 @@ function() {
                                             }(this, function(c) {
                                                 switch (c.label) {
                                                     case 0:
-                                                        r = vO(vS(a, o, l), i, n), c.label = 1;
+                                                        r = vx(vO(a, o, l), i, n), c.label = 1;
                                                     case 1:
-                                                        return c.trys.push([1, 3, , 4]), [4, vb(e, t, r)];
+                                                        return c.trys.push([1, 3, , 4]), [4, vg(e, t, r)];
                                                     case 2:
                                                     case 3:
                                                         return c.sent(), [3, 4];
@@ -25094,18 +25117,18 @@ function() {
                                                 var a = r.apply(e, t);
 
                                                 function i(e) {
-                                                    vx(a, n, o, i, l, "next", e)
+                                                    vP(a, n, o, i, l, "next", e)
                                                 }
 
                                                 function l(e) {
-                                                    vx(a, n, o, i, l, "throw", e)
+                                                    vP(a, n, o, i, l, "throw", e)
                                                 }
                                                 i(void 0)
                                             })
                                         })()
                                     },
                                     getBase64EncodedAuditHeader: function(e) {
-                                        return vO(vS(a, o, l), i, e)
+                                        return vx(vO(a, o, l), i, e)
                                     }
                                 }]
                             }
@@ -25117,23 +25140,23 @@ function() {
                     common: ["CommonUI.Controls", "Feature.Parents", "Feature.AccountSettings"],
                     feature: "Feature.LegallySensitiveContent"
                 }),
-                vj = null,
                 vC = null,
-                vE = {
+                vE = null,
+                vA = {
                     isEnabled: function() {
-                        return null === vj && (vj = A.Guac.callBehaviour("app-policy").then(function(e) {
+                        return null === vC && (vC = A.Guac.callBehaviour("app-policy").then(function(e) {
                             return (null == e ? void 0 : e.UseAmpV2WizardForVpc) === !0
                         }).catch(function() {
                             return !1
-                        })), vj
+                        })), vC
                     },
                     getExcludedRequestTypes: function() {
-                        return null === vC && (vC = A.Guac.callBehaviour("app-policy").then(function(e) {
+                        return null === vE && (vE = A.Guac.callBehaviour("app-policy").then(function(e) {
                             var t;
                             return null != (t = null == e ? void 0 : e.AmpV2VpcExcludedRequestTypes) ? t : []
                         }).catch(function() {
                             return []
-                        })), vC
+                        })), vE
                     },
                     launch: function(e) {
                         var t, n = e.recourseAction,
@@ -25198,37 +25221,37 @@ function() {
                             })(Object(r)).forEach(function(e) {
                                 Object.defineProperty(n, e, Object.getOwnPropertyDescriptor(r, e))
                             }), n);
-                            window.dispatchEvent(new CustomEvent(sV, {
+                            window.dispatchEvent(new CustomEvent(s_, {
                                 detail: o
                             }))
                         })).then(function(e) {
                             var t;
-                            void 0 !== e.reason && "Completed" !== e.reason && "Cancelled" !== e.reason && dT(dC.VerificationFailed, n, {
+                            void 0 !== e.reason && "Completed" !== e.reason && "Cancelled" !== e.reason && dI(dE.VerificationFailed, n, {
                                 error: "amp-v2-wizard ".concat("VPC", " flow exited as ").concat(e.reason),
                                 flowId: null != (t = e.flowId) ? t : ""
                             }), i()
                         }, i)
                     }
                 },
-                vA = (0, N.withTranslations)(function(e) {
+                vT = (0, N.withTranslations)(function(e) {
                     var t = e.translate;
                     return (0, P.jsxs)($, {
-                        store: pF,
-                        children: [(0, P.jsx)(vl, {
+                        store: pV,
+                        children: [(0, P.jsx)(vc, {
                             translate: t,
-                            vpcV2Handoff: vE
-                        }), (0, P.jsx)(vu, {
+                            vpcV2Handoff: vA
+                        }), (0, P.jsx)(vs, {
                             translate: t
-                        }), (0, P.jsx)(vP, {
+                        }), (0, P.jsx)(vj, {
                             translate: t
-                        }), (0, P.jsx)(sW, {})]
+                        }), (0, P.jsx)(sK, {})]
                     })
                 }, {
                     common: ["CommonUI.Controls", "CommonUI.Features", "Amp.Upsell", "Amp.FAEUpsell", "Feature.Friends", "Feature.AccountSettings", "Feature.Parents"],
                     feature: "Verification.Identity"
                 });
 
-            function vT(e, t, n, r, o, a, i) {
+            function vI(e, t, n, r, o, a, i) {
                 try {
                     var l = e[a](i),
                         c = l.value
@@ -25339,7 +25362,7 @@ function() {
                             }
                         }(this, function(e) {
                             return [2, new Promise(function(e) {
-                                var t = new CustomEvent(p_, {
+                                var t = new CustomEvent(pW, {
                                     detail: {
                                         featureName: n,
                                         redirectLink: o,
@@ -25351,7 +25374,7 @@ function() {
                                         namespace: h,
                                         wizardIntent: b,
                                         closeCallback: function(t) {
-                                            e(t === dE.Granted)
+                                            e(t === dA.Granted)
                                         }
                                     }
                                 });
@@ -25365,22 +25388,22 @@ function() {
                             var a = t.apply(e, n);
 
                             function i(e) {
-                                vT(a, r, o, i, l, "next", e)
+                                vI(a, r, o, i, l, "next", e)
                             }
 
                             function l(e) {
-                                vT(a, r, o, i, l, "throw", e)
+                                vI(a, r, o, i, l, "throw", e)
                             }
                             i(void 0)
                         })
                     })()
                 }
             }, C()(function() {
-                yl && function e() {
-                    var t = document.getElementById(yl);
-                    t ? (0, E.renderWithErrorBoundary)((0, P.jsx)(vA, {}), t) : window.requestAnimationFrame(e)
+                yc && function e() {
+                    var t = document.getElementById(yc);
+                    t ? (0, E.renderWithErrorBoundary)((0, P.jsx)(vT, {}), t) : window.requestAnimationFrame(e)
                 }()
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("AccessManagementUpsellV2");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/accessManagementUpsellV2-ff19f8d12dbd0ae0.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/accessManagementUpsellV2-004a3c13959382e9.js.map

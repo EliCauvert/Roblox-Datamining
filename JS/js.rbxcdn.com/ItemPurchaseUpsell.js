@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "ab525e423cf7566448a23ff5f21e35ce1f1d008e"
+            id: "e22dec8e2e63fb9225f3855c946e64b1e4fbd6a1"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "c58bf9c2-9a3e-4cf2-bb80-cd46bcbf0869", e._sentryDebugIdIdentifier = "sentry-dbid-c58bf9c2-9a3e-4cf2-bb80-cd46bcbf0869")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "73217926-857e-4c68-9a5c-989b54148ec8", e._sentryDebugIdIdentifier = "sentry-dbid-73217926-857e-4c68-9a5c-989b54148ec8")
     } catch (e) {}
 }(),
 function() {
@@ -8104,20 +8104,21 @@ function() {
                     })]
                 })
             })
-        };
+        },
+        i9 = window.Roblox["core-scripts"].util.url;
 
-    function i9(e, t) {
+    function le(e, t) {
         (null == t || t > e.length) && (t = e.length);
         for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
         return n
     }
-    var le = function(e, t) {
+    var lt = function(e, t) {
         (0, eA.useEffect)(function() {
             t && (0, eE.fireEvent)("".concat("RenderTracking", "-").concat("Purchase", "-").concat(e))
         }, [t])
     };
 
-    function lt(e, t, r, n, o, a, i) {
+    function lr(e, t, r, n, o, a, i) {
         try {
             var l = e[a](i),
                 c = l.value
@@ -8128,13 +8129,13 @@ function() {
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
 
-    function lr(e, t) {
+    function ln(e, t) {
         (null == t || t > e.length) && (t = e.length);
         for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
         return n
     }
 
-    function ln(e, t, r, n, o, a, i) {
+    function lo(e, t, r, n, o, a, i) {
         try {
             var l = e[a](i),
                 c = l.value
@@ -8145,7 +8146,7 @@ function() {
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
 
-    function lo(e) {
+    function la(e) {
         for (var t = 1; t < arguments.length; t++) {
             var r = null != arguments[t] ? arguments[t] : {},
                 n = Object.keys(r);
@@ -8164,7 +8165,7 @@ function() {
         return e
     }
 
-    function la(e, t) {
+    function li(e, t) {
         return function(e) {
             if (Array.isArray(e)) return e
         }(e) || function(e, t) {
@@ -8188,16 +8189,16 @@ function() {
             }
         }(e, t) || function(e, t) {
             if (e) {
-                if ("string" == typeof e) return lr(e, t);
+                if ("string" == typeof e) return ln(e, t);
                 var r = Object.prototype.toString.call(e).slice(8, -1);
                 if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return lr(e, t)
+                if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return ln(e, t)
             }
         }(e, t) || function() {
             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
         }()
     }
-    var li = function(e) {
+    var ll = function(e) {
             var t, r, n, o, a, i, l, c, u, s, f, p, d, h, y, m, b, v, g, O, E, w, P, x, j, A, I, _, T, N, R, U, M, k, D, B, L, H = e.translate,
                 F = e.expectedPrice,
                 G = e.thumbnail,
@@ -8219,22 +8220,22 @@ function() {
                 ei = e.isLimited,
                 el = e.packageLoading,
                 ec = void 0 !== el && el,
-                es = e.onRefetchPackage,
-                ef = e.onAcceptOffers,
-                ep = e.onDirectPurchase,
-                ed = (0, eA.useCallback)(function(e) {
-                    null == es || es(null != e ? e : F)
-                }, [es, F]),
-                eh = (n = void 0 === (r = (t = {
+                eu = e.onRefetchPackage,
+                es = e.onAcceptOffers,
+                ef = e.onDirectPurchase,
+                ep = (0, eA.useCallback)(function(e) {
+                    null == eu || eu(null != e ? e : F)
+                }, [eu, F]),
+                ed = (n = void 0 === (r = (t = {
                     collectibleItemId: void 0 === er ? null : er,
                     rentalOptionDays: void 0 === en ? null : en,
                     expectedPrice: F,
                     isLimitedItem: void 0 !== ei && ei,
                     open: Z,
-                    onPriceResolved: ed
-                }).collectibleItemId) ? null : r, a = void 0 === (o = t.rentalOptionDays) ? null : o, i = t.expectedPrice, l = t.isLimitedItem, u = void 0 !== (c = t.open) && c, s = t.onPriceResolved, f = null != i && i <= 0 || void 0 !== l && l, d = (p = la((0, eA.useState)([]), 2))[0], h = p[1], y = (0, eA.useRef)([]), (0, eA.useEffect)(function() {
+                    onPriceResolved: ep
+                }).collectibleItemId) ? null : r, a = void 0 === (o = t.rentalOptionDays) ? null : o, i = t.expectedPrice, l = t.isLimitedItem, u = void 0 !== (c = t.open) && c, s = t.onPriceResolved, f = null != i && i <= 0 || void 0 !== l && l, d = (p = li((0, eA.useState)([]), 2))[0], h = p[1], y = (0, eA.useRef)([]), (0, eA.useEffect)(function() {
                     y.current = d
-                }, [d]), b = (m = la((0, eA.useState)(), 2))[0], v = m[1], O = (g = la((0, eA.useState)(void 0), 2))[0], E = g[1], P = (w = la((0, eA.useState)(), 2))[0], x = w[1], A = (j = la((0, eA.useState)(!1), 2))[0], I = j[1], _ = (0, eA.useRef)(0), T = (0, eA.useRef)(s), (0, eA.useEffect)(function() {
+                }, [d]), b = (m = li((0, eA.useState)(), 2))[0], v = m[1], O = (g = li((0, eA.useState)(void 0), 2))[0], E = g[1], P = (w = li((0, eA.useState)(), 2))[0], x = w[1], A = (j = li((0, eA.useState)(!1), 2))[0], I = j[1], _ = (0, eA.useRef)(0), T = (0, eA.useRef)(s), (0, eA.useEffect)(function() {
                     T.current = s
                 }, [s]), N = (0, eA.useCallback)(function(e) {
                     var t;
@@ -8326,7 +8327,7 @@ function() {
                                     if (!n || f) return [2];
                                     t = _.current + 1, _.current = t, I(!0), y.label = 1;
                                 case 1:
-                                    return y.trys.push([1, , 3, 4]), [4, (m = lo({
+                                    return y.trys.push([1, , 3, 4]), [4, (m = la({
                                         featureKey: "MARKETPLACE_CART",
                                         items: [null != a && a > 0 ? {
                                             collectibleItemId: n,
@@ -8443,11 +8444,11 @@ function() {
                                             var o = b.apply(e, t);
 
                                             function a(e) {
-                                                lt(o, r, n, a, i, "next", e)
+                                                lr(o, r, n, a, i, "next", e)
                                             }
 
                                             function i(e) {
-                                                lt(o, r, n, a, i, "throw", e)
+                                                lr(o, r, n, a, i, "throw", e)
                                             }
                                             a(void 0)
                                         })
@@ -8478,11 +8479,11 @@ function() {
                             var a = t.apply(e, r);
 
                             function i(e) {
-                                ln(a, n, o, i, l, "next", e)
+                                lo(a, n, o, i, l, "next", e)
                             }
 
                             function l(e) {
-                                ln(a, n, o, i, l, "throw", e)
+                                lo(a, n, o, i, l, "throw", e)
                             }
                             i(void 0)
                         })
@@ -8496,7 +8497,7 @@ function() {
                 }, [u, n, f, N]), R = (0, eA.useCallback)(function(e, t) {
                     var r = y.current.map(function(r) {
                         var n, o;
-                        return r.offerId === e ? (n = lo({}, r), o = o = {
+                        return r.offerId === e ? (n = la({}, r), o = o = {
                             selected: t
                         }, Object.getOwnPropertyDescriptors ? Object.defineProperties(n, Object.getOwnPropertyDescriptors(o)) : (function(e) {
                             var t = Object.keys(e);
@@ -8531,22 +8532,22 @@ function() {
                     selectedOfferIds: U,
                     handleOfferCheckedChange: R
                 }),
-                ey = eh.offerSelections,
-                em = eh.resolvedPrice,
-                eb = eh.resolvedDiscountInformation,
-                ev = eh.resolvedSavingsSummary,
-                eg = eh.isPricingLoading,
-                eO = eh.selectedOfferIds,
-                eE = eh.handleOfferCheckedChange,
-                ew = null != em ? em : F,
-                eS = void 0 !== eb ? eb : et,
-                eP = (0, eA.useMemo)(function() {
+                eh = ed.offerSelections,
+                ey = ed.resolvedPrice,
+                em = ed.resolvedDiscountInformation,
+                eb = ed.resolvedSavingsSummary,
+                ev = ed.isPricingLoading,
+                eg = ed.selectedOfferIds,
+                eO = ed.handleOfferCheckedChange,
+                eE = null != ey ? ey : F,
+                ew = void 0 !== em ? em : et,
+                eS = (0, eA.useMemo)(function() {
                     var e, t, r, n, o, a, i;
-                    return eS ? (a = null != (e = eS.originalPrice) ? e : 0, {
-                        savedAmount: i = null != (t = null != (r = eS.totalDiscountAmount) ? r : eS.totalAmountSaved) ? t : 0,
+                    return ew ? (a = null != (e = ew.originalPrice) ? e : 0, {
+                        savedAmount: i = null != (t = null != (r = ew.totalDiscountAmount) ? r : ew.totalAmountSaved) ? t : 0,
                         originalPrice: a,
                         totalPrice: a - i,
-                        discountLines: null != (n = null == (o = eS.discounts) ? void 0 : o.map(function(e, t) {
+                        discountLines: null != (n = null == (o = ew.discounts) ? void 0 : o.map(function(e, t) {
                             var r, n, o, a, i = null != (r = null != (n = e.discountAmount) ? n : e.robuxDiscountAmount) ? r : 0,
                                 l = (null == (a = e.localizedDiscountAttribution) ? void 0 : a.trim()) || void 0,
                                 c = l || e.discountCampaign || "Discount ".concat(t + 1);
@@ -8560,12 +8561,12 @@ function() {
                             }
                         })) ? n : []
                     }) : null
-                }, [eS]),
-                ex = null != z && ew <= z;
-            le("UnifiedRobuxUpsellModal", Z);
-            var ej = null != ee ? ee : H(C),
-                e_ = H("Action.Buy"),
-                eT = (D = (k = function(e) {
+                }, [ew]),
+                eP = null != z && eE <= z;
+            lt("UnifiedRobuxUpsellModal", Z);
+            var ex = null != ee ? ee : H(C),
+                ej = H("Action.Buy"),
+                e_ = (D = (k = function(e) {
                     if (Array.isArray(e)) return e
                 }(M = (0, eA.useState)(!1)) || function(e) {
                     var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
@@ -8588,10 +8589,10 @@ function() {
                     }
                 }(M) || function(e) {
                     if (e) {
-                        if ("string" == typeof e) return i9(e, 2);
+                        if ("string" == typeof e) return le(e, 2);
                         var t = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return i9(e, 2)
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return le(e, 2)
                     }
                 }(M) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -8612,7 +8613,7 @@ function() {
                     }).catch(function(e) {
                         console.warn("Failed to fetch DMCCA feature", e)
                     })
-                }, []), L = eu.urlService.getUrlWithLocale(S, J.getRobloxLocale()) + (D ? "#robux-and-premium-membership" : ""), i0(H, "Message.TermsOfUse", [{
+                }, []), L = (0, i9.getUrlWithLocale)(S, J.getRobloxLocale()) + (D ? "#robux-and-premium-membership" : ""), i0(H, "Message.TermsOfUse", [{
                     opening: "aTagStart",
                     closing: "aTagEnd",
                     render: function(e) {
@@ -8624,13 +8625,13 @@ function() {
                         }, e)
                     }
                 }])),
-                eC = (0, eA.useCallback)(function() {
+                eT = (0, eA.useCallback)(function() {
                     var e = {
-                        purchasePrice: ew,
-                        offerIds: eO
+                        purchasePrice: eE,
+                        offerIds: eg
                     };
-                    ex && ep ? ep(e) : ef ? ef(e) : W()
-                }, [ew, eO, ex, ep, ef, W]);
+                    eP && ef ? ef(e) : es ? es(e) : W()
+                }, [eE, eg, eP, ef, es, W]);
             return (0, eN.jsx)(r7, {
                 open: Z,
                 onOpenChange: function(e) {
@@ -8649,17 +8650,17 @@ function() {
                             className: "margin-bottom-xsmall",
                             children: (0, eN.jsx)(ol, {
                                 translate: H,
-                                titleText: ej,
+                                titleText: ex,
                                 currentRobuxBalance: z
                             })
                         }), (0, eN.jsx)(iB, {
                             translate: H,
                             thumbnail: G,
                             assetName: V,
-                            expectedPrice: ew,
+                            expectedPrice: eE,
                             priceSuffix: Q,
-                            discountInformation: eS
-                        }), ey.map(function(e) {
+                            discountInformation: ew
+                        }), eh.map(function(e) {
                             var t = "upsell-offer-label-".concat(e.offerId);
                             return (0, eN.jsxs)("label", {
                                 htmlFor: "upsell-offer-checkbox-".concat(e.offerId),
@@ -8671,9 +8672,9 @@ function() {
                                     size: "Small",
                                     isChecked: e.selected,
                                     onCheckedChange: function(t) {
-                                        eE(e.offerId, !0 === t)
+                                        eO(e.offerId, !0 === t)
                                     },
-                                    isDisabled: eg || ec,
+                                    isDisabled: ev || ec,
                                     "data-testid": "upsell-promo-checkbox-".concat(e.offerId)
                                 }), (0, eN.jsx)(i6, {
                                     id: t,
@@ -8681,11 +8682,11 @@ function() {
                                     className: "text-body-medium content-default"
                                 })]
                             }, e.offerId)
-                        }), eP && eP.savedAmount > 0 && (0, eN.jsx)(i8, {
+                        }), eS && eS.savedAmount > 0 && (0, eN.jsx)(i8, {
                             translate: H,
-                            normalizedDiscount: eP,
-                            savingsSummary: ev
-                        }), !ex && null != q && null != $ && (0, eN.jsx)(i7, {
+                            normalizedDiscount: eS,
+                            savingsSummary: eb
+                        }), !eP && null != q && null != $ && (0, eN.jsx)(i7, {
                             robuxAmount: q,
                             price: $
                         })]
@@ -8696,20 +8697,20 @@ function() {
                             children: [(0, eN.jsx)(on, {
                                 variant: "Emphasis",
                                 className: "width-full shrink-0",
-                                onClick: eC,
-                                isDisabled: void 0 !== K && K || eg || ec,
+                                onClick: eT,
+                                isDisabled: void 0 !== K && K || ev || ec,
                                 "data-testid": "purchase-confirm-button",
-                                children: e_
+                                children: ej
                             }), (0, eN.jsx)("div", {
                                 className: "text-body-small",
-                                children: eT
+                                children: e_
                             })]
                         })
                     })]
                 })
             })
         },
-        ll = function(e) {
+        lc = function(e) {
             var t = e.translate,
                 r = function(e, t) {
                     if (null == e) return {};
@@ -8734,7 +8735,7 @@ function() {
                 useTranslate: iM,
                 render: function(e) {
                     var t, n;
-                    return (0, eN.jsx)(li, (t = function(e) {
+                    return (0, eN.jsx)(ll, (t = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var r = null != arguments[t] ? arguments[t] : {},
                                 n = Object.keys(r);
@@ -8766,7 +8767,7 @@ function() {
                 }
             })
         },
-        lc = function(e) {
+        lu = function(e) {
             var t = e.translate,
                 r = e.expectedPrice,
                 n = e.thumbnail,
@@ -8777,7 +8778,7 @@ function() {
                 c = e.currentRobuxBalance,
                 u = e.open,
                 s = void 0 !== u && u;
-            return le("UnifiedRobuxUpsellTooExpensiveModal", s), (0, eN.jsx)(r7, {
+            return lt("UnifiedRobuxUpsellTooExpensiveModal", s), (0, eN.jsx)(r7, {
                 open: s,
                 onOpenChange: function(e) {
                     !e && i && i()
@@ -8828,7 +8829,7 @@ function() {
                 })
             })
         },
-        lu = function(e) {
+        ls = function(e) {
             var t = e.translate,
                 r = function(e, t) {
                     if (null == e) return {};
@@ -8853,7 +8854,7 @@ function() {
                 useTranslate: iM,
                 render: function(e) {
                     var t, n;
-                    return (0, eN.jsx)(lc, (t = function(e) {
+                    return (0, eN.jsx)(lu, (t = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var r = null != arguments[t] ? arguments[t] : {},
                                 n = Object.keys(r);
@@ -8885,7 +8886,7 @@ function() {
                 }
             })
         },
-        ls = function(e) {
+        lf = function(e) {
             var t = document.createElement("div");
             document.body.appendChild(t);
             var r = function() {
@@ -8900,7 +8901,7 @@ function() {
                     !1 !== (null == (t = e.onAccept) ? void 0 : t.call(e)) && n()
                 };
             if ("tooExpensive" === e.variant) {
-                var a = eI().createElement(lu, {
+                var a = eI().createElement(ls, {
                     expectedPrice: e.expectedPrice,
                     thumbnail: e.thumbnail,
                     assetName: e.assetName,
@@ -8927,7 +8928,7 @@ function() {
                     null == (n = e.onDirectPurchase) || n.call(e, t), r()
                 } : void 0,
                 s = function() {
-                    var r = eI().createElement(ll, {
+                    var r = eI().createElement(lc, {
                         expectedPrice: e.expectedPrice,
                         thumbnail: e.thumbnail,
                         assetName: e.assetName,
@@ -8965,7 +8966,7 @@ function() {
             }
         };
 
-    function lf(e, t, r) {
+    function lp(e, t, r) {
         return t in e ? Object.defineProperty(e, t, {
             value: r,
             enumerable: !0,
@@ -8973,22 +8974,22 @@ function() {
             writable: !0
         }) : e[t] = r, e
     }
-    var lp = function() {
+    var ld = function() {
         var e;
 
         function t() {
             var e = this;
             if (!(this instanceof t)) throw TypeError("Cannot call a class as a function");
-            lf(this, "overlayDiv", null), lf(this, "contentDiv", null), lf(this, "loadingMessageSpan", null), lf(this, "spinnerSpan", null), lf(this, "loadingOverlayElementId", "loading-overlay"), lf(this, "_loadingMessage", void 0), lf(this, "show", function(t) {
+            lp(this, "overlayDiv", null), lp(this, "contentDiv", null), lp(this, "loadingMessageSpan", null), lp(this, "spinnerSpan", null), lp(this, "loadingOverlayElementId", "loading-overlay"), lp(this, "_loadingMessage", void 0), lp(this, "show", function(t) {
                 var r = e.getOrCreateOverlayDiv(),
                     n = e.getOrCreateContentDiv(r);
                 return e.getOrCreateSpinnerSpan(n), e.updateOrCreateMessage(t), e
-            }), lf(this, "hide", function() {
+            }), lp(this, "hide", function() {
                 var t, r, n, o, a, i, l, c;
                 null == (r = e.spinnerSpan) || null == (t = r.parentNode) || t.removeChild(e.spinnerSpan), null == (o = e.loadingMessageSpan) || null == (n = o.parentNode) || n.removeChild(e.loadingMessageSpan), null == (i = e.contentDiv) || null == (a = i.parentNode) || a.removeChild(e.contentDiv), null == (c = e.overlayDiv) || null == (l = c.parentNode) || l.removeChild(e.overlayDiv), e.overlayDiv = null, e.contentDiv = null, e.spinnerSpan = null, e.loadingMessageSpan = null
-            }), lf(this, "updateMessage", function(t) {
+            }), lp(this, "updateMessage", function(t) {
                 e._loadingMessage = t, e.updateOrCreateMessage(t)
-            }), lf(this, "updateOrCreateMessage", function(t) {
+            }), lp(this, "updateOrCreateMessage", function(t) {
                 if (e.overlayDiv) {
                     if (!t) {
                         var r, n;
@@ -9001,17 +9002,17 @@ function() {
                         o.innerText = t, o.classList.add("loading-message"), e.getOrCreateContentDiv(e.overlayDiv).appendChild(o), e.loadingMessageSpan = o
                     }
                 }
-            }), lf(this, "getOrCreateContentDiv", function(t) {
+            }), lp(this, "getOrCreateContentDiv", function(t) {
                 if (e.contentDiv) return e.contentDiv;
                 var r = document.createElement("div");
                 return r.classList.add("loading-overlay-content"), e.contentDiv = r, t.appendChild(r), r
-            }), lf(this, "getOrCreateOverlayDiv", function() {
+            }), lp(this, "getOrCreateOverlayDiv", function() {
                 if (e.overlayDiv) return e.overlayDiv;
                 var t = document.getElementById(e.loadingOverlayElementId);
                 if (t) return e.overlayDiv = t, t;
                 var r = document.createElement("div");
                 return e.overlayDiv = r, r.id = e.loadingOverlayElementId, r.classList.add("loading-overlay"), document.body.appendChild(r), r
-            }), lf(this, "getOrCreateSpinnerSpan", function(t) {
+            }), lp(this, "getOrCreateSpinnerSpan", function(t) {
                 if (e.spinnerSpan) return e.spinnerSpan;
                 var r = document.createElement("span");
                 return r.classList.add("spinner", "spinner-default"), t.appendChild(r), e.spinnerSpan = r, r
@@ -9031,7 +9032,7 @@ function() {
             }(t.prototype, e), t
     }();
 
-    function ld(e, t, r, n, o, a, i) {
+    function lh(e, t, r, n, o, a, i) {
         try {
             var l = e[a](i),
                 c = l.value
@@ -9042,11 +9043,11 @@ function() {
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
 
-    function lh(e) {
+    function ly(e) {
         w.upsellUtil.expireUpsellCookie(), window.location.href = E.Endpoints.getAbsoluteUrl(e)
     }
 
-    function ly() {
+    function lm() {
         var e;
         return (e = function() {
             var e;
@@ -9147,30 +9148,30 @@ function() {
                 var a = e.apply(t, r);
 
                 function i(e) {
-                    ld(a, n, o, i, l, "next", e)
+                    lh(a, n, o, i, l, "next", e)
                 }
 
                 function l(e) {
-                    ld(a, n, o, i, l, "throw", e)
+                    lh(a, n, o, i, l, "throw", e)
                 }
                 i(void 0)
             })
         })()
     }
 
-    function lm() {
-        (0, E.DeviceMeta)().isDesktop && (0, E.DeviceMeta)().isUniversalApp ? ly().then(function(e) {
+    function lb() {
+        (0, E.DeviceMeta)().isDesktop && (0, E.DeviceMeta)().isUniversalApp ? lm().then(function(e) {
             return window.open(e, "_self")
         }).catch(function() {
             return window.open(ea.EnvironmentUrls.vngGamesShopUrl, "_self")
-        }) : ly().then(function(e) {
+        }) : lm().then(function(e) {
             return window.open(e, "_blank")
         }).catch(function() {
             return window.open(ea.EnvironmentUrls.vngGamesShopUrl, "_blank")
         })
     }
 
-    function lb(e, t, r, n) {
+    function lv(e, t, r, n) {
         var o = "<span>".concat(r.get("Message.PurchaseSucceededRobuxBalance", {
                 userRobuxBalance: ep(t)
             }), "</span>"),
@@ -9191,19 +9192,19 @@ function() {
                     item_id: e.productId
                 }, !0), eS("AutoPurchaseSucceedEquipMyAvatar", e.assetType);
                 var t, r = e.itemPath;
-                return ((null === E.Endpoints || void 0 === E.Endpoints ? void 0 : E.Endpoints.supportLocalizedUrls) && (r = E.Endpoints.removeUrlLocale(r)), i) ? r.startsWith(x) ? lh("".concat(e.itemPath, "?#!/store")) : lh(e.itemPath) : void 0 !== (t = E.Endpoints.getAbsoluteUrl("/my/avatar")) && "" !== t && (w.upsellUtil.expireUpsellCookie(), window.location.href = t), !1
+                return ((null === E.Endpoints || void 0 === E.Endpoints ? void 0 : E.Endpoints.supportLocalizedUrls) && (r = E.Endpoints.removeUrlLocale(r)), i) ? r.startsWith(x) ? ly("".concat(e.itemPath, "?#!/store")) : ly(e.itemPath) : void 0 !== (t = E.Endpoints.getAbsoluteUrl("/my/avatar")) && "" !== t && (w.upsellUtil.expireUpsellCookie(), window.location.href = t), !1
             },
             onDecline: function() {
                 return n.show(), w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.SUCCESS, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL, {
                     item_type: e.assetType,
                     item_id: e.productId
-                }, !0), eS("AutoPurchaseSucceedBackToShop", e.assetType), lh(e.itemPath), !1
+                }, !0), eS("AutoPurchaseSucceedBackToShop", e.assetType), ly(e.itemPath), !1
             },
             onCancel: function() {
                 return n.show(), w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.SUCCESS, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL, {
                     item_type: e.assetType,
                     item_id: e.productId
-                }, !0), eS("AutoPurchaseSucceedClose", e.assetType), lh(e.itemPath), !1
+                }, !0), eS("AutoPurchaseSucceedClose", e.assetType), ly(e.itemPath), !1
             },
             allowHtmlContentInBody: !0,
             allowHtmlContentInFooter: !1,
@@ -9214,7 +9215,7 @@ function() {
         })
     }
 
-    function lv(e, t) {
+    function lg(e, t) {
         E.Dialog.open({
             titleText: t.get("Heading.ErrorOccured", {}),
             bodyContent: t.get("Message.PurchaseErrorOccured", {}),
@@ -9227,7 +9228,7 @@ function() {
         })
     }
 
-    function lg(e, t, r, n, o, a, i) {
+    function lO(e, t, r, n, o, a, i) {
         try {
             var l = e[a](i),
                 c = l.value
@@ -9238,7 +9239,7 @@ function() {
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
 
-    function lO(e) {
+    function lE(e) {
         return function() {
             var t = this,
                 r = arguments;
@@ -9246,18 +9247,18 @@ function() {
                 var a = e.apply(t, r);
 
                 function i(e) {
-                    lg(a, n, o, i, l, "next", e)
+                    lO(a, n, o, i, l, "next", e)
                 }
 
                 function l(e) {
-                    lg(a, n, o, i, l, "throw", e)
+                    lO(a, n, o, i, l, "throw", e)
                 }
                 i(void 0)
             })
         }
     }
 
-    function lE(e, t) {
+    function lw(e, t) {
         var r, n, o, a = {
                 label: 0,
                 sent: function() {
@@ -9338,10 +9339,10 @@ function() {
         }
     }
 
-    function lw(e, t, r, n) {
-        return lO(function() {
+    function lS(e, t, r, n) {
+        return lE(function() {
             var o, a, i, l, c, u, s, f, p, d, h, y;
-            return lE(this, function(m) {
+            return lw(this, function(m) {
                 var b, v, g;
                 switch (m.label) {
                     case 0:
@@ -9398,10 +9399,10 @@ function() {
                             sortType: g.SortType,
                             userId: v,
                             searchId: g.SearchId
-                        }, E.EventStream.SendEventWithTarget("LibraryAssetAcquired", "Marketplace", s, E.EventStream.TargetTypes.WWW)), eS(et, t.assetType), r.hide(), f = t.userBalance - t.expectedPrice, lb(t, f, n, r), [2, Promise.resolve()];
+                        }, E.EventStream.SendEventWithTarget("LibraryAssetAcquired", "Marketplace", s, E.EventStream.TargetTypes.WWW)), eS(et, t.assetType), r.hide(), f = t.userBalance - t.expectedPrice, lv(t, f, n, r), [2, Promise.resolve()];
                     case 3:
                         if (p = m.sent(), r.hide(), eS(er, t.assetType), d = p, (void 0 === p ? "undefined" : p && "u" > typeof Symbol && p.constructor === Symbol ? "symbol" : typeof p) != "object" || !("responseText" in d.request)) return [2, Promise.reject(d.request)];
-                        if ("Bad Request" === (h = d.request).responseText) lv(t, n);
+                        if ("Bad Request" === (h = d.request).responseText) lg(t, n);
                         else try {
                             y = JSON.parse(h.responseText || ""), (0, E.ItemPurchase)().openErrorView(y), eg()
                         } catch (e) {
@@ -9415,13 +9416,13 @@ function() {
         })()
     }
 
-    function lS(e) {
+    function lP(e) {
         var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : void 0,
             r = arguments.length > 2 ? arguments[2] : void 0,
             n = arguments.length > 3 ? arguments[3] : void 0;
-        return lO(function() {
+        return lE(function() {
             var o, a, i, l, c, u, s, f, p;
-            return lE(this, function(d) {
+            return lw(this, function(d) {
                 if (null == (o = e.itemContainerElemClassList) ? void 0 : o.contains("btn-disabled-primary")) return [2, Promise.resolve()];
                 if (l = "".concat(E.EnvironmentUrls.apiGatewayUrl).concat("/game-passes/v1/game-passes/{productId}/purchase".replace("{productId}", e.productId)), c = "".concat(E.EnvironmentUrls.economyApi).concat("/v1/purchases/products/{productId}".replace("{productId}", e.productId)), (null == (a = e.itemDetail) ? void 0 : a.collectibleItemId) && (s = e.itemDetail.collectibleItemInstanceId ? "/marketplace-sales/v1/item/{collectibleItemId}/purchase-resale" : "/marketplace-sales/v1/item/{collectibleItemId}/purchase-item", u = "".concat(E.EnvironmentUrls.apiGatewayUrl).concat(s.replace("{collectibleItemId}", e.itemDetail.collectibleItemId))), t) return [2, t({
                     productId: e.productId,
@@ -9433,9 +9434,9 @@ function() {
                 })];
                 if (eS("AutoPurchaseStarted", e.assetType), null == (i = e.itemDetail) ? void 0 : i.subscriptionTargetKey) {
                     var h;
-                    return [2, (h = "".concat(E.EnvironmentUrls.apiGatewayUrl).concat("/v1/subscriptions/purchase-with-robux/{subscriptionTargetKey}".replace("{subscriptionTargetKey}", e.itemDetail.subscriptionTargetKey)), lO(function() {
+                    return [2, (h = "".concat(E.EnvironmentUrls.apiGatewayUrl).concat("/v1/subscriptions/purchase-with-robux/{subscriptionTargetKey}".replace("{subscriptionTargetKey}", e.itemDetail.subscriptionTargetKey)), lE(function() {
                         var t, o, a;
-                        return lE(this, function(i) {
+                        return lw(this, function(i) {
                             switch (i.label) {
                                 case 0:
                                     t = {
@@ -9451,21 +9452,21 @@ function() {
                                         idempotencyKey: ey()
                                     })];
                                 case 2:
-                                    return i.sent(), eS(et, e.assetType), r.hide(), o = e.userBalance - e.expectedPrice, lb(e, o, n, r), [2, Promise.resolve()];
+                                    return i.sent(), eS(et, e.assetType), r.hide(), o = e.userBalance - e.expectedPrice, lv(e, o, n, r), [2, Promise.resolve()];
                                 case 3:
-                                    return a = i.sent(), r.hide(), eS(er, e.assetType), lv(e, n), [2, Promise.reject(a)];
+                                    return a = i.sent(), r.hide(), eS(er, e.assetType), lg(e, n), [2, Promise.reject(a)];
                                 case 4:
                                     return [2]
                             }
                         })
                     })())]
                 }
-                return e.assetType === _ ? [2, lw(l, e, r, n)] : u ? [2, lw(u, e, r, n)] : [2, lw(c, e, r, n)]
+                return e.assetType === _ ? [2, lS(l, e, r, n)] : u ? [2, lS(u, e, r, n)] : [2, lS(c, e, r, n)]
             })
         })()
     }
 
-    function lP(e, t, r, n, o, a, i) {
+    function lx(e, t, r, n, o, a, i) {
         try {
             var l = e[a](i),
                 c = l.value
@@ -9475,7 +9476,7 @@ function() {
         }
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
-    var lx = function(e) {
+    var lj = function(e) {
         var t = e.thumbnailImageUrl;
         return (0, eN.jsxs)("div", {
             className: "item-preview",
@@ -9501,7 +9502,7 @@ function() {
         })
     };
 
-    function lj(e, t, r, n, o) {
+    function lA(e, t, r, n, o) {
         var a, i, l = function(e, t) {
             var r, n, o = w.upsellUtil.constants.UPSELL_TARGET_ITEM_URL_REGEX.exec(window.location.pathname);
             if (w.upsellUtil.constants.UPSELL_TARGET_ITEM_URL_REGEX.lastIndex = 0, Array.isArray(o) && o.length > 0 && (n = (function(e) {
@@ -9580,7 +9581,7 @@ function() {
         eS("UpsellContinued", null == r ? void 0 : r.assetType), w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBUX_UPSELL, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.GO_TO_ROBUX_PURCHASE_PAGE), window.location.href = eu.urlService.getAbsoluteUrl("".concat("/upgrades/paymentmethods", "?ap=").concat(e.roblox_product_id, "&UpsellUuid=").concat(l))
     }
 
-    function lA(e, t, r, n) {
+    function lI(e, t, r, n) {
         var o = Date.now(),
             a = o - t;
         w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBUX_UPSELL, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, e, {
@@ -9592,7 +9593,7 @@ function() {
         })
     }
 
-    function lI(e, t, r, n, o, a, i) {
+    function l_(e, t, r, n, o, a, i) {
         try {
             var l = e[a](i),
                 c = l.value
@@ -9603,13 +9604,13 @@ function() {
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
 
-    function l_(e, t) {
+    function lT(e, t) {
         (null == t || t > e.length) && (t = e.length);
         for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
         return n
     }
 
-    function lT(e, t, r, n, o, a, i) {
+    function lN(e, t, r, n, o, a, i) {
         try {
             var l = e[a](i),
                 c = l.value
@@ -9620,19 +9621,19 @@ function() {
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
 
-    function lN(e, t) {
+    function lC(e, t) {
         try {
             E.EventStream.SendEventWithTarget("ItemPurchaseUpsellEvent", e, t, E.EventStream.TargetTypes.WWW)
         } catch (e) {}
     }
 
-    function lC(e, t) {
+    function lR(e, t) {
         (null == t || t > e.length) && (t = e.length);
         for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
         return n
     }
 
-    function lR(e, t, r, n, o, a, i) {
+    function lU(e, t, r, n, o, a, i) {
         try {
             var l = e[a](i),
                 c = l.value
@@ -9643,7 +9644,7 @@ function() {
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
 
-    function lU(e) {
+    function lM(e) {
         return function() {
             var t = this,
                 r = arguments;
@@ -9651,18 +9652,18 @@ function() {
                 var a = e.apply(t, r);
 
                 function i(e) {
-                    lR(a, n, o, i, l, "next", e)
+                    lU(a, n, o, i, l, "next", e)
                 }
 
                 function l(e) {
-                    lR(a, n, o, i, l, "throw", e)
+                    lU(a, n, o, i, l, "throw", e)
                 }
                 i(void 0)
             })
         }
     }
 
-    function lM(e, t) {
+    function lk(e, t) {
         return function(e) {
             if (Array.isArray(e)) return e
         }(e) || function(e, t) {
@@ -9686,17 +9687,17 @@ function() {
             }
         }(e, t) || function(e, t) {
             if (e) {
-                if ("string" == typeof e) return lC(e, t);
+                if ("string" == typeof e) return lR(e, t);
                 var r = Object.prototype.toString.call(e).slice(8, -1);
                 if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return lC(e, t)
+                if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return lR(e, t)
             }
         }(e, t) || function() {
             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
         }()
     }
 
-    function lk(e, t) {
+    function lD(e, t) {
         var r, n, o, a = {
                 label: 0,
                 sent: function() {
@@ -9777,7 +9778,7 @@ function() {
         }
     }
 
-    function lD(e, t, r, n, o, a, i) {
+    function lB(e, t, r, n, o, a, i) {
         try {
             var l = e[a](i),
                 c = l.value
@@ -9787,35 +9788,24 @@ function() {
         }
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
-    var lB = function(e) {
+    var lL = function(e) {
             var t = document.querySelector('.PurchaseButton[data-product-id="'.concat(e.productId, '"]')),
                 r = null == t ? void 0 : t.closest(".store-card"),
                 n = null == r ? void 0 : r.querySelector(".gear-passes-asset img");
             return n ? n.src : null
         },
-        lL = function(e, t) {
+        lH = function(e, t) {
             var r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : window.location.pathname;
             if (r.includes(x)) {
                 if (!t) throw Error("button data not exist");
                 if (eS("UpsellFromGamesPage", t.assetType), "Subscription" === t.assetType) return e.imageurl;
-                var n = lB(t);
+                var n = lL(t);
                 if (!n) throw eS("UpsellThumbnailProcessFailed", t.assetType), Error("thumbnail image url process failed");
                 return n
             }
             return e.imageurl
         },
-        lH = window.HeaderScripts;
-
-    function lF(e, t, r, n, o, a, i) {
-        try {
-            var l = e[a](i),
-                c = l.value
-        } catch (e) {
-            r(e);
-            return
-        }
-        l.done ? t(c) : Promise.resolve(c).then(n, o)
-    }
+        lF = window.HeaderScripts;
 
     function lG(e, t, r, n, o, a, i) {
         try {
@@ -9839,7 +9829,18 @@ function() {
         l.done ? t(c) : Promise.resolve(c).then(n, o)
     }
 
-    function lW(e) {
+    function lW(e, t, r, n, o, a, i) {
+        try {
+            var l = e[a](i),
+                c = l.value
+        } catch (e) {
+            r(e);
+            return
+        }
+        l.done ? t(c) : Promise.resolve(c).then(n, o)
+    }
+
+    function lX(e) {
         return function() {
             var t = this,
                 r = arguments;
@@ -9847,18 +9848,18 @@ function() {
                 var a = e.apply(t, r);
 
                 function i(e) {
-                    lV(a, n, o, i, l, "next", e)
+                    lW(a, n, o, i, l, "next", e)
                 }
 
                 function l(e) {
-                    lV(a, n, o, i, l, "throw", e)
+                    lW(a, n, o, i, l, "throw", e)
                 }
                 i(void 0)
             })
         }
     }
 
-    function lX(e, t, r) {
+    function lK(e, t, r) {
         return t in e ? Object.defineProperty(e, t, {
             value: r,
             enumerable: !0,
@@ -9867,7 +9868,7 @@ function() {
         }) : e[t] = r, e
     }
 
-    function lK(e, t) {
+    function lz(e, t) {
         var r, n, o, a = {
                 label: 0,
                 sent: function() {
@@ -9947,20 +9948,20 @@ function() {
             }
         }
     }
-    var lz = function() {
+    var lY = function() {
         var e;
 
         function t() {
             var e = this;
             if (!(this instanceof t)) throw TypeError("Cannot call a class as a function");
-            lX(this, "intl", void 0), lX(this, "intlProvider", void 0), lX(this, "translationResource", void 0), lX(this, "loadingOverlay", void 0), lX(this, "_state", {
+            lK(this, "intl", void 0), lK(this, "intlProvider", void 0), lK(this, "translationResource", void 0), lK(this, "loadingOverlay", void 0), lK(this, "_state", {
                 purchased: !1,
                 retryRemainTimes: 5,
                 timeoutHandle: null
-            }), lX(this, "_checkBalanceAndPurchase", function(t, r) {
-                return lW(function() {
+            }), lK(this, "_checkBalanceAndPurchase", function(t, r) {
+                return lX(function() {
                     var e, n, o;
-                    return lK(this, function(a) {
+                    return lz(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 if (e = this, this._state.purchased) return [2, Promise.resolve()];
@@ -10075,24 +10076,24 @@ function() {
                                         var o = i.apply(e, t);
 
                                         function a(e) {
-                                            lD(o, r, n, a, l, "next", e)
+                                            lB(o, r, n, a, l, "next", e)
                                         }
 
                                         function l(e) {
-                                            lD(o, r, n, a, l, "throw", e)
+                                            lB(o, r, n, a, l, "throw", e)
                                         }
                                         a(void 0)
                                     })
                                 })()];
                             case 2:
                                 if (t.userBalance = o = a.sent(), !(o >= t.expectedPrice)) return [3, 4];
-                                return [4, lS(t, r, this.loadingOverlay, this.translationResource)];
+                                return [4, lP(t, r, this.loadingOverlay, this.translationResource)];
                             case 3:
                                 a.sent(), this._stopPeriodicChecking(), this._state.purchased = !0, a.label = 4;
                             case 4:
                                 return this._state.purchased || (this._state.retryRemainTimes > 0 ? (this._state.timeoutHandle = window.setTimeout(function() {
-                                    return lW(function() {
-                                        return lK(this, function(e) {
+                                    return lX(function() {
+                                        return lz(this, function(e) {
                                             switch (e.label) {
                                                 case 0:
                                                     return [4, this._checkBalanceAndPurchase(t, r)];
@@ -10109,18 +10110,18 @@ function() {
                         }
                     })
                 }).call(e)
-            }), lX(this, "_stopPeriodicChecking", function() {
+            }), lK(this, "_stopPeriodicChecking", function() {
                 e._state.timeoutHandle && (clearTimeout(e._state.timeoutHandle), e._state.timeoutHandle = null)
-            }), lX(this, "_processGenericErrorState", function(t) {
-                e.loadingOverlay.hide(), lv(t, e.translationResource), eg()
-            }), this.intl = new E.Intl, this.intlProvider = new E.TranslationResourceProvider(this.intl), this.translationResource = this.intlProvider.getTranslationResource(j), this.loadingOverlay = new lp
+            }), lK(this, "_processGenericErrorState", function(t) {
+                e.loadingOverlay.hide(), lg(t, e.translationResource), eg()
+            }), this.intl = new E.Intl, this.intlProvider = new E.TranslationResourceProvider(this.intl), this.translationResource = this.intlProvider.getTranslationResource(j), this.loadingOverlay = new ld
         }
         return e = [{
                 key: "startItemUpsellProcess",
                 value: function(e, t, r) {
-                    return lW(function(e, t, r) {
+                    return lX(function(e, t, r) {
                         var n, o, a, i, l, c, u, s, f, p, d, h, y, m, b, v, g, O, x, _, T, N, L, F, G, V, W = arguments;
-                        return lK(this, function(X) {
+                        return lz(this, function(X) {
                             var K, z, Y, Z, q, Q, et, er, eo, ea, ei;
                             switch (X.label) {
                                 case 0:
@@ -10227,17 +10228,17 @@ function() {
                                             var o = z.apply(e, t);
 
                                             function a(e) {
-                                                lF(o, r, n, a, i, "next", e)
+                                                lG(o, r, n, a, i, "next", e)
                                             }
 
                                             function i(e) {
-                                                lF(o, r, n, a, i, "throw", e)
+                                                lG(o, r, n, a, i, "throw", e)
                                             }
                                             a(void 0)
                                         })
                                     })()];
                                 case 2:
-                                    if (X.sent()) return w.paymentFlowAnalyticsService.startRobuxUpsellFlow(null != (c = null == (f = t.buyButtonElementDataset) ? void 0 : f.assetType) ? c : "", !!(null == (p = t.buyButtonElementDataset) ? void 0 : p.userassetId), null != (u = null == (d = t.buyButtonElementDataset) ? void 0 : d.isPrivateServer) && u, null != (s = null == (h = t.buyButtonElementDataset) ? void 0 : h.isPlace) && s, null == (y = t.buyButtonElementDataset) ? void 0 : y.productId), i.thumbnailImageUrl = lL(i, t.buyButtonElementDataset), Y = i, Z = this.translationResource, q = this.intlProvider, er = ep(t.expectedItemPrice), eo = "<div class='item-card-container item-preview'>\n        <div class='item-card-thumb'>\n          <img alt='item preview' src='".concat(null != (Q = Y.thumbnailImageUrl) ? Q : "", "' />\n        </div>\n        <div class='item-info text-name'>\n        <div class='text-overflow item-card-name'>").concat((0, es.escapeHtml)(t.assetName), "</div>\n          <div class='text-robux item-card-price'>").concat(er, "</div>\n        </div>\n      </div>"), eS($, null == (et = t.buyButtonElementDataset) ? void 0 : et.assetType), w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBUX_UPSELL, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN), ea = eo + (Z.get(D, {}) || "<div class='modal-message-block text-center border-top'>Sorry, you don't have enough Robux to buy this item. Would you like to purchase a Robux package?</div>"), ei = Z.get("Message.InsufficientRobuxRedirectToExternalPartner", {}) || "<div class='text-footer modal-message-block text-center'> You will be taken to our partner’s page to complete the purchase.</div>", E.Dialog.open({
+                                    if (X.sent()) return w.paymentFlowAnalyticsService.startRobuxUpsellFlow(null != (c = null == (f = t.buyButtonElementDataset) ? void 0 : f.assetType) ? c : "", !!(null == (p = t.buyButtonElementDataset) ? void 0 : p.userassetId), null != (u = null == (d = t.buyButtonElementDataset) ? void 0 : d.isPrivateServer) && u, null != (s = null == (h = t.buyButtonElementDataset) ? void 0 : h.isPlace) && s, null == (y = t.buyButtonElementDataset) ? void 0 : y.productId), i.thumbnailImageUrl = lH(i, t.buyButtonElementDataset), Y = i, Z = this.translationResource, q = this.intlProvider, er = ep(t.expectedItemPrice), eo = "<div class='item-card-container item-preview'>\n        <div class='item-card-thumb'>\n          <img alt='item preview' src='".concat(null != (Q = Y.thumbnailImageUrl) ? Q : "", "' />\n        </div>\n        <div class='item-info text-name'>\n        <div class='text-overflow item-card-name'>").concat((0, es.escapeHtml)(t.assetName), "</div>\n          <div class='text-robux item-card-price'>").concat(er, "</div>\n        </div>\n      </div>"), eS($, null == (et = t.buyButtonElementDataset) ? void 0 : et.assetType), w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBUX_UPSELL, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN), ea = eo + (Z.get(D, {}) || "<div class='modal-message-block text-center border-top'>Sorry, you don't have enough Robux to buy this item. Would you like to purchase a Robux package?</div>"), ei = Z.get("Message.InsufficientRobuxRedirectToExternalPartner", {}) || "<div class='text-footer modal-message-block text-center'> You will be taken to our partner’s page to complete the purchase.</div>", E.Dialog.open({
                                         titleText: Z.get(M, {}) || "Insufficient Robux",
                                         bodyContent: ea,
                                         declineText: Z.get(U, {}),
@@ -10336,7 +10337,7 @@ function() {
                                                             declineText: n.get(H, {}),
                                                             acceptText: n.get("Action.ContinueToPayment", {}) || "Continue to Payment",
                                                             onAccept: function() {
-                                                                w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.LEAVE_ROBLOX_WARNING, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CONTINUE_TO_VNG), eS("ConfirmLeaveRobloxModal", null == e ? void 0 : e.assetType), lm()
+                                                                w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.LEAVE_ROBLOX_WARNING, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CONTINUE_TO_VNG), eS("ConfirmLeaveRobloxModal", null == e ? void 0 : e.assetType), lb()
                                                             },
                                                             onDecline: function() {
                                                                 w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.LEAVE_ROBLOX_WARNING, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL), eS(ee, null == e ? void 0 : e.assetType)
@@ -10361,17 +10362,17 @@ function() {
                                                     var a = r.apply(e, t);
 
                                                     function i(e) {
-                                                        lG(a, n, o, i, l, "next", e)
+                                                        lV(a, n, o, i, l, "next", e)
                                                     }
 
                                                     function l(e) {
-                                                        lG(a, n, o, i, l, "throw", e)
+                                                        lV(a, n, o, i, l, "throw", e)
                                                     }
                                                     i(void 0)
                                                 })
                                             })()).catch(function() {
                                                 var e;
-                                                eS("LeaveRobloxFailedToShown", null == (e = t.buyButtonElementDataset) ? void 0 : e.assetType), lm()
+                                                eS("LeaveRobloxFailedToShown", null == (e = t.buyButtonElementDataset) ? void 0 : e.assetType), lb()
                                             }), !1
                                         },
                                         onDecline: function() {
@@ -10391,7 +10392,7 @@ function() {
                                     }), [2, Promise.resolve()];
                                     return [4, ec(i, t)];
                                 case 3:
-                                    if (200 === (m = X.sent()).status) return w.paymentFlowAnalyticsService.startRobuxUpsellFlow(null != (b = null == (O = t.buyButtonElementDataset) ? void 0 : O.assetType) ? b : "", !!(null == (x = t.buyButtonElementDataset) ? void 0 : x.userassetId), null != (v = null == (_ = t.buyButtonElementDataset) ? void 0 : _.isPrivateServer) && v, null != (g = null == (T = t.buyButtonElementDataset) ? void 0 : T.isPlace) && g, null == (N = t.buyButtonElementDataset) ? void 0 : N.productId), i.thumbnailImageUrl = lL(i, t.buyButtonElementDataset), ! function(e, t, r, n, o, a, i) {
+                                    if (200 === (m = X.sent()).status) return w.paymentFlowAnalyticsService.startRobuxUpsellFlow(null != (b = null == (O = t.buyButtonElementDataset) ? void 0 : O.assetType) ? b : "", !!(null == (x = t.buyButtonElementDataset) ? void 0 : x.userassetId), null != (v = null == (_ = t.buyButtonElementDataset) ? void 0 : _.isPrivateServer) && v, null != (g = null == (T = t.buyButtonElementDataset) ? void 0 : T.isPlace) && g, null == (N = t.buyButtonElementDataset) ? void 0 : N.productId), i.thumbnailImageUrl = lH(i, t.buyButtonElementDataset), ! function(e, t, r, n, o, a, i) {
                                         var l, c, u = arguments.length > 7 && void 0 !== arguments[7] && arguments[7],
                                             s = ep(t.expectedItemPrice),
                                             f = "<div class='item-card-container item-preview'>\n        <div class='item-card-thumb'>\n          <img alt='item preview' src='".concat(null != (l = r.thumbnailImageUrl) ? l : "", "' />\n        </div>\n        <div class='item-info text-name'>\n        <div class='text-overflow item-card-name'>").concat((0, es.escapeHtml)(t.assetName), "</div>\n          <div class='text-robux item-card-price'>").concat(s, "</div>\n        </div>\n      </div>");
@@ -10419,21 +10420,21 @@ function() {
                                                     y = i.get(k, {});
 
                                                 function m() {
-                                                    return lA(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.BUY_ROBUX_AND_ITEM, u, n, r), ej(o, E.CurrentUser.isUnder13, function() {
-                                                        return lj(o, n, r.buyButtonElementDataset)
+                                                    return lI(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.BUY_ROBUX_AND_ITEM, u, n, r), ej(o, E.CurrentUser.isUnder13, function() {
+                                                        return lA(o, n, r.buyButtonElementDataset)
                                                     }, l, r.buyButtonElementDataset).catch(function() {
                                                         var e;
-                                                        eS(en, null == (e = r.buyButtonElementDataset) ? void 0 : e.assetType), lj(o, n, r.buyButtonElementDataset)
+                                                        eS(en, null == (e = r.buyButtonElementDataset) ? void 0 : e.assetType), lA(o, n, r.buyButtonElementDataset)
                                                     }), !1
                                                 }
 
                                                 function b() {
                                                     var e;
-                                                    lA(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL, u, n, r), eS(J, null == (e = r.buyButtonElementDataset) ? void 0 : e.assetType)
+                                                    lI(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL, u, n, r), eS(J, null == (e = r.buyButtonElementDataset) ? void 0 : e.assetType)
                                                 }
                                                 if (c) {
                                                     var v, g, O, P, x, j, A, I, _ = (null == (P = r.buyButtonElementDataset) ? void 0 : P.assetType) === "Subscription",
-                                                        T = _ && r.thumbnail ? r.thumbnail : lx({
+                                                        T = _ && r.thumbnail ? r.thumbnail : lj({
                                                             thumbnailImageUrl: null != (v = n.thumbnailImageUrl) ? v : ""
                                                         }),
                                                         N = null != (g = null == (x = r.buyButtonElementDataset) ? void 0 : x.collectibleItemId) ? g : null,
@@ -10441,7 +10442,7 @@ function() {
                                                         M = Number(n.userBalanceRobux),
                                                         D = o,
                                                         L = 0;
-                                                    I = ls({
+                                                    I = lf({
                                                         variant: "standard",
                                                         expectedPrice: r.expectedItemPrice,
                                                         upsellProduct: o,
@@ -10471,19 +10472,19 @@ function() {
                                                         onAcceptOffers: function(e) {
                                                             var t = e.purchasePrice,
                                                                 o = e.offerIds;
-                                                            lA(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.BUY_ROBUX_AND_ITEM, u, n, r);
+                                                            lI(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.BUY_ROBUX_AND_ITEM, u, n, r);
                                                             var a = o.length ? o : void 0;
                                                             return ej(D, E.CurrentUser.isUnder13, function() {
-                                                                return lj(D, n, r.buyButtonElementDataset, t, a)
+                                                                return lA(D, n, r.buyButtonElementDataset, t, a)
                                                             }, l, r.buyButtonElementDataset).catch(function() {
                                                                 var e;
-                                                                eS(en, null == (e = r.buyButtonElementDataset) ? void 0 : e.assetType), lj(D, n, r.buyButtonElementDataset, t, a)
+                                                                eS(en, null == (e = r.buyButtonElementDataset) ? void 0 : e.assetType), lA(D, n, r.buyButtonElementDataset, t, a)
                                                             }), !1
                                                         },
                                                         onDirectPurchase: function(e) {
                                                             var t = e.purchasePrice,
                                                                 o = e.offerIds;
-                                                            lA(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.BUY_ROBUX_AND_ITEM, u, n, r), (function(e) {
+                                                            lI(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.BUY_ROBUX_AND_ITEM, u, n, r), (function(e) {
                                                                 var t;
                                                                 return (t = function(e) {
                                                                     var t, r, n, o, a, i, l, c, u, s, f, p, d, h;
@@ -10588,7 +10589,7 @@ function() {
                                                                                     itemPurchaseAjaxData: r,
                                                                                     itemDetail: p,
                                                                                     offerIds: o.length ? o : void 0
-                                                                                }, (h = new lp).show(), h.updateMessage(i.get(B, {})), [4, lS(d, null, h, i)];
+                                                                                }, (h = new ld).show(), h.updateMessage(i.get(B, {})), [4, lP(d, null, h, i)];
                                                                             case 1:
                                                                                 return y.sent(), [2]
                                                                         }
@@ -10600,11 +10601,11 @@ function() {
                                                                         var a = t.apply(e, r);
 
                                                                         function i(e) {
-                                                                            lP(a, n, o, i, l, "next", e)
+                                                                            lx(a, n, o, i, l, "next", e)
                                                                         }
 
                                                                         function l(e) {
-                                                                            lP(a, n, o, i, l, "throw", e)
+                                                                            lx(a, n, o, i, l, "throw", e)
                                                                         }
                                                                         i(void 0)
                                                                     })
@@ -10631,7 +10632,7 @@ function() {
                                                     onAccept: m,
                                                     onDecline: function() {
                                                         var e;
-                                                        lA(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL, u, n, r), eS(J, null == (e = r.buyButtonElementDataset) ? void 0 : e.assetType)
+                                                        lI(w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL, u, n, r), eS(J, null == (e = r.buyButtonElementDataset) ? void 0 : e.assetType)
                                                     },
                                                     onCancel: b,
                                                     allowHtmlContentInBody: !0,
@@ -10671,7 +10672,7 @@ function() {
                                     s = window.location.pathname;
                                 (null === E.Endpoints || void 0 === E.Endpoints ? void 0 : E.Endpoints.supportLocalizedUrls) && (s = E.Endpoints.removeUrlLocale(s));
                                 var f = t;
-                                s.startsWith(x) && (f = null != (o = lB(r)) ? o : f);
+                                s.startsWith(x) && (f = null != (o = lL(r)) ? o : f);
                                 var p = "<div class='item-card-container item-preview'>\n        <div class='item-card-thumb'>\n          <img alt='item preview' src='".concat(f, "' />\n        </div>\n        <div class='item-info text-name'>\n        <div class='text-overflow item-card-name'>").concat((0, es.escapeHtml)(r.itemName), "</div>\n          <div class='text-robux item-card-price'>").concat(u, "</div>\n        </div>\n      </div>") + n.get("Message.InsufficientRobuxExceedLargestPackage", {
                                     divTagStart: "<div class='modal-message-block text-center border-top'>",
                                     divTagEnd: "</div>",
@@ -10688,17 +10689,17 @@ function() {
                                             return
                                         }
                                         window.location.href = E.Endpoints.getAbsoluteUrl("/upgrades/robux?ctx=upsell")
-                                    }(null != (e = null == (n = lH.deviceMeta.getDeviceMeta()) ? void 0 : n.isTablet) && e, null != (t = null == (o = lH.deviceMeta.getDeviceMeta()) ? void 0 : o.isUniversalApp) && t), !1
+                                    }(null != (e = null == (n = lF.deviceMeta.getDeviceMeta()) ? void 0 : n.isTablet) && e, null != (t = null == (o = lF.deviceMeta.getDeviceMeta()) ? void 0 : o.isUniversalApp) && t), !1
                                 }
 
                                 function h() {
                                     w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBUX_UPSELL_EXCEED_LARGEST_PACKAGE, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, w.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL), eS(J, null == r ? void 0 : r.assetType)
                                 }
                                 if (w.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent(w.paymentFlowAnalyticsService.ENUM_TRIGGERING_CONTEXT.WEB_CATALOG_ROBUX_UPSELL, !0, w.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBUX_UPSELL_EXCEED_LARGEST_PACKAGE, w.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN), eS("UpsellExceedLargestShown", r.assetType), a) {
-                                    var y = !0 === r.isPrivateServer && i ? i : lx({
+                                    var y = !0 === r.isPrivateServer && i ? i : lj({
                                         thumbnailImageUrl: null != f ? f : ""
                                     });
-                                    ls({
+                                    lf({
                                         variant: "tooExpensive",
                                         expectedPrice: c,
                                         assetName: r.itemName,
@@ -10733,9 +10734,9 @@ function() {
             }, {
                 key: "initiateAutoPurchase",
                 value: function(e, t) {
-                    return lW(function(e, t) {
+                    return lX(function(e, t) {
                         var r, n, o, a, i, l, c, u, s = arguments;
-                        return lK(this, function(f) {
+                        return lz(this, function(f) {
                             switch (f.label) {
                                 case 0:
                                     r = s.length > 2 && void 0 !== s[2] ? s[2] : document.getElementById(P), n = s.length > 3 && void 0 !== s[3] ? s[3] : document.getElementById("item-container"), this._state = {
@@ -10745,21 +10746,21 @@ function() {
                                     }, this.loadingOverlay.show(), eS("AutoPurchaseEntryPoint", q), f.label = 1;
                                 case 1:
                                     var p, d, h;
-                                    return f.trys.push([1, 3, , 4]), (!e || !(e.startsWith("/catalog/") || e.startsWith("/bundles/") || e.startsWith("/game-pass/") || e.startsWith(x)) || e.includes("UpsellUuid=")) && (w.upsellUtil.expireUpsellCookie(), window.location.href = E.Endpoints.getAbsoluteUrl("/catalog")), [4, (p = n, d = null == n ? void 0 : n.dataset, h = null == r ? void 0 : r.dataset, lU(function() {
+                                    return f.trys.push([1, 3, , 4]), (!e || !(e.startsWith("/catalog/") || e.startsWith("/bundles/") || e.startsWith("/game-pass/") || e.startsWith(x)) || e.includes("UpsellUuid=")) && (w.upsellUtil.expireUpsellCookie(), window.location.href = E.Endpoints.getAbsoluteUrl("/catalog")), [4, (p = n, d = null == n ? void 0 : n.dataset, h = null == r ? void 0 : r.dataset, lM(function() {
                                         var t, r, n, o, a, i, l, c, u, s, f, y;
-                                        return lk(this, function(m) {
+                                        return lD(this, function(m) {
                                             switch (m.label) {
                                                 case 0:
-                                                    return [4, lU(function() {
+                                                    return [4, lM(function() {
                                                         var t, r, n, o, a, i, l, c, u;
-                                                        return lk(this, function(s) {
+                                                        return lD(this, function(s) {
                                                             var f, p, y;
                                                             switch (s.label) {
                                                                 case 0:
-                                                                    if ((t = w.upsellUtil.parseUpsellCookie()) && 0 !== Object.keys(t).length && (!t.targetItemUrl || e.startsWith(t.targetItemUrl)) || (eS("AutoPurchasePotentialHackingActionSpotted2", q), lN(X, {
+                                                                    if ((t = w.upsellUtil.parseUpsellCookie()) && 0 !== Object.keys(t).length && (!t.targetItemUrl || e.startsWith(t.targetItemUrl)) || (eS("AutoPurchasePotentialHackingActionSpotted2", q), lC(X, {
                                                                             itemPath: e,
                                                                             upsellCookieData: t
-                                                                        }), eg(), lh(e)), (r = h) || (eg(), lh(e)), t.subscriptionTargetKey) return o = {
+                                                                        }), eg(), ly(e)), (r = h) || (eg(), ly(e)), t.subscriptionTargetKey) return o = {
                                                                         expectedPrice: t.expectedPrice || "0",
                                                                         expectedCurrency: t.expectedCurrency || "1",
                                                                         expectedSellerId: t.expectedSellerId || "",
@@ -10770,9 +10771,9 @@ function() {
                                                                     }, [2, [r, o]];
                                                                     s.label = 1;
                                                                 case 1:
-                                                                    return s.trys.push([1, 3, , 4]), [4, (i = t.collectibleItemId ? null == d ? void 0 : d.productId : t.productId, lU(function() {
+                                                                    return s.trys.push([1, 3, , 4]), [4, (i = t.collectibleItemId ? null == d ? void 0 : d.productId : t.productId, lM(function() {
                                                                         var t, r;
-                                                                        return lk(this, function(n) {
+                                                                        return lD(this, function(n) {
                                                                             switch (n.label) {
                                                                                 case 0:
                                                                                     if (!i) return [2, Promise.reject()];
@@ -10885,23 +10886,23 @@ function() {
                                                                                             var a = o.apply(e, t);
 
                                                                                             function i(e) {
-                                                                                                lI(a, r, n, i, l, "next", e)
+                                                                                                l_(a, r, n, i, l, "next", e)
                                                                                             }
 
                                                                                             function l(e) {
-                                                                                                lI(a, r, n, i, l, "throw", e)
+                                                                                                l_(a, r, n, i, l, "throw", e)
                                                                                             }
                                                                                             i(void 0)
                                                                                         })
                                                                                     })()];
                                                                                 case 2:
-                                                                                    if (!(t = n.sent()) || 0 === Object.keys(t).length) return eS("AutoPurchasePotentialHackingActionSpotted3", q), lN(z, {
+                                                                                    if (!(t = n.sent()) || 0 === Object.keys(t).length) return eS("AutoPurchasePotentialHackingActionSpotted3", q), lC(z, {
                                                                                         itemPath: e,
                                                                                         productId: i
                                                                                     }), [2, Promise.reject()];
                                                                                     return [2, t];
                                                                                 case 3:
-                                                                                    return r = n.sent(), eS("AutoPurchasePotentialHackingActionSpotted4", q), lN(K, {
+                                                                                    return r = n.sent(), eS("AutoPurchasePotentialHackingActionSpotted4", q), lC(K, {
                                                                                         itemPath: e,
                                                                                         productId: i,
                                                                                         error: r
@@ -10914,11 +10915,11 @@ function() {
                                                                 case 2:
                                                                     return a = s.sent(), [3, 4];
                                                                 case 3:
-                                                                    return l = s.sent(), lN(Y, {
+                                                                    return l = s.sent(), lC(Y, {
                                                                         itemPath: e,
                                                                         upsellCookieData: t,
                                                                         error: l
-                                                                    }), eg(), lh(e), [2, Promise.reject()];
+                                                                    }), eg(), ly(e), [2, Promise.reject()];
                                                                 case 4:
                                                                     return [4, (f = a.assetId, p = a.assetType, (y = function() {
                                                                         var e, t, r, n, o;
@@ -11058,10 +11059,10 @@ function() {
                                                                                             }
                                                                                         }(i) || function(e) {
                                                                                             if (e) {
-                                                                                                if ("string" == typeof e) return l_(e, 1);
+                                                                                                if ("string" == typeof e) return lT(e, 1);
                                                                                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                                                                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                                                                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return l_(e, 1)
+                                                                                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return lT(e, 1)
                                                                                             }
                                                                                         }(i) || function() {
                                                                                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -11080,11 +11081,11 @@ function() {
                                                                             var o = y.apply(e, t);
 
                                                                             function a(e) {
-                                                                                lT(o, r, n, a, i, "next", e)
+                                                                                lN(o, r, n, a, i, "next", e)
                                                                             }
 
                                                                             function i(e) {
-                                                                                lT(o, r, n, a, i, "throw", e)
+                                                                                lN(o, r, n, a, i, "throw", e)
                                                                             }
                                                                             a(void 0)
                                                                         })
@@ -11114,7 +11115,7 @@ function() {
                                                         })
                                                     })()];
                                                 case 1:
-                                                    r = (t = lM.apply(void 0, [m.sent(), 2]))[0], o = (n = t[1]).placeproductpromotionId, a = "LibraryItem" === ((null === E.MetaDataValues || void 0 === E.MetaDataValues ? void 0 : E.MetaDataValues.getPageName()) || ""), i = parseInt(r.userBalanceRobux, 10), l = parseInt(n.expectedCurrency, 10), c = parseInt(n.expectedPrice, 10), u = parseInt(n.expectedSellerId, 10), s = {
+                                                    r = (t = lk.apply(void 0, [m.sent(), 2]))[0], o = (n = t[1]).placeproductpromotionId, a = "LibraryItem" === ((null === E.MetaDataValues || void 0 === E.MetaDataValues ? void 0 : E.MetaDataValues.getPageName()) || ""), i = parseInt(r.userBalanceRobux, 10), l = parseInt(n.expectedCurrency, 10), c = parseInt(n.expectedPrice, 10), u = parseInt(n.expectedSellerId, 10), s = {
                                                         itemContainerElemClassList: null == p ? void 0 : p.classList,
                                                         assetType: n.assetType,
                                                         assetName: (0, es.escapeHtml)(n.itemName),
@@ -11158,7 +11159,7 @@ function() {
                                     a = this.translationResource.get(B, {}), i = o.userBalance, l = o.expectedPrice, f.label = 5;
                                 case 5:
                                     if (f.trys.push([5, 9, , 10]), e.startsWith(x) && (null == (c = document.getElementById("tab-store")) || c.click()), !(i > l)) return [3, 7];
-                                    return this.loadingOverlay.updateMessage(a), [4, lS(o, t, this.loadingOverlay, this.translationResource)];
+                                    return this.loadingOverlay.updateMessage(a), [4, lP(o, t, this.loadingOverlay, this.translationResource)];
                                 case 6:
                                     return f.sent(), this._state.purchased = !0, [2, Promise.resolve()];
                                 case 7:
@@ -11166,7 +11167,7 @@ function() {
                                 case 8:
                                     return f.sent(), [3, 10];
                                 case 9:
-                                    return u = f.sent(), this.loadingOverlay.hide(), eS(er, null == o ? void 0 : o.assetType), lN(Z, {
+                                    return u = f.sent(), this.loadingOverlay.hide(), eS(er, null == o ? void 0 : o.assetType), lC(Z, {
                                         itemPurchaseObj: o,
                                         error: u
                                     }), eg(), [3, 10];
@@ -11184,6 +11185,6 @@ function() {
                 }
             }(t.prototype, e), t
     }();
-    void 0 === window.Roblox && (window.Roblox = {}), void 0 === window.Roblox.ItemPurchaseUpsellService && (window.Roblox.ItemPurchaseUpsellService = new lz)
+    void 0 === window.Roblox && (window.Roblox = {}), void 0 === window.Roblox.ItemPurchaseUpsellService && (window.Roblox.ItemPurchaseUpsellService = new lY)
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("ItemPurchaseUpsell");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/itemPurchaseUpsell-c6ed91bddb5f453d.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/itemPurchaseUpsell-1226e4423c04535d.js.map

@@ -573,6 +573,16 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "ODPChallenge.Prologue.Action.ReceiveTransfer": "receive Robux",
     "Heading.ConversationalRequest.LiftPlatformAccessRestriction": "Do you allow your child to use Roblox?",
     "Description.LiftPlatformAccessRestrictionConsent": "With your permission, your child will be able to sign in to Roblox.",
-    "Response.ODPBirthdayNotAllowed": "This date can't be used for your child's account. Try another date."
+    "Response.ODPBirthdayNotAllowed": "This date can't be used for your child's account. Try another date.",
+    "Description.VPCRequestSpendNotifications": "Notifications will be sent to the parent who has created their Roblox parent account. If you enable high spend alerts, you will receive an email if your child spends $100, $250, and/or $500 USD or local currency equivalent in a given month, and thereafter for every ten transactions.",
+    "Heading.ODPUpgradeAlreadyCompleted": "Alert",
+    "Description.ODPUpgradeAlreadyCompleted": "Email can no longer be changed after a Roblox parent account has been linked to this PIN",
+    "Heading.ConversationalRequest.DoNotDisturb": "Allow your child to get notifications throughout the day?",
+    "Description.VPCRequestDoNotDisturb": "When Do not disturb is turned on, your child only gets notifications outside of the Do not disturb hours you set.",
+    "Heading.ConversationalRequest.DoNotDisturbTimeWindow": "Update your child's Do not disturb hours?",
+    "Description.VPCRequestDoNotDisturbTimeWindow": "Your child only gets notifications outside of the Do not disturb hours you set.",
+    "Heading.ConversationalRequest.SpendNotifications": "Update notifications about your child's spending?",
+    "Heading.ConversationalRequest.RevokeExperienceApproval": "Remove this game from your child’s list of allowed games?",
+    "Description.ConversationalRequest.RevokeExperienceApproval": "Your child won't be able to play it unless its content maturity rating is now considered right for their age."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c86a9fb8-4c2f-12fc-c40f-9f457d236e20")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7eb2bdd0-2e19-aabe-d10a-549c86f2b60d")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 962059, e => {
@@ -5521,71 +5521,77 @@
                 })]
             })
         };
-    var ag = e.i(905943),
-        ab = e.i(751846),
-        ay = e.i(930047);
-    let aI = (0, s.withTranslation)(e => {
+    var ag = e.i(458451),
+        ab = e.i(905943),
+        ay = e.i(751846),
+        aI = e.i(186930);
+    let aT = (0, s.withTranslation)(e => {
             let t, {
                     moment: n
                 } = e,
                 {
                     translate: o
                 } = (0, s.useTranslation)(),
-                r = n.status === ea,
-                l = r && !0 === n.hasLocalVideo,
-                d = i9(r ? n.draftId : null, {
-                    enabled: l,
+                {
+                    user: r
+                } = (0, ag.useRobloxAuthentication)(),
+                l = n.status === ea,
+                d = l && !0 === n.hasLocalVideo,
+                u = i9(l ? n.draftId : null, {
+                    enabled: d,
                     thumbnailUrl: n.thumbnailUrl,
                     videoUrl: n.videoUrl
                 }),
                 {
-                    assetId: u
+                    assetId: c
                 } = n,
-                [c, m] = (0, a.useState)(!1),
-                p = o("Label.MomentVideoPreview"),
-                h = !!(null == d ? void 0 : d.videoUrl) || null != u,
-                v = (0, a.useCallback)(() => {
-                    h && m(!0)
-                }, [h]),
+                [m, p] = (0, a.useState)(!1),
+                h = o("Label.MomentVideoPreview"),
+                v = !!(null == u ? void 0 : u.videoUrl) || null != c,
                 f = (0, a.useCallback)(() => {
-                    m(!1)
+                    v && p(!0)
+                }, [v]),
+                x = (0, a.useCallback)(() => {
+                    p(!1)
                 }, []);
-            t = (null == d ? void 0 : d.thumbnailUrl) ? (0, i.jsx)("img", {
+            t = (null == u ? void 0 : u.thumbnailUrl) ? (0, i.jsx)("img", {
                 alt: "",
                 className: "radius-small [object-fit:cover]",
                 "data-testid": "moment-video-thumbnail-image",
                 height: 48,
-                src: d.thumbnailUrl,
+                src: u.thumbnailUrl,
                 width: 48
-            }) : null != u ? (0, i.jsx)("div", {
+            }) : null != c ? (0, i.jsx)("div", {
                 className: "radius-small clip size-[48px]",
                 "data-testid": "moment-video-thumbnail-image",
-                children: (0, i.jsx)(ab.Thumbnail2d, {
+                children: (0, i.jsx)(ay.Thumbnail2d, {
                     alt: "",
                     containerClass: "block",
                     imgClassName: "[object-fit:cover]",
-                    returnPolicy: ab.ReturnPolicy.PlaceHolder,
-                    targetId: u,
-                    type: ab.ThumbnailTypes.assetThumbnail
+                    returnPolicy: ay.ReturnPolicy.PlaceHolder,
+                    targetId: c,
+                    type: ay.ThumbnailTypes.assetThumbnail
                 })
             }) : (0, i.jsx)("div", {
                 "aria-hidden": !0,
                 className: "radius-small bg-surface-200 size-[48px]"
             });
-            let x = null;
-            return ((null == d ? void 0 : d.videoUrl) ? x = (0, i.jsx)("video", {
-                "aria-label": p,
+            let g = null;
+            return ((null == u ? void 0 : u.videoUrl) ? g = (0, i.jsx)("video", {
+                "aria-label": h,
                 autoPlay: !0,
                 className: "radius-medium block max-width-[500px] max-height-[500px]",
                 loop: !0,
                 muted: !0,
                 playsInline: !0,
-                src: d.videoUrl
-            }) : null != u && (x = (0, i.jsx)("div", {
-                "aria-label": p,
+                src: u.videoUrl
+            }) : null != c && (g = (0, i.jsx)("div", {
+                "aria-label": h,
                 className: "radius-medium clip max-width-[500px] max-height-[500px] bg-surface-200",
-                children: (0, i.jsx)(ay.RobloxVideoPlayer, {
-                    videoAssetId: String(u),
+                children: (0, i.jsx)(aI.RobloxVideoPlayer, {
+                    cmcdInstanceType: aI.CmcdInstanceType.CreatorDashboard,
+                    cmcdUserId: null == r ? void 0 : r.id,
+                    videoAssetId: String(c),
                     environment: "production",
                     src: void 0,
                     autoPlay: !0,
@@ -5593,36 +5599,36 @@
                     loop: !0,
                     muted: !0
                 })
-            })), h) ? (0, i.jsxs)(ag.Popover, {
-                open: c,
-                onOpenChange: m,
-                children: [(0, i.jsx)(ag.PopoverAnchor, {
+            })), v) ? (0, i.jsxs)(ab.Popover, {
+                open: m,
+                onOpenChange: p,
+                children: [(0, i.jsx)(ab.PopoverAnchor, {
                     asChild: !0,
                     children: (0, i.jsx)("button", {
-                        "aria-label": p,
+                        "aria-label": h,
                         className: "padding-none bg-none stroke-none",
                         type: "button",
-                        onPointerEnter: v,
-                        onPointerLeave: f,
-                        onFocus: v,
-                        onBlur: f,
+                        onPointerEnter: f,
+                        onPointerLeave: x,
+                        onFocus: f,
+                        onBlur: x,
                         children: t
                     })
-                }), (0, i.jsx)(ag.PopoverContent, {
+                }), (0, i.jsx)(ab.PopoverContent, {
                     align: "start",
-                    ariaLabel: p,
+                    ariaLabel: h,
                     className: "outline-none",
                     side: "bottom",
-                    children: x
+                    children: g
                 })]
             }) : t
         }, [_.TranslationNamespace.Creations]),
-        aT = [10, 25, 50],
-        aC = {
+        aC = [10, 25, 50],
+        aw = {
             [en]: "MomentsTable.NoActiveMoments",
             [ea]: "MomentsTable.NoDraftMoments"
         },
-        aw = e => {
+        aS = e => {
             let {
                 moment: t,
                 disabled: n,
@@ -5654,7 +5660,7 @@
                 })]
             })
         },
-        aS = e => {
+        aA = e => {
             let {
                 moment: t,
                 editLabel: n,
@@ -5676,7 +5682,7 @@
                 isHoverable: !0,
                 "data-testid": "moment-row-".concat(h),
                 children: [(0, i.jsx)(al.TableCell, {
-                    children: (0, i.jsx)(aI, {
+                    children: (0, i.jsx)(aT, {
                         moment: t
                     })
                 }), (0, i.jsx)(al.TableCell, {
@@ -5685,7 +5691,7 @@
                     children: t.status === en ? (0, i.jsx)("span", {
                         "data-testid": "moment-description-".concat(h),
                         children: t.description || "-"
-                    }) : (0, i.jsx)(aw, {
+                    }) : (0, i.jsx)(aS, {
                         moment: t,
                         disabled: null != o && o === h,
                         onBlur: c
@@ -5732,7 +5738,7 @@
                 })]
             })
         },
-        aA = (0, s.withTranslation)(e => {
+        aM = (0, s.withTranslation)(e => {
             let {
                 moments: t,
                 onEditMoment: n,
@@ -5825,10 +5831,10 @@
                                         children: (0, i.jsx)("span", {
                                             className: "text-body-medium content-muted block padding-y-xxlarge",
                                             "data-testid": "moments-table-empty-filter-message",
-                                            children: p(aC[f])
+                                            children: p(aw[f])
                                         })
                                     })
-                                }) : S.map(e => (0, i.jsx)(aS, {
+                                }) : S.map(e => (0, i.jsx)(aA, {
                                     moment: e,
                                     editLabel: j,
                                     publishingDraftId: l,
@@ -5844,7 +5850,7 @@
                             page: I,
                             rowsPerPage: T,
                             totalRows: y.length,
-                            rowsPerPageOptions: aT,
+                            rowsPerPageOptions: aC,
                             onPageChange: M,
                             onRowsPerPageChange: w
                         }) : null]
@@ -5852,7 +5858,7 @@
                 })
             })
         }, [_.TranslationNamespace.Creations, _.TranslationNamespace.Controls]),
-        aM = (0, s.withTranslation)(e => {
+        aj = (0, s.withTranslation)(e => {
             let {
                 onRetry: t
             } = e, {
@@ -5878,11 +5884,11 @@
                 })
             })
         }, [_.TranslationNamespace.Error]);
-    var aj = e.i(917852);
-    let aP = () => {
-            window.open(aj.idVerificationActionUrl, "_blank", "noopener,noreferrer")
+    var aP = e.i(917852);
+    let aE = () => {
+            window.open(aP.idVerificationActionUrl, "_blank", "noopener,noreferrer")
         },
-        aE = (0, s.withTranslation)(() => {
+        ak = (0, s.withTranslation)(() => {
             let {
                 translate: e
             } = (0, s.useTranslation)();
@@ -5892,7 +5898,7 @@
                 severity: "Warning",
                 hasCloseAffordance: !1,
                 primaryActionLabel: e("Label.VerifyId"),
-                onPrimaryAction: aP,
+                onPrimaryAction: aE,
                 "data-testid": "moments-id-verification-banner",
                 children: (0, i.jsxs)("div", {
                     className: "flex flex-col gap-xsmall",
@@ -5906,7 +5912,7 @@
                 })
             })
         }, [_.TranslationNamespace.Creations]),
-        ak = () => {
+        aL = () => {
             var e;
             (() => {
                 let {
@@ -6246,9 +6252,9 @@
                 onReload: et
             }) : (!z || Y) && (O || Y) ? (0, i.jsxs)("div", {
                 className: "flex grow-1 flex-col gap-medium self-stretch width-full",
-                children: [d ? (0, i.jsx)(aM, {
+                children: [d ? (0, i.jsx)(aj, {
                     onRetry: v
-                }) : null, h ? (0, i.jsx)(aE, {}) : null, Y ? (0, i.jsx)(aA, {
+                }) : null, h ? (0, i.jsx)(ak, {}) : null, Y ? (0, i.jsx)(aM, {
                     moments: J,
                     hasNextPage: D,
                     fetchNextPage: U,
@@ -6283,16 +6289,16 @@
                 })
             })
         },
-        aL = {
+        aR = {
             width: "100%",
             height: "100%"
         },
-        aR = (0, nG.makeStyles)()(e => ({
+        aN = (0, nG.makeStyles)()(e => ({
             section: {
-                ...aL
+                ...aR
             },
             container: {
-                ...aL
+                ...aR
             },
             title: {
                 marginBottom: e.spacing(1),
@@ -6306,90 +6312,90 @@
                 padding: 0
             }
         })),
-        aN = (0, D.default)(() => e.A(202045), {
+        aO = (0, D.default)(() => e.A(202045), {
             loadableGenerated: {
                 modules: [623728]
             },
             ssr: !1
         }),
-        aO = (0, D.default)(() => e.A(378869), {
+        aD = (0, D.default)(() => e.A(378869), {
             loadableGenerated: {
                 modules: [518808]
             },
             ssr: !1
         }),
-        aD = (0, D.default)(() => e.A(580854), {
+        aU = (0, D.default)(() => e.A(580854), {
             loadableGenerated: {
                 modules: [427685]
             },
             ssr: !1
         }),
-        aU = (0, D.default)(() => e.A(307640), {
+        aB = (0, D.default)(() => e.A(307640), {
             loadableGenerated: {
                 modules: [48220]
             },
             ssr: !1
         }),
-        aB = (0, D.default)(() => e.A(114198), {
+        aq = (0, D.default)(() => e.A(114198), {
             loadableGenerated: {
                 modules: [595604]
             },
             ssr: !1
         }),
-        aq = (0, D.default)(() => e.A(558217), {
+        az = (0, D.default)(() => e.A(558217), {
             loadableGenerated: {
                 modules: [333771]
             },
             ssr: !1
         }),
-        az = (0, D.default)(() => e.A(546234), {
+        aF = (0, D.default)(() => e.A(546234), {
             loadableGenerated: {
                 modules: [82873]
             },
             ssr: !1
         }),
-        aF = (0, D.default)(() => e.A(85397), {
+        aV = (0, D.default)(() => e.A(85397), {
             loadableGenerated: {
                 modules: [973472]
             },
             ssr: !1
         }),
-        aV = (0, D.default)(() => e.A(890748), {
+        aG = (0, D.default)(() => e.A(890748), {
             loadableGenerated: {
                 modules: [835459]
             },
             ssr: !1
         }),
-        aG = (0, D.default)(() => e.A(68996), {
+        a_ = (0, D.default)(() => e.A(68996), {
             loadableGenerated: {
                 modules: [565869]
             },
             ssr: !1
         }),
-        a_ = (0, D.default)(() => e.A(441969), {
+        aH = (0, D.default)(() => e.A(441969), {
             loadableGenerated: {
                 modules: [415945]
             },
             ssr: !1
         }),
-        aH = (0, D.default)(() => e.A(481709), {
+        aW = (0, D.default)(() => e.A(481709), {
             loadableGenerated: {
                 modules: [947274]
             },
             ssr: !1
         }),
-        aW = (0, D.default)(() => e.A(272047), {
+        aK = (0, D.default)(() => e.A(272047), {
             loadableGenerated: {
                 modules: [616027]
             },
             ssr: !1
         });
 
-    function aK(e) {
+    function aJ(e) {
         let t = (0, h.readQueryValue)(e);
         return void 0 === t ? m.Asset.MyExperiences : (0, p.isValidEnumValue)(m.Asset, t) ? t : m.Asset.MyExperiences
     }
-    let aJ = (0, s.withTranslation)(e => {
+    let aY = (0, s.withTranslation)(e => {
             let {
                 verificationMetadata: t,
                 currentGroup: n,
@@ -6403,7 +6409,7 @@
                 translate: f
             } = (0, s.useTranslation)(), T = (0, b.default)(), w = (0, a.useRef)(void 0), S = (0, a.useMemo)(() => [], []), A = (0, g.isTaxonomyActiveTab)(l.activeTab), M = A || (0, g.isRecentsActiveTab)(l.activeTab), j = (0, a.useMemo)(() => {
                 let e = (0, g.isAllAssetTypesActiveTab)(l.activeTab) ? m.Asset.AllCatalogAsset : g.TAXONOMY_HOST_ASSET;
-                return I.default.getMenuState(M ? e : aK(l.activeTab), S)
+                return I.default.getMenuState(M ? e : aJ(l.activeTab), S)
             }, [l.activeTab, S, M]);
             (0, a.useEffect)(() => {
                 (0, g.isRecentsActiveTab)(l.activeTab) && d({
@@ -6417,7 +6423,7 @@
                         section: E,
                         container: k
                     }
-                } = aR(),
+                } = aN(),
                 L = (0, a.useCallback)(e => {
                     if (j.menuItem === e.menuItem && j.submenuItem === e.submenuItem) return;
                     if ((0, g.shouldOpenTaxonomyView)({
@@ -6435,9 +6441,9 @@
                     })
                 }, [j.menuItem, j.submenuItem, d, T]),
                 R = (0, a.useMemo)(() => {
-                    let e = aK(l.activeTab);
+                    let e = aJ(l.activeTab);
                     if (void 0 === p && e === m.Asset.Moments || void 0 === v && e === m.Asset.Showcase) return j;
-                    let t = aK(l.activeTab) === m.Asset.TextDocument;
+                    let t = aJ(l.activeTab) === m.Asset.TextDocument;
                     if (void 0 === h && t) return j;
                     let i = I.default.getValidMenuState(P, j, c, n, void 0, void 0, p, v, h);
                     if (i !== j) {
@@ -6466,22 +6472,22 @@
                 _ = (0, J.isDevelopmentItemAsset)(N, h),
                 Y = (0, a.useMemo)(() => {
                     var e, t;
-                    return _ ? (0, i.jsx)(aH, {
+                    return _ ? (0, i.jsx)(aW, {
                         groupId: null == n ? void 0 : n.id,
                         useTabNavigationSpacing: !1,
                         userId: null == o ? void 0 : o.id
-                    }) : N === m.Asset.Decal ? (0, i.jsx)(aD, {
+                    }) : N === m.Asset.Decal ? (0, i.jsx)(aU, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Animation ? (0, i.jsx)(aO, {
+                    }) : N === m.Asset.Animation ? (0, i.jsx)(aD, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Audio || N === m.Asset.Video ? (0, i.jsx)(aU, {
+                    }) : N === m.Asset.Audio || N === m.Asset.Video ? (0, i.jsx)(aB, {
                         mediaAssetType: N,
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Plugin ? (0, i.jsx)(az, {
+                    }) : N === m.Asset.Plugin ? (0, i.jsx)(aF, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Model ? (0, i.jsx)(aq, {
+                    }) : N === m.Asset.Model ? (0, i.jsx)(az, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.MeshPart ? (0, i.jsx)(aB, {
+                    }) : N === m.Asset.MeshPart ? (0, i.jsx)(aq, {
                         groupId: null == n ? void 0 : n.id
                     }) : N === m.Asset.TextDocument ? (0, i.jsx)("div", {
                         className: "flex justify-center items-center padding-y-xxlarge",
@@ -6490,18 +6496,18 @@
                             size: "Large",
                             variant: "Indeterminate"
                         })
-                    }) : N === m.Asset.ShareLink ? (0, i.jsx)(aG, {}) : N === m.Asset.Moments ? (0, i.jsx)(ak, {}) : N === m.Asset.AssetPermissionRequests ? (0, i.jsx)(aW, {}) : N === m.Asset.Showcase ? (0, i.jsx)(aF, {
+                    }) : N === m.Asset.ShareLink ? (0, i.jsx)(a_, {}) : N === m.Asset.Moments ? (0, i.jsx)(aL, {}) : N === m.Asset.AssetPermissionRequests ? (0, i.jsx)(aK, {}) : N === m.Asset.Showcase ? (0, i.jsx)(aV, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.AllCatalogAsset || N === m.Asset.AvatarLooks || N === m.Asset.AvatarBackground ? (0, i.jsx)(aN, {
+                    }) : N === m.Asset.AllCatalogAsset || N === m.Asset.AvatarLooks || N === m.Asset.AvatarBackground ? (0, i.jsx)(aO, {
                         assetType: N,
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Image || N === m.Asset.Mesh ? (0, i.jsx)(aV, {
+                    }) : N === m.Asset.Image || N === m.Asset.Mesh ? (0, i.jsx)(aG, {
                         primitiveAssetType: N,
                         groupId: null == n ? void 0 : n.id
-                    }) : D ? (0, i.jsx)(aN, {
+                    }) : D ? (0, i.jsx)(aO, {
                         assetType: N,
                         groupId: null == n ? void 0 : n.id
-                    }) : (0, i.jsx)(a_, {
+                    }) : (0, i.jsx)(aH, {
                         assetType: N,
                         creatorType: (null == n ? void 0 : n.id) ? U.SearchCreatorType.Group : U.SearchCreatorType.User,
                         creatorTargetId: null != (e = null != (t = null == n ? void 0 : n.id) ? t : null == o ? void 0 : o.id) ? e : 0
@@ -6529,7 +6535,7 @@
                 })]
             })
         }, [_.TranslationNamespace.AssetTypes, _.TranslationNamespace.Controls, _.TranslationNamespace.Creations, _.TranslationNamespace.Error, _.TranslationNamespace.Navigation, _.TranslationNamespace.ShareLinksManagement, _.TranslationNamespace.ExperienceReleases, _.TranslationNamespace.Taxonomy]),
-        aY = () => {
+        aQ = () => {
             let e = (0, f.useCurrentGroup)(),
                 {
                     user: t
@@ -6544,7 +6550,7 @@
                     o(t)
                 })
             }, []), (0, i.jsx)(N, {
-                children: (0, i.jsx)(aJ, {
+                children: (0, i.jsx)(aY, {
                     verificationMetadata: n,
                     currentGroup: e,
                     currentUser: t,
@@ -6552,10 +6558,10 @@
                 })
             })
         };
-    var aQ = e.i(675330),
-        aX = e.i(177608),
-        aZ = e.i(796266);
-    let a$ = () => {
+    var aX = e.i(675330),
+        aZ = e.i(177608),
+        a$ = e.i(796266);
+    let a0 = () => {
             var e;
             let {
                 translate: t
@@ -6567,12 +6573,12 @@
                 children: null != (e = null == n ? void 0 : n.label) ? e : t("Heading.Creations")
             })
         },
-        a0 = e => {
+        a1 = e => {
             let {
                 children: t
             } = e;
-            return (0, i.jsx)(aX.default, {
-                title: (0, i.jsx)(a$, {}),
+            return (0, i.jsx)(aZ.default, {
+                title: (0, i.jsx)(a0, {}),
                 secondaryRail: (0, i.jsx)(M, {}),
                 secondarySize: "small",
                 noBreadCrumbs: !0,
@@ -6581,28 +6587,28 @@
                 })
             })
         },
-        a1 = () => {
+        a2 = () => {
             let {
                 isResolving: e
-            } = (0, aZ.default)(), t = (0, a.useMemo)(() => ({
+            } = (0, a$.default)(), t = (0, a.useMemo)(() => ({
                 isResolving: e
             }), [e]);
             return (0, i.jsx)(l.default, {
-                children: (0, i.jsx)(aQ.default, {
+                children: (0, i.jsx)(aX.default, {
                     children: (0, i.jsx)(o.default, {
                         children: (0, i.jsx)(j.Provider, {
                             value: t,
-                            children: (0, i.jsx)(aY, {})
+                            children: (0, i.jsx)(aQ, {})
                         })
                     })
                 })
             })
         };
-    a1.getPageLayout = e => (0, i.jsx)(a0, {
+    a2.getPageLayout = e => (0, i.jsx)(a1, {
         children: e
-    }), a1.loggerConfig = {
+    }), a2.loggerConfig = {
         rosId: "3539"
-    }, e.s(["default", 0, a1], 962059)
+    }, e.s(["default", 0, a2], 962059)
 }, 748348, (e, t, n) => {
     let i = "/dashboard/creations";
     (window.__NEXT_P = window.__NEXT_P || []).push([i, () => e.r(962059)]), t.hot && t.hot.dispose(function() {
@@ -6610,5 +6616,5 @@
     })
 }]);
 
-//# debugId=c86a9fb8-4c2f-12fc-c40f-9f457d236e20
-//# sourceMappingURL=0at94bja_bkb2.js.map
+//# debugId=7eb2bdd0-2e19-aabe-d10a-549c86f2b60d
+//# sourceMappingURL=0dsait8ve4vlj.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "5f66d3d7-9c4a-f1e9-dbf6-1f62e433e723")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "ca974028-02bc-018d-52a9-18dbd663bc08")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 639102, e => {
@@ -1676,59 +1676,62 @@
             resources: c,
             children: a
         })
-    }, "default", 0, e => {
+    }, "default", 0, (e, i) => {
         let {
-            user: i
+            user: r
         } = (0, s.useAuthentication)(), {
-            locale: r
+            locale: l
         } = (0, a.useLocalization)(), {
-            translate: l
+            translate: d
         } = (0, a.useTranslation)(), {
-            trackerClient: d
-        } = (0, u.useEventTrackerProvider)(), v = {
-            "Action.DownloadStudio": l("Action.DownloadStudio"),
-            "Message.CheckingStudio": l("Message.CheckingStudio"),
-            "Message.OpenStudioError": l("Message.OpenStudioError"),
-            "Message.StartYourCreation": l("Message.StartYourCreation")
+            trackerClient: v
+        } = (0, u.useEventTrackerProvider)(), m = null == i ? void 0 : i.onDialogClose, g = {
+            "Action.DownloadStudio": d("Action.DownloadStudio"),
+            "Message.CheckingStudio": d("Message.CheckingStudio"),
+            "Message.OpenStudioError": d("Message.OpenStudioError"),
+            "Message.StartYourCreation": d("Message.StartYourCreation")
         }, {
-            isCompatible: m,
-            open: g,
-            dialog: y,
-            getStudioDownloadUrlAsync: S
-        } = (0, o.useStudio)(null != e ? e : v, {
-            startAttempt: e => d.sendEvent((0, c.studioStartAttemptEventModel)(e.task)),
-            startSuccess: (e, t) => d.sendEvent((0, c.studioStartSuccessEventModel)(e.task, null == t ? void 0 : t.hasAuthCode, null == t ? void 0 : t.authCodeHash)),
+            isCompatible: y,
+            open: S,
+            dialog: w,
+            getStudioDownloadUrlAsync: b
+        } = (0, o.useStudio)(null != e ? e : g, {
+            startAttempt: e => v.sendEvent((0, c.studioStartAttemptEventModel)(e.task)),
+            startSuccess: (e, t) => v.sendEvent((0, c.studioStartSuccessEventModel)(e.task, null == t ? void 0 : t.hasAuthCode, null == t ? void 0 : t.authCodeHash)),
             download: (e, t) => {
                 (null == t ? void 0 : t.getDownloadCode) ? t.getDownloadCode().then(e => {
-                    void 0 !== e ? d.sendEvent((0, c.downloadStudioOpenOrDownloadEventModel)(e)) : d.sendEvent((0, c.downloadStudioOpenOrDownloadEventModel)())
+                    void 0 !== e ? v.sendEvent((0, c.downloadStudioOpenOrDownloadEventModel)(e)) : v.sendEvent((0, c.downloadStudioOpenOrDownloadEventModel)())
                 }).catch(() => {
-                    d.sendEvent((0, c.downloadStudioOpenOrDownloadEventModel)())
-                }): d.sendEvent((0, c.downloadStudioOpenOrDownloadEventModel)())
-            }
-        }), [w, b] = (0, n.useState)(!1), N = (0, n.useCallback)(() => b(!1), []), C = (0, n.useCallback)((e, t) => g(e, t), [g]);
+                    v.sendEvent((0, c.downloadStudioOpenOrDownloadEventModel)())
+                }): v.sendEvent((0, c.downloadStudioOpenOrDownloadEventModel)())
+            },
+            close: () => null == m ? void 0 : m()
+        }), [N, C] = (0, n.useState)(!1), A = (0, n.useCallback)(() => {
+            C(!1), null == m || m()
+        }, [m]), x = (0, n.useCallback)((e, t) => S(e, t), [S]);
         return {
-            isCompatible: m,
+            isCompatible: y,
             open: (0, n.useCallback)(e => {
                 let t = {
-                    userId: null == i ? void 0 : i.id,
-                    locale: null != r ? r : a.Locale.English,
+                    userId: null == r ? void 0 : r.id,
+                    locale: null != l ? l : a.Locale.English,
                     protocolScheme: (f(), "roblox-studio"),
                     distributorType: "Global"
                 };
                 (async () => {
                     if (e.task === o.EStudioTaskType.EditPlace || e.task === o.EStudioTaskType.EditPlaceRevision) try {
-                        if (!await h(e.universeId, e.placeId)) return void b(!0)
+                        if (!await h(e.universeId, e.placeId)) return void C(!0)
                     } catch (e) {}
-                    C(e, t)
+                    x(e, t)
                 })().catch(() => {})
-            }, [null == i ? void 0 : i.id, r, C]),
+            }, [null == r ? void 0 : r.id, l, x]),
             dialog: (0, t.jsxs)(t.Fragment, {
-                children: [y, (0, t.jsx)(p.default, {
-                    open: w,
-                    onClose: N
+                children: [w, (0, t.jsx)(p.default, {
+                    open: N,
+                    onClose: A
                 })]
             }),
-            getStudioDownloadUrlAsync: S
+            getStudioDownloadUrlAsync: b
         }
     }], 893949)
 }, 714644, e => {
@@ -2318,5 +2321,5 @@
     e.s(["DialogTitle", () => t.default])
 }]);
 
-//# debugId=5f66d3d7-9c4a-f1e9-dbf6-1f62e433e723
-//# sourceMappingURL=0-8x8z7tg8g4t.js.map
+//# debugId=ca974028-02bc-018d-52a9-18dbd663bc08
+//# sourceMappingURL=3s73ndwe1vi-4.js.map

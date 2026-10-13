@@ -261,6 +261,12 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Label.ReferralsLegalDisclosureV2": "By clicking \\u{201C}Refer to Plus\\u{201D}, I agree to the {linkStart}Roblox Plus Referral Program Terms{linkEnd}.",
     "Description.ReferralRecipientLegalDisclosure": "By clicking \"Subscribe\", you agree to the {linkStartRef}Referral Program Terms{linkEndRef} and the {linkStart}Roblox Subscription Terms{linkEnd}. You will be automatically charged each month until you cancel.",
     "Description.ReferralRecipientLegalDisclosurePurchase": "By clicking \\u{201C}{ctaText}\\u{201D}, you agree to the <a href=\"{referralTermsUrl}\">Referral Program Terms</a> and the <a href=\"{termsUrl}\">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel.",
-    "Description.NoLongerValidReferralGenericError": "This referral link is no longer valid."
+    "Description.NoLongerValidReferralGenericError": "This referral link is no longer valid.",
+    "Description.PendingPlanChangeBanner": "Your plan will change to {boldStart}{productName}{boldEnd} on {date}",
+    "Action.CancelPlanChange": "Cancel",
+    "Header.PendingPlanChangeDialogTitle": "Subscription changing",
+    "Description.PendingPlanChangeDialog": "Your subscription will update to {productName} for {price} on {date}. You may cancel this change to keep your current Plus subscription.",
+    "Action.CancelPendingPlanChange": "Cancel pending change",
+    "Message.CancelPlanChangeFailed": "Something went wrong. Please try again."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");

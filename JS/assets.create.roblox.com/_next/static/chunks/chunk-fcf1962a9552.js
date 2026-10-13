@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "44426588-013e-3397-f776-e1ce3035d3ee")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "0162ff29-fff3-4d18-7eb2-e19096eada0e")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 156071, e => {
@@ -49,15 +49,14 @@
         c = new r.MembershipApi(s),
         v = new r.SocialLinksApi(s),
         h = new r.RevenueApi(s),
-        I = new r.MigrationApi(s),
-        g = {
+        I = {
             On: r.RobloxGroupsApiSetFeaturesRequestModelFeaturesPayoutsEnum.On,
             Blocked: r.RobloxGroupsApiSetFeaturesRequestModelFeaturesPayoutsEnum.Blocked
         },
-        m = r.V1GroupsGroupIdAuditLogGetActionTypeEnum,
-        G = r.V1GroupsGroupIdAuditLogGetLimitEnum,
-        R = r.RobloxGroupsApiGroupFeatureResponseFeatureEnum;
-    e.s(["GroupAuditLimitEnum", 0, G, "GroupAuditLogActionTypeEnum", 0, m, "GroupFeatureTypeEnum", 0, R, "SetGroupFeaturesEnum", 0, g, "default", 0, {
+        g = r.V1GroupsGroupIdAuditLogGetActionTypeEnum,
+        m = r.V1GroupsGroupIdAuditLogGetLimitEnum,
+        G = r.RobloxGroupsApiGroupFeatureResponseFeatureEnum;
+    e.s(["GroupAuditLimitEnum", 0, m, "GroupAuditLogActionTypeEnum", 0, g, "GroupFeatureTypeEnum", 0, G, "SetGroupFeaturesEnum", 0, I, "default", 0, {
         searchGroups: (e, r, t) => u.v1GroupsSearchGet({
             keyword: e,
             limit: r,
@@ -137,12 +136,6 @@
         setGroupFeatures: (e, r) => p.v1GroupsGroupIdFeaturesPatch({
             groupId: e,
             request: r
-        }),
-        getGroupMigrationStatus: e => I.v1GroupsGroupIdMigrationGet({
-            groupId: e
-        }),
-        getGroupProductFeatures: e => a.v1GroupsGroupIdProductFeaturesGet({
-            groupId: e
         }),
         getGroupSettings: e => a.v1GroupsGroupIdSettingsGet({
             groupId: e
@@ -5228,5 +5221,5 @@
     }])
 }]);
 
-//# debugId=44426588-013e-3397-f776-e1ce3035d3ee
-//# sourceMappingURL=3kdt7sslw3q-j.js.map
+//# debugId=0162ff29-fff3-4d18-7eb2-e19096eada0e
+//# sourceMappingURL=3xy423ropt04s.js.map

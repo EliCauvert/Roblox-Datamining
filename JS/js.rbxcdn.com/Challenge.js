@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "7a2d1516894bb279ac0410d96cf96adfba427841"
+            id: "f373a8db74ee9fbcbe18a0c474bd01e88cdfcba5"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "f0ff57a8-e33c-49f7-b8db-df5a0b9e8b2f", e._sentryDebugIdIdentifier = "sentry-dbid-f0ff57a8-e33c-49f7-b8db-df5a0b9e8b2f")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "f5e83cbd-4108-4daf-9fe4-dc39a527a3dd", e._sentryDebugIdIdentifier = "sentry-dbid-f5e83cbd-4108-4daf-9fe4-dc39a527a3dd")
     } catch (e) {}
 }(),
 function() {
@@ -26986,6 +26986,17 @@ function() {
                             return e.src = "//".concat(Sx, "/v2/").concat(t, "/api.js"), e.setAttribute("data-callback", f), e.async = !0, e.defer = !0, o && e.setAttribute("data-nonce", o), document.body.appendChild(e), e
                         }, [s, o, a, d, f]),
                         h = (0, eu.useCallback)(function(e) {
+                            var o = !1,
+                                a = !1,
+                                u = function(e) {
+                                    a || (a = !0, r({
+                                        arkoseIframeId: t,
+                                        eventId: SP.ChallengeSuppressed,
+                                        payload: {
+                                            captchaToken: e
+                                        }
+                                    }))
+                                };
                             e.setConfig({
                                 selector: "#".concat(c),
                                 mode: l ? "lightbox" : "inline",
@@ -26995,7 +27006,7 @@ function() {
                                     blob: n
                                 },
                                 onCompleted: function(e) {
-                                    r({
+                                    o || u(e.token), r({
                                         arkoseIframeId: t,
                                         eventId: SP.ChallengeComplete,
                                         payload: {
@@ -27014,7 +27025,7 @@ function() {
                                     })
                                 },
                                 onShown: function(e) {
-                                    r({
+                                    o = !0, r({
                                         arkoseIframeId: t,
                                         eventId: SP.ChallengeShown,
                                         payload: {
@@ -27023,13 +27034,7 @@ function() {
                                     })
                                 },
                                 onSuppress: function(e) {
-                                    r({
-                                        arkoseIframeId: t,
-                                        eventId: SP.ChallengeSuppressed,
-                                        payload: {
-                                            captchaToken: e.token
-                                        }
-                                    })
+                                    u(e.token)
                                 },
                                 onResize: function(e) {
                                     r({
@@ -53318,4 +53323,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Challenge");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/challenge-e82890694163c5ac.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/challenge-defb19a1070988c1.js.map

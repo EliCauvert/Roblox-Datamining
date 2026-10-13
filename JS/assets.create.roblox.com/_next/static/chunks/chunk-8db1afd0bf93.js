@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "4c77907e-ddb6-53c6-c64e-0395def5fc6e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "496e19c6-ebbd-d7ee-f06c-154ba8b3f797")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 718067, e => {
@@ -77,8 +77,8 @@
             [r.RoleColorType.LightTeal, "36FFFF"],
             [r.RoleColorType.Standard, "FFFFFF"]
         ]),
-        c = [r.RoleColorType.Blue, r.RoleColorType.Green, r.RoleColorType.Purple, r.RoleColorType.Yellow, r.RoleColorType.Orange, r.RoleColorType.Red, r.RoleColorType.Pink, r.RoleColorType.Teal];
-    var p = ((t = p || {}).Creator = "Creator", t.Content = "Content", t.Membership = "Membership", t.Monetization = "Monetization", t.GroupSettings = "GroupSettings", t.Roles = "Roles", t.GroupMembers = "GroupMembers", t),
+        p = [r.RoleColorType.Blue, r.RoleColorType.Green, r.RoleColorType.Purple, r.RoleColorType.Yellow, r.RoleColorType.Orange, r.RoleColorType.Red, r.RoleColorType.Pink, r.RoleColorType.Teal];
+    var c = ((t = c || {}).Creator = "Creator", t.Content = "Content", t.Membership = "Membership", t.Monetization = "Monetization", t.GroupSettings = "GroupSettings", t.Roles = "Roles", t.GroupMembers = "GroupMembers", t),
         g = ((i = g || {}).CreateOrDeleteRoles = "CreateOrDeleteRoles", i.ConfigureRolesPermissions = "ConfigureRolesPermissions", i.ConfigureRolesSettings = "ConfigureRolesSettings", i.CreateExperience = "CreateExperience", i.UploadAsset = "UploadAsset", i.Invitation = "Invitation", i.ManageMembers = "ManageMembers", i.RoleAssignment = "RoleAssignment", i.SendOneTimePayout = "SendOneTimePayout", i.ConfigureRecurringPayouts = "ConfigureRecurringPayouts", i.GroupInformationUpdate = "GroupInformationUpdate", i.TransferOwnership = "TransferOwnership", i.SpendGroupFunds = "SpendGroupFunds", i.AdCreated = "AdCreated", i.AssetModerated = "AssetModerated", i),
         h = ((o = h || {}).Members = "Members", o.Invited = "Invited", o);
     let m = {
@@ -107,7 +107,7 @@
         GroupSettings: [],
         Roles: [],
         GroupMembers: []
-    }, "GroupActivityHistoryFilterDimensions", () => p, "GroupActivityHistoryFilterOptionsMapping", 0, {
+    }, "GroupActivityHistoryFilterDimensions", () => c, "GroupActivityHistoryFilterOptionsMapping", 0, {
         Creator: [],
         Content: ["UploadAsset", "CreateExperience", "AssetModerated"],
         Membership: [],
@@ -138,9 +138,9 @@
         SpendGroupFunds: "Label.FilterOptionSpendGroupFunds",
         AdCreated: "Label.FilterOptionAdCreated",
         AssetModerated: "Label.FilterOptionAssetModerated"
-    }, "GroupMembersMenuState", () => h, "GroupNameChangeCost", 0, 100, "GroupSocialLinkTypesPatternMap", 0, l, "GroupSocialLinkTypesToNameMap", 0, u, "InviteQueryKey", 0, "invitationGroupId", "MaximumRoles", 0, 99, "MembersPageSize", 0, 10, "MigratedGroupStatus", 0, "Migrated", "NewGroupPrice", 0, 100, "RoleColorTypeToHexMap", 0, d, "SocialLinksLimit", 0, 3, "SupportedRoleColorTypes", 0, c, "THIRTY_DAYS", 0, 2592e6, "getEndOfDay", 0, function(e) {
+    }, "GroupMembersMenuState", () => h, "GroupNameChangeCost", 0, 100, "GroupSocialLinkTypesPatternMap", 0, l, "GroupSocialLinkTypesToNameMap", 0, u, "InviteQueryKey", 0, "invitationGroupId", "NewGroupPrice", 0, 100, "RoleColorTypeToHexMap", 0, d, "SocialLinksLimit", 0, 3, "SupportedRoleColorTypes", 0, p, "THIRTY_DAYS", 0, 2592e6, "getEndOfDay", 0, function(e) {
         return new Date(e.getFullYear(), e.getMonth(), e.getDate(), 23, 59, 59, 999)
-    }, "noResultsIconPath", 0, "".concat("https://assets.create.roblox.com/eb3ad3460982c977b774de367f55aa527dc2c248/assets", "/group/no_results.svg"), "universeEvents", 0, y])
+    }, "universeEvents", 0, y])
 }, 270384, e => {
     "use strict";
     var t = e.i(690569),
@@ -156,13 +156,13 @@
         return (0, t.g)("MuiDialogContentText", e)
     }(0, n.g)("MuiDialogContentText", ["root"]);
     let d = ["children", "className"],
-        c = (0, a.s)(s.T, {
+        p = (0, a.s)(s.T, {
             shouldForwardProp: e => (0, a.r)(e) || "classes" === e,
             name: "MuiDialogContentText",
             slot: "Root",
             overridesResolver: (e, t) => t.root
         })({}),
-        p = o.forwardRef(function(e, o) {
+        c = o.forwardRef(function(e, o) {
             let n = (0, l.u)({
                     props: e,
                     name: "MuiDialogContentText"
@@ -170,7 +170,7 @@
                 {
                     className: s
                 } = n,
-                p = (0, t._)(n, d),
+                c = (0, t._)(n, d),
                 g = (e => {
                     let {
                         classes: t
@@ -178,19 +178,19 @@
                         root: ["root"]
                     }, u, t);
                     return (0, i._)({}, t, o)
-                })(p);
-            return (0, r.jsx)(c, (0, i._)({
+                })(c);
+            return (0, r.jsx)(p, (0, i._)({
                 component: "p",
                 variant: "body1",
                 color: "text.secondary",
                 ref: o,
-                ownerState: p,
+                ownerState: c,
                 className: (0, a.c)(g.root, s)
             }, n, {
                 classes: g
             }))
         });
-    e.s(["D", 0, p])
+    e.s(["D", 0, c])
 }, 517604, e => {
     "use strict";
     var t = e.i(194250),
@@ -221,9 +221,9 @@
             }),
             u = l[0],
             d = l[1],
-            c = (0, i.useState)(!1),
-            p = c[0],
-            g = c[1],
+            p = (0, i.useState)(!1),
+            c = p[0],
+            g = p[1],
             h = (0, i.useCallback)(function() {
                 g(!0)
             }, [g]),
@@ -249,7 +249,7 @@
         }, n), i.default.createElement(o.default, (0, t._)({}, u.props, r, {
             "aria-labelledby": u.props.id,
             "aria-describedby": "dialog-content-text-describe-id",
-            open: p,
+            open: c,
             onClose: m,
             ref: s
         }), u.children))
@@ -280,8 +280,8 @@
         var l = e.title,
             u = e.color,
             d = e.loading,
-            c = void 0 !== d && d,
-            p = e.content,
+            p = void 0 !== d && d,
+            c = e.content,
             g = e.confirmText,
             h = e.cancelText,
             m = e.onCancel,
@@ -290,17 +290,17 @@
             id: s
         }, l), t.default.createElement(o.default, null, t.default.createElement(r.D, {
             id: "dialog-content-text-describe-id"
-        }, p)), t.default.createElement(a.default, null, t.default.createElement(n.default, {
+        }, c)), t.default.createElement(a.default, null, t.default.createElement(n.default, {
             size: "large",
             variant: "outlined",
             "aria-label": h,
             color: "secondary",
             onClick: m,
-            disabled: c
+            disabled: p
         }, h), t.default.createElement(n.default, {
             size: "large",
             variant: "contained",
-            loading: c,
+            loading: p,
             "aria-label": g,
             color: void 0 === u ? "primaryBrand" : u,
             onClick: y
@@ -308,7 +308,7 @@
     }], 458442)
 }, 387125, e => {
     "use strict";
-    var t, i, o, a, n, r, s, l, u, d, c, p, g = e.i(711300),
+    var t, i, o, a, n, r, s, l, u, d, p, c, g = e.i(711300),
         h = e.i(634203),
         m = e.i(35877),
         y = e.i(747304);
@@ -529,17 +529,17 @@
     var G = e.i(549772),
         D = e.i(841246),
         w = e.i(117437),
-        _ = (n = new WeakMap, r = new WeakMap, s = new WeakMap, l = new WeakMap, u = new WeakMap, d = new WeakMap, c = new WeakMap, p = new WeakMap, class {
+        _ = (n = new WeakMap, r = new WeakMap, s = new WeakMap, l = new WeakMap, u = new WeakMap, d = new WeakMap, p = new WeakMap, c = new WeakMap, class {
             mount() {
-                P(this, d).value++, 1 === (0, g._)(this, d) && ((0, m._)(this, c, G.focusManager.subscribe(async e => {
+                P(this, d).value++, 1 === (0, g._)(this, d) && ((0, m._)(this, p, G.focusManager.subscribe(async e => {
                     e && (await this.resumePausedMutations(), (0, g._)(this, n).onFocus())
-                })), (0, m._)(this, p, D.onlineManager.subscribe(async e => {
+                })), (0, m._)(this, c, D.onlineManager.subscribe(async e => {
                     e && (await this.resumePausedMutations(), (0, g._)(this, n).onOnline())
                 })))
             }
             unmount() {
                 var e, t;
-                P(this, d).value--, 0 === (0, g._)(this, d) && (null == (e = (0, g._)(this, c)) || e.call(this), (0, m._)(this, c, void 0), null == (t = (0, g._)(this, p)) || t.call(this), (0, m._)(this, p, void 0))
+                P(this, d).value--, 0 === (0, g._)(this, d) && (null == (e = (0, g._)(this, p)) || e.call(this), (0, m._)(this, p, void 0), null == (t = (0, g._)(this, c)) || t.call(this), (0, m._)(this, c, void 0))
             }
             isFetching(e) {
                 return (0, g._)(this, n).findAll({
@@ -750,10 +750,10 @@
                 }), (0, h._)(this, d, {
                     writable: !0,
                     value: void 0
-                }), (0, h._)(this, c, {
+                }), (0, h._)(this, p, {
                     writable: !0,
                     value: void 0
-                }), (0, h._)(this, p, {
+                }), (0, h._)(this, c, {
                     writable: !0,
                     value: void 0
                 }), (0, m._)(this, n, e.queryCache || new b), (0, m._)(this, r, e.mutationCache || new M), (0, m._)(this, s, e.defaultOptions || {}), (0, m._)(this, l, new Map), (0, m._)(this, u, new Map), (0, m._)(this, d, 0)
@@ -762,5 +762,5 @@
     e.s(["QueryClient", 0, _], 387125)
 }]);
 
-//# debugId=4c77907e-ddb6-53c6-c64e-0395def5fc6e
-//# sourceMappingURL=1xwbszm_7agze.js.map
+//# debugId=496e19c6-ebbd-d7ee-f06c-154ba8b3f797
+//# sourceMappingURL=0ye6w845vsra3.js.map

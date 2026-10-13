@@ -245,6 +245,9 @@ Roblox.LangDynamic["Feature.Payment"] = {
     "Label.WalletBalance": "Wallet balance",
     "Label.BalanceWithAmount": "Balance {amount}",
     "Label.InsufficientBalance": "Not enough balance",
-    "Label.AdditionalBalanceNeeded": "Additional balance needed"
+    "Label.AdditionalBalanceNeeded": "Additional balance needed",
+    "Action.ChangeBillingAddress": "Change billing address",
+    "Response.AddressValidationFailed": "Check your billing address and try again.",
+    "Response.AddressUpdateFailed": "We couldn't update your billing address. Please try again."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Payment");
