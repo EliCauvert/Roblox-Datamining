@@ -22,6 +22,9 @@ return {
 		ElectricLime = function()
 			return require(script.ElectricLime)
 		end,
+		Halloween2026 = function()
+			return require(script.Halloween2026)
+		end,
 		HyperPlum = function()
 			return require(script.HyperPlum)
 		end,
@@ -30,9 +33,6 @@ return {
 		end,
 		Kids = function()
 			return require(script.Kids)
-		end,
-		KidsClassic = function()
-			return require(script.KidsClassic)
 		end,
 		KineticEnergy = function()
 			return require(script.KineticEnergy)

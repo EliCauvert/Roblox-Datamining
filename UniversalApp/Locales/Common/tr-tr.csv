@@ -444,6 +444,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Devam edebilmek için
 Authentication.SignUp.Action.ApplyOnNextRespawn,Bir dahaki sıfırlamada uygula
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.ContinueSetup,Kuruluma devam et
 Authentication.SignUp.Action.Create,Oluştur
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Hesap Oluştur
@@ -499,7 +500,7 @@ Authentication.SignUp.Description.VerificationPage,"""Kaydol"" düğmesine tıkl
 Authentication.SignUp.Description.VerificationPage.CreateAccount,"""Hesap oluştur"" seçeneğine tıkladığında tahkim maddesi de dâhil olmak üzere Kullanım Koşullarını kabul etmiş ve Gizlilik Politikasını onaylamış sayılırsın."
 Authentication.SignUp.Description.VerificationPageMultiStep,Devam Et'e tıklayarak tahkim maddesi de dâhil olmak üzere Kullanım Koşullarını kabul etmiş ve Gizlilik Politikasını onaylamış sayılırsın.
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,"Kodu girip ""Devam Et"" düğmesine tıklayarak çocuğunuzun Roblox'a erişmesine izin vermiş olursunuz."
-Authentication.SignUp.Header.CloseWithoutFinishing,Tamamlamadan kapatılsın mı?
+Authentication.SignUp.Header.CancelAccountCreation,Hesap oluşturma işlemi iptal edilsin mi?
 Authentication.SignUp.Header.CreatePassword,"Merhaba {username}, bir şifre oluştur"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Merhaba {username}, bir şifre veya geçiş anahtarı oluştur"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,Hesabını oluşturduk. Nasıl giriş yapacağını seç.
@@ -2248,6 +2249,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Metni kopyala
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,Yeni oyun oluştur
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Bir daha sorma
@@ -2301,10 +2303,16 @@ Feature.Build.Analytics.Description.PayerConversion,"Ödeme yapan kişiye dönü
 Feature.Build.Analytics.Description.PlaythroughRate,"Oynama oranı, tam bir oyun oturumunun tamamlandığı ziyaretlerin yüzdesidir. Daha yüksek oranlar, oyuncuların deneyimini başlaması kolay ve bitirmeye değer bulduğunu gösterir."
 Feature.Build.Analytics.Description.TotalPlaytime,"Toplam oynama süresi, tüm oyuncuların belirli bir süre boyunca deneyiminde geçirdiği sürenin toplamıdır. Oynama süresinin artması genellikle daha ilgi çekici oturumlara işaret eder."
 Feature.Build.Analytics.DurationHours,{number} sa.
+Feature.Build.Analytics.Goal.Action.CreateAd,Bir reklam oluştur
+Feature.Build.Analytics.Goal.Action.SellItems,Öğeleri sat
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,Arkadaşlarla paylaş
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,İyi bir ilk izlenim bırak
 Feature.Build.Analytics.Goal.GetMorePlayers,Daha fazla oyuncu kazan
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Oyuncuları tekrar tekrar oynamaya teşvik et
+Feature.Build.Analytics.Goal.Locked.EarnRobux,Bu istatistikleri görmek için oyununda Robux kazan.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,Bu istatistikleri görmek için ilk oyuncunu kazan.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Geri dönen oyuncun olduğunda bu istatistikleri görebilirsin.
 Feature.Build.Analytics.KeyStats,Önemli istatistikler
 Feature.Build.Analytics.LastMonth,Geçen ay
 Feature.Build.Analytics.LastWeek,
@@ -2342,6 +2350,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,Yeni kullanıcı oturum süresi
 Feature.Build.Analytics.Title.PayerConversion,Ödeme yapan kişiye dönüşüm
 Feature.Build.Analytics.Title.PlaythroughRate,Oynama oranı
 Feature.Build.Analytics.Title.RobuxSpent,Harcanan Robux
+Feature.Build.Analytics.Title.TopAcquisitionSource,En popüler kaynak
+Feature.Build.Analytics.Title.TopDropOffStep,En büyük düşüş
 Feature.Build.Analytics.Title.TotalPlaytime,Toplam oynama süresi
 Feature.Build.Analytics.Visits,Ziyaretler
 Feature.Build.Content.NewGame,Yeni oyun
@@ -2385,7 +2395,6 @@ Feature.Build.Description.PlaytestLatest,En son versiyonunda oynanış testi yap
 Feature.Build.Description.PlaytestLocked,İlk oyununu oluşturduktan sonra oynanış testine başlayabilirsin.
 Feature.Build.Description.PlaytesterAccess,Arkadaşlarını erken test kullanıcısı olmaya davet et veya daha fazla insanın oynamasına izin vermek için oyununun Kitle ayarını değiştir.
 Feature.Build.Description.PricingRules,Fiyatlandırma kurallarını belirle
-Feature.Build.Description.PrivateShare,Oyununu paylaşmak için Kitle ayarını değiştir.
 Feature.Build.Description.PromoteGameFree,Tek dokunuşla oyununu daha fazla oyuncunun karşısına çıkar.
 Feature.Build.Description.PromoteGamePaid,Oyununu milyonlarca oyuncunun karşısına çıkarmak için bir reklam oluştur.
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays} günlük bir reklam kampanyasıyla kitleni genişlet ve oyununun keşfedilmesini sağla.
@@ -2429,6 +2438,7 @@ Feature.Build.Label.AdditionalUsage,Ek İnşa Et kullanım hakkı
 Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT} kullanıldı
 Feature.Build.Label.AdsManager,Reklam Yöneticisi
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,Tüm oyunlar
 Feature.Build.Label.AmountAvailable,{AMOUNT} mevcut
 Feature.Build.Label.Autosaved,Otomatik kaydedildi
 Feature.Build.Label.Available,mevcut
@@ -2453,12 +2463,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Kolay performans raporu
 Feature.Build.Label.Error,Sorun
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,Ücretsiz
 Feature.Build.Label.FreeBuildUsage,Ücretsiz İnşa Et kullanım hakkı
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Yalnızca arkadaşlar
 Feature.Build.Label.GamePlays,Oyun oynama sayısı
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
+Feature.Build.Label.GroupGames,Grup oyunları
+Feature.Build.Label.Groups,Gruplar
 Feature.Build.Label.Hi,Merhaba
 Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
 Feature.Build.Label.Images2D,2 Boyutlu Görseller
@@ -2472,6 +2485,7 @@ Feature.Build.Label.ManagedPricing,Yönetilen fiyatlandırma
 Feature.Build.Label.ManagedPricingMixed,Mevcut ürünler arasında karışık
 Feature.Build.Label.MaximizeForGamePlays,Oyun oynama sayısını en üst düzeye çıkar
 Feature.Build.Label.Models3D,3 Boyutlu Modeller
+Feature.Build.Label.MyGames,Oyunlarım
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Sınır yok
 Feature.Build.Label.NotStarted,Başlamadı
@@ -2619,6 +2633,7 @@ Feature.Build.Message.BuildInternalError,İnşa Et bir sorunla karşılaştı. T
 Feature.Build.Message.BuildResponseFailed,İnşa Et yanıt veremedi. Tekrar dene.
 Feature.Build.Message.BuildStillWorking,"Üzerinde çalışıyor. Beklerken uygulamadan çıkabilir, Roblox oynayabilir veya başka bir projeye başlayabilirsin."
 Feature.Build.Message.BuildStopped,İnşa Et'i durdurdun.
+Feature.Build.Message.BuildTakingLonger,Bu işlem beklenenden daha uzun sürüyor. Beklemeye devam edebilir veya başka bir şeye başlayabilirsin.
 Feature.Build.Message.BuildTemporarilyDown,İnşa Et geçici olarak kullanım dışı. Bir dakika içinde tekrar dene.
 Feature.Build.Message.CompletedTasks,{COUNT} tamamlanan görev
 Feature.Build.Message.ConversationGone,Bu sohbet artık mevcut değil. Yeni bir sohbet başlat.
@@ -2719,7 +2734,6 @@ Feature.Build.Title.ExperienceAudience,Deneyim kitlesi
 Feature.Build.Title.FreeUsageReached,Ücretsiz İnşa Et kullanım sınırına ulaşıldı
 Feature.Build.Title.FriendsOnlyPlay,Yalnızca arkadaşlar oynayabilir
 Feature.Build.Title.GameCreationDone,Oyun oluşturma tamamlandı
-Feature.Build.Title.GamePrivate,Bu oyun özeldir
 Feature.Build.Title.GenericError,Bir şeyler ters gitti
 Feature.Build.Title.GetUsers,Kullanıcıları al
 Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma açılsın mı?
@@ -3998,7 +4012,6 @@ Feature.Home.Heading.JoinYourFriends,Arkadaşlarına Katıl
 Feature.Home.HeadingFriends,Arkadaşlar ({friendCount})
 Feature.Home.Label.HappeningNow,Şu anda gerçekleşiyor
 Feature.Home.PeopleList.ChatWith,{username} ile sohbet et
-Feature.Home.Robux,
 Feature.InAppBugReporting.Message.AppVersion,Sürüm: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,Ayrıntı boş olamaz
 Feature.InAppBugReporting.Message.CommentLabel,Destek Talebi Açıklaması
@@ -4137,7 +4150,7 @@ Feature.Moments.Description.HowToCaptureStep2,Yakalama denetimlerini etkinleşti
 Feature.Moments.Description.HowToCaptureStep3,Oynanışın fotoğraflarını ve videolarını yakala
 Feature.Moments.Description.LeaveMomentsCreation,Tüm değişikliklerini kaybedeceksin ancak yakalanan bu ekran görüntüsünü <b>Yakalananlar</b> galerinde bulabilirsin.
 Feature.Moments.Description.NoMusicResults,Müzik bulunamadı
-Feature.Moments.Description.NonInfiniteScrollEndBody,Anlar'da bir durma noktasına ulaştın. İzlemeye devam etmek için aşağıya dokun.
+Feature.Moments.Description.NonInfiniteScrollEndBody,Sayfanı duraklattık. İzlemeye devam etmek isteyip istemediğine karar verebilirsin.
 Feature.Moments.Description.NothingHereYet,Burada henüz bir şey yok...
 Feature.Moments.Description.PublishMoment,Anını anlat
 Feature.Moments.Description.TooManyUploads,Bugün çok fazla video yükledin. Yarın tekrar dene.
@@ -4202,7 +4215,7 @@ Feature.Moments.Label.MomentUnavailableDefault,Bu An kullanılamıyor.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Henüz yorum yok
-Feature.Moments.Label.NonInfiniteScrollEndTitle,Şimdilik yeni bir şey yok
+Feature.Moments.Label.NonInfiniteScrollEndTitle,İzlenecek daha fazla An var
 Feature.Moments.Label.Photos,Fotoğraflar
 Feature.Moments.Label.PostDeleted,An silindi
 Feature.Moments.Label.PostRemovedBody,"Paylaştığın An, Topluluk Standartlarımıza aykırı."
@@ -5075,7 +5088,7 @@ Feature.Schools.Heading.RemoveYourSchool,Okulunu kaldır
 Feature.Schools.Heading.SchoolIsLive,Okulun artık açık
 Feature.Schools.Heading.SchoolUnavailable,Okulun kullanılamıyor
 Feature.Schools.Heading.SelectGraduationYear,Mezuniyet yılını seç
-Feature.Schools.Heading.ShareWithFriends,Arkadaşlarla paylaş
+Feature.Schools.Heading.ShareWithFriends,
 Feature.Schools.Heading.ThanksForInterest,İlgin için teşekkürler
 Feature.Schools.Heading.YouJoinedSchool,{school} adlı okula katıldın!
 Feature.Schools.Heading.YourFounderReward,Kurucu ödülün

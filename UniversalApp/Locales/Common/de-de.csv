@@ -499,7 +499,6 @@ Authentication.SignUp.Description.VerificationPage,Durch das Anklicken von „Re
 Authentication.SignUp.Description.VerificationPage.CreateAccount,"Durch das Anklicken von ""Konto Erstellen"" stimmst du unseren Nutzungsbedingungen einschließlich der Schiedsklausel zu und erkennst die Datenschutzrichtlinie an."
 Authentication.SignUp.Description.VerificationPageMultiStep,Durch das Anklicken von „Weiter“ stimmst du unseren Nutzungsbedingungen einschließlich der Schiedsklausel zu und erkennst die Datenschutzrichtlinie an.
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,"Durch die Eingabe des Codes und das Anklicken auf „Weiter“ erlaubst du deinem Kind, auf Roblox zuzugreifen."
-Authentication.SignUp.Header.CloseWithoutFinishing,Ohne Abschluss schließen?
 Authentication.SignUp.Header.CreatePassword,"Hallo {username}, erstelle ein Passwort"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Hallo {username}, erstelle ein Passwort oder Passkey"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,"Wir haben dein Konto erstellt. Wähle aus, wie du dich anmelden möchtest."
@@ -2349,6 +2348,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,Sitzungszeit neuer Benutzer
 Feature.Build.Analytics.Title.PayerConversion,Umwandlung in zahlende Benutzer
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,Ausgegebene Robux
+Feature.Build.Analytics.Title.TopAcquisitionSource,Top-Quelle
+Feature.Build.Analytics.Title.TopDropOffStep,Größter Verlust
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,Besuche
 Feature.Build.Content.NewGame,Neues Spiel
@@ -2392,7 +2393,6 @@ Feature.Build.Description.PlaytestLatest,"Du testest gerade die neueste Version.
 Feature.Build.Description.PlaytestLocked,"Du kannst mit dem Spieltest beginnen, nachdem du dein erstes Spiel erstellt hast."
 Feature.Build.Description.PlaytesterAccess,"Lade Freunde als Vorabtester ein oder ändere die Zielgruppeneinstellung deines Spiels, damit mehr Personen spielen können."
 Feature.Build.Description.PricingRules,Preisgestaltungsregeln festlegen
-Feature.Build.Description.PrivateShare,"Ändere die Zielgruppeneinstellung deines Spiels, um es zu teilen."
 Feature.Build.Description.PromoteGameFree,Präsentiere dein Spiel mit nur einem Fingertipp mehr Spielern.
 Feature.Build.Description.PromoteGamePaid,"Erstelle eine Werbeanzeige, um dein Spiel Millionen von Spielern zu präsentieren."
 Feature.Build.Description.PromoteGameWithAdCampaign,"Vergrößere deine Zielgruppe mit einer {durationDays}-tägigen Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird."
@@ -2518,6 +2518,15 @@ Feature.Build.Label.Thinking,Denkt nach
 Feature.Build.Label.Title,Titel
 Feature.Build.Label.TitleDescription,Titel und Beschreibung
 Feature.Build.Label.Tool,Tool
+Feature.Build.Label.ToolAdEligibilityDone,Berechtigung für Werbung wurde überprüft
+Feature.Build.Label.ToolAdEligibilityFailed,Berechtigung für Werbung konnte nicht überprüft werden
+Feature.Build.Label.ToolAdEligibilityRunning,Berechtigung für Werbung wird überprüft
+Feature.Build.Label.ToolAnalyticsDone,Statistiken wurden analysiert
+Feature.Build.Label.ToolAnalyticsFailed,Statistiken konnten nicht analysiert werden
+Feature.Build.Label.ToolAnalyticsRunning,Statistiken werden analysiert
+Feature.Build.Label.ToolApiDocsDone,API-Dokumente wurden gesucht
+Feature.Build.Label.ToolApiDocsFailed,Suche nach API-Dokumenten nicht möglich
+Feature.Build.Label.ToolApiDocsRunning,API-Dokumente werden gesucht
 Feature.Build.Label.ToolAssetDone,Objekt wurde eingefügt
 Feature.Build.Label.ToolAssetFailed,Objekt konnte nicht eingefügt werden
 Feature.Build.Label.ToolAssetRunning,Objekt wird eingefügt
@@ -2527,6 +2536,9 @@ Feature.Build.Label.ToolAssetSearchRunning,Objektbibliothek wird durchsucht
 Feature.Build.Label.ToolClientDMDone,Client-DataModel wurde durchsucht
 Feature.Build.Label.ToolClientDMFailed,Client-DataModel konnte nicht durchsucht werden
 Feature.Build.Label.ToolClientDMRunning,Client-DataModel wird durchsucht
+Feature.Build.Label.ToolCompileDone,Code wurde kompiliert
+Feature.Build.Label.ToolCompileFailed,Code konnte nicht kompiliert werden
+Feature.Build.Label.ToolCompileRunning,Code wird kompiliert
 Feature.Build.Label.ToolGameInfoDone,Spielinformationen wurden aktualisiert
 Feature.Build.Label.ToolGameInfoFailed,Spielinformationen konnten nicht aktualisiert werden
 Feature.Build.Label.ToolGameInfoRunning,Spielinformationen werden aktualisiert
@@ -2563,6 +2575,9 @@ Feature.Build.Label.ToolQuestionRunning,Frage wird gestellt
 Feature.Build.Label.ToolReqUpdateDone,Anforderungen wurden aktualisiert
 Feature.Build.Label.ToolReqUpdateFailed,Anforderungen konnten nicht aktualisiert werden
 Feature.Build.Label.ToolReqUpdateRunning,Anforderungen werden aktualisiert
+Feature.Build.Label.ToolRestoreVersionDone,Version wurde wiederhergestellt
+Feature.Build.Label.ToolRestoreVersionFailed,Version konnte nicht wiederhergestellt werden
+Feature.Build.Label.ToolRestoreVersionRunning,Version wird wiederhergestellt
 Feature.Build.Label.ToolScriptDone,Skript wurde ausgeführt
 Feature.Build.Label.ToolScriptFailed,Skript konnte nicht ausgeführt werden
 Feature.Build.Label.ToolScriptRunning,Skript wird ausgeführt
@@ -2578,6 +2593,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Deine Aufgaben werden geplant
 Feature.Build.Label.ToolThumbnailDone,Vorschaubild des Spiels wurde festgelegt
 Feature.Build.Label.ToolThumbnailFailed,Vorschaubild des Spiels konnte nicht festgelegt werden
 Feature.Build.Label.ToolThumbnailRunning,Vorschaubild des Spiels wird festgelegt
+Feature.Build.Label.ToolVerifyDone,Fehlerprüfung abgeschlossen
+Feature.Build.Label.ToolVerifyFailed,Fehlerprüfung nicht möglich
+Feature.Build.Label.ToolVerifyRunning,Fehlerprüfung
 Feature.Build.Label.UniverseNumber,Universum {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unbekannt
 Feature.Build.Label.UnlimitedUsed,{USED} verwendet • Kein Limit
@@ -2708,7 +2726,6 @@ Feature.Build.Title.ExperienceAudience,Zielgruppe der Experience
 Feature.Build.Title.FreeUsageReached,Kostenloses Build-Kontingent erreicht
 Feature.Build.Title.FriendsOnlyPlay,Nur Freunde können spielen
 Feature.Build.Title.GameCreationDone,Spielerstellung abgeschlossen
-Feature.Build.Title.GamePrivate,Dieses Spiel ist privat
 Feature.Build.Title.GenericError,Etwas ist schiefgelaufen
 Feature.Build.Title.GetUsers,Benutzer gewinnen
 Feature.Build.Title.ManagedPricingAcknowledgement,Verwaltete Preisgestaltung aktivieren?
@@ -3987,7 +4004,6 @@ Feature.Home.Heading.JoinYourFriends,Schließ dich Freunden an
 Feature.Home.HeadingFriends,Freunde ({friendCount})
 Feature.Home.Label.HappeningNow,Läuft jetzt
 Feature.Home.PeopleList.ChatWith,Chatte mit {username}
-Feature.Home.Robux,
 Feature.InAppBugReporting.Message.AppVersion,Build: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,Angaben dürfen nicht leer sein
 Feature.InAppBugReporting.Message.CommentLabel,Ticketbeschreibung
@@ -4184,6 +4200,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,Moment konnte nicht gepostet werde
 Feature.Moments.Label.MomentNoLongerAvailable,Dieser Moment ist nicht mehr verfügbar.
 Feature.Moments.Label.MomentPublishedBody,Dein Moment wurde erfolgreich veröffentlicht.
 Feature.Moments.Label.MomentPublishedTitle,Moment veröffentlicht
+Feature.Moments.Label.MomentRemovedBody,Er hat gegen unsere Sicherheitsregeln verstoßen und ist daher nicht mehr verfügbar.
+Feature.Moments.Label.MomentRemovedTitle,Wir haben diesen Moment entfernt
 Feature.Moments.Label.MomentUnavailable,Moment nicht verfügbar
 Feature.Moments.Label.MomentUnavailableDefault,Dieser Moment ist nicht verfügbar.
 Feature.Moments.Label.MomentsExperienceName,
@@ -4950,7 +4968,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10 % Rabatt in den e
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10 % Rabatt in den ersten {trialUnlockDays} Tagen, dann 20 % Rabatt auf Artikel und Avatare"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Mehr Spaß für weniger Robux. Abonniere Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Mit Plus frühzeitig mitmachen
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,Dieser Empfehlungslink ist nicht mehr gültig.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,"{username} hat dich eingeladen, Plus beizutreten. Wenn du Plus kaufst, erhaltet ihr beide {amount} Robux."
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"Indem du auf \u{201C}{ctaText}\u{201D} klickst, stimmst du den <a href=""{referralTermsUrl}"">Bedingungen des Empfehlungsprogramms</a> und den <a href=""{termsUrl}"">Abonnementbedingungen von Roblox</a> zu. Dir wird jeden Monat automatisch eine Gebühr berechnet, bis du das Abo kündigst."
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Das Angebot gilt nur für neue Plus-Abonnenten.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Wenn jemand über deinen Link Plus kauft.
 Feature.RobloxSubscription.Description.ReferralShare,"Lade jemanden zu Plus ein. Wenn die Person Plus kauft, erhaltet ihr beide {amount} Robux."

@@ -48,7 +48,9 @@ local function variantsFactory(p1)
 				statusIndicator = { size = statusIndicatorSizeModule.Medium }
 			},
 			[avatarSizeModule.Pictogram] = {
-				statusIndicator = { size = statusIndicatorSizeModule.Pictogram }
+				statusIndicator = {
+					size = if flagsModule.FoundationStatusIndicatorDesignUpdate then statusIndicatorSizeModule.Large else statusIndicatorSizeModule.Pictogram
+				}
 			}
 		},
 		presence = {

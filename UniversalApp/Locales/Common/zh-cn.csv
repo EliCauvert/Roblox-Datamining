@@ -482,7 +482,6 @@ Authentication.SignUp.Description.VerificationPage,单击注册按钮后，即�
 Authentication.SignUp.Description.VerificationPage.CreateAccount,点按“创建帐户”，即表示你已同意我们的使用条款（包括其中的仲裁条款），且你已了解隐私政策。
 Authentication.SignUp.Description.VerificationPageMultiStep,点按“继续”，即表示你已同意我们的使用条款（包括其中的仲裁条款），且你已了解隐私政策。
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,输入验证码并点击继续，则表示您同意您的孩子访问 Roblox。
-Authentication.SignUp.Header.CloseWithoutFinishing,是否在未完成的情况下关闭？
 Authentication.SignUp.Header.CreatePassword,嗨，{username}：请创建一个密码
 Authentication.SignUp.Header.CreatePasswordOrPasskey,你好 {username}，请创建一个密码或通行密钥
 Authentication.SignUp.Header.CreatedAccountChooseSignin,我们已为你创建帐户。请选择登录方式。
@@ -2336,6 +2335,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,新用户会话时长
 Feature.Build.Analytics.Title.PayerConversion,付费用户转化率
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,已扣取 Robux
+Feature.Build.Analytics.Title.TopAcquisitionSource,热门来源
+Feature.Build.Analytics.Title.TopDropOffStep,最大流失
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,访问次数
 Feature.Build.Content.NewGame,新游戏
@@ -2379,7 +2380,6 @@ Feature.Build.Description.PlaytestLatest,你正在对最新版本进行游戏测
 Feature.Build.Description.PlaytestLocked,创建你的第一款游戏后，你就可以开始游戏测试。
 Feature.Build.Description.PlaytesterAccess,邀请好友成为初期测试玩家，或更改游戏的受众设置，允许更多人游玩。
 Feature.Build.Description.PricingRules,设置定价规则
-Feature.Build.Description.PrivateShare,更改游戏的受众设置以分享该游戏。
 Feature.Build.Description.PromoteGameFree,只需轻点一下，即可让你的游戏面向更多玩家展示。
 Feature.Build.Description.PromoteGamePaid,创建广告，让你的游戏面向数百万玩家展示。
 Feature.Build.Description.PromoteGameWithAdCampaign,通过为期 {durationDays} 天的广告活动扩大受众群体，让你的游戏被他人发现。
@@ -2713,7 +2713,6 @@ Feature.Build.Title.ExperienceAudience,体验受众
 Feature.Build.Title.FreeUsageReached,已达到免费 Build 使用额度上限
 Feature.Build.Title.FriendsOnlyPlay,只有好友可以游玩
 Feature.Build.Title.GameCreationDone,游戏创建已完成
-Feature.Build.Title.GamePrivate,此游戏为私密游戏
 Feature.Build.Title.GenericError,出错了
 Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
@@ -3989,7 +3988,6 @@ Feature.Home.Heading.JoinYourFriends,加入你的朋友
 Feature.Home.HeadingFriends,好友（{friendCount} 名）
 Feature.Home.Label.HappeningNow,正在进行
 Feature.Home.PeopleList.ChatWith,与“{username}”聊天
-Feature.Home.Robux,
 Feature.InAppBugReporting.Message.AppVersion,版本：{value}
 Feature.InAppBugReporting.Message.CommentEmptyError,细节不能为空
 Feature.InAppBugReporting.Message.CommentLabel,票单说明

@@ -7,7 +7,7 @@
 					Color3 = Color3.fromRGB(208, 217, 251)
 				},
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(235, 121, 115) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(240, 68, 51) }
 			},
 			ActionEmphasis = {
 				Background = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
@@ -55,7 +55,7 @@
 			Common = {
 				Backdrop = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
 				HeavyDivider = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(0, 19, 87) },
+				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(148, 15, 19) },
 				Scrim = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
 				Shadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
 				Shimmer = {
@@ -66,7 +66,7 @@
 			Content = {
 				Default = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
 				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-				Link = { Transparency = 0, Color3 = Color3.fromRGB(112, 160, 255) },
+				Link = { Transparency = 0, Color3 = Color3.fromRGB(82, 139, 255) },
 				Muted = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) }
 			},
 			Extended = {
@@ -314,10 +314,10 @@
 			},
 			None = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 			OverMedia = {
-				OverMedia_0 = { Transparency = 0.08, Color3 = Color3.fromRGB(0, 19, 87) },
-				OverMedia_100 = { Transparency = 0.08, Color3 = Color3.fromRGB(0, 23, 107) },
-				OverMedia_200 = { Transparency = 0.08, Color3 = Color3.fromRGB(1, 27, 121) },
-				OverMedia_300 = { Transparency = 0.08, Color3 = Color3.fromRGB(2, 32, 141) }
+				OverMedia_0 = { Transparency = 0.08, Color3 = Color3.fromRGB(18, 18, 21) },
+				OverMedia_100 = { Transparency = 0.08, Color3 = Color3.fromRGB(25, 26, 31) },
+				OverMedia_200 = { Transparency = 0.08, Color3 = Color3.fromRGB(32, 34, 39) },
+				OverMedia_300 = { Transparency = 0.08, Color3 = Color3.fromRGB(39, 41, 48) }
 			},
 			Selection = {
 				End = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
@@ -367,10 +367,10 @@
 				}
 			},
 			Surface = {
-				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(0, 19, 87) },
-				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(0, 23, 107) },
-				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(1, 27, 121) },
-				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(2, 32, 141) }
+				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
+				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) }
 			},
 			System = {
 				Alert = { Transparency = 0, Color3 = Color3.fromRGB(223, 40, 31) },
@@ -383,7 +383,7 @@
 		},
 		Component = {
 			BaseMenu = {
-				BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(2, 32, 141) },
+				BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
 				BorderRadius = 8 * p1
 			},
 			ControllerBar = {
@@ -414,16 +414,16 @@
 				Label = {
 					Typography = {
 						LetterSpacing = 0,
-						LineHeight = 1.177,
-						Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-						FontSize = 17 * p1
+						LineHeight = 1.111,
+						Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+						FontSize = 18 * p1
 					}
 				}
 			},
 			Facepile = {
 				Badge = {
 					BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(2, 32, 141) },
+					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
 					BorderRadius = 9999 * p1,
 					BorderWidth = 2 * p1,
 					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
@@ -432,15 +432,15 @@
 					Spacing = 4 * p1,
 					Typography = {
 						LetterSpacing = 0,
-						LineHeight = 1.167,
-						Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-						FontSize = 12 * p1
+						LineHeight = 1.077,
+						Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+						FontSize = 13 * p1
 					}
 				},
 				Container = { Gap = 4 * p1 },
 				Face = {
 					BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
-					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(2, 32, 141) },
+					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
 					BorderRadius = 9999 * p1,
 					BorderWidth = 2 * p1,
 					Height = 16 * p1,
@@ -452,7 +452,7 @@
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.2,
-						Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+						Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
 						FontSize = 15 * p1
 					}
 				}
@@ -464,13 +464,13 @@
 					Padding = { Top = 4 * p1 },
 					Typography = {
 						LetterSpacing = 0,
-						LineHeight = 1.167,
-						Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-						FontSize = 12 * p1
+						LineHeight = 1.077,
+						Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+						FontSize = 13 * p1
 					}
 				},
 				Error = {
-					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(235, 121, 115) }
+					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(240, 68, 51) }
 				}
 			},
 			InputLabel = {
@@ -481,7 +481,7 @@
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.2,
-						Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+						Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
 						FontSize = 15 * p1
 					}
 				},
@@ -496,7 +496,7 @@
 					CheckFrame = { Size = 32 * p1 },
 					Container = {
 						BorderWidth = 0,
-						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(2, 32, 141) },
+						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
 						BorderColor = {
 							Transparency = 0.84,
 							Color3 = Color3.fromRGB(208, 217, 251)
@@ -520,9 +520,9 @@
 					Text = {
 						Typography = {
 							LetterSpacing = 0,
-							LineHeight = 1.158,
-							Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-							FontSize = 19 * p1
+							LineHeight = 1.1,
+							Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+							FontSize = 20 * p1
 						}
 					},
 					TextFrame = {
@@ -577,14 +577,14 @@
 						Gap = 2 * p1,
 						Typography = {
 							LetterSpacing = 0,
-							LineHeight = 1.177,
-							Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-							FontSize = 17 * p1
+							LineHeight = 1.111,
+							Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+							FontSize = 18 * p1
 						}
 					},
 					Icon = { Size = 16 * p1 },
 					Image = {
-						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(2, 32, 141) },
+						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
 						BorderColor = {
 							Transparency = 0.84,
 							Color3 = Color3.fromRGB(208, 217, 251)
@@ -598,7 +598,7 @@
 					},
 					Status = {
 						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) },
-						BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(0, 19, 87) },
+						BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
 						BorderWidth = 2.5 * p1,
 						Size = 16 * p1
 					}
@@ -636,7 +636,7 @@
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.2,
-						Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+						Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
 						FontSize = 15 * p1
 					}
 				}
@@ -649,9 +649,9 @@
 				Data = {
 					Typography = {
 						LetterSpacing = -0.01,
-						LineHeight = 1,
-						Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-						FontSize = 34 * p1
+						LineHeight = 0.971,
+						Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+						FontSize = 35 * p1
 					}
 				},
 				DataGroup = { Gap = 0 },
@@ -659,9 +659,9 @@
 				Label = {
 					Typography = {
 						LetterSpacing = 0,
-						LineHeight = 1.158,
-						Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-						FontSize = 19 * p1
+						LineHeight = 1.1,
+						Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+						FontSize = 20 * p1
 					}
 				}
 			},
@@ -791,9 +791,9 @@
 						Spacing = { Leading = 12 * p1, Trailing = 12 * p1 },
 						Typography = {
 							LetterSpacing = 0,
-							LineHeight = 1.158,
-							Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
-							FontSize = 19 * p1
+							LineHeight = 1.1,
+							Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+							FontSize = 20 * p1
 						}
 					},
 					FieldValue = {
@@ -837,7 +837,7 @@
 			VerticalTile = {
 				Base = {
 					Container = {
-						Background = { Transparency = 0, Color3 = Color3.fromRGB(2, 32, 141) },
+						Background = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) },
 						BorderColor = {
 							Transparency = 0.84,
 							Color3 = Color3.fromRGB(208, 217, 251)
@@ -873,29 +873,29 @@
 		Config = {
 			ColorMode = { Name = "Dark", IsDark = "true", IsLight = "false" },
 			Text = {
-				Font = "rbxassetid://127896232205472",
-				InverseScale = 0.827129859388,
-				NominalScale = 1.209,
-				Interval = 4.836 * p1,
+				Font = "rbxasset://fonts/families/BuilderSans.json",
+				InverseScale = 0.793650793651,
+				NominalScale = 1.26,
+				Interval = 5.04 * p1,
 				Scale = p1
 			},
 			Theme = {
-				Name = "KidsClassic",
-				IsClassic = "true",
+				Name = "Halloween2026",
+				IsClassic = "false",
 				IsDefault = "false",
 				IsFoundation = "false",
-				IsKids = "true",
+				IsKids = "false",
 				IsUIBlox = "false",
 				Text = {
-					Font = "rbxassetid://127896232205472",
-					NominalScale = 1.209,
+					Font = "rbxasset://fonts/families/BuilderSans.json",
+					NominalScale = 1.26,
 					FontWeight = {
-						FontWeight_300 = "Regular",
+						FontWeight_300 = "Light",
 						FontWeight_400 = "Regular",
-						FontWeight_500 = "Regular",
-						FontWeight_600 = "Bold",
+						FontWeight_500 = "Medium",
+						FontWeight_600 = "SemiBold",
 						FontWeight_700 = "Bold",
-						FontWeight_800 = "Bold"
+						FontWeight_800 = "ExtraBold"
 					}
 				}
 			},
@@ -908,7 +908,7 @@
 					Color3 = Color3.fromRGB(208, 217, 251)
 				},
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(235, 121, 115) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(240, 68, 51) }
 			},
 			ActionEmphasis = {
 				Background = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
@@ -956,7 +956,7 @@
 			Common = {
 				Backdrop = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
 				HeavyDivider = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(0, 19, 87) },
+				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(148, 15, 19) },
 				Scrim = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
 				Shadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
 				Shimmer = {
@@ -967,15 +967,15 @@
 			Content = {
 				Default = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
 				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-				Link = { Transparency = 0, Color3 = Color3.fromRGB(112, 160, 255) },
+				Link = { Transparency = 0, Color3 = Color3.fromRGB(82, 139, 255) },
 				Muted = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) }
 			},
 			None = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 			OverMedia = {
-				OverMedia_0 = { Transparency = 0.08, Color3 = Color3.fromRGB(0, 19, 87) },
-				OverMedia_100 = { Transparency = 0.08, Color3 = Color3.fromRGB(0, 23, 107) },
-				OverMedia_200 = { Transparency = 0.08, Color3 = Color3.fromRGB(1, 27, 121) },
-				OverMedia_300 = { Transparency = 0.08, Color3 = Color3.fromRGB(2, 32, 141) }
+				OverMedia_0 = { Transparency = 0.08, Color3 = Color3.fromRGB(18, 18, 21) },
+				OverMedia_100 = { Transparency = 0.08, Color3 = Color3.fromRGB(25, 26, 31) },
+				OverMedia_200 = { Transparency = 0.08, Color3 = Color3.fromRGB(32, 34, 39) },
+				OverMedia_300 = { Transparency = 0.08, Color3 = Color3.fromRGB(39, 41, 48) }
 			},
 			Selection = {
 				End = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
@@ -1025,10 +1025,10 @@
 				}
 			},
 			Surface = {
-				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(0, 19, 87) },
-				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(0, 23, 107) },
-				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(1, 27, 121) },
-				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(2, 32, 141) }
+				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
+				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) }
 			},
 			System = {
 				Alert = { Transparency = 0, Color3 = Color3.fromRGB(223, 40, 31) },
@@ -1048,44 +1048,44 @@
 		},
 		FontSize = {
 			FontSize_200 = 10 * p1,
-			FontSize_250 = 12 * p1,
+			FontSize_250 = 13 * p1,
 			FontSize_300 = 15 * p1,
-			FontSize_350 = 17 * p1,
-			FontSize_400 = 19 * p1,
-			FontSize_500 = 24 * p1,
-			FontSize_600 = 29 * p1,
-			FontSize_700 = 34 * p1,
-			FontSize_800 = 39 * p1,
-			FontSize_900 = 44 * p1,
-			FontSize_1000 = 48 * p1,
-			FontSize_1100 = 53 * p1,
-			FontSize_1200 = 58 * p1,
-			FontSize_1300 = 63 * p1,
-			FontSize_1400 = 68 * p1,
-			FontSize_1500 = 73 * p1,
-			FontSize_1600 = 77 * p1,
-			FontSize_1700 = 82 * p1,
-			FontSize_1800 = 87 * p1,
-			FontSize_1900 = 92 * p1,
-			FontSize_2000 = 97 * p1,
-			FontSize_2100 = 102 * p1,
-			FontSize_2200 = 106 * p1,
-			FontSize_2300 = 111 * p1,
-			FontSize_2400 = 116 * p1,
-			FontSize_2500 = 121 * p1,
-			FontSize_2600 = 126 * p1,
-			FontSize_2700 = 131 * p1,
-			FontSize_2800 = 135 * p1,
-			FontSize_2900 = 140 * p1,
-			FontSize_3000 = 145 * p1
+			FontSize_350 = 18 * p1,
+			FontSize_400 = 20 * p1,
+			FontSize_500 = 25 * p1,
+			FontSize_600 = 30 * p1,
+			FontSize_700 = 35 * p1,
+			FontSize_800 = 40 * p1,
+			FontSize_900 = 45 * p1,
+			FontSize_1000 = 50 * p1,
+			FontSize_1100 = 55 * p1,
+			FontSize_1200 = 60 * p1,
+			FontSize_1300 = 66 * p1,
+			FontSize_1400 = 71 * p1,
+			FontSize_1500 = 76 * p1,
+			FontSize_1600 = 81 * p1,
+			FontSize_1700 = 86 * p1,
+			FontSize_1800 = 91 * p1,
+			FontSize_1900 = 96 * p1,
+			FontSize_2000 = 101 * p1,
+			FontSize_2100 = 106 * p1,
+			FontSize_2200 = 111 * p1,
+			FontSize_2300 = 116 * p1,
+			FontSize_2400 = 121 * p1,
+			FontSize_2500 = 126 * p1,
+			FontSize_2600 = 131 * p1,
+			FontSize_2700 = 136 * p1,
+			FontSize_2800 = 141 * p1,
+			FontSize_2900 = 146 * p1,
+			FontSize_3000 = 151 * p1
 		},
 		FontWeight = {
-			FontWeight_300 = "Regular",
+			FontWeight_300 = "Light",
 			FontWeight_400 = "Regular",
-			FontWeight_500 = "Regular",
-			FontWeight_600 = "Bold",
+			FontWeight_500 = "Medium",
+			FontWeight_600 = "SemiBold",
 			FontWeight_700 = "Bold",
-			FontWeight_800 = "Bold"
+			FontWeight_800 = "ExtraBold"
 		},
 		Gap = {
 			None = 0,
@@ -1116,25 +1116,25 @@
 				Smoke = { Transparency = 0, Color3 = Color3.fromRGB(53, 55, 65) },
 				White = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) }
 			},
-			Family = { Standard = "rbxassetid://127896232205472" },
+			Family = { Standard = "rbxasset://fonts/families/BuilderSans.json" },
 			FontSize_25 = 10 * p1,
-			FontSize_50 = 12 * p1,
+			FontSize_50 = 13 * p1,
 			FontSize_75 = 15 * p1,
-			FontSize_100 = 17 * p1,
-			FontSize_200 = 19 * p1,
-			FontSize_300 = 24 * p1,
-			FontSize_400 = 29 * p1,
-			FontSize_500 = 34 * p1,
-			FontSize_600 = 39 * p1,
-			FontSize_700 = 48 * p1,
-			FontSize_800 = 58 * p1,
-			FontSize_900 = 68 * p1,
-			FontSize_1000 = 82 * p1,
+			FontSize_100 = 18 * p1,
+			FontSize_200 = 20 * p1,
+			FontSize_300 = 25 * p1,
+			FontSize_400 = 30 * p1,
+			FontSize_500 = 35 * p1,
+			FontSize_600 = 40 * p1,
+			FontSize_700 = 50 * p1,
+			FontSize_800 = 60 * p1,
+			FontSize_900 = 71 * p1,
+			FontSize_1000 = 86 * p1,
 			LetterSpacing = { Default = 0 },
-			LineHeight_100 = 0.827,
-			LineHeight_200 = 0.993,
-			LineHeight_300 = 1.075,
-			LineHeight_400 = 1.158,
+			LineHeight_100 = 0.794,
+			LineHeight_200 = 0.952,
+			LineHeight_300 = 1.032,
+			LineHeight_400 = 1.111,
 			Opacity_0 = 1,
 			Opacity_8 = 0.92,
 			Opacity_12 = 0.88,
@@ -1188,11 +1188,11 @@
 			Stroke_250 = 2.5 * p1,
 			Stroke_300 = 3 * p1,
 			Stroke_400 = 4 * p1,
-			Weight_300 = "Regular",
+			Weight_300 = "Light",
 			Weight_400 = "Regular",
-			Weight_600 = "Regular",
+			Weight_600 = "Medium",
 			Weight_700 = "Bold",
-			Weight_900 = "Bold"
+			Weight_900 = "ExtraBold"
 		},
 		Gutter = {
 			None = 0,
@@ -1218,12 +1218,9 @@
 		},
 		Inverse = {
 			ActionAlert = {
-				Background = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
+				Background = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(131, 15, 7) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(217, 28, 21) }
 			},
 			ActionEmphasis = {
 				Background = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
@@ -1233,10 +1230,10 @@
 			ActionLink = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			ActionOverMedia = {
-				Background = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+				Background = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
@@ -1246,12 +1243,9 @@
 				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(0, 20, 92) }
 			},
 			ActionStandard = {
-				Background = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
+				Background = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			ActionSubEmphasis = {
 				Background = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
@@ -1266,45 +1260,39 @@
 			ActionUtility = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			Common = {
 				Backdrop = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
-				HeavyDivider = {
-					Transparency = 0.96,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(204, 221, 255) },
+				HeavyDivider = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
+				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(148, 15, 19) },
 				Scrim = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
 				Shadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-				Shimmer = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				}
+				Shimmer = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			Content = {
-				Default = { Transparency = 0, Color3 = Color3.fromRGB(53, 55, 65) },
-				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
-				Link = { Transparency = 0, Color3 = Color3.fromRGB(0, 45, 214) },
-				Muted = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) }
+				Default = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+				Link = { Transparency = 0, Color3 = Color3.fromRGB(20, 70, 255) },
+				Muted = { Transparency = 0, Color3 = Color3.fromRGB(106, 111, 129) }
 			},
 			None = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 			OverMedia = {
 				OverMedia_0 = {
 					Transparency = 0.08,
-					Color3 = Color3.fromRGB(204, 221, 255)
+					Color3 = Color3.fromRGB(255, 255, 255)
 				},
 				OverMedia_100 = {
 					Transparency = 0.08,
-					Color3 = Color3.fromRGB(185, 207, 255)
+					Color3 = Color3.fromRGB(247, 247, 248)
 				},
 				OverMedia_200 = {
 					Transparency = 0.08,
-					Color3 = Color3.fromRGB(204, 221, 255)
+					Color3 = Color3.fromRGB(255, 255, 255)
 				},
 				OverMedia_300 = {
 					Transparency = 0.08,
-					Color3 = Color3.fromRGB(185, 207, 255)
+					Color3 = Color3.fromRGB(247, 247, 248)
 				}
 			},
 			Selection = {
@@ -1312,22 +1300,10 @@
 				Start = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) }
 			},
 			Shift = {
-				Shift_100 = {
-					Transparency = 0.96,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Shift_200 = {
-					Transparency = 0.92,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Shift_300 = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Shift_400 = {
-					Transparency = 0.84,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				}
+				Shift_100 = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
+				Shift_200 = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
+				Shift_300 = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+				Shift_400 = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			State = {
 				Hover = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
@@ -1335,43 +1311,31 @@
 				Press = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			Stroke = {
-				Default = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Emphasis = {
-					Transparency = 0.84,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Muted = {
-					Transparency = 0.92,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				}
+				Default = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+				Emphasis = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+				Muted = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			Surface = {
-				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(204, 221, 255) },
-				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(185, 207, 255) },
-				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(204, 221, 255) },
-				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(185, 207, 255) }
+				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
 			System = {
-				Alert = { Transparency = 0, Color3 = Color3.fromRGB(197, 18, 10) },
-				Contrast = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+				Alert = { Transparency = 0, Color3 = Color3.fromRGB(223, 40, 31) },
+				Contrast = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
 				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-				Neutral = { Transparency = 0, Color3 = Color3.fromRGB(53, 55, 65) },
-				Success = { Transparency = 0, Color3 = Color3.fromRGB(2, 114, 64) },
-				Warning = { Transparency = 0, Color3 = Color3.fromRGB(129, 93, 0) }
+				Neutral = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+				Success = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) },
+				Warning = { Transparency = 0, Color3 = Color3.fromRGB(242, 186, 42) }
 			}
 		},
 		LetterSpacing = { Default = 0, Loose = 0.01, Tight = -0.01 },
 		LightMode = {
 			ActionAlert = {
-				Background = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
+				Background = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(131, 15, 7) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(217, 28, 21) }
 			},
 			ActionEmphasis = {
 				Background = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
@@ -1381,10 +1345,10 @@
 			ActionLink = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			ActionOverMedia = {
-				Background = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+				Background = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
@@ -1394,12 +1358,9 @@
 				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(0, 20, 92) }
 			},
 			ActionStandard = {
-				Background = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
+				Background = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			ActionSubEmphasis = {
 				Background = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
@@ -1414,45 +1375,39 @@
 			ActionUtility = {
 				Background = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 				Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) }
+				Foreground = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 			},
 			Common = {
 				Backdrop = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
-				HeavyDivider = {
-					Transparency = 0.96,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(204, 221, 255) },
+				HeavyDivider = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
+				NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(148, 15, 19) },
 				Scrim = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
 				Shadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-				Shimmer = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				}
+				Shimmer = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			Content = {
-				Default = { Transparency = 0, Color3 = Color3.fromRGB(53, 55, 65) },
-				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
-				Link = { Transparency = 0, Color3 = Color3.fromRGB(0, 45, 214) },
-				Muted = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) }
+				Default = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
+				Link = { Transparency = 0, Color3 = Color3.fromRGB(20, 70, 255) },
+				Muted = { Transparency = 0, Color3 = Color3.fromRGB(106, 111, 129) }
 			},
 			None = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
 			OverMedia = {
 				OverMedia_0 = {
 					Transparency = 0.08,
-					Color3 = Color3.fromRGB(204, 221, 255)
+					Color3 = Color3.fromRGB(255, 255, 255)
 				},
 				OverMedia_100 = {
 					Transparency = 0.08,
-					Color3 = Color3.fromRGB(185, 207, 255)
+					Color3 = Color3.fromRGB(247, 247, 248)
 				},
 				OverMedia_200 = {
 					Transparency = 0.08,
-					Color3 = Color3.fromRGB(204, 221, 255)
+					Color3 = Color3.fromRGB(255, 255, 255)
 				},
 				OverMedia_300 = {
 					Transparency = 0.08,
-					Color3 = Color3.fromRGB(185, 207, 255)
+					Color3 = Color3.fromRGB(247, 247, 248)
 				}
 			},
 			Selection = {
@@ -1460,22 +1415,10 @@
 				Start = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) }
 			},
 			Shift = {
-				Shift_100 = {
-					Transparency = 0.96,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Shift_200 = {
-					Transparency = 0.92,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Shift_300 = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Shift_400 = {
-					Transparency = 0.84,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				}
+				Shift_100 = { Transparency = 0.96, Color3 = Color3.fromRGB(27, 37, 75) },
+				Shift_200 = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
+				Shift_300 = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+				Shift_400 = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			State = {
 				Hover = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) },
@@ -1483,39 +1426,30 @@
 				Press = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			Stroke = {
-				Default = {
-					Transparency = 0.88,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Emphasis = {
-					Transparency = 0.84,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				},
-				Muted = {
-					Transparency = 0.92,
-					Color3 = Color3.fromRGB(12, 23, 111)
-				}
+				Default = { Transparency = 0.88, Color3 = Color3.fromRGB(27, 37, 75) },
+				Emphasis = { Transparency = 0.84, Color3 = Color3.fromRGB(27, 37, 75) },
+				Muted = { Transparency = 0.92, Color3 = Color3.fromRGB(27, 37, 75) }
 			},
 			Surface = {
-				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(204, 221, 255) },
-				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(185, 207, 255) },
-				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(204, 221, 255) },
-				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(185, 207, 255) }
+				Surface_0 = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+				Surface_100 = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
+				Surface_200 = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
+				Surface_300 = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) }
 			},
 			System = {
-				Alert = { Transparency = 0, Color3 = Color3.fromRGB(197, 18, 10) },
-				Contrast = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+				Alert = { Transparency = 0, Color3 = Color3.fromRGB(223, 40, 31) },
+				Contrast = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
 				Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
-				Neutral = { Transparency = 0, Color3 = Color3.fromRGB(53, 55, 65) },
-				Success = { Transparency = 0, Color3 = Color3.fromRGB(2, 114, 64) },
-				Warning = { Transparency = 0, Color3 = Color3.fromRGB(129, 93, 0) }
+				Neutral = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+				Success = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) },
+				Warning = { Transparency = 0, Color3 = Color3.fromRGB(242, 186, 42) }
 			}
 		},
 		LineHeight = {
-			LineHeight_100 = 0.827,
-			LineHeight_120 = 0.993,
-			LineHeight_130 = 1.075,
-			LineHeight_140 = 1.158
+			LineHeight_100 = 0.794,
+			LineHeight_120 = 0.952,
+			LineHeight_130 = 1.032,
+			LineHeight_140 = 1.111
 		},
 		Margin = {
 			None = 0,
@@ -1551,7 +1485,7 @@
 							Color3 = Color3.fromRGB(208, 217, 251)
 						},
 						Border = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-						Content = { Transparency = 0, Color3 = Color3.fromRGB(235, 121, 115) }
+						Content = { Transparency = 0, Color3 = Color3.fromRGB(240, 68, 51) }
 					},
 					Primary = {
 						Background = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
@@ -1575,9 +1509,9 @@
 					}
 				},
 				Background = {
-					Contrast = { Transparency = 0, Color3 = Color3.fromRGB(0, 23, 107) },
-					Default = { Transparency = 0, Color3 = Color3.fromRGB(0, 19, 87) },
-					Muted = { Transparency = 0, Color3 = Color3.fromRGB(1, 27, 121) },
+					Contrast = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+					Default = { Transparency = 0, Color3 = Color3.fromRGB(18, 18, 21) },
+					Muted = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
 					OnHover = {
 						Transparency = 0.92,
 						Color3 = Color3.fromRGB(208, 217, 251)
@@ -1588,19 +1522,19 @@
 					}
 				},
 				BackgroundUi = {
-					Contrast = { Transparency = 0.08, Color3 = Color3.fromRGB(0, 19, 87) },
-					Default = { Transparency = 0, Color3 = Color3.fromRGB(2, 32, 141) }
+					Contrast = { Transparency = 0.08, Color3 = Color3.fromRGB(18, 18, 21) },
+					Default = { Transparency = 0, Color3 = Color3.fromRGB(39, 41, 48) }
 				},
 				Common = {
 					Alert = { Transparency = 0, Color3 = Color3.fromRGB(223, 40, 31) },
 					Badge = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-					BadgeContent = { Transparency = 0, Color3 = Color3.fromRGB(25, 26, 31) },
+					BadgeContent = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) },
 					Divider = {
 						Transparency = 0.84,
 						Color3 = Color3.fromRGB(208, 217, 251)
 					},
 					DropShadow = { Transparency = 0.5, Color3 = Color3.fromRGB(0, 0, 0) },
-					NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(0, 19, 87) },
+					NavigationBar = { Transparency = 0, Color3 = Color3.fromRGB(148, 15, 19) },
 					Offline = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) },
 					Online = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) },
 					Overlay = { Transparency = 0.25, Color3 = Color3.fromRGB(10, 10, 14) },
@@ -1657,8 +1591,8 @@
 				Text = {
 					Default = { Transparency = 0, Color3 = Color3.fromRGB(213, 215, 221) },
 					Emphasis = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-					Inverse = { Transparency = 0, Color3 = Color3.fromRGB(53, 55, 65) },
-					Link = { Transparency = 0, Color3 = Color3.fromRGB(112, 160, 255) },
+					Inverse = { Transparency = 0, Color3 = Color3.fromRGB(73, 77, 90) },
+					Link = { Transparency = 0, Color3 = Color3.fromRGB(82, 139, 255) },
 					Muted = { Transparency = 0, Color3 = Color3.fromRGB(188, 190, 200) }
 				},
 				Ui = {
@@ -1704,45 +1638,45 @@
 			Typography = {
 				Body = {
 					LetterSpacing = 0,
-					LineHeight = 1.158,
-					Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
-					FontSize = 19 * p1
+					LineHeight = 1.1,
+					Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+					FontSize = 20 * p1
 				},
 				CaptionBody = {
 					LetterSpacing = 0,
 					LineHeight = 1.2,
-					Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+					Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
 					FontSize = 15 * p1
 				},
 				CaptionHeader = {
 					LetterSpacing = 0,
-					LineHeight = 1.177,
-					Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-					FontSize = 17 * p1
+					LineHeight = 1.111,
+					Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+					FontSize = 18 * p1
 				},
 				Footer = {
 					LetterSpacing = 0,
-					LineHeight = 1.167,
-					Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-					FontSize = 12 * p1
+					LineHeight = 1.077,
+					Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+					FontSize = 13 * p1
 				},
 				Header = {
 					LetterSpacing = -0.01,
-					LineHeight = 1,
-					Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-					FontSize = 24 * p1
+					LineHeight = 0.96,
+					Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+					FontSize = 25 * p1
 				},
 				Subheader = {
 					LetterSpacing = 0,
-					LineHeight = 1.158,
-					Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-					FontSize = 19 * p1
+					LineHeight = 1.1,
+					Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+					FontSize = 20 * p1
 				},
 				Title = {
 					LetterSpacing = -0.01,
-					LineHeight = 1,
-					Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-					FontSize = 34 * p1
+					LineHeight = 0.971,
+					Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+					FontSize = 35 * p1
 				}
 			}
 		},
@@ -1815,110 +1749,110 @@
 		Typography = {
 			BodyLarge = {
 				LetterSpacing = 0,
-				LineHeight = 1.158,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
-				FontSize = 19 * p1
+				LineHeight = 1.1,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+				FontSize = 20 * p1
 			},
 			BodyMedium = {
 				LetterSpacing = 0,
-				LineHeight = 1.177,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
-				FontSize = 17 * p1
+				LineHeight = 1.111,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+				FontSize = 18 * p1
 			},
 			BodySmall = {
 				LetterSpacing = 0,
 				LineHeight = 1.2,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
 				FontSize = 15 * p1
 			},
 			CaptionLarge = {
 				LetterSpacing = 0,
-				LineHeight = 1.177,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 17 * p1
+				LineHeight = 1.111,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+				FontSize = 18 * p1
 			},
 			CaptionMedium = {
 				LetterSpacing = 0,
 				LineHeight = 1.2,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
 				FontSize = 15 * p1
 			},
 			CaptionSmall = {
 				LetterSpacing = 0,
-				LineHeight = 1.167,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 12 * p1
+				LineHeight = 1.077,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+				FontSize = 13 * p1
 			},
 			DisplayLarge = {
 				LetterSpacing = -0.01,
-				LineHeight = 0.99,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 97 * p1
+				LineHeight = 0.951,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				FontSize = 101 * p1
 			},
 			DisplayMedium = {
 				LetterSpacing = -0.01,
-				LineHeight = 1,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 68 * p1
+				LineHeight = 0.958,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				FontSize = 71 * p1
 			},
 			DisplaySmall = {
 				LetterSpacing = -0.01,
-				LineHeight = 1,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 48 * p1
+				LineHeight = 0.96,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				FontSize = 50 * p1
 			},
 			HeadingLarge = {
 				LetterSpacing = -0.01,
-				LineHeight = 1,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 34 * p1
+				LineHeight = 0.971,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				FontSize = 35 * p1
 			},
 			HeadingMedium = {
 				LetterSpacing = -0.01,
-				LineHeight = 1.103,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 29 * p1
+				LineHeight = 1.067,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				FontSize = 30 * p1
 			},
 			HeadingSmall = {
 				LetterSpacing = -0.01,
-				LineHeight = 1,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 24 * p1
+				LineHeight = 0.96,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				FontSize = 25 * p1
 			},
 			LabelLarge = {
 				LetterSpacing = 0,
-				LineHeight = 0.842,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 19 * p1
+				LineHeight = 0.8,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+				FontSize = 20 * p1
 			},
 			LabelMedium = {
 				LetterSpacing = 0,
-				LineHeight = 0.824,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 17 * p1
+				LineHeight = 0.778,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
+				FontSize = 18 * p1
 			},
 			LabelSmall = {
 				LetterSpacing = 0,
 				LineHeight = 0.8,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
 				FontSize = 15 * p1
 			},
 			TitleLarge = {
 				LetterSpacing = 0,
-				LineHeight = 1.158,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 19 * p1
+				LineHeight = 1.1,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				FontSize = 20 * p1
 			},
 			TitleMedium = {
 				LetterSpacing = 0,
-				LineHeight = 1.177,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
-				FontSize = 17 * p1
+				LineHeight = 1.111,
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				FontSize = 18 * p1
 			},
 			TitleSmall = {
 				LetterSpacing = 0,
 				LineHeight = 1.2,
-				Font = Font.new("rbxassetid://127896232205472", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
+				Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal),
 				FontSize = 15 * p1
 			}
 		}

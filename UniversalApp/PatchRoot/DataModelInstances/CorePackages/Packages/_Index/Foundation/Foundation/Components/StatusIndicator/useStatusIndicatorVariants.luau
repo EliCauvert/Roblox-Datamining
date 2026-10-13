@@ -1,4 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
+local flagsModule = require(foundation.Utility.Flags)
 local statusIndicatorSizeModule = require(foundation.Enums.StatusIndicatorSize)
 local statusIndicatorVariantModule = require(foundation.Enums.StatusIndicatorVariant)
 local statusIndicatorShapeModule = require(foundation.Enums.StatusIndicatorShape)
@@ -11,109 +12,144 @@ local var1 = _G.__DEV__ == true
 local font = Font.new(require(foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
 function variantsFactory(p1)
-	-- upvalues: font (ref), statusIndicatorVariantModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
-	return {
-		common = {
-			content = { tag = "auto-xy text-align-x-left", font = font }
+	-- upvalues: font (ref), flagsModule (ref), statusIndicatorVariantModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
+	local t = {
+		content = { tag = "auto-xy text-align-x-left", font = font },
+		stroke = if flagsModule.FoundationStatusIndicatorDesignUpdate then { Thickness = p1.Stroke.Thicker } else nil
+	}
+	local t_1 = {
+		[statusIndicatorVariantModule.Alert] = {
+			container = { tag = "bg-system-alert" },
+			content = { style = p1.DarkMode.Content.Emphasis }
 		},
-		variants = {
-			[statusIndicatorVariantModule.Alert] = {
-				container = { tag = "bg-system-alert" },
-				content = { style = p1.DarkMode.Content.Emphasis }
-			},
-			[statusIndicatorVariantModule.Success] = {
-				container = { tag = "bg-system-success" },
-				content = { style = p1.LightMode.Content.Emphasis }
-			},
-			[statusIndicatorVariantModule.Warning] = {
-				container = { tag = "bg-system-warning" },
-				content = { style = p1.LightMode.Content.Emphasis }
-			},
-			[statusIndicatorVariantModule.Emphasis] = {
-				container = { tag = "bg-system-emphasis" },
-				content = { style = p1.DarkMode.Content.Emphasis }
-			},
-			[statusIndicatorVariantModule.Neutral] = {
-				container = { tag = "bg-system-neutral" },
-				content = { style = p1.Inverse.Content.Emphasis }
-			},
-			[statusIndicatorVariantModule.Standard] = {
-				container = { tag = "bg-action-standard" },
-				content = { style = p1.Color.Content.Emphasis }
-			},
-			[statusIndicatorVariantModule.Contrast_Experiment] = {
-				container = { tag = "bg-system-contrast" },
-				content = { style = p1.Inverse.Content.Emphasis }
-			},
-			[statusIndicatorVariantModule.Voice] = {
-				container = { backgroundStyle = p1.Color.Extended.Orange.Orange_600 }
-			}
+		[statusIndicatorVariantModule.Success] = {
+			container = { tag = "bg-system-success" },
+			content = { style = p1.LightMode.Content.Emphasis }
 		},
-		hasValue = {
-			[true] = {
-				container = {
-					tag = "row align-x-center align-y-center size-400-400 auto-x padding-xsmall"
-				}
-			}
+		[statusIndicatorVariantModule.Warning] = {
+			container = { tag = "bg-system-warning" },
+			content = { style = p1.LightMode.Content.Emphasis }
 		},
-		shape = {
-			[statusIndicatorShapeModule.Circle] = {
-				container = { tag = "radius-circle" },
-				stroke = { LineJoinMode = Enum.LineJoinMode.Round }
-			},
-			[statusIndicatorShapeModule.Ring] = {
-				container = { tag = "align-x-center align-y-center radius-circle" },
-				ring = { tag = "radius-circle bg-surface-100" },
-				stroke = { LineJoinMode = Enum.LineJoinMode.Round }
-			},
-			[statusIndicatorShapeModule.Square] = {
-				container = { tag = "radius-none" },
-				stroke = { LineJoinMode = Enum.LineJoinMode.Miter }
-			}
+		[statusIndicatorVariantModule.Emphasis] = {
+			container = { tag = "bg-system-emphasis" },
+			content = { style = p1.DarkMode.Content.Emphasis }
 		},
-		sizes = {
-			[statusIndicatorSizeModule.XSmall] = {
-				container = {
-					size = UDim2.fromOffset(p1.Size.Size_150, p1.Size.Size_150)
-				},
-				ring = {
-					size = UDim2.fromOffset(p1.Size.Size_150 / 2, p1.Size.Size_150 / 2)
-				},
-				stroke = { Thickness = p1.Stroke.Standard }
-			},
-			[statusIndicatorSizeModule.Small] = {
-				container = {
-					size = UDim2.fromOffset(p1.Size.Size_200, p1.Size.Size_200)
-				},
-				ring = {
-					size = UDim2.fromOffset(p1.Size.Size_200 / 2, p1.Size.Size_200 / 2)
-				},
-				stroke = { Thickness = p1.Size.Size_50 }
-			},
-			[statusIndicatorSizeModule.Medium] = {
-				container = {
-					size = UDim2.fromOffset(p1.Size.Size_250, p1.Size.Size_250)
-				},
-				ring = {
-					size = UDim2.fromOffset(p1.Size.Size_250 / 2, p1.Size.Size_250 / 2)
-				},
-				stroke = { Thickness = p1.Size.Size_50 }
-			},
-			[statusIndicatorSizeModule.Pictogram] = {
-				container = {
-					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
-				},
-				ring = {
-					size = UDim2.fromOffset(p1.Size.Size_500 / 2, p1.Size.Size_500 / 2)
-				},
-				stroke = { Thickness = p1.Stroke.Thicker }
+		[statusIndicatorVariantModule.Neutral] = {
+			container = { tag = "bg-system-neutral" },
+			content = { style = p1.Inverse.Content.Emphasis }
+		},
+		[statusIndicatorVariantModule.Standard] = {
+			container = { tag = "bg-action-standard" },
+			content = { style = p1.Color.Content.Emphasis }
+		},
+		[statusIndicatorVariantModule.Contrast_Experiment] = {
+			container = { tag = "bg-system-contrast" },
+			content = { style = p1.Inverse.Content.Emphasis }
+		},
+		[statusIndicatorVariantModule.Voice] = {
+			container = { backgroundStyle = p1.Color.Extended.Orange.Orange_600 }
+		}
+	}
+	local t_2 = {
+		[true] = {
+			container = {
+				tag = if flagsModule.FoundationStatusIndicatorDesignUpdate then "row align-x-center align-y-center auto-x padding-xsmall" else "row align-x-center align-y-center size-400-400 auto-x padding-xsmall"
 			}
 		}
+	}
+	local t_3 = {
+		[statusIndicatorShapeModule.Circle] = {
+			container = { tag = "radius-circle" },
+			stroke = { LineJoinMode = Enum.LineJoinMode.Round }
+		},
+		[statusIndicatorShapeModule.Ring] = {
+			container = { tag = "align-x-center align-y-center radius-circle" },
+			ring = { tag = "radius-circle bg-surface-100" },
+			stroke = { LineJoinMode = Enum.LineJoinMode.Round }
+		},
+		[statusIndicatorShapeModule.Square] = {
+			container = { tag = "radius-none" },
+			stroke = { LineJoinMode = Enum.LineJoinMode.Miter }
+		}
+	}
+	local t_4 = {
+		[statusIndicatorSizeModule.XSmall] = {
+			container = {
+				size = UDim2.fromOffset(p1.Size.Size_150, p1.Size.Size_150)
+			},
+			ring = {
+				size = UDim2.fromOffset(p1.Size.Size_150 / 2, p1.Size.Size_150 / 2)
+			},
+			stroke = if flagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Stroke.Standard }
+		},
+		[statusIndicatorSizeModule.Small] = {
+			container = {
+				size = UDim2.fromOffset(p1.Size.Size_200, p1.Size.Size_200)
+			},
+			ring = {
+				size = UDim2.fromOffset(p1.Size.Size_200 / 2, p1.Size.Size_200 / 2)
+			},
+			stroke = if flagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Size.Size_50 }
+		},
+		[statusIndicatorSizeModule.Medium] = {
+			container = {
+				size = UDim2.fromOffset(p1.Size.Size_250, p1.Size.Size_250)
+			},
+			ring = {
+				size = UDim2.fromOffset(p1.Size.Size_250 / 2, p1.Size.Size_250 / 2)
+			},
+			stroke = if flagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Size.Size_50 }
+		},
+		[statusIndicatorSizeModule.Large] = {
+			container = {
+				size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
+			},
+			ring = {
+				size = UDim2.fromOffset(p1.Size.Size_500 / 2, p1.Size.Size_500 / 2)
+			},
+			stroke = { Thickness = p1.Stroke.Thicker }
+		},
+		[statusIndicatorSizeModule.Pictogram] = {
+			container = {
+				size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
+			},
+			ring = {
+				size = UDim2.fromOffset(p1.Size.Size_500 / 2, p1.Size.Size_500 / 2)
+			},
+			stroke = { Thickness = p1.Stroke.Thicker }
+		}
+	}
+	local t_5 = {
+		container = {
+			size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
+		},
+		content = { typography = p1.Typography.LabelSmall }
+	}
+	local t_6 = {
+		container = {
+			size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
+		},
+		content = { typography = p1.Typography.LabelMedium }
+	}
+	
+	return {
+		common = t,
+		variants = t_1,
+		hasValue = t_2,
+		shape = t_3,
+		sizes = t_4,
+		numericSizes = if flagsModule.FoundationStatusIndicatorDesignUpdate then {
+			[statusIndicatorSizeModule.XSmall] = t_5,
+			[statusIndicatorSizeModule.Small] = t_5,
+			[statusIndicatorSizeModule.Medium] = t_5,
+			[statusIndicatorSizeModule.Large] = t_6,
+			[statusIndicatorSizeModule.Pictogram] = t_6
+		} else nil
 	}
 end
 
 return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: var1 (ref), statusIndicatorVariantModule (ref), indexBindableModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref)
+	-- upvalues: var1 (ref), statusIndicatorVariantModule (ref), indexBindableModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref), flagsModule (ref)
 	if var1 then
 		if p2 == statusIndicatorVariantModule.Contrast_Experiment then
 			error("Contrast is not a supported StatusIndicator variant.")
@@ -124,7 +160,7 @@ return function(p1, p2, p3, p4, p5, p6)
 	end
 	local statusIndicator = variantsContextModule.useVariants("StatusIndicator", variantsFactory, p1)
 	
-	return composeStyleVariantModule(statusIndicator.common, statusIndicator.variants[p2], statusIndicator.hasValue[p3], statusIndicator.shape[p4], if not p3 then statusIndicator.sizes[p5] else {}, if p6 then {
+	return composeStyleVariantModule(statusIndicator.common, statusIndicator.variants[p2], statusIndicator.hasValue[p3], statusIndicator.shape[p4], if flagsModule.FoundationStatusIndicatorDesignUpdate then if p3 then statusIndicator.numericSizes[p5] else statusIndicator.sizes[p5] elseif not p3 then statusIndicator.sizes[p5] else {}, if p6 then {
 		stroke = {
 			Color = indexBindableModule(p6, "Color3"),
 			Transparency = indexBindableModule(p6, "Transparency")

@@ -482,7 +482,6 @@ Authentication.SignUp.Description.VerificationPage,'साइन-अप कर�
 Authentication.SignUp.Description.VerificationPage.CreateAccount,'अकाउंट बनाएँ' पर क्लिक करने का मतलब है कि आप आर्बिट्रेशन सहित 'उपयोग की शर्तों' से सहमत हैं और आपने प्राइवेसी पॉलिसी को स्वीकार किया है.
 Authentication.SignUp.Description.VerificationPageMultiStep,'जारी रखें' पर क्लिक करने का मतलब है कि आप आर्बिट्रेशन सहित 'उपयोग की शर्तों' से सहमत हैं और आपने प्राइवेसी पॉलिसी को स्वीकार किया है.
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,कोड डालने और 'जारी रखें' पर क्लिक करने का मतलब है कि आपने अपने बच्चे को Roblox ऐक्सेस करने की सहमति दी है.
-Authentication.SignUp.Header.CloseWithoutFinishing,पूरा किए बिना बंद करना है?
 Authentication.SignUp.Header.CreatePassword,"हैलो {username}, पासवर्ड बनाएँ"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"हैलो {username}, कोई पासवर्ड या पास-की बनाएँ"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,हमने आपका अकाउंट बना दिया है. साइन-इन करने का तरीका चुनें.
@@ -2335,6 +2334,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,नए यूज़र का �
 Feature.Build.Analytics.Title.PayerConversion,पेमेंट करने वाले यूज़र का कन्वर्ज़न
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,खर्च किए गए Robux
+Feature.Build.Analytics.Title.TopAcquisitionSource,टॉप सोर्स
+Feature.Build.Analytics.Title.TopDropOffStep,सबसे बड़ी गिरावट
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,विज़िट
 Feature.Build.Content.NewGame,नया गेम
@@ -2378,7 +2379,6 @@ Feature.Build.Description.PlaytestLatest,"आपने अपने सबसे
 Feature.Build.Description.PlaytestLocked,"अपना पहला गेम क्रिएट करने के बाद, प्लेटेस्टिंग शुरू की जा सकती है."
 Feature.Build.Description.PlaytesterAccess,फ़्रेंड्स को अर्ली टेस्टर के रूप में इनवाइट करें या अपने गेम की ऑडियंस सेटिंग बदलकर ज़्यादा लोगों को अपना गेम खेलने दें.
 Feature.Build.Description.PricingRules,कीमत तय करने के नियम सेट करें
-Feature.Build.Description.PrivateShare,"इसे शेयर करने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
 Feature.Build.Description.PromoteGameFree,बस एक टैप में अपने गेम को ज़्यादा प्लेयर्स की नज़रों में लाएँ.
 Feature.Build.Description.PromoteGamePaid,"अपना गेम लाखों प्लेयर्स की नज़रों में लाने के लिए, एक ऐड क्रिएट करें."
 Feature.Build.Description.PromoteGameWithAdCampaign,"{durationDays}-दिन के ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ."
@@ -2504,6 +2504,15 @@ Feature.Build.Label.Thinking,प्रोसेस कर रहा है
 Feature.Build.Label.Title,टाइटल
 Feature.Build.Label.TitleDescription,टाइटल और विवरण
 Feature.Build.Label.Tool,टूल
+Feature.Build.Label.ToolAdEligibilityDone,"चेक कर लिया गया कि ऐड, शर्तों के मुताबिक है या नहीं"
+Feature.Build.Label.ToolAdEligibilityFailed,"चेक नहीं किया जा सका कि ऐड, शर्तों के मुताबिक है या नहीं"
+Feature.Build.Label.ToolAdEligibilityRunning,"चेक किया जा रहा है कि ऐड, शर्तों के मुताबिक है या नहीं"
+Feature.Build.Label.ToolAnalyticsDone,आँकड़ों का विश्लेषण कर लिया गया
+Feature.Build.Label.ToolAnalyticsFailed,आँकड़ों का विश्लेषण नहीं किया जा सका
+Feature.Build.Label.ToolAnalyticsRunning,आँकड़ों का विश्लेषण किया जा रहा है
+Feature.Build.Label.ToolApiDocsDone,API डॉक्यूमेंट्स में खोजा गया
+Feature.Build.Label.ToolApiDocsFailed,API डॉक्यूमेंट्स में खोजा नहीं जा सका
+Feature.Build.Label.ToolApiDocsRunning,API डॉक्यूमेंट्स में खोजा जा रहा है
 Feature.Build.Label.ToolAssetDone,ऐसेट डाला गया
 Feature.Build.Label.ToolAssetFailed,ऐसेट डाला नहीं जा सका
 Feature.Build.Label.ToolAssetRunning,ऐसेट डाला जा रहा है
@@ -2513,6 +2522,9 @@ Feature.Build.Label.ToolAssetSearchRunning,ऐसेट लाइब्रेर
 Feature.Build.Label.ToolClientDMDone,क्लाइंट DataModel सर्च किया गया
 Feature.Build.Label.ToolClientDMFailed,क्लाइंट DataModel सर्च नहीं किया जा सका
 Feature.Build.Label.ToolClientDMRunning,क्लाइंट DataModel सर्च किया जा रहा है
+Feature.Build.Label.ToolCompileDone,कोड को कंपाइल कर लिया गया
+Feature.Build.Label.ToolCompileFailed,कोड को कंपाइल नहीं किया जा सका
+Feature.Build.Label.ToolCompileRunning,कोड को कंपाइल किया जा रहा है
 Feature.Build.Label.ToolGameInfoDone,गेम की जानकारी अपडेट की गई
 Feature.Build.Label.ToolGameInfoFailed,गेम की जानकारी अपडेट नहीं की जा सकी
 Feature.Build.Label.ToolGameInfoRunning,गेम की जानकारी अपडेट की जा रही है
@@ -2549,6 +2561,9 @@ Feature.Build.Label.ToolQuestionRunning,एक सवाल पूछा जा 
 Feature.Build.Label.ToolReqUpdateDone,शर्तें अपडेट की गईं
 Feature.Build.Label.ToolReqUpdateFailed,शर्तें अपडेट नहीं की जा सकीं
 Feature.Build.Label.ToolReqUpdateRunning,शर्तें अपडेट की जा रही हैं
+Feature.Build.Label.ToolRestoreVersionDone,वर्ज़न को रीस्टोर किया गया
+Feature.Build.Label.ToolRestoreVersionFailed,वर्ज़न को रीस्टोर नहीं किया जा सका
+Feature.Build.Label.ToolRestoreVersionRunning,वर्ज़न को रीस्टोर किया जा रहा है
 Feature.Build.Label.ToolScriptDone,स्क्रिप्ट रन की गई
 Feature.Build.Label.ToolScriptFailed,स्क्रिप्ट रन नहीं हो सकी
 Feature.Build.Label.ToolScriptRunning,स्क्रिप्ट रन हो रही है
@@ -2564,6 +2579,9 @@ Feature.Build.Label.ToolTasksPlanRunning,आपके टास्क प्ल�
 Feature.Build.Label.ToolThumbnailDone,गेम थंबनेल सेट हो गया
 Feature.Build.Label.ToolThumbnailFailed,गेम थंबनेल सेट नहीं किया जा सका
 Feature.Build.Label.ToolThumbnailRunning,गेम थंबनेल सेट किया जा रहा है
+Feature.Build.Label.ToolVerifyDone,गड़बड़ियाँ चेक कर ली गईं
+Feature.Build.Label.ToolVerifyFailed,गड़बड़ियाँ चेक नहीं की जा सकीं
+Feature.Build.Label.ToolVerifyRunning,गड़बड़ियाँ चेक की जा रही हैं
 Feature.Build.Label.UniverseNumber,यूनिवर्स {UNIVERSE_ID}
 Feature.Build.Label.Unknown,अज्ञात
 Feature.Build.Label.UnlimitedUsed,{USED} इस्तेमाल किए गए • कोई लिमिट नहीं
@@ -2694,7 +2712,6 @@ Feature.Build.Title.ExperienceAudience,एक्सपीरिएंस की 
 Feature.Build.Title.FreeUsageReached,मुफ़्त बिल्ड के इस्तेमाल की लिमिट पूरी हो गई
 Feature.Build.Title.FriendsOnlyPlay,सिर्फ़ फ़्रेंड्स ही खेल सकते हैं
 Feature.Build.Title.GameCreationDone,गेम क्रिएशन पूरा हुआ
-Feature.Build.Title.GamePrivate,यह गेम प्राइवेट है
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,यूज़र्स पाएँ
 Feature.Build.Title.ManagedPricingAcknowledgement,'मैनेज की जा रही कीमतें' फ़ीचर चालू करना है?
@@ -3973,7 +3990,6 @@ Feature.Home.Heading.JoinYourFriends,अपने फ़्रेंड्स �
 Feature.Home.HeadingFriends,फ़्रेंड्स ({friendCount})
 Feature.Home.Label.HappeningNow,अभी चल रहा है
 Feature.Home.PeopleList.ChatWith,{username} के साथ चैट करें
-Feature.Home.Robux,
 Feature.InAppBugReporting.Message.AppVersion,बनाएँ : {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,विवरण का फ़ील्ड खाली नहीं हो सकता
 Feature.InAppBugReporting.Message.CommentLabel,टिकट का विवरण
@@ -4170,6 +4186,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,Moment पोस्ट नही�
 Feature.Moments.Label.MomentNoLongerAvailable,यह Moment अब उपलब्ध नहीं है.
 Feature.Moments.Label.MomentPublishedBody,आपका Moment पब्लिश हो गया है.
 Feature.Moments.Label.MomentPublishedTitle,Moment पब्लिश हो गया
+Feature.Moments.Label.MomentRemovedBody,"हमारे सुरक्षा नियमों का उल्लंघन करने की वजह से, इसे हटा दिया गया है."
+Feature.Moments.Label.MomentRemovedTitle,हमने इस Moment को हटा दिया है
 Feature.Moments.Label.MomentUnavailable,Moment उपलब्ध नहीं है
 Feature.Moments.Label.MomentUnavailableDefault,यह Moment उपलब्ध नहीं है.
 Feature.Moments.Label.MomentsExperienceName,
@@ -4939,7 +4957,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"अलग-अलग �
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"आइटम और अवतार पर, पहले {trialUnlockDays} दिनों में 10% और उसके बाद 20% की छूट"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,कम Robux में ज़्यादा मज़ा. Roblox Plus को सब्सक्राइब करें.
 Feature.RobloxSubscription.Description.JoinEarly,Plus के साथ जल्दी जॉइन करें
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,यह रेफ़रल लिंक अब मान्य नहीं है.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} ने आपको Plus जॉइन करने के लिए इन्वाइट किया है. आपके Plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{referralTermsUrl}"">रेफ़रल प्रोग्राम की शर्तों</a> और <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने का शुल्क अपने-आप ले लिया जाएगा."
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ऑफ़र सिर्फ़ Plus के नए सब्सक्राइबर्स के लिए मान्य है.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,जब कोई आपके लिंक से Plus खरीदता है.
 Feature.RobloxSubscription.Description.ReferralShare,किसी को Plus जॉइन करने के लिए इन्वाइट करें और उनके Plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.

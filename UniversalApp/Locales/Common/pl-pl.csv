@@ -499,7 +499,6 @@ Authentication.SignUp.Description.VerificationPage,"Klikając „Zarejestruj si�
 Authentication.SignUp.Description.VerificationPage.CreateAccount,"Klikając „Utwórz konto”, akceptujesz Warunki użytkowania, w tym klauzulę arbitrażową, oraz Politykę prywatności."
 Authentication.SignUp.Description.VerificationPageMultiStep,"Klikając „Kontynuuj”, akceptujesz Warunki użytkowania, w tym klauzulę arbitrażową, oraz Politykę prywatności."
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,"Wprowadzając kod i klikając „Kontynuuj”, udzielasz swojemu dziecku zgody na dostęp do platformy Roblox."
-Authentication.SignUp.Header.CloseWithoutFinishing,Zamknąć bez ukończenia?
 Authentication.SignUp.Header.CreatePassword,"Cześć, {username}, utwórz hasło"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Cześć, {username}, utwórz hasło lub klucz dostępu"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,Utworzyliśmy Twoje konto. Wybierz sposób logowania.
@@ -2355,6 +2354,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,Czas trwania sesji nowych użyt
 Feature.Build.Analytics.Title.PayerConversion,Konwersja użytkowników płacących
 Feature.Build.Analytics.Title.PlaythroughRate,Współczynnik rozgrywek
 Feature.Build.Analytics.Title.RobuxSpent,Wydane Robuxy
+Feature.Build.Analytics.Title.TopAcquisitionSource,Najtrafniejsze źródło
+Feature.Build.Analytics.Title.TopDropOffStep,Największy spadek
 Feature.Build.Analytics.Title.TotalPlaytime,Łączny czas gry
 Feature.Build.Analytics.Visits,Odwiedziny
 Feature.Build.Content.NewGame,Nowa gra
@@ -2398,7 +2399,6 @@ Feature.Build.Description.PlaytestLatest,"Testujesz swoją najnowszą wersję. O
 Feature.Build.Description.PlaytestLocked,Możesz rozpocząć testowanie rozgrywki po utworzeniu swojej pierwszej gry.
 Feature.Build.Description.PlaytesterAccess,"Zaproś znajomych jako testerów wczesnej wersji lub zmień w swojej grze ustawienie Odbiorcy, aby umożliwić grę większej liczbie osób."
 Feature.Build.Description.PricingRules,Ustaw zasady dotyczące cen
-Feature.Build.Description.PrivateShare,"Zmień ustawienie Odbiorcy swojej gry, aby ją udostępnić."
 Feature.Build.Description.PromoteGameFree,Zaprezentuj swoją grę większej liczbie graczy jednym kliknięciem.
 Feature.Build.Description.PromoteGamePaid,"Stwórz reklamę, aby zaprezentować swoją grę milionom graczy."
 Feature.Build.Description.PromoteGameWithAdCampaign,"Zwiększ liczbę odbiorców dzięki {durationDays}-dniowej kampanii reklamowej i spraw, aby Twoja gra została zauważona."
@@ -2524,6 +2524,15 @@ Feature.Build.Label.Thinking,Myślę
 Feature.Build.Label.Title,Tytuł
 Feature.Build.Label.TitleDescription,Tytuł i opis
 Feature.Build.Label.Tool,narzędzie
+Feature.Build.Label.ToolAdEligibilityDone,Sprawdzono kryteria kwalifikacji reklamy
+Feature.Build.Label.ToolAdEligibilityFailed,Nie udało się sprawdzić kryteriów kwalifikacji reklamy
+Feature.Build.Label.ToolAdEligibilityRunning,Sprawdzam kryteria kwalifikacji reklamy
+Feature.Build.Label.ToolAnalyticsDone,Przeanalizowano statystyki
+Feature.Build.Label.ToolAnalyticsFailed,Nie udało się przeanalizować statystyk
+Feature.Build.Label.ToolAnalyticsRunning,Analizuję statystyki
+Feature.Build.Label.ToolApiDocsDone,Wyszukano dokumentację interfejsu API
+Feature.Build.Label.ToolApiDocsFailed,Nie udało się wyszukać dokumentacji interfejsu API
+Feature.Build.Label.ToolApiDocsRunning,Szukam dokumentacji interfejsu API
 Feature.Build.Label.ToolAssetDone,Wstawiono zasób
 Feature.Build.Label.ToolAssetFailed,Nie udało się wstawić zasobu
 Feature.Build.Label.ToolAssetRunning,Wstawiam zasób
@@ -2533,6 +2542,9 @@ Feature.Build.Label.ToolAssetSearchRunning,Przeszukuję bibliotekę zasobów
 Feature.Build.Label.ToolClientDMDone,Przeszukano DataModel klienta
 Feature.Build.Label.ToolClientDMFailed,Nie udało się przeszukać DataModel klienta
 Feature.Build.Label.ToolClientDMRunning,Wyszukiwanie DataModel klienta
+Feature.Build.Label.ToolCompileDone,Skompilowano kod
+Feature.Build.Label.ToolCompileFailed,Nie udało się skompilować kodu
+Feature.Build.Label.ToolCompileRunning,Kompiluję kod
 Feature.Build.Label.ToolGameInfoDone,Zaktualizowano informacje o grze
 Feature.Build.Label.ToolGameInfoFailed,Nie udało się zaktualizować informacji o grze
 Feature.Build.Label.ToolGameInfoRunning,Aktualizuję informacje o grze
@@ -2569,6 +2581,9 @@ Feature.Build.Label.ToolQuestionRunning,Zadaję pytanie
 Feature.Build.Label.ToolReqUpdateDone,Zaktualizowano wymagania
 Feature.Build.Label.ToolReqUpdateFailed,Nie udało się zaktualizować wymagań
 Feature.Build.Label.ToolReqUpdateRunning,Aktualizuję wymagania
+Feature.Build.Label.ToolRestoreVersionDone,Przywrócono wersję
+Feature.Build.Label.ToolRestoreVersionFailed,Nie udało się przywrócić wersji
+Feature.Build.Label.ToolRestoreVersionRunning,Przywracam wersję
 Feature.Build.Label.ToolScriptDone,Uruchomiono skrypt
 Feature.Build.Label.ToolScriptFailed,Nie udało się uruchomić skryptu
 Feature.Build.Label.ToolScriptRunning,Uruchamiam skrypt
@@ -2584,6 +2599,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Planuję Twoje zadania
 Feature.Build.Label.ToolThumbnailDone,Ustaw miniaturę gry
 Feature.Build.Label.ToolThumbnailFailed,Nie udało się ustawić miniatury gry
 Feature.Build.Label.ToolThumbnailRunning,Ustawiam miniaturę gry
+Feature.Build.Label.ToolVerifyDone,Sprawdzono pod kątem błędów
+Feature.Build.Label.ToolVerifyFailed,Nie udało się sprawdzić pod kątem błędów
+Feature.Build.Label.ToolVerifyRunning,Sprawdzam pod kątem błędów
 Feature.Build.Label.UniverseNumber,Uniwersum {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Brak informacji
 Feature.Build.Label.UnlimitedUsed,Wykorzystano {USED} • Brak limitu
@@ -2714,7 +2732,6 @@ Feature.Build.Title.ExperienceAudience,Odbiorcy projektu
 Feature.Build.Title.FreeUsageReached,Osiągnięto limit bezpłatnych użyć funkcji Buduj
 Feature.Build.Title.FriendsOnlyPlay,Tylko znajomi mogą grać
 Feature.Build.Title.GameCreationDone,Ukończono tworzenie gry
-Feature.Build.Title.GamePrivate,Ta gra jest prywatna
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Pozyskaj użytkowników
 Feature.Build.Title.ManagedPricingAcknowledgement,Włączyć zarządzane ceny?
@@ -3993,7 +4010,6 @@ Feature.Home.Heading.JoinYourFriends,
 Feature.Home.HeadingFriends,Znajomi ({friendCount})
 Feature.Home.Label.HappeningNow,W trakcie
 Feature.Home.PeopleList.ChatWith,Czat z użytkownikiem {username}
-Feature.Home.Robux,
 Feature.InAppBugReporting.Message.AppVersion,Kompilacja: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,Szczegóły nie mogą być puste
 Feature.InAppBugReporting.Message.CommentLabel,Opis biletu
@@ -4190,6 +4206,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,Nie udało się opublikować momen
 Feature.Moments.Label.MomentNoLongerAvailable,Ten Moment nie jest już dostępny.
 Feature.Moments.Label.MomentPublishedBody,Twój moment został opublikowany.
 Feature.Moments.Label.MomentPublishedTitle,Moment opublikowany
+Feature.Moments.Label.MomentRemovedBody,"Naruszył nasze zasady bezpieczeństwa, więc nie jest już dostępny."
+Feature.Moments.Label.MomentRemovedTitle,Usunęliśmy ten moment
 Feature.Moments.Label.MomentUnavailable,Moment niedostępny
 Feature.Moments.Label.MomentUnavailableDefault,Ten moment nie jest dostępny.
 Feature.Moments.Label.MomentsExperienceName,
@@ -4959,7 +4977,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% zniżki przez pie
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% zniżki przez pierwsze {trialUnlockDays} dni, a następnie 20% zniżki na przedmioty i awatary"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Więcej zabawy za mniej Robuxów. Wykup subskrypcję Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Dołącz wcześniej dzięki subskrypcji Plus
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,Ten link polecający utracił ważność.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,"{username} zaprosił(a) Cię do dołączenia do subskrypcji Plus. Gdy wykupisz subskrypcję Plus, oboje otrzymacie tyle Robuxów: {amount}."
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"Klikając przycisk \u{201C}{ctaText}\u{201D}, akceptujesz <a href=""{referralTermsUrl}"">Warunki programu poleceń</a> i <a href=""{termsUrl}"">Warunki subskrypcji Robloxa</a>. Opłata będzie pobierana automatycznie co miesiąc do momentu anulowania subskrypcji."
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Oferta ważna tylko dla nowych subskrybentów Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Gdy ktoś kupi subskrypcję Plus za pomocą Twojego linku.
 Feature.RobloxSubscription.Description.ReferralShare,"Zaproś kogoś do subskrypcji Plus, a gdy ją wykupi, oboje otrzymacie tyle Robuxów: {amount}."

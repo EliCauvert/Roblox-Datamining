@@ -445,6 +445,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,You must reset your p
 Authentication.SignUp.Action.ApplyOnNextRespawn,Apply on next respawn
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.ContinueSetup,Continue setup
 Authentication.SignUp.Action.Create,Create
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Create Account
@@ -500,7 +501,7 @@ Authentication.SignUp.Description.VerificationPage,"By clicking Sign Up, you are
 Authentication.SignUp.Description.VerificationPage.CreateAccount,"By clicking Create Account, you are agreeing to the Terms of Use including the arbitration clause and you are acknowledging the Privacy Policy."
 Authentication.SignUp.Description.VerificationPageMultiStep,"By clicking Continue, you are agreeing to the Terms of Use including the arbitration clause and you are acknowledging the Privacy Policy."
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,"By entering the code and clicking Continue, you are giving consent to your child to access Roblox."
-Authentication.SignUp.Header.CloseWithoutFinishing,Close without finishing?
+Authentication.SignUp.Header.CancelAccountCreation,Cancel account creation?
 Authentication.SignUp.Header.CreatePassword,"Hey {username}, create a password"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Hey {username}, create a password or passkey"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,We created your account. Choose how you'll sign-in.
@@ -2268,6 +2269,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Copy text
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,Create new game
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Don't ask again
@@ -2321,10 +2323,17 @@ Feature.Build.Analytics.Description.PayerConversion,Payer conversion is the perc
 Feature.Build.Analytics.Description.PlaythroughRate,Playthrough rate is the percentage of visits that completed a full play session. Higher rates suggest players find your experience easy to get into and worth finishing.
 Feature.Build.Analytics.Description.TotalPlaytime,Total playtime sums the time all players spent in your experience over the period. Rising playtime usually signals more engaging sessions.
 Feature.Build.Analytics.DurationHours,{number} hrs
+Feature.Build.Analytics.Goal.Action.CreateAd,Create an ad
+Feature.Build.Analytics.Goal.Action.SellItems,Sell items
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,Share with friends
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,Make a good first impression
 Feature.Build.Analytics.Goal.GetMorePlayers,Get more players
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Keep players coming back
+Feature.Build.Analytics.Goal.Locked.EarnRobux,Earn Robux in your game to see these stats.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,Get your first player to see these stats.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Get more players to see these stats.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Get your first returning player to see these stats.
 Feature.Build.Analytics.KeyStats,Key stats
 Feature.Build.Analytics.LastMonth,Last month
 Feature.Build.Analytics.LastWeek,
@@ -2362,6 +2371,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,New user session time
 Feature.Build.Analytics.Title.PayerConversion,Payer conversion
 Feature.Build.Analytics.Title.PlaythroughRate,Playthrough rate
 Feature.Build.Analytics.Title.RobuxSpent,Robux spent
+Feature.Build.Analytics.Title.TopAcquisitionSource,Top source
+Feature.Build.Analytics.Title.TopDropOffStep,Biggest dropoff
 Feature.Build.Analytics.Title.TotalPlaytime,Total playtime
 Feature.Build.Analytics.Visits,Visits
 Feature.Build.Content.NewGame,New game
@@ -2405,7 +2416,6 @@ Feature.Build.Description.PlaytestLatest,You're playtesting your latest version.
 Feature.Build.Description.PlaytestLocked,You can start playtesting after you create your first game.
 Feature.Build.Description.PlaytesterAccess,Invite friends as early testers or change your game's Audience setting to let more people play.
 Feature.Build.Description.PricingRules,Set pricing rules
-Feature.Build.Description.PrivateShare,Change your game's Audience setting to share it.
 Feature.Build.Description.PromoteGameFree,Get your game in front of more players in one tap.
 Feature.Build.Description.PromoteGamePaid,Create an ad to get your game in front of millions of players.
 Feature.Build.Description.PromoteGameWithAdCampaign,Boost your audience with a {durationDays}-day ad campaign and get your game discovered.
@@ -2449,6 +2459,7 @@ Feature.Build.Label.AdditionalUsage,Additional Build usage
 Feature.Build.Label.AdditionalUsed,{USED} of {LIMIT} used
 Feature.Build.Label.AdsManager,Ads Manager
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,All games
 Feature.Build.Label.AmountAvailable,{AMOUNT} available
 Feature.Build.Label.Autosaved,Autosaved
 Feature.Build.Label.Available,available
@@ -2473,12 +2484,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Easy performance report
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,Free
 Feature.Build.Label.FreeBuildUsage,Free Build usage
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Friends only
 Feature.Build.Label.GamePlays,Game plays
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
+Feature.Build.Label.GroupGames,Group games
+Feature.Build.Label.Groups,Groups
 Feature.Build.Label.Hi,Hi
 Feature.Build.Label.IconThumbnails,Icon & thumbnails
 Feature.Build.Label.Images2D,2D Images
@@ -2492,6 +2506,7 @@ Feature.Build.Label.ManagedPricing,Managed pricing
 Feature.Build.Label.ManagedPricingMixed,Mixed across current products
 Feature.Build.Label.MaximizeForGamePlays,Maximize for game plays
 Feature.Build.Label.Models3D,3D Models
+Feature.Build.Label.MyGames,My games
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,No limit
 Feature.Build.Label.NotStarted,Not started
@@ -2639,6 +2654,7 @@ Feature.Build.Message.BuildInternalError,Build ran into a problem. Try again.
 Feature.Build.Message.BuildResponseFailed,Build couldn't respond. Try again.
 Feature.Build.Message.BuildStillWorking,"Working on it. You can leave the app, play Roblox, or start another project while you wait."
 Feature.Build.Message.BuildStopped,You stopped Build.
+Feature.Build.Message.BuildTakingLonger,This is taking longer than expected. You can keep waiting or start something else.
 Feature.Build.Message.BuildTemporarilyDown,Build is temporarily unavailable. Try again in a minute.
 Feature.Build.Message.CompletedTasks,{COUNT} completed tasks
 Feature.Build.Message.ConversationGone,This conversation is no longer available. Start a new one.
@@ -2739,7 +2755,6 @@ Feature.Build.Title.ExperienceAudience,Experience audience
 Feature.Build.Title.FreeUsageReached,Free Build usage limit reached
 Feature.Build.Title.FriendsOnlyPlay,Only friends can play
 Feature.Build.Title.GameCreationDone,Completed game creation
-Feature.Build.Title.GamePrivate,This game is private
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Get users
 Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
@@ -4018,7 +4033,6 @@ Feature.Home.Heading.JoinYourFriends,Join Your Friends
 Feature.Home.HeadingFriends,Friends ({friendCount})
 Feature.Home.Label.HappeningNow,Happening now
 Feature.Home.PeopleList.ChatWith,Chat with {username}
-Feature.Home.Robux,
 Feature.InAppBugReporting.Message.AppVersion,Build: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,Details cannot be empty
 Feature.InAppBugReporting.Message.CommentLabel,Ticket Description
@@ -4157,7 +4171,7 @@ Feature.Moments.Description.HowToCaptureStep2,Enable the Capture controls
 Feature.Moments.Description.HowToCaptureStep3,Capture photos and videos of gameplay
 Feature.Moments.Description.LeaveMomentsCreation,"You'll lose all your changes, but you can still find this capture in your <b>Captures</b> gallery."
 Feature.Moments.Description.NoMusicResults,No music found
-Feature.Moments.Description.NonInfiniteScrollEndBody,You've reached a stopping point in Moments. Tap below to keep watching.
+Feature.Moments.Description.NonInfiniteScrollEndBody,We've paused your feed. You can decide if you'd like to continue watching.
 Feature.Moments.Description.NothingHereYet,Nothing here yet...
 Feature.Moments.Description.PublishMoment,Describe your Moment
 Feature.Moments.Description.TooManyUploads,You have uploaded too many videos today. Try again tomorrow.
@@ -4222,7 +4236,7 @@ Feature.Moments.Label.MomentUnavailableDefault,This Moment isn't available.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,No comments yet
-Feature.Moments.Label.NonInfiniteScrollEndTitle,You're all caught up for now
+Feature.Moments.Label.NonInfiniteScrollEndTitle,There are more Moments to watch
 Feature.Moments.Label.Photos,Photos
 Feature.Moments.Label.PostDeleted,Moment deleted
 Feature.Moments.Label.PostRemovedBody,The Moment you posted goes against our Community Standards.
@@ -5101,7 +5115,7 @@ Feature.Schools.Heading.RemoveYourSchool,Remove your school
 Feature.Schools.Heading.SchoolIsLive,Your school is now open
 Feature.Schools.Heading.SchoolUnavailable,Your school is unavailable
 Feature.Schools.Heading.SelectGraduationYear,Select graduation year
-Feature.Schools.Heading.ShareWithFriends,Share with friends
+Feature.Schools.Heading.ShareWithFriends,
 Feature.Schools.Heading.ThanksForInterest,Thanks for your interest
 Feature.Schools.Heading.YouJoinedSchool,You joined {school}!
 Feature.Schools.Heading.YourFounderReward,Your founder reward

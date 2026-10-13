@@ -7,7 +7,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorSurfaceSurface200Color3",
-				value = Color3.new(0.00392157, 0.105882, 0.47451)
+				value = Color3.new(0.12549, 0.133333, 0.152941)
 			},
 			[2] = { name = "ColorSurfaceSurface200Transparency", value = 0 }
 		}
@@ -34,7 +34,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorOverMediaOverMedia100Color3",
-				value = Color3.new(0, 0.0901961, 0.419608)
+				value = Color3.new(0.0980392, 0.101961, 0.121569)
 			},
 			[2] = {
 				name = "ColorOverMediaOverMedia100Transparency",
@@ -95,7 +95,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorOverMediaOverMedia0Color3",
-				value = Color3.new(0, 0.0745098, 0.341176)
+				value = Color3.new(0.0705882, 0.0705882, 0.0823529)
 			},
 			[2] = {
 				name = "ColorOverMediaOverMedia0Transparency",
@@ -203,7 +203,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorContentInverseEmphasisColor3",
-				value = Color3.new(0.0980392, 0.101961, 0.121569)
+				value = Color3.new(0.12549, 0.133333, 0.152941)
 			},
 			[2] = {
 				name = "ColorContentInverseEmphasisTransparency",
@@ -315,7 +315,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorContentInverseDefaultColor3",
-				value = Color3.new(0.207843, 0.215686, 0.254902)
+				value = Color3.new(0.286275, 0.301961, 0.352941)
 			},
 			[2] = {
 				name = "ColorContentInverseDefaultTransparency",
@@ -375,7 +375,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorSurfaceSurface300Color3",
-				value = Color3.new(0.00784314, 0.12549, 0.552941)
+				value = Color3.new(0.152941, 0.160784, 0.188235)
 			},
 			[2] = { name = "ColorSurfaceSurface300Transparency", value = 0 }
 		}
@@ -571,7 +571,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorActionAlertForegroundColor3",
-				value = Color3.new(0.921569, 0.47451, 0.45098)
+				value = Color3.new(0.941176, 0.266667, 0.2)
 			},
 			[2] = {
 				name = "ColorActionAlertForegroundTransparency",
@@ -635,7 +635,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorSurfaceSurface0Color3",
-				value = Color3.new(0, 0.0745098, 0.341176)
+				value = Color3.new(0.0705882, 0.0705882, 0.0823529)
 			},
 			[2] = { name = "ColorSurfaceSurface0Transparency", value = 0 }
 		}
@@ -648,7 +648,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorOverMediaOverMedia300Color3",
-				value = Color3.new(0.00784314, 0.12549, 0.552941)
+				value = Color3.new(0.152941, 0.160784, 0.188235)
 			},
 			[2] = {
 				name = "ColorOverMediaOverMedia300Transparency",
@@ -684,7 +684,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorContentInverseLinkColor3",
-				value = Color3.new(0, 0.176471, 0.839216)
+				value = Color3.new(0.0784314, 0.27451, 1)
 			},
 			[2] = { name = "ColorContentInverseLinkTransparency", value = 0 }
 		}
@@ -712,7 +712,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorContentLinkColor3",
-				value = Color3.new(0.439216, 0.627451, 1)
+				value = Color3.new(0.321569, 0.545098, 1)
 			},
 			[2] = { name = "ColorContentLinkTransparency", value = 0 }
 		}
@@ -908,7 +908,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorSurfaceSurface100Color3",
-				value = Color3.new(0, 0.0901961, 0.419608)
+				value = Color3.new(0.0980392, 0.101961, 0.121569)
 			},
 			[2] = { name = "ColorSurfaceSurface100Transparency", value = 0 }
 		}
@@ -1089,7 +1089,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorOverMediaOverMedia200Color3",
-				value = Color3.new(0.00392157, 0.105882, 0.47451)
+				value = Color3.new(0.12549, 0.133333, 0.152941)
 			},
 			[2] = {
 				name = "ColorOverMediaOverMedia200Transparency",
@@ -1136,7 +1136,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorContentInverseMutedColor3",
-				value = Color3.new(0.286275, 0.301961, 0.352941)
+				value = Color3.new(0.415686, 0.435294, 0.505882)
 			},
 			[2] = { name = "ColorContentInverseMutedTransparency", value = 0 }
 		}

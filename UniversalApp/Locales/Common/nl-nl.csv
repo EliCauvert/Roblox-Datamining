@@ -482,7 +482,6 @@ Authentication.SignUp.Description.VerificationPage,"Door op Registreren te klikk
 Authentication.SignUp.Description.VerificationPage.CreateAccount,"Door op Account aanmaken te klikken, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
 Authentication.SignUp.Description.VerificationPageMultiStep,"Door op Doorgaan te klikken, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,"Door de code in te voeren en op Doorgaan te klikken, geef je je kind toestemming om Roblox te gebruiken."
-Authentication.SignUp.Header.CloseWithoutFinishing,Afsluiten zonder af te ronden?
 Authentication.SignUp.Header.CreatePassword,"Hoi {username}, maak een wachtwoord aan"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Hoi {username}, maak een wachtwoord of toegangssleutel aan"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,We hebben je account gemaakt. Kies hoe je je wilt aanmelden.
@@ -954,7 +953,7 @@ CommonUI.Features.Label.TermsOfUse,
 CommonUI.Features.Label.Thanks,Bedankt
 CommonUI.Features.Label.TheHunt,Roblox-evenementen
 CommonUI.Features.Label.Trades,Ruilen
-CommonUI.Features.Label.Unchecked,Niet aangevinkt
+CommonUI.Features.Label.Unchecked,Niet geverifieerd
 CommonUI.Features.Label.VNGMigrationBody,Download de nieuwe Roblox-VNG-app en log in met je Roblox-gebruikersnaam om Roblox in jouw regio te blijven gebruiken.
 CommonUI.Features.Label.VNGMigrationBodyPC,Download de nieuwe Roblox-VN-app en log in met je Roblox-gebruikersnaam om Roblox in jouw regio te blijven gebruiken.
 CommonUI.Features.Label.VNGMigrationGoButton,Ga naar de Roblox-VNG-app
@@ -1126,7 +1125,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox genereert automatisc
 CoreScripts.TextChat.ChatWindow.Transcribing,Transcriberen...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Dat hebben we niet opgepikt! Probeer het opnieuw.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,We ondersteunen die taal nog niet!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Om je microfoon te gebruiken, tik je hier om je apparaatinstellingen bij te werken."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,Tik hier om je apparaatinstellingen bij te werken om je microfoon te gebruiken.
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Om je microfoon te gebruiken, ga je naar je apparaatinstellingen en geef je Roblox toegang tot de microfoon."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Geen toegang tot microfoon
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Om berichten met je stem te verzenden, verwerken we je audio en verwijderen we deze meteen, in overeenstemming met ons privacybeleid."
@@ -2337,6 +2336,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,Sessietijd van nieuwe gebruiker
 Feature.Build.Analytics.Title.PayerConversion,Conversie betalende gebruikers/spelers
 Feature.Build.Analytics.Title.PlaythroughRate,Playthrough-percentage
 Feature.Build.Analytics.Title.RobuxSpent,Uitgegeven Robux
+Feature.Build.Analytics.Title.TopAcquisitionSource,Topbron
+Feature.Build.Analytics.Title.TopDropOffStep,Grootste verlies
 Feature.Build.Analytics.Title.TotalPlaytime,Totale speeltijd
 Feature.Build.Analytics.Visits,Bezoeken
 Feature.Build.Content.NewGame,Nieuw spel
@@ -2380,7 +2381,6 @@ Feature.Build.Description.PlaytestLatest,Je bent je nieuwste versie aan het test
 Feature.Build.Description.PlaytestLocked,Je kunt beginnen met playtesten nadat je je eerste spel hebt gemaakt.
 Feature.Build.Description.PlaytesterAccess,Nodig vrienden uit als vroege testers of wijzig de instelling Doelgroep van je spel om meer mensen te laten spelen.
 Feature.Build.Description.PricingRules,Prijsregels instellen
-Feature.Build.Description.PrivateShare,Wijzig de instelling Doelgroep van je spel om deze te delen.
 Feature.Build.Description.PromoteGameFree,Breng je spel met één tik onder de aandacht van meer spelers.
 Feature.Build.Description.PromoteGamePaid,Maak een advertentie om je spel onder de aandacht te brengen van miljoenen spelers.
 Feature.Build.Description.PromoteGameWithAdCampaign,Vergroot je doelgroep met een advertentiecampagne van {durationDays} dagen en zorg ervoor dat je spel wordt ontdekt.
@@ -2506,6 +2506,15 @@ Feature.Build.Label.Thinking,Aan het denken
 Feature.Build.Label.Title,Titel
 Feature.Build.Label.TitleDescription,Titel en beschrijving
 Feature.Build.Label.Tool,tool
+Feature.Build.Label.ToolAdEligibilityDone,Geschiktheid van advertentie gecontroleerd
+Feature.Build.Label.ToolAdEligibilityFailed,Kan geschiktheid van advertentie niet controleren
+Feature.Build.Label.ToolAdEligibilityRunning,Geschiktheid van advertentie controleren
+Feature.Build.Label.ToolAnalyticsDone,De statistieken zijn geanalyseerd
+Feature.Build.Label.ToolAnalyticsFailed,Kan de statistieken niet analyseren
+Feature.Build.Label.ToolAnalyticsRunning,De statistieken worden geanalyseerd
+Feature.Build.Label.ToolApiDocsDone,API-documentatie opgezocht
+Feature.Build.Label.ToolApiDocsFailed,Kan API-documentatie niet opzoeken
+Feature.Build.Label.ToolApiDocsRunning,API-documentatie opzoeken
 Feature.Build.Label.ToolAssetDone,Asset ingevoegd
 Feature.Build.Label.ToolAssetFailed,Kan asset niet invoegen
 Feature.Build.Label.ToolAssetRunning,Bezig met het invoeren van de asset…
@@ -2515,6 +2524,9 @@ Feature.Build.Label.ToolAssetSearchRunning,Bezig met doorzoeken van de assetbibl
 Feature.Build.Label.ToolClientDMDone,Client DataModel doorzocht
 Feature.Build.Label.ToolClientDMFailed,Kan client DataModel niet doorzoeken
 Feature.Build.Label.ToolClientDMRunning,Client DataModel doorzoeken
+Feature.Build.Label.ToolCompileDone,De code is gecompileerd
+Feature.Build.Label.ToolCompileFailed,Kan de code niet compileren
+Feature.Build.Label.ToolCompileRunning,Bezig met het compileren van de code
 Feature.Build.Label.ToolGameInfoDone,Spelinformatie bijgewerkt
 Feature.Build.Label.ToolGameInfoFailed,Kan spelinformatie niet bijwerken
 Feature.Build.Label.ToolGameInfoRunning,Bezig met het bijwerken van de spelinformatie…
@@ -2551,6 +2563,9 @@ Feature.Build.Label.ToolQuestionRunning,Bezig met een vraag stellen…
 Feature.Build.Label.ToolReqUpdateDone,Vereisten bijgewerkt
 Feature.Build.Label.ToolReqUpdateFailed,Kan vereisten niet bijwerken
 Feature.Build.Label.ToolReqUpdateRunning,Bezig met het bijwerken van de vereisten…
+Feature.Build.Label.ToolRestoreVersionDone,Versie hersteld
+Feature.Build.Label.ToolRestoreVersionFailed,Kan versie niet herstellen
+Feature.Build.Label.ToolRestoreVersionRunning,Versie wordt hersteld
 Feature.Build.Label.ToolScriptDone,Script uitgevoerd
 Feature.Build.Label.ToolScriptFailed,Kan script niet uitvoeren
 Feature.Build.Label.ToolScriptRunning,Bezig met het uitvoeren van het script…
@@ -2566,6 +2581,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Bezig met het plannen van je taken…
 Feature.Build.Label.ToolThumbnailDone,Spelminiatuur ingesteld
 Feature.Build.Label.ToolThumbnailFailed,Kan spelminiatuur niet instellen
 Feature.Build.Label.ToolThumbnailRunning,Bezig met het instellen van de spelminiatuur…
+Feature.Build.Label.ToolVerifyDone,Op fouten gecontroleerd
+Feature.Build.Label.ToolVerifyFailed,Kan niet controleren op fouten
+Feature.Build.Label.ToolVerifyRunning,Controleren op fouten
 Feature.Build.Label.UniverseNumber,Universum-{UNIVERSE_ID}
 Feature.Build.Label.Unknown,Onbekend
 Feature.Build.Label.UnlimitedUsed,{USED} gebruikt • Geen limiet
@@ -2696,7 +2714,6 @@ Feature.Build.Title.ExperienceAudience,Doelgroep van de ervaring
 Feature.Build.Title.FreeUsageReached,Limiet voor gratis Build-tegoed bereikt
 Feature.Build.Title.FriendsOnlyPlay,Alleen vrienden kunnen spelen
 Feature.Build.Title.GameCreationDone,Spel gecreëerd
-Feature.Build.Title.GamePrivate,Dit spel is privé
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Gebruikers ophalen
 Feature.Build.Title.ManagedPricingAcknowledgement,Beheerde prijzen inschakelen?
@@ -3975,7 +3992,6 @@ Feature.Home.Heading.JoinYourFriends,Sluit je aan bij je vrienden
 Feature.Home.HeadingFriends,Vrienden ({friendCount})
 Feature.Home.Label.HappeningNow,Nu gaande
 Feature.Home.PeopleList.ChatWith,Chat met {username}
-Feature.Home.Robux,
 Feature.InAppBugReporting.Message.AppVersion,Build: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,De details mogen niet leeg zijn
 Feature.InAppBugReporting.Message.CommentLabel,Beschrijving van ticket
@@ -4172,6 +4188,8 @@ Feature.Moments.Label.MomentFailedToPostTitle,Moment kon niet worden gepost
 Feature.Moments.Label.MomentNoLongerAvailable,Dit moment is niet meer beschikbaar.
 Feature.Moments.Label.MomentPublishedBody,Het publiceren van je moment is geslaagd.
 Feature.Moments.Label.MomentPublishedTitle,Moment gepubliceerd
+Feature.Moments.Label.MomentRemovedBody,"Het was in strijd met onze veiligheidsregels, dus het is niet meer beschikbaar."
+Feature.Moments.Label.MomentRemovedTitle,We hebben dit moment verwijderd
 Feature.Moments.Label.MomentUnavailable,Moment niet beschikbaar
 Feature.Moments.Label.MomentUnavailableDefault,Dit moment is niet beschikbaar.
 Feature.Moments.Label.MomentsExperienceName,
@@ -4941,7 +4959,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% korting op de eer
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% korting op de eerste {trialUnlockDays} dagen, daarna 20% korting op items en avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Meer plezier voor minder Robux. Abonneer je op Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Doe eerder mee met Plus
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,Deze doorverwijslink is niet langer geldig.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} heeft je uitgenodigd voor Plus. Jullie krijgen allebei {amount} Robux wanneer je Plus afsluit.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"Door op \u{201C}{ctaText}\u{201D} te klikken, ga je akkoord met de <a href=""{referralTermsUrl}"">Voorwaarden van het Doorverwijzingsprogramma</a> en de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Aanbieding alleen geldig voor nieuwe Plus-abonnees.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Wanneer iemand Plus afsluit via jouw link.
 Feature.RobloxSubscription.Description.ReferralShare,Nodig iemand uit voor Plus en jullie krijgen allebei {amount} Robux wanneer die persoon Plus afsluit.

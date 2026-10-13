@@ -445,6 +445,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,계속하기 전에 �
 Authentication.SignUp.Action.ApplyOnNextRespawn,다음 리스폰 시 적용
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.ContinueSetup,설정 계속
 Authentication.SignUp.Action.Create,만들기
 Authentication.SignUp.Action.CreateAPasskey,패스키 생성
 Authentication.SignUp.Action.CreateAccount,
@@ -500,7 +501,7 @@ Authentication.SignUp.Description.VerificationPage,'회원가입'을 누르면 �
 Authentication.SignUp.Description.VerificationPage.CreateAccount,'계정 생성'을 누르면 중재 조항을 포함한 이용 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.
 Authentication.SignUp.Description.VerificationPageMultiStep,'계속'을 누르면 중재 조항을 포함한 이용 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,코드를 입력하고 '계속'을 클릭하면 자녀의 Roblox 이용을 승인하게 됩니다.
-Authentication.SignUp.Header.CloseWithoutFinishing,완료하지 않고 닫으시겠습니까?
+Authentication.SignUp.Header.CancelAccountCreation,계정 만들기를 취소할까요?
 Authentication.SignUp.Header.CreatePassword,"{username} 님, 비밀번호를 생성하세요"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"{username} 님, 비밀번호 또는 패스키를 생성하세요"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,계정이 생성되었습니다. 로그인 방법을 선택하세요.
@@ -2262,6 +2263,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,텍스트 복사
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,새 게임 만들기
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,다시 묻지 않음
@@ -2315,10 +2317,16 @@ Feature.Build.Analytics.Description.PayerConversion,유료 사용자 전환은 �
 Feature.Build.Analytics.Description.PlaythroughRate,플레이스루 비율은 전체 플레이 세션을 완료한 방문자의 비율입니다. 비율이 높다는 것은 플레이어가 체험을 쉽게 시작하고 끝까지 플레이할 가치가 있다고 생각하는 것을 의미합니다.
 Feature.Build.Analytics.Description.TotalPlaytime,총 플레이타임은 해당 기간 동안 모든 플레이어가 체험에 소요한 시간을 합산한 것입니다. 플레이타임이 증가하면 일반적으로 더 많은 참여 세션이 있다는 신호입니다.
 Feature.Build.Analytics.DurationHours,{number}시간
+Feature.Build.Analytics.Goal.Action.CreateAd,광고 만들기
+Feature.Build.Analytics.Goal.Action.SellItems,아이템 판매
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,친구와 공유
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,좋은 첫인상을 남기세요
 Feature.Build.Analytics.Goal.GetMorePlayers,플레이어를 더 많이 유치하세요
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,플레이어의 재방문을 유도하세요
+Feature.Build.Analytics.Goal.Locked.EarnRobux,이 통계를 보려면 게임 내에서 Robux를 획득하세요.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,이 통계를 보려면 첫 번째 플레이어를 확보하세요.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,이 통계를 보려면 첫 번째 재방문 플레이어를 확보하세요.
 Feature.Build.Analytics.KeyStats,주요 통계
 Feature.Build.Analytics.LastMonth,지난달
 Feature.Build.Analytics.LastWeek,
@@ -2356,6 +2364,8 @@ Feature.Build.Analytics.Title.NewUserSessionTime,신규 사용자 세션 시간
 Feature.Build.Analytics.Title.PayerConversion,유료 사용자 전환
 Feature.Build.Analytics.Title.PlaythroughRate,
 Feature.Build.Analytics.Title.RobuxSpent,사용된 Robux
+Feature.Build.Analytics.Title.TopAcquisitionSource,상위 소스
+Feature.Build.Analytics.Title.TopDropOffStep,최대 이탈률
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,방문 수
 Feature.Build.Content.NewGame,새 게임
@@ -2399,7 +2409,6 @@ Feature.Build.Description.PlaytestLatest,최신 버전을 플레이테스트하�
 Feature.Build.Description.PlaytestLocked,첫 게임을 만든 후 플레이테스트를 시작할 수 있습니다.
 Feature.Build.Description.PlaytesterAccess,친구를 얼리 테스터로 초대하거나 게임의 대상 설정을 변경하여 더 많은 사람이 플레이할 수 있도록 하세요.
 Feature.Build.Description.PricingRules,가격 규칙 설정
-Feature.Build.Description.PrivateShare,게임을 공유하려면 게임의 대상 설정을 변경하세요.
 Feature.Build.Description.PromoteGameFree,한 번의 탭으로 더 많은 플레이어에게 게임을 노출하세요.
 Feature.Build.Description.PromoteGamePaid,광고를 만들어 수백만 명의 플레이어에게 게임을 노출하세요.
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}일 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요.
@@ -2443,6 +2452,7 @@ Feature.Build.Label.AdditionalUsage,추가 Build 사용량
 Feature.Build.Label.AdditionalUsed,{LIMIT} 중 {USED} 사용됨
 Feature.Build.Label.AdsManager,광고 관리자
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,모든 게임
 Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
 Feature.Build.Label.Autosaved,자동 저장됨
 Feature.Build.Label.Available,이용 가능
@@ -2467,12 +2477,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,간편한 성과 보고서
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,무료
 Feature.Build.Label.FreeBuildUsage,무료 Build 사용량
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,게임 플레이 횟수
 Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
+Feature.Build.Label.GroupGames,그룹 게임
+Feature.Build.Label.Groups,
 Feature.Build.Label.Hi,안녕하세요
 Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
 Feature.Build.Label.Images2D,2D 이미지
@@ -2486,6 +2499,7 @@ Feature.Build.Label.ManagedPricing,관리형 가격 책정
 Feature.Build.Label.ManagedPricingMixed,현재 상품 전체에 혼합
 Feature.Build.Label.MaximizeForGamePlays,게임 플레이 횟수 극대화
 Feature.Build.Label.Models3D,3D 모델
+Feature.Build.Label.MyGames,내 게임
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,한도 없음
 Feature.Build.Label.NotStarted,시작 전
@@ -2525,6 +2539,15 @@ Feature.Build.Label.Thinking,생각 중
 Feature.Build.Label.Title,제목
 Feature.Build.Label.TitleDescription,제목 및 설명
 Feature.Build.Label.Tool,도구
+Feature.Build.Label.ToolAdEligibilityDone,광고 자격 확인 완료
+Feature.Build.Label.ToolAdEligibilityFailed,광고 자격을 확인할 수 없음
+Feature.Build.Label.ToolAdEligibilityRunning,광고 자격 확인 중
+Feature.Build.Label.ToolAnalyticsDone,통계 분석 완료
+Feature.Build.Label.ToolAnalyticsFailed,통계를 분석할 수 없음
+Feature.Build.Label.ToolAnalyticsRunning,통계 분석 중
+Feature.Build.Label.ToolApiDocsDone,API 문서 조회 완료
+Feature.Build.Label.ToolApiDocsFailed,API 문서를 조회할 수 없음
+Feature.Build.Label.ToolApiDocsRunning,API 문서 조회 중
 Feature.Build.Label.ToolAssetDone,애셋 삽입됨
 Feature.Build.Label.ToolAssetFailed,애셋을 삽입할 수 없음
 Feature.Build.Label.ToolAssetRunning,애셋 삽입 중
@@ -2534,6 +2557,9 @@ Feature.Build.Label.ToolAssetSearchRunning,애셋 라이브러리 검색 중
 Feature.Build.Label.ToolClientDMDone,클라이언트 DataModel 검색됨
 Feature.Build.Label.ToolClientDMFailed,클라이언트 DataModel을 검색할 수 없음
 Feature.Build.Label.ToolClientDMRunning,클라이언트 DataModel 검색 중
+Feature.Build.Label.ToolCompileDone,코드 컴파일 완료
+Feature.Build.Label.ToolCompileFailed,코드를 컴파일할 수 없음
+Feature.Build.Label.ToolCompileRunning,코드 컴파일 중
 Feature.Build.Label.ToolGameInfoDone,게임 정보 업데이트됨
 Feature.Build.Label.ToolGameInfoFailed,게임 정보를 업데이트할 수 없음
 Feature.Build.Label.ToolGameInfoRunning,게임 정보 업데이트 중
@@ -2570,6 +2596,9 @@ Feature.Build.Label.ToolQuestionRunning,질문하는 중
 Feature.Build.Label.ToolReqUpdateDone,요건 업데이트됨
 Feature.Build.Label.ToolReqUpdateFailed,요건을 업데이트할 수 없음
 Feature.Build.Label.ToolReqUpdateRunning,요건 업데이트 중
+Feature.Build.Label.ToolRestoreVersionDone,버전 복구 완료
+Feature.Build.Label.ToolRestoreVersionFailed,버전을 복구할 수 없음
+Feature.Build.Label.ToolRestoreVersionRunning,버전 복구 중
 Feature.Build.Label.ToolScriptDone,스크립트 실행됨
 Feature.Build.Label.ToolScriptFailed,스크립트를 실행할 수 없음
 Feature.Build.Label.ToolScriptRunning,스크립트 실행 중
@@ -2585,6 +2614,9 @@ Feature.Build.Label.ToolTasksPlanRunning,작업 계획 중
 Feature.Build.Label.ToolThumbnailDone,게임 섬네일 설정
 Feature.Build.Label.ToolThumbnailFailed,게임 섬네일을 설정하지 못함
 Feature.Build.Label.ToolThumbnailRunning,게임 섬네일 설정 중
+Feature.Build.Label.ToolVerifyDone,오류 확인 완료
+Feature.Build.Label.ToolVerifyFailed,오류를 확인할 수 없음
+Feature.Build.Label.ToolVerifyRunning,오류 확인 중
 Feature.Build.Label.UniverseNumber,{UNIVERSE_ID} 유니버스
 Feature.Build.Label.Unknown,알 수 없음
 Feature.Build.Label.UnlimitedUsed,{USED} 사용됨 • 한도 없음
@@ -2615,6 +2647,7 @@ Feature.Build.Message.BuildInternalError,Build에 문제가 발생했습니다. 
 Feature.Build.Message.BuildResponseFailed,Build가 응답하지 않았습니다. 다시 시도해 보세요.
 Feature.Build.Message.BuildStillWorking,"작업 진행 중입니다. 기다리는 동안 앱을 종료하거나, Roblox를 플레이하거나, 다른 프로젝트를 시작할 수 있습니다."
 Feature.Build.Message.BuildStopped,Build를 중단했습니다.
+Feature.Build.Message.BuildTakingLonger,예상보다 시간이 오래 걸리고 있습니다. 계속 기다리거나 다른 작업을 시작하실 수 있습니다.
 Feature.Build.Message.BuildTemporarilyDown,Build를 일시적으로 이용할 수 없습니다. 1분 후 다시 시도해 보세요.
 Feature.Build.Message.CompletedTasks,완료한 작업 {COUNT}개
 Feature.Build.Message.ConversationGone,이 대화는 더 이상 이용할 수 없습니다. 새 대화를 시작하세요.
@@ -2707,7 +2740,7 @@ Feature.Build.Title.BuildUsage,Build 사용량
 Feature.Build.Title.ChangesNotLive,변경 사항이 아직 라이브 상태가 아닙니다
 Feature.Build.Title.ChatBuildUnavailable,Build를 이용할 수 없습니다.
 Feature.Build.Title.Content,콘텐츠
-Feature.Build.Title.CreateYourAd,광고 만들기
+Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,일일 Robux 한도에 도달함
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,상품 편집
@@ -2715,7 +2748,6 @@ Feature.Build.Title.ExperienceAudience,체험 오디언스
 Feature.Build.Title.FreeUsageReached,무료 Build 사용량 한도에 도달함
 Feature.Build.Title.FriendsOnlyPlay,친구만 플레이할 수 있습니다
 Feature.Build.Title.GameCreationDone,게임 제작 완료
-Feature.Build.Title.GamePrivate,비공개 게임입니다
 Feature.Build.Title.GenericError,오류 발생
 Feature.Build.Title.GetUsers,사용자 가져오기
 Feature.Build.Title.ManagedPricingAcknowledgement,관리형 가격 책정을 켜시겠습니까?
@@ -2818,7 +2850,7 @@ Feature.Catalog.Heading.PremiumOnly,Roblox Plus 멤버 전용
 Feature.Catalog.Heading.QuantityLimitReached,크리에이터가 설정해 둔 한도에 도달했습니다.
 Feature.Catalog.Heading.QuickMenu,퀵 메뉴
 Feature.Catalog.Heading.Resellers,재판매자
-Feature.Catalog.Heading.SellItem,아이템 판매
+Feature.Catalog.Heading.SellItem,
 Feature.Catalog.Heading.Sellers,판매자
 Feature.Catalog.Heading.SetPrice,정가
 Feature.Catalog.Heading.ShowBodyParts,신체 파트 표시
@@ -3995,7 +4027,6 @@ Feature.Home.Heading.JoinYourFriends,친구와 합류
 Feature.Home.HeadingFriends,친구 ({friendCount}명)
 Feature.Home.Label.HappeningNow,지금 진행 중
 Feature.Home.PeopleList.ChatWith,{username} 님과 채팅
-Feature.Home.Robux,
 Feature.InAppBugReporting.Message.AppVersion,빌드: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,세부 사항은 반드시 입력해야 합니다
 Feature.InAppBugReporting.Message.CommentLabel,신고 내용 설명
@@ -4135,7 +4166,7 @@ Feature.Moments.Description.HowToCaptureStep2,캡처 제어를 활성화합니�
 Feature.Moments.Description.HowToCaptureStep3,게임 플레이 사진 및 동영상을 캡처합니다.
 Feature.Moments.Description.LeaveMomentsCreation,"모든 변경 사항이 사라지지만, 이 캡처는 <b>캡처</b> 갤러리에서 계속 확인하실 수 있습니다."
 Feature.Moments.Description.NoMusicResults,음악을 찾을 수 없음
-Feature.Moments.Description.NonInfiniteScrollEndBody,모멘트에서 정지 지점에 도달했습니다. 계속 보려면 아래를 누르세요.
+Feature.Moments.Description.NonInfiniteScrollEndBody,피드가 일시 중지되었습니다. 계속 시청할지 여부를 결정하실 수 있습니다.
 Feature.Moments.Description.NothingHereYet,아직 아무것도 없네요...
 Feature.Moments.Description.PublishMoment,모멘트에 대한 설명을 작성해 주세요
 Feature.Moments.Description.TooManyUploads,오늘 업로드한 동영상이 너무 많습니다. 내일 다시 시도하세요.
@@ -4193,12 +4224,14 @@ Feature.Moments.Label.MomentFailedToPostTitle,모멘트를 게시하지 못했�
 Feature.Moments.Label.MomentNoLongerAvailable,이 모멘트는 더 이상 이용할 수 없습니다.
 Feature.Moments.Label.MomentPublishedBody,모멘트 게시가 완료되었습니다.
 Feature.Moments.Label.MomentPublishedTitle,모멘트 게시됨
+Feature.Moments.Label.MomentRemovedBody,"안전 규칙을 위반한 모멘트로, 더 이상 이용할 수 없습니다."
+Feature.Moments.Label.MomentRemovedTitle,이 모멘트는 제거되었습니다
 Feature.Moments.Label.MomentUnavailable,모멘트 이용 불가
 Feature.Moments.Label.MomentUnavailableDefault,이 모멘트는 이용할 수 없습니다.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,코멘트 아직 없음
-Feature.Moments.Label.NonInfiniteScrollEndTitle,지금은 모두 확인했습니다
+Feature.Moments.Label.NonInfiniteScrollEndTitle,시청할 모멘트가 더 있습니다
 Feature.Moments.Label.Photos,사진
 Feature.Moments.Label.PostDeleted,모멘트 삭제됨
 Feature.Moments.Label.PostRemovedBody,게시하신 모멘트는 당사 커뮤니티 규정에 위배됩니다.
@@ -4962,7 +4995,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"아이템 및 아바�
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"아이템 및 아바타 첫 {trialUnlockDays}일 동안 10% 할인, 이후 20% 할인"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Roblox Plus 구독을 통해 적은 Robux로 더 큰 즐거움을 누리세요.
 Feature.RobloxSubscription.Description.JoinEarly,Plus로 일찍 참여하기
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,더 이상 유효하지 않은 추천 링크입니다.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} 님이 나를 Plus에 초대했습니다. Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"\u{201C}{ctaText}\u{201D}을(를) 클릭하면 <a href=""{referralTermsUrl}"">추천 프로그램 약관</a> 및 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Description.ReferralRecipientReward,새로운 Plus 구독자에게만 제공되는 혜택입니다.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,누군가 회원님의 링크를 통해 Plus를 구매하는 경우.
 Feature.RobloxSubscription.Description.ReferralShare,"다른 사람을 Plus에 초대한 경우, 초대 받은 사람이 Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다."
@@ -5069,7 +5104,7 @@ Feature.Schools.Heading.RemoveYourSchool,내 학교 제거
 Feature.Schools.Heading.SchoolIsLive,이제 내 학교를 이용할 수 있습니다
 Feature.Schools.Heading.SchoolUnavailable,내 학교 이용 불가
 Feature.Schools.Heading.SelectGraduationYear,졸업 연도 선택
-Feature.Schools.Heading.ShareWithFriends,친구와 공유
+Feature.Schools.Heading.ShareWithFriends,
 Feature.Schools.Heading.ThanksForInterest,관심을 가져주셔서 감사합니다
 Feature.Schools.Heading.YouJoinedSchool,{school}에 합류했습니다!
 Feature.Schools.Heading.YourFounderReward,내 창립 멤버 보상
