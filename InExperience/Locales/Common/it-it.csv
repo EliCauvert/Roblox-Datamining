@@ -89,6 +89,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Il tuo indirizzo 
 Authentication.Login.WeChat.AntiAddictionText,"Boicotta le brutte esperienze, rifiuta le esperienze piratate. Sii consapevole dell'autodifesa e dell'essere ingannati. Le esperienze di visita fanno bene al cervello, ma troppe visite di esperienza possono danneggiare la tua salute. Gestisci bene il tuo tempo e goditi uno stile di vita sano."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Applica alla prossima rigenerazione
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ContinueSetup,Continua configurazione
 Authentication.SignUp.Action.Create,Crea
 Authentication.SignUp.Action.CreateAccountSentenceCase,Crea un account
 Authentication.SignUp.Action.ExitModalLeave,Esci
@@ -102,6 +103,7 @@ Authentication.SignUp.Description.Try,Prova
 Authentication.SignUp.Description.UsernameChanged,"Tutto in ordine! Il tuo account è pronto e collegato alla piattaforma {platform}. Ricarica per visualizzare il tuo nome utente aggiornato nel gioco. In caso contrario, la modifica verrà applicata alla prossima sessione."
 Authentication.SignUp.Description.UsernameUnchanged,Ci sei! Il tuo account è pronto e collegato alla piattaforma {platform}. Chatta con gli amici e gioca a milioni di giochi Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Il tuo account Roblox sarà collegato al tuo account per {platform}. Puoi scollegarli dalla schermata Impostazioni in qualsiasi momento. Ci potrebbe essere una pausa prima di essere in grado di collegare a un altro account per {platform}. Facendo clic su {ctaButton}, accetti i Termini di Utilizzo, compresa la clausola di arbitrato e stai riconoscendo l'Informativa sulla privacy."
+Authentication.SignUp.Header.CancelAccountCreation,Vuoi annullare la creazione dell'account?
 Authentication.SignUp.Header.OneLastThing,Un'ultima cosa
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Configura il tuo account Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,Seleziona paese
@@ -1942,6 +1944,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Copia testo
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,Crea nuovo gioco
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Non chiedermelo più
@@ -1995,10 +1998,17 @@ Feature.Build.Analytics.Description.PayerConversion,La conversione pagante è la
 Feature.Build.Analytics.Description.PlaythroughRate,Il tasso di completamento (playthrough) è la percentuale di visite che hanno completato una sessione di gioco completa. Tassi più alti indicano che i giocatori trovano la tua esperienza facile da iniziare e che vale la pena portarla a termine.
 Feature.Build.Analytics.Description.TotalPlaytime,Il tempo di gioco totale somma il tempo che tutti i giocatori hanno trascorso nella tua esperienza nel periodo. L'aumento del tempo di gioco di solito indica sessioni più coinvolgenti.
 Feature.Build.Analytics.DurationHours,{number} ore
+Feature.Build.Analytics.Goal.Action.CreateAd,Crea un annuncio
+Feature.Build.Analytics.Goal.Action.SellItems,Vendi articoli
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,Condividi con gli amici
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,Fai una buona prima impressione
 Feature.Build.Analytics.Goal.GetMorePlayers,Ottieni più giocatori
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Fai in modo che le persone vogliano tornare a giocare
+Feature.Build.Analytics.Goal.Locked.EarnRobux,Guadagna Robux nel tuo gioco per visualizzare queste statistiche.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,Ottieni il tuo primo giocatore per visualizzare queste statistiche.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Fai visualizzare queste statistiche a un numero maggiore di giocatori.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,"Almeno un giocatore deve tornare a giocare di nuovo, per visualizzare queste statistiche."
 Feature.Build.Analytics.KeyStats,Statistiche chiave
 Feature.Build.Analytics.LastMonth,Ultimo mese
 Feature.Build.Analytics.LastWeek,Ultima settimana
@@ -2124,6 +2134,7 @@ Feature.Build.Label.AdditionalUsage,Utilizzo aggiuntivo di Costruisci
 Feature.Build.Label.AdditionalUsed,{USED} di {LIMIT} utilizzato
 Feature.Build.Label.AdsManager,Gestore degli annunci
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,Tutti i giochi
 Feature.Build.Label.AmountAvailable,{AMOUNT} a disposizione
 Feature.Build.Label.Autosaved,Salvato automaticamente
 Feature.Build.Label.Available,disponibile
@@ -2148,12 +2159,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,Fine
 Feature.Build.Label.EasyPerformanceReport,Report sulle prestazioni semplificato
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,Gratis
 Feature.Build.Label.FreeBuildUsage,Utilizzo gratuito di Build
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Riservata agli amici
 Feature.Build.Label.GamePlays,Partite giocate
 Feature.Build.Label.GetMoreBuildUsage,Ottieni più utilizzo di Build
+Feature.Build.Label.GroupGames,Giochi dei gruppi
+Feature.Build.Label.Groups,Gruppi
 Feature.Build.Label.Hi,Ciao
 Feature.Build.Label.IconThumbnails,Icona e miniature
 Feature.Build.Label.Images2D,Immagini 2D
@@ -2167,6 +2181,7 @@ Feature.Build.Label.ManagedPricing,Prezzi gestiti
 Feature.Build.Label.ManagedPricingMixed,Misti tra i prodotti attuali
 Feature.Build.Label.MaximizeForGamePlays,Massimizza per le partite giocate
 Feature.Build.Label.Models3D,Modelli 3D
+Feature.Build.Label.MyGames,I miei giochi
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Senza limiti
 Feature.Build.Label.NotStarted,Non iniziata
@@ -2314,12 +2329,12 @@ Feature.Build.Message.BuildInternalError,Build ha riscontrato un problema. Ripro
 Feature.Build.Message.BuildResponseFailed,Build non ha risposto. Riprova.
 Feature.Build.Message.BuildStillWorking,"Ci stiamo lavorando. Mentre aspetti, puoi uscire dall'app, giocare a Roblox o avviare un altro progetto."
 Feature.Build.Message.BuildStopped,Hai interrotto Build.
+Feature.Build.Message.BuildTakingLonger,L'operazione sta impiegando più tempo del previsto. Puoi continuare ad aspettare o iniziare qualcos'altro.
 Feature.Build.Message.BuildTemporarilyDown,Build è temporaneamente non disponibile. Riprova tra un minuto.
 Feature.Build.Message.CompletedTasks,{COUNT} attività completate
 Feature.Build.Message.ConversationGone,Questa conversazione non è più disponibile. Avvia una nuova conversazione.
 Feature.Build.Message.ConversationNotFound,Impossibile trovare questa conversazione. Avvia una nuova conversazione.
 Feature.Build.Message.CreateGameToUseBuild,Crea un nuovo gioco per iniziare a usare Build.
-Feature.Build.Message.CreatedRevertedVer,È stata creata una versione ripristinata.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Espandi l'idoneità del tuo pubblico sull'Hub Creatore
 Feature.Build.Message.ExperiencesLoadFailed,Impossibile caricare le esperienze
@@ -2356,7 +2371,6 @@ Feature.Build.Message.PublishExpandAudience,Pubblica per ampliare il tuo pubblic
 Feature.Build.Message.PublishNotReverted,La tua pubblicazione non è stata ripristinata. Riprova.
 Feature.Build.Message.PublishPromotionUpsell,Congratulazioni per la pubblicazione del tuo gioco! Hai {promotionCount} promozioni gratuite a disposizione per ottenere più giocatori su Roblox.
 Feature.Build.Message.PublishPromotionUpsellSingular,Congratulazioni per la pubblicazione del tuo gioco! Hai 1 promozione gratuita a disposizione per ottenere più giocatori su Roblox.
-Feature.Build.Message.PublishReverted,Pubblicazione ripristinata.
 Feature.Build.Message.QuestionnaireNeeded,Questo gioco è stato modificato al di fuori di Build. Compila il questionario sui contenuti per pubblicarlo.
 Feature.Build.Message.ReadyToPlay,Il tuo gioco è pronto per essere giocato su Roblox!
 Feature.Build.Message.ResetHours,Si ripristina tra {HOURS} ore
@@ -3652,7 +3666,7 @@ Feature.Moments.Description.HowToCaptureStep2,Abilita i controlli per l'acquisiz
 Feature.Moments.Description.HowToCaptureStep3,Acquisisci foto e video della partita
 Feature.Moments.Description.LeaveMomentsCreation,"Perderai tutte le modifiche, ma potrai comunque trovare questa cattura nella tua galleria <b>catture</b>."
 Feature.Moments.Description.NoMusicResults,Nessuna musica trovata
-Feature.Moments.Description.NonInfiniteScrollEndBody,Hai raggiunto un punto di interruzione in Momenti. Tocca qui sotto per continuare a guardare.
+Feature.Moments.Description.NonInfiniteScrollEndBody,Abbiamo messo in pausa il tuo feed. Puoi decidere se desideri continuare a guardare.
 Feature.Moments.Description.NothingHereYet,Qui non c'è ancora niente...
 Feature.Moments.Description.PublishMoment,Descrivi il tuo Momento
 Feature.Moments.Description.StayFriendly,Manteniamo un tono amichevole
@@ -3718,7 +3732,7 @@ Feature.Moments.Label.MomentUnavailableDefault,Questo Momento non è disponibile
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Ancora nessun commento
-Feature.Moments.Label.NonInfiniteScrollEndTitle,È tutto aggiornato per ora
+Feature.Moments.Label.NonInfiniteScrollEndTitle,Ci sono altri Momenti da guardare
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostDeleted,Momento eliminato
 Feature.Moments.Label.PostRemovedBody,Il Momento che hai pubblicato viola le nostre norme della community.
@@ -3758,6 +3772,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Attendi un minuto, quindi riprova"
 Feature.Moments.Label.VoiceModerationError,Il tuo script deve seguire le regole di sicurezza
 Feature.Moments.Label.VoicePlaceholder,Inserisci il testo della tua voce fuori campo. Limite di {maxCount} caratteri
 Feature.Moments.Label.VoiceTimeoutBody,Tempo di generazione della voce fuori campo scaduto.
+Feature.Moments.Label.VoiceTooManyNumbersError,Lo script contiene troppi numeri
 Feature.Moments.Label.WriteComment,Scrivi un commento
 Feature.Moments.Title.Comments,Commenti
 Feature.Moments.Title.CommentsWithCappedCount,Commenti ({count}+)

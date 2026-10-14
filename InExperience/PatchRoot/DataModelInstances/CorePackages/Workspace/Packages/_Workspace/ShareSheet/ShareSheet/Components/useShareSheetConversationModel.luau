@@ -1,8 +1,6 @@
 ﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
 local parent = shareSheet.Parent
-local appChatModule = require(parent.AppChat)
 local reactModule = require(parent.React)
-local fFlagShareSheetHoldRecipientsWhileSendingModule = require(shareSheet.Flags.FFlagShareSheetHoldRecipientsWhileSending)
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 local _ = require(parent.AppChat.GetConversationListStore)
 local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
@@ -10,7 +8,7 @@ local fetchConversationListPageToSignalsModule = require(parent.AppChat.fetchCon
 local useExternalChatConversationEligibilityModule = require(parent.AppChat.useExternalChatConversationEligibility)
 local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
 local _ = require(shareSheet.Types)
-local useConversationList = appChatModule.Hooks.useConversationList
+local useConversationListModule = require(parent.AppChat.useConversationList)
 
 local function getCompactConversations(p1, p2, p3, p4)
 	-- upvalues: shareSheetConstantsModule (ref)
@@ -32,18 +30,15 @@ local function getCompactConversations(p1, p2, p3, p4)
 end
 
 return function(p5)
-	-- upvalues: useConversationList (ref), fFlagShareSheetHoldRecipientsWhileSendingModule (ref), reactModule (ref), useExternalChatConversationEligibilityModule (ref), shareSheetConstantsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), getCompactConversations (ref), fetchConversationListPageToSignalsModule (ref)
+	-- upvalues: useConversationListModule (ref), reactModule (ref), useExternalChatConversationEligibilityModule (ref), shareSheetConstantsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), getCompactConversations (ref), fetchConversationListPageToSignalsModule (ref)
 	local var2 = p5.chatShare ~= nil
-	local var3 = useConversationList(var2)
+	local var3 = useConversationListModule(var2)
+	local var4 = reactModule.useRef(var3)
 	
-	if fFlagShareSheetHoldRecipientsWhileSendingModule then
-		local var4 = reactModule.useRef(var3)
-		
-		if p5.isSending then
-			var3 = var4.current
-		else
-			var4.current = var3
-		end
+	if p5.isSending then
+		var3 = var4.current
+	else
+		var4.current = var3
 	end
 	local var5
 	local var6 = #var3.items > 0
@@ -87,7 +82,6 @@ return function(p5)
 	var5 = var2 and (not var6 and (var3.listStatus.error == nil and (if var3.listStatus.isFetchingConversations ~= true then var3.listStatus.hasFetchedInitialPage ~= true else true)))
 	
 	return {
-		conversations = if fFlagShareSheetHoldRecipientsWhileSendingModule then nil else var3.items,
 		conversationEligibility = var11,
 		isSocialRowLoading = var7 and var5,
 		listStatus = var3.listStatus,

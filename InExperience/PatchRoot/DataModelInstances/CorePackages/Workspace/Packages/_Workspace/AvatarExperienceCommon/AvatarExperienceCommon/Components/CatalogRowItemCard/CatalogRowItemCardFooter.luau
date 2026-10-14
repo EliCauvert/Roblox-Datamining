@@ -16,11 +16,12 @@ local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagAXMISSmallUIChanges = avatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
 local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
+local fFlagAXMISOffersChip = avatarExperienceFlagsModule.FFlagAXMISOffersChip
 local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref), reactModule (ref), cryoModule (ref), fFlagAXMISWithOffers (ref), iconSize (ref), foundationModule (ref), itemCardPriceLine (ref), fFlagAXMISSmallUIChanges (ref), fFlagAXDurables2Option (ref), itemCardTitle (ref), text (ref), icon (ref), verifiedBadgesModule (ref)
+	-- upvalues: useTokens (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref), reactModule (ref), cryoModule (ref), fFlagAXMISWithOffers (ref), iconSize (ref), foundationModule (ref), itemCardPriceLine (ref), fFlagAXMISSmallUIChanges (ref), fFlagAXDurables2Option (ref), itemCardTitle (ref), text (ref), icon (ref), verifiedBadgesModule (ref), fFlagAXMISOffersChip (ref)
 	local var1 = useTokens()
 	local selectedTimedOptionPrice = nil
 	local setSelectedTimedOptionPrice = nil
@@ -275,7 +276,7 @@ return function(p1)
 		var8 = reactModule.createElement
 		var8 = var8(foundationModule.View, {
 			tag = if fFlagAXDurables2Option and p1.hideTimedOptionSelections then "auto-x row gap-xsmall align-y-center position-bottom-left anchor-bottom-left" else "auto-xy row gap-xsmall align-y-center position-bottom-left anchor-bottom-left",
-			Size = if fFlagAXDurables2Option and p1.hideTimedOptionSelections then UDim2.fromOffset(0, var1.Size.Size_1200) else nil
+			Size = if fFlagAXMISOffersChip then UDim2.fromOffset(0, var1.Size.Size_800) else nil
 		}, cryoModule.Dictionary.join(if fFlagAXDurables2Option and p1.hideTimedOptionSelections and p1.timedOptions and ((not p1.isOwned or p1.expirationTime) and p1.itemStatusInCheckout == nil) then {} else useMemo, {
 			WearTimeOptions = if fFlagAXDurables2Option and p1.hideTimedOptionSelections or not p1.timedOptions or p1.isOwned and not p1.expirationTime then nil else reactModule.createElement(foundationModule.View, { tag = "auto-xy padding-left-small", LayoutOrder = 100 }, {
 				WearTimeSelectedOptionInList = if p1.wearTimeSelectedOptionInList then reactModule.createElement(p1.wearTimeSelectedOptionInList, {
@@ -324,6 +325,17 @@ return function(p1)
 						})
 					})
 				})
+			}) else nil,
+			OfferAppliedBadge = if fFlagAXMISOffersChip and not fFlagAXDurables2Option and p1.offerApplied and (not p1.timedOptions or p1.isOwned and not p1.expirationTime) then reactModule.createElement(foundationModule.Badge, {
+				LayoutOrder = 101,
+				icon = {
+					name = foundationModule.Enums.IconName.TagSparkle,
+					position = foundationModule.Enums.IconPosition.Left
+				},
+				text = p1.offersLocalized and p1.offersLocalized.OfferApplied,
+				variant = foundationModule.Enums.BadgeVariant.Neutral,
+				shape = foundationModule.Enums.BadgeShape.Pill,
+				size = foundationModule.Enums.BadgeSize.XSmall
 			}) else nil
 		}))
 	else

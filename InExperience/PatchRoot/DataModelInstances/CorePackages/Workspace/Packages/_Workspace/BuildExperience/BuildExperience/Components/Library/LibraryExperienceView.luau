@@ -184,34 +184,40 @@ return function(p1)
 			},
 			ref = var15
 		}, {
-			Leading = reactModule.createElement(iconButton, {
+			Leading = reactModule.createElement(view, {
 				LayoutOrder = 1,
-				isCircular = true,
-				icon = if onBack ~= nil then iconName.X else iconName.ChevronLargeLeft,
-				ref = var16,
-				onActivated = function()
-					-- upvalues: onBack (ref), p1 (ref), releaseFocusWithinModule (copy), var15 (ref), var11 (ref), var14 (ref), var19 (ref)
-					local onBack_1 = onBack or p1.onLeave
-					releaseFocusWithinModule(var15.current)
-					var11(nil)
-					
-					if not var14 or onBack ~= nil then
-						onBack_1()
+				tag = "auto-xy radius-circle",
+				testId = "Library.Experience.LeadingChip",
+				backgroundStyle = if p1.isOpen then nil else var1.Color.OverMedia.OverMedia_0
+			}, {
+				Button = reactModule.createElement(iconButton, {
+					isCircular = true,
+					icon = if onBack ~= nil then iconName.X else iconName.ChevronLargeLeft,
+					ref = var16,
+					onActivated = function()
+						-- upvalues: onBack (ref), p1 (ref), releaseFocusWithinModule (copy), var15 (ref), var11 (ref), var14 (ref), var19 (ref)
+						local onBack_1 = onBack or p1.onLeave
+						releaseFocusWithinModule(var15.current)
+						var11(nil)
 						
-						return
-					end
-					var19("")
-					
-					if p1.onSearchReset == nil then
-						p1.onQueryChanged("")
+						if not var14 or onBack ~= nil then
+							onBack_1()
+							
+							return
+						end
+						var19("")
 						
-						return
-					end
-					p1.onSearchReset()
-				end,
-				size = inputSize.Large,
-				variant = buttonVariant.Utility,
-				testId = if onBack ~= nil then "Library.Experience.Leave" else "Library.Experience.Back"
+						if p1.onSearchReset == nil then
+							p1.onQueryChanged("")
+							
+							return
+						end
+						p1.onSearchReset()
+					end,
+					size = inputSize.Large,
+					variant = buttonVariant.Utility,
+					testId = if onBack ~= nil then "Library.Experience.Leave" else "Library.Experience.Back"
+				})
 			}),
 			Title = if not var14 then reactModule.createElement(text, {
 				LayoutOrder = 2,

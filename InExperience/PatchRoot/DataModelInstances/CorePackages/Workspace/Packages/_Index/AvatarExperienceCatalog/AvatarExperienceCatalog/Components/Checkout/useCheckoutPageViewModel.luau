@@ -60,7 +60,7 @@ local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
 local fFlagAXFixMISUpsellDiscountSummary = sharedFlagsModule.FFlagAXFixMISUpsellDiscountSummary
 local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
-local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
+local fFlagAXMISOffersChip = avatarExperienceFlagsModule.FFlagAXMISOffersChip
 local fFlagAXEnableExpiredUserLookCheckout = avatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
 local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 local fFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup = avatarExperienceFlagsModule.FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup
@@ -182,7 +182,7 @@ local function selectItemInfoForTryOnItems(a)
 end
 
 local var8 = function(p1, p2)
-	-- upvalues: fFlagAXDurables2Option (ref)
+	-- upvalues: fFlagAXMISOffersChip (ref)
 	local t = {}
 	
 	for i, v in p1 do
@@ -196,7 +196,7 @@ local var8 = function(p1, p2)
 		cloned.discountInformation = p2[cloned.collectibleItemId].discountInformation or {}
 		cloned.priceInRobuxDiscountedByOffers = p2[cloned.collectibleItemId].priceInRobux
 		
-		if fFlagAXDurables2Option then
+		if fFlagAXMISOffersChip then
 			var9 = #p2[cloned.collectibleItemId].offerIdsApplied > 0
 			var9 = nil
 		else

@@ -2,7 +2,6 @@
 local parent = shareSheet.Parent
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
-local fFlagShareSheetHoldRecipientsWhileSendingModule = require(shareSheet.Flags.FFlagShareSheetHoldRecipientsWhileSending)
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 local var1 = if fFlagShareSheetPeoplePickerEnabledModule then require(shareSheet.Stores.GetUniversalShareSheetStore) else nil
 local getExternalChatMessageSenderStoreModule = require(parent.AppChat.GetExternalChatMessageSenderStore)
@@ -16,7 +15,7 @@ local useShareSheetSelectionModule = require(script.Parent.useShareSheetSelectio
 local useShareSheetSendModule = require(script.Parent.useShareSheetSend)
 
 return function(p1)
-	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), var1 (ref), signalsReactModule (ref), getExternalChatMessageSenderStoreModule (ref), useShareSheetSelectionModule (ref), fFlagShareSheetHoldRecipientsWhileSendingModule (ref), useShareSheetSendModule (ref), useShareSheetConversationModelModule (ref), useLocalization (ref), reactModule (ref), shareSheetTelemetryModule (ref), var2 (ref), getAppFeaturePolicies (ref)
+	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), var1 (ref), signalsReactModule (ref), getExternalChatMessageSenderStoreModule (ref), useShareSheetSelectionModule (ref), useShareSheetSendModule (ref), useShareSheetConversationModelModule (ref), useLocalization (ref), reactModule (ref), shareSheetTelemetryModule (ref), var2 (ref), getAppFeaturePolicies (ref)
 	local var3 = nil
 	local var4 = nil
 	
@@ -27,7 +26,7 @@ return function(p1)
 	local var5 = signalsReactModule.useSignalState(getExternalChatMessageSenderStoreModule().getSender)
 	local var6 = useShareSheetSelectionModule()
 	local selectedConversationIds = var6.selectedConversationIds
-	local var7 = if fFlagShareSheetHoldRecipientsWhileSendingModule then useShareSheetSendModule({
+	local var7 = useShareSheetSendModule({
 		chatShare = var5,
 		context = p1.context,
 		formatSuccessSnackbarText = p1.formatSuccessSnackbarText,
@@ -37,12 +36,12 @@ return function(p1)
 		selectedConversationIds = selectedConversationIds,
 		telemetryId = p1.telemetryId,
 		url = p1.url
-	}) else nil
+	})
 	local var8 = useShareSheetConversationModelModule({
 		chatShare = var5,
 		isOpen = p1.isOpen == true,
 		isPeoplePickerDisplayed = var4,
-		isSending = if fFlagShareSheetHoldRecipientsWhileSendingModule then var7.isSending else nil,
+		isSending = var7.isSending,
 		selectedConversationIds = selectedConversationIds
 	})
 	local var9 = useLocalization({
@@ -59,8 +58,8 @@ return function(p1)
 		})
 	end, { p1.context, p1.telemetryId })
 	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: fFlagShareSheetHoldRecipientsWhileSendingModule (copy), var7 (write), selectedConversationIds (ref), shareSheetTelemetryModule (copy), p1 (ref), var6 (ref)
-		if fFlagShareSheetHoldRecipientsWhileSendingModule and var7.isSending then
+		-- upvalues: var7 (ref), selectedConversationIds (ref), shareSheetTelemetryModule (copy), p1 (ref), var6 (ref)
+		if var7.isSending then
 			return
 		end
 		shareSheetTelemetryModule.logInteraction({
@@ -75,7 +74,7 @@ return function(p1)
 		p1.telemetryId,
 		selectedConversationIds,
 		var6.onConversationActivated,
-		if fFlagShareSheetHoldRecipientsWhileSendingModule then var7.isSending else false
+		var7.isSending
 	})
 	local var12 = nil
 	local var13 = nil
@@ -97,20 +96,6 @@ return function(p1)
 			end, { var3 }),
 			onConversationActivated = var11,
 			selectedConversationIds = selectedConversationIds
-		})
-	end
-	if not fFlagShareSheetHoldRecipientsWhileSendingModule then
-		var7 = useShareSheetSendModule({
-			chatShare = var5,
-			context = p1.context,
-			conversations = var8.conversations,
-			formatSuccessSnackbarText = p1.formatSuccessSnackbarText,
-			onCloseWithReason = p1.onCloseWithReason,
-			onSendActivated = var6.onSendActivated,
-			onShareSendResultSnackbar = p1.onShareSendResultSnackbar,
-			selectedConversationIds = selectedConversationIds,
-			telemetryId = p1.telemetryId,
-			url = p1.url
 		})
 	end
 	return {

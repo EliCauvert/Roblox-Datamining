@@ -2340,7 +2340,6 @@ Feature.Build.Message.CompletedTasks,{COUNT} tamamlanan görev
 Feature.Build.Message.ConversationGone,Bu sohbet artık mevcut değil. Yeni bir sohbet başlat.
 Feature.Build.Message.ConversationNotFound,Bu sohbet bulunamadı. Yeni bir sohbet başlat.
 Feature.Build.Message.CreateGameToUseBuild,İnşa Et'i kullanmaya başlamak için yeni bir oyun oluştur.
-Feature.Build.Message.CreatedRevertedVer,Geri döndürülmüş bir versiyon oluşturuldu.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Yaratıcı Merkezi'nde gerekli şartları karşılama açısından kitleni genişlet
 Feature.Build.Message.ExperiencesLoadFailed,Deneyimler yüklenemedi
@@ -2377,7 +2376,6 @@ Feature.Build.Message.PublishExpandAudience,Kitleni genişletmek için yayınla
 Feature.Build.Message.PublishNotReverted,Yayınlaman geri döndürülmedi. Tekrar dene.
 Feature.Build.Message.PublishPromotionUpsell,Oyununu yayınladığın için tebrikler! Roblox'ta daha fazla oyuncu kazanmak için {promotionCount} ücretsiz promosyonun var.
 Feature.Build.Message.PublishPromotionUpsellSingular,Oyununu yayınladığın için tebrikler! Roblox'ta daha fazla oyuncu kazanmak için 1 ücretsiz promosyonun var.
-Feature.Build.Message.PublishReverted,Yayınlama geri döndürüldü.
 Feature.Build.Message.QuestionnaireNeeded,Bu oyun İnşa Et dışında düzenlendi. Yayınlamak için içerik anketini tamamla.
 Feature.Build.Message.ReadyToPlay,Oyunun Roblox'ta oynamaya hazır!
 Feature.Build.Message.ResetHours,{HOURS} saat içinde sıfırlanacak

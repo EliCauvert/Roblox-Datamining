@@ -97,7 +97,6 @@ local luaAppKeepTileBadgesDuringVideo = game:DefineFastFlag("LuaAppKeepTileBadge
 local fFlagLuaAppVideoTileDisableActivation = require(parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
 local fFlagLuaAppFixHiddenTileVideoCleanup = require(parent.SharedFlags).FFlagLuaAppFixHiddenTileVideoCleanup
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
-local fFlagLuaAppHomeReduceRenders = require(parent.SharedFlags).FFlagLuaAppHomeReduceRenders
 local fFlagLuaAppContinueSortInstantPlay = require(parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
 local fFlagLuaAppGameTileExtractGameDetailsCallback = require(parent.SharedFlags).FFlagLuaAppGameTileExtractGameDetailsCallback
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
@@ -965,7 +964,7 @@ local _ = function(p2, p3)
 end
 
 appGameTile = roactRoduxModule.connect(function(p2, p3)
-	-- upvalues: fFlagLuaAppGameDetailsAttributionFix (ref), gameInfosReducer (ref), fFlagMigrateGameInfoToStore (ref), gameTileConstantsModule (ref), getGameTileLayoutDataModule (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var2 (ref), itemLayoutDataParsingUtilsModule (ref), formatExperienceThumbnailModule (ref), formatExperienceIconModule (ref), fFlagLuaAppHomeMomentVideoFallback (ref), getLayoutDataVideoModule (ref), luaAppUseRatingFormatHelper2 (ref), formatExperienceRatingModule (ref), fFlagLuaAppHomeReduceRenders (ref), t (ref)
+	-- upvalues: fFlagLuaAppGameDetailsAttributionFix (ref), gameInfosReducer (ref), fFlagMigrateGameInfoToStore (ref), gameTileConstantsModule (ref), getGameTileLayoutDataModule (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var2 (ref), itemLayoutDataParsingUtilsModule (ref), formatExperienceThumbnailModule (ref), formatExperienceIconModule (ref), fFlagLuaAppHomeMomentVideoFallback (ref), getLayoutDataVideoModule (ref), luaAppUseRatingFormatHelper2 (ref), formatExperienceRatingModule (ref), t (ref)
 	local universeId = p3.entry.universeId
 	local var9 = nil
 	
@@ -1093,7 +1092,7 @@ appGameTile = roactRoduxModule.connect(function(p2, p3)
 		rating = var25,
 		showAgeRating = var14,
 		ageRatingText = var15,
-		friendVisits = if var10 then var10.friendVisits elseif fFlagLuaAppHomeReduceRenders then t else {},
+		friendVisits = if var10 then var10.friendVisits else t,
 		friendVisitedString = if var10 and var10.friendVisitedString ~= "" then var10.friendVisitedString else nil,
 		hidePlayButton = var18,
 		footerLayoutData = if var21 then var21.footer else nil

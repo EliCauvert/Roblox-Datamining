@@ -94,7 +94,7 @@ return function(p1)
 	
 	if var9 then
 		return var13
-	elseif _G.ENVIRONMENT ~= "PRODUCTION" then
+	elseif _G.ENVIRONMENT ~= "PRODUCTION" and (_G.ENVIRONMENT == "DEVELOPMENT" or _G.__DEV__) then
 		local packages = parent_1:FindFirstAncestor("Packages") or parent_1:FindFirstAncestor("CorePackages")
 		
 		if not (if packages and packages:FindFirstChild("Dev") and packages.Dev:FindFirstChild("JestGlobals") then pcall(require, packages.Dev.JestGlobals) else false) then

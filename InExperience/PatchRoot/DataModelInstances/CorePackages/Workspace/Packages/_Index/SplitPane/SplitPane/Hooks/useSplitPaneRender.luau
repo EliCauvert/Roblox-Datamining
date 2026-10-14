@@ -8,12 +8,14 @@ local splitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneCon
 local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
 local isSupportPaneScreenModule = require(script.Parent.Parent.Utils.isSupportPaneScreen)
 local splitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
+local splitPaneTelemetryModule = require(script.Parent.Parent.Telemetry.SplitPaneTelemetry)
+local fFlagEnableSplitPaneTelemetry = require(parent.SharedFlags).FFlagEnableSplitPaneTelemetry
 local supportPaneInputRulesModule = require(script.Parent.Parent.Utils.supportPaneInputRules)
 local usePreferredInput = responsiveModule.usePreferredInput
 local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
 return function(p1, p2, p3, p4)
-	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), reactModule (ref), splitPaneContextModule (ref), usePreferredInput (ref), tempRnSwitchNavigatorName (ref), splitPaneVariantModule (ref), supportPaneInputRulesModule (ref), isSupportPaneScreenModule (ref)
+	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), reactModule (ref), splitPaneContextModule (ref), usePreferredInput (ref), tempRnSwitchNavigatorName (ref), fFlagEnableSplitPaneTelemetry (ref), splitPaneTelemetryModule (ref), splitPaneVariantModule (ref), supportPaneInputRulesModule (ref), isSupportPaneScreenModule (ref)
 	local store = splitPaneStoreModule.getStore()
 	local var1 = signalsReactModule.useSignalState(store.getSupportPaneMode)
 	local var2 = signalsReactModule.useSignalState(store.getSupportWidth)
@@ -66,7 +68,7 @@ return function(p1, p2, p3, p4)
 	local var10 = p1[1] ~= nil and (p1[1].descriptor ~= nil and (p1[1].descriptor.state ~= nil and p1[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
 	local var11 = reactModule.useRef(0)
 	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var6 (ref), var10 (ref), splitPaneVariantModule (copy), store (ref), supportPaneInputRulesModule (copy), var5 (ref)
+		-- upvalues: var11 (ref), var6 (ref), var10 (ref), fFlagEnableSplitPaneTelemetry (copy), splitPaneTelemetryModule (copy), splitPaneVariantModule (copy), store (ref), supportPaneInputRulesModule (copy), var5 (ref)
 		local current = var11.current
 		var11.current = var6
 		
@@ -76,6 +78,9 @@ return function(p1, p2, p3, p4)
 		local var14 = not var13 and var6 > 0
 		
 		if var13 then
+			if fFlagEnableSplitPaneTelemetry then
+				splitPaneTelemetryModule.logSupportRouteOpened()
+			end
 			if splitPaneVariantModule.shouldAutoExpandOnSupportOpen() then
 				store.setTemporarySupportPaneMode(supportPaneInputRulesModule.resolveOpenedMode(var5))
 				

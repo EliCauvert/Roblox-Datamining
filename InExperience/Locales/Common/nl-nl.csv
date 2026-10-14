@@ -89,6 +89,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Je e-mailadres is
 Authentication.Login.WeChat.AntiAddictionText,"Boycot slechte ervaringen, weiger illegale ervaringen. Wees voorzichtig en zorg dat je niet bedrogen wordt. Ervaringen bezoeken is goed voor je hersenen, maar te veel ervaringen bezoeken kan je gezondheid schaden. Let op de tijd die je aan ervaringen besteed en zorg voor een gezonde levensstijl."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Toepassen bij de volgende respawn
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ContinueSetup,Doorgaan met instellen
 Authentication.SignUp.Action.Create,Maken
 Authentication.SignUp.Action.CreateAccountSentenceCase,Account aanmaken
 Authentication.SignUp.Action.ExitModalLeave,Afsluiten
@@ -102,6 +103,7 @@ Authentication.SignUp.Description.Try,Proberen
 Authentication.SignUp.Description.UsernameChanged,"Alles is geregeld! Je account is klaar en gekoppeld aan {platform}. Respawn nu om je bijgewerkte gebruikersnaam in het spel te zien, anders wordt deze de volgende keer toegepast."
 Authentication.SignUp.Description.UsernameUnchanged,Gelukt! Je account is klaar en gekoppeld aan{platform}. Chat met vrienden en speel miljoenen Roblox-spellen.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Je Roblox-account wordt gekoppeld aan je account op {platform}. Je kunt de koppeling op elk moment ongedaan maken via het scherm Instellingen. Er kan een afkoelperiode zijn voordat je kunt koppelen aan een ander account op {platform}. Door op {ctaButton} te klikken, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
+Authentication.SignUp.Header.CancelAccountCreation,Aanmaken van account annuleren?
 Authentication.SignUp.Header.OneLastThing,Nog één ding
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Je Roblox-account instellen
 Authentication.SignUp.Heading.CountryCodeSelector,Land selecteren
@@ -1943,6 +1945,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Tekst kopiëren
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,Nieuwe game maken
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Niet meer vragen
@@ -1996,10 +1999,17 @@ Feature.Build.Analytics.Description.PayerConversion,De conversie van betalende g
 Feature.Build.Analytics.Description.PlaythroughRate,Het playthrough-percentage is het percentage bezoeken waarbij een volledige speelsessie is voltooid. Hogere percentages wijzen erop dat spelers je ervaring gemakkelijk toegankelijk vinden en het de moeite waard vinden om te voltooien.
 Feature.Build.Analytics.Description.TotalPlaytime,De totale speeltijd is de som van de tijd die alle spelers gedurende de periode in je ervaring hebben doorgebracht. Een toenemende speeltijd duidt meestal op boeiendere sessies.
 Feature.Build.Analytics.DurationHours,{number} uur
+Feature.Build.Analytics.Goal.Action.CreateAd,Een advertentie maken
+Feature.Build.Analytics.Goal.Action.SellItems,Items verkopen
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,Delen met vrienden
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,Een goede eerste indruk maken
 Feature.Build.Analytics.Goal.GetMorePlayers,Bereik meer spelers
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Zorg dat spelers terugkomen
+Feature.Build.Analytics.Goal.Locked.EarnRobux,Verdien Robux in je game om deze statistieken te zien.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,Zorg voor je eerste speler om deze statistieken te zien.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Zorg voor meer spelers om deze statistieken te zien.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Zorg voor je eerste terugkerende speler om deze statistieken te zien.
 Feature.Build.Analytics.KeyStats,Belangrijkste statistieken
 Feature.Build.Analytics.LastMonth,Afgelopen maand
 Feature.Build.Analytics.LastWeek,
@@ -2125,6 +2135,7 @@ Feature.Build.Label.AdditionalUsage,Extra Build-tegoed
 Feature.Build.Label.AdditionalUsed,{USED} van {LIMIT} gebruikt
 Feature.Build.Label.AdsManager,Ads Manager
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,Alle games
 Feature.Build.Label.AmountAvailable,{AMOUNT} beschikbaar
 Feature.Build.Label.Autosaved,Automatisch opgeslagen
 Feature.Build.Label.Available,beschikbaar
@@ -2149,12 +2160,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Eenvoudig prestatierapport
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,Gratis
 Feature.Build.Label.FreeBuildUsage,Gratis Build-tegoed
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,Speelsessies van het spel
 Feature.Build.Label.GetMoreBuildUsage,Koop meer Build-tegoed
+Feature.Build.Label.GroupGames,Games van de groep
+Feature.Build.Label.Groups,Groepen
 Feature.Build.Label.Hi,Hallo
 Feature.Build.Label.IconThumbnails,Pictogram en miniaturen
 Feature.Build.Label.Images2D,2D-afbeeldingen
@@ -2168,6 +2182,7 @@ Feature.Build.Label.ManagedPricing,Beheerde prijzen
 Feature.Build.Label.ManagedPricingMixed,Gemengd over huidige producten
 Feature.Build.Label.MaximizeForGamePlays,Speelsessies van het spel maximaliseren
 Feature.Build.Label.Models3D,3D-modellen
+Feature.Build.Label.MyGames,Mijn games
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Geen limiet
 Feature.Build.Label.NotStarted,Niet gestart
@@ -2315,12 +2330,12 @@ Feature.Build.Message.BuildInternalError,Build is op een probleem gestuit. Probe
 Feature.Build.Message.BuildResponseFailed,Build reageerde niet. Probeer het nog een keer.
 Feature.Build.Message.BuildStillWorking,"We zijn ermee bezig. Je kunt de app afsluiten, Roblox spelen of een ander project starten terwijl je wacht."
 Feature.Build.Message.BuildStopped,Je hebt Build gestopt.
+Feature.Build.Message.BuildTakingLonger,Dit duurt langer dan verwacht. Je kunt blijven wachten of iets anders beginnen.
 Feature.Build.Message.BuildTemporarilyDown,Build is tijdelijk niet beschikbaar. Probeer het over een minuut nog een keer.
 Feature.Build.Message.CompletedTasks,{COUNT} taken voltooid
 Feature.Build.Message.ConversationGone,Dit gesprek is niet meer beschikbaar. Start een nieuw gesprek.
 Feature.Build.Message.ConversationNotFound,We konden dit gesprek niet vinden. Start een nieuw gesprek.
 Feature.Build.Message.CreateGameToUseBuild,Maak een nieuw spel om Build te gebruiken.
-Feature.Build.Message.CreatedRevertedVer,Er is een teruggezette versie aangemaakt.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Breid je geschiktheid voor doelgroepen uit in de Creator Hub
 Feature.Build.Message.ExperiencesLoadFailed,Kan ervaringen niet laden
@@ -2357,7 +2372,6 @@ Feature.Build.Message.PublishExpandAudience,Publiceer om je doelgroep te vergrot
 Feature.Build.Message.PublishNotReverted,Je publicatie is niet teruggedraaid. Probeer het nog een keer.
 Feature.Build.Message.PublishPromotionUpsell,Gefeliciteerd met het publiceren van je spel. Je hebt {promotionCount} gratis promoties beschikbaar om meer spelers op Roblox te krijgen.
 Feature.Build.Message.PublishPromotionUpsellSingular,Gefeliciteerd met het publiceren van je spel. Je hebt 1 gratis promotie beschikbaar om meer spelers op Roblox te krijgen.
-Feature.Build.Message.PublishReverted,Publicatie teruggedraaid.
 Feature.Build.Message.QuestionnaireNeeded,Deze game is buiten Build om bewerkt. Vul de contentvragenlijst in om te publiceren.
 Feature.Build.Message.ReadyToPlay,Je spel is klaar om te worden gespeeld op Roblox!
 Feature.Build.Message.ResetHours,Wordt over {HOURS} uur gereset
@@ -3653,7 +3667,7 @@ Feature.Moments.Description.HowToCaptureStep2,Schakel de besturing voor opnames 
 Feature.Moments.Description.HowToCaptureStep3,Leg foto's en video's van het spel vast
 Feature.Moments.Description.LeaveMomentsCreation,"Al je wijzigingen gaan verloren, maar je kunt deze opname nog steeds vinden in je galerij met <b>Opnames</b>."
 Feature.Moments.Description.NoMusicResults,Geen muziek gevonden
-Feature.Moments.Description.NonInfiniteScrollEndBody,Je hebt een stoppunt bereikt in Momenten. Tik hieronder om verder te kijken.
+Feature.Moments.Description.NonInfiniteScrollEndBody,We hebben je feed gepauzeerd. Je kunt beslissen of je wilt blijven kijken.
 Feature.Moments.Description.NothingHereYet,Hier is nog niets te zien...
 Feature.Moments.Description.PublishMoment,Beschrijf je moment
 Feature.Moments.Description.StayFriendly,Laten we het vriendelijk houden
@@ -3719,7 +3733,7 @@ Feature.Moments.Label.MomentUnavailableDefault,Dit moment is niet beschikbaar.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Nog geen reacties
-Feature.Moments.Label.NonInfiniteScrollEndTitle,Je bent voorlopig weer helemaal bij
+Feature.Moments.Label.NonInfiniteScrollEndTitle,Er zijn meer momenten om te bekijken
 Feature.Moments.Label.Photos,Foto's
 Feature.Moments.Label.PostDeleted,Moment verwijderd
 Feature.Moments.Label.PostRemovedBody,"Het moment dat je hebt gepost, is in strijd met onze Communityrichtlijnen."
@@ -3759,6 +3773,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,Wacht even en probeer het nog een ke
 Feature.Moments.Label.VoiceModerationError,Je script moet voldoen aan de veiligheidsregels
 Feature.Moments.Label.VoicePlaceholder,Voer het script van je voice-over in. De tekenlimiet is {maxCount} tekens
 Feature.Moments.Label.VoiceTimeoutBody,De tijdslimiet voor het genereren van de voice-over is bereikt.
+Feature.Moments.Label.VoiceTooManyNumbersError,Script bevat te veel getallen
 Feature.Moments.Label.WriteComment,Schrijf een reactie
 Feature.Moments.Title.Comments,
 Feature.Moments.Title.CommentsWithCappedCount,Reacties ({count}+)

@@ -3,6 +3,7 @@ local coreGuiService = game:GetService("CoreGui")
 local dashModule = require(parent.Dash)
 local unifiedEventLogConstantsModule = require(script.Parent.Parent.UnifiedEventLogConstants)
 local fFlagAXMISEnableMultiShoppingUnifiedEvents = require(parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShoppingUnifiedEvents
+local fFlagCleanupTenFootUiPaddingAndAnalytics = require(parent.SharedFlags).FFlagCleanupTenFootUiPaddingAndAnalytics
 local t = {
 	getUnifiedLoggingFieldName = function(p1)
 		-- upvalues: unifiedEventLogConstantsModule (ref)
@@ -57,10 +58,10 @@ function t.getElementSizeAndPosition(p1)
 	local scrollingFrame = p1:FindFirstAncestorWhichIsA("ScrollingFrame")
 	
 	if scrollingFrame then
-		table.insert(u156, scrollingFrame)
-		var1 = getParentScrollingFrames(scrollingFrame, u156)
+		table.insert(u162, scrollingFrame)
+		var1 = getParentScrollingFrames(scrollingFrame, u162)
 	else
-		var1 = u156
+		var1 = u162
 	end
 	if var1 then
 		for i, v in var1 do
@@ -79,7 +80,7 @@ function t.getElementSizeAndPosition(p1)
 end
 
 function t.getScreenSize(p2)
-	-- upvalues: coreGuiService (ref)
+	-- upvalues: coreGuiService (ref), fFlagCleanupTenFootUiPaddingAndAnalytics (ref)
 	local var2
 	local var3 = nil
 	local screenGui = p2:FindFirstAncestorOfClass("ScreenGui")
@@ -92,7 +93,7 @@ function t.getScreenSize(p2)
 		
 		if var2 and var2:IsA("SurfaceGui") then
 			var3 = var2
-		else
+		elseif not fFlagCleanupTenFootUiPaddingAndAnalytics then
 			local tenFootUiSurfaceGuiFolder = coreGuiService:FindFirstChild("TenFootUiSurfaceGuiFolder")
 			local var4 = if tenFootUiSurfaceGuiFolder then tenFootUiSurfaceGuiFolder:FindFirstChild("RootViewSurface_SurfaceGui") else nil
 			

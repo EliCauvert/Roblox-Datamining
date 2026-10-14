@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXBackgroundGenerationPollPublishedInventory", false) and require(script.Parent.FFlagAXRefetchInventoryOnUpdate)

@@ -927,6 +927,9 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,3rd Person Fixe
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,View & Controls
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR Vignette Enabled
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,Voice Chat Volume
+CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,Voice typing mode
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,Auto Send
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,Manual Send
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,VR CONTROLS
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,"An error occurred, please try again."
@@ -2354,7 +2357,6 @@ Feature.Build.Message.CompletedTasks,{COUNT} completed tasks
 Feature.Build.Message.ConversationGone,This conversation is no longer available. Start a new one.
 Feature.Build.Message.ConversationNotFound,This conversation couldn't be found. Start a new one.
 Feature.Build.Message.CreateGameToUseBuild,Create a new game to start using Build.
-Feature.Build.Message.CreatedRevertedVer,Created a reverted version.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Expand your audience eligibility on Creator Hub
 Feature.Build.Message.ExperiencesLoadFailed,Couldn't load experiences
@@ -2391,7 +2393,6 @@ Feature.Build.Message.PublishExpandAudience,Publish to expand your audience
 Feature.Build.Message.PublishNotReverted,Your publish wasn't reverted. Try again.
 Feature.Build.Message.PublishPromotionUpsell,Congratulations on publishing your game! You have {promotionCount} free promotions available to gain more players on Roblox.
 Feature.Build.Message.PublishPromotionUpsellSingular,Congratulations on publishing your game! You have 1 free promotion available to gain more players on Roblox.
-Feature.Build.Message.PublishReverted,Reverted publish.
 Feature.Build.Message.QuestionnaireNeeded,This game was edited outside of Build. Complete the content questionnaire to publish.
 Feature.Build.Message.ReadyToPlay,Your game is ready to play on Roblox!
 Feature.Build.Message.ResetHours,Resets in {HOURS} hours
@@ -3592,6 +3593,7 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,"Your
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,"You can’t use chat for another {number} minutes because one or more of your messages broke the rules. If you break the rules again, you could be banned."
 Feature.InExperienceIntervention.Description.Disclaimer,Did we make a mistake? {startLink}Let us know{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,Your feedback helps our systems improve.
+Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,Keep your words kind and your community safe.
 Feature.InExperienceIntervention.Description.LoseAccess,"If this happens again, you may lose access to your account."
 Feature.InExperienceIntervention.Description.MayLoseAccess,"If you break the rules again, you may lose access to your account."
 Feature.InExperienceIntervention.Description.Mistake,Did we make a mistake?
@@ -3611,6 +3613,7 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,Don't shar
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,Chat suspended for {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,We'll take a look
 Feature.InExperienceIntervention.Heading.TextChatSuspension,Text chat suspension
+Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,Voice typing may be turned off if you break the rules
 Feature.InExperienceIntervention.Label.Complete,Complete
 Feature.InExperienceIntervention.Label.EndsOn,Ends on:
 Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
@@ -3794,6 +3797,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Wait a minute, then try again"
 Feature.Moments.Label.VoiceModerationError,Your script must follow the safety rules
 Feature.Moments.Label.VoicePlaceholder,Type your voiceover script. {maxCount} character limit
 Feature.Moments.Label.VoiceTimeoutBody,Voiceover generation timed out.
+Feature.Moments.Label.VoiceTooManyNumbersError,Script contains too many numbers
 Feature.Moments.Label.WriteComment,Write a comment
 Feature.Moments.Title.Comments,Comments
 Feature.Moments.Title.CommentsWithCappedCount,Comments ({count}+)

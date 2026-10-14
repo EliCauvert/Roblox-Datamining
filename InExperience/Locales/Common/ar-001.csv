@@ -89,6 +89,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,لم يتم ال�
 Authentication.Login.WeChat.AntiAddictionText,ابتعد عن التجارب السيئة وارفض المشاركة في التجارب المقرصنة. ابقَ متيقظًا واحذر الخداع. إن المشاركة في بعض التجارب مفيدة لعقلك، لكن الإفراط فيها يمكن أن يضر بصحتك. لذلك نوصيك بإدارة وقتك بالمفيد النافع واتباع نمط حياة سليم.
 Authentication.SignUp.Action.ApplyOnNextRespawn,تطبيق عند إعادة الظهور التالي
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ContinueSetup,متابعة الإعداد
 Authentication.SignUp.Action.Create,إنشاء
 Authentication.SignUp.Action.CreateAccountSentenceCase,إنشاء حساب
 Authentication.SignUp.Action.ExitModalLeave,الخروج
@@ -102,6 +103,7 @@ Authentication.SignUp.Description.Try,جرب
 Authentication.SignUp.Description.UsernameChanged,كل شيء جاهز! حسابك جاهز ومرتبط بمنصّة {platform}. أعد الظهور الآن لرؤية اسم المستخدم المحدث في اللعبة، أو سيُطبق التغيير في المرة القادمة.
 Authentication.SignUp.Description.UsernameUnchanged,لقد انضممت! حسابك جاهز ومرتبط بمنصّة {platform}. يمكنك الدردشة مع الأصدقاء وتشغيل الملايين من ألعاب منصّة Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,سيتم ربط حسابك في منصة Roblox بحسابك على حساب {platform}. يمكنك إلغاء الربط من شاشة الإعدادات في أي وقت. قد تكون هناك فترة انتظار قبل أن تتمكن من ربط الحساب بحساب آخر على حساب {platform}. من خلال النقر على {ctaButton}، أنت توافق على شروط الاستخدام بما في ذلك شرط التحكيم وأنت تُقِر بسياسة الخصوصية.
+Authentication.SignUp.Header.CancelAccountCreation,هل تريد إلغاء إنشاء الحساب؟
 Authentication.SignUp.Header.OneLastThing,شيء أخير
 Authentication.SignUp.Header.SetUpYourRobloxAccount,إعداد حسابك على منصّة Roblox
 Authentication.SignUp.Heading.CountryCodeSelector,حدد البلد
@@ -1928,6 +1930,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,نسخ النص
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,إنشاء لعبة جديدة
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,عدم السؤال مرة أخرى
@@ -1981,10 +1984,16 @@ Feature.Build.Analytics.Description.PayerConversion,"""التحويل إلى د�
 Feature.Build.Analytics.Description.PlaythroughRate,"""معدل إكمال جلسة اللعب"" هو النسبة المئوية لعدد الزيارات التي أكملت جلسة لعب كاملة. وتشير المعدلات الأعلى إلى أن اللاعبين يجدون تجربتك سهلة الاندماج وتستحق الإنهاء."
 Feature.Build.Analytics.Description.TotalPlaytime,"""إجمالي مدة اللعب"" هو مجموع الوقت الذي قضاه جميع اللاعبين في تجربتك خلال الفترة. وعادةً ما يشير ارتفاع مدة اللعب إلى جلسات أكثر تفاعلًا."
 Feature.Build.Analytics.DurationHours,{number} من الساعات
+Feature.Build.Analytics.Goal.Action.CreateAd,إنشاء إعلان
+Feature.Build.Analytics.Goal.Action.SellItems,بيع العناصر
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,مشاركة مع الأصدقاء
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,كوّن انطباعًا أوليًا جيدًا
 Feature.Build.Analytics.Goal.GetMorePlayers,اجذب المزيد من اللاعبين
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,اجعل اللاعبين متحمسين للعودة
+Feature.Build.Analytics.Goal.Locked.EarnRobux,اربح عملات Robux في لعبتك للاطِّلاع على هذه الإحصائيات.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,احصل على لاعبك الأول للاطِّلاع على هذه الإحصائيات.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,احصل على لاعبك العائد الأول للاطِّلاع على هذه الإحصائيات.
 Feature.Build.Analytics.KeyStats,الإحصاءات الرئيسية
 Feature.Build.Analytics.LastMonth,الشهر الماضي
 Feature.Build.Analytics.LastWeek,
@@ -2110,6 +2119,7 @@ Feature.Build.Label.AdditionalUsage,استخدام إضافي لميزة Build
 Feature.Build.Label.AdditionalUsed,تم استخدام {USED} من {LIMIT}
 Feature.Build.Label.AdsManager,إدارة الإعلانات
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,كل الألعاب
 Feature.Build.Label.AmountAvailable,الاستخدام المتاح: {AMOUNT}
 Feature.Build.Label.Autosaved,تم الحفظ تلقائيًا
 Feature.Build.Label.Available,المتاح
@@ -2134,12 +2144,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,تقرير أداء مبسط
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,مجانًا
 Feature.Build.Label.FreeBuildUsage,استخدام ميزة Build المجاني
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,عدد مرات تشغيل اللعبة
 Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
+Feature.Build.Label.GroupGames,ألعاب المجموعات
+Feature.Build.Label.Groups,المجموعات
 Feature.Build.Label.Hi,مرحبًا
 Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
 Feature.Build.Label.Images2D,الصور ثنائية الأبعاد
@@ -2153,6 +2166,7 @@ Feature.Build.Label.ManagedPricing,التسعير المُدار
 Feature.Build.Label.ManagedPricingMixed,مختلط عبر المنتجات الحالية
 Feature.Build.Label.MaximizeForGamePlays,زوِّد عدد مرات تشغيل اللعبة إلى أقصى حد
 Feature.Build.Label.Models3D,النماذج ثلاثية الأبعاد
+Feature.Build.Label.MyGames,ألعابي
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,لا يوجد حدّ
 Feature.Build.Label.NotStarted,لم يتم البدء
@@ -2300,12 +2314,12 @@ Feature.Build.Message.BuildInternalError,واجهت ميزة Build مشكلة. �
 Feature.Build.Message.BuildResponseFailed,تعذَّر على ميزة Build الاستجابة. حاول مرة أخرى.
 Feature.Build.Message.BuildStillWorking,جارٍ العمل على ذلك. يمكنك مغادرة التطبيق أو تشغيل منصّة Roblox أو بدء مشروع آخر أثناء الانتظار.
 Feature.Build.Message.BuildStopped,لقد أوقفت ميزة Build.
+Feature.Build.Message.BuildTakingLonger,يستغرق هذا وقتًا أطول من المتوقع. يمكنك الاستمرار في الانتظار أو بدء شيء آخر.
 Feature.Build.Message.BuildTemporarilyDown,ميزة Build غير متوفرة مؤقتًا. حاول مرة أخرى بعد دقيقة.
 Feature.Build.Message.CompletedTasks,{COUNT} من المهام المكتملة
 Feature.Build.Message.ConversationGone,لم تعد هذه المحادثة متوفرة. ابدأ محادثة جديدة.
 Feature.Build.Message.ConversationNotFound,تعذَّر العثور على هذه المحادثة. ابدأ محادثة جديدة.
 Feature.Build.Message.CreateGameToUseBuild,أنشئ لعبة جديدة لبدء استخدام ميزة Build.
-Feature.Build.Message.CreatedRevertedVer,تم إنشاء إصدار تم التراجع عنه.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,يمكنك توسيع نطاق أهلية جمهورك في مركز المصمم
 Feature.Build.Message.ExperiencesLoadFailed,تعذَّر تحميل التجارب
@@ -2342,7 +2356,6 @@ Feature.Build.Message.PublishExpandAudience,يمكنك النشر لتوسيع �
 Feature.Build.Message.PublishNotReverted,لم يتم التراجع عن عملية النشر. حاوِل مرة أخرى.
 Feature.Build.Message.PublishPromotionUpsell,تهانينا على نشر لعبتك! لديك {promotionCount} من العروض الخاصة المجانية المتاحة لجذب المزيد من اللاعبين على منصّة Roblox.
 Feature.Build.Message.PublishPromotionUpsellSingular,تهانينا على نشر لعبتك! لديك عرض خاص مجاني واحد متاح لجذب المزيد من اللاعبين على منصّة Roblox.
-Feature.Build.Message.PublishReverted,تم التراجع عن النشر.
 Feature.Build.Message.QuestionnaireNeeded,تم تحرير هذه اللعبة خارج ميزة Build. أكمل استبيان المحتوى للنشر.
 Feature.Build.Message.ReadyToPlay,لعبتك جاهزة للتشغيل على منصّة Roblox!
 Feature.Build.Message.ResetHours,ستتم إعادة التعيين خلال {HOURS} من الساعات
@@ -3638,7 +3651,7 @@ Feature.Moments.Description.HowToCaptureStep2,تمكين عناصر تحكم ا�
 Feature.Moments.Description.HowToCaptureStep3,التقط صورًا ومقاطع فيديو خاصة باللعب
 Feature.Moments.Description.LeaveMomentsCreation,ستفقد جميع التغييرات التي أجريتها، لكن لا يزال بإمكانك العثور على هذه اللقطة في معرض <b>اللقطات</b>.
 Feature.Moments.Description.NoMusicResults,لم يتم العثور على أي موسيقى
-Feature.Moments.Description.NonInfiniteScrollEndBody,لقد وصلت إلى نقطة توقف في اللحظات. اضغط أدناه لمواصلة المشاهدة.
+Feature.Moments.Description.NonInfiniteScrollEndBody,لقد أوقفنا موجزك مؤقتًا. يمكنك تحديد ما إذا كنت ترغب في مواصلة المشاهدة.
 Feature.Moments.Description.NothingHereYet,لا يوجد شيء هنا حتى الآن...
 Feature.Moments.Description.PublishMoment,صِف لحظتك
 Feature.Moments.Description.StayFriendly,لنحافظ على أجواء ودّية
@@ -3704,7 +3717,7 @@ Feature.Moments.Label.MomentUnavailableDefault,هذه اللحظة غير متا
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,لا توجد أي تعليقات حتى الآن
-Feature.Moments.Label.NonInfiniteScrollEndTitle,أنت على اطلاع بكل جديد حاليًا
+Feature.Moments.Label.NonInfiniteScrollEndTitle,هناك المزيد من اللحظات لمشاهدتها
 Feature.Moments.Label.Photos,الصور
 Feature.Moments.Label.PostDeleted,تم حذف اللحظة
 Feature.Moments.Label.PostRemovedBody,تنتهك اللحظة التي نشرتها معايير مجتمعنا.

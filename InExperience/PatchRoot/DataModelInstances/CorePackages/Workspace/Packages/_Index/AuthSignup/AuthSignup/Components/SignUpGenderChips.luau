@@ -1,7 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("AuthSignup").Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
-local userGender = require(parent.AuthCommon).Enums.UserGender
+local authCommonModule = require(parent.AuthCommon)
+local userGender = authCommonModule.Enums.UserGender
+local formatBoldRichText = authCommonModule.Utils.formatBoldRichText
 local view = foundationModule.View
 local chip = foundationModule.Chip
 local inputLabel = foundationModule.InputLabel
@@ -10,7 +12,7 @@ local chipSize = foundationModule.Enums.ChipSize
 local iconName = foundationModule.Enums.IconName
 
 return function(value)
-	-- upvalues: reactModule (ref), view (ref), inputLabel (ref), inputLabelSize (ref), chip (ref), iconName (ref), chipSize (ref), userGender (ref)
+	-- upvalues: reactModule (ref), view (ref), inputLabel (ref), formatBoldRichText (ref), inputLabelSize (ref), chip (ref), iconName (ref), chipSize (ref), userGender (ref)
 	local onGenderSelected = value.onGenderSelected
 	
 	return reactModule.createElement(view, {
@@ -19,7 +21,8 @@ return function(value)
 	}, {
 		Label = reactModule.createElement(inputLabel, {
 			LayoutOrder = 1,
-			Text = value.label,
+			Text = if value.isLabelBold then formatBoldRichText(value.label) else value.label,
+			RichText = value.isLabelBold,
 			size = inputLabelSize.Medium
 		}),
 		Options = reactModule.createElement(view, { tag = "row gap-small auto-xy", LayoutOrder = 2 }, {

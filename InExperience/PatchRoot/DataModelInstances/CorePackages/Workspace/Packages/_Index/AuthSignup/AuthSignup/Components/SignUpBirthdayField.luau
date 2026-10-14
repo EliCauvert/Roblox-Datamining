@@ -1,6 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("AuthSignup").Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
+local formatBoldRichText = require(parent.AuthCommon).Utils.formatBoldRichText
 local view = foundationModule.View
 local text = foundationModule.Text
 local icon = foundationModule.Icon
@@ -11,7 +12,7 @@ local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 
 return function(value)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), inputLabel (ref), inputLabelSize (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), view (ref), inputLabel (ref), formatBoldRichText (ref), inputLabelSize (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
 	local var1 = value.text ~= nil and value.text ~= ""
 	
 	return reactModule.createElement(view, {
@@ -22,7 +23,8 @@ return function(value)
 		Label = reactModule.createElement(inputLabel, {
 			isRequired = true,
 			LayoutOrder = 1,
-			Text = value.label,
+			Text = if value.isLabelBold then formatBoldRichText(value.label) else value.label,
+			RichText = value.isLabelBold,
 			size = inputLabelSize.Medium
 		}),
 		Field = reactModule.createElement(view, {

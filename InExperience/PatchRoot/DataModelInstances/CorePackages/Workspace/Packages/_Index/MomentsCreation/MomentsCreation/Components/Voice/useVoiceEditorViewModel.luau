@@ -36,6 +36,7 @@ local fFlagMomentsTTSStartTimeScrubberFollowModule = require(momentsCreation.Fla
 local fFlagMomentsTTSComposerCaretAlignmentModule = require(momentsCreation.Flags.FFlagMomentsTTSComposerCaretAlignment)
 local fFlagMomentsTTSVoiceSelectorModule = require(momentsCreation.Flags.FFlagMomentsTTSVoiceSelector)
 local fFlagMomentsTTSComposerUncontrolledInputModule = require(momentsCreation.Flags.FFlagMomentsTTSComposerUncontrolledInput)
+local fFlagMomentsTTSTooManyDigitsErrorModule = require(momentsCreation.Flags.FFlagMomentsTTSTooManyDigitsError)
 local dialogTypeModule = require(momentsCreation.Enums.DialogType)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local var1 = getFIntMomentsTTSDefaultVoiceIdModule()
@@ -66,13 +67,13 @@ local _ = function(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: getFIntMomentsTTSMaxCharactersModule (ref), useLocalization (ref), useOnScreenKeyboardHeightModule (ref), useState (ref), userInputService (ref), useEffect (ref), useComposerParentTextPaddingModule (ref), fFlagMomentsTTSComposerCaretAlignmentModule (ref), useTokens (ref), var1 (ref), fFlagMomentsTTSVoiceSelectorModule (ref), useSignalState (ref), voiceCatalogModule (ref), fFlagMomentsTTSComposerUncontrolledInputModule (ref), reactModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), signalsModule (ref), clampTtsStartTimeModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), dialogTypeModule (ref), useCallback (ref), t (ref), useLayoutEffect (ref), useMemo (ref), measureTextLineCountModule (ref), builderSans (ref), var3 (ref), var2 (ref), computeVoiceButtonStateModule (ref), useVoiceSelectorModule (ref), fFlagMomentsTTSStartTimeScrubberFollowModule (ref), useTtsStartTimeDragModule (ref)
+	-- upvalues: getFIntMomentsTTSMaxCharactersModule (ref), fFlagMomentsTTSTooManyDigitsErrorModule (ref), useLocalization (ref), useOnScreenKeyboardHeightModule (ref), useState (ref), userInputService (ref), useEffect (ref), useComposerParentTextPaddingModule (ref), fFlagMomentsTTSComposerCaretAlignmentModule (ref), useTokens (ref), var1 (ref), fFlagMomentsTTSVoiceSelectorModule (ref), useSignalState (ref), voiceCatalogModule (ref), fFlagMomentsTTSComposerUncontrolledInputModule (ref), reactModule (ref), getFFlagMomentsTTSStartTimePositioningModule (ref), signalsModule (ref), clampTtsStartTimeModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), dialogTypeModule (ref), useCallback (ref), t (ref), useLayoutEffect (ref), useMemo (ref), measureTextLineCountModule (ref), builderSans (ref), var3 (ref), var2 (ref), computeVoiceButtonStateModule (ref), useVoiceSelectorModule (ref), fFlagMomentsTTSStartTimeScrubberFollowModule (ref), useTtsStartTimeDragModule (ref)
 	local controller = p1.controller
 	local var4 = getFIntMomentsTTSMaxCharactersModule()
 	local playback = controller.preview.playback
 	local ttsAudio = controller.ttsAudio
 	assert(ttsAudio ~= nil, "VoiceEditor requires controller.ttsAudio")
-	local var5 = useLocalization({
+	local t_1 = {
 		createText = "Feature.Moments.Action.CreateVoiceover",
 		saveText = "Feature.Moments.Action.SaveVoiceover",
 		helperDefault = "Feature.Moments.Label.VoiceHelperDefault",
@@ -86,11 +87,17 @@ return function(p1)
 			"Feature.Moments.Label.VoicePlaceholder",
 			maxCount = var4
 		}
-	})
-	local t_1 = {
+	}
+	
+	if fFlagMomentsTTSTooManyDigitsErrorModule then
+		t_1.tooManyDigitsError = "Feature.Moments.Label.VoiceTooManyNumbersError"
+	end
+	local var5 = useLocalization(t_1)
+	local t_2 = {
 		moderated = var5.moderationError,
 		quotaExceeded = var5.limitError,
 		timeout = var5.timeoutError,
+		tooManyDigits = var5.tooManyDigitsError,
 		failure = var5.failureError
 	}
 	local failureError = var5.failureError
@@ -209,7 +216,7 @@ return function(p1)
 		var47.current = true
 	end, { var56, playback, setSelectedVoiceId })
 	useEffect(function()
-		-- upvalues: var51 (ref), var36 (ref), var31 (ref), var47 (ref), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), ttsAudio (ref), var48 (ref), var50 (ref), playback (ref), var46 (ref), controller (ref), dialogTypeModule (copy), t_1 (ref), failureError (ref), var49 (ref)
+		-- upvalues: var51 (ref), var36 (ref), var31 (ref), var47 (ref), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), ttsAudio (ref), var48 (ref), var50 (ref), playback (ref), var46 (ref), controller (ref), dialogTypeModule (copy), t_2 (ref), failureError (ref), var49 (ref)
 		if var51 == "ready" and var36.current ~= "" then
 			var31(true)
 			
@@ -240,11 +247,11 @@ return function(p1)
 			local errorReason = ttsAudio.getErrorReason(false)
 			fireAnalyticsEventModule(eventNames.EditingFlowVoiceGenerateFailed, makeCreationEventFieldsModule.makeVoiceEventFields({ failure_reason = tostring(errorReason or "failure") }))
 			
-			if errorReason ~= "moderated" then
+			if errorReason ~= "moderated" and errorReason ~= "tooManyDigits" then
 				controller.showModal({
 					modalType = dialogTypeModule.VoiceoverError,
 					modalProps = {
-						message = t_1[errorReason] or failureError,
+						message = t_2[errorReason] or failureError,
 						onTryAgain = function()
 							-- upvalues: controller (copy), var49 (copy)
 							controller.dismissModal()
@@ -402,7 +409,8 @@ return function(p1)
 	local canGenerate = var66.canGenerate
 	local var67 = var66.showSave and not var6
 	local isModerated = var66.isModerated
-	local isOverLimit_1 = isOverLimit or isModerated
+	local isTooManyDigits = var66.isTooManyDigits
+	local isOverLimit_1 = isOverLimit or (isModerated or isTooManyDigits)
 	local var68 = reactModule.useRef(false)
 	useEffect(function()
 		-- upvalues: var51 (ref), var68 (ref)
@@ -639,7 +647,7 @@ return function(p1)
 			var79(playback.getDuration(p3))
 		end)
 	end, { controller, playback })
-	local var80 = if isOverLimit then var5.overLimit elseif isModerated then var5.moderationError elseif isGenerating then var5.generating else var5.helperDefault
+	local var80 = if isOverLimit then var5.overLimit elseif isModerated then var5.moderationError elseif isTooManyDigits then var5.tooManyDigitsError elseif isGenerating then var5.generating else var5.helperDefault
 	
 	if var51 ~= "ready" then
 		var45 = var51 == "playing" and (var53 > 0 and var78 > 0)

@@ -380,7 +380,6 @@ return {
 	CHAT_REVERT_CONFIRMATION_TITLE = "Feature.Build.Title.RevertLastChange",
 	CHAT_REVERT_TO_VERSION = "Feature.Build.Description.RevertToVersion",
 	CHAT_REVERT_FAILURE = if fFlagEnableTeamTestLua then "Feature.Build.Message.RevertVersionFail" else "Feature.Build.Message.PublishNotReverted",
-	CHAT_REVERT_SUCCESS = if fFlagEnableTeamTestLua then "Feature.Build.Message.CreatedRevertedVer" else "Feature.Build.Message.PublishReverted",
 	CHAT_STOP_CONFIRMATION_ACTION = "Feature.Build.Action.Stop",
 	CHAT_STOP_CONFIRMATION_CANCEL = "Feature.Build.Action.KeepBuilding",
 	CHAT_STOP_CONFIRMATION_DESCRIPTION = "Feature.Build.Description.StopBuild",

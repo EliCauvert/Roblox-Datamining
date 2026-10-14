@@ -58,9 +58,6 @@ return function(p1)
 	local sendMessage = var5.sendMessage
 	
 	return {
-		tracksExternalComposerText = true,
-		allowsComposerTypingWhileResponding = true,
-		reservesHandleSpace = true,
 		isOpen = var1,
 		onClose = onClose,
 		sheetComponent = foundationModule.Sheet,
@@ -93,11 +90,22 @@ return function(p1)
 			composerResourceAttachments,
 			removeComposerResourceAttachmentAtIndex
 		}),
+		onActivateComposerResourceAttachment = reactModule.useCallback(function(p2)
+			-- upvalues: composerResourceAttachments (ref), getLibraryStoreModule (copy), chatTypesModule (copy)
+			local var8 = composerResourceAttachments[p2]
+			
+			if var8 ~= nil then
+				getLibraryStoreModule().reportChipEvent("Activated", { chatTypesModule.getResourceAttachmentUri(var8) })
+			end
+		end, { composerResourceAttachments }),
 		isComposerSendBlocked = var7,
+		tracksExternalComposerText = true,
 		textBoxRef = var5.textBoxRef,
 		isAssistantResponding = var5.isAssistantResponding,
 		canStopAssistantResponse = var5.canStopAssistantResponse,
 		canSendWhileResponding = var5.canSendWhileResponding,
+		allowsComposerTypingWhileResponding = true,
+		reservesHandleSpace = true,
 		onSend = reactModule.useCallback(function(p2)
 			-- upvalues: composerResourceAttachments (ref), chatTypesModule (copy), sendMessage (ref), getLibraryStoreModule (copy)
 			local t = {}

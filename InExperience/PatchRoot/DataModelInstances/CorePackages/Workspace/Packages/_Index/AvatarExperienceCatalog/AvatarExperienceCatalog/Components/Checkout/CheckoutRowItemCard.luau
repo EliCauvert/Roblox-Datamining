@@ -13,6 +13,7 @@ local useCheckoutRowItemCardViewModelModule = require(script.Parent.useCheckoutR
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
+local fFlagAXMISOffersChip = avatarExperienceFlagsModule.FFlagAXMISOffersChip
 local fFlagAXMISSmallUIChanges = avatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
 local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
 local avatarExperienceTimedOptionsModule = require(parent.AvatarExperienceTimedOptions)
@@ -49,7 +50,7 @@ local _ = function(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), fFlagAXDurablesForMIS (ref), useCheckoutRowItemCardViewModelModule (ref), fFlagAXDurables2Option (ref), useLocalization (ref), ASSET_TYPE_LOCALIZED (ref), BUNDLE_TYPE_LOCALIZED (ref), t (ref), OFFERS_LOCALIZED (ref), reactModule (ref), fFlagAXMISWithOffers (ref), purchaseItemsErrorStatusMapModule (ref), wearTimeOptionButton (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), fFlagAXMISSmallUIChanges (ref), wearTimeSelectedOptionInList (ref)
+	-- upvalues: foundationModule (ref), fFlagAXDurablesForMIS (ref), useCheckoutRowItemCardViewModelModule (ref), fFlagAXDurables2Option (ref), useLocalization (ref), ASSET_TYPE_LOCALIZED (ref), BUNDLE_TYPE_LOCALIZED (ref), t (ref), fFlagAXMISOffersChip (ref), OFFERS_LOCALIZED (ref), reactModule (ref), fFlagAXMISWithOffers (ref), purchaseItemsErrorStatusMapModule (ref), wearTimeOptionButton (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), fFlagAXMISSmallUIChanges (ref), wearTimeSelectedOptionInList (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local thumbnailSize = p1.thumbnailSize or var1.Size.Size_2100
 	local selectedTimedOptionPrice = nil
@@ -65,7 +66,7 @@ return reactModule.memo(function(p1)
 	local var4 = useLocalization(ASSET_TYPE_LOCALIZED)
 	local var5 = useLocalization(BUNDLE_TYPE_LOCALIZED)
 	local var6 = useLocalization(t)
-	local var7 = if fFlagAXDurables2Option then useLocalization(OFFERS_LOCALIZED) else nil
+	local var7 = if fFlagAXMISOffersChip then useLocalization(OFFERS_LOCALIZED) else nil
 	local var8 = if p1.itemType == Enum.AvatarItemType.Bundle.Name then "BundleThumbnail" else "Asset"
 	local var9 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), ASSET_TYPE_LOCALIZED (copy), var4 (ref), BUNDLE_TYPE_LOCALIZED (copy), var5 (ref)
@@ -186,7 +187,9 @@ return reactModule.memo(function(p1)
 				headerSize = UDim2.fromOffset(thumbnailSize, thumbnailSize),
 				footerSize = UDim2.fromScale(0, 1),
 				footerAutomaticSize = Enum.AutomaticSize.XY,
-				AutomaticSize = Enum.AutomaticSize.XY
+				AutomaticSize = Enum.AutomaticSize.XY,
+				offersLocalized = if fFlagAXMISOffersChip then var7 else nil,
+				offerApplied = if fFlagAXMISOffersChip then p1.offerApplied else nil
 			})
 		}) else nil,
 		RightSlot = if not fFlagAXDurables2Option then reactModule.createElement(foundationModule.View, {

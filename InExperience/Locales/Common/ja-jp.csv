@@ -106,6 +106,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,メールアド�
 Authentication.Login.WeChat.AntiAddictionText,不適切なバーチャル空間には参加しないように心掛け、海賊版は拒否しましょう。自衛意識を高め、騙されないようにしましょう。バーチャル空間を訪問することは脳の働きを高めてくれますが、度がすぎると健康を害する恐れがあります。時間管理をきちんと行い、健康的なライフスタイルをお楽しみください。
 Authentication.SignUp.Action.ApplyOnNextRespawn,次のリスポーンで適用
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ContinueSetup,設定を続ける
 Authentication.SignUp.Action.Create,作成
 Authentication.SignUp.Action.CreateAccountSentenceCase,アカウントを作成
 Authentication.SignUp.Action.ExitModalLeave,退出
@@ -119,6 +120,7 @@ Authentication.SignUp.Description.Try,こちらをお試しください
 Authentication.SignUp.Description.UsernameChanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。更新したユーザー名を今すぐゲーム内に反映させるには、リスポーンしてください。何もしなくても、次回から適用されます。
 Authentication.SignUp.Description.UsernameUnchanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。友達とチャットしたり、何百万ものRobloxゲームをプレイしたりしましょう。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,お持ちのRoblox（ロブロックス）アカウントは {platform} 上のアカウントに紐づけられます。設定画面からいつでも紐づけを解除できます。また {platform} 上の他のアカウントとの紐づけができるようになるまでには、クールダウン期間があるかもしれません。{ctaButton} をクリックすると、仲裁条項を含む利用規約に同意し、プライバシーポリシーを承認したことになります。
+Authentication.SignUp.Header.CancelAccountCreation,アカウント作成をキャンセルしますか？
 Authentication.SignUp.Header.OneLastThing,最後のステップ
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Robloxアカウントを設定
 Authentication.SignUp.Heading.CountryCodeSelector,国を選択
@@ -1961,6 +1963,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,テキストをコピー
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,新しいゲームを作成
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,今後表示しない
@@ -2014,10 +2017,17 @@ Feature.Build.Analytics.Description.PayerConversion,有料ユーザーコンバ�
 Feature.Build.Analytics.Description.PlaythroughRate,プレイスルー率は、最後まで完了したプレイセッションの割合です。この割合が高いほど、プレイヤーがバーチャル空間を始めやすく、最後までプレイする価値があると感じていることを示します。
 Feature.Build.Analytics.Description.TotalPlaytime,合計プレイ時間は、その期間にすべてのプレイヤーがバーチャル空間で過ごした時間の合計です。プレイ時間の増加は通常、プレイセッションの魅力が高まっていることを示します。
 Feature.Build.Analytics.DurationHours,{number}時間
+Feature.Build.Analytics.Goal.Action.CreateAd,広告を作成
+Feature.Build.Analytics.Goal.Action.SellItems,アイテムを販売
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,友達と共有
 Feature.Build.Analytics.Goal.EarnRobux,Robuxを獲得する
 Feature.Build.Analytics.Goal.FirstImpression,良い第一印象を与える
 Feature.Build.Analytics.Goal.GetMorePlayers,より多くのプレイヤーを獲得
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,プレイヤーにリピートしてもらう
+Feature.Build.Analytics.Goal.Locked.EarnRobux,ゲーム内でRobuxを獲得して、これらの統計を確認しましょう。
+Feature.Build.Analytics.Goal.Locked.FirstImpression,最初のプレイヤーを獲得して、これらの統計を確認しましょう。
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,より多くのプレイヤーを獲得して、これらの統計を確認しましょう。
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,最初のリピートプレイヤーを獲得して、これらの統計を確認しましょう。
 Feature.Build.Analytics.KeyStats,主な指標
 Feature.Build.Analytics.LastMonth,先月
 Feature.Build.Analytics.LastWeek,
@@ -2143,6 +2153,7 @@ Feature.Build.Label.AdditionalUsage,追加のビルド使用量
 Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT}使用済み
 Feature.Build.Label.AdsManager,広告管理
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,すべてのゲーム
 Feature.Build.Label.AmountAvailable,残り{AMOUNT}
 Feature.Build.Label.Autosaved,自動保存済み
 Feature.Build.Label.Available,利用可能
@@ -2167,12 +2178,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,わかりやすいパフォーマンスレポート
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,フィルター
 Feature.Build.Label.Free,無料
 Feature.Build.Label.FreeBuildUsage,無料のビルド使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,友達限定
 Feature.Build.Label.GamePlays,プレイ数
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
+Feature.Build.Label.GroupGames,グループゲーム
+Feature.Build.Label.Groups,グループ
 Feature.Build.Label.Hi,こんにちは
 Feature.Build.Label.IconThumbnails,アイコンとサムネイル
 Feature.Build.Label.Images2D,2D画像
@@ -2186,6 +2200,7 @@ Feature.Build.Label.ManagedPricing,管理価格設定
 Feature.Build.Label.ManagedPricingMixed,既存の製品で設定が混在
 Feature.Build.Label.MaximizeForGamePlays,プレイ数を最大化
 Feature.Build.Label.Models3D,3Dモデル
+Feature.Build.Label.MyGames,マイゲーム
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,制限なし
 Feature.Build.Label.NotStarted,開始していません
@@ -2333,12 +2348,12 @@ Feature.Build.Message.BuildInternalError,ビルドで問題が発生しました
 Feature.Build.Message.BuildResponseFailed,ビルドが応答しませんでした。もう一度お試しください。
 Feature.Build.Message.BuildStillWorking,処理中です。待機中でもアプリを終了したり、Robloxをプレイしたり、別のプロジェクトを開始したりできます。
 Feature.Build.Message.BuildStopped,ビルドを停止しました。
+Feature.Build.Message.BuildTakingLonger,予想よりも時間がかかっています。そのままお待ちいただくか、別の作業を開始してください。
 Feature.Build.Message.BuildTemporarilyDown,ビルドは一時的に利用できません。しばらくしてからもう一度お試しください。
 Feature.Build.Message.CompletedTasks,{COUNT}件の完了したタスク
 Feature.Build.Message.ConversationGone,この会話は利用できなくなりました。新しい会話を始めてください。
 Feature.Build.Message.ConversationNotFound,この会話は見つかりませんでした。新しい会話を始めてください。
 Feature.Build.Message.CreateGameToUseBuild,ゲームを新規作成して、ビルドの使用を開始してください。
-Feature.Build.Message.CreatedRevertedVer,元に戻したバージョンが作成されました。
 Feature.Build.Message.ErrorCodeText,（{ERROR_CODE}）{ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,クリエーターハブでオーディエンスの適格性を拡大
 Feature.Build.Message.ExperiencesLoadFailed,バーチャル空間を読み込めませんでした
@@ -2375,7 +2390,6 @@ Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
 Feature.Build.Message.PublishPromotionUpsell,ゲームの公開、おめでとうございます！Robloxでさらに多くのプレイヤーを獲得するために、無料プロモーションを{promotionCount}回利用できます。
 Feature.Build.Message.PublishPromotionUpsellSingular,ゲームの公開、おめでとうございます！Robloxでさらに多くのプレイヤーを獲得するために、無料プロモーションを1回利用できます。
-Feature.Build.Message.PublishReverted,公開を元に戻しました。
 Feature.Build.Message.QuestionnaireNeeded,このゲームはビルド外で編集されました。公開するには、コンテンツに関する質問フォームに回答してください。
 Feature.Build.Message.ReadyToPlay,あなたのゲームをRobloxでプレイするための準備完了です！
 Feature.Build.Message.ResetHours,{HOURS}時間後にリセット
@@ -2425,7 +2439,7 @@ Feature.Build.Title.BuildUsage,ビルド使用量
 Feature.Build.Title.ChangesNotLive,変更はまだ公開されていません
 Feature.Build.Title.ChatBuildUnavailable,ビルドは利用できません。
 Feature.Build.Title.Content,コンテンツ
-Feature.Build.Title.CreateYourAd,広告を作成
+Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,Robuxが1日の限度額に達しました
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,製品を編集
@@ -3671,7 +3685,7 @@ Feature.Moments.Description.HowToCaptureStep2,切り抜き操作を有効化し�
 Feature.Moments.Description.HowToCaptureStep3,ゲームプレイの写真とビデオを切り抜きます
 Feature.Moments.Description.LeaveMomentsCreation,変更内容はすべて失われますが、この切り抜きは引き続き<b>切り抜き</b>ギャラリーに保存されます。
 Feature.Moments.Description.NoMusicResults,音楽が見つかりません
-Feature.Moments.Description.NonInfiniteScrollEndBody,モーメントの停止ポイントに達しました。視聴を続けるには以下をタップしてください。
+Feature.Moments.Description.NonInfiniteScrollEndBody,フィードを一時停止しました。引き続き視聴するかどうかを決定できます。
 Feature.Moments.Description.NothingHereYet,まだ何もありません...
 Feature.Moments.Description.PublishMoment,モーメントの説明をしてください
 Feature.Moments.Description.StayFriendly,フレンドリーな雰囲気を保ちましょう
@@ -3737,7 +3751,7 @@ Feature.Moments.Label.MomentUnavailableDefault,このモーメントは使用で
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,コメントはまだありません
-Feature.Moments.Label.NonInfiniteScrollEndTitle,現在、新着のモーメントはありません
+Feature.Moments.Label.NonInfiniteScrollEndTitle,他にも視聴可能なモーメントがあります
 Feature.Moments.Label.Photos,写真
 Feature.Moments.Label.PostDeleted,モーメントが削除されました
 Feature.Moments.Label.PostRemovedBody,投稿したモーメントは、コミュニティ基準に違反しています。
@@ -3777,6 +3791,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,しばらくしてから、もう一
 Feature.Moments.Label.VoiceModerationError,スクリプトは安全に関するルールに従う必要があります
 Feature.Moments.Label.VoicePlaceholder,ボイスオーバーのスクリプトを入力してください。文字数制限は{maxCount}文字です
 Feature.Moments.Label.VoiceTimeoutBody,ボイスオーバーの生成がタイムアウトしました。
+Feature.Moments.Label.VoiceTooManyNumbersError,スクリプトに含まれる桁数が多すぎます
 Feature.Moments.Label.WriteComment,コメントを書く
 Feature.Moments.Title.Comments,コメント
 Feature.Moments.Title.CommentsWithCappedCount,コメント（{count}件以上）

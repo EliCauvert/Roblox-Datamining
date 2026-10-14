@@ -14,7 +14,6 @@ local discoveryVideoEndEvent = discoveryAnalyticsModule.Events.discoveryVideoEnd
 local discoveryVideoLoadEvent = discoveryAnalyticsModule.Events.discoveryVideoLoadEvent
 local discoveryVideoLoopEvent = discoveryAnalyticsModule.Events.discoveryVideoLoopEvent
 local discoveryVideoPlayEvent = discoveryAnalyticsModule.Events.discoveryVideoPlayEvent
-local fFlagLuaAppHomeReduceRenders = require(parent.SharedFlags).FFlagLuaAppHomeReduceRenders
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppBroadenVideoAnalytics = require(parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
 local fFlagLuaAppHomeMomentVideoFallback = require(parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
@@ -53,7 +52,7 @@ local _ = function(value, p1)
 end
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: reactModule (ref), mutedError (ref), fFlagLuaAppDiscoveryMomentVideoTelemetry (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), getGameTileLayoutDataModule (ref), getLayoutDataVideoModule (ref), fFlagLuaAppHomeMomentVideoFallback (ref), discoveryVideoPlayEvent (ref), fFlagLuaAppBroadenVideoAnalytics (ref), omniRecommendationsContentType (ref), discoveryEventErrorLogger (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref), fFlagLuaAppHomeReduceRenders (ref)
+	-- upvalues: reactModule (ref), mutedError (ref), fFlagLuaAppDiscoveryMomentVideoTelemetry (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), getGameTileLayoutDataModule (ref), getLayoutDataVideoModule (ref), fFlagLuaAppHomeMomentVideoFallback (ref), discoveryVideoPlayEvent (ref), fFlagLuaAppBroadenVideoAnalytics (ref), omniRecommendationsContentType (ref), discoveryEventErrorLogger (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref)
 	local var1 = if p1 ~= nil then nil elseif p2 then p1.topicId else p1.gameSetTypeId
 	local var2 = reactModule.useCallback(function(_, _)
 		-- upvalues: p5 (ref), mutedError (copy), fFlagLuaAppDiscoveryMomentVideoTelemetry (copy), var1 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), getLayoutDataVideoModule (copy), fFlagLuaAppHomeMomentVideoFallback (copy), discoveryVideoPlayEvent (copy), p3 (ref), p4 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
@@ -92,7 +91,7 @@ Traceback:
 	runtime : [lunaux]:1320 function match_weird_patterns
 	end, { p3, p5, var1, p4 })
 	
-	return if fFlagLuaAppHomeReduceRenders then reactModule.useMemo(function()
+	return reactModule.useMemo(function()
 		-- upvalues: var2 (ref), var3 (ref), var4 (ref), var5 (ref)
 		return {
 			reportVideoPlay = var2,
@@ -100,10 +99,5 @@ Traceback:
 			reportVideoLoop = var4,
 			reportVideoEnd = var5
 		}
-	end, { var2, var3, var4, var5 }) else {
-		reportVideoPlay = var2,
-		reportVideoLoad = var3,
-		reportVideoLoop = var4,
-		reportVideoEnd = var5
-	}
+	end, { var2, var3, var4, var5 })
 end

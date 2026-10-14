@@ -2,6 +2,7 @@
 
 return {
 	SplitPaneStore = require(script.Stores.SplitPaneStore),
+	SplitPaneTelemetry = require(script.Telemetry.SplitPaneTelemetry),
 	useSplitLayoutStatus = require(script.Hooks.useSplitLayoutStatus),
 	useSplitPaneRender = require(script.Hooks.useSplitPaneRender),
 	SplitPaneContext = require(script.Context.SplitPaneContext),

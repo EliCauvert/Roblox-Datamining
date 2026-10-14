@@ -105,6 +105,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,您的電子郵�
 Authentication.Login.WeChat.AntiAddictionText,抵制劣質與抄襲體驗！玩遊戲有益身心，但過度沉迷會對身體造成影響。控制遊戲時間，享受健康人生！
 Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生時套用
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ContinueSetup,繼續設定
 Authentication.SignUp.Action.Create,建立
 Authentication.SignUp.Action.CreateAccountSentenceCase,建立帳號
 Authentication.SignUp.Action.ExitModalLeave,離開
@@ -118,6 +119,7 @@ Authentication.SignUp.Description.Try,試用
 Authentication.SignUp.Description.UsernameChanged,大功告成！你的帳號已準備就緒並連結到 {platform}。立即重生，即可在遊戲中看到更新後的使用者名稱，或在下次重生時套用。
 Authentication.SignUp.Description.UsernameUnchanged,大功告成！你的帳號已準備就緒並連結到 {platform}。歡迎與好友聊天，並暢玩數百萬個 Roblox 遊戲。
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,您的 Roblox 帳號將連結到您在 {platform} 的帳號。您可以隨時從設定畫面取消連結。成功連結到 {platform} 上的另一個帳號之前，可能會有一段時間的等待期。按一下「{ctaButton}」即表示您同意使用條款（包括仲裁條款），並瞭解隱私權政策。
+Authentication.SignUp.Header.CancelAccountCreation,要取消建立帳號嗎？
 Authentication.SignUp.Header.OneLastThing,最後一步
 Authentication.SignUp.Header.SetUpYourRobloxAccount,設定你的 Roblox 帳號
 Authentication.SignUp.Heading.CountryCodeSelector,選擇國家
@@ -1960,6 +1962,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,複製文字
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,建立新遊戲
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,不要再詢問
@@ -2013,10 +2016,16 @@ Feature.Build.Analytics.Description.PayerConversion,付費使用者轉換率是�
 Feature.Build.Analytics.Description.PlaythroughRate,遊玩完成率是指完成整個遊玩作業的造訪百分比。比例越高代表玩家認為你的體驗越容易上手，而且更有意願通關。
 Feature.Build.Analytics.Description.TotalPlaytime,總遊玩時間計算某段時間內，所有玩家在體驗中花費的總時數。遊玩時間增加通常表示作業更具吸引力。
 Feature.Build.Analytics.DurationHours,{number} 小時
+Feature.Build.Analytics.Goal.Action.CreateAd,建立廣告
+Feature.Build.Analytics.Goal.Action.SellItems,販賣物品
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,與好友分享
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,留下良好的第一印象
 Feature.Build.Analytics.Goal.GetMorePlayers,吸引更多玩家
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,吸引玩家持續回流
+Feature.Build.Analytics.Goal.Locked.EarnRobux,在遊戲中賺取 Robux 以查看這些統計資料。
+Feature.Build.Analytics.Goal.Locked.FirstImpression,取得第一個玩家以查看這些統計資料。
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,取得第一個回流玩家以查看這些統計資料。
 Feature.Build.Analytics.KeyStats,關鍵統計資料
 Feature.Build.Analytics.LastMonth,上個月
 Feature.Build.Analytics.LastWeek,
@@ -2142,6 +2151,7 @@ Feature.Build.Label.AdditionalUsage,額外組建使用量
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，上限 {LIMIT}
 Feature.Build.Label.AdsManager,廣告管理工具
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,所有遊戲
 Feature.Build.Label.AmountAvailable,尚有 {AMOUNT} 次可使用
 Feature.Build.Label.Autosaved,已自動儲存
 Feature.Build.Label.Available,可供使用
@@ -2166,12 +2176,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,簡單的成效報告
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,免費
 Feature.Build.Label.FreeBuildUsage,免費組建使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,僅限好友
 Feature.Build.Label.GamePlays,遊戲遊玩次數
 Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
+Feature.Build.Label.GroupGames,群組遊戲
+Feature.Build.Label.Groups,群組
 Feature.Build.Label.Hi,嗨
 Feature.Build.Label.IconThumbnails,圖示和縮圖
 Feature.Build.Label.Images2D,2D 圖片
@@ -2185,6 +2198,7 @@ Feature.Build.Label.ManagedPricing,管理定價
 Feature.Build.Label.ManagedPricingMixed,混合套用於現有產品
 Feature.Build.Label.MaximizeForGamePlays,最大化遊戲遊玩次數
 Feature.Build.Label.Models3D,3D 模型
+Feature.Build.Label.MyGames,我的遊戲
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,無上限
 Feature.Build.Label.NotStarted,尚未開始
@@ -2332,12 +2346,12 @@ Feature.Build.Message.BuildInternalError,組建系統發生問題，請再試一
 Feature.Build.Message.BuildResponseFailed,組建系統無法回應，請再試一次。
 Feature.Build.Message.BuildStillWorking,正在處理。在等待期間，你可以離開 App、玩 Roblox 或開始另一項專案。
 Feature.Build.Message.BuildStopped,你已停止組建。
+Feature.Build.Message.BuildTakingLonger,處理時間比預期來得長。你可以繼續等待，或開始進行其他操作。
 Feature.Build.Message.BuildTemporarilyDown,暫時無法使用組建，請 1 分鐘後再試。
 Feature.Build.Message.CompletedTasks,已完成 {COUNT} 項任務
 Feature.Build.Message.ConversationGone,此對話已無法使用。請開始新的對話。
 Feature.Build.Message.ConversationNotFound,找不到此對話。請開始新的對話。
 Feature.Build.Message.CreateGameToUseBuild,建立新遊戲以開始使用組建。
-Feature.Build.Message.CreatedRevertedVer,已建立還原的版本。
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,在創作者中心擴大你的受眾資格
 Feature.Build.Message.ExperiencesLoadFailed,無法載入體驗
@@ -2374,7 +2388,6 @@ Feature.Build.Message.PublishExpandAudience,發佈以擴大受眾
 Feature.Build.Message.PublishNotReverted,無法還原發佈的內容，請再試一次。
 Feature.Build.Message.PublishPromotionUpsell,恭喜你發佈遊戲！你有 {promotionCount} 次免費促銷機會，可以在 Roblox 上吸引更多玩家。
 Feature.Build.Message.PublishPromotionUpsellSingular,恭喜你發佈遊戲！你有 1 次免費促銷機會，可以在 Roblox 上吸引更多玩家。
-Feature.Build.Message.PublishReverted,已還原發佈版本。
 Feature.Build.Message.QuestionnaireNeeded,此遊戲是在組建之外編輯的。請完成內容問卷以發佈。
 Feature.Build.Message.ReadyToPlay,你的遊戲已可在 Roblox 上遊玩！
 Feature.Build.Message.ResetHours,{HOURS} 小時後重置
@@ -2424,7 +2437,7 @@ Feature.Build.Title.BuildUsage,組建使用量
 Feature.Build.Title.ChangesNotLive,變更的內容尚未發佈
 Feature.Build.Title.ChatBuildUnavailable,無法使用組建。
 Feature.Build.Title.Content,內容
-Feature.Build.Title.CreateYourAd,建立廣告
+Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,已達每日 Robux 上限
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,編輯產品
@@ -2590,7 +2603,7 @@ Feature.Catalog.Heading.PremiumOnly,僅限 Roblox Plus
 Feature.Catalog.Heading.QuantityLimitReached,已達創作者上限
 Feature.Catalog.Heading.QuickMenu,快速選單
 Feature.Catalog.Heading.Resellers,轉賣者
-Feature.Catalog.Heading.SellItem,販賣物品
+Feature.Catalog.Heading.SellItem,
 Feature.Catalog.Heading.Sellers,賣家
 Feature.Catalog.Heading.SetPrice,設定價格
 Feature.Catalog.Heading.ShowBodyParts,顯示身體部位
@@ -3670,7 +3683,7 @@ Feature.Moments.Description.HowToCaptureStep2,啟用截圖控制項
 Feature.Moments.Description.HowToCaptureStep3,擷取遊戲遊玩的照片和影片
 Feature.Moments.Description.LeaveMomentsCreation,你即將失去所有變更，但仍可在<b>截圖</b>圖庫中找到此截圖。
 Feature.Moments.Description.NoMusicResults,找不到音樂
-Feature.Moments.Description.NonInfiniteScrollEndBody,你已到達「美好時光」的中斷處。輕觸下方即可繼續觀看。
+Feature.Moments.Description.NonInfiniteScrollEndBody,我們已暫停你的饋送。你可以決定是否要繼續觀看。
 Feature.Moments.Description.NothingHereYet,這裡還沒有任何內容...
 Feature.Moments.Description.PublishMoment,描述你的「美好時光」
 Feature.Moments.Description.StayFriendly,讓我們保持友善的互動
@@ -3736,7 +3749,7 @@ Feature.Moments.Label.MomentUnavailableDefault,無法使用這個美好時光。
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,尚無留言
-Feature.Moments.Label.NonInfiniteScrollEndTitle,已查看所有目前的通知
+Feature.Moments.Label.NonInfiniteScrollEndTitle,還有更多美好時光可供觀看
 Feature.Moments.Label.Photos,相片
 Feature.Moments.Label.PostDeleted,美好時光已刪除
 Feature.Moments.Label.PostRemovedBody,你張貼的「美好時光」違反了我們的《社群標準》。

@@ -65,8 +65,7 @@ return function(p1)
 	local var5 = useLocalization({
 		revertConfirmationTitle = localizationStringsModule.CHAT_REVERT_CONFIRMATION_TITLE,
 		revertConfirmationDescription = localizationStringsModule.CHAT_REVERT_CONFIRMATION_DESCRIPTION,
-		revertFailure = localizationStringsModule.CHAT_REVERT_FAILURE,
-		revertSuccess = localizationStringsModule.CHAT_REVERT_SUCCESS
+		revertFailure = localizationStringsModule.CHAT_REVERT_FAILURE
 	})
 	local _ = nil
 	local _ = nil
@@ -100,10 +99,7 @@ return function(p1)
 		-- upvalues: getPlaytestLoadingStoreModule (copy), var2 (ref)
 		return if var2 == nil then false else getPlaytestLoadingStoreModule(p2).getAgentStatusForPlaceId(var2)(p2) == "Loading"
 	end, { var2 })
-	local var20 = signalsReactModule.useSignalState(var19)
-	local _ = nil
-	local _ = nil
-	local var21 = if var2 ~= nil then var1 else getAgentRollbackRequestStoreModule(false).getIsPendingForPlaceId(var2)
+	local var20 = if var2 ~= nil then var1 else getAgentRollbackRequestStoreModule(false).getIsPendingForPlaceId(var2)
 	
 	return if turnFeedbackIds == nil or turnFeedbackIds.sequenceId == nil then nil else reactModule.createElement(reactModule.Fragment, nil, {
 		Feedback = reactModule.createElement(userFeedbackModule, {
@@ -113,7 +109,7 @@ return function(p1)
 				copyIconName = if fFlagBuildExperienceCopyChatMessagesModule then var15 else nil,
 				copyTestId = if fFlagBuildExperienceCopyChatMessagesModule then `{p1.testId}-copy` else nil,
 				includeRevert = feedbackIconsModule.canRevert(turnFeedbackIds),
-				isRevertDisabled = var20 or signalsReactModule.useSignalState(var21)
+				isRevertDisabled = signalsReactModule.useSignalState(var19) or signalsReactModule.useSignalState(var20)
 			}),
 			onActivated = reactModule.useCallback(function(p2)
 				-- upvalues: turnFeedbackIds (ref), feedbackActionModule (copy), var8 (ref), fFlagBuildExperienceCopyChatMessagesModule (copy), var16 (write), sendAgentTurnFeedbackModule (copy), var12 (ref)
@@ -150,9 +146,9 @@ return function(p1)
 			title = revertConfirmationTitle,
 			description = revertConfirmationDescription,
 			onRestore = function()
-				-- upvalues: var19 (ref), var21 (write), var12 (ref), feedbackActionModule (copy), sendAgentTurnFeedbackModule (copy), turnFeedbackIds (ref), var10 (ref), var14 (ref), feedbackIconsModule (copy), var8 (ref), revertFailure (write)
+				-- upvalues: var19 (ref), var20 (ref), var12 (ref), feedbackActionModule (copy), sendAgentTurnFeedbackModule (copy), turnFeedbackIds (ref), var10 (ref), var14 (ref), feedbackIconsModule (copy), var8 (ref), revertFailure (write)
 				if var19(false) then return end
-				if var21(false) then
+				if var20(false) then
 					return
 				end
 				var12(feedbackActionModule.REVERT)

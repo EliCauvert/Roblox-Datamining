@@ -161,6 +161,7 @@ return function(p1)
 				tracksExternalText = p1.tracksExternalComposerText,
 				resourceAttachments = if fFlagBuildExperienceChatResourceAttachments then p1.composerResourceAttachments else nil,
 				onRemoveResourceAttachment = if fFlagBuildExperienceChatResourceAttachments then p1.onRemoveComposerResourceAttachment else nil,
+				onActivateResourceAttachment = p1.onActivateComposerResourceAttachment,
 				placeholder = var2.composerPlaceholder,
 				textBoxRef = p1.textBoxRef,
 				isAssistantResponding = p1.isAssistantResponding,

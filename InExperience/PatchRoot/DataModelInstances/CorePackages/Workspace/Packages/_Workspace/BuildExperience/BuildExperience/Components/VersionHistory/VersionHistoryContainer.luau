@@ -7,7 +7,6 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local timeModule = require(parent.Time)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildExperienceVersionHistoryPaginationModule = require(buildExperience.Flags.FFlagBuildExperienceVersionHistoryPagination)
 local getAgentRollbackRequestStoreModule = require(buildExperience.Stores.GetAgentRollbackRequestStore)
 local getPlaytestLoadingStoreModule = require(parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
 local agentRollbackSnackbarModule = require(script.Parent.AgentRollbackSnackbar)
@@ -89,9 +88,9 @@ local function mapLocalizedHistoryToEntries(p4, p5, p6, p7)
 	return t
 end
 
-local _ = function(p8, p9, p10)
+local _ = function(p8, p9)
 	-- upvalues: dataStatus (ref), localizationStringsModule (ref)
-	return if p10 == nil then if p8 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif p8 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #p9 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil else p10
+	return if p8 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif p8 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #p9 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil
 end
 
 local _ = function(p8, p9, p10, p11)
@@ -149,7 +148,7 @@ local function useAgentRollbackRestore(p8, p9, p10)
 end
 
 return function(p8)
-	-- upvalues: useLocalization (ref), dateHelper (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), placeVersionHistoryModule (ref), signalsReactModule (ref), fFlagBuildExperienceVersionHistoryPaginationModule (ref), useNextHistoryPageModule (ref), useScrollToTopAfterRestoreModule (ref), getPlaytestLoadingStoreModule (ref), useLiveVersionCardViewModelModule (ref), useAgentRollbackRestore (ref), mapLocalizedHistoryToEntries (ref), useLatestVersionCardViewModelModule (ref), dataStatus (ref), versionHistoryBottomSheetModule (ref), agentRollbackSnackbarModule (ref)
+	-- upvalues: useLocalization (ref), dateHelper (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), placeVersionHistoryModule (ref), signalsReactModule (ref), useNextHistoryPageModule (ref), useScrollToTopAfterRestoreModule (ref), getPlaytestLoadingStoreModule (ref), useLiveVersionCardViewModelModule (ref), useAgentRollbackRestore (ref), mapLocalizedHistoryToEntries (ref), useLatestVersionCardViewModelModule (ref), dataStatus (ref), versionHistoryBottomSheetModule (ref), agentRollbackSnackbarModule (ref)
 	local var1 = useLocalization(dateHelper.MonthsLocalizationKeys)
 	local var2 = useLocalization({
 		empty = localizationStringsModule.VERSION_HISTORY_EMPTY,
@@ -171,7 +170,7 @@ return function(p8)
 	end, { var4, p8.placeId })
 	local var6 = signalsReactModule.useSignalState(var5.data)
 	local var7 = signalsReactModule.useSignalState(var5.status)
-	local var8 = if fFlagBuildExperienceVersionHistoryPaginationModule then useNextHistoryPageModule(var4, p8.placeId, var6) else nil
+	local var8 = useNextHistoryPageModule(var4, p8.placeId, var6)
 	local var9 = useScrollToTopAfterRestoreModule()
 	local var10 = signalsReactModule.useSignalState(reactModule.useCallback(function(p9)
 		-- upvalues: getPlaytestLoadingStoreModule (copy), p8 (ref)

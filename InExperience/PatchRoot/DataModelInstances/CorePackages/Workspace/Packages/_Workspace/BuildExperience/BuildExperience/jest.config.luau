@@ -2,6 +2,7 @@
 
 return {
 	displayName = "BuildExperience",
+	testPathIgnorePatterns = { "LibraryAudioPlayerContainer.test" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.ErrorLogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,

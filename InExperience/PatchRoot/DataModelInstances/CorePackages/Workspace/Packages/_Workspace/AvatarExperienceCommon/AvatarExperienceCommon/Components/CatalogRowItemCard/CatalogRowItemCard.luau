@@ -20,6 +20,7 @@ local catalogItemCardBadgeMapsModule = require(script.Parent.Parent.CatalogItemC
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
+local fFlagAXMISOffersChip = avatarExperienceFlagsModule.FFlagAXMISOffersChip
 local fFlagAXMarketplaceItemCardIndicatorStack = avatarExperienceFlagsModule.FFlagAXMarketplaceItemCardIndicatorStack
 local fFlagAXMarketplaceLicensingItemCards = avatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemCards
 local _ = require(parent.AvatarExperienceModel)
@@ -41,7 +42,7 @@ local function buildItemStatusContent(p1, p2)
 end
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), itemInfoIconMap (ref), itemTypeToContentMap (ref), fFlagAXMarketplaceItemCardIndicatorStack (ref), var1 (ref), fFlagAXMarketplaceLicensingItemCards (ref), reactModule (ref), licensingBadgeModule (ref), foundationModule (ref), buildItemStatusContent (ref), shouldRenderIndicatorStackModule (ref), indicatorStackModule (ref), itemCardHeader (ref), itemCardHeaderCornersOverlay (ref), itemCardBadge (ref), itemCardStatus (ref), itemCardIcon (ref), fFlagAXRemoveDynamicHeadBadge (ref), catalogRowItemCardFooterModule (ref), fFlagAXDurables2Option (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref)
+	-- upvalues: useTokens (ref), itemInfoIconMap (ref), itemTypeToContentMap (ref), fFlagAXMarketplaceItemCardIndicatorStack (ref), var1 (ref), fFlagAXMarketplaceLicensingItemCards (ref), reactModule (ref), licensingBadgeModule (ref), foundationModule (ref), buildItemStatusContent (ref), shouldRenderIndicatorStackModule (ref), indicatorStackModule (ref), itemCardHeader (ref), itemCardHeaderCornersOverlay (ref), itemCardBadge (ref), itemCardStatus (ref), itemCardIcon (ref), fFlagAXRemoveDynamicHeadBadge (ref), catalogRowItemCardFooterModule (ref), fFlagAXDurables2Option (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref), fFlagAXMISOffersChip (ref)
 	local var2 = useTokens()
 	local var3 = if p1.itemInfo then itemInfoIconMap[p1.itemInfo] else nil
 	local var4 = if p1.itemType then itemTypeToContentMap[p1.itemType] else nil
@@ -131,8 +132,8 @@ return reactModule.forwardRef(function(p1, p2)
 		hideTimedOptionSelections = if fFlagAXDurables2Option then p1.hideTimedOptionSelections else nil,
 		Size = p1.footerSize,
 		AutomaticSize = if p1.footerAutomaticSize then p1.footerAutomaticSize else Enum.AutomaticSize.Y,
-		offersLocalized = if fFlagAXDurables2Option then p1.offersLocalized else nil,
-		offerApplied = if fFlagAXDurables2Option then p1.offerApplied else nil,
+		offersLocalized = if fFlagAXMISOffersChip then p1.offersLocalized else nil,
+		offerApplied = if fFlagAXMISOffersChip then p1.offerApplied else nil,
 		showOfferPillTooltip = if fFlagAXDurables2Option then p1.showOfferPillTooltip else nil
 	})
 	

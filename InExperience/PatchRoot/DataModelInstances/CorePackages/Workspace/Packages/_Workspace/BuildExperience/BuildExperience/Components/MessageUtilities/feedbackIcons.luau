@@ -3,15 +3,12 @@ local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local promiseModule = require(parent.Promise)
-local sharedFlagsModule = require(parent.SharedFlags)
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
 local _ = require(buildExperience.Chat.chatTypes)
 local feedbackActionModule = require(script.Parent.FeedbackAction)
 local _ = require(script.Parent.UserFeedback)
 local getAgentRollbackRequestStoreModule = require(buildExperience.Stores.GetAgentRollbackRequestStore)
-local rollbackPlaceWithRetryModule = require(buildExperience.utils.rollbackPlaceWithRetry)
-local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 local iconName = foundationModule.Enums.IconName
 local debug = creatorAgentChatModule.debug
 local buildAgentRollbackNoteTimeoutSeconds = game:DefineFastInt("BuildAgentRollbackNoteTimeoutSeconds", 5)
@@ -102,12 +99,12 @@ end
 
 local function fetchVersionNote(p3, p4, p5, p6, p7)
 	-- upvalues: promiseModule (ref), findVersionNote (ref), fetchVersionNote (ref)
-	return if p7 == nil or p7 > 0 then p3.fetchPageHistory(p4, { cursor = p6 }):andThen(function(p8)
+	return if p7 <= 0 then promiseModule.resolve(nil) else p3.fetchPageHistory(p4, { cursor = p6 }):andThen(function(p8)
 		-- upvalues: findVersionNote (copy), p5 (ref), fetchVersionNote (copy), p3 (ref), p4 (ref), p7 (ref)
 		local var1 = findVersionNote(p8, p5)
 		
-		return if var1 == nil then if p8.nextCursor == nil or p8.nextCursor == "" then nil else fetchVersionNote(p3, p4, p5, p8.nextCursor, if p7 == nil then nil else p7 - 1) else var1
-	end) else promiseModule.resolve(nil)
+		return if var1 == nil then if p8.nextCursor == nil or p8.nextCursor == "" then nil else fetchVersionNote(p3, p4, p5, p8.nextCursor, p7 - 1) else var1
+	end)
 end
 
 return {
@@ -140,7 +137,7 @@ return {
 				-- upvalues: findVersionNote (copy), rollbackTargetVersionNumber (ref), fetchVersionNote (copy), placeVersionHistoryStore (ref), placeId (ref), var3 (ref)
 				local var4 = findVersionNote(p4, rollbackTargetVersionNumber)
 				
-				return if var4 == nil then if p4.nextCursor == nil or p4.nextCursor == "" then nil else fetchVersionNote(placeVersionHistoryStore, placeId, rollbackTargetVersionNumber, p4.nextCursor, if var3 == nil then nil else var3 - 1) else var4
+				return if var4 == nil then if p4.nextCursor == nil or p4.nextCursor == "" then nil else fetchVersionNote(placeVersionHistoryStore, placeId, rollbackTargetVersionNumber, p4.nextCursor, var3 - 1) else var4
 			end):timeout(buildAgentRollbackNoteTimeoutSeconds):catch(function(p4)
 				-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), httpService (copy)
 				local var4
@@ -217,101 +214,6 @@ return {
 			t.rawError = p4
 			log(var5, var6, t)
 			error(p4)
-		end)
-	end,
-	rollbackPublishedVersion = function(p3, p4)
-		-- upvalues: debug (ref), placeVersionHistoryModule (ref), findVersionNote (ref), fetchVersionNote (ref), httpService (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref)
-		local rollbackTargetVersionNumber, publishedVersionNumber
-		local universeId = p3.universeId
-		local placeId = p3.placeId
-		
-		if p3.rollbackTargetVersionNumber == nil then
-			publishedVersionNumber = p3.publishedVersionNumber
-			rollbackTargetVersionNumber = if publishedVersionNumber == nil or publishedVersionNumber <= 1 then nil else publishedVersionNumber - 1
-		else
-			rollbackTargetVersionNumber = p3.rollbackTargetVersionNumber
-		end
-		if placeId == nil or rollbackTargetVersionNumber == nil then
-			debug.log("warn", "agent feedback revert missing rollback ids", { feedbackIds = p3 })
-			
-			if p4 ~= nil and p4.onRevertFailure ~= nil then
-				p4.onRevertFailure()
-			end
-			return
-		elseif p4 ~= nil and p4.onRevertStart ~= nil then
-			p4.onRevertStart()
-		end
-		publishedVersionNumber = placeVersionHistoryModule.getPlaceVersionHistoryStore()
-		local var1 = nil
-		publishedVersionNumber.fetchPageHistory(placeId, { cursor = nil }):andThen(function(p5)
-			-- upvalues: findVersionNote (copy), rollbackTargetVersionNumber (ref), fetchVersionNote (copy), publishedVersionNumber (ref), placeId (ref), var1 (ref)
-			local var2 = findVersionNote(p5, rollbackTargetVersionNumber)
-			
-			return if var2 == nil then if p5.nextCursor == nil or p5.nextCursor == "" then nil else fetchVersionNote(publishedVersionNumber, placeId, rollbackTargetVersionNumber, p5.nextCursor, if var1 == nil then nil else var1 - 1) else var2
-		end):catch(function(p5)
-			-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), httpService (copy)
-			local var2
-			local log = debug.log
-			local var3 = "warn"
-			local var4 = "agent feedback revert source note load failed"
-			local t = {
-				placeId = placeId,
-				restoredVersion = rollbackTargetVersionNumber
-			}
-			
-			if typeof(p5) == "table" then
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p5 (ref)
-					return httpService:JSONEncode(p5)
-				end)
-				var2 = if ok then status else tostring(p5)
-			end
-			t.error = var2
-			t.rawError = p5
-			log(var3, var4, t)
-			
-			return nil
-		end):andThen(function(p5)
-			-- upvalues: debug (copy), placeId (ref), rollbackTargetVersionNumber (ref), rollbackPlaceWithRetryModule (copy), fFlagEnableTeamTestLua (copy)
-			if p5 == nil then
-				debug.log("info", "agent feedback revert note copy skipped", {
-					reason = "source_notes_not_found",
-					placeId = placeId,
-					restoredVersion = rollbackTargetVersionNumber
-				})
-			end
-			return rollbackPlaceWithRetryModule(placeId, rollbackTargetVersionNumber, {
-				debugSource = "agent feedback revert",
-				note = p5,
-				published = if fFlagEnableTeamTestLua then false else true
-			})
-		end):andThen(function()
-			-- upvalues: p4 (ref)
-			if p4 ~= nil and p4.onRevertSuccess ~= nil then
-				p4.onRevertSuccess()
-			end
-		end):catch(function(p5)
-			-- upvalues: httpService (copy), debug (copy), universeId (ref), placeId (ref), rollbackTargetVersionNumber (ref), p4 (ref)
-			local var2
-			if typeof(p5) == "table" then
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p5 (ref)
-					return httpService:JSONEncode(p5)
-				end)
-				var2 = if ok then status else tostring(p5)
-			end
-			debug.log("warn", "agent feedback revert rollback failed", {
-				universeId = universeId,
-				placeId = placeId,
-				versionToRollback = rollbackTargetVersionNumber,
-				error = var2,
-				rawError = p5
-			})
-			warn(`[BuildExperience] agent feedback revert rollback failed: {var2}`)
-			
-			if p4 ~= nil and p4.onRevertFailure ~= nil then
-				p4.onRevertFailure()
-			end
 		end)
 	end
 }

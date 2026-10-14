@@ -106,6 +106,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Email kamu belum 
 Authentication.Login.WeChat.AntiAddictionText,"Boikot pengalaman virtual yang tidak baik, tolak pengalaman virtual bajakan. Pahami cara membela diri dan jangan sampai tertipu. Menghabiskan waktu di pengalaman virtual baik untuk otak, tetapi terlalu banyak dapat mengganggu kesehatan. Atur waktumu dengan baik dan nikmati gaya hidup sehat."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Terapkan pada respawn berikutnya
 Authentication.SignUp.Action.Cancel,
+Authentication.SignUp.Action.ContinueSetup,Lanjutkan pengaturan
 Authentication.SignUp.Action.Create,Buat
 Authentication.SignUp.Action.CreateAccountSentenceCase,Buat akun
 Authentication.SignUp.Action.ExitModalLeave,Keluar
@@ -119,6 +120,7 @@ Authentication.SignUp.Description.Try,Coba
 Authentication.SignUp.Description.UsernameChanged,"Semua siap. Akunmu sudah siap dan terhubung ke {platform}. Respawn sekarang untuk melihat nama pengguna terbarumu dalam game, atau nama pengguna akan diterapkan pada lain waktu."
 Authentication.SignUp.Description.UsernameUnchanged,Kamu sudah masuk. Akunmu sudah siap dan terhubung ke {platform}. Chat dengan teman dan mainkan jutaan game Roblox.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Akun Roblox-mu akan dihubungkan ke akunmu di {platform}. Kamu dapat memutus hubungan dari layar Pengaturan kapan saja. Kamu mungkin harus menunggu beberapa saat sebelum dapat terhubung ke akun lain di {platform}. Dengan mengklik {ctaButton}, kamu menyetujui Ketentuan Penggunaan termasuk klausa arbitrase dan menerima Kebijakan Privasi."
+Authentication.SignUp.Header.CancelAccountCreation,Batalkan pembuatan akun?
 Authentication.SignUp.Header.OneLastThing,Satu hal terakhir
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Siapkan akun Roblox-mu
 Authentication.SignUp.Heading.CountryCodeSelector,Pilih negara
@@ -1961,6 +1963,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Salin teks
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,Buat game baru
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Jangan tanya lagi
@@ -2014,10 +2017,16 @@ Feature.Build.Analytics.Description.PayerConversion,Konversi pengguna nongratis 
 Feature.Build.Analytics.Description.PlaythroughRate,Tingkat penyelesaian adalah persentase kunjungan yang menyelesaikan seluruh sesi bermain. Tingkat yang lebih tinggi menunjukkan bahwa pemain merasa pengalaman virtualmu mudah dimainkan dan layak diselesaikan.
 Feature.Build.Analytics.Description.TotalPlaytime,Total waktu main adalah jumlah waktu yang dihabiskan semua pemain di pengalaman virtualmu selama periode tersebut. Peningkatan waktu main biasanya menandakan sesi yang lebih menarik.
 Feature.Build.Analytics.DurationHours,{number} j
+Feature.Build.Analytics.Goal.Action.CreateAd,Buat iklan
+Feature.Build.Analytics.Goal.Action.SellItems,Jual item
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,Bagikan kepada teman
 Feature.Build.Analytics.Goal.EarnRobux,Perolehan Robux
 Feature.Build.Analytics.Goal.FirstImpression,Buat impresi pertama yang baik
 Feature.Build.Analytics.Goal.GetMorePlayers,Dapatkan lebih banyak pemain
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Buat pemain terus kembali bermain
+Feature.Build.Analytics.Goal.Locked.EarnRobux,Dapatkan Robux di game-mu untuk melihat statistik ini.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,Dapatkan pemain pertamamu untuk melihat statistik ini.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Dapatkan pemain pertamamu yang kembali bermain untuk melihat statistik ini.
 Feature.Build.Analytics.KeyStats,Statistik utama
 Feature.Build.Analytics.LastMonth,Bulan lalu
 Feature.Build.Analytics.LastWeek,
@@ -2143,6 +2152,7 @@ Feature.Build.Label.AdditionalUsage,Kuota penggunaan Build tambahan
 Feature.Build.Label.AdditionalUsed,{USED} dari {LIMIT} digunakan
 Feature.Build.Label.AdsManager,Manajer Iklan
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,Semua game
 Feature.Build.Label.AmountAvailable,{AMOUNT} tersedia
 Feature.Build.Label.Autosaved,Disimpan otomatis
 Feature.Build.Label.Available,tersedia
@@ -2167,12 +2177,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Laporan performa mudah
 Feature.Build.Label.Error,Kesalahan
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,Gratis
 Feature.Build.Label.FreeBuildUsage,Penggunaan Build gratis
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Khusus teman
 Feature.Build.Label.GamePlays,Game dimainkan
 Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
+Feature.Build.Label.GroupGames,Game grup
+Feature.Build.Label.Groups,Grup
 Feature.Build.Label.Hi,Hai
 Feature.Build.Label.IconThumbnails,Ikon & thumbnail
 Feature.Build.Label.Images2D,Gambar 2D
@@ -2186,6 +2199,7 @@ Feature.Build.Label.ManagedPricing,Harga terkelola
 Feature.Build.Label.ManagedPricingMixed,Harga terkelola campuran di seluruh produk saat ini
 Feature.Build.Label.MaximizeForGamePlays,Maksimalkan agar game lebih banyak dimainkan
 Feature.Build.Label.Models3D,Model 3D
+Feature.Build.Label.MyGames,Game saya
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Tidak ada batas
 Feature.Build.Label.NotStarted,Belum dimulai
@@ -2333,12 +2347,12 @@ Feature.Build.Message.BuildInternalError,Build mengalami masalah. Coba lagi.
 Feature.Build.Message.BuildResponseFailed,Build tidak dapat merespons. Coba lagi.
 Feature.Build.Message.BuildStillWorking,"Sedang diproses. Kamu dapat keluar dari aplikasi, bermain Roblox, atau memulai proyek lain sambil menunggu."
 Feature.Build.Message.BuildStopped,Kamu menghentikan Build.
+Feature.Build.Message.BuildTakingLonger,Ini membutuhkan waktu lebih lama dari yang diperkirakan. Kamu bisa terus menunggu atau memulai hal lain.
 Feature.Build.Message.BuildTemporarilyDown,Build tidak tersedia untuk sementara. Coba lagi dalam 1 menit.
 Feature.Build.Message.CompletedTasks,{COUNT} tugas selesai
 Feature.Build.Message.ConversationGone,Percakapan ini tidak lagi tersedia. Mulai yang baru.
 Feature.Build.Message.ConversationNotFound,Percakapan ini tidak dapat ditemukan. Mulai yang baru.
 Feature.Build.Message.CreateGameToUseBuild,Buat game baru untuk mulai menggunakan Build.
-Feature.Build.Message.CreatedRevertedVer,Selesai membuat versi yang dibatalkan.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Perluas kelayakan audiensmu di Pusat Kreator
 Feature.Build.Message.ExperiencesLoadFailed,Tidak dapat me-load pengalaman virtual
@@ -2375,7 +2389,6 @@ Feature.Build.Message.PublishExpandAudience,Publikasikan untuk memperluas audien
 Feature.Build.Message.PublishNotReverted,Publikasimu gagal dibatalkan. Coba lagi.
 Feature.Build.Message.PublishPromotionUpsell,"Selamat, akhirnya game kamu rilis! Kamu punya {promotionCount} promosi gratis yang tersedia untuk menjangkau lebih banyak pemain di Roblox."
 Feature.Build.Message.PublishPromotionUpsellSingular,"Selamat, akhirnya game kamu rilis! Kamu punya 1 promosi gratis yang tersedia untuk menjangkau lebih banyak pemain di Roblox."
-Feature.Build.Message.PublishReverted,Membatalkan publikasi.
 Feature.Build.Message.QuestionnaireNeeded,Game ini diedit di luar Build. Selesaikan kuesioner konten untuk memublikasikannya.
 Feature.Build.Message.ReadyToPlay,Game-mu siap dimainkan di Roblox!
 Feature.Build.Message.ResetHours,Reset dalam {HOURS} jam
@@ -3669,7 +3682,7 @@ Feature.Moments.Description.HowToCaptureStep2,Aktifkan kendali Media
 Feature.Moments.Description.HowToCaptureStep3,Ambil foto dan video gameplay
 Feature.Moments.Description.LeaveMomentsCreation,"Semua perubahanmu akan hilang, tetapi kamu masih dapat menemukan tangkapan layar ini di galeri <b>Mediamu</b>."
 Feature.Moments.Description.NoMusicResults,Musik tidak ditemukan
-Feature.Moments.Description.NonInfiniteScrollEndBody,Kamu telah mencapai titik akhir di Moment. Ketuk di bawah untuk terus menonton.
+Feature.Moments.Description.NonInfiniteScrollEndBody,Kami sudah menjeda feed-mu. Kamu bisa memutuskan apakah ingin terus menonton.
 Feature.Moments.Description.NothingHereYet,Belum ada apa pun di sini...
 Feature.Moments.Description.PublishMoment,Deskripsikan Moment-mu
 Feature.Moments.Description.StayFriendly,Mari kita tetap bersikap ramah
@@ -3735,7 +3748,7 @@ Feature.Moments.Label.MomentUnavailableDefault,Moment ini tidak tersedia.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Belum ada komentar
-Feature.Moments.Label.NonInfiniteScrollEndTitle,Kamu sudah melihat semuanya
+Feature.Moments.Label.NonInfiniteScrollEndTitle,Ada lebih banyak Moment untuk ditonton
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostDeleted,Moment dihapus
 Feature.Moments.Label.PostRemovedBody,Moment yang kamu posting bertentangan dengan Standar Komunitas kami.
