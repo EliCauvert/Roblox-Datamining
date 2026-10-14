@@ -1947,6 +1947,7 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Response.PasswordTooSimilarToUsername": "Password shouldn't be too similar to your username.",
     "Heading.IdentityVerificationSetting": "Identity verification setting",
     "Label.IdentityVerification": "Identity verification setting",
-    "Description.NoApprovedExperiencesChildSide": "No allowed games yet. Once your parent approves a game you requested, it'll show up here."
+    "Description.NoApprovedExperiencesChildSide": "No allowed games yet. Once your parent approves a game you requested, it'll show up here.",
+    "Description.ManageYourChildWithPin": "Get access to parental controls and insights on your child's screen time, friends, spending, and more.{lineBreak}On your child's device, go to Settings > Parental controls to set a PIN or link your account by email."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

@@ -254,6 +254,10 @@ Roblox.LangDynamic["Feature.AppealsPortal"] = {
     "Label.TypeLower.InGameBehavior": "in-game behavior",
     "Label.InGameBehavior": "In-game behavior",
     "Label.InGameBehavior.Notice": "Chat or gameplay",
-    "Description.FixByDate": "Fix the issue in Studio by {date}, then come back and ask for review."
+    "Description.FixByDate": "Fix the issue in Studio by {date}, then come back and ask for review.",
+    "Description.AppealDeniedCategoryChangedNeutral": "We reviewed this appeal and updated the violation category.",
+    "Label.AppealSentBy": "Sent by {username}",
+    "Description.AppealReceivedNeutral": "We received this appeal. We’ll reply within 5 business days. Complex issues can take longer.",
+    "Description.AppealDeniedNeutral": "We reviewed this appeal. This content breaks the rules in our Community Standards."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AppealsPortal");

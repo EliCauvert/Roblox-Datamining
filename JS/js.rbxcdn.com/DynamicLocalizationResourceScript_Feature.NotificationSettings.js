@@ -83,6 +83,7 @@ Roblox.LangDynamic["Feature.NotificationSettings"] = {
     "Description.TurnOnEmail": "Turn on email notifications",
     "Label.RecommendedOffers": "Recommended Offers",
     "Label.FriendPresence": "Friend Presence",
-    "Label.RecommendedExperienceEvents": "Recommended Game Events"
+    "Label.RecommendedExperienceEvents": "Recommended Game Events",
+    "Label.RecommendedMoments": "Recommended Moments"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.NotificationSettings");

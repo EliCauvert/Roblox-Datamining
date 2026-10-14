@@ -73,6 +73,7 @@ Roblox.LangDynamic["Feature.Friends"] = {
     "Action.AccountDeleted": "Account deleted",
     "Label.MutualFriend": "{mutualFriendsCount, plural, =0 {# mutual friends} =1 {# mutual friend} other {# mutual friends}}",
     "Label.Follower": "Follower",
+    "Action.FriendRequestSent": "Friend Request Sent",
     "Label.ConnectWithFriends": "Connect With Friends",
     "Label.AllowContactsAccess": "Allow access to your contacts to connect with friends on Roblox!",
     "Label.ContactsRecommendations": "Roblox uses your contacts to help you and your existing connections find each other through recommendations. You can change this any time in your account settings.",

@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "04a869a5b2455b0b727592d1a85724dd98934fb3"
+            id: "a403f8b88981fe477577d81974242fe6d666fe26"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "8dadf4e0-59e5-4b71-ba9d-7f599a8efc16", e._sentryDebugIdIdentifier = "sentry-dbid-8dadf4e0-59e5-4b71-ba9d-7f599a8efc16")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "f48ee3a6-ff77-41a9-9987-c63a7997451b", e._sentryDebugIdIdentifier = "sentry-dbid-f48ee3a6-ff77-41a9-9987-c63a7997451b")
     } catch (e) {}
 }(),
 function() {
@@ -53961,7 +53961,7 @@ function() {
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var TO = ["dark-theme", "light-theme", "system-theme"];
+            var TO = ["color-mode-dark", "color-mode-light", "color-mode-system"];
 
             function TS(e, t) {
                 (null == t || t > e.length) && (t = e.length);
@@ -54086,8 +54086,8 @@ function() {
                                         return e.classList.contains(t)
                                     })
                                 });
-                                if (null == e ? void 0 : e.classList.contains("dark-theme")) return "dark";
-                                if (null == e ? void 0 : e.classList.contains("light-theme")) return "light"
+                                if (null == e ? void 0 : e.classList.contains("color-mode-dark")) return "dark";
+                                if (null == e ? void 0 : e.classList.contains("color-mode-light")) return "light"
                             }
                             return r ? "dark" : "light"
                         }, [r]), a = (i = function(e) {
@@ -54134,7 +54134,7 @@ function() {
                                         e.disconnect()
                                     }
                             }
-                        }, [n]), a) ? "light-theme" : "dark-theme",
+                        }, [n]), a) ? "light" : "dark",
                         g = mC("fui-edu-tooltip"),
                         w = "".concat(g, "-title"),
                         x = "".concat(g, "-desc"),
@@ -54152,7 +54152,7 @@ function() {
                         "aria-labelledby": w,
                         "aria-describedby": x,
                         onOpenAutoFocus: null != d ? d : TA,
-                        className: oG(b, "relative foundation-web-portal-zindex bg-surface-100 radius-medium shadow-transient-low", "min-width-[240px] max-width-[296px]", p)
+                        className: oG("light" === b ? "color-mode-light" : "color-mode-dark", "relative foundation-web-portal-zindex bg-surface-100 radius-medium shadow-transient-low", "min-width-[240px] max-width-[296px]", p)
                     }, (void 0 === s || s) && rq.createElement(p$, {
                         asChild: !0
                     }, rq.createElement("div", {
@@ -56835,4 +56835,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("ProfilePlatform");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/profilePlatform-4bda2d2d046a76f2.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/profilePlatform-1e78b79c5f7b7493.js.map

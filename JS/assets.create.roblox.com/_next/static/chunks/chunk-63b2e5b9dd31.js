@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "21f3d50f-984c-ce6d-8e6d-0cb480bfe412")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "ace02c82-c671-fb09-ee8c-d1b449c5a837")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 428993, e => {
@@ -49,30 +49,35 @@
     var t = e.i(157700);
     let r = (0, t.defineFlag)({
             namespace: "financial-platform",
-            name: "ShowOct20ShutoffBanner",
-            defaultValue: !1
+            name: "ShowDevExWithholdingAmount",
+            defaultValue: 0
         }),
         n = (0, t.defineFlag)({
             namespace: "financial-platform",
-            name: "isTaxDocumentationOpenToDevexEligible",
+            name: "ShowOct20ShutoffBanner",
             defaultValue: !1
         }),
         i = (0, t.defineFlag)({
             namespace: "financial-platform",
-            name: "isTaxFormDeliveryConsentEnabled",
+            name: "isTaxDocumentationOpenToDevexEligible",
             defaultValue: !1
         }),
         a = (0, t.defineFlag)({
             namespace: "financial-platform",
+            name: "isTaxFormDeliveryConsentEnabled",
+            defaultValue: !1
+        }),
+        o = (0, t.defineFlag)({
+            namespace: "financial-platform",
             name: "taxFormDeliveryConsentRolloutPercentage",
             defaultValue: 100
         }),
-        o = (0, t.defineFlag)({
+        l = (0, t.defineFlag)({
             namespace: "financial-platform",
             name: "devexFinancialPolicyRolloutPercentage",
             defaultValue: 0
         });
-    e.s(["devexFinancialPolicyRolloutPercentage", 0, o, "isTaxDocumentationOpenToDevexEligible", 0, n, "isTaxFormDeliveryConsentEnabled", 0, i, "showOct20ShutoffBanner", 0, r, "taxFormDeliveryConsentRolloutPercentage", 0, a])
+    e.s(["devexFinancialPolicyRolloutPercentage", 0, l, "isTaxDocumentationOpenToDevexEligible", 0, i, "isTaxFormDeliveryConsentEnabled", 0, a, "showDevExWithholdingAmount", 0, r, "showOct20ShutoffBanner", 0, n, "taxFormDeliveryConsentRolloutPercentage", 0, o])
 }, 887317, e => {
     "use strict";
     var t = e.i(677753),
@@ -302,14 +307,14 @@
         }
     }
 
-    function I(e, r) {
+    function h(e, r) {
         return null == e ? e : {
             clientId: (0, t.exists)(e, "clientId") ? e.clientId : void 0,
             authCode: (0, t.exists)(e, "authCode") ? e.authCode : void 0
         }
     }
 
-    function h(e) {
+    function I(e) {
         if (void 0 !== e) return null === e ? null : {
             creatorWalletId: a(e.creatorWalletId),
             codeChallenge: e.codeChallenge
@@ -460,7 +465,7 @@
                             }, r)];
                         case 1:
                             return o = i.sent(), [2, new t.JSONApiResponse(o, function(e) {
-                                return I(e)
+                                return h(e)
                             })]
                     }
                 })
@@ -491,7 +496,7 @@
                                 method: "POST",
                                 headers: a,
                                 query: n,
-                                body: h(e.initializeKycRfiEmbeddingRequest)
+                                body: I(e.initializeKycRfiEmbeddingRequest)
                             }, r)];
                         case 1:
                             return o = i.sent(), [2, new t.JSONApiResponse(o, function(e) {
@@ -880,7 +885,7 @@
                             }, r)];
                         case 1:
                             return o = i.sent(), [2, new t.JSONApiResponse(o, function(e) {
-                                return I(e)
+                                return h(e)
                             })]
                     }
                 })
@@ -910,7 +915,7 @@
                                 method: "POST",
                                 headers: a,
                                 query: n,
-                                body: h(e.initializeKycRfiEmbeddingRequest)
+                                body: I(e.initializeKycRfiEmbeddingRequest)
                             }, r)];
                         case 1:
                             return o = i.sent(), [2, new t.JSONApiResponse(o, function(e) {
@@ -1793,5 +1798,5 @@
     }])
 }]);
 
-//# debugId=21f3d50f-984c-ce6d-8e6d-0cb480bfe412
-//# sourceMappingURL=2nc2n60139xc8.js.map
+//# debugId=ace02c82-c671-fb09-ee8c-d1b449c5a837
+//# sourceMappingURL=2l0bmbzlj-9jx.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "4000a4e9-f126-f6f3-5b62-bdb2017ec26e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "deb947e3-241d-d18c-8a8d-baf62bc97975")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 889311, e => {
@@ -237,12 +237,12 @@
                 style: k,
                 timeout: x = "auto",
                 TransitionComponent: P = r.T
-            } = e, L = (0, a._)(e, d), N = (0, o.u)(), A = i.useRef(), U = (0, n.u)(), V = i.useRef(null), R = (0, c.u)(V, (0, l.g)(y), h), B = e => t => {
+            } = e, N = (0, a._)(e, d), L = (0, o.u)(), A = i.useRef(), U = (0, n.u)(), V = i.useRef(null), R = (0, c.u)(V, (0, l.g)(y), h), _ = e => t => {
                 if (e) {
                     let a = V.current;
                     void 0 === t ? e(a) : e(a, t)
                 }
-            }, O = B(T), _ = B((e, t) => {
+            }, B = _(T), O = _((e, t) => {
                 let a;
                 (0, r.r)(e);
                 let {
@@ -264,7 +264,7 @@
                     delay: n,
                     easing: s
                 })].join(","), f && f(e, t)
-            }), H = B(S), F = B(w), D = B(e => {
+            }), H = _(S), F = _(w), D = _(e => {
                 let t, {
                     duration: a,
                     delay: i,
@@ -284,22 +284,22 @@
                     delay: p ? i : i || .333 * t,
                     easing: n
                 })].join(","), e.style.opacity = 0, e.style.transform = g(.75), E && E(e)
-            }), G = B(I);
+            }), G = _(I);
             return (0, s.jsx)(P, (0, t._)({
                 appear: v,
                 in: b,
                 nodeRef: V,
-                onEnter: _,
+                onEnter: O,
                 onEntered: H,
-                onEntering: O,
+                onEntering: B,
                 onExit: D,
                 onExited: G,
                 onExiting: F,
                 addEndListener: e => {
-                    "auto" === x && N.start(A.current || 0, e), m && m(V.current, e)
+                    "auto" === x && L.start(A.current || 0, e), m && m(V.current, e)
                 },
                 timeout: "auto" === x ? null : x
-            }, L, {
+            }, N, {
                 children: (e, a) => i.cloneElement(y, (0, t._)({
                     style: (0, t._)({
                         opacity: 0,
@@ -721,7 +721,7 @@
                 currentUrl: String(t),
                 additionalProperties: {
                     ...r,
-                    loggerVersion: "1.9.0",
+                    loggerVersion: "1.10.0",
                     viewportWidth: i,
                     viewportHeight: n
                 }
@@ -773,6 +773,42 @@
         }
     }
     class f {
+        notify() {
+            this.listeners.forEach(e => e())
+        }
+        constructor(e = () => performance.now(), a = () => "".concat(window.location.pathname).concat(window.location.search)) {
+            (0, t._)(this, "now", void 0), (0, t._)(this, "getInitialUrl", void 0), (0, t._)(this, "navigation", void 0), (0, t._)(this, "committedNavigation", void 0), (0, t._)(this, "nextId", 0), (0, t._)(this, "settledId", void 0), (0, t._)(this, "listeners", new Set), (0, t._)(this, "subscribe", e => (this.listeners.add(e), () => {
+                this.listeners.delete(e)
+            })), (0, t._)(this, "getSnapshot", () => (this.navigation || (this.navigation = {
+                id: this.nextId++,
+                url: this.getInitialUrl(),
+                startedAt: 0,
+                type: "initial",
+                isNavigating: !1
+            }, this.committedNavigation = this.navigation), this.navigation)), (0, t._)(this, "start", e => {
+                this.getSnapshot(), this.navigation = {
+                    id: this.nextId++,
+                    url: e,
+                    startedAt: this.now(),
+                    type: "client",
+                    isNavigating: !0
+                }, this.notify()
+            }), (0, t._)(this, "complete", e => {
+                var t;
+                (null == (t = this.navigation) ? void 0 : t.url) === e && (this.navigation = {
+                    ...this.navigation,
+                    isNavigating: !1
+                }, this.committedNavigation = this.navigation, this.notify())
+            }), (0, t._)(this, "cancel", (e, t) => {
+                var a;
+                (null == (a = this.navigation) ? void 0 : a.url) === t && (this.navigation = this.committedNavigation, this.notify())
+            }), (0, t._)(this, "claim", e => {
+                var t;
+                return (null == (t = this.navigation) ? void 0 : t.id) === e && !this.navigation.isNavigating && this.settledId !== e && (this.settledId = e, !0)
+            }), this.now = e, this.getInitialUrl = a
+        }
+    }
+    class S {
         logEvent(e) {
             let t = e.toLogEventObject();
             console.table([{
@@ -782,10 +818,10 @@
         }
     }
 
-    function S(e) {
+    function T(e) {
         return window.location.href.replace(/#.*$/, "")
     }
-    class T {
+    class E {
         static parseCookieValue() {
             let e = (0, a.getCookieValueByKey)("UnifiedLoggerSession");
             return e ? decodeURIComponent(e).split("&").reduce((e, t) => {
@@ -794,7 +830,7 @@
             }, {}) : {}
         }
         initCacheFromCookies() {
-            let e = T.parseCookieValue();
+            let e = E.parseCookieValue();
             if (void 0 !== e[this.productName]) return {
                 ...e[this.productName],
                 timestamp: Date.now()
@@ -843,7 +879,7 @@
         }
         updateCookie() {
             if (!this.cache) return;
-            let e = T.parseCookieValue();
+            let e = E.parseCookieValue();
             e[this.productName] = this.cache, (0, a.setCookie)("UnifiedLoggerSession", Object.entries(e).map(e => {
                 let [t, {
                     sessionId: a,
@@ -955,7 +991,7 @@
         }
         logPageLoadEvent() {
             var e;
-            let t = S();
+            let t = T();
             if (t === this.lastPageLoadUrl) return;
             let a = this.sessionService.getOrCreateSessionId(),
                 i = new r({
@@ -974,7 +1010,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = S(), r = this.sessionService.getOrCreateSessionId(), o = new s({
+            } = e, n = T(), r = this.sessionService.getOrCreateSessionId(), o = new s({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -989,7 +1025,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = S(), r = this.sessionService.getOrCreateSessionId(), s = new c({
+            } = e, n = T(), r = this.sessionService.getOrCreateSessionId(), s = new c({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1004,7 +1040,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = S(), r = this.sessionService.getOrCreateSessionId(), s = new o({
+            } = e, n = T(), r = this.sessionService.getOrCreateSessionId(), s = new o({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1014,12 +1050,31 @@
             });
             this.events.emit("hover", s), this.logEventToLogger(s)
         }
+        logPageSettledEvent(e) {
+            let {
+                navigationId: t,
+                page: a,
+                outcome: i
+            } = e;
+            if (!this.pageSettledTracker.claim(t)) return;
+            let n = this.pageSettledTracker.getSnapshot();
+            this.logWebVitalsEvent({
+                eventName: "pageSettled",
+                parameters: {
+                    page: a,
+                    durationMs: String(Math.round(performance.now() - n.startedAt)),
+                    outcome: i,
+                    navigationType: n.type,
+                    navigationId: String(t)
+                }
+            })
+        }
         logWebVitalsEvent(e) {
             let {
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = S(), r = this.sessionService.getOrCreateSessionId(), s = new l({
+            } = e, n = T(), r = this.sessionService.getOrCreateSessionId(), s = new l({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1034,7 +1089,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = S(), r = this.sessionService.getOrCreateSessionId(), s = new d({
+            } = e, n = T(), r = this.sessionService.getOrCreateSessionId(), s = new d({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1049,7 +1104,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = S(), r = this.sessionService.getOrCreateSessionId(), s = new p({
+            } = e, n = T(), r = this.sessionService.getOrCreateSessionId(), s = new p({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1064,7 +1119,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = S(), r = this.sessionService.getOrCreateSessionId(), s = new g({
+            } = e, n = T(), r = this.sessionService.getOrCreateSessionId(), s = new g({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1080,7 +1135,7 @@
                 context: a,
                 properties: i,
                 hostProperties: n = {}
-            } = e, r = S(), s = this.sessionService.getOrCreateSessionId();
+            } = e, r = T(), s = this.sessionService.getOrCreateSessionId();
             this.hostRoutedEventStreamLogger.log({
                 eventType: t,
                 context: a,
@@ -1099,7 +1154,7 @@
                 sessionId: a,
                 parameters: i,
                 tags: n
-            } = e, r = S(), s = new u({
+            } = e, r = T(), s = new u({
                 product: this.product,
                 url: r,
                 eventName: t,
@@ -1137,18 +1192,18 @@
                         })
                     }
                 }
-            }()), (0, t._)(this, "onSessionRefresh", e => {
+            }()), (0, t._)(this, "pageSettledTracker", new f), (0, t._)(this, "onSessionRefresh", e => {
                 this.logSessionEvent({
                     eventName: "sessionStart",
                     sessionId: e
                 })
             }), this.eventLoggers.push(null != r ? r : new y({
                 eventBaseUrl: e
-            })), this.debugMode = !!n, this.product = a, this.commonEventParameters = i, this.sessionProductGroup = null != s ? s : a, this.debugMode && this.eventLoggers.push(new f), this.hostRoutedEventStreamLogger = new b({
+            })), this.debugMode = !!n, this.product = a, this.commonEventParameters = i, this.sessionProductGroup = null != s ? s : a, this.debugMode && this.eventLoggers.push(new S), this.hostRoutedEventStreamLogger = new b({
                 eventBaseUrl: e
             }), this.disableSession = o, this.sessionService = this.disableSession ? {
                 getOrCreateSessionId: () => {}
-            } : new T({
+            } : new E({
                 productName: this.sessionProductGroup,
                 onSessionRefresh: this.onSessionRefresh
             })
@@ -1156,5 +1211,5 @@
     }])
 }]);
 
-//# debugId=4000a4e9-f126-f6f3-5b62-bdb2017ec26e
-//# sourceMappingURL=2jmtvaax_4hjf.js.map
+//# debugId=deb947e3-241d-d18c-8a8d-baf62bc97975
+//# sourceMappingURL=0ruipky2vj_vc.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c0e6e978-8968-cf56-8b98-fd2447eb7a1a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b5014c4c-1055-af8b-cadf-5d47323b63cb")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 245299, e => {
@@ -24,40 +24,45 @@
         }),
         n = (0, t.defineFlag)({
             namespace: "creator-gameops",
-            name: "enablePlayerHostedEvents",
+            name: "enablePlayerSupportTicketTranslation",
             defaultValue: !1
         }),
         r = (0, t.defineFlag)({
             namespace: "creator-gameops",
-            name: "enablePlayerSupportCreatorTicketReroute",
+            name: "enablePlayerHostedEvents",
             defaultValue: !1
         }),
         i = (0, t.defineFlag)({
             namespace: "creator-gameops",
-            name: "enableReachStatusBadge",
+            name: "enablePlayerSupportCreatorTicketReroute",
             defaultValue: !1
         }),
         o = (0, t.defineFlag)({
             namespace: "creator-gameops",
-            name: "enablePlayerSupportArchive",
+            name: "enableReachStatusBadge",
             defaultValue: !1
         }),
         s = (0, t.defineFlag)({
             namespace: "creator-gameops",
-            name: "enablePlayerSupportCategoryChange",
+            name: "enablePlayerSupportArchive",
             defaultValue: !1
         }),
         l = (0, t.defineFlag)({
             namespace: "creator-gameops",
-            name: "enablePlayerSupportSpamManagement",
+            name: "enablePlayerSupportCategoryChange",
             defaultValue: !1
         }),
         u = (0, t.defineFlag)({
             namespace: "creator-gameops",
+            name: "enablePlayerSupportSpamManagement",
+            defaultValue: !1
+        }),
+        c = (0, t.defineFlag)({
+            namespace: "creator-gameops",
             name: "enableEarlyTestersUserOwnedGame",
             defaultValue: !1
         });
-    e.s(["enableEarlyTestersUserOwnedGame", 0, u, "enablePlayerHostedEvents", 0, n, "enablePlayerSupport", 0, a, "enablePlayerSupportArchive", 0, o, "enablePlayerSupportCategoryChange", 0, s, "enablePlayerSupportCreatorTicketReroute", 0, r, "enablePlayerSupportSpamManagement", 0, l, "enableReachStatusBadge", 0, i])
+    e.s(["enableEarlyTestersUserOwnedGame", 0, c, "enablePlayerHostedEvents", 0, r, "enablePlayerSupport", 0, a, "enablePlayerSupportArchive", 0, s, "enablePlayerSupportCategoryChange", 0, l, "enablePlayerSupportCreatorTicketReroute", 0, i, "enablePlayerSupportSpamManagement", 0, u, "enablePlayerSupportTicketTranslation", 0, n, "enableReachStatusBadge", 0, o])
 }, 886525, e => {
     "use strict";
     let t = (0, e.i(157700).defineFlag)({
@@ -253,12 +258,12 @@
         S = ((i = S || {}).EnableSignalLookup = "enableSignalLookup", i.AlwaysShow = "alwaysShow", i),
         R = R || {},
         w = ((o = w || {}).mobileVariant = "mobileVariant", o),
-        x = x || {},
-        T = ((s = {}).ShowEditInStudioButton = "showEditInStudioButton", s.EnableCreationsNavLayout = "enableCreationsIPNavLayout", s),
+        T = T || {},
+        x = ((s = {}).ShowEditInStudioButton = "showEditInStudioButton", s.EnableCreationsNavLayout = "enableCreationsIPNavLayout", s),
         L = ((l = {}).EnableBulkAssetUpload = "enableBulkAssetUpload", l),
         U = ((u = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", u.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", u.EnableAudienceControls = "enableAudienceControls", u.EnableNewBadgePattern = "enableNewBadgePattern", u.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", u.EnableAudiencesReplacement = "enableAudiencesReplacement", u),
-        z = ((c = {}).EnableTalentHubV2 = "enableTalentHubV2", c.EnableTalentHubV2M2 = "enableTalentHubV2M2", c),
-        k = ((d = {}).StarterPlaceTemplateId = "starterPlaceTemplateId", d),
+        k = ((c = {}).EnableTalentHubV2 = "enableTalentHubV2", c.EnableTalentHubV2M2 = "enableTalentHubV2M2", c),
+        z = ((d = {}).StarterPlaceTemplateId = "starterPlaceTemplateId", d),
         A = ((g = A || {}).EnableExperienceWebhooks = "enableExperienceWebhooks", g),
         H = ((p = H || {}).GameAppealsEnabled = "gameAppealsEnabled", p),
         M = ((m = M || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", m),
@@ -271,12 +276,12 @@
         "CreatorHub.HomePage.OpportunitiesSection.UserId": S,
         "CreatorHub.LandingPage": R,
         "CreatorHub.LandingPage.UserId": w,
-        "CreatorHub.Navigation": x,
-        "CreatorHub.Navigation.User": T,
+        "CreatorHub.Navigation": T,
+        "CreatorHub.Navigation.User": x,
         "CreatorHub.Publishing.UserId": L,
         "CreatorDashboard.LicenseManager": I,
         "CreatorDashboard.RightsManager": E,
-        "CRK.StarterPlace.StarterPlaceCreation": k,
+        "CRK.StarterPlace.StarterPlaceCreation": z,
         "CreatorSuccess.OrganizationsV2": {},
         "CreatorHub.CreatorDocumentation.Search.UserId": ((h = {}).SearchVersion = "searchVersion", h),
         "CreatorHub.Creations.Permission": U,
@@ -284,7 +289,7 @@
         "CreatorHub.GameAppeals.UserId": H,
         "CreatorHub.HomePage.ExperienceTile.UserId": M,
         "CreatorHub.Changelog": N,
-        "CreatorHub.TalentHub.UserId": z
+        "CreatorHub.TalentHub.UserId": k
     };
     async function V(e) {
         let t = (0, y.getBEDEV2ServiceBasePath)("product-experimentation-platform"),
@@ -295,7 +300,7 @@
         })).json()
     }
     let j = (0, P.default)(V);
-    e.s(["CreatorHubCreationsPermissionParameters", () => U, "CreatorHubPublishingParameters", () => L, "IXPLayers", () => F, "LicenseManagerParameters", () => I, "TalentHubParameters", () => z, "fetchIXPParametersForCurrentUser", 0, j])
+    e.s(["CreatorHubCreationsPermissionParameters", () => U, "CreatorHubPublishingParameters", () => L, "IXPLayers", () => F, "LicenseManagerParameters", () => I, "TalentHubParameters", () => k, "fetchIXPParametersForCurrentUser", 0, j])
 }, 998683, e => {
     "use strict";
     var t = e.i(721281),
@@ -862,7 +867,7 @@
                 role: "checkbox",
                 "aria-checked": w(m) ? "mixed" : m,
                 "aria-required": b,
-                "data-state": x(m),
+                "data-state": T(m),
                 "data-disabled": d ? "" : void 0,
                 disabled: d,
                 value: c,
@@ -927,7 +932,7 @@
             return (0, p.jsx)(d.Presence, {
                 present: n || w(i.checked) || !0 === i.checked,
                 children: (0, p.jsx)(g.Primitive.span, {
-                    "data-state": x(i.checked),
+                    "data-state": T(i.checked),
                     "data-disabled": i.disabled ? "" : void 0,
                     ...r,
                     ref: t,
@@ -997,11 +1002,11 @@
         return "indeterminate" === e
     }
 
-    function x(e) {
+    function T(e) {
         return w(e) ? "indeterminate" : e ? "checked" : "unchecked"
     }
     R.displayName = S;
-    let T = {
+    let x = {
             XSmall: "size-400",
             Small: "size-500",
             Medium: "size-600",
@@ -1019,7 +1024,7 @@
             Medium: "text-body-medium",
             Large: "text-body-large"
         },
-        z = {
+        k = {
             XSmall: "",
             Small: "padding-top-xxsmall",
             Medium: "padding-top-xxsmall",
@@ -1041,7 +1046,7 @@
             htmlFor: f,
             className: (0, n.default)("flex flex-col grow-1 gap-xsmall", !l && "cursor-pointer")
         }, r.default.createElement("span", {
-            className: (0, n.default)(U[u], z[u], "content-emphasis")
+            className: (0, n.default)(U[u], k[u], "content-emphasis")
         }, i), c && r.default.createElement("span", {
             className: "text-body-medium content-default"
         }, c));
@@ -1051,7 +1056,7 @@
             className: (0, n.default)(L[u])
         }, r.default.createElement(E, {
             "data-slot": "checkbox",
-            className: (0, n.default)(T[u], t.interactable, !l && "cursor-pointer", "flex items-center justify-center radius-small padding-none content-default", "data-[state=unchecked]:bg-none data-[state=unchecked]:stroke-standard data-[state=unchecked]:stroke-contrast-alpha", "data-[state=indeterminate]:bg-system-contrast data-[state=indeterminate]:stroke-none", "data-[state=checked]:bg-system-contrast data-[state=checked]:stroke-none"),
+            className: (0, n.default)(x[u], t.interactable, !l && "cursor-pointer", "flex items-center justify-center radius-small padding-none content-default", "data-[state=unchecked]:bg-none data-[state=unchecked]:stroke-standard data-[state=unchecked]:stroke-contrast-alpha", "data-[state=indeterminate]:bg-system-contrast data-[state=indeterminate]:stroke-none", "data-[state=checked]:bg-system-contrast data-[state=checked]:stroke-none"),
             id: f,
             checked: s,
             disabled: l,
@@ -1060,7 +1065,7 @@
             ...m
         }, r.default.createElement(t.StateLayer, null), r.default.createElement(O, {
             "data-slot": "checkbox-indicator",
-            className: (0, n.default)(T[u], "content-[var(--inverse-content-emphasis)] icon", "data-[state=indeterminate]:icon-filled-minus", "data-[state=checked]:icon-filled-check")
+            className: (0, n.default)(x[u], "content-[var(--inverse-content-emphasis)] icon", "data-[state=indeterminate]:icon-filled-minus", "data-[state=checked]:icon-filled-check")
         }))), "Start" === d && v)
     }], 904451)
 }, 990729, e => {
@@ -1270,27 +1275,38 @@
         n = [],
         r = ["pageload", "click", "impression", "hover", "webvitals", "apivitals", "formvitals", "error", "session"],
         i = new Set(["TTFB", "FCP", "LCP", "FID", "CLS", "INP"]);
+
+    function o() {
+        let e = (0, t.useContext)(a);
+        if (null === e) throw Error("useUnifiedLoggerProvider must be used within a UnifiedLoggerProvider");
+        return e
+    }
+    let s = () => null;
     e.s(["UnifiedLoggerProvider", 0, e => {
         var o;
         let {
             children: s,
             unifiedLogger: l,
             pageLoggerConfig: u,
-            path: c
-        } = e, d = null != (o = null == u ? void 0 : u.tags) ? o : n, g = null == u ? void 0 : u.rosId, p = (0, t.useMemo)(() => ({
-            tags: d,
-            rosId: g,
-            path: c
-        }), [d, g, c]), m = (0, t.useRef)(p), b = (0, t.useRef)(p);
+            path: c,
+            url: d,
+            isReady: g = !0
+        } = e, p = null != (o = null == u ? void 0 : u.tags) ? o : n, m = null == u ? void 0 : u.rosId, b = (0, t.useMemo)(() => ({
+            tags: p,
+            rosId: m,
+            path: c,
+            url: d,
+            isReady: g
+        }), [p, m, c, d, g]), f = (0, t.useRef)(b), v = (0, t.useRef)(b);
         (0, t.useLayoutEffect)(() => {
-            b.current = p, void 0 === m.current.path && void 0 !== p.path && (m.current = {
-                ...m.current,
-                path: p.path
+            v.current = b, void 0 === f.current.path && void 0 !== b.path && (f.current = {
+                ...f.current,
+                path: b.path
             })
-        }, [p]), (0, t.useLayoutEffect)(() => {
+        }, [b]), (0, t.useLayoutEffect)(() => {
             let e = e => {
                 var t;
-                let a, n = (a = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== a && i.has(a)) ? m.current : b.current;
+                let a, n = (a = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== a && i.has(a)) ? f.current : v.current;
                 void 0 !== n.path && (e.parameters = {
                     ...e.parameters,
                     path: n.path
@@ -1304,21 +1320,40 @@
                 })
             }
         }, [l]);
-        let f = (0, t.useMemo)(() => ({
+        let h = (0, t.useMemo)(() => ({
             unifiedLogger: l,
-            pageContext: p
-        }), [l, p]);
+            pageContext: b
+        }), [l, b]);
         return t.default.createElement(a.Provider, {
-            value: f
+            value: h
         }, s)
     }, "useOptionalUnifiedLoggerProvider", 0, function() {
         return (0, t.useContext)(a)
-    }, "useUnifiedLoggerProvider", 0, function() {
-        let e = (0, t.useContext)(a);
-        if (null === e) throw Error("useUnifiedLoggerProvider must be used within a UnifiedLoggerProvider");
-        return e
-    }])
+    }, "usePageSettled", 0, e => {
+        let {
+            unifiedLogger: a,
+            pageContext: n
+        } = o(), {
+            path: r,
+            url: i,
+            isReady: l
+        } = n, u = a.pageSettledTracker, c = (0, t.useSyncExternalStore)(u.subscribe, u.getSnapshot, s);
+        (0, t.useEffect)(() => {
+            if (!c || c.isNavigating || !l || !r || !i || !e || c.url.split(/[?#]/)[0] !== i.split(/[?#]/)[0]) return;
+            let t = new URL(r, window.location.origin).pathname,
+                n = requestAnimationFrame(() => {
+                    n = requestAnimationFrame(() => {
+                        a.logPageSettledEvent({
+                            navigationId: c.id,
+                            page: t,
+                            outcome: e
+                        })
+                    })
+                });
+            return () => cancelAnimationFrame(n)
+        }, [c, l, i, r, e, a])
+    }, "useUnifiedLoggerProvider", 0, o])
 }]);
 
-//# debugId=c0e6e978-8968-cf56-8b98-fd2447eb7a1a
-//# sourceMappingURL=19ra5bk-glle7.js.map
+//# debugId=b5014c4c-1055-af8b-cadf-5d47323b63cb
+//# sourceMappingURL=1n89wvc00itxj.js.map
