@@ -444,6 +444,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Przed kontynuowaniem 
 Authentication.SignUp.Action.ApplyOnNextRespawn,Zastosuj przy następnym odrodzeniu
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.ContinueSetup,Kontynuuj konfigurację
 Authentication.SignUp.Action.Create,Utwórz
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
@@ -499,6 +500,7 @@ Authentication.SignUp.Description.VerificationPage,"Klikając „Zarejestruj si�
 Authentication.SignUp.Description.VerificationPage.CreateAccount,"Klikając „Utwórz konto”, akceptujesz Warunki użytkowania, w tym klauzulę arbitrażową, oraz Politykę prywatności."
 Authentication.SignUp.Description.VerificationPageMultiStep,"Klikając „Kontynuuj”, akceptujesz Warunki użytkowania, w tym klauzulę arbitrażową, oraz Politykę prywatności."
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,"Wprowadzając kod i klikając „Kontynuuj”, udzielasz swojemu dziecku zgody na dostęp do platformy Roblox."
+Authentication.SignUp.Header.CancelAccountCreation,Anulować tworzenie konta?
 Authentication.SignUp.Header.CreatePassword,"Cześć, {username}, utwórz hasło"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"Cześć, {username}, utwórz hasło lub klucz dostępu"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,Utworzyliśmy Twoje konto. Wybierz sposób logowania.
@@ -886,14 +888,11 @@ CommonUI.Controls.Label.Wednesday,Środa
 CommonUI.Controls.Label.WednesdayAbbreviated,Śr.
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Nie znaleziono wyników
-CommonUI.Features.Action.ClassicThemeSunsetGetPlus,Kup subskrypcję Plus
-CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,Przejdź
 CommonUI.Features.Action.LessLowercase,mniej
 CommonUI.Features.Action.MoreLowercase,więcej
 CommonUI.Features.Action.Send,Wyślij
-CommonUI.Features.Heading.ClassicThemeSunset,Dziękujemy za świętowanie 20-lecia Robloxa
 CommonUI.Features.Heading.GameDetails,Szczegóły projektu
 CommonUI.Features.Label.About,Informacje
 CommonUI.Features.Label.AboutUs,O nas
@@ -911,8 +910,6 @@ CommonUI.Features.Label.Catalog,Katalog Roblox
 CommonUI.Features.Label.ChannelWithChannelName,Kanał: {channelName}
 CommonUI.Features.Label.Charts,Hity
 CommonUI.Features.Label.Chat,Czat
-CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Subskrybenci Roblox Plus zachowują motyw klasyczny. Znika tylko rocznicowa ikona aplikacji.
-CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,Dzięki subskrypcji Roblox Plus zachowujesz motyw klasyczny. Znika tylko rocznicowa ikona aplikacji.
 CommonUI.Features.Label.ClientCoreScriptVersion,Wersja rdzenia źródłowego aplikacji klienckiej: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,Znajomi
 CommonUI.Features.Label.Connection,Znajomy
@@ -2260,6 +2257,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Kopiuj tekst
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,Utwórz nową grę
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Nie pytaj ponownie
@@ -2313,10 +2311,16 @@ Feature.Build.Analytics.Description.PayerConversion,"Konwersja użytkowników p�
 Feature.Build.Analytics.Description.PlaythroughRate,"Współczynnik rozgrywek to odsetek wizyt, podczas których ukończono pełną sesję grania. Wyższe wskaźniki sugerują, że gracze uważają, że łatwo jest rozpocząć Twój projekt i warto go ukończyć."
 Feature.Build.Analytics.Description.TotalPlaytime,Łączny czas gry to suma czasu spędzonego przez wszystkich graczy w Twoim projekcie w danym okresie. Wzrost czasu gry zwykle sygnalizuje bardziej wciągające sesje.
 Feature.Build.Analytics.DurationHours,{number} godz.
+Feature.Build.Analytics.Goal.Action.CreateAd,Utwórz reklamę
+Feature.Build.Analytics.Goal.Action.SellItems,Sprzedaj przedmioty
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,Udostępnij znajomym
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,Zrób dobre pierwsze wrażenie
 Feature.Build.Analytics.Goal.GetMorePlayers,Zdobądź więcej graczy
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,"Spraw, by gracze wracali"
+Feature.Build.Analytics.Goal.Locked.EarnRobux,"Zarabiaj Robuxy w swojej grze, aby zobaczyć te statystyki."
+Feature.Build.Analytics.Goal.Locked.FirstImpression,"Zdobądź swojego pierwszego gracza, aby zobaczyć te statystyki."
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,"Zdobądź swojego pierwszego powracającego gracza, aby zobaczyć te statystyki."
 Feature.Build.Analytics.KeyStats,Kluczowe statystyki
 Feature.Build.Analytics.LastMonth,Ubiegły miesiąc
 Feature.Build.Analytics.LastWeek,
@@ -2442,6 +2446,7 @@ Feature.Build.Label.AdditionalUsage,Dodatkowe użycia funkcji Buduj
 Feature.Build.Label.AdditionalUsed,Wykorzystano {USED} z {LIMIT}
 Feature.Build.Label.AdsManager,Menedżer reklam
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,Wszystkie gry
 Feature.Build.Label.AmountAvailable,Dostępne {AMOUNT}
 Feature.Build.Label.Autosaved,Zapisano automatycznie
 Feature.Build.Label.Available,dostępne
@@ -2466,12 +2471,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Prosty i zrozumiały raport dotyczący skuteczności
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,Darmowe
 Feature.Build.Label.FreeBuildUsage,Bezpłatne użycia funkcji Buduj
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,Rozegrane gry
 Feature.Build.Label.GetMoreBuildUsage,Zdobądź więcej użyć funkcji Buduj
+Feature.Build.Label.GroupGames,Gry grupy
+Feature.Build.Label.Groups,Grupy
 Feature.Build.Label.Hi,Cześć
 Feature.Build.Label.IconThumbnails,Ikona i miniatury
 Feature.Build.Label.Images2D,Obrazy 2D
@@ -2485,6 +2493,7 @@ Feature.Build.Label.ManagedPricing,Zarządzane ceny
 Feature.Build.Label.ManagedPricingMixed,Mieszane dla aktualnych produktów
 Feature.Build.Label.MaximizeForGamePlays,Maksymalizuj pod kątem liczby rozegranych gier
 Feature.Build.Label.Models3D,Modele 3D
+Feature.Build.Label.MyGames,Moje gry
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Brak limitu
 Feature.Build.Label.NotStarted,Nie rozpoczęto
@@ -2632,12 +2641,12 @@ Feature.Build.Message.BuildInternalError,Wystąpił problem z funkcją Buduj. Sp
 Feature.Build.Message.BuildResponseFailed,Funkcja Buduj nie odpowiada. Spróbuj ponownie.
 Feature.Build.Message.BuildStillWorking,"Pracujemy nad tym. W międzyczasie możesz opuścić aplikację, grać na platformie Roblox lub rozpocząć inny projekt."
 Feature.Build.Message.BuildStopped,Zatrzymano funkcję Buduj.
+Feature.Build.Message.BuildTakingLonger,To trwa dłużej niż zwykle. Możesz poczekać lub zacząć robić coś innego.
 Feature.Build.Message.BuildTemporarilyDown,Funcja Buduj jest tymczasowo niedostępna. Spróbuj ponownie za chwilę.
 Feature.Build.Message.CompletedTasks,Liczba ukończonych zadań: {COUNT}
 Feature.Build.Message.ConversationGone,Ta rozmowa nie jest już dostępna. Rozpocznij nową.
 Feature.Build.Message.ConversationNotFound,Nie udało się znaleźć tej rozmowy. Rozpocznij nową.
 Feature.Build.Message.CreateGameToUseBuild,"Utwórz nową grę, aby zacząć korzystać z funkcji Buduj."
-Feature.Build.Message.CreatedRevertedVer,Utworzono cofniętą wersję.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Zwiększ liczbę kwalifikujących się odbiorców w Centrum dla twórców
 Feature.Build.Message.ExperiencesLoadFailed,Nie udało się wczytać projektów
@@ -2674,7 +2683,6 @@ Feature.Build.Message.PublishExpandAudience,"Opublikuj, aby zwiększyć liczbę 
 Feature.Build.Message.PublishNotReverted,Twoja publikacja nie została cofnięta. Spróbuj ponownie.
 Feature.Build.Message.PublishPromotionUpsell,"Gratulujemy opublikowania gry! Masz bezpłatne promocje ({promotionCount}), dzięki którym możesz zdobyć więcej graczy na Robloxie."
 Feature.Build.Message.PublishPromotionUpsellSingular,"Gratulujemy opublikowania gry! Masz 1 bezpłatną promocję, dzięki której możesz zdobyć więcej graczy na Robloxie."
-Feature.Build.Message.PublishReverted,Cofnięto publikację.
 Feature.Build.Message.QuestionnaireNeeded,"Ta gra została edytowana poza funkcją Buduj. Wypełnij kwestionariusz dotyczący treści, aby ją opublikować."
 Feature.Build.Message.ReadyToPlay,Twoja gra jest gotowa do uruchomienia na Robloxie
 Feature.Build.Message.ResetHours,Reset za {HOURS} godz.
@@ -4148,7 +4156,7 @@ Feature.Moments.Description.HowToCaptureStep2,Włącz elementy sterujące przech
 Feature.Moments.Description.HowToCaptureStep3,Przechwytuj zdjęcia i filmy z rozgrywki
 Feature.Moments.Description.LeaveMomentsCreation,"Utracisz wszystkie wprowadzone zmiany, ale ten przechwycony element będzie nadal dostępny w galerii <b>przechwyconych elementów</b>."
 Feature.Moments.Description.NoMusicResults,Nie znaleziono muzyki
-Feature.Moments.Description.NonInfiniteScrollEndBody,"Osiągnięto punkt zatrzymania w sekcji Momenty. Dotknij poniżej, aby kontynuować oglądanie."
+Feature.Moments.Description.NonInfiniteScrollEndBody,"Wstrzymaliśmy Twój kanał aktualności. Możesz zdecydować, czy chcesz oglądać dalej."
 Feature.Moments.Description.NothingHereYet,Niczego tu jeszcze nie ma...
 Feature.Moments.Description.PublishMoment,Opisz swój moment
 Feature.Moments.Description.TooManyUploads,Przesłano dziś zbyt wiele filmów. Spróbuj ponownie jutro.
@@ -4213,7 +4221,7 @@ Feature.Moments.Label.MomentUnavailableDefault,Ten moment nie jest dostępny.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Nie ma jeszcze komentarzy
-Feature.Moments.Label.NonInfiniteScrollEndTitle,Na razie jesteś na bieżąco
+Feature.Moments.Label.NonInfiniteScrollEndTitle,Jest więcej momentów do obejrzenia
 Feature.Moments.Label.Photos,Zdjęcia
 Feature.Moments.Label.PostDeleted,Moment usunięty
 Feature.Moments.Label.PostRemovedBody,Opublikowany przez Ciebie moment jest niezgodny z naszymi Standardami społeczności.
@@ -5086,7 +5094,7 @@ Feature.Schools.Heading.RemoveYourSchool,Usuń swoją szkołę
 Feature.Schools.Heading.SchoolIsLive,Twoja szkoła jest już dostępna
 Feature.Schools.Heading.SchoolUnavailable,Twoja szkoła jest niedostępna
 Feature.Schools.Heading.SelectGraduationYear,Wybierz rok ukończenia szkoły
-Feature.Schools.Heading.ShareWithFriends,Udostępnij znajomym
+Feature.Schools.Heading.ShareWithFriends,
 Feature.Schools.Heading.ThanksForInterest,Dziękujemy za zainteresowanie
 Feature.Schools.Heading.YouJoinedSchool,Dołączasz do szkoły {school}!
 Feature.Schools.Heading.YourFounderReward,Twoja nagroda dla założyciela

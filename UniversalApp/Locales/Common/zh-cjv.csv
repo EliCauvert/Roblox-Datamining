@@ -436,7 +436,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,继续之前，你必
 Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生时应用
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,
+Authentication.SignUp.Action.ContinueSetup,继续设置
 Authentication.SignUp.Action.Create,创建
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
@@ -492,7 +492,7 @@ Authentication.SignUp.Description.VerificationPage,单击注册按钮后，即�
 Authentication.SignUp.Description.VerificationPage.CreateAccount,点按“创建帐户”，即表示你已同意我们的使用条款（包括其中的仲裁条款），且你已了解隐私政策。
 Authentication.SignUp.Description.VerificationPageMultiStep,点按“继续”，即表示你已同意我们的使用条款（包括其中的仲裁条款），且你已了解隐私政策。
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,输入验证码并点击继续，则表示您同意您的孩子访问 Roblox。
-Authentication.SignUp.Header.CancelAccountCreation,
+Authentication.SignUp.Header.CancelAccountCreation,取消帐户创建？
 Authentication.SignUp.Header.CreatePassword,嗨，{username}：请创建一个密码
 Authentication.SignUp.Header.CreatePasswordOrPasskey,你好 {username}，请创建一个密码或通行密钥
 Authentication.SignUp.Header.CreatedAccountChooseSignin,我们已为你创建帐户。请选择登录方式。
@@ -883,14 +883,11 @@ CommonUI.Controls.Label.Wednesday,星期三
 CommonUI.Controls.Label.WednesdayAbbreviated,周三
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,未找到结果
-CommonUI.Features.Action.ClassicThemeSunsetGetPlus,订阅 Plus
-CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,开始
 CommonUI.Features.Action.LessLowercase,收起
 CommonUI.Features.Action.MoreLowercase,展开
 CommonUI.Features.Action.Send,发送
-CommonUI.Features.Heading.ClassicThemeSunset,感谢你与我们一同庆祝 Roblox 20 周年
 CommonUI.Features.Heading.GameDetails,作品详情
 CommonUI.Features.Label.About,简介
 CommonUI.Features.Label.AboutUs,关于我们
@@ -908,8 +905,6 @@ CommonUI.Features.Label.Catalog,Roblox 商店
 CommonUI.Features.Label.ChannelWithChannelName,频道：{channelName}
 CommonUI.Features.Label.Charts,排行榜
 CommonUI.Features.Label.Chat,聊天
-CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plus 会员可以继续使用经典主题。仅周年纪念 App 图标将停止使用。
-CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,拥有 Roblox Plus 会员资格的用户可以继续使用经典主题。仅周年纪念 App 图标将停止使用。
 CommonUI.Features.Label.ClientCoreScriptVersion,客户端-CoreScript-版本：{clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,添加为联系人
 CommonUI.Features.Label.Connection,好友
@@ -2261,7 +2256,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,复制文本
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
-Feature.Build.Action.CreateNewGame,
+Feature.Build.Action.CreateNewGame,创建新游戏
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,不再询问
@@ -2315,17 +2310,17 @@ Feature.Build.Analytics.Description.PayerConversion,付费用户转化率是指�
 Feature.Build.Analytics.Description.PlaythroughRate,通关率是完成完整游戏会话的访问次数占比。通关率越高，表明玩家越容易上手游戏体验，并且更愿意游玩至结束。
 Feature.Build.Analytics.Description.TotalPlaytime,总游戏时间是该时间段内所有玩家在你的游戏体验中花费的时间总和。游戏时间增加通常表明游戏过程更具吸引力。
 Feature.Build.Analytics.DurationHours,{number} 小时
-Feature.Build.Analytics.Goal.Action.CreateAd,
-Feature.Build.Analytics.Goal.Action.SellItems,
-Feature.Build.Analytics.Goal.Action.ShareWithFriends,
+Feature.Build.Analytics.Goal.Action.CreateAd,创建广告
+Feature.Build.Analytics.Goal.Action.SellItems,出售道具
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,与好友分享
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,留下良好的第一印象
 Feature.Build.Analytics.Goal.GetMorePlayers,吸引更多玩家
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,让玩家持续回归
-Feature.Build.Analytics.Goal.Locked.EarnRobux,
-Feature.Build.Analytics.Goal.Locked.FirstImpression,
+Feature.Build.Analytics.Goal.Locked.EarnRobux,在你的游戏中赚取 Robux 以查看这些统计数据。
+Feature.Build.Analytics.Goal.Locked.FirstImpression,让你的第一位玩家看到这些统计数据。
 Feature.Build.Analytics.Goal.Locked.GetMorePlayers,
-Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,让你的第一位回访玩家看到这些统计数据。
 Feature.Build.Analytics.KeyStats,关键统计数据
 Feature.Build.Analytics.LastMonth,上个月
 Feature.Build.Analytics.LastWeek,
@@ -2451,7 +2446,7 @@ Feature.Build.Label.AdditionalUsage,额外的 Build 使用额度
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，共 {LIMIT}
 Feature.Build.Label.AdsManager,广告管理器
 Feature.Build.Label.All,
-Feature.Build.Label.AllGames,
+Feature.Build.Label.AllGames,所有游戏
 Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
 Feature.Build.Label.Autosaved,自动保存版本
 Feature.Build.Label.Available,可用
@@ -2483,7 +2478,7 @@ Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,仅限好友
 Feature.Build.Label.GamePlays,游戏游玩次数
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
-Feature.Build.Label.GroupGames,
+Feature.Build.Label.GroupGames,群组游戏
 Feature.Build.Label.Groups,
 Feature.Build.Label.Hi,你好
 Feature.Build.Label.IconThumbnails,标志和缩略图
@@ -2498,7 +2493,7 @@ Feature.Build.Label.ManagedPricing,托管定价
 Feature.Build.Label.ManagedPricingMixed,对当前商品使用混合定价
 Feature.Build.Label.MaximizeForGamePlays,最大化游戏游玩次数
 Feature.Build.Label.Models3D,3D 模型
-Feature.Build.Label.MyGames,
+Feature.Build.Label.MyGames,我的游戏
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,无限额
 Feature.Build.Label.NotStarted,未开始
@@ -2646,13 +2641,12 @@ Feature.Build.Message.BuildInternalError,Build 遇到问题。请重试。
 Feature.Build.Message.BuildResponseFailed,Build 无法响应。请重试。
 Feature.Build.Message.BuildStillWorking,正在处理。在等待期间，你可以离开 App、在 Roblox 中游玩或开始另一个项目。
 Feature.Build.Message.BuildStopped,你已停止 Build。
-Feature.Build.Message.BuildTakingLonger,
+Feature.Build.Message.BuildTakingLonger,处理时间过长。你可以继续等待，也可以开始处理其他事项。
 Feature.Build.Message.BuildTemporarilyDown,Build 暂不可用。请在一分钟后重试。
 Feature.Build.Message.CompletedTasks,{COUNT} 个已完成任务
 Feature.Build.Message.ConversationGone,此对话已不可用。请开始新的对话。
 Feature.Build.Message.ConversationNotFound,找不到此对话。请开始新的对话。
 Feature.Build.Message.CreateGameToUseBuild,创建新游戏，开始使用 Build。
-Feature.Build.Message.CreatedRevertedVer,已创建还原版本。
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,在创作者中心扩大受众适用范围
 Feature.Build.Message.ExperiencesLoadFailed,无法加载体验
@@ -2689,7 +2683,6 @@ Feature.Build.Message.PublishExpandAudience,发布并扩大受众范围
 Feature.Build.Message.PublishNotReverted,你的发布未还原。请重试。
 Feature.Build.Message.PublishPromotionUpsell,恭喜你成功发布游戏！你有 {promotionCount} 次免费推广机会，可在 Roblox 上吸引更多玩家。
 Feature.Build.Message.PublishPromotionUpsellSingular,恭喜你成功发布游戏！你有 1 次免费推广机会，可在 Roblox 上吸引更多玩家。
-Feature.Build.Message.PublishReverted,已还原发布操作。
 Feature.Build.Message.QuestionnaireNeeded,此游戏是在 Build 之外编辑的。请填写内容问卷，以便发布游戏。
 Feature.Build.Message.ReadyToPlay,你的游戏已可在 Roblox 上游玩！
 Feature.Build.Message.ResetHours,{HOURS} 小时后重置
@@ -4160,7 +4153,7 @@ Feature.Moments.Description.HowToCaptureStep2,启用“截图”控件
 Feature.Moments.Description.HowToCaptureStep3,截取游戏的照片和视频
 Feature.Moments.Description.LeaveMomentsCreation,你将丢失所有更改，但仍然可以在<b>截图</b>图库中找到此截图。
 Feature.Moments.Description.NoMusicResults,未找到音乐
-Feature.Moments.Description.NonInfiniteScrollEndBody,你已到达“精彩瞬间”中的停止点。轻点下方以继续观看。
+Feature.Moments.Description.NonInfiniteScrollEndBody,我们已暂停你的推送。你可以决定是否要继续观看。
 Feature.Moments.Description.NothingHereYet,这里什么都没有...
 Feature.Moments.Description.PublishMoment,描述你的精彩瞬间
 Feature.Moments.Description.TooManyUploads,你今天上传的视频太多了。请明天再试。
@@ -4225,7 +4218,7 @@ Feature.Moments.Label.MomentUnavailableDefault,此精彩瞬间不可用。
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,暂无评论
-Feature.Moments.Label.NonInfiniteScrollEndTitle,全部都看完啦
+Feature.Moments.Label.NonInfiniteScrollEndTitle,还有更多精彩瞬间可供观看
 Feature.Moments.Label.Photos,照片
 Feature.Moments.Label.PostDeleted,精彩瞬间已删除
 Feature.Moments.Label.PostRemovedBody,你发布的精彩瞬间违反了社区准则。
@@ -4265,6 +4258,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,请等待一分钟，然后重试
 Feature.Moments.Label.VoiceModerationError,你的脚本必须遵守安全规则
 Feature.Moments.Label.VoicePlaceholder,请输入你的旁白脚本。字符数限制为 {maxCount} 个
 Feature.Moments.Label.VoiceTimeoutBody,旁白生成超时。
+Feature.Moments.Label.VoiceTooManyNumbersError,
 Feature.Moments.Label.WriteComment,留下评论
 Feature.Moments.Title.Comments,评论
 Feature.Moments.Title.CommentsWithCappedCount,评论（{count} 条以上）
@@ -5104,7 +5098,7 @@ Feature.Schools.Heading.RemoveYourSchool,移除你的学校
 Feature.Schools.Heading.SchoolIsLive,添加学校功能现已上线
 Feature.Schools.Heading.SchoolUnavailable,学校不可用
 Feature.Schools.Heading.SelectGraduationYear,选择毕业年份
-Feature.Schools.Heading.ShareWithFriends,与好友分享
+Feature.Schools.Heading.ShareWithFriends,
 Feature.Schools.Heading.ThanksForInterest,感谢你的关注
 Feature.Schools.Heading.YouJoinedSchool,你已加入{school}！
 Feature.Schools.Heading.YourFounderReward,你的创始人奖励

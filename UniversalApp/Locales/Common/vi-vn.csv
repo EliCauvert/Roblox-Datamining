@@ -444,6 +444,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Bạn phải đặt l
 Authentication.SignUp.Action.ApplyOnNextRespawn,Áp dụng cho lần hồi sinh tiếp theo
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.ContinueSetup,Tiếp tục thiết lập
 Authentication.SignUp.Action.Create,Tạo
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Tạo Tài khoản
@@ -499,6 +500,7 @@ Authentication.SignUp.Description.VerificationPage,Bấm vào Đăng ký đồng
 Authentication.SignUp.Description.VerificationPage.CreateAccount,"Bấm vào Tạo Tài Khoản đồng nghĩa với việc bạn đồng ý với Điều Khoản Sử Dụng, trong đó có các điều khoản trọng tài, và thừa nhận Chính Sách Quyền Riêng Tư."
 Authentication.SignUp.Description.VerificationPageMultiStep,"Bấm vào Tiếp tục đồng nghĩa với việc bạn đồng ý với Điều Khoản Sử Dụng, bao gồm điều khoản trọng tài và thừa nhận Chính Sách Quyền Riêng Tư."
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,"Bằng cách nhập mã và nhấp vào Tiếp tục, bạn đồng ý cho con mình truy cập Roblox."
+Authentication.SignUp.Header.CancelAccountCreation,Hủy tạo tài khoản?
 Authentication.SignUp.Header.CreatePassword,"{username} ơi, hãy tạo một mật khẩu"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"{username} ơi, hãy tạo mật khẩu hoặc mã xác nhận"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,Chúng tôi đã tạo tài khoản cho bạn. Hãy chọn cách bạn đăng nhập.
@@ -886,14 +888,11 @@ CommonUI.Controls.Label.Wednesday,Thứ 4
 CommonUI.Controls.Label.WednesdayAbbreviated,T4
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,Không tìm thấy kết quả
-CommonUI.Features.Action.ClassicThemeSunsetGetPlus,Đăng ký gói Plus
-CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,Đi
 CommonUI.Features.Action.LessLowercase,ẩn bớt
 CommonUI.Features.Action.MoreLowercase,xem thêm
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicThemeSunset,Cảm ơn bạn đã tham gia kỷ niệm 20 năm Roblox
 CommonUI.Features.Heading.GameDetails,Chi tiết trải nghiệm
 CommonUI.Features.Label.About,Về sản phẩm
 CommonUI.Features.Label.AboutUs,Về chúng tôi
@@ -911,8 +910,6 @@ CommonUI.Features.Label.Catalog,Danh Mục Roblox
 CommonUI.Features.Label.ChannelWithChannelName,Kênh: {channelName}
 CommonUI.Features.Label.Charts,Bảng xếp hạng
 CommonUI.Features.Label.Chat,Trò chuyện
-CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Thành viên Roblox Plus được tiếp tục sử dụng chủ đề Cổ điển. Chỉ có biểu tượng kỷ niệm của ứng dụng sẽ bị gỡ bỏ.
-CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,Gói thành viên Roblox Plus giúp bạn được tiếp tục sử dụng chủ đề Cổ điển. Chỉ có biểu tượng kỷ niệm của ứng dụng sẽ bị gỡ bỏ.
 CommonUI.Features.Label.ClientCoreScriptVersion,Phiên bản-CoreScript-máy khách: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,Bạn bè
 CommonUI.Features.Label.Connection,Kết nối
@@ -2260,6 +2257,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Sao chép văn bản
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,Tạo trò chơi mới
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Không hỏi lại
@@ -2313,10 +2311,16 @@ Feature.Build.Analytics.Description.PayerConversion,Tỷ lệ chuyển đổi th
 Feature.Build.Analytics.Description.PlaythroughRate,Tỷ lệ hoàn thành lượt chơi là tỷ lệ phần trăm số lượt truy cập đã hoàn thành trọn vẹn một phiên chơi. Tỷ lệ này càng cao càng chứng tỏ người chơi cảm thấy trải nghiệm của bạn hấp dẫn và đáng để chơi tới cùng.
 Feature.Build.Analytics.Description.TotalPlaytime,"Tổng thời gian chơi là tổng thời gian mà tất cả các người chơi đã dành cho trải nghiệm của bạn trong một khoảng thời gian. Thông thường, thời gian chơi càng cao chứng tỏ phiên chơi càng hấp dẫn."
 Feature.Build.Analytics.DurationHours,{number} giờ
+Feature.Build.Analytics.Goal.Action.CreateAd,Tạo quảng cáo
+Feature.Build.Analytics.Goal.Action.SellItems,Bán vật phẩm
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,Chia sẻ với bạn bè
 Feature.Build.Analytics.Goal.EarnRobux,
 Feature.Build.Analytics.Goal.FirstImpression,Tạo ấn tượng tốt ngay từ lần đầu
 Feature.Build.Analytics.Goal.GetMorePlayers,Thu hút thêm người chơi
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Thu hút người chơi quay trở lại
+Feature.Build.Analytics.Goal.Locked.EarnRobux,Hãy kiếm Robux trong trò chơi của bạn để xem các số liệu thống kê này.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,Hãy thu hút người chơi đầu tiên để xem các số liệu thống kê này.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Hãy thu hút người chơi quay lại đầu tiên để xem các số liệu thống kê này.
 Feature.Build.Analytics.KeyStats,Số liệu chính
 Feature.Build.Analytics.LastMonth,Tháng trước
 Feature.Build.Analytics.LastWeek,
@@ -2442,6 +2446,7 @@ Feature.Build.Label.AdditionalUsage,Lượt sử dụng Build bổ sung
 Feature.Build.Label.AdditionalUsed,Đã dùng {USED}/{LIMIT}
 Feature.Build.Label.AdsManager,Trình quản lý quảng cáo
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,Tất cả trò chơi
 Feature.Build.Label.AmountAvailable,Còn {AMOUNT}
 Feature.Build.Label.Autosaved,Đã tự động lưu
 Feature.Build.Label.Available,còn lại
@@ -2466,12 +2471,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,Hoàn tất
 Feature.Build.Label.EasyPerformanceReport,Báo cáo hiệu suất dễ dàng
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,Miễn phí
 Feature.Build.Label.FreeBuildUsage,Lượt sử dụng Build miễn phí
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,Lượt chơi
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
+Feature.Build.Label.GroupGames,Trò chơi của nhóm
+Feature.Build.Label.Groups,
 Feature.Build.Label.Hi,Xin chào
 Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
 Feature.Build.Label.Images2D,Hình ảnh 2D
@@ -2485,6 +2493,7 @@ Feature.Build.Label.ManagedPricing,Giá được quản lý
 Feature.Build.Label.ManagedPricingMixed,Kết hợp trên các sản phẩm hiện tại
 Feature.Build.Label.MaximizeForGamePlays,Tăng tối đa lượt chơi
 Feature.Build.Label.Models3D,Mô hình 3D
+Feature.Build.Label.MyGames,Trò chơi của tôi
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Không giới hạn
 Feature.Build.Label.NotStarted,Chưa bắt đầu
@@ -2632,12 +2641,12 @@ Feature.Build.Message.BuildInternalError,Build đã gặp sự cố. Vui lòng t
 Feature.Build.Message.BuildResponseFailed,Build không phản hồi. Vui lòng thử lại.
 Feature.Build.Message.BuildStillWorking,"Đang xử lý. Bạn có thể thoát ứng dụng, chơi Roblox hoặc bắt đầu một dự án khác trong lúc chờ đợi."
 Feature.Build.Message.BuildStopped,Bạn đã dừng Build.
+Feature.Build.Message.BuildTakingLonger,Quá trình này đang mất nhiều thời gian hơn dự kiến. Bạn có thể tiếp tục chờ hoặc bắt đầu làm việc khác.
 Feature.Build.Message.BuildTemporarilyDown,Build tạm thời không sử dụng được. Hãy thử lại sau ít phút.
 Feature.Build.Message.CompletedTasks,{COUNT} nhiệm vụ đã hoàn thành
 Feature.Build.Message.ConversationGone,Cuộc trò chuyện này không còn nữa. Hãy bắt đầu cuộc trò chuyện mới.
 Feature.Build.Message.ConversationNotFound,Không tìm thấy cuộc trò chuyện này. Hãy bắt đầu cuộc trò chuyện mới.
 Feature.Build.Message.CreateGameToUseBuild,Hãy tạo trò chơi mới để bắt đầu sử dụng Build.
-Feature.Build.Message.CreatedRevertedVer,Đã tạo phiên bản trả về.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Mở rộng đối tượng người chơi trong Trung tâm nhà sáng tạo
 Feature.Build.Message.ExperiencesLoadFailed,Không tải được trải nghiệm
@@ -2674,7 +2683,6 @@ Feature.Build.Message.PublishExpandAudience,Đăng để mở rộng đối tư�
 Feature.Build.Message.PublishNotReverted,Không hủy đăng được. Vui lòng thử lại.
 Feature.Build.Message.PublishPromotionUpsell,Chúc mừng bạn đã đăng trò chơi thành công! Bạn có {promotionCount} lượt quảng cáo miễn phí để thu hút thêm người chơi trên Roblox.
 Feature.Build.Message.PublishPromotionUpsellSingular,Chúc mừng bạn đã đăng trò chơi! Bạn có 1 lượt quảng bá miễn phí để thu hút thêm người chơi trên Roblox.
-Feature.Build.Message.PublishReverted,Đã hủy đăng.
 Feature.Build.Message.QuestionnaireNeeded,Trò chơi này đã được chỉnh sửa bên ngoài Build. Vui lòng trả lời khảo sát nội dung để đăng.
 Feature.Build.Message.ReadyToPlay,Trò chơi của bạn đã sẵn sàng để chơi trên Roblox!
 Feature.Build.Message.ResetHours,Làm mới sau {HOURS} giờ
@@ -4148,7 +4156,7 @@ Feature.Moments.Description.HowToCaptureStep2,Bật các nút điều khiển Ch
 Feature.Moments.Description.HowToCaptureStep3,Chụp ảnh và quay màn hình trong quá trình trải nghiệm trò chơi
 Feature.Moments.Description.LeaveMomentsCreation,"Mọi thay đổi bạn đã thực hiện sẽ biến mất, nhưng bạn vẫn có thể tìm lại bản ghi này trong thư viện <b>Bản ghi</b> của mình."
 Feature.Moments.Description.NoMusicResults,Không tìm thấy nhạc
-Feature.Moments.Description.NonInfiniteScrollEndBody,Bạn đã đến điểm dừng khi xem Khoảnh khắc. Nhấn vào phần bên dưới để tiếp tục xem.
+Feature.Moments.Description.NonInfiniteScrollEndBody,Chúng tôi đã tạm dừng bảng tin của bạn. Bạn có thể chọn tiếp tục xem nếu muốn.
 Feature.Moments.Description.NothingHereYet,Chưa có gì ở đây...
 Feature.Moments.Description.PublishMoment,Mô tả Khoảnh khắc của bạn
 Feature.Moments.Description.TooManyUploads,Bạn đã tải lên quá nhiều video cho hôm nay. Hãy thử lại vào ngày mai.
@@ -4213,7 +4221,7 @@ Feature.Moments.Label.MomentUnavailableDefault,Khoảnh khắc này không tồn
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,Âm nhạc
 Feature.Moments.Label.NoCommentsYet,Chưa có bình luận nào
-Feature.Moments.Label.NonInfiniteScrollEndTitle,Bạn hiện đã xem hết toàn bộ nội dung
+Feature.Moments.Label.NonInfiniteScrollEndTitle,Còn nhiều Khoảnh khắc khác để xem
 Feature.Moments.Label.Photos,Ảnh
 Feature.Moments.Label.PostDeleted,Khoảnh khắc đã bị xóa
 Feature.Moments.Label.PostRemovedBody,Khoảnh khắc bạn đăng vi phạm Tiêu chuẩn cộng đồng của chúng tôi.
@@ -5086,7 +5094,7 @@ Feature.Schools.Heading.RemoveYourSchool,Xóa trường học của bạn
 Feature.Schools.Heading.SchoolIsLive,Trường học hiện đã mở
 Feature.Schools.Heading.SchoolUnavailable,Trường học của bạn không hoạt động
 Feature.Schools.Heading.SelectGraduationYear,Chọn năm tốt nghiệp
-Feature.Schools.Heading.ShareWithFriends,Chia sẻ với bạn bè
+Feature.Schools.Heading.ShareWithFriends,
 Feature.Schools.Heading.ThanksForInterest,Cảm ơn bạn đã quan tâm
 Feature.Schools.Heading.YouJoinedSchool,Bạn đã tham gia {school}!
 Feature.Schools.Heading.YourFounderReward,Phần thưởng nhà sáng lập dành cho bạn

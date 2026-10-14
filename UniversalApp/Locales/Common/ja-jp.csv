@@ -444,6 +444,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,続ける前に、パ
 Authentication.SignUp.Action.ApplyOnNextRespawn,次のリスポーンで適用
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.ContinueSetup,設定を続ける
 Authentication.SignUp.Action.Create,作成
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,アカウントを作成する
@@ -499,6 +500,7 @@ Authentication.SignUp.Description.VerificationPage,「新規登録」をクリ�
 Authentication.SignUp.Description.VerificationPage.CreateAccount,「アカウントを作成」をクリックすると、仲裁条項を含む利用規約に同意し、プライバシーポリシーを承認したことになります。
 Authentication.SignUp.Description.VerificationPageMultiStep,「続ける」をクリックすると、仲裁条項を含む利用規約に同意し、プライバシーポリシーを承認したことになります。
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,コードを入力して「続ける」をクリックすると、お子様がRobloxにアクセスすることに同意することになります。
+Authentication.SignUp.Header.CancelAccountCreation,アカウント作成をキャンセルしますか？
 Authentication.SignUp.Header.CreatePassword,{username} さん、パスワードを作成してください
 Authentication.SignUp.Header.CreatePasswordOrPasskey,{username} さん。パスワードを作成してください
 Authentication.SignUp.Header.CreatedAccountChooseSignin,アカウントを作成しました。ログイン方法を選択してください。
@@ -886,14 +888,11 @@ CommonUI.Controls.Label.Wednesday,水曜日
 CommonUI.Controls.Label.WednesdayAbbreviated,水
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,結果が見つかりません
-CommonUI.Features.Action.ClassicThemeSunsetGetPlus,Plusを入手
-CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,実行
 CommonUI.Features.Action.LessLowercase,表示を減らす
 CommonUI.Features.Action.MoreLowercase,その他
 CommonUI.Features.Action.Send,送信
-CommonUI.Features.Heading.ClassicThemeSunset,Robloxの20周年を祝っていただきありがとうございます
 CommonUI.Features.Heading.GameDetails,バーチャル空間の詳細
 CommonUI.Features.Label.About,情報
 CommonUI.Features.Label.AboutUs,当社について
@@ -911,8 +910,6 @@ CommonUI.Features.Label.Catalog,Robloxカタログ
 CommonUI.Features.Label.ChannelWithChannelName,チャンネル: {channelName}
 CommonUI.Features.Label.Charts,ランキング
 CommonUI.Features.Label.Chat,チャット
-CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plusメンバーの方は、初期テーマをそのまま維持していただけます。記念アプリアイコンのみ提供終了となります。
-CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,Roblox Plusメンバーシップをお持ちのため、初期テーマをそのまま維持していただけます。記念アプリアイコンのみ提供終了となります。
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,つながる
 CommonUI.Features.Label.Connection,つながり
@@ -2260,6 +2257,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,テキストをコピー
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,新しいゲームを作成
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,今後表示しない
@@ -2313,10 +2311,17 @@ Feature.Build.Analytics.Description.PayerConversion,有料ユーザーコンバ�
 Feature.Build.Analytics.Description.PlaythroughRate,プレイスルー率は、最後まで完了したプレイセッションの割合です。この割合が高いほど、プレイヤーがバーチャル空間を始めやすく、最後までプレイする価値があると感じていることを示します。
 Feature.Build.Analytics.Description.TotalPlaytime,合計プレイ時間は、その期間にすべてのプレイヤーがバーチャル空間で過ごした時間の合計です。プレイ時間の増加は通常、プレイセッションの魅力が高まっていることを示します。
 Feature.Build.Analytics.DurationHours,{number}時間
+Feature.Build.Analytics.Goal.Action.CreateAd,広告を作成
+Feature.Build.Analytics.Goal.Action.SellItems,アイテムを販売
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,友達と共有
 Feature.Build.Analytics.Goal.EarnRobux,Robuxを獲得する
 Feature.Build.Analytics.Goal.FirstImpression,良い第一印象を与える
 Feature.Build.Analytics.Goal.GetMorePlayers,より多くのプレイヤーを獲得
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,プレイヤーにリピートしてもらう
+Feature.Build.Analytics.Goal.Locked.EarnRobux,ゲーム内でRobuxを獲得して、これらの統計を確認しましょう。
+Feature.Build.Analytics.Goal.Locked.FirstImpression,最初のプレイヤーを獲得して、これらの統計を確認しましょう。
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,より多くのプレイヤーを獲得して、これらの統計を確認しましょう。
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,最初のリピートプレイヤーを獲得して、これらの統計を確認しましょう。
 Feature.Build.Analytics.KeyStats,主な指標
 Feature.Build.Analytics.LastMonth,先月
 Feature.Build.Analytics.LastWeek,
@@ -2442,6 +2447,7 @@ Feature.Build.Label.AdditionalUsage,追加のビルド使用量
 Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT}使用済み
 Feature.Build.Label.AdsManager,広告管理
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,すべてのゲーム
 Feature.Build.Label.AmountAvailable,残り{AMOUNT}
 Feature.Build.Label.Autosaved,自動保存済み
 Feature.Build.Label.Available,利用可能
@@ -2466,12 +2472,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,わかりやすいパフォーマンスレポート
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,フィルター
 Feature.Build.Label.Free,無料
 Feature.Build.Label.FreeBuildUsage,無料のビルド使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,友達限定
 Feature.Build.Label.GamePlays,プレイ数
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
+Feature.Build.Label.GroupGames,グループゲーム
+Feature.Build.Label.Groups,
 Feature.Build.Label.Hi,こんにちは
 Feature.Build.Label.IconThumbnails,アイコンとサムネイル
 Feature.Build.Label.Images2D,2D画像
@@ -2485,6 +2494,7 @@ Feature.Build.Label.ManagedPricing,管理価格設定
 Feature.Build.Label.ManagedPricingMixed,既存の製品で設定が混在
 Feature.Build.Label.MaximizeForGamePlays,プレイ数を最大化
 Feature.Build.Label.Models3D,3Dモデル
+Feature.Build.Label.MyGames,マイゲーム
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,制限なし
 Feature.Build.Label.NotStarted,開始していません
@@ -2632,12 +2642,12 @@ Feature.Build.Message.BuildInternalError,ビルドで問題が発生しました
 Feature.Build.Message.BuildResponseFailed,ビルドが応答しませんでした。もう一度お試しください。
 Feature.Build.Message.BuildStillWorking,処理中です。待機中でもアプリを終了したり、Robloxをプレイしたり、別のプロジェクトを開始したりできます。
 Feature.Build.Message.BuildStopped,ビルドを停止しました。
+Feature.Build.Message.BuildTakingLonger,予想よりも時間がかかっています。そのままお待ちいただくか、別の作業を開始してください。
 Feature.Build.Message.BuildTemporarilyDown,ビルドは一時的に利用できません。しばらくしてからもう一度お試しください。
 Feature.Build.Message.CompletedTasks,{COUNT}件の完了したタスク
 Feature.Build.Message.ConversationGone,この会話は利用できなくなりました。新しい会話を始めてください。
 Feature.Build.Message.ConversationNotFound,この会話は見つかりませんでした。新しい会話を始めてください。
 Feature.Build.Message.CreateGameToUseBuild,ゲームを新規作成して、ビルドの使用を開始してください。
-Feature.Build.Message.CreatedRevertedVer,元に戻したバージョンが作成されました。
 Feature.Build.Message.ErrorCodeText,（{ERROR_CODE}）{ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,クリエーターハブでオーディエンスの適格性を拡大
 Feature.Build.Message.ExperiencesLoadFailed,バーチャル空間を読み込めませんでした
@@ -2674,7 +2684,6 @@ Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
 Feature.Build.Message.PublishPromotionUpsell,ゲームの公開、おめでとうございます！Robloxでさらに多くのプレイヤーを獲得するために、無料プロモーションを{promotionCount}回利用できます。
 Feature.Build.Message.PublishPromotionUpsellSingular,ゲームの公開、おめでとうございます！Robloxでさらに多くのプレイヤーを獲得するために、無料プロモーションを1回利用できます。
-Feature.Build.Message.PublishReverted,公開を元に戻しました。
 Feature.Build.Message.QuestionnaireNeeded,このゲームはビルド外で編集されました。公開するには、コンテンツに関する質問フォームに回答してください。
 Feature.Build.Message.ReadyToPlay,あなたのゲームをRobloxでプレイするための準備完了です！
 Feature.Build.Message.ResetHours,{HOURS}時間後にリセット
@@ -2724,7 +2733,7 @@ Feature.Build.Title.BuildUsage,ビルド使用量
 Feature.Build.Title.ChangesNotLive,変更はまだ公開されていません
 Feature.Build.Title.ChatBuildUnavailable,ビルドは利用できません。
 Feature.Build.Title.Content,コンテンツ
-Feature.Build.Title.CreateYourAd,広告を作成
+Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,Robuxが1日の限度額に達しました
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,製品を編集
@@ -4148,7 +4157,7 @@ Feature.Moments.Description.HowToCaptureStep2,切り抜き操作を有効化し�
 Feature.Moments.Description.HowToCaptureStep3,ゲームプレイの写真とビデオを切り抜きます
 Feature.Moments.Description.LeaveMomentsCreation,変更内容はすべて失われますが、この切り抜きは引き続き<b>切り抜き</b>ギャラリーに保存されます。
 Feature.Moments.Description.NoMusicResults,音楽が見つかりません
-Feature.Moments.Description.NonInfiniteScrollEndBody,モーメントの停止ポイントに達しました。視聴を続けるには以下をタップしてください。
+Feature.Moments.Description.NonInfiniteScrollEndBody,フィードを一時停止しました。引き続き視聴するかどうかを決定できます。
 Feature.Moments.Description.NothingHereYet,まだ何もありません...
 Feature.Moments.Description.PublishMoment,モーメントの説明をしてください
 Feature.Moments.Description.TooManyUploads,本日アップロードしたビデオの数が多すぎます。明日もう一度お試しください。
@@ -4213,7 +4222,7 @@ Feature.Moments.Label.MomentUnavailableDefault,このモーメントは使用で
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,コメントはまだありません
-Feature.Moments.Label.NonInfiniteScrollEndTitle,現在、新着のモーメントはありません
+Feature.Moments.Label.NonInfiniteScrollEndTitle,他にも視聴可能なモーメントがあります
 Feature.Moments.Label.Photos,写真
 Feature.Moments.Label.PostDeleted,モーメントが削除されました
 Feature.Moments.Label.PostRemovedBody,投稿したモーメントは、コミュニティ基準に違反しています。
@@ -4253,6 +4262,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,しばらくしてから、もう一
 Feature.Moments.Label.VoiceModerationError,スクリプトは安全に関するルールに従う必要があります
 Feature.Moments.Label.VoicePlaceholder,ボイスオーバーのスクリプトを入力してください。文字数制限は{maxCount}文字です
 Feature.Moments.Label.VoiceTimeoutBody,ボイスオーバーの生成がタイムアウトしました。
+Feature.Moments.Label.VoiceTooManyNumbersError,スクリプトに含まれる桁数が多すぎます
 Feature.Moments.Label.WriteComment,コメントを書く
 Feature.Moments.Title.Comments,コメント
 Feature.Moments.Title.CommentsWithCappedCount,コメント（{count}件以上）
@@ -5084,7 +5094,7 @@ Feature.Schools.Heading.RemoveYourSchool,
 Feature.Schools.Heading.SchoolIsLive,あなたの学校が公開されました
 Feature.Schools.Heading.SchoolUnavailable,あなたの学校は利用できません
 Feature.Schools.Heading.SelectGraduationYear,卒業年度を選択
-Feature.Schools.Heading.ShareWithFriends,友達と共有
+Feature.Schools.Heading.ShareWithFriends,
 Feature.Schools.Heading.ThanksForInterest,ご関心をお寄せくださりありがとうございます
 Feature.Schools.Heading.YouJoinedSchool,{school}に参加しました！
 Feature.Schools.Heading.YourFounderReward,あなたの創立者報酬

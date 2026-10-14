@@ -889,14 +889,11 @@ CommonUI.Controls.Label.Wednesday,수요일
 CommonUI.Controls.Label.WednesdayAbbreviated,수
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,검색 결과 없음
-CommonUI.Features.Action.ClassicThemeSunsetGetPlus,Plus 구독
-CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,이동
 CommonUI.Features.Action.LessLowercase,간략히 보기
 CommonUI.Features.Action.MoreLowercase,
 CommonUI.Features.Action.Send,보내기
-CommonUI.Features.Heading.ClassicThemeSunset,Roblox 20주년을 함께 기념해 주셔서 감사합니다
 CommonUI.Features.Heading.GameDetails,체험 설명
 CommonUI.Features.Label.About,소개
 CommonUI.Features.Label.AboutUs,회사 소개
@@ -914,8 +911,6 @@ CommonUI.Features.Label.Catalog,Roblox 카탈로그
 CommonUI.Features.Label.ChannelWithChannelName,채널: {channelName}
 CommonUI.Features.Label.Charts,차트
 CommonUI.Features.Label.Chat,채팅
-CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plus 멤버는 클래식 테마를 계속 사용할 수 있습니다. 기념일 앱 아이콘만 사라집니다.
-CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,Roblox Plus 멤버십으로 클래식 테마를 계속 사용할 수 있습니다. 기념일 앱 아이콘만 사라집니다.
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,친구
 CommonUI.Features.Label.Connection,인맥
@@ -2653,7 +2648,6 @@ Feature.Build.Message.CompletedTasks,완료한 작업 {COUNT}개
 Feature.Build.Message.ConversationGone,이 대화는 더 이상 이용할 수 없습니다. 새 대화를 시작하세요.
 Feature.Build.Message.ConversationNotFound,이 대화를 찾지 못했습니다. 새 대화를 시작하세요.
 Feature.Build.Message.CreateGameToUseBuild,Build 사용을 시작하려면 새 게임을 만드세요.
-Feature.Build.Message.CreatedRevertedVer,되돌린 버전을 생성했습니다.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,크리에이터 허브에서 오디언스 자격을 확대하세요
 Feature.Build.Message.ExperiencesLoadFailed,체험을 불러오지 못함
@@ -2690,7 +2684,6 @@ Feature.Build.Message.PublishExpandAudience,오디언스를 확대하려면 게�
 Feature.Build.Message.PublishNotReverted,게시한 내용을 되돌리지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishPromotionUpsell,게임 게시가 완료되었습니다. 축하드립니다! Roblox에서 더 많은 플레이어를 확보할 수 있는 무료 프로모션이 {promotionCount}건 있습니다.
 Feature.Build.Message.PublishPromotionUpsellSingular,게임 게시가 완료되었습니다. 축하드립니다! Roblox에서 더 많은 플레이어를 확보할 수 있는 무료 프로모션이 1건 있습니다.
-Feature.Build.Message.PublishReverted,게시를 되돌렸습니다.
 Feature.Build.Message.QuestionnaireNeeded,이 게임은 Build 외부에서 편집되었습니다. 게시하려면 콘텐츠 설문지를 작성해 주세요.
 Feature.Build.Message.ReadyToPlay,게임을 Roblox에서 플레이할 준비가 되었습니다!
 Feature.Build.Message.ResetHours,{HOURS}시간 후 재설정

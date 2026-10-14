@@ -871,14 +871,11 @@ CommonUI.Controls.Label.Wednesday,วันพุธ
 CommonUI.Controls.Label.WednesdayAbbreviated,เรา
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,ไม่พบผลการค้นหา
-CommonUI.Features.Action.ClassicThemeSunsetGetPlus,สมัคร Plus
-CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,ไป
 CommonUI.Features.Action.LessLowercase,แสดงน้อยลง
 CommonUI.Features.Action.MoreLowercase,แสดงเพิ่ม
 CommonUI.Features.Action.Send,
-CommonUI.Features.Heading.ClassicThemeSunset,ขอบคุณที่ร่วมฉลองครบรอบ 20 ปีของ Roblox
 CommonUI.Features.Heading.GameDetails,รายละเอียดประสบการณ์
 CommonUI.Features.Label.About,เกี่ยวกับ
 CommonUI.Features.Label.AboutUs,เกี่ยวกับเรา
@@ -896,8 +893,6 @@ CommonUI.Features.Label.Catalog,แค็ตตาล็อก Roblox
 CommonUI.Features.Label.ChannelWithChannelName,แชนเนล: {channelName}
 CommonUI.Features.Label.Charts,อันดับ
 CommonUI.Features.Label.Chat,แชท
-CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,สมาชิก Roblox Plus จะยังคงใช้ธีมคลาสสิกต่อได้ เฉพาะไอคอนแอปฉลองครบรอบเท่านั้นที่จะยกเลิก
-CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,ผู้ใช้ที่เป็นสมาชิก Roblox Plus จะยังคงใช้ธีมคลาสสิกต่อได้ เฉพาะไอคอนแอปฉลองครบรอบเท่านั้นที่จะยกเลิก
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,เพื่อน
 CommonUI.Features.Label.Connection,คนรู้จัก
@@ -2635,7 +2630,6 @@ Feature.Build.Message.CompletedTasks,{COUNT} งานที่เสร็จ�
 Feature.Build.Message.ConversationGone,การสนทนานี้ใช้ไม่ได้อีกต่อไป โปรดเริ่มการสนทนาใหม่
 Feature.Build.Message.ConversationNotFound,ไม่พบการสนทนานี้ โปรดเริ่มการสนทนาใหม่
 Feature.Build.Message.CreateGameToUseBuild,สร้างเกมใหม่เพื่อเริ่มใช้ Build
-Feature.Build.Message.CreatedRevertedVer,สร้างเวอร์ชันที่แปลงกลับแล้ว
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,ขยายคุณสมบัติของกลุ่มเป้าหมายของคุณในศูนย์กลางครีเอเตอร์
 Feature.Build.Message.ExperiencesLoadFailed,ไม่สามารถโหลดประสบการณ์ได้
@@ -2672,7 +2666,6 @@ Feature.Build.Message.PublishExpandAudience,เผยแพร่เพื่อ
 Feature.Build.Message.PublishNotReverted,ย้อนกลับการเผยแพร่ของคุณไม่สำเร็จ โปรดลองอีกครั้ง
 Feature.Build.Message.PublishPromotionUpsell,ยินดีด้วยที่เผยแพร่เกมแล้ว! คุณมีโปรโมชันฟรี {promotionCount} ครั้งเพื่อเพิ่มผู้เล่นบน Roblox
 Feature.Build.Message.PublishPromotionUpsellSingular,ยินดีด้วยที่เผยแพร่เกมแล้ว! คุณมีโปรโมชันฟรี 1 ครั้งเพื่อเพิ่มผู้เล่นบน Roblox
-Feature.Build.Message.PublishReverted,แปลงการเผยแพร่กลับแล้ว
 Feature.Build.Message.QuestionnaireNeeded,เกมนี้ได้รับการแก้ไขนอก Build กรอกแบบสอบถามเกี่ยวกับเนื้อหาให้ครบถ้วนเพื่อเผยแพร่
 Feature.Build.Message.ReadyToPlay,เกมของคุณพร้อมให้เล่นบน Roblox แล้ว!
 Feature.Build.Message.ResetHours,รีเซ็ตใน {HOURS} ชั่วโมง

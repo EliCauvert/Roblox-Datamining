@@ -468,7 +468,7 @@ Authentication.SignUp.Description.BirthdayHelp3,"This helps us show you relevant
 Authentication.SignUp.Description.BirthdayHint,Enter date
 Authentication.SignUp.Description.BirthdayValuePropC,This helps us know what content to show you. It won't be visible to others
 Authentication.SignUp.Description.ClickNextAgreeToTerms,"By selecting Next, you agree to the Terms of Use, including the arbitration clause, and you acknowledge the Privacy Policy."
-Authentication.SignUp.Description.CreateAPassword,Create a password for your Roblox account
+Authentication.SignUp.Description.CreateAPassword,Choose how to secure your account.
 Authentication.SignUp.Description.CreateAccountPasskeyEmphasisDescription,"Passkeys allow you to sign in quickly with your Face ID, fingerprint, or the PIN you use to unlock your device."
 Authentication.SignUp.Description.CreatePasskeyOrOTP,Create a passkey for your Roblox account or add an email to sign in with a one time password.
 Authentication.SignUp.Description.EnsureNeverLoseAccount,This ensures that you never lose access to your Roblox account.
@@ -892,14 +892,11 @@ CommonUI.Controls.Label.Wednesday,Wednesday
 CommonUI.Controls.Label.WednesdayAbbreviated,We
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,No results found
-CommonUI.Features.Action.ClassicThemeSunsetGetPlus,Get Plus
-CommonUI.Features.Action.ClassicThemeSunsetManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,Go
 CommonUI.Features.Action.LessLowercase,less
 CommonUI.Features.Action.MoreLowercase,more
 CommonUI.Features.Action.Send,Send
-CommonUI.Features.Heading.ClassicThemeSunset,Thank you for celebrating 20 years of Roblox
 CommonUI.Features.Heading.GameDetails,Experience Details
 CommonUI.Features.Label.About,About
 CommonUI.Features.Label.AboutUs,About Us
@@ -917,8 +914,6 @@ CommonUI.Features.Label.Catalog,Roblox Catalog
 CommonUI.Features.Label.ChannelWithChannelName,Channel: {channelName}
 CommonUI.Features.Label.Charts,Charts
 CommonUI.Features.Label.Chat,Chat
-CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plus members keep the Classic theme. Only the anniversary app icon is retiring.
-CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,Your Roblox Plus membership keeps the Classic theme. Only the anniversary app icon is retiring.
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
 CommonUI.Features.Label.Connect,Friends
 CommonUI.Features.Label.Connection,Connection
@@ -2660,7 +2655,6 @@ Feature.Build.Message.CompletedTasks,{COUNT} completed tasks
 Feature.Build.Message.ConversationGone,This conversation is no longer available. Start a new one.
 Feature.Build.Message.ConversationNotFound,This conversation couldn't be found. Start a new one.
 Feature.Build.Message.CreateGameToUseBuild,Create a new game to start using Build.
-Feature.Build.Message.CreatedRevertedVer,Created a reverted version.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Expand your audience eligibility on Creator Hub
 Feature.Build.Message.ExperiencesLoadFailed,Couldn't load experiences
@@ -2697,7 +2691,6 @@ Feature.Build.Message.PublishExpandAudience,Publish to expand your audience
 Feature.Build.Message.PublishNotReverted,Your publish wasn't reverted. Try again.
 Feature.Build.Message.PublishPromotionUpsell,Congratulations on publishing your game! You have {promotionCount} free promotions available to gain more players on Roblox.
 Feature.Build.Message.PublishPromotionUpsellSingular,Congratulations on publishing your game! You have 1 free promotion available to gain more players on Roblox.
-Feature.Build.Message.PublishReverted,Reverted publish.
 Feature.Build.Message.QuestionnaireNeeded,This game was edited outside of Build. Complete the content questionnaire to publish.
 Feature.Build.Message.ReadyToPlay,Your game is ready to play on Roblox!
 Feature.Build.Message.ResetHours,Resets in {HOURS} hours
@@ -4276,6 +4269,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Wait a minute, then try again"
 Feature.Moments.Label.VoiceModerationError,Your script must follow the safety rules
 Feature.Moments.Label.VoicePlaceholder,Type your voiceover script. {maxCount} character limit
 Feature.Moments.Label.VoiceTimeoutBody,Voiceover generation timed out.
+Feature.Moments.Label.VoiceTooManyNumbersError,Script contains too many numbers
 Feature.Moments.Label.WriteComment,Write a comment
 Feature.Moments.Title.Comments,Comments
 Feature.Moments.Title.CommentsWithCappedCount,Comments ({count}+)
