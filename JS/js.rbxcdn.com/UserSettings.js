@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "281003d0164ef6fa8b639df9a07e4599678988d9"
+            id: "570c580a55d17c36e4e824d418910cc256ce8078"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "43bc8a3a-ea49-41a5-bd6a-d397b4f606fd", e._sentryDebugIdIdentifier = "sentry-dbid-43bc8a3a-ea49-41a5-bd6a-d397b4f606fd")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "f36563ff-84c9-4e2f-8048-18fe7fbb0f78", e._sentryDebugIdIdentifier = "sentry-dbid-f36563ff-84c9-4e2f-8048-18fe7fbb0f78")
     } catch (e) {}
 }(),
 function() {
@@ -46885,6 +46885,7 @@ function() {
                     },
                     approvedExperiences: {
                         noApprovedExperiences: "Description.NoApprovedExperiences",
+                        noApprovedExperiencesChildSide: "Description.NoApprovedExperiencesChildSide",
                         removeFromApproved: "Action.RemoveFromApproved",
                         confirmRevoke: "Heading.ConfirmRevoke",
                         confirmRevokeExperience: "Description.ConfirmRevokeExperience",
@@ -97571,7 +97572,7 @@ function() {
                             }), s && (0, D.jsx)(eq.Loading, {})]
                         }) : (0, D.jsx)("div", {
                             className: "text-description approved-experiences-empty-state",
-                            children: i(a.noApprovedExperiences)
+                            children: i(n || r ? a.noApprovedExperiences : a.noApprovedExperiencesChildSide)
                         })]
                     })
                 },
@@ -105917,7 +105918,42 @@ function() {
                             this.constructor = e
                         }
                         etX(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n)
-                    }(t, e), t.prototype.subscriptionsV2CheckSubscriptionReferralEligibilityRaw = function(e, t) {
+                    }(t, e), t.prototype.subscriptionsV2CancelSubscriptionPlanChangeRaw = function(e, t) {
+                        return et$(this, void 0, void 0, function() {
+                            var n, r;
+                            return etJ(this, function(i) {
+                                switch (i.label) {
+                                    case 0:
+                                        if (null === e.subscriptionId || void 0 === e.subscriptionId) throw new qe("subscriptionId", "Required parameter requestParameters.subscriptionId was null or undefined when calling subscriptionsV2CancelSubscriptionPlanChange.");
+                                        return n = {}, (r = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                            path: "/v2/subscriptions/{subscriptionId}/cancel-plan-change".replace("{".concat("subscriptionId", "}"), encodeURIComponent(String(e.subscriptionId))),
+                                            schemaPath: "/v2/subscriptions/{subscriptionId}/cancel-plan-change",
+                                            method: "POST",
+                                            headers: r,
+                                            query: n,
+                                            body: function(e) {
+                                                if (void 0 !== e) return null === e ? null : {
+                                                    planChangeId: e.planChangeId
+                                                }
+                                            }(e.cancelSubscriptionPlanChangeRequest)
+                                        }, t)];
+                                    case 1:
+                                        return [2, new qr(i.sent())]
+                                }
+                            })
+                        })
+                    }, t.prototype.subscriptionsV2CancelSubscriptionPlanChange = function(e, t) {
+                        return et$(this, void 0, void 0, function() {
+                            return etJ(this, function(n) {
+                                switch (n.label) {
+                                    case 0:
+                                        return [4, this.subscriptionsV2CancelSubscriptionPlanChangeRaw(e, t)];
+                                    case 1:
+                                        return n.sent(), [2]
+                                }
+                            })
+                        })
+                    }, t.prototype.subscriptionsV2CheckSubscriptionReferralEligibilityRaw = function(e, t) {
                         return et$(this, void 0, void 0, function() {
                             var n, r;
                             return etJ(this, function(i) {
@@ -112156,4 +112192,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("UserSettings");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-f90d067f37f126dc.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-0b84818d2179f521.js.map

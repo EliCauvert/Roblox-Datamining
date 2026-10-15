@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f6a244f1-9b21-79fe-692a-cbfc1f59d4d1")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "094dce0d-7c80-37d4-c21d-abc5bd6539c5")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -6955,12 +6955,12 @@
                     };
                     return (0, s.a)(c, h, u)
                 })(J),
-                Y = null != (r = null != (o = null == F ? void 0 : F.root) ? o : S.Root) ? r : y,
-                X = null != (a = null != (c = null == F ? void 0 : F.badge) ? c : S.Badge) ? a : v,
+                X = null != (r = null != (o = null == F ? void 0 : F.root) ? o : S.Root) ? r : y,
+                Y = null != (a = null != (c = null == F ? void 0 : F.badge) ? c : S.Badge) ? a : v,
                 Q = null != (f = null == R ? void 0 : R.root) ? f : A.root,
                 $ = null != (b = null == R ? void 0 : R.badge) ? b : A.badge,
                 ee = (0, m.u)({
-                    elementType: Y,
+                    elementType: X,
                     externalSlotProps: Q,
                     externalForwardedProps: M,
                     additionalProps: {
@@ -6971,13 +6971,13 @@
                     className: (0, s.c)(null == Q ? void 0 : Q.className, Z.root, w)
                 }),
                 et = (0, m.u)({
-                    elementType: X,
+                    elementType: Y,
                     externalSlotProps: $,
                     ownerState: J,
                     className: (0, s.c)(Z.badge, null == $ ? void 0 : $.className)
                 });
-            return (0, d.jsxs)(Y, (0, i._)({}, ee, {
-                children: [x, (0, d.jsx)(X, (0, i._)({}, et, {
+            return (0, d.jsxs)(X, (0, i._)({}, ee, {
+                children: [x, (0, d.jsx)(Y, (0, i._)({}, et, {
                     children: K
                 }))]
             }))
@@ -7809,7 +7809,7 @@
                     hasSecondaryAction: J,
                     selected: O
                 }),
-                Y = (t => {
+                X = (t => {
                     let {
                         alignItems: n,
                         button: r,
@@ -7827,11 +7827,11 @@
                         container: ["container"]
                     }, l.g, o)
                 })(Z),
-                X = (0, m.u)(G, u),
+                Y = (0, m.u)(G, u),
                 Q = U.root || k.Root || b,
                 $ = H.root || D.root || {},
                 ee = (0, r._)({
-                    className: (0, a.c)(Y.root, $.className, x),
+                    className: (0, a.c)(X.root, $.className, x),
                     disabled: R
                 }, V),
                 et = T || "li";
@@ -7839,8 +7839,8 @@
                 value: W,
                 children: (0, s.jsxs)(C, (0, r._)({
                     as: j,
-                    className: (0, a.c)(Y.container, _),
-                    ref: X,
+                    className: (0, a.c)(X.container, _),
+                    ref: Y,
                     ownerState: Z
                 }, z, {
                     children: [(0, s.jsx)(Q, (0, r._)({}, $, !(0, h.i)(Q) && {
@@ -7854,7 +7854,7 @@
                 value: W,
                 children: (0, s.jsxs)(Q, (0, r._)({}, $, {
                     as: et,
-                    ref: X
+                    ref: Y
                 }, !(0, h.i)(Q) && {
                     ownerState: (0, r._)({}, Z, $.ownerState)
                 }, ee, {
@@ -8684,8 +8684,8 @@
                     scrollButtons: K = "auto",
                     selectionFollowsFocus: J,
                     slots: Z = {},
-                    slotProps: Y = {},
-                    TabIndicatorProps: X = {},
+                    slotProps: X = {},
+                    TabIndicatorProps: Y = {},
                     TabScrollButtonProps: Q = {},
                     textColor: $ = "primary",
                     value: ee,
@@ -8740,12 +8740,12 @@
                 })(ed),
                 em = (0, f.u)({
                     elementType: Z.StartScrollButtonIcon,
-                    externalSlotProps: Y.startScrollButtonIcon,
+                    externalSlotProps: X.startScrollButtonIcon,
                     ownerState: ed
                 }),
                 eh = (0, f.u)({
                     elementType: Z.EndScrollButtonIcon,
-                    externalSlotProps: Y.endScrollButtonIcon,
+                    externalSlotProps: X.endScrollButtonIcon,
                     ownerState: ed
                 }),
                 [ef, eg] = a.useState(!1),
@@ -8937,10 +8937,10 @@
                 updateIndicator: e_,
                 updateScrollButtons: eB
             }), [e_, eB]);
-            let eP = (0, u.jsx)(P, (0, o._)({}, X, {
-                    className: (0, i.c)(ep.indicator, X.className),
+            let eP = (0, u.jsx)(P, (0, o._)({}, Y, {
+                    className: (0, i.c)(ep.indicator, Y.className),
                     ownerState: ed,
-                    style: (0, o._)({}, ey, X.style)
+                    style: (0, o._)({}, ey, Y.style)
                 })),
                 eO = 0,
                 eH = a.Children.map(T, t => {
@@ -9114,7 +9114,7 @@
                     variant: J = "outlined"
                 } = i,
                 Z = (0, r._)(i, y),
-                Y = (0, n._)({}, i, {
+                X = (0, n._)({}, i, {
                     autoFocus: h,
                     color: E,
                     disabled: I,
@@ -9125,14 +9125,14 @@
                     select: q,
                     variant: J
                 }),
-                X = (t => {
+                Y = (t => {
                     let {
                         classes: n
                     } = t;
                     return (0, a.a)({
                         root: ["root"]
                     }, g, n)
-                })(Y),
+                })(X),
                 Q = {};
             "outlined" === J && (D && void 0 !== D.shrink && (Q.notched = D.shrink), Q.label = R), q && (W && W.native || (Q.id = void 0), Q["aria-describedby"] = void 0);
             let $ = (0, c.u)(k),
@@ -9160,7 +9160,7 @@
                     inputProps: j
                 }, Q, _));
             return (0, l.jsxs)(b, (0, n._)({
-                className: (0, a.c)(X.root, C),
+                className: (0, a.c)(Y.root, C),
                 disabled: I,
                 error: S,
                 fullWidth: x,
@@ -9168,7 +9168,7 @@
                 required: z,
                 color: E,
                 variant: J,
-                ownerState: Y
+                ownerState: X
             }, Z, {
                 children: [null != R && "" !== R && (0, l.jsx)(d.I, (0, n._)({
                     htmlFor: $,
@@ -10130,7 +10130,7 @@
             outline: 0,
             position: "relative"
         }),
-        Y = o.forwardRef(function(t, n) {
+        X = o.forwardRef(function(t, n) {
             var r, a, i;
             let l, m, h, f, y, v = J({
                     props: t,
@@ -10256,7 +10256,7 @@
                 })
             })
         });
-    var X = (0, a.default)({
+    var Y = (0, a.default)({
             name: "TreeView"
         })(function(t, n) {
             var o, a, l = n.variant,
@@ -10274,14 +10274,14 @@
             var s = t.variant,
                 u = t.className,
                 c = (0, r.a)(t, ["children", "classes", "defaultCollapseIcon", "defaultExpandIcon", "variant", "className"]),
-                d = X((0, r._)((0, r._)({}, c), {
+                d = Y((0, r._)((0, r._)({}, c), {
                     variant: void 0 === s ? "dense" : s
                 }), {
                     props: {
                         classes: (0, l.default)(i, u)
                     }
                 });
-            return o.default.createElement(Y, (0, r._)({}, c, {
+            return o.default.createElement(X, (0, r._)({}, c, {
                 slots: {
                     collapseIcon: h.E,
                     expandIcon: f.N
@@ -10848,16 +10848,16 @@
                     className: z.iconContainer
                 }),
                 Z = null != (l = x.label) ? l : eb,
-                Y = (0, c.k)({
+                X = (0, c.k)({
                     elementType: Z,
                     getSlotProps: N,
                     externalSlotProps: T.label,
                     ownerState: {},
                     className: z.label
                 }),
-                X = null != (p = x.checkbox) ? p : eS,
+                Y = null != (p = x.checkbox) ? p : eS,
                 Q = (0, c.k)({
-                    elementType: X,
+                    elementType: Y,
                     getSlotProps: L,
                     externalSlotProps: T.checkbox,
                     ownerState: {},
@@ -10912,7 +10912,7 @@
                                 slots: x,
                                 slotProps: T
                             })]
-                        })), (0, d.jsx)(X, (0, s._)({}, Q)), U.editing ? (0, d.jsx)(et, (0, s._)({}, en)) : (0, d.jsx)(Z, (0, s._)({}, Y)), (0, d.jsx)(er, (0, s._)({}, ea))]
+                        })), (0, d.jsx)(Y, (0, s._)({}, Q)), U.editing ? (0, d.jsx)(et, (0, s._)({}, en)) : (0, d.jsx)(Z, (0, s._)({}, X)), (0, d.jsx)(er, (0, s._)({}, ea))]
                     })), A && (0, d.jsx)(eE, (0, s._)({
                         as: $
                     }, ee))]
@@ -12832,11 +12832,11 @@
                 n.set(t, !0)
             }), n
         }),
-        Y = j((t, n) => {
+        X = j((t, n) => {
             var r, o;
             return null == (r = null == (o = t.itemMetaLookup[n]) ? void 0 : o.selectable) || r
         }),
-        X = {
+        Y = {
             selectedItemsRaw: j(t => t.selectedItems),
             selectedItems: J,
             selectedItemsMap: Z,
@@ -12845,9 +12845,9 @@
             isCheckboxSelectionEnabled: j(t => t.checkboxSelection),
             propagationRules: j(t => t.selectionPropagation),
             isItemSelected: j(Z, (t, n) => t.has(n)),
-            isFeatureEnabledForItem: j(Y, t => !t.disableSelection, (t, n, r) => n && t),
-            canItemBeSelected: j(K.isItemDisabled, Y, t => !t.disableSelection, (t, n, r, o) => r && !t && n),
-            isItemSelectable: Y
+            isFeatureEnabledForItem: j(X, t => !t.disableSelection, (t, n, r) => n && t),
+            canItemBeSelected: j(K.isItemDisabled, X, t => !t.disableSelection, (t, n, r, o) => r && !t && n),
+            isItemSelectable: X
         },
         Q = _(t => t.expandedItems, t => {
             let n = new Map;
@@ -12939,7 +12939,7 @@
             isItemBeingEdited: j((t, n) => null != n && t.editedItemId === n),
             isAnyItemBeingEdited: j(t => !!t.editedItemId)
         },
-        el = _(X.selectedItems, $.expandedItemsMap, K.itemMetaLookup, K.disabledItemFocusable, t => K.itemOrderedChildrenIds(t, null), (t, n, r, o, a) => {
+        el = _(Y.selectedItems, $.expandedItemsMap, K.itemMetaLookup, K.disabledItemFocusable, t => K.itemOrderedChildrenIds(t, null), (t, n, r, o, a) => {
             let i = t.find(t => {
                 if (!o && W(r, t)) return !1;
                 let a = r[t];
@@ -13010,7 +13010,7 @@
         } = t, {
             store: o,
             publicAPI: a
-        } = v(), i = H(o, $.isItemExpandable, n), l = H(o, eu.isItemLoading, n), s = H(o, eu.itemHasError, n), u = ec(r) || i, c = H(o, $.isItemExpanded, n), d = H(o, es.isItemFocused, n), p = H(o, X.isItemSelected, n), m = H(o, K.isItemDisabled, n), h = H(o, ei.isItemBeingEdited, n), f = {
+        } = v(), i = H(o, $.isItemExpandable, n), l = H(o, eu.isItemLoading, n), s = H(o, eu.itemHasError, n), u = ec(r) || i, c = H(o, $.isItemExpanded, n), d = H(o, es.isItemFocused, n), p = H(o, Y.isItemSelected, n), m = H(o, K.isItemDisabled, n), h = H(o, ei.isItemBeingEdited, n), f = {
             expandable: u,
             expanded: c,
             focused: d,
@@ -13028,14 +13028,14 @@
                 handleExpansion: t => {
                     if (f.disabled) return;
                     f.focused || o.focus.focusItem(t, n);
-                    let r = X.isMultiSelectEnabled(o.state) && (t.shiftKey || t.ctrlKey || t.metaKey);
+                    let r = Y.isMultiSelectEnabled(o.state) && (t.shiftKey || t.ctrlKey || t.metaKey);
                     !f.expandable || r && $.isItemExpanded(o.state, n) || o.expansion.setItemExpansion({
                         event: t,
                         itemId: n
                     })
                 },
                 handleSelection: t => {
-                    X.canItemBeSelected(o.state, n) && (f.focused || f.editing || o.focus.focusItem(t, n), X.isMultiSelectEnabled(o.state) && (t.shiftKey || t.ctrlKey || t.metaKey) ? t.shiftKey ? o.selection.expandSelectionRange(t, n) : o.selection.setItemSelection({
+                    Y.canItemBeSelected(o.state, n) && (f.focused || f.editing || o.focus.focusItem(t, n), Y.isMultiSelectEnabled(o.state) && (t.shiftKey || t.ctrlKey || t.metaKey) ? t.shiftKey ? o.selection.expandSelectionRange(t, n) : o.selection.setItemSelection({
                         event: t,
                         itemId: n,
                         keepExistingSelection: !0
@@ -13047,7 +13047,7 @@
                 },
                 handleCheckboxSelection: t => {
                     let r = t.nativeEvent.shiftKey,
-                        a = X.isMultiSelectEnabled(o.state);
+                        a = Y.isMultiSelectEnabled(o.state);
                     a && r ? o.selection.expandSelectionRange(t, n) : o.selection.setItemSelection({
                         event: t,
                         itemId: n,
@@ -13216,7 +13216,7 @@
         return o
     }, "n", 0, function(t) {
         return f("MuiTreeItem", t)
-    }, "o", 0, g, "p", 0, f, "q", 0, l, "r", 0, d, "s", 0, X, "t", 0, ed, "u", 0, v, "v", 0, y, "w", 0, b, "x", 0, function(t) {
+    }, "o", 0, g, "p", 0, f, "q", 0, l, "r", 0, d, "s", 0, Y, "t", 0, ed, "u", 0, v, "v", 0, y, "w", 0, b, "x", 0, function(t) {
         let {
             storeParameters: n,
             items: r,
@@ -13299,25 +13299,23 @@
     var n, r = t.i(230242),
         o = t.i(169533),
         a = t.i(80768),
-        i = t.i(127229);
-    let l = "u" < typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
-    var s = t.i(489427);
-    t.i(728441), t.i(823979), t.i(350941);
-    let u = s.GLOBAL_OBJ;
+        i = t.i(176325),
+        l = t.i(378862),
+        s = t.i(6340);
 
-    function c() {
+    function u() {
         let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-            n = u.document,
-            s = (null == n ? void 0 : n.head) || (null == n ? void 0 : n.body);
-        if (!s) {
-            l && o.debug.error("[showReportDialog] Global document not defined");
+            n = s.WINDOW.document,
+            u = (null == n ? void 0 : n.head) || (null == n ? void 0 : n.body);
+        if (!u) {
+            l.DEBUG_BUILD && o.debug.error("[showReportDialog] Global document not defined");
             return
         }
         let c = (0, r.getCurrentScope)(),
             d = (0, r.getClient)(),
             p = null == d ? void 0 : d.getDsn();
         if (!p) {
-            l && o.debug.error("[showReportDialog] DSN not configured");
+            l.DEBUG_BUILD && o.debug.error("[showReportDialog] DSN not configured");
             return
         }
         let m = {
@@ -13328,21 +13326,8 @@
                 },
                 eventId: t.eventId || (0, a.lastEventId)()
             },
-            h = u.document.createElement("script");
-        h.async = !0, h.crossOrigin = "anonymous", h.src = function(t, n) {
-            let r, o, a = (0, i.makeDsn)(t);
-            if (!a) return "";
-            let l = "".concat((r = a.protocol ? "".concat(a.protocol, ":") : "", o = a.port ? ":".concat(a.port) : "", "".concat(r, "//").concat(a.host).concat(o).concat(a.path ? "/".concat(a.path) : "", "/api/")), "embed/error-page/"),
-                s = "dsn=".concat((0, i.dsnToString)(a));
-            for (let t in n)
-                if ("dsn" !== t && "onClose" !== t)
-                    if ("user" === t) {
-                        let t = n.user;
-                        if (!t) continue;
-                        t.name && (s += "&name=".concat(encodeURIComponent(t.name))), t.email && (s += "&email=".concat(encodeURIComponent(t.email)))
-                    } else s += "&".concat(encodeURIComponent(t), "=").concat(encodeURIComponent(n[t]));
-            return "".concat(l, "?").concat(s)
-        }(p, m);
+            h = s.WINDOW.document.createElement("script");
+        h.async = !0, h.crossOrigin = "anonymous", h.src = (0, i.getReportDialogEndpoint)(p, m);
         let {
             onLoad: f,
             onClose: g
@@ -13352,26 +13337,26 @@
                 if ("__sentry_reportdialog_closed__" === n.data) try {
                     g()
                 } finally {
-                    u.removeEventListener("message", t)
+                    s.WINDOW.removeEventListener("message", t)
                 }
             };
-            u.addEventListener("message", t)
+            s.WINDOW.addEventListener("message", t)
         }
-        s.appendChild(h)
+        u.appendChild(h)
     }
-    var d = t.i(416340);
-    let p = "u" < typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
-    var m = t.i(379705);
-    let h = Symbol.for("react.forward_ref"),
-        f = Symbol.for("react.memo"),
-        g = {};
-    g[h] = {
+    var c = t.i(416340);
+    let d = "u" < typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
+    var p = t.i(379705);
+    let m = Symbol.for("react.forward_ref"),
+        h = Symbol.for("react.memo"),
+        f = {};
+    f[m] = {
         $$typeof: !0,
         render: !0,
         defaultProps: !0,
         displayName: !0,
         propTypes: !0
-    }, g[f] = {
+    }, f[h] = {
         $$typeof: !0,
         compare: !0,
         defaultProps: !0,
@@ -13379,12 +13364,12 @@
         propTypes: !0,
         type: !0
     }, Object.defineProperty.bind(Object), Object.getOwnPropertyNames.bind(Object), null == (n = Object.getOwnPropertySymbols) || n.bind(Object), Object.getOwnPropertyDescriptor.bind(Object), Object.getPrototypeOf.bind(Object);
-    let y = {
+    let g = {
         componentStack: null,
         error: null,
         eventId: null
     };
-    class v extends d.Component {
+    class y extends c.Component {
         componentDidCatch(t, n) {
             let {
                 componentStack: o
@@ -13392,15 +13377,15 @@
                 beforeCapture: i,
                 onError: l,
                 showDialog: s,
-                dialogOptions: u
+                dialogOptions: d
             } = this.props;
-            (0, r.withScope)(p => {
-                i && i(p, t, o);
+            (0, r.withScope)(m => {
+                i && i(m, t, o);
                 let h = function(t, n, o) {
                     let i, {
                         componentStack: l
                     } = n;
-                    if (null !== (i = d.version.match(/^([^.]+)/)) && parseInt(i[0]) >= 17 && (0, m.isError)(t) && l) {
+                    if (null !== (i = c.version.match(/^([^.]+)/)) && parseInt(i[0]) >= 17 && (0, p.isError)(t) && l) {
                         let n, r = Error(t.message);
                         r.name = "React ErrorBoundary ".concat(t.name), r.stack = l, n = new WeakSet,
                             function t(r, o) {
@@ -13419,8 +13404,8 @@
                         type: "auto.function.react.error_boundary"
                     }
                 });
-                l && l(t, o, h), s && (this._lastEventId = h, this._openFallbackReportDialog && c({
-                    ...u,
+                l && l(t, o, h), s && (this._lastEventId = h, this._openFallbackReportDialog && u({
+                    ...d,
                     eventId: h
                 })), this.setState({
                     error: t,
@@ -13443,7 +13428,7 @@
             } = this.state, {
                 onUnmount: o
             } = this.props;
-            o && (this.state === y ? o(null, null, null) : o(t, n, r)), this._cleanupHook && (this._cleanupHook(), this._cleanupHook = void 0)
+            o && (this.state === g ? o(null, null, null) : o(t, n, r)), this._cleanupHook && (this._cleanupHook(), this._cleanupHook = void 0)
         }
         resetErrorBoundary() {
             let {
@@ -13453,7 +13438,7 @@
                 componentStack: r,
                 eventId: o
             } = this.state;
-            t && t(n, r, o), this.setState(y)
+            t && t(n, r, o), this.setState(g)
         }
         render() {
             let {
@@ -13461,26 +13446,26 @@
                 children: n
             } = this.props, r = this.state;
             if (null === r.componentStack) return "function" == typeof n ? n() : n;
-            let a = "function" == typeof t ? d.createElement(t, {
+            let a = "function" == typeof t ? c.createElement(t, {
                 error: r.error,
                 componentStack: r.componentStack,
                 resetError: () => this.resetErrorBoundary(),
                 eventId: r.eventId
             }) : t;
-            return d.isValidElement(a) ? a : (t && p && o.debug.warn("fallback did not produce a valid ReactElement"), null)
+            return c.isValidElement(a) ? a : (t && d && o.debug.warn("fallback did not produce a valid ReactElement"), null)
         }
         constructor(t) {
-            super(t), this.state = y, this._openFallbackReportDialog = !0;
+            super(t), this.state = g, this._openFallbackReportDialog = !0;
             const n = (0, r.getClient)();
             n && t.showDialog && (this._openFallbackReportDialog = !1, this._cleanupHook = n.on("afterSendEvent", n => {
-                !n.type && this._lastEventId && n.event_id === this._lastEventId && c({
+                !n.type && this._lastEventId && n.event_id === this._lastEventId && u({
                     ...t.dialogOptions,
                     eventId: this._lastEventId
                 })
             }))
         }
     }
-    t.s(["ErrorBoundary", 0, v], 445465)
+    t.s(["ErrorBoundary", 0, y], 445465)
 }, 602635, t => {
     "use strict";
     var n = t.i(721281),
@@ -13531,8 +13516,8 @@
         K = t.i(393423),
         J = t.i(277107),
         Z = t.i(880079),
-        Y = t.i(619302),
-        X = t.i(270604),
+        X = t.i(619302),
+        Y = t.i(270604),
         Q = t.i(507532),
         $ = t.i(165984),
         ee = t.i(929485),
@@ -13585,8 +13570,8 @@
         eK = t.i(721034),
         eJ = t.i(611915),
         eZ = t.i(691236),
-        eY = t.i(825052),
-        eX = t.i(589624),
+        eX = t.i(825052),
+        eY = t.i(589624),
         eQ = t.i(458451),
         e$ = t.i(79187),
         e0 = t.i(533414),
@@ -13719,10 +13704,10 @@
         tJ = "Updates",
         tZ = "Advertise";
 
-    function tY(t) {
+    function tX(t) {
         return ["CreatorHub", "Home", "CreatorDashboard", "RoadMap", "Explore"].includes(t)
     }
-    let tX = /^[a-z]{2}-[a-z]{2}$/,
+    let tY = /^[a-z]{2}-[a-z]{2}$/,
         tQ = () => {
             let {
                 target: t,
@@ -13735,8 +13720,8 @@
                     l = tH(t, n),
                     s = null != (r = null == i ? void 0 : i.split("/").filter(Boolean)) ? r : [],
                     u = "docs" === s[0] ? s[1] : s[0],
-                    c = u && tX.test(u) ? "".concat(u, "/") : "",
-                    d = tY(a) ? "/" : l,
+                    c = u && tY.test(u) ? "".concat(u, "/") : "",
+                    d = tX(a) ? "/" : l,
                     p = "Store" === a ? "/" : "".concat(l, "store/"),
                     m = "Talent" === a ? "/" : "".concat(l, "talent/"),
                     h = o ? "/".concat(c) : "".concat(l, "docs/"),
@@ -13840,7 +13825,7 @@
             var n, o;
             let {
                 children: a
-            } = t, i = (0, eX.useRouter)(), {
+            } = t, i = (0, eY.useRouter)(), {
                 pathname: l
             } = i, {
                 user: s
@@ -13949,7 +13934,7 @@
                         ...t,
                         [r]: n
                     }
-                }), n = i.query.tab, l && (t6.has(l) || l && l.startsWith("/dashboard/group/") || "/dashboard/transactions" === l && "string" == typeof n && t5.has(n)) || p !== tG || eX.default.push({
+                }), n = i.query.tab, l && (t6.has(l) || l && l.startsWith("/dashboard/group/") || "/dashboard/transactions" === l && "string" == typeof n && t5.has(n)) || p !== tG || eY.default.push({
                     pathname: f
                 })
             }, [f, l, i.query.tab, p, b, E]), T = (0, r.useCallback)(t => {
@@ -13962,7 +13947,7 @@
                     let n = {
                         ...i.query
                     };
-                    delete n.groupId, eX.default.push({
+                    delete n.groupId, eY.default.push({
                         query: n
                     }, void 0, {
                         shallow: !0
@@ -14554,7 +14539,7 @@
                 })(E, v), [v, E])
             }(), {
                 asPath: v
-            } = (0, eX.useRouter)(), {
+            } = (0, eY.useRouter)(), {
                 translate: b
             } = (0, e$.useTranslation)(), {
                 currentWorkspace: {
@@ -15030,7 +15015,7 @@
                 justifyContent: "space-between"
             }
         })),
-        nY = t => {
+        nX = t => {
             let {
                 value: n,
                 selected: o,
@@ -15045,26 +15030,26 @@
                 onClick: () => a(n)
             }, i, o && r.default.createElement(f.CheckIcon, null))
         },
-        nX = t => {
+        nY = t => {
             let {
                 sortBy: n,
                 onSortUpdate: o
             } = t, {
                 translate: a
             } = (0, e$.useTranslation)();
-            return r.default.createElement(s.Grid, null, r.default.createElement(nY, {
+            return r.default.createElement(s.Grid, null, r.default.createElement(nX, {
                 value: t1,
                 selected: n === t1,
                 onSelect: o
-            }, a("Label.Priority")), r.default.createElement(nY, {
+            }, a("Label.Priority")), r.default.createElement(nX, {
                 value: t2,
                 selected: n === t2,
                 onSelect: o
-            }, a("Label.RecentlyUsed")), r.default.createElement(nY, {
+            }, a("Label.RecentlyUsed")), r.default.createElement(nX, {
                 value: t4,
                 selected: n === t4,
                 onSelect: o
-            }, a("Label.DateCreated")), r.default.createElement(nY, {
+            }, a("Label.DateCreated")), r.default.createElement(nX, {
                 value: t3,
                 selected: n === t3,
                 onSelect: o
@@ -15180,7 +15165,7 @@
                     l(!1)
                 },
                 startIcon: r.default.createElement(v.ChevronLeftIcon, null)
-            }, w("Label.SortGroupsBy")), r.default.createElement(nX, {
+            }, w("Label.SortGroupsBy")), r.default.createElement(nY, {
                 sortBy: n,
                 onSortUpdate: u
             }), r.default.createElement(y.Button, {
@@ -15506,13 +15491,13 @@
                 enableGroupModeration: K,
                 currentProduct: J,
                 sendEvent: Z
-            } = tS(), Y = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium")), {
+            } = tS(), X = (0, m.useMediaQuery)(t => t.breakpoints.down("Medium")), {
                 transitions: {
                     duration: {
-                        standard: X
+                        standard: Y
                     }
                 }
-            } = (0, S.useTheme)(), Q = Y && P, $ = !Y && P, ee = Y && H, et = !Y && H, [en, er] = (0, r.useState)(n), eo = (0, r.useCallback)(() => {
+            } = (0, S.useTheme)(), Q = X && P, $ = !X && P, ee = X && H, et = !X && H, [en, er] = (0, r.useState)(n), eo = (0, r.useCallback)(() => {
                 O(!0), Z((t => {
                     let {
                         surfaceProduct: n,
@@ -15533,15 +15518,15 @@
             }, [J, Z]);
             (0, r.useEffect)(() => {
                 let t;
-                return !P && H && (t = setTimeout(() => U(!1), X)), () => {
+                return !P && H && (t = setTimeout(() => U(!1), Y)), () => {
                     t && clearTimeout(t)
                 }
-            }, [P, H, X]), (0, r.useEffect)(() => {
+            }, [P, H, Y]), (0, r.useEffect)(() => {
                 let t;
-                return P || (t = setTimeout(() => er(n), X)), () => {
+                return P || (t = setTimeout(() => er(n), Y)), () => {
                     t && clearTimeout(t)
                 }
-            }, [n, P, X]);
+            }, [n, P, Y]);
             let ea = (0, r.useCallback)(() => {
                     O(!1), Z((t => {
                         let {
@@ -15671,7 +15656,7 @@
                 }
             }, r.default.createElement(j.ListSubheader, null, r.default.createElement(l.Typography, {
                 variant: "captionHeader"
-            }, f("Label.SortGroupsBy"))), r.default.createElement(nX, {
+            }, f("Label.SortGroupsBy"))), r.default.createElement(nY, {
                 sortBy: a,
                 onSortUpdate: d
             })), r.default.createElement(_.Select, {
@@ -15740,7 +15725,7 @@
                 isLoading: c,
                 setCurrentWorkspace: d
             } = t9(), p = (0, r.useCallback)(() => {
-                /^https?:\/\//.test(a) ? window.location.assign(a) : eX.default.push(a)
+                /^https?:\/\//.test(a) ? window.location.assign(a) : eY.default.push(a)
             }, [a]);
             return null === s || c ? r.default.createElement("div", {
                 className: o
@@ -16235,9 +16220,9 @@
                 Ads: q,
                 Roblox: W,
                 Documentation: G
-            } = tQ(), K = ["Documentation", "Assistant"].includes(j), [J, Z] = (0, r.useState)(null), Y = (0, r.useCallback)((t, n) => {
+            } = tQ(), K = ["Documentation", "Assistant"].includes(j), [J, Z] = (0, r.useState)(null), X = (0, r.useCallback)((t, n) => {
                 l(nT(t)), null != n && Z(n), "temporary" === C && "Learn" !== t && k(!1), "Learn" === t ? K && x(!0) : x(!1)
-            }, [C, l, x, k, K]), X = (0, r.useMemo)(() => {
+            }, [C, l, x, k, K]), Y = (0, r.useMemo)(() => {
                 if (w) return "Documentation";
                 if (n.startsWith(N.updates)) return tJ;
                 if (j === tG) {
@@ -16249,10 +16234,10 @@
                 }
                 return [tW, "Documentation", tK, "Forum", tZ, tJ, "Talent"].includes(j) ? j : null
             }, [w, j, n, N.creations, N.analytics, N.collaborations, N.updates, null == D ? void 0 : D.visible]);
-            null != J && X === J && Z(null);
-            let Q = null != J ? J : X;
+            null != J && Y === J && Z(null);
+            let Q = null != J ? J : Y;
             return ((0, r.useEffect)(() => {
-                let t = eX.default.events;
+                let t = eY.default.events;
                 if (!t) return;
                 let n = () => {
                     Z(null)
@@ -16273,7 +16258,7 @@
                 compact: b,
                 icon: r.default.createElement(M.RobloxIcon, null),
                 label: R("Label.Creator"),
-                onClick: () => Y("Header"),
+                onClick: () => X("Header"),
                 href: N.home
             })) : r.default.createElement(s.Grid, {
                 classes: {
@@ -16289,7 +16274,7 @@
                 enableAnimation: I,
                 icon: r.default.createElement(M.RobloxIcon, null),
                 label: R("Label.Creator"),
-                onClick: () => Y("Header"),
+                onClick: () => X("Header"),
                 href: N.home
             }), o && r.default.createElement(n9, {
                 collapsed: b
@@ -16300,7 +16285,7 @@
                 active: "Home" === Q,
                 activeIcon: r.default.createElement(B.BuilderHomeFillIcon, null),
                 label: R("Heading.Home"),
-                onClick: () => Y("Home", "Home"),
+                onClick: () => X("Home", "Home"),
                 href: N.home
             }), o && r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16315,7 +16300,7 @@
                 }),
                 active: "Creations" === Q,
                 label: R("Heading.Creations"),
-                onClick: () => Y("Creations", "Creations"),
+                onClick: () => X("Creations", "Creations"),
                 href: N.creations
             }), r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16330,7 +16315,7 @@
                 }),
                 active: "Documentation" === Q,
                 label: R("Heading.Learn"),
-                onClick: () => Y("Learn", "Documentation"),
+                onClick: () => X("Learn", "Documentation"),
                 href: G.home
             }), !(null == _ ? void 0 : _.includes(tK)) && r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16345,7 +16330,7 @@
                 }),
                 active: "Store" === Q,
                 label: R("Heading.Store"),
-                onClick: () => Y("Store", "Store"),
+                onClick: () => X("Store", "Store"),
                 href: z.home
             }), r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16354,7 +16339,7 @@
                 activeIcon: r.default.createElement(O.BuilderChatSideFillIcon, null),
                 active: "Forum" === Q,
                 label: R("Heading.Forums"),
-                onClick: () => Y("Forum", "Forum"),
+                onClick: () => X("Forum", "Forum"),
                 href: V.home
             }), r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16369,7 +16354,7 @@
                 }),
                 active: Q === tJ,
                 label: R("Heading.Updates"),
-                onClick: () => Y(tJ, tJ),
+                onClick: () => X(tJ, tJ),
                 href: N.updates
             }), o && r.default.createElement(r.default.Fragment, null, (!b || v) && r.default.createElement("div", {
                 className: "padding-y-small width-full"
@@ -16380,7 +16365,7 @@
                 activeIcon: r.default.createElement(rr, null),
                 active: "Finances" === Q,
                 label: R("Heading.Finances"),
-                onClick: () => Y("Finances", "Finances"),
+                onClick: () => X("Finances", "Finances"),
                 href: N.finances
             }), r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16395,7 +16380,7 @@
                 }),
                 active: "Analytics" === Q,
                 label: R("Title.Analytics"),
-                onClick: () => Y("Analytics", "Analytics"),
+                onClick: () => X("Analytics", "Analytics"),
                 href: N.analytics
             }), F === t0 && r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16410,7 +16395,7 @@
                 }),
                 active: "Collaboration" === Q,
                 label: R("Heading.Collaboration"),
-                onClick: () => Y("Collaboration", "Collaboration"),
+                onClick: () => X("Collaboration", "Collaboration"),
                 href: N.groupProfile
             }), r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16425,7 +16410,7 @@
                     size: "Medium"
                 }),
                 label: R("Heading.Ads"),
-                onClick: () => Y("Ads", tZ),
+                onClick: () => X("Ads", tZ),
                 href: q.home
             }), (!b || v) && r.default.createElement("div", {
                 className: "padding-y-small width-full"
@@ -16462,7 +16447,7 @@
                 compact: b,
                 icon: r.default.createElement(M.RobloxIcon, null),
                 label: R("Label.RobloxWebsite"),
-                onClick: () => Y("RobloxWebsite"),
+                onClick: () => X("RobloxWebsite"),
                 href: W.home
             }), !L && r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16470,7 +16455,7 @@
                 icon: r.default.createElement(U.StudioIcon, null),
                 label: R("Heading.Studio"),
                 onClick: () => {
-                    Y("studio"), i()
+                    X("studio"), i()
                 }
             }), "persistent" === C && r.default.createElement(rl, {
                 enableAnimation: I && S,
@@ -16945,7 +16930,7 @@
         },
         rL = {
             icon: r.default.createElement(Q.HomeOutlinedIcon, null),
-            activeIcon: r.default.createElement(X.HomeIcon, null),
+            activeIcon: r.default.createElement(Y.HomeIcon, null),
             key: "Home",
             title: "Heading.Home",
             href: tL,
@@ -16953,7 +16938,7 @@
         },
         rN = {
             icon: r.default.createElement(Q.HomeOutlinedIcon, null),
-            activeIcon: r.default.createElement(X.HomeIcon, null),
+            activeIcon: r.default.createElement(Y.HomeIcon, null),
             key: "Home",
             title: "Heading.Home",
             href: tN,
@@ -16961,7 +16946,7 @@
         },
         rM = {
             icon: r.default.createElement(Q.HomeOutlinedIcon, null),
-            activeIcon: r.default.createElement(X.HomeIcon, null),
+            activeIcon: r.default.createElement(Y.HomeIcon, null),
             key: "Home",
             title: "Heading.Home",
             href: tM,
@@ -17120,7 +17105,7 @@
             },
             subTabs: [rq, rJ]
         },
-        rY = [rL, {
+        rX = [rL, {
             icon: r.default.createElement(G.DashboardOutlinedIcon, null),
             activeIcon: r.default.createElement(W.DashboardIcon, null),
             key: "CreatorDashboard",
@@ -17135,14 +17120,14 @@
             href: "".concat(tL, "/store"),
             path: "/store"
         }, {
-            icon: r.default.createElement(Y.PeopleOutlineOutlinedIcon, null),
+            icon: r.default.createElement(X.PeopleOutlineOutlinedIcon, null),
             activeIcon: r.default.createElement(Z.PeopleIcon, null),
             key: "CommunityEvents",
             title: "Heading.CommunityEvents",
             href: "".concat(tL, "/events"),
             path: "/events"
         }, rq],
-        rX = [rN, {
+        rY = [rN, {
             icon: r.default.createElement(G.DashboardOutlinedIcon, null),
             activeIcon: r.default.createElement(W.DashboardIcon, null),
             key: "CreatorDashboard",
@@ -17157,7 +17142,7 @@
             href: "".concat(tN, "/store"),
             path: "/store"
         }, {
-            icon: r.default.createElement(Y.PeopleOutlineOutlinedIcon, null),
+            icon: r.default.createElement(X.PeopleOutlineOutlinedIcon, null),
             activeIcon: r.default.createElement(Z.PeopleIcon, null),
             key: "CommunityEvents",
             title: "Heading.CommunityEvents",
@@ -17179,7 +17164,7 @@
             href: "".concat(tM, "/store"),
             path: "/store"
         }, {
-            icon: r.default.createElement(Y.PeopleOutlineOutlinedIcon, null),
+            icon: r.default.createElement(X.PeopleOutlineOutlinedIcon, null),
             activeIcon: r.default.createElement(Z.PeopleIcon, null),
             key: "CommunityEvents",
             title: "Heading.CommunityEvents",
@@ -17207,7 +17192,7 @@
             title: "Heading.Dashboard",
             href: "".concat(tB, "/creations")
         }, rW],
-        r2 = [rR, ...rY, rP].reduce((t, n) => (t.set(n.key, n.title), t), new Map),
+        r2 = [rR, ...rX, rP].reduce((t, n) => (t.set(n.key, n.title), t), new Map),
         r4 = [rR, {
             key: "Advertise",
             title: "Heading.AdsManager",
@@ -17218,7 +17203,7 @@
             title: "Heading.Talent",
             href: tL,
             path: "/talent"
-        }, ...rY].reduce((t, n) => (t.set(n.key, n), t), new Map),
+        }, ...rX].reduce((t, n) => (t.set(n.key, n), t), new Map),
         r3 = "Small",
         r5 = (0, i.makeStyles)()(t => ({
             container: {
@@ -18218,15 +18203,15 @@
                 G.current = t, n && "current" in n && (n.current = t)
             }, [n]), Z = (0, r.useCallback)(() => {
                 A && I.notificationId && !I.read && A(I.notificationId, !0)
-            }, [A, I.notificationId, I.read]), Y = (0, r.useCallback)(() => {
+            }, [A, I.notificationId, I.read]), X = (0, r.useCallback)(() => {
                 N({
                     eventType: "clickNotification",
                     context: "click",
                     parameters: nB(I, x)
                 })
-            }, [I, x, N]), X = (0, r.useCallback)(() => {
-                Y(), Z()
-            }, [Z, Y]), Q = (0, r.useCallback)(t => {
+            }, [I, x, N]), Y = (0, r.useCallback)(() => {
+                X(), Z()
+            }, [Z, X]), Q = (0, r.useCallback)(t => {
                 var n;
                 N({
                     eventType: "clickNotificationCtaButton",
@@ -18523,7 +18508,7 @@
                     underline: "none",
                     className: "focus-visible:block focus-visible:bg-surface-200 focus-visible:outline-focus",
                     color: "inherit",
-                    onClick: X
+                    onClick: Y
                 }, a), i)) : r.default.createElement("div", {
                     tabIndex: 0,
                     role: "alert",
@@ -18541,7 +18526,7 @@
                 }
             }, r.default.createElement(oy, {
                 notification: I,
-                onNotificationClick: Y
+                onNotificationClick: X
             }, r.default.createElement(s.Grid, {
                 ref: K,
                 className: B(M.container, H && M.containerMultiLine),
@@ -19389,7 +19374,7 @@
             } = rv(), [f, g] = (0, e0.useLocalStorage)("NotificationTrayNewLookSeen.".concat(n), "false"), [y, v] = (0, r.useState)(!1), [b, C] = (0, r.useState)(!1), [E, w] = (0, r.useState)([]), [I, S] = (0, r.useState)(""), [A, x] = (0, r.useState)(!1), [T, k] = (0, r.useState)(!1), [D, j] = (0, r.useState)(!1), [_, F] = (0, r.useState)(0), [R, L] = (0, r.useState)(0), [N, M] = (0, r.useState)(!1), [B, P] = (0, r.useState)(void 0), [O, H] = (0, r.useState)(!1), U = (0, r.useRef)({
                 scrollTop: 0,
                 scrollHeight: 0
-            }), z = (0, r.useRef)(!0), V = (0, r.useRef)(!1), q = (0, r.useRef)(null), W = (0, r.useRef)(null), G = (0, r.useRef)(null), K = (0, r.useRef)(null), J = (0, r.useRef)(0), Z = (0, r.useRef)(""), Y = (0, r.useRef)(!0), X = (0, r.useRef)(!1), Q = (0, r.useRef)({}), $ = (0, r.useRef)({}), ee = (0, r.useRef)(!1), et = (0, r.useRef)(!1), en = (0, r.useRef)(!1), er = (0, r.useRef)(y), eo = (0, r.useRef)(null), ea = (0, r.useRef)(null), {
+            }), z = (0, r.useRef)(!0), V = (0, r.useRef)(!1), q = (0, r.useRef)(null), W = (0, r.useRef)(null), G = (0, r.useRef)(null), K = (0, r.useRef)(null), J = (0, r.useRef)(0), Z = (0, r.useRef)(""), X = (0, r.useRef)(!0), Y = (0, r.useRef)(!1), Q = (0, r.useRef)({}), $ = (0, r.useRef)({}), ee = (0, r.useRef)(!1), et = (0, r.useRef)(!1), en = (0, r.useRef)(!1), er = (0, r.useRef)(y), eo = (0, r.useRef)(null), ea = (0, r.useRef)(null), {
                 reportNewUnseenNotifFrontier: ei,
                 setLastSeenNotificationId: el,
                 setNewUnseenNotifFrontier: es,
@@ -19436,7 +19421,7 @@
                 if (!A && (!D || t !== ok.Paginate) && !Q.current[t]) try {
                     var r, o, a, s;
                     Q.current[t] = !0, z.current = !1, x(!0), k(!1);
-                    let u = Y.current,
+                    let u = X.current,
                         c = 0 === E.length || t === ok.Refresh || t === ok.ReloadAll || !Z.current,
                         d = c ? "" : Z.current,
                         p = await (null == h ? void 0 : h.creatorStreamNotificationsGetCreatorStreamNotificationsByUser({
@@ -19446,7 +19431,7 @@
                             cursor: d || void 0,
                             fullRefresh: u || void 0
                         }));
-                    u && (Y.current = !1);
+                    u && (X.current = !1);
                     let m = (t => {
                             if (!t || !t.length) return [];
                             let n = [];
@@ -19516,7 +19501,7 @@
                 N || F(0)
             }, [N, F]), (0, r.useEffect)(() => {
                 var t, n, r, o;
-                if (er.current = y, !et.current && y && (eo.current = Date.now(), ea.current = null, E.length > 0 && es(E[0].titleNotification.notificationId), X.current && (null == (t = W.current) || t.focus()), G.current && (G.current.scrollTop = 0, U.current = {
+                if (er.current = y, !et.current && y && (eo.current = Date.now(), ea.current = null, E.length > 0 && es(E[0].titleNotification.notificationId), Y.current && (null == (t = W.current) || t.focus()), G.current && (G.current.scrollTop = 0, U.current = {
                         scrollTop: 0,
                         scrollHeight: G.current.scrollHeight
                     })), et.current && !y) {
@@ -19536,14 +19521,14 @@
                             ...nS(o),
                             productTeam: nI
                         }
-                    })), eo.current = null, ea.current = null, X.current && (null == (r = K.current) || r.focus())
+                    })), eo.current = null, ea.current = null, Y.current && (null == (r = K.current) || r.focus())
                 }
-                et.current = y, X.current = !1
+                et.current = y, Y.current = !1
             }, [y, E, es, i, M, F, ei]), (0, r.useEffect)(() => {
                 C(!!I && ec !== I)
             }, [ec, I]), (0, r.useEffect)(() => {
                 let t = setInterval(() => {
-                    Y.current = !0
+                    X.current = !0
                 }, 36e5);
                 return () => {
                     clearInterval(t)
@@ -19564,7 +19549,7 @@
                                 }),
                                 productTeam: nI
                             }
-                        }), C(!1), t && (X.current = !0, null == (r = W.current) || r.focus())), !n
+                        }), C(!1), t && (Y.current = !0, null == (r = W.current) || r.focus())), !n
                     })
                 }, [b, E, i, f, g]),
                 ew = (0, r.useCallback)(() => {
@@ -19635,7 +19620,7 @@
                 role: "dialog",
                 className: u.popperContent,
                 onKeyDown: t => {
-                    "Escape" === t.key && (ew(), X.current = !0)
+                    "Escape" === t.key && (ew(), Y.current = !0)
                 },
                 style: {
                     display: y ? "block" : "none",
@@ -19786,10 +19771,10 @@
                                     universeId: t
                                 }
                             } : {}
-                        }), eX.default.push(l);
+                        }), eY.default.push(l);
                         return
                     }
-                    eX.default.push(a)
+                    eY.default.push(a)
                 }
             }, r.default.createElement(te.Icon, {
                 name: "icon-regular-nebula"
@@ -19924,7 +19909,7 @@
             })
         }) : r
     }
-    async function oY(t, n) {
+    async function oX(t, n) {
         let r = await oZ(t, n);
         return oq("readRBXASBlob", o => {
             let {
@@ -19944,7 +19929,7 @@
             })
         })
     }
-    async function oX(t, n, r) {
+    async function oY(t, n, r) {
         let o = await oZ(t, n);
         return oq("syncRBXASBlob", a => {
             let {
@@ -19994,14 +19979,14 @@
         return (0, e1.useQuery)({
             enabled: (null == t ? void 0 : t.enabled) && a && null !== o,
             queryFn: async () => {
-                let t = await oY(i, l),
+                let t = await oX(i, l),
                     n = await r.accountSwitchGetLoggedInUsersMetadata({
                         post: {
                             encryptedUsersDataBlob: t,
                             removeInvalidActiveUser: !1
                         }
                     });
-                return n.encryptedUsersDataBlob && t !== n.encryptedUsersDataBlob && await oX(i, l, n.encryptedUsersDataBlob), n
+                return n.encryptedUsersDataBlob && t !== n.encryptedUsersDataBlob && await oY(i, l, n.encryptedUsersDataBlob), n
             },
             queryKey: ["".concat(oQ, "getLoggedInUsersMetadata")],
             retry: null == t ? void 0 : t.retry,
@@ -20042,7 +20027,7 @@
                     [, c] = (0, e0.useSessionStorage)(oP, null);
                 return (0, e4.useMutation)({
                     mutationFn: async t => {
-                        let n = await oY(l, s),
+                        let n = await oX(l, s),
                             r = await o.accountSwitch({
                                 post: {
                                     ...t,
@@ -20051,7 +20036,7 @@
                             });
                         if (!r.encryptedUsersDataBlob) throw Error("Switch accounts failed: encryptedUsersDataBlob was null");
                         if (r.errors && r.errors.length > 0) throw Error("Switch accounts failed: ".concat(r.errors.map(t => "Error code ".concat(t.code, ": ").concat(t.message)).join(", ")));
-                        return await oX(l, s, r.encryptedUsersDataBlob), {
+                        return await oY(l, s, r.encryptedUsersDataBlob), {
                             ...r,
                             encryptedUsersDataBlob: r.encryptedUsersDataBlob
                         }
@@ -20324,7 +20309,7 @@
             } = tS(), {
                 logout: C,
                 user: E
-            } = (0, eQ.useRobloxAuthentication)(), w = (m = tH(y, v), h = tY(g) ? "/" : m, "".concat(h, "settings/preferences")), I = (0, r.useCallback)(() => {
+            } = (0, eQ.useRobloxAuthentication)(), w = (m = tH(y, v), h = tX(g) ? "/" : m, "".concat(h, "settings/preferences")), I = (0, r.useCallback)(() => {
                 b(nF)
             }, [b]), S = (0, r.useCallback)(() => {
                 (null == E ? void 0 : E.id) && (b(nR), navigator.clipboard.writeText(E.id.toString())), p({
@@ -21364,7 +21349,7 @@
             return t
         })(), {
             pathname: i
-        } = (0, eX.useRouter)();
+        } = (0, eY.useRouter)();
         return r.default.createElement(rf, {
             pathname: i,
             sendEvent: a,
@@ -21386,7 +21371,7 @@
                     position: d
                 } = t, p = (0, r.useMemo)(() => {
                     var t;
-                    return t = "luobu" === l ? "production" === s ? r1 : "staging" === s ? r$ : r0 : "production" === s ? rY : "staging" === s ? rX : rQ, u ? t.filter(t => !u.includes(t.key)) : t
+                    return t = "luobu" === l ? "production" === s ? r1 : "staging" === s ? r$ : r0 : "production" === s ? rX : "staging" === s ? rY : rQ, u ? t.filter(t => !u.includes(t.key)) : t
                 }, [u, s, l]), m = null == (n = window) ? void 0 : n.location.origin;
                 ((null == (o = window) ? void 0 : o.location.host.startsWith("devforum")) || (null == (a = window) ? void 0 : a.location.host.startsWith("music"))) && (m = null == m ? void 0 : m.replace(/(devforum|music)/, "create"));
                 let h = (i = m, p.map(t => oM(t, i)));
@@ -22057,7 +22042,7 @@
         aK = tw.z.preprocess(t => null != t ? t : void 0, tw.z.boolean().optional()).catch(void 0),
         aJ = tw.z.preprocess(t => null != t ? t : void 0, tw.z.number().optional()).catch(void 0),
         aZ = tw.z.preprocess(t => null != t ? t : void 0, tw.z.string().optional()).catch(void 0),
-        aY = tw.z.object({
+        aX = tw.z.object({
             disableProducts: tw.z.preprocess(t => null != t ? t : void 0, tw.z.array(tw.z.string()).optional()).catch(void 0),
             enableLuobu: aK,
             enableNotificationsM2: aK,
@@ -22065,7 +22050,7 @@
             creatorEventsVariant: aZ,
             layoutVariant: aZ
         }).catch({}),
-        aX = tw.z.object({
+        aY = tw.z.object({
             searchVersion: aJ
         }).catch({}),
         aQ = tw.z.object({
@@ -22087,9 +22072,9 @@
             searchVersion: "searchVersion"
         }), a1("CreatorHub.TalentHub.UserId", t, n, aq)]);
         return "fulfilled" === o.status && "fulfilled" === a.status && "fulfilled" === i.status && "fulfilled" === l.status ? {
-            ixpParamsValue: aY.parse(o.value),
-            ixpParamsByUserValue: aY.parse(a.value),
-            ixpParamsCreatorHubSearchValue: aX.parse(i.value),
+            ixpParamsValue: aX.parse(o.value),
+            ixpParamsByUserValue: aX.parse(a.value),
+            ixpParamsCreatorHubSearchValue: aY.parse(i.value),
             ixpParamsTalentHubValue: aQ.parse(l.value)
         } : null
     }
@@ -22640,7 +22625,7 @@
             className: f(g, k ? y : void 0),
             href: o,
             onClick: it
-        }, j)), r.default.createElement(eY.TreeItem, {
+        }, j)), r.default.createElement(eX.TreeItem, {
             nodeId: n,
             label: j,
             classes: {
@@ -23066,7 +23051,7 @@
         }
     }
 
-    function Y(t, n) {
+    function X(t, n) {
         return null == t ? t : {
             searchSessionId: (0, U.exists)(t, "searchSessionId") ? t.searchSessionId : void 0,
             totalResults: (0, U.exists)(t, "totalResults") ? t.totalResults : void 0,
@@ -23079,7 +23064,7 @@
         }
     }
 
-    function X(t) {
+    function Y(t) {
         var n;
         return null == (n = t) ? n : {
             jobId: (0, U.exists)(n, "jobId") ? n.jobId : void 0,
@@ -23282,7 +23267,7 @@
                                 }, n)];
                             case 1:
                                 return a = i.sent(), [2, new U.JSONApiResponse(a, function(t) {
-                                    return Y(t)
+                                    return X(t)
                                 })]
                         }
                     })
@@ -23333,7 +23318,7 @@
                                 }, n)];
                             case 1:
                                 return a = i.sent(), [2, new U.JSONApiResponse(a, function(t) {
-                                    return Y(t)
+                                    return X(t)
                                 })]
                         }
                     })
@@ -23390,7 +23375,7 @@
                                     return null == t ? t : {
                                         searchSessionId: (0, U.exists)(t, "searchSessionId") ? t.searchSessionId : void 0,
                                         totalResults: (0, U.exists)(t, "totalResults") ? t.totalResults : void 0,
-                                        results: (0, U.exists)(t, "results") ? null === t.results ? null : t.results.map(X) : void 0,
+                                        results: (0, U.exists)(t, "results") ? null === t.results ? null : t.results.map(Y) : void 0,
                                         hasTotalResults: (0, U.exists)(t, "hasTotalResults") ? t.hasTotalResults : void 0,
                                         hasNextResultIndex: (0, U.exists)(t, "hasNextResultIndex") ? t.hasNextResultIndex : void 0,
                                         nextResultIndex: (0, U.exists)(t, "nextResultIndex") ? t.nextResultIndex : void 0,
@@ -23621,8 +23606,8 @@
         eK = eg(["svg", "a", "altglyph", "altglyphdef", "altglyphitem", "animatecolor", "animatemotion", "animatetransform", "circle", "clippath", "defs", "desc", "ellipse", "enterkeyhint", "exportparts", "filter", "font", "g", "glyph", "glyphref", "hkern", "image", "inputmode", "line", "lineargradient", "marker", "mask", "metadata", "mpath", "part", "path", "pattern", "polygon", "polyline", "radialgradient", "rect", "stop", "style", "switch", "symbol", "text", "textpath", "title", "tref", "tspan", "view", "vkern"]),
         eJ = eg(["feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence"]),
         eZ = eg(["animate", "color-profile", "cursor", "discard", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignobject", "hatch", "hatchpath", "mesh", "meshgradient", "meshpatch", "meshrow", "missing-glyph", "script", "set", "solidcolor", "unknown", "use"]),
-        eY = eg(["math", "menclose", "merror", "mfenced", "mfrac", "mglyph", "mi", "mlabeledtr", "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom", "mroot", "mrow", "ms", "mspace", "msqrt", "mstyle", "msub", "msup", "msubsup", "mtable", "mtd", "mtext", "mtr", "munder", "munderover", "mprescripts"]),
-        eX = eg(["maction", "maligngroup", "malignmark", "mlongdiv", "mscarries", "mscarry", "msgroup", "mstack", "msline", "msrow", "semantics", "annotation", "annotation-xml", "mprescripts", "none"]),
+        eX = eg(["math", "menclose", "merror", "mfenced", "mfrac", "mglyph", "mi", "mlabeledtr", "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom", "mroot", "mrow", "ms", "mspace", "msqrt", "mstyle", "msub", "msup", "msubsup", "mtable", "mtd", "mtext", "mtr", "munder", "munderover", "mprescripts"]),
+        eY = eg(["maction", "maligngroup", "malignmark", "mlongdiv", "mscarries", "mscarry", "msgroup", "mstack", "msline", "msrow", "semantics", "annotation", "annotation-xml", "mprescripts", "none"]),
         eQ = eg(["#text"]),
         e$ = eg(["accept", "action", "align", "alt", "autocapitalize", "autocomplete", "autopictureinpicture", "autoplay", "background", "bgcolor", "border", "capture", "cellpadding", "cellspacing", "checked", "cite", "class", "clear", "color", "cols", "colspan", "command", "commandfor", "controls", "controlslist", "coords", "crossorigin", "datetime", "decoding", "default", "dir", "disabled", "disablepictureinpicture", "disableremoteplayback", "download", "draggable", "enctype", "enterkeyhint", "exportparts", "face", "for", "headers", "height", "hidden", "high", "href", "hreflang", "id", "inert", "inputmode", "integrity", "ismap", "kind", "label", "lang", "list", "loading", "loop", "low", "max", "maxlength", "media", "method", "min", "minlength", "multiple", "muted", "name", "nonce", "noshade", "novalidate", "nowrap", "open", "optimum", "part", "pattern", "placeholder", "playsinline", "popover", "popovertarget", "popovertargetaction", "poster", "preload", "pubdate", "radiogroup", "readonly", "rel", "required", "rev", "reversed", "role", "rows", "rowspan", "spellcheck", "scope", "selected", "shape", "size", "sizes", "slot", "span", "srclang", "start", "src", "srcset", "step", "style", "summary", "tabindex", "title", "translate", "type", "usemap", "valign", "value", "width", "wrap", "xmlns"]),
         e0 = eg(["accent-height", "accumulate", "additive", "alignment-baseline", "amplitude", "ascent", "attributename", "attributetype", "azimuth", "basefrequency", "baseline-shift", "begin", "bias", "by", "class", "clip", "clippathunits", "clip-path", "clip-rule", "color", "color-interpolation", "color-interpolation-filters", "color-profile", "color-rendering", "cx", "cy", "d", "dx", "dy", "diffuseconstant", "direction", "display", "divisor", "dur", "edgemode", "elevation", "end", "exponent", "fill", "fill-opacity", "fill-rule", "filter", "filterunits", "flood-color", "flood-opacity", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-weight", "fx", "fy", "g1", "g2", "glyph-name", "glyphref", "gradientunits", "gradienttransform", "height", "href", "id", "image-rendering", "in", "in2", "intercept", "k", "k1", "k2", "k3", "k4", "kerning", "keypoints", "keysplines", "keytimes", "lang", "lengthadjust", "letter-spacing", "kernelmatrix", "kernelunitlength", "lighting-color", "local", "marker-end", "marker-mid", "marker-start", "markerheight", "markerunits", "markerwidth", "maskcontentunits", "maskunits", "max", "mask", "mask-type", "media", "method", "mode", "min", "name", "numoctaves", "offset", "operator", "opacity", "order", "orient", "orientation", "origin", "overflow", "paint-order", "path", "pathlength", "patterncontentunits", "patterntransform", "patternunits", "points", "preservealpha", "preserveaspectratio", "primitiveunits", "r", "rx", "ry", "radius", "refx", "refy", "repeatcount", "repeatdur", "restart", "result", "rotate", "scale", "seed", "shape-rendering", "slope", "specularconstant", "specularexponent", "spreadmethod", "startoffset", "stddeviation", "stitchtiles", "stop-color", "stop-opacity", "stroke-dasharray", "stroke-dashoffset", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-opacity", "stroke", "stroke-width", "style", "surfacescale", "systemlanguage", "tabindex", "tablevalues", "targetx", "targety", "transform", "transform-origin", "text-anchor", "text-decoration", "text-rendering", "textlength", "type", "u1", "u2", "unicode", "values", "viewbox", "visibility", "version", "vert-adv-y", "vert-origin-x", "vert-origin-y", "width", "word-spacing", "wrap", "writing-mode", "xchannelselector", "ychannelselector", "x", "x1", "x2", "xmlns", "y", "y1", "y2", "z", "zoomandpan"]),
@@ -23705,7 +23690,7 @@
         o.isSupported = "function" == typeof ed && "function" == typeof I && T && void 0 !== T.createHTMLDocument;
         let R = e9,
             L = null,
-            N = eV({}, [...eG, ...eK, ...eJ, ...eY, ...eQ]),
+            N = eV({}, [...eG, ...eK, ...eJ, ...eX, ...eQ]),
             M = null,
             B = eV({}, [...e$, ...e0, ...e1, ...e2]),
             P = Object.seal(ev(null, {
@@ -23752,8 +23737,8 @@
             K = !0,
             J = !1,
             Z = !1,
-            Y = !1,
             X = !1,
+            Y = !1,
             Q = !1,
             $ = !1,
             ee = !0,
@@ -23789,7 +23774,7 @@
             tm = function() {
                 let t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
                 if (tc && tc === t) return;
-                t && "object" == typeof t || (t = {}), t = eq(t), tu = "application/xhtml+xml" === (tl = -1 === ts.indexOf(t.PARSER_MEDIA_TYPE) ? "text/html" : t.PARSER_MEDIA_TYPE) ? eD : ek, L = eP(t, "ALLOWED_TAGS") && eT(t.ALLOWED_TAGS) ? eV({}, t.ALLOWED_TAGS, tu) : N, M = eP(t, "ALLOWED_ATTR") && eT(t.ALLOWED_ATTR) ? eV({}, t.ALLOWED_ATTR, tu) : B, eC = eP(t, "ALLOWED_NAMESPACES") && eT(t.ALLOWED_NAMESPACES) ? eV({}, t.ALLOWED_NAMESPACES, eD) : eE, ec = eP(t, "ADD_URI_SAFE_ATTR") && eT(t.ADD_URI_SAFE_ATTR) ? eV(eq(ep), t.ADD_URI_SAFE_ATTR, tu) : ep, es = eP(t, "ADD_DATA_URI_TAGS") && eT(t.ADD_DATA_URI_TAGS) ? eV(eq(eu), t.ADD_DATA_URI_TAGS, tu) : eu, ei = eP(t, "FORBID_CONTENTS") && eT(t.FORBID_CONTENTS) ? eV({}, t.FORBID_CONTENTS, tu) : el, O = eP(t, "FORBID_TAGS") && eT(t.FORBID_TAGS) ? eV({}, t.FORBID_TAGS, tu) : eq({}), H = eP(t, "FORBID_ATTR") && eT(t.FORBID_ATTR) ? eV({}, t.FORBID_ATTR, tu) : eq({}), ea = !!eP(t, "USE_PROFILES") && (t.USE_PROFILES && "object" == typeof t.USE_PROFILES ? eq(t.USE_PROFILES) : t.USE_PROFILES), z = !1 !== t.ALLOW_ARIA_ATTR, V = !1 !== t.ALLOW_DATA_ATTR, q = t.ALLOW_UNKNOWN_PROTOCOLS || !1, W = !1 !== t.ALLOW_SELF_CLOSE_IN_ATTR, G = t.SAFE_FOR_TEMPLATES || !1, K = !1 !== t.SAFE_FOR_XML, J = t.WHOLE_DOCUMENT || !1, X = t.RETURN_DOM || !1, Q = t.RETURN_DOM_FRAGMENT || !1, $ = t.RETURN_TRUSTED_TYPE || !1, Y = t.FORCE_BODY || !1, ee = !1 !== t.SANITIZE_DOM, et = t.SANITIZE_NAMED_PROPS || !1, er = !1 !== t.KEEP_CONTENT, eo = t.IN_PLACE || !1, R = ! function(t) {
+                t && "object" == typeof t || (t = {}), t = eq(t), tu = "application/xhtml+xml" === (tl = -1 === ts.indexOf(t.PARSER_MEDIA_TYPE) ? "text/html" : t.PARSER_MEDIA_TYPE) ? eD : ek, L = eP(t, "ALLOWED_TAGS") && eT(t.ALLOWED_TAGS) ? eV({}, t.ALLOWED_TAGS, tu) : N, M = eP(t, "ALLOWED_ATTR") && eT(t.ALLOWED_ATTR) ? eV({}, t.ALLOWED_ATTR, tu) : B, eC = eP(t, "ALLOWED_NAMESPACES") && eT(t.ALLOWED_NAMESPACES) ? eV({}, t.ALLOWED_NAMESPACES, eD) : eE, ec = eP(t, "ADD_URI_SAFE_ATTR") && eT(t.ADD_URI_SAFE_ATTR) ? eV(eq(ep), t.ADD_URI_SAFE_ATTR, tu) : ep, es = eP(t, "ADD_DATA_URI_TAGS") && eT(t.ADD_DATA_URI_TAGS) ? eV(eq(eu), t.ADD_DATA_URI_TAGS, tu) : eu, ei = eP(t, "FORBID_CONTENTS") && eT(t.FORBID_CONTENTS) ? eV({}, t.FORBID_CONTENTS, tu) : el, O = eP(t, "FORBID_TAGS") && eT(t.FORBID_TAGS) ? eV({}, t.FORBID_TAGS, tu) : eq({}), H = eP(t, "FORBID_ATTR") && eT(t.FORBID_ATTR) ? eV({}, t.FORBID_ATTR, tu) : eq({}), ea = !!eP(t, "USE_PROFILES") && (t.USE_PROFILES && "object" == typeof t.USE_PROFILES ? eq(t.USE_PROFILES) : t.USE_PROFILES), z = !1 !== t.ALLOW_ARIA_ATTR, V = !1 !== t.ALLOW_DATA_ATTR, q = t.ALLOW_UNKNOWN_PROTOCOLS || !1, W = !1 !== t.ALLOW_SELF_CLOSE_IN_ATTR, G = t.SAFE_FOR_TEMPLATES || !1, K = !1 !== t.SAFE_FOR_XML, J = t.WHOLE_DOCUMENT || !1, Y = t.RETURN_DOM || !1, Q = t.RETURN_DOM_FRAGMENT || !1, $ = t.RETURN_TRUSTED_TYPE || !1, X = t.FORCE_BODY || !1, ee = !1 !== t.SANITIZE_DOM, et = t.SANITIZE_NAMED_PROPS || !1, er = !1 !== t.KEEP_CONTENT, eo = t.IN_PLACE || !1, R = ! function(t) {
                     try {
                         return eH(t, ""), !0
                     } catch (t) {
@@ -23797,7 +23782,7 @@
                     }
                 }(t.ALLOWED_URI_REGEXP) ? e9 : t.ALLOWED_URI_REGEXP, ey = "string" == typeof t.NAMESPACE ? t.NAMESPACE : ef, ez = eP(t, "MATHML_TEXT_INTEGRATION_POINTS") && t.MATHML_TEXT_INTEGRATION_POINTS && "object" == typeof t.MATHML_TEXT_INTEGRATION_POINTS ? eq(t.MATHML_TEXT_INTEGRATION_POINTS) : eV({}, ["mi", "mo", "mn", "ms", "mtext"]), ta = eP(t, "HTML_INTEGRATION_POINTS") && t.HTML_INTEGRATION_POINTS && "object" == typeof t.HTML_INTEGRATION_POINTS ? eq(t.HTML_INTEGRATION_POINTS) : eV({}, ["annotation-xml"]);
                 let r = eP(t, "CUSTOM_ELEMENT_HANDLING") && t.CUSTOM_ELEMENT_HANDLING && "object" == typeof t.CUSTOM_ELEMENT_HANDLING ? eq(t.CUSTOM_ELEMENT_HANDLING) : ev(null);
-                if (P = ev(null), eP(r, "tagNameCheck") && tp(r.tagNameCheck) && (P.tagNameCheck = r.tagNameCheck), eP(r, "attributeNameCheck") && tp(r.attributeNameCheck) && (P.attributeNameCheck = r.attributeNameCheck), eP(r, "allowCustomizedBuiltInElements") && "boolean" == typeof r.allowCustomizedBuiltInElements && (P.allowCustomizedBuiltInElements = r.allowCustomizedBuiltInElements), G && (V = !1), Q && (X = !0), ea && (L = eV({}, eQ), M = ev(null), !0 === ea.html && (eV(L, eG), eV(M, e$)), !0 === ea.svg && (eV(L, eK), eV(M, e0), eV(M, e2)), !0 === ea.svgFilters && (eV(L, eJ), eV(M, e0), eV(M, e2)), !0 === ea.mathMl && (eV(L, eY), eV(M, e1), eV(M, e2))), U.tagCheck = null, U.attributeCheck = null, eP(t, "ADD_TAGS") && ("function" == typeof t.ADD_TAGS ? U.tagCheck = t.ADD_TAGS : eT(t.ADD_TAGS) && (L === N && (L = eq(L)), eV(L, t.ADD_TAGS, tu))), eP(t, "ADD_ATTR") && ("function" == typeof t.ADD_ATTR ? U.attributeCheck = t.ADD_ATTR : eT(t.ADD_ATTR) && (M === B && (M = eq(M)), eV(M, t.ADD_ATTR, tu))), eP(t, "ADD_URI_SAFE_ATTR") && eT(t.ADD_URI_SAFE_ATTR) && eV(ec, t.ADD_URI_SAFE_ATTR, tu), eP(t, "FORBID_CONTENTS") && eT(t.FORBID_CONTENTS) && (ei === el && (ei = eq(ei)), eV(ei, t.FORBID_CONTENTS, tu)), eP(t, "ADD_FORBID_CONTENTS") && eT(t.ADD_FORBID_CONTENTS) && (ei === el && (ei = eq(ei)), eV(ei, t.ADD_FORBID_CONTENTS, tu)), er && (L["#text"] = !0), J && eV(L, ["html", "head", "body"]), L.table && (eV(L, ["tbody"]), delete O.tbody), t.TRUSTED_TYPES_POLICY) {
+                if (P = ev(null), eP(r, "tagNameCheck") && tp(r.tagNameCheck) && (P.tagNameCheck = r.tagNameCheck), eP(r, "attributeNameCheck") && tp(r.attributeNameCheck) && (P.attributeNameCheck = r.attributeNameCheck), eP(r, "allowCustomizedBuiltInElements") && "boolean" == typeof r.allowCustomizedBuiltInElements && (P.allowCustomizedBuiltInElements = r.allowCustomizedBuiltInElements), G && (V = !1), Q && (Y = !0), ea && (L = eV({}, eQ), M = ev(null), !0 === ea.html && (eV(L, eG), eV(M, e$)), !0 === ea.svg && (eV(L, eK), eV(M, e0), eV(M, e2)), !0 === ea.svgFilters && (eV(L, eJ), eV(M, e0), eV(M, e2)), !0 === ea.mathMl && (eV(L, eX), eV(M, e1), eV(M, e2))), U.tagCheck = null, U.attributeCheck = null, eP(t, "ADD_TAGS") && ("function" == typeof t.ADD_TAGS ? U.tagCheck = t.ADD_TAGS : eT(t.ADD_TAGS) && (L === N && (L = eq(L)), eV(L, t.ADD_TAGS, tu))), eP(t, "ADD_ATTR") && ("function" == typeof t.ADD_ATTR ? U.attributeCheck = t.ADD_ATTR : eT(t.ADD_ATTR) && (M === B && (M = eq(M)), eV(M, t.ADD_ATTR, tu))), eP(t, "ADD_URI_SAFE_ATTR") && eT(t.ADD_URI_SAFE_ATTR) && eV(ec, t.ADD_URI_SAFE_ATTR, tu), eP(t, "FORBID_CONTENTS") && eT(t.FORBID_CONTENTS) && (ei === el && (ei = eq(ei)), eV(ei, t.FORBID_CONTENTS, tu)), eP(t, "ADD_FORBID_CONTENTS") && eT(t.ADD_FORBID_CONTENTS) && (ei === el && (ei = eq(ei)), eV(ei, t.ADD_FORBID_CONTENTS, tu)), er && (L["#text"] = !0), J && eV(L, ["html", "head", "body"]), L.table && (eV(L, ["tbody"]), delete O.tbody), t.TRUSTED_TYPES_POLICY) {
                     if ("function" != typeof t.TRUSTED_TYPES_POLICY.createHTML) throw eU('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
                     if ("function" != typeof t.TRUSTED_TYPES_POLICY.createScriptURL) throw eU('TRUSTED_TYPES_POLICY configuration option must provide a "createScriptURL" hook.');
                     A = (n = t.TRUSTED_TYPES_POLICY).createHTML("")
@@ -23805,7 +23790,7 @@
                 eg && eg(t), tc = t
             },
             th = eV({}, [...eK, ...eJ, ...eZ]),
-            tf = eV({}, [...eY, ...eX]),
+            tf = eV({}, [...eX, ...eY]),
             tg = function(t) {
                 let n = I(t);
                 n && n.tagName || (n = {
@@ -23839,7 +23824,7 @@
                     })
                 }
                 if (n.removeAttribute(t), "is" === t)
-                    if (X || Q) try {
+                    if (Y || Q) try {
                         ty(n)
                     } catch (t) {} else try {
                         n.setAttribute(t, "")
@@ -23848,7 +23833,7 @@
             tb = function(t) {
                 let r = null,
                     o = null;
-                if (Y) t = "<remove></remove>" + t;
+                if (X) t = "<remove></remove>" + t;
                 else {
                     let n = ej(t, /^[\r\n\t ]+/);
                     o = n && n[0]
@@ -24059,14 +24044,14 @@
                 t_(t)
             } else if (tI(t)) 1 === (l = (a = tb("<!---->")).ownerDocument.importNode(t, !0)).nodeType && "BODY" === l.nodeName || "HTML" === l.nodeName ? a = l : a.appendChild(l), t_(l);
             else {
-                if (!X && !G && !J && -1 === t.indexOf("<")) return n && $ ? n.createHTML(t) : t;
-                if (!(a = tb(t))) return X ? null : $ ? A : ""
+                if (!Y && !G && !J && -1 === t.indexOf("<")) return n && $ ? n.createHTML(t) : t;
+                if (!(a = tb(t))) return Y ? null : $ ? A : ""
             }
-            a && Y && ty(a.firstChild);
+            a && X && ty(a.firstChild);
             let d = tC(eo ? t : a);
             for (; u = d.nextNode();) tA(u), tD(u), u.content instanceof s && tj(u.content);
             if (eo) return G && tE(t), t;
-            if (X) {
+            if (Y) {
                 if (G && tE(a), Q)
                     for (c = D.call(a.ownerDocument); a.firstChild;) c.appendChild(a.firstChild);
                 else c = a;
@@ -24269,11 +24254,11 @@
         return "number" == typeof t
     }
 
-    function tY(t) {
+    function tX(t) {
         return "object" == typeof t
     }
 
-    function tX(t) {
+    function tY(t) {
         return null != t
     }
 
@@ -24362,12 +24347,12 @@
             let r = [],
                 o = !1,
                 a = (t, n, i, l) => {
-                    if (tX(t))
+                    if (tY(t))
                         if (n[i]) {
                             var s, u;
                             let c = t[n[i]];
-                            if (!tX(c)) return;
-                            if (i === n.length - 1 && (tJ(c) || tZ(c) || !0 === (s = c) || !1 === s || tY(u = s) && null !== u && "[object Boolean]" == t$(s) || "bigint" == typeof c)) r.push(void 0 !== l ? {
+                            if (!tY(c)) return;
+                            if (i === n.length - 1 && (tJ(c) || tZ(c) || !0 === (s = c) || !1 === s || tX(u = s) && null !== u && "[object Boolean]" == t$(s) || "bigint" == typeof c)) r.push(void 0 !== l ? {
                                 v: tK(c),
                                 i: l
                             } : tK(c));
@@ -24455,7 +24440,7 @@
             return this.records.length
         }
         _createStringRecord(t, n) {
-            return !tX(t) || tQ(t) ? null : {
+            return !tY(t) || tQ(t) ? null : {
                 v: t,
                 i: n,
                 n: this.norm.get(t)
@@ -24469,12 +24454,12 @@
             for (let n = 0, o = this.keys.length; n < o; n++) {
                 let o = this.keys[n],
                     a = o.getFn ? o.getFn(t) : this.getFn(t, o.path);
-                if (tX(a)) {
+                if (tY(a)) {
                     if (tG(a)) {
                         let t = [];
                         for (let n = 0, r = a.length; n < r; n += 1) {
                             let r = a[n];
-                            if (tX(r)) {
+                            if (tY(r)) {
                                 if (tJ(r)) {
                                     if (!tQ(r)) {
                                         let o = {
@@ -24484,7 +24469,7 @@
                                         };
                                         t.push(o)
                                     }
-                                } else if (tX(r.v)) {
+                                } else if (tY(r.v)) {
                                     let n = tJ(r.v) ? r.v : tK(r.v);
                                     if (!tQ(n)) {
                                         let o = {
@@ -24942,7 +24927,7 @@
             let a = Object.keys(t),
                 i = !!t[np];
             if (!i && a.length > 1 && !nm(t)) return o(nh(t));
-            if (!tG(t) && tY(t) && !nm(t)) {
+            if (!tG(t) && tX(t) && !nm(t)) {
                 let o = i ? t[np] : a[0],
                     l = i ? t.$val : t[o];
                 if (!tJ(l)) throw Error("Invalid value for key ".concat(o));
@@ -25135,7 +25120,7 @@
             this._invalidateSearcherCache()
         }
         add(t) {
-            if (!tX(t)) return;
+            if (!tY(t)) return;
             this._docs.push(t);
             let n = this._myIndex.add(t, this._docs.length - 1);
             if (this._invertedIndex && n) {
@@ -25225,7 +25210,7 @@
                             refIndex: i
                         };
                     return r && (a = [], t.matches.forEach(t => {
-                        if (!tX(t.indices) || !t.indices.length) return;
+                        if (!tY(t.indices) || !t.indices.length) return;
                         let n = {
                             indices: t.indices,
                             value: t.value
@@ -25251,7 +25236,7 @@
                     i: s,
                     n: u
                 } = t;
-                if (!tX(i)) return;
+                if (!tY(i)) return;
                 let c = o.searchIn(i);
                 if (c.isMatch) {
                     let t = {
@@ -25318,7 +25303,7 @@
                     $: o,
                     i: l
                 } = t;
-                if (tX(o)) {
+                if (tY(o)) {
                     let t = r(n, o, l);
                     t.length && (a.has(l) || (a.set(l, {
                         idx: l,
@@ -25346,7 +25331,7 @@
                     $: l,
                     i: u
                 } = t;
-                if (!tX(l)) return;
+                if (!tY(l)) return;
                 let c = [],
                     d = !1,
                     p = !1;
@@ -25375,7 +25360,7 @@
                 value: r,
                 searcher: o
             } = t;
-            if (!tX(r)) return [];
+            if (!tY(r)) return [];
             let a = [];
             if (tG(r)) r.forEach(t => {
                 let {
@@ -25383,7 +25368,7 @@
                     i: i,
                     n: l
                 } = t;
-                if (!tX(r)) return;
+                if (!tY(r)) return;
                 let s = o.searchIn(r);
                 if (s.isMatch) {
                     let t = {
@@ -25744,10 +25729,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nA("https://assets.create.roblox.com/5d918dbe344d5756eb9e631dab52e13e6e31979f", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nA("https://assets.create.roblox.com/5d789367c032a3f49412c04d8f8d67972b446828", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!nT()) return [];
-                r = nA("https://assets.create.roblox.com/5d918dbe344d5756eb9e631dab52e13e6e31979f", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nA("https://assets.create.roblox.com/5d789367c032a3f49412c04d8f8d67972b446828", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -25948,12 +25933,12 @@
             translationKey: "Label.DevForum",
             fallbackLabel: "Forum"
         }],
-        nY = [{
+        nX = [{
             value: tN.CreatorHub,
             translationKey: "Label.Pages",
             fallbackLabel: "Pages"
         }, ...nZ],
-        nX = (t, n) => nJ.some(t => t.value === n) ? t.filter(t => tP(t.documentationContentType) === n) : t.filter(t => t.documentationContentType === n),
+        nY = (t, n) => nJ.some(t => t.value === n) ? t.filter(t => tP(t.documentationContentType) === n) : t.filter(t => t.documentationContentType === n),
         nQ = t => t.isTrusted && t.detail > 0,
         n$ = t => {
             let {
@@ -26013,7 +25998,7 @@
                 currentProduct: s,
                 searchResults: u,
                 searchSessionId: c
-            } = t, d = nX(u, r), p = Array.from(new Set(d.map(t => t.documentationContentType))), m = nJ.findIndex(t => t.value === r), h = nZ.findIndex(t => t.value === r);
+            } = t, d = nY(u, r), p = Array.from(new Set(d.map(t => t.documentationContentType))), m = nJ.findIndex(t => t.value === r), h = nZ.findIndex(t => t.value === r);
             n.logClickEvent({
                 eventName: tx.CategoryClicked,
                 parameters: {
@@ -26043,7 +26028,7 @@
                 currentProduct: s,
                 searchResults: u,
                 searchSessionId: c
-            } = t, d = nX(u, r).length;
+            } = t, d = nY(u, r).length;
             n.logClickEvent({
                 eventName: tx.CategoryCleared,
                 parameters: {
@@ -27765,7 +27750,7 @@
         let o = r.trim();
         return o ? "".concat(t).concat(n, "?keyword=").concat(encodeURIComponent(o)) : "".concat(t).concat(n)
     }
-    let rY = (0, s.makeStyles)()(t => ({
+    let rX = (0, s.makeStyles)()(t => ({
             row: {
                 display: "flex",
                 alignItems: "center",
@@ -27818,7 +27803,7 @@
                 lineHeight: 0
             }
         })),
-        rX = t => {
+        rY = t => {
             let {
                 query: n,
                 onClickItem: r
@@ -27828,7 +27813,7 @@
                 translate: l
             } = (0, o.useTranslation)(), {
                 classes: s
-            } = rY(), u = (0, a.useRef)(null), {
+            } = rX(), u = (0, a.useRef)(null), {
                 onKeyDownSearch: d
             } = nW(u), [p, m] = (0, a.useState)(!1), h = n.trim(), f = rZ(tw(i), "/store/models", n);
             if (!h) return null;
@@ -28552,7 +28537,7 @@
                     var t;
                     return null == (t = T.current) ? void 0 : t.focus()
                 }
-            }), []), [B, P] = (0, a.useState)(nK), O = B !== nK ? B : g, [z, V] = (0, a.useState)(""), q = (0, H.useDebounce)(z, 450), [W, G] = (0, a.useState)(null), [K, J] = (0, a.useState)(""), [Z, Y] = (0, a.useState)(!1), [X, Q] = (0, a.useState)(!1), [et, er] = (0, a.useState)(!1), [eo, ea] = (0, a.useState)([]), {
+            }), []), [B, P] = (0, a.useState)(nK), O = B !== nK ? B : g, [z, V] = (0, a.useState)(""), q = (0, H.useDebounce)(z, 450), [W, G] = (0, a.useState)(null), [K, J] = (0, a.useState)(""), [Z, X] = (0, a.useState)(!1), [Y, Q] = (0, a.useState)(!1), [et, er] = (0, a.useState)(!1), [eo, ea] = (0, a.useState)([]), {
                 storeResults: ei,
                 isStoreLoading: el
             } = function(t) {
@@ -28826,7 +28811,7 @@
                 k.current && (k.current.scrollTop = 0)
             }, [g]), (0, a.useEffect)(() => {
                 0 === z.length && a.default.startTransition(() => {
-                    ea([]), J(""), Y(!1)
+                    ea([]), J(""), X(!1)
                 })
             }, [z]), (0, a.useEffect)(() => {
                 let t;
@@ -28836,18 +28821,18 @@
                     var o, i;
                     let l, u;
                     if (0 === ed.length) return a.default.startTransition(() => {
-                        ea([]), J(""), Y(!1)
+                        ea([]), J(""), X(!1)
                     });
                     let d = "".concat(ed, "-").concat(eh);
                     if (d in on) {
                         let t = null != (o = on[d]) ? o : [];
                         a.default.startTransition(() => {
-                            ea(t), J(ed), Y(!1)
+                            ea(t), J(ed), X(!1)
                         });
                         return
                     }
                     t = setTimeout(() => {
-                        Y(!0)
+                        X(!0)
                     }, 300);
                     try {
                         if (l = await f.search({
@@ -28904,7 +28889,7 @@
                             eventLogger: h,
                             category: O,
                             interaction: tk.Input,
-                            isRecommended: X,
+                            isRecommended: Y,
                             isSemantic: !!l.isSemantic,
                             isQueryUnderstandApplied: l.isQueryUnderstandApplied,
                             locale: c,
@@ -28915,12 +28900,12 @@
                         })
                     } catch (n) {
                         tR("SearchDialogV2: failed to fetch search results ".concat(n instanceof Error ? n.message : String(n))), er(!0), clearTimeout(t), a.default.startTransition(() => {
-                            ea([]), J(ed), Y(!1)
+                            ea([]), J(ed), X(!1)
                         });
                         return
                     }
                     clearTimeout(t), a.default.startTransition(() => {
-                        er(l.isError), ea(u), J(ed), Y(!1)
+                        er(l.isError), ea(u), J(ed), X(!1)
                     }), l.isError || (on[d] = u)
                 })(), () => {
                     n = !0, t && clearTimeout(t)
@@ -28928,7 +28913,7 @@
             }, [ed, eh]), (0, a.useEffect)(() => {
                 W && G(null)
             }, [W]);
-            let eA = nY.find(t => t.value === B),
+            let eA = nX.find(t => t.value === B),
                 ex = nJ.find(t => t.value === g),
                 eT = (0, a.useCallback)((t, n) => {
                     var o;
@@ -28936,28 +28921,28 @@
                         eventLogger: h,
                         category: t.value,
                         interaction: n,
-                        isRecommended: X,
+                        isRecommended: Y,
                         locale: c,
                         query: z,
                         currentProduct: m,
                         searchResults: eS,
                         searchSessionId: r
                     }))
-                }, [h, g, I, y, X, c, z, m, eS, r]),
+                }, [h, g, I, y, Y, c, z, m, eS, r]),
                 ek = (0, a.useCallback)((t, n) => {
                     var o;
                     null == (o = T.current) || o.focus(), "" !== t.value && (v(), P(nK), n4({
                         eventLogger: h,
                         category: t.value,
                         interaction: n,
-                        isRecommended: X,
+                        isRecommended: Y,
                         locale: c,
                         query: z,
                         currentProduct: m,
                         searchResults: eS,
                         searchSessionId: r
                     }))
-                }, [h, v, X, c, z, m, eS, r]),
+                }, [h, v, Y, c, z, m, eS, r]),
                 eD = (0, a.useCallback)(() => {
                     var t;
                     V(""), P(nK), v(), null == (t = T.current) || t.focus()
@@ -28973,7 +28958,7 @@
                         eventLogger: h,
                         category: O,
                         interaction: tk.KeyboardBackspace,
-                        isRecommended: X,
+                        isRecommended: Y,
                         locale: c,
                         query: z,
                         currentProduct: m,
@@ -28985,35 +28970,35 @@
                         let n = nq()[0];
                         n && n.focus()
                     }
-                }, [h, O, z, eb, X, c, eD, m, eo, r]),
+                }, [h, O, z, eb, Y, c, eD, m, eo, r]),
                 eF = (0, a.useCallback)((t, n) => {
                     var o;
                     null == (o = T.current) || o.focus(), t.value !== B && (P(t.value), n2({
                         eventLogger: h,
                         category: t.value,
                         interaction: n,
-                        isRecommended: X,
+                        isRecommended: Y,
                         locale: c,
                         query: z,
                         currentProduct: m,
                         searchResults: eo,
                         searchSessionId: r
                     }))
-                }, [h, B, X, c, z, m, eo, r]),
+                }, [h, B, Y, c, z, m, eo, r]),
                 eR = (0, a.useCallback)((t, n) => {
                     var o;
                     null == (o = T.current) || o.focus(), t.value !== nK && (P(nK), n4({
                         eventLogger: h,
                         category: t.value,
                         interaction: n,
-                        isRecommended: X,
+                        isRecommended: Y,
                         locale: c,
                         query: z,
                         currentProduct: m,
                         searchResults: eo,
                         searchSessionId: r
                     }))
-                }, [h, X, c, z, m, eo, r]),
+                }, [h, Y, c, z, m, eo, r]),
                 eL = (0, a.useCallback)(t => {
                     V(t.target.value), Q(!1)
                 }, []),
@@ -29159,7 +29144,7 @@
                                 eventLogger: h,
                                 category: O,
                                 interaction: tk.Click,
-                                isRecommended: X,
+                                isRecommended: Y,
                                 locale: c,
                                 query: z,
                                 currentProduct: m,
@@ -29250,7 +29235,7 @@
                         eventLogger: h,
                         category: O,
                         interaction: n,
-                        isRecommended: X,
+                        isRecommended: Y,
                         locale: c,
                         query: z,
                         currentProduct: m,
@@ -29295,7 +29280,7 @@
                 onClickFilter: eT
             }) : E ? a.default.createElement(rG, {
                 onClickFilter: eF
-            }) : null), g === tB && "items" === i && a.default.createElement(a.default.Fragment, null, z.trim().length > 0 && a.default.createElement(rX, {
+            }) : null), g === tB && "items" === i && a.default.createElement(a.default.Fragment, null, z.trim().length > 0 && a.default.createElement(rY, {
                 query: z,
                 onClickItem: (t, n) => {
                     (t => {
@@ -29810,7 +29795,7 @@
         getCookieString(t) {
             return ""
         }
-    }(eq = eY || (eY = {}))[eq.Trace = 0] = "Trace", eq[eq.Debug = 1] = "Debug", eq[eq.Information = 2] = "Information", eq[eq.Warning = 3] = "Warning", eq[eq.Error = 4] = "Error", eq[eq.Critical = 5] = "Critical", eq[eq.None = 6] = "None";
+    }(eq = eX || (eX = {}))[eq.Trace = 0] = "Trace", eq[eq.Debug = 1] = "Debug", eq[eq.Information = 2] = "Information", eq[eq.Warning = 3] = "Warning", eq[eq.Error = 4] = "Error", eq[eq.Critical = 5] = "Critical", eq[eq.None = 6] = "None";
     class f {
         log(t, n) {}
     }
@@ -29855,7 +29840,7 @@
     async function C(t, n, r, o, a, i) {
         let l = {},
             [s, u] = I();
-        l[s] = u, t.log(eY.Trace, "(".concat(n, " transport) sending data. ").concat(v(a, i.logMessageContent), "."));
+        l[s] = u, t.log(eX.Trace, "(".concat(n, " transport) sending data. ").concat(v(a, i.logMessageContent), "."));
         let c = b(a) ? "arraybuffer" : "text",
             d = await r.post(o, {
                 content: a,
@@ -29867,7 +29852,7 @@
                 timeout: i.timeout,
                 withCredentials: i.withCredentials
             });
-        t.log(eY.Trace, "(".concat(n, " transport) request complete. Response status: ").concat(d.statusCode, "."))
+        t.log(eX.Trace, "(".concat(n, " transport) request complete. Response status: ").concat(d.statusCode, "."))
     }
     class E {
         dispose() {
@@ -29881,16 +29866,16 @@
     class w {
         log(t, n) {
             if (t >= this._minLevel) {
-                let r = "[".concat(new Date().toISOString(), "] ").concat(eY[t], ": ").concat(n);
+                let r = "[".concat(new Date().toISOString(), "] ").concat(eX[t], ": ").concat(n);
                 switch (t) {
-                    case eY.Critical:
-                    case eY.Error:
+                    case eX.Critical:
+                    case eX.Error:
                         this.out.error(r);
                         break;
-                    case eY.Warning:
+                    case eX.Warning:
                         this.out.warn(r);
                         break;
-                    case eY.Information:
+                    case eX.Information:
                         this.out.info(r);
                         break;
                     default:
@@ -29938,7 +29923,7 @@
             });
             let s = null;
             t.timeout && (s = setTimeout(() => {
-                o.abort(), this._logger.log(eY.Warning, "Timeout from HTTP request."), n = new i
+                o.abort(), this._logger.log(eX.Warning, "Timeout from HTTP request."), n = new i
             }, t.timeout)), "" === t.content && (t.content = void 0), t.content && (t.headers = t.headers || {}, b(t.content) ? t.headers["Content-Type"] = "application/octet-stream" : t.headers["Content-Type"] = "text/plain;charset=UTF-8");
             try {
                 r = await this._fetchType(t.url, {
@@ -29956,7 +29941,7 @@
                 })
             } catch (t) {
                 if (n) throw n;
-                throw this._logger.log(eY.Warning, "Error from HTTP request. ".concat(t, ".")), t
+                throw this._logger.log(eX.Warning, "Error from HTTP request. ".concat(t, ".")), t
             } finally {
                 s && clearTimeout(s), t.abortSignal && (t.abortSignal.onabort = null)
             }
@@ -30011,9 +29996,9 @@
                 }), t.timeout && (o.timeout = t.timeout), o.onload = () => {
                     t.abortSignal && (t.abortSignal.onabort = null), o.status >= 200 && o.status < 300 ? n(new m(o.status, o.statusText, o.response || o.responseText)) : r(new a(o.response || o.responseText || o.statusText, o.status))
                 }, o.onerror = () => {
-                    this._logger.log(eY.Warning, "Error from HTTP request. ".concat(o.status, ": ").concat(o.statusText, ".")), r(new a(o.statusText, o.status))
+                    this._logger.log(eX.Warning, "Error from HTTP request. ".concat(o.status, ": ").concat(o.statusText, ".")), r(new a(o.statusText, o.status))
                 }, o.ontimeout = () => {
-                    this._logger.log(eY.Warning, "Timeout from HTTP request."), r(new i)
+                    this._logger.log(eX.Warning, "Timeout from HTTP request."), r(new i)
                 }, o.send(t.content)
             }) : Promise.reject(Error("No url defined.")) : Promise.reject(Error("No method defined."))
         }
@@ -30067,7 +30052,7 @@
             if (o.type) throw Error("Expected a handshake response from the server.");
             return [r, o]
         }
-    }(eW = eX || (eX = {}))[eW.Invocation = 1] = "Invocation", eW[eW.StreamItem = 2] = "StreamItem", eW[eW.Completion = 3] = "Completion", eW[eW.StreamInvocation = 4] = "StreamInvocation", eW[eW.CancelInvocation = 5] = "CancelInvocation", eW[eW.Ping = 6] = "Ping", eW[eW.Close = 7] = "Close", eW[eW.Ack = 8] = "Ack", eW[eW.Sequence = 9] = "Sequence";
+    }(eW = eY || (eY = {}))[eW.Invocation = 1] = "Invocation", eW[eW.StreamItem = 2] = "StreamItem", eW[eW.Completion = 3] = "Completion", eW[eW.StreamInvocation = 4] = "StreamInvocation", eW[eW.CancelInvocation = 5] = "CancelInvocation", eW[eW.Ping = 6] = "Ping", eW[eW.Close = 7] = "Close", eW[eW.Ack = 8] = "Ack", eW[eW.Sequence = 9] = "Sequence";
     class _ {
         next(t) {
             for (let n of this.observers) n.next(t)
@@ -30115,7 +30100,7 @@
         }
         _shouldProcessMessage(t) {
             if (this._waitForSequenceMessage)
-                if (t.type !== eX.Sequence) return !1;
+                if (t.type !== eY.Sequence) return !1;
                 else return this._waitForSequenceMessage = !1, !0;
             if (!this._isInvocationMessage(t)) return !0;
             let n = this._nextReceivingSequenceId;
@@ -30130,7 +30115,7 @@
         async _resend() {
             let t = 0 !== this._messages.length ? this._messages[0]._id : this._totalMessageCount + 1;
             for (let n of (await this._connection.send(this._protocol.writeMessage({
-                    type: eX.Sequence,
+                    type: eY.Sequence,
                     sequenceId: t
                 })), this._messages)) await this._connection.send(n._message);
             this._reconnectInProgress = !1
@@ -30140,16 +30125,16 @@
         }
         _isInvocationMessage(t) {
             switch (t.type) {
-                case eX.Invocation:
-                case eX.StreamItem:
-                case eX.Completion:
-                case eX.StreamInvocation:
-                case eX.CancelInvocation:
+                case eY.Invocation:
+                case eY.StreamItem:
+                case eY.Completion:
+                case eY.StreamInvocation:
+                case eY.CancelInvocation:
                     return !0;
-                case eX.Close:
-                case eX.Sequence:
-                case eX.Ping:
-                case eX.Ack:
+                case eY.Close:
+                case eY.Sequence:
+                case eY.Ping:
+                case eY.Ack:
                     return !1
             }
         }
@@ -30157,7 +30142,7 @@
             void 0 === this._ackTimerHandle && (this._ackTimerHandle = setTimeout(async () => {
                 try {
                     this._reconnectInProgress || await this._connection.send(this._protocol.writeMessage({
-                        type: eX.Ack,
+                        type: eY.Ack,
                         sequenceId: this._latestReceivedSequenceId
                     }))
                 } catch (t) {}
@@ -30196,11 +30181,11 @@
         }
         async _startWithStateTransitions() {
             if (this._connectionState !== eQ.Disconnected) return Promise.reject(Error("Cannot start a HubConnection that is not in the 'Disconnected' state."));
-            this._connectionState = eQ.Connecting, this._logger.log(eY.Debug, "Starting HubConnection.");
+            this._connectionState = eQ.Connecting, this._logger.log(eX.Debug, "Starting HubConnection.");
             try {
-                await this._startInternal(), y.isBrowser && window.document.addEventListener("freeze", this._freezeEventListener), this._connectionState = eQ.Connected, this._connectionStarted = !0, this._logger.log(eY.Debug, "HubConnection connected successfully.")
+                await this._startInternal(), y.isBrowser && window.document.addEventListener("freeze", this._freezeEventListener), this._connectionState = eQ.Connected, this._connectionStarted = !0, this._logger.log(eX.Debug, "HubConnection connected successfully.")
             } catch (t) {
-                return this._connectionState = eQ.Disconnected, this._logger.log(eY.Debug, "HubConnection failed to start successfully because of error '".concat(t, "'.")), Promise.reject(t)
+                return this._connectionState = eQ.Disconnected, this._logger.log(eX.Debug, "HubConnection failed to start successfully because of error '".concat(t, "'.")), Promise.reject(t)
             }
         }
         async _startInternal() {
@@ -30216,12 +30201,12 @@
                     protocol: this._protocol.name,
                     version: n
                 };
-                if (this._logger.log(eY.Debug, "Sending handshake request."), await this._sendMessage(this._handshakeProtocol.writeHandshakeRequest(r)), this._logger.log(eY.Information, "Using HubProtocol '".concat(this._protocol.name, "'.")), this._cleanupTimeout(), this._resetTimeoutPeriod(), this._resetKeepAliveInterval(), await t, this._stopDuringStartError) throw this._stopDuringStartError;
+                if (this._logger.log(eX.Debug, "Sending handshake request."), await this._sendMessage(this._handshakeProtocol.writeHandshakeRequest(r)), this._logger.log(eX.Information, "Using HubProtocol '".concat(this._protocol.name, "'.")), this._cleanupTimeout(), this._resetTimeoutPeriod(), this._resetKeepAliveInterval(), await t, this._stopDuringStartError) throw this._stopDuringStartError;
                 (this.connection.features.reconnect || 0) && (this._messageBuffer = new F(this._protocol, this.connection, this._statefulReconnectBufferSize), this.connection.features.disconnected = this._messageBuffer._disconnected.bind(this._messageBuffer), this.connection.features.resend = () => {
                     if (this._messageBuffer) return this._messageBuffer._resend()
                 }), this.connection.features.inherentKeepAlive || await this._sendMessage(this._cachedPingMessage)
             } catch (t) {
-                throw this._logger.log(eY.Debug, "Hub handshake failed with error '".concat(t, "' during start(). Stopping HubConnection.")), this._cleanupTimeout(), this._cleanupPingTimer(), await this.connection.stop(t), t
+                throw this._logger.log(eX.Debug, "Hub handshake failed with error '".concat(t, "' during start(). Stopping HubConnection.")), this._cleanupTimeout(), this._cleanupPingTimer(), await this.connection.stop(t), t
             }
         }
         async stop() {
@@ -30232,10 +30217,10 @@
             } catch (t) {}
         }
         _stopInternal(t) {
-            if (this._connectionState === eQ.Disconnected) return this._logger.log(eY.Debug, "Call to HubConnection.stop(".concat(t, ") ignored because it is already in the disconnected state.")), Promise.resolve();
-            if (this._connectionState === eQ.Disconnecting) return this._logger.log(eY.Debug, "Call to HttpConnection.stop(".concat(t, ") ignored because the connection is already in the disconnecting state.")), this._stopPromise;
+            if (this._connectionState === eQ.Disconnected) return this._logger.log(eX.Debug, "Call to HubConnection.stop(".concat(t, ") ignored because it is already in the disconnected state.")), Promise.resolve();
+            if (this._connectionState === eQ.Disconnecting) return this._logger.log(eX.Debug, "Call to HttpConnection.stop(".concat(t, ") ignored because the connection is already in the disconnecting state.")), this._stopPromise;
             let n = this._connectionState;
-            return (this._connectionState = eQ.Disconnecting, this._logger.log(eY.Debug, "Stopping HubConnection."), this._reconnectDelayHandle) ? (this._logger.log(eY.Debug, "Connection stopped during reconnect delay. Done reconnecting."), clearTimeout(this._reconnectDelayHandle), this._reconnectDelayHandle = void 0, this._completeClose(), Promise.resolve()) : (n === eQ.Connected && this._sendCloseMessage(), this._cleanupTimeout(), this._cleanupPingTimer(), this._stopDuringStartError = t || new l("The connection was stopped before the hub handshake could complete."), this.connection.stop(t))
+            return (this._connectionState = eQ.Disconnecting, this._logger.log(eX.Debug, "Stopping HubConnection."), this._reconnectDelayHandle) ? (this._logger.log(eX.Debug, "Connection stopped during reconnect delay. Done reconnecting."), clearTimeout(this._reconnectDelayHandle), this._reconnectDelayHandle = void 0, this._completeClose(), Promise.resolve()) : (n === eQ.Connected && this._sendCloseMessage(), this._cleanupTimeout(), this._cleanupPingTimer(), this._stopDuringStartError = t || new l("The connection was stopped before the hub handshake could complete."), this.connection.stop(t))
         }
         async _sendCloseMessage() {
             try {
@@ -30251,7 +30236,7 @@
                 let t = this._createCancelInvocation(s.invocationId);
                 return delete this._callbacks[s.invocationId], a.then(() => this._sendWithProtocol(t))
             }, this._callbacks[s.invocationId] = (t, n) => {
-                n ? u.error(n) : t && (t.type === eX.Completion ? t.error ? u.error(Error(t.error)) : u.complete() : u.next(t.item))
+                n ? u.error(n) : t && (t.type === eY.Completion ? t.error ? u.error(Error(t.error)) : u.complete() : u.next(t.item))
             }, a = this._sendWithProtocol(s).catch(t => {
                 u.error(t), delete this._callbacks[s.invocationId]
             }), this._launchStreams(i, a), u
@@ -30272,7 +30257,7 @@
             let [a, i] = this._replaceStreamingParams(r), l = this._createInvocation(t, r, !1, i);
             return new Promise((t, n) => {
                 this._callbacks[l.invocationId] = (r, o) => {
-                    o ? n(o) : r && (r.type === eX.Completion ? r.error ? n(Error(r.error)) : t(r.result) : n(Error("Unexpected message type: ".concat(r.type))))
+                    o ? n(o) : r && (r.type === eY.Completion ? r.error ? n(Error(r.error)) : t(r.result) : n(Error("Unexpected message type: ".concat(r.type))))
                 };
                 let r = this._sendWithProtocol(l).catch(t => {
                     n(t), delete this._callbacks[l.invocationId]
@@ -30305,40 +30290,40 @@
             if (this._cleanupTimeout(), this._receivedHandshakeResponse || (t = this._processHandshakeResponse(t), this._receivedHandshakeResponse = !0), t) {
                 for (let n of this._protocol.parseMessages(t, this._logger))
                     if (!this._messageBuffer || this._messageBuffer._shouldProcessMessage(n)) switch (n.type) {
-                        case eX.Invocation:
+                        case eY.Invocation:
                             this._invokeClientMethod(n).catch(t => {
-                                this._logger.log(eY.Error, "Invoke client method threw error: ".concat(S(t)))
+                                this._logger.log(eX.Error, "Invoke client method threw error: ".concat(S(t)))
                             });
                             break;
-                        case eX.StreamItem:
-                        case eX.Completion: {
+                        case eY.StreamItem:
+                        case eY.Completion: {
                             let t = this._callbacks[n.invocationId];
                             if (t) {
-                                n.type === eX.Completion && delete this._callbacks[n.invocationId];
+                                n.type === eY.Completion && delete this._callbacks[n.invocationId];
                                 try {
                                     t(n)
                                 } catch (t) {
-                                    this._logger.log(eY.Error, "Stream callback threw error: ".concat(S(t)))
+                                    this._logger.log(eX.Error, "Stream callback threw error: ".concat(S(t)))
                                 }
                             }
                             break
                         }
-                        case eX.Ping:
+                        case eY.Ping:
                             break;
-                        case eX.Close: {
-                            this._logger.log(eY.Information, "Close message received from server.");
+                        case eY.Close: {
+                            this._logger.log(eX.Information, "Close message received from server.");
                             let t = n.error ? Error("Server returned an error on close: " + n.error) : void 0;
                             !0 === n.allowReconnect ? this.connection.stop(t) : this._stopPromise = this._stopInternal(t);
                             break
                         }
-                        case eX.Ack:
+                        case eY.Ack:
                             this._messageBuffer && this._messageBuffer._ack(n);
                             break;
-                        case eX.Sequence:
+                        case eY.Sequence:
                             this._messageBuffer && this._messageBuffer._resetSequence(n);
                             break;
                         default:
-                            this._logger.log(eY.Warning, "Invalid message type: ".concat(n.type, "."))
+                            this._logger.log(eX.Warning, "Invalid message type: ".concat(n.type, "."))
                     }
             }
             this._resetTimeoutPeriod()
@@ -30349,17 +30334,17 @@
                 [r, n] = this._handshakeProtocol.parseHandshakeResponse(t)
             } catch (r) {
                 let t = "Error parsing handshake response: " + r;
-                this._logger.log(eY.Error, t);
+                this._logger.log(eX.Error, t);
                 let n = Error(t);
                 throw this._handshakeRejecter(n), n
             }
             if (n.error) {
                 let t = "Server returned handshake error: " + n.error;
-                this._logger.log(eY.Error, t);
+                this._logger.log(eX.Error, t);
                 let r = Error(t);
                 throw this._handshakeRejecter(r), r
             }
-            return this._logger.log(eY.Debug, "Server handshake complete."), this._handshakeResolver(), r
+            return this._logger.log(eX.Debug, "Server handshake complete."), this._handshakeResolver(), r
         }
         _resetKeepAliveInterval() {
             this.connection.features.inherentKeepAlive || (this._nextKeepAlive = new Date().getTime() + this.keepAliveIntervalInMilliseconds, this._cleanupPingTimer())
@@ -30383,21 +30368,21 @@
             let n, r, o, a = t.target.toLowerCase(),
                 i = this._methods[a];
             if (!i) {
-                this._logger.log(eY.Warning, "No client method with the name '".concat(a, "' found.")), t.invocationId && (this._logger.log(eY.Warning, "No result given for '".concat(a, "' method and invocation ID '").concat(t.invocationId, "'.")), await this._sendWithProtocol(this._createCompletionMessage(t.invocationId, "Client didn't provide a result.", null)));
+                this._logger.log(eX.Warning, "No client method with the name '".concat(a, "' found.")), t.invocationId && (this._logger.log(eX.Warning, "No result given for '".concat(a, "' method and invocation ID '").concat(t.invocationId, "'.")), await this._sendWithProtocol(this._createCompletionMessage(t.invocationId, "Client didn't provide a result.", null)));
                 return
             }
             let l = i.slice(),
                 s = !!t.invocationId;
             for (let i of l) try {
                 let l = n;
-                n = await i.apply(this, t.arguments), s && n && l && (this._logger.log(eY.Error, "Multiple results provided for '".concat(a, "'. Sending error to server.")), o = this._createCompletionMessage(t.invocationId, "Client provided multiple results.", null)), r = void 0
+                n = await i.apply(this, t.arguments), s && n && l && (this._logger.log(eX.Error, "Multiple results provided for '".concat(a, "'. Sending error to server.")), o = this._createCompletionMessage(t.invocationId, "Client provided multiple results.", null)), r = void 0
             } catch (t) {
-                r = t, this._logger.log(eY.Error, "A callback for the method '".concat(a, "' threw error '").concat(t, "'."))
+                r = t, this._logger.log(eX.Error, "A callback for the method '".concat(a, "' threw error '").concat(t, "'."))
             }
-            o ? await this._sendWithProtocol(o) : s ? (r ? o = this._createCompletionMessage(t.invocationId, "".concat(r), null) : void 0 !== n ? o = this._createCompletionMessage(t.invocationId, null, n) : (this._logger.log(eY.Warning, "No result given for '".concat(a, "' method and invocation ID '").concat(t.invocationId, "'.")), o = this._createCompletionMessage(t.invocationId, "Client didn't provide a result.", null)), await this._sendWithProtocol(o)) : n && this._logger.log(eY.Error, "Result given for '".concat(a, "' method but server is not expecting a result."))
+            o ? await this._sendWithProtocol(o) : s ? (r ? o = this._createCompletionMessage(t.invocationId, "".concat(r), null) : void 0 !== n ? o = this._createCompletionMessage(t.invocationId, null, n) : (this._logger.log(eX.Warning, "No result given for '".concat(a, "' method and invocation ID '").concat(t.invocationId, "'.")), o = this._createCompletionMessage(t.invocationId, "Client didn't provide a result.", null)), await this._sendWithProtocol(o)) : n && this._logger.log(eX.Error, "Result given for '".concat(a, "' method but server is not expecting a result."))
         }
         _connectionClosed(t) {
-            this._logger.log(eY.Debug, "HubConnection.connectionClosed(".concat(t, ") called while in state ").concat(this._connectionState, ".")), this._stopDuringStartError = this._stopDuringStartError || t || new l("The underlying connection was closed before the hub handshake could complete."), this._handshakeResolver && this._handshakeResolver(), this._cancelCallbacksWithError(t || Error("Invocation canceled due to the underlying connection being closed.")), this._cleanupTimeout(), this._cleanupPingTimer(), this._connectionState === eQ.Disconnecting ? this._completeClose(t) : this._connectionState === eQ.Connected && this._reconnectPolicy ? this._reconnect(t) : this._connectionState === eQ.Connected && this._completeClose(t)
+            this._logger.log(eX.Debug, "HubConnection.connectionClosed(".concat(t, ") called while in state ").concat(this._connectionState, ".")), this._stopDuringStartError = this._stopDuringStartError || t || new l("The underlying connection was closed before the hub handshake could complete."), this._handshakeResolver && this._handshakeResolver(), this._cancelCallbacksWithError(t || Error("Invocation canceled due to the underlying connection being closed.")), this._cleanupTimeout(), this._cleanupPingTimer(), this._connectionState === eQ.Disconnecting ? this._completeClose(t) : this._connectionState === eQ.Connected && this._reconnectPolicy ? this._reconnect(t) : this._connectionState === eQ.Connected && this._completeClose(t)
         }
         _completeClose(t) {
             if (this._connectionStarted) {
@@ -30405,7 +30390,7 @@
                 try {
                     this._closedCallbacks.forEach(n => n.apply(this, [t]))
                 } catch (n) {
-                    this._logger.log(eY.Error, "An onclose callback called with error '".concat(t, "' threw error '").concat(n, "'."))
+                    this._logger.log(eX.Error, "An onclose callback called with error '".concat(t, "' threw error '").concat(n, "'."))
                 }
             }
         }
@@ -30415,37 +30400,37 @@
                 o = void 0 !== t ? t : Error("Attempting to reconnect due to a unknown error."),
                 a = this._getNextRetryDelay(r++, 0, o);
             if (null === a) {
-                this._logger.log(eY.Debug, "Connection not reconnecting because the IRetryPolicy returned null on the first reconnect attempt."), this._completeClose(t);
+                this._logger.log(eX.Debug, "Connection not reconnecting because the IRetryPolicy returned null on the first reconnect attempt."), this._completeClose(t);
                 return
             }
-            if (this._connectionState = eQ.Reconnecting, t ? this._logger.log(eY.Information, "Connection reconnecting because of error '".concat(t, "'.")) : this._logger.log(eY.Information, "Connection reconnecting."), 0 !== this._reconnectingCallbacks.length) {
+            if (this._connectionState = eQ.Reconnecting, t ? this._logger.log(eX.Information, "Connection reconnecting because of error '".concat(t, "'.")) : this._logger.log(eX.Information, "Connection reconnecting."), 0 !== this._reconnectingCallbacks.length) {
                 try {
                     this._reconnectingCallbacks.forEach(n => n.apply(this, [t]))
                 } catch (n) {
-                    this._logger.log(eY.Error, "An onreconnecting callback called with error '".concat(t, "' threw error '").concat(n, "'."))
+                    this._logger.log(eX.Error, "An onreconnecting callback called with error '".concat(t, "' threw error '").concat(n, "'."))
                 }
-                if (this._connectionState !== eQ.Reconnecting) return void this._logger.log(eY.Debug, "Connection left the reconnecting state in onreconnecting callback. Done reconnecting.")
+                if (this._connectionState !== eQ.Reconnecting) return void this._logger.log(eX.Debug, "Connection left the reconnecting state in onreconnecting callback. Done reconnecting.")
             }
             for (; null !== a;) {
-                if (this._logger.log(eY.Information, "Reconnect attempt number ".concat(r, " will start in ").concat(a, " ms.")), await new Promise(t => {
+                if (this._logger.log(eX.Information, "Reconnect attempt number ".concat(r, " will start in ").concat(a, " ms.")), await new Promise(t => {
                         this._reconnectDelayHandle = setTimeout(t, a)
-                    }), this._reconnectDelayHandle = void 0, this._connectionState !== eQ.Reconnecting) return void this._logger.log(eY.Debug, "Connection left the reconnecting state during reconnect delay. Done reconnecting.");
+                    }), this._reconnectDelayHandle = void 0, this._connectionState !== eQ.Reconnecting) return void this._logger.log(eX.Debug, "Connection left the reconnecting state during reconnect delay. Done reconnecting.");
                 try {
-                    if (await this._startInternal(), this._connectionState = eQ.Connected, this._logger.log(eY.Information, "HubConnection reconnected successfully."), 0 !== this._reconnectedCallbacks.length) try {
+                    if (await this._startInternal(), this._connectionState = eQ.Connected, this._logger.log(eX.Information, "HubConnection reconnected successfully."), 0 !== this._reconnectedCallbacks.length) try {
                         this._reconnectedCallbacks.forEach(t => t.apply(this, [this.connection.connectionId]))
                     } catch (t) {
-                        this._logger.log(eY.Error, "An onreconnected callback called with connectionId '".concat(this.connection.connectionId, "; threw error '").concat(t, "'."))
+                        this._logger.log(eX.Error, "An onreconnected callback called with connectionId '".concat(this.connection.connectionId, "; threw error '").concat(t, "'."))
                     }
                     return
                 } catch (t) {
-                    if (this._logger.log(eY.Information, "Reconnect attempt failed because of error '".concat(t, "'.")), this._connectionState !== eQ.Reconnecting) {
-                        this._logger.log(eY.Debug, "Connection moved to the '".concat(this._connectionState, "' from the reconnecting state during reconnect attempt. Done reconnecting.")), this._connectionState === eQ.Disconnecting && this._completeClose();
+                    if (this._logger.log(eX.Information, "Reconnect attempt failed because of error '".concat(t, "'.")), this._connectionState !== eQ.Reconnecting) {
+                        this._logger.log(eX.Debug, "Connection moved to the '".concat(this._connectionState, "' from the reconnecting state during reconnect attempt. Done reconnecting.")), this._connectionState === eQ.Disconnecting && this._completeClose();
                         return
                     }
                     o = t instanceof Error ? t : Error(t.toString()), a = this._getNextRetryDelay(r++, Date.now() - n, o)
                 }
             }
-            this._logger.log(eY.Information, "Reconnect retries have been exhausted after ".concat(Date.now() - n, " ms and ").concat(r, " failed attempts. Connection disconnecting.")), this._completeClose()
+            this._logger.log(eX.Information, "Reconnect retries have been exhausted after ".concat(Date.now() - n, " ms and ").concat(r, " failed attempts. Connection disconnecting.")), this._completeClose()
         }
         _getNextRetryDelay(t, n, r) {
             try {
@@ -30455,7 +30440,7 @@
                     retryReason: r
                 })
             } catch (r) {
-                return this._logger.log(eY.Error, "IRetryPolicy.nextRetryDelayInMilliseconds(".concat(t, ", ").concat(n, ") threw error '").concat(r, "'.")), null
+                return this._logger.log(eX.Error, "IRetryPolicy.nextRetryDelayInMilliseconds(".concat(t, ", ").concat(n, ") threw error '").concat(r, "'.")), null
             }
         }
         _cancelCallbacksWithError(t) {
@@ -30465,7 +30450,7 @@
                 try {
                     o(null, t)
                 } catch (n) {
-                    this._logger.log(eY.Error, "Stream 'error' callback called with '".concat(t, "' threw error: ").concat(S(n)))
+                    this._logger.log(eX.Error, "Stream 'error' callback called with '".concat(t, "' threw error: ").concat(S(n)))
                 }
             })
         }
@@ -30481,12 +30466,12 @@
                     arguments: n,
                     streamIds: o,
                     target: t,
-                    type: eX.Invocation
+                    type: eY.Invocation
                 };
                 else return {
                     arguments: n,
                     target: t,
-                    type: eX.Invocation
+                    type: eY.Invocation
                 };
             {
                 let r = this._invocationId;
@@ -30495,12 +30480,12 @@
                     invocationId: r.toString(),
                     streamIds: o,
                     target: t,
-                    type: eX.Invocation
+                    type: eY.Invocation
                 } : {
                     arguments: n,
                     invocationId: r.toString(),
                     target: t,
-                    type: eX.Invocation
+                    type: eY.Invocation
                 }
             }
         }
@@ -30541,48 +30526,48 @@
                 invocationId: o.toString(),
                 streamIds: r,
                 target: t,
-                type: eX.StreamInvocation
+                type: eY.StreamInvocation
             } : {
                 arguments: n,
                 invocationId: o.toString(),
                 target: t,
-                type: eX.StreamInvocation
+                type: eY.StreamInvocation
             }
         }
         _createCancelInvocation(t) {
             return {
                 invocationId: t,
-                type: eX.CancelInvocation
+                type: eY.CancelInvocation
             }
         }
         _createStreamItemMessage(t, n) {
             return {
                 invocationId: t,
                 item: n,
-                type: eX.StreamItem
+                type: eY.StreamItem
             }
         }
         _createCompletionMessage(t, n, r) {
             return n ? {
                 error: n,
                 invocationId: t,
-                type: eX.Completion
+                type: eY.Completion
             } : {
                 invocationId: t,
                 result: r,
-                type: eX.Completion
+                type: eY.Completion
             }
         }
         _createCloseMessage() {
             return {
-                type: eX.Close
+                type: eY.Close
             }
         }
         constructor(t, n, r, o, a, i, l) {
             this._nextKeepAlive = 0, this._freezeEventListener = () => {
-                this._logger.log(eY.Warning, "The page is being frozen, this will likely lead to the connection being closed and messages being lost. For more information see the docs at https://learn.microsoft.com/aspnet/core/signalr/javascript-client#bsleep")
+                this._logger.log(eX.Warning, "The page is being frozen, this will likely lead to the connection being closed and messages being lost. For more information see the docs at https://learn.microsoft.com/aspnet/core/signalr/javascript-client#bsleep")
             }, g.isRequired(t, "connection"), g.isRequired(n, "logger"), g.isRequired(r, "protocol"), this.serverTimeoutInMilliseconds = null != a ? a : 3e4, this.keepAliveIntervalInMilliseconds = null != i ? i : 15e3, this._statefulReconnectBufferSize = null != l ? l : 1e5, this._logger = n, this._protocol = r, this.connection = t, this._reconnectPolicy = o, this._handshakeProtocol = new j, this.connection.onreceive = t => this._processIncomingData(t), this.connection.onclose = t => this._connectionClosed(t), this._callbacks = {}, this._methods = {}, this._closedCallbacks = [], this._reconnectingCallbacks = [], this._reconnectedCallbacks = [], this._invocationId = 0, this._receivedHandshakeResponse = !1, this._connectionState = eQ.Disconnected, this._connectionStarted = !1, this._cachedPingMessage = this._protocol.writeMessage({
-                type: eX.Ping
+                type: eY.Ping
             })
         }
     }
@@ -30633,7 +30618,7 @@
             return this._pollAbort.aborted
         }
         async connect(t, n) {
-            if (g.isRequired(t, "url"), g.isRequired(n, "transferFormat"), g.isIn(n, e0, "transferFormat"), this._url = t, this._logger.log(eY.Trace, "(LongPolling transport) Connecting."), n === e0.Binary && "u" > typeof XMLHttpRequest && "string" != typeof new XMLHttpRequest().responseType) throw Error("Binary protocols over XmlHttpRequest not implementing advanced features are not supported.");
+            if (g.isRequired(t, "url"), g.isRequired(n, "transferFormat"), g.isIn(n, e0, "transferFormat"), this._url = t, this._logger.log(eX.Trace, "(LongPolling transport) Connecting."), n === e0.Binary && "u" > typeof XMLHttpRequest && "string" != typeof new XMLHttpRequest().responseType) throw Error("Binary protocols over XmlHttpRequest not implementing advanced features are not supported.");
             let [r, o] = I(), i = {
                 [r]: o,
                 ...this._options.headers
@@ -30645,32 +30630,32 @@
             };
             n === e0.Binary && (l.responseType = "arraybuffer");
             let s = "".concat(t, "&_=").concat(Date.now());
-            this._logger.log(eY.Trace, "(LongPolling transport) polling: ".concat(s, "."));
+            this._logger.log(eX.Trace, "(LongPolling transport) polling: ".concat(s, "."));
             let u = await this._httpClient.get(s, l);
-            200 !== u.statusCode ? (this._logger.log(eY.Error, "(LongPolling transport) Unexpected response code: ".concat(u.statusCode, ".")), this._closeError = new a(u.statusText || "", u.statusCode), this._running = !1) : this._running = !0, this._receiving = this._poll(this._url, l)
+            200 !== u.statusCode ? (this._logger.log(eX.Error, "(LongPolling transport) Unexpected response code: ".concat(u.statusCode, ".")), this._closeError = new a(u.statusText || "", u.statusCode), this._running = !1) : this._running = !0, this._receiving = this._poll(this._url, l)
         }
         async _poll(t, n) {
             try {
                 for (; this._running;) try {
                     let r = "".concat(t, "&_=").concat(Date.now());
-                    this._logger.log(eY.Trace, "(LongPolling transport) polling: ".concat(r, "."));
+                    this._logger.log(eX.Trace, "(LongPolling transport) polling: ".concat(r, "."));
                     let o = await this._httpClient.get(r, n);
-                    204 === o.statusCode ? (this._logger.log(eY.Information, "(LongPolling transport) Poll terminated by server."), this._running = !1) : 200 !== o.statusCode ? (this._logger.log(eY.Error, "(LongPolling transport) Unexpected response code: ".concat(o.statusCode, ".")), this._closeError = new a(o.statusText || "", o.statusCode), this._running = !1) : o.content ? (this._logger.log(eY.Trace, "(LongPolling transport) data received. ".concat(v(o.content, this._options.logMessageContent), ".")), this.onreceive && this.onreceive(o.content)) : this._logger.log(eY.Trace, "(LongPolling transport) Poll timed out, reissuing.")
+                    204 === o.statusCode ? (this._logger.log(eX.Information, "(LongPolling transport) Poll terminated by server."), this._running = !1) : 200 !== o.statusCode ? (this._logger.log(eX.Error, "(LongPolling transport) Unexpected response code: ".concat(o.statusCode, ".")), this._closeError = new a(o.statusText || "", o.statusCode), this._running = !1) : o.content ? (this._logger.log(eX.Trace, "(LongPolling transport) data received. ".concat(v(o.content, this._options.logMessageContent), ".")), this.onreceive && this.onreceive(o.content)) : this._logger.log(eX.Trace, "(LongPolling transport) Poll timed out, reissuing.")
                 } catch (t) {
-                    this._running ? t instanceof i ? this._logger.log(eY.Trace, "(LongPolling transport) Poll timed out, reissuing.") : (this._closeError = t, this._running = !1) : this._logger.log(eY.Trace, "(LongPolling transport) Poll errored after shutdown: ".concat(t.message))
+                    this._running ? t instanceof i ? this._logger.log(eX.Trace, "(LongPolling transport) Poll timed out, reissuing.") : (this._closeError = t, this._running = !1) : this._logger.log(eX.Trace, "(LongPolling transport) Poll errored after shutdown: ".concat(t.message))
                 }
             } finally {
-                this._logger.log(eY.Trace, "(LongPolling transport) Polling complete."), this.pollAborted || this._raiseOnClose()
+                this._logger.log(eX.Trace, "(LongPolling transport) Polling complete."), this.pollAborted || this._raiseOnClose()
             }
         }
         async send(t) {
             return this._running ? C(this._logger, "LongPolling", this._httpClient, this._url, t, this._options) : Promise.reject(Error("Cannot send until the transport is connected"))
         }
         async stop() {
-            this._logger.log(eY.Trace, "(LongPolling transport) Stopping polling."), this._running = !1, this._pollAbort.abort();
+            this._logger.log(eX.Trace, "(LongPolling transport) Stopping polling."), this._running = !1, this._pollAbort.abort();
             try {
                 let t;
-                await this._receiving, this._logger.log(eY.Trace, "(LongPolling transport) sending DELETE request to ".concat(this._url, "."));
+                await this._receiving, this._logger.log(eX.Trace, "(LongPolling transport) sending DELETE request to ".concat(this._url, "."));
                 let n = {},
                     [r, o] = I();
                 n[r] = o;
@@ -30687,15 +30672,15 @@
                 } catch (n) {
                     t = n
                 }
-                t ? t instanceof a && (404 === t.statusCode ? this._logger.log(eY.Trace, "(LongPolling transport) A 404 response was returned from sending a DELETE request.") : this._logger.log(eY.Trace, "(LongPolling transport) Error sending a DELETE request: ".concat(t))) : this._logger.log(eY.Trace, "(LongPolling transport) DELETE request accepted.")
+                t ? t instanceof a && (404 === t.statusCode ? this._logger.log(eX.Trace, "(LongPolling transport) A 404 response was returned from sending a DELETE request.") : this._logger.log(eX.Trace, "(LongPolling transport) Error sending a DELETE request: ".concat(t))) : this._logger.log(eX.Trace, "(LongPolling transport) DELETE request accepted.")
             } finally {
-                this._logger.log(eY.Trace, "(LongPolling transport) Stop finished."), this._raiseOnClose()
+                this._logger.log(eX.Trace, "(LongPolling transport) Stop finished."), this._raiseOnClose()
             }
         }
         _raiseOnClose() {
             if (this.onclose) {
                 let t = "(LongPolling transport) Firing onclose event.";
-                this._closeError && (t += " Error: " + this._closeError), this._logger.log(eY.Trace, t), this.onclose(this._closeError)
+                this._closeError && (t += " Error: " + this._closeError), this._logger.log(eX.Trace, t), this.onclose(this._closeError)
             }
         }
         constructor(t, n, r) {
@@ -30704,7 +30689,7 @@
     }
     class U {
         async connect(t, n) {
-            return g.isRequired(t, "url"), g.isRequired(n, "transferFormat"), g.isIn(n, e0, "transferFormat"), this._logger.log(eY.Trace, "(SSE transport) Connecting."), this._url = t, this._accessToken && (t += (0 > t.indexOf("?") ? "?" : "&") + "access_token=".concat(encodeURIComponent(this._accessToken))), new Promise((r, o) => {
+            return g.isRequired(t, "url"), g.isRequired(n, "transferFormat"), g.isIn(n, e0, "transferFormat"), this._logger.log(eX.Trace, "(SSE transport) Connecting."), this._url = t, this._accessToken && (t += (0 > t.indexOf("?") ? "?" : "&") + "access_token=".concat(encodeURIComponent(this._accessToken))), new Promise((r, o) => {
                 let a, i = !1;
                 if (n !== e0.Text) return void o(Error("The Server-Sent Events transport only supports the 'Text' transfer format"));
                 if (y.isBrowser || y.isWebWorker) a = new this._options.EventSource(t, {
@@ -30726,7 +30711,7 @@
                 try {
                     a.onmessage = t => {
                         if (this.onreceive) try {
-                            this._logger.log(eY.Trace, "(SSE transport) data received. ".concat(v(t.data, this._options.logMessageContent), ".")), this.onreceive(t.data)
+                            this._logger.log(eX.Trace, "(SSE transport) data received. ".concat(v(t.data, this._options.logMessageContent), ".")), this.onreceive(t.data)
                         } catch (t) {
                             this._close(t);
                             return
@@ -30734,7 +30719,7 @@
                     }, a.onerror = t => {
                         i ? this._close() : o(Error("EventSource failed to connect. The connection could not be found on the server, either the connection ID is not present on the server, or a proxy is refusing/buffering the connection. If you have multiple servers check that sticky sessions are enabled."))
                     }, a.onopen = () => {
-                        this._logger.log(eY.Information, "SSE connected to ".concat(this._url)), this._eventSource = a, i = !0, r()
+                        this._logger.log(eX.Information, "SSE connected to ".concat(this._url)), this._eventSource = a, i = !0, r()
                     }
                 } catch (t) {
                     o(t);
@@ -30758,7 +30743,7 @@
     class z {
         async connect(t, n) {
             let r;
-            return g.isRequired(t, "url"), g.isRequired(n, "transferFormat"), g.isIn(n, e0, "transferFormat"), this._logger.log(eY.Trace, "(WebSockets transport) Connecting."), this._accessTokenFactory && (r = await this._accessTokenFactory()), new Promise((o, a) => {
+            return g.isRequired(t, "url"), g.isRequired(n, "transferFormat"), g.isIn(n, e0, "transferFormat"), this._logger.log(eX.Trace, "(WebSockets transport) Connecting."), this._accessTokenFactory && (r = await this._accessTokenFactory()), new Promise((o, a) => {
                 let i;
                 t = t.replace(/^http/, "ws");
                 let l = this._httpClient.getCookieString(t),
@@ -30774,12 +30759,12 @@
                     })
                 } else r && (t += (0 > t.indexOf("?") ? "?" : "&") + "access_token=".concat(encodeURIComponent(r)));
                 i || (i = new this._webSocketConstructor(t)), n === e0.Binary && (i.binaryType = "arraybuffer"), i.onopen = n => {
-                    this._logger.log(eY.Information, "WebSocket connected to ".concat(t, ".")), this._webSocket = i, s = !0, o()
+                    this._logger.log(eX.Information, "WebSocket connected to ".concat(t, ".")), this._webSocket = i, s = !0, o()
                 }, i.onerror = t => {
                     let n = null;
-                    n = "u" > typeof ErrorEvent && t instanceof ErrorEvent ? t.error : "There was an error with the transport", this._logger.log(eY.Information, "(WebSockets transport) ".concat(n, "."))
+                    n = "u" > typeof ErrorEvent && t instanceof ErrorEvent ? t.error : "There was an error with the transport", this._logger.log(eX.Information, "(WebSockets transport) ".concat(n, "."))
                 }, i.onmessage = t => {
-                    if (this._logger.log(eY.Trace, "(WebSockets transport) data received. ".concat(v(t.data, this._logMessageContent), ".")), this.onreceive) try {
+                    if (this._logger.log(eX.Trace, "(WebSockets transport) data received. ".concat(v(t.data, this._logMessageContent), ".")), this.onreceive) try {
                         this.onreceive(t.data)
                     } catch (t) {
                         this._close(t);
@@ -30791,13 +30776,13 @@
             })
         }
         send(t) {
-            return this._webSocket && this._webSocket.readyState === this._webSocketConstructor.OPEN ? (this._logger.log(eY.Trace, "(WebSockets transport) sending data. ".concat(v(t, this._logMessageContent), ".")), this._webSocket.send(t), Promise.resolve()) : Promise.reject("WebSocket is not in the OPEN state")
+            return this._webSocket && this._webSocket.readyState === this._webSocketConstructor.OPEN ? (this._logger.log(eX.Trace, "(WebSockets transport) sending data. ".concat(v(t, this._logMessageContent), ".")), this._webSocket.send(t), Promise.resolve()) : Promise.reject("WebSocket is not in the OPEN state")
         }
         stop() {
             return this._webSocket && this._close(void 0), Promise.resolve()
         }
         _close(t) {
-            this._webSocket && (this._webSocket.onclose = () => {}, this._webSocket.onmessage = () => {}, this._webSocket.onerror = () => {}, this._webSocket.close(), this._webSocket = void 0), this._logger.log(eY.Trace, "(WebSockets transport) socket closed."), this.onclose && (this._isCloseEvent(t) && (!1 === t.wasClean || 1e3 !== t.code) ? this.onclose(Error("WebSocket closed with status code: ".concat(t.code, " (").concat(t.reason || "no reason given", ")."))) : t instanceof Error ? this.onclose(t) : this.onclose())
+            this._webSocket && (this._webSocket.onclose = () => {}, this._webSocket.onmessage = () => {}, this._webSocket.onerror = () => {}, this._webSocket.close(), this._webSocket = void 0), this._logger.log(eX.Trace, "(WebSockets transport) socket closed."), this.onclose && (this._isCloseEvent(t) && (!1 === t.wasClean || 1e3 !== t.code) ? this.onclose(Error("WebSocket closed with status code: ".concat(t.code, " (").concat(t.reason || "no reason given", ")."))) : t instanceof Error ? this.onclose(t) : this.onclose())
         }
         _isCloseEvent(t) {
             return t && "boolean" == typeof t.wasClean && "number" == typeof t.code
@@ -30808,14 +30793,14 @@
     }
     class V {
         async start(t) {
-            if (t = t || e0.Binary, g.isIn(t, e0, "transferFormat"), this._logger.log(eY.Debug, "Starting connection with transfer format '".concat(e0[t], "'.")), "Disconnected" !== this._connectionState) return Promise.reject(Error("Cannot start an HttpConnection that is not in the 'Disconnected' state."));
+            if (t = t || e0.Binary, g.isIn(t, e0, "transferFormat"), this._logger.log(eX.Debug, "Starting connection with transfer format '".concat(e0[t], "'.")), "Disconnected" !== this._connectionState) return Promise.reject(Error("Cannot start an HttpConnection that is not in the 'Disconnected' state."));
             if (this._connectionState = "Connecting", this._startInternalPromise = this._startInternal(t), await this._startInternalPromise, "Disconnecting" === this._connectionState) {
                 let t = "Failed to start the HttpConnection before stop() was called.";
-                return this._logger.log(eY.Error, t), await this._stopPromise, Promise.reject(new l(t))
+                return this._logger.log(eX.Error, t), await this._stopPromise, Promise.reject(new l(t))
             }
             if ("Connected" !== this._connectionState) {
                 let t = "HttpConnection.startInternal completed gracefully but didn't enter the connection into the connected state!";
-                return this._logger.log(eY.Error, t), Promise.reject(new l(t))
+                return this._logger.log(eX.Error, t), Promise.reject(new l(t))
             }
             this._connectionStarted = !0
         }
@@ -30823,7 +30808,7 @@
             return "Connected" !== this._connectionState ? Promise.reject(Error("Cannot send data if the connection is not in the 'Connected' State.")) : (this._sendQueue || (this._sendQueue = new q(this.transport)), this._sendQueue.send(t))
         }
         async stop(t) {
-            return "Disconnected" === this._connectionState ? (this._logger.log(eY.Debug, "Call to HttpConnection.stop(".concat(t, ") ignored because the connection is already in the disconnected state.")), Promise.resolve()) : "Disconnecting" === this._connectionState ? (this._logger.log(eY.Debug, "Call to HttpConnection.stop(".concat(t, ") ignored because the connection is already in the disconnecting state.")), this._stopPromise) : void(this._connectionState = "Disconnecting", this._stopPromise = new Promise(t => {
+            return "Disconnected" === this._connectionState ? (this._logger.log(eX.Debug, "Call to HttpConnection.stop(".concat(t, ") ignored because the connection is already in the disconnected state.")), Promise.resolve()) : "Disconnecting" === this._connectionState ? (this._logger.log(eX.Debug, "Call to HttpConnection.stop(".concat(t, ") ignored because the connection is already in the disconnecting state.")), this._stopPromise) : void(this._connectionState = "Disconnecting", this._stopPromise = new Promise(t => {
                 this._stopPromiseResolver = t
             }), await this._stopInternal(t), await this._stopPromise)
         }
@@ -30836,10 +30821,10 @@
                 try {
                     await this.transport.stop()
                 } catch (t) {
-                    this._logger.log(eY.Error, "HttpConnection.transport.stop() threw error '".concat(t, "'.")), this._stopConnection()
+                    this._logger.log(eX.Error, "HttpConnection.transport.stop() threw error '".concat(t, "'.")), this._stopConnection()
                 }
                 this.transport = void 0
-            } else this._logger.log(eY.Debug, "HttpConnection.transport is undefined in HttpConnection.stop() because start() failed.")
+            } else this._logger.log(eX.Debug, "HttpConnection.transport is undefined in HttpConnection.stop() because start() failed.")
         }
         async _startInternal(t) {
             let n = this.baseUrl;
@@ -30863,9 +30848,9 @@
                     } while (r.url && o < 100) if (100 === o && r.url) throw Error("Negotiate redirection limit exceeded.");
                     await this._createTransport(n, this._options.transport, r, t)
                 }
-                this.transport instanceof H && (this.features.inherentKeepAlive = !0), "Connecting" === this._connectionState && (this._logger.log(eY.Debug, "The HttpConnection connected successfully."), this._connectionState = "Connected")
+                this.transport instanceof H && (this.features.inherentKeepAlive = !0), "Connecting" === this._connectionState && (this._logger.log(eX.Debug, "The HttpConnection connected successfully."), this._connectionState = "Connected")
             } catch (t) {
-                return this._logger.log(eY.Error, "Failed to start the connection: " + t), this._connectionState = "Disconnected", this.transport = void 0, this._stopPromiseResolver(), Promise.reject(t)
+                return this._logger.log(eX.Error, "Failed to start the connection: " + t), this._connectionState = "Disconnected", this.transport = void 0, this._stopPromiseResolver(), Promise.reject(t)
             }
         }
         async _getNegotiationResponse(t) {
@@ -30873,7 +30858,7 @@
                 [r, o] = I();
             n[r] = o;
             let i = this._resolveNegotiateUrl(t);
-            this._logger.log(eY.Debug, "Sending negotiation request: ".concat(i, "."));
+            this._logger.log(eX.Debug, "Sending negotiation request: ".concat(i, "."));
             try {
                 let t = await this._httpClient.post(i, {
                     content: "",
@@ -30890,7 +30875,7 @@
                 return r
             } catch (n) {
                 let t = "Failed to complete negotiation with the server: " + n;
-                return n instanceof a && 404 === n.statusCode && (t += " Either this is not a SignalR endpoint or there is a proxy blocking the connection."), this._logger.log(eY.Error, t), Promise.reject(new d(t))
+                return n instanceof a && 404 === n.statusCode && (t += " Either this is not a SignalR endpoint or there is a proxy blocking the connection."), this._logger.log(eX.Error, t), Promise.reject(new d(t))
             }
         }
         _createConnectUrl(t, n) {
@@ -30899,7 +30884,7 @@
         async _createTransport(t, n, r, o) {
             let a = this._createConnectUrl(t, r.connectionToken);
             if (this._isITransport(n)) {
-                this._logger.log(eY.Debug, "Connection was provided an instance of ITransport, using that directly."), this.transport = n, await this._startTransport(a, o), this.connectionId = r.connectionId;
+                this._logger.log(eX.Debug, "Connection was provided an instance of ITransport, using that directly."), this.transport = n, await this._startTransport(a, o), this.connectionId = r.connectionId;
                 return
             }
             let i = [],
@@ -30921,9 +30906,9 @@
                         await this._startTransport(a, o), this.connectionId = u.connectionId;
                         return
                     } catch (t) {
-                        if (this._logger.log(eY.Error, "Failed to start the transport '".concat(r.transport, "': ").concat(t)), u = void 0, i.push(new c("".concat(r.transport, " failed: ").concat(t), e$[r.transport])), "Connecting" !== this._connectionState) {
+                        if (this._logger.log(eX.Error, "Failed to start the transport '".concat(r.transport, "': ").concat(t)), u = void 0, i.push(new c("".concat(r.transport, " failed: ").concat(t), e$[r.transport])), "Connecting" !== this._connectionState) {
                             let t = "Failed to select transport before stop() was called.";
-                            return this._logger.log(eY.Debug, t), Promise.reject(new l(t))
+                            return this._logger.log(eX.Debug, t), Promise.reject(new l(t))
                         }
                     }
                 }
@@ -30958,11 +30943,11 @@
         }
         _resolveTransportOrError(t, n, r, o) {
             let a = e$[t.transport];
-            if (null == a) return this._logger.log(eY.Debug, "Skipping transport '".concat(t.transport, "' because it is not supported by this client.")), Error("Skipping transport '".concat(t.transport, "' because it is not supported by this client."));
-            if (n && (a & n) == 0) return this._logger.log(eY.Debug, "Skipping transport '".concat(e$[a], "' because it was disabled by the client.")), new u("'".concat(e$[a], "' is disabled by the client."), a);
-            if (!(t.transferFormats.map(t => e0[t]).indexOf(r) >= 0)) return this._logger.log(eY.Debug, "Skipping transport '".concat(e$[a], "' because it does not support the requested transfer format '").concat(e0[r], "'.")), Error("'".concat(e$[a], "' does not support ").concat(e0[r], "."));
-            if (a === e$.WebSockets && !this._options.WebSocket || a === e$.ServerSentEvents && !this._options.EventSource) return this._logger.log(eY.Debug, "Skipping transport '".concat(e$[a], "' because it is not supported in your environment.'")), new s("'".concat(e$[a], "' is not supported in your environment."), a);
-            this._logger.log(eY.Debug, "Selecting transport '".concat(e$[a], "'."));
+            if (null == a) return this._logger.log(eX.Debug, "Skipping transport '".concat(t.transport, "' because it is not supported by this client.")), Error("Skipping transport '".concat(t.transport, "' because it is not supported by this client."));
+            if (n && (a & n) == 0) return this._logger.log(eX.Debug, "Skipping transport '".concat(e$[a], "' because it was disabled by the client.")), new u("'".concat(e$[a], "' is disabled by the client."), a);
+            if (!(t.transferFormats.map(t => e0[t]).indexOf(r) >= 0)) return this._logger.log(eX.Debug, "Skipping transport '".concat(e$[a], "' because it does not support the requested transfer format '").concat(e0[r], "'.")), Error("'".concat(e$[a], "' does not support ").concat(e0[r], "."));
+            if (a === e$.WebSockets && !this._options.WebSocket || a === e$.ServerSentEvents && !this._options.EventSource) return this._logger.log(eX.Debug, "Skipping transport '".concat(e$[a], "' because it is not supported in your environment.'")), new s("'".concat(e$[a], "' is not supported in your environment."), a);
+            this._logger.log(eX.Debug, "Selecting transport '".concat(e$[a], "'."));
             try {
                 return this.features.reconnect = a === e$.WebSockets ? o : void 0, this._constructTransport(a)
             } catch (t) {
@@ -30973,16 +30958,16 @@
             return t && "object" == typeof t && "connect" in t
         }
         _stopConnection(t) {
-            if (this._logger.log(eY.Debug, "HttpConnection.stopConnection(".concat(t, ") called while in state ").concat(this._connectionState, ".")), this.transport = void 0, t = this._stopError || t, this._stopError = void 0, "Disconnected" === this._connectionState) return void this._logger.log(eY.Debug, "Call to HttpConnection.stopConnection(".concat(t, ") was ignored because the connection is already in the disconnected state."));
-            if ("Connecting" === this._connectionState) throw this._logger.log(eY.Warning, "Call to HttpConnection.stopConnection(".concat(t, ") was ignored because the connection is still in the connecting state.")), Error("HttpConnection.stopConnection(".concat(t, ") was called while the connection is still in the connecting state."));
-            if ("Disconnecting" === this._connectionState && this._stopPromiseResolver(), t ? this._logger.log(eY.Error, "Connection disconnected with error '".concat(t, "'.")) : this._logger.log(eY.Information, "Connection disconnected."), this._sendQueue && (this._sendQueue.stop().catch(t => {
-                    this._logger.log(eY.Error, "TransportSendQueue.stop() threw error '".concat(t, "'."))
+            if (this._logger.log(eX.Debug, "HttpConnection.stopConnection(".concat(t, ") called while in state ").concat(this._connectionState, ".")), this.transport = void 0, t = this._stopError || t, this._stopError = void 0, "Disconnected" === this._connectionState) return void this._logger.log(eX.Debug, "Call to HttpConnection.stopConnection(".concat(t, ") was ignored because the connection is already in the disconnected state."));
+            if ("Connecting" === this._connectionState) throw this._logger.log(eX.Warning, "Call to HttpConnection.stopConnection(".concat(t, ") was ignored because the connection is still in the connecting state.")), Error("HttpConnection.stopConnection(".concat(t, ") was called while the connection is still in the connecting state."));
+            if ("Disconnecting" === this._connectionState && this._stopPromiseResolver(), t ? this._logger.log(eX.Error, "Connection disconnected with error '".concat(t, "'.")) : this._logger.log(eX.Information, "Connection disconnected."), this._sendQueue && (this._sendQueue.stop().catch(t => {
+                    this._logger.log(eX.Error, "TransportSendQueue.stop() threw error '".concat(t, "'."))
                 }), this._sendQueue = void 0), this.connectionId = void 0, this._connectionState = "Disconnected", this._connectionStarted) {
                 this._connectionStarted = !1;
                 try {
                     this.onclose && this.onclose(t)
                 } catch (n) {
-                    this._logger.log(eY.Error, "HttpConnection.onclose(".concat(t, ") threw error '").concat(n, "'."))
+                    this._logger.log(eX.Error, "HttpConnection.onclose(".concat(t, ") threw error '").concat(n, "'."))
                 }
             }
         }
@@ -30990,7 +30975,7 @@
             if (0 === t.lastIndexOf("https://", 0) || 0 === t.lastIndexOf("http://", 0)) return t;
             if (!y.isBrowser) throw Error("Cannot resolve '".concat(t, "'."));
             let n = window.document.createElement("a");
-            return n.href = t, this._logger.log(eY.Information, "Normalizing '".concat(t, "' to '").concat(n.href, "'.")), n.href
+            return n.href = t, this._logger.log(eX.Information, "Normalizing '".concat(t, "' to '").concat(n.href, "'.")), n.href
         }
         _resolveNegotiateUrl(t) {
             let n = new URL(t);
@@ -31000,7 +30985,7 @@
         }
         constructor(n, r = {}) {
             var o;
-            if (this._stopPromiseResolver = () => {}, this.features = {}, this._negotiateVersion = 1, g.isRequired(n, "url"), this._logger = void 0 === (o = r.logger) ? new w(eY.Information) : null === o ? f.instance : void 0 !== o.log ? o : new w(o), this.baseUrl = this._resolveUrl(n), (r = r || {}).logMessageContent = void 0 !== r.logMessageContent && r.logMessageContent, "boolean" == typeof r.withCredentials || void 0 === r.withCredentials) r.withCredentials = void 0 === r.withCredentials || r.withCredentials;
+            if (this._stopPromiseResolver = () => {}, this.features = {}, this._negotiateVersion = 1, g.isRequired(n, "url"), this._logger = void 0 === (o = r.logger) ? new w(eX.Information) : null === o ? f.instance : void 0 !== o.log ? o : new w(o), this.baseUrl = this._resolveUrl(n), (r = r || {}).logMessageContent = void 0 !== r.logMessageContent && r.logMessageContent, "boolean" == typeof r.withCredentials || void 0 === r.withCredentials) r.withCredentials = void 0 === r.withCredentials || r.withCredentials;
             else throw Error("withCredentials option was not a 'boolean' or 'undefined' value");
             r.timeout = void 0 === r.timeout ? 1e5 : r.timeout;
             let a = null,
@@ -31072,26 +31057,26 @@
                 let r = JSON.parse(t);
                 if ("number" != typeof r.type) throw Error("Invalid payload.");
                 switch (r.type) {
-                    case eX.Invocation:
+                    case eY.Invocation:
                         this._isInvocationMessage(r);
                         break;
-                    case eX.StreamItem:
+                    case eY.StreamItem:
                         this._isStreamItemMessage(r);
                         break;
-                    case eX.Completion:
+                    case eY.Completion:
                         this._isCompletionMessage(r);
                         break;
-                    case eX.Ping:
-                    case eX.Close:
+                    case eY.Ping:
+                    case eY.Close:
                         break;
-                    case eX.Ack:
+                    case eY.Ack:
                         this._isAckMessage(r);
                         break;
-                    case eX.Sequence:
+                    case eY.Sequence:
                         this._isSequenceMessage(r);
                         break;
                     default:
-                        n.log(eY.Information, "Unknown message type '" + r.type + "' ignored.");
+                        n.log(eX.Information, "Unknown message type '" + r.type + "' ignored.");
                         continue
                 }
                 o.push(r)
@@ -31125,15 +31110,15 @@
         }
     }
     let K = {
-        trace: eY.Trace,
-        debug: eY.Debug,
-        info: eY.Information,
-        information: eY.Information,
-        warn: eY.Warning,
-        warning: eY.Warning,
-        error: eY.Error,
-        critical: eY.Critical,
-        none: eY.None
+        trace: eX.Trace,
+        debug: eX.Debug,
+        info: eX.Information,
+        information: eX.Information,
+        warn: eX.Warning,
+        warning: eX.Warning,
+        error: eX.Error,
+        critical: eX.Critical,
+        none: eX.None
     };
     class J {
         configureLogging(t) {
@@ -31188,16 +31173,16 @@
                 return !1
             }
         })(),
-        Y = (t, n) => "storage.".concat(t, "_").concat(n),
-        X = new Map,
+        X = (t, n) => "storage.".concat(t, "_").concat(n),
+        Y = new Map,
         Q = (t, n, r) => {
-            let o = Y(t, n),
-                a = X.get(o);
+            let o = X(t, n),
+                a = Y.get(o);
             a && window.removeEventListener("storage", a);
             let i = n => {
                 n.key === t && r(n.newValue)
             };
-            X.set(o, i), window.addEventListener("storage", i)
+            Y.set(o, i), window.addEventListener("storage", i)
         },
         $ = (t, n) => {
             localStorage.removeItem(t), localStorage.setItem(t, n)
@@ -31316,11 +31301,11 @@
         eR = new Map,
         eL = function(t) {
             for (var n, r = arguments.length, o = Array(r > 1 ? r - 1 : 0), a = 1; a < r; a++) o[a - 1] = arguments[a];
-            eY.Warning >= (null != (n = eF.get(t)) ? n : eY.None) && console.warn(...o)
+            eX.Warning >= (null != (n = eF.get(t)) ? n : eX.None) && console.warn(...o)
         },
         eN = function(t) {
             for (var n, r = arguments.length, o = Array(r > 1 ? r - 1 : 0), a = 1; a < r; a++) o[a - 1] = arguments[a];
-            eY.Error >= (null != (n = eF.get(t)) ? n : eY.None) && console.error(...o)
+            eX.Error >= (null != (n = eF.get(t)) ? n : eX.None) && console.error(...o)
         },
         eM = function(t, n) {
             var r;
@@ -31367,7 +31352,7 @@
             }
         })
     });
-    var ez, eV, eq, eW, eG, eK, eJ, eZ, eY, eX, eQ, e$, e0, e1 = ((eZ = {}).Production = "https://realtime-signalr.roblox.com/userhub", eZ.Staging = "https://snc2-realtime-signalr.sitetest1.robloxlabs.com/userhub", eZ.Development = "https://realtime-signalr.sitetest3.robloxlabs.com/userhub", eZ);
+    var ez, eV, eq, eW, eG, eK, eJ, eZ, eX, eY, eQ, e$, e0, e1 = ((eZ = {}).Production = "https://realtime-signalr.roblox.com/userhub", eZ.Staging = "https://snc2-realtime-signalr.sitetest1.robloxlabs.com/userhub", eZ.Development = "https://realtime-signalr.sitetest3.robloxlabs.com/userhub", eZ);
     let e2 = {
         production: "https://realtime-signalr.roblox.com/userhub",
         staging: "https://snc2-realtime-signalr.sitetest1.robloxlabs.com/userhub",
@@ -31378,7 +31363,7 @@
     }, "useSignalR", 0, function(t, r) {
         let a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
             {
-                logLevel: i = eY.None,
+                logLevel: i = eX.None,
                 crossTab: l,
                 onConnectionStateChange: s,
                 skipNegotiation: u = !0
@@ -31517,7 +31502,7 @@
                 }
             }), () => {
                 let t, n;
-                t = Y(eT, h), (n = X.get(t)) && (window.removeEventListener("storage", n), X.delete(t))
+                t = X(eT, h), (n = Y.get(t)) && (window.removeEventListener("storage", n), Y.delete(t))
             }
         }, [d, p, r, h, c]), (0, o.useEffect)(() => {
             if (d || !p) return;
@@ -31566,5 +31551,5 @@
     }])
 }]);
 
-//# debugId=f6a244f1-9b21-79fe-692a-cbfc1f59d4d1
-//# sourceMappingURL=3jdenhd_ys9k9.js.map
+//# debugId=094dce0d-7c80-37d4-c21d-abc5bd6539c5
+//# sourceMappingURL=2k_vz4rnj5fu7.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "67a0455f-4946-be0a-a07c-b8cfb32efae2")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "477a256c-6dd5-f916-f522-5e480e4740a5")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -166,10 +166,15 @@
         }),
         V = (0, t.defineFlag)({
             namespace: "creator-analytics",
+            name: "isExperimentMetricsV2Enabled",
+            defaultValue: !1
+        }),
+        _ = (0, t.defineFlag)({
+            namespace: "creator-analytics",
             name: "isClientSessionDetailsV2Enabled",
             defaultValue: !1
         });
-    e.s(["acquisitionMigrationMetricsEnabled", 0, s, "analyticsChartLoadEventstreamEnabled", 0, a, "isAnalyticsAssistantChatEnabled", 0, h, "isAnalyticsAssistantIssueBannerEnabled", 0, b, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, g, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, w, "isAssistantChartOverflowMenuEnabled", 0, S, "isClientSessionDetailsV2Enabled", 0, V, "isClientSessionsEnabled", 0, x, "isCustomDashboardsLocalStorageEnabled", 0, A, "isCustomMetricsBackendEnabled", 0, i, "isEhdResultsAlwaysFetched", 0, B, "isEhdResultsEnabled", 0, R, "isExperimentNullControlValueEnabled", 0, d, "isExperimentRolloutEnabled", 0, u, "isExperimentSegmentationEnabled", 0, I, "isExperimentTargetingEnabled", 0, r, "isExperimentationTemplatesEnabled", 0, l, "isGeneralBreakGlassBannerEnabled", 0, m, "isJourneyEventsEnabled", 0, D, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, T, "isMonetizationBreakGlassBannerEnabled", 0, p, "isPeriodSummaryBridgeEnabled", 0, M, "isPlayerFeedbackExampleCommentsEnabled", 0, f, "isRotraceMetricEnabled", 0, C, "isTargetingConfigsEnabled", 0, c, "isTelemetryMigrationEnabled", 0, k, "isTreemapColorBySiblingProportionEnabled", 0, E, "showCreatorRewardsReportingDisclaimer", 0, y, "showVideoServiceDashboard", 0, v, "visibleAssetIdInPersonalizationEnabled", 0, o])
+    e.s(["acquisitionMigrationMetricsEnabled", 0, s, "analyticsChartLoadEventstreamEnabled", 0, a, "isAnalyticsAssistantChatEnabled", 0, h, "isAnalyticsAssistantIssueBannerEnabled", 0, b, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, g, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, w, "isAssistantChartOverflowMenuEnabled", 0, S, "isClientSessionDetailsV2Enabled", 0, _, "isClientSessionsEnabled", 0, x, "isCustomDashboardsLocalStorageEnabled", 0, A, "isCustomMetricsBackendEnabled", 0, i, "isEhdResultsAlwaysFetched", 0, B, "isEhdResultsEnabled", 0, R, "isExperimentMetricsV2Enabled", 0, V, "isExperimentNullControlValueEnabled", 0, d, "isExperimentRolloutEnabled", 0, u, "isExperimentSegmentationEnabled", 0, I, "isExperimentTargetingEnabled", 0, r, "isExperimentationTemplatesEnabled", 0, l, "isGeneralBreakGlassBannerEnabled", 0, m, "isJourneyEventsEnabled", 0, D, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, T, "isMonetizationBreakGlassBannerEnabled", 0, p, "isPeriodSummaryBridgeEnabled", 0, M, "isPlayerFeedbackExampleCommentsEnabled", 0, f, "isRotraceMetricEnabled", 0, C, "isTargetingConfigsEnabled", 0, c, "isTelemetryMigrationEnabled", 0, k, "isTreemapColorBySiblingProportionEnabled", 0, E, "showCreatorRewardsReportingDisclaimer", 0, y, "showVideoServiceDashboard", 0, v, "visibleAssetIdInPersonalizationEnabled", 0, o])
 }, 665869, 729904, e => {
     "use strict";
     var t = e.i(157700);
@@ -1749,5 +1754,5 @@
     }, "useCookieConsentContext", 0, F], 260241)
 }]);
 
-//# debugId=67a0455f-4946-be0a-a07c-b8cfb32efae2
-//# sourceMappingURL=1-tmflw4qtah7.js.map
+//# debugId=477a256c-6dd5-f916-f522-5e480e4740a5
+//# sourceMappingURL=1wf9mip7qe8sh.js.map
