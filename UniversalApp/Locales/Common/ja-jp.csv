@@ -2243,6 +2243,7 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} さんをブロックし�
 Feature.BlockingModal.Message.BlockConfirmation,このユーザーをブロックするとつながりまたはフォロワーから削除されます。ブロックされた人は、あなたにメッセージやリクエスト、招待状を送れなくなります。<br /><br />あなたがブロックしたことは相手に通知されません。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,このユーザーをブロックすると友達またはフォロワーから削除されます。ブロックされた人は、あなたにメッセージやリクエスト、招待状を送れなくなります。<br /><br />あなたがブロックしたことは相手に通知されません。
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,カスタムオプションを追加...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,早期テスターを招待
 Feature.Build.Action.AddPlaytesters,
@@ -2312,6 +2313,7 @@ Feature.Build.Analytics.Description.PayerConversion,有料ユーザーコンバ�
 Feature.Build.Analytics.Description.PlaythroughRate,プレイスルー率は、最後まで完了したプレイセッションの割合です。この割合が高いほど、プレイヤーがバーチャル空間を始めやすく、最後までプレイする価値があると感じていることを示します。
 Feature.Build.Analytics.Description.TotalPlaytime,合計プレイ時間は、その期間にすべてのプレイヤーがバーチャル空間で過ごした時間の合計です。プレイ時間の増加は通常、プレイセッションの魅力が高まっていることを示します。
 Feature.Build.Analytics.DurationHours,{number}時間
+Feature.Build.Analytics.DurationMinutes,{number}分
 Feature.Build.Analytics.Goal.Action.CreateAd,広告を作成
 Feature.Build.Analytics.Goal.Action.SellItems,アイテムを販売
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,友達と共有
@@ -2434,6 +2436,7 @@ Feature.Build.Error.MonetizationOptionsLoad,オプションを読み込めませ
 Feature.Build.Error.MonetizationPermissionDenied,収益化オプションを変更する権限がありません。
 Feature.Build.Header.AccessSharing,アクセスとシェア
 Feature.Build.Header.AllVersions,すべてのバージョン
+Feature.Build.Header.Answers,回答
 Feature.Build.Header.ContentMaturity,コンテンツ成熟度
 Feature.Build.Header.CustomAnswer,カスタムの回答
 Feature.Build.Header.GameConfiguration,ゲームの設定
@@ -2766,8 +2769,6 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,含まれるもの
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Description.AllowPhotoAccessInfo,切り抜きを保存するには、Robloxがあなたのデバイスのカメラロールにアクセスする必要があります。
-Feature.Captures.Title.AllowPhotoAccessInfo,写真へのアクセスを許可する
 Feature.Catalog.Action.Buy,購入
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,カスタマイズへ
@@ -3429,7 +3430,7 @@ Feature.Durables.PartiallyExpiredItems.TitleText,アイテムの有効期限が�
 Feature.Durables.PurchaseModal.SuccessMessage,{itemName}の有効期限が{number}日間延長されました。
 Feature.Durables.TimeRemaining.Days,{number}日
 Feature.Durables.TimeRemaining.Hours,
-Feature.Durables.TimeRemaining.Minutes,{number}分
+Feature.Durables.TimeRemaining.Minutes,
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days}日間（購入後から開始）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,EU・デジタルサービス法に基づく違法コンテンツを報告するにはこちらへ。 https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,インターネット接続がありません
@@ -4066,6 +4067,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,残り{time}
+Feature.InExperienceShop.GamePass,ゲームパス
 Feature.InExperienceShop.Label.EndTime,あと{timeRemaining}で終了
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,

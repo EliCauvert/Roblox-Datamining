@@ -1336,8 +1336,6 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Заблокировать: {DisplayName}?
 Feature.BuyRobux.Heading.Banner,Купить Robux
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Description.AllowPhotoAccessInfo,"Чтобы сохранить скриншот/видео экрана, Roblox необходим доступ к фотоплёнке камеры устройства."
-Feature.Captures.Title.AllowPhotoAccessInfo,Разрешить доступ к фотографиям
 Feature.Catalog.Action.Buy,Купить
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.UnavailableItems,

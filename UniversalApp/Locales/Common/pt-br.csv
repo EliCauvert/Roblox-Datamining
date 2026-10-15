@@ -2242,6 +2242,7 @@ Feature.BlockingModal.Heading.BlockUser,Bloquear {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Bloquear este usuário irá removê-los como conexão ou seguidor. Ele não será capaz de enviar mensagens, solicitações ou convites para você.<br /><br />Ele não será notificado de que você o bloqueou."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Se você bloquear este usuário, ele será removido das suas conexões ou seguidores e não poderá enviar mensagens, solicitações ou convites para você.<br /><br />Ele não será notificado de que você o bloqueou."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Adicionar uma opção personalizada…
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Convidar testador antecipado
 Feature.Build.Action.AddPlaytesters,Convidar testadores antecipados
@@ -2433,6 +2434,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Não foi possível carregar as opç�
 Feature.Build.Error.MonetizationPermissionDenied,Você não tem permissão para alterar as opções de monetização.
 Feature.Build.Header.AccessSharing,Acesso e compartilhamento
 Feature.Build.Header.AllVersions,Todas as versões
+Feature.Build.Header.Answers,Respostas
 Feature.Build.Header.ContentMaturity,Maturidade do conteúdo
 Feature.Build.Header.CustomAnswer,Resposta personalizada
 Feature.Build.Header.GameConfiguration,Configuração do jogo
@@ -2765,8 +2767,6 @@ Feature.Build.Title.Versions,Versões
 Feature.Build.Title.WhatsIncluded,O que está incluído?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,"Algo deu errado, tente novamente mais tarde."
-Feature.Captures.Description.AllowPhotoAccessInfo,"Para salvar suas capturas, o aplicativo Roblox precisa acessar a galeria de fotos do seu dispositivo."
-Feature.Captures.Title.AllowPhotoAccessInfo,Permitir acesso às fotos
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Vá até Personalizar
@@ -4065,6 +4065,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Restam {time}
+Feature.InExperienceShop.GamePass,Passe de jogo
 Feature.InExperienceShop.Label.EndTime,Termina em {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural, {number} dias
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 dia

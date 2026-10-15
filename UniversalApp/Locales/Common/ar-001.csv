@@ -2209,6 +2209,7 @@ Feature.BlockingModal.Heading.BlockUser,هل تريد حظر {DisplayName}؟
 Feature.BlockingModal.Message.BlockConfirmation,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة جهات تواصلك أو متابعيك، ولن يتمكّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة أصدقائك أو متابعيك، ولن يتمكَّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,إضافة خيار مخصص...
 Feature.Build.Action.AddFriends,دعوة الأصدقاء
 Feature.Build.Action.AddPlaytester,دعوة مختبر لعب مبكر واحد
 Feature.Build.Action.AddPlaytesters,دعوة مختبري اللعب المبكرين
@@ -2400,6 +2401,7 @@ Feature.Build.Error.MonetizationOptionsLoad,تعذَّر تحميل الخيار
 Feature.Build.Error.MonetizationPermissionDenied,ليس لديك الإذن لتغيير خيارات الحصول على عائد.
 Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
 Feature.Build.Header.AllVersions,جميع الإصدارات
+Feature.Build.Header.Answers,الإجابات
 Feature.Build.Header.ContentMaturity,حساسية المحتوى
 Feature.Build.Header.CustomAnswer,إجابة مخصصة
 Feature.Build.Header.GameConfiguration,تهيئة اللعبة
@@ -2732,8 +2734,6 @@ Feature.Build.Title.Versions,الإصدارات
 Feature.Build.Title.WhatsIncluded,ما الذي تشمله الحملة؟
 Feature.BuyRobux.Heading.Banner,شراء Robux
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Description.AllowPhotoAccessInfo,يحتاج Roblox إلى الوصول إلى معرض الكاميرا بجهازك لحفظ اللقطات التي تصورها.
-Feature.Captures.Title.AllowPhotoAccessInfo,السماح بالوصول إلى الصور
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,الانتقال إلى التخصيص
@@ -4032,6 +4032,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,تبقى {time}
+Feature.InExperienceShop.GamePass,تذكرة اللعبة
 Feature.InExperienceShop.Label.EndTime,ينتهي خلال {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,يوم واحد

@@ -2253,6 +2253,7 @@ Feature.BlockingModal.Heading.BlockUser,Block {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Blocking this user will remove them as a Connection or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Blocking this user will remove them as a friend or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Add a custom option...
 Feature.Build.Action.AddFriends,Invite friends
 Feature.Build.Action.AddPlaytester,Invite early tester
 Feature.Build.Action.AddPlaytesters,Invite early testers
@@ -2322,6 +2323,7 @@ Feature.Build.Analytics.Description.PayerConversion,Payer conversion is the perc
 Feature.Build.Analytics.Description.PlaythroughRate,Playthrough rate is the percentage of visits that completed a full play session. Higher rates suggest players find your experience easy to get into and worth finishing.
 Feature.Build.Analytics.Description.TotalPlaytime,Total playtime sums the time all players spent in your experience over the period. Rising playtime usually signals more engaging sessions.
 Feature.Build.Analytics.DurationHours,{number} hrs
+Feature.Build.Analytics.DurationMinutes,{number} mins
 Feature.Build.Analytics.Goal.Action.CreateAd,Create an ad
 Feature.Build.Analytics.Goal.Action.SellItems,Sell items
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Share with friends
@@ -2444,6 +2446,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Options couldn't load. Try again.
 Feature.Build.Error.MonetizationPermissionDenied,You don't have permission to change monetization options.
 Feature.Build.Header.AccessSharing,Access & sharing
 Feature.Build.Header.AllVersions,All versions
+Feature.Build.Header.Answers,Answers
 Feature.Build.Header.ContentMaturity,Content maturity
 Feature.Build.Header.CustomAnswer,Custom answer
 Feature.Build.Header.GameConfiguration,Game configuration
@@ -2776,8 +2779,6 @@ Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Description.AllowPhotoAccessInfo,"To save your captures, Roblox needs access to your device’s camera roll."
-Feature.Captures.Title.AllowPhotoAccessInfo,Allow Access to Photos
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Go to Customize
@@ -4076,6 +4077,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} left
+Feature.InExperienceShop.GamePass,Game pass
 Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number} days
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 day

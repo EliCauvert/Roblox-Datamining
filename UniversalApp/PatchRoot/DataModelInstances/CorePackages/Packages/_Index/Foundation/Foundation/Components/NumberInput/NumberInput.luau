@@ -507,7 +507,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 				Position = UDim2.fromOffset(var29.left.Offset, 0),
 				Text = var23:map(function(p4)
 					-- upvalues: var1 (copy)
-					return `{if var1.prefix then var1.prefix .. " " else ""}<font transparency="1">{p4}</font>{if var1.suffix then " " .. var34.suffix else ""}`
+					return `{if var1.prefix then var1.prefix .. " " else ""}<font transparency="1">{p4}</font>{if var1.suffix then " " .. var1.suffix else ""}`
 				end),
 				padding = var28,
 				testId = `{var1.testId}--units`

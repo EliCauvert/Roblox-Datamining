@@ -2242,6 +2242,7 @@ Feature.BlockingModal.Heading.BlockUser,Chặn {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Khi bị chặn, người dùng này sẽ không còn là Người quen hoặc người theo dõi nữa. Họ sẽ không thể nhắn tin, gửi yêu cầu hoặc gửi lời mời cho bạn.<br /><br />Họ sẽ không được thông báo về việc bạn đã chặn họ."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Khi bị chặn, người dùng này sẽ không còn là bạn bè hoặc người theo dõi bạn nữa. Họ sẽ không thể nhắn tin, gửi yêu cầu hoặc gửi lời mời cho bạn.<br /><br />Họ sẽ không được thông báo là bạn đã chặn họ."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Thêm tùy chọn tùy chỉnh...
 Feature.Build.Action.AddFriends,Mời bạn bè
 Feature.Build.Action.AddPlaytester,Mời người tham gia thử nghiệm sớm
 Feature.Build.Action.AddPlaytesters,
@@ -2433,6 +2434,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Không tải được tùy chọn. V
 Feature.Build.Error.MonetizationPermissionDenied,Bạn không có quyền thay đổi tùy chọn kiếm tiền.
 Feature.Build.Header.AccessSharing,Quyền truy cập và chia sẻ
 Feature.Build.Header.AllVersions,Tất cả các phiên bản
+Feature.Build.Header.Answers,Câu trả lời
 Feature.Build.Header.ContentMaturity,Mức độ nội dung người lớn
 Feature.Build.Header.CustomAnswer,Câu trả lời tùy chỉnh
 Feature.Build.Header.GameConfiguration,Cấu hình của trò chơi
@@ -2765,8 +2767,6 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Bao gồm những gì?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Description.AllowPhotoAccessInfo,"Để lưu ảnh chụp của bạn, Roblox cần bạn cấp quyền truy cập vào thư viện ảnh của thiết bị."
-Feature.Captures.Title.AllowPhotoAccessInfo,Cho Phép Truy Cập Ảnh
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,
@@ -4065,6 +4065,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Còn {time}
+Feature.InExperienceShop.GamePass,Vé trò chơi
 Feature.InExperienceShop.Label.EndTime,Kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 ngày

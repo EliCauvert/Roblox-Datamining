@@ -2242,6 +2242,7 @@ Feature.BlockingModal.Heading.BlockUser,Blokir {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Memblokir pengguna ini akan menghapusnya sebagai Koneksi atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Memblokir pengguna ini akan menghapusnya sebagai teman atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
 Feature.Build.Action.Add,Tambah
+Feature.Build.Action.AddCustomOption,Tambahkan opsi kustom...
 Feature.Build.Action.AddFriends,Undang teman
 Feature.Build.Action.AddPlaytester,Undang penguji tahap awal
 Feature.Build.Action.AddPlaytesters,
@@ -2433,6 +2434,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Opsi tidak dapat di-load. Coba lagi.
 Feature.Build.Error.MonetizationPermissionDenied,Kamu tidak memiliki izin untuk mengubah opsi monetisasi.
 Feature.Build.Header.AccessSharing,Akses & berbagi
 Feature.Build.Header.AllVersions,Semua versi
+Feature.Build.Header.Answers,Jawaban
 Feature.Build.Header.ContentMaturity,Kedewasaan konten
 Feature.Build.Header.CustomAnswer,Jawaban kustom
 Feature.Build.Header.GameConfiguration,Konfigurasi game
@@ -2765,8 +2767,6 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Dapat apa saja?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Description.AllowPhotoAccessInfo,"Untuk menyimpan media, Roblox harus memiliki akses ke rol kamera perangkatmu."
-Feature.Captures.Title.AllowPhotoAccessInfo,Izinkan Akses ke Foto
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Buka Kustomisasi
@@ -4063,6 +4063,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} lagi
+Feature.InExperienceShop.GamePass,Pas game
 Feature.InExperienceShop.Label.EndTime,Berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number} hari
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 hari

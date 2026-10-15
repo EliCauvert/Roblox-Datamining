@@ -2245,6 +2245,7 @@ Feature.BlockingModal.Heading.BlockUser,屏蔽“{DisplayName}”？
 Feature.BlockingModal.Message.BlockConfirmation,屏蔽此用户将会把他们从你的好友或关注者中移除。他们将无法向你发送消息、请求或邀请。<br /><br />他们不会收到你已屏蔽他们的通知。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,屏蔽此用户会将其从你的好友或粉丝列表中移除。此用户将无法向你发送消息、请求或邀请。<br /><br />对方不会收到你已屏蔽他们的通知。
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,添加自定义选项...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,邀请初期测试玩家
 Feature.Build.Action.AddPlaytesters,
@@ -2314,6 +2315,7 @@ Feature.Build.Analytics.Description.PayerConversion,付费用户转化率是指�
 Feature.Build.Analytics.Description.PlaythroughRate,通关率是完成完整游戏会话的访问次数占比。通关率越高，表明玩家越容易上手游戏体验，并且更愿意游玩至结束。
 Feature.Build.Analytics.Description.TotalPlaytime,总游戏时间是该时间段内所有玩家在你的游戏体验中花费的时间总和。游戏时间增加通常表明游戏过程更具吸引力。
 Feature.Build.Analytics.DurationHours,{number} 小时
+Feature.Build.Analytics.DurationMinutes,
 Feature.Build.Analytics.Goal.Action.CreateAd,创建广告
 Feature.Build.Analytics.Goal.Action.SellItems,出售道具
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,与好友分享
@@ -2436,6 +2438,7 @@ Feature.Build.Error.MonetizationOptionsLoad,无法加载选项。请重试。
 Feature.Build.Error.MonetizationPermissionDenied,你没有更改收益化选项的权限。
 Feature.Build.Header.AccessSharing,访问权限和共享
 Feature.Build.Header.AllVersions,所有版本
+Feature.Build.Header.Answers,回答
 Feature.Build.Header.ContentMaturity,内容成熟度
 Feature.Build.Header.CustomAnswer,自定义回答
 Feature.Build.Header.GameConfiguration,游戏配置
@@ -2768,8 +2771,6 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些内容？
 Feature.BuyRobux.Heading.Banner,购买罗宝
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Description.AllowPhotoAccessInfo,为了保存你的截屏，Roblox 需要访问你的设备或第三方的相机胶卷。
-Feature.Captures.Title.AllowPhotoAccessInfo,允许访问照片
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,前往“自定义”
@@ -4065,6 +4066,7 @@ Feature.InExperienceIntervention.Label.Player,{username}：{evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩余 {time}
+Feature.InExperienceShop.GamePass,游戏通行证
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}后结束
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,

@@ -2225,6 +2225,7 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} blokkeren?
 Feature.BlockingModal.Message.BlockConfirmation,"Als je deze gebruiker blokkeert, wordt deze verwijderd als connectie of volger. De gebruiker kan je geen berichten, verzoeken of uitnodigingen sturen.<br /><br />De gebruiker krijgt geen melding dat je die hebt geblokkeerd."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Als je deze gebruiker blokkeert, wordt deze verwijderd als vriend of volger. De gebruiker kan je geen berichten, verzoeken of uitnodigingen sturen.<br /><br />De gebruiker krijgt geen melding dat je die hebt geblokkeerd."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Een aangepaste optie toevoegen...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Vroege tester uitnodigen
 Feature.Build.Action.AddPlaytesters,Vroege testers uitnodigen
@@ -2294,6 +2295,7 @@ Feature.Build.Analytics.Description.PayerConversion,De conversie van betalende g
 Feature.Build.Analytics.Description.PlaythroughRate,Het playthrough-percentage is het percentage bezoeken waarbij een volledige speelsessie is voltooid. Hogere percentages wijzen erop dat spelers je ervaring gemakkelijk toegankelijk vinden en het de moeite waard vinden om te voltooien.
 Feature.Build.Analytics.Description.TotalPlaytime,De totale speeltijd is de som van de tijd die alle spelers gedurende de periode in je ervaring hebben doorgebracht. Een toenemende speeltijd duidt meestal op boeiendere sessies.
 Feature.Build.Analytics.DurationHours,{number} uur
+Feature.Build.Analytics.DurationMinutes,{number} minuten
 Feature.Build.Analytics.Goal.Action.CreateAd,Een advertentie maken
 Feature.Build.Analytics.Goal.Action.SellItems,Items verkopen
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Delen met vrienden
@@ -2416,6 +2418,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Opties konden niet worden geladen. P
 Feature.Build.Error.MonetizationPermissionDenied,Je hebt geen toestemming om de opties voor inkomsten genereren te wijzigen.
 Feature.Build.Header.AccessSharing,Toegang en delen
 Feature.Build.Header.AllVersions,Alle versies
+Feature.Build.Header.Answers,Antwoorden
 Feature.Build.Header.ContentMaturity,Contentclassificatie
 Feature.Build.Header.CustomAnswer,Aangepast antwoord
 Feature.Build.Header.GameConfiguration,Spelconfiguratie
@@ -2748,8 +2751,6 @@ Feature.Build.Title.Versions,Versies
 Feature.Build.Title.WhatsIncluded,Wat is er inbegrepen?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Description.AllowPhotoAccessInfo,Roblox toegang nodig tot de filmrol van je apparaat om opnames op te slaan.
-Feature.Captures.Title.AllowPhotoAccessInfo,Toegang tot foto's geven
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Ga door naar Aanpassen
@@ -4048,12 +4049,13 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Nog {time}
+Feature.InExperienceShop.GamePass,Game Pass
 Feature.InExperienceShop.Label.EndTime,Eindigt over {timeRemaining}
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number} dagen
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 dag
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
 Feature.InExperienceShop.Label.Timer.Hour.Singular,1 uur
-Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} minuten
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minuut
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde

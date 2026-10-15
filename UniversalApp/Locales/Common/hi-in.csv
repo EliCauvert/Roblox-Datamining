@@ -2222,6 +2222,7 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} को ब्लॉक क
 Feature.BlockingModal.Message.BlockConfirmation,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक किया है."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक कर दिया है."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,कस्टम विकल्प जोड़ें...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,अर्ली टेस्टर को इनवाइट करें
 Feature.Build.Action.AddPlaytesters,अर्ली टेस्टर्स को इनवाइट करें
@@ -2413,6 +2414,7 @@ Feature.Build.Error.MonetizationOptionsLoad,विकल्प लोड नह�
 Feature.Build.Error.MonetizationPermissionDenied,आपके पास मॉनेटाइज़ेशन के विकल्प बदलने की परमिशन नहीं है.
 Feature.Build.Header.AccessSharing,ऐक्सेस और शेयरिंग
 Feature.Build.Header.AllVersions,सभी वर्ज़न
+Feature.Build.Header.Answers,जवाब
 Feature.Build.Header.ContentMaturity,कॉन्टेंट मैच्योरिटी
 Feature.Build.Header.CustomAnswer,कस्टम जवाब
 Feature.Build.Header.GameConfiguration,गेम कॉन्फ़िगरेशन
@@ -2745,8 +2747,6 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,क्या-क्या शामिल है?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Description.AllowPhotoAccessInfo,"अपने स्क्रीनशॉट सेव करने के लिए, Roblox को आपके डिवाइस के कैमरा रोल का ऐक्सेस चाहिए."
-Feature.Captures.Title.AllowPhotoAccessInfo,फ़ोटो का ऐक्सेस दें
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,'कस्टमाइज़ करें' पर जाएँ
@@ -4045,6 +4045,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} बाकी हैं
+Feature.InExperienceShop.GamePass,गेम पास
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा
 Feature.InExperienceShop.Label.Timer.Day.Plural,{number} दिन
 Feature.InExperienceShop.Label.Timer.Day.Singular,
