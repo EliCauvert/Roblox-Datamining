@@ -51,6 +51,8 @@ local isBorderlessBubbleChatEnabledModule = require(expChat.isBorderlessBubbleCh
 local expChatPresetChatEmojiEffectExperimentation = require(parent.SocialExperiments).ExpChatPresetChatEmojiEffectExperimentation
 local logPresetChatEmojiEffectExposureModule = require(expChat.PresetChat.logPresetChatEmojiEffectExposure)
 local fFlagExpChatRenderHistoricalMessagesModule = require(expChat.Flags.FFlagExpChatRenderHistoricalMessages)
+local fFlagExpChatMessageHistoryExperiment = sharedFlagsModule.FFlagExpChatMessageHistoryExperiment
+local expChatMessageHistoryExperimentation = require(parent.SocialExperiments).ExpChatMessageHistoryExperimentation
 
 function getChatTranslationEnabled()
 	-- upvalues: textChatService (ref)
@@ -58,7 +60,7 @@ function getChatTranslationEnabled()
 end
 
 return function(p1)
-	-- upvalues: createSignal (ref), fFlagExpChatMessagesStoreUseProxyModule (ref), createProxy (ref), createComputed (ref), dictionary (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatMessagesStoreBatchModule (ref), signalsExperimentalModule (ref), fFlagExpChatRenderHistoricalMessagesModule (ref), list (ref), isBorderlessBubbleChatEnabledModule (ref), getServerTimeNowMillisModule (ref), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (ref), httpService (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (ref), fFlagExpChatEnableV2ChatWindowModule (ref), set (ref), sanitizeForRichTextModule (ref), getFFlagExpChatSyntheticSystemMessageRichText (ref), generateRichSystemMessageTextFormatModule (ref), fFlagExpChatDictation (ref), computeNameColor (ref), playersService (ref), fFlagEnableInExpChatRewriteModule (ref), getTextAndTranslationModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), isWhiteSpaceOnlyModule (ref), fFlagExpChatFixLocalUserVerifiedBadgeModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), expChatSharedModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatDisableUniverseBubbleChat (ref), fFlagExpChatGlobalTabDefaultModule (ref), isGlobalBubbleChatEnabledModule (ref), shouldRenderTextChannelInDefaultWindow (ref), getTextChannelDisplayMode (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), expChatPresetChatEmojiEffectExperimentation (ref), logPresetChatEmojiEffectExposureModule (ref), fIntExpChatRandomCharChangeLowerBoundModule (ref), fIntExpChatRandomCharChangeUpperBoundModule (ref), configModule (ref), fFlagExpChatClearHiddenMessagesPostAgeCheckModule (ref)
+	-- upvalues: createSignal (ref), fFlagExpChatMessagesStoreUseProxyModule (ref), createProxy (ref), createComputed (ref), dictionary (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatMessagesStoreBatchModule (ref), signalsExperimentalModule (ref), fFlagExpChatRenderHistoricalMessagesModule (ref), list (ref), expChatMessageHistoryExperimentation (ref), isBorderlessBubbleChatEnabledModule (ref), getServerTimeNowMillisModule (ref), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (ref), httpService (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (ref), fFlagExpChatMessageHistoryExperiment (ref), fFlagExpChatEnableV2ChatWindowModule (ref), set (ref), sanitizeForRichTextModule (ref), getFFlagExpChatSyntheticSystemMessageRichText (ref), generateRichSystemMessageTextFormatModule (ref), fFlagExpChatDictation (ref), computeNameColor (ref), playersService (ref), fFlagEnableInExpChatRewriteModule (ref), getTextAndTranslationModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), isWhiteSpaceOnlyModule (ref), fFlagExpChatFixLocalUserVerifiedBadgeModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), expChatSharedModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatDisableUniverseBubbleChat (ref), fFlagExpChatGlobalTabDefaultModule (ref), isGlobalBubbleChatEnabledModule (ref), shouldRenderTextChannelInDefaultWindow (ref), getTextChannelDisplayMode (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), expChatPresetChatEmojiEffectExperimentation (ref), logPresetChatEmojiEffectExposureModule (ref), fIntExpChatRandomCharChangeLowerBoundModule (ref), fIntExpChatRandomCharChangeUpperBoundModule (ref), configModule (ref), fFlagExpChatClearHiddenMessagesPostAgeCheckModule (ref)
 	local t = {
 		canLocalUserChat = false,
 		isBubbleChatEnabled = false,
@@ -313,15 +315,53 @@ return function(p1)
 		return list.append(p5, p6)
 	end
 	
-	local _ = function(p8)
-		-- upvalues: var7 (ref), t (ref)
-		return p8.isHistorical == true and (p8.isVisibleInChatWindow and t.messageLimit <= #var7(false))
+	local function capHistoricalPrefix(p8, p9)
+		-- upvalues: expChatMessageHistoryExperimentation (copy), var14 (ref), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), list (copy)
+		if not p9.isHistorical then
+			return p8
+		end
+		local historyArm = expChatMessageHistoryExperimentation.getHistoryArm(var14(false))
+		local var43 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+		
+		local function _(p10)
+			-- upvalues: p9 (ref), var43 (ref)
+			return if p10 == p9.messageId then p9 else var43 and var43[p10]
+		end
+		
+		local var44 = 0
+		
+		for i, v in ipairs(p8) do
+			local var45 = if v == p9.messageId then p9 else var43 and var43[v]
+			
+			if not var45 or not var45.isHistorical then break end
+			var44 += 1
+		end
+		local var46 = if historyArm then historyArm.maxAgeSeconds else 0
+		local maxValue = math.max(1, var44 - (if historyArm then historyArm.maxCount else 0) + 1)
+		
+		if var46 > 0 then
+			local var47 = workspace:GetServerTimeNow() - var46
+			
+			for i_1 = maxValue, var44 do
+				local var48 = p8[i_1]
+				local var49 = if var48 == p9.messageId then p9 else var43 and var43[var48]
+				
+				if var49 and var47 <= var49.timestamp.UnixTimestamp then break end
+				maxValue = i_1 + 1
+			end
+		end
+		return if maxValue == 1 then p8 elseif #p8 < maxValue then {} else list.slice(p8, maxValue)
 	end
 	
-	local _ = function(p8, p9)
+	local _ = function(p10)
+		-- upvalues: var7 (ref), t (ref)
+		return p10.isHistorical == true and (p10.isVisibleInChatWindow and t.messageLimit <= #var7(false))
+	end
+	
+	local _ = function(p10, p11)
 		-- upvalues: var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write)
-		if not p9 and not var33 then
-			updateNextMessageComponent(p8)
+		if not p11 and not var33 then
+			updateNextMessageComponent(p10)
 			
 			return
 		elseif var32 then
@@ -332,321 +372,330 @@ return function(p1)
 		var31()
 	end
 	
-	local function keepHistoricalFlag(p8)
+	local function keepHistoricalFlag(p10)
 		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), dictionary (copy)
-		local var43 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
-		local messageId = var43 and var43[p8.messageId]
+		local var50 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+		local messageId = var50 and var50[p10.messageId]
 		
-		return if messageId ~= nil and messageId.isHistorical == true then dictionary.join(p8, { isHistorical = true }) else p8
+		return if messageId ~= nil and messageId.isHistorical == true then dictionary.join(p10, { isHistorical = true }) else p10
 	end
 	
-	local _ = function(p8)
-		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
-		local var43 = function()
-			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), p8 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
-			local var44 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+	local _ = function(p10)
+		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
+		local var50 = function()
+			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), p10 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
+			local var51 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
 			
 			if isBorderlessBubbleChatEnabledModule() then
-				local messageId = var44 and var44[p8.messageId]
-				p8.bubbleChatReceivedAtMillis = if messageId then messageId.bubbleChatReceivedAtMillis else getServerTimeNowMillisModule()
+				local messageId = var51 and var51[p10.messageId]
+				p10.bubbleChatReceivedAtMillis = if messageId then messageId.bubbleChatReceivedAtMillis else getServerTimeNowMillisModule()
 			end
-			if var44 and var44[p8.messageId] then
-				if fFlagExpChatEvictFloodcheckedFromWindowOrderModule and (p8.status == Enum.TextChatMessageStatus.Floodchecked or p8.status == Enum.TextChatMessageStatus.MessageTooLong) then
-					var8(function(p9)
-						-- upvalues: list (copy), p8 (copy)
-						return list.filter(p9, function(p10)
-							-- upvalues: p8 (copy)
-							return p10 ~= p8.messageId
+			if var51 and var51[p10.messageId] then
+				if fFlagExpChatEvictFloodcheckedFromWindowOrderModule and (p10.status == Enum.TextChatMessageStatus.Floodchecked or p10.status == Enum.TextChatMessageStatus.MessageTooLong) then
+					var8(function(p11)
+						-- upvalues: list (copy), p10 (copy)
+						return list.filter(p11, function(p12)
+							-- upvalues: p10 (copy)
+							return p12 ~= p10.messageId
 						end)
 					end)
-					local var45 = resolveChannelNameForMapOrder(p8, p8.channelNameOverride)
+					local var52 = resolveChannelNameForMapOrder(p10, p10.channelNameOverride)
 					
-					if var45 then
-						var10(function(p9)
-							-- upvalues: var45 (ref), list (copy), p8 (copy), dictionary (copy)
-							local var46 = p9[var45]
+					if var52 then
+						var10(function(p11)
+							-- upvalues: var52 (ref), list (copy), p10 (copy), dictionary (copy)
+							local var53 = p11[var52]
 							
-							return if var46 then dictionary.join(p9, {
-								[var45] = list.filter(var46, function(p10)
-									-- upvalues: p8 (copy)
-									return p10 ~= p8.messageId
+							return if var53 then dictionary.join(p11, {
+								[var52] = list.filter(var53, function(p12)
+									-- upvalues: p10 (copy)
+									return p12 ~= p10.messageId
 								end)
-							}) else p9
+							}) else p11
 						end)
 					end
-					local messageId = p8.messageId
+					local messageId = p10.messageId
 					
 					if fFlagExpChatMessagesStoreUseProxyModule then
 						var3[messageId] = nil
 					else
-						var2(function(p9)
+						var2(function(p11)
 							-- upvalues: dictionary (copy), messageId (ref)
-							return dictionary.removeKey(p9, messageId)
+							return dictionary.removeKey(p11, messageId)
 						end)
 					end
-					if p8.userId then
-						local userId = p8.userId
+					if p10.userId then
+						local userId = p10.userId
 						
-						local var46 = function(p9)
-							-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), p8 (copy)
-							if not p9 then
+						local var53 = function(p11)
+							-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), p10 (copy)
+							if not p11 then
 								return nil
 							end
-							local var47 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p9, function(p10)
-								-- upvalues: p8 (copy)
-								return p10 ~= p8.messageId
-							end) else list.filter(p9, function(p10)
-								-- upvalues: p8 (copy)
-								return p10.messageId ~= p8.messageId
+							local var54 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p11, function(p12)
+								-- upvalues: p10 (copy)
+								return p12 ~= p10.messageId
+							end) else list.filter(p11, function(p12)
+								-- upvalues: p10 (copy)
+								return p12.messageId ~= p10.messageId
 							end)
 							
-							return if #var47 == 0 then nil else var47
+							return if #var54 == 0 then nil else var54
 						end
 						
 						if fFlagExpChatMessagesStoreUseProxyModule then
-							var6[userId] = var46(var6[userId])
+							var6[userId] = var53(var6[userId])
 							
 							return
 						end
-						var5(function(p9)
-							-- upvalues: var46 (ref), userId (ref), dictionary (copy)
-							local var47 = var46(p9[userId])
+						var5(function(p11)
+							-- upvalues: var53 (ref), userId (ref), dictionary (copy)
+							local var54 = var53(p11[userId])
 							
-							return if var47 == nil then dictionary.removeKey(p9, userId) else dictionary.join(p9, { [userId] = var47 })
+							return if var54 == nil then dictionary.removeKey(p11, userId) else dictionary.join(p11, { [userId] = var54 })
 						end)
 					end
 					return
 				elseif fFlagExpChatRenderHistoricalMessagesModule then
-					writeByMessageId(p8.messageId, keepHistoricalFlag(p8))
+					writeByMessageId(p10.messageId, keepHistoricalFlag(p10))
 				else
-					writeByMessageId(p8.messageId, p8)
+					writeByMessageId(p10.messageId, p10)
 				end
-				if not fFlagExpChatMessagesStoreMemoryCleanupModule and p8.userId then
-					local userId = p8.userId
+				if not fFlagExpChatMessagesStoreMemoryCleanupModule and p10.userId then
+					local userId = p10.userId
 					
-					local var47 = function(p9)
-						-- upvalues: p8 (copy), list (copy)
-						if not p9 then
+					local var54 = function(p11)
+						-- upvalues: p10 (copy), list (copy)
+						if not p11 then
 							return nil
 						end
-						local var48 = nil
+						local var55 = nil
 						
-						for i, v in ipairs(p9) do
-							if v.messageId == p8.messageId then
-								var48 = i
+						for i, v in ipairs(p11) do
+							if v.messageId == p10.messageId then
+								var55 = i
 								break
 							end
 						end
-						return if var48 then list.set(p9, var48, p8) else p9
+						return if var55 then list.set(p11, var55, p10) else p11
 					end
 					
 					if fFlagExpChatMessagesStoreUseProxyModule then
-						var6[userId] = var47(var6[userId])
+						var6[userId] = var54(var6[userId])
 						
 						return
 					end
-					var5(function(p10)
-						-- upvalues: var47 (ref), userId (ref), dictionary (copy)
-						local var49 = var47(p10[userId])
+					var5(function(p12)
+						-- upvalues: var54 (ref), userId (ref), dictionary (copy)
+						local var56 = var54(p12[userId])
 						
-						return if var49 == nil then dictionary.removeKey(p10, userId) else dictionary.join(p10, { [userId] = var49 })
+						return if var56 == nil then dictionary.removeKey(p12, userId) else dictionary.join(p12, { [userId] = var56 })
 					end)
 				end
 				return
 			elseif fFlagExpChatRenderHistoricalMessagesModule then
-				local var48 = p8
+				local var55 = p10
 				
-				if var48.isHistorical == true and (var48.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
+				if var55.isHistorical == true and (var55.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
 			end
-			local userId = p8.userId
-			local partOrModel = p8.partOrModel
+			local userId = p10.userId
+			local partOrModel = p10.partOrModel
 			
 			if not userId and partOrModel then
 				userId = var19(false)[partOrModel]
 				
 				if not userId then
 					userId = httpService:GenerateGUID(false)
-					var18(function(p9)
+					var18(function(p11)
 						-- upvalues: dictionary (copy), userId (write), partOrModel (ref)
-						return dictionary.join(p9, { [userId] = partOrModel })
+						return dictionary.join(p11, { [userId] = partOrModel })
 					end)
-					var20(function(p9)
+					var20(function(p11)
 						-- upvalues: dictionary (copy), partOrModel (ref), userId (write)
-						return dictionary.join(p9, { [partOrModel] = userId })
+						return dictionary.join(p11, { [partOrModel] = userId })
 					end)
 				end
 			end
-			local var49 = if userId ~= p8.userId then p8 else dictionary.join(p8, { userId = userId })
-			local var50 = nil
+			local var56 = if userId ~= p10.userId then p10 else dictionary.join(p10, { userId = userId })
+			local var57 = nil
 			
-			if getFFlagTextChatEnableUniverseChatTabs() and var49.channelNameOverride then
-				var50 = var49.channelNameOverride
-			elseif var49.textChannel then
-				var50 = if var49.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var49.textChannel.Name
+			if getFFlagTextChatEnableUniverseChatTabs() and var56.channelNameOverride then
+				var57 = var56.channelNameOverride
+			elseif var56.textChannel then
+				var57 = if var56.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var56.textChannel.Name
 			end
-			if var49.isVisibleInChatWindow then
-				local var51 = var7(false)
-				local var52 = if var50 then var9(false)[var50] or {} else {}
+			if var56.isVisibleInChatWindow then
+				local var58 = var7(false)
+				local var59 = if var57 then var9(false)[var57] or {} else {}
 				
-				if t.messageLimit <= #var51 then
-					local var53 = var51[1]
-					local var54 = var44 and var44[var53]
+				if t.messageLimit <= #var58 then
+					local var60 = var58[1]
+					local var61 = var51 and var51[var60]
 					
-					if var54 then
+					if var61 then
 						if not fFlagExpChatMessagesStoreKeepInByMessageIdModule then
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var53] = nil
+								var3[var60] = nil
 							else
-								var2(function(p9)
-									-- upvalues: dictionary (copy), var53 (ref)
-									return dictionary.removeKey(p9, var53)
+								var2(function(p11)
+									-- upvalues: dictionary (copy), var60 (ref)
+									return dictionary.removeKey(p11, var60)
 								end)
 							end
 						end
-						if var54.userId then
-							local userId_1 = var54.userId
+						if var61.userId then
+							local userId_1 = var61.userId
 							
-							local var55 = function(p9)
-								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var53 (ref), var17 (copy), var54 (ref), var20 (copy), dictionary (copy), var18 (copy)
-								if not p9 then
+							local var62 = function(p11)
+								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var60 (ref), var17 (copy), var61 (ref), var20 (copy), dictionary (copy), var18 (copy)
+								if not p11 then
 									return nil
 								end
-								local var56 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p9, function(p10)
-									-- upvalues: var53 (copy)
-									return p10 ~= var53
-								end) else list.filter(p9, function(p10)
-									-- upvalues: var53 (copy)
-									return p10.messageId ~= var53
+								local var63 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p11, function(p12)
+									-- upvalues: var60 (copy)
+									return p12 ~= var60
+								end) else list.filter(p11, function(p12)
+									-- upvalues: var60 (copy)
+									return p12.messageId ~= var60
 								end)
 								
-								if #var56 ~= 0 then
-									return var56
+								if #var63 ~= 0 then
+									return var63
 								end
-								local var57 = var17(false)
+								local var64 = var17(false)
 								
-								if var57[var54.userId] then
-									local userId = var57[var54.userId]
-									var20(function(p10)
+								if var64[var61.userId] then
+									local userId = var64[var61.userId]
+									var20(function(p12)
 										-- upvalues: dictionary (copy), userId (ref)
-										return dictionary.removeKey(p10, userId)
+										return dictionary.removeKey(p12, userId)
 									end)
-									var18(function(p10)
-										-- upvalues: dictionary (copy), var54 (copy)
-										return dictionary.removeKey(p10, var54.userId)
+									var18(function(p12)
+										-- upvalues: dictionary (copy), var61 (copy)
+										return dictionary.removeKey(p12, var61.userId)
 									end)
 								end
 								return nil
 							end
 							
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var6[userId_1] = var55(var6[userId_1])
+								var6[userId_1] = var62(var6[userId_1])
 							else
-								var5(function(p9)
-									-- upvalues: var55 (ref), userId_1 (ref), dictionary (copy)
-									local var56 = var55(p9[userId_1])
+								var5(function(p11)
+									-- upvalues: var62 (ref), userId_1 (ref), dictionary (copy)
+									local var63 = var62(p11[userId_1])
 									
-									return if var56 == nil then dictionary.removeKey(p9, userId_1) else dictionary.join(p9, { [userId_1] = var56 })
+									return if var63 == nil then dictionary.removeKey(p11, userId_1) else dictionary.join(p11, { [userId_1] = var63 })
 								end)
 							end
 						end
-						var8(function(p9)
+						var8(function(p11)
 							-- upvalues: list (copy)
-							return list.removeIndex(p9, 1)
+							return list.removeIndex(p11, 1)
 						end)
 						
 						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var53] = nil
+							t_3[var60] = nil
 						end
 					end
 				end
-				if var50 and t.messageLimit <= #var52 then
-					local var56 = var52[1]
+				if var57 and t.messageLimit <= #var59 then
+					local var63 = var59[1]
 					
-					if var56 then
-						var10(function(p9)
-							-- upvalues: var50 (write), list (copy), dictionary (copy)
-							return dictionary.join(p9, { [var50] = list.removeIndex(p9[var50] or {}, 1) })
+					if var63 then
+						var10(function(p11)
+							-- upvalues: var57 (write), list (copy), dictionary (copy)
+							return dictionary.join(p11, { [var57] = list.removeIndex(p11[var57] or {}, 1) })
 						end)
 						
-						if var44 and var44[var56] then
+						if var51 and var51[var63] then
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var56] = nil
+								var3[var63] = nil
 							else
-								var2(function(p9)
-									-- upvalues: dictionary (copy), var56 (ref)
-									return dictionary.removeKey(p9, var56)
+								var2(function(p11)
+									-- upvalues: dictionary (copy), var63 (ref)
+									return dictionary.removeKey(p11, var63)
 								end)
 							end
 						end
 						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var56] = nil
+							t_3[var63] = nil
 						end
 					end
 				end
 			end
-			writeByMessageId(var49.messageId, var49)
+			writeByMessageId(var56.messageId, var56)
 			
-			if var49.userId then
-				local userId_1 = var49.userId
+			if var56.userId then
+				local userId_1 = var56.userId
 				
-				local var57 = function(p9)
-					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var49 (ref), list (copy)
-					p9 = p9 or {}
-					local var58 = false
+				local var64 = function(p11)
+					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var56 (ref), list (copy)
+					p11 = p11 or {}
+					local var65 = false
 					
 					if fFlagExpChatMessagesStoreMemoryCleanupModule then
-						for i, v in ipairs(p9) do
-							if v == var49.messageId then
-								var58 = true
+						for i, v in ipairs(p11) do
+							if v == var56.messageId then
+								var65 = true
 							end
 						end
 					else
-						for i, v in ipairs(p9) do
-							if v.messageId == var49.messageId then
-								var58 = true
+						for i, v in ipairs(p11) do
+							if v.messageId == var56.messageId then
+								var65 = true
 								break
 							end
 						end
 					end
-					return if var58 then p9 else list.append(p9, if fFlagExpChatMessagesStoreMemoryCleanupModule then var49.messageId else var49)
+					return if var65 then p11 else list.append(p11, if fFlagExpChatMessagesStoreMemoryCleanupModule then var56.messageId else var56)
 				end
 				
 				if fFlagExpChatMessagesStoreUseProxyModule then
-					var6[userId_1] = var57(var6[userId_1])
+					var6[userId_1] = var64(var6[userId_1])
 				else
-					var5(function(p10)
-						-- upvalues: var57 (ref), userId_1 (ref), dictionary (copy)
-						local var59 = var57(p10[userId_1])
+					var5(function(p12)
+						-- upvalues: var64 (ref), userId_1 (ref), dictionary (copy)
+						local var66 = var64(p12[userId_1])
 						
-						return if var59 == nil then dictionary.removeKey(p10, userId_1) else dictionary.join(p10, { [userId_1] = var59 })
+						return if var66 == nil then dictionary.removeKey(p12, userId_1) else dictionary.join(p12, { [userId_1] = var66 })
 					end)
 				end
 			end
-			local var59 = false
+			local var66 = false
 			
-			if var49.isVisibleInChatWindow then
-				var8(function(p10)
-					-- upvalues: insertWindowMessageIdInOrder (copy), var49 (ref), var59 (write)
-					local var60 = insertWindowMessageIdInOrder(p10, var49.messageId, var49.isHistorical)
-					var59 = var59 or var60[#var60] ~= var49.messageId
+			if var56.isVisibleInChatWindow then
+				var8(function(p12)
+					-- upvalues: insertWindowMessageIdInOrder (copy), var56 (ref), var66 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy)
+					local var67 = insertWindowMessageIdInOrder(p12, var56.messageId, var56.isHistorical)
+					var66 = var66 or var67[#var67] ~= var56.messageId
 					
-					return var60
+					if fFlagExpChatMessageHistoryExperiment then
+						local var68 = capHistoricalPrefix(var67, var56)
+						var66 = var66 or #var68 < #var67
+						
+						return var68
+					end
+					return var67
 				end)
 				
-				if var50 then
-					var10(function(p10)
-						-- upvalues: var50 (write), insertWindowMessageIdInOrder (copy), var49 (ref), var59 (write), dictionary (copy)
-						local var60 = insertWindowMessageIdInOrder(p10[var50] or {}, var49.messageId, var49.isHistorical)
-						var59 = var59 or var60[#var60] ~= var49.messageId
+				if var57 then
+					var10(function(p12)
+						-- upvalues: var57 (write), insertWindowMessageIdInOrder (copy), var56 (ref), var66 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), dictionary (copy)
+						local var67 = insertWindowMessageIdInOrder(p12[var57] or {}, var56.messageId, var56.isHistorical)
+						var66 = var66 or var67[#var67] ~= var56.messageId
 						
-						return dictionary.join(p10, { [var50] = var60 })
+						if fFlagExpChatMessageHistoryExperiment then
+							var67 = capHistoricalPrefix(var67, var56)
+						end
+						return dictionary.join(p12, { [var57] = var67 })
 					end)
 				end
 				if fFlagExpChatEnableV2ChatWindowModule then
-					local var60 = var29(false)
+					local var67 = var29(false)
 					
-					if if var60 ~= nil then var50 == var60 else true then
-						local messageId = var49.messageId
+					if if var67 ~= nil then var57 == var67 else true then
+						local messageId = var56.messageId
 						
 						if not var33 then
 							updateNextMessageComponent(messageId)
@@ -661,74 +710,74 @@ return function(p1)
 		end
 		
 		if fFlagExpChatMessagesStoreBatchModule then
-			signalsExperimentalModule.batch(var43)
+			signalsExperimentalModule.batch(var50)
 			
 			return
 		end
-		var43()
+		var50()
 	end
 	
 	local t_4 = {}
 	
-	local function getMessage(p9)
+	local function getMessage(p11)
 		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), t_3 (ref), createComputed (copy)
 		if fFlagExpChatMessagesStoreUseProxyModule then
-			return function(p10)
-				-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), p9 (ref)
-				return (if fFlagExpChatMessagesStoreUseProxyModule then var3(p10) else var1(p10))[p9]
+			return function(p12)
+				-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), p11 (ref)
+				return (if fFlagExpChatMessagesStoreUseProxyModule then var3(p12) else var1(p12))[p11]
 			end
-		elseif not t_3[p9] then
-			t_3[p9] = createComputed(function(p10)
-				-- upvalues: var1 (copy), p9 (ref)
-				local var58 = var1(p10)
+		elseif not t_3[p11] then
+			t_3[p11] = createComputed(function(p12)
+				-- upvalues: var1 (copy), p11 (ref)
+				local var65 = var1(p12)
 				
-				return if var58 and var58[p9] then var58[p9] else nil
+				return if var65 and var65[p11] then var65[p11] else nil
 			end)
 		end
-		return t_3[p9]
+		return t_3[p11]
 	end
 	
-	local function getUserMessageCache(p9)
+	local function getUserMessageCache(p11)
 		-- upvalues: t_4 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), createComputed (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (ref), var4 (ref), var3 (ref), var1 (ref), var13 (ref), set (copy)
-		local var58 = tostring(p9)
+		local var65 = tostring(p11)
 		
-		if not t_4[var58] then
-			t_4[var58] = {}
+		if not t_4[var65] then
+			t_4[var65] = {}
 			
 			if not fFlagExpChatMessagesStoreMemoryCleanupModule then
-				t_4[var58].messages = createComputed(function(p10)
-					-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var4 (copy), var58 (ref)
-					return (if fFlagExpChatMessagesStoreUseProxyModule then var6(p10) else var4(p10))[var58] or {}
+				t_4[var65].messages = createComputed(function(p12)
+					-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var4 (copy), var65 (ref)
+					return (if fFlagExpChatMessagesStoreUseProxyModule then var6(p12) else var4(p12))[var65] or {}
 				end)
 			end
 			if fFlagExpChatMessagesStoreMemoryCleanupModule then
-				t_4[var58].bubbleMessages = createComputed(function(p10)
-					-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var4 (copy), var58 (ref), var3 (copy), var1 (copy), var13 (copy), set (copy)
-					local var59 = (if fFlagExpChatMessagesStoreUseProxyModule then var6(p10) else var4(p10))[var58] or {}
-					local var60 = if fFlagExpChatMessagesStoreUseProxyModule then var3(p10) else var1(p10)
-					local var61 = var13(p10)
+				t_4[var65].bubbleMessages = createComputed(function(p12)
+					-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var4 (copy), var65 (ref), var3 (copy), var1 (copy), var13 (copy), set (copy)
+					local var66 = (if fFlagExpChatMessagesStoreUseProxyModule then var6(p12) else var4(p12))[var65] or {}
+					local var67 = if fFlagExpChatMessagesStoreUseProxyModule then var3(p12) else var1(p12)
+					local var68 = var13(p12)
 					local t = {}
 					
-					for i, v in ipairs(var59) do
-						local var62 = var60[v]
+					for i, v in ipairs(var66) do
+						local var69 = var67[v]
 						
-						if var62 then
-							if var62.isVisibleInBubbleChat and not (var62.userId and set.has(var61, var62.userId) or false) then
-								table.insert(t, var62)
+						if var69 then
+							if var69.isVisibleInBubbleChat and not (var69.userId and set.has(var68, var69.userId) or false) then
+								table.insert(t, var69)
 							end
 						end
 					end
 					return t
 				end)
 			else
-				t_4[var58].bubbleMessages = createComputed(function(p11)
-					-- upvalues: t_4 (copy), var58 (ref), var13 (copy), set (copy)
-					local var63 = t_4[var58].messages(p11)
-					local var64 = var13(p11)
+				t_4[var65].bubbleMessages = createComputed(function(p13)
+					-- upvalues: t_4 (copy), var65 (ref), var13 (copy), set (copy)
+					local var70 = t_4[var65].messages(p13)
+					local var71 = var13(p13)
 					local t = {}
 					
-					for i, v in ipairs(var63) do
-						if v.isVisibleInBubbleChat and not (v.userId and set.has(var64, v.userId) or false) then
+					for i, v in ipairs(var70) do
+						if v.isVisibleInBubbleChat and not (v.userId and set.has(var71, v.userId) or false) then
 							table.insert(t, v)
 						end
 					end
@@ -736,53 +785,53 @@ return function(p1)
 				end)
 			end
 			if not fFlagExpChatMessagesStoreMemoryCleanupModule then
-				t_4[var58].lastMessage = createComputed(function(p11)
-					-- upvalues: t_4 (copy), var58 (ref)
-					local var63 = t_4[var58].messages(p11)
+				t_4[var65].lastMessage = createComputed(function(p13)
+					-- upvalues: t_4 (copy), var65 (ref)
+					local var70 = t_4[var65].messages(p13)
 					
-					return if #var63 > 0 then var63[#var63] else nil
+					return if #var70 > 0 then var70[#var70] else nil
 				end)
 			end
 		end
-		return t_4[var58]
+		return t_4[var65]
 	end
 	
-	local function getUserMessages(p10)
+	local function getUserMessages(p12)
 		-- upvalues: getUserMessageCache (ref)
-		return getUserMessageCache(p10).messages
+		return getUserMessageCache(p12).messages
 	end
 	
-	local function getUserBubbleMessages(p10)
+	local function getUserBubbleMessages(p12)
 		-- upvalues: getUserMessageCache (ref)
-		return getUserMessageCache(p10).bubbleMessages
+		return getUserMessageCache(p12).bubbleMessages
 	end
 	
-	local function getUserLastMessage(p10)
+	local function getUserLastMessage(p12)
 		-- upvalues: getUserMessageCache (ref)
-		return getUserMessageCache(p10).lastMessage
+		return getUserMessageCache(p12).lastMessage
 	end
 	
 	local _ = function()
 		-- upvalues: createComputed (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref)
-		return createComputed(function(p10)
+		return createComputed(function(p12)
 			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy)
-			local var59 = if fFlagExpChatMessagesStoreUseProxyModule then var3(p10) else var1(p10)
+			local var66 = if fFlagExpChatMessagesStoreUseProxyModule then var3(p12) else var1(p12)
 			
-			if not var59 then
+			if not var66 then
 				return {}
 			end
 			local t = {}
 			
-			for i, v in var59 do
+			for i, v in var66 do
 				table.insert(t, v)
 			end
 			return t
 		end)
 	end
 	
-	local function addSystemMessage(p10, p11, p12, p13, p14, p15)
-		-- upvalues: sanitizeForRichTextModule (copy), getFFlagExpChatSyntheticSystemMessageRichText (copy), generateRichSystemMessageTextFormatModule (copy), fFlagExpChatDictation (copy), httpService (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
-		local var59 = sanitizeForRichTextModule(p10)
+	local function addSystemMessage(p12, p13, p14, p15, p16, p17)
+		-- upvalues: sanitizeForRichTextModule (copy), getFFlagExpChatSyntheticSystemMessageRichText (copy), generateRichSystemMessageTextFormatModule (copy), fFlagExpChatDictation (copy), httpService (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
+		local var66 = sanitizeForRichTextModule(p12)
 		local t_1 = {
 			userId = nil,
 			prefixText = "",
@@ -795,45 +844,45 @@ return function(p1)
 			chatWindowMessageProperties = nil,
 			textChatMessageInstance = nil,
 			partOrModel = nil,
-			text = if getFFlagExpChatSyntheticSystemMessageRichText() then generateRichSystemMessageTextFormatModule(var59, if fFlagExpChatDictation then p14 else nil, p13) else var59,
+			text = if getFFlagExpChatSyntheticSystemMessageRichText() then generateRichSystemMessageTextFormatModule(var66, if fFlagExpChatDictation then p16 else nil, p15) else var66,
 			messageId = httpService:GenerateGUID(false),
 			timestamp = DateTime.fromUnixTimestampMillis(workspace:GetServerTimeNow() * 1000),
 			status = Enum.TextChatMessageStatus.Success,
-			textChannel = p15,
-			channelNameOverride = if p15 ~= nil then p11 else nil,
-			metadata = p12
+			textChannel = p17,
+			channelNameOverride = if p17 ~= nil then p13 else nil,
+			metadata = p14
 		}
 		
-		local var60 = function()
-			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
-			local var61 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+		local var67 = function()
+			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
+			local var68 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
 			
 			if isBorderlessBubbleChatEnabledModule() then
-				local messageId = var61 and var61[t_1.messageId]
+				local messageId = var68 and var68[t_1.messageId]
 				t_1.bubbleChatReceivedAtMillis = if messageId then messageId.bubbleChatReceivedAtMillis else getServerTimeNowMillisModule()
 			end
-			if var61 and var61[t_1.messageId] then
+			if var68 and var68[t_1.messageId] then
 				if fFlagExpChatEvictFloodcheckedFromWindowOrderModule and (t_1.status == Enum.TextChatMessageStatus.Floodchecked or t_1.status == Enum.TextChatMessageStatus.MessageTooLong) then
-					var8(function(p16)
+					var8(function(p18)
 						-- upvalues: list (copy), t_1 (copy)
-						return list.filter(p16, function(p17)
+						return list.filter(p18, function(p19)
 							-- upvalues: t_1 (copy)
-							return p17 ~= t_1.messageId
+							return p19 ~= t_1.messageId
 						end)
 					end)
-					local var62 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
+					local var69 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
 					
-					if var62 then
-						var10(function(p16)
-							-- upvalues: var62 (ref), list (copy), t_1 (copy), dictionary (copy)
-							local var63 = p16[var62]
+					if var69 then
+						var10(function(p18)
+							-- upvalues: var69 (ref), list (copy), t_1 (copy), dictionary (copy)
+							local var70 = p18[var69]
 							
-							return if var63 then dictionary.join(p16, {
-								[var62] = list.filter(var63, function(p17)
+							return if var70 then dictionary.join(p18, {
+								[var69] = list.filter(var70, function(p19)
 									-- upvalues: t_1 (copy)
-									return p17 ~= t_1.messageId
+									return p19 ~= t_1.messageId
 								end)
-							}) else p16
+							}) else p18
 						end)
 					end
 					local messageId = t_1.messageId
@@ -841,40 +890,40 @@ return function(p1)
 					if fFlagExpChatMessagesStoreUseProxyModule then
 						var3[messageId] = nil
 					else
-						var2(function(p16)
+						var2(function(p18)
 							-- upvalues: dictionary (copy), messageId (ref)
-							return dictionary.removeKey(p16, messageId)
+							return dictionary.removeKey(p18, messageId)
 						end)
 					end
 					if t_1.userId then
 						local userId = t_1.userId
 						
-						local var63 = function(p16)
+						local var70 = function(p18)
 							-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), t_1 (copy)
-							if p16 then
-								local var64 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p16, function(p17)
+							if p18 then
+								local var71 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p18, function(p19)
 									-- upvalues: t_1 (copy)
-									return p17 ~= t_1.messageId
-								end) else list.filter(p16, function(p17)
+									return p19 ~= t_1.messageId
+								end) else list.filter(p18, function(p19)
 									-- upvalues: t_1 (copy)
-									return p17.messageId ~= t_1.messageId
+									return p19.messageId ~= t_1.messageId
 								end)
 								
-								return if #var64 == 0 then nil else var64
+								return if #var71 == 0 then nil else var71
 							end
 							return nil
 						end
 						
 						if fFlagExpChatMessagesStoreUseProxyModule then
-							var6[userId] = var63(var6[userId])
+							var6[userId] = var70(var6[userId])
 							
 							return
 						end
-						var5(function(p16)
-							-- upvalues: var63 (ref), userId (ref), dictionary (copy)
-							local var64 = var63(p16[userId])
+						var5(function(p18)
+							-- upvalues: var70 (ref), userId (ref), dictionary (copy)
+							local var71 = var70(p18[userId])
 							
-							return if var64 == nil then dictionary.removeKey(p16, userId) else dictionary.join(p16, { [userId] = var64 })
+							return if var71 == nil then dictionary.removeKey(p18, userId) else dictionary.join(p18, { [userId] = var71 })
 						end)
 					end
 					return
@@ -886,36 +935,36 @@ return function(p1)
 				if not fFlagExpChatMessagesStoreMemoryCleanupModule and t_1.userId then
 					local userId = t_1.userId
 					
-					local var64 = function(p16)
+					local var71 = function(p18)
 						-- upvalues: t_1 (copy), list (copy)
-						if not p16 then
+						if not p18 then
 							return nil
 						end
-						local var65 = nil
+						local var72 = nil
 						
-						for i, v in ipairs(p16) do
+						for i, v in ipairs(p18) do
 							if v.messageId == t_1.messageId then break end
 						end
-						return if var65 then list.set(p16, var65, t_1) else p16
+						return if var72 then list.set(p18, var72, t_1) else p18
 					end
 					
 					if fFlagExpChatMessagesStoreUseProxyModule then
-						var6[userId] = var64(var6[userId])
+						var6[userId] = var71(var6[userId])
 						
 						return
 					end
-					var5(function(p17)
-						-- upvalues: var64 (ref), userId (ref), dictionary (copy)
-						local var66 = var64(p17[userId])
+					var5(function(p19)
+						-- upvalues: var71 (ref), userId (ref), dictionary (copy)
+						local var73 = var71(p19[userId])
 						
-						return if var66 == nil then dictionary.removeKey(p17, userId) else dictionary.join(p17, { [userId] = var66 })
+						return if var73 == nil then dictionary.removeKey(p19, userId) else dictionary.join(p19, { [userId] = var73 })
 					end)
 				end
 				return
 			elseif fFlagExpChatRenderHistoricalMessagesModule then
-				local var65 = t_1
+				local var72 = t_1
 				
-				if var65.isHistorical == true and (var65.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
+				if var72.isHistorical == true and (var72.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
 			end
 			local userId = t_1.userId
 			local partOrModel = t_1.partOrModel
@@ -925,187 +974,196 @@ return function(p1)
 				
 				if not userId then
 					userId = httpService:GenerateGUID(false)
-					var18(function(p16)
+					var18(function(p18)
 						-- upvalues: dictionary (copy), userId (write), partOrModel (ref)
-						return dictionary.join(p16, { [userId] = partOrModel })
+						return dictionary.join(p18, { [userId] = partOrModel })
 					end)
-					var20(function(p16)
+					var20(function(p18)
 						-- upvalues: dictionary (copy), partOrModel (ref), userId (write)
-						return dictionary.join(p16, { [partOrModel] = userId })
+						return dictionary.join(p18, { [partOrModel] = userId })
 					end)
 				end
 			end
-			local var66 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
-			local var67 = nil
+			local var73 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
+			local var74 = nil
 			
-			if getFFlagTextChatEnableUniverseChatTabs() and var66.channelNameOverride then
-				var67 = var66.channelNameOverride
-			elseif var66.textChannel then
-				var67 = if var66.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var66.textChannel.Name
+			if getFFlagTextChatEnableUniverseChatTabs() and var73.channelNameOverride then
+				var74 = var73.channelNameOverride
+			elseif var73.textChannel then
+				var74 = if var73.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var73.textChannel.Name
 			end
-			if var66.isVisibleInChatWindow then
-				local var68 = var7(false)
-				local var69 = if var67 then var9(false)[var67] or {} else {}
+			if var73.isVisibleInChatWindow then
+				local var75 = var7(false)
+				local var76 = if var74 then var9(false)[var74] or {} else {}
 				
-				if t.messageLimit <= #var68 then
-					local var70 = var68[1]
-					local var71 = var61 and var61[var70]
+				if t.messageLimit <= #var75 then
+					local var77 = var75[1]
+					local var78 = var68 and var68[var77]
 					
-					if var71 then
+					if var78 then
 						if not fFlagExpChatMessagesStoreKeepInByMessageIdModule then
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var70] = nil
+								var3[var77] = nil
 							else
-								var2(function(p16)
-									-- upvalues: dictionary (copy), var70 (ref)
-									return dictionary.removeKey(p16, var70)
+								var2(function(p18)
+									-- upvalues: dictionary (copy), var77 (ref)
+									return dictionary.removeKey(p18, var77)
 								end)
 							end
 						end
-						if var71.userId then
-							local userId_1 = var71.userId
+						if var78.userId then
+							local userId_1 = var78.userId
 							
-							local var72 = function(p16)
-								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var70 (ref), var17 (copy), var71 (ref), var20 (copy), dictionary (copy), var18 (copy)
-								if not p16 then
+							local var79 = function(p18)
+								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var77 (ref), var17 (copy), var78 (ref), var20 (copy), dictionary (copy), var18 (copy)
+								if not p18 then
 									return nil
 								end
-								local var73 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p16, function(p17)
-									-- upvalues: var70 (copy)
-									return p17 ~= var70
-								end) else list.filter(p16, function(p17)
-									-- upvalues: var70 (copy)
-									return p17.messageId ~= var70
+								local var80 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p18, function(p19)
+									-- upvalues: var77 (copy)
+									return p19 ~= var77
+								end) else list.filter(p18, function(p19)
+									-- upvalues: var77 (copy)
+									return p19.messageId ~= var77
 								end)
 								
-								if #var73 ~= 0 then
-									return var73
+								if #var80 ~= 0 then
+									return var80
 								end
-								local var74 = var17(false)
+								local var81 = var17(false)
 								
-								if var74[var71.userId] then
-									local userId = var74[var71.userId]
-									var20(function(p17)
+								if var81[var78.userId] then
+									local userId = var81[var78.userId]
+									var20(function(p19)
 										-- upvalues: dictionary (copy), userId (ref)
-										return dictionary.removeKey(p17, userId)
+										return dictionary.removeKey(p19, userId)
 									end)
-									var18(function(p17)
-										-- upvalues: dictionary (copy), var71 (copy)
-										return dictionary.removeKey(p17, var71.userId)
+									var18(function(p19)
+										-- upvalues: dictionary (copy), var78 (copy)
+										return dictionary.removeKey(p19, var78.userId)
 									end)
 								end
 								return nil
 							end
 							
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var6[userId_1] = var72(var6[userId_1])
+								var6[userId_1] = var79(var6[userId_1])
 							else
-								var5(function(p16)
-									-- upvalues: var72 (ref), userId_1 (ref), dictionary (copy)
-									local var73 = var72(p16[userId_1])
+								var5(function(p18)
+									-- upvalues: var79 (ref), userId_1 (ref), dictionary (copy)
+									local var80 = var79(p18[userId_1])
 									
-									return if var73 == nil then dictionary.removeKey(p16, userId_1) else dictionary.join(p16, { [userId_1] = var73 })
+									return if var80 == nil then dictionary.removeKey(p18, userId_1) else dictionary.join(p18, { [userId_1] = var80 })
 								end)
 							end
 						end
-						var8(function(p16)
+						var8(function(p18)
 							-- upvalues: list (copy)
-							return list.removeIndex(p16, 1)
+							return list.removeIndex(p18, 1)
 						end)
 						
 						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var70] = nil
+							t_3[var77] = nil
 						end
 					end
 				end
-				if var67 and t.messageLimit <= #var69 then
-					local var73 = var69[1]
+				if var74 and t.messageLimit <= #var76 then
+					local var80 = var76[1]
 					
-					if var73 then
-						var10(function(p16)
-							-- upvalues: var67 (write), list (copy), dictionary (copy)
-							return dictionary.join(p16, { [var67] = list.removeIndex(p16[var67] or {}, 1) })
+					if var80 then
+						var10(function(p18)
+							-- upvalues: var74 (write), list (copy), dictionary (copy)
+							return dictionary.join(p18, { [var74] = list.removeIndex(p18[var74] or {}, 1) })
 						end)
 						
-						if var61 and var61[var73] then
+						if var68 and var68[var80] then
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var73] = nil
+								var3[var80] = nil
 							else
-								var2(function(p16)
-									-- upvalues: dictionary (copy), var73 (ref)
-									return dictionary.removeKey(p16, var73)
+								var2(function(p18)
+									-- upvalues: dictionary (copy), var80 (ref)
+									return dictionary.removeKey(p18, var80)
 								end)
 							end
 						end
 						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var73] = nil
+							t_3[var80] = nil
 						end
 					end
 				end
 			end
-			writeByMessageId(var66.messageId, var66)
+			writeByMessageId(var73.messageId, var73)
 			
-			if var66.userId then
-				local userId_1 = var66.userId
+			if var73.userId then
+				local userId_1 = var73.userId
 				
-				local var74 = function(p16)
-					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var66 (ref), list (copy)
-					local p17 = p16 or {}
-					local var75 = false
+				local var81 = function(p18)
+					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var73 (ref), list (copy)
+					local p19 = p18 or {}
+					local var82 = false
 					
 					if fFlagExpChatMessagesStoreMemoryCleanupModule then
-						for i, v in ipairs(p17) do
-							if v == var66.messageId then
-								var75 = true
+						for i, v in ipairs(p19) do
+							if v == var73.messageId then
+								var82 = true
 							end
 						end
 					else
-						for i, v in ipairs(p17) do
-							if v.messageId == var66.messageId then
-								local var75 = true
+						for i, v in ipairs(p19) do
+							if v.messageId == var73.messageId then
+								local var82 = true
 								break
 							end
 						end
 					end
-					return if var75 then p17 else list.append(p17, if fFlagExpChatMessagesStoreMemoryCleanupModule then var66.messageId else var66)
+					return if var82 then p19 else list.append(p19, if fFlagExpChatMessagesStoreMemoryCleanupModule then var73.messageId else var73)
 				end
 				
 				if fFlagExpChatMessagesStoreUseProxyModule then
-					var6[userId_1] = var74(var6[userId_1])
+					var6[userId_1] = var81(var6[userId_1])
 				else
-					var5(function(p18)
-						-- upvalues: var74 (ref), userId_1 (ref), dictionary (copy)
-						local var76 = var74(p18[userId_1])
+					var5(function(p20)
+						-- upvalues: var81 (ref), userId_1 (ref), dictionary (copy)
+						local var83 = var81(p20[userId_1])
 						
-						return if var76 == nil then dictionary.removeKey(p18, userId_1) else dictionary.join(p18, { [userId_1] = var76 })
+						return if var83 == nil then dictionary.removeKey(p20, userId_1) else dictionary.join(p20, { [userId_1] = var83 })
 					end)
 				end
 			end
-			local var76 = false
+			local var83 = false
 			
-			if var66.isVisibleInChatWindow then
-				var8(function(p18)
-					-- upvalues: insertWindowMessageIdInOrder (copy), var66 (ref), var76 (write)
-					local var77 = insertWindowMessageIdInOrder(p18, var66.messageId, var66.isHistorical)
-					var76 = var76 or var77[#var77] ~= var66.messageId
+			if var73.isVisibleInChatWindow then
+				var8(function(p20)
+					-- upvalues: insertWindowMessageIdInOrder (copy), var73 (ref), var83 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy)
+					local var84 = insertWindowMessageIdInOrder(p20, var73.messageId, var73.isHistorical)
+					var83 = var83 or var84[#var84] ~= var73.messageId
 					
-					return var77
+					if fFlagExpChatMessageHistoryExperiment then
+						local var85 = capHistoricalPrefix(var84, var73)
+						var83 = var83 or #var85 < #var84
+						
+						return var85
+					end
+					return var84
 				end)
 				
-				if var67 then
-					var10(function(p18)
-						-- upvalues: var67 (write), insertWindowMessageIdInOrder (copy), var66 (ref), var76 (write), dictionary (copy)
-						local var77 = insertWindowMessageIdInOrder(p18[var67] or {}, var66.messageId, var66.isHistorical)
-						var76 = var76 or var77[#var77] ~= var66.messageId
+				if var74 then
+					var10(function(p20)
+						-- upvalues: var74 (write), insertWindowMessageIdInOrder (copy), var73 (ref), var83 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), dictionary (copy)
+						local var84 = insertWindowMessageIdInOrder(p20[var74] or {}, var73.messageId, var73.isHistorical)
+						var83 = var83 or var84[#var84] ~= var73.messageId
 						
-						return dictionary.join(p18, { [var67] = var77 })
+						if fFlagExpChatMessageHistoryExperiment then
+							var84 = capHistoricalPrefix(var84, var73)
+						end
+						return dictionary.join(p20, { [var74] = var84 })
 					end)
 				end
 				if fFlagExpChatEnableV2ChatWindowModule then
-					local var77 = var29(false)
+					local var84 = var29(false)
 					
-					if if var77 ~= nil then var67 == var77 else true then
-						local messageId = var66.messageId
+					if if var84 ~= nil then var74 == var84 else true then
+						local messageId = var73.messageId
 						
 						if not var33 then
 							updateNextMessageComponent(messageId)
@@ -1120,77 +1178,77 @@ return function(p1)
 		end
 		
 		if fFlagExpChatMessagesStoreBatchModule then
-			signalsExperimentalModule.batch(var60)
+			signalsExperimentalModule.batch(var67)
 			
 			return
 		end
-		var60()
+		var67()
 	end
 	
-	local function formatPrefixForUniverseChatTabs(value, p16, p17)
+	local function formatPrefixForUniverseChatTabs(value, p18, p19)
 		-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), computeNameColor (copy), playersService (copy)
-		return if getFFlagTextChatEnableUniverseChatTabs() and p16 and #value ~= 0 then `<font color="#{(if p107.TextSource then computeNameColor(p107.TextSource.Username) else computeNameColor(if playersService.LocalPlayer then playersService.LocalPlayer.Name else "")):ToHex()}">{value}</font>` else value
+		return if getFFlagTextChatEnableUniverseChatTabs() and p18 and #value ~= 0 then `<font color="#{(if p110.TextSource then computeNameColor(p110.TextSource.Username) else computeNameColor(if playersService.LocalPlayer then playersService.LocalPlayer.Name else "")):ToHex()}">{value}</font>` else value
 	end
 	
-	local function handleIncomingOrOutgoingMessage(a, b, p16, p17, p18)
-		-- upvalues: fFlagEnableInExpChatRewriteModule (copy), getTextAndTranslationModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), isWhiteSpaceOnlyModule (copy), fFlagExpChatFixLocalUserVerifiedBadgeModule (copy), playersService (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), var14 (ref), fFlagExpChatPresetChatEnabled (copy), var13 (ref), set (copy), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), expChatSharedModule (copy), var16 (ref), fFlagEnableInExpChatSummaryOnLuaModule (copy), fFlagExpChatDisableUniverseBubbleChat (copy), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatGlobalTabDefaultModule (copy), isGlobalBubbleChatEnabledModule (copy), shouldRenderTextChannelInDefaultWindow (copy), getTextChannelDisplayMode (copy), formatPrefixForUniverseChatTabs (ref), getFFlagExpChatTelemetryEventTriggerModule (copy), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy), expChatPresetChatEmojiEffectExperimentation (copy), logPresetChatEmojiEffectExposureModule (copy)
-		local var75, var76
+	local function handleIncomingOrOutgoingMessage(a, b, p18, p19, p20)
+		-- upvalues: fFlagEnableInExpChatRewriteModule (copy), getTextAndTranslationModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), isWhiteSpaceOnlyModule (copy), fFlagExpChatFixLocalUserVerifiedBadgeModule (copy), playersService (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), var14 (ref), fFlagExpChatPresetChatEnabled (copy), var13 (ref), set (copy), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), expChatSharedModule (copy), var16 (ref), fFlagEnableInExpChatSummaryOnLuaModule (copy), fFlagExpChatDisableUniverseBubbleChat (copy), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatGlobalTabDefaultModule (copy), isGlobalBubbleChatEnabledModule (copy), shouldRenderTextChannelInDefaultWindow (copy), getTextChannelDisplayMode (copy), formatPrefixForUniverseChatTabs (ref), getFFlagExpChatTelemetryEventTriggerModule (copy), fFlagExpChatMessageHistoryExperiment (copy), expChatMessageHistoryExperimentation (copy), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), capHistoricalPrefix (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy), expChatPresetChatEmojiEffectExperimentation (copy), logPresetChatEmojiEffectExposureModule (copy)
+		local var82, var83
 		local _ = nil
 		local _ = nil
 		
 		if fFlagEnableInExpChatRewriteModule then
-			local var77, var78 = getTextAndTranslationModule(a)
-			var75 = var77
-			var76 = var78
+			local var84, var85 = getTextAndTranslationModule(a)
+			var82 = var84
+			var83 = var85
 		else
-			var75 = if getFFlagExpChatProtectedChatInternalAPIs() then a.TextInternal else a.Text
-			var76 = if getFFlagExpChatProtectedChatInternalAPIs() then a.TranslationInternal else a.Translation
+			var82 = if getFFlagExpChatProtectedChatInternalAPIs() then a.TextInternal else a.Text
+			var83 = if getFFlagExpChatProtectedChatInternalAPIs() then a.TranslationInternal else a.Translation
 		end
-		if isWhiteSpaceOnlyModule(var75) and a.Status ~= Enum.TextChatMessageStatus.Floodchecked and a.Status ~= Enum.TextChatMessageStatus.MessageTooLong then return end
-		local var79 = if a.TextSource then tostring(a.TextSource.UserId) elseif fFlagExpChatFixLocalUserVerifiedBadgeModule and b and playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else nil
+		if isWhiteSpaceOnlyModule(var82) and a.Status ~= Enum.TextChatMessageStatus.Floodchecked and a.Status ~= Enum.TextChatMessageStatus.MessageTooLong then return end
+		local var86 = if a.TextSource then tostring(a.TextSource.UserId) elseif fFlagExpChatFixLocalUserVerifiedBadgeModule and b and playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else nil
 		
 		if not (if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)) then return end
-		local var80
+		local var87
 		local _ = nil
-		local var81 = var79 == nil or (if var14(false) or fFlagExpChatPresetChatEnabled and (a.PresetId or "") ~= "" then if a.Status ~= Enum.TextChatMessageStatus.Success then a.Status == Enum.TextChatMessageStatus.Sending else true else false)
-		var81 = var81 and not (if var79 and var13(false) then set.has(var13(false), var79) else false)
-		local var82 = false
+		local var88 = var86 == nil or (if var14(false) or fFlagExpChatPresetChatEnabled and (a.PresetId or "") ~= "" then if a.Status ~= Enum.TextChatMessageStatus.Success then a.Status == Enum.TextChatMessageStatus.Sending else true else false)
+		var88 = var88 and not (if var86 and var13(false) then set.has(var13(false), var86) else false)
+		local var89 = false
 		local _ = nil
 		
 		if fFlagExpChatUseChatConfigStore then
-			var80 = getChatConfigurationStoreModule(false).getIsBubbleChatEnabled(false)
+			var87 = getChatConfigurationStoreModule(false).getIsBubbleChatEnabled(false)
 		else
 			local store = expChatSharedModule.context and expChatSharedModule.context.store
-			var80 = if store then store:getState().Messages.isBubbleChatEnabled else var16(false)
+			var87 = if store then store:getState().Messages.isBubbleChatEnabled else var16(false)
 		end
-		if var80 and var81 and (not fFlagEnableInExpChatSummaryOnLuaModule or var79 ~= nil) and (a.Status == Enum.TextChatMessageStatus.Success or a.Status == Enum.TextChatMessageStatus.Sending) then
-			var82 = true
+		if var87 and var88 and (not fFlagEnableInExpChatSummaryOnLuaModule or var86 ~= nil) and (a.Status == Enum.TextChatMessageStatus.Success or a.Status == Enum.TextChatMessageStatus.Sending) then
+			var89 = true
 		end
-		if fFlagExpChatDisableUniverseBubbleChat and getFFlagTextChatEnableUniverseChatTabs() and p17 == true and (not fFlagExpChatGlobalTabDefaultModule or not isGlobalBubbleChatEnabledModule()) then
-			var82 = false
+		if fFlagExpChatDisableUniverseBubbleChat and getFFlagTextChatEnableUniverseChatTabs() and p19 == true and (not fFlagExpChatGlobalTabDefaultModule or not isGlobalBubbleChatEnabledModule()) then
+			var89 = false
 		end
 		if a.Status ~= Enum.TextChatMessageStatus.Success and a.Status ~= Enum.TextChatMessageStatus.Sending then
-			var81 = false
-			var82 = false
+			var88 = false
+			var89 = false
 		end
-		if p18 then
-			var82 = false
+		if p20 then
+			var89 = false
 		end
-		if not p17 and p16 == nil and not shouldRenderTextChannelInDefaultWindow(a.TextChannel, getTextChannelDisplayMode()) then
-			var81 = false
+		if not p19 and p18 == nil and not shouldRenderTextChannelInDefaultWindow(a.TextChannel, getTextChannelDisplayMode()) then
+			var88 = false
 		end
 		local t_1 = {
 			shouldOverrideBubbleChatSettings = false,
-			userId = var79,
-			prefixText = formatPrefixForUniverseChatTabs(if getFFlagExpChatProtectedChatInternalAPIs() then a.PrefixTextInternal else a.PrefixText, p16, a),
-			text = var75,
-			translation = var76,
-			useTranslation = getChatTranslationEnabled() and var76 ~= nil,
+			userId = var86,
+			prefixText = formatPrefixForUniverseChatTabs(if getFFlagExpChatProtectedChatInternalAPIs() then a.PrefixTextInternal else a.PrefixText, p18, a),
+			text = var82,
+			translation = var83,
+			useTranslation = getChatTranslationEnabled() and var83 ~= nil,
 			messageId = a.MessageId,
 			status = a.Status,
 			timestamp = a.Timestamp,
-			isVisibleInBubbleChat = var82,
-			isVisibleInChatWindow = var81,
+			isVisibleInBubbleChat = var89,
+			isVisibleInChatWindow = var88,
 			textChannel = a.TextChannel,
 			bubbleChatMessageProperties = a.BubbleChatMessageProperties,
 			chatWindowMessageProperties = a.ChatWindowMessageProperties,
@@ -1198,48 +1256,51 @@ return function(p1)
 			partOrModel = if a.TextSource then a.TextSource.Parent else nil,
 			wasRewritten = if fFlagEnableInExpChatRewriteModule then a.WasRewritten else nil,
 			originalText = if fFlagEnableInExpChatRewriteModule then a.OriginalText else nil,
-			isHistorical = p18,
-			channelNameOverride = if getFFlagTextChatEnableUniverseChatTabs() and p16 then p16 else nil,
+			isHistorical = p20,
+			channelNameOverride = if getFFlagTextChatEnableUniverseChatTabs() and p18 then p18 else nil,
 			chatActionType = if fFlagEnableInExpChatSummaryOnLuaModule then a.ChatActionType else nil,
-			isUniverseChat = p17,
+			isUniverseChat = p19,
 			presetId = if fFlagExpChatPresetChatEnabled then a.PresetId else nil,
 			presetChatVersion = if fFlagExpChatPresetChatEnabled then a.PresetChatVersion else nil
 		}
-		local var83 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
-		local var84 = var83 and var83[t_1.messageId] ~= nil
+		local var90 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+		local var91 = var90 and var90[t_1.messageId] ~= nil
 		
-		if p18 and var84 then return end
-		if t_1.isVisibleInChatWindow or t_1.isVisibleInBubbleChat or var84 then
-			local var85 = function()
-				-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
-				local var86 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+		if p20 and var91 then return end
+		if fFlagExpChatMessageHistoryExperiment and p20 then
+			expChatMessageHistoryExperimentation.logExposure(var14(false))
+		end
+		if t_1.isVisibleInChatWindow or t_1.isVisibleInBubbleChat or var91 then
+			local var92 = function()
+				-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
+				local var93 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
 				
 				if isBorderlessBubbleChatEnabledModule() then
-					local messageId = var86 and var86[t_1.messageId]
+					local messageId = var93 and var93[t_1.messageId]
 					t_1.bubbleChatReceivedAtMillis = if messageId then messageId.bubbleChatReceivedAtMillis else getServerTimeNowMillisModule()
 				end
-				if var86 and var86[t_1.messageId] then
+				if var93 and var93[t_1.messageId] then
 					if fFlagExpChatEvictFloodcheckedFromWindowOrderModule and (t_1.status == Enum.TextChatMessageStatus.Floodchecked or t_1.status == Enum.TextChatMessageStatus.MessageTooLong) then
-						var8(function(p19)
+						var8(function(p21)
 							-- upvalues: list (copy), t_1 (copy)
-							return list.filter(p19, function(p20)
+							return list.filter(p21, function(p22)
 								-- upvalues: t_1 (copy)
-								return p20 ~= t_1.messageId
+								return p22 ~= t_1.messageId
 							end)
 						end)
-						local var87 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
+						local var94 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
 						
-						if var87 then
-							var10(function(p19)
-								-- upvalues: var87 (ref), list (copy), t_1 (copy), dictionary (copy)
-								local var88 = p19[var87]
+						if var94 then
+							var10(function(p21)
+								-- upvalues: var94 (ref), list (copy), t_1 (copy), dictionary (copy)
+								local var95 = p21[var94]
 								
-								return if var88 then dictionary.join(p19, {
-									[var87] = list.filter(var88, function(p20)
+								return if var95 then dictionary.join(p21, {
+									[var94] = list.filter(var95, function(p22)
 										-- upvalues: t_1 (copy)
-										return p20 ~= t_1.messageId
+										return p22 ~= t_1.messageId
 									end)
-								}) else p19
+								}) else p21
 							end)
 						end
 						local messageId = t_1.messageId
@@ -1247,40 +1308,40 @@ return function(p1)
 						if fFlagExpChatMessagesStoreUseProxyModule then
 							var3[messageId] = nil
 						else
-							var2(function(p19)
+							var2(function(p21)
 								-- upvalues: dictionary (copy), messageId (ref)
-								return dictionary.removeKey(p19, messageId)
+								return dictionary.removeKey(p21, messageId)
 							end)
 						end
 						if t_1.userId then
 							local userId = t_1.userId
 							
-							local var88 = function(p19)
+							local var95 = function(p21)
 								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), t_1 (copy)
-								if p19 then
-									local var89 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p19, function(p20)
+								if p21 then
+									local var96 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p21, function(p22)
 										-- upvalues: t_1 (copy)
-										return p20 ~= t_1.messageId
-									end) else list.filter(p19, function(p20)
+										return p22 ~= t_1.messageId
+									end) else list.filter(p21, function(p22)
 										-- upvalues: t_1 (copy)
-										return p20.messageId ~= t_1.messageId
+										return p22.messageId ~= t_1.messageId
 									end)
 									
-									return if #var89 == 0 then nil else var89
+									return if #var96 == 0 then nil else var96
 								end
 								return nil
 							end
 							
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var6[userId] = var88(var6[userId])
+								var6[userId] = var95(var6[userId])
 								
 								return
 							end
-							var5(function(p19)
-								-- upvalues: var88 (ref), userId (ref), dictionary (copy)
-								local var89 = var88(p19[userId])
+							var5(function(p21)
+								-- upvalues: var95 (ref), userId (ref), dictionary (copy)
+								local var96 = var95(p21[userId])
 								
-								return if var89 == nil then dictionary.removeKey(p19, userId) else dictionary.join(p19, { [userId] = var89 })
+								return if var96 == nil then dictionary.removeKey(p21, userId) else dictionary.join(p21, { [userId] = var96 })
 							end)
 						end
 						return
@@ -1292,36 +1353,36 @@ return function(p1)
 					if not fFlagExpChatMessagesStoreMemoryCleanupModule and t_1.userId then
 						local userId = t_1.userId
 						
-						local var89 = function(p19)
+						local var96 = function(p21)
 							-- upvalues: t_1 (copy), list (copy)
-							if not p19 then
+							if not p21 then
 								return nil
 							end
-							local var90 = nil
+							local var97 = nil
 							
-							for i, v in ipairs(p19) do
+							for i, v in ipairs(p21) do
 								if v.messageId == t_1.messageId then break end
 							end
-							return if var90 then list.set(p19, var90, t_1) else p19
+							return if var97 then list.set(p21, var97, t_1) else p21
 						end
 						
 						if fFlagExpChatMessagesStoreUseProxyModule then
-							var6[userId] = var89(var6[userId])
+							var6[userId] = var96(var6[userId])
 							
 							return
 						end
-						var5(function(p20)
-							-- upvalues: var89 (ref), userId (ref), dictionary (copy)
-							local var91 = var89(p20[userId])
+						var5(function(p22)
+							-- upvalues: var96 (ref), userId (ref), dictionary (copy)
+							local var98 = var96(p22[userId])
 							
-							return if var91 == nil then dictionary.removeKey(p20, userId) else dictionary.join(p20, { [userId] = var91 })
+							return if var98 == nil then dictionary.removeKey(p22, userId) else dictionary.join(p22, { [userId] = var98 })
 						end)
 					end
 					return
 				elseif fFlagExpChatRenderHistoricalMessagesModule then
-					local var90 = t_1
+					local var97 = t_1
 					
-					if var90.isHistorical == true and (var90.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
+					if var97.isHistorical == true and (var97.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
 				end
 				local userId = t_1.userId
 				local partOrModel = t_1.partOrModel
@@ -1331,187 +1392,196 @@ return function(p1)
 					
 					if not userId then
 						userId = httpService:GenerateGUID(false)
-						var18(function(p19)
+						var18(function(p21)
 							-- upvalues: dictionary (copy), userId (write), partOrModel (ref)
-							return dictionary.join(p19, { [userId] = partOrModel })
+							return dictionary.join(p21, { [userId] = partOrModel })
 						end)
-						var20(function(p19)
+						var20(function(p21)
 							-- upvalues: dictionary (copy), partOrModel (ref), userId (write)
-							return dictionary.join(p19, { [partOrModel] = userId })
+							return dictionary.join(p21, { [partOrModel] = userId })
 						end)
 					end
 				end
-				local var91 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
-				local var92 = nil
+				local var98 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
+				local var99 = nil
 				
-				if getFFlagTextChatEnableUniverseChatTabs() and var91.channelNameOverride then
-					var92 = var91.channelNameOverride
-				elseif var91.textChannel then
-					var92 = if var91.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var91.textChannel.Name
+				if getFFlagTextChatEnableUniverseChatTabs() and var98.channelNameOverride then
+					var99 = var98.channelNameOverride
+				elseif var98.textChannel then
+					var99 = if var98.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var98.textChannel.Name
 				end
-				if var91.isVisibleInChatWindow then
-					local var93 = var7(false)
-					local var94 = if var92 then var9(false)[var92] or {} else {}
+				if var98.isVisibleInChatWindow then
+					local var100 = var7(false)
+					local var101 = if var99 then var9(false)[var99] or {} else {}
 					
-					if t.messageLimit <= #var93 then
-						local var95 = var93[1]
-						local var96 = var86 and var86[var95]
+					if t.messageLimit <= #var100 then
+						local var102 = var100[1]
+						local var103 = var93 and var93[var102]
 						
-						if var96 then
+						if var103 then
 							if not fFlagExpChatMessagesStoreKeepInByMessageIdModule then
 								if fFlagExpChatMessagesStoreUseProxyModule then
-									var3[var95] = nil
+									var3[var102] = nil
 								else
-									var2(function(p19)
-										-- upvalues: dictionary (copy), var95 (ref)
-										return dictionary.removeKey(p19, var95)
+									var2(function(p21)
+										-- upvalues: dictionary (copy), var102 (ref)
+										return dictionary.removeKey(p21, var102)
 									end)
 								end
 							end
-							if var96.userId then
-								local userId_1 = var96.userId
+							if var103.userId then
+								local userId_1 = var103.userId
 								
-								local var97 = function(p19)
-									-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var95 (ref), var17 (copy), var96 (ref), var20 (copy), dictionary (copy), var18 (copy)
-									if not p19 then
+								local var104 = function(p21)
+									-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var102 (ref), var17 (copy), var103 (ref), var20 (copy), dictionary (copy), var18 (copy)
+									if not p21 then
 										return nil
 									end
-									local var98 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p19, function(p20)
-										-- upvalues: var95 (copy)
-										return p20 ~= var95
-									end) else list.filter(p19, function(p20)
-										-- upvalues: var95 (copy)
-										return p20.messageId ~= var95
+									local var105 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p21, function(p22)
+										-- upvalues: var102 (copy)
+										return p22 ~= var102
+									end) else list.filter(p21, function(p22)
+										-- upvalues: var102 (copy)
+										return p22.messageId ~= var102
 									end)
 									
-									if #var98 ~= 0 then
-										return var98
+									if #var105 ~= 0 then
+										return var105
 									end
-									local var99 = var17(false)
+									local var106 = var17(false)
 									
-									if var99[var96.userId] then
-										local userId = var99[var96.userId]
-										var20(function(p20)
+									if var106[var103.userId] then
+										local userId = var106[var103.userId]
+										var20(function(p22)
 											-- upvalues: dictionary (copy), userId (ref)
-											return dictionary.removeKey(p20, userId)
+											return dictionary.removeKey(p22, userId)
 										end)
-										var18(function(p20)
-											-- upvalues: dictionary (copy), var96 (copy)
-											return dictionary.removeKey(p20, var96.userId)
+										var18(function(p22)
+											-- upvalues: dictionary (copy), var103 (copy)
+											return dictionary.removeKey(p22, var103.userId)
 										end)
 									end
 									return nil
 								end
 								
 								if fFlagExpChatMessagesStoreUseProxyModule then
-									var6[userId_1] = var97(var6[userId_1])
+									var6[userId_1] = var104(var6[userId_1])
 								else
-									var5(function(p19)
-										-- upvalues: var97 (ref), userId_1 (ref), dictionary (copy)
-										local var98 = var97(p19[userId_1])
+									var5(function(p21)
+										-- upvalues: var104 (ref), userId_1 (ref), dictionary (copy)
+										local var105 = var104(p21[userId_1])
 										
-										return if var98 == nil then dictionary.removeKey(p19, userId_1) else dictionary.join(p19, { [userId_1] = var98 })
+										return if var105 == nil then dictionary.removeKey(p21, userId_1) else dictionary.join(p21, { [userId_1] = var105 })
 									end)
 								end
 							end
-							var8(function(p19)
+							var8(function(p21)
 								-- upvalues: list (copy)
-								return list.removeIndex(p19, 1)
+								return list.removeIndex(p21, 1)
 							end)
 							
 							if fFlagExpChatMessagesStoreMemoryCleanupModule then
-								t_3[var95] = nil
+								t_3[var102] = nil
 							end
 						end
 					end
-					if var92 and t.messageLimit <= #var94 then
-						local var98 = var94[1]
+					if var99 and t.messageLimit <= #var101 then
+						local var105 = var101[1]
 						
-						if var98 then
-							var10(function(p19)
-								-- upvalues: var92 (write), list (copy), dictionary (copy)
-								return dictionary.join(p19, { [var92] = list.removeIndex(p19[var92] or {}, 1) })
+						if var105 then
+							var10(function(p21)
+								-- upvalues: var99 (write), list (copy), dictionary (copy)
+								return dictionary.join(p21, { [var99] = list.removeIndex(p21[var99] or {}, 1) })
 							end)
 							
-							if var86 and var86[var98] then
+							if var93 and var93[var105] then
 								if fFlagExpChatMessagesStoreUseProxyModule then
-									var3[var98] = nil
+									var3[var105] = nil
 								else
-									var2(function(p19)
-										-- upvalues: dictionary (copy), var98 (ref)
-										return dictionary.removeKey(p19, var98)
+									var2(function(p21)
+										-- upvalues: dictionary (copy), var105 (ref)
+										return dictionary.removeKey(p21, var105)
 									end)
 								end
 							end
 							if fFlagExpChatMessagesStoreMemoryCleanupModule then
-								t_3[var98] = nil
+								t_3[var105] = nil
 							end
 						end
 					end
 				end
-				writeByMessageId(var91.messageId, var91)
+				writeByMessageId(var98.messageId, var98)
 				
-				if var91.userId then
-					local userId_1 = var91.userId
+				if var98.userId then
+					local userId_1 = var98.userId
 					
-					local var99 = function(p19)
-						-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var91 (ref), list (copy)
-						local p20 = p19 or {}
-						local var100 = false
+					local var106 = function(p21)
+						-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var98 (ref), list (copy)
+						local p22 = p21 or {}
+						local var107 = false
 						
 						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							for i, v in ipairs(p20) do
-								if v == var91.messageId then
-									var100 = true
+							for i, v in ipairs(p22) do
+								if v == var98.messageId then
+									var107 = true
 								end
 							end
 						else
-							for i, v in ipairs(p20) do
-								if v.messageId == var91.messageId then
-									local var100 = true
+							for i, v in ipairs(p22) do
+								if v.messageId == var98.messageId then
+									local var107 = true
 									break
 								end
 							end
 						end
-						return if var100 then p20 else list.append(p20, if fFlagExpChatMessagesStoreMemoryCleanupModule then var91.messageId else var91)
+						return if var107 then p22 else list.append(p22, if fFlagExpChatMessagesStoreMemoryCleanupModule then var98.messageId else var98)
 					end
 					
 					if fFlagExpChatMessagesStoreUseProxyModule then
-						var6[userId_1] = var99(var6[userId_1])
+						var6[userId_1] = var106(var6[userId_1])
 					else
-						var5(function(p21)
-							-- upvalues: var99 (ref), userId_1 (ref), dictionary (copy)
-							local var101 = var99(p21[userId_1])
+						var5(function(p23)
+							-- upvalues: var106 (ref), userId_1 (ref), dictionary (copy)
+							local var108 = var106(p23[userId_1])
 							
-							return if var101 == nil then dictionary.removeKey(p21, userId_1) else dictionary.join(p21, { [userId_1] = var101 })
+							return if var108 == nil then dictionary.removeKey(p23, userId_1) else dictionary.join(p23, { [userId_1] = var108 })
 						end)
 					end
 				end
-				local var101 = false
+				local var108 = false
 				
-				if var91.isVisibleInChatWindow then
-					var8(function(p21)
-						-- upvalues: insertWindowMessageIdInOrder (copy), var91 (ref), var101 (write)
-						local var102 = insertWindowMessageIdInOrder(p21, var91.messageId, var91.isHistorical)
-						var101 = var101 or var102[#var102] ~= var91.messageId
+				if var98.isVisibleInChatWindow then
+					var8(function(p23)
+						-- upvalues: insertWindowMessageIdInOrder (copy), var98 (ref), var108 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy)
+						local var109 = insertWindowMessageIdInOrder(p23, var98.messageId, var98.isHistorical)
+						var108 = var108 or var109[#var109] ~= var98.messageId
 						
-						return var102
+						if fFlagExpChatMessageHistoryExperiment then
+							local var110 = capHistoricalPrefix(var109, var98)
+							var108 = var108 or #var110 < #var109
+							
+							return var110
+						end
+						return var109
 					end)
 					
-					if var92 then
-						var10(function(p21)
-							-- upvalues: var92 (write), insertWindowMessageIdInOrder (copy), var91 (ref), var101 (write), dictionary (copy)
-							local var102 = insertWindowMessageIdInOrder(p21[var92] or {}, var91.messageId, var91.isHistorical)
-							var101 = var101 or var102[#var102] ~= var91.messageId
+					if var99 then
+						var10(function(p23)
+							-- upvalues: var99 (write), insertWindowMessageIdInOrder (copy), var98 (ref), var108 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), dictionary (copy)
+							local var109 = insertWindowMessageIdInOrder(p23[var99] or {}, var98.messageId, var98.isHistorical)
+							var108 = var108 or var109[#var109] ~= var98.messageId
 							
-							return dictionary.join(p21, { [var92] = var102 })
+							if fFlagExpChatMessageHistoryExperiment then
+								var109 = capHistoricalPrefix(var109, var98)
+							end
+							return dictionary.join(p23, { [var99] = var109 })
 						end)
 					end
 					if fFlagExpChatEnableV2ChatWindowModule then
-						local var102 = var29(false)
+						local var109 = var29(false)
 						
-						if if var102 ~= nil then var92 == var102 else true then
-							local messageId = var91.messageId
+						if if var109 ~= nil then var99 == var109 else true then
+							local messageId = var98.messageId
 							
 							if not var33 then
 								updateNextMessageComponent(messageId)
@@ -1526,9 +1596,9 @@ return function(p1)
 			end
 			
 			if fFlagExpChatMessagesStoreBatchModule then
-				signalsExperimentalModule.batch(var85)
+				signalsExperimentalModule.batch(var92)
 			else
-				var85()
+				var92()
 			end
 		end
 		if expChatPresetChatEmojiEffectExperimentation.isExperimentEnabled then
@@ -1537,7 +1607,7 @@ return function(p1)
 	end
 	
 	local function handleIncomingBubbleChatMessage(a)
-		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy), expChatPresetChatEmojiEffectExperimentation (copy), logPresetChatEmojiEffectExposureModule (copy)
+		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy), expChatPresetChatEmojiEffectExperimentation (copy), logPresetChatEmojiEffectExposureModule (copy)
 		local t_1 = {
 			prefixText = "",
 			textChannel = nil,
@@ -1556,948 +1626,15 @@ return function(p1)
 			bubbleChatMessageProperties = a.bubbleChatMessageProperties
 		}
 		
-		local var100 = function()
-			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
-			local var101 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+		local var107 = function()
+			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
+			local var108 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
 			
 			if isBorderlessBubbleChatEnabledModule() then
-				local messageId = var101 and var101[t_1.messageId]
+				local messageId = var108 and var108[t_1.messageId]
 				t_1.bubbleChatReceivedAtMillis = if messageId then messageId.bubbleChatReceivedAtMillis else getServerTimeNowMillisModule()
 			end
-			if var101 and var101[t_1.messageId] then
-				if fFlagExpChatEvictFloodcheckedFromWindowOrderModule and (t_1.status == Enum.TextChatMessageStatus.Floodchecked or t_1.status == Enum.TextChatMessageStatus.MessageTooLong) then
-					var8(function(p19)
-						-- upvalues: list (copy), t_1 (copy)
-						return list.filter(p19, function(p20)
-							-- upvalues: t_1 (copy)
-							return p20 ~= t_1.messageId
-						end)
-					end)
-					local var102 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
-					
-					if var102 then
-						var10(function(p19)
-							-- upvalues: var102 (ref), list (copy), t_1 (copy), dictionary (copy)
-							local var103 = p19[var102]
-							
-							return if var103 then dictionary.join(p19, {
-								[var102] = list.filter(var103, function(p20)
-									-- upvalues: t_1 (copy)
-									return p20 ~= t_1.messageId
-								end)
-							}) else p19
-						end)
-					end
-					local messageId = t_1.messageId
-					
-					if fFlagExpChatMessagesStoreUseProxyModule then
-						var3[messageId] = nil
-					else
-						var2(function(p19)
-							-- upvalues: dictionary (copy), messageId (ref)
-							return dictionary.removeKey(p19, messageId)
-						end)
-					end
-					if t_1.userId then
-						local userId = t_1.userId
-						
-						local var103 = function(p19)
-							-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), t_1 (copy)
-							if p19 then
-								local var104 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p19, function(p20)
-									-- upvalues: t_1 (copy)
-									return p20 ~= t_1.messageId
-								end) else list.filter(p19, function(p20)
-									-- upvalues: t_1 (copy)
-									return p20.messageId ~= t_1.messageId
-								end)
-								
-								return if #var104 == 0 then nil else var104
-							end
-							return nil
-						end
-						
-						if fFlagExpChatMessagesStoreUseProxyModule then
-							var6[userId] = var103(var6[userId])
-							
-							return
-						end
-						var5(function(p19)
-							-- upvalues: var103 (ref), userId (ref), dictionary (copy)
-							local var104 = var103(p19[userId])
-							
-							return if var104 == nil then dictionary.removeKey(p19, userId) else dictionary.join(p19, { [userId] = var104 })
-						end)
-					end
-					return
-				elseif fFlagExpChatRenderHistoricalMessagesModule then
-					writeByMessageId(t_1.messageId, keepHistoricalFlag(t_1))
-				else
-					writeByMessageId(t_1.messageId, t_1)
-				end
-				if not fFlagExpChatMessagesStoreMemoryCleanupModule and t_1.userId then
-					local userId = t_1.userId
-					
-					local var104 = function(p19)
-						-- upvalues: t_1 (copy), list (copy)
-						if not p19 then
-							return nil
-						end
-						local var105 = nil
-						
-						for i, v in ipairs(p19) do
-							if v.messageId == t_1.messageId then break end
-						end
-						return if var105 then list.set(p19, var105, t_1) else p19
-					end
-					
-					if fFlagExpChatMessagesStoreUseProxyModule then
-						var6[userId] = var104(var6[userId])
-						
-						return
-					end
-					var5(function(p20)
-						-- upvalues: var104 (ref), userId (ref), dictionary (copy)
-						local var106 = var104(p20[userId])
-						
-						return if var106 == nil then dictionary.removeKey(p20, userId) else dictionary.join(p20, { [userId] = var106 })
-					end)
-				end
-				return
-			elseif fFlagExpChatRenderHistoricalMessagesModule then
-				local var105 = t_1
-				
-				if var105.isHistorical == true and (var105.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
-			end
-			local userId = t_1.userId
-			local partOrModel = t_1.partOrModel
-			
-			if not userId and partOrModel then
-				userId = var19(false)[partOrModel]
-				
-				if not userId then
-					userId = httpService:GenerateGUID(false)
-					var18(function(p19)
-						-- upvalues: dictionary (copy), userId (write), partOrModel (ref)
-						return dictionary.join(p19, { [userId] = partOrModel })
-					end)
-					var20(function(p19)
-						-- upvalues: dictionary (copy), partOrModel (ref), userId (write)
-						return dictionary.join(p19, { [partOrModel] = userId })
-					end)
-				end
-			end
-			local var106 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
-			local var107 = nil
-			
-			if getFFlagTextChatEnableUniverseChatTabs() and var106.channelNameOverride then
-				var107 = var106.channelNameOverride
-			elseif var106.textChannel then
-				var107 = if var106.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var106.textChannel.Name
-			end
-			if var106.isVisibleInChatWindow then
-				local var108 = var7(false)
-				local var109 = if var107 then var9(false)[var107] or {} else {}
-				
-				if t.messageLimit <= #var108 then
-					local var110 = var108[1]
-					local var111 = var101 and var101[var110]
-					
-					if var111 then
-						if not fFlagExpChatMessagesStoreKeepInByMessageIdModule then
-							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var110] = nil
-							else
-								var2(function(p19)
-									-- upvalues: dictionary (copy), var110 (ref)
-									return dictionary.removeKey(p19, var110)
-								end)
-							end
-						end
-						if var111.userId then
-							local userId_1 = var111.userId
-							
-							local var112 = function(p19)
-								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var110 (ref), var17 (copy), var111 (ref), var20 (copy), dictionary (copy), var18 (copy)
-								if not p19 then
-									return nil
-								end
-								local var113 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p19, function(p20)
-									-- upvalues: var110 (copy)
-									return p20 ~= var110
-								end) else list.filter(p19, function(p20)
-									-- upvalues: var110 (copy)
-									return p20.messageId ~= var110
-								end)
-								
-								if #var113 ~= 0 then
-									return var113
-								end
-								local var114 = var17(false)
-								
-								if var114[var111.userId] then
-									local userId = var114[var111.userId]
-									var20(function(p20)
-										-- upvalues: dictionary (copy), userId (ref)
-										return dictionary.removeKey(p20, userId)
-									end)
-									var18(function(p20)
-										-- upvalues: dictionary (copy), var111 (copy)
-										return dictionary.removeKey(p20, var111.userId)
-									end)
-								end
-								return nil
-							end
-							
-							if fFlagExpChatMessagesStoreUseProxyModule then
-								var6[userId_1] = var112(var6[userId_1])
-							else
-								var5(function(p19)
-									-- upvalues: var112 (ref), userId_1 (ref), dictionary (copy)
-									local var113 = var112(p19[userId_1])
-									
-									return if var113 == nil then dictionary.removeKey(p19, userId_1) else dictionary.join(p19, { [userId_1] = var113 })
-								end)
-							end
-						end
-						var8(function(p19)
-							-- upvalues: list (copy)
-							return list.removeIndex(p19, 1)
-						end)
-						
-						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var110] = nil
-						end
-					end
-				end
-				if var107 and t.messageLimit <= #var109 then
-					local var113 = var109[1]
-					
-					if var113 then
-						var10(function(p19)
-							-- upvalues: var107 (write), list (copy), dictionary (copy)
-							return dictionary.join(p19, { [var107] = list.removeIndex(p19[var107] or {}, 1) })
-						end)
-						
-						if var101 and var101[var113] then
-							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var113] = nil
-							else
-								var2(function(p19)
-									-- upvalues: dictionary (copy), var113 (ref)
-									return dictionary.removeKey(p19, var113)
-								end)
-							end
-						end
-						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var113] = nil
-						end
-					end
-				end
-			end
-			writeByMessageId(var106.messageId, var106)
-			
-			if var106.userId then
-				local userId_1 = var106.userId
-				
-				local var114 = function(p19)
-					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var106 (ref), list (copy)
-					local p20 = p19 or {}
-					local var115 = false
-					
-					if fFlagExpChatMessagesStoreMemoryCleanupModule then
-						for i, v in ipairs(p20) do
-							if v == var106.messageId then
-								var115 = true
-							end
-						end
-					else
-						for i, v in ipairs(p20) do
-							if v.messageId == var106.messageId then
-								local var115 = true
-								break
-							end
-						end
-					end
-					return if var115 then p20 else list.append(p20, if fFlagExpChatMessagesStoreMemoryCleanupModule then var106.messageId else var106)
-				end
-				
-				if fFlagExpChatMessagesStoreUseProxyModule then
-					var6[userId_1] = var114(var6[userId_1])
-				else
-					var5(function(p21)
-						-- upvalues: var114 (ref), userId_1 (ref), dictionary (copy)
-						local var116 = var114(p21[userId_1])
-						
-						return if var116 == nil then dictionary.removeKey(p21, userId_1) else dictionary.join(p21, { [userId_1] = var116 })
-					end)
-				end
-			end
-			local var116 = false
-			
-			if var106.isVisibleInChatWindow then
-				var8(function(p21)
-					-- upvalues: insertWindowMessageIdInOrder (copy), var106 (ref), var116 (write)
-					local var117 = insertWindowMessageIdInOrder(p21, var106.messageId, var106.isHistorical)
-					var116 = var116 or var117[#var117] ~= var106.messageId
-					
-					return var117
-				end)
-				
-				if var107 then
-					var10(function(p21)
-						-- upvalues: var107 (write), insertWindowMessageIdInOrder (copy), var106 (ref), var116 (write), dictionary (copy)
-						local var117 = insertWindowMessageIdInOrder(p21[var107] or {}, var106.messageId, var106.isHistorical)
-						var116 = var116 or var117[#var117] ~= var106.messageId
-						
-						return dictionary.join(p21, { [var107] = var117 })
-					end)
-				end
-				if fFlagExpChatEnableV2ChatWindowModule then
-					local var117 = var29(false)
-					
-					if if var117 ~= nil then var107 == var117 else true then
-						local messageId = var106.messageId
-						
-						if not var33 then
-							updateNextMessageComponent(messageId)
-						elseif var32 then
-							var33 = true
-						else
-							var31()
-						end
-					end
-				end
-			end
-		end
-		
-		if fFlagExpChatMessagesStoreBatchModule then
-			signalsExperimentalModule.batch(var100)
-		else
-			var100()
-		end
-		if expChatPresetChatEmojiEffectExperimentation.isExperimentEnabled then
-			logPresetChatEmojiEffectExposureModule(t_1)
-		end
-	end
-	
-	local function handleHiddenMessageReceived(p19)
-		-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), fIntExpChatRandomCharChangeLowerBoundModule (copy), fIntExpChatRandomCharChangeUpperBoundModule (copy), configModule (copy), getFFlagExpChatTelemetryEventTriggerModule (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
-		local var115 = string.len(if getFFlagExpChatProtectedChatInternalAPIs() then p19.TextInternal else p19.Text)
-		local t_1 = {
-			userId = nil,
-			isVisibleInBubbleChat = false,
-			isVisibleInChatWindow = true,
-			isHiddenMessage = true,
-			prefixText = configModule.LOCK_EMOJI .. " :",
-			text = string.rep(configModule.DOT_TEXT, var115 + math.random(math.max(fIntExpChatRandomCharChangeLowerBoundModule, -(var115 - 1)), fIntExpChatRandomCharChangeUpperBoundModule)),
-			textChannel = p19.TextChannel,
-			messageId = p19.MessageId,
-			status = p19.Status,
-			timestamp = p19.Timestamp,
-			textChatMessageInstance = if getFFlagExpChatTelemetryEventTriggerModule() then p19 else nil
-		}
-		
-		local var116 = function()
-			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
-			local var117 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
-			
-			if isBorderlessBubbleChatEnabledModule() then
-				local messageId = var117 and var117[t_1.messageId]
-				t_1.bubbleChatReceivedAtMillis = if messageId then messageId.bubbleChatReceivedAtMillis else getServerTimeNowMillisModule()
-			end
-			if var117 and var117[t_1.messageId] then
-				if fFlagExpChatEvictFloodcheckedFromWindowOrderModule and (t_1.status == Enum.TextChatMessageStatus.Floodchecked or t_1.status == Enum.TextChatMessageStatus.MessageTooLong) then
-					var8(function(p20)
-						-- upvalues: list (copy), t_1 (copy)
-						return list.filter(p20, function(p21)
-							-- upvalues: t_1 (copy)
-							return p21 ~= t_1.messageId
-						end)
-					end)
-					local var118 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
-					
-					if var118 then
-						var10(function(p20)
-							-- upvalues: var118 (ref), list (copy), t_1 (copy), dictionary (copy)
-							local var119 = p20[var118]
-							
-							return if var119 then dictionary.join(p20, {
-								[var118] = list.filter(var119, function(p21)
-									-- upvalues: t_1 (copy)
-									return p21 ~= t_1.messageId
-								end)
-							}) else p20
-						end)
-					end
-					local messageId = t_1.messageId
-					
-					if fFlagExpChatMessagesStoreUseProxyModule then
-						var3[messageId] = nil
-					else
-						var2(function(p20)
-							-- upvalues: dictionary (copy), messageId (ref)
-							return dictionary.removeKey(p20, messageId)
-						end)
-					end
-					if t_1.userId then
-						local userId = t_1.userId
-						
-						local var119 = function(p20)
-							-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), t_1 (copy)
-							if p20 then
-								local var120 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p20, function(p21)
-									-- upvalues: t_1 (copy)
-									return p21 ~= t_1.messageId
-								end) else list.filter(p20, function(p21)
-									-- upvalues: t_1 (copy)
-									return p21.messageId ~= t_1.messageId
-								end)
-								
-								return if #var120 == 0 then nil else var120
-							end
-							return nil
-						end
-						
-						if fFlagExpChatMessagesStoreUseProxyModule then
-							var6[userId] = var119(var6[userId])
-							
-							return
-						end
-						var5(function(p20)
-							-- upvalues: var119 (ref), userId (ref), dictionary (copy)
-							local var120 = var119(p20[userId])
-							
-							return if var120 == nil then dictionary.removeKey(p20, userId) else dictionary.join(p20, { [userId] = var120 })
-						end)
-					end
-					return
-				elseif fFlagExpChatRenderHistoricalMessagesModule then
-					writeByMessageId(t_1.messageId, keepHistoricalFlag(t_1))
-				else
-					writeByMessageId(t_1.messageId, t_1)
-				end
-				if not fFlagExpChatMessagesStoreMemoryCleanupModule and t_1.userId then
-					local userId = t_1.userId
-					
-					local var120 = function(p20)
-						-- upvalues: t_1 (copy), list (copy)
-						if not p20 then
-							return nil
-						end
-						local var121 = nil
-						
-						for i, v in ipairs(p20) do
-							if v.messageId == t_1.messageId then break end
-						end
-						return if var121 then list.set(p20, var121, t_1) else p20
-					end
-					
-					if fFlagExpChatMessagesStoreUseProxyModule then
-						var6[userId] = var120(var6[userId])
-						
-						return
-					end
-					var5(function(p21)
-						-- upvalues: var120 (ref), userId (ref), dictionary (copy)
-						local var122 = var120(p21[userId])
-						
-						return if var122 == nil then dictionary.removeKey(p21, userId) else dictionary.join(p21, { [userId] = var122 })
-					end)
-				end
-				return
-			elseif fFlagExpChatRenderHistoricalMessagesModule then
-				local var121 = t_1
-				
-				if var121.isHistorical == true and (var121.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
-			end
-			local userId = t_1.userId
-			local partOrModel = t_1.partOrModel
-			
-			if not userId and partOrModel then
-				userId = var19(false)[partOrModel]
-				
-				if not userId then
-					userId = httpService:GenerateGUID(false)
-					var18(function(p20)
-						-- upvalues: dictionary (copy), userId (write), partOrModel (ref)
-						return dictionary.join(p20, { [userId] = partOrModel })
-					end)
-					var20(function(p20)
-						-- upvalues: dictionary (copy), partOrModel (ref), userId (write)
-						return dictionary.join(p20, { [partOrModel] = userId })
-					end)
-				end
-			end
-			local var122 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
-			local var123 = nil
-			
-			if getFFlagTextChatEnableUniverseChatTabs() and var122.channelNameOverride then
-				var123 = var122.channelNameOverride
-			elseif var122.textChannel then
-				var123 = if var122.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var122.textChannel.Name
-			end
-			if var122.isVisibleInChatWindow then
-				local var124 = var7(false)
-				local var125 = if var123 then var9(false)[var123] or {} else {}
-				
-				if t.messageLimit <= #var124 then
-					local var126 = var124[1]
-					local var127 = var117 and var117[var126]
-					
-					if var127 then
-						if not fFlagExpChatMessagesStoreKeepInByMessageIdModule then
-							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var126] = nil
-							else
-								var2(function(p20)
-									-- upvalues: dictionary (copy), var126 (ref)
-									return dictionary.removeKey(p20, var126)
-								end)
-							end
-						end
-						if var127.userId then
-							local userId_1 = var127.userId
-							
-							local var128 = function(p20)
-								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var126 (ref), var17 (copy), var127 (ref), var20 (copy), dictionary (copy), var18 (copy)
-								if not p20 then
-									return nil
-								end
-								local var129 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p20, function(p21)
-									-- upvalues: var126 (copy)
-									return p21 ~= var126
-								end) else list.filter(p20, function(p21)
-									-- upvalues: var126 (copy)
-									return p21.messageId ~= var126
-								end)
-								
-								if #var129 ~= 0 then
-									return var129
-								end
-								local var130 = var17(false)
-								
-								if var130[var127.userId] then
-									local userId = var130[var127.userId]
-									var20(function(p21)
-										-- upvalues: dictionary (copy), userId (ref)
-										return dictionary.removeKey(p21, userId)
-									end)
-									var18(function(p21)
-										-- upvalues: dictionary (copy), var127 (copy)
-										return dictionary.removeKey(p21, var127.userId)
-									end)
-								end
-								return nil
-							end
-							
-							if fFlagExpChatMessagesStoreUseProxyModule then
-								var6[userId_1] = var128(var6[userId_1])
-							else
-								var5(function(p20)
-									-- upvalues: var128 (ref), userId_1 (ref), dictionary (copy)
-									local var129 = var128(p20[userId_1])
-									
-									return if var129 == nil then dictionary.removeKey(p20, userId_1) else dictionary.join(p20, { [userId_1] = var129 })
-								end)
-							end
-						end
-						var8(function(p20)
-							-- upvalues: list (copy)
-							return list.removeIndex(p20, 1)
-						end)
-						
-						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var126] = nil
-						end
-					end
-				end
-				if var123 and t.messageLimit <= #var125 then
-					local var129 = var125[1]
-					
-					if var129 then
-						var10(function(p20)
-							-- upvalues: var123 (write), list (copy), dictionary (copy)
-							return dictionary.join(p20, { [var123] = list.removeIndex(p20[var123] or {}, 1) })
-						end)
-						
-						if var117 and var117[var129] then
-							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var129] = nil
-							else
-								var2(function(p20)
-									-- upvalues: dictionary (copy), var129 (ref)
-									return dictionary.removeKey(p20, var129)
-								end)
-							end
-						end
-						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var129] = nil
-						end
-					end
-				end
-			end
-			writeByMessageId(var122.messageId, var122)
-			
-			if var122.userId then
-				local userId_1 = var122.userId
-				
-				local var130 = function(p20)
-					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var122 (ref), list (copy)
-					local p21 = p20 or {}
-					local var131 = false
-					
-					if fFlagExpChatMessagesStoreMemoryCleanupModule then
-						for i, v in ipairs(p21) do
-							if v == var122.messageId then
-								var131 = true
-							end
-						end
-					else
-						for i, v in ipairs(p21) do
-							if v.messageId == var122.messageId then
-								local var131 = true
-								break
-							end
-						end
-					end
-					return if var131 then p21 else list.append(p21, if fFlagExpChatMessagesStoreMemoryCleanupModule then var122.messageId else var122)
-				end
-				
-				if fFlagExpChatMessagesStoreUseProxyModule then
-					var6[userId_1] = var130(var6[userId_1])
-				else
-					var5(function(p22)
-						-- upvalues: var130 (ref), userId_1 (ref), dictionary (copy)
-						local var132 = var130(p22[userId_1])
-						
-						return if var132 == nil then dictionary.removeKey(p22, userId_1) else dictionary.join(p22, { [userId_1] = var132 })
-					end)
-				end
-			end
-			local var132 = false
-			
-			if var122.isVisibleInChatWindow then
-				var8(function(p22)
-					-- upvalues: insertWindowMessageIdInOrder (copy), var122 (ref), var132 (write)
-					local var133 = insertWindowMessageIdInOrder(p22, var122.messageId, var122.isHistorical)
-					var132 = var132 or var133[#var133] ~= var122.messageId
-					
-					return var133
-				end)
-				
-				if var123 then
-					var10(function(p22)
-						-- upvalues: var123 (write), insertWindowMessageIdInOrder (copy), var122 (ref), var132 (write), dictionary (copy)
-						local var133 = insertWindowMessageIdInOrder(p22[var123] or {}, var122.messageId, var122.isHistorical)
-						var132 = var132 or var133[#var133] ~= var122.messageId
-						
-						return dictionary.join(p22, { [var123] = var133 })
-					end)
-				end
-				if fFlagExpChatEnableV2ChatWindowModule then
-					local var133 = var29(false)
-					
-					if if var133 ~= nil then var123 == var133 else true then
-						local messageId = var122.messageId
-						
-						if not var33 then
-							updateNextMessageComponent(messageId)
-						elseif var32 then
-							var33 = true
-						else
-							var31()
-						end
-					end
-				end
-			end
-		end
-		
-		if fFlagExpChatMessagesStoreBatchModule then
-			signalsExperimentalModule.batch(var116)
-			
-			return
-		end
-		var116()
-	end
-	
-	local function handlePlayerRemoved(p20)
-		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (ref), var5 (ref), dictionary (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), t_4 (ref), var12 (ref), set (copy), var4 (ref), var17 (ref), var20 (ref), var18 (ref), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
-		local var131 = tostring(p20)
-		
-		local function doHandlePlayerRemoved()
-			-- upvalues: var131 (ref), fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var5 (copy), dictionary (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), t_4 (copy), var12 (copy), set (copy), var4 (copy), var17 (copy), var20 (copy), var18 (copy)
-			if fFlagExpChatMessagesStoreUseProxyModule then
-				var6[var131] = nil
-			else
-				var5(function(p21)
-					-- upvalues: dictionary (copy), var131 (ref)
-					return dictionary.removeKey(p21, var131)
-				end)
-			end
-			if fFlagExpChatMessagesStoreMemoryCleanupModule then
-				t_4[var131] = nil
-			end
-			var12(function(p21)
-				-- upvalues: set (copy), var131 (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var4 (copy), var17 (copy), var20 (copy), dictionary (copy), var18 (copy)
-				if not p21 then
-					return {}
-				elseif #((if fFlagExpChatMessagesStoreUseProxyModule then var6 else var4(false))[var131] or {}) == 0 and not set.has(p21, var131) then
-					return p21
-				end
-				local var132 = var17(false)
-				
-				if var132[var131] then
-					local var133 = var132[var131]
-					var20(function(p22)
-						-- upvalues: dictionary (copy), var133 (ref)
-						return dictionary.removeKey(p22, var133)
-					end)
-					var18(function(p22)
-						-- upvalues: dictionary (copy), var131 (copy)
-						return dictionary.removeKey(p22, var131)
-					end)
-				end
-				return set.subtract(p21, var131)
-			end)
-		end
-		
-		if fFlagExpChatMessagesStoreBatchModule then
-			signalsExperimentalModule.batch(doHandlePlayerRemoved)
-			
-			return
-		elseif fFlagExpChatMessagesStoreUseProxyModule then
-			var6[var131] = nil
-		else
-			var5(function(p21)
-				-- upvalues: dictionary (copy), var131 (ref)
-				return dictionary.removeKey(p21, var131)
-			end)
-		end
-		if fFlagExpChatMessagesStoreMemoryCleanupModule then
-			t_4[var131] = nil
-		end
-		var12(function(p21)
-			-- upvalues: set (copy), var131 (ref), fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var4 (copy), var17 (copy), var20 (copy), dictionary (copy), var18 (copy)
-			if not p21 then
-				return {}
-			elseif #((if fFlagExpChatMessagesStoreUseProxyModule then var6 else var4(false))[var131] or {}) == 0 and not set.has(p21, var131) then
-				return p21
-			end
-			local var132 = var17(false)
-			
-			if var132[var131] then
-				local var133 = var132[var131]
-				var20(function(p22)
-					-- upvalues: dictionary (copy), var133 (ref)
-					return dictionary.removeKey(p22, var133)
-				end)
-				var18(function(p22)
-					-- upvalues: dictionary (copy), var131 (copy)
-					return dictionary.removeKey(p22, var131)
-				end)
-			end
-			return set.subtract(p21, var131)
-		end)
-	end
-	
-	local function muteUser(p20)
-		-- upvalues: var12 (ref), set (copy)
-		var12(function(p21)
-			-- upvalues: set (copy), p20 (ref)
-			return if p21 then set.add(p21, p20) else {}
-		end)
-	end
-	
-	local function unmuteUser(p20)
-		-- upvalues: var12 (ref), set (copy)
-		var12(function(p21)
-			-- upvalues: set (copy), p20 (ref)
-			return if p21 then set.subtract(p21, p20) else {}
-		end)
-	end
-	
-	local function clearWindowMessages()
-		-- upvalues: forEachByMessageId (ref), dictionary (copy), var8 (ref), var10 (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var26 (ref), var27 (write), var28 (write), var23 (ref), t_1 (ref), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
-		local function doClearWindowMessages()
-			-- upvalues: forEachByMessageId (copy), dictionary (copy), var8 (copy), var10 (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var26 (copy), var27 (copy), var28 (copy), var23 (copy), t_1 (copy)
-			forEachByMessageId(function(_, p20)
-				-- upvalues: dictionary (copy)
-				return dictionary.join(p20, { isVisibleInChatWindow = false })
-			end)
-			var8(function(_)
-				return {}
-			end)
-			var10(function(_)
-				return {}
-			end)
-			
-			if fFlagExpChatEnableV2ChatWindowModule then
-				var26(1)
-				var27 = 0
-				var28 = 0
-				
-				for i, v in ipairs(var23(false)) do
-					local var131 = t_1[v]
-					
-					if var131 then
-						var131.setter(nil)
-					end
-				end
-			end
-		end
-		
-		if fFlagExpChatMessagesStoreBatchModule then
-			signalsExperimentalModule.batch(doClearWindowMessages)
-			
-			return
-		end
-		doClearWindowMessages()
-	end
-	
-	local function handleHiddenMessagesCleared()
-		-- upvalues: fFlagExpChatClearHiddenMessagesPostAgeCheckModule (copy), forEachByMessageId (ref), dictionary (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), var8 (ref), list (copy), var10 (ref)
-		if fFlagExpChatClearHiddenMessagesPostAgeCheckModule then
-			forEachByMessageId(function(_, p20)
-				-- upvalues: dictionary (copy)
-				return if p20 and p20.isHiddenMessage then dictionary.join(p20, { isVisibleInChatWindow = false }) else nil
-			end)
-			
-			local function isNotHidden(p20)
-				-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy)
-				local var131 = (if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false))[p20]
-				
-				return var131 and not var131.isHiddenMessage
-			end
-			
-			var8(function(p20)
-				-- upvalues: list (copy), isNotHidden (ref)
-				return list.filter(p20, isNotHidden)
-			end)
-			var10(function(p20)
-				-- upvalues: dictionary (copy), list (copy), isNotHidden (ref)
-				return dictionary.map(p20, function(p21)
-					-- upvalues: list (copy), isNotHidden (copy)
-					return list.filter(p21, isNotHidden)
-				end)
-			end)
-			
-			return
-		end
-	end
-	
-	local function rebuildMessageWithTranslation(p20, p21)
-		-- upvalues: isBorderlessBubbleChatEnabledModule (copy), getFFlagExpChatTelemetryEventTriggerModule (copy), fFlagEnableInExpChatRewriteModule (copy), fFlagEnableInExpChatSummaryOnLuaModule (copy), fFlagExpChatPresetChatEnabled (copy), fFlagExpChatRenderHistoricalMessagesModule (copy)
-		return {
-			prefixText = p20.prefixText,
-			text = p20.text,
-			translation = p20.translation,
-			useTranslation = p21,
-			messageId = p20.messageId,
-			status = p20.status,
-			timestamp = p20.timestamp,
-			bubbleChatReceivedAtMillis = if isBorderlessBubbleChatEnabledModule() then p20.bubbleChatReceivedAtMillis else nil,
-			isVisibleInBubbleChat = p20.isVisibleInBubbleChat,
-			isVisibleInChatWindow = p20.isVisibleInChatWindow,
-			partOrModel = p20.partOrModel,
-			shouldOverrideBubbleChatSettings = p20.shouldOverrideBubbleChatSettings,
-			bubbleChatMessageProperties = p20.bubbleChatMessageProperties,
-			chatWindowMessageProperties = p20.chatWindowMessageProperties,
-			textChatMessageInstance = if getFFlagExpChatTelemetryEventTriggerModule() then p20.textChatMessageInstance else nil,
-			userId = p20.userId,
-			textChannel = p20.textChannel,
-			wasRewritten = if fFlagEnableInExpChatRewriteModule then p20.wasRewritten else nil,
-			originalText = if fFlagEnableInExpChatRewriteModule then p20.originalText else nil,
-			chatActionType = if fFlagEnableInExpChatSummaryOnLuaModule then p20.chatActionType else nil,
-			presetId = if fFlagExpChatPresetChatEnabled then p20.presetId else nil,
-			presetChatVersion = if fFlagExpChatPresetChatEnabled then p20.presetChatVersion else nil,
-			isHistorical = if fFlagExpChatRenderHistoricalMessagesModule then p20.isHistorical else nil
-		}
-	end
-	
-	local function toggleGlobalTranslation(p20)
-		-- upvalues: forEachByMessageId (ref), rebuildMessageWithTranslation (ref), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
-		local function doToggleGlobalTranslation()
-			-- upvalues: forEachByMessageId (copy), rebuildMessageWithTranslation (copy), p20 (ref)
-			forEachByMessageId(function(_, p21)
-				-- upvalues: rebuildMessageWithTranslation (copy), p20 (copy)
-				return rebuildMessageWithTranslation(p21, p20)
-			end)
-		end
-		
-		if fFlagExpChatMessagesStoreBatchModule then
-			signalsExperimentalModule.batch(doToggleGlobalTranslation)
-			
-			return
-		end
-		forEachByMessageId(function(_, p21)
-			-- upvalues: rebuildMessageWithTranslation (copy), p20 (ref)
-			return rebuildMessageWithTranslation(p21, p20)
-		end)
-	end
-	
-	local function toggleMessageTranslation(p20, p21)
-		-- upvalues: rebuildMessageWithTranslation (ref), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var2 (ref), dictionary (copy)
-		local var131 = function(p22)
-			-- upvalues: rebuildMessageWithTranslation (copy), p20 (ref)
-			return rebuildMessageWithTranslation(p22, p20)
-		end
-		
-		if fFlagExpChatMessagesStoreUseProxyModule then
-			local var132 = var3[p21]
-			
-			if var132 then
-				local var133 = rebuildMessageWithTranslation(var132, p20)
-				
-				if var133 then
-					var3[p21] = var133
-					
-					return
-				end
-			end
-		else
-			var2(function(p22)
-				-- upvalues: p21 (ref), var131 (ref), dictionary (copy)
-				if p22 and p22[p21] then
-					local var134 = var131(p22[p21])
-					
-					return if var134 then dictionary.join(p22, { [p21] = var134 }) else p22
-				end
-				return p22 or {}
-			end)
-		end
-	end
-	
-	local function handleLegacyBubbleCreated(p20)
-		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
-		local timestamp = p20.timestamp
-		local t_1 = {
-			prefixText = "",
-			shouldOverrideBubbleChatSettings = true,
-			isVisibleInBubbleChat = true,
-			isVisibleInChatWindow = false,
-			translation = nil,
-			useTranslation = false,
-			textChannel = nil,
-			bubbleChatMessageProperties = nil,
-			chatWindowMessageProperties = nil,
-			userId = p20.userId,
-			text = p20.text,
-			messageId = p20.id,
-			status = Enum.TextChatMessageStatus.Success,
-			timestamp = if timestamp then DateTime.fromUnixTimestampMillis(timestamp) else DateTime.now(),
-			partOrModel = p20.adornee
-		}
-		
-		local var131 = function()
-			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
-			local var132 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
-			
-			if isBorderlessBubbleChatEnabledModule() then
-				local messageId = var132 and var132[t_1.messageId]
-				t_1.bubbleChatReceivedAtMillis = if messageId then messageId.bubbleChatReceivedAtMillis else getServerTimeNowMillisModule()
-			end
-			if var132 and var132[t_1.messageId] then
+			if var108 and var108[t_1.messageId] then
 				if fFlagExpChatEvictFloodcheckedFromWindowOrderModule and (t_1.status == Enum.TextChatMessageStatus.Floodchecked or t_1.status == Enum.TextChatMessageStatus.MessageTooLong) then
 					var8(function(p21)
 						-- upvalues: list (copy), t_1 (copy)
@@ -2506,15 +1643,15 @@ return function(p1)
 							return p22 ~= t_1.messageId
 						end)
 					end)
-					local var133 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
+					local var109 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
 					
-					if var133 then
+					if var109 then
 						var10(function(p21)
-							-- upvalues: var133 (ref), list (copy), t_1 (copy), dictionary (copy)
-							local var134 = p21[var133]
+							-- upvalues: var109 (ref), list (copy), t_1 (copy), dictionary (copy)
+							local var110 = p21[var109]
 							
-							return if var134 then dictionary.join(p21, {
-								[var133] = list.filter(var134, function(p22)
+							return if var110 then dictionary.join(p21, {
+								[var109] = list.filter(var110, function(p22)
 									-- upvalues: t_1 (copy)
 									return p22 ~= t_1.messageId
 								end)
@@ -2534,10 +1671,10 @@ return function(p1)
 					if t_1.userId then
 						local userId = t_1.userId
 						
-						local var134 = function(p21)
+						local var110 = function(p21)
 							-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), t_1 (copy)
 							if p21 then
-								local var135 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p21, function(p22)
+								local var111 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p21, function(p22)
 									-- upvalues: t_1 (copy)
 									return p22 ~= t_1.messageId
 								end) else list.filter(p21, function(p22)
@@ -2545,21 +1682,21 @@ return function(p1)
 									return p22.messageId ~= t_1.messageId
 								end)
 								
-								return if #var135 == 0 then nil else var135
+								return if #var111 == 0 then nil else var111
 							end
 							return nil
 						end
 						
 						if fFlagExpChatMessagesStoreUseProxyModule then
-							var6[userId] = var134(var6[userId])
+							var6[userId] = var110(var6[userId])
 							
 							return
 						end
 						var5(function(p21)
-							-- upvalues: var134 (ref), userId (ref), dictionary (copy)
-							local var135 = var134(p21[userId])
+							-- upvalues: var110 (ref), userId (ref), dictionary (copy)
+							local var111 = var110(p21[userId])
 							
-							return if var135 == nil then dictionary.removeKey(p21, userId) else dictionary.join(p21, { [userId] = var135 })
+							return if var111 == nil then dictionary.removeKey(p21, userId) else dictionary.join(p21, { [userId] = var111 })
 						end)
 					end
 					return
@@ -2571,36 +1708,36 @@ return function(p1)
 				if not fFlagExpChatMessagesStoreMemoryCleanupModule and t_1.userId then
 					local userId = t_1.userId
 					
-					local var135 = function(p21)
+					local var111 = function(p21)
 						-- upvalues: t_1 (copy), list (copy)
 						if not p21 then
 							return nil
 						end
-						local var136 = nil
+						local var112 = nil
 						
 						for i, v in ipairs(p21) do
 							if v.messageId == t_1.messageId then break end
 						end
-						return if var136 then list.set(p21, var136, t_1) else p21
+						return if var112 then list.set(p21, var112, t_1) else p21
 					end
 					
 					if fFlagExpChatMessagesStoreUseProxyModule then
-						var6[userId] = var135(var6[userId])
+						var6[userId] = var111(var6[userId])
 						
 						return
 					end
 					var5(function(p22)
-						-- upvalues: var135 (ref), userId (ref), dictionary (copy)
-						local var137 = var135(p22[userId])
+						-- upvalues: var111 (ref), userId (ref), dictionary (copy)
+						local var113 = var111(p22[userId])
 						
-						return if var137 == nil then dictionary.removeKey(p22, userId) else dictionary.join(p22, { [userId] = var137 })
+						return if var113 == nil then dictionary.removeKey(p22, userId) else dictionary.join(p22, { [userId] = var113 })
 					end)
 				end
 				return
 			elseif fFlagExpChatRenderHistoricalMessagesModule then
-				local var136 = t_1
+				local var112 = t_1
 				
-				if var136.isHistorical == true and (var136.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
+				if var112.isHistorical == true and (var112.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
 			end
 			local userId = t_1.userId
 			local partOrModel = t_1.partOrModel
@@ -2620,76 +1757,76 @@ return function(p1)
 					end)
 				end
 			end
-			local var137 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
-			local var138 = nil
+			local var113 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
+			local var114 = nil
 			
-			if getFFlagTextChatEnableUniverseChatTabs() and var137.channelNameOverride then
-				var138 = var137.channelNameOverride
-			elseif var137.textChannel then
-				var138 = if var137.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var137.textChannel.Name
+			if getFFlagTextChatEnableUniverseChatTabs() and var113.channelNameOverride then
+				var114 = var113.channelNameOverride
+			elseif var113.textChannel then
+				var114 = if var113.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var113.textChannel.Name
 			end
-			if var137.isVisibleInChatWindow then
-				local var139 = var7(false)
-				local var140 = if var138 then var9(false)[var138] or {} else {}
+			if var113.isVisibleInChatWindow then
+				local var115 = var7(false)
+				local var116 = if var114 then var9(false)[var114] or {} else {}
 				
-				if t.messageLimit <= #var139 then
-					local var141 = var139[1]
-					local var142 = var132 and var132[var141]
+				if t.messageLimit <= #var115 then
+					local var117 = var115[1]
+					local var118 = var108 and var108[var117]
 					
-					if var142 then
+					if var118 then
 						if not fFlagExpChatMessagesStoreKeepInByMessageIdModule then
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var141] = nil
+								var3[var117] = nil
 							else
 								var2(function(p21)
-									-- upvalues: dictionary (copy), var141 (ref)
-									return dictionary.removeKey(p21, var141)
+									-- upvalues: dictionary (copy), var117 (ref)
+									return dictionary.removeKey(p21, var117)
 								end)
 							end
 						end
-						if var142.userId then
-							local userId_1 = var142.userId
+						if var118.userId then
+							local userId_1 = var118.userId
 							
-							local var143 = function(p21)
-								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var141 (ref), var17 (copy), var142 (ref), var20 (copy), dictionary (copy), var18 (copy)
+							local var119 = function(p21)
+								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var117 (ref), var17 (copy), var118 (ref), var20 (copy), dictionary (copy), var18 (copy)
 								if not p21 then
 									return nil
 								end
-								local var144 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p21, function(p22)
-									-- upvalues: var141 (copy)
-									return p22 ~= var141
+								local var120 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p21, function(p22)
+									-- upvalues: var117 (copy)
+									return p22 ~= var117
 								end) else list.filter(p21, function(p22)
-									-- upvalues: var141 (copy)
-									return p22.messageId ~= var141
+									-- upvalues: var117 (copy)
+									return p22.messageId ~= var117
 								end)
 								
-								if #var144 ~= 0 then
-									return var144
+								if #var120 ~= 0 then
+									return var120
 								end
-								local var145 = var17(false)
+								local var121 = var17(false)
 								
-								if var145[var142.userId] then
-									local userId = var145[var142.userId]
+								if var121[var118.userId] then
+									local userId = var121[var118.userId]
 									var20(function(p22)
 										-- upvalues: dictionary (copy), userId (ref)
 										return dictionary.removeKey(p22, userId)
 									end)
 									var18(function(p22)
-										-- upvalues: dictionary (copy), var142 (copy)
-										return dictionary.removeKey(p22, var142.userId)
+										-- upvalues: dictionary (copy), var118 (copy)
+										return dictionary.removeKey(p22, var118.userId)
 									end)
 								end
 								return nil
 							end
 							
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var6[userId_1] = var143(var6[userId_1])
+								var6[userId_1] = var119(var6[userId_1])
 							else
 								var5(function(p21)
-									-- upvalues: var143 (ref), userId_1 (ref), dictionary (copy)
-									local var144 = var143(p21[userId_1])
+									-- upvalues: var119 (ref), userId_1 (ref), dictionary (copy)
+									local var120 = var119(p21[userId_1])
 									
-									return if var144 == nil then dictionary.removeKey(p21, userId_1) else dictionary.join(p21, { [userId_1] = var144 })
+									return if var120 == nil then dictionary.removeKey(p21, userId_1) else dictionary.join(p21, { [userId_1] = var120 })
 								end)
 							end
 						end
@@ -2699,98 +1836,107 @@ return function(p1)
 						end)
 						
 						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var141] = nil
+							t_3[var117] = nil
 						end
 					end
 				end
-				if var138 and t.messageLimit <= #var140 then
-					local var144 = var140[1]
+				if var114 and t.messageLimit <= #var116 then
+					local var120 = var116[1]
 					
-					if var144 then
+					if var120 then
 						var10(function(p21)
-							-- upvalues: var138 (write), list (copy), dictionary (copy)
-							return dictionary.join(p21, { [var138] = list.removeIndex(p21[var138] or {}, 1) })
+							-- upvalues: var114 (write), list (copy), dictionary (copy)
+							return dictionary.join(p21, { [var114] = list.removeIndex(p21[var114] or {}, 1) })
 						end)
 						
-						if var132 and var132[var144] then
+						if var108 and var108[var120] then
 							if fFlagExpChatMessagesStoreUseProxyModule then
-								var3[var144] = nil
+								var3[var120] = nil
 							else
 								var2(function(p21)
-									-- upvalues: dictionary (copy), var144 (ref)
-									return dictionary.removeKey(p21, var144)
+									-- upvalues: dictionary (copy), var120 (ref)
+									return dictionary.removeKey(p21, var120)
 								end)
 							end
 						end
 						if fFlagExpChatMessagesStoreMemoryCleanupModule then
-							t_3[var144] = nil
+							t_3[var120] = nil
 						end
 					end
 				end
 			end
-			writeByMessageId(var137.messageId, var137)
+			writeByMessageId(var113.messageId, var113)
 			
-			if var137.userId then
-				local userId_1 = var137.userId
+			if var113.userId then
+				local userId_1 = var113.userId
 				
-				local var145 = function(p21)
-					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var137 (ref), list (copy)
+				local var121 = function(p21)
+					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var113 (ref), list (copy)
 					local p22 = p21 or {}
-					local var146 = false
+					local var122 = false
 					
 					if fFlagExpChatMessagesStoreMemoryCleanupModule then
 						for i, v in ipairs(p22) do
-							if v == var137.messageId then
-								var146 = true
+							if v == var113.messageId then
+								var122 = true
 							end
 						end
 					else
 						for i, v in ipairs(p22) do
-							if v.messageId == var137.messageId then
-								local var146 = true
+							if v.messageId == var113.messageId then
+								local var122 = true
 								break
 							end
 						end
 					end
-					return if var146 then p22 else list.append(p22, if fFlagExpChatMessagesStoreMemoryCleanupModule then var137.messageId else var137)
+					return if var122 then p22 else list.append(p22, if fFlagExpChatMessagesStoreMemoryCleanupModule then var113.messageId else var113)
 				end
 				
 				if fFlagExpChatMessagesStoreUseProxyModule then
-					var6[userId_1] = var145(var6[userId_1])
+					var6[userId_1] = var121(var6[userId_1])
 				else
 					var5(function(p23)
-						-- upvalues: var145 (ref), userId_1 (ref), dictionary (copy)
-						local var147 = var145(p23[userId_1])
+						-- upvalues: var121 (ref), userId_1 (ref), dictionary (copy)
+						local var123 = var121(p23[userId_1])
 						
-						return if var147 == nil then dictionary.removeKey(p23, userId_1) else dictionary.join(p23, { [userId_1] = var147 })
+						return if var123 == nil then dictionary.removeKey(p23, userId_1) else dictionary.join(p23, { [userId_1] = var123 })
 					end)
 				end
 			end
-			local var147 = false
+			local var123 = false
 			
-			if var137.isVisibleInChatWindow then
+			if var113.isVisibleInChatWindow then
 				var8(function(p23)
-					-- upvalues: insertWindowMessageIdInOrder (copy), var137 (ref), var147 (write)
-					local var148 = insertWindowMessageIdInOrder(p23, var137.messageId, var137.isHistorical)
-					var147 = var147 or var148[#var148] ~= var137.messageId
+					-- upvalues: insertWindowMessageIdInOrder (copy), var113 (ref), var123 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy)
+					local var124 = insertWindowMessageIdInOrder(p23, var113.messageId, var113.isHistorical)
+					var123 = var123 or var124[#var124] ~= var113.messageId
 					
-					return var148
+					if fFlagExpChatMessageHistoryExperiment then
+						local var125 = capHistoricalPrefix(var124, var113)
+						var123 = var123 or #var125 < #var124
+						
+						return var125
+					end
+					return var124
 				end)
 				
-				if var138 then
+				if var114 then
 					var10(function(p23)
-						-- upvalues: var138 (write), insertWindowMessageIdInOrder (copy), var137 (ref), var147 (write), dictionary (copy)
-						local var148 = insertWindowMessageIdInOrder(p23[var138] or {}, var137.messageId, var137.isHistorical)
-						var147 = var147 or var148[#var148] ~= var137.messageId
+						-- upvalues: var114 (write), insertWindowMessageIdInOrder (copy), var113 (ref), var123 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), dictionary (copy)
+						local var124 = insertWindowMessageIdInOrder(p23[var114] or {}, var113.messageId, var113.isHistorical)
+						var123 = var123 or var124[#var124] ~= var113.messageId
 						
-						return dictionary.join(p23, { [var138] = var148 })
+						if fFlagExpChatMessageHistoryExperiment then
+							var124 = capHistoricalPrefix(var124, var113)
+						end
+						return dictionary.join(p23, { [var114] = var124 })
 					end)
 				end
 				if fFlagExpChatEnableV2ChatWindowModule then
-					local var148 = var29(false)
+					local var124 = var29(false)
 					
-					if if var148 ~= nil then var138 == var148 else true then
-						local messageId = var137.messageId
+					if if var124 ~= nil then var114 == var124 else true then
+						local messageId = var113.messageId
 						
 						if not var33 then
 							updateNextMessageComponent(messageId)
@@ -2805,67 +1951,1018 @@ return function(p1)
 		end
 		
 		if fFlagExpChatMessagesStoreBatchModule then
-			signalsExperimentalModule.batch(var131)
+			signalsExperimentalModule.batch(var107)
+		else
+			var107()
+		end
+		if expChatPresetChatEmojiEffectExperimentation.isExperimentEnabled then
+			logPresetChatEmojiEffectExposureModule(t_1)
+		end
+	end
+	
+	local function handleHiddenMessageReceived(p21)
+		-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), fIntExpChatRandomCharChangeLowerBoundModule (copy), fIntExpChatRandomCharChangeUpperBoundModule (copy), configModule (copy), getFFlagExpChatTelemetryEventTriggerModule (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
+		local var122 = string.len(if getFFlagExpChatProtectedChatInternalAPIs() then p21.TextInternal else p21.Text)
+		local t_1 = {
+			userId = nil,
+			isVisibleInBubbleChat = false,
+			isVisibleInChatWindow = true,
+			isHiddenMessage = true,
+			prefixText = configModule.LOCK_EMOJI .. " :",
+			text = string.rep(configModule.DOT_TEXT, var122 + math.random(math.max(fIntExpChatRandomCharChangeLowerBoundModule, -(var122 - 1)), fIntExpChatRandomCharChangeUpperBoundModule)),
+			textChannel = p21.TextChannel,
+			messageId = p21.MessageId,
+			status = p21.Status,
+			timestamp = p21.Timestamp,
+			textChatMessageInstance = if getFFlagExpChatTelemetryEventTriggerModule() then p21 else nil
+		}
+		
+		local var123 = function()
+			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
+			local var124 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+			
+			if isBorderlessBubbleChatEnabledModule() then
+				local messageId = var124 and var124[t_1.messageId]
+				t_1.bubbleChatReceivedAtMillis = if messageId then messageId.bubbleChatReceivedAtMillis else getServerTimeNowMillisModule()
+			end
+			if var124 and var124[t_1.messageId] then
+				if fFlagExpChatEvictFloodcheckedFromWindowOrderModule and (t_1.status == Enum.TextChatMessageStatus.Floodchecked or t_1.status == Enum.TextChatMessageStatus.MessageTooLong) then
+					var8(function(p22)
+						-- upvalues: list (copy), t_1 (copy)
+						return list.filter(p22, function(p23)
+							-- upvalues: t_1 (copy)
+							return p23 ~= t_1.messageId
+						end)
+					end)
+					local var125 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
+					
+					if var125 then
+						var10(function(p22)
+							-- upvalues: var125 (ref), list (copy), t_1 (copy), dictionary (copy)
+							local var126 = p22[var125]
+							
+							return if var126 then dictionary.join(p22, {
+								[var125] = list.filter(var126, function(p23)
+									-- upvalues: t_1 (copy)
+									return p23 ~= t_1.messageId
+								end)
+							}) else p22
+						end)
+					end
+					local messageId = t_1.messageId
+					
+					if fFlagExpChatMessagesStoreUseProxyModule then
+						var3[messageId] = nil
+					else
+						var2(function(p22)
+							-- upvalues: dictionary (copy), messageId (ref)
+							return dictionary.removeKey(p22, messageId)
+						end)
+					end
+					if t_1.userId then
+						local userId = t_1.userId
+						
+						local var126 = function(p22)
+							-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), t_1 (copy)
+							if p22 then
+								local var127 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p22, function(p23)
+									-- upvalues: t_1 (copy)
+									return p23 ~= t_1.messageId
+								end) else list.filter(p22, function(p23)
+									-- upvalues: t_1 (copy)
+									return p23.messageId ~= t_1.messageId
+								end)
+								
+								return if #var127 == 0 then nil else var127
+							end
+							return nil
+						end
+						
+						if fFlagExpChatMessagesStoreUseProxyModule then
+							var6[userId] = var126(var6[userId])
+							
+							return
+						end
+						var5(function(p22)
+							-- upvalues: var126 (ref), userId (ref), dictionary (copy)
+							local var127 = var126(p22[userId])
+							
+							return if var127 == nil then dictionary.removeKey(p22, userId) else dictionary.join(p22, { [userId] = var127 })
+						end)
+					end
+					return
+				elseif fFlagExpChatRenderHistoricalMessagesModule then
+					writeByMessageId(t_1.messageId, keepHistoricalFlag(t_1))
+				else
+					writeByMessageId(t_1.messageId, t_1)
+				end
+				if not fFlagExpChatMessagesStoreMemoryCleanupModule and t_1.userId then
+					local userId = t_1.userId
+					
+					local var127 = function(p22)
+						-- upvalues: t_1 (copy), list (copy)
+						if not p22 then
+							return nil
+						end
+						local var128 = nil
+						
+						for i, v in ipairs(p22) do
+							if v.messageId == t_1.messageId then break end
+						end
+						return if var128 then list.set(p22, var128, t_1) else p22
+					end
+					
+					if fFlagExpChatMessagesStoreUseProxyModule then
+						var6[userId] = var127(var6[userId])
+						
+						return
+					end
+					var5(function(p23)
+						-- upvalues: var127 (ref), userId (ref), dictionary (copy)
+						local var129 = var127(p23[userId])
+						
+						return if var129 == nil then dictionary.removeKey(p23, userId) else dictionary.join(p23, { [userId] = var129 })
+					end)
+				end
+				return
+			elseif fFlagExpChatRenderHistoricalMessagesModule then
+				local var128 = t_1
+				
+				if var128.isHistorical == true and (var128.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
+			end
+			local userId = t_1.userId
+			local partOrModel = t_1.partOrModel
+			
+			if not userId and partOrModel then
+				userId = var19(false)[partOrModel]
+				
+				if not userId then
+					userId = httpService:GenerateGUID(false)
+					var18(function(p22)
+						-- upvalues: dictionary (copy), userId (write), partOrModel (ref)
+						return dictionary.join(p22, { [userId] = partOrModel })
+					end)
+					var20(function(p22)
+						-- upvalues: dictionary (copy), partOrModel (ref), userId (write)
+						return dictionary.join(p22, { [partOrModel] = userId })
+					end)
+				end
+			end
+			local var129 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
+			local var130 = nil
+			
+			if getFFlagTextChatEnableUniverseChatTabs() and var129.channelNameOverride then
+				var130 = var129.channelNameOverride
+			elseif var129.textChannel then
+				var130 = if var129.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var129.textChannel.Name
+			end
+			if var129.isVisibleInChatWindow then
+				local var131 = var7(false)
+				local var132 = if var130 then var9(false)[var130] or {} else {}
+				
+				if t.messageLimit <= #var131 then
+					local var133 = var131[1]
+					local var134 = var124 and var124[var133]
+					
+					if var134 then
+						if not fFlagExpChatMessagesStoreKeepInByMessageIdModule then
+							if fFlagExpChatMessagesStoreUseProxyModule then
+								var3[var133] = nil
+							else
+								var2(function(p22)
+									-- upvalues: dictionary (copy), var133 (ref)
+									return dictionary.removeKey(p22, var133)
+								end)
+							end
+						end
+						if var134.userId then
+							local userId_1 = var134.userId
+							
+							local var135 = function(p22)
+								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var133 (ref), var17 (copy), var134 (ref), var20 (copy), dictionary (copy), var18 (copy)
+								if not p22 then
+									return nil
+								end
+								local var136 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p22, function(p23)
+									-- upvalues: var133 (copy)
+									return p23 ~= var133
+								end) else list.filter(p22, function(p23)
+									-- upvalues: var133 (copy)
+									return p23.messageId ~= var133
+								end)
+								
+								if #var136 ~= 0 then
+									return var136
+								end
+								local var137 = var17(false)
+								
+								if var137[var134.userId] then
+									local userId = var137[var134.userId]
+									var20(function(p23)
+										-- upvalues: dictionary (copy), userId (ref)
+										return dictionary.removeKey(p23, userId)
+									end)
+									var18(function(p23)
+										-- upvalues: dictionary (copy), var134 (copy)
+										return dictionary.removeKey(p23, var134.userId)
+									end)
+								end
+								return nil
+							end
+							
+							if fFlagExpChatMessagesStoreUseProxyModule then
+								var6[userId_1] = var135(var6[userId_1])
+							else
+								var5(function(p22)
+									-- upvalues: var135 (ref), userId_1 (ref), dictionary (copy)
+									local var136 = var135(p22[userId_1])
+									
+									return if var136 == nil then dictionary.removeKey(p22, userId_1) else dictionary.join(p22, { [userId_1] = var136 })
+								end)
+							end
+						end
+						var8(function(p22)
+							-- upvalues: list (copy)
+							return list.removeIndex(p22, 1)
+						end)
+						
+						if fFlagExpChatMessagesStoreMemoryCleanupModule then
+							t_3[var133] = nil
+						end
+					end
+				end
+				if var130 and t.messageLimit <= #var132 then
+					local var136 = var132[1]
+					
+					if var136 then
+						var10(function(p22)
+							-- upvalues: var130 (write), list (copy), dictionary (copy)
+							return dictionary.join(p22, { [var130] = list.removeIndex(p22[var130] or {}, 1) })
+						end)
+						
+						if var124 and var124[var136] then
+							if fFlagExpChatMessagesStoreUseProxyModule then
+								var3[var136] = nil
+							else
+								var2(function(p22)
+									-- upvalues: dictionary (copy), var136 (ref)
+									return dictionary.removeKey(p22, var136)
+								end)
+							end
+						end
+						if fFlagExpChatMessagesStoreMemoryCleanupModule then
+							t_3[var136] = nil
+						end
+					end
+				end
+			end
+			writeByMessageId(var129.messageId, var129)
+			
+			if var129.userId then
+				local userId_1 = var129.userId
+				
+				local var137 = function(p22)
+					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var129 (ref), list (copy)
+					local p23 = p22 or {}
+					local var138 = false
+					
+					if fFlagExpChatMessagesStoreMemoryCleanupModule then
+						for i, v in ipairs(p23) do
+							if v == var129.messageId then
+								var138 = true
+							end
+						end
+					else
+						for i, v in ipairs(p23) do
+							if v.messageId == var129.messageId then
+								local var138 = true
+								break
+							end
+						end
+					end
+					return if var138 then p23 else list.append(p23, if fFlagExpChatMessagesStoreMemoryCleanupModule then var129.messageId else var129)
+				end
+				
+				if fFlagExpChatMessagesStoreUseProxyModule then
+					var6[userId_1] = var137(var6[userId_1])
+				else
+					var5(function(p24)
+						-- upvalues: var137 (ref), userId_1 (ref), dictionary (copy)
+						local var139 = var137(p24[userId_1])
+						
+						return if var139 == nil then dictionary.removeKey(p24, userId_1) else dictionary.join(p24, { [userId_1] = var139 })
+					end)
+				end
+			end
+			local var139 = false
+			
+			if var129.isVisibleInChatWindow then
+				var8(function(p24)
+					-- upvalues: insertWindowMessageIdInOrder (copy), var129 (ref), var139 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy)
+					local var140 = insertWindowMessageIdInOrder(p24, var129.messageId, var129.isHistorical)
+					var139 = var139 or var140[#var140] ~= var129.messageId
+					
+					if fFlagExpChatMessageHistoryExperiment then
+						local var141 = capHistoricalPrefix(var140, var129)
+						var139 = var139 or #var141 < #var140
+						
+						return var141
+					end
+					return var140
+				end)
+				
+				if var130 then
+					var10(function(p24)
+						-- upvalues: var130 (write), insertWindowMessageIdInOrder (copy), var129 (ref), var139 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), dictionary (copy)
+						local var140 = insertWindowMessageIdInOrder(p24[var130] or {}, var129.messageId, var129.isHistorical)
+						var139 = var139 or var140[#var140] ~= var129.messageId
+						
+						if fFlagExpChatMessageHistoryExperiment then
+							var140 = capHistoricalPrefix(var140, var129)
+						end
+						return dictionary.join(p24, { [var130] = var140 })
+					end)
+				end
+				if fFlagExpChatEnableV2ChatWindowModule then
+					local var140 = var29(false)
+					
+					if if var140 ~= nil then var130 == var140 else true then
+						local messageId = var129.messageId
+						
+						if not var33 then
+							updateNextMessageComponent(messageId)
+						elseif var32 then
+							var33 = true
+						else
+							var31()
+						end
+					end
+				end
+			end
+		end
+		
+		if fFlagExpChatMessagesStoreBatchModule then
+			signalsExperimentalModule.batch(var123)
 			
 			return
 		end
-		var131()
+		var123()
 	end
 	
-	updateNextMessageComponent = function(p21)
+	local function handlePlayerRemoved(p22)
+		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (ref), var5 (ref), dictionary (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), t_4 (ref), var12 (ref), set (copy), var4 (ref), var17 (ref), var20 (ref), var18 (ref), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
+		local var138 = tostring(p22)
+		
+		local function doHandlePlayerRemoved()
+			-- upvalues: var138 (ref), fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var5 (copy), dictionary (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), t_4 (copy), var12 (copy), set (copy), var4 (copy), var17 (copy), var20 (copy), var18 (copy)
+			if fFlagExpChatMessagesStoreUseProxyModule then
+				var6[var138] = nil
+			else
+				var5(function(p23)
+					-- upvalues: dictionary (copy), var138 (ref)
+					return dictionary.removeKey(p23, var138)
+				end)
+			end
+			if fFlagExpChatMessagesStoreMemoryCleanupModule then
+				t_4[var138] = nil
+			end
+			var12(function(p23)
+				-- upvalues: set (copy), var138 (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var4 (copy), var17 (copy), var20 (copy), dictionary (copy), var18 (copy)
+				if not p23 then
+					return {}
+				elseif #((if fFlagExpChatMessagesStoreUseProxyModule then var6 else var4(false))[var138] or {}) == 0 and not set.has(p23, var138) then
+					return p23
+				end
+				local var139 = var17(false)
+				
+				if var139[var138] then
+					local var140 = var139[var138]
+					var20(function(p24)
+						-- upvalues: dictionary (copy), var140 (ref)
+						return dictionary.removeKey(p24, var140)
+					end)
+					var18(function(p24)
+						-- upvalues: dictionary (copy), var138 (copy)
+						return dictionary.removeKey(p24, var138)
+					end)
+				end
+				return set.subtract(p23, var138)
+			end)
+		end
+		
+		if fFlagExpChatMessagesStoreBatchModule then
+			signalsExperimentalModule.batch(doHandlePlayerRemoved)
+			
+			return
+		elseif fFlagExpChatMessagesStoreUseProxyModule then
+			var6[var138] = nil
+		else
+			var5(function(p23)
+				-- upvalues: dictionary (copy), var138 (ref)
+				return dictionary.removeKey(p23, var138)
+			end)
+		end
+		if fFlagExpChatMessagesStoreMemoryCleanupModule then
+			t_4[var138] = nil
+		end
+		var12(function(p23)
+			-- upvalues: set (copy), var138 (ref), fFlagExpChatMessagesStoreUseProxyModule (copy), var6 (copy), var4 (copy), var17 (copy), var20 (copy), dictionary (copy), var18 (copy)
+			if not p23 then
+				return {}
+			elseif #((if fFlagExpChatMessagesStoreUseProxyModule then var6 else var4(false))[var138] or {}) == 0 and not set.has(p23, var138) then
+				return p23
+			end
+			local var139 = var17(false)
+			
+			if var139[var138] then
+				local var140 = var139[var138]
+				var20(function(p24)
+					-- upvalues: dictionary (copy), var140 (ref)
+					return dictionary.removeKey(p24, var140)
+				end)
+				var18(function(p24)
+					-- upvalues: dictionary (copy), var138 (copy)
+					return dictionary.removeKey(p24, var138)
+				end)
+			end
+			return set.subtract(p23, var138)
+		end)
+	end
+	
+	local function muteUser(p22)
+		-- upvalues: var12 (ref), set (copy)
+		var12(function(p23)
+			-- upvalues: set (copy), p22 (ref)
+			return if p23 then set.add(p23, p22) else {}
+		end)
+	end
+	
+	local function unmuteUser(p22)
+		-- upvalues: var12 (ref), set (copy)
+		var12(function(p23)
+			-- upvalues: set (copy), p22 (ref)
+			return if p23 then set.subtract(p23, p22) else {}
+		end)
+	end
+	
+	local function clearWindowMessages()
+		-- upvalues: forEachByMessageId (ref), dictionary (copy), var8 (ref), var10 (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var26 (ref), var27 (write), var28 (write), var23 (ref), t_1 (ref), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
+		local function doClearWindowMessages()
+			-- upvalues: forEachByMessageId (copy), dictionary (copy), var8 (copy), var10 (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var26 (copy), var27 (copy), var28 (copy), var23 (copy), t_1 (copy)
+			forEachByMessageId(function(_, p22)
+				-- upvalues: dictionary (copy)
+				return dictionary.join(p22, { isVisibleInChatWindow = false })
+			end)
+			var8(function(_)
+				return {}
+			end)
+			var10(function(_)
+				return {}
+			end)
+			
+			if fFlagExpChatEnableV2ChatWindowModule then
+				var26(1)
+				var27 = 0
+				var28 = 0
+				
+				for i, v in ipairs(var23(false)) do
+					local var138 = t_1[v]
+					
+					if var138 then
+						var138.setter(nil)
+					end
+				end
+			end
+		end
+		
+		if fFlagExpChatMessagesStoreBatchModule then
+			signalsExperimentalModule.batch(doClearWindowMessages)
+			
+			return
+		end
+		doClearWindowMessages()
+	end
+	
+	local function handleHiddenMessagesCleared()
+		-- upvalues: fFlagExpChatClearHiddenMessagesPostAgeCheckModule (copy), forEachByMessageId (ref), dictionary (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), var8 (ref), list (copy), var10 (ref)
+		if fFlagExpChatClearHiddenMessagesPostAgeCheckModule then
+			forEachByMessageId(function(_, p22)
+				-- upvalues: dictionary (copy)
+				return if p22 and p22.isHiddenMessage then dictionary.join(p22, { isVisibleInChatWindow = false }) else nil
+			end)
+			
+			local function isNotHidden(p22)
+				-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy)
+				local var138 = (if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false))[p22]
+				
+				return var138 and not var138.isHiddenMessage
+			end
+			
+			var8(function(p22)
+				-- upvalues: list (copy), isNotHidden (ref)
+				return list.filter(p22, isNotHidden)
+			end)
+			var10(function(p22)
+				-- upvalues: dictionary (copy), list (copy), isNotHidden (ref)
+				return dictionary.map(p22, function(p23)
+					-- upvalues: list (copy), isNotHidden (copy)
+					return list.filter(p23, isNotHidden)
+				end)
+			end)
+			
+			return
+		end
+	end
+	
+	local function rebuildMessageWithTranslation(p22, p23)
+		-- upvalues: isBorderlessBubbleChatEnabledModule (copy), getFFlagExpChatTelemetryEventTriggerModule (copy), fFlagEnableInExpChatRewriteModule (copy), fFlagEnableInExpChatSummaryOnLuaModule (copy), fFlagExpChatPresetChatEnabled (copy), fFlagExpChatRenderHistoricalMessagesModule (copy)
+		return {
+			prefixText = p22.prefixText,
+			text = p22.text,
+			translation = p22.translation,
+			useTranslation = p23,
+			messageId = p22.messageId,
+			status = p22.status,
+			timestamp = p22.timestamp,
+			bubbleChatReceivedAtMillis = if isBorderlessBubbleChatEnabledModule() then p22.bubbleChatReceivedAtMillis else nil,
+			isVisibleInBubbleChat = p22.isVisibleInBubbleChat,
+			isVisibleInChatWindow = p22.isVisibleInChatWindow,
+			partOrModel = p22.partOrModel,
+			shouldOverrideBubbleChatSettings = p22.shouldOverrideBubbleChatSettings,
+			bubbleChatMessageProperties = p22.bubbleChatMessageProperties,
+			chatWindowMessageProperties = p22.chatWindowMessageProperties,
+			textChatMessageInstance = if getFFlagExpChatTelemetryEventTriggerModule() then p22.textChatMessageInstance else nil,
+			userId = p22.userId,
+			textChannel = p22.textChannel,
+			wasRewritten = if fFlagEnableInExpChatRewriteModule then p22.wasRewritten else nil,
+			originalText = if fFlagEnableInExpChatRewriteModule then p22.originalText else nil,
+			chatActionType = if fFlagEnableInExpChatSummaryOnLuaModule then p22.chatActionType else nil,
+			presetId = if fFlagExpChatPresetChatEnabled then p22.presetId else nil,
+			presetChatVersion = if fFlagExpChatPresetChatEnabled then p22.presetChatVersion else nil,
+			isHistorical = if fFlagExpChatRenderHistoricalMessagesModule then p22.isHistorical else nil
+		}
+	end
+	
+	local function toggleGlobalTranslation(p22)
+		-- upvalues: forEachByMessageId (ref), rebuildMessageWithTranslation (ref), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
+		local function doToggleGlobalTranslation()
+			-- upvalues: forEachByMessageId (copy), rebuildMessageWithTranslation (copy), p22 (ref)
+			forEachByMessageId(function(_, p23)
+				-- upvalues: rebuildMessageWithTranslation (copy), p22 (copy)
+				return rebuildMessageWithTranslation(p23, p22)
+			end)
+		end
+		
+		if fFlagExpChatMessagesStoreBatchModule then
+			signalsExperimentalModule.batch(doToggleGlobalTranslation)
+			
+			return
+		end
+		forEachByMessageId(function(_, p23)
+			-- upvalues: rebuildMessageWithTranslation (copy), p22 (ref)
+			return rebuildMessageWithTranslation(p23, p22)
+		end)
+	end
+	
+	local function toggleMessageTranslation(p22, p23)
+		-- upvalues: rebuildMessageWithTranslation (ref), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var2 (ref), dictionary (copy)
+		local var138 = function(p24)
+			-- upvalues: rebuildMessageWithTranslation (copy), p22 (ref)
+			return rebuildMessageWithTranslation(p24, p22)
+		end
+		
+		if fFlagExpChatMessagesStoreUseProxyModule then
+			local var139 = var3[p23]
+			
+			if var139 then
+				local var140 = rebuildMessageWithTranslation(var139, p22)
+				
+				if var140 then
+					var3[p23] = var140
+					
+					return
+				end
+			end
+		else
+			var2(function(p24)
+				-- upvalues: p23 (ref), var138 (ref), dictionary (copy)
+				if p24 and p24[p23] then
+					local var141 = var138(p24[p23])
+					
+					return if var141 then dictionary.join(p24, { [p23] = var141 }) else p24
+				end
+				return p24 or {}
+			end)
+		end
+	end
+	
+	local function handleLegacyBubbleCreated(p22)
+		-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), isBorderlessBubbleChatEnabledModule (copy), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (ref), list (copy), resolveChannelNameForMapOrder (ref), var10 (ref), dictionary (copy), var2 (ref), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (ref), var5 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (ref), keepHistoricalFlag (ref), var7 (ref), t (ref), var19 (ref), httpService (copy), var18 (ref), var20 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (ref), var9 (ref), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (ref), t_3 (ref), insertWindowMessageIdInOrder (ref), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (ref), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (ref), var33 (write), updateNextMessageComponent (write), var32 (write), var31 (write), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
+		local timestamp = p22.timestamp
+		local t_1 = {
+			prefixText = "",
+			shouldOverrideBubbleChatSettings = true,
+			isVisibleInBubbleChat = true,
+			isVisibleInChatWindow = false,
+			translation = nil,
+			useTranslation = false,
+			textChannel = nil,
+			bubbleChatMessageProperties = nil,
+			chatWindowMessageProperties = nil,
+			userId = p22.userId,
+			text = p22.text,
+			messageId = p22.id,
+			status = Enum.TextChatMessageStatus.Success,
+			timestamp = if timestamp then DateTime.fromUnixTimestampMillis(timestamp) else DateTime.now(),
+			partOrModel = p22.adornee
+		}
+		
+		local var138 = function()
+			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (copy), var1 (copy), isBorderlessBubbleChatEnabledModule (copy), t_1 (ref), getServerTimeNowMillisModule (copy), fFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), var8 (copy), list (copy), resolveChannelNameForMapOrder (copy), var10 (copy), dictionary (copy), var2 (copy), fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var6 (copy), var5 (copy), fFlagExpChatRenderHistoricalMessagesModule (copy), writeByMessageId (copy), keepHistoricalFlag (copy), var7 (copy), t (copy), var19 (copy), httpService (copy), var18 (copy), var20 (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var21 (copy), var9 (copy), fFlagExpChatMessagesStoreKeepInByMessageIdModule (copy), var17 (copy), t_3 (copy), insertWindowMessageIdInOrder (copy), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), fFlagExpChatEnableV2ChatWindowModule (copy), var29 (copy), var33 (copy), updateNextMessageComponent (copy), var32 (copy), var31 (copy)
+			local var139 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+			
+			if isBorderlessBubbleChatEnabledModule() then
+				local messageId = var139 and var139[t_1.messageId]
+				t_1.bubbleChatReceivedAtMillis = if messageId then messageId.bubbleChatReceivedAtMillis else getServerTimeNowMillisModule()
+			end
+			if var139 and var139[t_1.messageId] then
+				if fFlagExpChatEvictFloodcheckedFromWindowOrderModule and (t_1.status == Enum.TextChatMessageStatus.Floodchecked or t_1.status == Enum.TextChatMessageStatus.MessageTooLong) then
+					var8(function(p23)
+						-- upvalues: list (copy), t_1 (copy)
+						return list.filter(p23, function(p24)
+							-- upvalues: t_1 (copy)
+							return p24 ~= t_1.messageId
+						end)
+					end)
+					local var140 = resolveChannelNameForMapOrder(t_1, t_1.channelNameOverride)
+					
+					if var140 then
+						var10(function(p23)
+							-- upvalues: var140 (ref), list (copy), t_1 (copy), dictionary (copy)
+							local var141 = p23[var140]
+							
+							return if var141 then dictionary.join(p23, {
+								[var140] = list.filter(var141, function(p24)
+									-- upvalues: t_1 (copy)
+									return p24 ~= t_1.messageId
+								end)
+							}) else p23
+						end)
+					end
+					local messageId = t_1.messageId
+					
+					if fFlagExpChatMessagesStoreUseProxyModule then
+						var3[messageId] = nil
+					else
+						var2(function(p23)
+							-- upvalues: dictionary (copy), messageId (ref)
+							return dictionary.removeKey(p23, messageId)
+						end)
+					end
+					if t_1.userId then
+						local userId = t_1.userId
+						
+						local var141 = function(p23)
+							-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), t_1 (copy)
+							if p23 then
+								local var142 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p23, function(p24)
+									-- upvalues: t_1 (copy)
+									return p24 ~= t_1.messageId
+								end) else list.filter(p23, function(p24)
+									-- upvalues: t_1 (copy)
+									return p24.messageId ~= t_1.messageId
+								end)
+								
+								return if #var142 == 0 then nil else var142
+							end
+							return nil
+						end
+						
+						if fFlagExpChatMessagesStoreUseProxyModule then
+							var6[userId] = var141(var6[userId])
+							
+							return
+						end
+						var5(function(p23)
+							-- upvalues: var141 (ref), userId (ref), dictionary (copy)
+							local var142 = var141(p23[userId])
+							
+							return if var142 == nil then dictionary.removeKey(p23, userId) else dictionary.join(p23, { [userId] = var142 })
+						end)
+					end
+					return
+				elseif fFlagExpChatRenderHistoricalMessagesModule then
+					writeByMessageId(t_1.messageId, keepHistoricalFlag(t_1))
+				else
+					writeByMessageId(t_1.messageId, t_1)
+				end
+				if not fFlagExpChatMessagesStoreMemoryCleanupModule and t_1.userId then
+					local userId = t_1.userId
+					
+					local var142 = function(p23)
+						-- upvalues: t_1 (copy), list (copy)
+						if not p23 then
+							return nil
+						end
+						local var143 = nil
+						
+						for i, v in ipairs(p23) do
+							if v.messageId == t_1.messageId then break end
+						end
+						return if var143 then list.set(p23, var143, t_1) else p23
+					end
+					
+					if fFlagExpChatMessagesStoreUseProxyModule then
+						var6[userId] = var142(var6[userId])
+						
+						return
+					end
+					var5(function(p24)
+						-- upvalues: var142 (ref), userId (ref), dictionary (copy)
+						local var144 = var142(p24[userId])
+						
+						return if var144 == nil then dictionary.removeKey(p24, userId) else dictionary.join(p24, { [userId] = var144 })
+					end)
+				end
+				return
+			elseif fFlagExpChatRenderHistoricalMessagesModule then
+				local var143 = t_1
+				
+				if var143.isHistorical == true and (var143.isVisibleInChatWindow and t.messageLimit <= #var7(false)) then return end
+			end
+			local userId = t_1.userId
+			local partOrModel = t_1.partOrModel
+			
+			if not userId and partOrModel then
+				userId = var19(false)[partOrModel]
+				
+				if not userId then
+					userId = httpService:GenerateGUID(false)
+					var18(function(p23)
+						-- upvalues: dictionary (copy), userId (write), partOrModel (ref)
+						return dictionary.join(p23, { [userId] = partOrModel })
+					end)
+					var20(function(p23)
+						-- upvalues: dictionary (copy), partOrModel (ref), userId (write)
+						return dictionary.join(p23, { [partOrModel] = userId })
+					end)
+				end
+			end
+			local var144 = if userId ~= t_1.userId then t_1 else dictionary.join(t_1, { userId = userId })
+			local var145 = nil
+			
+			if getFFlagTextChatEnableUniverseChatTabs() and var144.channelNameOverride then
+				var145 = var144.channelNameOverride
+			elseif var144.textChannel then
+				var145 = if var144.textChannel.Name == "RBXSystem" or getFFlagTextChatEnableUniverseChatTabs() and not var21(false) then "RBXGeneral" else var144.textChannel.Name
+			end
+			if var144.isVisibleInChatWindow then
+				local var146 = var7(false)
+				local var147 = if var145 then var9(false)[var145] or {} else {}
+				
+				if t.messageLimit <= #var146 then
+					local var148 = var146[1]
+					local var149 = var139 and var139[var148]
+					
+					if var149 then
+						if not fFlagExpChatMessagesStoreKeepInByMessageIdModule then
+							if fFlagExpChatMessagesStoreUseProxyModule then
+								var3[var148] = nil
+							else
+								var2(function(p23)
+									-- upvalues: dictionary (copy), var148 (ref)
+									return dictionary.removeKey(p23, var148)
+								end)
+							end
+						end
+						if var149.userId then
+							local userId_1 = var149.userId
+							
+							local var150 = function(p23)
+								-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), list (copy), var148 (ref), var17 (copy), var149 (ref), var20 (copy), dictionary (copy), var18 (copy)
+								if not p23 then
+									return nil
+								end
+								local var151 = if fFlagExpChatMessagesStoreMemoryCleanupModule then list.filter(p23, function(p24)
+									-- upvalues: var148 (copy)
+									return p24 ~= var148
+								end) else list.filter(p23, function(p24)
+									-- upvalues: var148 (copy)
+									return p24.messageId ~= var148
+								end)
+								
+								if #var151 ~= 0 then
+									return var151
+								end
+								local var152 = var17(false)
+								
+								if var152[var149.userId] then
+									local userId = var152[var149.userId]
+									var20(function(p24)
+										-- upvalues: dictionary (copy), userId (ref)
+										return dictionary.removeKey(p24, userId)
+									end)
+									var18(function(p24)
+										-- upvalues: dictionary (copy), var149 (copy)
+										return dictionary.removeKey(p24, var149.userId)
+									end)
+								end
+								return nil
+							end
+							
+							if fFlagExpChatMessagesStoreUseProxyModule then
+								var6[userId_1] = var150(var6[userId_1])
+							else
+								var5(function(p23)
+									-- upvalues: var150 (ref), userId_1 (ref), dictionary (copy)
+									local var151 = var150(p23[userId_1])
+									
+									return if var151 == nil then dictionary.removeKey(p23, userId_1) else dictionary.join(p23, { [userId_1] = var151 })
+								end)
+							end
+						end
+						var8(function(p23)
+							-- upvalues: list (copy)
+							return list.removeIndex(p23, 1)
+						end)
+						
+						if fFlagExpChatMessagesStoreMemoryCleanupModule then
+							t_3[var148] = nil
+						end
+					end
+				end
+				if var145 and t.messageLimit <= #var147 then
+					local var151 = var147[1]
+					
+					if var151 then
+						var10(function(p23)
+							-- upvalues: var145 (write), list (copy), dictionary (copy)
+							return dictionary.join(p23, { [var145] = list.removeIndex(p23[var145] or {}, 1) })
+						end)
+						
+						if var139 and var139[var151] then
+							if fFlagExpChatMessagesStoreUseProxyModule then
+								var3[var151] = nil
+							else
+								var2(function(p23)
+									-- upvalues: dictionary (copy), var151 (ref)
+									return dictionary.removeKey(p23, var151)
+								end)
+							end
+						end
+						if fFlagExpChatMessagesStoreMemoryCleanupModule then
+							t_3[var151] = nil
+						end
+					end
+				end
+			end
+			writeByMessageId(var144.messageId, var144)
+			
+			if var144.userId then
+				local userId_1 = var144.userId
+				
+				local var152 = function(p23)
+					-- upvalues: fFlagExpChatMessagesStoreMemoryCleanupModule (copy), var144 (ref), list (copy)
+					local p24 = p23 or {}
+					local var153 = false
+					
+					if fFlagExpChatMessagesStoreMemoryCleanupModule then
+						for i, v in ipairs(p24) do
+							if v == var144.messageId then
+								var153 = true
+							end
+						end
+					else
+						for i, v in ipairs(p24) do
+							if v.messageId == var144.messageId then
+								local var153 = true
+								break
+							end
+						end
+					end
+					return if var153 then p24 else list.append(p24, if fFlagExpChatMessagesStoreMemoryCleanupModule then var144.messageId else var144)
+				end
+				
+				if fFlagExpChatMessagesStoreUseProxyModule then
+					var6[userId_1] = var152(var6[userId_1])
+				else
+					var5(function(p25)
+						-- upvalues: var152 (ref), userId_1 (ref), dictionary (copy)
+						local var154 = var152(p25[userId_1])
+						
+						return if var154 == nil then dictionary.removeKey(p25, userId_1) else dictionary.join(p25, { [userId_1] = var154 })
+					end)
+				end
+			end
+			local var154 = false
+			
+			if var144.isVisibleInChatWindow then
+				var8(function(p25)
+					-- upvalues: insertWindowMessageIdInOrder (copy), var144 (ref), var154 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy)
+					local var155 = insertWindowMessageIdInOrder(p25, var144.messageId, var144.isHistorical)
+					var154 = var154 or var155[#var155] ~= var144.messageId
+					
+					if fFlagExpChatMessageHistoryExperiment then
+						local var156 = capHistoricalPrefix(var155, var144)
+						var154 = var154 or #var156 < #var155
+						
+						return var156
+					end
+					return var155
+				end)
+				
+				if var145 then
+					var10(function(p25)
+						-- upvalues: var145 (write), insertWindowMessageIdInOrder (copy), var144 (ref), var154 (write), fFlagExpChatMessageHistoryExperiment (copy), capHistoricalPrefix (copy), dictionary (copy)
+						local var155 = insertWindowMessageIdInOrder(p25[var145] or {}, var144.messageId, var144.isHistorical)
+						var154 = var154 or var155[#var155] ~= var144.messageId
+						
+						if fFlagExpChatMessageHistoryExperiment then
+							var155 = capHistoricalPrefix(var155, var144)
+						end
+						return dictionary.join(p25, { [var145] = var155 })
+					end)
+				end
+				if fFlagExpChatEnableV2ChatWindowModule then
+					local var155 = var29(false)
+					
+					if if var155 ~= nil then var145 == var155 else true then
+						local messageId = var144.messageId
+						
+						if not var33 then
+							updateNextMessageComponent(messageId)
+						elseif var32 then
+							var33 = true
+						else
+							var31()
+						end
+					end
+				end
+			end
+		end
+		
+		if fFlagExpChatMessagesStoreBatchModule then
+			signalsExperimentalModule.batch(var138)
+			
+			return
+		end
+		var138()
+	end
+	
+	updateNextMessageComponent = function(p23)
 		-- upvalues: var23 (ref), var25 (ref), var26 (ref), t_1 (ref), fFlagEnableInExpChatRewriteModule (copy), t_2 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref), var28 (write), var27 (write)
-		local var146 = var23(false)
+		local var153 = var23(false)
 		
-		if #var146 == 0 then return end
-		local var147 = var25(false)
-		local var148 = var146[var147]
+		if #var153 == 0 then return end
+		local var154 = var25(false)
+		local var155 = var153[var154]
 		
-		if not var148 then
+		if not var155 then
 			var26(1)
 			
 			return
 		end
-		local var149 = t_1[var148]
+		local var156 = t_1[var155]
 		
-		if var149 then
-			var149.setter(p21)
+		if var156 then
+			var156.setter(p23)
 		end
-		local var150 = if fFlagEnableInExpChatRewriteModule then 10 else 1
-		local var151 = t_2[var148]
+		local var157 = if fFlagEnableInExpChatRewriteModule then 10 else 1
+		local var158 = t_2[var155]
 		
 		if fFlagExpChatRenderHistoricalMessagesModule then
-			local var152 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
-			local var153 = var152 and var152[p21]
+			local var159 = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1(false)
+			local var160 = var159 and var159[p23]
 			
-			if var153 ~= nil and var153.isHistorical == true then
-				var28 += var150
+			if var160 ~= nil and var160.isHistorical == true then
+				var28 += var157
 				
-				if var151 then
-					var151.setter(var28 + -1000000)
+				if var158 then
+					var158.setter(var28 + -1000000)
 				end
 			else
-				var27 += var150
+				var27 += var157
 				
-				if var151 then
-					var151.setter(var27)
+				if var158 then
+					var158.setter(var27)
 				end
 			end
-			var26(var147 % #var146 + 1)
+			var26(var154 % #var153 + 1)
 		end
 	end
 	
 	return {
 		getByMessageId = if fFlagExpChatMessagesStoreUseProxyModule then var3 else var1,
-		getMessages = if fFlagExpChatMessagesStoreMemoryCleanupModule then nil else createComputed(function(p21)
+		getMessages = if fFlagExpChatMessagesStoreMemoryCleanupModule then nil else createComputed(function(p23)
 			-- upvalues: fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var1 (ref)
-			local var146 = if fFlagExpChatMessagesStoreUseProxyModule then var3(p21) else var1(p21)
+			local var153 = if fFlagExpChatMessagesStoreUseProxyModule then var3(p23) else var1(p23)
 			
-			if not var146 then
+			if not var153 then
 				return {}
 			end
 			local t = {}
 			
-			for i, v in var146 do
+			for i, v in var153 do
 				table.insert(t, v)
 			end
 			return t
@@ -2883,58 +2980,58 @@ return function(p1)
 		getUserMessages = if fFlagExpChatMessagesStoreMemoryCleanupModule then nil else getUserMessages,
 		getUserBubbleMessages = getUserBubbleMessages,
 		getUserLastMessage = if fFlagExpChatMessagesStoreMemoryCleanupModule then nil else getUserLastMessage,
-		registerMessageComponent = function(p22)
+		registerMessageComponent = function(p24)
 			-- upvalues: t_1 (ref), createSignal (copy), t_2 (ref), var24 (ref), list (copy)
-			if not t_1[p22] then
-				local var147, var148 = createSignal(nil)
-				t_1[p22] = { getter = var147, setter = var148 }
-				local var149, var150 = createSignal(0)
-				t_2[p22] = { getter = var149, setter = var150 }
-				var24(function(p23)
-					-- upvalues: list (copy), p22 (ref)
-					return list.append(p23, p22)
+			if not t_1[p24] then
+				local var154, var155 = createSignal(nil)
+				t_1[p24] = { getter = var154, setter = var155 }
+				local var156, var157 = createSignal(0)
+				t_2[p24] = { getter = var156, setter = var157 }
+				var24(function(p25)
+					-- upvalues: list (copy), p24 (ref)
+					return list.append(p25, p24)
 				end)
 			end
-			return t_1[p22].getter
+			return t_1[p24].getter
 		end,
-		unregisterMessageComponent = function(p22)
+		unregisterMessageComponent = function(p24)
 			-- upvalues: var23 (ref), t_1 (ref), t_2 (ref), var24 (ref), list (copy), var25 (ref), var26 (ref), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
-			local var147 = nil
+			local var154 = nil
 			
 			for i, v in ipairs(var23(false)) do
-				if v == p22 then
-					var147 = i
+				if v == p24 then
+					var154 = i
 					break
 				end
 			end
-			if t_1[p22] then
-				t_1[p22] = nil
+			if t_1[p24] then
+				t_1[p24] = nil
 			end
-			if t_2[p22] then
-				t_2[p22] = nil
+			if t_2[p24] then
+				t_2[p24] = nil
 			end
-			if var147 then
+			if var154 then
 				local function doUnregister()
-					-- upvalues: var24 (copy), list (copy), p22 (ref), var23 (copy), var25 (copy), var26 (copy), var147 (write)
-					var24(function(p23)
-						-- upvalues: list (copy), p22 (copy)
-						return list.filter(p23, function(p24)
-							-- upvalues: p22 (copy)
-							return p24 ~= p22
+					-- upvalues: var24 (copy), list (copy), p24 (ref), var23 (copy), var25 (copy), var26 (copy), var154 (write)
+					var24(function(p25)
+						-- upvalues: list (copy), p24 (copy)
+						return list.filter(p25, function(p26)
+							-- upvalues: p24 (copy)
+							return p26 ~= p24
 						end)
 					end)
-					local var148 = var23(false)
-					local var149 = var25(false)
+					local var155 = var23(false)
+					local var156 = var25(false)
 					
-					if #var148 == 0 then
+					if #var155 == 0 then
 						var26(1)
 						
 						return
-					elseif var147 < var149 then
-						var26(var149 - 1)
+					elseif var154 < var156 then
+						var26(var156 - 1)
 						
 						return
-					elseif #var148 < var149 then
+					elseif #var155 < var156 then
 						var26(1)
 					end
 				end
@@ -2950,24 +3047,24 @@ return function(p1)
 			-- upvalues: var29 (ref), var9 (ref), var7 (ref), var26 (ref), var27 (write), var28 (write), updateNextMessageComponent (write), var23 (ref), var25 (ref), t_1 (ref), fFlagExpChatMessagesStoreBatchModule (copy), signalsExperimentalModule (copy)
 			local function doRepopulate()
 				-- upvalues: var29 (copy), var9 (copy), var7 (copy), var26 (copy), var27 (copy), var28 (copy), updateNextMessageComponent (copy), var23 (copy), var25 (copy), t_1 (copy)
-				local var148 = var29(false)
+				local var155 = var29(false)
 				local _ = nil
-				local var149 = if var148 then var9(false)[var148] or {} else var7(false)
+				local var156 = if var155 then var9(false)[var155] or {} else var7(false)
 				var26(1)
 				var27 = 0
 				var28 = 0
 				
-				for i, v in ipairs(var149) do
+				for i, v in ipairs(var156) do
 					updateNextMessageComponent(v)
 				end
-				local var150 = var23(false)
+				local var157 = var23(false)
 				
-				if #var149 < #var150 then
-					for i_1 = var25(false), #var150 do
-						local var151 = t_1[var150[i_1]]
+				if #var156 < #var157 then
+					for i_1 = var25(false), #var157 do
+						local var158 = t_1[var157[i_1]]
 						
-						if var151 then
-							var151.setter(nil)
+						if var158 then
+							var158.setter(nil)
 						end
 					end
 				end
@@ -2982,15 +3079,15 @@ return function(p1)
 		end,
 		getMessageComponentSignal = function(value)
 			-- upvalues: t_1 (ref)
-			local var152 = t_1[value]
+			local var159 = t_1[value]
 			
-			return if var152 then var152.getter else nil
+			return if var159 then var159.getter else nil
 		end,
 		getLayoutOrderSignal = function(value)
 			-- upvalues: t_2 (ref)
-			local var152 = t_2[value]
+			local var159 = t_2[value]
 			
-			return if var152 then var152.getter else nil
+			return if var159 then var159.getter else nil
 		end,
 		updateNextMessageComponent = updateNextMessageComponent,
 		getMessageComponentRingBuffer = var23,
@@ -3008,34 +3105,34 @@ return function(p1)
 		batchWrites = batchWrites,
 		handleIncomingBubbleChatMessage = handleIncomingBubbleChatMessage,
 		handleLegacyBubbleCreated = handleLegacyBubbleCreated,
-		handleLegacyBubbleTextUpdated = function(p23, p24)
+		handleLegacyBubbleTextUpdated = function(p25, p26)
 			-- upvalues: dictionary (copy), fFlagExpChatMessagesStoreUseProxyModule (copy), var3 (ref), var2 (ref)
-			local var152 = function(p25)
-				-- upvalues: dictionary (copy), p24 (ref)
-				return dictionary.join(p25, { text = p24 })
+			local var159 = function(p27)
+				-- upvalues: dictionary (copy), p26 (ref)
+				return dictionary.join(p27, { text = p26 })
 			end
 			
 			if fFlagExpChatMessagesStoreUseProxyModule then
-				local var153 = var3[p23]
+				local var160 = var3[p25]
 				
-				if var153 then
-					local var154 = dictionary.join(var153, { text = p24 })
+				if var160 then
+					local var161 = dictionary.join(var160, { text = p26 })
 					
-					if var154 then
-						var3[p23] = var154
+					if var161 then
+						var3[p25] = var161
 						
 						return
 					end
 				end
 			else
-				var2(function(p25)
-					-- upvalues: p23 (ref), var152 (ref), dictionary (copy)
-					if p25 and p25[p23] then
-						local var155 = var152(p25[p23])
+				var2(function(p27)
+					-- upvalues: p25 (ref), var159 (ref), dictionary (copy)
+					if p27 and p27[p25] then
+						local var162 = var159(p27[p25])
 						
-						return if var155 then dictionary.join(p25, { [p23] = var155 }) else p25
+						return if var162 then dictionary.join(p27, { [p25] = var162 }) else p27
 					end
-					return p25 or {}
+					return p27 or {}
 				end)
 			end
 		end,

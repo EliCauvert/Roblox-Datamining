@@ -287,6 +287,7 @@ return {
 	FFlagExpChatDictationStopOnSafetyIntervention = require(script.FFlagExpChatDictationStopOnSafetyIntervention),
 	FFlagExpChatIgnoreHistoricalMessages = require(script.FFlagExpChatIgnoreHistoricalMessages),
 	FFlagExpChatRenderHistoricalMessages = require(script.FFlagExpChatRenderHistoricalMessages),
+	FFlagExpChatMessageHistoryExperiment = require(script.FFlagExpChatMessageHistoryExperiment),
 	EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = game:GetEngineFeature("PresetChatUseExpressionTrayOptionsEndpoint"),
 	FFlagAddFriendsSessionId = game:DefineFastFlag("AddFriendsSessionId", false),
 	FFlagFriendsPageViewBtnEnabled = require(script.FFlagFriendsPageViewBtnEnabled),

@@ -7,6 +7,7 @@ local signalsReactModule = require(parent.SignalsReact)
 local _ = require(parent.Signals)
 local sharedFlagsModule = require(parent.SharedFlags)
 local configModule = require(expChat.Config)
+local advanceHistoryScrollModule = require(script.Parent.advanceHistoryScroll)
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local debounceModule = require(expChat.ChatWindow.Helpers.debounce)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
@@ -16,6 +17,7 @@ local expChatWindowScrollV3Debounce = game:DefineFastInt("ExpChatWindowScrollV3D
 local fFlagExpChatLimitScrollingV2WindowModule = require(expChat.Flags.FFlagExpChatLimitScrollingV2Window)
 local fFlagExpChatScrollbarInsetModule = require(expChat.Flags.FFlagExpChatScrollbarInset)
 local fFlagExpChatFixWarmMountBottomLockModule = require(expChat.Flags.FFlagExpChatFixWarmMountBottomLock)
+local fFlagExpChatRenderHistoricalMessagesModule = require(expChat.Flags.FFlagExpChatRenderHistoricalMessages)
 local expChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
 local fFlagExpChatPerfTrackerTabName = require(parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
 local _ = require(parent.SocialLuaAnalytics)
@@ -39,7 +41,7 @@ local var2 = debounceModule(function()
 end, expChatWindowScrollV3Debounce)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), fFlagFriendsChatOsaSystemMessage (ref), signalsReactModule (ref), userInputService (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), var1 (ref), getFFlagExpChatSendWindowScrollEventModule (ref), var2 (ref), fFlagExpChatEnableFriendsTab (ref), configModule (ref), fFlagExpChatScrollbarInsetModule (ref), fFlagExpChatLimitScrollingV2WindowModule (ref), fFlagExpChatFixWarmMountBottomLockModule (ref)
+	-- upvalues: useStyle (ref), reactModule (ref), fFlagFriendsChatOsaSystemMessage (ref), signalsReactModule (ref), userInputService (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), var1 (ref), getFFlagExpChatSendWindowScrollEventModule (ref), var2 (ref), fFlagExpChatEnableFriendsTab (ref), fFlagExpChatRenderHistoricalMessagesModule (ref), advanceHistoryScrollModule (ref), configModule (ref), fFlagExpChatScrollbarInsetModule (ref), fFlagExpChatLimitScrollingV2WindowModule (ref), fFlagExpChatFixWarmMountBottomLockModule (ref)
 	local theme = useStyle().Theme
 	local var3 = reactModule.useRef(nil)
 	local var4 = fFlagFriendsChatOsaSystemMessage and p1.scrollToTopOnReset == true
@@ -49,8 +51,9 @@ return reactModule.memo(function(p1)
 	local var8 = reactModule.useRef(nil)
 	local var9, var10 = reactModule.useBinding(false)
 	local var11 = reactModule.useRef(false)
-	local var12 = signalsReactModule.useSignalState(p1.messageComponentsSignal)
-	local var13 = reactModule.useCallback(function()
+	local var12 = reactModule.useRef({ canvasHeight = nil, historicalCount = 0 })
+	local var13 = signalsReactModule.useSignalState(p1.messageComponentsSignal)
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: userInputService (copy), var10 (ref), var11 (ref)
 		local preferredInput = userInputService.PreferredInput
 		
@@ -61,7 +64,7 @@ return reactModule.memo(function(p1)
 			var11.current = true
 		end
 	end, { userInputService.PreferredInput })
-	local var14 = reactModule.useCallback(function()
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: userInputService (copy), var10 (ref), var11 (ref), var8 (ref), var6 (ref), var3 (ref), var7 (ref)
 		local preferredInput = userInputService.PreferredInput
 		
@@ -78,26 +81,26 @@ return reactModule.memo(function(p1)
 			end
 		end
 	end, { userInputService.PreferredInput })
-	local var15 = reactModule.useRef(nil)
+	local var16 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var15 (ref)
+		-- upvalues: var16 (ref)
 		return function()
-			-- upvalues: var15 (copy)
-			if var15.current then
-				var15.current.cleanup()
+			-- upvalues: var16 (copy)
+			if var16.current then
+				var16.current.cleanup()
 			end
 		end
 	end, {})
-	local var16 = reactModule.useRef(p1.selectedChannelName)
-	var16.current = p1.selectedChannelName
-	local var17 = reactModule.useCallback(function(p2)
-		-- upvalues: var15 (ref), var16 (ref), expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), var5 (ref), var1 (copy), getFFlagExpChatSendWindowScrollEventModule (copy), var2 (copy), fFlagExpChatEnableFriendsTab (copy), p1 (ref)
-		if var15.current == nil then
-			local current = var16.current
-			var15.current = expChatPerfTracker.startChatWindowScrollInterval(expChatPerfTracker.Events.ChatWindowScrollInterval, p2, {}, if fFlagExpChatPerfTrackerTabName and current then { tabName = current } else nil)
+	local var17 = reactModule.useRef(p1.selectedChannelName)
+	var17.current = p1.selectedChannelName
+	local var18 = reactModule.useCallback(function(p2)
+		-- upvalues: var16 (ref), var17 (ref), expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), var5 (ref), var1 (copy), getFFlagExpChatSendWindowScrollEventModule (copy), var2 (copy), fFlagExpChatEnableFriendsTab (copy), p1 (ref)
+		if var16.current == nil then
+			local current = var17.current
+			var16.current = expChatPerfTracker.startChatWindowScrollInterval(expChatPerfTracker.Events.ChatWindowScrollInterval, p2, {}, if fFlagExpChatPerfTrackerTabName and current then { tabName = current } else nil)
 		end
-		if var15.current then
-			var15.current.onScrollTick()
+		if var16.current then
+			var16.current.onScrollTick()
 		end
 		local absoluteWindowSize = p2.AbsoluteWindowSize
 		local absoluteCanvasSize = p2.AbsoluteCanvasSize
@@ -112,7 +115,7 @@ return reactModule.memo(function(p1)
 	end, {
 		if fFlagExpChatEnableFriendsTab then p1.onCanvasPositionChanged else nil
 	})
-	local var18 = reactModule.useCallback(function(p2)
+	local var19 = reactModule.useCallback(function(p2)
 		-- upvalues: var5 (ref), var11 (ref)
 		if var5.current and not var11.current then
 			p2.CanvasPosition = Vector2.new(0, 9007199254740992)
@@ -126,7 +129,7 @@ return reactModule.memo(function(p1)
 			var7.current = false
 			var8.current = nil
 		end
-		local var19 = scrollResetKey and (p1.isChannelBarVisible and (not var4 and not var7.current))
+		local var20 = scrollResetKey and (p1.isChannelBarVisible and (not var4 and not var7.current))
 		
 		if scrollResetKey and (var4 and not var7.current) then
 			var5.current = false
@@ -141,7 +144,7 @@ return reactModule.memo(function(p1)
 			var8.current = nil
 			
 			return
-		elseif var19 then
+		elseif var20 then
 			var5.current = true
 			
 			if not var11.current and var3.current then
@@ -150,37 +153,46 @@ return reactModule.memo(function(p1)
 		end
 	end, { scrollResetKey, p1.isChannelBarVisible, var4 })
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var5 (ref), var11 (ref)
+		-- upvalues: var3 (ref), p1 (ref), fFlagExpChatRenderHistoricalMessagesModule (copy), advanceHistoryScrollModule (copy), var12 (ref), var5 (ref), var11 (ref)
 		local current = var3.current
 		
 		if current then
-			local var19 = current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
-				-- upvalues: var5 (copy), var11 (copy), var3 (copy)
+			local historicalMessageCountSignal = p1.historicalMessageCountSignal
+			local var20 = current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
+				-- upvalues: fFlagExpChatRenderHistoricalMessagesModule (copy), historicalMessageCountSignal (ref), advanceHistoryScrollModule (copy), var12 (copy), current (ref), var5 (copy), var11 (copy), var3 (copy)
+				if fFlagExpChatRenderHistoricalMessagesModule and historicalMessageCountSignal then
+					local var21 = advanceHistoryScrollModule(var12.current, current.AbsoluteCanvasSize.Y, historicalMessageCountSignal(false))
+					
+					if var21 > 0 and not var5.current and not var11.current then
+						current.CanvasPosition += Vector2.new(0, var21)
+					end
+				end
 				if var5.current and not var11.current and var3.current then
 					var3.current.CanvasPosition = Vector2.new(0, 9007199254740992)
 				end
 			end)
 			
 			return function()
-				-- upvalues: var19 (ref)
-				var19:Disconnect()
+				-- upvalues: var20 (ref)
+				var20:Disconnect()
 			end
 		end
 	end, {
 		var5.current,
 		var11.current,
 		var3.current,
-		scrollResetKey
+		scrollResetKey,
+		p1.historicalMessageCountSignal
 	})
-	local var19 = if fFlagExpChatEnableFriendsTab and type(p1.contentTopPadding) == "number" then UDim.new(0, p1.contentTopPadding) elseif fFlagExpChatEnableFriendsTab and p1.contentTopPadding ~= nil then p1.contentTopPadding:map(function(p2)
+	local var20 = if fFlagExpChatEnableFriendsTab and type(p1.contentTopPadding) == "number" then UDim.new(0, p1.contentTopPadding) elseif fFlagExpChatEnableFriendsTab and p1.contentTopPadding ~= nil then p1.contentTopPadding:map(function(p2)
 		return UDim.new(0, p2)
 	end) else nil
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = p1.Size,
-		[reactModule.Event.InputBegan] = var13,
-		[reactModule.Event.InputEnded] = var14
+		[reactModule.Event.InputBegan] = var14,
+		[reactModule.Event.InputEnded] = var15
 	}, {
 		padding = reactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, 0),
@@ -203,11 +215,11 @@ return reactModule.memo(function(p1)
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			CanvasSize = UDim2.new(),
-			[reactModule.Change.CanvasPosition] = var17,
-			[reactModule.Change.AbsoluteWindowSize] = if fFlagExpChatFixWarmMountBottomLockModule then var18 else nil
+			[reactModule.Change.CanvasPosition] = var18,
+			[reactModule.Change.AbsoluteWindowSize] = if fFlagExpChatFixWarmMountBottomLockModule then var19 else nil
 		}, if fFlagExpChatEnableFriendsTab then {
-			contentPadding = if var19 ~= nil then nil else reactModule.createElement("UIPadding", { PaddingTop = var19 }),
-			messages = reactModule.createElement(reactModule.Fragment, nil, var12)
-		} else var12)
+			contentPadding = if var20 ~= nil then nil else reactModule.createElement("UIPadding", { PaddingTop = var20 }),
+			messages = reactModule.createElement(reactModule.Fragment, nil, var13)
+		} else var13)
 	})
 end)

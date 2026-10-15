@@ -93,6 +93,7 @@ return {
 	AccessLayer = "Experimentation.ExposureTest.AccessLayer",
 	GridUILayer = "PlayerApp.GridUI",
 	ExpChatHiddenMessagesExpLayer = "ExperienceChat.HiddenMessages",
+	ExpChatMessageHistoryLayer = "ExperienceChat.MessageHistory",
 	ExpChatSystemMessagesExpLayer = "ExperienceChat.SystemMessages",
 	ExpChatTabOrderLayer = "ExperienceChat.TabOrder",
 	ExpChatPresetChatLayer = "UniverseChat.PresetChat",
