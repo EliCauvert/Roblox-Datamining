@@ -22,7 +22,7 @@ return function(p1)
 	local var3 = usePreferredInputModule()
 	local var4 = useTokens()
 	local fFlagMomentsAlignFeedNavArrowsWithHeaderModule = require(moments.Flags.FFlagMomentsAlignFeedNavArrowsWithHeader)
-	local var5 = if fFlagMomentsAlignFeedNavArrowsWithHeaderModule and require(moments.Flags.FFlagMomentsUseFoundationHeaderBar) then require(parent.AppComposition).useCompositionLayout() else nil
+	local var5 = if fFlagMomentsAlignFeedNavArrowsWithHeaderModule then require(parent.AppComposition).useCompositionLayout() else nil
 	
 	return if var2 == formFactor.MobileLandscape then nil elseif not (var3 ~= Enum.PreferredInput.KeyboardAndMouse and not (if var3 ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and var3 == Enum.PreferredInput.MicroGamepad else true)) then if p1.active then reactModule.createElement(view, {
 		tag = "size-full",

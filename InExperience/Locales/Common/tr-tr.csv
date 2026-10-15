@@ -2008,6 +2008,7 @@ Feature.Build.Analytics.Description.PayerConversion,"Ödeme yapan kişiye dönü
 Feature.Build.Analytics.Description.PlaythroughRate,"Oynama oranı, tam bir oyun oturumunun tamamlandığı ziyaretlerin yüzdesidir. Daha yüksek oranlar, oyuncuların deneyimini başlaması kolay ve bitirmeye değer bulduğunu gösterir."
 Feature.Build.Analytics.Description.TotalPlaytime,"Toplam oynama süresi, tüm oyuncuların belirli bir süre boyunca deneyiminde geçirdiği sürenin toplamıdır. Oynama süresinin artması genellikle daha ilgi çekici oturumlara işaret eder."
 Feature.Build.Analytics.DurationHours,{number} sa.
+Feature.Build.Analytics.DurationMinutes,{number} dakika
 Feature.Build.Analytics.Goal.Action.CreateAd,Bir reklam oluştur
 Feature.Build.Analytics.Goal.Action.SellItems,Öğeleri sat
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Arkadaşlarla paylaş
@@ -3617,7 +3618,7 @@ Feature.InExperienceShop.Label.Timer.Day.Plural,{number} gün
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,{number} saat
 Feature.InExperienceShop.Label.Timer.Hour.Singular,1 saat
-Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} dakika
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 dakika
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} saniye
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 saniye

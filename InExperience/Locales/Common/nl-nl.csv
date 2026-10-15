@@ -2003,6 +2003,7 @@ Feature.Build.Analytics.Description.PayerConversion,De conversie van betalende g
 Feature.Build.Analytics.Description.PlaythroughRate,Het playthrough-percentage is het percentage bezoeken waarbij een volledige speelsessie is voltooid. Hogere percentages wijzen erop dat spelers je ervaring gemakkelijk toegankelijk vinden en het de moeite waard vinden om te voltooien.
 Feature.Build.Analytics.Description.TotalPlaytime,De totale speeltijd is de som van de tijd die alle spelers gedurende de periode in je ervaring hebben doorgebracht. Een toenemende speeltijd duidt meestal op boeiendere sessies.
 Feature.Build.Analytics.DurationHours,{number} uur
+Feature.Build.Analytics.DurationMinutes,{number} minuten
 Feature.Build.Analytics.Goal.Action.CreateAd,Een advertentie maken
 Feature.Build.Analytics.Goal.Action.SellItems,Items verkopen
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Delen met vrienden
@@ -3612,7 +3613,7 @@ Feature.InExperienceShop.Label.Timer.Day.Plural,{number} dagen
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 dag
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
 Feature.InExperienceShop.Label.Timer.Hour.Singular,1 uur
-Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} minuten
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minuut
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde

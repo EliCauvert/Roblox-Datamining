@@ -9,8 +9,10 @@ local function formatNumber(p1, p2, p3)
 end
 
 return function(p1, p2, p3, p4)
-	-- upvalues: analyticsUnitModule (ref), formatNumber (ref), roundToDecimalsModule (ref), numberLocalization (ref)
-	if p2 == analyticsUnitModule.Percent then
+	-- upvalues: analyticsUnitModule (ref), numberLocalization (ref), formatNumber (ref), roundToDecimalsModule (ref)
+	if p2 == analyticsUnitModule.Minutes then
+		return numberLocalization.localizeDecimal(p1, p4, 2)
+	elseif p2 == analyticsUnitModule.Percent then
 		return formatNumber(p1 * 100, p3, p4)
 	elseif p2 ~= analyticsUnitModule.Temporal then
 		return formatNumber(p1, p3, p4)

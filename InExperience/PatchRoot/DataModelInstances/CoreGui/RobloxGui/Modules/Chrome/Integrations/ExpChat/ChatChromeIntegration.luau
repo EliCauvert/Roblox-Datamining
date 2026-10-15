@@ -29,7 +29,9 @@ end
 local chatVisible
 local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
 local focusNavigationStore = expChatModule.Stores.GetFocusNavigationStore(false)
+local getMessagesStore = expChatModule.Stores.GetMessagesStore
 local shouldSkipHistoricalMessage = expChatModule.shouldSkipHistoricalMessage
+local isHistoricalMessage = expChatModule.isHistoricalMessage
 local shouldSuppressUnreadForTabMetadata = expChatModule.shouldSuppressUnreadForTabMetadata
 local getFriendsChatIconUnreadStoreModule = require(corePackagesService.Workspace.Packages.FriendsChat.GetFriendsChatIconUnreadStore)
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
@@ -39,6 +41,7 @@ local fFlagExpChatInitializeWindowFromGameSettings = sharedFlagsModule.FFlagExpC
 local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
+local fFlagExpChatHistoricalMessagesUnibarUnread = sharedFlagsModule.FFlagExpChatHistoricalMessagesUnibarUnread
 local inExperienceAppChatModalModule = require(corePackagesService.Workspace.Packages.AppChat.InExperienceAppChatModal)
 local chatSelectorModule = require(robloxGui.Modules.ChatSelector)
 local getExperienceChatVisualConfig = require(corePackagesService.Workspace.Packages.ExpChat).getExperienceChatVisualConfig
@@ -63,26 +66,59 @@ else
 end
 local var2 = nil
 local visibilityStateChanged = chatSelectorModule.VisibilityStateChanged
+local var3 = 0
+local var4 = false
+
+local function _(p1)
+	-- upvalues: getMessagesStore (ref)
+	local getHistoricalWindowMessageCount = getMessagesStore(p1).getHistoricalWindowMessageCount
+	
+	return if getHistoricalWindowMessageCount then getHistoricalWindowMessageCount(p1) else 0
+end
+
+local _ = function()
+	-- upvalues: getMessagesStore (ref), var3 (write)
+	local getHistoricalWindowMessageCount = getMessagesStore(false).getHistoricalWindowMessageCount
+	local var5 = if getHistoricalWindowMessageCount then getHistoricalWindowMessageCount(false) else 0
+	var3 = math.min(var3, var5)
+	
+	return var5 - var3
+end
+
+local _ = function()
+	-- upvalues: var3 (write), getMessagesStore (ref)
+	local getHistoricalWindowMessageCount = getMessagesStore(false).getHistoricalWindowMessageCount
+	var3 = if getHistoricalWindowMessageCount then getHistoricalWindowMessageCount(false) else 0
+end
 
 local function updateUnreadNotification()
-	-- upvalues: var2 (write), fFlagExpChatEnableFriendsTab (ref), var1 (write), getFriendsChatIconUnreadStoreModule (ref), chatVisible (write)
+	-- upvalues: var2 (write), fFlagExpChatHistoricalMessagesUnibarUnread (ref), getMessagesStore (ref), var3 (write), fFlagExpChatEnableFriendsTab (ref), var1 (write), getFriendsChatIconUnreadStoreModule (ref), chatVisible (write)
+	local var5
 	if not var2.notification then return end
+	if fFlagExpChatHistoricalMessagesUnibarUnread then
+		local getHistoricalWindowMessageCount = getMessagesStore(false).getHistoricalWindowMessageCount
+		local var6 = if getHistoricalWindowMessageCount then getHistoricalWindowMessageCount(false) else 0
+		var3 = math.min(var3, var6)
+		var5 = var6 - var3
+	else
+		var5 = 0
+	end
 	if not fFlagExpChatEnableFriendsTab then
-		var2.notification:fireCount(var1)
+		var2.notification:fireCount(var1 + var5)
 		
 		return
 	end
-	local var3 = var1 + getFriendsChatIconUnreadStoreModule(false).getUnreadCountToDisplay(false)
+	local var7 = var1 + getFriendsChatIconUnreadStoreModule(false).getUnreadCountToDisplay(false) + var5
 	
-	if chatVisible or var3 == 0 then
+	if chatVisible or var7 == 0 then
 		var2.notification:clear()
 		
 		return
 	end
-	var2.notification:fireCount(var3)
+	var2.notification:fireCount(var7)
 end
 
-local function _()
+local _ = function()
 	-- upvalues: runService (ref), chatService (ref), playersService (ref)
 	if runService:IsStudio() then
 		return true
@@ -124,11 +160,11 @@ if fFlagExpChatWindowSyncUnibar then
 	end)
 	default.setGameSettingsChatVisible(gameSettings.ChatVisible)
 end
-local var3 = mappedSignal.new(visibilityStateChanged, function()
+local var5 = mappedSignal.new(visibilityStateChanged, function()
 	-- upvalues: chatVisible (write)
 	return chatVisible
 end, function()
-	-- upvalues: chatSelectorModule (ref), expChatUnibarAvailabilityRefactor (ref), runService (ref), chatService (ref), playersService (ref), var2 (write), guiService (ref), gameSettings (ref), chatVisible (write), fFlagExpChatEnableFriendsTab (ref), var1 (write), getFriendsChatIconUnreadStoreModule (ref), updateUnreadNotification (ref)
+	-- upvalues: chatSelectorModule (ref), expChatUnibarAvailabilityRefactor (ref), runService (ref), chatService (ref), playersService (ref), var2 (write), guiService (ref), gameSettings (ref), chatVisible (write), var4 (write), fFlagExpChatEnableFriendsTab (ref), var1 (write), fFlagExpChatHistoricalMessagesUnibarUnread (ref), var3 (write), getMessagesStore (ref), getFriendsChatIconUnreadStoreModule (ref), updateUnreadNotification (ref)
 	local visibility = chatSelectorModule.GetVisibility()
 	
 	if not expChatUnibarAvailabilityRefactor and not visibility then
@@ -150,10 +186,16 @@ end, function()
 		gameSettings.ChatVisible = visibility
 	end
 	chatVisible = visibility
+	var4 = true
 	
 	if fFlagExpChatEnableFriendsTab then
 		if visibility then
 			var1 = 0
+			
+			if fFlagExpChatHistoricalMessagesUnibarUnread then
+				local getHistoricalWindowMessageCount = getMessagesStore(false).getHistoricalWindowMessageCount
+				var3 = if getHistoricalWindowMessageCount then getHistoricalWindowMessageCount(false) else 0
+			end
 			getFriendsChatIconUnreadStoreModule(false).clearDisplayCount()
 		end
 		updateUnreadNotification()
@@ -161,6 +203,11 @@ end, function()
 		return
 	elseif visibility and var1 and var2.notification then
 		var1 = 0
+		
+		if fFlagExpChatHistoricalMessagesUnibarUnread then
+			local getHistoricalWindowMessageCount = getMessagesStore(false).getHistoricalWindowMessageCount
+			var3 = if getHistoricalWindowMessageCount then getHistoricalWindowMessageCount(false) else 0
+		end
 		var2.notification:clear()
 	end
 end)
@@ -266,16 +313,16 @@ function t.activated(_)
 	end)
 end
 
-t.isActivated = var3
+t.isActivated = var5
 t.selected = if fFlagEnableConsoleExpControls then function(p1)
 	-- upvalues: serviceModule (ref), userInputService (ref), gamepadUtils (ref), focusSelectExpChatModule (ref), var2 (write)
-	local var4 = nil
+	local var6 = nil
 	local inputChangedConnection = nil
 	local inputBeganConnection = nil
-	var4 = serviceModule:selectedItem():connect(function(p2)
-		-- upvalues: p1 (ref), var4 (write), inputChangedConnection (write), inputBeganConnection (write)
+	var6 = serviceModule:selectedItem():connect(function(p2)
+		-- upvalues: p1 (ref), var6 (write), inputChangedConnection (write), inputBeganConnection (write)
 		assert(p2 ~= p1.id, "Expected selectedId to not be self.id on selection")
-		var4:disconnect()
+		var6:disconnect()
 		inputChangedConnection:Disconnect()
 		inputBeganConnection:Disconnect()
 	end)
@@ -296,10 +343,10 @@ t.selected = if fFlagEnableConsoleExpControls then function(p1)
 end else nil
 t.components = {
 	Icon = function(_)
-		-- upvalues: getExperienceChatVisualConfig (ref), commonIconModule (ref), var3 (ref)
-		local var4 = getExperienceChatVisualConfig()
+		-- upvalues: getExperienceChatVisualConfig (ref), commonIconModule (ref), var5 (ref)
+		local var6 = getExperienceChatVisualConfig()
 		
-		return commonIconModule(var4.icon.off, var4.icon.on, var3)
+		return commonIconModule(var6.icon.off, var6.icon.on, var5)
 	end
 }
 var2 = serviceModule:register(t)
@@ -343,75 +390,94 @@ if fFlagExpChatEnableFriendsTab then
 		updateUnreadNotification()
 	end)
 end
-local _ = function(p1)
-	-- upvalues: shouldSkipHistoricalMessage (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref)
-	local var4
-	if p1 ~= nil then
-		var4 = shouldSkipHistoricalMessage(p1)
+if fFlagExpChatHistoricalMessagesUnibarUnread then
+	signalsUtilsModule.createDetachedEffect(function(p1)
+		-- upvalues: getMessagesStore (ref), var4 (write), chatVisible (write), var3 (write), updateUnreadNotification (ref)
+		local getHistoricalWindowMessageCount = getMessagesStore(p1).getHistoricalWindowMessageCount
+		local _ = if getHistoricalWindowMessageCount then getHistoricalWindowMessageCount(p1) else 0
 		
-		if not var4 then
-			var4 = expChatSuppressWelcomeMessageUnibarUnread
+		if var4 and chatVisible then
+			local getHistoricalWindowMessageCount_1 = getMessagesStore(false).getHistoricalWindowMessageCount
+			var3 = if getHistoricalWindowMessageCount_1 then getHistoricalWindowMessageCount_1(false) else 0
+		end
+		updateUnreadNotification()
+	end)
+end
+local _ = function(p1)
+	-- upvalues: fFlagExpChatHistoricalMessagesUnibarUnread (ref), isHistoricalMessage (ref), shouldSkipHistoricalMessage (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref)
+	local var6
+	if fFlagExpChatHistoricalMessagesUnibarUnread and isHistoricalMessage(p1) then
+		return true
+	elseif p1 ~= nil then
+		var6 = shouldSkipHistoricalMessage(p1)
+		
+		if not var6 then
+			var6 = expChatSuppressWelcomeMessageUnibarUnread
 			
-			if var4 then
-				var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
+			if var6 then
+				var6 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
 			end
 		end
-		return var4
+		return var6
 	end
 end
 
 textChatService.MessageReceived:Connect(function(p1)
-	-- upvalues: getTextChannelDisplayMode (ref), shouldRenderTextChannelInDefaultWindow (ref), shouldSkipHistoricalMessage (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), chatVisible (write), var1 (write), updateUnreadNotification (ref)
-	local var4
+	-- upvalues: getTextChannelDisplayMode (ref), shouldRenderTextChannelInDefaultWindow (ref), fFlagExpChatHistoricalMessagesUnibarUnread (ref), isHistoricalMessage (ref), shouldSkipHistoricalMessage (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), chatVisible (write), var1 (write), updateUnreadNotification (ref)
+	local var6
 	if not shouldRenderTextChannelInDefaultWindow(p1.TextChannel, getTextChannelDisplayMode()) then return end
-	if p1 ~= nil then
-		var4 = shouldSkipHistoricalMessage(p1)
+	if fFlagExpChatHistoricalMessagesUnibarUnread and isHistoricalMessage(p1) then
+		var6 = true
+	elseif p1 ~= nil then
+		var6 = shouldSkipHistoricalMessage(p1)
 		
-		if not var4 then
-			var4 = expChatSuppressWelcomeMessageUnibarUnread
+		if not var6 then
+			var6 = expChatSuppressWelcomeMessageUnibarUnread
 			
-			if var4 then
-				var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
+			if var6 then
+				var6 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
 			end
 		end
-		if var4 then return end
-		if not chatVisible then
-			var1 += 1
-			updateUnreadNotification()
-		end
+	end
+	if var6 then return end
+	if not chatVisible then
+		var1 += 1
+		updateUnreadNotification()
 	end
 end)
 
 if getFFlagTextChatEnableUniverseChatTabs() then
 	textChatService.UniverseChatMessageReceived:Connect(function(p1)
-		-- upvalues: shouldSkipHistoricalMessage (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), chatVisible (write), var1 (write), updateUnreadNotification (ref)
-		local var4
-		if p1 ~= nil then
-			var4 = shouldSkipHistoricalMessage(p1)
+		-- upvalues: fFlagExpChatHistoricalMessagesUnibarUnread (ref), isHistoricalMessage (ref), shouldSkipHistoricalMessage (ref), expChatSuppressWelcomeMessageUnibarUnread (ref), shouldSuppressUnreadForTabMetadata (ref), chatVisible (write), var1 (write), updateUnreadNotification (ref)
+		local var6
+		if fFlagExpChatHistoricalMessagesUnibarUnread and isHistoricalMessage(p1) then
+			var6 = true
+		elseif p1 ~= nil then
+			var6 = shouldSkipHistoricalMessage(p1)
 			
-			if not var4 then
-				var4 = expChatSuppressWelcomeMessageUnibarUnread
+			if not var6 then
+				var6 = expChatSuppressWelcomeMessageUnibarUnread
 				
-				if var4 then
-					var4 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
+				if var6 then
+					var6 = shouldSuppressUnreadForTabMetadata(p1 and p1.Metadata)
 				end
 			end
-			if var4 then return end
-			if not chatVisible then
-				var1 += 1
-				updateUnreadNotification()
-			end
+		end
+		if var6 then return end
+		if not chatVisible then
+			var1 += 1
+			updateUnreadNotification()
 		end
 	end)
 end
-local var4 = 0
+local var6 = 0
 chatSelectorModule.MessagesChanged:connect(function(p1)
-	-- upvalues: chatVisible (write), var1 (write), var4 (write), updateUnreadNotification (ref)
+	-- upvalues: chatVisible (write), var1 (write), var6 (write), updateUnreadNotification (ref)
 	if not chatVisible then
-		var1 += p1 - var4
+		var1 += p1 - var6
 		updateUnreadNotification()
 	end
-	var4 = p1
+	var6 = p1
 end)
 
 if not fFlagExpChatWindowSyncUnibar then
@@ -440,9 +506,9 @@ if not fFlagExpChatWindowSyncUnibar then
 end
 local _ = function()
 	-- upvalues: gameSettings (ref), viewportUtilModule (ref), chatVisible (write), chatSelectorModule (ref)
-	local var5 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
-	chatVisible = var5
-	chatSelectorModule:SetVisible(var5)
+	local var7 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
+	chatVisible = var7
+	chatSelectorModule:SetVisible(var7)
 end
 
 coroutine.wrap(function()
@@ -466,9 +532,9 @@ coroutine.wrap(function()
 		default.setLocalUserChat(status_1)
 		
 		if status_1 then
-			local var5 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
-			chatVisible = var5
-			chatSelectorModule:SetVisible(var5)
+			local var7 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
+			chatVisible = var7
+			chatSelectorModule:SetVisible(var7)
 			
 			return
 		end
@@ -482,9 +548,9 @@ coroutine.wrap(function()
 			end
 			var2.availability:unavailable()
 		end)
-		local var6 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
-		chatVisible = var6
-		chatSelectorModule:SetVisible(var6)
+		local var8 = if viewportUtilModule.isSmallTouchScreen() then false else gameSettings.ChatVisible
+		chatVisible = var8
+		chatSelectorModule:SetVisible(var8)
 	end
 end)()
 

@@ -3,6 +3,7 @@ local parent = moments.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
+local fFlagMomentsCommentRowRedesignModule = require(moments.Flags.FFlagMomentsCommentRowRedesign)
 local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
 local controlState = foundationModule.Enums.ControlState
 local useTokens = foundationModule.Hooks.useTokens
@@ -15,7 +16,7 @@ local function _(p1)
 end
 
 return function(p1, p2)
-	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), controlState (ref), t (ref), t_1 (ref), getColorStyleWithTransparencyModule (ref)
+	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), controlState (ref), t (ref), t_1 (ref), fFlagMomentsCommentRowRedesignModule (ref), getColorStyleWithTransparencyModule (ref)
 	local var1 = useTokens()
 	local var2, var3 = reactOtterModule.useAnimatedBinding(0)
 	local var4 = reactModule.useRef(controlState.Default)
@@ -31,7 +32,7 @@ return function(p1, p2)
 		end
 		var3(reactOtterModule.instant(if var6 then 1 else 0))
 	end, { p1, p2 })
-	local emphasis = var1.Color.Content.Emphasis
+	local var6 = if fFlagMomentsCommentRowRedesignModule then var1.Color.Content.Default else var1.Color.Content.Emphasis
 	
 	return {
 		onStateChanged = reactModule.useCallback(function(p3)
@@ -39,16 +40,16 @@ return function(p1, p2)
 			var4.current = p3
 			
 			if var5.current then
-				local var6 = if p3 ~= controlState.Hover then p3 == controlState.Pressed else true
-				var3(reactOtterModule.ease(if var6 then 1 else 0, if var6 then t else t_1))
+				local var7 = if p3 ~= controlState.Hover then p3 == controlState.Pressed else true
+				var3(reactOtterModule.ease(if var7 then 1 else 0, if var7 then t else t_1))
 			end
 		end, { var3 }),
 		textStyle = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), getColorStyleWithTransparencyModule (copy), emphasis (ref)
+			-- upvalues: var2 (ref), getColorStyleWithTransparencyModule (copy), var6 (ref)
 			return var2:map(function(p3)
-				-- upvalues: getColorStyleWithTransparencyModule (copy), emphasis (copy)
-				return getColorStyleWithTransparencyModule(emphasis, p3 * 0.4)
+				-- upvalues: getColorStyleWithTransparencyModule (copy), var6 (copy)
+				return getColorStyleWithTransparencyModule(var6, p3 * 0.4)
 			end)
-		end, { var2, emphasis })
+		end, { var2, var6 })
 	}
 end

@@ -4,6 +4,7 @@ local foundationModule = require(parent.Foundation)
 local experienceAnalyticsModule = require(parent.DataHydration.ExperienceAnalytics)
 local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
 local analyticsUnitModule = require(buildExperience.Analytics.AnalyticsUnit)
+local analyticsMetricModule = require(buildExperience.Analytics.AnalyticsMetric)
 local goalLockedActionIdModule = require(buildExperience.Analytics.Goals.GoalLockedActionId)
 local goalMetricSummarySourcesModule = require(buildExperience.Analytics.Goals.GoalMetricSummarySources)
 local _ = require(buildExperience.Analytics.Goals.GoalTypes)
@@ -30,11 +31,12 @@ return {
 			id = "GetMorePlayers",
 			unlockMilestone = "universe_dau_5_achieved",
 			titleKey = analyticsKeysModule.ANALYTICS_GOAL_TITLE_GET_MORE_PLAYERS,
+			charts = { analyticsMetricModule.DailyActiveUsers },
 			metricSummaries = {
 				{
 					kind = "number",
 					id = "DailyActiveUsers",
-					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_DAILY_ACTIVE_USERS,
+					titleKey = analyticsKeysModule.ANALYTICS_OVERVIEW_METRIC_TITLE_DAILY_ACTIVE_USERS,
 					source = goalMetricSummarySourcesModule.summary({ metric = metricId.DailyActiveUsers }),
 					format = { unit = analyticsUnitModule.Scalar }
 				},
@@ -72,11 +74,12 @@ return {
 			id = "FirstImpression",
 			unlockMilestone = "universe_dau_5_achieved",
 			titleKey = analyticsKeysModule.ANALYTICS_GOAL_TITLE_FIRST_IMPRESSION,
+			charts = { analyticsMetricModule.NewUserSessionTime },
 			metricSummaries = {
 				{
 					kind = "number",
 					id = "NewUserSessionTime",
-					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_NEW_USER_SESSION_TIME,
+					titleKey = analyticsKeysModule.ANALYTICS_OVERVIEW_METRIC_TITLE_NEW_USER_SESSION_TIME,
 					source = goalMetricSummarySourcesModule.summary({
 						metric = metricId.AveragePlayTimeMinutesPerDAU,
 						filters = {
@@ -87,7 +90,7 @@ return {
 							}
 						}
 					}),
-					format = { unit = analyticsUnitModule.Temporal }
+					format = { unit = analyticsUnitModule.Minutes }
 				},
 				{
 					kind = "breakdown",
@@ -115,18 +118,22 @@ return {
 			id = "KeepPlayersComingBack",
 			unlockMilestone = "universe_first_returning_user_achieved",
 			titleKey = analyticsKeysModule.ANALYTICS_GOAL_TITLE_KEEP_PLAYERS_COMING_BACK,
+			charts = {
+				analyticsMetricModule.D1Retention,
+				analyticsMetricModule.D7Retention
+			},
 			metricSummaries = {
 				{
 					kind = "number",
 					id = "ForwardD1Retention",
-					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_D1_RETENTION,
+					titleKey = analyticsKeysModule.ANALYTICS_OVERVIEW_METRIC_TITLE_D1_RETENTION,
 					source = goalMetricSummarySourcesModule.summary({ endOffsetDays = 1, metric = metricId.ForwardD1Retention }),
 					format = { unit = analyticsUnitModule.Percent }
 				},
 				{
 					kind = "number",
 					id = "ForwardD7Retention",
-					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_D7_RETENTION,
+					titleKey = analyticsKeysModule.ANALYTICS_OVERVIEW_METRIC_TITLE_D7_RETENTION,
 					source = goalMetricSummarySourcesModule.summary({ endOffsetDays = 7, metric = metricId.ForwardD7Retention }),
 					format = { unit = analyticsUnitModule.Percent }
 				}
@@ -139,11 +146,15 @@ return {
 			id = "EarnRobux",
 			unlockMilestone = "universe_first_robux_spent_achieved",
 			titleKey = analyticsKeysModule.ANALYTICS_GOAL_TITLE_EARN_ROBUX,
+			charts = {
+				analyticsMetricModule.RobuxSpent,
+				analyticsMetricModule.PayerConversion
+			},
 			metricSummaries = {
 				{
 					kind = "number",
 					id = "DailyRevenue",
-					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_ROBUX_SPENT,
+					titleKey = analyticsKeysModule.ANALYTICS_OVERVIEW_METRIC_TITLE_ROBUX_SPENT,
 					icon = foundationModule.Enums.IconName.Robux,
 					source = goalMetricSummarySourcesModule.summary({ metric = metricId.DailyRevenue }),
 					format = { unit = analyticsUnitModule.Scalar }
@@ -151,7 +162,7 @@ return {
 				{
 					kind = "number",
 					id = "PayingUsersCVR",
-					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_PAYER_CONVERSION,
+					titleKey = analyticsKeysModule.ANALYTICS_OVERVIEW_METRIC_TITLE_PAYER_CONVERSION,
 					source = goalMetricSummarySourcesModule.summary({ metric = metricId.PayingUsersCVR }),
 					format = { unit = analyticsUnitModule.Percent }
 				}

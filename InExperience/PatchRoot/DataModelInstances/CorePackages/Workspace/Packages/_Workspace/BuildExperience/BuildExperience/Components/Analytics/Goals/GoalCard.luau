@@ -50,6 +50,7 @@ return function(p1)
 		Card = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
+			onActivated = if not p1.isLocked then p1.onActivated else nil,
 			testId = `{testId}.Card`
 		}, if p1.isLocked then {
 			Locked = reactModule.createElement(goalLockedContentModule, {

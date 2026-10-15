@@ -69,6 +69,7 @@ return function(p1)
 			Cards = if fFlagBuildAnalyticsGoalsModule then nil else reactModule.createElement(statsCardContainerModule, { layoutOrder = 3, cards = p1.statsCards }),
 			Goals = if fFlagBuildAnalyticsGoalsModule then reactModule.createElement(goalsSectionModule, {
 				layoutOrder = 4,
+				onOpenChat = p1.onOpenChat,
 				universeId = p1.universeId,
 				window = p1.window,
 				testId = `{testId}.Goals`

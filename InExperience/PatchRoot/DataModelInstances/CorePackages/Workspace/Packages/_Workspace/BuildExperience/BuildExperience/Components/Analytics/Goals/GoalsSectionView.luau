@@ -16,6 +16,7 @@ return function(p1)
 	for i, v in p1.entries do
 		local goal = v.goal
 		t[goal.id] = reactModule.createElement(goalCardModule, {
+			onActivated = v.onActivated,
 			goal = goal,
 			universeId = p1.universeId,
 			window = p1.window,

@@ -13,5 +13,5 @@ return function(p1, p2, p3, p4, p5)
 	-- upvalues: formatNumber (ref), analyticsUnitModule (ref), fillTemplate (ref)
 	local var1 = formatNumber(p1, p2, p3, p5)
 	
-	return if p2 == analyticsUnitModule.Percent then fillTemplate(p4.percent, var1) elseif p2 == analyticsUnitModule.Temporal then fillTemplate(p4.duration, var1) else var1
+	return if p2 == analyticsUnitModule.Percent then fillTemplate(p4.percent, var1) elseif p2 == analyticsUnitModule.Temporal or p2 == analyticsUnitModule.Minutes then fillTemplate(p4.duration, var1) else var1
 end

@@ -12,7 +12,7 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local unifiedProductDetailsModule = require(parent.Generic.UnifiedProductDetails)
 local priceSummaryModule = require(parent.Generic.PriceSummary)
 local unifiedPurchaseModalHeaderModule = require(parent.Generic.UnifiedPurchaseModalHeader)
-local productDetailsContainerModule = require(parent.Generic.ProductDetailsContainer)
+local _ = require(parent.Generic.ProductDetailsContainer)
 local useCartPricingModule = require(parent.ProductPurchase.v4.useCartPricing)
 local buildCartPricingOfferCheckboxesModule = require(parent.ProductPurchase.v4.buildCartPricingOfferCheckboxes)
 local _ = require(parent.ProductPurchase.v4.cartPricingResponseLineItem)
@@ -29,14 +29,13 @@ local _ = require(script.Parent.UnifiedProductPurchaseModalTypes)
 local unifiedPurchaseModalTypeEnumModule = require(parent.Enums.UnifiedPurchaseModalTypeEnum)
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
-local fFlagEnableOffersOnInExperienceSurface = require(parent.Parent.SharedFlags).FFlagEnableOffersOnInExperienceSurface
 local fFlagOffersOnlyAffordableLock = require(parent.Parent.SharedFlags).FFlagOffersOnlyAffordableLock
 local fFlagLuaAppsEnablePromptVIPServerPurchase = require(parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local _ = require(parent.ProductPurchase.PricingTypes)
 local blackbirdUpsellBanner = require(parent_1.RobloxSubscriptionPurchaseApp).Components.BlackbirdUpsellBanner
 
 local function UnifiedProductPurchaseModal(p1)
-	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), useInitialButtonDisableDelayModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), useCartPricingModule (ref), fFlagOffersOnlyAffordableLock (ref), useFocusNavigationRefsModule (ref), checkbox (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), text (ref), cartPricingProductDetailsModule (ref), productDetailsContainerModule (ref), sheet (ref), unifiedPurchaseModalHeaderModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), blackbirdUpsellBanner (ref)
+	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), useInitialButtonDisableDelayModule (ref), useCartPricingModule (ref), fFlagOffersOnlyAffordableLock (ref), useFocusNavigationRefsModule (ref), checkbox (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), text (ref), cartPricingProductDetailsModule (ref), sheet (ref), unifiedPurchaseModalHeaderModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), blackbirdUpsellBanner (ref)
 	local var1 = useLocalization({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
 		Subscribe = "Feature.Subscription.Action.Subscribe",
@@ -61,26 +60,18 @@ local function UnifiedProductPurchaseModal(p1)
 	local var3, var4 = reactModule.useState(p1.postPurchaseActions or {})
 	local var5, var6 = reactModule.useState(var1.BuyItem)
 	local var7 = useInitialButtonDisableDelayModule(p1.buttons.isDisabled)
-	local var8 = nil
-	local var9 = nil
-	local var10 = nil
-	local var11 = nil
-	
-	if fFlagEnableOffersOnInExperienceSurface then
-		var8 = useCartPricingModule({
-			product = p1.product,
-			purchaseModalType = p1.purchaseModalType,
-			cartPricingResponse = p1.cartPricingResponse,
-			onCartOfferAppliedChanged = p1.onCartOfferAppliedChanged
-		})
-		local _ = 0
-		var10 = p1.buttons.isDisabled or (if p1.isCartPricingLoading ~= true then var7 == true else true)
-		local priceWithoutOffersDiscounts = var8.priceWithoutOffersDiscounts
-		local priceAfterOffersDiscounts = var8.priceAfterOffersDiscounts
-		local var12 = priceWithoutOffersDiscounts ~= nil and p1.robuxBalanceAmount < priceWithoutOffersDiscounts
-		var11 = var10 or (var12 and (not fFlagOffersOnlyAffordableLock or (priceAfterOffersDiscounts ~= nil and priceAfterOffersDiscounts <= p1.robuxBalanceAmount)))
-		var9 = if var8.showCartOfferUi then #var8.cartPricingOffers else 0
-	end
+	local var8 = useCartPricingModule({
+		product = p1.product,
+		purchaseModalType = p1.purchaseModalType,
+		cartPricingResponse = p1.cartPricingResponse,
+		onCartOfferAppliedChanged = p1.onCartOfferAppliedChanged
+	})
+	local var9 = p1.buttons.isDisabled or (if p1.isCartPricingLoading ~= true then var7 == true else true)
+	local priceWithoutOffersDiscounts = var8.priceWithoutOffersDiscounts
+	local priceAfterOffersDiscounts = var8.priceAfterOffersDiscounts
+	local var10 = priceWithoutOffersDiscounts ~= nil and p1.robuxBalanceAmount < priceWithoutOffersDiscounts
+	local var11 = var9 or (var10 and (not fFlagOffersOnlyAffordableLock or (priceAfterOffersDiscounts ~= nil and priceAfterOffersDiscounts <= p1.robuxBalanceAmount)))
+	local var12 = if var8.showCartOfferUi then #var8.cartPricingOffers else 0
 	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), unifiedPurchaseModalTypeEnumModule (copy), var6 (ref), var1 (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), fFlagLuaAppsEnablePromptVIPServerPurchase (copy)
 		local purchaseModalType = p1.purchaseModalType
@@ -126,17 +117,19 @@ local function UnifiedProductPurchaseModal(p1)
 		var4(p1.postPurchaseActions or {})
 	end, { p1.postPurchaseActions })
 	local var16 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then var1.Subscribe else var1.Buy
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), reactModule (copy), checkbox (copy), var7 (ref), var4 (ref)
+	local cloned = table.clone(buildCartPricingOfferCheckboxesModule({ cartPricing = var8, isDisabled = var11 }))
+	
+	for i, v in pairs(reactModule.useMemo(function()
+		-- upvalues: var3 (ref), reactModule (copy), checkbox (copy), var12 (ref), var9 (ref), var4 (ref)
 		local t = {}
 		
-		for i, v in ipairs(var3 or {}) do
-			t["PostPurchaseActionCheckBox_" .. tostring(i)] = reactModule.createElement(checkbox, {
+		for i, v in var3 do
+			t[v.actionKey] = reactModule.createElement(checkbox, {
 				size = "XSmall",
-				LayoutOrder = i,
+				LayoutOrder = var12 + i,
 				label = v.label,
-				isChecked = not var7 and v.isActionSelected,
-				isDisabled = var7,
+				isChecked = v.isActionSelected,
+				isDisabled = var9,
 				onActivated = function()
 					-- upvalues: var4 (copy), i (ref), v (ref)
 					var4(function(p2)
@@ -154,65 +147,22 @@ local function UnifiedProductPurchaseModal(p1)
 			})
 		end
 		return t
-	end, { var3, var7 })
-	local var18 = nil
-	
-	if fFlagEnableOffersOnInExperienceSurface then
-		var17 = reactModule.useMemo(function()
-			-- upvalues: var3 (ref), reactModule (copy), checkbox (copy), var9 (write), var10 (write), var4 (ref)
-			local t = {}
-			
-			for i, v in var3 do
-				t[v.actionKey] = reactModule.createElement(checkbox, {
-					size = "XSmall",
-					LayoutOrder = var9 + i,
-					label = v.label,
-					isChecked = v.isActionSelected,
-					isDisabled = var10,
-					onActivated = function()
-						-- upvalues: var4 (copy), i (ref), v (ref)
-						var4(function(p2)
-							-- upvalues: i (copy), v (copy)
-							local cloned = table.clone(p2)
-							cloned[i] = {
-								label = v.label,
-								isActionSelected = not v.isActionSelected,
-								actionKey = v.actionKey
-							}
-							
-							return cloned
-						end)
-					end
-				})
-			end
-			return t
-		end, { var3, var9, var10 })
-		local cloned = table.clone(buildCartPricingOfferCheckboxesModule({ cartPricing = var8, isDisabled = var11 }))
-		
-		for i, v in pairs(var17) do
-			cloned[i] = v
-		end
-		var18 = reactModule.createElement(view, {
-			tag = "col gap-medium auto-y size-full-0 align-x-start align-y-start",
-			LayoutOrder = 2
-		}, cloned)
+	end, { var3, var12, var9 })) do
+		cloned[i] = v
 	end
+	local var17 = reactModule.createElement(view, {
+		tag = "col gap-medium auto-y size-full-0 align-x-start align-y-start",
+		LayoutOrder = 2
+	}, cloned)
 	local itemPrice = p1.product.itemPrice
-	local var19 = if itemPrice then itemPrice.priceInRobux else p1.product.itemRobuxCost
-	local var20 = if fFlagLuaAppsEnablePromptVIPServerPurchase then if var19 ~= 0 then if p1.isFreeWithRobloxPlus then var1.FreeWithPlus elseif p1.isMonthlyPrice then var1.Free else nil else nil else nil
-	local var21 = if fFlagEnableOffersOnInExperienceSurface then reactModule.createElement(cartPricingProductDetailsModule, {
+	local var18 = if itemPrice then itemPrice.priceInRobux else p1.product.itemRobuxCost
+	local var19 = reactModule.createElement(cartPricingProductDetailsModule, {
 		cartPricing = var8,
 		purchaseModalType = p1.purchaseModalType,
 		priceSuffix = var2,
-		priceText = if fFlagLuaAppsEnablePromptVIPServerPurchase then var20 else nil,
+		priceText = if fFlagLuaAppsEnablePromptVIPServerPurchase then if fFlagLuaAppsEnablePromptVIPServerPurchase then if var18 ~= 0 then if p1.isFreeWithRobloxPlus then var1.FreeWithPlus elseif p1.isMonthlyPrice then var1.Free else nil else nil else nil else nil,
 		includePriceSuffixOnOriginal = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.isMonthlyPrice else nil,
 		isCartPricingLoading = p1.isCartPricingLoading
-	}) else reactModule.createElement(productDetailsContainerModule, {
-		purchaseModalType = p1.purchaseModalType,
-		product = p1.product,
-		priceSuffix = var2,
-		priceText = if fFlagLuaAppsEnablePromptVIPServerPurchase then var20 else nil,
-		includePriceSuffixOnOriginal = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.isMonthlyPrice else nil
 	})
 	
 	return reactModule.createElement(sheet.Root, {
@@ -233,25 +183,22 @@ local function UnifiedProductPurchaseModal(p1)
 			SheetContentContainer = reactModule.createElement(view, {
 				tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center"
 			}, {
-				ProductDetailsContainer = var21 or reactModule.createElement(view, {
+				ProductDetailsContainer = var19 or reactModule.createElement(view, {
 					tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center",
 					LayoutOrder = 1
 				}, {
-					ProductDetails = if p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then reactModule.createElement(priceSummaryModule, { amount = var19, itemPrice = itemPrice }) else reactModule.createElement(unifiedProductDetailsModule, {
+					ProductDetails = if p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then reactModule.createElement(priceSummaryModule, { amount = var18, itemPrice = itemPrice }) else reactModule.createElement(unifiedProductDetailsModule, {
 						isPortrait = false,
 						itemIcon = p1.product.itemIcon,
 						itemName = p1.product.itemName,
-						itemRobuxCost = var19,
+						itemRobuxCost = var18,
 						itemPrice = itemPrice,
 						itemDisplayPrice = if fFlagEnableUnifiedPurchaseFlowForDevSubs then p1.product.itemDisplayPrice else nil,
 						priceSuffix = var2,
 						model = p1.product.model
 					})
 				}),
-				PostPurchaseActions = if fFlagEnableOffersOnInExperienceSurface then var18 elseif next(var17) then reactModule.createElement(view, {
-					LayoutOrder = 3,
-					tag = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then "col gap-medium auto-y size-full-0 align-x-start align-y-start padding-top-small" else "col gap-medium auto-y size-full-0 align-x-start align-y-start"
-				}, { var17 }) else nil
+				PostPurchaseActions = var17
 			})
 		}),
 		Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 3 }, {
@@ -264,7 +211,7 @@ local function UnifiedProductPurchaseModal(p1)
 					text = var16,
 					onActivated = var15,
 					inputDelay = if p1.buttons.buyItemEnableInputDelayed and not var7 then 2.5 else 0,
-					isDisabled = if fFlagEnableOffersOnInExperienceSurface then var10 else var7,
+					isDisabled = var9,
 					ref = var14,
 					fillBehavior = fillBehavior.Fill,
 					variant = buttonVariant.Emphasis

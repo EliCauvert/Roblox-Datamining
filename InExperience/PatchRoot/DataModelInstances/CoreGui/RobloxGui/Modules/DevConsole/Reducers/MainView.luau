@@ -1,9 +1,10 @@
 ﻿local immutableModule = require(script.Parent.Parent.Immutable)
 local setActiveTabModule = require(script.Parent.Parent.Actions.SetActiveTab)
 local setTabListModule = require(script.Parent.Parent.Actions.SetTabList)
+local fFlagDevConsoleTabReselectKeepsClientViewModule = require(script.Parent.Flags.FFlagDevConsoleTabReselectKeepsClientView)
 
 return function(p1, p2)
-	-- upvalues: setActiveTabModule (ref), immutableModule (ref), setTabListModule (ref)
+	-- upvalues: setActiveTabModule (ref), fFlagDevConsoleTabReselectKeepsClientViewModule (ref), immutableModule (ref), setTabListModule (ref)
 	p1 = p1 or {
 		isDeveloperView = false,
 		isClientView = true,
@@ -20,6 +21,9 @@ return function(p1, p2)
 		}
 		
 		if p1.currTabIndex ~= p2.newTabIndex then
+			t.isClientView = true
+		end
+		if fFlagDevConsoleTabReselectKeepsClientViewModule and t.isClientView == nil then
 			t.isClientView = true
 		end
 		local var1 = immutableModule.JoinDictionaries(p1, t)

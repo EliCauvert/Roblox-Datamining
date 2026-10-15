@@ -2023,6 +2023,7 @@ Feature.Build.Analytics.Description.PayerConversion,Payer conversion is the perc
 Feature.Build.Analytics.Description.PlaythroughRate,Playthrough rate is the percentage of visits that completed a full play session. Higher rates suggest players find your experience easy to get into and worth finishing.
 Feature.Build.Analytics.Description.TotalPlaytime,Total playtime sums the time all players spent in your experience over the period. Rising playtime usually signals more engaging sessions.
 Feature.Build.Analytics.DurationHours,{number} hrs
+Feature.Build.Analytics.DurationMinutes,{number} mins
 Feature.Build.Analytics.Goal.Action.CreateAd,Create an ad
 Feature.Build.Analytics.Goal.Action.SellItems,Sell items
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Share with friends

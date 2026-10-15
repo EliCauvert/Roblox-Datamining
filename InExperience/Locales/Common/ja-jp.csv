@@ -2021,6 +2021,7 @@ Feature.Build.Analytics.Description.PayerConversion,有料ユーザーコンバ�
 Feature.Build.Analytics.Description.PlaythroughRate,プレイスルー率は、最後まで完了したプレイセッションの割合です。この割合が高いほど、プレイヤーがバーチャル空間を始めやすく、最後までプレイする価値があると感じていることを示します。
 Feature.Build.Analytics.Description.TotalPlaytime,合計プレイ時間は、その期間にすべてのプレイヤーがバーチャル空間で過ごした時間の合計です。プレイ時間の増加は通常、プレイセッションの魅力が高まっていることを示します。
 Feature.Build.Analytics.DurationHours,{number}時間
+Feature.Build.Analytics.DurationMinutes,{number}分
 Feature.Build.Analytics.Goal.Action.CreateAd,広告を作成
 Feature.Build.Analytics.Goal.Action.SellItems,アイテムを販売
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,友達と共有
@@ -3630,7 +3631,7 @@ Feature.InExperienceShop.Label.Timer.Day.Plural,{number}日
 Feature.InExperienceShop.Label.Timer.Day.Singular,
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
 Feature.InExperienceShop.Label.Timer.Hour.Singular,
-Feature.InExperienceShop.Label.Timer.Minute.Plural,{number}分
+Feature.InExperienceShop.Label.Timer.Minute.Plural,
 Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number}秒
 Feature.InExperienceShop.Label.Timer.Second.Singular,1秒

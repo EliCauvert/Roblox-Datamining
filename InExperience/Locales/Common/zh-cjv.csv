@@ -2015,6 +2015,7 @@ Feature.Build.Analytics.Description.PayerConversion,付费用户转化率是指�
 Feature.Build.Analytics.Description.PlaythroughRate,通关率是完成完整游戏会话的访问次数占比。通关率越高，表明玩家越容易上手游戏体验，并且更愿意游玩至结束。
 Feature.Build.Analytics.Description.TotalPlaytime,总游戏时间是该时间段内所有玩家在你的游戏体验中花费的时间总和。游戏时间增加通常表明游戏过程更具吸引力。
 Feature.Build.Analytics.DurationHours,{number} 小时
+Feature.Build.Analytics.DurationMinutes,
 Feature.Build.Analytics.Goal.Action.CreateAd,创建广告
 Feature.Build.Analytics.Goal.Action.SellItems,出售道具
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,与好友分享

@@ -18,7 +18,6 @@
 	FFlagAXUseProfileIconEntryPoint = require(script.FFlagAXUseProfileIconEntryPoint),
 	FFlagMeProfileEntryTooltipEnabled = require(script.FFlagMeProfileEntryTooltipEnabled),
 	FFlagAXAddManageOutfitClickTracking = require(script.FFlagAXAddManageOutfitClickTracking),
-	FFlagAXPhotoboothFunctionality = require(script.FFlagAXPhotoboothFunctionality),
 	FFlagAXFavoritesManagerNavEntry = require(script.FFlagAXFavoritesManagerNavEntry),
 	FFlagAXItemCardComponentsMemo = require(script.FFlagAXItemCardComponentsMemo),
 	FFlagAXMemoizeEquippedLayeredMakeupAssets = require(script.FFlagAXMemoizeEquippedLayeredMakeupAssets),

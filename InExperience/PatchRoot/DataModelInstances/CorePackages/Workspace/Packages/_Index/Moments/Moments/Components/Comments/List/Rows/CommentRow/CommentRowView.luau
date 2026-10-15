@@ -3,6 +3,7 @@ local parent = moments.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
+local fFlagMomentsCommentRowRedesignModule = require(moments.Flags.FFlagMomentsCommentRowRedesign)
 local imageWithSkeletonModule = require(moments.Components.ImageWithSkeleton)
 local commentActionsMenuModule = require(script.Parent.CommentActionsMenu)
 local commentDeleteConfirmationDialogModule = require(script.Parent.CommentDeleteConfirmationDialog)
@@ -19,7 +20,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local function noop() end
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useComposedRef (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), foundationModule (ref), commentRowHighlightModule (ref), noop (ref), stateLayerAffordance (ref), imageWithSkeletonModule (ref), radius (ref), commentReactionButtonModule (ref), commentActionsMenuModule (ref), commentDeleteConfirmationDialogModule (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useComposedRef (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), foundationModule (ref), commentRowHighlightModule (ref), fFlagMomentsCommentRowRedesignModule (ref), noop (ref), stateLayerAffordance (ref), imageWithSkeletonModule (ref), radius (ref), commentReactionButtonModule (ref), commentActionsMenuModule (ref), commentDeleteConfirmationDialogModule (ref)
 	local var1 = useTokens()
 	local actionsMenu = p1.actionsMenu
 	local deleteConfirmation = p1.deleteConfirmation
@@ -39,7 +40,7 @@ return function(p1)
 		Content = reactModule.createElement(foundationModule.View, {
 			tag = {
 				["row gap-medium size-full-0 auto-y padding-x-small padding-top-small"] = true,
-				["padding-bottom-small"] = not p1.showReactionControl
+				["padding-bottom-small"] = fFlagMomentsCommentRowRedesignModule or not p1.showReactionControl
 			},
 			ref = useComposedRef(p1.gestureRef, var4),
 			onActivated = if p1.isGestureSurfaceActive then noop else nil,
@@ -49,8 +50,11 @@ return function(p1)
 			testId = `moments-comment-row-content-{p1.commentId}`
 		}, {
 			Avatar = reactModule.createElement(foundationModule.View, {
-				tag = "size-700-700",
 				LayoutOrder = 1,
+				tag = {
+					["size-800-800"] = fFlagMomentsCommentRowRedesignModule,
+					["size-700-700"] = not fFlagMomentsCommentRowRedesignModule
+				},
 				testId = if p1.avatarUserId ~= nil then `moments-comment-avatar-fallback-{p1.commentId}` else `moments-comment-avatar-{p1.commentId}`
 			}, {
 				Image = reactModule.createElement(imageWithSkeletonModule, {
@@ -61,13 +65,21 @@ return function(p1)
 				})
 			}),
 			TextColumn = reactModule.createElement(foundationModule.View, {
-				tag = "col fill gap-small auto-y",
 				LayoutOrder = 2,
+				tag = {
+					["col fill auto-y"] = true,
+					["gap-xsmall"] = fFlagMomentsCommentRowRedesignModule,
+					["gap-small"] = not fFlagMomentsCommentRowRedesignModule
+				},
 				testId = `moments-comment-content-{p1.commentId}`
 			}, {
 				MainContent = reactModule.createElement(foundationModule.View, {
-					tag = "col gap-xsmall size-full-0 auto-y",
 					LayoutOrder = 1,
+					tag = {
+						["col size-full-0 auto-y"] = true,
+						["gap-xxsmall"] = fFlagMomentsCommentRowRedesignModule,
+						["gap-xsmall"] = not fFlagMomentsCommentRowRedesignModule
+					},
 					testId = `moments-comment-main-content-{p1.commentId}`
 				}, {
 					Header = reactModule.createElement(foundationModule.View, {
@@ -81,30 +93,34 @@ return function(p1)
 							radius = radius.Medium,
 							testId = `moments-comment-author-loading-{p1.commentId}`
 						}) else reactModule.createElement(foundationModule.Text, {
-							tag = "shrink auto-xy text-title-small text-truncate-end content-default",
 							LayoutOrder = 1,
+							tag = {
+								["shrink auto-xy text-truncate-end"] = true,
+								["text-title-medium content-emphasis"] = fFlagMomentsCommentRowRedesignModule,
+								["text-title-small content-default"] = not fFlagMomentsCommentRowRedesignModule
+							},
 							Text = p1.authorLabel,
 							testId = `moments-comment-author-{p1.commentId}`
 						}),
-						Separator = if p1.metadataLabel ~= nil then nil else reactModule.createElement(foundationModule.Text, {
+						Separator = if fFlagMomentsCommentRowRedesignModule or p1.metadataLabel == nil then nil else reactModule.createElement(foundationModule.Text, {
 							tag = "auto-xy text-body-small content-muted",
 							LayoutOrder = 2,
 							Text = "\194\183"
 						}),
-						Timestamp = reactModule.createElement(foundationModule.Text, {
+						Timestamp = if fFlagMomentsCommentRowRedesignModule then nil else reactModule.createElement(foundationModule.Text, {
 							tag = "auto-xy text-body-small text-truncate-end content-muted",
 							LayoutOrder = 3,
 							Text = p1.metadataLabel or "",
 							testId = `moments-comment-timestamp-{p1.commentId}`
 						}),
-						HeaderAction = if p1.headerAction ~= nil then nil else reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = 4 }, { Action = p1.headerAction })
+						HeaderAction = if fFlagMomentsCommentRowRedesignModule or p1.headerAction == nil then nil else reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = 4 }, { Action = p1.headerAction })
 					}),
 					Body = reactModule.createElement(foundationModule.Text, {
 						tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left",
 						LayoutOrder = 2,
 						Text = p1.bodyText or p1.text,
 						RichText = p1.bodyText ~= nil,
-						textStyle = p1.bodyTextStyle or var1.Color.Content.Emphasis,
+						textStyle = p1.bodyTextStyle or (if fFlagMomentsCommentRowRedesignModule then var1.Color.Content.Default else var1.Color.Content.Emphasis),
 						ref = p1.bodyRef,
 						onAbsoluteSizeChanged = p1.onBodyAbsoluteSizeChanged,
 						testId = `moments-comment-body-{p1.commentId}`
@@ -118,7 +134,7 @@ return function(p1)
 						testId = `moments-comment-body-measure-{p1.commentId}`
 					})
 				}),
-				Reaction = if p1.showReactionControl then reactModule.createElement(commentReactionButtonModule, {
+				Reaction = if fFlagMomentsCommentRowRedesignModule or not p1.showReactionControl then nil else reactModule.createElement(commentReactionButtonModule, {
 					LayoutOrder = 2,
 					commentId = p1.commentId,
 					isReactionSelected = p1.isReactionSelected == true,
@@ -126,6 +142,34 @@ return function(p1)
 					reactionCountLabel = p1.reactionCountLabel or "0",
 					isReactionCountHidden = p1.isReactionCountHidden,
 					onReactionActivated = p1.onReactionActivated or noop
+				}),
+				Footer = if fFlagMomentsCommentRowRedesignModule and (p1.metadataLabel ~= nil or p1.headerAction ~= nil or p1.showReactionControl) then reactModule.createElement(foundationModule.View, {
+					tag = "row align-y-center gap-small size-full-0 auto-y",
+					LayoutOrder = 2,
+					testId = `moments-comment-footer-{p1.commentId}`
+				}, {
+					Metadata = reactModule.createElement(foundationModule.View, {
+						tag = "row align-y-center fill gap-small auto-y clip",
+						LayoutOrder = 1,
+						testId = `moments-comment-footer-metadata-{p1.commentId}`
+					}, {
+						Timestamp = if p1.metadataLabel ~= nil then nil else reactModule.createElement(foundationModule.Text, {
+							tag = "auto-xy text-body-small text-truncate-end content-muted",
+							LayoutOrder = 1,
+							Text = p1.metadataLabel,
+							testId = `moments-comment-timestamp-{p1.commentId}`
+						}),
+						HeaderAction = if p1.headerAction ~= nil then nil else reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = 2 }, { Action = p1.headerAction })
+					}),
+					Reaction = if p1.showReactionControl then reactModule.createElement(commentReactionButtonModule, {
+						LayoutOrder = 2,
+						commentId = p1.commentId,
+						isReactionSelected = p1.isReactionSelected == true,
+						isReactionDisabled = p1.isReactionDisabled == true,
+						reactionCountLabel = p1.reactionCountLabel or "0",
+						isReactionCountHidden = p1.isReactionCountHidden,
+						onReactionActivated = p1.onReactionActivated or noop
+					}) else nil
 				}) else nil
 			}),
 			ActionsMenu = if actionsMenu == nil or var2 then nil else reactModule.createElement(commentActionsMenuModule, {
