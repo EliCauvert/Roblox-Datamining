@@ -450,7 +450,7 @@ Authentication.SignUp.Description.BirthdayHelp3,Dit helpt ons om je relevante co
 Authentication.SignUp.Description.BirthdayHint,Datum invoeren
 Authentication.SignUp.Description.BirthdayValuePropC,Dit helpt ons om te weten welke content we je moeten laten zien. Deze is niet zichtbaar voor anderen
 Authentication.SignUp.Description.ClickNextAgreeToTerms,"Door Volgende te selecteren, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
-Authentication.SignUp.Description.CreateAPassword,Een wachtwoord aanmaken voor je Roblox-account
+Authentication.SignUp.Description.CreateAPassword,Kies hoe je je account wilt beveiligen.
 Authentication.SignUp.Description.CreateAccountPasskeyEmphasisDescription,"Met toegangssleutels kun je je snel aanmelden met je Face-ID, vingerafdruk of de PIN die je gebruikt om je apparaat te ontgrendelen."
 Authentication.SignUp.Description.CreatePasskeyOrOTP,Maak een toegangssleutel aan voor je Roblox-account of voeg een e-mailadres toe om je aan te melden met een uniek wachtwoord.
 Authentication.SignUp.Description.EnsureNeverLoseAccount,Dit zorgt ervoor dat je nooit de toegang verliest tot je Roblox-account.
@@ -502,6 +502,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,Je account beveiligen met Face-ID
 Authentication.SignUp.Heading.UserGreetingWithName,Hallo {username}
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,"Hé {username}, maak een toegangssleutel of wachtwoord aan"
 Authentication.SignUp.Heading.WhatsYourBirthday,
+Authentication.SignUp.Label.AddPassword,Wachtwoord toevoegen
 Authentication.SignUp.Label.Age,Leeftijd
 Authentication.SignUp.Label.Birthday,Verjaardag
 Authentication.SignUp.Label.BirthdayHeaderB,Selecteer eerst je verjaardag
@@ -514,7 +515,6 @@ Authentication.SignUp.Label.EmailAddress,E-mailadres
 Authentication.SignUp.Label.EnterYourEmail,Voer je e-mailadres in
 Authentication.SignUp.Label.EnterYourParentsEmail,Voer het e-mailadres van je ouder in
 Authentication.SignUp.Label.Error.MinimumAge5,Nieuwe accounts moeten ouder zijn dan vijf jaar
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Je moet ouder zijn om dit spel te spelen
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,Gebruikersnaam is al in gebruik
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,Gebruikersnaam mag niet beginnen of eindigen met _
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"Gebruikersnaam mag alleen letters, cijfers en _ bevatten"
@@ -727,6 +727,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation bevat Curve
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation bevat meer dan {maxAllowed} MarkerCurve(s). Zorg ervoor dat er niet meer dan {maxAllowed} MarkerCurve-descendant(s) zijn.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation bevat een MarkerCurve met {count} markers. {maxAllowed} is het maximum per MarkerCurve. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation bevat een onverwacht child: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Asset {AssetId} ({InstanceFullName}.{FieldName}) is niet gepubliceerd. Publiceer de asset en probeer het opnieuw.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische hoofden op de marktplaats moeten de juiste cage hebben, zodat de oog- en mondhoekpunten op de cage overeenkomen met de mesh-hoekpunten. Verbeter je cage en de uitlijning ervan met de mesh."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Kan de glimlachuitdrukking van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor de mond aan zodat ze overeenkomen met de positie van de mond op het hoofd en zorg dat deze een glimlachuitdrukking kan weergeven.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Kan de uitdrukking voor het sluiten van het linkeroog van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor het linkeroog aan zodat ze overeenkomen met de positie van het linkeroog op het hoofd en zorg dat het oog kan worden gesloten.
@@ -739,7 +740,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissief gebied bove
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissivePercentage}%, moet {maxEmissivePercentage}% of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissief gebied overschreden.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissiveArea}, moet {maxEmissiveArea} of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Dit item maakt gebruik van emissieve maps die alleen beschikbaar zijn voor makers in het Trusted Creator-programma. Verwijder alle inhoud van emissieve maps of word lid van het programma voordat je gaat uploaden.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Er ontbreekt een geldige maximale translatiewaarde van het onderdeel in de gepubliceerde animatie. Publiceer de animatie opnieuw.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Er ontbreekt een geldige UGC-emotemarker in de gepubliceerde animatie. Publiceer de animatie opnieuw.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,De maximale translatie van het onderdeel kon niet worden berekend op basis van de gepubliceerde animatiegegevens. Publiceer de animatie opnieuw.
@@ -747,6 +747,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"De ge
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Het hoofd moet boven UpperTorso worden geplaatst. Het middelpunt van het hoofd bevindt zich onder de bovenkant van de romp, wat aangeeft dat de hoofdmesh is ingeklapt of verkeerd is geplaatst."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,De eigenschap InternalOverrideFACSData op FaceControls moet leeg zijn bij het uploaden.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Er is gedetecteerd dat FACS je hoofd vergroot tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamische hoofden mogen maximaal {maxFacsJointCount} FACS-joints hebben, maar dit hoofd heeft er {actualJointCount}. Verminder het aantal FACS-joints en probeer het opnieuw."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Er is gedetecteerd dat FACS je hoofd verkleint tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Het uploadformaat komt niet overeen met de verwachte mappenstructuur. Probeer het opnieuw of dien een bugrapport in.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Bot {bonePath} is te ver buiten het mesh-onderdeel {partName}, plaats het dichter bij de grens van de mesh-onderdeelgrootte."
@@ -2656,11 +2657,8 @@ Feature.Build.Message.NoSearchResultsFound,Geen zoekresultaten gevonden
 Feature.Build.Message.NoVersionHistory,Nog geen versiegeschiedenis.
 Feature.Build.Message.OneTaskCompleted,1 taak voltooid
 Feature.Build.Message.OutOfBuildUsage,Je hebt geen Build-tegoed meer. Bekijk je opties om Robux te gebruiken om content te blijven maken.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Je kon geen uitnodigingslink voor de chat verzenden naar de volgende gebruikers:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Gebruik de knop Delen om een link te ontvangen.
 Feature.Build.Message.PlaytesterRequestFailed,We konden je aanvraag niet voltooien. Probeer het opnieuw.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} van {MAX_INVITES} vroege testers uitgenodigd
-Feature.Build.Message.PrivatePlaytestInvite,{username} heeft je uitgenodigd om een vroege tester te zijn voor {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Je spel is gepubliceerd, maar kon niet openbaar worden gemaakt. Probeer het nog een keer."
 Feature.Build.Message.PublishExpandAudience,Publiceer om je doelgroep te vergroten
 Feature.Build.Message.PublishNotReverted,Je publicatie is niet teruggedraaid. Probeer het nog een keer.
@@ -2729,7 +2727,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Beheerde prijzen inschakelen?
 Feature.Build.Title.NoMonetizationProducts,Begin met verdienen in je spel
 Feature.Build.Title.NoRobuxForUsage,Geen Robux meer over voor Build-tegoed
 Feature.Build.Title.PickCampaign,Kies een lengte
-Feature.Build.Title.PlaytestInviteSendFailed,Kan uitnodigingen niet verzenden
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Kon de volgende gebruikers niet toevoegen:
 Feature.Build.Title.PlaytestersOnlyPlay,Alleen playtesters kunnen spelen
@@ -2751,15 +2748,8 @@ Feature.Build.Title.Versions,Versies
 Feature.Build.Title.WhatsIncluded,Wat is er inbegrepen?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,"Nee, bedankt"
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,Deel je opname
-Feature.Captures.Body.ShareCapturePrompt,Wil je je opname delen?
 Feature.Captures.Description.AllowPhotoAccessInfo,Roblox toegang nodig tot de filmrol van je apparaat om opnames op te slaan.
 Feature.Captures.Title.AllowPhotoAccessInfo,Toegang tot foto's geven
-Feature.Captures.Title.ShareCapturePrompt,Opname delen
-Feature.Captures.Toast.CaptureSaved,Opname opgeslagen
-Feature.Captures.Toast.CaptureSavedToDevice,Opgeslagen op apparaat
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Ga door naar Aanpassen
@@ -3841,7 +3831,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,"Gesponsorde ervaringen worden betaald door makers. Gebruikers in de EU krijgen die te zien op basis van algemene informatie over je apparaattype, locatie en demografische gegevens. Buiten de EU worden dit soort advertenties ook getoond op basis van aanvullende informatie."
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,Zoek in plaats daarvan naar mensen met de naam
 Feature.GamePage.LabelShowingResultsFor,Resultaten weergeven voor
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Deze ervaring is niet beschikbaar vanwege de status van je leeftijdsverificatie.
@@ -4254,8 +4243,8 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Post melden
-Feature.MusicPlayer.Action.GoToSongDetails,Ga naar nummergegevens
-Feature.MusicPlayer.Action.Report,
+Feature.Moments.Tooltip.ShareFirstMomentBody,Maak een moment van je opnames
+Feature.Moments.Tooltip.ShareFirstMomentTitle,Je eerste moment delen
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
 Feature.NotApproved.Action.Pending,
@@ -4863,7 +4852,7 @@ Feature.ProfileBadges.VerifiedBadgeInfoLink,
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,Geverifieerde badge
 Feature.ProfileBadges.action.close,
 Feature.QualtricsSurveyPrompt.Action.Cancel,
-Feature.QualtricsSurveyPrompt.Action.Close,
+Feature.QualtricsSurveyPrompt.Action.Close,"Nee, bedankt"
 Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
 Feature.QualtricsSurveyPrompt.Action.Next,

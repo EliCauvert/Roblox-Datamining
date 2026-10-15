@@ -502,6 +502,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,अपने अकाउंट �
 Authentication.SignUp.Heading.UserGreetingWithName,हैलो {username}
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,"नमस्ते {username}, पास-की या पासवर्ड बनाएँ"
 Authentication.SignUp.Heading.WhatsYourBirthday,
+Authentication.SignUp.Label.AddPassword,पासवर्ड जोड़ें
 Authentication.SignUp.Label.Age,उम्र
 Authentication.SignUp.Label.Birthday,जन्मदिन
 Authentication.SignUp.Label.BirthdayHeaderB,जन्मदिन चुनें
@@ -514,7 +515,6 @@ Authentication.SignUp.Label.EmailAddress,ईमेल एड्रेस
 Authentication.SignUp.Label.EnterYourEmail,अपना ईमेल पता डालें
 Authentication.SignUp.Label.EnterYourParentsEmail,अपने पेरेंट का ईमेल पता डालें
 Authentication.SignUp.Label.Error.MinimumAge5,"नया अकाउंट बनाने के लिए, पाँच साल से ज़्यादा उम्र का होना ज़रूरी है"
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,इस गेम को खेलने के लिए उम्र ज़्यादा होनी चाहिए
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,यह यूज़रनेम पहले से इस्तेमाल में है
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,यूज़रनेम _ से शुरू या खत्म नहीं होना चाहिए
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"यूज़रनेम में सिर्फ़ अक्षर, संख्याएँ और _ होने चाहिए"
@@ -739,7 +739,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,एमिसिव �
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} बहुत ज़्यादा एमिसिव है. एमिसिव एरिया × इंटेंसिटी, लिमिट से ज़्यादा है (फ़िलहाल {emissivePercentage}% को {maxEmissivePercentage}% या इससे कम होना चाहिए). चमक रहे एरिया को छोटा करें या इसकी EmissiveStrength कम करें."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,एमिसिव एरिया अपनी सीमा से ऊपर जा चुका है.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} बहुत ज़्यादा एमिसिव है. एमिसिव एरिया × इंटेंसिटी, लिमिट से ज़्यादा है (फ़िलहाल {emissiveArea} को {maxEmissiveArea} या इससे कम होना चाहिए). चमक रहे एरिया को छोटा करें या इसकी EmissiveStrength कम करें."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"यह ऐसेट एमिसिव मैप का इस्तेमाल करता है, जो सिर्फ़ 'भरोसेमंद क्रिएटर प्रोग्राम' में शामिल क्रिएटर्स के लिए उपलब्ध हैं. कृपया सभी एमिसिव मैप कॉन्टेंट हटा दें या अपलोड करने से पहले प्रोग्राम में शामिल हो जाएँ."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,"पब्लिश किए गए ऐनिमेशन में, एक 'मैक्सिमम पार्ट ट्रांसलेशन' की मान्य वैल्यू मौजूद नहीं है. कृपया ऐनिमेशन को फिर से पब्लिश करें."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,पब्लिश किए गए ऐनिमेशन में एक मान्य UGC emote मार्कर मौजूद नहीं है. कृपया ऐनिमेशन को फिर से पब्लिश करें.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,पब्लिश किए गए ऐनिमेशन डेटा से 'मैक्सिमम पार्ट ट्रांसलेशन' का हिसाब नहीं लगाया जा सका. कृपया ऐनिमेशन को फिर से पब्लिश करें.
@@ -747,6 +746,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"प�
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"सिर को टॉर्सो के ऊपरी हिस्से पर रखा जाना चाहिए. सिर के बीच का हिस्सा टॉर्सो के ऊपरी हिस्से से नीचे है, जिसका मतलब है कि हेड मेश दब गया है या गलत जगह पर है."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls पर InternalOverrideFACSData प्रॉपर्टी अपलोड के समय खाली होनी चाहिए.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs को आपके सिर को {modPercent}% तक फैलाते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"डायनैमिक हेड में ज़्यादा-से-ज़्यादा {maxFacsJointCount} FACS जॉइंट हो सकते हैं, लेकिन इस हेड में {actualJointCount} हैं. कृपया FACS जॉइंट की संख्या कम करके फिर से कोशिश करें."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs को आपके सिर को {modPercent}% तक सिकोड़ते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,अपलोड किया गया फ़ॉर्मेट सही फ़ोल्डर स्ट्रक्चर से मैच नहीं करता है. कृपया फिर से कोशिश करें या बग रिपोर्ट फ़ाइल करें.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"बोन {bonePath}, मेशपार्ट {partName} से बहुत दूर है, कृपया इसे मेशपार्ट के साइज़ की सीमा के करीब रखें."
@@ -2300,6 +2300,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,और ज़्यादा प्�
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,प्लेयर्स को बार-बार वापस आने के लिए प्रेरित करें
 Feature.Build.Analytics.Goal.Locked.EarnRobux,"ये आँकड़े देखने के लिए, अपने गेम में Robux कमाएँ."
 Feature.Build.Analytics.Goal.Locked.FirstImpression,"ये आँकड़े देखने के लिए, आपके पास आपका पहला प्लेयर होना चाहिए."
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,"इन आँकड़ों को देखने के लिए, आपके पास और ज़्यादा प्लेयर्स होने चाहिए."
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,"ये आँकड़े देखने के लिए, आपके पास वापस आपका गेम खेलने वाला पहला प्लेयर होना चाहिए."
 Feature.Build.Analytics.KeyStats,मुख्य आँकड़े
 Feature.Build.Analytics.LastMonth,पिछले महीने
@@ -2653,11 +2654,8 @@ Feature.Build.Message.NoSearchResultsFound,कोई सर्च रिज़�
 Feature.Build.Message.NoVersionHistory,अभी तक कोई वर्ज़न हिस्ट्री नहीं है.
 Feature.Build.Message.OneTaskCompleted,1 टास्क पूरा हुआ
 Feature.Build.Message.OutOfBuildUsage,"आपके बिल्ड का इस्तेमाल खत्म हो गया है. क्रिएट करना जारी रखने के लिए, Robux का इस्तेमाल करने के अपने विकल्प देखें."
-Feature.Build.Message.PlaytestInviteSendFailedBody,इन यूज़र्स को इनवाइट चैट लिंक नहीं भेजा जा सका :
-Feature.Build.Message.PlaytestInviteSendFailedHint,"लिंक पाने के लिए, 'शेयर करें' बटन का इस्तेमाल करें."
 Feature.Build.Message.PlaytesterRequestFailed,हम आपकी रिक्वेस्ट पूरी नहीं कर सके. कृपया फिर से कोशिश करें.
 Feature.Build.Message.PlaytestersAdded,{MAX_INVITES} में से {INVITED_COUNT} अर्ली टेस्टर्स को इनवाइट किया गया
-Feature.Build.Message.PrivatePlaytestInvite,{username} ने आपको {experienceName} का अर्ली टेस्टर बनने के लिए इनवाइट किया है
 Feature.Build.Message.PublicPublishFailed,"आपका गेम पब्लिश किया गया, लेकिन पब्लिक नहीं किया जा सका. फिर से कोशिश करें."
 Feature.Build.Message.PublishExpandAudience,अपनी ऑडियंस बढ़ाने के लिए पब्लिश करें
 Feature.Build.Message.PublishNotReverted,आपका पब्लिश रिवर्ट नहीं हुआ. फिर से कोशिश करें.
@@ -2726,7 +2724,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,'मैनेज की जा
 Feature.Build.Title.NoMonetizationProducts,अपने गेम में कमाना शुरू करें
 Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
 Feature.Build.Title.PickCampaign,अवधि चुनें
-Feature.Build.Title.PlaytestInviteSendFailed,इनवाइट नहीं भेजे जा सके
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,इन यूज़र्स को नहीं जोड़ा जा सका :
 Feature.Build.Title.PlaytestersOnlyPlay,सिर्फ़ प्लेटेस्टर्स खेल सकते हैं
@@ -2748,15 +2745,8 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,क्या-क्या शामिल है?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,"नहीं, रहने दें"
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,कैप्चर शेयर करें
-Feature.Captures.Body.ShareCapturePrompt,क्या आपको अपना स्क्रीनशॉट शेयर करना है?
 Feature.Captures.Description.AllowPhotoAccessInfo,"अपने स्क्रीनशॉट सेव करने के लिए, Roblox को आपके डिवाइस के कैमरा रोल का ऐक्सेस चाहिए."
 Feature.Captures.Title.AllowPhotoAccessInfo,फ़ोटो का ऐक्सेस दें
-Feature.Captures.Title.ShareCapturePrompt,स्क्रीनशॉट शेयर करें
-Feature.Captures.Toast.CaptureSaved,स्क्रीनशॉट सेव किया गया
-Feature.Captures.Toast.CaptureSavedToDevice,डिवाइस पर सेव किया गया
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,'कस्टमाइज़ करें' पर जाएँ
@@ -3838,7 +3828,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,स्पॉन्सर किया गया
 Feature.GamePage.Label.SponsoredDisclosure,"स्पॉन्सर किए गए आइटम का पेमेंट क्रिएटर्स करते हैं. EU के यूज़र्स को उनके डिवाइस टाइप, लोकेशन और डेमोग्राफ़िक की आम जानकारी के आधार पर ऐड्स दिखाए जा सकते हैं. EU के बाहर, ऐड्स अतिरिक्त जानकारी के आधार पर भी दिखाए जा सकते हैं."
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,इसके बजाय इस नाम के लोगों को सर्च करें
 Feature.GamePage.LabelShowingResultsFor,इसके लिए नतीजे दिखाए जा रहे हैं
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,आपकी उम्र का वेरिफ़िकेशन नहीं हो पाने की वजह से यह एक्सपीरिएंस उपलब्ध नहीं है.
@@ -4241,6 +4230,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,"थोड़ी देर इंत
 Feature.Moments.Label.VoiceModerationError,आपकी स्क्रिप्ट में सुरक्षा संबंधी नियमों का पालन किया जाना चाहिए
 Feature.Moments.Label.VoicePlaceholder,अपनी वॉइसओवर स्क्रिप्ट टाइप करें. ज़्यादा-से-ज़्यादा {maxCount} कैरेक्टर होने चाहिए
 Feature.Moments.Label.VoiceTimeoutBody,वॉइसओवर जेनरेशन टाइम आउट हो गया.
+Feature.Moments.Label.VoiceTooManyNumbersError,स्क्रिप्ट में बहुत ज़्यादा नंबर हैं
 Feature.Moments.Label.WriteComment,कमेंट लिखें
 Feature.Moments.Title.Comments,कमेंट्स
 Feature.Moments.Title.CommentsWithCappedCount,कमेंट ({count}+)
@@ -4250,8 +4240,6 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
-Feature.MusicPlayer.Action.GoToSongDetails,गाने की जानकारी पर जाएँ
-Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
 Feature.NotApproved.Action.Pending,
@@ -4859,7 +4847,7 @@ Feature.ProfileBadges.VerifiedBadgeInfoLink,
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,वेरिफ़ाई किया गया बैज
 Feature.ProfileBadges.action.close,
 Feature.QualtricsSurveyPrompt.Action.Cancel,
-Feature.QualtricsSurveyPrompt.Action.Close,
+Feature.QualtricsSurveyPrompt.Action.Close,"नहीं, रहने दें"
 Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
 Feature.QualtricsSurveyPrompt.Action.Next,

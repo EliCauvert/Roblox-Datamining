@@ -467,7 +467,7 @@ Authentication.SignUp.Description.BirthdayHelp3,"Bu, sana alakalı içerikler g�
 Authentication.SignUp.Description.BirthdayHint,Tarih gir
 Authentication.SignUp.Description.BirthdayValuePropC,"Bu, sana hangi içerikleri göstereceğimizi bilmemize yardımcı olur. Başkaları bunu görmeyecek"
 Authentication.SignUp.Description.ClickNextAgreeToTerms,"""Sıradaki"" düğmesine tıklayarak tahkim maddesi de dâhil olmak üzere Kullanım Koşullarını kabul etmiş ve Gizlilik Politikasını onaylamış sayılırsın."
-Authentication.SignUp.Description.CreateAPassword,Roblox hesabın için bir şifre oluştur
+Authentication.SignUp.Description.CreateAPassword,Hesabını nasıl güvence altına alacağını seç.
 Authentication.SignUp.Description.CreateAccountPasskeyEmphasisDescription,"Geçiş anahtarları, cihazının kilidini açmak için kullandığın PIN, yüz kimliği veya parmak iziyle hızlı giriş yapmanı sağlar."
 Authentication.SignUp.Description.CreatePasskeyOrOTP,Roblox hesabın için bir geçiş anahtarı oluştur veya tek kullanımlık şifreyle giriş yapmak için e-posta ekle.
 Authentication.SignUp.Description.EnsureNeverLoseAccount,"Bu, Roblox hesabına erişimini asla kaybetmemeni sağlar."
@@ -519,6 +519,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,Hesabını Face ID ile güvenceye
 Authentication.SignUp.Heading.UserGreetingWithName,Merhaba {username}
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,"Merhaba {username}, bir geçiş anahtarı veya şifre oluştur"
 Authentication.SignUp.Heading.WhatsYourBirthday,
+Authentication.SignUp.Label.AddPassword,Şifre ekle
 Authentication.SignUp.Label.Age,Yaş
 Authentication.SignUp.Label.Birthday,Doğum Günü
 Authentication.SignUp.Label.BirthdayHeaderB,Öncelikle doğum gününü seç
@@ -531,7 +532,6 @@ Authentication.SignUp.Label.EmailAddress,E-posta Adresi
 Authentication.SignUp.Label.EnterYourEmail,E-posta adresini gir
 Authentication.SignUp.Label.EnterYourParentsEmail,Ebeveyninin e-posta adresini gir
 Authentication.SignUp.Label.Error.MinimumAge5,Yeni hesap oluşturabilmek için beş yaşın üzerinde olunması gereklidir
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Bu oyunu oynamak için daha büyük olman gerekiyor
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,Ad zaten kullanımda
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,Kullanıcı adı _ ile başlayamaz veya bitemez
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"Kullanıcı adı yalnızca harf, sayı ve _ içerebilir"
@@ -744,6 +744,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,"CurveAnimation, çok fazl
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"CurveAnimation, {maxAllowed} taneden fazla MarkerCurve içeriyor. Lütfen en fazla {maxAllowed} MarkerCurve alt öğesi bulunmasına dikkat et."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,"CurveAnimation, {count} İşaretçili bir MarkerCurve içeriyor. MarkerCurve başına maksimum {maxAllowed} işaretçi olabilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation beklenmedik bir alt öğe içeriyor: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,{AssetId} kimlikli varlık ({InstanceFullName}.{FieldName}) yayınlanmadı. Yayınla ve tekrar dene.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Pazar yerindeki Dinamik Kafalar, kafes üzerindeki gözler ve ağız köşeleri mesh köşeleriyle hizalanacak şekilde düzgünce kafeslenmelidir. Lütfen kafeslemeni ve mesh ile hizalamasını iyileştir."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Dinamik Kafa için gülümseme ifadesi algılanamıyor. Kafada ağzın bulunduğu yerle eşleşmesi için lütfen ağzın kafes işaretlerini ayarla ve gülümseme ifadesini gösterebildiğinden emin ol.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Dinamik Kafa için sol göz kapalı ifadesi algılanamıyor. Kafada sol gözün bulunduğu yerle eşleşmesi için lütfen sol gözün kafes işaretlerini ayarla ve gözün kapatılabildiğinden emin ol.
@@ -756,7 +757,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Yayıcı Alan Eşiğ
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} çok Yayıcı. Yayıcı alan × yoğunluk sınırı aşıyor (şu anda yüzde {emissivePercentage}, yüzde {maxEmissivePercentage} veya daha az olmalıdır). Parlayan alanı küçült veya Yayıcı Gücünü düşür."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Yayıcı Alan Aşıldı.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} çok Yayıcı. Yayıcı alan × yoğunluk sınırı aşıyor (şu anda {emissiveArea}, {maxEmissiveArea} veya daha az olmalıdır). Parlayan alanı küçült veya Yayıcı Gücünü düşür."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"Bu varlık, yalnızca Güvenilir Yaratıcı Programı'ndaki yaratıcılar tarafından kullanılabilen yayıcı haritalar kullanıyor. Yüklemeden önce lütfen tüm yayıcı harita içeriklerini kaldır veya programa katıl."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Yayınlanan animasyonda geçerli bir maksimum parça öteleme değeri eksik. Lütfen animasyonu yeniden yayınla.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Yayınlanan animasyonda geçerli bir kullanıcı tarafından oluşturulmuş içerik (KTOİ) ifade işaretleyicisi eksik. Lütfen animasyonu yeniden yayınla.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Yayınlanan animasyon verilerinden maksimum parça ötelemesi hesaplanamadı. Lütfen animasyonu yeniden yayınla.
@@ -764,6 +764,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Yayı
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Kafa, Üst Gövdenin üzerine yerleştirilmelidir. Kafa merkezi, gövdenin üst kısmının altında. Bu, kafa mesh'inin çöktüğünü veya yanlış yerleştirildiğini gösterir."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls'taki InternalOverrideFACSData özelliği yükleme sırasında boş olmalıdır.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında büyüttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,Dinamik kafalarda en fazla {maxFacsJointCount} Yüz Hareketi Kodlama Sistemi (FACS) eklemi olabilir ancak bu kafada {actualJointCount} eklem var. Lütfen FACS eklemi sayısını azaltıp tekrar dene.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında küçülttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Yükleme formatı beklenen klasör yapısıyla eşleşmiyor. Lütfen tekrar dene veya bir hata raporu gönder.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,{bonePath} kemiği {partName} mesh parçanın çok dışında kalıyor; kemiği lütfen mesh parça boyut sınırına yaklaştır.
@@ -2307,6 +2308,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,Daha fazla oyuncu kazan
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Oyuncuları tekrar tekrar oynamaya teşvik et
 Feature.Build.Analytics.Goal.Locked.EarnRobux,Bu istatistikleri görmek için oyununda Robux kazan.
 Feature.Build.Analytics.Goal.Locked.FirstImpression,Bu istatistikleri görmek için ilk oyuncunu kazan.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Daha fazla oyuncun olduğunda bu istatistikleri görebilirsin.
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Geri dönen oyuncun olduğunda bu istatistikleri görebilirsin.
 Feature.Build.Analytics.KeyStats,Önemli istatistikler
 Feature.Build.Analytics.LastMonth,Geçen ay
@@ -2660,11 +2662,8 @@ Feature.Build.Message.NoSearchResultsFound,Hiçbir arama sonucu bulunamadı
 Feature.Build.Message.NoVersionHistory,Henüz sürüm geçmişi yok.
 Feature.Build.Message.OneTaskCompleted,1 görev tamamlandı
 Feature.Build.Message.OutOfBuildUsage,İnşa Et kullanım hakkın tükendi. Bir şeyler oluşturmaya devam etmek için Robux kullanma seçeneklerini görüntüle.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Aşağıdaki kullanıcılara sohbet bağlantısı içeren davet gönderemedin:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Bağlantı almak için lütfen Paylaş düğmesini kullan.
 Feature.Build.Message.PlaytesterRequestFailed,Talebini tamamlayamadık. Lütfen tekrar dene.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT}/{MAX_INVITES} erken test kullanıcısı davet edildi
-Feature.Build.Message.PrivatePlaytestInvite,{username} seni {experienceName} için erken test kullanıcısı olmaya davet etti
 Feature.Build.Message.PublicPublishFailed,Oyunun yayınlandı ancak herkese açık hâle getirilemedi. Tekrar dene.
 Feature.Build.Message.PublishExpandAudience,Kitleni genişletmek için yayınla
 Feature.Build.Message.PublishNotReverted,Yayınlaman geri döndürülmedi. Tekrar dene.
@@ -2733,7 +2732,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma aç�
 Feature.Build.Title.NoMonetizationProducts,Oyununda kazanmaya başla
 Feature.Build.Title.NoRobuxForUsage,İnşa Et kullanım hakkı için Robux kalmadı
 Feature.Build.Title.PickCampaign,Süre seç
-Feature.Build.Title.PlaytestInviteSendFailed,Davetler gönderilemedi
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Aşağıdaki kullanıcılar eklenemedi:
 Feature.Build.Title.PlaytestersOnlyPlay,Yalnızca oynanış testçileri oynayabilir
@@ -2755,15 +2753,8 @@ Feature.Build.Title.Versions,Versiyonlar
 Feature.Build.Title.WhatsIncluded,Neler dâhil?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,"Hayır, teşekkürler"
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,Yakalamanı paylaş
-Feature.Captures.Body.ShareCapturePrompt,Yakalamanı paylaşmak ister misin?
 Feature.Captures.Description.AllowPhotoAccessInfo,Yakalamalarını kaydetmek için Roblox'un cihazının kamerasına erişmesi gerekiyor.
 Feature.Captures.Title.AllowPhotoAccessInfo,Fotoğraflara Erişime İzin Ver
-Feature.Captures.Title.ShareCapturePrompt,Yakalamayı Paylaş
-Feature.Captures.Toast.CaptureSaved,Yakalama kaydedildi
-Feature.Captures.Toast.CaptureSavedToDevice,Cihaza Kaydedildi
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Özelleştir'e git
@@ -3845,7 +3836,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,"Sponsorlu Öğelerin ücreti, Yaratıcılar tarafından ödenir. Reklamlar, AB bölgelerindeki kullanıcılar için cihazının türü, konumu ve demografik hakkındaki genel bilgilere dayalı olarak sana gösterilebilir. Reklamlar, AB dışındaki bölgeler için ilave başka bilgilere dayalı olarak gösterilebilir."
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,Hiçbir Sonuç Bulunamadı
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,Bunun yerine şu ada sahip kişileri ara:
 Feature.GamePage.LabelShowingResultsFor,Şu arama için sonuçlar gösteriliyor:
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,"Bu deneyim, yaş doğrulama durumun nedeniyle kullanılamıyor."
@@ -4248,6 +4238,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Bir dakika bekle, ardından tekrar 
 Feature.Moments.Label.VoiceModerationError,Metnin güvenlik kurallarına uymalıdır
 Feature.Moments.Label.VoicePlaceholder,Seslendirme metnini yaz. {maxCount} karakter sınırı
 Feature.Moments.Label.VoiceTimeoutBody,Seslendirme oluşturma işlemi zaman aşımına uğradı.
+Feature.Moments.Label.VoiceTooManyNumbersError,Komut dosyası çok fazla sayıda rakam içeriyor
 Feature.Moments.Label.WriteComment,Yorum yaz
 Feature.Moments.Title.Comments,Yorumlar
 Feature.Moments.Title.CommentsWithCappedCount,Yorumlar ({count}+)
@@ -4257,8 +4248,8 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
-Feature.MusicPlayer.Action.GoToSongDetails,Şarkı Detaylarına Git
-Feature.MusicPlayer.Action.Report,
+Feature.Moments.Tooltip.ShareFirstMomentBody,Yakaladığın görüntülerden bir An oluştur
+Feature.Moments.Tooltip.ShareFirstMomentTitle,İlk Anını paylaş
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
 Feature.NotApproved.Action.Pending,

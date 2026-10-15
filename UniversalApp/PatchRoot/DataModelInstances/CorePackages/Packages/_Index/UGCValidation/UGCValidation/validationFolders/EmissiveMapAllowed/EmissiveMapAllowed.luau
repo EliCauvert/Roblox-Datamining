@@ -1,9 +1,9 @@
 ﻿local parent = script.Parent.Parent.Parent
-local httpService = game:GetService("HttpService")
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local APIUtilModule = require(parent.util.APIUtil)
+local getFFlagUGCValidateEmissiveMapAllowedModule = require(parent.flags.getFFlagUGCValidateEmissiveMapAllowed)
+local getFFlagUGCValidateDecalBlockEmissivesModule = require(parent.flags.getFFlagUGCValidateDecalBlockEmissives)
 local t = {
 	categories = {
 		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
@@ -15,80 +15,58 @@ local t = {
 	},
 	requiredData = {
 		validationEnumsModule.SharedDataMember.consumerConfig,
-		validationEnumsModule.SharedDataMember.uploadEnum,
-		validationEnumsModule.SharedDataMember.meshTextures
+		validationEnumsModule.SharedDataMember.rootInstance
 	},
-	fflag = require(parent.flags.getFFlagUGCValidateEmissiveMapAllowed),
+	fflag = function()
+		-- upvalues: getFFlagUGCValidateEmissiveMapAllowedModule (ref), getFFlagUGCValidateDecalBlockEmissivesModule (ref)
+		return getFFlagUGCValidateEmissiveMapAllowedModule() or getFFlagUGCValidateDecalBlockEmissivesModule()
+	end,
 	expectedFailures = {}
 }
 
 local function _(p1)
-	for i, v in p1 do
-		if v.EmissiveMask then
-			return true
+	return p1.EmissiveMaskContent.SourceType ~= Enum.ContentSourceType.None
+end
+
+local function isDecalEmissive(p1)
+	local emissiveTint = p1.EmissiveTint
+	
+	return if p1.EmissiveMaskContent.SourceType == Enum.ContentSourceType.None then if math.abs(p1.EmissiveStrength - 1) <= 0.00001 then if math.abs(emissiveTint.R - 1) <= 0.00001 then if math.abs(emissiveTint.G - 1) <= 0.00001 then math.abs(emissiveTint.B - 1) > 0.00001 else true else true else true else p1.EmissiveMaskContent.SourceType ~= Enum.ContentSourceType.None
+end
+
+local function reportEmissiveDecals(p1, p2)
+	-- upvalues: isDecalEmissive (ref), errorSourceStringsModule (ref)
+	for i, v in p2 do
+		if v:IsA("Decal") and isDecalEmissive(v) then
+			p1:fail(errorSourceStringsModule.Keys.EmissiveMap_NotAllowedOnDecal, { InstancePath = v:GetFullName() })
 		end
 	end
-	return false
 end
 
-local function checkEmissivePermission(p2)
-	-- upvalues: APIUtilModule (ref), httpService (ref)
-	if not p2.assetType then
-		return false, "Unable to determine asset type for emissive permission check"
-	end
-	local var1, var2 = APIUtilModule.requestAndRetryGet(string.format("https://itemconfiguration.%s/v1/permissions/action-allowed-for-item-type?action=1&assetType=%s", APIUtilModule.getBaseDomain(), tostring(p2.assetType.Value)))
-	
-	if not var1 then
-		return false, "Failed to check emissive map permission: " .. tostring(var2)
-	end
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), var2 (ref)
-		return httpService:JSONDecode(var2)
-	end)
-	
-	if not ok then
-		return false, "Failed to decode emissive map permission response"
-	end
-	local metadataPermissions = status.metadataPermissions
-	
-	if metadataPermissions then
-		return metadataPermissions.EmissiveResult == true, nil
-	end
-	return false, nil
-end
-
-function t.run(p2, p3)
-	-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref), checkEmissivePermission (ref)
-	local var1
-	for i, v in p3.meshTextures do
-		if v.EmissiveMask then
-			var1 = true
-			if not var1 then return end
-			local validationEnv = p3.consumerConfig.validationEnv
+local function reportInExperienceEmissive(p3, p4, p5)
+	-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref)
+	if not (if p5.consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC then p5.backendConfigs.universeId ~= nil else true) then return end
+	for i, v in p4 do
+		if v:IsA("SurfaceAppearance") and v.EmissiveMaskContent.SourceType ~= Enum.ContentSourceType.None then
+			p3:fail(errorSourceStringsModule.Keys.EmissiveMap_NotAllowedInExperience)
 			
-			if validationEnv == validationEnumsModule.ValidationEnv.IEC then
-				p2:fail(errorSourceStringsModule.Keys.EmissiveMap_NotAllowed)
-				
-				return
-			elseif validationEnv == validationEnumsModule.ValidationEnv.Backend then
-				if not p3.consumerConfig.backendConfigs.isEmissiveAllowed then
-					p2:fail(errorSourceStringsModule.Keys.EmissiveMap_NotAllowed)
-				end
-				return
-			else
-				local var2, var3 = checkEmissivePermission(p3.uploadEnum)
-				
-				if var3 then
-					p2:forceError(var3)
-				end
-				if not var2 then
-					p2:fail(errorSourceStringsModule.Keys.EmissiveMap_NotAllowed)
-				end
-				return
-			end
+			return
 		end
 	end
-	var1 = false
+end
+
+function t.run(p6, p7)
+	-- upvalues: getFFlagUGCValidateDecalBlockEmissivesModule (ref), reportEmissiveDecals (ref), getFFlagUGCValidateEmissiveMapAllowedModule (ref), reportInExperienceEmissive (ref)
+	local rootInstance = p7.rootInstance
+	local descendants = rootInstance:GetDescendants()
+	table.insert(descendants, rootInstance)
+	
+	if getFFlagUGCValidateDecalBlockEmissivesModule() then
+		reportEmissiveDecals(p6, descendants)
+	end
+	if getFFlagUGCValidateEmissiveMapAllowedModule() then
+		reportInExperienceEmissive(p6, descendants, p7.consumerConfig)
+	end
 end
 
 return t

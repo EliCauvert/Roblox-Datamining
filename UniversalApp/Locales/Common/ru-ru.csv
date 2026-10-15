@@ -1336,15 +1336,8 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Заблокировать: {DisplayName}?
 Feature.BuyRobux.Heading.Banner,Купить Robux
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,"Нет, спасибо"
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,Поделиться снимком/записью экрана
-Feature.Captures.Body.ShareCapturePrompt,Хочешь поделиться снимком/записью экрана?
 Feature.Captures.Description.AllowPhotoAccessInfo,"Чтобы сохранить скриншот/видео экрана, Roblox необходим доступ к фотоплёнке камеры устройства."
 Feature.Captures.Title.AllowPhotoAccessInfo,Разрешить доступ к фотографиям
-Feature.Captures.Title.ShareCapturePrompt,
-Feature.Captures.Toast.CaptureSaved,Медиа сохранено
-Feature.Captures.Toast.CaptureSavedToDevice,Сохранено на устройстве
 Feature.Catalog.Action.Buy,Купить
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.UnavailableItems,
@@ -2112,7 +2105,6 @@ Feature.GamePage.Action.BackToTop,Наверх
 Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,"Спонсируемые предметы оплачиваются создателями. Для пользователей ЕС они могут быть показаны на основе общей информации о типе устройства, местоположении и демографии. За пределами ЕС реклама может быть также показана на основе дополнительной информации."
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,Нет результатов
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,Искать для названных людей
 Feature.GamePage.LabelShowingResultsFor,Результаты поиска по запросу
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Этот плейс недоступен в связи со статусом подтверждения возраста.
@@ -2627,7 +2619,7 @@ Feature.ProfileBadges.VerifiedBadgeInfo,"Этот значок удостове�
 Feature.ProfileBadges.VerifiedBadgeInfoLink,
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,Значок подтверждения
 Feature.ProfileBadges.action.close,
-Feature.QualtricsSurveyPrompt.Action.Close,
+Feature.QualtricsSurveyPrompt.Action.Close,"Нет, спасибо"
 Feature.QualtricsSurveyPrompt.Description.PromptText,"Привет, {DisplayName}! Хочешь помочь сделать Roblox лучше? Пройди опрос, мы хотим знать твоё мнение!"
 Feature.QualtricsSurveyPrompt.Heading.Title,Помоги нам сделать Roblox лучше!
 Feature.QualtricsSurveyPrompt.Heading.WebviewName,Опрос
@@ -2753,7 +2745,7 @@ Feature.SettingsHub.Description.QRCodeCameraPermissionAndroidDeeplinkNotSupporte
 Feature.SettingsHub.Description.QRCodeCameraPermissionIOS,"Чтобы отсканировать QR-код, Roblox необходим доступ к камере."
 Feature.SettingsHub.Label.ConnectionsListLoadErrorMessage,Не удаётся загрузить друзей. Повтори попытку.
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,
-Feature.SettingsHub.Label.InviteSearchNoResults,
+Feature.SettingsHub.Label.InviteSearchNoResults,Нет результатов
 Feature.SettingsHub.Label.Invited,Приглашено
 Feature.SettingsHub.Label.Moderated,Проверено
 Feature.SettingsHub.Label.NoConnectionsPageMessage,"Добавляй друзей, чтобы можно было исследовать Roblox вместе."

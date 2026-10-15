@@ -520,6 +520,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,Face ID로 계정 보안 유지
 Authentication.SignUp.Heading.UserGreetingWithName,{username}님 안녕하세요
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,"{username} 님, 패스키 또는 비밀번호를 생성하세요"
 Authentication.SignUp.Heading.WhatsYourBirthday,
+Authentication.SignUp.Label.AddPassword,비밀번호 추가
 Authentication.SignUp.Label.Age,나이
 Authentication.SignUp.Label.Birthday,생년월일
 Authentication.SignUp.Label.BirthdayHeaderB,먼저 생년월일을 선택하세요
@@ -532,7 +533,6 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,
 Authentication.SignUp.Label.EnterYourParentsEmail,보호자 이메일 입력
 Authentication.SignUp.Label.Error.MinimumAge5,새 계정은 5세 이상이어야 합니다
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,이 게임을 플레이하려면 나이가 더 많아야 합니다.
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,이미 사용 중인 사용자 이름입니다
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,사용자 이름은 '_'로 시작하거나 끝날 수 없습니다
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"사용자 이름에는 문자, 숫자, '_'만 사용할 수 있습니다"
@@ -757,7 +757,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,이미시브 영역�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} 의 발광도가 너무 높습니다. 발광 영역 × 강도가 한도를 초과합니다(현재 {emissivePercentage}%, {maxEmissivePercentage}% 이하여야 함). 발광 영역을 줄이거나 발광 강도를 낮추세요."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,이미시브 영역이 초과되었습니다.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} 의 발광도가 너무 높습니다. 발광 영역 × 강도가 한도를 초과합니다(현재 {emissiveArea}, {maxEmissiveArea} 이하여야 함). 발광 영역을 줄이거나 발광 강도를 낮추세요."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,이 애셋은 신뢰할 수 있는 크리에이터 프로그램에 속한 크리에이터만 사용할 수 있는 발광형 맵을 사용합니다. 업로드하기 전에 모든 발광형 맵 콘텐츠를 제거하거나 프로그램에 참여하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,게시된 애니메이션에 유효한 최대 부위 이동 거리 값이 없습니다. 애니메이션을 다시 게시하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,게시된 애니메이션에 유효한 UGC 감정 표현 마커가 없습니다. 애니메이션을 다시 게시하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,게시된 애니메이션 데이터에서 최대 부위 이동 거리를 계산할 수 없습니다. 애니메이션을 다시 게시하세요.
@@ -765,6 +764,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"게�
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"머리는 UpperTorso 위에 배치해야 합니다. 머리 중심이 몸통 상단 아래에 있어, 헤드 메시가 접혔거나 잘못 배치되었음을 나타냅니다."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls의 InternalOverrideFACSData 속성은 업로드 시 비워두어야 합니다.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 확대된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"다이내믹 헤드에는 최대 {maxFacsJointCount}개의 FACS 조인트를 포함할 수 있지만, 이 헤드에는 {actualJointCount}개가 있습니다. FACS 조인트 개수를 줄이고 다시 시도하세요."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 축소된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,업로드 형식이 예상 폴더 구조와 일치하지 않습니다. 다시 시도하거나 버그 신고를 제출하세요.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,뼈대 {bonePath}이(가) 메시 파트 {partName}에서 너무 멀리 떨어져 있습니다. 뼈대를 메시 파트 크기 경계에 더 가깝게 배치하세요.
@@ -2321,6 +2321,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,플레이어를 더 많이 유치하
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,플레이어의 재방문을 유도하세요
 Feature.Build.Analytics.Goal.Locked.EarnRobux,이 통계를 보려면 게임 내에서 Robux를 획득하세요.
 Feature.Build.Analytics.Goal.Locked.FirstImpression,이 통계를 보려면 첫 번째 플레이어를 확보하세요.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,이 통계를 보려면 플레이어를 더 많이 유치하세요.
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,이 통계를 보려면 첫 번째 재방문 플레이어를 확보하세요.
 Feature.Build.Analytics.KeyStats,주요 통계
 Feature.Build.Analytics.LastMonth,지난달
@@ -2674,11 +2675,8 @@ Feature.Build.Message.NoSearchResultsFound,검색 결과가 없습니다
 Feature.Build.Message.NoVersionHistory,아직 버전 기록이 없습니다.
 Feature.Build.Message.OneTaskCompleted,1개 작업 완료
 Feature.Build.Message.OutOfBuildUsage,Build 사용량이 소진되었습니다. 계속 제작하려면 Robux 사용 옵션을 확인하세요.
-Feature.Build.Message.PlaytestInviteSendFailedBody,다음 사용자에게 초대 채팅 링크를 보낼 수 없습니다:
-Feature.Build.Message.PlaytestInviteSendFailedHint,공유 버튼을 사용하여 링크를 받으세요.
 Feature.Build.Message.PlaytesterRequestFailed,요청을 완료하지 못했습니다. 다시 시도해 보세요.
 Feature.Build.Message.PlaytestersAdded,얼리 테스터 {MAX_INVITES}명 중 {INVITED_COUNT}명 초대함
-Feature.Build.Message.PrivatePlaytestInvite,{username} 님이 나를 {experienceName}의 얼리 테스터로 초대했습니다.
 Feature.Build.Message.PublicPublishFailed,게임이 게시되었지만 공개되지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishExpandAudience,오디언스를 확대하려면 게시하세요
 Feature.Build.Message.PublishNotReverted,게시한 내용을 되돌리지 못했습니다. 다시 시도하세요.
@@ -2747,7 +2745,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,관리형 가격 책정을 켜
 Feature.Build.Title.NoMonetizationProducts,게임 내에서 수익을 올리세요
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.PickCampaign,기간을 선택하세요.
-Feature.Build.Title.PlaytestInviteSendFailed,초대를 보낼 수 없음
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,다음 사용자를 추가할 수 없습니다:
 Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다
@@ -2769,15 +2766,8 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,포함 사항
 Feature.BuyRobux.Heading.Banner,Robux 구매
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,아니요 안 할래요
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,캡처를 공유하세요
-Feature.Captures.Body.ShareCapturePrompt,캡처를 공유할까요?
 Feature.Captures.Description.AllowPhotoAccessInfo,캡처를 저장하려면 Roblox가 기기의 카메라 롤에 액세스할 수 있어야 합니다.
 Feature.Captures.Title.AllowPhotoAccessInfo,사진에 액세스 허용
-Feature.Captures.Title.ShareCapturePrompt,캡처 공유
-Feature.Captures.Toast.CaptureSaved,캡처 저장 완료
-Feature.Captures.Toast.CaptureSavedToDevice,기기에 저장됨
 Feature.Catalog.Action.Buy,구매
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,꾸미기로 이동하기
@@ -3860,7 +3850,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,"스폰서 아이템은 크리에이터가 비용을 지불합니다. EU 사용자의 경우, 기기 유형, 위치, 인구 통계에 관한 일반적인 정보를 기반으로 표시될 수 있습니다. EU 외 지역은 추가 정보를 기반으로 광고가 표시될 수 있습니다."
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,결과를 찾을 수 없습니다
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,대신 다음 이름의 회원 검색:
 Feature.GamePage.LabelShowingResultsFor,검색 결과 - 검색어:
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,나이 인증 결과로 인해 이 체험을 이용할 수 없습니다.
@@ -4264,6 +4253,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,잠시 기다린 후 다시 시도�
 Feature.Moments.Label.VoiceModerationError,스크립트는 안전 규칙을 준수해야 합니다
 Feature.Moments.Label.VoicePlaceholder,보이스오버 스크립트를 입력하세요. 글자 수 한도 {maxCount}자
 Feature.Moments.Label.VoiceTimeoutBody,보이스오버 생성 시간이 초과되었습니다.
+Feature.Moments.Label.VoiceTooManyNumbersError,스크립트에 숫자가 너무 많습니다
 Feature.Moments.Label.WriteComment,코멘트를 남기세요
 Feature.Moments.Title.Comments,코멘트
 Feature.Moments.Title.CommentsWithCappedCount,코멘트({count}개 이상)
@@ -4273,8 +4263,6 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,게시물 신고
-Feature.MusicPlayer.Action.GoToSongDetails,'노래 세부 정보'로 이동
-Feature.MusicPlayer.Action.Report,리포트
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
 Feature.NotApproved.Action.Pending,응답 대기 중
@@ -4759,7 +4747,7 @@ Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,검색에서
 Feature.PlayerSearchResults.Label.KeywordTooShort,최소 3자 이상 입력하세요.
 Feature.PlayerSearchResults.Label.NewUsername,새로운 사용자 이름
-Feature.PlayerSearchResults.Label.NoResultsFound,
+Feature.PlayerSearchResults.Label.NoResultsFound,결과를 찾을 수 없습니다
 Feature.PlayerSearchResults.Label.NoResultsTryAnotherWay,다른 방법으로 친구를 찾으세요.
 Feature.PlayerSearchResults.Label.Previously,
 Feature.PlayerSearchResults.Label.ThisIsYou,회원님이네요

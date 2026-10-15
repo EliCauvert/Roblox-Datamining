@@ -106,7 +106,7 @@ return function(p1)
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
 		Size = UDim2.new(1, 0, 0, tokens.Size.Size_1200),
-		GroupTransparency = if p1.disabled then 1 - tokens.Component.TextField.Disabled.Field.Opacity else 0
+		GroupTransparency = if p1.disabled then 0.68 else 0
 	}
 	local t_4 = {}
 	local createElement_2 = reactModule.createElement

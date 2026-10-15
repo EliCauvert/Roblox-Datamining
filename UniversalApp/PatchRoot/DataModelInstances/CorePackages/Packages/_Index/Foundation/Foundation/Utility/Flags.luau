@@ -15,7 +15,6 @@ return {
 	FoundationBaseMenuSubmenuMaxHeight = safeFlagsModule.createGetFFlag("FoundationBaseMenuSubmenuMaxHeight")(),
 	FoundationViewMemoizationChanges = safeFlagsModule.createGetFFlag("FoundationViewMemoizationChanges")(),
 	FoundationOptionSelectorGroupFixes = safeFlagsModule.createGetFFlag("FoundationOptionSelectorGroupFixes")(),
-	FoundationOverlayResilientMainGui = safeFlagsModule.createGetFFlag("FoundationOverlayResilientMainGui")(),
 	FoundationWidgetManagerSnapshotFlush = safeFlagsModule.createGetFFlag("FoundationWidgetManagerSnapshotFlush")(),
 	FoundationSegmentedControlBeta = safeFlagsModule.createGetFFlag("FoundationSegmentedControlBeta")(),
 	FoundationTooltipPressedOutside = safeFlagsModule.createGetFFlag("FoundationTooltipPressedOutside")(),
@@ -40,7 +39,6 @@ return {
 	FoundationKnobRaisedShadow = var1 and safeFlagsModule.createGetFFlag("FoundationKnobRaisedShadow")(),
 	FoundationStatusIndicatorMask = safeFlagsModule.createGetFFlag("FoundationStatusIndicatorMask")(),
 	FoundationAccordionBeta = safeFlagsModule.createGetFFlag("FoundationAccordionBeta")(),
-	FoundationSliderBeta = safeFlagsModule.createGetFFlag("FoundationSliderBeta3")(),
 	FoundationSystemEmphasisNonActions = safeFlagsModule.createGetFFlag("FoundationSystemEmphasisNonActions")(),
 	FoundationPopoverClampMinBound = safeFlagsModule.createGetFFlag("FoundationPopoverClampMinBound")(),
 	FoundationFixColorOnScrubbableNumberInput = var2,
@@ -59,5 +57,7 @@ return {
 	FoundationEducationalTooltipBodyOnlyContentLayout = var4 and (var5 and safeFlagsModule.createGetFFlag("FoundationEducationalTooltipBodyOnlyContentLayout")()),
 	FoundationSheetReversedContent = safeFlagsModule.createGetFFlag("FoundationSheetReversedContent")(),
 	FoundationStatusIndicatorDesignUpdate = safeFlagsModule.createGetFFlag("FoundationStatusIndicatorDesignUpdate")(),
-	FoundationUnifiedScrimScrolling = safeFlagsModule.createGetFFlag("FoundationUnifiedScrimScrolling2")()
+	FoundationUnifiedScrimScrolling = safeFlagsModule.createGetFFlag("FoundationUnifiedScrimScrolling2")(),
+	FoundationFixChipAccessoryLayout = safeFlagsModule.createGetFFlag("FoundationFixChipAccessoryLayout")(),
+	FoundationRemoveDeprecatedSemanticTokens = safeFlagsModule.createGetFFlag("FoundationRemoveDeprecatedSemanticTokens")()
 }

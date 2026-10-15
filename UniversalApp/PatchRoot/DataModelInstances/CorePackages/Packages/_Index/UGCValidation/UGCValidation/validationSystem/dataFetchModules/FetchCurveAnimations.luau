@@ -4,15 +4,21 @@ local getAllInstancesIsAModule = require(parent.util.getAllInstancesIsA)
 local getFFlagUGCValidateCurveAnimSingleRootModule = require(parent.flags.getFFlagUGCValidateCurveAnimSingleRoot)
 
 return {
-	getData = function(p1)
+	getData = function(p1, p2)
 		-- upvalues: getAllInstancesIsAModule (ref), getFFlagUGCValidateCurveAnimSingleRootModule (ref)
-		local status
+		local var1, status
 		local t = {}
 		
 		for i, v in getAllInstancesIsAModule(p1, "Animation") do
 			local animationId = v.AnimationId
 			
 			if animationId ~= "" then
+				var1 = p2 and p2.preloadedCurveAnimations[animationId]
+				
+				if var1 then
+					table.insert(t, var1)
+					continue
+				end
 				ok, status = pcall(function()
 					-- upvalues: animationId (ref)
 					return game:GetObjectsAllOrNone(animationId)

@@ -467,7 +467,7 @@ Authentication.SignUp.Description.BirthdayHelp3,これは関連コンテンツ�
 Authentication.SignUp.Description.BirthdayHint,日付を入力
 Authentication.SignUp.Description.BirthdayValuePropC,あなたに表示するコンテンツを決めるのに役立ちます。他の方々には表示されません
 Authentication.SignUp.Description.ClickNextAgreeToTerms,「次へ」をクリックすると、仲裁条項を含む利用規約に同意し、プライバシーポリシーを承認したことになります。
-Authentication.SignUp.Description.CreateAPassword,Robloxアカウントのパスワードを作成
+Authentication.SignUp.Description.CreateAPassword,アカウントを保護する方法を選択してください。
 Authentication.SignUp.Description.CreateAccountPasskeyEmphasisDescription,パスキーを使用すると、顔認証、指紋またはデバイスのロック解除に使用する暗証番号（PIN）で素早くログインできます。
 Authentication.SignUp.Description.CreatePasskeyOrOTP,Robloxアカウントのパスキーを作成するか、一回限りのパスワードでサインインするためのメールアドレスを追加してください。
 Authentication.SignUp.Description.EnsureNeverLoseAccount,お持ちのRobloxアカウントにアクセスできなくなるのを防ぎます。
@@ -519,6 +519,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,Face IDでアカウントを保�
 Authentication.SignUp.Heading.UserGreetingWithName,{username} さん、こんにちは
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,{username}さん、パスキーまたはパスワードを作成してください
 Authentication.SignUp.Heading.WhatsYourBirthday,
+Authentication.SignUp.Label.AddPassword,パスワードを追加
 Authentication.SignUp.Label.Age,年齢
 Authentication.SignUp.Label.Birthday,生年月日
 Authentication.SignUp.Label.BirthdayHeaderB,まず生年月日を選択
@@ -531,7 +532,6 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,
 Authentication.SignUp.Label.EnterYourParentsEmail,保護者のメールアドレスを入力
 Authentication.SignUp.Label.Error.MinimumAge5,新規アカウントの設定年齢は5歳以上でなければなりません
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,このゲームをプレイするには、一定の年齢以上である必要があります
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,このユーザーネームはすでに使用されています
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,ユーザーネームの最初と最後に下線 _ は使用不可
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,ユーザーネームに使用できるのは半角英数字と _ のみ
@@ -744,6 +744,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimationに、キー
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimationに、{maxAllowed}件を超えるMarkerCurveが含まれています。MarkerCurveの子孫は{maxAllowed}件以下にしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimationに、マーカーが{count}件あるMarkerCurveが含まれています。MarkerCurveあたりのマーカーの最大数は{maxAllowed}件です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimationに、予期しない子が含まれています：{childName}
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,アセット{AssetId}（{InstanceFullName}.{FieldName}）は公開されていません。公開してから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,マーケットプレイスの「動く頭」は、ケージの目と口の頂点がメッシュの頂点と一致するように、適切に合わせる必要があります。ケージとメッシュとの位置合わせを改善してください。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,動く頭の笑顔の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、笑顔の表情ができるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,動く頭の左目を閉じた表情を検出できません。左目のケージのランドマークを調整して、頭の左目の位置に合わせ、閉じられるようにしてください。
@@ -756,7 +757,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,エミッシブエ�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{emissivePercentage}%ですが、{maxEmissivePercentage}%以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,エミッシブエリアの面積が上限を超えています。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{emissiveArea}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{assetTypeName}ですが、{maxEmissiveArea}以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,このアセットは、信頼できるクリエータープログラムのクリエーターのみが利用できるエミッシブマップを使用しています。アップロードする前に、すべてのエミッシブマップコンテンツを削除するか、プログラムに参加してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,公開されたアニメーションには有効なパーツの最大移動量がありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,公開されたアニメーションには有効なUGCリアクションマーカーがありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,公開されたアニメーションデータからパーツの最大移動量を計算できませんでした。アニメーションを再公開してください。
@@ -764,6 +764,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,公開
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,頭はUpperTorsoの上に配置する必要があります。現在、頭の中心が胴体の最上部より下に位置しています。これは、頭のメッシュが折りたたまれているか、配置が正しくないことを示しています。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,アップロード時、FaceControlsのInternalOverrideFACSDataプロパティは空にする必要があります。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,頭部を{modPercent}%に拡大するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,「動く頭」には最大{maxFacsJointCount}個のFACS（表情コーディングシステム）ジョイントを含めることができますが、この頭には{actualJointCount}個含まれています。FACSジョイントの数を減らしてから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,頭部を{modPercent}%に縮小するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,アップロード形式が期待されるフォルダ構造と一致しません。再度お試しいただくか、バグ報告を提出してください。
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,骨「{bonePath}」がメッシュパーツ「{partName}」から離れすぎています。メッシュパーツのサイズ境界に近づけてください。
@@ -2674,11 +2675,8 @@ Feature.Build.Message.NoSearchResultsFound,検索結果が見つかりません�
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
 Feature.Build.Message.OneTaskCompleted,1つのタスクが完了しました
 Feature.Build.Message.OutOfBuildUsage,ビルド使用量がなくなりました。作成を続けるには、Robuxを使用するためのオプションをご確認ください。
-Feature.Build.Message.PlaytestInviteSendFailedBody,次のユーザーに招待のチャットリンクを送信できませんでした：
-Feature.Build.Message.PlaytestInviteSendFailedHint,[シェア]ボタンを使用して、リンクを取得してください。
 Feature.Build.Message.PlaytesterRequestFailed,リクエストを完了できませんでした。もう一度お試しください。
 Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人の早期テスターを招待済み
-Feature.Build.Message.PrivatePlaytestInvite,{username}さんから『{experienceName}』の早期テスターとして招待されました
 Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
 Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを拡大
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
@@ -2747,7 +2745,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンに
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.PickCampaign,期間を選択
-Feature.Build.Title.PlaytestInviteSendFailed,招待を送信できませんでした
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,次のユーザーを追加できませんでした：
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
@@ -2769,15 +2766,8 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,含まれるもの
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,しない
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,切り抜きをシェアする
-Feature.Captures.Body.ShareCapturePrompt,切り抜きをシェアしますか？
 Feature.Captures.Description.AllowPhotoAccessInfo,切り抜きを保存するには、Robloxがあなたのデバイスのカメラロールにアクセスする必要があります。
 Feature.Captures.Title.AllowPhotoAccessInfo,写真へのアクセスを許可する
-Feature.Captures.Title.ShareCapturePrompt,
-Feature.Captures.Toast.CaptureSaved,切り抜きを保存済み
-Feature.Captures.Toast.CaptureSavedToDevice,デバイスに保存しました
 Feature.Catalog.Action.Buy,購入
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,カスタマイズへ
@@ -3859,7 +3849,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,スポンサー広告アイテムは、クリエーターによって支払われています。EU圏のユーザーには、お持ちのデバイスの種類やご利用の地域、ユーザーのみなさんの属性データ全般に関する一般的な情報に基づいて表示されるかもしれません。EU圏以外では、その他の追加情報に基づいて広告が表示されるかもしれません。
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,結果が見つかりませんでした
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,以下の人の名前でサーチ：
 Feature.GamePage.LabelShowingResultsFor,以下の結果を表示中:
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,このバーチャル空間は、年齢確認の状態によって利用できません。
@@ -4272,8 +4261,8 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
-Feature.MusicPlayer.Action.GoToSongDetails,曲の詳細へ
-Feature.MusicPlayer.Action.Report,
+Feature.Moments.Tooltip.ShareFirstMomentBody,切り抜きからモーメントを作成します
+Feature.Moments.Tooltip.ShareFirstMomentTitle,最初のモーメントをシェア
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
 Feature.NotApproved.Action.Pending,
@@ -4756,7 +4745,7 @@ Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,サーチから
 Feature.PlayerSearchResults.Label.KeywordTooShort,少なくとも3文字入力してください
 Feature.PlayerSearchResults.Label.NewUsername,新しいユーザーネーム
-Feature.PlayerSearchResults.Label.NoResultsFound,
+Feature.PlayerSearchResults.Label.NoResultsFound,結果が見つかりませんでした
 Feature.PlayerSearchResults.Label.NoResultsTryAnotherWay,他の方法で友達を探してみてください。
 Feature.PlayerSearchResults.Label.Previously,前の名前は
 Feature.PlayerSearchResults.Label.ThisIsYou,これがあなたです
@@ -4879,7 +4868,7 @@ Feature.ProfileBadges.VerifiedBadgeInfoLink,
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,認証済みバッジ
 Feature.ProfileBadges.action.close,
 Feature.QualtricsSurveyPrompt.Action.Cancel,
-Feature.QualtricsSurveyPrompt.Action.Close,
+Feature.QualtricsSurveyPrompt.Action.Close,しない
 Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
 Feature.QualtricsSurveyPrompt.Action.Next,

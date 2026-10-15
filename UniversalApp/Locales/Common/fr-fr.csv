@@ -519,6 +519,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,Sécurise ton compte avec Face I
 Authentication.SignUp.Heading.UserGreetingWithName,Bonjour {username}
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,"Salut {username}, crée un passkey ou un mot de passe"
 Authentication.SignUp.Heading.WhatsYourBirthday,Quelle est votre date d'anniversaire ?
+Authentication.SignUp.Label.AddPassword,Ajouter un mot de passe
 Authentication.SignUp.Label.Age,Âge
 Authentication.SignUp.Label.Birthday,Date anniversaire
 Authentication.SignUp.Label.BirthdayHeaderB,"Tout d'abord, sélectionne ta date de naissance"
@@ -531,7 +532,6 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,Saisissez votre adresse e-mail
 Authentication.SignUp.Label.EnterYourParentsEmail,Saisis l'adresse e-mail de ton parent
 Authentication.SignUp.Label.Error.MinimumAge5,Les nouveaux comptes doivent avoir plus de cinq ans
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Tu es trop jeune pour jouer à cette expérience.
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,Ce nom d'utilisateur est déjà utilisé
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,Le nom d'utilisateur ne doit pas commencer ou se terminer par _
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"Le nom d'utilisateur ne doit contenir que des lettres, des chiffres et _"
@@ -756,7 +756,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Zone émissive supé
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} est trop émissif. Le produit de la surface émissive par l'intensité dépasse la limite autorisée (actuellement {emissivePercentage} %, pour un maximum de{maxEmissivePercentage} %). Réduis la zone lumineuse ou diminue son EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Zone émissive dépassée.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} est trop émissif. Le produit de la surface émissive par l'intensité dépasse la limite autorisée (actuellement {emissiveArea}, pour un maximum de {maxEmissiveArea}). Réduis la zone lumineuse ou diminue son EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Ce contenu utilise des cartes émissives qui ne sont disponibles que pour les créateurs du programme des créateurs de confiance. Supprime tout contenu de cartes émissives ou rejoins le programme avant de l'importer.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Il manque une valeur de translation maximale valide à l'animation publiée. Republie l'animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Il manque un marqueur d'emote UGC valide à l'animation publiée. Republie l'animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,La translation maximale n'a pas pu être calculée à partir des données de l'animation publiée. Republie l'animation.
@@ -764,6 +763,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"L'ani
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"La tête doit être placée au-dessus de UpperTorso. Le centre de la tête se trouve sous le haut du torse, ce qui indique que le maillage de la tête est affaissé ou mal positionné."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La propriété InternalOverrideFACSData sur FaceControls doit être vide lors de l'importation.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Nous avons détecté que le système de codage facial est en train d'agrandir la tête à {modPercent} %, alors la modification de la tête est contraire à la politique de la marketplace relative aux animations faciales."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Les têtes dynamiques peuvent avoir au maximum {maxFacsJointCount} articulations avec système de codage facial (FACS), mais cette tête en compte {actualJointCount}. Réduis le nombre d'articulations FACS, puis réessaie."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Nous avons détecté que le système de codage facial est en train de réduire la tête à {modPercent} %, alors que la modification de la tête est contraire à la politique de la marketplace relative aux animations faciales."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Le format d'importation ne correspond pas à la structure de dossiers attendue. Réessaie ou signale un bug.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,L'os {bonePath} est trop éloigné de la partie de maillage {partName}. Merci de le rapprocher des limites de la taille de la partie de maillage.
@@ -2320,6 +2320,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,Attire plus de joueurs
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Assurez le retour des joueurs
 Feature.Build.Analytics.Goal.Locked.EarnRobux,Gagne des Robux dans ton jeu pour consulter ces statistiques.
 Feature.Build.Analytics.Goal.Locked.FirstImpression,Accueille ton premier joueur pour consulter ces statistiques.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Attire plus de joueurs pour consulter ces statistiques.
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Fais revenir un joueur pour la première fois afin de consulter ces statistiques.
 Feature.Build.Analytics.KeyStats,Stats clés
 Feature.Build.Analytics.LastMonth,Le mois dernier
@@ -2673,11 +2674,8 @@ Feature.Build.Message.NoSearchResultsFound,Aucun résultat de recherche
 Feature.Build.Message.NoVersionHistory,Aucun historique des versions pour le moment.
 Feature.Build.Message.OneTaskCompleted,1 tâche terminée
 Feature.Build.Message.OutOfBuildUsage,Tu ne peux plus utiliser la fonctionnalité Construire. Consulte tes options pour utiliser des Robux et continuer à créer.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Les utilisateurs suivants n'ont pas pu recevoir ton lien d'invitation :
-Feature.Build.Message.PlaytestInviteSendFailedHint,Utilise le bouton Partager pour obtenir un lien.
 Feature.Build.Message.PlaytesterRequestFailed,Nous n'avons pas pu traiter ta demande. Réessaie.
 Feature.Build.Message.PlaytestersAdded,Testeurs en avant-première invités : {INVITED_COUNT}/{MAX_INVITES}
-Feature.Build.Message.PrivatePlaytestInvite,{username} t'invite à tester {experienceName} en avant-première
 Feature.Build.Message.PublicPublishFailed,"Ton jeu a été publié, mais n'a pas pu être rendu public. Réessaye."
 Feature.Build.Message.PublishExpandAudience,Publie pour élargir ton public
 Feature.Build.Message.PublishNotReverted,Ta publication n'a pas été rétablie. Réessaie.
@@ -2746,7 +2744,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Activer la tarification géré
 Feature.Build.Title.NoMonetizationProducts,Gagne de l'argent dans ton expérience
 Feature.Build.Title.NoRobuxForUsage,Il ne reste plus de Robux pour utiliser Construire
 Feature.Build.Title.PickCampaign,Choisis une durée
-Feature.Build.Title.PlaytestInviteSendFailed,Impossible d'envoyer les invitations
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Impossible d'ajouter les utilisateurs suivants :
 Feature.Build.Title.PlaytestersOnlyPlay,Seuls les testeurs peuvent y jouer
@@ -2768,15 +2765,8 @@ Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,Qu'est-ce qui est inclus ?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,Non merci
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,Partager ta capture
-Feature.Captures.Body.ShareCapturePrompt,Veux-tu partager ta capture ?
 Feature.Captures.Description.AllowPhotoAccessInfo,"Pour enregistrer vos captures, Roblox a besoin d’accéder à votre appareil."
 Feature.Captures.Title.AllowPhotoAccessInfo,Autoriser l'accès aux photos
-Feature.Captures.Title.ShareCapturePrompt,Partager la capture
-Feature.Captures.Toast.CaptureSaved,Capture sauvegardée
-Feature.Captures.Toast.CaptureSavedToDevice,Enregistré sur l'appareil
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Aller à Personnaliser
@@ -3858,7 +3848,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Sponsorisés
 Feature.GamePage.Label.SponsoredDisclosure,"Les items sponsorisés sont payés par les créateurs. Pour les utilisateurs de l'UE, ils peuvent vous être présentés sur la base d'informations générales concernant votre type d'appareil, votre localisation et vos données démographiques. En dehors de l'UE, les publicités peuvent également être affichées sur la base d'informations supplémentaires."
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,Recherche plutôt les personnes nommées
 Feature.GamePage.LabelShowingResultsFor,Affichage des résultats pour
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Cette expérience n'est pas disponible en raison de ton statut su la vérification de ton âge.
@@ -4261,6 +4250,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Patiente une minute, puis réessaie
 Feature.Moments.Label.VoiceModerationError,Ton script doit respecter les règles de sécurité
 Feature.Moments.Label.VoicePlaceholder,Saisis le script pour ta voix off ({maxCount} caractères max.)
 Feature.Moments.Label.VoiceTimeoutBody,La génération de la voix off a expiré.
+Feature.Moments.Label.VoiceTooManyNumbersError,Le script contient trop de chiffres
 Feature.Moments.Label.WriteComment,Écrire un commentaire
 Feature.Moments.Title.Comments,Commentaires
 Feature.Moments.Title.CommentsWithCappedCount,Commentaires (+ de {count})
@@ -4270,8 +4260,6 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Signaler un post
-Feature.MusicPlayer.Action.GoToSongDetails,Aller aux détails de la chanson
-Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,Se déconnecter
 Feature.NotApproved.Action.Pending,

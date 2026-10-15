@@ -3,7 +3,6 @@ local createEditableInstancesForContextModule = require(parent.util.createEditab
 local getMeshSizeModule = require(parent.util.getMeshSize)
 local sharedDataMember = require(parent.validationSystem.ValidationEnums).SharedDataMember
 local _ = require(parent.util.Types)
-local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local getFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule = require(parent.flags.getFFlagUGCValidateEmissiveAreaChecksFixedAlgo)
 local t = {
 	cleanup = function(p1)
@@ -54,55 +53,45 @@ local function getMeshData(p2, p3, p4)
 end
 
 local function getTextureData(p2, p3, p4)
-	-- upvalues: getFFlagUGCValidateAllowEmissivesModule (ref), getFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule (ref), createEditableInstancesForContextModule (ref), t (ref)
-	local t_1
+	-- upvalues: getFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule (ref), createEditableInstancesForContextModule (ref), t (ref)
 	local surfaceAppearance = p2:FindFirstChildWhichIsA("SurfaceAppearance")
-	local _ = {}
-	
-	if surfaceAppearance == nil then
-		t_1 = {
-			isPBR = false,
-			Texture = if p2:IsA("MeshPart") then p2.TextureContent else Content.fromUri(p2.TextureId)
-		}
-	else
-		t_1 = {
-			isPBR = true,
-			ColorMap = surfaceAppearance.ColorMapContent,
-			MetalnessMap = surfaceAppearance.MetalnessMapContent,
-			NormalMap = surfaceAppearance.NormalMapContent,
-			RoughnessMap = surfaceAppearance.RoughnessMapContent
-		}
-		
-		if getFFlagUGCValidateAllowEmissivesModule() then
-			t_1.EmissiveMask = surfaceAppearance.EmissiveMaskContent
-		end
-	end
-	local t_2 = { isPBR = t_1.isPBR }
+	local var1 = if surfaceAppearance ~= nil then {
+		isPBR = false,
+		Texture = if p2:IsA("MeshPart") then p2.TextureContent else Content.fromUri(p2.TextureId)
+	} else {
+		isPBR = true,
+		ColorMap = surfaceAppearance.ColorMapContent,
+		MetalnessMap = surfaceAppearance.MetalnessMapContent,
+		NormalMap = surfaceAppearance.NormalMapContent,
+		RoughnessMap = surfaceAppearance.RoughnessMapContent,
+		EmissiveMask = surfaceAppearance.EmissiveMaskContent
+	}
+	local t_1 = { isPBR = var1.isPBR }
 	
 	if getFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule() and surfaceAppearance ~= nil then
-		t_2.EmissiveTint = surfaceAppearance.EmissiveTint
-		t_2.EmissiveStrength = surfaceAppearance.EmissiveStrength
+		t_1.EmissiveTint = surfaceAppearance.EmissiveTint
+		t_1.EmissiveStrength = surfaceAppearance.EmissiveStrength
 	end
-	for i, v in t_1 do
+	for i, v in var1 do
 		if getFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule() then
 			if i ~= "isPBR" and i ~= "EmissiveTint" and (i ~= "EmissiveStrength" and v.SourceType ~= Enum.ContentSourceType.None) then
 				local editableImage, editableImage_1 = createEditableInstancesForContextModule.getEditableInstanceInfo(v, p4, "EditableImage", p3)
 				
 				if editableImage then
-					t_2[i] = {
+					t_1[i] = {
 						editable = editableImage_1.instance,
 						createdInValidation = editableImage_1.created
 					}
 					continue
 				end
-				t.cleanup(t_2)
+				t.cleanup(t_1)
 				
 				return false
 			end
 		elseif i ~= "isPBR" and v.SourceType ~= Enum.ContentSourceType.None then
 		end
 	end
-	return true, t_2
+	return true, t_1
 end
 
 local function getCageData(p5, p6, p7, p8)
@@ -133,15 +122,15 @@ end
 
 local function getDataInstance(p5, p6)
 	-- upvalues: sharedDataMember (ref)
-	local var1 = if p5:IsA("MeshPart") then p5 else p5:FindFirstChildOfClass("SpecialMesh")
+	local var2 = if p5:IsA("MeshPart") then p5 else p5:FindFirstChildOfClass("SpecialMesh")
 	
-	if var1 then
+	if var2 then
 		local baseWrap = p5:FindFirstChildWhichIsA("BaseWrap")
 		
 		if p6 == sharedDataMember.renderMeshesData then
-			return true, var1
+			return true, var2
 		elseif p6 == sharedDataMember.meshTextures then
-			return (var1.ClassName == "MeshPart" and var1.TextureContent.SourceType ~= Enum.ContentSourceType.None) or (var1:FindFirstChildWhichIsA("SurfaceAppearance") ~= nil or (var1.ClassName == "SpecialMesh" and var1.TextureId ~= "")), var1
+			return (var2.ClassName == "MeshPart" and var2.TextureContent.SourceType ~= Enum.ContentSourceType.None) or (var2:FindFirstChildWhichIsA("SurfaceAppearance") ~= nil or (var2.ClassName == "SpecialMesh" and var2.TextureId ~= "")), var2
 		elseif p6 == sharedDataMember.outerCagesData and baseWrap then
 			return baseWrap.CageMeshContent.SourceType ~= Enum.ContentSourceType.None, baseWrap
 		elseif p6 == sharedDataMember.innerCagesData and baseWrap and baseWrap.ClassName == "WrapLayer" then
@@ -153,33 +142,33 @@ end
 
 function t.getDatas(p5, p6, p7, p8, p9)
 	-- upvalues: getDataInstance (ref), sharedDataMember (ref), getMeshData (ref), getCageData (ref), getTextureData (ref), t (ref)
-	local var1
+	local var2
 	local t_1 = {}
 	local descendants = p5:GetDescendants()
 	table.insert(descendants, p5)
 	
 	for i, v in descendants do
-		var23, var24 = getDataInstance(v, p6)
+		var22, var23 = getDataInstance(v, p6)
 		
-		if var23 then
-			local var2 = nil
+		if var22 then
 			local var3 = nil
+			local var4 = nil
 			
 			if p6 == sharedDataMember.renderMeshesData then
-				local var4, var5 = getMeshData(var1, p7, p8)
-				var2 = var4
+				local var5, var6 = getMeshData(var2, p7, p8)
 				var3 = var5
+				var4 = var6
 			elseif p6 == sharedDataMember.innerCagesData or p6 == sharedDataMember.outerCagesData then
-				local var6, var7 = getCageData(var1, p6 == sharedDataMember.outerCagesData, p7, p8)
-				var2 = var6
+				local var7, var8 = getCageData(var2, p6 == sharedDataMember.outerCagesData, p7, p8)
 				var3 = var7
+				var4 = var8
 			elseif p6 == sharedDataMember.meshTextures then
-				local var8, var9 = getTextureData(var1, p7, p9)
-				var2 = var8
+				local var9, var10 = getTextureData(var2, p7, p9)
 				var3 = var9
+				var4 = var10
 			end
-			if var2 and var3 ~= nil then
-				t_1[v.Name] = var3
+			if var3 and var4 ~= nil then
+				t_1[v.Name] = var4
 				continue
 			end
 			t.cleanup(t_1)

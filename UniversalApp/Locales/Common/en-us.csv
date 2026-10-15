@@ -520,6 +520,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,Secure your account with Face ID
 Authentication.SignUp.Heading.UserGreetingWithName,Hi {username}
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,"Hey {username}, create a passkey or password"
 Authentication.SignUp.Heading.WhatsYourBirthday,What's your birthday?
+Authentication.SignUp.Label.AddPassword,Add password
 Authentication.SignUp.Label.Age,Age
 Authentication.SignUp.Label.Birthday,Birthday
 Authentication.SignUp.Label.BirthdayHeaderB,"First, select your birthday"
@@ -532,7 +533,6 @@ Authentication.SignUp.Label.EmailAddress,Email Address
 Authentication.SignUp.Label.EnterYourEmail,Enter your email
 Authentication.SignUp.Label.EnterYourParentsEmail,Enter your parent's email
 Authentication.SignUp.Label.Error.MinimumAge5,New accounts must be above the age of five
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Must be older to play this game
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,Username is already in use
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,Username should not start or end with _
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"Username should contain only letters, numbers, and _"
@@ -746,6 +746,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contains Cu
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contains more than {maxAllowed} MarkerCurve(s). Please ensure there is no more than {maxAllowed} MarkerCurve descendant(s).
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation contains a MarkerCurve with {count} Markers. {maxAllowed} is the maximum per MarkerCurve. Please fix the animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation contains unexpected child: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Asset {AssetId} ({InstanceFullName}.{FieldName}) is not published. Publish it and try again.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Dynamic Heads on the marketplace must be properly caged so that the eyes and mouth vertices on the cage line up with the mesh vertices. Please improve your caging and its alignment with the mesh.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Cannot detect smile expression for the Dynamic Head. Please adjust cage landmarks for the mouth to match where the mouth on the head and make sure it can show smile expression.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Cannot detect left eye close expression for the Dynamic Head. Please adjust cage landmarks for the left eye to match where the left eye on the head and make sure it can be closed.
@@ -758,7 +759,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissive Area Above 
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} is too Emissive. Emissive area × intensity exceeds limit (currently {emissivePercentage}%, must be {maxEmissivePercentage}% or less). Shrink the glowing area or lower its EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissive Area Exceeded.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} is too Emissive. Emissive area × intensity exceeds limit (currently {emissiveArea}, must be {maxEmissiveArea} or less). Shrink the glowing area or lower its EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,This asset uses emissive maps which are only available to creators in the Trusted Creator Program. Please remove all emissive map content or join the program before uploading.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,Emissive maps aren't supported for items created in experiences. Remove EmissiveMaskContent from every SurfaceAppearance.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,"Decals can't be emissive. On '{InstancePath}', remove EmissiveMaskContent, set EmissiveStrength to 1, and set EmissiveTint to white."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,The published animation is missing a valid maximum part translation value. Please republish the animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,The published animation is missing a valid UGC emote marker. Please republish the animation.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,The maximum part translation could not be calculated from the published animation data. Please republish the animation.
@@ -766,6 +768,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"The p
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Head must be placed above UpperTorso. The head center is below the top of the torso, which indicates the head mesh is collapsed or misplaced."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,The InternalOverrideFACSData property on FaceControls must be empty on upload.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs was detected expanding your head to {modPercent}%, but altering the head is against marketplace policy for facial animations."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamic heads can have at most {maxFacsJointCount} FACS joints, but this head has {actualJointCount}. Please reduce the number of FACS joints and try again."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs was detected shrinking your head to {modPercent}%, but altering the head is against marketplace policy for facial animations."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Upload format does not match expected folder structure. Please try again or file a bug report.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Bone {bonePath} is too far outside of the meshpart {partName}, please put it closer to the meshpart size boundary."
@@ -1232,6 +1235,7 @@ Feature.Accessibility.AppTheme.Classic,Classic
 Feature.Accessibility.AppTheme.CosmicDust,Cosmic Dust
 Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,Electric Lime
+Feature.Accessibility.AppTheme.Halloween2026,The Hollow
 Feature.Accessibility.AppTheme.HyperPlum,Hyper Plum
 Feature.Accessibility.AppTheme.InfernoBlast,Inferno Blast
 Feature.Accessibility.AppTheme.KineticEnergy,Kinetic Energy
@@ -2681,11 +2685,8 @@ Feature.Build.Message.NoSearchResultsFound,No search results found
 Feature.Build.Message.NoVersionHistory,No version history yet.
 Feature.Build.Message.OneTaskCompleted,1 task completed
 Feature.Build.Message.OutOfBuildUsage,You're out of Build usage. View your options to use Robux to keep creating.
-Feature.Build.Message.PlaytestInviteSendFailedBody,You were not able to send an invite chat link to the following users:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Please use the Share button to get a link.
 Feature.Build.Message.PlaytesterRequestFailed,We couldn't complete your request. Please try again.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} of {MAX_INVITES} early testers invited
-Feature.Build.Message.PrivatePlaytestInvite,{username} invited you to be an early tester for {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Your game was published, but couldn't be made public. Try again."
 Feature.Build.Message.PublishExpandAudience,Publish to expand your audience
 Feature.Build.Message.PublishNotReverted,Your publish wasn't reverted. Try again.
@@ -2754,7 +2755,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
 Feature.Build.Title.PickCampaign,Pick a length
-Feature.Build.Title.PlaytestInviteSendFailed,Couldn't send invites
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Could not add the following users:
 Feature.Build.Title.PlaytestersOnlyPlay,Only playtesters can play
@@ -2776,15 +2776,8 @@ Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,No thanks
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,Share your capture
-Feature.Captures.Body.ShareCapturePrompt,Would you like to share your capture?
 Feature.Captures.Description.AllowPhotoAccessInfo,"To save your captures, Roblox needs access to your device’s camera roll."
 Feature.Captures.Title.AllowPhotoAccessInfo,Allow Access to Photos
-Feature.Captures.Title.ShareCapturePrompt,Share Capture
-Feature.Captures.Toast.CaptureSaved,Capture saved
-Feature.Captures.Toast.CaptureSavedToDevice,Saved to Device
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Go to Customize
@@ -3866,7 +3859,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,"Sponsored Items are paid for by Creators. For EU users, they may be shown to you based on general information about your device type, location, and demographics. Outside of the EU, ads may also be shown based on additional information."
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,No Results Found
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,Search instead for people named
 Feature.GamePage.LabelShowingResultsFor,Showing results for
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,This experience is unavailable due to your age verification status.
@@ -4279,8 +4271,8 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.ReportPost,Report post
-Feature.MusicPlayer.Action.GoToSongDetails,Go to Song Details
-Feature.MusicPlayer.Action.Report,
+Feature.Moments.Tooltip.ShareFirstMomentBody,Create a Moment from your captures
+Feature.Moments.Tooltip.ShareFirstMomentTitle,Share your first Moment
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,Log out
 Feature.NotApproved.Action.Pending,

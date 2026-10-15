@@ -519,6 +519,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,Zabezpiecz konto za pomocą Face 
 Authentication.SignUp.Heading.UserGreetingWithName,"Cześć, {username}"
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,"Cześć, {username}! Utwórz klucz dostępu lub hasło"
 Authentication.SignUp.Heading.WhatsYourBirthday,
+Authentication.SignUp.Label.AddPassword,Dodaj hasło
 Authentication.SignUp.Label.Age,Wiek
 Authentication.SignUp.Label.Birthday,Data urodzenia
 Authentication.SignUp.Label.BirthdayHeaderB,Najpierw wybierz swoją datę urodzenia
@@ -531,7 +532,6 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,Wprowadź swój adres e-mail
 Authentication.SignUp.Label.EnterYourParentsEmail,Wprowadź adres e-mail rodzica
 Authentication.SignUp.Label.Error.MinimumAge5,W przypadku nowych kont wymagany jest wiek powyżej piątego roku życia
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,"Aby grać w tę grę, musisz być starszy(-a)"
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,Nazwa użytkownika jest już w użyciu
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,Nazwa użytkownika nie powinna zaczynać się ani kończyć znakiem _
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"Nazwa użytkownika powinna zawierać wyłącznie litery, cyfry i znak _"
@@ -756,7 +756,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Obszar emisyjny powy
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} ma zbyt dużą emisyjność. Iloczyn obszaru emisyjnego i intensywności emisji przekracza dopuszczalny limit (obecnie wynosi {emissivePercentage}%, a nie może być wyższy niż {maxEmissivePercentage}%). Zmniejsz świecący obszar lub obniż jego wartość EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Przekroczono obszar emisyjny.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} ma zbyt dużą emisyjność. Iloczyn obszaru emisyjnego i intensywności emisji przekracza dopuszczalny limit (obecnie wynosi {emissiveArea}, a nie może być wyższy niż {maxEmissiveArea}). Zmniejsz świecący obszar lub obniż jego wartość EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"Ten zasób wykorzystuje mapy emisyjne, które są dostępne wyłącznie dla twórców w programie „Zaufany twórca”. Usuń całą zawartość map emisyjnych lub dołącz do programu przed przesłaniem."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,W opublikowanej animacji brakuje prawidłowej wartości maksymalnej translacji części. Opublikuj animację ponownie.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,W opublikowanej animacji brakuje prawidłowego znacznika emotki TGU. Opublikuj animację ponownie.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Nie udało się obliczyć maksymalnej translacji części na podstawie danych opublikowanej animacji. Opublikuj animację ponownie.
@@ -764,6 +763,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Opubl
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Głowa musi być umieszczona powyżej UpperTorso. Środek głowy znajduje się poniżej górnej części tułowia, co wskazuje, że siatka głowy jest zapadnięta lub umieszczona w niewłaściwym miejscu."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Właściwość InternalOverrideFACSData w FaceControls musi być pusta podczas przesyłania.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Wykryto, że FACS spowodował powiększenie Twojej głowy do {modPercent}%, ale zmienianie głowy jest niezgodne z polityką rynku w zakresie animacji twarzy."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Liczba stawów FACS w dynamicznych głowach nie może przekroczyć {maxFacsJointCount}, ale ta głowa ma ich {actualJointCount}. Zmniejsz liczbę stawów FACS i spróbuj ponownie."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Wykryto, że FACS spowodował zmniejszenie Twojej głowy do {modPercent}%, ale zmienianie głowy jest niezgodne z polityką rynku w zakresie animacji twarzy."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Format przesyłanego pliku nie odpowiada oczekiwanej strukturze folderów. Spróbuj ponownie lub zgłoś błąd.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,Kość {bonePath} znajduje się zbyt daleko poza częścią siatki {partName}. Umieść ją bliżej granicy rozmiaru siatki.
@@ -2320,6 +2320,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,Zdobądź więcej graczy
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,"Spraw, by gracze wracali"
 Feature.Build.Analytics.Goal.Locked.EarnRobux,"Zarabiaj Robuxy w swojej grze, aby zobaczyć te statystyki."
 Feature.Build.Analytics.Goal.Locked.FirstImpression,"Zdobądź swojego pierwszego gracza, aby zobaczyć te statystyki."
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,"Zdobądź więcej graczy, aby zobaczyć te statystyki."
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,"Zdobądź swojego pierwszego powracającego gracza, aby zobaczyć te statystyki."
 Feature.Build.Analytics.KeyStats,Kluczowe statystyki
 Feature.Build.Analytics.LastMonth,Ubiegły miesiąc
@@ -2673,11 +2674,8 @@ Feature.Build.Message.NoSearchResultsFound,Nie znaleziono wyników wyszukiwania
 Feature.Build.Message.NoVersionHistory,Nie ma jeszcze historii wersji.
 Feature.Build.Message.OneTaskCompleted,1 zadanie ukończone
 Feature.Build.Message.OutOfBuildUsage,"Skończyły Ci się użycia funkcji Buduj. Zobacz opcje użycia Robuxów, aby kontynuować tworzenie."
-Feature.Build.Message.PlaytestInviteSendFailedBody,Nie udało Ci się wysłać linku do czatu z zaproszeniem do następujących użytkowników:
-Feature.Build.Message.PlaytestInviteSendFailedHint,"Użyj przycisku Udostępnij, aby uzyskać link."
 Feature.Build.Message.PlaytesterRequestFailed,Nie udało się zrealizować Twojej prośby. Spróbuj ponownie.
 Feature.Build.Message.PlaytestersAdded,Zaproszono {INVITED_COUNT} z {MAX_INVITES} testerów wczesnej wersji
-Feature.Build.Message.PrivatePlaytestInvite,Użytkownik {username} zaprosił Cię do roli testera wczesnej wersji projektu „{experienceName}”
 Feature.Build.Message.PublicPublishFailed,"Twoja gra została opublikowana, ale nie udało się jej udostępnić publicznie. Spróbuj ponownie."
 Feature.Build.Message.PublishExpandAudience,"Opublikuj, aby zwiększyć liczbę odbiorców"
 Feature.Build.Message.PublishNotReverted,Twoja publikacja nie została cofnięta. Spróbuj ponownie.
@@ -2746,7 +2744,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Włączyć zarządzane ceny?
 Feature.Build.Title.NoMonetizationProducts,Zacznij zarabiać w swojej grze
 Feature.Build.Title.NoRobuxForUsage,Nie masz już Robuxów na użycia funkcji Buduj
 Feature.Build.Title.PickCampaign,Wybierz czas trwania
-Feature.Build.Title.PlaytestInviteSendFailed,Nie udało się wysłać zaproszeń
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Nie udało się dodać następujących użytkowników:
 Feature.Build.Title.PlaytestersOnlyPlay,Tylko testerzy mogą grać
@@ -2768,15 +2765,8 @@ Feature.Build.Title.Versions,Wersje
 Feature.Build.Title.WhatsIncluded,Co jest uwzględnione?
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,"Nie, dziękuję"
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,Udostępnij zawartość
-Feature.Captures.Body.ShareCapturePrompt,Czy chcesz udostępnić przechwyconą zawartość?
 Feature.Captures.Description.AllowPhotoAccessInfo,"Aby zapisywać przechwyconą zawartość, aplikacja Roblox potrzebuje dostępu do rolki z aparatu na urządzeniu."
 Feature.Captures.Title.AllowPhotoAccessInfo,Zezwól na dostęp do zdjęć
-Feature.Captures.Title.ShareCapturePrompt,
-Feature.Captures.Toast.CaptureSaved,Zapisano zrzut
-Feature.Captures.Toast.CaptureSavedToDevice,Zapisano na urządzeniu
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Przejdź do strony Dostosuj
@@ -3858,7 +3848,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,"Przedmioty sponsorowane są opłacane przez twórców. W przypadku użytkowników z UE mogą być wyświetlane na podstawie informacji ogólnych dotyczących typu używanego urządzenia, lokalizacji oraz danych demograficznych. W przypadku użytkowników spoza UE mogą być wyświetlane również na podstawie dodatkowych informacji."
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,Zamiast tego wyszukaj graczy o nazwie:
 Feature.GamePage.LabelShowingResultsFor,Wyświetlono wyniki dla:
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Projekt jest niedostępny ze względu na twój status weryfikacji wieku.
@@ -4261,6 +4250,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Odczekaj chwilę, a następnie spr
 Feature.Moments.Label.VoiceModerationError,Twój skrypt musi być zgodny z zasadami bezpieczeństwa
 Feature.Moments.Label.VoicePlaceholder,Wpisz swój skrypt lektora. Maks. liczba znaków: {maxCount}
 Feature.Moments.Label.VoiceTimeoutBody,Przekroczono limit czasu generowania lektora.
+Feature.Moments.Label.VoiceTooManyNumbersError,Skrypt zawiera zbyt wiele liczb
 Feature.Moments.Label.WriteComment,Napisz komentarz
 Feature.Moments.Title.Comments,Komentarze
 Feature.Moments.Title.CommentsWithCappedCount,Komentarze ({count}+)
@@ -4270,8 +4260,6 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Zgłoś posta
-Feature.MusicPlayer.Action.GoToSongDetails,Przejdź do szczegółów utworu
-Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,Wyloguj
 Feature.NotApproved.Action.Pending,Oczekuje
@@ -4879,7 +4867,7 @@ Feature.ProfileBadges.VerifiedBadgeInfoLink,
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,Odznaka weryfikacji
 Feature.ProfileBadges.action.close,
 Feature.QualtricsSurveyPrompt.Action.Cancel,
-Feature.QualtricsSurveyPrompt.Action.Close,
+Feature.QualtricsSurveyPrompt.Action.Close,"Nie, dziękuję"
 Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
 Feature.QualtricsSurveyPrompt.Action.Next,

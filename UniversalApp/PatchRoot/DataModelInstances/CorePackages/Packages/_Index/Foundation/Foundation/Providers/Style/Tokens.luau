@@ -2,6 +2,7 @@
 local foundation = script:FindFirstAncestor("Foundation")
 local _ = require(foundation.Parent.RbxDesignFoundations)
 local colorModeModule = require(foundation.Enums.ColorMode)
+local deprecatedTokenUtilitiesModule = require(script.DeprecatedTokenUtilities)
 local deviceModule = require(foundation.Enums.Device)
 local flagsModule = require(foundation.Utility.Flags)
 local themeNameModule = require(foundation.Enums.ThemeName)
@@ -16,7 +17,7 @@ local function _(p1, p2)
 	elseif p2 == nil then
 		p2 = 1
 	end
-	return (if p1 == deviceModule.Console then 1.5 else 1) * u159
+	return (if p1 == deviceModule.Console then 1.5 else 1) * u166
 end
 
 local function applyTokenOverrides(p1, p2)
@@ -32,7 +33,7 @@ local function applyTokenOverrides(p1, p2)
 end
 
 local function buildTokens(p3, p4, p5)
-	-- upvalues: applyTokenOverrides (ref)
+	-- upvalues: applyTokenOverrides (ref), flagsModule (ref), deprecatedTokenUtilitiesModule (ref)
 	local var3 = p3(p4)
 	local t = {
 		Color = var3.Color,
@@ -41,7 +42,6 @@ local function buildTokens(p3, p4, p5)
 		Ease = var3.Ease,
 		LightMode = var3.LightMode,
 		Inverse = var3.Inverse,
-		Semantic = var3.Semantic,
 		Size = var3.Size,
 		Padding = var3.Padding,
 		Margin = var3.Margin,
@@ -59,6 +59,13 @@ local function buildTokens(p3, p4, p5)
 	if p5 then
 		applyTokenOverrides(t, p5)
 	end
+	if flagsModule.FoundationRemoveDeprecatedSemanticTokens then
+		t.Semantic = nil
+		
+		return t
+	end
+	t.Semantic = deprecatedTokenUtilitiesModule.getDeprecatedSemanticTokens(t, p4)
+	
 	return t
 end
 

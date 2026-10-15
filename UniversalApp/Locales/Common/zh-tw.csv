@@ -518,6 +518,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,使用 Face ID 確保帳號安全
 Authentication.SignUp.Heading.UserGreetingWithName,{username}，您好
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,{username}，你好！請建立密碼金鑰或密碼
 Authentication.SignUp.Heading.WhatsYourBirthday,
+Authentication.SignUp.Label.AddPassword,新增密碼
 Authentication.SignUp.Label.Age,年齡
 Authentication.SignUp.Label.Birthday,生日
 Authentication.SignUp.Label.BirthdayHeaderB,請先選擇您的生日
@@ -530,7 +531,6 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,輸入你的電子郵件
 Authentication.SignUp.Label.EnterYourParentsEmail,輸入家長的電子郵件
 Authentication.SignUp.Label.Error.MinimumAge5,新帳號必須年滿五歲以上
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,此遊戲有遊玩年齡限制
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,使用者名稱已被使用
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,使用者名稱不應以 _ 作為開頭或結尾
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,使用者名稱應只包含字母、數字與 _
@@ -755,7 +755,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,發光區域超過�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName} 的發光度太高。發光區域 × 強度超過限制（目前為 {emissivePercentage}%，必須小於或等於 {maxEmissivePercentage}%）。請縮小發光區域或降低其 EmissiveStrength。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,超出發光區域。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{assetTypeName} 的發光度太高。發光區域 × 強度超過限制（目前為 {emissiveArea}，必須小於或等於 {maxEmissiveArea}）。請縮小發光區域或降低其 EmissiveStrength。
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用僅供「信任創作者計畫」中的創作者使用的發光貼圖。請移除所有發光貼圖內容，或在上傳前加入該計畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已發佈的動畫缺少有效的部位最大平移距離值。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已發佈的動畫缺少有效的 UGC 動作標記。請重新發佈此動畫。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,無法從已發佈的動畫資料中，計算部位的最大平移距離。請重新發佈此動畫。
@@ -763,6 +762,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,已發
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,頭部必須放置在 UpperTorso 上方。頭部中心位於軀幹頂端下方，這意味著頭部網格塌陷或位置不對。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls 上的 InternalOverrideFACSData 屬性在上傳時，必須為空。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS 偵測到你的頭部被放大至 {modPercent}%，但更改頭部的行為違反了市集的臉部動畫政策。
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,動態頭部最多可以有 {maxFacsJointCount} 個 FACS 關節，但這個頭部有 {actualJointCount} 個。請減少 FACS 關節的數量，然後再試一次。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS 偵測到你的頭部被縮小至 {modPercent}%，但更改頭部的行為違反了市集的臉部動畫政策。
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,上傳格式不符合預期的資料夾結構。請再試一次或提交錯誤報告。
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,骨骼 {bonePath} 距離網格零件 {partName} 過遠，請將其移動至靠近網格零件的尺寸邊界處。
@@ -2319,6 +2319,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,吸引更多玩家
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,吸引玩家持續回流
 Feature.Build.Analytics.Goal.Locked.EarnRobux,在遊戲中賺取 Robux 以查看這些統計資料。
 Feature.Build.Analytics.Goal.Locked.FirstImpression,取得第一個玩家以查看這些統計資料。
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,獲得更多玩家以查看這些統計資料。
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,取得第一個回流玩家以查看這些統計資料。
 Feature.Build.Analytics.KeyStats,關鍵統計資料
 Feature.Build.Analytics.LastMonth,上個月
@@ -2672,11 +2673,8 @@ Feature.Build.Message.NoSearchResultsFound,找不到搜尋結果
 Feature.Build.Message.NoVersionHistory,尚無版本紀錄。
 Feature.Build.Message.OneTaskCompleted,已完成 1 項任務
 Feature.Build.Message.OutOfBuildUsage,你的組建使用量已用完。查看你的選項，使用 Robux 以繼續創作。
-Feature.Build.Message.PlaytestInviteSendFailedBody,你無法向以下使用者傳送聊天邀請連結：
-Feature.Build.Message.PlaytestInviteSendFailedHint,請使用「分享」按鈕來取得連結。
 Feature.Build.Message.PlaytesterRequestFailed,我們無法完成你的請求，請再試一次。
 Feature.Build.Message.PlaytestersAdded,已邀請 {INVITED_COUNT} 位早鳥測試員，共 {MAX_INVITES} 位
-Feature.Build.Message.PrivatePlaytestInvite,{username} 邀請你成為搶先遊玩 {experienceName} 的測試員
 Feature.Build.Message.PublicPublishFailed,你的遊戲已發佈，但無法設為公開，請再試一次。
 Feature.Build.Message.PublishExpandAudience,發佈以擴大受眾
 Feature.Build.Message.PublishNotReverted,無法還原發佈的內容，請再試一次。
@@ -2745,7 +2743,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,是否開啟管理定價功能
 Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.PickCampaign,選擇長度
-Feature.Build.Title.PlaytestInviteSendFailed,無法傳送邀請
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,無法新增以下使用者：
 Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
@@ -2767,15 +2764,8 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些內容？
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,不，謝了
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,分享您的截圖
-Feature.Captures.Body.ShareCapturePrompt,您願意分享您的截圖嗎？
 Feature.Captures.Description.AllowPhotoAccessInfo,為了儲存您的擷取內容，Roblox 需要存取您裝置的相機膠卷。
 Feature.Captures.Title.AllowPhotoAccessInfo,允許存取相片
-Feature.Captures.Title.ShareCapturePrompt,分享截圖
-Feature.Captures.Toast.CaptureSaved,已儲存截圖
-Feature.Captures.Toast.CaptureSavedToDevice,儲存到裝置
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,前往「自訂」頁面
@@ -3857,7 +3847,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,贊助物品是由創作者支付。針對歐盟的使用者，可能會依據裝置類型、位置和人口統計資訊等一般資訊來向您顯示。針對歐盟外的使用者，廣告可能也會根據額外資訊向您顯示。
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,改為搜尋帳號：
 Feature.GamePage.LabelShowingResultsFor,顯示以下搜尋結果：
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,您的年齡驗證狀態無法參訪此體驗。
@@ -4260,6 +4249,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,請稍候片刻，然後再試一次
 Feature.Moments.Label.VoiceModerationError,指令碼必須遵守安全規定
 Feature.Moments.Label.VoicePlaceholder,輸入你的旁白指令碼。{maxCount} 個字元上限
 Feature.Moments.Label.VoiceTimeoutBody,旁白生成逾時。
+Feature.Moments.Label.VoiceTooManyNumbersError,指令碼包含過多數字
 Feature.Moments.Label.WriteComment,撰寫留言
 Feature.Moments.Title.Comments,留言
 Feature.Moments.Title.CommentsWithCappedCount,留言（{count} 則以上）
@@ -4269,8 +4259,6 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
 Feature.Moments.Title.ReportPost,檢舉貼文
-Feature.MusicPlayer.Action.GoToSongDetails,前往歌曲詳細資訊
-Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
 Feature.NotApproved.Action.Pending,
@@ -4878,7 +4866,7 @@ Feature.ProfileBadges.VerifiedBadgeInfoLink,
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,驗證徽章
 Feature.ProfileBadges.action.close,
 Feature.QualtricsSurveyPrompt.Action.Cancel,
-Feature.QualtricsSurveyPrompt.Action.Close,
+Feature.QualtricsSurveyPrompt.Action.Close,不，謝了
 Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
 Feature.QualtricsSurveyPrompt.Action.Next,

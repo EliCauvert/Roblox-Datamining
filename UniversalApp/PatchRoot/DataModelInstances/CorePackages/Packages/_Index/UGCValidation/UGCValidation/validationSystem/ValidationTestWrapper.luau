@@ -121,14 +121,14 @@ return function(p3, p4, p5)
 					error(status.message, 0)
 				end
 				if getFFlagUGCValidationFetchErrorMethodModule() and type(status) == "table" and status.__fetchError then
-					if p4.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+					if p4.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend and not (validationModule.shadowFlag() and not validationModule.fflag()) then
 						error(status.message, 0)
 					end
 					var1:err(status.message)
-					v = var1:complete()
-					reportSingleResult(p3, p4, v.status, v.telemetryContext, v.duration)
+					local var7 = var1:complete()
+					reportSingleResult(p3, p4, var7.status, var7.telemetryContext, var7.duration)
 					
-					return v
+					return var7
 				elseif getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
 					print("Validation error:", status)
 					print("As this is in debug mode, we will re-call the function for a full error trace: ")

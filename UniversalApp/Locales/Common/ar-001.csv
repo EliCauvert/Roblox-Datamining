@@ -501,6 +501,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,تأمين حسابك باستخ�
 Authentication.SignUp.Heading.UserGreetingWithName,مرحبًا {username}
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,مرحبًا {username}، يُرجى إنشاء مفتاح مرور أو كلمة مرور
 Authentication.SignUp.Heading.WhatsYourBirthday,
+Authentication.SignUp.Label.AddPassword,إضافة كلمة مرور
 Authentication.SignUp.Label.Age,العمر
 Authentication.SignUp.Label.Birthday,تاريخ الميلاد
 Authentication.SignUp.Label.BirthdayHeaderB,أولاً، حدّد تاريخ ميلادك
@@ -513,7 +514,6 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,أدخل بريدك الإلكتروني
 Authentication.SignUp.Label.EnterYourParentsEmail,إدخال البريد الإلكتروني لوالديك
 Authentication.SignUp.Label.Error.MinimumAge5,ينبغي أن تكون الحسابات الجديدة للأعمار فوق الخامسة
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,يجب أن تكون أكبر سنًا لتشغيل هذه اللعبة
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,اسم المستخدم هذا مأخوذ
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,لا يمكن أن تبدأ أسماء المستخدمين أو تنتهي بالرمز _
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,يمكن أن تحتوي أسماء المستخدمين على أحرف وأرقام و _ فقط
@@ -738,7 +738,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,تتجاوز الم�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,يتميز {meshName} بكونه مضيئًا للغاية. تتجاوز مساحة الإضاءة × الشدة الحد المسموح به (حيث تبلغ حاليًا {emissivePercentage}%، ويجب أن تكون {maxEmissivePercentage}% أو أقل). قم بتقليص المساحة المتوهجة أو خفض قيمة EmissiveStrength.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,تم تجاوز المنطقة المُضيئة.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,يتميز {assetTypeName} بكونه مضيئًا للغاية. تتجاوز مساحة الإضاءة × الشدة الحد المسموح به (حيث تبلغ حاليًا {emissiveArea}، ويجب أن تكون {maxEmissiveArea} أو أقل). قم بتقليص المساحة المتوهجة أو خفض قيمة EmissiveStrength.
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,يستخدم هذا الأصل خرائط إضاءة ذاتية متاحة فقط للمصممين في برنامج المصممين الموثوق بهم. يُرجى إزالة محتوى خرائط الإضاءة الذاتية بالكامل أو الانضمام إلى البرنامج قبل الرفع.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,تفتقد الحركة المنشورة إلى قيمة صالحة للحد الأقصى لإزاحة الأجزاء. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,تفتقد الحركة المنشورة إلى علامة حركة تعبيرية صالحة من تصميم المستخدم (UGC). يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,تعذَّر حساب الحد الأقصى لإزاحة الجزء من بيانات الحركة المنشورة. يُرجى إعادة نشر الحركة.
@@ -746,6 +745,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,تحد
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,يجب وضع الرأس فوق UpperTorso. يقع مركز الرأس أسفل الجزء العلوي من الجسم، مما يشير إلى أن أصل Mesh للرأس منهار أو في غير موضعه الصحيح.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,يجب أن تكون خاصية InternalOverrideFACSData في FaceControls فارغة عند الرفع.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,تم اكتشاف أن نظام FACS قام بتوسيع حجم رأسك إلى {modPercent}%، لكن تعديل الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,يمكن أن تحتوي الرؤوس الديناميكية على {maxFacsJointCount} من مفاصل نظام FACS كحد أقصى، لكن هذا الرأس يحتوي على {actualJointCount}. يُرجى تقليل عدد مفاصل نظام FACS والمحاولة مرة أخرى.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,تم اكتشاف أن نظام FACS قام بتقليص حجم رأسك إلى {modPercent}%، لكن تغيير الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,تنسيق الملف الذي تم تحميله لا يطابق بنية المجلد المتوقعة. يُرجى المحاولة مرة أخرى أو الإبلاغ عن الأخطاء.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,العظم {bonePath} بعيد جدًا عن MeshPart {partName}، يرجى وضعه أقرب إلى حدود حجم MeshPart‏.
@@ -2287,6 +2287,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,اجذب المزيد من اللا�
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,اجعل اللاعبين متحمسين للعودة
 Feature.Build.Analytics.Goal.Locked.EarnRobux,اربح عملات Robux في لعبتك للاطِّلاع على هذه الإحصائيات.
 Feature.Build.Analytics.Goal.Locked.FirstImpression,احصل على لاعبك الأول للاطِّلاع على هذه الإحصائيات.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,احصل على المزيد من اللاعبين للاطِّلاع على هذه الإحصائيات.
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,احصل على لاعبك العائد الأول للاطِّلاع على هذه الإحصائيات.
 Feature.Build.Analytics.KeyStats,الإحصاءات الرئيسية
 Feature.Build.Analytics.LastMonth,الشهر الماضي
@@ -2640,11 +2641,8 @@ Feature.Build.Message.NoSearchResultsFound,لم يتم العثور على أي 
 Feature.Build.Message.NoVersionHistory,لا يوجد سجل إصدارات حتى الآن.
 Feature.Build.Message.OneTaskCompleted,تم إكمال مهمة واحدة
 Feature.Build.Message.OutOfBuildUsage,لقد نفد رصيدك من استخدام ميزة Build. اعرض خياراتك لاستخدام عملات Robux لمواصلة الإنشاء.
-Feature.Build.Message.PlaytestInviteSendFailedBody,تعذر إرسال رابط دعوة الدردشة إلى المستخدمين التاليين:
-Feature.Build.Message.PlaytestInviteSendFailedHint,"يُرجى استخدام زر ""مشاركة"" للحصول على الرابط."
 Feature.Build.Message.PlaytesterRequestFailed,لم نتمكن من إكمال طلبك. يُرجى إعادة المحاولة.
 Feature.Build.Message.PlaytestersAdded,تمت دعوة {INVITED_COUNT} من أصل {MAX_INVITES} من مختبري اللعب المبكرين
-Feature.Build.Message.PrivatePlaytestInvite,تمت دعوتك من قِبل {username} لتكون مختبر لعب مبكر لتجربة {experienceName}
 Feature.Build.Message.PublicPublishFailed,تم نشر لعبتك، ولكن تعذَّر جعلها عامة. حاول مرة أخرى.
 Feature.Build.Message.PublishExpandAudience,يمكنك النشر لتوسيع نطاق جمهورك
 Feature.Build.Message.PublishNotReverted,لم يتم التراجع عن عملية النشر. حاوِل مرة أخرى.
@@ -2713,7 +2711,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل ال�
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.PickCampaign,اختَر مدة
-Feature.Build.Title.PlaytestInviteSendFailed,تعذَّر إرسال الدعوات
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,تعذَّر إضافة المستخدمين التاليين:
 Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
@@ -2735,15 +2732,8 @@ Feature.Build.Title.Versions,الإصدارات
 Feature.Build.Title.WhatsIncluded,ما الذي تشمله الحملة؟
 Feature.BuyRobux.Heading.Banner,شراء Robux
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,لا، شكرًا
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,شارك لقطاتك
-Feature.Captures.Body.ShareCapturePrompt,هل ترغب في مشاركة لقطتك؟
 Feature.Captures.Description.AllowPhotoAccessInfo,يحتاج Roblox إلى الوصول إلى معرض الكاميرا بجهازك لحفظ اللقطات التي تصورها.
 Feature.Captures.Title.AllowPhotoAccessInfo,السماح بالوصول إلى الصور
-Feature.Captures.Title.ShareCapturePrompt,مشاركة اللقطة
-Feature.Captures.Toast.CaptureSaved,تم حفظ اللقطة
-Feature.Captures.Toast.CaptureSavedToDevice,تم حفظها على الجهاز
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,الانتقال إلى التخصيص
@@ -3825,7 +3815,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,برعاية
 Feature.GamePage.Label.SponsoredDisclosure,العناصر التي تم رعايتها مدفوعة من قبل المصممين. بالنسبة للمستخدمي في الاتحاد الأوروبي، قد يتم عرضهم لك على أساس معلومات عامة مثل نوع جهازك وموقعك الجغرافي. أما خارج الاتحاد الأوروبي، فقد يتم عرض الإعلانات استنادًا إلى معلومات إضافية.
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,لم يتم العثور على نتائج
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,البحث بدلاً من ذلك عن أشخاص بالاسم
 Feature.GamePage.LabelShowingResultsFor,عرض النتائج لـ
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,هذه التجربة غير متوفرة بسبب حالة التحقق من عمرك.
@@ -4228,6 +4217,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,انتظر دقيقة، ثم حاو�
 Feature.Moments.Label.VoiceModerationError,يجب أن يتبع النص البرمجي لديك قواعد السلامة
 Feature.Moments.Label.VoicePlaceholder,اكتب نص التعليق الصوتي. الحد الأقصى هو {maxCount} من الأحرف
 Feature.Moments.Label.VoiceTimeoutBody,انتهت المدة لإنشاء التعليق الصوتي.
+Feature.Moments.Label.VoiceTooManyNumbersError,يحتوي النص البرمجي على عدد كبير جدًا من الأرقام
 Feature.Moments.Label.WriteComment,اكتب تعليقًا
 Feature.Moments.Title.Comments,التعليقات
 Feature.Moments.Title.CommentsWithCappedCount,التعليقات ({count} فأكثر)
@@ -4237,8 +4227,6 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
 Feature.Moments.Title.MomentRemoved,تمت إزالة اللحظة
 Feature.Moments.Title.ReportPost,الإبلاغ عن المنشور
-Feature.MusicPlayer.Action.GoToSongDetails,الانتقال إلى تفاصيل الأغنية
-Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
 Feature.NotApproved.Action.Pending,
@@ -4723,7 +4711,7 @@ Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,من البحث
 Feature.PlayerSearchResults.Label.KeywordTooShort,الرجاء إدخال 3 أحرف على الأقل
 Feature.PlayerSearchResults.Label.NewUsername,اسم مستخدم جديد
-Feature.PlayerSearchResults.Label.NoResultsFound,
+Feature.PlayerSearchResults.Label.NoResultsFound,لم يتم العثور على نتائج
 Feature.PlayerSearchResults.Label.NoResultsTryAnotherWay,جرّب طريقة أخرى للعثور على أصدقاء.
 Feature.PlayerSearchResults.Label.Previously,سابقًا
 Feature.PlayerSearchResults.Label.ThisIsYou,هذا أنت
