@@ -2,14 +2,16 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local goalMetricDeltaPillModule = require(script.Parent.GoalMetricDeltaPill)
+local icon = foundationModule.Icon
 local skeleton = foundationModule.Skeleton
 local text = foundationModule.Text
 local view = foundationModule.View
+local iconSize = foundationModule.Enums.IconSize
 local radius = foundationModule.Enums.Radius
 local useTokens = foundationModule.Hooks.useTokens
 
 return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref), skeleton (ref), radius (ref), goalMetricDeltaPillModule (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref), skeleton (ref), radius (ref), icon (ref), iconSize (ref), goalMetricDeltaPillModule (ref)
 	local testId = p1.testId or "GoalMetricRowView"
 	
 	return reactModule.createElement(view, {
@@ -32,14 +34,21 @@ return function(p1)
 			LayoutOrder = 2,
 			tag = "row align-y-center gap-small size-full-0 auto-y"
 		}, {
-			Value = reactModule.createElement(text, {
+			Icon = if p1.icon then reactModule.createElement(icon, {
 				LayoutOrder = 1,
+				tag = "content-emphasis",
+				name = p1.icon,
+				size = iconSize.Medium,
+				testId = `{testId}-icon`
+			}) else nil,
+			Value = reactModule.createElement(text, {
+				LayoutOrder = 2,
 				tag = "auto-xy text-heading-small text-align-x-left content-emphasis",
 				Text = p1.valueText,
 				testId = `{testId}-value`
 			}),
 			Delta = if p1.deltaText ~= nil then nil else reactModule.createElement(goalMetricDeltaPillModule, {
-				layoutOrder = 2,
+				layoutOrder = 3,
 				text = p1.deltaText,
 				isPositive = p1.isDeltaPositive == true,
 				testId = `{testId}-delta`

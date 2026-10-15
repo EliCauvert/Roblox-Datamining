@@ -19,6 +19,7 @@ local peoplePickerModule = require(shareSheet.Components.PeoplePicker)
 local shareSheetActionRowModule = require(script.Parent.ShareSheetActionRow)
 local shareSheetSocialRowModule = require(script.Parent.ShareSheetSocialRow)
 local shareSendRowModule = require(script.Parent.ShareSendRow)
+local _ = require(shareSheet.Recipients.RecipientSource)
 local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
 local _ = require(shareSheet.Types)
 
@@ -146,6 +147,7 @@ return function(p1)
 					LayoutOrder = 3,
 					canShare = p1.canShareLink,
 					context = p1.context,
+					recipientSource = p1.recipientSource,
 					telemetryId = p1.telemetryId,
 					url = p1.url
 				})
@@ -164,6 +166,7 @@ return function(p1)
 				hasHorizontalPadding = false,
 				canShare = p1.canShareLink,
 				context = p1.context,
+				recipientSource = p1.recipientSource,
 				telemetryId = p1.telemetryId,
 				url = p1.url
 			}) else nil

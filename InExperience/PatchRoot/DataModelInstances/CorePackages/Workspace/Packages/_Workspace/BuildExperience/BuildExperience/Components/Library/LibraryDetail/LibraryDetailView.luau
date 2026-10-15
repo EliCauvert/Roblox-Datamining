@@ -3,6 +3,9 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local chatActionsModule = require(buildExperience.Components.Chat.ChatActions)
+local _ = require(buildExperience.Chat.chatTypes)
+local fFlagBuildExperienceAnswerFormModule = require(buildExperience.Flags.FFlagBuildExperienceAnswerForm)
+local var1 = if fFlagBuildExperienceAnswerFormModule then require(buildExperience.Components.AnswerForm.AnswerFormContainer) else nil
 local _ = require(buildExperience.Components.Chat.ChatComposer)
 local _ = require(buildExperience.Components.Library.LibraryTypes)
 local modelViewportModule = require(buildExperience.Components.Library.ModelViewport)
@@ -17,35 +20,51 @@ local view = foundationModule.View
 local radius = foundationModule.Enums.Radius
 
 return function(p1)
-	-- upvalues: useHardwareInsetsModule (ref), reactModule (ref), fFlagBuildExperienceLibrary (ref), view (ref), modelViewportModule (ref), text (ref), image (ref), scrollView (ref), libraryAudioPlayerContainerModule (ref), skeleton (ref), radius (ref), chatActionsModule (ref)
+	-- upvalues: useHardwareInsetsModule (ref), fFlagBuildExperienceAnswerFormModule (ref), foundationModule (ref), reactModule (ref), fFlagBuildExperienceLibrary (ref), view (ref), modelViewportModule (ref), text (ref), image (ref), scrollView (ref), libraryAudioPlayerContainerModule (ref), skeleton (ref), radius (ref), var1 (ref), chatActionsModule (ref)
+	local var2, var3, var4
 	local bottom = useHardwareInsetsModule().bottom
-	local var1, var2 = reactModule.useState(false)
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		var2(p2.AbsoluteSize.Y < 400)
-	end, {})
-	local var4 = reactModule.useRef(nil)
-	local var5 = if p1.chatActions ~= nil then nil else table.clone(p1.chatActions)
+	local _ = nil
+	local _ = nil
+	local _ = nil
 	
-	if var5 ~= nil then
-		var5.textBoxRef = var4
-		var5.allowsTypingWhileResponding = true
+	if fFlagBuildExperienceAnswerFormModule then
+		var2 = foundationModule.Hooks.useScaledValue(400)
+		local var5, var6 = reactModule.useBinding(0)
+		var3 = var5
+		var4 = var6
+	else
+		var2 = nil
+		var3 = nil
+		var4 = nil
+	end
+	local var7, var8 = reactModule.useState(false)
+	local var9 = reactModule.useCallback(function(p2)
+		-- upvalues: var8 (ref)
+		var8(p2.AbsoluteSize.Y < 400)
+	end, {})
+	local var10 = reactModule.useRef(nil)
+	local var11 = if p1.chatActions ~= nil then nil else table.clone(p1.chatActions)
+	
+	if var11 ~= nil then
+		var11.textBoxRef = var10
+		var11.allowsTypingWhileResponding = true
 		
 		if fFlagBuildExperienceLibrary then
-			var5.onRemoveResourceAttachment = nil
+			var11.onRemoveResourceAttachment = nil
 		end
-		local onSend = var5.onSend
+		local onSend = var11.onSend
 		
 		function var11.onSend()
-			-- upvalues: onSend (ref), var4 (ref)
-			local var6 = onSend()
+			-- upvalues: onSend (ref), var10 (ref)
+			local var12 = onSend()
 			
-			if var6 and var4.current ~= nil then
-				var4.current.releaseFocus()
+			if var12 and var10.current ~= nil then
+				var10.current.releaseFocus()
 			end
-			return var6
+			return var12
 		end
 	end
+	local var12 = fFlagBuildExperienceAnswerFormModule and (p1.isActive ~= false and (var11 ~= nil and var11.answerForm ~= nil))
 	local liveModel = p1.liveModel
 	local _ = nil
 	
@@ -95,7 +114,7 @@ return function(p1)
 					CanvasSize = UDim2.fromOffset(0, 0),
 					ScrollingDirection = Enum.ScrollingDirection.Y
 				},
-				onAbsoluteSizeChanged = var3
+				onAbsoluteSizeChanged = var9
 			}, {
 				Content = reactModule.createElement(view, {
 					tag = "col align-x-center align-y-center size-full auto-y padding-x-large padding-y-medium"
@@ -106,7 +125,7 @@ return function(p1)
 						soundLabel = p1.soundLabel,
 						title = if liveModel ~= nil then p1.modelName or "" else liveModel.displayName,
 						isActive = p1.isActive,
-						isCompact = var1
+						isCompact = var7
 					})
 				})
 			}) elseif p1.status == "Failed" then reactModule.createElement(text, {
@@ -132,12 +151,36 @@ return function(p1)
 				Text = p1.description
 			})
 		}),
-		Composer = if var5 == nil or p1.isActive == false then nil else reactModule.createElement(view, {
+		AnswerForm = if var12 then reactModule.createElement(scrollView, {
+			LayoutOrder = 3,
+			tag = "shrink size-full-0 padding-x-medium",
+			testId = "Library.Preview.AnswerFormScroll",
+			Size = var3:map(function(p2)
+				-- upvalues: var2 (write)
+				return UDim2.new(1, 0, 0, math.min(p2, var2))
+			end),
+			onAbsoluteCanvasSizeChanged = function(value)
+				-- upvalues: var4 (write)
+				var4(value.AbsoluteCanvasSize.Y)
+			end,
+			scroll = {
+				AutomaticCanvasSize = Enum.AutomaticSize.Y,
+				CanvasSize = UDim2.new(),
+				ScrollingDirection = Enum.ScrollingDirection.Y
+			}
+		}, reactModule.createElement(var1, {
+			state = var11.answerForm,
+			actions = var11.localToolActions,
+			onSubmitText = var11.onSubmitAnswerText,
+			onStop = var11.onStop,
+			errorText = var11.composerErrorText
+		})) else nil,
+		Composer = if var11 == nil or p1.isActive == false or var12 then nil else reactModule.createElement(view, {
 			LayoutOrder = 3,
 			tag = "col size-full-0 auto-y padding-x-medium padding-bottom-medium",
 			testId = "Library.Preview.Composer"
 		}, {
-			Actions = reactModule.createElement(chatActionsModule, var5)
+			Actions = reactModule.createElement(chatActionsModule, var11)
 		})
 	})
 end

@@ -10,6 +10,7 @@ local chatLineReportInfoModule = require(chatLineReporting.Components.ChatLineRe
 local chatLineReportModalWindowModule = require(chatLineReporting.Components.ChatLineReportModalWindow)
 local chatLineReportSelectableLineModule = require(chatLineReporting.Components.ChatLineReportSelectableLine)
 local isSystemMessageModule = require(chatLineReporting.Common.isSystemMessage)
+local fFlagChatLineSelectionModalCleanupSizeListenersModule = require(chatLineReporting.Flags.FFlagChatLineSelectionModalCleanupSizeListeners)
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local foundationModule = require(parent.Foundation)
 local empty = foundationModule.Empty
@@ -36,8 +37,32 @@ local function createChildren(p1, _, p2, p3)
 	return t, t_1
 end
 
+local function useAbsoluteSizeListener(value, p4)
+	-- upvalues: reactModule (ref)
+	local var2 = reactModule.useRef(nil)
+	local var3 = reactModule.useRef(value)
+	var3.current = value
+	
+	return reactModule.useCallback(function(p5)
+		-- upvalues: p4 (ref), var2 (ref), var3 (ref)
+		if p4 then
+			p4.current = p5
+		end
+		if var2.current then
+			var2.current:Disconnect()
+			var2.current = nil
+		end
+		if p5 then
+			var2.current = p5:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+				-- upvalues: var3 (copy), p5 (ref)
+				var3.current(p5)
+			end)
+		end
+	end, {})
+end
+
 return function(p4)
-	-- upvalues: reactModule (ref), useLocalization (ref), constantsModule (ref), createChildren (ref), cryoModule (ref), useLayerCollector (ref), chatLineReportModalWindowModule (ref), buttonType (ref), chatLineReportInfoModule (ref), empty (ref), scrollView (ref), scrollBarVisibility (ref), radioGroup (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), constantsModule (ref), createChildren (ref), cryoModule (ref), useLayerCollector (ref), fFlagChatLineSelectionModalCleanupSizeListenersModule (ref), useAbsoluteSizeListener (ref), chatLineReportModalWindowModule (ref), buttonType (ref), chatLineReportInfoModule (ref), empty (ref), scrollView (ref), scrollBarVisibility (ref), radioGroup (ref)
 	local var2, var3 = reactModule.useState(false)
 	local var4 = reactModule.useRef(nil)
 	local var5, var6 = reactModule.useState(0)
@@ -49,8 +74,22 @@ return function(p4)
 	local var14 = cryoModule.isEmpty(var12)
 	local var15 = useLayerCollector()
 	local absoluteSize = var15.absoluteSize
+	local var16 = nil
+	local var17 = nil
+	
+	if fFlagChatLineSelectionModalCleanupSizeListenersModule then
+		var16 = useAbsoluteSizeListener(function(p5)
+			-- upvalues: var6 (ref)
+			var6(p5.AbsoluteSize.Y)
+		end)
+		var17 = useAbsoluteSizeListener(function(p5)
+			-- upvalues: var9 (ref)
+			var9(p5.AbsoluteSize.X)
+		end, var7)
+	end
 	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var6 (ref)
+		-- upvalues: fFlagChatLineSelectionModalCleanupSizeListenersModule (copy), var4 (ref), var6 (ref)
+		if fFlagChatLineSelectionModalCleanupSizeListenersModule then return end
 		if var4.current then
 			var4.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var6 (copy), var4 (copy)
@@ -59,7 +98,8 @@ return function(p4)
 		end
 	end, { var4.current, absoluteSize })
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var9 (ref)
+		-- upvalues: fFlagChatLineSelectionModalCleanupSizeListenersModule (copy), var7 (ref), var9 (ref)
+		if fFlagChatLineSelectionModalCleanupSizeListenersModule then return end
 		if var7.current then
 			var7.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var9 (copy), var7 (copy)
@@ -113,7 +153,7 @@ return function(p4)
 				scrollBarVisibility = scrollBarVisibility.Always,
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			},
-			ref = var7
+			ref = if fFlagChatLineSelectionModalCleanupSizeListenersModule then var17 else var7
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 12),
@@ -128,7 +168,7 @@ return function(p4)
 						selected_chat_line_index = var13[p5]
 					})
 				end,
-				ref = var4
+				ref = if fFlagChatLineSelectionModalCleanupSizeListenersModule then var16 else var4
 			}, var12)
 		})
 	})

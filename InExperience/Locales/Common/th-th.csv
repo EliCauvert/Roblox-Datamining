@@ -1930,6 +1930,7 @@ Feature.BlockingModal.Heading.BlockUser,บล็อค {DisplayName} ไหม?
 Feature.BlockingModal.Message.BlockConfirmation,การบล็อคผู้ใช้รายนี้จะเป็นการลบออกจากคนรู้จักหรือผู้ติดตาม โดยผู้ใช้ดังกล่าวจะไม่สามารถส่งข้อความ คำขอ หรือคำเชิญถึงคุณได้<br /><br />ผู้ใช้จะไม่ได้รับแจ้งว่าคุณบล็อค
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,การบล็อคผู้ใช้รายนี้จะเป็นการลบออกจากเพื่อนหรือผู้ติดตาม โดยผู้ใช้ดังกล่าวจะไม่สามารถส่งข้อความ คำขอ หรือคำเชิญถึงคุณได้<br /><br />และจะไม่ได้รับแจ้งว่าคุณบล็อค
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,เพิ่มตัวเลือกที่กำหนดเอง...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,เชิญผู้ทดลองเล่นระยะแรก
 Feature.Build.Action.AddPlaytesters,
@@ -2121,6 +2122,7 @@ Feature.Build.Error.MonetizationOptionsLoad,ไม่สามารถโหล
 Feature.Build.Error.MonetizationPermissionDenied,คุณไม่มีสิทธิ์เปลี่ยนตัวเลือกการสร้างรายได้
 Feature.Build.Header.AccessSharing,การเข้าถึงและการแชร์
 Feature.Build.Header.AllVersions,ทุกเวอร์ชัน
+Feature.Build.Header.Answers,คำตอบ
 Feature.Build.Header.ContentMaturity,ระดับความเหมาะสมของเนื้อหา
 Feature.Build.Header.CustomAnswer,คำตอบที่กำหนดเอง
 Feature.Build.Header.GameConfiguration,การกำหนดค่าเกม
@@ -3593,6 +3595,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,เหลืออีก {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,เมื่อคุณซื้อ Robux จะถือว่าคุณยอมรับ{termsLinkStart}ข้อกำหนดการใช้งาน{termsLinkEnd} รวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและนโยบายเกี่ยวกับการเพิกถอน
+Feature.InExperienceShop.GamePass,บัตรผ่านเกม
 Feature.InExperienceShop.Label.BonusItem,ไอเท็มโบนัส
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,สิ้นสุดใน {timeRemaining}

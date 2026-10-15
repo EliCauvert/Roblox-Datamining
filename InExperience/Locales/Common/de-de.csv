@@ -1880,6 +1880,7 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} blockieren?
 Feature.BlockingModal.Message.BlockConfirmation,"Wenn du diese Person blockierst, wird sie als Connection oder Follower entfernt. Er oder sie kann dir keine Nachrichten, Anfragen oder Einladungen mehr senden.<br /><br />Die Person wird nicht darüber benachrichtigt, dass du sie blockiert hast."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Wenn du diesen Benutzer blockierst, wird er als Freund oder Follower entfernt. Er oder sie kann dir keine Nachrichten, Anfragen oder Einladungen mehr senden.<br /><br />Der Benutzer wird nicht darüber benachrichtigt, dass du ihn oder sie blockiert hast."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Eine benutzerdefinierte Option hinzufügen …
 Feature.Build.Action.AddFriends,Freunde einladen
 Feature.Build.Action.AddPlaytester,Vorabtester einladen
 Feature.Build.Action.AddPlaytesters,
@@ -2071,6 +2072,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Die Optionen konnten nicht geladen w
 Feature.Build.Error.MonetizationPermissionDenied,"Du hast nicht die nötigen Rechte, um die Monetarisierungsoptionen zu ändern."
 Feature.Build.Header.AccessSharing,Zugriff und Teilen
 Feature.Build.Header.AllVersions,Alle Versionen
+Feature.Build.Header.Answers,Antworten
 Feature.Build.Header.ContentMaturity,Inhaltseinstufung
 Feature.Build.Header.CustomAnswer,Benutzerdefinierte Antwort
 Feature.Build.Header.GameConfiguration,Spielkonfiguration
@@ -2855,7 +2857,7 @@ Feature.Chat.Action.MuteVoice,
 Feature.Chat.Action.Remove,
 Feature.Chat.Action.RemoveFromGroup,Aus Gruppe entfernen
 Feature.Chat.Action.RemoveUser,Benutzer entfernen
-Feature.Chat.Action.Reply,Antworten
+Feature.Chat.Action.Reply,
 Feature.Chat.Action.Report,
 Feature.Chat.Action.ReportUser,Benutzer melden
 Feature.Chat.Action.Save,
@@ -3543,6 +3545,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Noch {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Durch den Kauf von Robux erklärst du dich mit unseren {termsLinkStart}Nutzungsbedingungen{termsLinkEnd}, einschließlich der Schiedsklausel und der Widerrufsbelehrung, einverstanden."
+Feature.InExperienceShop.GamePass,Spielpass
 Feature.InExperienceShop.Label.BonusItem,Bonusartikel
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Endet in {timeRemaining}

@@ -46,6 +46,7 @@ return reactModule.memo(function()
 			messagePlaceholder = var5.messagePlaceholder,
 			onCloseWithReason = var5.onCloseWithReason,
 			onShareSendResultSnackbar = var2,
+			recipientSource = var5.recipientSource,
 			telemetryId = var5.telemetryId,
 			url = var5.url
 		}) else nil,

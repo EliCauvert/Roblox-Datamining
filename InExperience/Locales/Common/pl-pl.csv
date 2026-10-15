@@ -1947,6 +1947,7 @@ Feature.BlockingModal.Heading.BlockUser,Zablokować użytkownika {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Zablokowanie tego użytkownika spowoduje usunięcie go jako znajomego lub obserwującego. Nie będzie mógł wysyłać do Ciebie wiadomości, próśb ani zaproszeń.<br /><br />Nie powiadomimy go, że został przez Ciebie zablokowany."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Dodaj opcję niestandardową...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Zaproś testera wczesnej wersji
 Feature.Build.Action.AddPlaytesters,Zaproś testerów wczesnej wersji
@@ -2138,6 +2139,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Nie udało się wczytać opcji. Spr�
 Feature.Build.Error.MonetizationPermissionDenied,Nie masz uprawnień do zmiany opcji monetyzacji.
 Feature.Build.Header.AccessSharing,Dostęp i udostępnianie
 Feature.Build.Header.AllVersions,Wszystkie wersje
+Feature.Build.Header.Answers,Odpowiedzi
 Feature.Build.Header.ContentMaturity,Poziom treści dla dorosłych
 Feature.Build.Header.CustomAnswer,Odpowiedź niestandardowa
 Feature.Build.Header.GameConfiguration,Konfiguracja gry
@@ -3610,6 +3612,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,pozostało {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Kupując Robuxy, akceptujesz nasze {termsLinkStart}Warunki użytkowania{termsLinkEnd}, w tym klauzulę arbitrażową i zasady anulowania."
+Feature.InExperienceShop.GamePass,Przepustka
 Feature.InExperienceShop.Label.BonusItem,Dodatkowy przedmiot
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Kończy się za {timeRemaining}

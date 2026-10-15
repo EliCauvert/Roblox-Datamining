@@ -5,6 +5,8 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local shareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
 local shareSheetRowModule = require(script.Parent.ShareSheetRow)
+local fFlagShareSheetFriendsSort = require(parent.SharedFlags).FFlagShareSheetFriendsSort
+local _ = require(shareSheet.Recipients.RecipientSource)
 local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
 local copyLinkModule = require(shareSheet.copyLink)
 local shareLinkModule = require(shareSheet.shareLink)
@@ -12,7 +14,7 @@ local iconName = foundationModule.Enums.IconName
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
 return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), copyLinkModule (ref), shareSheetTelemetryModule (ref), shareLinkModule (ref), shareSheetRowModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), shareSheetItemContainerModule (ref), iconName (ref)
+	-- upvalues: reactModule (ref), useLocalization (ref), copyLinkModule (ref), shareSheetTelemetryModule (ref), fFlagShareSheetFriendsSort (ref), shareLinkModule (ref), shareSheetRowModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), shareSheetItemContainerModule (ref), iconName (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3 = reactModule.useRef(nil)
 	local var4 = useLocalization({
@@ -34,24 +36,32 @@ return function(p1)
 		end)
 	end, {})
 	local var6 = reactModule.useCallback(function()
-		-- upvalues: copyLinkModule (copy), p1 (ref), var5 (ref), shareSheetTelemetryModule (copy)
+		-- upvalues: copyLinkModule (copy), p1 (ref), var5 (ref), shareSheetTelemetryModule (copy), fFlagShareSheetFriendsSort (copy)
 		copyLinkModule({ context = p1.context, url = p1.url })
 		var5()
 		shareSheetTelemetryModule.logInteraction({
 			context = p1.context,
+			recipientSource = if fFlagShareSheetFriendsSort then p1.recipientSource else nil,
 			telemetryId = p1.telemetryId or "",
 			interactionType = shareSheetTelemetryModule.InteractionType.CopyLink
 		})
-	end, { p1.context, p1.telemetryId, p1.url, var5 })
+	end, {
+		p1.context,
+		p1.recipientSource,
+		p1.telemetryId,
+		p1.url,
+		var5
+	})
 	local var7 = reactModule.useCallback(function()
-		-- upvalues: shareLinkModule (copy), p1 (ref), shareSheetTelemetryModule (copy)
+		-- upvalues: shareLinkModule (copy), p1 (ref), shareSheetTelemetryModule (copy), fFlagShareSheetFriendsSort (copy)
 		shareLinkModule({ context = p1.context, url = p1.url })
 		shareSheetTelemetryModule.logInteraction({
 			context = p1.context,
+			recipientSource = if fFlagShareSheetFriendsSort then p1.recipientSource else nil,
 			telemetryId = p1.telemetryId or "",
 			interactionType = shareSheetTelemetryModule.InteractionType.NativeShare
 		})
-	end, { p1.context, p1.telemetryId, p1.url })
+	end, { p1.context, p1.recipientSource, p1.telemetryId, p1.url })
 	reactModule.useEffect(function()
 		-- upvalues: var3 (ref)
 		return function()

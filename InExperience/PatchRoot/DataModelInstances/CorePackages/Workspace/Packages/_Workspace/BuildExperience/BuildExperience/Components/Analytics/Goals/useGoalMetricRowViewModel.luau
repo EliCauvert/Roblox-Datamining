@@ -114,6 +114,7 @@ return function(p2)
 	return {
 		title = p2.title,
 		valueText = var7,
+		icon = if summary.kind == "number" then summary.icon else nil,
 		deltaText = deltaText,
 		isDeltaPositive = var4 ~= nil and var4.isPositive,
 		isLoading = var2,

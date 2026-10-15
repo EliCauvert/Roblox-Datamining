@@ -1,6 +1,7 @@
 ﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
 local parent = shareSheet.Parent
 local reactModule = require(parent.React)
+local fFlagShareSheetFriendsSort = require(parent.SharedFlags).FFlagShareSheetFriendsSort
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 local _ = require(parent.AppChat.GetConversationListStore)
 local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
@@ -30,7 +31,7 @@ local function getCompactConversations(p1, p2, p3, p4)
 end
 
 return function(p5)
-	-- upvalues: useConversationListModule (ref), reactModule (ref), useExternalChatConversationEligibilityModule (ref), shareSheetConstantsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), getCompactConversations (ref), fetchConversationListPageToSignalsModule (ref)
+	-- upvalues: useConversationListModule (ref), reactModule (ref), useExternalChatConversationEligibilityModule (ref), shareSheetConstantsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), getCompactConversations (ref), fFlagShareSheetFriendsSort (ref), fetchConversationListPageToSignalsModule (ref)
 	local var2 = p5.chatShare ~= nil
 	local var3 = useConversationListModule(var2)
 	local var4 = reactModule.useRef(var3)
@@ -73,12 +74,14 @@ return function(p5)
 			isLoading = var3.listStatus.error ~= nil and var5.isLoading
 		}
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), fetchConversationListPageToSignalsModule (copy)
-		if var2 then
-			fetchConversationListPageToSignalsModule()
-		end
-	end, { var2 })
+	if not fFlagShareSheetFriendsSort then
+		reactModule.useEffect(function()
+			-- upvalues: var2 (ref), fetchConversationListPageToSignalsModule (copy)
+			if var2 then
+				fetchConversationListPageToSignalsModule()
+			end
+		end, { var2 })
+	end
 	var5 = var2 and (not var6 and (var3.listStatus.error == nil and (if var3.listStatus.isFetchingConversations ~= true then var3.listStatus.hasFetchedInitialPage ~= true else true)))
 	
 	return {

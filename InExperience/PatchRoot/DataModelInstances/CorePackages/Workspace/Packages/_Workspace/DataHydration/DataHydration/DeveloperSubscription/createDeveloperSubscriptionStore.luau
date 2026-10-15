@@ -4,6 +4,7 @@ local _ = require(parent.HttpClient)
 local statusCodes = require(parent.Http).StatusCodes
 local promiseModule = require(parent.Promise)
 local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
+local fFlagDataHydrationPreserveIncompleteCatalogResultsModule = require(dataHydration.Flags.FFlagDataHydrationPreserveIncompleteCatalogResults)
 local dataHydrationUtilsModule = require(dataHydration.DataHydrationUtils)
 local fetchDeveloperSubscriptionModule = require(script.Parent.fetchDeveloperSubscription)
 local developerSubscriptionTypesModule = require(script.Parent.DeveloperSubscriptionTypes)
@@ -12,7 +13,7 @@ local frozen = table.freeze({
 })
 
 return function(p1)
-	-- upvalues: dataHydrationUtilsModule (ref), createSingleEntityResolverModule (ref), fetchDeveloperSubscriptionModule (ref), frozen (ref), promiseModule (ref), statusCodes (ref), developerSubscriptionTypesModule (ref)
+	-- upvalues: dataHydrationUtilsModule (ref), fetchDeveloperSubscriptionModule (ref), fFlagDataHydrationPreserveIncompleteCatalogResultsModule (ref), promiseModule (ref), createSingleEntityResolverModule (ref), frozen (ref), statusCodes (ref), developerSubscriptionTypesModule (ref)
 	p1 = p1 or {}
 	local t = { network = p1.network, baseUrl = p1.baseUrl }
 	local getLocalPlayerUserId = p1.getLocalPlayerUserId or dataHydrationUtilsModule.getLocalPlayerUserId
@@ -20,9 +21,25 @@ return function(p1)
 	local var1 = 0
 	local var2 = false
 	local var3 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchDeveloperSubscriptionModule (copy), t (ref)
-		return fetchDeveloperSubscriptionModule.list(p2, t)
-	end, { resolver = { replaceItems = true } })
+		-- upvalues: fetchDeveloperSubscriptionModule (copy), t (ref), fFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), promiseModule (copy)
+		local var4 = fetchDeveloperSubscriptionModule.list(p2, t)
+		
+		return if fFlagDataHydrationPreserveIncompleteCatalogResultsModule then var4:catch(function(p3)
+			-- upvalues: promiseModule (copy)
+			return if typeof(p3) == "table" and p3.code == "IncompleteDeveloperSubscriptionList" then {
+				isIncomplete = true,
+				developerSubscriptions = p3.developerSubscriptions,
+				nextCursor = p3.nextCursor
+			} else promiseModule.reject(p3)
+		end) else var4
+	end, {
+		cache = if fFlagDataHydrationPreserveIncompleteCatalogResultsModule then {
+			ttlSecondsForItem = function(p2)
+				return if p2.isIncomplete then 60 else nil
+			end
+		} else nil,
+		resolver = { replaceItems = true }
+	})
 	local var4 = observeLocalPlayerUserId(function()
 		-- upvalues: var1 (write)
 		var1 += 1
@@ -342,6 +359,7 @@ return function(p1)
 		getSubscriptions = var3.get,
 		fetchSubscriptions = var3.fetch,
 		getAndFetchSubscriptions = var3.getAndFetch,
+		getAccountResetGeneration = var3.getAccountResetGeneration,
 		getPermission = function(p7)
 			-- upvalues: fetchDeveloperSubscriptionModule (copy), t (ref)
 			return fetchDeveloperSubscriptionModule.getPermission(p7, t)

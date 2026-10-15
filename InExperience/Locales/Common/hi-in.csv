@@ -1928,6 +1928,7 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} को ब्लॉक क
 Feature.BlockingModal.Message.BlockConfirmation,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक किया है."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक कर दिया है."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,कस्टम विकल्प जोड़ें...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,अर्ली टेस्टर को इनवाइट करें
 Feature.Build.Action.AddPlaytesters,अर्ली टेस्टर्स को इनवाइट करें
@@ -2119,6 +2120,7 @@ Feature.Build.Error.MonetizationOptionsLoad,विकल्प लोड नह�
 Feature.Build.Error.MonetizationPermissionDenied,आपके पास मॉनेटाइज़ेशन के विकल्प बदलने की परमिशन नहीं है.
 Feature.Build.Header.AccessSharing,ऐक्सेस और शेयरिंग
 Feature.Build.Header.AllVersions,सभी वर्ज़न
+Feature.Build.Header.Answers,जवाब
 Feature.Build.Header.ContentMaturity,कॉन्टेंट मैच्योरिटी
 Feature.Build.Header.CustomAnswer,कस्टम जवाब
 Feature.Build.Header.GameConfiguration,गेम कॉन्फ़िगरेशन
@@ -3591,6 +3593,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} बाकी हैं
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Robux खरीदने का मतलब है कि आप हमारी {termsLinkStart}उपयोग की शर्तों{termsLinkEnd} से सहमत हैं, जिसमें आर्बिट्रेशन क्लॉज़ और वापसी से जुड़ी पॉलिसी शामिल हैं."
+Feature.InExperienceShop.GamePass,गेम पास
 Feature.InExperienceShop.Label.BonusItem,बोनस आइटम
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा

@@ -282,6 +282,7 @@ local function createLocalToolControllers(p3, p4, p5)
 			-- upvalues: var4 (ref), var5 (ref), var8 (ref)
 			return var4.trySubmitComposerText(p6) or (var5.trySubmitComposerText(p6) or (var8 ~= nil and var8.trySubmitComposerText(p6)))
 		end,
+		trySubmitAnswerText = var4.trySubmitAnswerText,
 		stopPending = function()
 			-- upvalues: var4 (ref), var5 (ref), var7 (ref), var8 (ref)
 			var4.stopPendingAnswer()
@@ -508,7 +509,8 @@ return {
 				var4.finish()
 			end else var3.stopPending,
 			syncFromTurnState = var3.syncFromTurnState,
-			trySubmitComposerText = var3.trySubmitComposerText
+			trySubmitComposerText = var3.trySubmitComposerText,
+			trySubmitAnswerText = var3.trySubmitAnswerText
 		}
 	end,
 	createResumedAssistantTurn = function(p10, p11, p12, p13, p14, p15)
@@ -645,7 +647,8 @@ return {
 				var11.stopPending()
 			end,
 			syncFromTurnState = var11.syncFromTurnState,
-			trySubmitComposerText = var11.trySubmitComposerText
+			trySubmitComposerText = var11.trySubmitComposerText,
+			trySubmitAnswerText = var11.trySubmitAnswerText
 		}
 	end,
 	getPromptFailureComposerError = getPromptFailureComposerError,

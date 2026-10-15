@@ -4,6 +4,7 @@ local _ = require(parent.HttpClient)
 local statusCodes = require(parent.Http).StatusCodes
 local promiseModule = require(parent.Promise)
 local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
+local fFlagDataHydrationPreserveIncompleteCatalogResultsModule = require(dataHydration.Flags.FFlagDataHydrationPreserveIncompleteCatalogResults)
 local dataHydrationUtilsModule = require(dataHydration.DataHydrationUtils)
 local fetchGamePassConfigModule = require(script.Parent.fetchGamePassConfig)
 local _ = require(script.Parent.GamePassConfigTypes)
@@ -12,7 +13,7 @@ local frozen = table.freeze({
 })
 
 return function(p1)
-	-- upvalues: dataHydrationUtilsModule (ref), createSingleEntityResolverModule (ref), fetchGamePassConfigModule (ref), promiseModule (ref), frozen (ref), statusCodes (ref)
+	-- upvalues: dataHydrationUtilsModule (ref), fetchGamePassConfigModule (ref), fFlagDataHydrationPreserveIncompleteCatalogResultsModule (ref), promiseModule (ref), createSingleEntityResolverModule (ref), frozen (ref), statusCodes (ref)
 	p1 = p1 or {}
 	local t = { network = p1.network, baseUrl = p1.baseUrl }
 	local getLocalPlayerUserId = p1.getLocalPlayerUserId or dataHydrationUtilsModule.getLocalPlayerUserId
@@ -20,9 +21,25 @@ return function(p1)
 	local var1 = false
 	local var2 = 0
 	local var3 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchGamePassConfigModule (copy), t (ref)
-		return fetchGamePassConfigModule.list(p2, t)
-	end, { resolver = { replaceItems = true } })
+		-- upvalues: fetchGamePassConfigModule (copy), t (ref), fFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), promiseModule (copy)
+		local var4 = fetchGamePassConfigModule.list(p2, t)
+		
+		return if fFlagDataHydrationPreserveIncompleteCatalogResultsModule then var4:catch(function(p3)
+			-- upvalues: promiseModule (copy)
+			return if typeof(p3) == "table" and p3.code == "IncompleteGamePassList" then {
+				isIncomplete = true,
+				gamePasses = p3.gamePasses,
+				nextPageToken = p3.nextPageToken
+			} else promiseModule.reject(p3)
+		end) else var4
+	end, {
+		cache = if fFlagDataHydrationPreserveIncompleteCatalogResultsModule then {
+			ttlSecondsForItem = function(p2)
+				return if p2.isIncomplete then 60 else nil
+			end
+		} else nil,
+		resolver = { replaceItems = true }
+	})
 	local var4 = observeLocalPlayerUserId(function()
 		-- upvalues: var2 (write)
 		var2 += 1
@@ -305,6 +322,7 @@ return function(p1)
 		getGamePasses = var3.get,
 		fetchGamePasses = var3.fetch,
 		getAndFetchGamePasses = var3.getAndFetch,
+		getAccountResetGeneration = var3.getAccountResetGeneration,
 		list = list,
 		get = get,
 		batchGet = batchGet,

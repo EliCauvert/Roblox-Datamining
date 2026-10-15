@@ -1938,6 +1938,7 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} engellensin mi?
 Feature.BlockingModal.Message.BlockConfirmation,"Bu kullanıcıyı engellersen Etkileşim Ağından veya takipçi listenden kaldırılır. Sana mesaj, istek veya davet gönderemez.<br /><br />Onu engellediğin konusunda bilgilendirilmez."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Bu kullanıcıyı engellersen arkadaş veya takipçi listenden kaldırılır. Sana mesaj, istek veya davet gönderemez.<br /><br />Onu engellediğin konusunda bilgilendirilmez."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Özelleştirilmiş bir seçenek ekle...
 Feature.Build.Action.AddFriends,Arkadaşları davet et
 Feature.Build.Action.AddPlaytester,Erken test kullanıcısı davet et
 Feature.Build.Action.AddPlaytesters,Erken test kullanıcıları davet et
@@ -2129,6 +2130,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Seçenekler yüklenemedi. Tekrar den
 Feature.Build.Error.MonetizationPermissionDenied,Gelir elde etme seçeneklerini değiştirme iznin yok.
 Feature.Build.Header.AccessSharing,Erişim ve paylaşım
 Feature.Build.Header.AllVersions,Tüm versiyonlar
+Feature.Build.Header.Answers,Yanıtlar
 Feature.Build.Header.ContentMaturity,İçerik Olgunluk Düzeyi
 Feature.Build.Header.CustomAnswer,Özel yanıt
 Feature.Build.Header.GameConfiguration,Oyun yapılandırması
@@ -3603,6 +3605,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} kaldı
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robux satın alarak tahkim maddesi ve fesih politikası da dâhil olmak üzere {termsLinkStart}Kullanım Koşullarımızı{termsLinkEnd} kabul etmiş olursun.
+Feature.InExperienceShop.GamePass,Oyun bileti
 Feature.InExperienceShop.Label.BonusItem,Bonus öğe
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} sonra sona erecek

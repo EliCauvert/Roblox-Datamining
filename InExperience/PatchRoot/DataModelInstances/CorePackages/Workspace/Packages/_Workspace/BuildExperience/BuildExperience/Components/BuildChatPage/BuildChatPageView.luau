@@ -23,10 +23,12 @@ local playButtonModule = require(buildExperience.Components.PlayButton.PlayButto
 local buyMoreRobuxCardModule = require(buildExperience.Components.Chat.BuyMoreRobuxCard)
 local chatActionsModule = require(buildExperience.Components.Chat.ChatActions)
 local chatMessageListModule = require(buildExperience.Components.Chat.ChatMessageList)
+local fFlagBuildExperienceAnswerFormModule = require(buildExperience.Flags.FFlagBuildExperienceAnswerForm)
+local var3 = if fFlagBuildExperienceAnswerFormModule then require(buildExperience.Components.AnswerForm.AnswerFormContainer) else nil
 local pushNotificationsUpsellCardModule = require(buildExperience.Components.Chat.PushNotificationsUpsellCard)
-local var3 = if fFlagBuildAdUpsellModule then require(buildExperience.Components.Ads.AdUpsellMilestone.AdUpsellMilestoneContainer) else nil
-local var4 = if fFlagBuildAdUpsellModule then require(buildExperience.Components.Ads.CreateAdCampaignSheet.CreateAdCampaignSheetContainer) else nil
-local var5 = if fFlagBuildAdUpsellModule then require(buildExperience.Components.Ads.AdCampaignCreatedToast) else nil
+local var4 = if fFlagBuildAdUpsellModule then require(buildExperience.Components.Ads.AdUpsellMilestone.AdUpsellMilestoneContainer) else nil
+local var5 = if fFlagBuildAdUpsellModule then require(buildExperience.Components.Ads.CreateAdCampaignSheet.CreateAdCampaignSheetContainer) else nil
+local var6 = if fFlagBuildAdUpsellModule then require(buildExperience.Components.Ads.AdCampaignCreatedToast) else nil
 local subagentStatusModule = require(buildExperience.Components.SubagentStatus)
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore)
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
@@ -99,7 +101,7 @@ local function groupAdUpsellCardsByAnchorIndex(p4)
 end
 
 local function renderAdUpsells(p5, p6, p7, p8)
-	-- upvalues: fFlagBuildAdUpsellModule (ref), fFlagBuildAdUpsellPinnedModule (ref), reactModule (ref), text (ref), chatConstantsModule (ref), groupAdUpsellCardsByAnchorIndex (ref), var3 (ref), fFlagBuildAgentAdCampaignCardModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisPositionProviderModule (ref), view (ref)
+	-- upvalues: fFlagBuildAdUpsellModule (ref), fFlagBuildAdUpsellPinnedModule (ref), reactModule (ref), text (ref), chatConstantsModule (ref), groupAdUpsellCardsByAnchorIndex (ref), var4 (ref), fFlagBuildAgentAdCampaignCardModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisPositionProviderModule (ref), view (ref)
 	local cloned = table.clone(p6)
 	
 	if fFlagBuildAdUpsellModule and fFlagBuildAdUpsellPinnedModule and p5.adUpsellCongratsAnchorIndex ~= nil then
@@ -117,7 +119,7 @@ local function renderAdUpsells(p5, p6, p7, p8)
 			
 			for i_1, v_1 in v do
 				table.insert(t_1, v_1.id)
-				t[v_1.id] = reactModule.createElement(var3, {
+				t[v_1.id] = reactModule.createElement(var4, {
 					anchorId = v_1.id,
 					order = v_1.order,
 					isImpressed = v_1.isImpressed,
@@ -149,7 +151,7 @@ local function renderAdUpsells(p5, p6, p7, p8)
 	
 	if fFlagBuildAdUpsellModule and fFlagBuildAdUpsellPinnedModule then
 		for i, v in p5.adUpsellCards do
-			t[v.id] = reactModule.createElement(var3, {
+			t[v.id] = reactModule.createElement(var4, {
 				anchorId = v.id,
 				order = v.order,
 				isImpressed = v.isImpressed,
@@ -166,17 +168,18 @@ local function renderAdUpsells(p5, p6, p7, p8)
 end
 
 return function(p9)
-	-- upvalues: var1 (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), renderAdUpsells (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), view (ref), fFlagBuildAdUpsellPinnedModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceLibrary (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), playButtonModule (ref), agentDetailMenuModule (ref), iconVariant (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagEnableBuildAdPromotionModule (ref), scrollView (ref), foundationModule (ref), divider (ref), var2 (ref), toTodoItems (ref), var4 (ref), fFlagBuildAdsManagerUniverseUrlModule (ref), var5 (ref)
-	local var6 = false
-	local var7 = nil
+	-- upvalues: fFlagBuildExperienceAnswerFormModule (ref), var1 (ref), reactModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAdUpsellModule (ref), useTokens (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceRemoveAgentTaskUiModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), chatConstantsModule (ref), pushNotificationsUpsellCardModule (ref), renderAdUpsells (ref), var3 (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), view (ref), fFlagBuildAdUpsellPinnedModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceLibrary (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), playButtonModule (ref), agentDetailMenuModule (ref), iconVariant (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagEnableBuildAdPromotionModule (ref), scrollView (ref), foundationModule (ref), divider (ref), var2 (ref), toTodoItems (ref), var5 (ref), fFlagBuildAdsManagerUniverseUrlModule (ref), var6 (ref)
+	local var7 = fFlagBuildExperienceAnswerFormModule and p9.answerForm ~= nil
+	local var8 = false
+	local var9 = nil
 	
 	if var1 then
-		local var8, var9 = reactModule.useState(false)
-		var6 = var8
-		var7 = var9
+		local var10, var11 = reactModule.useState(false)
+		var8 = var10
+		var9 = var11
 	end
-	local var10, v
-	local var11 = useLocalization({
+	local var12, v
+	local var13 = useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
 		adUpsellCongrats = if fFlagBuildAdUpsellModule then if p9.adUpsellFreePromotionsRemaining == 1 then localizationStringsModule.AD_UPSELL_CONGRATS_SINGULAR else {
 			localizationStringsModule.AD_UPSELL_CONGRATS,
@@ -185,37 +188,37 @@ return function(p9)
 		adCampaignCreated = if fFlagBuildAdUpsellModule then localizationStringsModule.ADS_STATS_CREATE_SUCCESS else nil,
 		adCampaignCreatedView = if fFlagBuildAdUpsellModule then localizationStringsModule.AD_CAMPAIGN_CARD_VIEW else nil
 	})
-	local var12 = useTokens()
-	local var13 = reactModule.useRef(nil)
-	useScrollPerformanceTrackerModule("LuaApp_Build_Chat_Scroll", var13)
-	local var14 = reactModule.useCallback(function(p10)
-		-- upvalues: var13 (ref), p9 (ref)
-		var13.current = p10
+	local var14 = useTokens()
+	local var15 = reactModule.useRef(nil)
+	useScrollPerformanceTrackerModule("LuaApp_Build_Chat_Scroll", var15)
+	local var16 = reactModule.useCallback(function(p10)
+		-- upvalues: var15 (ref), p9 (ref)
+		var15.current = p10
 		p9.scrollingFrameRef(p10)
 	end, { p9.scrollingFrameRef })
 	local taskState = p9.taskState
 	local selectedChipGroupName = p9.selectedChipGroupName
 	
 	if taskState == nil or selectedChipGroupName == nil then
-		var10 = nil
+		var12 = nil
 	else
 		for i, v in taskState.groups do
 			if v.name == selectedChipGroupName then
-				var10 = v
+				var12 = v
 			end
 		end
-		var10 = nil
+		var12 = nil
 	end
 	local v_1
 	taskState = not fFlagBuildExperienceRemoveAgentTaskUiModule
 	selectedChipGroupName = chatMessageListModule({
 		isPageVisible = p9.isAdUpsellVisible,
-		scrollingFrameRef = var13,
+		scrollingFrameRef = var15,
 		isAgentAdCampaignCreateDisabled = p9.isAgentAdCampaignCreateDisabled,
 		messages = p9.messages,
 		clockBinding = p9.clockBinding,
 		localToolActions = p9.localToolActions,
-		emptyState = reactModule.createElement(buildEmptyStateModule),
+		emptyState = if not var7 then reactModule.createElement(buildEmptyStateModule) else nil,
 		isHistoryLoading = p9.isHistoryLoading,
 		onPlaytest = p9.onPlaytest,
 		onPublish = p9.onPublish,
@@ -224,17 +227,17 @@ return function(p9)
 		getAgentAdCampaignCardState = if fFlagBuildAgentAdCampaignCardModule then p9.getAgentAdCampaignCardState else nil,
 		onAgentAdCampaignActive = if fFlagBuildAgentAdCampaignCardModule then p9.onAgentAdCampaignActive else nil
 	})
-	local var15 = false
+	local var17 = false
 	
 	for v, v_1 in p9.messages do
 		if v_1.kind == "user_message" then
-			var15 = true
+			var17 = true
 			break
 		end
 	end
 	local MESSAGE_LAYOUT_ORDER_STRIDE = chatConstantsModule.MESSAGE_LAYOUT_ORDER_STRIDE
 	
-	if p9.showPushNotificationsUpsell and var15 and p9.isAssistantResponding then
+	if p9.showPushNotificationsUpsell and var17 and p9.isAssistantResponding then
 		selectedChipGroupName.PushNotificationsUpsell = reactModule.createElement(pushNotificationsUpsellCardModule, {
 			LayoutOrder = (#p9.messages + 1) * MESSAGE_LAYOUT_ORDER_STRIDE,
 			isRequestPending = p9.isPushNotificationsRequestPending,
@@ -244,9 +247,19 @@ return function(p9)
 			onNotNow = p9.onNotNow
 		})
 	end
-	local var16, var17 = renderAdUpsells(p9, selectedChipGroupName, var13, var11.adUpsellCongrats)
-	selectedChipGroupName = var16
+	local var18, var19 = renderAdUpsells(p9, selectedChipGroupName, var15, var13.adUpsellCongrats)
+	selectedChipGroupName = var18
 	
+	if var7 then
+		selectedChipGroupName.AnswerForm = reactModule.createElement(var3, {
+			LayoutOrder = (#p9.messages + 2) * chatConstantsModule.MESSAGE_LAYOUT_ORDER_STRIDE,
+			state = p9.answerForm,
+			actions = p9.localToolActions,
+			onSubmitText = p9.onSubmitAnswerText,
+			onStop = p9.onStop,
+			errorText = p9.composerErrorText
+		})
+	end
 	if fFlagBuildExperienceChatAccordionScrollAnchorModule then
 		selectedChipGroupName = {
 			ScrollAnchor = reactModule.createElement(chatScrollAnchorContextModule.Provider, { value = p9.anchorScrollToInstance }, selectedChipGroupName)
@@ -256,7 +269,7 @@ return function(p9)
 	
 	if taskState and p9.taskState ~= nil then
 		for i_1, v_2 in p9.taskState.groups do
-			local var18 = if v_2.isLoading then subagentTaskStatus.InProgress elseif v_2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
+			local var20 = if v_2.isLoading then subagentTaskStatus.InProgress elseif v_2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
 			v[`Group{i_1}`] = reactModule.createElement(subagentStatusModule.Root, {
 				layoutOrder = i_1,
 				text = v_2.name,
@@ -267,21 +280,23 @@ return function(p9)
 				end,
 				testId = `BuildChatPage.SubagentStatus.{v_2.name}`
 			}, {
-				Indicator = if var18 ~= subagentTaskStatus.Pending then nil else reactModule.createElement(subagentStatusModule.LoadingIndicator, {
-					status = var18,
+				Indicator = if var20 ~= subagentTaskStatus.Pending then nil else reactModule.createElement(subagentStatusModule.LoadingIndicator, {
+					status = var20,
 					testId = `BuildChatPage.SubagentStatus.{v_2.name}.Indicator`
 				})
 			})
 		end
 	end
+	local createElement
 	v_1 = reactModule.createElement
-	v_1 = v_1(view, {
+	local t = {
 		testId = "BuildChatPage.ActionBody",
 		tag = {
 			["composition-content-body size-full-0 auto-y"] = true,
 			["col gap-medium"] = p9.showBuyMoreRobuxCard or fFlagBuildAdUpsellPinnedModule and #p9.adUpsellCards > 0
 		}
-	}, {
+	}
+	local t_1 = {
 		BuyMoreRobux = if p9.showBuyMoreRobuxCard then reactModule.createElement(buyMoreRobuxCardModule, {
 			LayoutOrder = 1,
 			title = p9.buyMoreRobuxCardTitle,
@@ -295,8 +310,14 @@ return function(p9)
 			tag = "col gap-medium size-full-0 auto-y",
 			testId = "BuildChatPage.AdUpsells",
 			LayoutOrder = if p9.showBuyMoreRobuxCard then 2 else 1
-		}, var17) else nil,
-		Footer = reactModule.createElement(chatActionsModule, {
+		}, var19) else nil
+	}
+	
+	if var7 then
+		createElement = nil
+	else
+		createElement = reactModule.createElement
+		createElement = createElement(chatActionsModule, {
 			LayoutOrder = if p9.showBuyMoreRobuxCard then if fFlagBuildAdUpsellPinnedModule and #p9.adUpsellCards > 0 then 3 else 2 elseif fFlagBuildAdUpsellPinnedModule and #p9.adUpsellCards > 0 then 2 else nil,
 			composerText = p9.composerText,
 			composerErrorText = p9.composerErrorText,
@@ -307,7 +328,7 @@ return function(p9)
 			isSendBlocked = p9.isComposerSendBlocked,
 			resourceAttachments = if fFlagBuildExperienceChatResourceAttachments then p9.composerResourceAttachments else nil,
 			onRemoveResourceAttachment = if fFlagBuildExperienceChatResourceAttachments then p9.onRemoveComposerResourceAttachment else nil,
-			placeholder = var11.composerPlaceholder,
+			placeholder = var13.composerPlaceholder,
 			textBoxRef = p9.textBoxRef,
 			isAssistantResponding = p9.isAssistantResponding,
 			canStopAssistantResponse = p9.canStopAssistantResponse,
@@ -315,7 +336,9 @@ return function(p9)
 			onSend = p9.onSend,
 			onStop = p9.onStop
 		})
-	})
+	end
+	t_1.Footer = createElement
+	v_1 = v_1(view, t, t_1)
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center size-full bg-surface-0",
@@ -374,8 +397,8 @@ return function(p9)
 						variant = if p9.agentSpecVersion ~= nil then iconVariant.Regular else iconVariant.Filled
 					},
 					onActivated = function()
-						-- upvalues: var7 (write)
-						var7(true)
+						-- upvalues: var9 (write)
+						var9(true)
 					end,
 					size = inputSize.Large,
 					variant = buttonVariant.Utility
@@ -423,7 +446,7 @@ return function(p9)
 		}),
 		Messages = reactModule.createElement(scrollView, {
 			LayoutOrder = 2,
-			scrollingFrameRef = var14,
+			scrollingFrameRef = var16,
 			onAbsoluteCanvasSizeChanged = p9.onChatViewportChanged,
 			onAbsoluteWindowSizeChanged = p9.onChatViewportChanged,
 			tag = {
@@ -440,21 +463,21 @@ return function(p9)
 				testId = "BuildChatPage.MessageBody",
 				layout = {
 					FillDirection = Enum.FillDirection.Vertical,
-					Padding = UDim.new(0, var12.Size.Size_800)
+					Padding = UDim.new(0, var14.Size.Size_800)
 				},
 				tag = {
 					["composition-content-body"] = true,
-					["size-full"] = p9.isChatEmpty,
-					["size-full-0 auto-y padding-y-large"] = not p9.isChatEmpty
+					["size-full"] = p9.isChatEmpty and not var7,
+					["size-full-0 auto-y padding-y-large"] = not p9.isChatEmpty or var7
 				}
 			}, selectedChipGroupName)
 		}),
-		AgentSpecSheet = if var1 and var6 then reactModule.createElement(var2, {
+		AgentSpecSheet = if var1 and var8 then reactModule.createElement(var2, {
 			specVersion = p9.agentSpecVersion,
 			onSave = p9.setAgentSpecVersion,
 			onClose = function()
-				-- upvalues: var7 (write)
-				var7(false)
+				-- upvalues: var9 (write)
+				var9(false)
 			end
 		}) else nil,
 		Actions = reactModule.createElement(view, {
@@ -466,12 +489,12 @@ return function(p9)
 			}
 		}, { ActionBody = v_1 }),
 		TodoBottomSheet = if taskState then reactModule.createElement(subagentStatusModule.TodoBottomSheet, {
-			title = if var10 ~= nil then "" else var10.name,
-			items = toTodoItems(var10),
-			isOpen = var10 ~= nil,
+			title = if var12 ~= nil then "" else var12.name,
+			items = toTodoItems(var12),
+			isOpen = var12 ~= nil,
 			onClose = p9.onChipBottomSheetClose
 		}) else nil,
-		AdCampaignSheet = if fFlagBuildAdUpsellModule and p9.isAdUpsellVisible then reactModule.createElement(var4, {
+		AdCampaignSheet = if fFlagBuildAdUpsellModule and p9.isAdUpsellVisible then reactModule.createElement(var5, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
 			universeId = if fFlagBuildAdsManagerUniverseUrlModule then p9.target.universeId else nil,
@@ -487,7 +510,7 @@ return function(p9)
 			runStartTimeMs = p9.adCampaignRunStartTimeMs,
 			runEndTimeMs = p9.adCampaignRunEndTimeMs
 		}) else nil,
-		AgentAdCampaignSheet = if fFlagBuildAgentAdCampaignCardModule then reactModule.createElement(var4, {
+		AgentAdCampaignSheet = if fFlagBuildAgentAdCampaignCardModule then reactModule.createElement(var5, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
 			universeId = if fFlagBuildAdsManagerUniverseUrlModule then p9.target.universeId else nil,
@@ -501,12 +524,12 @@ return function(p9)
 			attemptedOption = p9.agentAdCampaignAttemptedOption,
 			runStartTimeMs = p9.agentAdCampaignRunStartTimeMs
 		}) else nil,
-		AdCampaignCreatedToast = if fFlagBuildAdUpsellModule and p9.isAdCampaignCreatedToastVisible and p9.isAdUpsellVisible then reactModule.createElement(var5, {
+		AdCampaignCreatedToast = if fFlagBuildAdUpsellModule and p9.isAdCampaignCreatedToastVisible and p9.isAdUpsellVisible then reactModule.createElement(var6, {
 			testId = "AdCampaignCreatedToast",
-			actionText = if p9.onOpenGetUsersPage ~= nil then nil else var11.adCampaignCreatedView,
+			actionText = if p9.onOpenGetUsersPage ~= nil then nil else var13.adCampaignCreatedView,
 			onActionActivated = p9.onOpenGetUsersPage,
 			onClose = p9.onAdCampaignCreatedToastDismiss,
-			title = var11.adCampaignCreated
+			title = var13.adCampaignCreated
 		}) else nil
 	})
 end

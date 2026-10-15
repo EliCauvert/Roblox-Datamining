@@ -1,5 +1,7 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local experienceAnalyticsModule = require(buildExperience.Parent.DataHydration.ExperienceAnalytics)
+local parent = buildExperience.Parent
+local foundationModule = require(parent.Foundation)
+local experienceAnalyticsModule = require(parent.DataHydration.ExperienceAnalytics)
 local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
 local analyticsUnitModule = require(buildExperience.Analytics.AnalyticsUnit)
 local goalLockedActionIdModule = require(buildExperience.Analytics.Goals.GoalLockedActionId)
@@ -142,6 +144,7 @@ return {
 					kind = "number",
 					id = "DailyRevenue",
 					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_ROBUX_SPENT,
+					icon = foundationModule.Enums.IconName.Robux,
 					source = goalMetricSummarySourcesModule.summary({ metric = metricId.DailyRevenue }),
 					format = { unit = analyticsUnitModule.Scalar }
 				},

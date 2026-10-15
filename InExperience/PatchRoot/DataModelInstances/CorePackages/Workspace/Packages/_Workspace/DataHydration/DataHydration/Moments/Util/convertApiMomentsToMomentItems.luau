@@ -2,6 +2,7 @@
 local parent = dataHydration.Parent
 local momentsTypesModule = require(parent.MomentsTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagMomentsServeEDPVideos = sharedFlagsModule.FFlagMomentsServeEDPVideos
 local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local _ = require(dataHydration.Moments.MomentsStoreTypes)
 local convertApiMomentCommentsModule = require(dataHydration.Moments.Util.convertApiMomentComments)
@@ -22,6 +23,11 @@ end
 local _ = function(p1)
 	-- upvalues: momentStatus (ref)
 	return if p1 == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
+end
+
+local _ = function(p1)
+	-- upvalues: fFlagMomentsServeEDPVideos (ref)
+	return if p1 == "experience" or p1 == "ad" then p1 elseif fFlagMomentsServeEDPVideos and p1 == "edpVideo" then p1 else nil
 end
 
 local function toEnumItem(p1, p2, p3)
@@ -192,23 +198,41 @@ local _ = function(p2)
 end
 
 local function convertApiMomentToMomentItem(p3)
-	-- upvalues: normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsComments (ref), fFlagMomentsCommentsIxpEnabled (ref), convertApiMomentCommentsModule (ref)
+	-- upvalues: fFlagMomentsServeEDPVideos (ref), normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsComments (ref), fFlagMomentsCommentsIxpEnabled (ref), convertApiMomentCommentsModule (ref)
+	local isEdpVideo
 	local captionedAssetMoment = p3.captionedAssetMoment
 	local owner = p3.owner
-	local entityId = p3.entityId or p3.id
+	
+	if fFlagMomentsServeEDPVideos then
+		isEdpVideo = p3.entityType == "edpVideo"
+		isEdpVideo = nil
+	else
+		isEdpVideo = nil
+	end
+	local entityId
+	if fFlagMomentsServeEDPVideos and isEdpVideo then
+		entityId = p3.id
+		
+		if not entityId then
+			entityId = if captionedAssetMoment == nil or captionedAssetMoment.assetId == nil then nil else tostring(captionedAssetMoment.assetId)
+		end
+	else
+		entityId = p3.entityId or p3.id
+	end
 	local feedItemId = p3.feedItemId
 	
-	if captionedAssetMoment == nil or captionedAssetMoment.assetId == nil or (owner == nil or owner.id == nil) or (entityId == nil or feedItemId == nil or feedItemId == "") then
+	if captionedAssetMoment == nil or captionedAssetMoment.assetId == nil or (not fFlagMomentsServeEDPVideos or not isEdpVideo) and (owner == nil or owner.id == nil) or (entityId == nil or feedItemId == nil or feedItemId == "") then
 		return nil
 	end
 	local var8
 	local var9 = if p3.primaryCta ~= nil then nil else p3.primaryCta.experienceCta
-	local var10 = normalizeCaptureEdits(if captionedAssetMoment.captureType == "Screenshot" then captionedAssetMoment.screenshotCaptureEdits else captionedAssetMoment.videoCaptureEdits)
-	local var11 = if (captionedAssetMoment.status or p3.status) == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
+	local var10 = if not fFlagMomentsServeEDPVideos then nil elseif var9 ~= nil then if isEdpVideo then tonumber(p3.entityId) else nil else var9.experienceId
+	local var11 = normalizeCaptureEdits(if captionedAssetMoment.captureType == "Screenshot" then captionedAssetMoment.screenshotCaptureEdits else captionedAssetMoment.videoCaptureEdits)
+	local var12 = if (captionedAssetMoment.status or p3.status) == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
 	local t = {
 		assetId = captionedAssetMoment.assetId,
 		channelId = if fFlagEnableMomentsCommentReporting and type(p3.channelId) == "string" and p3.channelId ~= "" then p3.channelId else nil,
-		creatorId = owner.id,
+		creatorId = if fFlagMomentsServeEDPVideos and (owner == nil or owner.id == nil) then 0 else owner.id,
 		isModerated = captionedAssetMoment.isModerated
 	}
 	local t_1 = {
@@ -217,7 +241,7 @@ local function convertApiMomentToMomentItem(p3)
 		assetAccessContext = captionedAssetMoment.assetAccessContext,
 		captureType = if captionedAssetMoment.captureType == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video,
 		description = captionedAssetMoment.caption,
-		edits = var10,
+		edits = var11,
 		experienceName = if var9 ~= nil then nil else var9.experienceName
 	}
 	local reactions = p3.reactions
@@ -225,28 +249,37 @@ local function convertApiMomentToMomentItem(p3)
 	if reactions == nil or reactions.counts == nil then
 		var8 = nil
 	else
-		local var12 = 0
+		local var13 = 0
 		
 		for i, v in reactions.counts do
-			var12 += v
+			var13 += v
 		end
-		var8 = var12
+		var8 = var13
 	end
+	local var14
 	t_1.likeCount = var8
 	t_1.partnerUploadType = captionedAssetMoment.partnerUploadType
 	t_1.placeId = if var9 ~= nil then nil else var9.placeId
-	t_1.universeId = if var9 ~= nil then nil else var9.experienceId
+	t_1.universeId = if fFlagMomentsServeEDPVideos then var10 elseif var9 ~= nil then nil else var9.experienceId
 	t.metadata = t_1
+	
+	if fFlagMomentsServeEDPVideos then
+		local entityType = p3.entityType
+		var14 = if entityType == "experience" or entityType == "ad" then entityType elseif fFlagMomentsServeEDPVideos and entityType == "edpVideo" then entityType else nil
+	else
+		var14 = nil
+	end
+	t.entityType = var14
 	t.momentId = entityId
 	t.postAsset = if getFFlagMomentsRenderPostAssetsModule() and p3.postAsset ~= nil and p3.postAsset.postAssetId ~= nil then { postAssetId = p3.postAsset.postAssetId } else nil
 	t.recommendationMetadata = { feedItemId = feedItemId, tracingId = p3.feedSessionId }
-	t.status = var11
+	t.status = var12
 	
 	if fFlagMomentsComments or fFlagMomentsCommentsIxpEnabled then
-		local var13 = convertApiMomentCommentsModule(p3.comments)
+		local var15 = convertApiMomentCommentsModule(p3.comments)
 		
-		if var13 ~= nil then
-			t.comments = var13
+		if var15 ~= nil then
+			t.comments = var15
 		end
 	end
 	return t
@@ -260,10 +293,10 @@ return function(p4)
 		return t
 	end
 	for i, v in ipairs(p4) do
-		local var14 = convertApiMomentToMomentItem(v)
+		local var16 = convertApiMomentToMomentItem(v)
 		
-		if var14 ~= nil then
-			table.insert(t, var14)
+		if var16 ~= nil then
+			table.insert(t, var16)
 		end
 	end
 	return t

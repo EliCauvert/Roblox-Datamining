@@ -1933,6 +1933,7 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} blokkeren?
 Feature.BlockingModal.Message.BlockConfirmation,"Als je deze gebruiker blokkeert, wordt deze verwijderd als connectie of volger. De gebruiker kan je geen berichten, verzoeken of uitnodigingen sturen.<br /><br />De gebruiker krijgt geen melding dat je die hebt geblokkeerd."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Als je deze gebruiker blokkeert, wordt deze verwijderd als vriend of volger. De gebruiker kan je geen berichten, verzoeken of uitnodigingen sturen.<br /><br />De gebruiker krijgt geen melding dat je die hebt geblokkeerd."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Een aangepaste optie toevoegen...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Vroege tester uitnodigen
 Feature.Build.Action.AddPlaytesters,Vroege testers uitnodigen
@@ -2124,6 +2125,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Opties konden niet worden geladen. P
 Feature.Build.Error.MonetizationPermissionDenied,Je hebt geen toestemming om de opties voor inkomsten genereren te wijzigen.
 Feature.Build.Header.AccessSharing,Toegang en delen
 Feature.Build.Header.AllVersions,Alle versies
+Feature.Build.Header.Answers,Antwoorden
 Feature.Build.Header.ContentMaturity,Contentclassificatie
 Feature.Build.Header.CustomAnswer,Aangepast antwoord
 Feature.Build.Header.GameConfiguration,Spelconfiguratie
@@ -3598,6 +3600,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Nog {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Door Robux te kopen, ga je akkoord met onze {termsLinkStart}Gebruiksvoorwaarden{termsLinkEnd}, inclusief de arbitrageclausule en het herroepingsbeleid."
+Feature.InExperienceShop.GamePass,Game Pass
 Feature.InExperienceShop.Label.BonusItem,Bonusitem
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Eindigt over {timeRemaining}

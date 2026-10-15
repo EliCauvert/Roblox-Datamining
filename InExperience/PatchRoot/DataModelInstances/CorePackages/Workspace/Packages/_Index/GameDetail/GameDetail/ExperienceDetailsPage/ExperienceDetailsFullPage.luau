@@ -8,6 +8,7 @@ local fetchExperienceDetailsPageModule = require(script.Parent.fetchExperienceDe
 local getExperienceDetailsPageKeyModule = require(script.Parent.getExperienceDetailsPageKey)
 local removeGameDetailSessionIfDepartedModule = require(script.Parent.removeGameDetailSessionIfDeparted)
 local useEdpFunctionallyReadyLoggerModule = require(script.Parent.useEdpFunctionallyReadyLogger)
+local createExperienceDetailsPageTimerModule = require(script.Parent.createExperienceDetailsPageTimer)
 local usePublishContainerWidthModule = require(script.Parent.usePublishContainerWidth)
 local experienceDetailsFallbackBannerImageModule = require(script.Parent.Fallback.ExperienceDetailsFallbackBannerImage)
 local experienceDetailsFallbackFeedModule = require(script.Parent.Fallback.ExperienceDetailsFallbackFeed)
@@ -37,6 +38,7 @@ local filterPlayWithReward = experienceDetailsPageScopeFieldsModule.FilterPlayWi
 local isTenFoot = experienceDetailsPageScopeFieldsModule.IsTenFoot
 local compositionTags = require(parent.AppComposition).CompositionTags
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagEDPTTIParityDefinitions = sharedFlagsModule.FFlagEDPTTIParityDefinitions
 local fFlagSduiPageEntryUseSharedHooks = sharedFlagsModule.FFlagSduiPageEntryUseSharedHooks
 local fFlagSduiContainerQueries = sharedFlagsModule.FFlagSduiContainerQueries
 local sduiEdpPageScopeIsTenFoot = game:DefineFastFlag("SduiEdpPageScopeIsTenFoot", false)
@@ -57,9 +59,9 @@ local t = {
 }
 
 return reactModule.memo(function(_)
-	-- upvalues: gameDetail (ref), experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), reactModule (ref), usePageScopeRef (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useTokens (ref), useGetCurrentLegacyRoute (ref), filterPlayWithReward (ref), sduiEdpPageScopeIsTenFoot (ref), isTenFoot (ref), isTenFootInterface (ref), removeGameDetailSessionIfDepartedModule (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), fFlagSduiContainerQueries (ref), usePublishContainerWidthModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), fFlagEnableSplitPaneEDPFix (ref), experienceDetailsPageScopeFieldsModule (ref), detailsPageLayout (ref), t (ref), edpBannerAspectRatioTenths (ref), edpDirectionalFullBleedOverlapOffset (ref), edpFullBleedOverlapOffset (ref), edpGradientTopBleedOffset (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), edpDirectionalGradientMidTransparencyHundredths (ref), edpDirectionalBannerBottomVisiblePercent (ref), edpBannerBottomVisiblePercent (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackBannerImageModule (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), experienceDetailsPersistentActionBarModule (ref)
+	-- upvalues: gameDetail (ref), experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), reactModule (ref), usePageScopeRef (ref), fFlagEDPTTIParityDefinitions (ref), createExperienceDetailsPageTimerModule (ref), EDPTTIConstants (ref), sduiSurfaceLoadTimeTracker (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useTokens (ref), useGetCurrentLegacyRoute (ref), filterPlayWithReward (ref), sduiEdpPageScopeIsTenFoot (ref), isTenFoot (ref), isTenFootInterface (ref), removeGameDetailSessionIfDepartedModule (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), fFlagSduiContainerQueries (ref), usePublishContainerWidthModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), fFlagEnableSplitPaneEDPFix (ref), experienceDetailsPageScopeFieldsModule (ref), detailsPageLayout (ref), t (ref), edpBannerAspectRatioTenths (ref), edpDirectionalFullBleedOverlapOffset (ref), edpFullBleedOverlapOffset (ref), edpGradientTopBleedOffset (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), edpDirectionalGradientMidTransparencyHundredths (ref), edpDirectionalBannerBottomVisiblePercent (ref), edpBannerBottomVisiblePercent (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackBannerImageModule (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), experienceDetailsPersistentActionBarModule (ref)
 -- FATAL: Failed to generate AST for `ExperienceDetailsFullPage` function:
-runtime : [KeyError] :11990: 90
+runtime : [KeyError] :11990: 95
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

@@ -1,9 +1,11 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
+﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
+local parent = shareSheet.Parent
 local reactModule = require(parent.React)
 local _ = require(parent.AppChat.GetConversationListStore)
 local _ = require(script.Parent.PeoplePickerHeader.PeoplePickerHeaderContainer)
 local _ = require(script.Parent.PeoplePickerList.PeoplePickerListContainer)
 local usePeoplePickerPaginationModule = require(script.Parent.usePeoplePickerPagination)
+local _ = require(shareSheet.Types)
 local shareSheetPeoplePickerSearchDebounceMs = game:DefineFastInt("ShareSheetPeoplePickerSearchDebounceMs", 250)
 
 local function usePeoplePickerSearch()
@@ -49,7 +51,9 @@ return function(p1)
 		conversationCount = #p1.conversations,
 		isEligibilityLoading = p1.isEligibilityLoading,
 		isPeoplePickerDisplayed = p1.isPeoplePickerDisplayed,
-		listStatus = p1.listStatus
+		listStatus = p1.listStatus,
+		loadMore = p1.loadMore,
+		listResult = p1.listResult
 	})
 	
 	return {

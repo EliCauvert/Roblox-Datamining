@@ -1928,6 +1928,7 @@ Feature.BlockingModal.Heading.BlockUser,Vuoi bloccare {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Bloccando questo utente, lo rimuoverai dai contatti o dai follower e non potrà più inviarti messaggi, richieste o inviti.<br /><br />L'utente non riceverà alcuna notifica relativa al blocco."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Bloccando questo utente, lo rimuoverai dagli amici o dai follower e non potrà più inviarti messaggi, richieste o inviti.<br /><br />L'utente non riceverà alcuna notifica relativa al blocco."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Aggiungi un'opzione personalizzata...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Invita un early tester
 Feature.Build.Action.AddPlaytesters,Invita early tester
@@ -2119,6 +2120,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Impossibile caricare le opzioni. Rip
 Feature.Build.Error.MonetizationPermissionDenied,Non hai i permessi necessari per modificare le opzioni di monetizzazione.
 Feature.Build.Header.AccessSharing,Accesso e condivisione
 Feature.Build.Header.AllVersions,Tutte le versioni
+Feature.Build.Header.Answers,Risposte
 Feature.Build.Header.ContentMaturity,Maturità contenuti
 Feature.Build.Header.CustomAnswer,Risposta personalizzata
 Feature.Build.Header.GameConfiguration,Configurazione del gioco
@@ -3591,6 +3593,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} rimanenti
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Acquistando Robux, accetti i nostri {termsLinkStart}Termini di utilizzo{termsLinkEnd}, inclusa la clausola compromissoria e la politica di revoca."
+Feature.InExperienceShop.GamePass,Pass di gioco
 Feature.InExperienceShop.Label.BonusItem,Articolo bonus
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina tra {timeRemaining}

@@ -1,17 +1,21 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
 local parent = moments.Parent
+local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
 local dialogSize = foundationModule.Enums.DialogSize
+local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
 local useComposedRef = reactUtilsModule.useComposedRef
+local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
 local commentsComposerContainerModule = require(moments.Components.Comments.Composer.CommentsComposerContainer)
 local commentsPanelBodyContainerModule = require(moments.Components.Comments.Panel.CommentsPanelBody.CommentsPanelBodyContainer)
 local sheetShimModule = require(moments.Components.SheetShim)
 local commentsSheetSnapPointsModule = require(script.Parent.CommentsSheetSnapPoints)
+local fFlagMomentsCommentsSheetFocusNavigationModule = require(moments.Flags.FFlagMomentsCommentsSheetFocusNavigation)
 
 local function sizeContentForList(p1)
 	if p1 ~= nil then
@@ -48,7 +52,7 @@ local function useTopSnapPointReporter(value)
 end
 
 return function(p1)
-	-- upvalues: useTopSnapPointReporter (ref), useComposedRef (ref), sizeContentForList (ref), sizeContentToFit (ref), reactModule (ref), sheetShimModule (ref), dialogSize (ref), commentsSheetSnapPointsModule (ref), sheet (ref), text (ref), view (ref), commentsPanelBodyContainerModule (ref), commentsComposerContainerModule (ref)
+	-- upvalues: useTopSnapPointReporter (ref), useComposedRef (ref), sizeContentForList (ref), sizeContentToFit (ref), fFlagMomentsCommentsSheetFocusNavigationModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), sheetShimModule (ref), dialogSize (ref), commentsSheetSnapPointsModule (ref), sheet (ref), text (ref), view (ref), commentsPanelBodyContainerModule (ref), commentsComposerContainerModule (ref)
 	return reactModule.createElement(sheetShimModule.Root, {
 		hideBackdrop = true,
 		testId = "moments-comments-sheet",
@@ -57,7 +61,11 @@ return function(p1)
 		onSnapPointChanged = p1.onSnapPointChanged,
 		onContentInsetChanged = p1.onContentInsetChanged,
 		size = dialogSize.Medium,
-		snapPoints = commentsSheetSnapPointsModule
+		snapPoints = commentsSheetSnapPointsModule,
+		ref = if fFlagMomentsCommentsSheetFocusNavigationModule then useFocusRoot({
+			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
+			isFocusable = p1.isOpen
+		}) else nil
 	}, {
 		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
 			Title = reactModule.createElement(text, {

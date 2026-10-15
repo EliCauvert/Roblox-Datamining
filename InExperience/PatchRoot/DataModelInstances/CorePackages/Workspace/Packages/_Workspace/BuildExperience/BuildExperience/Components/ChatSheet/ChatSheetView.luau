@@ -16,6 +16,9 @@ local chatCardEmphasisProviderModule = require(buildExperience.Components.Chat.C
 local chatMessageListModule = require(buildExperience.Components.Chat.ChatMessageList)
 local chatScrollAnchorContextModule = require(buildExperience.Chat.ChatScrollAnchorContext)
 local _ = require(buildExperience.Chat.chatTypes)
+local chatConstantsModule = require(buildExperience.Chat.chatConstants)
+local fFlagBuildExperienceAnswerFormModule = require(buildExperience.Flags.FFlagBuildExperienceAnswerForm)
+local var1 = if fFlagBuildExperienceAnswerFormModule then require(buildExperience.Components.AnswerForm.AnswerFormContainer) else nil
 local _ = require(buildExperience.Chat.useChatSessionCore)
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
@@ -25,7 +28,7 @@ local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperie
 local fFlagBuildExperienceChatSheetReversedContentModule = require(buildExperience.Flags.FFlagBuildExperienceChatSheetReversedContent)
 local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local fFlagBuildExperienceChatResourceAttachments = require(parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
-local var1 = if fFlagBuildExperienceUseFoundationSheetModule then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
+local var2 = if fFlagBuildExperienceUseFoundationSheetModule then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
 local useScrollPerformanceTrackerModule = require(buildExperience.Telemetry.useScrollPerformanceTracker)
 local dialogSize = foundationModule.Enums.DialogSize
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
@@ -40,53 +43,54 @@ local t = {
 
 local function ChatSheetContent(p1)
 	-- upvalues: reactModule (ref), fFlagBuildExperienceLibrary (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceChatSheetReversedContentModule (ref)
-	local var2 = reactModule.useRef(nil)
-	local var3 = nil
+	local var3 = reactModule.useRef(nil)
 	local var4 = nil
+	local var5 = nil
 	
 	if fFlagBuildExperienceLibrary then
-		local var5, var6 = reactModule.useState(nil)
-		var3 = var5
+		local var6, var7 = reactModule.useState(nil)
 		var4 = var6
+		var5 = var7
 	end
-	useScrollPerformanceTrackerModule("LuaApp_Build_Chat_Scroll", var2)
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), var4 (write), p1 (ref)
-		var2.current = p2
+	useScrollPerformanceTrackerModule("LuaApp_Build_Chat_Scroll", var3)
+	local var8 = reactModule.useCallback(function(p2)
+		-- upvalues: var3 (ref), var5 (write), p1 (ref)
+		var3.current = p2
 		
-		if var4 ~= nil then
-			var4(p2)
+		if var5 ~= nil then
+			var5(p2)
 		end
 		p1.setScrollingFrame(p2)
-	end, { p1.setScrollingFrame, var4 })
+	end, { p1.setScrollingFrame, var5 })
 	
 	if fFlagBuildExperienceLibrary then
 		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var3 (write)
+			-- upvalues: p1 (ref), var4 (write)
 			if p1.onFramesChanged ~= nil then
-				p1.onFramesChanged(p1.sheet, var3)
+				p1.onFramesChanged(p1.sheet, var4)
 			end
-		end, { p1.onFramesChanged, p1.sheet, var3 })
+		end, { p1.onFramesChanged, p1.sheet, var4 })
 	end
 	return reactModule.createElement(p1.sheetComponent.Content, {
 		isReversed = if fFlagBuildExperienceChatSheetReversedContentModule then true else nil,
-		scrollingFrameRef = var7
+		scrollingFrameRef = var8
 	}, p1.children)
 end
 
 return function(p1)
-	-- upvalues: var1 (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), reactUtilsModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), view (ref), fFlagBuildExperienceLibrary (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceInGameShell (ref), buildPillMenuPortalModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisProviderModule (ref)
-	local sheetComponent = p1.sheetComponent or var1
-	local var2 = useLocalization({
+	-- upvalues: fFlagBuildExperienceAnswerFormModule (ref), var2 (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), reactUtilsModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), var1 (ref), chatConstantsModule (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), view (ref), fFlagBuildExperienceLibrary (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), fFlagBuildExperienceInGameShell (ref), buildPillMenuPortalModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), chatCardEmphasisProviderModule (ref)
+	local var3 = fFlagBuildExperienceAnswerFormModule and p1.answerForm ~= nil
+	local sheetComponent = p1.sheetComponent or var2
+	local var4 = useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
 	})
-	local var3 = useTokens()
-	local var4, var5 = reactModule.useState(nil)
-	local var6 = var5
+	local var5 = useTokens()
+	local var6, var7 = reactModule.useState(nil)
+	local var8 = var7
 	
 	if fFlagBuildExperienceMonetizationNativeUIModule then
 		local onClose = p1.onClose
-		var6 = reactUtilsModule.useComposedRef(var5, useFocusRoot({
+		var8 = reactUtilsModule.useComposedRef(var7, useFocusRoot({
 			isAutoFocusRoot = true,
 			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
 			eventMap = t,
@@ -105,19 +109,29 @@ return function(p1)
 			isFocusable = p1.isOpen
 		}))
 	end
-	local var7 = chatMessageListModule({
+	local var9 = chatMessageListModule({
 		messages = p1.messages,
 		clockBinding = p1.clockBinding,
 		localToolActions = p1.localToolActions,
-		emptyState = reactModule.createElement(buildEmptyStateModule),
+		emptyState = if not var3 then reactModule.createElement(buildEmptyStateModule) else nil,
 		isHistoryLoading = p1.isHistoryLoading,
 		onPlaytest = p1.onPlaytest,
 		isPlaytestLoading = p1.isPlaytestLoading
 	})
 	
+	if var3 then
+		var9.AnswerForm = reactModule.createElement(var1, {
+			LayoutOrder = (#p1.messages + 2) * chatConstantsModule.MESSAGE_LAYOUT_ORDER_STRIDE,
+			state = p1.answerForm,
+			actions = p1.localToolActions,
+			onSubmitText = p1.onSubmitAnswerText,
+			onStop = p1.onStop,
+			errorText = p1.composerErrorText
+		})
+	end
 	if fFlagBuildExperienceChatAccordionScrollAnchorModule then
-		var7 = {
-			ScrollAnchor = reactModule.createElement(chatScrollAnchorContextModule.Provider, { value = p1.anchorScrollToInstance }, var7)
+		var9 = {
+			ScrollAnchor = reactModule.createElement(chatScrollAnchorContextModule.Provider, { value = p1.anchorScrollToInstance }, var9)
 		}
 	end
 	local createElement = reactModule.createElement
@@ -125,17 +139,17 @@ return function(p1)
 		testId = "ChatSheet.MessageList",
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
-			Padding = UDim.new(0, var3.Size.Size_800)
+			Padding = UDim.new(0, var5.Size.Size_800)
 		},
-		padding = if fFlagBuildExperienceLibrary and p1.reservesHandleSpace == true then { top = UDim.new(0, var3.Size.Size_600) } else nil,
+		padding = if fFlagBuildExperienceLibrary and p1.reservesHandleSpace == true then { top = UDim.new(0, var5.Size.Size_600) } else nil,
 		tag = {
-			["size-full"] = #p1.messages == 0,
-			["size-full-0 auto-y"] = #p1.messages > 0
+			["size-full"] = #p1.messages == 0 and not var3,
+			["size-full-0 auto-y"] = if #p1.messages <= 0 then var3 else true
 		}
-	}, var7)
+	}, var9)
 	local createElement_1 = reactModule.createElement
 	createElement_1 = createElement_1(sheetComponent.Root, {
-		ref = var6,
+		ref = var8,
 		isOpen = p1.isOpen,
 		snapPoints = p1.snapPoints,
 		defaultSnapPointIndex = p1.defaultSnapPointIndex,
@@ -146,10 +160,10 @@ return function(p1)
 		Content = reactModule.createElement(ChatSheetContent, {
 			setScrollingFrame = p1.scrollingFrameRef,
 			sheetComponent = sheetComponent,
-			sheet = var4,
+			sheet = var6,
 			onFramesChanged = p1.onFramesChanged
 		}, { MessageList = createElement }),
-		Actions = reactModule.createElement(sheetComponent.Actions, nil, {
+		Actions = if not var3 then reactModule.createElement(sheetComponent.Actions, nil, {
 			Footer = reactModule.createElement(chatActionsModule, {
 				composerText = p1.composerText,
 				composerErrorText = p1.composerErrorText,
@@ -162,7 +176,7 @@ return function(p1)
 				resourceAttachments = if fFlagBuildExperienceChatResourceAttachments then p1.composerResourceAttachments else nil,
 				onRemoveResourceAttachment = if fFlagBuildExperienceChatResourceAttachments then p1.onRemoveComposerResourceAttachment else nil,
 				onActivateResourceAttachment = p1.onActivateComposerResourceAttachment,
-				placeholder = var2.composerPlaceholder,
+				placeholder = var4.composerPlaceholder,
 				textBoxRef = p1.textBoxRef,
 				isAssistantResponding = p1.isAssistantResponding,
 				canStopAssistantResponse = p1.canStopAssistantResponse,
@@ -171,10 +185,10 @@ return function(p1)
 				onSend = p1.onSend,
 				onStop = p1.onStop
 			})
-		}),
+		}) else nil,
 		TopBarPillMenu = if fFlagBuildExperienceInGameShell or p1.topBarPillMenuTarget == nil then nil else reactModule.createElement(buildPillMenuPortalModule, {
 			testId = "build-pill-menu",
-			sheet = var4,
+			sheet = var6,
 			target = p1.topBarPillMenuTarget,
 			onOpenChat = p1.onOpenChat
 		})

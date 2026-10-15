@@ -11,10 +11,9 @@ local submitSource = analyticsServiceModule.SubmitSource
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
-local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), getIsInExpSceneSelectionAvailableModule (ref), telemetryEventType (ref), inExpSceneSelectionAdapterModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), textWithTranslationModule (ref)
+	-- upvalues: reactModule (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), getIsInExpSceneSelectionAvailableModule (ref), telemetryEventType (ref), inExpSceneSelectionAdapterModule (ref), submitSource (ref), textWithTranslationModule (ref)
 	local var1, var2 = reactModule.useState(p1.loadingText)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	local var3 = useLayoutSlots()
@@ -25,11 +24,11 @@ return reactModule.memo(function(p1)
 	local var5 = reactModule.useRef(sendEvent)
 	var5.current = sendEvent
 	reactModule.useEffect(function()
-		-- upvalues: getIsInExpSceneSelectionAvailableModule (copy), var5 (ref), telemetryEventType (copy), var4 (ref), var2 (ref), inExpSceneSelectionAdapterModule (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
+		-- upvalues: getIsInExpSceneSelectionAvailableModule (copy), var5 (ref), telemetryEventType (copy), var4 (ref), var2 (ref), inExpSceneSelectionAdapterModule (copy), submitSource (copy)
 		if getIsInExpSceneSelectionAvailableModule() then
 			local var6 = nil
 			var6 = inExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p2)
-				-- upvalues: var6 (write), var5 (copy), telemetryEventType (copy), var4 (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
+				-- upvalues: var6 (write), var5 (copy), telemetryEventType (copy), var4 (copy), submitSource (copy)
 				var6 = nil
 				var5.current({
 					sub_event_type = telemetryEventType.SceneCaptureResult,
@@ -38,7 +37,7 @@ return reactModule.memo(function(p1)
 				local current = var4.current
 				
 				if p2.reason == "submit" then
-					if fFlagAbuseReportSceneSelectionSubmitTrackingModule and current.onExternalSubmit then
+					if current.onExternalSubmit then
 						current.onExternalSubmit(submitSource.SceneSelection)
 					end
 					if current.onNext then

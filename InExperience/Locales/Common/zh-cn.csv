@@ -1928,6 +1928,7 @@ Feature.BlockingModal.Heading.BlockUser,屏蔽“{DisplayName}”？
 Feature.BlockingModal.Message.BlockConfirmation,屏蔽此用户将会把他们从你的好友或关注者中移除。他们将无法向你发送消息、请求或邀请。<br /><br />他们不会收到你已屏蔽他们的通知。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,屏蔽此用户会将其从你的好友或粉丝列表中移除。此用户将无法向你发送消息、请求或邀请。<br /><br />对方不会收到你已屏蔽他们的通知。
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,添加自定义选项...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,邀请初期测试玩家
 Feature.Build.Action.AddPlaytesters,
@@ -2119,6 +2120,7 @@ Feature.Build.Error.MonetizationOptionsLoad,无法加载选项。请重试。
 Feature.Build.Error.MonetizationPermissionDenied,你没有更改收益化选项的权限。
 Feature.Build.Header.AccessSharing,访问权限和共享
 Feature.Build.Header.AllVersions,所有版本
+Feature.Build.Header.Answers,回答
 Feature.Build.Header.ContentMaturity,内容成熟度
 Feature.Build.Header.CustomAnswer,自定义回答
 Feature.Build.Header.GameConfiguration,游戏配置
@@ -3588,6 +3590,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩余 {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,购买 Robux 即表示你同意我们的{termsLinkStart}《使用条款》{termsLinkEnd}，包括仲裁条款和撤销政策。
+Feature.InExperienceShop.GamePass,游戏通行证
 Feature.InExperienceShop.Label.BonusItem,奖励道具
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}后结束

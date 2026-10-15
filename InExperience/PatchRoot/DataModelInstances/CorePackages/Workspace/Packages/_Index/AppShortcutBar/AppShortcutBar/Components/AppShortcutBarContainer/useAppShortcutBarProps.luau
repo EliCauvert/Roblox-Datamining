@@ -26,7 +26,6 @@ local fFlagAXMigrateCatalogPageInputBindings = sharedFlagsModule.FFlagAXMigrateC
 local fFlagAXMigrateLookDetailsPeekViewToFocusNavigation = sharedFlagsModule.FFlagAXMigrateLookDetailsPeekViewToFocusNavigation
 local fFlagLuaAppResponsiveEnginePreferredInput = sharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local fFlagSocialCarouselPressXToViewProfile = sharedFlagsModule.FFlagSocialCarouselPressXToViewProfile
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagEnableStickyShortcutBarOnAllPlatforms = sharedFlagsModule.FFlagEnableStickyShortcutBarOnAllPlatforms
 local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
@@ -150,7 +149,7 @@ local t_5 = {
 		[focusNavigationEventNameEnum.UpdateOutfit] = t_3[Enum.KeyCode.ButtonX],
 		[focusNavigationEventNameEnum.IgnoreTrustedFriendRequest] = t_3[Enum.KeyCode.ButtonX],
 		[focusNavigationEventNameEnum.IgnoreFriendRequest] = t_3[Enum.KeyCode.ButtonX],
-		[focusNavigationEventNameEnum.ViewProfile] = if fFlagSocialCarouselPressXToViewProfile then t_3[Enum.KeyCode.ButtonX] else nil
+		[focusNavigationEventNameEnum.ViewProfile] = t_3[Enum.KeyCode.ButtonX]
 	},
 	[Enum.KeyCode.ButtonA] = {
 		[focusNavigationEventNameEnum.PlayVideo] = if fFlagLuaAppMediaGalleryGamepadSupport then t_3[Enum.KeyCode.ButtonA] else nil,
@@ -278,7 +277,7 @@ local t_7 = {
 	[focusNavigationEventNameEnum.MoveClothingTile] = "Feature.Avatar.Title.Move",
 	[focusNavigationEventNameEnum.RemoveClothingTile] = "Feature.Catalog.Action.Remove",
 	[focusNavigationEventNameEnum.CancelAndReset] = "Feature.Catalog.Action.Cancel",
-	[focusNavigationEventNameEnum.ViewProfile] = if fFlagSocialCarouselPressXToViewProfile then "Feature.Profile.Action.ViewProfile" else nil,
+	[focusNavigationEventNameEnum.ViewProfile] = "Feature.Profile.Action.ViewProfile",
 	[focusNavigationEventNameEnum.CollapseAvatar] = if fFlagEnableSplitPane then "Feature.SplitPane.Label.CollapseAvatar" else nil,
 	[focusNavigationEventNameEnum.ExpandAvatar] = if fFlagEnableSplitPane then "Feature.SplitPane.Label.ExpandAvatar" else nil
 }

@@ -2,6 +2,7 @@
 local promiseModule = require(dataHydration.Parent.Promise)
 local creatorApiHttpModule = require(dataHydration.creatorApiHttp)
 local _ = require(script.Parent.GamePassConfigTypes)
+local fFlagDataHydrationPreserveIncompleteCatalogResultsModule = require(dataHydration.Flags.FFlagDataHydrationPreserveIncompleteCatalogResults)
 
 local function collectionUrl(p1, p2)
 	return ("%s/game-passes/v1/universes/%d/game-passes"):format(p1, p2)
@@ -49,15 +50,20 @@ local function listPage(p1, p2, p3)
 end
 
 function t.list(p1, p2)
-	-- upvalues: listPage (ref), promiseModule (ref)
+	-- upvalues: listPage (ref), fFlagDataHydrationPreserveIncompleteCatalogResultsModule (ref), promiseModule (ref)
 	local t = {}
 	local t_1 = {}
+	local t_2 = {}
 	
 	local function fetchNext(p3, p4)
-		-- upvalues: listPage (copy), p1 (ref), p2 (ref), t (ref), t_1 (ref), promiseModule (copy), fetchNext (ref)
+		-- upvalues: listPage (copy), p1 (ref), p2 (ref), fFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), t_2 (ref), t (ref), t_1 (ref), promiseModule (copy), fetchNext (ref)
 		return listPage(p1, p3, p2):andThen(function(p5)
-			-- upvalues: t (copy), t_1 (copy), p4 (ref), promiseModule (copy), fetchNext (copy)
+			-- upvalues: fFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), t_2 (copy), t (copy), t_1 (copy), p4 (ref), promiseModule (copy), fetchNext (copy)
 			for i, v in p5.gamePasses do
+				if fFlagDataHydrationPreserveIncompleteCatalogResultsModule then
+					assert(not t_2[v.gamePassId], "Game Pass list contains a duplicate ID")
+					t_2[v.gamePassId] = true
+				end
 				table.insert(t, v)
 			end
 			local nextPageToken = p5.nextPageToken

@@ -1914,6 +1914,7 @@ Feature.BlockingModal.Heading.BlockUser,هل تريد حظر {DisplayName}؟
 Feature.BlockingModal.Message.BlockConfirmation,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة جهات تواصلك أو متابعيك، ولن يتمكّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة أصدقائك أو متابعيك، ولن يتمكَّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,إضافة خيار مخصص...
 Feature.Build.Action.AddFriends,دعوة الأصدقاء
 Feature.Build.Action.AddPlaytester,دعوة مختبر لعب مبكر واحد
 Feature.Build.Action.AddPlaytesters,دعوة مختبري اللعب المبكرين
@@ -2105,6 +2106,7 @@ Feature.Build.Error.MonetizationOptionsLoad,تعذَّر تحميل الخيار
 Feature.Build.Error.MonetizationPermissionDenied,ليس لديك الإذن لتغيير خيارات الحصول على عائد.
 Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
 Feature.Build.Header.AllVersions,جميع الإصدارات
+Feature.Build.Header.Answers,الإجابات
 Feature.Build.Header.ContentMaturity,حساسية المحتوى
 Feature.Build.Header.CustomAnswer,إجابة مخصصة
 Feature.Build.Header.GameConfiguration,تهيئة اللعبة
@@ -3577,6 +3579,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,تبقى {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,بشراء عملات Robux، فإنك توافق على {termsLinkStart}شروط الاستخدام{termsLinkEnd}، بما في ذلك شرط التحكيم وسياسة الإلغاء.
+Feature.InExperienceShop.GamePass,تذكرة اللعبة
 Feature.InExperienceShop.Label.BonusItem,عنصر مكافأة
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,ينتهي خلال {timeRemaining}

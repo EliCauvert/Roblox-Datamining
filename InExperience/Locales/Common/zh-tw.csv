@@ -1946,6 +1946,7 @@ Feature.BlockingModal.Heading.BlockUser,要封鎖 {DisplayName} 嗎？
 Feature.BlockingModal.Message.BlockConfirmation,封鎖此使用者，系統會一併將對方從「聯絡對象」或「追蹤者」名單移除。移除後將無法向您傳送訊息、請求或邀請。<br /><br />對方不會收到遭你封鎖的通知。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,若封鎖此使用者，系統會一併將其從「好友」或「追蹤者」名單移除，對方將無法向你傳送訊息、請求或邀請。<br /><br />對方不會收到遭你封鎖的通知。
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,新增自訂選項...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,邀請搶先遊玩的測試員
 Feature.Build.Action.AddPlaytesters,
@@ -2137,6 +2138,7 @@ Feature.Build.Error.MonetizationOptionsLoad,無法載入選項，請再試一次
 Feature.Build.Error.MonetizationPermissionDenied,你沒有變更變現方法選項的權限。
 Feature.Build.Header.AccessSharing,存取權與分享
 Feature.Build.Header.AllVersions,所有版本
+Feature.Build.Header.Answers,答案
 Feature.Build.Header.ContentMaturity,成年適宜內容
 Feature.Build.Header.CustomAnswer,自訂答案
 Feature.Build.Header.GameConfiguration,遊戲設定
@@ -3609,6 +3611,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩下 {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,購買 Robux 即表示您同意我們的{termsLinkStart}使用條款{termsLinkEnd}，包括仲裁條款和撤銷政策。
+Feature.InExperienceShop.GamePass,遊戲通行證
 Feature.InExperienceShop.Label.BonusItem,額外獎勵物品
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}後結束

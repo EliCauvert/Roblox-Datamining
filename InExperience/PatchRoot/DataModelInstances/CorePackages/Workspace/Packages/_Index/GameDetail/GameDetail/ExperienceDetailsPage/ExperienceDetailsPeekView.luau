@@ -6,6 +6,7 @@ local fetchExperienceDetailsPageModule = require(script.Parent.fetchExperienceDe
 local getExperienceDetailsPageKeyModule = require(script.Parent.getExperienceDetailsPageKey)
 local peekViewTopBarModule = require(script.Parent.PeekViewTopBar)
 local useEdpFunctionallyReadyLoggerModule = require(script.Parent.useEdpFunctionallyReadyLogger)
+local createExperienceDetailsPageTimerModule = require(script.Parent.createExperienceDetailsPageTimer)
 local useMotionJitterMetricModule = require(script.Parent.useMotionJitterMetric)
 local experienceDetailsFallbackActionBarModule = require(script.Parent.Fallback.ExperienceDetailsFallbackActionBar)
 local experienceDetailsFallbackFeedModule = require(script.Parent.Fallback.ExperienceDetailsFallbackFeed)
@@ -47,6 +48,7 @@ local filterPlayWithReward = experienceDetailsPageScopeFieldsModule.FilterPlayWi
 local compositionTags = require(parent.AppComposition).CompositionTags
 local experienceDetailsPersistentActionBarModule = require(script.Parent.ExperienceDetailsPersistentActionBar)
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagEDPTTIParityDefinitions = sharedFlagsModule.FFlagEDPTTIParityDefinitions
 local fFlagSduiPageEntryUseSharedHooks = sharedFlagsModule.FFlagSduiPageEntryUseSharedHooks
 local fFlagLuaAppSduiEdpHideSystemBarOnPeekViewMount = sharedFlagsModule.FFlagLuaAppSduiEdpHideSystemBarOnPeekViewMount
 local fFlagEnableMotionJitterMetric = sharedFlagsModule.FFlagEnableMotionJitterMetric
@@ -54,7 +56,7 @@ local fFlagSduiEdpPersistentActionBarPlayButton = sharedFlagsModule.FFlagSduiEdp
 local fFlagLuaAppEdpBottomSheetPeekViewEvents = sharedFlagsModule.FFlagLuaAppEdpBottomSheetPeekViewEvents
 
 return reactModule.memo(function(p1)
-	-- upvalues: experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), usePageScopeRef (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useTokens (ref), useNavigation (ref), useRoactService (ref), appEventIngestService (ref), appSessionService (ref), useDispatch (ref), fFlagLuaAppSduiEdpHideSystemBarOnPeekViewMount (ref), setTabBarVisible (ref), filterPlayWithReward (ref), useTopBarHeight (ref), useScreenSize (ref), useDeviceInsets (ref), getSafeAreaSize (ref), useEntrySurfacing (ref), experienceDetailsPageConstantsModule (ref), useSelector (ref), peekViewState (ref), fFlagEnableMotionJitterMetric (ref), useMotionJitterMetricModule (ref), appPage (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), gameDetailsPeekViewEvents (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), peekViewWithTopBar (ref), peekViewTopBarModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), experienceDetailsPersistentActionBarModule (ref), sduiFeatureEntryPoint (ref), experienceDetailsFallbackActionBarModule (ref)
+	-- upvalues: experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), usePageScopeRef (ref), reactModule (ref), fFlagEDPTTIParityDefinitions (ref), createExperienceDetailsPageTimerModule (ref), EDPTTIConstants (ref), sduiSurfaceLoadTimeTracker (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useTokens (ref), useNavigation (ref), useRoactService (ref), appEventIngestService (ref), appSessionService (ref), useDispatch (ref), fFlagLuaAppSduiEdpHideSystemBarOnPeekViewMount (ref), setTabBarVisible (ref), filterPlayWithReward (ref), useTopBarHeight (ref), useScreenSize (ref), useDeviceInsets (ref), getSafeAreaSize (ref), useEntrySurfacing (ref), experienceDetailsPageConstantsModule (ref), useSelector (ref), peekViewState (ref), fFlagEnableMotionJitterMetric (ref), useMotionJitterMetricModule (ref), appPage (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), gameDetailsPeekViewEvents (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), peekViewWithTopBar (ref), peekViewTopBarModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), experienceDetailsPersistentActionBarModule (ref), sduiFeatureEntryPoint (ref), experienceDetailsFallbackActionBarModule (ref)
 	local universeId = experienceDetailsPageUtilsModule.getUniverseId(p1)
 	local analyticsSource = experienceDetailsPageUtilsModule.getAnalyticsSource(p1)
 	local tilePositionIndex = experienceDetailsPageUtilsModule.getTilePositionIndex(p1)
@@ -62,8 +64,13 @@ return reactModule.memo(function(p1)
 	local var1 = getExperienceDetailsPageKeyModule(universeId)
 	usePageScopeRef(var1)
 	local var2 = reactModule.useMemo(function()
-		-- upvalues: experienceDetailsPageUtilsModule (copy), p1 (ref), sduiSurfaceLoadTimeTracker (copy), var1 (ref), EDPTTIConstants (copy), getSduiClientPageScope (copy)
-		local var3 = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "pageTimer") or sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(var1, {
+		-- upvalues: experienceDetailsPageUtilsModule (copy), p1 (ref), fFlagEDPTTIParityDefinitions (copy), createExperienceDetailsPageTimerModule (copy), var1 (ref), EDPTTIConstants (copy), sduiSurfaceLoadTimeTracker (copy), getSduiClientPageScope (copy)
+		local pageTimer = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "pageTimer")
+		local _ = nil
+		local var3 = if fFlagEDPTTIParityDefinitions then pageTimer or createExperienceDetailsPageTimerModule(var1, {
+			page = "Untracked",
+			category = EDPTTIConstants.EDP_IMPLEMENTATION.SDUI_PEEK_VIEW
+		}) else pageTimer or sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(var1, {
 			manualSurfaceReady = true,
 			eventName = EDPTTIConstants.EDP_TTI_EVENT_NAME,
 			metadata = {

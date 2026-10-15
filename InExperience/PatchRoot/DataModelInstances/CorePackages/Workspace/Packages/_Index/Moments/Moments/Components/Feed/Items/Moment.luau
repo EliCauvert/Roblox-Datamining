@@ -8,6 +8,7 @@ local _ = require(script.createMomentStore)
 local momentsCommonModule = require(parent.MomentsCommon)
 local momentsTypesModule = require(parent.MomentsTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagMomentsServeEDPVideos = sharedFlagsModule.FFlagMomentsServeEDPVideos
 local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
@@ -49,7 +50,7 @@ return {
 			return momentAttribution(p1.moment)
 		end,
 		render = function(p1, _)
-			-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsAvatarLookTryOn (ref), fFlagMomentsOptimisticProfilePending (ref), momentsTypesModule (ref), sharedFlagsModule (ref), commentsModule (ref), momentItemModule (ref), createMediaSurface (ref)
+			-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsAvatarLookTryOn (ref), fFlagMomentsOptimisticProfilePending (ref), momentsTypesModule (ref), sharedFlagsModule (ref), commentsModule (ref), momentItemModule (ref), createMediaSurface (ref), fFlagMomentsServeEDPVideos (ref), momentItemSkeletonModule (ref)
 			local moment = p1.moment
 			
 			if moment == nil then
@@ -71,8 +72,7 @@ return {
 				end
 			end
 			local recommendationMetadata = moment.recommendationMetadata
-			
-			return reactModule.createElement(momentItemModule, {
+			local var3 = reactModule.createElement(momentItemModule, {
 				data = {
 					kind = "experience",
 					creatorIsVerified = nil,
@@ -93,6 +93,13 @@ return {
 				renderMediaSurface = if getFFlagMomentsRenderPostAssetsModule() then createMediaSurface else nil,
 				moment = moment
 			})
+			
+			return if fFlagMomentsServeEDPVideos and moment.entityType == "edpVideo" then reactModule.createElement(require(script.EdpVideoEligibility.EdpVideoEligibilityContainer), {
+				momentId = moment.momentId,
+				universeId = moment.metadata.universeId,
+				content = var3,
+				loadingContent = reactModule.createElement(momentItemSkeletonModule)
+			}) else var3
 		end
 	},
 	{

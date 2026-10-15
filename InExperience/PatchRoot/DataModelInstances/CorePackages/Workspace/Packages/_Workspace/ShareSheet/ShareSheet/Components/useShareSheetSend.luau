@@ -4,6 +4,8 @@ local reactModule = require(parent.React)
 local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
 local _ = require(parent.InExperienceLocales)
 local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
+local fFlagShareSheetFriendsSort = require(parent.SharedFlags).FFlagShareSheetFriendsSort
+local _ = require(shareSheet.Recipients.RecipientSource)
 local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
 local useConversationListModule = require(parent.AppChat.useConversationList)
 
@@ -26,7 +28,7 @@ local function formatLocalizedSnackbarTitle(p1, p2, p3, p4, p5)
 end
 
 return function(p1)
-	-- upvalues: useConversationListModule (ref), reactModule (ref), localizationRoactContext (ref), shareSheetTelemetryModule (ref), formatLocalizedSnackbarTitle (ref)
+	-- upvalues: useConversationListModule (ref), reactModule (ref), localizationRoactContext (ref), shareSheetTelemetryModule (ref), fFlagShareSheetFriendsSort (ref), formatLocalizedSnackbarTitle (ref)
 	local items = useConversationListModule(p1.chatShare ~= nil).items
 	local var1, var2 = reactModule.useState(false)
 	local var3 = reactModule.useRef(false)
@@ -35,13 +37,14 @@ return function(p1)
 	return {
 		isSending = var1,
 		onSendActivated = reactModule.useCallback(function(p2)
-			-- upvalues: var3 (ref), shareSheetTelemetryModule (copy), p1 (ref), items (ref), var2 (ref), var4 (ref), formatLocalizedSnackbarTitle (copy)
+			-- upvalues: var3 (ref), shareSheetTelemetryModule (copy), p1 (ref), fFlagShareSheetFriendsSort (copy), items (ref), var2 (ref), var4 (ref), formatLocalizedSnackbarTitle (copy)
 			if var3.current then return end
 			local var5 = string.find(p2, "%S") ~= nil
 			
 			if var5 then
 				shareSheetTelemetryModule.logInteraction({
 					context = p1.context,
+					recipientSource = if fFlagShareSheetFriendsSort then p1.recipientSource else nil,
 					telemetryId = p1.telemetryId or "",
 					interactionType = shareSheetTelemetryModule.InteractionType.CustomMessageSubmitted
 				})
@@ -71,7 +74,7 @@ return function(p1)
 			local var9 = if p2 == "" then p1.url else `{p1.url} {p2}`
 			
 			local function finishSending()
-				-- upvalues: var3 (copy), var2 (copy), var7 (write), var8 (write), p1 (copy), chatShare (ref), t (ref), t_1 (ref), shareSheetTelemetryModule (copy), var4 (copy), formatLocalizedSnackbarTitle (copy)
+				-- upvalues: var3 (copy), var2 (copy), var7 (write), var8 (write), p1 (copy), chatShare (ref), t (ref), t_1 (ref), shareSheetTelemetryModule (copy), fFlagShareSheetFriendsSort (copy), var4 (copy), formatLocalizedSnackbarTitle (copy)
 				var3.current = false
 				var2(false)
 				
@@ -82,9 +85,10 @@ return function(p1)
 					p1.onShareSendResultSnackbar({
 						action = if var8 and navigateToChat then {
 							onActivated = function()
-								-- upvalues: shareSheetTelemetryModule (copy), p1 (copy), t (copy), var10 (ref), navigateToChat (ref)
+								-- upvalues: shareSheetTelemetryModule (copy), p1 (copy), fFlagShareSheetFriendsSort (copy), t (copy), var10 (ref), navigateToChat (ref)
 								shareSheetTelemetryModule.logInteraction({
 									context = p1.context,
+									recipientSource = if fFlagShareSheetFriendsSort then p1.recipientSource else nil,
 									telemetryId = p1.telemetryId or "",
 									interactionType = shareSheetTelemetryModule.InteractionType.ViewMessage,
 									requestedConversationId = if #t == 1 then t[1].id else nil,
@@ -105,9 +109,10 @@ return function(p1)
 			end
 			
 			local function send(p3)
-				-- upvalues: shareSheetTelemetryModule (copy), p1 (copy), var5 (ref), chatShare (ref), var9 (ref), var8 (write), t_1 (ref), var7 (write), var6 (write)
+				-- upvalues: shareSheetTelemetryModule (copy), p1 (copy), fFlagShareSheetFriendsSort (copy), var5 (ref), chatShare (ref), var9 (ref), var8 (write), t_1 (ref), var7 (write), var6 (write)
 				local var10 = shareSheetTelemetryModule.startMessageSendResult({
 					context = p1.context,
+					recipientSource = if fFlagShareSheetFriendsSort then p1.recipientSource else nil,
 					telemetryId = p1.telemetryId or "",
 					requestedConversationId = p3.id,
 					hasCustomMessage = var5
@@ -155,7 +160,7 @@ return function(p1)
 		end, {
 			p1.chatShare, p1.context, items, p1.formatSuccessSnackbarText,
 			p1.onCloseWithReason, p1.onSendActivated, p1.onShareSendResultSnackbar,
-			p1.selectedConversationIds, p1.telemetryId, p1.url, var4
+			p1.recipientSource, p1.selectedConversationIds, p1.telemetryId, p1.url, var4
 		})
 	}
 end

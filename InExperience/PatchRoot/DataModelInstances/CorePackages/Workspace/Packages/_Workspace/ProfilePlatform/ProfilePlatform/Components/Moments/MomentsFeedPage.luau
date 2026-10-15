@@ -15,6 +15,7 @@ local fFlagEnableArgusImmersiveNav = sharedFlagsModule.FFlagEnableArgusImmersive
 local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
 local fFlagEnableMomentsCommentBlocking = sharedFlagsModule.FFlagEnableMomentsCommentBlocking
 local fFlagAbuseReportSubmissionTargetV4 = sharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
+local fFlagMomentsServeEDPVideos = sharedFlagsModule.FFlagMomentsServeEDPVideos
 local view = foundationModule.View
 local iconButton = foundationModule.IconButton
 local buttonSize = foundationModule.Enums.ButtonSize
@@ -37,7 +38,7 @@ local createUserMomentsFeedSourceModule = require(parent.Moments.CreateUserMomen
 local reportMoment = momentsModule.reportMoment
 
 return if fFlagEnableArgusImmersiveNav then function()
-	-- upvalues: useNavigation (ref), fFlagMomentsOptimisticProfilePending (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), useDispatch (ref), closeCentralOverlay (ref), reportMoment (ref), openDynamicAbuseReport (ref), abuseVector (ref), fFlagAbuseReportSubmissionTargetV4 (ref), fFlagEnableMomentsCommentReporting (ref), fFlagEnableMomentsCommentBlocking (ref), useOpenBlockingModalModule (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
+	-- upvalues: useNavigation (ref), fFlagMomentsOptimisticProfilePending (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), useDispatch (ref), fFlagMomentsServeEDPVideos (ref), openDynamicAbuseReport (ref), abuseVector (ref), closeCentralOverlay (ref), reportMoment (ref), fFlagAbuseReportSubmissionTargetV4 (ref), fFlagEnableMomentsCommentReporting (ref), fFlagEnableMomentsCommentBlocking (ref), useOpenBlockingModalModule (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
 	local var1 = useNavigation()
 	local extraProps = var1.getParam("extraProps")
 	local var2 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
@@ -48,7 +49,6 @@ return if fFlagEnableArgusImmersiveNav then function()
 		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var2) })
 		var1.goBack()
 	end, { var1.goBack, var2 })
-	local _ = nil
 	local var6 = useDispatch()
 	local var7 = useScreenSize()
 	
@@ -64,7 +64,22 @@ return if fFlagEnableArgusImmersiveNav then function()
 			initialMomentId = var4,
 			onBack = var5,
 			openMomentsFeedReport = reactModule.useCallback(function(p1)
-				-- upvalues: var6 (ref), closeCentralOverlay (copy), reportMoment (copy), openDynamicAbuseReport (copy), abuseVector (copy), fFlagAbuseReportSubmissionTargetV4 (copy)
+				-- upvalues: fFlagMomentsServeEDPVideos (copy), var6 (ref), openDynamicAbuseReport (copy), abuseVector (copy), closeCentralOverlay (copy), reportMoment (copy), fFlagAbuseReportSubmissionTargetV4 (copy)
+				if fFlagMomentsServeEDPVideos and p1.onCustomSubmit then
+					var6(openDynamicAbuseReport({
+						abuseVector = abuseVector.MomentsFeed,
+						targetId = p1.feedItemId,
+						onSubmit = p1.onSubmit,
+						onClose = function()
+							-- upvalues: p1 (ref), var6 (copy), closeCentralOverlay (copy)
+							p1.onClose()
+							var6(closeCentralOverlay())
+						end,
+						onCustomSubmit = p1.onCustomSubmit
+					}))
+					
+					return
+				end
 				local var8 = false
 				
 				local function submitMomentsIp(_)

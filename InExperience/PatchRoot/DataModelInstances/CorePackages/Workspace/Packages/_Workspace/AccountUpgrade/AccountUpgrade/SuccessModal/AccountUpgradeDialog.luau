@@ -42,8 +42,8 @@ local function useFitHeights(p1)
 		overlayHeight = var2,
 		headerHeight = var4,
 		setHeaderHeight = var5,
-		canvasHeight = var6,
-		setCanvasHeight = var7
+		contentHeight = var6,
+		setContentHeight = var7
 	}
 end
 
@@ -130,7 +130,7 @@ return function(p1)
 	
 	if var3 and var4 then
 		local setHeaderHeight = var4.setHeaderHeight
-		local setCanvasHeight = var4.setCanvasHeight
+		local setContentHeight = var4.setContentHeight
 		
 		if var5 then
 			var5 = reactModule.createElement(view, {
@@ -148,12 +148,15 @@ return function(p1)
 			testId = `{testId}--content`
 		}, {
 			ScrollingFrame = reactModule.createElement("ScrollingFrame", {
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				Selectable = false,
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(),
 				Size = reactModule.joinBindings({
 					var4.overlayHeight,
 					var4.headerHeight,
-					var4.canvasHeight
+					var4.contentHeight
 				}):map(function(p2)
 					-- upvalues: var1 (ref)
 					local var7 = p2[2]
@@ -164,19 +167,16 @@ return function(p1)
 				VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar,
 				ScrollBarThickness = var1.Size.Size_150,
 				ScrollBarImageColor3 = var1.Color.Shift.Shift_400.Color3,
-				ScrollBarImageTransparency = var1.Color.Shift.Shift_400.Transparency,
-				BackgroundTransparency = 1,
-				BorderSizePixel = 0,
-				Selectable = false,
-				[reactModule.Change.AbsoluteCanvasSize] = function(p2)
-					-- upvalues: setCanvasHeight (ref)
-					setCanvasHeight(p2.AbsoluteCanvasSize.Y)
-				end
+				ScrollBarImageTransparency = var1.Color.Shift.Shift_400.Transparency
 			}, {
 				Layout = reactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalFlex = Enum.UIFlexAlignment.Fill,
-					SortOrder = Enum.SortOrder.LayoutOrder
+					SortOrder = Enum.SortOrder.LayoutOrder,
+					[reactModule.Change.AbsoluteContentSize] = function(p2)
+						-- upvalues: setContentHeight (ref)
+						setContentHeight(p2.AbsoluteContentSize.Y)
+					end
 				}),
 				Children = reactModule.createElement(reactModule.Fragment, nil, p1.children)
 			})

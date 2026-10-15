@@ -1947,6 +1947,7 @@ Feature.BlockingModal.Heading.BlockUser,Blokir {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Memblokir pengguna ini akan menghapusnya sebagai Koneksi atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Memblokir pengguna ini akan menghapusnya sebagai teman atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Tambahkan opsi kustom...
 Feature.Build.Action.AddFriends,Undang teman
 Feature.Build.Action.AddPlaytester,Undang penguji tahap awal
 Feature.Build.Action.AddPlaytesters,
@@ -2138,6 +2139,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Opsi tidak dapat di-load. Coba lagi.
 Feature.Build.Error.MonetizationPermissionDenied,Kamu tidak memiliki izin untuk mengubah opsi monetisasi.
 Feature.Build.Header.AccessSharing,Akses & berbagi
 Feature.Build.Header.AllVersions,Semua versi
+Feature.Build.Header.Answers,Jawaban
 Feature.Build.Header.ContentMaturity,Kedewasaan konten
 Feature.Build.Header.CustomAnswer,Jawaban kustom
 Feature.Build.Header.GameConfiguration,Konfigurasi game
@@ -3608,6 +3610,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} lagi
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Dengan membeli Robux, kamu menyetujui {termsLinkStart}Ketentuan Penggunaan{termsLinkEnd} kami, termasuk klausul arbitrase dan kebijakan pembatalan."
+Feature.InExperienceShop.GamePass,Pas game
 Feature.InExperienceShop.Label.BonusItem,Item bonus
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Berakhir dalam {timeRemaining}

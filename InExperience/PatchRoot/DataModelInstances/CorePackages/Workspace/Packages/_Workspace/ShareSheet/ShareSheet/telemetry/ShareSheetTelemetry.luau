@@ -1,8 +1,10 @@
 ﻿local telemetryService = game:GetService("TelemetryService")
 local shareSheet = script:FindFirstAncestor("ShareSheet")
 local parent = shareSheet.Parent
+local fFlagShareSheetFriendsSort = require(parent.SharedFlags).FFlagShareSheetFriendsSort
 local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
 local loggingProtocolModule = require(parent.LoggingProtocol)
+local _ = require(shareSheet.Recipients.RecipientSource)
 local getElapsedTimeMsModule = require(shareSheet.getElapsedTimeMs)
 local eventIngest = loggingProtocolModule.TelemetryBackends.EventIngest
 local shareSheetTelemetryThrottleHundredthsPercent = game:DefineFastInt("ShareSheetTelemetryThrottleHundredthsPercent", 10000)
@@ -165,13 +167,14 @@ function t_1.logMessageSendResult(p1)
 end
 
 function t_1.startMessageSendResult(p1)
-	-- upvalues: t_1 (ref), getElapsedTimeMsModule (ref)
+	-- upvalues: t_1 (ref), fFlagShareSheetFriendsSort (ref), getElapsedTimeMsModule (ref)
 	local processTime = os.clock()
 	
 	return function(p2)
-		-- upvalues: t_1 (copy), p1 (ref), getElapsedTimeMsModule (copy), processTime (ref)
+		-- upvalues: t_1 (copy), p1 (ref), fFlagShareSheetFriendsSort (copy), getElapsedTimeMsModule (copy), processTime (ref)
 		t_1.logMessageSendResult({
 			context = p1.context,
+			recipientSource = if fFlagShareSheetFriendsSort then p1.recipientSource else nil,
 			telemetryId = p1.telemetryId,
 			requestedConversationId = p1.requestedConversationId,
 			resolvedConversationId = p2.conversationId,

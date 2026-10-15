@@ -2,6 +2,7 @@
 local creatorAgentChatModule = require(buildExperience.Parent.DataHydration.CreatorAgentChat)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local _ = require(script.Parent.chatTypes)
+local fFlagBuildExperienceAnswerFormModule = require(buildExperience.Flags.FFlagBuildExperienceAnswerForm)
 local turnDisplayModule = require(script.Parent.turnDisplay)
 local fFlagBuildExperienceSinglePlaytestCardModule = require(buildExperience.Flags.FFlagBuildExperienceSinglePlaytestCard)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
@@ -206,8 +207,23 @@ local _ = function(p8, p9, p10, p11, p12, p13, p14, p15)
 	}
 end
 
+local _ = function(p8, p9, p10)
+	-- upvalues: makeSegmentKey (ref)
+	return {
+		kind = "client_tool",
+		isActive = false,
+		answerStackPrompt = nil,
+		planProposal = nil,
+		devProductProposal = nil,
+		key = makeSegmentKey(p8, "client-tool", p9, 1),
+		toolCallId = p9,
+		callOrder = p10[1].callOrder or 0,
+		answeredPrompts = p10
+	}
+end
+
 local function projectAskUserSegments(p8, p9, p10, p11, p12)
-	-- upvalues: makeSegmentKey (ref), studioAskUserTool (ref)
+	-- upvalues: fFlagBuildExperienceAnswerFormModule (ref), makeSegmentKey (ref), studioAskUserTool (ref)
 	local var5 = p8.toolCalls[p10]
 	
 	if var5 == nil then
@@ -226,11 +242,10 @@ local function projectAskUserSegments(p8, p9, p10, p11, p12)
 		for i, v in var7 do
 			local var9 = var8.selections[i]
 			
-			if not (i == var8.currentIndex and not p12.submittedToolCallIds[p10]) then
-				if var9 == nil then break end
+			if i == var8.currentIndex and not p12.submittedToolCallIds[p10] then
 				table.insert(t, {
 					kind = "client_tool",
-					isActive = false,
+					isActive = true,
 					planProposal = nil,
 					devProductProposal = nil,
 					key = makeSegmentKey(p9, "client-tool", p10, i),
@@ -238,37 +253,17 @@ local function projectAskUserSegments(p8, p9, p10, p11, p12)
 					callOrder = var8.callOrder,
 					answerStackPrompt = {
 						question = v,
-						selectedOptionId = var9.selectedOptionId,
-						customResponseText = var9.customResponseText,
+						selectedOptionId = if var9 ~= nil then nil else var9.selectedOptionId,
+						customResponseText = if var9 ~= nil then nil else var9.customResponseText,
 						toolCallId = p10,
 						callOrder = var8.callOrder,
 						isLastQuestion = #var7 <= i
 					}
 				})
+				break
+			elseif var9 == nil then
+				break
 			end
-			table.insert(t, {
-				kind = "client_tool",
-				isActive = true,
-				planProposal = nil,
-				devProductProposal = nil,
-				key = makeSegmentKey(p9, "client-tool", p10, i),
-				toolCallId = p10,
-				callOrder = var8.callOrder,
-				answerStackPrompt = {
-					question = v,
-					selectedOptionId = if var9 ~= nil then nil else var9.selectedOptionId,
-					customResponseText = if var9 ~= nil then nil else var9.customResponseText,
-					toolCallId = p10,
-					callOrder = var8.callOrder,
-					isLastQuestion = #var7 <= i
-				}
-			})
-			
-			return t
-		end
-		return t
-	else
-		for i, v in var6 do
 			table.insert(t, {
 				kind = "client_tool",
 				isActive = false,
@@ -276,12 +271,68 @@ local function projectAskUserSegments(p8, p9, p10, p11, p12)
 				devProductProposal = nil,
 				key = makeSegmentKey(p9, "client-tool", p10, i),
 				toolCallId = p10,
-				callOrder = v.callOrder or i,
-				answerStackPrompt = v
+				callOrder = var8.callOrder,
+				answerStackPrompt = {
+					question = v,
+					selectedOptionId = var9.selectedOptionId,
+					customResponseText = var9.customResponseText,
+					toolCallId = p10,
+					callOrder = var8.callOrder,
+					isLastQuestion = #var7 <= i
+				}
 			})
+			continue
+			elseif not fFlagBuildExperienceAnswerFormModule or not p12.submittedToolCallIds[p10] or (var8.isSubmitting or #t <= 0) then
+				return t
+			end
+			local t_1 = {}
+			
+			for i_1, v_1 in t do
+				table.insert(t_1, v_1.answerStackPrompt)
+			end
+			return {
+				{
+					kind = "client_tool",
+					isActive = false,
+					answerStackPrompt = nil,
+					planProposal = nil,
+					devProductProposal = nil,
+					key = makeSegmentKey(p9, "client-tool", p10, 1),
+					toolCallId = p10,
+					callOrder = t_1[1].callOrder or 0,
+					answeredPrompts = t_1
+				}
+			}
 		end
-		return t
+		-- [0.002s] <RUNTIME-ERROR> : Error block 16 analysis at pc 0 (list.remove(x): x not in list)
+	elseif fFlagBuildExperienceAnswerFormModule then
+		return {
+			{
+				kind = "client_tool",
+				isActive = false,
+				answerStackPrompt = nil,
+				planProposal = nil,
+				devProductProposal = nil,
+				key = makeSegmentKey(p9, "client-tool", p10, 1),
+				toolCallId = p10,
+				callOrder = var6[1].callOrder or 0,
+				answeredPrompts = var6
+			}
+		}
 	end
+	for i, v in var6 do
+		table.insert(t, {
+			kind = "client_tool",
+			isActive = false,
+			planProposal = nil,
+			devProductProposal = nil,
+			key = makeSegmentKey(p9, "client-tool", p10, i),
+			toolCallId = p10,
+			callOrder = v.callOrder or i,
+			answerStackPrompt = v
+		})
+	end
+	return t
 end
 
 local function projectPlanSegments(p13, p14, p15, p16, p17)

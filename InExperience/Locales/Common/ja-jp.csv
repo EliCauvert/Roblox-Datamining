@@ -1951,6 +1951,7 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} さんをブロックし�
 Feature.BlockingModal.Message.BlockConfirmation,このユーザーをブロックするとつながりまたはフォロワーから削除されます。ブロックされた人は、あなたにメッセージやリクエスト、招待状を送れなくなります。<br /><br />あなたがブロックしたことは相手に通知されません。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,このユーザーをブロックすると友達またはフォロワーから削除されます。ブロックされた人は、あなたにメッセージやリクエスト、招待状を送れなくなります。<br /><br />あなたがブロックしたことは相手に通知されません。
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,カスタムオプションを追加...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,早期テスターを招待
 Feature.Build.Action.AddPlaytesters,
@@ -2142,6 +2143,7 @@ Feature.Build.Error.MonetizationOptionsLoad,オプションを読み込めませ
 Feature.Build.Error.MonetizationPermissionDenied,収益化オプションを変更する権限がありません。
 Feature.Build.Header.AccessSharing,アクセスとシェア
 Feature.Build.Header.AllVersions,すべてのバージョン
+Feature.Build.Header.Answers,回答
 Feature.Build.Header.ContentMaturity,コンテンツ成熟度
 Feature.Build.Header.CustomAnswer,カスタムの回答
 Feature.Build.Header.GameConfiguration,ゲームの設定
@@ -3616,6 +3618,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,残り{time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robuxを購入すると、仲裁条項と撤回ポリシーを含むRobloxの{termsLinkStart}利用規約{termsLinkEnd}に同意したものとみなされます。
+Feature.InExperienceShop.GamePass,ゲームパス
 Feature.InExperienceShop.Label.BonusItem,ボーナスアイテム
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,あと{timeRemaining}で終了

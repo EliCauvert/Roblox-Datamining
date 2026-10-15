@@ -14,11 +14,10 @@ local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local fFlagSupportSubmissionOnAllReportNodes = require(parent.SharedFlags).FFlagSupportSubmissionOnAllReportNodes
 local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
-local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useAbuseReportAnalytics (ref), reactModule (ref), listNodeV2Module (ref), dashModule (ref), commentNodeModule (ref), confirmationNodeModule (ref), fFlagSupportSubmissionOnAllReportNodes (ref), paragraphNodeModule (ref), reviewNodeModule (ref), genericAbuseReporting (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref)
+	-- upvalues: useAbuseReportAnalytics (ref), reactModule (ref), listNodeV2Module (ref), dashModule (ref), commentNodeModule (ref), confirmationNodeModule (ref), fFlagSupportSubmissionOnAllReportNodes (ref), paragraphNodeModule (ref), reviewNodeModule (ref), genericAbuseReporting (ref), fFlagAbuseReportInExpPlayerListV3 (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	
 	if p1.node.type == "list" then
@@ -110,7 +109,7 @@ return reactModule.memo(function(p1)
 			end else nil,
 			onFailure = p1.onFailure,
 			goBack = p1.goBack,
-			onExternalSubmit = if fFlagAbuseReportSceneSelectionSubmitTrackingModule then p1.onExternalSubmit else nil
+			onExternalSubmit = p1.onExternalSubmit
 		}))
 	elseif fFlagAbuseReportInExpPlayerListV3 and p1.node.type == "inExpUserSelection" then
 		local var3 = if p1.store then p1.store[p1.node.storeAs] else nil

@@ -1953,6 +1953,7 @@ Feature.BlockingModal.Heading.BlockUser,Block {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Blocking this user will remove them as a Connection or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Blocking this user will remove them as a friend or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,Add a custom option...
 Feature.Build.Action.AddFriends,Invite friends
 Feature.Build.Action.AddPlaytester,Invite early tester
 Feature.Build.Action.AddPlaytesters,Invite early testers
@@ -2144,6 +2145,7 @@ Feature.Build.Error.MonetizationOptionsLoad,Options couldn't load. Try again.
 Feature.Build.Error.MonetizationPermissionDenied,You don't have permission to change monetization options.
 Feature.Build.Header.AccessSharing,Access & sharing
 Feature.Build.Header.AllVersions,All versions
+Feature.Build.Header.Answers,Answers
 Feature.Build.Header.ContentMaturity,Content maturity
 Feature.Build.Header.CustomAnswer,Custom answer
 Feature.Build.Header.GameConfiguration,Game configuration
@@ -3619,6 +3621,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} left
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"By purchasing Robux, you agree to our {termsLinkStart}Terms of Use{termsLinkEnd}, including the arbitration clause and revocation policy."
+Feature.InExperienceShop.GamePass,Game pass
 Feature.InExperienceShop.Label.BonusItem,Bonus item
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}
