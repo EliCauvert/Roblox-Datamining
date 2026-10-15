@@ -6,6 +6,8 @@ local roactUtilsModule = require(parent_1.RoactUtils)
 local foundationModule = require(parent_1.Foundation)
 local localizationModule = require(parent_1.Localization)
 local icon = foundationModule.Icon
+local iconName = foundationModule.Enums.IconName
+local iconSize = foundationModule.Enums.IconSize
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local tooltip = foundationModule.Tooltip
 local view = foundationModule.View
@@ -23,57 +25,60 @@ local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local useTokens = foundationModule.Hooks.useTokens
 local captureTriggerTypeModule = require(parent.Enums.CaptureTriggerType)
 local maxVideoCaptureDurationSeconds = game:DefineFastInt("MaxVideoCaptureDurationSeconds", 30)
+local fFlagCapturesControlsUseBuilderIconsModule = require(parent.Flags.FFlagCapturesControlsUseBuilderIcons)
+local var1 = if fFlagCapturesControlsUseBuilderIconsModule then iconName.FrameVideoCamera else "icons/controls/screenRecord_alt"
+local var2 = if fFlagCapturesControlsUseBuilderIconsModule then iconSize.Large else nil
 
 return function(p1)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useTokens (ref), useSelector (ref), constantsModule (ref), useCallback (ref), eventNamesModule (ref), stopVideoCaptureModule (ref), reactOtterModule (ref), useEffect (ref), maxVideoCaptureDurationSeconds (ref), startVideoCaptureModule (ref), reactModule (ref), view (ref), tooltip (ref), popoverAlign (ref), icon (ref), captureTriggerTypeModule (ref), foundationModule (ref), radialProgressBarModule (ref)
-	local var1 = useAnalyticsModule()
-	local var2 = useDispatch()
-	local var3 = useLocalization({
+	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useTokens (ref), useSelector (ref), constantsModule (ref), useCallback (ref), eventNamesModule (ref), stopVideoCaptureModule (ref), reactOtterModule (ref), useEffect (ref), maxVideoCaptureDurationSeconds (ref), startVideoCaptureModule (ref), reactModule (ref), view (ref), tooltip (ref), popoverAlign (ref), icon (ref), var1 (ref), var2 (ref), captureTriggerTypeModule (ref), foundationModule (ref), radialProgressBarModule (ref)
+	local var3 = useAnalyticsModule()
+	local var4 = useDispatch()
+	local var5 = useLocalization({
 		captureVideo = "Feature.Captures.Title.CaptureVideoTooltip",
 		videoCaptureInProgressTitle = "Feature.Captures.Title.VideoCaptureInProgressTooltip"
 	})
-	local var4 = useTokens()
-	local var5 = useSelector(function(p2)
+	local var6 = useTokens()
+	local var7 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].IsVideoCaptureActive.status
 	end)
-	local var6 = useSelector(function(p2)
+	local var8 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].IsVideoCaptureActive.triggerType
 	end)
-	local var7, var8 = reactOtterModule.useAnimatedBinding(0, useCallback(function()
-		-- upvalues: var5 (ref), var1 (ref), eventNamesModule (copy), var2 (ref), stopVideoCaptureModule (copy)
-		if var5 then
-			var1.fireEvent(eventNamesModule.CapturesEntrypointVideoDeactivatedAutomatically)
-			var2(stopVideoCaptureModule())
+	local var9, var10 = reactOtterModule.useAnimatedBinding(0, useCallback(function()
+		-- upvalues: var7 (ref), var3 (ref), eventNamesModule (copy), var4 (ref), stopVideoCaptureModule (copy)
+		if var7 then
+			var3.fireEvent(eventNamesModule.CapturesEntrypointVideoDeactivatedAutomatically)
+			var4(stopVideoCaptureModule())
 			
 			return
 		end
-	end, { var5 }))
+	end, { var7 }))
 	useEffect(function()
-		-- upvalues: var5 (ref), var8 (ref), reactOtterModule (copy), maxVideoCaptureDurationSeconds (copy)
-		if var5 then
-			var8(reactOtterModule.ease(1, {
+		-- upvalues: var7 (ref), var10 (ref), reactOtterModule (copy), maxVideoCaptureDurationSeconds (copy)
+		if var7 then
+			var10(reactOtterModule.ease(1, {
 				duration = maxVideoCaptureDurationSeconds,
 				easingStyle = Enum.EasingStyle.Linear
 			}))
 			
 			return
 		end
-		var8(reactOtterModule.instant(0))
-	end, { var8, var5 })
+		var10(reactOtterModule.instant(0))
+	end, { var10, var7 })
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		VideoCaptureStartCTA = if not var5 then reactModule.createElement(view, {
+		VideoCaptureStartCTA = if not var7 then reactModule.createElement(view, {
 			LayoutOrder = p1.layoutOrder,
 			onActivated = useCallback(function()
-				-- upvalues: var5 (ref), var1 (ref), eventNamesModule (copy), var2 (ref), startVideoCaptureModule (copy)
-				if var5 then
+				-- upvalues: var7 (ref), var3 (ref), eventNamesModule (copy), var4 (ref), startVideoCaptureModule (copy)
+				if var7 then
 					return
 				end
-				var1.fireEvent(eventNamesModule.CapturesEntrypointVideoActivated)
-				var2(startVideoCaptureModule())
-			end, { var5 }),
+				var3.fireEvent(eventNamesModule.CapturesEntrypointVideoActivated)
+				var4(startVideoCaptureModule())
+			end, { var7 }),
 			tag = {
 				["size-1200-1200"] = true,
 				["anchor-center-center auto-xy clip position-center-center radius-circle"] = true
@@ -82,59 +87,61 @@ return function(p1)
 			StartIconWithTooltip = reactModule.createElement(tooltip, {
 				align = popoverAlign.Center,
 				side = p1.popoverSide,
-				title = var3.captureVideo
+				title = var5.captureVideo
 			}, reactModule.createElement(view, { tag = "size-1200-1200" }, {
 				Icon = reactModule.createElement(icon, {
-					name = "icons/controls/screenRecord_alt",
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
-					style = var4.Color.Content.Emphasis
+					name = var1,
+					size = var2,
+					style = var6.Color.Content.Emphasis
 				})
 			}))
 		}) else nil,
-		VideoCaptureDisabledStartCTA = if var5 and var6 == captureTriggerTypeModule.LegacyCapture then reactModule.createElement(view, {
+		VideoCaptureDisabledStartCTA = if var7 and var8 == captureTriggerTypeModule.LegacyCapture then reactModule.createElement(view, {
 			tag = "anchor-center-center auto-xy clip position-center-center radius-circle",
 			LayoutOrder = p1.layoutOrder
 		}, {
 			StartIconWithTooltip = reactModule.createElement(tooltip, {
 				align = popoverAlign.Center,
 				side = p1.popoverSide,
-				title = var3.videoCaptureInProgressTitle
+				title = var5.videoCaptureInProgressTitle
 			}, reactModule.createElement(icon, {
-				name = "icons/controls/screenRecord_alt",
-				style = var4.Color.Content.Muted
+				name = var1,
+				size = var2,
+				style = var6.Color.Content.Muted
 			}))
 		}) else nil,
-		VideoCaptureActiveView = if var5 and (var6 == captureTriggerTypeModule.UserCapture or var6 == captureTriggerTypeModule.DeveloperCapture) then reactModule.createElement(view, {
+		VideoCaptureActiveView = if var7 and (var8 == captureTriggerTypeModule.UserCapture or var8 == captureTriggerTypeModule.DeveloperCapture) then reactModule.createElement(view, {
 			tag = "anchor-center-center clip position-center-center radius-circle size-900-900 padding-xxsmall",
 			LayoutOrder = p1.layoutOrder
 		}, {
-			VideoCaptureStopCTA = if var6 == captureTriggerTypeModule.UserCapture then reactModule.createElement(view, {
+			VideoCaptureStopCTA = if var8 == captureTriggerTypeModule.UserCapture then reactModule.createElement(view, {
 				tag = "anchor-center-center bg-over-media-300 col flex-evenly position-center-center size-700-700 radius-circle",
 				onActivated = useCallback(function()
-					-- upvalues: var5 (ref), var1 (ref), eventNamesModule (copy), var2 (ref), stopVideoCaptureModule (copy)
-					if var5 then
-						var1.fireEvent(eventNamesModule.CapturesEntrypointVideoDeactivated)
-						var2(stopVideoCaptureModule())
+					-- upvalues: var7 (ref), var3 (ref), eventNamesModule (copy), var4 (ref), stopVideoCaptureModule (copy)
+					if var7 then
+						var3.fireEvent(eventNamesModule.CapturesEntrypointVideoDeactivated)
+						var4(stopVideoCaptureModule())
 						
 						return
 					end
-				end, { var5 })
+				end, { var7 })
 			}, {
 				VideoCaptureStopIcon = reactModule.createElement(icon, {
 					name = "icons/controls/mediaStop_small",
 					size = foundationModule.Enums.IconSize.Small,
-					style = var4.Color.System.Alert
+					style = var6.Color.System.Alert
 				})
 			}) else nil,
-			VideoCaptureActiveIndicator = if var6 == captureTriggerTypeModule.DeveloperCapture then reactModule.createElement(view, {
+			VideoCaptureActiveIndicator = if var8 == captureTriggerTypeModule.DeveloperCapture then reactModule.createElement(view, {
 				tag = "anchor-center-center col flex-evenly position-center-center size-700-700 radius-circle"
 			}, {
 				VideoCaptureIndicatorIcon = reactModule.createElement(view, {
 					tag = "anchor-center-center bg-alert position-center-center size-300-300 radius-circle"
 				})
 			}) else nil,
-			ProgressBar = reactModule.createElement(radialProgressBarModule, { progress = var7 })
+			ProgressBar = reactModule.createElement(radialProgressBarModule, { progress = var9 })
 		}) else nil
 	})
 end

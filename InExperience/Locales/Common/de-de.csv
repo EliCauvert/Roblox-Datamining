@@ -129,7 +129,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} Jah
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Tag
 Authentication.SignUp.Label.EnterYourEmail,Gib deine E-Mail-Adresse ein
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,"Man muss älter sein, um dieses Spiel zu spielen"
 Authentication.SignUp.Label.ErrorsWithPassword,Das Passwort enthält Fehler.
 Authentication.SignUp.Label.ErrorsWithUsername,Der Benutzername enthält Fehler.
 Authentication.SignUp.Label.ExitModalSubtitle,"Dein Konto ist fast fertig. Wenn du die Seite verlässt, wird dein Fortschritt nicht gespeichert."
@@ -281,7 +280,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissiver Bereich ü
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} ist zu emissiv. Der Wert ""Emissiver Bereich × Intensität"" überschreitet den Grenzwert (derzeit {emissivePercentage} %, muss {maxEmissivePercentage} % oder weniger betragen). Verkleinere den leuchtenden Bereich oder verringere seine Emissionsstärke."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissiver Bereich überschritten.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} ist zu emissiv. Der Wert ""Emissiver Bereich × Intensität"" überschreitet den Grenzwert (derzeit {emissiveArea}, muss {maxEmissiveArea} oder weniger betragen). Verkleinere den leuchtenden Bereich oder verringere seine Emissionsstärke."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"Dieses Objekt verwendet Emissionskarten, die nur für Creator im Programm für vertraute Creator verfügbar sind. Bitte entferne alle Emissionskarteninhalte oder tritt dem Programm vor dem Hochladen bei."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Der veröffentlichten Animation fehlt ein gültiger maximaler Wert für die Teileverschiebung. Bitte veröffentliche die Animation erneut.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Der veröffentlichten Animation fehlt ein gültiger UGC-Emote-Marker. Bitte veröffentliche die Animation erneut.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Die maximale Teileverschiebung konnte nicht aus den veröffentlichten Animationsdaten berechnet werden. Bitte veröffentliche die Animation erneut.
@@ -289,6 +287,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Die v
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Der Kopf muss über dem Oberkörper platziert werden. Die Kopfmitte befindet sich unterhalb der Oberseite des Oberkörpers, was darauf hinweist, dass das Kopf-Mesh eingeklappt oder falsch platziert ist."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Die Eigenschaft InternalOverrideFACSData auf FaceControls muss beim Hochladen leer sein.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Wir haben festgestellt, dass FACS deinen Kopf auf {modPercent} % vergrößert hat. Die Änderung des Kopfes verstößt jedoch gegen die Marktplatzrichtlinien für Gesichtsanimationen."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamische Köpfe dürfen höchstens {maxFacsJointCount} FACS-Gelenke haben, aber dieser Kopf hat {actualJointCount}. Bitte reduziere die Anzahl der FACS-Gelenke und versuche es erneut."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Wir haben festgestellt, dass FACS deinen Kopf auf {modPercent} % verkleinert hat. Die Änderung des Kopfes verstößt jedoch gegen die Marktplatzrichtlinien für Gesichtsanimationen."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Das Upload-Format stimmt nicht mit der erwarteten Ordnerstruktur überein. Bitte versuche es erneut oder erstelle einen Fehlerbericht.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,Der Knochen {bonePath} liegt zu weit außerhalb des Mesh-Teils {partName}. Bitte platziere ihn näher an der Größenbegrenzung des Mesh-Teils.
@@ -1959,6 +1958,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,Mehr Spieler gewinnen
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,"Sorge dafür, dass die Spieler immer wieder zurückkehren"
 Feature.Build.Analytics.Goal.Locked.EarnRobux,"Verdiene Robux in deinem Spiel, um diese Statistiken zu sehen."
 Feature.Build.Analytics.Goal.Locked.FirstImpression,"Erhalte deinen ersten Spiele, um diese Statistiken zu sehen."
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,"Gewinne mehr Spieler, um diese Statistiken zu sehen."
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,"Erhalte deinen ersten wiederkehrenden Spiele, um diese Statistiken zu sehen."
 Feature.Build.Analytics.KeyStats,Wichtige Statistiken
 Feature.Build.Analytics.LastMonth,Letzter Monat
@@ -2312,11 +2312,8 @@ Feature.Build.Message.NoSearchResultsFound,Keine Suchergebnisse gefunden
 Feature.Build.Message.NoVersionHistory,Noch kein Versionsverlauf.
 Feature.Build.Message.OneTaskCompleted,1 Aufgabe abgeschlossen
 Feature.Build.Message.OutOfBuildUsage,"Dein Build-Kontingent ist aufgebraucht. Sieh dir deine Optionen an, um Robux zu verwenden und weiter zu erstellen."
-Feature.Build.Message.PlaytestInviteSendFailedBody,Du konntest keinen Einladungs-Chat-Link an die folgenden Benutzer senden:
-Feature.Build.Message.PlaytestInviteSendFailedHint,"Bitte verwende die Schaltfläche ""Teilen"", um einen Link zu erhalten."
 Feature.Build.Message.PlaytesterRequestFailed,Wir konnten deine Anfrage nicht abschließen. Bitte versuche es erneut.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} von {MAX_INVITES} Vorabtestern eingeladen
-Feature.Build.Message.PrivatePlaytestInvite,"{username} hat dich eingeladen, Vorabtester für {experienceName} zu sein"
 Feature.Build.Message.PublicPublishFailed,"Dein Spiel wurde veröffentlicht, konnte aber nicht öffentlich gemacht werden. Bitte versuche es erneut."
 Feature.Build.Message.PublishExpandAudience,"Veröffentliche, um deine Zielgruppe zu vergrößern"
 Feature.Build.Message.PublishNotReverted,Deine Veröffentlichung wurde nicht rückgängig gemacht. Bitte versuche es erneut.
@@ -2385,7 +2382,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Verwaltete Preisgestaltung akt
 Feature.Build.Title.NoMonetizationProducts,"Beginne, in deinem Spiel Einnahmen zu erzielen"
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
 Feature.Build.Title.PickCampaign,Dauer auswählen
-Feature.Build.Title.PlaytestInviteSendFailed,Einladungen konnten nicht gesendet werden
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Die folgenden Benutzer konnten nicht hinzugefügt werden:
 Feature.Build.Title.PlaytestersOnlyPlay,Nur Spieletester können spielen
@@ -3723,6 +3719,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,Warte eine Minute und versuche es da
 Feature.Moments.Label.VoiceModerationError,Dein Skript muss den Sicherheitsregeln entsprechen
 Feature.Moments.Label.VoicePlaceholder,Gib dein Voiceover-Skript ein. Maximal {maxCount} Zeichen
 Feature.Moments.Label.VoiceTimeoutBody,Zeitüberschreitung bei der Erstellung des Voiceovers.
+Feature.Moments.Label.VoiceTooManyNumbersError,Das Skript enthält zu viele Ziffern
 Feature.Moments.Label.WriteComment,Verfasse einen Kommentar
 Feature.Moments.Title.Comments,Kommentare
 Feature.Moments.Title.CommentsWithCappedCount,Kommentare (Mehr als {count})

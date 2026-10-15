@@ -49,8 +49,10 @@ local fFlagSocialCarouselFixGameJoinCardDismissModule = require(socialCarousel.F
 local fFlagSocialCarouselShowPlusBadgeModule = require(socialCarousel.Flags.FFlagSocialCarouselShowPlusBadge)
 local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMobileGameJoinCard
 local fFlagEnableConsoleGameJoinCard = require(parent.SharedFlags).FFlagEnableConsoleGameJoinCard
+local fFlagConsoleOpenMobileGameJoinCard = require(parent.SharedFlags).FFlagConsoleOpenMobileGameJoinCard
 local fFlagMobileGameJoinCardTTITracking = require(parent.SharedFlags).FFlagMobileGameJoinCardTTITracking
 local fFlagMobileGameJoinCardGamepadSupport = require(parent.SharedFlags).FFlagMobileGameJoinCardGamepadSupport
+local fFlagDesktopGameJoinCardGamepadSupport = require(parent.SharedFlags).FFlagDesktopGameJoinCardGamepadSupport
 local enableFriendCarouselInGameFriendExposureLoggingV2 = game:DefineFastFlag("EnableFriendCarouselInGameFriendExposureLogging_v2", false)
 local socialViewFriendSortInGameFriendsLayer = game:DefineFastString("SocialViewFriendSortInGameFriendsLayer", "Social.ViewFriendSortInGameFriends")
 
@@ -60,38 +62,42 @@ local _ = function(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), useDispatch (ref), useNavigation (ref), fFlagMobileGameJoinCardGamepadSupport (ref), useDeviceType (ref), usePreferredInput (ref), fFlagSocialCarouselFixConsoleCtaForInGameModule (ref), fFlagPPVEnabledOnConsole (ref), fFlagEnableConsoleGameJoinCard (ref), responsiveModule (ref), fFlagSocialCarouselUseConsolePolicyForCtaModule (ref), useAppPolicy (ref), fFlagSocialCarouselPressXToViewProfile (ref), robloxAppEnumsModule (ref), fFlagEnableMobileGameJoinCard (ref), useSocialCarouselContextModule (ref), useSocialCarouselAnalyticsModule (ref), useLocalization (ref), fFlagSocialCarouselUseProfileStore (ref), var1 (ref), fFlagUserProfilePlatformProfile (ref), signalsModule (ref), signalsReactModule (ref), userProfilesModule (ref), fFlagSocialCarouselShowPlusBadgeModule (ref), presenceTypes (ref), playerContextualMenuModule (ref), tile (ref), enums (ref), enableFriendCarouselInGameFriendExposureLoggingV2 (ref), IXPService (ref), socialViewFriendSortInGameFriendsLayer (ref), fFlagMobileGameJoinCardTTITracking (ref), gameJoinCardTTI (ref), appPage (ref), fFlagEnableSplitPane (ref), enums_1 (ref), focusNavigationEventNameEnum (ref), constantsModule (ref), fFlagSocialCarouselEnableUserSeenEventsModule (ref), fFlagSocialCarouselFixGameJoinCardDismissModule (ref), useGameJoinCardNavigation (ref), userTileModule (ref), cryoModule (ref), socialCarouselVendorImagePath (ref), view (ref), foundationModule (ref), desktopGameJoinCardContainer (ref), userTileEventHandlers (ref)
+	-- upvalues: reactModule (ref), useDispatch (ref), useNavigation (ref), fFlagMobileGameJoinCardGamepadSupport (ref), fFlagDesktopGameJoinCardGamepadSupport (ref), useDeviceType (ref), usePreferredInput (ref), fFlagSocialCarouselFixConsoleCtaForInGameModule (ref), fFlagPPVEnabledOnConsole (ref), fFlagEnableConsoleGameJoinCard (ref), responsiveModule (ref), fFlagSocialCarouselUseConsolePolicyForCtaModule (ref), useAppPolicy (ref), robloxAppEnumsModule (ref), fFlagSocialCarouselPressXToViewProfile (ref), fFlagEnableMobileGameJoinCard (ref), fFlagConsoleOpenMobileGameJoinCard (ref), useSocialCarouselContextModule (ref), useSocialCarouselAnalyticsModule (ref), useLocalization (ref), fFlagSocialCarouselUseProfileStore (ref), var1 (ref), fFlagUserProfilePlatformProfile (ref), signalsModule (ref), signalsReactModule (ref), userProfilesModule (ref), fFlagSocialCarouselShowPlusBadgeModule (ref), presenceTypes (ref), playerContextualMenuModule (ref), tile (ref), enums (ref), enableFriendCarouselInGameFriendExposureLoggingV2 (ref), IXPService (ref), socialViewFriendSortInGameFriendsLayer (ref), fFlagMobileGameJoinCardTTITracking (ref), gameJoinCardTTI (ref), appPage (ref), fFlagEnableSplitPane (ref), enums_1 (ref), focusNavigationEventNameEnum (ref), constantsModule (ref), fFlagSocialCarouselEnableUserSeenEventsModule (ref), fFlagSocialCarouselFixGameJoinCardDismissModule (ref), useGameJoinCardNavigation (ref), userTileModule (ref), cryoModule (ref), socialCarouselVendorImagePath (ref), view (ref), foundationModule (ref), desktopGameJoinCardContainer (ref), userTileEventHandlers (ref)
 	local var2
 	local var3 = reactModule.useRef(nil)
 	local var4 = useDispatch()
 	local var5 = useNavigation()
-	local var6 = if fFlagMobileGameJoinCardGamepadSupport then useDeviceType() else nil
+	local var6 = if fFlagMobileGameJoinCardGamepadSupport or fFlagDesktopGameJoinCardGamepadSupport then useDeviceType() else nil
 	local var7 = usePreferredInput()
 	local var8 = if fFlagSocialCarouselFixConsoleCtaForInGameModule or not fFlagPPVEnabledOnConsole or fFlagEnableConsoleGameJoinCard then var7 == responsiveModule.Input.Directional else false
 	local var9 = if fFlagSocialCarouselUseConsolePolicyForCtaModule or fFlagMobileGameJoinCardGamepadSupport then useAppPolicy(function(p2)
 		return p2.getUseConsoleGameJoinCard()
 	end) else var8
 	
+	if fFlagDesktopGameJoinCardGamepadSupport and var6 == robloxAppEnumsModule.DeviceType.Desktop then
+		var9 = false
+	end
 	if fFlagSocialCarouselPressXToViewProfile then
 		var2 = var7 == responsiveModule.Input.Directional
 		var2 = nil
 	else
 		var2 = false
 	end
-	local var10 = if var6 ~= robloxAppEnumsModule.DeviceType.Phone then var6 == robloxAppEnumsModule.DeviceType.Tablet else true
-	local var11 = fFlagEnableMobileGameJoinCard
+	local var10
+	local var11 = if var6 ~= robloxAppEnumsModule.DeviceType.Phone then var6 == robloxAppEnumsModule.DeviceType.Tablet else true
 	
-	if var11 then
+	if fFlagEnableMobileGameJoinCard then
 		if fFlagMobileGameJoinCardGamepadSupport then
-			var11 = var10
+			var10 = var11
 			
-			if not var11 then
-				var11 = var7 == responsiveModule.Input.Touch
-				var11 = nil
+			if not var10 then
+				var10 = var7 == responsiveModule.Input.Touch
+				var10 = nil
 			end
 		else
-			var11 = var7 == responsiveModule.Input.Touch
+			var10 = var7 == responsiveModule.Input.Touch
 		end
+		var10 = var10 or fFlagConsoleOpenMobileGameJoinCard and var9
 	end
 	local var12, var13
 	local var14 = useSocialCarouselContextModule()
@@ -193,25 +199,26 @@ return function(p1)
 	end
 	local var26
 	local var27 = reactModule.useCallback(function(_)
-		-- upvalues: p1 (ref), fFlagSocialCarouselFixConsoleCtaForInGameModule (copy), presenceTypes (copy), var9 (write), fFlagPPVEnabledOnConsole (copy), var4 (ref), playerContextualMenuModule (copy), var17 (ref), tile (copy), enums (copy), enableFriendCarouselInGameFriendExposureLoggingV2 (copy), IXPService (copy), socialViewFriendSortInGameFriendsLayer (copy), var11 (ref), fFlagMobileGameJoinCardTTITracking (copy), gameJoinCardTTI (copy), var5 (ref), appPage (copy), var25 (write), var24 (write), fFlagEnableSplitPane (copy), enums_1 (copy), var15 (ref)
+		-- upvalues: p1 (ref), presenceTypes (copy), fFlagSocialCarouselFixConsoleCtaForInGameModule (copy), var9 (write), fFlagPPVEnabledOnConsole (copy), fFlagConsoleOpenMobileGameJoinCard (copy), var10 (ref), var4 (ref), playerContextualMenuModule (copy), var17 (ref), tile (copy), enums (copy), enableFriendCarouselInGameFriendExposureLoggingV2 (copy), IXPService (copy), socialViewFriendSortInGameFriendsLayer (copy), fFlagMobileGameJoinCardTTITracking (copy), gameJoinCardTTI (copy), var5 (ref), appPage (copy), var25 (write), var24 (write), fFlagEnableSplitPane (copy), enums_1 (copy), var15 (ref)
 		if p1.item.onActivated then
 			p1.item.onActivated(p1.item)
 		else
+			local var28 = p1.item.presence ~= nil and p1.item.presence.userPresenceType == presenceTypes.InGame
 			local _ = nil
 			
-			if if fFlagSocialCarouselFixConsoleCtaForInGameModule then var9 and (not fFlagPPVEnabledOnConsole or (p1.item.presence ~= nil and p1.item.presence.userPresenceType == presenceTypes.InGame)) else not fFlagPPVEnabledOnConsole and var9 then
-				local var28 = var4
+			if (if fFlagSocialCarouselFixConsoleCtaForInGameModule then var9 and (not fFlagPPVEnabledOnConsole or var28) else not fFlagPPVEnabledOnConsole and var9) and (not fFlagConsoleOpenMobileGameJoinCard or not var10 or not var28) then
+				local var29 = var4
 				local openPlayerContextualMenu = playerContextualMenuModule.openPlayerContextualMenu
 				local t = { subjectUserId = p1.item.id, subjectPresence = var17 }
 				local item = p1.item
 				t.robloxFriendshipStatus = if item.tileType ~= tile.Recommendation then if item.isFriendWithUser then Enum.FriendStatus.Friend elseif item.hasIncomingFriendRequest then Enum.FriendStatus.FriendRequestReceived elseif item.hasPendingFriendRequest then Enum.FriendStatus.FriendRequestSent else Enum.FriendStatus.NotFriend else Enum.FriendStatus.Friend
 				t.friendshipOriginSourceType = enums.FriendshipOriginSourceType.FriendRecommendations.rawValue()
-				var28(openPlayerContextualMenu(t))
+				var29(openPlayerContextualMenu(t))
 			elseif p1.item.presence and p1.item.presence.userPresenceType == presenceTypes.InGame then
 				if enableFriendCarouselInGameFriendExposureLoggingV2 then
 					IXPService:LogFlagLinkedUserLayerExposure(socialViewFriendSortInGameFriendsLayer)
 				end
-				if var11 then
+				if var10 then
 					if fFlagMobileGameJoinCardTTITracking then
 						gameJoinCardTTI.trackMobileCardClickStart()
 					end
@@ -233,8 +240,8 @@ return function(p1)
 	end, {
 		p1.item,
 		var24,
-		if fFlagMobileGameJoinCardGamepadSupport then var11 else nil,
-		if fFlagMobileGameJoinCardGamepadSupport then var9 else nil
+		if fFlagMobileGameJoinCardGamepadSupport then var10 else nil,
+		if fFlagMobileGameJoinCardGamepadSupport or fFlagDesktopGameJoinCardGamepadSupport then var9 else nil
 	})
 	local var28 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), tile (copy), var16 (ref), presenceTypes (copy)
@@ -323,20 +330,35 @@ return function(p1)
 		end, {})
 	end
 	local var36
-	local var37 = if fFlagEnableConsoleGameJoinCard then useGameJoinCardNavigation(var29, var8, var3) else false
+	if fFlagDesktopGameJoinCardGamepadSupport then
+		var36 = var8
+		
+		if var36 then
+			var36 = var6 ~= robloxAppEnumsModule.DeviceType.Desktop
+			var36 = nil
+		end
+	else
+		var36 = var8
+	end
+	local var37 = false
+	
+	if fFlagEnableConsoleGameJoinCard then
+		var37 = useGameJoinCardNavigation(if fFlagDesktopGameJoinCardGamepadSupport and not var36 then nil else var29, var36, var3)
+	end
+	local var38
 	local presence = p1.item.presence
-	local var38 = presence and presence.userPresenceType == presenceTypes.InGame
+	local var39 = presence and presence.userPresenceType == presenceTypes.InGame
 	
 	if not var24 then
-		var36 = var37 and (var38 and var17 ~= nil)
+		var38 = var37 and (var39 and var17 ~= nil)
 	end
-	local var39 = fFlagEnableConsoleGameJoinCard and (var38 and (var8 and var36))
+	local var40 = fFlagEnableConsoleGameJoinCard and (var39 and (var36 and var38))
 	reactModule.useEffect(function()
-		-- upvalues: enableFriendCarouselInGameFriendExposureLoggingV2 (copy), var36 (ref), IXPService (copy), socialViewFriendSortInGameFriendsLayer (copy)
-		if enableFriendCarouselInGameFriendExposureLoggingV2 and var36 then
+		-- upvalues: enableFriendCarouselInGameFriendExposureLoggingV2 (copy), var38 (ref), IXPService (copy), socialViewFriendSortInGameFriendsLayer (copy)
+		if enableFriendCarouselInGameFriendExposureLoggingV2 and var38 then
 			IXPService:LogFlagLinkedUserLayerExposure(socialViewFriendSortInGameFriendsLayer)
 		end
-	end, { var36 })
+	end, { var38 })
 	
 	return reactModule.createElement(view, {
 		BackgroundTransparency = 1,
@@ -366,10 +388,10 @@ return function(p1)
 			userId = p1.item.id,
 			presence = presence,
 			anchorRef = var3,
-			isOpen = var36 == true,
+			isOpen = var38 == true,
 			onClose = var26,
 			homepageCarouselAbsolutePosition = p1.index,
-			showGamepadJoinFocus = var39 == true,
+			showGamepadJoinFocus = var40 == true,
 			onCardGuiObjectChanged = if fFlagSocialCarouselPressXToViewProfile then var35 else var31,
 			isFocused = var37
 		}) else nil,

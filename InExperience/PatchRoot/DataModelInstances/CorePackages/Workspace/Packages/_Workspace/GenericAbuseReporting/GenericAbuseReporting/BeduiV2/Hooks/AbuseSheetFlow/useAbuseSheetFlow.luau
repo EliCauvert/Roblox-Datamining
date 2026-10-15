@@ -25,7 +25,6 @@ local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local linkOpenedSource = analyticsServiceModule.LinkOpenedSource
 local submitSource = analyticsServiceModule.SubmitSource
 local formatErrorDetailForAnalytics = analyticsServiceModule.formatErrorDetailForAnalytics
-local fFlagEnableReportingFlowForMomentsFeed = require(parent.SharedFlags).FFlagEnableReportingFlowForMomentsFeed
 local fFlagAbuseReportSceneSelectionNextOnFailureModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionNextOnFailure)
 local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 local fFlagAbuseReportSubmissionTargetV4 = require(parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4
@@ -59,7 +58,7 @@ local function useAbuseSheetAnalytics(p1, p2, p3, p4)
 end
 
 return function(p1, p2)
-	-- upvalues: reactModule (ref), resolveStartNode (ref), reducer (ref), getInitialState (ref), getNewRunId (ref), useOpenLinkModule (ref), useRoactService (ref), roactNetworking (ref), useAbuseSheetAnalytics (ref), selectStore (ref), resolveArConfig (ref), telemetryEventType (ref), dashModule (ref), fFlagAbuseReportImproveErrorEventsModule (ref), linkOpenedSource (ref), fFlagAbuseReportSubmissionTargetV4 (ref), getSubmissionTargetTelemetry (ref), sendReportModule (ref), promiseModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), abuseVectorModule (ref), fFlagAbuseReportSceneSelectionNextOnFailureModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), formatErrorDetailForAnalytics (ref), contentNodeModule (ref)
+	-- upvalues: reactModule (ref), resolveStartNode (ref), reducer (ref), getInitialState (ref), getNewRunId (ref), useOpenLinkModule (ref), useRoactService (ref), roactNetworking (ref), useAbuseSheetAnalytics (ref), selectStore (ref), resolveArConfig (ref), telemetryEventType (ref), dashModule (ref), fFlagAbuseReportImproveErrorEventsModule (ref), linkOpenedSource (ref), fFlagAbuseReportSubmissionTargetV4 (ref), getSubmissionTargetTelemetry (ref), sendReportModule (ref), promiseModule (ref), abuseVectorModule (ref), fFlagAbuseReportSceneSelectionNextOnFailureModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), formatErrorDetailForAnalytics (ref), contentNodeModule (ref)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), resolveStartNode (copy)
 		return if p1 then resolveStartNode(p1) else "root"
@@ -254,7 +253,7 @@ return function(p1, p2)
 	end
 	
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), nodeId (ref), var2 (ref), dashModule (copy), p2 (ref), var3 (ref), var11 (ref), telemetryEventType (copy), linkOpenedSource (copy), var4 (ref), notifyFinish (ref), reset (ref), fFlagAbuseReportSubmissionTargetV4 (copy), getSubmissionTargetTelemetry (copy), sendReportModule (copy), var5 (ref), promiseModule (copy), fFlagEnableReportingFlowForMomentsFeed (copy), abuseVectorModule (copy), fFlagAbuseReportSceneSelectionNextOnFailureModule (copy), var6 (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var12 (ref), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy)
+		-- upvalues: var8 (ref), nodeId (ref), var2 (ref), dashModule (copy), p2 (ref), var3 (ref), var11 (ref), telemetryEventType (copy), linkOpenedSource (copy), var4 (ref), notifyFinish (ref), reset (ref), fFlagAbuseReportSubmissionTargetV4 (copy), getSubmissionTargetTelemetry (copy), sendReportModule (copy), var5 (ref), promiseModule (copy), abuseVectorModule (copy), fFlagAbuseReportSceneSelectionNextOnFailureModule (copy), var6 (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var12 (ref), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy)
 		if not var8 or not nodeId then return end
 		if var2.navigationState ~= "gotoNext" and var2.navigationState ~= "gotoFailure" then return end
 		local var14 = dashModule.last(var2.stack)
@@ -349,7 +348,7 @@ return function(p1, p2)
 		local var16 = nil
 		
 		local function onSubmitForm()
-			-- upvalues: fFlagAbuseReportSubmissionTargetV4 (copy), target (ref), sendReportModule (copy), var5 (copy), submission (ref), p2 (copy), var16 (write), promiseModule (copy), fFlagEnableReportingFlowForMomentsFeed (copy), abuseVectorModule (copy)
+			-- upvalues: fFlagAbuseReportSubmissionTargetV4 (copy), target (ref), sendReportModule (copy), var5 (copy), submission (ref), p2 (copy), var16 (write), promiseModule (copy), abuseVectorModule (copy)
 			if fFlagAbuseReportSubmissionTargetV4 then
 				if type(target) == "table" and target.type == "default" then
 					return sendReportModule(var5, "abuse-reporting/v1/abuse-report", submission.data)
@@ -369,7 +368,7 @@ return function(p1, p2)
 					return promiseModule.reject("Unsupported submission target")
 				end
 			elseif p2.onCustomSubmit then
-				if not fFlagEnableReportingFlowForMomentsFeed or p2.abuseVector ~= abuseVectorModule.MomentsFeed then
+				if p2.abuseVector ~= abuseVectorModule.MomentsFeed then
 					return p2.onCustomSubmit(submission)
 				end
 				local var18 = p2.onCustomSubmit(submission)

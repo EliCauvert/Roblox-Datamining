@@ -3,7 +3,6 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local userPickerListModule = require(buildExperience.Components.UserPicker.UserPickerList)
-local privateInviteSendFailureDialogModule = require(script.Parent.PrivateInviteSendFailureDialog)
 local privateInviteAddErrorDialogModule = require(script.Parent.PrivateInviteAddErrorDialog)
 local privateInviteAddRejectedDialogModule = require(script.Parent.PrivateInviteAddRejectedDialog)
 local var1 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
@@ -16,7 +15,7 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: reactModule (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref), var1 (ref), iconButton (ref), iconName (ref), searchInput (ref), userPickerListModule (ref), privateInviteSendFailureDialogModule (ref), privateInviteAddErrorDialogModule (ref), privateInviteAddRejectedDialogModule (ref)
+	-- upvalues: reactModule (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref), var1 (ref), iconButton (ref), iconName (ref), searchInput (ref), userPickerListModule (ref), privateInviteAddErrorDialogModule (ref), privateInviteAddRejectedDialogModule (ref)
 	local testId = p1.testId or "private-invites-picker"
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
@@ -78,11 +77,6 @@ return function(p1)
 				})
 			})
 		}),
-		FailureDialog = if #p1.failedInviteUserIds > 0 then reactModule.createElement(privateInviteSendFailureDialogModule, {
-			failedUserIds = p1.failedInviteUserIds,
-			onShare = p1.onShareFailedInvites,
-			onCancel = p1.onDismissFailedInvites
-		}) else nil,
 		AddErrorDialog = if p1.hasAddError then reactModule.createElement(privateInviteAddErrorDialogModule, { onDismiss = p1.onDismissAddError }) else nil,
 		AddRejectedDialog = if #p1.rejectedInviteUserIds > 0 then reactModule.createElement(privateInviteAddRejectedDialogModule, {
 			rejectedUserIds = p1.rejectedInviteUserIds,

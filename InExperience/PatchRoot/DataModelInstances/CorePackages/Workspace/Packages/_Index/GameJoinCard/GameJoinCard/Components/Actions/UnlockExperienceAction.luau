@@ -21,7 +21,11 @@ return {
 			text = p1.localized[userCtaAction.UnlockExperience],
 			render = function(p2, p3)
 				-- upvalues: reactModule (copy), ageCheckUpsellCTAModule (copy)
-				return reactModule.createElement(ageCheckUpsellCTAModule, { onUnlockPressed = p2.onActivated, LayoutOrder = p3 })
+				return reactModule.createElement(ageCheckUpsellCTAModule, {
+					onUnlockPressed = p2.onActivated,
+					LayoutOrder = p3,
+					focusRef = p2.focusRef
+				})
 			end,
 			onActivated = function()
 				-- upvalues: useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), getTelemetryFieldsModule (copy), p1 (ref)

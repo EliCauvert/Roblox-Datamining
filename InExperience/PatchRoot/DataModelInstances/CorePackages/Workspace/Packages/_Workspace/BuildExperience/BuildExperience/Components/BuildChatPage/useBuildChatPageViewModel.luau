@@ -42,6 +42,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local realtimeMessageId = messageBusService:GetMessageId("Realtime", "appResume")
 local t = { allComplete = false, groups = {} }
 local t_1 = {
+	adUpsellCongratsAnchorIndex = nil,
 	adUpsellFreePromotionsRemaining = 0,
 	isAdUpsellCreatePending = false,
 	isAdCampaignSheetOpen = false,

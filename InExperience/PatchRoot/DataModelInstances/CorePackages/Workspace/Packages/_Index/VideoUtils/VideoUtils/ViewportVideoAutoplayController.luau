@@ -22,7 +22,6 @@ local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppHoverIdleAutoplayDuringScroll = require(parent.SharedFlags).FFlagLuaAppHoverIdleAutoplayDuringScroll
 local fFlagLuaAppTileVideoKeepPlayingOnScroll = require(parent.SharedFlags).FFlagLuaAppTileVideoKeepPlayingOnScroll
 local fFlagLuaAppVideoAutoplayFeedElection = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
-local fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate
 local fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor
 local fFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback
 local fFlagLuaAppVideoAutoplayElectOnNewCandidateModule = require(script.Parent.FFlagLuaAppVideoAutoplayElectOnNewCandidate)
@@ -738,7 +737,7 @@ function t_1:_selectUserIntentWinner()
 end
 
 function t_1:_selectCurrentIdleWinner(p1)
-	-- upvalues: collectionService (ref), userIntentModeAutoplayCandidateTagModule (ref), viewportAutoplayVideoKeyAttributeModule (ref), fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate (ref), getTileRowSpan (ref), fIntLuaAppOneByTwoTileVideoVisiblePercent (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), getIsInstanceVisibleModule (ref)
+	-- upvalues: collectionService (ref), userIntentModeAutoplayCandidateTagModule (ref), viewportAutoplayVideoKeyAttributeModule (ref), getTileRowSpan (ref), fIntLuaAppOneByTwoTileVideoVisiblePercent (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), getIsInstanceVisibleModule (ref)
 	local var8 = if self.feedScopeRef then self.feedScopeRef.current else nil
 	local viewPortBounds = self.viewPortBounds
 	
@@ -747,7 +746,7 @@ function t_1:_selectCurrentIdleWinner(p1)
 	end
 	for i, v in collectionService:GetTagged(userIntentModeAutoplayCandidateTagModule) do
 		if v:IsA("GuiObject") and v:GetAttribute(viewportAutoplayVideoKeyAttributeModule) == p1 and (not self.playedVideoKeys[p1] and v:IsDescendantOf(var8)) then
-			if getIsInstanceVisibleModule(v, viewPortBounds, if fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate and getTileRowSpan(v) == 2 and not self.preferTallestWinner then fIntLuaAppOneByTwoTileVideoVisiblePercent else fIntLuaAppGameTileVideoVisiblePercent) then
+			if getIsInstanceVisibleModule(v, viewPortBounds, if getTileRowSpan(v) == 2 and not self.preferTallestWinner then fIntLuaAppOneByTwoTileVideoVisiblePercent else fIntLuaAppGameTileVideoVisiblePercent) then
 				return v
 			end
 		end
@@ -766,7 +765,7 @@ function t_1:_isCandidateEligibleForSelection(p2, p3)
 end
 
 function t_1:_selectWinner(p2, p3, p4, p5, p6)
-	-- upvalues: luaAppVideoAutoplayMaxDistanceToWinnerLinePercent (ref), fFlagLuaAppVideoAutoplayFeedElection (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), collectionService (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), viewportAutoplayCandidateTagModule (ref), fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate (ref), getTileRowSpan (ref), fIntLuaAppOneByTwoTileVideoVisiblePercent (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), getIsInstanceVisibleModule (ref), discoveryEventErrorLogger (ref), reportCandidateOverlap (ref), computeRowAnchorOverrides (ref), resolveOneByOneHeight (ref), getReadingOrderPositions (ref), isTilePinnedLeft (ref)
+	-- upvalues: luaAppVideoAutoplayMaxDistanceToWinnerLinePercent (ref), fFlagLuaAppVideoAutoplayFeedElection (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), collectionService (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), viewportAutoplayCandidateTagModule (ref), getTileRowSpan (ref), fIntLuaAppOneByTwoTileVideoVisiblePercent (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), getIsInstanceVisibleModule (ref), discoveryEventErrorLogger (ref), reportCandidateOverlap (ref), computeRowAnchorOverrides (ref), resolveOneByOneHeight (ref), getReadingOrderPositions (ref), isTilePinnedLeft (ref)
 	local viewPortBounds = self.viewPortBounds
 	
 	if not viewPortBounds then
@@ -851,121 +850,110 @@ function t_1:_selectWinner(p2, p3, p4, p5, p6)
 		end
 		for i, v in var17 do
 			if v:IsA("GuiObject") and v:IsDescendantOf(current) and (not fFlagLuaAppOneByTwoHoverIdleAutoplay or self:_isCandidateEligibleForSelection(v, p6)) then
-				local var19
-				if fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate then
-					var19 = if getTileRowSpan(v) == 2 and not self.preferTallestWinner then fIntLuaAppOneByTwoTileVideoVisiblePercent else fIntLuaAppGameTileVideoVisiblePercent
+				if getIsInstanceVisibleModule(v, viewPortBounds, if getTileRowSpan(v) == 2 and not self.preferTallestWinner then fIntLuaAppOneByTwoTileVideoVisiblePercent else fIntLuaAppGameTileVideoVisiblePercent) then
+					local x = v.AbsolutePosition.X
 					
-					if getIsInstanceVisibleModule(v, viewPortBounds, var19) then
-						var19 = v.AbsolutePosition.X
+					if fFlagLuaAppVideoAutoplayFeedElection and self.preferTallestWinner then
+						local absValue = math.abs(math.clamp(var9, v.AbsolutePosition.Y, v.AbsolutePosition.Y + v.AbsoluteSize.Y) - var9)
+						local y = v.AbsoluteSize.Y
+						local absValue_1 = math.abs(v.AbsolutePosition.Y + x / maxValue * y - var9)
+						local var19 = false
 						
-						if fFlagLuaAppVideoAutoplayFeedElection and self.preferTallestWinner then
-							local absValue = math.abs(math.clamp(var9, v.AbsolutePosition.Y, v.AbsolutePosition.Y + v.AbsoluteSize.Y) - var9)
-							local y = v.AbsoluteSize.Y
-							local absValue_1 = math.abs(v.AbsolutePosition.Y + var19 / maxValue * y - var9)
-							local var20 = false
-							
-							if absValue < var12 then
-								var20 = true
-							elseif absValue == var12 then
-								if var15 < y then
-									var20 = true
-								elseif y == var15 then
-									if p4 then
-										local var21
-										if var19 < var13 then
-											var21 = true
-										elseif var19 == var13 and not var14 and var11 then
-											var14 = true
-											reportCandidateOverlap(var11, v, var19)
-										end
-										var21 = false
-										if var21 then
-											var20 = true
-										end
-									elseif absValue_1 < var16 then
+						if absValue < var12 then
+							var19 = true
+						elseif absValue == var12 then
+							if var15 < y then
+								var19 = true
+							elseif y == var15 then
+								if p4 then
+									local var20
+									if x < var13 then
 										var20 = true
-									elseif absValue_1 == var16 then
-										local var22
-										if var19 < var13 then
-											var22 = true
-										elseif var19 == var13 and not var14 and var11 then
-											var14 = true
-											reportCandidateOverlap(var11, v, var19)
-										end
-										var22 = false
-										if var22 then
-											var20 = true
-										end
+									elseif x == var13 and not var14 and var11 then
+										var14 = true
+										reportCandidateOverlap(var11, v, x)
+									end
+									var20 = false
+									if var20 then
+										var19 = true
+									end
+								elseif absValue_1 < var16 then
+									var19 = true
+								elseif absValue_1 == var16 then
+									local var21
+									if x < var13 then
+										var21 = true
+									elseif x == var13 and not var14 and var11 then
+										var14 = true
+										reportCandidateOverlap(var11, v, x)
+									end
+									var21 = false
+									if var21 then
+										var19 = true
 									end
 								end
 							end
-							if var20 then
-								var12 = absValue
-								var15 = y
-								var16 = absValue_1
-								var13 = var19
-								var11 = v
-							end
-						elseif fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then
-							local var23 = getTileRowSpan(v)
-							local var24 = var18[v]
-							
-							if var23 == 2 then
-								local var25 = getReadingOrderPositions(v, var19, maxValue, var23, resolveOneByOneHeight(v, var23))
-								
-								if var24 ~= nil then
-									var25[if isTilePinnedLeft(v) then 1 else var23] = var24
-								end
-								for i_1, v_1 in var25 do
-									considerFoldXCandidate(v, var19, v_1)
-								end
-							elseif var24 == nil then
-								considerFoldXCandidate(v, var19, v.AbsolutePosition.Y + var19 / maxValue * v.AbsoluteSize.Y)
-							else
-								considerFoldXCandidate(v, var19, var24)
-							end
-						else
-							considerFoldXCandidate(v, var19)
 						end
+						if var19 then
+							var12 = absValue
+							var15 = y
+							var16 = absValue_1
+							var13 = x
+							var11 = v
+						end
+					elseif fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then
+						local var22 = getTileRowSpan(v)
+						local var23 = var18[v]
+						
+						if var22 == 2 then
+							local var24 = getReadingOrderPositions(v, x, maxValue, var22, resolveOneByOneHeight(v, var22))
+							
+							if var23 ~= nil then
+								var24[if isTilePinnedLeft(v) then 1 else var22] = var23
+							end
+							for i_1, v_1 in var24 do
+								considerFoldXCandidate(v, x, v_1)
+							end
+						elseif var23 == nil then
+							considerFoldXCandidate(v, x, v.AbsolutePosition.Y + x / maxValue * v.AbsoluteSize.Y)
+						else
+							considerFoldXCandidate(v, x, var23)
+						end
+					else
+						considerFoldXCandidate(v, x)
 					end
-				elseif getIsInstanceVisibleModule(v, viewPortBounds, fIntLuaAppGameTileVideoVisiblePercent) then
 				end
 			end
 		end
 		return if var10 < var12 then nil else var11
 	else
 		for i, v in collectionService:GetTagged(if fFlagLuaAppOneByTwoHoverIdleAutoplay and p5 then p5 else viewportAutoplayCandidateTagModule) do
-			if v:IsA("GuiObject") and v:IsDescendantOf(current) and (not fFlagLuaAppOneByTwoHoverIdleAutoplay or self:_isCandidateEligibleForSelection(v, p6)) then
-				if fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate then
-					if getIsInstanceVisibleModule(v, viewPortBounds, if getTileRowSpan(v) == 2 then fIntLuaAppOneByTwoTileVideoVisiblePercent else fIntLuaAppGameTileVideoVisiblePercent) then
-						local absValue = math.abs(v.AbsolutePosition.Y + v.AbsolutePosition.X / maxValue * v.AbsoluteSize.Y - var9)
-						local x = v.AbsolutePosition.X
-						local var26 = false
-						
-						if absValue < var12 then
-							var26 = true
-						elseif absValue == var12 then
-							if x < var13 then
-								var26 = true
-							elseif x == var13 and not var14 and var11 then
-								var14 = true
-								discoveryEventErrorLogger.reportError("ViewportAutoplayCandidateOverlap", "Two visible autoplay candidates share identical reading-order position and AbsolutePosition.X", {
-									candidateA = var11.Name,
-									candidateB = v.Name,
-									absolutePositionX = x,
-									absolutePositionY = v.AbsolutePosition.Y,
-									absoluteSizeX = v.AbsoluteSize.X,
-									absoluteSizeY = v.AbsoluteSize.Y
-								})
-							end
-						end
-						if var26 then
-							var12 = absValue
-							var13 = x
-							var11 = v
-						end
+			if v:IsA("GuiObject") and v:IsDescendantOf(current) and (not fFlagLuaAppOneByTwoHoverIdleAutoplay or self:_isCandidateEligibleForSelection(v, p6)) and getIsInstanceVisibleModule(v, viewPortBounds, if getTileRowSpan(v) == 2 then fIntLuaAppOneByTwoTileVideoVisiblePercent else fIntLuaAppGameTileVideoVisiblePercent) then
+				local absValue = math.abs(v.AbsolutePosition.Y + v.AbsolutePosition.X / maxValue * v.AbsoluteSize.Y - var9)
+				local x = v.AbsolutePosition.X
+				local var25 = false
+				
+				if absValue < var12 then
+					var25 = true
+				elseif absValue == var12 then
+					if x < var13 then
+						var25 = true
+					elseif x == var13 and not var14 and var11 then
+						var14 = true
+						discoveryEventErrorLogger.reportError("ViewportAutoplayCandidateOverlap", "Two visible autoplay candidates share identical reading-order position and AbsolutePosition.X", {
+							candidateA = var11.Name,
+							candidateB = v.Name,
+							absolutePositionX = x,
+							absolutePositionY = v.AbsolutePosition.Y,
+							absoluteSizeX = v.AbsoluteSize.X,
+							absoluteSizeY = v.AbsoluteSize.Y
+						})
 					end
-				elseif getIsInstanceVisibleModule(v, viewPortBounds, fIntLuaAppGameTileVideoVisiblePercent) then
+				end
+				if var25 then
+					var12 = absValue
+					var13 = x
+					var11 = v
 				end
 			end
 		end

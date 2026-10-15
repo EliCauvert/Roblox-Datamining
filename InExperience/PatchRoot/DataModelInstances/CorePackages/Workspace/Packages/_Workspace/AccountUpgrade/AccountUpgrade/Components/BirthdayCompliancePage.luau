@@ -5,17 +5,20 @@ local reactModule = require(parent.React)
 local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSafeArea
 local authCommonModule = require(parent.AuthCommon)
 local authBackgroundContainer = authCommonModule.Components.AuthBackgroundContainer
+local useOpenDisclaimerLinks = authCommonModule.Hooks.useOpenDisclaimerLinks
 local isLoggedOutUserId = authCommonModule.Utils.isLoggedOutUserId
 local updateLoginEntryData = authCommonModule.Utils.updateLoginEntryData
 local user = authCommonModule.Thunks.User
 local authLocalStorageKeys = authCommonModule.Enums.AuthLocalStorageKeys
 local logoutReasonNames = authCommonModule.Enums.LogoutReasonNames
 local fFlagAccountUpgradeHideAccountOnSignOutModule = require(accountUpgrade.Flags.FFlagAccountUpgradeHideAccountOnSignOut)
+local fFlagAccountUpgradeOAuthDialogFitsContentModule = require(accountUpgrade.Flags.FFlagAccountUpgradeOAuthDialogFitsContent)
 local accountUpgradeAppShellFlowModule = require(accountUpgrade.AppShell.AccountUpgradeAppShellFlow)
 local accountUpgradeFlowModule = require(accountUpgrade.AccountUpgradeFlow)
 local accountUpgradePageModule = require(accountUpgrade.MobilePage.AccountUpgradePage)
 local fFlagAccountUpgradeFullPageOnPhoneModule = require(accountUpgrade.MobilePage.FFlagAccountUpgradeFullPageOnPhone)
 local useMobilePageModule = require(accountUpgrade.MobilePage.useMobilePage)
+local _ = require(accountUpgrade.Components.useAccountUpgradeViewModel)
 local oAuth = accountUpgradeFlowModule.OAuth
 local roactUtilsModule = require(parent.RoactUtils)
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
@@ -30,7 +33,7 @@ local function renderLandingArt()
 end
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useRoactService (ref), roactServiceTagsModule (ref), useSelector (ref), reactModule (ref), useStore (ref), fFlagAccountUpgradeHideAccountOnSignOutModule (ref), user (ref), logoutReasonNames (ref), updateLoginEntryData (ref), appStorageService (ref), authLocalStorageKeys (ref), isLoggedOutUserId (ref), fFlagAccountUpgradeFullPageOnPhoneModule (ref), useMobilePageModule (ref), accountUpgradePageModule (ref), oAuth (ref), fullscreenPageWithSafeArea (ref), renderLandingArt (ref), accountUpgradeAppShellFlowModule (ref)
+	-- upvalues: useDispatch (ref), useRoactService (ref), roactServiceTagsModule (ref), useSelector (ref), reactModule (ref), useStore (ref), fFlagAccountUpgradeHideAccountOnSignOutModule (ref), user (ref), logoutReasonNames (ref), updateLoginEntryData (ref), appStorageService (ref), authLocalStorageKeys (ref), fFlagAccountUpgradeOAuthDialogFitsContentModule (ref), useOpenDisclaimerLinks (ref), isLoggedOutUserId (ref), fFlagAccountUpgradeFullPageOnPhoneModule (ref), useMobilePageModule (ref), accountUpgradePageModule (ref), oAuth (ref), fullscreenPageWithSafeArea (ref), renderLandingArt (ref), accountUpgradeAppShellFlowModule (ref)
 	local var1 = useDispatch()
 	local var2 = useRoactService(roactServiceTagsModule.RoactNetworking)
 	local var3 = useRoactService(roactServiceTagsModule.AppGuiService)
@@ -75,6 +78,20 @@ return function(p1)
 		var3,
 		var7
 	})
+	local var9 = nil
+	
+	if fFlagAccountUpgradeOAuthDialogFitsContentModule then
+		local var10 = useOpenDisclaimerLinks()
+		var9 = reactModule.useCallback(function(p2)
+			-- upvalues: var10 (ref)
+			if p2 == "terms" then
+				var10.openTerms()
+				
+				return
+			end
+			var10.openPrivacy()
+		end, { var10 })
+	end
 	local setDarkThemeOverride = p1.setDarkThemeOverride
 	local clearThemeOverride = p1.clearThemeOverride
 	reactModule.useEffect(function()
@@ -94,6 +111,7 @@ return function(p1)
 		flow = oAuth,
 		currentUsername = var4,
 		onSignOut = var8,
+		onLegalLinkSelected = var9,
 		onComplete = var6,
 		onUnrecoverableFailure = var5
 	}) else reactModule.createElement(fullscreenPageWithSafeArea, {
@@ -105,6 +123,7 @@ return function(p1)
 			flow = oAuth,
 			currentUsername = var4,
 			onSignOut = var8,
+			onLegalLinkSelected = var9,
 			onComplete = var6,
 			onUnrecoverableFailure = var5
 		})

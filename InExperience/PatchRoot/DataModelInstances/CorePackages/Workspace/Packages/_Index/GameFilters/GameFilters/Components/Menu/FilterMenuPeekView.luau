@@ -16,10 +16,9 @@ local filterMenuOptionsModule = require(gameFilters.Components.Menu.FilterMenuOp
 local useTopBarHeightSelectorModule = require(gameFilters.Components.Menu.useTopBarHeightSelector)
 local getOptionContextTagModule = require(gameFilters.Analytics.getOptionContextTag)
 local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
-local fFlagLuaAppChartsActiveFilterChips = require(parent.SharedFlags).FFlagLuaAppChartsActiveFilterChips
 
 return function()
-	-- upvalues: useNavigationProps (ref), reactModule (ref), useNavigation (ref), peekViewState (ref), filterClickButtonNameModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), getOptionContextTagModule (ref), fFlagLuaAppChartsActiveFilterChips (ref), useTopBarHeightSelectorModule (ref), signal (ref), peekView (ref), filterMenuActionBarModule (ref), filterMenuHeaderModule (ref), filterMenuOptionsModule (ref)
+	-- upvalues: useNavigationProps (ref), reactModule (ref), useNavigation (ref), peekViewState (ref), filterClickButtonNameModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), getOptionContextTagModule (ref), useTopBarHeightSelectorModule (ref), signal (ref), peekView (ref), filterMenuActionBarModule (ref), filterMenuHeaderModule (ref), filterMenuOptionsModule (ref)
 	local var1 = useNavigationProps(function(_, p1)
 		return {
 			filter = p1.filter,
@@ -33,13 +32,13 @@ return function()
 	local var4 = reactModule.useRef(false)
 	local var5 = useNavigation()
 	local var6 = reactModule.useCallback(function(p1, _)
-		-- upvalues: peekViewState (copy), var5 (ref), var1 (ref), var4 (ref), filterClickButtonNameModule (copy), filter (ref), var2 (ref), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
+		-- upvalues: peekViewState (copy), var5 (ref), var1 (ref), var4 (ref), filterClickButtonNameModule (copy), filter (ref), var2 (ref), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy)
 		if p1 == peekViewState.Closed or p1 == peekViewState.Hidden then
 			var5.goBack()
 			var1.onFilterMenuClosed()
 			
 			if not var4.current then
-				var1.sendFilterClick(filterClickButtonNameModule.ClosePeekView, filter.selectedOptionId, var2, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(filter, filter.selectedOptionId) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(filter, var2) else nil, if fFlagLuaAppChartsActiveFilterChips then true else nil)
+				var1.sendFilterClick(filterClickButtonNameModule.ClosePeekView, filter.selectedOptionId, var2, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(filter, filter.selectedOptionId) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(filter, var2) else nil, true)
 			end
 		end
 	end, {
@@ -124,11 +123,11 @@ return function()
 				Size = UDim2.new(1, 0, 0, 84),
 				applyEnabled = var2 ~= filter.selectedOptionId,
 				onApply = reactModule.useCallback(function()
-					-- upvalues: var1 (ref), filter (ref), var2 (ref), var4 (ref), var27 (ref), filterClickButtonNameModule (copy), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
+					-- upvalues: var1 (ref), filter (ref), var2 (ref), var4 (ref), var27 (ref), filterClickButtonNameModule (copy), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy)
 					var1.onFilterApplied(filter.filterType, var2)
 					var4.current = true
 					var27()
-					var1.sendFilterClick(filterClickButtonNameModule.Apply, var2, filter.selectedOptionId, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(filter, var2) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(filter, filter.selectedOptionId) else nil, if fFlagLuaAppChartsActiveFilterChips then true else nil)
+					var1.sendFilterClick(filterClickButtonNameModule.Apply, var2, filter.selectedOptionId, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(filter, var2) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(filter, filter.selectedOptionId) else nil, true)
 				end, {
 					if fFlagLuaAppChartsFilterOptionTextTag then nil else filter.filterType,
 					if fFlagLuaAppChartsFilterOptionTextTag then nil else filter.selectedOptionId,

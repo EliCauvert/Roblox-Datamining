@@ -5,6 +5,7 @@ local parent = expChat.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
+local fFlagExpChatPresetTrayDismissAnalyticsModule = require(expChat.Flags.FFlagExpChatPresetTrayDismissAnalytics)
 local configModule = require(expChat.Config)
 local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
 local presetChatButtonModule = require(script.Parent.PresetChatButton)
@@ -15,7 +16,7 @@ local flyOutWidth = configModule.PresetTray.FlyOutWidth
 local flyOutHeight = configModule.PresetTray.FlyOutHeight
 
 return reactModule.memo(function(value)
-	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), userInputService (ref), guiService (ref), foundationModule (ref), presetChatButtonModule (ref), flyOutWidth (ref), flyOutHeight (ref), presetChatContainerModule (ref)
+	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), userInputService (ref), guiService (ref), fFlagExpChatPresetTrayDismissAnalyticsModule (ref), foundationModule (ref), presetChatButtonModule (ref), flyOutWidth (ref), flyOutHeight (ref), presetChatContainerModule (ref)
 	local var1 = getPresetChatStoreModule(false)
 	local var2 = signalsReactModule.useSignalState(var1.getIsTrayOpen)
 	local var3 = reactModule.useCallback(function()
@@ -23,7 +24,7 @@ return reactModule.memo(function(value)
 		setIsPresetTrayOpenModule(var1, false)
 	end, { var1 })
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), userInputService (copy), setIsPresetTrayOpenModule (copy), var1 (ref), guiService (copy)
+		-- upvalues: var2 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), userInputService (copy), setIsPresetTrayOpenModule (copy), var1 (ref), guiService (copy), fFlagExpChatPresetTrayDismissAnalyticsModule (copy)
 		if var2 then
 			local var4 = if fFlagExpChatPresetChatGamepadEnabledModule then userInputService.InputBegan:Connect(function(p1, _)
 				-- upvalues: setIsPresetTrayOpenModule (copy), var1 (copy)
@@ -32,7 +33,12 @@ return reactModule.memo(function(value)
 				end
 			end) else nil
 			local menuOpenedConnection = guiService.MenuOpened:Connect(function()
-				-- upvalues: var1 (copy)
+				-- upvalues: fFlagExpChatPresetTrayDismissAnalyticsModule (copy), setIsPresetTrayOpenModule (copy), var1 (copy)
+				if fFlagExpChatPresetTrayDismissAnalyticsModule then
+					setIsPresetTrayOpenModule(var1, false)
+					
+					return
+				end
 				var1.setIsTrayOpen(false)
 			end)
 			
@@ -80,7 +86,12 @@ return reactModule.memo(function(value)
 			onPressedOutside = var3
 		}, {
 			ContentWrapper = reactModule.createElement(foundationModule.View, { Size = UDim2.fromOffset(flyOutWidth, flyOutHeight) }, {
-				Container = reactModule.createElement(presetChatContainerModule, { compact = true, textChannel = value.textChannel })
+				Container = reactModule.createElement(presetChatContainerModule, {
+					compact = true,
+					textChannel = value.textChannel,
+					onSendChat = value.onSendChat,
+					onSendGlobalChat = value.onSendGlobalChat
+				})
 			})
 		})
 	})

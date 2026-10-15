@@ -41,7 +41,6 @@ local useNavigation = navigationModule.useNavigation
 local useSignalState = signalsReactModule.useSignalState
 local fFlagEnableArgus = sharedFlagsModule.FFlagEnableArgus
 local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
-local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local fFlagMomentsAvatarLookTryOn = sharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
@@ -62,7 +61,7 @@ local function PushedFeedSafeAreaProvider(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), fFlagEnableArgus (ref), createSignalTracker (ref), fFlagMomentsOptimisticProfilePending (ref), fFlagMomentsFlyoutCreateButtonModule (ref), useCreationEntryModule (ref), useUploadHostModule (ref), logCreateIntentModule (ref), funnelEventNames (ref), immersiveFeedKind (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), createUserMomentsFeedSourceModule (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), createRecommendationTelemetry (ref), logMomentsLayerExposure (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), moments (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), useNavigationFocus (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), useNavigation (ref), roactNavigationModule (ref), fFlagMomentsNavigationEventModule (ref), navigationDestinationTypeModule (ref), momentsImmersiveNavigationMenu (ref), momentsBackHeaderModule (ref), momentsFeedSurfaceModule (ref), PushedFeedSafeAreaProvider (ref), view (ref), constantsModule (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref), momentsHostShellModule (ref), fFlagMomentsAvatarLookTryOn (ref)
+	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), fFlagEnableArgus (ref), createSignalTracker (ref), fFlagMomentsOptimisticProfilePending (ref), fFlagMomentsFlyoutCreateButtonModule (ref), useCreationEntryModule (ref), useUploadHostModule (ref), logCreateIntentModule (ref), funnelEventNames (ref), immersiveFeedKind (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), createUserMomentsFeedSourceModule (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), createRecommendationTelemetry (ref), logMomentsLayerExposure (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), moments (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), useNavigationFocus (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref), reportModalCovering (ref), fFlagMomentsFlushDwellBeforeNavigationModule (ref), useNavigation (ref), roactNavigationModule (ref), fFlagMomentsNavigationEventModule (ref), navigationDestinationTypeModule (ref), momentsImmersiveNavigationMenu (ref), momentsBackHeaderModule (ref), momentsFeedSurfaceModule (ref), PushedFeedSafeAreaProvider (ref), view (ref), constantsModule (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref), momentsHostShellModule (ref), fFlagMomentsAvatarLookTryOn (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(nil)
 	
@@ -171,9 +170,9 @@ return reactModule.memo(function(p1)
 		end
 	end, { sessionSource, current })
 	local var17 = useNavigationFocus()
-	local getCovering = fFlagEnableReportingFlowForMomentsFeed and useSignalState(reportModalCovering.getCovering)
-	local var18 = var17 and (not useSignalState(feedPlaybackSuspension.getSuspended) and (not useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting) and (not getCovering and not var10)))
-	local var19 = reactModule.useCallback(function(p2)
+	local var18 = useSignalState(reportModalCovering.getCovering)
+	local var19 = var17 and (not useSignalState(feedPlaybackSuspension.getSuspended) and (not useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting) and (not var18 and not var10)))
+	local var20 = reactModule.useCallback(function(p2)
 		-- upvalues: var1 (ref)
 		local current = var1.current
 		
@@ -181,7 +180,7 @@ return reactModule.memo(function(p1)
 			current.flushView(p2)
 		end
 	end, {})
-	local var20 = reactModule.useCallback(function(p2)
+	local var21 = reactModule.useCallback(function(p2)
 		-- upvalues: var1 (ref)
 		local current = var1.current
 		
@@ -189,65 +188,65 @@ return reactModule.memo(function(p1)
 			current.refresh(p2)
 		end
 	end, {})
-	local var21 = if fFlagMomentsFlushDwellBeforeNavigationModule then useNavigation() else nil
+	local var22 = if fFlagMomentsFlushDwellBeforeNavigationModule then useNavigation() else nil
 	reactModule.useEffect(function()
-		-- upvalues: fFlagMomentsFlushDwellBeforeNavigationModule (copy), var21 (write), roactNavigationModule (copy), var19 (ref)
-		if fFlagMomentsFlushDwellBeforeNavigationModule and var21 ~= nil and var21.addListener ~= nil then
-			local var22 = var21.addListener(roactNavigationModule.Events.WillBlur, function()
-				-- upvalues: var19 (copy)
-				var19()
+		-- upvalues: fFlagMomentsFlushDwellBeforeNavigationModule (copy), var22 (write), roactNavigationModule (copy), var20 (ref)
+		if fFlagMomentsFlushDwellBeforeNavigationModule and var22 ~= nil and var22.addListener ~= nil then
+			local var23 = var22.addListener(roactNavigationModule.Events.WillBlur, function()
+				-- upvalues: var20 (copy)
+				var20()
 			end)
 			
 			return function()
-				-- upvalues: var22 (ref)
-				var22.remove()
+				-- upvalues: var23 (ref)
+				var23.remove()
 			end
 		end
 		return nil
-	end, { var21, var19 })
+	end, { var22, var20 })
 	local onBack = p1.onBack
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: fFlagMomentsFlushDwellBeforeNavigationModule (copy), var19 (ref), fFlagMomentsNavigationEventModule (copy), navigationDestinationTypeModule (copy), onBack (ref)
+	local var23 = reactModule.useCallback(function()
+		-- upvalues: fFlagMomentsFlushDwellBeforeNavigationModule (copy), var20 (ref), fFlagMomentsNavigationEventModule (copy), navigationDestinationTypeModule (copy), onBack (ref)
 		if fFlagMomentsFlushDwellBeforeNavigationModule then
-			var19(if fFlagMomentsNavigationEventModule then navigationDestinationTypeModule.Exit else nil)
+			var20(if fFlagMomentsNavigationEventModule then navigationDestinationTypeModule.Exit else nil)
 		end
 		onBack()
-	end, { onBack, var19 })
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var20 (ref), fFlagMomentsNavigationEventModule (copy), navigationDestinationTypeModule (copy)
-		fireAnalyticsEvent(eventNames.FeedHomeButtonPressed)
-		var20(if fFlagMomentsNavigationEventModule then navigationDestinationTypeModule.Trending else nil)
-	end, { var20 })
-	local openOwnMoments = p1.openOwnMoments
+	end, { onBack, var20 })
 	local var24 = reactModule.useCallback(function()
-		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), openOwnMoments (ref), fFlagMomentsFlushDwellBeforeNavigationModule (copy), var19 (ref), fFlagMomentsNavigationEventModule (copy), navigationDestinationTypeModule (copy)
+		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var21 (ref), fFlagMomentsNavigationEventModule (copy), navigationDestinationTypeModule (copy)
+		fireAnalyticsEvent(eventNames.FeedHomeButtonPressed)
+		var21(if fFlagMomentsNavigationEventModule then navigationDestinationTypeModule.Trending else nil)
+	end, { var21 })
+	local openOwnMoments = p1.openOwnMoments
+	local var25 = reactModule.useCallback(function()
+		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), openOwnMoments (ref), fFlagMomentsFlushDwellBeforeNavigationModule (copy), var20 (ref), fFlagMomentsNavigationEventModule (copy), navigationDestinationTypeModule (copy)
 		fireAnalyticsEvent(eventNames.MyCreationButtonPressed)
 		
 		if openOwnMoments ~= nil then
 			if fFlagMomentsFlushDwellBeforeNavigationModule then
-				var19(if fFlagMomentsNavigationEventModule then navigationDestinationTypeModule.MyMoments else nil)
+				var20(if fFlagMomentsNavigationEventModule then navigationDestinationTypeModule.MyMoments else nil)
 			end
 			openOwnMoments()
 		end
-	end, { openOwnMoments, var19 })
-	local var25 = momentsImmersiveNavigationMenu and feedKind == immersiveFeedKind.Trending
-	local var26 = reactModule.createElement(PushedFeedSafeAreaProvider, nil, reactModule.createElement(momentsFeedSurfaceModule, {
+	end, { openOwnMoments, var20 })
+	local var26 = momentsImmersiveNavigationMenu and feedKind == immersiveFeedKind.Trending
+	local var27 = reactModule.createElement(PushedFeedSafeAreaProvider, nil, reactModule.createElement(momentsFeedSurfaceModule, {
 		source = var15,
 		telemetry = var16,
-		inactiveDestination = if fFlagMomentsNavigationEventModule then if var10 then navigationDestinationTypeModule.Create elseif getCovering then navigationDestinationTypeModule.Report else nil else nil,
-		active = var17 and (not getCovering and not var10),
-		playbackActive = var18,
+		inactiveDestination = if fFlagMomentsNavigationEventModule then if var10 then navigationDestinationTypeModule.Create elseif var18 then navigationDestinationTypeModule.Report else nil else nil,
+		active = var17 and (not var18 and not var10),
+		playbackActive = var19,
 		initialIndex = initialIndex,
 		header = reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), momentsBackHeaderModule (copy), var22 (ref), var9 (ref), var8 (ref), var25 (ref), var23 (ref), var24 (ref)
+			-- upvalues: reactModule (copy), momentsBackHeaderModule (copy), var23 (ref), var9 (ref), var8 (ref), var26 (ref), var24 (ref), var25 (ref)
 			return reactModule.createElement(momentsBackHeaderModule, {
-				onBack = var22,
+				onBack = var23,
 				onCreatePressed = if var9 then var8 else nil,
-				onNavigateToTrending = if var25 then var23 else nil,
-				onNavigateToMyMoments = if var25 then var24 else nil
+				onNavigateToTrending = if var26 then var24 else nil,
+				onNavigateToMyMoments = if var26 then var25 else nil
 			})
 		end, {
-			var22, var9, var8, var25, var23, var24
+			var23, var9, var8, var26, var24, var25
 		}),
 		controllerRef = var1
 	}))
@@ -261,7 +260,7 @@ return reactModule.memo(function(p1)
 		openMomentCommentReport = p1.openMomentCommentReport,
 		openBlockUser = p1.openBlockUser
 	}, if var9 then reactModule.createElement(view, { tag = "size-full bg-surface-0" }, {
-		Feed = var26,
+		Feed = var27,
 		CreationFlowOverlay = if var10 then reactModule.createElement(view, {
 			tag = "size-full",
 			ZIndex = constantsModule.DisplayOrder.Modals
@@ -274,5 +273,5 @@ return reactModule.memo(function(p1)
 		}, {
 			Screen = reactModule.createElement(FTUXEducationScreenModule, { onClose = var5.onExitFtux })
 		}) else nil
-	}) else var26)
+	}) else var27)
 end)

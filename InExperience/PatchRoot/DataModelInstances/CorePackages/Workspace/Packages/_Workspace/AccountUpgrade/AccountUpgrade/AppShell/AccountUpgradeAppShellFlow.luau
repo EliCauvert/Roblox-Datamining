@@ -2,6 +2,7 @@
 local reactModule = require(accountUpgrade.Parent.React)
 local _ = require(accountUpgrade.AccountUpgradeFlow)
 local accountUpgradeContainerModule = require(accountUpgrade.Components.AccountUpgradeContainer)
+local _ = require(accountUpgrade.Components.useAccountUpgradeViewModel)
 local isAccountUpgradeErrorUnrecoverableModule = require(accountUpgrade.Utils.isAccountUpgradeErrorUnrecoverable)
 
 return function(p1)
@@ -15,6 +16,7 @@ return function(p1)
 		hasBackdrop = p1.hasBackdrop,
 		onClose = p1.onDismiss,
 		onSignOut = p1.onSignOut,
+		onLegalLinkSelected = p1.onLegalLinkSelected,
 		onSignUpComplete = reactModule.useCallback(function(p2)
 			-- upvalues: onComplete (ref)
 			if p2.isSuccess then

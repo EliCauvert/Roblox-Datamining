@@ -113,6 +113,7 @@ return {
 	FramerateCaps = if game:DefineFastFlag("MoreFramerateOptions", false) then {
 		60, 120, 144, 160, 165, 180, 200, 240
 	} else { 60, 120, 144, 240 },
+	FramerateCapsIOS = { 60, 120 },
 	OnAppRatingPromptEventDescriptor = if fFlagEnableGameLeftMessage then {
 		mid = messageBus.getMessageId("AppRatingPrompt", "leftGame"),
 		validateParams = tModule.strictInterface({ gameTime = tModule.number })

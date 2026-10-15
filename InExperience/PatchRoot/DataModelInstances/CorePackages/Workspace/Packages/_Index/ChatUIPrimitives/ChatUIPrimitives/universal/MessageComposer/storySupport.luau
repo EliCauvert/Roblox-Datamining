@@ -3,27 +3,27 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(script.Parent.MessageComposer)
 local _ = require(script.Parent.Parent.Types)
+local plainTextContentModelModule = require(script.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel)
+local presetContentModelModule = require(script.Parent.Parent.ContentKinds.Preset.PresetContentModel)
 local t = {
-	noopDelivery = {
-		sendMessageDraft = function(_)
-			return { accepted = false }
-		end,
-		onMessageDeliveryReceipt = function(_) end
-	},
+	noopDelivery = { sendMessageDraft = function(_) end },
 	draftLabel = function(p1)
+		-- upvalues: plainTextContentModelModule (ref), presetContentModelModule (ref)
 		local t = {}
 		
 		for i, v in p1.contents do
-			local plainText = v.plainText
+			local draft = plainTextContentModelModule.getDraft(v)
 			
-			if plainText then
-				table.insert(t, `plainText "{plainText.text}"`)
+			if draft then
+				table.insert(t, `plainText "{draft.text}"`)
+			end
+			local draft_1 = presetContentModelModule.getDraft(v)
+			
+			if draft_1 then
+				table.insert(t, `preset "{draft_1.presetId}" "{draft_1.displayText}"`)
 			end
 		end
-		return if #t == 0 then "(no plainText content)" else table.concat(t, ", ")
-	end,
-	receiptLabel = function(p2)
-		return if p2.accepted then `Last receipt: accepted {p2.messageId}` else "Last receipt: rejected"
+		return if #t == 0 then "(no content)" else table.concat(t, ", ")
 	end,
 	useEventLog = function()
 		-- upvalues: reactModule (ref)
@@ -42,41 +42,20 @@ local t = {
 	end
 }
 
-function t.useDeliveryLog(p2)
+function t.useDeliveryLog()
 	-- upvalues: t (ref), reactModule (ref)
 	local var1, var2 = t.useEventLog()
-	local var3, var4 = reactModule.useState("Last receipt: none yet")
-	local var5 = reactModule.useRef(1)
-	local var6 = reactModule.useCallback(function(p3)
-		-- upvalues: t (copy), p2 (ref), var5 (ref), var2 (ref)
-		local var7 = t.draftLabel(p3)
-		
-		if p2 then
-			local var8 = tostring(var5.current)
-			var5.current += 1
-			var2(`accepted {var8}: {var7}`)
-			
-			return { accepted = true, messageId = var8 }
-		end
-		var2(`rejected: {var7}`)
-		
-		return { accepted = false }
-	end, { p2, var2 })
-	local var7 = reactModule.useCallback(function(p3)
-		-- upvalues: var4 (ref), t (copy)
-		var4(t.receiptLabel(p3))
-	end, {})
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: var2 (ref), t (copy)
+		var2(`sent: {t.draftLabel(p2)}`)
+	end, { var2 })
 	
 	return {
 		messageDelivery = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), var7 (ref)
-			return {
-				sendMessageDraft = var6,
-				onMessageDeliveryReceipt = var7
-			}
-		end, { var6, var7 }),
-		entries = var1,
-		lastReceipt = var3
+			-- upvalues: var3 (ref)
+			return { sendMessageDraft = var3 }
+		end, { var3 }),
+		entries = var1
 	}
 end
 

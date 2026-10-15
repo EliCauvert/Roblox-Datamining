@@ -113,7 +113,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} jaar
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Dag
 Authentication.SignUp.Label.EnterYourEmail,Voer je e-mailadres in
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Je moet ouder zijn om dit spel te spelen
 Authentication.SignUp.Label.ErrorsWithPassword,Er zijn fouten in het wachtwoord.
 Authentication.SignUp.Label.ErrorsWithUsername,Er zijn fouten in de gebruikersnaam.
 Authentication.SignUp.Label.ExitModalSubtitle,"Je account is bijna gemaakt. Als je stopt, verlies je je voortgang."
@@ -253,6 +252,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation bevat Curve
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation bevat meer dan {maxAllowed} MarkerCurve(s). Zorg ervoor dat er niet meer dan {maxAllowed} MarkerCurve-descendant(s) zijn.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation bevat een MarkerCurve met {count} markers. {maxAllowed} is het maximum per MarkerCurve. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation bevat een onverwacht child: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Asset {AssetId} ({InstanceFullName}.{FieldName}) is niet gepubliceerd. Publiceer de asset en probeer het opnieuw.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische hoofden op de marktplaats moeten de juiste cage hebben, zodat de oog- en mondhoekpunten op de cage overeenkomen met de mesh-hoekpunten. Verbeter je cage en de uitlijning ervan met de mesh."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Kan de glimlachuitdrukking van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor de mond aan zodat ze overeenkomen met de positie van de mond op het hoofd en zorg dat deze een glimlachuitdrukking kan weergeven.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Kan de uitdrukking voor het sluiten van het linkeroog van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor het linkeroog aan zodat ze overeenkomen met de positie van het linkeroog op het hoofd en zorg dat het oog kan worden gesloten.
@@ -265,7 +265,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissief gebied bove
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissivePercentage}%, moet {maxEmissivePercentage}% of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissief gebied overschreden.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissiveArea}, moet {maxEmissiveArea} of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Dit item maakt gebruik van emissieve maps die alleen beschikbaar zijn voor makers in het Trusted Creator-programma. Verwijder alle inhoud van emissieve maps of word lid van het programma voordat je gaat uploaden.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Er ontbreekt een geldige maximale translatiewaarde van het onderdeel in de gepubliceerde animatie. Publiceer de animatie opnieuw.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Er ontbreekt een geldige UGC-emotemarker in de gepubliceerde animatie. Publiceer de animatie opnieuw.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,De maximale translatie van het onderdeel kon niet worden berekend op basis van de gepubliceerde animatiegegevens. Publiceer de animatie opnieuw.
@@ -273,6 +272,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"De ge
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Het hoofd moet boven UpperTorso worden geplaatst. Het middelpunt van het hoofd bevindt zich onder de bovenkant van de romp, wat aangeeft dat de hoofdmesh is ingeklapt of verkeerd is geplaatst."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,De eigenschap InternalOverrideFACSData op FaceControls moet leeg zijn bij het uploaden.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Er is gedetecteerd dat FACS je hoofd vergroot tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamische hoofden mogen maximaal {maxFacsJointCount} FACS-joints hebben, maar dit hoofd heeft er {actualJointCount}. Verminder het aantal FACS-joints en probeer het opnieuw."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Er is gedetecteerd dat FACS je hoofd verkleint tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Het uploadformaat komt niet overeen met de verwachte mappenstructuur. Probeer het opnieuw of dien een bugrapport in.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Bot {bonePath} is te ver buiten het mesh-onderdeel {partName}, plaats het dichter bij de grens van de mesh-onderdeelgrootte."
@@ -910,6 +910,9 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,Vaste camera in
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,Weergave en spelbesturing
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR-vignette ingeschakeld
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,Volume van spraakchat
+CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,Modus spraakgestuurd typen
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,Automatisch verzenden
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,Handmatig verzenden
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,VR-SPELBESTURING
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,Er is een fout opgetreden. Probeer het opnieuw.
@@ -2362,11 +2365,8 @@ Feature.Build.Message.NoSearchResultsFound,Geen zoekresultaten gevonden
 Feature.Build.Message.NoVersionHistory,Nog geen versiegeschiedenis.
 Feature.Build.Message.OneTaskCompleted,1 taak voltooid
 Feature.Build.Message.OutOfBuildUsage,Je hebt geen Build-tegoed meer. Bekijk je opties om Robux te gebruiken om content te blijven maken.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Je kon geen uitnodigingslink voor de chat verzenden naar de volgende gebruikers:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Gebruik de knop Delen om een link te ontvangen.
 Feature.Build.Message.PlaytesterRequestFailed,We konden je aanvraag niet voltooien. Probeer het opnieuw.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} van {MAX_INVITES} vroege testers uitgenodigd
-Feature.Build.Message.PrivatePlaytestInvite,{username} heeft je uitgenodigd om een vroege tester te zijn voor {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Je spel is gepubliceerd, maar kon niet openbaar worden gemaakt. Probeer het nog een keer."
 Feature.Build.Message.PublishExpandAudience,Publiceer om je doelgroep te vergroten
 Feature.Build.Message.PublishNotReverted,Je publicatie is niet teruggedraaid. Probeer het nog een keer.
@@ -2435,7 +2435,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Beheerde prijzen inschakelen?
 Feature.Build.Title.NoMonetizationProducts,Begin met verdienen in je spel
 Feature.Build.Title.NoRobuxForUsage,Geen Robux meer over voor Build-tegoed
 Feature.Build.Title.PickCampaign,Kies een lengte
-Feature.Build.Title.PlaytestInviteSendFailed,Kan uitnodigingen niet verzenden
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Kon de volgende gebruikers niet toevoegen:
 Feature.Build.Title.PlaytestersOnlyPlay,Alleen playtesters kunnen spelen
@@ -3571,6 +3570,7 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,"Je s
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,"Je kunt de chat gedurende de komende {number} minuten niet gebruiken omdat een of meer van je berichten in strijd waren met de regels. Als je de regels opnieuw overtreedt, kun je worden verbannen."
 Feature.InExperienceIntervention.Description.Disclaimer,Hebben we een fout gemaakt? {startLink}Laat het ons weten{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,Je feedback helpt om onze systemen te verbeteren.
+Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,Gebruik vriendelijke woorden en houd je community veilig.
 Feature.InExperienceIntervention.Description.LoseAccess,"Als dit opnieuw gebeurt, kun je de toegang tot je account verliezen."
 Feature.InExperienceIntervention.Description.MayLoseAccess,"Als je opnieuw de regels overtreedt, kun je de toegang tot je account verliezen."
 Feature.InExperienceIntervention.Description.Mistake,Hebben we een fout gemaakt?
@@ -3590,6 +3590,7 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,Deel geen 
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,Chat is opgeschorst gedurende {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,We zullen ernaar kijken
 Feature.InExperienceIntervention.Heading.TextChatSuspension,Schorsing van tekstchat
+Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,Spraakgestuurd typen kan worden uitgeschakeld als je de regels overtreedt
 Feature.InExperienceIntervention.Label.Complete,Afgelopen
 Feature.InExperienceIntervention.Label.EndsOn,Eindigt op:
 Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
@@ -3784,6 +3785,8 @@ Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Tooltip.Creation,Iedereen in de ervaring kan je momenten zien.
+Feature.Moments.Tooltip.ShareFirstMomentBody,Maak een moment van je opnames
+Feature.Moments.Tooltip.ShareFirstMomentTitle,Je eerste moment delen
 Feature.NativeAds.Label.Ad,Advertentie
 Feature.NotApproved.Action.ReportMistake,Een fout melden
 Feature.NotApproved.Label.AbuseType.Advertising,Adverteren

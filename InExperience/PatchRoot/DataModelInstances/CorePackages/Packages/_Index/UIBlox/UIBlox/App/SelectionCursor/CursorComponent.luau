@@ -8,15 +8,15 @@ local useStyleModule = require(parent.Core.Style.useStyle)
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useStyleModule (ref), reactModule (ref), eventConnection (ref), runService (ref)
 	local var1 = useStyleModule()
-	local selectionCursor = var1.Tokens.Component.SelectionCursor
+	local selection = var1.Tokens.Color.Selection
 	local reducedMotion = var1.Settings.ReducedMotion
 	local colorSequence = ColorSequence.new({
-		ColorSequenceKeypoint.new(0, selectionCursor.Gradient.Start.Color3),
-		ColorSequenceKeypoint.new(1, selectionCursor.Gradient.End.Color3)
+		ColorSequenceKeypoint.new(0, selection.Start.Color3),
+		ColorSequenceKeypoint.new(1, selection.End.Color3)
 	})
 	local numberSequence = NumberSequence.new({
-		NumberSequenceKeypoint.new(0, selectionCursor.Gradient.Start.Transparency),
-		NumberSequenceKeypoint.new(1, selectionCursor.Gradient.End.Transparency)
+		NumberSequenceKeypoint.new(0, selection.Start.Transparency),
+		NumberSequenceKeypoint.new(1, selection.End.Transparency)
 	})
 	local var2, var3 = reactModule.useBinding(0)
 	local var4, var5 = reactModule.useBinding(colorSequence)

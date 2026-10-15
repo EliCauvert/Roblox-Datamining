@@ -130,7 +130,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} añ
 Authentication.SignUp.Label.Continue,Continuar
 Authentication.SignUp.Label.Day,Día
 Authentication.SignUp.Label.EnterYourEmail,Ingresa tu correo electrónico
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Debes ser mayor para jugar este juego
 Authentication.SignUp.Label.ErrorsWithPassword,Hay errores en la contraseña.
 Authentication.SignUp.Label.ErrorsWithUsername,Hay errores en el nombre de usuario.
 Authentication.SignUp.Label.ExitModalSubtitle,"Tu cuenta casi está lista. Si te vas, perderás tu progreso."
@@ -282,7 +281,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Área emisiva por en
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} es demasiado emisivo. El área emisiva × la intensidad supera el límite (actualmente {emissivePercentage}%, debe ser {maxEmissivePercentage}% o menos). Reduce el área brillante o disminuye su EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Área emisiva excedida.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} es demasiado emisivo. El área emisiva × la intensidad supera el límite (actualmente {emissiveArea}, debe ser {maxEmissiveArea} o menos). Reduce el área brillante o disminuye su EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Este recurso utiliza mapas emisivos que solo están disponibles para los creadores del Programa de creadores de confianza. Elimina todo el contenido de mapas emisivos o únete al programa antes de subirlo.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,A la animación publicada le falta un valor válido de traslación máxima de la parte. Vuelve a publicar la animación.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,A la animación publicada le falta un marcador de emote UGC válido. Vuelve a publicar la animación.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,No se pudo calcular la traslación máxima de la parte a partir de los datos de la animación publicada. Vuelve a publicar la animación.
@@ -290,6 +288,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"La an
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"La cabeza debe colocarse por encima de la parte superior del torso. El centro de la cabeza está por debajo de la parte superior del torso, lo que indica que la malla de la cabeza está colapsada o mal colocada."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La propiedad InternalOverrideFACSData en FaceControls debe estar vacía al cargar.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Se detectó que FACs agrandó tu cabeza al {modPercent}%, pero alterar la cabeza va en contra de la política del mercado para las animaciones faciales."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Las cabezas dinámicas pueden tener un máximo de {maxFacsJointCount} articulaciones del Sistema de Codificación Facial, pero esta cabeza tiene {actualJointCount}. Reduce el número de articulaciones del Sistema de Codificación Facial e inténtalo de nuevo."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Se detectó que FACs redujo tu cabeza al {modPercent}%, pero alterar la cabeza va en contra de la política del mercado para las animaciones faciales."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,El formato de carga no coincide con la estructura de carpetas esperada. Inténtalo de nuevo o envía un informe de error.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"La articulación {bonePath} está demasiado alejada de la MeshPart {partName}, colócalas más cerca del límite del tamaño de la MeshPart."
@@ -2027,6 +2026,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,Consigue más jugadores
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Logra que los jugadores regresen
 Feature.Build.Analytics.Goal.Locked.EarnRobux,Gana Robux en tu juego para ver estas estadísticas.
 Feature.Build.Analytics.Goal.Locked.FirstImpression,Consigue que tu primer jugador vea estas estadísticas.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Consigue que más jugadores vean estas estadísticas.
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Consigue que tu primer jugador recurrente vea estas estadísticas.
 Feature.Build.Analytics.KeyStats,Estadísticas clave
 Feature.Build.Analytics.LastMonth,Último mes
@@ -2380,11 +2380,8 @@ Feature.Build.Message.NoSearchResultsFound,No se encontraron resultados de búsq
 Feature.Build.Message.NoVersionHistory,Aún no hay historial de versiones.
 Feature.Build.Message.OneTaskCompleted,1 tarea completada
 Feature.Build.Message.OutOfBuildUsage,Ya no puedes usar la compilación. Consulta tus opciones para usar Robux y seguir creando.
-Feature.Build.Message.PlaytestInviteSendFailedBody,No pudiste enviar un enlace de invitación de chat a los siguientes usuarios:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Usa el botón Compartir para obtener un enlace.
 Feature.Build.Message.PlaytesterRequestFailed,No pudimos completar tu solicitud. Inténtalo de nuevo.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} de {MAX_INVITES} evaluadores de juego invitados
-Feature.Build.Message.PrivatePlaytestInvite,{username} te invitó a ser un evaluador de juego para {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Tu juego se publicó, pero no se pudo hacer público. Inténtalo de nuevo."
 Feature.Build.Message.PublishExpandAudience,Publica para ampliar tu público
 Feature.Build.Message.PublishNotReverted,Tu publicación no se revirtió. Inténtalo de nuevo.
@@ -2453,7 +2450,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,¿Quieres activar Precios gest
 Feature.Build.Title.NoMonetizationProducts,Comienza a ganar en tu juego
 Feature.Build.Title.NoRobuxForUsage,No quedan Robux para el uso de la compilación
 Feature.Build.Title.PickCampaign,Elige una duración
-Feature.Build.Title.PlaytestInviteSendFailed,No se pudieron enviar las invitaciones
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,No se pudieron añadir los siguientes usuarios:
 Feature.Build.Title.PlaytestersOnlyPlay,Solo los evaluadores de juego pueden jugar
@@ -3791,6 +3787,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,Espera un minuto y vuelve a intentar
 Feature.Moments.Label.VoiceModerationError,Tu script debe seguir las normas de seguridad
 Feature.Moments.Label.VoicePlaceholder,Escribe el guion de tu voz en off. Límite de caracteres: {maxCount}
 Feature.Moments.Label.VoiceTimeoutBody,Se agotó el tiempo de espera para la generación de la voz en off.
+Feature.Moments.Label.VoiceTooManyNumbersError,El script contiene demasiados números
 Feature.Moments.Label.WriteComment,Escribe un comentario
 Feature.Moments.Title.Comments,Comentarios
 Feature.Moments.Title.CommentsWithCappedCount,Comentarios ({count}+)

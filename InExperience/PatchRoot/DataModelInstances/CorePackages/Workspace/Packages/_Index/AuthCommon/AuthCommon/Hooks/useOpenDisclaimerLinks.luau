@@ -65,23 +65,24 @@ return function(p1)
 	})
 	local var7 = if p1 then p1.ctx else nil
 	local var8 = if p1 then p1.state else nil
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), authFormInteraction (copy), eventStreamConstants (copy), var8 (ref), var6 (ref), urlBuilder (copy)
+	local var9 = if p1 then p1.origin else nil
+	local var10 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), authFormInteraction (copy), eventStreamConstants (copy), var8 (ref), var9 (ref), var6 (ref), urlBuilder (copy)
 		if var7 then
-			authFormInteraction(var7, eventStreamConstants.Field.TermsOfService, var8)
+			authFormInteraction(var7, eventStreamConstants.Field.TermsOfService, var8, var9)
 		end
 		var6(urlBuilder.static.about.terms())
-	end, { var6, var7, var8 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), authFormInteraction (copy), eventStreamConstants (copy), var8 (ref), var6 (ref), urlBuilder (copy)
+	end, { var6, var7, var8, var9 })
+	local var11 = reactModule.useCallback(function()
+		-- upvalues: var7 (ref), authFormInteraction (copy), eventStreamConstants (copy), var8 (ref), var9 (ref), var6 (ref), urlBuilder (copy)
 		if var7 then
-			authFormInteraction(var7, eventStreamConstants.Field.PrivacyPolicy, var8)
+			authFormInteraction(var7, eventStreamConstants.Field.PrivacyPolicy, var8, var9)
 		end
 		var6(urlBuilder.static.about.privacy())
-	end, { var6, var7, var8 })
+	end, { var6, var7, var8, var9 })
 	
 	return reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var10 (ref), var6 (ref)
-		return { openTerms = var9, openPrivacy = var10, openLink = var6 }
-	end, { var9, var10, var6 })
+		-- upvalues: var10 (ref), var11 (ref), var6 (ref)
+		return { openTerms = var10, openPrivacy = var11, openLink = var6 }
+	end, { var10, var11, var6 })
 end

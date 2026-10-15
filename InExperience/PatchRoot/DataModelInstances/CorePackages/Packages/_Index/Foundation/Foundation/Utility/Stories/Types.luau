@@ -2,6 +2,7 @@
 local _ = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Enums.Device)
 local _ = require(foundation.Providers.Preferences.PreferencesProvider)
+local _ = require(foundation.Enums.ThemeName)
 
 return {
 	toDeveloperStorybookStoryProps = function(p1)

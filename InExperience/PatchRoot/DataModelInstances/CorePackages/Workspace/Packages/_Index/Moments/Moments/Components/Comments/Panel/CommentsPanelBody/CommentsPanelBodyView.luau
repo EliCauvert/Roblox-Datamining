@@ -2,13 +2,14 @@
 local parent = moments.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local fFlagMomentsCommentsRevealAfterMeasureModule = require(moments.Flags.FFlagMomentsCommentsRevealAfterMeasure)
 local commentsListContainerModule = require(moments.Components.Comments.List.CommentsList.CommentsListContainer)
 local commentsPanelStateViewModule = require(script.Parent.Parent.CommentsPanelStateView)
 local commentsReadOnlyNoticeViewModule = require(script.Parent.Parent.CommentsReadOnlyNoticeView)
 local _ = require(script.Parent.Parent.getCommentsPanelState)
 
 return function(p1)
-	-- upvalues: reactModule (ref), commentsListContainerModule (ref), commentsPanelStateViewModule (ref), foundationModule (ref), commentsReadOnlyNoticeViewModule (ref)
+	-- upvalues: reactModule (ref), commentsListContainerModule (ref), fFlagMomentsCommentsRevealAfterMeasureModule (ref), commentsPanelStateViewModule (ref), foundationModule (ref), commentsReadOnlyNoticeViewModule (ref)
 	local var1
 	local feedItemId = p1.feedItemId
 	local var2 = p1.contentState == "list" and feedItemId ~= nil
@@ -21,7 +22,8 @@ return function(p1)
 		var1 = reactModule.createElement(commentsListContainerModule, {
 			feedItemId = feedItemId,
 			sessionId = p1.sessionId,
-			isReadOnly = p1.isReadOnly
+			isReadOnly = p1.isReadOnly,
+			onRevealed = if fFlagMomentsCommentsRevealAfterMeasureModule then p1.onListRevealed else nil
 		})
 	else
 		var1 = reactModule.createElement(commentsPanelStateViewModule, {
@@ -52,7 +54,16 @@ return function(p1)
 				["auto-y"] = not var2 and not isLoading,
 				fill = not var2
 			}
-		}, { [var3] = var1 }),
+		}, {
+			[var3] = var1,
+			RevealPlaceholders = if fFlagMomentsCommentsRevealAfterMeasureModule and var2 and not p1.isListRevealed then reactModule.createElement(foundationModule.View, {
+				ZIndex = 2,
+				tag = "size-full bg-surface-100",
+				testId = "moments-comments-panel-reveal-placeholders"
+			}, {
+				Placeholders = reactModule.createElement(commentsPanelStateViewModule, { state = "loading" })
+			}) else nil
+		}),
 		ReadOnly = if p1.isReadOnly and not var2 then reactModule.createElement(foundationModule.View, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y",

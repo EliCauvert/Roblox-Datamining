@@ -2,9 +2,11 @@
 local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local impressionsTagUtility = require(parent.Impressions).ImpressionsTagUtility
+local combineReactTags = require(parent.RoactUtils).combineReactTags
+local fFlagSduiOptionSelectorAnchorTag = require(parent.SharedFlags).FFlagSduiOptionSelectorAnchorTag
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), impressionsTagUtility (ref), cryoModule (ref)
+	-- upvalues: reactModule (ref), impressionsTagUtility (ref), cryoModule (ref), fFlagSduiOptionSelectorAnchorTag (ref), combineReactTags (ref)
 	local layoutOrder = p1.layoutOrder
 	local size = p1.size
 	local position = p1.position
@@ -64,6 +66,6 @@ return reactModule.memo(function(p1)
 		BackgroundTransparency = 1,
 		AutomaticSize = automaticSize,
 		[reactModule.Change.AbsoluteSize] = if p1.onItemSizeChanged then var3 else nil,
-		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil
+		[reactModule.Tag] = if fFlagSduiOptionSelectorAnchorTag then combineReactTags(p1.tag, if p1.testId then `data-testid={p1.testId}` else nil) elseif p1.testId then `data-testid={p1.testId}` else nil
 	}, var4)
 end)

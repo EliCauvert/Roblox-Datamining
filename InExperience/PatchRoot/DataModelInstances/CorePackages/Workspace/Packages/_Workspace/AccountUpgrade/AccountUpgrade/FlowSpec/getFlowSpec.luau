@@ -1,7 +1,6 @@
 ﻿local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
 local accountUpgradeFieldModule = require(accountUpgrade.AccountUpgradeField)
 local accountUpgradeFlowModule = require(accountUpgrade.AccountUpgradeFlow)
-local fIntAccountUpgradeMinimumAgeModule = require(accountUpgrade.Flags.FIntAccountUpgradeMinimumAge)
 local t = {
 	[accountUpgradeFlowModule.Pioneer] = {
 		canDismiss = true,
@@ -18,8 +17,7 @@ local t = {
 		optionalFields = {
 			accountUpgradeFieldModule.Email,
 			accountUpgradeFieldModule.Gender
-		},
-		minimumAge = fIntAccountUpgradeMinimumAgeModule
+		}
 	},
 	[accountUpgradeFlowModule.PioneerU13] = {
 		canDismiss = false,
@@ -41,12 +39,13 @@ local t = {
 		titleTextKey = "Authentication.SignUp.Header.OneLastThing",
 		subtitleTextKey = "Authentication.SignUp.Subtitle.AddYourBirthday",
 		submitTextKey = "Authentication.SignUp.Action.CreateAccountSentenceCase",
+		legalTextKey = "Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount",
+		fitsDialogToContent = true,
 		requiredFields = {
 			accountUpgradeFieldModule.Birthday,
 			accountUpgradeFieldModule.Username
 		},
-		optionalFields = { accountUpgradeFieldModule.Gender },
-		minimumAge = fIntAccountUpgradeMinimumAgeModule
+		optionalFields = { accountUpgradeFieldModule.Gender }
 	},
 	[accountUpgradeFlowModule.Signup] = {
 		canDismiss = true,

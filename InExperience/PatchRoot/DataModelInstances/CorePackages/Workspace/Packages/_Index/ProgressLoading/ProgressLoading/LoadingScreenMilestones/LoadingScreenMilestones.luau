@@ -10,7 +10,8 @@ local milestone = constantsModule.Milestone
 local var1 = nil
 
 local function _(p1)
-	return (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
+	-- upvalues: constantsModule (ref)
+	return (if p1.host == constantsModule.Host.DeferredJoin then "DeferredJoin_" else "") .. (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
 end
 
 return {
@@ -23,7 +24,7 @@ return {
 		local t = nil
 		local var3 = nil
 		local t_1 = {}
-		local text = (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
+		local text = (if p1.host == constantsModule.Host.DeferredJoin then "DeferredJoin_" else "") .. (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
 		local t_2 = {
 			category = constantsModule.CATEGORY,
 			page = constantsModule.PAGE,

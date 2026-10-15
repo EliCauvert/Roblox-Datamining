@@ -18,6 +18,7 @@ local flyoutLeftHeader = require(parent.FlyoutSidePanel).Components.FlyoutLeftHe
 local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 local navigationMenuModule = require(moments.Components.NavigationMenu)
 local constantsModule = require(moments.Constants)
+local fFlagMomentsFtuxTooltipCreateCopyModule = require(moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
 
 local function renderAction(p1, p2, p3, p4)
 	-- upvalues: reactModule (ref), iconButton (ref), buttonVariant (ref), inputSize (ref)
@@ -34,7 +35,7 @@ local function renderAction(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: renderAction (ref), chevronLargeLeft (ref), plusLarge (ref), reactModule (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), navigationMenuModule (ref), view (ref), flyoutSidePanelIXP (ref), flyoutLeftHeader (ref), text (ref), foundationModule (ref), coachmark (ref), headerBar (ref), gradientBackdrop (ref), constantsModule (ref)
+	-- upvalues: renderAction (ref), chevronLargeLeft (ref), plusLarge (ref), reactModule (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), navigationMenuModule (ref), view (ref), flyoutSidePanelIXP (ref), flyoutLeftHeader (ref), text (ref), foundationModule (ref), fFlagMomentsFtuxTooltipCreateCopyModule (ref), coachmark (ref), headerBar (ref), gradientBackdrop (ref), constantsModule (ref)
 	local var1 = nil
 	local var2 = nil
 	
@@ -110,11 +111,11 @@ return function(p1)
 			})
 			local var6 = if p1.showFtuxTooltip then reactModule.createElement(coachmark, {
 				LayoutOrder = 1,
-				title = "Share Your First Moment",
-				text = "Tap + to share a moment from your captures",
 				isOpen = p1.showFtuxTooltip,
 				onClose = p1.onFtuxTooltipClosed,
 				side = foundationModule.Enums.PopoverSide.Bottom,
+				title = if fFlagMomentsFtuxTooltipCreateCopyModule then p1.ftuxTooltipTitle else "Share Your First Moment",
+				text = if fFlagMomentsFtuxTooltipCreateCopyModule then p1.ftuxTooltipText else "Tap + to share a moment from your captures",
 				align = foundationModule.Enums.PopoverAlign.End
 			}, var5) else reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy" }, { Action = var5 })
 			

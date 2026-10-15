@@ -1,18 +1,14 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local reactModule = require(parent.React)
-local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
-local _ = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
+﻿local reactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: reactModule (ref), fFlagCollectionViewMathChanges (ref)
+return function(p1, p2, p3, p4)
+	-- upvalues: reactModule (ref)
 	local var1, var2 = reactModule.useState(1)
 	local var3 = reactModule.useCallback(function()
-		-- upvalues: p4 (ref), p1 (ref), fFlagCollectionViewMathChanges (copy), p5 (ref), p6 (ref), p2 (ref), p3 (ref), var2 (ref)
+		-- upvalues: p4 (ref), p1 (ref), p2 (ref), p3 (ref), var2 (ref)
 		if p4 then
-			if p1.current == nil or fFlagCollectionViewMathChanges and p5 <= 0 then return end
+			if p1.current == nil then return end
 			local x = p1.current.CanvasPosition.X
-			local var4 = if fFlagCollectionViewMathChanges then p6:getValue().stride else p2:getValue().X + p3
+			local var4 = p2:getValue().X + p3
 			
 			if var4 > 0 then
 				var2(math.max(1, math.floor(x / var4)))
@@ -25,12 +21,7 @@ return function(p1, p2, p3, p4, p5, p6)
 		else
 			var2(1)
 		end
-	end, {
-		p4,
-		p1,
-		if fFlagCollectionViewMathChanges then p6 else p2,
-		if fFlagCollectionViewMathChanges then p5 else p3
-	})
+	end, { p4, p1, p2, p3 })
 	reactModule.useEffect(function()
 		-- upvalues: var3 (ref)
 		var3()

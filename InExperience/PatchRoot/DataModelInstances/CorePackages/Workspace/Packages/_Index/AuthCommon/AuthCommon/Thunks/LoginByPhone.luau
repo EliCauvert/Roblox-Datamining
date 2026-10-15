@@ -20,44 +20,79 @@ local getFFlagEnableLoginAccountSelector = require(parent.SharedFlags).GetFFlagE
 local fFlagEnableLastLoginMethodTracking = require(parent.SharedFlags).FFlagEnableLastLoginMethodTracking
 local fFlagEnableRecordLogin = require(parent.SharedFlags).FFlagEnableRecordLogin
 local enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByPhone", false)
+local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
+local loggingProtocolModule = require(parent.LoggingProtocol)
+local getLoginByCredentialSsoErrorMessageModule = require(authCommon.Utils.GetLoginByCredentialSsoErrorMessage)
+local loginByPhoneSSOErrorsTelemetryModule = require(authCommon.Utils.LoginByPhoneSSOErrorsTelemetry)
+local getFFlagEnableGenericTwoFAMessage = require(parent.SharedFlags).GetFFlagEnableGenericTwoFAMessage
+local fFlagEnablePhoneSsoConnectModule = require(authCommon.Flags.FFlagEnablePhoneSsoConnect)
+
+local function loginRequest(p1, p2, p3, p4, p5, p6)
+	-- upvalues: fFlagEnablePhoneSsoConnectModule (ref), getAppFeaturePolicies (ref), loginRequestsModule (ref)
+	return if fFlagEnablePhoneSsoConnectModule and getAppFeaturePolicies().getUseSingleSignOn() then loginRequestsModule.singleSignOnConnectWithCredential(p1, p2, p3, "PhoneNumber") else loginRequestsModule.logByPhone(p1, p2, p3, p4, p5, p6)
+end
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: loginRequestsModule (ref), loginResultModule (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), fFlagEnableRecordLogin (ref), recordLoginModule (ref), httpService (ref), loginErrorCodesModule (ref), getDxBlobModule (ref), getCaptchaDataJsonModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (ref), getFFlagEnableLoginAccountSelector (ref), getMultipleUsersPerCredentialErrorDataModule (ref), promiseModule (ref), enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone (ref)
+	-- upvalues: fFlagEnablePhoneSsoConnectModule (ref), getAppFeaturePolicies (ref), loginRequest (ref), loginResultModule (ref), promiseModule (ref), loginErrorCodesModule (ref), getFFlagEnableGenericTwoFAMessage (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), fFlagEnableRecordLogin (ref), recordLoginModule (ref), httpService (ref), getLoginByCredentialSsoErrorMessageModule (ref), loggingProtocolModule (ref), loginByPhoneSSOErrorsTelemetryModule (ref), getDxBlobModule (ref), getCaptchaDataJsonModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (ref), getFFlagEnableLoginAccountSelector (ref), getMultipleUsersPerCredentialErrorDataModule (ref), enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone (ref)
 	return function(p9)
-		-- upvalues: loginRequestsModule (copy), p1 (ref), p2 (ref), p3 (ref), p5 (ref), p7 (ref), p8 (ref), loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), httpService (copy), loginErrorCodesModule (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), promiseModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone (copy), p6 (ref)
-		return loginRequestsModule.logByPhone(p1, p2, p3, p5, p7, p8):andThen(function(p10)
-			-- upvalues: loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), p2 (copy)
+		-- upvalues: fFlagEnablePhoneSsoConnectModule (copy), getAppFeaturePolicies (copy), loginRequest (copy), p1 (ref), p2 (ref), p3 (ref), p5 (ref), p7 (ref), p8 (ref), loginResultModule (copy), promiseModule (copy), loginErrorCodesModule (copy), getFFlagEnableGenericTwoFAMessage (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), httpService (copy), getLoginByCredentialSsoErrorMessageModule (copy), loggingProtocolModule (copy), loginByPhoneSSOErrorsTelemetryModule (copy), p6 (ref), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone (copy)
+		local var2 = fFlagEnablePhoneSsoConnectModule and getAppFeaturePolicies().getUseSingleSignOn()
+		
+		return loginRequest(p1, p2, p3, p5, p7, p8):andThen(function(p10)
+			-- upvalues: loginResultModule (copy), var2 (ref), getAppFeaturePolicies (copy), promiseModule (copy), loginErrorCodesModule (copy), getFFlagEnableGenericTwoFAMessage (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), p2 (copy)
 			assert(p10, "no login attempt result")
 			assert(#p10 == 1, "no result or more than one result")
-			assert(loginResultModule.fromJsonData(p10[1]), "result invalid")
+			local var3 = loginResultModule.fromJsonData(p10[1])
+			assert(var3, "result invalid")
 			
-			if fFlagEnableLastLoginMethodTracking then
-				appStorageUtilitiesModule.setLastSuccessfulSignInMethod(loginMethodsModule.Phone)
+			if var2 then
+				local var4 = getAppFeaturePolicies()
+				
+				if (not var4.getLinkedAuthEndpointsEnabled() or not var4.getWebViewSupport()) and loginResultModule.hasTwoStepData(var3) then
+					return promiseModule.reject({
+						errorCode = loginErrorCodesModule.ServiceUnavailable,
+						errorKey = if getFFlagEnableGenericTwoFAMessage() then "Authentication.Login.Response.Require2FAGeneric" else "Authentication.Login.Response.Require2FA"
+					})
+				elseif fFlagEnableLastLoginMethodTracking then
+					appStorageUtilitiesModule.setLastSuccessfulSignInMethod(loginMethodsModule.Phone)
+				end
+				if fFlagEnableRecordLogin then
+					pcall(function()
+						-- upvalues: recordLoginModule (copy), var3 (ref), loginMethodsModule (copy), p2 (copy)
+						recordLoginModule(var3, loginMethodsModule.Phone, p2)
+					end)
+				end
+				return var3
 			end
-			local var2 = loginResultModule.fromJsonData(p10[1])
-			
-			if fFlagEnableRecordLogin then
-				pcall(function()
-					-- upvalues: recordLoginModule (copy), var2 (ref), loginMethodsModule (copy), p2 (copy)
-					recordLoginModule(var2, loginMethodsModule.Phone, p2)
-				end)
-			end
-			return var2
 		end, function(p10)
-			-- upvalues: httpService (copy), loginErrorCodesModule (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (copy), p2 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p9 (ref), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), promiseModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone (copy), p6 (copy)
+			-- upvalues: httpService (copy), var2 (ref), getLoginByCredentialSsoErrorMessageModule (copy), loggingProtocolModule (copy), loginByPhoneSSOErrorsTelemetryModule (copy), promiseModule (copy), p6 (copy), loginErrorCodesModule (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (copy), p2 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p9 (ref), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone (copy)
 			local body = httpService:JSONDecode(p10.Body)
-			local var2 = nil
-			local code = body.errors[1].code
 			local var3 = nil
+			local code = body.errors[1].code
+			local var4 = nil
 			local userFacingMessage = body and (body.errors and (body.errors[1] and body.errors[1].userFacingMessage))
 			
-			if code == loginErrorCodesModule.IncorrectCValueOrPassword then
-				var2 = "Authentication.Login.Response.IncorrectPhoneOrPassword"
+			if var2 then
+				warn("Login ErrorCode:", code)
+				var3 = getLoginByCredentialSsoErrorMessageModule.getMessage(code, "Authentication.Login.Response.IncorrectPhoneOrPassword", "Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod")
+				loggingProtocolModule.default:logRobloxTelemetryEvent(loginByPhoneSSOErrorsTelemetryModule, nil, {
+					ssoErrorCode = code,
+					msgShown = if type(var3) == "table" then var3[1] else var3
+				})
+				
+				return promiseModule.reject({
+					errorKey = var3,
+					errorCode = getLoginByCredentialSsoErrorMessageModule.getUiErrorCode(code),
+					securityQuestionsCallback = p6,
+					userFacingMessage = userFacingMessage
+				})
+			elseif code == loginErrorCodesModule.IncorrectCValueOrPassword then
+				var3 = "Authentication.Login.Response.IncorrectPhoneOrPassword"
 			elseif code == loginErrorCodesModule.Captcha then
 				local _ = getDxBlobModule(body)
 				local _ = nil
-				local var4, var5 = getCaptchaDataJsonModule(body)
-				var4 = {
+				local var5, var6 = getCaptchaDataJsonModule(body)
+				var5 = {
 					detail = "",
 					name = appPage.CaptchaNative,
 					extraProps = {
@@ -65,46 +100,46 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8)
 						cvalueType = "phonenumber",
 						backNavigationDisabledWhileLoading = true,
 						captchaCallback = p4,
-						captchaId = var4,
+						captchaId = var5,
 						cvalue = p2,
-						dxBlob = var5
+						dxBlob = var6
 					}
 				}
 				
 				if fFlagSignalsNavP3Dispatch then
-					var1.down(var1.fromLegacyPage(var4))
+					var1.down(var1.fromLegacyPage(var5))
 				else
-					p9:dispatch(navigateDown(var4))
+					p9:dispatch(navigateDown(var5))
 				end
 			elseif getFFlagLuaAppUsingSecurityQuestionsForLuaLogin() and code == loginErrorCodesModule.SecurityQuestions then
-				var2 = "Authentication.Login.Response.SomethingWentWrong"
+				var3 = "Authentication.Login.Response.SomethingWentWrong"
 				
 				if body.errors[1].fieldData then
 					local fieldData = httpService:JSONDecode(body.errors[1].fieldData)
 					
 					if fieldData.sessionId and fieldData.userId then
-						var3 = fieldData
-						var2 = nil
+						var4 = fieldData
+						var3 = nil
 					end
 				end
 			elseif getFFlagEnableLoginAccountSelector() and code == loginErrorCodesModule.MultipleUsersPerCredential then
 				return promiseModule.reject({
-					errorKey = var2,
+					errorKey = var3,
 					errorCode = code,
 					usersData = getMultipleUsersPerCredentialErrorDataModule(body),
 					userFacingMessage = userFacingMessage
 				})
 			elseif code == loginErrorCodesModule.ServiceUnavailable then
-				var2 = "Authentication.Login.Response.ServiceUnavailable"
+				var3 = "Authentication.Login.Response.ServiceUnavailable"
 			elseif enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone and code == loginErrorCodesModule.IllegalChildAccountLinking then
-				var2 = "Authentication.Login.LinkIllegalChildAccountLinking"
+				var3 = "Authentication.Login.LinkIllegalChildAccountLinking"
 			elseif code ~= loginErrorCodesModule.AccountLocked then
-				var2 = "Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod"
+				var3 = "Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod"
 			end
 			return promiseModule.reject({
-				errorKey = var2,
+				errorKey = var3,
 				errorCode = code,
-				securityQuestionsData = var3,
+				securityQuestionsData = var4,
 				securityQuestionsCallback = p6,
 				userFacingMessage = userFacingMessage
 			})

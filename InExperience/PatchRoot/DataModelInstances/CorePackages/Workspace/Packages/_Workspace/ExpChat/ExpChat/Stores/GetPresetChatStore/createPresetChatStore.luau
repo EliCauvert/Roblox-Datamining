@@ -13,6 +13,7 @@ return function()
 	local var17, var18 = createSignal(nil)
 	local var19, var20 = createSignal(0)
 	local var21, var22 = createSignal({})
+	local var23, var24 = createSignal({})
 	
 	return {
 		getIsEnabled = var1,
@@ -26,6 +27,7 @@ return function()
 		getPresetCooldownEndsAt = var17,
 		getChatWindowBottomY = var19,
 		getPresetClickCounts = var21,
+		getViewedGroupIds = var23,
 		setIsEnabled = var2,
 		setIsLoading = var4,
 		setIsTrayOpen = var6,
@@ -36,11 +38,22 @@ return function()
 		setLayoutModeOverride = var16,
 		setPresetCooldownEndsAt = var18,
 		setChatWindowBottomY = var20,
+		setPresetClickCounts = var22,
 		incrementPresetClickCount = function(value)
 			-- upvalues: var21 (ref), var22 (ref)
 			local cloned = table.clone(var21(false))
 			cloned[value] = if cloned[value] then cloned[value] + 1 else 1
 			var22(cloned)
+		end,
+		setViewedGroupIds = var24,
+		markGroupViewed = function(p1)
+			-- upvalues: var23 (ref), var24 (ref)
+			if var23(false)[p1] then
+				return
+			end
+			local cloned = table.clone(var23(false))
+			cloned[p1] = true
+			var24(cloned)
 		end
 	}
 end

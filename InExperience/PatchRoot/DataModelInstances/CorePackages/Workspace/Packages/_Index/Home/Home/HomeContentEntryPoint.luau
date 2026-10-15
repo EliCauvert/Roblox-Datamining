@@ -17,7 +17,6 @@ local fetchHomePageModule = require(home.fetchHomePage)
 local useHomeCollectionLayoutSyncModule = require(home.useHomeCollectionLayoutSync)
 local homeConstantsModule = require(home.HomeConstants)
 local homePageSessionModule = require(home.HomePageSession)
-local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local fFlagLuaAppAddHomeExtraTopPadding = require(parent.SharedFlags).FFlagLuaAppAddHomeExtraTopPadding
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
@@ -26,6 +25,7 @@ local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPa
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
 local fFlagHomePageRefetchOnDataHydrationAccountReset = require(parent.SharedFlags).FFlagHomePageRefetchOnDataHydrationAccountReset
 local fFlagLuaAppSduiHomeSponsoredAdViewabilityModule = require(home.Flags.FFlagLuaAppSduiHomeSponsoredAdViewability)
+local fFlagAppThemeHalloween2026HomeBackground = require(parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 
 local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
@@ -39,7 +39,7 @@ local function getCommittedHomeSessionId(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: homeConstantsModule (ref), fFlagLuaAppAddHomeExtraTopPadding (ref), useEntrySurfacing (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fFlagHomePageRefetchOnDataHydrationAccountReset (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), responsiveModule (ref), videoUtilsModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppSduiHomeSponsoredAdViewabilityModule (ref), signalsReactModule (ref), getCommittedHomeSessionId (ref), useSponsoredAdViewabilityDetector (ref), appLifecycleObserverService (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref)
+	-- upvalues: homeConstantsModule (ref), fFlagLuaAppAddHomeExtraTopPadding (ref), useEntrySurfacing (ref), fFlagSduiDismissPromptPageScope (ref), usePageScopeRef (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fFlagHomePageRefetchOnDataHydrationAccountReset (ref), fetchHomePageModule (ref), home (ref), useHomeCollectionLayoutSyncModule (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), responsiveModule (ref), videoUtilsModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppSduiHomeSponsoredAdViewabilityModule (ref), signalsReactModule (ref), getCommittedHomeSessionId (ref), useSponsoredAdViewabilityDetector (ref), appLifecycleObserverService (ref), sduiPageWrapperEntryPoint (ref), refreshHomePageModule (ref), fFlagAppPageShellScrollToTopFocus (ref), fFlagLuaAppsDefaultSelection (ref), fFlagAppThemeHalloween2026HomeBackground (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local var1 = nil
 	
@@ -96,11 +96,13 @@ return reactModule.memo(function(p1)
 		pageTimer = var3,
 		refresh = refreshHomePageModule,
 		pageTopPadding = p1.pageTopPadding,
-		feedTopMargin = if fFlagLuaAppSduiStickyHeaderScrollAway then if fFlagLuaAppAddHomeExtraTopPadding then var1 else p1.feedTopMargin else nil,
-		stickyTopPadding = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil,
-		scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.scrollAway else nil,
+		feedTopMargin = if fFlagLuaAppAddHomeExtraTopPadding then var1 else p1.feedTopMargin,
+		stickyTopPadding = p1.feedTopMargin,
+		scrollAway = p1.scrollAway,
 		videoPlaybackContext = if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then var4 else nil,
 		handleBackButton = if fFlagAppPageShellScrollToTopFocus then false else nil,
-		defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
+		defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil,
+		backgroundStyle = if fFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil,
+		stickyBackgroundStyle = if fFlagAppThemeHalloween2026HomeBackground then p1.stickyBackgroundStyle else nil
 	})
 end)

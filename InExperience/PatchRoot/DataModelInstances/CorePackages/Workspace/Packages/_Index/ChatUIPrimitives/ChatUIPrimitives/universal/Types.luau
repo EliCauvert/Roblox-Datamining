@@ -1,9 +1,10 @@
 ﻿local tModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.t)
 local plainTextTypesModule = require(script.Parent.ContentKinds.PlainText.PlainTextTypes)
-local var1 = tModule.array(tModule.union(tModule.strictInterface({ plainText = plainTextTypesModule.isValid })))
+local presetTypesModule = require(script.Parent.ContentKinds.Preset.PresetTypes)
+local var1 = tModule.array(tModule.union(tModule.strictInterface({ plainText = plainTextTypesModule.isValid }), tModule.strictInterface({ preset = presetTypesModule.isValid })))
 local var2 = tModule.interface({ userId = tModule.string, displayName = tModule.string })
 local var3 = tModule.interface({
-	contents = tModule.array(tModule.union(tModule.strictInterface({ plainText = plainTextTypesModule.isValidDraft }))),
+	contents = tModule.array(tModule.union(tModule.strictInterface({ plainText = plainTextTypesModule.isValidDraft }), tModule.strictInterface({ preset = presetTypesModule.isValidDraft }))),
 	repliesToIds = tModule.optional(tModule.array(tModule.string))
 })
 local var4 = tModule.interface({

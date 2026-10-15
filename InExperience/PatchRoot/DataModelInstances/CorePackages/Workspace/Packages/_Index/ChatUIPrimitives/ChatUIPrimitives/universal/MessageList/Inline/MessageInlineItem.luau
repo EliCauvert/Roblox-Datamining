@@ -3,12 +3,13 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(parent.Signals)
 local createNextOrder = require(parent.ReactUtils).createNextOrder
-local _ = require(script.Parent.Parent.Parent.Types)
 local _ = require(script.Parent.Parent.groupMessages)
 local identityInlineModule = require(script.Parent.Parent.Parent.Identity.IdentityInline)
 local useMessageInlineViewModelModule = require(script.Parent.useMessageInlineViewModel)
+local withMessageContentModule = require(script.Parent.Parent.Parent.ContentKinds.withMessageContent)
 local t = {
-	plainText = require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextInline)
+	plainText = withMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextInline), require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel).getDetail),
+	preset = withMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetInline), require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetContentModel).getDetail)
 }
 
 return function(p1)

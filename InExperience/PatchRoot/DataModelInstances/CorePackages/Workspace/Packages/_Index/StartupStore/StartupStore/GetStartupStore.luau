@@ -2,7 +2,6 @@
 local signalsModule = require(parent.Signals)
 local signalsExperimentalModule = require(parent.SignalsExperimental)
 local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
-local fFlagLuaAppChartsResetFetchingStatusOnFilterChange = require(parent.SharedFlags).FFlagLuaAppChartsResetFetchingStatusOnFilterChange
 
 local function _(p1)
 	-- upvalues: retrievalStatus (ref)
@@ -21,21 +20,21 @@ local function joinRetrievalStatus(p1, p2)
 end
 
 local _ = function()
-	-- upvalues: fFlagLuaAppChartsResetFetchingStatusOnFilterChange (ref), retrievalStatus (ref)
-	return if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then {
+	-- upvalues: retrievalStatus (ref)
+	return {
 		isRefreshFetch = false,
 		status = retrievalStatus.NotStarted
-	} else retrievalStatus.NotStarted
+	}
 end
 
 return signalsModule.createComputed(function()
-	-- upvalues: signalsModule (ref), retrievalStatus (ref), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (ref), joinRetrievalStatus (ref), signalsExperimentalModule (ref)
+	-- upvalues: signalsModule (ref), retrievalStatus (ref), joinRetrievalStatus (ref), signalsExperimentalModule (ref)
 	local var1, var2 = signalsModule.createSignal(true)
 	local var3, var4 = signalsModule.createSignal(retrievalStatus.NotStarted)
-	local var5, var6 = signalsModule.createSignal(if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then {
+	local var5, var6 = signalsModule.createSignal({
 		isRefreshFetch = false,
 		status = retrievalStatus.NotStarted
-	} else retrievalStatus.NotStarted)
+	})
 	local var7, var8 = signalsModule.createSignal(retrievalStatus.NotStarted)
 	
 	return {
@@ -44,33 +43,26 @@ return signalsModule.createComputed(function()
 		getGamesPageDataStatus = var5,
 		getFetchHomePageDataStatusAll = var7,
 		getAppLoadingStarted = signalsModule.createComputed(function(p1)
-			-- upvalues: var5 (ref), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (copy), var3 (ref), var7 (ref), joinRetrievalStatus (copy), retrievalStatus (copy)
-			local var9 = var5(p1)
-			
-			return joinRetrievalStatus(joinRetrievalStatus(if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then var9.status else var9, var3(p1)), var7(p1)) ~= retrievalStatus.NotStarted
+			-- upvalues: var5 (ref), var3 (ref), var7 (ref), joinRetrievalStatus (copy), retrievalStatus (copy)
+			return joinRetrievalStatus(joinRetrievalStatus(var5(p1).status, var3(p1)), var7(p1)) ~= retrievalStatus.NotStarted
 		end),
 		setPreloading = var2,
 		setHomePageDataStatus = var4,
 		setGamesPageDataStatus = function(value, p1)
-			-- upvalues: fFlagLuaAppChartsResetFetchingStatusOnFilterChange (copy), var6 (ref)
-			if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then
-				var6({ status = value, isRefreshFetch = p1 or false })
-				
-				return
-			end
-			var6(value)
+			-- upvalues: var6 (ref)
+			var6({ status = value, isRefreshFetch = p1 or false })
 		end,
 		setFetchHomePageDataStatusAll = var8,
 		reset = function()
-			-- upvalues: signalsExperimentalModule (copy), var2 (ref), var4 (ref), retrievalStatus (copy), var6 (ref), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (copy), var8 (ref)
+			-- upvalues: signalsExperimentalModule (copy), var2 (ref), var4 (ref), retrievalStatus (copy), var6 (ref), var8 (ref)
 			signalsExperimentalModule.batch(function()
-				-- upvalues: var2 (copy), var4 (copy), retrievalStatus (copy), var6 (copy), fFlagLuaAppChartsResetFetchingStatusOnFilterChange (copy), var8 (copy)
+				-- upvalues: var2 (copy), var4 (copy), retrievalStatus (copy), var6 (copy), var8 (copy)
 				var2(true)
 				var4(retrievalStatus.NotStarted)
-				var6(if fFlagLuaAppChartsResetFetchingStatusOnFilterChange then {
+				var6({
 					isRefreshFetch = false,
 					status = retrievalStatus.NotStarted
-				} else retrievalStatus.NotStarted)
+				})
 				var8(retrievalStatus.NotStarted)
 			end)
 		end

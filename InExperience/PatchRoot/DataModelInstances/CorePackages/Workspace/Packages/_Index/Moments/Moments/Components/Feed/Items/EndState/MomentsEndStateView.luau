@@ -20,7 +20,7 @@ local formFactor = momentsCommonModule.Enums.FormFactor
 local t = {
 	title = "Feature.Moments.Label.NonInfiniteScrollEndTitle",
 	description = "Feature.Moments.Description.NonInfiniteScrollEndBody",
-	loadMore = "Feature.Moments.Action.LearnMore"
+	loadMore = "Feature.Moments.Action.Continue"
 }
 local t_1 = {
 	title = "Feature.Moments.Label.FeedEndTitle",
@@ -38,11 +38,11 @@ return function(p1)
 	local var3 = p1.showLoadMore ~= false
 	local var4 = useLocalization(if fFlagMomentsNonInfiniteScrollEndStateFixesModule and not var3 then t_1 else t)
 	local title = var4.title
-	local var5 = if title == nil or title == "" then "You're all caught up for now" else title
+	local var5 = if title == nil or title == "" then "There are more Moments to watch" else title
 	local description = var4.description
-	title = if description == nil or description == "" then "You've reached a stopping point in Moments. Tap below to keep watching." else description
+	title = if description == nil or description == "" then "We've paused your feed. You can decide if you'd like to continue watching." else description
 	local loadMore = var4.loadMore
-	description = if loadMore == nil or loadMore == "" then "Load more" else loadMore
+	description = if loadMore == nil or loadMore == "" then "Continue" else loadMore
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-center gap-xxlarge size-full clip bg-surface-0",
@@ -107,7 +107,7 @@ return function(p1)
 					onActivated = p1.onLoadMore,
 					size = inputSize.Medium,
 					text = description,
-					variant = buttonVariant.Emphasis,
+					variant = buttonVariant.Standard,
 					width = UDim.new(1, 0)
 				})
 			}) else nil

@@ -130,7 +130,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} tahu
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Hari
 Authentication.SignUp.Label.EnterYourEmail,Masukkan emailmu
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Kamu belum cukup umur untuk memainkan game ini
 Authentication.SignUp.Label.ErrorsWithPassword,Ada eror pada password.
 Authentication.SignUp.Label.ErrorsWithUsername,Ada eror pada nama pengguna.
 Authentication.SignUp.Label.ExitModalSubtitle,"Akunmu hampir selesai dibuat. Jika keluar, progresmu akan hilang."
@@ -282,7 +281,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Area Emisif di Atas 
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} terlalu Emisif. Luas area Emisif × intensitas melebihi batas (saat ini {emissivePercentage}%, maksimal {maxEmissivePercentage}%). Perkecil area bercahaya atau turunkan EmissiveStrength-nya."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Area Emisif Terlampaui.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} terlalu Emisif. Luas area Emisif × intensitas melebihi batas (saat ini {emissiveArea}, maksimal {maxEmissiveArea}). Perkecil area bercahaya atau turunkan EmissiveStrength-nya."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Aset ini menggunakan peta emisif yang hanya tersedia untuk kreator dalam Program Kreator Tepercaya. Hapus semua konten peta emisif atau gabung ke program sebelum meng-upload.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Animasi yang dipublikasikan tidak memiliki nilai translasi maksimum bagian yang valid. Publikasikan ulang animasi.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Animasi yang dipublikasikan tidak memiliki penanda emote UGC yang valid. Publikasikan ulang animasi.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Translasi maksimum bagian tidak dapat dihitung dari data animasi yang dipublikasikan. Publikasikan ulang animasi.
@@ -290,6 +288,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Anima
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Kepala harus ditempatkan di atas UpperTorso. Titik tengah kepala berada di bawah bagian atas badan, yang menunjukkan bahwa mesh kepala menciut atau salah tempat."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Properti InternalOverrideFACSData pada FaceControls harus kosong saat proses upload.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FAC terdeteksi memperbesar kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Kepala dinamis dapat memiliki maksimal {maxFacsJointCount} sendi FACS, tetapi kepala ini memiliki {actualJointCount}. Kurangi jumlah sendi FACS, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FAC terdeteksi memperkecil kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Format upload tidak cocok dengan struktur folder yang diharapkan. Coba lagi atau ajukan laporan bug.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Tulang {bonePath} terlalu jauh di luar meshpart {partName}, posisikan lebih dekat dengan batas ukuran meshpart."
@@ -2026,6 +2025,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,Dapatkan lebih banyak pemain
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Buat pemain terus kembali bermain
 Feature.Build.Analytics.Goal.Locked.EarnRobux,Dapatkan Robux di game-mu untuk melihat statistik ini.
 Feature.Build.Analytics.Goal.Locked.FirstImpression,Dapatkan pemain pertamamu untuk melihat statistik ini.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Dapatkan lebih banyak pemain untuk melihat statistik ini.
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Dapatkan pemain pertamamu yang kembali bermain untuk melihat statistik ini.
 Feature.Build.Analytics.KeyStats,Statistik utama
 Feature.Build.Analytics.LastMonth,Bulan lalu
@@ -2379,11 +2379,8 @@ Feature.Build.Message.NoSearchResultsFound,Tidak ada hasil pencarian
 Feature.Build.Message.NoVersionHistory,Belum ada riwayat versi.
 Feature.Build.Message.OneTaskCompleted,1 tugas selesai
 Feature.Build.Message.OutOfBuildUsage,Kuota penggunaan Build-mu sudah habis. Lihat opsi untuk menggunakan Robux agar bisa terus berkreasi.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Kamu tidak bisa mengirim link chat undangan kepada pengguna berikut:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Gunakan tombol Bagikan untuk mendapatkan link.
 Feature.Build.Message.PlaytesterRequestFailed,Kami tidak dapat menyelesaikan permintaanmu. Coba lagi.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} dari {MAX_INVITES} penguji tahap awal diundang
-Feature.Build.Message.PrivatePlaytestInvite,{username} mengundangmu menjadi penguji tahap awal untuk {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Game-mu telah dipublikasikan, tetapi tidak dapat dibuat publik. Coba lagi."
 Feature.Build.Message.PublishExpandAudience,Publikasikan untuk memperluas audiensmu
 Feature.Build.Message.PublishNotReverted,Publikasimu gagal dibatalkan. Coba lagi.
@@ -2452,7 +2449,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
 Feature.Build.Title.NoMonetizationProducts,Mulai hasilkan pendapatan di game-mu
 Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
 Feature.Build.Title.PickCampaign,Pilih durasi
-Feature.Build.Title.PlaytestInviteSendFailed,Tidak dapat mengirim undangan
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Tidak dapat menambahkan pengguna berikut:
 Feature.Build.Title.PlaytestersOnlyPlay,Hanya playtester yang bisa memainkannya
@@ -3788,6 +3784,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Tunggu sebentar, lalu coba lagi"
 Feature.Moments.Label.VoiceModerationError,Skripmu harus mematuhi peraturan keamanan
 Feature.Moments.Label.VoicePlaceholder,Ketik skrip voiceover-mu. Batas {maxCount} karakter
 Feature.Moments.Label.VoiceTimeoutBody,Waktu pembuatan voiceover habis.
+Feature.Moments.Label.VoiceTooManyNumbersError,Skrip berisi terlalu banyak angka
 Feature.Moments.Label.WriteComment,Tulis komentar
 Feature.Moments.Title.Comments,Komentar
 Feature.Moments.Title.CommentsWithCappedCount,Komentar ({count}+)

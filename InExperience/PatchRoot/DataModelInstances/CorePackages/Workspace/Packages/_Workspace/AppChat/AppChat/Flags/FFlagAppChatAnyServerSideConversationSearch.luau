@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAppChatServerSideConversationSearch) or require(script.Parent.FFlagFriendsChatServerSideConversationSearch)

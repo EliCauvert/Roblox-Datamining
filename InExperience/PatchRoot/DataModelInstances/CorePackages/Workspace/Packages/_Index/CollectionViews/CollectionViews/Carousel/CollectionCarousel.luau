@@ -21,10 +21,6 @@ local carouselScrollButtonsModule = require(collectionViews.Carousel.CarouselScr
 local _ = require(collectionViews.CollectionViewTypes)
 local useCollectionLayoutModule = require(collectionViews.CollectionLayoutStore.useCollectionLayout)
 local compositionTags = require(parent.AppComposition).CompositionTags
-local calculateCarouselSpacingMetricsModule = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagCollectionViewMathChanges = sharedFlagsModule.FFlagCollectionViewMathChanges
-local fFlagLuaAppEnableVRCarouselScrolling = sharedFlagsModule.FFlagLuaAppEnableVRCarouselScrolling
 local var1 = tModule.strictInterface({
 	testId = tModule.optional(tModule.string),
 	Position = tModule.optional(tModule.UDim2),
@@ -74,27 +70,17 @@ local t = {
 	sideMargin = 0
 }
 
-local function _(p1, p2)
-	-- upvalues: fFlagLuaAppEnableVRCarouselScrolling (ref)
-	return if p1 == nil then if fFlagLuaAppEnableVRCarouselScrolling then true else not p2 else p1
+local function _(p1, _)
+	return p1 == nil or p1
 end
 
 local _ = function(p1, _, p2, p3, p4)
-	-- upvalues: responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref)
-	if not p2 then
-		return false
-	elseif p3 == nil then
-		local _ = true
-		local pointer = responsiveModule.Input.Pointer
-		local _ = p1 == pointer and ((if p1 == pointer then fFlagLuaAppEnableVRCarouselScrolling else nil) and p4)
-		
-		return u435
-	end
-	return p3
+	-- upvalues: responsiveModule (ref)
+	return if p2 then if p3 == nil then if p1 ~= responsiveModule.Input.Pointer then p4 else true else p3 else false
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: validateProps (ref), var1 (ref), cryoModule (ref), t (ref), useCollectionLayoutModule (ref), argCheckModule (ref), reactModule (ref), fFlagCollectionViewMathChanges (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), useCollectionSizeBindingsModule (ref), calculateCarouselSpacingMetricsModule (ref), useScrollButtonHandlersModule (ref), useCarouselScrollingBindingModule (ref), useDesignTokens (ref), scrollingRowOfCollectionItemsModule (ref), collectionBackgroundMuralModule (ref), maybeForceDarkThemeModule (ref), collectionHeaderModule (ref), compositionTags (ref), carouselScrollButtonsModule (ref)
+	-- upvalues: validateProps (ref), var1 (ref), cryoModule (ref), t (ref), useCollectionLayoutModule (ref), argCheckModule (ref), reactModule (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), responsiveModule (ref), useCollectionSizeBindingsModule (ref), useScrollButtonHandlersModule (ref), useCarouselScrollingBindingModule (ref), useDesignTokens (ref), scrollingRowOfCollectionItemsModule (ref), collectionBackgroundMuralModule (ref), maybeForceDarkThemeModule (ref), collectionHeaderModule (ref), compositionTags (ref), carouselScrollButtonsModule (ref)
 	validateProps(var1, p1)
 	local var2 = cryoModule.Dictionary.join(t, p1)
 	local sideMargin = var2.sideMargin
@@ -107,28 +93,10 @@ return reactModule.memo(function(p1)
 	argCheckModule.assert(var2.fractionalItemAmount >= 0)
 	argCheckModule.assert(columnGap >= 0)
 	local var5 = reactModule.useRef(nil)
-	local var6 = nil
-	local var7 = nil
-	local var8 = nil
-	
-	if fFlagCollectionViewMathChanges then
-		local var9, var10 = reactModule.useBinding(0)
-		var6 = var9
-		var7 = var10
-		var8 = reactModule.useCallback(function(p2)
-			-- upvalues: var7 (write)
-			if p2 then
-				var7(p2.AbsoluteSize.X)
-			end
-		end, {})
-	end
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: var5 (ref), fFlagCollectionViewMathChanges (copy), var7 (write), var2 (ref)
+	local var6 = reactModule.useCallback(function(p2)
+		-- upvalues: var5 (ref), var2 (ref)
 		var5.current = p2
 		
-		if fFlagCollectionViewMathChanges and p2 then
-			var7(p2.AbsoluteSize.X)
-		end
 		if var2.onScrollingFrameRefCallback then
 			var2.onScrollingFrameRefCallback(p2)
 		end
@@ -139,60 +107,50 @@ return reactModule.memo(function(p1)
 		var2.onScrollingFrameRefCallback,
 		var2.scrollingFrameRef
 	})
-	local var12 = useLastInput()
-	local var13 = useIsSpatial()
+	local var7 = useLastInput()
+	local var8 = useIsSpatial()
 	local hideHeaderButton = var2.hideHeaderButton or usePreferredInput() == responsiveModule.Input.Directional
 	local scrollingEnabledOverride = var2.scrollingEnabledOverride
-	local var14 = if scrollingEnabledOverride ~= nil then if fFlagLuaAppEnableVRCarouselScrolling then true else not var13 else scrollingEnabledOverride
+	local var9 = scrollingEnabledOverride ~= nil or scrollingEnabledOverride
 	local minValue = math.min(var2.maxItemsToShow or #var2.items, #var2.items)
 	
-	if not var14 then
+	if not var9 then
 		minValue = math.min(numColumns, minValue)
 	end
 	argCheckModule.assert(minValue >= 0)
-	local var15 = if var14 and numColumns < minValue then var2.fractionalItemAmount else 0
-	local var16, var17, var18, var19 = useCollectionSizeBindingsModule(numColumns, columnGap, sideMargin, var15, var2.getItemHeight, var2.onContainerSizeChanged, var4)
-	local var20 = if fFlagCollectionViewMathChanges then reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var6 (write), var16 (ref), calculateCarouselSpacingMetricsModule (copy), numColumns (ref), columnGap (ref), var4 (ref), var15 (ref)
-		return reactModule.joinBindings({ var6, var16 }):map(function(p2)
-			-- upvalues: calculateCarouselSpacingMetricsModule (copy), numColumns (copy), columnGap (copy), var4 (copy), var15 (copy)
-			return calculateCarouselSpacingMetricsModule(p2[1], numColumns, columnGap, var4 or 0, var15, p2[2].X)
-		end)
-	end, {
-		var6, var16, numColumns, columnGap, var4, var15
-	}) else nil
+	local var10, var11, var12, var13 = useCollectionSizeBindingsModule(numColumns, columnGap, sideMargin, if var9 and numColumns < minValue then var2.fractionalItemAmount else 0, var2.getItemHeight, var2.onContainerSizeChanged, var4)
 	local shouldShowScrollButtonsOverride = var2.shouldShowScrollButtonsOverride
-	local var21 = not var14 and (if shouldShowScrollButtonsOverride == nil then if var12 ~= responsiveModule.Input.Pointer then fFlagLuaAppEnableVRCarouselScrolling and (if fFlagLuaAppEnableVRCarouselScrolling then var13 else nil) else true else shouldShowScrollButtonsOverride)
-	local var22, var23, var24, var25 = useScrollButtonHandlersModule(var5, minValue, var21, numColumns, if fFlagCollectionViewMathChanges then nil else var16, if fFlagCollectionViewMathChanges then nil else columnGap, nil, if fFlagCollectionViewMathChanges then var20 else nil)
-	local var26 = useCarouselScrollingBindingModule(var5, var2.enableHoverOverflow == true)
-	local var27 = columnGap * 0.5
-	local var28 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), reactModule (copy), var16 (ref), var26 (ref), var27 (ref)
-		return if var2.enableHoverOverflow then reactModule.joinBindings({ var16, var26 }):map(function(p2)
-			-- upvalues: var27 (copy)
-			return UDim2.new(1, if p2[2] then 0 else -var27 * 2, 0, p2[1].Y)
+	local var14 = not var9 and (if shouldShowScrollButtonsOverride == nil then if var7 ~= responsiveModule.Input.Pointer then var8 else true else shouldShowScrollButtonsOverride)
+	local var15, var16, var17, var18 = useScrollButtonHandlersModule(var5, minValue, var14, numColumns, var10, columnGap, nil)
+	local var19 = useCarouselScrollingBindingModule(var5, var2.enableHoverOverflow == true)
+	local var20 = columnGap * 0.5
+	local var21 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), reactModule (copy), var10 (ref), var19 (ref), var20 (ref)
+		return if var2.enableHoverOverflow then reactModule.joinBindings({ var10, var19 }):map(function(p2)
+			-- upvalues: var20 (copy)
+			return UDim2.new(1, if p2[2] then 0 else -var20 * 2, 0, p2[1].Y)
 		end) else nil
-	end, { var16, var26, var27, var2.enableHoverOverflow })
-	local var29 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var26 (ref), var27 (ref)
-		return if var2.enableHoverOverflow then var26:map(function(p2)
-			-- upvalues: var27 (copy)
-			return UDim2.new(0, if p2 then 0 else var27, 0, 500)
+	end, { var10, var19, var20, var2.enableHoverOverflow })
+	local var22 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var19 (ref), var20 (ref)
+		return if var2.enableHoverOverflow then var19:map(function(p2)
+			-- upvalues: var20 (copy)
+			return UDim2.new(0, if p2 then 0 else var20, 0, 500)
 		end) else nil
-	end, { var26, var27, var2.enableHoverOverflow })
-	local var30 = useDesignTokens()
-	local size400 = var30.Size.Size_400
-	local size500 = var30.Size.Size_500
-	local white100 = var30.Color.Extended.White.White_100
-	local var31 = var2.backgroundMuralUrl ~= nil
-	local var32 = var2.title and var2.title ~= ""
-	local var33 = reactModule.createElement(scrollingRowOfCollectionItemsModule, {
-		Position = var29,
-		Size = var28,
-		ScrollingEnabled = var14,
+	end, { var19, var20, var2.enableHoverOverflow })
+	local var23 = useDesignTokens()
+	local size400 = var23.Size.Size_400
+	local size500 = var23.Size.Size_500
+	local white100 = var23.Color.Extended.White.White_100
+	local var24 = var2.backgroundMuralUrl ~= nil
+	local var25 = var2.title and var2.title ~= ""
+	local var26 = reactModule.createElement(scrollingRowOfCollectionItemsModule, {
+		Position = var22,
+		Size = var21,
+		ScrollingEnabled = var9,
 		onChangeCanvasPosition = var2.onChangeCanvasPosition,
-		onScrollingFrameRefCallback = var11,
-		itemSizeBinding = var16,
+		onScrollingFrameRefCallback = var6,
+		itemSizeBinding = var10,
 		items = var2.items,
 		totalItemsOnCanvas = minValue,
 		numColumns = numColumns,
@@ -203,9 +161,7 @@ return reactModule.memo(function(p1)
 		onReachedThresholdFromEnd = var2.onReachedThresholdFromEnd,
 		thresholdFromEnd = var2.thresholdFromEnd,
 		onViewableItemsChanged = var2.onViewableItemsChanged,
-		AutomaticSize = var2.AutomaticSize,
-		spacingMetricsBinding = if fFlagCollectionViewMathChanges then var20 else nil,
-		onScrollingFrameAbsoluteSizeChanged = if fFlagCollectionViewMathChanges then var8 else nil
+		AutomaticSize = var2.AutomaticSize
 	})
 	
 	return reactModule.createElement("Frame", {
@@ -221,15 +177,15 @@ return reactModule.memo(function(p1)
 		BackgroundMural = var2.backgroundMuralUrl and reactModule.createElement(collectionBackgroundMuralModule, {
 			ZIndex = -1,
 			backgroundMuralUrl = var2.backgroundMuralUrl,
-			containerSizeBinding = var17
+			containerSizeBinding = var11
 		}) or nil,
 		CollectionContent = reactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0),
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			[reactModule.Change.AbsoluteSize] = var18,
-			ref = var19
+			[reactModule.Change.AbsoluteSize] = var12,
+			ref = var13
 		}, {
 			UIPadding = reactModule.createElement("UIPadding", {
 				PaddingTop = if var2.backgroundMuralUrl ~= nil then nil else UDim.new(0, size500),
@@ -240,7 +196,7 @@ return reactModule.memo(function(p1)
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, if var32 or var2.headerComponent then size400 else 0)
+				Padding = UDim.new(0, if var25 or var2.headerComponent then size400 else 0)
 			}),
 			CollectionHeader = if var2.headerComponent then var2.headerComponent else maybeForceDarkThemeModule(reactModule.createElement(collectionHeaderModule, {
 				LayoutOrder = 1,
@@ -250,16 +206,16 @@ return reactModule.memo(function(p1)
 				onActivateInfoIcon = var2.onActivateInfoIcon,
 				tooltipSupportsVR = var2.tooltipSupportsVR,
 				tooltipSupportsTenFootUi = var2.tooltipSupportsTenFootUi,
-				hideButton = if #var2.items >= 1 then hideHeaderButton or not var32 else true,
+				hideButton = if #var2.items >= 1 then hideHeaderButton or not var25 else true,
 				onActivate = var2.onActivateHeader,
 				onActivateSubtitle = var2.onActivateSubtitle,
 				buttonText = var2.headerButtonText,
-				titleColor = if var31 then white100 else nil,
-				subtitleColor = if var31 then white100 else nil,
+				titleColor = if var24 then white100 else nil,
+				subtitleColor = if var24 then white100 else nil,
 				hideSubtitleChevron = var2.hideSubtitleChevron
-			}), var31),
+			}), var24),
 			Items = reactModule.createElement("Frame", {
-				Size = if var2.enableHoverOverflow then var16:map(function(p2)
+				Size = if var2.enableHoverOverflow then var10:map(function(p2)
 					return UDim2.new(1, 0, 0, p2.Y)
 				end) else UDim2.new(1, 0, 0, 0),
 				AutomaticSize = if not var2.enableHoverOverflow then Enum.AutomaticSize.Y else nil,
@@ -269,28 +225,28 @@ return reactModule.memo(function(p1)
 				[reactModule.Tag] = if var2.collectionItemSize and not var2.enableHoverOverflow then compositionTags.Utility.ClipAtMaxWidth else nil
 			}, {
 				CarouselClip = if var2.enableHoverOverflow then reactModule.createElement("Frame", {
-					Size = var26:map(function(p2)
-						-- upvalues: var27 (ref)
-						return UDim2.new(1, if p2 then 0 else var27 * 2, 1, 1000)
+					Size = var19:map(function(p2)
+						-- upvalues: var20 (ref)
+						return UDim2.new(1, if p2 then 0 else var20 * 2, 1, 1000)
 					end),
-					Position = var26:map(function(p2)
-						-- upvalues: var27 (ref)
-						return UDim2.new(0, if p2 then 0 else -var27, 0, -500)
+					Position = var19:map(function(p2)
+						-- upvalues: var20 (ref)
+						return UDim2.new(0, if p2 then 0 else -var20, 0, -500)
 					end),
 					BackgroundTransparency = 1,
 					[reactModule.Tag] = if var2.collectionItemSize then compositionTags.Utility.ClipAtMaxWidth else nil
-				}, { ScrollingItems = var33 }) else nil,
-				ScrollingItems = if not var2.enableHoverOverflow then var33 else nil,
-				ScrollButtons = if var21 then reactModule.createElement(carouselScrollButtonsModule, {
+				}, { ScrollingItems = var26 }) else nil,
+				ScrollingItems = if not var2.enableHoverOverflow then var26 else nil,
+				ScrollButtons = if var14 then reactModule.createElement(carouselScrollButtonsModule, {
 					ZIndex = 10,
-					handleScrollLeft = var22,
-					handleScrollRight = var23,
-					leftScrollingEnabled = var24,
-					rightScrollingEnabled = var25,
+					handleScrollLeft = var15,
+					handleScrollRight = var16,
+					leftScrollingEnabled = var17,
+					rightScrollingEnabled = var18,
 					Size = UDim2.new(1, 2 * sideMargin, 1, 0),
 					Position = UDim2.new(0.5, 0, 0, 0),
 					AnchorPoint = Vector2.new(0.5, 0),
-					buttonOffsetFromEdge = var30.Size.Size_200,
+					buttonOffsetFromEdge = var23.Size.Size_200,
 					onScrollButtonEnter = var2.onScrollButtonEnter,
 					onScrollButtonLeave = var2.onScrollButtonLeave
 				}) else nil

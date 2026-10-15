@@ -121,7 +121,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date}（{yearsOld} 岁
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,日
 Authentication.SignUp.Label.EnterYourEmail,输入你的电子邮箱
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,尚未达到游玩此游戏的年龄
 Authentication.SignUp.Label.ErrorsWithPassword,密码发生错误。
 Authentication.SignUp.Label.ErrorsWithUsername,用户名发生错误。
 Authentication.SignUp.Label.ExitModalSubtitle,你的帐户即将创建完成。如果离开，将会丢失当前进度。
@@ -262,6 +261,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation 包含关�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation 包含超过 {maxAllowed} 个 MarkerCurve。请确保 MarkerCurve 的子对象数量不超过 {maxAllowed} 个。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation 包含带 {count} 个标记的 MarkerCurve。每个 MarkerCurve 最多只能有 {maxAllowed} 个标记。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation 包含不应存在的子级：{childName}
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,商城中的动态头部必须正确置入笼架，以便笼架上的眼睛和嘴巴顶点与网格顶点对齐。请调整笼架位置，使其与网格对齐。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,无法检测到动态头部的微笑表情。请调整嘴巴的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示微笑表情。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,无法检测到动态头部的左眼闭合表情。请调整左眼的笼架标记，使其与头部的左眼位置相匹配，并确保其可以闭合。
@@ -274,7 +274,8 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,自发光面积超�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,“{meshName}”的自发光程度过高。自发光区域面积 × 强度超出上限（当前为 {emissivePercentage}%，不得超过 {maxEmissivePercentage}%）。请缩小发光区域或降低其 EmissiveStrength。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,自发光面积超出上限。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,“{assetTypeName}”的自发光程度过高。自发光区域面积 × 强度超出上限（当前为 {emissiveArea}，不得超过 {maxEmissiveArea}）。请缩小发光区域或降低其 EmissiveStrength。
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用了发光贴图，这些贴图仅限“受信任创作者计划”创作者使用。请移除所有发光贴图内容或加入该计划后再上传。
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedInExperience,
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowedOnDecal,
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,已发布的动画缺少有效的部件最大位移值。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,已发布的动画缺少有效的用户生成内容动作标记。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,无法根据已发布的动画数据计算部件的最大位移。请重新发布该动画。
@@ -282,6 +283,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,已发
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,头部必须位于上身躯干的上方。头部中心位于躯干顶部下方，表明头部网格塌陷或位置不当。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,上传时，FaceControls 上的 InternalOverrideFACSData 属性必须为空。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,检测到 FACS 将你的头部扩大到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,动态头部最多可以有 {maxFacsJointCount} 个 FACS 关节，但此头部有 {actualJointCount} 个。请减少 FACS 关节的数量，然后重试。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,检测到 FACS 将你的头部缩小到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,上传格式与预期的文件夹结构不符。请重试或提交错误报告。
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,骨骼“{bonePath}”离网格部件“{partName}”过远，请将其放置在更靠近网格部件尺寸边界的位置。
@@ -2021,7 +2023,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,吸引更多玩家
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,让玩家持续回归
 Feature.Build.Analytics.Goal.Locked.EarnRobux,在你的游戏中赚取 Robux 以查看这些统计数据。
 Feature.Build.Analytics.Goal.Locked.FirstImpression,让你的第一位玩家看到这些统计数据。
-Feature.Build.Analytics.Goal.Locked.GetMorePlayers,
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,让更多玩家看到这些统计数据。
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,让你的第一位回访玩家看到这些统计数据。
 Feature.Build.Analytics.KeyStats,关键统计数据
 Feature.Build.Analytics.LastMonth,上个月
@@ -2375,11 +2377,8 @@ Feature.Build.Message.NoSearchResultsFound,未找到搜索结果
 Feature.Build.Message.NoVersionHistory,暂无版本历史记录。
 Feature.Build.Message.OneTaskCompleted,已完成 1 项任务
 Feature.Build.Message.OutOfBuildUsage,你的 Build 使用额度已用完。请查看你的选项，以便使用 Robux 继续创建。
-Feature.Build.Message.PlaytestInviteSendFailedBody,你无法向以下用户发送聊天邀请链接：
-Feature.Build.Message.PlaytestInviteSendFailedHint,请使用分享按钮获取链接。
 Feature.Build.Message.PlaytesterRequestFailed,我们无法完成你的请求。请重试。
 Feature.Build.Message.PlaytestersAdded,已邀请 {INVITED_COUNT} 位初期测试玩家，最多可邀请 {MAX_INVITES} 位
-Feature.Build.Message.PrivatePlaytestInvite,{username}已邀请你成为“{experienceName}”的初期测试玩家
 Feature.Build.Message.PublicPublishFailed,你的游戏已发布，但无法公开。请重试。
 Feature.Build.Message.PublishExpandAudience,发布并扩大受众范围
 Feature.Build.Message.PublishNotReverted,你的发布未还原。请重试。
@@ -2448,7 +2447,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.PickCampaign,选择时长
-Feature.Build.Title.PlaytestInviteSendFailed,无法发送邀请
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,无法添加以下用户：
 Feature.Build.Title.PlaytestersOnlyPlay,只有测试玩家可以游玩
@@ -3786,7 +3784,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,请等待一分钟，然后重试
 Feature.Moments.Label.VoiceModerationError,你的脚本必须遵守安全规则
 Feature.Moments.Label.VoicePlaceholder,请输入你的旁白脚本。字符数限制为 {maxCount} 个
 Feature.Moments.Label.VoiceTimeoutBody,旁白生成超时。
-Feature.Moments.Label.VoiceTooManyNumbersError,
+Feature.Moments.Label.VoiceTooManyNumbersError,脚本包含的数字过多
 Feature.Moments.Label.WriteComment,留下评论
 Feature.Moments.Title.Comments,评论
 Feature.Moments.Title.CommentsWithCappedCount,评论（{count} 条以上）
@@ -3797,6 +3795,8 @@ Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页�
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.ReportPost,举报帖子
 Feature.Moments.Tooltip.Creation,体验中的每个人都可以查看你的“精彩瞬间”。
+Feature.Moments.Tooltip.ShareFirstMomentBody,
+Feature.Moments.Tooltip.ShareFirstMomentTitle,
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,报告错误
 Feature.NotApproved.Label.AbuseType.Advertising,

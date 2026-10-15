@@ -70,7 +70,8 @@ local function MusicPickerWithAnalytics(p1)
 					var1.togglePreview(p2)
 				end,
 				savedIds = var1.savedIds,
-				toggleSaved = var1.toggleSaved
+				toggleSaved = var1.toggleSaved,
+				showSaveButton = var1.showSaveButton
 			}
 		end, { var1, var2 })
 	}, { Picker = reactModule.createElement(MusicPickerBase, p1) })

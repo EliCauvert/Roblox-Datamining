@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("MomentsCommentsRevealAfterMeasure", false) and require(script:FindFirstAncestor("Moments").Parent.SharedFlags).FFlagMomentsComments

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXPhotoboothMomentsLogging2", false) and require(script.Parent.FFlagAXUseUnifiedLoggingEnums)
+﻿return game:DefineFastFlag("AXPhotoboothMomentsLogging2", false)

@@ -11,6 +11,7 @@ local closeConfirmationDialogModule = require(script.Parent.CloseConfirmationDia
 local accountUpgradeDialogModule = require(accountUpgrade.SuccessModal.AccountUpgradeDialog)
 local accountUpgradeDialogActionsModule = require(accountUpgrade.SuccessModal.AccountUpgradeDialogActions)
 local accountUpgradeFieldModule = require(accountUpgrade.AccountUpgradeField)
+local fFlagAccountUpgradeOAuthTelemetryModule = require(accountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
 local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
@@ -25,7 +26,7 @@ local function createAuditContent(p1)
 end
 
 return function(p2)
-	-- upvalues: accountUpgradeFieldModule (ref), reactModule (ref), view (ref), accountUpgradeFieldsModule (ref), accountUpgradeDialogActionsModule (ref), buttonVariant (ref), accountUpgradeFieldErrorModule (ref), legalTextWithLinks (ref), createAuditContent (ref), accountUpgradeDialogModule (ref), birthdayPickerSheetModule (ref), closeConfirmationDialogModule (ref)
+	-- upvalues: accountUpgradeFieldModule (ref), reactModule (ref), view (ref), accountUpgradeFieldsModule (ref), accountUpgradeDialogActionsModule (ref), buttonVariant (ref), accountUpgradeFieldErrorModule (ref), legalTextWithLinks (ref), createAuditContent (ref), accountUpgradeDialogModule (ref), birthdayPickerSheetModule (ref), fFlagAccountUpgradeOAuthTelemetryModule (ref), closeConfirmationDialogModule (ref)
 	local var1 = not p2.isSaveEnabled and not p2.isSubmitting
 	local var2 = p2.fieldStates[accountUpgradeFieldModule.Birthday] ~= nil
 	local onClose = p2.onClose
@@ -42,6 +43,7 @@ return function(p2)
 		end, { onClose }) else nil,
 		onCloseActivated = if p2.confirmsClose then onClose else nil,
 		hasBackdrop = p2.hasBackdrop,
+		fitsContent = p2.fitsDialogToContent,
 		isFocusable = not (p2.isBirthdayPickerOpen or p2.isCloseConfirmationOpen),
 		children = {
 			Content = reactModule.createElement(view, {
@@ -92,7 +94,8 @@ return function(p2)
 				isOpen = p2.isBirthdayPickerOpen,
 				birthday = p2.birthday,
 				onClose = p2.onBirthdayPickerClosed,
-				onConfirm = p2.onBirthdayConfirmed
+				onConfirm = p2.onBirthdayConfirmed,
+				onAllPicked = if fFlagAccountUpgradeOAuthTelemetryModule then p2.onBirthdayPickerAllPicked else nil
 			}) else nil,
 			CloseConfirmation = if p2.isCloseConfirmationOpen and onSignOut then reactModule.createElement(closeConfirmationDialogModule, {
 				onBack = p2.onCloseConfirmationBack,

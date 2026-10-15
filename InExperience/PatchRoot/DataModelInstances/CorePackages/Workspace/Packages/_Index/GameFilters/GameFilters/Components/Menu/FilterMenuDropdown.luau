@@ -11,7 +11,6 @@ local filterMenuHeaderModule = require(gameFilters.Components.Menu.FilterMenuHea
 local filterMenuOptionsModule = require(gameFilters.Components.Menu.FilterMenuOptions)
 local getOptionContextTagModule = require(gameFilters.Analytics.getOptionContextTag)
 local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
-local fFlagLuaAppChartsActiveFilterChips = require(parent.SharedFlags).FFlagLuaAppChartsActiveFilterChips
 local var1 = if fFlagLuaAppChartsFilterOptionTextTag then nil else 10000
 
 local function _(p1, p2)
@@ -19,7 +18,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), var1 (ref), filterClickButtonNameModule (ref), getOptionContextTagModule (ref), fFlagLuaAppChartsActiveFilterChips (ref), filterMenuHeaderModule (ref), filterMenuOptionsModule (ref), filterMenuActionBarModule (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), var1 (ref), filterClickButtonNameModule (ref), getOptionContextTagModule (ref), filterMenuHeaderModule (ref), filterMenuOptionsModule (ref), filterMenuActionBarModule (ref)
 	local uDim2, vector2
 	local var2 = useTokens()
 	local var3 = useDispatch()
@@ -76,10 +75,10 @@ return function(p1)
 		return Vector2.new(maxValue, maxValue_1)
 	end)
 	local var22 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), p1 (ref), filterClickButtonNameModule (copy), var6 (ref), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
+		-- upvalues: var3 (ref), p1 (ref), filterClickButtonNameModule (copy), var6 (ref), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy)
 		var3(p1.closeCentralOverlayThunk())
 		p1.onFilterMenuClosed()
-		p1.sendFilterClick(filterClickButtonNameModule.CloseDropdown, p1.filter.selectedOptionId, var6, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, p1.filter.selectedOptionId) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, var6) else nil, if fFlagLuaAppChartsActiveFilterChips then true else nil)
+		p1.sendFilterClick(filterClickButtonNameModule.CloseDropdown, p1.filter.selectedOptionId, var6, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, p1.filter.selectedOptionId) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, var6) else nil, true)
 	end, {
 		p1.filter,
 		var6,
@@ -161,11 +160,11 @@ return function(p1)
 				Size = UDim2.new(if fFlagLuaAppChartsFilterOptionTextTag then 0 else 1, 0, 0, var5),
 				applyEnabled = var6 ~= p1.filter.selectedOptionId,
 				onApply = reactModule.useCallback(function()
-					-- upvalues: p1 (ref), var6 (ref), var3 (ref), filterClickButtonNameModule (copy), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
+					-- upvalues: p1 (ref), var6 (ref), var3 (ref), filterClickButtonNameModule (copy), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy)
 					p1.onFilterApplied(p1.filter.filterType, var6)
 					var3(p1.closeCentralOverlayThunk())
 					p1.onFilterMenuClosed()
-					p1.sendFilterClick(filterClickButtonNameModule.Apply, var6, p1.filter.selectedOptionId, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, var6) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, p1.filter.selectedOptionId) else nil, if fFlagLuaAppChartsActiveFilterChips then true else nil)
+					p1.sendFilterClick(filterClickButtonNameModule.Apply, var6, p1.filter.selectedOptionId, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, var6) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, p1.filter.selectedOptionId) else nil, true)
 				end, {
 					p1.filter, var6, p1.onFilterApplied, p1.closeCentralOverlayThunk,
 					p1.onFilterMenuClosed, p1.sendFilterClick

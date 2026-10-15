@@ -130,7 +130,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} tu�
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Ngày
 Authentication.SignUp.Label.EnterYourEmail,Nhập email của bạn
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Bạn phải đủ tuổi để chơi trò chơi này
 Authentication.SignUp.Label.ErrorsWithPassword,Đã xảy ra lỗi với mật khẩu.
 Authentication.SignUp.Label.ErrorsWithUsername,Đã xảy ra lỗi với tên người dùng.
 Authentication.SignUp.Label.ExitModalSubtitle,"Tài khoản của bạn sắp được tạo xong. Nếu bạn thoát, tiến trình của bạn sẽ không được lưu."
@@ -282,7 +281,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Diện tích phát s
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} có mức Phát sáng quá cao. Diện tích phát sáng × cường độ phát sáng đã vượt quá giới hạn (hiện tại là {emissivePercentage}%, phải ở mức {maxEmissivePercentage}% trở xuống). Hãy thu nhỏ diện tích phát sáng hoặc giảm EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Đã vượt quá diện tích phát sáng.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} có mức Phát sáng quá cao. Diện tích phát sáng × cường độ phát sáng đã vượt quá giới hạn (hiện tại là {emissiveArea}, phải ở mức {maxEmissiveArea} trở xuống). Hãy thu nhỏ diện tích phát sáng hoặc giảm EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Tài sản này sử dụng bản đồ phát sáng chỉ dành cho nhà sáng tạo tham gia Chương trình Nhà sáng tạo đáng tin cậy. Vui lòng xóa tất cả nội dung chứa bản đồ phát sáng hoặc tham gia chương trình trước khi tải lên.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Hiệu ứng động đã đăng bị thiếu giá trị dịch chuyển tối đa hợp lệ của bộ phận. Vui lòng đăng lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Hiệu ứng động đã đăng bị thiếu điểm đánh dấu biểu cảm UGC hợp lệ. Vui lòng đăng lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Không thể tính toán độ dịch chuyển tối đa của bộ phận dựa trên dữ liệu hiệu ứng động đã đăng. Vui lòng đăng lại hiệu ứng động này.
@@ -290,6 +288,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Hiệ
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,Đầu phải được đặt phía trên Thân trên. Tâm của đầu đang nằm dưới đỉnh của thân – điều này cho thấy lưới của đầu đang bị xẹp hoặc đặt sai vị trí.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Thuộc tính InternalOverrideFACSData trên FaceControls phải để trống khi tải lên.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACS phát hiện đầu của bạn bị phóng to lên {modPercent}%, tuy nhiên việc thay đổi kích thước đầu là vi phạm chính sách về chợ đối với hiệu ứng khuôn mặt."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Đầu hiệu ứng động có thể có tối đa {maxFacsJointCount} khớp FACS, nhưng đầu này có {actualJointCount}. Vui lòng giảm số lượng khớp FACS rồi thử lại."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACS phát hiện đầu của bạn bị thu nhỏ còn {modPercent}%, tuy nhiên việc thay đổi kích thước đầu là vi phạm chính sách về chợ đối với hiệu ứng khuôn mặt."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Định dạng của tệp tải lên không khớp với cấu trúc thư mục yêu cầu. Vui lòng thử lại hoặc gửi báo cáo lỗi.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Xương {bonePath} nằm quá xa so với meshpart {partName}, vui lòng đặt xương này gần hơn với ranh giới kích thước của meshpart."
@@ -2026,6 +2025,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,Thu hút thêm người chơi
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Thu hút người chơi quay trở lại
 Feature.Build.Analytics.Goal.Locked.EarnRobux,Hãy kiếm Robux trong trò chơi của bạn để xem các số liệu thống kê này.
 Feature.Build.Analytics.Goal.Locked.FirstImpression,Hãy thu hút người chơi đầu tiên để xem các số liệu thống kê này.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Thu hút thêm người chơi để xem các số liệu thống kê này.
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Hãy thu hút người chơi quay lại đầu tiên để xem các số liệu thống kê này.
 Feature.Build.Analytics.KeyStats,Số liệu chính
 Feature.Build.Analytics.LastMonth,Tháng trước
@@ -2379,11 +2379,8 @@ Feature.Build.Message.NoSearchResultsFound,Không tìm thấy kết quả tìm k
 Feature.Build.Message.NoVersionHistory,Chưa có lịch sử phiên bản.
 Feature.Build.Message.OneTaskCompleted,Đã hoàn thành 1 nhiệm vụ
 Feature.Build.Message.OutOfBuildUsage,Bạn đã hết lượt sử dụng Build. Hãy xem các lựa chọn sử dụng Robux để tiếp tục sáng tạo.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Bạn không thể gửi liên kết mời tham gia trò chuyện cho những người dùng sau:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Vui lòng sử dụng nút Chia sẻ để lấy đường liên kết.
 Feature.Build.Message.PlaytesterRequestFailed,Chúng tôi không thể hoàn tất yêu cầu của bạn. Vui lòng thử lại.
 Feature.Build.Message.PlaytestersAdded,Đã mời {INVITED_COUNT}/{MAX_INVITES} người thử nghiệm sớm
-Feature.Build.Message.PrivatePlaytestInvite,{username} đã mời bạn tham gia thử nghiệm sớm {experienceName}
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
 Feature.Build.Message.PublishExpandAudience,Đăng để mở rộng đối tượng của bạn
 Feature.Build.Message.PublishNotReverted,Không hủy đăng được. Vui lòng thử lại.
@@ -2452,7 +2449,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được
 Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò chơi của bạn
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.PickCampaign,Chọn thời lượng
-Feature.Build.Title.PlaytestInviteSendFailed,Không gửi được lời mời
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Không thể thêm những người dùng sau:
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
@@ -3790,6 +3786,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,Vui lòng đợi một lát rồi th
 Feature.Moments.Label.VoiceModerationError,Kịch bản của bạn phải tuân thủ quy tắc an toàn
 Feature.Moments.Label.VoicePlaceholder,Nhập kịch bản thuyết minh. Tối đa {maxCount} ký tự
 Feature.Moments.Label.VoiceTimeoutBody,Đã hết thời gian chờ tạo phần thuyết minh.
+Feature.Moments.Label.VoiceTooManyNumbersError,Tập lệnh chứa quá nhiều chữ số
 Feature.Moments.Label.WriteComment,Viết bình luận
 Feature.Moments.Title.Comments,Bình luận
 Feature.Moments.Title.CommentsWithCappedCount,Bình luận ({count}+)

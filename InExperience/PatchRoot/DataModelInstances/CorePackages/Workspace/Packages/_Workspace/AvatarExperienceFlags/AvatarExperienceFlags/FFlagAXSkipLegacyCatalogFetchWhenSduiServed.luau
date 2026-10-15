@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXSkipLegacyCatalogFetchWhenSduiServed", false) and require(script.Parent.FFlagAXMigrateAllTabToSduiDev)

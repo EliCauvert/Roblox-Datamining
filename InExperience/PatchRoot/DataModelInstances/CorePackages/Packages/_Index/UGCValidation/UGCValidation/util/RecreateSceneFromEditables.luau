@@ -6,7 +6,6 @@ local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local rigBuilderModule = require(parent.util.RigBuilder)
 local buildEmoteKeyframeSequenceFromCurveAnimModule = require(parent.util.buildEmoteKeyframeSequenceFromCurveAnim)
 local getEngineFeatureEngineUGCValidateEmoteAnimationExportModule = require(parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)
-local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local t = {}
 
 local function createCagePart(p1, p2, p3, p4)
@@ -20,7 +19,7 @@ local function createCagePart(p1, p2, p3, p4)
 end
 
 local function copyMeshPart(p1, p2, p3)
-	-- upvalues: assetService (ref), getFFlagUGCValidateAllowEmissivesModule (ref), r15plusUtilsModule (ref)
+	-- upvalues: assetService (ref), r15plusUtilsModule (ref)
 	local editable = assetService:CreateMeshPartAsync(Content.fromObject(p2.editable))
 	
 	if p3 and not p3.isPBR and p3.Texture then
@@ -40,7 +39,7 @@ local function copyMeshPart(p1, p2, p3)
 		if p3.RoughnessMap then
 			surfaceAppearance.RoughnessMapContent = Content.fromObject(p3.RoughnessMap.editable)
 		end
-		if getFFlagUGCValidateAllowEmissivesModule() and p3.EmissiveMask then
+		if p3.EmissiveMask then
 			surfaceAppearance.EmissiveMaskContent = Content.fromObject(p3.EmissiveMask.editable)
 		end
 		surfaceAppearance.Parent = editable

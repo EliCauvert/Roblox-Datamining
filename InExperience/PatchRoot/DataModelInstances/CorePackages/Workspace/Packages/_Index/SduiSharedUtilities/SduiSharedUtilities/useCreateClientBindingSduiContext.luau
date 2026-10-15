@@ -9,7 +9,6 @@ local getSduiServiceDependenciesStore = sduiCoreSystemModule.getSduiServiceDepen
 local collectionItemSize = require(parent.CollectionViews).CollectionViewTypes.CollectionItemSize
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppCompositionAlways = sharedFlagsModule.FFlagLuaAppCompositionAlways
-local fFlagLuaAppSduiStickyHeaderScrollAway = sharedFlagsModule.FFlagLuaAppSduiStickyHeaderScrollAway
 local fFlagLuaAppSduiVideoThumbnail = sharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 local fFlagLuaAppOneByTwoHoverIdleAutoplay = sharedFlagsModule.FFlagLuaAppOneByTwoHoverIdleAutoplay
 local t = {
@@ -21,7 +20,7 @@ local t = {
 }
 
 return function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), useCollectionLayoutConfig (ref), reactModule (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref), getSduiServiceDependenciesStore (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref)
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), useCollectionLayoutConfig (ref), reactModule (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref), getSduiServiceDependenciesStore (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref)
 	p7 = p7 or p1
 	local _ = nil
 	local var1 = nil
@@ -46,7 +45,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 		end, { var2, p1, p6 })
 	end
 	return reactModule.useMemo(function()
-		-- upvalues: getSduiServiceDependenciesStore (copy), p1 (ref), p7 (ref), var1 (write), p6 (ref), p4 (ref), p5 (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), p8 (ref), fFlagLuaAppSduiVideoThumbnail (copy), fFlagLuaAppOneByTwoHoverIdleAutoplay (copy), p9 (ref)
+		-- upvalues: getSduiServiceDependenciesStore (copy), p1 (ref), p7 (ref), var1 (write), p6 (ref), p4 (ref), p5 (ref), p8 (ref), fFlagLuaAppSduiVideoThumbnail (copy), fFlagLuaAppOneByTwoHoverIdleAutoplay (copy), p9 (ref)
 		return {
 			dependencies = getSduiServiceDependenciesStore().getDependencies(p1),
 			appPage = p1,
@@ -55,12 +54,11 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 			appCompositionEnabled = p6 ~= nil or p6,
 			dataUpdatedTimestamp = p4,
 			configKey = p5,
-			scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p8 else nil,
+			scrollAway = p8,
 			videoPlaybackContext = if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then p9 else nil
 		}
 	end, {
-		p1, p7, var1, p4, p5, p6,
-		if fFlagLuaAppSduiStickyHeaderScrollAway then p8 else nil,
+		p1, p7, var1, p4, p5, p6, p8,
 		if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then p9 else nil
 	})
 end

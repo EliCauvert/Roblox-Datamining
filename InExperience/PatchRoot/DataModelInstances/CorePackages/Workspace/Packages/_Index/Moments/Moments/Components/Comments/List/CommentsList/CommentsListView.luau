@@ -28,6 +28,7 @@ return function(p1)
 				onEndReached = p1.onEndReached,
 				onViewportChanged = p1.onViewportChanged,
 				onContentLengthChanged = p1.onContentLengthChanged,
+				onVisibleRangeChanged = p1.onVisibleRangeChanged,
 				autoScrollOnChange = if fFlagViewRecyclerReact06 then viewRecyclerModule.AutoScrollPolicy.WhenAtStart else p1.autoScrollOnChange,
 				autoScrollThreshold = if fFlagViewRecyclerReact06 then 33 else nil,
 				scrollingFrameRef = p1.listScrollingFrameRef,

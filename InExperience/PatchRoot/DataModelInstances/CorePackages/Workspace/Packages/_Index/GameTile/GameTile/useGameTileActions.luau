@@ -38,6 +38,7 @@ local userSignalTypes = userSignalsModule.UserSignalTypes
 local fFlagLuaAppMakeDisclaimerOptInForFeedbackForm = sharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
 local fFlagLuaAppNotInterestedFeedbackFormTelemetry = sharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
 local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
+local fFlagEnableNewReportFlowGameTile = sharedFlagsModule.FFlagEnableNewReportFlowGameTile
 local fFlagAddThumbnailSelectorReport = sharedFlagsModule.FFlagAddThumbnailSelectorReport
 local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
 local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
@@ -45,7 +46,7 @@ local fFlagLuaAppContinueSortInstantPlay = sharedFlagsModule.FFlagLuaAppContinue
 local fFlagLuaAppExtractNotInterestedHelper = sharedFlagsModule.FFlagLuaAppExtractNotInterestedHelper
 
 return function(p1, p2)
-	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppContinueSortInstantPlay (ref), reactModule (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), fFlagLuaAppExtractNotInterestedHelper (ref), activateGameNotInterestedModule (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), fFlagAddThumbnailSelectorReport (ref)
+	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppContinueSortInstantPlay (ref), reactModule (ref), userSignalTypes (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), flaggedMutedError (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), httpService (ref), mutedError (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), sendNotInterestedFeedbackFormAnalyticsModule (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref), tileOverflowMenuItems (ref), fFlagLuaAppExtractNotInterestedHelper (ref), activateGameNotInterestedModule (ref), setCentralOverlay (ref), centralOverlayType (ref), iconName (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), fFlagEnableNewReportFlowGameTile (ref), fFlagAddThumbnailSelectorReport (ref)
 	local var1 = useDispatch()
 	local var2 = useRoactService(roactNetworking)
 	local var3 = useLocalization({
@@ -310,14 +311,14 @@ return function(p1, p2)
 		end
 	end, { var1, p1.adId, p2 })
 	local var14 = if fFlagLuaAppEnableReportExperience then reactModule.useCallback(function()
-		-- upvalues: p1 (ref), flaggedMutedError (copy), var1 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), fFlagAddThumbnailSelectorReport (copy), closeCentralOverlay (copy), p2 (ref), tileOverflowMenuItems (copy)
+		-- upvalues: p1 (ref), flaggedMutedError (copy), var1 (ref), openDynamicAbuseReportModule (copy), fFlagEnableNewReportFlowGameTile (copy), abuseVectorModule (copy), fFlagAddThumbnailSelectorReport (copy), closeCentralOverlay (copy), p2 (ref), tileOverflowMenuItems (copy)
 		if not p1.placeId then
 			flaggedMutedError("ReportExperienceError", "Report experience clicked without valid target place id")
 			
 			return
 		end
 		var1(openDynamicAbuseReportModule({
-			abuseVector = abuseVectorModule.Place,
+			abuseVector = if fFlagEnableNewReportFlowGameTile then abuseVectorModule.GameTile else abuseVectorModule.Place,
 			targetId = p1.placeId,
 			custom = if fFlagAddThumbnailSelectorReport then { universeId = p1.universeId } else nil,
 			onClose = function()

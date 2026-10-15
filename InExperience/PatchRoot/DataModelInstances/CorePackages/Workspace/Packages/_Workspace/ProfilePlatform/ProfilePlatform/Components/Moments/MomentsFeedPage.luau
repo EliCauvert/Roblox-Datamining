@@ -12,7 +12,6 @@ local useOpenBlockingModalModule = require(parent.MomentsCommon.useOpenBlockingM
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local fFlagEnableArgusImmersiveNav = sharedFlagsModule.FFlagEnableArgusImmersiveNav
-local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
 local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
 local fFlagEnableMomentsCommentBlocking = sharedFlagsModule.FFlagEnableMomentsCommentBlocking
 local fFlagAbuseReportSubmissionTargetV4 = sharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
@@ -38,7 +37,7 @@ local createUserMomentsFeedSourceModule = require(parent.Moments.CreateUserMomen
 local reportMoment = momentsModule.reportMoment
 
 return if fFlagEnableArgusImmersiveNav then function()
-	-- upvalues: useNavigation (ref), fFlagMomentsOptimisticProfilePending (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useDispatch (ref), closeCentralOverlay (ref), reportMoment (ref), openDynamicAbuseReport (ref), abuseVector (ref), fFlagAbuseReportSubmissionTargetV4 (ref), fFlagEnableMomentsCommentReporting (ref), fFlagEnableMomentsCommentBlocking (ref), useOpenBlockingModalModule (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
+	-- upvalues: useNavigation (ref), fFlagMomentsOptimisticProfilePending (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), useDispatch (ref), closeCentralOverlay (ref), reportMoment (ref), openDynamicAbuseReport (ref), abuseVector (ref), fFlagAbuseReportSubmissionTargetV4 (ref), fFlagEnableMomentsCommentReporting (ref), fFlagEnableMomentsCommentBlocking (ref), useOpenBlockingModalModule (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref), immersiveFeedKind (ref)
 	local var1 = useNavigation()
 	local extraProps = var1.getParam("extraProps")
 	local var2 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
@@ -49,98 +48,13 @@ return if fFlagEnableArgusImmersiveNav then function()
 		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var2) })
 		var1.goBack()
 	end, { var1.goBack, var2 })
-	local var6 = nil
-	
-	if fFlagEnableReportingFlowForMomentsFeed then
-		local var7 = useDispatch()
-		var6 = reactModule.useCallback(function(p1)
-			-- upvalues: var7 (ref), closeCentralOverlay (copy), reportMoment (copy), openDynamicAbuseReport (copy), abuseVector (copy), fFlagAbuseReportSubmissionTargetV4 (copy)
-			local var8 = false
-			
-			local function submitMomentsIp(_)
-				-- upvalues: var8 (write), p1 (ref), var7 (copy), closeCentralOverlay (copy), reportMoment (copy)
-				var8 = true
-				
-				local function _(p2)
-					-- upvalues: p1 (copy), var7 (copy), closeCentralOverlay (copy)
-					p1.onClose()
-					var7(closeCentralOverlay())
-					
-					if p1.onIpReportCode then
-						p1.onIpReportCode(p2)
-					end
-				end
-				
-				return reportMoment(p1.feedItemId, "IntellectualProperty"):andThen(function(p2)
-					-- upvalues: p1 (copy), var7 (copy), closeCentralOverlay (copy)
-					local reportCode = p2.reportCode
-					p1.onClose()
-					var7(closeCentralOverlay())
-					
-					if p1.onIpReportCode then
-						p1.onIpReportCode(reportCode)
-					end
-					return p2
-				end, function()
-					-- upvalues: p1 (copy), var7 (copy), closeCentralOverlay (copy)
-					p1.onClose()
-					var7(closeCentralOverlay())
-					
-					if p1.onIpReportCode then
-						p1.onIpReportCode(nil)
-					end
-				end)
-			end
-			
-			var7(openDynamicAbuseReport({
-				abuseVector = abuseVector.MomentsFeed,
-				targetId = p1.feedItemId,
-				onSubmit = function()
-					-- upvalues: var8 (write), p1 (ref)
-					if var8 then
-						return
-					end
-					p1.onSubmit()
-				end,
-				onClose = function()
-					-- upvalues: p1 (ref), var7 (copy), closeCentralOverlay (copy)
-					p1.onClose()
-					var7(closeCentralOverlay())
-				end,
-				onCustomSubmit = if not fFlagAbuseReportSubmissionTargetV4 then function(p2)
-					-- upvalues: submitMomentsIp (ref)
-					return if p2.endpoint == "moments-ip" then submitMomentsIp(p2) else nil
-				end else nil,
-				clientActionHandlers = if fFlagAbuseReportSubmissionTargetV4 then { ["moments-ip"] = submitMomentsIp } else nil
-			}))
-		end, { var7 })
-	end
-	local var8 = nil
-	
-	if fFlagEnableMomentsCommentReporting then
-		local var9 = useDispatch()
-		var8 = reactModule.useCallback(function(p1)
-			-- upvalues: var9 (ref), openDynamicAbuseReport (copy), abuseVector (copy), closeCentralOverlay (copy)
-			var9(openDynamicAbuseReport({
-				abuseVector = abuseVector.MomentComment,
-				attributes = {
-					targetId = p1.commentId,
-					channelId = p1.channelId,
-					reportedUserId = p1.reportedUserId
-				},
-				analyticsTargetId = p1.commentId,
-				onClose = function()
-					-- upvalues: var9 (copy), closeCentralOverlay (copy)
-					var9(closeCentralOverlay())
-				end
-			}))
-		end, { var9 })
-	end
-	local var10 = useScreenSize()
+	local _ = nil
+	local var6 = useDispatch()
+	local var7 = useScreenSize()
 	
 	return reactModule.createElement(view, {
 		tag = "bg-surface-0",
-		Size = UDim2.fromOffset(var10.X, var10.Y)
+		Size = UDim2.fromOffset(var7.X, var7.Y)
 	}, {
 		Presentation = reactModule.createElement(momentsImmersivePresentation, {
 			sessionSource = "profile",
@@ -149,8 +63,83 @@ return if fFlagEnableArgusImmersiveNav then function()
 			initialIndex = var3,
 			initialMomentId = var4,
 			onBack = var5,
-			openMomentsFeedReport = var6,
-			openMomentCommentReport = var8,
+			openMomentsFeedReport = reactModule.useCallback(function(p1)
+				-- upvalues: var6 (ref), closeCentralOverlay (copy), reportMoment (copy), openDynamicAbuseReport (copy), abuseVector (copy), fFlagAbuseReportSubmissionTargetV4 (copy)
+				local var8 = false
+				
+				local function submitMomentsIp(_)
+					-- upvalues: var8 (write), p1 (ref), var6 (copy), closeCentralOverlay (copy), reportMoment (copy)
+					var8 = true
+					
+					local function _(p2)
+						-- upvalues: p1 (copy), var6 (copy), closeCentralOverlay (copy)
+						p1.onClose()
+						var6(closeCentralOverlay())
+						
+						if p1.onIpReportCode then
+							p1.onIpReportCode(p2)
+						end
+					end
+					
+					return reportMoment(p1.feedItemId, "IntellectualProperty"):andThen(function(p2)
+						-- upvalues: p1 (copy), var6 (copy), closeCentralOverlay (copy)
+						local reportCode = p2.reportCode
+						p1.onClose()
+						var6(closeCentralOverlay())
+						
+						if p1.onIpReportCode then
+							p1.onIpReportCode(reportCode)
+						end
+						return p2
+					end, function()
+						-- upvalues: p1 (copy), var6 (copy), closeCentralOverlay (copy)
+						p1.onClose()
+						var6(closeCentralOverlay())
+						
+						if p1.onIpReportCode then
+							p1.onIpReportCode(nil)
+						end
+					end)
+				end
+				
+				var6(openDynamicAbuseReport({
+					abuseVector = abuseVector.MomentsFeed,
+					targetId = p1.feedItemId,
+					onSubmit = function()
+						-- upvalues: var8 (write), p1 (ref)
+						if var8 then
+							return
+						end
+						p1.onSubmit()
+					end,
+					onClose = function()
+						-- upvalues: p1 (ref), var6 (copy), closeCentralOverlay (copy)
+						p1.onClose()
+						var6(closeCentralOverlay())
+					end,
+					onCustomSubmit = if not fFlagAbuseReportSubmissionTargetV4 then function(p2)
+						-- upvalues: submitMomentsIp (ref)
+						return if p2.endpoint == "moments-ip" then submitMomentsIp(p2) else nil
+					end else nil,
+					clientActionHandlers = if fFlagAbuseReportSubmissionTargetV4 then { ["moments-ip"] = submitMomentsIp } else nil
+				}))
+			end, { var6 }),
+			openMomentCommentReport = if fFlagEnableMomentsCommentReporting then reactModule.useCallback(function(p1)
+				-- upvalues: var6 (ref), openDynamicAbuseReport (copy), abuseVector (copy), closeCentralOverlay (copy)
+				var6(openDynamicAbuseReport({
+					abuseVector = abuseVector.MomentComment,
+					attributes = {
+						targetId = p1.commentId,
+						channelId = p1.channelId,
+						reportedUserId = p1.reportedUserId
+					},
+					analyticsTargetId = p1.commentId,
+					onClose = function()
+						-- upvalues: var6 (copy), closeCentralOverlay (copy)
+						var6(closeCentralOverlay())
+					end
+				}))
+			end, { var6 }) else nil,
 			openBlockUser = if fFlagEnableMomentsCommentBlocking then useOpenBlockingModalModule(var1) else nil
 		})
 	})

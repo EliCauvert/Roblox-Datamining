@@ -11,10 +11,11 @@ local sduiVariableItemWidthCarouselModule = require(serverDrivenUi.Content.Colle
 local fFlagSduiOptionImpressionsEventName = require(parent.SharedFlags).FFlagSduiOptionImpressionsEventName
 local fFlagSduiOptionSelectorHeaderComponent = require(parent.SharedFlags).FFlagSduiOptionSelectorHeaderComponent
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
+local fFlagSduiOptionSelectorAnchorTag = require(parent.SharedFlags).FFlagSduiOptionSelectorAnchorTag
 local luaAppNilCheckOptionItemConfigs = game:DefineFastFlag("LuaAppNilCheckOptionItemConfigs", false)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), sduiErrorType (ref), sduiComponentType (ref), fFlagSduiChartsSortDetailGenreFilter (ref), luaAppNilCheckOptionItemConfigs (ref), cryoModule (ref), sduiVariableItemWidthCarouselModule (ref), fFlagSduiOptionImpressionsEventName (ref), fFlagSduiOptionSelectorHeaderComponent (ref), sduiPlaceholderWrapper (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), sduiErrorType (ref), sduiComponentType (ref), fFlagSduiChartsSortDetailGenreFilter (ref), luaAppNilCheckOptionItemConfigs (ref), fFlagSduiOptionSelectorAnchorTag (ref), cryoModule (ref), sduiVariableItemWidthCarouselModule (ref), fFlagSduiOptionImpressionsEventName (ref), fFlagSduiOptionSelectorHeaderComponent (ref), sduiPlaceholderWrapper (ref)
 	local sduiContext = p1.sduiContext
 	local paddingBetweenOptionSelectorAndCollection = p1.paddingBetweenOptionSelectorAndCollection or useTokens().Size.Size_400
 	local var1, var2 = reactModule.useState(nil)
@@ -67,6 +68,43 @@ return reactModule.memo(function(p1)
 		}, sduiContext.appPage)
 		var2(nil)
 	end, { p1.onOptionActivated, sduiContext, var1, var4 })
+	local var6, var7 = reactModule.useMemo(function()
+		-- upvalues: luaAppNilCheckOptionItemConfigs (copy), p1 (ref), sduiContext (ref), sduiErrorType (copy), sduiComponentType (copy), fFlagSduiOptionSelectorAnchorTag (copy), cryoModule (copy), var3 (ref), var5 (ref)
+		if luaAppNilCheckOptionItemConfigs and (not p1.optionItemConfigs or not p1.optionsData) then
+			sduiContext.dependencies.logger.reportError(sduiErrorType.InvalidProps, {
+				componentType = sduiComponentType.OptionSelectorCollection,
+				message = `Missing {if not p1.optionItemConfigs then "optionItemConfigs" else "optionsData"} prop`,
+				propName = if not p1.optionItemConfigs then "optionItemConfigs" else "optionsData"
+			}, sduiContext.appPage)
+			
+			return {}
+		end
+		local t = {}
+		local var8 = if fFlagSduiOptionSelectorAnchorTag then {} else nil
+		
+		for i, v in p1.optionItemConfigs do
+			local var9 = p1.optionsData[i]
+			local var10 = if var9 then var9.id else nil
+			
+			if fFlagSduiOptionSelectorAnchorTag and var8 then
+				local var11 = if var9 then var9.anchorTag else nil
+				var8[i] = if var11 ~= "" then nil else var11
+			end
+			local cloned = table.clone(v)
+			cloned.props = cryoModule.Dictionary.join(v.props or {}, {
+				isChecked = var10 ~= nil and var10 == var3,
+				onActivated = function()
+					-- upvalues: var5 (copy), var10 (ref)
+					var5(var10)
+				end
+			})
+			table.insert(t, cloned)
+		end
+		if fFlagSduiOptionSelectorAnchorTag then
+			return t, var8
+		end
+		return t, nil
+	end, { p1.optionItemConfigs, p1.optionsData, var3, var5 })
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -96,34 +134,8 @@ return reactModule.memo(function(p1)
 			startRow = p1.startRow,
 			numUpdatesToDelayImpressions = p1.numUpdatesToDelayImpressions,
 			appCompositionEnabled = p1.appCompositionEnabled,
-			items = reactModule.useMemo(function()
-				-- upvalues: luaAppNilCheckOptionItemConfigs (copy), p1 (ref), sduiContext (ref), sduiErrorType (copy), sduiComponentType (copy), cryoModule (copy), var3 (ref), var5 (ref)
-				if luaAppNilCheckOptionItemConfigs and (not p1.optionItemConfigs or not p1.optionsData) then
-					sduiContext.dependencies.logger.reportError(sduiErrorType.InvalidProps, {
-						componentType = sduiComponentType.OptionSelectorCollection,
-						message = `Missing {if not p1.optionItemConfigs then "optionItemConfigs" else "optionsData"} prop`,
-						propName = if not p1.optionItemConfigs then "optionItemConfigs" else "optionsData"
-					}, sduiContext.appPage)
-					
-					return {}
-				end
-				local t = {}
-				
-				for i, v in p1.optionItemConfigs do
-					local var6 = p1.optionsData[i]
-					local var7 = if var6 then var6.id else nil
-					local cloned = table.clone(v)
-					cloned.props = cryoModule.Dictionary.join(v.props or {}, {
-						isChecked = var7 ~= nil and var7 == var3,
-						onActivated = function()
-							-- upvalues: var5 (copy), var7 (ref)
-							var5(var7)
-						end
-					})
-					table.insert(t, cloned)
-				end
-				return t
-			end, { p1.optionItemConfigs, p1.optionsData, var3, var5 }),
+			items = var6,
+			itemTags = if fFlagSduiOptionSelectorAnchorTag then var7 else nil,
 			itemHeight = p1.itemHeight,
 			itemPadding = p1.itemPadding,
 			scrollButtonsEnabled = p1.scrollButtonsEnabled,

@@ -25,7 +25,7 @@ local function buildWrappedItems(p1)
 	})
 end
 
-return reactModule.memo(if require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway then function(p1)
+return reactModule.memo(function(p1)
 	-- upvalues: buildWrappedItems (ref), reactModule (ref), useScrollAwayHeaderPosition (ref), view (ref), divider (ref), orientation (ref)
 	local var1 = buildWrappedItems(p1)
 	local var2, var3 = reactModule.useBinding(UDim2.new(1, 0, 0, 0))
@@ -109,50 +109,6 @@ return reactModule.memo(if require(parent.SharedFlags).FFlagLuaAppSduiStickyHead
 				}) else nil,
 				StickyDivider = reactModule.createElement(divider, { LayoutOrder = 4, orientation = orientation.Horizontal })
 			})
-		})
-	})
-end else function(p1)
-	-- upvalues: buildWrappedItems (ref), reactModule (ref), divider (ref), orientation (ref), view (ref)
-	local var1 = buildWrappedItems(p1)
-	var1.StickyDivider = reactModule.createElement(divider, {
-		LayoutOrder = 1000000,
-		orientation = orientation.Horizontal
-	})
-	
-	return reactModule.createElement(view, {
-		tag = "size-full-0 auto-y",
-		LayoutOrder = p1.layoutOrder or 1,
-		ZIndex = p1.zIndex or 1
-	}, {
-		Content = reactModule.createElement(view, {
-			tag = p1.contentTag,
-			Size = UDim2.fromScale(1, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			backgroundStyle = p1.backgroundStyle,
-			layout = {
-				FillDirection = Enum.FillDirection.Vertical,
-				SortOrder = Enum.SortOrder.LayoutOrder
-			}
-		}, {
-			TopSpacer = if p1.paddingTop and p1.paddingTop > 0 then reactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
-				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, p1.paddingTop)
-			}) else nil,
-			StickyContent = reactModule.createElement(view, {
-				tag = "size-full-0 auto-y",
-				LayoutOrder = 2,
-				layout = {
-					FillDirection = Enum.FillDirection.Vertical,
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, p1.gapBetweenItems)
-				}
-			}, var1),
-			BottomSpacer = if p1.paddingBottom and p1.paddingBottom > 0 then reactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
-				LayoutOrder = 3,
-				Size = UDim2.new(1, 0, 0, p1.paddingBottom)
-			}) else nil
 		})
 	})
 end)

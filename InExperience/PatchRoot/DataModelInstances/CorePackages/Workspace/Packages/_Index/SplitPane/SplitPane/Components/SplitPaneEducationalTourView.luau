@@ -14,8 +14,11 @@ local function _(p1, p2)
 	return Rect.new(p1.Min - p2, p1.Max - p2)
 end
 
+local frame = Instance.new("Frame")
+frame.BackgroundTransparency = 1
+
 return function(p1)
-	-- upvalues: buttonVariant (ref), reactModule (ref), educationalTooltip (ref), splitPaneEducationalTourVideoModule (ref), reactRobloxModule (ref), splitPaneEducationalTourScrimModule (ref), splitPaneEducationalTourChromeModule (ref)
+	-- upvalues: buttonVariant (ref), reactModule (ref), educationalTooltip (ref), splitPaneEducationalTourVideoModule (ref), reactRobloxModule (ref), splitPaneEducationalTourScrimModule (ref), frame (ref), splitPaneEducationalTourChromeModule (ref)
 	local t = {}
 	
 	if p1.tooltipModel ~= nil then
@@ -108,9 +111,32 @@ return function(p1)
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Size = UDim2.fromOffset(1, 1)
 			}) else nil,
-			Scrim = if p1.hasPresentedTooltip then reactModule.createElement(splitPaneEducationalTourScrimModule, {
+			Scrim = if p1.hasPresentedTooltip or p1.holdsInputBeforeTooltip then reactModule.createElement(splitPaneEducationalTourScrimModule, {
 				targetRect = if isTooltipContentVisible then rect_1 else nil,
-				dimEndX = if isTooltipContentVisible then var2 else nil
+				dimEndX = if isTooltipContentVisible then var2 else nil,
+				isTransparent = not p1.hasPresentedTooltip
+			}) else nil,
+			FocusHold = if p1.holdsInputBeforeTooltip and p1.tooltipModel == nil then reactModule.createElement("Frame", {
+				Name = "SplitPaneEducationalTourFocusHold",
+				BackgroundTransparency = 1,
+				SelectionGroup = true,
+				ref = p1.setFocusSurfaceRef,
+				Size = UDim2.fromOffset(1, 1),
+				SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
+				SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+				SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
+				SelectionBehaviorUp = Enum.SelectionBehavior.Stop
+			}, {
+				FocusTarget = reactModule.createElement("TextButton", {
+					Name = "FocusTarget",
+					BackgroundTransparency = 1,
+					AutoButtonColor = false,
+					Selectable = true,
+					Text = "",
+					ref = p1.setPrimaryActionRef,
+					Size = UDim2.fromScale(1, 1),
+					SelectionImageObject = frame
+				})
 			}) else nil,
 			Chrome = if rect == nil or p1.supportOverlayTopInset == nil or p1.presentation.isCollapsedStepOne then nil else reactModule.createElement(splitPaneEducationalTourChromeModule, {
 				supportPaneRect = rect,

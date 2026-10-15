@@ -1,5 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local signalsModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.Signals)
+local plainTextContentModelModule = require(script.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel)
+local presetContentModelModule = require(script.Parent.Parent.ContentKinds.Preset.PresetContentModel)
 local messageEnvelopeModelModule = require(script.Parent.Parent.MessageEnvelopeModel)
 local messageModelModule = require(script.Parent.Parent.MessageModel)
 local _ = require(script.Parent.Parent.Types)
@@ -7,6 +9,15 @@ local frozen = table.freeze({
 	{ userId = "1", displayName = "Roblox" },
 	{ userId = "156", displayName = "Builderman" }
 })
+
+local function _(a)
+	return { kind = "plainText", text = a }
+end
+
+local _ = function(a, b)
+	return { kind = "preset", presetId = a, displayText = b }
+end
+
 local frozen_1 = table.freeze({
 	"Switching to Bright blue, red team is stacked",
 	"Who just bloxxed me off the tower??",
@@ -17,18 +28,53 @@ local frozen_1 = table.freeze({
 	"Friend request sent, let's run it back", "Changing teams, green has nobody",
 	"Who keeps blowing up the house? /regen"
 })
+local frozen_2 = table.freeze({
+	{ kind = "plainText", text = frozen_1[1] },
+	{ kind = "plainText", text = frozen_1[2] },
+	{ kind = "plainText", text = frozen_1[3] },
+	{ kind = "plainText", text = frozen_1[4] },
+	{ kind = "plainText", text = frozen_1[5] },
+	{ kind = "plainText", text = frozen_1[6] },
+	{ kind = "plainText", text = frozen_1[7] },
+	{ kind = "plainText", text = frozen_1[8] },
+	{ kind = "plainText", text = frozen_1[9] },
+	{ kind = "plainText", text = frozen_1[10] },
+	{ kind = "plainText", text = frozen_1[11] },
+	{ kind = "plainText", text = frozen_1[12] },
+	{
+		kind = "preset",
+		presetId = "hello",
+		displayText = "Hello"
+	},
+	{ kind = "preset", presetId = "gg", displayText = "gg" }
+})
 
-local function _(p1)
+local function acceptedSendOf(p1)
+	-- upvalues: plainTextContentModelModule (ref), presetContentModelModule (ref)
 	local var1 = p1.contents[1]
 	
-	return if var1 == nil or var1.plainText == nil then nil else var1.plainText.text
+	if var1 == nil then
+		return nil
+	end
+	local draft = plainTextContentModelModule.getDraft(var1)
+	
+	if draft == nil then
+		local draft_1 = presetContentModelModule.getDraft(var1)
+		
+		return if draft_1 == nil then nil elseif draft_1.presetId == "" or draft_1.displayText == "" then nil else {
+			kind = "preset",
+			presetId = draft_1.presetId,
+			displayText = draft_1.displayText
+		}
+	end
+	return if draft.text == "" then nil else { kind = "plainText", text = draft.text }
 end
 
 return {
 	incomingIntervalSeconds = 2,
 	welcomeText = "Welcome to Crossroads! Type /regen if someone wrecks the map.",
 	create = function(p1, p2)
-		-- upvalues: signalsModule (ref), messageModelModule (ref), messageEnvelopeModelModule (ref), frozen (ref), httpService (ref), frozen_1 (ref)
+		-- upvalues: signalsModule (ref), messageModelModule (ref), messageEnvelopeModelModule (ref), frozen (ref), acceptedSendOf (ref), httpService (ref), frozen_2 (ref)
 		local t = { displayName = "You", userId = p1 }
 		local random = Random.new()
 		
@@ -90,6 +136,22 @@ return {
 			return fromPlainText(p4, t)
 		end
 		
+		local function messageFromAcceptedSend(p4, p5, p6)
+			-- upvalues: var4 (write), p2 (ref), messageModelModule (copy)
+			local t = {}
+			local var5 = p6
+			
+			if not var5 then
+				local var6 = if p2 then p2.getNowMs else nil
+				var4 = math.max(if var6 then var6() else DateTime.now().UnixTimestampMillis, var4 + 1)
+				var5 = var4
+			end
+			t.sentAtUnixMilliseconds = var5
+			t.author = p5
+			
+			return if p4.kind == "preset" then messageModelModule.fromPreset(p4.presetId, p4.displayText, t) else messageModelModule.fromPlainText(p4.text, t)
+		end
+		
 		local _ = function(p4)
 			-- upvalues: messageEnvelopeModelModule (copy), var2 (ref), var3 (ref)
 			local cloned = table.clone(var2(false))
@@ -126,143 +188,103 @@ return {
 		end
 		
 		local _ = function()
-			-- upvalues: frozen_1 (copy), p2 (ref), random (ref), frozen (copy), messageModelModule (copy), var4 (write), messageEnvelopeModelModule (copy), var2 (ref), var3 (ref)
-			local frozen_1Count = #frozen_1
+			-- upvalues: frozen_2 (copy), p2 (ref), random (ref), frozen (copy), messageFromAcceptedSend (ref), messageEnvelopeModelModule (copy), var2 (ref), var3 (ref)
+			local frozen_2Count = #frozen_2
 			local var11 = if p2 then p2.random else nil
-			local var12 = frozen_1[if var11 then var11:NextInteger(1, frozen_1Count) else random:NextInteger(1, frozen_1Count)]
+			local var12 = frozen_2[if var11 then var11:NextInteger(1, frozen_2Count) else random:NextInteger(1, frozen_2Count)]
 			local frozenCount = #frozen
 			local var13 = if p2 then p2.random else nil
-			local fromPlainText = messageModelModule.fromPlainText
-			local t = {
-				sentAtUnixMilliseconds = var4,
-				author = frozen[if var13 then var13:NextInteger(1, frozenCount) else random:NextInteger(1, frozenCount)]
-			}
-			local var14 = if p2 then p2.getNowMs else nil
-			var4 = math.max(if var14 then var14() else DateTime.now().UnixTimestampMillis, var4 + 1)
-			local var15 = messageEnvelopeModelModule.incoming(fromPlainText(var12, t))
+			local var14 = if var13 then var13:NextInteger(1, frozenCount) else random:NextInteger(1, frozenCount)
 			local cloned = table.clone(var2(false))
-			table.insert(cloned, var15)
+			table.insert(cloned, messageEnvelopeModelModule.incoming(messageFromAcceptedSend(var12, frozen[var14])))
 			var3(cloned)
 		end
 		
 		return {
 			getMessageEnvelopes = var2,
 			sendMessageDraft = function(p6)
-				-- upvalues: httpService (copy), var4 (write), p2 (ref), messageEnvelopeModelModule (copy), t (ref), var2 (ref), var3 (ref), t_1 (ref), replaceEnvelope (ref), messageModelModule (copy)
-				local var16 = p6.contents[1]
-				local var17 = if var16 == nil or var16.plainText == nil then nil else var16.plainText.text
+				-- upvalues: acceptedSendOf (copy), httpService (copy), var4 (write), p2 (ref), messageEnvelopeModelModule (copy), t (ref), var2 (ref), var3 (ref), t_1 (ref), replaceEnvelope (ref), messageFromAcceptedSend (ref)
+				local var15 = acceptedSendOf(p6)
 				
-				if var17 == nil or var17 == "" then
-					return { accepted = false }
+				if var15 == nil then
+					return
 				end
-				var16 = httpService:GenerateGUID(false)
-				local var18 = if p2 then p2.getNowMs else nil
-				var4 = math.max(if var18 then var18() else DateTime.now().UnixTimestampMillis, var4 + 1)
-				local var19 = var4
-				local var20 = if p2 then p2.deliveryOutcome else nil
-				local var21 = if p2 then p2.deliveryDelaySeconds else nil
+				local var16 = httpService:GenerateGUID(false)
+				local var17 = if p2 then p2.getNowMs else nil
+				var4 = math.max(if var17 then var17() else DateTime.now().UnixTimestampMillis, var4 + 1)
+				local var18 = var4
+				local var19 = if p2 then p2.deliveryOutcome else nil
+				local var20 = if p2 then p2.deliveryDelaySeconds else nil
 				local cloned = table.clone(var2(false))
-				table.insert(cloned, messageEnvelopeModelModule.sending(var16, p6, t, var19))
+				table.insert(cloned, messageEnvelopeModelModule.sending(var16, p6, t, var18))
 				var3(cloned)
-				local var22 = nil
+				local var21 = nil
 				
 				local function resolveDelivery()
-					-- upvalues: t_1 (copy), var22 (write), replaceEnvelope (copy), var16 (ref), p2 (copy), var20 (ref), messageEnvelopeModelModule (copy), var17 (ref), t (copy), var19 (ref), messageModelModule (copy), var4 (copy)
-					t_1[var22] = nil
+					-- upvalues: t_1 (copy), var21 (write), replaceEnvelope (copy), var16 (ref), p2 (copy), var19 (ref), messageEnvelopeModelModule (copy), messageFromAcceptedSend (copy), var15 (ref), t (copy), var18 (ref)
+					t_1[var21] = nil
 					replaceEnvelope(var16, function(p7)
-						-- upvalues: p2 (copy), var20 (copy), messageEnvelopeModelModule (copy), var17 (copy), t (copy), var19 (copy), messageModelModule (copy), var4 (copy)
+						-- upvalues: p2 (copy), var19 (copy), messageEnvelopeModelModule (copy), messageFromAcceptedSend (copy), var15 (copy), t (copy), var18 (copy)
 						if p7.direction ~= "outgoing" or p7.payload.kind ~= "draft" or p7.delivery.state ~= "sending" then
 							return p7
 						end
-						local var23 = if p2 then p2.getNowMs else nil
-						local maxValue = math.max(if var23 then var23() else DateTime.now().UnixTimestampMillis, p7.delivery.attemptedAtUnixMilliseconds)
+						local var22 = if p2 then p2.getNowMs else nil
+						local maxValue = math.max(if var22 then var22() else DateTime.now().UnixTimestampMillis, p7.delivery.attemptedAtUnixMilliseconds)
 						
-						if var20 == "fail" then
-							return messageEnvelopeModelModule.failed(p7, maxValue)
-						end
-						local acknowledged = messageEnvelopeModelModule.acknowledged
-						local fromPlainText = messageModelModule.fromPlainText
-						local t_1 = {}
-						local var24 = var19
-						
-						if not var24 then
-							local var25 = if p2 then p2.getNowMs else nil
-							var4 = math.max(if var25 then var25() else DateTime.now().UnixTimestampMillis, var4 + 1)
-							var24 = var4
-						end
-						t_1.sentAtUnixMilliseconds = var24
-						t_1.author = t
-						
-						return acknowledged(p7, fromPlainText(var17, t_1), maxValue)
+						return if var19 == "fail" then messageEnvelopeModelModule.failed(p7, maxValue) else messageEnvelopeModelModule.acknowledged(p7, messageFromAcceptedSend(var15, t, var18), maxValue)
 					end)
 				end
 				
-				t_1[if var21 ~= nil then task.defer(resolveDelivery) else task.delay(var21, resolveDelivery)] = true
-				
-				return { accepted = true, messageId = var16 }
+				t_1[if var20 ~= nil then task.defer(resolveDelivery) else task.delay(var20, resolveDelivery)] = true
 			end,
 			startIncomingTraffic = function()
-				-- upvalues: frozen_1 (copy), p2 (ref), random (ref), frozen (copy), messageModelModule (copy), var4 (write), messageEnvelopeModelModule (copy), var2 (ref), var3 (ref)
-				local var23 = false
+				-- upvalues: frozen_2 (copy), p2 (ref), random (ref), frozen (copy), messageFromAcceptedSend (ref), messageEnvelopeModelModule (copy), var2 (ref), var3 (ref)
+				local var22 = false
 				local delayedThread = nil
 				
 				local function scheduleNext()
-					-- upvalues: delayedThread (write), var23 (write), frozen_1 (copy), p2 (copy), random (copy), frozen (copy), messageModelModule (copy), var4 (copy), messageEnvelopeModelModule (copy), var2 (copy), var3 (copy), scheduleNext (ref)
+					-- upvalues: delayedThread (write), var22 (write), frozen_2 (copy), p2 (copy), random (copy), frozen (copy), messageFromAcceptedSend (copy), messageEnvelopeModelModule (copy), var2 (copy), var3 (copy), scheduleNext (ref)
 					delayedThread = task.delay(2, function()
-						-- upvalues: delayedThread (copy), var23 (copy), frozen_1 (copy), p2 (copy), random (copy), frozen (copy), messageModelModule (copy), var4 (copy), messageEnvelopeModelModule (copy), var2 (copy), var3 (copy), scheduleNext (copy)
+						-- upvalues: delayedThread (copy), var22 (copy), frozen_2 (copy), p2 (copy), random (copy), frozen (copy), messageFromAcceptedSend (copy), messageEnvelopeModelModule (copy), var2 (copy), var3 (copy), scheduleNext (copy)
 						delayedThread = nil
 						
-						if var23 then
+						if var22 then
 							return
 						end
-						local frozen_1Count = #frozen_1
-						local var24 = if p2 then p2.random else nil
-						local var25 = frozen_1[if var24 then var24:NextInteger(1, frozen_1Count) else random:NextInteger(1, frozen_1Count)]
+						local frozen_2Count = #frozen_2
+						local var23 = if p2 then p2.random else nil
+						local var24 = frozen_2[if var23 then var23:NextInteger(1, frozen_2Count) else random:NextInteger(1, frozen_2Count)]
 						local frozenCount = #frozen
-						local var26 = if p2 then p2.random else nil
-						local var27 = frozen[if var26 then var26:NextInteger(1, frozenCount) else random:NextInteger(1, frozenCount)]
-						local fromPlainText = messageModelModule.fromPlainText
-						local t = {}
-						local var28 = if p2 then p2.getNowMs else nil
-						var4 = math.max(if var28 then var28() else DateTime.now().UnixTimestampMillis, var4 + 1)
-						t.sentAtUnixMilliseconds = var4
-						t.author = var27
-						local var29 = messageEnvelopeModelModule.incoming(fromPlainText(var25, t))
+						local var25 = if p2 then p2.random else nil
+						local var26 = if var25 then var25:NextInteger(1, frozenCount) else random:NextInteger(1, frozenCount)
 						local cloned = table.clone(var2(false))
-						table.insert(cloned, var29)
+						table.insert(cloned, messageEnvelopeModelModule.incoming(messageFromAcceptedSend(var24, frozen[var26])))
 						var3(cloned)
 						scheduleNext()
 					end)
 				end
 				
 				delayedThread = task.delay(2, function()
-					-- upvalues: delayedThread (write), var23 (write), frozen_1 (copy), p2 (copy), random (copy), frozen (copy), messageModelModule (copy), var4 (copy), messageEnvelopeModelModule (copy), var2 (copy), var3 (copy), scheduleNext (ref)
+					-- upvalues: delayedThread (write), var22 (write), frozen_2 (copy), p2 (copy), random (copy), frozen (copy), messageFromAcceptedSend (copy), messageEnvelopeModelModule (copy), var2 (copy), var3 (copy), scheduleNext (ref)
 					delayedThread = nil
 					
-					if var23 then
+					if var22 then
 						return
 					end
-					local frozen_1Count = #frozen_1
-					local var30 = if p2 then p2.random else nil
-					local var31 = frozen_1[if var30 then var30:NextInteger(1, frozen_1Count) else random:NextInteger(1, frozen_1Count)]
+					local frozen_2Count = #frozen_2
+					local var23 = if p2 then p2.random else nil
+					local var24 = frozen_2[if var23 then var23:NextInteger(1, frozen_2Count) else random:NextInteger(1, frozen_2Count)]
 					local frozenCount = #frozen
-					local var32 = if p2 then p2.random else nil
-					local var33 = frozen[if var32 then var32:NextInteger(1, frozenCount) else random:NextInteger(1, frozenCount)]
-					local fromPlainText = messageModelModule.fromPlainText
-					local t = {}
-					local var34 = if p2 then p2.getNowMs else nil
-					var4 = math.max(if var34 then var34() else DateTime.now().UnixTimestampMillis, var4 + 1)
-					t.sentAtUnixMilliseconds = var4
-					t.author = var33
+					local var25 = if p2 then p2.random else nil
 					local cloned = table.clone(var2(false))
-					table.insert(cloned, messageEnvelopeModelModule.incoming(fromPlainText(var31, t)))
+					table.insert(cloned, messageEnvelopeModelModule.incoming(messageFromAcceptedSend(var24, frozen[if var25 then var25:NextInteger(1, frozenCount) else random:NextInteger(1, frozenCount)])))
 					var3(cloned)
 					scheduleNext()
 				end)
 				
 				return function()
-					-- upvalues: var23 (write), delayedThread (write)
-					var23 = true
+					-- upvalues: var22 (write), delayedThread (write)
+					var22 = true
 					
 					if delayedThread ~= nil then
 						task.cancel(delayedThread)
@@ -280,5 +302,6 @@ return {
 		}
 	end,
 	senderPool = frozen,
-	incomingLines = frozen_1
+	incomingLines = frozen_1,
+	incomingContents = frozen_2
 }

@@ -6,13 +6,11 @@ local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
 local _ = require(parent.SduiCoreSystem)
 local enumsModule = require(profilePlatform.Common.Enums)
 local createProfileCompletionPromptsConfig = require(parent.ProfilePlatformCommon).Utils.createProfileCompletionPromptsConfig
-local serverTriggeredModalsModule = require(parent.ServerTriggeredModals)
-local profileCompletionResolveLatestSduiEntry = game:DefineFastFlag("ProfileCompletionResolveLatestSduiEntry", false)
 local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local fetchPrompts = serverTriggeredModalsModule.fetchPrompts
+local fetchPrompts = require(parent.ServerTriggeredModals).fetchPrompts
 
 return function()
-	-- upvalues: reactModule (ref), createProfileCompletionPromptsConfig (ref), fetchPrompts (ref), profileCompletionResolveLatestSduiEntry (ref), getSduiApiStore (ref), enumsModule (ref), signalsReactModule (ref)
+	-- upvalues: reactModule (ref), createProfileCompletionPromptsConfig (ref), fetchPrompts (ref), getSduiApiStore (ref), enumsModule (ref), signalsReactModule (ref)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: createProfileCompletionPromptsConfig (copy)
 		return createProfileCompletionPromptsConfig()
@@ -23,10 +21,7 @@ return function()
 	end, { var1 })
 	
 	return signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
-		-- upvalues: profileCompletionResolveLatestSduiEntry (copy), getSduiApiStore (copy), enumsModule (copy)
-		if not profileCompletionResolveLatestSduiEntry then
-			return getSduiApiStore().getRootConfig(enumsModule.Components.ProfileCompletion, p1)
-		end
+		-- upvalues: getSduiApiStore (copy), enumsModule (copy)
 		local var2 = getSduiApiStore().getData(enumsModule.Components.ProfileCompletion).data(p1)
 		
 		if not var2 then

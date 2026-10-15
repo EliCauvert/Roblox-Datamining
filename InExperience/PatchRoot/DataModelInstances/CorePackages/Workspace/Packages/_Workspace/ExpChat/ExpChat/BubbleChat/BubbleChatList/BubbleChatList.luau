@@ -4,15 +4,22 @@ local roactModule = require(parent.Roact)
 local list = require(parent.llama).List
 local expChatSharedModule = require(parent.ExpChatShared)
 local chatBubbleModule = require(expChat.BubbleChat.ChatBubble)
+local borderlessBubbleChatModule = require(expChat.BubbleChat.BorderlessBubbleChat)
+local isBorderlessBubbleChatMessageModule = require(expChat.BubbleChat.Helpers.isBorderlessBubbleChatMessage)
+local getBubbleChatDisplayTextModule = require(expChat.BubbleChat.Helpers.getBubbleChatDisplayText)
+local getBubbleChatStartTimeMillisModule = require(expChat.BubbleChat.Helpers.getBubbleChatStartTimeMillis)
+local applyBubbleChatMessagePropertiesTextModule = require(expChat.BubbleChat.Helpers.applyBubbleChatMessagePropertiesText)
 local globalFlagsModule = require(expChat.GlobalFlags)
 local bubbleChatList = roactModule.PureComponent:extend("BubbleChatList")
 local getFFlagChatTranslationUIEnabledBubbleChatModule = require(expChat.Flags.getFFlagChatTranslationUIEnabledBubbleChat)
 local getFFlagExpChatUseUpdatedMessageRenderedModule = require(expChat.Flags.getFFlagExpChatUseUpdatedMessageRendered)
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local isBorderlessBubbleChatEnabledModule = require(expChat.isBorderlessBubbleChatEnabled)
 
 function bubbleChatList.getDerivedStateFromProps(p1, p2)
-	-- upvalues: list (ref), getFFlagChatTranslationUIEnabledBubbleChatModule (ref), fFlagExpChatPresetChatEnabled (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref)
+	-- upvalues: isBorderlessBubbleChatEnabledModule (ref), list (ref), isBorderlessBubbleChatMessageModule (ref), getFFlagChatTranslationUIEnabledBubbleChatModule (ref), fFlagExpChatPresetChatEnabled (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref), getBubbleChatDisplayTextModule (ref), getBubbleChatStartTimeMillisModule (ref)
 	local t = {}
+	local var1 = if isBorderlessBubbleChatEnabledModule() then p1.messages[#p1.messages] else nil
 	
 	if p2.bubbles then
 		for i, v in ipairs(p2.bubbles) do
@@ -20,11 +27,20 @@ function bubbleChatList.getDerivedStateFromProps(p1, p2)
 				-- upvalues: v (ref)
 				return p3.messageId == v.messageId
 			end) then
-				table.insert(t, { fadingOut = true, messageId = v.messageId })
+				if not (isBorderlessBubbleChatEnabledModule() and (var1 ~= nil and (v.isBorderless or isBorderlessBubbleChatMessageModule(var1)))) then
+					table.insert(t, {
+						fadingOut = true,
+						messageId = v.messageId,
+						isBorderless = if isBorderlessBubbleChatEnabledModule() then v.isBorderless else nil,
+						borderlessText = if isBorderlessBubbleChatEnabledModule() and v.isBorderless then v.borderlessText else nil,
+						borderlessReceivedAtMillis = if isBorderlessBubbleChatEnabledModule() and v.isBorderless then v.borderlessReceivedAtMillis else nil
+					})
+				end
 			end
 		end
 	end
 	for i, v in ipairs(p1.messages) do
+		local var2 = if isBorderlessBubbleChatEnabledModule() then isBorderlessBubbleChatMessageModule(v) else nil
 		table.insert(t, {
 			fadingOut = false,
 			messageId = v.messageId,
@@ -34,7 +50,10 @@ function bubbleChatList.getDerivedStateFromProps(p1, p2)
 			timestamp = tonumber(tostring(v.timestamp):sub(-9)) or v.timestamp,
 			bubbleChatMessageProperties = v.bubbleChatMessageProperties,
 			presetId = if fFlagExpChatPresetChatEnabled then v.presetId else nil,
-			textChatMessageInstance = if getFFlagExpChatUseUpdatedMessageRenderedModule() then v.textChatMessageInstance else nil
+			textChatMessageInstance = if getFFlagExpChatUseUpdatedMessageRenderedModule() then v.textChatMessageInstance else nil,
+			isBorderless = var2,
+			borderlessText = if var2 then getBubbleChatDisplayTextModule(v) else nil,
+			borderlessReceivedAtMillis = if var2 then getBubbleChatStartTimeMillisModule(v) else nil
 		})
 	end
 	return { bubbles = t }
@@ -49,22 +68,22 @@ function bubbleChatList.init(p3, p4)
 	end
 	function p3.onBubbleFadeOut(p5)
 		-- upvalues: list (copy), p3 (ref)
-		local var1 = list.filter(p3.state.bubbles, function(p6)
+		local var3 = list.filter(p3.state.bubbles, function(p6)
 			-- upvalues: p5 (ref)
 			return p6.messageId ~= p5
 		end)
 		
-		if #var1 == 0 and p3.props.onLastBubbleFadeOut then
+		if #var3 == 0 and p3.props.onLastBubbleFadeOut then
 			p3.props.onLastBubbleFadeOut()
 			
 			return
 		end
-		p3:setState({ bubbles = var1 })
+		p3:setState({ bubbles = var3 })
 	end
 end
 
 function bubbleChatList.render(p3)
-	-- upvalues: roactModule (ref), globalFlagsModule (ref), chatBubbleModule (ref), getFFlagChatTranslationUIEnabledBubbleChatModule (ref), fFlagExpChatPresetChatEnabled (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref)
+	-- upvalues: roactModule (ref), globalFlagsModule (ref), isBorderlessBubbleChatEnabledModule (ref), applyBubbleChatMessagePropertiesTextModule (ref), borderlessBubbleChatModule (ref), chatBubbleModule (ref), getFFlagChatTranslationUIEnabledBubbleChatModule (ref), fFlagExpChatPresetChatEnabled (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref)
 	local t = {}
 	local chatSettings = p3.props.chatSettings
 	t.Layout = roactModule.createElement("UIListLayout", {
@@ -76,13 +95,17 @@ function bubbleChatList.render(p3)
 	t.CaretPadding = p3.props.chatSettings.TailVisible and (globalFlagsModule.AvatarChatEnabled and (p3.props.showCaret and roactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 8) })))
 	
 	for i, v in ipairs(p3.state.bubbles) do
-		local var1 = i == #p3.state.bubbles
-		local var2 = if var1 then p3.props.renderFirstInsert else nil
+		local var3 = i == #p3.state.bubbles
+		local var4 = if var3 then p3.props.renderFirstInsert else nil
 		local insertSize = p3.props.insertSize
 		local text = v.text
 		local translation = v.translation
 		
-		if v.bubbleChatMessageProperties then
+		if isBorderlessBubbleChatEnabledModule() then
+			local var5, var6 = applyBubbleChatMessagePropertiesTextModule(text, translation, v.bubbleChatMessageProperties)
+			text = var5
+			translation = var6
+		elseif v.bubbleChatMessageProperties then
 			local bubbleChatMessageProperties = v.bubbleChatMessageProperties
 			
 			if bubbleChatMessageProperties:IsA("TextChatMessageProperties") then
@@ -94,26 +117,41 @@ function bubbleChatList.render(p3)
 				end
 			end
 		end
-		t["Bubble" .. v.messageId] = roactModule.createElement(chatBubbleModule, {
-			messageId = v.messageId,
-			text = text or "",
-			translation = if getFFlagChatTranslationUIEnabledBubbleChatModule() then translation else nil,
-			useTranslation = if getFFlagChatTranslationUIEnabledBubbleChatModule() then v.useTranslation else nil,
-			timestamp = v.timestamp or 0,
-			isMostRecent = var1,
-			theme = p3.props.theme,
-			fadingOut = v.fadingOut,
-			onFadeOut = p3.onBubbleFadeOut,
-			chatSettings = chatSettings,
-			renderInsert = var2,
-			insertSize = insertSize,
-			showCaret = p3.props.showCaret,
-			clientSettings = p3.props.clientSettings,
-			bubbleChatMessageProperties = v.bubbleChatMessageProperties,
-			presetId = if fFlagExpChatPresetChatEnabled then v.presetId else nil,
-			isTextChatServiceOn = p3.props.isTextChatServiceOn,
-			textChatMessageInstance = if getFFlagExpChatUseUpdatedMessageRenderedModule() then v.textChatMessageInstance else nil
-		})
+		if isBorderlessBubbleChatEnabledModule() and v.isBorderless then
+			t["Bubble" .. v.messageId] = roactModule.createElement(borderlessBubbleChatModule, {
+				messageId = v.messageId,
+				text = v.borderlessText or "",
+				timestamp = v.timestamp or 0,
+				receivedAtMillis = v.borderlessReceivedAtMillis,
+				isDistant = p3.props.isDistant,
+				distanceTransparency = p3.props.borderlessDistanceTransparency,
+				fadingOut = v.fadingOut,
+				onFadeOut = p3.onBubbleFadeOut,
+				chatSettings = chatSettings,
+				textChatMessageInstance = v.textChatMessageInstance
+			})
+		else
+			t["Bubble" .. v.messageId] = roactModule.createElement(chatBubbleModule, {
+				messageId = v.messageId,
+				text = text or "",
+				translation = if getFFlagChatTranslationUIEnabledBubbleChatModule() then translation else nil,
+				useTranslation = if getFFlagChatTranslationUIEnabledBubbleChatModule() then v.useTranslation else nil,
+				timestamp = v.timestamp or 0,
+				isMostRecent = var3,
+				theme = p3.props.theme,
+				fadingOut = v.fadingOut,
+				onFadeOut = p3.onBubbleFadeOut,
+				chatSettings = chatSettings,
+				renderInsert = var4,
+				insertSize = insertSize,
+				showCaret = p3.props.showCaret,
+				clientSettings = p3.props.clientSettings,
+				bubbleChatMessageProperties = v.bubbleChatMessageProperties,
+				presetId = if fFlagExpChatPresetChatEnabled then v.presetId else nil,
+				isTextChatServiceOn = p3.props.isTextChatServiceOn,
+				textChatMessageInstance = if getFFlagExpChatUseUpdatedMessageRenderedModule() then v.textChatMessageInstance else nil
+			})
+		end
 	end
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

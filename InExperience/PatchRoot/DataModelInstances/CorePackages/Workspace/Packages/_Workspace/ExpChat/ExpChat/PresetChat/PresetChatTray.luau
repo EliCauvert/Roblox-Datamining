@@ -6,6 +6,7 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local otterModule = require(parent.Otter)
 local signalsReactModule = require(parent.SignalsReact)
+local fFlagExpChatPresetTrayDismissAnalyticsModule = require(expChat.Flags.FFlagExpChatPresetTrayDismissAnalytics)
 local configModule = require(expChat.Config)
 local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
 local presetChatContainerModule = require(script.Parent.PresetChatContainer)
@@ -22,7 +23,7 @@ local function _()
 end
 
 return reactModule.memo(function(value)
-	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), compactWidthThreshold (ref), foundationModule (ref), useAutoTrayHeightModule (ref), reactModule (ref), guiService (ref), setIsPresetTrayOpenModule (ref), otterModule (ref), slideSpring (ref), userInputService (ref), configModule (ref), presetChatContainerModule (ref)
+	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), compactWidthThreshold (ref), foundationModule (ref), useAutoTrayHeightModule (ref), reactModule (ref), guiService (ref), setIsPresetTrayOpenModule (ref), otterModule (ref), slideSpring (ref), userInputService (ref), fFlagExpChatPresetTrayDismissAnalyticsModule (ref), configModule (ref), presetChatContainerModule (ref)
 	local var1
 	local var2 = getPresetChatStoreModule(false)
 	local var3 = signalsReactModule.useSignalState(var2.getIsTrayOpen)
@@ -106,7 +107,7 @@ return reactModule.memo(function(value)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), userInputService (copy), setIsPresetTrayOpenModule (copy), var2 (ref), guiService (copy)
+		-- upvalues: var3 (ref), userInputService (copy), setIsPresetTrayOpenModule (copy), var2 (ref), guiService (copy), fFlagExpChatPresetTrayDismissAnalyticsModule (copy)
 		if var3 then
 			local inputBeganConnection = userInputService.InputBegan:Connect(function(p1, _)
 				-- upvalues: setIsPresetTrayOpenModule (copy), var2 (copy)
@@ -115,7 +116,12 @@ return reactModule.memo(function(value)
 				end
 			end)
 			local menuOpenedConnection = guiService.MenuOpened:Connect(function()
-				-- upvalues: var2 (copy)
+				-- upvalues: fFlagExpChatPresetTrayDismissAnalyticsModule (copy), setIsPresetTrayOpenModule (copy), var2 (copy)
+				if fFlagExpChatPresetTrayDismissAnalyticsModule then
+					setIsPresetTrayOpenModule(var2, false)
+					
+					return
+				end
 				var2.setIsTrayOpen(false)
 			end)
 			
@@ -189,7 +195,9 @@ return reactModule.memo(function(value)
 					Container = reactModule.createElement(presetChatContainerModule, {
 						shouldShowKeyboardButton = true,
 						textChannel = value.textChannel,
-						compact = var1
+						compact = var1,
+						onSendChat = value.onSendChat,
+						onSendGlobalChat = value.onSendGlobalChat
 					})
 				})
 			})

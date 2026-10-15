@@ -12,7 +12,6 @@ local getDisplayStore = require(parent.Display).GetDisplayStore
 local appHeaderBarModule = require(parent.AppHeaderBar)
 local navButtonType = require(sduiSharedUtilities.SduiIntegrationTypes).NavButtonType
 local useScrollAwayHeaderPositionModule = require(sduiSharedUtilities.useScrollAwayHeaderPosition)
-local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 
 local function calculateSize(p1)
 	-- upvalues: getDisplayStore (ref)
@@ -22,7 +21,7 @@ local function calculateSize(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), usePreferredInput (ref), responsiveModule (ref), signalsReactModule (ref), calculateSize (ref), reactModule (ref), navButtonType (ref), iconButton (ref), foundationModule (ref), builderIconsModule (ref), appHeaderBarModule (ref), useScrollAwayHeaderPositionModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
+	-- upvalues: useTokens (ref), usePreferredInput (ref), responsiveModule (ref), signalsReactModule (ref), calculateSize (ref), reactModule (ref), navButtonType (ref), iconButton (ref), foundationModule (ref), builderIconsModule (ref), appHeaderBarModule (ref), useScrollAwayHeaderPositionModule (ref)
 	local closeCallback = p1.closeCallback
 	local var1 = useTokens()
 	local var2 = usePreferredInput() == responsiveModule.Input.Directional
@@ -67,9 +66,8 @@ return reactModule.memo(function(p1)
 			BackgroundColor3 = var1.Color.Surface.Surface_0.Color3,
 			Size = var3,
 			Position = useScrollAwayHeaderPositionModule({
-				sizeBinding = if fFlagLuaAppSduiStickyHeaderScrollAway then nil else var3,
 				enabled = p1.scrollAwayHeader,
-				scrollAwayHeight = if fFlagLuaAppSduiStickyHeaderScrollAway and p1.scrollAwayHeader then var3:getValue().Y.Offset else nil
+				scrollAwayHeight = if p1.scrollAwayHeader then var3:getValue().Y.Offset else nil
 			}),
 			AutomaticSize = if var4 then Enum.AutomaticSize.Y else nil
 		}, {

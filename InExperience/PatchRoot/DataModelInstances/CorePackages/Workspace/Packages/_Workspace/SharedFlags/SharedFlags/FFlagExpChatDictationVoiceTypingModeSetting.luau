@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ExpChatDictationVoiceTypingModeSetting", false)
+﻿return game:DefineFastFlag("ExpChatDictationVoiceTypingModeSettingV2", false)

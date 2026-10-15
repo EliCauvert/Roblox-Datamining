@@ -18,9 +18,10 @@ local fFlagAXSduiFeedPublishesBreakpoint = avatarExperienceFlagsModule.FFlagAXSd
 local fFlagAXMarketplaceBreakpointMismatchCounter = avatarExperienceFlagsModule.FFlagAXMarketplaceBreakpointMismatchCounter
 local fFlagAXSduiFeedMaintainScrollOnSeeAll = avatarExperienceFlagsModule.FFlagAXSduiFeedMaintainScrollOnSeeAll
 local fFlagAXSduiPageVariantRequestId = avatarExperienceFlagsModule.FFlagAXSduiPageVariantRequestId
+local fFlagAXSduiPublishRequestIdWithResponse = avatarExperienceFlagsModule.FFlagAXSduiPublishRequestIdWithResponse
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useComponentBreakpointSizeModule (ref), fFlagAXSduiFeedPublishesBreakpoint (ref), fFlagAXMarketplaceBreakpointMismatchCounter (ref), reactModule (ref), sduiLoadTimer (ref), avatarScreen (ref), getCatalogPageRequestIdStoreModule (ref), useSignalState (ref), fFlagAXSduiCatalogScrollImpressions (ref), fFlagAXSduiFeedMaintainScrollOnSeeAll (ref), fFlagAXSduiPageVariantRequestId (ref), fetchCatalogPageModule (ref), catalogSduiPageContextModule (ref), sduiFeatureEntryPoint (ref), getCatalogConfigKeyModule (ref)
+	-- upvalues: useComponentBreakpointSizeModule (ref), fFlagAXSduiFeedPublishesBreakpoint (ref), fFlagAXMarketplaceBreakpointMismatchCounter (ref), reactModule (ref), sduiLoadTimer (ref), avatarScreen (ref), getCatalogPageRequestIdStoreModule (ref), useSignalState (ref), fFlagAXSduiCatalogScrollImpressions (ref), fFlagAXSduiFeedMaintainScrollOnSeeAll (ref), fFlagAXSduiPublishRequestIdWithResponse (ref), fFlagAXSduiPageVariantRequestId (ref), fetchCatalogPageModule (ref), catalogSduiPageContextModule (ref), sduiFeatureEntryPoint (ref), getCatalogConfigKeyModule (ref)
 	local var1 = nil
 	var10, var9 = useComponentBreakpointSizeModule(var1, if fFlagAXSduiFeedPublishesBreakpoint or fFlagAXMarketplaceBreakpointMismatchCounter then p1.breakpointOptions else nil)
 	local var2 = if p1.loadTimer then p1.loadTimer else reactModule.useMemo(function()
@@ -54,9 +55,12 @@ return reactModule.forwardRef(function(p1, p2)
 		if fFlagAXSduiFeedMaintainScrollOnSeeAll then p1.scrollRestoreRef else nil
 	})
 	reactModule.useEffect(function()
-		-- upvalues: fFlagAXSduiPageVariantRequestId (copy), var4 (ref), p1 (ref), var10 (ref), fetchCatalogPageModule (copy), var2 (ref)
+		-- upvalues: fFlagAXSduiPublishRequestIdWithResponse (copy), var4 (ref), p1 (ref), var10 (ref), fFlagAXSduiPageVariantRequestId (copy), fetchCatalogPageModule (copy), var2 (ref)
+		if fFlagAXSduiPublishRequestIdWithResponse then
+			var4.activatePageVariant(p1.identifier, var10)
+		end
 		fetchCatalogPageModule({
-			requestId = if fFlagAXSduiPageVariantRequestId then var4.activatePageVariant(p1.identifier, var10) else var4.getOrCreatePageRequestId(p1.identifier),
+			requestId = if fFlagAXSduiPublishRequestIdWithResponse then var4.getPageVariantRequestIdToSend(p1.identifier, var10) elseif fFlagAXSduiPageVariantRequestId then var4.activatePageVariant(p1.identifier, var10) else var4.getOrCreatePageRequestId(p1.identifier),
 			context = p1.context,
 			screenSize = var10
 		}, var2)

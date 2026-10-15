@@ -2,6 +2,10 @@
 	CATEGORY = "ExperienceLoading",
 	PAGE = "TiltLoadingScreen",
 	EVENT_NAME = "ExperienceLoadingScreen",
+	Host = table.freeze({
+		InExperience = "InExperience",
+		DeferredJoin = "DeferredJoin"
+	}),
 	DismissSource = table.freeze({
 		NormalReady = "NormalReady",
 		DeveloperOverride = "DeveloperOverride"

@@ -42,7 +42,6 @@ local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnect
 local getFFlagAppChatParticipantDialogFoundationMenuModule = require(appChat.Flags.getFFlagAppChatParticipantDialogFoundationMenu)
 local getFFlagAppChatEnableRootedNavigationModule = require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
-local fFlagHideConversationTypeInfoIfNoWebViewModule = require(appChat.Flags.FFlagHideConversationTypeInfoIfNoWebView)
 local t = {
 	topBarHeight = 0,
 	wideMode = false,
@@ -60,7 +59,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), getFFlagAppChatParticipantDialogFoundationMenuModule (ref), useStyle (ref), useLocalization (ref), getFFlagIsSquadEnabled (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), luaAppNavigationContextModule (ref), useDispatch (ref), useState (ref), useNavigation (ref), useIsGroupChatEnabledModule (ref), useIsChatEnabledModule (ref), useEffect (ref), useSelector (ref), getDeepValueModule (ref), conversationModule (ref), appChatNetworkingModule (ref), useUserProfilesFetch (ref), userProfilesCombinedNameAndUsernameByUserIds (ref), useTelemetryModule (ref), chatDetailsTelemetryLayerModule (ref), selectChatUserEntryModelListModule (ref), getConversationTitleModule (ref), useIsUserPendingModule (ref), conversationChannelsModule (ref), promiseModule (ref), genericDialogTypeModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), chatDetailsTelemetryEventsModule (ref), useCallback (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), useAppPolicy (ref), useChatPlacementContext (ref), isPlacementInExperience (ref), chatConversationTelemetryStateModule (ref), chatDetailsTelemetryStateModule (ref), useEffectOnMount (ref), chatDetailsPageModule (ref), participantDialogContainerModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), getFFlagAppChatParticipantDialogFoundationMenuModule (ref), useStyle (ref), useLocalization (ref), getFFlagIsSquadEnabled (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), luaAppNavigationContextModule (ref), useDispatch (ref), useState (ref), useNavigation (ref), useIsGroupChatEnabledModule (ref), useIsChatEnabledModule (ref), useEffect (ref), useSelector (ref), getDeepValueModule (ref), conversationModule (ref), appChatNetworkingModule (ref), useUserProfilesFetch (ref), userProfilesCombinedNameAndUsernameByUserIds (ref), useTelemetryModule (ref), chatDetailsTelemetryLayerModule (ref), selectChatUserEntryModelListModule (ref), getConversationTitleModule (ref), useIsUserPendingModule (ref), conversationChannelsModule (ref), promiseModule (ref), genericDialogTypeModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), chatDetailsTelemetryEventsModule (ref), useCallback (ref), useAppPolicy (ref), useChatPlacementContext (ref), isPlacementInExperience (ref), chatConversationTelemetryStateModule (ref), chatDetailsTelemetryStateModule (ref), useEffectOnMount (ref), chatDetailsPageModule (ref), participantDialogContainerModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1 or {})
 	local var2 = getFFlagAppChatParticipantDialogFoundationMenuModule()
 	local var3 = useStyle()
@@ -303,9 +302,10 @@ return function(p1)
 		var23.emit(chatDetailsTelemetryEventsModule.ChatDetailsAddFriendsBtnClicked, {})
 	end
 	
-	local var40 = if fFlagHideConversationTypeInfoIfNoWebViewModule then useAppPolicy(function(p2)
+	local _ = nil
+	local var40 = useAppPolicy(function(p2)
 		return p2.getWebViewSupport()
-	end) or isPlacementInExperience(useChatPlacementContext().chatPlacement) else nil
+	end) or isPlacementInExperience(useChatPlacementContext().chatPlacement)
 	local var41 = if var20 then var20.moderationType else cryoModule.None
 	local var42 = if var20 then var20.userPendingStatus else cryoModule.None
 	local var43 = chatConversationTelemetryStateModule.useMergeState()
@@ -350,7 +350,7 @@ return function(p1)
 		wideMode = var1.wideMode,
 		shouldHideGroupChatFunctionality = var27,
 		shouldShowAddFriends = var18,
-		shouldShowConversationTypeInfo = if fFlagHideConversationTypeInfoIfNoWebViewModule then var40 else nil,
+		shouldShowConversationTypeInfo = var40,
 		conversationTypeText = var31,
 		isCreateUnfilteredChatLoading = var7,
 		topBarHeight = var1.topBarHeight,

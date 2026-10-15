@@ -1,9 +1,10 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local signalsModule = require(appChat.Parent.Signals)
 local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
+local getConversationViewModelStoreModule = require(appChat.Stores.GetConversationViewModelStore)
 local createConversationListStoreModule = require(script.createConversationListStore)
 
 return signalsModule.createComputed(function()
-	-- upvalues: createConversationListStoreModule (ref), getConversationStoreModule (ref)
-	return createConversationListStoreModule(getConversationStoreModule(false))
+	-- upvalues: createConversationListStoreModule (ref), getConversationStoreModule (ref), getConversationViewModelStoreModule (ref)
+	return createConversationListStoreModule(getConversationStoreModule(false), getConversationViewModelStoreModule(false))
 end)

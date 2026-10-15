@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ConsoleOpenMobileGameJoinCard", false) and (require(script.Parent.FFlagEnableMobileGameJoinCard) and require(script.Parent.FFlagMobileGameJoinCardGamepadSupport))

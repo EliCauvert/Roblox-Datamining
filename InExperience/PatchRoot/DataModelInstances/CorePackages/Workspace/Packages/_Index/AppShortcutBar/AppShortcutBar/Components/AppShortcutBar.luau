@@ -1,14 +1,17 @@
 ﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("AppShortcutBar").Parent
+local appShortcutBar = script:FindFirstAncestor("AppShortcutBar")
+local parent = appShortcutBar.Parent
 local reactModule = require(parent.React)
 local responsiveModule = require(parent.Responsive)
 local useFocusedTextBox = require(parent.FocusNavigationUtils).useFocusedTextBox
 local shortcutBar = require(parent.UIBlox).App.Navigation.ShortcutBar
 local shortcutBarMinSize = game:DefineFastFlag("ShortcutBarMinSize", false)
 local disableAppShortcutBarAndroidTV = game:DefineFastFlag("DisableAppShortcutBarAndroidTV", false)
+local fFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled = require(appShortcutBar.Flags).FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled
+local useStickyShortcutBarExposureLoggingModule = require(appShortcutBar.Hooks.useStickyShortcutBarExposureLogging)
 
 function AppShortcutBar(p1)
-	-- upvalues: useFocusedTextBox (ref), responsiveModule (ref), reactModule (ref), userInputService (ref), disableAppShortcutBarAndroidTV (ref), shortcutBarMinSize (ref), shortcutBar (ref)
+	-- upvalues: useFocusedTextBox (ref), responsiveModule (ref), reactModule (ref), userInputService (ref), disableAppShortcutBarAndroidTV (ref), shortcutBarMinSize (ref), fFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled (ref), useStickyShortcutBarExposureLoggingModule (ref), shortcutBar (ref)
 	local var1 = if p1.Position then p1.Position else UDim2.fromScale(0.5, 0)
 	local var2 = if p1.AnchorPoint then p1.AnchorPoint else Vector2.new(0.5, 0)
 	local var3 = useFocusedTextBox()
@@ -33,6 +36,9 @@ function AppShortcutBar(p1)
 	
 	if shortcutBarMinSize then
 		var7 = var7 and (not responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small) and not responsiveModule.useBreakpointYOrSmaller(responsiveModule.Keys.XSmall))
+	end
+	if fFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled then
+		useStickyShortcutBarExposureLoggingModule(var7)
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

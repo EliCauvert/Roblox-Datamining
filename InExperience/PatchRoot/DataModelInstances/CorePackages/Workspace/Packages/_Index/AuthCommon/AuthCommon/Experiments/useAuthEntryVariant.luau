@@ -10,6 +10,7 @@ local uiMode = require(parent.RobloxAppEnums).UiMode
 local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
 local appBtidLayers = require(parent.ExperimentLayers).AppBtidLayers
 local fFlagGoogleAppleSsoDesktopModule = require(authCommon.Flags.FFlagGoogleAppleSsoDesktop)
+local fFlagEnableAccountSwitchSsoLogin = require(parent.SharedFlags).FFlagEnableAccountSwitchSsoLogin
 local debugAuthEntryVariantOverride = game:DefineFastInt("DebugAuthEntryVariantOverride", -1)
 local universalAppAuthEntryLayer = appBtidLayers.UniversalAppAuthEntryLayer
 local t = { Control = 0, Foundation = 1, FoundationSso = 2 }
@@ -27,34 +28,42 @@ return {
 		
 		return if p2 and (var1 == t.Foundation or var1 == t.FoundationSso) then var1 else t.Control
 	end,
-	useAuthEntryVariant = function(p1)
-		-- upvalues: useIXPService (ref), useBrowserTrackerExperiment (ref), universalAppAuthEntryLayer (ref), useAppPolicy (ref), useUiModeInfo (ref), reactModule (ref), userInputService (ref), fFlagGoogleAppleSsoDesktopModule (ref), uiMode (ref), isPioneerLaunch (ref), debugAuthEntryVariantOverride (ref), t (ref)
-		local var1 = useIXPService()
-		local var2 = useBrowserTrackerExperiment({ universalAppAuthEntryLayer }, function(p2)
+	useAuthEntryVariant = function(p1, p2)
+		-- upvalues: useIXPService (ref), useBrowserTrackerExperiment (ref), universalAppAuthEntryLayer (ref), useAppPolicy (ref), useUiModeInfo (ref), reactModule (ref), fFlagEnableAccountSwitchSsoLogin (ref), userInputService (ref), fFlagGoogleAppleSsoDesktopModule (ref), uiMode (ref), isPioneerLaunch (ref), debugAuthEntryVariantOverride (ref), t (ref)
+		local var1
+		local var2 = useIXPService()
+		local var3 = useBrowserTrackerExperiment({ universalAppAuthEntryLayer }, function(p3)
 			-- upvalues: universalAppAuthEntryLayer (copy)
-			return (p2[universalAppAuthEntryLayer] or {}).authEntryVariant
+			return (p3[universalAppAuthEntryLayer] or {}).authEntryVariant
 		end, false)
-		local var3 = var1:GetBrowserTrackerStatusForLayer(universalAppAuthEntryLayer) == Enum.IXPLoadingStatus.Initialized
-		local var4 = useAppPolicy(function(p2)
-			return p2.getExcludeExternalIdentityLogin() or p2.getUseVNGUserAgreementPopup()
+		local var4 = var2:GetBrowserTrackerStatusForLayer(universalAppAuthEntryLayer) == Enum.IXPLoadingStatus.Initialized
+		local var5 = useAppPolicy(function(p3)
+			return p3.getExcludeExternalIdentityLogin() or p3.getUseVNGUserAgreementPopup()
 		end)
 		local uiMode_1 = useUiModeInfo().uiMode
-		local var5 = reactModule.useRef(false)
-		p1 = p1 or userInputService:GetPlatform()
-		local var6 = if p1 == Enum.Platform.Windows or p1 == Enum.Platform.OSX then fFlagGoogleAppleSsoDesktopModule elseif p1 ~= Enum.Platform.IOS then p1 == Enum.Platform.Android else true
+		local var6 = reactModule.useRef(false)
 		
-		if var6 then
-			var6 = uiMode_1 ~= uiMode.TenFoot and (uiMode_1 ~= uiMode.VR and (not var4 and not isPioneerLaunch()))
+		if fFlagEnableAccountSwitchSsoLogin then
+			var1 = p2 ~= false
+			var1 = nil
+		else
+			var1 = true
+		end
+		p1 = p1 or userInputService:GetPlatform()
+		local var7 = if p1 == Enum.Platform.Windows or p1 == Enum.Platform.OSX then fFlagGoogleAppleSsoDesktopModule elseif p1 ~= Enum.Platform.IOS then p1 == Enum.Platform.Android else true
+		
+		if var7 then
+			var7 = uiMode_1 ~= uiMode.TenFoot and (uiMode_1 ~= uiMode.VR and (not var5 and not isPioneerLaunch()))
 		end
 		reactModule.useEffect(function()
-			-- upvalues: var6 (ref), var3 (ref), var5 (ref), var1 (ref), universalAppAuthEntryLayer (copy)
-			if var6 and var3 and not var5.current then
-				var5.current = true
-				var1:LogBrowserTrackerLayerExposure(universalAppAuthEntryLayer)
+			-- upvalues: var1 (ref), var7 (ref), var4 (ref), var6 (ref), var2 (ref), universalAppAuthEntryLayer (copy)
+			if var1 and var7 and (var4 and not var6.current) then
+				var6.current = true
+				var2:LogBrowserTrackerLayerExposure(universalAppAuthEntryLayer)
 			end
-		end, { var1, var6, var3 })
-		local var7 = if debugAuthEntryVariantOverride == nil or debugAuthEntryVariantOverride < 0 then var2 else debugAuthEntryVariantOverride
+		end, { var2, var7, var4, var1 })
+		local var8 = if debugAuthEntryVariantOverride == nil or debugAuthEntryVariantOverride < 0 then var3 else debugAuthEntryVariantOverride
 		
-		return if var6 and (var7 == t.Foundation or var7 == t.FoundationSso) then var7 else t.Control
+		return if var7 and (var8 == t.Foundation or var8 == t.FoundationSso) then var8 else t.Control
 	end
 }

@@ -38,9 +38,14 @@ return reactModule.memo(function(p1)
 	if primaryCta and primaryCta.type == enumsModule.ButtonTypes.Join and (join.isVisible and not join.isVisible(var3)) then
 		primaryCta = nil
 	end
+	local isLoading = var6.isLoading
+	
+	if isLoading and join.isJoinExpected and not join.isJoinExpected(id, var3) then
+		isLoading = false
+	end
 	return composeCtaRowModule(p1, ctaConfig, var3, {
 		primaryCta = primaryCta,
 		secondaryCta = var6.secondaryCta,
-		isLoading = var6.isLoading
+		isLoading = isLoading
 	})
 end)

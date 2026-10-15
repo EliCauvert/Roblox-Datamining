@@ -4,12 +4,15 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(parent.SduiCompat)
 local fFlagSduiContentRowStateLayerModule = require(sduiSharedContent.Flags.FFlagSduiContentRowStateLayer)
+local fFlagSDUIContentRowSelectableModule = require(sduiSharedContent.Flags.FFlagSDUIContentRowSelectable)
 local fFlagSduiContentRowTrailingHover = require(parent.SharedFlags).FFlagSduiContentRowTrailingHover
 local view = foundationModule.View
 local controlState = foundationModule.Enums.ControlState
+local cursorType = foundationModule.Enums.CursorType
+local useCursor = foundationModule.Hooks.useCursor
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagSduiContentRowTrailingHover (ref), reactModule (ref), controlState (ref), view (ref), fFlagSduiContentRowStateLayerModule (ref), foundationModule (ref)
+	-- upvalues: fFlagSduiContentRowTrailingHover (ref), reactModule (ref), controlState (ref), fFlagSDUIContentRowSelectableModule (ref), useCursor (ref), cursorType (ref), view (ref), fFlagSduiContentRowStateLayerModule (ref), foundationModule (ref)
 	local var1 = nil
 	local var2 = nil
 	
@@ -21,6 +24,8 @@ return reactModule.memo(function(p1)
 		end, {})
 		var2 = if p1.trailingHover == nil or not var3 then p1.trailing else p1.trailingHover
 	end
+	local var5 = fFlagSDUIContentRowSelectableModule and p1.selectable == true
+	
 	return reactModule.createElement(view, {
 		tag = if p1.tag then p1.tag else "row auto-y gap-large",
 		LayoutOrder = p1.layoutOrder,
@@ -29,7 +34,10 @@ return reactModule.memo(function(p1)
 		Active = p1.onActivated ~= nil,
 		onActivated = p1.onActivated,
 		onStateChanged = if fFlagSduiContentRowTrailingHover and p1.trailingHover ~= nil then var1 else nil,
-		selection = { Selectable = false },
+		selection = {
+			Selectable = var5,
+			SelectionImageObject = if var5 then if fFlagSDUIContentRowSelectableModule then useCursor(cursorType.RoundedRect) else nil else nil
+		},
 		stateLayer = {
 			affordance = if fFlagSduiContentRowStateLayerModule then p1.stateLayerAffordance or foundationModule.Enums.StateLayerAffordance.None else foundationModule.Enums.StateLayerAffordance.None
 		},

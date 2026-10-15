@@ -23,9 +23,7 @@ local fFlagPromptsHandlerEnabled = require(parent.SharedFlags).FFlagPromptsHandl
 local fFlagLuaAppSduiStreamingChunkedResponses = require(parent.SharedFlags).FFlagLuaAppSduiStreamingChunkedResponses
 local fFlagLuaAppEnableSduiHomePage = require(parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local fFlagSduiStreamingRefreshReplacesInputData = require(parent.SharedFlags).FFlagSduiStreamingRefreshReplacesInputData
-local fFlagSduiApiStoreOnSuccessAndRefresh = require(parent.SharedFlags).FFlagSduiApiStoreOnSuccessAndRefresh
 local fFlagSduiUseHttpClientModule = require(sduiSharedUtilities.Flags.FFlagSduiUseHttpClient)
-local fFlagSduiClientDrivenTemplates = require(parent.SharedFlags).FFlagSduiClientDrivenTemplates
 local fFlagLuaAppSduiHomePageSupport = require(parent.SharedFlags).FFlagLuaAppSduiHomePageSupport
 local cryoModule = require(parent.Cryo)
 
@@ -50,9 +48,9 @@ local function mergeTables(p1, p2)
 end
 
 return function(_)
-	-- upvalues: fFlagSduiClientDrivenTemplates (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagLuaAppEnableSduiHomePage (ref), fFlagSduiStreamingRefreshReplacesInputData (ref), fFlagSduiUseHttpClientModule (ref), sduiRequestStatus (ref), sduiLogger (ref), sduiErrors (ref), getSduiDataBinder (ref), getSduiTemplateStoreModule (ref), recordTemplateUsage (ref), sduiUsageRecorder (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), sduiInputDataMergeModule (ref), createBuilderConfig (ref), getSduiClientBindingBuilder (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagEnableSduiV2HomepagePrompts (ref), fFlagPromptsHandlerEnabled (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), cryoModule (ref), processClientHintsModule (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref)
+	-- upvalues: fFlagSduiAllowNoConfigsBuilt (ref), fFlagLuaAppEnableSduiHomePage (ref), fFlagSduiStreamingRefreshReplacesInputData (ref), fFlagSduiUseHttpClientModule (ref), sduiRequestStatus (ref), sduiLogger (ref), sduiErrors (ref), getSduiDataBinder (ref), getSduiTemplateStoreModule (ref), recordTemplateUsage (ref), sduiUsageRecorder (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), sduiInputDataMergeModule (ref), createBuilderConfig (ref), getSduiClientBindingBuilder (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagEnableSduiV2HomepagePrompts (ref), fFlagPromptsHandlerEnabled (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), cryoModule (ref), processClientHintsModule (ref)
 -- FATAL: Failed to generate AST for `handleSduiApiResponse` function:
-runtime : [KeyError] :11990: 112
+runtime : [KeyError] :11990: 111
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

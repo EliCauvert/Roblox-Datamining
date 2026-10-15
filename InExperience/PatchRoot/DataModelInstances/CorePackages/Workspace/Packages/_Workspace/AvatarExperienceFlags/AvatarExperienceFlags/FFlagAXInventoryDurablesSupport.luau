@@ -1,3 +1,1 @@
-﻿local fFlagAXEditorSubcategoryFiltersModule = require(script.Parent.FFlagAXEditorSubcategoryFilters)
-
-return game:DefineFastFlag("AXInventoryDurablesSupport5", false) and fFlagAXEditorSubcategoryFiltersModule or game:DefineFastFlag("AXStandaloneInventoryDurablesSupport", false) and fFlagAXEditorSubcategoryFiltersModule
+﻿return game:DefineFastFlag("AXInventoryDurablesSupport5", false) and require(script.Parent.FFlagAXEditorSubcategoryFilters)

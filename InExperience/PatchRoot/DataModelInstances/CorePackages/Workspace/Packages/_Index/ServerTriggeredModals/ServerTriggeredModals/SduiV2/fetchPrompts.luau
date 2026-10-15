@@ -17,6 +17,7 @@ local fFlagSduiExtendedCapabilitiesPrompts = require(parent.SharedFlags).FFlagSd
 local fFlagPushNotificationsUpsellHomePromptsExperiment = require(parent.SharedFlags).FFlagPushNotificationsUpsellHomePromptsExperiment
 local fFlagSplitPaneEducationalTour = require(parent.SharedFlags).FFlagSplitPaneEducationalTour
 local var1 = if fFlagSplitPaneEducationalTour then require(script.Parent.SplitPaneTourPrompt) else nil
+local fFlagPromptsEdpOpenReplaceOnFetch = require(parent.SharedFlags).FFlagPromptsEdpOpenReplaceOnFetch
 
 local function getPromptsUrl(p1, p2)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref)
@@ -30,7 +31,7 @@ local function getPromptsUrl(p1, p2)
 end
 
 return function(p1, p2)
-	-- upvalues: parent (ref), fFlagSduiExtendedCapabilitiesPrompts (ref), sduiSharedUtilitiesModule (ref), getSduiApiStore (ref), sduiResponseType (ref), urlBuilder (ref), urlBase (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), fFlagEdpOpenPromptsHandlerEnabled (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), getPromptsUrl (ref), fFlagSduiAllowNoConfigsBuilt (ref), promptsEntryPointModule (ref), fFlagPushNotificationsUpsellHomePromptsExperiment (ref), nativePushNotificationPermissionPrompt (ref), fFlagSplitPaneEducationalTour (ref), var1 (ref), parsePageEntriesFromResponse (ref)
+	-- upvalues: parent (ref), fFlagSduiExtendedCapabilitiesPrompts (ref), sduiSharedUtilitiesModule (ref), getSduiApiStore (ref), sduiResponseType (ref), urlBuilder (ref), urlBase (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), fFlagEdpOpenPromptsHandlerEnabled (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), getPromptsUrl (ref), fFlagPromptsEdpOpenReplaceOnFetch (ref), fFlagSduiAllowNoConfigsBuilt (ref), promptsEntryPointModule (ref), fFlagPushNotificationsUpsellHomePromptsExperiment (ref), nativePushNotificationPermissionPrompt (ref), fFlagSplitPaneEducationalTour (ref), var1 (ref), parsePageEntriesFromResponse (ref)
 	local serviceContractsProtoModule = require(parent.ServiceContractsProto)
 	local getEligiblePromptsRequest = serviceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsRequest
 	getSduiApiStore().fetchIfNeeded({
@@ -43,6 +44,7 @@ return function(p1, p2)
 		surfaceKey = p1.surfaceKey,
 		configKey = p1.configKey,
 		clearOnEmptyResponse = p1.clearOnEmptyResponse,
+		replaceOnFetch = if fFlagPromptsEdpOpenReplaceOnFetch then p1.replaceOnFetch else nil,
 		allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then p1.allowNoConfigsBuilt else nil,
 		loadTimer = p1.loadTimer,
 		apiProto = serviceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsResponse,

@@ -1,13 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local enumerateModule = require(parent.enumerate)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCatalogBodySuits = avatarExperienceFlagsModule.FFlagAXCatalogBodySuits
-local fFlagAXCatalogM41Props = avatarExperienceFlagsModule.FFlagAXCatalogM41Props
-local fFlagAXCatalogM41FullMasks = avatarExperienceFlagsModule.FFlagAXCatalogM41FullMasks
-local fFlagAXCatalogM41HandAndArm = avatarExperienceFlagsModule.FFlagAXCatalogM41HandAndArm
-local fFlagAXFixHandAndArmWidgetApiContext = avatarExperienceFlagsModule.FFlagAXFixHandAndArmWidgetApiContext
 
-return if fFlagAXCatalogBodySuits then enumerateModule(script.Name, {
+return require(parent.enumerate)(script.Name, {
 	Featured = "Featured",
 	Limited = "Limited",
 	Community = "Community",
@@ -26,10 +20,10 @@ return if fFlagAXCatalogBodySuits then enumerateModule(script.Name, {
 	Bodysuits = "Bodysuits",
 	Hats = "Hats",
 	Face = "Face",
-	FullMasks = if fFlagAXCatalogM41FullMasks then "Full Masks" else nil,
+	FullMasks = if avatarExperienceFlagsModule.FFlagAXCatalogM41FullMasks then "Full Masks" else nil,
 	Neck = "Neck",
 	Shoulder = "Shoulder",
-	HandAndArm = if fFlagAXCatalogM41HandAndArm then if fFlagAXFixHandAndArmWidgetApiContext then "Hand And Arm" else "Hand & Arm" else nil,
+	HandAndArm = if avatarExperienceFlagsModule.FFlagAXCatalogM41HandAndArm then if avatarExperienceFlagsModule.FFlagAXFixHandAndArmWidgetApiContext then "Hand And Arm" else "Hand & Arm" else nil,
 	Front = "Front",
 	Back = "Back",
 	Waist = "Waist",
@@ -45,43 +39,5 @@ return if fFlagAXCatalogBodySuits then enumerateModule(script.Name, {
 	Eyebrows = "Eyebrows",
 	AnimationBundles = "AnimationBundles",
 	Emotes = "Emotes",
-	Props = if fFlagAXCatalogM41Props then "Props" else nil
-}) else enumerateModule(script.Name, {
-	Featured = "Featured",
-	Limited = "Limited",
-	Community = "Community",
-	Premium = "Premium",
-	Shirts = "Shirts",
-	TShirts = "TShirts",
-	Sweaters = "Sweaters",
-	Jackets = "Jackets",
-	Pants = "Pants",
-	DressesAndSkirts = "DressSkirt",
-	Shorts = "Shorts",
-	Shoes = "Shoes",
-	ClassicShirts = "Classic Shirts",
-	ClassicTShirts = "Classic T-Shirts",
-	ClassicPants = "Classic Pants",
-	Hats = "Hats",
-	Face = "Face",
-	FullMasks = if fFlagAXCatalogM41FullMasks then "Full Masks" else nil,
-	Neck = "Neck",
-	Shoulder = "Shoulder",
-	HandAndArm = if fFlagAXCatalogM41HandAndArm then if fFlagAXFixHandAndArmWidgetApiContext then "Hand And Arm" else "Hand & Arm" else nil,
-	Front = "Front",
-	Back = "Back",
-	Waist = "Waist",
-	Gear = "Gear",
-	FullBodies = "Full Bodies",
-	Heads = "Heads",
-	Hair = "Hair",
-	MakeupLooks = "Makeup Looks",
-	EyeMakeup = "Eye Makeup",
-	FaceMakeup = "Face Makeup",
-	LipMakeup = "Lip Makeup",
-	Eyelashes = "Eyelashes",
-	Eyebrows = "Eyebrows",
-	AnimationBundles = "AnimationBundles",
-	Emotes = "Emotes",
-	Props = if fFlagAXCatalogM41Props then "Props" else nil
+	Props = if avatarExperienceFlagsModule.FFlagAXCatalogM41Props then "Props" else nil
 })

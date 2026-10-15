@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXSduiPublishRequestIdWithResponse", false) and require(script.Parent.FFlagAXSduiPageVariantRequestId)

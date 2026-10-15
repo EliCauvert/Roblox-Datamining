@@ -130,7 +130,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date}（{yearsOld}歳�
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,日
 Authentication.SignUp.Label.EnterYourEmail,メールアドレスを入力
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,このゲームをプレイするには、一定の年齢以上である必要があります
 Authentication.SignUp.Label.ErrorsWithPassword,パスワードにエラーがあります。
 Authentication.SignUp.Label.ErrorsWithUsername,ユーザーネームにエラーがあります。
 Authentication.SignUp.Label.ExitModalSubtitle,アカウント作成はほぼ完了しています。退出するとと進捗が失われます。
@@ -270,6 +269,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimationに、キー
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimationに、{maxAllowed}件を超えるMarkerCurveが含まれています。MarkerCurveの子孫は{maxAllowed}件以下にしてください。
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimationに、マーカーが{count}件あるMarkerCurveが含まれています。MarkerCurveあたりのマーカーの最大数は{maxAllowed}件です。アニメーションを修正してください。
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimationに、予期しない子が含まれています：{childName}
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,アセット{AssetId}（{InstanceFullName}.{FieldName}）は公開されていません。公開してから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,マーケットプレイスの「動く頭」は、ケージの目と口の頂点がメッシュの頂点と一致するように、適切に合わせる必要があります。ケージとメッシュとの位置合わせを改善してください。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,動く頭の笑顔の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、笑顔の表情ができるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,動く頭の左目を閉じた表情を検出できません。左目のケージのランドマークを調整して、頭の左目の位置に合わせ、閉じられるようにしてください。
@@ -282,7 +282,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,エミッシブエ�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{emissivePercentage}%ですが、{maxEmissivePercentage}%以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,エミッシブエリアの面積が上限を超えています。
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{emissiveArea}の発光が強すぎます。エミッシブエリア×強度が上限を超えています（現在{assetTypeName}ですが、{maxEmissiveArea}以下でなければなりません）。光るエリアを縮小するか、EmissiveStrengthを下げてください。
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,このアセットは、信頼できるクリエータープログラムのクリエーターのみが利用できるエミッシブマップを使用しています。アップロードする前に、すべてのエミッシブマップコンテンツを削除するか、プログラムに参加してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,公開されたアニメーションには有効なパーツの最大移動量がありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,公開されたアニメーションには有効なUGCリアクションマーカーがありません。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,公開されたアニメーションデータからパーツの最大移動量を計算できませんでした。アニメーションを再公開してください。
@@ -290,6 +289,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,公開
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,頭はUpperTorsoの上に配置する必要があります。現在、頭の中心が胴体の最上部より下に位置しています。これは、頭のメッシュが折りたたまれているか、配置が正しくないことを示しています。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,アップロード時、FaceControlsのInternalOverrideFACSDataプロパティは空にする必要があります。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,頭部を{modPercent}%に拡大するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,「動く頭」には最大{maxFacsJointCount}個のFACS（表情コーディングシステム）ジョイントを含めることができますが、この頭には{actualJointCount}個含まれています。FACSジョイントの数を減らしてから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,頭部を{modPercent}%に縮小するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,アップロード形式が期待されるフォルダ構造と一致しません。再度お試しいただくか、バグ報告を提出してください。
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,骨「{bonePath}」がメッシュパーツ「{partName}」から離れすぎています。メッシュパーツのサイズ境界に近づけてください。
@@ -926,6 +926,9 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,3人称視点�
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,表示とコントロール
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR Vignetteを有効化済み
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,ボイスチャットの音量
+CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,音声入力モード
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,自動送信
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,手動送信
 CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,VR コントロール
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,エラーが発生しました。もう一度お試しください。
@@ -2380,11 +2383,8 @@ Feature.Build.Message.NoSearchResultsFound,検索結果が見つかりません�
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
 Feature.Build.Message.OneTaskCompleted,1つのタスクが完了しました
 Feature.Build.Message.OutOfBuildUsage,ビルド使用量がなくなりました。作成を続けるには、Robuxを使用するためのオプションをご確認ください。
-Feature.Build.Message.PlaytestInviteSendFailedBody,次のユーザーに招待のチャットリンクを送信できませんでした：
-Feature.Build.Message.PlaytestInviteSendFailedHint,[シェア]ボタンを使用して、リンクを取得してください。
 Feature.Build.Message.PlaytesterRequestFailed,リクエストを完了できませんでした。もう一度お試しください。
 Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人の早期テスターを招待済み
-Feature.Build.Message.PrivatePlaytestInvite,{username}さんから『{experienceName}』の早期テスターとして招待されました
 Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
 Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを拡大
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
@@ -2453,7 +2453,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンに
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.PickCampaign,期間を選択
-Feature.Build.Title.PlaytestInviteSendFailed,招待を送信できませんでした
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,次のユーザーを追加できませんでした：
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
@@ -3589,6 +3588,7 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,{numb
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,あなたのメッセージが規則に違反したため、あと{number}分間チャットを利用できません。再び規則に違反した場合、アカウント停止になる可能性があります。
 Feature.InExperienceIntervention.Description.Disclaimer,審査ミスがありましたか？ {startLink}お知らせください{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,フィードバックは、当社のシステムの向上に役立ちます。
+Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,思いやりのある言葉づかいを心がけ、コミュニティの安全を守りましょう。
 Feature.InExperienceIntervention.Description.LoseAccess,次に同じことが起きた場合、お持ちのアカウントにアクセスできなくなる可能性があります。
 Feature.InExperienceIntervention.Description.MayLoseAccess,次にルール違反があった場合、お持ちのアカウントにアクセスできなくなる可能性があります。
 Feature.InExperienceIntervention.Description.Mistake,審査ミスがありましたか？
@@ -3608,6 +3608,7 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,個人情�
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,チャットが {remainingTime} 、使用停止されました
 Feature.InExperienceIntervention.Heading.TakeALook,確認します
 Feature.InExperienceIntervention.Heading.TextChatSuspension,チャットの利用停止
+Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,ルールに違反すると、音声入力がオフになる場合があります
 Feature.InExperienceIntervention.Label.Complete,
 Feature.InExperienceIntervention.Label.EndsOn,終了日：
 Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
@@ -3802,6 +3803,8 @@ Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しま�
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.Moments.Tooltip.Creation,バーチャル空間内の全員があなたのモーメントを見ることができます。
+Feature.Moments.Tooltip.ShareFirstMomentBody,切り抜きからモーメントを作成します
+Feature.Moments.Tooltip.ShareFirstMomentTitle,最初のモーメントをシェア
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,審査ミスを報告
 Feature.NotApproved.Label.AbuseType.Advertising,

@@ -6,13 +6,12 @@ local sduiResponseType = sduiSharedUtilitiesModule.SduiResponseType
 local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local getDevStoreSeeAllUrlModule = require(experienceStoreServerDrivenUi.Api.getDevStoreSeeAllUrl)
 local getDevStoreSeeAllPageKeyModule = require(experienceStoreServerDrivenUi.Utils.getDevStoreSeeAllPageKey)
-local fFlagSduiProtobufJsonDecode = require(parent.SharedFlags).FFlagSduiProtobufJsonDecode
 
 return function(p1, p2, p3)
-	-- upvalues: getDevStoreSeeAllUrlModule (ref), getDevStoreSeeAllPageKeyModule (ref), parent (ref), getSduiApiStore (ref), fFlagSduiProtobufJsonDecode (ref), sduiResponseType (ref), appPage (ref)
+	-- upvalues: getDevStoreSeeAllUrlModule (ref), getDevStoreSeeAllPageKeyModule (ref), parent (ref), getSduiApiStore (ref), sduiResponseType (ref), appPage (ref)
 	local var1 = getDevStoreSeeAllUrlModule(p1)
 	getSduiApiStore().fetchIfNeeded({
-		responseType = if fFlagSduiProtobufJsonDecode then sduiResponseType.Protobuf else nil,
+		responseType = sduiResponseType.Protobuf,
 		url = var1,
 		surfaceKey = appPage.DevStoreSeeAll,
 		configKey = getDevStoreSeeAllPageKeyModule(p1),

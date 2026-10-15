@@ -1,1 +1,1 @@
-﻿return game:DefineFastInt("LoadingScreenMilestonesSampleRate", 1)
+﻿return game:DefineFastInt("LoadingScreenMilestonesSampleRate2", 1)

@@ -17,11 +17,12 @@ local statusIndicator = foundationModule.StatusIndicator
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local radius = foundationModule.Enums.Radius
 local fFlagSocialCarouselShowLoadingSkeletonModule = require(socialCarousel.Flags.FFlagSocialCarouselShowLoadingSkeleton)
+local fFlagSocialCarouselUnselectableSkeletonModule = require(socialCarousel.Flags.FFlagSocialCarouselUnselectableSkeleton)
 local fFlagSocialCarouselRemoveStrokeForAddFriendsModule = require(socialCarousel.Flags.FFlagSocialCarouselRemoveStrokeForAddFriends)
 local fIntSocalCarouselMaxNewRequestsCountModule = require(socialCarousel.Flags.FIntSocalCarouselMaxNewRequestsCount)
 
 return function(p1)
-	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), skeleton (ref), radius (ref), fFlagSocialCarouselRemoveStrokeForAddFriendsModule (ref), icon (ref), iconSize (ref)
+	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), fFlagSocialCarouselUnselectableSkeletonModule (ref), skeleton (ref), radius (ref), fFlagSocialCarouselRemoveStrokeForAddFriendsModule (ref), icon (ref), iconSize (ref)
 	local tileRef = p1.tileRef or reactModule.useRef(nil)
 	local var1 = useTokens()
 	local var2, var3 = reactModule.useState(false)
@@ -54,7 +55,7 @@ return function(p1)
 		end, {}),
 		onActivated = if isLoading then nil else p1.onActivated,
 		stateLayer = { affordance = enums.StateLayerAffordance.None },
-		selection = if isLoading or not p1.selectionOrder then nil else {
+		selection = if fFlagSocialCarouselUnselectableSkeletonModule and isLoading then { Selectable = false } elseif isLoading or not p1.selectionOrder then nil else {
 			SelectionOrder = p1.selectionOrder,
 			Selectable = p1.selectable ~= nil or p1.selectable
 		}

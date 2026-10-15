@@ -3,6 +3,7 @@ local parent = moments.Parent
 local _ = require(parent.MomentsTypes)
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
+local fFlagMomentsCommentsRevealAfterMeasureModule = require(moments.Flags.FFlagMomentsCommentsRevealAfterMeasure)
 local getCommentCollectionStoreModule = require(moments.Components.Comments.GetCommentCollectionStore)
 local getCommentsListCoordinatorModule = require(moments.Components.Comments.List.getCommentsListCoordinator)
 local _ = require(script.Parent.Parent.getCommentsPanelState)
@@ -10,7 +11,7 @@ local _ = require(script.Parent.CommentsPanelBodyView)
 local useVisibleContentHeightModule = require(script.Parent.useVisibleContentHeight)
 
 return function(p1)
-	-- upvalues: reactModule (ref), getCommentCollectionStoreModule (ref), signalsReactModule (ref), getCommentsListCoordinatorModule (ref), useVisibleContentHeightModule (ref)
+	-- upvalues: reactModule (ref), getCommentCollectionStoreModule (ref), signalsReactModule (ref), getCommentsListCoordinatorModule (ref), useVisibleContentHeightModule (ref), fFlagMomentsCommentsRevealAfterMeasureModule (ref)
 	local feedItemId = p1.feedItemId
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), feedItemId (ref)
@@ -54,19 +55,41 @@ return function(p1)
 			p1.onClose()
 		end
 	end, { var2, p1.onClose, panelState.shouldClose, var1 })
+	local var8 = reactModule.useCallback(function()
+		-- upvalues: feedItemId (ref), var6 (ref), p1 (ref)
+		if feedItemId ~= nil and feedItemId ~= "" then
+			var6.retryInitial(feedItemId, p1.sessionId)
+		end
+	end, { var6, p1.sessionId, feedItemId })
+	local var9 = useVisibleContentHeightModule(p1.scrollingFrameRef, p1.actionsFrame)
+	local var10 = true
+	local var11 = nil
 	
+	if fFlagMomentsCommentsRevealAfterMeasureModule then
+		local var12 = `{feedItemId or ""}:{p1.sessionId}`
+		local var13, var14 = reactModule.useState(nil)
+		var10 = var13 == var12
+		var11 = reactModule.useCallback(function()
+			-- upvalues: var14 (ref), var12 (ref)
+			var14(var12)
+		end, { var12 })
+		local var15 = panelState.contentState == "list" and feedItemId ~= nil
+		reactModule.useEffect(function()
+			-- upvalues: var15 (ref), var14 (ref)
+			if not var15 then
+				var14(nil)
+			end
+		end, { var15 })
+	end
 	return {
 		contentState = panelState.contentState,
 		isReadOnly = panelState.isReadOnly,
 		canRetryInitial = panelState.canRetryInitial,
 		feedItemId = feedItemId,
 		sessionId = p1.sessionId,
-		stateMinHeight = useVisibleContentHeightModule(p1.scrollingFrameRef, p1.actionsFrame),
-		onRetryInitial = reactModule.useCallback(function()
-			-- upvalues: feedItemId (ref), var6 (ref), p1 (ref)
-			if feedItemId ~= nil and feedItemId ~= "" then
-				var6.retryInitial(feedItemId, p1.sessionId)
-			end
-		end, { var6, p1.sessionId, feedItemId })
+		stateMinHeight = var9,
+		onRetryInitial = var8,
+		isListRevealed = var10,
+		onListRevealed = var11
 	}
 end

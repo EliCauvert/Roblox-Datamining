@@ -130,7 +130,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} yaş
 Authentication.SignUp.Label.Continue,Devam Et
 Authentication.SignUp.Label.Day,Gün
 Authentication.SignUp.Label.EnterYourEmail,E-posta adresini gir
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Bu oyunu oynamak için daha büyük olman gerekiyor
 Authentication.SignUp.Label.ErrorsWithPassword,Şifre ile ilgili hatalar var.
 Authentication.SignUp.Label.ErrorsWithUsername,Kullanıcı adıyla ilgili hatalar var.
 Authentication.SignUp.Label.ExitModalSubtitle,Hesabın neredeyse oluşturuldu. Ayrılırsan şu ana kadarki ilerlemeni kaybedeceksin.
@@ -270,6 +269,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,"CurveAnimation, çok fazl
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"CurveAnimation, {maxAllowed} taneden fazla MarkerCurve içeriyor. Lütfen en fazla {maxAllowed} MarkerCurve alt öğesi bulunmasına dikkat et."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,"CurveAnimation, {count} İşaretçili bir MarkerCurve içeriyor. MarkerCurve başına maksimum {maxAllowed} işaretçi olabilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation beklenmedik bir alt öğe içeriyor: {childName}
+Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,{AssetId} kimlikli varlık ({InstanceFullName}.{FieldName}) yayınlanmadı. Yayınla ve tekrar dene.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Pazar yerindeki Dinamik Kafalar, kafes üzerindeki gözler ve ağız köşeleri mesh köşeleriyle hizalanacak şekilde düzgünce kafeslenmelidir. Lütfen kafeslemeni ve mesh ile hizalamasını iyileştir."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Dinamik Kafa için gülümseme ifadesi algılanamıyor. Kafada ağzın bulunduğu yerle eşleşmesi için lütfen ağzın kafes işaretlerini ayarla ve gülümseme ifadesini gösterebildiğinden emin ol.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Dinamik Kafa için sol göz kapalı ifadesi algılanamıyor. Kafada sol gözün bulunduğu yerle eşleşmesi için lütfen sol gözün kafes işaretlerini ayarla ve gözün kapatılabildiğinden emin ol.
@@ -282,7 +282,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Yayıcı Alan Eşiğ
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} çok Yayıcı. Yayıcı alan × yoğunluk sınırı aşıyor (şu anda yüzde {emissivePercentage}, yüzde {maxEmissivePercentage} veya daha az olmalıdır). Parlayan alanı küçült veya Yayıcı Gücünü düşür."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Yayıcı Alan Aşıldı.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} çok Yayıcı. Yayıcı alan × yoğunluk sınırı aşıyor (şu anda {emissiveArea}, {maxEmissiveArea} veya daha az olmalıdır). Parlayan alanı küçült veya Yayıcı Gücünü düşür."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"Bu varlık, yalnızca Güvenilir Yaratıcı Programı'ndaki yaratıcılar tarafından kullanılabilen yayıcı haritalar kullanıyor. Yüklemeden önce lütfen tüm yayıcı harita içeriklerini kaldır veya programa katıl."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Yayınlanan animasyonda geçerli bir maksimum parça öteleme değeri eksik. Lütfen animasyonu yeniden yayınla.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Yayınlanan animasyonda geçerli bir kullanıcı tarafından oluşturulmuş içerik (KTOİ) ifade işaretleyicisi eksik. Lütfen animasyonu yeniden yayınla.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Yayınlanan animasyon verilerinden maksimum parça ötelemesi hesaplanamadı. Lütfen animasyonu yeniden yayınla.
@@ -290,6 +289,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Yayı
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Kafa, Üst Gövdenin üzerine yerleştirilmelidir. Kafa merkezi, gövdenin üst kısmının altında. Bu, kafa mesh'inin çöktüğünü veya yanlış yerleştirildiğini gösterir."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls'taki InternalOverrideFACSData özelliği yükleme sırasında boş olmalıdır.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında büyüttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,Dinamik kafalarda en fazla {maxFacsJointCount} Yüz Hareketi Kodlama Sistemi (FACS) eklemi olabilir ancak bu kafada {actualJointCount} eklem var. Lütfen FACS eklemi sayısını azaltıp tekrar dene.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında küçülttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Yükleme formatı beklenen klasör yapısıyla eşleşmiyor. Lütfen tekrar dene veya bir hata raporu gönder.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,{bonePath} kemiği {partName} mesh parçanın çok dışında kalıyor; kemiği lütfen mesh parça boyut sınırına yaklaştır.
@@ -926,6 +926,9 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,Üçüncü Şah
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,Görünüm ve Denetimler
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR Vinyet Etkin
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,Sesli Sohbet Ses Seviyesi
+CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,Sesli yazma modu
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,Otomatik Gönderim
+CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,Manuel Gönderim
 CoreScripts.InGameMenu.GameSettings.Volume,Ses Seviyesi
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,VR KONTROLLERİ
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,"Bir hata oluştu, lütfen tekrar dene."
@@ -2013,6 +2016,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,Daha fazla oyuncu kazan
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,Oyuncuları tekrar tekrar oynamaya teşvik et
 Feature.Build.Analytics.Goal.Locked.EarnRobux,Bu istatistikleri görmek için oyununda Robux kazan.
 Feature.Build.Analytics.Goal.Locked.FirstImpression,Bu istatistikleri görmek için ilk oyuncunu kazan.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Daha fazla oyuncun olduğunda bu istatistikleri görebilirsin.
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Geri dönen oyuncun olduğunda bu istatistikleri görebilirsin.
 Feature.Build.Analytics.KeyStats,Önemli istatistikler
 Feature.Build.Analytics.LastMonth,Geçen ay
@@ -2366,11 +2370,8 @@ Feature.Build.Message.NoSearchResultsFound,Hiçbir arama sonucu bulunamadı
 Feature.Build.Message.NoVersionHistory,Henüz sürüm geçmişi yok.
 Feature.Build.Message.OneTaskCompleted,1 görev tamamlandı
 Feature.Build.Message.OutOfBuildUsage,İnşa Et kullanım hakkın tükendi. Bir şeyler oluşturmaya devam etmek için Robux kullanma seçeneklerini görüntüle.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Aşağıdaki kullanıcılara sohbet bağlantısı içeren davet gönderemedin:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Bağlantı almak için lütfen Paylaş düğmesini kullan.
 Feature.Build.Message.PlaytesterRequestFailed,Talebini tamamlayamadık. Lütfen tekrar dene.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT}/{MAX_INVITES} erken test kullanıcısı davet edildi
-Feature.Build.Message.PrivatePlaytestInvite,{username} seni {experienceName} için erken test kullanıcısı olmaya davet etti
 Feature.Build.Message.PublicPublishFailed,Oyunun yayınlandı ancak herkese açık hâle getirilemedi. Tekrar dene.
 Feature.Build.Message.PublishExpandAudience,Kitleni genişletmek için yayınla
 Feature.Build.Message.PublishNotReverted,Yayınlaman geri döndürülmedi. Tekrar dene.
@@ -2439,7 +2440,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma aç�
 Feature.Build.Title.NoMonetizationProducts,Oyununda kazanmaya başla
 Feature.Build.Title.NoRobuxForUsage,İnşa Et kullanım hakkı için Robux kalmadı
 Feature.Build.Title.PickCampaign,Süre seç
-Feature.Build.Title.PlaytestInviteSendFailed,Davetler gönderilemedi
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Aşağıdaki kullanıcılar eklenemedi:
 Feature.Build.Title.PlaytestersOnlyPlay,Yalnızca oynanış testçileri oynayabilir
@@ -3575,6 +3575,7 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,{numb
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,Mesajlarından biri veya daha fazlası kuralları çiğnediği için {number} dakika boyunca sohbeti kullanamazsın. Kuralları tekrar çiğnemen hâlinde engellenebilirsin.
 Feature.InExperienceIntervention.Description.Disclaimer,Bir hata mı yaptık? {startLink}Bizi bilgilendir{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,"Geri bildirimin, sistemlerimizin gelişmesine yardımcı olur."
+Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,Nazik kelimeler kullan ve topluluğunun güvenliğini koru.
 Feature.InExperienceIntervention.Description.LoseAccess,Bu durumun tekrarlanması hâlinde hesabına erişimi kaybedebilirsin.
 Feature.InExperienceIntervention.Description.MayLoseAccess,Kuralları tekrar çiğnemen hâlinde hesabına erişimi kaybedebilirsin.
 Feature.InExperienceIntervention.Description.Mistake,Bir hata mı yaptık?
@@ -3594,6 +3595,7 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,Kişisel b
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,Sohbetin {remainingTime} süreliğine askıya alındı
 Feature.InExperienceIntervention.Heading.TakeALook,Sohbeti inceleyeceğiz
 Feature.InExperienceIntervention.Heading.TextChatSuspension,Metin sohbeti uzaklaştırması
+Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,Kuralları çiğnersen sesli yazma kapatılabilir
 Feature.InExperienceIntervention.Label.Complete,Tamamlandı
 Feature.InExperienceIntervention.Label.EndsOn,Sona erme tarihi:
 Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
@@ -3777,6 +3779,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,"Bir dakika bekle, ardından tekrar 
 Feature.Moments.Label.VoiceModerationError,Metnin güvenlik kurallarına uymalıdır
 Feature.Moments.Label.VoicePlaceholder,Seslendirme metnini yaz. {maxCount} karakter sınırı
 Feature.Moments.Label.VoiceTimeoutBody,Seslendirme oluşturma işlemi zaman aşımına uğradı.
+Feature.Moments.Label.VoiceTooManyNumbersError,Komut dosyası çok fazla sayıda rakam içeriyor
 Feature.Moments.Label.WriteComment,Yorum yaz
 Feature.Moments.Title.Comments,Yorumlar
 Feature.Moments.Title.CommentsWithCappedCount,Yorumlar ({count}+)
@@ -3787,6 +3790,8 @@ Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
 Feature.Moments.Tooltip.Creation,"Deneyimdeki herkes, Anlarını görüntüleyebilir."
+Feature.Moments.Tooltip.ShareFirstMomentBody,Yakaladığın görüntülerden bir An oluştur
+Feature.Moments.Tooltip.ShareFirstMomentTitle,İlk Anını paylaş
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,Bir hata raporla
 Feature.NotApproved.Label.AbuseType.Advertising,

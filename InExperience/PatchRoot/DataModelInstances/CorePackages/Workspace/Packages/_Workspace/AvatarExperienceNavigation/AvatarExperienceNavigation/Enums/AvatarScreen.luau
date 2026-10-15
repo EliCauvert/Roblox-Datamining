@@ -12,6 +12,8 @@ return {
 	CatalogSearchLanding = "CatalogSearchLanding",
 	ItemDetails = "ItemDetails",
 	OutfitDetails = "OutfitDetails",
+	SendGiftRecipientPicker = "SendGiftRecipientPicker",
+	SendGiftReview = "SendGiftReview",
 	SellItemPage = "SellItemPage",
 	ItemOwnershipPage = "ItemOwnershipPage",
 	ResellersPage = "ResellersPage",

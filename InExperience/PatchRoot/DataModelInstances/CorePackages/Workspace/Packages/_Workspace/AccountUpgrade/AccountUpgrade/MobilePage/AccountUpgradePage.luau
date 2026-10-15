@@ -28,6 +28,7 @@ return function(p1)
 				onUnrecoverableFailure()
 			end
 		end, { onUnrecoverableFailure }),
-		onSignOut = p1.onSignOut
+		onSignOut = p1.onSignOut,
+		onLegalLinkSelected = p1.onLegalLinkSelected
 	}))
 end

@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("ExpChatMessageEffectChatWindowEnlargeTextSize", 28)

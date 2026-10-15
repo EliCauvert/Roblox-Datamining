@@ -113,7 +113,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} anni
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Giorno
 Authentication.SignUp.Label.EnterYourEmail,Inserisci la tua email
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,Devi essere più grande per giocare a questo gioco
 Authentication.SignUp.Label.ErrorsWithPassword,Si è verificato un errore con la password.
 Authentication.SignUp.Label.ErrorsWithUsername,Si è verificato un errore con il nome utente.
 Authentication.SignUp.Label.ExitModalSubtitle,"Hai quasi finito la creazione dell'account. Se esci, perderai i progressi."
@@ -265,7 +264,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Area emissiva al di 
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} è troppo emissivo. L'area emissiva moltiplicata per l'intensità supera il limite (attualmente un {emissivePercentage}%, mentre deve essere pari o inferiore a un {maxEmissivePercentage}%). Riduci l'area luminosa o abbassa il valore di EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Area emissiva superata.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} è troppo emissivo. L'area emissiva moltiplicata per l'intensità supera il limite (attualmente {emissiveArea}, mentre deve essere pari o inferiore a {maxEmissiveArea}). Riduci l'area luminosa o abbassa il valore di EmissiveStrength."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Questa risorsa utilizza mappe emissive che sono disponibili solo per i creatori del programma Trusted Creator. Rimuovi tutti i contenuti delle mappe emissive o partecipa al programma prima di caricare.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Nell'animazione pubblicata manca un valore valido di traslazione massima della parte. Ripubblica l'animazione.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Nell'animazione pubblicata manca un indicatore di emote UGC valido. Ripubblica l'animazione.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Non è stato possibile calcolare la traslazione massima della parte dai dati dell'animazione pubblicata. Ripubblica l'animazione.
@@ -273,6 +271,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"L'ani
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"La testa deve essere posizionata sopra UpperTorso. Il centro della testa si trova al di sotto della parte superiore del busto, il che indica che la mesh della testa è collassata o posizionata in modo errato."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La proprietà InternalOverrideFACSData su FaceControls deve essere vuota al momento del caricamento.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"È stato rilevato che FACs ha espanso la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Le teste dinamiche possono avere al massimo {maxFacsJointCount} articolazioni del sistema di codifica facciale, ma questa testa ne ha {actualJointCount}. Riduci il numero di articolazioni del sistema di codifica facciale e riprova."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"È stato rilevato che FACs ha ridotto la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Il formato caricato non corrisponde alla struttura di cartelle prevista. Riprova o invia una segnalazione di bug.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,L'osso {bonePath} è troppo lontano e al di fuori dalla MeshPart {partName}. Spostalo più vicino al limite dimensionale della MeshPart.
@@ -2361,11 +2360,8 @@ Feature.Build.Message.NoSearchResultsFound,Nessun risultato di ricerca trovato
 Feature.Build.Message.NoVersionHistory,Non è ancora presente alcuna cronologia delle versioni.
 Feature.Build.Message.OneTaskCompleted,1 attività completata
 Feature.Build.Message.OutOfBuildUsage,Hai esaurito l'utilizzo di Costruisci. Visualizza le opzioni per utilizzare Robux e continuare a creare.
-Feature.Build.Message.PlaytestInviteSendFailedBody,Non è stato possibile inviare un link di invito alla chat ai seguenti utenti:
-Feature.Build.Message.PlaytestInviteSendFailedHint,Utilizza il tasto Condividi per ottenere un link.
 Feature.Build.Message.PlaytesterRequestFailed,Non è stato possibile completare la richiesta. Riprova.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} di {MAX_INVITES} early tester invitati
-Feature.Build.Message.PrivatePlaytestInvite,"{username} ti ha invitato a essere un early tester per il gioco ""{experienceName}"""
 Feature.Build.Message.PublicPublishFailed,"Il tuo gioco è stato pubblicato, ma non è stato possibile renderlo pubblico. Riprova."
 Feature.Build.Message.PublishExpandAudience,Pubblica per ampliare il tuo pubblico
 Feature.Build.Message.PublishNotReverted,La tua pubblicazione non è stata ripristinata. Riprova.
@@ -2434,7 +2430,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,Attivare i prezzi gestiti?
 Feature.Build.Title.NoMonetizationProducts,Inizia a guadagnare nel tuo gioco
 Feature.Build.Title.NoRobuxForUsage,Nessun Robux rimasto per l'utilizzo di Build
 Feature.Build.Title.PickCampaign,Scegli una durata
-Feature.Build.Title.PlaytestInviteSendFailed,Impossibile inviare gli inviti
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Impossibile aggiungere i seguenti utenti:
 Feature.Build.Title.PlaytestersOnlyPlay,Solo i playtester possono giocare

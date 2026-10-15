@@ -4,6 +4,7 @@ local foundationModule = require(parent.Foundation)
 local builderIconsModule = require(parent.BuilderIcons)
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local appPage = require(parent.RobloxAppEnums).AppPage
+local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 local constantsModule = require(script.Parent.Parent.Constants)
 local FAVORITES_URI = constantsModule.FAVORITES_URI
 local CONTINUE_PLAYING_URI = constantsModule.CONTINUE_PLAYING_URI
@@ -20,6 +21,7 @@ local fFlagFlyoutSidePanelTradesEntryModule = require(script.Parent.Parent.Flags
 local fFlagFlyoutFilterWebViewsAndBrowserLinks = sharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
 local fFlagEnableLuaCommunityList = sharedFlagsModule.FFlagEnableLuaCommunityList
 local fFlagFlyoutResolveItemContextOnActivationModule = require(flyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
+local fFlagEnableChartsInFlyout = sharedFlagsModule.FFlagEnableChartsInFlyout
 local communityListRouting = require(parent.Groups).CommunityListRouting
 local t = {
 	Favorites = "Favorites",
@@ -210,7 +212,10 @@ local t_4 = {
 		itemType = t.Charts,
 		textKey = t_2[t.Charts],
 		icon = builderIconsModule.Icon.ChartThreeVerticalBars,
-		context = { destinationType = t_3.AppPage }
+		context = {
+			appPage = if fFlagEnableChartsInFlyout and flyoutSidePanelIXP.isChartsInFlyoutEnabled() then appPage.Games else nil,
+			destinationType = t_3.AppPage
+		}
 	},
 	[t.Learn] = {
 		itemType = t.Learn,

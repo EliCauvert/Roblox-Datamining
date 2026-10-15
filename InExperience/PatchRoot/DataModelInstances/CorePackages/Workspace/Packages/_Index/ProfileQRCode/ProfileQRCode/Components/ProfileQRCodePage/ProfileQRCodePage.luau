@@ -36,6 +36,7 @@ local useLastInputMode = focusNavigationUtilsModule.useLastInputMode
 local color3 = Color3.new(1, 1, 1)
 local fFlagProfileQRCodeFixFocusNavigationModule = require(profileQRCode.Flags.FFlagProfileQRCodeFixFocusNavigation)
 local fFlagQRCodeCopyUpdates = require(parent.SharedFlags).FFlagQRCodeCopyUpdates
+local fFlagQRCodePageVisualRefresh = require(parent.SharedFlags).FFlagQRCodePageVisualRefresh
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local fStringCanAccessTrustedContactsAmpFeature = require(parent.SharedFlags).FStringCanAccessTrustedContactsAmpFeature
 local fFlagTCPolicyCheckRedirect = require(parent.SharedFlags).FFlagTCPolicyCheckRedirect
@@ -45,7 +46,7 @@ local ampApiProvider = require(parent.AmpUpsell).AmpApiProvider
 local ampEnums = require(parent.AmpUpsell).AmpEnums
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useAppPolicy (ref), useLocalization (ref), textKeysModule (ref), fFlagQRCodeCopyUpdates (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fFlagProfileQRCodeFixFocusNavigationModule (ref), useIsWideMode (ref), useStyle (ref), useLastInputMode (ref), useFocusGuiObject (ref), useProfileShareLink (ref), contexts (ref), profileSharePolicyEnum (ref), images (ref), fFlagTCPolicyCheckRedirect (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpFeature (ref), ampApiProvider (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), ampEnums (ref), profileQRCodeTopElementsModule (ref), verticalScrollView (ref), color3 (ref), QRCodeViewModule (ref), styledTextLabel (ref), inputLabel (ref), inputLabelSize (ref), button (ref), buttonType (ref), standardButtonSize (ref)
+	-- upvalues: useDispatch (ref), useAppPolicy (ref), useLocalization (ref), textKeysModule (ref), fFlagQRCodeCopyUpdates (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fFlagProfileQRCodeFixFocusNavigationModule (ref), useIsWideMode (ref), useStyle (ref), useLastInputMode (ref), useFocusGuiObject (ref), useProfileShareLink (ref), contexts (ref), profileSharePolicyEnum (ref), images (ref), fFlagTCPolicyCheckRedirect (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpFeature (ref), ampApiProvider (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), ampEnums (ref), fFlagQRCodePageVisualRefresh (ref), foundationModule (ref), profileQRCodeTopElementsModule (ref), verticalScrollView (ref), color3 (ref), QRCodeViewModule (ref), styledTextLabel (ref), inputLabel (ref), inputLabelSize (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local var2 = useDispatch()
 	local var3 = useAppPolicy(function(p2)
 		return p2.getWebViewSupport()
@@ -120,6 +121,11 @@ return function(p1)
 		Size = UDim2.fromScale(1, 1)
 	}
 	local t_1 = {
+		WidePanel = if fFlagQRCodePageVisualRefresh and var9 then reactModule.createElement(foundationModule.View, {
+			tag = "bg-over-media-100",
+			ZIndex = 0,
+			Size = UDim2.fromScale(0.6, 1)
+		}) else nil,
 		TopElements = reactModule.createElement(profileQRCodeTopElementsModule, {
 			appStorageService = p1.appStorageService,
 			onClose = p1.onClose,
@@ -140,7 +146,7 @@ return function(p1)
 	local t_4 = {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundColor3 = color3,
-		BackgroundTransparency = if var9 then 0.7 else 1,
+		BackgroundTransparency = if var9 and not fFlagQRCodePageVisualRefresh then 0.7 else 1,
 		Position = UDim2.fromScale(0, 0),
 		Size = if var9 then UDim2.fromScale(0.6, 1) else UDim2.fromScale(1, 1),
 		BorderSizePixel = 0,

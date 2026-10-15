@@ -8,9 +8,7 @@ local makeNormalizeTableFn = normalize.makeNormalizeTableFn
 local normalizeNotEmptyString = normalize.normalizeNotEmptyString
 local httpService = game:GetService("HttpService")
 local _ = require(avatarExperienceCatalog.Models.CatalogCategories)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCatalogCategoriesSDUI = avatarExperienceFlagsModule.FFlagAXCatalogCategoriesSDUI
-local fFlagAXCatalogCategoriesSDUIPillTitleNormalization = avatarExperienceFlagsModule.FFlagAXCatalogCategoriesSDUIPillTitleNormalization
+local fFlagAXCatalogCategoriesSDUI = require(parent.AvatarExperienceFlags).FFlagAXCatalogCategoriesSDUI
 
 local function _()
 	-- upvalues: httpService (ref)
@@ -125,12 +123,12 @@ local _ = function()
 end
 
 local _ = function(p4)
-	-- upvalues: fFlagAXCatalogCategoriesSDUIPillTitleNormalization (ref), normalizeNotEmptyString (ref), normalizeString (ref)
+	-- upvalues: fFlagAXCatalogCategoriesSDUI (ref), normalizeNotEmptyString (ref), normalizeString (ref)
 	local pillTitle = p4.props and p4.props.pillTitle
 	local _ = nil
 	local _ = nil
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
+	if fFlagAXCatalogCategoriesSDUI then
 		local var1, var2 = normalizeNotEmptyString(pillTitle)
 		
 		return var1, var2
@@ -141,12 +139,12 @@ local _ = function(p4)
 end
 
 local _ = function(p4)
-	-- upvalues: fFlagAXCatalogCategoriesSDUIPillTitleNormalization (ref), normalizeNotEmptyString (ref), normalizeString (ref)
+	-- upvalues: fFlagAXCatalogCategoriesSDUI (ref), normalizeNotEmptyString (ref), normalizeString (ref)
 	local pillId = p4.props and p4.props.pillId
 	local _ = nil
 	local _ = nil
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
+	if fFlagAXCatalogCategoriesSDUI then
 		local var1, var2 = normalizeNotEmptyString(pillId)
 		
 		return var1, var2
@@ -325,7 +323,7 @@ local var2 = function(p4)
 end
 
 local function normalizeCategoryOrSubcategory(p5, p6)
-	-- upvalues: fFlagAXCatalogCategoriesSDUIPillTitleNormalization (ref), normalizeNotEmptyString (ref), normalizeString (ref), httpService (ref), extractShowCatalogContentActionRequestParams (ref), splitCommaSeparatedString (ref), fFlagAXCatalogCategoriesSDUI (ref), extractWidgetContext (ref), normalizeNumber (ref), var2 (write), normalizeBoolean (ref)
+	-- upvalues: fFlagAXCatalogCategoriesSDUI (ref), normalizeNotEmptyString (ref), normalizeString (ref), httpService (ref), extractShowCatalogContentActionRequestParams (ref), splitCommaSeparatedString (ref), extractWidgetContext (ref), normalizeNumber (ref), var2 (write), normalizeBoolean (ref)
 	if type(p5) ~= "table" then
 		return nil, "Config must be a table"
 	end
@@ -335,7 +333,7 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 	local _ = nil
 	local _ = nil
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
+	if fFlagAXCatalogCategoriesSDUI then
 		local var7, var8 = normalizeNotEmptyString(pillId)
 		var5 = var7
 		var6 = var8
@@ -345,14 +343,14 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		var6 = var10
 	end
 	if var6 then
-		table.insert(t, "Id: " .. var74)
+		table.insert(t, "Id: " .. var73)
 	end
 	local var11, var12
 	local pillTitle = p5.props and p5.props.pillTitle
 	local _ = nil
 	local _ = nil
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
+	if fFlagAXCatalogCategoriesSDUI then
 		local var13, var14 = normalizeNotEmptyString(pillTitle)
 		var11 = var13
 		var12 = var14
@@ -362,14 +360,14 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		var12 = var16
 	end
 	if var12 then
-		table.insert(t, "Name: " .. var81)
+		table.insert(t, "Name: " .. var80)
 	end
 	local var17, var18
 	local pillTitle_1 = p5.props and p5.props.pillTitle
 	local _ = nil
 	local _ = nil
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
+	if fFlagAXCatalogCategoriesSDUI then
 		local var19, var20 = normalizeNotEmptyString(pillTitle_1)
 		var17 = var19
 		var18 = var20
@@ -379,14 +377,14 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		var18 = var22
 	end
 	if var18 then
-		table.insert(t, "LocalizedTitle: " .. var88)
+		table.insert(t, "LocalizedTitle: " .. var87)
 	end
 	local var23, var24
 	local pillTitle_2 = p5.props and p5.props.pillTitle
 	local _ = nil
 	local _ = nil
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
+	if fFlagAXCatalogCategoriesSDUI then
 		local var25, var26 = normalizeNotEmptyString(pillTitle_2)
 		var23 = var25
 		var24 = var26
@@ -396,7 +394,7 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		var24 = var28
 	end
 	if var24 then
-		table.insert(t, "Title: " .. var95)
+		table.insert(t, "Title: " .. var94)
 	end
 	local var29 = httpService:GenerateGUID(true)
 	local var30 = nil
@@ -419,7 +417,7 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		end
 	end
 	if var32 then
-		table.insert(t, "AssetTypeIdStrings: " .. var105)
+		table.insert(t, "AssetTypeIdStrings: " .. var104)
 	end
 	local var36
 	local var37 = extractShowCatalogContentActionRequestParams(p5)
@@ -475,12 +473,12 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		var47 = var49
 	end
 	if var47 then
-		table.insert(t, "TimeToRefresh: " .. var119)
+		table.insert(t, "TimeToRefresh: " .. var118)
 	end
 	local var50, var51 = normalizeNotEmptyString(p5.props and p5.props.cameraFocus)
 	
 	if var51 then
-		table.insert(t, "CameraFocus: " .. var123)
+		table.insert(t, "CameraFocus: " .. var122)
 	end
 	local var52, var53
 	local cameraZoomRadius = p5.props and p5.props.cameraZoomRadius
@@ -500,7 +498,7 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		var53 = var55
 	end
 	if var53 then
-		table.insert(t, "CameraZoomRadius: " .. var126)
+		table.insert(t, "CameraZoomRadius: " .. var125)
 	end
 	cameraZoomRadius = nil
 	local _ = nil
@@ -511,7 +509,7 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		local var58 = var57
 		
 		if var58 then
-			table.insert(t, "Subcategories: " .. var131)
+			table.insert(t, "Subcategories: " .. var130)
 		end
 	end
 	local var59, var60, var61, var62
@@ -545,7 +543,7 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		var60 = var64
 	end
 	if var60 then
-		table.insert(t, "CanAnimateCameraBasedMood: " .. var136)
+		table.insert(t, "CanAnimateCameraBasedMood: " .. var135)
 	end
 	local var65, var66, var67
 	local disableFilters = p5.props and p5.props.disableFilters
@@ -578,12 +576,12 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		var65 = var69
 	end
 	if var65 then
-		table.insert(t, "DisableFilters: " .. var142)
+		table.insert(t, "DisableFilters: " .. var141)
 	end
 	local var70, var71 = normalizeNotEmptyString(p5.props and p5.props.pageType)
 	
 	if var71 then
-		table.insert(t, "PageType: " .. var146)
+		table.insert(t, "PageType: " .. var145)
 	end
 	local var72, var73
 	local var74 = extractShowCatalogContentActionRequestParams(p5)
@@ -598,22 +596,22 @@ local function normalizeCategoryOrSubcategory(p5, p6)
 		var73 = var76
 	end
 	if var73 then
-		table.insert(t, "LooksWidgetContextForOrganicContent: " .. var152)
+		table.insert(t, "LooksWidgetContextForOrganicContent: " .. var151)
 	end
 	local var77, var78 = normalizeNotEmptyString(p5.props and p5.props.tooltipKey)
 	
 	if var78 then
-		table.insert(t, "TooltipKey: " .. var154)
+		table.insert(t, "TooltipKey: " .. var153)
 	end
 	local var79, var80 = normalizeNotEmptyString(p5.props and p5.props.tooltipBody)
 	
 	if var80 then
-		table.insert(t, "TooltipBody: " .. var156)
+		table.insert(t, "TooltipBody: " .. var155)
 	end
 	local var81, var82 = normalizeNotEmptyString(p5.props and p5.props.tileType)
 	
 	if var82 then
-		table.insert(t, "TileType: " .. var158)
+		table.insert(t, "TileType: " .. var157)
 	end
 	if #t > 0 then
 		return nil, (if p6.isSubcategory then "Subcategory" else "Category") .. " normalization failed: " .. table.concat(t, "; ")

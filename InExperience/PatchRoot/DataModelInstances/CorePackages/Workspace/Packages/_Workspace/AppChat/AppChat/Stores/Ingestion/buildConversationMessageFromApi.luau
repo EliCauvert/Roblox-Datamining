@@ -19,6 +19,7 @@ return function(p1, p2)
 		replies_to = p1.replies_to,
 		cards = if getFFlagEnableSocialCards() then p1.cards else nil,
 		filtered_for_receivers = p1.filtered_for_receivers,
+		is_previewable = p1.is_previewable,
 		conversationId = p2,
 		stableKey = p1.id
 	}

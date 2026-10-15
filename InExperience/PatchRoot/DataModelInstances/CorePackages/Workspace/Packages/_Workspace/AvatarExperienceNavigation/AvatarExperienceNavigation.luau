@@ -38,5 +38,8 @@ return {
 		NavigateWithLock = require(script.Thunks.NavigateWithLock),
 		NavigateDownToAvatarScreen = require(script.Thunks.NavigateDownToAvatarScreen)
 	},
+	Utils = {
+		closeGiftSendFlow = require(script.Utils.closeGiftSendFlow)
+	},
 	["jest.config"] = script["jest.config"]
 }

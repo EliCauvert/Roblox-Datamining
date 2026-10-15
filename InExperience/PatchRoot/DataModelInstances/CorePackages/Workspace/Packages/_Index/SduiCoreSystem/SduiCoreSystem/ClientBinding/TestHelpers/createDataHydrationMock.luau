@@ -92,6 +92,7 @@ return {
 			Community = if p1 then p1.Community else nil,
 			CommunityUserMembership = if p1 then p1.CommunityUserMembership else nil,
 			NotificationBadge = if p1 then p1.NotificationBadge else nil,
+			LeaderboardStats = if p1 then p1.LeaderboardStats else nil,
 			DataHydrationTypes = t
 		}
 		

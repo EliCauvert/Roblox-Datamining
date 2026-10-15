@@ -4,6 +4,7 @@ local reactModule = require(parent.React)
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local useStatusBarHeight = require(parent.RobloxAppHooks).useStatusBarHeight
 local fFlagProfileModalViewStatusBarOffsetModule = require(profilePlatform.Flags.FFlagProfileModalViewStatusBarOffset)
+local fFlagProfileModalViewBottomSafeAreaModule = require(profilePlatform.Flags.FFlagProfileModalViewBottomSafeArea)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
@@ -18,7 +19,7 @@ local fFlagFixCommunityProfileWideCoverLayoutModule = require(profilePlatform.Fl
 local view = require(parent.Foundation).View
 
 return function(p1)
-	-- upvalues: useStyle (ref), useSignalState (ref), displayModule (ref), fFlagProfileModalViewStatusBarOffsetModule (ref), useStatusBarHeight (ref), fFlagFixCommunityProfileWideCoverLayoutModule (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), inputHandlersModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), view (ref)
+	-- upvalues: useStyle (ref), useSignalState (ref), displayModule (ref), fFlagProfileModalViewStatusBarOffsetModule (ref), useStatusBarHeight (ref), fFlagProfileModalViewBottomSafeAreaModule (ref), fFlagFixCommunityProfileWideCoverLayoutModule (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), inputHandlersModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), view (ref)
 	local var1 = useStyle()
 	local var2 = useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding)
 	local t = {
@@ -31,7 +32,7 @@ return function(p1)
 	}
 	local var3 = if fFlagProfileModalViewStatusBarOffsetModule then useStatusBarHeight() else nil
 	local var4 = if fFlagProfileModalViewStatusBarOffsetModule then var3 else 0
-	local var5 = if fFlagProfileModalViewStatusBarOffsetModule then -var3 else 0
+	local var5 = if fFlagProfileModalViewStatusBarOffsetModule then -(var3 + (if fFlagProfileModalViewBottomSafeAreaModule then var2.bottom else 0)) else 0
 	local var6 = if fFlagFixCommunityProfileWideCoverLayoutModule then useProfileWrapperContextModule() else nil
 	local var7 = if fFlagFixCommunityProfileWideCoverLayoutModule then useProfileJsonComponentModule(enumsModule.Components.CoverPhoto) else nil
 	local var8 = if fFlagFixCommunityProfileWideCoverLayoutModule and var6 ~= nil and (var6.profileType == enumsModule.ProfileTypes.Community and var7 ~= nil) and var7.coverPhotoId == nil then 56 else 0

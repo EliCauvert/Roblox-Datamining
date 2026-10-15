@@ -7,6 +7,7 @@ local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.U
 local sendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
 local fFlagAXUnifiedImpressionsOnThumbnail = require(parent.AvatarExperienceFlags).FFlagAXUnifiedImpressionsOnThumbnail
 local fFlagAXFixHomeAvatarsUnifiedPurchase = require(parent.SharedFlags).FFlagAXFixHomeAvatarsUnifiedPurchase
+local fFlagAXEnableUnifiedLoggingAvatarMoment = require(parent.SharedFlags).FFlagAXEnableUnifiedLoggingAvatarMoment
 local fFlagAXUnifiedEventCounters = require(parent.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
 local AXSendPurchaseAttempt = game:DefineFastFlag("AXSendPurchaseAttempt", false)
 local AXUnifiedFilterWidgetLoadedAndUIImpression = game:DefineFastFlag("AXUnifiedFilterWidgetLoadedAndUIImpression", false)
@@ -36,21 +37,21 @@ function t.hasUiElementData(p1)
 end
 
 function t.hasItemId(p1)
-	-- upvalues: marketplaceUnifiedAction (ref), AXUnifiedFilterWidgetLoadedAndUIImpression (ref)
+	-- upvalues: fFlagAXEnableUnifiedLoggingAvatarMoment (ref), marketplaceUnifiedAction (ref), AXUnifiedFilterWidgetLoadedAndUIImpression (ref)
 	local action = p1.action
 	local itemId = p1.itemId
 	
-	return if action == marketplaceUnifiedAction.UNDEFINED_ACTION or action == marketplaceUnifiedAction.UI_ELEMENT_CLICK or (action == marketplaceUnifiedAction.PAGE_VIEW or action == marketplaceUnifiedAction.WIDGET_IMPRESSION) or AXUnifiedFilterWidgetLoadedAndUIImpression and (action == marketplaceUnifiedAction.UI_ELEMENT_IMPRESSION or action == marketplaceUnifiedAction.WIDGET_LOADED) then true else itemId ~= nil and itemId ~= ""
+	return if fFlagAXEnableUnifiedLoggingAvatarMoment and action == marketplaceUnifiedAction.PAGE_EXIT then true elseif action == marketplaceUnifiedAction.UNDEFINED_ACTION or action == marketplaceUnifiedAction.UI_ELEMENT_CLICK or (action == marketplaceUnifiedAction.PAGE_VIEW or action == marketplaceUnifiedAction.WIDGET_IMPRESSION) or AXUnifiedFilterWidgetLoadedAndUIImpression and (action == marketplaceUnifiedAction.UI_ELEMENT_IMPRESSION or action == marketplaceUnifiedAction.WIDGET_LOADED) then true else itemId ~= nil and itemId ~= ""
 end
 
 function t.hasValidItemType(p1)
-	-- upvalues: marketplaceUnifiedItemType (ref), AXUnifiedFilterWidgetLoadedAndUIImpression (ref), marketplaceUnifiedAction (ref)
+	-- upvalues: marketplaceUnifiedItemType (ref), fFlagAXEnableUnifiedLoggingAvatarMoment (ref), marketplaceUnifiedAction (ref), AXUnifiedFilterWidgetLoadedAndUIImpression (ref)
 	local itemType = p1.itemType
 	
 	if itemType == marketplaceUnifiedItemType.UNDEFINED_ITEM_TYPE or itemType == nil then
 		local action = p1.action
 		
-		return if AXUnifiedFilterWidgetLoadedAndUIImpression then if action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then if action ~= marketplaceUnifiedAction.UI_ELEMENT_IMPRESSION then if action ~= marketplaceUnifiedAction.PAGE_VIEW then if action ~= marketplaceUnifiedAction.WIDGET_IMPRESSION then action == marketplaceUnifiedAction.WIDGET_LOADED else true else true else true else true elseif action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then if action ~= marketplaceUnifiedAction.PAGE_VIEW then action == marketplaceUnifiedAction.WIDGET_IMPRESSION else true else true
+		return if fFlagAXEnableUnifiedLoggingAvatarMoment and action == marketplaceUnifiedAction.PAGE_EXIT then true elseif AXUnifiedFilterWidgetLoadedAndUIImpression then if action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then if action ~= marketplaceUnifiedAction.UI_ELEMENT_IMPRESSION then if action ~= marketplaceUnifiedAction.PAGE_VIEW then if action ~= marketplaceUnifiedAction.WIDGET_IMPRESSION then action == marketplaceUnifiedAction.WIDGET_LOADED else true else true else true else true elseif action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then if action ~= marketplaceUnifiedAction.PAGE_VIEW then action == marketplaceUnifiedAction.WIDGET_IMPRESSION else true else true
 	end
 	return if itemType ~= marketplaceUnifiedItemType.ASSET then if itemType ~= marketplaceUnifiedItemType.BUNDLE then itemType == marketplaceUnifiedItemType.LOOK else true else true
 end
@@ -75,14 +76,14 @@ function t.hasRequestIdForWidgetLog(p1)
 end
 
 function t.hasValidSizeAndPosition(p1)
-	-- upvalues: fFlagAXFixHomeAvatarsUnifiedPurchase (ref), marketplaceUnifiedAction (ref), unifiedLoggingSurface (ref)
+	-- upvalues: fFlagAXFixHomeAvatarsUnifiedPurchase (ref), marketplaceUnifiedAction (ref), unifiedLoggingSurface (ref), fFlagAXEnableUnifiedLoggingAvatarMoment (ref)
 	local action = p1.action
 	
-	return if fFlagAXFixHomeAvatarsUnifiedPurchase and action == marketplaceUnifiedAction.PURCHASE_SUCCESS and (p1.surface == unifiedLoggingSurface.DISCOVERY_HOMEPAGE or p1.surface == unifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS) then true elseif action == marketplaceUnifiedAction.ITEM_IMPRESSION or action == marketplaceUnifiedAction.ITEM_SELECTED or (action == marketplaceUnifiedAction.ITEM_DESELECTED or action == marketplaceUnifiedAction.PURCHASE_SUCCESS) then ((p1.screenSizeWidth or 0) > 0 and (p1.screenSizeHeight or 0) > 0) and (((p1.elementSizeWidth or 0) > 0 and (p1.elementSizeHeight or 0) > 0) and ((p1.gridPositionRow or 0) > 0 and (p1.gridPositionColumn or 0) > 0)) elseif action == marketplaceUnifiedAction.WIDGET_IMPRESSION then (p1.gridPositionRow or 0) > 0 and (p1.gridPositionColumn or 0) == 1 else true
+	return if fFlagAXFixHomeAvatarsUnifiedPurchase and action == marketplaceUnifiedAction.PURCHASE_SUCCESS and (p1.surface == unifiedLoggingSurface.DISCOVERY_HOMEPAGE or p1.surface == unifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS) then true elseif fFlagAXEnableUnifiedLoggingAvatarMoment and action == marketplaceUnifiedAction.PURCHASE_SUCCESS and p1.surface == unifiedLoggingSurface.SHOP_AVATAR_MOMENT then true elseif action == marketplaceUnifiedAction.ITEM_IMPRESSION or action == marketplaceUnifiedAction.ITEM_SELECTED or (action == marketplaceUnifiedAction.ITEM_DESELECTED or action == marketplaceUnifiedAction.PURCHASE_SUCCESS) then ((p1.screenSizeWidth or 0) > 0 and (p1.screenSizeHeight or 0) > 0) and (((p1.elementSizeWidth or 0) > 0 and (p1.elementSizeHeight or 0) > 0) and ((p1.gridPositionRow or 0) > 0 and (p1.gridPositionColumn or 0) > 0)) elseif action == marketplaceUnifiedAction.WIDGET_IMPRESSION then (p1.gridPositionRow or 0) > 0 and (p1.gridPositionColumn or 0) == 1 else true
 end
 
 function t.hasValidFilter(p1)
-	-- upvalues: AXAlignUnifiedFilterSearchKeyword (ref), marketplaceUnifiedAction (ref), unifiedLoggingSurface (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), unifiedEventLogEnumsModule (ref)
+	-- upvalues: AXAlignUnifiedFilterSearchKeyword (ref), marketplaceUnifiedAction (ref), unifiedLoggingSurface (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), fFlagAXEnableUnifiedLoggingAvatarMoment (ref), unifiedEventLogEnumsModule (ref)
 	local surface = p1.surface
 	local keyword = p1.keyword
 	local category = p1.category
@@ -100,7 +101,7 @@ function t.hasValidFilter(p1)
 	
 	if category == nil or category == "" then
 		if not fFlagAXUnifiedImpressionsOnThumbnail then
-			var1 = if p1.action ~= marketplaceUnifiedAction.WIDGET_IMPRESSION then if p1.action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then if p1.action ~= marketplaceUnifiedAction.PAGE_VIEW then p1.action == marketplaceUnifiedAction.PURCHASE_ATTEMPT else true else true else true
+			var1 = if p1.action ~= marketplaceUnifiedAction.WIDGET_IMPRESSION then if p1.action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then if p1.action ~= marketplaceUnifiedAction.PAGE_VIEW then if p1.action ~= marketplaceUnifiedAction.PURCHASE_ATTEMPT then fFlagAXEnableUnifiedLoggingAvatarMoment and p1.action == marketplaceUnifiedAction.PAGE_EXIT else true else true else true else true
 		end
 	elseif subcategory ~= nil and subcategory == "" then
 		var1 = false

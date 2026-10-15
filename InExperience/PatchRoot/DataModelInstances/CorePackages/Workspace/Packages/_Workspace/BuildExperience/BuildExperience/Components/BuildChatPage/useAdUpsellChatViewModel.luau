@@ -14,13 +14,14 @@ local useGetAdCampaignsModule = require(buildExperience.Components.Ads.useGetAdC
 local adUpsellPublishUtilsModule = require(script.Parent.adUpsellPublishUtils)
 local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
 local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
+local fFlagBuildAdUpsellPinnedModule = require(buildExperience.Flags.FFlagBuildAdUpsellPinned)
 local fFlagBuildAdsNotificationRouting = require(parent.SharedFlags).FFlagBuildAdsNotificationRouting
 local useAdsCampaignDeepLinkModule = require(buildExperience.Components.Ads.useAdsCampaignDeepLink)
 local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
 local var1 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
 
 return function(p1)
-	-- upvalues: getAdUpsellEventStoreModule (ref), signalsReactModule (ref), reactModule (ref), useGetAdCampaignEligibilityModule (ref), adCampaignEligibilityUtilsModule (ref), useCreateAdCampaignModule (ref), fFlagEnablePaidAdsModule (ref), useGetAdCampaignsModule (ref), adCampaignScheduleUtilsModule (ref), fFlagBuildAdUpsellModule (ref), useAdsCampaignDeepLinkModule (ref), fFlagBuildAdsNotificationRouting (ref), buildAppStorageKeyEngineFeature (ref), var1 (ref), adUpsellPublishUtilsModule (ref), sendBuildExperienceEventModule (ref)
+	-- upvalues: getAdUpsellEventStoreModule (ref), signalsReactModule (ref), reactModule (ref), useGetAdCampaignEligibilityModule (ref), adCampaignEligibilityUtilsModule (ref), useCreateAdCampaignModule (ref), fFlagEnablePaidAdsModule (ref), useGetAdCampaignsModule (ref), adCampaignScheduleUtilsModule (ref), fFlagBuildAdUpsellModule (ref), useAdsCampaignDeepLinkModule (ref), fFlagBuildAdsNotificationRouting (ref), adUpsellPublishUtilsModule (ref), buildAppStorageKeyEngineFeature (ref), var1 (ref), fFlagBuildAdUpsellPinnedModule (ref), sendBuildExperienceEventModule (ref)
 	local var2 = getAdUpsellEventStoreModule(false)
 	local var3 = signalsReactModule.useSignalState(var2.getRevision)
 	local var4 = reactModule.useRef(nil)
@@ -70,9 +71,13 @@ return function(p1)
 			return true
 		end
 	}) else nil
+	local var26 = reactModule.useMemo(function()
+		-- upvalues: adUpsellPublishUtilsModule (copy), p1 (ref)
+		return adUpsellPublishUtilsModule.getLastMessageKey(p1.messages)
+	end, { p1.messages })
 	local useEffect = reactModule.useEffect
 	
-	local var26 = function()
+	local var27 = function()
 		-- upvalues: var11 (ref), var13 (ref), var15 (ref), var19 (ref), fFlagEnablePaidAdsModule (copy), var20 (ref), var18 (ref)
 		var11(false)
 		var13(nil)
@@ -86,10 +91,10 @@ return function(p1)
 	end
 	
 	local t = {}
-	local var27 = if var25 ~= nil then p1.universeId or 0 else var25.scopeRevision
-	local var28 = var25 ~= nil and ((if var25 ~= nil then p1.sessionId else nil) or "")
+	local var28 = if var25 ~= nil then p1.universeId or 0 else var25.scopeRevision
+	local var29 = var25 ~= nil and ((if var25 ~= nil then p1.sessionId else nil) or "")
 	-- Unknown statement at pc 0: <SetList>
-	useEffect(var26, t)
+	useEffect(var27, t)
 	reactModule.useEffect(function()
 		-- upvalues: fFlagEnablePaidAdsModule (copy), var6 (ref), var5 (ref), var20 (ref), var17 (ref), var19 (ref), var18 (ref), var7 (ref)
 		if fFlagEnablePaidAdsModule then
@@ -114,28 +119,28 @@ return function(p1)
 			end
 		end
 	end, { p1.isPageVisible, isCreatePending })
-	local var29 = reactModule.useRef(false)
+	local var30 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var29 (ref), isCreatePending (ref), var16 (ref), var25 (write), p1 (ref), var9 (ref), var2 (ref), var18 (ref), fFlagEnablePaidAdsModule (copy), var20 (ref), var19 (ref), var11 (ref), var15 (ref)
-		local current = var29.current
-		var29.current = isCreatePending
+		-- upvalues: var30 (ref), isCreatePending (ref), var16 (ref), var25 (write), p1 (ref), var9 (ref), var2 (ref), var18 (ref), fFlagEnablePaidAdsModule (copy), var20 (ref), var19 (ref), var11 (ref), var15 (ref)
+		local current = var30.current
+		var30.current = isCreatePending
 		
 		if current and not isCreatePending then
 			local current_1 = var16.current
 			var16.current = nil
 			
 			if not var9.hasCreateError and (if var25 == nil then current_1 ~= nil and (current_1.universeId == p1.universeId and current_1.sessionId == p1.sessionId) else var25.finishCreate()) then
-				local var30
+				local var31
 				if p1.universeId ~= nil then
 					var2.dismissPermanently(p1.universeId)
 				end
 				if fFlagEnablePaidAdsModule then
-					var30 = var20.current ~= nil
-					var30 = nil
+					var31 = var20.current ~= nil
+					var31 = nil
 				else
-					var30 = var19.current ~= nil
+					var31 = var19.current ~= nil
 				end
-				var18(var30)
+				var18(var31)
 				
 				if p1.isPageVisible then
 					var11(false)
@@ -148,7 +153,7 @@ return function(p1)
 		p1.universeId ~= nil, p1.universeId or 0, p1.sessionId ~= nil,
 		p1.sessionId or ""
 	})
-	local var30 = reactModule.useMemo(function()
+	local var31 = reactModule.useMemo(function()
 		-- upvalues: buildAppStorageKeyEngineFeature (copy), p1 (ref), var1 (copy)
 		return if buildAppStorageKeyEngineFeature and p1.universeId ~= nil then var1.getAdUpsellState(p1.universeId, p1.sessionId) else nil
 	end, {
@@ -158,71 +163,83 @@ return function(p1)
 		p1.sessionId ~= nil,
 		p1.sessionId or ""
 	})
-	local var31 = p1.isPublic and (var8 and (not (if var30 ~= nil then not var30.isAvailable or var30.dismissedPermanently else true) and (not var23 and not var17)))
+	local var32 = p1.isPublic and (var8 and (not (if var31 ~= nil then not var31.isAvailable or var31.dismissedPermanently else true) and (not var23 and not var17)))
 	reactModule.useEffect(function()
-		-- upvalues: var30 (ref), var2 (ref)
-		if var30 ~= nil and not var30.isAvailable then
+		-- upvalues: var31 (ref), var2 (ref)
+		if var31 ~= nil and not var31.isAvailable then
 			var2.retryStorageRead()
 		end
-	end, { var2, var30 ~= nil, var30 ~= nil and var30.isAvailable })
-	local var32 = reactModule.useMemo(function()
-		-- upvalues: adUpsellPublishUtilsModule (copy), p1 (ref)
-		return adUpsellPublishUtilsModule.getLastMessageKey(p1.messages)
-	end, { p1.messages })
+	end, { var2, var31 ~= nil, var31 ~= nil and var31.isAvailable })
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var32 (ref), var30 (ref), var2 (ref)
-		if p1.universeId == nil or p1.sessionId == nil or (var32 == nil or var30 == nil) or var30.pendingMilestoneCount == 0 then
+		-- upvalues: p1 (ref), fFlagBuildAdUpsellPinnedModule (copy), var26 (ref), var31 (ref), var2 (ref)
+		if p1.universeId == nil or p1.sessionId == nil or not fFlagBuildAdUpsellPinnedModule and var26 == nil or (var31 == nil or var31.pendingMilestoneCount == 0) then
 			return
 		end
-		var2.attachPendingMilestones(p1.universeId, p1.sessionId, var32)
+		var2.attachPendingMilestones(p1.universeId, p1.sessionId, if fFlagBuildAdUpsellPinnedModule then nil else var26)
 	end, {
 		var2,
 		p1.universeId,
 		p1.sessionId,
-		var32,
-		if var30 ~= nil then var30.pendingMilestoneCount else 0
+		var26,
+		if var31 ~= nil then var31.pendingMilestoneCount else 0
 	})
-	local var33 = reactModule.useMemo(function()
+	local t_1 = {}
+	local var33 = nil
+	local var34 = reactModule.useMemo(function()
 		-- upvalues: adUpsellPublishUtilsModule (copy), p1 (ref)
 		return adUpsellPublishUtilsModule.getMessageIndexByKey(p1.messages)
 	end, { p1.messages })
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), var33 (ref), var2 (ref)
-		local var34 = if p1.universeId == nil or p1.sessionId == nil then nil else `{p1.universeId}:{p1.sessionId}`
+		-- upvalues: fFlagBuildAdUpsellPinnedModule (copy), p1 (ref), var4 (ref), var34 (ref), var2 (ref)
+		if fFlagBuildAdUpsellPinnedModule then return end
+		local var35 = if p1.universeId == nil or p1.sessionId == nil then nil else `{p1.universeId}:{p1.sessionId}`
 		
 		if not p1.isHistoryExhausted then
 			var4.current = nil
 		end
-		if not p1.isHistoryExhausted or var34 == nil or var4.current == var34 then return end
+		if not p1.isHistoryExhausted or var35 == nil or var4.current == var35 then return end
 		local t = {}
 		
-		for i in var33 do
+		for i in var34 do
 			t[i] = true
 		end
 		if var2.pruneAnchors(p1.universeId, p1.sessionId, t) then
-			var4.current = var34
+			var4.current = var35
 		end
 	end, {
-		var2, p1.isHistoryExhausted, p1.universeId, p1.sessionId, var33, var3
+		var2, p1.isHistoryExhausted, p1.universeId, p1.sessionId, var34, var3
 	})
-	local t_1 = {}
 	
-	if var30 ~= nil and var30.isAvailable and var31 then
-		for i, v in var30.anchors do
-			local afterMessageKey = var33[v.afterMessageKey]
-			
-			if afterMessageKey ~= nil then
-				table.insert(t_1, {
-					id = v.id,
-					order = v.order,
-					anchorIndex = afterMessageKey,
-					isImpressed = v.impressed
-				})
+	if var31 ~= nil and var31.isAvailable and var32 then
+		for i, v in var31.anchors do
+			if fFlagBuildAdUpsellPinnedModule then
+				table.insert(t_1, { id = v.id, order = v.order, isImpressed = v.impressed })
+				local transientCongratsMessageKey = var2.getTransientCongratsMessageKey(v.id)
+				
+				if transientCongratsMessageKey ~= nil then
+					var33 = var34[transientCongratsMessageKey]
+				end
+			else
+				local afterMessageKey = v.afterMessageKey
+				
+				if afterMessageKey ~= nil then
+					local var36 = var34[afterMessageKey]
+					
+					if var36 ~= nil then
+						table.insert(t_1, {
+							id = v.id,
+							order = v.order,
+							anchorIndex = var36,
+							isImpressed = v.impressed
+						})
+					end
+				end
 			end
 		end
 	end
 	return {
 		adUpsellCards = t_1,
+		adUpsellCongratsAnchorIndex = var33,
 		adUpsellFreePromotionsRemaining = var7,
 		isAdUpsellCreatePending = isCreatePending,
 		isAdCampaignSheetOpen = var10,
@@ -287,16 +304,16 @@ return function(p1)
 		end, { var9.clearCreateError, var25 }),
 		onAdCampaignSheetCreate = reactModule.useCallback(function(p2)
 			-- upvalues: fFlagBuildAdUpsellModule (copy), var25 (write), p1 (ref), sendBuildExperienceEventModule (copy), var16 (ref), var19 (ref), var7 (ref), fFlagEnablePaidAdsModule (copy), var20 (ref), var5 (ref), var9 (ref)
-			local var35 = if fFlagBuildAdUpsellModule then var25.getPresentedRequestId() else nil
+			local var37 = if fFlagBuildAdUpsellModule then var25.getPresentedRequestId() else nil
 			local t = {
 				universeId = p1.universeId,
 				conversationId = p1.sessionId
 			}
 			
-			if var35 == nil then
+			if var37 == nil then
 				sendBuildExperienceEventModule("AD_UPSELL_CREATE_CONFIRM_CLICK", t)
 			else
-				sendBuildExperienceEventModule("AD_CAMPAIGN_DEEP_LINK_CONFIRM_CLICK", t, { requestId = var35 })
+				sendBuildExperienceEventModule("AD_CAMPAIGN_DEEP_LINK_CONFIRM_CLICK", t, { requestId = var37 })
 			end
 			if var25 == nil then
 				var16.current = { universeId = p1.universeId, sessionId = p1.sessionId }

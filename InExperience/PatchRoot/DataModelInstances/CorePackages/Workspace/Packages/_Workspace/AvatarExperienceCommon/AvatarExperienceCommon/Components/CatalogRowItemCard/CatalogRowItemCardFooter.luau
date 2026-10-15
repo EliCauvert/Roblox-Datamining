@@ -16,12 +16,13 @@ local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagAXMISSmallUIChanges = avatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
 local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
+local fFlagAXGifting = avatarExperienceFlagsModule.FFlagAXGifting
 local fFlagAXMISOffersChip = avatarExperienceFlagsModule.FFlagAXMISOffersChip
 local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref), reactModule (ref), cryoModule (ref), fFlagAXMISWithOffers (ref), iconSize (ref), foundationModule (ref), itemCardPriceLine (ref), fFlagAXMISSmallUIChanges (ref), fFlagAXDurables2Option (ref), itemCardTitle (ref), text (ref), icon (ref), verifiedBadgesModule (ref), fFlagAXMISOffersChip (ref)
+	-- upvalues: useTokens (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref), reactModule (ref), cryoModule (ref), fFlagAXMISWithOffers (ref), iconSize (ref), foundationModule (ref), itemCardPriceLine (ref), fFlagAXMISSmallUIChanges (ref), fFlagAXGifting (ref), fFlagAXDurables2Option (ref), itemCardTitle (ref), text (ref), icon (ref), verifiedBadgesModule (ref), fFlagAXMISOffersChip (ref)
 	local var1 = useTokens()
 	local selectedTimedOptionPrice = nil
 	local setSelectedTimedOptionPrice = nil
@@ -96,7 +97,7 @@ return function(p1)
 	}
 	local t_1 = {}
 	
-	if fFlagAXDurables2Option and p1.onRemove then
+	if if fFlagAXGifting then p1.onRemove or p1.giftButton else fFlagAXDurables2Option and p1.onRemove then
 		local var5
 		createElement_1 = reactModule.createElement
 		local view_1 = foundationModule.View
@@ -166,13 +167,33 @@ return function(p1)
 			})
 		}) else nil
 		t_3.Left = createElement_2(view_2, t_4, t_5)
-		t_3.Right = if p1.onRemove then reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = 2 }, reactModule.createElement(foundationModule.IconButton, {
+		t_3.Right = if p1.onRemove or fFlagAXGifting and p1.giftButton then reactModule.createElement(foundationModule.View, {
+			LayoutOrder = 2,
+			tag = if fFlagAXGifting then {
+				["auto-xy"] = true,
+				["row gap-small"] = p1.giftButton ~= nil
+			} else "auto-xy"
+		}, if fFlagAXGifting then {
+			GiftButton = if p1.giftButton ~= nil then nil else reactModule.createElement(foundationModule.View, {
+				tag = "auto-xy",
+				LayoutOrder = 1,
+				testId = "catalogRowItemCardGiftButton"
+			}, p1.giftButton),
+			RemoveButton = if p1.onRemove then reactModule.createElement(foundationModule.IconButton, {
+				icon = "x",
+				isCircular = true,
+				testId = "catalogRowItemCardRemoveButton",
+				LayoutOrder = 2,
+				variant = foundationModule.Enums.ButtonVariant.Standard,
+				onActivated = p1.onRemove
+			}) else nil
+		} elseif p1.onRemove then reactModule.createElement(foundationModule.IconButton, {
 			icon = "x",
 			isCircular = true,
 			testId = "catalogRowItemCardRemoveButton",
 			variant = foundationModule.Enums.ButtonVariant.Standard,
 			onActivated = p1.onRemove
-		})) else nil
+		}) else nil) else nil
 		createElement_1 = createElement_1(view_1, t_2, t_3)
 	else
 		local var6

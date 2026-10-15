@@ -5,10 +5,13 @@ local foundationModule = require(parent.Foundation)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local inputHandlersModule = require(parent.InputHandlers)
 local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSafeArea
+local legalTextWithLinks = require(parent.AuthCommon).Components.LegalTextWithLinks
 local accountUpgradeFieldsModule = require(accountUpgrade.Components.AccountUpgradeFields)
 local accountUpgradeFieldErrorModule = require(accountUpgrade.Components.AccountUpgradeFieldError)
 local closeConfirmationDialogModule = require(accountUpgrade.Components.CloseConfirmationDialog)
 local accountUpgradeFieldModule = require(accountUpgrade.AccountUpgradeField)
+local fFlagAccountUpgradeOAuthDialogFitsContentModule = require(accountUpgrade.Flags.FFlagAccountUpgradeOAuthDialogFitsContent)
+local fFlagAccountUpgradeOAuthTelemetryModule = require(accountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
 local birthdaySheetModule = require(script.Parent.BirthdaySheet)
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
@@ -29,7 +32,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: foundationModule (ref), useLastInputMode (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), fullscreenPageWithSafeArea (ref), view (ref), headerBar (ref), text (ref), iconName (ref), scrollView (ref), scrollBarVisibility (ref), accountUpgradeFieldsModule (ref), inputSize (ref), button (ref), buttonVariant (ref), accountUpgradeFieldErrorModule (ref), accountUpgradeFieldModule (ref), birthdaySheetModule (ref), closeConfirmationDialogModule (ref)
+	-- upvalues: foundationModule (ref), useLastInputMode (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), fullscreenPageWithSafeArea (ref), view (ref), headerBar (ref), text (ref), iconName (ref), scrollView (ref), scrollBarVisibility (ref), accountUpgradeFieldsModule (ref), inputSize (ref), button (ref), buttonVariant (ref), accountUpgradeFieldErrorModule (ref), fFlagAccountUpgradeOAuthDialogFitsContentModule (ref), legalTextWithLinks (ref), accountUpgradeFieldModule (ref), birthdaySheetModule (ref), fFlagAccountUpgradeOAuthTelemetryModule (ref), closeConfirmationDialogModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = not p1.isSaveEnabled and not p1.isSubmitting
 	local onClose = p1.onClose
@@ -133,7 +136,13 @@ return function(p1)
 							LayoutOrder = 2,
 							testId = "AccountUpgradeSubmitError",
 							text = p1.submitError
-						})
+						}),
+						LegalText = if fFlagAccountUpgradeOAuthDialogFitsContentModule and p1.legalText then reactModule.createElement(legalTextWithLinks, {
+							LayoutOrder = 3,
+							testId = "AccountUpgradeLegalText",
+							text = p1.legalText,
+							onLinkActivated = p1.onLegalLinkActivated
+						}) else nil
 					})
 				})
 			}),
@@ -141,7 +150,8 @@ return function(p1)
 				isOpen = p1.isBirthdayPickerOpen,
 				birthday = p1.birthday,
 				onClose = p1.onBirthdayPickerClosed,
-				onConfirm = p1.onBirthdayConfirmed
+				onConfirm = p1.onBirthdayConfirmed,
+				onAllPicked = if fFlagAccountUpgradeOAuthTelemetryModule then p1.onBirthdayPickerAllPicked else nil
 			}),
 			CloseConfirmation = if p1.isCloseConfirmationOpen and onSignOut then reactModule.createElement(closeConfirmationDialogModule, {
 				onBack = p1.onCloseConfirmationBack,

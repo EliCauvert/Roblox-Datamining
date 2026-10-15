@@ -15,5 +15,6 @@
 	useThrottledCallback = require(script.useThrottledCallback),
 	useLaserPointerHand = require(script.useLaserPointerHand),
 	useIOSStatusBarStyler = require(script.useIOSStatusBarStyler),
-	useAssetFetchStatus = require(script.useAssetFetchStatus)
+	useAssetFetchStatus = require(script.useAssetFetchStatus),
+	useTableWrappedCallbackRef = require(script.useTableWrappedCallbackRef)
 }

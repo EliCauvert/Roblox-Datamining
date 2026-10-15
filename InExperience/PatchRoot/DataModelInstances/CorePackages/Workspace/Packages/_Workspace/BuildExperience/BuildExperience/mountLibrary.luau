@@ -36,6 +36,7 @@ local localizationProvider = localizationModule.LocalizationProvider
 local localization = robloxAppLocalesModule.Localization
 local libraryTypesModule = require(buildExperience.Components.Library.LibraryTypes)
 local _ = require(buildExperience.Chat.chatTypes)
+local fFlagBuildExperienceLibrary = require(parent.SharedFlags).FFlagBuildExperienceLibrary
 local var1 = nil
 local var2 = nil
 
@@ -62,188 +63,217 @@ local function focusModel(p1, p2)
 	p2.requestFocus(boundingBox.Position, boundingBox_1.Magnitude / 2, p1)
 end
 
-local _ = function(p1)
+local function requestWorldFocus(p1, p2)
+	local var3 = nil
+	local var4 = nil
+	
+	for i, v in p1 do
+		local boundingBox, boundingBox_1 = v:GetBoundingBox()
+		
+		if boundingBox_1 ~= Vector3.new(0, 0, 0) then
+			for i_3 = -1, 1, 2 do
+				for i_2 = -1, 1, 2 do
+					for i_1 = -1, 1, 2 do
+						local var5 = boundingBox:PointToWorldSpace(boundingBox_1 * Vector3.new(i_3, i_2, i_1) / 2)
+						var3 = if var3 == nil then var5 else var3:Min(var5)
+						var4 = if var4 == nil then var5 else var4:Max(var5)
+					end
+				end
+			end
+		end
+	end
+	if var3 ~= nil and var4 ~= nil then
+		p2.requestFocus((var3 + var4) / 2, (var4 - var3).Magnitude / 2)
+	end
+end
+
+local _ = function(p3)
 	local ok, status = pcall(function()
-		-- upvalues: p1 (ref)
-		return p1:GetService("Workspace")
+		-- upvalues: p3 (ref)
+		return p3:GetService("Workspace")
 	end)
 	
 	return if ok and typeof(status) == "Instance" and status:IsA("Workspace") then status else nil
 end
 
-local function ConnectedLibrary(p1)
-	-- upvalues: getLibraryStoreModule (ref), reactModule (ref), useLibraryStringsModule (ref), signalsReactModule (ref), useLibraryWorldCutoutViewModelModule (ref), sendBuildExperienceEventModule (ref), roactNavigationModule (ref), signalsModule (ref), getPlayButtonStoreModule (ref), var1 (write), runService (ref), libraryTypesModule (ref), focusModel (ref), createViewerWorldPickerModule (ref), httpService (ref), leaveExperienceModule (ref), default (ref), getAndroidBackSignalModule (ref), bindLibraryBackInputModule (ref), libraryNavigatorModule (ref), focusNavigationUtilsModule (ref), libraryExperienceViewModule (ref), libraryLeavingOverlayModule (ref), foundationModule (ref)
-	local var3 = getLibraryStoreModule()
-	local var4 = reactModule.useRef(os.clock())
-	local var5 = reactModule.useRef(false)
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+local function ConnectedLibrary(p3)
+	-- upvalues: getLibraryStoreModule (ref), reactModule (ref), useLibraryStringsModule (ref), signalsReactModule (ref), useLibraryWorldCutoutViewModelModule (ref), sendBuildExperienceEventModule (ref), roactNavigationModule (ref), signalsModule (ref), getPlayButtonStoreModule (ref), fFlagBuildExperienceLibrary (ref), requestWorldFocus (ref), var1 (write), runService (ref), libraryTypesModule (ref), focusModel (ref), createViewerWorldPickerModule (ref), httpService (ref), leaveExperienceModule (ref), default (ref), getAndroidBackSignalModule (ref), bindLibraryBackInputModule (ref), libraryNavigatorModule (ref), focusNavigationUtilsModule (ref), libraryExperienceViewModule (ref), libraryLeavingOverlayModule (ref), foundationModule (ref)
+	local var6 = getLibraryStoreModule()
+	local var7 = reactModule.useRef(os.clock())
+	local var8 = reactModule.useRef(false)
+	local var9 = reactModule.useCallback(function()
+		-- upvalues: p3 (ref)
 		return {
-			universeId = p1.dataModel.GameId,
-			placeId = p1.dataModel.PlaceId
+			universeId = p3.dataModel.GameId,
+			placeId = p3.dataModel.PlaceId
 		}
-	end, { p1.dataModel })
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useRef(nil)
-	local var9 = useLibraryStringsModule()
-	local var10 = var3.useIsOpen()
-	local var11 = signalsReactModule.useSignalState(var3.getChatComposerState)
-	local var12 = if var11 ~= nil then nil else var11.onAddResource
-	local var13 = if var11 ~= nil then nil else var11.onRemoveResourceByPath
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: var12 (ref), var13 (ref), var7 (ref), var8 (ref), var3 (ref)
-		return if var12 == nil or var13 == nil then {
-			onAddResource = function(p2)
-				-- upvalues: var3 (copy)
-				var3.requestAddToChat(p2)
+	end, { p3.dataModel })
+	local var10 = reactModule.useRef(nil)
+	local var11 = reactModule.useRef(nil)
+	local var12 = useLibraryStringsModule()
+	local var13 = var6.useIsOpen()
+	local var14 = signalsReactModule.useSignalState(var6.getChatComposerState)
+	local var15 = if var14 ~= nil then nil else var14.onAddResource
+	local var16 = if var14 ~= nil then nil else var14.onRemoveResourceByPath
+	local var17 = reactModule.useMemo(function()
+		-- upvalues: var15 (ref), var16 (ref), var10 (ref), var11 (ref), var6 (ref)
+		return if var15 == nil or var16 == nil then {
+			onAddResource = function(p4)
+				-- upvalues: var6 (copy)
+				var6.requestAddToChat(p4)
 				
 				return true
 			end,
-			onRemoveResource = var3.requestRemoveFromChat
+			onRemoveResource = var6.requestRemoveFromChat
 		} else {
-			onAddResource = function(p2)
-				-- upvalues: var7 (copy), var8 (copy), var13 (copy), var12 (copy)
-				local current = var7.current
+			onAddResource = function(p4)
+				-- upvalues: var10 (copy), var11 (copy), var16 (copy), var15 (copy)
+				local current = var10.current
 				
-				if current ~= nil and current ~= p2.path then
-					var7.current = nil
-					var8.current = nil
-					var13(current)
+				if current ~= nil and current ~= p4.path then
+					var10.current = nil
+					var11.current = nil
+					var16(current)
 				end
-				return var12(p2)
+				return var15(p4)
 			end,
-			onRemoveResource = function(p2)
-				-- upvalues: var13 (copy)
-				var13(p2.path)
+			onRemoveResource = function(p4)
+				-- upvalues: var16 (copy)
+				var16(p4.path)
 			end
 		}
-	end, { var12 or false, var13 or false, var3 })
-	local var15, var16 = reactModule.useState({ routeName = "Browser" })
-	local var17 = if var15.routeName == "Detail" then var15.params.itemId else nil
-	local var18 = if var17 ~= nil then "Model" else var15.params.itemKind
-	local var19 = if var15.routeName == "Category" or var15.routeName == "Search" and var15.params.itemKind ~= nil then var15.params else nil
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
-		local dataModel = p1.dataModel
+	end, { var15 or false, var16 or false, var6 })
+	local var18, var19 = reactModule.useState({ routeName = "Browser" })
+	local var20 = if var18.routeName == "Detail" then var18.params.itemId else nil
+	local var21 = if var20 ~= nil then "Model" else var18.params.itemKind
+	local var22 = if var18.routeName == "Category" or var18.routeName == "Search" and var18.params.itemKind ~= nil then var18.params else nil
+	local var23 = reactModule.useMemo(function()
+		-- upvalues: p3 (ref)
+		local dataModel = p3.dataModel
 		local ok, status = pcall(function()
 			-- upvalues: dataModel (ref)
 			return dataModel:GetService("Workspace")
 		end)
 		
 		return if ok and typeof(status) == "Instance" and status:IsA("Workspace") then status else nil
-	end, { p1.dataModel })
-	local var21 = signalsReactModule.useSignalState(p1.library.getItems)
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var20 (ref), p1 (ref), var21 (ref)
-		if var20 == nil then
-			return false
-		end
-		local playersService = p1.dataModel:GetService("Players")
+	end, { p3.dataModel })
+	local var24 = signalsReactModule.useSignalState(p3.library.getItems)
+	local var25 = reactModule.useMemo(function()
+		-- upvalues: var23 (ref), p3 (ref), var24 (ref)
+		local t = {}
 		
-		for i, v in var21 do
-			if v.model ~= nil and v.model:IsDescendantOf(var20) and playersService:GetPlayerFromCharacter(v.model) == nil then
-				return true
+		if var23 == nil then
+			return t
+		end
+		local playersService = p3.dataModel:GetService("Players")
+		
+		for i, v in var24 do
+			local model = v.model
+			
+			if model ~= nil and model:IsDescendantOf(var23) and playersService:GetPlayerFromCharacter(model) == nil then
+				table.insert(t, model)
 			end
 		end
-		return false
-	end, { var20, var21, p1.dataModel })
-	local var23 = useLibraryWorldCutoutViewModelModule({
-		isAvailable = var22,
-		isHome = var15.routeName == "Browser",
-		isOpen = var10,
-		onViewportRectChanged = var3.setWorldViewportRect
+		return t
+	end, { var23, var24, p3.dataModel })
+	local var26 = #var25 > 0
+	local var27 = useLibraryWorldCutoutViewModelModule({
+		isAvailable = var26,
+		isHome = var18.routeName == "Browser",
+		isOpen = var13,
+		onViewportRectChanged = var6.setWorldViewportRect
 	})
 	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), p1 (ref), sendBuildExperienceEventModule (copy), var6 (ref), var10 (ref), var15 (ref), var18 (ref), var19 (ref)
-		local var24 = if var17 ~= nil then nil else p1.library.getItem(false, var17)
-		sendBuildExperienceEventModule("LIBRARY_IMPRESSION", var6(), {
+		-- upvalues: var20 (ref), p3 (ref), sendBuildExperienceEventModule (copy), var9 (ref), var13 (ref), var18 (ref), var21 (ref), var22 (ref)
+		local var28 = if var20 ~= nil then nil else p3.library.getItem(false, var20)
+		sendBuildExperienceEventModule("LIBRARY_IMPRESSION", var9(), {
 			phase = "viewed",
-			surface = if var10 then var15.routeName else "World",
-			kind = if var17 ~= nil then if var19 ~= nil then "All" else var19.itemKind else var18,
-			scope = if var19 == nil or var19.folderId == nil then "Root" else "Folder",
-			hasDescription = if var24 ~= nil then nil else tostring(var24.description ~= nil),
-			location = if var24 ~= nil then nil else var24.rootName
+			surface = if var13 then var18.routeName else "World",
+			kind = if var20 ~= nil then if var22 ~= nil then "All" else var22.itemKind else var21,
+			scope = if var22 == nil or var22.folderId == nil then "Root" else "Folder",
+			hasDescription = if var28 ~= nil then nil else tostring(var28.description ~= nil),
+			location = if var28 ~= nil then nil else var28.rootName
 		})
 	end, {
-		p1.library, var6, var10, var15.routeName, var17 or false, var18,
-		if var19 ~= nil then false else var19.folderId or var19.itemKind
+		p3.library, var9, var13, var18.routeName, var20 or false, var21,
+		if var22 ~= nil then false else var22.folderId or var22.itemKind
 	})
-	local var24 = reactModule.useRef(nil)
-	local var25 = reactModule.useCallback(function(p2)
-		-- upvalues: var24 (ref)
-		var24.current = p2
+	local var28 = reactModule.useRef(nil)
+	local var29 = reactModule.useCallback(function(p4)
+		-- upvalues: var28 (ref)
+		var28.current = p4
 		
 		return function()
-			-- upvalues: var24 (copy)
-			var24.current = nil
+			-- upvalues: var28 (copy)
+			var28.current = nil
 		end
 	end, {})
-	local var26 = reactModule.useCallback(function(_, p2)
-		-- upvalues: var16 (ref)
-		var16(p2.routes[p2.index])
+	local var30 = reactModule.useCallback(function(_, p4)
+		-- upvalues: var19 (ref)
+		var19(p4.routes[p4.index])
 	end, {})
-	local var27, var28 = reactModule.useState("")
-	local var29 = reactModule.useRef(nil)
-	local var30 = reactModule.useCallback(function(p2)
-		-- upvalues: var28 (ref), var24 (ref), var15 (ref), roactNavigationModule (copy), var19 (ref), var29 (ref), sendBuildExperienceEventModule (copy), var6 (ref)
-		var28(p2)
-		local current = var24.current
+	local var31, var32 = reactModule.useState("")
+	local var33 = reactModule.useRef(nil)
+	local var34 = reactModule.useCallback(function(p4)
+		-- upvalues: var32 (ref), var28 (ref), var18 (ref), roactNavigationModule (copy), var22 (ref), var33 (ref), sendBuildExperienceEventModule (copy), var9 (ref)
+		var32(p4)
+		local current = var28.current
 		
 		if current ~= nil then
 			local reducedMotion = UserSettings():GetService("UserGameSettings").ReducedMotion
 			
-			if p2 ~= "" and var15.routeName ~= "Search" then
+			if p4 ~= "" and var18.routeName ~= "Search" then
 				current(roactNavigationModule.Actions.navigate({
 					routeName = "Search",
 					key = "LibrarySearch",
-					params = var19 or {},
+					params = var22 or {},
 					immediate = reducedMotion
 				}))
-			elseif p2 == "" and var15.routeName == "Search" then
+			elseif p4 == "" and var18.routeName == "Search" then
 				current(roactNavigationModule.StackActions.pop({ immediate = reducedMotion }))
 			end
 		end
-		if var29.current ~= nil then
-			task.cancel(var29.current)
+		if var33.current ~= nil then
+			task.cancel(var33.current)
 		end
-		var29.current = task.delay(0.3, function()
-			-- upvalues: var29 (copy), sendBuildExperienceEventModule (copy), var6 (copy), var19 (copy), p2 (ref)
-			var29.current = nil
-			sendBuildExperienceEventModule("LIBRARY_SEARCH", var6(), {
-				surface = if var19 ~= nil then "Browser" else "Category",
-				kind = if var19 ~= nil then "All" else var19.itemKind,
-				scope = if var19 == nil or var19.folderId == nil then "Root" else "Folder",
-				hasQuery = tostring(p2 ~= "")
+		var33.current = task.delay(0.3, function()
+			-- upvalues: var33 (copy), sendBuildExperienceEventModule (copy), var9 (copy), var22 (copy), p4 (ref)
+			var33.current = nil
+			sendBuildExperienceEventModule("LIBRARY_SEARCH", var9(), {
+				surface = if var22 ~= nil then "Browser" else "Category",
+				kind = if var22 ~= nil then "All" else var22.itemKind,
+				scope = if var22 == nil or var22.folderId == nil then "Root" else "Folder",
+				hasQuery = tostring(p4 ~= "")
 			})
 		end)
-	end, { var6, var15, var19 or false })
+	end, { var9, var18, var22 or false })
 	local useEffect = reactModule.useEffect
 	
-	local var31 = function()
-		-- upvalues: var29 (ref)
+	local var35 = function()
+		-- upvalues: var33 (ref)
 		return function()
-			-- upvalues: var29 (copy)
-			if var29.current ~= nil then
-				task.cancel(var29.current)
-				var29.current = nil
+			-- upvalues: var33 (copy)
+			if var33.current ~= nil then
+				task.cancel(var33.current)
+				var33.current = nil
 			end
 		end
 	end
 	
 	local t = {}
-	local var32 = var17 or false
-	local var33 = if var19 ~= nil then false else var19.itemKind
-	local var34 = var19 == nil and ((if var19 == nil then var19.folderId else nil) or false)
+	local var36 = var20 or false
+	local var37 = if var22 ~= nil then false else var22.itemKind
+	local var38 = var22 == nil and ((if var22 == nil then var22.folderId else nil) or false)
 	-- Unknown statement at pc 0: <SetList>
-	useEffect(var31, t)
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: var30 (ref)
-		var30("")
-	end, { var30 })
-	local library = p1.library
-	local var36, var37 = reactModule.useState(false)
-	local var38 = reactModule.useCallback(function()
-		-- upvalues: library (ref), sendBuildExperienceEventModule (copy), var6 (ref), var5 (ref)
+	useEffect(var35, t)
+	local var39 = reactModule.useCallback(function()
+		-- upvalues: var34 (ref)
+		var34("")
+	end, { var34 })
+	local library = p3.library
+	local var40, var41 = reactModule.useState(false)
+	local var42 = reactModule.useCallback(function()
+		-- upvalues: library (ref), sendBuildExperienceEventModule (copy), var9 (ref), var8 (ref)
 		local ok, status = pcall(function()
 			-- upvalues: library (copy)
 			library.refresh()
@@ -252,35 +282,35 @@ local function ConnectedLibrary(p1)
 		end)
 		
 		if not ok then
-			sendBuildExperienceEventModule("LIBRARY_FETCH_FAILED", var6(), {
+			sendBuildExperienceEventModule("LIBRARY_FETCH_FAILED", var9(), {
 				surface = "Library",
 				reason = "refresh_failed",
-				phase = if var5.current then "refresh" else "initial"
+				phase = if var8.current then "refresh" else "initial"
 			})
 			error(status, 0)
 		end
-	end, { library, var6 })
+	end, { library, var9 })
 	reactModule.useEffect(function()
-		-- upvalues: sendBuildExperienceEventModule (copy), var6 (ref), p1 (ref), var38 (ref), var37 (ref), var5 (ref), library (ref), var4 (ref)
-		sendBuildExperienceEventModule("LIBRARY_IMPRESSION", var6(), { phase = "opened", surface = "Library" })
-		local dataModel = p1.dataModel
+		-- upvalues: sendBuildExperienceEventModule (copy), var9 (ref), p3 (ref), var42 (ref), var41 (ref), var8 (ref), library (ref), var7 (ref)
+		sendBuildExperienceEventModule("LIBRARY_IMPRESSION", var9(), { phase = "opened", surface = "Library" })
+		local dataModel = p3.dataModel
 		
 		local function ready()
-			-- upvalues: var38 (copy), var37 (copy), var5 (copy), library (copy), sendBuildExperienceEventModule (copy), var6 (copy), var4 (copy)
-			var38()
-			var37(true)
+			-- upvalues: var42 (copy), var41 (copy), var8 (copy), library (copy), sendBuildExperienceEventModule (copy), var9 (copy), var7 (copy)
+			var42()
+			var41(true)
 			
-			if not var5.current then
-				var5.current = true
+			if not var8.current then
+				var8.current = true
 				local t = { Model = 0, Image = 0, Sound = 0, Folder = 0 }
 				
 				for i, v in library.getItems(false) do
 					t[if v.className == "Folder" then "Folder" else v.kind] += 1
 				end
-				sendBuildExperienceEventModule("LIBRARY_IMPRESSION", var6(), {
+				sendBuildExperienceEventModule("LIBRARY_IMPRESSION", var9(), {
 					phase = "ready",
 					surface = "Library",
-					durationMs = tostring(math.round((os.clock() - var4.current) * 1000)),
+					durationMs = tostring(math.round((os.clock() - var7.current) * 1000)),
 					modelCount = tostring(t.Model),
 					imageCount = tostring(t.Image),
 					soundCount = tostring(t.Sound),
@@ -300,165 +330,188 @@ local function ConnectedLibrary(p1)
 			loadedConnection:Disconnect()
 			persistentLoadedConnection:Disconnect()
 		end
-	end, { library, p1.dataModel, var38, var6 })
-	local var39 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var17 (ref), library (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: var17 (copy), library (copy)
-			return if var17 == nil then nil else library.getItem(p2, var17)
+	end, { library, p3.dataModel, var42, var9 })
+	local var43 = signalsReactModule.useSignalState(reactModule.useMemo(function()
+		-- upvalues: signalsModule (copy), var20 (ref), library (ref)
+		return signalsModule.createComputed(function(p4)
+			-- upvalues: var20 (copy), library (copy)
+			return if var20 == nil then nil else library.getItem(p4, var20)
 		end)
-	end, { library, var17 or false }))
-	local var40 = reactModule.useCallback(function()
-		-- upvalues: var24 (ref), var15 (ref), var28 (ref), var38 (ref), var3 (ref), getPlayButtonStoreModule (copy), roactNavigationModule (copy)
-		local current = var24.current
+	end, { library, var20 or false }))
+	local var44 = reactModule.useCallback(function()
+		-- upvalues: var28 (ref), var18 (ref), var32 (ref), var42 (ref), var6 (ref), getPlayButtonStoreModule (copy), roactNavigationModule (copy)
+		local current = var28.current
 		
-		if var15.routeName == "Browser" or current == nil then
-			var3.setIsOpen(false)
+		if var18.routeName == "Browser" or current == nil then
+			var6.setIsOpen(false)
 			
 			return
-		elseif var15.routeName == "Search" then
-			var28("")
+		elseif var18.routeName == "Search" then
+			var32("")
 		else
-			var38()
+			var42()
 		end
-		var3.setIsOpen(true)
+		var6.setIsOpen(true)
 		getPlayButtonStoreModule().setIsActive(false)
 		current(roactNavigationModule.StackActions.pop({
-			immediate = var15.routeName == "Search" and UserSettings():GetService("UserGameSettings").ReducedMotion
+			immediate = var18.routeName == "Search" and UserSettings():GetService("UserGameSettings").ReducedMotion
 		}))
-	end, { var15.routeName, var3, var38 })
-	local var41 = reactModule.useCallback(function(p2, p3, p4, p5)
-		-- upvalues: var38 (ref), var28 (ref), var24 (ref), sendBuildExperienceEventModule (copy), var6 (ref), var15 (ref), roactNavigationModule (copy)
-		var38()
+	end, { var18.routeName, var6, var42 })
+	local var45 = reactModule.useCallback(function(p4, p5, p6, p7)
+		-- upvalues: var42 (ref), var32 (ref), var28 (ref), sendBuildExperienceEventModule (copy), var9 (ref), var18 (ref), roactNavigationModule (copy)
+		var42()
 		
-		if p5 ~= nil then
-			var28("")
+		if p7 ~= nil then
+			var32("")
 		end
-		local current = var24.current
+		local current = var28.current
 		
 		if current ~= nil then
-			sendBuildExperienceEventModule("LIBRARY_CATEGORY_CLICK", var6(), {
-				action = if p5 ~= nil then "category" else "folder",
-				kind = p2,
-				surface = var15.routeName
+			sendBuildExperienceEventModule("LIBRARY_CATEGORY_CLICK", var9(), {
+				action = if p7 ~= nil then "category" else "folder",
+				kind = p4,
+				surface = var18.routeName
 			})
 			current(roactNavigationModule.Actions.navigate({
 				routeName = "Category",
-				key = if p5 ~= nil then "LibraryCategory" else `LibraryFolder:{p5}`,
+				key = if p7 ~= nil then "LibraryCategory" else `LibraryFolder:{p7}`,
 				params = {
-					itemKind = p2,
-					categoryKey = p3,
-					title = p4,
-					folderId = p5
+					itemKind = p4,
+					categoryKey = p5,
+					title = p6,
+					folderId = p7
 				}
 			}))
 		end
-	end, { var38, var6, var15.routeName })
-	local var42 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var24 (ref), library (ref), sendBuildExperienceEventModule (copy), var6 (ref), var3 (ref), var15 (ref), roactNavigationModule (copy)
-		local current = var24.current
+	end, { var42, var9, var18.routeName })
+	local var46 = reactModule.useCallback(function(p4, p5)
+		-- upvalues: var28 (ref), library (ref), sendBuildExperienceEventModule (copy), var9 (ref), var6 (ref), var18 (ref), roactNavigationModule (copy)
+		local current = var28.current
 		
 		if current ~= nil then
-			local item = library.getItem(false, p2)
-			sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var6(), {
+			local item = library.getItem(false, p4)
+			sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var9(), {
 				action = "detail",
-				kind = p3,
-				surface = if var3.getIsOpen(false) then var15.routeName else "World",
+				kind = p5,
+				surface = if var6.getIsOpen(false) then var18.routeName else "World",
 				location = if item ~= nil then nil else item.rootName
 			})
 			current(roactNavigationModule.Actions.navigate({
 				routeName = "Detail",
 				key = "LibraryDetail",
-				params = { itemId = p2, itemKind = p3 }
+				params = { itemId = p4, itemKind = p5 }
 			}))
 		end
-	end, { var6, var15.routeName, var3, library })
-	local var43 = reactModule.useRef(false)
-	local var44 = reactModule.useRef(nil)
+	end, { var9, var18.routeName, var6, library })
+	local var47 = reactModule.useRef(false)
+	local var48 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var43 (ref), var20 (ref), var10 (ref), var23 (ref), var36 (ref), var21 (ref), var44 (ref), var3 (ref)
-		if var43.current or var20 == nil then return end
-		if not var10 or var23.phase ~= "Home" then
-			var43.current = true
+		-- upvalues: var47 (ref), var23 (ref), var13 (ref), var27 (ref), var40 (ref), fFlagBuildExperienceLibrary (copy), var26 (ref), requestWorldFocus (copy), var25 (ref), var6 (ref), var24 (ref), var48 (ref)
+		if var47.current or var23 == nil then return end
+		if not var13 or var27.phase ~= "Home" then
+			var47.current = true
 			
 			return
-		elseif not var36 or not var23.isMeasured then return end
-		for i, v in var21 do
-			local model = v.model
-			
-			if v.folderId == nil and v.className ~= "Folder" and (model ~= nil and model:IsDescendantOf(var20)) then
-				var43.current = true
-				var44.current = model
-				local var45 = var3
-				local boundingBox, boundingBox_1 = model:GetBoundingBox()
-				var45.requestFocus(boundingBox.Position, boundingBox_1.Magnitude / 2, model)
+		elseif not var40 or not var27.isMeasured then return end
+		if fFlagBuildExperienceLibrary then
+			if var26 then
+				var47.current = true
+				requestWorldFocus(var25, var6)
+			end
+			return
+		else
+			for i, v in var24 do
+				local model = v.model
 				
-				return
+				if v.folderId == nil and v.className ~= "Folder" and (model ~= nil and model:IsDescendantOf(var23)) then
+					var47.current = true
+					var48.current = model
+					local var49 = var6
+					local boundingBox, boundingBox_1 = model:GetBoundingBox()
+					var49.requestFocus(boundingBox.Position, boundingBox_1.Magnitude / 2, model)
+					
+					return
+				end
 			end
 		end
 	end, {
-		var21, var36, var10, var23.phase, var23.isMeasured, var20, var3
+		var24, var40, var13, var27.phase, var27.isMeasured, var23, var6, var26, var25
 	})
-	local var46 = var10 and var15.routeName == "Browser"
-	local var47 = reactModule.useRef(var46)
+	local var50 = var13 and var18.routeName == "Browser"
+	local var51 = reactModule.useRef(var50)
 	reactModule.useEffect(function()
-		-- upvalues: var44 (ref), var3 (ref), var46 (ref), var47 (ref), var20 (ref)
-		local current = var44.current
-		local focusRequest = var3.getFocusRequest(false)
-		
-		if var46 and not var47.current and (current ~= nil and var20 ~= nil) and (current:IsDescendantOf(var20) and (focusRequest == nil or focusRequest.model ~= current)) then
-			local var48 = var3
-			local boundingBox, boundingBox_1 = current:GetBoundingBox()
-			var48.requestFocus(boundingBox.Position, boundingBox_1.Magnitude / 2, current)
+		-- upvalues: fFlagBuildExperienceLibrary (copy), var50 (ref), var51 (ref), var47 (ref), var26 (ref), requestWorldFocus (copy), var25 (ref), var6 (ref), var48 (ref), var23 (ref)
+		if fFlagBuildExperienceLibrary then
+			if var50 and not var51.current and (var47.current and var26) then
+				requestWorldFocus(var25, var6)
+			end
+			var51.current = var50
+			
+			return
+		else
+			local current = var48.current
+			local focusRequest = var6.getFocusRequest(false)
+			
+			if var50 and not var51.current and (current ~= nil and var23 ~= nil) and (current:IsDescendantOf(var23) and (focusRequest == nil or focusRequest.model ~= current)) then
+				local var52 = var6
+				local boundingBox, boundingBox_1 = current:GetBoundingBox()
+				var52.requestFocus(boundingBox.Position, boundingBox_1.Magnitude / 2, current)
+			end
+			var51.current = var50
 		end
-		var47.current = var46
-	end, { var46, var20, var3 })
+	end, {
+		var50,
+		var23,
+		var6,
+		var26,
+		var25
+	})
 	local browser = reactModule.useRef("Browser")
-	browser.current = if var10 then var15.routeName else "World"
-	local var48 = reactModule.useRef(false)
-	local var49 = reactModule.useCallback(function(p2)
-		-- upvalues: var48 (ref), sendBuildExperienceEventModule (copy), var6 (ref), browser (ref)
-		if var48.current then
+	browser.current = if var13 then var18.routeName else "World"
+	local var52 = reactModule.useRef(false)
+	local var53 = reactModule.useCallback(function(p4)
+		-- upvalues: var52 (ref), sendBuildExperienceEventModule (copy), var9 (ref), browser (ref)
+		if var52.current then
 			return
 		end
-		var48.current = true
-		sendBuildExperienceEventModule("LIBRARY_IMPRESSION", var6(), {
+		var52.current = true
+		sendBuildExperienceEventModule("LIBRARY_IMPRESSION", var9(), {
 			phase = "closed",
-			reason = p2,
+			reason = p4,
 			surface = browser.current
 		})
-	end, { var6 })
-	local var50 = reactModule.useRef(var49)
-	var50.current = var49
+	end, { var9 })
+	local var54 = reactModule.useRef(var53)
+	var54.current = var53
 	reactModule.useEffect(function()
-		-- upvalues: var50 (ref)
+		-- upvalues: var54 (ref)
 		return function()
-			-- upvalues: var50 (copy)
-			var50.current("other")
+			-- upvalues: var54 (copy)
+			var54.current("other")
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (copy)
+		-- upvalues: p3 (ref), var1 (copy)
 		game:GetService("ReplicatedFirst"):RemoveDefaultLoadingScreen()
 		
 		return function()
-			-- upvalues: p1 (copy), var1 (copy)
-			p1.onUnmount()
+			-- upvalues: p3 (copy), var1 (copy)
+			p3.onUnmount()
 			
 			if var1 ~= nil then
 				var1:Destroy()
 				var1 = nil
 			end
 		end
-	end, { p1.onUnmount })
-	local var51, var52 = reactModule.useState(false)
-	local var53 = reactModule.useRef(false)
-	local var54, var55 = reactModule.useState(false)
+	end, { p3.onUnmount })
+	local var55, var56 = reactModule.useState(false)
+	local var57 = reactModule.useRef(false)
+	local var58, var59 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: runService (copy), var55 (ref)
+		-- upvalues: runService (copy), var59 (ref)
 		local renderSteppedConnection = runService.RenderStepped:Once(function()
-			-- upvalues: var55 (copy)
-			var55(true)
+			-- upvalues: var59 (copy)
+			var59(true)
 		end)
 		
 		return function()
@@ -467,116 +520,116 @@ local function ConnectedLibrary(p1)
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var46 (ref), var1 (copy)
-		if var46 and var1 ~= nil then
+		-- upvalues: var50 (ref), var1 (copy)
+		if var50 and var1 ~= nil then
 			var1:Destroy()
 			var1 = nil
 		end
-	end, { var46 })
-	local var56 = reactModule.useRef(0)
+	end, { var50 })
+	local var60 = reactModule.useRef(0)
 	reactModule.useEffect(function()
-		-- upvalues: var39 (ref), var56 (ref), var3 (ref), var7 (ref), var8 (ref), var14 (ref), libraryTypesModule (copy), var1 (copy), var38 (ref)
-		if var39 == nil or var39.model == nil then
+		-- upvalues: var43 (ref), var60 (ref), var6 (ref), var10 (ref), var11 (ref), var17 (ref), libraryTypesModule (copy), var1 (copy), var42 (ref)
+		if var43 == nil or var43.model == nil then
 			return
 		end
-		local var57 = true
-		local destroyingConnection = var39.model.Destroying:Connect(function()
-			-- upvalues: var56 (copy), var3 (copy), var7 (copy), var8 (copy), var14 (copy), libraryTypesModule (copy), var39 (copy), var1 (copy), var57 (write), var38 (copy)
-			var56.current += 1
-			var3.clearFocus()
-			var7.current = nil
-			var8.current = nil
-			var14.onRemoveResource(libraryTypesModule.toChatResource(var39))
+		local var61 = true
+		local destroyingConnection = var43.model.Destroying:Connect(function()
+			-- upvalues: var60 (copy), var6 (copy), var10 (copy), var11 (copy), var17 (copy), libraryTypesModule (copy), var43 (copy), var1 (copy), var61 (write), var42 (copy)
+			var60.current += 1
+			var6.clearFocus()
+			var10.current = nil
+			var11.current = nil
+			var17.onRemoveResource(libraryTypesModule.toChatResource(var43))
 			
 			if var1 ~= nil then
 				var1:Destroy()
 				var1 = nil
 			end
 			task.defer(function()
-				-- upvalues: var57 (copy), var38 (copy)
-				if var57 then
-					var38()
+				-- upvalues: var61 (copy), var42 (copy)
+				if var61 then
+					var42()
 				end
 			end)
 		end)
 		
 		return function()
-			-- upvalues: var57 (write), destroyingConnection (ref)
-			var57 = false
+			-- upvalues: var61 (write), destroyingConnection (ref)
+			var61 = false
 			destroyingConnection:Disconnect()
 		end
-	end, { var39 or false, var3, var14, var38 })
-	local var57 = signalsReactModule.useSignalState(getPlayButtonStoreModule().getIsActive)
-	local var58 = var11 ~= nil and var11.isAssistantResponding == true
-	local var59 = reactModule.useRef(false)
-	local var60 = reactModule.useRef(nil)
-	local var61 = signalsReactModule.useSignalState(var3.getPromptFailure)
-	local var62 = reactModule.useRef(if var61 ~= nil then 0 else var61.token)
+	end, { var43 or false, var6, var17, var42 })
+	local var61 = signalsReactModule.useSignalState(getPlayButtonStoreModule().getIsActive)
+	local var62 = var14 ~= nil and var14.isAssistantResponding == true
+	local var63 = reactModule.useRef(false)
+	local var64 = reactModule.useRef(nil)
+	local var65 = signalsReactModule.useSignalState(var6.getPromptFailure)
+	local var66 = reactModule.useRef(if var65 ~= nil then 0 else var65.token)
 	reactModule.useEffect(function()
-		-- upvalues: var61 (ref), var62 (ref), var60 (ref), sendBuildExperienceEventModule (copy), var6 (ref)
-		if var61 == nil or var61.token <= var62.current then return end
-		var62.current = var61.token
-		local current = var60.current
+		-- upvalues: var65 (ref), var66 (ref), var64 (ref), sendBuildExperienceEventModule (copy), var9 (ref)
+		if var65 == nil or var65.token <= var66.current then return end
+		var66.current = var65.token
+		local current = var64.current
 		
 		if current == nil then return end
-		var60.current = nil
+		var64.current = nil
 		local cloned = table.clone(current)
 		cloned.phase = "failed"
 		
-		if var61.errorCode ~= nil then
-			cloned.errorCode = tostring(var61.errorCode)
+		if var65.errorCode ~= nil then
+			cloned.errorCode = tostring(var65.errorCode)
 		end
-		sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var6(), cloned)
-	end, { var61, var6 })
+		sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var9(), cloned)
+	end, { var65, var9 })
 	reactModule.useEffect(function()
-		-- upvalues: var59 (ref), var58 (ref), var60 (ref), var36 (ref), var10 (ref), var38 (ref)
-		if var59.current and not var58 then
-			var60.current = nil
+		-- upvalues: var63 (ref), var62 (ref), var64 (ref), var40 (ref), var13 (ref), var42 (ref)
+		if var63.current and not var62 then
+			var64.current = nil
 		end
-		if var59.current and not var58 and (var36 and var10) then
-			var38()
+		if var63.current and not var62 and (var40 and var13) then
+			var42()
 		end
-		var59.current = var58
-	end, { var58, var36, var10, var38 })
-	local var63 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: focusModel (copy), var3 (ref), var56 (ref), libraryTypesModule (copy), var7 (ref), var8 (ref), getPlayButtonStoreModule (copy)
-		if p2.model ~= nil and not p2.model:IsDescendantOf(workspace) then return end
-		if p2.model ~= nil then
-			focusModel(p2.model, var3)
+		var63.current = var62
+	end, { var62, var40, var13, var42 })
+	local var67 = reactModule.useCallback(function(p4, p5)
+		-- upvalues: focusModel (copy), var6 (ref), var60 (ref), libraryTypesModule (copy), var10 (ref), var11 (ref), getPlayButtonStoreModule (copy)
+		if p4.model ~= nil and not p4.model:IsDescendantOf(workspace) then return end
+		if p4.model ~= nil then
+			focusModel(p4.model, var6)
 		end
-		var3.setIsOpen(false)
-		var56.current += 1
-		local current = var56.current
+		var6.setIsOpen(false)
+		var60.current += 1
+		local current = var60.current
 		task.defer(function()
-			-- upvalues: var56 (copy), current (ref), var3 (copy), libraryTypesModule (copy), p2 (ref), var7 (copy), p3 (ref), var8 (copy), getPlayButtonStoreModule (copy)
-			if var56.current == current and not var3.getIsOpen(false) then
-				local var64 = libraryTypesModule.toChatResource(p2)
-				var3.requestAddToChat(var64, var7.current, p3)
-				var7.current = var64.path
-				var8.current = var64
+			-- upvalues: var60 (copy), current (ref), var6 (copy), libraryTypesModule (copy), p4 (ref), var10 (copy), p5 (ref), var11 (copy), getPlayButtonStoreModule (copy)
+			if var60.current == current and not var6.getIsOpen(false) then
+				local var68 = libraryTypesModule.toChatResource(p4)
+				var6.requestAddToChat(var68, var10.current, p5)
+				var10.current = var68.path
+				var11.current = var68
 				getPlayButtonStoreModule().setIsActive(true)
 				
 				return
 			end
 		end)
-	end, { var3 })
+	end, { var6 })
 	reactModule.useEffect(function()
-		-- upvalues: var56 (ref)
+		-- upvalues: var60 (ref)
 		return function()
-			-- upvalues: var56 (copy)
-			var56.current += 1
+			-- upvalues: var60 (copy)
+			var60.current += 1
 		end
 	end, {})
-	local var64 = signalsReactModule.useSignalState(var3.getChipEvent)
+	local var68 = signalsReactModule.useSignalState(var6.getChipEvent)
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var64 (ref), libraryTypesModule (copy), var7 (ref), var1 (copy), library (ref), focusModel (copy), var3 (ref)
-		local current = var8.current
+		-- upvalues: var11 (ref), var68 (ref), libraryTypesModule (copy), var10 (ref), var1 (copy), library (ref), focusModel (copy), var6 (ref)
+		local current = var11.current
 		
-		if var64 == nil or current == nil then return end
-		if not table.find(var64.uris, libraryTypesModule.toResourceUri(current.path)) then return end
-		if var64.kind == "Removed" then
-			var7.current = nil
-			var8.current = nil
+		if var68 == nil or current == nil then return end
+		if not table.find(var68.uris, libraryTypesModule.toResourceUri(current.path)) then return end
+		if var68.kind == "Removed" then
+			var10.current = nil
+			var11.current = nil
 			
 			if var1 == nil then
 				return
@@ -586,58 +639,58 @@ local function ConnectedLibrary(p1)
 				
 				return
 			end
-		elseif var64.kind == "Activated" then
+		elseif var68.kind == "Activated" then
 			for i, v in library.getItems(false) do
 				if v.path == current.path and v.model ~= nil and v.model:IsDescendantOf(workspace) then
-					focusModel(v.model, var3)
+					focusModel(v.model, var6)
 				end
 			end
 			return
 		else
-			var3.requestAddToChat(current, nil, false)
+			var6.requestAddToChat(current, nil, false)
 		end
-	end, { var64, var3, library.getItems })
+	end, { var68, var6, library.getItems })
 	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var36 (ref), var22 (ref), p1 (ref), createViewerWorldPickerModule (copy), var3 (ref), library (ref), var38 (ref), var42 (ref), var63 (ref), getPlayButtonStoreModule (copy), var8 (ref), var7 (ref), var14 (ref), var1 (copy)
-		if var10 or not var36 or not var22 then
+		-- upvalues: var13 (ref), var40 (ref), var26 (ref), p3 (ref), createViewerWorldPickerModule (copy), var6 (ref), library (ref), var42 (ref), var46 (ref), var67 (ref), getPlayButtonStoreModule (copy), var11 (ref), var10 (ref), var17 (ref), var1 (copy)
+		if var13 or not var40 or not var26 then
 			return nil
 		end
-		local workspaceService = p1.dataModel:GetService("Workspace")
+		local workspaceService = p3.dataModel:GetService("Workspace")
 		local currentCamera = workspaceService.CurrentCamera
 		
 		if currentCamera == nil then
 			return nil
 		end
-		local var65 = true
-		local var66 = createViewerWorldPickerModule({
+		local var69 = true
+		local var70 = createViewerWorldPickerModule({
 			camera = currentCamera,
-			userInputService = p1.dataModel:GetService("UserInputService"),
+			userInputService = p3.dataModel:GetService("UserInputService"),
 			world = workspaceService,
 			isBlocked = function()
-				-- upvalues: var65 (write), var3 (copy)
-				return not var65 or var3.getIsOpen(false)
+				-- upvalues: var69 (write), var6 (copy)
+				return not var69 or var6.getIsOpen(false)
 			end,
-			onPick = function(p2)
-				-- upvalues: library (copy), var38 (copy), var42 (copy), var63 (copy), getPlayButtonStoreModule (copy)
-				local var67 = library.resolveWorldItem(p2)
+			onPick = function(p4)
+				-- upvalues: library (copy), var42 (copy), var46 (copy), var67 (copy), getPlayButtonStoreModule (copy)
+				local var71 = library.resolveWorldItem(p4)
 				
-				if var67 == nil then
-					var38()
-					var67 = library.resolveWorldItem(p2)
+				if var71 == nil then
+					var42()
+					var71 = library.resolveWorldItem(p4)
 				end
-				if var67 ~= nil then
-					var42(var67.id, var67.kind)
-					var63(var67, not getPlayButtonStoreModule().getIsActive(false))
+				if var71 ~= nil then
+					var46(var71.id, var71.kind)
+					var67(var71, not getPlayButtonStoreModule().getIsActive(false))
 				end
 			end,
 			onMiss = function()
-				-- upvalues: var8 (copy), var7 (copy), var14 (copy), var1 (copy)
-				local current = var8.current
+				-- upvalues: var11 (copy), var10 (copy), var17 (copy), var1 (copy)
+				local current = var11.current
 				
 				if current == nil then return end
-				var7.current = nil
-				var8.current = nil
-				var14.onRemoveResource(current)
+				var10.current = nil
+				var11.current = nil
+				var17.onRemoveResource(current)
 				
 				if var1 ~= nil then
 					var1:Destroy()
@@ -647,90 +700,91 @@ local function ConnectedLibrary(p1)
 		})
 		
 		return function()
-			-- upvalues: var65 (write), var66 (ref)
-			var65 = false
-			var66()
+			-- upvalues: var69 (write), var70 (ref)
+			var69 = false
+			var70()
 		end
 	end, {
-		var10, var36, var22, var3, library, var38, var63, var42, var14, p1.dataModel
+		var13, var40, var26, var6, library, var42, var67, var46, var17, p3.dataModel
 	})
 	
-	local var65 = function()
-		-- upvalues: var36 (ref), var38 (ref), var3 (ref), sendBuildExperienceEventModule (copy), var6 (ref), var23 (ref), var18 (ref), var56 (ref), getPlayButtonStoreModule (copy)
-		if var36 then
-			var38()
+	local var69 = function()
+		-- upvalues: var40 (ref), var42 (ref), var6 (ref), sendBuildExperienceEventModule (copy), var9 (ref), var27 (ref), var21 (ref), var60 (ref), getPlayButtonStoreModule (copy)
+		if var40 then
+			var42()
 		end
-		if not var3.getIsOpen(false) then
-			sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var6(), if var23.exit() then {
+		if not var6.getIsOpen(false) then
+			sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var9(), if var27.exit() then {
 				action = "back",
 				kind = "All",
 				surface = "World",
 				source = "home_cutout"
-			} else { action = "object", surface = "World", kind = var18 })
+			} else { action = "object", surface = "World", kind = var21 })
 		end
-		var56.current += 1
+		var60.current += 1
 		getPlayButtonStoreModule().setIsActive(false)
-		var3.setIsOpen(true)
+		var6.setIsOpen(true)
 	end
 	
-	local var66 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref)
-		var3.setWorldViewportRect(if p2 ~= nil then nil else Rect.new(p2.AbsolutePosition, p2.AbsolutePosition + p2.AbsoluteSize))
-	end, { var3 })
+	local var70 = reactModule.useCallback(function(p4)
+		-- upvalues: var6 (ref)
+		var6.setWorldViewportRect(if p4 ~= nil then nil else Rect.new(p4.AbsolutePosition, p4.AbsolutePosition + p4.AbsoluteSize))
+	end, { var6 })
 	
-	local var67 = function(p2)
-		-- upvalues: var17 (ref), library (ref), var3 (ref), var63 (ref), sendBuildExperienceEventModule (copy), var6 (ref)
-		if var17 ~= nil then
-			local item = library.getItem(false, var17)
+	local var71 = function(p4)
+		-- upvalues: var20 (ref), library (ref), var6 (ref), var67 (ref), sendBuildExperienceEventModule (copy), var9 (ref)
+		if var20 ~= nil then
+			local item = library.getItem(false, var20)
 			
 			if item == nil then
-				var3.setIsOpen(false)
+				var6.setIsOpen(false)
 				
 				return
 			end
-			local isOpen = var3.getIsOpen(false)
-			var63(item, p2 ~= "prompt")
-			local var68 = isOpen and not var3.getIsOpen(false)
+			local isOpen = var6.getIsOpen(false)
+			var67(item, p4 ~= "prompt")
+			local var72 = isOpen and not var6.getIsOpen(false)
 			
-			if var68 or isOpen and item.model ~= nil and not item.model:IsDescendantOf(workspace) then
-				sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var6(), {
+			if var72 or isOpen and item.model ~= nil and not item.model:IsDescendantOf(workspace) then
+				sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var9(), {
 					action = "world",
 					surface = "Detail",
-					outcome = if var68 then nil else "unavailable",
+					outcome = if var72 then nil else "unavailable",
 					kind = item.kind,
-					source = p2 or "segmented_control",
+					source = p4 or "segmented_control",
 					location = item.rootName
 				})
 			end
 		end
 	end
 	
-	local var68 = function()
-		-- upvalues: var15 (ref), var3 (ref), var23 (ref), sendBuildExperienceEventModule (copy), var6 (ref), var67 (ref)
-		if var15.routeName == "Browser" and var3.getIsOpen(false) and var23.enter() then
-			sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var6(), {
-				action = "world",
-				kind = "All",
-				surface = "Home",
-				source = "home_cutout"
-			})
-			var67()
-			
-			return
+	local var72 = function()
+		-- upvalues: var18 (ref), var6 (ref), var27 (ref), sendBuildExperienceEventModule (copy), var9 (ref), fFlagBuildExperienceLibrary (copy), requestWorldFocus (copy), var25 (ref), var71 (ref)
+		if var18.routeName ~= "Browser" or not var6.getIsOpen(false) or not var27.enter() then return end
+		sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var9(), {
+			action = "world",
+			kind = "All",
+			surface = "Home",
+			source = "home_cutout"
+		})
+		
+		if fFlagBuildExperienceLibrary then
+			requestWorldFocus(var25, var6)
 		end
+		var71()
 	end
 	
-	local function returnToAppChat(p2, p3)
-		-- upvalues: var53 (ref), var52 (ref), var49 (ref), p1 (ref), httpService (copy), leaveExperienceModule (copy), default (copy)
-		if var53.current then return end
-		var53.current = true
-		var52(true)
-		var49(p3)
-		p2 = p2 or p1.sessionId
-		local gameId = `roblox://navigation/build?universeid={p1.dataModel.GameId}`
+	local function returnToAppChat(p4, p5)
+		-- upvalues: var57 (ref), var56 (ref), var53 (ref), p3 (ref), httpService (copy), leaveExperienceModule (copy), default (copy)
+		if var57.current then return end
+		var57.current = true
+		var56(true)
+		var53(p5)
+		p4 = p4 or p3.sessionId
+		local gameId = `roblox://navigation/build?universeid={p3.dataModel.GameId}`
 		
-		if p2 ~= nil then
-			gameId ..= `&sessionid={httpService:UrlEncode(p2)}`
+		if p4 ~= nil then
+			gameId ..= `&sessionid={httpService:UrlEncode(p4)}`
 		end
 		task.spawn(leaveExperienceModule, function()
 			-- upvalues: default (copy), gameId (write)
@@ -739,140 +793,142 @@ local function ConnectedLibrary(p1)
 	end
 	
 	local function onNavigateBack()
-		-- upvalues: var53 (ref), var10 (ref), var65 (ref), var15 (ref), returnToAppChat (ref), var40 (ref)
-		if var53.current then return end
-		if not var10 then
-			var65()
+		-- upvalues: var57 (ref), var13 (ref), var69 (ref), var18 (ref), returnToAppChat (ref), var44 (ref)
+		if var57.current then return end
+		if not var13 then
+			var69()
 			
 			return
-		elseif var15.routeName == "Browser" then
+		elseif var18.routeName == "Browser" then
 			returnToAppChat(nil, "back_button")
 			
 			return
 		end
-		var40()
+		var44()
 	end
 	
-	local var69 = reactModule.useRef(onNavigateBack)
-	var69.current = onNavigateBack
-	local var70 = reactModule.useRef(nil)
+	local var73 = reactModule.useRef(onNavigateBack)
+	var73.current = onNavigateBack
+	local var74 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: var69 (ref), getAndroidBackSignalModule (copy), bindLibraryBackInputModule (copy), var70 (ref)
+		-- upvalues: var73 (ref), getAndroidBackSignalModule (copy), bindLibraryBackInputModule (copy), var74 (ref)
 		local function navigateBack()
-			-- upvalues: var69 (copy)
-			var69.current()
+			-- upvalues: var73 (copy)
+			var73.current()
 		end
 		
-		local var71 = getAndroidBackSignalModule():Connect(navigateBack)
-		local var72 = bindLibraryBackInputModule(navigateBack)
-		var70.current = var72
+		local var75 = getAndroidBackSignalModule():Connect(navigateBack)
+		local var76 = bindLibraryBackInputModule(navigateBack)
+		var74.current = var76
 		
 		return function()
-			-- upvalues: var71 (ref), var72 (ref), var70 (copy)
-			var71:Disconnect()
-			var72.unbind()
-			var70.current = nil
+			-- upvalues: var75 (ref), var76 (ref), var74 (copy)
+			var75:Disconnect()
+			var76.unbind()
+			var74.current = nil
 		end
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var70 (ref), var57 (ref)
-		if var70.current ~= nil then
-			var70.current.setChatOpen(var57)
+		-- upvalues: var74 (ref), var61 (ref)
+		if var74.current ~= nil then
+			var74.current.setChatOpen(var61)
 		end
-	end, { var57 })
-	local var71 = if var11 ~= nil then nil else table.clone(var11)
+	end, { var61 })
+	local var75 = if var14 ~= nil then nil else table.clone(var14)
 	
-	if var71 ~= nil and var11 ~= nil then
-		local onSend = var11.onSend
+	if var75 ~= nil and var14 ~= nil then
+		local onSend = var14.onSend
 		
-		function var111.onSend()
-			-- upvalues: var18 (ref), var39 (ref), sendBuildExperienceEventModule (copy), var6 (ref), onSend (ref), returnToAppChat (ref), var60 (ref), var67 (ref)
+		function var118.onSend()
+			-- upvalues: var21 (ref), var43 (ref), sendBuildExperienceEventModule (copy), var9 (ref), onSend (ref), returnToAppChat (ref), var64 (ref), var71 (ref)
 			local t = {
 				action = "prompt",
 				surface = "Detail",
-				kind = var18,
-				location = if var39 ~= nil then nil else var39.rootName
+				kind = var21,
+				location = if var43 ~= nil then nil else var43.rootName
 			}
 			local _ = nil
-			local var72 = if var18 == "Image" or var18 == "Sound" then onSend(function(p2)
-				-- upvalues: t (ref), sendBuildExperienceEventModule (copy), var6 (copy), returnToAppChat (copy)
+			local var76 = if var21 == "Image" or var21 == "Sound" then onSend(function(p4)
+				-- upvalues: t (ref), sendBuildExperienceEventModule (copy), var9 (copy), returnToAppChat (copy)
 				local cloned = table.clone(t)
 				cloned.phase = "received"
-				sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var6(), cloned)
-				returnToAppChat(p2, "prompt_return")
+				sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var9(), cloned)
+				returnToAppChat(p4, "prompt_return")
 			end) else onSend(function()
-				-- upvalues: t (ref), sendBuildExperienceEventModule (copy), var6 (copy)
+				-- upvalues: t (ref), sendBuildExperienceEventModule (copy), var9 (copy)
 				local cloned = table.clone(t)
 				cloned.phase = "received"
-				sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var6(), cloned)
+				sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var9(), cloned)
 			end)
 			
-			if var72 then
-				var60.current = t
+			if var76 then
+				var64.current = t
 			end
-			if var72 and var18 == "Model" then
-				var67("prompt")
+			if var76 and var21 == "Model" then
+				var71("prompt")
 			end
 			local cloned = table.clone(t)
 			cloned.phase = "submit"
-			cloned.outcome = if var72 then "accepted" else "rejected"
-			sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var6(), cloned)
+			cloned.outcome = if var76 then "accepted" else "rejected"
+			sendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", var9(), cloned)
 			
-			return var72
+			return var76
 		end
 	end
-	local var72 = if var17 == nil then var9.title elseif var18 == "Model" then var9.object elseif var18 == "Image" then var9.image else var9.sound
+	local createElement = reactModule.createElement
+	createElement = createElement(libraryNavigatorModule, {
+		externalDispatchConnector = var29,
+		onNavigationStateChange = var30,
+		screenProps = {
+			library = library,
+			isReady = var40,
+			isOpen = var13,
+			activeRouteKey = var18.key,
+			query = var31,
+			onBack = var44,
+			onOpenItem = var46,
+			onOpenCategory = var45,
+			chatActions = var75,
+			resourceActions = var17,
+			unavailableText = var12.modelUnavailable,
+			worldCutout = if var26 or fFlagBuildExperienceLibrary and not var40 then {
+				title = var12.world,
+				onActivated = var72,
+				onRectChanged = var27.onCellRectChanged
+			} else nil
+		}
+	})
+	local var76 = if var20 == nil then var12.title elseif var21 == "Model" then var12.object elseif var21 == "Image" then var12.image else var12.sound
 	
 	return reactModule.createElement(focusNavigationUtilsModule.FocusRoot, {
 		isIsolated = true,
 		surfaceIdentifier = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PopUp,
-		isAutoFocusRoot = var10,
-		isFocusable = var10
+		isAutoFocusRoot = var13,
+		isFocusable = var13
 	}, {
 		Experience = reactModule.createElement(libraryExperienceViewModule, {
-			isOpen = var10,
-			showModeControl = var22 and (var17 ~= nil and var18 == "Model"),
-			isWorldAvailable = if var39 == nil or var39.model == nil then nil else var39.model:IsDescendantOf(workspace),
-			title = if var17 ~= nil then if var23.phase == "Expanding" or var23.phase == "World" then var9.world elseif var19 ~= nil then var9.title else var19.title elseif var39 ~= nil then var72 else var39.displayName,
-			onBack = if var17 == nil and var19 == nil and var15.routeName ~= "Search" then if not var10 then var65 else nil else var40,
-			query = if var17 == nil then var27 else nil,
-			searchPlaceholder = var9.searchPlaceholder,
-			onQueryChanged = if var17 == nil then var30 else nil,
-			onSearchReset = if var17 == nil then var35 else nil,
-			assetLabel = var72,
-			worldLabel = var9.world,
-			onShowLibrary = var65,
-			onShowWorld = var67,
-			onWorldViewportChanged = var66,
-			worldCutout = var23.view,
+			isOpen = var13,
+			showModeControl = var26 and (var20 ~= nil and var21 == "Model"),
+			isWorldAvailable = if var43 == nil or var43.model == nil then nil else var43.model:IsDescendantOf(workspace),
+			title = if var20 ~= nil then if var27.phase == "Expanding" or var27.phase == "World" then var12.world elseif var22 ~= nil then var12.title else var22.title elseif var43 ~= nil then var76 else var43.displayName,
+			onBack = if var20 == nil and var22 == nil and var18.routeName ~= "Search" then if not var13 then var69 else nil else var44,
+			query = if var20 == nil then var31 else nil,
+			searchPlaceholder = var12.searchPlaceholder,
+			onQueryChanged = if var20 == nil then var34 else nil,
+			onSearchReset = if var20 == nil then var39 else nil,
+			assetLabel = var76,
+			worldLabel = var12.world,
+			onShowLibrary = var69,
+			onShowWorld = var71,
+			onWorldViewportChanged = var70,
+			worldCutout = var27.view,
 			onLeave = function()
 				-- upvalues: returnToAppChat (ref)
 				returnToAppChat(nil, "close_button")
 			end
-		}, reactModule.createElement(libraryNavigatorModule, {
-			externalDispatchConnector = var25,
-			onNavigationStateChange = var26,
-			screenProps = {
-				library = library,
-				isReady = var36,
-				isOpen = var10,
-				activeRouteKey = var15.key,
-				query = var27,
-				onBack = var40,
-				onOpenItem = var42,
-				onOpenCategory = var41,
-				chatActions = var71,
-				resourceActions = var14,
-				unavailableText = var9.modelUnavailable,
-				worldCutout = if var22 then {
-					title = var9.world,
-					onActivated = var68,
-					onRectChanged = var23.onCellRectChanged
-				} else nil
-			}
-		})),
-		Leaving = if var51 then reactModule.createElement(libraryLeavingOverlayModule, { ZIndex = 2 }) else nil,
-		FirstFrameCover = if not var54 then reactModule.createElement(foundationModule.View, {
+		}, createElement),
+		Leaving = if var55 then reactModule.createElement(libraryLeavingOverlayModule, { ZIndex = 2 }) else nil,
+		FirstFrameCover = if not var58 then reactModule.createElement(foundationModule.View, {
 			ZIndex = 3,
 			tag = "size-full bg-surface-0",
 			testId = "Library.FirstFrameCover"
@@ -880,7 +936,7 @@ local function ConnectedLibrary(p1)
 	})
 end
 
-return function(p2, p3)
+return function(p4, p5)
 	-- upvalues: var2 (write), getLibraryStoreModule (ref), coreGuiService (ref), createBuildLibraryStoreModule (ref), reactRobloxModule (ref), localization (ref), localizationService (ref), reactFocusNavigationModule (ref), reactModule (ref), localizationProvider (ref), libraryThemeProviderModule (ref), buildExperienceCompositionStyleSheetModule (ref), focusNavigationUtilsModule (ref), ConnectedLibrary (ref)
 	if var2 == nil then
 		getLibraryStoreModule().setIsOpen(true)
@@ -892,25 +948,25 @@ return function(p2, p3)
 		buildExperienceLibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		buildExperienceLibrary.DisplayOrder = 10
 		buildExperienceLibrary.Parent = coreGuiService
-		local var65 = createBuildLibraryStoreModule(p2 or game)
-		local var66 = reactRobloxModule.createRoot(buildExperienceLibrary)
-		var2 = var66
-		local var67 = localization.new(localizationService.RobloxLocaleId)
-		local var68 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+		local var69 = createBuildLibraryStoreModule(p4 or game)
+		local var70 = reactRobloxModule.createRoot(buildExperienceLibrary)
+		var2 = var70
+		local var71 = localization.new(localizationService.RobloxLocaleId)
+		local var72 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 		reactRobloxModule.flushSync(function()
-			-- upvalues: var66 (ref), reactModule (copy), localizationProvider (copy), var67 (ref), libraryThemeProviderModule (copy), buildExperienceCompositionStyleSheetModule (copy), reactFocusNavigationModule (copy), var68 (ref), focusNavigationUtilsModule (copy), ConnectedLibrary (copy), p2 (ref), var65 (ref), p3 (ref), var2 (copy), buildExperienceLibrary (ref)
-			var66:render(reactModule.createElement(localizationProvider, { localization = var67 }, {
+			-- upvalues: var70 (ref), reactModule (copy), localizationProvider (copy), var71 (ref), libraryThemeProviderModule (copy), buildExperienceCompositionStyleSheetModule (copy), reactFocusNavigationModule (copy), var72 (ref), focusNavigationUtilsModule (copy), ConnectedLibrary (copy), p4 (ref), var69 (ref), p5 (ref), var2 (copy), buildExperienceLibrary (ref)
+			var70:render(reactModule.createElement(localizationProvider, { localization = var71 }, {
 				FoundationProvider = reactModule.createElement(libraryThemeProviderModule, { displayOrder = 10 }, {
 					CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),
-					Library = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var68 }, {
+					Library = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var72 }, {
 						Registry = reactModule.createElement(focusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider, nil, {
 							Content = reactModule.createElement(ConnectedLibrary, {
-								dataModel = p2 or game,
-								library = var65,
-								sessionId = p3,
+								dataModel = p4 or game,
+								library = var69,
+								sessionId = p5,
 								onUnmount = function()
-									-- upvalues: var68 (copy), var2 (copy), buildExperienceLibrary (copy)
-									var68:teardown()
+									-- upvalues: var72 (copy), var2 (copy), buildExperienceLibrary (copy)
+									var72:teardown()
 									var2 = nil
 									buildExperienceLibrary:Destroy()
 								end
@@ -921,7 +977,7 @@ return function(p2, p3)
 			}))
 		end)
 		
-		return var66
+		return var70
 	end
 	return var2
 end

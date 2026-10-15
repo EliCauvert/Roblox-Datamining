@@ -1,4 +1,6 @@
 ﻿return {
+	Accordion = "Accordion",
+	AccordionItem = "AccordionItem",
 	ActionBar = "ActionBar",
 	AgeCheckUpsellRow = "AgeCheckUpsellRow",
 	AiOverview = "AiOverview",

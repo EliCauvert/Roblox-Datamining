@@ -15,6 +15,8 @@
 	GetMultipleUsersPerCredentialErrorData = require(script.GetMultipleUsersPerCredentialErrorData),
 	GetLoginByUsernameErrorMessage = require(script.GetLoginByUsernameErrorMessage),
 	LoginByUsernameSSOErrorsTelemetry = require(script.LoginByUsernameSSOErrorsTelemetry),
+	LoginByEmailSSOErrorsTelemetry = require(script.LoginByEmailSSOErrorsTelemetry),
+	LoginByPhoneSSOErrorsTelemetry = require(script.LoginByPhoneSSOErrorsTelemetry),
 	getSignedOutAccounts = require(script.getSignedOutAccounts),
 	recordLogin = require(script.recordLogin),
 	recordSignOut = require(script.recordSignOut),

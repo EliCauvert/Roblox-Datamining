@@ -5,7 +5,7 @@ local reactModule = require(parent.React)
 local appPage = require(parent.RobloxAppEnums).AppPage
 local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
 local compositionTags = require(parent.AppComposition).CompositionTags
-local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
+local fFlagAppThemeHalloween2026HomeBackground = require(parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 local sduiPageEntryPoint = sduiSharedUtilitiesModule.SduiPageEntryPoint
 local sduiSurfaceLoadTimeTracker = sduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
 local getSduiClientPageScope = sduiSharedUtilitiesModule.getSduiClientPageScope
@@ -18,7 +18,7 @@ local function _(p1, p2)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: chartsConstantsModule (ref), usePageScopeRef (ref), reactModule (ref), getSduiClientPageScope (ref), sduiSurfaceLoadTimeTracker (ref), fetchChartsPageModule (ref), sduiPageEntryPoint (ref), appPage (ref), compositionTags (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
+	-- upvalues: chartsConstantsModule (ref), usePageScopeRef (ref), reactModule (ref), getSduiClientPageScope (ref), sduiSurfaceLoadTimeTracker (ref), fetchChartsPageModule (ref), sduiPageEntryPoint (ref), appPage (ref), compositionTags (ref), fFlagAppThemeHalloween2026HomeBackground (ref)
 	local configKey = chartsConstantsModule.ConfigKey
 	local pageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
 	usePageScopeRef(configKey)
@@ -62,7 +62,9 @@ return reactModule.memo(function(p1)
 		stickyContentTag = compositionTags.ContentRegion.Header,
 		scrollPerformanceIntervalName = chartsConstantsModule.ScrollPerformanceIntervalName,
 		pageTopPadding = p1.pageTopPadding,
-		feedTopMargin = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil,
-		scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.scrollAway else nil
+		feedTopMargin = p1.feedTopMargin,
+		scrollAway = p1.scrollAway,
+		backgroundStyle = if fFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil,
+		feedBackgroundStyle = if fFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil
 	})
 end)

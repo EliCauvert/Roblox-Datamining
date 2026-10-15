@@ -11,6 +11,7 @@ return {
 			query = {
 				lookbackWindows = 2,
 				metric = p1.metric,
+				endOffsetDays = p1.endOffsetDays,
 				filters = p1.filters
 			},
 			derive = function(p2, p3)

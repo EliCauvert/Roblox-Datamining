@@ -2,6 +2,8 @@
 	ExpChatLocalChatEnabledMessageExperimentation = require(script.ExpChatLocalChatEnabledMessageExperimentation),
 	ExpChatPresetChatBadgeFTUXExperimentation = require(script.ExpChatPresetChatBadgeFTUXExperimentation),
 	ExpChatPresetChatAutocompleteExperimentation = require(script.ExpChatPresetChatAutocompleteExperimentation),
+	ExpChatPresetChatEmojiTabExperimentation = require(script.ExpChatPresetChatEmojiTabExperimentation),
+	ExpChatPresetChatEmojiEffectExperimentation = require(script.ExpChatPresetChatEmojiEffectExperimentation),
 	ArgoPartyExperimentation = require(script.ArgoPartyExperimentation),
 	ExpChatNewSystemMessagesExperimentation = require(script.ExpChatNewSystemMessagesExperimentation),
 	ExpChatGlobalTabDefaultExperimentation = require(script.ExpChatGlobalTabDefaultExperimentation),

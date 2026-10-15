@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("SplitPaneEducationalTourKeepOnDeepLinkPatterns", "roblox.*://navigation/home,roblox.*://open/widget.*,roblox.*://open/lock_screen_widget")

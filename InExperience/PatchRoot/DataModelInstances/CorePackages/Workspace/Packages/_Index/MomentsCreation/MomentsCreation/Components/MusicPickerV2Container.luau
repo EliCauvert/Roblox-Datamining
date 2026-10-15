@@ -17,6 +17,7 @@ local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCrea
 local fFlagMomentsCreationMusicPickerTabsModule = require(momentsCreation.Flags.FFlagMomentsCreationMusicPickerTabs)
 local fFlagMomentsCreationMusicPickerPaginationModule = require(momentsCreation.Flags.FFlagMomentsCreationMusicPickerPagination)
 local fFlagMomentsCreationMusicPickerRetainSearchModule = require(momentsCreation.Flags.FFlagMomentsCreationMusicPickerRetainSearch)
+local fFlagMomentsAudioSaveButton = momentsCommonModule.Flags.FFlagMomentsAudioSaveButton
 local eventNames = momentsCommonModule.Analytics.EventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
@@ -118,7 +119,7 @@ local _ = function()
 end
 
 return function(p1)
-	-- upvalues: useCreationFlowStringsModule (ref), getMusicStoreModule (ref), useDeviceInsets (ref), useStoreContent (ref), useMemo (ref), builderIconsModule (ref), useState (ref), fFlagMomentsCreationMusicPickerRetainSearchModule (ref), useEffect (ref), signalsModule (ref), useAudioPlaybackModule (ref), useCallback (ref), makeCreationEventFieldsModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), reactModule (ref), musicEditorModule (ref), musicPickerContext (ref), musicPicker (ref), fFlagMomentsCreationMusicPickerTabsModule (ref)
+	-- upvalues: useCreationFlowStringsModule (ref), getMusicStoreModule (ref), useDeviceInsets (ref), useStoreContent (ref), useMemo (ref), builderIconsModule (ref), useState (ref), fFlagMomentsCreationMusicPickerRetainSearchModule (ref), useEffect (ref), signalsModule (ref), useAudioPlaybackModule (ref), useCallback (ref), makeCreationEventFieldsModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsAudioSaveButton (ref), reactModule (ref), musicEditorModule (ref), musicPickerContext (ref), musicPicker (ref), fFlagMomentsCreationMusicPickerTabsModule (ref)
 	local controller = p1.controller
 	local playback = controller.preview.playback
 	local var11 = useCreationFlowStringsModule()
@@ -270,12 +271,13 @@ return function(p1)
 		onStartTimeChanged = var36
 	}) else reactModule.createElement(musicPickerContext.Provider, {
 		value = useMemo(function()
-			-- upvalues: var17 (ref), var37 (ref), var21 (ref), var38 (ref)
+			-- upvalues: var17 (ref), var37 (ref), var21 (ref), var38 (ref), fFlagMomentsAudioSaveButton (copy)
 			return {
 				previewingId = var17,
 				togglePreview = var37,
 				savedIds = var21,
-				toggleSaved = var38
+				toggleSaved = var38,
+				showSaveButton = fFlagMomentsAudioSaveButton
 			}
 		end, { var17 or 0, var21, var37, var38 })
 	}, {
@@ -283,17 +285,21 @@ return function(p1)
 			source = "moments",
 			titleText = var11.EditingCtaMusic,
 			searchPlaceholder = var11.GeneralSearchPlaceholder,
-			showTabs = fFlagMomentsCreationMusicPickerTabsModule,
+			showTabs = fFlagMomentsCreationMusicPickerTabsModule and fFlagMomentsAudioSaveButton,
 			tabs = useMemo(function()
-				-- upvalues: var11 (ref), var14 (ref), var16 (ref)
-				return {
+				-- upvalues: var11 (ref), var14 (ref), fFlagMomentsAudioSaveButton (copy), var16 (ref)
+				local list = {
 					{
 						id = "trending",
 						label = var11.MusicTabTrending,
 						content = var14
-					},
-					{ id = "saved", label = "Saved", content = var16 }
+					}
 				}
+				
+				if fFlagMomentsAudioSaveButton then
+					table.insert(list, { id = "saved", label = "Saved", content = var16 })
+				end
+				return list
 			end, { var11, var14, var16 }),
 			searchContent = var14,
 			onQueryChanged = useCallback(function(p4)

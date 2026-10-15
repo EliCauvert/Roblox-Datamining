@@ -2,10 +2,9 @@
 local reactModule = require(parent.React)
 local useDeviceInsets = require(parent.Responsive).useDeviceInsets
 
-local function dimPanel(p1, p2, p3)
+local function dimPanel(p1, p2, p3, p4)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("TextButton", {
-		BackgroundTransparency = 0.5,
 		BorderSizePixel = 0,
 		Active = true,
 		AutoButtonColor = false,
@@ -14,7 +13,8 @@ local function dimPanel(p1, p2, p3)
 		Name = p1,
 		Position = p2,
 		Size = p3,
-		BackgroundColor3 = Color3.new(0, 0, 0)
+		BackgroundColor3 = Color3.new(0, 0, 0),
+		BackgroundTransparency = p4 or 0.5
 	})
 end
 
@@ -75,7 +75,7 @@ return function(p1)
 		}
 	elseif var2 == nil then
 		t = {
-			Dim = dimPanel("Dim", UDim2.fromScale(0, 0), UDim2.fromScale(1, 1))
+			Dim = dimPanel("Dim", UDim2.fromScale(0, 0), UDim2.fromScale(1, 1), if p1.isTransparent then 1 else nil)
 		}
 	else
 		local x = var2.Min.X

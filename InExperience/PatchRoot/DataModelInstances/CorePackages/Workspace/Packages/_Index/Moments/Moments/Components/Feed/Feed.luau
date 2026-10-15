@@ -5,6 +5,7 @@ local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(parent.MomentsTypes)
 local reactModule = require(parent.React)
 local sharedFlagsModule = require(parent.SharedFlags)
+local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local useLocalization = localizationModule.Hooks.useLocalization
 local analytics = momentsCommonModule.Analytics
@@ -32,8 +33,10 @@ local immersiveChromeControllerModule = require(script.Parent.ImmersiveChromeCon
 local deletionConfirmationDialogModule = require(script.Parent.DeletionConfirmationDialog)
 local getImmersiveChromeStoreModule = require(moments.Stores.GetImmersiveChromeStore)
 local fFlagMomentsImmersiveChromeModule = require(moments.Flags.FFlagMomentsImmersiveChrome)
+local fFlagMomentsCommentsCloseOnFeedJumpModule = require(moments.Flags.FFlagMomentsCommentsCloseOnFeedJump)
 local getMomentsCapabilities = momentsCommonModule.Stores.GetMomentsCapabilities
 local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
+local fFlagMomentsDeleteSnackbarModule = require(moments.Flags.FFlagMomentsDeleteSnackbar)
 local fFlagMomentsFixDeleteToastCopyModule = require(moments.Flags.FFlagMomentsFixDeleteToastCopy)
 local getFFlagMomentsNonInfiniteScroll = momentsCommonModule.Flags.GetFFlagMomentsNonInfiniteScroll
 local fFlagMomentsNonInfiniteScrollEndStateFixesModule = require(moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
@@ -120,7 +123,7 @@ local _ = function()
 end
 
 return function(p1)
-	-- upvalues: var2 (ref), fFlagMomentsComments (ref), var1 (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), useLocalization (ref), t (ref), useMomentsSession (ref), getToastStoreModule (ref), reactModule (ref), getFeedScrollLimitModule (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), getFFlagMomentsNonInfiniteScroll (ref), getMomentsCapabilities (ref), createFeedStoreModule (ref), feedItemDedupeKey (ref), fFlagMomentsMediaSmoothnessTelemetry (ref), fFlagMomentsNavigationEventModule (ref), logMomentViewBeganModule (ref), moments (ref), fireAnalyticsEvent (ref), eventNames (ref), logFeedEndStateReachedModule (ref), useFeedTelemetryModule (ref), feedItemAttribution (ref), fFlagMomentsOptimisticProfilePending (ref), momentsSurfaceLoadManager (ref), feedItemRegistryModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), deleteMomentModule (ref), var3 (write), parent (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref), makeFeedActionFieldsModule (ref), fFlagMomentsFixDeleteToastCopyModule (ref), makeMediaLoadEventFields (ref), analytics (ref), fFlagMomentsFeedMediaLoadAttemptedEvent (ref), feedContext (ref), verticalPager (ref), renderFeedItem (ref), feedItemKey (ref), feedStateViewModule (ref), feedNavigationBarModule (ref), immersiveChromeControllerModule (ref), swipeLatencyTrackerModule (ref), deletionConfirmationDialogModule (ref), momentMediaCoordinatorProviderModule (ref), surfaceReadyTrackerModule (ref)
+	-- upvalues: var2 (ref), fFlagMomentsComments (ref), var1 (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), useLocalization (ref), t (ref), useMomentsSession (ref), getToastStoreModule (ref), reactModule (ref), getFeedScrollLimitModule (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), getFFlagMomentsNonInfiniteScroll (ref), getMomentsCapabilities (ref), createFeedStoreModule (ref), feedItemDedupeKey (ref), fFlagMomentsCommentsCloseOnFeedJumpModule (ref), signalsModule (ref), fFlagMomentsMediaSmoothnessTelemetry (ref), fFlagMomentsNavigationEventModule (ref), logMomentViewBeganModule (ref), moments (ref), fireAnalyticsEvent (ref), eventNames (ref), logFeedEndStateReachedModule (ref), useFeedTelemetryModule (ref), feedItemAttribution (ref), fFlagMomentsOptimisticProfilePending (ref), momentsSurfaceLoadManager (ref), feedItemRegistryModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), deleteMomentModule (ref), var3 (write), parent (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref), makeFeedActionFieldsModule (ref), fFlagMomentsDeleteSnackbarModule (ref), fFlagMomentsFixDeleteToastCopyModule (ref), makeMediaLoadEventFields (ref), analytics (ref), fFlagMomentsFeedMediaLoadAttemptedEvent (ref), feedContext (ref), verticalPager (ref), renderFeedItem (ref), feedItemKey (ref), feedStateViewModule (ref), feedNavigationBarModule (ref), immersiveChromeControllerModule (ref), swipeLatencyTrackerModule (ref), deletionConfirmationDialogModule (ref), momentMediaCoordinatorProviderModule (ref), surfaceReadyTrackerModule (ref)
 	local source = p1.source
 	local var4 = p1.active ~= nil or p1.active
 	local var5 = if p1.playbackActive ~= nil then var4 else p1.playbackActive
@@ -157,6 +160,56 @@ return function(p1)
 			var17.dispose()
 		end
 	end, { var17 })
+	
+	if fFlagMomentsCommentsCloseOnFeedJumpModule and var1 ~= nil then
+		reactModule.useEffect(function()
+			-- upvalues: var4 (ref), var1 (copy), var17 (ref), signalsModule (copy)
+			if not var4 then return end
+			local feedItemId
+			local var18 = var1(false)
+			
+			local function _(p2)
+				-- upvalues: var17 (copy)
+				local currentItem = var17.pager.getCurrentItem(p2)
+				
+				if currentItem == nil or currentItem.kind == "skeleton" then
+					return nil
+				elseif currentItem.kind == "moment" then
+					local moment = currentItem.moment
+					
+					return moment.recommendationMetadata.feedItemId or `moment:{moment.momentId}`
+				end
+				return `kind:{currentItem.kind}`
+			end
+			
+			local currentItem = var17.pager.getCurrentItem(false)
+			
+			if currentItem == nil then
+				feedItemId = nil
+			else
+				local var19 = if currentItem.kind ~= "skeleton" then if currentItem.kind ~= "moment" then currentItem.moment else nil else nil
+				feedItemId = currentItem.kind ~= "skeleton" and (currentItem.kind ~= "moment" and (var19.recommendationMetadata.feedItemId or `moment:{var19.momentId}`))
+			end
+			return signalsModule.createEffect(function(p2)
+				-- upvalues: var17 (copy), feedItemId (write), var18 (ref)
+				local feedItemId_1
+				local currentItem = var17.pager.getCurrentItem(p2)
+				
+				if currentItem == nil then
+					feedItemId_1 = nil
+				else
+					local var20 = if currentItem.kind ~= "skeleton" then if currentItem.kind ~= "moment" then currentItem.moment else nil else nil
+					feedItemId_1 = currentItem.kind ~= "skeleton" and (currentItem.kind ~= "moment" and (var20.recommendationMetadata.feedItemId or `moment:{var20.momentId}`))
+				end
+				if feedItemId_1 == nil or feedItemId_1 == feedItemId then return end
+				feedItemId = feedItemId_1
+				
+				if feedItemId ~= nil and var18.getIsOpen(false) and var18.getFeedItemId(false) == feedItemId then
+					var18.close()
+				end
+			end)
+		end, { var4, var17 })
+	end
 	local var18 = reactModule.useRef(nil)
 	local var19 = reactModule.useRef(nil)
 	local var20 = reactModule.useRef(nil)
@@ -408,7 +461,7 @@ return function(p1)
 		end
 	end, { var17 })
 	local var45 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), var14 (ref), deleteMomentModule (copy), var3 (copy), parent (copy), var44 (ref), fFlagMomentsRemoveDeletedFromProfile (copy), fFlagMomentsOptimisticProfilePending (copy), getDeletedMomentsStoreModule (copy), makeFeedActionFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsFixDeleteToastCopyModule (copy), var15 (ref), var13 (ref)
+		-- upvalues: var16 (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), var14 (ref), deleteMomentModule (copy), var3 (copy), parent (copy), var44 (ref), fFlagMomentsRemoveDeletedFromProfile (copy), fFlagMomentsOptimisticProfilePending (copy), getDeletedMomentsStoreModule (copy), makeFeedActionFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsDeleteSnackbarModule (copy), var15 (ref), var13 (ref), fFlagMomentsFixDeleteToastCopyModule (copy)
 		if var16 then
 			local momentId = var16.momentId
 			local feedItemId = var16.feedItemId
@@ -440,7 +493,13 @@ return function(p1)
 			if var46 then
 				fireAnalyticsEvent(eventNames.MomentItemDeleted, var46)
 			end
-			if fFlagMomentsFixDeleteToastCopyModule then
+			if fFlagMomentsDeleteSnackbarModule then
+				var15.triggerToast({
+					text = "",
+					variant = "snackbar",
+					title = var13.deletedToast
+				})
+			elseif fFlagMomentsFixDeleteToastCopyModule then
 				var15.triggerToast({ text = "", title = var13.deletedToast })
 			else
 				var15.triggerToast({ title = var13.deletedTitle, text = var13.deletedBody })

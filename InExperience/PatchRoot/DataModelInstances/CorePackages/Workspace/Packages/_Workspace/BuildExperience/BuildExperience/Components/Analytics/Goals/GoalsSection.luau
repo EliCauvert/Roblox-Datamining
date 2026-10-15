@@ -5,6 +5,7 @@ local _ = require(parent.DataHydration.ExperienceAnalytics)
 local _ = require(buildExperience.Analytics.AnalyticsWindow)
 local useMetricMetadataModule = require(buildExperience.Analytics.useMetricMetadata)
 local goalsModule = require(buildExperience.Analytics.Goals.Goals)
+local useGoalMilestonesModule = require(buildExperience.Analytics.Goals.useGoalMilestones)
 local goalsSectionViewModule = require(script.Parent.GoalsSectionView)
 local useGoalsSectionViewModelModule = require(script.Parent.useGoalsSectionViewModel)
 local t = {}
@@ -19,11 +20,14 @@ for i, v in goalsModule.Goals do
 	end
 end
 return function(p1)
-	-- upvalues: useMetricMetadataModule (ref), t_1 (ref), useGoalsSectionViewModelModule (ref), goalsModule (ref), reactModule (ref), goalsSectionViewModule (ref)
+	-- upvalues: useMetricMetadataModule (ref), t_1 (ref), useGoalMilestonesModule (ref), useGoalsSectionViewModelModule (ref), goalsModule (ref), reactModule (ref), goalsSectionViewModule (ref)
 	local var1 = useMetricMetadataModule(t_1)
 	
 	return reactModule.createElement(goalsSectionViewModule, {
-		entries = useGoalsSectionViewModelModule({ goals = goalsModule.Goals }),
+		entries = useGoalsSectionViewModelModule({
+			goals = goalsModule.Goals,
+			milestones = useGoalMilestonesModule(p1.universeId)
+		}),
 		universeId = p1.universeId,
 		window = p1.window,
 		latestByMetric = var1.latestByMetric,

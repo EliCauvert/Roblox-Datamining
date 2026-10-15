@@ -39,16 +39,16 @@ return function(p2)
 		local t = {}
 		
 		for i, v in var4.message.contents do
-			local var5, var6 = unpackContentModule(v)
+			local var5 = unpackContentModule(v)
 			
-			if var5 ~= nil and var6 ~= nil then
+			if var5 ~= nil then
 				table.insert(t, {
 					kind = var5,
 					getContent = function(p3)
-						-- upvalues: unpackContentModule (copy), p2 (copy), i (ref), var6 (ref)
-						local _, var7 = unpackContentModule(p2(p3).message.contents[i])
+						-- upvalues: p2 (copy), i (ref), unpackContentModule (copy), var5 (ref), v (ref)
+						local var6 = p2(p3).message.contents[i]
 						
-						return if var7 == nil then var6 else var7
+						return if unpackContentModule(var6) == var5 then var6 else v
 					end
 				})
 			end

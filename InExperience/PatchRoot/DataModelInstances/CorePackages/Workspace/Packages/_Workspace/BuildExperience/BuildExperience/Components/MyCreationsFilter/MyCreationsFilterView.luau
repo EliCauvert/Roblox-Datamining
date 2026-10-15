@@ -58,13 +58,13 @@ return function(p1)
 			}, {
 				Label = reactModule.createElement(text, {
 					LayoutOrder = 1,
-					tag = "fill auto-y text-title-medium text-align-x-left text-truncate-end content-emphasis",
+					tag = "fill auto-y text-heading-small text-align-x-left text-truncate-end content-emphasis",
 					Text = p1.label,
 					testId = `{testId}.Label`
 				}),
 				FilterButton = reactModule.createElement(iconButton, {
 					LayoutOrder = 2,
-					icon = iconName.TwoSlidersHorizontal,
+					icon = iconName.ThreeBarsHorizontalNarrowing,
 					onActivated = p1.onOpenSheet,
 					size = inputSize.Small,
 					testId = `{testId}.FilterButton`,

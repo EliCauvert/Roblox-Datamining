@@ -26,6 +26,7 @@ return {
 	Goals = {
 		{
 			id = "GetMorePlayers",
+			unlockMilestone = "universe_dau_5_achieved",
 			titleKey = analyticsKeysModule.ANALYTICS_GOAL_TITLE_GET_MORE_PLAYERS,
 			metricSummaries = {
 				{
@@ -67,6 +68,7 @@ return {
 		},
 		{
 			id = "FirstImpression",
+			unlockMilestone = "universe_dau_5_achieved",
 			titleKey = analyticsKeysModule.ANALYTICS_GOAL_TITLE_FIRST_IMPRESSION,
 			metricSummaries = {
 				{
@@ -109,20 +111,21 @@ return {
 		},
 		{
 			id = "KeepPlayersComingBack",
+			unlockMilestone = "universe_first_returning_user_achieved",
 			titleKey = analyticsKeysModule.ANALYTICS_GOAL_TITLE_KEEP_PLAYERS_COMING_BACK,
 			metricSummaries = {
 				{
 					kind = "number",
 					id = "ForwardD1Retention",
 					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_D1_RETENTION,
-					source = goalMetricSummarySourcesModule.summary({ metric = metricId.ForwardD1Retention }),
+					source = goalMetricSummarySourcesModule.summary({ endOffsetDays = 1, metric = metricId.ForwardD1Retention }),
 					format = { unit = analyticsUnitModule.Percent }
 				},
 				{
 					kind = "number",
 					id = "ForwardD7Retention",
 					titleKey = analyticsKeysModule.ANALYTICS_METRIC_TITLE_D7_RETENTION,
-					source = goalMetricSummarySourcesModule.summary({ metric = metricId.ForwardD7Retention }),
+					source = goalMetricSummarySourcesModule.summary({ endOffsetDays = 7, metric = metricId.ForwardD7Retention }),
 					format = { unit = analyticsUnitModule.Percent }
 				}
 			},
@@ -132,6 +135,7 @@ return {
 		},
 		{
 			id = "EarnRobux",
+			unlockMilestone = "universe_first_robux_spent_achieved",
 			titleKey = analyticsKeysModule.ANALYTICS_GOAL_TITLE_EARN_ROBUX,
 			metricSummaries = {
 				{

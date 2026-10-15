@@ -5,7 +5,6 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local fetchAllDesiredDataModule = require(parent.validationSystem.dataFetchModules.FetchAllDesiredData)
-local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local t = {
 	categories = {
 		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
@@ -44,7 +43,7 @@ local function checkEditableImageSize(p1, p2, p3, p4, p5, p6, p7)
 end
 
 function t.run(p1, p2)
-	-- upvalues: fetchAllDesiredDataModule (ref), validationEnumsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), constantsInterfaceModule (ref), checkEditableImageSize (ref)
+	-- upvalues: fetchAllDesiredDataModule (ref), validationEnumsModule (ref), constantsInterfaceModule (ref), checkEditableImageSize (ref)
 	local rootInstance = p2.rootInstance
 	local assetType = p2.uploadEnum.assetType
 	local meshTextures = p2.meshTextures
@@ -83,12 +82,13 @@ function t.run(p1, p2)
 					local surfaceAppearance = var1:FindFirstChildWhichIsA("SurfaceAppearance")
 					
 					if surfaceAppearance then
-						local list = { "ColorMap", "MetalnessMap", "NormalMap", "RoughnessMap" }
-						
-						if getFFlagUGCValidateAllowEmissivesModule() then
-							table.insert(list, "EmissiveMask")
-						end
-						for i_1, v_1 in list do
+						for i_1, v_1 in {
+							"ColorMap",
+							"MetalnessMap",
+							"NormalMap",
+							"RoughnessMap",
+							"EmissiveMask"
+						} do
 							local var3 = specialMesh[v_1]
 							
 							if var3 and var3.editable then

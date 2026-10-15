@@ -8,21 +8,17 @@ local _ = require(foundation.Components.Types)
 local flagsModule = require(foundation.Utility.Flags)
 
 local function variantsFactory(p1)
-	-- upvalues: flagsModule (ref), sliderVariantModule (ref), inputSizeModule (ref)
+	-- upvalues: sliderVariantModule (ref), flagsModule (ref), inputSizeModule (ref)
 	return {
 		common = {
 			bar = {
-				tag = if flagsModule.FoundationSliderBeta then "position-center-center anchor-center-center radius-circle" else "position-center-center anchor-center-center size-full-100 radius-small"
+				tag = "position-center-center anchor-center-center radius-circle"
 			},
-			fill = {
-				tag = if flagsModule.FoundationSliderBeta then "radius-circle" else "radius-small"
-			}
+			fill = { tag = "radius-circle" }
 		},
 		variants = {
 			[sliderVariantModule.Emphasis] = {
-				bar = {
-					tag = if flagsModule.FoundationSliderBeta then "bg-shift-200" else "bg-shift-400"
-				},
+				bar = { tag = "bg-shift-200" },
 				fill = { tag = "bg-emphasis" },
 				knob = {
 					hasShadow = true,
@@ -31,19 +27,17 @@ local function variantsFactory(p1)
 				}
 			},
 			[sliderVariantModule.Standard] = {
-				bar = {
-					tag = if flagsModule.FoundationSliderBeta then "bg-shift-200" else "bg-shift-400"
-				},
+				bar = { tag = "bg-shift-200" },
 				fill = { tag = "bg-system-contrast" },
 				knob = {
+					hasShadow = true,
 					style = p1.Color.System.Contrast,
 					dragStyle = p1.Color.System.Contrast,
-					stroke = if flagsModule.FoundationSliderBeta then {
+					stroke = {
 						Color = p1.Color.Stroke.Default.Color3,
 						Transparency = p1.Color.Stroke.Default.Transparency,
 						Thickness = p1.Stroke.Standard
-					} else nil,
-					hasShadow = if flagsModule.FoundationSliderBeta then true else false
+					}
 				}
 			},
 			[sliderVariantModule.Utility] = {
@@ -60,22 +54,10 @@ local function variantsFactory(p1)
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
-				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_100 } else nil,
-				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_300 }
-			},
-			[inputSizeModule.Small] = {
-				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_150 } else nil,
-				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_400 }
-			},
-			[inputSizeModule.Medium] = {
-				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_200 } else nil,
-				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_500 }
-			},
-			[inputSizeModule.Large] = {
-				bar = if flagsModule.FoundationSliderBeta then { height = p1.Size.Size_250 } else nil,
-				hitbox = if flagsModule.FoundationSliderBeta then nil else { height = p1.Size.Size_700 }
-			}
+			[inputSizeModule.XSmall] = { bar = { height = p1.Size.Size_100 } },
+			[inputSizeModule.Small] = { bar = { height = p1.Size.Size_150 } },
+			[inputSizeModule.Medium] = { bar = { height = p1.Size.Size_200 } },
+			[inputSizeModule.Large] = { bar = { height = p1.Size.Size_250 } }
 		},
 		orientation = {
 			[true] = {

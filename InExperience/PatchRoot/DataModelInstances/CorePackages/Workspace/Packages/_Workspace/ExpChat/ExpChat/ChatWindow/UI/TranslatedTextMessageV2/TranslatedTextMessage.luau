@@ -15,14 +15,22 @@ local fIntExpChatWindowTransparencyRewriteInteractableThresholdModule = require(
 local fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module = require(flags.FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2)
 local fFlagExpChatPolishSummaryMessageUIModule = require(flags.FFlagExpChatPolishSummaryMessageUI)
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local isChatWindowEnlargeEnabledModule = require(expChat.isChatWindowEnlargeEnabled)
+local fFlagExpChatMessageEffectChatWindowEnlargePaddingModule = require(flags.FFlagExpChatMessageEffectChatWindowEnlargePadding)
+local fFlagExpChatMessageEffectChatWindowEnlargeLineHeightModule = require(flags.FFlagExpChatMessageEffectChatWindowEnlargeLineHeight)
+local fIntExpChatMessageEffectChatWindowEnlargePaddingPixelsModule = require(flags.FIntExpChatMessageEffectChatWindowEnlargePaddingPixels)
 local getPresetIconRichText = expChatSharedModule.getPresetIconRichText
 local textChatMessageChatActionTypeModule = require(expChat.TextChatMessageChatActionType)
 local summaryMessageRichTextModule = require(expChat.summaryMessageRichText)
 local rewriteToggleModule = require(script.Parent.RewriteToggle)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
 local getRewriteDropdownStoreModule = require(expChat.Stores.GetRewriteDropdownStore)
+local messageEffectModule = require(expChat.MessageEffects.MessageEffect)
 local getMessageTextSize = require(parent.ChatUIPrimitives).Utils.getMessageTextSize
 local useFinishChatWindowMessageRenderIntervals = require(parent.ChatUIPrimitives).Hooks.useFinishChatWindowMessageRenderIntervals
+local applyChatWindowMessageEffectsModule = require(expChat.MessageEffects.applyChatWindowMessageEffects)
+local getChatWindowPrefixOffsetModule = require(expChat.MessageEffects.getChatWindowPrefixOffset)
+local getChatWindowMessageLineHeightModule = require(expChat.MessageEffects.getChatWindowMessageLineHeight)
 local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local configModule = require(expChat.Config)
 local helpers = expChat.ChatWindow.Helpers
@@ -53,13 +61,13 @@ local function appendTrustedIndicator(p1, p2, p3, p4, p5)
 	local var1 = p5.Color.Shift.Shift_300.Color3:ToHex()
 	local transparency = p5.Color.Shift.Shift_300.Transparency
 	local transparency_1 = p5.Color.Content.Emphasis.Transparency
-	local var2 = `{`{`{`{`<mark color='#{var24}' transparency='{transparency + p9 * (1 - transparency)}'>`}<font transparency='1' weight='{600}' size='{p10 - 4}'><stroke transparency='1'>_`}<font color='#{p11.Color.Content.Emphasis.Color3:ToHex()}' transparency='{transparency_1 + p9 * (1 - transparency_1)}'>{p2}</font>`}_</stroke></font>`}</mark>`
+	local var2 = `{`{`{`{`<mark color='#{var32}' transparency='{transparency + p9 * (1 - transparency)}'>`}<font transparency='1' weight='{600}' size='{p10 - 4}'><stroke transparency='1'>_`}<font color='#{p11.Color.Content.Emphasis.Color3:ToHex()}' transparency='{transparency_1 + p9 * (1 - transparency_1)}'>{p2}</font>`}_</stroke></font>`}</mark>`
 	
 	return if string.find(p1, ":([%S:]-)$") then string.gsub(p1, ":([%S:]-)$", ` {var2} :%1`) else `{p1} {var2}`
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagDebugMessageProfilingModule (ref), getMessageTextSize (ref), localizationModule (ref), fFlagExpChatRewriteInlineModule (ref), fFlagEnableInExpChatRewriteModule (ref), fStringInExpChatRewriteLabelKeyModule (ref), foundationModule (ref), reactModule (ref), useFinishChatWindowMessageRenderIntervals (ref), getMessagesStoreModule (ref), getRewriteDropdownStoreModule (ref), fFlagExpChatRewriteToggleAnalyticsModule (ref), expChatSharedModule (ref), configModule (ref), appendTrustedIndicator (ref), trim (ref), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (ref), fFlagExpChatPolishSummaryMessageUIModule (ref), fFlagExpChatPresetChatEnabled (ref), getPresetIconRichText (ref), textChatMessageChatActionTypeModule (ref), summaryMessageRichTextModule (ref), duplicateInvisibleTextModule (ref), fIntExpChatWindowTransparencyRewriteInteractableThresholdModule (ref), useCursor (ref), mergeBindableScalarModule (ref), rewriteToggleModule (ref)
+	-- upvalues: fFlagDebugMessageProfilingModule (ref), getMessageTextSize (ref), localizationModule (ref), fFlagExpChatRewriteInlineModule (ref), fFlagEnableInExpChatRewriteModule (ref), fStringInExpChatRewriteLabelKeyModule (ref), foundationModule (ref), reactModule (ref), useFinishChatWindowMessageRenderIntervals (ref), getMessagesStoreModule (ref), getRewriteDropdownStoreModule (ref), fFlagExpChatRewriteToggleAnalyticsModule (ref), expChatSharedModule (ref), configModule (ref), appendTrustedIndicator (ref), trim (ref), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (ref), fFlagExpChatPolishSummaryMessageUIModule (ref), fFlagExpChatPresetChatEnabled (ref), isChatWindowEnlargeEnabledModule (ref), applyChatWindowMessageEffectsModule (ref), getPresetIconRichText (ref), textChatMessageChatActionTypeModule (ref), summaryMessageRichTextModule (ref), duplicateInvisibleTextModule (ref), getChatWindowPrefixOffsetModule (ref), fFlagExpChatMessageEffectChatWindowEnlargeLineHeightModule (ref), getChatWindowMessageLineHeightModule (ref), fIntExpChatWindowTransparencyRewriteInteractableThresholdModule (ref), useCursor (ref), fFlagExpChatMessageEffectChatWindowEnlargePaddingModule (ref), messageEffectModule (ref), fIntExpChatMessageEffectChatWindowEnlargePaddingPixelsModule (ref), mergeBindableScalarModule (ref), rewriteToggleModule (ref)
 	if fFlagDebugMessageProfilingModule then
 		debug.profilebegin("TranslatedTextMessage")
 	end
@@ -171,52 +179,69 @@ return reactModule.memo(function(p1)
 		var14 = #list_1 + 1
 		table.insert(list_1, p1.isPresetMessage)
 	end
-	local var15 = reactModule.joinBindings(list_1):map(function(p2)
-		-- upvalues: fFlagExpChatPresetChatEnabled (copy), var14 (write), getPresetIconRichText (copy), var13 (write), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), var12 (write), textChatMessageChatActionTypeModule (copy), fFlagExpChatPolishSummaryMessageUIModule (copy), summaryMessageRichTextModule (copy), var3 (ref), duplicateInvisibleTextModule (copy), fFlagExpChatRewriteInlineModule (copy), fFlagEnableInExpChatRewriteModule (copy), foundationModule (copy), var2 (write)
-		local var16 = p2[1]
-		local var17 = p2[2]
-		local var18 = p2[4]
-		local var19 = p2[3]
+	local var15 = nil
+	
+	if isChatWindowEnlargeEnabledModule() and p1.effects ~= nil then
+		var15 = #list_1 + 1
+		table.insert(list_1, p1.effects)
+	end
+	local var16 = reactModule.joinBindings(list_1):map(function(p2)
+		-- upvalues: isChatWindowEnlargeEnabledModule (copy), var15 (write), applyChatWindowMessageEffectsModule (copy), fFlagExpChatPresetChatEnabled (copy), var14 (write), getPresetIconRichText (copy), var13 (write), fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), var12 (write), textChatMessageChatActionTypeModule (copy), fFlagExpChatPolishSummaryMessageUIModule (copy), summaryMessageRichTextModule (copy), var3 (ref), duplicateInvisibleTextModule (copy), fFlagExpChatRewriteInlineModule (copy), fFlagEnableInExpChatRewriteModule (copy), foundationModule (copy), var2 (write)
+		local var17 = p2[1]
+		local var18 = p2[2]
+		local var19 = p2[4]
+		local var20 = p2[3]
 		
+		if isChatWindowEnlargeEnabledModule() and var15 ~= nil then
+			var20 = applyChatWindowMessageEffectsModule(var20, p2[var15])
+		end
 		if fFlagExpChatPresetChatEnabled and var14 ~= nil and p2[var14] then
-			var19 ..= ` {getPresetIconRichText(p2[var13])}`
+			var20 ..= ` {getPresetIconRichText(p2[var13])}`
 		end
 		if fFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module and p2[var12] == textChatMessageChatActionTypeModule.Summary then
-			local var20 = if fFlagExpChatPolishSummaryMessageUIModule then p2[var13] else nil
-			var19 = summaryMessageRichTextModule.wrapInSummaryMutedStyle(summaryMessageRichTextModule.getSummaryIconPrefix(var20) .. " " .. var95, var3.Color.Content.Muted.Color3:ToHex(), var20)
+			local var21 = if fFlagExpChatPolishSummaryMessageUIModule then p2[var13] else nil
+			var20 = summaryMessageRichTextModule.wrapInSummaryMutedStyle(summaryMessageRichTextModule.getSummaryIconPrefix(var21) .. " " .. var107, var3.Color.Content.Muted.Color3:ToHex(), var21)
 		end
-		if string.len(var16) > 0 then
-			if var17 then
-				var19 = "     " .. var95
+		if string.len(var17) > 0 then
+			if var18 then
+				var20 = "     " .. var107
 			end
-			var19 = duplicateInvisibleTextModule(var16, var18.FontFace, var18.TextSize) .. " " .. var95
+			var20 = duplicateInvisibleTextModule(var17, var19.FontFace, var19.TextSize) .. " " .. var107
 		end
 		if fFlagExpChatRewriteInlineModule and fFlagEnableInExpChatRewriteModule then
-			local var21 = p2[6]
+			local var22 = p2[6]
 			
 			if p2[5] then
-				var19 = `{var19} <font size='{var94.TextSize - 4}' color='#{var28.Color.Content.Muted.Color3:ToHex()}'>{`({var2})`}<font transparency='1'><stroke transparency='1'>_</stroke></font>{`<font weight='600' family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>{if var21 then foundationModule.Enums.IconName.ChevronLargeUp else foundationModule.Enums.IconName.ChevronLargeDown}</font>`}</font>`
+				var20 = `{var20} <font size='{var106.TextSize - 4}' color='#{var36.Color.Content.Muted.Color3:ToHex()}'>{`({var2})`}<font transparency='1'><stroke transparency='1'>_</stroke></font>{`<font weight='600' family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>{if var22 then foundationModule.Enums.IconName.ChevronLargeUp else foundationModule.Enums.IconName.ChevronLargeDown}</font>`}</font>`
 			end
 		end
-		return var19
+		return var20
 	end)
-	local var22 = var11:map(function(p3)
+	local var23 = var11:map(function(p3)
 		return UDim2.new(0, p3 - 2, 0, p3 - 2)
 	end)
-	local var23 = p1.originalPrefixText:map(function(p3)
+	local var24 = p1.originalPrefixText:map(function(p3)
 		return string.len(p3) > 0
 	end)
-	local var24 = "UIGradient"
-	local var25 = p1.prefixTextProperties:map(function(p3)
-		-- upvalues: var24 (ref)
-		return if p3 then p3[var24] else nil
+	local var25 = "UIGradient"
+	local var26 = p1.prefixTextProperties:map(function(p3)
+		-- upvalues: var25 (ref)
+		return if p3 then p3[var25] else nil
 	end)
-	local var26 = nil
-	local var27 = nil
+	local var27 = if isChatWindowEnlargeEnabledModule() and p1.effects ~= nil then reactModule.joinBindings({ p1.effects, p1.prefixTextProperties }):map(function(p3)
+		-- upvalues: getChatWindowPrefixOffsetModule (copy)
+		return UDim2.fromOffset(0, getChatWindowPrefixOffsetModule(p3[1], p3[2].TextSize))
+	end) else nil
+	local var28 = if fFlagExpChatMessageEffectChatWindowEnlargeLineHeightModule and isChatWindowEnlargeEnabledModule() and p1.effects ~= nil then reactModule.joinBindings({ p1.effects, var11, p1.prefixTextProperties }):map(function(p3)
+		-- upvalues: getChatWindowMessageLineHeightModule (copy)
+		return getChatWindowMessageLineHeightModule(p3[1], p3[2], p3[3].TextSize)
+	end) else nil
+	local var29 = nil
+	local var30 = nil
 	
 	if fFlagEnableInExpChatRewriteModule then
 		local wasRewritten = p1.wasRewritten
-		var26 = wasRewritten:map(function(p3)
+		var29 = wasRewritten:map(function(p3)
 			-- upvalues: fFlagExpChatRewriteInlineModule (copy)
 			return p3 and not fFlagExpChatRewriteInlineModule
 		end)
@@ -225,24 +250,28 @@ return reactModule.memo(function(p1)
 			local chatWindowTransparencyBindable = p1.chatWindowTransparencyBindable
 			
 			if chatWindowTransparencyBindable == nil then
-				var27 = wasRewritten
+				var30 = wasRewritten
 			elseif typeof(chatWindowTransparencyBindable) == "number" then
-				local var28 = chatWindowTransparencyBindable < fIntExpChatWindowTransparencyRewriteInteractableThresholdModule
-				var27 = wasRewritten:map(function(p3)
-					-- upvalues: var28 (ref)
-					return p3 and var28
+				local var31 = chatWindowTransparencyBindable < fIntExpChatWindowTransparencyRewriteInteractableThresholdModule
+				var30 = wasRewritten:map(function(p3)
+					-- upvalues: var31 (ref)
+					return p3 and var31
 				end)
 			else
-				var27 = reactModule.joinBindings({ wasRewritten, chatWindowTransparencyBindable }):map(function(p3)
+				var30 = reactModule.joinBindings({ wasRewritten, chatWindowTransparencyBindable }):map(function(p3)
 					-- upvalues: fIntExpChatWindowTransparencyRewriteInteractableThresholdModule (copy)
 					return p3[1] and p3[2] < fIntExpChatWindowTransparencyRewriteInteractableThresholdModule
 				end)
 			end
 		end
 	end
-	local var29 = useCursor()
+	local var32 = useCursor()
+	local var33 = if fFlagExpChatMessageEffectChatWindowEnlargePaddingModule and isChatWindowEnlargeEnabledModule() and p1.effects ~= nil then p1.effects:map(function(p3)
+		-- upvalues: messageEffectModule (copy), fIntExpChatMessageEffectChatWindowEnlargePaddingPixelsModule (copy)
+		return UDim.new(0, if p3 and table.find(p3, messageEffectModule.ChatWindowEnlarge) then fIntExpChatMessageEffectChatWindowEnlargePaddingPixelsModule else 0)
+	end) else nil
 	local createElement = reactModule.createElement
-	local var30 = "Frame"
+	local var34 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
@@ -251,14 +280,18 @@ return reactModule.memo(function(p1)
 		Visible = p1.visible
 	}
 	local t_1 = {
-		UIPadding = reactModule.createElement("UIPadding", { PaddingRight = p1.arButtonPadding }),
+		UIPadding = reactModule.createElement("UIPadding", {
+			PaddingRight = p1.arButtonPadding,
+			PaddingTop = var33,
+			PaddingBottom = var33
+		}),
 		ColumnLayout = if fFlagEnableInExpChatRewriteModule and not fFlagExpChatRewriteInlineModule then reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}) else nil
 	}
 	local createElement_1 = reactModule.createElement
-	local var31 = "Frame"
+	local var35 = "Frame"
 	local t_2 = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
@@ -267,103 +300,106 @@ return reactModule.memo(function(p1)
 	}
 	local t_3 = {}
 	local createElement_2 = reactModule.createElement
-	local var32 = "TextLabel"
+	local var36 = "TextLabel"
 	local t_4 = {
 		BackgroundTransparency = 1,
 		RichText = true,
 		TextWrapped = true,
 		AutomaticSize = Enum.AutomaticSize.XY
 	}
-	local var33 = "FontFace"
+	local var37 = "FontFace"
 	t_4.FontFace = p1.prefixTextProperties:map(function(p3)
-		-- upvalues: var33 (ref)
-		return if p3 then p3[var33] else nil
-	end)
-	t_4.Text = var9
-	local var34 = "TextColor3"
-	t_4.TextColor3 = p1.prefixTextProperties:map(function(p3)
-		-- upvalues: var34 (ref)
-		return if p3 then p3[var34] else nil
-	end)
-	local var35 = "TextSize"
-	t_4.TextSize = p1.prefixTextProperties:map(function(p3)
-		-- upvalues: var35 (ref)
-		return if p3 then p3[var35] else nil
-	end)
-	local var36 = "TextStrokeColor3"
-	t_4.TextStrokeColor3 = p1.prefixTextProperties:map(function(p3)
-		-- upvalues: var36 (ref)
-		return if p3 then p3[var36] else nil
-	end)
-	local var37 = "TextStrokeTransparency"
-	t_4.TextStrokeTransparency = mergeBindableScalarModule(p1.prefixTextProperties:map(function(p3)
 		-- upvalues: var37 (ref)
 		return if p3 then p3[var37] else nil
+	end)
+	t_4.LineHeight = var28
+	t_4.Position = var27
+	t_4.Text = var9
+	local var38 = "TextColor3"
+	t_4.TextColor3 = p1.prefixTextProperties:map(function(p3)
+		-- upvalues: var38 (ref)
+		return if p3 then p3[var38] else nil
+	end)
+	local var39 = "TextSize"
+	t_4.TextSize = p1.prefixTextProperties:map(function(p3)
+		-- upvalues: var39 (ref)
+		return if p3 then p3[var39] else nil
+	end)
+	local var40 = "TextStrokeColor3"
+	t_4.TextStrokeColor3 = p1.prefixTextProperties:map(function(p3)
+		-- upvalues: var40 (ref)
+		return if p3 then p3[var40] else nil
+	end)
+	local var41 = "TextStrokeTransparency"
+	t_4.TextStrokeTransparency = mergeBindableScalarModule(p1.prefixTextProperties:map(function(p3)
+		-- upvalues: var41 (ref)
+		return if p3 then p3[var41] else nil
 	end), p1.textTransparency)
 	t_4.TextTransparency = mergeBindableScalarModule(0, p1.textTransparency)
 	t_4.TextXAlignment = Enum.TextXAlignment.Left
 	t_4.TextYAlignment = Enum.TextYAlignment.Top
-	t_4.Visible = var23
+	t_4.Visible = var24
 	local t_5 = {}
 	local createElement_3 = reactModule.createElement
-	local var38 = "UIGradient"
+	local var42 = "UIGradient"
 	local t_6 = {}
-	local var39 = "Enabled"
-	t_6.Enabled = var25:map(function(p3)
-		-- upvalues: var39 (ref)
-		return if p3 then p3[var39] else nil
-	end)
-	local var40 = "Color"
-	t_6.Color = var25:map(function(p3)
-		-- upvalues: var40 (ref)
-		return if p3 then p3[var40] else nil
-	end)
-	local var41 = "Offset"
-	t_6.Offset = var25:map(function(p3)
-		-- upvalues: var41 (ref)
-		return if p3 then p3[var41] else nil
-	end)
-	local var42 = "Rotation"
-	t_6.Rotation = var25:map(function(p3)
-		-- upvalues: var42 (ref)
-		return if p3 then p3[var42] else nil
-	end)
-	local var43 = "Transparency"
-	t_6.Transparency = var25:map(function(p3)
+	local var43 = "Enabled"
+	t_6.Enabled = var26:map(function(p3)
 		-- upvalues: var43 (ref)
 		return if p3 then p3[var43] else nil
 	end)
-	t_5.UIGradient = createElement_3(var38, t_6)
-	t_3.PrefixText = createElement_2(var32, t_4, t_5)
+	local var44 = "Color"
+	t_6.Color = var26:map(function(p3)
+		-- upvalues: var44 (ref)
+		return if p3 then p3[var44] else nil
+	end)
+	local var45 = "Offset"
+	t_6.Offset = var26:map(function(p3)
+		-- upvalues: var45 (ref)
+		return if p3 then p3[var45] else nil
+	end)
+	local var46 = "Rotation"
+	t_6.Rotation = var26:map(function(p3)
+		-- upvalues: var46 (ref)
+		return if p3 then p3[var46] else nil
+	end)
+	local var47 = "Transparency"
+	t_6.Transparency = var26:map(function(p3)
+		-- upvalues: var47 (ref)
+		return if p3 then p3[var47] else nil
+	end)
+	t_5.UIGradient = createElement_3(var42, t_6)
+	t_3.PrefixText = createElement_2(var36, t_4, t_5)
 	local createElement_4 = reactModule.createElement
-	local var44 = if fFlagExpChatRewriteInlineModule and fFlagEnableInExpChatRewriteModule then "TextButton" else "TextLabel"
+	local var48 = if fFlagExpChatRewriteInlineModule and fFlagEnableInExpChatRewriteModule then "TextButton" else "TextLabel"
 	local t_7 = {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1
 	}
-	local var45 = "FontFace"
+	local var49 = "FontFace"
 	t_7.FontFace = p1.bodyTextProperties:map(function(p3)
-		-- upvalues: var45 (ref)
-		return if p3 then p3[var45] else nil
+		-- upvalues: var49 (ref)
+		return if p3 then p3[var49] else nil
 	end)
+	t_7.LineHeight = var28
 	t_7.RichText = true
 	t_7.Size = UDim2.new(1, 0, 0, 0)
-	t_7.Text = var15
-	local var46 = "TextColor3"
+	t_7.Text = var16
+	local var50 = "TextColor3"
 	t_7.TextColor3 = p1.bodyTextProperties:map(function(p3)
-		-- upvalues: var46 (ref)
-		return if p3 then p3[var46] else nil
+		-- upvalues: var50 (ref)
+		return if p3 then p3[var50] else nil
 	end)
 	t_7.TextSize = var11
-	local var47 = "TextStrokeColor3"
+	local var51 = "TextStrokeColor3"
 	t_7.TextStrokeColor3 = p1.bodyTextProperties:map(function(p3)
-		-- upvalues: var47 (ref)
-		return if p3 then p3[var47] else nil
+		-- upvalues: var51 (ref)
+		return if p3 then p3[var51] else nil
 	end)
-	local var48 = "TextStrokeTransparency"
+	local var52 = "TextStrokeTransparency"
 	t_7.TextStrokeTransparency = mergeBindableScalarModule(p1.bodyTextProperties:map(function(p3)
-		-- upvalues: var48 (ref)
-		return if p3 then p3[var48] else nil
+		-- upvalues: var52 (ref)
+		return if p3 then p3[var52] else nil
 	end), p1.textTransparency)
 	t_7.TextTransparency = mergeBindableScalarModule(0, p1.textTransparency)
 	t_7.TextWrapped = true
@@ -371,15 +407,16 @@ return reactModule.memo(function(p1)
 	t_7.TextYAlignment = Enum.TextYAlignment.Top
 	t_7[reactModule.Change.Text] = var5
 	t_7[reactModule.Event.Activated] = if fFlagExpChatRewriteInlineModule and fFlagEnableInExpChatRewriteModule then var8 else nil
-	t_7.Interactable = if fFlagExpChatRewriteInlineModule and fFlagEnableInExpChatRewriteModule then var27 else nil
-	t_3.BodyText = createElement_4(var44, t_7)
+	t_7.Interactable = if fFlagExpChatRewriteInlineModule and fFlagEnableInExpChatRewriteModule then var30 else nil
+	t_3.BodyText = createElement_4(var48, t_7)
 	local createElement_5 = reactModule.createElement
-	local var49 = "Frame"
+	local var53 = "Frame"
 	local t_8 = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
+		Position = var27,
 		Size = UDim2.new(1, 0, 0, 0),
-		Visible = var23
+		Visible = var24
 	}
 	local t_9 = {
 		Layout = reactModule.createElement("UIListLayout", {
@@ -389,24 +426,25 @@ return reactModule.memo(function(p1)
 		})
 	}
 	local createElement_6 = reactModule.createElement
-	local var50 = "TextButton"
+	local var54 = "TextButton"
 	local t_10 = {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1
 	}
-	local var51 = "FontFace"
+	local var55 = "FontFace"
 	t_10.FontFace = p1.prefixTextProperties:map(function(p3)
-		-- upvalues: var51 (ref)
-		return if p3 then p3[var51] else nil
+		-- upvalues: var55 (ref)
+		return if p3 then p3[var55] else nil
 	end)
+	t_10.LineHeight = var28
 	t_10.RichText = true
-	t_10.SelectionImageObject = var29
+	t_10.SelectionImageObject = var32
 	t_10.Size = UDim2.new(0, 0, 0, 0)
 	t_10.Text = var10
-	local var52 = "TextSize"
+	local var56 = "TextSize"
 	t_10.TextSize = p1.prefixTextProperties:map(function(p3)
-		-- upvalues: var52 (ref)
-		return if p3 then p3[var52] else nil
+		-- upvalues: var56 (ref)
+		return if p3 then p3[var56] else nil
 	end)
 	t_10.TextStrokeTransparency = 1
 	t_10.TextTransparency = 1
@@ -415,7 +453,7 @@ return reactModule.memo(function(p1)
 	t_10.TextYAlignment = Enum.TextYAlignment.Top
 	t_10.LayoutOrder = 1
 	t_10[reactModule.Event.Activated] = var6
-	t_9.TextButton = createElement_6(var50, t_10)
+	t_9.TextButton = createElement_6(var54, t_10)
 	t_9.TranslationButton = reactModule.createElement("ImageButton", {
 		BackgroundTransparency = 1,
 		HoverImage = "rbxasset://textures/translateIconDark.png",
@@ -423,21 +461,21 @@ return reactModule.memo(function(p1)
 		ImageTransparency = mergeBindableScalarModule(0, p1.textTransparency),
 		LayoutOrder = 2,
 		PressedImage = "rbxasset://textures/translateIconDark.png",
-		SelectionImageObject = var29,
-		Size = var22,
+		SelectionImageObject = var32,
+		Size = var23,
 		Visible = p1.shouldShowTranslationToggle,
 		[reactModule.Event.Activated] = var7
 	})
-	t_3.TextMessageButton = createElement_5(var49, t_8, t_9)
-	t_1.TextMessage = createElement_1(var31, t_2, t_3)
+	t_3.TextMessageButton = createElement_5(var53, t_8, t_9)
+	t_1.TextMessage = createElement_1(var35, t_2, t_3)
 	t_1.RewriteToggle = if fFlagEnableInExpChatRewriteModule and not fFlagExpChatRewriteInlineModule then reactModule.createElement(rewriteToggleModule, {
 		LayoutOrder = 2,
 		isRewriteMenuOpen = p1.isRewriteWindowOpen,
 		textTransparency = p1.textTransparency,
 		onActivated = var8,
-		Visible = var26
+		Visible = var29
 	}) else nil
-	createElement = createElement(var30, t, t_1)
+	createElement = createElement(var34, t, t_1)
 	
 	if fFlagDebugMessageProfilingModule then
 		debug.profileend()

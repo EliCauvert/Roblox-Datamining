@@ -4,6 +4,7 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local compositionTags = require(parent.AppComposition).CompositionTags
 local reactModule = require(parent.React)
 local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
+local fFlagSduiSettingsFocusRef = require(parent.SharedFlags).FFlagSduiSettingsFocusRef
 local sduiPageWrapperEntryPoint = sduiSharedUtilitiesModule.SduiPageWrapperEntryPoint
 local sduiSurfaceLoadTimeTracker = sduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
 local usePageScopeRef = sduiSharedUtilitiesModule.usePageScopeRef
@@ -15,7 +16,7 @@ local surfaceLoadTimeEventName = settingsSduiConstantsModule.SurfaceLoadTimeEven
 local t = { layout = compositionTags.Layout.Detail }
 
 return reactModule.memo(function(value)
-	-- upvalues: usePageScopeRef (ref), configKey (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), surfaceLoadTimeEventName (ref), fetchSettingsPageModule (ref), sduiPageWrapperEntryPoint (ref), settings (ref), t (ref)
+	-- upvalues: usePageScopeRef (ref), configKey (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), surfaceLoadTimeEventName (ref), fetchSettingsPageModule (ref), sduiPageWrapperEntryPoint (ref), settings (ref), t (ref), fFlagSduiSettingsFocusRef (ref)
 	usePageScopeRef(configKey)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: sduiSurfaceLoadTimeTracker (copy), configKey (copy), surfaceLoadTimeEventName (copy)
@@ -46,6 +47,7 @@ return reactModule.memo(function(value)
 			fetchSettingsPageModule(var2, true)
 		end, {}),
 		composition = t,
-		pageTopPadding = value.pageTopPadding
+		pageTopPadding = value.pageTopPadding,
+		defaultFocusRef = if fFlagSduiSettingsFocusRef then value.defaultFocusRef else nil
 	})
 end)

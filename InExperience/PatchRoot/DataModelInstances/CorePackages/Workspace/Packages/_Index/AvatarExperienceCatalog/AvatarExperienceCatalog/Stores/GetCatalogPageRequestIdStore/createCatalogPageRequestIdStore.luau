@@ -8,6 +8,7 @@ local constantsModule = require(avatarExperienceCatalog.Constants)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXSduiBracedPageRequestId = avatarExperienceFlagsModule.FFlagAXSduiBracedPageRequestId
 local fFlagAXSduiPageVariantRequestId = avatarExperienceFlagsModule.FFlagAXSduiPageVariantRequestId
+local fFlagAXSduiPublishRequestIdWithResponse = avatarExperienceFlagsModule.FFlagAXSduiPublishRequestIdWithResponse
 
 local function _(p1, p2)
 	-- upvalues: normalizeScreenSizeForWire (ref)
@@ -15,11 +16,12 @@ local function _(p1, p2)
 end
 
 return function()
-	-- upvalues: signalsModule (ref), fFlagAXSduiBracedPageRequestId (ref), httpService (ref), sendAXCounterV2 (ref), constantsModule (ref), normalizeScreenSizeForWire (ref), fFlagAXSduiPageVariantRequestId (ref)
+	-- upvalues: signalsModule (ref), fFlagAXSduiBracedPageRequestId (ref), httpService (ref), sendAXCounterV2 (ref), constantsModule (ref), normalizeScreenSizeForWire (ref), fFlagAXSduiPageVariantRequestId (ref), fFlagAXSduiPublishRequestIdWithResponse (ref)
 	local var1, var2 = signalsModule.createSignal({})
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
+	local t_3 = {}
 	
 	local function _()
 		-- upvalues: fFlagAXSduiBracedPageRequestId (copy), httpService (copy)
@@ -167,14 +169,64 @@ return function()
 			return var6
 		end,
 		resetPageVariantRequestId = function(value, p1)
-			-- upvalues: normalizeScreenSizeForWire (copy), t_1 (ref), t (ref), resetPageRequestId (ref)
+			-- upvalues: normalizeScreenSizeForWire (copy), t_1 (ref), t (ref), fFlagAXSduiPublishRequestIdWithResponse (copy), t_3 (ref), resetPageRequestId (ref)
 			local var5 = `{value}|{normalizeScreenSizeForWire(p1)}`
 			local var6 = t_1[value]
 			t[var5] = nil
 			
+			if fFlagAXSduiPublishRequestIdWithResponse then
+				t_3[var5] = nil
+			end
 			if var6 == nil or var6 == var5 then
 				resetPageRequestId(value)
 			end
+		end,
+		beginPageVariantRefresh = function(p1, p2)
+			-- upvalues: normalizeScreenSizeForWire (copy), t (ref), getOrCreateVariantRequestIdForKey (ref), fFlagAXSduiBracedPageRequestId (copy), httpService (copy), t_3 (ref)
+			local var5 = `{p1}|{normalizeScreenSizeForWire(p2)}`
+			
+			if t[var5] == nil then
+				return getOrCreateVariantRequestIdForKey(p1, var5, p2)
+			end
+			local var6 = if fFlagAXSduiBracedPageRequestId then httpService:GenerateGUID(true) else httpService:GenerateGUID(false)
+			t_3[var5] = var6
+			
+			return var6
+		end,
+		getPageVariantRequestIdToSend = function(p1, p2)
+			-- upvalues: normalizeScreenSizeForWire (copy), t_3 (ref), getOrCreateVariantRequestIdForKey (ref)
+			local var5 = `{p1}|{normalizeScreenSizeForWire(p2)}`
+			
+			return t_3[var5] or getOrCreateVariantRequestIdForKey(p1, var5, p2)
+		end,
+		commitPageVariantRequestId = function(p1, p2, p3)
+			-- upvalues: normalizeScreenSizeForWire (copy), t_3 (ref), t (ref), t_1 (ref), var1 (ref), var2 (ref)
+			local var5 = `{p1}|{normalizeScreenSizeForWire(p2)}`
+			
+			if t_3[var5] ~= p3 then return end
+			t_3[var5] = nil
+			t[var5] = p3
+			
+			if t_1[p1] == var5 then
+				local var6 = var1(false)
+				
+				if var6[p1] == p3 then return end
+				local cloned = table.clone(var6)
+				cloned[p1] = p3
+				var2(cloned)
+			end
+		end,
+		discardPageVariantRequestId = function(p1, p2, p3)
+			-- upvalues: normalizeScreenSizeForWire (copy), t_3 (ref)
+			local var5 = `{p1}|{normalizeScreenSizeForWire(p2)}`
+			
+			if t_3[var5] == p3 then
+				t_3[var5] = nil
+			end
+		end,
+		getPageVariantRequestId = function(p1, p2)
+			-- upvalues: t (ref), normalizeScreenSizeForWire (copy)
+			return t[`{p1}|{normalizeScreenSizeForWire(p2)}`]
 		end
 	}
 end

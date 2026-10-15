@@ -28,6 +28,7 @@ local getAccountUpgradeErrorTextKeyModule = require(accountUpgrade.Utils.getAcco
 local resolveFieldStatesModule = require(accountUpgrade.Utils.resolveFieldStates)
 local useTextFieldValueModule = require(accountUpgrade.Hooks.useTextFieldValue)
 local fFlagAccountUpgradeOAuthTelemetryModule = require(accountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
+local fFlagAccountUpgradeOAuthDialogFitsContentModule = require(accountUpgrade.Flags.FFlagAccountUpgradeOAuthDialogFitsContent)
 local _ = require(script.Parent.AccountUpgradeView)
 local _ = require(script.Parent.AccountUpgradeFields)
 local inputValidity = authCommonModule.Enums.InputValidity
@@ -59,8 +60,8 @@ local _ = function(p1, p2)
 end
 
 local function resolveLegalText(p1, p2)
-	-- upvalues: fFlagEnableDesktopSsoSignupDialogModule (ref), t (ref)
-	if not fFlagEnableDesktopSsoSignupDialogModule or p2.hidesLegalText == true then
+	-- upvalues: accountUpgradeFlowModule (ref), fFlagAccountUpgradeOAuthDialogFitsContentModule (ref), fFlagEnableDesktopSsoSignupDialogModule (ref), t (ref)
+	if not (if p2.flow == accountUpgradeFlowModule.OAuth then fFlagAccountUpgradeOAuthDialogFitsContentModule else fFlagEnableDesktopSsoSignupDialogModule) or p2.hidesLegalText == true then
 		return {}
 	end
 	local var1 = if p1.linkedAccountLegalTextKey then p2.linkedPlatformAccountName else nil
@@ -84,7 +85,7 @@ end
 local function reportEmail() end
 
 return function(p1)
-	-- upvalues: accountUpgradeFlowModule (ref), getFlowSpec (ref), accountUpgradeSurfaceModule (ref), fFlagAccountUpgradeOAuthTelemetryModule (ref), accountUpgradeAnalyticsModule (ref), useRoactService (ref), roactNetworking (ref), fFlagEnableDesktopSsoSignupDialogModule (ref), fFlagAllowCurrentUsernameOnSignup (ref), reactModule (ref), inputValidity (ref), userGender (ref), useTextFieldValueModule (ref), reportEmail (ref), isStringEmail (ref), dateHelper (ref), getAccountUpgradeErrorTextKeyModule (ref), getFFlagEnableAuditForSinglePageSignUp (ref), resolveLegalText (ref), useLocalization (ref), accountUpgradeFieldModule (ref), t (ref), localizationService (ref), resolveFieldStatesModule (ref), usernameValidationContext (ref), usernameSuggestor (ref), computeIsAccountUpgradeButtonEnabledModule (ref), authButtonClick (ref), eventStreamConstants (ref), promiseModule (ref), accountUpgradeRequest (ref), getAccountUpgradeErrorCodeModule (ref), authClientError (ref), t_1 (ref)
+	-- upvalues: accountUpgradeFlowModule (ref), getFlowSpec (ref), accountUpgradeSurfaceModule (ref), fFlagAccountUpgradeOAuthTelemetryModule (ref), accountUpgradeAnalyticsModule (ref), useRoactService (ref), roactNetworking (ref), fFlagEnableDesktopSsoSignupDialogModule (ref), fFlagAllowCurrentUsernameOnSignup (ref), reactModule (ref), inputValidity (ref), userGender (ref), useTextFieldValueModule (ref), reportEmail (ref), isStringEmail (ref), dateHelper (ref), getAccountUpgradeErrorTextKeyModule (ref), fFlagAccountUpgradeOAuthDialogFitsContentModule (ref), getFFlagEnableAuditForSinglePageSignUp (ref), resolveLegalText (ref), useLocalization (ref), accountUpgradeFieldModule (ref), t (ref), localizationService (ref), resolveFieldStatesModule (ref), usernameValidationContext (ref), usernameSuggestor (ref), computeIsAccountUpgradeButtonEnabledModule (ref), authButtonClick (ref), eventStreamConstants (ref), promiseModule (ref), accountUpgradeRequest (ref), getAccountUpgradeErrorCodeModule (ref), authClientError (ref), t_1 (ref)
 	local flow = p1.flow or accountUpgradeFlowModule.Pioneer
 	local var1 = getFlowSpec(flow)
 	assert(var1 ~= nil, `Unsupported account upgrade flow: {flow}`)
@@ -97,7 +98,7 @@ return function(p1)
 	local var7, var8 = reactModule.useState(nil)
 	local useState = reactModule.useState
 	local var9 = if var6 == nil or var6 == "" then inputValidity.Unvalidated else inputValidity.Valid
-	useState, var35 = useState(var9)
+	useState, var36 = useState(var9)
 	local var10, var11 = reactModule.useState(inputValidity.Unvalidated)
 	local var12, var13 = reactModule.useState(userGender.Unknown)
 	local var14, var15 = reactModule.useState(false)
@@ -145,31 +146,37 @@ return function(p1)
 	local var35 = if value_2 ~= "" then isStringEmail(value_2) else true
 	local var36 = if value_2 == "" or var35 then nil else "Authentication.SignUp.Response.InvalidEmail"
 	local var37 = if var7 then dateHelper.MonthsLocalizationKeys[var7.Month] else nil
-	local minimumAge = var1.minimumAge
-	local var38 = var7 ~= nil and (minimumAge ~= nil and var7:GetAgeInYears() < minimumAge)
-	local var39 = if var38 then "Authentication.SignUp.Label.Error.MinimumAgeNotMet" else nil
-	local var40 = nil
+	local var38 = nil
 	
 	if var26 ~= nil and not var26.isHandled then
-		var40 = var26.errorTextKey or getAccountUpgradeErrorTextKeyModule(if var4 then nil else var26.errorCode)
+		var38 = var26.errorTextKey or getAccountUpgradeErrorTextKeyModule(if var4 then nil else var26.errorCode)
 	end
 	local onLegalLinkSelected = p1.onLegalLinkSelected
-	local var41 = if fFlagEnableDesktopSsoSignupDialogModule then reactModule.useCallback(function(p2)
-		-- upvalues: onLegalLinkSelected (ref)
-		if onLegalLinkSelected == nil then return end
+	local var39 = if fFlagEnableDesktopSsoSignupDialogModule or fFlagAccountUpgradeOAuthTelemetryModule or fFlagAccountUpgradeOAuthDialogFitsContentModule then reactModule.useCallback(function(p2)
+		-- upvalues: fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref), onLegalLinkSelected (ref)
 		if p2 == "terms" then
-			onLegalLinkSelected("terms")
-			
-			return
+			if fFlagAccountUpgradeOAuthTelemetryModule then
+				accountUpgradeAnalyticsModule.reportLegalLinkActivated(flow, surface, "terms")
+			end
+			if onLegalLinkSelected then
+				onLegalLinkSelected("terms")
+				
+				return
+			end
 		elseif p2 == "privacy" then
-			onLegalLinkSelected("privacy")
+			if fFlagAccountUpgradeOAuthTelemetryModule then
+				accountUpgradeAnalyticsModule.reportLegalLinkActivated(flow, surface, "privacy")
+			end
+			if onLegalLinkSelected then
+				onLegalLinkSelected("privacy")
+			end
 		end
-	end, { onLegalLinkSelected }) else nil
-	local var42 = fFlagEnableDesktopSsoSignupDialogModule and (var1.capturesAuditContent == true and getFFlagEnableAuditForSinglePageSignUp())
-	local var43 = resolveLegalText(var1, p1)
-	local activeKey = var43.activeKey
-	local linkedPlatformAccountName = var43.linkedPlatformAccountName
-	local var44 = useLocalization({
+	end, { flow, surface, onLegalLinkSelected }) else nil
+	local var40 = fFlagEnableDesktopSsoSignupDialogModule and (var1.capturesAuditContent == true and getFFlagEnableAuditForSinglePageSignUp())
+	local var41 = resolveLegalText(var1, p1)
+	local activeKey = var41.activeKey
+	local linkedPlatformAccountName = var41.linkedPlatformAccountName
+	local var42 = useLocalization({
 		birthdayLabel = "Authentication.SignUp.Label.Birthday",
 		birthdayPlaceholder = "Authentication.SignUp.Description.BirthdayHint",
 		usernamePlaceholder = "Authentication.SignUp.Message.Username.NoRealNameUse",
@@ -182,28 +189,27 @@ return function(p1)
 		maleText = "Authentication.SignUp.Label.GenderMale",
 		titleText = var1.titleTextKey,
 		subtitleText = var1.subtitleTextKey,
-		legalText = var43.standardKey,
-		legalTextTemplate = if var42 then activeKey else nil,
-		usernameTitle = if var42 then "Authentication.Login.Label.Username" else nil,
-		passwordTitle = if var42 then "CommonUI.Messages.Label.Password" else nil,
+		legalText = var41.standardKey,
+		legalTextTemplate = if var40 then activeKey else nil,
+		usernameTitle = if var40 then "Authentication.Login.Label.Username" else nil,
+		passwordTitle = if var40 then "CommonUI.Messages.Label.Password" else nil,
 		saveText = var1.submitTextKey,
 		emailError = var36,
-		birthdayError = var39,
-		submitError = var40,
+		submitError = var38,
 		monthText = var37,
 		dayAffix = dateHelper.DayAffixLocalizationKey,
 		yearAffix = dateHelper.YearAffixLocalizationKey
 	})
-	local var45 = if fFlagEnableDesktopSsoSignupDialogModule then useLocalization({
+	local var43 = if fFlagEnableDesktopSsoSignupDialogModule then useLocalization({
 		legalText = if linkedPlatformAccountName then {
 			var1.linkedAccountLegalTextKey,
 			platform = linkedPlatformAccountName,
-			ctaButton = var44.saveText
+			ctaButton = var42.saveText
 		} else nil
 	}).legalText else nil
-	local var46 = if fFlagEnableDesktopSsoSignupDialogModule then reactModule.useMemo(function()
-		-- upvalues: var42 (ref), var1 (ref), accountUpgradeFieldModule (copy), var44 (ref), activeKey (ref), linkedPlatformAccountName (ref), t (copy)
-		if not var42 then
+	local var44 = if fFlagEnableDesktopSsoSignupDialogModule then reactModule.useMemo(function()
+		-- upvalues: var40 (ref), var1 (ref), accountUpgradeFieldModule (copy), var42 (ref), activeKey (ref), linkedPlatformAccountName (ref), t (copy)
+		if not var40 then
 			return nil
 		end
 		local t_1 = {}
@@ -219,11 +225,11 @@ return function(p1)
 			end
 		end
 		
-		local var47 = var1
+		local var45 = var1
 		local birthday = accountUpgradeFieldModule.Birthday
 		
-		if if table.find(var47.requiredFields, birthday) == nil then table.find(var47.optionalFields, birthday) ~= nil else true then
-			local birthdayLabel = var44.birthdayLabel
+		if if table.find(var45.requiredFields, birthday) == nil then table.find(var45.optionalFields, birthday) ~= nil else true then
+			local birthdayLabel = var42.birthdayLabel
 			
 			if birthdayLabel ~= nil then
 				table.insert(t_1, {
@@ -233,7 +239,7 @@ return function(p1)
 				})
 			end
 		end
-		local usernameTitle = var44.usernameTitle
+		local usernameTitle = var42.usernameTitle
 		
 		if usernameTitle ~= nil then
 			table.insert(t_1, {
@@ -242,11 +248,11 @@ return function(p1)
 				translatedSourceString = usernameTitle
 			})
 		end
-		local var48 = var1
+		local var46 = var1
 		local password = accountUpgradeFieldModule.Password
 		
-		if if table.find(var48.requiredFields, password) == nil then table.find(var48.optionalFields, password) ~= nil else true then
-			local passwordTitle = var44.passwordTitle
+		if if table.find(var46.requiredFields, password) == nil then table.find(var46.optionalFields, password) ~= nil else true then
+			local passwordTitle = var42.passwordTitle
 			
 			if passwordTitle ~= nil then
 				table.insert(t_1, {
@@ -256,11 +262,11 @@ return function(p1)
 				})
 			end
 		end
-		local var49 = var1
+		local var47 = var1
 		local email = accountUpgradeFieldModule.Email
 		
-		if if table.find(var49.requiredFields, email) == nil then table.find(var49.optionalFields, email) ~= nil else true then
-			local emailLabel = var44.emailLabel
+		if if table.find(var47.requiredFields, email) == nil then table.find(var47.optionalFields, email) ~= nil else true then
+			local emailLabel = var42.emailLabel
 			
 			if emailLabel ~= nil then
 				table.insert(t_1, {
@@ -270,11 +276,11 @@ return function(p1)
 				})
 			end
 		end
-		local var50 = var1
+		local var48 = var1
 		local gender = accountUpgradeFieldModule.Gender
 		
-		if if table.find(var50.requiredFields, gender) == nil then table.find(var50.optionalFields, gender) ~= nil else true then
-			local genderLabel = var44.genderLabel
+		if if table.find(var48.requiredFields, gender) == nil then table.find(var48.optionalFields, gender) ~= nil else true then
+			local genderLabel = var42.genderLabel
 			
 			if genderLabel ~= nil then
 				table.insert(t_1, {
@@ -285,29 +291,29 @@ return function(p1)
 			end
 		end
 		if activeKey then
-			local var51 = activeKey
-			local legalTextTemplate = var44.legalTextTemplate
-			local var52 = if linkedPlatformAccountName then {
+			local var49 = activeKey
+			local legalTextTemplate = var42.legalTextTemplate
+			local var50 = if linkedPlatformAccountName then {
 				platform = linkedPlatformAccountName,
-				ctaButton = var44.saveText
+				ctaButton = var42.saveText
 			} else t
 			
 			if legalTextTemplate ~= nil then
 				table.insert(t_1, {
-					translationKey = var51,
+					translationKey = var49,
 					translatedSourceString = legalTextTemplate,
-					parameters = var52
+					parameters = var50
 				})
 			end
 		end
 		return t_1
 	end, {
-		var42, var1, activeKey, linkedPlatformAccountName, var44.saveText,
-		var44.birthdayLabel, var44.usernameTitle, var44.passwordTitle,
-		var44.emailLabel, var44.genderLabel, var44.legalTextTemplate
+		var40, var1, activeKey, linkedPlatformAccountName, var42.saveText,
+		var42.birthdayLabel, var42.usernameTitle, var42.passwordTitle,
+		var42.emailLabel, var42.genderLabel, var42.legalTextTemplate
 	}) else nil
-	local var47 = if not (var7 == nil or var44.monthText == nil) then dateHelper:GetFormattedFullString(var44.monthText, var7.Day, var44.dayAffix, var7.Year, var44.yearAffix, " ", localizationService.RobloxLocaleId) else ""
-	local var48 = resolveFieldStatesModule({
+	local var45 = if not (var7 == nil or var42.monthText == nil) then dateHelper:GetFormattedFullString(var42.monthText, var7.Day, var42.dayAffix, var7.Year, var42.yearAffix, " ", localizationService.RobloxLocaleId) else ""
+	local var46 = resolveFieldStatesModule({
 		spec = var1,
 		isSatisfied = {
 			[accountUpgradeFieldModule.Birthday] = var7 ~= nil,
@@ -315,10 +321,10 @@ return function(p1)
 			[accountUpgradeFieldModule.Password] = value_1 ~= "" and var10 == inputValidity.Valid
 		}
 	})
-	local username = var48[accountUpgradeFieldModule.Username]
-	local password = var48[accountUpgradeFieldModule.Password]
+	local username = var46[accountUpgradeFieldModule.Username]
+	local password = var46[accountUpgradeFieldModule.Password]
 	assert(username ~= nil, "Account upgrade flow must include a username state")
-	local var49 = reactModule.useMemo(function()
+	local var47 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref), usernameValidationContext (copy), var6 (ref)
 		return {
 			birthday = if var7 then var7:FormatForEndpoint() else "",
@@ -326,11 +332,11 @@ return function(p1)
 			currentUsername = var6
 		}
 	end, { var7, var6 })
-	local var50 = reactModule.useMemo(function()
+	local var48 = reactModule.useMemo(function()
 		-- upvalues: value (ref)
 		return { username = value }
 	end, { value })
-	local var51 = reactModule.useCallback(function(p2, p3)
+	local var49 = reactModule.useCallback(function(p2, p3)
 		-- upvalues: var9 (ref), var7 (ref), usernameSuggestor (copy), var3 (ref), usernameValidationContext (copy), var30 (ref), var23 (ref)
 		var9(p3)
 		
@@ -344,57 +350,78 @@ return function(p1)
 			end
 		end)
 	end, { var3, var7, var30.valueRef })
-	local var52 = reactModule.useCallback(function(_, p2)
+	local var50 = reactModule.useCallback(function(_, p2)
 		-- upvalues: var11 (ref)
 		var11(p2)
 	end, {})
-	local var53 = if fFlagEnableDesktopSsoSignupDialogModule then p1.onFieldInteraction else nil
-	local var54 = reactModule.useCallback(function()
-		-- upvalues: var53 (ref), var15 (ref)
-		if var53 then
-			var53("BirthdayFocused")
+	local var51 = if fFlagEnableDesktopSsoSignupDialogModule then p1.onFieldInteraction else nil
+	local var52 = reactModule.useCallback(function()
+		-- upvalues: fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref), var51 (ref), var15 (ref)
+		if fFlagAccountUpgradeOAuthTelemetryModule then
+			accountUpgradeAnalyticsModule.reportBirthdayActivated(flow, surface)
+		end
+		if var51 then
+			var51("BirthdayFocused")
 		end
 		var15(true)
-	end, { var53 })
-	local var55 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref)
+	end, { flow, surface, var51 })
+	local var53 = reactModule.useCallback(function()
+		-- upvalues: fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref), var15 (ref)
+		if fFlagAccountUpgradeOAuthTelemetryModule then
+			accountUpgradeAnalyticsModule.reportBirthdayPickerClosed(flow, surface)
+		end
 		var15(false)
-	end, {})
-	local var56 = reactModule.useCallback(function(p2)
-		-- upvalues: var53 (ref), var8 (ref), var15 (ref)
-		if var53 then
-			var53("BirthdayConfirmed")
+	end, { flow, surface })
+	local var54 = if fFlagAccountUpgradeOAuthTelemetryModule then reactModule.useCallback(function()
+		-- upvalues: accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref)
+		accountUpgradeAnalyticsModule.reportBirthdayPickerAllPicked(flow, surface)
+	end, { flow, surface }) else nil
+	local var55 = reactModule.useCallback(function(p2)
+		-- upvalues: fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref), var51 (ref), var8 (ref), var15 (ref)
+		if fFlagAccountUpgradeOAuthTelemetryModule then
+			accountUpgradeAnalyticsModule.reportBirthdayConfirmed(flow, surface)
+		end
+		if var51 then
+			var51("BirthdayConfirmed")
 		end
 		var8(p2)
 		var15(false)
-	end, { var53 })
+	end, { flow, surface, var51 })
+	local var56 = if fFlagEnableDesktopSsoSignupDialogModule or fFlagAccountUpgradeOAuthTelemetryModule then reactModule.useCallback(function()
+		-- upvalues: fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref), var51 (ref)
+		if fFlagAccountUpgradeOAuthTelemetryModule then
+			accountUpgradeAnalyticsModule.reportUsernameFocused(flow, surface)
+		end
+		if var51 then
+			var51("UsernameFocused")
+		end
+	end, { flow, surface, var51 }) else nil
 	local var57 = if fFlagEnableDesktopSsoSignupDialogModule then reactModule.useCallback(function()
-		-- upvalues: var53 (ref)
-		if var53 then
-			var53("UsernameFocused")
+		-- upvalues: var51 (ref)
+		if var51 then
+			var51("PasswordFocused")
 		end
-	end, { var53 }) else nil
-	local var58 = if fFlagEnableDesktopSsoSignupDialogModule then reactModule.useCallback(function()
-		-- upvalues: var53 (ref)
-		if var53 then
-			var53("PasswordFocused")
+	end, { var51 }) else nil
+	local var58 = if fFlagEnableDesktopSsoSignupDialogModule or fFlagAccountUpgradeOAuthTelemetryModule then reactModule.useCallback(function(p2)
+		-- upvalues: userGender (copy), var12 (ref), fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref), var51 (ref), var13 (ref)
+		local var59 = if p2 == userGender.Unknown then var12 else p2
+		
+		if fFlagAccountUpgradeOAuthTelemetryModule then
+			accountUpgradeAnalyticsModule.reportGenderActivated(flow, surface, var59)
 		end
-	end, { var53 }) else nil
-	local var59 = if fFlagEnableDesktopSsoSignupDialogModule then reactModule.useCallback(function(p2)
-		-- upvalues: var53 (ref), userGender (copy), var12 (ref), var13 (ref)
-		if var53 then
-			var53(if (if p2 == userGender.Unknown then var12 else p2) == userGender.Male then "GenderMaleActivated" else "GenderFemaleActivated")
+		if var51 then
+			var51(if var59 == userGender.Male then "GenderMaleActivated" else "GenderFemaleActivated")
 		end
 		var13(p2)
-	end, { var12, var53 }) else nil
-	local var60 = reactModule.useCallback(function()
+	end, { flow, surface, var12, var51 }) else nil
+	local var59 = reactModule.useCallback(function()
 		-- upvalues: fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref), var17 (ref)
 		if fFlagAccountUpgradeOAuthTelemetryModule then
 			accountUpgradeAnalyticsModule.reportCloseButtonClicked(flow, surface)
 		end
 		var17(true)
 	end, { flow, surface })
-	local var61 = reactModule.useCallback(function()
+	local var60 = reactModule.useCallback(function()
 		-- upvalues: fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref), var17 (ref)
 		if fFlagAccountUpgradeOAuthTelemetryModule then
 			accountUpgradeAnalyticsModule.reportCloseWarningBack(flow, surface)
@@ -402,7 +429,7 @@ return function(p1)
 		var17(false)
 	end, { flow, surface })
 	local onSignOut = p1.onSignOut
-	local var62 = reactModule.useMemo(function()
+	local var61 = reactModule.useMemo(function()
 		-- upvalues: onSignOut (ref), fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref)
 		return if onSignOut == nil then nil else function()
 			-- upvalues: fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (copy), surface (copy), onSignOut (copy)
@@ -412,13 +439,13 @@ return function(p1)
 			onSignOut()
 		end
 	end, { flow, surface, onSignOut })
-	local var63 = nil
+	local var62 = nil
 	
 	if var1.canDismiss then
-		var63 = if not var1.signsOutOnDismiss then if p1.onSignOut == nil or var18 then nil else var60 else p1.onClose
+		var62 = if not var1.signsOutOnDismiss then if p1.onSignOut == nil or var18 then nil else var59 else p1.onClose
 	end
-	local var64
-	local var65 = computeIsAccountUpgradeButtonEnabledModule({
+	local var63
+	local var64 = computeIsAccountUpgradeButtonEnabledModule({
 		birthday = var7,
 		username = value,
 		password = value_1,
@@ -426,39 +453,44 @@ return function(p1)
 		passwordValid = var10,
 		email = value_2,
 		emailValid = var35,
-		isBirthdayOldEnough = not var38,
 		isSubmitting = var18,
 		requiredFields = var1.requiredFields
 	})
-	local var66 = reactModule.useCallback(function()
-		-- upvalues: var53 (ref), var20 (ref), var21 (ref)
-		if var53 then
-			var53(if var20 then "PasswordShown" else "PasswordHidden")
+	local var65 = reactModule.useCallback(function()
+		-- upvalues: var51 (ref), var20 (ref), var21 (ref)
+		if var51 then
+			var51(if var20 then "PasswordShown" else "PasswordHidden")
 		end
 		var21(function(p2)
 			return not p2
 		end)
-	end, { var20, var53 })
-	local var67 = reactModule.useCallback(function(p2)
-		-- upvalues: var30 (ref), var23 (ref), authButtonClick (copy), eventStreamConstants (copy)
+	end, { var20, var51 })
+	local var66 = reactModule.useCallback(function(p2)
+		-- upvalues: var30 (ref), var23 (ref), fFlagAccountUpgradeOAuthTelemetryModule (copy), flow (ref), accountUpgradeFlowModule (copy), accountUpgradeAnalyticsModule (copy), surface (ref), authButtonClick (copy), eventStreamConstants (copy)
 		var30.onChanged(p2)
 		var23({})
+		
+		if fFlagAccountUpgradeOAuthTelemetryModule and flow == accountUpgradeFlowModule.OAuth then
+			accountUpgradeAnalyticsModule.reportUsernameSuggestionSelected(flow, surface, p2)
+			
+			return
+		end
 		authButtonClick(eventStreamConstants.Context.SinglePageSignUpScreen, eventStreamConstants.Button.UsernameSuggestion, p2)
-	end, { var30.onChanged })
-	local var68 = reactModule.useCallback(function()
+	end, { flow, surface, var30.onChanged })
+	local var67 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref)
 		var25(true)
 	end, {})
-	local var69 = reactModule.useCallback(function()
+	local var68 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref)
 		var25(false)
 	end, {})
-	local var70 = if useState == inputValidity.Invalid and #var22 > 0 then var22 else {}
-	local var71 = reactModule.useCallback(function()
-		-- upvalues: var18 (ref), var5 (ref), authButtonClick (copy), eventStreamConstants (copy), var2 (ref), var19 (ref), var27 (ref), value (ref), value_1 (ref), var7 (ref), value_2 (ref), var12 (ref), var4 (ref), promiseModule (copy), accountUpgradeRequest (copy), var3 (ref), var1 (ref), fFlagAccountUpgradeOAuthTelemetryModule (copy), accountUpgradeAnalyticsModule (copy), flow (ref), surface (ref), p1 (ref), var6 (ref), getAccountUpgradeErrorCodeModule (copy), authClientError (copy), var28 (ref)
+	local var69 = if useState == inputValidity.Invalid and #var22 > 0 then var22 else {}
+	local var70 = reactModule.useCallback(function()
+		-- upvalues: var18 (ref), var5 (ref), authButtonClick (copy), eventStreamConstants (copy), fFlagAccountUpgradeOAuthTelemetryModule (copy), flow (ref), var2 (ref), var19 (ref), var27 (ref), value (ref), value_1 (ref), var7 (ref), value_2 (ref), var12 (ref), var4 (ref), promiseModule (copy), accountUpgradeRequest (copy), var3 (ref), var1 (ref), accountUpgradeAnalyticsModule (copy), surface (ref), p1 (ref), var6 (ref), getAccountUpgradeErrorCodeModule (copy), authClientError (copy), var28 (ref)
 		if var18 then return end
 		if not var5 then
-			authButtonClick(eventStreamConstants.Context.AccountUpgrade, eventStreamConstants.Button.Save, nil, nil, nil, var2)
+			authButtonClick(eventStreamConstants.Context.AccountUpgrade, eventStreamConstants.Button.Save, if fFlagAccountUpgradeOAuthTelemetryModule then flow else nil, nil, nil, var2)
 		end
 		var19(true)
 		var27(nil)
@@ -472,9 +504,9 @@ return function(p1)
 		};
 		(if var4 then promiseModule.try(function()
 			-- upvalues: var4 (copy), t (ref), promiseModule (copy)
-			local var72 = var4(t)
+			local var71 = var4(t)
 			
-			return if promiseModule.is(var72) then var72 else promiseModule.reject({})
+			return if promiseModule.is(var71) then var71 else promiseModule.reject({})
 		end) else accountUpgradeRequest(var3, {
 			upgradeType = var1.upgradeType,
 			username = t.username,
@@ -494,10 +526,10 @@ return function(p1)
 			})
 		end, function(p2)
 			-- upvalues: var4 (copy), getAccountUpgradeErrorCodeModule (copy), var19 (copy), var27 (copy), p1 (copy), var5 (copy), authClientError (copy), eventStreamConstants (copy), var2 (copy), fFlagAccountUpgradeOAuthTelemetryModule (copy), var28 (copy), accountUpgradeAnalyticsModule (copy), flow (copy), surface (copy)
-			local var72 = if var4 == nil then { errorCode = getAccountUpgradeErrorCodeModule(p2) } elseif type(p2) == "table" then p2 else {}
-			local errorCode = var72.errorCode
+			local var71 = if var4 == nil then { errorCode = getAccountUpgradeErrorCodeModule(p2) } elseif type(p2) == "table" then p2 else {}
+			local errorCode = var71.errorCode
 			var19(false)
-			var27(var72)
+			var27(var71)
 			
 			if p1.onSignUpFailed then
 				p1.onSignUpFailed(errorCode)
@@ -516,78 +548,80 @@ return function(p1)
 		p1.onSignUpComplete, p1.onSignUpFailed, var4, var5, var1, surface, value
 	})
 	local t_2 = {
-		titleText = var44.titleText,
-		subtitleText = var44.subtitleText,
-		birthdayLabel = var44.birthdayLabel,
+		titleText = var42.titleText,
+		subtitleText = var42.subtitleText,
+		birthdayLabel = var42.birthdayLabel,
 		birthday = var7,
-		birthdayText = var47,
-		birthdayPlaceholder = var44.birthdayPlaceholder,
-		birthdayError = var44.birthdayError,
+		birthdayText = var45,
+		birthdayPlaceholder = var42.birthdayPlaceholder,
 		usernameTitleTextKey = "Authentication.Login.Label.Username"
 	}
 	local blockingField = username.blockingField
 	t_2.usernameSummaryErrorTextKey = if blockingField == nil then "Authentication.SignUp.Label.ErrorsWithUsername" else assert(t_1[blockingField], `Account upgrade field has no blocker error key: {blockingField}`)
 	t_2.isUsernamePrerequisiteMet = username.isUnlocked
-	t_2.fieldStates = var48
-	t_2.usernameValidatorAdditionalProps = var49
-	t_2.usernamePlaceholder = var44.usernamePlaceholder
+	t_2.fieldStates = var46
+	t_2.usernameValidatorAdditionalProps = var47
+	t_2.usernamePlaceholder = var42.usernamePlaceholder
 	t_2.username = value
 	t_2.prefilledUsername = var31.current
-	t_2.usernameSuggestions = var70
-	t_2.usernameSuggestionPrompt = `{var44.usernameSuggestionPrompt}:`
-	t_2.onUsernameSuggestionSelected = var67
+	t_2.usernameSuggestions = var69
+	t_2.usernameSuggestionPrompt = `{var42.usernameSuggestionPrompt}:`
+	t_2.usernameSuggestionEventContext = if fFlagAccountUpgradeOAuthTelemetryModule and flow == accountUpgradeFlowModule.OAuth then eventStreamConstants.Context.AccountUpgrade else nil
+	t_2.onUsernameSuggestionSelected = var66
 	t_2.pillClicked = var24
-	t_2.updatePillClicked = var68
-	t_2.resetPillClicked = var69
-	t_2.onUsernameValidated = var51
+	t_2.updatePillClicked = var67
+	t_2.resetPillClicked = var68
+	t_2.onUsernameValidated = var49
 	t_2.passwordTitleTextKey = "CommonUI.Messages.Label.Password"
 	
 	if password then
 		local blockingField_1 = password.blockingField
-		var64 = if blockingField_1 == nil then "Authentication.SignUp.Label.ErrorsWithPassword" else assert(t_1[blockingField_1], `Account upgrade field has no blocker error key: {blockingField_1}`)
+		var63 = if blockingField_1 == nil then "Authentication.SignUp.Label.ErrorsWithPassword" else assert(t_1[blockingField_1], `Account upgrade field has no blocker error key: {blockingField_1}`)
 	else
-		var64 = "Authentication.SignUp.Label.ErrorsWithPassword"
+		var63 = "Authentication.SignUp.Label.ErrorsWithPassword"
 	end
-	t_2.passwordSummaryErrorTextKey = var64
+	t_2.passwordSummaryErrorTextKey = var63
 	t_2.isPasswordPrerequisiteMet = if password then password.isUnlocked else false
-	t_2.passwordValidatorAdditionalProps = var50
-	t_2.passwordPlaceholder = var44.passwordPlaceholder
-	t_2.onPasswordValidated = var52
+	t_2.passwordValidatorAdditionalProps = var48
+	t_2.passwordPlaceholder = var42.passwordPlaceholder
+	t_2.onPasswordValidated = var50
 	t_2.hidePassword = var20
-	t_2.emailLabel = var44.emailLabel
-	t_2.emailPlaceholder = var44.emailPlaceholder
+	t_2.emailLabel = var42.emailLabel
+	t_2.emailPlaceholder = var42.emailPlaceholder
 	t_2.email = value_2
-	t_2.emailError = var44.emailError
-	t_2.genderLabel = var44.genderLabel
-	t_2.femaleText = var44.femaleText
-	t_2.maleText = var44.maleText
+	t_2.emailError = var42.emailError
+	t_2.genderLabel = var42.genderLabel
+	t_2.femaleText = var42.femaleText
+	t_2.maleText = var42.maleText
 	t_2.gender = var12
-	t_2.saveText = var44.saveText
-	t_2.isSaveEnabled = var65
+	t_2.saveText = var42.saveText
+	t_2.isSaveEnabled = var64
 	t_2.isSubmitting = var18
-	t_2.submitError = var44.submitError
-	t_2.legalText = var45 or var44.legalText
-	t_2.onLegalLinkActivated = var41
+	t_2.submitError = var42.submitError
+	t_2.legalText = var43 or var42.legalText
+	t_2.onLegalLinkActivated = var39
 	t_2.boldFieldLabels = fFlagEnableDesktopSsoSignupDialogModule and var1.boldFieldLabels == true
-	t_2.auditContent = var46
+	t_2.fitsDialogToContent = fFlagAccountUpgradeOAuthDialogFitsContentModule and var1.fitsDialogToContent == true
+	t_2.auditContent = var44
 	t_2.isBirthdayPickerOpen = var14
 	t_2.hasBackdrop = p1.hasBackdrop
-	t_2.onClose = var63
-	t_2.confirmsClose = var63 ~= nil and var1.signsOutOnDismiss
+	t_2.onClose = var62
+	t_2.confirmsClose = var62 ~= nil and var1.signsOutOnDismiss
 	t_2.isCloseConfirmationOpen = var16
-	t_2.onCloseConfirmationBack = var61
-	t_2.onSignOut = var62
-	t_2.onBirthdayActivated = var54
-	t_2.onBirthdayConfirmed = var56
-	t_2.onBirthdayPickerClosed = var55
+	t_2.onCloseConfirmationBack = var60
+	t_2.onSignOut = var61
+	t_2.onBirthdayActivated = var52
+	t_2.onBirthdayConfirmed = var55
+	t_2.onBirthdayPickerClosed = var53
+	t_2.onBirthdayPickerAllPicked = var54
 	t_2.onUsernameChanged = var30.onChanged
 	t_2.onPasswordChanged = var32.onChanged
 	t_2.onEmailChanged = var33.onChanged
-	t_2.onGenderChanged = var59 or var13
-	t_2.onUsernameFocused = var57
-	t_2.onPasswordFocused = var58
-	t_2.onPasswordVisibilityToggle = var66
-	t_2.onSaveActivated = var71
+	t_2.onGenderChanged = var58 or var13
+	t_2.onUsernameFocused = var56
+	t_2.onPasswordFocused = var57
+	t_2.onPasswordVisibilityToggle = var65
+	t_2.onSaveActivated = var70
 	
 	return t_2
 end

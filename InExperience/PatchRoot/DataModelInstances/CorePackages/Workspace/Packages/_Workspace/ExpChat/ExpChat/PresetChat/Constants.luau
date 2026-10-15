@@ -9,6 +9,7 @@
 			PresetKeyboardIcon = "preset_keyboard_icon",
 			PresetEntryPointButton = "preset_entry_point_button",
 			AutocompleteDropdown = "autocomplete_dropdown",
+			EmojiDropdown = "emoji_dropdown",
 			MainInputBar = "exp_chat_main_input_bar",
 			PresetAutocomplete = "preset_autocomplete"
 		},

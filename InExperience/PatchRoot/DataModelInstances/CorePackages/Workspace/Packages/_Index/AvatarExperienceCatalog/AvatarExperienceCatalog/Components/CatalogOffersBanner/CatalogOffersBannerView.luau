@@ -11,11 +11,12 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagAXUpdateOffersEndsUIWithBadge = avatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
+local fFlagAXRemoveOfferBannerIcon = avatarExperienceFlagsModule.FFlagAXRemoveOfferBannerIcon
 
 return function(p1)
-	-- upvalues: fFlagAXUpdateOffersEndsUIWithBadge (ref), useTokens (ref), reactModule (ref), foundationModule (ref), getFoundationIconNameModule (ref), iconVariant (ref), iconSize (ref), offerExpiryBadge (ref), iconName (ref), buttonVariant (ref), inputSize (ref)
-	local var1
-	local var2 = if fFlagAXUpdateOffersEndsUIWithBadge then useTokens() else nil
+	-- upvalues: fFlagAXUpdateOffersEndsUIWithBadge (ref), useTokens (ref), reactModule (ref), foundationModule (ref), fFlagAXRemoveOfferBannerIcon (ref), getFoundationIconNameModule (ref), iconVariant (ref), iconSize (ref), offerExpiryBadge (ref), iconName (ref), buttonVariant (ref), inputSize (ref)
+	local createElement_2
+	local var1 = if fFlagAXUpdateOffersEndsUIWithBadge then useTokens() else nil
 	local createElement = reactModule.createElement
 	local view = foundationModule.View
 	local t = {
@@ -35,8 +36,8 @@ return function(p1)
 	local t_3 = {}
 	
 	if p1.offerModalTapAreaEnabled and p1.onOfferBannerActivated then
-		var1 = reactModule.createElement
-		var1 = var1(foundationModule.View, {
+		createElement_2 = reactModule.createElement
+		createElement_2 = createElement_2(foundationModule.View, {
 			tag = "grow auto-y",
 			LayoutOrder = 1,
 			testId = "CatalogOffersBannerDirectApiTapArea"
@@ -50,12 +51,12 @@ return function(p1)
 				[reactModule.Event.Activated] = p1.onOfferBannerActivated
 			}, {
 				TapInner = reactModule.createElement(foundationModule.View, { tag = "row items-center gap-medium size-full-0 auto-y" }, {
-					Icon = reactModule.createElement(foundationModule.Icon, {
+					Icon = if fFlagAXRemoveOfferBannerIcon and not getFoundationIconNameModule(p1.iconName) then nil else reactModule.createElement(foundationModule.Icon, {
 						LayoutOrder = 1,
 						name = getFoundationIconNameModule(p1.iconName),
 						variant = iconVariant.Filled,
 						size = iconSize.Large,
-						style = if fFlagAXUpdateOffersEndsUIWithBadge then var2.Color.System.Contrast else p1.iconEmphasisStyle,
+						style = if fFlagAXUpdateOffersEndsUIWithBadge then var1.Color.System.Contrast else p1.iconEmphasisStyle,
 						AnchorPoint = Vector2.new(0.5, 0.5)
 					}),
 					Title = reactModule.createElement(foundationModule.Text, {
@@ -73,16 +74,17 @@ return function(p1)
 			})
 		})
 	else
-		var1 = reactModule.createElement(foundationModule.View, {
+		createElement_2 = reactModule.createElement
+		createElement_2 = createElement_2(foundationModule.View, {
 			tag = "row items-center grow gap-medium auto-y",
 			LayoutOrder = 1
 		}, {
-			Icon = reactModule.createElement(foundationModule.Icon, {
+			Icon = if fFlagAXRemoveOfferBannerIcon and not getFoundationIconNameModule(p1.iconName) then nil else reactModule.createElement(foundationModule.Icon, {
 				LayoutOrder = 1,
 				name = getFoundationIconNameModule(p1.iconName),
 				variant = iconVariant.Regular,
 				size = iconSize.Large,
-				style = if fFlagAXUpdateOffersEndsUIWithBadge then var2.Color.System.Contrast else p1.iconEmphasisStyle,
+				style = if fFlagAXUpdateOffersEndsUIWithBadge then var1.Color.System.Contrast else p1.iconEmphasisStyle,
 				AnchorPoint = Vector2.new(0.5, 0.5)
 			}),
 			Title = reactModule.createElement(foundationModule.Text, {
@@ -94,7 +96,7 @@ return function(p1)
 			})
 		})
 	end
-	t_3.Leading = var1
+	t_3.Leading = createElement_2
 	t_3.Close = reactModule.createElement(foundationModule.View, {
 		tag = "row items-center auto-xy",
 		LayoutOrder = 2,

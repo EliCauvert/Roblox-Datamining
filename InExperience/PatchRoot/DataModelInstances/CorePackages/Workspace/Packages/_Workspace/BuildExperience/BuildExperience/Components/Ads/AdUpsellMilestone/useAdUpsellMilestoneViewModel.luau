@@ -3,44 +3,40 @@ local reactModule = require(buildExperience.Parent.React)
 local adUpsellVisibilityUtilsModule = require(script.Parent.adUpsellVisibilityUtils)
 local _ = require(script.Parent.AdUpsellMilestoneView)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local fFlagBuildAdUpsellPinnedModule = require(buildExperience.Flags.FFlagBuildAdUpsellPinned)
 
 return function(p1)
-	-- upvalues: reactModule (ref), adUpsellVisibilityUtilsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
+	-- upvalues: reactModule (ref), fFlagBuildAdUpsellPinnedModule (ref), adUpsellVisibilityUtilsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(nil)
 	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), var1 (ref), adUpsellVisibilityUtilsModule (copy)
+		-- upvalues: p1 (ref), var2 (ref), var1 (ref), fFlagBuildAdUpsellPinnedModule (copy), adUpsellVisibilityUtilsModule (copy)
 		if p1.isImpressed then
 			var2.current = p1.anchorId
 			
 			return
 		elseif var2.current == p1.anchorId then return end
-		local current = p1.scrollingFrameRef.current
-		local current_1 = var1.current
+		local current = var1.current
 		
-		if current == nil or current_1 == nil then
-			return
-		end
-		local t = {}
-		local var3 = false
-		
-		local function disconnectListeners()
-			-- upvalues: var3 (write), t (write)
-			if var3 then return end
-			var3 = true
-			
-			for i, v in t do
-				v:Disconnect()
+		if fFlagBuildAdUpsellPinnedModule then
+			if current == nil or not p1.isPageVisible then
+				return
 			end
-			table.clear(t)
-		end
-		
-		local function reportIfVisible()
-			-- upvalues: var2 (copy), p1 (copy), current_1 (ref), current (ref), adUpsellVisibilityUtilsModule (copy), var3 (write), t (write)
-			if var2.current ~= p1.anchorId and p1.isPageVisible and (current_1:IsDescendantOf(current) and adUpsellVisibilityUtilsModule.isCardVisibleInScrollViewport(current, current_1)) then
-				var2.current = p1.anchorId
-				p1.onImpression(p1.anchorId)
-				
+			var2.current = p1.anchorId
+			p1.onImpression(p1.anchorId)
+			
+			return
+		else
+			local current_1 = p1.scrollingFrameRef and p1.scrollingFrameRef.current
+			
+			if current_1 == nil or current == nil then
+				return
+			end
+			local t = {}
+			local var3 = false
+			
+			local function disconnectListeners()
+				-- upvalues: var3 (write), t (write)
 				if var3 then return end
 				var3 = true
 				
@@ -49,18 +45,34 @@ return function(p1)
 				end
 				table.clear(t)
 			end
+			
+			local function reportIfVisible()
+				-- upvalues: var2 (copy), p1 (copy), current (ref), current_1 (ref), adUpsellVisibilityUtilsModule (copy), var3 (write), t (write)
+				if var2.current ~= p1.anchorId and p1.isPageVisible and (current:IsDescendantOf(current_1) and adUpsellVisibilityUtilsModule.isCardVisibleInScrollViewport(current_1, current)) then
+					var2.current = p1.anchorId
+					p1.onImpression(p1.anchorId)
+					
+					if var3 then return end
+					var3 = true
+					
+					for i, v in t do
+						v:Disconnect()
+					end
+					table.clear(t)
+				end
+			end
+			
+			t = {
+				current_1:GetPropertyChangedSignal("CanvasPosition"):Connect(reportIfVisible),
+				current_1:GetPropertyChangedSignal("AbsolutePosition"):Connect(reportIfVisible),
+				current_1:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(reportIfVisible),
+				current:GetPropertyChangedSignal("AbsolutePosition"):Connect(reportIfVisible),
+				current:GetPropertyChangedSignal("AbsoluteSize"):Connect(reportIfVisible)
+			}
+			reportIfVisible()
+			
+			return disconnectListeners
 		end
-		
-		t = {
-			current:GetPropertyChangedSignal("CanvasPosition"):Connect(reportIfVisible),
-			current:GetPropertyChangedSignal("AbsolutePosition"):Connect(reportIfVisible),
-			current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(reportIfVisible),
-			current_1:GetPropertyChangedSignal("AbsolutePosition"):Connect(reportIfVisible),
-			current_1:GetPropertyChangedSignal("AbsoluteSize"):Connect(reportIfVisible)
-		}
-		reportIfVisible()
-		
-		return disconnectListeners
 	end, {
 		p1.anchorId,
 		p1.isImpressed,

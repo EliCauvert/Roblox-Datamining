@@ -1,10 +1,22 @@
 ﻿local coreGuiService = game:GetService("CoreGui")
-local fIntAXGuiObjectIsObscuredPaddingModule = require(script:FindFirstAncestor("BulkPurchaseApp").Flags.FIntAXGuiObjectIsObscuredPadding)
+local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local fIntAXGuiObjectIsObscuredPaddingModule = require(bulkPurchaseApp.Flags.FIntAXGuiObjectIsObscuredPadding)
+local fFlagFixBulkPurchaseTopBarObfuscation = require(bulkPurchaseApp.Parent.SharedFlags).FFlagFixBulkPurchaseTopBarObfuscation
+
+local function _(p1)
+	-- upvalues: fFlagFixBulkPurchaseTopBarObfuscation (ref)
+	return fFlagFixBulkPurchaseTopBarObfuscation and (p1:IsA("ImageLabel") and p1.ImageTransparency == 1)
+end
+
+local _ = function(p1)
+	-- upvalues: fFlagFixBulkPurchaseTopBarObfuscation (ref)
+	return fFlagFixBulkPurchaseTopBarObfuscation and (p1.BackgroundTransparency == 0 and (p1:HasTag("gui-object-defaults") and not p1:HasTag("x-default-transparency")))
+end
 
 local function getGuiObjectIsObscuredAtPosition(p1, p2, p3)
-	-- upvalues: coreGuiService (ref)
+	-- upvalues: coreGuiService (ref), fFlagFixBulkPurchaseTopBarObfuscation (ref)
 	for i, v in coreGuiService:GetGuiObjectsAtPosition(p2, p3) do
-		if (not v:IsA("Frame") or v.Active ~= false or v.BackgroundTransparency ~= 1) and not v:IsDescendantOf(p1) then
+		if (not v:IsA("Frame") and (not fFlagFixBulkPurchaseTopBarObfuscation or (not v:IsA("ImageLabel") or v.ImageTransparency ~= 1)) or v.Active ~= false or v.BackgroundTransparency ~= 1 and (not fFlagFixBulkPurchaseTopBarObfuscation or not (v.BackgroundTransparency == 0 and (v:HasTag("gui-object-defaults") and not v:HasTag("x-default-transparency"))))) and not v:IsDescendantOf(p1) then
 			return v ~= p1
 		end
 	end

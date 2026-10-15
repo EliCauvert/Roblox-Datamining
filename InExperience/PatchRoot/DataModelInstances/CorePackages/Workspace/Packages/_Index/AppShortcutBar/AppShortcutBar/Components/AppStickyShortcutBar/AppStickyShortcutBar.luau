@@ -15,6 +15,7 @@ local disallowStickyShortcutBarOnNotLoggedIn = game:DefineFastFlag("DisallowStic
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagUseSignalsForAuthenticationStatus = sharedFlagsModule.FFlagUseSignalsForAuthenticationStatus
 local fFlagEnableStickyShortcutBarOnAllPlatforms = sharedFlagsModule.FFlagEnableStickyShortcutBarOnAllPlatforms
+local fFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled = require(appShortcutBar.Flags).FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled
 local var1 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 
 local function selectUserLoggedIn(p1)
@@ -26,9 +27,10 @@ local useAppShortcutBarHeight = require(appShortcutBar.Hooks).useAppShortcutBarH
 local useIsStickyShortcutBarEnabled = require(appShortcutBar.Hooks).useIsStickyShortcutBarEnabled
 local getShortcutBarStatusStoreModule = require(appShortcutBar.Stores.GetShortcutBarStatusStore)
 local appShortcut = require(appShortcutBar.Components.AppShortcut).AppShortcut
+local useStickyShortcutBarExposureLoggingModule = require(appShortcutBar.Hooks.useStickyShortcutBarExposureLogging)
 
 function AppStickyShortcutBar(p1)
-	-- upvalues: getShortcutBarStatusStoreModule (ref), useTokens (ref), useAppShortcutBarHeight (ref), responsiveModule (ref), useFocusedTextBox (ref), fFlagEnableStickyShortcutBarOnAllPlatforms (ref), useIsStickyShortcutBarEnabled (ref), useSignalState (ref), displayModule (ref), disallowStickyShortcutBarOnNotLoggedIn (ref), fFlagUseSignalsForAuthenticationStatus (ref), var1 (ref), loginStatus (ref), useSelector (ref), selectUserLoggedIn (ref), focusNavigationEventNameEnum (ref), reactModule (ref), appShortcut (ref)
+	-- upvalues: getShortcutBarStatusStoreModule (ref), useTokens (ref), useAppShortcutBarHeight (ref), responsiveModule (ref), useFocusedTextBox (ref), fFlagEnableStickyShortcutBarOnAllPlatforms (ref), useIsStickyShortcutBarEnabled (ref), useSignalState (ref), displayModule (ref), disallowStickyShortcutBarOnNotLoggedIn (ref), fFlagUseSignalsForAuthenticationStatus (ref), var1 (ref), loginStatus (ref), useSelector (ref), selectUserLoggedIn (ref), focusNavigationEventNameEnum (ref), reactModule (ref), fFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled (ref), useStickyShortcutBarExposureLoggingModule (ref), appShortcut (ref)
 	local var2 = getShortcutBarStatusStoreModule(false)
 	local var3 = useTokens()
 	local var4 = useAppShortcutBarHeight()
@@ -78,6 +80,9 @@ function AppStickyShortcutBar(p1)
 		var2.setShortcutBarVisible(not var10)
 	end, { var10 })
 	
+	if fFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled then
+		useStickyShortcutBarExposureLoggingModule(not var10)
+	end
 	if fFlagEnableStickyShortcutBarOnAllPlatforms then
 		local maxValue = math.max(var4 - var8.bottom, 0)
 		reactModule.useEffect(function()

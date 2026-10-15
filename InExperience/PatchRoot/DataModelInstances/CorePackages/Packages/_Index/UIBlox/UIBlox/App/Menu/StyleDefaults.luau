@@ -5,11 +5,11 @@ return {
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
-			elementHeight = p1.Tokens.Component.MenuCell.Base.Container.Height,
-			borderCornerRadius = p1.Tokens.Component.BaseMenu.BorderRadius,
+			elementHeight = p1.Tokens.Size.Size_1400,
+			borderCornerRadius = p1.Tokens.Radius.Medium,
 			background = {
-				Color = p1.Tokens.Component.BaseMenu.BackgroundColor.Color3,
-				Transparency = p1.Tokens.Component.BaseMenu.BackgroundColor.Transparency
+				Color = p1.Tokens.Color.Surface.Surface_300.Color3,
+				Transparency = p1.Tokens.Color.Surface.Surface_300.Transparency
 			}
 		}
 	end,
@@ -17,20 +17,20 @@ return {
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
-			iconSize = p1.Tokens.Component.MenuCell.Base.IconFrame.Size,
-			selectedIconSize = p1.Tokens.Component.MenuCell.Base.CheckFrame.Size,
-			iconPaddingLeft = p1.Tokens.Component.MenuCell.Base.Container.Spacing.Leading,
+			iconSize = p1.Tokens.Size.Size_800,
+			selectedIconSize = p1.Tokens.Size.Size_800,
+			iconPaddingLeft = p1.Tokens.Size.Size_300,
 			textPadding = {
-				left = p1.Tokens.Component.MenuCell.Base.TextFrame.Spacing.Leading,
-				right = p1.Tokens.Component.MenuCell.Base.TextFrame.Spacing.Trailing
+				left = p1.Tokens.Size.Size_300,
+				right = p1.Tokens.Size.Size_300
 			},
 			fontStyle = {
-				Font = p1.Tokens.Component.MenuCell.Base.Text.Typography.Font,
-				RelativeSize = p1.Tokens.Component.MenuCell.Base.Text.Typography.FontSize / p1.Font.BaseSize,
-				RelativeMinSize = p1.Tokens.Component.MenuCell.Base.Text.Typography.FontSize / p1.Font.BaseSize
+				Font = p1.Tokens.Typography.TitleLarge.Font,
+				RelativeSize = p1.Tokens.Typography.TitleLarge.FontSize / p1.Font.BaseSize,
+				RelativeMinSize = p1.Tokens.Typography.TitleLarge.FontSize / p1.Font.BaseSize
 			},
-			dividerSize = p1.Tokens.Component.MenuCell.Divider.Container.BorderWidth,
-			selectedIconPaddingRight = p1.Tokens.Component.MenuCell.Base.Container.Spacing.Trailing
+			dividerSize = p1.Tokens.Stroke.Standard,
+			selectedIconPaddingRight = p1.Tokens.Size.Size_300
 		}
 	end,
 	getDropdownMenuCellDefaultTokens = function(p1)

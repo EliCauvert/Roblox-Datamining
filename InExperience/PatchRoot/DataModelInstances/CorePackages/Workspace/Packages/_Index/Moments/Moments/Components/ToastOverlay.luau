@@ -4,16 +4,18 @@ local foundationModule = require(parent.Foundation)
 local momentsCommonModule = require(parent.MomentsCommon)
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
+local snackbar = foundationModule.Snackbar
 local toast = foundationModule.Toast
 local view = foundationModule.View
 local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local useScreenSize = momentsCommonModule.Hooks.useScreenSize
 local useTokens = foundationModule.Hooks.useTokens
 local getToastStoreModule = require(moments.Stores.GetToastStore)
+local _ = require(moments.Stores.GetToastStore.createToastStore)
 local constantsModule = require(moments.Constants)
 
 local function ToastItem(p1)
-	-- upvalues: reactModule (ref), toast (ref)
+	-- upvalues: reactModule (ref), snackbar (ref), toast (ref)
 	local entry = p1.entry
 	local onDismiss = p1.onDismiss
 	reactModule.useEffect(function()
@@ -29,7 +31,7 @@ local function ToastItem(p1)
 		end
 	end, { entry.id, onDismiss })
 	
-	return reactModule.createElement(toast, {
+	return if entry.data.variant == "snackbar" then reactModule.createElement(snackbar, { title = entry.data.title, LayoutOrder = entry.id }) else reactModule.createElement(toast, {
 		title = entry.data.title,
 		text = if entry.data.text ~= "" then nil else entry.data.text,
 		LayoutOrder = entry.id,

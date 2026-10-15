@@ -57,7 +57,6 @@ local fFlagFriendsPageUserListCtaEnabledModule = require(friendsLanding.Flags.FF
 local var2 = if fFlagFriendsPageUserListCtaEnabledModule then require(friendsLanding.Common.FriendsLandingCtaConfig) else nil
 local fFlagConnectionManagementChips = require(parent.SharedFlags).FFlagConnectionManagementChips
 local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
-local fFlagFixCohubUiBugs = require(parent.SharedFlags).FFlagFixCohubUiBugs
 local fFlagFriendsPageAlwaysOpenPPV = require(parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
 local fFlagFriendsPageUserListEnabled = require(parent.SharedFlags).FFlagFriendsPageUserListEnabled
 local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
@@ -67,7 +66,7 @@ local fixFriendsLandingRightMargin = game:DefineFastFlag("FixFriendsLandingRight
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
 return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), friendsLandingContextModule (ref), friendsLandingAnalyticsModule (ref), useNavigation (ref), useDesignTokens (ref), useUiModeInfo (ref), fFlagFixScalingOnFriendsLandingModule (ref), useTokens (ref), useFocusGuiObject (ref), fFlagFixCohubUiBugs (ref), getPageMargin (ref), useScreenSize (ref), uiMode (ref), fFlagEnableFriendsLandingFilterChipsOnConsoleModule (ref), focusNavigationUtilsModule (ref), inputHandlersModule (ref), appPage (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), useTextSizeOffset (ref), fFlagConnectionManagementChips (ref), ampApiProvider (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), accessResponseEnum (ref), fFlagFriendsPageAlwaysOpenPPV (ref), convertUserPresenceTypeToString (ref), enumScreensModule (ref), buttonClickEventsModule (ref), constantsModule (ref), friendTileModule (ref), dependencyArray (ref), var1 (ref), filterStatesModule (ref), fFlagCreateConnectionsHub (ref), gridMetrics (ref), useAnimatedScrollToSelection (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), isFromConnectionsHubModule (ref), fFlagLuaAppsDefaultSelection (ref), useFocusOnMount (ref), fFlagFriendsPageUserListEnabled (ref), roactModule (ref), horizontalPageMargin (ref), fixFriendsLandingRightMargin (ref), refreshScrollingFrame (ref), filterByButtonModule (ref), emptyResultsViewModule (ref), noFriendsViewModule (ref), userListLayoutAdaptor (ref), layoutMode (ref), fFlagFriendsPageUserListCtaEnabledModule (ref), var2 (write), collectionGrid (ref), button (ref), buttonType (ref)
+	-- upvalues: useLocalization (ref), reactModule (ref), friendsLandingContextModule (ref), friendsLandingAnalyticsModule (ref), useNavigation (ref), useDesignTokens (ref), useUiModeInfo (ref), fFlagFixScalingOnFriendsLandingModule (ref), useTokens (ref), useFocusGuiObject (ref), getPageMargin (ref), useScreenSize (ref), uiMode (ref), fFlagEnableFriendsLandingFilterChipsOnConsoleModule (ref), focusNavigationUtilsModule (ref), inputHandlersModule (ref), appPage (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), useTextSizeOffset (ref), fFlagConnectionManagementChips (ref), ampApiProvider (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), accessResponseEnum (ref), fFlagFriendsPageAlwaysOpenPPV (ref), convertUserPresenceTypeToString (ref), enumScreensModule (ref), buttonClickEventsModule (ref), constantsModule (ref), friendTileModule (ref), dependencyArray (ref), var1 (ref), filterStatesModule (ref), fFlagCreateConnectionsHub (ref), gridMetrics (ref), useAnimatedScrollToSelection (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), isFromConnectionsHubModule (ref), fFlagLuaAppsDefaultSelection (ref), useFocusOnMount (ref), fFlagFriendsPageUserListEnabled (ref), roactModule (ref), horizontalPageMargin (ref), fixFriendsLandingRightMargin (ref), refreshScrollingFrame (ref), filterByButtonModule (ref), emptyResultsViewModule (ref), noFriendsViewModule (ref), userListLayoutAdaptor (ref), layoutMode (ref), fFlagFriendsPageUserListCtaEnabledModule (ref), var2 (write), collectionGrid (ref), button (ref), buttonType (ref)
 	local var3 = useLocalization({
 		pageError = "CommonUI.Messages.Response.PageError",
 		successText = "Feature.Friends.Action.FriendRemoved",
@@ -82,7 +81,7 @@ return function(p1)
 	local var8 = useUiModeInfo()
 	local var9 = if fFlagFixScalingOnFriendsLandingModule then useTokens() else nil
 	local var10 = useFocusGuiObject()
-	local var11 = if fFlagFixCohubUiBugs then getPageMargin(useScreenSize().X) else nil
+	local var11 = getPageMargin(useScreenSize().X)
 	local var12 = var8.uiMode == uiMode.TenFoot
 	local var13 = var12 and not fFlagEnableFriendsLandingFilterChipsOnConsoleModule
 	local isCursor = focusNavigationUtilsModule.useLastInputMode() == "Cursor"
@@ -262,10 +261,10 @@ return function(p1)
 		BackgroundTransparency = if var47 then 1 else var7.LuaApps.App.Page.BackgroundTransparency
 	}, {
 		HorizontalPageMargin = reactModule.createElement(horizontalPageMargin, { backgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-			Padding = if fFlagFixCohubUiBugs then reactModule.createElement("UIPadding", {
+			Padding = reactModule.createElement("UIPadding", {
 				PaddingLeft = UDim.new(0, var11),
 				PaddingRight = if fixFriendsLandingRightMargin then UDim.new(0, var11) else nil
-			}) else nil,
+			}),
 			scrollView = reactModule.createElement(refreshScrollingFrame, {
 				scrollingElementProps = {
 					Size = UDim2.new(1, 0, 1, -constantsModule.TOP_BAR_HEIGHT + (if fFlagExtendScrollingFramesBySafeInsets then var46.bottom else 0)),

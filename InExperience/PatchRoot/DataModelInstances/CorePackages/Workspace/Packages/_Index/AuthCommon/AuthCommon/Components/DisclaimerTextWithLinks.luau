@@ -23,7 +23,7 @@ return function(p1)
 		text = cloned,
 		template = if var1 then p1.textKey else nil
 	})
-	local var3 = useOpenDisclaimerLinksModule()
+	local var3 = useOpenDisclaimerLinksModule({ ctx = p1.ctx, state = p1.state, origin = p1.origin })
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Text = reactModule.createElement(legalTextWithLinksModule, {

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("MomentsCommentsCloseOnFeedJump", false) and require(script:FindFirstAncestor("Moments").Parent.SharedFlags).FFlagMomentsComments

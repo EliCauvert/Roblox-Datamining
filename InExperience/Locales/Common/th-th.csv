@@ -113,7 +113,6 @@ Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} ป�
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,วัน
 Authentication.SignUp.Label.EnterYourEmail,กรอกอีเมลของคุณ
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,ต้องมีอายุมากกว่านี้เพื่อเล่นเกมนี้
 Authentication.SignUp.Label.ErrorsWithPassword,มีข้อผิดพลาดเกิดขึ้นกับรหัสผ่าน
 Authentication.SignUp.Label.ErrorsWithUsername,มีข้อผิดพลาดเกิดขึ้นกับชื่อผู้ใช้
 Authentication.SignUp.Label.ExitModalSubtitle,คุณสร้างบัญชีเกือบเสร็จแล้ว หากออกตอนนี้ ความคืบหน้าที่ทำไว้จะหายไป
@@ -265,7 +264,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,พื้นที�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissivePercentage}% และต้องไม่เกิน {maxEmissivePercentage}%) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,พื้นที่การเปล่งแสงเกินขีดจำกัด
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{assetTypeName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissiveArea} ต้องไม่เกิน {maxEmissiveArea}) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,ทรัพยากรนี้ใช้แผนที่แบบเปล่งแสง ซึ่งมีให้เฉพาะครีเอเตอร์ในโปรแกรมสำหรับครีเอเตอร์ที่เชื่อได้เท่านั้น โปรดลบเนื้อหาแผนที่แบบเปล่งแสงออกทั้งหมด หรือเข้าร่วมโปรแกรมก่อนอัปโหลด
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,แอนิเมชันที่เผยแพร่ไม่มีค่าระยะการขยับชิ้นส่วนสูงสุดที่ถูกต้อง โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,แอนิเมชันที่เผยแพร่ไม่มีมาร์กเกอร์ท่าทาง UGC ที่ถูกต้อง โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,ไม่สามารถคำนวณระยะการขยับชิ้นส่วนสูงสุดจากข้อมูลแอนิเมชันที่เผยแพร่ได้ โปรดเผยแพร่แอนิเมชันอีกครั้ง
@@ -273,6 +271,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,แอ
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,ต้องวางศีรษะให้อยู่เหนือ UpperTorso ศูนย์กลางของศีรษะอยู่ต่ำกว่าส่วนบนของลำตัว ซึ่งบ่งชี้ว่าเมชของศีรษะยุบตัวหรือวางผิดตำแหน่ง
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,คุณสมบัติ InternalOverrideFACSData บน FaceControls ต้องว่างเปล่าเมื่ออัปโหลด
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำให้ใหญ่ขึ้นเป็น {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,ศีรษะแบบเคลื่อนไหวมีข้อต่อ FACS ได้สูงสุด {maxFacsJointCount} จุด แต่ศีรษะนี้มีข้อต่อ {actualJointCount} จุด โปรดลดจำนวนข้อต่อ FACS แล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำเล็กลงเหลือ {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,รูปแบบการอัปโหลดไม่ตรงกับโครงสร้างโฟลเดอร์ที่คาดไว้ โปรดลองอีกครั้งหรือรายงานจุดบกพร่อง
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,กระดูก {bonePath} อยู่ห่างจาก Meshpart {partName} มากเกินไป โปรดปรับให้อยู่ใกล้ขอบเขตขนาดของ Meshpart มากขึ้น
@@ -2009,6 +2008,7 @@ Feature.Build.Analytics.Goal.GetMorePlayers,ดึงดูดผู้เล่
 Feature.Build.Analytics.Goal.KeepPlayersComingBack,ทำให้ผู้เล่นกลับมาเล่นอีก
 Feature.Build.Analytics.Goal.Locked.EarnRobux,รับ Robux ในเกมของคุณเพื่อดูสถิติเหล่านี้
 Feature.Build.Analytics.Goal.Locked.FirstImpression,เมื่อมีผู้เล่นคนแรกเข้ามาในเกม คุณจะดูสถิติเหล่านี้ได้
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,ดึงดูดผู้เล่นให้มากขึ้นเพื่อให้ดูสถิติเหล่านี้ได้
 Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,เมื่อมีผู้เล่นกลับมาเล่นเกมของคุณคนแรก คุณจะดูสถิติเหล่านี้ได้
 Feature.Build.Analytics.KeyStats,สถิติสำคัญ
 Feature.Build.Analytics.LastMonth,เดือนที่ผ่านมา
@@ -2362,11 +2362,8 @@ Feature.Build.Message.NoSearchResultsFound,
 Feature.Build.Message.NoVersionHistory,ยังไม่มีประวัติเวอร์ชัน
 Feature.Build.Message.OneTaskCompleted,เสร็จแล้ว 1 งาน
 Feature.Build.Message.OutOfBuildUsage,คุณใช้โควต้าการใช้งาน Build หมดแล้ว ดูตัวเลือกของคุณเพื่อใช้ Robux สร้างต่อ
-Feature.Build.Message.PlaytestInviteSendFailedBody,คุณไม่สามารถส่งลิงก์เชิญเข้าร่วมแชทให้ผู้ใช้ต่อไปนี้ได้:
-Feature.Build.Message.PlaytestInviteSendFailedHint,โปรดใช้ปุ่มแชร์เพื่อรับลิงก์
 Feature.Build.Message.PlaytesterRequestFailed,เราไม่สามารถดำเนินการตามคำขอของคุณได้ โปรดลองอีกครั้ง
 Feature.Build.Message.PlaytestersAdded,เชิญผู้ทดลองเล่นระยะแรกแล้ว {INVITED_COUNT} จาก {MAX_INVITES} คน
-Feature.Build.Message.PrivatePlaytestInvite,{username} ชวนคุณมาเป็นผู้ทดลองเล่นระยะแรกสำหรับ {experienceName}
 Feature.Build.Message.PublicPublishFailed,เผยแพร่เกมของคุณแล้ว แต่ไม่สามารถตั้งค่าเป็นสาธารณะได้ โปรดลองอีกครั้ง
 Feature.Build.Message.PublishExpandAudience,เผยแพร่เพื่อขยายกลุ่มเป้าหมายของคุณ
 Feature.Build.Message.PublishNotReverted,ย้อนกลับการเผยแพร่ของคุณไม่สำเร็จ โปรดลองอีกครั้ง
@@ -2435,7 +2432,6 @@ Feature.Build.Title.ManagedPricingAcknowledgement,เปิดการตั้
 Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรายได้ในเกมของคุณ
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
 Feature.Build.Title.PickCampaign,เลือกระยะเวลา
-Feature.Build.Title.PlaytestInviteSendFailed,ไม่สามารถส่งคำเชิญได้
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,ไม่สามารถเพิ่มผู้ใช้ต่อไปนี้ได้:
 Feature.Build.Title.PlaytestersOnlyPlay,เฉพาะผู้ทดลองเล่นเท่านั้นที่เล่นได้
@@ -3773,6 +3769,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,โปรดรอสักครู
 Feature.Moments.Label.VoiceModerationError,สคริปต์ของคุณต้องเป็นไปตามกฎความปลอดภัย
 Feature.Moments.Label.VoicePlaceholder,พิมพ์สคริปต์เสียงบรรยายของคุณ สูงสุด {maxCount} อักขระ
 Feature.Moments.Label.VoiceTimeoutBody,การสร้างเสียงบรรยายหมดเวลา
+Feature.Moments.Label.VoiceTooManyNumbersError,สคริปต์มีตัวเลขมากเกินไป
 Feature.Moments.Label.WriteComment,เขียนความคิดเห็น
 Feature.Moments.Title.Comments,ความคิดเห็น
 Feature.Moments.Title.CommentsWithCappedCount,ความคิดเห็น ({count}+)

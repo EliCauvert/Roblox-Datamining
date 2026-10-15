@@ -8,6 +8,7 @@ local _ = require(buildExperience.Components.Library.LibraryTypes)
 local modelViewportModule = require(buildExperience.Components.Library.ModelViewport)
 local libraryAudioPlayerContainerModule = require(buildExperience.Components.Library.LibraryAudioPlayer.LibraryAudioPlayerContainer)
 local useHardwareInsetsModule = require(buildExperience.Components.ChatSheet.useHardwareInsets)
+local fFlagBuildExperienceLibrary = require(parent.SharedFlags).FFlagBuildExperienceLibrary
 local image = foundationModule.Image
 local skeleton = foundationModule.Skeleton
 local scrollView = foundationModule.ScrollView
@@ -16,7 +17,7 @@ local view = foundationModule.View
 local radius = foundationModule.Enums.Radius
 
 return function(p1)
-	-- upvalues: useHardwareInsetsModule (ref), reactModule (ref), view (ref), modelViewportModule (ref), text (ref), image (ref), scrollView (ref), libraryAudioPlayerContainerModule (ref), skeleton (ref), radius (ref), chatActionsModule (ref)
+	-- upvalues: useHardwareInsetsModule (ref), reactModule (ref), fFlagBuildExperienceLibrary (ref), view (ref), modelViewportModule (ref), text (ref), image (ref), scrollView (ref), libraryAudioPlayerContainerModule (ref), skeleton (ref), radius (ref), chatActionsModule (ref)
 	local bottom = useHardwareInsetsModule().bottom
 	local var1, var2 = reactModule.useState(false)
 	local var3 = reactModule.useCallback(function(p2)
@@ -29,6 +30,10 @@ return function(p1)
 	if var5 ~= nil then
 		var5.textBoxRef = var4
 		var5.allowsTypingWhileResponding = true
+		
+		if fFlagBuildExperienceLibrary then
+			var5.onRemoveResourceAttachment = nil
+		end
 		local onSend = var5.onSend
 		
 		function var11.onSend()

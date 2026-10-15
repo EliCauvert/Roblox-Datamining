@@ -17,6 +17,12 @@ local getSplitPaneEducationalTourTooltipModelModule = require(script.Parent.getS
 local useSplitPaneEducationalTourLifecycleModule = require(script.Parent.useSplitPaneEducationalTourLifecycle)
 local splitPaneEducationalTourViewModule = require(script.Parent.SplitPaneEducationalTourView)
 local fFlagDebugSplitPaneEducationalTourAutoStartModule = require(script.Parent.Parent.Flags.FFlagDebugSplitPaneEducationalTourAutoStart)
+local fIntSplitPaneEducationalTourStartDelayMsModule = require(script.Parent.Parent.Flags.FIntSplitPaneEducationalTourStartDelayMs)
+local fFlagSplitPaneEducationalTourPreloadVideosModule = require(script.Parent.Parent.Flags.FFlagSplitPaneEducationalTourPreloadVideos)
+local var1 = if fFlagSplitPaneEducationalTourPreloadVideosModule then require(script.Parent.useSplitPaneEducationalTourVideoPreload) else nil
+local fFlagSplitPaneEducationalTourSkipOnDeepLinkModule = require(script.Parent.Parent.Flags.FFlagSplitPaneEducationalTourSkipOnDeepLink)
+local var2 = if fFlagSplitPaneEducationalTourSkipOnDeepLinkModule then require(parent.DeepLink).DeepLinkLuaReceiverStatusStore else nil
+local fStringSplitPaneEducationalTourKeepOnDeepLinkPatternsModule = require(script.Parent.Parent.Flags.FStringSplitPaneEducationalTourKeepOnDeepLinkPatterns)
 local isSplitPaneEducationalTourGuiObjectVisibleModule = require(script.Parent.isSplitPaneEducationalTourGuiObjectVisible)
 local getSplitPaneEducationalTourStoreModule = require(script.Parent.Parent.Stores.getSplitPaneEducationalTourStore)
 local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
@@ -32,6 +38,8 @@ local usePreferredInput = responsiveModule.usePreferredInput
 local useDefaultFocusBehavior = reactFocusNavigationModule.useDefaultFocusBehavior
 local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
 local splitPaneEducationalTourStepsModuleCount = #splitPaneEducationalTourStepsModule
+local minValue = math.min(fIntSplitPaneEducationalTourStartDelayMsModule, 3000)
+local var3 = minValue > 0
 
 local function selectStatusBarHeight(p1)
 	return if p1.TopBar == nil then 0 else p1.TopBar.statusBarHeight
@@ -50,58 +58,58 @@ local function _(p1)
 end
 
 local function SplitPaneEducationalTourBody(p1)
-	-- upvalues: supportPaneMode (ref), splitPaneStoreModule (ref), useSignalState (ref), reactModule (ref), useSelector (ref), selectStatusBarHeight (ref), useTrackedRectModule (ref), useOverlay (ref), useTokens (ref), useLocalization (ref), useScaledValue (ref), flags (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), useDefaultFocusBehavior (ref), reactFocusNavigationModule (ref), usePreferredInput (ref), input (ref), useFocusOnMount (ref), isSplitPaneEducationalTourGuiObjectVisibleModule (ref), getSplitPaneEducationalTourPresentationModule (ref), useSplitPaneEducationalTourLifecycleModule (ref), splitPaneEducationalTourStepsModuleCount (ref), guiService (ref), splitPaneEducationalTourStepsModule (ref), getSplitPaneEducationalTourTooltipModelModule (ref), splitPaneEducationalTourViewModule (ref)
+	-- upvalues: supportPaneMode (ref), splitPaneStoreModule (ref), useSignalState (ref), reactModule (ref), useSelector (ref), selectStatusBarHeight (ref), useTrackedRectModule (ref), useOverlay (ref), useTokens (ref), useLocalization (ref), useScaledValue (ref), flags (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), useDefaultFocusBehavior (ref), reactFocusNavigationModule (ref), usePreferredInput (ref), input (ref), useFocusOnMount (ref), isSplitPaneEducationalTourGuiObjectVisibleModule (ref), getSplitPaneEducationalTourPresentationModule (ref), useSplitPaneEducationalTourLifecycleModule (ref), splitPaneEducationalTourStepsModuleCount (ref), var3 (ref), minValue (ref), guiService (ref), splitPaneEducationalTourStepsModule (ref), getSplitPaneEducationalTourTooltipModelModule (ref), splitPaneEducationalTourViewModule (ref)
 	local supportPaneRef = p1.supportPaneRef
 	local supportPaneMode_1 = p1.supportPaneMode
-	local var1 = supportPaneMode_1 == supportPaneMode.Collapsed
+	local var4 = supportPaneMode_1 == supportPaneMode.Collapsed
 	local isSupportSurfaceEligible = p1.isSupportSurfaceEligible
 	local tourStore = p1.tourStore
 	local store = splitPaneStoreModule.getStore()
 	local stepIndex = p1.stepIndex
-	local var2 = useSignalState(store.getShouldDefaultToCollapsed)
-	local var3 = useSignalState(tourStore.getCollapsedExpandButtonRect)
-	local var4 = useSignalState(tourStore.getCollapsedExpandButtonInstance)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref)
-		return if var4 == nil then nil else { current = var4 }
-	end, { var4 })
-	local var6 = useSelector(selectStatusBarHeight)
-	local var7, var8 = reactModule.useState(nil)
-	local var9, var10 = reactModule.useState(nil)
-	local var11, var12 = reactModule.useState(nil)
-	local var13, var14 = reactModule.useState(nil)
-	local var15, var16 = reactModule.useState(nil)
-	local var17 = reactModule.useMemo(function()
+	local var5 = useSignalState(store.getShouldDefaultToCollapsed)
+	local var6 = useSignalState(tourStore.getCollapsedExpandButtonRect)
+	local var7 = useSignalState(tourStore.getCollapsedExpandButtonInstance)
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref)
 		return if var7 == nil then nil else { current = var7 }
 	end, { var7 })
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var9 (ref)
-		return if var9 == nil then nil else { current = var9 }
-	end, { var9 })
-	local var19 = reactModule.useMemo(function()
-		-- upvalues: var11 (ref)
-		return if var11 == nil then nil else { current = var11 }
-	end, { var11 })
+	local var9 = useSelector(selectStatusBarHeight)
+	local var10, var11 = reactModule.useState(nil)
+	local var12, var13 = reactModule.useState(nil)
+	local var14, var15 = reactModule.useState(nil)
+	local var16, var17 = reactModule.useState(nil)
+	local var18, var19 = reactModule.useState(nil)
 	local var20 = reactModule.useMemo(function()
-		-- upvalues: var13 (ref)
-		return if var13 == nil then nil else { current = var13 }
-	end, { var13 })
+		-- upvalues: var10 (ref)
+		return if var10 == nil then nil else { current = var10 }
+	end, { var10 })
 	local var21 = reactModule.useMemo(function()
-		-- upvalues: var15 (ref)
-		return if var15 == nil then nil else { current = var15 }
-	end, { var15 })
-	local var22, var23 = reactModule.useState(nil)
+		-- upvalues: var12 (ref)
+		return if var12 == nil then nil else { current = var12 }
+	end, { var12 })
+	local var22 = reactModule.useMemo(function()
+		-- upvalues: var14 (ref)
+		return if var14 == nil then nil else { current = var14 }
+	end, { var14 })
+	local var23 = reactModule.useMemo(function()
+		-- upvalues: var16 (ref)
+		return if var16 == nil then nil else { current = var16 }
+	end, { var16 })
+	local var24 = reactModule.useMemo(function()
+		-- upvalues: var18 (ref)
+		return if var18 == nil then nil else { current = var18 }
+	end, { var18 })
+	local var25, var26 = reactModule.useState(nil)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var23 (ref), supportPaneRef (ref)
-		var23(if supportPaneRef ~= nil then nil else supportPaneRef.current)
+		-- upvalues: var26 (ref), supportPaneRef (ref)
+		var26(if supportPaneRef ~= nil then nil else supportPaneRef.current)
 	end, { supportPaneRef })
-	local var24 = useTrackedRectModule(var22)
-	local var25 = useOverlay()
-	local var26 = useTrackedRectModule(if var25 and var25:IsA("GuiObject") then var25 else nil)
-	local var27 = if var26 ~= nil then nil else var26.Min
-	local var28 = useTokens()
-	local var29 = useLocalization({
+	local var27 = useTrackedRectModule(var25)
+	local var28 = useOverlay()
+	local var29 = useTrackedRectModule(if var28 and var28:IsA("GuiObject") then var28 else nil)
+	local var30 = if var29 ~= nil then nil else var29.Min
+	local var31 = useTokens()
+	local var32 = useLocalization({
 		continueButton = "Feature.SplitPane.Tour.Button.Continue",
 		finishTourButton = "Feature.SplitPane.Tour.Button.FinishTour",
 		skipTourButton = "Feature.SplitPane.Tour.Button.SkipTour",
@@ -113,72 +121,72 @@ local function SplitPaneEducationalTourBody(p1)
 		stepThreeDescription = "Feature.SplitPane.Tour.Step3.Description",
 		stepThreeTitle = "Feature.SplitPane.Tour.Step3.Title"
 	})
-	local var30 = useScaledValue(if flags.FoundationEducationalTooltipRefresh then 280 else 320)
-	local var31, var32 = useDefaultFocusBehavior(useFocusRoot({
+	local var33 = useScaledValue(if flags.FoundationEducationalTooltipRefresh then 280 else 320)
+	local var34, var35 = useDefaultFocusBehavior(useFocusRoot({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
 	}))
-	local var33 = reactModule.useCallback(function(p2)
-		-- upvalues: var32 (ref)
-		if typeof(var32) == "function" then
-			var32(p2)
+	local var36 = reactModule.useCallback(function(p2)
+		-- upvalues: var35 (ref)
+		if typeof(var35) == "function" then
+			var35(p2)
 			
 			return
-		elseif var32 ~= nil then
-			var32.current = p2
+		elseif var35 ~= nil then
+			var35.current = p2
 		end
-	end, { var32 })
-	local var34 = reactFocusNavigationModule.useFocusGuiObject()
-	local var35 = usePreferredInput()
-	local var36 = var35 == input.Directional
-	local var37 = reactModule.useRef(nil)
-	local var38, var39 = reactModule.useState(nil)
-	local var40, var41 = reactModule.useState(false)
-	local var42 = useFocusOnMount(var31)
-	local var43 = reactModule.useCallback(function(p2)
-		-- upvalues: var37 (ref), var42 (ref)
-		var37.current = p2
+	end, { var35 })
+	local var37 = reactFocusNavigationModule.useFocusGuiObject()
+	local var38 = usePreferredInput()
+	local var39 = var38 == input.Directional
+	local var40 = reactModule.useRef(nil)
+	local var41, var42 = reactModule.useState(nil)
+	local var43, var44 = reactModule.useState(false)
+	local var45 = useFocusOnMount(var34)
+	local var46 = reactModule.useCallback(function(p2)
+		-- upvalues: var40 (ref), var45 (ref)
+		var40.current = p2
+		var45(p2)
+	end, { var45 })
+	local var47 = reactModule.useCallback(function(p2)
+		-- upvalues: var42 (ref), var36 (ref)
 		var42(p2)
-	end, { var42 })
-	local var44 = reactModule.useCallback(function(p2)
-		-- upvalues: var39 (ref), var33 (ref)
-		var39(p2)
-		var33(p2)
-	end, { var33 })
+		var36(p2)
+	end, { var36 })
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var38 (ref), var41 (ref), isSplitPaneEducationalTourGuiObjectVisibleModule (copy)
-		if var38 == nil then
-			var41(false)
+		-- upvalues: var41 (ref), var44 (ref), isSplitPaneEducationalTourGuiObjectVisibleModule (copy)
+		if var41 == nil then
+			var44(false)
 			
 			return
 		end
 		local function updateVisibility()
-			-- upvalues: var41 (copy), isSplitPaneEducationalTourGuiObjectVisibleModule (copy), var38 (copy)
-			var41(isSplitPaneEducationalTourGuiObjectVisibleModule(var38))
+			-- upvalues: var44 (copy), isSplitPaneEducationalTourGuiObjectVisibleModule (copy), var41 (copy)
+			var44(isSplitPaneEducationalTourGuiObjectVisibleModule(var41))
 		end
 		
-		var41(isSplitPaneEducationalTourGuiObjectVisibleModule(var38))
+		var44(isSplitPaneEducationalTourGuiObjectVisibleModule(var41))
 		local t = {}
 		
 		local function observeVisibleAncestors()
-			-- upvalues: t (write), var38 (copy), updateVisibility (ref), var41 (copy), isSplitPaneEducationalTourGuiObjectVisibleModule (copy)
+			-- upvalues: t (write), var41 (copy), updateVisibility (ref), var44 (copy), isSplitPaneEducationalTourGuiObjectVisibleModule (copy)
 			for i, v in t do
 				v:Disconnect()
 			end
 			t = {}
-			local var45 = var38
-			while var45 ~= nil do
-				if var45:IsA("GuiObject") then
-					table.insert(t, var45:GetPropertyChangedSignal("Visible"):Connect(updateVisibility))
+			local var48 = var41
+			while var48 ~= nil do
+				if var48:IsA("GuiObject") then
+					table.insert(t, var48:GetPropertyChangedSignal("Visible"):Connect(updateVisibility))
 				end
-				var45 = var45.Parent
+				var48 = var48.Parent
 			end
-			var41(isSplitPaneEducationalTourGuiObjectVisibleModule(var38))
+			var44(isSplitPaneEducationalTourGuiObjectVisibleModule(var41))
 		end
 		
 		observeVisibleAncestors()
-		local ancestryChangedConnection = var38.AncestryChanged:Connect(observeVisibleAncestors)
+		local ancestryChangedConnection = var41.AncestryChanged:Connect(observeVisibleAncestors)
 		
 		return function()
 			-- upvalues: ancestryChangedConnection (ref), t (write)
@@ -188,157 +196,211 @@ local function SplitPaneEducationalTourBody(p1)
 				v:Disconnect()
 			end
 		end
-	end, { var38 })
-	local var46 = var27 or Vector2.zero
-	local var47 = getSplitPaneEducationalTourPresentationModule({
+	end, { var41 })
+	local var49 = var30 or Vector2.zero
+	local var50 = getSplitPaneEducationalTourPresentationModule({
 		collapsedSpotlightPadding = 4,
 		stepIndex = stepIndex,
-		isSupportPaneCollapsed = var1,
-		isDirectionalInput = var36,
-		collapsedExpandButtonRect = var3,
-		supportPaneRect = var24,
+		isSupportPaneCollapsed = var4,
+		isDirectionalInput = var39,
+		collapsedExpandButtonRect = var6,
+		supportPaneRect = var27,
 		anchors = {
-			gamepadCollapsedStepOne = var18,
-			collapsedExpandButton = var5,
-			gamepadStepTwo = var19,
-			bottomPane = var17,
-			gamepadFinal = var20,
-			topRightControl = var21,
+			gamepadCollapsedStepOne = var21,
+			collapsedExpandButton = var8,
+			gamepadStepTwo = var22,
+			bottomPane = var20,
+			gamepadFinal = var23,
+			topRightControl = var24,
 			supportPane = supportPaneRef
 		}
 	})
-	local var48 = useSplitPaneEducationalTourLifecycleModule({
+	local var51 = useSplitPaneEducationalTourLifecycleModule({
 		isSupportSurfaceEligible = isSupportSurfaceEligible,
 		stepIndex = stepIndex,
 		totalSteps = splitPaneEducationalTourStepsModuleCount,
 		supportPaneMode = supportPaneMode_1,
-		shouldDefaultToCollapsed = var2,
-		isSupportPaneCollapsed = var1,
+		shouldDefaultToCollapsed = var5,
+		isSupportPaneCollapsed = var4,
 		tourStore = tourStore,
 		splitPaneStore = store
 	})
+	local var52, var53 = reactModule.useState(not var3)
 	reactModule.useEffect(function()
-		-- upvalues: var40 (ref), var48 (ref)
-		if var40 then
+		-- upvalues: var3 (copy), minValue (copy), var53 (ref)
+		if var3 then
+			local var54 = false
+			task.delay(minValue / 1000, function()
+				-- upvalues: var54 (write), var53 (copy)
+				if not var54 then
+					var53(true)
+				end
+			end)
+			
+			return function()
+				-- upvalues: var54 (write)
+				var54 = true
+			end
+		end
+	end, {})
+	reactModule.useEffect(function()
+		-- upvalues: var43 (ref), var52 (ref), var51 (ref)
+		if var43 or not var52 then
 			return
 		end
-		local var49 = false
+		local var54 = false
 		task.delay(5, function()
-			-- upvalues: var49 (write), var48 (copy)
-			if not var49 then
-				var48.endTour()
+			-- upvalues: var54 (write), var51 (copy)
+			if not var54 then
+				var51.endTour()
 			end
 		end)
 		
 		return function()
-			-- upvalues: var49 (write)
-			var49 = true
+			-- upvalues: var54 (write)
+			var54 = true
 		end
-	end, { var40, var48.endTour })
+	end, { var43, var52, var51.endTour })
 	reactModule.useEffect(function()
-		-- upvalues: var37 (ref), var35 (ref), input (copy), guiService (copy), var34 (ref)
-		if var37.current ~= nil and (var35 == input.Directional or guiService.SelectedCoreObject ~= nil) then
-			var34(var37.current)
+		-- upvalues: var40 (ref), var38 (ref), input (copy), guiService (copy), var37 (ref)
+		if var40.current ~= nil and (var38 == input.Directional or guiService.SelectedCoreObject ~= nil) then
+			var37(var40.current)
 		end
-	end, { stepIndex, var35, var34 })
-	local var49 = splitPaneEducationalTourStepsModule[stepIndex]
-	local var50 = getSplitPaneEducationalTourTooltipModelModule({
+	end, { stepIndex, var38, var37, var52 })
+	local var54 = splitPaneEducationalTourStepsModule[stepIndex]
+	local var55 = if var52 then getSplitPaneEducationalTourTooltipModelModule({
 		stepIndex = stepIndex,
 		totalSteps = splitPaneEducationalTourStepsModuleCount,
-		step = var49,
-		isCollapsedStepOne = var47.isCollapsedStepOne,
-		isDirectionalInput = var36,
-		localized = var29
-	})
-	local var51, var52 = reactModule.useState(false)
+		step = var54,
+		isCollapsedStepOne = var50.isCollapsedStepOne,
+		isDirectionalInput = var39,
+		localized = var32
+	}) else nil
+	local var56, var57 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: var40 (ref), var52 (ref)
-		if var40 then
-			var52(true)
+		-- upvalues: var43 (ref), var57 (ref)
+		if var43 then
+			var57(true)
 		end
-	end, { var40 })
-	local var53 = reactModule.useRef(false)
+	end, { var43 })
+	local var58 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var53 (ref), var49 (ref), var38 (ref), var40 (ref), tourStore (ref)
-		if not var53.current and var49 ~= nil and (var38 ~= nil and var40) then
-			var53.current = true
+		-- upvalues: var58 (ref), var54 (ref), var41 (ref), var43 (ref), tourStore (ref)
+		if not var58.current and var54 ~= nil and (var41 ~= nil and var43) then
+			var58.current = true
 			tourStore.notifyTourVisible()
 		end
-	end, { var49, var38, var40, tourStore.notifyTourVisible })
+	end, { var54, var41, var43, tourStore.notifyTourVisible })
 	
 	return reactModule.createElement(splitPaneEducationalTourViewModule, {
 		videoAspectRatio = 1.5,
-		isTooltipContentVisible = var40,
-		hasPresentedTooltip = var51,
-		supportPaneRect = var24,
-		overlayOrigin = var46,
-		overlayInstance = var25,
-		supportOverlayTopInset = var6,
-		presentation = var47,
-		tooltipModel = var50,
-		tokens = var28,
-		mediaWidth = var30,
-		setPrimaryActionRef = var43,
-		setTooltipContentRef = var44,
-		setGamepadCollapsedTooltipAnchorInstance = var10,
-		setBottomPaneTooltipAnchorInstance = var8,
-		setGamepadStepTwoTooltipAnchorInstance = var12,
-		setGamepadFinalTooltipAnchorInstance = var14,
-		setTopRightControlInstance = var16,
-		onNext = var48.handleNext,
-		onEnd = var48.endTour
+		isTooltipContentVisible = var43,
+		hasPresentedTooltip = var56,
+		holdsInputBeforeTooltip = var3,
+		supportPaneRect = var27,
+		overlayOrigin = var49,
+		overlayInstance = var28,
+		supportOverlayTopInset = var9,
+		presentation = var50,
+		tooltipModel = var55,
+		tokens = var31,
+		mediaWidth = var33,
+		setPrimaryActionRef = var46,
+		setTooltipContentRef = var47,
+		setFocusSurfaceRef = var36,
+		setGamepadCollapsedTooltipAnchorInstance = var13,
+		setBottomPaneTooltipAnchorInstance = var11,
+		setGamepadStepTwoTooltipAnchorInstance = var15,
+		setGamepadFinalTooltipAnchorInstance = var17,
+		setTopRightControlInstance = var19,
+		onNext = var51.handleNext,
+		onEnd = var51.endTour
 	})
 end
 
-return function(p2)
-	-- upvalues: getSplitPaneEducationalTourStoreModule (ref), useSignalState (ref), localUserIdStore (ref), useSelector (ref), selectIsCentralOverlayOpen (ref), reactModule (ref), fFlagDebugSplitPaneEducationalTourAutoStartModule (ref), SplitPaneEducationalTourBody (ref)
-	local var54 = getSplitPaneEducationalTourStoreModule(false)
-	local var55 = useSignalState(var54.getStepIndex)
-	local var56 = useSignalState(var54.getIsOpen)
-	local var57 = useSignalState(var54.getPendingUserId)
-	local var58 = useSignalState(localUserIdStore.getCurrentUserId)
-	local var59 = p2.isSupportSurfaceEligible and not useSelector(selectIsCentralOverlayOpen)
-	local var60 = reactModule.useRef(false)
+local t = {}
+
+for i, v in string.split(fStringSplitPaneEducationalTourKeepOnDeepLinkPatternsModule, ",") do
+	local match = string.match(v, "^%s*(.-)%s*$")
+	
+	if match ~= nil and match ~= "" then
+		table.insert(t, match)
+	end
+end
+local function isKeepOnDeepLink(p2)
+	-- upvalues: t (ref)
+	local var59 = string.split(string.lower(p2), "?")[1]
+	
+	for i, v in t do
+		local ok, status = pcall(string.find, var59, v)
+		
+		if ok and status ~= nil then
+			return true
+		end
+	end
+	return false
+end
+
+return function(p3)
+	-- upvalues: getSplitPaneEducationalTourStoreModule (ref), useSignalState (ref), localUserIdStore (ref), useSelector (ref), selectIsCentralOverlayOpen (ref), fFlagSplitPaneEducationalTourPreloadVideosModule (ref), var1 (ref), fFlagDebugSplitPaneEducationalTourAutoStartModule (ref), fFlagSplitPaneEducationalTourSkipOnDeepLinkModule (ref), var2 (ref), isKeepOnDeepLink (ref), reactModule (ref), SplitPaneEducationalTourBody (ref)
+	local var60 = getSplitPaneEducationalTourStoreModule(false)
+	local var61 = useSignalState(var60.getStepIndex)
+	local var62 = useSignalState(var60.getIsOpen)
+	local var63 = useSignalState(var60.getPendingUserId)
+	local var64 = useSignalState(localUserIdStore.getCurrentUserId)
+	local var65 = p3.isSupportSurfaceEligible and not useSelector(selectIsCentralOverlayOpen)
+	
+	if fFlagSplitPaneEducationalTourPreloadVideosModule then
+		var1(var62 or fFlagDebugSplitPaneEducationalTourAutoStartModule)
+	end
+	local var66 = if fFlagSplitPaneEducationalTourSkipOnDeepLinkModule then useSignalState(var2(false).getLastDetectedPostAuthUrl) else nil
+	local var67 = var66 ~= nil and (var66 ~= "" and not isKeepOnDeepLink(var66))
+	local var68 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: var56 (ref), var57 (ref), var58 (ref), var54 (ref), var55 (ref), var60 (ref), var59 (ref)
-		if var56 and var57 ~= var58 then
-			var54.discardPendingTour()
+		-- upvalues: var62 (ref), var63 (ref), var64 (ref), var60 (ref), var67 (ref), var61 (ref), var68 (ref), var65 (ref)
+		if var62 and var63 ~= var64 then
+			var60.discardPendingTour()
 			
 			return
-		elseif var56 and var55 == 0 then
-			var60.current = false
+		elseif var67 and not var60.getHasShownTour(false) and (var62 or var61 > 0) then
+			var60.discardPendingTour()
+			
+			return
+		elseif var62 and var61 == 0 then
+			var68.current = false
 		end
-		if var56 and var59 and not var60.current then
-			var60.current = true
-			var54.setStepIndex(1)
+		if var62 and var65 and not var68.current then
+			var68.current = true
+			var60.setStepIndex(1)
 		end
-		if not var56 then
-			var60.current = false
+		if not var62 then
+			var68.current = false
 		end
 	end, {
-		var56, var57, var58, var55, var59, var54.setStepIndex, var54.discardPendingTour
+		var62, var63, var64, var61, var65, var67, var60.getHasShownTour,
+		var60.setStepIndex, var60.discardPendingTour
 	})
-	local var61 = reactModule.useRef(false)
+	local var69 = reactModule.useRef(false)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagDebugSplitPaneEducationalTourAutoStartModule (copy), var59 (ref), var61 (ref), var54 (ref)
-		if fFlagDebugSplitPaneEducationalTourAutoStartModule and var59 and not var61.current then
-			var61.current = true
-			var54.setStepIndex(1)
+		-- upvalues: fFlagDebugSplitPaneEducationalTourAutoStartModule (copy), var65 (ref), var67 (ref), var69 (ref), var60 (ref)
+		if fFlagDebugSplitPaneEducationalTourAutoStartModule and var65 and (not var67 and not var69.current) then
+			var69.current = true
+			var60.setStepIndex(1)
 		end
-	end, { var59, var54.setStepIndex })
+	end, { var65, var67, var60.setStepIndex })
 	reactModule.useEffect(function()
-		-- upvalues: var54 (ref)
+		-- upvalues: var60 (ref)
 		return function()
-			-- upvalues: var54 (copy)
-			var54.discardPendingTour()
+			-- upvalues: var60 (copy)
+			var60.discardPendingTour()
 		end
-	end, { var54.discardPendingTour })
+	end, { var60.discardPendingTour })
 	
-	return if var55 == 0 then nil else reactModule.createElement(SplitPaneEducationalTourBody, {
-		supportPaneRef = p2.supportPaneRef,
-		supportPaneMode = p2.supportPaneMode,
-		isSupportSurfaceEligible = var59,
-		tourStore = var54,
-		stepIndex = var55
+	return if var61 == 0 then nil else reactModule.createElement(SplitPaneEducationalTourBody, {
+		supportPaneRef = p3.supportPaneRef,
+		supportPaneMode = p3.supportPaneMode,
+		isSupportSurfaceEligible = var65,
+		tourStore = var60,
+		stepIndex = var61
 	})
 end

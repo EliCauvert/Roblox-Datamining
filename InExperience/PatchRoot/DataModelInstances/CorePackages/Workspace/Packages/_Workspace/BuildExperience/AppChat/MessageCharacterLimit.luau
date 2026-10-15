@@ -1,1 +1,0 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Components.ChatConversation.MessageCharacterLimit)

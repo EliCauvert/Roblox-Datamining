@@ -1,0 +1,1 @@
+﻿return if game:DefineFastFlag("EnableChartsInFlyout", false) then not game:DefineFastFlag("ChartsInFlyoutAddSubTabDependency", false) or require(script.Parent.FFlagAppIaHomeSubTab) else game:DefineFastFlag("EnableChartsInFlyout", false)

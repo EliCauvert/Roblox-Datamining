@@ -228,7 +228,6 @@ return {
 		removeMakeupAssetsFromTryOnsIfOverLimit = require(script.Utils.TryOns.removeMakeupAssetsFromTryOnsIfOverLimit),
 		getItemPurchaseActionType = require(script.Utils.getItemPurchaseActionType),
 		RoactGamepadMigration = {
-			useTableWrappedCallbackRef = require(script.Utils.RoactGamepadMigration.useTableWrappedCallbackRef),
 			findValueKeyInRefCache = require(script.Utils.RoactGamepadMigration.findValueKeyInRefCache)
 		},
 		getBackendLayerNamesForCatalog = require(script.Utils.getBackendLayerNamesForCatalog),

@@ -14,6 +14,7 @@ local avatarGroupModule = require(foundation.Components.AvatarGroup)
 local _ = require(foundation.Enums.AvatarGroupType)
 local useBackgroundStyle = require(foundation.Providers.Style.BackgroundStyleContext).useBackgroundStyle
 local _ = require(foundation.Components.Types)
+local flagsModule = require(foundation.Utility.Flags)
 local useAccessoryVariantsModule = require(script.Parent.useAccessoryVariants)
 local _ = require(foundation.Enums.ChipSize)
 
@@ -28,28 +29,38 @@ local function AvatarGroupWrapper(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokensModule (ref), reactModule (ref), useAccessoryVariantsModule (ref), AvatarGroupWrapper (ref), isBuilderOrMigratedIcon (ref), iconModule (ref), isMigrated (ref), uiblox (ref), imageModule (ref), viewModule (ref)
-	local var1 = reactModule.useMemo(function()
+	-- upvalues: useTokensModule (ref), reactModule (ref), useAccessoryVariantsModule (ref), flagsModule (ref), AvatarGroupWrapper (ref), isBuilderOrMigratedIcon (ref), iconModule (ref), isMigrated (ref), uiblox (ref), imageModule (ref), viewModule (ref)
+	local var1
+	local var2 = useTokensModule()
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref)
 		return if type(p1.config) == "string" then { isCircular = false, iconName = p1.config } else p1.config
 	end, { p1.config })
-	local var2 = useAccessoryVariantsModule(useTokensModule(), p1.size, p1.isLeading, if var1.type ~= "AvatarGroup" then var1.isCircular or false else true)
+	local size = p1.size
+	local isLeading = p1.isLeading
+	
+	if flagsModule.FoundationFixChipAccessoryLayout then
+		local _ = var3.type == "AvatarGroup"
+	else
+		var1 = if var3.type ~= "AvatarGroup" then var3.isCircular or false else true
+	end
+	local var4 = useAccessoryVariantsModule(var2, size, isLeading, var1, p1.isIconOnly)
 	
 	return reactModule.createElement(viewModule, {
 		tag = "auto-xy",
-		padding = var2.accessory.padding,
-		onActivated = var1.onActivated,
+		padding = var4.accessory.padding,
+		onActivated = var3.onActivated,
 		isDisabled = p1.isDisabled,
 		LayoutOrder = if p1.isLeading then 1 else 3,
 		testId = p1.testId
-	}, if var1.type == "AvatarGroup" then reactModule.createElement(AvatarGroupWrapper, p1) elseif isBuilderOrMigratedIcon(var1.iconName) then reactModule.createElement(iconModule, {
-		name = if isMigrated(var1.iconName) then uiblox[var1.iconName].name else var1.iconName,
-		variant = if isMigrated(var1.iconName) then uiblox[var1.iconName].variant else var1.iconVariant,
-		size = var2.accessory.Size.Y.Offset,
+	}, if var3.type == "AvatarGroup" then reactModule.createElement(AvatarGroupWrapper, p1) elseif isBuilderOrMigratedIcon(var3.iconName) then reactModule.createElement(iconModule, {
+		name = if isMigrated(var3.iconName) then uiblox[var3.iconName].name else var3.iconName,
+		variant = if isMigrated(var3.iconName) then uiblox[var3.iconName].variant else var3.iconVariant,
+		size = var4.accessory.Size.Y.Offset,
 		style = p1.contentStyle
 	}) else reactModule.createElement(imageModule, {
-		Image = var1.iconName,
-		Size = var2.accessory.Size,
+		Image = var3.iconName,
+		Size = var4.accessory.Size,
 		imageStyle = p1.contentStyle
 	}))
 end)

@@ -148,6 +148,7 @@ local t = {
 	},
 	PresetChat = {
 		Icon = "lightning-bolt",
+		EmojiIcon = "circle-face-emoji",
 		IconVariant = "Regular",
 		IconVariantActive = "Filled",
 		ButtonWidth = 32

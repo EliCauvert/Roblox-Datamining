@@ -2,9 +2,10 @@
 local signalsModule = require(appChat.Parent.Signals)
 local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
 local getConversationMessageStoreModule = require(appChat.Stores.GetConversationMessageStore)
+local getConversationMessageListStoreModule = require(appChat.Stores.GetConversationMessageListStore)
 local createConversationViewModelStoreModule = require(script.createConversationViewModelStore)
 
 return signalsModule.createComputed(function()
-	-- upvalues: getConversationStoreModule (ref), getConversationMessageStoreModule (ref), createConversationViewModelStoreModule (ref)
-	return createConversationViewModelStoreModule(getConversationStoreModule(false), getConversationMessageStoreModule(false))
+	-- upvalues: getConversationStoreModule (ref), getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), createConversationViewModelStoreModule (ref)
+	return createConversationViewModelStoreModule(getConversationStoreModule(false), getConversationMessageStoreModule(false), getConversationMessageListStoreModule(false))
 end)

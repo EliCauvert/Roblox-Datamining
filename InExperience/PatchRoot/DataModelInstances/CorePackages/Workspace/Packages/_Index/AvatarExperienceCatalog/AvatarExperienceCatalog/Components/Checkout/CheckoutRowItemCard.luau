@@ -2,7 +2,8 @@
 local parent = avatarExperienceCatalog.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
-local catalogRowItemCard = require(parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogRowItemCard
+local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
+local catalogRowItemCard = avatarExperienceCommonModule.Components.CatalogItemCard.CatalogRowItemCard
 local itemCardThumbnail = require(parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
 local tutilsModule = require(parent.tutils)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
@@ -10,7 +11,11 @@ local _ = require(avatarExperienceCatalog.Stores.createAXShoppingCartStore)
 local purchaseItemsErrorStatusMapModule = require(avatarExperienceCatalog.Enums.PurchaseItemsErrorStatusMap)
 local constantsModule = require(avatarExperienceCatalog.Constants)
 local useCheckoutRowItemCardViewModelModule = require(script.Parent.useCheckoutRowItemCardViewModel)
+local avatarExperienceGiftingModule = require(parent.AvatarExperienceGifting)
+local avatarItemGiftEntryPoint = avatarExperienceGiftingModule.Components.AvatarItemGiftEntryPoint
+local useAvatarItemGiftEligibility = avatarExperienceGiftingModule.Hooks.useAvatarItemGiftEligibility
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXGifting = avatarExperienceFlagsModule.FFlagAXGifting
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
 local fFlagAXMISOffersChip = avatarExperienceFlagsModule.FFlagAXMISOffersChip
@@ -19,6 +24,7 @@ local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
 local avatarExperienceTimedOptionsModule = require(parent.AvatarExperienceTimedOptions)
 local wearTimeSelectedOptionInList = avatarExperienceTimedOptionsModule.WearTimeSelectedOptionInList
 local wearTimeOptionButton = avatarExperienceTimedOptionsModule.WearTimeOptionButton
+local constants = avatarExperienceCommonModule.Constants
 local ASSET_TYPE_LOCALIZED = constantsModule.ASSET_TYPE_LOCALIZED
 local BUNDLE_TYPE_LOCALIZED = constantsModule.BUNDLE_TYPE_LOCALIZED
 local OFFERS_LOCALIZED = constantsModule.OFFERS_LOCALIZED
@@ -50,7 +56,7 @@ local _ = function(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), fFlagAXDurablesForMIS (ref), useCheckoutRowItemCardViewModelModule (ref), fFlagAXDurables2Option (ref), useLocalization (ref), ASSET_TYPE_LOCALIZED (ref), BUNDLE_TYPE_LOCALIZED (ref), t (ref), fFlagAXMISOffersChip (ref), OFFERS_LOCALIZED (ref), reactModule (ref), fFlagAXMISWithOffers (ref), purchaseItemsErrorStatusMapModule (ref), wearTimeOptionButton (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), fFlagAXMISSmallUIChanges (ref), wearTimeSelectedOptionInList (ref)
+	-- upvalues: foundationModule (ref), fFlagAXDurablesForMIS (ref), useCheckoutRowItemCardViewModelModule (ref), fFlagAXDurables2Option (ref), useLocalization (ref), ASSET_TYPE_LOCALIZED (ref), BUNDLE_TYPE_LOCALIZED (ref), t (ref), fFlagAXMISOffersChip (ref), OFFERS_LOCALIZED (ref), reactModule (ref), fFlagAXMISWithOffers (ref), purchaseItemsErrorStatusMapModule (ref), wearTimeOptionButton (ref), fFlagAXGifting (ref), constants (ref), useAvatarItemGiftEligibility (ref), avatarItemGiftEntryPoint (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), fFlagAXMISSmallUIChanges (ref), wearTimeSelectedOptionInList (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local thumbnailSize = p1.thumbnailSize or var1.Size.Size_2100
 	local selectedTimedOptionPrice = nil
@@ -159,6 +165,11 @@ return reactModule.memo(function(p1)
 		p1.discountInformation,
 		if fFlagAXMISWithOffers then p1.priceInRobuxDiscountedByOffers else nil
 	})
+	local var11 = if if fFlagAXGifting then useAvatarItemGiftEligibility(if fFlagAXGifting and p1.itemId ~= constants.AVATAR_BLOCKY_DEFAULT_BUNDLE_ID then p1.collectibleItemId else nil).areItemsGiftable else false then reactModule.createElement(avatarItemGiftEntryPoint, {
+		isCircular = true,
+		LayoutOrder = 1,
+		collectibleItemId = p1.collectibleItemId
+	}) else nil
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = if fFlagAXDurables2Option then "auto-y col size-full-0 gap-xxsmall" else "auto-y row size-full-0 gap-small",
@@ -193,14 +204,18 @@ return reactModule.memo(function(p1)
 			})
 		}) else nil,
 		RightSlot = if not fFlagAXDurables2Option then reactModule.createElement(foundationModule.View, {
-			tag = "auto-xy anchor-top-right self-center",
-			LayoutOrder = 2
+			LayoutOrder = 2,
+			tag = if fFlagAXGifting then {
+				["row self-center gap-small anchor-top-right auto-xy"] = true
+			} else "auto-xy anchor-top-right self-center"
 		}, {
+			GiftButton = if fFlagAXGifting then var11 else nil,
 			RemoveButton = if p1.onRemove then reactModule.createElement(foundationModule.IconButton, {
 				icon = "x",
 				isCircular = true,
 				variant = foundationModule.Enums.ButtonVariant.Standard,
-				onActivated = p1.onRemove
+				onActivated = p1.onRemove,
+				LayoutOrder = if fFlagAXGifting then 2 else nil
 			}) else nil
 		}) else nil,
 		ItemRow = if fFlagAXDurables2Option then reactModule.createElement(foundationModule.View, {
@@ -216,6 +231,7 @@ return reactModule.memo(function(p1)
 					}),
 					onActivated = p1.onActivated,
 					onRemove = p1.onRemove,
+					giftButton = if fFlagAXGifting then var11 else nil,
 					creator = if fFlagAXMISSmallUIChanges then nil else { name = p1.creatorName, verified = p1.creatorVerified },
 					priceLineContent = var10,
 					itemStatusInCheckout = p1.status,
@@ -249,8 +265,8 @@ return reactModule.memo(function(p1)
 			if p1.timedOptions then
 				for i, v in p1.timedOptions do
 					if v.days == 3 or v.days == 0 then
-						local var11
-						local var12 = `Option{i}`
+						local var12
+						local var13 = `Option{i}`
 						local createElement = reactModule.createElement
 						local view = foundationModule.View
 						local t_1 = {
@@ -259,7 +275,7 @@ return reactModule.memo(function(p1)
 						}
 						local t_2 = {}
 						local createElement_1 = reactModule.createElement
-						local var13 = wearTimeOptionButton
+						local var14 = wearTimeOptionButton
 						local t_3 = { isFullWidth = true }
 						local t_4 = {
 							days = v.days,
@@ -268,31 +284,31 @@ return reactModule.memo(function(p1)
 						}
 						
 						if p1.selectedTimedOptionIndexInReducer then
-							var11 = i == p1.selectedTimedOptionIndexInReducer
-							var11 = nil
+							var12 = i == p1.selectedTimedOptionIndexInReducer
+							var12 = nil
 						else
-							var11 = v.selected
+							var12 = v.selected
 						end
-						t_4.selected = var11
+						t_4.selected = var12
 						t_4.priceInRobuxDiscountedByOffers = p1.priceInRobuxDiscountedByOffers
 						t_3.option = t_4
 						
 						function t_3.onActivated()
 							-- upvalues: p1 (copy), i (ref), setSelectedTimedOptionPrice (copy)
-							local var14 = p1.timedOptions[i]
+							local var15 = p1.timedOptions[i]
 							
-							if var14 then
+							if var15 then
 								if setSelectedTimedOptionPrice then
-									setSelectedTimedOptionPrice(var14.price)
+									setSelectedTimedOptionPrice(var15.price)
 								end
 								if p1.onTimedOptionPriceChanged then
-									p1.onTimedOptionPriceChanged(var14.price, if var14.days == 0 then nil else var14.days)
+									p1.onTimedOptionPriceChanged(var15.price, if var15.days == 0 then nil else var15.days)
 								end
 							end
 						end
 						
-						t_2.Button = createElement_1(var13, t_3)
-						t[var12] = createElement(view, t_1, t_2)
+						t_2.Button = createElement_1(var14, t_3)
+						t[var13] = createElement(view, t_1, t_2)
 					end
 				end
 			end

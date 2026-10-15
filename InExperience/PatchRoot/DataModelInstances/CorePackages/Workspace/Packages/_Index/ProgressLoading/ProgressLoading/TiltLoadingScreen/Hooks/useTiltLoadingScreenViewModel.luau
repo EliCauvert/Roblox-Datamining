@@ -6,15 +6,14 @@ local signalsReactModule = require(parent_1.SignalsReact)
 local constantsModule = require(tiltLoadingScreen.Constants)
 local createTiltLoadingScreenModelModule = require(tiltLoadingScreen.Models.createTiltLoadingScreenModel)
 local loadingScreenTelemetryModule = require(parent.LoadingScreenTelemetry)
-local useScreenSizeModule = require(script.Parent.useScreenSize)
 local _ = require(tiltLoadingScreen.Types)
 
-return function(value)
-	-- upvalues: reactModule (ref), createTiltLoadingScreenModelModule (ref), signalsReactModule (ref), useScreenSizeModule (ref), loadingScreenTelemetryModule (ref), constantsModule (ref)
+return function(value, p1, p2)
+	-- upvalues: reactModule (ref), createTiltLoadingScreenModelModule (ref), signalsReactModule (ref), loadingScreenTelemetryModule (ref), constantsModule (ref)
 	local var1 = reactModule.useMemo(function()
-		-- upvalues: createTiltLoadingScreenModelModule (copy), value (ref)
-		return createTiltLoadingScreenModelModule(value)
-	end, { value })
+		-- upvalues: createTiltLoadingScreenModelModule (copy), value (ref), p2 (ref)
+		return createTiltLoadingScreenModelModule(value, nil, p2)
+	end, { value, p2 })
 	local var2 = signalsReactModule.useSignalState(var1.getAssetInfo)
 	local var3 = signalsReactModule.useSignalState(var1.getUniverseId)
 	local var4 = signalsReactModule.useSignalState(var1.getFollowUserId)
@@ -24,29 +23,28 @@ return function(value)
 	local var8 = signalsReactModule.useSignalState(var1.getQueuePosition)
 	local var9 = signalsReactModule.useSignalState(var1.getQueueTreatment)
 	local var10 = signalsReactModule.useSignalState(var1.getServerStatusText)
-	local var11 = useScreenSizeModule()
-	local var12 = reactModule.useRef(var5)
-	local var13 = reactModule.useRef(false)
+	local var11 = reactModule.useRef(var5)
+	local var12 = reactModule.useRef(false)
 	reactModule.useEffect(function()
 		-- upvalues: var1 (ref)
 		var1.start()
 		
 		return var1.destroy
 	end, { var1 })
-	var12.current = var5
-	var13.current = not (var3 <= 0)
+	var11.current = var5
+	var12.current = not (var3 <= 0)
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var12 (ref), loadingScreenTelemetryModule (copy)
+		-- upvalues: var12 (ref), var11 (ref), loadingScreenTelemetryModule (copy)
 		return function()
-			-- upvalues: var13 (copy), var12 (copy), loadingScreenTelemetryModule (copy)
-			if var13.current and var12.current == nil then
+			-- upvalues: var12 (copy), var11 (copy), loadingScreenTelemetryModule (copy)
+			if var12.current and var11.current == nil then
 				loadingScreenTelemetryModule.countPlayerLocalizationChoiceNotReady()
 			end
 		end
 	end, {})
 	
 	return {
-		isMobile = math.min(var11.X, var11.Y) <= constantsModule.MOBILE_BREAKPOINT,
+		isMobile = math.min(p1.X, p1.Y) <= constantsModule.MOBILE_BREAKPOINT,
 		gameData = reactModule.useMemo(function()
 			-- upvalues: var2 (ref)
 			return if var2 then {
@@ -68,14 +66,14 @@ return function(value)
 				-- upvalues: var1 (ref)
 				var1.launchExperience()
 			end, { var1 }),
-			onJoinNewServer = reactModule.useCallback(function(p1)
+			onJoinNewServer = reactModule.useCallback(function(p3)
 				-- upvalues: var1 (ref)
-				var1.logQueuedStateButtonClick("JoinNewServer", p1)
+				var1.logQueuedStateButtonClick("JoinNewServer", p3)
 				var1.launchExperience()
 			end, { var1 }),
-			onJoinTheLine = reactModule.useCallback(function(p1)
+			onJoinTheLine = reactModule.useCallback(function(p3)
 				-- upvalues: var1 (ref)
-				var1.logQueuedStateButtonClick("JoinTheLine", p1)
+				var1.logQueuedStateButtonClick("JoinTheLine", p3)
 			end, { var1 }),
 			onShowConnectionHealth = reactModule.useCallback(function()
 				-- upvalues: var1 (ref)

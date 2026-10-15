@@ -26,6 +26,7 @@ local fFlagSduiMarketplaceCatalogCategorySupport = sharedFlagsModule.FFlagSduiMa
 local fFlagSduiMarketplaceCatalogSortSupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport
 local fFlagSduiAddMarketplaceEntityDataHydration = sharedFlagsModule.FFlagSduiAddMarketplaceEntityDataHydration
 local fFlagSduiAddCollectibleItemDataHydration = sharedFlagsModule.FFlagSduiAddCollectibleItemDataHydration
+local fFlagSduiLeaderboardComponent = sharedFlagsModule.FFlagSduiLeaderboardComponent
 local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local fFlagSduiCapabilityBindings = sharedFlagsModule.FFlagSduiCapabilityBindings
 local fFlagMigrateGameInfoToStore = sharedFlagsModule.FFlagMigrateGameInfoToStore
@@ -102,6 +103,11 @@ end
 local _ = function(a)
 	-- upvalues: dataHydrationModule (ref)
 	dataHydrationModule.CollectibleItem.getCollectibleItemStore(false).updateCollectibleItemInfos(a)
+end
+
+local _ = function(p1)
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.LeaderboardStats.getLeaderboardStatsStore(false).updateLeaderboardStatsBatch(p1)
 end
 
 local _ = function(p1)
@@ -240,7 +246,7 @@ local function calculateAgeRecommendationDerivedField(p2, p3, _)
 end
 
 local function getDataObjectSignal(value, _, p4, p5)
-	-- upvalues: dataHydrationModule (ref), sduiDataBindingContentTypeModule (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiNotificationBadgeHydration (ref)
+	-- upvalues: dataHydrationModule (ref), sduiDataBindingContentTypeModule (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiLeaderboardComponent (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiNotificationBadgeHydration (ref)
 	if value == "badge" then
 		return dataHydrationModule.Badges.getBadgeInfoStore(false).getBadgeInfo(tostring(p4))
 	elseif value == "creator" then
@@ -287,6 +293,8 @@ local function getDataObjectSignal(value, _, p4, p5)
 				return dataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).getMarketplaceLookInfo(p4)
 			elseif fFlagSduiAddCollectibleItemDataHydration and value == "collectibleItem" then
 				return dataHydrationModule.CollectibleItem.getCollectibleItemStore(false).getCollectibleItemInfo(p4)
+			elseif fFlagSduiLeaderboardComponent and value == "leaderboardStats" then
+				return dataHydrationModule.LeaderboardStats.getLeaderboardStatsStore(false).getLeaderboardStats(tostring(p4))
 			elseif fFlagSduiDevStoreSeeAllSupport then
 				return if value == "gameDeveloperProduct" then dataHydrationModule.Game.getGameDeveloperProductStore(false).getGameDeveloperProductInfo(tostring(p4)) elseif value == "gameSubscription" then dataHydrationModule.Game.getGameSubscriptionStore(false).getGameSubscriptionInfo(tostring(p4)) elseif fFlagSduiNotificationBadgeHydration and value == "notificationBadge" then dataHydrationModule.NotificationBadge.getNotificationBadgeStore(false).getNotificationBadge(tostring(p4)) else nil
 			end
@@ -369,7 +377,7 @@ local function getFieldValueForClientContentType(p4, p5, p6, p7)
 				if var7 then
 					return var8
 				end
-				error(`Failed to find policy value for '{table.concat(p30, ".")}'`)
+				error(`Failed to find policy value for '{table.concat(p31, ".")}'`)
 			else
 				error(`Failed to find rawPolicy table when binding value {table.concat(p5, ".")}`)
 			end
@@ -520,6 +528,7 @@ local t_1 = {
 	marketplaceBundle = if fFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
 	marketplaceLook = if fFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
 	collectibleItem = if fFlagSduiAddCollectibleItemDataHydration then getDataHydrationField else nil,
+	leaderboardStats = if fFlagSduiLeaderboardComponent then getDataHydrationField else nil,
 	song = getDataHydrationField,
 	gamePass = getDataHydrationField,
 	gameDeveloperProduct = if fFlagSduiDevStoreSeeAllSupport then getDataHydrationField else nil,
@@ -537,7 +546,7 @@ local t_1 = {
 
 return {
 	updateDataStores = function(p13)
-		-- upvalues: dataHydrationModule (ref), fFlagMigrateGameInfoToStore (ref), updateVoteCountsFromUniverses (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiNotificationBadgeHydration (ref)
+		-- upvalues: dataHydrationModule (ref), fFlagMigrateGameInfoToStore (ref), updateVoteCountsFromUniverses (ref), fFlagSduiCommunitySectionSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref), fFlagSduiAddCollectibleItemDataHydration (ref), fFlagSduiLeaderboardComponent (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiNotificationBadgeHydration (ref)
 		if p13.badge then
 			dataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p13.badge)
 		end
@@ -613,6 +622,9 @@ return {
 		end
 		if fFlagSduiAddCollectibleItemDataHydration and p13.collectibleItem then
 			dataHydrationModule.CollectibleItem.getCollectibleItemStore(false).updateCollectibleItemInfos(p13.collectibleItem)
+		end
+		if fFlagSduiLeaderboardComponent and p13.leaderboardStats then
+			dataHydrationModule.LeaderboardStats.getLeaderboardStatsStore(false).updateLeaderboardStatsBatch(p13.leaderboardStats)
 		end
 		if fFlagSduiDevStoreSeeAllSupport then
 			if p13.gameDeveloperProduct then

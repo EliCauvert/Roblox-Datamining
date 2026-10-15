@@ -1,47 +1,32 @@
 ﻿local marketplaceService = game:GetService("MarketplaceService")
 local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local roact = require(purchasePrompt.Parent.PurchasePromptDeps).Roact
-local errorOccurredModule = require(purchasePrompt.Actions.ErrorOccurred)
-local purchaseErrorModule = require(purchasePrompt.Enums.PurchaseError)
 local retryAfterUpsellModule = require(purchasePrompt.Thunks.retryAfterUpsell)
 local connectToStoreModule = require(purchasePrompt.connectToStore)
-local counterModule = require(purchasePrompt.Enums.Counter)
-local sendCounterModule = require(purchasePrompt.Thunks.sendCounter)
 local handleNativePurchaseFailureOrCancelModule = require(purchasePrompt.Thunks.handleNativePurchaseFailureOrCancel)
 local externalEventConnectionModule = require(script.Parent.ExternalEventConnection)
-local fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal = require(purchasePrompt.Parent.SharedFlags).FFlagEnableBlackbirdUpsellInUnifiedPurchaseModal
 local fFlagLuaAppEnableNativePurchaseFinishedV2Signals = require(purchasePrompt.Parent.SharedFlags).FFlagLuaAppEnableNativePurchaseFinishedV2Signals
 
 return connectToStoreModule(nil, function(p1)
-	-- upvalues: retryAfterUpsellModule (ref), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (ref), handleNativePurchaseFailureOrCancelModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), sendCounterModule (ref), counterModule (ref)
+	-- upvalues: retryAfterUpsellModule (ref), handleNativePurchaseFailureOrCancelModule (ref)
 	return {
 		nativePurchaseFinished = function(_, _, p2, _)
-			-- upvalues: p1 (ref), retryAfterUpsellModule (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), handleNativePurchaseFailureOrCancelModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), sendCounterModule (copy), counterModule (copy)
+			-- upvalues: p1 (ref), retryAfterUpsellModule (copy), handleNativePurchaseFailureOrCancelModule (copy)
 			if p2 then
 				p1(retryAfterUpsellModule())
 				
 				return
-			elseif fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then
-				p1(handleNativePurchaseFailureOrCancelModule())
-				
-				return
 			end
-			p1(errorOccurredModule(purchaseErrorModule.InvalidFundsUnknown))
-			p1(sendCounterModule(counterModule.UpsellFailedNativePurchase))
+			p1(handleNativePurchaseFailureOrCancelModule())
 		end,
 		nativePurchaseFinishedWithLocalPlayer = function(_, p2, _)
-			-- upvalues: p1 (ref), retryAfterUpsellModule (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), handleNativePurchaseFailureOrCancelModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), sendCounterModule (copy), counterModule (copy)
+			-- upvalues: p1 (ref), retryAfterUpsellModule (copy), handleNativePurchaseFailureOrCancelModule (copy)
 			if p2 then
 				p1(retryAfterUpsellModule())
 				
 				return
-			elseif fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then
-				p1(handleNativePurchaseFailureOrCancelModule())
-				
-				return
 			end
-			p1(errorOccurredModule(purchaseErrorModule.InvalidFundsUnknown))
-			p1(sendCounterModule(counterModule.UpsellFailedNativePurchase))
+			p1(handleNativePurchaseFailureOrCancelModule())
 		end
 	}
 end)(function(p1)

@@ -82,11 +82,15 @@ return function(p1)
 			-- upvalues: getTransparencyStoreModule (copy)
 			getTransparencyStoreModule(false).resetAllTransparency()
 		end,
-		onSendChat = function(p2, p3, p4)
+		onSendChat = function(p2, p3, p4, p5)
 			-- upvalues: runVirtualChatCommandModule (copy), playersService (copy), commands (copy), textChatService (copy), loggerModule (copy), promiseModule (copy), expChatFlipDictationPriorityV2 (copy), fFlagExpChatDictatedSpeechEnabledModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), list (copy), configModule (copy), fFlagExpChatDictation (copy), dictationAnalyticsModule (copy), analytics (copy), computeEditDistanceModule (copy), fFlagExpChatDictationGrafanaMetricsModule (copy)
 			if string.sub(p2, 1, 1) == "/" and runVirtualChatCommandModule(p2, if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0, commands.getVirtualLocalEnabledCommands(), "RBXGeneral") then return end
 			local chatInputBarConfiguration = textChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
-			local var1 = if chatInputBarConfiguration then chatInputBarConfiguration.TargetTextChannel else nil
+			local var1 = p5
+			
+			if var1 == nil and chatInputBarConfiguration then
+				var1 = chatInputBarConfiguration.TargetTextChannel
+			end
 			loggerModule:debug("onSendChat: {} to {}", p2, if var1 then var1.Name else "nil")
 			
 			if var1 then
@@ -110,8 +114,8 @@ return function(p1)
 					local t = {
 						channelName = var1.Name,
 						senderUserId = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil,
-						numParticipants = list.count(var1:GetChildren(), function(p5)
-							return p5:IsA("TextSource")
+						numParticipants = list.count(var1:GetChildren(), function(p6)
+							return p6:IsA("TextSource")
 						end),
 						isDefaultChannel = if configModule[var1.Name] then "true" else "false"
 					}
@@ -158,8 +162,8 @@ return function(p1)
 							dictationAnalyticsModule.reportMessageSentCounter(p3.mode)
 						end
 					end
-				end):catch(function(p5)
-					warn(p5.error)
+				end):catch(function(p6)
+					warn(p6.error)
 				end)
 			else
 				loggerModule:warning("TargetTextChannel was nil!")

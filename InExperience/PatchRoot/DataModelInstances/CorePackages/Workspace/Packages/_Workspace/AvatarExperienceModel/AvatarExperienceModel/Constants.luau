@@ -1,8 +1,6 @@
 ﻿local avatarExperienceModel = script:FindFirstAncestor("AvatarExperienceModel")
 local _ = require(avatarExperienceModel.Types.CommonTypes)
-local avatarExperienceFlagsModule = require(avatarExperienceModel.Parent.AvatarExperienceFlags)
-local fFlagAXCatalogBodySuits = avatarExperienceFlagsModule.FFlagAXCatalogBodySuits
-local fFlagAXInventoryDurablesSupport = avatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
+local fFlagAXInventoryDurablesSupport = require(avatarExperienceModel.Parent.AvatarExperienceFlags).FFlagAXInventoryDurablesSupport
 local t = {}
 local t_1 = {}
 local enumItems = Enum.BundleType:GetEnumItems()
@@ -77,7 +75,7 @@ return {
 			Tops = 12,
 			Outerwear = 12,
 			Bottoms = 12,
-			Bodysuits = if fFlagAXCatalogBodySuits then 12 else nil
+			Bodysuits = 12
 		},
 		Makeup = {
 			Makeup = game:DefineFastInt("AXMakeupZoomRadius", 7),

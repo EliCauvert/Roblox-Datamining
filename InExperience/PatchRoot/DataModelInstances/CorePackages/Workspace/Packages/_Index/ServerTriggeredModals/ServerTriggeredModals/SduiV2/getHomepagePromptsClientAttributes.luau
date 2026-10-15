@@ -2,7 +2,7 @@
 local parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEdpGameLeavePromptsHandlerEnabled = sharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
-local fFlagSduiClientDrivenTemplates = sharedFlagsModule.FFlagSplitPaneEducationalTour and sharedFlagsModule.FFlagSduiClientDrivenTemplates
+local fFlagSplitPaneEducationalTour = sharedFlagsModule.FFlagSplitPaneEducationalTour
 local promiseModule = require(parent.Promise)
 local notificationsUpsellModule = require(parent.NotificationsUpsell)
 local reactModule = require(parent.React)
@@ -35,10 +35,10 @@ local _ = function(p1)
 end
 
 local function getExistingHomepageClientAttributes()
-	-- upvalues: fFlagSduiClientDrivenTemplates (ref), parent (ref), appStorageService (ref)
+	-- upvalues: fFlagSplitPaneEducationalTour (ref), parent (ref), appStorageService (ref)
 	local t = {}
 	
-	if fFlagSduiClientDrivenTemplates and require(parent.SplitPane).isSplitPaneTourSupported() then
+	if fFlagSplitPaneEducationalTour and require(parent.SplitPane).isSplitPaneTourSupported() then
 		t.isSplitPaneTourSupported = "true"
 	end
 	local ok, status = pcall(appStorageService.GetItem, appStorageService, "KidsAccountHasResetToDefaultTheme")
