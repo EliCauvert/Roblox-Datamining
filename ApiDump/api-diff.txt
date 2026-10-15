@@ -1,231 +1,380 @@
-Version version-9b554450a0fc4e65 (2026-10-08 18:36:04 UTC)
+Version version-4f087c32742644ab (2026-10-15 08:37:13 UTC)
 ============================================================
 
-Added Class TestExecutionContext : Object [NotCreatable] [NotReplicated]
+Added Class FeatureMatchingTable : Instance
+	Added Property FeatureMatchingTable.SchemaName: string [ReadOnly]
+	Added Property FeatureMatchingTable.Data: SharedString [Hidden] [NotScriptable]
+	Added Function FeatureMatchingTable:GetSchema() -> { [string]: any }
 
-Added Class TestFailure : Object [NotCreatable] [NotReplicated]
-	Added Property TestFailure.Line: number [ReadOnly]
-	Added Property TestFailure.Matcher: string [ReadOnly]
-	Added Property TestFailure.Message: string [ReadOnly]
-	Added Property TestFailure.StackTrace: string [ReadOnly]
-	Added Function TestFailure:GetActual() -> any
-	Added Function TestFailure:GetContext() -> { [string]: any }
-	Added Function TestFailure:GetExpected() -> any
-	Added Function TestFailure:GetSource() -> Instance?
+Added Class InputReplayService : Instance [NotCreatable] [Service] [NotReplicated]
 
-Added Class TestResult : Object [NotCreatable] [NotReplicated]
-	Added Property TestResult.Duration: number [ReadOnly]
-	Added Property TestResult.FailedChecks: number [ReadOnly]
-	Added Property TestResult.PassedChecks: number [ReadOnly]
-	Added Property TestResult.Status: Enum.TestCaseStatus [ReadOnly]
-	Added Property TestResult.SuiteName: string [ReadOnly]
-	Added Property TestResult.TestId: string [ReadOnly]
-	Added Property TestResult.TestName: string [ReadOnly]
-	Added Property TestResult.UncaughtError: string [ReadOnly]
-	Added Function TestResult:GetFailures() -> { any }
-	Added Function TestResult:GetTestTags() -> { any }
+Added Class ParticleEmitter2D : Instance [NotBrowsable]
+	Added Property ParticleEmitter2D.Blend: number {🚧Basic}
+	Added Property ParticleEmitter2D.Brightness: number {🚧Basic}
+	Added Property ParticleEmitter2D.Color: ColorSequence {🚧Basic}
+	Added Property ParticleEmitter2D.LightEmission: number {🚧Basic}
+	Added Property ParticleEmitter2D.Size: NumberSequence {🚧Basic}
+	Added Property ParticleEmitter2D.Squash: NumberSequence {🚧Basic}
+	Added Property ParticleEmitter2D.TextureContent: Content {🚧Basic}
+	Added Property ParticleEmitter2D.Transparency: NumberSequence {🚧Basic}
+	Added Property ParticleEmitter2D.ZIndex: number {🚧Basic}
+	Added Property ParticleEmitter2D.EmissionAngle: number {🚧Basic}
+	Added Property ParticleEmitter2D.EmissionMode: Enum.ParticleEmitter2DEmissionMode {🚧Basic}
+	Added Property ParticleEmitter2D.EmissionOffset: Vector2 {🚧Basic}
+	Added Property ParticleEmitter2D.EmissionSpread: Vector2 {🚧Basic}
+	Added Property ParticleEmitter2D.Enabled: boolean {🚧Basic}
+	Added Property ParticleEmitter2D.Lifetime: NumberRange {🚧Basic}
+	Added Property ParticleEmitter2D.Rate: number {🚧Basic}
+	Added Property ParticleEmitter2D.RotSpeed: NumberRange {🚧Basic}
+	Added Property ParticleEmitter2D.Rotation: NumberRange {🚧Basic}
+	Added Property ParticleEmitter2D.Speed: NumberRange {🚧Basic}
+	Added Property ParticleEmitter2D.SpreadAngle: number {🚧Basic}
+	Added Property ParticleEmitter2D.FlipbookBlendFrames: boolean {🚧Basic}
+	Added Property ParticleEmitter2D.FlipbookFramerate: NumberRange {🚧Basic}
+	Added Property ParticleEmitter2D.FlipbookLayout: Enum.ParticleFlipbookLayout {🚧Basic}
+	Added Property ParticleEmitter2D.FlipbookMode: Enum.ParticleFlipbookMode {🚧Basic}
+	Added Property ParticleEmitter2D.FlipbookSizeX: number {🚧Basic}
+	Added Property ParticleEmitter2D.FlipbookSizeY: number {🚧Basic}
+	Added Property ParticleEmitter2D.FlipbookStartRandom: boolean {🚧Basic}
+	Added Property ParticleEmitter2D.Acceleration: Vector2 {🚧Basic}
+	Added Property ParticleEmitter2D.Drag: number {🚧Basic}
+	Added Property ParticleEmitter2D.LockedToParent: boolean {🚧Basic}
+	Added Property ParticleEmitter2D.TimeScale: number {🚧Basic}
+	Added Function ParticleEmitter2D:Clear() -> () {🚧Basic}
+	Added Function ParticleEmitter2D:Emit(particleCount: number? = 16) -> () {🚧Basic}
+	Added Function ParticleEmitter2D:FastForward(numFrames: number) -> () {🚧Basic} {🔒RobloxScript}
+	Added Event ParticleEmitter2D.OnClearRequested() [Hidden] {🚧Basic} {🔒RobloxEngine}
+	Added Event ParticleEmitter2D.OnEmitRequested(particleCount: number) [Hidden] {🚧Basic} {🔒RobloxEngine}
 
-Added Class TestRunResult : Object [NotCreatable] [NotReplicated]
-	Added Property TestRunResult.Duration: number [ReadOnly]
-	Added Property TestRunResult.Failed: number [ReadOnly]
-	Added Property TestRunResult.Passed: number [ReadOnly]
-	Added Property TestRunResult.Skipped: number [ReadOnly]
-	Added Property TestRunResult.Status: Enum.TestRunStatus [ReadOnly]
-	Added Property TestRunResult.Summary: string [ReadOnly]
-	Added Property TestRunResult.Total: number [ReadOnly]
-	Added Function TestRunResult:GetTests() -> { any }
+Added Class PhysicsActivitySensor : SensorBase [NotBrowsable]
+	Added Property PhysicsActivitySensor.Position: Vector3 {🚧InternalTest} {🚀SimAccess}
+	Added Property PhysicsActivitySensor.Size: Vector3 {🚧InternalTest} {🚀SimAccess}
+	Added Property PhysicsActivitySensor.Active: boolean [ReadOnly] {🚧InternalTest}
 
-Added Class TestSuite : Object [NotCreatable] [NotReplicated]
-	Added Property TestSuite.SuiteName: string [ReadOnly]
-	Added Property TestSuite.TimeoutSec: number [ReadOnly]
-	Added Function TestSuite:GetTestTags() -> { any }
-	Added Function TestSuite:RegisterTest(testName: string, options: { [string]: any }? = nil, callback: ((...any) -> ...any)?) -> TestCase
+Added Property InputBinding.Deadzone: NumberRange {🚧Input}
+Added Property PhysicsSettings.DrawShapecast: boolean {🔒Plugin}
+Added Property StarterGear.Loaded: boolean [ReadOnly] {🚧Players}
+Added Property UIDragDetector.Selectable: boolean {🚧UI}
+Added Property AudioSpeechToText.UsageType: string [Hidden] {🚧Audio} {🔒RobloxScript}
+Added Property GuiService.CoreUISafeAreaInsetBottomRight: Vector2 [Hidden] [ReadOnly] [NotScriptable] {🚧UI} {🔒RobloxEngine}
+Added Property GuiService.CoreUISafeAreaInsetTopLeft: Vector2 [Hidden] [ReadOnly] [NotScriptable] {🚧UI} {🔒RobloxEngine}
+Added Property GuiService.FullscreenViewport: Rect [Hidden] [ReadOnly] [NotScriptable] {🚧UI} {🔒RobloxEngine}
+Added Property GuiService.HardwareSafeAreaInsetBottomRight: Vector2 [Hidden] [ReadOnly] [NotScriptable] {🚧UI} {🔒RobloxEngine}
+Added Property GuiService.HardwareSafeAreaInsetTopLeft: Vector2 [Hidden] [ReadOnly] [NotScriptable] {🚧UI} {🔒RobloxEngine}
+Added Property GuiService.ScreenContextRawScreenScale: number [Hidden] [ReadOnly] [NotScriptable] {🚧UI} {🔒RobloxEngine}
+Added Property GuiService.ScreenContextTopbarInset: Rect [Hidden] [ReadOnly] [NotScriptable] {🚧UI} {🔒RobloxEngine}
+Added Property Humanoid.InternalAvatarRulesRootPartSize: Vector3 [Hidden] [NotScriptable] {🚧AvatarAppearance}
+Added Property Humanoid.InternalAvatarRulesRootPartSizeScalesWithBody: boolean [Hidden] [NotScriptable] {🚧AvatarAppearance}
+Added Property StarterPlayer.UseImprovedCharacterEvents: Enum.RolloutState [NotScriptable] {🚧Players} {🔒RobloxScript}
+Added Property AvatarAccessoryRules.BackAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarAccessoryRules.FaceAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarAccessoryRules.FrontAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarAccessoryRules.HairAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarAccessoryRules.HeadAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarAccessoryRules.NeckAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarAccessoryRules.ShoulderAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarAccessoryRules.WaistAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.ClimbAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.FallAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.IdleAltAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.IdleAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.JumpAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.MoodAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.RunAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.SwimAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.SwimIdleAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarAnimationRules.WalkAnimationOverride: number {🔒RobloxScript}
+Added Property AvatarBodyRules.AvatarType: Enum.GameAvatarType {🔒RobloxScript}
+Added Property AvatarBodyRules.CustomBuildBodyType: NumberRange {🔒RobloxScript}
+Added Property AvatarBodyRules.CustomBuildHead: NumberRange {🔒RobloxScript}
+Added Property AvatarBodyRules.CustomBuildHeight: NumberRange {🔒RobloxScript}
+Added Property AvatarBodyRules.CustomBuildProportions: NumberRange {🔒RobloxScript}
+Added Property AvatarBodyRules.CustomBuildWidth: NumberRange {🔒RobloxScript}
+Added Property AvatarBodyRules.CustomWorldHeight: NumberRange {🔒RobloxScript}
+Added Property AvatarBodyRules.HeadOverride: number {🔒RobloxScript}
+Added Property AvatarBodyRules.LeftArmOverride: number {🔒RobloxScript}
+Added Property AvatarBodyRules.LeftLegOverride: number {🔒RobloxScript}
+Added Property AvatarBodyRules.RightArmOverride: number {🔒RobloxScript}
+Added Property AvatarBodyRules.RightLegOverride: number {🔒RobloxScript}
+Added Property AvatarBodyRules.TorsoOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.ClassicPantsAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.ClassicShirtsAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.ClassicTShirtsAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.DressSkirtAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.JacketAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.LeftShoesAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.PantsAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.RightShoesAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.ShirtAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.ShortsAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.SweaterAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarClothingRules.TShirtAccessoryOverride: number {🔒RobloxScript}
+Added Property AvatarSettings.RulesSchemaVersion: number {🔍RobloxScript} {✏️NotAccessible}
+Added Property Packages.OverridesRecalculated: boolean [Hidden] {🔒RobloxEngine}
 
-Added Class AnimationPlayer : Instance {🔒RobloxScript} [NotCreatable]
-	Added Property AnimationPlayer.AnimationContent: Content [Hidden] [NotReplicated] {🔒RobloxScript}
-	Added Property AnimationPlayer.AutoPlay: boolean [Hidden] [NotReplicated] {🔒RobloxScript}
-	Added Property AnimationPlayer.CurrentFrame: number [Hidden] [NotReplicated] {🔒RobloxScript}
-	Added Property AnimationPlayer.Enabled: boolean [Hidden] [NotReplicated] {🔒RobloxScript}
-	Added Property AnimationPlayer.IsPlaying: boolean [Hidden] [ReadOnly] {🔒RobloxScript}
-	Added Property AnimationPlayer.Loop: boolean [Hidden] [NotReplicated] {🔒RobloxScript}
-	Added Property AnimationPlayer.Speed: number [Hidden] [NotReplicated] {🔒RobloxScript}
-	Added Property AnimationPlayer.TimePosition: number [Hidden] [NotReplicated] {🔒RobloxScript}
-	Added Property AnimationPlayer.Track: string [NotReplicated] {🔒RobloxScript} [📁LoadOnly]
-	Added Function AnimationPlayer:Pause() -> () {🔒RobloxScript}
-	Added Function AnimationPlayer:Play() -> () {🔒RobloxScript}
-	Added Function AnimationPlayer:Stop() -> () {🔒RobloxScript}
+Added Function AssetService:FetchAssetWithFormat(url: string, assetFormat: string, options: { [string]: any }?) -> { Instance } [Yields] {🔒RobloxScript}
+Added Function GenerationService:GenerateAnimationAsync(inputs: { [string]: any }, options: { [string]: any }?, progressCallback: ((...any) -> ...any)?) -> ...any [Yields] {🚧DynamicGeneration} {🔒RobloxScript}
+Added Function Humanoid:ApplyAvatarRulesAsync(avatarRules: AvatarRules) -> () [Yields] {🔒RobloxScript}
+Added Function MarketplaceService:GetPassOwnershipAsync(user: Player, gamePassId: number) -> { [string]: any } [Yields] {🚧AssetRead}
+Added Function MarketplaceService:RedeemGamePassFreeTrial(user: Player, gamePassId: number, startTime: string, endTime: string) -> () {🔒RobloxScript}
+Added Function Player:LoadCharacterWithAvatarRulesAsync(avatarRules: AvatarRules) -> () [Yields] {🚧Players} {🔒RobloxScript}
+Added Function RunService:IsTeamCreateViewer() -> boolean {🚧Basic} {🔒RobloxScript} {🧬Safe}
+Added Function SoundService:GetPeakLevel() -> number {🚧Audio} {🔒RobloxScript}
+Added Function TestCase:Check(actualValue: any, expectedValue: any, message: string? = "") -> () [CustomLuaState]
+Added Function AnimatedImageService:AddAnimatedImageClipAsync(content: Content, clipName: string, frames: { any }) -> () [Yields] {🔒RobloxScript}
+Added Function AnimatedImageService:GetAnimatedImageClipFramesAsync(content: Content, clipName: string) -> { any } [Yields] {🔒RobloxScript}
+Added Function AnimatedImageService:GetAnimatedImageClipsChangedSignal(content: Content) -> RBXScriptSignal {🔒RobloxScript}
+Added Function AssetQualityService:FetchAssetQualitySummaryFromUrlAsync(summaryUrl: string, jobId: string, desiredQualityChecks: { any }) -> { [string]: any } [Yields] {🔒RobloxScript}
+Added Function SystemThemeService:setAppIcon(iconName: string) -> () {🔒RobloxScript}
 
-Added Class FriendsCallingService : Instance {🔒RobloxScript} [NotCreatable] [Service] [NotReplicated]
-	Added Function FriendsCallingService:EndCall() -> () {🔒RobloxScript}
-	Added Function FriendsCallingService:SetMuted(muted: boolean) -> () {🔒RobloxScript}
-	Added Function FriendsCallingService:SetVolume(volume: number) -> () {🔒RobloxScript}
-	Added Function FriendsCallingService:StartCall() -> () {🔒RobloxScript}
+Added Event MarketplaceService.GamePassFreeTrialRedeemed(player: Instance, gamePassId: number) {🔒RobloxScript}
+Added Event Player.EmotesLoaded() {🚧Players}
 
-Added Class HiddenPlayerService : Instance {🔒RobloxEngine} [NotCreatable] [Service]
-	Added Property HiddenPlayerService.LocalHiddenPlayer: Player? [Hidden] [ReadOnly] [NotScriptable] {🔒RobloxEngine}
+Added Enum FeatureChannelEncoding
+	Added EnumItem FeatureChannelEncoding.Float32 : 0
+	Added EnumItem FeatureChannelEncoding.Float16 : 1
 
-Added Class InstanceRegistryService : Instance {🔒RobloxScript} [NotCreatable] [Service] [NotReplicated]
-	Added Function InstanceRegistryService:GetIdentity(scopeRoot: Instance, instance: Instance) -> ScopedInstanceIdentity? {🔒RobloxScript}
+Added Enum FeatureNormalization
+	Added EnumItem FeatureNormalization.None : 0
+	Added EnumItem FeatureNormalization.StandardScore : 1
+	Added EnumItem FeatureNormalization.UnitL2 : 2
 
-Added Class UIBlur : UIComponent
-	Added Property UIBlur.Color: Color3 {🚧UI}
-	Added Property UIBlur.Strength: Enum.UIBlurStrength {🚧UI}
-	Added Property UIBlur.Transparency: number {🚧UI}
-	Added Property UIBlur.Enabled: boolean {🚧UI}
+Added Enum MetadataFieldType
+	Added EnumItem MetadataFieldType.UInt8 : 0
+	Added EnumItem MetadataFieldType.UInt16 : 1
+	Added EnumItem MetadataFieldType.UInt32 : 2
+	Added EnumItem MetadataFieldType.Float32 : 3
+	Added EnumItem MetadataFieldType.Int32 : 4
+	Added EnumItem MetadataFieldType.Int64 : 5
+	Added EnumItem MetadataFieldType.UInt64 : 6
+	Added EnumItem MetadataFieldType.Float64 : 7
+	Added EnumItem MetadataFieldType.Buffer : 8
+	Added EnumItem MetadataFieldType.Vector3 : 9
+	Added EnumItem MetadataFieldType.CFrame : 10
+	Added EnumItem MetadataFieldType.ContentId : 11
+	Added EnumItem MetadataFieldType.TagMask32 : 12
+	Added EnumItem MetadataFieldType.Vector2 : 13
 
-Added Property Camera.OrthographicMode: Enum.OrthographicMode {🚧Basic}
-Added Property Camera.OrthographicSize: number {🚧Basic}
-Added Property Camera.ProjectionType: Enum.ProjectionType {🚧Basic}
-Added Property Camera.ViewStretch: number {🚧Basic}
-Added Property Decal.ResampleMode: Enum.ResamplerMode {🚧Basic}
-Added Property SurfaceAppearance.SurfaceSlot: number {🚧Basic}
-Added Property TestCase.SuiteName: string [ReadOnly]
-Added Property TestCase.TestId: string [ReadOnly]
-Added Property TestCase.TestName: string [ReadOnly]
-Added Property TestCase.TimeoutSec: number [ReadOnly]
-Added Property Workspace.ReplicationFrequency: Enum.ReplicationMode {🚧PluginOrOpenCloud}
-Added Property Workspace.ReplicationThroughput: Enum.ReplicationMode {🚧PluginOrOpenCloud}
-Added Property VRService.PresentationMode: Enum.VRPresentationMode [Hidden] [ReadOnly] {🚧Input} {🔒RobloxScript}
-Added Property AnimatedImageService.UserCreatedTracks: BinaryString {🔒RobloxScript}
+Added Enum ParticleEmitter2DEmissionMode
+	Added EnumItem ParticleEmitter2DEmissionMode.Point : 0
+	Added EnumItem ParticleEmitter2DEmissionMode.BoundingBox : 1
 
-Added Function AnimationTrack:UpdateGraphNodeDefinition(nodeId: string, nodeDefinition: Instance) -> boolean {🚧Animation} {🔒RobloxScript}
-Added Function AudioEmitter:GetWorldCFrame() -> CFrame? {🚧Audio} {🔒RobloxScript}
-Added Function AudioListener:GetWorldCFrame() -> CFrame? {🚧Audio} {🔒RobloxScript}
-Added Function AudioPlayer:GetPlaybackState() -> string {🚧Audio} {🔒RobloxScript}
-Added Function MarketplaceService:CanUsersTransferRobuxAsync(sender: Player, receiverUser: User) -> Enum.RobuxTransferEligibility [Yields] {🚧PromptExternalPurchase}
-Added Function MarketplaceService:PromptVIPServerPurchase(player: Player) -> () {🚧PromptExternalPurchase}
-Added Function MeshPart:GetSurfaceSlotsAsync() -> { any } [Yields] {🚧Basic}
-Added Function ModerationService:BindViolationProcessor(priority: number, callback: (...any) -> ...any) -> RBXScriptConnection {🚧Consequences}
-Added Function ModerationService:MockViolationCallbackAsync(report: { [string]: any }) -> () {🚧Consequences}
-Added Function Sound:GetPlaybackState() -> string {🚧LegacySound} {🔒RobloxScript}
-Added Function Sound:GetWorldCFrame() -> CFrame? {🚧LegacySound} {🔒RobloxScript}
-Added Function SoundService:GetListenerWorldCFrame() -> CFrame? {🚧Audio} {🔒RobloxScript}
-Added Function Stats:GetMemoryUsageMbAllCategoriesFiltered(dmId: number, vmClass: number) -> { any } {🚧InternalTest}
-Added Function Stats:GetMemoryUsageMbFiltered(dmId: number, vmClass: number) -> number {🚧InternalTest}
-Added Function TestCase:GetTestTags() -> { any }
-Added Function TestService:ListTests() -> { any }
-Added Function TestService:RegisterSuite(suiteName: string, options: { [string]: any }? = nil) -> TestSuite
-Added Function TestService:ResetTestRegistry() -> ()
-Added Function TestService:RunTestsAsync(filter: { [string]: any }? = nil) -> TestRunResult [Yields]
-Added Function TestService:StartAudioCaptureAsync(artifactName: string? = "", options: { [string]: any }? = nil) -> ...any [Yields] {🚧InternalTest}
-Added Function TestService:StopAudioCaptureAsync() -> ...any [Yields] {🚧InternalTest}
-Added Function AnimatedImageService:CreateTrack(sourceContent: Content, trackName: string, frameDefinitions: { any }) -> AnimatedImageTrack {🔒RobloxScript}
-Added Function AnimatedImageService:DestroyTrack(sourceContent: Content, trackName: string) -> () {🔒RobloxScript}
-Added Function DataModelDiff:GetAttributeNames(identity: ScopedInstanceIdentity) -> { any } {🚧PluginOrOpenCloud} {🔒RobloxScript}
-Added Function PackageService:RevertAttributeOverridesAsync(scopeRoot: Instance, identities: { any }, attributeNames: { any }) -> () [Yields] {🔒RobloxScript}
-Added Function PackageService:RevertInstanceOverridesAsync(scopeRoot: Instance, identities: { any }) -> () [Yields] {🔒RobloxScript}
-Added Function PackageService:RevertPropertyOverridesAsync(scopeRoot: Instance, identities: { any }, propertyNames: { any }) -> () [Yields] {🔒RobloxScript}
-Added Function PopLatencyService:GetForcedPop() -> string {🔒RobloxScript}
-Added Function PopLatencyService:SetForcedPop(popCode: string) -> () {🔒RobloxScript}
+Added EnumItem AssetType.AnimatedImage : 95
 
-Added Event MarketplaceService.PromptVIPServerPurchaseRequested() {🔒RobloxScript}
-Added Event TestService.TestRegistryChanged()
+Added Tag [CustomLuaState] to Function TestCase:Require
 
-Added Enum OrthographicMode
-	Added EnumItem OrthographicMode.Vertical : 0
-	Added EnumItem OrthographicMode.Horizontal : 1
-	Added EnumItem OrthographicMode.Diagonal : 2
-	Added EnumItem OrthographicMode.MaxAxis : 3
+Added Tag [Deprecated] to Class AvatarRules
+	Added Tag [Deprecated] to Property AvatarRules.AvatarType
 
-Added Enum ProjectionType
-	Added EnumItem ProjectionType.Perspective : 0
-	Added EnumItem ProjectionType.Orthographic : 1
+Added Tag [Deprecated] to Function Humanoid:ApplyAvatarRules
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomAccessoryMode
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomBackAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomBackAccessoryId
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomFaceAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomFaceAccessoryId
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomFrontAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomFrontAccessoryId
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomHairAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomHairAccessoryId
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomHeadAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomHeadAccessoryId
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomNeckAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomNeckAccessoryId
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomShoulderAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomShoulderAccessoryId
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomWaistAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarAccessoryRules.CustomWaistAccessoryId
+Added Tag [Deprecated] to Property AvatarAnimationRules.AnimationClipsMode
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomClimbAnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomClimbAnimationId
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomFallAnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomFallAnimationId
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomIdleAlt1AnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomIdleAlt1AnimationId
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomIdleAlt2AnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomIdleAlt2AnimationId
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomIdleAnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomIdleAnimationId
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomJumpAnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomJumpAnimationId
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomRunAnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomRunAnimationId
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomSwimAnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomSwimAnimationId
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomSwimIdleAnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomSwimIdleAnimationId
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomWalkAnimationEnabled
+Added Tag [Deprecated] to Property AvatarAnimationRules.CustomWalkAnimationId
+Added Tag [Deprecated] to Property AvatarBodyRules.AppearanceMode
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomBodyBundleId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomBodyType
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomBodyTypeScale
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomEyebrowEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomEyebrowId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomEyelashEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomEyelashId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomFaceEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomFaceId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomHeadEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomHeadId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomHeadScale
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomHeight
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomHeightScale
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomLeftArmEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomLeftArmId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomLeftLegEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomLeftLegId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomMoodEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomMoodId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomProportionsScale
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomRightArmEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomRightArmId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomRightLegEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomRightLegId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomTorsoEnabled
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomTorsoId
+Added Tag [Deprecated] to Property AvatarBodyRules.CustomWidthScale
+Added Tag [Deprecated] to Property AvatarBodyRules.KeepPlayerHead
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomClassicPantsAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomClassicPantsAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomClassicShirtsAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomClassicShirtsAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomClassicTShirtsAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomClassicTShirtsAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomClothingMode
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomDressSkirtAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomDressSkirtAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomJacketAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomJacketAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomLeftShoesAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomLeftShoesAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomPantsAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomPantsAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomRightShoesAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomRightShoesAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomShirtAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomShirtAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomShortsAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomShortsAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomSweaterAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomSweaterAccessoryId
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomTShirtAccessoryEnabled
+Added Tag [Deprecated] to Property AvatarClothingRules.CustomTShirtAccessoryId
+Added Tag [Deprecated] to Property AvatarCollisionRules.LegacyCollisionMode
 
-Added Enum ReplicationMode
-	Added EnumItem ReplicationMode.Automatic : 0
-	Added EnumItem ReplicationMode.Low : 1
-	Added EnumItem ReplicationMode.Medium : 2
-	Added EnumItem ReplicationMode.High : 3
+Added Tag [Deprecated] to Enum AvatarSettingsAnimationClipsMode
+	Added Tag [Deprecated] to EnumItem AvatarSettingsAnimationClipsMode.PlayerChoice
+	Added Tag [Deprecated] to EnumItem AvatarSettingsAnimationClipsMode.CustomClips
 
-Added Enum RobuxTransferEligibility
-	Added EnumItem RobuxTransferEligibility.Unknown : 0
-	Added EnumItem RobuxTransferEligibility.Eligible : 1
-	Added EnumItem RobuxTransferEligibility.SenderNotEligible : 2
-	Added EnumItem RobuxTransferEligibility.ReceiverNotEligible : 3
+Added Tag [Deprecated] to Enum AvatarSettingsAppearanceMode
+	Added Tag [Deprecated] to EnumItem AvatarSettingsAppearanceMode.PlayerChoice
+	Added Tag [Deprecated] to EnumItem AvatarSettingsAppearanceMode.CustomParts
+	Added Tag [Deprecated] to EnumItem AvatarSettingsAppearanceMode.CustomBody
 
-Added Enum TestCaseStatus
-	Added EnumItem TestCaseStatus.Pass : 0
-	Added EnumItem TestCaseStatus.Fail : 1
-	Added EnumItem TestCaseStatus.TimedOut : 2
-	Added EnumItem TestCaseStatus.Skipped : 3
+Added Tag [Deprecated] to Enum AvatarSettingsCustomAccessoryMode
+	Added Tag [Deprecated] to EnumItem AvatarSettingsCustomAccessoryMode.PlayerChoice
+	Added Tag [Deprecated] to EnumItem AvatarSettingsCustomAccessoryMode.CustomAccessories
 
-Added Enum TestRunStatus
-	Added EnumItem TestRunStatus.Pass : 0
-	Added EnumItem TestRunStatus.Fail : 1
-	Added EnumItem TestRunStatus.NoTests : 2
-	Added EnumItem TestRunStatus.Skipped : 3
+Added Tag [Deprecated] to Enum AvatarSettingsCustomBodyType
+	Added Tag [Deprecated] to EnumItem AvatarSettingsCustomBodyType.AvatarReference
+	Added Tag [Deprecated] to EnumItem AvatarSettingsCustomBodyType.BundleId
 
-Added Enum UIBlurStrength
-	Added EnumItem UIBlurStrength.Light : 0
-	Added EnumItem UIBlurStrength.Medium : 1
-	Added EnumItem UIBlurStrength.Heavy : 2
+Added Tag [Deprecated] to Enum AvatarSettingsCustomClothingMode
+	Added Tag [Deprecated] to EnumItem AvatarSettingsCustomClothingMode.PlayerChoice
+	Added Tag [Deprecated] to EnumItem AvatarSettingsCustomClothingMode.CustomClothing
 
-Added Enum VRPresentationMode
-	Added EnumItem VRPresentationMode.Stereo : 0
-	Added EnumItem VRPresentationMode.Flat : 1
+Added Tag [Deprecated] to Enum AvatarSettingsLegacyCollisionMode
+	Added Tag [Deprecated] to EnumItem AvatarSettingsLegacyCollisionMode.R6Colliders
+	Added Tag [Deprecated] to EnumItem AvatarSettingsLegacyCollisionMode.InnerBoxColliders
 
-Added EnumItem PioneerSource.RobloxPioneerTest : 3
+Added Tag [NotBrowsable] to Class AdPlacement
 
-Added Tag [Deprecated] to Function TestService:RegisterTestLegacy
-Added Tag [NotReplicated] to Class AnimatedImageService
-Added Tag [NotReplicated] to Class TestCase
-
-Changed the superclass of Class TestCase 
-	from: "Instance"
-	  to: "Object"
-
-Changed the capabilities and security of Property Model.LevelOfDetail 
-	from:  {🔒Plugin}
-	  to: {🚧PluginOrOpenCloud} 
-
-Changed the capabilities and security of Property Workspace.LuauTypeCheckMode 
-	from:  {🔒Plugin}
-	  to: {🚧PluginOrOpenCloud} 
-
-Changed the capabilities and write permissions of Property MeshPart.RenderFidelity 
-	from: {🚧Basic} {✏️Plugin}
-	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
-
-Changed the capabilities and write permissions of Property Workspace.FallHeightEnabled 
-	from: {🚧Basic} {✏️Plugin}
-	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
-
-Changed the capabilities and write permissions of Property Workspace.FallenPartsDestroyHeight 
-	from: {🚧Basic} {✏️Plugin}
-	  to: {🚧🔎Basic} {🚧✏️PluginOrOpenCloud} 
-
-Changed the capabilities and write permissions of Property Workspace.StreamingEnabled 
+Changed the capabilities and write permissions of Property BaseScript.RunContext 
 	from:  {✏️Plugin}
 	  to: {🚧✏️PluginOrOpenCloud} 
 
-Changed the security of Property HumanoidRigDescription.OriginOffset 
+Changed the category of Property Workspace.GlobalWind 
+	from: "Behavior"
+	  to: "AirProperties"
+
+Changed the security of Property StarterPlayer.CreateDefaultPlayerModule 
+	from: 
+	  to: {🔒RobloxScript}
+
+Changed the security of Property Workspace.PlayerScriptsUseInputActionSystem 
+	from: 
+	  to: {🔒RobloxScript}
+
+Changed the capabilities and parameters of Function TestCase:Require 
+	from: {🚧InternalTest} (condition: boolean, message: string? = "", source: Instance? = nil, line: number? = 0)
+	  to:  (actualValue: any, expectedValue: any, message: string? = "")
+
+Changed the capabilities and security of Function AnimationRigData:LoadFromModel 
+	from: {🚧Animation} {🔒RobloxScript}
+	  to: {🚧Animation + PluginOrOpenCloud} 
+
+Changed the capabilities and security of Function Animator:StepAnimations 
+	from: {🚧Animation} {🔒Plugin}
+	  to: {🚧Animation + PluginOrOpenCloud} 
+
+Changed the capabilities and security of Function DigitsRigDescription:SetJoint 
+	from: {🚧Animation} {🔒RobloxScript}
+	  to: {🚧Animation + PluginOrOpenCloud} 
+
+Changed the capabilities and security of Function HumanoidRigDescription:GetJoint 
+	from: {🚧Animation} {🔒RobloxScript}
+	  to: {🚧Animation + PluginOrOpenCloud} 
+
+Changed the capabilities and security of Function HumanoidRigDescription:GetR15JointLabels 
+	from: {🚧Animation} {🔒RobloxScript}
+	  to: {🚧Animation + PluginOrOpenCloud} 
+
+Changed the capabilities and security of Function HumanoidRigDescription:SetJoint 
+	from: {🚧Animation} {🔒RobloxScript}
+	  to: {🚧Animation + PluginOrOpenCloud} 
+
+Changed the capabilities and security of Function HumanoidRigDescription:SetTposeAdjustment 
+	from: {🚧Animation} {🔒RobloxScript}
+	  to: {🚧Animation + PluginOrOpenCloud} 
+
+Changed the parameters of Function WorldRoot:Shapecast 
+	from: (part: BasePart, direction: Vector3, params: RaycastParams?)
+	  to: (part: BasePart, direction: Vector3, params: RaycastParams?, cframeOverride: CFrame?, sizeOverride: Vector3?)
+
+Changed the parameters of Function FriendsCallingService:StartCall 
+	from: ()
+	  to: (params: { [string]: any })
+
+Changed the security of Function LayerCollector:GetGuiObjectsAtPosition 
 	from: {🔒RobloxScript}
 	  to: 
 
-Changed the capabilities and parameters of Function TestService:RegisterTest 
-	from: {🚧InternalTest} (testOptions: { [string]: any })
-	  to:  (testName: string, options: { [string]: any }? = nil, callback: ((...any) -> ...any)?)
+Changed the parameters of Event ProjectService.ContentMapMutationResult 
+	from: (operationId: number, result: Enum.ProjectServiceOperationResult, authoritativeRevision: number)
+	  to: (operationId: number, result: number, authoritativeRevision: number)
 
-Changed the parameters of Function MarketplaceService:PerformSubscriptionPurchaseV3Async 
-	from: (productType: string, productId: string, paymentProvider: string, paymentSessionId: string)
-	  to: (productType: string, productId: string, paymentProvider: string, paymentSessionId: string, referrerId: number?)
+Removed Class AnimatedImageTrack
+	Removed Property AnimatedImageTrack.Duration
+	Removed Property AnimatedImageTrack.FrameCount
+	Removed Property AnimatedImageTrack.TrackName
+	Removed Function AnimatedImageTrack:GetContent
+	Removed Function AnimatedImageTrack:GetFrameNames
 
-Changed the parameters of Function TeleportService:TeleportSwitchServer 
-	from: ()
-	  to: (gameIdsToExclude: { any }? = {})
+Removed Function Player:LoadCharacterWithAvatarRules
+Removed Function StudioService:GetPlaceIsPersistedToCloud
+Removed Function AnimatedImageService:CreateTrack
+Removed Function AnimatedImageService:DestroyTrack
+Removed Function AnimatedImageService:GetFrameNames
+Removed Function AnimatedImageService:GetTrack
+Removed Function AnimatedImageService:GetTracksChanged
+Removed Function AnimatedImageService:Prewarm
+Removed Function AnimatedImageService:UnloadTracks
 
-Removed Class AnimatedImage
-	Removed Property AnimatedImage.Content
-	Removed Property AnimatedImage.PlaybackSpeed
-	Removed Function AnimatedImage:GetBoundTracks
-	Removed Function AnimatedImage:Pause
-	Removed Function AnimatedImage:Resume
+Removed Enum ProjectServiceOperationResult
 
-Removed Function PackageLink:getOverrides
-
-Removed Enum AnimatedImagePlaybackState
-	Removed EnumItem AnimatedImagePlaybackState.Begin
-	Removed EnumItem AnimatedImagePlaybackState.Playing
-	Removed EnumItem AnimatedImagePlaybackState.Paused
-	Removed EnumItem AnimatedImagePlaybackState.Completed
-	Removed EnumItem AnimatedImagePlaybackState.Canceled
+Removed Tag [Hidden] from Property SurfaceAppearance.ColorMapContent
+Removed Tag [Hidden] from Property SurfaceAppearance.MetalnessMapContent
+Removed Tag [Hidden] from Property SurfaceAppearance.NormalMapContent
+Removed Tag [Hidden] from Property SurfaceAppearance.RoughnessMapContent
+Removed Tag [NotScriptable] from Property StarterPlayer.CreateDefaultPlayerModule
+Removed Tag [NotScriptable] from Property Workspace.PlayerScriptsUseInputActionSystem
