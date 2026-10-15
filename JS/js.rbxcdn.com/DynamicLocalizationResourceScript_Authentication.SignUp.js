@@ -274,6 +274,10 @@ Roblox.LangDynamic["Authentication.SignUp"] = {
     "Label.PasswordErrorLowComplexity": "Has a letter and a number or symbol",
     "Label.PasswordErrorTooSimilarToUsername": "Isn't too similar to username",
     "Header.CancelAccountCreation": "Cancel account creation?",
-    "Action.ContinueSetup": "Continue setup"
+    "Action.ContinueSetup": "Continue setup",
+    "Subtitle.OpeningRoblox": "If Roblox doesn't open automatically, {linkStart}click here{linkEnd}",
+    "Header.OpeningRoblox": "Opening Roblox...",
+    "Description.OpeningRoblox": "You can close this tab after Roblox opens.",
+    "Response.GenericError": "An unexpected error occurred. Go back to {landingPage}"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.SignUp");

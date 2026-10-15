@@ -16,6 +16,7 @@ Roblox.LangDynamic["Common.AlertsAndOptions"] = {
     "Label.sSwitchAccount": "Switch Accounts",
     "Description.AccountSwitchedConfirmationBannerText": "You switched to {accountName}",
     "Labels.NewItem": "New item",
-    "Labels.NewUpdate": "New update"
+    "Labels.NewUpdate": "New update",
+    "Labels.LimitedTimeBonus": "Limited-time bonus"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Common.AlertsAndOptions");

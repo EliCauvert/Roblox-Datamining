@@ -1357,6 +1357,10 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Description.LegacyAutoAssignRoleBanner": "We recommend using the Base Member role as your default role for new\n members. You can customize the Base Member role to fit your Community by changing its name and permissions.",
     "Action.RemoveAffiliate": "Remove",
     "Action.TransferGroup": "Transfer Group",
-    "Action.ReplyWithCount": "Reply ({replyCount})"
+    "Action.ReplyWithCount": "Reply ({replyCount})",
+    "Label.LoadingForums": "Loading forums…",
+    "Heading.Overview": "Overview",
+    "Label.Explore": "Explore",
+    "Message.NoForumCategories": "No forums yet"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");

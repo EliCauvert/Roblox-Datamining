@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "a850a6f2-cb18-b00c-80cc-18f92b8b15f1")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "e7965716-c3ce-2e32-86cb-8945659f672b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 805386, e => {
@@ -136,8 +136,8 @@
                         f += 14;
                         for (var V = new u(R), x = new u(19), L = 0; L < I; ++L) x[p[L]] = M(e, f + 3 * L, 7);
                         f += 3 * I;
-                        for (var Q = N(x), H = (1 << Q) - 1, G = S(x, Q, 1), L = 0; L < R;) {
-                            var F = G[M(e, f, H)];
+                        for (var Q = N(x), G = (1 << Q) - 1, H = S(x, Q, 1), L = 0; L < R;) {
+                            var F = H[M(e, f, G)];
                             f += 15 & F;
                             var K = F >> 4;
                             if (K < 16) V[L++] = K;
@@ -216,12 +216,12 @@
             var n = t / 8 | 0;
             e[n] |= r, e[n + 1] |= r >> 8
         },
-        H = function(e, t, r) {
+        G = function(e, t, r) {
             r <<= 7 & t;
             var n = t / 8 | 0;
             e[n] |= r, e[n + 1] |= r >> 8, e[n + 2] |= r >> 16
         },
-        G = function(e, t) {
+        H = function(e, t) {
             for (var r = [], n = 0; n < e.length; ++n) e[n] && r.push({
                 s: n,
                 f: e[n]
@@ -328,9 +328,9 @@
         },
         q = function(e, t, r, n, a, i, o, s, c, u, d) {
             Q(t, d++, r), ++a[256];
-            for (var f, y, g, v, b = G(a, 15), A = b.t, D = b.l, C = G(i, 15), w = C.t, T = C.l, _ = K(A), O = _.c, N = _.n, M = K(w), U = M.c, P = M.n, k = new l(19), x = 0; x < O.length; ++x) ++k[31 & O[x]];
+            for (var f, y, g, v, b = H(a, 15), A = b.t, D = b.l, C = H(i, 15), w = C.t, T = C.l, _ = K(A), O = _.c, N = _.n, M = K(w), U = M.c, P = M.n, k = new l(19), x = 0; x < O.length; ++x) ++k[31 & O[x]];
             for (var x = 0; x < U.length; ++x) ++k[31 & U[x]];
-            for (var B = G(k, 7), L = B.t, F = B.l, q = 19; q > 4 && !L[p[q - 1]]; --q);
+            for (var B = H(k, 7), L = B.t, F = B.l, q = 19; q > 4 && !L[p[q - 1]]; --q);
             var Y = u + 5 << 3,
                 W = j(a, E) + j(i, I) + o,
                 X = j(a, A) + j(i, w) + o + 14 + 3 * q + j(k, L) + 2 * k[16] + 3 * k[17] + 7 * k[18];
@@ -351,12 +351,12 @@
                 var er = n[x];
                 if (er > 255) {
                     var et = er >> 18 & 31;
-                    H(t, d, f[et + 257]), d += y[et + 257], et > 7 && (Q(t, d, er >> 23 & 31), d += h[et]);
+                    G(t, d, f[et + 257]), d += y[et + 257], et > 7 && (Q(t, d, er >> 23 & 31), d += h[et]);
                     var en = 31 & er;
-                    H(t, d, g[en]), d += v[en], en > 3 && (H(t, d, er >> 5 & 8191), d += m[en])
-                } else H(t, d, f[er]), d += y[er]
+                    G(t, d, g[en]), d += v[en], en > 3 && (G(t, d, er >> 5 & 8191), d += m[en])
+                } else G(t, d, f[er]), d += y[er]
             }
-            return H(t, d, f[256]), d + y[256]
+            return G(t, d, f[256]), d + y[256]
         },
         Y = new d([65540, 131080, 131088, 131104, 262176, 1048704, 1048832, 2114560, 2117632]),
         W = new u(0),
@@ -375,24 +375,24 @@
                         L = 32767 & N,
                         Q = w[B];
                     if (C[L] = Q, w[B] = L, U <= N) {
-                        var H = o - N;
-                        if ((V > 7e3 || M > 24576) && (H > 423 || !p)) {
+                        var G = o - N;
+                        if ((V > 7e3 || M > 24576) && (G > 423 || !p)) {
                             f = q(e, c, 0, I, R, _, O, M, x, N - x, f), M = V = O = 0, x = N;
-                            for (var G = 0; G < 286; ++G) R[G] = 0;
-                            for (var G = 0; G < 30; ++G) _[G] = 0
+                            for (var H = 0; H < 286; ++H) R[H] = 0;
+                            for (var H = 0; H < 30; ++H) _[H] = 0
                         }
                         var F = 2,
                             K = 0,
                             j = b,
                             W = L - Q & 32767;
-                        if (H > 2 && B == E(N - W))
-                            for (var X = Math.min(g, H) - 1, $ = Math.min(32767, N), J = Math.min(258, H); W <= $ && --j && L != Q;) {
+                        if (G > 2 && B == E(N - W))
+                            for (var X = Math.min(g, G) - 1, $ = Math.min(32767, N), J = Math.min(258, G); W <= $ && --j && L != Q;) {
                                 if (e[N + F] == e[N + F - W]) {
                                     for (var Z = 0; Z < J && e[N + Z] == e[N + Z - W]; ++Z);
                                     if (Z > F) {
                                         if (F = Z, K = W, Z > X) break;
-                                        for (var ee = Math.min(W, Z - 2), et = 0, G = 0; G < ee; ++G) {
-                                            var er = N - W + G & 32767,
+                                        for (var ee = Math.min(W, Z - 2), et = 0, H = 0; H < ee; ++H) {
+                                            var er = N - W + H & 32767,
                                                 en = C[er],
                                                 ea = er - en & 32767;
                                             ea > et && (et = ea, Q = er)
@@ -510,7 +510,7 @@
             return [u, l, d, h, m, p, g, A, _, O, C, x, S, N, M, U, P, k, B, L, eV, el, ed]
         },
         es = function() {
-            return [u, l, d, h, m, p, v, D, R, E, V, I, C, Y, W, S, Q, H, G, F, K, j, z, q, P, k, X, ee, eI, el]
+            return [u, l, d, h, m, p, v, D, R, E, V, I, C, Y, W, S, Q, G, H, F, K, j, z, q, P, k, X, ee, eI, el]
         },
         ec = function() {
             return [eb, eA]
@@ -807,7 +807,7 @@
         }
     };
 
-    function eH(e, t) {
+    function eG(e, t) {
         if (t) {
             for (var r = new u(e.length), n = 0; n < e.length; ++n) r[n] = e.charCodeAt(n);
             return r
@@ -826,7 +826,7 @@
         return k(i, 0, o)
     }
 
-    function eG(e, t) {
+    function eH(e, t) {
         if (t) {
             for (var r = "", n = 0; n < e.length; n += 16384) r += String.fromCharCode.apply(null, e.subarray(n, n + 16384));
             return r
@@ -855,7 +855,7 @@
     }, (function(e) {
         this.ondata = e
     }).prototype.push = function(e, t) {
-        this.ondata || B(5), this.d && B(4), this.ondata(eH(e), this.d = t || !1)
+        this.ondata || B(5), this.d && B(4), this.ondata(eG(e), this.d = t || !1)
     };
     var eF = function(e) {
             return 1 == e ? 3 : e < 6 ? 2 : +(9 == e)
@@ -944,10 +944,10 @@
         var t = this;
         if (this.ondata || B(5), 2 & this.d) this.ondata(B(4 + (1 & this.d) * 8, 0, 1), null, !1);
         else {
-            var r = eH(e.filename),
+            var r = eG(e.filename),
                 n = r.length,
                 a = e.comment,
-                i = a && eH(a),
+                i = a && eG(a),
                 o = n != e.filename.length || i && a.length != i.length,
                 s = n + ej(e.extra) + 30;
             n > 65535 && this.ondata(B(11, 0, 1), null, !1);
@@ -1071,7 +1071,7 @@
                             m.k.unshift(p), i = 2;
                             var f = ef(c, o + 18),
                                 y = ef(c, o + 22),
-                                g = eG(c.subarray(o + 30, o += 30 + a), !(2048 & t)),
+                                g = eH(c.subarray(o + 30, o += 30 + a), !(2048 & t)),
                                 v = eK(c, o, u, 2, f, y, 0),
                                 b = v[0],
                                 A = v[1],
@@ -1121,7 +1121,7 @@
             let t = "";
             for (let r = 0; r < e.length; r += 32768) t += String.fromCharCode(...e.subarray(r, r + 32768));
             return btoa(t).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/u, "")
-        })(eI(eH(e))),
+        })(eI(eG(e))),
         e3 = (e, t) => {
             let r = (e => {
                 if (!e || !/^[A-Za-z0-9_-]+$/u.test(e)) return null;
@@ -1139,7 +1139,7 @@
             })(e);
             if (!r) return null;
             try {
-                let e = eG(eV(r));
+                let e = eH(eV(r));
                 return e.length <= t ? e : null
             } catch (e) {
                 return null
@@ -1472,8 +1472,8 @@
         B = /^Percentile\d+$/,
         L = new Set(Object.values(t.RAQIV2DateRangeType)),
         Q = Object.values(t.RAQIV2Dimension),
-        H = Object.values(t.RAQIV2UIPseudoDimension),
-        G = Object.values(t.RAQIV2MetricGranularity),
+        G = Object.values(t.RAQIV2UIPseudoDimension),
+        H = Object.values(t.RAQIV2MetricGranularity),
         F = Object.values(c.AnnotationType),
         K = t.RAQIV2UIPseudoDimension.PercentileType,
         j = t.RAQIV2UIPseudoDimension.AggregationType,
@@ -1488,7 +1488,7 @@
     }
 
     function X(e) {
-        return Q.includes(e) || H.includes(e)
+        return Q.includes(e) || G.includes(e)
     }
 
     function $(e) {
@@ -1878,7 +1878,7 @@
                             defaultGranularity: function(e, t) {
                                 if (null == e) return;
                                 let r = w(e, t);
-                                if (!G.includes(r)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be a known granularity."));
+                                if (!H.includes(r)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be a known granularity."));
                                 return r
                             }(a.defaultGranularity, "".concat(r, ".defaultGranularity")),
                             annotationOptions: function(e, t) {
@@ -1932,7 +1932,8 @@
             })
         }
     }, "validateDashboardDescription", 0, eh, "validateDashboardName", 0, ed], 646877);
-    let eC = {
+    let eC = o.READABLE_BACKEND_DOCUMENT_SCHEMA_VERSIONS,
+        ew = {
             [r.ChartType.Spline]: 1,
             [r.ChartType.Area]: 2,
             [r.ChartType.DurationSpline]: 7,
@@ -1942,7 +1943,7 @@
             [r.ChartType.Pie]: 5,
             [r.ChartType.Table]: 6
         },
-        ew = {
+        eT = {
             DASHBOARD_CHART_TYPE_SPLINE: r.ChartType.Spline,
             DASHBOARD_CHART_TYPE_AREA: r.ChartType.Area,
             DASHBOARD_CHART_TYPE_DURATION_SPLINE: r.ChartType.DurationSpline,
@@ -1960,7 +1961,7 @@
             5: r.ChartType.Pie,
             6: r.ChartType.Table
         },
-        eT = {
+        eS = {
             Cumulative: 1,
             Minute: 2,
             HalfHour: 3,
@@ -1968,7 +1969,7 @@
             Day: 5,
             Week: 6
         },
-        eS = {
+        eE = {
             DASHBOARD_GRANULARITY_CUMULATIVE: "Cumulative",
             DASHBOARD_GRANULARITY_MINUTE: "Minute",
             DASHBOARD_GRANULARITY_HALF_HOUR: "HalfHour",
@@ -1982,7 +1983,7 @@
             5: "Day",
             6: "Week"
         },
-        eE = {
+        eI = {
             [t.RAQIV2MetricGranularity.None]: 1,
             [t.RAQIV2MetricGranularity.OneMinute]: 2,
             [t.RAQIV2MetricGranularity.HalfHour]: 3,
@@ -1990,7 +1991,7 @@
             [t.RAQIV2MetricGranularity.OneDay]: 5,
             [t.RAQIV2MetricGranularity.OneWeek]: 6
         },
-        eI = {
+        eR = {
             DASHBOARD_GRANULARITY_CUMULATIVE: t.RAQIV2MetricGranularity.None,
             DASHBOARD_GRANULARITY_MINUTE: t.RAQIV2MetricGranularity.OneMinute,
             DASHBOARD_GRANULARITY_HALF_HOUR: t.RAQIV2MetricGranularity.HalfHour,
@@ -2004,7 +2005,7 @@
             5: t.RAQIV2MetricGranularity.OneDay,
             6: t.RAQIV2MetricGranularity.OneWeek
         },
-        eR = {
+        e_ = {
             [t.RAQIV2AggregationType.Sum]: 1,
             [t.RAQIV2AggregationType.Count]: 2,
             [t.RAQIV2AggregationType.Average]: 3,
@@ -2023,7 +2024,7 @@
             [o.CustomDashboardSummaryCardAggregation.Cumulative]: 24,
             [o.CustomDashboardSummaryCardAggregation.AveragePerUniqueUser]: 25
         },
-        e_ = {
+        eV = {
             DASHBOARD_AGGREGATION_SUM: t.RAQIV2AggregationType.Sum,
             DASHBOARD_AGGREGATION_COUNT: t.RAQIV2AggregationType.Count,
             DASHBOARD_AGGREGATION_AVERAGE: t.RAQIV2AggregationType.Average,
@@ -2059,66 +2060,66 @@
             24: o.CustomDashboardSummaryCardAggregation.Cumulative,
             25: t.RAQIV2AggregationType.AveragePerUser
         },
-        eV = {
+        eO = {
             [o.SummaryCardTitleSource.Auto]: 1,
             [o.SummaryCardTitleSource.Custom]: 2
         },
-        eO = {
+        eN = {
             DASHBOARD_TITLE_SOURCE_AUTO: o.SummaryCardTitleSource.Auto,
             DASHBOARD_TITLE_SOURCE_CUSTOM: o.SummaryCardTitleSource.Custom,
             1: o.SummaryCardTitleSource.Auto,
             2: o.SummaryCardTitleSource.Custom
         },
-        eN = {
+        eM = {
             none: 1,
             weekly: 2
         },
-        eM = {
+        eU = {
             DASHBOARD_CHART_SMOOTHING_NONE: "none",
             DASHBOARD_CHART_SMOOTHING_WEEKLY: "weekly",
             1: "none",
             2: "weekly"
         };
 
-    function eU(e) {
+    function eP(e) {
         return "object" == typeof e && null !== e && !Array.isArray(e)
     }
 
-    function eP(e) {
+    function ek(e) {
         return String(e)
     }
 
-    function ek(e) {
+    function ex(e) {
         throw new i.CustomDashboardValidationError("backendContract", e)
     }
 
-    function ex(e, t, r) {
-        let n = t[eP(e)];
-        return void 0 === n && ek("Unsupported ".concat(r, " value ").concat(String(e), ".")), n
-    }
-
     function eB(e, t, r) {
-        let n = t[eP(e)];
-        return void 0 === n && ek("Unsupported backend ".concat(r, " value ").concat(String(e), ".")), n
+        let n = t[ek(e)];
+        return void 0 === n && ex("Unsupported ".concat(r, " value ").concat(String(e), ".")), n
     }
 
-    function eL(e) {
+    function eL(e, t, r) {
+        let n = t[ek(e)];
+        return void 0 === n && ex("Unsupported backend ".concat(r, " value ").concat(String(e), ".")), n
+    }
+
+    function eQ(e) {
         let t = new Date(e).toISOString();
-        return Number.isNaN(Date.parse(t)) && ek("Timestamp is outside the supported RFC3339 range."), t
+        return Number.isNaN(Date.parse(t)) && ex("Timestamp is outside the supported RFC3339 range."), t
     }
 
-    function eQ(e, t) {
+    function eG(e, t) {
         if ("string" == typeof e) {
             let r = Date.parse(e);
-            return Number.isFinite(r) || ek("".concat(t, " is not a valid timestamp.")), r
+            return Number.isFinite(r) || ex("".concat(t, " is not a valid timestamp.")), r
         }
-        if (eU(e)) {
+        if (eP(e)) {
             var r, n;
             let a = Number(null != (r = e.seconds) ? r : 0),
                 i = Number(null != (n = e.nanos) ? n : 0);
-            return Number.isFinite(a) && Number.isFinite(i) || ek("".concat(t, " is not a valid timestamp.")), 1e3 * a + Math.floor(i / 1e6)
+            return Number.isFinite(a) && Number.isFinite(i) || ex("".concat(t, " is not a valid timestamp.")), 1e3 * a + Math.floor(i / 1e6)
         }
-        return ek("".concat(t, " is not a valid timestamp."))
+        return ex("".concat(t, " is not a valid timestamp."))
     }
 
     function eH(e) {
@@ -2128,41 +2129,41 @@
         }))
     }
 
-    function eG(e, t) {
-        return null == e ? [] : (Array.isArray(e) || ek("".concat(t, " must be an array.")), e.map((e, r) => {
+    function eF(e, t) {
+        return null == e ? [] : (Array.isArray(e) || ex("".concat(t, " must be an array.")), e.map((e, r) => {
             var n, a;
-            eU(e) || ek("".concat(t, "[").concat(r, "] must be an object."));
+            eP(e) || ex("".concat(t, "[").concat(r, "] must be an object."));
             let i = null != (n = null != (a = e.dimensionKey) ? a : e.dimension_key) ? n : e.dimension;
-            ("string" != typeof i || 0 === i.length) && ek("".concat(t, "[").concat(r, "].dimensionKey must be a non-empty string."));
+            ("string" != typeof i || 0 === i.length) && ex("".concat(t, "[").concat(r, "].dimensionKey must be a non-empty string."));
             let {
                 values: o
             } = e;
-            return Array.isArray(o) && o.every(e => "string" == typeof e) || ek("".concat(t, "[").concat(r, "].values must be an array of strings.")), {
+            return Array.isArray(o) && o.every(e => "string" == typeof e) || ex("".concat(t, "[").concat(r, "].values must be an array of strings.")), {
                 dimension: i,
                 values: o
             }
         }))
     }
 
-    function eF(e, t, r) {
-        if (null != e) return Array.isArray(e) && e.every(e => "string" == typeof e) || ek("".concat(t, " must be an array of strings.")), e.map((e, n) => r(e) ? e : ek("".concat(t, "[").concat(n, "] is unsupported.")))
+    function eK(e, t, r) {
+        if (null != e) return Array.isArray(e) && e.every(e => "string" == typeof e) || ex("".concat(t, " must be an array of strings.")), e.map((e, n) => r(e) ? e : ex("".concat(t, "[").concat(n, "] is unsupported.")))
     }
 
-    function eK(e, r) {
+    function ej(e, r) {
         var n;
         return (n = e.dimension) !== t.RAQIV2Dimension.CustomEventName && $(n) ? {
             dimension: e.dimension,
             values: [...e.values]
-        } : ek("".concat(r, " contains an unsupported dimension."))
+        } : ex("".concat(r, " contains an unsupported dimension."))
     }
 
-    function ej(e) {
+    function ez(e) {
         if (e && 0 !== e.length) return e.map(e => ({
             pseudoDimensionKey: e.pseudoDimensionKey,
             variantKey: e.variantKey
         }))
     }
-    let ez = {
+    let eq = {
         SUM: t.RAQIV2AggregationType.Sum,
         COUNT: t.RAQIV2AggregationType.Count,
         AVERAGE: t.RAQIV2AggregationType.Average,
@@ -2172,21 +2173,21 @@
         AVERAGE_PER_USER: t.RAQIV2AggregationType.AveragePerUser
     };
 
-    function eq(e) {
-        return Object.hasOwn(ez, e) ? ez[e] : void 0
+    function eY(e) {
+        return Object.hasOwn(eq, e) ? eq[e] : void 0
     }
 
-    function eY(e) {
+    function eW(e) {
         if (Array.isArray(e) && 0 !== e.length) return e.map((e, r) => {
             var n, a;
             let i, o, {
                     pseudoDimensionKey: s,
                     variantKey: c
-                } = (eU(e) || ek("variantSelections[".concat(r, "] must be an object.")), i = null != (n = e.pseudoDimensionKey) ? n : e.pseudo_dimension_key, o = null != (a = e.variantKey) ? a : e.variant_key, ("string" != typeof i || "string" != typeof o) && ek("variantSelections[".concat(r, "] is missing keys.")), {
+                } = (eP(e) || ex("variantSelections[".concat(r, "] must be an object.")), i = null != (n = e.pseudoDimensionKey) ? n : e.pseudo_dimension_key, o = null != (a = e.variantKey) ? a : e.variant_key, ("string" != typeof i || "string" != typeof o) && ex("variantSelections[".concat(r, "] is missing keys.")), {
                     pseudoDimensionKey: i,
                     variantKey: o
                 }),
-                u = s === t.RAQIV2UIPseudoDimension.AggregationType ? eq(c) : void 0;
+                u = s === t.RAQIV2UIPseudoDimension.AggregationType ? eY(c) : void 0;
             return {
                 pseudoDimensionKey: s,
                 variantKey: null != u ? u : c
@@ -2194,28 +2195,28 @@
         })
     }
 
-    function eW(e) {
+    function eX(e) {
         if (!e || 0 === e.length) return;
         let r = null,
             n = null,
             a = t.RAQIV2UIPseudoDimension.AggregationType,
             i = t.RAQIV2UIPseudoDimension.PercentileType;
-        for (let t of e) t.pseudoDimensionKey === a && (er(t.variantKey) || ek("Unsupported aggregation variant ".concat(t.variantKey, ".")), r = t.variantKey), t.pseudoDimensionKey === i && (en(t.variantKey) || ek("Unsupported percentile variant ".concat(t.variantKey, ".")), n = t.variantKey);
+        for (let t of e) t.pseudoDimensionKey === a && (er(t.variantKey) || ex("Unsupported aggregation variant ".concat(t.variantKey, ".")), r = t.variantKey), t.pseudoDimensionKey === i && (en(t.variantKey) || ex("Unsupported percentile variant ".concat(t.variantKey, ".")), n = t.variantKey);
         if (null !== r || null !== n) return {
             aggregationType: r,
             percentile: n
         }
     }
 
-    function eX(e) {
-        let r = ej(e.variantSelections);
+    function e$(e) {
+        let r = ez(e.variantSelections);
         if (e.computedMetric) {
             var a;
             return {
                 computedMetric: {
                     sources: (a = e.computedMetric).sources.map(e => {
                         let r = e.metric,
-                            a = ej(function(e) {
+                            a = ez(function(e) {
                                 if (!e) return;
                                 let r = [];
                                 return e.aggregationType && r.push({
@@ -2234,7 +2235,7 @@
                                     metricKey: r.metric,
                                     customEventName: r.customEventName,
                                     ...r.aggregationType ? {
-                                        aggregation: ex(r.aggregationType, eR, "aggregation")
+                                        aggregation: eB(r.aggregationType, e_, "aggregation")
                                     } : {}
                                 }
                             },
@@ -2278,63 +2279,66 @@
         }
     }
 
-    function e$(e, r) {
+    function eJ(e, r) {
         var n, a, i;
-        eU(e) || ek("".concat(r, " must be an object."));
-        let o = eY(null != (n = e.variantSelections) ? n : e.variant_selections),
+        eP(e) || ex("".concat(r, " must be an object."));
+        let o = eW(null != (n = e.variantSelections) ? n : e.variant_selections),
             s = null != (a = e.computedMetric) ? a : e.computed_metric;
         if (void 0 !== s) return {
             computedMetric: function(e, r) {
-                eU(e) || ek("".concat(r, " must be an object."));
+                eP(e) || ex("".concat(r, " must be an object."));
                 let {
                     sources: n,
                     formula: a,
                     displayName: i,
                     l7Smoothing: o
                 } = e;
-                Array.isArray(n) && 0 !== n.length && "string" == typeof a || ek("".concat(r, " is not a valid computed metric."));
+                Array.isArray(n) && 0 !== n.length && "string" == typeof a || ex("".concat(r, " is not a valid computed metric."));
                 let [s, ...c] = n.map((e, n) => {
                     var a, i, o, s, c, u, l, d, h;
                     let m, p, f;
-                    eU(e) || ek("".concat(r, ".sources[").concat(n, "] must be an object."));
+                    eP(e) || ex("".concat(r, ".sources[").concat(n, "] must be an object."));
                     let y = null != (a = null != (i = e.sourceKey) ? i : e.source_key) ? a : e.key;
-                    ("string" != typeof y || 0 === y.length) && ek("".concat(r, ".sources[").concat(n, "].sourceKey must be set."));
-                    let g = void 0 === e.filters ? void 0 : eG(e.filters, "".concat(r, ".sources[").concat(n, "].filters")),
-                        v = eY(null != (o = e.variantSelections) ? o : e.variant_selections),
+                    ("string" != typeof y || 0 === y.length) && ex("".concat(r, ".sources[").concat(n, "].sourceKey must be set."));
+                    let g = void 0 === e.filters ? void 0 : eF(e.filters, "".concat(r, ".sources[").concat(n, "].filters")),
+                        v = eW(null != (o = e.variantSelections) ? o : e.variant_selections),
                         b = e.metric,
                         A = null != (s = e.metricKey) ? s : e.metric_key;
-                    if (void 0 !== b && void 0 !== A && ek("".concat(r, ".sources[").concat(n, "] must not contain both metric and metricKey representations.")), void 0 !== A)
-                        if ("string" != typeof A && ek("".concat(r, ".sources[").concat(n, "].metricKey must be a string.")), A === t.RAQIV2UIMetric.CustomEventsV2) {
+                    if (void 0 !== b && void 0 !== A && ex("".concat(r, ".sources[").concat(n, "] must not contain both metric and metricKey representations.")), void 0 !== A)
+                        if ("string" != typeof A && ex("".concat(r, ".sources[").concat(n, "].metricKey must be a string.")), A === t.RAQIV2UIMetric.CustomEventsV2) {
                             let e = null != (c = null == g ? void 0 : g.filter(e => e.dimension === t.RAQIV2Dimension.CustomEventName)) ? c : [],
                                 a = e[0],
                                 i = null == a ? void 0 : a.values[0];
-                            (1 !== e.length || (null == a ? void 0 : a.values.length) !== 1 || "string" != typeof i || 0 === i.trim().length) && ek("".concat(r, ".sources[").concat(n, "] must contain exactly one non-empty ") + "".concat(t.RAQIV2Dimension.CustomEventName, " filter for a canonical custom event."));
+                            (1 !== e.length || (null == a ? void 0 : a.values.length) !== 1 || "string" != typeof i || 0 === i.trim().length) && ex("".concat(r, ".sources[").concat(n, "] must contain exactly one non-empty ") + "".concat(t.RAQIV2Dimension.CustomEventName, " filter for a canonical custom event."));
                             let o = null != (u = null == v ? void 0 : v.filter(e => e.pseudoDimensionKey === t.RAQIV2UIPseudoDimension.AggregationType)) ? u : [];
-                            1 !== o.length && ek("".concat(r, ".sources[").concat(n, "] must contain exactly one ") + "".concat(t.RAQIV2UIPseudoDimension.AggregationType, " selection for a canonical custom event."));
-                            let s = o[0];
-                            s && er(s.variantKey) || ek("".concat(r, ".sources[").concat(n, "] has an invalid custom-event aggregation.")), m = {
+                            o.length > 1 && ex("".concat(r, ".sources[").concat(n, "] must not contain multiple ") + "".concat(t.RAQIV2UIPseudoDimension.AggregationType, " selections for a canonical custom event."));
+                            let s = o[0],
+                                l = null == s ? void 0 : s.variantKey;
+                            void 0 === l || er(l) || ex("".concat(r, ".sources[").concat(n, "] has an invalid custom-event aggregation.")), m = {
                                 metric: t.RAQIV2UIMetric.CustomEventsV2,
                                 customEventName: i,
-                                aggregationType: s.variantKey
-                            }, p = null == g ? void 0 : g.filter(e => e.dimension !== t.RAQIV2Dimension.CustomEventName).map(e => eK(e, "".concat(r, ".sources[").concat(n, "].filters"))), f = eW(null == v ? void 0 : v.filter(e => e.pseudoDimensionKey !== t.RAQIV2UIPseudoDimension.AggregationType))
-                        } else ea(A) || ek("".concat(r, ".sources[").concat(n, "].metricKey is unsupported.")), m = A, p = null == g ? void 0 : g.map(e => eK(e, "".concat(r, ".sources[").concat(n, "].filters"))), f = eW(v);
+                                ...void 0 !== l ? {
+                                    aggregationType: l
+                                } : {}
+                            }, p = null == g ? void 0 : g.filter(e => e.dimension !== t.RAQIV2Dimension.CustomEventName).map(e => ej(e, "".concat(r, ".sources[").concat(n, "].filters"))), f = eX(null == v ? void 0 : v.filter(e => e.pseudoDimensionKey !== t.RAQIV2UIPseudoDimension.AggregationType))
+                        } else ea(A) || ex("".concat(r, ".sources[").concat(n, "].metricKey is unsupported.")), m = A, p = null == g ? void 0 : g.map(e => ej(e, "".concat(r, ".sources[").concat(n, "].filters"))), f = eX(v);
                     else {
-                        eU(b) || ek("".concat(r, ".sources[").concat(n, "] must contain either metric or metricKey."));
+                        eP(b) || ex("".concat(r, ".sources[").concat(n, "] must contain either metric or metricKey."));
                         let e = null != (l = b.customEventMetric) ? l : b.custom_event_metric;
-                        if (eU(e)) {
+                        if (eP(e)) {
                             let a, i = null != (d = e.customEventName) ? d : e.custom_event_name;
-                            ("string" != typeof i || 0 === i.trim().length) && ek("".concat(r, ".sources[").concat(n, "].metric.customEventMetric is invalid.")), m = {
+                            ("string" != typeof i || 0 === i.trim().length) && ex("".concat(r, ".sources[").concat(n, "].metric.customEventMetric is invalid.")), m = {
                                 metric: t.RAQIV2UIMetric.CustomEventsV2,
                                 customEventName: i,
                                 ...void 0 !== e.aggregation ? {
-                                    aggregationType: er(a = eB(e.aggregation, e_, "aggregation")) ? a : ek("Unsupported custom-event aggregation ".concat(a, "."))
+                                    aggregationType: er(a = eL(e.aggregation, eV, "aggregation")) ? a : ex("Unsupported custom-event aggregation ".concat(a, "."))
                                 } : {}
                             }
                         } else {
                             let e = null != (h = b.metricKey) ? h : b.metric_key;
-                            "string" != typeof e && ek("".concat(r, ".sources[").concat(n, "].metric.metricKey must be set.")), ea(e) || ek("".concat(r, ".sources[").concat(n, "].metric.metricKey is unsupported.")), m = e
+                            "string" != typeof e && ex("".concat(r, ".sources[").concat(n, "].metric.metricKey must be set.")), ea(e) || ex("".concat(r, ".sources[").concat(n, "].metric.metricKey is unsupported.")), m = e
                         }
-                        p = null == g ? void 0 : g.map(e => eK(e, "".concat(r, ".sources[").concat(n, "].filters"))), f = eW(eU(e) ? null == v ? void 0 : v.filter(e => e.pseudoDimensionKey !== t.RAQIV2UIPseudoDimension.AggregationType) : v)
+                        p = null == g ? void 0 : g.map(e => ej(e, "".concat(r, ".sources[").concat(n, "].filters"))), f = eX(eP(e) ? null == v ? void 0 : v.filter(e => e.pseudoDimensionKey !== t.RAQIV2UIPseudoDimension.AggregationType) : v)
                     }
                     return {
                         key: y,
@@ -2347,7 +2351,7 @@
                         } : {}
                     }
                 });
-                return s || ek("".concat(r, ".sources must be non-empty.")), {
+                return s || ex("".concat(r, ".sources must be non-empty.")), {
                     sources: [s, ...c],
                     formula: a,
                     ..."string" == typeof i ? {
@@ -2361,55 +2365,55 @@
             variantSelections: o
         };
         let c = null != (i = e.metricKey) ? i : e.metric_key;
-        return ("string" != typeof c || 0 === c.length) && ek("".concat(r, ".metricKey must be set.")), {
-            metricKey: ea(c) ? c : ek("".concat(r, ".metricKey is not a supported numeric metric.")),
+        return ("string" != typeof c || 0 === c.length) && ex("".concat(r, ".metricKey must be set.")), {
+            metricKey: ea(c) ? c : ex("".concat(r, ".metricKey is not a supported numeric metric.")),
             variantSelections: o
         }
     }
 
-    function eJ(e, t) {
+    function eZ(e, t) {
         var r, n, i, o, s, c, u, l, d;
         let h;
         if (null == e) return {};
-        eU(e) || ek("".concat(t, " must be an object."));
-        let m = eU(e.granularity) ? null != (r = e.granularity.fixed) ? r : e.granularity : void 0,
-            p = eU(m) ? m.granularity : void 0,
-            f = void 0 === p ? void 0 : eI[eP(p)],
+        eP(e) || ex("".concat(t, " must be an object."));
+        let m = eP(e.granularity) ? null != (r = e.granularity.fixed) ? r : e.granularity : void 0,
+            p = eP(m) ? m.granularity : void 0,
+            f = void 0 === p ? void 0 : eR[ek(p)],
             y = null != (n = e.annotationOptions) ? n : e.annotation_options,
-            g = eU(y) ? (h = null != (l = eF(null != (d = y.defaultAnnotationTypeKeys) ? d : y.default_annotation_type_keys, "".concat(t, ".annotationOptions.defaultAnnotationTypeKeys"), Z)) ? l : [], {
+            g = eP(y) ? (h = null != (l = eK(null != (d = y.defaultAnnotationTypeKeys) ? d : y.default_annotation_type_keys, "".concat(t, ".annotationOptions.defaultAnnotationTypeKeys"), Z)) ? l : [], {
                 supportedAnnotationTypes: (0, a.resolveCustomDashboardSupportedAnnotationTypes)(h),
                 defaultAnnotationTypes: h,
                 showAnnotationsControl: "boolean" == typeof y.showAnnotationsControl ? y.showAnnotationsControl : "boolean" != typeof y.show_annotations_control || y.show_annotations_control
             }) : void 0,
             v = null != (i = e.defaultFilters) ? i : e.default_filters,
-            b = void 0 === v ? void 0 : eG(v, "".concat(t, ".defaultFilters")),
-            A = eF(null != (o = e.filterDimensionKeys) ? o : e.filter_dimension_keys, "".concat(t, ".filterDimensionKeys"), $),
-            D = eF(null != (s = e.breakdownDimensionKeys) ? s : e.breakdown_dimension_keys, "".concat(t, ".breakdownDimensionKeys"), $),
-            C = eF(null != (c = e.defaultBreakdownDimensionKeys) ? c : e.default_breakdown_dimension_keys, "".concat(t, ".defaultBreakdownDimensionKeys"), X);
+            b = void 0 === v ? void 0 : eF(v, "".concat(t, ".defaultFilters")),
+            A = eK(null != (o = e.filterDimensionKeys) ? o : e.filter_dimension_keys, "".concat(t, ".filterDimensionKeys"), $),
+            D = eK(null != (s = e.breakdownDimensionKeys) ? s : e.breakdown_dimension_keys, "".concat(t, ".breakdownDimensionKeys"), $),
+            C = eK(null != (c = e.defaultBreakdownDimensionKeys) ? c : e.default_breakdown_dimension_keys, "".concat(t, ".defaultBreakdownDimensionKeys"), X);
         return {
             timeRangeOptions: function(e, t) {
                 var r, n;
                 if (null == e) return;
-                if (eU(e) || ek("".concat(t, " must be an object.")), void 0 !== e.none) return {
+                if (eP(e) || ex("".concat(t, " must be an object.")), void 0 !== e.none) return {
                     type: "None"
                 };
                 let a = null != (r = e.dateRange) ? r : e.date_range;
-                if (void 0 !== a) return eU(a) || ek("".concat(t, ".dateRange must be an object.")), {
+                if (void 0 !== a) return eP(a) || ex("".concat(t, ".dateRange must be an object.")), {
                     type: "DateRange",
                     defaultSelection: function(e, t) {
                         var r, n, a, i;
                         if (null == e) return;
-                        eU(e) || ek("".concat(t, " must be an object."));
+                        eP(e) || ex("".concat(t, " must be an object."));
                         let o = null != (r = e.relativeRangeKey) ? r : e.relative_range_key;
-                        if ("string" == typeof o) return et(o) || ek("".concat(t, ".relativeRangeKey is unsupported.")), {
+                        if ("string" == typeof o) return et(o) || ex("".concat(t, ".relativeRangeKey is unsupported.")), {
                             type: "Relative",
                             rangeType: o
                         };
                         let s = null != (n = e.customRange) ? n : e.custom_range;
-                        if (eU(s)) return {
+                        if (eP(s)) return {
                             type: "Custom",
-                            startTimeMs: eQ(null != (a = s.startTime) ? a : s.start_time, "".concat(t, ".customRange.startTime")),
-                            endTimeMs: eQ(null != (i = s.endTime) ? i : s.end_time, "".concat(t, ".customRange.endTime"))
+                            startTimeMs: eG(null != (a = s.startTime) ? a : s.start_time, "".concat(t, ".customRange.startTime")),
+                            endTimeMs: eG(null != (i = s.endTime) ? i : s.end_time, "".concat(t, ".customRange.endTime"))
                         }
                     }(null != (n = a.defaultSelection) ? n : a.default_selection, "".concat(t, ".dateRange.defaultSelection"))
                 }
@@ -2423,22 +2427,22 @@
         }
     }
 
-    function eZ(e) {
+    function e0(e) {
         return {
-            metric: eX(e.metric),
+            metric: e$(e.metric),
             seriesKey: e.seriesKey,
             ...e.filters ? {
                 filters: eH(e.filters)
             } : {},
             ...e.aggregation ? {
-                aggregation: ex(e.aggregation, eR, "aggregation")
+                aggregation: eB(e.aggregation, e_, "aggregation")
             } : {}
         }
     }
 
-    function e0(e, t) {
+    function e1(e, t) {
         var r, n, a, i;
-        eU(e) || ek("".concat(t, " must be an object."));
+        eP(e) || ex("".concat(t, " must be an object."));
         let s = null != (r = e.summaryCard) ? r : e.summary_card;
         if (void 0 !== s) {
             let e, r;
@@ -2446,17 +2450,17 @@
                 type: "Component",
                 component: {
                     type: "SummaryCard",
-                    summaryCard: (n = "".concat(t, ".summaryCard"), eU(s) || ek("".concat(n, " must be an object.")), ("string" != typeof(e = null != (a = s.tileId) ? a : s.tile_id) || 0 === e.length) && ek("".concat(n, ".tileId must be set.")), r = null != (i = s.titleSource) ? i : s.title_source, {
+                    summaryCard: (n = "".concat(t, ".summaryCard"), eP(s) || ex("".concat(n, " must be an object.")), ("string" != typeof(e = null != (a = s.tileId) ? a : s.tile_id) || 0 === e.length) && ex("".concat(n, ".tileId must be set.")), r = null != (i = s.titleSource) ? i : s.title_source, {
                         type: "SummaryCard",
                         tileId: e,
                         ..."string" == typeof s.title ? {
                             title: s.title
                         } : {},
-                        metric: e$(s.metric, "".concat(n, ".metric")),
-                        aggregation: eB(s.aggregation, e_, "aggregation"),
-                        filters: eG(s.filters, "".concat(n, ".filters")),
+                        metric: eJ(s.metric, "".concat(n, ".metric")),
+                        aggregation: eL(s.aggregation, eV, "aggregation"),
+                        filters: eF(s.filters, "".concat(n, ".filters")),
                         ...void 0 !== r ? {
-                            titleSource: eB(r, eO, "titleSource")
+                            titleSource: eL(r, eN, "titleSource")
                         } : {}
                     })
                 }
@@ -2470,22 +2474,22 @@
                 chart: function(e, t) {
                     var r, n, a, i, s;
                     let c, u;
-                    eU(e) || ek("".concat(t, " must be an object."));
+                    eP(e) || ex("".concat(t, " must be an object."));
                     let l = null != (r = e.tileId) ? r : e.tile_id;
-                    ("string" != typeof l || 0 === l.length) && ek("".concat(t, ".tileId must be set."));
+                    ("string" != typeof l || 0 === l.length) && ex("".concat(t, ".tileId must be set."));
                     let d = null != (n = e.dataSpec) ? n : e.data_spec,
                         h = null != (a = e.chartSpec) ? a : e.chart_spec;
-                    eU(d) && eU(h) || ek("".concat(t, " must include dataSpec and chartSpec.")), Array.isArray(d.metrics) || ek("".concat(t, ".dataSpec.metrics must be an array."));
-                    let m = eB(null != (i = h.chartType) ? i : h.chart_type, ew, "chartType"),
+                    eP(d) && eP(h) || ex("".concat(t, " must include dataSpec and chartSpec.")), Array.isArray(d.metrics) || ex("".concat(t, ".dataSpec.metrics must be an array."));
+                    let m = eL(null != (i = h.chartType) ? i : h.chart_type, eT, "chartType"),
                         p = d.granularity,
                         f = h.smoothing;
                     if (void 0 !== d.aggregation) {
-                        let e = eB(d.aggregation, e_, "aggregation");
-                        ee(e) || ek("Unsupported chart aggregation ".concat(e, ".")), c = e
+                        let e = eL(d.aggregation, eV, "aggregation");
+                        ee(e) || ex("Unsupported chart aggregation ".concat(e, ".")), c = e
                     }
                     let y = null != (s = d.breakdownDimensionKeys) ? s : d.breakdown_dimension_keys;
-                    Array.isArray(y) && (y.every(e => "string" == typeof e) || ek("".concat(t, ".dataSpec.breakdownDimensionKeys must contain strings.")), u = y);
-                    let g = void 0 !== p ? eB(p, eS, "granularity") : o.DEFAULT_CHART_GRANULARITY;
+                    Array.isArray(y) && (y.every(e => "string" == typeof e) || ex("".concat(t, ".dataSpec.breakdownDimensionKeys must contain strings.")), u = y);
+                    let g = void 0 !== p ? eL(p, eE, "granularity") : o.DEFAULT_CHART_GRANULARITY;
                     return {
                         type: "Chart",
                         tileId: l,
@@ -2496,14 +2500,14 @@
                             metrics: d.metrics.map((e, r) => {
                                 var n, a;
                                 let i, o;
-                                return n = "".concat(t, ".dataSpec.metrics[").concat(r, "]"), eU(e) || ek("".concat(n, " must be an object.")), ("string" != typeof(i = null != (a = e.seriesKey) ? a : e.series_key) || 0 === i.length) && ek("".concat(n, ".seriesKey must be set.")), {
-                                    metric: e$(e.metric, "".concat(n, ".metric")),
+                                return n = "".concat(t, ".dataSpec.metrics[").concat(r, "]"), eP(e) || ex("".concat(n, " must be an object.")), ("string" != typeof(i = null != (a = e.seriesKey) ? a : e.series_key) || 0 === i.length) && ex("".concat(n, ".seriesKey must be set.")), {
+                                    metric: eJ(e.metric, "".concat(n, ".metric")),
                                     seriesKey: i,
                                     ...void 0 === e.filters ? {} : {
-                                        filters: eG(e.filters, "".concat(n, ".filters"))
+                                        filters: eF(e.filters, "".concat(n, ".filters"))
                                     },
                                     ...void 0 !== e.aggregation ? {
-                                        aggregation: ee(o = eB(e.aggregation, e_, "aggregation")) ? o : ek("Unsupported chart aggregation ".concat(o, "."))
+                                        aggregation: ee(o = eL(e.aggregation, eV, "aggregation")) ? o : ex("Unsupported chart aggregation ".concat(o, "."))
                                     } : {}
                                 }
                             }),
@@ -2514,13 +2518,13 @@
                                 breakdownDimensions: u
                             } : {},
                             granularity: g,
-                            filters: eG(d.filters, "".concat(t, ".dataSpec.filters"))
+                            filters: eF(d.filters, "".concat(t, ".dataSpec.filters"))
                         },
                         chartSpec: {
                             chartType: m,
                             overlays: function(e) {
                                 var t, r, n, a;
-                                if (!eU(e)) return;
+                                if (!eP(e)) return;
                                 let i = {
                                     ..."boolean" == typeof e.genreBenchmark || "boolean" == typeof e.genre_benchmark ? {
                                         genreBenchmark: !!(null != (t = e.genreBenchmark) ? t : e.genre_benchmark)
@@ -2541,16 +2545,16 @@
                                 return Object.keys(i).length > 0 ? i : void 0
                             }(h.overlays),
                             ...void 0 !== f ? {
-                                smoothing: eB(f, eM, "smoothing")
+                                smoothing: eL(f, eU, "smoothing")
                             } : {}
                         }
                     }
                 }(c, "".concat(t, ".chart"))
             }
-        } : ek("".concat(t, " must set chart or summaryCard."))
+        } : ex("".concat(t, " must set chart or summaryCard."))
     }
 
-    function e1(e) {
+    function e2(e) {
         switch (e.type) {
             case "Component":
                 var r, n, a, i, c, u;
@@ -2562,37 +2566,37 @@
                             ...void 0 !== n.title ? {
                                 title: n.title
                             } : {},
-                            metric: eX(n.metric),
-                            aggregation: ex(n.aggregation, eR, "aggregation"),
+                            metric: e$(n.metric),
+                            aggregation: eB(n.aggregation, e_, "aggregation"),
                             filters: eH(n.filters),
-                            titleSource: ex(null != (a = n.titleSource) ? a : o.SummaryCardTitleSource.Auto, eV, "titleSource")
+                            titleSource: eB(null != (a = n.titleSource) ? a : o.SummaryCardTitleSource.Auto, eO, "titleSource")
                         }
                     } : {
                         chart: (l = function(e) {
                             if (!e) return;
                             let t = {};
-                            return void 0 !== e.genreBenchmark && (t.genreBenchmark = e.genreBenchmark), void 0 !== e.similarExperienceBenchmark && (t.similarExperienceBenchmark = e.similarExperienceBenchmark), void 0 !== e.topExperienceBenchmark && (t.topExperienceBenchmark = e.topExperienceBenchmark), void 0 !== e.previousPeriod && ("boolean" != typeof e.previousPeriod && ek("Backend v1 cannot persist configured previous-period comparison offsets."), t.previousPeriod = e.previousPeriod), void 0 !== e.quota && (t.quota = e.quota), Object.keys(t).length > 0 ? t : void 0
+                            return void 0 !== e.genreBenchmark && (t.genreBenchmark = e.genreBenchmark), void 0 !== e.similarExperienceBenchmark && (t.similarExperienceBenchmark = e.similarExperienceBenchmark), void 0 !== e.topExperienceBenchmark && (t.topExperienceBenchmark = e.topExperienceBenchmark), void 0 !== e.previousPeriod && ("boolean" != typeof e.previousPeriod && ex("Backend v1 cannot persist configured previous-period comparison offsets."), t.previousPeriod = e.previousPeriod), void 0 !== e.quota && (t.quota = e.quota), Object.keys(t).length > 0 ? t : void 0
                         }((i = r.chart).chartSpec.overlays), d = null == (u = i.dataSpec.metrics[0]) ? void 0 : u.metric, h = null != (c = i.dataSpec.aggregation) ? c : void 0 !== d ? (0, s.resolveDefaultChartAggregation)(d) : t.RAQIV2AggregationType.Average, {
                             tileId: i.tileId,
                             ...void 0 !== i.title ? {
                                 title: i.title
                             } : {},
                             dataSpec: {
-                                metrics: i.dataSpec.metrics.map(eZ),
-                                aggregation: ex(h, eR, "aggregation"),
+                                metrics: i.dataSpec.metrics.map(e0),
+                                aggregation: eB(h, e_, "aggregation"),
                                 ...i.dataSpec.breakdownDimensions ? {
                                     breakdownDimensionKeys: [...i.dataSpec.breakdownDimensions]
                                 } : {},
-                                granularity: ex(i.dataSpec.granularity, eT, "granularity"),
+                                granularity: eB(i.dataSpec.granularity, eS, "granularity"),
                                 filters: eH(i.dataSpec.filters)
                             },
                             chartSpec: {
-                                chartType: ex(i.chartSpec.chartType, eC, "chartType"),
+                                chartType: eB(i.chartSpec.chartType, ew, "chartType"),
                                 ...l ? {
                                     overlays: l
                                 } : {},
                                 ...i.chartSpec.smoothing ? {
-                                    smoothing: ex(i.chartSpec.smoothing, eN, "smoothing")
+                                    smoothing: eB(i.chartSpec.smoothing, eM, "smoothing")
                                 } : {}
                             }
                         })
@@ -2601,103 +2605,103 @@
             case "Stack":
                 return {
                     stack: {
-                        children: e.children.map(e1)
+                        children: e.children.map(e2)
                     }
                 };
             case "Flex":
                 return {
                     flex: {
-                        children: e.children.map(e1)
+                        children: e.children.map(e2)
                     }
                 };
             case "Grid":
                 return {
                     grid: {
                         columnCount: e.columnCount,
-                        children: e.children.map(e1)
+                        children: e.children.map(e2)
                     }
                 };
             default:
-                return ek("Unsupported layout node ".concat(JSON.stringify(e), "."))
+                return ex("Unsupported layout node ".concat(JSON.stringify(e), "."))
         }
     }
 
-    function e2(e, t) {
+    function e3(e, t) {
         var r, n;
-        if (eU(e) || ek("".concat(t, " must be an object.")), "string" == typeof e.type) {
-            if ("Component" === e.type) return e0(e.component, "".concat(t, ".component"));
-            if ("Stack" === e.type || "Flex" === e.type) return Array.isArray(e.children) || ek("".concat(t, ".children must be an array.")), {
+        if (eP(e) || ex("".concat(t, " must be an object.")), "string" == typeof e.type) {
+            if ("Component" === e.type) return e1(e.component, "".concat(t, ".component"));
+            if ("Stack" === e.type || "Flex" === e.type) return Array.isArray(e.children) || ex("".concat(t, ".children must be an array.")), {
                 type: e.type,
-                children: e.children.map((e, r) => e2(e, "".concat(t, ".children[").concat(r, "]")))
+                children: e.children.map((e, r) => e3(e, "".concat(t, ".children[").concat(r, "]")))
             };
             if ("Grid" === e.type) {
-                Array.isArray(e.children) || ek("".concat(t, ".children must be an array."));
+                Array.isArray(e.children) || ex("".concat(t, ".children must be an array."));
                 let n = null != (r = e.columnCount) ? r : e.column_count;
-                return 1 !== n && 2 !== n && ek("".concat(t, ".columnCount must be 1 or 2.")), {
+                return 1 !== n && 2 !== n && ex("".concat(t, ".columnCount must be 1 or 2.")), {
                     type: "Grid",
                     columnCount: n,
-                    children: e.children.map((e, r) => e2(e, "".concat(t, ".children[").concat(r, "]")))
+                    children: e.children.map((e, r) => e3(e, "".concat(t, ".children[").concat(r, "]")))
                 }
             }
         }
-        if (void 0 !== e.component) return e0(e.component, "".concat(t, ".component"));
-        if (void 0 !== e.stack) return eU(e.stack) && Array.isArray(e.stack.children) || ek("".concat(t, ".stack.children must be an array.")), {
+        if (void 0 !== e.component) return e1(e.component, "".concat(t, ".component"));
+        if (void 0 !== e.stack) return eP(e.stack) && Array.isArray(e.stack.children) || ex("".concat(t, ".stack.children must be an array.")), {
             type: "Stack",
-            children: e.stack.children.map((e, r) => e2(e, "".concat(t, ".stack.children[").concat(r, "]")))
+            children: e.stack.children.map((e, r) => e3(e, "".concat(t, ".stack.children[").concat(r, "]")))
         };
-        if (void 0 !== e.flex) return eU(e.flex) && Array.isArray(e.flex.children) || ek("".concat(t, ".flex.children must be an array.")), {
+        if (void 0 !== e.flex) return eP(e.flex) && Array.isArray(e.flex.children) || ex("".concat(t, ".flex.children must be an array.")), {
             type: "Flex",
-            children: e.flex.children.map((e, r) => e2(e, "".concat(t, ".flex.children[").concat(r, "]")))
+            children: e.flex.children.map((e, r) => e3(e, "".concat(t, ".flex.children[").concat(r, "]")))
         };
         if (void 0 !== e.grid) {
-            eU(e.grid) && Array.isArray(e.grid.children) || ek("".concat(t, ".grid.children must be an array."));
+            eP(e.grid) && Array.isArray(e.grid.children) || ex("".concat(t, ".grid.children must be an array."));
             let r = null != (n = e.grid.columnCount) ? n : e.grid.column_count;
-            return 1 !== r && 2 !== r && ek("".concat(t, ".grid.columnCount must be 1 or 2.")), {
+            return 1 !== r && 2 !== r && ex("".concat(t, ".grid.columnCount must be 1 or 2.")), {
                 type: "Grid",
                 columnCount: r,
-                children: e.grid.children.map((e, r) => e2(e, "".concat(t, ".grid.children[").concat(r, "]")))
+                children: e.grid.children.map((e, r) => e3(e, "".concat(t, ".grid.children[").concat(r, "]")))
             }
         }
-        return ek("".concat(t, " must set component, stack, flex, or grid."))
+        return ex("".concat(t, " must set component, stack, flex, or grid."))
     }
     e.s(["backendDocumentHasUpperSnakeAggregationVariants", 0, function(e) {
         return function e(r) {
             var n, a;
             if (Array.isArray(r)) return r.some(e);
-            if (!eU(r)) return !1;
+            if (!eP(r)) return !1;
             let i = null != (n = r.pseudoDimensionKey) ? n : r.pseudo_dimension_key,
                 o = null != (a = r.variantKey) ? a : r.variant_key;
-            return "string" == typeof i && "string" == typeof o && i === t.RAQIV2UIPseudoDimension.AggregationType && void 0 !== eq(o) || Object.values(r).some(e)
+            return "string" == typeof i && "string" == typeof o && i === t.RAQIV2UIPseudoDimension.AggregationType && void 0 !== eY(o) || Object.values(r).some(e)
         }(e)
     }, "backendDocumentToCustomDashboardConfig", 0, function(e) {
         var t;
-        eU(e) || ek("Backend custom dashboard document is missing config.");
+        eP(e) || ex("Backend custom dashboard document is missing config.");
         let r = null != (t = e.schemaVersion) ? t : e.schema_version;
-        return r !== o.READABLE_BACKEND_DOCUMENT_SCHEMA_VERSIONS[0] && r !== o.READABLE_BACKEND_DOCUMENT_SCHEMA_VERSIONS[1] && ek("Unsupported backend custom dashboard schema version ".concat(String(r), ".")), eU(e.config) || ek("Backend custom dashboard document is missing config."), eU(e.config.page) || ek("config.page must be an object."), eD({
+        return "number" == typeof r && eC.includes(r) || ex("Unsupported backend custom dashboard schema version ".concat(String(r), ".")), eP(e.config) || ex("Backend custom dashboard document is missing config."), eP(e.config.page) || ex("config.page must be an object."), eD({
             page: function(e, t) {
                 var r, n, a;
-                if (eU(e) || ek("".concat(t, " must be an object.")), e.mode === o.DashboardPageMode.Untabbed) {
+                if (eP(e) || ex("".concat(t, " must be an object.")), e.mode === o.DashboardPageMode.Untabbed) {
                     let r = e.surface;
-                    eU(r) || ek("".concat(t, ".surface must be an object."));
+                    eP(r) || ex("".concat(t, ".surface must be an object."));
                     let n = null != (a = r.bodyNodes) ? a : r.body_nodes;
-                    return Array.isArray(n) || ek("".concat(t, ".surface.bodyNodes must be an array.")), {
+                    return Array.isArray(n) || ex("".concat(t, ".surface.bodyNodes must be an array.")), {
                         mode: o.DashboardPageMode.Untabbed,
                         surface: {
-                            controls: eJ(r.controls, "".concat(t, ".surface.controls")),
-                            bodyNodes: n.map((e, r) => e2(e, "".concat(t, ".surface.bodyNodes[").concat(r, "]")))
+                            controls: eZ(r.controls, "".concat(t, ".surface.controls")),
+                            bodyNodes: n.map((e, r) => e3(e, "".concat(t, ".surface.bodyNodes[").concat(r, "]")))
                         }
                     }
                 }
                 let i = e.untabbed;
-                eU(i) || ek("".concat(t, ".untabbed must be an object."));
+                eP(i) || ex("".concat(t, ".untabbed must be an object."));
                 let s = i.surface;
-                eU(s) || ek("".concat(t, ".untabbed.surface must be an object."));
+                eP(s) || ex("".concat(t, ".untabbed.surface must be an object."));
                 let c = null != (r = null != (n = s.bodyNodes) ? n : s.body_nodes) ? r : [];
-                return Array.isArray(c) || ek("".concat(t, ".untabbed.surface.bodyNodes must be an array.")), {
+                return Array.isArray(c) || ex("".concat(t, ".untabbed.surface.bodyNodes must be an array.")), {
                     mode: o.DashboardPageMode.Untabbed,
                     surface: {
-                        controls: eJ(s.controls, "".concat(t, ".untabbed.surface.controls")),
-                        bodyNodes: c.map((e, r) => e2(e, "".concat(t, ".untabbed.surface.bodyNodes[").concat(r, "]")))
+                        controls: eZ(s.controls, "".concat(t, ".untabbed.surface.controls")),
+                        bodyNodes: c.map((e, r) => e3(e, "".concat(t, ".untabbed.surface.bodyNodes[").concat(r, "]")))
                     }
                 }
             }(e.config.page, "config.page")
@@ -2710,11 +2714,11 @@
         return {
             schemaVersion: o.BACKEND_DOCUMENT_WRITE_SCHEMA_VERSION,
             config: {
-                page: ((t = e.page).mode !== o.DashboardPageMode.Untabbed && ek("Only untabbed dashboard pages can be serialized to the backend."), {
+                page: ((t = e.page).mode !== o.DashboardPageMode.Untabbed && ex("Only untabbed dashboard pages can be serialized to the backend."), {
                     untabbed: {
                         surface: {
                             resourceTypeKeys: [1],
-                            controls: (n = (r = t.surface.controls).defaultGranularity ? eE[r.defaultGranularity] : void 0, {
+                            controls: (n = (r = t.surface.controls).defaultGranularity ? eI[r.defaultGranularity] : void 0, {
                                 ...r.timeRangeOptions ? {
                                     timeRangeOptions: function(e) {
                                         if ("None" === e.type) return {
@@ -2728,8 +2732,8 @@
                                                         relativeRangeKey: t.rangeType
                                                     } : {
                                                         customRange: {
-                                                            startTime: eL(t.startTimeMs),
-                                                            endTime: eL(t.endTimeMs)
+                                                            startTime: eQ(t.startTimeMs),
+                                                            endTime: eQ(t.endTimeMs)
                                                         }
                                                     }
                                                 }
@@ -2766,7 +2770,7 @@
                                     }
                                 } : {}
                             }),
-                            bodyNodes: t.surface.bodyNodes.map(e1)
+                            bodyNodes: t.surface.bodyNodes.map(e2)
                         }
                     }
                 })
@@ -3536,7 +3540,7 @@
         return (0, p.customDashboardConfigToBackendDocument)(e)
     }
 
-    function H(e) {
+    function G(e) {
         var t, r, n, a, i, o, s;
         let c, u, l = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : y.EMPTY_DASHBOARD_CONFIG,
             d = L(e),
@@ -3570,10 +3574,10 @@
         })
     }
 
-    function G(e) {
+    function H(e) {
         var t;
         if (!e.metadata) throw Error("Custom dashboard API response is missing metadata.");
-        return H(e.metadata, (t = e.document) ? (0, p.backendDocumentToCustomDashboardConfig)(t) : y.EMPTY_DASHBOARD_CONFIG)
+        return G(e.metadata, (t = e.document) ? (0, p.backendDocumentToCustomDashboardConfig)(t) : y.EMPTY_DASHBOARD_CONFIG)
     }
 
     function F(e, t) {
@@ -3586,7 +3590,7 @@
                 this.ensureAvailable();
                 let a = t ? await this.client.listDashboards(e, t) : await this.listAllDashboards(e);
                 return {
-                    items: D((null != (r = a.dashboards) ? r : []).map(t => (this.rememberMetadata(e, t), H(t)))),
+                    items: D((null != (r = a.dashboards) ? r : []).map(t => (this.rememberMetadata(e, t), G(t)))),
                     migrationFailedCount: 0,
                     nextPageToken: t && null != (n = a.nextPageToken) ? n : void 0,
                     capabilities: void 0 === a.capabilities ? void 0 : (0, s.parseDashboardCapabilities)(a.capabilities)
@@ -3617,7 +3621,7 @@
                         dashboardId: t
                     }),
                     n = this.rememberMetadata(e, r.metadata),
-                    a = G(r);
+                    a = H(r);
                 if (this.shouldRepairStoredDocument(e, a, r)) {
                     var i;
                     return null != (i = await this.repairStoredDocument(e, a, n)) ? i : a
@@ -3630,7 +3634,7 @@
                 universeId: e,
                 dashboardId: t
             });
-            return this.rememberMetadata(e, r.metadata), G(r)
+            return this.rememberMetadata(e, r.metadata), H(r)
         }
         shouldRepairStoredDocument(e, t, r) {
             return this.repairLegacyDocumentsOnRead && !this.legacyDocumentRepairUnavailable && !this.legacyDocumentRepairAttempted.has(F(e, t.id)) && "published" === t.status && (0, p.backendDocumentHasUpperSnakeAggregationVariants)(r.document)
@@ -3651,7 +3655,7 @@
                     universeId: e,
                     dashboardId: t.id,
                     eventType: "update"
-                }), G(r)
+                }), H(r)
             } catch (e) {
                 console.warn("ApiCustomDashboardService: could not repair stored dashboard document", {
                     dashboardId: t.id,
@@ -3680,7 +3684,7 @@
                         document: Q(r)
                     });
                 this.rememberMetadata(e.universeId, n.metadata);
-                let a = G(n);
+                let a = H(n);
                 return this.emit({
                     universeId: e.universeId,
                     dashboardId: a.id,
@@ -3710,7 +3714,7 @@
                             metadataPatch: i
                         } : {}
                     });
-                    this.rememberMetadata(e, r.metadata), a = G(r)
+                    this.rememberMetadata(e, r.metadata), a = H(r)
                 } else if (s) {
                     let r = await this.client.updateDashboardMetadata({
                         universeId: e,
@@ -3767,7 +3771,7 @@
                         document: Q(i)
                     });
                 this.rememberMetadata(e, c.metadata);
-                let u = G(c);
+                let u = H(c);
                 return this.emit({
                     universeId: e,
                     dashboardId: t,
@@ -3802,7 +3806,7 @@
                     name: s
                 });
                 this.rememberMetadata(e, c.metadata);
-                let u = G(c),
+                let u = H(c),
                     l = (r = u.config, n = (0, f.getSummaryCards)(r).map(e => A(e)), a = (0, f.getChartRows)(r).map(e => ({
                         ...e,
                         tiles: e.tiles.map(e => A(e))
@@ -3826,7 +3830,7 @@
                         document: Q(l)
                     });
                 this.rememberMetadata(e, h.metadata);
-                let m = G(h);
+                let m = H(h);
                 return this.emit({
                     universeId: e,
                     dashboardId: m.id,
@@ -3846,7 +3850,7 @@
                         document: Q(n.config)
                     });
                 this.rememberMetadata(e, i.metadata);
-                let o = G(i);
+                let o = H(i);
                 return this.emit({
                     universeId: e,
                     dashboardId: t,
@@ -4683,7 +4687,7 @@
                                 ...n,
                                 schemaVersion: r
                             }
-                        }(r, er, y.CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION));
+                        }(r, er, y.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION));
                         m !== t.schemaVersion && (s = !0);
                         let c = (0, k.validateCustomDashboardDocument)({
                             ...t,
@@ -5397,7 +5401,7 @@
                 }
             }
         };
-    e.s(["BACKEND_DOCUMENT_WRITE_SCHEMA_VERSION", 0, 1, "CUSTOM_DASHBOARD_CHART_TYPES", 0, r, "CUSTOM_DASHBOARD_CURRENT_SCHEMA_VERSION", 0, 1, "CustomDashboardSummaryCardAggregation", 0, {
+    e.s(["BACKEND_DOCUMENT_WRITE_SCHEMA_VERSION", 0, 1, "CUSTOM_DASHBOARD_CHART_TYPES", 0, r, "CustomDashboardSummaryCardAggregation", 0, {
         AverageOverTimePeriod: "AverageOverTimePeriod",
         AveragePerUniqueUser: "AveragePerUniqueUser",
         MostRecentDataPoint: "MostRecentDataPoint",
@@ -5501,5 +5505,5 @@
     }])
 }]);
 
-//# debugId=a850a6f2-cb18-b00c-80cc-18f92b8b15f1
-//# sourceMappingURL=0aocnqyhn0g-_.js.map
+//# debugId=e7965716-c3ce-2e32-86cb-8945659f672b
+//# sourceMappingURL=2s4e1xmv394z9.js.map

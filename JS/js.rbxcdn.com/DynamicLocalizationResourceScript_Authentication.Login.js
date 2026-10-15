@@ -164,7 +164,7 @@ Roblox.LangDynamic["Authentication.Login"] = {
     "Action.SignInToAnotherAccount": "Sign in to another account",
     "Action.UseAnotherDeviceSentenceCase": "Use another device",
     "Authentication.QuickSignInLowercase": "Quick sign in",
-    "Authentication.Login.Response.NoLoginMethods": "No sign-in methods are available for this account. Please try account recovery or contact support.",
+    "Authentication.Login.Response.NoLoginMethods": "No sign-in methods are available for this account. It may be connected to Google or Apple. Try one of those or use account recovery.",
     "Response.NoLoginMethods": "No sign-in methods are available for this account. Please try account recovery or contact support.",
     "Response.EnterEmailForLoginCode": "To sign in, please enter your email address instead",
     "Title.NewPlaceVersionLiveErrorReportBanner": "{placeName}: V{versionNumber} is live.",

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7eb2bdd0-2e19-aabe-d10a-549c86f2b60d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "133eeead-59c4-47ef-b76b-80b983c41ab9")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 962059, e => {
@@ -6404,31 +6404,37 @@
             } = e, [l, d] = (0, G.useQueryParams)(["activeTab", "filterIndex"]), {
                 resetAllFilters: u
             } = (0, K.default)(), {
-                settings: c
-            } = (0, x.useSettings)(), p = C(), h = (0, nQ.default)(), v = (0, nX.default)(), {
-                translate: f
-            } = (0, s.useTranslation)(), T = (0, b.default)(), w = (0, a.useRef)(void 0), S = (0, a.useMemo)(() => [], []), A = (0, g.isTaxonomyActiveTab)(l.activeTab), M = A || (0, g.isRecentsActiveTab)(l.activeTab), j = (0, a.useMemo)(() => {
+                settings: c,
+                isFetched: p
+            } = (0, x.useSettings)(), {
+                isFetched: h
+            } = (0, f.useGroups)(), {
+                isResolving: v
+            } = (0, a.useContext)(j), T = C(), w = (0, nQ.default)(), S = (0, nX.default)(), {
+                translate: A,
+                ready: M
+            } = (0, s.useTranslation)(), P = (0, b.default)(), E = (0, a.useRef)(void 0), k = (0, a.useMemo)(() => [], []), L = (0, g.isTaxonomyActiveTab)(l.activeTab), R = L || (0, g.isRecentsActiveTab)(l.activeTab), N = (0, a.useMemo)(() => {
                 let e = (0, g.isAllAssetTypesActiveTab)(l.activeTab) ? m.Asset.AllCatalogAsset : g.TAXONOMY_HOST_ASSET;
-                return I.default.getMenuState(M ? e : aJ(l.activeTab), S)
-            }, [l.activeTab, S, M]);
+                return I.default.getMenuState(R ? e : aJ(l.activeTab), k)
+            }, [l.activeTab, k, R]);
             (0, a.useEffect)(() => {
                 (0, g.isRecentsActiveTab)(l.activeTab) && d({
-                    activeTab: A ? (0, g.buildTaxonomyActiveTab)(g.ALL_ASSET_TYPES_L1_KEY) : m.Asset.AllCatalogAsset,
+                    activeTab: L ? (0, g.buildTaxonomyActiveTab)(g.ALL_ASSET_TYPES_L1_KEY) : m.Asset.AllCatalogAsset,
                     filterIndex: 0
                 })
-            }, [l.activeTab, A, d]);
-            let P = (0, a.useMemo)(() => y.default.filter(e => !S.includes(e.type)), [S]),
+            }, [l.activeTab, L, d]);
+            let O = (0, a.useMemo)(() => y.default.filter(e => !k.includes(e.type)), [k]),
                 {
                     classes: {
-                        section: E,
-                        container: k
+                        section: D,
+                        container: _
                     }
                 } = aN(),
-                L = (0, a.useCallback)(e => {
-                    if (j.menuItem === e.menuItem && j.submenuItem === e.submenuItem) return;
+                Y = (0, a.useCallback)(e => {
+                    if (N.menuItem === e.menuItem && N.submenuItem === e.submenuItem) return;
                     if ((0, g.shouldOpenTaxonomyView)({
-                            isTaxonomyEnabled: T,
-                            isChangingSection: j.menuItem !== e.menuItem,
+                            isTaxonomyEnabled: P,
+                            isChangingSection: N.menuItem !== e.menuItem,
                             nextAssetType: I.default.getAssetType(e)
                         })) return void d({
                         activeTab: g.AVATAR_ITEMS_ACTIVE_TAB,
@@ -6439,15 +6445,15 @@
                         activeTab: I.default.getAssetType(e),
                         filterIndex: t
                     })
-                }, [j.menuItem, j.submenuItem, d, T]),
-                R = (0, a.useMemo)(() => {
+                }, [N.menuItem, N.submenuItem, d, P]),
+                Q = (0, a.useMemo)(() => {
                     let e = aJ(l.activeTab);
-                    if (void 0 === p && e === m.Asset.Moments || void 0 === v && e === m.Asset.Showcase) return j;
+                    if (void 0 === T && e === m.Asset.Moments || void 0 === S && e === m.Asset.Showcase) return N;
                     let t = aJ(l.activeTab) === m.Asset.TextDocument;
-                    if (void 0 === h && t) return j;
-                    let i = I.default.getValidMenuState(P, j, c, n, void 0, void 0, p, v, h);
-                    if (i !== j) {
-                        if (!A) {
+                    if (void 0 === w && t) return N;
+                    let i = I.default.getValidMenuState(O, N, c, n, void 0, void 0, T, S, w);
+                    if (i !== N) {
+                        if (!L) {
                             let e = (0, W.isOnItemTab)(i.menuItem.type) ? 0 : void 0;
                             d({
                                 activeTab: I.default.getAssetType(i),
@@ -6456,81 +6462,82 @@
                         }
                         return i
                     }
-                    return j
-                }, [P, j, A, l.activeTab, c, n, p, h, v, d]),
-                N = (0, a.useMemo)(() => I.default.getAssetType(R), [R]);
+                    return N
+                }, [O, N, L, l.activeTab, c, n, T, w, S, d]),
+                X = (0, a.useMemo)(() => I.default.getAssetType(Q), [Q]);
             (0, a.useEffect)(() => {
-                if (void 0 === w.current) {
-                    w.current = N;
+                if (void 0 === E.current) {
+                    E.current = X;
                     return
                 }
-                let e = w.current;
-                e !== N && (w.current = N, (0, J.isDevelopmentItemAsset)(e, h) && (0, J.isDevelopmentItemAsset)(N, h) || u())
-            }, [N, h, u]);
-            let O = N === m.Asset.MyExperiences || N === m.Asset.SharedExperiences,
-                D = (0, a.useMemo)(() => null == r ? void 0 : r.has(N), [N, r]),
-                _ = (0, J.isDevelopmentItemAsset)(N, h),
-                Y = (0, a.useMemo)(() => {
+                let e = E.current;
+                e !== X && (E.current = X, (0, J.isDevelopmentItemAsset)(e, w) && (0, J.isDevelopmentItemAsset)(X, w) || u())
+            }, [X, w, u]);
+            let Z = X === m.Asset.MyExperiences || X === m.Asset.SharedExperiences,
+                $ = (0, a.useMemo)(() => null == r ? void 0 : r.has(X), [X, r]),
+                ee = (0, J.isDevelopmentItemAsset)(X, w),
+                et = (0, a.useMemo)(() => {
                     var e, t;
-                    return _ ? (0, i.jsx)(aW, {
+                    return ee ? (0, i.jsx)(aW, {
                         groupId: null == n ? void 0 : n.id,
                         useTabNavigationSpacing: !1,
                         userId: null == o ? void 0 : o.id
-                    }) : N === m.Asset.Decal ? (0, i.jsx)(aU, {
+                    }) : X === m.Asset.Decal ? (0, i.jsx)(aU, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Animation ? (0, i.jsx)(aD, {
+                    }) : X === m.Asset.Animation ? (0, i.jsx)(aD, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Audio || N === m.Asset.Video ? (0, i.jsx)(aB, {
-                        mediaAssetType: N,
+                    }) : X === m.Asset.Audio || X === m.Asset.Video ? (0, i.jsx)(aB, {
+                        mediaAssetType: X,
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Plugin ? (0, i.jsx)(aF, {
+                    }) : X === m.Asset.Plugin ? (0, i.jsx)(aF, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Model ? (0, i.jsx)(az, {
+                    }) : X === m.Asset.Model ? (0, i.jsx)(az, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.MeshPart ? (0, i.jsx)(aq, {
+                    }) : X === m.Asset.MeshPart ? (0, i.jsx)(aq, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.TextDocument ? (0, i.jsx)("div", {
+                    }) : X === m.Asset.TextDocument ? (0, i.jsx)("div", {
                         className: "flex justify-center items-center padding-y-xxlarge",
                         children: (0, i.jsx)(q.ProgressCircle, {
-                            ariaLabel: f("Label.Loading"),
+                            ariaLabel: A("Label.Loading"),
                             size: "Large",
                             variant: "Indeterminate"
                         })
-                    }) : N === m.Asset.ShareLink ? (0, i.jsx)(a_, {}) : N === m.Asset.Moments ? (0, i.jsx)(aL, {}) : N === m.Asset.AssetPermissionRequests ? (0, i.jsx)(aK, {}) : N === m.Asset.Showcase ? (0, i.jsx)(aV, {
+                    }) : X === m.Asset.ShareLink ? (0, i.jsx)(a_, {}) : X === m.Asset.Moments ? (0, i.jsx)(aL, {}) : X === m.Asset.AssetPermissionRequests ? (0, i.jsx)(aK, {}) : X === m.Asset.Showcase ? (0, i.jsx)(aV, {
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.AllCatalogAsset || N === m.Asset.AvatarLooks || N === m.Asset.AvatarBackground ? (0, i.jsx)(aO, {
-                        assetType: N,
+                    }) : X === m.Asset.AllCatalogAsset || X === m.Asset.AvatarLooks || X === m.Asset.AvatarBackground ? (0, i.jsx)(aO, {
+                        assetType: X,
                         groupId: null == n ? void 0 : n.id
-                    }) : N === m.Asset.Image || N === m.Asset.Mesh ? (0, i.jsx)(aG, {
-                        primitiveAssetType: N,
+                    }) : X === m.Asset.Image || X === m.Asset.Mesh ? (0, i.jsx)(aG, {
+                        primitiveAssetType: X,
                         groupId: null == n ? void 0 : n.id
-                    }) : D ? (0, i.jsx)(aO, {
-                        assetType: N,
+                    }) : $ ? (0, i.jsx)(aO, {
+                        assetType: X,
                         groupId: null == n ? void 0 : n.id
                     }) : (0, i.jsx)(aH, {
-                        assetType: N,
+                        assetType: X,
                         creatorType: (null == n ? void 0 : n.id) ? U.SearchCreatorType.Group : U.SearchCreatorType.User,
-                        creatorTargetId: null != (e = null != (t = null == n ? void 0 : n.id) ? t : null == o ? void 0 : o.id) ? e : 0
+                        creatorTargetId: null != (e = null != (t = null == n ? void 0 : n.id) ? t : null == o ? void 0 : o.id) ? e : 0,
+                        isTelemetryReady: p && h && M && !v && (null == o ? void 0 : o.id) !== void 0 && aJ(l.activeTab) === X
                     })
-                }, [N, null == n ? void 0 : n.id, null == o ? void 0 : o.id, D, _, f]);
+                }, [X, null == n ? void 0 : n.id, null == o ? void 0 : o.id, $, ee, A, p, h, M, v, l.activeTab]);
             return (0, i.jsxs)(H.default, {
                 children: [(0, i.jsx)(B.HubMeta, {
-                    title: (0, B.buildTitle)(R.submenuItem ? f(R.submenuItem.nameKey) : f(R.menuItem.nameKey)),
-                    breadcrumb: (0, B.buildBreadcrumb)(f("Heading.Creations"), f(R.menuItem.nameKey), R.submenuItem ? f(R.submenuItem.nameKey) : void 0)
+                    title: (0, B.buildTitle)(Q.submenuItem ? A(Q.submenuItem.nameKey) : A(Q.menuItem.nameKey)),
+                    breadcrumb: (0, B.buildBreadcrumb)(A("Heading.Creations"), A(Q.menuItem.nameKey), Q.submenuItem ? A(Q.submenuItem.nameKey) : void 0)
                 }), (0, i.jsx)("section", {
-                    className: E,
+                    className: D,
                     children: (0, i.jsxs)(z.Grid, {
                         container: !0,
                         direction: "column",
-                        className: k,
+                        className: _,
                         children: [(0, i.jsx)(F.AgeVerificationUpsellBanner, {
                             trackingPage: F.AgeVerificationUpsellPage.Creations
-                        }), !_ && (0, i.jsx)(iZ, {
-                            menuState: R,
-                            onMenuStateChange: L,
+                        }), !ee && (0, i.jsx)(iZ, {
+                            menuState: Q,
+                            onMenuStateChange: Y,
                             verificationMetadata: t,
                             group: n
-                        }), O && (0, i.jsx)(V.default, {}), Y]
+                        }), Z && (0, i.jsx)(V.default, {}), et]
                     })
                 })]
             })
@@ -6616,5 +6623,5 @@
     })
 }]);
 
-//# debugId=7eb2bdd0-2e19-aabe-d10a-549c86f2b60d
-//# sourceMappingURL=0dsait8ve4vlj.js.map
+//# debugId=133eeead-59c4-47ef-b76b-80b983c41ab9
+//# sourceMappingURL=0z9oo4d2_k3td.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "194423f7-53ff-a555-bb8a-ff3f9b3a278c")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f6a244f1-9b21-79fe-692a-cbfc1f59d4d1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -1045,11 +1045,11 @@
                 })
             }, r
         }(n.BaseAPI)),
-        h = function(t) {
+        h = (function(t) {
             function r() {
                 return null !== t && t.apply(this, arguments) || this
             }
-            return o(r, t), r.prototype.landingEligibilityGetLandingEligibilityRaw = function(t) {
+            o(r, t), r.prototype.landingEligibilityGetLandingEligibilityRaw = function(t) {
                 return a(this, void 0, void 0, function() {
                     var r, o, a;
                     return i(this, function(i) {
@@ -1087,9 +1087,8 @@
                         }
                     })
                 })
-            }, r
-        }(n.BaseAPI),
-        f = (function(t) {
+            }
+        }(n.BaseAPI), function(t) {
             function r() {
                 return null !== t && t.apply(this, arguments) || this
             }
@@ -1169,7 +1168,7 @@
                 })
             }, r
         }(n.BaseAPI)),
-        g = function(t) {
+        f = function(t) {
             function r() {
                 return null !== t && t.apply(this, arguments) || this
             }
@@ -1209,86 +1208,85 @@
                     })
                 })
             }, r
-        }(n.BaseAPI),
-        y = function(t) {
-            function r() {
-                return null !== t && t.apply(this, arguments) || this
-            }
-            return o(r, t), r.prototype.yourPlaceReengagementCreateYourPlaceReengagementEntryRaw = function(t, r) {
-                return a(this, void 0, void 0, function() {
-                    var o, a, l;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                if (null === t.yourPlaceReengagementCreateYourPlaceReengagementEntryRequest || void 0 === t.yourPlaceReengagementCreateYourPlaceReengagementEntryRequest) throw new n.RequiredError("yourPlaceReengagementCreateYourPlaceReengagementEntryRequest", "Required parameter requestParameters.yourPlaceReengagementCreateYourPlaceReengagementEntryRequest was null or undefined when calling yourPlaceReengagementCreateYourPlaceReengagementEntry.");
-                                return o = {}, (a = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
-                                    path: "/v1/your-place-reengagement",
-                                    schemaPath: "/v1/your-place-reengagement",
-                                    method: "POST",
-                                    headers: a,
-                                    query: o,
-                                    body: function(t) {
-                                        if (void 0 !== t) return null === t ? null : {
-                                            universeId: t.universeId
-                                        }
-                                    }(t.yourPlaceReengagementCreateYourPlaceReengagementEntryRequest)
-                                }, r)];
-                            case 1:
-                                return l = i.sent(), [2, new n.VoidApiResponse(l)]
-                        }
-                    })
-                })
-            }, r.prototype.yourPlaceReengagementCreateYourPlaceReengagementEntry = function(t, n) {
-                return a(this, void 0, void 0, function() {
-                    return i(this, function(r) {
-                        switch (r.label) {
-                            case 0:
-                                return [4, this.yourPlaceReengagementCreateYourPlaceReengagementEntryRaw(t, n)];
-                            case 1:
-                                return r.sent(), [2]
-                        }
-                    })
-                })
-            }, r.prototype.yourPlaceReengagementGetYourPlaceReengagementEntryRaw = function(t) {
-                return a(this, void 0, void 0, function() {
-                    var r, o, a;
-                    return i(this, function(i) {
-                        switch (i.label) {
-                            case 0:
-                                return r = {}, o = {}, [4, this.request({
-                                    path: "/v1/your-place-reengagement",
-                                    schemaPath: "/v1/your-place-reengagement",
-                                    method: "GET",
-                                    headers: o,
-                                    query: r
-                                }, t)];
-                            case 1:
-                                return a = i.sent(), [2, new n.JSONApiResponse(a, function(t) {
-                                    return null == t ? t : {
-                                        hasValidEntry: (0, n.exists)(t, "hasValidEntry") ? t.hasValidEntry : void 0,
-                                        universeId: (0, n.exists)(t, "universeId") ? t.universeId : void 0,
-                                        rootPlaceId: (0, n.exists)(t, "rootPlaceId") ? t.rootPlaceId : void 0
-                                    }
-                                })]
-                        }
-                    })
-                })
-            }, r.prototype.yourPlaceReengagementGetYourPlaceReengagementEntry = function(t) {
-                return a(this, void 0, void 0, function() {
-                    return i(this, function(n) {
-                        switch (n.label) {
-                            case 0:
-                                return [4, this.yourPlaceReengagementGetYourPlaceReengagementEntryRaw(t)];
-                            case 1:
-                                return [4, n.sent().value()];
-                            case 2:
-                                return [2, n.sent()]
-                        }
-                    })
-                })
-            }, r
         }(n.BaseAPI);
-    t.s(["CreatorHomeContentApi", 0, p, "GroupListSurface", 0, {
+    (function(t) {
+        function r() {
+            return null !== t && t.apply(this, arguments) || this
+        }
+        o(r, t), r.prototype.yourPlaceReengagementCreateYourPlaceReengagementEntryRaw = function(t, r) {
+            return a(this, void 0, void 0, function() {
+                var o, a, l;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            if (null === t.yourPlaceReengagementCreateYourPlaceReengagementEntryRequest || void 0 === t.yourPlaceReengagementCreateYourPlaceReengagementEntryRequest) throw new n.RequiredError("yourPlaceReengagementCreateYourPlaceReengagementEntryRequest", "Required parameter requestParameters.yourPlaceReengagementCreateYourPlaceReengagementEntryRequest was null or undefined when calling yourPlaceReengagementCreateYourPlaceReengagementEntry.");
+                            return o = {}, (a = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
+                                path: "/v1/your-place-reengagement",
+                                schemaPath: "/v1/your-place-reengagement",
+                                method: "POST",
+                                headers: a,
+                                query: o,
+                                body: function(t) {
+                                    if (void 0 !== t) return null === t ? null : {
+                                        universeId: t.universeId
+                                    }
+                                }(t.yourPlaceReengagementCreateYourPlaceReengagementEntryRequest)
+                            }, r)];
+                        case 1:
+                            return l = i.sent(), [2, new n.VoidApiResponse(l)]
+                    }
+                })
+            })
+        }, r.prototype.yourPlaceReengagementCreateYourPlaceReengagementEntry = function(t, n) {
+            return a(this, void 0, void 0, function() {
+                return i(this, function(r) {
+                    switch (r.label) {
+                        case 0:
+                            return [4, this.yourPlaceReengagementCreateYourPlaceReengagementEntryRaw(t, n)];
+                        case 1:
+                            return r.sent(), [2]
+                    }
+                })
+            })
+        }, r.prototype.yourPlaceReengagementGetYourPlaceReengagementEntryRaw = function(t) {
+            return a(this, void 0, void 0, function() {
+                var r, o, a;
+                return i(this, function(i) {
+                    switch (i.label) {
+                        case 0:
+                            return r = {}, o = {}, [4, this.request({
+                                path: "/v1/your-place-reengagement",
+                                schemaPath: "/v1/your-place-reengagement",
+                                method: "GET",
+                                headers: o,
+                                query: r
+                            }, t)];
+                        case 1:
+                            return a = i.sent(), [2, new n.JSONApiResponse(a, function(t) {
+                                return null == t ? t : {
+                                    hasValidEntry: (0, n.exists)(t, "hasValidEntry") ? t.hasValidEntry : void 0,
+                                    universeId: (0, n.exists)(t, "universeId") ? t.universeId : void 0,
+                                    rootPlaceId: (0, n.exists)(t, "rootPlaceId") ? t.rootPlaceId : void 0
+                                }
+                            })]
+                    }
+                })
+            })
+        }, r.prototype.yourPlaceReengagementGetYourPlaceReengagementEntry = function(t) {
+            return a(this, void 0, void 0, function() {
+                return i(this, function(n) {
+                    switch (n.label) {
+                        case 0:
+                            return [4, this.yourPlaceReengagementGetYourPlaceReengagementEntryRaw(t)];
+                        case 1:
+                            return [4, n.sent().value()];
+                        case 2:
+                            return [2, n.sent()]
+                    }
+                })
+            })
+        }
+    })(n.BaseAPI), t.s(["CreatorHomeContentApi", 0, p, "GroupListSurface", 0, {
         CreatorHub: "CreatorHub",
         StudioAssetImporter: "StudioAssetImporter",
         StudioConvertToPackage: "StudioConvertToPackage",
@@ -1300,7 +1298,7 @@
         StudioStartPage: "StudioStartPage",
         StudioPublishNewPlace: "StudioPublishNewPlace",
         StudioSaveNewPlace: "StudioSaveNewPlace"
-    }, "GroupsApi", 0, m, "LandingEligibilityApi", 0, h, "SignalsApi", 0, f, "UserScreenApi", 0, g, "YourPlaceReengagementApi", 0, y])
+    }, "GroupsApi", 0, m, "SignalsApi", 0, h, "UserScreenApi", 0, f])
 }, 918697, t => {
     "use strict";
     var n = t.i(677753),
@@ -25746,10 +25744,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nA("https://assets.create.roblox.com/2bffa7e96a436a0be8edb96e6d9a7c2f6ee39366", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nA("https://assets.create.roblox.com/5d918dbe344d5756eb9e631dab52e13e6e31979f", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!nT()) return [];
-                r = nA("https://assets.create.roblox.com/2bffa7e96a436a0be8edb96e6d9a7c2f6ee39366", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nA("https://assets.create.roblox.com/5d918dbe344d5756eb9e631dab52e13e6e31979f", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -31568,5 +31566,5 @@
     }])
 }]);
 
-//# debugId=194423f7-53ff-a555-bb8a-ff3f9b3a278c
-//# sourceMappingURL=2a4xhfk15w7v2.js.map
+//# debugId=f6a244f1-9b21-79fe-692a-cbfc1f59d4d1
+//# sourceMappingURL=3jdenhd_ys9k9.js.map

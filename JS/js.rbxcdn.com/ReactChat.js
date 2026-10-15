@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "a403f8b88981fe477577d81974242fe6d666fe26"
+            id: "d44d8a1dea533fa2d8418629f42c0608cae32163"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "799f94a0-1a8f-439a-bb36-f842a3fca518", e._sentryDebugIdIdentifier = "sentry-dbid-799f94a0-1a8f-439a-bb36-f842a3fca518")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "30add9a5-7285-4e6b-a630-21e48615696d", e._sentryDebugIdIdentifier = "sentry-dbid-30add9a5-7285-4e6b-a630-21e48615696d")
     } catch (e) {}
 }(),
 function() {
@@ -29805,10 +29805,47 @@ function() {
                         children: (0, es.jsx)(xB, {})
                     })
                 },
-                xH = window.Roblox["core-scripts"].http.http,
-                xz = window.CoreRobloxUtilities;
+                xH = function() {
+                    return ig.Url.parse(iu().metricsApi).getOrThrow().withPath("/v1/games/report-event")
+                },
+                xz = function(e, t, r) {
+                    try {
+                        ib.postUntyped(e().withSearchParams(function(e) {
+                            for (var t = 1; t < arguments.length; t++) {
+                                var r = null != arguments[t] ? arguments[t] : {},
+                                    n = Object.keys(r);
+                                "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(e) {
+                                    return Object.getOwnPropertyDescriptor(r, e).enumerable
+                                }))), n.forEach(function(t) {
+                                    var n;
+                                    n = r[t], t in e ? Object.defineProperty(e, t, {
+                                        value: n,
+                                        enumerable: !0,
+                                        configurable: !0,
+                                        writable: !0
+                                    }) : e[t] = n
+                                })
+                            }
+                            return e
+                        }({
+                            name: t
+                        }, r)), "", {
+                            credentials: "include",
+                            keepalive: !0,
+                            signal: AbortSignal.timeout(3e4)
+                        })
+                    } catch (e) {}
+                },
+                xV = function() {
+                    for (var e = arguments.length, t = Array(e), r = 0; r < e; r++) t[r] = arguments[r];
+                    t.forEach(function(e) {
+                        xz(xH, e)
+                    })
+                },
+                xG = window.Roblox["core-scripts"].http.http,
+                xK = window.Roblox["core-scripts"].dataStore;
 
-            function xV(e, t, r, n, o, a, i) {
+            function xW(e, t, r, n, o, a, i) {
                 try {
                     var l = e[a](i),
                         u = l.value
@@ -29819,7 +29856,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function xG(e) {
+            function xq(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -29827,18 +29864,18 @@ function() {
                         var a = e.apply(t, r);
 
                         function i(e) {
-                            xV(a, n, o, i, l, "next", e)
+                            xW(a, n, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            xV(a, n, o, i, l, "throw", e)
+                            xW(a, n, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 }
             }
 
-            function xK(e, t) {
+            function x$(e, t) {
                 var r, n, o, a = {
                         label: 0,
                         sent: function() {
@@ -29918,41 +29955,41 @@ function() {
                     }
                 }
             }
-            var xW = xz.dataStores.gamesDataStore,
-                xq = function() {
-                    return xG(function() {
-                        return xK(this, function(e) {
+            var xX = r.n(xK)().gamesDataStore,
+                xQ = function() {
+                    return xq(function() {
+                        return x$(this, function(e) {
                             return [2, (0, w_.callBehaviour)("play-button-ui")]
                         })
                     })()
                 },
-                x$ = function() {
+                xY = function() {
                     var e = {
                         url: "".concat(iu().apiGatewayUrl, "/user-settings-api/v1/user-settings/settings-and-options"),
                         withCredentials: !0
                     };
-                    return xH.get(e).then(function(e) {
+                    return xG.get(e).then(function(e) {
                         return e.data
                     })
                 },
-                xX = function(e) {
+                xZ = function(e) {
                     var t = {
                         url: "".concat(iu().apiGatewayUrl, "/experience-guidelines-api/experience-guidelines/get-age-recommendation"),
                         withCredentials: !0
                     };
-                    return xH.post(t, {
+                    return xG.post(t, {
                         universeId: e
                     }).then(function(e) {
                         return e.data
                     })
                 },
-                xQ = function(e, t) {
+                xJ = function(e, t) {
                     var r = {
                         url: "".concat(iu().apiGatewayUrl, "/fiat-paid-access-service/v1/purchase"),
                         withCredentials: !0,
                         retryable: !0
                     };
-                    return xH.post(r, {
+                    return xG.post(r, {
                         rootPlaceId: e,
                         expectedBasePriceId: t
                     }).then(function(e) {
@@ -29960,17 +29997,17 @@ function() {
                         return null != (r = JSON.parse(null != (t = e.data.checkoutUrl) ? t : "").checkoutUrl) ? r : ""
                     })
                 },
-                xY = "Playable",
-                xZ = "GuestProhibited",
-                xJ = "PurchaseRequired",
-                x0 = "TemporarilyUnavailable",
-                x1 = "ContextualPlayabilityRegionalAvailability",
-                x2 = "ContextualPlayabilityAgeRecommendationParentalControls",
-                x3 = "FiatPurchaseRequired",
-                x6 = "ContextualPlayabilityRequireParentApproval",
-                x8 = "FiatPurchaseDeviceRestricted";
+                x0 = "Playable",
+                x1 = "GuestProhibited",
+                x2 = "PurchaseRequired",
+                x3 = "TemporarilyUnavailable",
+                x6 = "ContextualPlayabilityRegionalAvailability",
+                x8 = "ContextualPlayabilityAgeRecommendationParentalControls",
+                x5 = "FiatPurchaseRequired",
+                x4 = "ContextualPlayabilityRequireParentApproval",
+                x7 = "FiatPurchaseDeviceRestricted";
 
-            function x5(e, t, r) {
+            function x9(e, t, r) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: r,
                     enumerable: !0,
@@ -29978,13 +30015,13 @@ function() {
                     writable: !0
                 }) : e[t] = r, e
             }
-            x5(ec = {}, "UnplayableOtherReason", "UnplayableError.UnplayableOther"), x5(ec, x0, "UnplayableError.TemporarilyUnavailable"), x5(ec, "GameUnapproved", "UnplayableError.GameUnapproved"), x5(ec, "IncorrectConfiguration", "UnplayableError.IncorrectConfiguration"), x5(ec, "UniverseRootPlaceIsPrivate", "UnplayableError.CreatorHasntMadeAvailable"), x5(ec, "InsufficientPermissionFriendsOnly", "UnplayableError.CreatorHasntMadeAvailable"), x5(ec, "InsufficientPermissionGroupOnly", "UnplayableError.CreatorHasntMadeAvailable"), x5(ec, "DeviceRestricted", "UnplayableError.DeviceRestrictedDefault"), x5(ec, x8, "UnplayableError.FiatPurchaseDeviceRestricted"), x5(ec, "UnderReview", "UnplayableError.Moderated"), x5(ec, "AccountRestricted", "UnplayableError.AccountRestricted"), x5(ec, "ComplianceBlocked", "UnplayableError.ComplianceBlocked"), x5(ec, x1, "UnplayableError.ContextualPlayabilityRegionalAvailability"), x5(ec, "ContextualPlayabilityRegionalCompliance", "UnplayableError.ContextualPlayabilityRegionalCompliance"), x5(ec, x2, "UnplayableError.ContextualPlayabilityAgeRecommendationParentalControls"), x5(ec, "ContextualPlayabilityAgeGated", "UnplayableError.ContextualPlayabilityAgeGated"), x5(ec, "PlaceHasNoPublishedVersion", "UnplayableError.CreatorHasntMadeAvailable"), x5(ec, "ContextualPlayabilityUnrated", "UnplayableError.ContextualPlayabilityUnrated"), x5(ec, "ContextualPlayabilityAgeGatedByDescriptor", "UnplayableError.ContextualPlayabilityAgeGatedByDescriptor"), x5(ec, "ContextualPlayabilityExperienceBlockedParentalControls", "UnplayableError.ContextualPlayabilityExperienceBlockedParentalControls"), x5(ec, x6, "UnplayableError.ContextualPlayabilityRequireParentApproval");
-            var x4 = "PlayButtonText.Unlock",
-                x7 = "PlayButtonText.Unavailable",
-                x9 = "PlayButtonText.Buy",
-                Se = "PlayButtonText.PlayDemo",
-                St = "PlayButtonText.PlayOnWeb",
-                Sr = function(e, t) {
+            x9(ec = {}, "UnplayableOtherReason", "UnplayableError.UnplayableOther"), x9(ec, x3, "UnplayableError.TemporarilyUnavailable"), x9(ec, "GameUnapproved", "UnplayableError.GameUnapproved"), x9(ec, "IncorrectConfiguration", "UnplayableError.IncorrectConfiguration"), x9(ec, "UniverseRootPlaceIsPrivate", "UnplayableError.CreatorHasntMadeAvailable"), x9(ec, "InsufficientPermissionFriendsOnly", "UnplayableError.CreatorHasntMadeAvailable"), x9(ec, "InsufficientPermissionGroupOnly", "UnplayableError.CreatorHasntMadeAvailable"), x9(ec, "DeviceRestricted", "UnplayableError.DeviceRestrictedDefault"), x9(ec, x7, "UnplayableError.FiatPurchaseDeviceRestricted"), x9(ec, "UnderReview", "UnplayableError.Moderated"), x9(ec, "AccountRestricted", "UnplayableError.AccountRestricted"), x9(ec, "ComplianceBlocked", "UnplayableError.ComplianceBlocked"), x9(ec, x6, "UnplayableError.ContextualPlayabilityRegionalAvailability"), x9(ec, "ContextualPlayabilityRegionalCompliance", "UnplayableError.ContextualPlayabilityRegionalCompliance"), x9(ec, x8, "UnplayableError.ContextualPlayabilityAgeRecommendationParentalControls"), x9(ec, "ContextualPlayabilityAgeGated", "UnplayableError.ContextualPlayabilityAgeGated"), x9(ec, "PlaceHasNoPublishedVersion", "UnplayableError.CreatorHasntMadeAvailable"), x9(ec, "ContextualPlayabilityUnrated", "UnplayableError.ContextualPlayabilityUnrated"), x9(ec, "ContextualPlayabilityAgeGatedByDescriptor", "UnplayableError.ContextualPlayabilityAgeGatedByDescriptor"), x9(ec, "ContextualPlayabilityExperienceBlockedParentalControls", "UnplayableError.ContextualPlayabilityExperienceBlockedParentalControls"), x9(ec, x4, "UnplayableError.ContextualPlayabilityRequireParentApproval");
+            var Se = "PlayButtonText.Unlock",
+                St = "PlayButtonText.Unavailable",
+                Sr = "PlayButtonText.Buy",
+                Sn = "PlayButtonText.PlayDemo",
+                So = "PlayButtonText.PlayOnWeb",
+                Sa = function(e, t) {
                     var r, n;
                     return {
                         eventName: "playGameClicked",
@@ -29996,7 +30033,7 @@ function() {
                                 "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(e) {
                                     return Object.getOwnPropertyDescriptor(r, e).enumerable
                                 }))), n.forEach(function(t) {
-                                    x5(e, t, r[t])
+                                    x9(e, t, r[t])
                                 })
                             }
                             return e
@@ -30015,7 +30052,7 @@ function() {
                         gamePlayIntentEventCtx: "PlayButton"
                     }
                 },
-                Sn = {
+                Si = {
                     ActionNeeded: "ActionNeededButtonShown",
                     Unplayable: "UnplayableErrorShown",
                     SeventeenPlusInPlayable: "ReachedSeventeenPlusCaseInPlayable",
@@ -30040,7 +30077,7 @@ function() {
                     PlayableUxTreatmentUnknownTreatment: "PlayableUxTreatmentUnknownTreatment",
                     PlayableUxTreatmentPlayabilityStatusStillLoading: "PlayableUxTreatmentPlayabilityStatusStillLoading"
                 },
-                So = {
+                Sl = {
                     eventName: "unlockPlayIntent",
                     ageCheckUpsellName: "AgeCheckRequired",
                     gameLaunchFallbackUpsellName: "GameLaunch",
@@ -30052,14 +30089,14 @@ function() {
                     updatePlaytestSettingsUpsellName: "UpdatePlaytestSettings",
                     trustedFriendRequiredUpsellName: "TrustedFriendRequired"
                 },
-                Sa = "gameJoinAgeCheckRequired",
-                Si = "gameJoinContentMaturityLock",
-                Sl = {
+                Su = "gameJoinAgeCheckRequired",
+                Sc = "gameJoinContentMaturityLock",
+                Ss = {
                     settingChange: "account_management/SettingsChange",
                     accountManagement: "account_management/AccountManagement"
                 };
 
-            function Su(e, t, r, n, o, a, i) {
+            function Sf(e, t, r, n, o, a, i) {
                 try {
                     var l = e[a](i),
                         u = l.value
@@ -30069,20 +30106,20 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var Sc = void 0,
-                Ss = void 0,
-                Sf = void 0,
-                Sd = void 0,
+            var Sd = void 0,
                 Sp = void 0,
                 Sy = void 0,
-                Sm = function(e) {
+                Sm = void 0,
+                Sh = void 0,
+                Sv = void 0,
+                Sb = function(e) {
                     var t = !(arguments.length > 1) || void 0 === arguments[1] || arguments[1],
                         r = (0, ef.useQuery)({
                             queryKey: ["playabilityStatus", e],
                             queryFn: function() {
                                 var t;
                                 return (t = function() {
-                                    var t, r, n, o, a;
+                                    var t, r;
                                     return function(e, t) {
                                         var r, n, o, a = {
                                                 label: 0,
@@ -30162,38 +30199,38 @@ function() {
                                                 }
                                             }
                                         }
-                                    }(this, function(i) {
-                                        switch (i.label) {
+                                    }(this, function(n) {
+                                        switch (n.label) {
                                             case 0:
-                                                if (!e) throw null == (r = window.EventTracker) || r.fireEvent(Sn.PlayabilityStatusFetchInvalidUniverseId), Error("Invalid universe ID for playability status fetch");
-                                                i.label = 1;
+                                                if (!e) throw xV(Si.PlayabilityStatusFetchInvalidUniverseId), Error("Invalid universe ID for playability status fetch");
+                                                n.label = 1;
                                             case 1:
-                                                var l;
-                                                return i.trys.push([1, 3, , 4]), [4, (l = [e], xG(function() {
+                                                var o;
+                                                return n.trys.push([1, 3, , 4]), [4, (o = [e], xq(function() {
                                                     var e;
-                                                    return xK(this, function(t) {
+                                                    return x$(this, function(t) {
                                                         switch (t.label) {
                                                             case 0:
-                                                                return [4, xW.getPlayabilityStatus(l)];
+                                                                return [4, xX.getPlayabilityStatus(o)];
                                                             case 1:
                                                                 return [2, (void 0 === (e = t.sent().data) ? [] : e)[0]]
                                                         }
                                                     })
                                                 })())];
                                             case 2:
-                                                return n = i.sent(), [3, 4];
+                                                return r = n.sent(), [3, 4];
                                             case 3:
-                                                throw i.sent(), null == (o = window.EventTracker) || o.fireEvent(Sn.PlayabilityStatusFetchFailed), Error("Playability status fetch failed");
+                                                throw n.sent(), xV(Si.PlayabilityStatusFetchFailed), Error("Playability status fetch failed");
                                             case 4:
-                                                if (!(null == n ? void 0 : n.playabilityStatus) || void 0 === n.isPlayable) throw null == (a = window.EventTracker) || a.fireEvent(Sn.PlayabilityStatusFetchInvalidResponse), Error("Invalid playability status response");
+                                                if (!(null == r ? void 0 : r.playabilityStatus) || void 0 === r.isPlayable) throw xV(Si.PlayabilityStatusFetchInvalidResponse), Error("Invalid playability status response");
                                                 return [2, {
-                                                    playabilityStatus: n.playabilityStatus,
-                                                    isPlayable: n.isPlayable,
-                                                    unplayableDisplayText: n.unplayableDisplayText,
-                                                    playableUxTreatment: n.playableUxTreatment,
-                                                    upsellUxTreatment: n.upsellUxTreatment,
-                                                    demoModeAvailable: n.demoModeAvailable,
-                                                    privatePlaytestInfo: null != (t = n.privatePlaytestInfo) ? t : void 0
+                                                    playabilityStatus: r.playabilityStatus,
+                                                    isPlayable: r.isPlayable,
+                                                    unplayableDisplayText: r.unplayableDisplayText,
+                                                    playableUxTreatment: r.playableUxTreatment,
+                                                    upsellUxTreatment: r.upsellUxTreatment,
+                                                    demoModeAvailable: r.demoModeAvailable,
+                                                    privatePlaytestInfo: null != (t = r.privatePlaytestInfo) ? t : void 0
                                                 }]
                                         }
                                     })
@@ -30204,11 +30241,11 @@ function() {
                                         var a = t.apply(e, r);
 
                                         function i(e) {
-                                            Su(a, n, o, i, l, "next", e)
+                                            Sf(a, n, o, i, l, "next", e)
                                         }
 
                                         function l(e) {
-                                            Su(a, n, o, i, l, "throw", e)
+                                            Sf(a, n, o, i, l, "throw", e)
                                         }
                                         i(void 0)
                                     })
@@ -30234,13 +30271,13 @@ function() {
                             }
                     }, [l, t]), (0, em.useMemo)(function() {
                         return a ? {
-                            playabilityStatus: x0,
-                            isPlayable: Sc,
-                            unplayableDisplayText: Ss,
-                            playableUxTreatment: Sf,
-                            upsellUxTreatment: Sd,
-                            demoModeAvailable: Sp,
-                            privatePlaytestInfo: Sy,
+                            playabilityStatus: x3,
+                            isPlayable: Sd,
+                            unplayableDisplayText: Sp,
+                            playableUxTreatment: Sy,
+                            upsellUxTreatment: Sm,
+                            demoModeAvailable: Sh,
+                            privatePlaytestInfo: Sv,
                             isFetchingPlayability: o,
                             refetchPlayabilityData: l
                         } : {
@@ -30256,20 +30293,35 @@ function() {
                         }
                     }, [n, a, o, l])
                 },
-                Sh = window.HeaderScripts,
-                Sv = window.Roblox.NavigationService,
-                Sb = "full",
-                Sg = function(e) {
-                    return e === Sb && "btn-full-width"
+                Sg = window.Roblox.NavigationService,
+                Sw = "full",
+                SO = function(e) {
+                    return e === Sw && "btn-full-width"
                 },
-                Sw = {
+                Sx = {
                     display: "flex"
                 },
-                SO = window.Roblox["core-scripts"].endpoints,
-                Sx = window.Roblox["core-scripts"].game,
-                SS = window.Roblox["core-scripts"].util.url;
+                SS = window.Roblox["core-scripts"].endpoints,
+                Sj = window.Roblox["core-scripts"].game,
+                SP = window.Roblox["core-scripts"].util.url,
+                SE = "function" == typeof crypto.randomUUID,
+                SC = function() {
+                    var e = new Uint8Array(16);
+                    crypto.getRandomValues(e);
+                    var t = Array.from(e, function(e, t) {
+                        return (6 === t ? 15 & e | 64 : 8 === t ? 63 & e | 128 : e).toString(16).padStart(2, "0")
+                    });
+                    return "".concat(t.slice(0, 4).join(""), "-").concat(t.slice(4, 6).join(""), "-").concat(t.slice(6, 8).join(""), "-") + "".concat(t.slice(8, 10).join(""), "-").concat(t.slice(10, 16).join(""))
+                },
+                SI = window.Roblox["core-scripts"].meta.device;
 
-            function Sj(e, t, r, n, o, a, i) {
+            function SA(e, t) {
+                (null == t || t > e.length) && (t = e.length);
+                for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
+                return n
+            }
+
+            function ST(e, t, r, n, o, a, i) {
                 try {
                     var l = e[a](i),
                         u = l.value
@@ -30280,7 +30332,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function SP(e) {
+            function Sk(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -30288,18 +30340,18 @@ function() {
                         var a = e.apply(t, r);
 
                         function i(e) {
-                            Sj(a, n, o, i, l, "next", e)
+                            ST(a, n, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            Sj(a, n, o, i, l, "throw", e)
+                            ST(a, n, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 }
             }
 
-            function SE(e) {
+            function SN(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -30318,7 +30370,16 @@ function() {
                 return e
             }
 
-            function SC(e, t) {
+            function S_(e, t) {
+                if (e) {
+                    if ("string" == typeof e) return SA(e, t);
+                    var r = Object.prototype.toString.call(e).slice(8, -1);
+                    if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return SA(e, t)
+                }
+            }
+
+            function SD(e, t) {
                 var r, n, o, a = {
                         label: 0,
                         sent: function() {
@@ -30398,39 +30459,39 @@ function() {
                     }
                 }
             }
-            var SI = {
+            var SR = {
                     pid: "experiencestart_mobileweb",
                     is_retargeting: "false"
                 },
-                SA = function() {
+                SM = function() {
                     var e, t, r;
                     return null != (e = null == (r = window.Roblox) || null == (t = r.GameLauncher) ? void 0 : t.isJoinAttemptIdEnabled()) && e
                 };
 
-            function ST(e) {
-                if (!SA()) return {};
+            function SL(e) {
+                if (!SM()) return {};
                 var t = e.joinAttemptOrigin,
                     r = e.joinAttemptId;
                 return {
-                    joinAttemptId: r = "string" == typeof r ? r : iv.uuidService.generateRandomUuid(),
+                    joinAttemptId: r = "string" == typeof r ? r : SE ? crypto.randomUUID() : SC(),
                     joinAttemptOrigin: t
                 }
             }
 
-            function Sk(e, t, r, n) {
-                var o = SE({
+            function SU(e, t, r, n) {
+                var o = SN({
                     placeId: t
-                }, e, ST(e), r, null == n ? {} : {
+                }, e, SL(e), r, null == n ? {} : {
                     actionType: n
                 });
-                return xz.eventStreamService.sendEventWithTarget("playGameClicked", "click", o), o
+                return (0, ii.sendEventWithTarget)("playGameClicked", "click", o), o
             }
 
-            function SN(e) {
+            function SB(e) {
                 var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
                     r = "".concat(iu().websiteUrl, "/games/start?placeid=").concat(e);
-                if (SA()) {
-                    var n = ST(t),
+                if (SM()) {
+                    var n = SL(t),
                         o = n.joinAttemptId,
                         a = n.joinAttemptOrigin;
                     "string" == typeof o && o.length > 0 && (r += "&joinAttemptId=".concat(o), "string" == typeof a && a.length > 0 && (r += "&joinAttemptOrigin=".concat(a)))
@@ -30439,16 +30500,16 @@ function() {
                     l = t.eventId;
                 return "string" == typeof i && i.length > 0 && (r += "&launchData=".concat(i)), "string" == typeof l && l.length > 0 && (r += "&eventId=".concat(l)), encodeURIComponent(r)
             }
-            var S_ = function(e, t, r, n) {
+            var SF = function(e, t, r, n) {
                     var o = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : {},
                         a = arguments.length > 5 && void 0 !== arguments[5] ? arguments[5] : {},
                         i = arguments.length > 6 && void 0 !== arguments[6] ? arguments[6] : {},
                         l = arguments.length > 7 ? arguments[7] : void 0,
-                        u = Sh.deviceMeta.getDeviceMeta();
-                    if ((null == u ? void 0 : u.isIosDevice) || (null == u ? void 0 : u.isAndroidDevice) || Sh.jsClientDeviceIdentifier.isIos13Ipad || (null == u ? void 0 : u.isChromeOs)) {
-                        var c = Sk(o, e, a, l),
-                            s = SN(e, c),
-                            f = SS.composeQueryString(SE({}, SI, i));
+                        u = (0, SI.getDeviceMeta)();
+                    if ((null == u ? void 0 : u.isIosDevice) || (null == u ? void 0 : u.isAndroidDevice) || (0, SI.isIos13Ipad)() || (null == u ? void 0 : u.isChromeOs)) {
+                        var c = SU(o, e, a, l),
+                            s = SB(e, c),
+                            f = (0, SP.composeQueryString)(SN({}, SR, i));
                         window.open("https://ro.blox.com/Ebh5?".concat(f, "&af_dp=").concat(s, "&af_web_dp=").concat(s, "&deep_link_value=").concat(s), "_self")
                     } else {
                         var d = "0";
@@ -30460,28 +30521,28 @@ function() {
                             } catch (e) {
                                 return {}
                             }
-                        }()[e]), (0, Sx.launchGame)((0, Sx.buildPlayGameProperties)(t, e, n, void 0, r, d, a), Sr(e, o), l), window.localStorage.getItem("ref_info") && window.localStorage.removeItem("ref_info")
+                        }()[e]), (0, Sj.launchGame)((0, Sj.buildPlayGameProperties)(t, e, n, void 0, r, d, a), Sa(e, o), l), window.localStorage.getItem("ref_info") && window.localStorage.removeItem("ref_info")
                     }
                 },
-                SD = function(e) {
+                SH = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-                        r = Sh.deviceMeta.getDeviceMeta();
-                    if ((null == r ? void 0 : r.isIosDevice) || (null == r ? void 0 : r.isAndroidDevice) || Sh.jsClientDeviceIdentifier.isIos13Ipad || (null == r ? void 0 : r.isChromeOs)) {
-                        var n = Sk({}, e, {}),
-                            o = SN(e, n),
-                            a = SS.composeQueryString(SE({}, SI, t));
+                        r = (0, SI.getDeviceMeta)();
+                    if ((null == r ? void 0 : r.isIosDevice) || (null == r ? void 0 : r.isAndroidDevice) || (0, SI.isIos13Ipad)() || (null == r ? void 0 : r.isChromeOs)) {
+                        var n = SU({}, e, {}),
+                            o = SB(e, n),
+                            a = (0, SP.composeQueryString)(SN({}, SR, t));
                         window.open("https://ro.blox.com/Ebh5?".concat(a, "&af_dp=").concat(o, "&af_web_dp=").concat(o, "&deep_link_value=").concat(o), "_self")
-                    } else(0, Sx.launchGame)((0, Sx.buildPlayGameProperties)(void 0, e), Sr(e, {}))
+                    } else(0, Sj.launchGame)((0, Sj.buildPlayGameProperties)(void 0, e), Sa(e, {}))
                 },
-                SR = function(e) {
+                Sz = function(e) {
                     var t = e.context,
                         r = e.pageContext;
-                    return SP(function() {
-                        var e, n, o, a, i, l;
-                        return SC(this, function(u) {
-                            switch (u.label) {
+                    return Sk(function() {
+                        var e, n, o, a;
+                        return SD(this, function(i) {
+                            switch (i.label) {
                                 case 0:
-                                    return u.trys.push([0, 2, , 3]), o = {
+                                    return i.trys.push([0, 2, , 3]), o = {
                                         featureName: "TriggerAgeCheckUpsellIncludingVPC",
                                         isAsyncCall: !1,
                                         usePrologue: !1,
@@ -30491,31 +30552,62 @@ function() {
                                         }
                                     }, [4, null == (n = window.Roblox.AccessManagementUpsellV2Service) ? void 0 : n.startAccessManagementUpsell(o)];
                                 case 1:
-                                    return [2, null != (e = u.sent()) && e];
+                                    return [2, null != (e = i.sent()) && e];
                                 case 2:
-                                    throw a = u.sent(), null == (l = (null != (i = window.EventTracker) ? i : {}).fireEvent) || l(Sn.PlayButtonUpsellAgeRestrictionVerificationError), a;
+                                    throw a = i.sent(), xV(Si.PlayButtonUpsellAgeRestrictionVerificationError), a;
                                 case 3:
                                     return [2]
                             }
                         })
                     })()
                 },
-                SM = function(e, t) {
+                SV = function(e, t) {
                     try {
-                        var r, n = null == (r = window.Roblox.UrlParser) ? void 0 : r.getParameterValueByName("shareLinkSourceType", !1);
-                        if ((null == n ? void 0 : n.toLowerCase()) !== "experiencedetails") return;
-                        var o = window.Roblox.EventStream;
-                        null == o || o.SendEventWithTarget("shareLinkGameJoin", "GamePlayButtonWeb", {
+                        var r, n, o = null == (n = (r = new URLSearchParams(window.location.search), function(e) {
+                            if (Array.isArray(e)) return SA(e)
+                        }(r) || function(e) {
+                            if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
+                        }(r) || S_(r) || function() {
+                            throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                        }()).find(function(e) {
+                            var t = (function(e) {
+                                if (Array.isArray(e)) return e
+                            }(e) || function(e) {
+                                var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                                if (null != n) {
+                                    var o = [],
+                                        a = !0,
+                                        i = !1;
+                                    try {
+                                        for (n = n.call(e); !(a = (t = n.next()).done) && (o.push(t.value), 1 !== o.length); a = !0);
+                                    } catch (e) {
+                                        i = !0, r = e
+                                    } finally {
+                                        try {
+                                            a || null == n.return || n.return()
+                                        } finally {
+                                            if (i) throw r
+                                        }
+                                    }
+                                    return o
+                                }
+                            }(e) || S_(e, 1) || function() {
+                                throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                            }())[0];
+                            return "sharelinksourcetype" === t.toLowerCase()
+                        })) ? void 0 : n[1];
+                        if ((null == o ? void 0 : o.toLowerCase()) !== "experiencedetails") return;
+                        (0, ii.sendEventWithTarget)("shareLinkGameJoin", "GamePlayButtonWeb", {
                             placeId: e,
                             universeId: t
-                        }, o.TargetTypes.WWW)
+                        }, ii.targetTypes.WWW)
                     } catch (e) {}
                 },
-                SL = function(e, t, r, n) {
-                    xz.eventStreamService.sendEvent({
-                        name: So.eventName,
-                        type: So.eventName,
-                        context: xz.eventStreamService.eventTypes.formInteraction
+                SG = function(e, t, r, n) {
+                    (0, ii.sendEvent)({
+                        name: Sl.eventName,
+                        type: Sl.eventName,
+                        context: ii.eventTypes.formInteraction
                     }, {
                         universeId: e,
                         upsellName: t,
@@ -30523,9 +30615,9 @@ function() {
                         pg: n
                     })
                 },
-                SU = window.ReactUtilities,
-                SB = ["Feature.GameLaunchGuestMode", "Common.VisitGame", "CommonUI.Controls", "Feature.ExperienceDetails", "Feature.DownloadLanding", "Feature.Build", "Feature.Friends"],
-                SF = (0, SU.withTranslations)(function(e) {
+                SK = window.ReactUtilities,
+                SW = ["Feature.GameLaunchGuestMode", "Common.VisitGame", "CommonUI.Controls", "Feature.ExperienceDetails", "Feature.DownloadLanding", "Feature.Build", "Feature.Friends"],
+                Sq = (0, SK.withTranslations)(function(e) {
                     var t = e.onButtonClick,
                         r = e.buttonWidth,
                         n = e.buttonClassName,
@@ -30534,29 +30626,23 @@ function() {
                         children: [(0, es.jsx)(o7, {
                             "data-testid": "play-action-needed-button",
                             variant: "Emphasis",
-                            style: Sw,
-                            className: lM()(Sg(void 0 === r ? Sb : r), void 0 === n ? "btn-common-play-game-action-needed-lg" : n),
+                            style: Sx,
+                            className: lM()(SO(void 0 === r ? Sw : r), void 0 === n ? "btn-common-play-game-action-needed-lg" : n),
                             onClick: t,
-                            children: o(x4)
+                            children: o(Se)
                         }), (0, es.jsx)("div", {
                             id: "access-management-upsell-container-v1"
                         })]
                     })
-                }, SB),
-                SH = function(e) {
+                }, SW),
+                S$ = function(e) {
                     var t = e.universeId,
                         r = e.buttonClassName,
                         n = e.pageContext,
                         o = (0, em.useCallback)(function(e) {
-                            e.preventDefault(), e.stopPropagation();
-                            var r, o = (null != (r = window.EventTracker) ? r : {}).fireEvent;
-                            if (null == o || o(Sn.PlayButtonUpsellExperienceApprovalTriggered), SL(t, So.experienceApprovalUpsellName, x6, n), !window.Roblox.AccessManagementUpsellV2Service) {
-                                null == o || o(Sn.PlayButtonUpsellExperienceApprovalError);
-                                return
-                            }
-                            window.Roblox.AccessManagementUpsellV2Service.startAccessManagementUpsell({
+                            (e.preventDefault(), e.stopPropagation(), xV(Si.PlayButtonUpsellExperienceApprovalTriggered), SG(t, Sl.experienceApprovalUpsellName, x4, n), window.Roblox.AccessManagementUpsellV2Service) ? window.Roblox.AccessManagementUpsellV2Service.startAccessManagementUpsell({
                                 featureName: "CanApproveExperience",
-                                namespace: Sl.accountManagement,
+                                namespace: Ss.accountManagement,
                                 isAsyncCall: !1,
                                 usePrologue: !0,
                                 ampRecourseData: {
@@ -30564,18 +30650,18 @@ function() {
                                     experienceManagementAction: "Approve"
                                 }
                             }).catch(function() {
-                                null == o || o(Sn.PlayButtonUpsellExperienceApprovalError)
-                            })
+                                xV(Si.PlayButtonUpsellExperienceApprovalError)
+                            }): xV(Si.PlayButtonUpsellExperienceApprovalError)
                         }, [t, n]);
-                    return (0, es.jsx)(SF, {
+                    return (0, es.jsx)(Sq, {
                         onButtonClick: o,
                         buttonClassName: r
                     })
                 };
-            SH.defaultProps = {
+            S$.defaultProps = {
                 buttonClassName: void 0
             };
-            var Sz = function(e) {
+            var SX = function(e) {
                 var t = e.buttonClassName,
                     r = e.buttonWidth;
                 return (0, es.jsx)(o7, {
@@ -30583,136 +30669,136 @@ function() {
                     variant: "Emphasis",
                     isLoading: !0,
                     "aria-label": "Loading",
-                    style: Sw,
-                    className: lM()(Sg(void 0 === r ? Sb : r), void 0 === t ? "btn-common-play-game-lg" : t)
+                    style: Sx,
+                    className: lM()(SO(void 0 === r ? Sw : r), void 0 === t ? "btn-common-play-game-lg" : t)
                 })
             };
 
-            function SV(e, t) {
+            function SQ(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function SG(e, t, r) {
-                return (SG = SQ() ? Reflect.construct : function(e, t, r) {
+            function SY(e, t, r) {
+                return (SY = S3() ? Reflect.construct : function(e, t, r) {
                     var n = [null];
                     n.push.apply(n, t);
                     var o = new(Function.bind.apply(e, n));
-                    return r && SW(o, r.prototype), o
+                    return r && SJ(o, r.prototype), o
                 }).apply(null, arguments)
             }
 
-            function SK(e, t) {
+            function SZ(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
 
-            function SW(e, t) {
-                return (SW = Object.setPrototypeOf || function(e, t) {
+            function SJ(e, t) {
+                return (SJ = Object.setPrototypeOf || function(e, t) {
                     return e.__proto__ = t, e
                 })(e, t)
             }
 
-            function Sq(e) {
+            function S0(e) {
                 return function(e) {
-                    if (Array.isArray(e)) return SV(e)
+                    if (Array.isArray(e)) return SQ(e)
                 }(e) || function(e) {
                     if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                }(e) || SX(e) || function() {
+                }(e) || S2(e) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function S$(e) {
+            function S1(e) {
                 return e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
             }
 
-            function SX(e, t) {
+            function S2(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return SV(e, t);
+                    if ("string" == typeof e) return SQ(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return SV(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return SQ(e, t)
                 }
             }
 
-            function SQ() {
+            function S3() {
                 try {
                     var e = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}))
                 } catch (e) {}
-                return (SQ = function() {
+                return (S3 = function() {
                     return !!e
                 })()
             } /*! @license DOMPurify 3.3.1 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.3.1/LICENSE */
-            var SY = Object.entries,
-                SZ = Object.setPrototypeOf,
-                SJ = Object.isFrozen,
-                S0 = Object.getPrototypeOf,
-                S1 = Object.getOwnPropertyDescriptor,
-                S2 = Object.freeze,
-                S3 = Object.seal,
-                S6 = Object.create,
-                S8 = "u" > typeof Reflect && Reflect,
-                S5 = S8.apply,
-                S4 = S8.construct;
-            S2 || (S2 = function(e) {
+            var S6 = Object.entries,
+                S8 = Object.setPrototypeOf,
+                S5 = Object.isFrozen,
+                S4 = Object.getPrototypeOf,
+                S7 = Object.getOwnPropertyDescriptor,
+                S9 = Object.freeze,
+                je = Object.seal,
+                jt = Object.create,
+                jr = "u" > typeof Reflect && Reflect,
+                jn = jr.apply,
+                jo = jr.construct;
+            S9 || (S9 = function(e) {
                 return e
-            }), S3 || (S3 = function(e) {
+            }), je || (je = function(e) {
                 return e
-            }), S5 || (S5 = function(e, t) {
+            }), jn || (jn = function(e, t) {
                 for (var r = arguments.length, n = Array(r > 2 ? r - 2 : 0), o = 2; o < r; o++) n[o - 2] = arguments[o];
                 return e.apply(t, n)
-            }), S4 || (S4 = function(e) {
+            }), jo || (jo = function(e) {
                 for (var t = arguments.length, r = Array(t > 1 ? t - 1 : 0), n = 1; n < t; n++) r[n - 1] = arguments[n];
-                return SG(e, Sq(r))
+                return SY(e, S0(r))
             });
-            var S7 = jd(Array.prototype.forEach),
-                S9 = jd(Array.prototype.lastIndexOf),
-                je = jd(Array.prototype.pop),
-                jt = jd(Array.prototype.push),
-                jr = jd(Array.prototype.splice),
-                jn = jd(String.prototype.toLowerCase),
-                jo = jd(String.prototype.toString),
-                ja = jd(String.prototype.match),
-                ji = jd(String.prototype.replace),
-                jl = jd(String.prototype.indexOf),
-                ju = jd(String.prototype.trim),
-                jc = jd(Object.prototype.hasOwnProperty),
-                js = jd(RegExp.prototype.test),
-                jf = (i = TypeError, function() {
+            var ja = jg(Array.prototype.forEach),
+                ji = jg(Array.prototype.lastIndexOf),
+                jl = jg(Array.prototype.pop),
+                ju = jg(Array.prototype.push),
+                jc = jg(Array.prototype.splice),
+                js = jg(String.prototype.toLowerCase),
+                jf = jg(String.prototype.toString),
+                jd = jg(String.prototype.match),
+                jp = jg(String.prototype.replace),
+                jy = jg(String.prototype.indexOf),
+                jm = jg(String.prototype.trim),
+                jh = jg(Object.prototype.hasOwnProperty),
+                jv = jg(RegExp.prototype.test),
+                jb = (i = TypeError, function() {
                     for (var e = arguments.length, t = Array(e), r = 0; r < e; r++) t[r] = arguments[r];
-                    return S4(i, t)
+                    return jo(i, t)
                 });
 
-            function jd(e) {
+            function jg(e) {
                 return function(t) {
-                    SK(t, RegExp) && (t.lastIndex = 0);
+                    SZ(t, RegExp) && (t.lastIndex = 0);
                     for (var r = arguments.length, n = Array(r > 1 ? r - 1 : 0), o = 1; o < r; o++) n[o - 1] = arguments[o];
-                    return S5(e, t, n)
+                    return jn(e, t, n)
                 }
             }
 
-            function jp(e, t) {
-                var r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : jn;
-                SZ && SZ(e, null);
+            function jw(e, t) {
+                var r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : js;
+                S8 && S8(e, null);
                 for (var n = t.length; n--;) {
                     var o = t[n];
                     if ("string" == typeof o) {
                         var a = r(o);
-                        a !== o && (SJ(t) || (t[n] = a), o = a)
+                        a !== o && (S5(t) || (t[n] = a), o = a)
                     }
                     e[o] = !0
                 }
                 return e
             }
 
-            function jy(e) {
-                var t = S6(null),
+            function jO(e) {
+                var t = jt(null),
                     r = !0,
                     n = !1,
                     o = void 0;
                 try {
-                    for (var a, i = SY(e)[Symbol.iterator](); !(r = (a = i.next()).done); r = !0) {
+                    for (var a, i = S6(e)[Symbol.iterator](); !(r = (a = i.next()).done); r = !0) {
                         var l, u = (l = a.value, function(e) {
                                 if (Array.isArray(e)) return e
                             }(l) || function(e) {
@@ -30734,15 +30820,15 @@ function() {
                                     }
                                     return o
                                 }
-                            }(l) || SX(l, 2) || function() {
+                            }(l) || S2(l, 2) || function() {
                                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                             }()),
                             c = u[0],
                             s = u[1];
-                        jc(e, c) && (Array.isArray(s) ? t[c] = function(e) {
-                            for (var t = 0; t < e.length; t++) jc(e, t) || (e[t] = null);
+                        jh(e, c) && (Array.isArray(s) ? t[c] = function(e) {
+                            for (var t = 0; t < e.length; t++) jh(e, t) || (e[t] = null);
                             return e
-                        }(s) : s && (void 0 === s ? "undefined" : S$(s)) === "object" && s.constructor === Object ? t[c] = jy(s) : t[c] = s)
+                        }(s) : s && (void 0 === s ? "undefined" : S1(s)) === "object" && s.constructor === Object ? t[c] = jO(s) : t[c] = s)
                     }
                 } catch (e) {
                     n = !0, o = e
@@ -30756,54 +30842,54 @@ function() {
                 return t
             }
 
-            function jm(e, t) {
+            function jx(e, t) {
                 for (; null !== e;) {
-                    var r = S1(e, t);
+                    var r = S7(e, t);
                     if (r) {
-                        if (r.get) return jd(r.get);
-                        if ("function" == typeof r.value) return jd(r.value)
+                        if (r.get) return jg(r.get);
+                        if ("function" == typeof r.value) return jg(r.value)
                     }
-                    e = S0(e)
+                    e = S4(e)
                 }
                 return function() {
                     return null
                 }
             }
-            var jh = S2(["a", "abbr", "acronym", "address", "area", "article", "aside", "audio", "b", "bdi", "bdo", "big", "blink", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "content", "data", "datalist", "dd", "decorator", "del", "details", "dfn", "dialog", "dir", "div", "dl", "dt", "element", "em", "fieldset", "figcaption", "figure", "font", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "img", "input", "ins", "kbd", "label", "legend", "li", "main", "map", "mark", "marquee", "menu", "menuitem", "meter", "nav", "nobr", "ol", "optgroup", "option", "output", "p", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "section", "select", "shadow", "slot", "small", "source", "spacer", "span", "strike", "strong", "style", "sub", "summary", "sup", "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "time", "tr", "track", "tt", "u", "ul", "var", "video", "wbr"]),
-                jv = S2(["svg", "a", "altglyph", "altglyphdef", "altglyphitem", "animatecolor", "animatemotion", "animatetransform", "circle", "clippath", "defs", "desc", "ellipse", "enterkeyhint", "exportparts", "filter", "font", "g", "glyph", "glyphref", "hkern", "image", "inputmode", "line", "lineargradient", "marker", "mask", "metadata", "mpath", "part", "path", "pattern", "polygon", "polyline", "radialgradient", "rect", "stop", "style", "switch", "symbol", "text", "textpath", "title", "tref", "tspan", "view", "vkern"]),
-                jb = S2(["feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence"]),
-                jg = S2(["animate", "color-profile", "cursor", "discard", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignobject", "hatch", "hatchpath", "mesh", "meshgradient", "meshpatch", "meshrow", "missing-glyph", "script", "set", "solidcolor", "unknown", "use"]),
-                jw = S2(["math", "menclose", "merror", "mfenced", "mfrac", "mglyph", "mi", "mlabeledtr", "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom", "mroot", "mrow", "ms", "mspace", "msqrt", "mstyle", "msub", "msup", "msubsup", "mtable", "mtd", "mtext", "mtr", "munder", "munderover", "mprescripts"]),
-                jO = S2(["maction", "maligngroup", "malignmark", "mlongdiv", "mscarries", "mscarry", "msgroup", "mstack", "msline", "msrow", "semantics", "annotation", "annotation-xml", "mprescripts", "none"]),
-                jx = S2(["#text"]),
-                jS = S2(["accept", "action", "align", "alt", "autocapitalize", "autocomplete", "autopictureinpicture", "autoplay", "background", "bgcolor", "border", "capture", "cellpadding", "cellspacing", "checked", "cite", "class", "clear", "color", "cols", "colspan", "controls", "controlslist", "coords", "crossorigin", "datetime", "decoding", "default", "dir", "disabled", "disablepictureinpicture", "disableremoteplayback", "download", "draggable", "enctype", "enterkeyhint", "exportparts", "face", "for", "headers", "height", "hidden", "high", "href", "hreflang", "id", "inert", "inputmode", "integrity", "ismap", "kind", "label", "lang", "list", "loading", "loop", "low", "max", "maxlength", "media", "method", "min", "minlength", "multiple", "muted", "name", "nonce", "noshade", "novalidate", "nowrap", "open", "optimum", "part", "pattern", "placeholder", "playsinline", "popover", "popovertarget", "popovertargetaction", "poster", "preload", "pubdate", "radiogroup", "readonly", "rel", "required", "rev", "reversed", "role", "rows", "rowspan", "spellcheck", "scope", "selected", "shape", "size", "sizes", "slot", "span", "srclang", "start", "src", "srcset", "step", "style", "summary", "tabindex", "title", "translate", "type", "usemap", "valign", "value", "width", "wrap", "xmlns", "slot"]),
-                jj = S2(["accent-height", "accumulate", "additive", "alignment-baseline", "amplitude", "ascent", "attributename", "attributetype", "azimuth", "basefrequency", "baseline-shift", "begin", "bias", "by", "class", "clip", "clippathunits", "clip-path", "clip-rule", "color", "color-interpolation", "color-interpolation-filters", "color-profile", "color-rendering", "cx", "cy", "d", "dx", "dy", "diffuseconstant", "direction", "display", "divisor", "dur", "edgemode", "elevation", "end", "exponent", "fill", "fill-opacity", "fill-rule", "filter", "filterunits", "flood-color", "flood-opacity", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-weight", "fx", "fy", "g1", "g2", "glyph-name", "glyphref", "gradientunits", "gradienttransform", "height", "href", "id", "image-rendering", "in", "in2", "intercept", "k", "k1", "k2", "k3", "k4", "kerning", "keypoints", "keysplines", "keytimes", "lang", "lengthadjust", "letter-spacing", "kernelmatrix", "kernelunitlength", "lighting-color", "local", "marker-end", "marker-mid", "marker-start", "markerheight", "markerunits", "markerwidth", "maskcontentunits", "maskunits", "max", "mask", "mask-type", "media", "method", "mode", "min", "name", "numoctaves", "offset", "operator", "opacity", "order", "orient", "orientation", "origin", "overflow", "paint-order", "path", "pathlength", "patterncontentunits", "patterntransform", "patternunits", "points", "preservealpha", "preserveaspectratio", "primitiveunits", "r", "rx", "ry", "radius", "refx", "refy", "repeatcount", "repeatdur", "restart", "result", "rotate", "scale", "seed", "shape-rendering", "slope", "specularconstant", "specularexponent", "spreadmethod", "startoffset", "stddeviation", "stitchtiles", "stop-color", "stop-opacity", "stroke-dasharray", "stroke-dashoffset", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-opacity", "stroke", "stroke-width", "style", "surfacescale", "systemlanguage", "tabindex", "tablevalues", "targetx", "targety", "transform", "transform-origin", "text-anchor", "text-decoration", "text-rendering", "textlength", "type", "u1", "u2", "unicode", "values", "viewbox", "visibility", "version", "vert-adv-y", "vert-origin-x", "vert-origin-y", "width", "word-spacing", "wrap", "writing-mode", "xchannelselector", "ychannelselector", "x", "x1", "x2", "xmlns", "y", "y1", "y2", "z", "zoomandpan"]),
-                jP = S2(["accent", "accentunder", "align", "bevelled", "close", "columnsalign", "columnlines", "columnspan", "denomalign", "depth", "dir", "display", "displaystyle", "encoding", "fence", "frame", "height", "href", "id", "largeop", "length", "linethickness", "lspace", "lquote", "mathbackground", "mathcolor", "mathsize", "mathvariant", "maxsize", "minsize", "movablelimits", "notation", "numalign", "open", "rowalign", "rowlines", "rowspacing", "rowspan", "rspace", "rquote", "scriptlevel", "scriptminsize", "scriptsizemultiplier", "selection", "separator", "separators", "stretchy", "subscriptshift", "supscriptshift", "symmetric", "voffset", "width", "xmlns"]),
-                jE = S2(["xlink:href", "xml:id", "xlink:title", "xml:space", "xmlns:xlink"]),
-                jC = S3(/\{\{[\w\W]*|[\w\W]*\}\}/gm),
-                jI = S3(/<%[\w\W]*|[\w\W]*%>/gm),
-                jA = S3(/\$\{[\w\W]*/gm),
-                jT = S3(/^data-[\-\w.\u00B7-\uFFFF]+$/),
-                jk = S3(/^aria-[\-\w]+$/),
-                jN = S3(/^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i),
-                j_ = S3(/^(?:\w+script|data):/i),
-                jD = S3(/[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g),
-                jR = S3(/^html$/i),
-                jM = Object.freeze({
+            var jS = S9(["a", "abbr", "acronym", "address", "area", "article", "aside", "audio", "b", "bdi", "bdo", "big", "blink", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "content", "data", "datalist", "dd", "decorator", "del", "details", "dfn", "dialog", "dir", "div", "dl", "dt", "element", "em", "fieldset", "figcaption", "figure", "font", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "img", "input", "ins", "kbd", "label", "legend", "li", "main", "map", "mark", "marquee", "menu", "menuitem", "meter", "nav", "nobr", "ol", "optgroup", "option", "output", "p", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "section", "select", "shadow", "slot", "small", "source", "spacer", "span", "strike", "strong", "style", "sub", "summary", "sup", "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "time", "tr", "track", "tt", "u", "ul", "var", "video", "wbr"]),
+                jj = S9(["svg", "a", "altglyph", "altglyphdef", "altglyphitem", "animatecolor", "animatemotion", "animatetransform", "circle", "clippath", "defs", "desc", "ellipse", "enterkeyhint", "exportparts", "filter", "font", "g", "glyph", "glyphref", "hkern", "image", "inputmode", "line", "lineargradient", "marker", "mask", "metadata", "mpath", "part", "path", "pattern", "polygon", "polyline", "radialgradient", "rect", "stop", "style", "switch", "symbol", "text", "textpath", "title", "tref", "tspan", "view", "vkern"]),
+                jP = S9(["feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence"]),
+                jE = S9(["animate", "color-profile", "cursor", "discard", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignobject", "hatch", "hatchpath", "mesh", "meshgradient", "meshpatch", "meshrow", "missing-glyph", "script", "set", "solidcolor", "unknown", "use"]),
+                jC = S9(["math", "menclose", "merror", "mfenced", "mfrac", "mglyph", "mi", "mlabeledtr", "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom", "mroot", "mrow", "ms", "mspace", "msqrt", "mstyle", "msub", "msup", "msubsup", "mtable", "mtd", "mtext", "mtr", "munder", "munderover", "mprescripts"]),
+                jI = S9(["maction", "maligngroup", "malignmark", "mlongdiv", "mscarries", "mscarry", "msgroup", "mstack", "msline", "msrow", "semantics", "annotation", "annotation-xml", "mprescripts", "none"]),
+                jA = S9(["#text"]),
+                jT = S9(["accept", "action", "align", "alt", "autocapitalize", "autocomplete", "autopictureinpicture", "autoplay", "background", "bgcolor", "border", "capture", "cellpadding", "cellspacing", "checked", "cite", "class", "clear", "color", "cols", "colspan", "controls", "controlslist", "coords", "crossorigin", "datetime", "decoding", "default", "dir", "disabled", "disablepictureinpicture", "disableremoteplayback", "download", "draggable", "enctype", "enterkeyhint", "exportparts", "face", "for", "headers", "height", "hidden", "high", "href", "hreflang", "id", "inert", "inputmode", "integrity", "ismap", "kind", "label", "lang", "list", "loading", "loop", "low", "max", "maxlength", "media", "method", "min", "minlength", "multiple", "muted", "name", "nonce", "noshade", "novalidate", "nowrap", "open", "optimum", "part", "pattern", "placeholder", "playsinline", "popover", "popovertarget", "popovertargetaction", "poster", "preload", "pubdate", "radiogroup", "readonly", "rel", "required", "rev", "reversed", "role", "rows", "rowspan", "spellcheck", "scope", "selected", "shape", "size", "sizes", "slot", "span", "srclang", "start", "src", "srcset", "step", "style", "summary", "tabindex", "title", "translate", "type", "usemap", "valign", "value", "width", "wrap", "xmlns", "slot"]),
+                jk = S9(["accent-height", "accumulate", "additive", "alignment-baseline", "amplitude", "ascent", "attributename", "attributetype", "azimuth", "basefrequency", "baseline-shift", "begin", "bias", "by", "class", "clip", "clippathunits", "clip-path", "clip-rule", "color", "color-interpolation", "color-interpolation-filters", "color-profile", "color-rendering", "cx", "cy", "d", "dx", "dy", "diffuseconstant", "direction", "display", "divisor", "dur", "edgemode", "elevation", "end", "exponent", "fill", "fill-opacity", "fill-rule", "filter", "filterunits", "flood-color", "flood-opacity", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-weight", "fx", "fy", "g1", "g2", "glyph-name", "glyphref", "gradientunits", "gradienttransform", "height", "href", "id", "image-rendering", "in", "in2", "intercept", "k", "k1", "k2", "k3", "k4", "kerning", "keypoints", "keysplines", "keytimes", "lang", "lengthadjust", "letter-spacing", "kernelmatrix", "kernelunitlength", "lighting-color", "local", "marker-end", "marker-mid", "marker-start", "markerheight", "markerunits", "markerwidth", "maskcontentunits", "maskunits", "max", "mask", "mask-type", "media", "method", "mode", "min", "name", "numoctaves", "offset", "operator", "opacity", "order", "orient", "orientation", "origin", "overflow", "paint-order", "path", "pathlength", "patterncontentunits", "patterntransform", "patternunits", "points", "preservealpha", "preserveaspectratio", "primitiveunits", "r", "rx", "ry", "radius", "refx", "refy", "repeatcount", "repeatdur", "restart", "result", "rotate", "scale", "seed", "shape-rendering", "slope", "specularconstant", "specularexponent", "spreadmethod", "startoffset", "stddeviation", "stitchtiles", "stop-color", "stop-opacity", "stroke-dasharray", "stroke-dashoffset", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-opacity", "stroke", "stroke-width", "style", "surfacescale", "systemlanguage", "tabindex", "tablevalues", "targetx", "targety", "transform", "transform-origin", "text-anchor", "text-decoration", "text-rendering", "textlength", "type", "u1", "u2", "unicode", "values", "viewbox", "visibility", "version", "vert-adv-y", "vert-origin-x", "vert-origin-y", "width", "word-spacing", "wrap", "writing-mode", "xchannelselector", "ychannelselector", "x", "x1", "x2", "xmlns", "y", "y1", "y2", "z", "zoomandpan"]),
+                jN = S9(["accent", "accentunder", "align", "bevelled", "close", "columnsalign", "columnlines", "columnspan", "denomalign", "depth", "dir", "display", "displaystyle", "encoding", "fence", "frame", "height", "href", "id", "largeop", "length", "linethickness", "lspace", "lquote", "mathbackground", "mathcolor", "mathsize", "mathvariant", "maxsize", "minsize", "movablelimits", "notation", "numalign", "open", "rowalign", "rowlines", "rowspacing", "rowspan", "rspace", "rquote", "scriptlevel", "scriptminsize", "scriptsizemultiplier", "selection", "separator", "separators", "stretchy", "subscriptshift", "supscriptshift", "symmetric", "voffset", "width", "xmlns"]),
+                j_ = S9(["xlink:href", "xml:id", "xlink:title", "xml:space", "xmlns:xlink"]),
+                jD = je(/\{\{[\w\W]*|[\w\W]*\}\}/gm),
+                jR = je(/<%[\w\W]*|[\w\W]*%>/gm),
+                jM = je(/\$\{[\w\W]*/gm),
+                jL = je(/^data-[\-\w.\u00B7-\uFFFF]+$/),
+                jU = je(/^aria-[\-\w]+$/),
+                jB = je(/^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i),
+                jF = je(/^(?:\w+script|data):/i),
+                jH = je(/[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g),
+                jz = je(/^html$/i),
+                jV = Object.freeze({
                     __proto__: null,
-                    ARIA_ATTR: jk,
-                    ATTR_WHITESPACE: jD,
-                    CUSTOM_ELEMENT: S3(/^[a-z][.\w]*(-[.\w]+)+$/i),
-                    DATA_ATTR: jT,
-                    DOCTYPE_NAME: jR,
-                    ERB_EXPR: jI,
-                    IS_ALLOWED_URI: jN,
-                    IS_SCRIPT_OR_DATA: j_,
-                    MUSTACHE_EXPR: jC,
-                    TMPLIT_EXPR: jA
+                    ARIA_ATTR: jU,
+                    ATTR_WHITESPACE: jH,
+                    CUSTOM_ELEMENT: je(/^[a-z][.\w]*(-[.\w]+)+$/i),
+                    DATA_ATTR: jL,
+                    DOCTYPE_NAME: jz,
+                    ERB_EXPR: jR,
+                    IS_ALLOWED_URI: jB,
+                    IS_SCRIPT_OR_DATA: jF,
+                    MUSTACHE_EXPR: jD,
+                    TMPLIT_EXPR: jM
                 }),
-                jL = function(e, t) {
-                    if ((void 0 === e ? "undefined" : S$(e)) !== "object" || "function" != typeof e.createPolicy) return null;
+                jG = function(e, t) {
+                    if ((void 0 === e ? "undefined" : S1(e)) !== "object" || "function" != typeof e.createPolicy) return null;
                     var r = null,
                         n = "data-tt-policy-suffix";
                     t && t.hasAttribute(n) && (r = t.getAttribute(n));
@@ -30821,7 +30907,7 @@ function() {
                         return console.warn("TrustedTypes policy " + o + " could not be created."), null
                     }
                 },
-                jU = function() {
+                jK = function() {
                     return {
                         afterSanitizeAttributes: [],
                         afterSanitizeElements: [],
@@ -30834,7 +30920,7 @@ function() {
                         uponSanitizeShadowNode: []
                     }
                 },
-                jB = function e() {
+                jW = function e() {
                     var t, r = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "u" < typeof window ? null : window,
                         n = function(t) {
                             return e(t)
@@ -30854,11 +30940,11 @@ function() {
                         m = r.DOMParser,
                         h = r.trustedTypes,
                         v = s.prototype,
-                        b = jm(v, "cloneNode"),
-                        g = jm(v, "remove"),
-                        w = jm(v, "nextSibling"),
-                        O = jm(v, "childNodes"),
-                        x = jm(v, "parentNode");
+                        b = jx(v, "cloneNode"),
+                        g = jx(v, "remove"),
+                        w = jx(v, "nextSibling"),
+                        O = jx(v, "childNodes"),
+                        x = jx(v, "parentNode");
                     if ("function" == typeof u) {
                         var S = o.createElement("template");
                         S.content && S.content.ownerDocument && (o = S.content.ownerDocument)
@@ -30869,22 +30955,22 @@ function() {
                         C = o.createDocumentFragment,
                         I = o.getElementsByTagName,
                         A = a.importNode,
-                        T = jU();
-                    n.isSupported = "function" == typeof SY && "function" == typeof x && P && void 0 !== P.createHTMLDocument;
-                    var k = jM.MUSTACHE_EXPR,
-                        N = jM.ERB_EXPR,
-                        _ = jM.TMPLIT_EXPR,
-                        D = jM.DATA_ATTR,
-                        R = jM.ARIA_ATTR,
-                        M = jM.IS_SCRIPT_OR_DATA,
-                        L = jM.ATTR_WHITESPACE,
-                        U = jM.CUSTOM_ELEMENT,
-                        B = jM.IS_ALLOWED_URI,
+                        T = jK();
+                    n.isSupported = "function" == typeof S6 && "function" == typeof x && P && void 0 !== P.createHTMLDocument;
+                    var k = jV.MUSTACHE_EXPR,
+                        N = jV.ERB_EXPR,
+                        _ = jV.TMPLIT_EXPR,
+                        D = jV.DATA_ATTR,
+                        R = jV.ARIA_ATTR,
+                        M = jV.IS_SCRIPT_OR_DATA,
+                        L = jV.ATTR_WHITESPACE,
+                        U = jV.CUSTOM_ELEMENT,
+                        B = jV.IS_ALLOWED_URI,
                         F = null,
-                        H = jp({}, Sq(jh).concat(Sq(jv), Sq(jb), Sq(jw), Sq(jx))),
+                        H = jw({}, S0(jS).concat(S0(jj), S0(jP), S0(jC), S0(jA))),
                         z = null,
-                        V = jp({}, Sq(jS).concat(Sq(jj), Sq(jP), Sq(jE))),
-                        G = Object.seal(S6(null, {
+                        V = jw({}, S0(jT).concat(S0(jk), S0(jN), S0(j_))),
+                        G = Object.seal(jt(null, {
                             tagNameCheck: {
                                 writable: !0,
                                 configurable: !1,
@@ -30906,7 +30992,7 @@ function() {
                         })),
                         K = null,
                         W = null,
-                        q = Object.seal(S6(null, {
+                        q = Object.seal(jt(null, {
                             tagCheck: {
                                 writable: !0,
                                 configurable: !1,
@@ -30938,54 +31024,54 @@ function() {
                         ec = !1,
                         es = {},
                         ef = null,
-                        ed = jp({}, ["annotation-xml", "audio", "colgroup", "desc", "foreignobject", "head", "iframe", "math", "mi", "mn", "mo", "ms", "mtext", "noembed", "noframes", "noscript", "plaintext", "script", "style", "svg", "template", "thead", "title", "video", "xmp"]),
+                        ed = jw({}, ["annotation-xml", "audio", "colgroup", "desc", "foreignobject", "head", "iframe", "math", "mi", "mn", "mo", "ms", "mtext", "noembed", "noframes", "noscript", "plaintext", "script", "style", "svg", "template", "thead", "title", "video", "xmp"]),
                         ep = null,
-                        ey = jp({}, ["audio", "video", "img", "source", "image", "track"]),
+                        ey = jw({}, ["audio", "video", "img", "source", "image", "track"]),
                         em = null,
-                        eh = jp({}, ["alt", "class", "for", "id", "label", "name", "pattern", "placeholder", "role", "summary", "title", "value", "style", "xmlns"]),
+                        eh = jw({}, ["alt", "class", "for", "id", "label", "name", "pattern", "placeholder", "role", "summary", "title", "value", "style", "xmlns"]),
                         ev = "http://www.w3.org/1998/Math/MathML",
                         eb = "http://www.w3.org/2000/svg",
                         eg = "http://www.w3.org/1999/xhtml",
                         ew = eg,
                         eO = !1,
                         ex = null,
-                        eS = jp({}, [ev, eb, eg], jo),
-                        ej = jp({}, ["mi", "mo", "mn", "ms", "mtext"]),
-                        eP = jp({}, ["annotation-xml"]),
-                        eE = jp({}, ["title", "style", "font", "a", "script"]),
+                        eS = jw({}, [ev, eb, eg], jf),
+                        ej = jw({}, ["mi", "mo", "mn", "ms", "mtext"]),
+                        eP = jw({}, ["annotation-xml"]),
+                        eE = jw({}, ["title", "style", "font", "a", "script"]),
                         eC = null,
                         eI = ["application/xhtml+xml", "text/html"],
                         eA = null,
                         eT = null,
                         ek = o.createElement("form"),
                         eN = function(e) {
-                            return SK(e, RegExp) || SK(e, Function)
+                            return SZ(e, RegExp) || SZ(e, Function)
                         },
                         e_ = function() {
                             var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
                             if (!eT || eT !== e) {
-                                if (e && (void 0 === e ? "undefined" : S$(e)) === "object" || (e = {}), e = jy(e), eA = "application/xhtml+xml" === (eC = -1 === eI.indexOf(e.PARSER_MEDIA_TYPE) ? "text/html" : e.PARSER_MEDIA_TYPE) ? jo : jn, F = jc(e, "ALLOWED_TAGS") ? jp({}, e.ALLOWED_TAGS, eA) : H, z = jc(e, "ALLOWED_ATTR") ? jp({}, e.ALLOWED_ATTR, eA) : V, ex = jc(e, "ALLOWED_NAMESPACES") ? jp({}, e.ALLOWED_NAMESPACES, jo) : eS, em = jc(e, "ADD_URI_SAFE_ATTR") ? jp(jy(eh), e.ADD_URI_SAFE_ATTR, eA) : eh, ep = jc(e, "ADD_DATA_URI_TAGS") ? jp(jy(ey), e.ADD_DATA_URI_TAGS, eA) : ey, ef = jc(e, "FORBID_CONTENTS") ? jp({}, e.FORBID_CONTENTS, eA) : ed, K = jc(e, "FORBID_TAGS") ? jp({}, e.FORBID_TAGS, eA) : jy({}), W = jc(e, "FORBID_ATTR") ? jp({}, e.FORBID_ATTR, eA) : jy({}), es = !!jc(e, "USE_PROFILES") && e.USE_PROFILES, $ = !1 !== e.ALLOW_ARIA_ATTR, X = !1 !== e.ALLOW_DATA_ATTR, Q = e.ALLOW_UNKNOWN_PROTOCOLS || !1, Y = !1 !== e.ALLOW_SELF_CLOSE_IN_ATTR, Z = e.SAFE_FOR_TEMPLATES || !1, J = !1 !== e.SAFE_FOR_XML, ee = e.WHOLE_DOCUMENT || !1, en = e.RETURN_DOM || !1, eo = e.RETURN_DOM_FRAGMENT || !1, ea = e.RETURN_TRUSTED_TYPE || !1, er = e.FORCE_BODY || !1, ei = !1 !== e.SANITIZE_DOM, el = e.SANITIZE_NAMED_PROPS || !1, eu = !1 !== e.KEEP_CONTENT, ec = e.IN_PLACE || !1, B = e.ALLOWED_URI_REGEXP || jN, ew = e.NAMESPACE || eg, ej = e.MATHML_TEXT_INTEGRATION_POINTS || ej, eP = e.HTML_INTEGRATION_POINTS || eP, G = e.CUSTOM_ELEMENT_HANDLING || {}, e.CUSTOM_ELEMENT_HANDLING && eN(e.CUSTOM_ELEMENT_HANDLING.tagNameCheck) && (G.tagNameCheck = e.CUSTOM_ELEMENT_HANDLING.tagNameCheck), e.CUSTOM_ELEMENT_HANDLING && eN(e.CUSTOM_ELEMENT_HANDLING.attributeNameCheck) && (G.attributeNameCheck = e.CUSTOM_ELEMENT_HANDLING.attributeNameCheck), e.CUSTOM_ELEMENT_HANDLING && "boolean" == typeof e.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements && (G.allowCustomizedBuiltInElements = e.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements), Z && (X = !1), eo && (en = !0), es && (F = jp({}, jx), z = [], !0 === es.html && (jp(F, jh), jp(z, jS)), !0 === es.svg && (jp(F, jv), jp(z, jj), jp(z, jE)), !0 === es.svgFilters && (jp(F, jb), jp(z, jj), jp(z, jE)), !0 === es.mathMl && (jp(F, jw), jp(z, jP), jp(z, jE))), e.ADD_TAGS && ("function" == typeof e.ADD_TAGS ? q.tagCheck = e.ADD_TAGS : (F === H && (F = jy(F)), jp(F, e.ADD_TAGS, eA))), e.ADD_ATTR && ("function" == typeof e.ADD_ATTR ? q.attributeCheck = e.ADD_ATTR : (z === V && (z = jy(z)), jp(z, e.ADD_ATTR, eA))), e.ADD_URI_SAFE_ATTR && jp(em, e.ADD_URI_SAFE_ATTR, eA), e.FORBID_CONTENTS && (ef === ed && (ef = jy(ef)), jp(ef, e.FORBID_CONTENTS, eA)), e.ADD_FORBID_CONTENTS && (ef === ed && (ef = jy(ef)), jp(ef, e.ADD_FORBID_CONTENTS, eA)), eu && (F["#text"] = !0), ee && jp(F, ["html", "head", "body"]), F.table && (jp(F, ["tbody"]), delete K.tbody), e.TRUSTED_TYPES_POLICY) {
-                                    if ("function" != typeof e.TRUSTED_TYPES_POLICY.createHTML) throw jf('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
-                                    if ("function" != typeof e.TRUSTED_TYPES_POLICY.createScriptURL) throw jf('TRUSTED_TYPES_POLICY configuration option must provide a "createScriptURL" hook.');
+                                if (e && (void 0 === e ? "undefined" : S1(e)) === "object" || (e = {}), e = jO(e), eA = "application/xhtml+xml" === (eC = -1 === eI.indexOf(e.PARSER_MEDIA_TYPE) ? "text/html" : e.PARSER_MEDIA_TYPE) ? jf : js, F = jh(e, "ALLOWED_TAGS") ? jw({}, e.ALLOWED_TAGS, eA) : H, z = jh(e, "ALLOWED_ATTR") ? jw({}, e.ALLOWED_ATTR, eA) : V, ex = jh(e, "ALLOWED_NAMESPACES") ? jw({}, e.ALLOWED_NAMESPACES, jf) : eS, em = jh(e, "ADD_URI_SAFE_ATTR") ? jw(jO(eh), e.ADD_URI_SAFE_ATTR, eA) : eh, ep = jh(e, "ADD_DATA_URI_TAGS") ? jw(jO(ey), e.ADD_DATA_URI_TAGS, eA) : ey, ef = jh(e, "FORBID_CONTENTS") ? jw({}, e.FORBID_CONTENTS, eA) : ed, K = jh(e, "FORBID_TAGS") ? jw({}, e.FORBID_TAGS, eA) : jO({}), W = jh(e, "FORBID_ATTR") ? jw({}, e.FORBID_ATTR, eA) : jO({}), es = !!jh(e, "USE_PROFILES") && e.USE_PROFILES, $ = !1 !== e.ALLOW_ARIA_ATTR, X = !1 !== e.ALLOW_DATA_ATTR, Q = e.ALLOW_UNKNOWN_PROTOCOLS || !1, Y = !1 !== e.ALLOW_SELF_CLOSE_IN_ATTR, Z = e.SAFE_FOR_TEMPLATES || !1, J = !1 !== e.SAFE_FOR_XML, ee = e.WHOLE_DOCUMENT || !1, en = e.RETURN_DOM || !1, eo = e.RETURN_DOM_FRAGMENT || !1, ea = e.RETURN_TRUSTED_TYPE || !1, er = e.FORCE_BODY || !1, ei = !1 !== e.SANITIZE_DOM, el = e.SANITIZE_NAMED_PROPS || !1, eu = !1 !== e.KEEP_CONTENT, ec = e.IN_PLACE || !1, B = e.ALLOWED_URI_REGEXP || jB, ew = e.NAMESPACE || eg, ej = e.MATHML_TEXT_INTEGRATION_POINTS || ej, eP = e.HTML_INTEGRATION_POINTS || eP, G = e.CUSTOM_ELEMENT_HANDLING || {}, e.CUSTOM_ELEMENT_HANDLING && eN(e.CUSTOM_ELEMENT_HANDLING.tagNameCheck) && (G.tagNameCheck = e.CUSTOM_ELEMENT_HANDLING.tagNameCheck), e.CUSTOM_ELEMENT_HANDLING && eN(e.CUSTOM_ELEMENT_HANDLING.attributeNameCheck) && (G.attributeNameCheck = e.CUSTOM_ELEMENT_HANDLING.attributeNameCheck), e.CUSTOM_ELEMENT_HANDLING && "boolean" == typeof e.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements && (G.allowCustomizedBuiltInElements = e.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements), Z && (X = !1), eo && (en = !0), es && (F = jw({}, jA), z = [], !0 === es.html && (jw(F, jS), jw(z, jT)), !0 === es.svg && (jw(F, jj), jw(z, jk), jw(z, j_)), !0 === es.svgFilters && (jw(F, jP), jw(z, jk), jw(z, j_)), !0 === es.mathMl && (jw(F, jC), jw(z, jN), jw(z, j_))), e.ADD_TAGS && ("function" == typeof e.ADD_TAGS ? q.tagCheck = e.ADD_TAGS : (F === H && (F = jO(F)), jw(F, e.ADD_TAGS, eA))), e.ADD_ATTR && ("function" == typeof e.ADD_ATTR ? q.attributeCheck = e.ADD_ATTR : (z === V && (z = jO(z)), jw(z, e.ADD_ATTR, eA))), e.ADD_URI_SAFE_ATTR && jw(em, e.ADD_URI_SAFE_ATTR, eA), e.FORBID_CONTENTS && (ef === ed && (ef = jO(ef)), jw(ef, e.FORBID_CONTENTS, eA)), e.ADD_FORBID_CONTENTS && (ef === ed && (ef = jO(ef)), jw(ef, e.ADD_FORBID_CONTENTS, eA)), eu && (F["#text"] = !0), ee && jw(F, ["html", "head", "body"]), F.table && (jw(F, ["tbody"]), delete K.tbody), e.TRUSTED_TYPES_POLICY) {
+                                    if ("function" != typeof e.TRUSTED_TYPES_POLICY.createHTML) throw jb('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
+                                    if ("function" != typeof e.TRUSTED_TYPES_POLICY.createScriptURL) throw jb('TRUSTED_TYPES_POLICY configuration option must provide a "createScriptURL" hook.');
                                     j = (t = e.TRUSTED_TYPES_POLICY).createHTML("")
-                                } else void 0 === t && (t = jL(h, i)), null !== t && "string" == typeof j && (j = t.createHTML(""));
-                                S2 && S2(e), eT = e
+                                } else void 0 === t && (t = jG(h, i)), null !== t && "string" == typeof j && (j = t.createHTML(""));
+                                S9 && S9(e), eT = e
                             }
                         },
-                        eD = jp({}, Sq(jv).concat(Sq(jb), Sq(jg))),
-                        eR = jp({}, Sq(jw).concat(Sq(jO))),
+                        eD = jw({}, S0(jj).concat(S0(jP), S0(jE))),
+                        eR = jw({}, S0(jC).concat(S0(jI))),
                         eM = function(e) {
                             var t = x(e);
                             t && t.tagName || (t = {
                                 namespaceURI: ew,
                                 tagName: "template"
                             });
-                            var r = jn(e.tagName),
-                                n = jn(t.tagName);
+                            var r = js(e.tagName),
+                                n = js(t.tagName);
                             return !!ex[e.namespaceURI] && (e.namespaceURI === eb ? t.namespaceURI === eg ? "svg" === r : t.namespaceURI === ev ? "svg" === r && ("annotation-xml" === n || ej[n]) : !!eD[r] : e.namespaceURI === ev ? t.namespaceURI === eg ? "math" === r : t.namespaceURI === eb ? "math" === r && eP[n] : !!eR[r] : e.namespaceURI === eg ? (t.namespaceURI !== eb || !!eP[n]) && (t.namespaceURI !== ev || !!ej[n]) && !eR[r] && (eE[r] || !eD[r]) : "application/xhtml+xml" === eC && !!ex[e.namespaceURI])
                         },
                         eL = function(e) {
-                            jt(n.removed, {
+                            ju(n.removed, {
                                 element: e
                             });
                             try {
@@ -30996,12 +31082,12 @@ function() {
                         },
                         eU = function(e, t) {
                             try {
-                                jt(n.removed, {
+                                ju(n.removed, {
                                     attribute: t.getAttributeNode(e),
                                     from: t
                                 })
                             } catch (e) {
-                                jt(n.removed, {
+                                ju(n.removed, {
                                     attribute: null,
                                     from: t
                                 })
@@ -31018,7 +31104,7 @@ function() {
                                 n = null;
                             if (er) e = "<remove></remove>" + e;
                             else {
-                                var a = ja(e, /^[\r\n\t ]+/);
+                                var a = jd(e, /^[\r\n\t ]+/);
                                 n = a && a[0]
                             }
                             "application/xhtml+xml" === eC && ew === eg && (e = '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body>' + e + "</body></html>");
@@ -31039,14 +31125,14 @@ function() {
                             return E.call(e.ownerDocument || e, e, f.SHOW_ELEMENT | f.SHOW_COMMENT | f.SHOW_TEXT | f.SHOW_PROCESSING_INSTRUCTION | f.SHOW_CDATA_SECTION, null)
                         },
                         eH = function(e) {
-                            return SK(e, y) && ("string" != typeof e.nodeName || "string" != typeof e.textContent || "function" != typeof e.removeChild || !SK(e.attributes, p) || "function" != typeof e.removeAttribute || "function" != typeof e.setAttribute || "string" != typeof e.namespaceURI || "function" != typeof e.insertBefore || "function" != typeof e.hasChildNodes)
+                            return SZ(e, y) && ("string" != typeof e.nodeName || "string" != typeof e.textContent || "function" != typeof e.removeChild || !SZ(e.attributes, p) || "function" != typeof e.removeAttribute || "function" != typeof e.setAttribute || "string" != typeof e.namespaceURI || "function" != typeof e.insertBefore || "function" != typeof e.hasChildNodes)
                         },
                         ez = function(e) {
-                            return "function" == typeof c && SK(e, c)
+                            return "function" == typeof c && SZ(e, c)
                         };
 
                     function eV(e, t, r) {
-                        S7(e, function(e) {
+                        ja(e, function(e) {
                             e.call(n, t, r, eT)
                         })
                     }
@@ -31057,9 +31143,9 @@ function() {
                             if (eV(T.uponSanitizeElement, e, {
                                     tagName: r,
                                     allowedTags: F
-                                }), J && e.hasChildNodes() && !ez(e.firstElementChild) && js(/<[/\w!]/g, e.innerHTML) && js(/<[/\w!]/g, e.textContent) || 7 === e.nodeType || J && 8 === e.nodeType && js(/<[/\w]/g, e.data)) return eL(e), !0;
-                            if (!(SK(q.tagCheck, Function) && q.tagCheck(r)) && (!F[r] || K[r])) {
-                                if (!K[r] && eW(r) && (SK(G.tagNameCheck, RegExp) && js(G.tagNameCheck, r) || SK(G.tagNameCheck, Function) && G.tagNameCheck(r))) return !1;
+                                }), J && e.hasChildNodes() && !ez(e.firstElementChild) && jv(/<[/\w!]/g, e.innerHTML) && jv(/<[/\w!]/g, e.textContent) || 7 === e.nodeType || J && 8 === e.nodeType && jv(/<[/\w]/g, e.data)) return eL(e), !0;
+                            if (!(SZ(q.tagCheck, Function) && q.tagCheck(r)) && (!F[r] || K[r])) {
+                                if (!K[r] && eW(r) && (SZ(G.tagNameCheck, RegExp) && jv(G.tagNameCheck, r) || SZ(G.tagNameCheck, Function) && G.tagNameCheck(r))) return !1;
                                 if (eu && !ef[r]) {
                                     var o = x(e) || e.parentNode,
                                         a = O(e) || e.childNodes;
@@ -31071,28 +31157,28 @@ function() {
                                 }
                                 return eL(e), !0
                             }
-                            return SK(e, s) && !eM(e) || ("noscript" === r || "noembed" === r || "noframes" === r) && js(/<\/no(script|embed|frames)/i, e.innerHTML) ? (eL(e), !0) : (Z && 3 === e.nodeType && (t = e.textContent, S7([k, N, _], function(e) {
-                                t = ji(t, e, " ")
-                            }), e.textContent !== t && (jt(n.removed, {
+                            return SZ(e, s) && !eM(e) || ("noscript" === r || "noembed" === r || "noframes" === r) && jv(/<\/no(script|embed|frames)/i, e.innerHTML) ? (eL(e), !0) : (Z && 3 === e.nodeType && (t = e.textContent, ja([k, N, _], function(e) {
+                                t = jp(t, e, " ")
+                            }), e.textContent !== t && (ju(n.removed, {
                                 element: e.cloneNode()
                             }), e.textContent = t)), eV(T.afterSanitizeElements, e, null), !1)
                         },
                         eK = function(e, t, r) {
                             if (ei && ("id" === t || "name" === t) && (r in o || r in ek)) return !1;
-                            if (X && !W[t] && js(D, t));
-                            else if ($ && js(R, t));
-                            else if (SK(q.attributeCheck, Function) && q.attributeCheck(t, e));
+                            if (X && !W[t] && jv(D, t));
+                            else if ($ && jv(R, t));
+                            else if (SZ(q.attributeCheck, Function) && q.attributeCheck(t, e));
                             else if (!z[t] || W[t]) {
-                                if (!(eW(e) && (SK(G.tagNameCheck, RegExp) && js(G.tagNameCheck, e) || SK(G.tagNameCheck, Function) && G.tagNameCheck(e)) && (SK(G.attributeNameCheck, RegExp) && js(G.attributeNameCheck, t) || SK(G.attributeNameCheck, Function) && G.attributeNameCheck(t, e)) || "is" === t && G.allowCustomizedBuiltInElements && (SK(G.tagNameCheck, RegExp) && js(G.tagNameCheck, r) || SK(G.tagNameCheck, Function) && G.tagNameCheck(r)))) return !1
+                                if (!(eW(e) && (SZ(G.tagNameCheck, RegExp) && jv(G.tagNameCheck, e) || SZ(G.tagNameCheck, Function) && G.tagNameCheck(e)) && (SZ(G.attributeNameCheck, RegExp) && jv(G.attributeNameCheck, t) || SZ(G.attributeNameCheck, Function) && G.attributeNameCheck(t, e)) || "is" === t && G.allowCustomizedBuiltInElements && (SZ(G.tagNameCheck, RegExp) && jv(G.tagNameCheck, r) || SZ(G.tagNameCheck, Function) && G.tagNameCheck(r)))) return !1
                             } else if (em[t]);
-                            else if (js(B, ji(r, L, "")));
-                            else if (("src" === t || "xlink:href" === t || "href" === t) && "script" !== e && 0 === jl(r, "data:") && ep[e]);
-                            else if (Q && !js(M, ji(r, L, "")));
+                            else if (jv(B, jp(r, L, "")));
+                            else if (("src" === t || "xlink:href" === t || "href" === t) && "script" !== e && 0 === jy(r, "data:") && ep[e]);
+                            else if (Q && !jv(M, jp(r, L, "")));
                             else if (r) return !1;
                             return !0
                         },
                         eW = function(e) {
-                            return "annotation-xml" !== e && ja(e, U)
+                            return "annotation-xml" !== e && jd(e, U)
                         },
                         eq = function(e) {
                             eV(T.beforeSanitizeAttributes, e, null);
@@ -31110,16 +31196,16 @@ function() {
                                         u = i.namespaceURI,
                                         c = i.value,
                                         s = eA(l),
-                                        f = "value" === l ? c : ju(c);
-                                    if (o.attrName = s, o.attrValue = f, o.keepAttr = !0, o.forceKeepAttr = void 0, eV(T.uponSanitizeAttribute, e, o), f = o.attrValue, el && ("id" === s || "name" === s) && (eU(l, e), f = "user-content-" + f), J && js(/((--!?|])>)|<\/(style|title|textarea)/i, f) || "attributename" === s && ja(f, "href")) return eU(l, e);
+                                        f = "value" === l ? c : jm(c);
+                                    if (o.attrName = s, o.attrValue = f, o.keepAttr = !0, o.forceKeepAttr = void 0, eV(T.uponSanitizeAttribute, e, o), f = o.attrValue, el && ("id" === s || "name" === s) && (eU(l, e), f = "user-content-" + f), J && jv(/((--!?|])>)|<\/(style|title|textarea)/i, f) || "attributename" === s && jd(f, "href")) return eU(l, e);
                                     if (!o.forceKeepAttr) {
-                                        if (!o.keepAttr || !Y && js(/\/>/i, f)) return eU(l, e);
-                                        Z && S7([k, N, _], function(e) {
-                                            f = ji(f, e, " ")
+                                        if (!o.keepAttr || !Y && jv(/\/>/i, f)) return eU(l, e);
+                                        Z && ja([k, N, _], function(e) {
+                                            f = jp(f, e, " ")
                                         });
                                         var d = eA(e.nodeName);
                                         if (!eK(d, s, f)) return eU(l, e);
-                                        if (t && (void 0 === h ? "undefined" : S$(h)) === "object" && "function" == typeof h.getAttributeType)
+                                        if (t && (void 0 === h ? "undefined" : S1(h)) === "object" && "function" == typeof h.getAttributeType)
                                             if (u);
                                             else switch (h.getAttributeType(d, s)) {
                                                 case "TrustedHTML":
@@ -31129,7 +31215,7 @@ function() {
                                                     f = t.createScriptURL(f)
                                             }
                                         if (f !== c) try {
-                                            u ? e.setAttributeNS(u, l, f) : e.setAttribute(l, f), eH(e) ? eL(e) : je(n.removed)
+                                            u ? e.setAttributeNS(u, l, f) : e.setAttribute(l, f), eH(e) ? eL(e) : jl(n.removed)
                                         } catch (t) {
                                             eU(l, e)
                                         }
@@ -31141,7 +31227,7 @@ function() {
                         e$ = function e(t) {
                             var r = null,
                                 n = eF(t);
-                            for (eV(T.beforeSanitizeShadowDOM, t, null); r = n.nextNode();) eV(T.uponSanitizeShadowNode, r, null), eG(r), eq(r), SK(r.content, l) && e(r.content);
+                            for (eV(T.beforeSanitizeShadowDOM, t, null); r = n.nextNode();) eV(T.uponSanitizeShadowNode, r, null), eG(r), eq(r), SZ(r.content, l) && e(r.content);
                             eV(T.afterSanitizeShadowDOM, t, null)
                         };
                     return n.sanitize = function(e) {
@@ -31152,21 +31238,21 @@ function() {
                             s = null;
                         if ((eO = !e) && (e = "\x3c!--\x3e"), "string" != typeof e && !ez(e))
                             if ("function" == typeof e.toString) {
-                                if ("string" != typeof(e = e.toString())) throw jf("dirty is not a string, aborting")
-                            } else throw jf("toString is not a function");
+                                if ("string" != typeof(e = e.toString())) throw jb("dirty is not a string, aborting")
+                            } else throw jb("toString is not a function");
                         if (!n.isSupported) return e;
                         if (et || e_(r), n.removed = [], "string" == typeof e && (ec = !1), ec) {
                             if (e.nodeName) {
                                 var f = eA(e.nodeName);
-                                if (!F[f] || K[f]) throw jf("root node is forbidden and cannot be sanitized in-place")
+                                if (!F[f] || K[f]) throw jb("root node is forbidden and cannot be sanitized in-place")
                             }
-                        } else if (SK(e, c)) 1 === (i = (o = eB("\x3c!----\x3e")).ownerDocument.importNode(e, !0)).nodeType && "BODY" === i.nodeName || "HTML" === i.nodeName ? o = i : o.appendChild(i);
+                        } else if (SZ(e, c)) 1 === (i = (o = eB("\x3c!----\x3e")).ownerDocument.importNode(e, !0)).nodeType && "BODY" === i.nodeName || "HTML" === i.nodeName ? o = i : o.appendChild(i);
                         else {
                             if (!en && !Z && !ee && -1 === e.indexOf("<")) return t && ea ? t.createHTML(e) : e;
                             if (!(o = eB(e))) return en ? null : ea ? j : ""
                         }
                         o && er && eL(o.firstChild);
-                        for (var d = eF(ec ? e : o); u = d.nextNode();) eG(u), eq(u), SK(u.content, l) && e$(u.content);
+                        for (var d = eF(ec ? e : o); u = d.nextNode();) eG(u), eq(u), SZ(u.content, l) && e$(u.content);
                         if (ec) return e;
                         if (en) {
                             if (eo)
@@ -31175,8 +31261,8 @@ function() {
                             return (z.shadowroot || z.shadowrootmode) && (s = A.call(a, s, !0)), s
                         }
                         var p = ee ? o.outerHTML : o.innerHTML;
-                        return ee && F["!doctype"] && o.ownerDocument && o.ownerDocument.doctype && o.ownerDocument.doctype.name && js(jR, o.ownerDocument.doctype.name) && (p = "<!DOCTYPE " + o.ownerDocument.doctype.name + ">\n" + p), Z && S7([k, N, _], function(e) {
-                            p = ji(p, e, " ")
+                        return ee && F["!doctype"] && o.ownerDocument && o.ownerDocument.doctype && o.ownerDocument.doctype.name && jv(jz, o.ownerDocument.doctype.name) && (p = "<!DOCTYPE " + o.ownerDocument.doctype.name + ">\n" + p), Z && ja([k, N, _], function(e) {
+                            p = jp(p, e, " ")
                         }), t && ea ? t.createHTML(p) : p
                     }, n.setConfig = function() {
                         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
@@ -31186,34 +31272,34 @@ function() {
                     }, n.isValidAttribute = function(e, t, r) {
                         return eT || e_({}), eK(eA(e), eA(t), r)
                     }, n.addHook = function(e, t) {
-                        "function" == typeof t && jt(T[e], t)
+                        "function" == typeof t && ju(T[e], t)
                     }, n.removeHook = function(e, t) {
                         if (void 0 !== t) {
-                            var r = S9(T[e], t);
-                            return -1 === r ? void 0 : jr(T[e], r, 1)[0]
+                            var r = ji(T[e], t);
+                            return -1 === r ? void 0 : jc(T[e], r, 1)[0]
                         }
-                        return je(T[e])
+                        return jl(T[e])
                     }, n.removeHooks = function(e) {
                         T[e] = []
                     }, n.removeAllHooks = function() {
-                        T = jU()
+                        T = jK()
                     }, n
                 }(),
-                jF = {
+                jq = {
                     ADD_ATTR: ["target"]
                 },
-                jH = jB();
-            jH.addHook("afterSanitizeAttributes", function(e) {
+                j$ = jW();
+            j$.addHook("afterSanitizeAttributes", function(e) {
                 "A" === e.nodeName && (e.setAttribute("target", "_blank"), e.setAttribute("rel", "noopener noreferrer"))
             });
-            var jz = function(e) {
+            var jX = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
                         r = t.shouldOpenLinksInNewTab;
                     return (0, em.useMemo)(function() {
-                        return (r ? jH : jB).sanitize(e, jF)
+                        return (r ? j$ : jW).sanitize(e, jq)
                     }, [e, r])
                 },
-                jV = function(e) {
+                jQ = function(e) {
                     var t = e.titleText,
                         r = e.bodyText,
                         n = e.primaryButtonText,
@@ -31226,7 +31312,7 @@ function() {
                         s = e.hasCloseAffordance,
                         f = e.orientButtonsVertically,
                         d = void 0 !== f && f,
-                        p = jz(r, {
+                        p = jX(r, {
                             shouldOpenLinksInNewTab: !0
                         }),
                         y = n && i ? (0, es.jsx)(o7, {
@@ -31274,12 +31360,12 @@ function() {
                         })
                     })
                 },
-                jG = function(e) {
+                jY = function(e) {
                     var t = e.isModalOpen,
                         r = e.navigateToAccountSettings,
                         n = e.closeModal,
                         o = e.translate;
-                    return (0, es.jsx)(jV, {
+                    return (0, es.jsx)(jQ, {
                         titleText: o("UpdateMaturitySettingModal.Label.Title"),
                         bodyText: o("UpdateMaturitySettingModal.Label.Body"),
                         primaryButtonText: o("UpdateMaturitySettingModal.Action.GoToSettings"),
@@ -31291,11 +31377,11 @@ function() {
                         onCloseModal: n
                     })
                 },
-                jK = function(e) {
+                jZ = function(e) {
                     var t = e.isModalOpen,
                         r = e.closeModal,
                         n = e.translate;
-                    return (0, es.jsx)(jV, {
+                    return (0, es.jsx)(jQ, {
                         titleText: n("RestrictedUnplayableModal.Label.Title"),
                         bodyText: n("RestrictedUnplayableModal.Label.Body"),
                         secondaryButtonText: n("RestrictedUnplayableModal.Action.Ok"),
@@ -31305,13 +31391,13 @@ function() {
                         onCloseModal: r
                     })
                 },
-                jW = function(e) {
+                jJ = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                         r = !!e && !t,
                         n = (0, ef.useQuery)({
                             queryKey: ["ageRecommendation", e],
                             queryFn: function() {
-                                return xX(e)
+                                return xZ(e)
                             },
                             enabled: r
                         }),
@@ -31325,13 +31411,13 @@ function() {
                     }
                 };
 
-            function jq(e, t) {
+            function j0(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function j$(e, t) {
+            function j1(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -31355,27 +31441,27 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return jq(e, t);
+                        if ("string" == typeof e) return j0(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return jq(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return j0(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var jX = function(e) {
-                var t, r, n = j$((0, em.useState)(void 0), 2),
+            var j2 = function(e) {
+                var t, r, n = j1((0, em.useState)(void 0), 2),
                     o = n[0],
                     a = n[1],
-                    i = j$((0, em.useState)(!1), 2),
+                    i = j1((0, em.useState)(!1), 2),
                     l = i[0],
                     u = i[1],
-                    c = j$((0, em.useState)(!1), 2),
+                    c = j1((0, em.useState)(!1), 2),
                     s = c[0],
                     f = c[1];
                 (0, em.useEffect)(function() {
-                    f(!1), u(!0), x$().then(function(e) {
+                    f(!1), u(!0), xY().then(function(e) {
                         a(e.contentAgeRestriction)
                     }).catch(function() {
                         f(!0)
@@ -31383,7 +31469,7 @@ function() {
                         u(!1)
                     })
                 }, []);
-                var d = jW(e),
+                var d = jJ(e),
                     p = d.ageRecommendationData,
                     y = d.hasError,
                     m = d.isLoading;
@@ -31395,13 +31481,13 @@ function() {
                 }
             };
 
-            function jQ(e, t) {
+            function j3(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function jY(e, t, r, n, o, a, i) {
+            function j6(e, t, r, n, o, a, i) {
                 try {
                     var l = e[a](i),
                         u = l.value
@@ -31412,7 +31498,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function jZ(e, t) {
+            function j8(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -31436,36 +31522,36 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return jQ(e, t);
+                        if ("string" == typeof e) return j3(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return jQ(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return j3(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var jJ = function(e, t, r, n, o, a, i, l) {
+            var j5 = function(e, t, r, n, o, a, i, l) {
                     var u = (0, ef.useQuery)({
                             queryKey: ["guacPlayButtonUI"],
                             queryFn: function() {
-                                return xq()
+                                return xQ()
                             },
                             staleTime: 6e4
                         }).data,
-                        c = jZ((0, em.useState)(!1), 2),
+                        c = j8((0, em.useState)(!1), 2),
                         s = c[0],
                         f = c[1],
-                        d = jZ((0, em.useState)(!1), 2),
+                        d = j8((0, em.useState)(!1), 2),
                         p = d[0],
                         y = d[1],
                         m = (0, em.useCallback)(function() {
-                            S_(e, n, o, a, i, void 0, l)
+                            SF(e, n, o, a, i, void 0, l)
                         }, [i, a, e, o, n, l]),
                         h = (0, em.useCallback)(function(e, n, o) {
                             var a;
                             return (a = function() {
-                                var a, i, l, c, s, d, p;
+                                var a, i, l, c, s;
                                 return function(e, t) {
                                     var r, n, o, a = {
                                             label: 0,
@@ -31545,23 +31631,23 @@ function() {
                                             }
                                         }
                                     }
-                                }(this, function(h) {
-                                    switch (h.label) {
+                                }(this, function(d) {
+                                    switch (d.label) {
                                         case 0:
-                                            if (i = function(e) {
-                                                    SL(t, e, x2, r)
-                                                }, l = (null != (a = window.EventTracker) ? a : {}).fireEvent, o || void 0 === e || void 0 === n) return m(), null == l || l(Sn.PlayButtonUpsellUnknownSettingOrAge), i(So.gameLaunchFallbackUpsellName), [2];
-                                            if ("minimal" === n) return m(), null == l || l(Sn.PlayButtonUpsellMinimalMaturityRating), i(So.gameLaunchFallbackUpsellName), [2];
-                                            if (!(c = ({
+                                            if (a = function(e) {
+                                                    SG(t, e, x8, r)
+                                                }, o || void 0 === e || void 0 === n) return m(), xV(Si.PlayButtonUpsellUnknownSettingOrAge), a(Sl.gameLaunchFallbackUpsellName), [2];
+                                            if ("minimal" === n) return m(), xV(Si.PlayButtonUpsellMinimalMaturityRating), a(Sl.gameLaunchFallbackUpsellName), [2];
+                                            if (!(i = ({
                                                     mild: "NinePlus",
                                                     moderate: "ThirteenPlus",
                                                     restricted: "SeventeenPlus",
                                                     unrated: "ThirteenPlus"
-                                                })[n])) return m(), null == l || l(Sn.PlayButtonUpsellAgeNotInMapping), i(So.gameLaunchFallbackUpsellName), [2];
-                                            if (!(s = e.options.find(function(e) {
-                                                    return e.option.optionValue === c
+                                                })[n])) return m(), xV(Si.PlayButtonUpsellAgeNotInMapping), a(Sl.gameLaunchFallbackUpsellName), [2];
+                                            if (!(l = e.options.find(function(e) {
+                                                    return e.option.optionValue === i
                                                 }))) return [3, 13];
-                                            switch (d = s.requirement) {
+                                            switch (c = l.requirement) {
                                                 case "SelfUpdateSetting":
                                                     return [3, 1];
                                                 case "ParentalConsent":
@@ -31571,14 +31657,14 @@ function() {
                                             }
                                             return [3, 11];
                                         case 1:
-                                            return f(!0), null == l || l(Sn.PlayButtonUpsellSelfUpdateSettingTriggered), i(d), [3, 12];
+                                            return f(!0), xV(Si.PlayButtonUpsellSelfUpdateSettingTriggered), a(c), [3, 12];
                                         case 2:
-                                            if (null == l || l(Sn.PlayButtonUpsellAskYourParentTriggered), i(d), !window.Roblox.AccessManagementUpsellV2Service) return null == l || l(Sn.PlayButtonUpsellParentalConsentError), [3, 12];
-                                            h.label = 3;
+                                            if (xV(Si.PlayButtonUpsellAskYourParentTriggered), a(c), !window.Roblox.AccessManagementUpsellV2Service) return xV(Si.PlayButtonUpsellParentalConsentError), [3, 12];
+                                            d.label = 3;
                                         case 3:
-                                            return h.trys.push([3, 5, , 6]), p = (null == u ? void 0 : u.useExperienceApprovalForParentalConsent) ? {
+                                            return d.trys.push([3, 5, , 6]), s = (null == u ? void 0 : u.useExperienceApprovalForParentalConsent) ? {
                                                 featureName: "CanApproveExperience",
-                                                namespace: Sl.accountManagement,
+                                                namespace: Ss.accountManagement,
                                                 isAsyncCall: !1,
                                                 usePrologue: !0,
                                                 ampRecourseData: {
@@ -31587,35 +31673,35 @@ function() {
                                                 }
                                             } : {
                                                 featureName: "CanChangeSetting",
-                                                namespace: Sl.settingChange,
+                                                namespace: Ss.settingChange,
                                                 isAsyncCall: !1,
                                                 usePrologue: !0,
                                                 ampRecourseData: {
-                                                    contentAgeRestriction: s.option.optionValue
+                                                    contentAgeRestriction: l.option.optionValue
                                                 }
-                                            }, [4, window.Roblox.AccessManagementUpsellV2Service.startAccessManagementUpsell(p)];
+                                            }, [4, window.Roblox.AccessManagementUpsellV2Service.startAccessManagementUpsell(s)];
                                         case 4:
-                                            return h.sent(), [3, 6];
+                                            return d.sent(), [3, 6];
                                         case 5:
-                                            return h.sent(), m(), null == l || l(Sn.PlayButtonUpsellParentalConsentError), i(So.gameLaunchFallbackUpsellName), [3, 6];
+                                            return d.sent(), m(), xV(Si.PlayButtonUpsellParentalConsentError), a(Sl.gameLaunchFallbackUpsellName), [3, 6];
                                         case 6:
                                         case 10:
                                             return [3, 12];
                                         case 7:
-                                            return h.trys.push([7, 9, , 10]), null == l || l(Sn.PlayButtonUpsellAgeRestrictionVerificationTriggered), i(d), [4, SR({
-                                                context: Si,
+                                            return d.trys.push([7, 9, , 10]), xV(Si.PlayButtonUpsellAgeRestrictionVerificationTriggered), a(c), [4, Sz({
+                                                context: Sc,
                                                 pageContext: r
                                             })];
                                         case 8:
-                                            return h.sent() && window.location.reload(), [3, 10];
+                                            return d.sent() && window.location.reload(), [3, 10];
                                         case 9:
-                                            return h.sent(), m(), i(So.gameLaunchFallbackUpsellName), [3, 10];
+                                            return d.sent(), m(), a(Sl.gameLaunchFallbackUpsellName), [3, 10];
                                         case 11:
-                                            m(), null == l || l(Sn.PlayButtonUpsellUnknownRequirement), i(So.gameLaunchFallbackUpsellName), h.label = 12;
+                                            m(), xV(Si.PlayButtonUpsellUnknownRequirement), a(Sl.gameLaunchFallbackUpsellName), d.label = 12;
                                         case 12:
                                             return [3, 14];
                                         case 13:
-                                            y(!0), null == l || l(Sn.PlayButtonUpsellRestrictedUnplayableTriggered), i(So.restrictedUnplayableUpsellName), h.label = 14;
+                                            y(!0), xV(Si.PlayButtonUpsellRestrictedUnplayableTriggered), a(Sl.restrictedUnplayableUpsellName), d.label = 14;
                                         case 14:
                                             return [2]
                                     }
@@ -31627,11 +31713,11 @@ function() {
                                     var o = a.apply(e, t);
 
                                     function i(e) {
-                                        jY(o, r, n, i, l, "next", e)
+                                        j6(o, r, n, i, l, "next", e)
                                     }
 
                                     function l(e) {
-                                        jY(o, r, n, i, l, "throw", e)
+                                        j6(o, r, n, i, l, "throw", e)
                                     }
                                     i(void 0)
                                 })
@@ -31647,7 +31733,7 @@ function() {
                         launchPlayButtonUpsell: h,
                         isSelfUpdateSettingModalOpen: s,
                         navigateToAccountSettings: (0, em.useCallback)(function() {
-                            var e = (0, SO.getAbsoluteUrl)("/my/account#!/privacy");
+                            var e = (0, SS.getAbsoluteUrl)("/my/account#!/privacy");
                             "u" > typeof window && (window.location.href = e, f(!1))
                         }, []),
                         closeSelfUpdateSettingModal: v,
@@ -31655,7 +31741,7 @@ function() {
                         closeRestrictedUnplayableModal: b
                     }
                 },
-                j0 = function(e) {
+                j4 = function(e) {
                     var t = e.universeId,
                         r = e.buttonClassName,
                         n = e.placeId,
@@ -31666,12 +31752,12 @@ function() {
                         u = e.appsFlyerReferralProperties,
                         c = e.pageContext,
                         s = e.translate,
-                        f = jX(t),
+                        f = j2(t),
                         d = f.contentAgeRestriction,
                         p = f.contentMaturityRating,
                         y = f.isFetching,
                         m = f.hasError,
-                        h = jJ(n, t, c, o, a, i, l, u),
+                        h = j5(n, t, c, o, a, i, l, u),
                         v = h.launchPlayButtonUpsell,
                         b = h.isSelfUpdateSettingModalOpen,
                         g = h.navigateToAccountSettings,
@@ -31681,25 +31767,25 @@ function() {
                         S = (0, em.useCallback)(function(e) {
                             e.preventDefault(), e.stopPropagation(), v(d, p, m)
                         }, [v, d, p, m]);
-                    return !m && y ? (0, es.jsx)(Sz, {
+                    return !m && y ? (0, es.jsx)(SX, {
                         buttonClassName: null != r ? r : "btn-common-play-game-action-needed-lg"
                     }) : (0, es.jsxs)(eh().Fragment, {
-                        children: [(0, es.jsx)(SF, {
+                        children: [(0, es.jsx)(Sq, {
                             onButtonClick: S,
                             buttonClassName: r
-                        }), b && (0, es.jsx)(jG, {
+                        }), b && (0, es.jsx)(jY, {
                             isModalOpen: b,
                             navigateToAccountSettings: g,
                             closeModal: w,
                             translate: s
-                        }), O && (0, es.jsx)(jK, {
+                        }), O && (0, es.jsx)(jZ, {
                             isModalOpen: O,
                             closeModal: x,
                             translate: s
                         })]
                     })
                 };
-            j0.defaultProps = {
+            j4.defaultProps = {
                 buttonClassName: void 0,
                 rootPlaceId: void 0,
                 privateServerLinkCode: void 0,
@@ -31707,15 +31793,15 @@ function() {
                 eventProperties: {},
                 appsFlyerReferralProperties: {}
             };
-            var j1 = (0, SU.withTranslations)(j0, SB);
+            var j7 = (0, SK.withTranslations)(j4, SW);
 
-            function j2(e, t) {
+            function j9(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function j3(e, t, r, n, o, a, i) {
+            function Pe(e, t, r, n, o, a, i) {
                 try {
                     var l = e[a](i),
                         u = l.value
@@ -31726,7 +31812,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function j6(e, t) {
+            function Pt(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -31750,16 +31836,16 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return j2(e, t);
+                        if ("string" == typeof e) return j9(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return j2(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return j9(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var j8 = function(e, t) {
+            var Pr = function(e, t) {
                     var r = !(arguments.length > 2) || void 0 === arguments[2] || arguments[2],
                         n = (0, ef.useQuery)({
                             queryKey: ["purchaseProductData", e, t],
@@ -31850,22 +31936,22 @@ function() {
                                         switch (n.label) {
                                             case 0:
                                                 var o, a;
-                                                return [4, Promise.all([(o = [e], xG(function() {
+                                                return [4, Promise.all([(o = [e], xq(function() {
                                                     var e;
-                                                    return xK(this, function(t) {
+                                                    return x$(this, function(t) {
                                                         switch (t.label) {
                                                             case 0:
-                                                                return [4, xW.getProductInfo(o)];
+                                                                return [4, xX.getProductInfo(o)];
                                                             case 1:
                                                                 return [2, (void 0 === (e = t.sent().data.data) ? [] : e)[0]]
                                                         }
                                                     })
-                                                })()), (a = [t], xG(function() {
+                                                })()), (a = [t], xq(function() {
                                                     var e;
-                                                    return xK(this, function(t) {
+                                                    return x$(this, function(t) {
                                                         switch (t.label) {
                                                             case 0:
-                                                                return [4, xW.getPlaceDetails(a)];
+                                                                return [4, xX.getPlaceDetails(a)];
                                                             case 1:
                                                                 return [2, (void 0 === (e = t.sent().data) ? [] : e)[0]]
                                                         }
@@ -31873,7 +31959,7 @@ function() {
                                                 })())])];
                                             case 1:
                                                 return [2, {
-                                                    productInfo: (r = j6.apply(void 0, [n.sent(), 2]))[0],
+                                                    productInfo: (r = Pt.apply(void 0, [n.sent(), 2]))[0],
                                                     productDetails: r[1]
                                                 }]
                                         }
@@ -31885,11 +31971,11 @@ function() {
                                         var a = r.apply(e, t);
 
                                         function i(e) {
-                                            j3(a, n, o, i, l, "next", e)
+                                            Pe(a, n, o, i, l, "next", e)
                                         }
 
                                         function l(e) {
-                                            j3(a, n, o, i, l, "throw", e)
+                                            Pe(a, n, o, i, l, "throw", e)
                                         }
                                         i(void 0)
                                     })
@@ -31910,7 +31996,7 @@ function() {
                         productDetails: a
                     }
                 },
-                j5 = function(e) {
+                Pn = function(e) {
                     var t = e.buttonWidth,
                         r = e.buttonClassName,
                         n = e.iconClassName,
@@ -31926,8 +32012,8 @@ function() {
                         children: (0, es.jsxs)(o7, {
                             "data-testid": "play-purchase-button",
                             variant: "Emphasis",
-                            style: Sw,
-                            className: lM()(Sg(t), r),
+                            style: Sx,
+                            className: lM()(SO(t), r),
                             onClick: function() {
                                 return null
                             },
@@ -31942,8 +32028,8 @@ function() {
                     }) : (0, es.jsxs)(o7, {
                         "data-testid": "play-purchase-button",
                         variant: "Emphasis",
-                        style: Sw,
-                        className: lM()(Sg(t), r),
+                        style: Sx,
+                        className: lM()(SO(t), r),
                         onClick: function(e) {
                             l && !u && l(e)
                         },
@@ -31957,13 +32043,13 @@ function() {
                     })
                 };
 
-            function j4(e, t) {
+            function Po(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function j7(e, t, r, n, o, a, i) {
+            function Pa(e, t, r, n, o, a, i) {
                 try {
                     var l = e[a](i),
                         u = l.value
@@ -31973,9 +32059,9 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            j5.defaultProps = {
+            Pn.defaultProps = {
                 hideButtonText: !1,
-                buttonWidth: Sb,
+                buttonWidth: Sw,
                 buttonClassName: "btn-economy-robux-white-lg",
                 iconClassName: "icon-robux-white",
                 hideButtonIcon: !1,
@@ -31983,7 +32069,7 @@ function() {
                 onClick: void 0,
                 redirectUrl: void 0
             };
-            var j9 = function(e) {
+            var Pi = function(e) {
                     var t, r, n, o = e.universeId,
                         a = e.placeId,
                         i = e.productDetails,
@@ -32018,10 +32104,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return j4(e, 2);
+                                if ("string" == typeof e) return Po(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return j4(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Po(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -32031,7 +32117,7 @@ function() {
                         b = (0, em.useCallback)(function(e) {
                             var t;
                             return (t = function() {
-                                var t, r, n, l;
+                                var t, r, n;
                                 return function(e, t) {
                                     var r, n, o, a = {
                                             label: 0,
@@ -32111,17 +32197,17 @@ function() {
                                             }
                                         }
                                     }
-                                }(this, function(u) {
-                                    switch (u.label) {
+                                }(this, function(l) {
+                                    switch (l.label) {
                                         case 0:
                                             if (e.preventDefault(), e.stopPropagation(), r = null == (t = i.fiatPurchaseData) ? void 0 : t.basePriceId, !a || !r) return [2];
-                                            v(!0), u.label = 1;
+                                            v(!0), l.label = 1;
                                         case 1:
-                                            return u.trys.push([1, 3, 4, 5]), SL(o, So.fiatPurchaseUpsellName, x3, y), [4, xQ(a, r)];
+                                            return l.trys.push([1, 3, 4, 5]), SG(o, Sl.fiatPurchaseUpsellName, x5, y), [4, xJ(a, r)];
                                         case 2:
-                                            return (n = u.sent()) && (0, SS.isValidStripeCheckoutUrl)(n) && (window.location.href = n), [3, 5];
+                                            return (n = l.sent()) && (0, SP.isValidStripeCheckoutUrl)(n) && (window.location.href = n), [3, 5];
                                         case 3:
-                                            return u.sent(), null == (l = window.EventTracker) || l.fireEvent(Sn.PreparePurchaseUrlError), console.error("Error preparing purchase url"), [3, 5];
+                                            return l.sent(), xV(Si.PreparePurchaseUrlError), console.error("Error preparing purchase url"), [3, 5];
                                         case 4:
                                             return v(!1), [7];
                                         case 5:
@@ -32135,41 +32221,41 @@ function() {
                                     var a = t.apply(e, r);
 
                                     function i(e) {
-                                        j7(a, n, o, i, l, "next", e)
+                                        Pa(a, n, o, i, l, "next", e)
                                     }
 
                                     function l(e) {
-                                        j7(a, n, o, i, l, "throw", e)
+                                        Pa(a, n, o, i, l, "throw", e)
                                     }
                                     i(void 0)
                                 })
                             })()
                         }, [a, i, o, y]);
-                    return (0, es.jsx)(j5, {
+                    return (0, es.jsx)(Pn, {
                         buttonWidth: c,
                         buttonClassName: s,
                         iconClassName: u,
                         hideButtonText: f,
                         hideButtonIcon: !0,
-                        buttonContent: void 0 !== p && p ? l(x9) : null != (r = null == (n = i.fiatPurchaseData) ? void 0 : n.localizedFiatPrice) ? r : "",
+                        buttonContent: void 0 !== p && p ? l(Sr) : null != (r = null == (n = i.fiatPurchaseData) ? void 0 : n.localizedFiatPrice) ? r : "",
                         onClick: d ? void 0 : b,
                         redirectUrl: d,
                         isPurchasing: h
                     })
                 },
-                Pe = window.RobloxItemPurchase,
-                Pt = window.RobloxThumbnails;
+                Pl = window.RobloxItemPurchase,
+                Pu = window.RobloxThumbnails;
 
-            function Pr(e, t) {
+            function Pc(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var Pn = function(e) {
+            var Ps = function(e) {
                     var t;
                     return null != (t = null == e ? void 0 : e.price.toString()) ? t : ""
                 },
-                Po = function(e) {
+                Pf = function(e) {
                     var t, r = e.universeId,
                         n = e.iconClassName,
                         o = e.buttonWidth,
@@ -32181,7 +32267,7 @@ function() {
                         s = e.translate,
                         f = e.refetchPlayabilityStatus,
                         d = (0, em.useRef)();
-                    null != d.current || (d.current = (0, Pe.createItemPurchase)());
+                    null != d.current || (d.current = (0, Pl.createItemPurchase)());
                     var p = function(e) {
                             if (Array.isArray(e)) return e
                         }(t = d.current) || function(e) {
@@ -32205,10 +32291,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return Pr(e, 2);
+                                if ("string" == typeof e) return Pc(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Pr(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Pc(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -32219,24 +32305,24 @@ function() {
                             e.preventDefault(), e.stopPropagation(), m.start()
                         }, [m]);
                     return (0, es.jsxs)(eh().Fragment, {
-                        children: [(0, es.jsx)(j5, {
+                        children: [(0, es.jsx)(Pn, {
                             buttonWidth: o,
                             buttonClassName: a,
                             iconClassName: n,
                             hideButtonText: i,
-                            buttonContent: Pn(c),
+                            buttonContent: Ps(c),
                             onClick: l ? void 0 : h,
                             redirectUrl: l
                         }), (0, es.jsx)(y, {
                             translate: s,
                             productId: c.productId,
                             expectedPrice: c.price,
-                            thumbnail: (0, es.jsx)(Pt.Thumbnail2d, {
-                                type: Pt.ThumbnailTypes.gameIcon,
-                                size: Pt.DefaultThumbnailSize,
+                            thumbnail: (0, es.jsx)(Pu.Thumbnail2d, {
+                                type: Pu.ThumbnailTypes.gameIcon,
+                                size: Pu.DefaultThumbnailSize,
                                 targetId: parseInt(r, 10),
                                 imgClassName: "game-card-thumb",
-                                format: Pt.ThumbnailFormat.jpeg
+                                format: Pu.ThumbnailFormat.jpeg
                             }),
                             assetName: u.name,
                             assetType: "Place",
@@ -32248,14 +32334,14 @@ function() {
                         })]
                     })
                 },
-                Pa = (0, SU.withTranslations)(function(e) {
+                Pd = (0, SK.withTranslations)(function(e) {
                     var t = e.translate,
                         r = e.universeId,
                         n = e.placeId,
                         o = e.iconClassName,
                         a = void 0 === o ? "icon-robux-white" : o,
                         i = e.buttonWidth,
-                        l = void 0 === i ? Sb : i,
+                        l = void 0 === i ? Sw : i,
                         u = e.buttonClassName,
                         c = void 0 === u ? "btn-economy-robux-white-lg" : u,
                         s = e.refetchPlayabilityStatus,
@@ -32265,13 +32351,13 @@ function() {
                         y = e.playabilityStatus,
                         m = e.showDefaultPurchaseText,
                         h = e.pageContext,
-                        v = j8(r, n),
+                        v = Pr(r, n),
                         b = v.productInfo,
                         g = v.productDetails;
-                    return v.isLoading ? (0, es.jsx)(Sz, {
+                    return v.isLoading ? (0, es.jsx)(SX, {
                         buttonClassName: c,
                         buttonWidth: l
-                    }) : "Fiat" == (y === x3 && (null == g ? void 0 : g.fiatPurchaseData) ? "Fiat" : "Robux") ? (0, es.jsx)(j9, {
+                    }) : "Fiat" == (y === x5 && (null == g ? void 0 : g.fiatPurchaseData) ? "Fiat" : "Robux") ? (0, es.jsx)(Pi, {
                         universeId: r,
                         placeId: n,
                         iconClassName: a,
@@ -32283,7 +32369,7 @@ function() {
                         translate: t,
                         showDefaultPurchaseText: void 0 !== m && m,
                         pageContext: h
-                    }) : (0, es.jsx)(Po, {
+                    }) : (0, es.jsx)(Pf, {
                         universeId: r,
                         iconClassName: a,
                         buttonWidth: l,
@@ -32295,15 +32381,15 @@ function() {
                         translate: t,
                         refetchPlayabilityStatus: s
                     })
-                }, SB),
-                Pi = function(e) {
+                }, SW),
+                Pp = function(e) {
                     var t, r, n = new URLSearchParams(window.location.search);
                     return {
                         launchData: null != (t = n.get("launchData")) ? t : e,
                         eventId: null != (r = n.get("eventId")) ? r : void 0
                     }
                 },
-                Pl = (0, ey.withTranslations)(function(e) {
+                Py = (0, ey.withTranslations)(function(e) {
                     var t = e.translate,
                         r = e.universeId,
                         n = e.placeId,
@@ -32313,11 +32399,11 @@ function() {
                         l = e.eventProperties,
                         u = e.appsFlyerReferralProperties,
                         c = (0, em.useCallback)(function(e) {
-                            e.preventDefault(), e.stopPropagation(), SM(n, r);
-                            var t = Pi((null == l ? void 0 : l.launchData) != null ? String(l.launchData) : void 0);
-                            S_(n, o, a, i, l, t, u, "DemoPlayButtonClick")
+                            e.preventDefault(), e.stopPropagation(), SV(n, r);
+                            var t = Pp((null == l ? void 0 : l.launchData) != null ? String(l.launchData) : void 0);
+                            SF(n, o, a, i, l, t, u, "DemoPlayButtonClick")
                         }, [r, n, o, a, i, l, u]),
-                        s = t(Se) || "Play Demo";
+                        s = t(Sn) || "Play Demo";
                     return (0, es.jsx)("button", {
                         type: "button",
                         "data-testid": "demo-play-button",
@@ -32325,8 +32411,8 @@ function() {
                         onClick: c,
                         children: s
                     })
-                }, SB),
-                Pu = (0, ey.withTranslations)(function(e) {
+                }, SW),
+                Pm = (0, ey.withTranslations)(function(e) {
                     var t = e.translate,
                         r = e.placeId;
                     return (0, es.jsx)(o7, {
@@ -32334,14 +32420,14 @@ function() {
                         as: "a",
                         variant: "Standard",
                         size: "Large",
-                        style: Sw,
+                        style: Sx,
                         className: "btn-full-width btn-control-lg play-on-web-button",
                         href: "".concat(iu().playWebsite, "/games/start?placeId=").concat(r),
                         target: "_blank",
-                        children: t(St) || "Play on Web"
+                        children: t(So) || "Play on Web"
                     })
                 }, ["Feature.ExperienceDetails"]),
-                Pc = (0, SU.withTranslations)(function(e) {
+                Ph = (0, SK.withTranslations)(function(e) {
                     var t = e.translate,
                         r = e.iconClassName,
                         n = e.buttonWidth,
@@ -32350,8 +32436,8 @@ function() {
                     return (0, es.jsxs)(o7, {
                         "data-testid": "play-unplayable-button",
                         variant: "Emphasis",
-                        style: Sw,
-                        className: lM()(Sg(void 0 === n ? Sb : n), void 0 === o ? "btn-common-play-game-unplayable-lg" : o),
+                        style: Sx,
+                        className: lM()(SO(void 0 === n ? Sw : n), void 0 === o ? "btn-common-play-game-unplayable-lg" : o),
                         isDisabled: !0,
                         onClick: function() {
                             return null
@@ -32360,17 +32446,17 @@ function() {
                             className: void 0 === r ? "icon-status-unavailable-secondary" : r
                         }), !(void 0 !== a && a) && (0, es.jsx)("span", {
                             className: "btn-text",
-                            children: t(x7)
+                            children: t(St)
                         })]
                     })
-                }, SB),
-                Ps = (0, SU.withTranslations)(function(e) {
+                }, SW),
+                Pv = (0, SK.withTranslations)(function(e) {
                     var t = e.treatmentData,
                         r = e.isModalOpen,
                         n = e.onConfirm,
                         o = e.onDismiss,
                         a = e.translate;
-                    return (0, es.jsx)(jV, {
+                    return (0, es.jsx)(jQ, {
                         titleText: t.titleText,
                         bodyText: t.bodyText,
                         primaryButtonText: t.primaryActionText,
@@ -32381,17 +32467,17 @@ function() {
                         isModalOpen: r,
                         onCloseModal: o
                     })
-                }, SB);
+                }, SW);
 
-            function Pf(e, t) {
+            function Pb(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var Pd = function(e) {
+            var Pg = function(e) {
                     return !!e && "string" == typeof e.titleText && e.titleText.length > 0 && "string" == typeof e.bodyText && e.bodyText.length > 0 && "string" == typeof e.primaryActionText && e.primaryActionText.length > 0 && "string" == typeof e.secondaryActionText && e.secondaryActionText.length > 0
                 },
-                Pp = function(e, t, r) {
+                Pw = function(e, t, r) {
                     var n, o = function(e) {
                             if (Array.isArray(e)) return e
                         }(n = (0, em.useState)(!1)) || function(e) {
@@ -32415,43 +32501,42 @@ function() {
                             }
                         }(n) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return Pf(e, 2);
+                                if ("string" == typeof e) return Pb(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Pf(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Pb(e, 2)
                             }
                         }(n) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                         }(),
                         a = o[0],
                         i = o[1],
-                        l = Sm(e),
+                        l = Sb(e),
                         u = l.playabilityStatus,
                         c = l.playableUxTreatment,
                         s = l.isFetchingPlayability,
                         f = (0, em.useCallback)(function(t) {
-                            SL(e, t, xY, r)
+                            SG(e, t, x0, r)
                         }, [e, r]);
                     return {
                         doGameLaunchWithPlayableUxTreatment: (0, em.useCallback)(function() {
-                            var e, r, n;
                             if (s) {
-                                t(), null == (e = window.EventTracker) || e.fireEvent(Sn.PlayableUxTreatmentPlayabilityStatusStillLoading), f(So.gameLaunchFallbackUpsellName);
+                                t(), xV(Si.PlayableUxTreatmentPlayabilityStatusStillLoading), f(Sl.gameLaunchFallbackUpsellName);
                                 return
                             }
-                            if (u !== xY || !(null == c ? void 0 : c.treatment)) return void t();
+                            if (u !== x0 || !(null == c ? void 0 : c.treatment)) return void t();
                             if ("reconfirmLaunchModal" !== c.treatment) {
-                                t(), null == (r = window.EventTracker) || r.fireEvent(Sn.PlayableUxTreatmentUnknownTreatment), f(So.gameLaunchFallbackUpsellName);
+                                t(), xV(Si.PlayableUxTreatmentUnknownTreatment), f(Sl.gameLaunchFallbackUpsellName);
                                 return
                             }
-                            if (!Pd(c.data)) {
-                                t(), null == (n = window.EventTracker) || n.fireEvent(Sn.PlayableUxTreatmentMalformedData), f(So.gameLaunchFallbackUpsellName);
+                            if (!Pg(c.data)) {
+                                t(), xV(Si.PlayableUxTreatmentMalformedData), f(Sl.gameLaunchFallbackUpsellName);
                                 return
                             }
-                            i(!0), f(So.reconfirmLaunchModalUpsellName)
+                            i(!0), f(Sl.reconfirmLaunchModalUpsellName)
                         }, [s, u, c, t, f]),
                         playableUxTreatmentModal: (0, em.useMemo)(function() {
-                            return a && c && Pd(c.data) ? (0, es.jsx)(Ps, {
+                            return a && c && Pg(c.data) ? (0, es.jsx)(Pv, {
                                 treatmentData: c.data,
                                 isModalOpen: a,
                                 onConfirm: function() {
@@ -32465,7 +32550,7 @@ function() {
                     }
                 };
 
-            function Py(e, t, r, n, o, a, i) {
+            function PO(e, t, r, n, o, a, i) {
                 try {
                     var l = e[a](i),
                         u = l.value
@@ -32475,12 +32560,12 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var Pm = function(e) {
+            var Px = function(e) {
                 var t = e.universeId,
                     r = e.buttonClassName,
                     n = e.playabilityStatus,
                     o = e.pageContext;
-                return (0, es.jsx)(SF, {
+                return (0, es.jsx)(Sq, {
                     onButtonClick: function(e) {
                         var r;
                         return (r = function() {
@@ -32568,8 +32653,8 @@ function() {
                                     case 0:
                                         e.preventDefault(), e.stopPropagation(), r.label = 1;
                                     case 1:
-                                        return r.trys.push([1, 3, , 4]), SL(t, So.ageCheckUpsellName, n, o), [4, SR({
-                                            context: Sa,
+                                        return r.trys.push([1, 3, , 4]), SG(t, Sl.ageCheckUpsellName, n, o), [4, Sz({
+                                            context: Su,
                                             pageContext: o
                                         })];
                                     case 2:
@@ -32587,11 +32672,11 @@ function() {
                                 var a = r.apply(e, t);
 
                                 function i(e) {
-                                    Py(a, n, o, i, l, "next", e)
+                                    PO(a, n, o, i, l, "next", e)
                                 }
 
                                 function l(e) {
-                                    Py(a, n, o, i, l, "throw", e)
+                                    PO(a, n, o, i, l, "throw", e)
                                 }
                                 i(void 0)
                             })
@@ -32601,13 +32686,13 @@ function() {
                 })
             };
 
-            function Ph(e, t) {
+            function PS(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Pv(e, t, r, n, o, a, i) {
+            function Pj(e, t, r, n, o, a, i) {
                 try {
                     var l = e[a](i),
                         u = l.value
@@ -32618,7 +32703,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function Pb(e) {
+            function PP(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -32626,18 +32711,18 @@ function() {
                         var a = e.apply(t, r);
 
                         function i(e) {
-                            Pv(a, n, o, i, l, "next", e)
+                            Pj(a, n, o, i, l, "next", e)
                         }
 
                         function l(e) {
-                            Pv(a, n, o, i, l, "throw", e)
+                            Pj(a, n, o, i, l, "throw", e)
                         }
                         i(void 0)
                     })
                 }
             }
 
-            function Pg(e, t) {
+            function PE(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -32661,17 +32746,17 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return Ph(e, t);
+                        if ("string" == typeof e) return PS(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Ph(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return PS(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function Pw(e, t) {
+            function PC(e, t) {
                 var r, n, o, a = {
                         label: 0,
                         sent: function() {
@@ -32751,22 +32836,22 @@ function() {
                     }
                 }
             }
-            var PO = function(e) {
+            var PI = function(e) {
                     var t, r;
                     return {
                         launchData: null != (t = new URLSearchParams(window.location.search).get("launchData")) ? t : e,
                         eventId: null != (r = new URLSearchParams(window.location.search).get("eventId")) ? r : void 0
                     }
                 },
-                Px = function(e, t) {
+                PA = function(e, t) {
                     var r = !(arguments.length > 2) || void 0 === arguments[2] || arguments[2];
                     return t ? (0, es.jsxs)("div", {
                         className: "stacked-play-buttons-container",
                         children: [e, r && t]
                     }) : e
                 },
-                PS = {},
-                Pj = function(e) {
+                PT = {},
+                Pk = function(e) {
                     var t = e.universeId,
                         r = e.placeId,
                         n = e.rootPlaceId,
@@ -32774,12 +32859,12 @@ function() {
                         a = e.gameInstanceId,
                         i = e.status,
                         l = e.eventProperties,
-                        u = void 0 === l ? PS : l,
+                        u = void 0 === l ? PT : l,
                         c = e.appsFlyerReferralProperties,
-                        s = void 0 === c ? PS : c,
+                        s = void 0 === c ? PT : c,
                         f = e.iconClassName,
                         d = e.buttonWidth,
-                        p = void 0 === d ? Sb : d,
+                        p = void 0 === d ? Sw : d,
                         y = e.buttonClassName,
                         m = void 0 === y ? "btn-common-play-game-lg" : y,
                         h = e.disableLoadingState,
@@ -32789,50 +32874,50 @@ function() {
                         w = e.analyticsCallback,
                         O = void 0 === w ? void 0 : w,
                         x = e.pageContext,
-                        S = Pg((0, em.useState)(void 0), 2),
+                        S = PE((0, em.useState)(void 0), 2),
                         j = S[0],
                         P = S[1],
-                        E = Pg((0, em.useState)(void 0), 2),
+                        E = PE((0, em.useState)(void 0), 2),
                         C = E[0],
                         I = E[1],
-                        A = Pg((0, em.useState)(void 0), 2),
+                        A = PE((0, em.useState)(void 0), 2),
                         T = A[0],
                         k = A[1],
-                        N = Pg((0, em.useState)(void 0), 2),
+                        N = PE((0, em.useState)(void 0), 2),
                         _ = N[0],
                         D = N[1],
-                        R = Pg((0, em.useState)(void 0), 2),
+                        R = PE((0, em.useState)(void 0), 2),
                         M = R[0],
                         L = R[1],
-                        U = Pg((0, em.useState)(void 0), 2),
+                        U = PE((0, em.useState)(void 0), 2),
                         B = U[0],
                         F = U[1],
-                        H = Pg((0, em.useState)(void 0), 2),
+                        H = PE((0, em.useState)(void 0), 2),
                         z = H[0],
                         V = H[1],
-                        G = Pg((0, em.useState)(void 0), 2),
+                        G = PE((0, em.useState)(void 0), 2),
                         K = G[0],
                         W = G[1],
                         q = (0, ef.useQuery)({
                             queryKey: ["getIsVNGLandingRedirectEnabled"],
-                            queryFn: Sv.getIsVNGLandingRedirectEnabled,
+                            queryFn: Sg.getIsVNGLandingRedirectEnabled,
                             retry: !1
                         }).data;
                     (0, em.useEffect)(function() {
-                        Pb(function() {
-                            var e, r, n;
-                            return Pw(this, function(o) {
-                                switch (o.label) {
+                        PP(function() {
+                            var e, r;
+                            return PC(this, function(n) {
+                                switch (n.label) {
                                     case 0:
-                                        return o.trys.push([0, 2, , 3]), [4, Pb(function() {
+                                        return n.trys.push([0, 2, , 3]), [4, PP(function() {
                                             var e, r, n, o, a, i, l, u, c, s, f, d, p, y, m, h, v;
-                                            return Pw(this, function(b) {
+                                            return PC(this, function(b) {
                                                 switch (b.label) {
                                                     case 0:
                                                         if (e = {
                                                                 isUniverseEnabledForVoice: !1,
                                                                 isUniverseEnabledForAvatarVideo: !1
-                                                            }, !Sh.authenticatedUser.isAuthenticated) return [2, {
+                                                            }, void 0 === iH()) return [2, {
                                                             elegibleToSeeVoiceUpsell: !1,
                                                             universePlaceVoiceEnabledSettings: e,
                                                             showAgeVerificationOverlay: !1,
@@ -32842,7 +32927,7 @@ function() {
                                                             useCameraU13Design: !1,
                                                             useVoiceUpsellV2Design: !1
                                                         }];
-                                                        return [4, xq()];
+                                                        return [4, xQ()];
                                                     case 1:
                                                         var g;
                                                         if (n = (r = b.sent()).playButtonOverlayWebFlag, o = r.voiceOptInWebFlag, a = r.cameraOptInWebFlag, i = r.cameraOptInWebFlagU13, l = r.requireExplicitVoiceConsent, u = r.useCameraU13Design, c = r.useVoiceUpsellV2Design, !n && !(o || a)) return [2, {
@@ -32855,15 +32940,15 @@ function() {
                                                             useCameraU13Design: u,
                                                             useVoiceUpsellV2Design: c
                                                         }];
-                                                        return [4, (g = t, xG(function() {
+                                                        return [4, (g = t, xq(function() {
                                                             var e;
-                                                            return xK(this, function(t) {
+                                                            return x$(this, function(t) {
                                                                 switch (t.label) {
                                                                     case 0:
                                                                         return e = {
                                                                             withCredentials: !0,
                                                                             url: "".concat(iu().voiceApi, "/v1/settings/verify/show-age-verification-overlay/").concat(g)
-                                                                        }, [4, xH.get(e)];
+                                                                        }, [4, xG.get(e)];
                                                                     case 1:
                                                                         return [2, t.sent().data]
                                                                 }
@@ -32891,9 +32976,9 @@ function() {
                                             })
                                         })()];
                                     case 1:
-                                        return P(null != (e = (r = o.sent()).universePlaceVoiceEnabledSettings.isUniverseEnabledForVoice) && e), k(r.elegibleToSeeVoiceUpsell), I(r.showAgeVerificationOverlay), D(r.showVoiceOptInOverlay), L(r.showAvatarVideoOptInOverlay), F(r.requireExplicitVoiceConsent), V(r.useCameraU13Design), W(r.useVoiceUpsellV2Design), [3, 3];
+                                        return P(null != (e = (r = n.sent()).universePlaceVoiceEnabledSettings.isUniverseEnabledForVoice) && e), k(r.elegibleToSeeVoiceUpsell), I(r.showAgeVerificationOverlay), D(r.showVoiceOptInOverlay), L(r.showAvatarVideoOptInOverlay), F(r.requireExplicitVoiceConsent), V(r.useCameraU13Design), W(r.useVoiceUpsellV2Design), [3, 3];
                                     case 2:
-                                        return o.sent(), null == (n = window.EventTracker) || n.fireEvent(Sn.PlayButtonShowIdentificationError), k(!1), P(!1), I(!1), D(!1), L(!1), F(!0), V(!1), W(!1), [3, 3];
+                                        return n.sent(), xV(Si.PlayButtonShowIdentificationError), k(!1), P(!1), I(!1), D(!1), L(!1), F(!0), V(!1), W(!1), [3, 3];
                                     case 3:
                                         return [2]
                                 }
@@ -32901,34 +32986,34 @@ function() {
                         })()
                     }, []);
                     var $ = (0, em.useCallback)(function() {
-                            SM(r, t);
-                            var e = PO(null != u.launchData ? String(u.launchData) : void 0);
-                            S_(r, n, o, a, u, e, s)
+                            SV(r, t);
+                            var e = PI(null != u.launchData ? String(u.launchData) : void 0);
+                            SF(r, n, o, a, u, e, s)
                         }, [r, t, u, s, n, o, a]),
-                        X = Pp(t, $, x),
+                        X = Pw(t, $, x),
                         Q = X.doGameLaunchWithPlayableUxTreatment,
                         Y = X.playableUxTreatmentModal;
                     return void 0 !== C || void 0 !== h && h ? (0, es.jsxs)(eh().Fragment, {
                         children: [(0, es.jsxs)(o7, {
                             "data-testid": "play-button",
                             variant: "Emphasis",
-                            style: Sw,
-                            className: lM()(Sg(p), m),
+                            style: Sx,
+                            className: lM()(SO(p), m),
                             onClick: function(e) {
-                                return Pb(function() {
+                                return PP(function() {
                                     var t;
-                                    return Pw(this, function(n) {
+                                    return PC(this, function(n) {
                                         var o, a, l, u;
                                         switch (n.label) {
                                             case 0:
-                                                if (e.preventDefault(), e.stopPropagation(), i !== xY) return [3, 7];
+                                                if (e.preventDefault(), e.stopPropagation(), i !== x0) return [3, 7];
                                                 if (T && j && is().getAllValuesForLayer("SocialVoice.VoiceUpsell").then(function() {
                                                         is().logLayerExposure("SocialVoice.VoiceUpsell")
                                                     }).catch(function() {
                                                         console.error("error logging exposure event in play-join")
                                                     }), !C) return [3, 2];
-                                                return [4, SP(function() {
-                                                    return SC(this, function(e) {
+                                                return [4, Sk(function() {
+                                                    return SD(this, function(e) {
                                                         try {
                                                             return [2, window.Roblox.IdentityVerificationService.startVerificationFlow()]
                                                         } catch (e) {
@@ -32937,11 +33022,11 @@ function() {
                                                     })
                                                 })()];
                                             case 1:
-                                                return (t = Pg.apply(void 0, [n.sent(), 2]))[0], t[1] && I(!1), [3, 6];
+                                                return (t = PE.apply(void 0, [n.sent(), 2]))[0], t[1] && I(!1), [3, 6];
                                             case 2:
                                                 if (!_) return [3, 4];
-                                                return [4, (o = null == B || B, a = null != K && K, SP(function() {
-                                                    return SC(this, function(e) {
+                                                return [4, (o = null == B || B, a = null != K && K, Sk(function() {
+                                                    return SD(this, function(e) {
                                                         try {
                                                             return [2, window.Roblox.IdentityVerificationService.showVoiceOptInOverlay(o, a)]
                                                         } catch (e) {
@@ -32953,8 +33038,8 @@ function() {
                                                 return n.sent() && D(!1), [3, 6];
                                             case 4:
                                                 if (!M) return [3, 6];
-                                                return [4, (l = null == B || B, u = null == z || z, SP(function() {
-                                                    return SC(this, function(e) {
+                                                return [4, (l = null == B || B, u = null == z || z, Sk(function() {
+                                                    return SD(this, function(e) {
                                                         try {
                                                             return [2, window.Roblox.IdentityVerificationService.showAvatarVideoOptInOverlay(l, u)]
                                                         } catch (e) {
@@ -32967,7 +33052,7 @@ function() {
                                             case 6:
                                                 return Q(), [3, 8];
                                             case 7:
-                                                i === xZ && (q ? Sv.navigateToLoginWithRedirect() : SD(r, s)), n.label = 8;
+                                                i === x1 && (q ? Sg.navigateToLoginWithRedirect() : SH(r, s)), n.label = 8;
                                             case 8:
                                                 return O && O(), [2]
                                         }
@@ -32983,15 +33068,15 @@ function() {
                         }), (0, es.jsx)("div", {
                             id: "id-verification-container"
                         }), Y]
-                    }) : (0, es.jsx)(Sz, {
+                    }) : (0, es.jsx)(SX, {
                         buttonClassName: m,
                         buttonWidth: p
                     })
                 },
-                PP = function(e) {
+                PN = function(e) {
                     return (0, es.jsx)(ef.QueryClientProvider, {
                         client: ey.queryClient,
-                        children: (0, es.jsx)(Pj, function(e) {
+                        children: (0, es.jsx)(Pk, function(e) {
                             for (var t = 1; t < arguments.length; t++) {
                                 var r = null != arguments[t] ? arguments[t] : {},
                                     n = Object.keys(r);
@@ -33011,155 +33096,154 @@ function() {
                         }({}, e))
                     })
                 },
-                PE = function(e) {
-                    var t, r = e.placeId,
-                        n = e.rootPlaceId,
-                        o = e.universeId,
-                        a = e.privateServerLinkCode,
-                        i = e.gameInstanceId,
-                        l = e.refetchPlayabilityStatus,
-                        u = e.playabilityStatus,
-                        c = e.demoModeAvailable,
-                        s = e.hideButtonText,
-                        f = e.eventProperties,
-                        d = void 0 === f ? PS : f,
-                        p = e.appsFlyerReferralProperties,
-                        y = void 0 === p ? PS : p,
-                        m = e.disableLoadingState,
-                        h = e.buttonClassName,
-                        v = e.redirectPurchaseUrl,
-                        b = e.showDefaultPurchaseText,
-                        g = e.shouldShowVpcPlayButtonUpsells,
-                        w = e.playabilityStatusCtaOverrides,
-                        O = e.pageContext,
-                        x = e.playOnWebEnabled,
-                        S = (null != (t = window.EventTracker) ? t : {}).fireEvent,
-                        j = j8(o, r, u === xJ || u === x3),
-                        P = j.isLoading,
-                        E = j.productInfo,
-                        C = j.productDetails,
-                        I = c ? (0, es.jsx)(Pl, {
-                            universeId: o,
-                            placeId: r,
-                            rootPlaceId: n,
-                            privateServerLinkCode: a,
-                            gameInstanceId: i,
-                            eventProperties: d,
-                            appsFlyerReferralProperties: y
-                        }) : null,
-                        A = x ? (0, es.jsx)(Pu, {
-                            placeId: r
-                        }) : null;
-                    switch (u) {
-                        case void 0:
-                            if (!m) return (0, es.jsx)(Sz, {
-                                buttonClassName: h
-                            });
-                            return (0, es.jsx)(PP, {
-                                universeId: o,
-                                placeId: r,
-                                rootPlaceId: n,
-                                privateServerLinkCode: a,
-                                gameInstanceId: i,
-                                status: xY,
-                                eventProperties: d,
-                                appsFlyerReferralProperties: y,
-                                disableLoadingState: m,
-                                buttonClassName: h,
-                                pageContext: O
-                            });
-                        case xZ:
-                        case xY:
-                            var T = null == w ? void 0 : w[u];
-                            if (void 0 !== T) return x ? Px(T, A) : T;
-                            var k = (0, es.jsx)(PP, {
-                                universeId: o,
-                                placeId: r,
-                                rootPlaceId: n,
-                                privateServerLinkCode: a,
-                                gameInstanceId: i,
-                                status: u,
-                                eventProperties: d,
-                                appsFlyerReferralProperties: y,
-                                disableLoadingState: m,
-                                buttonClassName: h,
-                                pageContext: O
-                            });
-                            return x ? Px(k, A) : k;
-                        case "ContextualPlayabilityUnverifiedSeventeenPlusUser":
-                        case "ContextualPlayabilityAgeCheckRequired":
-                            return null == S || S(Sn.ActionNeeded), (0, es.jsx)(Pm, {
-                                universeId: o,
-                                buttonClassName: h,
-                                playabilityStatus: u,
-                                pageContext: O
-                            });
-                        case xJ:
-                        case x3:
-                            var N = u === x3 ? !!(null == C ? void 0 : C.fiatPurchaseData) : !!(null == E ? void 0 : E.isForSale);
-                            if (!P && !N) return null == S || S(Sn.Unplayable), Px((0, es.jsx)(Pc, {
-                                hideButtonText: s,
-                                buttonClassName: h
-                            }), I);
-                            return Px((0, es.jsx)(Pa, {
-                                refetchPlayabilityStatus: l,
-                                universeId: o,
-                                placeId: r,
-                                hideButtonText: s,
-                                buttonClassName: h,
-                                redirectPurchaseUrl: v,
-                                playabilityStatus: u,
-                                showDefaultPurchaseText: b,
-                                pageContext: O
-                            }), I, !P);
-                        case x8:
-                        case x1:
-                            return null == S || S(Sn.Unplayable), Px((0, es.jsx)(Pc, {
-                                hideButtonText: s,
-                                buttonClassName: h
-                            }), I);
-                        case x2:
-                            if (g) return null == S || S(Sn.ActionNeeded), (0, es.jsx)(j1, {
-                                universeId: o,
-                                buttonClassName: h,
-                                placeId: r,
-                                rootPlaceId: n,
-                                privateServerLinkCode: a,
-                                gameInstanceId: i,
-                                eventProperties: d,
-                                appsFlyerReferralProperties: y,
-                                pageContext: O
-                            });
-                            return null == S || S(Sn.Unplayable), (0, es.jsx)(Pc, {
-                                hideButtonText: s,
-                                buttonClassName: h
-                            });
-                        case x6:
-                            if (g) return null == S || S(Sn.ActionNeeded), (0, es.jsx)(SH, {
-                                universeId: o,
-                                buttonClassName: h,
-                                pageContext: O
-                            });
-                            return null == S || S(Sn.Unplayable), (0, es.jsx)(Pc, {
-                                hideButtonText: s,
-                                buttonClassName: h
-                            });
-                        default:
-                            return null == S || S(Sn.Unplayable), (0, es.jsx)(Pc, {
-                                hideButtonText: s,
-                                buttonClassName: h
-                            })
-                    }
-                },
-                PC = function(e) {
+                P_ = function(e) {
                     var t = e.placeId,
                         r = e.rootPlaceId,
                         n = e.universeId,
                         o = e.privateServerLinkCode,
-                        a = Sm(n),
+                        a = e.gameInstanceId,
+                        i = e.refetchPlayabilityStatus,
+                        l = e.playabilityStatus,
+                        u = e.demoModeAvailable,
+                        c = e.hideButtonText,
+                        s = e.eventProperties,
+                        f = void 0 === s ? PT : s,
+                        d = e.appsFlyerReferralProperties,
+                        p = void 0 === d ? PT : d,
+                        y = e.disableLoadingState,
+                        m = e.buttonClassName,
+                        h = e.redirectPurchaseUrl,
+                        v = e.showDefaultPurchaseText,
+                        b = e.shouldShowVpcPlayButtonUpsells,
+                        g = e.playabilityStatusCtaOverrides,
+                        w = e.pageContext,
+                        O = e.playOnWebEnabled,
+                        x = Pr(n, t, l === x2 || l === x5),
+                        S = x.isLoading,
+                        j = x.productInfo,
+                        P = x.productDetails,
+                        E = u ? (0, es.jsx)(Py, {
+                            universeId: n,
+                            placeId: t,
+                            rootPlaceId: r,
+                            privateServerLinkCode: o,
+                            gameInstanceId: a,
+                            eventProperties: f,
+                            appsFlyerReferralProperties: p
+                        }) : null,
+                        C = O ? (0, es.jsx)(Pm, {
+                            placeId: t
+                        }) : null;
+                    switch (l) {
+                        case void 0:
+                            if (!y) return (0, es.jsx)(SX, {
+                                buttonClassName: m
+                            });
+                            return (0, es.jsx)(PN, {
+                                universeId: n,
+                                placeId: t,
+                                rootPlaceId: r,
+                                privateServerLinkCode: o,
+                                gameInstanceId: a,
+                                status: x0,
+                                eventProperties: f,
+                                appsFlyerReferralProperties: p,
+                                disableLoadingState: y,
+                                buttonClassName: m,
+                                pageContext: w
+                            });
+                        case x1:
+                        case x0:
+                            var I = null == g ? void 0 : g[l];
+                            if (void 0 !== I) return O ? PA(I, C) : I;
+                            var A = (0, es.jsx)(PN, {
+                                universeId: n,
+                                placeId: t,
+                                rootPlaceId: r,
+                                privateServerLinkCode: o,
+                                gameInstanceId: a,
+                                status: l,
+                                eventProperties: f,
+                                appsFlyerReferralProperties: p,
+                                disableLoadingState: y,
+                                buttonClassName: m,
+                                pageContext: w
+                            });
+                            return O ? PA(A, C) : A;
+                        case "ContextualPlayabilityUnverifiedSeventeenPlusUser":
+                        case "ContextualPlayabilityAgeCheckRequired":
+                            return xV(Si.ActionNeeded), (0, es.jsx)(Px, {
+                                universeId: n,
+                                buttonClassName: m,
+                                playabilityStatus: l,
+                                pageContext: w
+                            });
+                        case x2:
+                        case x5:
+                            var T = l === x5 ? !!(null == P ? void 0 : P.fiatPurchaseData) : !!(null == j ? void 0 : j.isForSale);
+                            if (!S && !T) return xV(Si.Unplayable), PA((0, es.jsx)(Ph, {
+                                hideButtonText: c,
+                                buttonClassName: m
+                            }), E);
+                            return PA((0, es.jsx)(Pd, {
+                                refetchPlayabilityStatus: i,
+                                universeId: n,
+                                placeId: t,
+                                hideButtonText: c,
+                                buttonClassName: m,
+                                redirectPurchaseUrl: h,
+                                playabilityStatus: l,
+                                showDefaultPurchaseText: v,
+                                pageContext: w
+                            }), E, !S);
+                        case x7:
+                        case x6:
+                            return xV(Si.Unplayable), PA((0, es.jsx)(Ph, {
+                                hideButtonText: c,
+                                buttonClassName: m
+                            }), E);
+                        case x8:
+                            if (b) return xV(Si.ActionNeeded), (0, es.jsx)(j7, {
+                                universeId: n,
+                                buttonClassName: m,
+                                placeId: t,
+                                rootPlaceId: r,
+                                privateServerLinkCode: o,
+                                gameInstanceId: a,
+                                eventProperties: f,
+                                appsFlyerReferralProperties: p,
+                                pageContext: w
+                            });
+                            return xV(Si.Unplayable), (0, es.jsx)(Ph, {
+                                hideButtonText: c,
+                                buttonClassName: m
+                            });
+                        case x4:
+                            if (b) return xV(Si.ActionNeeded), (0, es.jsx)(S$, {
+                                universeId: n,
+                                buttonClassName: m,
+                                pageContext: w
+                            });
+                            return xV(Si.Unplayable), (0, es.jsx)(Ph, {
+                                hideButtonText: c,
+                                buttonClassName: m
+                            });
+                        default:
+                            return xV(Si.Unplayable), (0, es.jsx)(Ph, {
+                                hideButtonText: c,
+                                buttonClassName: m
+                            })
+                    }
+                },
+                PD = function(e) {
+                    var t = e.placeId,
+                        r = e.rootPlaceId,
+                        n = e.universeId,
+                        o = e.privateServerLinkCode,
+                        a = Sb(n),
                         i = a.playabilityStatus,
                         l = a.refetchPlayabilityData;
-                    return (0, es.jsx)(PE, {
+                    return (0, es.jsx)(P_, {
                         placeId: t,
                         rootPlaceId: r,
                         universeId: n,
@@ -33169,15 +33253,15 @@ function() {
                         pageContext: "UNKNOWN"
                     })
                 },
-                PI = JSON.parse('{"P":["Feature.Chat","Feature.UniversalFeatureRestrictions","Feature.AppealsPortal","Feature.InExperienceIntervention","Feature.NotApproved","Feature.Friends","AccountIdentity.AgeCheck","CommonUI.Controls","CommonUI.Messages","Feature.RobloxSubscription"]}').P;
+                PR = JSON.parse('{"P":["Feature.Chat","Feature.UniversalFeatureRestrictions","Feature.AppealsPortal","Feature.InExperienceIntervention","Feature.NotApproved","Feature.Friends","AccountIdentity.AgeCheck","CommonUI.Controls","CommonUI.Messages","Feature.RobloxSubscription"]}').P;
             ep()(function() {
                 var e = document.getElementById("chat-container");
                 e && (0, ey.renderWithErrorBoundary)((0, es.jsx)(ef.QueryClientProvider, {
                     client: ey.queryClient,
                     children: (0, es.jsx)(tZ, {
-                        namespaces: PI,
+                        namespaces: PR,
                         children: (0, es.jsx)(wJ.Provider, {
-                            value: PC,
+                            value: PD,
                             children: (0, es.jsx)(xF, {})
                         })
                     })
@@ -33185,4 +33269,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("ReactChat");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/reactChat-7417ffcc9b10c7e6.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/reactChat-af5848a4b819bb56.js.map
