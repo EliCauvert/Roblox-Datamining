@@ -1,24 +1,24 @@
-﻿local unknownModule = require(script.Parent["Symbol.roblox"])
-local var1 = newproxy(true)
-local t = {}
+﻿local SymbolRobloxModule = require(script.Parent["Symbol.roblox"])
+local Proxy = newproxy(true)
+local NamedResults = {}
 
-local function _(p1)
-	-- upvalues: t (ref), unknownModule (ref)
-	t[p1] = unknownModule.named("Roact" .. p0)
+local function _(Key) --[[ Line: 32 | Named "addType" ]]
+	-- upvalues: NamedResults (copy), SymbolRobloxModule (copy)
+	NamedResults[Key] = SymbolRobloxModule.named("Roact" .. Key)
 end
 
-t.HostChangeEvent = unknownModule.named("RoactHostChangeEvent")
-t.HostEvent = unknownModule.named("RoactHostEvent")
+NamedResults.HostChangeEvent = SymbolRobloxModule.named("RoactHostChangeEvent")
+NamedResults.HostEvent = SymbolRobloxModule.named("RoactHostEvent")
 
-function t.of(p1)
-	-- upvalues: var1 (ref)
-	return if typeof(p1) == "table" then p1[var1] else nil
+function NamedResults.of(p1) --[[ Line: 39 ]]
+	-- upvalues: Proxy (copy)
+	return if typeof(p1) == "table" then p1[Proxy] else nil
 end
 
-getmetatable(var1).__index = t
+getmetatable(Proxy).__index = NamedResults
 
-getmetatable(var1).__tostring = function()
+getmetatable(Proxy).__tostring = function(): string --[[ Line: 49 ]]
 	return "RoactType"
 end
 
-return var1
+return Proxy

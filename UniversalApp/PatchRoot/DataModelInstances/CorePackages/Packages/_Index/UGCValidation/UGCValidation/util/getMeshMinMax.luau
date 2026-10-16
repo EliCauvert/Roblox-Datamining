@@ -1,51 +1,50 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local pcallDeferredModule = require(parent.util.pcallDeferred)
-local calculateMinMaxModule = require(parent.util.calculateMinMax)
+local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local PcallDeferredModule = require(Parent.util.pcallDeferred)
+local CalculateMinMaxModule = require(Parent.util.calculateMinMax)
 
-local function getVerts(p1, p2, p3)
-	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref)
-	local var1, var2 = pcallDeferredModule(function()
-		-- upvalues: UGCValidationService (copy), p1 (ref)
+local function getVerts(p1, IsServer, p2) --[[ Line: 14 ]]
+	-- upvalues: PcallDeferredModule (copy), UGCValidationService (copy)
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 19 ]]
+		-- upvalues: UGCValidationService (upval), p1 (copy)
 		return UGCValidationService:GetEditableMeshVerts(p1.editableMesh)
-	end, p3)
+	end, p2)
 	
-	if var1 then
-		return true, nil, var2
+	if PcallDeferredModuleResult then
+		return true, nil, PcallDeferredModuleResult2
 	end
-	local text = "Failed to read mesh: " .. p0.fullName
+	local Text = "Failed to read mesh: " .. p1.fullName
 	
-	if p2 then
-		error(text)
+	if IsServer then
+		error(Text)
 	end
-	return false, { text }
+	return false, { Text }
 end
 
-local function getBoundsInfo(p1, p2)
-	-- upvalues: calculateMinMaxModule (ref)
-	local var1 = nil
-	local var2 = nil
+local function getBoundsInfo(List, Scale) --[[ Line: 36 ]]
+	-- upvalues: CalculateMinMaxModule (copy)
+	local v1 = nil
+	local v2 = nil
 	
-	for i, v in pairs(p1) do
-		local var3 = if p2 then v * p2 else v
-		local var4, var5 = calculateMinMaxModule(var1, var2, var3, var3)
-		var1 = var4
-		var2 = var5
+	for _, value in pairs(List) do
+		local ScaledScale = if Scale then value * Scale else value
+		v1, v11 = CalculateMinMaxModule(v1, v2, ScaledScale, ScaledScale)
 	end
-	return var1, var2
+	return v1, v2
 end
 
-return function(a, b)
-	-- upvalues: getVerts (ref), getBoundsInfo (ref)
-	local var6, var7, var8 = getVerts(a, b.isServer, b)
+return function(p1, p2) --[[ Line: 47 | Named "getMeshMinMax" ]]
+	-- upvalues: getVerts (copy), getBoundsInfo (copy)
+	local Verts, Verts2, Verts3 = getVerts(p1, p2.isServer, p2)
 	
-	if not var6 then
-		return var6, var7
-	elseif var8 and #var8 ~= 0 then
-		local var9, var10 = getBoundsInfo(var8, a.scale)
+	if not Verts then
+		return Verts, Verts2
+	elseif Verts3 and #Verts3 ~= 0 then
+		local BoundsInfo, BoundsInfo2 = getBoundsInfo(Verts3, p1.scale)
 		
-		return true, nil, var9, var10
+		return true, nil, BoundsInfo, BoundsInfo2
+	else
+		return false, { "Mesh: " .. p1.fullName .. " contains no verts" }
 	end
-	return false, { "Mesh: " .. a.fullName .. " contains no verts" }
 end

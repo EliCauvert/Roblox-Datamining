@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.GraphQL)
 
 return {
-	getResponseKeyFromInfo = function(a)
-		return if a.fieldNodes[1] and a.fieldNodes[1].alias ~= nil then a.fieldNodes[1].alias.value else a.fieldName
+	getResponseKeyFromInfo = function(p1) --[[ Line: 14 ]]
+		return if p1.fieldNodes[1] and p1.fieldNodes[1].alias ~= nil then p1.fieldNodes[1].alias.value else p1.fieldName
 	end
 }

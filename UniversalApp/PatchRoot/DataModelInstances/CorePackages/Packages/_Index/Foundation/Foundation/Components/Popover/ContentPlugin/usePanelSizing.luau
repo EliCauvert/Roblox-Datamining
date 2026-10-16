@@ -1,101 +1,99 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local constantsModule = require(foundation.Constants)
-local _ = require(foundation.Providers.StudioPanels.Types)
-local _ = require(foundation.Enums.PopoverAlign)
-local _ = require(foundation.Enums.PopoverSide)
-local reactModule = require(parent.React)
-local positioningModule = require(script.Parent.Parent.positioning)
-local SHADOW_SIZE = constantsModule.SHADOW_SIZE
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Providers.StudioPanels.Types)
+local _ = require(Foundation.Enums.PopoverAlign)
+local _ = require(Foundation.Enums.PopoverSide)
+local ReactModule = require(Foundation.Parent.React)
+local PositioningModule = require(script.Parent.Parent.positioning)
+local SHADOWSIZE = require(Foundation.Constants).SHADOW_SIZE
 
-local function _(value, p1, p2)
-	-- upvalues: reactModule (ref)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: value (ref), p1 (ref), p2 (ref)
-		local t = {}
+local function _(Frame: Frame, p1, p2) --[[ Line: 28 | Named "useConnectSignals" ]]
+	-- upvalues: ReactModule (copy)
+	ReactModule.useLayoutEffect(function() --[[ Line: 34 ]]
+		-- upvalues: Frame (copy), p1 (copy), p2 (copy)
+		local Connections = {}
 		
-		if value ~= nil then
-			for i, v in p1 do
-				t[v] = value:GetPropertyChangedSignal(v):Connect(if type(p2) == "table" then function()
-					-- upvalues: p2 (copy)
+		if Frame ~= nil then
+			for _, PropertyName in p1 do
+				Connections[PropertyName] = Frame:GetPropertyChangedSignal(PropertyName):Connect(if type(p2) == "table" then function() --[[ Line: 40 ]]
+					-- upvalues: p2 (upval)
 					p2.current()
 				end else p2)
 			end
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 47 ]]
+			-- upvalues: Connections (copy)
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
 		end
-	end, { value, p2 })
+	end, { Frame, p2 })
 end
 
-return function(p3, p4, p5, p6, p7)
-	-- upvalues: reactModule (ref), positioningModule (ref), SHADOW_SIZE (ref)
-	local var1, var2 = reactModule.useBinding(UDim2.new())
-	local var3, var4 = reactModule.useBinding(UDim2.new())
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(function() end)
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p5 (ref), p3 (ref), p4 (ref), p6 (ref), positioningModule (copy), SHADOW_SIZE (copy), var4 (ref), var2 (ref), p7 (ref), var5 (ref)
-		if not p5 then return end
-		local absoluteSize = p5.AbsoluteSize
-		local var8 = positioningModule.calculatePopoverBounds(if type(p3) == "table" then p3.position else p3, if type(p3) == "table" then p3.offset else 0, if type(p4) == "table" then p4.offset else 0, p6 or 0, absoluteSize) + Vector2.new(SHADOW_SIZE * 2, SHADOW_SIZE * 2)
-		var4(UDim2.fromOffset(absoluteSize.X, absoluteSize.Y))
-		var2(UDim2.fromOffset(var8.X, var8.Y))
-		local _ = p5.AbsolutePosition
+return function(p3, p4, Frame: Frame, p5, p6) --[[ Line: 55 | Named "usePanelSizing" ]]
+	-- upvalues: ReactModule (copy), PositioningModule (copy), SHADOWSIZE (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.new())
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UDim2.new())
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(function() --[[ Line: 66 ]] end)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 68 ]]
+		-- upvalues: Frame (copy), p3 (copy), p4 (copy), p5 (copy), PositioningModule (upval), SHADOWSIZE (upval), UseBindingResult2_1 (copy), UseBindingResult2 (copy), p6 (copy), UseRefResult (copy)
+		if not Frame then return end
+		local AbsoluteSize = Frame.AbsoluteSize
+		local NewPopoverBounds = PositioningModule.calculatePopoverBounds(if type(p3) == "table" then p3.position else p3, if type(p3) == "table" then p3.offset else 0, if type(p4) == "table" then p4.offset else 0, p5 or 0, AbsoluteSize) + Vector2.new(SHADOWSIZE * 2, SHADOWSIZE * 2)
+		UseBindingResult2_1(UDim2.fromOffset(AbsoluteSize.X, AbsoluteSize.Y))
+		UseBindingResult2(UDim2.fromOffset(NewPopoverBounds.X, NewPopoverBounds.Y))
+		local _ = Frame.AbsolutePosition
 		
-		if p7 then
-			if var5.current then
-				task.cancel(var5.current)
+		if p6 then
+			if UseRefResult.current then
+				task.cancel(UseRefResult.current)
 			end
-			var5.current = task.spawn(function()
-				-- upvalues: p7 (copy), var8 (ref)
-				p7.setSizeAsync(var8)
+			UseRefResult.current = task.spawn(function() --[[ Line: 100 ]]
+				-- upvalues: p6 (upval), NewPopoverBounds (copy)
+				p6.setSizeAsync(NewPopoverBounds)
 			end)
 		end
 	end, {
-		p5,
+		Frame,
 		p3,
 		p4,
-		p6,
-		p7
+		p5,
+		p6
 	})
-	var6.current = var7
-	local list = { "AbsoluteSize" }
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p5 (ref), list (ref), var6 (ref)
-		local t = {}
+	UseRefResult1.current = UseResult
+	local PropertyNames = { "AbsoluteSize" }
+	ReactModule.useLayoutEffect(function() --[[ Line: 34 ]]
+		-- upvalues: Frame (copy), PropertyNames (copy), UseRefResult1 (copy)
+		local Connections = {}
 		
-		if p5 ~= nil then
-			for i, v in list do
-				t[v] = p5:GetPropertyChangedSignal(v):Connect(if type(var6) == "table" then function()
-					-- upvalues: var6 (copy)
-					var6.current()
-				end else var6)
+		if Frame ~= nil then
+			for _, PropertyName in PropertyNames do
+				Connections[PropertyName] = Frame:GetPropertyChangedSignal(PropertyName):Connect(if type(UseRefResult1) == "table" then function() --[[ Line: 40 ]]
+					-- upvalues: UseRefResult1 (upval)
+					UseRefResult1.current()
+				end else UseRefResult1)
 			end
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 47 ]]
+			-- upvalues: Connections (copy)
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
 		end
-	end, { p5, var6 })
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var7 (ref)
-		var7()
-	end, { var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref)
-		return function()
-			-- upvalues: var5 (copy)
-			if var5.current then
-				task.cancel(var5.current)
+	end, { Frame, UseRefResult1 })
+	ReactModule.useLayoutEffect(function() --[[ Line: 109 ]]
+		-- upvalues: UseResult (copy)
+		UseResult()
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 113 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 114 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				task.cancel(UseRefResult.current)
 			end
 		end
 	end, {})
 	
-	return var1, var3
+	return UseBindingResult, UseBindingResult1
 end

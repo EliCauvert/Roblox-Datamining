@@ -1,185 +1,148 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
 local t = {}
-local t_1 = {}
-t_1.__index = t_1
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 259 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 265 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.kind ~= nil then
 		if self.kind.type == "comparison" then
-			local var2 = self.kind.value:encode()
-			local var3, var4 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-			var3, var16 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
-			buff = var3
-			var1 = var4
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "is_null" then
-			local var5 = self.kind.value:encode()
-			local var6, var7 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-			var6, var19 = protoModule.writeBuffer(var6, var7, var5, buffer.len(var5))
-			buff = var6
-			var1 = var7
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "is_not_null" then
-			local var8 = self.kind.value:encode()
-			local var9, var10 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
-			var9, var22 = protoModule.writeBuffer(var9, var10, var8, buffer.len(var8))
-			buff = var9
-			var1 = var10
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "and_condition" then
-			local var11 = self.kind.value:encode()
-			local var12, var13 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.lengthDelimited)
-			var12, var25 = protoModule.writeBuffer(var12, var13, var11, buffer.len(var11))
-			buff = var12
-			var1 = var13
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "or_condition" then
-			local var14 = self.kind.value:encode()
-			local var15, var16 = protoModule.writeTag(buff, var1, 5, protoModule.wireTypes.lengthDelimited)
-			var15, var28 = protoModule.writeBuffer(var15, var16, var14, buffer.len(var14))
-			buff = var15
-			var1 = var16
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "is_empty" then
-			local var17 = self.kind.value:encode()
-			local var18, var19 = protoModule.writeTag(buff, var1, 6, protoModule.wireTypes.lengthDelimited)
-			var18, var31 = protoModule.writeBuffer(var18, var19, var17, buffer.len(var17))
-			buff = var18
-			var1 = var19
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "is_not_empty" then
-			local var20 = self.kind.value:encode()
-			local var21, var22 = protoModule.writeTag(buff, var1, 7, protoModule.wireTypes.lengthDelimited)
-			var21, var34 = protoModule.writeBuffer(var21, var22, var20, buffer.len(var20))
-			buff = var21
-			var1 = var22
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "contains" then
-			local var23 = self.kind.value:encode()
-			local var24, var25 = protoModule.writeTag(buff, var1, 8, protoModule.wireTypes.lengthDelimited)
-			var24, var37 = protoModule.writeBuffer(var24, var25, var23, buffer.len(var23))
-			buff = var24
-			var1 = var25
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 310 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), t (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v39 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var8, var9 = protoModule.readVarInt(p1, var2)
-			local _ = var8
-			var2 = var9
-			continue
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 1 then
-				local _ = nil
-				local var10, var11 = protoModule.readBuffer(p1, var2)
-				var2 = var11
-				var1.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v39 = ProtoModule.readVarInt(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v39 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.kind = {
 					type = "comparison",
-					value = t.ComparisonCondition.decode(var10)
+					value = t.ComparisonCondition.decode(Buffer1)
 				}
-			elseif var7 == 2 then
-				local _ = nil
-				local var12, var13 = protoModule.readBuffer(p1, var2)
-				var2 = var13
-				var1.kind = {
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v39 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.kind = {
 					type = "is_null",
-					value = t.IsNullCondition.decode(var12)
+					value = t.IsNullCondition.decode(Buffer2)
 				}
-			elseif var7 == 3 then
-				local _ = nil
-				local var14, var15 = protoModule.readBuffer(p1, var2)
-				var2 = var15
-				var1.kind = {
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v39 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.kind = {
 					type = "is_not_null",
-					value = t.IsNotNullCondition.decode(var14)
+					value = t.IsNotNullCondition.decode(Buffer3)
 				}
-			elseif var7 == 4 then
-				local _ = nil
-				local var16, var17 = protoModule.readBuffer(p1, var2)
-				var2 = var17
-				var1.kind = {
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v39 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.kind = {
 					type = "and_condition",
-					value = t.AndCondition.decode(var16)
+					value = t.AndCondition.decode(Buffer4)
 				}
-			elseif var7 == 5 then
-				local _ = nil
-				local var18, var19 = protoModule.readBuffer(p1, var2)
-				var2 = var19
-				var1.kind = {
+			elseif Tag == 5 then
+				local Buffer5
+				Buffer5, v39 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.kind = {
 					type = "or_condition",
-					value = t.OrCondition.decode(var18)
+					value = t.OrCondition.decode(Buffer5)
 				}
-			elseif var7 == 6 then
-				local _ = nil
-				local var20, var21 = protoModule.readBuffer(p1, var2)
-				var2 = var21
-				var1.kind = {
+			elseif Tag == 6 then
+				local Buffer6
+				Buffer6, v39 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.kind = {
 					type = "is_empty",
-					value = t.IsEmptyCondition.decode(var20)
+					value = t.IsEmptyCondition.decode(Buffer6)
 				}
-			elseif var7 == 7 then
-				local _ = nil
-				local var22, var23 = protoModule.readBuffer(p1, var2)
-				var2 = var23
-				var1.kind = {
+			elseif Tag == 7 then
+				local Buffer7
+				Buffer7, v39 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.kind = {
 					type = "is_not_empty",
-					value = t.IsNotEmptyCondition.decode(var22)
+					value = t.IsNotEmptyCondition.decode(Buffer7)
 				}
-			elseif var7 == 8 then
-				local _ = nil
-				local var24, var25 = protoModule.readBuffer(p1, var2)
-				var2 = var25
-				var1.kind = {
+			elseif Tag == 8 then
+				local Buffer8
+				Buffer8, v39 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.kind = {
 					type = "contains",
-					value = t.ContainsCondition.decode(var24)
+					value = t.ContainsCondition.decode(Buffer8)
 				}
 			else
-				local _ = nil
-				local var26, var27 = protoModule.readVarInt(p1, var2)
-				var2 = var27 + var26
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var28, var29 = protoModule.readFixed32(p1, var2)
-			local _ = var28
-			var2 = var29
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var30, var31 = protoModule.readFixed64(p1, var2)
-			local _ = var30
-			var2 = var31
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v39 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v39 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var41)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 388 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -187,508 +150,467 @@ function t_1:jsonEncode()
 			t.comparison = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "is_null" then
+		end
+		if self.kind.type == "is_null" then
 			t.isNull = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "is_not_null" then
+		end
+		if self.kind.type == "is_not_null" then
 			t.isNotNull = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "and_condition" then
+		end
+		if self.kind.type == "and_condition" then
 			t.andCondition = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "or_condition" then
+		end
+		if self.kind.type == "or_condition" then
 			t.orCondition = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "is_empty" then
+		end
+		if self.kind.type == "is_empty" then
 			t.isEmpty = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "is_not_empty" then
+		end
+		if self.kind.type == "is_not_empty" then
 			t.isNotEmpty = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "contains" then
+		end
+		if self.kind.type == "contains" then
 			t.contains = self.kind.value:jsonEncode()
 		end
 	end
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), t (ref)
-	local var32 = t_1.new()
+function Module:jsonDecode() --[[ Line: 414 ]]
+	-- upvalues: Module (copy), t (copy)
+	local NewModule = Module.new()
 	
 	if self.comparison ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "comparison",
 			value = t.ComparisonCondition.jsonDecode(self.comparison)
 		}
 	end
 	if self.is_null ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "is_null",
 			value = t.IsNullCondition.jsonDecode(self.is_null)
 		}
 	end
 	if self.isNull ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "is_null",
 			value = t.IsNullCondition.jsonDecode(self.isNull)
 		}
 	end
 	if self.is_not_null ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "is_not_null",
 			value = t.IsNotNullCondition.jsonDecode(self.is_not_null)
 		}
 	end
 	if self.isNotNull ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "is_not_null",
 			value = t.IsNotNullCondition.jsonDecode(self.isNotNull)
 		}
 	end
 	if self.and_condition ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "and_condition",
 			value = t.AndCondition.jsonDecode(self.and_condition)
 		}
 	end
 	if self.andCondition ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "and_condition",
 			value = t.AndCondition.jsonDecode(self.andCondition)
 		}
 	end
 	if self.or_condition ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "or_condition",
 			value = t.OrCondition.jsonDecode(self.or_condition)
 		}
 	end
 	if self.orCondition ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "or_condition",
 			value = t.OrCondition.jsonDecode(self.orCondition)
 		}
 	end
 	if self.is_empty ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "is_empty",
 			value = t.IsEmptyCondition.jsonDecode(self.is_empty)
 		}
 	end
 	if self.isEmpty ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "is_empty",
 			value = t.IsEmptyCondition.jsonDecode(self.isEmpty)
 		}
 	end
 	if self.is_not_empty ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "is_not_empty",
 			value = t.IsNotEmptyCondition.jsonDecode(self.is_not_empty)
 		}
 	end
 	if self.isNotEmpty ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "is_not_empty",
 			value = t.IsNotEmptyCondition.jsonDecode(self.isNotEmpty)
 		}
 	end
 	if self.contains ~= nil then
-		var32.kind = {
+		NewModule.kind = {
 			type = "contains",
 			value = t.ContainsCondition.jsonDecode(self.contains)
 		}
 	end
-	return var32
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "PropCondition",
 	fullName = "roblox.apppageplatform.shared.v1beta1.PropCondition"
 }
-t.PropCondition = t_1
-typeRegistryModule.default:register(t.PropCondition)
-local t_2 = {}
-t_2.__index = t_2
+t.PropCondition = Module
+TypeRegistryModule.default:register(t.PropCondition)
+local Module1 = {}
+Module1.__index = Module1
 
-function t_2.new(p2)
-	-- upvalues: t (ref), t_2 (ref)
-	return setmetatable({
-		field = if p2 == nil or p2.field == nil then "" else p2.field,
-		op = if p2 == nil or p2.op == nil then assert(t.ComparisonCondition_Op.fromNumber(0), "Enum has no 0 default") else p2.op,
-		kind = if p2 == nil or p2.kind == nil then nil else p2.kind
-	}, t_2)
+function Module1.new(p1) --[[ Line: 490 ]]
+	-- upvalues: t (copy), Module1 (copy)
+	return (setmetatable({
+		field = if p1 == nil or p1.field == nil then "" else p1.field,
+		op = if p1 == nil or p1.op == nil then assert(t.ComparisonCondition_Op.fromNumber(0), "Enum has no 0 default") else p1.op,
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module1))
 end
 
-function t_2:encode()
-	-- upvalues: protoModule (ref), t (ref)
-	local buff = buffer.create(0)
-	local var32 = 0
+function Module1:encode() --[[ Line: 500 ]]
+	-- upvalues: ProtoModule (copy), t (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.field ~= nil and self.field ~= "" then
-		local var33, var34 = protoModule.writeTag(buff, var32, 1, protoModule.wireTypes.lengthDelimited)
-		var33, var75 = protoModule.writeString(var33, var34, self.field)
-		buff = var33
-		var32 = var34
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.field)
 	end
 	if self.op ~= nil and (self.op ~= nil and self.op ~= 0 or self.op ~= t.ComparisonCondition_Op.fromNumber(0)) then
-		local var35, var36 = protoModule.writeTag(buff, var32, 2, protoModule.wireTypes.varint)
-		var35, var77 = protoModule.writeVarInt(var35, var36, t.ComparisonCondition_Op.toNumber(self.op))
-		buff = var35
-		var32 = var36
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, t.ComparisonCondition_Op.toNumber(self.op))
 	end
 	if self.kind ~= nil then
 		if self.kind.type == "string_value" then
-			local var37, var38 = protoModule.writeTag(buff, var32, 3, protoModule.wireTypes.lengthDelimited)
-			var37, var79 = protoModule.writeString(var37, var38, self.kind.value)
-			buff = var37
-			var32 = var38
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.kind.value)
 		elseif self.kind.type == "bool_value" then
-			local var39, var40 = protoModule.writeTag(buff, var32, 4, protoModule.wireTypes.varint)
-			var39, var81 = protoModule.writeVarInt(var39, var40, if self.kind.value then 1 else 0)
-			buff = var39
-			var32 = var40
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult4, WriteTagResult2_3, if self.kind.value then 1 else 0)
 		elseif self.kind.type == "int32_value" then
-			local var41, var42 = protoModule.writeTag(buff, var32, 5, protoModule.wireTypes.varint)
-			var41, var83 = protoModule.writeVarInt(var41, var42, self.kind.value)
-			buff = var41
-			var32 = var42
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult5, WriteTagResult2_4, self.kind.value)
 		elseif self.kind.type == "int64_value" then
-			local var43, var44 = protoModule.writeTag(buff, var32, 6, protoModule.wireTypes.varint)
-			var43, var85 = protoModule.writeVarInt(var43, var44, self.kind.value)
-			buff = var43
-			var32 = var44
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult7, WriteTagResult2_6, self.kind.value)
 		elseif self.kind.type == "float_value" then
-			local var45, var46 = protoModule.writeTag(buff, var32, 7, protoModule.wireTypes.i32)
-			var45, var87 = protoModule.writeFloat(var45, var46, self.kind.value)
-			buff = var45
-			var32 = var46
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.i32)
+			Buf, Count = ProtoModule.writeFloat(WriteTagResult8, WriteTagResult2_7, self.kind.value)
 		elseif self.kind.type == "double_value" then
-			local var47, var48 = protoModule.writeTag(buff, var32, 8, protoModule.wireTypes.i64)
-			var47, var89 = protoModule.writeDouble(var47, var48, self.kind.value)
-			buff = var47
-			var32 = var48
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.i64)
+			Buf, Count = ProtoModule.writeDouble(WriteTagResult9, WriteTagResult2_8, self.kind.value)
 		elseif self.kind.type == "binding_path_value" then
-			local var49, var50 = protoModule.writeTag(buff, var32, 9, protoModule.wireTypes.lengthDelimited)
-			var49, var91 = protoModule.writeString(var49, var50, self.kind.value)
-			buff = var49
-			var32 = var50
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.kind.value)
 		end
 	end
-	local buff_1 = buffer.create(var32)
-	buffer.copy(buff_1, 0, buff, 0, var32)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_2.decode(p2)
-	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
-	local var32 = t_2.new()
-	local var33 = 0
-	while var33 < buffer.len(p2) do
-		local _ = nil
-		local var34 = nil
-		local var35, var36, var37 = protoModule.readTag(p2, var33)
-		local var38 = var35
-		var34 = var36
-		var33 = var37
+function Module1.decode(Buf) --[[ Line: 547 ]]
+	-- upvalues: Module1 (copy), ProtoModule (copy), t (copy)
+	local NewModule = Module1.new()
+	local v2 = 0
+	while v2 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v78 = ProtoModule.readTag(Buf, v2)
 		
-		if var34 == protoModule.wireTypes.varint then
-			if var38 == 2 then
-				local _ = nil
-				local var39, var40 = protoModule.readVarIntI32(p2, var33)
-				local var41 = var39
-				var33 = var40
-				var32.op = t.ComparisonCondition_Op.fromNumber(var41) or var41
-			elseif var38 == 4 then
-				local _ = nil
-				local var42, var43 = protoModule.readVarInt(p2, var33)
-				var33 = var43
-				var32.kind = { type = "bool_value", value = var42 ~= 0 }
-			elseif var38 == 5 then
-				local _ = nil
-				local var44, var45 = protoModule.readVarIntI32(p2, var33)
-				var33 = var45
-				var32.kind = { type = "int32_value", value = var44 }
-			elseif var38 == 6 then
-				local _ = nil
-				local var46, var47 = protoModule.readVarIntI64(p2, var33)
-				var33 = var47
-				var32.kind = { type = "int64_value", value = var46 }
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 2 then
+				local VarIntI32
+				VarIntI32, v78 = ProtoModule.readVarIntI32(Buf, v2)
+				NewModule.op = t.ComparisonCondition_Op.fromNumber(VarIntI32) or VarIntI32
+			elseif Tag == 4 then
+				local VarInt
+				VarInt, v78 = ProtoModule.readVarInt(Buf, v2)
+				NewModule.kind = { type = "bool_value", value = VarInt ~= 0 }
+			elseif Tag == 5 then
+				local VarIntI32_1
+				VarIntI32_1, v78 = ProtoModule.readVarIntI32(Buf, v2)
+				NewModule.kind = { type = "int32_value", value = VarIntI32_1 }
+			elseif Tag == 6 then
+				local VarIntI64
+				VarIntI64, v78 = ProtoModule.readVarIntI64(Buf, v2)
+				NewModule.kind = { type = "int64_value", value = VarIntI64 }
 			else
-				local _ = nil
-				local var48, var49 = protoModule.readVarInt(p2, var33)
-				local _ = var48
-				var33 = var49
+				local _
+				_, v78 = ProtoModule.readVarInt(Buf, v2)
 			end
-		end
-		if var34 == protoModule.wireTypes.lengthDelimited then
-			if var38 == 1 then
-				local _ = nil
-				local var50, var51 = protoModule.readBuffer(p2, var33)
-				var33 = var51
-				var32.field = buffer.tostring(var50)
-			elseif var38 == 3 then
-				local _ = nil
-				local var52, var53 = protoModule.readBuffer(p2, var33)
-				var33 = var53
-				var32.kind = { type = "string_value", value = buffer.tostring(var52) }
-			elseif var38 == 9 then
-				local _ = nil
-				local var54, var55 = protoModule.readBuffer(p2, var33)
-				var33 = var55
-				var32.kind = {
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v78 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.field = buffer.tostring(Buffer1)
+			elseif Tag == 3 then
+				local Buffer2
+				Buffer2, v78 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.kind = { type = "string_value", value = buffer.tostring(Buffer2) }
+			elseif Tag == 9 then
+				local Buffer3
+				Buffer3, v78 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.kind = {
 					type = "binding_path_value",
-					value = buffer.tostring(var54)
+					value = buffer.tostring(Buffer3)
 				}
 			else
-				local _ = nil
-				local var56, var57 = protoModule.readVarInt(p2, var33)
-				var33 = var57 + var56
+				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v2)
+				v2 = VarInt2 + VarInt1
 			end
-		elseif var34 == protoModule.wireTypes.i32 then
-			if var38 == 7 then
-				local _ = nil
-				local var58, var59 = protoModule.readFloat(p2, var33)
-				var33 = var59
-				var32.kind = { type = "float_value", value = var58 }
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			if Tag == 7 then
+				local Float
+				Float, v78 = ProtoModule.readFloat(Buf, v2)
+				NewModule.kind = { type = "float_value", value = Float }
 			else
-				local _ = nil
-				local var60, var61 = protoModule.readFixed32(p2, var33)
-				local _ = var60
-				var33 = var61
+				local _
+				_, v78 = ProtoModule.readFixed32(Buf, v2)
 			end
-		elseif var34 ~= protoModule.wireTypes.i64 then
-			error("Unsupported wire type: " .. var95)
-		elseif var38 == 8 then
-			local _ = nil
-			local var62, var63 = protoModule.readDouble(p2, var33)
-			var33 = var63
-			var32.kind = { type = "double_value", value = var62 }
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			if Tag == 8 then
+				local Double
+				Double, v78 = ProtoModule.readDouble(Buf, v2)
+				NewModule.kind = { type = "double_value", value = Double }
+			else
+				local _
+				_, v78 = ProtoModule.readFixed64(Buf, v2)
+			end
 		else
-			local _ = nil
-			local var64, var65 = protoModule.readFixed64(p2, var33)
-			local _ = var64
-			var33 = var65
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var32
+	return NewModule
 end
 
-function t_2:jsonEncode()
-	-- upvalues: t (ref), protoModule (ref)
-	local t_1 = {}
+function Module1:jsonEncode() --[[ Line: 630 ]]
+	-- upvalues: t (copy), ProtoModule (copy)
+	local t1 = {}
 	
 	if self.field ~= nil and self.field ~= "" then
-		t_1.field = self.field
+		t1.field = self.field
 	end
 	if self.op ~= nil and (self.op ~= nil and self.op ~= 0 or self.op ~= t.ComparisonCondition_Op.fromNumber(0)) then
-		t_1.op = if typeof(self.op) == "number" then self.op else t.ComparisonCondition_Op.toNumber(self.op)
+		t1.op = if typeof(self.op) == "number" then self.op else t.ComparisonCondition_Op.toNumber(self.op)
 	end
 	if self.kind ~= nil then
 		if self.kind.type == "string_value" then
-			t_1.stringValue = self.kind.value
+			t1.stringValue = self.kind.value
 			
-			return t_1
-		elseif self.kind.type == "bool_value" then
-			t_1.boolValue = self.kind.value
+			return t1
+		end
+		if self.kind.type == "bool_value" then
+			t1.boolValue = self.kind.value
 			
-			return t_1
-		elseif self.kind.type == "int32_value" then
-			t_1.int32Value = self.kind.value
+			return t1
+		end
+		if self.kind.type == "int32_value" then
+			t1.int32Value = self.kind.value
 			
-			return t_1
-		elseif self.kind.type == "int64_value" then
-			t_1.int64Value = self.kind.value
+			return t1
+		end
+		if self.kind.type == "int64_value" then
+			t1.int64Value = self.kind.value
 			
-			return t_1
-		elseif self.kind.type == "float_value" then
-			t_1.floatValue = protoModule.json.serializeNumber(self.kind.value)
+			return t1
+		end
+		if self.kind.type == "float_value" then
+			t1.floatValue = ProtoModule.json.serializeNumber(self.kind.value)
 			
-			return t_1
-		elseif self.kind.type == "double_value" then
-			t_1.doubleValue = protoModule.json.serializeNumber(self.kind.value)
+			return t1
+		end
+		if self.kind.type == "double_value" then
+			t1.doubleValue = ProtoModule.json.serializeNumber(self.kind.value)
 			
-			return t_1
-		elseif self.kind.type == "binding_path_value" then
-			t_1.bindingPathValue = self.kind.value
+			return t1
+		end
+		if self.kind.type == "binding_path_value" then
+			t1.bindingPathValue = self.kind.value
 		end
 	end
-	return t_1
+	return t1
 end
 
-function t_2:jsonDecode()
-	-- upvalues: t_2 (ref), t (ref), protoModule (ref)
-	local var66 = t_2.new()
+function Module1:jsonDecode() --[[ Line: 667 ]]
+	-- upvalues: Module1 (copy), t (copy), ProtoModule (copy)
+	local NewModule = Module1.new()
 	
 	if self.field ~= nil then
-		var66.field = self.field
+		NewModule.field = self.field
 	end
 	if self.op ~= nil then
-		var66.op = if typeof(self.op) == "number" then t.ComparisonCondition_Op.fromNumber(self.op) or self.op else t.ComparisonCondition_Op.fromName(self.op) or self.op
+		NewModule.op = (if typeof(self.op) == "number" then t.ComparisonCondition_Op.fromNumber(self.op) else t.ComparisonCondition_Op.fromName(self.op)) or self.op
 	end
 	if self.string_value ~= nil then
-		var66.kind = { type = "string_value", value = self.string_value }
+		NewModule.kind = { type = "string_value", value = self.string_value }
 	end
 	if self.stringValue ~= nil then
-		var66.kind = { type = "string_value", value = self.stringValue }
+		NewModule.kind = { type = "string_value", value = self.stringValue }
 	end
 	if self.bool_value ~= nil then
-		var66.kind = { type = "bool_value", value = self.bool_value }
+		NewModule.kind = { type = "bool_value", value = self.bool_value }
 	end
 	if self.boolValue ~= nil then
-		var66.kind = { type = "bool_value", value = self.boolValue }
+		NewModule.kind = { type = "bool_value", value = self.boolValue }
 	end
 	if self.int32_value ~= nil then
-		var66.kind = { type = "int32_value", value = self.int32_value }
+		NewModule.kind = { type = "int32_value", value = self.int32_value }
 	end
 	if self.int32Value ~= nil then
-		var66.kind = { type = "int32_value", value = self.int32Value }
+		NewModule.kind = { type = "int32_value", value = self.int32Value }
 	end
 	if self.int64_value ~= nil then
-		var66.kind = { type = "int64_value", value = self.int64_value }
+		NewModule.kind = { type = "int64_value", value = self.int64_value }
 	end
 	if self.int64Value ~= nil then
-		var66.kind = { type = "int64_value", value = self.int64Value }
+		NewModule.kind = { type = "int64_value", value = self.int64Value }
 	end
 	if self.float_value ~= nil then
-		var66.kind = {
+		NewModule.kind = {
 			type = "float_value",
-			value = protoModule.json.deserializeNumber(self.float_value)
+			value = ProtoModule.json.deserializeNumber(self.float_value)
 		}
 	end
 	if self.floatValue ~= nil then
-		var66.kind = {
+		NewModule.kind = {
 			type = "float_value",
-			value = protoModule.json.deserializeNumber(self.floatValue)
+			value = ProtoModule.json.deserializeNumber(self.floatValue)
 		}
 	end
 	if self.double_value ~= nil then
-		var66.kind = {
+		NewModule.kind = {
 			type = "double_value",
-			value = protoModule.json.deserializeNumber(self.double_value)
+			value = ProtoModule.json.deserializeNumber(self.double_value)
 		}
 	end
 	if self.doubleValue ~= nil then
-		var66.kind = {
+		NewModule.kind = {
 			type = "double_value",
-			value = protoModule.json.deserializeNumber(self.doubleValue)
+			value = ProtoModule.json.deserializeNumber(self.doubleValue)
 		}
 	end
 	if self.binding_path_value ~= nil then
-		var66.kind = {
+		NewModule.kind = {
 			type = "binding_path_value",
 			value = self.binding_path_value
 		}
 	end
 	if self.bindingPathValue ~= nil then
-		var66.kind = {
+		NewModule.kind = {
 			type = "binding_path_value",
 			value = self.bindingPathValue
 		}
 	end
-	return var66
+	return NewModule
 end
 
-t_2.descriptor = {
+Module1.descriptor = {
 	name = "ComparisonCondition",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ComparisonCondition"
 }
-t.ComparisonCondition = t_2
-typeRegistryModule.default:register(t.ComparisonCondition)
+t.ComparisonCondition = Module1
+TypeRegistryModule.default:register(t.ComparisonCondition)
 t.ComparisonCondition_Op = {
-	fromNumber = function(p3)
-		return if p3 == 0 then "OP_INVALID" elseif p3 == 1 then "OP_LT" elseif p3 == 2 then "OP_LTE" elseif p3 == 3 then "OP_GT" elseif p3 == 4 then "OP_GTE" elseif p3 == 5 then "OP_E" elseif p3 == 6 then "OP_NE" else nil
+	fromNumber = function(p1) --[[ Line: 750 ]]
+		return if p1 == 0 then "OP_INVALID" elseif p1 == 1 then "OP_LT" elseif p1 == 2 then "OP_LTE" elseif p1 == 3 then "OP_GT" elseif p1 == 4 then "OP_GTE" elseif p1 == 5 then "OP_E" elseif p1 == 6 then "OP_NE" else nil
 	end,
-	toNumber = function(p3)
-		return if p3 == "OP_INVALID" then 0 elseif p3 == "OP_LT" then 1 elseif p3 == "OP_LTE" then 2 elseif p3 == "OP_GT" then 3 elseif p3 == "OP_GTE" then 4 elseif p3 == "OP_E" then 5 elseif p3 == "OP_NE" then 6 else p3
+	toNumber = function(p1) --[[ Line: 770 ]]
+		return if p1 == "OP_INVALID" then 0 elseif p1 == "OP_LT" then 1 elseif p1 == "OP_LTE" then 2 elseif p1 == "OP_GT" then 3 elseif p1 == "OP_GTE" then 4 elseif p1 == "OP_E" then 5 elseif p1 == "OP_NE" then 6 else p1
 	end,
-	fromName = function(p3)
-		return if p3 == "OP_INVALID" then "OP_INVALID" elseif p3 == "OP_LT" then "OP_LT" elseif p3 == "OP_LTE" then "OP_LTE" elseif p3 == "OP_GT" then "OP_GT" elseif p3 == "OP_GTE" then "OP_GTE" elseif p3 == "OP_E" then "OP_E" elseif p3 == "OP_NE" then "OP_NE" else nil
+	fromName = function(p1) --[[ Line: 790 ]]
+		return if p1 == "OP_INVALID" then "OP_INVALID" elseif p1 == "OP_LT" then "OP_LT" elseif p1 == "OP_LTE" then "OP_LTE" elseif p1 == "OP_GT" then "OP_GT" elseif p1 == "OP_GTE" then "OP_GTE" elseif p1 == "OP_E" then "OP_E" elseif p1 == "OP_NE" then "OP_NE" else nil
 	end
 }
-local t_3 = {}
-t_3.__index = t_3
+local Module2 = {}
+Module2.__index = Module2
 
-function t_3.new(p3)
-	-- upvalues: t_3 (ref)
-	return setmetatable({
-		field = if p3 == nil or p3.field == nil then "" else p3.field
-	}, t_3)
+function Module2.new(p1) --[[ Line: 815 ]]
+	-- upvalues: Module2 (copy)
+	return (setmetatable({
+		field = if p1 == nil or p1.field == nil then "" else p1.field
+	}, Module2))
 end
 
-function t_3:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var66 = 0
+function Module2:encode() --[[ Line: 821 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.field ~= nil and self.field ~= "" then
-		local var67, var68 = protoModule.writeTag(buff, var66, 1, protoModule.wireTypes.lengthDelimited)
-		var67, var132 = protoModule.writeString(var67, var68, self.field)
-		buff = var67
-		var66 = var68
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.field)
 	end
-	local buff_1 = buffer.create(var66)
-	buffer.copy(buff_1, 0, buff, 0, var66)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_3.decode(p3)
-	-- upvalues: t_3 (ref), protoModule (ref)
-	local var66 = t_3.new()
-	local var67 = 0
-	while var67 < buffer.len(p3) do
-		local _ = nil
-		local var68 = nil
-		local var69, var70, var71 = protoModule.readTag(p3, var67)
-		local var72 = var69
-		var68 = var70
-		var67 = var71
+function Module2.decode(Buf) --[[ Line: 835 ]]
+	-- upvalues: Module2 (copy), ProtoModule (copy)
+	local NewModule = Module2.new()
+	local v3 = 0
+	while v3 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v102 = ProtoModule.readTag(Buf, v3)
 		
-		if var68 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var73, var74 = protoModule.readVarInt(p3, var67)
-			local _ = var73
-			var67 = var74
-			continue
-		end
-		if var68 == protoModule.wireTypes.lengthDelimited then
-			if var72 == 1 then
-				local _ = nil
-				local var75, var76 = protoModule.readBuffer(p3, var67)
-				var67 = var76
-				var66.field = buffer.tostring(var75)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v102 = ProtoModule.readVarInt(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v102 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.field = buffer.tostring(Buffer1)
 			else
-				local _ = nil
-				local var77, var78 = protoModule.readVarInt(p3, var67)
-				var67 = var78 + var77
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
+				v3 = VarInt2 + VarInt
 			end
-		elseif var68 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var79, var80 = protoModule.readFixed32(p3, var67)
-			local _ = var79
-			var67 = var80
-		elseif var68 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var81, var82 = protoModule.readFixed64(p3, var67)
-			local _ = var81
-			var67 = var82
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v102 = ProtoModule.readFixed32(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v102 = ProtoModule.readFixed64(Buf, v3)
 		else
-			error("Unsupported wire type: " .. var136)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var66
+	return NewModule
 end
 
-function t_3:jsonEncode()
+function Module2:jsonEncode() --[[ Line: 878 ]]
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -697,97 +619,81 @@ function t_3:jsonEncode()
 	return t
 end
 
-function t_3:jsonDecode()
-	-- upvalues: t_3 (ref)
-	local var83 = t_3.new()
+function Module2:jsonDecode() --[[ Line: 888 ]]
+	-- upvalues: Module2 (copy)
+	local NewModule = Module2.new()
 	
 	if self.field ~= nil then
-		var83.field = self.field
+		NewModule.field = self.field
 	end
-	return var83
+	return NewModule
 end
 
-t_3.descriptor = {
+Module2.descriptor = {
 	name = "IsNullCondition",
 	fullName = "roblox.apppageplatform.shared.v1beta1.IsNullCondition"
 }
-t.IsNullCondition = t_3
-typeRegistryModule.default:register(t.IsNullCondition)
-local t_4 = {}
-t_4.__index = t_4
+t.IsNullCondition = Module2
+TypeRegistryModule.default:register(t.IsNullCondition)
+local Module3 = {}
+Module3.__index = Module3
 
-function t_4.new(p4)
-	-- upvalues: t_4 (ref)
-	return setmetatable({
-		field = if p4 == nil or p4.field == nil then "" else p4.field
-	}, t_4)
+function Module3.new(p1) --[[ Line: 912 ]]
+	-- upvalues: Module3 (copy)
+	return (setmetatable({
+		field = if p1 == nil or p1.field == nil then "" else p1.field
+	}, Module3))
 end
 
-function t_4:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var83 = 0
+function Module3:encode() --[[ Line: 918 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.field ~= nil and self.field ~= "" then
-		local var84, var85 = protoModule.writeTag(buff, var83, 1, protoModule.wireTypes.lengthDelimited)
-		var84, var156 = protoModule.writeString(var84, var85, self.field)
-		buff = var84
-		var83 = var85
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.field)
 	end
-	local buff_1 = buffer.create(var83)
-	buffer.copy(buff_1, 0, buff, 0, var83)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_4.decode(p4)
-	-- upvalues: t_4 (ref), protoModule (ref)
-	local var83 = t_4.new()
-	local var84 = 0
-	while var84 < buffer.len(p4) do
-		local _ = nil
-		local var85 = nil
-		local var86, var87, var88 = protoModule.readTag(p4, var84)
-		local var89 = var86
-		var85 = var87
-		var84 = var88
+function Module3.decode(Buf) --[[ Line: 932 ]]
+	-- upvalues: Module3 (copy), ProtoModule (copy)
+	local NewModule = Module3.new()
+	local v4 = 0
+	while v4 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v118 = ProtoModule.readTag(Buf, v4)
 		
-		if var85 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var90, var91 = protoModule.readVarInt(p4, var84)
-			local _ = var90
-			var84 = var91
-			continue
-		end
-		if var85 == protoModule.wireTypes.lengthDelimited then
-			if var89 == 1 then
-				local _ = nil
-				local var92, var93 = protoModule.readBuffer(p4, var84)
-				var84 = var93
-				var83.field = buffer.tostring(var92)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v118 = ProtoModule.readVarInt(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v118 = ProtoModule.readBuffer(Buf, v4)
+				NewModule.field = buffer.tostring(Buffer1)
 			else
-				local _ = nil
-				local var94, var95 = protoModule.readVarInt(p4, var84)
-				var84 = var95 + var94
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
+				v4 = VarInt2 + VarInt
 			end
-		elseif var85 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var96, var97 = protoModule.readFixed32(p4, var84)
-			local _ = var96
-			var84 = var97
-		elseif var85 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var98, var99 = protoModule.readFixed64(p4, var84)
-			local _ = var98
-			var84 = var99
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v118 = ProtoModule.readFixed32(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v118 = ProtoModule.readFixed64(Buf, v4)
 		else
-			error("Unsupported wire type: " .. var160)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var83
+	return NewModule
 end
 
-function t_4:jsonEncode()
+function Module3:jsonEncode() --[[ Line: 975 ]]
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -796,97 +702,81 @@ function t_4:jsonEncode()
 	return t
 end
 
-function t_4:jsonDecode()
-	-- upvalues: t_4 (ref)
-	local var100 = t_4.new()
+function Module3:jsonDecode() --[[ Line: 985 ]]
+	-- upvalues: Module3 (copy)
+	local NewModule = Module3.new()
 	
 	if self.field ~= nil then
-		var100.field = self.field
+		NewModule.field = self.field
 	end
-	return var100
+	return NewModule
 end
 
-t_4.descriptor = {
+Module3.descriptor = {
 	name = "IsNotNullCondition",
 	fullName = "roblox.apppageplatform.shared.v1beta1.IsNotNullCondition"
 }
-t.IsNotNullCondition = t_4
-typeRegistryModule.default:register(t.IsNotNullCondition)
-local t_5 = {}
-t_5.__index = t_5
+t.IsNotNullCondition = Module3
+TypeRegistryModule.default:register(t.IsNotNullCondition)
+local Module4 = {}
+Module4.__index = Module4
 
-function t_5.new(p5)
-	-- upvalues: t_5 (ref)
-	return setmetatable({
-		field = if p5 == nil or p5.field == nil then "" else p5.field
-	}, t_5)
+function Module4.new(p1) --[[ Line: 1009 ]]
+	-- upvalues: Module4 (copy)
+	return (setmetatable({
+		field = if p1 == nil or p1.field == nil then "" else p1.field
+	}, Module4))
 end
 
-function t_5:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var100 = 0
+function Module4:encode() --[[ Line: 1015 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.field ~= nil and self.field ~= "" then
-		local var101, var102 = protoModule.writeTag(buff, var100, 1, protoModule.wireTypes.lengthDelimited)
-		var101, var180 = protoModule.writeString(var101, var102, self.field)
-		buff = var101
-		var100 = var102
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.field)
 	end
-	local buff_1 = buffer.create(var100)
-	buffer.copy(buff_1, 0, buff, 0, var100)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_5.decode(p5)
-	-- upvalues: t_5 (ref), protoModule (ref)
-	local var100 = t_5.new()
-	local var101 = 0
-	while var101 < buffer.len(p5) do
-		local _ = nil
-		local var102 = nil
-		local var103, var104, var105 = protoModule.readTag(p5, var101)
-		local var106 = var103
-		var102 = var104
-		var101 = var105
+function Module4.decode(Buf) --[[ Line: 1029 ]]
+	-- upvalues: Module4 (copy), ProtoModule (copy)
+	local NewModule = Module4.new()
+	local v5 = 0
+	while v5 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v134 = ProtoModule.readTag(Buf, v5)
 		
-		if var102 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var107, var108 = protoModule.readVarInt(p5, var101)
-			local _ = var107
-			var101 = var108
-			continue
-		end
-		if var102 == protoModule.wireTypes.lengthDelimited then
-			if var106 == 1 then
-				local _ = nil
-				local var109, var110 = protoModule.readBuffer(p5, var101)
-				var101 = var110
-				var100.field = buffer.tostring(var109)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v134 = ProtoModule.readVarInt(Buf, v5)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v134 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.field = buffer.tostring(Buffer1)
 			else
-				local _ = nil
-				local var111, var112 = protoModule.readVarInt(p5, var101)
-				var101 = var112 + var111
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v5)
+				v5 = VarInt2 + VarInt
 			end
-		elseif var102 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var113, var114 = protoModule.readFixed32(p5, var101)
-			local _ = var113
-			var101 = var114
-		elseif var102 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var115, var116 = protoModule.readFixed64(p5, var101)
-			local _ = var115
-			var101 = var116
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v134 = ProtoModule.readFixed32(Buf, v5)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v134 = ProtoModule.readFixed64(Buf, v5)
 		else
-			error("Unsupported wire type: " .. var184)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var100
+	return NewModule
 end
 
-function t_5:jsonEncode()
+function Module4:jsonEncode() --[[ Line: 1072 ]]
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -895,97 +785,81 @@ function t_5:jsonEncode()
 	return t
 end
 
-function t_5:jsonDecode()
-	-- upvalues: t_5 (ref)
-	local var117 = t_5.new()
+function Module4:jsonDecode() --[[ Line: 1082 ]]
+	-- upvalues: Module4 (copy)
+	local NewModule = Module4.new()
 	
 	if self.field ~= nil then
-		var117.field = self.field
+		NewModule.field = self.field
 	end
-	return var117
+	return NewModule
 end
 
-t_5.descriptor = {
+Module4.descriptor = {
 	name = "IsEmptyCondition",
 	fullName = "roblox.apppageplatform.shared.v1beta1.IsEmptyCondition"
 }
-t.IsEmptyCondition = t_5
-typeRegistryModule.default:register(t.IsEmptyCondition)
-local t_6 = {}
-t_6.__index = t_6
+t.IsEmptyCondition = Module4
+TypeRegistryModule.default:register(t.IsEmptyCondition)
+local Module5 = {}
+Module5.__index = Module5
 
-function t_6.new(p6)
-	-- upvalues: t_6 (ref)
-	return setmetatable({
-		field = if p6 == nil or p6.field == nil then "" else p6.field
-	}, t_6)
+function Module5.new(p1) --[[ Line: 1106 ]]
+	-- upvalues: Module5 (copy)
+	return (setmetatable({
+		field = if p1 == nil or p1.field == nil then "" else p1.field
+	}, Module5))
 end
 
-function t_6:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var117 = 0
+function Module5:encode() --[[ Line: 1112 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.field ~= nil and self.field ~= "" then
-		local var118, var119 = protoModule.writeTag(buff, var117, 1, protoModule.wireTypes.lengthDelimited)
-		var118, var204 = protoModule.writeString(var118, var119, self.field)
-		buff = var118
-		var117 = var119
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.field)
 	end
-	local buff_1 = buffer.create(var117)
-	buffer.copy(buff_1, 0, buff, 0, var117)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_6.decode(p6)
-	-- upvalues: t_6 (ref), protoModule (ref)
-	local var117 = t_6.new()
-	local var118 = 0
-	while var118 < buffer.len(p6) do
-		local _ = nil
-		local var119 = nil
-		local var120, var121, var122 = protoModule.readTag(p6, var118)
-		local var123 = var120
-		var119 = var121
-		var118 = var122
+function Module5.decode(Buf) --[[ Line: 1126 ]]
+	-- upvalues: Module5 (copy), ProtoModule (copy)
+	local NewModule = Module5.new()
+	local v6 = 0
+	while v6 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v150 = ProtoModule.readTag(Buf, v6)
 		
-		if var119 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var124, var125 = protoModule.readVarInt(p6, var118)
-			local _ = var124
-			var118 = var125
-			continue
-		end
-		if var119 == protoModule.wireTypes.lengthDelimited then
-			if var123 == 1 then
-				local _ = nil
-				local var126, var127 = protoModule.readBuffer(p6, var118)
-				var118 = var127
-				var117.field = buffer.tostring(var126)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v150 = ProtoModule.readVarInt(Buf, v6)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v150 = ProtoModule.readBuffer(Buf, v6)
+				NewModule.field = buffer.tostring(Buffer1)
 			else
-				local _ = nil
-				local var128, var129 = protoModule.readVarInt(p6, var118)
-				var118 = var129 + var128
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v6)
+				v6 = VarInt2 + VarInt
 			end
-		elseif var119 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var130, var131 = protoModule.readFixed32(p6, var118)
-			local _ = var130
-			var118 = var131
-		elseif var119 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var132, var133 = protoModule.readFixed64(p6, var118)
-			local _ = var132
-			var118 = var133
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v150 = ProtoModule.readFixed32(Buf, v6)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v150 = ProtoModule.readFixed64(Buf, v6)
 		else
-			error("Unsupported wire type: " .. var208)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var117
+	return NewModule
 end
 
-function t_6:jsonEncode()
+function Module5:jsonEncode() --[[ Line: 1169 ]]
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -994,124 +868,102 @@ function t_6:jsonEncode()
 	return t
 end
 
-function t_6:jsonDecode()
-	-- upvalues: t_6 (ref)
-	local var134 = t_6.new()
+function Module5:jsonDecode() --[[ Line: 1179 ]]
+	-- upvalues: Module5 (copy)
+	local NewModule = Module5.new()
 	
 	if self.field ~= nil then
-		var134.field = self.field
+		NewModule.field = self.field
 	end
-	return var134
+	return NewModule
 end
 
-t_6.descriptor = {
+Module5.descriptor = {
 	name = "IsNotEmptyCondition",
 	fullName = "roblox.apppageplatform.shared.v1beta1.IsNotEmptyCondition"
 }
-t.IsNotEmptyCondition = t_6
-typeRegistryModule.default:register(t.IsNotEmptyCondition)
-local t_7 = {}
-t_7.__index = t_7
+t.IsNotEmptyCondition = Module5
+TypeRegistryModule.default:register(t.IsNotEmptyCondition)
+local Module6 = {}
+Module6.__index = Module6
 
-function t_7.new(p7)
-	-- upvalues: t_7 (ref)
-	return setmetatable({
-		field = if p7 == nil or p7.field == nil then "" else p7.field,
-		kind = if p7 == nil or p7.kind == nil then nil else p7.kind
-	}, t_7)
+function Module6.new(p1) --[[ Line: 1203 ]]
+	-- upvalues: Module6 (copy)
+	return (setmetatable({
+		field = if p1 == nil or p1.field == nil then "" else p1.field,
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module6))
 end
 
-function t_7:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var134 = 0
+function Module6:encode() --[[ Line: 1210 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.field ~= nil and self.field ~= "" then
-		local var135, var136 = protoModule.writeTag(buff, var134, 1, protoModule.wireTypes.lengthDelimited)
-		var135, var228 = protoModule.writeString(var135, var136, self.field)
-		buff = var135
-		var134 = var136
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.field)
 	end
 	if self.kind ~= nil then
 		if self.kind.type == "string_value" then
-			local var137, var138 = protoModule.writeTag(buff, var134, 2, protoModule.wireTypes.lengthDelimited)
-			var137, var230 = protoModule.writeString(var137, var138, self.kind.value)
-			buff = var137
-			var134 = var138
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.kind.value)
 		elseif self.kind.type == "binding_path_value" then
-			local var139, var140 = protoModule.writeTag(buff, var134, 3, protoModule.wireTypes.lengthDelimited)
-			var139, var232 = protoModule.writeString(var139, var140, self.kind.value)
-			buff = var139
-			var134 = var140
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.kind.value)
 		end
 	end
-	local buff_1 = buffer.create(var134)
-	buffer.copy(buff_1, 0, buff, 0, var134)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_7.decode(p7)
-	-- upvalues: t_7 (ref), protoModule (ref)
-	local var134 = t_7.new()
-	local var135 = 0
-	while var135 < buffer.len(p7) do
-		local _ = nil
-		local var136 = nil
-		local var137, var138, var139 = protoModule.readTag(p7, var135)
-		local var140 = var137
-		var136 = var138
-		var135 = var139
+function Module6.decode(Buf) --[[ Line: 1234 ]]
+	-- upvalues: Module6 (copy), ProtoModule (copy)
+	local NewModule = Module6.new()
+	local v7 = 0
+	while v7 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v170 = ProtoModule.readTag(Buf, v7)
 		
-		if var136 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var141, var142 = protoModule.readVarInt(p7, var135)
-			local _ = var141
-			var135 = var142
-			continue
-		end
-		if var136 == protoModule.wireTypes.lengthDelimited then
-			if var140 == 1 then
-				local _ = nil
-				local var143, var144 = protoModule.readBuffer(p7, var135)
-				var135 = var144
-				var134.field = buffer.tostring(var143)
-			elseif var140 == 2 then
-				local _ = nil
-				local var145, var146 = protoModule.readBuffer(p7, var135)
-				var135 = var146
-				var134.kind = { type = "string_value", value = buffer.tostring(var145) }
-			elseif var140 == 3 then
-				local _ = nil
-				local var147, var148 = protoModule.readBuffer(p7, var135)
-				var135 = var148
-				var134.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v170 = ProtoModule.readVarInt(Buf, v7)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v170 = ProtoModule.readBuffer(Buf, v7)
+				NewModule.field = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v170 = ProtoModule.readBuffer(Buf, v7)
+				NewModule.kind = { type = "string_value", value = buffer.tostring(Buffer2) }
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v170 = ProtoModule.readBuffer(Buf, v7)
+				NewModule.kind = {
 					type = "binding_path_value",
-					value = buffer.tostring(var147)
+					value = buffer.tostring(Buffer3)
 				}
 			else
-				local _ = nil
-				local var149, var150 = protoModule.readVarInt(p7, var135)
-				var135 = var150 + var149
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v7)
+				v7 = VarInt2 + VarInt
 			end
-		elseif var136 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var151, var152 = protoModule.readFixed32(p7, var135)
-			local _ = var151
-			var135 = var152
-		elseif var136 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var153, var154 = protoModule.readFixed64(p7, var135)
-			local _ = var153
-			var135 = var154
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v170 = ProtoModule.readFixed32(Buf, v7)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v170 = ProtoModule.readFixed64(Buf, v7)
 		else
-			error("Unsupported wire type: " .. var236)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var134
+	return NewModule
 end
 
-function t_7:jsonEncode()
+function Module6:jsonEncode() --[[ Line: 1287 ]]
 	local t = {}
 	
 	if self.field ~= nil and self.field ~= "" then
@@ -1122,271 +974,240 @@ function t_7:jsonEncode()
 			t.stringValue = self.kind.value
 			
 			return t
-		elseif self.kind.type == "binding_path_value" then
+		end
+		if self.kind.type == "binding_path_value" then
 			t.bindingPathValue = self.kind.value
 		end
 	end
 	return t
 end
 
-function t_7:jsonDecode()
-	-- upvalues: t_7 (ref)
-	local var155 = t_7.new()
+function Module6:jsonDecode() --[[ Line: 1305 ]]
+	-- upvalues: Module6 (copy)
+	local NewModule = Module6.new()
 	
 	if self.field ~= nil then
-		var155.field = self.field
+		NewModule.field = self.field
 	end
 	if self.string_value ~= nil then
-		var155.kind = { type = "string_value", value = self.string_value }
+		NewModule.kind = { type = "string_value", value = self.string_value }
 	end
 	if self.stringValue ~= nil then
-		var155.kind = { type = "string_value", value = self.stringValue }
+		NewModule.kind = { type = "string_value", value = self.stringValue }
 	end
 	if self.binding_path_value ~= nil then
-		var155.kind = {
+		NewModule.kind = {
 			type = "binding_path_value",
 			value = self.binding_path_value
 		}
 	end
 	if self.bindingPathValue ~= nil then
-		var155.kind = {
+		NewModule.kind = {
 			type = "binding_path_value",
 			value = self.bindingPathValue
 		}
 	end
-	return var155
+	return NewModule
 end
 
-t_7.descriptor = {
+Module6.descriptor = {
 	name = "ContainsCondition",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ContainsCondition"
 }
-t.ContainsCondition = t_7
-typeRegistryModule.default:register(t.ContainsCondition)
-local t_8 = {}
-t_8.__index = t_8
+t.ContainsCondition = Module6
+TypeRegistryModule.default:register(t.ContainsCondition)
+local Module7 = {}
+Module7.__index = Module7
 
-function t_8.new(p8)
-	-- upvalues: t_8 (ref)
-	return setmetatable({
-		conditions = if p8 == nil or p8.conditions == nil then {} else p8.conditions
-	}, t_8)
+function Module7.new(p1) --[[ Line: 1345 ]]
+	-- upvalues: Module7 (copy)
+	return (setmetatable({
+		conditions = if p1 == nil or p1.conditions == nil then {} else p1.conditions
+	}, Module7))
 end
 
-function t_8:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var155 = 0
+function Module7:encode() --[[ Line: 1351 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.conditions ~= nil and #self.conditions > 0 then
-		for i, v in self.conditions do
-			local var156 = v:encode()
-			local var157, var158 = protoModule.writeTag(buff, var155, 1, protoModule.wireTypes.lengthDelimited)
-			var157, var261 = protoModule.writeBuffer(var157, var158, var156, buffer.len(var156))
-			buff = var157
-			var155 = var158
+		for _, condition in self.conditions do
+			local EncodeResult = condition:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var155)
-	buffer.copy(buff_1, 0, buff, 0, var155)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_8.decode(p8)
-	-- upvalues: t_8 (ref), protoModule (ref), t (ref)
-	local var159 = t_8.new()
-	local var160 = 0
-	while var160 < buffer.len(p8) do
-		local _ = nil
-		local var161 = nil
-		local var162, var163, var164 = protoModule.readTag(p8, var160)
-		local var165 = var162
-		var161 = var163
-		var160 = var164
+function Module7.decode(Buf) --[[ Line: 1368 ]]
+	-- upvalues: Module7 (copy), ProtoModule (copy), t (copy)
+	local NewModule = Module7.new()
+	local v8 = 0
+	while v8 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v189 = ProtoModule.readTag(Buf, v8)
 		
-		if var161 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var166, var167 = protoModule.readVarInt(p8, var160)
-			local _ = var166
-			var160 = var167
-			continue
-		end
-		if var161 == protoModule.wireTypes.lengthDelimited then
-			if var165 == 1 then
-				local _ = nil
-				local var168, var169 = protoModule.readBuffer(p8, var160)
-				var160 = var169
-				table.insert(var159.conditions, t.PropCondition.decode(var168))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v189 = ProtoModule.readVarInt(Buf, v8)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v189 = ProtoModule.readBuffer(Buf, v8)
+				table.insert(NewModule.conditions, t.PropCondition.decode(Buffer1))
 			else
-				local _ = nil
-				local var170, var171 = protoModule.readVarInt(p8, var160)
-				var160 = var171 + var170
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v8)
+				v8 = VarInt2 + VarInt
 			end
-		elseif var161 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var172, var173 = protoModule.readFixed32(p8, var160)
-			local _ = var172
-			var160 = var173
-		elseif var161 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var174, var175 = protoModule.readFixed64(p8, var160)
-			local _ = var174
-			var160 = var175
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v189 = ProtoModule.readFixed32(Buf, v8)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v189 = ProtoModule.readFixed64(Buf, v8)
 		else
-			error("Unsupported wire type: " .. var265)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var159
+	return NewModule
 end
 
-function t_8:jsonEncode()
+function Module7:jsonEncode() --[[ Line: 1411 ]]
 	local t = {}
 	
 	if self.conditions ~= nil and #self.conditions > 0 then
-		local t_1 = {}
+		local Conditions = {}
 		
-		for i, v in self.conditions do
-			table.insert(t_1, v:jsonEncode())
+		for _, condition in self.conditions do
+			table.insert(Conditions, condition:jsonEncode())
 		end
-		t.conditions = t_1
+		t.conditions = Conditions
 	end
 	return t
 end
 
-function t_8:jsonDecode()
-	-- upvalues: t_8 (ref), t (ref)
-	local var176 = t_8.new()
+function Module7:jsonDecode() --[[ Line: 1425 ]]
+	-- upvalues: Module7 (copy), t (copy)
+	local NewModule = Module7.new()
 	
 	if self.conditions ~= nil then
-		local t_1 = {}
+		local Conditions = {}
 		
-		for i, v in self.conditions do
-			table.insert(t_1, t.PropCondition.jsonDecode(v))
+		for _, condition in self.conditions do
+			table.insert(Conditions, t.PropCondition.jsonDecode(condition))
 		end
-		var176.conditions = t_1
+		NewModule.conditions = Conditions
 	end
-	return var176
+	return NewModule
 end
 
-t_8.descriptor = {
+Module7.descriptor = {
 	name = "AndCondition",
 	fullName = "roblox.apppageplatform.shared.v1beta1.AndCondition"
 }
-t.AndCondition = t_8
-typeRegistryModule.default:register(t.AndCondition)
-local t_9 = {}
-t_9.__index = t_9
+t.AndCondition = Module7
+TypeRegistryModule.default:register(t.AndCondition)
+local Module8 = {}
+Module8.__index = Module8
 
-function t_9.new(p9)
-	-- upvalues: t_9 (ref)
-	return setmetatable({
-		conditions = if p9 == nil or p9.conditions == nil then {} else p9.conditions
-	}, t_9)
+function Module8.new(p1) --[[ Line: 1454 ]]
+	-- upvalues: Module8 (copy)
+	return (setmetatable({
+		conditions = if p1 == nil or p1.conditions == nil then {} else p1.conditions
+	}, Module8))
 end
 
-function t_9:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var177 = 0
+function Module8:encode() --[[ Line: 1460 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.conditions ~= nil and #self.conditions > 0 then
-		for i, v in self.conditions do
-			local var178 = v:encode()
-			local var179, var180 = protoModule.writeTag(buff, var177, 1, protoModule.wireTypes.lengthDelimited)
-			var179, var288 = protoModule.writeBuffer(var179, var180, var178, buffer.len(var178))
-			buff = var179
-			var177 = var180
+		for _, condition in self.conditions do
+			local EncodeResult = condition:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var177)
-	buffer.copy(buff_1, 0, buff, 0, var177)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_9.decode(p9)
-	-- upvalues: t_9 (ref), protoModule (ref), t (ref)
-	local var181 = t_9.new()
-	local var182 = 0
-	while var182 < buffer.len(p9) do
-		local _ = nil
-		local var183 = nil
-		local var184, var185, var186 = protoModule.readTag(p9, var182)
-		local var187 = var184
-		var183 = var185
-		var182 = var186
+function Module8.decode(Buf) --[[ Line: 1477 ]]
+	-- upvalues: Module8 (copy), ProtoModule (copy), t (copy)
+	local NewModule = Module8.new()
+	local v9 = 0
+	while v9 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v208 = ProtoModule.readTag(Buf, v9)
 		
-		if var183 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var188, var189 = protoModule.readVarInt(p9, var182)
-			local _ = var188
-			var182 = var189
-			continue
-		end
-		if var183 == protoModule.wireTypes.lengthDelimited then
-			if var187 == 1 then
-				local _ = nil
-				local var190, var191 = protoModule.readBuffer(p9, var182)
-				var182 = var191
-				table.insert(var181.conditions, t.PropCondition.decode(var190))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v208 = ProtoModule.readVarInt(Buf, v9)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v208 = ProtoModule.readBuffer(Buf, v9)
+				table.insert(NewModule.conditions, t.PropCondition.decode(Buffer1))
 			else
-				local _ = nil
-				local var192, var193 = protoModule.readVarInt(p9, var182)
-				var182 = var193 + var192
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v9)
+				v9 = VarInt2 + VarInt
 			end
-		elseif var183 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var194, var195 = protoModule.readFixed32(p9, var182)
-			local _ = var194
-			var182 = var195
-		elseif var183 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var196, var197 = protoModule.readFixed64(p9, var182)
-			local _ = var196
-			var182 = var197
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v208 = ProtoModule.readFixed32(Buf, v9)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v208 = ProtoModule.readFixed64(Buf, v9)
 		else
-			error("Unsupported wire type: " .. var292)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var181
+	return NewModule
 end
 
-function t_9:jsonEncode()
+function Module8:jsonEncode() --[[ Line: 1520 ]]
 	local t = {}
 	
 	if self.conditions ~= nil and #self.conditions > 0 then
-		local t_1 = {}
+		local Conditions = {}
 		
-		for i, v in self.conditions do
-			table.insert(t_1, v:jsonEncode())
+		for _, condition in self.conditions do
+			table.insert(Conditions, condition:jsonEncode())
 		end
-		t.conditions = t_1
+		t.conditions = Conditions
 	end
 	return t
 end
 
-function t_9:jsonDecode()
-	-- upvalues: t_9 (ref), t (ref)
-	local var198 = t_9.new()
+function Module8:jsonDecode() --[[ Line: 1534 ]]
+	-- upvalues: Module8 (copy), t (copy)
+	local NewModule = Module8.new()
 	
 	if self.conditions ~= nil then
-		local t_1 = {}
+		local Conditions = {}
 		
-		for i, v in self.conditions do
-			table.insert(t_1, t.PropCondition.jsonDecode(v))
+		for _, condition in self.conditions do
+			table.insert(Conditions, t.PropCondition.jsonDecode(condition))
 		end
-		var198.conditions = t_1
+		NewModule.conditions = Conditions
 	end
-	return var198
+	return NewModule
 end
 
-t_9.descriptor = {
+Module8.descriptor = {
 	name = "OrCondition",
 	fullName = "roblox.apppageplatform.shared.v1beta1.OrCondition"
 }
-t.OrCondition = t_9
-typeRegistryModule.default:register(t.OrCondition)
+t.OrCondition = Module8
+TypeRegistryModule.default:register(t.OrCondition)
 
 return {
 	PropCondition = t.PropCondition,

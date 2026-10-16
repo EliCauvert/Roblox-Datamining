@@ -1,16 +1,16 @@
-﻿local roact = require(script.Parent.Parent.Parent.dependencies).Roact
-local mockProvidersModule = require(script.Parent.mockProviders)
+﻿local Roact = require(script.Parent.Parent.Parent.dependencies).Roact
+local MockProvidersModule = require(script.Parent.mockProviders)
 
-return function(p1, p2)
-	-- upvalues: mockProvidersModule (ref), roact (ref)
-	if p2 == nil then
-		p2 = Instance.new("Frame")
+return function(p1, Frame: Frame) --[[ Line: 7 ]]
+	-- upvalues: MockProvidersModule (copy), Roact (copy)
+	if Frame == nil then
+		Frame = Instance.new("Frame")
 	end
-	local var1 = roact.mount(mockProvidersModule(p1), p2)
+	local MountResult = Roact.mount(MockProvidersModule(p1), Frame)
 	
-	return p2, function()
-		-- upvalues: roact (copy), var1 (ref), p2 (write)
-		roact.unmount(var1)
-		p2:Destroy()
+	return Frame, function() --[[ Line: 14 ]]
+		-- upvalues: Roact (upval), MountResult (copy), Frame (ref)
+		Roact.unmount(MountResult)
+		Frame:Destroy()
 	end
 end

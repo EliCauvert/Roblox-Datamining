@@ -1,46 +1,49 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local tileContextModule = require(script.Parent.TileContext)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local _ = require(foundation.Enums.FillBehavior)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local TileContextModule = require(script.Parent.TileContext)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Enums.FillBehavior)
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local config = {
 	isContained = false,
 	testId = "--foundation-tile",
 	FillDirection = Enum.FillDirection.Vertical
 }
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), tileContextModule (ref)
-	local var1 = withDefaultsModule(p1, t)
+return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 36 | Named "Tile" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TileContextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 39 ]]
+		-- upvalues: WithDefaultsModuleResult (copy)
+		return {
+			isContained = WithDefaultsModuleResult.isContained,
+			fillDirection = WithDefaultsModuleResult.FillDirection,
+			testId = WithDefaultsModuleResult.testId
+		}
+	end, {
+		WithDefaultsModuleResult.isContained,
+		WithDefaultsModuleResult.FillDirection,
+		WithDefaultsModuleResult.testId
+	})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = {
-			["bg-shift-200"] = var1.isContained,
-			["gap-small"] = not var1.isContained,
+			["bg-shift-200"] = WithDefaultsModuleResult.isContained,
+			["gap-small"] = not WithDefaultsModuleResult.isContained,
 			["radius-medium"] = true
 		},
-		stateLayer = { affordance = stateLayerAffordanceModule.None },
-		onStateChanged = var1.onStateChanged,
+		stateLayer = { affordance = StateLayerAffordanceModule.None },
+		onStateChanged = WithDefaultsModuleResult.onStateChanged,
 		layout = {
-			FillDirection = var1.FillDirection,
+			FillDirection = WithDefaultsModuleResult.FillDirection,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
-		Size = var1.Size,
-		ref = p2
+		Size = WithDefaultsModuleResult.Size,
+		ref = Ref
 	}), {
-		TileContext = if var1.children then reactModule.createElement(tileContextModule.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: var1 (ref)
-				return {
-					isContained = var1.isContained,
-					fillDirection = var1.FillDirection,
-					testId = var1.testId
-				}
-			end, { var1.isContained, var1.FillDirection, var1.testId })
-		}, var1.children) else nil
+		TileContext = if WithDefaultsModuleResult.children then ReactModule.createElement(TileContextModule.Provider, { value = UseMemoResult }, WithDefaultsModuleResult.children) else nil
 	})
 end)

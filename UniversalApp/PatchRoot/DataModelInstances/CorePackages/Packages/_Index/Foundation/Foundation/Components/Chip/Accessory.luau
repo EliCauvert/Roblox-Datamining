@@ -1,55 +1,56 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local uiblox = require(parent.BuilderIcons).Migration.uiblox
-local iconModule = require(foundation.Components.Icon)
-local imageModule = require(foundation.Components.Image)
-local viewModule = require(foundation.Components.View)
-local iconMigrationUtilsModule = require(foundation.Utility.iconMigrationUtils)
-local useCumulativeBackgroundModule = require(foundation.Utility.useCumulativeBackground)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local isMigrated = iconMigrationUtilsModule.isMigrated
-local isBuilderOrMigratedIcon = iconMigrationUtilsModule.isBuilderOrMigratedIcon
-local avatarGroupModule = require(foundation.Components.AvatarGroup)
-local _ = require(foundation.Enums.AvatarGroupType)
-local useBackgroundStyle = require(foundation.Providers.Style.BackgroundStyleContext).useBackgroundStyle
-local _ = require(foundation.Components.Types)
-local useAccessoryVariantsModule = require(script.Parent.useAccessoryVariants)
-local _ = require(foundation.Enums.ChipSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local Uiblox = require(Parent.BuilderIcons).Migration.uiblox
+local IconModule = require(Foundation.Components.Icon)
+local ImageModule = require(Foundation.Components.Image)
+local ViewModule = require(Foundation.Components.View)
+local IconMigrationUtilsModule = require(Foundation.Utility.iconMigrationUtils)
+local UseCumulativeBackgroundModule = require(Foundation.Utility.useCumulativeBackground)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local IsMigratedFunction = IconMigrationUtilsModule.isMigrated
+local IsBuilderOrMigratedIconFunction = IconMigrationUtilsModule.isBuilderOrMigratedIcon
+local AvatarGroupModule = require(Foundation.Components.AvatarGroup)
+local _ = require(Foundation.Enums.AvatarGroupType)
+local UseBackgroundStyleFunction = require(Foundation.Providers.Style.BackgroundStyleContext).useBackgroundStyle
+local _ = require(Foundation.Components.Types)
+local FlagsModule = require(Foundation.Utility.Flags)
+local UseAccessoryVariantsModule = require(script.Parent.useAccessoryVariants)
+local _ = require(Foundation.Enums.ChipSize)
 
-local function AvatarGroupWrapper(p1)
-	-- upvalues: useBackgroundStyle (ref), useCumulativeBackgroundModule (ref), reactModule (ref), avatarGroupModule (ref)
-	local var1 = useBackgroundStyle()
-	local cloned = table.clone(p1.config.props)
-	cloned.size = p1.size
-	cloned.backplateStyle = useCumulativeBackgroundModule(var1, p1.chipBackgroundStyle)
+local function AvatarGroupWrapper(p1) --[[ Line: 68 ]]
+	-- upvalues: UseBackgroundStyleFunction (copy), UseCumulativeBackgroundModule (copy), ReactModule (copy), AvatarGroupModule (copy)
+	local UseBackgroundStyleResult = UseBackgroundStyleFunction()
+	local Copy = table.clone(p1.config.props)
+	Copy.size = p1.size
+	Copy.backplateStyle = UseCumulativeBackgroundModule(UseBackgroundStyleResult, p1.chipBackgroundStyle)
 	
-	return reactModule.createElement(avatarGroupModule, cloned)
+	return ReactModule.createElement(AvatarGroupModule, Copy)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokensModule (ref), reactModule (ref), useAccessoryVariantsModule (ref), AvatarGroupWrapper (ref), isBuilderOrMigratedIcon (ref), iconModule (ref), isMigrated (ref), uiblox (ref), imageModule (ref), viewModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
+return ReactModule.memo(function(p1) --[[ Line: 76 | Named "Accessory" ]]
+	-- upvalues: UseTokensModule (copy), ReactModule (copy), UseAccessoryVariantsModule (copy), FlagsModule (copy), AvatarGroupWrapper (copy), IsBuilderOrMigratedIconFunction (copy), IconModule (copy), IsMigratedFunction (copy), Uiblox (copy), ImageModule (copy), ViewModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 78 ]]
+		-- upvalues: p1 (copy)
 		return if type(p1.config) == "string" then { isCircular = false, iconName = p1.config } else p1.config
 	end, { p1.config })
-	local var2 = useAccessoryVariantsModule(useTokensModule(), p1.size, p1.isLeading, if var1.type ~= "AvatarGroup" then var1.isCircular or false else true)
+	local UseAccessoryVariantsModuleResult = UseAccessoryVariantsModule(UseTokensModule(), p1.size, p1.isLeading, if FlagsModule.FoundationFixChipAccessoryLayout then UseMemoResult.type == "AvatarGroup" else UseMemoResult.type == "AvatarGroup" or (UseMemoResult.isCircular or false), p1.isIconOnly)
 	
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "auto-xy",
-		padding = var2.accessory.padding,
-		onActivated = var1.onActivated,
+		padding = UseAccessoryVariantsModuleResult.accessory.padding,
+		onActivated = UseMemoResult.onActivated,
 		isDisabled = p1.isDisabled,
 		LayoutOrder = if p1.isLeading then 1 else 3,
 		testId = p1.testId
-	}, if var1.type == "AvatarGroup" then reactModule.createElement(AvatarGroupWrapper, p1) elseif isBuilderOrMigratedIcon(var1.iconName) then reactModule.createElement(iconModule, {
-		name = if isMigrated(var1.iconName) then uiblox[var1.iconName].name else var1.iconName,
-		variant = if isMigrated(var1.iconName) then uiblox[var1.iconName].variant else var1.iconVariant,
-		size = var2.accessory.Size.Y.Offset,
+	}, if UseMemoResult.type == "AvatarGroup" then ReactModule.createElement(AvatarGroupWrapper, p1) elseif IsBuilderOrMigratedIconFunction(UseMemoResult.iconName) then ReactModule.createElement(IconModule, {
+		name = if IsMigratedFunction(UseMemoResult.iconName) then Uiblox[UseMemoResult.iconName].name else UseMemoResult.iconName,
+		variant = if IsMigratedFunction(UseMemoResult.iconName) then Uiblox[UseMemoResult.iconName].variant else UseMemoResult.iconVariant,
+		size = UseAccessoryVariantsModuleResult.accessory.Size.Y.Offset,
 		style = p1.contentStyle
-	}) else reactModule.createElement(imageModule, {
-		Image = var1.iconName,
-		Size = var2.accessory.Size,
+	}) else ReactModule.createElement(ImageModule, {
+		Image = UseMemoResult.iconName,
+		Size = UseAccessoryVariantsModuleResult.accessory.Size,
 		imageStyle = p1.contentStyle
 	}))
 end)

@@ -1,54 +1,54 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local text = foundationModule.Text
-local view = foundationModule.View
-local descriptionUpdatedModule = require(momentsCreationFlow.Actions.DescriptionUpdated)
-local useCallback = reactModule.useCallback
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useDispatch = momentsCommonModule.Hooks.useDispatch
-local useSelector = momentsCommonModule.Hooks.useSelector
-local useState = reactModule.useState
-local useTokens = foundationModule.Hooks.useTokens
-local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
-local constantsModule = require(momentsCreationFlow.Constants)
-local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
-local eventNamesModule = require(momentsCreationFlow.Analytics.EventNames)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local DescriptionUpdatedModule = require(MomentsCreationFlow.Actions.DescriptionUpdated)
+local UseCallbackFunction = ReactModule.useCallback
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseDispatchFunction = MomentsCommonModule.Hooks.useDispatch
+local UseSelectorFunction = MomentsCommonModule.Hooks.useSelector
+local UseStateFunction = ReactModule.useState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local CreationFlowContextModule = require(MomentsCreationFlow.Context.CreationFlowContext)
+local ConstantsModule = require(MomentsCreationFlow.Constants)
+local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
+local EventNamesModule = require(MomentsCreationFlow.Analytics.EventNames)
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useDeviceInsets (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), useSelector (ref), constantsModule (ref), useState (ref), useCallback (ref), descriptionUpdatedModule (ref), eventNamesModule (ref), view (ref), creationFlowLocalizationModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), text (ref)
-	local var1 = useDispatch()
-	local var2 = useDeviceInsets()
-	local var3 = useTokens()
-	local var4 = reactModule.useContext(creationFlowContextModule)
-	local var5, var6 = useState(useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].CreationFlow.description
-	end))
+return function(p1) --[[ Line: 37 ]]
+	-- upvalues: UseDispatchFunction (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseStateFunction (copy), UseCallbackFunction (copy), DescriptionUpdatedModule (copy), EventNamesModule (copy), View (copy), CreationFlowLocalizationModule (copy), Button (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), Text (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
+	local UseStateResult, UseStateResult2 = UseStateFunction((UseSelectorFunction(function(p2) --[[ Line: 43 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].CreationFlow.description
+	end)))
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "align-x-center auto-y size-full-0",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var3.Padding.Large),
-			PaddingBottom = UDim.new(0, math.max(var2.bottom, var3.Padding.Large)),
-			PaddingLeft = UDim.new(0, math.max(var2.left, var3.Padding.XLarge)),
-			PaddingRight = UDim.new(0, math.max(var2.right, var3.Padding.XLarge))
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, UseTokensResult.Padding.Large),
+			PaddingBottom = UDim.new(0, (math.max(UseDeviceInsetsResult.bottom, UseTokensResult.Padding.Large))),
+			PaddingLeft = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.XLarge))),
+			PaddingRight = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge)))
 		}),
-		SizeConstraint = reactModule.createElement(view, {
+		SizeConstraint = ReactModule.createElement(View, {
 			tag = "align-x-center auto-y col gap-large size-full-0",
-			sizeConstraint = { MaxSize = constantsModule.BottomBarSizeConstraint }
+			sizeConstraint = { MaxSize = ConstantsModule.BottomBarSizeConstraint }
 		}, {
-			TextBoxContainer = reactModule.createElement(view, {
+			TextBoxContainer = ReactModule.createElement(View, {
 				tag = "size-full-2100 bg-surface-100 padding-medium radius-medium"
 			}, {
-				TextBox = reactModule.createElement("TextBox", {
+				TextBox = ReactModule.createElement("TextBox", {
 					Size = UDim2.fromScale(1, 1),
 					BackgroundTransparency = 1,
 					ClearTextOnFocus = false,
@@ -56,64 +56,65 @@ return function(p1)
 					Font = Enum.Font.BuilderSans,
 					MaxVisibleGraphemes = 140,
 					MultiLine = false,
-					PlaceholderColor3 = var3.Color.Content.Muted.Color3,
-					PlaceholderText = var4.getLocalization(creationFlowLocalizationModule.PublishingDescription),
+					PlaceholderColor3 = UseTokensResult.Color.Content.Muted.Color3,
+					PlaceholderText = UseContextResult.getLocalization(CreationFlowLocalizationModule.PublishingDescription),
 					ShowNativeInput = true,
-					Text = var5,
-					TextColor3 = var3.Color.ActionStandard.Foreground.Color3,
-					TextSize = var3.FontSize.FontSize_400,
+					Text = UseStateResult,
+					TextColor3 = UseTokensResult.Color.ActionStandard.Foreground.Color3,
+					TextSize = UseTokensResult.FontSize.FontSize_400,
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = useCallback(function(p2)
-						-- upvalues: var6 (ref)
-						local var7 = p2.Text:gsub("[\r\n]+", " ")
-						local charCount = utf8.len(var7)
+					[ReactModule.Change.Text] = UseCallbackFunction(function(p2) --[[ Line: 54 ]]
+						-- upvalues: UseStateResult2 (copy)
+						local Text: string = p2.Text:gsub("[\r\n]+", " ")
+						local Length = utf8.len(Text)
 						
-						if charCount == nil or charCount < 140 then
-							var6(var7)
-							p2.Text = var7
+						if Length == nil or Length < 140 then
+							UseStateResult2(Text)
+							p2.Text = Text
 							
 							return
+						else
+							local Segment = string.sub(Text, 1, utf8.offset(Text, 141) - 1)
+							UseStateResult2(Segment)
+							p2.Text = Segment
 						end
-						local substring = string.sub(var7, 1, utf8.offset(var7, 141) - 1)
-						var6(substring)
-						p2.Text = substring
 					end, {}),
-					[reactModule.Event.FocusLost] = useCallback(function()
-						-- upvalues: var1 (ref), descriptionUpdatedModule (copy), var5 (ref), var4 (ref), eventNamesModule (copy)
-						var1(descriptionUpdatedModule(var5))
-						var4.fireEvent(eventNamesModule.EditingFlowDescriptionEdited)
-					end, { var5 })
+					[ReactModule.Event.FocusLost] = UseCallbackFunction(function() --[[ Line: 49 ]]
+						-- upvalues: UseDispatchResult (copy), DescriptionUpdatedModule (upval), UseStateResult (copy), UseContextResult (copy), EventNamesModule (upval)
+						UseDispatchResult(DescriptionUpdatedModule(UseStateResult))
+						UseContextResult.fireEvent(EventNamesModule.EditingFlowDescriptionEdited)
+					end, { UseStateResult })
 				})
 			}),
-			CTAs = reactModule.createElement(view, {
+			CTAs = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "align-x-center auto-y align-y-bottom anchor-bottom-center gap-small position-bottom-center row size-full-0"
 			}, {
-				PostButton = reactModule.createElement(button, {
+				PostButton = ReactModule.createElement(Button, {
 					LayoutOrder = 1,
-					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
+					fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
 					onActivated = p1.onPublish,
-					size = inputSize.Medium,
-					text = var4.getLocalization(creationFlowLocalizationModule.PublishingCtaPrimary),
-					variant = buttonVariant.Emphasis,
+					size = InputSize.Medium,
+					text = UseContextResult.getLocalization(CreationFlowLocalizationModule.PublishingCtaPrimary),
+					variant = ButtonVariant.Emphasis,
 					width = UDim.new(0.5, 0)
 				}),
-				ReturnToEditingButton = reactModule.createElement(button, {
+				ReturnToEditingButton = ReactModule.createElement(Button, {
 					LayoutOrder = 2,
-					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-					text = var4.getLocalization(creationFlowLocalizationModule.PublishingCtaSecondary),
-					variant = buttonVariant.Standard,
+					fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
+					text = UseContextResult.getLocalization(CreationFlowLocalizationModule.PublishingCtaSecondary),
+					variant = ButtonVariant.Standard,
 					width = UDim.new(0.5, 0),
 					onActivated = p1.onReturnToEditing,
-					size = inputSize.Medium
+					size = InputSize.Medium
 				})
 			}),
-			Disclaimer = reactModule.createElement(text, {
+			Disclaimer = ReactModule.createElement(Text, {
 				LayoutOrder = 3,
 				tag = "auto-xy text-body-small content-neutral text-align-x-center text-align-y-top",
-				Text = var4.getLocalization(creationFlowLocalizationModule.CreationTooltip)
+				Text = UseContextResult.getLocalization(CreationFlowLocalizationModule.CreationTooltip)
 			})
 		})
 	})

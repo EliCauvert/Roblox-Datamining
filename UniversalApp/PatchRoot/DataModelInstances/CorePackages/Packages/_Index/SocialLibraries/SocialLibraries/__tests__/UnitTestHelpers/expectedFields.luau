@@ -1,13 +1,13 @@
-﻿return function(p1, p2)
+﻿return function(List, List1) --[[ Line: 1 | Named "expectedFields" ]]
 	local t = {}
 	
-	for i, v in ipairs(p2) do
-		t[v] = true
+	for _, value in ipairs(List1) do
+		t[value] = true
 	end
-	for i_1 in pairs(t) do
-		assert(p1[i_1] ~= nil, string.format("Expected field %q", i_1))
+	for i in pairs(t) do
+		assert(List[i] ~= nil, string.format("Expected field %q", i))
 	end
-	for i_2 in pairs(p1) do
-		assert(t[i_2] ~= nil, string.format("Did not expect field %q", i_2))
+	for i1 in pairs(List) do
+		assert(t[i1] ~= nil, string.format("Did not expect field %q", i1))
 	end
 end

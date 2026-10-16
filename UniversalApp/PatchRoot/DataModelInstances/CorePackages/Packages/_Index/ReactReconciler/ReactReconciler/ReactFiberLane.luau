@@ -1,17 +1,17 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
 local _ = require(script.Parent.ReactInternalTypes)
-local console = require(parent.Shared).console
-local unknownModule = require(script.Parent["ReactFiberSchedulerPriorities.roblox"])
-local var1 = require(parent.SafeFlags).createGetFFlag("ReactInlineMergeLanes")()
-local invariant = require(parent.Shared).invariant
-local immediatePriority = unknownModule.ImmediatePriority
-local userBlockingPriority = unknownModule.UserBlockingPriority
-local normalPriority = unknownModule.NormalPriority
-local lowPriority = unknownModule.LowPriority
-local idlePriority = unknownModule.IdlePriority
-local noPriority = unknownModule.NoPriority
-local t = {
+local Console = require(Parent.Shared).console
+local ReactFiberSchedulerPrioritiesRobloxModule = require(script.Parent["ReactFiberSchedulerPriorities.roblox"])
+local v1 = require(Parent.SafeFlags).createGetFFlag("ReactInlineMergeLanes")()
+local InvariantFunction = require(Parent.Shared).invariant
+local ImmediatePriority = ReactFiberSchedulerPrioritiesRobloxModule.ImmediatePriority
+local UserBlockingPriority = ReactFiberSchedulerPrioritiesRobloxModule.UserBlockingPriority
+local NormalPriority = ReactFiberSchedulerPrioritiesRobloxModule.NormalPriority
+local LowPriority = ReactFiberSchedulerPrioritiesRobloxModule.LowPriority
+local IdlePriority = ReactFiberSchedulerPrioritiesRobloxModule.IdlePriority
+local NoPriority = ReactFiberSchedulerPrioritiesRobloxModule.NoPriority
+local ReactFiberLaneModule = {
 	SyncLanePriority = 15,
 	SyncBatchedLanePriority = 14,
 	InputDiscreteLanePriority = 12,
@@ -33,548 +33,564 @@ local t = {
 	OffscreenLane = 1073741824,
 	NoTimestamp = -1
 }
-local noLanePriority = t.NoLanePriority
+local NoLanePriority = ReactFiberLaneModule.NoLanePriority
 
-function t.getCurrentUpdateLanePriority()
-	-- upvalues: noLanePriority (write)
-	return noLanePriority
+function ReactFiberLaneModule.getCurrentUpdateLanePriority() --[[ Line: 147 ]]
+	-- upvalues: NoLanePriority (ref)
+	return NoLanePriority
 end
 
-function t.setCurrentUpdateLanePriority(p1)
-	-- upvalues: noLanePriority (write)
-	noLanePriority = p1
+function ReactFiberLaneModule.setCurrentUpdateLanePriority(Value) --[[ Line: 151 ]]
+	-- upvalues: NoLanePriority (ref)
+	NoLanePriority = Value
 end
 
-local defaultLanePriority = t.DefaultLanePriority
+local DefaultLanePriority = ReactFiberLaneModule.DefaultLanePriority
 
-local function getHighestPriorityLanes(p1)
-	-- upvalues: defaultLanePriority (write), reactGlobalsModule (ref), console (ref)
-	if bit32.band(1, p1) ~= 0 then
-		defaultLanePriority = 15
+local function getHighestPriorityLanes(Mask: number): number --[[ Line: 159 ]]
+	-- upvalues: DefaultLanePriority (ref), ReactGlobalsModule (copy), Console (copy)
+	if bit32.band(1, Mask) ~= 0 then
+		DefaultLanePriority = 15
 		
 		return 1
-	elseif bit32.band(2, p1) ~= 0 then
-		defaultLanePriority = 14
+	end
+	if bit32.band(2, Mask) ~= 0 then
+		DefaultLanePriority = 14
 		
 		return 2
-	elseif bit32.band(4, p1) ~= 0 then
-		defaultLanePriority = 13
+	end
+	if bit32.band(4, Mask) ~= 0 then
+		DefaultLanePriority = 13
 		
 		return 4
 	end
-	local bits = bit32.band(24, p1)
+	local Bits = bit32.band(24, Mask)
 	
-	if bits ~= 0 then
-		defaultLanePriority = 12
+	if Bits ~= 0 then
+		DefaultLanePriority = 12
 		
-		return bits
-	elseif bit32.band(p1, 32) ~= 0 then
-		defaultLanePriority = 11
+		return Bits
+	end
+	if bit32.band(Mask, 32) ~= 0 then
+		DefaultLanePriority = 11
 		
 		return 32
 	end
-	local bits_1 = bit32.band(192, p1)
+	local Bits1 = bit32.band(192, Mask)
 	
-	if bits_1 ~= 0 then
-		defaultLanePriority = 10
+	if Bits1 ~= 0 then
+		DefaultLanePriority = 10
 		
-		return bits_1
-	elseif bit32.band(p1, 256) ~= 0 then
-		defaultLanePriority = 9
+		return Bits1
+	end
+	if bit32.band(Mask, 256) ~= 0 then
+		DefaultLanePriority = 9
 		
 		return 256
 	end
-	local bits_2 = bit32.band(3584, p1)
+	local Bits2 = bit32.band(3584, Mask)
 	
-	if bits_2 ~= 0 then
-		defaultLanePriority = 8
+	if Bits2 ~= 0 then
+		DefaultLanePriority = 8
 		
-		return bits_2
-	elseif bit32.band(p1, 4096) ~= 0 then
-		defaultLanePriority = 7
+		return Bits2
+	end
+	if bit32.band(Mask, 4096) ~= 0 then
+		DefaultLanePriority = 7
 		
 		return 4096
 	end
-	local bits_3 = bit32.band(4186112, p1)
+	local Bits3 = bit32.band(4186112, Mask)
 	
-	if bits_3 ~= 0 then
-		defaultLanePriority = 6
+	if Bits3 ~= 0 then
+		DefaultLanePriority = 6
 		
-		return bits_3
+		return Bits3
 	end
-	local bits_4 = bit32.band(62914560, p1)
+	local Bits4 = bit32.band(62914560, Mask)
 	
-	if bits_4 ~= 0 then
-		defaultLanePriority = 5
+	if Bits4 ~= 0 then
+		DefaultLanePriority = 5
 		
-		return bits_4
-	elseif bit32.band(p1, 67108864) ~= 0 then
-		defaultLanePriority = 4
+		return Bits4
+	end
+	if bit32.band(Mask, 67108864) ~= 0 then
+		DefaultLanePriority = 4
 		
 		return 67108864
-	elseif bit32.band(p1, 134217728) ~= 0 then
-		defaultLanePriority = 3
+	end
+	if bit32.band(Mask, 134217728) ~= 0 then
+		DefaultLanePriority = 3
 		
 		return 134217728
 	end
-	local bits_5 = bit32.band(805306368, p1)
+	local Bits5 = bit32.band(805306368, Mask)
 	
-	if bits_5 ~= 0 then
-		defaultLanePriority = 2
+	if Bits5 ~= 0 then
+		DefaultLanePriority = 2
 		
-		return bits_5
-	elseif bit32.band(1073741824, p1) ~= 0 then
-		defaultLanePriority = 1
+		return Bits5
+	end
+	if bit32.band(1073741824, Mask) ~= 0 then
+		DefaultLanePriority = 1
 		
 		return 1073741824
-	elseif reactGlobalsModule.__DEV__ then
-		console.error("Should have found matching lanes. This is a bug in React.")
 	end
-	defaultLanePriority = 8
+	if ReactGlobalsModule.__DEV__ then
+		Console.error("Should have found matching lanes. This is a bug in React.")
+	end
+	DefaultLanePriority = 8
 	
-	return p1
+	return Mask
 end
 
-function t.schedulerPriorityToLanePriority(startValue)
-	-- upvalues: immediatePriority (ref), userBlockingPriority (ref), normalPriority (ref), lowPriority (ref), idlePriority (ref)
-	return if startValue == immediatePriority then 15 elseif startValue == userBlockingPriority then 10 elseif startValue == normalPriority or startValue == lowPriority then 8 elseif startValue == idlePriority then 2 else 0
+function ReactFiberLaneModule.schedulerPriorityToLanePriority(IdlePriority1): number --[[ Line: 234 ]]
+	-- upvalues: ImmediatePriority (copy), UserBlockingPriority (copy), NormalPriority (copy), LowPriority (copy), IdlePriority (copy)
+	return if IdlePriority1 == ImmediatePriority then 15 elseif IdlePriority1 == UserBlockingPriority then 10 elseif IdlePriority1 == NormalPriority or IdlePriority1 == LowPriority then 8 elseif IdlePriority1 == IdlePriority then 2 else 0
 end
 
-function t.lanePriorityToSchedulerPriority(startValue)
-	-- upvalues: immediatePriority (ref), userBlockingPriority (ref), normalPriority (ref), idlePriority (ref), noPriority (ref), invariant (ref)
-	if startValue == 15 or startValue == 14 then
-		return immediatePriority
-	elseif startValue == 13 or startValue == 12 or (startValue == 11 or startValue == 10) then
-		return userBlockingPriority
-	elseif startValue == 9 or startValue == 8 or (startValue == 7 or startValue == 6) or (startValue == 4 or startValue == 5) then
-		return normalPriority
-	elseif startValue == 3 or startValue == 2 or startValue == 1 then
-		return idlePriority
-	elseif startValue == 0 then
-		return noPriority
+function ReactFiberLaneModule.lanePriorityToSchedulerPriority(p1) --[[ Line: 255 ]]
+	-- upvalues: ImmediatePriority (copy), UserBlockingPriority (copy), NormalPriority (copy), IdlePriority (copy), NoPriority (copy), InvariantFunction (copy)
+	if p1 == 15 or p1 == 14 then
+		return ImmediatePriority
+	elseif p1 == 13 or p1 == 12 or p1 == 11 or p1 == 10 then
+		return UserBlockingPriority
+	elseif p1 == 9 or p1 == 8 or p1 == 7 or p1 == 6 or p1 == 4 or p1 == 5 then
+		return NormalPriority
+	elseif p1 == 3 or p1 == 2 or p1 == 1 then
+		return IdlePriority
+	elseif p1 == 0 then
+		return NoPriority
+	else
+		InvariantFunction(false, "Invalid update priority: %s. This is a bug in React.", p1)
+		error("unreachable")
 	end
-	invariant(false, "Invalid update priority: %s. This is a bug in React.", startValue)
+end
+
+local Callback2 = nil
+local Callback1 = nil
+
+function ReactFiberLaneModule.getNextLanes(p1, Value: number): number --[[ Line: 299 ]]
+	-- upvalues: DefaultLanePriority (ref), getHighestPriorityLanes (copy), Callback1 (ref), Callback2 (ref)
+	local PendingLanes: number = p1.pendingLanes
+	
+	if PendingLanes == 0 then
+		DefaultLanePriority = 0
+		
+		return 0
+	end
+	local v2 = 0
+	local v3 = 0
+	local ExpiredLanes = p1.expiredLanes
+	local SuspendedLanes: number = p1.suspendedLanes
+	local PingedLanes: number = p1.pingedLanes
+	
+	if ExpiredLanes == 0 then
+		local Bits = bit32.band(PendingLanes, 134217727)
+		
+		if Bits == 0 then
+			local Bits2 = bit32.band(PendingLanes, (bit32.bnot(SuspendedLanes)))
+			
+			if Bits2 == 0 then
+				if PingedLanes ~= 0 then
+					v2 = getHighestPriorityLanes(PingedLanes)
+					v3 = DefaultLanePriority
+				end
+			else
+				v2 = getHighestPriorityLanes(Bits2)
+				v3 = DefaultLanePriority
+			end
+		else
+			local Bits1 = bit32.band(Bits, (bit32.bnot(SuspendedLanes)))
+			
+			if Bits1 == 0 then
+				local Bits3 = bit32.band(Bits, PingedLanes)
+				
+				if Bits3 ~= 0 then
+					v2 = getHighestPriorityLanes(Bits3)
+					v3 = DefaultLanePriority
+				end
+			else
+				v2 = getHighestPriorityLanes(Bits1)
+				v3 = DefaultLanePriority
+			end
+		end
+	else
+		v2 = ExpiredLanes
+		DefaultLanePriority = 15
+		v3 = 15
+	end
+	if v2 == 0 then
+		return 0
+	end
+	local Bits = bit32.band(PendingLanes, bit32.lshift(Callback1(v2), 1) - 1)
+	
+	if Value ~= 0 and Value ~= Bits and bit32.band(Value, SuspendedLanes) == 0 then
+		getHighestPriorityLanes(Value)
+		
+		if v3 <= DefaultLanePriority then
+			return Value
+		end
+		DefaultLanePriority = v3
+	end
+	local EntangledLanes: number = p1.entangledLanes
+	
+	if EntangledLanes ~= 0 then
+		local Entanglements = p1.entanglements
+		local Bits4 = bit32.band(Bits, EntangledLanes)
+		while Bits4 > 0 do
+			local CallbackResult: number = Callback2(Bits4)
+			Bits = bit32.bor(Bits, Entanglements[CallbackResult])
+			Bits4 = bit32.band(Bits4, (bit32.bnot((bit32.lshift(1, CallbackResult)))))
+		end
+	end
+	return Bits
+end
+
+function ReactFiberLaneModule.getMostRecentEventTime(p2, Value: number): number --[[ Line: 418 ]]
+	-- upvalues: Callback2 (ref)
+	local EventTimes = p2.eventTimes
+	local v4 = -1
+	while Value > 0 do
+		local CallbackResult: number = Callback2(Value)
+		local Shifted = bit32.lshift(1, CallbackResult)
+		local EventTime = EventTimes[CallbackResult]
+		
+		if v4 < EventTime then
+			v4 = EventTime
+		end
+		Value = bit32.band(Value, (bit32.bnot(Shifted)))
+	end
+	return v4
+end
+
+function ReactFiberLaneModule.computeExpirationTime(Mask, p3: number): number --[[ Line: 438 ]]
+	-- upvalues: getHighestPriorityLanes (copy), DefaultLanePriority (ref)
+	getHighestPriorityLanes(Mask)
+	local DefaultLanePriority1: number = DefaultLanePriority
+	
+	return if DefaultLanePriority1 >= 10 then p3 + 250 elseif DefaultLanePriority1 >= 6 then p3 + 5000 else -1
+end
+
+function ReactFiberLaneModule.markStarvedLanesAsExpired(p3, p4: number) --[[ Line: 468 ]]
+	-- upvalues: Callback2 (ref), getHighestPriorityLanes (copy), DefaultLanePriority (ref)
+	local SuspendedLanes: number = p3.suspendedLanes
+	local PingedLanes: number = p3.pingedLanes
+	local ExpirationTimes = p3.expirationTimes
+	local PendingLanes = p3.pendingLanes
+	while PendingLanes > 0 do
+		local CallbackResult: number = Callback2(PendingLanes)
+		local Shifted = bit32.lshift(1, CallbackResult)
+		local ExpirationTime = ExpirationTimes[CallbackResult]
+		
+		if ExpirationTime == -1 then
+			if bit32.band(Shifted, SuspendedLanes) == 0 or bit32.band(Shifted, PingedLanes) ~= 0 then
+				getHighestPriorityLanes(Shifted)
+				local DefaultLanePriority1: number = DefaultLanePriority
+				ExpirationTimes[CallbackResult] = if DefaultLanePriority1 >= 10 then p4 + 250 elseif DefaultLanePriority1 >= 6 then p4 + 5000 else -1
+			end
+		elseif ExpirationTime <= p4 then
+			p3.expiredLanes = bit32.bor(p3.expiredLanes, Shifted)
+		end
+		PendingLanes = bit32.band(PendingLanes, (bit32.bnot(Shifted)))
+	end
+end
+
+function ReactFiberLaneModule.getHighestPriorityPendingLanes(p5) --[[ Line: 510 ]]
+	-- upvalues: getHighestPriorityLanes (copy)
+	return (getHighestPriorityLanes(p5.pendingLanes))
+end
+
+function ReactFiberLaneModule.getLanesToRetrySynchronouslyOnError(p5): number --[[ Line: 515 ]]
+	local Bits = bit32.band(p5.pendingLanes, 3221225471)
+	
+	return if Bits == 0 then if bit32.band(Bits, 1073741824) == 0 then 0 else 1073741824 else Bits
+end
+
+function ReactFiberLaneModule.returnNextLanesPriority() --[[ Line: 528 ]]
+	-- upvalues: DefaultLanePriority (ref)
+	return DefaultLanePriority
+end
+
+function ReactFiberLaneModule.includesNonIdleWork(Value: number): boolean --[[ Line: 533 ]]
+	return bit32.band(Value, 134217727) ~= 0
+end
+
+function ReactFiberLaneModule.includesOnlyRetries(Value: number): boolean --[[ Line: 538 ]]
+	return bit32.band(Value, 62914560) == Value
+end
+
+function ReactFiberLaneModule.includesOnlyTransitions(Value: number): boolean --[[ Line: 543 ]]
+	return bit32.band(Value, 4186112) == Value
+end
+
+local Callback = nil
+
+local function findUpdateLane(p5, p6: number) --[[ Line: 553 ]]
+	-- upvalues: Callback (ref), findUpdateLane (copy), InvariantFunction (copy)
+	if p5 ~= 0 then
+		if p5 == 15 then
+			return 1
+		end
+		if p5 == 14 then
+			return 2
+		end
+		if p5 == 12 then
+			local CallbackResult = Callback((bit32.band(24, (bit32.bnot(p6)))))
+			
+			return if CallbackResult == 0 then findUpdateLane(10, p6) else CallbackResult
+		end
+		if p5 == 10 then
+			local CallbackResult = Callback((bit32.band(192, (bit32.bnot(p6)))))
+			
+			return if CallbackResult == 0 then findUpdateLane(8, p6) else CallbackResult
+		end
+		if p5 == 8 then
+			local CallbackResult = Callback((bit32.band(3584, (bit32.bnot(p6)))))
+			
+			if CallbackResult == 0 then
+				CallbackResult = Callback((bit32.band(4186112, (bit32.bnot(p6)))))
+				
+				if CallbackResult == 0 then
+					CallbackResult = Callback(3584)
+				end
+			end
+			return CallbackResult
+		elseif p5 ~= 6 and p5 ~= 5 and p5 == 2 then
+			local CallbackResult = Callback((bit32.band(805306368, (bit32.bnot(p6)))))
+			
+			if CallbackResult == 0 then
+				CallbackResult = Callback(805306368)
+			end
+			return CallbackResult
+		end
+	end
+	InvariantFunction(false, "Invalid update priority: %s. This is a bug in React.", p5)
 	error("unreachable")
 end
 
-local pickArbitraryLaneIndex = nil
-local getLowestPriorityLane = nil
-local getEqualOrHigherPriorityLanes = nil
+ReactFiberLaneModule.findUpdateLane = findUpdateLane
 
-function t.getNextLanes(p1, p2)
-	-- upvalues: defaultLanePriority (write), getHighestPriorityLanes (ref), getLowestPriorityLane (write), pickArbitraryLaneIndex (write)
-	local pendingLanes = p1.pendingLanes
+function ReactFiberLaneModule.findTransitionLane(p5: number, p6: number) --[[ Line: 612 ]]
+	-- upvalues: Callback (ref)
+	local CallbackResult = Callback((bit32.band(4186112, (bit32.bnot(p6)))))
 	
-	if pendingLanes == 0 then
-		defaultLanePriority = 0
+	if CallbackResult == 0 then
+		CallbackResult = Callback((bit32.band(4186112, (bit32.bnot(p5)))))
 		
-		return 0
-	end
-	local var2 = 0
-	local var3 = 0
-	local expiredLanes = p1.expiredLanes
-	local suspendedLanes = p1.suspendedLanes
-	local pingedLanes = p1.pingedLanes
-	
-	if expiredLanes == 0 then
-		local bits = bit32.band(pendingLanes, 134217727)
-		
-		if bits == 0 then
-			local bits_1 = bit32.band(pendingLanes, bit32.bnot(suspendedLanes))
-			
-			if bits_1 ~= 0 then
-				var2 = getHighestPriorityLanes(bits_1)
-				var3 = defaultLanePriority
-			elseif pingedLanes ~= 0 then
-				var2 = getHighestPriorityLanes(pingedLanes)
-				var3 = defaultLanePriority
-			end
-		else
-			local bits_1 = bit32.band(bits, bit32.bnot(suspendedLanes))
-			
-			if bits_1 == 0 then
-				local bits_2 = bit32.band(bits, pingedLanes)
-				
-				if bits_2 ~= 0 then
-					var2 = getHighestPriorityLanes(bits_2)
-					var3 = defaultLanePriority
-				end
-			else
-				var2 = getHighestPriorityLanes(bits_1)
-				var3 = defaultLanePriority
-			end
-		end
-	else
-		var2 = expiredLanes
-		defaultLanePriority = 15
-		var3 = 15
-	end
-	if var2 == 0 then
-		return 0
-	end
-	var2 = bit32.band(pendingLanes, bit32.lshift(getLowestPriorityLane(var2), 1) - 1)
-	
-	if p2 ~= 0 and p2 ~= var2 and bit32.band(p2, suspendedLanes) == 0 then
-		getHighestPriorityLanes(p2)
-		
-		if var3 <= defaultLanePriority then
-			return p2
-		end
-		defaultLanePriority = var3
-	end
-	local entangledLanes = p1.entangledLanes
-	
-	if entangledLanes ~= 0 then
-		local entanglements = p1.entanglements
-		local bits = bit32.band(var2, entangledLanes)
-		while bits > 0 do
-			local var4 = pickArbitraryLaneIndex(bits)
-			var2 = bit32.bor(var2, entanglements[var4])
-			bits = bit32.band(bits, bit32.bnot(bit32.lshift(1, var4)))
+		if CallbackResult == 0 then
+			CallbackResult = Callback(4186112)
 		end
 	end
-	return var2
+	return CallbackResult
 end
 
-function t.getMostRecentEventTime(p3, p4)
-	-- upvalues: pickArbitraryLaneIndex (write)
-	local eventTimes = p3.eventTimes
-	local var5 = -1
-	while p4 > 0 do
-		local var6 = pickArbitraryLaneIndex(p4)
-		local shifted = bit32.lshift(1, var6)
-		local var7 = eventTimes[var6]
-		
-		if var5 < var7 then
-			var5 = var7
-		end
-		p4 = bit32.band(p4, bit32.bnot(shifted))
-	end
-	return var5
-end
-
-function t.computeExpirationTime(p5, p6)
-	-- upvalues: getHighestPriorityLanes (ref), defaultLanePriority (write)
-	getHighestPriorityLanes(p5)
+function ReactFiberLaneModule.findRetryLane(p5: number) --[[ Line: 632 ]]
+	-- upvalues: Callback (ref)
+	local CallbackResult = Callback((bit32.band(62914560, (bit32.bnot(p5)))))
 	
-	return if defaultLanePriority >= 10 then p6 + 250 elseif defaultLanePriority >= 6 then p6 + 5000 else -1
-end
-
-function t.markStarvedLanesAsExpired(p5, p6)
-	-- upvalues: pickArbitraryLaneIndex (write), getHighestPriorityLanes (ref), defaultLanePriority (write)
-	local pendingLanes = p5.pendingLanes
-	local suspendedLanes = p5.suspendedLanes
-	local pingedLanes = p5.pingedLanes
-	local expirationTimes = p5.expirationTimes
-	local var8 = pendingLanes
-	while var8 > 0 do
-		local var9 = pickArbitraryLaneIndex(var8)
-		local shifted = bit32.lshift(1, var9)
-		local var10 = expirationTimes[var9]
-		
-		if var10 == -1 then
-			if bit32.band(shifted, suspendedLanes) == 0 or bit32.band(shifted, pingedLanes) ~= 0 then
-				getHighestPriorityLanes(shifted)
-				local var11 = defaultLanePriority
-				expirationTimes[var9] = if var11 >= 10 then p6 + 250 elseif var11 >= 6 then p6 + 5000 else -1
-			end
-		elseif var10 <= p6 then
-			p5.expiredLanes = bit32.bor(p5.expiredLanes, shifted)
-		end
-		var8 = bit32.band(var8, bit32.bnot(shifted))
+	if CallbackResult == 0 then
+		CallbackResult = Callback(62914560)
 	end
+	return CallbackResult
 end
 
-function t.getHighestPriorityPendingLanes(p7)
-	-- upvalues: getHighestPriorityLanes (ref)
-	return getHighestPriorityLanes(p7.pendingLanes)
+local function _(Value: number): number --[[ Line: 644 | Named "getHighestPriorityLane" ]]
+	return (bit32.band(Value, -Value))
 end
 
-function t.getLanesToRetrySynchronouslyOnError(p7)
-	local bits = bit32.band(p7.pendingLanes, 3221225471)
+Callback1 = function(p5: number): number --[[ Line: 648 | Named "getLowestPriorityLane" ]]
+	local Shift = 31 - bit32.countlz(p5)
 	
-	return if bits == 0 then if bit32.band(bits, 1073741824) == 0 then 0 else 1073741824 else bits
+	return if Shift < 0 then 0 else bit32.lshift(1, Shift)
 end
 
-function t.returnNextLanesPriority()
-	-- upvalues: defaultLanePriority (write)
-	return defaultLanePriority
+local _ = function(p5): number --[[ Line: 658 | Named "getEqualOrHigherPriorityLanes" ]]
+	-- upvalues: Callback1 (ref)
+	return bit32.lshift(Callback1(p5), 1) - 1
 end
 
-function t.includesNonIdleWork(p7)
-	return bit32.band(p7, 134217727) ~= 0
+Callback = function(Value: number): number --[[ Line: 662 | Named "pickArbitraryLane" ]]
+	return (bit32.band(Value, -Value))
 end
 
-function t.includesOnlyRetries(p7)
-	return bit32.band(p7, 62914560) == p7
+ReactFiberLaneModule.pickArbitraryLane = Callback
+
+Callback2 = function(Bits: number): number --[[ Line: 671 | Named "pickArbitraryLaneIndex" ]]
+	return 31 - bit32.countlz(Bits)
 end
 
-function t.includesOnlyTransitions(p7)
-	return bit32.band(p7, 4186112) == p7
+function ReactFiberLaneModule.includesSomeLane(Value: number, Mask: number): boolean --[[ Line: 680 ]]
+	return bit32.band(Value, Mask) ~= 0
 end
 
-local var12 = nil
-
-local function findUpdateLane(p7, p8)
-	-- upvalues: var12 (write), findUpdateLane (ref), invariant (ref)
-	if p7 ~= 0 then
-		if p7 == 15 then
-			return 1
-		elseif p7 == 14 then
-			return 2
-		elseif p7 == 12 then
-			local var13 = var12(bit32.band(24, bit32.bnot(p8)))
-			
-			return if var13 == 0 then findUpdateLane(10, p8) else var13
-		elseif p7 == 10 then
-			local var14 = var12(bit32.band(192, bit32.bnot(p8)))
-			
-			return if var14 == 0 then findUpdateLane(8, p8) else var14
-		elseif p7 == 8 then
-			local var15 = var12(bit32.band(3584, bit32.bnot(p8)))
-			
-			if var15 == 0 then
-				var15 = var12(bit32.band(4186112, bit32.bnot(p8)))
-				
-				if var15 == 0 then
-					var15 = var12(3584)
-				end
-			end
-			return var15
-		elseif p7 == 6 or p7 == 5 or p7 ~= 2 then
-			invariant(false, "Invalid update priority: %s. This is a bug in React.", p7)
-			error("unreachable")
-			
-			return
-		end
-		local var16 = var12(bit32.band(805306368, bit32.bnot(p8)))
-		
-		if var16 == 0 then
-			var16 = var12(805306368)
-		end
-		return var16
-	end
+function ReactFiberLaneModule.isSubsetOfLanes(Value: number, Mask: number): boolean --[[ Line: 685 ]]
+	return bit32.band(Value, Mask) == Mask
 end
 
-t.findUpdateLane = findUpdateLane
-
-function t.findTransitionLane(p7, p8)
-	-- upvalues: var12 (write)
-	local var13 = var12(bit32.band(4186112, bit32.bnot(p8)))
-	
-	if var13 == 0 then
-		var13 = var12(bit32.band(4186112, bit32.bnot(p7)))
-		
-		if var13 == 0 then
-			var13 = var12(4186112)
-		end
-	end
-	return var13
+local function mergeLanes(Value: number, Mask: number): number --[[ Line: 690 ]]
+	return (bit32.bor(Value, Mask))
 end
 
-function t.findRetryLane(p7)
-	-- upvalues: var12 (write)
-	local var13 = var12(bit32.band(62914560, bit32.bnot(p7)))
-	
-	if var13 == 0 then
-		var13 = var12(62914560)
-	end
-	return var13
+ReactFiberLaneModule.mergeLanes = if v1 then bit32.bor else mergeLanes
+
+function ReactFiberLaneModule.removeLanes(Value: number, p5: number): number --[[ Line: 698 ]]
+	return (bit32.band(Value, (bit32.bnot(p5))))
 end
 
-local function _(p7)
-	return bit32.band(p7, -p7)
+function ReactFiberLaneModule.laneToLanes(p5) --[[ Line: 705 ]]
+	return p5
 end
 
-getLowestPriorityLane = function(p7)
-	local var13 = 31 - bit32.countlz(p7)
-	
-	return if var13 < 0 then 0 else bit32.lshift(1, var13)
+function ReactFiberLaneModule.higherPriorityLane(p5, p6) --[[ Line: 710 ]]
+	return if p5 == 0 or p6 == 0 then if p5 == 0 then p6 else p5 elseif p5 < p6 then p5 else p6
 end
 
-getEqualOrHigherPriorityLanes = function(p7)
-	-- upvalues: getLowestPriorityLane (write)
-	return bit32.lshift(getLowestPriorityLane(p7), 1) - 1
+function ReactFiberLaneModule.higherLanePriority(p5, p6) --[[ Line: 726 ]]
+	return if p5 == 0 or p6 >= p5 then p6 else p5
 end
 
-function t.pickArbitraryLane(p7)
-	return bit32.band(p7, -p7)
-end
-
-pickArbitraryLaneIndex = function(p7)
-	return 31 - bit32.countlz(p7)
-end
-
-function t.includesSomeLane(p7, p8)
-	return bit32.band(p7, p8) ~= 0
-end
-
-function t.isSubsetOfLanes(value, p7)
-	return bit32.band(value, p7) == p7
-end
-
-t.mergeLanes = if var1 then bit32.bor else function(p7, p8)
-	return bit32.bor(p7, p8)
-end
-
-function t.removeLanes(p7, p8)
-	return bit32.band(p7, bit32.bnot(p8))
-end
-
-function t.laneToLanes(p7)
-	return p7
-end
-
-function t.higherPriorityLane(p7, p8)
-	return if p7 == 0 or p8 == 0 then if p7 == 0 then p8 else p7 elseif p7 < p8 then p7 else p8
-end
-
-function t.higherLanePriority(p7, p8)
-	return if p7 == 0 or p8 >= p7 then p8 else p7
-end
-
-function t.createLaneMap(p7)
+function ReactFiberLaneModule.createLaneMap(p5) --[[ Line: 737 ]]
 	return {
-		[0] = p7,
-		[1] = p7,
-		[2] = p7,
-		[3] = p7,
-		[4] = p7,
-		[5] = p7,
-		[6] = p7,
-		[7] = p7,
-		[8] = p7,
-		[9] = p7,
-		[10] = p7,
-		[11] = p7,
-		[12] = p7,
-		[13] = p7,
-		[14] = p7,
-		[15] = p7,
-		[16] = p7,
-		[17] = p7,
-		[18] = p7,
-		[19] = p7,
-		[20] = p7,
-		[21] = p7,
-		[22] = p7,
-		[23] = p7,
-		[24] = p7,
-		[25] = p7,
-		[26] = p7,
-		[27] = p7,
-		[28] = p7,
-		[29] = p7,
-		[30] = p7,
-		[31] = p7
+		[0] = p5,
+		[1] = p5,
+		[2] = p5,
+		[3] = p5,
+		[4] = p5,
+		[5] = p5,
+		[6] = p5,
+		[7] = p5,
+		[8] = p5,
+		[9] = p5,
+		[10] = p5,
+		[11] = p5,
+		[12] = p5,
+		[13] = p5,
+		[14] = p5,
+		[15] = p5,
+		[16] = p5,
+		[17] = p5,
+		[18] = p5,
+		[19] = p5,
+		[20] = p5,
+		[21] = p5,
+		[22] = p5,
+		[23] = p5,
+		[24] = p5,
+		[25] = p5,
+		[26] = p5,
+		[27] = p5,
+		[28] = p5,
+		[29] = p5,
+		[30] = p5,
+		[31] = p5
 	}
 end
 
-function t.markRootUpdated(p7, p8, p9)
-	p7.pendingLanes = bit32.bor(p7.pendingLanes, p8)
-	local var13 = p8 - 1
-	p7.suspendedLanes = bit32.band(p7.suspendedLanes, var13)
-	p7.pingedLanes = bit32.band(p7.pingedLanes, var13)
-	p7.eventTimes[31 - bit32.countlz(p8)] = p9
+function ReactFiberLaneModule.markRootUpdated(p5, Mask: number, p6) --[[ Line: 781 ]]
+	p5.pendingLanes = bit32.bor(p5.pendingLanes, Mask)
+	local MaskDelta = Mask - 1
+	p5.suspendedLanes = bit32.band(p5.suspendedLanes, MaskDelta)
+	p5.pingedLanes = bit32.band(p5.pingedLanes, MaskDelta)
+	p5.eventTimes[31 - bit32.countlz(Mask)] = p6
 end
 
-function t.markRootSuspended(p7, p8)
-	-- upvalues: pickArbitraryLaneIndex (write)
-	p7.suspendedLanes = bit32.bor(p7.suspendedLanes, p8)
-	p7.pingedLanes = bit32.band(p7.pingedLanes, bit32.bnot(p8))
-	local expirationTimes = p7.expirationTimes
-	local var13 = p8
-	while var13 > 0 do
-		local var14 = pickArbitraryLaneIndex(var13)
-		local shifted = bit32.lshift(1, var14)
-		expirationTimes[var14] = -1
-		var13 = bit32.band(var13, bit32.bnot(shifted))
+function ReactFiberLaneModule.markRootSuspended(p5, Mask: number) --[[ Line: 810 ]]
+	-- upvalues: Callback2 (ref)
+	p5.suspendedLanes = bit32.bor(p5.suspendedLanes, Mask)
+	p5.pingedLanes = bit32.band(p5.pingedLanes, (bit32.bnot(Mask)))
+	local ExpirationTimes = p5.expirationTimes
+	local Value: number = Mask
+	while Value > 0 do
+		local CallbackResult: number = Callback2(Value)
+		ExpirationTimes[CallbackResult] = -1
+		Value = bit32.band(Value, (bit32.bnot((bit32.lshift(1, CallbackResult)))))
 	end
 end
 
-function t.markRootPinged(p9, p10, _)
-	p9.pingedLanes = bit32.bor(p9.pingedLanes, bit32.band(p9.suspendedLanes, p10))
+function ReactFiberLaneModule.markRootPinged(p6, Mask: number, _) --[[ Line: 828 ]]
+	p6.pingedLanes = bit32.bor(p6.pingedLanes, (bit32.band(p6.suspendedLanes, Mask)))
 end
 
-function t.markRootExpired(p9, p10)
-	p9.expiredLanes = bit32.bor(p9.expiredLanes, bit32.band(p10, p9.pendingLanes))
+function ReactFiberLaneModule.markRootExpired(p6, Value: number) --[[ Line: 834 ]]
+	p6.expiredLanes = bit32.bor(p6.expiredLanes, (bit32.band(Value, p6.pendingLanes)))
 end
 
-function t.markDiscreteUpdatesExpired(p9)
-	p9.expiredLanes = bit32.bor(p9.expiredLanes, bit32.band(24, p9.pendingLanes))
+function ReactFiberLaneModule.markDiscreteUpdatesExpired(p6) --[[ Line: 840 ]]
+	p6.expiredLanes = bit32.bor(p6.expiredLanes, (bit32.band(24, p6.pendingLanes)))
 end
 
-function t.hasDiscreteLanes(p9)
-	return bit32.band(p9, 24) ~= 0
+function ReactFiberLaneModule.hasDiscreteLanes(Value: number): boolean --[[ Line: 846 ]]
+	return bit32.band(Value, 24) ~= 0
 end
 
-function t.markRootMutableRead(p9, p10)
-	p9.mutableReadLanes = bit32.bor(p9.mutableReadLanes, bit32.band(p10, p9.pendingLanes))
+function ReactFiberLaneModule.markRootMutableRead(p6, Value: number) --[[ Line: 851 ]]
+	p6.mutableReadLanes = bit32.bor(p6.mutableReadLanes, (bit32.band(Value, p6.pendingLanes)))
 end
 
-function t.markRootFinished(p9, p10)
-	-- upvalues: pickArbitraryLaneIndex (write)
-	local bits = bit32.band(p9.pendingLanes, bit32.bnot(p10))
-	p9.pendingLanes = p10
-	p9.suspendedLanes = 0
-	p9.pingedLanes = 0
-	p9.expiredLanes = bit32.band(p9.expiredLanes, p10)
-	p9.mutableReadLanes = bit32.band(p9.mutableReadLanes, p10)
-	p9.entangledLanes = bit32.band(p9.entangledLanes, p10)
-	local entanglements = p9.entanglements
-	local eventTimes = p9.eventTimes
-	local expirationTimes = p9.expirationTimes
-	local var15 = bits
-	while var15 > 0 do
-		local var16 = pickArbitraryLaneIndex(var15)
-		local shifted = bit32.lshift(1, var16)
-		entanglements[var16] = 0
-		eventTimes[var16] = -1
-		expirationTimes[var16] = -1
-		var15 = bit32.band(var15, bit32.bnot(shifted))
+function ReactFiberLaneModule.markRootFinished(p6, Mask: number) --[[ Line: 857 ]]
+	-- upvalues: Callback2 (ref)
+	local Bits = bit32.band(p6.pendingLanes, (bit32.bnot(Mask)))
+	p6.pendingLanes = Mask
+	p6.suspendedLanes = 0
+	p6.pingedLanes = 0
+	p6.expiredLanes = bit32.band(p6.expiredLanes, Mask)
+	p6.mutableReadLanes = bit32.band(p6.mutableReadLanes, Mask)
+	p6.entangledLanes = bit32.band(p6.entangledLanes, Mask)
+	local Entanglements = p6.entanglements
+	local EventTimes = p6.eventTimes
+	local ExpirationTimes = p6.expirationTimes
+	local Value: number = Bits
+	while Value > 0 do
+		local CallbackResult: number = Callback2(Value)
+		Entanglements[CallbackResult] = 0
+		EventTimes[CallbackResult] = -1
+		ExpirationTimes[CallbackResult] = -1
+		Value = bit32.band(Value, (bit32.bnot((bit32.lshift(1, CallbackResult)))))
 	end
 end
 
-function t.markRootEntangled(vectorA, vectorB)
-	-- upvalues: pickArbitraryLaneIndex (write)
-	vectorA.entangledLanes = bit32.bor(vectorA.entangledLanes, vectorB)
-	local entanglements = vectorA.entanglements
-	local var17 = vectorB
-	while var17 > 0 do
-		local var18 = pickArbitraryLaneIndex(var17)
-		local shifted = bit32.lshift(1, var18)
-		entanglements[var18] = bit32.bor(entanglements[var18], vectorB)
-		var17 = bit32.band(var17, bit32.bnot(shifted))
+function ReactFiberLaneModule.markRootEntangled(p7, Mask: number) --[[ Line: 890 ]]
+	-- upvalues: Callback2 (ref)
+	p7.entangledLanes = bit32.bor(p7.entangledLanes, Mask)
+	local Entanglements = p7.entanglements
+	local Value: number = Mask
+	while Value > 0 do
+		local CallbackResult: number = Callback2(Value)
+		local Shifted = bit32.lshift(1, CallbackResult)
+		Entanglements[CallbackResult] = bit32.bor(Entanglements[CallbackResult], Mask)
+		Value = bit32.band(Value, (bit32.bnot(Shifted)))
 	end
 end
 
-function t.getBumpedLaneForHydration(p11, p12)
-	-- upvalues: getHighestPriorityLanes (ref), defaultLanePriority (write), invariant (ref)
-	getHighestPriorityLanes(p12)
-	local var19 = nil
+function ReactFiberLaneModule.getBumpedLaneForHydration(p8, Mask: number): number --[[ Line: 906 ]]
+	-- upvalues: getHighestPriorityLanes (copy), DefaultLanePriority (ref), InvariantFunction (copy)
+	getHighestPriorityLanes(Mask)
+	local DefaultLanePriority1 = DefaultLanePriority
+	local Value: number? = nil
 	
-	if defaultLanePriority == 15 or defaultLanePriority == 14 then
-		var19 = 0
-	elseif defaultLanePriority == 13 or defaultLanePriority == 12 then
-		var19 = 4
-	elseif defaultLanePriority == 11 or defaultLanePriority == 10 then
-		var19 = 32
-	elseif defaultLanePriority == 9 or defaultLanePriority == 8 then
-		var19 = 256
-	elseif defaultLanePriority == 7 or defaultLanePriority == 6 then
-		var19 = 4096
-	elseif defaultLanePriority == 5 then
-		var19 = 4096
-	elseif defaultLanePriority == 4 then
-		var19 = 67108864
-	elseif defaultLanePriority == 3 or defaultLanePriority == 2 then
-		var19 = 134217728
-	elseif defaultLanePriority == 1 or defaultLanePriority == 0 then
-		var19 = 0
+	if DefaultLanePriority1 == 15 or DefaultLanePriority1 == 14 then
+		Value = 0
+	elseif DefaultLanePriority1 == 13 or DefaultLanePriority1 == 12 then
+		Value = 4
+	elseif DefaultLanePriority1 == 11 or DefaultLanePriority1 == 10 then
+		Value = 32
+	elseif DefaultLanePriority1 == 9 or DefaultLanePriority1 == 8 then
+		Value = 256
+	elseif DefaultLanePriority1 == 7 or DefaultLanePriority1 == 6 then
+		Value = 4096
+	elseif DefaultLanePriority1 == 5 then
+		Value = 4096
+	elseif DefaultLanePriority1 == 4 then
+		Value = 67108864
+	elseif DefaultLanePriority1 == 3 or DefaultLanePriority1 == 2 then
+		Value = 134217728
+	elseif DefaultLanePriority1 == 1 or DefaultLanePriority1 == 0 then
+		Value = 0
 	else
-		invariant(false, "Invalid lane: %s. This is a bug in React.", tostring(var19))
+		InvariantFunction(false, "Invalid lane: %s. This is a bug in React.", (tostring(Value)))
 	end
-	return if bit32.band(var19, bit32.bor(p11.suspendedLanes, p12)) == 0 then var19 else 0
+	return if bit32.band(Value, (bit32.bor(p8.suspendedLanes, Mask))) == 0 then Value else 0
 end
 
-return t
+return ReactFiberLaneModule

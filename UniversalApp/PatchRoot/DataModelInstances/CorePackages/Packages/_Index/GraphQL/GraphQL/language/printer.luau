@@ -1,324 +1,322 @@
-﻿local array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
-local httpService = game:GetService("HttpService")
+﻿local Array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
+local HttpService = game:GetService("HttpService")
 local _ = require(script.Parent.ast)
-local visit = require(script.Parent.visitor).visit
-local printBlockString = require(script.Parent.blockString).printBlockString
-local t = nil
-local _ = nil
-local join = nil
-local block = nil
-local wrap = nil
-local indent = nil
-local _ = nil
-local hasMultilineItems = nil
+local VisitFunction = require(script.Parent.visitor).visit
+local PrintBlockStringFunction = require(script.Parent.blockString).printBlockString
+local Leave = nil
+local Callback = nil
+local Callback2 = nil
+local Callback1 = nil
+local Callback3 = nil
+local isMultiline = nil
+local Callback4 = nil
 
-local function print_(p1)
-	-- upvalues: visit (ref), t (write)
-	return visit(p1, { leave = t })
+local function print_(p1) --[[ Line: 75 ]]
+	-- upvalues: VisitFunction (copy), Leave (ref)
+	return VisitFunction(p1, { leave = Leave })
 end
 
-local function addDescription(p1)
-	-- upvalues: join (write)
-	return function(_, p2)
-		-- upvalues: join (copy), p1 (ref)
-		return join({ p2.description, p1(p2) }, "\n")
+local function addDescription(Callback1) --[[ Line: 83 ]]
+	-- upvalues: Callback (ref)
+	return function(_, p1) --[[ Line: 85 ]]
+		-- upvalues: Callback (upval), Callback1 (copy)
+		return Callback({ p1.description, Callback1(p1) }, "\n")
 	end
 end
 
-t = {
-	Name = function(_, p1)
+Leave = {
+	Name = function(_, p1) --[[ Line: 92 ]]
 		return p1.value
 	end,
-	Variable = function(_, p1)
+	Variable = function(_, p1): string --[[ Line: 96 ]]
 		return "$" .. tostring(p1.name)
 	end,
-	Document = function(_, p1)
-		-- upvalues: join (write)
-		return join(p1.definitions, "\n\n") .. "\n"
+	Document = function(_, p1): string --[[ Line: 102 ]]
+		-- upvalues: Callback (ref)
+		return Callback(p1.definitions, "\n\n") .. "\n"
 	end,
-	OperationDefinition = function(_, p1)
-		-- upvalues: wrap (write), join (write)
-		local operation = p1.operation
-		local name = p1.name
-		local var1 = wrap("(", join(p1.variableDefinitions, ", "), ")")
-		local var2 = join(p1.directives, " ")
-		local selectionSet = p1.selectionSet
+	OperationDefinition = function(_, p1) --[[ Line: 106 ]]
+		-- upvalues: Callback1 (ref), Callback (ref)
+		local Operation = p1.operation
+		local Name = p1.name
+		local v1 = Callback1("(", Callback(p1.variableDefinitions, ", "), ")")
+		local v2 = Callback(p1.directives, " ")
+		local SelectionSet = p1.selectionSet
 		
-		return if name or var2 and var2 ~= "" or (var1 and var1 ~= "" or operation ~= "query") then join({ operation, join({ name, var1 }), var2, selectionSet }, " ") else selectionSet
+		return if Name or v2 and v2 ~= "" or v1 and v1 ~= "" or Operation ~= "query" then Callback({ Operation, Callback({ Name, v1 }), v2, SelectionSet }, " ") else SelectionSet
 	end,
-	VariableDefinition = function(_, p1)
-		-- upvalues: wrap (write), join (write)
-		return tostring(p1.variable) .. ": " .. tostring(p1.type) .. wrap(" = ", p1.defaultValue) .. wrap(" ", join(p1.directives, " "))
+	VariableDefinition = function(_, p1): string --[[ Line: 131 ]]
+		-- upvalues: Callback1 (ref), Callback (ref)
+		return tostring(p1.variable) .. ": " .. tostring(p1.type) .. Callback1(" = ", p1.defaultValue) .. Callback1(" ", Callback(p1.directives, " "))
 	end,
-	SelectionSet = function(_, p1)
-		-- upvalues: block (write)
-		return block(p1.selections)
+	SelectionSet = function(_, p1) --[[ Line: 143 ]]
+		-- upvalues: Callback2 (ref)
+		return Callback2(p1.selections)
 	end,
-	Field = function(_, p1)
-		-- upvalues: wrap (write), join (write), indent (write)
-		local alias = p1.alias
-		local name = p1.name
-		local arguments = p1.arguments
-		local directives = p1.directives
-		local selectionSet = p1.selectionSet
-		local text = wrap("", alias, ": ") .. tostring(name)
-		local text_1 = text .. wrap("(", join(arguments, ", "), ")")
-		local charCount = utf8.len(text_1)
-		assert(charCount ~= nil, "invalid utf8 string")
+	Field = function(_, p1) --[[ Line: 147 ]]
+		-- upvalues: Callback1 (ref), Callback (ref), Callback3 (ref)
+		local Arguments = p1.arguments
+		local Directives = p1.directives
+		local SelectionSet = p1.selectionSet
+		local Text = Callback1("", p1.alias, ": ") .. tostring(p1.name)
+		local Text1 = Text .. Callback1("(", Callback(Arguments, ", "), ")")
+		local Length = utf8.len(Text1)
+		assert(Length ~= nil, "invalid utf8 string")
 		
-		if charCount > 80 then
-			text_1 = text .. wrap("(\n", indent(join(arguments, "\n")), "\n)")
+		if Length > 80 then
+			Text1 = Text .. Callback1("(\n", Callback3(Callback(Arguments, "\n")), "\n)")
 		end
-		return join({ text_1, join(directives, " "), selectionSet }, " ")
+		return Callback({ Text1, Callback(Directives, " "), SelectionSet }, " ")
 	end,
-	Argument = function(_, p1)
+	Argument = function(_, p1): string --[[ Line: 168 ]]
 		return tostring(p1.name) .. ": " .. tostring(p1.value)
 	end,
-	FragmentSpread = function(_, p1)
-		-- upvalues: wrap (write), join (write)
-		return "..." .. tostring(p1.name) .. wrap(" ", join(p1.directives, " "))
+	FragmentSpread = function(_, p1): string --[[ Line: 176 ]]
+		-- upvalues: Callback1 (ref), Callback (ref)
+		return "..." .. tostring(p1.name) .. Callback1(" ", Callback(p1.directives, " "))
 	end,
-	InlineFragment = function(_, p1)
-		-- upvalues: join (write), wrap (write)
-		return join({
+	InlineFragment = function(_, p1) --[[ Line: 182 ]]
+		-- upvalues: Callback (ref), Callback1 (ref)
+		return Callback({
 			"...",
-			wrap("on ", p1.typeCondition),
-			join(p1.directives, " "),
+			Callback1("on ", p1.typeCondition),
+			Callback(p1.directives, " "),
 			p1.selectionSet
 		}, " ")
 	end,
-	FragmentDefinition = function(_, p1)
-		-- upvalues: wrap (write), join (write)
-		return "fragment " .. tostring(p1.name) .. wrap("(", join(p1.variableDefinitions, ", "), ")") .. " " .. "on " .. tostring(p1.typeCondition) .. " " .. wrap("", join(p1.directives, " "), " ") .. tostring(p1.selectionSet)
+	FragmentDefinition = function(_, p1): string --[[ Line: 193 ]]
+		-- upvalues: Callback1 (ref), Callback (ref)
+		return "fragment " .. tostring(p1.name) .. Callback1("(", Callback(p1.variableDefinitions, ", "), ")") .. " " .. "on " .. tostring(p1.typeCondition) .. " " .. Callback1("", Callback(p1.directives, " "), " ") .. tostring(p1.selectionSet)
 	end,
-	IntValue = function(_, p1)
+	IntValue = function(_, p1) --[[ Line: 216 ]]
 		return p1.value
 	end,
-	FloatValue = function(_, p1)
+	FloatValue = function(_, p1) --[[ Line: 220 ]]
 		return p1.value
 	end,
-	StringValue = function(_, p1, p2)
-		-- upvalues: printBlockString (ref), httpService (ref)
-		local value = p1.value
+	StringValue = function(_, p1, p2) --[[ Line: 224 ]]
+		-- upvalues: PrintBlockStringFunction (copy), HttpService (copy)
+		local Value = p1.value
 		
-		return if p1.block then printBlockString(value, if p2 == "description" then "" else "  ") else httpService:JSONEncode(value)
+		return if p1.block then PrintBlockStringFunction(Value, if p2 == "description" then "" else "  ") else HttpService:JSONEncode(Value)
 	end,
-	BooleanValue = function(_, p1)
+	BooleanValue = function(_, p1): string --[[ Line: 231 ]]
 		return if p1.value then "true" else "false"
 	end,
-	NullValue = function(_, _)
+	NullValue = function(_, _): string --[[ Line: 239 ]]
 		return "null"
 	end,
-	EnumValue = function(_, p1)
+	EnumValue = function(_, p1) --[[ Line: 242 ]]
 		return p1.value
 	end,
-	ListValue = function(_, p1)
-		-- upvalues: join (write)
-		return "[" .. join(p1.values, ", ") .. "]"
+	ListValue = function(_, p1): string --[[ Line: 246 ]]
+		-- upvalues: Callback (ref)
+		return "[" .. Callback(p1.values, ", ") .. "]"
 	end,
-	ObjectValue = function(_, p1)
-		-- upvalues: join (write)
-		return "{" .. join(p1.fields, ", ") .. "}"
+	ObjectValue = function(_, p1): string --[[ Line: 250 ]]
+		-- upvalues: Callback (ref)
+		return "{" .. Callback(p1.fields, ", ") .. "}"
 	end,
-	ObjectField = function(_, p1)
-		return p1.name .. ": " .. p22.value
+	ObjectField = function(_, p1): string --[[ Line: 254 ]]
+		return p1.name .. ": " .. p1.value
 	end,
-	Directive = function(_, p1)
-		-- upvalues: wrap (write), join (write)
-		return "@" .. tostring(p1.name) .. wrap("(", join(p1.arguments, ", "), ")")
+	Directive = function(_, p1): string --[[ Line: 262 ]]
+		-- upvalues: Callback1 (ref), Callback (ref)
+		return "@" .. tostring(p1.name) .. Callback1("(", Callback(p1.arguments, ", "), ")")
 	end,
-	NamedType = function(_, p1)
+	NamedType = function(_, p1) --[[ Line: 270 ]]
 		return p1.name
 	end,
-	ListType = function(_, p1)
+	ListType = function(_, p1): string --[[ Line: 274 ]]
 		return "[" .. tostring(p1.type) .. "]"
 	end,
-	NonNullType = function(_, p1)
+	NonNullType = function(_, p1): string --[[ Line: 278 ]]
 		return tostring(p1.type) .. "!"
 	end,
-	SchemaDefinition = addDescription(function(p1)
-		-- upvalues: join (write), block (write)
-		return join({
+	SchemaDefinition = addDescription(function(p1) --[[ Line: 286 ]]
+		-- upvalues: Callback (ref), Callback2 (ref)
+		return Callback({
 			"schema",
-			join(p1.directives, " "),
-			block(p1.operationTypes)
+			Callback(p1.directives, " "),
+			Callback2(p1.operationTypes)
 		}, " ")
 	end),
-	OperationTypeDefinition = function(_, p1)
+	OperationTypeDefinition = function(_, p1): string --[[ Line: 293 ]]
 		return tostring(p1.operation) .. ": " .. tostring(p1.type)
 	end,
-	ScalarTypeDefinition = addDescription(function(p1)
-		-- upvalues: join (write)
-		return join({ "scalar", p1.name, join(p1.directives, " ") }, " ")
+	ScalarTypeDefinition = addDescription(function(p1) --[[ Line: 299 ]]
+		-- upvalues: Callback (ref)
+		return Callback({ "scalar", p1.name, Callback(p1.directives, " ") }, " ")
 	end),
-	ObjectTypeDefinition = addDescription(function(p1)
-		-- upvalues: join (write), wrap (write), block (write)
-		return join({
+	ObjectTypeDefinition = addDescription(function(p1) --[[ Line: 306 ]]
+		-- upvalues: Callback (ref), Callback1 (ref), Callback2 (ref)
+		return Callback({
 			"type",
 			p1.name,
-			wrap("implements ", join(p1.interfaces, " & ")),
-			join(p1.directives, " "),
-			block(p1.fields)
+			Callback1("implements ", Callback(p1.interfaces, " & ")),
+			Callback(p1.directives, " "),
+			Callback2(p1.fields)
 		}, " ")
 	end),
-	FieldDefinition = addDescription(function(p1)
-		-- upvalues: hasMultilineItems (write), wrap (write), indent (write), join (write)
-		local arguments = p1.arguments
+	FieldDefinition = addDescription(function(p1): string --[[ Line: 320 ]]
+		-- upvalues: Callback4 (ref), Callback1 (ref), Callback3 (ref), Callback (ref)
+		local Arguments = p1.arguments
 		
-		return tostring(p1.name) .. (if hasMultilineItems(arguments) then wrap("(\n", indent(join(arguments, "\n")), "\n)") else wrap("(", join(arguments, ", "), ")")) .. ": " .. tostring(p1.type) .. wrap(" ", join(p1.directives, " "))
+		return tostring(p1.name) .. (if Callback4(Arguments) then Callback1("(\n", Callback3(Callback(Arguments, "\n")), "\n)") else Callback1("(", Callback(Arguments, ", "), ")")) .. ": " .. tostring(p1.type) .. Callback1(" ", Callback(p1.directives, " "))
 	end),
-	InputValueDefinition = addDescription(function(p1)
-		-- upvalues: join (write), wrap (write)
-		return join({
+	InputValueDefinition = addDescription(function(p1) --[[ Line: 334 ]]
+		-- upvalues: Callback (ref), Callback1 (ref)
+		return Callback({
 			tostring(p1.name) .. ": " .. tostring(p1.type),
-			wrap("= ", p1.defaultValue),
-			join(p1.directives, " ")
+			Callback1("= ", p1.defaultValue),
+			Callback(p1.directives, " ")
 		}, " ")
 	end),
-	InterfaceTypeDefinition = addDescription(function(p1)
-		-- upvalues: join (write), wrap (write), block (write)
-		return join({
+	InterfaceTypeDefinition = addDescription(function(p1) --[[ Line: 346 ]]
+		-- upvalues: Callback (ref), Callback1 (ref), Callback2 (ref)
+		return Callback({
 			"interface",
 			p1.name,
-			wrap("implements ", join(p1.interfaces, " & ")),
-			join(p1.directives, " "),
-			block(p1.fields)
+			Callback1("implements ", Callback(p1.interfaces, " & ")),
+			Callback(p1.directives, " "),
+			Callback2(p1.fields)
 		}, " ")
 	end),
-	UnionTypeDefinition = addDescription(function(p1)
-		-- upvalues: join (write)
-		local types = p1.types
+	UnionTypeDefinition = addDescription(function(p1) --[[ Line: 361 ]]
+		-- upvalues: Callback (ref)
+		local Types = p1.types
 		
-		return join({
+		return Callback({
 			"union",
 			p1.name,
-			join(p1.directives, " "),
-			if types and #types ~= 0 then "= " .. join(types, " | ") else ""
+			Callback(p1.directives, " "),
+			if Types and #Types ~= 0 then "= " .. Callback(Types, " | ") else ""
 		}, " ")
 	end),
-	EnumTypeDefinition = addDescription(function(p1)
-		-- upvalues: join (write), block (write)
-		return join({
+	EnumTypeDefinition = addDescription(function(p1) --[[ Line: 374 ]]
+		-- upvalues: Callback (ref), Callback2 (ref)
+		return Callback({
 			"enum",
 			p1.name,
-			join(p1.directives, " "),
-			block(p1.values)
+			Callback(p1.directives, " "),
+			Callback2(p1.values)
 		}, " ")
 	end),
-	EnumValueDefinition = addDescription(function(p1)
-		-- upvalues: join (write)
-		return join({ p1.name, join(p1.directives, " ") }, " ")
+	EnumValueDefinition = addDescription(function(p1) --[[ Line: 387 ]]
+		-- upvalues: Callback (ref)
+		return Callback({ p1.name, Callback(p1.directives, " ") }, " ")
 	end),
-	InputObjectTypeDefinition = addDescription(function(p1)
-		-- upvalues: join (write), block (write)
-		return join({
+	InputObjectTypeDefinition = addDescription(function(p1) --[[ Line: 397 ]]
+		-- upvalues: Callback (ref), Callback2 (ref)
+		return Callback({
 			"input",
 			p1.name,
-			join(p1.directives, " "),
-			block(p1.fields)
+			Callback(p1.directives, " "),
+			Callback2(p1.fields)
 		}, " ")
 	end),
-	DirectiveDefinition = addDescription(function(p1)
-		-- upvalues: hasMultilineItems (write), wrap (write), indent (write), join (write)
-		local arguments = p1.arguments
+	DirectiveDefinition = addDescription(function(p1): string --[[ Line: 410 ]]
+		-- upvalues: Callback4 (ref), Callback1 (ref), Callback3 (ref), Callback (ref)
+		local Arguments = p1.arguments
+		local Repeatable = p1.repeatable
 		
-		return "directive @" .. tostring(p1.name) .. (if hasMultilineItems(arguments) then wrap("(\n", indent(join(arguments, "\n")), "\n)") else wrap("(", join(arguments, ", "), ")")) .. (if p1.repeatable then " repeatable" else "") .. " on " .. join(p1.locations, " | ")
+		return "directive @" .. tostring(p1.name) .. (if Callback4(Arguments) then Callback1("(\n", Callback3(Callback(Arguments, "\n")), "\n)") else Callback1("(", Callback(Arguments, ", "), ")")) .. (if Repeatable then " repeatable" else "") .. " on " .. Callback(p1.locations, " | ")
 	end),
-	SchemaExtension = function(_, p1)
-		-- upvalues: join (write), block (write)
-		return join({
+	SchemaExtension = function(_, p1) --[[ Line: 425 ]]
+		-- upvalues: Callback (ref), Callback2 (ref)
+		return Callback({
 			"extend schema",
-			join(p1.directives, " "),
-			block(p1.operationTypes)
+			Callback(p1.directives, " "),
+			Callback2(p1.operationTypes)
 		}, " ")
 	end,
-	ScalarTypeExtension = function(_, p1)
-		-- upvalues: join (write)
-		return join({ "extend scalar", p1.name, join(p1.directives, " ") }, " ")
+	ScalarTypeExtension = function(_, p1) --[[ Line: 436 ]]
+		-- upvalues: Callback (ref)
+		return Callback({ "extend scalar", p1.name, Callback(p1.directives, " ") }, " ")
 	end,
-	ObjectTypeExtension = function(_, p1)
-		-- upvalues: join (write), wrap (write), block (write)
-		return join({
+	ObjectTypeExtension = function(_, p1) --[[ Line: 447 ]]
+		-- upvalues: Callback (ref), Callback1 (ref), Callback2 (ref)
+		return Callback({
 			"extend type",
 			p1.name,
-			wrap("implements ", join(p1.interfaces, " & ")),
-			join(p1.directives, " "),
-			block(p1.fields)
+			Callback1("implements ", Callback(p1.interfaces, " & ")),
+			Callback(p1.directives, " "),
+			Callback2(p1.fields)
 		}, " ")
 	end,
-	InterfaceTypeExtension = function(_, p1)
-		-- upvalues: join (write), wrap (write), block (write)
-		return join({
+	InterfaceTypeExtension = function(_, p1) --[[ Line: 462 ]]
+		-- upvalues: Callback (ref), Callback1 (ref), Callback2 (ref)
+		return Callback({
 			"extend interface",
 			p1.name,
-			wrap("implements ", join(p1.interfaces, " & ")),
-			join(p1.directives, " "),
-			block(p1.fields)
+			Callback1("implements ", Callback(p1.interfaces, " & ")),
+			Callback(p1.directives, " "),
+			Callback2(p1.fields)
 		}, " ")
 	end,
-	UnionTypeExtension = function(_, p1)
-		-- upvalues: join (write)
-		local types = p1.types
+	UnionTypeExtension = function(_, p1) --[[ Line: 477 ]]
+		-- upvalues: Callback (ref)
+		local Types = p1.types
 		
-		return join({
+		return Callback({
 			"extend union",
 			p1.name,
-			join(p1.directives, " "),
-			if types and #types ~= 0 then "= " .. join(types, " | ") else ""
+			Callback(p1.directives, " "),
+			if Types and #Types ~= 0 then "= " .. Callback(Types, " | ") else ""
 		}, " ")
 	end,
-	EnumTypeExtension = function(_, p1)
-		-- upvalues: join (write), block (write)
-		return join({
+	EnumTypeExtension = function(_, p1) --[[ Line: 490 ]]
+		-- upvalues: Callback (ref), Callback2 (ref)
+		return Callback({
 			"extend enum",
 			p1.name,
-			join(p1.directives, " "),
-			block(p1.values)
+			Callback(p1.directives, " "),
+			Callback2(p1.values)
 		}, " ")
 	end,
-	InputObjectTypeExtension = function(_, p1)
-		-- upvalues: join (write), block (write)
-		return join({
+	InputObjectTypeExtension = function(_, p1) --[[ Line: 503 ]]
+		-- upvalues: Callback (ref), Callback2 (ref)
+		return Callback({
 			"extend input",
 			p1.name,
-			join(p1.directives, " "),
-			block(p1.fields)
+			Callback(p1.directives, " "),
+			Callback2(p1.fields)
 		}, " ")
 	end
 }
 
-join = function(p1, p2)
-	-- upvalues: array (ref)
-	p2 = p2 or ""
+Callback = function(Directives, p1) --[[ Line: 521 | Named "join" ]]
+	-- upvalues: Array (copy)
+	local P80 = p1 or ""
 	
-	return if p1 then array.join(array.filter(p1, function(p3)
-		return tostring(p3) and p3 ~= ""
-	end), p2) else ""
+	return if Directives then Array.join(Array.filter(Directives, function(p2): boolean --[[ Line: 525 ]]
+		return tostring(p2) and p2 ~= ""
+	end), P80) else ""
 end
 
-block = function(p1)
-	-- upvalues: wrap (write), indent (write), join (write)
-	return wrap("{\n", indent(join(p1, "\n")), "\n}")
+Callback2 = function(Fields) --[[ Line: 539 | Named "block" ]]
+	-- upvalues: Callback1 (ref), Callback3 (ref), Callback (ref)
+	return Callback1("{\n", Callback3(Callback(Fields, "\n")), "\n}")
 end
 
-wrap = function(p1, p2, p3)
-	p3 = p3 or ""
+Callback1 = function(Text, DefaultValue, p1): string --[[ Line: 546 | Named "wrap" ]]
+	local P85 = p1 or ""
 	
-	return if p2 == nil or p2 == "" then "" else p1 .. tostring(p2) .. tostring(p3)
+	return if DefaultValue == nil or DefaultValue == "" then "" else Text .. tostring(DefaultValue) .. tostring(P85)
 end
 
-indent = function(p1)
-	-- upvalues: wrap (write)
-	return wrap("  ", p1:gsub("\n", "\n  "))
+Callback3 = function(Text: string) --[[ Line: 556 | Named "indent" ]]
+	-- upvalues: Callback1 (ref)
+	return Callback1("  ", (Text:gsub("\n", "\n  ")))
 end
 
-local function isMultiline(p1)
+isMultiline = function(p1): boolean --[[ Line: 563 | Named "isMultiline" ]]
 	return string.find(tostring(p1), "\n") ~= nil
 end
 
-hasMultilineItems = function(p1)
-	-- upvalues: array (ref), isMultiline (write)
-	return p1 ~= nil and array.some(p1, isMultiline)
+Callback4 = function(Arguments) --[[ Line: 567 | Named "hasMultilineItems" ]]
+	-- upvalues: Array (copy), isMultiline (ref)
+	return Arguments ~= nil and Array.some(Arguments, isMultiline)
 end
 
 return { print = print_ }

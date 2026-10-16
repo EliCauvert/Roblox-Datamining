@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("Foundation").Parent
-local _ = require(parent.React)
-local useClock = require(parent.ReactUtils).useClock
+﻿local Parent = script:FindFirstAncestor("Foundation").Parent
+local _ = require(Parent.React)
+local UseClockFunction = require(Parent.ReactUtils).useClock
 
-return function(p1)
-	-- upvalues: useClock (ref)
-	return useClock():map(function(p2)
-		-- upvalues: p1 (ref)
+return function(p1) --[[ Line: 11 | Named "useRotation" ]]
+	-- upvalues: UseClockFunction (copy)
+	return UseClockFunction():map(function(p2: number) --[[ Line: 14 ]]
+		-- upvalues: p1 (copy)
 		return p2 * 360 * (p1 or 1)
 	end)
 end

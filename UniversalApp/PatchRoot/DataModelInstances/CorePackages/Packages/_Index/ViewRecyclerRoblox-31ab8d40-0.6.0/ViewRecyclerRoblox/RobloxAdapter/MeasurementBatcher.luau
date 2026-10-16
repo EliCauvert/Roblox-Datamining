@@ -1,48 +1,51 @@
 ﻿local _ = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
 
 return {
-	new = function(p1, p2)
-		p2 = p2 or task.defer
-		local var1 = nil
-		local var2 = true
+	new = function(Callback1, p1) --[[ Line: 14 ]]
+		local Callback = p1 or task.defer
+		local v1 = nil
+		local Flag = true
 		
 		return {
-			add = function(p3)
-				-- upvalues: var2 (write), var1 (write), p2 (ref), p1 (ref)
-				if not var2 then return end
-				local var3 = var1
+			add = function(p2) --[[ Line: 22 ]]
+				-- upvalues: Flag (ref), v1 (ref), Callback (copy), Callback1 (copy)
+				if not Flag then return end
+				local List = v1
 				
-				if var3 == nil then
-					var3 = {}
-					var1 = var3
-					p2(function()
-						-- upvalues: var2 (copy), var1 (copy), var3 (write), p1 (copy)
-						if var2 and var1 == var3 then
-							var1 = nil
-							p1(var3)
+				if List == nil then
+					List = {}
+					v1 = List
+					Callback(function() --[[ Line: 30 ]]
+						-- upvalues: Flag (upval), v1 (upval), List (ref), Callback1 (upval)
+						if Flag and v1 == List then
+							v1 = nil
+							Callback1(List)
 						end
 					end)
 				end
-				table.insert(var3, p3)
+				table.insert(List, p2)
 			end,
-			flush = function()
-				-- upvalues: var1 (write), var2 (write), p1 (ref)
-				if var2 and var1 ~= nil then
-					var1 = nil
-					p1(var1)
+			flush = function() --[[ Line: 46 ]]
+				-- upvalues: v1 (ref), Flag (ref), Callback1 (copy)
+				local v2 = v1
+				
+				if Flag and v2 ~= nil then
+					v1 = nil
+					Callback1(v2)
 					
-					return var1
+					return v2
+				else
+					return nil
 				end
-				return nil
 			end,
-			cancelPending = function()
-				-- upvalues: var1 (write)
-				var1 = nil
+			cancelPending = function() --[[ Line: 40 ]]
+				-- upvalues: v1 (ref)
+				v1 = nil
 			end,
-			destroy = function()
-				-- upvalues: var2 (write), var1 (write)
-				var2 = false
-				var1 = nil
+			destroy = function() --[[ Line: 56 ]]
+				-- upvalues: Flag (ref), v1 (ref)
+				Flag = false
+				v1 = nil
 			end
 		}
 	end

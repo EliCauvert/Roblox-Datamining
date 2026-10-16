@@ -1,6 +1,6 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Enums.PinnedPosition)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local _ = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Enums.PinnedPosition)
 
 return {
 	EMPTY_INDEX_RANGE = table.freeze({ firstIndex = 1, lastIndex = 0 }),
@@ -10,10 +10,10 @@ return {
 		"scrollOffset", "viewportLength", "contentLength", "distanceFromEnd",
 		"atStart", "atEnd"
 	}),
-	isIndexRangeEmpty = function(p1)
+	isIndexRangeEmpty = function(p1): boolean --[[ Line: 112 ]]
 		return p1.lastIndex < p1.firstIndex
 	end,
-	getIndexRangeLength = function(p1)
-		return math.max(0, p1.lastIndex - p1.firstIndex + 1)
+	getIndexRangeLength = function(p1): number --[[ Line: 116 ]]
+		return (math.max(0, p1.lastIndex - p1.firstIndex + 1))
 	end
 }

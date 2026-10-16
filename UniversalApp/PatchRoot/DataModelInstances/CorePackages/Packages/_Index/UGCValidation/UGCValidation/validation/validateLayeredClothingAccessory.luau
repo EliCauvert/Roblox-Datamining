@@ -1,251 +1,229 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Constants)
-local validateLCCageQualityModule = require(parent.validation.validateLCCageQuality)
-local validateInstanceTreeModule = require(parent.validation.validateInstanceTree)
-local validateMeshTrianglesModule = require(parent.validation.validateMeshTriangles)
-local validateTagsModule = require(parent.validation.validateTags)
-local validateMeshBoundsModule = require(parent.validation.validateMeshBounds)
-local validateMeshVertColorsModule = require(parent.validation.validateMeshVertColors)
-local validateSingleInstanceModule = require(parent.validation.validateSingleInstance)
-local validateMeshSizePropertyModule = require(parent.validation.ValidateMeshSizeProperty)
-local validatePropertiesSensibleModule = require(parent.validation.ValidatePropertiesSensible)
-local validateDependenciesModule = require(parent.validation.validateDependencies)
-local validateSkinningTransferModule = require(parent.validation.validateSkinningTransfer)
-local validateTotalSurfaceAreaModule = require(parent.validation.validateTotalSurfaceArea)
-local validateCoplanarIntersectionModule = require(parent.validation.validateCoplanarIntersection)
-local validateMaxCubeDensityModule = require(parent.validation.validateMaxCubeDensity)
-local validateTexturePackModule = require(parent.validation.ValidateTexturePack)
-local rigidOrLayeredAllowedModule = require(parent.util.RigidOrLayeredAllowed)
-local createLayeredClothingSchemaModule = require(parent.util.createLayeredClothingSchema)
-local createEyebrowEyelashSchemaModule = require(parent.util.createEyebrowEyelashSchema)
-local getAttachmentModule = require(parent.util.getAttachment)
-local getMeshSizeModule = require(parent.util.getMeshSize)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
-local getEditableImageFromContextModule = require(parent.util.getEditableImageFromContext)
-local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
-local pcallDeferredModule = require(parent.util.pcallDeferred)
-local getFIntUGCValidationLCHandleScaleOffsetMaximumModule = require(parent.flags.getFIntUGCValidationLCHandleScaleOffsetMaximum)
-local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
-local getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule = require(parent.flags.getFFlagUGCValidateEyebrowEyelashThumbnailSchema)
-local validateMeshPartOnlySkinnedToR15Module = require(parent.validation.ValidateMeshPartOnlySkinnedToR15)
-local getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = require(parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Constants)
+local ValidateLCCageQualityModule = require(Parent.validation.validateLCCageQuality)
+local ValidateInstanceTreeModule = require(Parent.validation.validateInstanceTree)
+local ValidateMeshTrianglesModule = require(Parent.validation.validateMeshTriangles)
+local ValidateTagsModule = require(Parent.validation.validateTags)
+local ValidateMeshBoundsModule = require(Parent.validation.validateMeshBounds)
+local ValidateMeshVertColorsModule = require(Parent.validation.validateMeshVertColors)
+local ValidateSingleInstanceModule = require(Parent.validation.validateSingleInstance)
+local ValidateMeshSizePropertyModule = require(Parent.validation.ValidateMeshSizeProperty)
+local ValidatePropertiesSensibleModule = require(Parent.validation.ValidatePropertiesSensible)
+local ValidateDependenciesModule = require(Parent.validation.validateDependencies)
+local ValidateSkinningTransferModule = require(Parent.validation.validateSkinningTransfer)
+local ValidateTotalSurfaceAreaModule = require(Parent.validation.validateTotalSurfaceArea)
+local ValidateCoplanarIntersectionModule = require(Parent.validation.validateCoplanarIntersection)
+local ValidateMaxCubeDensityModule = require(Parent.validation.validateMaxCubeDensity)
+local ValidateTexturePackModule = require(Parent.validation.ValidateTexturePack)
+local RigidOrLayeredAllowedModule = require(Parent.util.RigidOrLayeredAllowed)
+local CreateLayeredClothingSchemaModule = require(Parent.util.createLayeredClothingSchema)
+local CreateEyebrowEyelashSchemaModule = require(Parent.util.createEyebrowEyelashSchema)
+local GetAttachmentModule = require(Parent.util.getAttachment)
+local GetMeshSizeModule = require(Parent.util.getMeshSize)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
+local GetEditableImageFromContextModule = require(Parent.util.getEditableImageFromContext)
+local GetExpectedPartSizeModule = require(Parent.util.getExpectedPartSize)
+local PcallDeferredModule = require(Parent.util.pcallDeferred)
+local GetFIntUGCValidationLCHandleScaleOffsetMaximumModule = require(Parent.flags.getFIntUGCValidationLCHandleScaleOffsetMaximum)
+local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
+local GetFFlagUGCValidateTexturePackModule = require(Parent.flags.getFFlagUGCValidateTexturePack)
+local GetFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule = require(Parent.flags.getFFlagUGCValidateEyebrowEyelashThumbnailSchema)
+local ValidateMeshPartOnlySkinnedToR15Module = require(Parent.validation.ValidateMeshPartOnlySkinnedToR15)
+local GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = require(Parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning)
 
-return function(p1)
-	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (ref), createEyebrowEyelashSchemaModule (ref), createLayeredClothingSchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), validateDependenciesModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref), getExpectedPartSizeModule (ref), getFIntUGCValidationLCHandleScaleOffsetMaximumModule (ref), getAttachmentModule (ref), validateTagsModule (ref), validateTotalSurfaceAreaModule (ref), validateMeshSizePropertyModule (ref), validateMeshBoundsModule (ref), validateMeshTrianglesModule (ref), validateMeshVertColorsModule (ref), validateCoplanarIntersectionModule (ref), validateMaxCubeDensityModule (ref), validateLCCageQualityModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (ref), validateSkinningTransferModule (ref), validateMeshPartOnlySkinnedToR15Module (ref)
-	local instances = p1.instances
-	local assetTypeEnum = p1.assetTypeEnum
+return function(p1) --[[ Line: 47 | Named "validateLayeredClothingAccessory" ]]
+	-- upvalues: RigidOrLayeredAllowedModule (copy), AnalyticsModule (copy), ConstantsModule (copy), ValidateSingleInstanceModule (copy), GetFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (copy), CreateEyebrowEyelashSchemaModule (copy), CreateLayeredClothingSchemaModule (copy), ValidateInstanceTreeModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), ValidateDependenciesModule (copy), GetEditableMeshFromContextModule (copy), GetEditableImageFromContextModule (copy), PcallDeferredModule (copy), GetMeshSizeModule (copy), GetExpectedPartSizeModule (copy), GetFIntUGCValidationLCHandleScaleOffsetMaximumModule (copy), GetAttachmentModule (copy), ValidateTagsModule (copy), ValidateTotalSurfaceAreaModule (copy), ValidateMeshSizePropertyModule (copy), ValidateMeshBoundsModule (copy), ValidateMeshTrianglesModule (copy), ValidateMeshVertColorsModule (copy), ValidateCoplanarIntersectionModule (copy), ValidateMaxCubeDensityModule (copy), ValidateLCCageQualityModule (copy), GetFFlagUGCValidateTexturePackModule (copy), ValidateTexturePackModule (copy), GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (copy), ValidateSkinningTransferModule (copy), ValidateMeshPartOnlySkinnedToR15Module (copy)
+	local Instances = p1.instances
+	local AssetTypeEnum = p1.assetTypeEnum
 	
-	if not rigidOrLayeredAllowedModule.isLayeredClothingAllowed(assetTypeEnum) then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLayeredClothingAccessory_AssetTypeNotAllowedAsLayeredClothing, nil, p1)
+	if not RigidOrLayeredAllowedModule.isLayeredClothingAllowed(AssetTypeEnum) then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLayeredClothingAccessory_AssetTypeNotAllowedAsLayeredClothing, nil, p1)
 		
 		return false, {
-			string.format("Asset type '%s' is not a layered clothing category. It can only be used with rigid accessories.", assetTypeEnum.Name)
+			string.format("Asset type '%s' is not a layered clothing category. It can only be used with rigid accessories.", AssetTypeEnum.Name)
 		}
 	end
-	local var1 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]
-	local _ = nil
-	local _ = nil
-	local var2, var3 = validateSingleInstanceModule(instances, p1)
+	local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[AssetTypeEnum]
+	local ValidateSingleInstanceModuleResult, ValidateSingleInstanceModuleResult2 = ValidateSingleInstanceModule(Instances, p1)
 	
-	if not var2 then
-		return false, var3
+	if not ValidateSingleInstanceModuleResult then
+		return false, ValidateSingleInstanceModuleResult2
 	end
-	local var4
-	local var5 = instances[1]
+	local InstancesEntry = Instances[1]
+	local IsAssetTypeEnumMatch: boolean = if GetFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule() then AssetTypeEnum == Enum.AssetType.EyebrowAccessory or AssetTypeEnum == Enum.AssetType.EyelashAccessory else false
+	local ValidateInstanceTreeModuleResult, ValidateInstanceTreeModuleResult2 = ValidateInstanceTreeModule(if IsAssetTypeEnumMatch then CreateEyebrowEyelashSchemaModule(ASSETTYPE.attachmentNames) else CreateLayeredClothingSchemaModule(ASSETTYPE.attachmentNames), InstancesEntry, p1)
 	
-	if getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule() then
-		var4 = true
-		
-		if assetTypeEnum ~= Enum.AssetType.EyebrowAccessory then
-			local _ = assetTypeEnum == Enum.AssetType.EyelashAccessory
-		end
-	else
-		var4 = false
+	if not ValidateInstanceTreeModuleResult then
+		return false, ValidateInstanceTreeModuleResult2
 	end
-	local var6, var7 = validateInstanceTreeModule(if var4 then createEyebrowEyelashSchemaModule(var1.attachmentNames) else createLayeredClothingSchemaModule(var1.attachmentNames), var5, p1)
-	local var8 = var7
-	
-	if not var6 then
-		return false, var8
-	elseif getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-		local var9, var10 = validatePropertiesSensibleModule.validate(var5, p1)
-		local var11 = var10
+	if GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
+		local ValidateResult, ValidateResult2 = ValidatePropertiesSensibleModule.validate(InstancesEntry, p1)
 		
-		if not var9 then
-			return false, var11
+		if not ValidateResult then
+			return false, ValidateResult2
 		end
 	end
-	local var12, var13 = validateDependenciesModule(var5, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
+	local ValidateDependenciesModuleResult, ValidateDependenciesModuleResult2 = ValidateDependenciesModule(InstancesEntry, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
 	
-	if not var12 then
-		return false, var13
+	if not ValidateDependenciesModuleResult then
+		return false, ValidateDependenciesModuleResult2
 	end
-	local var14 = true
-	local t = {}
-	local handle = var5:FindFirstChild("Handle")
-	local t_1 = {
+	local Flag = true
+	local List = {}
+	local Handle = InstancesEntry:FindFirstChild("Handle")
+	local config = {
 		fieldName = "MeshId",
-		fullName = handle:GetFullName(),
-		contentId = handle.MeshId,
-		context = var5.Name
+		fullName = Handle:GetFullName(),
+		contentId = Handle.MeshId,
+		context = InstancesEntry.Name
 	}
-	local var15 = t_1.contentId ~= nil and t_1.contentId ~= ""
-	local var16, var17 = getEditableMeshFromContextModule(handle, "MeshId", p1)
 	
-	if not var16 then
-		if t_1.contentId then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateLayeredClothingAccessory_FailedToLoadMesh, nil, p1)
+	if config.contentId == nil or config.contentId == "" then
+	end
+	local MeshId, MeshId2 = GetEditableMeshFromContextModule(Handle, "MeshId", p1)
+	
+	if not MeshId then
+		if config.contentId then
+			AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLayeredClothingAccessory_FailedToLoadMesh, nil, p1)
 			
 			return false, {
-				string.format("Failed to load mesh for layered clothing accessory '%s'. Make sure mesh exists and try again.", var5.Name)
+				string.format("Failed to load mesh for layered clothing accessory '%s'. Make sure mesh exists and try again.", InstancesEntry.Name)
 			}
 		end
-		var15 = false
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLayeredClothingAccessory_NoMeshId, nil, p1)
-		var14 = false
-		table.insert(t, {
-			string.format("Missing meshId on layered clothing accessory '%s'. Make sure you are using a valid meshId and try again.\n", var5.Name)
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLayeredClothingAccessory_NoMeshId, nil, p1)
+		Flag = false
+		table.insert(List, {
+			string.format("Missing meshId on layered clothing accessory '%s'. Make sure you are using a valid meshId and try again.\n", InstancesEntry.Name)
 		})
 	end
-	t_1.editableMesh = var17
-	var15 = true
-	local textureID = handle.TextureID
-	local t_2 = {
+	config.editableMesh = MeshId2
+	local v1 = true
+	local TextureID = Handle.TextureID
+	local config1 = {
 		fieldName = "TextureID",
-		fullName = handle:GetFullName(),
-		contentId = textureID
+		fullName = Handle:GetFullName(),
+		contentId = TextureID
 	}
-	local _ = nil
-	local _ = nil
 	
-	if textureID ~= "" then
-		local var18, var19 = getEditableImageFromContextModule(handle, "TextureID", p1)
-		local var20 = var19
+	if TextureID ~= "" then
+		local TextureID1, TextureID2 = GetEditableImageFromContextModule(Handle, "TextureID", p1)
 		
-		if not var18 then
+		if not TextureID1 then
 			return false, {
-				string.format("Failed to load texture for layered clothing accessory '%s'. Make sure texture exists and try again.", var5.Name)
+				string.format("Failed to load texture for layered clothing accessory '%s'. Make sure texture exists and try again.", InstancesEntry.Name)
 			}
 		end
-		t_2.editableImage = var20
+		config1.editableImage = TextureID2
 	end
-	local var21, var22 = pcallDeferredModule(function()
-		-- upvalues: getMeshSizeModule (copy), t_1 (ref)
-		return getMeshSizeModule(t_1)
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 176 ]]
+		-- upvalues: GetMeshSizeModule (upval), config (copy)
+		return GetMeshSizeModule(config)
 	end, p1)
 	
-	if not var21 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLayeredClothingAccessory_FailedToLoadMesh, nil, p1)
+	if not PcallDeferredModuleResult then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLayeredClothingAccessory_FailedToLoadMesh, nil, p1)
 		
 		return false, {
-			string.format("Failed to load mesh for layered clothing accessory '%s'. Make sure mesh exists and try again.", var5.Name)
+			string.format("Failed to load mesh for layered clothing accessory '%s'. Make sure mesh exists and try again.", InstancesEntry.Name)
 		}
 	end
-	local var23 = getExpectedPartSizeModule(handle, p1) / var22
+	local ExpectedPartSizeModuleRatio = GetExpectedPartSizeModule(Handle, p1) / PcallDeferredModuleResult2
 	
-	if not var23:FuzzyEq(Vector3.new(1, 1, 1), getFIntUGCValidationLCHandleScaleOffsetMaximumModule() / 1000) then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLayeredClothingAccessory_HandleIsScaled, nil, p1)
-		table.insert(t, string.format("%s has been scaled, but mesh parts with wrap layers do not support scaling. You need to change the Size property to match the MeshSize property.", handle.Name))
-		var14 = false
+	if not ExpectedPartSizeModuleRatio:FuzzyEq(vector.create(1, 1, 1), GetFIntUGCValidationLCHandleScaleOffsetMaximumModule() / 1000) then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLayeredClothingAccessory_HandleIsScaled, nil, p1)
+		table.insert(List, string.format("%s has been scaled, but mesh parts with wrap layers do not support scaling. You need to change the Size property to match the MeshSize property.", Handle.Name))
+		Flag = false
 	end
-	local var24
-	local var25 = getAttachmentModule(handle, var1.attachmentNames)
-	local name = var1.bounds[var25.Name]
-	local _ = {}
-	local var26, var27 = validateTagsModule(var5, p1)
-	local var28 = var27
+	local AttachmentModule = GetAttachmentModule(Handle, ASSETTYPE.attachmentNames)
+	local Bound = ASSETTYPE.bounds[AttachmentModule.Name]
+	local ValidateTagsModuleResult, ValidateTagsModuleResult2 = ValidateTagsModule(InstancesEntry, p1)
 	
-	if not var26 then
-		table.insert(t, table.concat(var28, "\n"))
-		var24 = false
-		var24 = var14
+	if not ValidateTagsModuleResult then
+		table.insert(List, table.concat(ValidateTagsModuleResult2, "\n"))
+		Flag = false
 	end
-	if handle:FindFirstChildOfClass("WrapLayer") == nil then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLayeredClothingAccessory_NoWrapLayer, nil, p1)
-		table.insert(t, string.format("Missing WrapLayer on layered clothing accessory %s. You need to create a child WrapLayer and try again.", var5.Name))
-		var24 = false
+	if Handle:FindFirstChildOfClass("WrapLayer") == nil then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLayeredClothingAccessory_NoWrapLayer, nil, p1)
+		table.insert(List, string.format("Missing WrapLayer on layered clothing accessory %s. You need to create a child WrapLayer and try again.", InstancesEntry.Name))
+		Flag = false
 	end
-	local var29, var30 = validateTotalSurfaceAreaModule(t_1, var23, p1)
-	
-	if not var29 then
-		table.insert(t, table.concat(var30, "\n"))
-		var24 = false
-	end
-	local var31, var32 = validateMeshSizePropertyModule.validateSingleMeshPart(handle, p1)
-	
-	if not var31 then
-		table.insert(t, table.concat(var32, "\n"))
-		var24 = false
-	end
-	local var33, var34 = validateMeshBoundsModule(handle, var25, t_1, var23, name, assetTypeEnum.Name, p1)
-	
-	if not var33 then
-		table.insert(t, table.concat(var34, "\n"))
-		var24 = false
-	end
-	local var35, var36 = validateMeshTrianglesModule(t_1, nil, p1)
-	
-	if not var35 then
-		table.insert(t, table.concat(var36, "\n"))
-		var24 = false
-	end
-	local var37, var38 = validateMeshVertColorsModule(t_1, false, p1)
-	
-	if not var37 then
-		table.insert(t, table.concat(var38, "\n"))
-		var24 = false
-	end
-	local var39, var40 = validateCoplanarIntersectionModule(t_1, var23, p1)
-	local var41 = var40
-	
-	if not var39 then
-		table.insert(t, table.concat(var41, "\n"))
-		var24 = false
-	end
-	local var42, var43 = validateMaxCubeDensityModule(t_1, p1, var23)
-	
-	if not var42 then
-		table.insert(t, table.concat(var43, "\n"))
-		var24 = false
-	end
-	local var44, var45 = validateLCCageQualityModule(var5, t_1, p1)
-	local var46 = var45
-	
-	if not var44 then
-		for i, v in var46 do
-			table.insert(t, v)
-		end
-		var24 = false
-	end
-	if getFFlagUGCValidateTexturePackModule() then
-		local var47, var48 = validateTexturePackModule.validate(var5, false, p1)
-		local var49 = var48
+	if v1 then
+		local ValidateTotalSurfaceAreaModuleResult, ValidateTotalSurfaceAreaModuleResult2 = ValidateTotalSurfaceAreaModule(config, ExpectedPartSizeModuleRatio, p1)
 		
-		if not var47 then
-			table.insert(t, table.concat(var49, "\n"))
-			var24 = false
+		if not ValidateTotalSurfaceAreaModuleResult then
+			table.insert(List, table.concat(ValidateTotalSurfaceAreaModuleResult2, "\n"))
+			Flag = false
+		end
+		local ValidateSingleMeshPartResult, ValidateSingleMeshPartResult2 = ValidateMeshSizePropertyModule.validateSingleMeshPart(Handle, p1)
+		
+		if not ValidateSingleMeshPartResult then
+			table.insert(List, table.concat(ValidateSingleMeshPartResult2, "\n"))
+			Flag = false
+		end
+		local ValidateMeshBoundsModuleResult, ValidateMeshBoundsModuleResult2 = ValidateMeshBoundsModule(Handle, AttachmentModule, config, ExpectedPartSizeModuleRatio, Bound, AssetTypeEnum.Name, p1)
+		
+		if not ValidateMeshBoundsModuleResult then
+			table.insert(List, table.concat(ValidateMeshBoundsModuleResult2, "\n"))
+			Flag = false
+		end
+		local ValidateMeshTrianglesModuleResult, ValidateMeshTrianglesModuleResult2 = ValidateMeshTrianglesModule(config, nil, p1)
+		
+		if not ValidateMeshTrianglesModuleResult then
+			table.insert(List, table.concat(ValidateMeshTrianglesModuleResult2, "\n"))
+			Flag = false
+		end
+		local ValidateMeshVertColorsModuleResult, ValidateMeshVertColorsModuleResult2 = ValidateMeshVertColorsModule(config, false, p1)
+		
+		if not ValidateMeshVertColorsModuleResult then
+			table.insert(List, table.concat(ValidateMeshVertColorsModuleResult2, "\n"))
+			Flag = false
+		end
+		local ValidateCoplanarIntersectionModuleResult, ValidateCoplanarIntersectionModuleResult2 = ValidateCoplanarIntersectionModule(config, ExpectedPartSizeModuleRatio, p1)
+		
+		if not ValidateCoplanarIntersectionModuleResult then
+			table.insert(List, table.concat(ValidateCoplanarIntersectionModuleResult2, "\n"))
+			Flag = false
 		end
 	end
-	if not getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() then
-		local var50, var51 = validateSkinningTransferModule(handle, p1)
-		local var52 = var51
-		
-		if not var50 then
-			table.insert(t, table.concat(var52, "\n"))
-			var24 = false
+	local ValidateMaxCubeDensityModuleResult, ValidateMaxCubeDensityModuleResult2 = ValidateMaxCubeDensityModule(config, p1, ExpectedPartSizeModuleRatio)
+	
+	if not ValidateMaxCubeDensityModuleResult then
+		table.insert(List, table.concat(ValidateMaxCubeDensityModuleResult2, "\n"))
+		Flag = false
+	end
+	local ValidateLCCageQualityModuleResult, ValidateLCCageQualityModuleResult2 = ValidateLCCageQualityModule(InstancesEntry, config, p1)
+	
+	if not ValidateLCCageQualityModuleResult then
+		for _, value in ValidateLCCageQualityModuleResult2 do
+			table.insert(List, value)
 		end
-		if not constantsModule.SkinningTransferRequiredTypes[assetTypeEnum] then
-			local var53, var54 = validateMeshPartOnlySkinnedToR15Module.validateMeshPart(handle, p1)
-			local var55 = var54
+		Flag = false
+	end
+	if GetFFlagUGCValidateTexturePackModule() then
+		local ValidateResult1, ValidateResult2_1 = ValidateTexturePackModule.validate(InstancesEntry, false, p1)
+		
+		if not ValidateResult1 then
+			table.insert(List, table.concat(ValidateResult2_1, "\n"))
+			Flag = false
+		end
+	end
+	if not GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() then
+		local ValidateSkinningTransferModuleResult, ValidateSkinningTransferModuleResult2 = ValidateSkinningTransferModule(Handle, p1)
+		
+		if not ValidateSkinningTransferModuleResult then
+			table.insert(List, table.concat(ValidateSkinningTransferModuleResult2, "\n"))
+			Flag = false
+		end
+		if not ConstantsModule.SkinningTransferRequiredTypes[AssetTypeEnum] then
+			local ValidateMeshPartResult, ValidateMeshPartResult2 = ValidateMeshPartOnlySkinnedToR15Module.validateMeshPart(Handle, p1)
 			
-			if not var53 then
-				table.insert(t, table.concat(var55, "\n"))
-				var24 = false
+			if not ValidateMeshPartResult then
+				table.insert(List, table.concat(ValidateMeshPartResult2, "\n"))
+				Flag = false
 			end
 		end
 	end
-	return var24, t
+	return Flag, List
 end

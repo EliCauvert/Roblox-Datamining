@@ -1,86 +1,87 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local contentProvider = require(foundation.Utility.Wrappers).Services.ContentProvider
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local ContentProvider = require(Foundation.Utility.Wrappers).Services.ContentProvider
+local _ = require(Foundation.Components.Types)
 
-local function _(value)
-	return if value ~= Enum.AssetFetchStatus.Success then if value ~= Enum.AssetFetchStatus.Failure then value == Enum.AssetFetchStatus.TimedOut else true else true
+local function _(AssetFetchStatus): boolean --[[ Line: 21 | Named "isFinalAssetFetchStatus" ]]
+	return AssetFetchStatus == Enum.AssetFetchStatus.Success or (AssetFetchStatus == Enum.AssetFetchStatus.Failure or AssetFetchStatus == Enum.AssetFetchStatus.TimedOut)
 end
 
-local function attachOnLoaded(p1, p2)
-	-- upvalues: contentProvider (ref)
-	if p1 == nil then return end
-	local var1 = contentProvider:GetAssetFetchStatus(p1)
+local function attachOnLoaded(ContentId, Callback: (any) -> ()) --[[ Line: 27 ]]
+	-- upvalues: ContentProvider (copy)
+	if ContentId == nil then return end
+	local AssetFetchStatus = ContentProvider:GetAssetFetchStatus(ContentId)
 	
-	if if var1 ~= Enum.AssetFetchStatus.Success then if var1 ~= Enum.AssetFetchStatus.Failure then var1 == Enum.AssetFetchStatus.TimedOut else true else true then
-		p2(var1)
+	if AssetFetchStatus == Enum.AssetFetchStatus.Success or (AssetFetchStatus == Enum.AssetFetchStatus.Failure or AssetFetchStatus == Enum.AssetFetchStatus.TimedOut) then
+		Callback(AssetFetchStatus)
 		
 		return
+	else
+		return ContentProvider:GetAssetFetchStatusChangedSignal(ContentId):Connect(function(AssetFetchStatus) --[[ Line: 41 ]]
+			-- upvalues: Callback (copy)
+			if AssetFetchStatus == Enum.AssetFetchStatus.Success or (AssetFetchStatus == Enum.AssetFetchStatus.Failure or AssetFetchStatus == Enum.AssetFetchStatus.TimedOut) then
+				Callback(AssetFetchStatus)
+			end
+		end)
 	end
-	return contentProvider:GetAssetFetchStatusChangedSignal(p1):Connect(function(p3)
-		-- upvalues: p2 (ref)
-		if if p3 ~= Enum.AssetFetchStatus.Success then if p3 ~= Enum.AssetFetchStatus.Failure then p3 == Enum.AssetFetchStatus.TimedOut else true else true then
-			p2(p3)
-		end
-	end)
 end
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), reactIsModule (ref), attachOnLoaded (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), reactIsModule (copy), p1 (ref), attachOnLoaded (copy), reactModule (copy)
-		if not p2 then return end
-		local var1 = nil
+return function(p1, Callback) --[[ Line: 48 | Named "useOnLoaded" ]]
+	-- upvalues: ReactModule (copy), ReactIsModule (copy), attachOnLoaded (copy)
+	ReactModule.useEffect(function() --[[ Line: 49 ]]
+		-- upvalues: Callback (copy), ReactIsModule (upval), p1 (copy), attachOnLoaded (upval), ReactModule (upval)
+		if not Callback then return end
+		local Connection = nil
 		
-		local function _()
-			-- upvalues: var1 (write)
-			if var1 then
-				var1:Disconnect()
-				var1 = nil
+		local function _() --[[ Line: 55 | Named "disconnectConnection" ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end
 		
-		local function handleFinalStatus(p3)
-			-- upvalues: var1 (write), p2 (copy)
-			if var1 then
-				var1:Disconnect()
-				var1 = nil
+		local function handleFinalStatus(p2) --[[ Line: 62 ]]
+			-- upvalues: Connection (ref), Callback (upval)
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			p2(p3)
+			Callback(p2)
 		end
 		
-		if reactIsModule.isBinding(p1) then
-			local var2 = p1
-			var1 = attachOnLoaded(var2:getValue(), handleFinalStatus)
-			local var3 = reactModule.__subscribeToBinding(var2, function(p3)
-				-- upvalues: var1 (write), attachOnLoaded (copy), handleFinalStatus (ref)
-				if var1 then
-					var1:Disconnect()
-					var1 = nil
+		if ReactIsModule.isBinding(p1) then
+			Connection = attachOnLoaded(p1:getValue(), handleFinalStatus)
+			local SubscribeToBindingResult = ReactModule.__subscribeToBinding(p1, function(p2) --[[ Line: 71 ]]
+				-- upvalues: Connection (ref), attachOnLoaded (upval), handleFinalStatus (copy)
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
 				end
-				var1 = attachOnLoaded(p3, handleFinalStatus)
+				Connection = attachOnLoaded(p2, handleFinalStatus)
 			end)
 			
-			return function()
-				-- upvalues: var3 (ref), var1 (write)
-				var3()
+			return function() --[[ Line: 76 ]]
+				-- upvalues: SubscribeToBindingResult (copy), Connection (ref)
+				SubscribeToBindingResult()
 				
-				if var1 then
-					var1:Disconnect()
-					var1 = nil
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
+				end
+			end
+		else
+			Connection = attachOnLoaded(p1, handleFinalStatus)
+			
+			return function() --[[ Line: 84 ]]
+				-- upvalues: Connection (ref)
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
 				end
 			end
 		end
-		var1 = attachOnLoaded(p1, handleFinalStatus)
-		
-		return function()
-			-- upvalues: var1 (write)
-			if var1 then
-				var1:Disconnect()
-				var1 = nil
-			end
-		end
-	end, { p1, p2 })
+	end, { p1, Callback })
 end

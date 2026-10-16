@@ -1,69 +1,69 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
-local inputPlacementModule = require(foundation.Enums.InputPlacement)
-local inputSizeModule = require(foundation.Enums.InputSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
+local InputPlacementModule = require(Foundation.Enums.InputPlacement)
+local InputSizeModule = require(Foundation.Enums.InputSize)
 local list = {
-	inputSizeModule.XSmall,
-	inputSizeModule.Small,
-	inputSizeModule.Medium
+	InputSizeModule.XSmall,
+	InputSizeModule.Small,
+	InputSizeModule.Medium
 }
-local list_1 = { inputPlacementModule.Start, inputPlacementModule.End }
-local list_2 = {
-	inputSizeModule.Medium,
-	inputSizeModule.XSmall,
-	inputSizeModule.Small
+local Placement = { InputPlacementModule.Start, InputPlacementModule.End }
+local Size = {
+	InputSizeModule.Medium,
+	InputSizeModule.XSmall,
+	InputSizeModule.Small
 }
 
-local function noop() end
+local function noop() --[[ Line: 55 ]] end
 
-local function Section(p1)
-	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
-	return reactModule.createElement(viewModule, {
+local function Section(Frame) --[[ Line: 57 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
+	return ReactModule.createElement(ViewModule, {
 		tag = "col gap-medium size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Title = reactModule.createElement(textModule, {
+		Title = ReactModule.createElement(TextModule, {
 			tag = "auto-xy text-label-medium content-default",
 			LayoutOrder = 1,
-			Text = p1.name
+			Text = Frame.name
 		}),
-		Content = reactModule.createElement(viewModule, {
+		Content = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
-			tag = p1.contentTag or "row gap-large align-y-top auto-xy wrap"
-		}, p1.children)
+			tag = Frame.contentTag or "row gap-large align-y-top auto-xy wrap"
+		}, Frame.children)
 	})
 end
 
-local function Page(p1)
-	-- upvalues: reactModule (ref), viewModule (ref)
-	return reactModule.createElement(viewModule, {
+local function Page(p1) --[[ Line: 79 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy)
+	return ReactModule.createElement(ViewModule, {
 		tag = "col gap-xxlarge size-full-0 auto-y padding-y-large bg-surface-0"
 	}, p1.children)
 end
 
-local function createItems(p1, p2)
-	-- upvalues: reactModule (ref), noop (ref)
-	local t = {}
+local function createItems(Item, States) --[[ Line: 87 ]]
+	-- upvalues: ReactModule (copy), noop (copy)
+	local Elements = {}
 	
-	for i, v in p2 do
-		t[`Item-{i}`] = reactModule.createElement(p1, {
-			label = v.label,
-			hint = v.hint,
-			isChecked = v.isChecked,
-			isDisabled = v.isDisabled,
-			isIndeterminate = v.isIndeterminate,
-			onActivated = v.onActivated or noop,
-			LayoutOrder = i
+	for LayoutOrder, state in States do
+		Elements[`Item-{LayoutOrder}`] = ReactModule.createElement(Item, {
+			label = state.label,
+			hint = state.hint,
+			isChecked = state.isChecked,
+			isDisabled = state.isDisabled,
+			isIndeterminate = state.isIndeterminate,
+			onActivated = state.onActivated or noop,
+			LayoutOrder = LayoutOrder
 		})
 	end
-	return t
+	return Elements
 end
 
-local function staticItems()
+local function staticItems() --[[ Line: 105 ]]
 	return {
 		{ label = "Option A", isChecked = true },
 		{ label = "Option B", isChecked = false },
@@ -72,88 +72,96 @@ local function staticItems()
 end
 
 return {
-	create = function(p3)
-		-- upvalues: reactModule (ref), viewModule (ref), createItems (ref), Page (ref), Section (ref), dashModule (ref), list (ref), staticItems (ref), inputSizeModule (ref), list_1 (ref), list_2 (ref), list_1 (ref)
+	create = function(p1) --[[ Line: 113 ]]
+		-- upvalues: ReactModule (copy), ViewModule (copy), createItems (copy), Page (copy), Section (copy), DashModule (copy), list (copy), staticItems (copy), InputSizeModule (copy), Placement (copy), Size (copy), Placement (copy)
 		return {
-			summary = p3.summary,
+			summary = p1.summary,
 			stories = {
 				{
 					name = "Playground",
-					story = function(value)
-						-- upvalues: reactModule (copy), p3 (ref), viewModule (copy), createItems (copy)
-						local controls = value.controls
-						local var1, var2 = reactModule.useState({ true, false, true, false })
+					story = function(p2) --[[ Line: 114 ]]
+						-- upvalues: ReactModule (upval), p1 (copy), ViewModule (upval), createItems (upval)
+						local Controls = p2.controls
+						local UseStateResult, UseStateResult2 = ReactModule.useState({ true, false, true, false })
 						local t = {}
 						
-						for i, v in p3.labels do
+						for i, label in p1.labels do
 							t[i] = {
-								label = v,
-								hint = if controls.showHints then p3.hints[i] else nil,
-								isChecked = var1[i],
-								onActivated = function(p4)
-									-- upvalues: var2 (ref), i (ref)
-									var2(function(p5)
-										-- upvalues: i (copy), p4 (ref)
-										local cloned = table.clone(p5)
-										cloned[i] = p4
+								label = label,
+								hint = if Controls.showHints then p1.hints[i] else nil,
+								isChecked = UseStateResult[i],
+								onActivated = function(p3) --[[ Line: 131 ]]
+									-- upvalues: UseStateResult2 (copy), i (copy)
+									UseStateResult2(function(Tbl) --[[ Line: 132 ]]
+										-- upvalues: i (upval), p3 (copy)
+										local Copy = table.clone(Tbl)
+										Copy[i] = p3
 										
-										return cloned
+										return Copy
 									end)
 								end
 							}
 						end
-						return reactModule.createElement(viewModule, { tag = "auto-xy padding-medium" }, {
-							Group = reactModule.createElement(p3.Group, {
-								legend = controls.legend,
-								size = controls.size,
-								placement = controls.placement
-							}, createItems(p3.Item, t))
+						return ReactModule.createElement(ViewModule, { tag = "auto-xy padding-medium" }, {
+							Group = ReactModule.createElement(p1.Group, {
+								legend = Controls.legend,
+								size = Controls.size,
+								placement = Controls.placement
+							}, (createItems(p1.Item, t)))
 						})
 					end
 				},
 				{
 					name = "Sizing",
-					story = function()
-						-- upvalues: reactModule (copy), Page (copy), Section (copy), dashModule (copy), list (copy), p3 (ref), createItems (copy), staticItems (copy)
-						return reactModule.createElement(Page, nil, {
-							Size = reactModule.createElement(Section, {
+					story = function() --[[ Line: 152 ]]
+						-- upvalues: ReactModule (upval), Page (upval), Section (upval), DashModule (upval), list (upval), p1 (copy), createItems (upval), staticItems (upval)
+						return ReactModule.createElement(Page, nil, {
+							Size = ReactModule.createElement(Section, {
 								LayoutOrder = 1,
 								name = "Size",
 								contentTag = "row gap-xxlarge auto-xy wrap"
-							}, dashModule.map(list, function(p4, p5)
-								-- upvalues: reactModule (copy), p3 (copy), createItems (copy), staticItems (copy)
-								return reactModule.createElement(p3.Group, { legend = p4, size = p4, LayoutOrder = p5 }, createItems(p3.Item, staticItems()))
+							}, DashModule.map(list, function(Legend, LayoutOrder) --[[ Line: 161 ]]
+								-- upvalues: ReactModule (upval), p1 (upval), createItems (upval), staticItems (upval)
+								return ReactModule.createElement(p1.Group, {
+									legend = Legend,
+									size = Legend,
+									LayoutOrder = LayoutOrder
+								}, (createItems(p1.Item, (staticItems()))))
 							end))
 						})
 					end
 				},
 				{
 					name = "States",
-					story = function()
-						-- upvalues: reactModule (copy), Page (copy), Section (copy), p3 (ref), inputSizeModule (copy), createItems (copy)
-						return reactModule.createElement(Page, nil, {
-							States = reactModule.createElement(Section, {
+					story = function() --[[ Line: 172 ]]
+						-- upvalues: ReactModule (upval), Page (upval), Section (upval), p1 (copy), InputSizeModule (upval), createItems (upval)
+						return ReactModule.createElement(Page, nil, {
+							States = ReactModule.createElement(Section, {
 								LayoutOrder = 1,
 								name = "Item states",
 								contentTag = "auto-xy"
 							}, {
-								Group = reactModule.createElement(p3.Group, { size = inputSizeModule.Medium }, createItems(p3.Item, p3.states))
+								Group = ReactModule.createElement(p1.Group, { size = InputSizeModule.Medium }, (createItems(p1.Item, p1.states)))
 							})
 						})
 					end
 				},
 				{
 					name = "Placement",
-					story = function()
-						-- upvalues: reactModule (copy), Page (copy), Section (copy), dashModule (copy), list_1 (copy), p3 (ref), createItems (copy), staticItems (copy)
-						return reactModule.createElement(Page, nil, {
-							Placement = reactModule.createElement(Section, {
+					story = function() --[[ Line: 188 ]]
+						-- upvalues: ReactModule (upval), Page (upval), Section (upval), DashModule (upval), Placement (upval), p1 (copy), createItems (upval), staticItems (upval)
+						return ReactModule.createElement(Page, nil, {
+							Placement = ReactModule.createElement(Section, {
 								LayoutOrder = 1,
 								name = "Placement",
 								contentTag = "row gap-xxlarge auto-xy wrap"
-							}, dashModule.map(list_1, function(p4, p5)
-								-- upvalues: reactModule (copy), p3 (copy), createItems (copy), staticItems (copy)
-								return reactModule.createElement(p3.Group, { legend = p4, placement = p4, LayoutOrder = p5 }, createItems(p3.Item, staticItems()))
+							}, DashModule.map(Placement, function(Legend, LayoutOrder) --[[ Line: 197 ]]
+								-- upvalues: ReactModule (upval), p1 (upval), createItems (upval), staticItems (upval)
+								return ReactModule.createElement(p1.Group, {
+									legend = Legend,
+									placement = Legend,
+									LayoutOrder = LayoutOrder
+								}, (createItems(p1.Item, (staticItems()))))
 							end))
 						})
 					end
@@ -161,9 +169,9 @@ return {
 			},
 			controls = {
 				showHints = false,
-				legend = p3.defaultLegend,
-				size = list_2,
-				placement = list_1
+				legend = p1.defaultLegend,
+				size = Size,
+				placement = Placement
 			}
 		}
 	end

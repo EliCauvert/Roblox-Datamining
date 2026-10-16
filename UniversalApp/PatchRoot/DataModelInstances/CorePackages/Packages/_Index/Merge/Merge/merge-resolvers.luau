@@ -1,47 +1,45 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local string = luauPolyfillModule.String
-local t = {}
-local mergeDeep = require(parent.Utils).mergeDeep
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local String = LuauPolyfillModule.String
+local MergeDeepFunction = require(Parent.Utils).mergeDeep
 
-local function mergeResolvers(p1, p2)
-	-- upvalues: boolean (ref), array (ref), mergeResolvers (ref), mergeDeep (ref), string (ref)
-	if not boolean.toJSBoolean(p1) or array.isArray(p1) and #p1 == 0 then
+local function mergeResolvers(Entry, p1) --[[ Line: 59 ]]
+	-- upvalues: Boolean (copy), Array (copy), mergeResolvers (copy), MergeDeepFunction (copy), String (copy)
+	if not Boolean.toJSBoolean(Entry) or Array.isArray(Entry) and #Entry == 0 then
 		return {}
-	elseif not boolean.toJSBoolean(array.isArray(p1)) then
-		return p1
-	elseif #p1 == 1 then
-		return if boolean.toJSBoolean(p1[1]) then p1[1] else {}
 	end
-	local t = {}
+	if not Boolean.toJSBoolean(Array.isArray(Entry)) then
+		return Entry
+	end
+	if #Entry == 1 then
+		return if Boolean.toJSBoolean(Entry[1]) then Entry[1] else {}
+	end
+	local List = {}
 	
-	for i, v in p1 do
-		local v
-		if boolean.toJSBoolean(array.isArray(v)) then
-			v = mergeResolvers(v)
+	for _, value in Entry do
+		if Boolean.toJSBoolean(Array.isArray(value)) then
+			value = mergeResolvers(value)
 		end
-		if boolean.toJSBoolean(typeof(v) == "table" and v) then
-			table.insert(t, v)
+		if Boolean.toJSBoolean(typeof(value) == "table" and value) then
+			table.insert(List, value)
 		end
 	end
-	local var1 = mergeDeep(t, true)
+	local MergeDeepResult = MergeDeepFunction(List, true)
 	
-	if boolean.toJSBoolean(if typeof(p2) == "table" then p2.exclusions else nil) then
-		for i_1, v_1 in p2.exclusions do
-			local unpacked, unpacked_1 = table.unpack(string.split(v_1, "."), 1, 2)
+	if Boolean.toJSBoolean(if typeof(p1) == "table" then p1.exclusions else nil) then
+		for _, exclusion in p1.exclusions do
+			local Unpacked, Unpacked2 = table.unpack(String.split(exclusion, "."), 1, 2)
 			
-			if not boolean.toJSBoolean(unpacked_1) or unpacked_1 == "*" then
-				var1[unpacked] = nil
-			elseif boolean.toJSBoolean(var1[unpacked]) then
-				var1[unpacked][unpacked_1] = nil
+			if not Boolean.toJSBoolean(Unpacked2) or Unpacked2 == "*" then
+				MergeDeepResult[Unpacked] = nil
+			elseif Boolean.toJSBoolean(MergeDeepResult[Unpacked]) then
+				MergeDeepResult[Unpacked][Unpacked2] = nil
 			end
 		end
 	end
-	return var1
+	return MergeDeepResult
 end
 
-t.mergeResolvers = mergeResolvers
-
-return t
+return { mergeResolvers = mergeResolvers }

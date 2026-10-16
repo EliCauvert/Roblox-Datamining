@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Roact).createContext()
+﻿return (require(script.Parent.Parent.Roact).createContext())

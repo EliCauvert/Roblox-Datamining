@@ -1,74 +1,74 @@
-﻿local replaced = string.gsub(string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl, ".*://", ""), "/.*", ""), "^www%.", "")
-local t = {
-	new = function(p1, p2)
-		-- upvalues: replaced (write)
-		assert(type(p1) == "string", "UrlBase.new: `name` should be a string")
+﻿local Replaced = string.gsub(string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl, ".*://", ""), "/.*", ""), "^www%.", "")
+local UrlBaseModule = {
+	new = function(Text, Version): string --[[ Line: 24 ]]
+		-- upvalues: Replaced (ref)
+		assert(type(Text) == "string", "UrlBase.new: `name` should be a string")
 		
-		if p2 == nil then
-			p2 = {}
+		if Version == nil then
+			Version = {}
 		end
-		if type(p2) == "number" or type(p2) == "string" then
-			p2 = { version = p2 }
+		if type(Version) == "number" or type(Version) == "string" then
+			Version = { version = Version }
 		end
-		assert(type(p2) == "table", "UrlBase.new: `params` should be a table")
-		local proto = p2.proto
-		local version = p2.version
-		local path = p2.path
+		assert(type(Version) == "table", "UrlBase.new: `params` should be a table")
+		local Proto = Version.proto
+		local Version1 = Version.version
+		local Path = Version.path
 		
-		if proto == nil then
-			proto = if p2.secure == false then "http" else "https"
+		if Proto == nil then
+			Proto = if Version.secure == false then "http" else "https"
 		end
-		local var1 = proto
+		local Text1: string = Proto
 		
-		if #proto > 0 then
-			var1 ..= "://"
+		if #Proto > 0 then
+			Text1 ..= "://"
 		end
-		var1 ..= p1
+		local Text2 = Text1 .. Text
 		
-		if #p1 > 0 then
-			var1 ..= "."
+		if #Text > 0 then
+			Text2 ..= "."
 		end
-		var1 ..= replaced
+		local Text3 = Text2 .. Replaced
 		
-		if version ~= nil and #tostring(version) > 0 then
-			var1 ..= "/v" .. tostring(version)
+		if Version1 ~= nil and #tostring(Version1) > 0 then
+			Text3 ..= "/v" .. tostring(Version1)
 		end
-		if path ~= nil and #path > 0 then
-			var1 ..= "/" .. path
+		if Path ~= nil and #Path > 0 then
+			Text3 ..= "/" .. Path
 		end
-		return var1
+		return Text3
 	end
 }
-local var1 = string.sub(replaced, -6) == "qq.com"
-t.API = t.new("api")
-t.APIS = t.new("apis")
-t.APIS_RBXCDN = "https://apis.rbxcdn.com"
-t.AUTH = t.new("auth")
-t.CHAT = t.new("chat")
-t.CREATE = t.new("create")
-t.FRIENDS = t.new("friends", 1)
-t.ASSETGAME = t.new("assetgame")
-t.GAMES = t.new("games", 1)
-t.NOTIFICATION = t.new("notification", 2)
-t.NOTIFICATIONS = t.new("notifications", 2)
-t.PRESENCE = t.new("presence", 1)
-t.REALTIME = t.new("realtime")
-t.WEB = t.new("web")
-t.WWW = t.new("www")
-t.ADS = t.new("ads", 1)
-t.ADCONFIGURATION = t.new("adconfiguration", 2)
-t.FOLLOWINGS = t.new("followings", 1)
-t.PREMIUM = t.new("premiumfeatures", 1)
-t.BLOG = "https://blog.roblox.com"
-t.CORP = if var1 then "https://roblox.qq.com" else "https://corp.roblox.com"
-t.USERMODERATION = t.new("usermoderation")
-t.ACCOUNTINFORMATION = t.new("accountinformation", 1)
-t.ACCOUNTSETTINGS = t.new("accountsettings")
-t.BADGES = t.new("badges", 1)
-t.INVENTORY = t.new("inventory", 1)
-t.CATALOG = t.new("catalog", 1)
-t.AVATAR = t.new("avatar", 1)
-t.MOBILENAV = "roblox://navigation"
-t.APPSFLYER = "https://ro.blox.com"
+local IsQqCom = string.sub(Replaced, -6) == "qq.com"
+UrlBaseModule.API = UrlBaseModule.new("api")
+UrlBaseModule.APIS = UrlBaseModule.new("apis")
+UrlBaseModule.APIS_RBXCDN = "https://apis.rbxcdn.com"
+UrlBaseModule.AUTH = UrlBaseModule.new("auth")
+UrlBaseModule.CHAT = UrlBaseModule.new("chat")
+UrlBaseModule.CREATE = UrlBaseModule.new("create")
+UrlBaseModule.FRIENDS = UrlBaseModule.new("friends", 1)
+UrlBaseModule.ASSETGAME = UrlBaseModule.new("assetgame")
+UrlBaseModule.GAMES = UrlBaseModule.new("games", 1)
+UrlBaseModule.NOTIFICATION = UrlBaseModule.new("notification", 2)
+UrlBaseModule.NOTIFICATIONS = UrlBaseModule.new("notifications", 2)
+UrlBaseModule.PRESENCE = UrlBaseModule.new("presence", 1)
+UrlBaseModule.REALTIME = UrlBaseModule.new("realtime")
+UrlBaseModule.WEB = UrlBaseModule.new("web")
+UrlBaseModule.WWW = UrlBaseModule.new("www")
+UrlBaseModule.ADS = UrlBaseModule.new("ads", 1)
+UrlBaseModule.ADCONFIGURATION = UrlBaseModule.new("adconfiguration", 2)
+UrlBaseModule.FOLLOWINGS = UrlBaseModule.new("followings", 1)
+UrlBaseModule.PREMIUM = UrlBaseModule.new("premiumfeatures", 1)
+UrlBaseModule.BLOG = "https://blog.roblox.com"
+UrlBaseModule.CORP = if IsQqCom then "https://roblox.qq.com" else "https://corp.roblox.com"
+UrlBaseModule.USERMODERATION = UrlBaseModule.new("usermoderation")
+UrlBaseModule.ACCOUNTINFORMATION = UrlBaseModule.new("accountinformation", 1)
+UrlBaseModule.ACCOUNTSETTINGS = UrlBaseModule.new("accountsettings")
+UrlBaseModule.BADGES = UrlBaseModule.new("badges", 1)
+UrlBaseModule.INVENTORY = UrlBaseModule.new("inventory", 1)
+UrlBaseModule.CATALOG = UrlBaseModule.new("catalog", 1)
+UrlBaseModule.AVATAR = UrlBaseModule.new("avatar", 1)
+UrlBaseModule.MOBILENAV = "roblox://navigation"
+UrlBaseModule.APPSFLYER = "https://ro.blox.com"
 
-return t
+return UrlBaseModule

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.CollisionMatchers2D.CollisionMatchers2D)
+﻿return (require(script.Parent.Parent.Parent._Index.CollisionMatchers2D.CollisionMatchers2D))

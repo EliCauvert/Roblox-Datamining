@@ -1,24 +1,28 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local _ = require(foundation.Enums.ControlState)
-local _ = require(foundation.Enums.InputSize)
-local useBaseMenuItemVariantsModule = require(script.Parent.useBaseMenuItemVariants)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local _ = require(Foundation.Enums.ControlState)
+local _ = require(Foundation.Enums.InputSize)
+local UseBaseMenuItemVariantsModule = require(script.Parent.useBaseMenuItemVariants)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokensModule (ref), useBaseMenuItemVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref)
-	local var1 = useBaseMenuItemVariantsModule(useTokensModule(), p1.size, false)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 30 | Named "BaseMenuTitleItem" ]]
+	-- upvalues: UseTokensModule (copy), UseBaseMenuItemVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), TextModule (copy)
+	local UseBaseMenuItemVariantsModuleResult = UseBaseMenuItemVariantsModule(UseTokensModule(), p1.size, false)
+	local IsMenuHasCheck = p1.menuHasCheck == true
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
-		tag = `row align-y-center {var1.container.tag}`,
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p1, {
+		tag = `row align-y-center {UseBaseMenuItemVariantsModuleResult.container.tag}`,
 		padding = {
-			left = UDim.new(0, if p1.menuHasCheck == true then (var1.container.paddingLeftWithCheck or 0) + (var1.title.checkColumnWidth or 0) else var1.container.paddingLeftWithoutCheck or 0),
-			right = UDim.new(0, var1.container.paddingRight or 0)
+			left = UDim.new(0, if IsMenuHasCheck then (UseBaseMenuItemVariantsModuleResult.container.paddingLeftWithCheck or 0) + (UseBaseMenuItemVariantsModuleResult.title.checkColumnWidth or 0) else UseBaseMenuItemVariantsModuleResult.container.paddingLeftWithoutCheck or 0),
+			right = UDim.new(0, UseBaseMenuItemVariantsModuleResult.container.paddingRight or 0)
 		},
-		ref = p2
-	}), reactModule.createElement(textModule, { Text = p1.text, tag = var1.title.tag }))
+		ref = Ref
+	}), ReactModule.createElement(TextModule, {
+		Text = p1.text,
+		tag = UseBaseMenuItemVariantsModuleResult.title.tag
+	}))
 end))

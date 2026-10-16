@@ -1,6 +1,6 @@
-﻿local createReducerSliceModule = require(script.Parent.createReducerSlice)
+﻿local CreateReducerSliceModule = require(script.Parent.createReducerSlice)
 
-return function(p1)
-	-- upvalues: createReducerSliceModule (ref)
-	return createReducerSliceModule("byGameId", "universeId", p1)
+return function(p1) --[[ Line: 2 ]]
+	-- upvalues: CreateReducerSliceModule (copy)
+	return CreateReducerSliceModule("byGameId", "universeId", p1)
 end

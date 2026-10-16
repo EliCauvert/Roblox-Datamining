@@ -1,88 +1,89 @@
-﻿local parent = script:FindFirstAncestor("Graphing").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local var1 = nil
+﻿local Parent = script:FindFirstAncestor("Graphing").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local MaxControlPoints = nil
 
-local function _()
-	-- upvalues: var1 (write)
-	if not var1 then
-		local path2D = Instance.new("Path2D")
-		var1 = path2D:GetMaxControlPoints()
-		path2D:Destroy()
+local function _() --[[ Line: 42 | Named "getMaxPointsPerPath" ]]
+	-- upvalues: MaxControlPoints (ref)
+	if not MaxControlPoints then
+		local Path2D = Instance.new("Path2D")
+		MaxControlPoints = Path2D:GetMaxControlPoints()
+		Path2D:Destroy()
 	end
-	assert(var1, "MAX_POINTS_PER_PATH was nil")
+	assert(MaxControlPoints, "MAX_POINTS_PER_PATH was nil")
 	
-	return var1
+	return MaxControlPoints
 end
 
-function Path2DWrapper(p1)
-	-- upvalues: reactModule (ref), var1 (write), signalsModule (ref)
-	local var2 = reactModule.useRef(nil)
+function Path2DWrapper(p1) --[[ Line: 53 ]]
+	-- upvalues: ReactModule (copy), MaxControlPoints (ref), SignalsModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if not var1 then
-		local path2D = Instance.new("Path2D")
-		var1 = path2D:GetMaxControlPoints()
-		path2D:Destroy()
+	if not MaxControlPoints then
+		local Path2D = Instance.new("Path2D")
+		MaxControlPoints = Path2D:GetMaxControlPoints()
+		Path2D:Destroy()
 	end
-	assert(var1, "MAX_POINTS_PER_PATH was nil")
-	local var3 = var1
-	local pointCount = p1.PointCount or (if p1.ControlPoints then #p1.ControlPoints else 0)
+	assert(MaxControlPoints, "MAX_POINTS_PER_PATH was nil")
+	local MaxControlPoints1: number = MaxControlPoints
+	local PointCount = p1.PointCount or (p1.ControlPoints and #p1.ControlPoints or 0)
 	
-	local function applyControlPoints(p2)
-		-- upvalues: var2 (ref), var3 (ref)
-		local current = var2.current
+	local function applyControlPoints(ControlPoints) --[[ Line: 59 ]]
+		-- upvalues: UseRefResult (copy), MaxControlPoints1 (copy)
+		local Current = UseRefResult.current
 		
-		if not current then return end
-		local var4 = 1
+		if not Current then return end
+		local Total = 1
 		
-		for i, v in current:GetChildren() do
-			local t = {}
-			local p1Count = #p2
+		for _, child in Current:GetChildren() do
+			local List = {}
+			local CountControlPoints = #ControlPoints
 			
-			for i_1 = var4, var4 + var3 - 1 do
-				if p1Count < i_1 then break end
-				table.insert(t, p2[i_1])
+			for i = Total, Total + MaxControlPoints1 - 1 do
+				if CountControlPoints < i then break end
+				table.insert(List, ControlPoints[i])
 			end
-			v:SetControlPoints(t)
-			var4 += var3 - 1
+			child:SetControlPoints(List)
+			Total += MaxControlPoints1 - 1
 		end
 	end
 	
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), signalsModule (copy), applyControlPoints (ref)
+	ReactModule.useLayoutEffect(function() --[[ Line: 84 ]]
+		-- upvalues: p1 (copy), SignalsModule (upval), applyControlPoints (copy)
 		if p1.ObserveControlPoints then
-			local observeControlPoints = p1.ObserveControlPoints
+			local ObserveControlPointsFunction = p1.ObserveControlPoints
 			
-			return signalsModule.createEffect(function(p3)
-				-- upvalues: applyControlPoints (copy), observeControlPoints (ref)
-				applyControlPoints(observeControlPoints(p3))
+			return SignalsModule.createEffect(function(p2) --[[ Line: 87 ]]
+				-- upvalues: applyControlPoints (upval), ObserveControlPointsFunction (copy)
+				applyControlPoints(ObserveControlPointsFunction(p2))
 			end)
-		elseif p1.ControlPoints then
+		end
+		if p1.ControlPoints then
 			applyControlPoints(p1.ControlPoints)
 		end
-		return function() end
+		return function() --[[ Line: 93 ]] end
 	end, { p1.ObserveControlPoints, p1.ControlPoints })
-	local tag = p1.Tag or ""
-	local var5 = p1.ClipContents ~= nil or p1.ClipContents
-	local t = {}
-	local var6 = 1
+	local Tag = p1.Tag or ""
+	local NoClipContents = p1.ClipContents == nil or p1.ClipContents
+	local Path2Ds = {}
+	local Count = 1
 	
-	for _ = 2, pointCount, var3 - 1 do
-		t[tostring(var6)] = reactModule.createElement("Path2D", {
+	for _ = 2, PointCount, MaxControlPoints1 - 1 do
+		Path2Ds[tostring(Count)] = ReactModule.createElement("Path2D", {
 			Color3 = p1.Color3,
 			Thickness = p1.Thickness,
 			ZIndex = p1.ZIndex,
-			[reactModule.Tag] = tag
+			[ReactModule.Tag] = Tag
 		})
-		var6 += 1
+		Count += 1
 	end
-	return reactModule.createElement(if var5 then "CanvasGroup" else "Frame", {
+	return ReactModule.createElement(if NoClipContents then "CanvasGroup" else "Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		ref = var2,
+		ref = UseRefResult,
 		Size = UDim2.fromScale(1, 1),
 		ZIndex = p1.ZIndex
-	}, t)
+	}, Path2Ds)
 end
 
 return Path2DWrapper

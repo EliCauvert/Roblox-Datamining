@@ -1,48 +1,50 @@
-﻿local roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
-local sortedList = roact.PureComponent:extend("SortedList")
-sortedList.defaultProps = {
+﻿local Roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
+local SortedList = Roact.PureComponent:extend("SortedList")
+SortedList.defaultProps = {
 	renderEntry = nil,
 	entryHeight = 48,
 	LayoutOrder = 0,
 	entries = {},
-	sortComparator = function(_, _)
+	sortComparator = function(_, _): boolean --[[ Line: 12 ]]
 		return true
 	end
 }
 
-function sortedList.sortEntries(p1)
-	local t = {}
+function SortedList.sortEntries(p1) --[[ Line: 19 ]]
+	local List = {}
 	
-	for i, v in pairs(p1.props.entries) do
-		table.insert(t, v)
+	for _, entry in pairs(p1.props.entries) do
+		table.insert(List, entry)
 	end
-	table.sort(t, p1.props.sortComparator)
+	table.sort(List, p1.props.sortComparator)
 	
-	return t
+	return List
 end
 
-function sortedList.render(p2)
-	-- upvalues: roact (ref)
-	local var1 = p2:sortEntries()
-	local t = {
-		layout = roact.createElement("UIListLayout", {
+function SortedList.render(p2) --[[ Line: 31 ]]
+	-- upvalues: Roact (copy)
+	local SortEntriesResult = p2:sortEntries()
+	local config = {
+		layout = Roact.createElement("UIListLayout", {
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
 	
-	for i, v in pairs(var1) do
-		table.insert(t, roact.createElement("Frame", {
+	for LayoutOrder, value in pairs(SortEntriesResult) do
+		table.insert(config, Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, p2.props.entryHeight),
-			LayoutOrder = i
-		}, { entry = p2.props.renderEntry(v, i == #var1) }))
+			LayoutOrder = LayoutOrder
+		}, {
+			entry = p2.props.renderEntry(value, LayoutOrder == #SortEntriesResult)
+		}))
 	end
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, #p2.props.entries * p2.props.entryHeight),
 		LayoutOrder = p2.props.LayoutOrder
-	}, t)
+	}, config)
 end
 
-return sortedList
+return SortedList

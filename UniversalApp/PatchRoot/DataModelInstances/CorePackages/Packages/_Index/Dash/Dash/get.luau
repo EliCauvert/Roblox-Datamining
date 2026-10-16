@@ -1,18 +1,18 @@
-﻿return function(p1, p2, p3)
+﻿return function(p1, List, p2) --[[ Line: 22 | Named "get" ]]
 	if p1 == nil then
-		return p3
+		return p2
 	end
-	local var1 = p1
+	local v1 = p1
 	
-	for i, v in p2 do
-		if type(var1) == "table" then
-			var1 = var1[v]
-			
-			if var1 == nil then
-				return p3
-			end
+	for _, value in List do
+		if type(v1) ~= "table" then
+			return p2
 		end
-		return p3
+		v1 = v1[value]
+		
+		if v1 == nil then
+			return p2
+		end
 	end
-	return var1
+	return v1
 end

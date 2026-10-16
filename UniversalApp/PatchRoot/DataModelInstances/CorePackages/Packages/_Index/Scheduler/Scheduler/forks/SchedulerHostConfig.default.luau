@@ -1,362 +1,359 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local object = luauPolyfillModule.Object
-local sharedModule = require(parent.Shared)
-local console = sharedModule.console
-local errorToString = sharedModule.errorToString
-local describeError = sharedModule.describeError
-local safeFlagsModule = require(parent.SafeFlags)
+﻿local Parent = script.Parent.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Object = LuauPolyfillModule.Object
+local SharedModule = require(Parent.Shared)
+local Console = SharedModule.console
+local ErrorToStringFunction = SharedModule.errorToString
+local DescribeError = SharedModule.describeError
+local SafeFlagsModule = require(Parent.SafeFlags)
 
-local var1 = function()
+local function GetCurrentTime(): number --[[ Line: 22 ]]
 	return os.clock() * 1000
 end
 
-local setTimeout = luauPolyfillModule.setTimeout
-local clearTimeout = luauPolyfillModule.clearTimeout
-local var2 = false
-local var3 = nil
-local none = object.None
-local reactSchedulerYieldInterval2 = safeFlagsModule.createGetFInt("ReactSchedulerYieldInterval2", 15)
-local var4 = safeFlagsModule.createGetFInt("ReactSchedulerDesiredFrameRate", 60)()
-local var5 = safeFlagsModule.createGetFInt("ReactSchedulerMinFrameRate", 30)()
-local var6 = safeFlagsModule.createGetFFlag("ReactSchedulerEnableDeferredWork")()
-local var7 = safeFlagsModule.createGetFFlag("ReactSchedulerSetFrameMarkerOnHeartbeatEnd")()
-local var8 = safeFlagsModule.createGetFFlag("ReactSchedulerSetTargetMsByHeartbeatDelta")()
-local var9 = safeFlagsModule.createGetFInt("ReactSchedulerNumberOfLookbackFrames", 1)()
-local var10 = safeFlagsModule.createGetFFlag("ReactSchedulerLookbackUseRingBuffer")()
-local var11 = false
-local var12 = 0
-local var13 = 1000 / var4
-local var14 = 1000 / var5
-local var15 = var13
-local var16 = var15
-local heartbeatConnection = nil
-local var17 = if var10 then table.create(var9) else nil
-local var18 = 1
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local Flag = false
+local Callback = nil
+local None = Object.None
+local ReactSchedulerYieldInterval2 = SafeFlagsModule.createGetFInt("ReactSchedulerYieldInterval2", 15)
+local DesiredFrameRate: number = SafeFlagsModule.createGetFInt("ReactSchedulerDesiredFrameRate", 60)()
+local MinimumFrameRate: number = SafeFlagsModule.createGetFInt("ReactSchedulerMinFrameRate", 30)()
+local DeferredWork = SafeFlagsModule.createGetFFlag("ReactSchedulerEnableDeferredWork")()
+local HeartbeatFrameMarker = SafeFlagsModule.createGetFFlag("ReactSchedulerSetFrameMarkerOnHeartbeatEnd")()
+local TargetMsByHeartbeatDelta = SafeFlagsModule.createGetFFlag("ReactSchedulerSetTargetMsByHeartbeatDelta")()
+local NumberOfLookbackFrames = SafeFlagsModule.createGetFInt("ReactSchedulerNumberOfLookbackFrames", 1)()
+local LookbackUseRingBuffer = SafeFlagsModule.createGetFFlag("ReactSchedulerLookbackUseRingBuffer")()
+local Flag1 = false
+local ScaledClockTime = 0
+local MinValue = 1000 / DesiredFrameRate
+local MaxValue = 1000 / MinimumFrameRate
+local ClampedValue: number = MinValue
+local Value: number = ClampedValue
+local HeartbeatConnection = nil
+local Buffer = if LookbackUseRingBuffer then table.create(NumberOfLookbackFrames) else nil
+local v1 = 1
 
-local function _()
-	-- upvalues: var13 (write), var4 (write), var14 (write), var5 (write), var15 (write), var16 (write)
-	var13 = 1000 / var4
-	var14 = 1000 / var5
-	var15 = var13
-	var16 = var15
+local function _() --[[ Line: 71 | Named "resetFrameBudgets" ]]
+	-- upvalues: MinValue (ref), DesiredFrameRate (ref), MaxValue (ref), MinimumFrameRate (ref), ClampedValue (ref), Value (ref)
+	MinValue = 1000 / DesiredFrameRate
+	MaxValue = 1000 / MinimumFrameRate
+	ClampedValue = MinValue
+	Value = ClampedValue
 end
 
-local _ = function()
-	-- upvalues: heartbeatConnection (write), var9 (write), var10 (write), var17 (ref), var18 (write), var16 (write), var15 (write), var13 (write), var14 (write)
-	if heartbeatConnection then
-		heartbeatConnection:Disconnect()
+local _ = function() --[[ Line: 78 | Named "createHeartbeatConnection" ]]
+	-- upvalues: HeartbeatConnection (ref), NumberOfLookbackFrames (ref), LookbackUseRingBuffer (ref), Buffer (copy), v1 (ref), Value (ref), ClampedValue (ref), MinValue (ref), MaxValue (ref)
+	if HeartbeatConnection then
+		HeartbeatConnection:Disconnect()
 	end
-	heartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(p1)
-		-- upvalues: var9 (copy), var10 (copy), var17 (copy), var18 (copy), var16 (copy), var15 (copy), var13 (copy), var14 (copy)
-		if var9 <= 1 then
-			var15 = math.clamp(p1 * 1000, var13, var14)
+	HeartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 83 ]]
+		-- upvalues: NumberOfLookbackFrames (upval), LookbackUseRingBuffer (upval), Buffer (upval), v1 (upval), Value (upval), ClampedValue (upval), MinValue (upval), MaxValue (upval)
+		if NumberOfLookbackFrames <= 1 then
+			ClampedValue = math.clamp(DeltaTime * 1000, MinValue, MaxValue)
 			
 			return
-		elseif var10 then
-			var17[var18] = p1 * 1000
-			var18 = var18 % var9 + 1
-			local var19 = 0
-			local var20 = var9
-			
-			for i = 1, var20 do
-				if var17[i] ~= nil then
-					var20 = i - 1
-					break
-				end
-				var19 += var17[i]
-			end
-			var16 = var19 / var20
-		else
-			local var21 = var9
-			var16 = (var16 * (var21 - 1) + p1 * 1000) / var21
 		end
-		var15 = math.clamp(var16, var13, var14)
-	end)
-end
-
-if var8 then
-	heartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(p1)
-		-- upvalues: var9 (write), var10 (write), var17 (ref), var18 (write), var16 (write), var15 (write), var13 (write), var14 (write)
-		if var9 <= 1 then
-			var15 = math.clamp(p1 * 1000, var13, var14)
+		if LookbackUseRingBuffer then
+			Buffer[v1] = DeltaTime * 1000
+			v1 = v1 % NumberOfLookbackFrames + 1
+			local Total = 0
+			local NumberOfLookbackFrames: number = NumberOfLookbackFrames
 			
-			return
-		elseif var10 then
-			var17[var18] = p1 * 1000
-			var18 = var18 % var9 + 1
-			local var19 = 0
-			
-			for i = 1, var9 do
-				if var17[i] == nil then
-					local var20 = i - 1
+			for i = 1, NumberOfLookbackFrames do
+				if Buffer[i] == nil then
+					NumberOfLookbackFrames = i - 1
 					break
-				end
-				var19 += var17[i]
-			end
-			var16 = var19 / var20
-			var15 = math.clamp(var16, var13, var14)
-			
-			return
-		else
-			local var21 = var9
-			var16 = (var16 * (var21 - 1) + p1 * 1000) / var21
-		end
-	end)
-end
-local function setFrameMarker()
-	-- upvalues: var12 (write)
-	var12 = os.clock() * 1000
-end
-
-local var19 = reactSchedulerYieldInterval2()
-local var20 = 0
-
-local function setSchedulerFlags(value)
-	-- upvalues: var19 (write), var4 (write), var13 (write), var14 (write), var5 (write), var15 (write), var16 (write), var6 (write), var7 (write), var8 (write), heartbeatConnection (write), var9 (write), var10 (write), var17 (ref), var18 (write)
-	if value.yieldInterval ~= nil then
-		var19 = value.yieldInterval
-	end
-	if value.desiredFrameRate ~= nil then
-		var4 = value.desiredFrameRate
-		var13 = 1000 / var4
-		var14 = 1000 / var5
-		var15 = var13
-		var16 = var15
-	end
-	if value.minimumFrameRate ~= nil then
-		var5 = value.minimumFrameRate
-		var13 = 1000 / var4
-		var14 = 1000 / var5
-		var15 = var13
-		var16 = var15
-	end
-	if value.deferredWork ~= nil then
-		var6 = value.deferredWork
-	end
-	if value.heartbeatFrameMarker ~= nil then
-		var7 = value.heartbeatFrameMarker
-	end
-	if value.targetMsByHeartbeatDelta ~= nil then
-		var8 = value.targetMsByHeartbeatDelta
-		
-		if value.targetMsByHeartbeatDelta then
-			if heartbeatConnection then
-				heartbeatConnection:Disconnect()
-			end
-			heartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(p1)
-				-- upvalues: var9 (copy), var10 (copy), var17 (copy), var18 (copy), var16 (copy), var15 (copy), var13 (copy), var14 (copy)
-				if var9 <= 1 then
-					var15 = math.clamp(p1 * 1000, var13, var14)
-					
-					return
-				elseif var10 then
-					var17[var18] = p1 * 1000
-					var18 = var18 % var9 + 1
-					local var21 = 0
-					
-					for i = 1, var9 do
-						if var17[i] == nil then
-							local var22 = i - 1
-							break
-						end
-						var21 += var17[i]
-					end
-					var16 = var21 / var22
-					var15 = math.clamp(var16, var13, var14)
-					
-					return
 				else
-					local var23 = var9
-					var16 = (var16 * (var23 - 1) + p1 * 1000) / var23
+					Total += Buffer[i]
 				end
-			end)
-		elseif heartbeatConnection then
-			heartbeatConnection:Disconnect()
-			heartbeatConnection = nil
-			var15 = var13
-		end
-	end
-	if value.numberOfLookbackFrames ~= nil then
-		var9 = value.numberOfLookbackFrames
-	end
-	if value.lookbackUseRingBuffer ~= nil then
-		var10 = value.lookbackUseRingBuffer
-	end
-end
-
-local function getSchedulerFlags()
-	-- upvalues: var19 (write), var4 (write), var5 (write), var6 (write), var7 (write), var8 (write), var9 (write), var10 (write)
-	return {
-		yieldInterval = var19,
-		desiredFrameRate = var4,
-		minimumFrameRate = var5,
-		deferredWork = var6,
-		heartbeatFrameMarker = var7,
-		targetMsByHeartbeatDelta = var8,
-		numberOfLookbackFrames = var9,
-		lookbackUseRingBuffer = var10
-	}
-end
-
-local _ = function()
-	-- upvalues: var12 (write), var15 (write), var19 (write)
-	return var19 < var15 - (os.clock() * 1000 - var12)
-end
-
-local function shouldYieldToHost()
-	-- upvalues: var20 (write)
-	return var20 <= os.clock() * 1000
-end
-
-local function requestPaint() end
-
-local function forceFrameRate(p1)
-	-- upvalues: console (ref), var19 (write)
-	if p1 < 0 or p1 > 125 then
-		console.warn("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported")
-		
-		return
-	elseif p1 > 0 then
-		var19 = math.floor(1000 / p1)
-		
-		return
-	end
-	var19 = 5
-end
-
-local function performWorkUntilDeadline()
-	-- upvalues: var3 (write), var20 (write), var19 (write), var6 (write), var7 (write), var11 (write), var12 (write), var15 (write), var2 (write), performWorkUntilDeadline (write), setFrameMarker (ref), reactGlobalsModule (ref), describeError (ref), errorToString (ref)
-	if var3 == nil then
-		var2 = false
-		
-		return
-	end
-	local var21 = os.clock() * 1000
-	var20 = var21 + var19
-	local var22 = true
-	
-	if var6 and not var7 and not var11 then
-		var12 = var21
-	end
-	if var7 and var11 and var19 >= var15 - (os.clock() * 1000 - var12) then
-		var22 = false
-	end
-	local var23, var24
-	local _ = nil
-	local _ = nil
-	
-	local function doWork()
-		-- upvalues: var3 (copy), var22 (write), var21 (ref), var2 (copy), var6 (copy), var12 (copy), var15 (copy), var19 (copy), var11 (copy), performWorkUntilDeadline (copy), var7 (copy), setFrameMarker (copy)
-		if not var3(var22, var21) then
-			var2 = false
-			var3 = nil
-		elseif not var6 then
-			task.delay(0, performWorkUntilDeadline)
-		elseif var19 < var15 - (os.clock() * 1000 - var12) then
-			var11 = true
-			task.defer(performWorkUntilDeadline)
-		else
-			var11 = false
-			task.delay(0, performWorkUntilDeadline)
-			
-			if var7 then
-				task.defer(setFrameMarker)
 			end
+			Value = Total / NumberOfLookbackFrames
+		else
+			local NumberOfLookbackFrames1: number = NumberOfLookbackFrames
+			Value = (Value * (NumberOfLookbackFrames1 - 1) + DeltaTime * 1000) / NumberOfLookbackFrames1
+		end
+		ClampedValue = math.clamp(Value, MinValue, MaxValue)
+	end)
+end
+
+if TargetMsByHeartbeatDelta then
+	if HeartbeatConnection then
+		HeartbeatConnection:Disconnect()
+	end
+	HeartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 83 ]]
+		-- upvalues: NumberOfLookbackFrames (ref), LookbackUseRingBuffer (ref), Buffer (copy), v1 (ref), Value (ref), ClampedValue (ref), MinValue (ref), MaxValue (ref)
+		if NumberOfLookbackFrames <= 1 then
+			ClampedValue = math.clamp(DeltaTime * 1000, MinValue, MaxValue)
+			
+			return
+		end
+		if LookbackUseRingBuffer then
+			Buffer[v1] = DeltaTime * 1000
+			v1 = v1 % NumberOfLookbackFrames + 1
+			local Total = 0
+			local NumberOfLookbackFrames: number = NumberOfLookbackFrames
+			
+			for i = 1, NumberOfLookbackFrames do
+				if Buffer[i] == nil then
+					NumberOfLookbackFrames = i - 1
+					break
+				else
+					Total += Buffer[i]
+				end
+			end
+			Value = Total / NumberOfLookbackFrames
+		else
+			local NumberOfLookbackFrames1: number = NumberOfLookbackFrames
+			Value = (Value * (NumberOfLookbackFrames1 - 1) + DeltaTime * 1000) / NumberOfLookbackFrames1
+		end
+		ClampedValue = math.clamp(Value, MinValue, MaxValue)
+	end)
+end
+local function setFrameMarker() --[[ Line: 125 ]]
+	-- upvalues: ScaledClockTime (ref)
+	ScaledClockTime = os.clock() * 1000
+end
+
+local ReactSchedulerYieldIntervalResult = ReactSchedulerYieldInterval2()
+local v2 = 0
+
+local _ = function(): boolean --[[ Line: 198 | Named "doesBudgetRemain" ]]
+	-- upvalues: ScaledClockTime (ref), ClampedValue (ref), ReactSchedulerYieldIntervalResult (ref)
+	return ReactSchedulerYieldIntervalResult < ClampedValue - (os.clock() * 1000 - ScaledClockTime)
+end
+
+local function performWorkUntilDeadline() --[[ Line: 229 ]]
+	-- upvalues: Callback (ref), v2 (ref), ReactSchedulerYieldIntervalResult (ref), DeferredWork (ref), HeartbeatFrameMarker (ref), Flag1 (ref), ScaledClockTime (ref), ClampedValue (ref), Flag (ref), performWorkUntilDeadline (ref), setFrameMarker (copy), ReactGlobalsModule (copy), DescribeError (copy), ErrorToStringFunction (copy)
+	if Callback == nil then
+		Flag = false
+		
+		return
+	end
+	local ScaledClockTime1 = os.clock() * 1000
+	v2 = ScaledClockTime1 + ReactSchedulerYieldIntervalResult
+	local Flag2 = true
+	
+	if DeferredWork and not HeartbeatFrameMarker and not Flag1 then
+		ScaledClockTime = ScaledClockTime1
+	end
+	if HeartbeatFrameMarker and Flag1 and ClampedValue - (os.clock() * 1000 - ScaledClockTime) <= ReactSchedulerYieldIntervalResult then
+		Flag2 = false
+	end
+	local function doWork() --[[ Line: 259 ]]
+		-- upvalues: Callback (upval), Flag2 (ref), ScaledClockTime1 (copy), Flag (upval), DeferredWork (upval), ScaledClockTime (upval), ClampedValue (upval), ReactSchedulerYieldIntervalResult (upval), Flag1 (upval), performWorkUntilDeadline (upval), HeartbeatFrameMarker (upval), setFrameMarker (upval)
+		if Callback(Flag2, ScaledClockTime1) then
+			if DeferredWork then
+				if ClampedValue - (os.clock() * 1000 - ScaledClockTime) > ReactSchedulerYieldIntervalResult then
+					Flag1 = true
+					task.defer(performWorkUntilDeadline)
+				else
+					Flag1 = false
+					task.delay(0, performWorkUntilDeadline)
+					
+					if HeartbeatFrameMarker then
+						task.defer(setFrameMarker)
+					end
+				end
+			else
+				task.delay(0, performWorkUntilDeadline)
+			end
+		else
+			Flag = false
+			Callback = nil
 		end
 		return nil
 	end
+	local Success = nil
+	local Result = nil
 	
-	if reactGlobalsModule.__YOLO__ then
-		var24 = doWork()
-		var23 = true
+	if ReactGlobalsModule.__YOLO__ then
+		Result = doWork()
+		Success = true
 	else
-		local ok, status = xpcall(doWork, describeError)
-		var23 = ok
-		var24 = status
+		Success, Result = xpcall(doWork, DescribeError)
 	end
-	if not var23 then
+	if not Success then
 		task.delay(0, performWorkUntilDeadline)
 		
-		if var7 then
+		if HeartbeatFrameMarker then
 			task.defer(setFrameMarker)
 		end
-		error(errorToString(var24))
+		error(ErrorToStringFunction(Result))
 	end
 end
 
-local _ = function(p1)
-	local thread = coroutine.create(function()
-		-- upvalues: p1 (ref)
+local _ = function(Callback) --[[ Line: 320 | Named "wrapPerformWorkWithCoroutine" ]]
+	local Thread = coroutine.create(function() --[[ Line: 321 ]]
+		-- upvalues: Callback (copy)
 		while true do
-			local ok, status = pcall(coroutine.wrap(p1))
-			coroutine.yield(ok, status)
+			local Success, Result = pcall((coroutine.wrap(Callback)))
+			coroutine.yield(Success, Result)
 		end
 	end)
 	
-	return function()
-		-- upvalues: thread (ref)
-		local _, var21, var22 = coroutine.resume(thread)
+	return function() --[[ Line: 331 ]]
+		-- upvalues: Thread (copy)
+		local _, Result, Resumed3 = coroutine.resume(Thread)
 		
-		if not var21 then
-			error(var22)
+		if not Result then
+			error(Resumed3)
 		end
 	end
 end
 
-local var21 = performWorkUntilDeadline
-local thread = coroutine.create(function()
-	-- upvalues: var21 (ref)
-	while true do
-		local ok, status = pcall(coroutine.wrap(var21))
-		coroutine.yield(ok, status)
-	end
+local PerformWorkUntilDeadline = performWorkUntilDeadline
+local Thread = coroutine.create(function() --[[ Line: 321 ]]
+	-- upvalues: PerformWorkUntilDeadline (copy)
+	local Success, Result = pcall((coroutine.wrap(PerformWorkUntilDeadline)))
+	coroutine.yield(Success, Result)
 end)
 
-performWorkUntilDeadline = function()
-	-- upvalues: thread (ref)
-	local _, var22, var23 = coroutine.resume(thread)
+performWorkUntilDeadline = function() --[[ Line: 331 ]]
+	-- upvalues: Thread (copy)
+	local _, Result, Resumed3 = coroutine.resume(Thread)
 	
-	if not var22 then
-		error(var23)
+	if not Result then
+		error(Resumed3)
 	end
 end
 
 return {
-	requestHostCallback = function(p2)
-		-- upvalues: var3 (write), var2 (write), performWorkUntilDeadline (write), var7 (write), setFrameMarker (ref)
-		var3 = p2
+	requestHostCallback = function(p1) --[[ Line: 341 ]]
+		-- upvalues: Callback (ref), Flag (ref), performWorkUntilDeadline (ref), HeartbeatFrameMarker (ref), setFrameMarker (copy)
+		Callback = p1
 		
-		if not var2 then
-			var2 = true
+		if not Flag then
+			Flag = true
 			task.delay(0, performWorkUntilDeadline)
 			
-			if var7 then
+			if HeartbeatFrameMarker then
 				task.defer(setFrameMarker)
 			end
 		end
 	end,
-	cancelHostCallback = function()
-		-- upvalues: var3 (write)
-		var3 = nil
+	cancelHostCallback = function() --[[ Line: 353 ]]
+		-- upvalues: Callback (ref)
+		Callback = nil
 	end,
-	requestHostTimeout = function(p2, p3)
-		-- upvalues: none (write), setTimeout (ref)
-		none = setTimeout(function()
-			-- upvalues: p2 (ref)
-			p2(os.clock() * 1000)
-		end, p3)
+	requestHostTimeout = function(Callback, p1) --[[ Line: 357 ]]
+		-- upvalues: None (ref), SetTimeoutFunction (copy)
+		None = SetTimeoutFunction(function() --[[ Line: 358 ]]
+			-- upvalues: Callback (copy)
+			Callback(os.clock() * 1000)
+		end, p1)
 	end,
-	cancelHostTimeout = function()
-		-- upvalues: clearTimeout (ref), none (write), object (ref)
-		clearTimeout(none)
-		none = object.None
+	cancelHostTimeout = function() --[[ Line: 363 ]]
+		-- upvalues: ClearTimeoutFunction (copy), None (ref), Object (copy)
+		ClearTimeoutFunction(None)
+		None = Object.None
 	end,
-	shouldYieldToHost = shouldYieldToHost,
-	requestPaint = requestPaint,
-	getCurrentTime = var1,
-	forceFrameRate = forceFrameRate,
-	setSchedulerFlags = setSchedulerFlags,
-	getSchedulerFlags = getSchedulerFlags
+	shouldYieldToHost = function(): boolean --[[ Line: 206 ]]
+		-- upvalues: v2 (ref)
+		return v2 <= os.clock() * 1000
+	end,
+	requestPaint = function() --[[ Line: 211 ]] end,
+	getCurrentTime = GetCurrentTime,
+	forceFrameRate = function(p1: number) --[[ Line: 213 ]]
+		-- upvalues: Console (copy), ReactSchedulerYieldIntervalResult (ref)
+		if p1 < 0 or p1 > 125 then
+			Console.warn("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported")
+			
+			return
+		end
+		if p1 > 0 then
+			ReactSchedulerYieldIntervalResult = math.floor(1000 / p1)
+			
+			return
+		else
+			ReactSchedulerYieldIntervalResult = 5
+		end
+	end,
+	setSchedulerFlags = function(SchedulerFlags) --[[ Line: 147 ]]
+		-- upvalues: ReactSchedulerYieldIntervalResult (ref), DesiredFrameRate (ref), MinValue (ref), MaxValue (ref), MinimumFrameRate (ref), ClampedValue (ref), Value (ref), DeferredWork (ref), HeartbeatFrameMarker (ref), TargetMsByHeartbeatDelta (ref), HeartbeatConnection (ref), NumberOfLookbackFrames (ref), LookbackUseRingBuffer (ref), Buffer (copy), v1 (ref)
+		if SchedulerFlags.yieldInterval ~= nil then
+			ReactSchedulerYieldIntervalResult = SchedulerFlags.yieldInterval
+		end
+		if SchedulerFlags.desiredFrameRate ~= nil then
+			DesiredFrameRate = SchedulerFlags.desiredFrameRate
+			MinValue = 1000 / DesiredFrameRate
+			MaxValue = 1000 / MinimumFrameRate
+			ClampedValue = MinValue
+			Value = ClampedValue
+		end
+		if SchedulerFlags.minimumFrameRate ~= nil then
+			MinimumFrameRate = SchedulerFlags.minimumFrameRate
+			MinValue = 1000 / DesiredFrameRate
+			MaxValue = 1000 / MinimumFrameRate
+			ClampedValue = MinValue
+			Value = ClampedValue
+		end
+		if SchedulerFlags.deferredWork ~= nil then
+			DeferredWork = SchedulerFlags.deferredWork
+		end
+		if SchedulerFlags.heartbeatFrameMarker ~= nil then
+			HeartbeatFrameMarker = SchedulerFlags.heartbeatFrameMarker
+		end
+		if SchedulerFlags.targetMsByHeartbeatDelta ~= nil then
+			TargetMsByHeartbeatDelta = SchedulerFlags.targetMsByHeartbeatDelta
+			
+			if SchedulerFlags.targetMsByHeartbeatDelta then
+				if HeartbeatConnection then
+					HeartbeatConnection:Disconnect()
+				end
+				HeartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 83 ]]
+					-- upvalues: NumberOfLookbackFrames (upval), LookbackUseRingBuffer (upval), Buffer (upval), v1 (upval), Value (upval), ClampedValue (upval), MinValue (upval), MaxValue (upval)
+					if NumberOfLookbackFrames <= 1 then
+						ClampedValue = math.clamp(DeltaTime * 1000, MinValue, MaxValue)
+						
+						return
+					end
+					if LookbackUseRingBuffer then
+						Buffer[v1] = DeltaTime * 1000
+						v1 = v1 % NumberOfLookbackFrames + 1
+						local Total = 0
+						local NumberOfLookbackFrames: number = NumberOfLookbackFrames
+						
+						for i = 1, NumberOfLookbackFrames do
+							if Buffer[i] == nil then
+								NumberOfLookbackFrames = i - 1
+								break
+							else
+								Total += Buffer[i]
+							end
+						end
+						Value = Total / NumberOfLookbackFrames
+					else
+						local NumberOfLookbackFrames1: number = NumberOfLookbackFrames
+						Value = (Value * (NumberOfLookbackFrames1 - 1) + DeltaTime * 1000) / NumberOfLookbackFrames1
+					end
+					ClampedValue = math.clamp(Value, MinValue, MaxValue)
+				end)
+			elseif HeartbeatConnection then
+				HeartbeatConnection:Disconnect()
+				HeartbeatConnection = nil
+				ClampedValue = MinValue
+			end
+		end
+		if SchedulerFlags.numberOfLookbackFrames ~= nil then
+			NumberOfLookbackFrames = SchedulerFlags.numberOfLookbackFrames
+		end
+		if SchedulerFlags.lookbackUseRingBuffer ~= nil then
+			LookbackUseRingBuffer = SchedulerFlags.lookbackUseRingBuffer
+		end
+	end,
+	getSchedulerFlags = function() --[[ Line: 185 ]]
+		-- upvalues: ReactSchedulerYieldIntervalResult (ref), DesiredFrameRate (ref), MinimumFrameRate (ref), DeferredWork (ref), HeartbeatFrameMarker (ref), TargetMsByHeartbeatDelta (ref), NumberOfLookbackFrames (ref), LookbackUseRingBuffer (ref)
+		return {
+			yieldInterval = ReactSchedulerYieldIntervalResult,
+			desiredFrameRate = DesiredFrameRate,
+			minimumFrameRate = MinimumFrameRate,
+			deferredWork = DeferredWork,
+			heartbeatFrameMarker = HeartbeatFrameMarker,
+			targetMsByHeartbeatDelta = TargetMsByHeartbeatDelta,
+			numberOfLookbackFrames = NumberOfLookbackFrames,
+			lookbackUseRingBuffer = LookbackUseRingBuffer
+		}
+	end
 }

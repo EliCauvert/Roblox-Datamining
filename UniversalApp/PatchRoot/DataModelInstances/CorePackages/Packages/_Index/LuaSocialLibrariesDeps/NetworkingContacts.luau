@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.NetworkingContacts.NetworkingContacts)
+﻿return (require(script.Parent.Parent.Parent._Index.NetworkingContacts.NetworkingContacts))

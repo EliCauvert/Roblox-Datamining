@@ -1,1 +1,1 @@
-﻿return require(script.OptionSelectorGroupItem)
+﻿return (require(script.OptionSelectorGroupItem))

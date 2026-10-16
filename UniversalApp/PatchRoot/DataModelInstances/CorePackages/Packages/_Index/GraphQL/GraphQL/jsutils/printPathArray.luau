@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.Parent.Parent.LuauPolyfill)
 
 return {
-	printPathArray = function(p1)
-		local t = {}
+	printPathArray = function(p1): string --[[ Line: 15 ]]
+		local List = {}
 		
 		for i = 1, #p1 do
-			local var1 = p1[i]
-			t[i] = if typeof(var1) == "number" then "[" .. tostring(var1) .. "]" else "." .. var1
+			local v1 = p1[i]
+			List[i] = typeof(v1) == "number" and "[" .. tostring(v1) .. "]" or "." .. v1
 		end
-		return table.concat(t, "")
+		return table.concat(List, "")
 	end
 }

@@ -1,392 +1,405 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local promiseModule = require(parent_1.Promise)
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
-local equalModule = require(parent.jsutils.equal)
-local apolloError = require(parent.errors).ApolloError
-local networkStatus = require(script.Parent.Parent.Parent.core).NetworkStatus
-local _ = require(parent.utilities)
-local documentType = require(script.Parent.Parent.parser).DocumentType
+﻿local QueryDataModule = {}
+local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local PromiseModule = require(Parent1.Promise)
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local HasOwnPropertyModule = require(Parent.luaUtils.hasOwnProperty)
+local EqualModule = require(Parent.jsutils.equal)
+local ApolloError = require(Parent.errors).ApolloError
+local NetworkStatus = require(script.Parent.Parent.Parent.core).NetworkStatus
+local _ = require(Parent.utilities)
+local DocumentType = require(script.Parent.Parent.parser).DocumentType
 local _ = require(script.Parent.Parent.types.types)
-local operationData = require(script.Parent.OperationData).OperationData
-local tbl = setmetatable({}, { __index = operationData })
-tbl.__index = tbl
+local OperationData = require(script.Parent.OperationData).OperationData
+local self = setmetatable({}, { __index = OperationData })
+self.__index = self
 
-function tbl.new(p1)
-	-- upvalues: operationData (ref), boolean (ref), tbl (ref)
-	local onNewData = p1.onNewData
-	local var1 = operationData.new(p1.options, p1.context)
-	var1.runLazy = false
-	var1.previous = {}
-	var1.onNewData = onNewData
+function self.new(Options) --[[ Line: 114 ]]
+	-- upvalues: OperationData (copy), Boolean (copy), self (copy)
+	local OnNewData = Options.onNewData
+	local NewOperationData = OperationData.new(Options.options, Options.context)
+	NewOperationData.runLazy = false
+	NewOperationData.previous = {}
+	NewOperationData.onNewData = OnNewData
 	
-	function var6.runLazyQuery(p2)
-		-- upvalues: var1 (ref)
-		var1:cleanup()
-		var1.runLazy = true
-		var1.lazyOptions = p2
-		var1:onNewData()
+	function NewOperationData.runLazyQuery(LazyOptions) --[[ Line: 133 ]]
+		-- upvalues: NewOperationData (copy)
+		NewOperationData:cleanup()
+		NewOperationData.runLazy = true
+		NewOperationData.lazyOptions = LazyOptions
+		NewOperationData:onNewData()
 	end
 	
-	function var6.obsRefetch(_, p2)
-		-- upvalues: boolean (copy), var1 (ref)
-		return if boolean.toJSBoolean(var1.currentObservable) then var1.currentObservable:refetch(p2) else nil
+	function NewOperationData:obsRefetch(p1) --[[ Line: 140 ]]
+		-- upvalues: Boolean (upval), NewOperationData (copy)
+		return if Boolean.toJSBoolean(NewOperationData.currentObservable) then NewOperationData.currentObservable:refetch(p1) else nil
 	end
 	
-	function var6.obsFetchMore(_, p2)
-		-- upvalues: var1 (ref)
-		return if var1.currentObservable then var1.currentObservable:fetchMore(p2) else nil
+	function NewOperationData:obsFetchMore(p1) --[[ Line: 147 ]]
+		-- upvalues: NewOperationData (copy)
+		return if NewOperationData.currentObservable then NewOperationData.currentObservable:fetchMore(p1) else nil
 	end
 	
-	function var6.obsUpdateQuery(_, p2)
-		-- upvalues: var1 (ref)
-		return if var1.currentObservable then var1.currentObservable:updateQuery(p2) else nil
+	function NewOperationData:obsUpdateQuery(p1) --[[ Line: 161 ]]
+		-- upvalues: NewOperationData (copy)
+		return if NewOperationData.currentObservable then NewOperationData.currentObservable:updateQuery(p1) else nil
 	end
 	
-	function var6.obsStartPolling(_, p2)
-		-- upvalues: var1 (ref)
-		return if var1.currentObservable then var1.currentObservable:startPolling(p2) else nil
+	function NewOperationData:obsStartPolling(p1) --[[ Line: 168 ]]
+		-- upvalues: NewOperationData (copy)
+		return if NewOperationData.currentObservable then NewOperationData.currentObservable:startPolling(p1) else nil
 	end
 	
-	function var6.obsStopPolling(_)
-		-- upvalues: var1 (ref)
-		return if var1.currentObservable then var1.currentObservable:stopPolling() else nil
+	function NewOperationData:obsStopPolling() --[[ Line: 172 ]]
+		-- upvalues: NewOperationData (copy)
+		return if NewOperationData.currentObservable then NewOperationData.currentObservable:stopPolling() else nil
 	end
 	
-	function var6.obsSubscribeToMore(p2)
-		-- upvalues: var1 (ref)
-		return if var1.currentObservable then var1.currentObservable:subscribeToMore(p2) else nil
+	function NewOperationData.obsSubscribeToMore(p1) --[[ Line: 187 ]]
+		-- upvalues: NewOperationData (copy)
+		return if NewOperationData.currentObservable then NewOperationData.currentObservable:subscribeToMore(p1) else nil
 	end
 	
-	return setmetatable(var1, tbl)
+	return (setmetatable(NewOperationData, self))
 end
 
-function tbl:execute()
-	-- upvalues: boolean (ref)
+function self:execute() --[[ Line: 200 ]]
+	-- upvalues: Boolean (copy)
 	self:refreshClient()
-	local options = self:getOptions()
-	local skip = options.skip
-	local query = options.query
+	local Options = self:getOptions()
+	local Skip = Options.skip
+	local Query = Options.query
 	
-	if skip or query ~= self.previous.query then
+	if Skip or Query ~= self.previous.query then
 		self:removeQuerySubscription()
-		self:removeObservable(not boolean.toJSBoolean(skip))
-		self.previous.query = query
+		self:removeObservable(not Boolean.toJSBoolean(Skip))
+		self.previous.query = Query
 	end
 	self:updateObservableQuery()
 	
 	return self:getExecuteSsrResult() or self:getExecuteResult()
 end
 
-function tbl:executeLazy()
-	-- upvalues: boolean (ref), networkStatus (ref)
-	return if boolean.toJSBoolean(self.runLazy) then table.pack(self.runLazyQuery, self:execute()) else table.pack(self.runLazyQuery, {
+function self.executeLazy(p1) --[[ Line: 214 ]]
+	-- upvalues: Boolean (copy), NetworkStatus (copy)
+	return if Boolean.toJSBoolean(p1.runLazy) then table.pack(p1.runLazyQuery, p1:execute()) else table.pack(p1.runLazyQuery, {
 		loading = false,
 		called = false,
 		data = nil,
-		networkStatus = networkStatus.ready
+		networkStatus = NetworkStatus.ready
 	})
 end
 
-function tbl:fetchData()
-	-- upvalues: boolean (ref), promiseModule (ref)
-	local options = self:getOptions()
+function self:fetchData() --[[ Line: 226 ]]
+	-- upvalues: Boolean (copy), PromiseModule (copy)
+	local Options = self:getOptions()
 	
-	return if boolean.toJSBoolean(if boolean.toJSBoolean(options.skip) then options.skip else options.ssr == false) then false else promiseModule.new(function(p1)
-		-- upvalues: self (ref)
+	return not Boolean.toJSBoolean(Boolean.toJSBoolean(Options.skip) and Options.skip or Options.ssr == false) and PromiseModule.new(function(p1) --[[ Line: 231 ]]
+		-- upvalues: self (copy)
 		return self:startQuerySubscription(p1)
 	end)
 end
 
-function tbl:afterExecute(p1)
-	-- upvalues: boolean (ref)
-	local var1 = p1 or {}
-	local var2 = if var1.lazy then var1.lazy else false
+function self:afterExecute(p1) --[[ Line: 236 ]]
+	-- upvalues: Boolean (copy)
+	local T = if p1 then p1 else {}
+	local Lazy = if T.lazy then T.lazy else false
 	self.isMounted = true
-	local options = self:getOptions()
+	local Options = self:getOptions()
+	local IsNotSsr = Options.ssr == false
 	
-	if boolean.toJSBoolean(self.currentObservable) and not boolean.toJSBoolean(options.ssr == false) and not boolean.toJSBoolean(self:ssrInitiated()) then
+	if Boolean.toJSBoolean(self.currentObservable) and not Boolean.toJSBoolean(IsNotSsr) and not Boolean.toJSBoolean(self:ssrInitiated()) then
 		self:startQuerySubscription()
 	end
-	if not boolean.toJSBoolean(var2) or boolean.toJSBoolean(self.runLazy) then
+	if not Boolean.toJSBoolean(Lazy) or Boolean.toJSBoolean(self.runLazy) then
 		self:handleErrorOrCompleted()
 	end
-	self.previousOptions = options
+	self.previousOptions = Options
 	
-	return function(...)
-		-- upvalues: self (ref)
+	return function(...) --[[ Line: 254 ]]
+		-- upvalues: self (copy)
 		return self:unmount(...)
 	end
 end
 
-function tbl:cleanup()
+function self:cleanup() --[[ Line: 259 ]]
 	self:removeQuerySubscription()
 	self:removeObservable(true)
 	self.previous.result = nil
 end
 
-function tbl:getOptions()
-	-- upvalues: boolean (ref), object (ref)
-	local options = getmetatable(getmetatable(self)).__index.getOptions(self)
+function self:getOptions() --[[ Line: 265 ]]
+	-- upvalues: Boolean (copy), Object (copy)
+	local Options = getmetatable((getmetatable(self))).__index.getOptions(self)
 	
-	if boolean.toJSBoolean(self.lazyOptions) then
-		options.variables = object.assign({}, options.variables, self.lazyOptions.variables)
-		options.context = object.assign({}, options.context, self.lazyOptions.context)
+	if Boolean.toJSBoolean(self.lazyOptions) then
+		Options.variables = Object.assign({}, Options.variables, self.lazyOptions.variables)
+		Options.context = Object.assign({}, Options.context, self.lazyOptions.context)
 	end
-	if boolean.toJSBoolean(self.runLazy) then
+	if Boolean.toJSBoolean(self.runLazy) then
 		self.options.skip = nil
 	end
-	return options
+	return Options
 end
 
-function tbl:ssrInitiated()
-	-- upvalues: boolean (ref)
-	return if boolean.toJSBoolean(self.context) then self.context.renderPromises else self.context
+function self.ssrInitiated(p1) --[[ Line: 281 ]]
+	-- upvalues: Boolean (copy)
+	return if Boolean.toJSBoolean(p1.context) then p1.context.renderPromises else p1.context
 end
 
-function tbl:getExecuteSsrResult()
-	-- upvalues: object (ref), networkStatus (ref), boolean (ref)
-	local options = self:getOptions()
-	local skip = options.skip
-	local var1 = object.assign({}, {
+function self:getExecuteSsrResult() --[[ Line: 289 ]]
+	-- upvalues: Object (copy), NetworkStatus (copy), Boolean (copy)
+	local Options = self:getOptions()
+	local Skip = Options.skip
+	local DisableNetworkFetches = self:refreshClient().client.disableNetworkFetches
+	local AssignResult = Object.assign({}, {
 		loading = true,
 		called = true,
 		data = nil,
 		stale = false,
-		networkStatus = networkStatus.loading,
+		networkStatus = NetworkStatus.loading,
 		client = self.client
 	}, self:observableQueryFields())
 	
-	if boolean.toJSBoolean(options.ssr == false) and (boolean.toJSBoolean(self:ssrInitiated()) or boolean.toJSBoolean(self:refreshClient().client.disableNetworkFetches)) then
-		self.previous.result = var1
+	if Boolean.toJSBoolean(Options.ssr == false) and (Boolean.toJSBoolean(self:ssrInitiated()) or Boolean.toJSBoolean(DisableNetworkFetches)) then
+		self.previous.result = AssignResult
 		
-		return var1
-	elseif not boolean.toJSBoolean(self:ssrInitiated()) then
+		return AssignResult
+	end
+	if not Boolean.toJSBoolean(self:ssrInitiated()) then
 		return nil
 	end
-	local var2 = boolean.toJSBoolean(self:getExecuteResult()) and self:getExecuteResult() or var1
+	local ExecuteResult = Boolean.toJSBoolean(self:getExecuteResult()) and self:getExecuteResult() or AssignResult
 	
-	if boolean.toJSBoolean(var2.loading) and not boolean.toJSBoolean(skip) then
-		self.context.renderPromises:addQueryPromise(self, function()
+	if Boolean.toJSBoolean(ExecuteResult.loading) and not Boolean.toJSBoolean(Skip) then
+		self.context.renderPromises:addQueryPromise(self, function() --[[ Line: 315 ]]
 			return nil
 		end)
 	end
-	return var2
+	return ExecuteResult
 end
 
-function tbl:prepareObservableQueryOptions()
-	-- upvalues: documentType (ref), boolean (ref), object (ref)
-	local options = self:getOptions()
-	self:verifyDocumentType(options.query, documentType.Query)
-	local var1 = if boolean.toJSBoolean(options.displayName) then options.displayName else "Query"
+function self:prepareObservableQueryOptions() --[[ Line: 325 ]]
+	-- upvalues: DocumentType (copy), Boolean (copy), Object (copy)
+	local Options = self:getOptions()
+	self:verifyDocumentType(Options.query, DocumentType.Query)
+	local DisplayName = Boolean.toJSBoolean(Options.displayName) and Options.displayName or "Query"
 	
-	if boolean.toJSBoolean(self:ssrInitiated()) and (options.fetchPolicy == "network-only" or options.fetchPolicy == "cache-and-network") then
-		options.fetchPolicy = "cache-first"
+	if Boolean.toJSBoolean(self:ssrInitiated()) and (Options.fetchPolicy == "network-only" or Options.fetchPolicy == "cache-and-network") then
+		Options.fetchPolicy = "cache-first"
 	end
-	return object.assign({}, options, { displayName = var1, context = options.context })
+	return Object.assign({}, Options, { displayName = DisplayName, context = Options.context })
 end
 
-function tbl:initializeObservableQuery()
-	-- upvalues: boolean (ref), object (ref)
-	if boolean.toJSBoolean(self:ssrInitiated()) then
+function self:initializeObservableQuery() --[[ Line: 341 ]]
+	-- upvalues: Boolean (copy), Object (copy)
+	if Boolean.toJSBoolean(self:ssrInitiated()) then
 		self.currentObservable = self.context.renderPromises:getSSRObservable(self:getOptions())
 	end
-	if not boolean.toJSBoolean(self.currentObservable) then
-		local var1 = self:prepareObservableQueryOptions()
-		self.previous.observableQueryOptions = object.assign({}, var1, { children = object.None })
-		self.currentObservable = self:refreshClient().client:watchQuery(object.assign({}, var1))
+	if not Boolean.toJSBoolean(self.currentObservable) then
+		local PrepareObservableQueryOptionsResult = self:prepareObservableQueryOptions()
+		self.previous.observableQueryOptions = Object.assign({}, PrepareObservableQueryOptionsResult, { children = Object.None })
+		self.currentObservable = self:refreshClient().client:watchQuery(Object.assign({}, PrepareObservableQueryOptionsResult))
 		
-		if boolean.toJSBoolean(self:ssrInitiated()) then
-			self.context.renderPromises:registerSSRObservable(self.currentObservable, var1)
+		if Boolean.toJSBoolean(self:ssrInitiated()) then
+			self.context.renderPromises:registerSSRObservable(self.currentObservable, PrepareObservableQueryOptionsResult)
 		end
 	end
 end
 
-function tbl:updateObservableQuery()
-	-- upvalues: boolean (ref), object (ref), equalModule (ref)
-	if not boolean.toJSBoolean(self.currentObservable) then
+function self:updateObservableQuery() --[[ Line: 358 ]]
+	-- upvalues: Boolean (copy), Object (copy), EqualModule (copy)
+	if not Boolean.toJSBoolean(self.currentObservable) then
 		self:initializeObservableQuery()
 		
 		return
 	end
-	local var1 = object.assign({}, self:prepareObservableQueryOptions(), { children = object.None })
+	local AssignResult = Object.assign({}, self:prepareObservableQueryOptions(), { children = Object.None })
 	
-	if boolean.toJSBoolean(self:getOptions().skip) then
-		self.previous.observableQueryOptions = var1
+	if Boolean.toJSBoolean(self:getOptions().skip) then
+		self.previous.observableQueryOptions = AssignResult
 		
 		return
-	elseif not equalModule(var1, self.previous.observableQueryOptions) then
-		self.previous.observableQueryOptions = var1
-		self.currentObservable:setOptions(var1):catch(function() end)
+	end
+	if not EqualModule(AssignResult, self.previous.observableQueryOptions) then
+		self.previous.observableQueryOptions = AssignResult
+		self.currentObservable:setOptions(AssignResult):catch(function() --[[ Line: 378 ]] end)
 	end
 end
 
-function tbl:startQuerySubscription(p1)
-	-- upvalues: boolean (ref), equalModule (ref), hasOwnPropertyModule (ref)
-	if p1 == nil then
-		p1 = self.onNewData
+function self:startQuerySubscription(OnNewDataFunction) --[[ Line: 388 ]]
+	-- upvalues: Boolean (copy), EqualModule (copy), HasOwnPropertyModule (copy)
+	if OnNewDataFunction == nil then
+		OnNewDataFunction = self.onNewData
 	end
-	if boolean.toJSBoolean(self.currentSubscription) or boolean.toJSBoolean(self:getOptions().skip) then
+	if not Boolean.toJSBoolean(self.currentSubscription) and not Boolean.toJSBoolean(self:getOptions().skip) then
+		self.currentSubscription = self.currentObservable:subscribe({
+			next = function(_, p1) --[[ Line: 396 ]]
+				-- upvalues: self (copy), Boolean (upval), EqualModule (upval), OnNewDataFunction (ref)
+				local Loading = p1.loading
+				local NetworkStatus = p1.networkStatus
+				local Data = p1.data
+				local Result = self.previous.result
+				
+				if not Boolean.toJSBoolean(Result) or Result.loading ~= Loading or Result.networkStatus ~= NetworkStatus or not EqualModule(Result.data, Data) then
+					OnNewDataFunction(self)
+					
+					return
+				end
+			end,
+			error = function(_, p1) --[[ Line: 412 ]]
+				-- upvalues: self (copy), HasOwnPropertyModule (upval), Boolean (upval), EqualModule (upval), OnNewDataFunction (ref)
+				self:resubscribeToQuery()
+				
+				if not HasOwnPropertyModule(p1, "graphQLErrors") then
+					error(p1)
+				end
+				local Result = self.previous.result
+				
+				if Boolean.toJSBoolean(Result) and Boolean.toJSBoolean(Result.loading) or not EqualModule(p1, self.previous.error) then
+					self.previous.error = p1
+					OnNewDataFunction(self)
+				end
+			end
+		})
+		
 		return
 	end
-	self.currentSubscription = self.currentObservable:subscribe({
-		next = function(_, p2)
-			-- upvalues: self (ref), boolean (copy), equalModule (copy), p1 (write)
-			local result = self.previous.result
-			
-			if boolean.toJSBoolean(result) and result.loading == p2.loading and (result.networkStatus == p2.networkStatus and equalModule(result.data, p2.data)) then
-				return
-			end
-			p1(self)
-		end,
-		error = function(_, p2)
-			-- upvalues: self (ref), hasOwnPropertyModule (copy), boolean (copy), equalModule (copy), p1 (write)
-			self:resubscribeToQuery()
-			
-			if not hasOwnPropertyModule(p2, "graphQLErrors") then
-				error(p2)
-			end
-			local result = self.previous.result
-			
-			if boolean.toJSBoolean(result) and boolean.toJSBoolean(result.loading) or not equalModule(p2, self.previous.error) then
-				self.previous.error = p2
-				p1(self)
-			end
-		end
-	})
 end
 
-function tbl:resubscribeToQuery()
-	-- upvalues: boolean (ref), object (ref)
+function self:resubscribeToQuery() --[[ Line: 429 ]]
+	-- upvalues: Boolean (copy), Object (copy)
 	self:removeQuerySubscription()
-	local currentObservable = self.currentObservable
+	local CurrentObservable = self.currentObservable
 	
-	if boolean.toJSBoolean(currentObservable) then
-		local lastError = currentObservable:getLastError()
-		local lastResult = currentObservable:getLastResult()
-		currentObservable:resetLastResults()
+	if Boolean.toJSBoolean(CurrentObservable) then
+		local LastError = CurrentObservable:getLastError()
+		local LastResult = CurrentObservable:getLastResult()
+		CurrentObservable:resetLastResults()
 		self:startQuerySubscription()
-		object.assign(currentObservable, { lastError = lastError, lastResult = lastResult })
+		Object.assign(CurrentObservable, { lastError = LastError, lastResult = LastResult })
 	end
 end
 
-function tbl:getExecuteResult()
-	-- upvalues: boolean (ref), object (ref), networkStatus (ref), apolloError (ref)
-	local var1 = self:observableQueryFields()
-	local options = self:getOptions()
+function self:getExecuteResult() --[[ Line: 449 ]]
+	-- upvalues: Boolean (copy), Object (copy), NetworkStatus (copy), ApolloError (copy)
+	local ObservableQueryFieldsResult = self:observableQueryFields()
+	local Options = self:getOptions()
 	
-	if boolean.toJSBoolean(options.skip) then
-		var1 = object.assign({}, var1, {
-			data = object.None,
-			error = object.None,
+	if Boolean.toJSBoolean(Options.skip) then
+		ObservableQueryFieldsResult = Object.assign({}, ObservableQueryFieldsResult, {
+			data = Object.None,
+			error = Object.None,
 			loading = false,
-			networkStatus = networkStatus.ready,
+			networkStatus = NetworkStatus.ready,
 			called = true
 		})
-	elseif boolean.toJSBoolean(self.currentObservable) then
-		local currentResult = self.currentObservable:getCurrentResult()
-		local data = currentResult.data
-		local loading = currentResult.loading
-		local partial = currentResult.partial
-		local networkStatus_1 = currentResult.networkStatus
-		local errors = currentResult.errors
-		local var2 = if boolean.toJSBoolean(errors) and #errors > 0 then apolloError.new({ graphQLErrors = errors }) else currentResult.error
-		var1 = object.assign({}, var1, {
-			data = data,
-			loading = loading,
-			networkStatus = networkStatus_1,
-			error = var2,
+	elseif Boolean.toJSBoolean(self.currentObservable) then
+		local CurrentResult = self.currentObservable:getCurrentResult()
+		local Data = CurrentResult.data
+		local Loading = CurrentResult.loading
+		local Partial = CurrentResult.partial
+		local Errors = CurrentResult.errors
+		local NewApolloError = if Boolean.toJSBoolean(Errors) and #Errors > 0 then ApolloError.new({ graphQLErrors = Errors }) else CurrentResult.error
+		ObservableQueryFieldsResult = Object.assign({}, ObservableQueryFieldsResult, {
+			data = Data,
+			loading = Loading,
+			networkStatus = CurrentResult.networkStatus,
+			error = NewApolloError,
 			called = true
 		})
 		
-		if not boolean.toJSBoolean(loading) then
-			if boolean.toJSBoolean(var2) then
-				object.assign(var1, {
+		if not Boolean.toJSBoolean(Loading) then
+			if Boolean.toJSBoolean(NewApolloError) then
+				Object.assign(ObservableQueryFieldsResult, {
 					data = (self.currentObservable:getLastResult() or {}).data
 				})
-			elseif boolean.toJSBoolean(options.partialRefetch) and boolean.toJSBoolean(partial) and (not boolean.toJSBoolean(data) or #object.keys(data) == 0) and self.currentObservable.options.fetchPolicy ~= "cache-only" then
-				object.assign(var1, { loading = true, networkStatus = networkStatus.loading })
-				var1:refetch()
+			else
+				local FetchPolicy = self.currentObservable.options.fetchPolicy
 				
-				return var1
+				if Boolean.toJSBoolean(Options.partialRefetch) and Boolean.toJSBoolean(Partial) and (not Boolean.toJSBoolean(Data) or #Object.keys(Data) == 0) and FetchPolicy ~= "cache-only" then
+					Object.assign(ObservableQueryFieldsResult, { loading = true, networkStatus = NetworkStatus.loading })
+					ObservableQueryFieldsResult:refetch()
+					
+					return ObservableQueryFieldsResult
+				end
 			end
 		end
 	end
-	var1.client = self.client
-	self:setOptions(options, true)
-	local result = self.previous.result
+	ObservableQueryFieldsResult.client = self.client
+	self:setOptions(Options, true)
+	local Result = self.previous.result
 	
-	if boolean.toJSBoolean(result) and boolean.toJSBoolean(result.loading) then
-		self.previous.loading = result.loading
+	if Boolean.toJSBoolean(Result) and Boolean.toJSBoolean(Result.loading) then
+		self.previous.loading = Result.loading
 	else
 		self.previous.loading = false
 	end
-	if boolean.toJSBoolean(result) then
-		var1.previousData = if boolean.toJSBoolean(result.data) then result.data else result.previousData
+	if Boolean.toJSBoolean(Result) then
+		ObservableQueryFieldsResult.previousData = Boolean.toJSBoolean(Result.data) and Result.data or Result.previousData
 	else
-		var1.previousData = result
+		ObservableQueryFieldsResult.previousData = Result
 	end
-	self.previous.result = var1
+	self.previous.result = ObservableQueryFieldsResult
 	
-	if boolean.toJSBoolean(self.currentObservable) then
+	if Boolean.toJSBoolean(self.currentObservable) then
 		self.currentObservable:resetQueryStoreErrors()
 	end
-	return var1
+	return ObservableQueryFieldsResult
 end
 
-function tbl:handleErrorOrCompleted()
-	-- upvalues: boolean (ref), equalModule (ref)
+function self:handleErrorOrCompleted() --[[ Line: 554 ]]
+	-- upvalues: Boolean (copy), EqualModule (copy)
 	if not self.currentObservable or not self.previous.result then return end
-	local result = self.previous.result
-	local data = result.data
-	local error = result.error
+	local Result = self.previous.result
+	local Data = Result.data
+	local Error1 = Result.error
 	
-	if not boolean.toJSBoolean(result.loading) then
-		local options = self:getOptions()
-		local query = options.query
-		local variables = options.variables
-		local onCompleted = options.onCompleted
-		local onError = options.onError
-		local skip = options.skip
+	if not Boolean.toJSBoolean(Result.loading) then
+		local Options = self:getOptions()
+		local Query = Options.query
+		local Variables = Options.variables
+		local OnCompletedFunction: (any) -> () = Options.onCompleted
+		local OnErrorFunction: (any) -> () = Options.onError
+		local Skip = Options.skip
 		
-		if boolean.toJSBoolean(self.previousOptions) and not boolean.toJSBoolean(self.previous.loading) and (equalModule(self.previousOptions.query, query) and equalModule(self.previousOptions.variables, variables)) then return end
-		if boolean.toJSBoolean(onCompleted) and not boolean.toJSBoolean(error) and not boolean.toJSBoolean(skip) then
-			onCompleted(data)
+		if Boolean.toJSBoolean(self.previousOptions) and not Boolean.toJSBoolean(self.previous.loading) and EqualModule(self.previousOptions.query, Query) and EqualModule(self.previousOptions.variables, Variables) then return end
+		if Boolean.toJSBoolean(OnCompletedFunction) and not Boolean.toJSBoolean(Error1) and not Boolean.toJSBoolean(Skip) then
+			OnCompletedFunction(Data)
 			
 			return
-		elseif boolean.toJSBoolean(onError) and boolean.toJSBoolean(error) then
-			onError(error)
+		end
+		if Boolean.toJSBoolean(OnErrorFunction) and Boolean.toJSBoolean(Error1) then
+			OnErrorFunction(Error1)
 		end
 	end
 end
 
-function tbl:removeQuerySubscription()
-	-- upvalues: boolean (ref)
-	if boolean.toJSBoolean(self.currentSubscription) then
+function self:removeQuerySubscription() --[[ Line: 583 ]]
+	-- upvalues: Boolean (copy)
+	if Boolean.toJSBoolean(self.currentSubscription) then
 		self.currentSubscription:unsubscribe()
 		self.currentSubscription = nil
 	end
 end
 
-function tbl:removeObservable(p1)
-	-- upvalues: boolean (ref)
-	if boolean.toJSBoolean(self.currentObservable) then
+function self:removeObservable(p1) --[[ Line: 590 ]]
+	-- upvalues: Boolean (copy)
+	if Boolean.toJSBoolean(self.currentObservable) then
 		self.currentObservable.tearDownQuery(self.currentObservable)
 		
-		if boolean.toJSBoolean(p1) then
+		if Boolean.toJSBoolean(p1) then
 			self.currentObservable = nil
 		end
 	end
 end
 
-function tbl:observableQueryFields()
-	-- upvalues: boolean (ref)
+function self:observableQueryFields() --[[ Line: 599 ]]
+	-- upvalues: Boolean (copy)
 	return {
-		variables = if boolean.toJSBoolean(self.currentObservable) then self.currentObservable.variables else nil,
+		variables = if Boolean.toJSBoolean(self.currentObservable) then self.currentObservable.variables else nil,
 		refetch = self.obsRefetch,
 		fetchMore = self.obsFetchMore,
 		updateQuery = self.obsUpdateQuery,
@@ -396,6 +409,6 @@ function tbl:observableQueryFields()
 	}
 end
 
-t.QueryData = tbl
+QueryDataModule.QueryData = self
 
-return t
+return QueryDataModule

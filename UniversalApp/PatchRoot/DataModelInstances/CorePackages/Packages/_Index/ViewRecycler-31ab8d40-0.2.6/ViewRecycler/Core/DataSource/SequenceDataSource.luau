@@ -1,208 +1,209 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Types)
-local itemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
-local mutationControllerModule = require(script.Parent.MutationController)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Types)
+local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
+local MutationControllerModule = require(script.Parent.MutationController)
 
-return function(p1, p2)
-	-- upvalues: itemKeyRegistryModule (ref), mutationControllerModule (ref), dataSourceChangeTypeModule (ref)
-	local cloned = table.clone(p1 or {})
-	local var1 = itemKeyRegistryModule.create(p2, "DataSource.sequence")
-	local var2 = var1.rebuild(cloned)
-	local var3 = mutationControllerModule(function()
-		-- upvalues: cloned (write)
-		return #cloned
-	end, function()
-		-- upvalues: cloned (write), var2 (write), var1 (ref)
+return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
+	-- upvalues: ItemKeyRegistryModule (copy), MutationControllerModule (copy), DataSourceChangeTypeModule (copy)
+	local Copy = table.clone(p1 or {})
+	local DataSourceSequence = ItemKeyRegistryModule.create(p2, "DataSource.sequence")
+	local RebuildResult = DataSourceSequence.rebuild(Copy)
+	local MutationControllerModuleResult = MutationControllerModule(function(): number --[[ Line: 37 ]]
+		-- upvalues: Copy (ref)
+		return #Copy
+	end, function() --[[ Line: 39 ]]
+		-- upvalues: Copy (ref), RebuildResult (ref), DataSourceSequence (copy)
 		return {
-			values = table.clone(cloned),
-			keys = table.clone(var2),
-			keyRegistry = var1.snapshot()
+			values = table.clone(Copy),
+			keys = table.clone(RebuildResult),
+			keyRegistry = DataSourceSequence.snapshot()
 		}
-	end, function(p3)
-		-- upvalues: cloned (write), var2 (write), var1 (ref)
-		cloned = p3.values
-		var2 = p3.keys
-		var1.restore(p3.keyRegistry)
+	end, function(p3) --[[ Line: 41 ]]
+		-- upvalues: Copy (ref), RebuildResult (ref), DataSourceSequence (copy)
+		Copy = p3.values
+		RebuildResult = p3.keys
+		DataSourceSequence.restore(p3.keyRegistry)
 	end)
-	local _ = nil
-	local t = {
-		getItemCount = function()
-			-- upvalues: cloned (write)
-			return #cloned
+	local config = nil
+	config = {
+		getItemCount = function(): number --[[ Line: 49 ]]
+			-- upvalues: Copy (ref)
+			return #Copy
 		end,
-		getItem = function(p3)
-			-- upvalues: cloned (write)
-			return cloned[p3]
+		getItem = function(p3) --[[ Line: 52 ]]
+			-- upvalues: Copy (ref)
+			return Copy[p3]
 		end,
-		getItemKey = function(p3)
-			-- upvalues: var2 (write)
-			return var2[p3]
+		getItemKey = function(p3) --[[ Line: 55 ]]
+			-- upvalues: RebuildResult (ref)
+			return RebuildResult[p3]
 		end,
-		getItems = function(p3, p4)
-			-- upvalues: cloned (write)
-			return table.move(cloned, p3, p4, 1, {})
+		getItems = function(p3, p4) --[[ Line: 58 ]]
+			-- upvalues: Copy (ref)
+			return table.move(Copy, p3, p4, 1, {})
 		end,
-		subscribe = var3.subscribe,
-		transaction = var3.transaction
+		subscribe = MutationControllerModuleResult.subscribe,
+		transaction = MutationControllerModuleResult.transaction
 	}
 	
-	function t.append(p3)
-		-- upvalues: t (write), cloned (write)
-		t.insert(#cloned + 1, p3)
+	function config.append(p3) --[[ Line: 65 ]]
+		-- upvalues: config (ref), Copy (ref)
+		config.insert(#Copy + 1, p3)
 	end
 	
-	function t.prepend(p3)
-		-- upvalues: t (write)
-		t.insert(1, p3)
+	function config.prepend(p3) --[[ Line: 69 ]]
+		-- upvalues: config (ref)
+		config.insert(1, p3)
 	end
 	
-	function t.insert(p3, p4)
-		-- upvalues: cloned (write), var1 (ref), var2 (write), var3 (ref), dataSourceChangeTypeModule (copy)
-		local clonedCount = #cloned
-		assert(p3 >= 1 and p3 <= clonedCount + 1, "DataSource.sequence: insert index out of range")
-		local var4 = var1.claim(p4, p3)
-		table.insert(cloned, p3, p4)
-		table.insert(var2, p3, var4)
-		var3.emit({
-			type = dataSourceChangeTypeModule.Insert,
-			index = p3,
-			keys = { var4 }
-		}, clonedCount)
+	function config.insert(Index: number, p3) --[[ Line: 73 ]]
+		-- upvalues: Copy (ref), DataSourceSequence (copy), RebuildResult (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+		local CountCopy = #Copy
+		assert(Index >= 1 and Index <= CountCopy + 1, "DataSource.sequence: insert index out of range")
+		local ClaimResult = DataSourceSequence.claim(p3, Index)
+		table.insert(Copy, Index, p3)
+		table.insert(RebuildResult, Index, ClaimResult)
+		MutationControllerModuleResult.emit({
+			type = DataSourceChangeTypeModule.Insert,
+			index = Index,
+			keys = { ClaimResult }
+		}, CountCopy)
 	end
 	
-	function t.remove(p3, p4)
-		-- upvalues: cloned (write), var2 (write), var1 (ref), var3 (ref), dataSourceChangeTypeModule (copy)
-		local clonedCount = #cloned
-		p4 = p4 or 1
-		assert(p4 > 0 and (p3 >= 1 and p3 + p4 - 1 <= clonedCount), "DataSource.sequence: remove range out of range")
-		local list = table.create(p4)
+	function config.remove(Index: number, p3) --[[ Line: 82 ]]
+		-- upvalues: Copy (ref), RebuildResult (ref), DataSourceSequence (copy), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+		local CountCopy = #Copy
+		local P11 = p3 or 1
+		assert(P11 > 0 and Index >= 1 and Index + P11 - 1 <= CountCopy, "DataSource.sequence: remove range out of range")
+		local Buffer = table.create(P11)
 		
-		for i = 1, p4 do
-			table.remove(cloned, p3)
-			local removed = table.remove(var2, p3)
-			list[i] = removed
-			var1.release(removed)
+		for i = 1, P11 do
+			table.remove(Copy, Index)
+			local Removed = table.remove(RebuildResult, Index)
+			Buffer[i] = Removed
+			DataSourceSequence.release(Removed)
 		end
-		var3.emit({
-			type = dataSourceChangeTypeModule.Remove,
-			index = p3,
-			keys = list
-		}, clonedCount)
+		MutationControllerModuleResult.emit({
+			type = DataSourceChangeTypeModule.Remove,
+			index = Index,
+			keys = Buffer
+		}, CountCopy)
 	end
 	
-	function t.setItem(value, p5)
-		-- upvalues: cloned (write), var2 (write), var1 (ref), var3 (ref), dataSourceChangeTypeModule (copy)
-		local clonedCount = #cloned
-		assert(value >= 1 and value <= clonedCount, "DataSource.sequence: setItem index out of range")
-		local var4 = var2[value]
-		var1.assertPreserved(var4, p5, value)
-		cloned[value] = p5
-		var3.emit({
-			type = dataSourceChangeTypeModule.Update,
-			keys = { var4 }
-		}, clonedCount)
+	function config.setItem(Key: number, p4) --[[ Line: 99 ]]
+		-- upvalues: Copy (ref), RebuildResult (ref), DataSourceSequence (copy), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+		local CountCopy = #Copy
+		assert(Key >= 1 and Key <= CountCopy, "DataSource.sequence: setItem index out of range")
+		local RebuildResultEntry = RebuildResult[Key]
+		DataSourceSequence.assertPreserved(RebuildResultEntry, p4, Key)
+		Copy[Key] = p4
+		MutationControllerModuleResult.emit({
+			type = DataSourceChangeTypeModule.Update,
+			keys = { RebuildResultEntry }
+		}, CountCopy)
 	end
 	
-	function t.moveItem(p5, p6)
-		-- upvalues: cloned (write), var2 (write), var3 (ref), dataSourceChangeTypeModule (copy)
-		local clonedCount = #cloned
-		assert(p5 >= 1 and p5 <= clonedCount, "DataSource.sequence: moveItem source index out of range")
-		assert(p6 >= 1 and p6 <= clonedCount, "DataSource.sequence: moveItem destination index out of range")
+	function config.moveItem(Index: number, ToIndex: number) --[[ Line: 108 ]]
+		-- upvalues: Copy (ref), RebuildResult (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+		local CountCopy = #Copy
+		assert(Index >= 1 and Index <= CountCopy, "DataSource.sequence: moveItem source index out of range")
+		assert(ToIndex >= 1 and ToIndex <= CountCopy, "DataSource.sequence: moveItem destination index out of range")
 		
-		if p5 == p6 then
+		if Index ~= ToIndex then
+			local Removed = table.remove(RebuildResult, Index)
+			table.insert(Copy, ToIndex, (table.remove(Copy, Index)))
+			table.insert(RebuildResult, ToIndex, Removed)
+			MutationControllerModuleResult.emit({
+				type = DataSourceChangeTypeModule.Move,
+				fromIndex = Index,
+				toIndex = ToIndex,
+				key = Removed
+			}, CountCopy)
+			
 			return
 		end
-		local removed = table.remove(var2, p5)
-		table.insert(cloned, p6, table.remove(cloned, p5))
-		table.insert(var2, p6, removed)
-		var3.emit({
-			type = dataSourceChangeTypeModule.Move,
-			fromIndex = p5,
-			toIndex = p6,
-			key = removed
-		}, clonedCount)
 	end
 	
-	function t.reorder(p5)
-		-- upvalues: cloned (write), var2 (write), var3 (ref), dataSourceChangeTypeModule (copy)
-		local clonedCount = #cloned
-		assert(#p5 == clonedCount, "DataSource.sequence: reorder must contain every key")
+	function config.reorder(List) --[[ Line: 133 ]]
+		-- upvalues: Copy (ref), RebuildResult (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+		local CountCopy = #Copy
+		assert(#List == CountCopy, "DataSource.sequence: reorder must contain every key")
 		local t = {}
 		
-		for i, v in var2 do
-			t[v] = cloned[i]
+		for i, value in RebuildResult do
+			t[value] = Copy[i]
 		end
-		local list = table.create(clonedCount)
-		local list_1 = table.create(clonedCount)
-		local t_1 = {}
+		local Buffer = table.create(CountCopy)
+		local Buffer1 = table.create(CountCopy)
+		local t1 = {}
 		
-		for i_1, v_1 in p5 do
-			assert(t[v_1] ~= nil and t_1[v_1] == nil, "DataSource.sequence: reorder must contain every key once")
-			t_1[v_1] = true
-			list[i_1] = t[v_1]
-			list_1[i_1] = v_1
+		for i1, value1 in List do
+			assert(t[value1] ~= nil and t1[value1] == nil, "DataSource.sequence: reorder must contain every key once")
+			t1[value1] = true
+			Buffer[i1] = t[value1]
+			Buffer1[i1] = value1
 		end
-		cloned = list
-		var2 = list_1
-		var3.emit({
-			type = dataSourceChangeTypeModule.Reorder,
-			keys = table.clone(list_1)
-		}, clonedCount)
+		Copy = Buffer
+		RebuildResult = Buffer1
+		MutationControllerModuleResult.emit({
+			type = DataSourceChangeTypeModule.Reorder,
+			keys = table.clone(Buffer1)
+		}, CountCopy)
 	end
 	
-	function t.replaceItems(p6, p7, p8)
-		-- upvalues: cloned (write), var3 (ref), t (write), var1 (ref), var2 (write), dataSourceChangeTypeModule (copy)
-		assert(p6 >= 1 and (p6 <= p7 and p7 <= #cloned), "DataSource.sequence: replaceItems range out of range")
-		var3.transaction(function()
-			-- upvalues: t (copy), p6 (ref), p7 (ref), p8 (ref), cloned (copy), var1 (copy), var2 (copy), var3 (copy), dataSourceChangeTypeModule (copy)
-			t.remove(p6, p7 - p6 + 1)
+	function config.replaceItems(Index: number, p4, p5) --[[ Line: 157 ]]
+		-- upvalues: Copy (ref), MutationControllerModuleResult (copy), config (ref), DataSourceSequence (copy), RebuildResult (ref), DataSourceChangeTypeModule (upval)
+		assert(Index >= 1 and Index <= p4 and p4 <= #Copy, "DataSource.sequence: replaceItems range out of range")
+		MutationControllerModuleResult.transaction(function() --[[ Line: 162 ]]
+			-- upvalues: config (upval), Index (copy), p4 (copy), p5 (copy), Copy (upval), DataSourceSequence (upval), RebuildResult (upval), MutationControllerModuleResult (upval), DataSourceChangeTypeModule (upval)
+			config.remove(Index, p4 - Index + 1)
 			
-			if #p8 == 0 then return end
-			local clonedCount = #cloned
-			local list = table.create(#p8)
+			if #p5 == 0 then return end
+			local CountCopy = #Copy
+			local Buffer = table.create(#p5)
 			
-			for i, v in p8 do
-				list[i] = var1.claim(v, p6 + i - 1)
+			for i, value in p5 do
+				Buffer[i] = DataSourceSequence.claim(value, Index + i - 1)
 			end
-			local list_1 = table.create(clonedCount + #p8)
-			local list_2 = table.create(clonedCount + #p8)
+			local Buffer1 = table.create(CountCopy + #p5)
+			local Buffer2 = table.create(CountCopy + #p5)
 			
-			if p6 > 1 then
-				table.move(cloned, 1, p6 - 1, 1, list_1)
-				table.move(var2, 1, p6 - 1, 1, list_2)
+			if Index > 1 then
+				table.move(Copy, 1, Index - 1, 1, Buffer1)
+				table.move(RebuildResult, 1, Index - 1, 1, Buffer2)
 			end
-			for i_1, v_1 in p8 do
-				local var4 = p6 + i_1 - 1
-				list_1[var4] = v_1
-				list_2[var4] = list[i_1]
+			for i1, value1 in p5 do
+				local IndexDelta = Index + i1 - 1
+				Buffer1[IndexDelta] = value1
+				Buffer2[IndexDelta] = Buffer[i1]
 			end
-			if p6 <= clonedCount then
-				table.move(cloned, p6, clonedCount, p6 + #p8, list_1)
-				table.move(var2, p6, clonedCount, p6 + #p8, list_2)
+			if Index <= CountCopy then
+				table.move(Copy, Index, CountCopy, Index + #p5, Buffer1)
+				table.move(RebuildResult, Index, CountCopy, Index + #p5, Buffer2)
 			end
-			cloned = list_1
-			var2 = list_2
-			var3.emit({
-				type = dataSourceChangeTypeModule.Insert,
-				index = p6,
-				keys = list
-			}, clonedCount)
+			Copy = Buffer1
+			RebuildResult = Buffer2
+			MutationControllerModuleResult.emit({
+				type = DataSourceChangeTypeModule.Insert,
+				index = Index,
+				keys = Buffer
+			}, CountCopy)
 		end)
 	end
 	
-	function t.reset(value)
-		-- upvalues: cloned (write), var1 (ref), var2 (write), var3 (ref), dataSourceChangeTypeModule (copy)
-		local clonedCount = #cloned
-		local cloned_1 = table.clone(value)
-		local var5 = var1.rebuild(cloned_1)
-		cloned = cloned_1
-		var2 = var5
-		var3.emit({
-			type = dataSourceChangeTypeModule.Reset,
-			keys = table.clone(var5)
-		}, clonedCount)
+	function config.reset(Tbl) --[[ Line: 199 ]]
+		-- upvalues: Copy (ref), DataSourceSequence (copy), RebuildResult (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+		local CountCopy = #Copy
+		local Copy1 = table.clone(Tbl)
+		local RebuildResult1 = DataSourceSequence.rebuild(Copy1)
+		Copy = Copy1
+		RebuildResult = RebuildResult1
+		MutationControllerModuleResult.emit({
+			type = DataSourceChangeTypeModule.Reset,
+			keys = table.clone(RebuildResult1)
+		}, CountCopy)
 	end
 	
-	return t
+	return config
 end

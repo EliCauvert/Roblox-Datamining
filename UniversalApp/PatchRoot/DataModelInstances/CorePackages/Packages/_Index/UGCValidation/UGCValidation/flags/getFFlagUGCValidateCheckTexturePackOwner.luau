@@ -1,7 +1,7 @@
-﻿local getEngineUGCValidateTexturePackCPlusPlusModule = require(script.Parent.Parent.flags.getEngineUGCValidateTexturePackCPlusPlus)
+﻿local GetEngineUGCValidateTexturePackCPlusPlusModule = require(script.Parent.Parent.flags.getEngineUGCValidateTexturePackCPlusPlus)
 game:DefineFastFlag("UGCValidateCheckTexturePackOwner", false)
 
-return function()
-	-- upvalues: getEngineUGCValidateTexturePackCPlusPlusModule (ref)
-	return game:GetFastFlag("UGCValidateCheckTexturePackOwner") and getEngineUGCValidateTexturePackCPlusPlusModule()
+return function() --[[ Line: 7 ]]
+	-- upvalues: GetEngineUGCValidateTexturePackCPlusPlusModule (copy)
+	return game:GetFastFlag("UGCValidateCheckTexturePackOwner") and GetEngineUGCValidateTexturePackCPlusPlusModule()
 end

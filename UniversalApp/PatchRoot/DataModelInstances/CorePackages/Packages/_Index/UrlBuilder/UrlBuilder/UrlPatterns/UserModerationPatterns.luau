@@ -1,4 +1,4 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 1 ]]
 	return {
 		moderationDetail = p1.fromString("usermoderation:v1/not-approved"),
 		reactivate = p1.fromString("usermoderation:v1/not-approved/reactivate"),

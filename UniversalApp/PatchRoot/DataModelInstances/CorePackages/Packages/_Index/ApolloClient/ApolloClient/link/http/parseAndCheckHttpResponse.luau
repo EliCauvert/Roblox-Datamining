@@ -1,47 +1,46 @@
-﻿local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local error = luauPolyfillModule.Error
-local _ = require(parent.luaUtils.Response)
-local httpService = game:GetService("HttpService")
-local t = {}
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Error1 = LuauPolyfillModule.Error
+local _ = require(Parent.luaUtils.Response)
+local HttpService = game:GetService("HttpService")
 local _ = require(script.Parent.Parent.core.types)
-local throwServerError = require(script.Parent.Parent.utils).throwServerError
-local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
+local ThrowServerErrorFunction = require(script.Parent.Parent.utils).throwServerError
+local HasOwnPropertyModule = require(Parent.luaUtils.hasOwnProperty)
 
-function t.parseAndCheckHttpResponse(p1)
-	-- upvalues: httpService (ref), error (ref), throwServerError (ref), array (ref), hasOwnPropertyModule (ref)
-	return function(p2)
-		-- upvalues: httpService (copy), error (copy), throwServerError (copy), array (copy), hasOwnPropertyModule (copy), p1 (ref)
-		return p2:text():andThen(function(p3)
-			-- upvalues: httpService (copy), error (copy), p2 (ref)
-			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), p3 (ref)
-				return httpService:JSONDecode(p3), true
+return {
+	parseAndCheckHttpResponse = function(p1) --[[ Line: 34 ]]
+		-- upvalues: HttpService (copy), Error1 (copy), ThrowServerErrorFunction (copy), Array (copy), HasOwnPropertyModule (copy)
+		return function(Response) --[[ Line: 35 ]]
+			-- upvalues: HttpService (upval), Error1 (upval), ThrowServerErrorFunction (upval), Array (upval), HasOwnPropertyModule (upval), p1 (copy)
+			return Response:text():andThen(function(Result) --[[ Line: 38 ]]
+				-- upvalues: HttpService (upval), Error1 (upval), Response (copy)
+				local Success, Result1 = pcall(function() --[[ Line: 39 ]]
+					-- upvalues: HttpService (upval), Result (copy)
+					return HttpService:JSONDecode(Result), true
+				end)
+				
+				if not Success then
+					local NewError = Error1.new(Result1)
+					NewError.name = "ServerParseError"
+					NewError.response = Response
+					NewError.statusCode = Response.status
+					NewError.bodyText = Result
+					error(NewError)
+				end
+				return Result1
+			end):andThen(function(Result) --[[ Line: 54 ]]
+				-- upvalues: Response (copy), ThrowServerErrorFunction (upval), Array (upval), HasOwnPropertyModule (upval), p1 (upval)
+				if Response.status ~= nil and Response.status >= 300 then
+					ThrowServerErrorFunction(Response, Result, ("Response not successful: Received status code %s"):format((tostring(Response.status))))
+				end
+				if not Array.isArray(Result) and not HasOwnPropertyModule(Result, "data") and not HasOwnPropertyModule(Result, "errors") then
+					ThrowServerErrorFunction(Response, Result, ("Server response was missing for query '%s'."):format(Array.isArray(p1) and Array.join(Array.map(p1, function(p2) --[[ Line: 77 ]]
+						return p2.operationName
+					end), ", ") or p1.operationName))
+				end
+				return Result
 			end)
-			
-			if not ok then
-				local serverParseError = error.new(status)
-				serverParseError.name = "ServerParseError"
-				serverParseError.response = p2
-				serverParseError.statusCode = p2.status
-				serverParseError.bodyText = p3
-				error(serverParseError)
-			end
-			return status
-		end):andThen(function(p3)
-			-- upvalues: p2 (ref), throwServerError (copy), array (copy), hasOwnPropertyModule (copy), p1 (copy)
-			if p2.status ~= nil and p2.status >= 300 then
-				throwServerError(p2, p3, ("Response not successful: Received status code %s"):format(tostring(p2.status)))
-			end
-			if not array.isArray(p3) and not hasOwnPropertyModule(p3, "data") and not hasOwnPropertyModule(p3, "errors") then
-				throwServerError(p2, p3, ("Server response was missing for query '%s'."):format(array.isArray(p1) and array.join(array.map(p1, function(p4)
-					return p4.operationName
-				end), ", ") or p1.operationName))
-			end
-			return p3
-		end)
+		end
 	end
-end
-
-return t
+}

@@ -1,37 +1,39 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local UGCValidationCageMeshDistanceHeadMaxCageMeshDistance = game:DefineFastInt("UGCValidationCageMeshDistanceHeadMaxCageMeshDistance", 60)
 local UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold = game:DefineFastInt("UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold", 30)
-local getFFlagUGCValidateAQScoreWarningsModule = require(parent.flags.getFFlagUGCValidateAQScoreWarnings)
+local GetFFlagUGCValidateAQScoreWarningsModule = require(Parent.flags.getFFlagUGCValidateAQScoreWarnings)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
-	fflag = require(parent.flags.getFFlagUGCValidateCageMeshDistanceHead),
-	run = function(p1, p2)
-		-- upvalues: UGCValidationCageMeshDistanceHeadMaxCageMeshDistance (ref), errorSourceStringsModule (ref), UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
-		local headOuterCage = p2.aqsSummaryData.Measure_Cage_Distance_Head.Head_OuterCage
+	categories = {
+		require(Parent.validationSystem.ValidationEnums).UploadCategory.DYNAMIC_HEAD
+	},
+	fflag = require(Parent.flags.getFFlagUGCValidateCageMeshDistanceHead),
+	run = function(p1, p2) --[[ Line: 16 ]]
+		-- upvalues: UGCValidationCageMeshDistanceHeadMaxCageMeshDistance (copy), ErrorSourceStringsModule (copy), UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold (copy), GetFFlagUGCValidateAQScoreWarningsModule (copy)
+		local HeadOuterCage = p2.aqsSummaryData.Measure_Cage_Distance_Head.Head_OuterCage
 		
-		if headOuterCage == nil or headOuterCage.max_distance == nil or headOuterCage.negative_sdf_percent == nil then
+		if HeadOuterCage == nil or HeadOuterCage.max_distance == nil or HeadOuterCage.negative_sdf_percent == nil then
 			error("Measure_Cage_Distance_Head: AQS summary missing required fields")
 			
 			return
-		elseif UGCValidationCageMeshDistanceHeadMaxCageMeshDistance / 100 < tonumber(headOuterCage.max_distance) then
-			p1:fail(errorSourceStringsModule.Keys.MeasureCageMeshDistanceHead_CageTooFar, {
-				max_sdf = tonumber(headOuterCage.max_distance),
+		end
+		if UGCValidationCageMeshDistanceHeadMaxCageMeshDistance / 100 < tonumber(HeadOuterCage.max_distance) then
+			p1:fail(ErrorSourceStringsModule.Keys.MeasureCageMeshDistanceHead_CageTooFar, {
+				max_sdf = tonumber(HeadOuterCage.max_distance),
 				max_sdf_threshold = UGCValidationCageMeshDistanceHeadMaxCageMeshDistance / 100
 			})
 		end
-		if UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold < tonumber(headOuterCage.negative_sdf_percent) * 100 then
-			p1:fail(errorSourceStringsModule.Keys.MeasureCageMeshDistanceHead_CageInsideMesh, {
-				negtiveSDFPercent = string.format("%.2f", tonumber(headOuterCage.negative_sdf_percent) * 100)
+		if UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold < tonumber(HeadOuterCage.negative_sdf_percent) * 100 then
+			p1:fail(ErrorSourceStringsModule.Keys.MeasureCageMeshDistanceHead_CageInsideMesh, {
+				negtiveSDFPercent = string.format("%.2f", tonumber(HeadOuterCage.negative_sdf_percent) * 100)
 			})
 		end
-		if getFFlagUGCValidateAQScoreWarningsModule() and headOuterCage.score ~= nil and tonumber(headOuterCage.score) ~= 100 then
-			p1:warn(errorSourceStringsModule.Keys.AQSWarn_CageMeshDistanceHead, {
-				max_distance = headOuterCage.max_distance or "unknown",
-				negative_sdf_percent = string.format("%.2f", (tonumber(headOuterCage.negative_sdf_percent) or 0) * 100)
+		if GetFFlagUGCValidateAQScoreWarningsModule() and HeadOuterCage.score ~= nil and tonumber(HeadOuterCage.score) ~= 100 then
+			p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_CageMeshDistanceHead, {
+				max_distance = HeadOuterCage.max_distance or "unknown",
+				negative_sdf_percent = string.format("%.2f", (tonumber(HeadOuterCage.negative_sdf_percent) or 0) * 100)
 			})
 		end
 	end

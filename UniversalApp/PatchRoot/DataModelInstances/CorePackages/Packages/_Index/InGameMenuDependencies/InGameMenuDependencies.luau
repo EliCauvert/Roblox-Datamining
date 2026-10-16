@@ -1,14 +1,14 @@
-﻿local parent = script.Parent
+﻿local Parent = script.Parent
 
 return {
-	Roact = require(parent.Roact),
-	Rodux = require(parent.Rodux),
-	RoactRodux = require(parent.RoactRodux),
-	UIBlox = require(parent.UIBlox),
-	Otter = require(parent.Otter),
-	Cryo = require(parent.Cryo),
-	t = require(parent.t),
-	PolicyProvider = require(parent.PolicyProvider),
-	Promise = require(parent.Promise),
-	Mock = require(parent.Mock)
+	Roact = require(Parent.Roact),
+	Rodux = require(Parent.Rodux),
+	RoactRodux = require(Parent.RoactRodux),
+	UIBlox = require(Parent.UIBlox),
+	Otter = require(Parent.Otter),
+	Cryo = require(Parent.Cryo),
+	t = require(Parent.t),
+	PolicyProvider = require(Parent.PolicyProvider),
+	Promise = require(Parent.Promise),
+	Mock = require(Parent.Mock)
 }

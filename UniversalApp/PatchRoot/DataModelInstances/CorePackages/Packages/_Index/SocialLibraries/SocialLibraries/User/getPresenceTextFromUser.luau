@@ -1,9 +1,9 @@
-﻿local userModel = require(script:FindFirstAncestor("SocialLibraries").dependencies).UserModel
+﻿local UserModel = require(script:FindFirstAncestor("SocialLibraries").dependencies).UserModel
 
-return function(p1)
-	-- upvalues: userModel (ref)
-	local presence = p1.presence
-	local lastLocation = p1.lastLocation
+return function(p1): string --[[ Line: 5 ]]
+	-- upvalues: UserModel (copy)
+	local Presence = p1.presence
+	local LastLocation = p1.lastLocation
 	
-	return if presence == userModel.PresenceType.OFFLINE then "Common.Presence.Label.Offline" elseif presence == userModel.PresenceType.ONLINE then "Common.Presence.Label.Online" elseif not (presence ~= userModel.PresenceType.IN_GAME and presence ~= userModel.PresenceType.IN_STUDIO) then if lastLocation then tostring(lastLocation) else "Common.Presence.Label.Online" else ""
+	return if Presence == UserModel.PresenceType.OFFLINE then "Common.Presence.Label.Offline" elseif Presence == UserModel.PresenceType.ONLINE then "Common.Presence.Label.Online" elseif Presence == UserModel.PresenceType.IN_GAME or Presence == UserModel.PresenceType.IN_STUDIO then if LastLocation then tostring(LastLocation) else "Common.Presence.Label.Online" else ""
 end

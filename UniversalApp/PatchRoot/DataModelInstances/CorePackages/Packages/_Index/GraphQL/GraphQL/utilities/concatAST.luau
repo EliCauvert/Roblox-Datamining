@@ -1,14 +1,14 @@
-﻿local array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
+﻿local Array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
 local _ = require(script.Parent.Parent.language.ast)
 
-function concatAST(p1)
-	-- upvalues: array (ref)
-	local t = {}
+function concatAST(List) --[[ Line: 23 ]]
+	-- upvalues: Array (copy)
+	local ConcatResult = {}
 	
-	for i, v in ipairs(p1) do
-		t = array.concat(t, v.definitions)
+	for _, value in ipairs(List) do
+		ConcatResult = Array.concat(ConcatResult, value.definitions)
 	end
-	return { kind = "Document", definitions = t }
+	return { kind = "Document", definitions = ConcatResult }
 end
 
 return { concatAST = concatAST }

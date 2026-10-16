@@ -1,33 +1,31 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local tModule = require(parent_1.t)
-local validateFontInfoModule = require(parent.Core.Style.Validator.validateFontInfo)
-local validateColorInfoModule = require(parent.Core.Style.Validator.validateColorInfo)
-local genericTextLabelModule = require(parent.Core.Text.GenericTextLabel.GenericTextLabel)
-local toastText = roactModule.PureComponent:extend("ToastText")
-toastText.validateProps = tModule.interface({
-	colorStyle = validateColorInfoModule,
-	fontStyle = validateFontInfoModule,
-	Size = tModule.UDim2,
-	Text = tModule.string,
-	AnchorPoint = tModule.optional(tModule.Vector2),
-	fluidSizing = tModule.optional(tModule.boolean),
-	LayoutOrder = tModule.optional(tModule.integer),
-	maxSize = tModule.optional(tModule.Vector2),
-	Position = tModule.optional(tModule.UDim2),
-	TextTruncate = tModule.optional(tModule.EnumItem),
-	TextXAlignment = tModule.optional(tModule.EnumItem),
-	TextYAlignment = tModule.optional(tModule.EnumItem)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local TModule = require(Parent1.t)
+local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
+local ToastText = RoactModule.PureComponent:extend("ToastText")
+ToastText.validateProps = TModule.interface({
+	colorStyle = require(Parent.Core.Style.Validator.validateColorInfo),
+	fontStyle = require(Parent.Core.Style.Validator.validateFontInfo),
+	Size = TModule.UDim2,
+	Text = TModule.string,
+	AnchorPoint = TModule.optional(TModule.Vector2),
+	fluidSizing = TModule.optional(TModule.boolean),
+	LayoutOrder = TModule.optional(TModule.integer),
+	maxSize = TModule.optional(TModule.Vector2),
+	Position = TModule.optional(TModule.UDim2),
+	TextTruncate = TModule.optional(TModule.EnumItem),
+	TextXAlignment = TModule.optional(TModule.EnumItem),
+	TextYAlignment = TModule.optional(TModule.EnumItem)
 })
-toastText.defaultProps = {
+ToastText.defaultProps = {
 	TextXAlignment = Enum.TextXAlignment.Left,
 	TextYAlignment = Enum.TextYAlignment.Center
 }
 
-function toastText.render(p1)
-	-- upvalues: roactModule (ref), genericTextLabelModule (ref)
-	return roactModule.createElement(genericTextLabelModule, p1.props)
+function ToastText.render(p1) --[[ Line: 39 ]]
+	-- upvalues: RoactModule (copy), GenericTextLabelModule (copy)
+	return RoactModule.createElement(GenericTextLabelModule, p1.props)
 end
 
-return toastText
+return ToastText

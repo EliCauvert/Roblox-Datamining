@@ -1,18 +1,18 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local contentModule = require(script.Parent.Content)
-local contentPluginModule = require(script.Parent.ContentPlugin)
-local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
-local usePluginModule = require(foundation.Providers.Plugin.usePlugin)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ContentModule = require(script.Parent.Content)
+local ContentPluginModule = require(script.Parent.ContentPlugin)
+local IsPluginSecurityModule = require(Foundation.Utility.isPluginSecurity)
+local UsePluginModule = require(Foundation.Providers.Plugin.usePlugin)
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: usePluginModule (ref), isPluginSecurityModule (ref), reactModule (ref), contentPluginModule (ref), contentModule (ref)
-	local _, var1 = usePluginModule()
-	local var2 = p1
+return ReactModule.forwardRef(function(Tbl, Ref) --[[ Line: 13 | Named "PopoverContentProxy" ]]
+	-- upvalues: UsePluginModule (copy), IsPluginSecurityModule (copy), ReactModule (copy), ContentPluginModule (copy), ContentModule (copy)
+	local _, UsePluginModuleResult2 = UsePluginModule()
+	local Tbl1 = Tbl
 	
-	if p2 then
-		var2 = table.clone(p1)
-		var2.ref = p2
+	if Ref then
+		Tbl1 = table.clone(Tbl)
+		Tbl1.ref = Ref
 	end
-	return if isPluginSecurityModule() and var1 then reactModule.createElement(contentPluginModule, var2) else reactModule.createElement(contentModule, var2)
+	return if IsPluginSecurityModule() and UsePluginModuleResult2 then ReactModule.createElement(ContentPluginModule, Tbl1) else ReactModule.createElement(ContentModule, Tbl1)
 end)

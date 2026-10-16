@@ -1,122 +1,118 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local core = parent_2.Core
-local reactModule = require(parent_3.React)
-local cryoModule = require(parent_3.Cryo)
-local roactGamepadModule = require(parent_3.RoactGamepad)
-local tModule = require(parent_3.t)
-local foundationModule = require(parent_3.Foundation)
-local foundationButtonUtilsModule = require(parent.FoundationButtonUtils)
-local validateImageModule = require(core.ImageSet.Validator.validateImage)
-local validateFontInfoModule = require(core.Style.Validator.validateFontInfo)
-local validateTypographyInfoModule = require(parent_2.Core.Style.Validator.validateTypographyInfo)
-local buttonTypeModule = require(parent.Enum.ButtonType)
-local standardButtonSizeModule = require(core.Button.Enum.StandardButtonSize)
-local genericButtonModule = require(core.Button.GenericButton)
-local controlStateModule = require(core.Control.Enum.ControlState)
-local isReactTagPropModule = require(parent_2.Utility.isReactTagProp)
-local imagesModule = require(parent_1.ImageSet.Images)
-local cursorKindModule = require(parent_1.SelectionImage.CursorKind)
-local withSelectionCursorProviderModule = require(parent_1.SelectionImage.withSelectionCursorProvider)
-local useCursorModule = require(parent_2.App.SelectionCursor.useCursor)
-local UIBloxConfigModule = require(parent_2.UIBloxConfig)
-local button = reactModule.PureComponent:extend("Button")
-local t = {
-	[buttonTypeModule.Alert] = { [controlStateModule.Default] = "Alert" },
-	[buttonTypeModule.PrimaryContextual] = {
-		[controlStateModule.Default] = "ContextualPrimaryDefault",
-		[controlStateModule.Hover] = "ContextualPrimaryOnHover"
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local Core = Parent2.Core
+local ReactModule = require(Parent3.React)
+local CryoModule = require(Parent3.Cryo)
+local RoactGamepadModule = require(Parent3.RoactGamepad)
+local TModule = require(Parent3.t)
+local FoundationModule = require(Parent3.Foundation)
+local FoundationButtonUtilsModule = require(Parent.FoundationButtonUtils)
+local ValidateImageModule = require(Core.ImageSet.Validator.validateImage)
+local ButtonTypeModule = require(Parent.Enum.ButtonType)
+local GenericButtonModule = require(Core.Button.GenericButton)
+local ControlStateModule = require(Core.Control.Enum.ControlState)
+local ImagesModule = require(Parent1.ImageSet.Images)
+local CursorKindModule = require(Parent1.SelectionImage.CursorKind)
+local WithSelectionCursorProviderModule = require(Parent1.SelectionImage.withSelectionCursorProvider)
+local UseCursorModule = require(Parent2.App.SelectionCursor.useCursor)
+local UIBloxConfigModule = require(Parent2.UIBloxConfig)
+local Button = ReactModule.PureComponent:extend("Button")
+local config = {
+	[ButtonTypeModule.Alert] = { [ControlStateModule.Default] = "Alert" },
+	[ButtonTypeModule.PrimaryContextual] = {
+		[ControlStateModule.Default] = "ContextualPrimaryDefault",
+		[ControlStateModule.Hover] = "ContextualPrimaryOnHover"
 	},
-	[buttonTypeModule.PrimarySystem] = {
-		[controlStateModule.Default] = "SystemPrimaryDefault",
-		[controlStateModule.Hover] = "SystemPrimaryOnHover"
+	[ButtonTypeModule.PrimarySystem] = {
+		[ControlStateModule.Default] = "SystemPrimaryDefault",
+		[ControlStateModule.Hover] = "SystemPrimaryOnHover"
 	},
-	[buttonTypeModule.Secondary] = {
-		[controlStateModule.Default] = "SecondaryDefault",
-		[controlStateModule.Hover] = "SecondaryOnHover"
+	[ButtonTypeModule.Secondary] = {
+		[ControlStateModule.Default] = "SecondaryDefault",
+		[ControlStateModule.Hover] = "SecondaryOnHover"
 	}
 }
-local t_1 = {
-	[buttonTypeModule.Alert] = { [controlStateModule.Default] = "Alert" },
-	[buttonTypeModule.PrimaryContextual] = {
-		[controlStateModule.Default] = "ContextualPrimaryContent"
+local config1 = {
+	[ButtonTypeModule.Alert] = { [ControlStateModule.Default] = "Alert" },
+	[ButtonTypeModule.PrimaryContextual] = {
+		[ControlStateModule.Default] = "ContextualPrimaryContent"
 	},
-	[buttonTypeModule.PrimarySystem] = { [controlStateModule.Default] = "SystemPrimaryContent" },
-	[buttonTypeModule.Secondary] = {
-		[controlStateModule.Default] = "SecondaryContent",
-		[controlStateModule.Hover] = "SecondaryOnHover"
+	[ButtonTypeModule.PrimarySystem] = { [ControlStateModule.Default] = "SystemPrimaryContent" },
+	[ButtonTypeModule.Secondary] = {
+		[ControlStateModule.Default] = "SecondaryContent",
+		[ControlStateModule.Hover] = "SecondaryOnHover"
 	}
 }
-local t_2 = {
-	[buttonTypeModule.Alert] = imagesModule["component_assets/circle_17_stroke_1"],
-	[buttonTypeModule.PrimaryContextual] = imagesModule["component_assets/circle_17"],
-	[buttonTypeModule.PrimarySystem] = imagesModule["component_assets/circle_17"],
-	[buttonTypeModule.Secondary] = imagesModule["component_assets/circle_17_stroke_1"]
+local config2 = {
+	[ButtonTypeModule.Alert] = ImagesModule["component_assets/circle_17_stroke_1"],
+	[ButtonTypeModule.PrimaryContextual] = ImagesModule["component_assets/circle_17"],
+	[ButtonTypeModule.PrimarySystem] = ImagesModule["component_assets/circle_17"],
+	[ButtonTypeModule.Secondary] = ImagesModule["component_assets/circle_17_stroke_1"]
 }
-local t_3 = {
-	[buttonTypeModule.PrimaryContextual] = imagesModule["component_assets/bulletRight_17"],
-	[buttonTypeModule.PrimarySystem] = imagesModule["component_assets/bulletRight_17"]
+local config3 = {
+	[ButtonTypeModule.PrimaryContextual] = ImagesModule["component_assets/bulletRight_17"],
+	[ButtonTypeModule.PrimarySystem] = ImagesModule["component_assets/bulletRight_17"]
 }
-local t_4 = {
-	[buttonTypeModule.Alert] = false,
-	[buttonTypeModule.PrimaryContextual] = true,
-	[buttonTypeModule.PrimarySystem] = false,
-	[buttonTypeModule.Secondary] = false
+local config4 = {
+	[ButtonTypeModule.Alert] = false,
+	[ButtonTypeModule.PrimaryContextual] = true,
+	[ButtonTypeModule.PrimarySystem] = false,
+	[ButtonTypeModule.Secondary] = false
 }
-local uDim = UDim.new(0, 8)
-button.validateProps = tModule.strictInterface({
-	[reactModule.Tag] = isReactTagPropModule,
-	buttonType = tModule.optional(buttonTypeModule.isEnumValue),
-	automaticSize = tModule.optional(tModule.EnumItem),
-	size = tModule.optional(tModule.UDim2),
-	standardSize = tModule.optional(standardButtonSizeModule.isEnumValue),
-	maxWidth = tModule.optional(tModule.numberPositive),
-	fitContent = tModule.optional(tModule.boolean),
-	anchorPoint = tModule.optional(tModule.Vector2),
-	position = tModule.optional(tModule.UDim2),
-	layoutOrder = tModule.optional(tModule.number),
-	icon = tModule.optional(validateImageModule),
-	text = tModule.optional(tModule.string),
-	inputIcon = tModule.optional(validateImageModule),
-	fontStyle = tModule.optional(tModule.union(tModule.string, validateFontInfoModule, validateTypographyInfoModule)),
-	buttonTextOverride = tModule.optional(tModule.table),
-	isDisabled = tModule.optional(tModule.boolean),
-	isLoading = tModule.optional(tModule.boolean),
-	isHoverBackgroundEnabled = tModule.optional(tModule.boolean),
-	isDelayedInput = tModule.optional(tModule.boolean),
-	enableInputDelayed = tModule.optional(tModule.boolean),
-	delayInputSeconds = tModule.optional(tModule.numberPositive),
-	onActivated = tModule.callback,
-	onStateChanged = tModule.optional(tModule.callback),
-	userInteractionEnabled = tModule.optional(tModule.boolean),
-	feedbackType = tModule.optional(tModule.string),
-	Selectable = tModule.optional(tModule.boolean),
-	NextSelectionDown = tModule.optional(tModule.table),
-	NextSelectionUp = tModule.optional(tModule.table),
-	NextSelectionLeft = tModule.optional(tModule.table),
-	NextSelectionRight = tModule.optional(tModule.table),
-	buttonRef = tModule.optional(tModule.union(tModule.table, tModule.callback)),
-	isRoactGamepadEnabled = tModule.optional(tModule.boolean),
-	cursor = tModule.optional(tModule.any),
-	DO_NOT_USE_useUIBloxButton = tModule.optional(tModule.boolean),
-	[reactModule.Change.AbsoluteSize] = tModule.optional(tModule.callback),
-	[reactModule.Change.AbsolutePosition] = tModule.optional(tModule.callback)
+local _UDim = UDim.new(0, 8)
+Button.validateProps = TModule.strictInterface({
+	[ReactModule.Tag] = require(Parent2.Utility.isReactTagProp),
+	buttonType = TModule.optional(ButtonTypeModule.isEnumValue),
+	automaticSize = TModule.optional(TModule.EnumItem),
+	size = TModule.optional(TModule.UDim2),
+	standardSize = TModule.optional(require(Core.Button.Enum.StandardButtonSize).isEnumValue),
+	maxWidth = TModule.optional(TModule.numberPositive),
+	fitContent = TModule.optional(TModule.boolean),
+	anchorPoint = TModule.optional(TModule.Vector2),
+	position = TModule.optional(TModule.UDim2),
+	layoutOrder = TModule.optional(TModule.number),
+	icon = TModule.optional(ValidateImageModule),
+	text = TModule.optional(TModule.string),
+	inputIcon = TModule.optional(ValidateImageModule),
+	fontStyle = TModule.optional(TModule.union(TModule.string, require(Core.Style.Validator.validateFontInfo), (require(Parent2.Core.Style.Validator.validateTypographyInfo)))),
+	buttonTextOverride = TModule.optional(TModule.table),
+	isDisabled = TModule.optional(TModule.boolean),
+	isLoading = TModule.optional(TModule.boolean),
+	isHoverBackgroundEnabled = TModule.optional(TModule.boolean),
+	isDelayedInput = TModule.optional(TModule.boolean),
+	enableInputDelayed = TModule.optional(TModule.boolean),
+	delayInputSeconds = TModule.optional(TModule.numberPositive),
+	onActivated = TModule.callback,
+	onStateChanged = TModule.optional(TModule.callback),
+	userInteractionEnabled = TModule.optional(TModule.boolean),
+	feedbackType = TModule.optional(TModule.string),
+	Selectable = TModule.optional(TModule.boolean),
+	NextSelectionDown = TModule.optional(TModule.table),
+	NextSelectionUp = TModule.optional(TModule.table),
+	NextSelectionLeft = TModule.optional(TModule.table),
+	NextSelectionRight = TModule.optional(TModule.table),
+	buttonRef = TModule.optional(TModule.union(TModule.table, TModule.callback)),
+	isRoactGamepadEnabled = TModule.optional(TModule.boolean),
+	cursor = TModule.optional(TModule.any),
+	DO_NOT_USE_useUIBloxButton = TModule.optional(TModule.boolean),
+	[ReactModule.Change.AbsoluteSize] = TModule.optional(TModule.callback),
+	[ReactModule.Change.AbsolutePosition] = TModule.optional(TModule.callback)
 })
-button.defaultProps = {
+Button.defaultProps = {
 	isDisabled = false,
 	isLoading = false,
 	isRoactGamepadEnabled = true,
-	buttonType = buttonTypeModule.PrimarySystem
+	buttonType = ButtonTypeModule.PrimarySystem
 }
 
-function button.render(p1)
-	-- upvalues: withSelectionCursorProviderModule (ref), reactModule (ref), roactGamepadModule (ref), genericButtonModule (ref), cursorKindModule (ref), t_4 (ref), t_2 (ref), t_3 (ref), t (ref), t_1 (ref)
-	return withSelectionCursorProviderModule(function(p2)
-		-- upvalues: p1 (ref), reactModule (copy), roactGamepadModule (copy), genericButtonModule (copy), cursorKindModule (copy), t_4 (copy), t_2 (copy), t_3 (copy), t (copy), t_1 (copy)
-		return reactModule.createElement(if p1.props.isRoactGamepadEnabled then roactGamepadModule.Focusable[genericButtonModule] else genericButtonModule, {
-			[reactModule.Tag] = p1.props[reactModule.Tag],
+function Button.render(p1) --[[ Line: 173 ]]
+	-- upvalues: WithSelectionCursorProviderModule (copy), ReactModule (copy), RoactGamepadModule (copy), GenericButtonModule (copy), CursorKindModule (copy), config4 (copy), config2 (copy), config3 (copy), config (copy), config1 (copy)
+	return WithSelectionCursorProviderModule(function(Callback) --[[ Line: 174 ]]
+		-- upvalues: p1 (copy), ReactModule (upval), RoactGamepadModule (upval), GenericButtonModule (upval), CursorKindModule (upval), config4 (upval), config2 (upval), config3 (upval), config (upval), config1 (upval)
+		return ReactModule.createElement(if p1.props.isRoactGamepadEnabled then RoactGamepadModule.Focusable[GenericButtonModule] else GenericButtonModule, {
+			[ReactModule.Tag] = p1.props[ReactModule.Tag],
 			Size = p1.props.size,
 			standardSize = p1.props.standardSize,
 			maxWidth = p1.props.maxWidth,
@@ -124,24 +120,24 @@ function button.render(p1)
 			AnchorPoint = p1.props.anchorPoint,
 			Position = p1.props.position,
 			LayoutOrder = p1.props.layoutOrder,
-			SelectionImageObject = if p1.props.cursor then p1.props.cursor else p2(cursorKindModule.RoundedRectNoInset),
+			SelectionImageObject = if p1.props.cursor then p1.props.cursor else Callback(CursorKindModule.RoundedRectNoInset),
 			icon = p1.props.icon,
 			text = p1.props.text,
 			inputIcon = p1.props.inputIcon,
 			fontStyle = p1.props.fontStyle,
 			isDisabled = p1.props.isDisabled,
 			isLoading = p1.props.isLoading,
-			isHoverBackgroundEnabled = t_4[p1.props.buttonType],
+			isHoverBackgroundEnabled = config4[p1.props.buttonType],
 			isDelayedInput = p1.props.isDelayedInput,
 			enableInputDelayed = p1.props.enableInputDelayed,
 			delayInputSeconds = p1.props.delayInputSeconds,
 			onActivated = p1.props.onActivated,
 			onStateChanged = p1.props.onStateChanged,
 			userInteractionEnabled = p1.props.userInteractionEnabled,
-			buttonImage = t_2[p1.props.buttonType],
-			delayedInputImage = t_3[p1.props.buttonType],
-			buttonStateColorMap = t[p1.props.buttonType],
-			contentStateColorMap = t_1[p1.props.buttonType],
+			buttonImage = config2[p1.props.buttonType],
+			delayedInputImage = config3[p1.props.buttonType],
+			buttonStateColorMap = config[p1.props.buttonType],
+			contentStateColorMap = config1[p1.props.buttonType],
 			buttonTextOverride = p1.props.buttonTextOverride,
 			Selectable = p1.props.Selectable,
 			NextSelectionUp = p1.props.NextSelectionUp,
@@ -150,69 +146,71 @@ function button.render(p1)
 			NextSelectionRight = p1.props.NextSelectionRight,
 			ref = p1.props.buttonRef,
 			feedbackType = p1.props.feedbackType,
-			[reactModule.Change.AbsoluteSize] = p1.props[reactModule.Change.AbsoluteSize],
-			[reactModule.Change.AbsolutePosition] = p1.props[reactModule.Change.AbsolutePosition]
+			[ReactModule.Change.AbsoluteSize] = p1.props[ReactModule.Change.AbsoluteSize],
+			[ReactModule.Change.AbsolutePosition] = p1.props[ReactModule.Change.AbsolutePosition]
 		})
 	end)
 end
 
-local var1 = function(p1)
-	-- upvalues: useCursorModule (ref), uDim (ref), cryoModule (ref), reactModule (ref), button (ref)
-	return reactModule.createElement(button, cryoModule.Dictionary.join({ cursor = useCursorModule(uDim) }, p1))
+local function v27(p1) --[[ Line: 227 ]]
+	-- upvalues: UseCursorModule (copy), _UDim (copy), CryoModule (copy), ReactModule (copy), Button (copy)
+	return ReactModule.createElement(Button, (CryoModule.Dictionary.join({ cursor = UseCursorModule(_UDim) }, p1)))
 end
 
-local var2 = reactModule.forwardRef(function(p1, p2)
-	-- upvalues: UIBloxConfigModule (ref), foundationModule (ref), cryoModule (ref), button (ref), foundationButtonUtilsModule (ref), reactModule (ref), roactGamepadModule (ref), var1 (ref)
-	if not UIBloxConfigModule.useFoundationButton or p1.DO_NOT_USE_useUIBloxButton then
-		return reactModule.createElement(var1, cryoModule.Dictionary.join(p1, { buttonRef = p1.buttonRef or p2 }))
-	end
-	local var3 = foundationModule.Hooks.useTokens()
-	local var4 = cryoModule.Dictionary.join(button.defaultProps, p1)
-	local isRoactGamepadEnabled = var4.isRoactGamepadEnabled
-	local maxWidth = foundationButtonUtilsModule.getMaxWidth(var4.standardSize, var4.maxWidth)
-	local buttonRef = p1.buttonRef or (p2 or reactModule.useRef(nil))
-	reactModule.useLayoutEffect(function()
-		-- upvalues: maxWidth (ref), buttonRef (ref)
-		local UISizeConstraint = nil
-		
-		if maxWidth and buttonRef and (typeof(buttonRef) == "table" and buttonRef.current) then
-			UISizeConstraint = Instance.new("UISizeConstraint")
-			UISizeConstraint.MaxSize = Vector2.new(maxWidth, 1e999)
-			UISizeConstraint.Parent = buttonRef.current
-		end
-		return function()
-			-- upvalues: UISizeConstraint (write)
-			if UISizeConstraint then
-				UISizeConstraint.Parent = nil
-				UISizeConstraint:Destroy()
+local ForwardRefResult = ReactModule.forwardRef(function(p1, p2) --[[ Line: 235 ]]
+	-- upvalues: UIBloxConfigModule (copy), FoundationModule (copy), CryoModule (copy), Button (copy), FoundationButtonUtilsModule (copy), ReactModule (copy), RoactGamepadModule (copy), v27 (copy)
+	if UIBloxConfigModule.useFoundationButton and not p1.DO_NOT_USE_useUIBloxButton then
+		local UseTokensResult = FoundationModule.Hooks.useTokens()
+		local JoinResult = CryoModule.Dictionary.join(Button.defaultProps, p1)
+		local IsRoactGamepadEnabled = JoinResult.isRoactGamepadEnabled
+		local MaxWidth = FoundationButtonUtilsModule.getMaxWidth(JoinResult.standardSize, JoinResult.maxWidth)
+		local UseRefResult = ReactModule.useRef(nil)
+		local ButtonRef = p1.buttonRef or (p2 or UseRefResult)
+		ReactModule.useLayoutEffect(function() --[[ Line: 246 ]]
+			-- upvalues: MaxWidth (copy), ButtonRef (copy)
+			local UISizeConstraint = nil
+			
+			if MaxWidth and ButtonRef and typeof(ButtonRef) == "table" and ButtonRef.current then
+				UISizeConstraint = Instance.new("UISizeConstraint")
+				UISizeConstraint.MaxSize = Vector2.new(MaxWidth, 1e999)
+				UISizeConstraint.Parent = ButtonRef.current
 			end
-		end
-	end, { maxWidth, buttonRef })
-	
-	return reactModule.createElement(if isRoactGamepadEnabled then roactGamepadModule.Focusable[foundationModule.Button] else foundationModule.Button, {
-		variant = foundationButtonUtilsModule.buttonMapping[var4.buttonType],
-		size = foundationButtonUtilsModule.getSizeMapping(var4.standardSize, var4.size, var3),
-		width = foundationButtonUtilsModule.getWidth(var4.standardSize, var4.size, var4.fitContent),
-		icon = foundationButtonUtilsModule.findIcon(var4.icon),
-		text = var4.text,
-		isLoading = var4.isLoading,
-		isDisabled = var4.isDisabled or (if var4.userInteractionEnabled ~= false then var4.isDelayedInput and not var4.enableInputDelayed else true),
-		inputDelay = if var4.isDelayedInput and var4.enableInputDelayed then var4.delayInputSeconds or 3 else nil,
-		onActivated = var4.onActivated,
-		testId = foundationButtonUtilsModule.getTestId(var4[reactModule.Tag]),
-		ref = buttonRef,
-		AnchorPoint = var4.anchorPoint,
-		Position = var4.position,
-		LayoutOrder = var4.layoutOrder,
-		onAbsoluteSizeChanged = var4[reactModule.Change.AbsoluteSize],
-		onAbsolutePositionChanged = var4[reactModule.Change.AbsolutePosition],
-		Selectable = var4.Selectable,
-		NextSelectionUp = var4.NextSelectionUp,
-		NextSelectionDown = var4.NextSelectionDown,
-		NextSelectionLeft = var4.NextSelectionLeft,
-		NextSelectionRight = var4.NextSelectionRight
-	})
+			return function() --[[ Line: 254 ]]
+				-- upvalues: UISizeConstraint (ref)
+				if UISizeConstraint then
+					UISizeConstraint.Parent = nil
+					UISizeConstraint:Destroy()
+				end
+			end
+		end, { MaxWidth, ButtonRef })
+		
+		return ReactModule.createElement(if IsRoactGamepadEnabled then RoactGamepadModule.Focusable[FoundationModule.Button] else FoundationModule.Button, {
+			variant = FoundationButtonUtilsModule.buttonMapping[JoinResult.buttonType],
+			size = FoundationButtonUtilsModule.getSizeMapping(JoinResult.standardSize, JoinResult.size, UseTokensResult),
+			width = FoundationButtonUtilsModule.getWidth(JoinResult.standardSize, JoinResult.size, JoinResult.fitContent),
+			icon = FoundationButtonUtilsModule.findIcon(JoinResult.icon),
+			text = JoinResult.text,
+			isLoading = JoinResult.isLoading,
+			isDisabled = JoinResult.isDisabled or (JoinResult.userInteractionEnabled == false or JoinResult.isDelayedInput and not JoinResult.enableInputDelayed),
+			inputDelay = if JoinResult.isDelayedInput and JoinResult.enableInputDelayed then JoinResult.delayInputSeconds or 3 else nil,
+			onActivated = JoinResult.onActivated,
+			testId = FoundationButtonUtilsModule.getTestId(JoinResult[ReactModule.Tag]),
+			ref = ButtonRef,
+			AnchorPoint = JoinResult.anchorPoint,
+			Position = JoinResult.position,
+			LayoutOrder = JoinResult.layoutOrder,
+			onAbsoluteSizeChanged = JoinResult[ReactModule.Change.AbsoluteSize],
+			onAbsolutePositionChanged = JoinResult[ReactModule.Change.AbsolutePosition],
+			Selectable = JoinResult.Selectable,
+			NextSelectionUp = JoinResult.NextSelectionUp,
+			NextSelectionDown = JoinResult.NextSelectionDown,
+			NextSelectionLeft = JoinResult.NextSelectionLeft,
+			NextSelectionRight = JoinResult.NextSelectionRight
+		})
+	else
+		return ReactModule.createElement(v27, CryoModule.Dictionary.join(p1, { buttonRef = p1.buttonRef or p2 }))
+	end
 end)
-var2.validateProps = button.validateProps
+ForwardRefResult.validateProps = Button.validateProps
 
-return var2
+return ForwardRefResult

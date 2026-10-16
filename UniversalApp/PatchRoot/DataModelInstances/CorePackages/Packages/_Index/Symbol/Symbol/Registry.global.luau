@@ -1,16 +1,16 @@
-﻿local symbolModule = require(script.Parent.Symbol)
-local t = {}
+﻿local SymbolModule = require(script.Parent.Symbol)
+local NewResults = {}
 
 return {
-	getOrInit = function(p1)
-		-- upvalues: t (write), symbolModule (ref)
-		if t[p1] == nil then
-			t[p1] = symbolModule.new(p1)
+	getOrInit = function(Key) --[[ Line: 20 ]]
+		-- upvalues: NewResults (ref), SymbolModule (copy)
+		if NewResults[Key] == nil then
+			NewResults[Key] = SymbolModule.new(Key)
 		end
-		return t[p1]
+		return NewResults[Key]
 	end,
-	__clear = function()
-		-- upvalues: t (write)
-		t = {}
+	__clear = function() --[[ Line: 28 ]]
+		-- upvalues: NewResults (ref)
+		NewResults = {}
 	end
 }

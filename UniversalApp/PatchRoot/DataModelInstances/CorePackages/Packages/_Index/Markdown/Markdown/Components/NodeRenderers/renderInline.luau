@@ -1,17 +1,17 @@
-﻿local markdown = script:FindFirstAncestor("Markdown")
-local parent = markdown.Parent
-local _ = require(markdown.Types)
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local inlineLayoutModule = require(parent.InlineLayout)
-local inlineLayout = inlineLayoutModule.Components.InlineLayout
-local mergeContextsModule = require(markdown.Utils.mergeContexts)
-local isInlineElement = inlineLayoutModule.Utils.isInlineElement
+﻿local Markdown = script:FindFirstAncestor("Markdown")
+local Parent = Markdown.Parent
+local _ = require(Markdown.Types)
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local InlineLayoutModule = require(Parent.InlineLayout)
+local InlineLayout = InlineLayoutModule.Components.InlineLayout
+local MergeContextsModule = require(Markdown.Utils.mergeContexts)
+local IsInlineElement = InlineLayoutModule.Utils.isInlineElement
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), inlineLayout (ref), dashModule (ref), mergeContextsModule (ref), isInlineElement (ref)
-	return reactModule.createElement(inlineLayout, {
+return function(p1, p2) --[[ Line: 13 | Named "renderInline" ]]
+	-- upvalues: ReactModule (copy), InlineLayout (copy), DashModule (copy), MergeContextsModule (copy), IsInlineElement (copy)
+	return ReactModule.createElement(InlineLayout, {
 		VerticalPadding = UDim.new(0, 0),
-		Elements = dashModule.filter(p2.processChildren(p1, mergeContextsModule(p2, { isInline = true })), isInlineElement)
+		Elements = DashModule.filter(p2.processChildren(p1, MergeContextsModule(p2, { isInline = true })), IsInlineElement)
 	})
 end

@@ -1,16 +1,16 @@
-﻿local colorScopeKeepPrefixModule = require(script.Parent.colorScopeKeepPrefix)
+﻿local ColorScopeKeepPrefixModule = require(script.Parent.colorScopeKeepPrefix)
 
-local function kebabToPascal(p1)
-	return p1:gsub("^%-?(.)", function(p2)
-		return p2:upper()
-	end):gsub("%-(.)", function(p2)
-		return p2:upper()
-	end)
+local function kebabToPascal(Text: string) --[[ Line: 3 ]]
+	return (Text:gsub("^%-?(.)", function(Text: string): string --[[ Line: 4 ]]
+		return Text:upper()
+	end):gsub("%-(.)", function(Text: string): string --[[ Line: 7 ]]
+		return Text:upper()
+	end))
 end
 
-return function(p1, p2)
-	-- upvalues: kebabToPascal (ref), colorScopeKeepPrefixModule (ref)
-	local var1 = kebabToPascal(p2)
+return function(Segment, p1): string --[[ Line: 15 | Named "tokenAttributePascalName" ]]
+	-- upvalues: kebabToPascal (copy), ColorScopeKeepPrefixModule (copy)
+	local KebabToPascalResult: string = kebabToPascal(p1)
 	
-	return if colorScopeKeepPrefixModule[p1] and string.sub(var1, 1, #p1) == p1 then string.sub(var1, #p1 + 1) else var1
+	return if ColorScopeKeepPrefixModule[Segment] and string.sub(KebabToPascalResult, 1, #Segment) == Segment then string.sub(KebabToPascalResult, #Segment + 1) else KebabToPascalResult
 end

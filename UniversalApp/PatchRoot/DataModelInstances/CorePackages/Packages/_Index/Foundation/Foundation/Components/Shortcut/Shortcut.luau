@@ -1,77 +1,76 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local _ = require(foundation.Enums.InputPlatform)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local placementModule = require(foundation.Enums.Placement)
-local _ = require(foundation.Enums.ShortcutSeparator)
-local shortcutVariantModule = require(foundation.Enums.ShortcutVariant)
-local useInputPlatformModule = require(foundation.Utility.useInputPlatform)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local keyCapModule = require(script.Parent.KeyCap)
-local separatorModule = require(script.Parent.Separator)
-local keyDisplayModule = require(script.Parent.keyDisplay)
-local useShortcutVariantsModule = require(script.Parent.useShortcutVariants)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local _ = require(Foundation.Enums.InputPlatform)
+local PlacementModule = require(Foundation.Enums.Placement)
+local _ = require(Foundation.Enums.ShortcutSeparator)
+local UseInputPlatformModule = require(Foundation.Utility.useInputPlatform)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local KeyCapModule = require(script.Parent.KeyCap)
+local SeparatorModule = require(script.Parent.Separator)
+local KeyDisplayModule = require(script.Parent.keyDisplay)
+local UseShortcutVariantsModule = require(script.Parent.useShortcutVariants)
+local config = {
 	testId = "--foundation-shortcut",
-	size = inputSizeModule.XSmall,
-	placement = placementModule.Start,
-	variant = shortcutVariantModule.Standard
+	size = require(Foundation.Enums.InputSize).XSmall,
+	placement = PlacementModule.Start,
+	variant = require(Foundation.Enums.ShortcutVariant).Standard
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useInputPlatformModule (ref), useShortcutVariantsModule (ref), reactModule (ref), separatorModule (ref), keyDisplayModule (ref), keyCapModule (ref), viewModule (ref), withCommonPropsModule (ref), placementModule (ref), textModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useInputPlatformModule()
-	local var3 = useShortcutVariantsModule(useTokensModule(), var1.size, var1.variant)
-	local t_1 = {}
-	local var4 = 0
-	local var5 = 0
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 55 | Named "Shortcut" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseInputPlatformModule (copy), UseShortcutVariantsModule (copy), ReactModule (copy), SeparatorModule (copy), KeyDisplayModule (copy), KeyCapModule (copy), ViewModule (copy), WithCommonPropsModule (copy), PlacementModule (copy), TextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseInputPlatformModuleResult = UseInputPlatformModule()
+	local UseShortcutVariantsModuleResult = UseShortcutVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
+	local Elements = {}
+	local Count = 0
+	local Count1 = 0
 	
-	for i, v in var1.shortcut do
-		if v.separator ~= nil then
-			var5 += 1
-			t_1[`Separator{var5}`] = reactModule.createElement(separatorModule, {
-				separator = v.separator,
-				variantProps = var3,
-				LayoutOrder = i,
-				testId = `{var1.testId}--separator-{var21}`
+	for LayoutOrder, value in WithDefaultsModuleResult.shortcut do
+		if value.separator ~= nil then
+			Count1 += 1
+			Elements[`Separator{Count1}`] = ReactModule.createElement(SeparatorModule, {
+				separator = value.separator,
+				variantProps = UseShortcutVariantsModuleResult,
+				LayoutOrder = LayoutOrder,
+				testId = `{WithDefaultsModuleResult.testId}--separator-{Count1}`
 			})
-		elseif v.keyCode ~= nil and not keyDisplayModule.isNonDisplayable(v.keyCode) then
-			var4 += 1
-			t_1[`Key{var4}`] = reactModule.createElement(keyCapModule, {
-				keyCode = v.keyCode,
-				platform = var2,
-				variantProps = var3,
-				LayoutOrder = i,
-				testId = `{var1.testId}--key-{var20}`
+		elseif value.keyCode ~= nil and not KeyDisplayModule.isNonDisplayable(value.keyCode) then
+			Count += 1
+			Elements[`Key{Count}`] = ReactModule.createElement(KeyCapModule, {
+				keyCode = value.keyCode,
+				platform = UseInputPlatformModuleResult,
+				variantProps = UseShortcutVariantsModuleResult,
+				LayoutOrder = LayoutOrder,
+				testId = `{WithDefaultsModuleResult.testId}--key-{Count}`
 			})
 		end
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
-		tag = var3.container.tag,
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseShortcutVariantsModuleResult.container.tag,
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, var3.container.gap),
+			Padding = UDim.new(0, UseShortcutVariantsModuleResult.container.gap),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
-		ref = p2
+		ref = Ref
 	}), {
-		Keys = reactModule.createElement(viewModule, {
-			tag = var3.keys.tag,
-			LayoutOrder = if var1.placement == placementModule.End then 2 else 1,
-			testId = `{var1.testId}--keys`
-		}, t_1),
-		Keybinding = if var1.keybinding == nil or var1.keybinding == "" then nil else reactModule.createElement(textModule, {
-			Text = var1.keybinding,
-			tag = var3.keybinding.tag,
-			LayoutOrder = if var1.placement == placementModule.End then 1 else 2,
-			testId = `{var1.testId}--keybinding`
+		Keys = ReactModule.createElement(ViewModule, {
+			tag = UseShortcutVariantsModuleResult.keys.tag,
+			LayoutOrder = if WithDefaultsModuleResult.placement == PlacementModule.End then 2 else 1,
+			testId = `{WithDefaultsModuleResult.testId}--keys`
+		}, Elements),
+		Keybinding = if WithDefaultsModuleResult.keybinding == nil or WithDefaultsModuleResult.keybinding == "" then nil else ReactModule.createElement(TextModule, {
+			Text = WithDefaultsModuleResult.keybinding,
+			tag = UseShortcutVariantsModuleResult.keybinding.tag,
+			LayoutOrder = if WithDefaultsModuleResult.placement == PlacementModule.End then 1 else 2,
+			testId = `{WithDefaultsModuleResult.testId}--keybinding`
 		})
 	})
 end))

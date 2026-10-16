@@ -1,11 +1,11 @@
-﻿local appLoggerModule = require(script.Parent.appLogger)
-local pageModule = require(script.Parent.Parent.page.page)
-appLoggerModule:addSink(require(script.Parent.PrintSink).new(appLoggerModule.Levels.Error))
+﻿local AppLoggerModule = require(script.Parent.appLogger)
+local PageModule = require(script.Parent.Parent.page.page)
+AppLoggerModule:addSink(require(script.Parent.PrintSink).new(AppLoggerModule.Levels.Error))
 
-return function()
-	-- upvalues: appLoggerModule (ref), pageModule (ref)
-	appLoggerModule:info("calling {root}")
-	pageModule.init(appLoggerModule)
+return function() --[[ Line: 8 ]]
+	-- upvalues: AppLoggerModule (copy), PageModule (copy)
+	AppLoggerModule:info("calling {root}")
+	PageModule.init(AppLoggerModule)
 	
-	return pageModule.doSomething()
+	return PageModule.doSomething()
 end

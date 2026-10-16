@@ -1,60 +1,56 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local curveAnimBoneHierarchyUtilsModule = require(parent.util.CurveAnimBoneHierarchyUtils)
-local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
-local getFFlagUGCValidateCurveAnimRigDataR15PlusModule = require(parent.flags.getFFlagUGCValidateCurveAnimRigDataR15Plus)
-local getEngineFeatureIsValidR15PlusModule = require(parent.flags.getEngineFeatureIsValidR15Plus)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local CurveAnimBoneHierarchyUtilsModule = require(Parent.util.CurveAnimBoneHierarchyUtils)
+local GetEngineFeatureIsValidR15PlusModule = require(Parent.flags.getEngineFeatureIsValidR15Plus)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.curveAnimations },
+	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref), getFFlagUGCValidateEmotesBonesAllowedModule (ref), curveAnimBoneHierarchyUtilsModule (ref), getFFlagUGCValidateCurveAnimRigDataR15PlusModule (ref), getEngineFeatureIsValidR15PlusModule (ref)
-		for i, v in p2.curveAnimations do
-			local var1 = 0
+	run = function(p1, p2) --[[ Line: 20 ]]
+		-- upvalues: ErrorSourceStringsModule (copy), CurveAnimBoneHierarchyUtilsModule (copy), GetEngineFeatureIsValidR15PlusModule (copy)
+		for _, curveAnimation in p2.curveAnimations do
+			local Count = 0
 			
-			for i_1, v_1 in v:GetChildren() do
-				if v_1:IsA("AnimationRigData") then
-					var1 += 1
+			for _, AnimationRigData in curveAnimation:GetChildren() do
+				if AnimationRigData:IsA("AnimationRigData") then
+					Count += 1
 					
-					if var1 > 1 then
-						p1:fail(errorSourceStringsModule.Keys.CurveAnim_MultipleRigData)
-						
-						return
+					if Count > 1 then
+						p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_MultipleRigData)
+						break
 					end
 				end
 			end
-			if var1 ~= 0 then
-				if not getFFlagUGCValidateEmotesBonesAllowedModule() or not curveAnimBoneHierarchyUtilsModule.hasBoneFolders(v) then
-					for v_1, v_2 in v:GetChildren() do
-						if v_2:IsA("AnimationRigData") and not v_2:IsValidR15() then
-							p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidRigData)
-							
-							return
-						end
-					end
-				elseif getFFlagUGCValidateCurveAnimRigDataR15PlusModule() and getEngineFeatureIsValidR15PlusModule() then
-					for v_1, v_2 in v:GetChildren() do
-						if v_2:IsA("AnimationRigData") and not v_2:IsValidR15Plus() then
-							p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidRigDataR15Plus)
-							
-							return
+			if Count == 0 then
+				p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_NoRigData)
+				break
+			end
+			if CurveAnimBoneHierarchyUtilsModule.hasBoneFolders(curveAnimation) then
+				if GetEngineFeatureIsValidR15PlusModule() then
+					for _, AnimationRigData1 in curveAnimation:GetChildren() do
+						if AnimationRigData1:IsA("AnimationRigData") and not AnimationRigData1:IsValidR15Plus() then
+							p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidRigDataR15Plus)
+							break
 						end
 					end
 				end
+			else
+				for _, AnimationRigData2 in curveAnimation:GetChildren() do
+					if AnimationRigData2:IsA("AnimationRigData") and not AnimationRigData2:IsValidR15() then
+						p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidRigData)
+						break
+					end
+				end
 			end
-			p1:fail(errorSourceStringsModule.Keys.CurveAnim_NoRigData)
-			
-			return
 		end
 	end
 }

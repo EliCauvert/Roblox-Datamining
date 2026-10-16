@@ -1,48 +1,48 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
 local _ = require(script.Parent.DateTimeUtilities)
-local singleMonthCalendarModule = require(script.Parent.Calendar.SingleMonthCalendar)
-local dateTimePickerVariantModule = require(foundation.Enums.DateTimePickerVariant)
-local dividerModule = require(foundation.Components.Divider)
-local viewModule = require(foundation.Components.View)
+local SingleMonthCalendarModule = require(script.Parent.Calendar.SingleMonthCalendar)
+local DateTimePickerVariantModule = require(Foundation.Enums.DateTimePickerVariant)
+local DividerModule = require(Foundation.Components.Divider)
+local ViewModule = require(Foundation.Components.View)
 
-return function(p1)
-	-- upvalues: dateTimePickerVariantModule (ref), reactModule (ref), viewModule (ref), dividerModule (ref), singleMonthCalendarModule (ref)
-	local testId = `{p1.testId}--calendar`
+return function(p1) --[[ Line: 35 | Named "DateTimePickerCalendarContent" ]]
+	-- upvalues: DateTimePickerVariantModule (copy), ReactModule (copy), ViewModule (copy), DividerModule (copy), SingleMonthCalendarModule (copy)
+	local CalendarName: string = `{p1.testId}--calendar`
 	
-	return if p1.variant == dateTimePickerVariantModule.DualWithPresets then reactModule.createElement(viewModule, { tag = "col size-full-0 auto-y" }, {
-		Calendar = reactModule.createElement(require(script.Parent.Calendar.TwoMonthCalendar), {
+	return if p1.variant == DateTimePickerVariantModule.DualWithPresets then ReactModule.createElement(ViewModule, { tag = "col size-full-0 auto-y" }, {
+		Calendar = ReactModule.createElement(require(script.Parent.Calendar.TwoMonthCalendar), {
 			LayoutOrder = 1,
 			onDayActivated = p1.onDayActivated,
 			referenceDate = p1.referenceDate,
 			selectableDateRange = p1.selectableDateRange,
 			selectedDates = p1.selectedDates,
-			testId = testId,
+			testId = CalendarName,
 			viewAnchorDate = p1.viewAnchorDate
 		}),
-		PresetsDivider = reactModule.createElement(dividerModule, { LayoutOrder = 2 }),
-		PresetsBar = reactModule.createElement(viewModule, {
+		PresetsDivider = ReactModule.createElement(DividerModule, { LayoutOrder = 2 }),
+		PresetsBar = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 3,
 			tag = "row size-full-0 auto-y padding-x-large padding-y-medium"
 		}, {
-			Presets = reactModule.createElement(require(script.Parent.Presets.DateRangePresets), {
+			Presets = ReactModule.createElement(require(script.Parent.Presets.DateRangePresets), {
 				LayoutOrder = 1,
 				onPresetSelected = p1.onPresetSelected,
 				referenceDate = p1.referenceDate,
 				selectableDateRange = p1.selectableDateRange,
 				selectedDates = p1.selectedDates,
-				testId = `{testId}--presets`
+				testId = `{CalendarName}--presets`
 			})
 		})
-	}) else reactModule.createElement(singleMonthCalendarModule, {
+	}) else ReactModule.createElement(SingleMonthCalendarModule, {
 		LayoutOrder = 1,
-		isDateRange = p1.variant == dateTimePickerVariantModule.Dual,
+		isDateRange = p1.variant == DateTimePickerVariantModule.Dual,
 		onSelectedDateChanged = p1.onSelectedDatesChanged,
 		referenceDate = p1.referenceDate,
 		selectableDateRange = p1.selectableDateRange,
 		selectedDates = p1.selectedDates,
-		showTimeList = p1.variant == dateTimePickerVariantModule.SingleWithTime,
-		testId = testId,
+		showTimeList = p1.variant == DateTimePickerVariantModule.SingleWithTime,
+		testId = CalendarName,
 		viewAnchorDate = p1.viewAnchorDate
 	})
 end

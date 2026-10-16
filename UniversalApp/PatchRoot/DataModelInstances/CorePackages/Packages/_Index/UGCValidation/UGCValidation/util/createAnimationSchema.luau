@@ -1,13 +1,13 @@
-﻿local constantsModule = require(script.Parent.Parent.Constants)
+﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-local function createAnimationEntry(p1, p2)
-	local t = { ClassName = "Animation" }
+local function createAnimationEntry(p1, p2) --[[ Line: 4 ]]
+	local config = { ClassName = "Animation" }
 	
 	if p1 then
-		t._optional = true
+		config._optional = true
 	end
 	if p2 then
-		t._children = {
+		config._children = {
 			{
 				Name = "Weight",
 				ClassName = "NumberValue",
@@ -15,34 +15,38 @@ local function createAnimationEntry(p1, p2)
 			}
 		}
 	end
-	return t
+	return config
 end
 
-local function createStringValueWithAnimations(p1, p2, p3)
-	-- upvalues: createAnimationEntry (ref)
-	local t = {}
-	table.insert(t, createAnimationEntry(false, p3))
+local function createStringValueWithAnimations(Name, p1: number, p2) --[[ Line: 23 ]]
+	-- upvalues: createAnimationEntry (copy)
+	local List = {}
+	table.insert(List, (createAnimationEntry(false, p2)))
 	
-	if p2 > 1 then
-		table.insert(t, createAnimationEntry(true, p3))
+	if p1 > 1 then
+		table.insert(List, (createAnimationEntry(true, p2)))
 	end
-	return { ClassName = "StringValue", Name = p1, _children = t }
+	return { ClassName = "StringValue", Name = Name, _children = List }
 end
 
-return function(p1)
-	-- upvalues: constantsModule (ref), createStringValueWithAnimations (ref)
-	local var1 = constantsModule.ANIMATION_ASSET_INFO[p1]
-	assert(var1, `No ANIMATION_ASSET_INFO for {p1}`)
-	local t = {}
+return function(AssetType) --[[ Line: 42 | Named "createAnimationSchema" ]]
+	-- upvalues: ConstantsModule (copy), createStringValueWithAnimations (copy)
+	local ANIMATIONASSET = ConstantsModule.ANIMATION_ASSET_INFO[AssetType]
+	assert(ANIMATIONASSET, `No ANIMATION_ASSET_INFO for {AssetType}`)
+	local List = {}
 	
-	if p1 == Enum.AssetType.IdleAnimation then
-		table.insert(t, createStringValueWithAnimations("idle", 2, true))
+	if AssetType == Enum.AssetType.IdleAnimation then
+		table.insert(List, (createStringValueWithAnimations("idle", 2, true)))
 	else
-		for i, v in var1.stringValueNames do
-			local t_1 = {}
-			table.insert(t_1, { ClassName = "Animation" })
-			table.insert(t, { ClassName = "StringValue", Name = v, _children = t_1 })
+		for _, stringValueName in ANIMATIONASSET.stringValueNames do
+			local _children = {}
+			table.insert(_children, { ClassName = "Animation" })
+			table.insert(List, {
+				ClassName = "StringValue",
+				Name = stringValueName,
+				_children = _children
+			})
 		end
 	end
-	return { Name = "R15Anim", ClassName = "Folder", _children = t }
+	return { Name = "R15Anim", ClassName = "Folder", _children = List }
 end

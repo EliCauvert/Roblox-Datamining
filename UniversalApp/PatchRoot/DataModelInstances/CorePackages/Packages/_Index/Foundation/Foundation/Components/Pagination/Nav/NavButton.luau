@@ -1,53 +1,52 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local buttonVariantModule = require(foundation.Enums.ButtonVariant)
-local iconButtonModule = require(foundation.Components.IconButton)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local paginationDirectionModule = require(foundation.Enums.PaginationDirection)
-local _ = require(foundation.Components.Types)
-local paginationSizeModule = require(foundation.Enums.PaginationSize)
-local icon = builderIconsModule.Icon
-local t = {
-	[paginationDirectionModule.First] = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
+local IconButtonModule = require(Foundation.Components.IconButton)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local PaginationDirectionModule = require(Foundation.Enums.PaginationDirection)
+local _ = require(Foundation.Components.Types)
+local PaginationSizeModule = require(Foundation.Enums.PaginationSize)
+local Icon = require(Parent.BuilderIcons).Icon
+local config = {
+	[PaginationDirectionModule.First] = {
 		testIdSuffix = "first",
-		icon = icon.ChevronSmallLeftToLine
+		icon = Icon.ChevronSmallLeftToLine
 	},
-	[paginationDirectionModule.Backward] = { testIdSuffix = "back", icon = icon.ChevronSmallLeft },
-	[paginationDirectionModule.Forward] = { testIdSuffix = "forward", icon = icon.ChevronSmallRight },
-	[paginationDirectionModule.Last] = {
+	[PaginationDirectionModule.Backward] = { testIdSuffix = "back", icon = Icon.ChevronSmallLeft },
+	[PaginationDirectionModule.Forward] = { testIdSuffix = "forward", icon = Icon.ChevronSmallRight },
+	[PaginationDirectionModule.Last] = {
 		testIdSuffix = "last",
-		icon = icon.ChevronSmallRightToLine
+		icon = Icon.ChevronSmallRightToLine
 	}
 }
 
-local function _(p1)
-	-- upvalues: paginationSizeModule (ref), inputSizeModule (ref)
-	return if p1 == paginationSizeModule.Small then inputSizeModule.XSmall else inputSizeModule.Small
+local function _(Small) --[[ Line: 43 | Named "getInputSize" ]]
+	-- upvalues: PaginationSizeModule (copy), InputSizeModule (copy)
+	return if Small == PaginationSizeModule.Small then InputSizeModule.XSmall else InputSizeModule.Small
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: t (ref), reactModule (ref), iconButtonModule (ref), paginationSizeModule (ref), inputSizeModule (ref), buttonVariantModule (ref)
-	local direction = t[p1.direction]
+return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 60 | Named "NavButton" ]]
+	-- upvalues: config (copy), ReactModule (copy), IconButtonModule (copy), PaginationSizeModule (copy), InputSizeModule (copy), ButtonVariantModule (copy)
+	local Entry = config[Frame.direction]
 	
-	return reactModule.createElement(iconButtonModule, {
+	return ReactModule.createElement(IconButtonModule, {
 		isCircular = true,
-		LayoutOrder = p1.LayoutOrder,
-		testId = `{p1.baseTestId}--{direction.testIdSuffix}`,
-		ref = p2,
-		icon = direction.icon,
-		size = if p1.slotSize == paginationSizeModule.Small then inputSizeModule.XSmall else inputSizeModule.Small,
-		variant = buttonVariantModule.Utility,
-		isDisabled = p1.isDisabled,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: p1 (ref)
-			p1.onDirectionActivated(p1.direction)
-		end, { p1.onDirectionActivated, p1.direction }),
-		Selectable = p1.Selectable,
-		NextSelectionLeft = p1.NextSelectionLeft,
-		NextSelectionRight = p1.NextSelectionRight,
-		NextSelectionUp = p1.NextSelectionUp,
-		NextSelectionDown = p1.NextSelectionDown
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `{Frame.baseTestId}--{Entry.testIdSuffix}`,
+		ref = Ref,
+		icon = Entry.icon,
+		size = if Frame.slotSize == PaginationSizeModule.Small then InputSizeModule.XSmall else InputSizeModule.Small,
+		variant = ButtonVariantModule.Utility,
+		isDisabled = Frame.isDisabled,
+		onActivated = ReactModule.useCallback(function() --[[ Line: 64 ]]
+			-- upvalues: Frame (copy)
+			Frame.onDirectionActivated(Frame.direction)
+		end, { Frame.onDirectionActivated, Frame.direction }),
+		Selectable = Frame.Selectable,
+		NextSelectionLeft = Frame.NextSelectionLeft,
+		NextSelectionRight = Frame.NextSelectionRight,
+		NextSelectionUp = Frame.NextSelectionUp,
+		NextSelectionDown = Frame.NextSelectionDown
 	})
 end))

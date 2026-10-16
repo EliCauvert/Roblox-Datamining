@@ -1,1 +1,1 @@
-﻿return require(script.gqlTag)
+﻿return (require(script.gqlTag))

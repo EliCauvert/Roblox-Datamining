@@ -1,11 +1,11 @@
-﻿local deepEqualModule = require(script.Parent.Parent.luaUtils.deepEqual)
+﻿local DeepEqualModule = require(script.Parent.Parent.luaUtils.deepEqual)
 
-return function(p1, p2)
-	-- upvalues: deepEqualModule (ref)
-	local var1, var2 = deepEqualModule(p1, p2)
+return function(p1, p2) --[[ Line: 17 | Named "toEqual" ]]
+	-- upvalues: DeepEqualModule (copy)
+	local DeepEqualModuleResult, DeepEqualModuleResult2 = DeepEqualModule(p1, p2)
 	
 	return {
-		pass = var1,
-		message = if not var1 then var2:gsub("{1}", "received"):gsub("{2}", "expected") else ("expected: not %s\nreceived:     %s"):format(tostring(p2), tostring(p1))
+		pass = DeepEqualModuleResult,
+		message = if DeepEqualModuleResult then ("expected: not %s\nreceived:     %s"):format(tostring(p2), (tostring(p1))) else DeepEqualModuleResult2:gsub("{1}", "received"):gsub("{2}", "expected")
 	}
 end

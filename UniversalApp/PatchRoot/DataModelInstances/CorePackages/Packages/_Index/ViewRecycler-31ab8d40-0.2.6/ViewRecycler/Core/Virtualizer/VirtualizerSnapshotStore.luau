@@ -1,39 +1,39 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.DataSource)
-local _ = require(viewRecycler.Core.Layout)
-local placementTypesModule = require(viewRecycler.Core.Placement.PlacementTypes)
-local shallowTableModule = require(viewRecycler.Internal.ShallowTable)
-local typesModule = require(viewRecycler.Core.Types)
-local _ = require(viewRecycler.Core.Virtualizer.VirtualizerSnapshot)
-local _ = require(viewRecycler.Core.Virtualizer.ItemRevisionTracker)
-local _ = require(viewRecycler.Core.PinnedItems.createPinnedItemPlanner)
-local cloneFrozen = shallowTableModule.cloneFrozen
-local containsEqual = shallowTableModule.containsEqual
-local optionalContainsEqual = shallowTableModule.optionalContainsEqual
-local frozen = table.freeze({ firstIndex = 1, lastIndex = 0 })
-local frozen_1 = table.freeze({})
-local frozen_2 = table.freeze({
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local _ = require(ViewRecycler.Core.DataSource)
+local _ = require(ViewRecycler.Core.Layout)
+local PlacementTypesModule = require(ViewRecycler.Core.Placement.PlacementTypes)
+local ShallowTableModule = require(ViewRecycler.Internal.ShallowTable)
+local TypesModule = require(ViewRecycler.Core.Types)
+local _ = require(ViewRecycler.Core.Virtualizer.VirtualizerSnapshot)
+local _ = require(ViewRecycler.Core.Virtualizer.ItemRevisionTracker)
+local _ = require(ViewRecycler.Core.PinnedItems.createPinnedItemPlanner)
+local CloneFrozenFunction = ShallowTableModule.cloneFrozen
+local ContainsEqualFunction = ShallowTableModule.containsEqual
+local OptionalContainsEqualFunction = ShallowTableModule.optionalContainsEqual
+local Frozen = table.freeze({ firstIndex = 1, lastIndex = 0 })
+local Frozen1 = table.freeze({})
+local Frozen2 = table.freeze({
 	hasViewportRelativePlacements = false,
 	retainedItems = table.freeze({}),
 	additionalAssignments = table.freeze({}),
 	placements = table.freeze({})
 })
-local frozen_3 = table.freeze({ assignmentsChanged = false, placementChanged = false })
-local ITEM_LAYOUT_KEYS = typesModule.ITEM_LAYOUT_KEYS
-local ITEM_PLACEMENT_KEYS = placementTypesModule.ITEM_PLACEMENT_KEYS
-local frozen_4 = table.freeze({ "key" })
-local frozen_5 = table.freeze({ "revision" })
+local Frozen3 = table.freeze({ assignmentsChanged = false, placementChanged = false })
+local ITEMLAYOUTKEYS = TypesModule.ITEM_LAYOUT_KEYS
+local ITEMPLACEMENTKEYS = PlacementTypesModule.ITEM_PLACEMENT_KEYS
+local Frozen4 = table.freeze({ "key" })
+local Frozen5 = table.freeze({ "revision" })
 
-local function _(p1, p2)
+local function _(p1, p2): boolean --[[ Line: 74 | Named "sameRange" ]]
 	return p1.firstIndex == p2.firstIndex and p1.lastIndex == p2.lastIndex
 end
 
-return function(p1)
-	-- upvalues: frozen (ref), cloneFrozen (ref), frozen_1 (ref), containsEqual (ref), ITEM_PLACEMENT_KEYS (ref), optionalContainsEqual (ref), ITEM_LAYOUT_KEYS (ref), placementTypesModule (ref), frozen_2 (ref), typesModule (ref), frozen_4 (ref), frozen_5 (ref), frozen_3 (ref)
-	local planner = p1.planner
-	local itemRevisions = p1.itemRevisions
-	local getRecyclableViewType = p1.getRecyclableViewType
-	local t = {
+return function(p1) --[[ Line: 78 | Named "createVirtualizerSnapshotStore" ]]
+	-- upvalues: Frozen (copy), CloneFrozenFunction (copy), Frozen1 (copy), ContainsEqualFunction (copy), ITEMPLACEMENTKEYS (copy), OptionalContainsEqualFunction (copy), ITEMLAYOUTKEYS (copy), PlacementTypesModule (copy), Frozen2 (copy), TypesModule (copy), Frozen4 (copy), Frozen5 (copy), Frozen3 (copy)
+	local Planner = p1.planner
+	local ItemRevisions = p1.itemRevisions
+	local GetRecyclableViewTypeFunction = p1.getRecyclableViewType
+	local config = {
 		entryIdentity = 0,
 		entryLayoutGeometry = 0,
 		entryPlacementGeometry = 0,
@@ -43,326 +43,332 @@ return function(p1)
 		snapshotRange = 0,
 		snapshotScroll = 0
 	}
-	local frozen_6 = table.freeze({
+	local Frozen6 = table.freeze({
 		version = 0,
 		contentStartOffset = 0,
 		contentLength = 0,
 		entries = table.freeze({}),
-		visibleRange = frozen,
-		mountedRange = frozen,
-		scrollState = cloneFrozen(p1.initialScrollState),
+		visibleRange = Frozen,
+		mountedRange = Frozen,
+		scrollState = CloneFrozenFunction(p1.initialScrollState),
 		requiresItemMeasurement = p1.initialRequiresItemMeasurement
 	})
 	
-	local function _(p2)
-		-- upvalues: t (ref)
-		t.entryIdentity = p2.identity
-		t.entryLayoutGeometry = p2.layoutGeometry
-		t.entryPlacementGeometry = p2.placementGeometry
-		t.entryRange = p2.range
-		t.entryScroll = p2.scroll
+	local function _(p2) --[[ Line: 108 | Named "recordEntryMaterialization" ]]
+		-- upvalues: config (copy)
+		config.entryIdentity = p2.identity
+		config.entryLayoutGeometry = p2.layoutGeometry
+		config.entryPlacementGeometry = p2.placementGeometry
+		config.entryRange = p2.range
+		config.entryScroll = p2.scroll
 	end
 	
-	local function resolvePlacement(p2, p3, p4)
-		-- upvalues: frozen_1 (copy)
-		local var1 = p3.placements[p2]
+	local function resolvePlacement(ItemKey, p2, ScrollOffset) --[[ Line: 116 ]]
+		-- upvalues: Frozen1 (upval)
+		local Placement = p2.placements[ItemKey]
 		
-		if var1 == nil then
-			return frozen_1, nil
-		elseif var1.viewportRelative then
+		if Placement == nil then
+			return Frozen1, nil
+		elseif Placement.viewportRelative then
 			return table.freeze({
-				mainAxisOffset = p4 + (var1.mainAxisOffset or 0),
-				mainAxisLength = var1.mainAxisLength,
-				zIndex = var1.zIndex
+				mainAxisOffset = ScrollOffset + (Placement.mainAxisOffset or 0),
+				mainAxisLength = Placement.mainAxisLength,
+				zIndex = Placement.zIndex
 			}), table.freeze({
 				viewportRelative = true,
-				mainAxisOffset = var1.mainAxisOffset,
-				mainAxisLength = var1.mainAxisLength,
-				zIndex = var1.zIndex
+				mainAxisOffset = Placement.mainAxisOffset,
+				mainAxisLength = Placement.mainAxisLength,
+				zIndex = Placement.zIndex
 			})
+		else
+			return table.freeze({
+				mainAxisOffset = Placement.mainAxisOffset,
+				mainAxisLength = Placement.mainAxisLength,
+				zIndex = Placement.zIndex
+			}), nil
 		end
-		return table.freeze({
-			mainAxisOffset = var1.mainAxisOffset,
-			mainAxisLength = var1.mainAxisLength,
-			zIndex = var1.zIndex
-		}), nil
 	end
 	
-	local function makeEntry(p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
-		-- upvalues: frozen_1 (copy), resolvePlacement (ref), containsEqual (copy), ITEM_PLACEMENT_KEYS (copy), optionalContainsEqual (copy), ITEM_LAYOUT_KEYS (copy), placementTypesModule (copy), cloneFrozen (copy)
-		local var1 = if p4 == nil then {
+	local function makeEntry(p2, Key, Index, Item, RecyclableViewType, Revision, Position, UpdateResult, p3, p4) --[[ Line: 145 ]]
+		-- upvalues: Frozen1 (upval), resolvePlacement (copy), ContainsEqualFunction (upval), ITEMPLACEMENTKEYS (upval), OptionalContainsEqualFunction (upval), ITEMLAYOUTKEYS (upval), PlacementTypesModule (upval), CloneFrozenFunction (upval)
+		local Config = if Index == nil then {
 			startOffset = 0,
-			length = p9.placements[p3].mainAxisLength or 0
-		} else p11 or p2.layout.getItemLayout(p4)
-		local var2 = frozen_1
-		local viewportPlacement = nil
+			length = UpdateResult.placements[Key].mainAxisLength or 0
+		} else p4 or p2.layout.getItemLayout(Index)
+		local CanvasPlacement = Frozen1
+		local ViewportPlacement = nil
 		
 		if p2.hasViewportPlacements then
-			local var3, var4 = resolvePlacement(p3, p9, p2.scrollState.scrollOffset)
-			var2 = var3
-			viewportPlacement = var4
+			CanvasPlacement, ViewportPlacement = resolvePlacement(Key, UpdateResult, p2.scrollState.scrollOffset)
 		end
-		if p10 ~= nil and containsEqual(p10.canvasPlacement, var2, ITEM_PLACEMENT_KEYS) then
-			var2 = p10.canvasPlacement
+		if p3 ~= nil and ContainsEqualFunction(p3.canvasPlacement, CanvasPlacement, ITEMPLACEMENTKEYS) then
+			CanvasPlacement = p3.canvasPlacement
 		end
-		if p10 ~= nil and optionalContainsEqual(p10.viewportPlacement, viewportPlacement, ITEM_PLACEMENT_KEYS) then
-			viewportPlacement = p10.viewportPlacement
+		if p3 ~= nil and OptionalContainsEqualFunction(p3.viewportPlacement, ViewportPlacement, ITEMPLACEMENTKEYS) then
+			ViewportPlacement = p3.viewportPlacement
 		end
-		if p10 ~= nil and containsEqual(p10.itemLayout, var1, ITEM_LAYOUT_KEYS) then
-			var1 = p10.itemLayout
+		if p3 ~= nil and ContainsEqualFunction(p3.itemLayout, Config, ITEMLAYOUTKEYS) then
+			Config = p3.itemLayout
 		end
-		if p10 ~= nil and p10.index == p4 and (p10.value == p5 and p10.recyclableViewType == p6) and (p10.identity.revision == p7 and containsEqual(p10.itemLayout, var1, ITEM_LAYOUT_KEYS) and (containsEqual(p10.canvasPlacement, var2, ITEM_PLACEMENT_KEYS) and optionalContainsEqual(p10.viewportPlacement, viewportPlacement, ITEM_PLACEMENT_KEYS))) then
-			return p10
-		end
-		local var5 = p10 ~= nil and (p10.index == p4 and (p10.identity.revision == p7 and p10.identity.kind == placementTypesModule.IdentityKind.Pinned == (p8 ~= nil)))
-		
-		return table.freeze({
-			key = p3,
-			index = p4,
-			value = p5,
-			recyclableViewType = p6,
-			identity = if var5 then p10.identity elseif p8 == nil then table.freeze({
-				kind = placementTypesModule.IdentityKind.Data,
-				index = p4,
-				revision = p7
-			}) else table.freeze({
-				kind = placementTypesModule.IdentityKind.Pinned,
-				position = p8,
-				revision = p7
-			}),
-			itemLayout = if table.isfrozen(var1) then var1 elseif p11 ~= nil then cloneFrozen(var1) else table.freeze(var1),
-			canvasPlacement = var2,
-			viewportPlacement = viewportPlacement,
-			measurementIdentity = if var5 then p10.measurementIdentity else table.freeze({
-				itemIndex = p4,
-				itemKey = p3,
-				itemRevision = p7,
-				pinnedPosition = p8
+		if p3 == nil or p3.index ~= Index or p3.value ~= Item or p3.recyclableViewType ~= RecyclableViewType or p3.identity.revision ~= Revision or not ContainsEqualFunction(p3.itemLayout, Config, ITEMLAYOUTKEYS) or not ContainsEqualFunction(p3.canvasPlacement, CanvasPlacement, ITEMPLACEMENTKEYS) or not OptionalContainsEqualFunction(p3.viewportPlacement, ViewportPlacement, ITEMPLACEMENTKEYS) then
+			local v1: boolean = p3 ~= nil and (p3.index == Index and p3.identity.revision == Revision and p3.identity.kind == PlacementTypesModule.IdentityKind.Pinned == (Position ~= nil))
+			
+			return table.freeze({
+				key = Key,
+				index = Index,
+				value = Item,
+				recyclableViewType = RecyclableViewType,
+				identity = if v1 then p3.identity elseif Position == nil then table.freeze({
+					kind = PlacementTypesModule.IdentityKind.Data,
+					index = Index,
+					revision = Revision
+				}) else table.freeze({
+					kind = PlacementTypesModule.IdentityKind.Pinned,
+					position = Position,
+					revision = Revision
+				}),
+				itemLayout = if table.isfrozen(Config) then Config elseif p4 == nil then CloneFrozenFunction(Config) else table.freeze(Config),
+				canvasPlacement = CanvasPlacement,
+				viewportPlacement = ViewportPlacement,
+				measurementIdentity = if v1 then p3.measurementIdentity else table.freeze({
+					itemIndex = Index,
+					itemKey = Key,
+					itemRevision = Revision,
+					pinnedPosition = Position
+				})
 			})
-		})
+		else
+			return p3
+		end
 	end
 	
-	local function materializeEntries(p2)
-		-- upvalues: t (ref), frozen_6 (write), planner (ref), frozen_2 (copy), typesModule (copy), makeEntry (ref), getRecyclableViewType (ref), itemRevisions (ref), containsEqual (copy), frozen_4 (copy), frozen_5 (copy)
-		local revisions = p2.revisions
-		local mountedRange = p2.mountedRange
-		local var1 = false
+	local function materializeEntries(p2) --[[ Line: 232 ]]
+		-- upvalues: config (copy), Frozen6 (ref), Planner (copy), Frozen2 (upval), TypesModule (upval), makeEntry (copy), GetRecyclableViewTypeFunction (copy), ItemRevisions (copy), ContainsEqualFunction (upval), Frozen4 (upval), Frozen5 (upval)
+		local Revisions = p2.revisions
+		local MountedRange = p2.mountedRange
+		local v1 = false
 		
-		if t.entryRange ~= revisions.range then
-			local mountedRange_1 = frozen_6.mountedRange
-			var1 = not (mountedRange_1.firstIndex == mountedRange.firstIndex and mountedRange_1.lastIndex == mountedRange.lastIndex)
+		if config.entryRange ~= Revisions.range then
+			local MountedRange1 = Frozen6.mountedRange
+			v1 = not (MountedRange1.firstIndex == MountedRange.firstIndex and MountedRange1.lastIndex == MountedRange.lastIndex)
 		end
-		local var2 = t.entryIdentity ~= revisions.identity
-		local var3 = t.entryLayoutGeometry ~= revisions.layoutGeometry
+		local IsNotEntryIdentityMatch = config.entryIdentity ~= Revisions.identity
+		local IsNotEntryLayoutGeometryMatch = config.entryLayoutGeometry ~= Revisions.layoutGeometry
+		local IsNotEntryPlacementGeometryMatch = config.entryPlacementGeometry ~= Revisions.placementGeometry
+		local IsNotEntryScrollMatch: boolean = p2.hasViewportPlacements and config.entryScroll ~= Revisions.scroll
 		
-		if not var1 and not var2 and (not var3 and not (t.entryPlacementGeometry ~= revisions.placementGeometry)) and not (p2.hasViewportPlacements and t.entryScroll ~= revisions.scroll) then
-			t.entryRange = revisions.range
-			t.entryScroll = revisions.scroll
+		if not v1 and not IsNotEntryIdentityMatch and not IsNotEntryLayoutGeometryMatch and not IsNotEntryPlacementGeometryMatch and not IsNotEntryScrollMatch then
+			config.entryRange = Revisions.range
+			config.entryScroll = Revisions.scroll
 			
 			return false, false
 		end
-		local var4
-		local var5 = if p2.hasViewportPlacements then planner.update({
+		local UpdateResult = if p2.hasViewportPlacements then Planner.update({
 			dataSource = p2.dataSource,
 			layout = p2.layout,
 			scrollOffset = p2.scrollState.scrollOffset,
 			viewportLength = p2.scrollState.viewportLength,
 			contentStartOffset = p2.contentStartOffset
-		}) else frozen_2
+		}) else Frozen2
 		
-		if var1 and not p2.hasViewportPlacements and (not var2 and not var3) then
-			local var6 = if typesModule.isIndexRangeEmpty(mountedRange) then 0 else mountedRange.lastIndex - mountedRange.firstIndex + 1
-			local list = table.create(var6)
-			local t_1 = {}
+		if v1 and not p2.hasViewportPlacements and not IsNotEntryIdentityMatch and not IsNotEntryLayoutGeometryMatch then
+			local NewLastIndex: number = if TypesModule.isIndexRangeEmpty(MountedRange) then 0 else MountedRange.lastIndex - MountedRange.firstIndex + 1
+			local Buffer = table.create(NewLastIndex)
+			local t = {}
 			
-			if var6 > 0 and p2.layout.getItemLayouts ~= nil then
-				p2.layout.getItemLayouts(mountedRange.firstIndex, mountedRange.lastIndex, t_1)
+			if NewLastIndex > 0 and p2.layout.getItemLayouts ~= nil then
+				p2.layout.getItemLayouts(MountedRange.firstIndex, MountedRange.lastIndex, t)
 			end
-			for i = mountedRange.firstIndex, mountedRange.lastIndex do
-				var4 = frozen_6.entries[i - frozen_6.mountedRange.firstIndex + 1]
+			for i = MountedRange.firstIndex, MountedRange.lastIndex do
+				local Entry = Frozen6.entries[i - Frozen6.mountedRange.firstIndex + 1]
 				
-				if var4 == nil or var4.index ~= i then
-					local itemKey = p2.dataSource.getItemKey(i)
-					local item = p2.dataSource.getItem(i)
-					table.insert(list, makeEntry(p2, itemKey, i, item, getRecyclableViewType(item, i), itemRevisions.get(itemKey), nil, var5, nil, t_1[i - mountedRange.firstIndex + 1]))
+				if Entry == nil or Entry.index ~= i then
+					local ItemKey = p2.dataSource.getItemKey(i)
+					local Item = p2.dataSource.getItem(i)
+					table.insert(Buffer, makeEntry(p2, ItemKey, i, Item, GetRecyclableViewTypeFunction(Item, i), ItemRevisions.get(ItemKey), nil, UpdateResult, nil, t[i - MountedRange.firstIndex + 1]))
 				else
-					table.insert(list, var4)
+					table.insert(Buffer, Entry)
 				end
 			end
-			table.freeze(list)
-			frozen_6 = table.freeze({
-				version = frozen_6.version,
-				entries = list,
-				visibleRange = frozen_6.visibleRange,
-				mountedRange = frozen_6.mountedRange,
-				scrollState = frozen_6.scrollState,
-				contentStartOffset = frozen_6.contentStartOffset,
-				contentLength = frozen_6.contentLength,
-				requiresItemMeasurement = frozen_6.requiresItemMeasurement
+			table.freeze(Buffer)
+			Frozen6 = table.freeze({
+				version = Frozen6.version,
+				entries = Buffer,
+				visibleRange = Frozen6.visibleRange,
+				mountedRange = Frozen6.mountedRange,
+				scrollState = Frozen6.scrollState,
+				contentStartOffset = Frozen6.contentStartOffset,
+				contentLength = Frozen6.contentLength,
+				requiresItemMeasurement = Frozen6.requiresItemMeasurement
 			})
-			t.entryIdentity = revisions.identity
-			t.entryLayoutGeometry = revisions.layoutGeometry
-			t.entryPlacementGeometry = revisions.placementGeometry
-			t.entryRange = revisions.range
-			t.entryScroll = revisions.scroll
+			config.entryIdentity = Revisions.identity
+			config.entryLayoutGeometry = Revisions.layoutGeometry
+			config.entryPlacementGeometry = Revisions.placementGeometry
+			config.entryRange = Revisions.range
+			config.entryScroll = Revisions.scroll
 			
 			return true, true
-		elseif var1 or p2.hasViewportPlacements or (var2 or not var3) then
-			local t_1 = {}
+		elseif v1 or p2.hasViewportPlacements or IsNotEntryIdentityMatch or not IsNotEntryLayoutGeometryMatch then
+			local t = {}
 			
-			for i_1, v_1 in frozen_6.entries do
-				t_1[v_1.key] = v_1
+			for _, entry1 in Frozen6.entries do
+				t[entry1.key] = entry1
 			end
-			local var7
-			local t_2 = {}
-			local t_3 = {}
-			local t_4 = {}
+			local List = {}
+			local t1 = {}
+			local t2 = {}
 			
-			if var3 and not typesModule.isIndexRangeEmpty(mountedRange) and p2.layout.getItemLayouts ~= nil then
-				p2.layout.getItemLayouts(mountedRange.firstIndex, mountedRange.lastIndex, t_4)
+			if IsNotEntryLayoutGeometryMatch and not TypesModule.isIndexRangeEmpty(MountedRange) and p2.layout.getItemLayouts ~= nil then
+				p2.layout.getItemLayouts(MountedRange.firstIndex, MountedRange.lastIndex, t2)
 			end
-			if not typesModule.isIndexRangeEmpty(mountedRange) then
-				for i_2 = mountedRange.firstIndex, mountedRange.lastIndex do
-					var4 = p2.dataSource.getItemKey(i_2)
-					var7 = t_1[var4]
+			if not TypesModule.isIndexRangeEmpty(MountedRange) then
+				for i2 = MountedRange.firstIndex, MountedRange.lastIndex do
+					local ItemKey = p2.dataSource.getItemKey(i2)
+					local Entry = t[ItemKey]
 					
-					if not p2.hasViewportPlacements and var1 and (not var2 and not var3) and (var7 ~= nil and var7.index == i_2) then
-						table.insert(t_2, var7)
-						t_3[var4] = true
+					if p2.hasViewportPlacements or (not v1 or IsNotEntryIdentityMatch or IsNotEntryLayoutGeometryMatch or Entry == nil or Entry.index ~= i2) then
+						local Item = if IsNotEntryIdentityMatch or Entry == nil or Entry.index ~= i2 then p2.dataSource.getItem(i2) else Entry.value
+						table.insert(List, makeEntry(p2, ItemKey, i2, Item, if IsNotEntryIdentityMatch or Entry == nil or Entry.index ~= i2 then GetRecyclableViewTypeFunction(Item, i2) else Entry.recyclableViewType, if IsNotEntryIdentityMatch or Entry == nil or Entry.index ~= i2 then ItemRevisions.get(ItemKey) else Entry.identity.revision, nil, UpdateResult, Entry, t2[i2 - MountedRange.firstIndex + 1]))
+					else
+						table.insert(List, Entry)
 					end
-					local var8 = if var2 or var7 == nil or var7.index ~= i_2 then p2.dataSource.getItem(i_2) else var7.value
-					table.insert(t_2, makeEntry(p2, var4, i_2, var8, if var2 or var7 == nil or var7.index ~= i_2 then getRecyclableViewType(var8, i_2) else var7.recyclableViewType, if var2 or var7 == nil or var7.index ~= i_2 then itemRevisions.get(var4) else var7.identity.revision, nil, var5, var7, t_4[i_2 - mountedRange.firstIndex + 1]))
+					t1[ItemKey] = true
 				end
 			end
-			for var4, var7 in var5.retainedItems do
-				if not t_3[var7.key] then
-					local item = p2.dataSource.getItem(var7.index)
-					local key = t_1[var7.key]
-					table.insert(t_2, makeEntry(p2, var7.key, var7.index, item, if key ~= nil then getRecyclableViewType(item, var7.index) else key.recyclableViewType, itemRevisions.get(var7.key), nil, var5, key, nil))
-					t_3[var7.key] = true
+			for _, retainedItem in UpdateResult.retainedItems do
+				if not t1[retainedItem.key] then
+					local Item = p2.dataSource.getItem(retainedItem.index)
+					local Entry = t[retainedItem.key]
+					table.insert(List, makeEntry(p2, retainedItem.key, retainedItem.index, Item, if Entry == nil then GetRecyclableViewTypeFunction(Item, retainedItem.index) else Entry.recyclableViewType, ItemRevisions.get(retainedItem.key), nil, UpdateResult, Entry, nil))
+					t1[retainedItem.key] = true
 				end
 			end
-			for var4, var7 in var5.additionalAssignments do
-				assert(not t_3[var7.key], `Virtualizer: duplicate snapshot key "{var39.key}"`)
-				table.insert(t_2, makeEntry(p2, var7.key, nil, var7.value, var7.itemViewType, var7.identity.revision, var7.identity.position, var5, t_1[var7.key], nil))
+			for _, additionalAssignment in UpdateResult.additionalAssignments do
+				assert(not t1[additionalAssignment.key], `Virtualizer: duplicate snapshot key "{additionalAssignment.key}"`)
+				table.insert(List, makeEntry(p2, additionalAssignment.key, nil, additionalAssignment.value, additionalAssignment.itemViewType, additionalAssignment.identity.revision, additionalAssignment.identity.position, UpdateResult, t[additionalAssignment.key], nil))
 			end
-			local var9 = #t_2 ~= #frozen_6.entries
-			local var10 = var9
+			local Flag = #List ~= #Frozen6.entries
+			local Flag1: boolean = Flag
 			
-			if not var10 then
-				for i_5, v_4 in t_2 do
-					if v_4 ~= frozen_6.entries[i_5] then
-						var10 = true
-						
-						if not containsEqual(v_4, frozen_6.entries[i_5], frozen_4) or not containsEqual(v_4.identity, frozen_6.entries[i_5].identity, frozen_5) then
-							var9 = true
-						end
+			if not Flag1 then
+				for i3, value in List do
+					local IsEntryMatch = value == Frozen6.entries[i3]
+					
+					if not IsEntryMatch then
+						Flag1 = true
+						IsEntryMatch = ContainsEqualFunction(value, Frozen6.entries[i3], Frozen4) and ContainsEqualFunction(value.identity, Frozen6.entries[i3].identity, Frozen5)
+					end
+					if not IsEntryMatch then
+						Flag = true
 					end
 				end
 			end
-			if var10 then
-				table.freeze(t_2)
-				frozen_6 = table.freeze({
-					version = frozen_6.version,
-					entries = t_2,
-					visibleRange = frozen_6.visibleRange,
-					mountedRange = frozen_6.mountedRange,
-					scrollState = frozen_6.scrollState,
-					contentStartOffset = frozen_6.contentStartOffset,
-					contentLength = frozen_6.contentLength,
-					requiresItemMeasurement = frozen_6.requiresItemMeasurement
+			if Flag1 then
+				table.freeze(List)
+				Frozen6 = table.freeze({
+					version = Frozen6.version,
+					entries = List,
+					visibleRange = Frozen6.visibleRange,
+					mountedRange = Frozen6.mountedRange,
+					scrollState = Frozen6.scrollState,
+					contentStartOffset = Frozen6.contentStartOffset,
+					contentLength = Frozen6.contentLength,
+					requiresItemMeasurement = Frozen6.requiresItemMeasurement
 				})
 			end
-			t.entryIdentity = revisions.identity
-			t.entryLayoutGeometry = revisions.layoutGeometry
-			t.entryPlacementGeometry = revisions.placementGeometry
-			t.entryRange = revisions.range
-			t.entryScroll = revisions.scroll
+			config.entryIdentity = Revisions.identity
+			config.entryLayoutGeometry = Revisions.layoutGeometry
+			config.entryPlacementGeometry = Revisions.placementGeometry
+			config.entryRange = Revisions.range
+			config.entryScroll = Revisions.scroll
 			
-			return var9, var10
+			return Flag, Flag1
 		else
-			local t_1 = {}
+			local t3 = {}
 			
-			if #frozen_6.entries > 0 and p2.layout.getItemLayouts ~= nil then
-				p2.layout.getItemLayouts(mountedRange.firstIndex, mountedRange.lastIndex, t_1)
+			if #Frozen6.entries > 0 and p2.layout.getItemLayouts ~= nil then
+				p2.layout.getItemLayouts(MountedRange.firstIndex, MountedRange.lastIndex, t3)
 			end
-			local list = table.create(#frozen_6.entries)
-			local var11 = false
+			local Buffer = table.create(#Frozen6.entries)
+			local v2 = false
 			
-			for i_1, var4 in frozen_6.entries do
-				local var12 = makeEntry(p2, var4.key, var4.index, var4.value, var4.recyclableViewType, var4.identity.revision, nil, var5, var4, t_1[i_1])
-				list[i_1] = var12
-				var11 = var11 or var12 ~= var4
+			for i1, entry in Frozen6.entries do
+				local Entry = makeEntry(p2, entry.key, entry.index, entry.value, entry.recyclableViewType, entry.identity.revision, nil, UpdateResult, entry, t3[i1])
+				Buffer[i1] = Entry
+				v2 = v2 or Entry ~= entry
 			end
-			if var11 then
-				table.freeze(list)
-				frozen_6 = table.freeze({
-					version = frozen_6.version,
-					entries = list,
-					visibleRange = frozen_6.visibleRange,
-					mountedRange = frozen_6.mountedRange,
-					scrollState = frozen_6.scrollState,
-					contentStartOffset = frozen_6.contentStartOffset,
-					contentLength = frozen_6.contentLength,
-					requiresItemMeasurement = frozen_6.requiresItemMeasurement
+			if v2 then
+				table.freeze(Buffer)
+				Frozen6 = table.freeze({
+					version = Frozen6.version,
+					entries = Buffer,
+					visibleRange = Frozen6.visibleRange,
+					mountedRange = Frozen6.mountedRange,
+					scrollState = Frozen6.scrollState,
+					contentStartOffset = Frozen6.contentStartOffset,
+					contentLength = Frozen6.contentLength,
+					requiresItemMeasurement = Frozen6.requiresItemMeasurement
 				})
 			end
-			t.entryIdentity = revisions.identity
-			t.entryLayoutGeometry = revisions.layoutGeometry
-			t.entryPlacementGeometry = revisions.placementGeometry
-			t.entryRange = revisions.range
-			t.entryScroll = revisions.scroll
+			config.entryIdentity = Revisions.identity
+			config.entryLayoutGeometry = Revisions.layoutGeometry
+			config.entryPlacementGeometry = Revisions.placementGeometry
+			config.entryRange = Revisions.range
+			config.entryScroll = Revisions.scroll
 			
-			return false, var11
+			return false, v2
 		end
 	end
 	
 	return {
-		commit = function(p3)
-			-- upvalues: materializeEntries (ref), t (ref), frozen_6 (write), cloneFrozen (copy), frozen_3 (copy)
-			local revisions = p3.revisions
-			local var13, var14 = materializeEntries(p3)
-			local var15 = t.snapshotRange ~= revisions.range
-			local var16 = t.snapshotScroll ~= revisions.scroll
-			local var17 = t.snapshotLayoutGeometry ~= revisions.layoutGeometry
-			local var18 = var15
+		commit = function(p3) --[[ Line: 497 ]]
+			-- upvalues: materializeEntries (copy), config (copy), Frozen6 (ref), CloneFrozenFunction (upval), Frozen3 (upval)
+			local Revisions = p3.revisions
+			local MaterializeEntriesResult, MaterializeEntriesResult2 = materializeEntries(p3)
+			local IsNotSnapshotRangeMatch = config.snapshotRange ~= Revisions.range
+			local IsNotSnapshotScrollMatch = config.snapshotScroll ~= Revisions.scroll
+			local IsNotSnapshotLayoutGeometryMatch = config.snapshotLayoutGeometry ~= Revisions.layoutGeometry
+			local IsNotSnapshotRangeMatch1: boolean = IsNotSnapshotRangeMatch
 			
-			if var18 then
-				local visibleRange = frozen_6.visibleRange
-				local visibleRange_1 = p3.visibleRange
-				var18 = not (visibleRange.firstIndex == visibleRange_1.firstIndex and visibleRange.lastIndex == visibleRange_1.lastIndex)
+			if IsNotSnapshotRangeMatch1 then
+				local VisibleRange = Frozen6.visibleRange
+				local VisibleRange1 = p3.visibleRange
+				IsNotSnapshotRangeMatch1 = not (VisibleRange.firstIndex == VisibleRange1.firstIndex and VisibleRange.lastIndex == VisibleRange1.lastIndex)
 			end
-			local var19 = var15
+			local IsNotSnapshotRangeMatch2: boolean = IsNotSnapshotRangeMatch
 			
-			if var19 then
-				local mountedRange = frozen_6.mountedRange
-				local mountedRange_1 = p3.mountedRange
-				var19 = not (mountedRange.firstIndex == mountedRange_1.firstIndex and mountedRange.lastIndex == mountedRange_1.lastIndex)
+			if IsNotSnapshotRangeMatch2 then
+				local MountedRange = Frozen6.mountedRange
+				local MountedRange1 = p3.mountedRange
+				IsNotSnapshotRangeMatch2 = not (MountedRange.firstIndex == MountedRange1.firstIndex and MountedRange.lastIndex == MountedRange1.lastIndex)
 			end
-			if var14 or (var18 or (var19 or (var16 or var17 and (if frozen_6.contentStartOffset == p3.contentStartOffset then if frozen_6.contentLength == p3.contentLength then frozen_6.requiresItemMeasurement ~= p3.requiresItemMeasurement else true else true)))) then
-				frozen_6 = table.freeze({
-					version = frozen_6.version + 1,
-					entries = frozen_6.entries,
-					visibleRange = if var18 then cloneFrozen(p3.visibleRange) else frozen_6.visibleRange,
-					mountedRange = if var19 then cloneFrozen(p3.mountedRange) else frozen_6.mountedRange,
-					scrollState = if var16 then cloneFrozen(p3.scrollState) else frozen_6.scrollState,
+			if MaterializeEntriesResult2 or (IsNotSnapshotRangeMatch1 or (IsNotSnapshotRangeMatch2 or (IsNotSnapshotScrollMatch or IsNotSnapshotLayoutGeometryMatch and (Frozen6.contentStartOffset ~= p3.contentStartOffset or (Frozen6.contentLength ~= p3.contentLength or Frozen6.requiresItemMeasurement ~= p3.requiresItemMeasurement))))) then
+				Frozen6 = table.freeze({
+					version = Frozen6.version + 1,
+					entries = Frozen6.entries,
+					visibleRange = if IsNotSnapshotRangeMatch1 then CloneFrozenFunction(p3.visibleRange) else Frozen6.visibleRange,
+					mountedRange = if IsNotSnapshotRangeMatch2 then CloneFrozenFunction(p3.mountedRange) else Frozen6.mountedRange,
+					scrollState = if IsNotSnapshotScrollMatch then CloneFrozenFunction(p3.scrollState) else Frozen6.scrollState,
 					contentStartOffset = p3.contentStartOffset,
 					contentLength = p3.contentLength,
 					requiresItemMeasurement = p3.requiresItemMeasurement
 				})
 			end
-			t.snapshotLayoutGeometry = revisions.layoutGeometry
-			t.snapshotRange = revisions.range
-			t.snapshotScroll = revisions.scroll
+			config.snapshotLayoutGeometry = Revisions.layoutGeometry
+			config.snapshotRange = Revisions.range
+			config.snapshotScroll = Revisions.scroll
 			
 			return {
-				snapshot = frozen_6,
-				presentation = if var13 or var14 then table.freeze({ assignmentsChanged = var13, placementChanged = var14 }) else frozen_3
+				snapshot = Frozen6,
+				presentation = if MaterializeEntriesResult or MaterializeEntriesResult2 then table.freeze({
+					assignmentsChanged = MaterializeEntriesResult,
+					placementChanged = MaterializeEntriesResult2
+				}) else Frozen3
 			}
 		end,
-		getSnapshot = function()
-			-- upvalues: frozen_6 (write)
-			return frozen_6
+		getSnapshot = function() --[[ Line: 546 ]]
+			-- upvalues: Frozen6 (ref)
+			return Frozen6
 		end
 	}
 end

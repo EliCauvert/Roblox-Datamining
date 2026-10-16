@@ -1,13 +1,14 @@
-﻿local dependenciesModule = require(script.Parent.Parent.Parent.dependencies)
-local tutils = dependenciesModule.tutils
-local llama = dependenciesModule.llama
+﻿local DependenciesModule = require(script.Parent.Parent.Parent.dependencies)
+local Tutils = DependenciesModule.tutils
+local Llama = DependenciesModule.llama
 
-return function(p1)
-	-- upvalues: llama (ref), tutils (ref)
-	if llama.isEmpty(p1) then
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: Llama (copy), Tutils (copy)
+	if Llama.isEmpty(p1) then
 		return "{}"
+	else
+		local Replaced, _ = string.gsub(" args: " .. Tutils.toString(p1), "%s+", " ")
+		
+		return Replaced
 	end
-	local replaced, _ = string.gsub(" args: " .. tutils.toString(p1), "%s+", " ")
-	
-	return replaced
 end

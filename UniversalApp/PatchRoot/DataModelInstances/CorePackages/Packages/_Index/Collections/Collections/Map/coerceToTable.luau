@@ -1,15 +1,15 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local mapModule = require(parent.Map)
-local instanceOfModule = require(parent_2.InstanceOf)
-local reduceModule = require(parent_1.Array.reduce)
-local _ = require(parent_2.ES7Types)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local MapModule = require(Parent.Map)
+local InstanceOfModule = require(Parent2.InstanceOf)
+local ReduceModule = require(Parent1.Array.reduce)
+local _ = require(Parent2.ES7Types)
 
-return function(p1)
-	-- upvalues: instanceOfModule (ref), mapModule (ref), reduceModule (ref)
-	return if instanceOfModule(p1, mapModule) then reduceModule(p1:entries(), function(p2, p3)
-		p2[p3[1]] = p3[2]
+return function(p1) --[[ Line: 27 | Named "coerceToTable" ]]
+	-- upvalues: InstanceOfModule (copy), MapModule (copy), ReduceModule (copy)
+	return if InstanceOfModule(p1, MapModule) then ReduceModule(p1:entries(), function(p2, Entry) --[[ Line: 33 ]]
+		p2[Entry[1]] = Entry[2]
 		
 		return p2
 	end, {}) else p1

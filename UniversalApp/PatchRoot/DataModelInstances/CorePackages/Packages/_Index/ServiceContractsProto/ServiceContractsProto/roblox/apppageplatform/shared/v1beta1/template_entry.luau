@@ -1,95 +1,75 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local uiComponentSchemaModule = require(script.Parent.ui_component_schema)
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local UiComponentSchemaModule = require(script.Parent.ui_component_schema)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 43 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		template = if p1 == nil or p1.template == nil then nil else p1.template,
 		roblox_component = if p1 == nil or p1.roblox_component == nil then "" else p1.roblox_component
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 50 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.template ~= nil then
-		local var2 = self.template:encode()
-		local var3, var4 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var3, var9 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
-		buff = var3
-		var1 = var4
+		local EncodeResult = self.template:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
-		local var5, var6 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var5, var11 = protoModule.writeString(var5, var6, self.roblox_component)
-		buff = var5
-		var1 = var6
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.roblox_component)
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), uiComponentSchemaModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 70 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), UiComponentSchemaModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v13 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var8, var9 = protoModule.readVarInt(p1, var2)
-			local _ = var8
-			var2 = var9
-			continue
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 1 then
-				local _ = nil
-				local var10, var11 = protoModule.readBuffer(p1, var2)
-				var2 = var11
-				var1.template = uiComponentSchemaModule.UiComponentSchema.decode(var10)
-			elseif var7 == 2 then
-				local _ = nil
-				local var12, var13 = protoModule.readBuffer(p1, var2)
-				var2 = var13
-				var1.roblox_component = buffer.tostring(var12)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v13 = ProtoModule.readVarInt(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v13 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.template = UiComponentSchemaModule.UiComponentSchema.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v13 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.roblox_component = buffer.tostring(Buffer2)
 			else
-				local _ = nil
-				local var14, var15 = protoModule.readVarInt(p1, var2)
-				var2 = var15 + var14
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var16, var17 = protoModule.readFixed32(p1, var2)
-			local _ = var16
-			var2 = var17
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var18, var19 = protoModule.readFixed64(p1, var2)
-			local _ = var18
-			var2 = var19
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v13 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v13 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var15)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 119 ]]
 	local t = {}
 	
 	if self.template ~= nil then
@@ -101,27 +81,27 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), uiComponentSchemaModule (ref)
-	local var20 = t_1.new()
+function Module:jsonDecode() --[[ Line: 133 ]]
+	-- upvalues: Module (copy), UiComponentSchemaModule (copy)
+	local NewModule = Module.new()
 	
 	if self.template ~= nil then
-		var20.template = uiComponentSchemaModule.UiComponentSchema.jsonDecode(self.template)
+		NewModule.template = UiComponentSchemaModule.UiComponentSchema.jsonDecode(self.template)
 	end
 	if self.roblox_component ~= nil then
-		var20.roblox_component = self.roblox_component
+		NewModule.roblox_component = self.roblox_component
 	end
 	if self.robloxComponent ~= nil then
-		var20.roblox_component = self.robloxComponent
+		NewModule.roblox_component = self.robloxComponent
 	end
-	return var20
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "TemplateEntry",
 	fullName = "roblox.apppageplatform.shared.v1beta1.TemplateEntry"
 }
-t.TemplateEntry = t_1
-typeRegistryModule.default:register(t.TemplateEntry)
+local config = { TemplateEntry = Module }
+TypeRegistryModule.default:register(config.TemplateEntry)
 
-return { TemplateEntry = t.TemplateEntry }
+return { TemplateEntry = config.TemplateEntry }

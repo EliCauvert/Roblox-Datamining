@@ -1,1 +1,1 @@
-﻿return require(script.GridDebug)
+﻿return (require(script.GridDebug))

@@ -1,27 +1,27 @@
-﻿local userInputService = require(script:FindFirstAncestor("Foundation").Utility.Wrappers).Services.UserInputService
+﻿local UserInputService = require(script:FindFirstAncestor("Foundation").Utility.Wrappers).Services.UserInputService
 local t = {}
 
-return function(p1)
-	-- upvalues: t (ref), userInputService (ref)
-	if t[p1] then
-		return t[p1]
+return function(Key) --[[ Line: 13 ]]
+	-- upvalues: t (copy), UserInputService (copy)
+	if t[Key] then
+		return t[Key]
 	end
-	local _ = nil
-	local var1 = userInputService:GetImageForKeyCode(p1)
+	local ImageForKeyCode = UserInputService:GetImageForKeyCode(Key)
 	
-	if var1 and var1 ~= "" then
+	if ImageForKeyCode and ImageForKeyCode ~= "" then
 		return {
 			keyVisualType = "Image",
 			size = UDim2.fromScale(0.7, 0.7),
-			key = var1
+			key = ImageForKeyCode
 		}
+	else
+		local config = {
+			keyVisualType = "String",
+			size = UDim2.fromScale(0.8, 0.8),
+			key = UserInputService:GetStringForKeyCode(Key) or ""
+		}
+		t[Key] = config
+		
+		return config
 	end
-	local t_1 = {
-		keyVisualType = "String",
-		size = UDim2.fromScale(0.8, 0.8),
-		key = userInputService:GetStringForKeyCode(p1) or ""
-	}
-	t[p1] = t_1
-	
-	return t_1
 end

@@ -1,31 +1,32 @@
-﻿local dEV = _G.__DEV__
-local parent = script.Parent
-local isArrayModule = require(parent.isArray)
-local _ = require(parent.Parent.Parent.ES7Types)
+﻿local DEV = _G.__DEV__
+local Parent = script.Parent
+local IsArrayModule = require(Parent.isArray)
+local _ = require(Parent.Parent.Parent.ES7Types)
 
-local function flat(p1, p2)
-	-- upvalues: dEV (ref), isArrayModule (ref), flat (ref)
-	if dEV then
-		if typeof(p1) ~= "table" then
-			error(string.format("Array.flat called on %s", typeof(p1)))
+local function flat(List, p1) --[[ Line: 21 ]]
+	-- upvalues: DEV (copy), IsArrayModule (copy), flat (copy)
+	if DEV then
+		if typeof(List) ~= "table" then
+			error(string.format("Array.flat called on %s", (typeof(List))))
 		end
-		if p2 ~= nil and typeof(p2) ~= "number" then
+		if p1 ~= nil and typeof(p1) ~= "number" then
 			error("depth is not a number or nil")
 		end
 	end
-	p2 = p2 or 1
-	local t = {}
+	local P1 = p1 or 1
+	local List1 = {}
 	
-	for i, v in p1 do
-		if not isArrayModule(v) then
-			table.insert(t, v)
+	for _, value in List do
+		if not IsArrayModule(value) then
+			table.insert(List1, value)
 			continue
 		end
-		for i_1, v_1 in if p2 > 1 then flat(v, p2 - 1) else v do
-			table.insert(t, v_1)
+		local FlatResult = if P1 > 1 then flat(value, P1 - 1) else value
+		for _, value1 in FlatResult do
+			table.insert(List1, value1)
 		end
 	end
-	return t
+	return List1
 end
 
 return flat

@@ -1,1 +1,1 @@
-﻿return require(script.NumberInput)
+﻿return (require(script.NumberInput))

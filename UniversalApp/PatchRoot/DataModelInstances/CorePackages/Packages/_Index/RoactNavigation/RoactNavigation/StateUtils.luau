@@ -1,26 +1,26 @@
-﻿local luauPolyfillModule = require(script.Parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local t = {
-	get = function(p1, p2)
-		for i, v in p1.routes do
-			if v.key == p2 then
-				return v
+﻿local LuauPolyfillModule = require(script.Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local StateUtils = {
+	get = function(p1, Key) --[[ Line: 31 ]]
+		for _, route in p1.routes do
+			if route.key == Key then
+				return route
 			end
 		end
 		return nil
 	end,
-	indexOf = function(p3, p4)
-		for i, v in p3.routes do
-			if v.key == p4 then
+	indexOf = function(p2, Key) --[[ Line: 42 ]]
+		for i, route in p2.routes do
+			if route.key == Key then
 				return i
 			end
 		end
 		return nil
 	end,
-	has = function(p5, p6)
-		for i, v in p5.routes do
-			if v.key == p6 then
+	has = function(p3, Key): boolean --[[ Line: 54 ]]
+		for _, route in p3.routes do
+			if route.key == Key then
 				return true
 			end
 		end
@@ -28,109 +28,114 @@ local t = {
 	end
 }
 
-function t.push(p7, p8)
-	-- upvalues: t (ref), array (ref), object (ref)
-	assert(t.indexOf(p7, p8.key) == nil, ("should not push route with duplicated key %s"):format(p8.key))
-	local var1 = array.concat(p7.routes, { p8 })
+function StateUtils.push(Tbl, p4) --[[ Line: 65 ]]
+	-- upvalues: StateUtils (copy), Array (copy), Object (copy)
+	assert(StateUtils.indexOf(Tbl, p4.key) == nil, ("should not push route with duplicated key %s"):format(p4.key))
+	local ConcatResult = Array.concat(Tbl.routes, { p4 })
 	
-	return object.assign(table.clone(p7), { index = #var1, routes = var1 })
+	return Object.assign(table.clone(Tbl), { index = #ConcatResult, routes = ConcatResult })
 end
 
-function t.pop(p7)
-	-- upvalues: object (ref)
-	if p7.index <= 1 then
-		return p7
-	end
-	local cloned = table.clone(p7.routes)
-	table.remove(cloned, #cloned)
-	
-	return object.assign(table.clone(p7), { index = #cloned, routes = cloned })
-end
-
-function t.jumpToIndex(p7, p8)
-	-- upvalues: object (ref)
-	if p8 == p7.index then
-		return p7
-	end
-	assert(p7.routes[p8] ~= nil, ("invalid index %d to jump to"):format(p8))
-	
-	return object.assign(table.clone(p7), { index = p8 })
-end
-
-function t.jumpTo(p7, p8)
-	-- upvalues: t (ref)
-	local var1 = t.indexOf(p7, p8)
-	assert(var1 ~= nil, ("attempt to jump to unknown key \"%s\""):format(p8))
-	
-	return t.jumpToIndex(p7, var1)
-end
-
-function t.back(p7)
-	-- upvalues: t (ref)
-	local var1 = p7.index - 1
-	
-	return if p7.routes[var1] then t.jumpToIndex(p7, var1) else p7
-end
-
-function t.forward(p7)
-	-- upvalues: t (ref)
-	local var1 = p7.index + 1
-	
-	return if p7.routes[var1] then t.jumpToIndex(p7, var1) else p7
-end
-
-function t.replaceAndPrune(p7, p8, p9)
-	-- upvalues: t (ref), object (ref)
-	local var1 = t.indexOf(p7, p8)
-	local var2 = t.replaceAtIndex(p7, var1, p9)
-	
-	return object.assign(table.clone(var2), { routes = { unpack(var2.routes, 1, var1) } })
-end
-
-function t.replaceAt(p7, p8, p9, p10)
-	-- upvalues: t (ref)
-	local var1 = t.indexOf(p7, p8)
-	local var2 = t.replaceAtIndex(p7, var1, p9)
-	var2.index = if p10 then p7.index else var1
-	
-	return var2
-end
-
-function t.replaceAtIndex(p7, p8, p9)
-	-- upvalues: object (ref)
-	assert(p7.routes[p8] ~= nil, ("invalid index %d for replacing route %s"):format(p8, p9.key))
-	
-	if p7.routes[p8] == p9 and p8 == p7.index then
-		return p7
-	end
-	local cloned = table.clone(p7.routes)
-	cloned[p8] = p9
-	
-	return object.assign(table.clone(p7), { index = p8, routes = cloned })
-end
-
-function t.reset(value, p7, p8)
-	-- upvalues: object (ref)
-	assert(type(p7) == "table" and #p7 > 0, "invalid routes to replace")
-	local var1 = p8 or #p7
-	
-	if #value.routes == #p7 and value.index == var1 then
-		local var2 = true
+function StateUtils.pop(Tbl) --[[ Line: 80 ]]
+	-- upvalues: Object (copy)
+	if Tbl.index <= 1 then
+		return Tbl
+	else
+		local Copy = table.clone(Tbl.routes)
+		table.remove(Copy, #Copy)
 		
-		for i = 1, #p7 do
-			if value.routes[i] == p7[i] then
+		return Object.assign(table.clone(Tbl), { index = #Copy, routes = Copy })
+	end
+end
+
+function StateUtils.jumpToIndex(Tbl, Index) --[[ Line: 95 ]]
+	-- upvalues: Object (copy)
+	if Index == Tbl.index then
+		return Tbl
+	else
+		assert(Tbl.routes[Index] ~= nil, ("invalid index %d to jump to"):format(Index))
+		
+		return Object.assign(table.clone(Tbl), { index = Index })
+	end
+end
+
+function StateUtils.jumpTo(p4, p5) --[[ Line: 108 ]]
+	-- upvalues: StateUtils (copy)
+	local IndexOfResult = StateUtils.indexOf(p4, p5)
+	assert(IndexOfResult ~= nil, ("attempt to jump to unknown key \"%s\""):format(p5))
+	
+	return StateUtils.jumpToIndex(p4, IndexOfResult)
+end
+
+function StateUtils.back(p4) --[[ Line: 116 ]]
+	-- upvalues: StateUtils (copy)
+	local IndexDelta = p4.index - 1
+	
+	return if p4.routes[IndexDelta] then StateUtils.jumpToIndex(p4, IndexDelta) else p4
+end
+
+function StateUtils.forward(p4) --[[ Line: 126 ]]
+	-- upvalues: StateUtils (copy)
+	local NewIndex = p4.index + 1
+	
+	return if p4.routes[NewIndex] then StateUtils.jumpToIndex(p4, NewIndex) else p4
+end
+
+function StateUtils.replaceAndPrune(p4, p5, p6) --[[ Line: 137 ]]
+	-- upvalues: StateUtils (copy), Object (copy)
+	local IndexOfResult = StateUtils.indexOf(p4, p5)
+	local ReplaceAtIndexResult = StateUtils.replaceAtIndex(p4, IndexOfResult, p6)
+	
+	return Object.assign(table.clone(ReplaceAtIndexResult), {
+		routes = { unpack(ReplaceAtIndexResult.routes, 1, IndexOfResult) }
+	})
+end
+
+function StateUtils.replaceAt(p4, p5, p6, p7) --[[ Line: 149 ]]
+	-- upvalues: StateUtils (copy)
+	local IndexOfResult = StateUtils.indexOf(p4, p5)
+	local ReplaceAtIndexResult = StateUtils.replaceAtIndex(p4, IndexOfResult, p6)
+	ReplaceAtIndexResult.index = if p7 then p4.index else IndexOfResult
+	
+	return ReplaceAtIndexResult
+end
+
+function StateUtils.replaceAtIndex(Tbl, Index, Route) --[[ Line: 159 ]]
+	-- upvalues: Object (copy)
+	assert(Tbl.routes[Index] ~= nil, ("invalid index %d for replacing route %s"):format(Index, Route.key))
+	
+	if Tbl.routes[Index] == Route and Index == Tbl.index then
+		return Tbl
+	else
+		local Copy = table.clone(Tbl.routes)
+		Copy[Index] = Route
+		
+		return Object.assign(table.clone(Tbl), { index = Index, routes = Copy })
+	end
+end
+
+function StateUtils.reset(Tbl, Routes, p4) --[[ Line: 178 ]]
+	-- upvalues: Object (copy)
+	assert(type(Routes) == "table" and #Routes > 0, "invalid routes to replace")
+	local CountRoutes = if p4 then p4 else #Routes
+	
+	if #Tbl.routes == #Routes and Tbl.index == CountRoutes then
+		local Flag = true
+		
+		for i = 1, #Routes do
+			if Tbl.routes[i] == Routes[i] then
 				continue
 			end
-			var2 = false
+			Flag = false
 			break
 		end
-		if var2 then
-			return value
+		if Flag then
+			return Tbl
 		end
 	end
-	assert(p7[var1] ~= nil, ("invalid index %d to reset"):format(var1))
+	assert(Routes[CountRoutes] ~= nil, ("invalid index %d to reset"):format(CountRoutes))
 	
-	return object.assign(table.clone(value), { index = var1, routes = p7 })
+	return Object.assign(table.clone(Tbl), { index = CountRoutes, routes = Routes })
 end
 
-return t
+return StateUtils

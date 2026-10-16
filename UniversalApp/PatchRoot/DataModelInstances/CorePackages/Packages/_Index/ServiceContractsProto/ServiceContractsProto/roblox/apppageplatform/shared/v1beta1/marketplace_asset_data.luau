@@ -1,18 +1,17 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
 local _ = require(script.Parent.custom_options)
-local marketplaceCatalogItemCommonModule = require(script.Parent.marketplace_catalog_item_common)
-local t_1 = {}
-t_1.__index = t_1
+local MarketplaceCatalogItemCommonModule = require(script.Parent.marketplace_catalog_item_common)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 110 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
 		name = if p1 == nil or p1.name == nil then "" else p1.name,
 		creator_name = if p1 == nil or p1.creator_name == nil then "" else p1.creator_name,
-		creator_has_verified_badge = if p1 == nil or p1.creator_has_verified_badge == nil then false else p1.creator_has_verified_badge,
+		creator_has_verified_badge = p1 ~= nil and p1.creator_has_verified_badge ~= nil and p1.creator_has_verified_badge,
 		asset_type = if p1 == nil or p1.asset_type == nil then "" else p1.asset_type,
 		price = if p1 == nil or p1.price == nil then 0 else p1.price,
 		description = if p1 == nil or p1.description == nil then nil else p1.description,
@@ -41,433 +40,313 @@ function t_1.new(p1)
 		is_purchasable = if p1 == nil or p1.is_purchasable == nil then nil else p1.is_purchasable,
 		variant_attributes = if p1 == nil or p1.variant_attributes == nil then {} else p1.variant_attributes,
 		genres = if p1 == nil or p1.genres == nil then {} else p1.genres
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 157 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var2, var8 = protoModule.writeString(var2, var3, self.id)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.id)
 	end
 	if self.name ~= nil and self.name ~= "" then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var4, var10 = protoModule.writeString(var4, var5, self.name)
-		buff = var4
-		var1 = var5
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.name)
 	end
 	if self.creator_name ~= nil and self.creator_name ~= "" then
-		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
-		var6, var12 = protoModule.writeString(var6, var7, self.creator_name)
-		buff = var6
-		var1 = var7
+		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.creator_name)
 	end
 	if self.creator_has_verified_badge then
-		local var8, var9 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.varint)
-		var8, var14 = protoModule.writeVarInt(var8, var9, if self.creator_has_verified_badge then 1 else 0)
-		buff = var8
-		var1 = var9
+		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult6, WriteTagResult2_5, if self.creator_has_verified_badge then 1 else 0)
 	end
 	if self.asset_type ~= nil and self.asset_type ~= "" then
-		local var10, var11 = protoModule.writeTag(buff, var1, 5, protoModule.wireTypes.lengthDelimited)
-		var10, var16 = protoModule.writeString(var10, var11, self.asset_type)
-		buff = var10
-		var1 = var11
+		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.asset_type)
 	end
 	if self.price ~= nil and self.price ~= 0 then
-		local var12, var13 = protoModule.writeTag(buff, var1, 6, protoModule.wireTypes.varint)
-		var12, var18 = protoModule.writeVarInt(var12, var13, self.price)
-		buff = var12
-		var1 = var13
+		local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult8, WriteTagResult2_7, self.price)
 	end
 	if self.description ~= nil then
-		local var14, var15 = protoModule.writeTag(buff, var1, 7, protoModule.wireTypes.lengthDelimited)
-		var14, var20 = protoModule.writeString(var14, var15, self.description)
-		buff = var14
-		var1 = var15
+		local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, self.description)
 	end
 	if self.creator_id ~= nil then
-		local var16, var17 = protoModule.writeTag(buff, var1, 8, protoModule.wireTypes.lengthDelimited)
-		var16, var22 = protoModule.writeString(var16, var17, self.creator_id)
-		buff = var16
-		var1 = var17
+		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.creator_id)
 	end
 	if self.creator_type ~= nil then
-		local var18, var19 = protoModule.writeTag(buff, var1, 9, protoModule.wireTypes.lengthDelimited)
-		var18, var24 = protoModule.writeString(var18, var19, self.creator_type)
-		buff = var18
-		var1 = var19
+		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.creator_type)
 	end
 	if self.creating_universe_id ~= nil then
-		local var20, var21 = protoModule.writeTag(buff, var1, 10, protoModule.wireTypes.lengthDelimited)
-		var20, var26 = protoModule.writeString(var20, var21, self.creating_universe_id)
-		buff = var20
-		var1 = var21
+		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult12, WriteTagResult2_11, self.creating_universe_id)
 	end
 	if self.taxonomy ~= nil and #self.taxonomy > 0 then
-		for i, v in self.taxonomy do
-			local var22 = v:encode()
-			local var23, var24 = protoModule.writeTag(buff, var1, 11, protoModule.wireTypes.lengthDelimited)
-			var23, var29 = protoModule.writeBuffer(var23, var24, var22, buffer.len(var22))
-			buff = var23
-			var1 = var24
+		for _, value in self.taxonomy do
+			local EncodeResult = value:encode()
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.render_properties ~= nil and #self.render_properties > 0 then
-		for i, v in self.render_properties do
-			local var25, var26 = protoModule.writeTag(buff, var1, 12, protoModule.wireTypes.lengthDelimited)
-			var25, var31 = protoModule.writeString(var25, var26, v)
-			buff = var25
-			var1 = var26
+		for _, renderProperty in self.render_properties do
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult15, WriteTagResult2_14, renderProperty)
 		end
 	end
 	if self.item_restrictions ~= nil and #self.item_restrictions > 0 then
-		for i, v in self.item_restrictions do
-			local var27, var28 = protoModule.writeTag(buff, var1, 13, protoModule.wireTypes.lengthDelimited)
-			var27, var33 = protoModule.writeString(var27, var28, v)
-			buff = var27
-			var1 = var28
+		for _, itemRestriction in self.item_restrictions do
+			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult19, WriteTagResult2_18, itemRestriction)
 		end
 	end
 	if self.is_high_definition ~= nil then
-		local var29, var30 = protoModule.writeTag(buff, var1, 14, protoModule.wireTypes.varint)
-		var29, var35 = protoModule.writeVarInt(var29, var30, if self.is_high_definition then 1 else 0)
-		buff = var29
-		var1 = var30
+		local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult22, WriteTagResult2_21, if self.is_high_definition then 1 else 0)
 	end
 	if self.is_pbr ~= nil then
-		local var31, var32 = protoModule.writeTag(buff, var1, 15, protoModule.wireTypes.varint)
-		var31, var37 = protoModule.writeVarInt(var31, var32, if self.is_pbr then 1 else 0)
-		buff = var31
-		var1 = var32
+		local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult23, WriteTagResult2_22, if self.is_pbr then 1 else 0)
 	end
 	if self.has_resellers ~= nil then
-		local var33, var34 = protoModule.writeTag(buff, var1, 16, protoModule.wireTypes.varint)
-		var33, var39 = protoModule.writeVarInt(var33, var34, if self.has_resellers then 1 else 0)
-		buff = var33
-		var1 = var34
+		local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult24, WriteTagResult2_23, if self.has_resellers then 1 else 0)
 	end
 	if self.lowest_price ~= nil then
-		local var35, var36 = protoModule.writeTag(buff, var1, 17, protoModule.wireTypes.varint)
-		var35, var41 = protoModule.writeVarInt(var35, var36, self.lowest_price)
-		buff = var35
-		var1 = var36
+		local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult17, WriteTagResult2_16, self.lowest_price)
 	end
 	if self.lowest_resale_price ~= nil then
-		local var37, var38 = protoModule.writeTag(buff, var1, 18, protoModule.wireTypes.varint)
-		var37, var43 = protoModule.writeVarInt(var37, var38, self.lowest_resale_price)
-		buff = var37
-		var1 = var38
+		local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult20, WriteTagResult2_19, self.lowest_resale_price)
 	end
 	if self.total_quantity ~= nil then
-		local var39, var40 = protoModule.writeTag(buff, var1, 19, protoModule.wireTypes.varint)
-		var39, var45 = protoModule.writeVarInt(var39, var40, self.total_quantity)
-		buff = var39
-		var1 = var40
+		local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult25, WriteTagResult2_24, self.total_quantity)
 	end
 	if self.units_available_for_consumption ~= nil then
-		local var41, var42 = protoModule.writeTag(buff, var1, 20, protoModule.wireTypes.varint)
-		var41, var47 = protoModule.writeVarInt(var41, var42, self.units_available_for_consumption)
-		buff = var41
-		var1 = var42
+		local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult18, WriteTagResult2_17, self.units_available_for_consumption)
 	end
 	if self.favorite_count ~= nil then
-		local var43, var44 = protoModule.writeTag(buff, var1, 21, protoModule.wireTypes.varint)
-		var43, var49 = protoModule.writeVarInt(var43, var44, self.favorite_count)
-		buff = var43
-		var1 = var44
+		local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult26, WriteTagResult2_25, self.favorite_count)
 	end
 	if self.timed_options ~= nil and #self.timed_options > 0 then
-		for i, v in self.timed_options do
-			local var45 = v:encode()
-			local var46, var47 = protoModule.writeTag(buff, var1, 22, protoModule.wireTypes.lengthDelimited)
-			var46, var52 = protoModule.writeBuffer(var46, var47, var45, buffer.len(var45))
-			buff = var46
-			var1 = var47
+		for _, timedOption in self.timed_options do
+			local EncodeResult = timedOption:encode()
+			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.collectible_item_id ~= nil then
-		local var48, var49 = protoModule.writeTag(buff, var1, 23, protoModule.wireTypes.lengthDelimited)
-		var48, var54 = protoModule.writeString(var48, var49, self.collectible_item_id)
-		buff = var48
-		var1 = var49
+		local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult21, WriteTagResult2_20, self.collectible_item_id)
 	end
 	if self.is_off_sale ~= nil then
-		local var50, var51 = protoModule.writeTag(buff, var1, 24, protoModule.wireTypes.varint)
-		var50, var56 = protoModule.writeVarInt(var50, var51, if self.is_off_sale then 1 else 0)
-		buff = var50
-		var1 = var51
+		local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, if self.is_off_sale then 1 else 0)
 	end
 	if self.sale_location_type ~= nil then
-		local var52, var53 = protoModule.writeTag(buff, var1, 25, protoModule.wireTypes.lengthDelimited)
-		var52, var58 = protoModule.writeString(var52, var53, self.sale_location_type)
-		buff = var52
-		var1 = var53
+		local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult27, WriteTagResult2_26, self.sale_location_type)
 	end
 	if self.item_status ~= nil and #self.item_status > 0 then
-		for i, v in self.item_status do
-			local var54, var55 = protoModule.writeTag(buff, var1, 26, protoModule.wireTypes.lengthDelimited)
-			var54, var60 = protoModule.writeString(var54, var55, v)
-			buff = var54
-			var1 = var55
+		for _, value1 in self.item_status do
+			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult28, WriteTagResult2_27, value1)
 		end
 	end
 	if self.price_status ~= nil then
-		local var56, var57 = protoModule.writeTag(buff, var1, 27, protoModule.wireTypes.lengthDelimited)
-		var56, var62 = protoModule.writeString(var56, var57, self.price_status)
-		buff = var56
-		var1 = var57
+		local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult29, WriteTagResult2_28, self.price_status)
 	end
 	if self.product_id ~= nil then
-		local var58, var59 = protoModule.writeTag(buff, var1, 28, protoModule.wireTypes.lengthDelimited)
-		var58, var64 = protoModule.writeString(var58, var59, self.product_id)
-		buff = var58
-		var1 = var59
+		local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult30, WriteTagResult2_29, self.product_id)
 	end
 	if self.owned ~= nil then
-		local var60, var61 = protoModule.writeTag(buff, var1, 29, protoModule.wireTypes.varint)
-		var60, var66 = protoModule.writeVarInt(var60, var61, if self.owned then 1 else 0)
-		buff = var60
-		var1 = var61
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, if self.owned then 1 else 0)
 	end
 	if self.is_purchasable ~= nil then
-		local var62, var63 = protoModule.writeTag(buff, var1, 30, protoModule.wireTypes.varint)
-		var62, var68 = protoModule.writeVarInt(var62, var63, if self.is_purchasable then 1 else 0)
-		buff = var62
-		var1 = var63
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult4, WriteTagResult2_3, if self.is_purchasable then 1 else 0)
 	end
 	if self.variant_attributes ~= nil and #self.variant_attributes > 0 then
-		for i, v in self.variant_attributes do
-			local var64 = v:encode()
-			local var65, var66 = protoModule.writeTag(buff, var1, 31, protoModule.wireTypes.lengthDelimited)
-			var65, var71 = protoModule.writeBuffer(var65, var66, var64, buffer.len(var64))
-			buff = var65
-			var1 = var66
+		for _, variantAttribute in self.variant_attributes do
+			local EncodeResult = variantAttribute:encode()
+			local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult32, WriteTagResult2_31, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.genres ~= nil and #self.genres > 0 then
-		for i, v in self.genres do
-			local var67, var68 = protoModule.writeTag(buff, var1, 32, protoModule.wireTypes.lengthDelimited)
-			var67, var73 = protoModule.writeString(var67, var68, v)
-			buff = var67
-			var1 = var68
+		for _, genre in self.genres do
+			local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult31, WriteTagResult2_30, genre)
 		end
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), marketplaceCatalogItemCommonModule (ref)
-	local var69 = t_1.new()
-	local var70 = 0
-	while var70 < buffer.len(p1) do
-		local _ = nil
-		local var71 = nil
-		local var72, var73, var74 = protoModule.readTag(p1, var70)
-		local var75 = var72
-		var71 = var73
-		var70 = var74
+function Module.decode(Buf) --[[ Line: 343 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), MarketplaceCatalogItemCommonModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v76 = ProtoModule.readTag(Buf, v1)
 		
-		if var71 == protoModule.wireTypes.varint then
-			if var75 == 4 then
-				local _ = nil
-				local var76, var77 = protoModule.readVarInt(p1, var70)
-				var70 = var77
-				var69.creator_has_verified_badge = var76 ~= 0
-			elseif var75 == 6 then
-				local _ = nil
-				local var78, var79 = protoModule.readVarIntI64(p1, var70)
-				var70 = var79
-				var69.price = var78
-			elseif var75 == 14 then
-				local _ = nil
-				local var80, var81 = protoModule.readVarInt(p1, var70)
-				var70 = var81
-				var69.is_high_definition = var80 ~= 0
-			elseif var75 == 15 then
-				local _ = nil
-				local var82, var83 = protoModule.readVarInt(p1, var70)
-				var70 = var83
-				var69.is_pbr = var82 ~= 0
-			elseif var75 == 16 then
-				local _ = nil
-				local var84, var85 = protoModule.readVarInt(p1, var70)
-				var70 = var85
-				var69.has_resellers = var84 ~= 0
-			elseif var75 == 17 then
-				local _ = nil
-				local var86, var87 = protoModule.readVarIntI64(p1, var70)
-				var70 = var87
-				var69.lowest_price = var86
-			elseif var75 == 18 then
-				local _ = nil
-				local var88, var89 = protoModule.readVarIntI64(p1, var70)
-				var70 = var89
-				var69.lowest_resale_price = var88
-			elseif var75 == 19 then
-				local _ = nil
-				local var90, var91 = protoModule.readVarIntI64(p1, var70)
-				var70 = var91
-				var69.total_quantity = var90
-			elseif var75 == 20 then
-				local _ = nil
-				local var92, var93 = protoModule.readVarIntI64(p1, var70)
-				var70 = var93
-				var69.units_available_for_consumption = var92
-			elseif var75 == 21 then
-				local _ = nil
-				local var94, var95 = protoModule.readVarIntI32(p1, var70)
-				var70 = var95
-				var69.favorite_count = var94
-			elseif var75 == 24 then
-				local _ = nil
-				local var96, var97 = protoModule.readVarInt(p1, var70)
-				var70 = var97
-				var69.is_off_sale = var96 ~= 0
-			elseif var75 == 29 then
-				local _ = nil
-				local var98, var99 = protoModule.readVarInt(p1, var70)
-				var70 = var99
-				var69.owned = var98 ~= 0
-			elseif var75 == 30 then
-				local _ = nil
-				local var100, var101 = protoModule.readVarInt(p1, var70)
-				var70 = var101
-				var69.is_purchasable = var100 ~= 0
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 4 then
+				local VarInt
+				VarInt, v76 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.creator_has_verified_badge = VarInt ~= 0
+			elseif Tag == 6 then
+				NewModule.price, v76 = ProtoModule.readVarIntI64(Buf, v1)
+			elseif Tag == 14 then
+				local VarInt1
+				VarInt1, v76 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.is_high_definition = VarInt1 ~= 0
+			elseif Tag == 15 then
+				local VarInt2
+				VarInt2, v76 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.is_pbr = VarInt2 ~= 0
+			elseif Tag == 16 then
+				local VarInt3
+				VarInt3, v76 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.has_resellers = VarInt3 ~= 0
+			elseif Tag == 17 then
+				NewModule.lowest_price, v76 = ProtoModule.readVarIntI64(Buf, v1)
+			elseif Tag == 18 then
+				NewModule.lowest_resale_price, v76 = ProtoModule.readVarIntI64(Buf, v1)
+			elseif Tag == 19 then
+				NewModule.total_quantity, v76 = ProtoModule.readVarIntI64(Buf, v1)
+			elseif Tag == 20 then
+				NewModule.units_available_for_consumption, v76 = ProtoModule.readVarIntI64(Buf, v1)
+			elseif Tag == 21 then
+				NewModule.favorite_count, v76 = ProtoModule.readVarIntI32(Buf, v1)
+			elseif Tag == 24 then
+				local VarInt4
+				VarInt4, v76 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.is_off_sale = VarInt4 ~= 0
+			elseif Tag == 29 then
+				local VarInt5
+				VarInt5, v76 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.owned = VarInt5 ~= 0
+			elseif Tag == 30 then
+				local VarInt6
+				VarInt6, v76 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.is_purchasable = VarInt6 ~= 0
 			else
-				local _ = nil
-				local var102, var103 = protoModule.readVarInt(p1, var70)
-				local _ = var102
-				var70 = var103
+				local _
+				_, v76 = ProtoModule.readVarInt(Buf, v1)
 			end
-		end
-		if var71 == protoModule.wireTypes.lengthDelimited then
-			if var75 == 1 then
-				local _ = nil
-				local var104, var105 = protoModule.readBuffer(p1, var70)
-				var70 = var105
-				var69.id = buffer.tostring(var104)
-			elseif var75 == 2 then
-				local _ = nil
-				local var106, var107 = protoModule.readBuffer(p1, var70)
-				var70 = var107
-				var69.name = buffer.tostring(var106)
-			elseif var75 == 3 then
-				local _ = nil
-				local var108, var109 = protoModule.readBuffer(p1, var70)
-				var70 = var109
-				var69.creator_name = buffer.tostring(var108)
-			elseif var75 == 5 then
-				local _ = nil
-				local var110, var111 = protoModule.readBuffer(p1, var70)
-				var70 = var111
-				var69.asset_type = buffer.tostring(var110)
-			elseif var75 == 7 then
-				local _ = nil
-				local var112, var113 = protoModule.readBuffer(p1, var70)
-				var70 = var113
-				var69.description = buffer.tostring(var112)
-			elseif var75 == 8 then
-				local _ = nil
-				local var114, var115 = protoModule.readBuffer(p1, var70)
-				var70 = var115
-				var69.creator_id = buffer.tostring(var114)
-			elseif var75 == 9 then
-				local _ = nil
-				local var116, var117 = protoModule.readBuffer(p1, var70)
-				var70 = var117
-				var69.creator_type = buffer.tostring(var116)
-			elseif var75 == 10 then
-				local _ = nil
-				local var118, var119 = protoModule.readBuffer(p1, var70)
-				var70 = var119
-				var69.creating_universe_id = buffer.tostring(var118)
-			elseif var75 == 11 then
-				local _ = nil
-				local var120, var121 = protoModule.readBuffer(p1, var70)
-				var70 = var121
-				table.insert(var69.taxonomy, marketplaceCatalogItemCommonModule.MarketplaceCatalogTaxonomyNode.decode(var120))
-			elseif var75 == 12 then
-				local _ = nil
-				local var122, var123 = protoModule.readBuffer(p1, var70)
-				var70 = var123
-				table.insert(var69.render_properties, buffer.tostring(var122))
-			elseif var75 == 13 then
-				local _ = nil
-				local var124, var125 = protoModule.readBuffer(p1, var70)
-				var70 = var125
-				table.insert(var69.item_restrictions, buffer.tostring(var124))
-			elseif var75 == 22 then
-				local _ = nil
-				local var126, var127 = protoModule.readBuffer(p1, var70)
-				var70 = var127
-				table.insert(var69.timed_options, marketplaceCatalogItemCommonModule.MarketplaceCatalogTimedOption.decode(var126))
-			elseif var75 == 23 then
-				local _ = nil
-				local var128, var129 = protoModule.readBuffer(p1, var70)
-				var70 = var129
-				var69.collectible_item_id = buffer.tostring(var128)
-			elseif var75 == 25 then
-				local _ = nil
-				local var130, var131 = protoModule.readBuffer(p1, var70)
-				var70 = var131
-				var69.sale_location_type = buffer.tostring(var130)
-			elseif var75 == 26 then
-				local _ = nil
-				local var132, var133 = protoModule.readBuffer(p1, var70)
-				var70 = var133
-				table.insert(var69.item_status, buffer.tostring(var132))
-			elseif var75 == 27 then
-				local _ = nil
-				local var134, var135 = protoModule.readBuffer(p1, var70)
-				var70 = var135
-				var69.price_status = buffer.tostring(var134)
-			elseif var75 == 28 then
-				local _ = nil
-				local var136, var137 = protoModule.readBuffer(p1, var70)
-				var70 = var137
-				var69.product_id = buffer.tostring(var136)
-			elseif var75 == 31 then
-				local _ = nil
-				local var138, var139 = protoModule.readBuffer(p1, var70)
-				var70 = var139
-				table.insert(var69.variant_attributes, marketplaceCatalogItemCommonModule.MarketplaceCatalogVariantAttribute.decode(var138))
-			elseif var75 == 32 then
-				local _ = nil
-				local var140, var141 = protoModule.readBuffer(p1, var70)
-				var70 = var141
-				table.insert(var69.genres, buffer.tostring(var140))
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.id = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.name = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.creator_name = buffer.tostring(Buffer3)
+			elseif Tag == 5 then
+				local Buffer4
+				Buffer4, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.asset_type = buffer.tostring(Buffer4)
+			elseif Tag == 7 then
+				local Buffer5
+				Buffer5, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.description = buffer.tostring(Buffer5)
+			elseif Tag == 8 then
+				local Buffer6
+				Buffer6, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.creator_id = buffer.tostring(Buffer6)
+			elseif Tag == 9 then
+				local Buffer7
+				Buffer7, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.creator_type = buffer.tostring(Buffer7)
+			elseif Tag == 10 then
+				local Buffer8
+				Buffer8, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.creating_universe_id = buffer.tostring(Buffer8)
+			elseif Tag == 11 then
+				local Buffer9
+				Buffer9, v76 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.taxonomy, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTaxonomyNode.decode(Buffer9))
+			elseif Tag == 12 then
+				local Buffer11
+				Buffer11, v76 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.render_properties, buffer.tostring(Buffer11))
+			elseif Tag == 13 then
+				local Buffer12
+				Buffer12, v76 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.item_restrictions, buffer.tostring(Buffer12))
+			elseif Tag == 22 then
+				local Buffer13
+				Buffer13, v76 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.timed_options, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTimedOption.decode(Buffer13))
+			elseif Tag == 23 then
+				local Buffer14
+				Buffer14, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.collectible_item_id = buffer.tostring(Buffer14)
+			elseif Tag == 25 then
+				local Buffer15
+				Buffer15, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.sale_location_type = buffer.tostring(Buffer15)
+			elseif Tag == 26 then
+				local Buffer16
+				Buffer16, v76 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.item_status, buffer.tostring(Buffer16))
+			elseif Tag == 27 then
+				local Buffer17
+				Buffer17, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.price_status = buffer.tostring(Buffer17)
+			elseif Tag == 28 then
+				local Buffer18
+				Buffer18, v76 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.product_id = buffer.tostring(Buffer18)
+			elseif Tag == 31 then
+				local Buffer19
+				Buffer19, v76 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.variant_attributes, MarketplaceCatalogItemCommonModule.MarketplaceCatalogVariantAttribute.decode(Buffer19))
+			elseif Tag == 32 then
+				local Buffer10
+				Buffer10, v76 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.genres, buffer.tostring(Buffer10))
 			else
-				local _ = nil
-				local var142, var143 = protoModule.readVarInt(p1, var70)
-				var70 = var143 + var142
+				local VarInt7, VarInt2_1 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2_1 + VarInt7
 			end
-		elseif var71 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var144, var145 = protoModule.readFixed32(p1, var70)
-			local _ = var144
-			var70 = var145
-		elseif var71 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var146, var147 = protoModule.readFixed64(p1, var70)
-			local _ = var146
-			var70 = var147
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v76 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v76 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var77)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var69
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 556 ]]
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -501,28 +380,28 @@ function t_1:jsonEncode()
 		t.creatingUniverseId = self.creating_universe_id
 	end
 	if self.taxonomy ~= nil and #self.taxonomy > 0 then
-		local t_1 = {}
+		local Taxonomy = {}
 		
-		for i, v in self.taxonomy do
-			table.insert(t_1, v:jsonEncode())
+		for _, value in self.taxonomy do
+			table.insert(Taxonomy, value:jsonEncode())
 		end
-		t.taxonomy = t_1
+		t.taxonomy = Taxonomy
 	end
 	if self.render_properties ~= nil and #self.render_properties > 0 then
-		local t_1 = {}
+		local RenderProperties = {}
 		
-		for i, v in self.render_properties do
-			table.insert(t_1, v)
+		for _, renderProperty in self.render_properties do
+			table.insert(RenderProperties, renderProperty)
 		end
-		t.renderProperties = t_1
+		t.renderProperties = RenderProperties
 	end
 	if self.item_restrictions ~= nil and #self.item_restrictions > 0 then
-		local t_1 = {}
+		local ItemRestrictions = {}
 		
-		for i, v in self.item_restrictions do
-			table.insert(t_1, v)
+		for _, itemRestriction in self.item_restrictions do
+			table.insert(ItemRestrictions, itemRestriction)
 		end
-		t.itemRestrictions = t_1
+		t.itemRestrictions = ItemRestrictions
 	end
 	if self.is_high_definition ~= nil then
 		t.isHighDefinition = self.is_high_definition
@@ -549,12 +428,12 @@ function t_1:jsonEncode()
 		t.favoriteCount = self.favorite_count
 	end
 	if self.timed_options ~= nil and #self.timed_options > 0 then
-		local t_1 = {}
+		local TimedOptions = {}
 		
-		for i, v in self.timed_options do
-			table.insert(t_1, v:jsonEncode())
+		for _, timedOption in self.timed_options do
+			table.insert(TimedOptions, timedOption:jsonEncode())
 		end
-		t.timedOptions = t_1
+		t.timedOptions = TimedOptions
 	end
 	if self.collectible_item_id ~= nil then
 		t.collectibleItemId = self.collectible_item_id
@@ -566,12 +445,12 @@ function t_1:jsonEncode()
 		t.saleLocationType = self.sale_location_type
 	end
 	if self.item_status ~= nil and #self.item_status > 0 then
-		local t_1 = {}
+		local ItemStatus = {}
 		
-		for i, v in self.item_status do
-			table.insert(t_1, v)
+		for _, value1 in self.item_status do
+			table.insert(ItemStatus, value1)
 		end
-		t.itemStatus = t_1
+		t.itemStatus = ItemStatus
 	end
 	if self.price_status ~= nil then
 		t.priceStatus = self.price_status
@@ -586,267 +465,267 @@ function t_1:jsonEncode()
 		t.isPurchasable = self.is_purchasable
 	end
 	if self.variant_attributes ~= nil and #self.variant_attributes > 0 then
-		local t_1 = {}
+		local VariantAttributes = {}
 		
-		for i, v in self.variant_attributes do
-			table.insert(t_1, v:jsonEncode())
+		for _, variantAttribute in self.variant_attributes do
+			table.insert(VariantAttributes, variantAttribute:jsonEncode())
 		end
-		t.variantAttributes = t_1
+		t.variantAttributes = VariantAttributes
 	end
 	if self.genres ~= nil and #self.genres > 0 then
-		local t_1 = {}
+		local Genres = {}
 		
-		for i, v in self.genres do
-			table.insert(t_1, v)
+		for _, genre in self.genres do
+			table.insert(Genres, genre)
 		end
-		t.genres = t_1
+		t.genres = Genres
 	end
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), marketplaceCatalogItemCommonModule (ref)
-	local var148 = t_1.new()
+function Module:jsonDecode() --[[ Line: 718 ]]
+	-- upvalues: Module (copy), MarketplaceCatalogItemCommonModule (copy)
+	local NewModule = Module.new()
 	
 	if self.id ~= nil then
-		var148.id = self.id
+		NewModule.id = self.id
 	end
 	if self.name ~= nil then
-		var148.name = self.name
+		NewModule.name = self.name
 	end
 	if self.creator_name ~= nil then
-		var148.creator_name = self.creator_name
+		NewModule.creator_name = self.creator_name
 	end
 	if self.creatorName ~= nil then
-		var148.creator_name = self.creatorName
+		NewModule.creator_name = self.creatorName
 	end
 	if self.creator_has_verified_badge ~= nil then
-		var148.creator_has_verified_badge = self.creator_has_verified_badge
+		NewModule.creator_has_verified_badge = self.creator_has_verified_badge
 	end
 	if self.creatorHasVerifiedBadge ~= nil then
-		var148.creator_has_verified_badge = self.creatorHasVerifiedBadge
+		NewModule.creator_has_verified_badge = self.creatorHasVerifiedBadge
 	end
 	if self.asset_type ~= nil then
-		var148.asset_type = self.asset_type
+		NewModule.asset_type = self.asset_type
 	end
 	if self.assetType ~= nil then
-		var148.asset_type = self.assetType
+		NewModule.asset_type = self.assetType
 	end
 	if self.price ~= nil then
-		var148.price = self.price
+		NewModule.price = self.price
 	end
 	if self.description ~= nil then
-		var148.description = self.description
+		NewModule.description = self.description
 	end
 	if self.creator_id ~= nil then
-		var148.creator_id = self.creator_id
+		NewModule.creator_id = self.creator_id
 	end
 	if self.creatorId ~= nil then
-		var148.creator_id = self.creatorId
+		NewModule.creator_id = self.creatorId
 	end
 	if self.creator_type ~= nil then
-		var148.creator_type = self.creator_type
+		NewModule.creator_type = self.creator_type
 	end
 	if self.creatorType ~= nil then
-		var148.creator_type = self.creatorType
+		NewModule.creator_type = self.creatorType
 	end
 	if self.creating_universe_id ~= nil then
-		var148.creating_universe_id = self.creating_universe_id
+		NewModule.creating_universe_id = self.creating_universe_id
 	end
 	if self.creatingUniverseId ~= nil then
-		var148.creating_universe_id = self.creatingUniverseId
+		NewModule.creating_universe_id = self.creatingUniverseId
 	end
 	if self.taxonomy ~= nil then
-		local t = {}
+		local Taxonomy = {}
 		
-		for i, v in self.taxonomy do
-			table.insert(t, marketplaceCatalogItemCommonModule.MarketplaceCatalogTaxonomyNode.jsonDecode(v))
+		for _, value in self.taxonomy do
+			table.insert(Taxonomy, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTaxonomyNode.jsonDecode(value))
 		end
-		var148.taxonomy = t
+		NewModule.taxonomy = Taxonomy
 	end
 	if self.render_properties ~= nil then
-		local t = {}
+		local Render_properties = {}
 		
-		for i, v in self.render_properties do
-			table.insert(t, v)
+		for _, renderProperty in self.render_properties do
+			table.insert(Render_properties, renderProperty)
 		end
-		var148.render_properties = t
+		NewModule.render_properties = Render_properties
 	end
 	if self.renderProperties ~= nil then
-		local t = {}
+		local Render_properties = {}
 		
-		for i, v in self.renderProperties do
-			table.insert(t, v)
+		for _, renderProperty1 in self.renderProperties do
+			table.insert(Render_properties, renderProperty1)
 		end
-		var148.render_properties = t
+		NewModule.render_properties = Render_properties
 	end
 	if self.item_restrictions ~= nil then
-		local t = {}
+		local Item_restrictions = {}
 		
-		for i, v in self.item_restrictions do
-			table.insert(t, v)
+		for _, itemRestriction in self.item_restrictions do
+			table.insert(Item_restrictions, itemRestriction)
 		end
-		var148.item_restrictions = t
+		NewModule.item_restrictions = Item_restrictions
 	end
 	if self.itemRestrictions ~= nil then
-		local t = {}
+		local Item_restrictions = {}
 		
-		for i, v in self.itemRestrictions do
-			table.insert(t, v)
+		for _, itemRestriction1 in self.itemRestrictions do
+			table.insert(Item_restrictions, itemRestriction1)
 		end
-		var148.item_restrictions = t
+		NewModule.item_restrictions = Item_restrictions
 	end
 	if self.is_high_definition ~= nil then
-		var148.is_high_definition = self.is_high_definition
+		NewModule.is_high_definition = self.is_high_definition
 	end
 	if self.isHighDefinition ~= nil then
-		var148.is_high_definition = self.isHighDefinition
+		NewModule.is_high_definition = self.isHighDefinition
 	end
 	if self.is_pbr ~= nil then
-		var148.is_pbr = self.is_pbr
+		NewModule.is_pbr = self.is_pbr
 	end
 	if self.isPbr ~= nil then
-		var148.is_pbr = self.isPbr
+		NewModule.is_pbr = self.isPbr
 	end
 	if self.has_resellers ~= nil then
-		var148.has_resellers = self.has_resellers
+		NewModule.has_resellers = self.has_resellers
 	end
 	if self.hasResellers ~= nil then
-		var148.has_resellers = self.hasResellers
+		NewModule.has_resellers = self.hasResellers
 	end
 	if self.lowest_price ~= nil then
-		var148.lowest_price = self.lowest_price
+		NewModule.lowest_price = self.lowest_price
 	end
 	if self.lowestPrice ~= nil then
-		var148.lowest_price = self.lowestPrice
+		NewModule.lowest_price = self.lowestPrice
 	end
 	if self.lowest_resale_price ~= nil then
-		var148.lowest_resale_price = self.lowest_resale_price
+		NewModule.lowest_resale_price = self.lowest_resale_price
 	end
 	if self.lowestResalePrice ~= nil then
-		var148.lowest_resale_price = self.lowestResalePrice
+		NewModule.lowest_resale_price = self.lowestResalePrice
 	end
 	if self.total_quantity ~= nil then
-		var148.total_quantity = self.total_quantity
+		NewModule.total_quantity = self.total_quantity
 	end
 	if self.totalQuantity ~= nil then
-		var148.total_quantity = self.totalQuantity
+		NewModule.total_quantity = self.totalQuantity
 	end
 	if self.units_available_for_consumption ~= nil then
-		var148.units_available_for_consumption = self.units_available_for_consumption
+		NewModule.units_available_for_consumption = self.units_available_for_consumption
 	end
 	if self.unitsAvailableForConsumption ~= nil then
-		var148.units_available_for_consumption = self.unitsAvailableForConsumption
+		NewModule.units_available_for_consumption = self.unitsAvailableForConsumption
 	end
 	if self.favorite_count ~= nil then
-		var148.favorite_count = self.favorite_count
+		NewModule.favorite_count = self.favorite_count
 	end
 	if self.favoriteCount ~= nil then
-		var148.favorite_count = self.favoriteCount
+		NewModule.favorite_count = self.favoriteCount
 	end
 	if self.timed_options ~= nil then
-		local t = {}
+		local Timed_options = {}
 		
-		for i, v in self.timed_options do
-			table.insert(t, marketplaceCatalogItemCommonModule.MarketplaceCatalogTimedOption.jsonDecode(v))
+		for _, timedOption in self.timed_options do
+			table.insert(Timed_options, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTimedOption.jsonDecode(timedOption))
 		end
-		var148.timed_options = t
+		NewModule.timed_options = Timed_options
 	end
 	if self.timedOptions ~= nil then
-		local t = {}
+		local Timed_options = {}
 		
-		for i, v in self.timedOptions do
-			table.insert(t, marketplaceCatalogItemCommonModule.MarketplaceCatalogTimedOption.jsonDecode(v))
+		for _, timedOption1 in self.timedOptions do
+			table.insert(Timed_options, MarketplaceCatalogItemCommonModule.MarketplaceCatalogTimedOption.jsonDecode(timedOption1))
 		end
-		var148.timed_options = t
+		NewModule.timed_options = Timed_options
 	end
 	if self.collectible_item_id ~= nil then
-		var148.collectible_item_id = self.collectible_item_id
+		NewModule.collectible_item_id = self.collectible_item_id
 	end
 	if self.collectibleItemId ~= nil then
-		var148.collectible_item_id = self.collectibleItemId
+		NewModule.collectible_item_id = self.collectibleItemId
 	end
 	if self.is_off_sale ~= nil then
-		var148.is_off_sale = self.is_off_sale
+		NewModule.is_off_sale = self.is_off_sale
 	end
 	if self.isOffSale ~= nil then
-		var148.is_off_sale = self.isOffSale
+		NewModule.is_off_sale = self.isOffSale
 	end
 	if self.sale_location_type ~= nil then
-		var148.sale_location_type = self.sale_location_type
+		NewModule.sale_location_type = self.sale_location_type
 	end
 	if self.saleLocationType ~= nil then
-		var148.sale_location_type = self.saleLocationType
+		NewModule.sale_location_type = self.saleLocationType
 	end
 	if self.item_status ~= nil then
-		local t = {}
+		local Item_status = {}
 		
-		for i, v in self.item_status do
-			table.insert(t, v)
+		for _, value1 in self.item_status do
+			table.insert(Item_status, value1)
 		end
-		var148.item_status = t
+		NewModule.item_status = Item_status
 	end
 	if self.itemStatus ~= nil then
-		local t = {}
+		local Item_status = {}
 		
-		for i, v in self.itemStatus do
-			table.insert(t, v)
+		for _, value2 in self.itemStatus do
+			table.insert(Item_status, value2)
 		end
-		var148.item_status = t
+		NewModule.item_status = Item_status
 	end
 	if self.price_status ~= nil then
-		var148.price_status = self.price_status
+		NewModule.price_status = self.price_status
 	end
 	if self.priceStatus ~= nil then
-		var148.price_status = self.priceStatus
+		NewModule.price_status = self.priceStatus
 	end
 	if self.product_id ~= nil then
-		var148.product_id = self.product_id
+		NewModule.product_id = self.product_id
 	end
 	if self.productId ~= nil then
-		var148.product_id = self.productId
+		NewModule.product_id = self.productId
 	end
 	if self.owned ~= nil then
-		var148.owned = self.owned
+		NewModule.owned = self.owned
 	end
 	if self.is_purchasable ~= nil then
-		var148.is_purchasable = self.is_purchasable
+		NewModule.is_purchasable = self.is_purchasable
 	end
 	if self.isPurchasable ~= nil then
-		var148.is_purchasable = self.isPurchasable
+		NewModule.is_purchasable = self.isPurchasable
 	end
 	if self.variant_attributes ~= nil then
-		local t = {}
+		local Variant_attributes = {}
 		
-		for i, v in self.variant_attributes do
-			table.insert(t, marketplaceCatalogItemCommonModule.MarketplaceCatalogVariantAttribute.jsonDecode(v))
+		for _, variantAttribute in self.variant_attributes do
+			table.insert(Variant_attributes, MarketplaceCatalogItemCommonModule.MarketplaceCatalogVariantAttribute.jsonDecode(variantAttribute))
 		end
-		var148.variant_attributes = t
+		NewModule.variant_attributes = Variant_attributes
 	end
 	if self.variantAttributes ~= nil then
-		local t = {}
+		local Variant_attributes1 = {}
 		
-		for i, v in self.variantAttributes do
-			table.insert(t, marketplaceCatalogItemCommonModule.MarketplaceCatalogVariantAttribute.jsonDecode(v))
+		for _, variantAttribute1 in self.variantAttributes do
+			table.insert(Variant_attributes1, MarketplaceCatalogItemCommonModule.MarketplaceCatalogVariantAttribute.jsonDecode(variantAttribute1))
 		end
-		var148.variant_attributes = t
+		NewModule.variant_attributes = Variant_attributes1
 	end
 	if self.genres ~= nil then
-		local t = {}
+		local Genres = {}
 		
-		for i, v in self.genres do
-			table.insert(t, v)
+		for _, genre in self.genres do
+			table.insert(Genres, genre)
 		end
-		var148.genres = t
+		NewModule.genres = Genres
 	end
-	return var148
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "MarketplaceAssetData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.MarketplaceAssetData"
 }
-t.MarketplaceAssetData = t_1
-typeRegistryModule.default:register(t.MarketplaceAssetData)
+local config = { MarketplaceAssetData = Module }
+TypeRegistryModule.default:register(config.MarketplaceAssetData)
 
-return { MarketplaceAssetData = t.MarketplaceAssetData }
+return { MarketplaceAssetData = config.MarketplaceAssetData }

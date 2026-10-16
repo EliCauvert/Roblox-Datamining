@@ -1,12 +1,12 @@
-﻿local reactModule = require(script:FindFirstAncestor("RoactAppExperiment").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("RoactAppExperiment").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		var1.current = p1
+return function(Current) --[[ Line: 9 | Named "usePrevious" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: UseRefResult (copy), Current (copy)
+		UseRefResult.current = Current
 	end)
 	
-	return var1.current
+	return UseRefResult.current
 end

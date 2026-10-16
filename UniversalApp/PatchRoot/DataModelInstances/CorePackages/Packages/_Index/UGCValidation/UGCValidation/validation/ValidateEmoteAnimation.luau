@@ -1,56 +1,58 @@
-﻿local parent = script.Parent.Parent
-local util = parent.util
-local _ = require(util.Types)
-local createEmoteSchemaModule = require(util.createEmoteSchema)
-local failureReasonsAccumulatorModule = require(util.FailureReasonsAccumulator)
-local validation = parent.validation
-local validateSingleInstanceModule = require(validation.validateSingleInstance)
-local validateInstanceTreeModule = require(validation.validateInstanceTree)
-local validateTagsModule = require(validation.validateTags)
-local validateDependenciesModule = require(validation.validateDependencies)
-local validatePropertiesSensibleModule = require(validation.ValidatePropertiesSensible)
-local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local t = {
-	validateStructure = function(p1)
-		-- upvalues: validateSingleInstanceModule (ref), validateInstanceTreeModule (ref), createEmoteSchemaModule (ref)
-		local var1, var2 = validateSingleInstanceModule(p1.instances or {}, p1)
+﻿local Parent = script.Parent.Parent
+local Util = Parent.util
+local _ = require(Util.Types)
+local CreateEmoteSchemaModule = require(Util.createEmoteSchema)
+local FailureReasonsAccumulatorModule = require(Util.FailureReasonsAccumulator)
+local Validation = Parent.validation
+local ValidateSingleInstanceModule = require(Validation.validateSingleInstance)
+local ValidateInstanceTreeModule = require(Validation.validateInstanceTree)
+local ValidateTagsModule = require(Validation.validateTags)
+local ValidateDependenciesModule = require(Validation.validateDependencies)
+local ValidatePropertiesSensibleModule = require(Validation.ValidatePropertiesSensible)
+local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
+local ValidateEmoteAnimationModule = {
+	validateStructure = function(p1) --[[ Line: 24 ]]
+		-- upvalues: ValidateSingleInstanceModule (copy), ValidateInstanceTreeModule (copy), CreateEmoteSchemaModule (copy)
+		local ValidateSingleInstanceModuleResult, ValidateSingleInstanceModuleResult2 = ValidateSingleInstanceModule(p1.instances or {}, p1)
 		
-		if not var1 then
-			return false, var2
+		if not ValidateSingleInstanceModuleResult then
+			return false, ValidateSingleInstanceModuleResult2
 		end
-		local var3 = p1.instances[1]
-		local var4, var5 = validateInstanceTreeModule(createEmoteSchemaModule(), var3, p1)
+		local InstancesEntry = p1.instances[1]
+		local ValidateInstanceTreeModuleResult, ValidateInstanceTreeModuleResult2 = ValidateInstanceTreeModule(CreateEmoteSchemaModule(), InstancesEntry, p1)
 		
-		if var4 then
-			return true, nil, var3
+		if ValidateInstanceTreeModuleResult then
+			return true, nil, InstancesEntry
+		else
+			return false, ValidateInstanceTreeModuleResult2
 		end
-		return false, var5
 	end
 }
 
-function t.validate(p1)
-	-- upvalues: t (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), validateTagsModule (ref)
-	local _ = nil
-	local var1, var2, var3 = t.validateStructure(p1)
+function ValidateEmoteAnimationModule.validate(p1) --[[ Line: 45 ]]
+	-- upvalues: ValidateEmoteAnimationModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), ValidateDependenciesModule (copy), FailureReasonsAccumulatorModule (copy), ValidateTagsModule (copy)
+	local ValidateStructureResult, ValidateStructureResult2, ValidateStructureResult3 = ValidateEmoteAnimationModule.validateStructure(p1)
 	
-	if not var1 then
-		return false, var2
-	elseif getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-		local var4, var5 = validatePropertiesSensibleModule.validate(var3, p1)
+	if not ValidateStructureResult then
+		return false, ValidateStructureResult2
+	end
+	if GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
+		local ValidateResult, ValidateResult2 = ValidatePropertiesSensibleModule.validate(ValidateStructureResult3, p1)
 		
-		if not var4 then
-			return false, var5
+		if not ValidateResult then
+			return false, ValidateResult2
 		end
 	end
-	var19, var16 = validateDependenciesModule(var3, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
+	local ValidateDependenciesModuleResult, ValidateDependenciesModuleResult2 = ValidateDependenciesModule(ValidateStructureResult3, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
 	
-	if var19 then
-		local var6 = failureReasonsAccumulatorModule.new()
-		var6:updateReasons(validateTagsModule(var3, p1))
+	if ValidateDependenciesModuleResult then
+		local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
+		NewFailureReasonsAccumulator:updateReasons(ValidateTagsModule(ValidateStructureResult3, p1))
 		
-		return var6:getFinalResults()
+		return NewFailureReasonsAccumulator:getFinalResults()
+	else
+		return false, ValidateDependenciesModuleResult2
 	end
-	return false, var3
 end
 
-return t
+return ValidateEmoteAnimationModule

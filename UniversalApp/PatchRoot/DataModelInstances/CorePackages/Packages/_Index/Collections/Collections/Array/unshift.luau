@@ -1,19 +1,19 @@
-﻿local dEV = _G.__DEV__
-local parent = script.Parent
-local isArrayModule = require(parent.isArray)
-local _ = require(parent.Parent.Parent.ES7Types)
+﻿local DEV = _G.__DEV__
+local Parent = script.Parent
+local IsArrayModule = require(Parent.isArray)
+local _ = require(Parent.Parent.Parent.ES7Types)
 
-return function(p1, ...)
-	-- upvalues: dEV (ref), isArrayModule (ref)
-	if dEV and not isArrayModule(p1) then
-		error(string.format("Array.unshift called on non-array %s", typeof(p1)))
+return function(List, ...): number --[[ Line: 23 ]]
+	-- upvalues: DEV (copy), IsArrayModule (copy)
+	if DEV and not IsArrayModule(List) then
+		error(string.format("Array.unshift called on non-array %s", (typeof(List))))
 	end
-	local var1 = select("#", ...)
+	local Selected: number = select("#", ...)
 	
-	if var1 > 0 then
-		for i = var1, 1, -1 do
-			table.insert(p1, 1, select(i, ...))
+	if Selected > 0 then
+		for i = Selected, 1, -1 do
+			table.insert(List, 1, (select(i, ...)))
 		end
 	end
-	return #p1
+	return #List
 end

@@ -1,13 +1,13 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
-local overlayContextModule = require(script.Parent.OverlayContext)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+local OverlayContextModule = require(script.Parent.OverlayContext)
 
-return function()
-	-- upvalues: reactModule (ref), overlayContextModule (ref)
-	local var1 = reactModule.useContext(overlayContextModule)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref)
-		var1.requestOverlay()
-	end, { var1.requestOverlay })
+return function() --[[ Line: 8 | Named "useScreen" ]]
+	-- upvalues: ReactModule (copy), OverlayContextModule (copy)
+	local UseContextResult = ReactModule.useContext(OverlayContextModule)
+	ReactModule.useLayoutEffect(function() --[[ Line: 11 ]]
+		-- upvalues: UseContextResult (copy)
+		UseContextResult.requestOverlay()
+	end, { UseContextResult.requestOverlay })
 	
-	return var1.screen
+	return UseContextResult.screen
 end

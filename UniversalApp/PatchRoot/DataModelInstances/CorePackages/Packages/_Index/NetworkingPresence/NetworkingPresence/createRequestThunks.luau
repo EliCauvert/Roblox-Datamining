@@ -1,12 +1,12 @@
-﻿local networkRequests = script.Parent.networkRequests
-local createGetPresencesFromUserIdsModule = require(networkRequests.createGetPresencesFromUserIds)
-local createSetInvisibilityStatusModule = require(networkRequests.createSetInvisibilityStatus)
+﻿local NetworkRequests = script.Parent.networkRequests
+local CreateGetPresencesFromUserIdsModule = require(NetworkRequests.createGetPresencesFromUserIds)
+local CreateSetInvisibilityStatusModule = require(NetworkRequests.createSetInvisibilityStatus)
 local _ = require(script.Parent.networkingPresenceTypes)
 
-return function(p1)
-	-- upvalues: createGetPresencesFromUserIdsModule (ref), createSetInvisibilityStatusModule (ref)
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: CreateGetPresencesFromUserIdsModule (copy), CreateSetInvisibilityStatusModule (copy)
 	return {
-		GetPresencesFromUserIds = createGetPresencesFromUserIdsModule(p1),
-		SetInvisibilityStatus = createSetInvisibilityStatusModule(p1)
+		GetPresencesFromUserIds = CreateGetPresencesFromUserIdsModule(p1),
+		SetInvisibilityStatus = CreateSetInvisibilityStatusModule(p1)
 	}
 end

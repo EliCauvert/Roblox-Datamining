@@ -1,12 +1,12 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
 return {
-	enc = function(p1)
-		-- upvalues: httpService (ref)
-		return httpService:JSONEncode(p1)
+	enc = function(Input) --[[ Line: 5 ]]
+		-- upvalues: HttpService (copy)
+		return HttpService:JSONEncode(Input)
 	end,
-	dec = function(p1)
-		-- upvalues: httpService (ref)
-		return httpService:JSONDecode(p1)
+	dec = function(Input) --[[ Line: 9 ]]
+		-- upvalues: HttpService (copy)
+		return HttpService:JSONDecode(Input)
 	end
 }

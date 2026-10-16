@@ -1,72 +1,72 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local diagnosticsModule = require(viewRecycler.Core.Diagnostics)
-local recyclingScopeModule = require(viewRecycler.Core.RecyclingScope)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DiagnosticsModule = require(ViewRecycler.Core.Diagnostics)
+local RecyclingScopeModule = require(ViewRecycler.Core.RecyclingScope)
 
-local function directBatch(p1)
-	p1()
+local function directBatch(Callback: () -> ()) --[[ Line: 20 ]]
+	Callback()
 end
 
-return function(p1)
-	-- upvalues: directBatch (ref), recyclingScopeModule (ref), diagnosticsModule (ref)
-	local itemViewAdapter = p1.itemViewAdapter
+return function(p1) --[[ Line: 24 | Named "createItemViewRecyclingScope" ]]
+	-- upvalues: directBatch (copy), RecyclingScopeModule (copy), DiagnosticsModule (copy)
+	local ItemViewAdapter = p1.itemViewAdapter
 	local t = {}
-	local t_1 = {}
-	local t_2 = {}
+	local CreateResults = {}
+	local Keys = {}
 	
-	local function flushLifecycleNotifications()
-		-- upvalues: t_2 (write), itemViewAdapter (ref), t_1 (write), t (ref)
-		if #t_2 > 0 and itemViewAdapter.onEvicted ~= nil then
-			itemViewAdapter.onEvicted(t_2)
+	local function flushLifecycleNotifications() --[[ Line: 35 ]]
+		-- upvalues: Keys (ref), ItemViewAdapter (copy), CreateResults (ref), t (copy)
+		if #Keys > 0 and ItemViewAdapter.onEvicted ~= nil then
+			ItemViewAdapter.onEvicted(Keys)
 		end
-		if #t_1 > 0 and itemViewAdapter.onCreated ~= nil then
-			local t_3 = {}
+		if #CreateResults > 0 and ItemViewAdapter.onCreated ~= nil then
+			local List = {}
 			
-			for i, v in t_1 do
-				if t[v] then
-					table.insert(t_3, v)
+			for _, createResult in CreateResults do
+				if t[createResult] then
+					table.insert(List, createResult)
 				end
 			end
-			if #t_3 > 0 then
-				itemViewAdapter.onCreated(t_3)
+			if #List > 0 then
+				ItemViewAdapter.onCreated(List)
 			end
 		end
-		t_1 = {}
-		t_2 = {}
+		CreateResults = {}
+		Keys = {}
 	end
 	
-	local batch = itemViewAdapter.batch or directBatch
-	local diagnostics = p1.diagnostics
+	local Batch = ItemViewAdapter.batch or directBatch
+	local DiagnosticsFunction = p1.diagnostics
 	
-	return recyclingScopeModule({
+	return RecyclingScopeModule({
 		adapter = {
-			create = function(p2)
-				-- upvalues: itemViewAdapter (ref), t (ref), t_1 (write)
-				local var1 = itemViewAdapter.create(p2)
-				t[var1] = true
-				table.insert(t_1, var1)
+			create = function(p2) --[[ Line: 66 ]]
+				-- upvalues: ItemViewAdapter (copy), t (copy), CreateResults (ref)
+				local NewItemViewAdapter = ItemViewAdapter.create(p2)
+				t[NewItemViewAdapter] = true
+				table.insert(CreateResults, NewItemViewAdapter)
 				
-				return var1
+				return NewItemViewAdapter
 			end,
-			destroy = function(p2)
-				-- upvalues: t (ref), t_2 (write)
-				t[p2] = nil
-				table.insert(t_2, p2)
+			destroy = function(Key) --[[ Line: 72 ]]
+				-- upvalues: t (copy), Keys (ref)
+				t[Key] = nil
+				table.insert(Keys, Key)
 			end,
-			batch = function(p2)
-				-- upvalues: batch (ref), flushLifecycleNotifications (ref)
-				local ok, status = pcall(batch, p2)
+			batch = function(p2) --[[ Line: 55 ]]
+				-- upvalues: Batch (copy), flushLifecycleNotifications (copy)
+				local Success, Result = pcall(Batch, p2)
 				flushLifecycleNotifications()
 				
-				if not ok then
-					error(status, 0)
+				if not Success then
+					error(Result, 0)
 				end
 			end
 		},
 		maxPoolSize = p1.maxPoolSize,
-		onPoolChanged = if diagnostics == nil then nil else function(p2)
-			-- upvalues: diagnostics (ref), diagnosticsModule (copy)
-			diagnostics({
-				kind = diagnosticsModule.EventKind.PoolChanged,
+		onPoolChanged = if DiagnosticsFunction == nil then nil else function(p2) --[[ Line: 81 ]]
+			-- upvalues: DiagnosticsFunction (copy), DiagnosticsModule (upval)
+			DiagnosticsFunction({
+				kind = DiagnosticsModule.EventKind.PoolChanged,
 				action = p2.action,
 				itemViewType = p2.viewType,
 				occupiedDelta = p2.occupiedDelta,

@@ -1,14 +1,15 @@
 ﻿local _ = require(script:FindFirstAncestor("Utils").Parent.Types)
-local nodeTypeConfigModule = require(script.Parent.NodeTypeConfig)
+local NodeTypeConfigModule = require(script.Parent.NodeTypeConfig)
 
-return function(p1)
-	-- upvalues: nodeTypeConfigModule (ref)
-	local type = nodeTypeConfigModule[p1.type]
+return function(p1) --[[ Line: 7 | Named "getNodeTypeConfig" ]]
+	-- upvalues: NodeTypeConfigModule (copy)
+	local NodeTypeConfigModuleEntry = NodeTypeConfigModule[p1.type]
 	
-	if type then
-		return type
+	if NodeTypeConfigModuleEntry then
+		return NodeTypeConfigModuleEntry
+	else
+		warn(`No node type config found for node: {p1.name} {p1.text} of type: {p1.type}`)
+		
+		return nil
 	end
-	warn(`No node type config found for node: {p1.name} {p1.text} of type: {p1.type}`)
-	
-	return nil
 end

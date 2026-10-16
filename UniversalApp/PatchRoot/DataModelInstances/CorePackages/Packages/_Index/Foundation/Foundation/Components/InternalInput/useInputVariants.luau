@@ -1,27 +1,27 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1)
-	-- upvalues: inputSizeModule (ref)
-	local ceiled = math.ceil(p1.Stroke.Standard)
+local function variantsFactory(p1) --[[ Line: 27 ]]
+	-- upvalues: InputSizeModule (copy)
+	local Ceiled = math.ceil(p1.Stroke.Standard)
 	
 	return {
 		common = {
 			container = {
 				tag = "row align-x-left align-y-top auto-xy",
-				padding = UDim.new(0, ceiled)
+				padding = UDim.new(0, Ceiled)
 			},
-			input = { stroke = { thickness = ceiled } }
+			input = { stroke = { thickness = Ceiled } }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = { container = { tag = "gap-medium" } },
-			[inputSizeModule.Small] = { container = { tag = "gap-medium" } },
-			[inputSizeModule.Medium] = { container = { tag = "gap-medium" } },
-			[inputSizeModule.Large] = { container = { tag = "gap-medium" } }
+			[InputSizeModule.XSmall] = { container = { tag = "gap-medium" } },
+			[InputSizeModule.Small] = { container = { tag = "gap-medium" } },
+			[InputSizeModule.Medium] = { container = { tag = "gap-medium" } },
+			[InputSizeModule.Large] = { container = { tag = "gap-medium" } }
 		},
 		labelPosition = {
 			[Enum.HorizontalAlignment.Left] = { container = { tag = "flex-x-between size-full-0" } },
@@ -30,9 +30,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local internalInput = variantsContextModule.useVariants("InternalInput", variantsFactory, p1)
+return function(p1, p2, p3) --[[ Line: 52 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local InternalInput = VariantsContextModule.useVariants("InternalInput", variantsFactory, p1)
 	
-	return composeStyleVariantModule(internalInput.common, internalInput.sizes[p2], internalInput.labelPosition[p3])
+	return ComposeStyleVariantModule(InternalInput.common, InternalInput.sizes[p2], InternalInput.labelPosition[p3])
 end

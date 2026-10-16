@@ -1,39 +1,41 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
 local _ = require(script.Parent.Parent.util.Types)
 
-return function(p1, p2)
-	-- upvalues: UGCValidationService (ref)
-	local t = {
+return function(AssetTypeEnum, List) --[[ Line: 7 ]]
+	-- upvalues: UGCValidationService (copy)
+	local config = {
 		isServer = true,
 		validateMeshPartAccessories = false,
-		assetTypeEnum = p1
+		assetTypeEnum = AssetTypeEnum
 	}
-	local t_1 = {}
-	local t_2 = {}
+	local EditableMeshes = {}
+	local EditableImages = {}
 	
-	for i, v in p2 do
-		for i_1, v_1 in v:GetDescendants() do
-			if v_1:IsA("BinaryStringValue") then
-				if v_1.Name == "MeshId" or v_1.Name == "CageMeshId" or v_1.Name == "ReferenceMeshId" then
-					if not t_1[v_1.Parent] then
-						t_1[v_1.Parent] = {}
+	for _, value in List do
+		for _, BinaryStringValue in value:GetDescendants() do
+			if BinaryStringValue:IsA("BinaryStringValue") then
+				if BinaryStringValue.Name == "MeshId" or BinaryStringValue.Name == "CageMeshId" or BinaryStringValue.Name == "ReferenceMeshId" then
+					if not EditableMeshes[BinaryStringValue.Parent] then
+						EditableMeshes[BinaryStringValue.Parent] = {}
 					end
-					t_1[v_1.Parent][v_1.Name] = {
+					EditableMeshes[BinaryStringValue.Parent][BinaryStringValue.Name] = {
 						created = true,
-						instance = UGCValidationService:CreateEditableMeshFromBinaryStringRobloxOnly(v_1)
+						instance = UGCValidationService:CreateEditableMeshFromBinaryStringRobloxOnly(BinaryStringValue)
 					}
-				elseif not t_2[v_1.Parent] then
-					t_2[v_1.Parent] = {}
+				else
+					if not EditableImages[BinaryStringValue.Parent] then
+						EditableImages[BinaryStringValue.Parent] = {}
+					end
+					EditableImages[BinaryStringValue.Parent][BinaryStringValue.Name] = {
+						created = true,
+						instance = UGCValidationService:CreateEditableImageFromBinaryStringRobloxOnly(BinaryStringValue)
+					}
 				end
-				t_2[v_1.Parent][v_1.Name] = {
-					created = true,
-					instance = UGCValidationService:CreateEditableImageFromBinaryStringRobloxOnly(v_1)
-				}
 			end
 		end
 	end
-	t.editableMeshes = t_1
-	t.editableImages = t_2
+	config.editableMeshes = EditableMeshes
+	config.editableImages = EditableImages
 	
-	return t
+	return config
 end

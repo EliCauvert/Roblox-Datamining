@@ -1,12 +1,12 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
-local cursorContextModule = require(script.Parent.CursorContext)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+local CursorContextModule = require(script.Parent.CursorContext)
 
-return function(p1)
-	-- upvalues: reactModule (ref), cursorContextModule (ref)
-	return reactModule.createElement(cursorContextModule.Consumer, {
-		render = function(p2)
-			-- upvalues: p1 (ref)
-			return p1(p2.getCursor)
+return function(Callback) --[[ Line: 8 | Named "withCursorMigration" ]]
+	-- upvalues: ReactModule (copy), CursorContextModule (copy)
+	return ReactModule.createElement(CursorContextModule.Consumer, {
+		render = function(p1) --[[ Line: 10 ]]
+			-- upvalues: Callback (copy)
+			return Callback(p1.getCursor)
 		end
 	})
 end

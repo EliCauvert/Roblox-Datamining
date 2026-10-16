@@ -1,37 +1,38 @@
-﻿local contentProviderService = game:GetService("ContentProvider")
-local reactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
+﻿local ContentProvider = game:GetService("ContentProvider")
+local ReactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref), contentProviderService (ref)
-	local var1, var2 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), contentProviderService (copy)
-		if not p1 or p1 == "" then
-			var2(false)
-			
-			return
-		elseif contentProviderService:GetAssetFetchStatus(p1) == Enum.AssetFetchStatus.Success then
-			var2(true)
+return function(ContentId) --[[ Line: 8 ]]
+	-- upvalues: ReactModule (copy), ContentProvider (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: ContentId (copy), UseStateResult2 (copy), ContentProvider (upval)
+		if not ContentId or ContentId == "" then
+			UseStateResult2(false)
 			
 			return
 		end
-		var2(false)
-		local var3 = true
-		task.spawn(function()
-			-- upvalues: contentProviderService (copy), p1 (copy), var3 (write), var2 (copy)
-			contentProviderService:PreloadAsync({ p1 }, function(p2, p3)
-				-- upvalues: var3 (copy), p1 (copy), var2 (copy)
-				if var3 and p2 == p1 and p3 == Enum.AssetFetchStatus.Success then
-					var2(true)
+		if ContentProvider:GetAssetFetchStatus(ContentId) == Enum.AssetFetchStatus.Success then
+			UseStateResult2(true)
+			
+			return
+		end
+		UseStateResult2(false)
+		local Flag = true
+		task.spawn(function() --[[ Line: 26 ]]
+			-- upvalues: ContentProvider (upval), ContentId (upval), Flag (ref), UseStateResult2 (upval)
+			ContentProvider:PreloadAsync({ ContentId }, function(ContentId1, AssetFetchStatus) --[[ Line: 27 ]]
+				-- upvalues: Flag (upval), ContentId (upval), UseStateResult2 (upval)
+				if Flag and ContentId1 == ContentId and AssetFetchStatus == Enum.AssetFetchStatus.Success then
+					UseStateResult2(true)
 				end
 			end)
 		end)
 		
-		return function()
-			-- upvalues: var3 (write)
-			var3 = false
+		return function() --[[ Line: 36 ]]
+			-- upvalues: Flag (ref)
+			Flag = false
 		end
-	end, { p1 })
+	end, { ContentId })
 	
-	return var1
+	return UseStateResult
 end

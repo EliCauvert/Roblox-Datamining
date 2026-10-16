@@ -1,127 +1,122 @@
-﻿local parent = script.Parent.Parent
-local _ = parent.lib
-local src = parent.src
-local requestModule = require(src.request)
-local cookiesModule = require(src.cookies)
-local ratelimitModule = require(src.ratelimit)
-local utilModule = require(src.util)
+﻿local Parent = script.Parent.Parent
+local _ = Parent.lib
+local Src = Parent.src
+local RequestModule = require(Src.request)
+local CookiesModule = require(Src.cookies)
+local RatelimitModule = require(Src.ratelimit)
+local UtilModule = require(Src.util)
 
-local function randomString(p1)
-	local var1 = ""
+local function randomString(p1): string --[[ Line: 15 ]]
+	local Text = ""
 	
 	for _ = 1, p1 do
-		var1 ..= string.char(math.random(97, 122))
+		Text ..= string.char(math.random(97, 122))
 	end
-	return var1
+	return Text
 end
 
-local t = {}
-t.__index = t
+local SessionModule = {}
+SessionModule.__index = SessionModule
 
-function t.new(p2)
-	-- upvalues: t (ref), cookiesModule (ref)
-	local tbl = setmetatable({}, t)
-	tbl.headers = {}
-	tbl.cookies = cookiesModule.new()
-	tbl.base_url = p2 or ""
-	tbl._ratelimit = nil
-	tbl.ignore_ratelimit = false
-	tbl.before_request = nil
-	tbl.after_request = nil
-	tbl.no_stats = false
-	tbl.log = true
+function SessionModule.new(p2) --[[ Line: 28 ]]
+	-- upvalues: SessionModule (copy), CookiesModule (copy)
+	local self = setmetatable({}, SessionModule)
+	self.headers = {}
+	self.cookies = CookiesModule.new()
+	self.base_url = p2 or ""
+	self._ratelimit = nil
+	self.ignore_ratelimit = false
+	self.before_request = nil
+	self.after_request = nil
+	self.no_stats = false
+	self.log = true
 	
-	return tbl
+	return self
 end
 
-function t:set_ratelimit(p2, p3)
-	-- upvalues: ratelimitModule (ref), randomString (ref)
+function SessionModule:set_ratelimit(p2, p3) --[[ Line: 52 ]]
+	-- upvalues: RatelimitModule (copy), randomString (copy)
 	if not p2 then
 		self:disable_ratelimit()
 	end
-	p3 = p3 or 60
+	local P4 = p3 or 60
 	
 	if self._ratelimit then
-		ratelimitModule.ratelimit[self._ratelimit.id] = nil
+		RatelimitModule.ratelimit[self._ratelimit.id] = nil
 	end
-	self._ratelimit = ratelimitModule.get("http.session-" .. randomString(12), p2, p3)
+	self._ratelimit = RatelimitModule.get("http.session-" .. randomString(12), p2, P4)
 end
 
-function t:disable_ratelimit()
-	-- upvalues: ratelimitModule (ref)
+function SessionModule:disable_ratelimit() --[[ Line: 70 ]]
+	-- upvalues: RatelimitModule (copy)
 	if self._ratelimit then
-		ratelimitModule.ratelimit[self._ratelimit.id] = nil
+		RatelimitModule.ratelimit[self._ratelimit.id] = nil
 		self._ratelimit = nil
 	end
 end
 
-function t:set_headers(p2)
-	for i, v in pairs(p2) do
-		self.headers[i] = v
+function SessionModule:set_headers(Headers) --[[ Line: 79 ]]
+	for i, header in pairs(Headers) do
+		self.headers[i] = header
 	end
 	return self
 end
 
-function t:Request(p3, p4, p5)
-	-- upvalues: requestModule (ref)
-	p5 = p5 or {}
+function SessionModule:Request(p2, Text: string, p3) --[[ Line: 89 ]]
+	-- upvalues: RequestModule (copy)
+	local P11 = p3 or {}
 	
-	if p4:sub(1, 7) ~= "http://" and p4:sub(1, 8) ~= "https://" then
-		p4 = self.base_url .. p6
+	if Text:sub(1, 7) ~= "http://" and Text:sub(1, 8) ~= "https://" then
+		Text = self.base_url .. Text
 	end
-	p5 = self.log
-	
-	if p5.log ~= nil then
-		p5 = p5.log
-	end
-	local var2 = requestModule.new(p3, p4, {
+	local NewRequest = RequestModule.new(p2, Text, {
 		headers = self.headers,
-		query = p5.query,
-		data = p5.data,
-		log = p5,
-		cookies = p5.cookies or self.cookies,
-		ignore_ratelimit = p5.ignore_ratelimit or self.ignore_ratelimit,
+		query = P11.query,
+		data = P11.data,
+		log = if P11.log == nil then self.log else P11.log,
+		cookies = P11.cookies or self.cookies,
+		ignore_ratelimit = P11.ignore_ratelimit or self.ignore_ratelimit,
 		no_stats = self.no_stats or false
 	})
 	
 	if self._ratelimit then
-		table.insert(var2._ratelimits, self._ratelimit)
+		table.insert(NewRequest._ratelimits, self._ratelimit)
 	end
-	var2:set_headers(p5.headers or {})
+	NewRequest:set_headers(P11.headers or {})
 	
-	function var9._callback(p6)
-		-- upvalues: self (ref)
-		for i, v in ipairs(p6.cookies.cookies) do
-			table.insert(self.cookies.cookies, v)
+	function NewRequest._callback(p4) --[[ Line: 122 ]]
+		-- upvalues: self (copy)
+		for _, cooky in ipairs(p4.cookies.cookies) do
+			table.insert(self.cookies.cookies, cooky)
 		end
 	end
 	
-	return var2
+	return NewRequest
 end
 
-function t:request(p6, p7, p8)
-	return self:Request(p6, p7, p8 or {}):send()
+function SessionModule:request(p4, p5, p6) --[[ Line: 131 ]]
+	return self:Request(p4, p5, p6 or {}):send()
 end
 
-t.send = utilModule.deprecate(t.request, "0.5", "Session:send")
+SessionModule.send = UtilModule.deprecate(SessionModule.request, "0.5", "Session:send")
 
-function t:promise_request(p6, p7, p8)
-	return self:Request(p6, p7, p8 or {}):send(true)
+function SessionModule:promise_request(p4, p5, p6) --[[ Line: 149 ]]
+	return self:Request(p4, p5, p6 or {}):send(true)
 end
 
-t.promise_send = utilModule.deprecate(t.promise_request, "0.5", "Session:promise_send")
+SessionModule.promise_send = UtilModule.deprecate(SessionModule.promise_request, "0.5", "Session:promise_send")
 
-for i, v in pairs({
+for _, Text in pairs({
 	"GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE", "PATCH"
 }) do
-	t[v:lower()] = function(p6, p7, p8)
-		-- upvalues: v (ref)
-		return p6:send(v, p7, p8)
+	SessionModule[Text:lower()] = function(p4, p5, p6) --[[ Line: 161 ]]
+		-- upvalues: Text (copy)
+		return p4:send(Text, p5, p6)
 	end
 	
-	t["promise_" .. v:lower()] = function(p6, p7, p8)
-		-- upvalues: v (ref)
-		return p6:promise_send(v, p7, p8)
+	SessionModule["promise_" .. Text:lower()] = function(p4, p5, p6) --[[ Line: 165 ]]
+		-- upvalues: Text (copy)
+		return p4:promise_send(Text, p5, p6)
 	end
 end
-return t
+return SessionModule

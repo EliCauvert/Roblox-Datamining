@@ -1,68 +1,68 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local _ = require(foundation.Components.Types)
-local flagsModule = require(foundation.Utility.Flags)
-local getTestIdTagModule = require(foundation.Utility.getTestIdTag)
-local indexBindableModule = require(foundation.Utility.indexBindable)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local getEngineFeature = flagsModule.FoundationGuiObjectInputSinkProperty and pcall(game.GetEngineFeature, game, "GuiObjectInputSink")
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local _ = require(Foundation.Components.Types)
+local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
+local IndexBindableModule = require(Foundation.Utility.indexBindable)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local Success = require(Foundation.Utility.Flags).FoundationGuiObjectInputSinkProperty and pcall(game.GetEngineFeature, game, "GuiObjectInputSink")
 
-return function(p1, p2)
-	-- upvalues: indexBindableModule (ref), getEngineFeature (ref), reactIsModule (ref), withCommonPropsModule (ref), reactModule (ref), getTestIdTagModule (ref)
-	if type(p2) == "table" then
-		p2.AutoLocalize = p1.AutoLocalize
-		p2.AutomaticSize = p1.AutomaticSize
-		p2.BackgroundColor3 = if p1.backgroundStyle then indexBindableModule(p1.backgroundStyle, "Color3") else nil
-		p2.BackgroundTransparency = if p1.backgroundStyle then indexBindableModule(p1.backgroundStyle, "Transparency") else nil
-		p2.BorderSizePixel = p1.BorderSizePixel
-		p2.BorderColor3 = p1.BorderColor3
-		p2.BorderMode = p1.BorderMode
-		p2.ClipsDescendants = p1.ClipsDescendants
+return function(Frame: Frame, p1) --[[ Line: 52 | Named "withGuiObjectProps" ]]
+	-- upvalues: IndexBindableModule (copy), Success (copy), ReactIsModule (copy), WithCommonPropsModule (copy), ReactModule (copy), GetTestIdTagModule (copy)
+	if type(p1) == "table" then
+		p1.AutoLocalize = Frame.AutoLocalize
+		p1.AutomaticSize = Frame.AutomaticSize
+		p1.BackgroundColor3 = if Frame.backgroundStyle then IndexBindableModule(Frame.backgroundStyle, "Color3") else nil
+		p1.BackgroundTransparency = if Frame.backgroundStyle then IndexBindableModule(Frame.backgroundStyle, "Transparency") else nil
+		p1.BorderSizePixel = Frame.BorderSizePixel
+		p1.BorderColor3 = Frame.BorderColor3
+		p1.BorderMode = Frame.BorderMode
+		p1.ClipsDescendants = Frame.ClipsDescendants
 		
-		if getEngineFeature then
-			p2.InputSink = p1.InputSink
+		if Success then
+			p1.InputSink = Frame.InputSink
 		end
-		p2.Rotation = p1.Rotation
-		p2.SizeConstraint = p1.SizeConstraint
+		p1.Rotation = Frame.Rotation
+		p1.SizeConstraint = Frame.SizeConstraint
 		
-		if p1.selection then
-			p2.Selectable = p1.selection.Selectable
-			p2.SelectionImageObject = p1.selection.SelectionImageObject
-			p2.SelectionOrder = p1.selection.SelectionOrder
-			p2.NextSelectionDown = p1.selection.NextSelectionDown
-			p2.NextSelectionLeft = p1.selection.NextSelectionLeft
-			p2.NextSelectionRight = p1.selection.NextSelectionRight
-			p2.NextSelectionUp = p1.selection.NextSelectionUp
+		if Frame.selection then
+			p1.Selectable = Frame.selection.Selectable
+			p1.SelectionImageObject = Frame.selection.SelectionImageObject
+			p1.SelectionOrder = Frame.selection.SelectionOrder
+			p1.NextSelectionDown = Frame.selection.NextSelectionDown
+			p1.NextSelectionLeft = Frame.selection.NextSelectionLeft
+			p1.NextSelectionRight = Frame.selection.NextSelectionRight
+			p1.NextSelectionUp = Frame.selection.NextSelectionUp
 		end
-		if p1.selectionGroup ~= nil then
-			if type(p1.selectionGroup) == "boolean" or reactIsModule.isBinding(p1.selectionGroup) then
-				p2.SelectionGroup = p1.selectionGroup
+		if Frame.selectionGroup ~= nil then
+			if type(Frame.selectionGroup) == "boolean" or ReactIsModule.isBinding(Frame.selectionGroup) then
+				p1.SelectionGroup = Frame.selectionGroup
 			else
-				local selectionGroup = p1.selectionGroup
-				p2.SelectionGroup = true
-				p2.SelectionBehaviorUp = selectionGroup.SelectionBehaviorUp
-				p2.SelectionBehaviorDown = selectionGroup.SelectionBehaviorDown
-				p2.SelectionBehaviorLeft = selectionGroup.SelectionBehaviorLeft
-				p2.SelectionBehaviorRight = selectionGroup.SelectionBehaviorRight
+				local SelectionGroup = Frame.selectionGroup
+				p1.SelectionGroup = true
+				p1.SelectionBehaviorUp = SelectionGroup.SelectionBehaviorUp
+				p1.SelectionBehaviorDown = SelectionGroup.SelectionBehaviorDown
+				p1.SelectionBehaviorLeft = SelectionGroup.SelectionBehaviorLeft
+				p1.SelectionBehaviorRight = SelectionGroup.SelectionBehaviorRight
 			end
 		end
-		p2.Size = p1.Size
+		p1.Size = Frame.Size
 	end
-	local var1 = withCommonPropsModule(p1, p2)
-	var1[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged
-	var1.onAbsoluteSizeChanged = nil
-	var1[reactModule.Change.AbsolutePosition] = p1.onAbsolutePositionChanged
-	var1.onAbsolutePositionChanged = nil
-	local var2 = getTestIdTagModule(var1.testId)
+	local WithCommonPropsModuleResult = WithCommonPropsModule(Frame, p1)
+	WithCommonPropsModuleResult[ReactModule.Change.AbsoluteSize] = Frame.onAbsoluteSizeChanged
+	WithCommonPropsModuleResult.onAbsoluteSizeChanged = nil
+	WithCommonPropsModuleResult[ReactModule.Change.AbsolutePosition] = Frame.onAbsolutePositionChanged
+	WithCommonPropsModuleResult.onAbsolutePositionChanged = nil
+	local TestIdTagModule = GetTestIdTagModule(WithCommonPropsModuleResult.testId)
 	
-	if var1[reactModule.Tag] and var2 then
-		var1[reactModule.Tag] ..= " " .. var9
+	if WithCommonPropsModuleResult[ReactModule.Tag] and TestIdTagModule then
+		local Tag = ReactModule.Tag
+		WithCommonPropsModuleResult[Tag] ..= " " .. TestIdTagModule
 	else
-		var1[reactModule.Tag] = var1[reactModule.Tag] or var2
+		WithCommonPropsModuleResult[ReactModule.Tag] = WithCommonPropsModuleResult[ReactModule.Tag] or TestIdTagModule
 	end
-	var1.testId = nil
+	WithCommonPropsModuleResult.testId = nil
 	
-	return var1
+	return WithCommonPropsModuleResult
 end

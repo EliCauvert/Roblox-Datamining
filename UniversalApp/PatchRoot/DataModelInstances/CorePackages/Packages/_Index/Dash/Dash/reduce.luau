@@ -1,8 +1,8 @@
-﻿return function(p1, p2, p3)
-	local var1 = p3
+﻿return function(List, Callback, p1) --[[ Line: 14 | Named "reduce" ]]
+	local v1 = p1
 	
-	for i, v in p1 do
-		var1 = p2(var1, v, i)
+	for i, value in List do
+		v1 = Callback(v1, value, i)
 	end
-	return var1
+	return v1
 end

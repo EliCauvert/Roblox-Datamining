@@ -1,58 +1,64 @@
-﻿local parent = script.Parent.Parent.Parent
-local object = require(parent.LuauPolyfill).Object
-local reactModule = require(parent.React)
-local useMemo = reactModule.useMemo
-local useContext = reactModule.useContext
-local t = {}
-local var1 = reactModule.createContext(nil)
-t.VirtualizedListContext = var1
+﻿local Parent = script.Parent.Parent.Parent
+local Object = require(Parent.LuauPolyfill).Object
+local v1 = require(Parent.SafeFlags).createGetFFlag("MemoizeVirtualizedListContext")()
+local ReactModule = require(Parent.React)
+local UseMemoFunction = ReactModule.useMemo
+local UseContextFunction = ReactModule.useContext
+local Context = ReactModule.createContext(nil)
+local VirtualizedListContextModule = { VirtualizedListContext = Context }
 
 if _G.__DEV__ then
-	var1.displayName = "VirtualizedListContext"
+	Context.displayName = "VirtualizedListContext"
 end
-function t.VirtualizedListContextResetter(value)
-	-- upvalues: reactModule (ref), var1 (ref)
-	return reactModule.createElement(var1.Provider, { value = nil }, value.children)
+function VirtualizedListContextModule.VirtualizedListContextResetter(p1) --[[ Line: 96 ]]
+	-- upvalues: ReactModule (copy), Context (copy)
+	return ReactModule.createElement(Context.Provider, { value = nil }, p1.children)
 end
 
-function t.VirtualizedListContextProvider(p1)
-	-- upvalues: useMemo (ref), reactModule (ref), var1 (ref)
-	local value = p1.value
+function VirtualizedListContextModule.VirtualizedListContextProvider(p1) --[[ Line: 109 ]]
+	-- upvalues: UseMemoFunction (copy), ReactModule (copy), Context (copy)
+	local Value = p1.value
 	
-	return reactModule.createElement(var1.Provider, {
-		value = useMemo(function()
-			-- upvalues: value (ref)
+	return ReactModule.createElement(Context.Provider, {
+		value = UseMemoFunction(function() --[[ Line: 116 ]]
+			-- upvalues: Value (copy)
 			return {
 				cellKey = nil,
-				getScrollMetrics = value.getScrollMetrics,
-				horizontal = value.horizontal,
-				getOutermostParentListRef = value.getOutermostParentListRef,
-				getNestedChildState = value.getNestedChildState,
-				registerAsNestedChild = value.registerAsNestedChild,
-				unregisterAsNestedChild = value.unregisterAsNestedChild,
+				getScrollMetrics = Value.getScrollMetrics,
+				horizontal = Value.horizontal,
+				getOutermostParentListRef = Value.getOutermostParentListRef,
+				getNestedChildState = Value.getNestedChildState,
+				registerAsNestedChild = Value.registerAsNestedChild,
+				unregisterAsNestedChild = Value.unregisterAsNestedChild,
 				debugInfo = {
-					cellKey = value.debugInfo.cellKey,
-					horizontal = value.debugInfo.horizontal,
-					listKey = value.debugInfo.listKey,
-					parent = value.debugInfo.parent
+					cellKey = Value.debugInfo.cellKey,
+					horizontal = Value.debugInfo.horizontal,
+					listKey = Value.debugInfo.listKey,
+					parent = Value.debugInfo.parent
 				}
 			}
 		end, {
-			value.getScrollMetrics, value.horizontal, value.getOutermostParentListRef,
-			value.getNestedChildState, value.registerAsNestedChild,
-			value.unregisterAsNestedChild, value.debugInfo.cellKey,
-			value.debugInfo.horizontal, value.debugInfo.listKey, value.debugInfo.parent
+			Value.getScrollMetrics, Value.horizontal, Value.getOutermostParentListRef,
+			Value.getNestedChildState, Value.registerAsNestedChild,
+			Value.unregisterAsNestedChild, Value.debugInfo.cellKey,
+			Value.debugInfo.horizontal, Value.debugInfo.listKey, Value.debugInfo.parent
 		})
 	}, p1.children)
 end
 
-function t.VirtualizedListCellContextProvider(p1)
-	-- upvalues: useContext (ref), var1 (ref), reactModule (ref), object (ref)
-	local var2 = useContext(var1)
+function VirtualizedListContextModule.VirtualizedListCellContextProvider(p1) --[[ Line: 156 ]]
+	-- upvalues: UseContextFunction (copy), Context (copy), v1 (copy), UseMemoFunction (copy), Object (copy), ReactModule (copy)
+	local CellKey = p1.cellKey
+	local Children = p1.children
+	local UseContextResult = UseContextFunction(Context)
+	local UseMemoResult = if v1 then UseMemoFunction(function() --[[ Line: 164 ]]
+		-- upvalues: UseContextResult (copy), Object (upval), CellKey (copy)
+		return if UseContextResult == nil then nil else Object.assign(table.clone(UseContextResult), { cellKey = CellKey })
+	end, { UseContextResult, CellKey }) else nil
 	
-	return reactModule.createElement(var1.Provider, {
-		value = if var2 == nil then nil else object.assign(table.clone(var2), { cellKey = p1.cellKey })
-	}, p1.children)
+	return ReactModule.createElement(Context.Provider, {
+		value = if v1 then UseMemoResult elseif UseContextResult == nil then nil else Object.assign(table.clone(UseContextResult), { cellKey = CellKey })
+	}, Children)
 end
 
-return t
+return VirtualizedListContextModule

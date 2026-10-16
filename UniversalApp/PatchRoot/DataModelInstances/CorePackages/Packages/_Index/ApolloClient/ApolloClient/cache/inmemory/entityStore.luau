@@ -1,422 +1,438 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local instanceof = luauPolyfillModule.instanceof
-local object = luauPolyfillModule.Object
-local set = luauPolyfillModule.Set
-local isCallableModule = require(parent.luaUtils.isCallable)
-local objectKeysForEachModule = require(parent.luaUtils.objectKeysForEach)
-local dep = require(parent.optimism).dep
-local invariant = require(parent.jsutils.invariant).invariant
-local equalModule = require(parent.jsutils.equal)
-local trie = require(parent.wry.trie).Trie
-local utilitiesModule = require(script.Parent.Parent.Parent.utilities)
-local isReference = utilitiesModule.isReference
-local makeReference = utilitiesModule.makeReference
-local deepMerger = utilitiesModule.DeepMerger
-local maybeDeepFreeze = utilitiesModule.maybeDeepFreeze
-local canUseWeakMap = utilitiesModule.canUseWeakMap
-local isNonNullObject = utilitiesModule.isNonNullObject
+﻿local EntityStore = {}
+local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local InstanceofFunction = LuauPolyfillModule.instanceof
+local Object = LuauPolyfillModule.Object
+local Set = LuauPolyfillModule.Set
+local IsCallableModule = require(Parent.luaUtils.isCallable)
+local ObjectKeysForEachModule = require(Parent.luaUtils.objectKeysForEach)
+local DepFunction = require(Parent.optimism).dep
+local InvariantFunction = require(Parent.jsutils.invariant).invariant
+local EqualModule = require(Parent.jsutils.equal)
+local Trie = require(Parent.wry.trie).Trie
+local UtilitiesModule = require(script.Parent.Parent.Parent.utilities)
+local IsReferenceFunction = UtilitiesModule.isReference
+local MakeReferenceFunction = UtilitiesModule.makeReference
+local DeepMerger = UtilitiesModule.DeepMerger
+local MaybeDeepFreezeFunction = UtilitiesModule.maybeDeepFreeze
+local CanUseWeakMap = UtilitiesModule.canUseWeakMap
+local IsNonNullObjectFunction = UtilitiesModule.isNonNullObject
 local _ = require(script.Parent.types)
-local helpersModule = require(script.Parent.helpers)
-local hasOwn = helpersModule.hasOwn
-local fieldNameFromStoreName = helpersModule.fieldNameFromStoreName
+local HelpersModule = require(script.Parent.helpers)
+local HasOwnFunction = HelpersModule.hasOwn
+local FieldNameFromStoreNameFunction = HelpersModule.fieldNameFromStoreName
 local _ = require(script.Parent.policies)
 local _ = require(script.Parent.Parent.core.types.Cache)
 local _ = require(script.Parent.Parent.core.types.common)
-local t_1 = {}
-local _ = nil
+local None = {}
+local delModifier = nil
 
-local function delModifier()
-	-- upvalues: t_1 (ref)
-	return t_1
+delModifier = function() --[[ Line: 80 | Named "delModifier" ]]
+	-- upvalues: None (copy)
+	return None
 end
 
-local t_2 = {}
-local tbl = nil
-local tbl_1 = nil
-local makeDepKey = nil
-local storeObjectReconciler = nil
-local var1 = nil
-local t_3 = {}
-t_3.__index = t_3
+local None1 = {}
+local Module = nil
+local Module1 = nil
+local Callback = nil
+local StoreObjectReconciler = nil
+local Callback1 = nil
+local Module2 = {}
+Module2.__index = Module2
 
-function t_3.new(p1, p2)
-	-- upvalues: t_3 (ref), maybeDeepFreeze (ref), isReference (ref), makeReference (ref)
-	local tbl = setmetatable({}, t_3)
-	tbl.policies = p1
-	tbl.group = p2
-	tbl.data = {}
-	tbl.rootIds = {}
-	tbl.refs = {}
+function Module2.new(Policies, Group) --[[ Line: 136 ]]
+	-- upvalues: Module2 (copy), MaybeDeepFreezeFunction (copy), IsReferenceFunction (copy), MakeReferenceFunction (copy)
+	local self = setmetatable({}, Module2)
+	self.policies = Policies
+	self.group = Group
+	self.data = {}
+	self.rootIds = {}
+	self.refs = {}
 	
-	function tbl.getFieldValue(_, p3, p4)
-		-- upvalues: maybeDeepFreeze (copy), isReference (copy), tbl (ref)
-		return maybeDeepFreeze(if isReference(p3) then tbl:get(p3.__ref, p4) else p3 and p3[p4])
+	function self:getFieldValue(LookupResult, p1) --[[ Line: 152 ]]
+		-- upvalues: MaybeDeepFreezeFunction (upval), IsReferenceFunction (upval), self (copy)
+		return (MaybeDeepFreezeFunction(if IsReferenceFunction(LookupResult) then self:get(LookupResult.__ref, p1) else LookupResult and LookupResult[p1]))
 	end
 	
-	function tbl.canRead(_, p3)
-		-- upvalues: isReference (copy), tbl (ref)
-		return if isReference(p3) then tbl:has(p3.__ref) else typeof(p3) == "table"
+	function self:canRead(p1) --[[ Line: 169 ]]
+		-- upvalues: IsReferenceFunction (upval), self (copy)
+		return if IsReferenceFunction(p1) then self:has(p1.__ref) else typeof(p1) == "table"
 	end
 	
-	function tbl.toReference(_, p3, p4)
-		-- upvalues: makeReference (copy), isReference (copy), tbl (ref)
-		if type(p3) == "string" then
-			return makeReference(p3)
-		elseif isReference(p3) then
-			return p3
+	function self:toReference(p1, p2) --[[ Line: 181 ]]
+		-- upvalues: MakeReferenceFunction (upval), IsReferenceFunction (upval), self (copy)
+		if type(p1) == "string" then
+			return MakeReferenceFunction(p1)
 		end
-		local unpacked = table.unpack(tbl.policies:identify(p3), 1, 1)
-		
-		if not unpacked then return end
-		local var2 = makeReference(unpacked)
-		
-		if p4 then
-			tbl:merge(unpacked, p3)
+		if IsReferenceFunction(p1) then
+			return p1
 		end
-		return var2
+		local Unpacked = table.unpack(self.policies:identify(p1), 1, 1)
+		
+		if not Unpacked then return end
+		local Reference = MakeReferenceFunction(Unpacked)
+		
+		if p2 then
+			self:merge(Unpacked, p1)
+		end
+		return Reference
 	end
 	
-	return tbl
+	return self
 end
 
-function t_3.addLayer(_, _, _)
+function Module2:addLayer(_, _) --[[ Line: 211 ]]
 	error("not implemented abstract method")
 end
 
-function t_3.removeLayer(_, _)
+function Module2:removeLayer(_) --[[ Line: 215 ]]
 	error("not implemented abstract method")
 end
 
-function t_3:toObject()
+function Module2:toObject() --[[ Line: 223 ]]
 	return table.clone(self.data)
 end
 
-function t_3:has(p1)
-	return self:lookup(p1, true) ~= nil
+function Module2:has(Ref): boolean --[[ Line: 229 ]]
+	return self:lookup(Ref, true) ~= nil
 end
 
-function t_3:get(p1, p2)
-	-- upvalues: hasOwn (ref), boolean (ref), instanceof (ref), tbl (write)
-	self.group:depend(p1, p2)
+function Module2:get(Ref, p1) --[[ Line: 233 ]]
+	-- upvalues: HasOwnFunction (copy), Boolean (copy), InstanceofFunction (copy), Module (ref)
+	self.group:depend(Ref, p1)
 	
-	if hasOwn(self.data, p1) then
-		local var2 = self.data[p1]
+	if HasOwnFunction(self.data, Ref) then
+		local Entry = self.data[Ref]
 		
-		return if boolean.toJSBoolean(var2) and hasOwn(var2, p2) then var2[p2] elseif p2 == "__typename" and hasOwn(self.policies.rootTypenamesById, p1) then self.policies.rootTypenamesById[p1] elseif instanceof(self, tbl) then self.parent:get(p1, p2) else nil
+		if Boolean.toJSBoolean(Entry) and HasOwnFunction(Entry, p1) then
+			return Entry[p1]
+		end
 	end
+	return if p1 == "__typename" and HasOwnFunction(self.policies.rootTypenamesById, Ref) then self.policies.rootTypenamesById[Ref] elseif InstanceofFunction(self, Module) then self.parent:get(Ref, p1) else nil
 end
 
-function t_3:lookup(p1, p2)
-	-- upvalues: hasOwn (ref), instanceof (ref), tbl (write)
+function Module2:lookup(p1, p2) --[[ Line: 252 ]]
+	-- upvalues: HasOwnFunction (copy), InstanceofFunction (copy), Module (ref)
 	if p2 then
 		self.group:depend(p1, "__exists")
 	end
-	return if hasOwn(self.data, p1) then self.data[p1] elseif instanceof(self, tbl) then self.parent:lookup(p1, p2) elseif self.policies.rootTypenamesById[p1] then {} else nil
+	return if HasOwnFunction(self.data, p1) then self.data[p1] elseif InstanceofFunction(self, Module) then self.parent:lookup(p1, p2) elseif self.policies.rootTypenamesById[p1] then {} else nil
 end
 
-function t_3:merge(p1, p2)
-	-- upvalues: isReference (ref), invariant (ref), deepMerger (ref), storeObjectReconciler (write), objectKeysForEachModule (ref), fieldNameFromStoreName (ref), instanceof (ref), tbl (write)
-	local var2 = nil
+function Module2:merge(p1, p2) --[[ Line: 281 ]]
+	-- upvalues: IsReferenceFunction (copy), InvariantFunction (copy), DeepMerger (copy), StoreObjectReconciler (ref), ObjectKeysForEachModule (copy), FieldNameFromStoreNameFunction (copy), InstanceofFunction (copy), Module (ref)
+	local v1 = nil
 	
-	if isReference(p1) then
+	if IsReferenceFunction(p1) then
 		p1 = p1.__ref
 	end
-	if isReference(p2) then
+	if IsReferenceFunction(p2) then
 		p2 = p2.__ref
 	end
-	local var3
-	local _ = nil
+	local LookupResult = nil
 	
 	if type(p1) == "string" then
-		var2 = p1
-		var3 = self:lookup(var2)
+		v1 = p1
+		LookupResult = self:lookup(v1)
 	else
-		var3 = p1
+		LookupResult = p1
 	end
-	local var4
-	local _ = nil
-	
+	local LookupResult1 = nil
 	if type(p2) == "string" then
-		var2 = p2
-		var4 = self:lookup(var2)
+		v1 = p2
+		LookupResult1 = self:lookup(v1)
 	else
-		var4 = p2
+		LookupResult1 = p2
 	end
-	if not var4 then return end
-	invariant(typeof(var2) == "string", "store.merge expects a string ID")
-	local var5 = deepMerger.new(storeObjectReconciler):merge(var3, var4)
-	self.data[var2] = var5
+	if not LookupResult1 then return end
+	InvariantFunction(typeof(v1) == "string", "store.merge expects a string ID")
+	local MergeResult = DeepMerger.new(StoreObjectReconciler):merge(LookupResult, LookupResult1)
+	self.data[v1] = MergeResult
 	
-	if var5 ~= var3 then
-		self.refs[var2] = nil
+	if MergeResult ~= LookupResult then
+		self.refs[v1] = nil
 		
 		if self.group.caching then
 			local t = {}
 			
-			if not var3 then
+			if not LookupResult then
 				t.__exists = 1
 			end
-			objectKeysForEachModule(var4, function(p3)
-				-- upvalues: var3 (write), var5 (ref), t (ref), fieldNameFromStoreName (copy), self (ref), instanceof (copy), tbl (copy)
-				if not var3 or var3[p3] ~= var5[p3] then
-					t[p3] = 1
-					local var6 = fieldNameFromStoreName(p3)
+			ObjectKeysForEachModule(LookupResult1, function(Key) --[[ Line: 350 ]]
+				-- upvalues: LookupResult (ref), MergeResult (copy), t (copy), FieldNameFromStoreNameFunction (upval), self (copy), InstanceofFunction (upval), Module (upval)
+				if not LookupResult or LookupResult[Key] ~= MergeResult[Key] then
+					t[Key] = 1
+					local FieldNameFromStoreNameResult = FieldNameFromStoreNameFunction(Key)
 					
-					if var6 ~= p3 and not self.policies:hasKeyArgs(var5.__typename, var6) then
-						t[var6] = 1
+					if FieldNameFromStoreNameResult ~= Key and not self.policies:hasKeyArgs(MergeResult.__typename, FieldNameFromStoreNameResult) then
+						t[FieldNameFromStoreNameResult] = 1
 					end
-					if var5[p3] == nil and not instanceof(self, tbl) then
-						var5[p3] = nil
+					if MergeResult[Key] == nil and not InstanceofFunction(self, Module) then
+						MergeResult[Key] = nil
 					end
 				end
 			end)
 			
-			if t.__typename and (not var3 or not var3.__typename) and self.policies.rootTypenamesById[var2] == var5.__typename then
+			if t.__typename and (not LookupResult or not LookupResult.__typename) and self.policies.rootTypenamesById[v1] == MergeResult.__typename then
 				t.__typename = nil
 			end
-			objectKeysForEachModule(t, function(p3)
-				-- upvalues: self (ref), var2 (write)
-				return self.group:dirty(var2, p3)
+			ObjectKeysForEachModule(t, function(p3) --[[ Line: 397 ]]
+				-- upvalues: self (copy), v1 (ref)
+				return self.group:dirty(v1, p3)
 			end)
 		end
 	end
 end
 
-function t_3:modify(p1, p2)
-	-- upvalues: t_1 (ref), t_2 (ref), isReference (ref), makeReference (ref), objectKeysForEachModule (ref), fieldNameFromStoreName (ref), isCallableModule (ref), delModifier (write), maybeDeepFreeze (ref), object (ref), deepMerger (ref), instanceof (ref), tbl (write)
-	local var2 = self:lookup(p1)
+function Module2:modify(p1, p2): boolean --[[ Line: 405 ]]
+	-- upvalues: None (copy), None1 (copy), IsReferenceFunction (copy), MakeReferenceFunction (copy), ObjectKeysForEachModule (copy), FieldNameFromStoreNameFunction (copy), IsCallableModule (copy), delModifier (ref), MaybeDeepFreezeFunction (copy), Object (copy), DeepMerger (copy), InstanceofFunction (copy), Module (ref)
+	local LookupResult = self:lookup(p1)
 	
-	if var2 then
-		local t = {}
-		local var3 = false
-		local var4 = true
-		local t_3 = {
-			DELETE = t_1,
-			INVALIDATE = t_2,
-			isReference = function(_, ...)
-				-- upvalues: isReference (copy)
-				return isReference(...)
+	if LookupResult then
+		local Nones = {}
+		local Flag = false
+		local Flag1 = true
+		local config = {
+			DELETE = None,
+			INVALIDATE = None1,
+			isReference = function(_, ...) --[[ Line: 418 ]]
+				-- upvalues: IsReferenceFunction (upval)
+				return IsReferenceFunction(...)
 			end,
 			toReference = self.toReference,
 			canRead = self.canRead,
-			readField = function(_, p3, p4)
-				-- upvalues: self (ref), makeReference (copy), p1 (ref)
-				return self.policies:readField(typeof(p3) == "string" and ({ fieldName = p3, from = p4 or makeReference(p1) } or p3), { store = self })
+			readField = function(_, FieldName, p3) --[[ Line: 423 ]]
+				-- upvalues: self (copy), MakeReferenceFunction (upval), p1 (copy)
+				return self.policies:readField(typeof(FieldName) == "string" and {
+					fieldName = FieldName,
+					from = p3 or MakeReferenceFunction(p1)
+				} or FieldName, { store = self })
 			end
 		}
-		objectKeysForEachModule(var2, function(p3)
-			-- upvalues: fieldNameFromStoreName (copy), var2 (ref), isCallableModule (copy), p2 (ref), delModifier (copy), t_1 (copy), maybeDeepFreeze (copy), object (copy), t_3 (ref), self (ref), p1 (ref), t_2 (copy), deepMerger (copy), t (ref), var3 (write), var4 (write)
-			local var5 = fieldNameFromStoreName(p3)
-			local var6 = var2[p3]
+		ObjectKeysForEachModule(LookupResult, function(StoreFieldName) --[[ Line: 440 ]]
+			-- upvalues: FieldNameFromStoreNameFunction (upval), LookupResult (copy), IsCallableModule (upval), p2 (copy), delModifier (upval), None (upval), MaybeDeepFreezeFunction (upval), Object (upval), config (copy), self (copy), p1 (copy), None1 (upval), DeepMerger (upval), Nones (copy), Flag (ref), Flag1 (ref)
+			local FieldNameFromStoreNameResult = FieldNameFromStoreNameFunction(StoreFieldName)
+			local LookupResultEntry = LookupResult[StoreFieldName]
 			
-			if var6 == nil then return end
-			local var7
-			local _ = nil
+			if LookupResultEntry == nil then return end
+			local Callback = if IsCallableModule(p2) then p2 else p2[StoreFieldName] or p2[FieldNameFromStoreNameResult]
 			
-			if isCallableModule(p2) then
-				var7 = p2
-			else
-				local var8 = p2
-				var7 = var8[p3] or var8[var5]
-			end
-			if var7 then
-				local var9 = if var7 == delModifier then t_1 else var7(if not isCallableModule(p2) then p2 else nil, maybeDeepFreeze(var6), object.assign(table.clone(t_3), {
-					fieldName = var5,
-					storeFieldName = p3,
-					storage = self:getStorage(p1, p3)
+			if Callback then
+				local None2 = if Callback == delModifier then None else Callback(if IsCallableModule(p2) then nil else p2 or nil, MaybeDeepFreezeFunction(LookupResultEntry), Object.assign(table.clone(config), {
+					fieldName = FieldNameFromStoreNameResult,
+					storeFieldName = StoreFieldName,
+					storage = self:getStorage(p1, StoreFieldName)
 				}))
 				
-				if var9 == t_2 then
-					self.group:dirty(p1, p3)
-				elseif var9 == t_1 then
-					var9 = deepMerger.None
-				end
-				if var9 ~= var6 then
-					t[p3] = var9
-					var3 = true
-					var6 = var9
+				if None2 == None1 then
+					self.group:dirty(p1, StoreFieldName)
+				else
+					if None2 == None then
+						None2 = DeepMerger.None
+					end
+					if None2 ~= LookupResultEntry then
+						Nones[StoreFieldName] = None2
+						Flag = true
+						LookupResultEntry = None2
+					end
 				end
 			end
-			if var6 ~= nil and var6 ~= deepMerger.None then
-				var4 = false
+			if LookupResultEntry ~= nil and LookupResultEntry ~= DeepMerger.None then
+				Flag1 = false
 			end
 		end)
+		
+		if Flag then
+			self:merge(p1, Nones)
+			
+			if Flag1 then
+				if InstanceofFunction(self, Module) then
+					self.data[p1] = nil
+				else
+					self.data[p1] = nil
+				end
+				self.group:dirty(p1, "__exists")
+			end
+			return true
+		end
 	end
 	return false
 end
 
-function t_3:delete(p1, p2, p3)
-	-- upvalues: delModifier (write)
-	local var2 = self:lookup(p1)
+function Module2:delete(Id, FieldName, Args) --[[ Line: 520 ]]
+	-- upvalues: delModifier (ref)
+	local LookupResult = self:lookup(Id)
 	
-	if not var2 then
+	if LookupResult then
+		local TypenameFieldValue = self:getFieldValue(LookupResult, "__typename")
+		local StoreFieldName = if FieldName and Args then self.policies:getStoreFieldName({
+			typename = TypenameFieldValue,
+			fieldName = FieldName,
+			args = Args
+		}) else FieldName
+		
+		return self:modify(Id, if StoreFieldName then { [StoreFieldName] = delModifier } else delModifier)
+	else
 		return false
 	end
-	local _ = nil
-	local var3 = if p2 and p3 then self.policies:getStoreFieldName({
-		typename = self:getFieldValue(var2, "__typename"),
-		fieldName = p2,
-		args = p3
-	}) else p2
-	
-	return self:modify(p1, if var3 then { [var3] = delModifier } else delModifier)
 end
 
-function t_3:evict(p1)
-	-- upvalues: hasOwn (ref), instanceof (ref), tbl (write)
-	local var2 = false
+function Module2:evict(p1) --[[ Line: 547 ]]
+	-- upvalues: HasOwnFunction (copy), InstanceofFunction (copy), Module (ref)
+	local DeleteResult = false
 	
 	if p1.id then
-		if hasOwn(self.data, p1.id) then
-			var2 = self:delete(p1.id, p1.fieldName, p1.args)
+		if HasOwnFunction(self.data, p1.id) then
+			DeleteResult = self:delete(p1.id, p1.fieldName, p1.args)
 		end
-		if instanceof(self, tbl) then
-			var2 = self.parent:evict(p1) or var2
+		if InstanceofFunction(self, Module) then
+			DeleteResult = self.parent:evict(p1) or DeleteResult
 		end
-		if p1.fieldName or var2 then
+		if p1.fieldName or DeleteResult then
 			self.group:dirty(p1.id, p1.fieldName or "__exists")
 		end
 	end
-	return var2
+	return DeleteResult
 end
 
-function t_3:clear()
+function Module2:clear() --[[ Line: 575 ]]
 	self:replace(nil)
 end
 
-function t_3:extract()
-	-- upvalues: hasOwn (ref), array (ref)
-	local var2 = self:toObject()
-	local t = {}
-	self:getRootIdSet():forEach(function(p1)
-		-- upvalues: hasOwn (copy), self (ref), t (ref)
-		if not hasOwn(self.policies.rootTypenamesById, p1) then
-			table.insert(t, p1)
+function Module2:extract() --[[ Line: 579 ]]
+	-- upvalues: HasOwnFunction (copy), Array (copy)
+	local Object = self:toObject()
+	local List = {}
+	self:getRootIdSet():forEach(function(p1) --[[ Line: 582 ]]
+		-- upvalues: HasOwnFunction (upval), self (copy), List (copy)
+		if not HasOwnFunction(self.policies.rootTypenamesById, p1) then
+			table.insert(List, p1)
 		end
 	end)
 	
-	if #t > 0 then
-		var2.__META = { extraRootIds = array.sort(t) }
+	if #List > 0 then
+		Object.__META = { extraRootIds = Array.sort(List) }
 	end
-	return var2
+	return Object
 end
 
-function t_3:replace(p1)
-	-- upvalues: objectKeysForEachModule (ref), hasOwn (ref), object (ref), array (ref)
-	objectKeysForEachModule(self.data, function(p2)
-		-- upvalues: p1 (ref), hasOwn (copy), self (ref)
-		if not p1 or not hasOwn(p1, p2) then
-			self:delete(p2)
+function Module2:replace(Tbl) --[[ Line: 595 ]]
+	-- upvalues: ObjectKeysForEachModule (copy), HasOwnFunction (copy), Object (copy), Array (copy)
+	ObjectKeysForEachModule(self.data, function(p1) --[[ Line: 597 ]]
+		-- upvalues: Tbl (copy), HasOwnFunction (upval), self (copy)
+		if not Tbl or not HasOwnFunction(Tbl, p1) then
+			self:delete(p1)
 		end
 	end)
 	
-	if p1 ~= nil then
-		local mETA = p1.__META
-		local var2 = object.assign(table.clone(p1), { __META = object.None })
-		objectKeysForEachModule(var2, function(p2)
-			-- upvalues: self (ref), var2 (ref)
-			self:merge(p2, var2[p2])
+	if Tbl ~= nil then
+		local META = Tbl.__META
+		local AssignResult = Object.assign(table.clone(Tbl), { __META = Object.None })
+		ObjectKeysForEachModule(AssignResult, function(p1) --[[ Line: 613 ]]
+			-- upvalues: self (copy), AssignResult (copy)
+			self:merge(p1, AssignResult[p1])
 		end)
 		
-		if mETA ~= nil then
-			array.forEach(mETA.extraRootIds, self.retain, self)
+		if META ~= nil then
+			Array.forEach(META.extraRootIds, self.retain, self)
 		end
 	end
 end
 
-function t_3.getStorage(_, _, ...)
+function Module2:getStorage(_, ...) --[[ Line: 626 ]]
 	error("not implemented abstract method")
 end
 
-function t_3:retain(p1)
-	-- upvalues: boolean (ref)
-	self.rootIds[p1] = (if boolean.toJSBoolean(self.rootIds[p1]) then self.rootIds[p1] else 0) + 1
+function Module2:retain(p1) --[[ Line: 630 ]]
+	-- upvalues: Boolean (copy)
+	self.rootIds[p1] = (if Boolean.toJSBoolean(self.rootIds[p1]) then self.rootIds[p1] else 0) + 1
 	
 	return self.rootIds[p1]
 end
 
-function t_3:release(p1)
-	-- upvalues: boolean (ref)
-	if self.rootIds[p1] <= 0 then
+function Module2:release(Key) --[[ Line: 637 ]]
+	-- upvalues: Boolean (copy)
+	if self.rootIds[Key] <= 0 then
 		return 0
 	end
-	self.rootIds[p1] -= 1
-	local var2 = self.rootIds[p1]
+	local RootIds = self.rootIds
+	RootIds[Key] -= 1
+	local RootId = self.rootIds[Key]
 	
-	if not boolean.toJSBoolean(var2) then
-		self.rootIds[p1] = nil
+	if not Boolean.toJSBoolean(RootId) then
+		self.rootIds[Key] = nil
 	end
-	return var2
+	return RootId
 end
 
-function t_3:getRootIdSet(p1)
-	-- upvalues: set (ref), array (ref), object (ref), instanceof (ref), tbl (write)
-	local var2 = if p1 == nil then set.new() else p1
-	array.forEach(object.keys(self.rootIds), var2.add, var2)
+function Module2:getRootIdSet(p1) --[[ Line: 654 ]]
+	-- upvalues: Set (copy), Array (copy), Object (copy), InstanceofFunction (copy), Module (ref)
+	local NewSet = if p1 == nil then Set.new() else p1
+	Array.forEach(Object.keys(self.rootIds), NewSet.add, NewSet)
 	
-	if instanceof(self, tbl) then
-		self.parent:getRootIdSet(var2)
+	if InstanceofFunction(self, Module) then
+		self.parent:getRootIdSet(NewSet)
 		
-		return var2
+		return NewSet
+	else
+		Array.forEach(Object.keys(self.policies.rootTypenamesById), NewSet.add, NewSet)
+		
+		return NewSet
 	end
-	array.forEach(object.keys(self.policies.rootTypenamesById), var2.add, var2)
-	
-	return var2
 end
 
-function t_3:gc()
-	-- upvalues: hasOwn (ref), array (ref), object (ref), boolean (ref), instanceof (ref), tbl (write)
-	local rootIdSet = self:getRootIdSet()
-	local var2 = self:toObject()
+function Module2:gc() --[[ Line: 675 ]]
+	-- upvalues: HasOwnFunction (copy), Array (copy), Object (copy), Boolean (copy), InstanceofFunction (copy), Module (ref)
+	local RootIdSet = self:getRootIdSet()
+	local Object1 = self:toObject()
 	
-	for i, v in rootIdSet do
-		if hasOwn(var2, v) then
-			array.forEach(object.keys(self:findChildRefIds(v)), rootIdSet.add, rootIdSet)
-			var2[v] = nil
+	for _, value in RootIdSet do
+		if HasOwnFunction(Object1, value) then
+			Array.forEach(Object.keys(self:findChildRefIds(value)), RootIdSet.add, RootIdSet)
+			Object1[value] = nil
 		end
 	end
-	local var3 = object.keys(var2)
+	local KeysResult = Object.keys(Object1)
 	
-	if boolean.toJSBoolean(#var3) then
-		local var4 = self
-		while instanceof(var4, tbl) do
-			var4 = var4.parent
+	if Boolean.toJSBoolean(#KeysResult) then
+		local Parent1 = self
+		while InstanceofFunction(Parent1, Module) do
+			Parent1 = Parent1.parent
 		end
-		array.forEach(var3, function(p1)
-			-- upvalues: var4 (write)
-			return var4:delete(p1)
+		Array.forEach(KeysResult, function(p1) --[[ Line: 700 ]]
+			-- upvalues: Parent1 (ref)
+			return Parent1:delete(p1)
 		end)
 	end
-	return var3
+	return KeysResult
 end
 
-function t_3:findChildRefIds(p1)
-	-- upvalues: hasOwn (ref), set (ref), isReference (ref), isNonNullObject (ref), objectKeysForEachModule (ref)
-	if not hasOwn(self.refs, p1) then
+function Module2:findChildRefIds(p1) --[[ Line: 707 ]]
+	-- upvalues: HasOwnFunction (copy), Set (copy), IsReferenceFunction (copy), IsNonNullObjectFunction (copy), ObjectKeysForEachModule (copy)
+	if not HasOwnFunction(self.refs, p1) then
 		self.refs[p1] = {}
-		local var5 = self.refs[p1]
-		local var6 = self.data[p1]
+		local Ref = self.refs[p1]
+		local Entry = self.data[p1]
 		
-		if not var6 then
-			return var5
+		if not Entry then
+			return Ref
 		end
-		local var7 = set.new({ var6 })
+		local NewSet = Set.new({ Entry })
 		
-		for i, v in var7 do
-			if isReference(v) then
-				var5[v.__ref] = true
+		for _, value in NewSet do
+			if IsReferenceFunction(value) then
+				Ref[value.__ref] = true
 			end
-			if isNonNullObject(v) then
-				objectKeysForEachModule(v, function(p2)
-					-- upvalues: v (ref), isNonNullObject (copy), var7 (ref)
-					local var8 = v[p2]
+			if IsNonNullObjectFunction(value) then
+				ObjectKeysForEachModule(value, function(p2) --[[ Line: 736 ]]
+					-- upvalues: value (copy), IsNonNullObjectFunction (upval), NewSet (copy)
+					local Entry = value[p2]
 					
-					if isNonNullObject(var8) then
-						var7:add(var8)
+					if IsNonNullObjectFunction(Entry) then
+						NewSet:add(Entry)
 					end
 				end)
 			end
@@ -425,39 +441,39 @@ function t_3:findChildRefIds(p1)
 	return self.refs[p1]
 end
 
-function t_3:makeCacheKey(...)
+function Module2:makeCacheKey(...) --[[ Line: 753 ]]
 	return self.group.keyMaker:lookupArray({ ... })
 end
 
-t.EntityStore = t_3
-local t_4 = {}
-t_4.__index = t_4
+EntityStore.EntityStore = Module2
+local Module3 = {}
+Module3.__index = Module3
 
-function t_4.new(p2, p3)
-	-- upvalues: t_4 (ref)
-	local tbl = setmetatable({}, t_4)
-	tbl.caching = p2
-	tbl.parent = p3
-	tbl.d = nil
-	tbl:resetCaching()
+function Module3.new(Caching, Parent) --[[ Line: 784 ]]
+	-- upvalues: Module3 (copy)
+	local self = setmetatable({}, Module3)
+	self.caching = Caching
+	self.parent = Parent
+	self.d = nil
+	self:resetCaching()
 	
-	return tbl
+	return self
 end
 
-function t_4:resetCaching()
-	-- upvalues: dep (ref), trie (ref), canUseWeakMap (ref)
-	self.d = if self.caching then dep() else nil
-	self.keyMaker = trie.new(canUseWeakMap)
+function Module3:resetCaching() --[[ Line: 793 ]]
+	-- upvalues: DepFunction (copy), Trie (copy), CanUseWeakMap (copy)
+	self.d = if self.caching then DepFunction() else nil
+	self.keyMaker = Trie.new(CanUseWeakMap)
 end
 
-function t_4:depend(p2, p3)
-	-- upvalues: makeDepKey (write), fieldNameFromStoreName (ref)
+function Module3:depend(p2, p3) --[[ Line: 800 ]]
+	-- upvalues: Callback (ref), FieldNameFromStoreNameFunction (copy)
 	if self.d then
-		self.d(makeDepKey(p2, p3))
-		local var8 = fieldNameFromStoreName(p3)
+		self.d(Callback(p2, p3))
+		local FieldNameFromStoreNameResult = FieldNameFromStoreNameFunction(p3)
 		
-		if var8 ~= p3 then
-			self.d(makeDepKey(p2, var8))
+		if FieldNameFromStoreNameResult ~= p3 then
+			self.d(Callback(p2, FieldNameFromStoreNameResult))
 		end
 		if self.parent then
 			self.parent:depend(p2, p3)
@@ -465,164 +481,168 @@ function t_4:depend(p2, p3)
 	end
 end
 
-function t_4:dirty(p2, p3)
-	-- upvalues: makeDepKey (write)
+function Module3:dirty(p2, p3) --[[ Line: 822 ]]
+	-- upvalues: Callback (ref)
 	if self.d then
-		self.d:dirty(makeDepKey(p2, p3), if p3 == "__exists" then "forget" else "setDirty")
+		self.d:dirty(Callback(p2, p3), if p3 == "__exists" then "forget" else "setDirty")
 	end
 end
 
-makeDepKey = function(p2, p3)
-	return p3 .. "#" .. p41
+Callback = function(Text, Text1): string --[[ Line: 840 | Named "makeDepKey" ]]
+	return Text1 .. "#" .. Text
 end
 
-function t.maybeDependOnExistenceOfEntity(p2, p3)
-	-- upvalues: var1 (write)
-	if var1(p2) then
+function EntityStore.maybeDependOnExistenceOfEntity(p2, p3) --[[ Line: 847 ]]
+	-- upvalues: Callback1 (ref)
+	if Callback1(p2) then
 		p2.group:depend(p3, "__exists")
 	end
 end
 
-local tbl_2 = setmetatable({}, { __index = t_3 })
-tbl_2.__index = tbl_2
+local self = setmetatable({}, { __index = Module2 })
+self.__index = self
 
-function tbl_2.new(p2)
-	-- upvalues: t_3 (ref), t_4 (ref), tbl_2 (ref), tbl_1 (write), trie (ref), canUseWeakMap (ref)
-	local policies = p2.policies
-	local resultCaching = p2.resultCaching
-	local seed = p2.seed
+function self.new(p2) --[[ Line: 872 ]]
+	-- upvalues: Module2 (copy), Module3 (copy), self (copy), Module1 (ref), Trie (copy), CanUseWeakMap (copy)
+	local Policies = p2.policies
+	local ResultCaching = p2.resultCaching
+	local Seed = p2.seed
 	
 	if p2.resultCaching == nil then
-		resultCaching = true
+		ResultCaching = true
 	end
-	local tbl = setmetatable(t_3.new(policies, t_4.new(resultCaching)), tbl_2)
-	tbl.stump = tbl_1.new(tbl)
-	tbl.storageTrie = trie.new(canUseWeakMap)
+	local self1 = setmetatable(Module2.new(Policies, Module3.new(ResultCaching)), self)
+	self1.stump = Module1.new(self1)
+	self1.storageTrie = Trie.new(CanUseWeakMap)
 	
-	if seed then
-		tbl:replace(seed)
+	if Seed then
+		self1:replace(Seed)
 	end
-	return tbl
+	return self1
 end
 
-function tbl_2:addLayer(p2, p3)
+function self:addLayer(p2, p3) --[[ Line: 896 ]]
 	return self.stump:addLayer(p2, p3)
 end
 
-function tbl_2.removeLayer(p2)
+function self.removeLayer(p2) --[[ Line: 903 ]]
 	return p2
 end
 
-function tbl_2:getStorage(...)
+function self:getStorage(...) --[[ Line: 908 ]]
 	return self.storageTrie:lookupArray({ ... })
 end
 
-t.EntityStore_Root = tbl_2
-tbl = setmetatable({}, { __index = t_3 })
-tbl.__index = tbl
+EntityStore.EntityStore_Root = self
+Module = setmetatable({}, { __index = Module2 })
+Module.__index = Module
 
-function tbl.new(p2, p3, p4, p5)
-	-- upvalues: t_3 (ref), tbl (write)
-	local tbl_1 = setmetatable(t_3.new(p3.policies, p5), tbl)
-	tbl_1.id = p2
-	tbl_1.parent = p3
-	tbl_1.replay = p4
-	tbl_1.group = p5
-	p4(tbl_1, tbl_1)
+function Module.new(Id, Parent, Callback: (any, any) -> (), Group) --[[ Line: 930 ]]
+	-- upvalues: Module2 (copy), Module (ref)
+	local self = setmetatable(Module2.new(Parent.policies, Group), Module)
+	self.id = Id
+	self.parent = Parent
+	self.replay = Callback
+	self.group = Group
+	Callback(self, self)
 	
-	return tbl_1
+	return self
 end
 
-function tbl:addLayer(p2, p3)
-	-- upvalues: tbl (write)
-	return tbl.new(p2, self, p3, self.group)
+function Module:addLayer(Id, Replay) --[[ Line: 945 ]]
+	-- upvalues: Module (ref)
+	return Module.new(Id, self, Replay, self.group)
 end
 
-function tbl:removeLayer(p2)
-	-- upvalues: objectKeysForEachModule (ref), equalModule (ref)
-	local var8 = self.parent:removeLayer(p2)
+function Module:removeLayer(Id) --[[ Line: 949 ]]
+	-- upvalues: ObjectKeysForEachModule (copy), EqualModule (copy)
+	local RemoveLayerResult = self.parent:removeLayer(Id)
 	
-	if p2 == self.id then
-		if self.group.caching then
-			objectKeysForEachModule(self.data, function(p3)
-				-- upvalues: self (ref), var8 (ref), objectKeysForEachModule (copy), equalModule (copy)
-				local var9 = self.data[p3]
-				local var10 = var8:lookup(p3)
+	if Id ~= self.id then
+		return if RemoveLayerResult == self.parent then self else RemoveLayerResult:addLayer(self.id, self.replay)
+	end
+	if self.group.caching then
+		ObjectKeysForEachModule(self.data, function(p2) --[[ Line: 960 ]]
+			-- upvalues: self (copy), RemoveLayerResult (copy), ObjectKeysForEachModule (upval), EqualModule (upval)
+			local Entry = self.data[p2]
+			local LookupResult = RemoveLayerResult.lookup(RemoveLayerResult, p2)
+			
+			if not LookupResult then
+				self:delete(p2)
 				
-				if not var10 then
-					self:delete(p3)
-					
-					return
-				elseif not var9 then
-					self.group:dirty(p3, "__exists")
-					objectKeysForEachModule(var10, function(p4)
-						-- upvalues: self (copy), p3 (ref)
-						self.group:dirty(p3, p4)
-					end)
-					
-					return
-				elseif var9 ~= var10 then
-					objectKeysForEachModule(var9, function(p4)
-						-- upvalues: equalModule (copy), var9 (ref), var10 (ref), self (copy), p3 (ref)
-						if not equalModule(var9[p4], var10[p4]) then
-							self.group:dirty(p3, p4)
-						end
-					end)
-				end
-			end)
-		end
-		return var8
-	else
-		return if var8 == self.parent then self else var8:addLayer(self.id, self.replay)
+				return
+			end
+			if not Entry then
+				self.group:dirty(p2, "__exists")
+				ObjectKeysForEachModule(LookupResult, function(p3) --[[ Line: 982 ]]
+					-- upvalues: self (upval), p2 (copy)
+					self.group:dirty(p2, p3)
+				end)
+				
+				return
+			end
+			if Entry ~= LookupResult then
+				ObjectKeysForEachModule(Entry, function(p3) --[[ Line: 991 ]]
+					-- upvalues: EqualModule (upval), Entry (copy), LookupResult (copy), self (upval), p2 (copy)
+					if not EqualModule(Entry[p3], LookupResult[p3]) then
+						self.group:dirty(p2, p3)
+					end
+				end)
+			end
+		end)
 	end
+	return RemoveLayerResult
 end
 
-function tbl:toObject()
-	-- upvalues: object (ref)
-	return object.assign({}, self.parent:toObject(), self.data)
+function Module:toObject() --[[ Line: 1012 ]]
+	-- upvalues: Object (copy)
+	return Object.assign({}, self.parent:toObject(), self.data)
 end
 
-function tbl:findChildRefIds(p2)
-	-- upvalues: hasOwn (ref), object (ref)
-	local var8 = self.parent:findChildRefIds(p2)
+function Module:findChildRefIds(p2) --[[ Line: 1016 ]]
+	-- upvalues: HasOwnFunction (copy), Object (copy)
+	local ChildRefIds = self.parent:findChildRefIds(p2)
+	local Index = getmetatable((getmetatable(self))).__index
 	
-	return hasOwn(self.data, p2) and object.assign({}, var8, getmetatable(getmetatable(self)).__index.findChildRefIds(self, p2)) or var8
+	return HasOwnFunction(self.data, p2) and Object.assign({}, ChildRefIds, Index.findChildRefIds(self, p2)) or ChildRefIds
 end
 
-function tbl:getStorage(...)
-	local parent = self.parent
-	while parent.parent do
-		parent = parent.parent
+function Module:getStorage(...) --[[ Line: 1025 ]]
+	local Parent = self.parent
+	while Parent.parent do
+		Parent = Parent.parent
 	end
-	return parent:getStorage(...)
+	return Parent:getStorage(...)
 end
 
-tbl_1 = setmetatable({}, { __index = tbl })
-tbl_1.__index = tbl_1
+Module1 = setmetatable({}, { __index = Module })
+Module1.__index = Module1
 
-function tbl_1.new(p2)
-	-- upvalues: tbl (write), t_4 (ref), tbl_1 (write)
-	return setmetatable(tbl.new("EntityStore.Stump", p2, function() end, t_4.new(p2.group.caching, p2.group)), tbl_1)
+function Module1.new(Parent) --[[ Line: 1041 ]]
+	-- upvalues: Module (ref), Module3 (copy), Module1 (ref)
+	return (setmetatable(Module.new("EntityStore.Stump", Parent, function() --[[ Line: 1042 ]] end, Module3.new(Parent.group.caching, Parent.group)), Module1))
 end
 
-function tbl_1.removeLayer(p2)
+function Module1.removeLayer(p2) --[[ Line: 1047 ]]
 	return p2
 end
 
-function tbl_1:merge(...)
+function Module1:merge(...) --[[ Line: 1052 ]]
 	return self.parent:merge(...)
 end
 
-storeObjectReconciler = function(_, p2, p3, p4)
-	-- upvalues: equalModule (ref)
-	local var8 = p2[p4]
-	local var9 = p3[p4]
+StoreObjectReconciler = function(_, p2, p3, p4) --[[ Line: 1061 | Named "storeObjectReconciler" ]]
+	-- upvalues: EqualModule (copy)
+	local v1 = p2[p4]
+	local v2 = p3[p4]
 	
-	return if equalModule(var8, var9) then var8 else var9
+	return if EqualModule(v1, v2) then v1 else v2
 end
 
-function t.supportsResultCaching(p2)
-	return type(p2) == "table" and (type(p2.group) == "table" and p2.group.caching == true)
+Callback1 = function(p2): boolean --[[ Line: 1081 | Named "supportsResultCaching" ]]
+	return type(p2) == "table" and type(p2.group) == "table" and p2.group.caching == true
 end
 
-return t
+EntityStore.supportsResultCaching = Callback1
+
+return EntityStore

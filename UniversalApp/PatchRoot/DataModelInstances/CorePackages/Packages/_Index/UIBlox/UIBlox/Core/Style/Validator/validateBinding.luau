@@ -1,3 +1,3 @@
-﻿local tModule = require(script.Parent.Parent.Parent.Parent.Parent.t)
+﻿local TModule = require(script.Parent.Parent.Parent.Parent.Parent.t)
 
-return tModule.interface({ getValue = tModule.callback, map = tModule.callback })
+return TModule.interface({ getValue = TModule.callback, map = TModule.callback })

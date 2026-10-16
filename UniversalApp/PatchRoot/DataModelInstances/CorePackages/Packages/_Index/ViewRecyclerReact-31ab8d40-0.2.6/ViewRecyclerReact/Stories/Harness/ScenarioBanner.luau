@@ -1,15 +1,15 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-assert(viewRecyclerReact ~= nil, "ScenarioBanner must be mounted under view-recycler-react")
-local createElement = require(viewRecyclerReact.Parent.React).createElement
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+assert(ViewRecyclerReact ~= nil, "ScenarioBanner must be mounted under view-recycler-react")
+local CreateElementFunction = require(ViewRecyclerReact.Parent.React).createElement
 
-return function(p1)
-	-- upvalues: createElement (ref)
-	return createElement("Frame", {
+return function(p1) --[[ Line: 8 | Named "ScenarioBanner" ]]
+	-- upvalues: CreateElementFunction (copy)
+	return CreateElementFunction("Frame", {
 		BorderSizePixel = 0,
 		BackgroundColor3 = Color3.fromRGB(31, 33, 43),
 		Size = UDim2.new(1, 0, 0, p1.height or 140)
 	}, {
-		Title = createElement("TextLabel", {
+		Title = CreateElementFunction("TextLabel", {
 			BackgroundTransparency = 1,
 			TextSize = 19,
 			Font = Enum.Font.BuilderSansBold,
@@ -19,7 +19,7 @@ return function(p1)
 			TextColor3 = Color3.new(1, 1, 1),
 			TextXAlignment = Enum.TextXAlignment.Left
 		}),
-		Instructions = createElement("TextLabel", {
+		Instructions = CreateElementFunction("TextLabel", {
 			BackgroundTransparency = 1,
 			TextSize = 14,
 			TextWrapped = true,
@@ -31,7 +31,7 @@ return function(p1)
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top
 		}),
-		ItemUpdate = createElement("TextLabel", {
+		ItemUpdate = CreateElementFunction("TextLabel", {
 			BackgroundTransparency = 1,
 			TextSize = 13,
 			Font = Enum.Font.BuilderSans,
@@ -41,7 +41,7 @@ return function(p1)
 			TextColor3 = Color3.fromRGB(174, 197, 255),
 			TextXAlignment = Enum.TextXAlignment.Left
 		}),
-		AcceptanceCriteria = createElement("TextLabel", {
+		AcceptanceCriteria = CreateElementFunction("TextLabel", {
 			BackgroundTransparency = 1,
 			TextSize = 14,
 			TextWrapped = true,

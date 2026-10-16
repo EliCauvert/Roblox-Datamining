@@ -1,29 +1,29 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local assetService = game:GetService("AssetService")
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local creationFlowMusicInfoRetrievedModule = require(momentsCreationFlow.Actions.CreationFlowMusicInfoRetrieved)
-local useDispatch = momentsCommonModule.Hooks.useDispatch
-local useSelector = momentsCommonModule.Hooks.useSelector
-local constantsModule = require(momentsCreationFlow.Constants)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local AssetService = game:GetService("AssetService")
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local CreationFlowMusicInfoRetrievedModule = require(MomentsCreationFlow.Actions.CreationFlowMusicInfoRetrieved)
+local UseDispatchFunction = MomentsCommonModule.Hooks.useDispatch
+local UseSelectorFunction = MomentsCommonModule.Hooks.useSelector
+local ConstantsModule = require(MomentsCreationFlow.Constants)
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useSelector (ref), constantsModule (ref), reactModule (ref), assetService (ref), creationFlowMusicInfoRetrievedModule (ref)
-	local var1 = useDispatch()
-	local var2 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy), p1 (ref)
-		return p2[constantsModule.RoduxKey].Music[p1]
+return function(p1) --[[ Line: 18 ]]
+	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), AssetService (copy), CreationFlowMusicInfoRetrievedModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 21 ]]
+		-- upvalues: ConstantsModule (upval), p1 (copy)
+		return p2[ConstantsModule.RoduxKey].Music[p1]
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), assetService (copy), var1 (ref), creationFlowMusicInfoRetrievedModule (copy)
-		if not var2 and p1 then
-			task.spawn(function()
-				-- upvalues: assetService (copy), p1 (copy), var1 (copy), creationFlowMusicInfoRetrievedModule (copy)
-				var1(creationFlowMusicInfoRetrievedModule({ [p1] = assetService:GetAudioMetadataAsync({ p1 })[1] }))
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: UseSelectorResult (copy), p1 (copy), AssetService (upval), UseDispatchResult (copy), CreationFlowMusicInfoRetrievedModule (upval)
+		if not UseSelectorResult and p1 then
+			task.spawn(function() --[[ Line: 27 ]]
+				-- upvalues: AssetService (upval), p1 (upval), UseDispatchResult (upval), CreationFlowMusicInfoRetrievedModule (upval)
+				UseDispatchResult(CreationFlowMusicInfoRetrievedModule({ [p1] = AssetService:GetAudioMetadataAsync({ p1 })[1] }))
 			end)
 		end
-	end, { p1, var2, var1 })
+	end, { p1, UseSelectorResult, UseDispatchResult })
 	
-	return var2
+	return UseSelectorResult
 end

@@ -1,12 +1,16 @@
 ﻿return {
-	createSignalIfSupported = function()
-		local abortController = _G.AbortController
+	createSignalIfSupported = function() --[[ Line: 11 ]]
+		local AbortController = _G.AbortController
 		
-		if typeof(abortController) == "nil" then
+		if typeof(AbortController) == "nil" then
 			return { controller = false, signal = false }
+		else
+			local NewAbortController = AbortController.new()
+			
+			return {
+				controller = NewAbortController,
+				signal = NewAbortController.signal
+			}
 		end
-		local var1 = abortController.new()
-		
-		return { controller = var1, signal = var1.signal }
 	end
 }

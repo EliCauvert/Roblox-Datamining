@@ -1,1 +1,1 @@
-﻿return require(script.TextInput)
+﻿return (require(script.TextInput))

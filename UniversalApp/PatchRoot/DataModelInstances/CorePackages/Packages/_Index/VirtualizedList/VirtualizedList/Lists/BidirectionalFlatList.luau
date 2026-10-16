@@ -1,243 +1,239 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local object = require(parent_1.LuauPolyfill).Object
-local promiseModule = require(parent_1.Promise)
-local t = {}
-local reactModule = require(parent_1.React)
-local useRef = reactModule.useRef
-local useState = reactModule.useState
-local viewModule = require(parent.Components.View.View)
-local flatListModule = require(script.Parent.FlatList)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Object = require(Parent1.LuauPolyfill).Object
+local PromiseModule = require(Parent1.Promise)
+local ReactModule = require(Parent1.React)
+local UseRefFunction = ReactModule.useRef
+local UseStateFunction = ReactModule.useState
+local ViewModule = require(Parent.Components.View.View)
+local FlatListModule = require(script.Parent.FlatList)
 
-local function _(p1)
-	return function(p2)
-		-- upvalues: p1 (ref)
-		return if p1 then p2.X else p2.Y
+local function _(p1) --[[ Line: 81 | Named "_getLength" ]]
+	return function(AbsoluteSize) --[[ Line: 82 ]]
+		-- upvalues: p1 (copy)
+		return if p1 then AbsoluteSize.X else AbsoluteSize.Y
 	end
 end
 
-t.BidirectionalFlatList = reactModule.forwardRef(function(p1, p2)
-	-- upvalues: promiseModule (ref), useState (ref), useRef (ref), reactModule (ref), flatListModule (ref), object (ref), viewModule (ref)
-	local function promiseFn()
-		-- upvalues: promiseModule (copy)
-		return promiseModule.resolve()
-	end
-	
-	local _ = if p1.activityIndicatorColor == nil then "black" else p1.activityIndicatorColor
-	local var1 = if p1.autoscrollToTopThreshold == nil then 100 else p1.autoscrollToTopThreshold
-	local data = p1.data
-	local enableAutoscrollToTop = p1.enableAutoscrollToTop
-	local footerLoadingIndicator = p1.FooterLoadingIndicator
-	local headerLoadingIndicator = p1.HeaderLoadingIndicator
-	local listHeaderComponent = p1.ListHeaderComponent
-	local listFooterComponent = p1.ListFooterComponent
-	local var2 = if p1.onEndReached == nil then promiseFn else p1.onEndReached
-	local var3 = if p1.onEndReachedThreshold == nil then 10 else p1.onEndReachedThreshold
-	local onScroll = p1.onScroll
-	local var4 = if p1.onStartReached == nil then promiseFn else p1.onStartReached
-	local var5 = if p1.onStartReachedThreshold == nil then 10 else p1.onStartReachedThreshold
-	local var6 = p1.showDefaultLoadingIndicators == nil or p1.showDefaultLoadingIndicators
-	local var7 = if p1.enableRetryOnStartReached == nil then false else p1.enableRetryOnStartReached
-	local var8 = if p1.enableRetryOnEndReached == nil then false else p1.enableRetryOnEndReached
-	local var9, var10 = useState(false)
-	local var11, var12 = useState(false)
-	local var13, var14 = useState(0)
-	local var15 = useRef({})
-	local var16 = useRef({})
-	local var17 = useRef(nil)
-	local var18 = useRef(nil)
-	
-	local function maybeCallOnStartReached()
-		-- upvalues: data (ref), var15 (ref), p1 (ref), var13 (ref), var10 (ref), promiseModule (copy), var17 (ref), var18 (ref), var4 (ref)
-		local var19
-		if data and #data > 0 and var15.current[#data] then return end
-		if p1.inverted then
-			var19 = var13 >= 3
-			var19 = nil
-		else
-			var19 = var13 >= 1
-		end
-		if not var19 then return end
-		if data and #data > 0 and var19 then
-			var15.current[#data] = true
-		end
-		var10(true)
-		
-		local function p()
-			-- upvalues: promiseModule (copy), var17 (copy), var10 (copy)
-			return promiseModule.new(function(p3)
-				-- upvalues: var17 (copy), var10 (copy)
-				var17.current = nil
-				var10(false)
-				p3()
-			end)
+return {
+	BidirectionalFlatList = ReactModule.forwardRef(function(Tbl, Ref) --[[ Line: 98 ]]
+		-- upvalues: PromiseModule (copy), UseStateFunction (copy), UseRefFunction (copy), ReactModule (copy), FlatListModule (copy), Object (copy), ViewModule (copy)
+		local function promiseFn() --[[ Line: 99 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve()
 		end
 		
-		if var18.current then
-			var18.current:andThen(function()
-				-- upvalues: var17 (copy), var4 (copy), p (ref)
-				var17.current = var4():andThen(p)
-			end)
-			
-			return
+		if Tbl.activityIndicatorColor ~= nil then
+			local _ = Tbl.activityIndicatorColor
 		end
-		var17.current = var4():andThen(p)
-	end
-	
-	local function maybeCallOnEndReached()
-		-- upvalues: data (ref), var16 (ref), p1 (ref), var13 (ref), var12 (ref), promiseModule (copy), var18 (ref), var17 (ref), var2 (ref)
-		local var19
-		if data and #data > 0 and var16.current[#data] then return end
-		if p1.inverted then
-			var19 = var13 >= 3
-			var19 = nil
-		else
-			var19 = var13 >= 1
-		end
-		if not var19 then return end
-		if data and #data > 0 and var19 then
-			var16.current[#data] = true
-		end
-		var12(true)
+		local AutoscrollToTopThreshold = if Tbl.autoscrollToTopThreshold == nil then 100 else Tbl.autoscrollToTopThreshold
+		local Data = Tbl.data
+		local EnableAutoscrollToTop = Tbl.enableAutoscrollToTop
+		local FooterLoadingIndicator = Tbl.FooterLoadingIndicator
+		local HeaderLoadingIndicator = Tbl.HeaderLoadingIndicator
+		local ListHeaderComponent = Tbl.ListHeaderComponent
+		local ListFooterComponent = Tbl.ListFooterComponent
+		local PromiseFn = if Tbl.onEndReached == nil then promiseFn else Tbl.onEndReached
+		local OnEndReachedThreshold = if Tbl.onEndReachedThreshold == nil then 10 else Tbl.onEndReachedThreshold
+		local OnScrollFunction = Tbl.onScroll
+		local PromiseFn1 = if Tbl.onStartReached == nil then promiseFn else Tbl.onStartReached
+		local OnStartReachedThreshold = if Tbl.onStartReachedThreshold == nil then 10 else Tbl.onStartReachedThreshold
+		local NoShowDefaultLoadingIndicators = Tbl.showDefaultLoadingIndicators == nil or Tbl.showDefaultLoadingIndicators
+		local EnableRetryOnStartReached = Tbl.enableRetryOnStartReached ~= nil and Tbl.enableRetryOnStartReached
+		local EnableRetryOnEndReached = Tbl.enableRetryOnEndReached ~= nil and Tbl.enableRetryOnEndReached
+		local UseStateResult, UseStateResult2 = UseStateFunction(false)
+		local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
+		local UseStateResult3, UseStateResult2_2 = UseStateFunction(0)
+		local UseRefResult = UseRefFunction({})
+		local UseRefResult1 = UseRefFunction({})
+		local UseRefResult2 = UseRefFunction(nil)
+		local UseRefResult3 = UseRefFunction(nil)
 		
-		local function p()
-			-- upvalues: promiseModule (copy), var18 (copy), var12 (copy)
-			return promiseModule.new(function(p3)
-				-- upvalues: var18 (copy), var12 (copy)
-				var18.current = nil
-				var12(false)
-				p3()
-			end)
-		end
-		
-		if var17.current then
-			var17.current:andThen(function()
-				-- upvalues: var18 (copy), var2 (copy), p (ref)
-				var18.current = var2():andThen(p)
-			end)
+		local function maybeCallOnStartReached() --[[ Line: 133 ]]
+			-- upvalues: Data (copy), UseRefResult (copy), Tbl (copy), UseStateResult3 (copy), UseStateResult2 (copy), PromiseModule (upval), UseRefResult2 (copy), UseRefResult3 (copy), PromiseFn1 (copy)
+			if Data and #Data > 0 and UseRefResult.current[#Data] then return end
+			local IsUseStateResultAbove: boolean = if Tbl.inverted then UseStateResult3 >= 3 else UseStateResult3 >= 1
 			
-			return
-		end
-		var18.current = var2():andThen(p)
-	end
-	
-	return reactModule.createElement(reactModule.Fragment, nil, reactModule.createElement(flatListModule, object.assign(table.clone(p1), {
-		renderItem = function(p3)
-			-- upvalues: reactModule (copy), viewModule (copy), p2 (ref), p1 (ref), enableAutoscrollToTop (ref), var1 (ref)
-			local item = p3.item
-			
-			return reactModule.createElement(viewModule, {
-				BorderSizePixel = 0,
-				name = "resize",
-				onLayout = function(p4)
-					-- upvalues: p2 (copy), p1 (copy), item (ref), enableAutoscrollToTop (copy), var1 (copy)
-					local var19 = if p2 and p2.current then p2.current._listRef._scrollRef.getNativeScrollRef()._nativeRef.current else nil
-					local horizontal = p1.horizontal
-					
-					local var20 = function(p5)
-						-- upvalues: horizontal (ref)
-						return if horizontal then p5.X else p5.Y
-					end
-					
-					if item.shouldResizeOnMount and var19 then
-						local var21 = var20(p4.AbsoluteSize)
-						
-						if var21 <= 0 or var19 == nil then
-							item.shouldResizeOnMount = false
-							
-							return
-						end
-						local canvasPosition = var19.CanvasPosition
-						local absoluteSize = var19.AbsoluteSize
-						local absoluteCanvasSize = var19.AbsoluteCanvasSize
-						local var22 = if enableAutoscrollToTop then var1 else nil
-						
-						if var22 and (if p1.inverted then var20(absoluteCanvasSize) - var20(canvasPosition) - var20(absoluteSize) else var20(canvasPosition)) < var22 then
-							item.shouldResizeOnMount = false
-							var19.CanvasPosition = if p1.inverted then if p1.horizontal then Vector2.new(var20(absoluteCanvasSize) - var20(absoluteSize), var19.CanvasPosition.Y) else Vector2.new(var19.CanvasPosition.X, var20(absoluteCanvasSize) - var20(absoluteSize)) elseif p1.horizontal then Vector2.new(0, var19.CanvasPosition.Y) else Vector2.new(var19.CanvasPosition.X, 0)
-							
-							return
-						end
-						local var23 = if p1.inverted then if p1.horizontal then Vector2.new(canvasPosition.X - var21, canvasPosition.Y) else Vector2.new(canvasPosition.X, canvasPosition.Y - var21) elseif p1.horizontal then Vector2.new(canvasPosition.X + var21, canvasPosition.Y) else Vector2.new(canvasPosition.X, canvasPosition.Y + var21)
-						item.shouldResizeOnMount = false
-						var19.CanvasPosition = var23
-					end
-				end,
-				AutomaticSize = if p1.horizontal then Enum.AutomaticSize.X else Enum.AutomaticSize.Y,
-				Size = if p1.horizontal then UDim2.new(0, 0, 1, 0) else UDim2.new(1, 0, 0, 0)
-			}, { child = p1.renderItem(p3) })
-		end,
-		ref = p2,
-		ListHeaderComponent = function()
-			-- upvalues: var6 (ref), listHeaderComponent (ref), reactModule (copy), var9 (ref), headerLoadingIndicator (ref)
-			if var6 then
-				if not var9 then
-					return nil
-				elseif headerLoadingIndicator then
-					return reactModule.createElement(headerLoadingIndicator, nil)
-				elseif _G.__DEV__ then
-					warn("default activity indicator not available")
-				end
-				return nil
-			else
-				return if listHeaderComponent then reactModule.createElement(listHeaderComponent, nil) else nil
+			if not IsUseStateResultAbove then return end
+			if Data and #Data > 0 and IsUseStateResultAbove then
+				UseRefResult.current[#Data] = true
 			end
-		end,
-		ListFooterComponent = function()
-			-- upvalues: var6 (ref), listFooterComponent (ref), reactModule (copy), var11 (ref), footerLoadingIndicator (ref)
-			if var6 then
-				if not var11 then
-					return nil
-				elseif footerLoadingIndicator then
-					return reactModule.createElement(footerLoadingIndicator, nil)
-				elseif _G.__DEV__ then
-					warn("default activity indicator not available")
-				end
-				return nil
-			else
-				return if listFooterComponent then reactModule.createElement(listFooterComponent, nil) else nil
-			end
-		end,
-		onEndReached = object.None,
-		onScroll = function(p3)
-			-- upvalues: var14 (ref), onScroll (ref), p1 (ref), var5 (ref), var3 (ref), maybeCallOnStartReached (ref), var7 (ref), data (ref), var15 (ref), maybeCallOnEndReached (ref), var8 (ref), var16 (ref)
-			var14(function(p4)
-				return p4 + 1
-			end)
+			UseStateResult2(true)
 			
-			if onScroll then
-				onScroll(p3)
-			end
-			local var19 = p3:GetChildren()[1]
-			local horizontal = p1.horizontal
-			
-			local var20 = function(p4)
-				-- upvalues: horizontal (ref)
-				return if horizontal then p4.X else p4.Y
+			local function p() --[[ Line: 151 ]]
+				-- upvalues: PromiseModule (upval), UseRefResult2 (upval), UseStateResult2 (upval)
+				return PromiseModule.new(function(Callback: () -> ()) --[[ Line: 152 ]]
+					-- upvalues: UseRefResult2 (upval), UseStateResult2 (upval)
+					UseRefResult2.current = nil
+					UseStateResult2(false)
+					Callback()
+				end)
 			end
 			
-			local var21 = var20(p3.AbsoluteSize)
-			local var22 = if p1.inverted then var20(p3.AbsoluteCanvasSize) - var20(p3.CanvasPosition) - var21 else var20(p3.CanvasPosition)
-			local var23 = var20(var19.AbsoluteSize) - var21 - var22 < var3
-			
-			if var22 < var5 then
-				maybeCallOnStartReached()
-			elseif var7 and data and (#data > 0 and var15.current[#data]) then
-				var15.current[#data] = false
-			end
-			if var23 then
-				maybeCallOnEndReached()
+			if UseRefResult3.current then
+				UseRefResult3.current:andThen(function() --[[ Line: 160 ]]
+					-- upvalues: UseRefResult2 (upval), PromiseFn1 (upval), p (copy)
+					UseRefResult2.current = PromiseFn1():andThen(p)
+				end)
 				
 				return
-			elseif var8 and data and (#data > 0 and var16.current[#data]) then
-				var16.current[#data] = false
+			else
+				UseRefResult2.current = PromiseFn1():andThen(p)
 			end
-		end,
-		maintainVisibleContentPosition = {
-			minIndexForVisible = 1,
-			autoscrollToTopThreshold = if enableAutoscrollToTop then var1 else nil
-		}
-	})))
-end)
-
-return t
+		end
+		
+		local function maybeCallOnEndReached() --[[ Line: 168 ]]
+			-- upvalues: Data (copy), UseRefResult1 (copy), Tbl (copy), UseStateResult3 (copy), UseStateResult2_1 (copy), PromiseModule (upval), UseRefResult3 (copy), UseRefResult2 (copy), PromiseFn (copy)
+			if Data and #Data > 0 and UseRefResult1.current[#Data] then return end
+			local IsUseStateResultAbove: boolean = if Tbl.inverted then UseStateResult3 >= 3 else UseStateResult3 >= 1
+			
+			if not IsUseStateResultAbove then return end
+			if Data and #Data > 0 and IsUseStateResultAbove then
+				UseRefResult1.current[#Data] = true
+			end
+			UseStateResult2_1(true)
+			
+			local function p() --[[ Line: 186 ]]
+				-- upvalues: PromiseModule (upval), UseRefResult3 (upval), UseStateResult2_1 (upval)
+				return PromiseModule.new(function(Callback: () -> ()) --[[ Line: 187 ]]
+					-- upvalues: UseRefResult3 (upval), UseStateResult2_1 (upval)
+					UseRefResult3.current = nil
+					UseStateResult2_1(false)
+					Callback()
+				end)
+			end
+			
+			if UseRefResult2.current then
+				UseRefResult2.current:andThen(function() --[[ Line: 195 ]]
+					-- upvalues: UseRefResult3 (upval), PromiseFn (upval), p (copy)
+					UseRefResult3.current = PromiseFn():andThen(p)
+				end)
+				
+				return
+			else
+				UseRefResult3.current = PromiseFn():andThen(p)
+			end
+		end
+		
+		return ReactModule.createElement(ReactModule.Fragment, nil, ReactModule.createElement(FlatListModule, Object.assign(table.clone(Tbl), {
+			renderItem = function(p1) --[[ Line: 314 ]]
+				-- upvalues: ReactModule (upval), ViewModule (upval), Ref (copy), Tbl (copy), EnableAutoscrollToTop (copy), AutoscrollToTopThreshold (copy)
+				local Item = p1.item
+				
+				return ReactModule.createElement(ViewModule, {
+					BorderSizePixel = 0,
+					name = "resize",
+					onLayout = function(Frame) --[[ Line: 317 ]]
+						-- upvalues: Ref (upval), Tbl (upval), Item (copy), EnableAutoscrollToTop (upval), AutoscrollToTopThreshold (upval)
+						local Current = if Ref and Ref.current then Ref.current._listRef._scrollRef.getNativeScrollRef()._nativeRef.current else nil
+						local Horizontal = Tbl.horizontal
+						
+						local function v50(AbsoluteSize) --[[ Line: 82 ]]
+							-- upvalues: Horizontal (copy)
+							return if Horizontal then AbsoluteSize.X else AbsoluteSize.Y
+						end
+						
+						if Item.shouldResizeOnMount and Current then
+							local v1: number = v50(Frame.AbsoluteSize)
+							
+							if v1 <= 0 or Current == nil then
+								Item.shouldResizeOnMount = false
+								
+								return
+							end
+							local CanvasPosition = Current.CanvasPosition
+							local AbsoluteSize = Current.AbsoluteSize
+							local AbsoluteCanvasSize = Current.AbsoluteCanvasSize
+							local AutoscrollToTopThreshold1 = if EnableAutoscrollToTop then AutoscrollToTopThreshold else nil
+							
+							if AutoscrollToTopThreshold1 and (if Tbl.inverted then v50(AbsoluteCanvasSize) - v50(CanvasPosition) - v50(AbsoluteSize) else v50(CanvasPosition)) < AutoscrollToTopThreshold1 then
+								Item.shouldResizeOnMount = false
+								Current.CanvasPosition = if Tbl.inverted then if Tbl.horizontal then Vector2.new(v50(AbsoluteCanvasSize) - v50(AbsoluteSize), Current.CanvasPosition.Y) else Vector2.new(Current.CanvasPosition.X, v50(AbsoluteCanvasSize) - v50(AbsoluteSize)) elseif Tbl.horizontal then Vector2.new(0, Current.CanvasPosition.Y) else Vector2.new(Current.CanvasPosition.X, 0)
+								
+								return
+							end
+							Item.shouldResizeOnMount = false
+							Current.CanvasPosition = if Tbl.inverted then if Tbl.horizontal then Vector2.new(CanvasPosition.X - v1, CanvasPosition.Y) else Vector2.new(CanvasPosition.X, CanvasPosition.Y - v1) elseif Tbl.horizontal then Vector2.new(CanvasPosition.X + v1, CanvasPosition.Y) else Vector2.new(CanvasPosition.X, CanvasPosition.Y + v1)
+						end
+					end,
+					AutomaticSize = if Tbl.horizontal then Enum.AutomaticSize.X else Enum.AutomaticSize.Y,
+					Size = if Tbl.horizontal then UDim2.new(0, 0, 1, 0) else UDim2.new(1, 0, 0, 0)
+				}, { child = Tbl.renderItem(p1) })
+			end,
+			ref = Ref,
+			ListHeaderComponent = function() --[[ Line: 247 ]]
+				-- upvalues: NoShowDefaultLoadingIndicators (copy), ListHeaderComponent (copy), ReactModule (upval), UseStateResult (copy), HeaderLoadingIndicator (copy)
+				if not NoShowDefaultLoadingIndicators then
+					return if ListHeaderComponent then ReactModule.createElement(ListHeaderComponent, nil) else nil
+				end
+				if not UseStateResult then
+					return nil
+				end
+				if HeaderLoadingIndicator then
+					return ReactModule.createElement(HeaderLoadingIndicator, nil)
+				end
+				if _G.__DEV__ then
+					warn("default activity indicator not available")
+				end
+				return nil
+			end,
+			ListFooterComponent = function() --[[ Line: 277 ]]
+				-- upvalues: NoShowDefaultLoadingIndicators (copy), ListFooterComponent (copy), ReactModule (upval), UseStateResult1 (copy), FooterLoadingIndicator (copy)
+				if not NoShowDefaultLoadingIndicators then
+					return if ListFooterComponent then ReactModule.createElement(ListFooterComponent, nil) else nil
+				end
+				if not UseStateResult1 then
+					return nil
+				end
+				if FooterLoadingIndicator then
+					return ReactModule.createElement(FooterLoadingIndicator, nil)
+				end
+				if _G.__DEV__ then
+					warn("default activity indicator not available")
+				end
+				return nil
+			end,
+			onEndReached = Object.None,
+			onScroll = function(ScrollFrame) --[[ Line: 204 ]]
+				-- upvalues: UseStateResult2_2 (copy), OnScrollFunction (copy), Tbl (copy), OnStartReachedThreshold (copy), OnEndReachedThreshold (copy), maybeCallOnStartReached (copy), EnableRetryOnStartReached (copy), Data (copy), UseRefResult (copy), maybeCallOnEndReached (copy), EnableRetryOnEndReached (copy), UseRefResult1 (copy)
+				UseStateResult2_2(function(p1: number): number --[[ Line: 206 ]]
+					return p1 + 1
+				end)
+				
+				if OnScrollFunction then
+					OnScrollFunction(ScrollFrame)
+				end
+				local Child = ScrollFrame:GetChildren()[1]
+				local Horizontal = Tbl.horizontal
+				
+				local function v42(AbsoluteSize) --[[ Line: 82 ]]
+					-- upvalues: Horizontal (copy)
+					return if Horizontal then AbsoluteSize.X else AbsoluteSize.Y
+				end
+				
+				local v1 = v42(ScrollFrame.AbsoluteSize)
+				local v2 = if Tbl.inverted then v42(ScrollFrame.AbsoluteCanvasSize) - v42(ScrollFrame.CanvasPosition) - v1 else v42(ScrollFrame.CanvasPosition)
+				local IsOnStartReachedThresholdAbove = v2 < OnStartReachedThreshold
+				local IsOnEndReachedThresholdAbove = v42(Child.AbsoluteSize) - v1 - v2 < OnEndReachedThreshold
+				
+				if IsOnStartReachedThresholdAbove then
+					maybeCallOnStartReached()
+				elseif EnableRetryOnStartReached and Data and #Data > 0 and UseRefResult.current[#Data] then
+					UseRefResult.current[#Data] = false
+				end
+				if IsOnEndReachedThresholdAbove then
+					maybeCallOnEndReached()
+					
+					return
+				end
+				if EnableRetryOnEndReached and Data and #Data > 0 and UseRefResult1.current[#Data] then
+					UseRefResult1.current[#Data] = false
+				end
+			end,
+			maintainVisibleContentPosition = {
+				minIndexForVisible = 1,
+				autoscrollToTopThreshold = if EnableAutoscrollToTop then AutoscrollToTopThreshold else nil
+			}
+		})))
+	end)
+}

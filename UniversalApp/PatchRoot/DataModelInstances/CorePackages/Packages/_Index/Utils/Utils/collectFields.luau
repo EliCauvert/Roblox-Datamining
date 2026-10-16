@@ -1,99 +1,98 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local map = luauPolyfillModule.Map
-local set = luauPolyfillModule.Set
-local t = {}
-local memoize5 = require(script.Parent.memoize).memoize5
-local graphQLModule = require(parent.GraphQL)
-local kind = graphQLModule.Kind
-local getDirectiveValues = graphQLModule.getDirectiveValues
-local graphQLSkipDirective = graphQLModule.GraphQLSkipDirective
-local graphQLIncludeDirective = graphQLModule.GraphQLIncludeDirective
-local isAbstractType = graphQLModule.isAbstractType
-local typeFromAST = graphQLModule.typeFromAST
-local shouldIncludeNode = nil
-local getFieldEntryKey = nil
-local doesFragmentConditionMatch = nil
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Map = LuauPolyfillModule.Map
+local Set = LuauPolyfillModule.Set
+local GraphQLModule = require(Parent.GraphQL)
+local Kind = GraphQLModule.Kind
+local GetDirectiveValuesFunction = GraphQLModule.getDirectiveValues
+local GraphQLSkipDirective = GraphQLModule.GraphQLSkipDirective
+local GraphQLIncludeDirective = GraphQLModule.GraphQLIncludeDirective
+local IsAbstractTypeFunction = GraphQLModule.isAbstractType
+local TypeFromASTFunction = GraphQLModule.typeFromAST
+local Callback = nil
+local Callback1 = nil
+local Callback2 = nil
 
-local function collectFields(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: kind (ref), boolean (ref), shouldIncludeNode (write), getFieldEntryKey (write), doesFragmentConditionMatch (write), collectFields (ref)
-	for i, v in p5.selections do
-		local kind_1 = v.kind
+local function collectFields(p1, p2, p3, p4, SelectionSet, NewResult, NewResult1) --[[ Line: 52 ]]
+	-- upvalues: Kind (copy), Boolean (copy), Callback (ref), Callback1 (ref), Callback2 (ref), collectFields (copy)
+	for _, selection in SelectionSet.selections do
+		local Kind1 = selection.kind
 		
-		if kind_1 == kind.FIELD then
-			if boolean.toJSBoolean(shouldIncludeNode(p3, v)) then
-				local var1 = getFieldEntryKey(v)
-				local var2 = p6:get(var1)
+		if Kind1 == Kind.FIELD then
+			if Boolean.toJSBoolean(Callback(p3, selection)) then
+				local CallbackResult = Callback1(selection)
+				local GetResult = NewResult:get(CallbackResult)
 				
-				if var2 == nil then
-					p6:set(var1, { v })
+				if GetResult == nil then
+					NewResult:set(CallbackResult, { selection })
 				else
-					table.insert(var2, v)
+					table.insert(GetResult, selection)
 				end
 			end
-		elseif kind_1 == kind.INLINE_FRAGMENT then
-			if shouldIncludeNode(p3, v) and doesFragmentConditionMatch(p1, v, p4) then
-				collectFields(p1, p2, p3, p4, v.selectionSet, p6, p7)
+		elseif Kind1 == Kind.INLINE_FRAGMENT then
+			if Callback(p3, selection) and Callback2(p1, selection, p4) then
+				collectFields(p1, p2, p3, p4, selection.selectionSet, NewResult, NewResult1)
 			end
-		elseif kind_1 == kind.FRAGMENT_SPREAD then
-			local value = v.name.value
+		elseif Kind1 == Kind.FRAGMENT_SPREAD then
+			local Value = selection.name.value
 			
-			if not p7:has(value) and shouldIncludeNode(p3, v) then
-				p7:add(value)
-				local var3 = p2[tostring(value)]
+			if not NewResult1:has(Value) and Callback(p3, selection) then
+				NewResult1:add(Value)
+				local v1 = p2[tostring(Value)]
 				
-				if boolean.toJSBoolean(var3) and boolean.toJSBoolean(doesFragmentConditionMatch(p1, var3, p4)) then
-					collectFields(p1, p2, p3, p4, var3.selectionSet, p6, p7)
+				if Boolean.toJSBoolean(v1) and Boolean.toJSBoolean(Callback2(p1, v1, p4)) then
+					collectFields(p1, p2, p3, p4, v1.selectionSet, NewResult, NewResult1)
 				end
 			end
 		end
 	end
-	return p6
+	return NewResult
 end
 
-t.collectFields = collectFields
-
-shouldIncludeNode = function(p8, p9)
-	-- upvalues: getDirectiveValues (ref), graphQLSkipDirective (ref), graphQLIncludeDirective (ref)
-	local var4 = getDirectiveValues(graphQLSkipDirective, p9, p8)
+Callback = function(p5, p6): boolean --[[ Line: 164 | Named "shouldIncludeNode" ]]
+	-- upvalues: GetDirectiveValuesFunction (copy), GraphQLSkipDirective (copy), GraphQLIncludeDirective (copy)
+	local DirectiveValues = GetDirectiveValuesFunction(GraphQLSkipDirective, p6, p5)
 	
-	if (if typeof(var4) == "table" then var4["if"] else nil) == true then
+	if (if typeof(DirectiveValues) == "table" then DirectiveValues["if"] else nil) == true then
 		return false
+	else
+		local DirectiveValues1 = GetDirectiveValuesFunction(GraphQLIncludeDirective, p6, p5)
+		
+		return (if typeof(DirectiveValues1) == "table" then DirectiveValues1["if"] else nil) ~= false
 	end
-	local var5 = getDirectiveValues(graphQLIncludeDirective, p9, p8)
-	
-	return (if typeof(var5) == "table" then var5["if"] else nil) ~= false
 end
 
-doesFragmentConditionMatch = function(p8, p9, p10)
-	-- upvalues: boolean (ref), typeFromAST (ref), isAbstractType (ref), array (ref)
-	local typeCondition = p9.typeCondition
+Callback2 = function(p5, p6, p7) --[[ Line: 184 | Named "doesFragmentConditionMatch" ]]
+	-- upvalues: Boolean (copy), TypeFromASTFunction (copy), IsAbstractTypeFunction (copy), Array (copy)
+	local TypeCondition = p6.typeCondition
 	
-	if not boolean.toJSBoolean(typeCondition) then
+	if Boolean.toJSBoolean(TypeCondition) then
+		local TypeFromASTResult = TypeFromASTFunction(p5, TypeCondition)
+		
+		return TypeFromASTResult == p7 or (if Boolean.toJSBoolean(IsAbstractTypeFunction(TypeFromASTResult)) then Array.includes(p5:getPossibleTypes(TypeFromASTResult), p7) else false)
+	else
 		return true
 	end
-	local var4 = typeFromAST(p8, typeCondition)
-	
-	return var4 == p10 or (if boolean.toJSBoolean(isAbstractType(var4)) then array.includes(p8:getPossibleTypes(var4), p10) else false)
 end
 
-getFieldEntryKey = function(p8)
-	return if p8.alias then p8.alias.value else p8.name.value
+Callback1 = function(p5) --[[ Line: 218 | Named "getFieldEntryKey" ]]
+	return if p5.alias then p5.alias.value else p5.name.value
 end
 
-t.collectSubFields = memoize5(function(p8, p9, p10, p11, p12)
-	-- upvalues: map (ref), set (ref), collectFields (ref)
-	local var4 = map.new()
-	local var5 = set.new()
-	
-	for i, v in p12 do
-		if v.selectionSet then
-			collectFields(p8, p9, p10, p11, v.selectionSet, var4, var5)
+return {
+	collectFields = collectFields,
+	collectSubFields = require(script.Parent.memoize).memoize5(function(p5, p6, p7, p8, List) --[[ Line: 226 ]]
+		-- upvalues: Map (copy), Set (copy), collectFields (copy)
+		local NewMap = Map.new()
+		local NewSet = Set.new()
+		
+		for _, value in List do
+			if value.selectionSet then
+				collectFields(p5, p6, p7, p8, value.selectionSet, NewMap, NewSet)
+			end
 		end
-	end
-	return var4
-end)
-
-return t
+		return NewMap
+	end)
+}

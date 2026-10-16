@@ -1,68 +1,56 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local reactModule = require(parent.Parent.Parent.React)
-local loadableImageModule = require(parent.Loading.LoadableImage)
-local _ = require(parent.Style.StyleTypes)
-local uDim = UDim.new(0, 8)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local ReactModule = require(Parent.Parent.Parent.React)
+local LoadableImageModule = require(Parent.Loading.LoadableImage)
+local _ = require(Parent.Style.StyleTypes)
+local _UDim = UDim.new(0, 8)
 
-return function(p1)
-	-- upvalues: uDim (ref), reactModule (ref), loadableImageModule (ref)
-	local var1
-	local aspectRatio = p1.aspectRatio
-	local isTopRounded = p1.isTopRounded
-	local isBottomRounded = p1.isBottomRounded
-	local thumbnail = p1.thumbnail
-	local border = p1.border
-	local isBottomRounded_1 = isTopRounded and isBottomRounded
-	local var2 = not isBottomRounded_1 and (isTopRounded or isBottomRounded)
-	local var3 = if border ~= nil then uDim else border.CornerRadius
-	local createElement = reactModule.createElement
-	local var4 = "Frame"
-	local t = {
+return function(p1) --[[ Line: 27 | Named "VerticalTileThumbnail" ]]
+	-- upvalues: _UDim (copy), ReactModule (copy), LoadableImageModule (copy)
+	local AspectRatio = p1.aspectRatio
+	local IsTopRounded = p1.isTopRounded
+	local IsBottomRounded = p1.isBottomRounded
+	local Thumbnail = p1.thumbnail
+	local Border = p1.border
+	local IsBottomRounded1 = IsTopRounded and IsBottomRounded
+	local IsTopRounded1 = not IsBottomRounded1 and (IsTopRounded or IsBottomRounded)
+	local CornerRadius = if Border == nil then _UDim else Border.CornerRadius
+	
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = if aspectRatio then UDim2.new(1, 0, aspectRatio, 0) else UDim2.new(1, 0, 1, 0),
-		SizeConstraint = if aspectRatio then Enum.SizeConstraint.RelativeXX else nil
-	}
-	local t_1 = {
-		TopFrame = reactModule.createElement("Frame", {
+		Size = if AspectRatio then UDim2.new(1, 0, AspectRatio, 0) else UDim2.new(1, 0, 1, 0),
+		SizeConstraint = if AspectRatio then Enum.SizeConstraint.RelativeXX else nil
+	}, {
+		TopFrame = ReactModule.createElement("Frame", {
 			ClipsDescendants = true,
 			BackgroundTransparency = 1,
 			Position = UDim2.fromScale(0, 0),
-			Size = UDim2.fromScale(1, if not var2 then 1 else 0.5)
+			Size = UDim2.fromScale(1, if IsTopRounded1 then 0.5 else 1)
 		}, {
-			TopImage = reactModule.createElement(loadableImageModule, {
+			TopImage = ReactModule.createElement(LoadableImageModule, {
 				BackgroundTransparency = 1,
 				showFailedStateWhenLoadingFailed = true,
 				useShimmerAnimationWhileLoading = true,
-				Image = thumbnail,
+				Image = Thumbnail,
 				Position = UDim2.fromScale(0, 0),
-				Size = UDim2.fromScale(1, if not var2 then 1 else 2),
-				cornerRadius = if isBottomRounded_1 or isTopRounded then var3 else nil
+				Size = UDim2.fromScale(1, if IsTopRounded1 then 2 else 1),
+				cornerRadius = if IsBottomRounded1 or IsTopRounded then CornerRadius else nil
 			})
-		})
-	}
-	
-	if var2 then
-		var1 = reactModule.createElement
-		var1 = var1("Frame", {
+		}),
+		BottomFrame = if IsTopRounded1 then ReactModule.createElement("Frame", {
 			ClipsDescendants = true,
 			BackgroundTransparency = 1,
 			Position = UDim2.fromScale(0, 0.5),
 			Size = UDim2.fromScale(1, 0.5)
 		}, {
-			BottomImage = reactModule.createElement(loadableImageModule, {
+			BottomImage = ReactModule.createElement(LoadableImageModule, {
 				BackgroundTransparency = 1,
 				showFailedStateWhenLoadingFailed = true,
 				useShimmerAnimationWhileLoading = true,
-				Image = thumbnail,
+				Image = Thumbnail,
 				Position = UDim2.fromScale(0, -1),
 				Size = UDim2.fromScale(1, 2),
-				cornerRadius = if isBottomRounded_1 or isBottomRounded then var3 else nil
+				cornerRadius = if IsBottomRounded1 or IsBottomRounded then CornerRadius else nil
 			})
-		})
-	else
-		var1 = nil
-	end
-	t_1.BottomFrame = var1
-	
-	return createElement(var4, t, t_1)
+		}) else nil
+	})
 end

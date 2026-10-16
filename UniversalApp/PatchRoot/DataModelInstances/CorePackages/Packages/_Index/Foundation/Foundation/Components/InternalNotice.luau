@@ -1,1 +1,1 @@
-﻿return require(script.InternalNotice)
+﻿return (require(script.InternalNotice))

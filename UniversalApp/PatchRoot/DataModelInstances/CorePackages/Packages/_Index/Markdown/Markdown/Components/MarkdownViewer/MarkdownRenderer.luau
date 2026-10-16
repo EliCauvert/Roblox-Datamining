@@ -1,303 +1,298 @@
-﻿local messageBusService = game:GetService("MessageBusService")
-local parent = script:FindFirstAncestor("Components").Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local dashModule = require(parent_1.Dash)
-local foundationModule = require(parent_1.Foundation)
-local inlineLayoutModule = require(parent_1.InlineLayout)
-local markdownCoreModule = require(parent_1.MarkdownCore)
-local view = foundationModule.View
-local text = foundationModule.Text
-local divider = foundationModule.Divider
-local utils = parent.Utils
-local textElement = inlineLayoutModule.Components.InlineLayoutElements.TextElement
-local selectableTextElement = inlineLayoutModule.Components.InlineLayoutElements.SelectableTextElement
-local linkElement = inlineLayoutModule.Components.InlineLayoutElements.LinkElement
-local imageElement = inlineLayoutModule.Components.InlineLayoutElements.ImageElement
-local hardBreakElement = inlineLayoutModule.Components.InlineLayoutElements.HardBreakElement
-local mergeContextsModule = require(utils.mergeContexts)
-local processSoftBreaksModule = require(utils.processSoftBreaks)
-local textStyleModule = require(utils.TextStyle)
-local renderInlineModule = require(script.Parent.Parent.NodeRenderers.renderInline)
-local renderTagModule = require(script.Parent.Parent.NodeRenderers.renderTag)
-local bulletList = markdownCoreModule.Components.BulletList
-local getBaseTextElementEngineTags = textStyleModule.getBaseTextElementEngineTags
-local getCodeTextStyles = textStyleModule.getCodeTextStyles
-local normalizeStyleFont = textStyleModule.normalizeStyleFont
-local _ = require(parent.Types)
-local highlighter = markdownCoreModule.Utils.Highlighter
-local getNodeTypeConfigModule = require(parent.Utils.getNodeTypeConfig)
-local isInlineElement = inlineLayoutModule.Utils.isInlineElement
-local flags = markdownCoreModule.Flags
-local flags_1 = foundationModule.Utility.Flags
-local builderSans = Enum.Font.BuilderSans
-local uDim2 = UDim2.fromOffset(16, 16)
-local code = Enum.Font.Code
-local font = Font.new("rbxasset://fonts/families/BuilderMono.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+﻿local MessageBusService = game:GetService("MessageBusService")
+local Parent = script:FindFirstAncestor("Components").Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local DashModule = require(Parent1.Dash)
+local FoundationModule = require(Parent1.Foundation)
+local InlineLayoutModule = require(Parent1.InlineLayout)
+local MarkdownCoreModule = require(Parent1.MarkdownCore)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Divider = FoundationModule.Divider
+local Utils = Parent.Utils
+local TextElement = InlineLayoutModule.Components.InlineLayoutElements.TextElement
+local SelectableTextElement = InlineLayoutModule.Components.InlineLayoutElements.SelectableTextElement
+local LinkElement = InlineLayoutModule.Components.InlineLayoutElements.LinkElement
+local ImageElement = InlineLayoutModule.Components.InlineLayoutElements.ImageElement
+local HardBreakElement = InlineLayoutModule.Components.InlineLayoutElements.HardBreakElement
+local MergeContextsModule = require(Utils.mergeContexts)
+local ProcessSoftBreaksModule = require(Utils.processSoftBreaks)
+local TextStyleModule = require(Utils.TextStyle)
+local RenderInlineModule = require(script.Parent.Parent.NodeRenderers.renderInline)
+local BulletList = MarkdownCoreModule.Components.BulletList
+local GetBaseTextElementEngineTagsFunction = TextStyleModule.getBaseTextElementEngineTags
+local GetCodeTextStylesFunction = TextStyleModule.getCodeTextStyles
+local NormalizeStyleFontFunction = TextStyleModule.normalizeStyleFont
+local _ = require(Parent.Types)
+local Highlighter = MarkdownCoreModule.Utils.Highlighter
+local GetNodeTypeConfigModule = require(Parent.Utils.getNodeTypeConfig)
+local IsInlineElementFunction = InlineLayoutModule.Utils.isInlineElement
+local Flags = MarkdownCoreModule.Flags
+local Flags1 = FoundationModule.Utility.Flags
+local BuilderSans = Enum.Font.BuilderSans
+local _UDim2 = UDim2.fromOffset(16, 16)
+local Code = Enum.Font.Code
+local _Font = Font.new("rbxasset://fonts/families/BuilderMono.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
-local var1 = function(p1)
+local function v31(p1) --[[ Line: 50 ]]
 	print(`[Default link callback]: URL [{p1}] is clicked`)
 end
 
-local t = { renderers = {} }
+local MarkdownRendererModule = { renderers = {} }
 
-local function _(p1, p2)
-	local fontFace = p1.fontFace or p1.font
+local function _(p1, p2) --[[ Line: 58 | Named "getFontFace" ]]
+	local FontFace = p1.fontFace or p1.font
 	
-	return if typeof(fontFace) == "Font" then fontFace elseif fontFace then Font.fromEnum(fontFace) else Font.fromEnum(p2)
+	return if typeof(FontFace) == "Font" then FontFace elseif FontFace then Font.fromEnum(FontFace) else Font.fromEnum(p2)
 end
 
-local _ = function(value)
-	return value.offset ~= 0
+local _ = function(p1): boolean --[[ Line: 68 | Named "shouldUseTopPadding" ]]
+	return p1.offset ~= 0
 end
 
-local function render(p1, p2)
-	-- upvalues: t (ref), getNodeTypeConfigModule (ref)
-	if not p1 then
+local function render(JoinResult, JoinDeepResult) --[[ Line: 73 ]]
+	-- upvalues: MarkdownRendererModule (copy), GetNodeTypeConfigModule (copy)
+	if not JoinResult then
 		return nil
 	end
-	local name = t.renderers[p1.name]
+	local Renderer = MarkdownRendererModule.renderers[JoinResult.name]
 	
-	if not name then
-		warn(`No renderer found for node: {p1.name}`)
+	if not Renderer then
+		warn(`No renderer found for node: {JoinResult.name}`)
 		
 		return nil
 	end
-	local var2 = name(p1, p2)
-	local var3 = getNodeTypeConfigModule(p1)
+	local RendererResult = Renderer(JoinResult, JoinDeepResult)
+	local NodeTypeConfigModule = GetNodeTypeConfigModule(JoinResult)
 	
-	if var3 and not var3.validateRenderResult(var2) then
-		warn(`Invalid render result for node: {p1.name} {p1.text} of type: {p1.type}`)
+	if NodeTypeConfigModule and not NodeTypeConfigModule.validateRenderResult(RendererResult) then
+		warn(`Invalid render result for node: {JoinResult.name} {JoinResult.text} of type: {JoinResult.type}`)
 	end
-	return var2
+	return RendererResult
 end
 
-local function processChildren(p3, p4)
-	-- upvalues: getNodeTypeConfigModule (ref), render (ref)
-	local children = p3.children
+local function processChildren(p1, p2) --[[ Line: 93 ]]
+	-- upvalues: GetNodeTypeConfigModule (copy), render (copy)
+	local Children = p1.children
 	
-	if not children then
+	if not Children then
 		return {}
 	end
-	local var4 = getNodeTypeConfigModule(p3)
-	local var5 = if var4 then var4.children else {}
-	local t = {}
+	local NodeTypeConfigModule = GetNodeTypeConfigModule(p1)
+	local Children1 = NodeTypeConfigModule and NodeTypeConfigModule.children or {}
+	local List = {}
 	
-	for i, v in children do
-		local type = v.type
+	for _, child in Children do
+		local Type = child.type
 		
-		if not var5[type] then
-			warn(`Invalid child node type. Parent node: {p3.name} {p3.text} of type: {p3.type} has invalid child node: {v.name} {v.text} of type: {type}`)
+		if not Children1[Type] then
+			warn(`Invalid child node type. Parent node: {p1.name} {p1.text} of type: {p1.type} has invalid child node: {child.name} {child.text} of type: {Type}`)
 		end
-		local var6 = render(v, p4)
+		local RenderResult = render(child, p2)
 		
-		if var6 then
-			if #var6 > 0 then
-				for i_1, v_1 in var6 do
-					table.insert(t, v_1)
+		if RenderResult then
+			if #RenderResult > 0 then
+				for _, value in RenderResult do
+					table.insert(List, value)
 				end
 			else
-				table.insert(t, var6)
+				table.insert(List, RenderResult)
 			end
 		end
 	end
-	return t
+	return List
 end
 
-local function renderRoot(p5, p6)
-	-- upvalues: reactModule (ref), view (ref)
-	return reactModule.createElement(view, {
-		tag = "size-full-0 auto-y col",
-		BorderSizePixel = 0,
-		backgroundStyle = { Transparency = 1 }
-	}, p6.processChildren(p5, p6))
-end
-
-local function renderHeading(p5, p6)
-	-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref), mergeContextsModule (ref)
-	return reactModule.createElement(view, {
-		tag = "size-full-0 auto-y",
-		key = tostring(p5.index),
-		LayoutOrder = p5.index
-	}, {
-		UIPadding = p5.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 20) }),
-		InlineLayout = renderInlineModule(p5, mergeContextsModule(p6, {
-			textStyles = p6.headerStyles[math.clamp(if p5.attributes and type(p5.attributes.depth) == "number" then p5.attributes.depth else 1, 1, #p6.headerStyles)]
-		}))
-	})
-end
-
-local function renderParagraph(p5, p6)
-	-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref)
-	return reactModule.createElement(view, {
-		tag = "size-full-0 auto-y",
-		key = tostring(p5.index),
-		LayoutOrder = p5.index
-	}, {
-		UIPadding = p5.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
-		InlineLayout = renderInlineModule(p5, p6)
-	})
-end
-
-local function computeLineNumbers(p5)
-	local p13Count = #p5
-	local t = {}
-	local var7 = 1
-	local var8 = 0
-	while var8 <= p13Count do
-		local matchIndex = string.find(p5, "\n", var8, true)
+local function computeLineNumbers(Text: string): string --[[ Line: 169 ]]
+	local CountText = #Text
+	local List = {}
+	local Count = 1
+	local Init = 0
+	while Init <= CountText do
+		local FoundAt: number? = string.find(Text, "\n", Init, true)
 		
-		if not matchIndex then break end
-		t[var7] = tostring(var7)
-		var7 += 1
-		var8 = matchIndex + 1
+		if not FoundAt then break end
+		List[Count] = tostring(Count)
+		Count += 1
+		Init = FoundAt + 1
 	end
-	t[var7] = tostring(var7)
+	List[Count] = tostring(Count)
 	
-	return table.concat(t, "\n")
+	return table.concat(List, "\n")
 end
 
-local _ = function(p6)
-	-- upvalues: messageBusService (ref)
-	pcall(function()
-		-- upvalues: messageBusService (copy), p6 (ref)
-		return messageBusService:Publish(messageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p6 })
+local _ = function(p3) --[[ Line: 188 | Named "copyToClipboard" ]]
+	-- upvalues: MessageBusService (copy)
+	pcall(function() --[[ Line: 189 ]]
+		-- upvalues: MessageBusService (upval), p3 (copy)
+		return MessageBusService:Publish(MessageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p3 })
 	end)
 end
 
-local var9 = dashModule.memoize(function(p6)
-	-- upvalues: messageBusService (ref)
-	return function()
-		-- upvalues: p6 (ref), messageBusService (copy)
-		pcall(function()
-			-- upvalues: messageBusService (copy), p6 (ref)
-			return messageBusService:Publish(messageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p6 })
+local MemoizeResult = DashModule.memoize(function(Text) --[[ Line: 197 ]]
+	-- upvalues: MessageBusService (copy)
+	return function() --[[ Line: 198 ]]
+		-- upvalues: Text (copy), MessageBusService (upval)
+		pcall(function() --[[ Line: 189 ]]
+			-- upvalues: MessageBusService (upval), Text (copy)
+			return MessageBusService:Publish(MessageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = Text })
 		end)
 	end
 end)
 
-local function renderHardBreak()
-	-- upvalues: hardBreakElement (ref)
-	return hardBreakElement
+local function renderHardBreak() --[[ Line: 467 ]]
+	-- upvalues: HardBreakElement (copy)
+	return HardBreakElement
 end
 
-t.defaultRenderers = {
-	ROOT = renderRoot,
-	HEADING = renderHeading,
-	PARAGRAPH = renderParagraph,
-	CODE_BLOCK = function(p6, p7)
-		-- upvalues: highlighter (ref), getCodeTextStyles (ref), flags (ref), font (ref), code (ref), computeLineNumbers (ref), reactModule (ref), view (ref), foundationModule (ref), var9 (ref), text (ref), dashModule (ref)
-		local var10
-		local text_1 = p6.text
-		local var11 = if (if p6.attributes then p6.attributes.language else nil) == "lua" then highlighter.highlight(text_1, p7.colorScheme) else text_1
-		local _ = nil
-		local var12 = getCodeTextStyles(p7)
-		local t = {
+MarkdownRendererModule.defaultRenderers = {
+	ROOT = function(p3, p4) --[[ Line: 125 ]]
+		-- upvalues: ReactModule (copy), View (copy)
+		return ReactModule.createElement(View, {
+			tag = "size-full-0 auto-y col",
+			BorderSizePixel = 0,
+			backgroundStyle = { Transparency = 1 }
+		}, (p4.processChildren(p3, p4)))
+	end,
+	HEADING = function(p3, p4) --[[ Line: 136 ]]
+		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy), MergeContextsModule (copy)
+		return ReactModule.createElement(View, {
+			tag = "size-full-0 auto-y",
+			key = tostring(p3.index),
+			LayoutOrder = p3.index
+		}, {
+			UIPadding = p3.offset ~= 0 and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 20) }),
+			InlineLayout = RenderInlineModule(p3, MergeContextsModule(p4, {
+				textStyles = p4.headerStyles[math.clamp(if p3.attributes and type(p3.attributes.depth) == "number" then p3.attributes.depth else 1, 1, #p4.headerStyles)]
+			}))
+		})
+	end,
+	PARAGRAPH = function(p3, p4) --[[ Line: 155 ]]
+		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy)
+		return ReactModule.createElement(View, {
+			tag = "size-full-0 auto-y",
+			key = tostring(p3.index),
+			LayoutOrder = p3.index
+		}, {
+			UIPadding = p3.offset ~= 0 and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
+			InlineLayout = RenderInlineModule(p3, p4)
+		})
+	end,
+	CODE_BLOCK = function(p3, p4) --[[ Line: 203 ]]
+		-- upvalues: Highlighter (copy), GetCodeTextStylesFunction (copy), Flags (copy), _Font (copy), Code (copy), computeLineNumbers (copy), ReactModule (copy), View (copy), FoundationModule (copy), MemoizeResult (copy), Text (copy), DashModule (copy)
+		local Text1 = p3.text
+		local HighlightResult = if (if p3.attributes then p3.attributes.language else nil) == "lua" then Highlighter.highlight(Text1, p4.colorScheme) else Text1
+		local CodeTextStyles = GetCodeTextStylesFunction(p4)
+		local config = {
 			TextWrapped = false,
 			tag = "auto-xy padding-small align-y-top"
 		}
-		local t_1 = { FontSize = var12.textSize }
+		local FontStyle = { FontSize = CodeTextStyles.textSize }
+		local FontFace = nil
 		
-		if flags.FFlagMarkdownAssistantParity then
-			var10 = var12.fontFace or font
+		if Flags.FFlagMarkdownAssistantParity then
+			FontFace = CodeTextStyles.fontFace or _Font
 		else
-			local fontFace = var12.fontFace or var12.font
-			var10 = if typeof(fontFace) == "Font" then fontFace elseif fontFace then Font.fromEnum(fontFace) else Font.fromEnum(code)
+			local FontFace1 = CodeTextStyles.fontFace or CodeTextStyles.font
+			FontFace = if typeof(FontFace1) == "Font" then FontFace1 elseif FontFace1 then Font.fromEnum(FontFace1) else Font.fromEnum(Code)
 		end
-		t_1.Font = var10
-		t_1.LineHeight = var12.lineHeight
-		t.fontStyle = t_1
-		t.TextXAlignment = Enum.TextXAlignment.Left
-		local t_2 = {
+		FontStyle.Font = FontFace
+		FontStyle.LineHeight = CodeTextStyles.lineHeight
+		config.fontStyle = FontStyle
+		config.TextXAlignment = Enum.TextXAlignment.Left
+		local config1 = {
 			RichText = true,
 			ZIndex = 1,
-			Text = var11,
-			textStyle = { Color3 = highlighter.getTokenColor("iden") }
+			Text = HighlightResult,
+			textStyle = { Color3 = Highlighter.getTokenColor("iden") }
 		}
-		local t_3 = {
+		local config2 = {
 			ZIndex = 0,
 			TextSelectable = true,
-			Text = text_1,
+			Text = Text1,
 			textStyle = {
 				Transparency = 0.4,
-				Color3 = highlighter.getTokenColor("iden")
+				Color3 = Highlighter.getTokenColor("iden")
 			}
 		}
-		local codeBackgroundStyles = p7.codeBackgroundStyles or {}
-		local backgroundColor3 = codeBackgroundStyles.backgroundColor3 or highlighter.getTokenColor("background")
-		local backgroundTransparency = codeBackgroundStyles.backgroundTransparency or 0
-		local var13 = nil
-		local showLineNumbers = p7.codeSettings and p7.codeSettings.showLineNumbers
+		local CodeBackgroundStyles = p4.codeBackgroundStyles or {}
+		local BackgroundColor3 = CodeBackgroundStyles.backgroundColor3 or Highlighter.getTokenColor("background")
+		local BackgroundTransparency = CodeBackgroundStyles.backgroundTransparency or 0
+		local Text2 = nil
+		local ShowLineNumbers = p4.codeSettings and p4.codeSettings.showLineNumbers
 		
-		if showLineNumbers then
-			var13 = computeLineNumbers(text_1)
+		if ShowLineNumbers then
+			Text2 = computeLineNumbers(Text1)
 		end
-		return reactModule.createElement(view, {
+		local ShowCopyButton = p4.codeSettings and p4.codeSettings.showCopyButton
+		local IsNotOffsetMatch = p3.offset ~= 0
+		
+		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y col",
 			BorderSizePixel = 0,
-			key = tostring(p6.index),
-			LayoutOrder = p6.index,
+			key = tostring(p3.index),
+			LayoutOrder = p3.index,
 			backgroundStyle = { Transparency = 1 }
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = if p6.offset ~= 0 then UDim.new(0, 10) else nil,
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = if IsNotOffsetMatch then UDim.new(0, 10) else nil,
 				PaddingBottom = UDim.new(0, 10)
 			}),
-			TitleBar = if p7.codeSettings and p7.codeSettings.showCopyButton then reactModule.createElement(foundationModule.View, {
+			TitleBar = if ShowCopyButton then ReactModule.createElement(FoundationModule.View, {
 				tag = "size-full-0 auto-y row align-x-right bg-shift-300 radius-small",
 				LayoutOrder = 1
 			}, {
-				CopyToClipboardButton = reactModule.createElement(foundationModule.IconButton, {
-					size = foundationModule.Enums.InputSize.Small,
-					icon = { name = foundationModule.Enums.IconName.TwoStackedSquares },
-					onActivated = var9(text_1)
+				CopyToClipboardButton = ReactModule.createElement(FoundationModule.IconButton, {
+					size = FoundationModule.Enums.InputSize.Small,
+					icon = { name = FoundationModule.Enums.IconName.TwoStackedSquares },
+					onActivated = MemoizeResult(Text1)
 				})
 			}) else nil,
-			CodeWrapper = reactModule.createElement(foundationModule.View, {
+			CodeWrapper = ReactModule.createElement(FoundationModule.View, {
 				LayoutOrder = 2,
 				tag = {
 					["size-full-0 auto-y"] = true,
-					["row align-y-center"] = showLineNumbers
+					["row align-y-center"] = ShowLineNumbers
 				}
 			}, {
-				LineNumbers = if showLineNumbers then reactModule.createElement(foundationModule.Text, {
+				LineNumbers = if ShowLineNumbers then ReactModule.createElement(FoundationModule.Text, {
 					LayoutOrder = 1,
 					tag = "size-0-0 auto-xy text-align-x-right text-align-y-center padding-small bg-shift-100 content-emphasis",
-					Text = var13,
-					fontStyle = t.fontStyle
+					Text = Text2,
+					fontStyle = config.fontStyle
 				}) else nil,
-				ScrollFrameWrapper = reactModule.createElement(foundationModule.View, {
+				ScrollFrameWrapper = ReactModule.createElement(FoundationModule.View, {
 					tag = "size-full-0 auto-y fill",
 					LayoutOrder = 2,
 					Size = UDim2.fromScale(1, 0)
 				}, {
-					ScrollFrame = reactModule.createElement("ScrollingFrame", {
+					ScrollFrame = ReactModule.createElement("ScrollingFrame", {
 						BorderSizePixel = 0,
-						BackgroundColor3 = backgroundColor3,
-						BackgroundTransparency = backgroundTransparency,
+						BackgroundColor3 = BackgroundColor3,
+						BackgroundTransparency = BackgroundTransparency,
 						ScrollingDirection = Enum.ScrollingDirection.X,
 						Size = UDim2.fromScale(1, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						AutomaticCanvasSize = Enum.AutomaticSize.X
 					}, {
-						HighlightedCode = reactModule.createElement(text, dashModule.join(t, t_2)),
-						SelectableCodeWrapper = reactModule.createElement(foundationModule.View, { tag = t.tag }, {
-							SelectableCode = reactModule.createElement("TextBox", {
+						HighlightedCode = ReactModule.createElement(Text, DashModule.join(config, config1)),
+						SelectableCodeWrapper = ReactModule.createElement(FoundationModule.View, { tag = config.tag }, {
+							SelectableCode = ReactModule.createElement("TextBox", {
 								BackgroundTransparency = 1,
 								TextEditable = false,
 								TextWrapped = false,
 								ClearTextOnFocus = false,
-								Text = t_3.Text,
-								FontFace = t.fontStyle.Font,
-								TextSize = t.fontStyle.FontSize,
-								TextColor3 = t_3.textStyle.Color3,
-								TextTransparency = t_3.textStyle.Transparency,
+								Text = config2.Text,
+								FontFace = config.fontStyle.Font,
+								TextSize = config.fontStyle.FontSize,
+								TextColor3 = config2.textStyle.Color3,
+								TextTransparency = config2.textStyle.Transparency,
 								TextXAlignment = Enum.TextXAlignment.Left,
 								TextYAlignment = Enum.TextYAlignment.Center,
-								ZIndex = t_3.ZIndex,
+								ZIndex = config2.ZIndex,
 								Size = UDim2.fromScale(0, 0),
 								AutomaticSize = Enum.AutomaticSize.XY,
-								LineHeight = p7.codeStyles.lineHeight
+								LineHeight = p4.codeStyles.lineHeight
 							})
 						})
 					})
@@ -305,241 +300,243 @@ t.defaultRenderers = {
 			})
 		})
 	end,
-	STYLED_TEXT = function(p6, p7)
-		-- upvalues: dashModule (ref), mergeContextsModule (ref)
-		local var10 = if p6.attributes and p6.attributes.style then p6.attributes.style else nil
-		local t = {}
+	STYLED_TEXT = function(p3, p4) --[[ Line: 425 ]]
+		-- upvalues: DashModule (copy), MergeContextsModule (copy)
+		local Style = if p3.attributes and p3.attributes.style then p3.attributes.style else nil
+		local JoinDeepResult = {}
 		
-		if var10 == "BOLD" or var10 == "BOLD_2" then
-			t.bold = true
-		elseif var10 == "ITALIC" or var10 == "ITALIC_2" then
-			t.italic = true
-		elseif var10 == "STRIKE" then
-			t.strike = true
-		elseif var10 == "INLINE_CODE" then
-			t = dashModule.joinDeep(p7.codeStyles, { selectable = true })
+		if Style == "BOLD" or Style == "BOLD_2" then
+			JoinDeepResult.bold = true
+		elseif Style == "ITALIC" or Style == "ITALIC_2" then
+			JoinDeepResult.italic = true
+		elseif Style == "STRIKE" then
+			JoinDeepResult.strike = true
+		elseif Style == "INLINE_CODE" then
+			JoinDeepResult = DashModule.joinDeep(p4.codeStyles, { selectable = true })
 		end
-		return p7.processChildren(p6, mergeContextsModule(p7, { textStyles = t }))
+		return (p4.processChildren(p3, MergeContextsModule(p4, { textStyles = JoinDeepResult })))
 	end,
-	TEXT = function(p6, p7)
-		-- upvalues: processSoftBreaksModule (ref), getBaseTextElementEngineTags (ref), flags (ref), builderSans (ref), selectableTextElement (ref), textElement (ref)
-		local fontFace
-		local t = {
-			LayoutOrder = p6.index,
-			Text = processSoftBreaksModule(p6.text),
-			EngineTags = getBaseTextElementEngineTags(p7.textStyles)
+	TEXT = function(p3, p4) --[[ Line: 441 ]]
+		-- upvalues: ProcessSoftBreaksModule (copy), GetBaseTextElementEngineTagsFunction (copy), Flags (copy), BuilderSans (copy), SelectableTextElement (copy), TextElement (copy)
+		local config = {
+			LayoutOrder = p3.index,
+			Text = ProcessSoftBreaksModule(p3.text),
+			EngineTags = GetBaseTextElementEngineTagsFunction(p4.textStyles)
 		}
-		local t_1 = {}
+		local FontStyle = {}
+		local FontFace = nil
 		
-		if flags.FFlagMarkdownAssistantParity then
-			fontFace = p7.textStyles.fontFace
+		if Flags.FFlagMarkdownAssistantParity then
+			FontFace = p4.textStyles.fontFace
 		else
-			local textStyles = p7.textStyles
-			local fontFace_1 = textStyles.fontFace or textStyles.font
-			fontFace = if typeof(fontFace_1) == "Font" then fontFace_1 elseif fontFace_1 then Font.fromEnum(fontFace_1) else Font.fromEnum(builderSans)
+			local TextStyles = p4.textStyles
+			local FontFace1 = TextStyles.fontFace or TextStyles.font
+			FontFace = if typeof(FontFace1) == "Font" then FontFace1 elseif FontFace1 then Font.fromEnum(FontFace1) else Font.fromEnum(BuilderSans)
 		end
-		t_1.Font = fontFace
-		t_1.FontSize = p7.textStyles.textSize
-		t.fontStyle = t_1
-		t.textStyle = {
-			Color3 = if typeof(p7.textStyles.color) == "string" then Color3.fromHex(p7.textStyles.color) else p7.textStyles.color,
-			Transparency = p7.textStyles.transparency
+		FontStyle.Font = FontFace
+		FontStyle.FontSize = p4.textStyles.textSize
+		config.fontStyle = FontStyle
+		config.textStyle = {
+			Color3 = if typeof(p4.textStyles.color) == "string" then Color3.fromHex(p4.textStyles.color) else p4.textStyles.color,
+			Transparency = p4.textStyles.transparency
 		}
-		t.viewTags = p7.textStyles.viewTags
+		config.viewTags = p4.textStyles.viewTags
 		
-		return if p7.textStyles.selectable then selectableTextElement.new(t) else textElement.new(t)
+		return if p4.textStyles.selectable then SelectableTextElement.new(config) else TextElement.new(config)
 	end,
-	LINK = function(p6, p7)
-		-- upvalues: mergeContextsModule (ref), dashModule (ref), isInlineElement (ref), hardBreakElement (ref), linkElement (ref)
-		local var10 = if p6.attributes then p6.attributes.url else p6.url or ""
+	LINK = function(p3, p4) --[[ Line: 471 ]]
+		-- upvalues: MergeContextsModule (copy), DashModule (copy), IsInlineElementFunction (copy), HardBreakElement (copy), LinkElement (copy)
+		local Url = p3.attributes and p3.attributes.url or (p3.url or "")
 		
-		return linkElement.new(dashModule.filter(p7.processChildren(p6, mergeContextsModule(p7, { textStyles = { color = p7.linkStyles.linkColor } })), function(p8)
-			-- upvalues: isInlineElement (copy), hardBreakElement (copy)
-			return isInlineElement(p8) and p8 ~= hardBreakElement
+		return LinkElement.new(DashModule.filter(p4.processChildren(p3, MergeContextsModule(p4, { textStyles = { color = p4.linkStyles.linkColor } })), function(HardBreakElement1): boolean --[[ Line: 481 ]]
+			-- upvalues: IsInlineElementFunction (upval), HardBreakElement (upval)
+			return IsInlineElementFunction(HardBreakElement1) and HardBreakElement1 ~= HardBreakElement
 		end), {
-			onActivated = function()
-				-- upvalues: p7 (ref), var10 (ref)
-				p7.linkCallback(var10)
+			onActivated = function() --[[ Line: 485 ]]
+				-- upvalues: p4 (copy), Url (copy)
+				p4.linkCallback(Url)
 			end
 		})
 	end,
-	LIST = function(p6, p7)
-		-- upvalues: reactModule (ref), view (ref), render (ref), dashModule (ref), bulletList (ref), flags (ref), builderSans (ref)
-		local var10
-		local t = {}
-		local var11 = nil
+	LIST = function(p3, p4) --[[ Line: 346 ]]
+		-- upvalues: ReactModule (copy), View (copy), render (copy), DashModule (copy), BulletList (copy), Flags (copy), BuilderSans (copy)
+		local List = {}
+		local v1 = nil
 		
-		for i = #p6.children, 1, -1 do
-			var10 = p6.children[i]
+		for i = #p3.children, 1, -1 do
+			local Child = p3.children[i]
 			
-			if var10.name == "LIST" then
-				var11 = var10
-				continue
-			end
-			if var11 then
-				table.insert(t, 1, {
-					Prefix = if var10.attributes then var10.attributes.prefix else nil,
-					Item = reactModule.createElement(view, {
-						tag = "size-full-0 auto-y col",
-						BorderSizePixel = 0,
-						backgroundStyle = { Transparency = 1 }
-					}, {
-						Item = render(dashModule.join(var10, { index = 1 }), p7),
-						List = render(dashModule.join(var11, { index = 2 }), p7)
-					})
+			if Child.name == "LIST" then
+				v1 = Child
+			elseif v1 then
+				local v2 = 1
+				local config1 = {
+					Prefix = if Child.attributes then Child.attributes.prefix else nil
+				}
+				config1.Item = ReactModule.createElement(View, {
+					tag = "size-full-0 auto-y col",
+					BorderSizePixel = 0,
+					backgroundStyle = { Transparency = 1 }
+				}, {
+					Item = render(DashModule.join(Child, { index = 1 }), p4),
+					List = render(DashModule.join(v1, { index = 2 }), p4)
 				})
-				var11 = nil
+				table.insert(List, v2, config1)
+				v1 = nil
 			else
-				table.insert(t, 1, {
-					Prefix = if var10.attributes then var10.attributes.prefix else nil,
-					Item = render(var10, p7)
+				table.insert(List, 1, {
+					Prefix = if Child.attributes then Child.attributes.prefix else nil,
+					Item = render(Child, p4)
 				})
 			end
 		end
-		local fontFace
-		local createElement = reactModule.createElement
-		local t_1 = {
+		local CreateElementFunction = ReactModule.createElement
+		local config = {
 			TextWrapped = true,
 			tag = "size-full-0 auto-y",
-			key = tostring(p6.index),
-			LayoutOrder = p6.index,
-			Items = t
+			key = tostring(p3.index),
+			LayoutOrder = p3.index,
+			Items = List
 		}
-		var10 = {}
+		local Label = {}
+		local FontFace = nil
 		
-		if flags.FFlagMarkdownAssistantParity then
-			fontFace = p7.textStyles.fontFace
+		if Flags.FFlagMarkdownAssistantParity then
+			FontFace = p4.textStyles.fontFace
 		else
-			local textStyles = p7.textStyles
-			local fontFace_1 = textStyles.fontFace or textStyles.font
-			fontFace = if typeof(fontFace_1) == "Font" then fontFace_1 elseif fontFace_1 then Font.fromEnum(fontFace_1) else Font.fromEnum(builderSans)
+			local TextStyles = p4.textStyles
+			local FontFace1 = TextStyles.fontFace or TextStyles.font
+			FontFace = if typeof(FontFace1) == "Font" then FontFace1 elseif FontFace1 then Font.fromEnum(FontFace1) else Font.fromEnum(BuilderSans)
 		end
-		var10.Font = fontFace
-		var10.TextColor = if typeof(p7.textStyles.color) == "string" then Color3.fromHex(p7.textStyles.color) else p7.textStyles.color
-		var10.TextSize = p7.textStyles.textSize
-		var10.LineHeight = p7.textStyles.textSize
-		t_1.ListStyle = var10
+		Label.Font = FontFace
+		Label.TextColor = if typeof(p4.textStyles.color) == "string" then Color3.fromHex(p4.textStyles.color) else p4.textStyles.color
+		Label.TextSize = p4.textStyles.textSize
+		Label.LineHeight = p4.textStyles.textSize
+		config.ListStyle = Label
 		
-		return createElement(bulletList, t_1, {
-			UIPadding = p6.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) })
+		return CreateElementFunction(BulletList, config, {
+			UIPadding = p3.offset ~= 0 and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) })
 		})
 	end,
-	LIST_ITEM = function(p8, p9)
-		-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref)
-		return reactModule.createElement(view, {
+	LIST_ITEM = function(p5, p6) --[[ Line: 415 ]]
+		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy)
+		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
-			key = tostring(p8.index),
-			LayoutOrder = p8.index
-		}, { InlineLayout = renderInlineModule(p8, p9) })
+			key = tostring(p5.index),
+			LayoutOrder = p5.index
+		}, { InlineLayout = RenderInlineModule(p5, p6) })
 	end,
-	DIVIDER = function(p8)
-		-- upvalues: reactModule (ref), view (ref), divider (ref)
-		return reactModule.createElement(view, {
+	DIVIDER = function(p5) --[[ Line: 491 ]]
+		-- upvalues: ReactModule (copy), View (copy), Divider (copy)
+		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
-			key = tostring(p8.index),
-			LayoutOrder = p8.index
+			key = tostring(p5.index),
+			LayoutOrder = p5.index
 		}, {
-			UIPadding = p8.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
-			Divider = reactModule.createElement(divider)
+			UIPadding = p5.offset ~= 0 and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
+			Divider = ReactModule.createElement(Divider)
 		})
 	end,
-	QUOTE = function(p8, p9)
-		-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref), mergeContextsModule (ref)
-		return reactModule.createElement(view, {
+	QUOTE = function(p5, p6) --[[ Line: 506 ]]
+		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy), MergeContextsModule (copy)
+		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y padding-small",
-			key = tostring(p8.index),
-			LayoutOrder = p8.index,
+			key = tostring(p5.index),
+			LayoutOrder = p5.index,
 			backgroundStyle = { Transparency = 1 }
 		}, {
-			InlineLayoutWrapper = reactModule.createElement(view, {
+			InlineLayoutWrapper = ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y",
 				backgroundStyle = {
 					Transparency = 0.9,
 					Color3 = Color3.fromRGB(163, 162, 165)
 				}
 			}, {
-				InlineLayout = renderInlineModule(p8, mergeContextsModule(p9, { textStyles = { italic = true, transparency = 0.5 } }))
+				InlineLayout = RenderInlineModule(p5, MergeContextsModule(p6, { textStyles = { italic = true, transparency = 0.5 } }))
 			})
 		})
 	end,
-	IMAGE = function(p8, p9)
-		-- upvalues: imageElement (ref)
-		return imageElement.new({
-			LayoutOrder = p8.index,
-			Image = if p8.attributes then p8.attributes.url else p8.url or nil,
-			Size = p9.imageStyles.size,
+	IMAGE = function(p5, p6) --[[ Line: 530 ]]
+		-- upvalues: ImageElement (copy)
+		return ImageElement.new({
+			LayoutOrder = p5.index,
+			Image = p5.attributes and p5.attributes.url or (p5.url or nil),
+			Size = p6.imageStyles.size,
 			backgroundStyle = {
-				Transparency = p9.imageStyles.backgroundTransparency,
-				Color3 = p9.imageStyles.backgroundColor3
+				Transparency = p6.imageStyles.backgroundTransparency,
+				Color3 = p6.imageStyles.backgroundColor3
 			},
-			imageStyle = { Transparency = p9.imageStyles.transparency },
-			ScaleType = p9.imageStyles.scaleType,
-			ResampleMode = p9.imageStyles.resampleMode,
-			tag = p9.imageStyles.tags
+			imageStyle = { Transparency = p6.imageStyles.transparency },
+			ScaleType = p6.imageStyles.scaleType,
+			ResampleMode = p6.imageStyles.resampleMode,
+			tag = p6.imageStyles.tags
 		})
 	end,
-	TAG = renderTagModule,
+	TAG = require(script.Parent.Parent.NodeRenderers.renderTag),
 	BREAK = renderHardBreak,
 	LINE_BREAK = renderHardBreak
 }
 
-function t.render(p8, p9)
-	-- upvalues: t (ref), flags (ref), normalizeStyleFont (ref), dashModule (ref), flags_1 (ref), font (ref), builderSans (ref), code (ref), uDim2 (ref), var1 (ref), processChildren (ref), render (ref)
-	local t_1
-	t.renderers = p9.userRenderers
-	local cloned = table.clone(p9.markdownRendererProps or {})
-	local _ = nil
+function MarkdownRendererModule.render(p5, p6) --[[ Line: 575 ]]
+	-- upvalues: MarkdownRendererModule (copy), Flags (copy), NormalizeStyleFontFunction (copy), DashModule (copy), Flags1 (copy), _Font (copy), BuilderSans (copy), Code (copy), _UDim2 (copy), v31 (copy), processChildren (copy), render (copy)
+	MarkdownRendererModule.renderers = p6.userRenderers
+	local Copy = table.clone(p6.markdownRendererProps or {})
+	local config = nil
 	
-	if flags.FFlagMarkdownAssistantParity then
-		cloned.textStyles = normalizeStyleFont(cloned.textStyles)
-		cloned.codeStyles = normalizeStyleFont(cloned.codeStyles)
+	if Flags.FFlagMarkdownAssistantParity then
+		Copy.textStyles = NormalizeStyleFontFunction(Copy.textStyles)
+		Copy.codeStyles = NormalizeStyleFontFunction(Copy.codeStyles)
 		
-		if cloned.headerStyles then
-			cloned.headerStyles = dashModule.map(cloned.headerStyles, normalizeStyleFont)
+		if Copy.headerStyles then
+			Copy.headerStyles = DashModule.map(Copy.headerStyles, NormalizeStyleFontFunction)
 		end
-		local bodyMedium = p9.tokens.Typography.BodyMedium
-		local var12 = if flags_1.FoundationFontFaceMigration then normalizeStyleFont({ font = bodyMedium.Font }).fontFace else Font.fromEnum(bodyMedium.Font)
-		local fontSize = bodyMedium.FontSize
-		t_1 = {
-			textStyles = { textSize = fontSize, fontFace = var12 },
-			codeStyles = { lineHeight = 1.111, textSize = fontSize, fontFace = font },
+		local BodyMedium = p6.tokens.Typography.BodyMedium
+		local FontFace = if Flags1.FoundationFontFaceMigration then NormalizeStyleFontFunction({ font = BodyMedium.Font }).fontFace else Font.fromEnum(BodyMedium.Font)
+		local FontSize: number = BodyMedium.FontSize
+		config = {
+			textStyles = { textSize = FontSize, fontFace = FontFace },
+			codeStyles = {
+				lineHeight = 1.111,
+				textSize = FontSize,
+				fontFace = _Font
+			},
 			headerStyles = {
-				[1] = { textSize = fontSize * 3, fontFace = var12 },
-				[2] = { textSize = fontSize * 2.5, fontFace = var12 },
-				[3] = { textSize = fontSize * 2, fontFace = var12 },
-				[4] = { textSize = fontSize * 1.5, fontFace = var12 },
-				[5] = { textSize = fontSize * 1.5, fontFace = var12 },
-				[6] = { textSize = fontSize * 1.5, fontFace = var12 }
+				[1] = { textSize = FontSize * 3, fontFace = FontFace },
+				[2] = { textSize = FontSize * 2.5, fontFace = FontFace },
+				[3] = { textSize = FontSize * 2, fontFace = FontFace },
+				[4] = { textSize = FontSize * 1.5, fontFace = FontFace },
+				[5] = { textSize = FontSize * 1.5, fontFace = FontFace },
+				[6] = { textSize = FontSize * 1.5, fontFace = FontFace }
 			}
 		}
 	else
-		t_1 = {
-			textStyles = { textSize = 18, font = builderSans },
-			codeStyles = { textSize = 18, lineHeight = 1.111, font = code },
+		config = {
+			textStyles = { textSize = 18, font = BuilderSans },
+			codeStyles = { textSize = 18, lineHeight = 1.111, font = Code },
 			headerStyles = {
-				[1] = { textSize = 54, font = builderSans },
-				[2] = { textSize = 45, font = builderSans },
-				[3] = { textSize = 36, font = builderSans },
-				[4] = { textSize = 27, font = builderSans }
+				[1] = { textSize = 54, font = BuilderSans },
+				[2] = { textSize = 45, font = BuilderSans },
+				[3] = { textSize = 36, font = BuilderSans },
+				[4] = { textSize = 27, font = BuilderSans }
 			}
 		}
 	end
-	local var13 = dashModule.joinDeep({
+	local JoinDeepResult = DashModule.joinDeep({
 		isInline = false,
-		textStyles = t_1.textStyles,
-		codeStyles = t_1.codeStyles,
-		headerStyles = t_1.headerStyles,
-		imageStyles = { size = uDim2 },
+		textStyles = config.textStyles,
+		codeStyles = config.codeStyles,
+		headerStyles = config.headerStyles,
+		imageStyles = { size = _UDim2 },
 		linkStyles = {
-			linkColor = `#{p9.tokens.Color.Content.Link.Color3:ToHex()}`
+			linkColor = `#{p6.tokens.Color.Content.Link.Color3:ToHex()}`
 		},
-		linkCallback = p9.linkCallback or var1,
-		colorScheme = p9.colorScheme,
+		linkCallback = p6.linkCallback or v31,
+		colorScheme = p6.colorScheme,
 		processChildren = processChildren
-	}, cloned)
-	table.freeze(var13)
+	}, Copy)
+	table.freeze(JoinDeepResult)
 	
-	return render(p8, var13)
+	return (render(p5, JoinDeepResult))
 end
 
-return t
+return MarkdownRendererModule

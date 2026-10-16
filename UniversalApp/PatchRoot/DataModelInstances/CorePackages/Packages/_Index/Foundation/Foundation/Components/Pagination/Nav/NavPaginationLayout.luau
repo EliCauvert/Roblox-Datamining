@@ -1,17 +1,17 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local _ = require(foundation.Enums.PaginationDirection)
-local _ = require(foundation.Enums.PaginationSize)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local navControlsModule = require(script.Parent.NavControls)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local _ = require(Foundation.Enums.PaginationDirection)
+local _ = require(Foundation.Enums.PaginationSize)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local NavControlsModule = require(script.Parent.NavControls)
 local _ = require(script.Parent.Parent.usePaginationSelectionChain)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), viewModule (ref), withCommonPropsModule (ref), navControlsModule (ref)
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { tag = "row align-y-center gap-small auto-xy", ref = p2 }), {
-		LeftNav = reactModule.createElement(navControlsModule, {
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 36 | Named "NavPaginationLayout" ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), NavControlsModule (copy)
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p1, { tag = "row align-y-center gap-small auto-xy", ref = Ref }), {
+		LeftNav = ReactModule.createElement(NavControlsModule, {
 			side = "start",
 			LayoutOrder = 1,
 			size = p1.size,
@@ -25,7 +25,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			selection = p1.selection
 		}),
 		PageContent = p1.pageContent,
-		RightNav = reactModule.createElement(navControlsModule, {
+		RightNav = ReactModule.createElement(NavControlsModule, {
 			side = "end",
 			size = p1.size,
 			LayoutOrder = if p1.pageContent then 3 else 2,

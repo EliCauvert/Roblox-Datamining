@@ -1,66 +1,70 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local flagsModule = require(foundation.Utility.Flags)
-local imageModule = require(foundation.Components.Image)
-local statusIndicatorModule = require(foundation.Components.StatusIndicator)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local mapBindableModule = require(foundation.Utility.mapBindable)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local thumbnailSizeModule = require(foundation.Enums.ThumbnailSize)
-local thumbnailTypeModule = require(foundation.Enums.ThumbnailType)
-local getRbxThumbModule = require(foundation.Utility.getRbxThumb)
-local useAvatarVariantsModule = require(script.Parent.useAvatarVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local usePresentationContext = require(foundation.Providers.Style.PresentationContext).usePresentationContext
-local getAvatarSizeModule = require(script.Parent.getAvatarSize)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local FlagsModule = require(Foundation.Utility.Flags)
+local ImageModule = require(Foundation.Components.Image)
+local StatusIndicatorModule = require(Foundation.Components.StatusIndicator)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local MapBindableModule = require(Foundation.Utility.mapBindable)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local ThumbnailSizeModule = require(Foundation.Enums.ThumbnailSize)
+local ThumbnailTypeModule = require(Foundation.Enums.ThumbnailType)
+local GetRbxThumbModule = require(Foundation.Utility.getRbxThumb)
+local UseAvatarVariantsModule = require(script.Parent.useAvatarVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local UsePresentationContextFunction = require(Foundation.Providers.Style.PresentationContext).usePresentationContext
+local GetAvatarSizeModule = require(script.Parent.getAvatarSize)
+local config = {
 	testId = "--foundation-avatar",
-	size = require(foundation.Enums.AvatarSize).Medium,
-	userPresence = require(foundation.Enums.UserPresence).None
+	size = require(Foundation.Enums.AvatarSize).Medium,
+	userPresence = require(Foundation.Enums.UserPresence).None
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useAvatarVariantsModule (ref), getAvatarSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref), flagsModule (ref), statusIndicatorModule (ref), dashModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3 = usePresentationContext()
-	local var4 = useAvatarVariantsModule(var2, var1.size, var1.userPresence, var1.backplateStyle, var3.isIconSize)
-	local var5 = getAvatarSizeModule(var2, var1.size, var3.isIconSize)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 51 | Named "Avatar" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseAvatarVariantsModule (copy), GetAvatarSizeModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy), MapBindableModule (copy), GetRbxThumbModule (copy), ThumbnailTypeModule (copy), ThumbnailSizeModule (copy), FlagsModule (copy), StatusIndicatorModule (copy), DashModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UsePresentationContextResult = UsePresentationContextFunction()
+	local UseAvatarVariantsModuleResult = UseAvatarVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.userPresence, WithDefaultsModuleResult.backplateStyle, UsePresentationContextResult.isIconSize)
+	local AvatarSizeModule = GetAvatarSizeModule(UseTokensModuleResult, WithDefaultsModuleResult.size, UsePresentationContextResult.isIconSize)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
-		tag = var4.container.tag,
-		ref = p2,
-		backgroundStyle = var4.container.backgroundStyle,
-		stroke = var4.container.stroke,
-		Size = UDim2.fromOffset(var5, var5)
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseAvatarVariantsModuleResult.container.tag,
+		ref = Ref,
+		backgroundStyle = UseAvatarVariantsModuleResult.container.backgroundStyle,
+		stroke = UseAvatarVariantsModuleResult.container.stroke,
+		Size = UDim2.fromOffset(AvatarSizeModule, AvatarSizeModule)
 	}), {
-		Image = reactModule.createElement(imageModule, {
-			Image = mapBindableModule(var1.userId, function(p3)
-				-- upvalues: getRbxThumbModule (copy), thumbnailTypeModule (copy), thumbnailSizeModule (copy), var1 (ref)
-				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p3, thumbnailSizeModule.Medium, { includeProfileFrame = var1.includeProfileFrame })
+		Image = ReactModule.createElement(ImageModule, {
+			Image = MapBindableModule(WithDefaultsModuleResult.userId, function(p2) --[[ Line: 71 ]]
+				-- upvalues: GetRbxThumbModule (upval), ThumbnailTypeModule (upval), ThumbnailSizeModule (upval), WithDefaultsModuleResult (copy)
+				return GetRbxThumbModule(ThumbnailTypeModule.AvatarHeadShot, p2, ThumbnailSizeModule.Medium, {
+					includeProfileFrame = WithDefaultsModuleResult.includeProfileFrame
+				})
 			end),
-			tag = var4.avatar.tag,
-			backgroundStyle = var1.backgroundStyle,
-			testId = `{var1.testId}--image`
+			tag = UseAvatarVariantsModuleResult.avatar.tag,
+			backgroundStyle = WithDefaultsModuleResult.backgroundStyle,
+			testId = `{WithDefaultsModuleResult.testId}--image`
 		}),
-		Indicator = if var4.statusIndicator.isVisible then if flagsModule.FoundationStatusIndicatorMask then reactModule.createElement(statusIndicatorModule, {
-			testId = `{var1.testId}--status-indicator`,
-			variant = var4.statusIndicator.variant,
-			shape = var4.statusIndicator.shape,
-			size = var4.statusIndicator.size,
-			mask = var4.statusIndicatorMask.mask,
-			ZIndex = var4.statusIndicatorMask.ZIndex,
-			AnchorPoint = var4.statusIndicatorMask.AnchorPoint,
-			Position = var4.statusIndicatorMask.Position
-		}) else reactModule.createElement(viewModule, dashModule.join(var4.statusIndicatorBackplate, { testId = `{var1.testId}--indicator-backplate` }), reactModule.createElement(statusIndicatorModule, {
-			testId = `{var1.testId}--status-indicator`,
-			variant = var4.statusIndicator.variant,
-			shape = var4.statusIndicator.shape,
-			size = var4.statusIndicator.size
+		Indicator = if UseAvatarVariantsModuleResult.statusIndicator.isVisible then if FlagsModule.FoundationStatusIndicatorMask then ReactModule.createElement(StatusIndicatorModule, {
+			testId = `{WithDefaultsModuleResult.testId}--status-indicator`,
+			variant = UseAvatarVariantsModuleResult.statusIndicator.variant,
+			shape = UseAvatarVariantsModuleResult.statusIndicator.shape,
+			size = UseAvatarVariantsModuleResult.statusIndicator.size,
+			mask = UseAvatarVariantsModuleResult.statusIndicatorMask.mask,
+			ZIndex = UseAvatarVariantsModuleResult.statusIndicatorMask.ZIndex,
+			AnchorPoint = UseAvatarVariantsModuleResult.statusIndicatorMask.AnchorPoint,
+			Position = UseAvatarVariantsModuleResult.statusIndicatorMask.Position
+		}) else ReactModule.createElement(ViewModule, DashModule.join(UseAvatarVariantsModuleResult.statusIndicatorBackplate, {
+			testId = `{WithDefaultsModuleResult.testId}--indicator-backplate`
+		}), ReactModule.createElement(StatusIndicatorModule, {
+			testId = `{WithDefaultsModuleResult.testId}--status-indicator`,
+			variant = UseAvatarVariantsModuleResult.statusIndicator.variant,
+			shape = UseAvatarVariantsModuleResult.statusIndicator.shape,
+			size = UseAvatarVariantsModuleResult.statusIndicator.size
 		})) else nil
 	})
 end))

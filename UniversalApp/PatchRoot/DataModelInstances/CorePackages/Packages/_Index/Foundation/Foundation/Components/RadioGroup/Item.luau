@@ -1,1 +1,1 @@
-﻿return require(script.RadioGroupItem)
+﻿return (require(script.RadioGroupItem))

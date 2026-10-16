@@ -1,7 +1,7 @@
-﻿local var1 = newproxy(true)
+﻿local Proxy = newproxy(true)
 
-getmetatable(var1).__tostring = function()
+getmetatable(Proxy).__tostring = function(): string --[[ Line: 11 ]]
 	return "Cryo.None"
 end
 
-return var1
+return Proxy

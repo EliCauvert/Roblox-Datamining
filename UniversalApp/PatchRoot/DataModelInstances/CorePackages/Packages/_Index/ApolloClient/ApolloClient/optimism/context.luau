@@ -1,9 +1,10 @@
-﻿local parent = script.Parent.Parent
-local t = { parentEntrySlot = require(parent.wry.context).Slot.new() }
+﻿local Parent = script.Parent.Parent
 local _ = require(script.Parent.anyEntryTypes)
-local contextModule = require(parent.wry.context)
-t.bindContext = contextModule.bind
-t.noContext = contextModule.noContext
-t.setTimeout = contextModule.setTimeout
+local ContextModule = require(Parent.wry.context)
 
-return t
+return {
+	parentEntrySlot = require(Parent.wry.context).Slot.new(),
+	bindContext = ContextModule.bind,
+	noContext = ContextModule.noContext,
+	setTimeout = ContextModule.setTimeout
+}

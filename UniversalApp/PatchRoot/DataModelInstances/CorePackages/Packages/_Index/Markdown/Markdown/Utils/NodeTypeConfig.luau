@@ -1,56 +1,56 @@
-﻿local parent = script:FindFirstAncestor("Utils").Parent
-local parent_1 = parent.Parent
-local nodeTypeModule = require(parent.Enums.NodeType)
-local isInlineElement = require(parent_1.InlineLayout).Utils.isInlineElement
-local dashModule = require(parent_1.Dash)
-local reactIsModule = require(parent_1.ReactIs)
+﻿local Parent = script:FindFirstAncestor("Utils").Parent
+local Parent1 = Parent.Parent
+local NodeTypeModule = require(Parent.Enums.NodeType)
+local IsInlineElementFunction = require(Parent1.InlineLayout).Utils.isInlineElement
+local DashModule = require(Parent1.Dash)
+local ReactIsModule = require(Parent1.ReactIs)
 
 return {
-	[nodeTypeModule.Root] = {
+	[NodeTypeModule.Root] = {
 		children = {
-			[nodeTypeModule.Block] = true,
-			[nodeTypeModule.TextBlock] = true
+			[NodeTypeModule.Block] = true,
+			[NodeTypeModule.TextBlock] = true
 		},
-		validateRenderResult = function(p1)
-			-- upvalues: reactIsModule (ref)
-			return p1 ~= nil and reactIsModule.isElement(p1)
+		validateRenderResult = function(p1) --[[ Line: 20 ]]
+			-- upvalues: ReactIsModule (copy)
+			return p1 ~= nil and ReactIsModule.isElement(p1)
 		end
 	},
-	[nodeTypeModule.Block] = {
+	[NodeTypeModule.Block] = {
 		children = {
-			[nodeTypeModule.Block] = true,
-			[nodeTypeModule.TextBlock] = true
+			[NodeTypeModule.Block] = true,
+			[NodeTypeModule.TextBlock] = true
 		},
-		validateRenderResult = function(p1)
-			-- upvalues: reactIsModule (ref), dashModule (ref)
-			return if p1 ~= nil then reactIsModule.isElement(p1) or dashModule.all(p1, reactIsModule.isElement) else true
+		validateRenderResult = function(p1) --[[ Line: 29 ]]
+			-- upvalues: ReactIsModule (copy), DashModule (copy)
+			return p1 == nil or (ReactIsModule.isElement(p1) or DashModule.all(p1, ReactIsModule.isElement))
 		end
 	},
-	[nodeTypeModule.TextBlock] = {
+	[NodeTypeModule.TextBlock] = {
 		children = {
-			[nodeTypeModule.InlineSpan] = true,
-			[nodeTypeModule.InlineLeaf] = true
+			[NodeTypeModule.InlineSpan] = true,
+			[NodeTypeModule.InlineLeaf] = true
 		},
-		validateRenderResult = function(p1)
-			-- upvalues: reactIsModule (ref), dashModule (ref)
-			return if p1 ~= nil then reactIsModule.isElement(p1) or dashModule.all(p1, reactIsModule.isElement) else true
+		validateRenderResult = function(p1) --[[ Line: 38 ]]
+			-- upvalues: ReactIsModule (copy), DashModule (copy)
+			return p1 == nil or (ReactIsModule.isElement(p1) or DashModule.all(p1, ReactIsModule.isElement))
 		end
 	},
-	[nodeTypeModule.InlineSpan] = {
+	[NodeTypeModule.InlineSpan] = {
 		children = {
-			[nodeTypeModule.InlineSpan] = true,
-			[nodeTypeModule.InlineLeaf] = true
+			[NodeTypeModule.InlineSpan] = true,
+			[NodeTypeModule.InlineLeaf] = true
 		},
-		validateRenderResult = function(p1)
-			-- upvalues: isInlineElement (ref), dashModule (ref)
-			return if p1 ~= nil then isInlineElement(p1) or dashModule.all(p1, isInlineElement) else true
+		validateRenderResult = function(p1) --[[ Line: 47 ]]
+			-- upvalues: IsInlineElementFunction (copy), DashModule (copy)
+			return p1 == nil or (IsInlineElementFunction(p1) or DashModule.all(p1, IsInlineElementFunction))
 		end
 	},
-	[nodeTypeModule.InlineLeaf] = {
+	[NodeTypeModule.InlineLeaf] = {
 		children = {},
-		validateRenderResult = function(p1)
-			-- upvalues: isInlineElement (ref)
-			return if p1 ~= nil then isInlineElement(p1) else true
+		validateRenderResult = function(p1) --[[ Line: 53 ]]
+			-- upvalues: IsInlineElementFunction (copy)
+			return p1 == nil or IsInlineElementFunction(p1)
 		end
 	}
 }

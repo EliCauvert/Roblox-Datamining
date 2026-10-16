@@ -1,29 +1,29 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
+return function() --[[ Line: 7 | Named "useRefCache" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var1.current == nil then
-		local t = {}
-		setmetatable(t, {
-			__index = function(_, p1)
-				-- upvalues: reactModule (copy), t (ref)
-				local var2 = reactModule.createRef()
-				t[p1] = var2
+	if UseRefResult.current == nil then
+		local Current = {}
+		setmetatable(Current, {
+			__index = function(_, Key) --[[ Line: 14 ]]
+				-- upvalues: ReactModule (upval), Current (copy)
+				local Ref = ReactModule.createRef()
+				Current[Key] = Ref
 				
-				return var2
+				return Ref
 			end,
-			__tostring = function(p1)
-				local var2 = "{"
+			__tostring = function(List): string --[[ Line: 19 ]]
+				local Message = "{"
 				
-				for i, v in pairs(p1) do
-					var2 = ("%s\n\t%s -> %s"):format(var2, tostring(i), tostring(v))
+				for i, value in pairs(List) do
+					Message = ("%s\n\t%s -> %s"):format(Message, tostring(i), (tostring(value)))
 				end
-				return var2 .. "\n}"
+				return Message .. "\n}"
 			end
 		})
-		var1.current = t
+		UseRefResult.current = Current
 	end
-	return var1.current
+	return UseRefResult.current
 end

@@ -1,29 +1,29 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getAllInstancesIsAModule = require(parent.util.getAllInstancesIsA)
-local getAllInstancesWithNameModule = require(parent.util.getAllInstancesWithName)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetAllInstancesIsAModule = require(Parent.util.getAllInstancesIsA)
+local GetAllInstancesWithNameModule = require(Parent.util.getAllInstancesWithName)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	fflag = r15plusUtilsModule.checkFlagEnabledForAllowHrd,
-	run = function(p1, p2)
-		-- upvalues: getAllInstancesIsAModule (ref), r15plusUtilsModule (ref), getAllInstancesWithNameModule (ref), errorSourceStringsModule (ref)
-		for i, v in getAllInstancesIsAModule(p2.rootInstance, "MeshPart") do
-			p1:setReportingInstance(v)
+	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
+	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
+	run = function(p1, p2) --[[ Line: 16 ]]
+		-- upvalues: GetAllInstancesIsAModule (copy), R15plusUtilsModule (copy), GetAllInstancesWithNameModule (copy), ErrorSourceStringsModule (copy)
+		for _, value in GetAllInstancesIsAModule(p2.rootInstance, "MeshPart") do
+			p1:setReportingInstance(value)
 			
-			for i_1, v_1 in r15plusUtilsModule.getNameWhitelistOfClassInSchema(r15plusUtilsModule.getAvatarBoneSchema(v.Name), "Attachment") do
-				if v_1 then
-					local var1 = getAllInstancesWithNameModule(v, i_1)
+			for AttName, value1 in R15plusUtilsModule.getNameWhitelistOfClassInSchema(R15plusUtilsModule.getAvatarBoneSchema(value.Name), "Attachment") do
+				if value1 then
+					local AllInstancesWithNameModule = GetAllInstancesWithNameModule(value, AttName)
 					
-					if #var1 ~= 1 or var1[1].ClassName ~= "Attachment" then
-						p1:fail(errorSourceStringsModule.Keys.MissingRequiredAttachment, { attName = i_1, partName = v.Name })
+					if #AllInstancesWithNameModule ~= 1 or AllInstancesWithNameModule[1].ClassName ~= "Attachment" then
+						p1:fail(ErrorSourceStringsModule.Keys.MissingRequiredAttachment, { attName = AttName, partName = value.Name })
 					end
 				end
 			end

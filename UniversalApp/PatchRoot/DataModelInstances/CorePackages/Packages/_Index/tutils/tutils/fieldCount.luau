@@ -1,8 +1,8 @@
-﻿return function(p1)
-	local var1 = 0
+﻿return function(List): number --[[ Line: 4 ]]
+	local Count = 0
 	
-	for i in pairs(p1) do
-		var1 += 1
+	for _ in pairs(List) do
+		Count += 1
 	end
-	return var1
+	return Count
 end

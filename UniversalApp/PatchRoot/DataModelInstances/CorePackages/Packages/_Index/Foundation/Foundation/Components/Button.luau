@@ -1,1 +1,1 @@
-﻿return require(script.Button)
+﻿return (require(script.Button))

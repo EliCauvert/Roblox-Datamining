@@ -1,15 +1,15 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function(value)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(Vector2.zero)
+return function(Callback) --[[ Line: 8 | Named "useAbsoluteSize" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
 	
-	return var1, reactModule.useCallback(function(p1)
-		-- upvalues: var2 (ref), value (ref)
-		var2(p1.AbsoluteSize)
+	return UseStateResult, (ReactModule.useCallback(function(Frame) --[[ Line: 11 ]]
+		-- upvalues: UseStateResult2 (copy), Callback (copy)
+		UseStateResult2(Frame.AbsoluteSize)
 		
-		if value then
-			value(p1)
+		if Callback then
+			Callback(Frame)
 		end
-	end, { value })
+	end, { Callback }))
 end

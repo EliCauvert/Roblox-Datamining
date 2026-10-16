@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local useStyleModule = require(parent.Core.Style.useStyle)
-local reactOtterModule = require(parent_1.ReactOtter)
-local t = { dampingRatio = 1, frequency = 3 }
-local t_1 = {
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local UseStyleModule = require(Parent.Core.Style.useStyle)
+local ReactOtterModule = require(Parent1.ReactOtter)
+local config = { dampingRatio = 1, frequency = 3 }
+local config1 = {
 	top = 270,
 	topRight = 305,
 	right = 0,
@@ -15,40 +15,41 @@ local t_1 = {
 	topLeft = 225
 }
 
-return function(p1)
-	-- upvalues: useStyleModule (ref), reactOtterModule (ref), reactModule (ref), t (ref), t_1 (ref)
-	local theme = useStyleModule().Theme
-	local var1, var2 = reactOtterModule.useAnimatedBinding(if p1.showGradient then 0 else 1)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), reactOtterModule (copy), t (copy)
+return function(p1) --[[ Line: 48 | Named "Overlay" ]]
+	-- upvalues: UseStyleModule (copy), ReactOtterModule (copy), ReactModule (copy), config (copy), config1 (copy)
+	local Theme = UseStyleModule().Theme
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if p1.showGradient then 0 else 1)
+	ReactModule.useEffect(function() --[[ Line: 55 ]]
+		-- upvalues: p1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
 		if p1.showGradient == false then
-			var2(reactOtterModule.spring(1, t))
+			UseAnimatedBindingResult2(ReactOtterModule.spring(1, config))
 			
 			return
+		else
+			UseAnimatedBindingResult2(ReactOtterModule.spring(0, config))
 		end
-		var2(reactOtterModule.spring(0, t))
 	end, { p1.showGradient })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Size = UDim2.fromScale(1, 1),
 		ZIndex = p1.ZIndex
 	}, {
-		Overlay = reactModule.createElement("Frame", {
+		Overlay = ReactModule.createElement("Frame", {
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = theme.Overlay.Color,
-			BackgroundTransparency = theme.Overlay.Transparency
+			BackgroundColor3 = Theme.Overlay.Color,
+			BackgroundTransparency = Theme.Overlay.Transparency
 		}),
-		Gradient = reactModule.createElement("Frame", {
+		Gradient = ReactModule.createElement("Frame", {
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundTransparency = var1
+			BackgroundTransparency = UseAnimatedBindingResult
 		}, {
-			UIGradient = reactModule.createElement("UIGradient", {
-				Rotation = t_1[p1.gradientDirection],
+			UIGradient = ReactModule.createElement("UIGradient", {
+				Rotation = config1[p1.gradientDirection],
 				Color = ColorSequence.new({
 					ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),
 					ColorSequenceKeypoint.new(1, Color3.new(0, 0, 0))

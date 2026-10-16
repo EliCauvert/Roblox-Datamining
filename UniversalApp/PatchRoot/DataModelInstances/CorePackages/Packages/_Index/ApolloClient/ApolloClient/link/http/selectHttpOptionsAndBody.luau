@@ -1,61 +1,63 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local t = {
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local PrintFunction = require(Parent.GraphQL).print
+local _ = require(script.Parent.Parent.core.types)
+local Callback = nil
+local SelectHttpOptionsAndBodyModule = {
 	fallbackHttpConfig = {
 		http = { includeQuery = true, includeExtensions = false },
 		headers = { accept = "*/*", ["content-type"] = "application/json" },
 		options = { method = "POST" }
-	}
-}
-local print = require(parent.GraphQL).print
-local _ = require(script.Parent.Parent.core.types)
-local headersToLowerCase = nil
-
-function t.selectHttpOptionsAndBody(p1, p2, ...)
-	-- upvalues: object (ref), array (ref), headersToLowerCase (write), boolean (ref), print (ref)
-	local list = { ... }
-	local var1 = object.assign({}, p2.options, { headers = p2.headers, credentials = p2.credentials })
-	local var2 = if p2.http ~= nil then {} else p2.http
-	array.forEach(list, function(p3)
-		-- upvalues: var1 (write), object (copy), headersToLowerCase (copy), boolean (copy), var2 (write)
-		var1 = object.assign({}, var1, p3.options, {
-			headers = object.assign({}, var1.headers, headersToLowerCase(p3.headers))
-		})
+	},
+	selectHttpOptionsAndBody = function(Body, p1, ...) --[[ Line: 112 ]]
+		-- upvalues: Object (copy), Array (copy), Callback (ref), Boolean (copy), PrintFunction (copy)
+		local AssignResult = Object.assign({}, p1.options, { headers = p1.headers, credentials = p1.credentials })
+		local T = nil
+		T = if p1.http == nil then {} else p1.http
+		Array.forEach({ ... }, function(p2) --[[ Line: 131 ]]
+			-- upvalues: AssignResult (ref), Object (upval), Callback (upval), Boolean (upval), T (ref)
+			AssignResult = Object.assign({}, AssignResult, p2.options, {
+				headers = Object.assign({}, AssignResult.headers, Callback(p2.headers))
+			})
+			
+			if Boolean.toJSBoolean(p2.credentials) then
+				AssignResult.credentials = p2.credentials
+			end
+			T = Object.assign({}, T, p2.http)
+		end)
+		local Extensions = Body.extensions
+		local Query = Body.query
+		local Body1 = {
+			operationName = Body.operationName,
+			variables = Body.variables
+		}
 		
-		if boolean.toJSBoolean(p3.credentials) then
-			var1.credentials = p3.credentials
+		if T.includeExtensions then
+			Body1.extensions = Extensions
 		end
-		var2 = object.assign({}, var2, p3.http)
-	end)
-	local operationName = p1.operationName
-	local extensions = p1.extensions
-	local query = p1.query
-	local t = { operationName = operationName, variables = p1.variables }
-	
-	if var2.includeExtensions then
-		t.extensions = extensions
+		if T.includeQuery then
+			Body1.query = PrintFunction(Query)
+		end
+		return { options = AssignResult, body = Body1 }
 	end
-	if var2.includeQuery then
-		t.query = print(query)
+}
+
+Callback = function(Headers) --[[ Line: 163 | Named "headersToLowerCase" ]]
+	-- upvalues: Array (copy), Object (copy)
+	if Headers == nil then
+		return Headers
+	else
+		local t = {}
+		Array.forEach(Object.keys(Headers), function(Text: string) --[[ Line: 166 ]]
+			-- upvalues: t (copy), Headers (copy)
+			t[string.lower(Text)] = Headers[Text]
+		end)
+		
+		return t
 	end
-	return { options = var1, body = t }
 end
 
-headersToLowerCase = function(p1)
-	-- upvalues: array (ref), object (ref)
-	if p1 == nil then
-		return p1
-	end
-	local t = {}
-	array.forEach(object.keys(p1), function(p2)
-		-- upvalues: t (ref), p1 (ref)
-		t[string.lower(p2)] = p1[p2]
-	end)
-	
-	return t
-end
-
-return t
+return SelectHttpOptionsAndBodyModule

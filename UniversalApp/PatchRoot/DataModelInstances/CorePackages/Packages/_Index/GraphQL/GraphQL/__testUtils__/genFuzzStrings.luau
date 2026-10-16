@@ -1,20 +1,25 @@
 ﻿return {
-	genFuzzStrings = function(p1)
-		return coroutine.wrap(function()
-			-- upvalues: p1 (ref)
-			local allowedChars = p1.allowedChars
-			local maxLength = p1.maxLength
-			local allowedCharsCount = #allowedChars
-			local var1 = 0
+	genFuzzStrings = function(p1) --[[ Line: 13 ]]
+		return coroutine.wrap(function() --[[ Line: 14 | Named "getFuzzStrings" ]]
+			-- upvalues: p1 (copy)
+			local AllowedChars = p1.allowedChars
+			local CountAllowedChars = #AllowedChars
+			local Total = 0
 			
-			for i = 1, maxLength do
-				var1 += allowedCharsCount ^ i
+			for i = 1, p1.maxLength do
+				Total += CountAllowedChars ^ i
 			end
 			coroutine.yield("")
 			
-			for i_1 = 0, var1 - 1 do
-				local var2 = ""
-				local var3 = i_1
+			for i1 = 0, Total - 1 do
+				local v1 = ""
+				local i2: number = i1
+				while i2 >= 0 do
+					local IRemainder = i2 % CountAllowedChars
+					v1 = AllowedChars[IRemainder + 1] .. v1
+					i2 = (i2 - IRemainder) / CountAllowedChars - 1
+				end
+				coroutine.yield(v1)
 			end
 		end)
 	end

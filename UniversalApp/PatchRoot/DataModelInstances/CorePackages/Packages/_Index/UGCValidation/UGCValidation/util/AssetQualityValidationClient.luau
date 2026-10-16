@@ -1,124 +1,124 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local createUGCBodyPartFoldersModule = require(parent.util.createUGCBodyPartFolders)
-local fixUpPreValidationModule = require(parent.util.fixUpPreValidation)
-local httpService = game:GetService("HttpService")
-local t = {
-	getAssetQualityService = function()
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local CreateUGCBodyPartFoldersModule = require(Parent.util.createUGCBodyPartFolders)
+local FixUpPreValidationModule = require(Parent.util.fixUpPreValidation)
+local HttpService = game:GetService("HttpService")
+local AssetQualityValidationClientModule = {
+	getAssetQualityService = function() --[[ Line: 13 ]]
 		return game:GetService("AssetQualityService")
 	end,
-	buildSettings = function(value)
-		-- upvalues: httpService (ref)
-		local t = { ConsumerName = value.source }
+	buildSettings = function(p1) --[[ Line: 17 ]]
+		-- upvalues: HttpService (copy)
+		local Options = { ConsumerName = p1.source }
 		
-		if value.intendedBundleType then
-			t.IntendedBundleTypeId = tostring(value.intendedBundleType.Value)
+		if p1.intendedBundleType then
+			Options.IntendedBundleTypeId = tostring(p1.intendedBundleType.Value)
 		end
-		if value.validateSingleAssetsInBundle then
-			t.ValidateSingleAssetsInBundle = "true"
+		if p1.validateSingleAssetsInBundle then
+			Options.ValidateSingleAssetsInBundle = "true"
 		end
-		if value.backendConfigs then
-			t.LegacyValidationConfigs = httpService:JSONEncode({
-				allowedCreators = value.backendConfigs.restrictedUserIds,
-				universeId = value.backendConfigs.universeId,
-				isUserInTrustedCreatorProgram = value.backendConfigs.isUserInTrustedCreatorProgram,
-				isEmissiveAllowed = value.backendConfigs.isEmissiveAllowed
+		if p1.backendConfigs then
+			Options.LegacyValidationConfigs = HttpService:JSONEncode({
+				allowedCreators = p1.backendConfigs.restrictedUserIds,
+				universeId = p1.backendConfigs.universeId,
+				isUserInTrustedCreatorProgram = p1.backendConfigs.isUserInTrustedCreatorProgram,
+				isEmissiveAllowed = p1.backendConfigs.isEmissiveAllowed
 			})
 		end
-		local t_1 = { postQualitySteps = { "validation" }, options = t }
+		local config = { postQualitySteps = { "validation" }, options = Options }
 		
-		if value.mode then
-			t_1.mode = value.mode
+		if p1.mode then
+			config.mode = p1.mode
 		end
-		return t_1
+		return config
 	end,
-	createSingleAssetInput = function(value, p1)
-		-- upvalues: fixUpPreValidationModule (ref)
-		local ok, status = pcall(fixUpPreValidationModule, value)
+	createSingleAssetInput = function(p1, AssetType) --[[ Line: 46 ]]
+		-- upvalues: FixUpPreValidationModule (copy)
+		local Success, Result = pcall(FixUpPreValidationModule, p1)
 		
-		if not ok then
-			error(status, 0)
+		if not Success then
+			error(Result, 0)
 		end
-		local model = Instance.new("Model")
-		model.Name = value.Name
-		status.Parent = model
+		local Model = Instance.new("Model")
+		Model.Name = p1.Name
+		Result.Parent = Model
 		
-		return { model = model, assetType = p1 }
+		return { model = Model, assetType = AssetType }
 	end,
-	createBodyInputs = function(p1, p2, p3)
-		-- upvalues: fixUpPreValidationModule (ref), createUGCBodyPartFoldersModule (ref)
-		local var1 = fixUpPreValidationModule(p1)
-		local t = {}
-		local ok, status = pcall(function()
-			-- upvalues: createUGCBodyPartFoldersModule (copy), var1 (ref), p2 (ref), p3 (ref), t (ref)
-			for i, v in createUGCBodyPartFoldersModule(var1, p2, p3, true) do
-				local model = Instance.new("Model")
+	createBodyInputs = function(p1, p2, p3) --[[ Line: 62 ]]
+		-- upvalues: FixUpPreValidationModule (copy), CreateUGCBodyPartFoldersModule (copy)
+		local FixUpPreValidationModuleResult = FixUpPreValidationModule(p1)
+		local List = {}
+		local Success, Result = pcall(function() --[[ Line: 69 ]]
+			-- upvalues: CreateUGCBodyPartFoldersModule (upval), FixUpPreValidationModuleResult (copy), p2 (copy), p3 (copy), List (copy)
+			for AssetType, value in CreateUGCBodyPartFoldersModule(FixUpPreValidationModuleResult, p2, p3, true) do
+				local Model = Instance.new("Model")
 				
-				for i_1, v_1 in v do
-					v_1.Parent = model
+				for _, value1 in value do
+					value1.Parent = Model
 				end
-				table.insert(t, { model = model, assetType = i })
+				table.insert(List, { model = Model, assetType = AssetType })
 			end
 		end)
-		var1:Destroy()
+		FixUpPreValidationModuleResult:Destroy()
 		
-		if not ok then
-			for i, v in t do
-				v.model:Destroy()
+		if not Success then
+			for _, value in List do
+				value.model:Destroy()
 			end
-			error(status, 0)
+			error(Result, 0)
 		end
-		return t
+		return List
 	end
 }
 
-function t.fetch(p4, p5)
-	-- upvalues: t (ref), httpService (ref)
-	local assetQualityService = t.getAssetQualityService()
-	local t_1 = {}
-	local t_2 = {}
+function AssetQualityValidationClientModule.fetch(List, p4) --[[ Line: 89 ]]
+	-- upvalues: AssetQualityValidationClientModule (copy), HttpService (copy)
+	local AssetQualityService = AssetQualityValidationClientModule.getAssetQualityService()
+	local List1 = {}
+	local List2 = {}
 	
-	for i, v in p4 do
-		table.insert(t_1, v.model)
-		table.insert(t_2, v.assetType.Value)
+	for _, SingleAssetInput in List do
+		table.insert(List1, SingleAssetInput.model)
+		table.insert(List2, SingleAssetInput.assetType.Value)
 	end
-	local ok, status = pcall(function()
-		-- upvalues: assetQualityService (ref), t_1 (ref), t_2 (ref), t (copy), p5 (ref), httpService (copy)
-		local var2 = assetQualityService:FetchAssetQualityValidationRawFromModelsAsync(t_1, t_2, t.buildSettings(p5))
+	local Success, Result = pcall(function() --[[ Line: 100 ]]
+		-- upvalues: AssetQualityService (copy), List1 (copy), List2 (copy), AssetQualityValidationClientModule (upval), p4 (copy), HttpService (upval)
+		local AssetQualityValidationRawFromModelsAsync = AssetQualityService:FetchAssetQualityValidationRawFromModelsAsync(List1, List2, AssetQualityValidationClientModule.buildSettings(p4))
 		
-		if typeof(var2) == "table" and typeof(var2.error) == "string" then
-			local var3 = if typeof(var2.taskId) == "string" then var2.taskId else nil
-			error(if var3 then `{var2.error} (taskId: {var3})` else var2.error, 0)
+		if typeof(AssetQualityValidationRawFromModelsAsync) == "table" and typeof(AssetQualityValidationRawFromModelsAsync.error) == "string" then
+			local TaskId = if typeof(AssetQualityValidationRawFromModelsAsync.taskId) == "string" then AssetQualityValidationRawFromModelsAsync.taskId else nil
+			error(if TaskId then `{AssetQualityValidationRawFromModelsAsync.error} (taskId: {TaskId})` else AssetQualityValidationRawFromModelsAsync.error, 0)
 		end
-		local var4 = if typeof(var2) == "table" then var2.validationRawJson else nil
+		local ValidationRawJson = if typeof(AssetQualityValidationRawFromModelsAsync) == "table" then AssetQualityValidationRawFromModelsAsync.validationRawJson else nil
 		
-		if typeof(var4) ~= "string" then
+		if typeof(ValidationRawJson) ~= "string" then
 			error("AssetQualityService returned no validationRawJson", 0)
 		end
-		local ok, status = pcall(httpService.JSONDecode, httpService, var4)
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, ValidationRawJson)
 		
-		if not ok or typeof(status) ~= "table" then
+		if not Success or typeof(Result) ~= "table" then
 			error("Failed to decode validationRawJson from AssetQualityService", 0)
 		end
-		return status
+		return Result
 	end)
 	
-	for i_1, v_1 in p4 do
-		v_1.model:Destroy()
+	for _, value in List do
+		value.model:Destroy()
 	end
-	if not ok then
-		error(status, 0)
+	if not Success then
+		error(Result, 0)
 	end
-	local var2 = if #p4 ~= 1 then p5.validateSingleAssetsInBundle == true else true
-	local t_3 = {}
+	local v1: boolean = #List == 1 or p4.validateSingleAssetsInBundle == true
+	local List3 = {}
 	
-	for i_2, v_2 in status do
-		table.insert(t_3, {
-			validationData = v_2,
-			assetType = if var2 and p4[i_2] then p4[i_2].assetType else nil
+	for i, ValidationData in Result do
+		table.insert(List3, {
+			validationData = ValidationData,
+			assetType = if v1 and List[i] then List[i].assetType else nil
 		})
 	end
-	return t_3
+	return List3
 end
 
-return t
+return AssetQualityValidationClientModule

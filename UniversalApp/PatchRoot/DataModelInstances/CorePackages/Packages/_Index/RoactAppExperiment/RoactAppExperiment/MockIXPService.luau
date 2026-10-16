@@ -1,90 +1,90 @@
-﻿local t = {}
-t.__index = t
+﻿local MockIXPService = {}
+MockIXPService.__index = MockIXPService
 
-function t.new(p1, p2, p3, p4, p5)
-	-- upvalues: t (ref)
-	local t_1 = {
+function MockIXPService.new(_browserTrackerLayerData, _userLayerData, p1, p2, p3) --[[ Line: 4 ]]
+	-- upvalues: MockIXPService (copy)
+	local config = {
 		_browserTrackerLoadingStatus = Enum.IXPLoadingStatus.Initialized,
-		_userLoadingStatus = if p3 then Enum.IXPLoadingStatus.Initialized else Enum.IXPLoadingStatus.None,
-		_userId = p5 or 0,
-		_browserTrackerLayerData = p1,
-		_userLayerData = p2,
-		_initializeDelay = p4 or 0.1,
+		_userLoadingStatus = p1 and Enum.IXPLoadingStatus.Initialized or Enum.IXPLoadingStatus.None,
+		_userId = p3 or 0,
+		_browserTrackerLayerData = _browserTrackerLayerData,
+		_userLayerData = _userLayerData,
+		_initializeDelay = p2 or 0.1,
 		_exposureEventsFired = {},
 		_browserTrackerBindableEvent = Instance.new("BindableEvent")
 	}
-	t_1.OnBrowserTrackerLayerLoadingStatusChanged = t_1._browserTrackerBindableEvent.Event
-	t_1._userBindableEvent = Instance.new("BindableEvent")
-	t_1.OnUserLayerLoadingStatusChanged = t_1._userBindableEvent.Event
-	setmetatable(t_1, t)
+	config.OnBrowserTrackerLayerLoadingStatusChanged = config._browserTrackerBindableEvent.Event
+	config._userBindableEvent = Instance.new("BindableEvent")
+	config.OnUserLayerLoadingStatusChanged = config._userBindableEvent.Event
+	setmetatable(config, MockIXPService)
 	
-	return t_1
+	return config
 end
 
-function t:_SetBrowserTrackerIXPLoadingStatus(p1)
-	if self._browserTrackerLoadingStatus ~= p1 then
-		self._browserTrackerLoadingStatus = p1
-		self._browserTrackerBindableEvent:Fire(p1)
+function MockIXPService:_SetBrowserTrackerIXPLoadingStatus(_browserTrackerLoadingStatus) --[[ Line: 32 ]]
+	if self._browserTrackerLoadingStatus ~= _browserTrackerLoadingStatus then
+		self._browserTrackerLoadingStatus = _browserTrackerLoadingStatus
+		self._browserTrackerBindableEvent:Fire(_browserTrackerLoadingStatus)
 	end
 end
 
-function t:_SetUserIXPLoadingStatus(p1, p2)
-	if self._userLoadingStatus ~= p1 or self._userId ~= p2 then
-		self._userLoadingStatus = p1
-		self._userId = p2
+function MockIXPService:_SetUserIXPLoadingStatus(_userLoadingStatus, UserId) --[[ Line: 39 ]]
+	if self._userLoadingStatus ~= _userLoadingStatus or self._userId ~= UserId then
+		self._userLoadingStatus = _userLoadingStatus
+		self._userId = UserId
 		self._userBindableEvent:Fire(self._userLoadingStatus, self._userId)
 	end
 end
 
-function t.RegisterUserLayers(_, _) end
+function MockIXPService:RegisterUserLayers(_) --[[ Line: 47 ]] end
 
-function t:InitializeUserLayers(p1)
-	if self._userLoadingStatus ~= Enum.IXPLoadingStatus.Initialized or self._userId ~= 0 and p1 ~= self._userId then
-		self:_SetUserIXPLoadingStatus(Enum.IXPLoadingStatus.Pending, p1)
-		spawn(function()
-			-- upvalues: self (ref), p1 (ref)
+function MockIXPService:InitializeUserLayers(UserId) --[[ Line: 49 ]]
+	if self._userLoadingStatus ~= Enum.IXPLoadingStatus.Initialized or self._userId ~= 0 and UserId ~= self._userId then
+		self:_SetUserIXPLoadingStatus(Enum.IXPLoadingStatus.Pending, UserId)
+		spawn(function() --[[ Line: 56 ]]
+			-- upvalues: self (copy), UserId (copy)
 			wait(self._initializeDelay)
-			self:_SetUserIXPLoadingStatus(Enum.IXPLoadingStatus.Initialized, p1)
+			self:_SetUserIXPLoadingStatus(Enum.IXPLoadingStatus.Initialized, UserId)
 		end)
 	end
 end
 
-function t:GetBrowserTrackerLayerVariables(p1)
-	return if self._browserTrackerLoadingStatus == Enum.IXPLoadingStatus.Initialized then self._browserTrackerLayerData[p1] else {}
+function MockIXPService.GetBrowserTrackerLayerVariables(p1, p2) --[[ Line: 63 ]]
+	return if p1._browserTrackerLoadingStatus == Enum.IXPLoadingStatus.Initialized then p1._browserTrackerLayerData[p2] else {}
 end
 
-function t:GetUserLayerVariables(p1)
-	return if self._userLoadingStatus == Enum.IXPLoadingStatus.Initialized then self._userLayerData[p1] else {}
+function MockIXPService.GetUserLayerVariables(p1, p2) --[[ Line: 70 ]]
+	return if p1._userLoadingStatus == Enum.IXPLoadingStatus.Initialized then p1._userLayerData[p2] else {}
 end
 
-function t:ClearUserLayers()
+function MockIXPService:ClearUserLayers() --[[ Line: 77 ]]
 	self._userLoadingStatus = Enum.IXPLoadingStatus.None
 	self._userId = 0
 	self._userBindableEvent:Fire(self._userLoadingStatus, self._userId)
 end
 
-function t:GetBrowserTrackerLayerLoadingStatus()
+function MockIXPService:GetBrowserTrackerLayerLoadingStatus() --[[ Line: 83 ]]
 	return self._browserTrackerLoadingStatus
 end
 
-function t:GetUserLayerLoadingStatus()
+function MockIXPService:GetUserLayerLoadingStatus() --[[ Line: 87 ]]
 	return self._userLoadingStatus
 end
 
-function t:GetBrowserTrackerStatusForLayer(_)
+function MockIXPService:GetBrowserTrackerStatusForLayer(_) --[[ Line: 91 ]]
 	return self._browserTrackerLoadingStatus
 end
 
-function t:GetUserStatusForLayer(_)
+function MockIXPService:GetUserStatusForLayer(_) --[[ Line: 95 ]]
 	return self._userLoadingStatus
 end
 
-function t:LogUserLayerExposure(p1)
+function MockIXPService:LogUserLayerExposure(p1) --[[ Line: 99 ]]
 	table.insert(self._exposureEventsFired, p1)
 end
 
-function t:LogBrowserTrackerLayerExposure(p1)
+function MockIXPService:LogBrowserTrackerLayerExposure(p1) --[[ Line: 103 ]]
 	table.insert(self._exposureEventsFired, p1)
 end
 
-return t
+return MockIXPService

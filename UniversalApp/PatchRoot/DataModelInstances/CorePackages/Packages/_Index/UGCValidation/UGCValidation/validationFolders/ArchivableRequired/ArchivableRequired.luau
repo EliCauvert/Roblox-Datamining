@@ -1,49 +1,47 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local t = {
-	categories = constantsModule.AllUploadCategories,
-	requiredData = {
-		require(parent.validationSystem.ValidationEnums).SharedDataMember.entrypointInput
-	},
-	fflag = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
-}
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function collectAllInstances(p1)
-	local t = {}
+local function collectAllInstances(EntrypointInput) --[[ Line: 23 ]]
+	local List = {}
 	
-	for i, v in p1 do
-		local t_1 = {}
+	for _, value in EntrypointInput do
+		local AllSelectedInstances = {}
 		
-		if typeof(v) == "Instance" then
-			table.insert(t_1, v)
-		elseif typeof(v) == "table" and v.allSelectedInstances ~= nil then
-			t_1 = v.allSelectedInstances
+		if typeof(value) == "Instance" then
+			table.insert(AllSelectedInstances, value)
+		elseif typeof(value) == "table" and value.allSelectedInstances ~= nil then
+			AllSelectedInstances = value.allSelectedInstances
 		end
-		for i_1, v_1 in t_1 do
-			table.insert(t, v_1)
+		for _, allSelectedInstance in AllSelectedInstances do
+			table.insert(List, allSelectedInstance)
 			
-			for i_2, v_2 in v_1:GetDescendants() do
-				table.insert(t, v_2)
+			for _, descendant in allSelectedInstance:GetDescendants() do
+				table.insert(List, descendant)
 			end
 		end
 	end
-	return t
+	return List
 end
 
-function t.run(p2, p3)
-	-- upvalues: collectAllInstances (ref), errorSourceStringsModule (ref), constantsModule (ref)
-	for i, v in collectAllInstances(p3.entrypointInput) do
-		if v.Archivable == false then
-			p2:fail(errorSourceStringsModule.Keys.PropertyValueInvalid, {
-				PropertyName = "Archivable",
-				ExpectedValue = "true",
-				InstancePath = v:GetFullName(),
-				ComparisonMethod = constantsModule.COMPARISON_METHODS.EXACT_EQ
-			})
+return {
+	categories = ConstantsModule.AllUploadCategories,
+	requiredData = {
+		require(Parent.validationSystem.ValidationEnums).SharedDataMember.entrypointInput
+	},
+	fflag = require(Parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent),
+	run = function(p1, p2) --[[ Line: 44 ]]
+		-- upvalues: collectAllInstances (copy), ErrorSourceStringsModule (copy), ConstantsModule (copy)
+		for _, value in collectAllInstances(p2.entrypointInput) do
+			if value.Archivable == false then
+				p1:fail(ErrorSourceStringsModule.Keys.PropertyValueInvalid, {
+					PropertyName = "Archivable",
+					ExpectedValue = "true",
+					InstancePath = value:GetFullName(),
+					ComparisonMethod = ConstantsModule.COMPARISON_METHODS.EXACT_EQ
+				})
+			end
 		end
 	end
-end
-
-return t
+}

@@ -1,5 +1,5 @@
-﻿return table.freeze({
+﻿return (table.freeze({
 	Hidden = "hidden",
 	Pending = "pending",
 	Presented = "presented"
-})
+}))

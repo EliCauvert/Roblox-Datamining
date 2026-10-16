@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.Resources.Resources)
+﻿return (require(script.Parent._Index.Resources.Resources))

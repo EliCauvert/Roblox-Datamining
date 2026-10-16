@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.SignalsReact.SignalsReact)
+﻿return (require(script.Parent._Index.SignalsReact.SignalsReact))

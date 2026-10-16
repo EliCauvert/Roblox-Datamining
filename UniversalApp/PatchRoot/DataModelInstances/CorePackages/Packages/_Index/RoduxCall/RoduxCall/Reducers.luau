@@ -1,11 +1,11 @@
-﻿local roduxModule = require(script:FindFirstAncestor("RoduxCall").Parent.Rodux)
-local currentCallModule = require(script.currentCall)
-local suggestedCalleesModule = require(script.suggestedCallees)
+﻿local RoduxModule = require(script:FindFirstAncestor("RoduxCall").Parent.Rodux)
+local CurrentCallModule = require(script.currentCall)
+local SuggestedCalleesModule = require(script.suggestedCallees)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), currentCallModule (ref), suggestedCalleesModule (ref)
-	return roduxModule.combineReducers({
-		currentCall = currentCallModule(),
-		suggestedCallees = suggestedCalleesModule(p1)
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: RoduxModule (copy), CurrentCallModule (copy), SuggestedCalleesModule (copy)
+	return RoduxModule.combineReducers({
+		currentCall = CurrentCallModule(),
+		suggestedCallees = SuggestedCalleesModule(p1)
 	})
 end

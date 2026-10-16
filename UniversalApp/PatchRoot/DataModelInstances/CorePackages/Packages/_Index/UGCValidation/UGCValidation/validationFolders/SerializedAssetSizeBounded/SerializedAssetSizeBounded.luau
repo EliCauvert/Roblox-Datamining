@@ -1,45 +1,39 @@
-﻿local serializationService = game:GetService("SerializationService")
+﻿local SerializationService = game:GetService("SerializationService")
 local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateSerializedAssetSizeBoundedModule = require(parent.flags.getFFlagUGCValidateSerializedAssetSizeBounded)
-local getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule = require(parent.flags.getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysics)
-local getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesDefault)
-local getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbsModule = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbs)
-local getFIntUGCValidateMaxSerializedAssetSizeBytesDynamicHeadModule = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesDynamicHead)
-local getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothingModule = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothing)
-local t = {
-	categories = constantsModule.AllAssetUploadCategories,
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule = require(Parent.flags.getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysics)
+local GetFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule = require(Parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesDefault)
+local GetFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothingModule = require(Parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothing)
+local config = {
+	[ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS] = require(Parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbs),
+	[ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD] = require(Parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesDynamicHead),
+	[ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING] = GetFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothingModule,
+	[ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH] = GetFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothingModule,
+	[ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY] = require(Parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesRigidAccessory)
+}
+
+return {
+	categories = require(Parent.Constants).AllAssetUploadCategories,
 	requiredData = {
-		validationEnumsModule.SharedDataMember.entrypointInput,
-		validationEnumsModule.SharedDataMember.uploadCategory,
-		validationEnumsModule.SharedDataMember.consumerConfig
+		ValidationEnumsModule.SharedDataMember.entrypointInput,
+		ValidationEnumsModule.SharedDataMember.uploadCategory,
+		ValidationEnumsModule.SharedDataMember.consumerConfig
 	},
-	fflag = getFFlagUGCValidateSerializedAssetSizeBoundedModule
-}
-local t_1 = {
-	[validationEnumsModule.UploadCategory.TORSO_AND_LIMBS] = getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbsModule,
-	[validationEnumsModule.UploadCategory.DYNAMIC_HEAD] = getFIntUGCValidateMaxSerializedAssetSizeBytesDynamicHeadModule,
-	[validationEnumsModule.UploadCategory.LAYERED_CLOTHING] = getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothingModule,
-	[validationEnumsModule.UploadCategory.EYEBROW_EYELASH] = getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothingModule,
-	[validationEnumsModule.UploadCategory.RIGID_ACCESSORY] = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesRigidAccessory)
-}
-
-function t.run(p1, p2)
-	-- upvalues: validationEnumsModule (ref), getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule (ref), UGCValidationService (ref), serializationService (ref), t_1 (ref), getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule (ref), errorSourceStringsModule (ref)
-	if p2.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.Backend then return end
-	local var1 = if getEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule() then UGCValidationService:GetSerializedSizeExcludingCollisionAsync(p2.entrypointInput) else buffer.len(serializationService:SerializeInstancesAsync(p2.entrypointInput))
-	local var2 = (t_1[p2.uploadCategory] or getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule)()
-	
-	if var2 < var1 then
-		p1:fail(errorSourceStringsModule.Keys.SerializedAssetTooLarge, {
-			sizeBytes = tostring(var1),
-			maxSizeBytes = tostring(var2)
-		})
+	fflag = require(Parent.flags.getFFlagUGCValidateSerializedAssetSizeBounded),
+	run = function(p1, p2) --[[ Line: 46 ]]
+		-- upvalues: ValidationEnumsModule (copy), GetEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule (copy), UGCValidationService (copy), SerializationService (copy), config (copy), GetFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule (copy), ErrorSourceStringsModule (copy)
+		if p2.consumerConfig.consumerEnv ~= ValidationEnumsModule.ConsumerEnv.Backend then return end
+		local SerializedSizeExcludingCollisionAsync = if GetEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule() then UGCValidationService:GetSerializedSizeExcludingCollisionAsync(p2.entrypointInput) else buffer.len(SerializationService:SerializeInstancesAsync(p2.entrypointInput))
+		local v1 = (config[p2.uploadCategory] or GetFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule)()
+		
+		if v1 < SerializedSizeExcludingCollisionAsync then
+			p1:fail(ErrorSourceStringsModule.Keys.SerializedAssetTooLarge, {
+				sizeBytes = tostring(SerializedSizeExcludingCollisionAsync),
+				maxSizeBytes = tostring(v1)
+			})
+		end
 	end
-end
-
-return t
+}

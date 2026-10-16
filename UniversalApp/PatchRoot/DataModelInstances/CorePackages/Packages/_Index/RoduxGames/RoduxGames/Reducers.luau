@@ -1,15 +1,15 @@
-﻿local roduxModule = require(script:FindFirstAncestor("RoduxGames").Parent.Rodux)
-local playabilityByGameIdModule = require(script.Games.playabilityByGameId)
-local productInfoByGameIdModule = require(script.Games.productInfoByGameId)
-local byGameIdModule = require(script.Games.byGameId)
-local mediaByGameIdModule = require(script.Games.mediaByGameId)
+﻿local RoduxModule = require(script:FindFirstAncestor("RoduxGames").Parent.Rodux)
+local PlayabilityByGameIdModule = require(script.Games.playabilityByGameId)
+local ProductInfoByGameIdModule = require(script.Games.productInfoByGameId)
+local ByGameIdModule = require(script.Games.byGameId)
+local MediaByGameIdModule = require(script.Games.mediaByGameId)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), playabilityByGameIdModule (ref), productInfoByGameIdModule (ref), byGameIdModule (ref), mediaByGameIdModule (ref)
-	return roduxModule.combineReducers({
-		playabilityByGameId = playabilityByGameIdModule(p1),
-		productInfoByGameId = productInfoByGameIdModule(p1),
-		byGameId = byGameIdModule(p1),
-		mediaByGameId = mediaByGameIdModule(p1)
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: RoduxModule (copy), PlayabilityByGameIdModule (copy), ProductInfoByGameIdModule (copy), ByGameIdModule (copy), MediaByGameIdModule (copy)
+	return RoduxModule.combineReducers({
+		playabilityByGameId = PlayabilityByGameIdModule(p1),
+		productInfoByGameId = ProductInfoByGameIdModule(p1),
+		byGameId = ByGameIdModule(p1),
+		mediaByGameId = MediaByGameIdModule(p1)
 	})
 end

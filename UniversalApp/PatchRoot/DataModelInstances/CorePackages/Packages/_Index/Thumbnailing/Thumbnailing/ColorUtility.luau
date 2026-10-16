@@ -1,7 +1,7 @@
 ﻿return {
-	Color3FromString = function(p1)
-		local var1, var2, var3 = unpack(p1:split("/"))
+	Color3FromString = function(Text: string): Color3 --[[ Line: 4 ]]
+		local Unpacked, Unpacked2, Unpacked3 = unpack(Text:split("/"))
 		
-		return Color3.fromRGB(tonumber(var1), tonumber(var2), tonumber(var3))
+		return (Color3.fromRGB(tonumber(Unpacked), tonumber(Unpacked2), (tonumber(Unpacked3))))
 	end
 }

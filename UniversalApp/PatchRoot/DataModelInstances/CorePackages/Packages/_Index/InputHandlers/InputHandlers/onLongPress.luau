@@ -1,9 +1,13 @@
 ﻿local _ = require(script.Parent.Parent.FocusNavigation)
-local handleInputModule = require(script.Parent.handleInput)
+local HandleInputModule = require(script.Parent.handleInput)
 
-return function(p1, p2, p3)
-	-- upvalues: handleInputModule (ref)
-	return handleInputModule({
-		hold = { durationSeconds = p1, onComplete = p2, onStep = p3 }
+return function(DurationSeconds, OnComplete, OnStep) --[[ Line: 7 | Named "onLongPress" ]]
+	-- upvalues: HandleInputModule (copy)
+	return HandleInputModule({
+		hold = {
+			durationSeconds = DurationSeconds,
+			onComplete = OnComplete,
+			onStep = OnStep
+		}
 	})
 end

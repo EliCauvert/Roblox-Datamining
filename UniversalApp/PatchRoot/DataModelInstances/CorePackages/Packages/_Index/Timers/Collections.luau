@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Collections.Collections)
+﻿return (require(script.Parent.Parent.Parent._Index.Collections.Collections))

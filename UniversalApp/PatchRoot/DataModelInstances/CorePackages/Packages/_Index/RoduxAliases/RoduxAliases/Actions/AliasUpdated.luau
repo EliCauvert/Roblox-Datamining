@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("RoduxAliases").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { payload = { userId = p1, newAlias = p2 } }
+﻿return require(script:FindFirstAncestor("RoduxAliases").Parent.Rodux).makeActionCreator(script.Name, function(UserId, NewAlias) --[[ Line: 5 ]]
+	return { payload = { userId = UserId, newAlias = NewAlias } }
 end)

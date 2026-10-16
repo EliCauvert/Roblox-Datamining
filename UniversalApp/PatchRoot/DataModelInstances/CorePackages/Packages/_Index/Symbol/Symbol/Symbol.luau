@@ -1,13 +1,13 @@
 ﻿return {
-	new = function(p1)
-		local var1 = newproxy(true)
-		local var2 = if p1 then ("Symbol(%s)"):format(p1) else "Symbol()"
+	new = function(p1) --[[ Line: 29 ]]
+		local Proxy = newproxy(true)
+		local SymbolName: string = if p1 then ("Symbol(%s)"):format(p1) else "Symbol()"
 		
-		getmetatable(var1).__tostring = function()
-			-- upvalues: var2 (write)
-			return var2
+		getmetatable(Proxy).__tostring = function() --[[ Line: 37 ]]
+			-- upvalues: SymbolName (ref)
+			return SymbolName
 		end
 		
-		return var1
+		return Proxy
 	end
 }

@@ -1,49 +1,49 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.Types)
-local createEventModule = require(viewRecycler.Internal.createEvent)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local _ = require(ViewRecycler.Core.Types)
+local CreateEventModule = require(ViewRecycler.Internal.createEvent)
 
-local function getItems(p1, p2, p3, p4)
-	local list = table.create(math.max(0, p4 - p3 + 1))
+local function getItems(p1: number, Callback, p2: number, p3: number) --[[ Line: 15 ]]
+	local Buffer = table.create((math.max(0, p3 - p2 + 1)))
 	
-	for i = p3, math.min(p4, p1) do
-		table.insert(list, p2(i))
+	for i = p2, math.min(p3, p1) do
+		table.insert(Buffer, Callback(i))
 	end
-	return list
+	return Buffer
 end
 
-return function(p5, p6, p7, p8)
-	-- upvalues: createEventModule (ref), getItems (ref)
-	local var1 = createEventModule()
-	local var2 = 0
-	local var3 = nil
+return function(Callback2, GetItem, GetItemKey, Callback1) --[[ Line: 23 | Named "createTranslatedDataSource" ]]
+	-- upvalues: CreateEventModule (copy), getItems (copy)
+	local EventModule = CreateEventModule()
+	local Count = 0
+	local Callback = nil
 	
 	return {
-		getItemCount = p5,
-		getItem = p6,
-		getItemKey = p7,
-		getItems = function(p9, p10)
-			-- upvalues: getItems (copy), p5 (ref), p6 (ref)
-			return getItems(p5(), p6, p9, p10)
+		getItemCount = Callback2,
+		getItem = GetItem,
+		getItemKey = GetItemKey,
+		getItems = function(p4, p5) --[[ Line: 58 ]]
+			-- upvalues: getItems (upval), Callback2 (copy), GetItem (copy)
+			return (getItems(Callback2(), GetItem, p4, p5))
 		end,
-		subscribe = function(p9)
-			-- upvalues: var2 (write), var3 (write), p8 (ref), var1 (ref)
-			if var2 == 0 then
-				var3 = p8(var1.fire)
+		subscribe = function(p4) --[[ Line: 33 ]]
+			-- upvalues: Count (ref), Callback (ref), Callback1 (copy), EventModule (copy)
+			if Count == 0 then
+				Callback = Callback1(EventModule.fire)
 			end
-			var2 += 1
-			local var4 = var1.connect(p9)
-			local var5 = true
+			Count += 1
+			local ConnectResult = EventModule.connect(p4)
+			local Flag = true
 			
-			return function()
-				-- upvalues: var5 (write), var4 (ref), var2 (copy), var3 (copy)
-				if not var5 then return end
-				var5 = false
-				var4()
-				var2 -= 1
+			return function() --[[ Line: 40 ]]
+				-- upvalues: Flag (ref), ConnectResult (copy), Count (upval), Callback (upval)
+				if not Flag then return end
+				Flag = false
+				ConnectResult()
+				Count -= 1
 				
-				if var2 == 0 and var3 ~= nil then
-					var3()
-					var3 = nil
+				if Count == 0 and Callback ~= nil then
+					Callback()
+					Callback = nil
 				end
 			end
 		end

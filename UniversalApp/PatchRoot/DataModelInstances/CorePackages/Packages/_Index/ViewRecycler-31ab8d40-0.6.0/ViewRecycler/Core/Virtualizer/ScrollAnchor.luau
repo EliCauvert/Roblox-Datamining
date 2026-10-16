@@ -1,306 +1,326 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local diagnosticsModule = require(viewRecycler.Core.Diagnostics)
-local _ = require(viewRecycler.Core.Virtualizer.ItemSequence)
-local scrollAlignmentModule = require(viewRecycler.Core.Enums.ScrollAlignment)
-local typesModule = require(viewRecycler.Core.Types)
-local _ = require(viewRecycler.Core.Virtualizer.Viewport)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local DiagnosticsModule = require(ViewRecycler.Core.Diagnostics)
+local _ = require(ViewRecycler.Core.Virtualizer.ItemSequence)
+local ScrollAlignmentModule = require(ViewRecycler.Core.Enums.ScrollAlignment)
+local TypesModule = require(ViewRecycler.Core.Types)
+local _ = require(ViewRecycler.Core.Virtualizer.Viewport)
 
-local function projectIndex(p1, p2)
-	-- upvalues: dataSourceChangeTypeModule (ref)
-	if p1 == nil or p2.type == dataSourceChangeTypeModule.Reset or p2.type == dataSourceChangeTypeModule.Reorder then
+local function projectIndex(IndexHint: number, p1) --[[ Line: 81 ]]
+	-- upvalues: DataSourceChangeTypeModule (copy)
+	if IndexHint == nil or p1.type == DataSourceChangeTypeModule.Reset or p1.type == DataSourceChangeTypeModule.Reorder then
 		return nil
-	elseif p2.type == dataSourceChangeTypeModule.Insert then
-		return if p2.index <= p1 then p1 + #p2.keys else p1
-	elseif p2.type == dataSourceChangeTypeModule.Remove then
-		return if p1 < p2.index then p1 elseif p2.index + #p2.keys <= p1 then p1 - #p2.keys else nil
-	elseif p2.type == dataSourceChangeTypeModule.Move then
-		return if p1 == p2.fromIndex then p2.toIndex elseif p2.fromIndex < p1 and p1 <= p2.toIndex then p1 - 1 elseif p2.toIndex <= p1 and p1 < p2.fromIndex then p1 + 1 else p1
+	elseif p1.type == DataSourceChangeTypeModule.Insert then
+		return if p1.index <= IndexHint then IndexHint + #p1.keys else IndexHint
+	elseif p1.type == DataSourceChangeTypeModule.Remove then
+		return if IndexHint < p1.index then IndexHint elseif p1.index + #p1.keys <= IndexHint then IndexHint - #p1.keys else nil
+	elseif p1.type == DataSourceChangeTypeModule.Move then
+		if IndexHint == p1.fromIndex then
+			return p1.toIndex
+		elseif p1.fromIndex < IndexHint and IndexHint <= p1.toIndex then
+			return IndexHint - 1
+		elseif p1.toIndex <= IndexHint and IndexHint < p1.fromIndex then
+			return IndexHint + 1
+		end
 	end
+	return IndexHint
 end
 
-return function(p1)
-	-- upvalues: typesModule (ref), projectIndex (ref), diagnosticsModule (ref), scrollAlignmentModule (ref)
-	local viewport = p1.viewport
-	local var1 = nil
+return function(p1) --[[ Line: 108 | Named "createScrollAnchor" ]]
+	-- upvalues: TypesModule (copy), projectIndex (copy), DiagnosticsModule (copy), ScrollAlignmentModule (copy)
+	local Viewport = p1.viewport
+	local Config = nil
 	
-	local function findKeyIndex(p2, p3)
-		-- upvalues: p1 (ref)
-		local itemSequence = p1.getItemSequence()
-		local itemCount = itemSequence.getItemCount()
+	local function findKeyIndex(AnchorKey, AnchorIndex: number): number? --[[ Line: 112 ]]
+		-- upvalues: p1 (copy)
+		local ItemSequence = p1.getItemSequence()
+		local ItemCount = ItemSequence.getItemCount()
 		
-		if p3 ~= nil and p3 >= 1 and (p3 <= itemCount and itemSequence.getItemKey(p3) == p2) then
-			return p3
+		if AnchorIndex ~= nil and AnchorIndex >= 1 and AnchorIndex <= ItemCount and ItemSequence.getItemKey(AnchorIndex) == AnchorKey then
+			return AnchorIndex
 		end
-		for i = 1, itemCount do
-			if itemSequence.getItemKey(i) ~= p2 then
-				continue
+		for i = 1, ItemCount do
+			if ItemSequence.getItemKey(i) == AnchorKey then
+				return i
 			end
-			return i
 		end
 		return nil
 	end
 	
-	local function captureViewport(p4, p5)
-		-- upvalues: p1 (ref), viewport (ref), typesModule (copy)
-		local itemSequence = p1.getItemSequence()
-		local itemCount = itemSequence.getItemCount()
-		local length = viewport.getLength()
+	local function captureViewport(ScrollOffset: number, FirstIndex) --[[ Line: 126 ]]
+		-- upvalues: p1 (copy), Viewport (copy), TypesModule (upval)
+		local ItemSequence = p1.getItemSequence()
+		local ItemCount: number = ItemSequence.getItemCount()
+		local Length: number = Viewport.getLength()
 		
-		if itemCount == 0 or length <= 0 then
+		if ItemCount == 0 or Length <= 0 then
 			return nil
 		end
-		local isItemMeasured
-		local var2 = p5
+		local Value = FirstIndex
 		
-		if var2 == nil then
-			local var3 = viewport.visibleRangeAt(p4, p4 + length)
+		if Value == nil then
+			local VisibleRangeAtResult = Viewport.visibleRangeAt(ScrollOffset, ScrollOffset + Length)
 			
-			if typesModule.isIndexRangeEmpty(var3) then
+			if TypesModule.isIndexRangeEmpty(VisibleRangeAtResult) then
 				return nil
 			end
-			var2 = var3.firstIndex
-			isItemMeasured = viewport.getLayout().isItemMeasured
+			Value = VisibleRangeAtResult.firstIndex
+			local IsItemMeasuredFunction = Viewport.getLayout().isItemMeasured
 			
-			if isItemMeasured ~= nil then
-				for i = var3.firstIndex, math.min(var3.lastIndex, itemCount) do
-					if not isItemMeasured(i) then
+			if IsItemMeasuredFunction ~= nil then
+				for i = VisibleRangeAtResult.firstIndex, math.min(VisibleRangeAtResult.lastIndex, ItemCount) do
+					if not IsItemMeasuredFunction(i) then
 						continue
 					end
-					var2 = i
+					Value = i
 					break
 				end
 			end
 		end
-		local clampedValue = math.clamp(var2, 1, itemCount)
-		isItemMeasured = viewport.placedItemLayout(clampedValue)
+		local ClampedValue = math.clamp(Value, 1, ItemCount)
+		local PlacedItemLayoutResult = Viewport.placedItemLayout(ClampedValue)
 		
 		return {
 			kind = "viewport",
-			key = itemSequence.getItemKey(clampedValue),
-			indexHint = clampedValue,
-			viewportCoordinate = isItemMeasured.startOffset - p4,
-			itemLength = isItemMeasured.length,
-			scrollOffset = p4,
-			viewportLength = length
+			key = ItemSequence.getItemKey(ClampedValue),
+			indexHint = ClampedValue,
+			viewportCoordinate = PlacedItemLayoutResult.startOffset - ScrollOffset,
+			itemLength = PlacedItemLayoutResult.length,
+			scrollOffset = ScrollOffset,
+			viewportLength = Length
 		}
 	end
 	
-	local function captureEvidence()
-		-- upvalues: viewport (ref), typesModule (copy), p1 (ref)
-		local scrollOffset = viewport.getScrollOffset()
-		local length = viewport.getLength()
-		local visibleRange = viewport.getVisibleRange()
+	local function captureEvidence() --[[ Line: 167 ]]
+		-- upvalues: Viewport (copy), TypesModule (upval), p1 (copy)
+		local ScrollOffset = Viewport.getScrollOffset()
+		local Length = Viewport.getLength()
+		local VisibleRange = Viewport.getVisibleRange()
 		
-		if typesModule.isIndexRangeEmpty(visibleRange) then
+		if TypesModule.isIndexRangeEmpty(VisibleRange) then
 			return nil
 		end
-		local itemSequence = p1.getItemSequence()
-		local t = {}
+		local ItemSequence = p1.getItemSequence()
+		local Items = {}
 		
-		for i = visibleRange.firstIndex, math.min(visibleRange.lastIndex, itemSequence.getItemCount()) do
-			local var4 = viewport.placedItemLayout(i)
-			table.insert(t, {
-				key = itemSequence.getItemKey(i),
-				viewportCoordinate = var4.startOffset - scrollOffset,
-				itemLength = var4.length
+		for i = VisibleRange.firstIndex, math.min(VisibleRange.lastIndex, (ItemSequence.getItemCount())) do
+			local PlacedItemLayoutResult = Viewport.placedItemLayout(i)
+			table.insert(Items, {
+				key = ItemSequence.getItemKey(i),
+				viewportCoordinate = PlacedItemLayoutResult.startOffset - ScrollOffset,
+				itemLength = PlacedItemLayoutResult.length
 			})
 		end
 		return {
-			scrollOffset = scrollOffset,
-			viewportLength = length,
-			items = t
+			scrollOffset = ScrollOffset,
+			viewportLength = Length,
+			items = Items
 		}
 	end
 	
-	local function prepareDataChange(p6, p7)
-		-- upvalues: var1 (write), projectIndex (copy), findKeyIndex (ref), p1 (ref)
-		if var1 == nil then return end
-		local indexHint = var1.indexHint
+	local function prepareDataChange(DataSourceChange, p2) --[[ Line: 188 ]]
+		-- upvalues: Config (ref), projectIndex (upval), findKeyIndex (copy), p1 (copy)
+		local Config1 = Config
 		
-		for i, v in p6.changes do
-			indexHint = projectIndex(indexHint, v)
+		if Config1 == nil then return end
+		local IndexHint = Config1.indexHint
+		
+		for _, change in DataSourceChange.changes do
+			IndexHint = projectIndex(IndexHint, change)
 		end
-		var1.indexHint = indexHint
+		Config1.indexHint = IndexHint
 		
-		if var1.kind == "itemTarget" or findKeyIndex(var1.key, indexHint) ~= nil then return end
-		if p7 ~= nil and p7.viewportLength > 0 then
-			for i, v_1 in p7.items do
-				local var5
-				local key = v_1.key
-				local itemSequence = p1.getItemSequence()
+		if Config1.kind == "itemTarget" or findKeyIndex(Config1.key, IndexHint) ~= nil then return end
+		if p2 ~= nil and p2.viewportLength > 0 then
+			local IndexHint1 = nil
+			for _, item in p2.items do
+				local Key = item.key
+				local ItemSequence = p1.getItemSequence()
+				IndexHint1 = nil
 				
-				for i_2 = 1, itemSequence.getItemCount() do
-					if itemSequence.getItemKey(i_2) ~= key then
+				for i = 1, ItemSequence.getItemCount() do
+					if ItemSequence.getItemKey(i) ~= Key then
 						continue
 					end
-					var5 = i_2
-					if var5 ~= nil then
-						var1 = {
-							kind = "viewport",
-							key = v_1.key,
-							indexHint = var5,
-							viewportCoordinate = v_1.viewportCoordinate,
-							itemLength = v_1.itemLength,
-							scrollOffset = p7.scrollOffset,
-							viewportLength = p7.viewportLength
-						}
-						
-						return
-					end
+					IndexHint1 = i
+					break
 				end
-				var5 = nil
-			end
-		end
-		var1 = nil
-	end
-	
-	local function resolve(p8)
-		-- upvalues: var1 (write), captureViewport (ref), viewport (ref), findKeyIndex (ref), diagnosticsModule (copy), p1 (ref)
-		if var1 == nil then
-			var1 = captureViewport(viewport.getScrollOffset(), nil)
-			
-			return nil
-		end
-		local var6 = findKeyIndex(var1.key, var1.indexHint)
-		
-		if var6 == nil then
-			var1 = captureViewport(viewport.getScrollOffset(), nil)
-			
-			return nil
-		end
-		local var7
-		local source = p8.source
-		local scrollOffset = viewport.getScrollOffset()
-		local _ = nil
-		
-		if var1.kind == "itemTarget" then
-			var1.indexHint = var6
-			source = diagnosticsModule.ScrollCorrectionSource.ProgrammaticScroll
-			var7 = viewport.offsetForItem(var6, var1.alignment) - scrollOffset
-		elseif not p1.shouldPreserveUserPosition() then
-			var1 = captureViewport(scrollOffset, nil)
-			
-			return nil
-		end
-		var1.indexHint = var6
-		local startInsetDelta = p8.startInsetDelta or 0
-		var7 = viewport.placedItemLayout(var6).startOffset - scrollOffset - var1.viewportCoordinate - startInsetDelta
-		
-		if p8.preserveStartAnchor and scrollOffset > 0 then
-			var7 += startInsetDelta
-		end
-		var7 = viewport.clamp(scrollOffset + var7) - scrollOffset
-		
-		if var1.kind == "viewport" then
-			local var8 = scrollOffset + (if math.abs(var7) < 1 then 0 else var7)
-			local var9 = viewport.placedItemLayout(var6)
-			local var10 = var9.startOffset - var8
-			local length = viewport.getLength()
-			var1 = if var10 < length and var10 + var9.length > 0 then {
-				kind = "viewport",
-				key = var1.key,
-				indexHint = var6,
-				viewportCoordinate = var10,
-				itemLength = var9.length,
-				scrollOffset = var8,
-				viewportLength = length
-			} else captureViewport(var8, nil)
-		end
-		return if math.abs(var7) < 1 then nil else { delta = var7, source = source }
-	end
-	
-	return {
-		setItemTarget = function(value, p8)
-			-- upvalues: p1 (ref), var1 (write), scrollAlignmentModule (copy)
-			local itemSequence = p1.getItemSequence()
-			local itemCount = itemSequence.getItemCount()
-			
-			if itemCount == 0 then
-				var1 = nil
-				
-				return
-			end
-			local clampedValue = math.clamp(value, 1, itemCount)
-			var1 = {
-				kind = "itemTarget",
-				key = itemSequence.getItemKey(clampedValue),
-				indexHint = clampedValue,
-				alignment = p8 or scrollAlignmentModule.Start
-			}
-		end,
-		setViewport = function(value)
-			-- upvalues: var1 (write), captureViewport (ref)
-			if var1 ~= nil and var1.kind == "viewport" then
-				local var6 = var1.viewportCoordinate - (value - var1.scrollOffset)
-				
-				if var6 < var1.viewportLength and var6 + var1.itemLength > 0 then
-					var1.viewportCoordinate = var6
-					var1.scrollOffset = value
+				if IndexHint1 ~= nil then
+					Config = {
+						kind = "viewport",
+						key = item.key,
+						indexHint = IndexHint1,
+						viewportCoordinate = item.viewportCoordinate,
+						itemLength = item.itemLength,
+						scrollOffset = p2.scrollOffset,
+						viewportLength = p2.viewportLength
+					}
 					
 					return
 				end
 			end
-			var1 = captureViewport(value, nil)
-		end,
-		observeHost = function(p8)
-			-- upvalues: var1 (write), captureViewport (ref)
-			if var1 == nil or var1.kind == "viewport" then
-				local var6 = var1
+		end
+		Config = nil
+	end
+	
+	local function resolve(p3) --[[ Line: 223 ]]
+		-- upvalues: Config (ref), captureViewport (copy), Viewport (copy), findKeyIndex (copy), DiagnosticsModule (upval), p1 (copy)
+		local Config1 = Config
+		
+		if Config1 == nil then
+			Config = captureViewport(Viewport.getScrollOffset(), nil)
+			
+			return nil
+		end
+		local KeyIndex = findKeyIndex(Config1.key, Config1.indexHint)
+		
+		if KeyIndex == nil then
+			Config = captureViewport(Viewport.getScrollOffset(), nil)
+			
+			return nil
+		end
+		local Source = p3.source
+		local ScrollOffset: number = Viewport.getScrollOffset()
+		local OffsetForItemResultDelta = nil
+		
+		if Config1.kind == "itemTarget" then
+			Config1.indexHint = KeyIndex
+			Source = DiagnosticsModule.ScrollCorrectionSource.ProgrammaticScroll
+			OffsetForItemResultDelta = Viewport.offsetForItem(KeyIndex, Config1.alignment) - ScrollOffset
+		else
+			if not p1.shouldPreserveUserPosition() then
+				Config = captureViewport(ScrollOffset, nil)
 				
-				if var6 ~= nil and var6.kind == "viewport" then
-					local var7 = var6.viewportCoordinate - (p8 - var6.scrollOffset)
+				return nil
+			end
+			Config1.indexHint = KeyIndex
+			local StartInsetDelta = p3.startInsetDelta or 0
+			OffsetForItemResultDelta = Viewport.placedItemLayout(KeyIndex).startOffset - ScrollOffset - Config1.viewportCoordinate - StartInsetDelta
+			
+			if p3.preserveStartAnchor and ScrollOffset > 0 then
+				OffsetForItemResultDelta += StartInsetDelta
+			end
+		end
+		local ClampResultDelta = Viewport.clamp(ScrollOffset + OffsetForItemResultDelta) - ScrollOffset
+		
+		if Config1.kind == "viewport" then
+			local NewScrollOffset = ScrollOffset + (if math.abs(ClampResultDelta) < 1 then 0 else ClampResultDelta)
+			local PlacedItemLayoutResult = Viewport.placedItemLayout(KeyIndex)
+			local StartOffsetDelta = PlacedItemLayoutResult.startOffset - NewScrollOffset
+			local Length = Viewport.getLength()
+			Config = if StartOffsetDelta < Length and StartOffsetDelta + PlacedItemLayoutResult.length > 0 then {
+				kind = "viewport",
+				key = Config1.key,
+				indexHint = KeyIndex,
+				viewportCoordinate = StartOffsetDelta,
+				itemLength = PlacedItemLayoutResult.length,
+				scrollOffset = NewScrollOffset,
+				viewportLength = Length
+			} else captureViewport(NewScrollOffset, nil)
+		end
+		return if math.abs(ClampResultDelta) < 1 then nil else { delta = ClampResultDelta, source = Source }
+	end
+	
+	return {
+		setItemTarget = function(Value: number, p3) --[[ Line: 290 ]]
+			-- upvalues: p1 (copy), Config (ref), ScrollAlignmentModule (upval)
+			local ItemSequence = p1.getItemSequence()
+			local ItemCount: number = ItemSequence.getItemCount()
+			
+			if ItemCount == 0 then
+				Config = nil
+				
+				return
+			else
+				local ClampedValue = math.clamp(Value, 1, ItemCount)
+				Config = {
+					kind = "itemTarget",
+					key = ItemSequence.getItemKey(ClampedValue),
+					indexHint = ClampedValue,
+					alignment = p3 or ScrollAlignmentModule.Start
+				}
+			end
+		end,
+		setViewport = function(ScrollOffset) --[[ Line: 276 ]]
+			-- upvalues: Config (ref), captureViewport (copy)
+			local Config1 = Config
+			
+			if Config1 ~= nil and Config1.kind == "viewport" then
+				local ViewportCoordinateDelta = Config1.viewportCoordinate - (ScrollOffset - Config1.scrollOffset)
+				
+				if ViewportCoordinateDelta < Config1.viewportLength and ViewportCoordinateDelta + Config1.itemLength > 0 then
+					Config1.viewportCoordinate = ViewportCoordinateDelta
+					Config1.scrollOffset = ScrollOffset
 					
-					if var7 < var6.viewportLength and var7 + var6.itemLength > 0 then
-						var6.viewportCoordinate = var7
-						var6.scrollOffset = p8
+					return
+				end
+			end
+			Config = captureViewport(ScrollOffset, nil)
+		end,
+		observeHost = function(ScrollOffset) --[[ Line: 306 ]]
+			-- upvalues: Config (ref), captureViewport (copy)
+			if Config == nil or Config.kind == "viewport" then
+				local Config1 = Config
+				
+				if Config1 ~= nil and Config1.kind == "viewport" then
+					local ViewportCoordinateDelta = Config1.viewportCoordinate - (ScrollOffset - Config1.scrollOffset)
+					
+					if ViewportCoordinateDelta < Config1.viewportLength and ViewportCoordinateDelta + Config1.itemLength > 0 then
+						Config1.viewportCoordinate = ViewportCoordinateDelta
+						Config1.scrollOffset = ScrollOffset
 						
 						return
 					end
 				end
-				var1 = captureViewport(p8, nil)
+				Config = captureViewport(ScrollOffset, nil)
 			end
 		end,
-		restore = function(p8, p9)
-			-- upvalues: findKeyIndex (ref), var1 (write), captureViewport (ref)
-			var1 = captureViewport(p9, if p8.anchorKey == nil then nil else findKeyIndex(p8.anchorKey, p8.anchorIndex))
+		restore = function(p3, ScrollOffset) --[[ Line: 311 ]]
+			-- upvalues: findKeyIndex (copy), Config (ref), captureViewport (copy)
+			Config = captureViewport(ScrollOffset, if p3.anchorKey == nil then nil else findKeyIndex(p3.anchorKey, p3.anchorIndex))
 		end,
-		snapshotOffset = function(value)
-			-- upvalues: findKeyIndex (ref), viewport (ref)
-			if value.anchorKey ~= nil then
-				local var6 = findKeyIndex(value.anchorKey, value.anchorIndex)
+		snapshotOffset = function(p3) --[[ Line: 317 ]]
+			-- upvalues: findKeyIndex (copy), Viewport (copy)
+			if p3.anchorKey ~= nil then
+				local KeyIndex = findKeyIndex(p3.anchorKey, p3.anchorIndex)
 				
-				return if var6 == nil then value.fallbackScrollOffset else viewport.placedItemLayout(var6).startOffset + value.offsetWithinItem
+				if KeyIndex ~= nil then
+					return Viewport.placedItemLayout(KeyIndex).startOffset + p3.offsetWithinItem
+				end
 			end
+			return p3.fallbackScrollOffset
 		end,
-		preserve = function(p8, p9)
-			-- upvalues: prepareDataChange (ref), captureEvidence (ref), resolve (ref)
-			if p8.dataSourceChange ~= nil then
-				prepareDataChange(p8.dataSourceChange, captureEvidence())
+		preserve = function(p3, Callback: () -> ()) --[[ Line: 326 ]]
+			-- upvalues: prepareDataChange (copy), captureEvidence (copy), resolve (copy)
+			if p3.dataSourceChange ~= nil then
+				prepareDataChange(p3.dataSourceChange, (captureEvidence()))
 			end
-			p9()
+			Callback()
 			
-			return resolve(p8)
+			return (resolve(p3))
 		end,
-		allowsPolicyOffset = function()
-			-- upvalues: var1 (write)
-			return if var1 ~= nil then var1.kind == "viewport" else true
+		allowsPolicyOffset = function(): boolean --[[ Line: 333 ]]
+			-- upvalues: Config (ref)
+			return Config == nil or Config.kind == "viewport"
 		end,
-		getAnchoredItem = function()
-			-- upvalues: var1 (write), p1 (ref), scrollAlignmentModule (copy)
-			if var1 == nil or var1.kind == "viewport" and not p1.shouldPreserveUserPosition() then
+		getAnchoredItem = function() --[[ Line: 336 ]]
+			-- upvalues: Config (ref), p1 (copy), ScrollAlignmentModule (upval)
+			local Config1 = Config
+			
+			if Config1 == nil or Config1.kind == "viewport" and not p1.shouldPreserveUserPosition() then
 				return nil
+			else
+				local IndexHint = Config1.indexHint
+				
+				return if IndexHint == nil then nil else table.freeze({
+					index = IndexHint,
+					alignment = if Config1.kind == "itemTarget" then Config1.alignment else ScrollAlignmentModule.Start
+				})
 			end
-			local indexHint = var1.indexHint
-			
-			return if indexHint == nil then nil else table.freeze({
-				index = indexHint,
-				alignment = if var1.kind == "itemTarget" then var1.alignment else scrollAlignmentModule.Start
-			})
 		end,
-		reset = function()
-			-- upvalues: var1 (write)
-			var1 = nil
+		reset = function() --[[ Line: 352 ]]
+			-- upvalues: Config (ref)
+			Config = nil
 		end
 	}
 end

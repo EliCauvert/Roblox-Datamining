@@ -1,11 +1,10 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local inspect = require(parent.jsutils.inspect).inspect
-local _ = require(parent.language.ast)
-local isNode = require(script.Parent.ast).isNode
-local t = {
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local InspectFunction = require(Parent.jsutils.inspect).inspect
+local _ = require(Parent.language.ast)
+local IsNodeFunction = require(script.Parent.ast).isNode
+local QueryDocumentKeys = {
 	Name = {},
 	Document = { "definitions" },
 	OperationDefinition = {
@@ -91,220 +90,223 @@ local t = {
 	EnumTypeExtension = { "name", "directives", "values" },
 	InputObjectTypeExtension = { "name", "directives", "fields" }
 }
-local var1 = object.freeze({})
-local nullModule = require(parent.luaUtils.null)
-local _ = nil
-local var2 = nil
+local FreezeResult = LuauPolyfillModule.Object.freeze({})
+local NullModule = require(Parent.luaUtils.null)
+local Callback = nil
+
+local function visit(p1, p2, p3) --[[ Line: 249 ]]
+	-- upvalues: QueryDocumentKeys (copy), Array (copy), NullModule (copy), IsNodeFunction (copy), InspectFunction (copy), Callback (ref), FreezeResult (copy)
+	local P2 = p3 or QueryDocumentKeys
+	local Prev = nil
+	local IsArray = Array.isArray(p1)
+	local Keys = { p1 }
+	local Index = 0
+	local Edits = {}
+	local Removed = nil
+	local List = {}
+	local List1 = {}
+	local v1 = p1
+	local SliceResult = nil
+	local Entry = nil
+	repeat
+		Index += 1
+		local IsIndexMatch = Index == #Keys + 1
+		local v2: boolean = IsIndexMatch and #Edits ~= 0
+		if IsIndexMatch then
+			Entry = if #List1 == 0 then nil else List[#List]
+			SliceResult = Removed
+			Removed = table.remove(List1)
+			
+			if v2 then
+				if IsArray then
+					SliceResult = Array.slice(SliceResult)
+				else
+					local t = {}
+					
+					for i1 in pairs(SliceResult) do
+						t[i1] = SliceResult[i1]
+					end
+					SliceResult = t
+				end
+				local Count = 0
+				
+				for i = 1, #Edits do
+					local EditEntry = Edits[i][1]
+					local EditEntry1 = Edits[i][2]
+					
+					if IsArray then
+						EditEntry -= Count
+					end
+					if IsArray and EditEntry1 == nil then
+						Array.splice(SliceResult, EditEntry, 1)
+						Count += 1
+					else
+						SliceResult[EditEntry] = EditEntry1
+					end
+				end
+			end
+			Index = Prev.index
+			Keys = Prev.keys
+			Edits = Prev.edits
+			IsArray = Prev.inArray
+			Prev = Prev.prev
+		else
+			Entry = if Removed then if IsArray then Index else Keys[Index] else nil
+			SliceResult = if Removed then Removed[Entry] else v1
+			
+			if SliceResult == nil or SliceResult == NullModule then continue end
+			if Removed then
+				table.insert(List, Entry)
+			end
+		end
+		local Enabled = nil
+		
+		if not Array.isArray(SliceResult) then
+			if not IsNodeFunction(SliceResult) then
+				error("Invalid AST Node: " .. InspectFunction(SliceResult) .. ".")
+			end
+			local CallbackResult = Callback(p2, SliceResult.kind, IsIndexMatch)
+			
+			if CallbackResult then
+				Enabled = CallbackResult(p2, SliceResult, Entry, Removed, List, List1)
+				
+				if Enabled == FreezeResult then break end
+				if Enabled == false then
+					if not IsIndexMatch then
+						table.remove(List)
+						continue
+					end
+				elseif Enabled ~= nil or Enabled == NullModule then
+					if Enabled == NullModule then
+						Enabled = nil
+					end
+					table.insert(Edits, { Entry, Enabled })
+					
+					if not IsIndexMatch then
+						if not IsNodeFunction(Enabled) then
+							table.remove(List)
+							continue
+						else
+							SliceResult = Enabled
+						end
+					end
+				end
+			end
+		end
+		if Enabled == nil and v2 then
+			table.insert(Edits, { Entry, SliceResult })
+		end
+		if IsIndexMatch then
+			table.remove(List)
+		else
+			Prev = {
+				inArray = IsArray,
+				index = Index,
+				keys = Keys,
+				edits = Edits,
+				prev = Prev
+			}
+			IsArray = Array.isArray(SliceResult)
+			Keys = if IsArray then SliceResult else P2[SliceResult.kind] or {}
+			Index = 0
+			Edits = {}
+			
+			if Removed then
+				table.insert(List1, Removed)
+			end
+			Removed = SliceResult
+		end
+	until Prev == nil
+	if #Edits ~= 0 then
+		v1 = Edits[#Edits][2]
+	end
+	return v1
+end
+
+local function visitInParallel(p1) --[[ Line: 412 ]]
+	-- upvalues: Callback (ref), FreezeResult (copy)
+	local FreezeResults = {}
+	
+	return {
+		enter = function(_, p2, ...) --[[ Line: 417 ]]
+			-- upvalues: p1 (copy), FreezeResults (copy), Callback (upval), FreezeResult (upval)
+			local CallbackResultResult = nil
+			for i = 1, #p1 do
+				if FreezeResults[i] == nil then
+					local CallbackResult = Callback(p1[i], p2.kind, false)
+					
+					if CallbackResult then
+						CallbackResultResult = CallbackResult(p1[i], p2, ...)
+						
+						if CallbackResultResult == false then
+							FreezeResults[i] = p2
+						elseif CallbackResultResult == FreezeResult then
+							FreezeResults[i] = FreezeResult
+						elseif CallbackResultResult ~= nil then
+							return CallbackResultResult
+						end
+					end
+				end
+			end
+		end,
+		leave = function(_, ...) --[[ Line: 439 ]]
+			-- upvalues: p1 (copy), FreezeResults (copy), Callback (upval), FreezeResult (upval)
+			local v1 = (...)
+			local CallbackResultResult = nil
+			
+			for i = 1, #p1 do
+				if FreezeResults[i] == nil then
+					local CallbackResult = Callback(p1[i], v1.kind, true)
+					
+					if CallbackResult then
+						CallbackResultResult = CallbackResult(p1[i], ...)
+						
+						if CallbackResultResult == FreezeResult then
+							FreezeResults[i] = FreezeResult
+						elseif CallbackResultResult ~= nil and CallbackResultResult ~= false then
+							return CallbackResultResult
+						end
+					end
+				elseif FreezeResults[i] == v1 then
+					FreezeResults[i] = nil
+				end
+			end
+		end
+	}
+end
+
+Callback = function(p3, Kind, p4) --[[ Line: 465 | Named "getVisitFn" ]]
+	local Callback = p3[Kind]
+	
+	if not Callback then
+		local Leave = if p4 then p3.leave else p3.enter
+		
+		if Leave then
+			if type(Leave) == "function" then
+				return Leave
+			end
+			local Callback1 = Leave[Kind]
+			
+			if type(Callback1) == "function" then
+				return Callback1
+			end
+		end
+	elseif not p4 and type(Callback) == "function" then
+		return Callback
+	else
+		local Leave1 = if typeof(Callback) ~= "function" then if p4 then Callback.leave else Callback.enter else nil
+		
+		if type(Leave1) == "function" then
+			return Leave1
+		end
+	end
+end
 
 return {
-	BREAK = var1,
-	REMOVE = nullModule,
-	visit = function(p1, p2, p3)
-		-- upvalues: t (ref), array (ref), nullModule (ref), isNode (ref), inspect (ref), var2 (write), var1 (ref)
-		p3 = p3 or t
-		local t_1 = nil
-		local var3 = array.isArray(p1)
-		local list = { p1 }
-		local var4 = 0
-		local t_2 = {}
-		local _ = nil
-		local _ = nil
-		local var5 = nil
-		local t_3 = {}
-		local t_4 = {}
-		local var6 = p1
-		local var7, var8, t_5
-		repeat
-			var4 += 1
-			local var9 = var4 == #list + 1
-			local var10 = var9 and #t_2 ~= 0
-			if not var9 then
-				var7 = if var5 then if var3 then var4 else list[var4] else nil
-				var8 = if var5 then var5[var7] else var6
-				
-				if var8 == nil or var8 == nullModule then continue end
-				if var5 then
-					table.insert(t_3, var7)
-				end
-				t_5 = nil
-				
-				if not array.isArray(var8) then
-					if not isNode(var8) then
-						error("Invalid AST Node: " .. inspect(var8) .. ".")
-					end
-					local var11 = var2(p2, var8.kind, var9)
-					
-					if var11 then
-						t_5 = var11(p2, var8, var7, var5, t_3, t_4)
-						
-						if t_5 == var1 then break end
-						if t_5 == false then
-							if var9 then
-								if t_5 == nil and var10 then
-									table.insert(t_2, { var7, var8 })
-								end
-								if var9 then
-									table.remove(t_3)
-								else
-									t_1 = {
-										inArray = var3,
-										index = var4,
-										keys = list,
-										edits = t_2,
-										prev = t_1
-									}
-									var3 = array.isArray(var8)
-									list = if var3 then var8 else p3[var8.kind] or {}
-									var4 = 0
-									t_2 = {}
-									
-									if var5 then
-										table.insert(t_4, var5)
-									end
-									var5 = var8
-								end
-							else
-								table.remove(t_3)
-							end
-						elseif t_5 ~= nil or t_5 == nullModule then
-							if t_5 == nullModule then
-								t_5 = nil
-							end
-							table.insert(t_2, { var7, t_5 })
-							
-							if not var9 then
-								if isNode(t_5) then
-									var8 = t_5
-								else
-									table.remove(t_3)
-								end
-							end
-						end
-					end
-				end
-			end
-			var7 = if #t_4 == 0 then nil else t_3[#t_3]
-			var8 = var5
-			var5 = table.remove(t_4)
-			
-			if var10 then
-				local i
-				if var3 then
-					var8 = array.slice(var8)
-				else
-					t_5 = {}
-					
-					for i in pairs(var8) do
-						t_5[i] = var8[i]
-					end
-					var8 = t_5
-				end
-				t_5 = 0
-				
-				for i_1 = 1, #t_2 do
-					i = t_2[i_1][1]
-					local var12 = t_2[i_1][2]
-					
-					if var3 then
-						i -= t_5
-					end
-					if var3 and var12 == nil then
-						array.splice(var8, i, 1)
-						t_5 += 1
-					else
-						var8[i] = var12
-					end
-				end
-			end
-			var4 = t_1.index
-			list = t_1.keys
-			t_2 = t_1.edits
-			var3 = t_1.inArray
-			t_1 = t_1.prev
-		until t_1 == nil
-		if #t_2 ~= 0 then
-			var6 = t_2[#t_2][2]
-		end
-		return var6
-	end,
-	visitInParallel = function(p1)
-		-- upvalues: var2 (write), var1 (ref)
-		local t = {}
-		
-		return {
-			enter = function(_, p2, ...)
-				-- upvalues: p1 (ref), t (ref), var2 (copy), var1 (copy)
-				for i = 1, #p1 do
-					if t[i] == nil then
-						local var3 = var2(p1[i], p2.kind, false)
-						
-						if var3 then
-							local var4 = var3(p1[i], p2, ...)
-							
-							if var4 == false then
-								t[i] = p2
-							elseif var4 == var1 then
-								t[i] = var1
-							elseif var4 == nil then
-								continue
-							end
-							return var4
-						end
-					end
-				end
-			end,
-			leave = function(_, ...)
-				-- upvalues: p1 (ref), t (ref), var2 (copy), var1 (copy)
-				local var5
-				local var6 = ...
-				
-				for i = 1, #p1 do
-					if t[i] == nil then
-						local var7 = var2(p1[i], var6.kind, true)
-						
-						if var7 then
-							var5 = var7(p1[i], ...)
-							
-							if var5 == var1 then
-								t[i] = var1
-							elseif var5 == nil or var5 == false then
-								continue
-							end
-							return var5
-						end
-					elseif t[i] == var6 then
-						t[i] = nil
-					end
-				end
-			end
-		}
-	end,
-	getVisitFn = function(p2, p3, p4)
-		local var3 = p2[p3]
-		
-		if var3 then
-			if not p4 and type(var3) == "function" then
-				return var3
-			end
-			local var4 = if typeof(var3) ~= "function" then if p4 then var3.leave else var3.enter else nil
-			
-			if type(var4) == "function" then
-				return var4
-			end
-		else
-			local var5 = if p4 then p2.leave else p2.enter
-			
-			if var5 then
-				if type(var5) == "function" then
-					return var5
-				end
-				local var6 = var5[p3]
-				
-				if type(var6) == "function" then
-					return var6
-				end
-			end
-		end
-	end,
-	QueryDocumentKeys = t
+	BREAK = FreezeResult,
+	REMOVE = NullModule,
+	visit = visit,
+	visitInParallel = visitInParallel,
+	getVisitFn = Callback,
+	QueryDocumentKeys = QueryDocumentKeys
 }

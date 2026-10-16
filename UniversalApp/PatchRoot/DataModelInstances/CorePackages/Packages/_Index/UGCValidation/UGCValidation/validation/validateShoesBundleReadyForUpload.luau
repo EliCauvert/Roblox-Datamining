@@ -1,25 +1,25 @@
-﻿local parent = script.Parent.Parent
-local promiseModule = require(parent.Parent.Promise)
-local _ = require(parent.util.BundlesMetadata)
-local _ = require(parent.util.Types)
-local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
-local destroyEditableInstancesModule = require(parent.util.destroyEditableInstances)
-local _ = require(parent.util.createUGCBodyPartFolders)
-local fixUpPreValidationModule = require(parent.util.fixUpPreValidation)
-local validateInternalModule = require(parent.validation.validateInternal)
-local validateShoesModule = require(parent.validation.validateShoes)
-local _ = require(parent.validation.validateBundleReadyForUpload)
-local validateFullShoesBundleStudio = game:DefineFastFlag("ValidateFullShoesBundleStudio", false)
-local legacyValidationAdapterModule = require(parent.util.LegacyValidationAdapter)
-local httpService = game:GetService("HttpService")
+﻿local Parent = script.Parent.Parent
+local PromiseModule = require(Parent.Parent.Promise)
+local _ = require(Parent.util.BundlesMetadata)
+local _ = require(Parent.util.Types)
+local CreateEditableInstancesForContextModule = require(Parent.util.createEditableInstancesForContext)
+local DestroyEditableInstancesModule = require(Parent.util.destroyEditableInstances)
+local _ = require(Parent.util.createUGCBodyPartFolders)
+local FixUpPreValidationModule = require(Parent.util.fixUpPreValidation)
+local ValidateInternalModule = require(Parent.validation.validateInternal)
+local ValidateShoesModule = require(Parent.validation.validateShoes)
+local _ = require(Parent.validation.validateBundleReadyForUpload)
+local ValidateFullShoesBundleStudio = game:DefineFastFlag("ValidateFullShoesBundleStudio", false)
+local LegacyValidationAdapterModule = require(Parent.util.LegacyValidationAdapter)
+local HttpService = game:GetService("HttpService")
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: promiseModule (ref), fixUpPreValidationModule (ref), httpService (ref), createEditableInstancesForContextModule (ref), validateInternalModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref), validateFullShoesBundleStudio (ref), validateShoesModule (ref)
-	p4 = p4 or function() end
-	assert(p4 ~= nil, "Luau")
+return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) --[[ Line: 25 | Named "validateShoesBundleReadyForUpload" ]]
+	-- upvalues: PromiseModule (copy), FixUpPreValidationModule (copy), HttpService (copy), CreateEditableInstancesForContextModule (copy), ValidateInternalModule (copy), LegacyValidationAdapterModule (copy), DestroyEditableInstancesModule (copy), ValidateFullShoesBundleStudio (copy), ValidateShoesModule (copy)
+	local Callback: (any) -> () = p3 or function() --[[ Line: 33 ]] end
+	assert(Callback ~= nil, "Luau")
 	
-	if not p1:IsA("Model") then
-		return promiseModule.resolve({
+	if not Model:IsA("Model") then
+		return PromiseModule.resolve({
 			errors = {
 				{
 					assetType = nil,
@@ -32,11 +32,11 @@ return function(p1, p2, p3, p4, p5, p6)
 			pieces = {}
 		})
 	end
-	local leftShoeAccessory = p1:FindFirstChild("LeftShoeAccessory")
-	local rightShoeAccessory = p1:FindFirstChild("RightShoeAccessory")
+	local LeftShoeAccessory = Model:FindFirstChild("LeftShoeAccessory")
+	local RightShoeAccessory = Model:FindFirstChild("RightShoeAccessory")
 	
-	if not leftShoeAccessory or not leftShoeAccessory:IsA("Accessory") or (not rightShoeAccessory or not rightShoeAccessory:IsA("Accessory")) then
-		return promiseModule.resolve({
+	if not LeftShoeAccessory or not LeftShoeAccessory:IsA("Accessory") or not RightShoeAccessory or not RightShoeAccessory:IsA("Accessory") then
+		return PromiseModule.resolve({
 			errors = {
 				{
 					assetType = nil,
@@ -49,144 +49,139 @@ return function(p1, p2, p3, p4, p5, p6)
 			pieces = {}
 		})
 	end
-	local t = {
-		[Enum.AssetType.LeftShoeAccessory] = { fixUpPreValidationModule(leftShoeAccessory) },
-		[Enum.AssetType.RightShoeAccessory] = { fixUpPreValidationModule(rightShoeAccessory) }
+	local config = {
+		[Enum.AssetType.LeftShoeAccessory] = { FixUpPreValidationModule(LeftShoeAccessory) },
+		[Enum.AssetType.RightShoeAccessory] = { FixUpPreValidationModule(RightShoeAccessory) }
 	}
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
+	local t = {}
+	local Errors = {}
+	local List = {}
 	
-	for i, v in p2[p3].allowedAssetTypeSettings do
-		local var1 = assert(Enum.AssetType[i], "Asset type name doesn't map to an enum item")
+	for i, allowedAssetTypeSetting in p1[p2].allowedAssetTypeSettings do
+		local AssetTypeNameDoesnTMapToAnEnumItem = assert(Enum.AssetType[i], "Asset type name doesn't map to an enum item")
 		
-		if v.isEligibleForUpload then
-			local var2 = t[var1]
-			local var3 = var2 and var2[1]
-			t_1[var1] = {
-				assetType = var1,
-				instance = var3,
-				settings = v,
-				status = if var3 == nil then "finished" else "pending"
+		if allowedAssetTypeSetting.isEligibleForUpload then
+			local Entry = config[AssetTypeNameDoesnTMapToAnEnumItem]
+			local Entry1 = Entry and Entry[1]
+			t[AssetTypeNameDoesnTMapToAnEnumItem] = {
+				assetType = AssetTypeNameDoesnTMapToAnEnumItem,
+				instance = Entry1,
+				settings = allowedAssetTypeSetting,
+				status = if Entry1 == nil then "finished" else "pending"
 			}
 			
-			if var3 == nil then
-				table.insert(t_2, { assetType = var1, error = { type = "notFound" } })
-			end
-		end
-	end
-	table.insert(t_3, t_1[Enum.AssetType.LeftShoeAccessory])
-	table.insert(t_3, t_1[Enum.AssetType.RightShoeAccessory])
-	local t_4 = { errors = t_2, pieces = t_3 }
-	p4(t_4)
-	local var4 = httpService:GenerateGUID()
-	
-	return promiseModule.each(t_3, function(p7, p8)
-		-- upvalues: p5 (ref), p6 (ref), createEditableInstancesForContextModule (copy), validateInternalModule (copy), legacyValidationAdapterModule (copy), var4 (ref), destroyEditableInstancesModule (copy), t_4 (write), p4 (write)
-		if p7.status == "finished" then return end
-		local var5, var6
-		assert(p7.instance ~= nil, "Unfinished piece doesn't have an instance")
-		local _ = nil
-		local _ = nil
-		local list = { p7.instance }
-		local t = {
-			instances = list,
-			assetTypeEnum = p7.assetType,
-			allowEditableInstances = p5,
-			bypassFlags = p6
-		}
-		local var7, var8 = createEditableInstancesForContextModule.processAll(list, p5)
-		
-		if var7 then
-			t.editableMeshes = var8.editableMeshes
-			t.editableImages = var8.editableImages
-			local var9, var10 = validateInternalModule(t)
-			var9, var38 = legacyValidationAdapterModule.studioRFUAssetValidation(t, var4, var9, var10)
-			var6 = var9
-			var5 = var10
-			destroyEditableInstancesModule(t.editableMeshes, t.editableImages)
-		else
-			var5 = var8
-			var6 = false
-		end
-		t_4 = table.clone(t_4)
-		t_4.errors = table.clone(t_4.errors)
-		
-		if not var6 then
-			assert(var5 ~= nil, "Failure without errors")
-			
-			for i, v in var5 do
-				table.insert(t_4.errors, {
-					assetType = p7.assetType,
-					error = { type = "message", message = v }
+			if Entry1 == nil then
+				table.insert(Errors, {
+					assetType = AssetTypeNameDoesnTMapToAnEnumItem,
+					error = { type = "notFound" }
 				})
 			end
 		end
-		t_4.pieces = table.clone(t_4.pieces)
-		t_4.pieces[p8].status = "finished"
-		p4(t_4)
-	end):andThen(function()
-		-- upvalues: validateFullShoesBundleStudio (copy), t_4 (write), p5 (ref), p6 (ref), createEditableInstancesForContextModule (copy), validateShoesModule (copy), legacyValidationAdapterModule (copy), var4 (ref), destroyEditableInstancesModule (copy), p4 (write)
-		if validateFullShoesBundleStudio then
-			local function createFullBodyData(p9)
-				local t = {}
+	end
+	table.insert(List, t[Enum.AssetType.LeftShoeAccessory])
+	table.insert(List, t[Enum.AssetType.RightShoeAccessory])
+	local Tbl = { errors = Errors, pieces = List }
+	Callback(Tbl)
+	local Guid = HttpService:GenerateGUID()
+	
+	return PromiseModule.each(List, function(p4, p5) --[[ Line: 124 ]]
+		-- upvalues: AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), ValidateInternalModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Tbl (ref), Callback (ref)
+		if p4.status == "finished" then return end
+		assert(p4.instance ~= nil, "Unfinished piece doesn't have an instance")
+		local Instances = { p4.instance }
+		local config = {
+			instances = Instances,
+			assetTypeEnum = p4.assetType,
+			allowEditableInstances = AllowEditableInstances,
+			bypassFlags = BypassFlags
+		}
+		local ProcessAllResult, ProcessAllResult2 = CreateEditableInstancesForContextModule.processAll(Instances, AllowEditableInstances)
+		local v1 = nil
+		local Messages = nil
+		
+		if ProcessAllResult then
+			config.editableMeshes = ProcessAllResult2.editableMeshes
+			config.editableImages = ProcessAllResult2.editableImages
+			local ValidateInternalModuleResult, ValidateInternalModuleResult2 = ValidateInternalModule(config)
+			v1, Messages = LegacyValidationAdapterModule.studioRFUAssetValidation(config, Guid, ValidateInternalModuleResult, ValidateInternalModuleResult2)
+			DestroyEditableInstancesModule(config.editableMeshes, config.editableImages)
+		else
+			Messages = ProcessAllResult2
+			v1 = false
+		end
+		Tbl = table.clone(Tbl)
+		Tbl.errors = table.clone(Tbl.errors)
+		
+		if not v1 then
+			assert(Messages ~= nil, "Failure without errors")
+			
+			for _, message in Messages do
+				table.insert(Tbl.errors, {
+					assetType = p4.assetType,
+					error = { type = "message", message = message }
+				})
+			end
+		end
+		Tbl.pieces = table.clone(Tbl.pieces)
+		Tbl.pieces[p5].status = "finished"
+		Callback(Tbl)
+	end):andThen(function() --[[ Line: 184 ]]
+		-- upvalues: ValidateFullShoesBundleStudio (upval), Tbl (ref), AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), ValidateShoesModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Callback (ref)
+		if ValidateFullShoesBundleStudio then
+			local FullBodyData = (function(List) --[[ Line: 186 | Named "createFullBodyData" ]]
+				local List1 = {}
 				
-				for i, v in p9 do
-					table.insert(t, {
-						assetTypeEnum = v.assetType,
-						allSelectedInstances = if v.instance then { v.instance } else {}
+				for _, value in List do
+					table.insert(List1, {
+						assetTypeEnum = value.assetType,
+						allSelectedInstances = if value.instance then { value.instance } else {}
 					})
 				end
-				return t
-			end
-			
-			local _ = nil
-			local _ = nil
-			local var11 = createFullBodyData(t_4.pieces)
-			local t = {
+				return List1
+			end)(Tbl.pieces)
+			local config = {
 				isServer = false,
-				fullBodyData = var11,
-				allowEditableInstances = p5,
-				bypassFlags = p6
+				fullBodyData = FullBodyData,
+				allowEditableInstances = AllowEditableInstances,
+				bypassFlags = BypassFlags
 			}
-			local t_1 = {}
+			local List = {}
 			
-			for i, v in var11 do
-				for i_1, v_1 in v.allSelectedInstances do
-					table.insert(t_1, v_1)
+			for _, value in FullBodyData do
+				for _, allSelectedInstance in value.allSelectedInstances do
+					table.insert(List, allSelectedInstance)
 				end
 			end
-			local var12, var13
-			local var14, var15 = createEditableInstancesForContextModule.processAll(t_1, p5)
+			local ProcessAllResult, ProcessAllResult2 = CreateEditableInstancesForContextModule.processAll(List, AllowEditableInstances)
+			local Messages = nil
+			local v2 = nil
 			
-			if var14 then
-				t.editableMeshes = var15.editableMeshes
-				t.editableImages = var15.editableImages
-				local var16, var17 = validateShoesModule(t)
-				var16, var29 = legacyValidationAdapterModule.studioRFUBundleValidation(var11, Enum.BundleType.Shoes, t, var4, var16, var17)
-				var13 = var16
-				var12 = var17
-				destroyEditableInstancesModule(t.editableMeshes, t.editableImages)
+			if ProcessAllResult then
+				config.editableMeshes = ProcessAllResult2.editableMeshes
+				config.editableImages = ProcessAllResult2.editableImages
+				local ValidateShoesModuleResult, ValidateShoesModuleResult2 = ValidateShoesModule(config)
+				v2, Messages = LegacyValidationAdapterModule.studioRFUBundleValidation(FullBodyData, Enum.BundleType.Shoes, config, Guid, ValidateShoesModuleResult, ValidateShoesModuleResult2)
+				DestroyEditableInstancesModule(config.editableMeshes, config.editableImages)
 			else
-				var12 = var15
-				var13 = false
+				Messages = ProcessAllResult2
+				v2 = false
 			end
-			if not var13 then
-				t_4 = table.clone(t_4)
-				t_4.errors = table.clone(t_4.errors)
-				assert(var12 and #var12 > 0, "There should always be a reason for failure")
+			if not v2 then
+				Tbl = table.clone(Tbl)
+				Tbl.errors = table.clone(Tbl.errors)
+				assert(Messages and #Messages > 0, "There should always be a reason for failure")
 				
-				for i_1, v_1 in var12 do
-					table.insert(t_4.errors, {
+				for _, message in Messages do
+					table.insert(Tbl.errors, {
 						assetType = nil,
-						error = { type = "message", message = v_1 }
+						error = { type = "message", message = message }
 					})
 				end
 			end
 		end
-		p4(t_4)
-	end):andThen(function()
-		-- upvalues: t_4 (write)
-		return t_4
+		Callback(Tbl)
+	end):andThen(function() --[[ Line: 259 ]]
+		-- upvalues: Tbl (ref)
+		return Tbl
 	end)
 end

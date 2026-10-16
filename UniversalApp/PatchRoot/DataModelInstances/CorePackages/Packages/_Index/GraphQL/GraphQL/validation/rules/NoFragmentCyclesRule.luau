@@ -1,54 +1,54 @@
-﻿local parent = script.Parent.Parent.Parent
-local array = require(parent.Parent.LuauPolyfill).Array
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
+﻿local Parent = script.Parent.Parent.Parent
+local Array = require(Parent.Parent.LuauPolyfill).Array
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
 
 return {
-	NoFragmentCyclesRule = function(p1)
-		-- upvalues: array (ref), graphQLError (ref)
+	NoFragmentCyclesRule = function(p1) --[[ Line: 18 ]]
+		-- upvalues: Array (copy), GraphQLError (copy)
 		local t = {}
-		local t_1 = {}
-		local t_2 = {}
+		local List = {}
+		local t1 = {}
 		
-		local function detectCycleRecursive(p2)
-			-- upvalues: t (ref), p1 (ref), t_2 (ref), t_1 (ref), detectCycleRecursive (ref), array (copy), graphQLError (copy)
-			if t[p2.name.value] then return end
-			local value = p2.name.value
-			t[value] = true
-			local selectionSetFragmentSpreads = p1:getFragmentSpreads(p2.selectionSet)
+		local function detectCycleRecursive(Fragment) --[[ Line: 31 ]]
+			-- upvalues: t (copy), p1 (copy), t1 (copy), List (copy), detectCycleRecursive (copy), Array (upval), GraphQLError (upval)
+			if t[Fragment.name.value] then return end
+			local Value = Fragment.name.value
+			t[Value] = true
+			local FragmentSpreads = p1:getFragmentSpreads(Fragment.selectionSet)
 			
-			if #selectionSetFragmentSpreads == 0 then return end
-			t_2[value] = #t_1
+			if #FragmentSpreads == 0 then return end
+			t1[Value] = #List
 			
-			for i, v in ipairs(selectionSetFragmentSpreads) do
-				local value_1 = v.name.value
-				local var1 = t_2[value_1]
-				table.insert(t_1, v)
+			for _, fragmentSpread in ipairs(FragmentSpreads) do
+				local Value1 = fragmentSpread.name.value
+				local Entry: number = t1[Value1]
+				table.insert(List, fragmentSpread)
 				
-				if var1 == nil then
-					local var2 = p1:getFragment(value_1)
+				if Entry == nil then
+					local Fragment1 = p1:getFragment(Value1)
 					
-					if var2 then
-						detectCycleRecursive(var2)
+					if Fragment1 then
+						detectCycleRecursive(Fragment1)
 					end
 				else
-					local var3 = array.slice(t_1, var1 + 1)
-					local joined = table.concat(array.map(array.slice(var3, 1, #var3), function(p3)
+					local SliceResult = Array.slice(List, Entry + 1)
+					local Joined = table.concat(Array.map(Array.slice(SliceResult, 1, #SliceResult), function(p2): string --[[ Line: 61 ]]
 						return "\"" .. p2.name.value .. "\""
 					end), ", ")
-					p1:reportError(graphQLError.new(("Cannot spread fragment \"%s\" within itself"):format(value_1) .. (joined ~= "" and (" via %s."):format(joined) or "."), var3))
+					p1:reportError(GraphQLError.new(("Cannot spread fragment \"%s\" within itself"):format(Value1) .. (if Joined == "" then "." else (" via %s."):format(Joined) or "."), SliceResult))
 				end
-				table.remove(t_1)
+				table.remove(List)
 			end
-			t_2[value] = nil
+			t1[Value] = nil
 		end
 		
 		return {
-			OperationDefinition = function()
+			OperationDefinition = function(): boolean --[[ Line: 82 ]]
 				return false
 			end,
-			FragmentDefinition = function(_, p3)
-				-- upvalues: detectCycleRecursive (ref)
-				detectCycleRecursive(p3)
+			FragmentDefinition = function(_, p2): boolean --[[ Line: 85 ]]
+				-- upvalues: detectCycleRecursive (copy)
+				detectCycleRecursive(p2)
 				
 				return false
 			end

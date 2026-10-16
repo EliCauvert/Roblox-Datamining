@@ -1,1 +1,1 @@
-﻿return require(script.ButtonGroup)
+﻿return (require(script.ButtonGroup))

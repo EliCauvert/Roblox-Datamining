@@ -1,38 +1,33 @@
-﻿local t = {
-	replaceNewlines = function(p1, p2)
-		p2 = p2 or " "
+﻿local AppsFlyerUtil = {
+	replaceNewlines = function(Text: string, p1) --[[ Line: 18 ]]
+		local P1 = p1 or " "
 		
-		return p1:gsub("\r\n", p2):gsub("\r", p2):gsub("\n", p2)
+		return Text:gsub("\r\n", P1):gsub("\r", P1):gsub("\n", P1)
 	end,
-	truncateLength = function(p1, p2)
-		p2 = p2 or 140
+	truncateLength = function(Text: string, p1) --[[ Line: 33 ]]
+		local P3 = p1 or 140
 		
-		if p1:len() <= p2 then
-			return p1
+		if Text:len() <= P3 then
+			return Text
 		end
-		local var1 = ""
-		local var2 = ("..."):len()
+		local Text1 = ""
+		local Length: number = ("..."):len()
 		
-		for i, v in utf8.graphemes(p1) do
-			local var3 = p1:sub(i, v)
+		for i, value in utf8.graphemes(Text) do
+			local Segment = Text:sub(i, value)
 			
-			if p2 < var1:len() + var3:len() + var2 then break end
-			var1 ..= var3
+			if P3 < Text1:len() + Segment:len() + Length then break end
+			Text1 ..= Segment
 		end
-		local var4, var5 = var1:gsub("%s+%S-$", "...", 1)
+		local SS, SS2 = Text1:gsub("%s+%S-$", "...", 1)
 		
-		if var5 > 0 then
-			var1 = var4
-			
-			return var1
-		end
-		return var1 .. "..."
+		return if SS2 > 0 then SS else Text1 .. "..."
 	end
 }
 
-function t.sanitizeDescription(p3)
-	-- upvalues: t (ref)
-	return t.truncateLength(t.replaceNewlines(p3))
+function AppsFlyerUtil.sanitizeDescription(p2) --[[ Line: 73 ]]
+	-- upvalues: AppsFlyerUtil (copy)
+	return (AppsFlyerUtil.truncateLength((AppsFlyerUtil.replaceNewlines(p2))))
 end
 
-return t
+return AppsFlyerUtil

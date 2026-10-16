@@ -1,105 +1,105 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local foundationModule = require(parent_2.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local roactModule = require(parent_2.Roact)
-local cryoModule = require(parent_2.Cryo)
-local tModule = require(parent_2.t)
-local roactGamepadModule = require(parent_2.RoactGamepad)
-local genericTextLabelModule = require(parent_1.Core.Text.GenericTextLabel.GenericTextLabel)
-local getFontFromFontStyleModule = require(parent_1.Core.Text.GetFontFromFontStyle)
-local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
-local validateImageModule = require(parent_1.Core.ImageSet.Validator.validateImage)
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local getPageMarginModule = require(parent.Container.getPageMargin)
-local iconSizeModule = require(parent.ImageSet.Enum.IconSize)
-local getIconSizeModule = require(parent.ImageSet.getIconSize)
-local imagesModule = require(parent.ImageSet.Images)
-local buttonModule = require(parent.Button.Button)
-local buttonTypeModule = require(parent.Button.Enum.ButtonType)
-local emptyState = roactModule.PureComponent:extend("EmptyState")
-emptyState.validateProps = tModule.strictInterface({
-	text = tModule.string,
-	icon = tModule.optional(validateImageModule),
-	size = tModule.optional(tModule.UDim2),
-	position = tModule.optional(tModule.UDim2),
-	anchorPoint = tModule.optional(tModule.Vector2),
-	buttonIcon = tModule.optional(validateImageModule),
-	buttonText = tModule.optional(tModule.string),
-	buttonType = tModule.optional(buttonTypeModule.isEnumValue),
-	onActivated = tModule.optional(tModule.callback),
-	frameRef = tModule.optional(tModule.table),
-	NextSelectionUp = tModule.optional(tModule.table),
-	NextSelectionDown = tModule.optional(tModule.table),
-	NextSelectionLeft = tModule.optional(tModule.table),
-	NextSelectionRight = tModule.optional(tModule.table),
-	maxSizeTextLabel = tModule.optional(tModule.Vector2),
-	iconColor = tModule.optional(tModule.Color3),
-	iconSize = tModule.optional(tModule.UDim2),
-	titleProps = tModule.optional(tModule.strictInterface({ titleText = tModule.optional(tModule.string) }))
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local FoundationModule = require(Parent2.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local RoactModule = require(Parent2.Roact)
+local CryoModule = require(Parent2.Cryo)
+local TModule = require(Parent2.t)
+local RoactGamepadModule = require(Parent2.RoactGamepad)
+local GenericTextLabelModule = require(Parent1.Core.Text.GenericTextLabel.GenericTextLabel)
+local GetFontFromFontStyleModule = require(Parent1.Core.Text.GetFontFromFontStyle)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local ValidateImageModule = require(Parent1.Core.ImageSet.Validator.validateImage)
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local GetPageMarginModule = require(Parent.Container.getPageMargin)
+local IconSizeModule = require(Parent.ImageSet.Enum.IconSize)
+local GetIconSizeModule = require(Parent.ImageSet.getIconSize)
+local ImagesModule = require(Parent.ImageSet.Images)
+local ButtonModule = require(Parent.Button.Button)
+local ButtonTypeModule = require(Parent.Button.Enum.ButtonType)
+local EmptyState = RoactModule.PureComponent:extend("EmptyState")
+EmptyState.validateProps = TModule.strictInterface({
+	text = TModule.string,
+	icon = TModule.optional(ValidateImageModule),
+	size = TModule.optional(TModule.UDim2),
+	position = TModule.optional(TModule.UDim2),
+	anchorPoint = TModule.optional(TModule.Vector2),
+	buttonIcon = TModule.optional(ValidateImageModule),
+	buttonText = TModule.optional(TModule.string),
+	buttonType = TModule.optional(ButtonTypeModule.isEnumValue),
+	onActivated = TModule.optional(TModule.callback),
+	frameRef = TModule.optional(TModule.table),
+	NextSelectionUp = TModule.optional(TModule.table),
+	NextSelectionDown = TModule.optional(TModule.table),
+	NextSelectionLeft = TModule.optional(TModule.table),
+	NextSelectionRight = TModule.optional(TModule.table),
+	maxSizeTextLabel = TModule.optional(TModule.Vector2),
+	iconColor = TModule.optional(TModule.Color3),
+	iconSize = TModule.optional(TModule.UDim2),
+	titleProps = TModule.optional(TModule.strictInterface({ titleText = TModule.optional(TModule.string) }))
 })
-emptyState.defaultProps = {
-	icon = imagesModule["icons/status/oof_xlarge"],
+EmptyState.defaultProps = {
+	icon = ImagesModule["icons/status/oof_xlarge"],
 	size = UDim2.fromScale(1, 1),
 	position = UDim2.fromScale(0.5, 0.5),
 	anchorPoint = Vector2.new(0.5, 0.5),
-	buttonIcon = imagesModule["icons/common/refresh"],
-	buttonType = buttonTypeModule.Secondary,
-	iconSize = UDim2.fromOffset(getIconSizeModule(iconSizeModule.XLarge), getIconSizeModule(iconSizeModule.XLarge))
+	buttonIcon = ImagesModule["icons/common/refresh"],
+	buttonType = ButtonTypeModule.Secondary,
+	iconSize = UDim2.fromOffset(GetIconSizeModule(IconSizeModule.XLarge), GetIconSizeModule(IconSizeModule.XLarge))
 }
 
-local function _(p1)
+local function _(p1) --[[ Line: 77 | Named "getCorrectedIconValue" ]]
 	return if p1 == "" then nil else p1
 end
 
-function emptyState.init(p1)
-	-- upvalues: roactModule (ref)
+function EmptyState.init(p1) --[[ Line: 81 ]]
+	-- upvalues: RoactModule (copy)
 	p1:setState({ absoluteSize = Vector2.new(0, 0) })
 	
-	function p1.onAbsoluteSizeChange(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ absoluteSize = p2.AbsoluteSize })
+	function p1.onAbsoluteSizeChange(Frame) --[[ Line: 85 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ absoluteSize = Frame.AbsoluteSize })
 	end
 	
-	p1.buttonRef = roactModule.createRef()
+	p1.buttonRef = RoactModule.createRef()
 end
 
-function emptyState.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref), roactGamepadModule (ref), imageSetComponentModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), getFontFromFontStyleModule (ref), genericTextLabelModule (ref), getPageMarginModule (ref), buttonModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), roactGamepadModule (copy), p1 (ref), imageSetComponentModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), getFontFromFontStyleModule (copy), genericTextLabelModule (copy), getPageMarginModule (copy), buttonModule (copy)
-		local createElement = roactModule.createElement
-		local frame = roactGamepadModule.Focusable.Frame
-		local t = {
-			[roactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChange,
+function EmptyState.render(p1) --[[ Line: 94 ]]
+	-- upvalues: WithStyleModule (copy), RoactModule (copy), RoactGamepadModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetFontFromFontStyleModule (copy), GenericTextLabelModule (copy), GetPageMarginModule (copy), ButtonModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 95 ]]
+		-- upvalues: RoactModule (upval), RoactGamepadModule (upval), p1 (copy), ImageSetComponentModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), GetFontFromFontStyleModule (upval), GenericTextLabelModule (upval), GetPageMarginModule (upval), ButtonModule (upval)
+		local CreateElementFunction1 = RoactModule.createElement
+		local Frame = RoactGamepadModule.Focusable.Frame
+		local config = {
+			[RoactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChange,
 			Size = p1.props.size,
 			Position = p1.props.position,
 			AnchorPoint = p1.props.anchorPoint,
 			BackgroundTransparency = 1,
-			[roactModule.Ref] = p1.props.frameRef,
+			[RoactModule.Ref] = p1.props.frameRef,
 			NextSelectionUp = p1.props.NextSelectionUp,
 			NextSelectionDown = p1.props.NextSelectionDown,
 			NextSelectionULeft = p1.props.NextSelectionLeft,
 			NextSelectionRight = p1.props.NextSelectionRight,
 			defaultChild = p1.buttonRef
 		}
-		local t_1 = {}
-		local createElement_1 = roactModule.createElement
-		local var1 = "Frame"
-		local t_2 = {
+		local t = {}
+		local CreateElementFunction = RoactModule.createElement
+		local v1 = "Frame"
+		local config1 = {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 187),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5)
 		}
-		local t_3 = {
-			UIListLayout = roactModule.createElement("UIListLayout", {
+		local config2 = {
+			UIListLayout = RoactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			Icon = roactModule.createElement(imageSetComponentModule.Label, {
+			Icon = RoactModule.createElement(ImageSetComponentModule.Label, {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0),
@@ -108,13 +108,13 @@ function emptyState.render(p1)
 				ImageColor3 = p1.props.iconColor or p2.Theme.IconEmphasis.Color,
 				ImageTransparency = p2.Theme.IconEmphasis.Transparency
 			}),
-			iconTextPadding = roactModule.createElement("Frame", {
+			iconTextPadding = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Size = UDim2.fromOffset(0, 12)
 			}),
-			TitleFrame = if p1.props.titleProps and p1.props.titleProps.titleText then roactModule.createElement("Frame", {
+			TitleFrame = if p1.props.titleProps and p1.props.titleProps.titleText then RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				LayoutOrder = 3,
@@ -122,19 +122,19 @@ function emptyState.render(p1)
 				Position = UDim2.fromScale(0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				TitlePadding = roactModule.createElement("UIPadding", {
+				TitlePadding = RoactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 14),
 					PaddingBottom = UDim.new(0, 14)
 				}),
-				TitleText = roactModule.createElement("TextLabel", {
+				TitleText = RoactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextWrapped = true,
 					LayoutOrder = 1,
 					Text = p1.props.titleProps.titleText,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = if foundationFontFaceMigration then nil else p2.Font.Title.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(getFontFromFontStyleModule(p2.Font.Title)) else nil,
+					Font = if FoundationFontFaceMigration then nil else p2.Font.Title.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(GetFontFromFontStyleModule(p2.Font.Title)) else nil,
 					TextSize = p2.Font.Header1.RelativeSize * p2.Font.BaseSize,
 					TextColor3 = p2.Theme.TextEmphasis.Color,
 					TextTransparency = p2.Theme.TextEmphasis.Transparency,
@@ -142,7 +142,7 @@ function emptyState.render(p1)
 					Size = UDim2.fromScale(1, 0)
 				})
 			}) else nil,
-			Text = roactModule.createElement(genericTextLabelModule, {
+			Text = RoactModule.createElement(GenericTextLabelModule, {
 				LayoutOrder = 4,
 				Text = p1.props.text,
 				TextXAlignment = Enum.TextXAlignment.Center,
@@ -151,55 +151,48 @@ function emptyState.render(p1)
 				colorStyle = p2.Theme.TextDefault,
 				maxSize = p1.props.maxSizeTextLabel
 			}),
-			textButtonPadding = roactModule.createElement("Frame", {
+			textButtonPadding = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 5,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Size = UDim2.fromOffset(0, 24)
 			})
 		}
-		local onActivated = p1.props.onActivated
+		local OnActivated = p1.props.onActivated
 		
-		if onActivated then
-			onActivated = roactModule.createElement
-			local var2 = "Frame"
-			local t_4 = {
+		if OnActivated then
+			local ButtonIcon = p1.props.buttonIcon
+			OnActivated = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 6,
 				Size = UDim2.new(1, 0, 0, 48),
 				AnchorPoint = Vector2.new(0.5, 0)
-			}
-			local t_5 = {
-				UIPadding = roactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, getPageMarginModule(p1.state.absoluteSize.X)),
-					PaddingRight = UDim.new(0, getPageMarginModule(p1.state.absoluteSize.X))
+			}, {
+				UIPadding = RoactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, GetPageMarginModule(p1.state.absoluteSize.X)),
+					PaddingRight = UDim.new(0, GetPageMarginModule(p1.state.absoluteSize.X))
 				}),
-				UISizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(640, 48) })
-			}
-			local createElement_2 = roactModule.createElement
-			local var3 = buttonModule
-			local t_6 = {
-				buttonType = p1.props.buttonType,
-				size = UDim2.fromScale(1, 1),
-				position = UDim2.fromScale(0.5, 0.5),
-				anchorPoint = Vector2.new(0.5, 0.5),
-				onActivated = p1.props.onActivated
-			}
-			local buttonIcon = p1.props.buttonIcon
-			t_6.icon = if buttonIcon == "" then nil else buttonIcon
-			t_6.text = p1.props.buttonText
-			t_6[roactModule.Ref] = p1.buttonRef
-			t_5.Button = createElement_2(var3, t_6)
-			onActivated = onActivated(var2, t_4, t_5)
+				UISizeConstraint = RoactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(640, 48) }),
+				Button = RoactModule.createElement(ButtonModule, {
+					buttonType = p1.props.buttonType,
+					size = UDim2.fromScale(1, 1),
+					position = UDim2.fromScale(0.5, 0.5),
+					anchorPoint = Vector2.new(0.5, 0.5),
+					onActivated = p1.props.onActivated,
+					icon = if ButtonIcon == "" then nil else ButtonIcon,
+					text = p1.props.buttonText,
+					[RoactModule.Ref] = p1.buttonRef
+				})
+			})
 		end
-		t_3.buttonFrame = onActivated
-		t_1.Content = createElement_1(var1, t_2, t_3)
+		config2.buttonFrame = OnActivated
+		t.Content = CreateElementFunction(v1, config1, config2)
 		
-		return createElement(frame, t, t_1)
+		return CreateElementFunction1(Frame, config, t)
 	end)
 end
 
-return roactModule.forwardRef(function(p1, p2)
-	-- upvalues: roactModule (ref), emptyState (ref), cryoModule (ref)
-	return roactModule.createElement(emptyState, cryoModule.Dictionary.join(p1, { frameRef = p2 }))
+return RoactModule.forwardRef(function(p1, FrameRef) --[[ Line: 210 ]]
+	-- upvalues: RoactModule (copy), EmptyState (copy), CryoModule (copy)
+	return RoactModule.createElement(EmptyState, CryoModule.Dictionary.join(p1, { frameRef = FrameRef }))
 end)

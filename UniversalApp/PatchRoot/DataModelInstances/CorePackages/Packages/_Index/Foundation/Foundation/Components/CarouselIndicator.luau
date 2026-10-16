@@ -1,1 +1,1 @@
-﻿return require(script.CarouselIndicator)
+﻿return (require(script.CarouselIndicator))

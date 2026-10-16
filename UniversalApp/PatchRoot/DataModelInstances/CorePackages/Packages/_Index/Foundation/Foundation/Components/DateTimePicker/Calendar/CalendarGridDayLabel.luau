@@ -1,79 +1,72 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local constantsModule = require(foundation.Constants)
-local controlStateModule = require(foundation.Enums.ControlState)
-local stateLayerModeModule = require(foundation.Enums.StateLayerMode)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ConstantsModule = require(Foundation.Constants)
+local ControlStateModule = require(Foundation.Enums.ControlState)
+local StateLayerModeModule = require(Foundation.Enums.StateLayerMode)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-local function _(p1, p2)
-	local t = {
+local function _(p1, Key) --[[ Line: 14 | Named "buildDayTags" ]]
+	local config = {
 		["size-full text-title-small text-align-x-center text-align-y-center"] = true,
 		["radius-circle"] = not p1
 	}
 	
-	if p1 and p2 and p2 ~= "" then
-		t[p2] = true
+	if p1 and Key and Key ~= "" then
+		config[Key] = true
 	end
-	return t
+	return config
 end
 
-return function(p1)
-	-- upvalues: useTokensModule (ref), constantsModule (ref), reactModule (ref), controlStateModule (ref), textModule (ref), stateLayerModeModule (ref), viewModule (ref)
-	local var1 = useTokensModule()
-	local var2 = if p1.isSelected then var1.Inverse.Content.Emphasis.Color3 elseif p1.isSelectable and p1.emphasizeText then var1.Color.Content.Emphasis.Color3 else var1.Color.Content.Muted.Color3
-	local var3 = if p1.isSelected or p1.isSelectable and p1.emphasizeText then 0 else constantsModule.DISABLED_TRANSPARENCY
-	local var4 = p1.highlight == true and not p1.isSelected
-	local bandRadiusTag = p1.bandRadiusTag
-	local t = {
+return function(Frame) --[[ Line: 42 | Named "CalendarGridDayLabel" ]]
+	-- upvalues: UseTokensModule (copy), ConstantsModule (copy), ReactModule (copy), ControlStateModule (copy), TextModule (copy), StateLayerModeModule (copy), ViewModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local EmphasisColor3 = if Frame.isSelected then UseTokensModuleResult.Inverse.Content.Emphasis.Color3 elseif Frame.isSelectable and Frame.emphasizeText then UseTokensModuleResult.Color.Content.Emphasis.Color3 else UseTokensModuleResult.Color.Content.Muted.Color3
+	local DISABLEDTRANSPARENCY = if Frame.isSelected or Frame.isSelectable and Frame.emphasizeText then 0 else ConstantsModule.DISABLED_TRANSPARENCY
+	local NoIsSelected: boolean = Frame.highlight == true and not Frame.isSelected
+	local BandRadiusTag = Frame.bandRadiusTag
+	local Tag = {
 		["size-full text-title-small text-align-x-center text-align-y-center"] = true,
-		["radius-circle"] = not var4
+		["radius-circle"] = not NoIsSelected
 	}
 	
-	if var4 and bandRadiusTag and bandRadiusTag ~= "" then
-		t[bandRadiusTag] = true
+	if NoIsSelected and BandRadiusTag and BandRadiusTag ~= "" then
+		Tag[BandRadiusTag] = true
 	end
-	local var5
-	t = reactModule.createElement(textModule, {
-		backgroundStyle = if p1.isSelected then var1.Color.System.Contrast elseif p1.highlight then var1.Color.ActionStandard.Background else nil,
-		onActivated = if p1.isSelectable then p1.onActivated else nil,
-		onStateChanged = if p1.isSelectable then reactModule.useMemo(function()
-			-- upvalues: p1 (ref), controlStateModule (copy)
-			return if p1.onHoverEnter == nil then nil else function(p2)
-				-- upvalues: controlStateModule (copy), p1 (copy)
-				if p2 == controlStateModule.Hover then
-					p1.onHoverEnter()
-				end
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+		-- upvalues: Frame (copy), ControlStateModule (upval)
+		return if Frame.onHoverEnter == nil then nil else function(Hover) --[[ Line: 61 ]]
+			-- upvalues: ControlStateModule (upval), Frame (upval)
+			if Hover == ControlStateModule.Hover then
+				Frame.onHoverEnter()
 			end
-		end, { p1.onHoverEnter }) else nil,
-		RichText = not p1.isSelectable,
-		stateLayer = {
-			mode = if p1.isSelected then stateLayerModeModule.Inverse else stateLayerModeModule.Default
-		},
-		tag = t,
-		testId = p1.testId,
-		Text = if p1.isSelectable then p1.label else `<s>{p1.label}</s>`,
-		textStyle = { Color3 = var2, Transparency = var3 }
-	})
-	local createElement = reactModule.createElement
-	local t_1 = { tag = "size-full", LayoutOrder = p1.LayoutOrder }
-	local t_2 = {}
+		end
+	end, { Frame.onHoverEnter })
 	
-	if p1.bandPosition and p1.bandSize then
-		var5 = reactModule.createElement
-		var5 = var5(viewModule, {
+	return ReactModule.createElement(ViewModule, { tag = "size-full", LayoutOrder = Frame.LayoutOrder }, {
+		Band = if Frame.bandPosition and Frame.bandSize then ReactModule.createElement(ViewModule, {
 			ZIndex = 0,
-			backgroundStyle = var1.Color.ActionStandard.Background,
-			Position = p1.bandPosition,
-			Size = p1.bandSize,
-			tag = if p1.bandRadiusTag and p1.bandRadiusTag ~= "" then p1.bandRadiusTag else nil
+			backgroundStyle = UseTokensModuleResult.Color.ActionStandard.Background,
+			Position = Frame.bandPosition,
+			Size = Frame.bandSize,
+			tag = if Frame.bandRadiusTag and Frame.bandRadiusTag ~= "" then Frame.bandRadiusTag else nil
+		}) else nil,
+		Day = ReactModule.createElement(TextModule, {
+			backgroundStyle = if Frame.isSelected then UseTokensModuleResult.Color.System.Contrast elseif Frame.highlight then UseTokensModuleResult.Color.ActionStandard.Background else nil,
+			onActivated = if Frame.isSelectable then Frame.onActivated else nil,
+			onStateChanged = if Frame.isSelectable then UseMemoResult else nil,
+			RichText = not Frame.isSelectable,
+			stateLayer = {
+				mode = if Frame.isSelected then StateLayerModeModule.Inverse else StateLayerModeModule.Default
+			},
+			tag = Tag,
+			testId = Frame.testId,
+			Text = if Frame.isSelectable then Frame.label else `<s>{Frame.label}</s>`,
+			textStyle = {
+				Color3 = EmphasisColor3,
+				Transparency = DISABLEDTRANSPARENCY
+			}
 		})
-	else
-		var5 = nil
-	end
-	t_2.Band = var5
-	t_2.Day = t
-	
-	return createElement(viewModule, t_1, t_2)
+	})
 end

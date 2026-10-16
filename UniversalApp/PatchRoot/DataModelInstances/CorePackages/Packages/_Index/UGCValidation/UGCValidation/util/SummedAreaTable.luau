@@ -1,103 +1,114 @@
-﻿local t = {}
-t.__index = t
+﻿local Module = {}
+Module.__index = Module
 
-function t:ReadPixel(p1, p2)
-	if self.size.X <= p1 or self.size.Y <= p2 or (p1 < 0 or p2 < 0) then
+function Module:ReadPixel(p1: number, p2: number): Color3 --[[ Line: 21 ]]
+	if self.size.X <= p1 or self.size.Y <= p2 or p1 < 0 or p2 < 0 then
 		return Color3.fromRGB(0, 0, 0)
-	end
-	local var1 = (p1 + p2 * self.size.X) * 4
-	
-	return Color3.fromRGB(buffer.readu8(self.buffer, var1), buffer.readu8(self.buffer, var1 + 1), buffer.readu8(self.buffer, var1 + 2))
-end
-
-function t.new(p1)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
-	tbl.buffer = p1:ReadPixelsBuffer(Vector2.new(0, 0), p1.Size)
-	tbl.size = p1.Size
-	
-	return tbl
-end
-
-local t_1 = {}
-t_1.__index = t_1
-
-function t_1.new(p1, p2)
-	-- upvalues: t_1 (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.size = p1
-	tbl.calculateWeightFromColor3 = p2
-	tbl.buffer = buffer.create(p1.X * p1.Y * 4)
-	
-	return tbl
-end
-
-function t_1:ReadValue(p1, p2)
-	return if p1 < 0 or p2 < 0 then 0 else buffer.readu32(self.buffer, (math.min(p1, self.size.X - 1) + math.min(p2, self.size.Y - 1) * self.size.X) * 4)
-end
-
-function t_1:WriteValue(p1, p2, p3)
-	assert(p1 < self.size.X and (p2 < self.size.Y and (p1 >= 0 and p2 >= 0)))
-	buffer.writeu32(self.buffer, (p1 + p2 * self.size.X) * 4, p3)
-end
-
-function t_1:BuildSummedAreaTable(p1)
-	-- upvalues: t (ref)
-	local var1 = t.new(p1)
-	assert(var1.size == self.size)
-	
-	for i_1 = 0, self.size.Y - 1 do
-		for i = 0, self.size.X - 1 do
-			self:WriteValue(i, i_1, self.calculateWeightFromColor3(var1:ReadPixel(i, i_1)) + self:ReadValue(i - 1, i_1) + self:ReadValue(i, i_1 - 1) - self:ReadValue(i - 1, i_1 - 1))
-		end
-	end
-end
-
-function t_1:GetAreaDensity(p2, p3)
-	local var2 = p2 - Vector2.one
-	local var3 = p2 + p3 - Vector2.one
-	local vector2 = Vector2.new(var3.X, var2.Y)
-	local vector2_1 = Vector2.new(var2.X, var3.Y)
-	
-	return self:ReadValue(var3.X, var3.Y) - self:ReadValue(vector2.X, vector2.Y) - self:ReadValue(vector2_1.X, vector2_1.Y) + self:ReadValue(var2.X, var2.Y)
-end
-
-function t_1:GetAreaDensityContinuous(p2, p3)
-	local var2 = 0
-	local var3 = p2 + p3
-	local var4 = p2:Ceil()
-	local var5 = var3:Floor()
-	local var6 = var5 - var4
-	
-	if var6.X > 0 and var6.Y > 0 then
-		var2 += self:GetAreaDensity(var4, var6)
-	end
-	local var7 = var4 - p2
-	local var8 = var3 - var5
-	
-	if var6.Y > 0 then
-		local vector2 = Vector2.new(1, var6.Y)
-		var2 = if math.floor(p2.X) < math.floor(var3.X) then var2 + self:GetAreaDensity(var4 + Vector2.new(-1, 0), vector2) * var7.X + self:GetAreaDensity(var4 + Vector2.new(var6.X, 0), vector2) * var8.X else var2 + self:GetAreaDensity(var4 + Vector2.new(-1, 0), vector2) * (var3.X - p2.X)
-	end
-	if var6.X > 0 then
-		local vector2 = Vector2.new(var6.X, 1)
-		var2 = if math.floor(p2.Y) < math.floor(var3.Y) then var2 + self:GetAreaDensity(var4 + Vector2.new(0, -1), vector2) * var7.Y + self:GetAreaDensity(var4 + Vector2.new(0, var6.Y), vector2) * var8.Y else var2 + self:GetAreaDensity(var4 + Vector2.new(0, -1), vector2) * (var3.Y - p2.Y)
-	end
-	local var9 = math.min(var4.X, var3.X) - p2.X
-	local var10 = math.min(var4.Y, var3.Y) - p2.Y
-	var2 += self:GetAreaDensity(p2:Floor(), Vector2.new(1, 1)) * var9 * var10
-	
-	if math.floor(p2.X) < math.floor(var3.X) then
-		var2 += self:GetAreaDensity(Vector2.new(var3.X, p2.Y):Floor(), Vector2.new(1, 1)) * var8.X * var10
+	else
+		local ScaledX = (p1 + p2 * self.size.X) * 4
 		
-		if math.floor(p2.Y) < math.floor(var3.Y) then
-			var2 += self:GetAreaDensity(var3:Floor(), Vector2.new(1, 1)) * var8.X * var8.Y
-		end
+		return Color3.fromRGB(buffer.readu8(self.buffer, ScaledX), buffer.readu8(self.buffer, ScaledX + 1), (buffer.readu8(self.buffer, ScaledX + 2)))
 	end
-	if math.floor(p2.Y) < math.floor(var3.Y) then
-		var2 += self:GetAreaDensity(Vector2.new(p2.X, var3.Y):Floor(), Vector2.new(1, 1)) * var9 * var8.Y
-	end
-	return var2
 end
 
-return t_1
+function Module.new(EditableImage) --[[ Line: 35 ]]
+	-- upvalues: Module (copy)
+	local self = setmetatable({}, Module)
+	self.buffer = EditableImage:ReadPixelsBuffer(Vector2.new(0, 0), EditableImage.Size)
+	self.size = EditableImage.Size
+	
+	return self
+end
+
+local SummedAreaTableModule = {}
+SummedAreaTableModule.__index = SummedAreaTableModule
+
+function SummedAreaTableModule.new(Size, CalculateWeightFromColor3) --[[ Line: 51 ]]
+	-- upvalues: SummedAreaTableModule (copy)
+	local self = setmetatable({}, SummedAreaTableModule)
+	self.size = Size
+	self.calculateWeightFromColor3 = CalculateWeightFromColor3
+	self.buffer = buffer.create(Size.X * Size.Y * 4)
+	
+	return self
+end
+
+function SummedAreaTableModule.ReadValue(p1, X: number, Y: number): number --[[ Line: 60 ]]
+	return if X < 0 or Y < 0 then 0 else buffer.readu32(p1.buffer, (math.min(X, p1.size.X - 1) + math.min(Y, p1.size.Y - 1) * p1.size.X) * 4)
+end
+
+function SummedAreaTableModule:WriteValue(p1: number, p2: number, Value) --[[ Line: 71 ]]
+	assert(p1 < self.size.X and (p2 < self.size.Y and p1 >= 0) and p2 >= 0)
+	buffer.writeu32(self.buffer, (p1 + p2 * self.size.X) * 4, Value)
+end
+
+function SummedAreaTableModule:BuildSummedAreaTable(p1) --[[ Line: 78 ]]
+	-- upvalues: Module (copy)
+	local NewModule = Module.new(p1)
+	assert(NewModule.size == self.size)
+	
+	for i = 0, self.size.Y - 1 do
+		for i1 = 0, self.size.X - 1 do
+			self:WriteValue(i1, i, self.calculateWeightFromColor3(NewModule:ReadPixel(i1, i)) + self:ReadValue(i1 - 1, i) + self:ReadValue(i1, i - 1) - self:ReadValue(i1 - 1, i - 1))
+		end
+	end
+end
+
+function SummedAreaTableModule:GetAreaDensity(NewVector, Vector) --[[ Line: 96 ]]
+	local NewVectorDelta = NewVector - Vector2.one
+	local NewVectorDelta1 = NewVector + Vector - Vector2.one
+	local _Vector2 = Vector2.new(NewVectorDelta1.X, NewVectorDelta.Y)
+	local _Vector2_1 = Vector2.new(NewVectorDelta.X, NewVectorDelta1.Y)
+	
+	return self:ReadValue(NewVectorDelta1.X, NewVectorDelta1.Y) - self:ReadValue(_Vector2.X, _Vector2.Y) - self:ReadValue(_Vector2_1.X, _Vector2_1.Y) + self:ReadValue(NewVectorDelta.X, NewVectorDelta.Y)
+end
+
+function SummedAreaTableModule:GetAreaDensityContinuous(Vector, p2): number --[[ Line: 115 ]]
+	local NewAreaDensity = 0
+	local NewVector = Vector + p2
+	local CeilResult = Vector:Ceil()
+	local FloorResult = NewVector:Floor()
+	local FloorResultDelta = FloorResult - CeilResult
+	
+	if FloorResultDelta.X > 0 and FloorResultDelta.Y > 0 then
+		NewAreaDensity += self:GetAreaDensity(CeilResult, FloorResultDelta)
+	end
+	local CeilResultDelta = CeilResult - Vector
+	local NewVectorDelta = NewVector - FloorResult
+	
+	if FloorResultDelta.Y > 0 then
+		local _Vector2 = Vector2.new(1, FloorResultDelta.Y)
+		
+		if math.floor(Vector.X) < math.floor(NewVector.X) then
+			NewAreaDensity = NewAreaDensity + self:GetAreaDensity(CeilResult + Vector2.new(-1, 0), _Vector2) * CeilResultDelta.X + self:GetAreaDensity(CeilResult + Vector2.new(FloorResultDelta.X, 0), _Vector2) * NewVectorDelta.X
+		else
+			NewAreaDensity += self:GetAreaDensity(CeilResult + Vector2.new(-1, 0), _Vector2) * (NewVector.X - Vector.X)
+		end
+	end
+	if FloorResultDelta.X > 0 then
+		local _Vector2 = Vector2.new(FloorResultDelta.X, 1)
+		
+		if math.floor(Vector.Y) < math.floor(NewVector.Y) then
+			NewAreaDensity = NewAreaDensity + self:GetAreaDensity(CeilResult + Vector2.new(0, -1), _Vector2) * CeilResultDelta.Y + self:GetAreaDensity(CeilResult + Vector2.new(0, FloorResultDelta.Y), _Vector2) * NewVectorDelta.Y
+		else
+			NewAreaDensity += self:GetAreaDensity(CeilResult + Vector2.new(0, -1), _Vector2) * (NewVector.Y - Vector.Y)
+		end
+	end
+	local SmallestDelta = math.min(CeilResult.X, NewVector.X) - Vector.X
+	local SmallestDelta1 = math.min(CeilResult.Y, NewVector.Y) - Vector.Y
+	local NewNewAreaDensity = NewAreaDensity + self:GetAreaDensity(Vector:Floor(), Vector2.new(1, 1)) * SmallestDelta * SmallestDelta1
+	
+	if math.floor(Vector.X) < math.floor(NewVector.X) then
+		NewNewAreaDensity += self:GetAreaDensity(Vector2.new(NewVector.X, Vector.Y):Floor(), Vector2.new(1, 1)) * NewVectorDelta.X * SmallestDelta1
+		
+		if math.floor(Vector.Y) < math.floor(NewVector.Y) then
+			NewNewAreaDensity += self:GetAreaDensity(NewVector:Floor(), Vector2.new(1, 1)) * NewVectorDelta.X * NewVectorDelta.Y
+		end
+	end
+	if math.floor(Vector.Y) < math.floor(NewVector.Y) then
+		NewNewAreaDensity += self:GetAreaDensity(Vector2.new(Vector.X, NewVector.Y):Floor(), Vector2.new(1, 1)) * SmallestDelta * NewVectorDelta.Y
+	end
+	return NewNewAreaDensity
+end
+
+return SummedAreaTableModule

@@ -1,12 +1,12 @@
-﻿local nullModule = require(script.Parent.null)
+﻿local NullModule = require(script.Parent.null)
 
 return {
-	isNillish = function(p1)
-		-- upvalues: nullModule (ref)
-		return if p1 ~= nil then p1 == nullModule else true
+	isNillish = function(NullModule1): boolean --[[ Line: 3 ]]
+		-- upvalues: NullModule (copy)
+		return NullModule1 == nil or NullModule1 == NullModule
 	end,
-	isNotNillish = function(p1)
-		-- upvalues: nullModule (ref)
-		return p1 ~= nil and p1 ~= nullModule
+	isNotNillish = function(NullModule1): boolean --[[ Line: 7 ]]
+		-- upvalues: NullModule (copy)
+		return NullModule1 ~= nil and NullModule1 ~= NullModule
 	end
 }

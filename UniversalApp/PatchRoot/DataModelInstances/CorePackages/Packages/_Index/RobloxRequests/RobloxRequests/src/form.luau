@@ -1,120 +1,122 @@
-﻿local parent = script.Parent.Parent
-local lib = parent.lib
-local _ = parent.src
-local httpService = game:GetService("HttpService")
-local mimetypesModule = require(lib.mimetypes)
-local b64Module = require(lib.b64)
+﻿local Parent = script.Parent.Parent
+local Lib = Parent.lib
+local _ = Parent.src
+local HttpService = game:GetService("HttpService")
+local MimetypesModule = require(Lib.mimetypes)
+local B64Module = require(Lib.b64)
 
-local function randomString(p1)
-	local var1 = ""
+local function randomString(p1): string --[[ Line: 16 ]]
+	local Text = ""
 	
 	for _ = 1, p1 do
-		var1 ..= string.char(math.random(97, 122))
+		Text ..= string.char(math.random(97, 122))
 	end
-	return var1
+	return Text
 end
 
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-function t.new(...)
-	-- upvalues: t (ref), mimetypesModule (ref)
-	local unknown = setmetatable({}, t)
-	unknown.__IsFile = true
-	unknown.name = "unknown"
-	unknown.content = ""
-	unknown.content_type = nil
+function Module.new(...) --[[ Line: 30 ]]
+	-- upvalues: Module (copy), MimetypesModule (copy)
+	local self = setmetatable({}, Module)
+	self.__IsFile = true
+	self.name = "unknown"
+	self.content = ""
+	self.content_type = nil
 	local list = { ... }
 	
 	if #list == 1 then
-		unknown.content = list[1]
+		self.content = list[1]
 	elseif #list >= 2 then
-		unknown.name = list[1]
-		unknown.content = list[2]
-		unknown.content_type = list[3]
+		self.name = list[1]
+		self.content = list[2]
+		self.content_type = list[3]
 	end
-	if not unknown.content_type then
-		local var2 = unknown.name:split(".")
-		unknown.content_type = mimetypesModule[var2[#var2]:lower()] or "text/plain"
+	if not self.content_type then
+		local v1 = self.name:split(".")
+		self.content_type = MimetypesModule[v1[#v1]:lower()] or "text/plain"
 	end
-	if type(unknown.content) ~= "string" then
-		error(("[http] Invalid file content for file %s"):format(unknown.name))
+	if type(self.content) ~= "string" then
+		error(("[http] Invalid file content for file %s"):format(self.name))
 	end
-	return unknown
+	return self
 end
 
-function t:__tostring()
+function Module:__tostring(): string --[[ Line: 71 ]]
 	return ("File('%s', '%s')"):format(self.name, self.content_type)
 end
 
-local t_1 = {}
-t_1.__index = t_1
+local Module1 = {}
+Module1.__index = Module1
 
-function t_1.new(p2)
-	-- upvalues: t_1 (ref), randomString (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.__FormData = true
-	p2 = p2 or {}
-	tbl.boundary = "--FormBoundary-" .. randomString(28)
-	tbl.content_type = "application/x-www-form-urlencoded"
-	tbl.fields = {}
+function Module1.new(p2) --[[ Line: 79 ]]
+	-- upvalues: Module1 (copy), randomString (copy)
+	local self = setmetatable({}, Module1)
+	self.__FormData = true
+	local P2 = p2 or {}
+	self.boundary = "--FormBoundary-" .. randomString(28)
+	self.content_type = "application/x-www-form-urlencoded"
+	self.fields = {}
 	
-	for i, v in pairs(p2) do
-		tbl:AddField(i, v)
+	for i, value in pairs(P2) do
+		self:AddField(i, value)
 	end
-	return tbl
+	return self
 end
 
-function t_1:AddField(p3, p4)
-	if p4.__IsFile then
+function Module1:AddField(Name, Value) --[[ Line: 96 ]]
+	if Value.__IsFile then
 		self.content_type = "multipart/form-data; boundary=\"" .. self.boundary .. "\""
 	end
-	table.insert(self.fields, { Name = p3, Value = p4 })
+	table.insert(self.fields, { Name = Name, Value = Value })
 end
 
-function t_1:build()
-	-- upvalues: httpService (ref), b64Module (ref)
-	local var2 = ""
+function Module1:build(): string --[[ Line: 108 ]]
+	-- upvalues: HttpService (copy), B64Module (copy)
+	local Text = ""
 	
 	if self.content_type == "application/x-www-form-urlencoded" then
-		for i, v in ipairs(self.fields) do
-			if v.Value.__IsFile then
+		for _, field in ipairs(self.fields) do
+			if field.Value.__IsFile then
 				error("[http] URL encoded forms cannot contain any files")
 			end
-			if v.Name:find("=") or v.Name:find("&") then
+			if field.Name:find("=") or field.Name:find("&") then
 				error("[http] Form field names must not contain '=' or '&'")
 			end
-			if type(v.Value) == "table" then
-				for i_1, v_1 in ipairs(v.Value) do
-					if #var2 > 0 then
-						var2 ..= "&"
+			if type(field.Value) == "table" then
+				for _, value in ipairs(field.Value) do
+					if #Text > 0 then
+						Text ..= "&"
 					end
-					var2 ..= v.Name .. "=" .. httpService:UrlEncode(v_1)
+					Text ..= field.Name .. "=" .. HttpService:UrlEncode(value)
 				end
-			elseif #var2 > 0 then
-				var2 ..= "&"
+			else
+				if #Text > 0 then
+					Text ..= "&"
+				end
+				Text ..= field.Name .. "=" .. HttpService:UrlEncode(field.Value)
 			end
-			var2 ..= v.Name .. "=" .. httpService:UrlEncode(v.Value)
 		end
-		return var2
+		return Text
 	else
-		for i, v in pairs(self.fields) do
-			local value = v.Value
-			var2 = (var2 .. "--" .. self.boundary .. "\r\n") .. ("Content-Disposition: form-data; name=\"%s\""):format(v.Name)
+		for _, field1 in pairs(self.fields) do
+			local Value = field1.Value
+			local Text1 = (Text .. "--" .. self.boundary .. "\r\n") .. ("Content-Disposition: form-data; name=\"%s\""):format(field1.Name)
 			
-			if v.Value.__IsFile then
-				value = v.Value.content
-				var2 = (var2 .. ("; filename=\"%s\""):format(v.Value.name)) .. "\r\nContent-Type: " .. v.Value.content_type
+			if field1.Value.__IsFile then
+				Value = field1.Value.content
+				Text1 = (Text1 .. ("; filename=\"%s\""):format(field1.Value.name)) .. "\r\nContent-Type: " .. field1.Value.content_type
 				
-				if v.Value.content_type:sub(1, 5) ~= "text/" then
-					value = b64Module.encode(value)
-					var2 ..= "\r\nContent-Transfer-Encoding: base64"
+				if field1.Value.content_type:sub(1, 5) ~= "text/" then
+					Value = B64Module.encode(Value)
+					Text1 ..= "\r\nContent-Transfer-Encoding: base64"
 				end
 			end
-			var2 ..= "\r\n\r\n" .. value .. "\r\n"
+			Text = Text1 .. "\r\n\r\n" .. Value .. "\r\n"
 		end
-		return var2 .. "--" .. self.boundary .. "--"
+		return Text .. "--" .. self.boundary .. "--"
 	end
 end
 
-return { FormData = t_1, File = t }
+return { FormData = Module1, File = Module }

@@ -1,23 +1,17 @@
-﻿local parent = script.Parent.Parent
-local cryoModule = require(parent.Parent.Parent.Parent.Cryo)
+﻿local Parent = script.Parent.Parent
+local CryoModule = require(Parent.Parent.Parent.Parent.Cryo)
 local _ = require(script.Parent.Types)
-local _ = require(parent.StyleTypes)
+local _ = require(Parent.StyleTypes)
 
-local function mapColorTokensToFoundation(p1, p2)
-	-- upvalues: cryoModule (ref)
-	p1.Semantic.Color = cryoModule.Dictionary.join(p1.Semantic.Color, p2.Semantic.Color)
-	p1.Global.Color = cryoModule.Dictionary.join(p1.Global.Color, p2.Global.Color)
-	p1.Component = cryoModule.Dictionary.join(p1.Component, p2.Component)
+local function getOnHoverColor(Background, p1) --[[ Line: 29 ]]
+	local Hover = p1.Color.State.Hover
 	
-	return p1
-end
-
-local function getOnHoverColor(p1, p2)
-	local hover = p2.Color.State.Hover
-	
-	return if hover.Transparency == 1 then { Color3 = p1.Color3, Transparency = p1.Transparency } elseif p1.Color3 == nil or p1.Transparency == 1 then { Color3 = hover.Color3, Transparency = hover.Transparency } else {
-		Color3 = p1.Color3:Lerp(hover.Color3, 1 - hover.Transparency),
-		Transparency = p1.Transparency
+	return if Hover.Transparency == 1 then {
+		Color3 = Background.Color3,
+		Transparency = Background.Transparency
+	} elseif Background.Color3 == nil or Background.Transparency == 1 then { Color3 = Hover.Color3, Transparency = Hover.Transparency } else {
+		Color3 = Background.Color3:Lerp(Hover.Color3, 1 - Hover.Transparency),
+		Transparency = Background.Transparency
 	}
 end
 
@@ -28,10 +22,17 @@ local list = {
 }
 
 return {
-	mapColorTokensToFoundation = mapColorTokensToFoundation,
-	mapThemeToFoundation = function(p1, p2)
-		-- upvalues: getOnHoverColor (ref), cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, cryoModule.Dictionary.map({
+	mapColorTokensToFoundation = function(p1, p2) --[[ Line: 18 ]]
+		-- upvalues: CryoModule (copy)
+		p1.Semantic.Color = CryoModule.Dictionary.join(p1.Semantic.Color, p2.Semantic.Color)
+		p1.Global.Color = CryoModule.Dictionary.join(p1.Global.Color, p2.Global.Color)
+		p1.Component = CryoModule.Dictionary.join(p1.Component, p2.Component)
+		
+		return p1
+	end,
+	mapThemeToFoundation = function(p1, p2) --[[ Line: 50 ]]
+		-- upvalues: getOnHoverColor (copy), CryoModule (copy)
+		return (CryoModule.Dictionary.join(p1, CryoModule.Dictionary.map({
 			BackgroundDefault = p2.Color.Surface.Surface_0,
 			BackgroundContrast = p2.Color.Surface.Surface_100,
 			BackgroundMuted = p2.Color.Surface.Surface_200,
@@ -66,14 +67,14 @@ return {
 			Alert = p2.Color.System.Alert,
 			Badge = p2.Color.System.Contrast,
 			BadgeContent = p2.Inverse.Content.Emphasis
-		}, function(p3)
+		}, function(p3) --[[ Line: 90 ]]
 			return { Color = p3.Color3, Transparency = p3.Transparency }
-		end))
+		end)))
 	end,
-	addFoundationFlatKeys = function(p1, p2)
-		-- upvalues: list (ref)
-		for i, v in list do
-			p1[v] = p2[v]
+	addFoundationFlatKeys = function(p1, p2) --[[ Line: 123 ]]
+		-- upvalues: list (copy)
+		for _, value in list do
+			p1[value] = p2[value]
 		end
 		return p1
 	end

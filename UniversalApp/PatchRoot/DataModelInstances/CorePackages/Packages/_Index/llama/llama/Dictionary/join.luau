@@ -1,22 +1,21 @@
-﻿local noneModule = require(script.Parent.Parent.None)
+﻿local NoneModule = require(script.Parent.Parent.None)
 
-return function(...)
-	-- upvalues: noneModule (ref)
-	local t = {}
+return function(...) --[[ Line: 4 | Named "join" ]]
+	-- upvalues: NoneModule (copy)
+	local NoneModules = {}
 	
 	for i = 1, select("#", ...) do
-		local var1 = select(i, ...)
+		local Selected = select(i, ...)
 		
-		if not var1 then
-			continue
-		end
-		for i, v in pairs(var1) do
-			if v == noneModule then
-				t[i] = nil
-			else
-				t[i] = v
+		if Selected then
+			for i1, value in pairs(Selected) do
+				if value == NoneModule then
+					NoneModules[i1] = nil
+				else
+					NoneModules[i1] = value
+				end
 			end
 		end
 	end
-	return t
+	return NoneModules
 end

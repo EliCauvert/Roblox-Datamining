@@ -1,72 +1,68 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.App.Style.StyleTypes)
-local UIBloxConfigModule = require(parent.UIBloxConfig)
+﻿local _ = require(script.Parent.Parent.Parent.App.Style.StyleTypes)
 
 return {
-	getBaseMenuDefaultTokens = function(p1)
+	getBaseMenuDefaultTokens = function(p1) --[[ Line: 27 ]]
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
-			elementHeight = p1.Tokens.Component.MenuCell.Base.Container.Height,
-			borderCornerRadius = p1.Tokens.Component.BaseMenu.BorderRadius,
+			elementHeight = p1.Tokens.Size.Size_1400,
+			borderCornerRadius = p1.Tokens.Radius.Medium,
 			background = {
-				Color = p1.Tokens.Component.BaseMenu.BackgroundColor.Color3,
-				Transparency = p1.Tokens.Component.BaseMenu.BackgroundColor.Transparency
+				Color = p1.Tokens.Color.Surface.Surface_300.Color3,
+				Transparency = p1.Tokens.Color.Surface.Surface_300.Transparency
 			}
 		}
 	end,
-	getCellDefaultTokens = function(p1)
+	getCellDefaultTokens = function(p1) --[[ Line: 7 ]]
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
-			iconSize = p1.Tokens.Component.MenuCell.Base.IconFrame.Size,
-			selectedIconSize = p1.Tokens.Component.MenuCell.Base.CheckFrame.Size,
-			iconPaddingLeft = p1.Tokens.Component.MenuCell.Base.Container.Spacing.Leading,
+			iconSize = p1.Tokens.Size.Size_800,
+			selectedIconSize = p1.Tokens.Size.Size_800,
+			iconPaddingLeft = p1.Tokens.Size.Size_300,
 			textPadding = {
-				left = p1.Tokens.Component.MenuCell.Base.TextFrame.Spacing.Leading,
-				right = p1.Tokens.Component.MenuCell.Base.TextFrame.Spacing.Trailing
+				left = p1.Tokens.Size.Size_300,
+				right = p1.Tokens.Size.Size_300
 			},
 			fontStyle = {
-				Font = p1.Tokens.Component.MenuCell.Base.Text.Typography.Font,
-				RelativeSize = p1.Tokens.Component.MenuCell.Base.Text.Typography.FontSize / p1.Font.BaseSize,
-				RelativeMinSize = p1.Tokens.Component.MenuCell.Base.Text.Typography.FontSize / p1.Font.BaseSize
+				Font = p1.Tokens.Typography.TitleLarge.Font,
+				RelativeSize = p1.Tokens.Typography.TitleLarge.FontSize / p1.Font.BaseSize,
+				RelativeMinSize = p1.Tokens.Typography.TitleLarge.FontSize / p1.Font.BaseSize
 			},
-			dividerSize = p1.Tokens.Component.MenuCell.Divider.Container.BorderWidth,
-			selectedIconPaddingRight = p1.Tokens.Component.MenuCell.Base.Container.Spacing.Trailing
+			dividerSize = p1.Tokens.Stroke.Standard,
+			selectedIconPaddingRight = p1.Tokens.Size.Size_300
 		}
 	end,
-	getDropdownMenuCellDefaultTokens = function(p1)
-		-- upvalues: UIBloxConfigModule (ref)
+	getDropdownMenuCellDefaultTokens = function(p1) --[[ Line: 39 ]]
 		return {
-			iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_900 else p1.Tokens.Global.Size_450,
+			iconSize = p1.Tokens.Size.Size_900,
 			containerPadding = {
-				left = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_400 else p1.Tokens.Global.Space_200,
-				right = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_600 else p1.Tokens.Global.Space_300
+				left = p1.Tokens.Size.Size_400,
+				right = p1.Tokens.Size.Size_600
 			},
-			textFont = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Typography.TitleLarge else p1.Tokens.Semantic.Typography.Subheader,
-			iconTextSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_400 else p1.Tokens.Global.Space_200,
+			textFont = p1.Tokens.Typography.TitleLarge,
+			iconTextSpacing = p1.Tokens.Size.Size_400,
 			border = {
-				cornerRadius = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Radius.Medium else p1.Tokens.Semantic.Radius.Medium,
-				size = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Stroke.Standard else p1.Tokens.Global.Stroke_100
+				cornerRadius = p1.Tokens.Radius.Medium,
+				size = p1.Tokens.Stroke.Standard
 			}
 		}
 	end,
-	getDropdownMenuDefaultTokens = function(p1)
-		-- upvalues: UIBloxConfigModule (ref)
+	getDropdownMenuDefaultTokens = function(p1) --[[ Line: 55 ]]
 		return {
-			height = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_1200 else p1.Tokens.Global.Size_600),
+			height = UDim.new(0, p1.Tokens.Size.Size_1200),
 			menuStateColors = {
 				buttonDefault = {
-					Color = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Color.ActionSubtle.Border.Color3 else p1.Tokens.Semantic.Color.Action.Secondary.Border.Color3,
-					Transparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Color.ActionSubtle.Border.Transparency else p1.Tokens.Semantic.Color.Action.Secondary.Border.Transparency
+					Color = p1.Tokens.Color.ActionSubtle.Border.Color3,
+					Transparency = p1.Tokens.Color.ActionSubtle.Border.Transparency
 				},
 				contentDefault = {
-					Color = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Color.Content.Default.Color3 else p1.Tokens.Semantic.Color.Text.Default.Color3,
-					Transparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Color.Content.Default.Transparency else p1.Tokens.Semantic.Color.Text.Default.Transparency
+					Color = p1.Tokens.Color.Content.Default.Color3,
+					Transparency = p1.Tokens.Color.Content.Default.Transparency
 				},
 				alert = {
-					Color = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Color.ActionAlert.Border.Color3 else p1.Tokens.Semantic.Color.Action.Alert.Border.Color3,
-					Transparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Color.ActionAlert.Border.Transparency else p1.Tokens.Semantic.Color.Action.Alert.Border.Transparency
+					Color = p1.Tokens.Color.ActionAlert.Border.Color3,
+					Transparency = p1.Tokens.Color.ActionAlert.Border.Transparency
 				}
 			}
 		}

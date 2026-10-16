@@ -1,19 +1,19 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local useAudioPlaybackModule = require(momentsCommon.Hooks.useAudioPlayback)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useImageDisplayModule = require(momentsCommon.Hooks.useImageDisplay)
-local useMemo = reactModule.useMemo
-local useRef = reactModule.useRef
-local useToggleStateModule = require(momentsCommon.Hooks.useToggleState)
-local useVideoPlaybackModule = require(momentsCommon.Hooks.useVideoPlayback)
-local signalModule = require(momentsCommon.Utils.Signal)
-local constantsModule = require(momentsCommon.Constants)
-local _ = require(momentsCommon.Types)
-local t = {
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseAudioPlaybackModule = require(MomentsCommon.Hooks.useAudioPlayback)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseImageDisplayModule = require(MomentsCommon.Hooks.useImageDisplay)
+local UseMemoFunction = ReactModule.useMemo
+local UseRefFunction = ReactModule.useRef
+local UseToggleStateModule = require(MomentsCommon.Hooks.useToggleState)
+local UseVideoPlaybackModule = require(MomentsCommon.Hooks.useVideoPlayback)
+local SignalModule = require(MomentsCommon.Utils.Signal)
+local ConstantsModule = require(MomentsCommon.Constants)
+local _ = require(MomentsCommon.Types)
+local config = {
 	autoplay = false,
 	looping = false,
 	content = nil,
@@ -21,147 +21,157 @@ local t = {
 	edits = { music = nil, trim = nil }
 }
 
-return function(p1, p2)
-	-- upvalues: cryoModule (ref), t (ref), useToggleStateModule (ref), useRef (ref), signalModule (ref), useMemo (ref), constantsModule (ref), useAudioPlaybackModule (ref), useVideoPlaybackModule (ref), useImageDisplayModule (ref), useCallback (ref), useEffect (ref)
-	local var1 = cryoModule.Dictionary.union(t, p2)
-	local var2 = useToggleStateModule(false)
-	local var3 = useToggleStateModule(false)
-	local var4 = useRef(signalModule.new())
-	local var5 = useMemo(function()
-		-- upvalues: var1 (ref)
-		return if var1.edits.music then var1.edits.music.assetId else nil
-	end, { var1.edits })
-	local var6 = useMemo(function()
-		-- upvalues: var1 (ref), constantsModule (copy)
-		return if var1.captureType == Enum.CaptureType.Screenshot then NumberRange.new(0, constantsModule.ScreenshotMusicDuration) elseif var1.edits.trim then NumberRange.new(var1.edits.trim.startTime, var1.edits.trim.endTime) else NumberRange.new(0, 1e999)
-	end, { var1.edits, var1.captureType })
-	local var7 = useAudioPlaybackModule(p1, var5, {
-		playbackRegion = useMemo(function()
-			-- upvalues: var1 (ref), var6 (ref)
-			return if var1.edits.music then NumberRange.new(var1.edits.music.startTime, var1.edits.music.startTime + (var6.Max - var6.Min)) else NumberRange.new(0, 1e999)
-		end, { var1.edits, var6 }),
+return function(p1, p2) --[[ Line: 40 | Named "useUnifiedPlayback" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseToggleStateModule (copy), UseRefFunction (copy), SignalModule (copy), UseMemoFunction (copy), ConstantsModule (copy), UseAudioPlaybackModule (copy), UseVideoPlaybackModule (copy), UseImageDisplayModule (copy), UseCallbackFunction (copy), UseEffectFunction (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p2)
+	local UseToggleStateModuleResult = UseToggleStateModule(false)
+	local UseToggleStateModuleResult1 = UseToggleStateModule(false)
+	local UseRefResult = UseRefFunction(SignalModule.new())
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 49 ]]
+		-- upvalues: UnionResult (copy)
+		return if UnionResult.edits.music then UnionResult.edits.music.assetId else nil
+	end, { UnionResult.edits })
+	local UseMemoResult1 = UseMemoFunction(function(): NumberRange --[[ Line: 57 ]]
+		-- upvalues: UnionResult (copy), ConstantsModule (upval)
+		return if UnionResult.captureType == Enum.CaptureType.Screenshot then NumberRange.new(0, ConstantsModule.ScreenshotMusicDuration) elseif UnionResult.edits.trim then NumberRange.new(UnionResult.edits.trim.startTime, UnionResult.edits.trim.endTime) else NumberRange.new(0, 1e999)
+	end, { UnionResult.edits, UnionResult.captureType })
+	local UseAudioPlaybackModuleResult = UseAudioPlaybackModule(p1, UseMemoResult, {
+		playbackRegion = UseMemoFunction(function(): NumberRange --[[ Line: 69 ]]
+			-- upvalues: UnionResult (copy), UseMemoResult1 (copy)
+			return if UnionResult.edits.music then NumberRange.new(UnionResult.edits.music.startTime, UnionResult.edits.music.startTime + (UseMemoResult1.Max - UseMemoResult1.Min)) else NumberRange.new(0, 1e999)
+		end, { UnionResult.edits, UseMemoResult1 }),
 		looping = p2.looping
 	})
-	local var8 = useVideoPlaybackModule(p1, if var1.captureType == Enum.CaptureType.Screenshot then nil else var1.content, { playbackRegion = var6, looping = p2.looping })
-	local var9 = useImageDisplayModule(p1, if var1.captureType == Enum.CaptureType.Screenshot then var1.content else nil)
-	local var10 = useCallback(function(p3)
-		-- upvalues: var8 (ref), var7 (ref)
-		if var8.ref.current and var8.ref.current.IsLoaded then
-			var8.timeline.seek(p3)
-			var7.timeline.seek(p3)
+	local UseVideoPlaybackModuleResult = UseVideoPlaybackModule(p1, if UnionResult.captureType == Enum.CaptureType.Screenshot then nil else UnionResult.content, { playbackRegion = UseMemoResult1, looping = p2.looping })
+	local UseImageDisplayModuleResult = UseImageDisplayModule(p1, if UnionResult.captureType == Enum.CaptureType.Screenshot then UnionResult.content else nil)
+	local UseCallbackResult = UseCallbackFunction(function(p3) --[[ Line: 94 ]]
+		-- upvalues: UseVideoPlaybackModuleResult (copy), UseAudioPlaybackModuleResult (copy)
+		if UseVideoPlaybackModuleResult.ref.current and UseVideoPlaybackModuleResult.ref.current.IsLoaded then
+			UseVideoPlaybackModuleResult.timeline.seek(p3)
+			UseAudioPlaybackModuleResult.timeline.seek(p3)
 			
 			return
 		end
-	end, { var8.timeline.seek, var7.timeline.seek })
-	useEffect(function()
-		-- upvalues: var8 (ref), var9 (ref), p1 (ref), var2 (ref)
-		if (not var8.ref.current or not var8.ref.current.IsLoaded) and (not var9.ref.current or not var9.isLoadedRef.current) then return end
+	end, {
+		UseVideoPlaybackModuleResult.timeline.seek,
+		UseAudioPlaybackModuleResult.timeline.seek
+	})
+	UseEffectFunction(function() --[[ Line: 103 ]]
+		-- upvalues: UseVideoPlaybackModuleResult (copy), UseImageDisplayModuleResult (copy), p1 (copy), UseToggleStateModuleResult (copy)
+		if (not UseVideoPlaybackModuleResult.ref.current or not UseVideoPlaybackModuleResult.ref.current.IsLoaded) and (not UseImageDisplayModuleResult.ref.current or not UseImageDisplayModuleResult.isLoadedRef.current) then return end
 		if p1 then
-			var2.enable()
+			UseToggleStateModuleResult.enable()
 			
 			return
-		end
-		var2.disable()
-	end, { p1 })
-	useEffect(function()
-		-- upvalues: var8 (ref), var9 (ref), var2 (ref), var7 (ref)
-		if (not var8.ref.current or not var8.ref.current.IsLoaded) and (not var9.ref.current or not var9.isLoadedRef.current) then return end
-		if var2.enabled then
-			var8.playback.play()
-			var7.playback.play()
-			
-			return
-		end
-		var8.playback.pause()
-		var7.playback.pause()
-	end, { var2.enabled })
-	useEffect(function()
-		-- upvalues: var3 (ref), var7 (ref), var5 (ref), var8 (ref)
-		if var3.enabled then
-			var7.volume.mute()
 		else
-			var7.volume.unmute()
+			UseToggleStateModuleResult.disable()
 		end
-		if var5 or var3.enabled then
-			var8.volume.mute()
+	end, { p1 })
+	UseEffectFunction(function() --[[ Line: 118 ]]
+		-- upvalues: UseVideoPlaybackModuleResult (copy), UseImageDisplayModuleResult (copy), UseToggleStateModuleResult (copy), UseAudioPlaybackModuleResult (copy)
+		if (not UseVideoPlaybackModuleResult.ref.current or not UseVideoPlaybackModuleResult.ref.current.IsLoaded) and (not UseImageDisplayModuleResult.ref.current or not UseImageDisplayModuleResult.isLoadedRef.current) then return end
+		if UseToggleStateModuleResult.enabled then
+			UseVideoPlaybackModuleResult.playback.play()
+			UseAudioPlaybackModuleResult.playback.play()
 			
 			return
+		else
+			UseVideoPlaybackModuleResult.playback.pause()
+			UseAudioPlaybackModuleResult.playback.pause()
 		end
-		var8.volume.unmute()
-	end, { var3.enabled, var5 })
-	local var11 = useCallback(function(p3)
-		-- upvalues: p1 (ref), var1 (ref), var2 (ref), var4 (ref)
-		if p1 and var1.autoplay then
-			var2.enable()
+	end, { UseToggleStateModuleResult.enabled })
+	UseEffectFunction(function() --[[ Line: 135 ]]
+		-- upvalues: UseToggleStateModuleResult1 (copy), UseAudioPlaybackModuleResult (copy), UseMemoResult (copy), UseVideoPlaybackModuleResult (copy)
+		if UseToggleStateModuleResult1.enabled then
+			UseAudioPlaybackModuleResult.volume.mute()
+		else
+			UseAudioPlaybackModuleResult.volume.unmute()
 		end
-		var4.current:fire(p3)
-	end, { p1, var1.autoplay })
-	local var12 = useCallback(function()
-		-- upvalues: var11 (ref)
-		var11(Enum.AssetType.Image)
-	end, { var11 })
-	local var13 = useCallback(function()
-		-- upvalues: var11 (ref)
-		var11(Enum.AssetType.Video)
-	end, { var11 })
-	local var14 = useCallback(function()
-		-- upvalues: var7 (ref)
-		var7.timeline.seek(0)
-	end, { var7.timeline.seek })
-	useEffect(function()
-		-- upvalues: var8 (ref), var14 (ref), var13 (ref), var9 (ref), var12 (ref)
-		local t = {}
+		if UseMemoResult or UseToggleStateModuleResult1.enabled then
+			UseVideoPlaybackModuleResult.volume.mute()
+			
+			return
+		else
+			UseVideoPlaybackModuleResult.volume.unmute()
+		end
+	end, { UseToggleStateModuleResult1.enabled, UseMemoResult })
+	local UseCallbackResult1 = UseCallbackFunction(function(p3) --[[ Line: 149 ]]
+		-- upvalues: p1 (copy), UnionResult (copy), UseToggleStateModuleResult (copy), UseRefResult (copy)
+		if p1 and UnionResult.autoplay then
+			UseToggleStateModuleResult.enable()
+		end
+		UseRefResult.current:fire(p3)
+	end, { p1, UnionResult.autoplay })
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 156 ]]
+		-- upvalues: UseCallbackResult1 (copy)
+		UseCallbackResult1(Enum.AssetType.Image)
+	end, { UseCallbackResult1 })
+	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 160 ]]
+		-- upvalues: UseCallbackResult1 (copy)
+		UseCallbackResult1(Enum.AssetType.Video)
+	end, { UseCallbackResult1 })
+	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 164 ]]
+		-- upvalues: UseAudioPlaybackModuleResult (copy)
+		UseAudioPlaybackModuleResult.timeline.seek(0)
+	end, { UseAudioPlaybackModuleResult.timeline.seek })
+	UseEffectFunction(function() --[[ Line: 168 ]]
+		-- upvalues: UseVideoPlaybackModuleResult (copy), UseCallbackResult4 (copy), UseCallbackResult3 (copy), UseImageDisplayModuleResult (copy), UseCallbackResult2 (copy)
+		local CurrentConnections = {}
 		
-		if var8.onVideoDidLoopSignalRef.current then
-			table.insert(t, var8.onVideoDidLoopSignalRef.current:connect(var14))
+		if UseVideoPlaybackModuleResult.onVideoDidLoopSignalRef.current then
+			table.insert(CurrentConnections, UseVideoPlaybackModuleResult.onVideoDidLoopSignalRef.current:connect(UseCallbackResult4))
 		end
-		if var8.onVideoLoadedSignalRef.current then
-			table.insert(t, var8.onVideoLoadedSignalRef.current:connect(var13))
+		if UseVideoPlaybackModuleResult.onVideoLoadedSignalRef.current then
+			table.insert(CurrentConnections, UseVideoPlaybackModuleResult.onVideoLoadedSignalRef.current:connect(UseCallbackResult3))
 		end
-		if var9.onImageLoadedSignalRef.current then
-			table.insert(t, var9.onImageLoadedSignalRef.current:connect(var12))
+		if UseImageDisplayModuleResult.onImageLoadedSignalRef.current then
+			table.insert(CurrentConnections, UseImageDisplayModuleResult.onImageLoadedSignalRef.current:connect(UseCallbackResult2))
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v.disconnect()
+		return function() --[[ Line: 183 ]]
+			-- upvalues: CurrentConnections (copy)
+			for _, currentConnection in CurrentConnections do
+				currentConnection.disconnect()
 			end
 		end
-	end, { var13, var14, var12 })
+	end, {
+		UseCallbackResult3,
+		UseCallbackResult4,
+		UseCallbackResult2
+	})
 	
 	return {
-		timeline = if var1.captureType == Enum.CaptureType.Video then {
-			duration = var8.timeline.duration,
-			elapsed = var8.timeline.elapsed,
-			seek = var10,
-			timeLength = var8.timeline.timeLength,
-			timePosition = var8.timeline.timePosition
+		timeline = if UnionResult.captureType == Enum.CaptureType.Video then {
+			duration = UseVideoPlaybackModuleResult.timeline.duration,
+			elapsed = UseVideoPlaybackModuleResult.timeline.elapsed,
+			seek = UseCallbackResult,
+			timeLength = UseVideoPlaybackModuleResult.timeline.timeLength,
+			timePosition = UseVideoPlaybackModuleResult.timeline.timePosition
 		} else {
-			duration = constantsModule.ScreenshotMusicDuration,
-			elapsed = var7.timeline.elapsed,
-			seek = var10,
-			timeLength = constantsModule.ScreenshotMusicDuration,
-			timePosition = var7.timeline.timePosition
+			duration = ConstantsModule.ScreenshotMusicDuration,
+			elapsed = UseAudioPlaybackModuleResult.timeline.elapsed,
+			seek = UseCallbackResult,
+			timeLength = ConstantsModule.ScreenshotMusicDuration,
+			timePosition = UseAudioPlaybackModuleResult.timeline.timePosition
 		},
 		playback = {
-			isPlaying = var2.enabled,
-			pause = var2.disable,
-			play = var2.enable,
-			toggle = var2.toggle
+			isPlaying = UseToggleStateModuleResult.enabled,
+			pause = UseToggleStateModuleResult.disable,
+			play = UseToggleStateModuleResult.enable,
+			toggle = UseToggleStateModuleResult.toggle
 		},
 		volume = {
-			isMuted = var3.enabled,
-			mute = var3.enable,
-			unmute = var3.disable,
-			toggle = var3.toggle
+			isMuted = UseToggleStateModuleResult1.enabled,
+			mute = UseToggleStateModuleResult1.enable,
+			unmute = UseToggleStateModuleResult1.disable,
+			toggle = UseToggleStateModuleResult1.toggle
 		},
 		audio = {
-			timeLength = var7.timeline.timeLength,
-			timePosition = var7.timeline.timePosition
+			timeLength = UseAudioPlaybackModuleResult.timeline.timeLength,
+			timePosition = UseAudioPlaybackModuleResult.timeline.timePosition
 		},
-		onContentLoadedSignalRef = var4,
-		imageRef = var9.updateRef,
-		videoRef = var8.updateRef,
-		audioRef = var7.ref
+		onContentLoadedSignalRef = UseRefResult,
+		imageRef = UseImageDisplayModuleResult.updateRef,
+		videoRef = UseVideoPlaybackModuleResult.updateRef,
+		audioRef = UseAudioPlaybackModuleResult.ref
 	}
 end

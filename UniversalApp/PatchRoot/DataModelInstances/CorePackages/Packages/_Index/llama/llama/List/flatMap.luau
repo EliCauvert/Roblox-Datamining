@@ -1,26 +1,27 @@
-﻿local function flatMap(p1, p2)
-	-- upvalues: flatMap (ref)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var1)
-	local var2 = type(p2)
-	assert(var2 == "function", "expected a function for second argument, got " .. var2)
+﻿local function flatMap(p1, Callback) --[[ Line: 2 ]]
+	-- upvalues: flatMap (copy)
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
+	local ValueType1 = type(Callback)
+	assert(ValueType1 == "function", "expected a function for second argument, got " .. ValueType1)
 	local t = {}
-	local var3 = 1
+	local Count = 1
 	
-	for i_1 = 1, #p1 do
-		if type(p1[i_1]) ~= "table" then
-			local var4 = p2(p1[i_1], i_1)
+	for i = 1, #p1 do
+		if type(p1[i]) == "table" then
+			local FlatMapResult = flatMap(p1[i], Callback)
 			
-			if var4 ~= nil then
-				t[var3] = var4
-				var3 += 1
+			for i1 = 1, #FlatMapResult do
+				t[Count] = FlatMapResult[i1]
+				Count += 1
 			end
-		end
-		local var5 = flatMap(p1[i_1], p2)
-		
-		for i = 1, #var5 do
-			t[var3] = var5[i]
-			var3 += 1
+		else
+			local CallbackResult = Callback(p1[i], i)
+			
+			if CallbackResult ~= nil then
+				t[Count] = CallbackResult
+				Count += 1
+			end
 		end
 	end
 	return t

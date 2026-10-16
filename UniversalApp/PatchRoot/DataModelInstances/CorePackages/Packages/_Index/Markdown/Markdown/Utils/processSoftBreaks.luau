@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return p1:gsub("%s*[\r\n]%s*", " ")
+﻿return function(Text: string): string --[[ Line: 5 | Named "processSoftBreaks" ]]
+	return (Text:gsub("%s*[\r\n]%s*", " "))
 end

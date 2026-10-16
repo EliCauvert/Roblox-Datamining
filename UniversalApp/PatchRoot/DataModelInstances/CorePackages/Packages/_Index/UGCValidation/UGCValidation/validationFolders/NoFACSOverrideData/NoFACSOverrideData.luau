@@ -1,18 +1,18 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
-	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	fflag = require(parent.flags.getEngineFeatureUGCValidateCheckFacsDisableOverride),
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref)
-		local faceControls = p2.rootInstance:FindFirstChildOfClass("FaceControls")
+	categories = { ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD },
+	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
+	fflag = require(Parent.flags.getEngineFeatureUGCValidateCheckFacsDisableOverride),
+	run = function(p1, p2) --[[ Line: 12 ]]
+		-- upvalues: ErrorSourceStringsModule (copy)
+		local FaceControls = p2.rootInstance:FindFirstChildOfClass("FaceControls")
 		
-		if faceControls and faceControls:HasOverrideFACSData() then
-			p1:fail(errorSourceStringsModule.Keys.FaceControlsOverrideFACSNotEmpty, nil, faceControls)
+		if FaceControls and FaceControls:HasOverrideFACSData() then
+			p1:fail(ErrorSourceStringsModule.Keys.FaceControlsOverrideFACSNotEmpty, nil, FaceControls)
 		end
 	end
 }

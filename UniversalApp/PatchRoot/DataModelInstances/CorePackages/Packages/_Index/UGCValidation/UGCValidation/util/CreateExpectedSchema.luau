@@ -1,120 +1,122 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local constantsModule = require(parent.Constants)
-local createIndividualBodyPartSchemaModule = require(parent.util.createIndividualBodyPartSchema)
-local createLayeredClothingSchemaModule = require(parent.util.createLayeredClothingSchema)
-local createEyebrowEyelashSchemaModule = require(parent.util.createEyebrowEyelashSchema)
-local createMeshPartAccessorySchemaModule = require(parent.util.createMeshPartAccessorySchema)
-local createMakeupSchemaModule = require(parent.util.createMakeupSchema)
-local createDynamicHeadMeshPartSchemaModule = require(parent.util.createDynamicHeadMeshPartSchema)
-local createAccessorySchemaModule = require(parent.util.createAccessorySchema)
-local createEmoteSchemaModule = require(parent.util.createEmoteSchema)
-local createAnimationSchemaModule = require(parent.util.createAnimationSchema)
-local getUploadCategoryModule = require(parent.util.getUploadCategory)
-local getFFlagUGCValidationEyebrowEyelashCategoryModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashCategory)
-local t = {}
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local ConstantsModule = require(Parent.Constants)
+local CreateIndividualBodyPartSchemaModule = require(Parent.util.createIndividualBodyPartSchema)
+local CreateLayeredClothingSchemaModule = require(Parent.util.createLayeredClothingSchema)
+local CreateEyebrowEyelashSchemaModule = require(Parent.util.createEyebrowEyelashSchema)
+local CreateMeshPartAccessorySchemaModule = require(Parent.util.createMeshPartAccessorySchema)
+local CreateMakeupSchemaModule = require(Parent.util.createMakeupSchema)
+local CreateDynamicHeadMeshPartSchemaModule = require(Parent.util.createDynamicHeadMeshPartSchema)
+local CreateAccessorySchemaModule = require(Parent.util.createAccessorySchema)
+local CreateEmoteSchemaModule = require(Parent.util.createEmoteSchema)
+local CreateAnimationSchemaModule = require(Parent.util.createAnimationSchema)
+local GetUploadCategoryModule = require(Parent.util.getUploadCategory)
+local GetFFlagUGCValidationEyebrowEyelashCategoryModule = require(Parent.flags.getFFlagUGCValidationEyebrowEyelashCategory)
+local CreateExpectedSchemaModule = {}
 
-local function _(p1)
-	-- upvalues: constantsModule (ref)
-	for i, v in p1 do
-		if v.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
-			return v
+local function _(Entry) --[[ Line: 19 | Named "getRootInstance" ]]
+	-- upvalues: ConstantsModule (copy)
+	for _, value in Entry do
+		if value.Name == ConstantsModule.FOLDER_NAMES.R15ArtistIntent then
+			return value
 		end
 	end
-	return p1[1]
+	return Entry[1]
 end
 
-function t.generateBundleSchema(p2)
-	-- upvalues: constantsModule (ref), getUploadCategoryModule (ref), t (ref)
-	local t_1 = { ClassName = "Folder", _children = {} }
+function CreateExpectedSchemaModule.generateBundleSchema(List) --[[ Line: 30 ]]
+	-- upvalues: ConstantsModule (copy), GetUploadCategoryModule (copy), CreateExpectedSchemaModule (copy)
+	local config = { ClassName = "Folder", _children = {} }
 	
-	for i, v in p2 do
-		local var1
-		local allSelectedInstances = v.allSelectedInstances
+	for _, value in List do
+		local AllSelectedInstances = value.allSelectedInstances
+		local allSelectedInstance1 = nil
 		
-		for i_1, v_1 in allSelectedInstances do
-			if v_1.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
-				var1 = v_1
-				local var2 = t.generateAssetSchema(getUploadCategoryModule(var1, v.assetTypeEnum, nil), v.assetTypeEnum, var1)
+		for _, allSelectedInstance in AllSelectedInstances do
+			if allSelectedInstance.Name == ConstantsModule.FOLDER_NAMES.R15ArtistIntent then
+				allSelectedInstance1 = allSelectedInstance
+				local AssetSchema = CreateExpectedSchemaModule.generateAssetSchema(GetUploadCategoryModule(allSelectedInstance1, value.assetTypeEnum, nil), value.assetTypeEnum, allSelectedInstance1)
 				
-				if var2.ClassName == "Folder" then
-					for v_1, v_2 in var2._children do
-						table.insert(t_1._children, v_2)
+				if AssetSchema.ClassName == "Folder" then
+					for _, child in AssetSchema._children do
+						table.insert(config._children, child)
 					end
 				else
-					table.insert(t_1._children, var2)
+					table.insert(config._children, AssetSchema)
 				end
+			else
+				continue
 			end
 		end
-		var1 = allSelectedInstances[1]
+		allSelectedInstance1 = AllSelectedInstances[1]
 	end
-	return t_1
+	return config
 end
 
-local function createBodyPartSchema(p3)
-	-- upvalues: constantsModule (ref), createIndividualBodyPartSchemaModule (ref)
-	local t = { ClassName = "Folder", _children = {} }
+local function createBodyPartSchema(p1) --[[ Line: 56 ]]
+	-- upvalues: ConstantsModule (copy), CreateIndividualBodyPartSchemaModule (copy)
+	local config = { ClassName = "Folder", _children = {} }
 	
-	for i in pairs(constantsModule.ASSET_TYPE_INFO[p3].subParts) do
-		table.insert(t._children, createIndividualBodyPartSchemaModule(p3, i))
+	for subPart in pairs(ConstantsModule.ASSET_TYPE_INFO[p1].subParts) do
+		table.insert(config._children, (CreateIndividualBodyPartSchemaModule(p1, subPart)))
 	end
-	return t
+	return config
 end
 
-local t_1 = {
-	EMOTE_ANIMATION = function(_, _)
-		-- upvalues: createEmoteSchemaModule (ref)
-		return createEmoteSchemaModule()
+local config = {
+	EMOTE_ANIMATION = function(_, _) --[[ Line: 72 ]]
+		-- upvalues: CreateEmoteSchemaModule (copy)
+		return CreateEmoteSchemaModule()
 	end,
-	DYNAMIC_HEAD = function(_, _)
-		-- upvalues: createDynamicHeadMeshPartSchemaModule (ref)
-		return createDynamicHeadMeshPartSchemaModule()
+	DYNAMIC_HEAD = function(_, _) --[[ Line: 75 ]]
+		-- upvalues: CreateDynamicHeadMeshPartSchemaModule (copy)
+		return CreateDynamicHeadMeshPartSchemaModule()
 	end,
-	TORSO_AND_LIMBS = function(p4, _)
-		-- upvalues: createBodyPartSchema (ref)
-		return createBodyPartSchema(p4)
+	TORSO_AND_LIMBS = function(p2, _) --[[ Line: 78 ]]
+		-- upvalues: createBodyPartSchema (copy)
+		return (createBodyPartSchema(p2))
 	end,
-	LAYERED_CLOTHING = function(p4, _)
-		-- upvalues: getFFlagUGCValidationEyebrowEyelashCategoryModule (ref), createEyebrowEyelashSchemaModule (ref), constantsModule (ref), createLayeredClothingSchemaModule (ref)
-		return if getFFlagUGCValidationEyebrowEyelashCategoryModule() or p4 ~= Enum.AssetType.EyebrowAccessory and p4 ~= Enum.AssetType.EyelashAccessory then createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createEyebrowEyelashSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames)
+	LAYERED_CLOTHING = function(AssetType, _) --[[ Line: 81 ]]
+		-- upvalues: GetFFlagUGCValidationEyebrowEyelashCategoryModule (copy), CreateEyebrowEyelashSchemaModule (copy), ConstantsModule (copy), CreateLayeredClothingSchemaModule (copy)
+		return if GetFFlagUGCValidationEyebrowEyelashCategoryModule() or AssetType ~= Enum.AssetType.EyebrowAccessory and AssetType ~= Enum.AssetType.EyelashAccessory then CreateLayeredClothingSchemaModule(ConstantsModule.ASSET_TYPE_INFO[AssetType].attachmentNames) else CreateEyebrowEyelashSchemaModule(ConstantsModule.ASSET_TYPE_INFO[AssetType].attachmentNames)
 	end,
-	EYEBROW_EYELASH = function(p4, _)
-		-- upvalues: createEyebrowEyelashSchemaModule (ref), constantsModule (ref)
-		return createEyebrowEyelashSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames)
+	EYEBROW_EYELASH = function(p2, _) --[[ Line: 91 ]]
+		-- upvalues: CreateEyebrowEyelashSchemaModule (copy), ConstantsModule (copy)
+		return CreateEyebrowEyelashSchemaModule(ConstantsModule.ASSET_TYPE_INFO[p2].attachmentNames)
 	end,
-	RIGID_ACCESSORY = function(p4, p5)
-		-- upvalues: constantsModule (ref), createMeshPartAccessorySchemaModule (ref), createAccessorySchemaModule (ref)
-		local var3 = constantsModule.ASSET_TYPE_INFO[p4]
+	RIGID_ACCESSORY = function(p2, Object) --[[ Line: 94 ]]
+		-- upvalues: ConstantsModule (copy), CreateMeshPartAccessorySchemaModule (copy), CreateAccessorySchemaModule (copy)
+		local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[p2]
 		
-		return if p5:FindFirstChildOfClass("MeshPart") then createMeshPartAccessorySchemaModule(var3.attachmentNames) else createAccessorySchemaModule(var3.attachmentNames)
+		return if Object:FindFirstChildOfClass("MeshPart") then CreateMeshPartAccessorySchemaModule(ASSETTYPE.attachmentNames) else CreateAccessorySchemaModule(ASSETTYPE.attachmentNames)
 	end,
-	MAKEUP = function(_, _)
-		-- upvalues: createMakeupSchemaModule (ref)
-		return createMakeupSchemaModule()
+	MAKEUP = function(_, _) --[[ Line: 103 ]]
+		-- upvalues: CreateMakeupSchemaModule (copy)
+		return CreateMakeupSchemaModule()
 	end,
-	ANIMATION = function(p4, _)
-		-- upvalues: createAnimationSchemaModule (ref)
-		return createAnimationSchemaModule(p4)
+	ANIMATION = function(p2, _) --[[ Line: 108 ]]
+		-- upvalues: CreateAnimationSchemaModule (copy)
+		return CreateAnimationSchemaModule(p2)
 	end
 }
 
-function t.generateAssetSchema(value, p4, p5)
-	-- upvalues: t_1 (ref)
-	return t_1[value](p4, p5)
+function CreateExpectedSchemaModule.generateAssetSchema(p2, AssetTypeEnum, p3) --[[ Line: 112 ]]
+	-- upvalues: config (copy)
+	return config[p2](AssetTypeEnum, p3)
 end
 
-function t.generateAnimationPackBundleSchema()
-	-- upvalues: constantsModule (ref)
-	local t = { ClassName = "Model", _children = {} }
+function CreateExpectedSchemaModule.generateAnimationPackBundleSchema() --[[ Line: 120 ]]
+	-- upvalues: ConstantsModule (copy)
+	local config = { ClassName = "Model", _children = {} }
 	
-	for i in constantsModule.ANIMATION_ASSET_INFO do
-		table.insert(t._children, {
+	for _ in ConstantsModule.ANIMATION_ASSET_INFO do
+		table.insert(config._children, {
 			ClassName = "Folder",
 			Name = "R15Anim",
 			_ignoreDescendants = true
 		})
 	end
-	return t
+	return config
 end
 
-return t
+return CreateExpectedSchemaModule

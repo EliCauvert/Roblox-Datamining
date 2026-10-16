@@ -1,4 +1,4 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 1 ]]
 	return {
 		paymentsGateway = {
 			getUpsellProduct = p1.fromString("apis:payments-gateway/v1/products/get-upsell-product"),
@@ -6,24 +6,24 @@
 			checkUserPurchaseSettings = p1.fromString("apis:payments-gateway/v1/check-user-purchase-settings")
 		},
 		purchaseWarning = {
-			getPurchaseWarning = function(p2, p3, p4)
-				-- upvalues: p1 (ref)
-				local var1 = ""
+			getPurchaseWarning = function(p2, p3, p4) --[[ Line: 9 ]]
+				-- upvalues: p1 (copy)
+				local Formatted = ""
 				
 				if p2 == nil then
 					if p3 == nil then
-						warn(string.format("%s - Invalid parameters, needs mobileProductId or productId", tostring(script.Name)))
+						warn(string.format("%s - Invalid parameters, needs mobileProductId or productId", (tostring(script.Name))))
 						
 						return nil
 					end
-					var1 = string.format("%s?productId=%d", "apis:purchase-warning/v1/purchase-warnings", p3)
+					Formatted = string.format("%s?productId=%d", "apis:purchase-warning/v1/purchase-warnings", p3)
 				else
-					var1 = string.format("%s?mobileProductId=%s", "apis:purchase-warning/v1/purchase-warnings", p2)
+					Formatted = string.format("%s?mobileProductId=%s", "apis:purchase-warning/v1/purchase-warnings", p2)
 				end
 				if p4 then
-					var1 = string.format("%s&is13To17ScaryModalEnabled=True", var1)
+					Formatted = string.format("%s&is13To17ScaryModalEnabled=True", Formatted)
 				end
-				return p1.fromString(var1)()
+				return p1.fromString(Formatted)()
 			end,
 			ackPurchaseWarning = p1.fromString("apis:purchase-warning/v1/purchase-warnings/acknowledge")
 		},

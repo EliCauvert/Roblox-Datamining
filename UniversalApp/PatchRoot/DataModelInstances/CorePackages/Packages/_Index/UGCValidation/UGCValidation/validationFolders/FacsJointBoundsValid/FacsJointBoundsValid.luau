@@ -1,40 +1,40 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFIntFacsJointMaximumDistRatioDirectModule = require(parent.flags.getFIntFacsJointMaximumDistRatioDirect)
-local getFIntFacsJointMaximumDistRatioAccumulatedModule = require(parent.flags.getFIntFacsJointMaximumDistRatioAccumulated)
-local getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = require(parent.flags.getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBounds)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFIntFacsJointMaximumDistRatioDirectModule = require(Parent.flags.getFIntFacsJointMaximumDistRatioDirect)
+local GetFIntFacsJointMaximumDistRatioAccumulatedModule = require(Parent.flags.getFIntFacsJointMaximumDistRatioAccumulated)
+local GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = require(Parent.flags.getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBounds)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
+	categories = { ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	prereqTests = {
-		validationEnumsModule.ValidationModule.DynamicHeadFacsPresent
+		ValidationEnumsModule.ValidationModule.DynamicHeadFacsPresent
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref), getFIntFacsJointMaximumDistRatioDirectModule (ref), getFIntFacsJointMaximumDistRatioAccumulatedModule (ref)
-		if not getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then return end
-		local head = p2.renderMeshesData.Head
-		local ok, status = pcall(function()
-			-- upvalues: UGCValidationService (copy), head (ref)
-			return UGCValidationService:GetMaximalJointDistancesWithinFacs(head.editable)
+	run = function(p1, p2) --[[ Line: 27 ]]
+		-- upvalues: GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy), GetFIntFacsJointMaximumDistRatioDirectModule (copy), GetFIntFacsJointMaximumDistRatioAccumulatedModule (copy)
+		if not GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then return end
+		local Head = p2.renderMeshesData.Head
+		local Success, Result = pcall(function() --[[ Line: 36 ]]
+			-- upvalues: UGCValidationService (upval), Head (copy)
+			return UGCValidationService:GetMaximalJointDistancesWithinFacs(Head.editable)
 		end)
 		
-		if not ok then
-			p1:fail(errorSourceStringsModule.Keys.DynHead_JointBoundsCheckFailed)
+		if not Success then
+			p1:fail(ErrorSourceStringsModule.Keys.DynHead_JointBoundsCheckFailed)
 			
 			return
 		end
-		local var1, var2, var3, var4 = unpack(status)
+		local Unpacked, Unpacked2, Unpacked3, Unpacked4 = unpack(Result)
 		
-		if getFIntFacsJointMaximumDistRatioDirectModule() / 100 < var1 then
-			p1:fail(errorSourceStringsModule.Keys.DynHead_JointDirectExceeded, { actionName = var2 })
+		if GetFIntFacsJointMaximumDistRatioDirectModule() / 100 < Unpacked then
+			p1:fail(ErrorSourceStringsModule.Keys.DynHead_JointDirectExceeded, { actionName = Unpacked2 })
 		end
-		if getFIntFacsJointMaximumDistRatioAccumulatedModule() / 100 < var3 then
-			p1:fail(errorSourceStringsModule.Keys.DynHead_JointAccumulatedExceeded, { jointName = var4 })
+		if GetFIntFacsJointMaximumDistRatioAccumulatedModule() / 100 < Unpacked3 then
+			p1:fail(ErrorSourceStringsModule.Keys.DynHead_JointAccumulatedExceeded, { jointName = Unpacked4 })
 		end
 	end
 }

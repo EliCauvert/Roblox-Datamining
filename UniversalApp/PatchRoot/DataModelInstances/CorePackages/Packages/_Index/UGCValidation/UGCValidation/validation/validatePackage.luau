@@ -1,33 +1,34 @@
-﻿local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Constants)
-local validateSingleInstanceModule = require(parent.validation.validateSingleInstance)
-local validateAssetCreatorModule = require(parent.validation.validateAssetCreator)
-local parseContentIdsModule = require(parent.util.ParseContentIds)
-local _ = require(parent.util.Types)
+﻿local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Constants)
+local ValidateSingleInstanceModule = require(Parent.validation.validateSingleInstance)
+local ValidateAssetCreatorModule = require(Parent.validation.validateAssetCreator)
+local ParseContentIdsModule = require(Parent.util.ParseContentIds)
+local _ = require(Parent.util.Types)
 
-return function(p1)
-	-- upvalues: validateSingleInstanceModule (ref), parseContentIdsModule (ref), constantsModule (ref), analyticsModule (ref), validateAssetCreatorModule (ref)
+return function(p1) --[[ Line: 12 | Named "validatePackage" ]]
+	-- upvalues: ValidateSingleInstanceModule (copy), ParseContentIdsModule (copy), ConstantsModule (copy), AnalyticsModule (copy), ValidateAssetCreatorModule (copy)
 	assert(p1.instances ~= nil, "instances required in validationContext for validatePackage")
-	local instances = p1.instances
-	local restrictedUserIds = p1.restrictedUserIds
-	local var1, var2 = validateSingleInstanceModule(instances, p1)
+	local Instances = p1.instances
+	local RestrictedUserIds = p1.restrictedUserIds
+	local ValidateSingleInstanceModuleResult, ValidateSingleInstanceModuleResult2 = ValidateSingleInstanceModule(Instances, p1)
 	
-	if not var1 then
-		return var1, var2
+	if not ValidateSingleInstanceModuleResult then
+		return ValidateSingleInstanceModuleResult, ValidateSingleInstanceModuleResult2
 	end
-	local var3 = instances[1]
+	local InstancesEntry = Instances[1]
 	local t = {}
-	local t_1 = {}
+	local t1 = {}
 	
-	if not restrictedUserIds or #restrictedUserIds == 0 then
+	if not RestrictedUserIds or #RestrictedUserIds == 0 then
 		return true
-	elseif parseContentIdsModule.parseWithErrorCheck(t, t_1, var3, constantsModule.PACKAGE_CONTENT_ID_FIELDS, nil, p1) then
-		return validateAssetCreatorModule(t_1, p1)
+	elseif ParseContentIdsModule.parseWithErrorCheck(t, t1, InstancesEntry, ConstantsModule.PACKAGE_CONTENT_ID_FIELDS, nil, p1) then
+		return ValidateAssetCreatorModule(t1, p1)
+	else
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validatePackage_FailedToParse, nil, p1)
+		
+		return false, {
+			string.format("Failed to parse package data for model '%s'. Make sure the packageId is valid and try again.", InstancesEntry:GetFullName())
+		}
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validatePackage_FailedToParse, nil, p1)
-	
-	return false, {
-		string.format("Failed to parse package data for model '%s'. Make sure the packageId is valid and try again.", var3:GetFullName())
-	}
 end

@@ -1,164 +1,170 @@
-﻿local t = {}
+﻿local FloatVectorModule = {}
 
-function t.new(...)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
-	tbl.data = {}
+function FloatVectorModule.new(...) --[[ Line: 12 ]]
+	-- upvalues: FloatVectorModule (copy)
+	local self = setmetatable({}, FloatVectorModule)
+	self.data = {}
 	local list = { ... }
 	
 	if #list == 1 and typeof(list[1]) == "table" then
-		list = if getmetatable(list[1]) == t then list[1].data else list[1]
+		if getmetatable(list[1]) == FloatVectorModule then
+			list = list[1].data
+		else
+			list = list[1]
+		end
 	end
-	for i, v in list do
-		if typeof(v) == "number" then
-			table.insert(tbl.data, v)
+	for _, value in list do
+		if typeof(value) == "number" then
+			table.insert(self.data, value)
 		else
 			error("arg to FloatVector.new() not a number")
 		end
 	end
-	return tbl
+	return self
 end
 
-function t:getSize()
+function FloatVectorModule:getSize(): number --[[ Line: 37 ]]
 	return #self.data
 end
 
-function t:checkCompatible(p1)
-	-- upvalues: t (ref)
-	if typeof(self) ~= typeof(t) or typeof(p1) ~= typeof(t) then
+function FloatVectorModule:checkCompatible(p1): boolean --[[ Line: 41 ]]
+	-- upvalues: FloatVectorModule (copy)
+	if typeof(self) ~= typeof(FloatVectorModule) or typeof(p1) ~= typeof(FloatVectorModule) then
 		error("vector operation on non-vector type")
 		
 		return false
 	elseif #self.data == #p1.data then
 		return true
+	else
+		error("operating on vectors of different dimension")
+		
+		return false
 	end
-	error("operating on vectors of different dimension")
-	
-	return false
 end
 
-function t:__index(p1)
-	-- upvalues: t (ref)
-	return if typeof(p1) == "number" then self.data[p1] else t[p1]
+function FloatVectorModule.__index(p1, p2) --[[ Line: 54 ]]
+	-- upvalues: FloatVectorModule (copy)
+	return if typeof(p2) == "number" then p1.data[p2] else FloatVectorModule[p2]
 end
 
-function t:__newindex(p1, p2)
+function FloatVectorModule:__newindex(p1, p2) --[[ Line: 62 ]]
 	if typeof(p1) == "number" then
 		self.data[p1] = p2
 		
 		return
-	end
-	rawset(self, p1, p2)
-end
-
-function t:__add(p1)
-	-- upvalues: t (ref)
-	t.checkCompatible(self, p1)
-	local t_1 = {}
-	
-	for i = 1, #self.data do
-		table.insert(t_1, self.data[i] + p1.data[i])
-	end
-	return t.new(t_1)
-end
-
-function t:__sub(p2)
-	-- upvalues: t (ref)
-	t.checkCompatible(self, p2)
-	local t_1 = {}
-	
-	for i = 1, #self.data do
-		table.insert(t_1, self.data[i] - p2.data[i])
-	end
-	return t.new(t_1)
-end
-
-function t:__mul(p3)
-	-- upvalues: t (ref)
-	if typeof(self) == typeof(t) and typeof(p3) == "number" then
-		local t_1 = {}
-		
-		for i, v in self.data do
-			table.insert(t_1, v * p3)
-		end
-		return t.new(t_1)
 	else
-		t.checkCompatible(self, p3)
-		local t_1 = {}
+		rawset(self, p1, p2)
+	end
+end
+
+function FloatVectorModule:__add(p1) --[[ Line: 71 ]]
+	-- upvalues: FloatVectorModule (copy)
+	FloatVectorModule.checkCompatible(self, p1)
+	local List = {}
+	
+	for i = 1, #self.data do
+		table.insert(List, self.data[i] + p1.data[i])
+	end
+	return FloatVectorModule.new(List)
+end
+
+function FloatVectorModule:__sub(p2) --[[ Line: 80 ]]
+	-- upvalues: FloatVectorModule (copy)
+	FloatVectorModule.checkCompatible(self, p2)
+	local List = {}
+	
+	for i = 1, #self.data do
+		table.insert(List, self.data[i] - p2.data[i])
+	end
+	return FloatVectorModule.new(List)
+end
+
+function FloatVectorModule:__mul(p3) --[[ Line: 89 ]]
+	-- upvalues: FloatVectorModule (copy)
+	if typeof(self) == typeof(FloatVectorModule) and typeof(p3) == "number" then
+		local List1 = {}
+		
+		for _, entry in self.data do
+			table.insert(List1, entry * p3)
+		end
+		return FloatVectorModule.new(List1)
+	else
+		FloatVectorModule.checkCompatible(self, p3)
+		local List = {}
 		
 		for i = 1, #self.data do
-			table.insert(t_1, self.data[i] * p3.data[i])
+			table.insert(List, self.data[i] * p3.data[i])
 		end
-		return t.new(t_1)
+		return FloatVectorModule.new(List)
 	end
 end
 
-function t:__div(p4)
-	-- upvalues: t (ref)
-	if typeof(self) == typeof(t) and typeof(p4) == "number" then
-		local t_1 = {}
+function FloatVectorModule:__div(p4) --[[ Line: 106 ]]
+	-- upvalues: FloatVectorModule (copy)
+	if typeof(self) == typeof(FloatVectorModule) and typeof(p4) == "number" then
+		local List1 = {}
 		
-		for i, v in self.data do
-			table.insert(t_1, v / p4)
+		for _, entry in self.data do
+			table.insert(List1, entry / p4)
 		end
-		return t.new(t_1)
+		return FloatVectorModule.new(List1)
 	else
-		t.checkCompatible(self, p4)
-		local t_1 = {}
+		FloatVectorModule.checkCompatible(self, p4)
+		local List = {}
 		
 		for i = 1, #self.data do
-			table.insert(t_1, self.data[i] / p4.data[i])
+			table.insert(List, self.data[i] / p4.data[i])
 		end
-		return t.new(t_1)
+		return FloatVectorModule.new(List)
 	end
 end
 
-function t:dot(vectorB)
-	-- upvalues: t (ref)
-	t.checkCompatible(self, vectorB)
-	local var1 = 0
+function FloatVectorModule:dot(p5): number --[[ Line: 123 ]]
+	-- upvalues: FloatVectorModule (copy)
+	FloatVectorModule.checkCompatible(self, p5)
+	local NewEntry = 0
 	
 	for i = 1, #self.data do
-		var1 += self.data[i] * vectorB.data[i]
+		NewEntry += self.data[i] * p5.data[i]
 	end
-	return var1
+	return NewEntry
 end
 
-function t:cross(vectorB)
-	-- upvalues: t (ref)
-	t.checkCompatible(self, vectorB)
+function FloatVectorModule:cross(p6) --[[ Line: 133 ]]
+	-- upvalues: FloatVectorModule (copy)
+	FloatVectorModule.checkCompatible(self, p6)
 	
-	if #self.data == 3 and #vectorB.data == 3 then
-		return t.new(self.data[2] * vectorB.data[3] - self.data[3] * vectorB.data[2], self.data[3] * vectorB.data[1] - self.data[1] * vectorB.data[3], self.data[1] * vectorB.data[2] - self.data[2] * vectorB.data[1])
+	if #self.data == 3 and #p6.data == 3 then
+		return FloatVectorModule.new(self.data[2] * p6.data[3] - self.data[3] * p6.data[2], self.data[3] * p6.data[1] - self.data[1] * p6.data[3], self.data[1] * p6.data[2] - self.data[2] * p6.data[1])
+	else
+		error("cross product is only defined for two 3 dimensional vectors")
+		
+		return nil
 	end
-	error("cross product is only defined for two 3 dimensional vectors")
-	
-	return nil
 end
 
-function t:magnitude()
-	local var2 = 0
+function FloatVectorModule.magnitude(p6): number --[[ Line: 146 ]]
+	local Value = 0
 	
-	for i, v in self.data do
-		var2 += v ^ 2
+	for _, entry in p6.data do
+		Value += entry ^ 2
 	end
-	return math.sqrt(var2)
+	return (math.sqrt(Value))
 end
 
-function t:fuzzyEq(p5, p6)
-	-- upvalues: t (ref)
-	if not t.checkCompatible(self, p5) then
+function FloatVectorModule:fuzzyEq(p7, p8): boolean --[[ Line: 154 ]]
+	-- upvalues: FloatVectorModule (copy)
+	if not FloatVectorModule.checkCompatible(self, p7) then
 		return false
 	end
-	p6 = p6 or 0.00001
+	local P23 = p8 or 0.00001
 	
 	for i = 1, #self.data do
-		if p6 >= math.abs(self.data[i] - p5.data[i]) then
-			continue
+		if P23 < math.abs(self.data[i] - p7.data[i]) then
+			return false
 		end
-		return false
 	end
 	return true
 end
 
-return t
+return FloatVectorModule

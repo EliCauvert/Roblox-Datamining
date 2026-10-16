@@ -1,19 +1,17 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local _ = require(parent_1.App.Style.StyleTypes)
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local iconSizeModule = require(parent.Enum.IconSize)
-local t = {
-	[iconSizeModule.Small] = 16,
-	[iconSizeModule.Medium] = 36,
-	[iconSizeModule.Large] = 48,
-	[iconSizeModule.XLarge] = 96,
-	[iconSizeModule.XXLarge] = 192
+﻿local Parent = script.Parent
+local _ = require(Parent.Parent.Parent.App.Style.StyleTypes)
+local IconSizeModule = require(Parent.Enum.IconSize)
+local config = {
+	[IconSizeModule.Small] = 16,
+	[IconSizeModule.Medium] = 36,
+	[IconSizeModule.Large] = 48,
+	[IconSizeModule.XLarge] = 96,
+	[IconSizeModule.XXLarge] = 192
 }
 
-return function(p1, p2)
-	-- upvalues: iconSizeModule (ref), UIBloxConfigModule (ref), t (ref)
-	assert(iconSizeModule.isEnumValue(p1))
+return function(Large, p1) --[[ Line: 17 ]]
+	-- upvalues: IconSizeModule (copy), config (copy)
+	assert(IconSizeModule.isEnumValue(Large))
 	
-	return if p2 == nil or p2.Tokens == nil then t[p1] elseif p1 == iconSizeModule.Small then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_400 else p2.Tokens.Semantic.Icon.Size.Small elseif p1 == iconSizeModule.Medium then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_900 else p2.Tokens.Semantic.Icon.Size.Medium elseif p1 == iconSizeModule.Large then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_1200 else p2.Tokens.Semantic.Icon.Size.Large elseif p1 == iconSizeModule.XLarge then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_2400 else p2.Tokens.Semantic.Icon.Size.XLarge elseif p1 == iconSizeModule.XXLarge then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then 192 else p2.Tokens.Semantic.Icon.Size.XxLarge else nil
+	return if p1 == nil or p1.Tokens == nil then config[Large] elseif Large == IconSizeModule.Small then p1.Tokens.Size.Size_400 elseif Large == IconSizeModule.Medium then p1.Tokens.Size.Size_900 elseif Large == IconSizeModule.Large then p1.Tokens.Size.Size_1200 elseif Large == IconSizeModule.XLarge then p1.Tokens.Size.Size_2400 elseif Large == IconSizeModule.XXLarge then 192 else nil
 end

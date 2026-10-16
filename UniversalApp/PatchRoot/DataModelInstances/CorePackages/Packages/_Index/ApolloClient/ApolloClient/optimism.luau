@@ -1,216 +1,216 @@
-﻿local parent = script.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local set = luauPolyfillModule.Set
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local t = {}
-local trie = require(parent.wry.trie).Trie
-local cache = require(script.cache).Cache
-local entry = require(script.entry).Entry
-local parentEntrySlot = require(script.context).parentEntrySlot
-local contextModule = require(script.context)
-t.bindContext = contextModule.bindContext
-t.noContext = contextModule.noContext
-t.setTimeout = contextModule.setTimeout
-t.dep = require(script.dep).dep
+﻿local Parent = script.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local Trie = require(Parent.wry.trie).Trie
+local Cache = require(script.cache).Cache
+local Entry = require(script.entry).Entry
+local ParentEntrySlot = require(script.context).parentEntrySlot
+local ContextModule = require(script.context)
 
-local function _()
-	-- upvalues: trie (ref)
-	local var1 = trie.new(true)
+local function _() --[[ Line: 61 | Named "makeDefaultMakeCacheKeyFunction" ]]
+	-- upvalues: Trie (copy)
+	local NewTrie = Trie.new(true)
 	
-	return function(_, ...)
-		-- upvalues: var1 (ref)
-		return var1:lookupArray({ ... })
+	return function(_, ...) --[[ Line: 64 ]]
+		-- upvalues: NewTrie (copy)
+		return NewTrie:lookupArray({ ... })
 	end
 end
 
-local var1 = trie.new(true)
+local NewTrie = Trie.new(true)
 
-function t.defaultMakeCacheKey(_, ...)
-	-- upvalues: var1 (ref)
-	return var1:lookupArray({ ... })
+local function DefaultMakeCacheKey(_, ...) --[[ Line: 64 ]]
+	-- upvalues: NewTrie (copy)
+	return NewTrie:lookupArray({ ... })
 end
 
-t.KeyTrie = trie
 local _ = require(script.initTypes)
-local var2 = set.new()
+local NewResult = LuauPolyfillModule.Set.new()
 
-function t.wrap(p1, p2, p3)
-	-- upvalues: cache (ref), boolean (ref), trie (ref), entry (ref), array (ref), var2 (ref), parentEntrySlot (ref), object (ref)
-	local var3 = p2
-	
-	if var3 == nil then
-		var3 = {}
-	end
-	local var4 = cache.new(if boolean.toJSBoolean(var3.max) then var3.max else 65536, function(p4)
-		return p4:dispose()
-	end)
-	local keyArgs = var3.keyArgs
-	
-	if boolean.toJSBoolean(var3.makeCacheKey) then
-		local makeCacheKey = var3.makeCacheKey
+return {
+	bindContext = ContextModule.bindContext,
+	noContext = ContextModule.noContext,
+	setTimeout = ContextModule.setTimeout,
+	dep = require(script.dep).dep,
+	defaultMakeCacheKey = DefaultMakeCacheKey,
+	KeyTrie = Trie,
+	wrap = function(Callback1, p1, p2) --[[ Line: 104 ]]
+		-- upvalues: Cache (copy), Boolean (copy), Trie (copy), Entry (copy), Array (copy), NewResult (copy), ParentEntrySlot (copy), Object (copy)
+		local v1 = p1
 		
-		if not makeCacheKey then
-			local var5 = trie.new(true)
-			
-			local makeCacheKey = function(_, ...)
-				-- upvalues: var5 (ref)
-				return var5:lookupArray({ ... })
-			end
+		if v1 == nil then
+			v1 = {}
 		end
-		if p3 ~= nil then
-			local var6 = p1
+		local NewCache = Cache.new(Boolean.toJSBoolean(v1.max) and v1.max or 65536, function(p3) --[[ Line: 115 ]]
+			return p3:dispose()
+		end)
+		local KeyArgsFunction = v1.keyArgs
+		repeat
+			repeat
+				if Boolean.toJSBoolean(v1.makeCacheKey) then
+					local MakeCacheKeyFunction = v1.makeCacheKey
+					
+					if MakeCacheKeyFunction then break end
+				end
+				local NewTrie = Trie.new(true)
+				
+				local function MakeCacheKeyFunction(_, ...) --[[ Line: 64 ]]
+					-- upvalues: NewTrie (copy)
+					return NewTrie:lookupArray({ ... })
+				end
+			until true
+			if p2 == nil then break end
+			local Callback = Callback1
 			
-			p1 = function(...)
-				-- upvalues: var6 (ref), p3 (ref)
-				return var6(p3, ...)
+			Callback1 = function(...) --[[ Line: 126 ]]
+				-- upvalues: Callback (copy), p2 (copy)
+				return Callback(p2, ...)
 			end
-		end
-		local tbl = setmetatable({}, {
-			__call = function(_, p4, ...)
-				-- upvalues: p3 (ref), makeCacheKey (ref), keyArgs (ref), p1 (write), var4 (ref), entry (copy), var3 (write), array (copy), var2 (copy), parentEntrySlot (copy)
-				local var7 = if p3 ~= nil then { p4, ... } else { ... }
-				local var8 = makeCacheKey(nil, table.unpack((function()
-					-- upvalues: keyArgs (copy), var7 (write)
-					return if keyArgs then keyArgs(nil, table.unpack(var7)) else var7
+		until true
+		local self = setmetatable({}, {
+			__call = function(_, p3, ...) --[[ Line: 134 ]]
+				-- upvalues: p2 (copy), MakeCacheKeyFunction (copy), KeyArgsFunction (copy), Callback1 (ref), NewCache (copy), Entry (upval), v1 (ref), Array (upval), NewResult (upval), ParentEntrySlot (upval)
+				local List = nil
+				List = if p2 == nil then { p3, ... } else { ... }
+				local CacheKey = MakeCacheKeyFunction(nil, table.unpack((function() --[[ Line: 147 ]]
+					-- upvalues: KeyArgsFunction (upval), List (ref)
+					return if KeyArgsFunction then KeyArgsFunction(nil, table.unpack(List)) else List
 				end)()))
 				
-				if var8 == nil then
-					return p1(table.unpack(var7))
+				if CacheKey == nil then
+					return Callback1(table.unpack(List))
 				end
-				local var9 = var4:get(var8)
+				local GetResult = NewCache:get(CacheKey)
 				
-				if var9 == nil then
-					var9 = entry.new(p1)
-					var4:set(var8, var9)
-					var9.subscribe = var3.subscribe
+				if GetResult == nil then
+					GetResult = Entry.new(Callback1)
+					NewCache:set(CacheKey, GetResult)
+					GetResult.subscribe = v1.subscribe
 					
-					function var20.forget()
-						-- upvalues: var4 (copy), var8 (ref)
-						return var4:delete(var8)
+					function GetResult.forget() --[[ Line: 167 ]]
+						-- upvalues: NewCache (upval), CacheKey (copy)
+						return NewCache:delete(CacheKey)
 					end
 				end
-				local var10 = var9:recompute(array.slice(var7))
-				var4:set(var8, var9)
-				var2:add(var4)
+				local RecomputeResult = GetResult:recompute((Array.slice(List)))
+				NewCache:set(CacheKey, GetResult)
+				NewResult:add(NewCache)
 				
-				if not parentEntrySlot:hasValue() then
-					var2:forEach(function(p5)
-						return p5:clean()
+				if not ParentEntrySlot:hasValue() then
+					NewResult:forEach(function(p4) --[[ Line: 184 ]]
+						return p4:clean()
 					end)
-					var2:clear()
+					NewResult:clear()
 				end
-				return var10
+				return RecomputeResult
 			end,
-			__index = function(p4, p5)
-				-- upvalues: var4 (ref)
-				return if p5 == "size" then var4.map.size else rawget(p4, p5)
+			__index = function(p3, p4) --[[ Line: 193 ]]
+				-- upvalues: NewCache (copy)
+				return if p4 == "size" then NewCache.map.size else rawget(p3, p4)
 			end,
-			__newindex = function(p4, p5, p6)
-				if p5 == "size" then
+			__newindex = function(p3, p4, p5) --[[ Line: 199 ]]
+				if p4 == "size" then
 					error("attempt to update a read-only table", 2)
 				end
-				rawset(p4, p5, p6)
+				rawset(p3, p4, p5)
 			end
 		})
 		
-		local function _(p4)
-			return function(_, ...)
-				-- upvalues: p4 (ref)
-				return p4(...)
+		local function _(Callback) --[[ Line: 213 | Named "asMethod" ]]
+			return function(_, ...) --[[ Line: 214 ]]
+				-- upvalues: Callback (copy)
+				return Callback(...)
 			end
 		end
 		
-		local function dirtyKey(p4)
-			-- upvalues: var4 (ref), boolean (copy)
-			local var7 = var4:get(p4)
+		local function dirtyKey(p3) --[[ Line: 219 ]]
+			-- upvalues: NewCache (copy), Boolean (upval)
+			local GetResult = NewCache:get(p3)
 			
-			if boolean.toJSBoolean(var7) then
-				var7:setDirty()
+			if Boolean.toJSBoolean(GetResult) then
+				GetResult:setDirty()
 			end
 		end
 		
-		function tbl.dirtyKey(_, ...)
-			-- upvalues: dirtyKey (ref)
+		function self:dirtyKey(...) --[[ Line: 214 ]]
+			-- upvalues: dirtyKey (copy)
 			return dirtyKey(...)
 		end
 		
-		local var7 = function(...)
-			-- upvalues: makeCacheKey (ref), var4 (ref), boolean (copy)
-			local var8 = var4:get(makeCacheKey(nil, ...))
+		local function v22(...) --[[ Line: 228 ]]
+			-- upvalues: MakeCacheKeyFunction (copy), NewCache (copy), Boolean (upval)
+			local GetResult = NewCache:get((MakeCacheKeyFunction(nil, ...)))
 			
-			if boolean.toJSBoolean(var8) then
-				var8:setDirty()
+			if Boolean.toJSBoolean(GetResult) then
+				GetResult:setDirty()
 			end
 		end
 		
-		function tbl.dirty(_, ...)
-			-- upvalues: var7 (ref)
-			return var7(...)
+		function self:dirty(...) --[[ Line: 214 ]]
+			-- upvalues: v22 (copy)
+			return v22(...)
 		end
 		
-		local function peekKey(p4)
-			-- upvalues: var4 (ref), boolean (copy)
-			local var8 = var4:get(p4)
+		local function peekKey(p3) --[[ Line: 232 ]]
+			-- upvalues: NewCache (copy), Boolean (upval)
+			local GetResult = NewCache:get(p3)
 			
-			if boolean.toJSBoolean(var8) then
-				return var8:peek()
-			end
+			if not Boolean.toJSBoolean(GetResult) then return end
+			return GetResult:peek()
 		end
 		
-		function tbl.peekKey(_, ...)
-			-- upvalues: peekKey (ref)
+		function self:peekKey(...) --[[ Line: 214 ]]
+			-- upvalues: peekKey (copy)
 			return peekKey(...)
 		end
 		
-		local var8 = function(...)
-			-- upvalues: peekKey (ref), makeCacheKey (ref)
-			return peekKey(makeCacheKey(nil, ...))
+		local function v24(...) --[[ Line: 242 ]]
+			-- upvalues: peekKey (copy), MakeCacheKeyFunction (copy)
+			return peekKey(MakeCacheKeyFunction(nil, ...))
 		end
 		
-		function tbl.peek(_, ...)
-			-- upvalues: var8 (ref)
-			return var8(...)
+		function self:peek(...) --[[ Line: 214 ]]
+			-- upvalues: v24 (copy)
+			return v24(...)
 		end
 		
-		local function forgetKey(p4)
-			-- upvalues: var4 (ref)
-			return var4:delete(p4)
+		local function forgetKey(p3) --[[ Line: 246 ]]
+			-- upvalues: NewCache (copy)
+			return NewCache:delete(p3)
 		end
 		
-		function tbl.forgetKey(_, ...)
-			-- upvalues: forgetKey (ref)
+		function self:forgetKey(...) --[[ Line: 214 ]]
+			-- upvalues: forgetKey (copy)
 			return forgetKey(...)
 		end
 		
-		local var9 = function(...)
-			-- upvalues: forgetKey (ref), makeCacheKey (ref)
-			return forgetKey(makeCacheKey(nil, ...))
+		local function v26(...) --[[ Line: 252 ]]
+			-- upvalues: forgetKey (copy), MakeCacheKeyFunction (copy)
+			return forgetKey(MakeCacheKeyFunction(nil, ...))
 		end
 		
-		function tbl.forget(_, ...)
-			-- upvalues: var9 (ref)
-			return var9(...)
+		function self:forget(...) --[[ Line: 214 ]]
+			-- upvalues: v26 (copy)
+			return v26(...)
 		end
 		
-		tbl.makeCacheKey = makeCacheKey
+		self.makeCacheKey = MakeCacheKeyFunction
 		
-		if boolean.toJSBoolean(keyArgs) then
-			local var10 = function(...)
-				-- upvalues: makeCacheKey (ref), keyArgs (ref)
-				return makeCacheKey(nil, table.unpack(keyArgs(...)))
+		if Boolean.toJSBoolean(KeyArgsFunction) then
+			local function v27(...) --[[ Line: 260 ]]
+				-- upvalues: MakeCacheKeyFunction (copy), KeyArgsFunction (copy)
+				return MakeCacheKeyFunction(nil, table.unpack(KeyArgsFunction(...)))
 			end
 			
-			function tbl.getKey(_, ...)
-				-- upvalues: var10 (ref)
-				return var10(...)
+			function self:getKey(...) --[[ Line: 214 ]]
+				-- upvalues: v27 (copy)
+				return v27(...)
 			end
 		else
-			tbl.getKey = makeCacheKey
+			self.getKey = MakeCacheKeyFunction
 		end
-		return object.freeze(tbl)
+		return Object.freeze(self)
 	end
-end
-
-return t
+}

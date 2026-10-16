@@ -1,16 +1,16 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local colorModeModule = require(foundation.Enums.ColorMode)
-local flagsModule = require(foundation.Utility.Flags)
-local rbxDesignFoundationsModule = require(parent.RbxDesignFoundations)
-local themeNameModule = require(foundation.Enums.ThemeName)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ColorModeModule = require(Foundation.Enums.ColorMode)
+local FlagsModule = require(Foundation.Utility.Flags)
+local RbxDesignFoundationsModule = require(Parent.RbxDesignFoundations)
+local ThemeNameModule = require(Foundation.Enums.ThemeName)
 
 return {
-	getGenerator = function(p1, p2)
-		-- upvalues: flagsModule (ref), rbxDesignFoundationsModule (ref), parent (ref), themeNameModule (ref), colorModeModule (ref)
-		local var1 = if flagsModule.FoundationFontFaceMigration then rbxDesignFoundationsModule.themes else require(parent.RbxDesignFoundationsV4).themes
-		local var2 = (var1[p1] or var1[themeNameModule.Default])()
+	getGenerator = function(p1, Light) --[[ Line: 12 ]]
+		-- upvalues: FlagsModule (copy), RbxDesignFoundationsModule (copy), Parent (copy), ThemeNameModule (copy), ColorModeModule (copy)
+		local Themes = if FlagsModule.FoundationFontFaceMigration then RbxDesignFoundationsModule.themes else require(Parent.RbxDesignFoundationsV4).themes
+		local v1 = (Themes[p1] or Themes[ThemeNameModule.Default])()
 		
-		return if p2 == colorModeModule.Light then var2.Light else var2.Dark
+		return if Light == ColorModeModule.Light then v1.Light else v1.Dark
 	end
 }

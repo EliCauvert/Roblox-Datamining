@@ -1,312 +1,330 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local navigationActionsModule = require(parent.NavigationActions)
-local backBehaviorModule = require(parent.BackBehavior)
-local getScreenForRouteNameModule = require(script.Parent.getScreenForRouteName)
-local createConfigGetterModule = require(script.Parent.createConfigGetter)
-local validateRouteConfigMapModule = require(script.Parent.validateRouteConfigMap)
-local validateRouteConfigArrayModule = require(script.Parent.validateRouteConfigArray)
-local invariantModule = require(parent.utils.invariant)
-local stackActionsModule = require(parent.routers.StackActions)
-local switchActionsModule = require(script.Parent.SwitchActions)
-local createPathParser = require(script.Parent.pathUtils).createPathParser
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local NavigationActionsModule = require(Parent.NavigationActions)
+local BackBehaviorModule = require(Parent.BackBehavior)
+local GetScreenForRouteNameModule = require(script.Parent.getScreenForRouteName)
+local CreateConfigGetterModule = require(script.Parent.createConfigGetter)
+local ValidateRouteConfigMapModule = require(script.Parent.validateRouteConfigMap)
+local ValidateRouteConfigArrayModule = require(script.Parent.validateRouteConfigArray)
+local InvariantModule = require(Parent.utils.invariant)
+local StackActionsModule = require(Parent.routers.StackActions)
+local SwitchActionsModule = require(script.Parent.SwitchActions)
+local CreatePathParserFunction = require(script.Parent.pathUtils).createPathParser
 
-local function defaultActionCreators()
+local function defaultActionCreators() --[[ Line: 20 ]]
 	return {}
 end
 
-local function mapToRouteName(p1)
-	return next(p1)
+local function mapToRouteName(p1) --[[ Line: 24 ]]
+	return (next(p1))
 end
 
-local function foldToRoutes(p1, p2)
-	local var1, var2 = next(p2)
-	p1[var1] = var2
+local function foldToRoutes(p1, p2) --[[ Line: 29 ]]
+	local Key, Value = next(p2)
+	p1[Key] = Value
 	
 	return p1
 end
 
-return function(p1, p2)
-	-- upvalues: validateRouteConfigArrayModule (ref), validateRouteConfigMapModule (ref), array (ref), foldToRoutes (ref), mapToRouteName (ref), defaultActionCreators (ref), backBehaviorModule (ref), getScreenForRouteNameModule (ref), object (ref), createPathParser (ref), navigationActionsModule (ref), createConfigGetterModule (ref), switchActionsModule (ref), stackActionsModule (ref), invariantModule (ref)
-	validateRouteConfigArrayModule(p1)
-	p2 = p2 or {}
-	local var1 = validateRouteConfigMapModule(array.reduce(p1, foldToRoutes, {}))
-	local order = p2.order or array.map(p1, mapToRouteName)
-	local getCustomActionCreators = p2.getCustomActionCreators or defaultActionCreators
-	local initialRouteParams = p2.initialRouteParams
-	local initialRouteName = p2.initialRouteName or order[1]
-	local backBehavior = p2.backBehavior or backBehaviorModule.None
-	local var2 = if p2.resetOnBlur ~= nil then p2.resetOnBlur else true
-	local var3 = array.indexOf(order, initialRouteName)
+return function(p1, p2) --[[ Line: 35 ]]
+	-- upvalues: ValidateRouteConfigArrayModule (copy), ValidateRouteConfigMapModule (copy), Array (copy), foldToRoutes (copy), mapToRouteName (copy), defaultActionCreators (copy), BackBehaviorModule (copy), GetScreenForRouteNameModule (copy), Object (copy), CreatePathParserFunction (copy), NavigationActionsModule (copy), CreateConfigGetterModule (copy), SwitchActionsModule (copy), StackActionsModule (copy), InvariantModule (copy)
+	ValidateRouteConfigArrayModule(p1)
+	local P4 = p2 or {}
+	local ValidateRouteConfigMapModuleResult = ValidateRouteConfigMapModule(Array.reduce(p1, foldToRoutes, {}))
+	local Order = P4.order or Array.map(p1, mapToRouteName)
+	local GetCustomActionCreators = P4.getCustomActionCreators or defaultActionCreators
+	local InitialRouteParams = P4.initialRouteParams
+	local InitialRouteName = P4.initialRouteName or Order[1]
+	local BackBehavior = P4.backBehavior or BackBehaviorModule.None
+	local NoResetOnBlur = P4.resetOnBlur == nil or P4.resetOnBlur
+	local IndexOfResult: number = Array.indexOf(Order, InitialRouteName)
 	
-	if var3 < 1 then
-		error(("Invalid initialRouteName '%s'. Should be one of %s"):format(initialRouteName, table.concat(array.map(order, function(p3)
+	if IndexOfResult < 1 then
+		error(("Invalid initialRouteName '%s'. Should be one of %s"):format(InitialRouteName, (table.concat(Array.map(Order, function(p3): string --[[ Line: 61 ]]
 			return ("\"%s\""):format(p3)
-		end), ", ")), 2)
+		end), ", "))), 2)
 	end
-	local t = {}
+	local ChildRouters = {}
 	
-	for i, v in order do
-		local getNextState = getScreenForRouteNameModule(var1, v)
+	for _, value in Order do
+		local ScreenForRouteNameModule = GetScreenForRouteNameModule(ValidateRouteConfigMapModuleResult, value)
 		
-		if type(getNextState) == "table" and getNextState.router then
-			t[v] = getNextState.router
+		if type(ScreenForRouteNameModule) == "table" and ScreenForRouteNameModule.router then
+			ChildRouters[value] = ScreenForRouteNameModule.router
 		else
-			t[v] = false
+			ChildRouters[value] = false
 		end
 	end
-	local function _(p3, p4)
-		-- upvalues: var1 (ref), object (copy)
-		local var4 = var1[p3]
+	local function _(p3, p4) --[[ Line: 80 | Named "getParamsForRoute" ]]
+		-- upvalues: ValidateRouteConfigMapModuleResult (copy), Object (upval)
+		local ValidateRouteConfigMapModuleResultEntry = ValidateRouteConfigMapModuleResult[p3]
 		
-		return if not (type(var4) ~= "table" or not var4.params) then if p4 then object.assign(table.clone(var4.params), p4) else table.clone(var4.params) else p4
+		return if type(ValidateRouteConfigMapModuleResultEntry) == "table" and ValidateRouteConfigMapModuleResultEntry.params then if p4 then Object.assign(table.clone(ValidateRouteConfigMapModuleResultEntry.params), p4) else table.clone(ValidateRouteConfigMapModuleResultEntry.params) else p4
 	end
 	
-	local var4 = createPathParser(t, var1, p2)
-	local getPathAndParamsForRoute = var4.getPathAndParamsForRoute
-	local getActionForPathAndParams = var4.getActionForPathAndParams
+	local PathParser = CreatePathParserFunction(ChildRouters, ValidateRouteConfigMapModuleResult, P4)
+	local GetPathAndParamsForRouteFunction = PathParser.getPathAndParamsForRoute
+	local GetActionForPathAndParamsFunction = PathParser.getActionForPathAndParams
 	
-	local function resetChildRoute(value)
-		-- upvalues: initialRouteName (ref), initialRouteParams (ref), var1 (ref), object (copy), t (ref), navigationActionsModule (copy)
-		local var5 = if value == initialRouteName then initialRouteParams else nil
-		local var6 = var1[value]
-		local var7 = if type(var6) == "table" and var6.params then if var5 then object.assign(table.clone(var6.params), var5) else table.clone(var6.params) else var5
-		var6 = t[value]
+	local function resetChildRoute(RouteName) --[[ Line: 95 ]]
+		-- upvalues: InitialRouteName (copy), InitialRouteParams (copy), ValidateRouteConfigMapModuleResult (copy), Object (upval), ChildRouters (copy), NavigationActionsModule (upval)
+		local InitialRouteParams1 = if RouteName == InitialRouteName then InitialRouteParams else nil
+		local ValidateRouteConfigMapModuleResultEntry = ValidateRouteConfigMapModuleResult[RouteName]
+		local AssignResult = if type(ValidateRouteConfigMapModuleResultEntry) == "table" and ValidateRouteConfigMapModuleResultEntry.params then if InitialRouteParams1 then Object.assign(table.clone(ValidateRouteConfigMapModuleResultEntry.params), InitialRouteParams1) else table.clone(ValidateRouteConfigMapModuleResultEntry.params) else InitialRouteParams1
+		local ChildRouter = ChildRouters[RouteName]
 		
-		return if var6 then object.assign(table.clone(var6.getStateForAction(navigationActionsModule.init())), { key = value, routeName = value, params = var7 }) else { key = value, routeName = value, params = var7 }
+		return if ChildRouter then Object.assign(table.clone(ChildRouter.getStateForAction((NavigationActionsModule.init()))), {
+			key = RouteName,
+			routeName = RouteName,
+			params = AssignResult
+		}) else {
+			key = RouteName,
+			routeName = RouteName,
+			params = AssignResult
+		}
 	end
 	
-	local function getNextState(p3, p4, p5)
-		-- upvalues: var2 (write), resetChildRoute (ref), object (copy), backBehavior (ref), backBehaviorModule (copy), navigationActionsModule (copy), array (copy)
-		local var5 = p5
+	local function getNextState(p3, p4, Tbl) --[[ Line: 118 ]]
+		-- upvalues: NoResetOnBlur (ref), resetChildRoute (copy), Object (upval), BackBehavior (copy), BackBehaviorModule (upval), NavigationActionsModule (upval), Array (upval)
+		local Tbl1 = Tbl
 		
-		if p4 and p5 and (p4.index ~= p5.index and var2) then
-			local cloned = table.clone(p5.routes)
-			cloned[p4.index] = resetChildRoute(p4.routes[p4.index].routeName)
-			var5 = object.assign(table.clone(p5), { routes = cloned })
+		if p4 and Tbl and p4.index ~= Tbl.index and NoResetOnBlur then
+			local Copy = table.clone(Tbl.routes)
+			Copy[p4.index] = resetChildRoute(p4.routes[p4.index].routeName)
+			Tbl1 = Object.assign(table.clone(Tbl), { routes = Copy })
 		end
-		if backBehavior ~= backBehaviorModule.History or p4 and var5 and var5.index == p4.index then
-			return var5
+		if BackBehavior ~= BackBehaviorModule.History or p4 and Tbl1 and Tbl1.index == p4.index then
+			return Tbl1
 		end
-		local var6 = if p4 then p4.routeKeyHistory else {}
+		local RouteKeyHistory = if p4 then p4.routeKeyHistory else {}
 		
-		if p3.type == navigationActionsModule.Navigate then
-			local key = var5.routes[var5.index].key
-			var6 = array.filter(var6, function(p6)
-				-- upvalues: key (ref)
-				return p6 ~= key
+		if p3.type == NavigationActionsModule.Navigate then
+			local Key = Tbl1.routes[Tbl1.index].key
+			RouteKeyHistory = Array.filter(RouteKeyHistory, function(Key1): boolean --[[ Line: 136 ]]
+				-- upvalues: Key (copy)
+				return Key1 ~= Key
 			end)
-			table.insert(var6, key)
-		elseif p3.type == navigationActionsModule.Back then
-			var6 = table.clone(var6)
-			table.remove(var6, #var6)
+			table.insert(RouteKeyHistory, Key)
+		elseif p3.type == NavigationActionsModule.Back then
+			RouteKeyHistory = table.clone(RouteKeyHistory)
+			table.remove(RouteKeyHistory, #RouteKeyHistory)
 		end
-		return object.assign(table.clone(var5), { routeKeyHistory = var6 })
+		return Object.assign(table.clone(Tbl1), { routeKeyHistory = RouteKeyHistory })
 	end
 	
-	local function getInitialState()
-		-- upvalues: array (copy), order (ref), resetChildRoute (ref), var3 (ref), backBehavior (ref), backBehaviorModule (copy)
-		local var5 = array.map(order, resetChildRoute)
-		local t = { routes = var5, index = var3 }
+	local function getInitialState() --[[ Line: 148 ]]
+		-- upvalues: Array (upval), Order (copy), resetChildRoute (copy), IndexOfResult (copy), BackBehavior (copy), BackBehaviorModule (upval)
+		local MapResult = Array.map(Order, resetChildRoute)
+		local config = { routes = MapResult, index = IndexOfResult }
 		
-		if backBehavior == backBehaviorModule.History then
-			t.routeKeyHistory = { var5[var3].key }
+		if BackBehavior == BackBehaviorModule.History then
+			config.routeKeyHistory = { MapResult[IndexOfResult].key }
 		end
-		return t
+		return config
 	end
 	
 	return {
-		childRouters = t,
-		getActionCreators = function(p3, p4)
-			-- upvalues: getCustomActionCreators (ref)
-			return getCustomActionCreators(p3, p4)
+		childRouters = ChildRouters,
+		getActionCreators = function(p3, p4) --[[ Line: 165 ]]
+			-- upvalues: GetCustomActionCreators (copy)
+			return GetCustomActionCreators(p3, p4)
 		end,
-		getScreenOptions = createConfigGetterModule(var1, p2.defaultNavigationOptions),
-		getStateForAction = function(p3, p4)
-			-- upvalues: getInitialState (ref), navigationActionsModule (copy), array (copy), initialRouteName (ref), initialRouteParams (ref), object (copy), switchActionsModule (copy), getNextState (ref), t (ref), order (ref), backBehavior (ref), backBehaviorModule (copy), var3 (ref), stackActionsModule (copy)
-			local var5 = if p4 then table.clone(p4) else nil
-			p4 = p4 or getInitialState()
-			local index = p4.index
+		getScreenOptions = CreateConfigGetterModule(ValidateRouteConfigMapModuleResult, P4.defaultNavigationOptions),
+		getStateForAction = function(Action, Tbl) --[[ Line: 171 ]]
+			-- upvalues: getInitialState (copy), NavigationActionsModule (upval), Array (upval), InitialRouteName (copy), InitialRouteParams (copy), Object (upval), SwitchActionsModule (upval), getNextState (copy), ChildRouters (copy), Order (copy), BackBehavior (copy), BackBehaviorModule (upval), IndexOfResult (copy), StackActionsModule (upval)
+			local Copy = if Tbl then table.clone(Tbl) else nil
+			local Tbl2 = Tbl or getInitialState()
+			local Index = Tbl2.index
 			
-			if p3.type == navigationActionsModule.Init then
-				local params = p3.params
+			if Action.type == NavigationActionsModule.Init then
+				local Params = Action.params
 				
-				if params then
-					p4.routes = array.map(p4.routes, function(p5)
-						-- upvalues: initialRouteName (copy), initialRouteParams (copy), object (copy), params (ref)
-						local var6 = if p5.routeName == initialRouteName then initialRouteParams else {}
+				if Params then
+					Tbl2.routes = Array.map(Tbl2.routes, function(Tbl) --[[ Line: 181 ]]
+						-- upvalues: InitialRouteName (upval), InitialRouteParams (upval), Object (upval), Params (copy)
+						local InitialRouteParams1 = Tbl.routeName == InitialRouteName and InitialRouteParams or {}
 						
-						return object.assign(table.clone(p5), {
-							params = if p5.params then object.assign(table.clone(p5.params), params, var6) else object.assign(table.clone(params), var6)
+						return Object.assign(table.clone(Tbl), {
+							params = if Tbl.params then Object.assign(table.clone(Tbl.params), Params, InitialRouteParams1) else Object.assign(table.clone(Params), InitialRouteParams1)
 						})
 					end)
 				end
 			end
-			if p3.type == switchActionsModule.JumpTo and (p3.key == nil or p3.key == p4.key) then
-				local params = p3.params
-				local var6 = array.findIndex(p4.routes, function(p5)
-					-- upvalues: p3 (ref)
-					return p5.routeName == p3.routeName
+			if Action.type == SwitchActionsModule.JumpTo and (Action.key == nil or Action.key == Tbl2.key) then
+				local Params1 = Action.params
+				local Index1: number = Array.findIndex(Tbl2.routes, function(p3): boolean --[[ Line: 194 ]]
+					-- upvalues: Action (copy)
+					return p3.routeName == Action.routeName
 				end)
 				
-				if var6 < 1 then
-					error(("There is no route named '%s' in the navigator with the key '%s'.\n"):format(p3.routeName, p3.key) .. "Must be one of: " .. table.concat(array.map(p4.routes, function(p5)
-						return p5.routeName
+				if Index1 < 1 then
+					error(("There is no route named '%s' in the navigator with the key '%s'.\n"):format(Action.routeName, Action.key) .. "Must be one of: " .. table.concat(Array.map(Tbl2.routes, function(p3) --[[ Line: 206 ]]
+						return p3.routeName
 					end), ","))
 				end
-				return if params then p4.routes.map(function(p5, p6)
-					-- upvalues: var6 (ref), object (copy), params (ref)
-					return if p6 == var6 then object.assign(table.clone(p5), { params = object.assign(table.clone(p5.params), params) }) else p5
-				end) else getNextState(p3, var5, object.assign(table.clone(p4), { routes = p4.routes, index = var6 }))
+				local Routes = Tbl2.routes
+				
+				return if Params1 then Tbl2.routes.map(function(Tbl, Index) --[[ Line: 216 ]]
+					-- upvalues: Index1 (copy), Object (upval), Params1 (copy)
+					return if Index == Index1 then Object.assign(table.clone(Tbl), { params = Object.assign(table.clone(Tbl.params), Params1) }) else Tbl
+				end) else getNextState(Action, Copy, Object.assign(table.clone(Tbl2), { routes = Routes, index = Index1 }))
 			else
-				local index_1 = p4.routes[p4.index]
-				local index_2 = t[order[p4.index]]
+				local Route = Tbl2.routes[Tbl2.index]
+				local ChildRouter = ChildRouters[Order[Tbl2.index]]
 				
-				if index_2 then
-					local stateForAction = index_2.getStateForAction(p3, index_1)
+				if ChildRouter then
+					local StateForAction = ChildRouter.getStateForAction(Action, Route)
 					
-					if not stateForAction and p4 then
+					if not StateForAction and Tbl then
 						return nil
-					elseif stateForAction and stateForAction ~= index_1 then
-						local cloned = table.clone(p4.routes)
-						cloned[p4.index] = stateForAction
+					end
+					if StateForAction and StateForAction ~= Route then
+						local Copy1 = table.clone(Tbl2.routes)
+						Copy1[Tbl2.index] = StateForAction
 						
-						return getNextState(p3, var5, object.assign(table.clone(p4), { routes = cloned }))
+						return getNextState(Action, Copy, Object.assign(table.clone(Tbl2), { routes = Copy1 }))
 					end
 				end
-				local var7 = if p3.key ~= nil then p3.key == index_1.key else true
+				local NoKey: boolean = Action.key == nil or Action.key == Route.key
 				
-				if p3.type == navigationActionsModule.Back then
-					if var7 and backBehavior == backBehaviorModule.InitialRoute then
-						index = var3
-					elseif var7 and backBehavior == backBehaviorModule.Order then
-						index = math.max(1, index - 1)
-					elseif var7 and backBehavior == backBehaviorModule.History and #p4.routeKeyHistory > 1 then
-						index = array.indexOf(order, p4.routeKeyHistory[#p4.routeKeyHistory - 1])
+				if Action.type == NavigationActionsModule.Back then
+					if NoKey and BackBehavior == BackBehaviorModule.InitialRoute then
+						Index = IndexOfResult
+					elseif NoKey and BackBehavior == BackBehaviorModule.Order then
+						Index = math.max(1, Index - 1)
+					elseif NoKey and BackBehavior == BackBehaviorModule.History and #Tbl2.routeKeyHistory > 1 then
+						Index = Array.indexOf(Order, Tbl2.routeKeyHistory[#Tbl2.routeKeyHistory - 1])
 					end
 				end
-				local var8 = false
+				local HasFindResult = false
 				
-				if p3.type == navigationActionsModule.Navigate then
-					var8 = array.find(order, function(p5, p6)
-						-- upvalues: p3 (ref), index (write)
-						if p5 == p3.routeName then
-							index = p6
+				if Action.type == NavigationActionsModule.Navigate then
+					HasFindResult = Array.find(Order, function(RouteName, p3): boolean --[[ Line: 274 ]]
+						-- upvalues: Action (copy), Index (ref)
+						if RouteName == Action.routeName then
+							Index = p3
+							
+							return true
+						else
+							return false
+						end
+					end) ~= nil
+					
+					if HasFindResult then
+						local Route1 = Tbl2.routes[Index]
+						local ChildRouter1 = ChildRouters[Action.routeName]
+						local Tbl1 = Route1
+						
+						if Action.action and ChildRouter1 then
+							local StateForAction = ChildRouter1.getStateForAction(Action.action, Route1)
+							
+							if StateForAction then
+								Tbl1 = StateForAction
+							end
+						end
+						if Action.params then
+							Tbl1 = Object.assign(table.clone(Tbl1), {
+								params = if Action.params == Object.None then Object.None elseif Tbl1.params then Object.assign(table.clone(Tbl1.params), Action.params) else table.clone(Action.params)
+							})
+						end
+						if Tbl1 ~= Route1 then
+							local Copy2 = table.clone(Tbl2.routes)
+							Copy2[Index] = Tbl1
+							
+							return getNextState(Action, Copy, (Object.assign(table.clone(Tbl2), { routes = Copy2, index = Index })))
+						end
+						if Tbl1 == Route1 and Tbl2.index == Index and Copy then
+							return nil
+						end
+					end
+				end
+				if Action.type == NavigationActionsModule.SetParams then
+					local Key = Action.key
+					local Index2: number = Array.findIndex(Tbl2.routes, function(p3): boolean --[[ Line: 320 ]]
+						-- upvalues: Key (copy)
+						return p3.key == Key
+					end)
+					
+					if Index2 > 0 then
+						local Route2 = Tbl2.routes[Index2]
+						local Copy3 = table.clone(Tbl2.routes)
+						Copy3[Index2] = Object.assign(table.clone(Route2), {
+							params = if Action.params == Object.None then Object.None elseif Route2.params and Action.params then Object.assign(table.clone(Route2.params), Action.params) elseif Route2.params then table.clone(Route2.params) elseif Action.params then table.clone(Action.params) else {}
+						})
+						
+						return getNextState(Action, Copy, Object.assign(table.clone(Tbl2), { routes = Copy3 }))
+					end
+				end
+				if Index ~= Tbl2.index then
+					return getNextState(Action, Copy, Object.assign(table.clone(Tbl2), { index = Index }))
+				end
+				if HasFindResult and not Tbl then
+					return Tbl2
+				end
+				if HasFindResult then
+					return table.clone(Tbl2)
+				end
+				if not (Action.type == NavigationActionsModule.Back or (Action.type == StackActionsModule.Pop or Action.type == StackActionsModule.PopToTop)) or Action.type == NavigationActionsModule.Back and Action.key ~= nil then
+					local Index3 = Tbl2.index
+					local Routes = Tbl2.routes
+					Array.find(Order, function(p3, Index): boolean --[[ Line: 363 ]]
+						-- upvalues: ChildRouters (upval), Index3 (ref), Routes (ref), Action (copy)
+						local ChildRouter = ChildRouters[p3]
+						
+						if Index == Index3 then
+							return false
+						end
+						local Route = Routes[Index]
+						
+						if ChildRouter then
+							Route = ChildRouter.getStateForAction(Action, Route)
+						end
+						if not Route then
+							Index3 = Index
+							
+							return true
+						elseif Route == Routes[Index] then
+							return false
+						else
+							Routes = table.clone(Routes)
+							Routes[Index] = Route
+							Index3 = Index
 							
 							return true
 						end
-						return false
-					end) ~= nil
+					end)
 					
-					if var8 then
-						local var9 = p4.routes[index]
-						local routeName = t[p3.routeName]
-						local var10 = var9
-						
-						if p3.action and routeName then
-							local var11
-							local stateForAction = routeName.getStateForAction(p3.action, var9)
-							
-							if stateForAction then
-								var10 = stateForAction
-							end
-						end
-						if p3.params then
-							var10 = object.assign(table.clone(var10), {
-								params = if p3.params == object.None then object.None elseif var10.params then object.assign(table.clone(var10.params), p3.params) else table.clone(p3.params)
-							})
-						end
-						if var10 ~= var9 then
-							local cloned = table.clone(p4.routes)
-							cloned[index] = var10
-							
-							return getNextState(p3, var5, object.assign(table.clone(p4), { routes = cloned, index = index }))
-						elseif var10 == var9 and p4.index == index and var5 then
-							return nil
-						elseif p3.type == navigationActionsModule.SetParams then
-							local key = p3.key
-							local var12 = array.findIndex(p4.routes, function(p5)
-								-- upvalues: key (ref)
-								return p5.key == key
-							end)
-							
-							if var12 > 0 then
-								var11 = p4.routes[var12]
-								local none = object.None
-								
-								if p3.params ~= object.None then
-									none = if var11.params and p3.params then object.assign(table.clone(var11.params), p3.params) elseif var11.params then table.clone(var11.params) elseif p3.params then table.clone(p3.params) else {}
-								end
-								local cloned = table.clone(p4.routes)
-								cloned[var12] = object.assign(table.clone(var11), { params = none })
-								
-								return getNextState(p3, var5, object.assign(table.clone(p4), { routes = cloned }))
-							elseif index ~= p4.index then
-								return getNextState(p3, var5, object.assign(table.clone(p4), { index = index }))
-							elseif var8 and not p4 then
-								return p4
-							elseif var8 then
-								return table.clone(p4)
-							elseif not (if p3.type ~= navigationActionsModule.Back then if p3.type ~= stackActionsModule.Pop then p3.type == stackActionsModule.PopToTop else true else true) or (p3.type == navigationActionsModule.Back and p3.key ~= nil) then
-								var11 = p4.index
-								local routes = p4.routes
-								array.find(order, function(p5, p6)
-									-- upvalues: t (copy), var11 (write), routes (write), p3 (ref)
-									local var13 = t[p5]
-									
-									if p6 == var11 then
-										return false
-									end
-									local var14 = routes[p6]
-									
-									if var13 then
-										var14 = var13.getStateForAction(p3, var14)
-									end
-									if not var14 then
-										var11 = p6
-										
-										return true
-									elseif var14 == routes[p6] then
-										return false
-									end
-									routes = table.clone(routes)
-									routes[p6] = var14
-									var11 = p6
-									
-									return true
-								end)
-								
-								if p3.preserveFocus then
-									var11 = p4.index
-								end
-								return if var11 == p4.index and routes == p4.routes then p4 else getNextState(p3, var5, object.assign(table.clone(p4), { index = var11, routes = routes }))
-							end
-						end
+					if Action.preserveFocus then
+						Index3 = Tbl2.index
+					end
+					if Index3 ~= Tbl2.index or Routes ~= Tbl2.routes then
+						return getNextState(Action, Copy, Object.assign(table.clone(Tbl2), { index = Index3, routes = Routes }))
 					end
 				end
+				return Tbl2
 			end
 		end,
-		getComponentForState = function(p3)
-			-- upvalues: invariantModule (copy), t (ref), getScreenForRouteNameModule (copy), var1 (ref)
-			local routeName = (p3.routes[p3.index] or {}).routeName
-			invariantModule(routeName, "There is no route defined for index '%d'. Check that you passed in a navigation state with a valid tab/screen index.", p3.index)
-			local var5 = t[routeName]
+		getComponentForState = function(Route) --[[ Line: 410 ]]
+			-- upvalues: InvariantModule (upval), ChildRouters (copy), GetScreenForRouteNameModule (upval), ValidateRouteConfigMapModuleResult (copy)
+			local RouteName = (Route.routes[Route.index] or {}).routeName
+			InvariantModule(RouteName, "There is no route defined for index '%d'. Check that you passed in a navigation state with a valid tab/screen index.", Route.index)
+			local ChildRouter = ChildRouters[RouteName]
 			
-			return if var5 then var5.getComponentForState(p3.routes[p3.index]) else getScreenForRouteNameModule(var1, routeName)
+			return if ChildRouter then ChildRouter.getComponentForState(Route.routes[Route.index]) else GetScreenForRouteNameModule(ValidateRouteConfigMapModuleResult, RouteName)
 		end,
-		getComponentForRouteName = function(p3)
-			-- upvalues: getScreenForRouteNameModule (copy), var1 (ref)
-			return getScreenForRouteNameModule(var1, p3)
+		getComponentForRouteName = function(p3) --[[ Line: 430 ]]
+			-- upvalues: GetScreenForRouteNameModule (upval), ValidateRouteConfigMapModuleResult (copy)
+			return GetScreenForRouteNameModule(ValidateRouteConfigMapModuleResult, p3)
 		end,
-		getPathAndParamsForState = function(p3)
-			-- upvalues: getPathAndParamsForRoute (ref)
-			return getPathAndParamsForRoute(p3.routes[p3.index])
+		getPathAndParamsForState = function(p3) --[[ Line: 434 ]]
+			-- upvalues: GetPathAndParamsForRouteFunction (copy)
+			return GetPathAndParamsForRouteFunction(p3.routes[p3.index])
 		end,
-		getActionForPathAndParams = function(p3, p4)
-			-- upvalues: getActionForPathAndParams (ref)
-			return getActionForPathAndParams(p3, p4)
+		getActionForPathAndParams = function(p3, p4) --[[ Line: 439 ]]
+			-- upvalues: GetActionForPathAndParamsFunction (copy)
+			return GetActionForPathAndParamsFunction(p3, p4)
 		end
 	}
 end

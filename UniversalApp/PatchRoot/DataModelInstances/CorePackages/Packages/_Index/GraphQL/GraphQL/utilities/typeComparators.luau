@@ -1,46 +1,30 @@
-﻿local parent = script.Parent.Parent
-local array = require(parent.Parent.LuauPolyfill).Array
-local definitionModule = require(parent.type.definition)
-local isInterfaceType = definitionModule.isInterfaceType
-local isObjectType = definitionModule.isObjectType
-local isListType = definitionModule.isListType
-local isNonNullType = definitionModule.isNonNullType
-local isAbstractType = definitionModule.isAbstractType
+﻿local Parent = script.Parent.Parent
+local Array = require(Parent.Parent.LuauPolyfill).Array
+local DefinitionModule = require(Parent.type.definition)
+local IsInterfaceTypeFunction = DefinitionModule.isInterfaceType
+local IsObjectTypeFunction = DefinitionModule.isObjectType
+local IsListTypeFunction = DefinitionModule.isListType
+local IsNonNullTypeFunction = DefinitionModule.isNonNullType
+local IsAbstractTypeFunction = DefinitionModule.isAbstractType
 
-local function isEqualType(p1, p2)
-	-- upvalues: isNonNullType (ref), isEqualType (ref), isListType (ref)
-	return p1 == p2 or (if isNonNullType(p1) and isNonNullType(p2) then isEqualType(p1.ofType, p2.ofType) elseif isListType(p1) and isListType(p2) then isEqualType(p1.ofType, p2.ofType) else false)
+local function isEqualType(OfType, OfType1) --[[ Line: 24 ]]
+	-- upvalues: IsNonNullTypeFunction (copy), isEqualType (copy), IsListTypeFunction (copy)
+	return OfType == OfType1 or (if IsNonNullTypeFunction(OfType) and IsNonNullTypeFunction(OfType1) then isEqualType(OfType.ofType, OfType1.ofType) elseif IsListTypeFunction(OfType) and IsListTypeFunction(OfType1) then isEqualType(OfType.ofType, OfType1.ofType) else false)
 end
 
-local function isTypeSubTypeOf(p1, p2, p3)
-	-- upvalues: isNonNullType (ref), isTypeSubTypeOf (ref), isListType (ref), isAbstractType (ref), isInterfaceType (ref), isObjectType (ref)
-	if p2 == p3 then
-		return true
-	elseif isNonNullType(p3) then
-		return if isNonNullType(p2) then isTypeSubTypeOf(p1, p2.ofType, p3.ofType) else false
-	elseif isNonNullType(p2) then
-		return isTypeSubTypeOf(p1, p2.ofType, p3)
-	elseif isListType(p3) then
-		return if isListType(p2) then isTypeSubTypeOf(p1, p2.ofType, p3.ofType) else false
-	elseif isListType(p2) then
-		return false
-	end
-	local var1 = isAbstractType(p3)
-	
-	if var1 and not isInterfaceType(p2) then
-		var1 = isObjectType(p2) and p1:isSubType(p3, p2)
-	end
-	return var1
+local function isTypeSubTypeOf(p1, OfType, OfType1) --[[ Line: 48 ]]
+	-- upvalues: IsNonNullTypeFunction (copy), isTypeSubTypeOf (copy), IsListTypeFunction (copy), IsAbstractTypeFunction (copy), IsInterfaceTypeFunction (copy), IsObjectTypeFunction (copy)
+	return OfType == OfType1 or (if IsNonNullTypeFunction(OfType1) then if IsNonNullTypeFunction(OfType) then isTypeSubTypeOf(p1, OfType.ofType, OfType1.ofType) else false elseif IsNonNullTypeFunction(OfType) then isTypeSubTypeOf(p1, OfType.ofType, OfType1) elseif IsListTypeFunction(OfType1) then if IsListTypeFunction(OfType) then isTypeSubTypeOf(p1, OfType.ofType, OfType1.ofType) else false else not IsListTypeFunction(OfType) and (IsAbstractTypeFunction(OfType1) and (if IsInterfaceTypeFunction(OfType) then p1:isSubType(OfType1, OfType) else IsObjectTypeFunction(OfType) and p1:isSubType(OfType1, OfType))))
 end
 
 return {
 	isEqualType = isEqualType,
 	isTypeSubTypeOf = isTypeSubTypeOf,
-	doTypesOverlap = function(vectorA, vectorB, p1)
-		-- upvalues: isAbstractType (ref), array (ref)
-		return vectorB == p1 or (if isAbstractType(vectorB) then if isAbstractType(p1) then array.some(vectorA:getPossibleTypes(vectorB), function(p2)
-			-- upvalues: vectorA (ref), p1 (ref)
-			return vectorA:isSubType(p1, p2)
-		end) else vectorA:isSubType(vectorB, p1) elseif isAbstractType(p1) then vectorA:isSubType(p1, vectorB) else false)
+	doTypesOverlap = function(p1, p2, p3) --[[ Line: 97 ]]
+		-- upvalues: IsAbstractTypeFunction (copy), Array (copy)
+		return p2 == p3 or (if IsAbstractTypeFunction(p2) then if IsAbstractTypeFunction(p3) then Array.some(p1:getPossibleTypes(p2), function(p4) --[[ Line: 106 ]]
+			-- upvalues: p1 (copy), p3 (copy)
+			return p1:isSubType(p3, p4)
+		end) else p1:isSubType(p2, p3) elseif IsAbstractTypeFunction(p3) then p1:isSubType(p3, p2) else false)
 	end
 }

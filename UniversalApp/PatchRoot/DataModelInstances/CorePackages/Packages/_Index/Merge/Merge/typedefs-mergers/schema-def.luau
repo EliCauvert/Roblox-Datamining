@@ -1,50 +1,49 @@
-﻿local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local t = {}
-local kind = require(parent.GraphQL).Kind
-local mergeDirectives = require(script.Parent.directives).mergeDirectives
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local Kind = require(Parent.GraphQL).Kind
+local MergeDirectivesFunction = require(script.Parent.directives).mergeDirectives
 local _ = require(script.Parent["merge-typedefs_types"])
-local t_1 = {
+local config = {
 	query = "Query",
 	mutation = "Mutation",
 	subscription = "Subscription"
 }
-t.DEFAULT_OPERATION_TYPE_NAME_MAP = t_1
 
-local function mergeOperationTypes(p1, p2)
-	-- upvalues: t_1 (ref), array (ref), boolean (ref)
-	local var1 = if p1 ~= nil then {} else p1
-	local var2 = if p2 ~= nil then {} else p2
-	local t = {}
+local function mergeOperationTypes(OperationTypes, OperationTypes1) --[[ Line: 37 ]]
+	-- upvalues: config (copy), Array (copy), Boolean (copy)
+	local T = if OperationTypes == nil then {} else OperationTypes
+	local T1 = if OperationTypes1 == nil then {} else OperationTypes1
+	local List = {}
 	
-	for i, v in t_1 do
-		local var3 = array.find(var1, function(p3)
-			-- upvalues: v (ref)
-			return p3.operation == v
+	for _, Operation in config do
+		local FindResult = Array.find(T, function(p1): boolean --[[ Line: 50 ]]
+			-- upvalues: Operation (copy)
+			return p1.operation == Operation
 		end)
-		local var4 = if boolean.toJSBoolean(var3) then var3 else array.find(var2, function(p3)
-			-- upvalues: v (ref)
-			return p3.operation == v
+		local FindResult1 = Boolean.toJSBoolean(FindResult) and FindResult or Array.find(T1, function(p1): boolean --[[ Line: 54 ]]
+			-- upvalues: Operation (copy)
+			return p1.operation == Operation
 		end)
 		
-		if var4 then
-			table.insert(t, var4)
+		if FindResult1 then
+			table.insert(List, FindResult1)
 		end
 	end
-	return t
+	return List
 end
 
-function t.mergeSchemaDefs(p3, p4, p5)
-	-- upvalues: boolean (ref), kind (ref), mergeDirectives (ref), mergeOperationTypes (ref), object (ref)
-	return if boolean.toJSBoolean(p4) then {
-		kind = if p3.kind == kind.SCHEMA_DEFINITION or p4.kind == kind.SCHEMA_DEFINITION then kind.SCHEMA_DEFINITION else kind.SCHEMA_EXTENSION,
-		description = if boolean.toJSBoolean(p3.description) then p3.description else p4.description,
-		directives = mergeDirectives(p3.directives, p4.directives, p5),
-		operationTypes = mergeOperationTypes(p3.operationTypes, p4.operationTypes)
-	} elseif p5 and boolean.toJSBoolean(p5.convertExtensions) then object.assign({}, p3, { kind = kind.SCHEMA_DEFINITION }) else p3
-end
-
-return t
+return {
+	DEFAULT_OPERATION_TYPE_NAME_MAP = config,
+	mergeSchemaDefs = function(p1, p2, p3) --[[ Line: 66 ]]
+		-- upvalues: Boolean (copy), Kind (copy), MergeDirectivesFunction (copy), mergeOperationTypes (copy), Object (copy)
+		return if Boolean.toJSBoolean(p2) then {
+			kind = if p1.kind == Kind.SCHEMA_DEFINITION or p2.kind == Kind.SCHEMA_DEFINITION then Kind.SCHEMA_DEFINITION else Kind.SCHEMA_EXTENSION,
+			description = Boolean.toJSBoolean(p1.description) and p1.description or p2.description,
+			directives = MergeDirectivesFunction(p1.directives, p2.directives, p3),
+			operationTypes = mergeOperationTypes(p1.operationTypes, p2.operationTypes)
+		} elseif p3 and Boolean.toJSBoolean(p3.convertExtensions) then Object.assign({}, p1, { kind = Kind.SCHEMA_DEFINITION }) else p1
+	end
+}

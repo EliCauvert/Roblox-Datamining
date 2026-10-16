@@ -1,94 +1,75 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
-		is_playable = if p1 == nil or p1.is_playable == nil then false else p1.is_playable,
+function Module.new(p1) --[[ Line: 41 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
+		is_playable = p1 ~= nil and p1.is_playable ~= nil and p1.is_playable,
 		playability_status = if p1 == nil or p1.playability_status == nil then "" else p1.playability_status
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 48 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.is_playable then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.varint)
-		var2, var7 = protoModule.writeVarInt(var2, var3, if self.is_playable then 1 else 0)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, if self.is_playable then 1 else 0)
 	end
 	if self.playability_status ~= nil and self.playability_status ~= "" then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var4, var9 = protoModule.writeString(var4, var5, self.playability_status)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.playability_status)
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 67 ]]
+	-- upvalues: Module (copy), ProtoModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v11 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			if var7 == 1 then
-				local _ = nil
-				local var8, var9 = protoModule.readVarInt(p1, var2)
-				var2 = var9
-				var1.is_playable = var8 ~= 0
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 1 then
+				local VarInt
+				VarInt, v11 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.is_playable = VarInt ~= 0
 			else
-				local _ = nil
-				local var10, var11 = protoModule.readVarInt(p1, var2)
-				local _ = var10
-				var2 = var11
+				local _
+				_, v11 = ProtoModule.readVarInt(Buf, v1)
 			end
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 2 then
-				local _ = nil
-				local var12, var13 = protoModule.readBuffer(p1, var2)
-				var2 = var13
-				var1.playability_status = buffer.tostring(var12)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 2 then
+				local Buffer1
+				Buffer1, v11 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.playability_status = buffer.tostring(Buffer1)
 			else
-				local _ = nil
-				local var14, var15 = protoModule.readVarInt(p1, var2)
-				var2 = var15 + var14
+				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt1
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var16, var17 = protoModule.readFixed32(p1, var2)
-			local _ = var16
-			var2 = var17
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var18, var19 = protoModule.readFixed64(p1, var2)
-			local _ = var18
-			var2 = var19
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v11 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v11 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var13)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 115 ]]
 	local t = {}
 	
 	if self.is_playable then
@@ -100,30 +81,30 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref)
-	local var20 = t_1.new()
+function Module:jsonDecode() --[[ Line: 129 ]]
+	-- upvalues: Module (copy)
+	local NewModule = Module.new()
 	
 	if self.is_playable ~= nil then
-		var20.is_playable = self.is_playable
+		NewModule.is_playable = self.is_playable
 	end
 	if self.isPlayable ~= nil then
-		var20.is_playable = self.isPlayable
+		NewModule.is_playable = self.isPlayable
 	end
 	if self.playability_status ~= nil then
-		var20.playability_status = self.playability_status
+		NewModule.playability_status = self.playability_status
 	end
 	if self.playabilityStatus ~= nil then
-		var20.playability_status = self.playabilityStatus
+		NewModule.playability_status = self.playabilityStatus
 	end
-	return var20
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "PlayabilityData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.PlayabilityData"
 }
-t.PlayabilityData = t_1
-typeRegistryModule.default:register(t.PlayabilityData)
+local config = { PlayabilityData = Module }
+TypeRegistryModule.default:register(config.PlayabilityData)
 
-return { PlayabilityData = t.PlayabilityData }
+return { PlayabilityData = config.PlayabilityData }

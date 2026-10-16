@@ -309,6 +309,7 @@ Authentication.Login.Action.LogInEmailOneTimeCode,이메일로 일회용 코드 
 Authentication.Login.Action.NeedHelp,도움이 필요하세요?
 Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ 로그인
+Authentication.Login.Action.QrCode,QR 코드
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.Save,저장
@@ -444,6 +445,8 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,계속하기 전에 �
 Authentication.SignUp.Action.ApplyOnNextRespawn,다음 리스폰 시 적용
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
+Authentication.SignUp.Action.ContinueSetup,설정 계속
+Authentication.SignUp.Action.Create,만들기
 Authentication.SignUp.Action.CreateAPasskey,패스키 생성
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
@@ -454,7 +457,6 @@ Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,지금 리스폰
 Authentication.SignUp.Action.SetupLater,나중에 설정
 Authentication.SignUp.Action.StartOver,처음부터 다시 시작
-Authentication.SignUp.Action.StartPlay,플레이 시작
 Authentication.SignUp.Action.UseEmail,이메일 주소 사용
 Authentication.SignUp.Action.UsePhoneNumber,
 Authentication.SignUp.Button.OKCaptialized,
@@ -479,6 +481,7 @@ Authentication.SignUp.Description.ParentEmailDisclaimer,Roblox 개인정보 처�
 Authentication.SignUp.Description.PasskeyTryAgain,죄송합니다. 패스키 등록 중 오류가 발생했습니다. 다른 사용자 이름으로 다시 등록해 주세요.
 Authentication.SignUp.Description.RobloxNotAvailableInRegion,현재 지역에서는 Roblox를 일시적으로 이용할 수 없습니다.
 Authentication.SignUp.Description.SecureAccountWithPasskeyText,나중에 휴대전화로 빠르게 로그인할 수 있도록 패스키로 계정의 보안을 유지하거나 수동으로 로그인할 수 있도록 비밀번호를 추가하세요.
+Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"계정을 생성하면 중재를 포함한 당사의 {startTermsTag}약관{endTermsTag}에 동의하고 {startPrivacyTag}개인정보 처리방침{endPrivacyTag}의 내용을 인정하는 것으로 간주됩니다. 만 18세 미만인 경우, 부모나 보호자가 계정 생성 및 당사의 약관에 동의해야 합니다."
 Authentication.SignUp.Description.SignUpAgreement.FullCopy.Continue,"'계속하기'를 클릭하면 당사의 이용 약관(중재 포함)에 동의하며 개인정보 처리방침을 인정하는 것으로 간주됩니다. 18세 미만인 경우, 이 계정을 생성하는 데 부모 또는 보호자의 동의를 얻었으며 부모 또는보호자가 이용 약관에 동의하였음을 인정하는 것으로 간주됩니다."
 Authentication.SignUp.Description.SignUpAgreement.FullCopy.CreateAccount,"'계정 생성'을 클릭하면 당사의 이용 약관(중재 포함)에 동의하며 개인정보 처리방침을 인정하는 것으로 간주됩니다. 18세 미만인 경우, 이 계정을 생성하는 데 부모 또는 보호자의 동의를 얻었으며 부모 또는 보호자가 이용 약관에 동의하였음을 인정하는 것으로 간주됩니다."
 Authentication.SignUp.Description.SignUpAgreement.ShortCopy,Roblox의 이용 약관(중재 포함)에 동의하며 개인정보 처리방침을 인정합니다.
@@ -498,7 +501,7 @@ Authentication.SignUp.Description.VerificationPage,'회원가입'을 누르면 �
 Authentication.SignUp.Description.VerificationPage.CreateAccount,'계정 생성'을 누르면 중재 조항을 포함한 이용 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.
 Authentication.SignUp.Description.VerificationPageMultiStep,'계속'을 누르면 중재 조항을 포함한 이용 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.
 Authentication.SignUp.Description.VerifiedParentalConsentModal.EnterContinue,코드를 입력하고 '계속'을 클릭하면 자녀의 Roblox 이용을 승인하게 됩니다.
-Authentication.SignUp.Header.CloseWithoutFinishing,완료하지 않고 닫으시겠습니까?
+Authentication.SignUp.Header.CancelAccountCreation,계정 만들기를 취소할까요?
 Authentication.SignUp.Header.CreatePassword,"{username} 님, 비밀번호를 생성하세요"
 Authentication.SignUp.Header.CreatePasswordOrPasskey,"{username} 님, 비밀번호 또는 패스키를 생성하세요"
 Authentication.SignUp.Header.CreatedAccountChooseSignin,계정이 생성되었습니다. 로그인 방법을 선택하세요.
@@ -517,6 +520,7 @@ Authentication.SignUp.Heading.SecureWithFaceId,Face ID로 계정 보안 유지
 Authentication.SignUp.Heading.UserGreetingWithName,{username}님 안녕하세요
 Authentication.SignUp.Heading.UserGreetingWithNameAndPasskeyPassword,"{username} 님, 패스키 또는 비밀번호를 생성하세요"
 Authentication.SignUp.Heading.WhatsYourBirthday,
+Authentication.SignUp.Label.AddPassword,비밀번호 추가
 Authentication.SignUp.Label.Age,나이
 Authentication.SignUp.Label.Birthday,생년월일
 Authentication.SignUp.Label.BirthdayHeaderB,먼저 생년월일을 선택하세요
@@ -529,7 +533,6 @@ Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,
 Authentication.SignUp.Label.EnterYourParentsEmail,보호자 이메일 입력
 Authentication.SignUp.Label.Error.MinimumAge5,새 계정은 5세 이상이어야 합니다
-Authentication.SignUp.Label.Error.MinimumAgeNotMet,이 게임을 플레이하려면 나이가 더 많아야 합니다.
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,이미 사용 중인 사용자 이름입니다
 Authentication.SignUp.Label.Error.UsernameContainsBoundingUnderscore,사용자 이름은 '_'로 시작하거나 끝날 수 없습니다
 Authentication.SignUp.Label.Error.UsernameContainsInvalidCharacter,"사용자 이름에는 문자, 숫자, '_'만 사용할 수 있습니다"
@@ -754,7 +757,6 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,이미시브 영역�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} 의 발광도가 너무 높습니다. 발광 영역 × 강도가 한도를 초과합니다(현재 {emissivePercentage}%, {maxEmissivePercentage}% 이하여야 함). 발광 영역을 줄이거나 발광 강도를 낮추세요."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,이미시브 영역이 초과되었습니다.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} 의 발광도가 너무 높습니다. 발광 영역 × 강도가 한도를 초과합니다(현재 {emissiveArea}, {maxEmissiveArea} 이하여야 함). 발광 영역을 줄이거나 발광 강도를 낮추세요."
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,이 애셋은 신뢰할 수 있는 크리에이터 프로그램에 속한 크리에이터만 사용할 수 있는 발광형 맵을 사용합니다. 업로드하기 전에 모든 발광형 맵 콘텐츠를 제거하거나 프로그램에 참여하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,게시된 애니메이션에 유효한 최대 부위 이동 거리 값이 없습니다. 애니메이션을 다시 게시하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,게시된 애니메이션에 유효한 UGC 감정 표현 마커가 없습니다. 애니메이션을 다시 게시하세요.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,게시된 애니메이션 데이터에서 최대 부위 이동 거리를 계산할 수 없습니다. 애니메이션을 다시 게시하세요.
@@ -762,6 +764,7 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"게�
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"머리는 UpperTorso 위에 배치해야 합니다. 머리 중심이 몸통 상단 아래에 있어, 헤드 메시가 접혔거나 잘못 배치되었음을 나타냅니다."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls의 InternalOverrideFACSData 속성은 업로드 시 비워두어야 합니다.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 확대된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
+Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"다이내믹 헤드에는 최대 {maxFacsJointCount}개의 FACS 조인트를 포함할 수 있지만, 이 헤드에는 {actualJointCount}개가 있습니다. FACS 조인트 개수를 줄이고 다시 시도하세요."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 축소된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,업로드 형식이 예상 폴더 구조와 일치하지 않습니다. 다시 시도하거나 버그 신고를 제출하세요.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,뼈대 {bonePath}이(가) 메시 파트 {partName}에서 너무 멀리 떨어져 있습니다. 뼈대를 메시 파트 크기 경계에 더 가깝게 배치하세요.
@@ -886,24 +889,16 @@ CommonUI.Controls.Label.Wednesday,수요일
 CommonUI.Controls.Label.WednesdayAbbreviated,수
 CommonUI.Controls.Label.Year,
 CommonUI.Controls.NoResultsFound,검색 결과 없음
-CommonUI.Features.Action.ClassicThemeSunsetGetPlus,Plus 구독
-CommonUI.Features.Action.ClassicThemeSunsetManage,
-CommonUI.Features.Action.ClassicUnlockGetTheme,테마 받기
-CommonUI.Features.Action.ClassicUnlockManage,
 CommonUI.Features.Action.Close,
 CommonUI.Features.Action.Go,이동
 CommonUI.Features.Action.LessLowercase,간략히 보기
 CommonUI.Features.Action.MoreLowercase,
 CommonUI.Features.Action.Send,보내기
-CommonUI.Features.Heading.ClassicThemeSunset,Roblox 20주년을 함께 기념해 주셔서 감사합니다
-CommonUI.Features.Heading.ClassicUnlock,Roblox 20주년을 기념하세요
 CommonUI.Features.Heading.GameDetails,체험 설명
 CommonUI.Features.Label.About,소개
 CommonUI.Features.Label.AboutUs,회사 소개
-CommonUI.Features.Label.AcceptConnection,인맥 수락
 CommonUI.Features.Label.AcceptFriend,친구 수락
-CommonUI.Features.Label.AddConnection,인맥 추가
-CommonUI.Features.Label.AddConnections,
+CommonUI.Features.Label.AddConnections,인맥 추가
 CommonUI.Features.Label.AddFriend,친구 추가
 CommonUI.Features.Label.AdjustScreen,화면 조정
 CommonUI.Features.Label.AppInformation,앱 정보
@@ -914,23 +909,17 @@ CommonUI.Features.Label.Catalog,Roblox 카탈로그
 CommonUI.Features.Label.ChannelWithChannelName,채널: {channelName}
 CommonUI.Features.Label.Charts,차트
 CommonUI.Features.Label.Chat,채팅
-CommonUI.Features.Label.ClassicThemeSunsetNonPlusDescription,Roblox Plus 멤버는 클래식 테마를 계속 사용할 수 있습니다. 기념일 앱 아이콘만 사라집니다.
-CommonUI.Features.Label.ClassicThemeSunsetPlusDescription,Roblox Plus 멤버십으로 클래식 테마를 계속 사용할 수 있습니다. 기념일 앱 아이콘만 사라집니다.
-CommonUI.Features.Label.ClassicUnlockDescription,기간 한정 클래식 룩을 즐겨보세요
-CommonUI.Features.Label.ClassicUnlockManagementSnackbar,설정에서 클래식 테마 관리
 CommonUI.Features.Label.ClientCoreScriptVersion,Client-CoreScript-Version: {clientCoreScriptVersion}
-CommonUI.Features.Label.Connect,친구
-CommonUI.Features.Label.Connection,인맥
-CommonUI.Features.Label.Connections,
+CommonUI.Features.Label.Connections,인맥
 CommonUI.Features.Label.ControllerBar.HoldPrefix,길게 누르기:
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,플레이
-CommonUI.Features.Label.CreateGames,만들기
+CommonUI.Features.Label.CreateGames,
 CommonUI.Features.Label.CreationCenter,게임 창작물 센터
 CommonUI.Features.Label.DevSubs,가입
 CommonUI.Features.Label.Discover,둘러보기
 CommonUI.Features.Label.ForYou,추천
-CommonUI.Features.Label.Friends,
+CommonUI.Features.Label.Friends,친구
 CommonUI.Features.Label.Game,체험
 CommonUI.Features.Label.Games,게임
 CommonUI.Features.Label.GiftCards,기프트 카드 구매
@@ -939,8 +928,6 @@ CommonUI.Features.Label.Help,도움말
 CommonUI.Features.Label.HelpAndSafety,도움말 및 안전
 CommonUI.Features.Label.Home,홈
 CommonUI.Features.Label.Inventory,인벤토리
-CommonUI.Features.Label.InviteConnections,인맥 초대
-CommonUI.Features.Label.JoinConnections,인맥과 합류하기
 CommonUI.Features.Label.Learn,학습
 CommonUI.Features.Label.Licensing,라이선싱
 CommonUI.Features.Label.LuobuRiderTerms,Luobu 전용 특별 약관
@@ -961,7 +948,6 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,프로필
 CommonUI.Features.Label.RM,
 CommonUI.Features.Label.Redeem,코드 사용
-CommonUI.Features.Label.RemoveConnection,친구 삭제
 CommonUI.Features.Label.ReportLogs,로그 보고
 CommonUI.Features.Label.ReportLogsSentenceCase,로그 전송
 CommonUI.Features.Label.Settings,
@@ -1131,7 +1117,6 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,여기서는 시�
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,여기서는 시스템 메시지만 볼 수 있습니다. 채팅을 켜려면 커뮤니케이션 설정을 업데이트하세요.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,현재 같은 지역에 있는 사용자와만 채팅하고 시스템 메시지를 볼 수 있습니다.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,비슷한 연령대의 사람들 및 신뢰할 수 있는 친구들과만 채팅할 수 있습니다.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAndTC,비슷한 연령대의 사람들과 신뢰할 수 있는 인맥과만 채팅할 수 있습니다.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold, 지금 플레이 중인 모든 사람에게 인사하세요!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,다른 플레이어 {RBX_COUNT}명이 채팅에 참여하고 있어요. 인사해 보세요!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 지금 플레이 중인 모든 사람에게 인사하세요!
@@ -1193,7 +1178,6 @@ CoreScripts.TextChat.Online.Success.Singular,
 CoreScripts.TextChat.Online.Success.Singular3,
 CoreScripts.TextChat.TeamChat.Error.NotOnTeam,팀에 소속되어 있지 않으면 팀 채팅을 이용할 수 없습니다.
 CoreScripts.TextChat.TeamChat.PrefixText,[팀]
-CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle,비슷한 연령대의 사람들 및 신뢰할 수 있는 인맥과만 대화할 수 있습니다.
 CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle.FriendsRename,
 CoreScripts.TextChat.Toast.ModerateChatOff.Title,읽기 전용 보기를 끄셨습니다
 CoreScripts.TextChat.Toast.ModerateChatOn.Subtitle,역할 권한에 따라 일부 메시지는 읽기 전용으로 설정됩니다.
@@ -1214,6 +1198,19 @@ CoreScripts.TopBar.Music,음악
 CoreScripts.TopBar.MusicLoading,재생 중인 음악이 없습니다
 CoreScripts.TopBar.MusicNotVerified,재생 중인 오디오가 인증되지 않았습니다
 CoreScripts.TopBar.Traversal.History,기록
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,계속 플레이
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,텔레포트
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Roblox 추천 게임
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,홈 이외
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,홈 화면 추천
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,기타
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,포털 광고
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,검색 광고
+CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,스폰서 광고
 Feature.AbuseReportDialog.Label.GeneralError,오류가 발생했습니다. 나중에 다시 시도하세요.
 Feature.Accessibility.Action.ScrollDown,아래로 스크롤
 Feature.Accessibility.Action.ScrollUp,위로 스크롤
@@ -1412,7 +1409,6 @@ Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,유효하지 않은 YouT
 Feature.AddFriends.Action.FriendAdded,친구 추가됨
 Feature.AddFriends.Action.IgnoreAll,전체 거절
 Feature.AddFriends.Action.IgnoreAllAltCase,모두 무시
-Feature.AddFriends.Action.IgnoreConnectionRequest,인맥 요청 무시
 Feature.AddFriends.Action.IgnoreFriendRequest,친구 요청 무시
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,신뢰할 수 있는 친구 요청 무시
 Feature.AddFriends.Action.RequestIgnored,요청이 무시됨
@@ -1421,26 +1417,21 @@ Feature.AddFriends.Heading.AddFriends,
 Feature.AddFriends.Label.AddFriendsTooltip,"먼저 친구를 찾은 후, 함께 Roblox를 탐험하세요."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"사용자 이름이나 이름으로 검색해, 아는 사람들을 Roblox에서 찾으세요."
 Feature.AddFriends.Label.ConnectWithContacts,"연락처 목록의 친구들을 초대하거나, 이미 Roblox에 있는 친구들과 소통하세요!"
-Feature.AddFriends.Label.ConnectionRequests,인맥 요청
 Feature.AddFriends.Label.ContactsTile,연락처
 Feature.AddFriends.Label.DeclineAllBackgrounded,친구 요청을 모두 무시합니다. 1분 정도 걸릴 수 있습니다.
-Feature.AddFriends.Label.EmptyState,Roblox에서 함께하고 싶은 사람이 있나요? 인맥을 추가해 Roblox에서 더 많은 콘텐츠를 즐겨 보세요!
 Feature.AddFriends.Label.EmptyState.FriendsRename,Roblox에서 함께하고 싶은 사람이 있나요? 친구를 추가해 Roblox에서 더 많은 콘텐츠를 즐겨 보세요!
 Feature.AddFriends.Label.EmptyStatePrompt,"Roblox에서 함께하고 싶은 사람이 있나요? 친구로 추가할 사람을 찾아 보거나, 이미 알고 있는 친구와 소통하세요!"
 Feature.AddFriends.Label.FriendRequests,친구 요청
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,사람 검색
 Feature.AddFriends.Label.MyQrCode,내 QR 코드
-Feature.AddFriends.Label.QRCodeTitle,QR 코드
+Feature.AddFriends.Label.QRCodeTitle,
 Feature.AddFriends.Label.SchoolTile,학급 친구
 Feature.AddFriends.Label.SearchForFriendsPrompt,"사용자 이름이나 표시 이름으로 검색해, 아는 사람들을 Roblox에서 찾으세요."
 Feature.AddFriends.Label.ShareQRCodeAddConnection,QR 코드를 공유해 아는 사람을 추가하세요
 Feature.AddFriends.Label.SyncContactsInvitePeople,연락처를 동기화해 친구를 찾고 초대하세요!
 Feature.AddFriends.Label.SyncWithContacts,
-Feature.AddFriends.Label.TrustedConnectionRequests,신뢰할 수 있는 인맥 요청
 Feature.AddFriends.Label.TrustedFriendRequests,신뢰할 수 있는 친구 요청
-Feature.AddFriends.Text.EmptyState,Roblox에서 함께하고 싶은 사람이 있나요?{lineBreak}인맥을 추가해 Roblox에서 더 많은 콘텐츠를 즐겨 보세요!
 Feature.AddFriends.Text.EmptyState.FriendsRename,Roblox에서 함께하고 싶은 사람이 있나요?{lineBreak}친구를 추가해 Roblox에서 더 많은 콘텐츠를 즐겨 보세요!
-Feature.AddFriends.Title.AddConnectionsToolTip,Roblox는 인맥과 함께할 때 더욱 즐겁답니다
 Feature.AddFriends.Title.AddFriendsToolTip,Roblox는 친구와 함께할 때 즐거움이 배가되죠!
 Feature.AddFriends.Title.AddFriendsTooltipTitle,Roblox는 친구와 함께할 때 더욱 즐겁답니다!
 Feature.AddFriends.Title.CameraPermission,카메라 권한
@@ -2234,9 +2225,9 @@ Feature.BlockingModal.Action.Block,차단
 Feature.BlockingModal.Action.BlockAndReport,차단하고 신고
 Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,{DisplayName} 님을 차단할까요?
-Feature.BlockingModal.Message.BlockConfirmation,"이 사용자를 차단하면 인맥 또는 팔로워 목록에서 삭제되며, 메시지, 요청, 초대 등을 나에게 보낼 수 없게 됩니다.<br /><br />차단한 사실은 상대에게 알려지지 않습니다."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"이 사용자를 차단하면 친구 또는 팔로워 목록에서 삭제됩니다. 상대가 메시지나 요청, 초대 등을 내게 보낼 수 없습니다.<br /><br />차단한 사실은 상대에게 알려지지 않습니다."
 Feature.Build.Action.Add,
+Feature.Build.Action.AddCustomOption,사용자 지정 옵션 추가...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,얼리 테스터 초대
 Feature.Build.Action.AddPlaytesters,
@@ -2252,6 +2243,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,텍스트 복사
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
+Feature.Build.Action.CreateNewGame,새 게임 만들기
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,다시 묻지 않음
@@ -2305,6 +2297,17 @@ Feature.Build.Analytics.Description.PayerConversion,유료 사용자 전환은 �
 Feature.Build.Analytics.Description.PlaythroughRate,플레이스루 비율은 전체 플레이 세션을 완료한 방문자의 비율입니다. 비율이 높다는 것은 플레이어가 체험을 쉽게 시작하고 끝까지 플레이할 가치가 있다고 생각하는 것을 의미합니다.
 Feature.Build.Analytics.Description.TotalPlaytime,총 플레이타임은 해당 기간 동안 모든 플레이어가 체험에 소요한 시간을 합산한 것입니다. 플레이타임이 증가하면 일반적으로 더 많은 참여 세션이 있다는 신호입니다.
 Feature.Build.Analytics.DurationHours,{number}시간
+Feature.Build.Analytics.Goal.Action.CreateAd,광고 만들기
+Feature.Build.Analytics.Goal.Action.SellItems,아이템 판매
+Feature.Build.Analytics.Goal.Action.ShareWithFriends,친구와 공유
+Feature.Build.Analytics.Goal.EarnRobux,
+Feature.Build.Analytics.Goal.FirstImpression,좋은 첫인상을 남기세요
+Feature.Build.Analytics.Goal.GetMorePlayers,플레이어를 더 많이 유치하세요
+Feature.Build.Analytics.Goal.KeepPlayersComingBack,플레이어의 재방문을 유도하세요
+Feature.Build.Analytics.Goal.Locked.EarnRobux,이 통계를 보려면 게임 내에서 Robux를 획득하세요.
+Feature.Build.Analytics.Goal.Locked.FirstImpression,이 통계를 보려면 첫 번째 플레이어를 확보하세요.
+Feature.Build.Analytics.Goal.Locked.GetMorePlayers,이 통계를 보려면 플레이어를 더 많이 유치하세요.
+Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,이 통계를 보려면 첫 번째 재방문 플레이어를 확보하세요.
 Feature.Build.Analytics.KeyStats,주요 통계
 Feature.Build.Analytics.LastMonth,지난달
 Feature.Build.Analytics.LastWeek,
@@ -2336,9 +2339,14 @@ Feature.Build.Analytics.Summary.TotalPlaytime,플레이어가 내 체험에서 �
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,총 플레이어
 Feature.Build.Analytics.Title.D1Retention,
+Feature.Build.Analytics.Title.D7Retention,7일 차 유지율
 Feature.Build.Analytics.Title.DailyActiveUsers,
+Feature.Build.Analytics.Title.NewUserSessionTime,신규 사용자 세션 시간
 Feature.Build.Analytics.Title.PayerConversion,유료 사용자 전환
 Feature.Build.Analytics.Title.PlaythroughRate,
+Feature.Build.Analytics.Title.RobuxSpent,사용된 Robux
+Feature.Build.Analytics.Title.TopAcquisitionSource,상위 소스
+Feature.Build.Analytics.Title.TopDropOffStep,최대 이탈률
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,방문 수
 Feature.Build.Content.NewGame,새 게임
@@ -2382,7 +2390,6 @@ Feature.Build.Description.PlaytestLatest,최신 버전을 플레이테스트하�
 Feature.Build.Description.PlaytestLocked,첫 게임을 만든 후 플레이테스트를 시작할 수 있습니다.
 Feature.Build.Description.PlaytesterAccess,친구를 얼리 테스터로 초대하거나 게임의 대상 설정을 변경하여 더 많은 사람이 플레이할 수 있도록 하세요.
 Feature.Build.Description.PricingRules,가격 규칙 설정
-Feature.Build.Description.PrivateShare,게임을 공유하려면 게임의 대상 설정을 변경하세요.
 Feature.Build.Description.PromoteGameFree,한 번의 탭으로 더 많은 플레이어에게 게임을 노출하세요.
 Feature.Build.Description.PromoteGamePaid,광고를 만들어 수백만 명의 플레이어에게 게임을 노출하세요.
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}일 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요.
@@ -2412,6 +2419,7 @@ Feature.Build.Error.MonetizationOptionsLoad,옵션을 불러오지 못했습니�
 Feature.Build.Error.MonetizationPermissionDenied,수익 창출 옵션을 변경할 권한이 없습니다.
 Feature.Build.Header.AccessSharing,액세스 및 공유
 Feature.Build.Header.AllVersions,모든 버전
+Feature.Build.Header.Answers,답변
 Feature.Build.Header.ContentMaturity,콘텐츠 수위
 Feature.Build.Header.CustomAnswer,사용자 정의 답변
 Feature.Build.Header.GameConfiguration,게임 구성
@@ -2426,6 +2434,7 @@ Feature.Build.Label.AdditionalUsage,추가 Build 사용량
 Feature.Build.Label.AdditionalUsed,{LIMIT} 중 {USED} 사용됨
 Feature.Build.Label.AdsManager,광고 관리자
 Feature.Build.Label.All,
+Feature.Build.Label.AllGames,모든 게임
 Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
 Feature.Build.Label.Autosaved,자동 저장됨
 Feature.Build.Label.Available,이용 가능
@@ -2450,12 +2459,15 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,간편한 성과 보고서
 Feature.Build.Label.Error,
+Feature.Build.Label.Filters,
 Feature.Build.Label.Free,무료
 Feature.Build.Label.FreeBuildUsage,무료 Build 사용량
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,게임 플레이 횟수
 Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
+Feature.Build.Label.GroupGames,그룹 게임
+Feature.Build.Label.Groups,
 Feature.Build.Label.Hi,안녕하세요
 Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
 Feature.Build.Label.Images2D,2D 이미지
@@ -2469,6 +2481,7 @@ Feature.Build.Label.ManagedPricing,관리형 가격 책정
 Feature.Build.Label.ManagedPricingMixed,현재 상품 전체에 혼합
 Feature.Build.Label.MaximizeForGamePlays,게임 플레이 횟수 극대화
 Feature.Build.Label.Models3D,3D 모델
+Feature.Build.Label.MyGames,내 게임
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,한도 없음
 Feature.Build.Label.NotStarted,시작 전
@@ -2508,6 +2521,15 @@ Feature.Build.Label.Thinking,생각 중
 Feature.Build.Label.Title,제목
 Feature.Build.Label.TitleDescription,제목 및 설명
 Feature.Build.Label.Tool,도구
+Feature.Build.Label.ToolAdEligibilityDone,광고 자격 확인 완료
+Feature.Build.Label.ToolAdEligibilityFailed,광고 자격을 확인할 수 없음
+Feature.Build.Label.ToolAdEligibilityRunning,광고 자격 확인 중
+Feature.Build.Label.ToolAnalyticsDone,통계 분석 완료
+Feature.Build.Label.ToolAnalyticsFailed,통계를 분석할 수 없음
+Feature.Build.Label.ToolAnalyticsRunning,통계 분석 중
+Feature.Build.Label.ToolApiDocsDone,API 문서 조회 완료
+Feature.Build.Label.ToolApiDocsFailed,API 문서를 조회할 수 없음
+Feature.Build.Label.ToolApiDocsRunning,API 문서 조회 중
 Feature.Build.Label.ToolAssetDone,애셋 삽입됨
 Feature.Build.Label.ToolAssetFailed,애셋을 삽입할 수 없음
 Feature.Build.Label.ToolAssetRunning,애셋 삽입 중
@@ -2517,6 +2539,9 @@ Feature.Build.Label.ToolAssetSearchRunning,애셋 라이브러리 검색 중
 Feature.Build.Label.ToolClientDMDone,클라이언트 DataModel 검색됨
 Feature.Build.Label.ToolClientDMFailed,클라이언트 DataModel을 검색할 수 없음
 Feature.Build.Label.ToolClientDMRunning,클라이언트 DataModel 검색 중
+Feature.Build.Label.ToolCompileDone,코드 컴파일 완료
+Feature.Build.Label.ToolCompileFailed,코드를 컴파일할 수 없음
+Feature.Build.Label.ToolCompileRunning,코드 컴파일 중
 Feature.Build.Label.ToolGameInfoDone,게임 정보 업데이트됨
 Feature.Build.Label.ToolGameInfoFailed,게임 정보를 업데이트할 수 없음
 Feature.Build.Label.ToolGameInfoRunning,게임 정보 업데이트 중
@@ -2553,6 +2578,9 @@ Feature.Build.Label.ToolQuestionRunning,질문하는 중
 Feature.Build.Label.ToolReqUpdateDone,요건 업데이트됨
 Feature.Build.Label.ToolReqUpdateFailed,요건을 업데이트할 수 없음
 Feature.Build.Label.ToolReqUpdateRunning,요건 업데이트 중
+Feature.Build.Label.ToolRestoreVersionDone,버전 복구 완료
+Feature.Build.Label.ToolRestoreVersionFailed,버전을 복구할 수 없음
+Feature.Build.Label.ToolRestoreVersionRunning,버전 복구 중
 Feature.Build.Label.ToolScriptDone,스크립트 실행됨
 Feature.Build.Label.ToolScriptFailed,스크립트를 실행할 수 없음
 Feature.Build.Label.ToolScriptRunning,스크립트 실행 중
@@ -2568,6 +2596,9 @@ Feature.Build.Label.ToolTasksPlanRunning,작업 계획 중
 Feature.Build.Label.ToolThumbnailDone,게임 섬네일 설정
 Feature.Build.Label.ToolThumbnailFailed,게임 섬네일을 설정하지 못함
 Feature.Build.Label.ToolThumbnailRunning,게임 섬네일 설정 중
+Feature.Build.Label.ToolVerifyDone,오류 확인 완료
+Feature.Build.Label.ToolVerifyFailed,오류를 확인할 수 없음
+Feature.Build.Label.ToolVerifyRunning,오류 확인 중
 Feature.Build.Label.UniverseNumber,{UNIVERSE_ID} 유니버스
 Feature.Build.Label.Unknown,알 수 없음
 Feature.Build.Label.UnlimitedUsed,{USED} 사용됨 • 한도 없음
@@ -2598,12 +2629,12 @@ Feature.Build.Message.BuildInternalError,Build에 문제가 발생했습니다. 
 Feature.Build.Message.BuildResponseFailed,Build가 응답하지 않았습니다. 다시 시도해 보세요.
 Feature.Build.Message.BuildStillWorking,"작업 진행 중입니다. 기다리는 동안 앱을 종료하거나, Roblox를 플레이하거나, 다른 프로젝트를 시작할 수 있습니다."
 Feature.Build.Message.BuildStopped,Build를 중단했습니다.
+Feature.Build.Message.BuildTakingLonger,예상보다 시간이 오래 걸리고 있습니다. 계속 기다리거나 다른 작업을 시작하실 수 있습니다.
 Feature.Build.Message.BuildTemporarilyDown,Build를 일시적으로 이용할 수 없습니다. 1분 후 다시 시도해 보세요.
 Feature.Build.Message.CompletedTasks,완료한 작업 {COUNT}개
 Feature.Build.Message.ConversationGone,이 대화는 더 이상 이용할 수 없습니다. 새 대화를 시작하세요.
 Feature.Build.Message.ConversationNotFound,이 대화를 찾지 못했습니다. 새 대화를 시작하세요.
 Feature.Build.Message.CreateGameToUseBuild,Build 사용을 시작하려면 새 게임을 만드세요.
-Feature.Build.Message.CreatedRevertedVer,되돌린 버전을 생성했습니다.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,크리에이터 허브에서 오디언스 자격을 확대하세요
 Feature.Build.Message.ExperiencesLoadFailed,체험을 불러오지 못함
@@ -2630,17 +2661,13 @@ Feature.Build.Message.NoSearchResultsFound,검색 결과가 없습니다
 Feature.Build.Message.NoVersionHistory,아직 버전 기록이 없습니다.
 Feature.Build.Message.OneTaskCompleted,1개 작업 완료
 Feature.Build.Message.OutOfBuildUsage,Build 사용량이 소진되었습니다. 계속 제작하려면 Robux 사용 옵션을 확인하세요.
-Feature.Build.Message.PlaytestInviteSendFailedBody,다음 사용자에게 초대 채팅 링크를 보낼 수 없습니다:
-Feature.Build.Message.PlaytestInviteSendFailedHint,공유 버튼을 사용하여 링크를 받으세요.
 Feature.Build.Message.PlaytesterRequestFailed,요청을 완료하지 못했습니다. 다시 시도해 보세요.
 Feature.Build.Message.PlaytestersAdded,얼리 테스터 {MAX_INVITES}명 중 {INVITED_COUNT}명 초대함
-Feature.Build.Message.PrivatePlaytestInvite,{username} 님이 나를 {experienceName}의 얼리 테스터로 초대했습니다.
 Feature.Build.Message.PublicPublishFailed,게임이 게시되었지만 공개되지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishExpandAudience,오디언스를 확대하려면 게시하세요
 Feature.Build.Message.PublishNotReverted,게시한 내용을 되돌리지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishPromotionUpsell,게임 게시가 완료되었습니다. 축하드립니다! Roblox에서 더 많은 플레이어를 확보할 수 있는 무료 프로모션이 {promotionCount}건 있습니다.
 Feature.Build.Message.PublishPromotionUpsellSingular,게임 게시가 완료되었습니다. 축하드립니다! Roblox에서 더 많은 플레이어를 확보할 수 있는 무료 프로모션이 1건 있습니다.
-Feature.Build.Message.PublishReverted,게시를 되돌렸습니다.
 Feature.Build.Message.QuestionnaireNeeded,이 게임은 Build 외부에서 편집되었습니다. 게시하려면 콘텐츠 설문지를 작성해 주세요.
 Feature.Build.Message.ReadyToPlay,게임을 Roblox에서 플레이할 준비가 되었습니다!
 Feature.Build.Message.ResetHours,{HOURS}시간 후 재설정
@@ -2690,7 +2717,7 @@ Feature.Build.Title.BuildUsage,Build 사용량
 Feature.Build.Title.ChangesNotLive,변경 사항이 아직 라이브 상태가 아닙니다
 Feature.Build.Title.ChatBuildUnavailable,Build를 이용할 수 없습니다.
 Feature.Build.Title.Content,콘텐츠
-Feature.Build.Title.CreateYourAd,광고 만들기
+Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,일일 Robux 한도에 도달함
 Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,상품 편집
@@ -2698,14 +2725,12 @@ Feature.Build.Title.ExperienceAudience,체험 오디언스
 Feature.Build.Title.FreeUsageReached,무료 Build 사용량 한도에 도달함
 Feature.Build.Title.FriendsOnlyPlay,친구만 플레이할 수 있습니다
 Feature.Build.Title.GameCreationDone,게임 제작 완료
-Feature.Build.Title.GamePrivate,비공개 게임입니다
 Feature.Build.Title.GenericError,오류 발생
 Feature.Build.Title.GetUsers,사용자 가져오기
 Feature.Build.Title.ManagedPricingAcknowledgement,관리형 가격 책정을 켜시겠습니까?
 Feature.Build.Title.NoMonetizationProducts,게임 내에서 수익을 올리세요
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.PickCampaign,기간을 선택하세요.
-Feature.Build.Title.PlaytestInviteSendFailed,초대를 보낼 수 없음
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,다음 사용자를 추가할 수 없습니다:
 Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다
@@ -2727,15 +2752,6 @@ Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,포함 사항
 Feature.BuyRobux.Heading.Banner,Robux 구매
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Action.NoThanks,아니요 안 할래요
-Feature.Captures.Action.Share,
-Feature.Captures.Action.ShareYourCapture,캡처를 공유하세요
-Feature.Captures.Body.ShareCapturePrompt,캡처를 공유할까요?
-Feature.Captures.Description.AllowPhotoAccessInfo,캡처를 저장하려면 Roblox가 기기의 카메라 롤에 액세스할 수 있어야 합니다.
-Feature.Captures.Title.AllowPhotoAccessInfo,사진에 액세스 허용
-Feature.Captures.Title.ShareCapturePrompt,캡처 공유
-Feature.Captures.Toast.CaptureSaved,캡처 저장 완료
-Feature.Captures.Toast.CaptureSavedToDevice,기기에 저장됨
 Feature.Catalog.Action.Buy,구매
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,꾸미기로 이동하기
@@ -2801,7 +2817,7 @@ Feature.Catalog.Heading.PremiumOnly,Roblox Plus 멤버 전용
 Feature.Catalog.Heading.QuantityLimitReached,크리에이터가 설정해 둔 한도에 도달했습니다.
 Feature.Catalog.Heading.QuickMenu,퀵 메뉴
 Feature.Catalog.Heading.Resellers,재판매자
-Feature.Catalog.Heading.SellItem,아이템 판매
+Feature.Catalog.Heading.SellItem,
 Feature.Catalog.Heading.Sellers,판매자
 Feature.Catalog.Heading.SetPrice,정가
 Feature.Catalog.Heading.ShowBodyParts,신체 파트 표시
@@ -3156,7 +3172,6 @@ Feature.Chat.Drawer.PinGame,핀하기
 Feature.Chat.Drawer.PlayGame,체험 방문
 Feature.Chat.Drawer.ViewDetails,
 Feature.Chat.Heading.ChatWithConnections,친구와 채팅하기
-Feature.Chat.Heading.ChatWithFriends,
 Feature.Chat.Heading.CreateUnfilteredChatDialog,확장된 채팅 기능을 이용할 수 있는 새 그룹을 만들까요?
 Feature.Chat.Heading.ExpressiveChat,다채로운 채팅
 Feature.Chat.Heading.FailedToLeaveGroup,그룹 나가기 실패
@@ -3174,7 +3189,6 @@ Feature.Chat.Heading.ShareGameToChat,채팅에서 체험 공유
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} 님이 나를 초대했습니다
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} 님이 나를 그룹에 초대했습니다
 Feature.Chat.Heading.YouWereInvitedToGroup,그룹에 참가하도록 초대되었습니다
-Feature.Chat.Label.AddConnections,
 Feature.Chat.Label.AddFriends,
 Feature.Chat.Label.Available,
 Feature.Chat.Label.Blocked,차단됨
@@ -3213,9 +3227,8 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,{DISPLAY_NAME} 님에게 답장 보
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,자신에게 답장
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} 님의 말...
 Feature.Chat.Label.ReplyingToYourself,회원님의 말...
-Feature.Chat.Label.SearchConnections,친구 검색
 Feature.Chat.Label.SearchForFriendsAndChat,대화 검색
-Feature.Chat.Label.SearchFriends,
+Feature.Chat.Label.SearchFriends,친구 검색
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.Sent,전송됨
 Feature.Chat.Label.SnoozeChatNotifications,체험 내 채팅 알림 음소거:
@@ -3236,34 +3249,27 @@ Feature.Chat.Label.UnknownUser,알 수 없는 사용자
 Feature.Chat.Label.User,사용자
 Feature.Chat.Label.ViewProfile,프로필 보기
 Feature.Chat.Label.YouRepliedToYou,
-Feature.Chat.Message.AddConnectionsLimit,채팅 그룹 최대 정원은 {connectionsNum}명입니다.
-Feature.Chat.Message.AddConnectionsPartyLimit,파티에 참여할 수 있는 친구 수는 최대 {connectionsNum}명입니다.
-Feature.Chat.Message.AddConnectionsPartyLimitSingular,개인정보 설정으로 인해 친구 1명과만 파티를 구성할 수 있습니다.
 Feature.Chat.Message.AddFriendsLimit,채팅 그룹에 추가할 수 있는 친구는 최대 {connectionsNum}명입니다.
-Feature.Chat.Message.AddFriendsPartyLimit,
-Feature.Chat.Message.AddFriendsPartyLimitSingular,
+Feature.Chat.Message.AddFriendsPartyLimit,파티에 참여할 수 있는 친구 수는 최대 {connectionsNum}명입니다.
+Feature.Chat.Message.AddFriendsPartyLimitSingular,개인정보 설정으로 인해 친구 1명과만 파티를 구성할 수 있습니다.
 Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} 님이 표시할 수 없는 메시지를 보냈습니다.
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,채팅이 비활성화되었습니다. 개인정보 설정에서 활성화할 수 있습니다.
 Feature.Chat.Message.ChatUnavailableRegion,현재 이 지역에서는 채팅을 이용할 수 없습니다.
 Feature.Chat.Message.ChatUnavailableWithUser,현재 이 사용자와는 채팅을 할 수 없습니다.
 Feature.Chat.Message.Default,채팅 참가자 중 일부는 회원님의 메시지를 볼 수 없어요.
-Feature.Chat.Message.EnableChat,친구와 채팅하려면 '개인정보 설정'에서 채팅 기능을 켜세요.
-Feature.Chat.Message.EnableChat.FriendsRename,
-Feature.Chat.Message.EnableParty,친구와 파티 기능을 활용하려면 '개인정보 설정'에서 파티 기능을 켜세요.
-Feature.Chat.Message.EnableParty.FriendsRename,
+Feature.Chat.Message.EnableChat.FriendsRename,친구와 채팅하려면 '개인정보 설정'에서 채팅 기능을 켜세요.
+Feature.Chat.Message.EnableParty.FriendsRename,친구와 파티 기능을 활용하려면 '개인정보 설정'에서 파티 기능을 켜세요.
 Feature.Chat.Message.FailedToLeaveGroup,{CONVERSATION_TITLE} 대화에서 회원님을 삭제할 수 없습니다.
 Feature.Chat.Message.FailedToLeaveGroup.V2,{CONVERSATION_TITLE} 그룹에서 회원님을 삭제할 수 없습니다.
 Feature.Chat.Message.FailedToRemoveUser,{CONVERSATION_TITLE} 대화에서 {USERNAME} 님을 삭제할 수 없습니다.
 Feature.Chat.Message.FailedToRemoveUser.V2,{CONVERSATION_TITLE} 그룹에서 {USERNAME} 님을 삭제할 수 없습니다.
 Feature.Chat.Message.FailedToRenameConversation,대화 이름 {EXISTING_NAME}(을)를 {NEW_NAME}(으)로 변경할 수 없어요.
 Feature.Chat.Message.FailedToRenameConversation.V2,그룹 이름 {EXISTING_NAME}(을)를 {NEW_NAME}(으)로 변경할 수 없습니다.
-Feature.Chat.Message.GroupConnectionLimitSingular,1명의 친구만 추가하여 채팅할 수 있습니다.
-Feature.Chat.Message.GroupFriendLimitSingular,
+Feature.Chat.Message.GroupFriendLimitSingular,1명의 친구만 추가하여 채팅할 수 있습니다.
 Feature.Chat.Message.LeaveGroup,회원님은 본 그룹과 채팅할 수 없게 됩니다.
 Feature.Chat.Message.LeaveGroup.V2,그룹에서 정말 나가시겠어요?
 Feature.Chat.Message.MakeConnectionsToChat,Roblox에서 친구를 사귀고 함께 채팅하세요
-Feature.Chat.Message.MakeConnectionsToParty,Roblox에서 친구를 사귀고 함께 파티를 구성하세요
-Feature.Chat.Message.MakeFriendsToParty,
+Feature.Chat.Message.MakeFriendsToParty,Roblox에서 친구를 사귀고 함께 파티를 구성하세요
 Feature.Chat.Message.MessageContentModerated,메시지가 규정에 맞지 않아 전송하지 못했습니다.
 Feature.Chat.Message.MessageUnavailable,메시지 확인 불가
 Feature.Chat.Message.OneUserTyping,{DISPLAY_NAME} 님이 메시지 입력 중...
@@ -3281,7 +3287,6 @@ Feature.Chat.Response.Failed,실패
 Feature.Chat.Response.NetworkError,네트워크 오류
 Feature.Chat.Response.Sending,전송 중
 Feature.Chat.RobloxConnectUnavailableWithUser,현재 이 사용자와는 Roblox Connect를 이용할 수 없습니다.
-Feature.Chat.Text.NoConnections,아직 추가한 인맥이 없습니다. 시작하려면 Roblox에서 인맥을 찾아 추가하세요.
 Feature.Chat.Text.NoFriends,아직 추가한 친구가 없습니다. 시작하려면 먼저 Roblox에서 친구를 찾아 추가하세요.
 Feature.Chat.Title.MuteChatNotifications,게임 플레이 중 친구의 채팅 알림 음소거
 Feature.Chat.Title.NewChat,새 채팅
@@ -3482,7 +3487,7 @@ Feature.FaceChat.Subtitle.FeatureDisabled,얼굴 애니메이션을 일시적으
 Feature.FaceChat.Subtitle.UnableToAccessCamera,"카메라를 사용해 아바타를 애니메이션화하려면, OS 설정으로 이동해 Roblox에서의 카메라 사용을 허용하세요"
 Feature.Favorites.Label.Favorite,
 Feature.Favorites.Label.Favorited,즐겨찾기 완료
-Feature.FlyoutSidePanel.Action.ContinuePlaying,계속 플레이
+Feature.FlyoutSidePanel.Action.ContinuePlaying,
 Feature.FlyoutSidePanel.Label.TooltipBody,"프로필, 콘텐츠 및 설정이 새 위치로 옮겨졌습니다."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> 옮겨짐
 Feature.Friends.Action.AcceptFriend,
@@ -3490,8 +3495,6 @@ Feature.Friends.Action.AccountDeleted,계정이 삭제됨
 Feature.Friends.Action.Add,
 Feature.Friends.Action.Block,
 Feature.Friends.Action.Close,
-Feature.Friends.Action.ConnectionAdded,인맥이 추가됨
-Feature.Friends.Action.ConnectionRequestSent,인맥 요청을 보냈어요
 Feature.Friends.Action.EditProfile,프로필 편집
 Feature.Friends.Action.FindFriends,
 Feature.Friends.Action.FriendAdded,
@@ -3544,9 +3547,6 @@ Feature.Friends.FriendingTooltipBody,일부 친구 요청은 단지 내 휴대�
 Feature.Friends.Heading.Activities,활동
 Feature.Friends.Heading.FilterBy,필터링 기준
 Feature.Friends.Heading.Friends,
-Feature.Friends.Label.AddConnectionVPC,이 사용자를 신뢰할 수 있는 인맥으로 추가하려면 보호자의 허락이 필요합니다.
-Feature.Friends.Label.AddConnectionsHint,인맥과 함께하면 Roblox가 더욱 재미있어져요!
-Feature.Friends.Label.AddConnectionsHintBody,이미 알고 있는 사람을 추가하거나 새로운 인맥을 찾아보세요
 Feature.Friends.Label.AddFriendVPC,이 사용자를 신뢰할 수 있는 친구로 추가하려면 보호자의 허락을 받아야 합니다.
 Feature.Friends.Label.All,
 Feature.Friends.Label.AllowContactsAccess,Roblox에서 친구와 연결해 소통하려면 연락처에 대한 액세스를 허용하세요!
@@ -3560,14 +3560,7 @@ Feature.Friends.Label.ConnectedNumYears,친구가 된 지 {num}년
 Feature.Friends.Label.ConnectedOneDay,친구가 된 지 1일
 Feature.Friends.Label.ConnectedOneMonth,친구가 된 지 1개월
 Feature.Friends.Label.ConnectedOneYear,친구가 된 지 1년
-Feature.Friends.Label.ConnectionOwns,1명의 인맥이 다음을 소유합니다.
-Feature.Friends.Label.ConnectionRecentlyPlayed,<b>1명의 인맥</b>이 최근 플레이한 체험이에요
-Feature.Friends.Label.ConnectionRemoved,인맥이 삭제되었습니다
-Feature.Friends.Label.ConnectionRequest,
-Feature.Friends.Label.ConnectionsCount,인맥 {connectionCount}명
-Feature.Friends.Label.ConnectionsOwn,{numberOfConnections}명의 인맥이 다음을 소유합니다.
-Feature.Friends.Label.ConnectionsPlayed,{numberOfConnections}명이 플레이함
-Feature.Friends.Label.ConnectionsRecentlyPlayed,<b>{numberOfConnections}명의 인맥</b>이 최근 플레이한 체험이에요
+Feature.Friends.Label.ConnectionRequest,인맥 요청
 Feature.Friends.Label.ContactsCaption,"Roblox는 이곳에서 나와 친구가 서로를 찾을 수 있도록 돕기 위해, 연락처를 정기적으로 동기화하고 일치하는 사용자를 저장합니다. 본 설정은 계정 설정 메뉴에서 언제든지 변경할 수 있습니다."
 Feature.Friends.Label.FAEEligibleBanner.Body,신뢰할 수 있는 친구를 추가하려면 먼저 나이 확인 절차를 완료하세요.
 Feature.Friends.Label.FewestInteractions,거의 대화하지 않는 친구
@@ -3589,7 +3582,7 @@ Feature.Friends.Label.FriendsAreNowConnections,Roblox의 친구라는 명칭이 
 Feature.Friends.Label.FriendsHintBold,같이 플레이해요!
 Feature.Friends.Label.FriendsHintPlain,먼저 친구를 추가하세요.
 Feature.Friends.Label.FriendsOwn,친구 {numberOfConnections}명이 보유함
-Feature.Friends.Label.FriendsPlayed,
+Feature.Friends.Label.FriendsPlayed,{numberOfConnections}명이 플레이함
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>친구 {numberOfConnections}명</b>이 최근에 플레이함
 Feature.Friends.Label.InGame,체험 중
 Feature.Friends.Label.IntroducingConnections,인맥 기능을 소개합니다
@@ -3597,26 +3590,19 @@ Feature.Friends.Label.JoinedInYear,{year}년에 가입함
 Feature.Friends.Label.ManageFriendsList,친구 목록 관리
 Feature.Friends.Label.ManageFriendsListCaption,"친구 목록을 최신 상태로 유지하기 위해, 거의 대화하지 않는 친구 목록을 검토하세요."
 Feature.Friends.Label.MultipleMutuals,서로 아는 인맥 {numConnections}명
-Feature.Friends.Label.MutualConnection,서로 아는 인맥 1명
-Feature.Friends.Label.MutualConnectionTitle,공통 인맥 1명
-Feature.Friends.Label.MutualConnections,
-Feature.Friends.Label.MutualConnectionsTitle,공통 인맥 {numConnections}명
 Feature.Friends.Label.MutualFriendTitle,서로 아는 친구 1명
 Feature.Friends.Label.MutualFriends,서로 아는 친구
 Feature.Friends.Label.MutualFriendsTitle,서로 아는 친구 {numConnections}명
 Feature.Friends.Label.MyProfile,
-Feature.Friends.Label.NewConnection,새로운 인맥
 Feature.Friends.Label.NewFriend,새 친구
 Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.NoFriendsYet,{name} 님은 아직 친구가 없습니다.
 Feature.Friends.Label.NowTrusted,{username} 님이 이제 신뢰할 수 있는 친구가 되었습니다
-Feature.Friends.Label.OneMutual,
+Feature.Friends.Label.OneMutual,서로 아는 인맥 1명
 Feature.Friends.Label.PYMK,아는 사이일 수 있는 사람
 Feature.Friends.Label.Pending,대기 중
 Feature.Friends.Label.PlayedByUser,<b>{name}</b> 님이 플레이한 체험이에요
-Feature.Friends.Label.PlayedByUserAndOneOther,<b>{name}</b> 님 외 <b>1명의 인맥</b>이 플레이한 경험이에요
 Feature.Friends.Label.PlayedByUserAndOneOther.FriendsRename,<b>{name}</b> 님 외 <b>1명의 친구</b>가 플레이함
-Feature.Friends.Label.PlayedByUserAndOthers,<b>{name}</b> 님 외 <b>{numOfOthers}명의 인맥</b>이 플레이한 체험이에요
 Feature.Friends.Label.PlayedByUserAndOthers.FriendsRename,<b>{name}</b> 님 외 <b>{numOfOthers}명의 친구</b>가 플레이함
 Feature.Friends.Label.RenameInfoText,"Roblox 친구가 이제 인맥으로 변경되었습니다. 알고 있는 사람을 인맥으로 추가해 접속 상태를 바로 확인하고, 파티를 시작하고, 함께 플레이하세요. <br /><br />이제 나이 확인을 완료한 13세 이상의 사용자는 일정 자격을 갖춘 인맥과 함께 다채로운 채팅 기능을 잠금 해제할 수 있습니다. 곧 더 많은 기능도 추가될 예정입니다!"
 Feature.Friends.Label.Request,
@@ -3641,21 +3627,12 @@ Feature.Friends.Message.ViewAndConnectHint,인맥 요청을 확인하고 알고 
 Feature.Friends.Message.ViewAndConnectTooltip,"친구 요청을 확인하고, 이미 알고 있는 친구와의 소통을 시작합니다."
 Feature.Friends.Mutual,공통 인맥
 Feature.Friends.Mutuals,
-Feature.Friends.OneMutualConnection,은(는) 서로 아는 인맥입니다
 Feature.Friends.OneMutualFriend,님은 서로 아는 친구입니다
-Feature.Friends.OneOtherMutualConnection,명의 서로 아는 인맥
 Feature.Friends.OneOtherMutualFriend,명의 사용자는 서로 아는 친구입니다
-Feature.Friends.PluralMutualConnections,
 Feature.Friends.PluralMutualFriends,
-Feature.Friends.PluralOtherMutualConnections,
 Feature.Friends.PluralOtherMutualFriends,
 Feature.Friends.Subtitle.ConnectionsEducation,"인맥과 더 쉽게 플레이하고 채팅하세요. 언제든 인맥을 삭제하거나, 차단하거나, 신고할 수 있습니다."
 Feature.Friends.Subtitle.FriendsEducation,"친구들과 더 쉽게 플레이하고 채팅하세요. 언제든 친구를 끊거나, 차단하거나, 신고할 수 있습니다."
-Feature.Friends.TCEducation.Banner.Text,"QR 코드나 연락처로 신뢰할 수 있는 인맥을 추가해 필터링 없는 채팅, 파티 음성 기능 등을 잠금 해제하세요."
-Feature.Friends.TCEducation.Modal.TextIntro,"아는 사람들과 함께하면 Roblox가 더 즐거워집니다. 나이가 확인된 사용자를 QR 코드나 연락처를 통해 추가하면 신뢰할 수 있는 인맥이 되며, 다음과 같은 추가 혜택을 잠금 해제할 수 있습니다."
-Feature.Friends.TCEducation.Modal.TextIntro.EighteenPlus,"18세 이상 사용자로 연령 확인을 완료했으므로, 연령이 확인된 18세 이상의 인맥 및 신뢰할 수 있는 인맥과 더 다양한 활동을 할 수 있습니다."
-Feature.Friends.TCEducation.Modal.TextOutro,신뢰할 수 있는 인맥을 추가하는 새로운 방법이 곧 공개됩니다. 인맥을 관리해 내게 연락할 수 있는 대상의 범위를 조정하세요.
-Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,연령이 확인된 다른 사용자를 QR 코드나 연락처를 통해 추가하면 신뢰할 수 있는 인맥으로 등록됩니다. 더 다양한 방법도 곧 공개될 예정입니다.
 Feature.Friends.TCEducation.Title,아는 사람들을 추가하세요
 Feature.Friends.TCFeature.AndMore,그 외 더 많은 기능들
 Feature.Friends.TCFeature.ChatWithoutFilters,필터링 없는 채팅
@@ -3670,11 +3647,7 @@ Feature.Friends.Text.NoConnections,아직 추가한 인맥이 없습니다. 시�
 Feature.Friends.Text.NoFriends,
 Feature.Friends.Title.TrustedFriendsExpiredLink,링크가 만료됨
 Feature.Friends.Title.TrustedFriendsInvalidLink,링크가 유효하지 않습니다
-Feature.Friends.TrustedConnection.AcceptTrustedRequest,신뢰할 수 있는 인맥 수락
-Feature.Friends.TrustedConnection.Action.RemoveTrustedConnection,신뢰할 수 있는 인맥에서 삭제
-Feature.Friends.TrustedConnection.Label.AddTrustedConnection,신뢰할 수 있는 인맥 추가
 Feature.Friends.TrustedConnection.Label.Trusted,
-Feature.Friends.TrustedConnection.Toast.TrustedConnectionRemoved,신뢰할 수 있는 인맥이 삭제됨
 Feature.Friends.TrustedFriend.AcceptTrustedRequest,신뢰할 수 있는 친구 수락하기
 Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,신뢰할 수 있는 친구에서 삭제하기
 Feature.Friends.TrustedFriend.AddBack.Header,
@@ -3696,9 +3669,6 @@ Feature.FriendsActivityFeed.Timestamp.OneHourAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.OneMinuteAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,
 Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,
-Feature.FriendsMenu.Label.SearchForConnections,인맥 검색
-Feature.FriendsMenu.Label.SelectedConnectionsCount,선택한 인맥 {numerator}/{denominator}명
-Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,선택한 인맥 {selectedCount}명
 Feature.FriendsMenu.Label.SelectedFriendsCount,선택된 친구({numerator}/{denominator}명)
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,선택된 친구({selectedCount}명)
 Feature.GameDetails.Action.BuyRobux,
@@ -3770,7 +3740,7 @@ Feature.GameDetails.Label.ProvideFeedbackTitle,
 Feature.GameDetails.Label.Rating,평점
 Feature.GameDetails.Label.ReportAbuse,
 Feature.GameDetails.Label.Servers,서버
-Feature.GameDetails.Label.SomethingElse,기타
+Feature.GameDetails.Label.SomethingElse,
 Feature.GameDetails.Label.Store,
 Feature.GameDetails.Label.Subgenre,하위 장르
 Feature.GameDetails.Label.Supported,지원
@@ -3818,7 +3788,6 @@ Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
 Feature.GamePage.Label.SponsoredDisclosure,"스폰서 아이템은 크리에이터가 비용을 지불합니다. EU 사용자의 경우, 기기 유형, 위치, 인구 통계에 관한 일반적인 정보를 기반으로 표시될 수 있습니다. EU 외 지역은 추가 정보를 기반으로 광고가 표시될 수 있습니다."
 Feature.GamePage.LabelCancelField,
-Feature.GamePage.LabelNoSearchResults,결과를 찾을 수 없습니다
 Feature.GamePage.LabelSearchInsteadForPlayersNamed,대신 다음 이름의 회원 검색:
 Feature.GamePage.LabelShowingResultsFor,검색 결과 - 검색어:
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,나이 인증 결과로 인해 이 체험을 이용할 수 없습니다.
@@ -3978,7 +3947,6 @@ Feature.Home.Heading.JoinYourFriends,친구와 합류
 Feature.Home.HeadingFriends,친구 ({friendCount}명)
 Feature.Home.Label.HappeningNow,지금 진행 중
 Feature.Home.PeopleList.ChatWith,{username} 님과 채팅
-Feature.Home.Robux,
 Feature.InAppBugReporting.Message.AppVersion,빌드: {value}
 Feature.InAppBugReporting.Message.CommentEmptyError,세부 사항은 반드시 입력해야 합니다
 Feature.InAppBugReporting.Message.CommentLabel,신고 내용 설명
@@ -4038,6 +4006,7 @@ Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} 남음
+Feature.InExperienceShop.GamePass,게임패스
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} 후 종료
 Feature.InExperienceShop.Label.Timer.Day.Plural,
 Feature.InExperienceShop.Label.Timer.Day.Singular,
@@ -4118,7 +4087,7 @@ Feature.Moments.Description.HowToCaptureStep2,캡처 제어를 활성화합니�
 Feature.Moments.Description.HowToCaptureStep3,게임 플레이 사진 및 동영상을 캡처합니다.
 Feature.Moments.Description.LeaveMomentsCreation,"모든 변경 사항이 사라지지만, 이 캡처는 <b>캡처</b> 갤러리에서 계속 확인하실 수 있습니다."
 Feature.Moments.Description.NoMusicResults,음악을 찾을 수 없음
-Feature.Moments.Description.NonInfiniteScrollEndBody,모멘트에서 정지 지점에 도달했습니다. 계속 보려면 아래를 누르세요.
+Feature.Moments.Description.NonInfiniteScrollEndBody,피드가 일시 중지되었습니다. 계속 시청할지 여부를 결정하실 수 있습니다.
 Feature.Moments.Description.NothingHereYet,아직 아무것도 없네요...
 Feature.Moments.Description.PublishMoment,모멘트에 대한 설명을 작성해 주세요
 Feature.Moments.Description.TooManyUploads,오늘 업로드한 동영상이 너무 많습니다. 내일 다시 시도하세요.
@@ -4176,12 +4145,14 @@ Feature.Moments.Label.MomentFailedToPostTitle,모멘트를 게시하지 못했�
 Feature.Moments.Label.MomentNoLongerAvailable,이 모멘트는 더 이상 이용할 수 없습니다.
 Feature.Moments.Label.MomentPublishedBody,모멘트 게시가 완료되었습니다.
 Feature.Moments.Label.MomentPublishedTitle,모멘트 게시됨
+Feature.Moments.Label.MomentRemovedBody,"안전 규칙을 위반한 모멘트로, 더 이상 이용할 수 없습니다."
+Feature.Moments.Label.MomentRemovedTitle,이 모멘트는 제거되었습니다
 Feature.Moments.Label.MomentUnavailable,모멘트 이용 불가
 Feature.Moments.Label.MomentUnavailableDefault,이 모멘트는 이용할 수 없습니다.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,코멘트 아직 없음
-Feature.Moments.Label.NonInfiniteScrollEndTitle,지금은 모두 확인했습니다
+Feature.Moments.Label.NonInfiniteScrollEndTitle,시청할 모멘트가 더 있습니다
 Feature.Moments.Label.Photos,사진
 Feature.Moments.Label.PostDeleted,모멘트 삭제됨
 Feature.Moments.Label.PostRemovedBody,게시하신 모멘트는 당사 커뮤니티 규정에 위배됩니다.
@@ -4221,6 +4192,7 @@ Feature.Moments.Label.VoiceLimitReachedBody,잠시 기다린 후 다시 시도�
 Feature.Moments.Label.VoiceModerationError,스크립트는 안전 규칙을 준수해야 합니다
 Feature.Moments.Label.VoicePlaceholder,보이스오버 스크립트를 입력하세요. 글자 수 한도 {maxCount}자
 Feature.Moments.Label.VoiceTimeoutBody,보이스오버 생성 시간이 초과되었습니다.
+Feature.Moments.Label.VoiceTooManyNumbersError,스크립트에 숫자가 너무 많습니다
 Feature.Moments.Label.WriteComment,코멘트를 남기세요
 Feature.Moments.Title.Comments,코멘트
 Feature.Moments.Title.CommentsWithCappedCount,코멘트({count}개 이상)
@@ -4230,8 +4202,6 @@ Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,게시물 신고
-Feature.MusicPlayer.Action.GoToSongDetails,'노래 세부 정보'로 이동
-Feature.MusicPlayer.Action.Report,리포트
 Feature.NotApproved.Action.Continue,
 Feature.NotApproved.Action.LogOut,
 Feature.NotApproved.Action.Pending,응답 대기 중
@@ -4716,15 +4686,17 @@ Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,검색에서
 Feature.PlayerSearchResults.Label.KeywordTooShort,최소 3자 이상 입력하세요.
 Feature.PlayerSearchResults.Label.NewUsername,새로운 사용자 이름
-Feature.PlayerSearchResults.Label.NoResultsFound,
+Feature.PlayerSearchResults.Label.NoResultsFound,결과를 찾을 수 없습니다
 Feature.PlayerSearchResults.Label.NoResultsTryAnotherWay,다른 방법으로 친구를 찾으세요.
 Feature.PlayerSearchResults.Label.Previously,
 Feature.PlayerSearchResults.Label.ThisIsYou,회원님이네요
 Feature.PlayerSearchResults.Label.You,
-Feature.PlayerSearchResults.Label.YouAreConnections,서로 인맥
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,여러분은 친구예요
+Feature.PrivateServers.Action.CreatePrivateServer,
+Feature.PrivateServers.Action.FreeWithBlackbird,Plus로 무료 이용
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio에서는 비공개 서버 구매가 지원되지 않습니다.
+Feature.PrivateServers.Description.VipServersNotSupported,이 게임은 비공개 서버를 지원하지 않습니다.
 Feature.Profile.Action.AboutThisProfile,프로필 정보
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4789,7 +4761,6 @@ Feature.Profile.Label.AboutDetailsHeading,{name} 정보
 Feature.Profile.Label.AboutPlaceholder,내용을 입력하세요...
 Feature.Profile.Label.AddFriend,
 Feature.Profile.Label.AgedUpDisplayNameCaption,Roblox에서 다른 사용자에게 표시되는 기본 공개 이름입니다. 실명 등 친구들이 알아볼 수 있는 이름을 만드세요.
-Feature.Profile.Label.AgedUpDisplayNameConnectionsCaption,Roblox에서 다른 사용자에게 표시되는 기본 공개 이름입니다. 실명 등 사람들이 알아볼 수 있는 이름을 만드세요.
 Feature.Profile.Label.AgedUpDisplayNameFailed,"이름을 저장할 수 없습니다. 다른 이름을 사용해 보세요.
 "
 Feature.Profile.Label.AgedUpDisplayNameFriendsCaption,Roblox에서 다른 사용자에게 표시되는 기본 공개 이름입니다. 실명 등 친구들이 알아볼 수 있는 이름을 선택하세요.
@@ -4824,8 +4795,7 @@ Feature.Profile.Message.InvalidAliasError,이름을 저장할 수 없습니다. 
 Feature.Profile.Message.NoExperienceAccess,{name}(을)를 이용할 수 있는 권한이 없습니다.
 Feature.Profile.Message.QRLoadFailed,불러오기 실패.
 Feature.Profile.Message.QRNofificationRequest,님이 내 QR 코드를 사용해 친구 요청을 보냈어요
-Feature.Profile.Message.QRNotificationRequest,QR 코드를 통해 친구 요청을 받았습니다.
-Feature.Profile.Message.QRNotificationRequest.FriendsRename,
+Feature.Profile.Message.QRNotificationRequest.FriendsRename,QR 코드를 통해 친구 요청을 받았습니다.
 Feature.Profile.Title.QrScanner,QR 스캐너
 Feature.Profile.Tooltip.CurrencyTransfer.Body,이제 Robux를 보낼 수 있습니다.
 Feature.Profile.Tooltip.CustomNameProfile,맞춤 이름을 설정해 더 쉽게 친구를 알아보세요.
@@ -4942,13 +4912,16 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"아이템 및 아바�
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"아이템 및 아바타 첫 {trialUnlockDays}일 동안 10% 할인, 이후 20% 할인"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Roblox Plus 구독을 통해 적은 Robux로 더 큰 즐거움을 누리세요.
 Feature.RobloxSubscription.Description.JoinEarly,Plus로 일찍 참여하기
+Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,더 이상 유효하지 않은 추천 링크입니다.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} 님이 나를 Plus에 초대했습니다. Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다.
+Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"\u{201C}{ctaText}\u{201D}을(를) 클릭하면 <a href=""{referralTermsUrl}"">추천 프로그램 약관</a> 및 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Description.ReferralRecipientReward,새로운 Plus 구독자에게만 제공되는 혜택입니다.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,누군가 회원님의 링크를 통해 Plus를 구매하는 경우.
 Feature.RobloxSubscription.Description.ReferralShare,"다른 사람을 Plus에 초대한 경우, 초대 받은 사람이 Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus를 공유하고 {amount} Robux  받기
 Feature.RobloxSubscription.Heading.ReferralHistory,추천 내역
+Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Plus에 가입하고 {amount} Robux 받기
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Plus에 가입하고  받기
 Feature.RobloxSubscription.Heading.ReferralShare,Plus를 공유하고  받기
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,무료 비공개 서버
@@ -4973,6 +4946,7 @@ Feature.RobloxSubscription.Label.RobuxEarned,획득한 Robux
 Feature.RobloxSubscription.Label.SuccessfulReferrals,성공한 추천
 Feature.RobloxSubscription.Label.month,개월
 Feature.RobloxSubscription.Label.months,
+Feature.RobloxSubscription.Message.AlreadySubscribed,이미 Plus를 이용하고 있습니다. 이 링크는 신규 회원을 위한 것입니다. 내 링크를 공유하여 친구를 초대하고 보상을 받으세요.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Plus 1주일 무료 구독하기
 Feature.RobloxSubscription.Title.AlreadySubscribed,좋은 소식
 Feature.RobloxSubscription.Title.GenericError,오류가 발생했습니다
@@ -4983,6 +4957,7 @@ Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Plus 구독으로 얼리 �
 Feature.RobloxSubscription.label.week,주
 Feature.RobloxSubscription.label.weeks,
 Feature.SafetyDashboard.Heading.AccountStatus.V2,"계정 상태, 규정 위반 및 이의 신청"
+Feature.SafetyDashboard.Heading.ReportHistory,신고 내역
 Feature.Schools.Action.AlreadyGraduated,이미 졸업했습니다
 Feature.Schools.Action.CantFindSchool,재학 중인 학교를 찾을 수 없나요?
 Feature.Schools.Action.Continue,
@@ -5046,7 +5021,7 @@ Feature.Schools.Heading.RemoveYourSchool,내 학교 제거
 Feature.Schools.Heading.SchoolIsLive,이제 내 학교를 이용할 수 있습니다
 Feature.Schools.Heading.SchoolUnavailable,내 학교 이용 불가
 Feature.Schools.Heading.SelectGraduationYear,졸업 연도 선택
-Feature.Schools.Heading.ShareWithFriends,친구와 공유
+Feature.Schools.Heading.ShareWithFriends,
 Feature.Schools.Heading.ThanksForInterest,관심을 가져주셔서 감사합니다
 Feature.Schools.Heading.YouJoinedSchool,{school}에 합류했습니다!
 Feature.Schools.Heading.YourFounderReward,내 창립 멤버 보상
@@ -5123,13 +5098,10 @@ Feature.SettingsHub.Description.QRCodeCameraPermissionAndroidDeeplinkNotSupporte
 2. '카메라'를 선택합니다
 3. Roblox의 카메라 접근 권한을 허용합니다"
 Feature.SettingsHub.Description.QRCodeCameraPermissionIOS,QR 코드를 스캔하려면 Roblox가 카메라를 사용할 수 있도록 허용해 주세요.
-Feature.SettingsHub.Label.ConnectionsListLoadErrorMessage,인맥을 불러올 수 없습니다. 나중에 다시 시도하세요.
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,친구를 불러올 수 없습니다. 나중에 다시 시도하세요.
 Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,초대 완료
 Feature.SettingsHub.Label.Moderated,검토 요청됨
-Feature.SettingsHub.Label.NoConnectionsPageMessage,인맥을 추가해 함께 탐험하세요.
-Feature.SettingsHub.Label.NoConnectionsScreen,인맥을 맺고 사람들을 초대해 함께 플레이하세요!
 Feature.SettingsHub.Label.NoFriendsPageMessage,친구를 추가해 함께 탐험하세요.
 Feature.SettingsHub.Label.NoFriendsScreen,친구를 사귄 후 초대해 함께 방문하세요!
 Feature.SettingsHub.Label.ReportComment,위반 사항에 대해 직접 설명해 주세요.
@@ -5186,6 +5158,16 @@ Feature.SplitPane.Label.Rotate,
 Feature.SplitPane.NoAdditionalAvatarsDialogBody,다른 아바타를 만든 다음 여기에서 테마를 전환하세요.
 Feature.SplitPane.NoAdditionalAvatarsDialogPrimaryCTA,아바타 만들기
 Feature.SplitPane.NoAdditionalAvatarsDialogTitle,저장된 아바타가 모두 표시됩니다
+Feature.SplitPane.Tour.Button.Continue,
+Feature.SplitPane.Tour.Button.FinishTour,투어 마치기
+Feature.SplitPane.Tour.Button.SkipTour,투어 건너뛰기
+Feature.SplitPane.Tour.Step1.Description.Collapsed,이제 저장된 아바타를 홈에서 볼 수 있습니다. 이 공간을 펼쳐서 아바타를 확인하세요.
+Feature.SplitPane.Tour.Step1.Description.Expanded,이제 저장된 아바타를 홈에서 볼 수 있습니다. 아바타를 돌리거나 확대해서 모든 디테일을 확인하세요.
+Feature.SplitPane.Tour.Step1.Title,홈 화면에서 내 아바타 보기
+Feature.SplitPane.Tour.Step2.Description,원하는 룩을 선택하세요. 게임에 참가하기 전에 저장된 아바타를 전환할 수 있습니다.
+Feature.SplitPane.Tour.Step2.Title,언제든지 룩을 변경하세요
+Feature.SplitPane.Tour.Step3.Description,언제든지 이 공간을 숨기고 새로운 게임을 찾는 데 집중할 수 있습니다. 저장된 아바타는 바로 여기에 그대로 있습니다.
+Feature.SplitPane.Tour.Step3.Title,표시할 항목을 선택하세요
 Feature.SplitPane.UnsavedChangesDialogBody,지금 전환하면 아바타 변경 사항을 잃을 수 있습니다. 변경 사항을 유지하려면 저장하세요.
 Feature.SplitPane.UnsavedChangesDialogPrimaryCTA,
 Feature.SplitPane.UnsavedChangesDialogSecondaryCTA,저장하지 않음
@@ -5705,7 +5687,6 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_MuteCommand,/mute <스피커
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_TeamCommand,/team <메시지> 또는 /t <메시지> : 팀 내 회원에게 팀 채팅 전송.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_UnMuteCommand,/unmute <스피커> : 스피커 음소거 해제.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <사용자 이름> 또는 /w <사용자 이름> : 사용자 채널에서 비공개 메시지 열기.
-InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,내 인맥인 {RBX_NAME} 님이 체험에 입장했어요.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,자신에게 귓속말할 수 없어요.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,현재 '{RBX_NAME}'팀에 속해 있어요.
 InstantApps.Shortcuts.Label.AddToDesktopMenuItem,데스크톱에 추가

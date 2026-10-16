@@ -1,255 +1,273 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local dateTimeCalendarViewUtilitiesModule = require(script.Parent.Utilities.DateTimeCalendarViewUtilities)
-local dateTimeEqualityUtilitiesModule = require(script.Parent.Utilities.DateTimeEqualityUtilities)
-local dateTimeParsingUtilitiesModule = require(script.Parent.Utilities.DateTimeParsingUtilities)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local DateTimeCalendarViewUtilitiesModule = require(script.Parent.Utilities.DateTimeCalendarViewUtilities)
+local DateTimeEqualityUtilitiesModule = require(script.Parent.Utilities.DateTimeEqualityUtilities)
+local DateTimeParsingUtilitiesModule = require(script.Parent.Utilities.DateTimeParsingUtilities)
 local _ = require(script.Parent.DateTimePickerProps)
-local dateTimeRangeSelectionUtilitiesModule = require(script.Parent.Utilities.DateTimeRangeSelectionUtilities)
-local dateTimeUtilitiesModule = require(script.Parent.DateTimeUtilities)
-local dateTimePickerVariantModule = require(foundation.Enums.DateTimePickerVariant)
-local _ = require(foundation.Components.Types)
-local guiService = require(foundation.Utility.Wrappers.Services).GuiService
+local DateTimeRangeSelectionUtilitiesModule = require(script.Parent.Utilities.DateTimeRangeSelectionUtilities)
+local DateTimeUtilitiesModule = require(script.Parent.DateTimeUtilities)
+local DateTimePickerVariantModule = require(Foundation.Enums.DateTimePickerVariant)
+local _ = require(Foundation.Components.Types)
+local GuiService = require(Foundation.Utility.Wrappers.Services).GuiService
 
-return function(p1)
-	-- upvalues: dateTimePickerVariantModule (ref), reactModule (ref), dateTimeRangeSelectionUtilitiesModule (ref), dateTimeParsingUtilitiesModule (ref), guiService (ref), dateTimeCalendarViewUtilitiesModule (ref), dateTimeUtilitiesModule (ref), dateTimeEqualityUtilitiesModule (ref)
-	local variant = p1.variant or dateTimePickerVariantModule.Single
-	local var1 = if variant ~= dateTimePickerVariantModule.Dual then variant == dateTimePickerVariantModule.DualWithPresets else true
-	local var2 = variant == dateTimePickerVariantModule.DualWithPresets
-	local var3 = variant == dateTimePickerVariantModule.SingleWithTime
-	local var4, var5 = reactModule.useState(false)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), dateTimeRangeSelectionUtilitiesModule (copy), var1 (ref)
-		local defaultDates = p1.defaultDates
+return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
+	-- upvalues: DateTimePickerVariantModule (copy), ReactModule (copy), DateTimeRangeSelectionUtilitiesModule (copy), DateTimeParsingUtilitiesModule (copy), GuiService (copy), DateTimeCalendarViewUtilitiesModule (copy), DateTimeUtilitiesModule (copy), DateTimeEqualityUtilitiesModule (copy)
+	local Variant = p1.variant or DateTimePickerVariantModule.Single
+	local IsVariantMatch: boolean = Variant == DateTimePickerVariantModule.Dual or Variant == DateTimePickerVariantModule.DualWithPresets
+	local IsVariantMatch1 = Variant == DateTimePickerVariantModule.DualWithPresets
+	local IsVariantMatch2 = Variant == DateTimePickerVariantModule.SingleWithTime
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 76 ]]
+		-- upvalues: p1 (copy), DateTimeRangeSelectionUtilitiesModule (upval), IsVariantMatch (copy)
+		local DefaultDates = p1.defaultDates
 		
-		return if defaultDates == nil then nil else dateTimeRangeSelectionUtilitiesModule.normalizeDates({ acceptsDateRange = var1, dates = defaultDates })
-	end, { p1.defaultDates, var1 })
-	local var8, var9 = reactModule.useState(if var7 then dateTimeParsingUtilitiesModule.formatInputText({ dates = var7, variant = variant }) else "")
-	local var10 = reactModule.useRef(var8)
-	var10.current = var8
-	local var11, var12 = reactModule.useState(function()
-		-- upvalues: var7 (ref)
-		return var7
+		return if DefaultDates == nil then nil else DateTimeRangeSelectionUtilitiesModule.normalizeDates({ acceptsDateRange = IsVariantMatch, dates = DefaultDates })
+	end, { p1.defaultDates, IsVariantMatch })
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(if UseMemoResult then DateTimeParsingUtilitiesModule.formatInputText({ dates = UseMemoResult, variant = Variant }) else "")
+	local UseRefResult1 = ReactModule.useRef(UseStateResult1)
+	UseRefResult1.current = UseStateResult1
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function() --[[ Line: 97 ]]
+		-- upvalues: UseMemoResult (copy)
+		return UseMemoResult
 	end)
-	local var13 = reactModule.useRef(var11)
-	var13.current = var11
-	local var14, var15 = reactModule.useState(nil)
-	local var16, var17 = reactModule.useState(function()
-		-- upvalues: var7 (ref)
-		return var7
+	local UseRefResult2 = ReactModule.useRef(UseStateResult3)
+	UseRefResult2.current = UseStateResult3
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(function() --[[ Line: 106 ]]
+		-- upvalues: UseMemoResult (copy)
+		return UseMemoResult
 	end)
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref)
-		var5(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 110 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {})
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref)
-		var5(true)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 114 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(true)
 	end, {})
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: guiService (copy), var19 (ref)
-		if guiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
-			var19()
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 118 ]]
+		-- upvalues: GuiService (upval), UseResult1 (copy)
+		if GuiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
+			UseResult1()
 		end
-	end, { var19, guiService.ViewportDisplaySize })
-	local var21 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var12 (ref), var13 (ref), var17 (ref), var15 (ref)
-		var12(p2)
-		var13.current = p2
+	end, { UseResult1, GuiService.ViewportDisplaySize })
+	local UseResult3 = ReactModule.useCallback(function(Current, p2) --[[ Line: 125 ]]
+		-- upvalues: UseStateResult2_2 (copy), UseRefResult2 (copy), UseStateResult2_4 (copy), UseStateResult2_3 (copy)
+		UseStateResult2_2(Current)
+		UseRefResult2.current = Current
 		
-		if p3 and p3.asApplied then
-			var17(p2)
+		if p2 and p2.asApplied then
+			UseStateResult2_4(Current)
 		end
-		if p3 and p3.anchor then
-			var15(p3.anchor)
+		if p2 and p2.anchor then
+			UseStateResult2_3(p2.anchor)
 		end
 	end, {})
 	
-	local function _(p2)
-		-- upvalues: dateTimeCalendarViewUtilitiesModule (copy), p1 (ref)
-		return DateTime.fromUnixTimestamp(dateTimeCalendarViewUtilitiesModule.resolveAnchorDate(p2, p1.referenceDate).UnixTimestamp)
+	local function _(p2) --[[ Line: 137 | Named "resolvedViewAnchor" ]]
+		-- upvalues: DateTimeCalendarViewUtilitiesModule (upval), p1 (copy)
+		return DateTime.fromUnixTimestamp(DateTimeCalendarViewUtilitiesModule.resolveAnchorDate(p2, p1.referenceDate).UnixTimestamp)
 	end
 	
-	local var22 = reactModule.useRef(nil)
-	local var23 = reactModule.useCallback(function(p2)
-		-- upvalues: var9 (ref), var22 (ref), var21 (ref), dateTimeCalendarViewUtilitiesModule (copy), p1 (ref), var1 (ref), dateTimeParsingUtilitiesModule (copy), dateTimeUtilitiesModule (copy)
-		var9(p2)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseResult4 = ReactModule.useCallback(function(Current) --[[ Line: 145 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseRefResult3 (copy), UseResult3 (copy), DateTimeCalendarViewUtilitiesModule (upval), p1 (copy), IsVariantMatch (copy), DateTimeParsingUtilitiesModule (upval), DateTimeUtilitiesModule (upval)
+		UseStateResult2_1(Current)
 		
-		if var22.current ~= nil then
-			local current = var22.current
-			var22.current = nil
+		if UseRefResult3.current ~= nil then
+			UseRefResult3.current = nil
 			
-			if p2 == current then return end
+			if Current == UseRefResult3.current then return end
 		end
-		local function clearDraftToReference()
-			-- upvalues: var21 (copy), dateTimeCalendarViewUtilitiesModule (copy), p1 (copy)
-			var21({}, {
+		local function clearDraftToReference() --[[ Line: 157 ]]
+			-- upvalues: UseResult3 (upval), DateTimeCalendarViewUtilitiesModule (upval), p1 (upval)
+			UseResult3({}, {
 				asApplied = true,
-				anchor = DateTime.fromUnixTimestamp(dateTimeCalendarViewUtilitiesModule.resolveAnchorDate(nil, p1.referenceDate).UnixTimestamp)
+				anchor = DateTime.fromUnixTimestamp(DateTimeCalendarViewUtilitiesModule.resolveAnchorDate(nil, p1.referenceDate).UnixTimestamp)
 			})
 		end
 		
-		if p2:match("^%s*$") then
+		if Current:match("^%s*$") then
 			clearDraftToReference()
 			p1.onChanged(nil)
 			
 			return
-		elseif var1 then
-			local var24, var25 = dateTimeParsingUtilitiesModule.parseDualInputEndpoints(p2)
-			p1.onChanged(var24, var25)
-			local var26 = dateTimeParsingUtilitiesModule.parseInputToDraftDates(p2, p1.selectableDateRange)
+		end
+		if IsVariantMatch then
+			local ParseDualInputEndpointsResult, ParseDualInputEndpointsResult2 = DateTimeParsingUtilitiesModule.parseDualInputEndpoints(Current)
+			p1.onChanged(ParseDualInputEndpointsResult, ParseDualInputEndpointsResult2)
+			local ParseInputToDraftDatesResult = DateTimeParsingUtilitiesModule.parseInputToDraftDates(Current, p1.selectableDateRange)
 			
-			if var26 then
-				var21(var26, { asApplied = true, anchor = var26[1] })
+			if ParseInputToDraftDatesResult then
+				UseResult3(ParseInputToDraftDatesResult, {
+					asApplied = true,
+					anchor = ParseInputToDraftDatesResult[1]
+				})
+				
+				return
+			else
+				clearDraftToReference()
 				
 				return
 			end
-			clearDraftToReference()
+		else
+			local ParseDateTimeFromTextResult = DateTimeParsingUtilitiesModule.parseDateTimeFromText(DateTimeParsingUtilitiesModule.trimInputText(Current))
+			
+			if ParseDateTimeFromTextResult and (p1.selectableDateRange == nil or DateTimeUtilitiesModule.isDateWithinRange(ParseDateTimeFromTextResult, p1.selectableDateRange)) then
+				UseResult3({ ParseDateTimeFromTextResult }, { asApplied = true, anchor = ParseDateTimeFromTextResult })
+				p1.onChanged(ParseDateTimeFromTextResult)
+				
+				return
+			else
+				clearDraftToReference()
+				p1.onChanged(ParseDateTimeFromTextResult)
+			end
+		end
+	end, {
+		p1.onChanged, IsVariantMatch, IsVariantMatch2, p1.referenceDate,
+		p1.selectableDateRange, UseResult3
+	})
+	local UseResult5 = ReactModule.useCallback(function(_) --[[ Line: 206 ]]
+		-- upvalues: IsVariantMatch (copy), UseRefResult1 (copy), DateTimeParsingUtilitiesModule (upval), p1 (copy), Variant (copy), UseRefResult2 (copy), DateTimeEqualityUtilitiesModule (upval), UseRefResult3 (copy), UseStateResult2_1 (copy)
+		if not IsVariantMatch then return end
+		local Current = UseRefResult1.current
+		local ParseInputToDraftDatesResult = DateTimeParsingUtilitiesModule.parseInputToDraftDates(Current, p1.selectableDateRange)
+		
+		if not ParseInputToDraftDatesResult then return end
+		local FormatInputTextResult = DateTimeParsingUtilitiesModule.formatInputText({ dates = ParseInputToDraftDatesResult, variant = Variant })
+		
+		if FormatInputTextResult == Current then return end
+		local Current1 = UseRefResult2.current
+		
+		if Current1 and Current1[1] and Current1[2] and DateTimeEqualityUtilitiesModule.isSameDay(Current1[1], ParseInputToDraftDatesResult[1]) and DateTimeEqualityUtilitiesModule.isSameDay(Current1[2], ParseInputToDraftDatesResult[2]) then
+			UseRefResult3.current = FormatInputTextResult
+			UseStateResult2_1(FormatInputTextResult)
+			p1.onChanged(ParseInputToDraftDatesResult[1], ParseInputToDraftDatesResult[2])
+			
+			return
+		end
+	end, {
+		IsVariantMatch,
+		p1.onChanged,
+		p1.selectableDateRange,
+		Variant
+	})
+	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 245 ]]
+		-- upvalues: DateTimeRangeSelectionUtilitiesModule (upval), UseRefResult2 (copy), UseResult3 (copy)
+		UseResult3((DateTimeRangeSelectionUtilitiesModule.selectRangeEndpoint(UseRefResult2.current, p2)))
+	end, { UseResult3 })
+	local UseResult7 = ReactModule.useCallback(function(p2) --[[ Line: 250 ]]
+		-- upvalues: p1 (copy), DateTimeEqualityUtilitiesModule (upval), UseResult3 (copy)
+		if not p1.selectableDateRange or DateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange(p2, p1.selectableDateRange) then
+			UseResult3({ p2.startDate, p2.endDate }, { anchor = p2.startDate })
+			
+			return
+		end
+	end, { p1.selectableDateRange, UseResult3 })
+	local UseResult8 = ReactModule.useCallback(function(Entry) --[[ Line: 261 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult3 (copy)
+		local Current = UseRefResult2.current
+		local CurrentEntry = if Current then Current[1] else nil
+		local CurrentEntry1 = if Current then Current[2] else nil
+		local Entry1 = Entry[1]
+		local Entry2 = Entry[2]
+		
+		if not Current or not Entry1 or not CurrentEntry or CurrentEntry.UnixTimestamp ~= Entry1.UnixTimestamp or not CurrentEntry1 ~= not Entry2 or CurrentEntry1 and Entry2 and CurrentEntry1.UnixTimestamp ~= Entry2.UnixTimestamp then
+			UseResult3(Entry)
+			
+			return
+		end
+	end, { UseResult3 })
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 284 ]]
+		-- upvalues: UseResult3 (copy), UseStateResult5 (copy), DateTimeCalendarViewUtilitiesModule (upval), p1 (copy)
+		UseResult3(UseStateResult5, {
+			anchor = DateTime.fromUnixTimestamp(DateTimeCalendarViewUtilitiesModule.resolveAnchorDate(UseStateResult5, p1.referenceDate).UnixTimestamp)
+		})
+	end, { UseStateResult5, p1.referenceDate, UseResult3 })
+	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 290 ]]
+		-- upvalues: UseResult9 (copy), UseResult (copy)
+		UseResult9()
+		UseResult()
+	end, { UseResult9, UseResult })
+	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 295 ]]
+		-- upvalues: UseResult9 (copy)
+		UseResult9()
+	end, { UseResult9 })
+	local UseResult12 = ReactModule.useCallback(function(Entry) --[[ Line: 299 ]]
+		-- upvalues: UseResult3 (copy), IsVariantMatch (copy), DateTimeUtilitiesModule (upval), UseRefResult3 (copy), UseStateResult2_1 (copy), p1 (copy), IsVariantMatch2 (copy)
+		local Entry1 = Entry[1]
+		
+		if not Entry1 then return end
+		UseResult3(Entry, { anchor = Entry1 })
+		
+		if IsVariantMatch then
+			local Entry2 = Entry[2]
+			local Text = DateTimeUtilitiesModule.formatLocalTime(Entry1) .. " - " .. (if Entry2 then DateTimeUtilitiesModule.formatLocalTime(Entry2) else "")
+			UseRefResult3.current = Text
+			UseStateResult2_1(Text)
+			p1.onChanged(Entry1, Entry2)
 			
 			return
 		else
-			local var27 = dateTimeParsingUtilitiesModule.parseDateTimeFromText(dateTimeParsingUtilitiesModule.trimInputText(p2))
-			
-			if var27 and (p1.selectableDateRange == nil or dateTimeUtilitiesModule.isDateWithinRange(var27, p1.selectableDateRange)) then
-				var21({ var27 }, { asApplied = true, anchor = var27 })
-				p1.onChanged(var27)
-				
-				return
-			end
-			clearDraftToReference()
-			p1.onChanged(var27)
+			local FormatLocalTimeResult = DateTimeUtilitiesModule.formatLocalTime(Entry1, IsVariantMatch2)
+			UseRefResult3.current = FormatLocalTimeResult
+			UseStateResult2_1(FormatLocalTimeResult)
+			p1.onChanged(Entry1)
 		end
 	end, {
-		p1.onChanged, var1, var3, p1.referenceDate, p1.selectableDateRange, var21
+		p1.onChanged,
+		IsVariantMatch,
+		IsVariantMatch2,
+		UseResult3
 	})
-	local var24 = reactModule.useCallback(function(_)
-		-- upvalues: var1 (ref), var10 (ref), dateTimeParsingUtilitiesModule (copy), p1 (ref), variant (ref), var13 (ref), dateTimeEqualityUtilitiesModule (copy), var22 (ref), var9 (ref)
-		if not var1 then return end
-		local current = var10.current
-		local var25 = dateTimeParsingUtilitiesModule.parseInputToDraftDates(current, p1.selectableDateRange)
+	local UseResult13 = ReactModule.useCallback(function() --[[ Line: 323 ]]
+		-- upvalues: UseRefResult2 (copy), IsVariantMatch1 (copy), UseResult (copy), UseStateResult2_4 (copy), UseResult12 (copy)
+		local Current = UseRefResult2.current
 		
-		if not var25 then return end
-		local var26 = dateTimeParsingUtilitiesModule.formatInputText({ dates = var25, variant = variant })
-		
-		if var26 == current then return end
-		local current_1 = var13.current
-		
-		if current_1 and current_1[1] and (current_1[2] and dateTimeEqualityUtilitiesModule.isSameDay(current_1[1], var25[1])) and dateTimeEqualityUtilitiesModule.isSameDay(current_1[2], var25[2]) then
-			var22.current = var26
-			var9(var26)
-			p1.onChanged(var25[1], var25[2])
-			
-			return
-		end
-	end, { var1, p1.onChanged, p1.selectableDateRange, variant })
-	local var25 = reactModule.useCallback(function(p2)
-		-- upvalues: dateTimeRangeSelectionUtilitiesModule (copy), var13 (ref), var21 (ref)
-		var21(dateTimeRangeSelectionUtilitiesModule.selectRangeEndpoint(var13.current, p2))
-	end, { var21 })
-	local var26 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), dateTimeEqualityUtilitiesModule (copy), var21 (ref)
-		if p1.selectableDateRange and not dateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange(p2, p1.selectableDateRange) then
-			return
-		end
-		var21({ p2.startDate, p2.endDate }, { anchor = p2.startDate })
-	end, { p1.selectableDateRange, var21 })
-	local var27 = reactModule.useCallback(function(p2)
-		-- upvalues: var13 (ref), var21 (ref)
-		local current = var13.current
-		local var28 = if current then current[1] else nil
-		local var29 = if current then current[2] else nil
-		local var30 = p2[1]
-		local var31 = p2[2]
-		
-		if current and var30 and (var28 and var28.UnixTimestamp == var30.UnixTimestamp) and not var29 == not var31 and (not var29 or not var31 or var29.UnixTimestamp == var31.UnixTimestamp) then
-			return
-		end
-		var21(p2)
-	end, { var21 })
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: var21 (ref), var16 (ref), dateTimeCalendarViewUtilitiesModule (copy), p1 (ref)
-		var21(var16, {
-			anchor = DateTime.fromUnixTimestamp(dateTimeCalendarViewUtilitiesModule.resolveAnchorDate(var16, p1.referenceDate).UnixTimestamp)
-		})
-	end, { var16, p1.referenceDate, var21 })
-	local var29 = reactModule.useCallback(function()
-		-- upvalues: var28 (ref), var18 (ref)
-		var28()
-		var18()
-	end, { var28, var18 })
-	local var30 = reactModule.useCallback(function()
-		-- upvalues: var28 (ref)
-		var28()
-	end, { var28 })
-	local var31 = reactModule.useCallback(function(p2)
-		-- upvalues: var21 (ref), var1 (ref), dateTimeUtilitiesModule (copy), var22 (ref), var9 (ref), p1 (ref), var3 (ref)
-		local var32 = p2[1]
-		
-		if not var32 then return end
-		var21(p2, { anchor = var32 })
-		local _ = nil
-		
-		if var1 then
-			local var33 = p2[2]
-			local text = dateTimeUtilitiesModule.formatLocalTime(var32) .. " - " .. (if var33 then dateTimeUtilitiesModule.formatLocalTime(var33) else "")
-			var22.current = text
-			var9(text)
-			p1.onChanged(var32, var33)
-			
-			return
-		end
-		local var34 = dateTimeUtilitiesModule.formatLocalTime(var32, var3)
-		var22.current = var34
-		var9(var34)
-		p1.onChanged(var32)
-	end, { p1.onChanged, var1, var3, var21 })
-	local var32 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref), var2 (ref), var18 (ref), var17 (ref), var31 (ref)
-		local current = var13.current
-		
-		if current then
-			if var2 and (not current[1] or not current[2]) then
-				var18()
+		if Current then
+			if IsVariantMatch1 and (not Current[1] or not Current[2]) then
+				UseResult()
 				
 				return
 			end
-			var17(current)
-			var31(current)
+			UseStateResult2_4(Current)
+			UseResult12(Current)
 		end
-		var18()
-	end, { var18, var31, var2 })
-	local var33 = false
+		UseResult()
+	end, { UseResult, UseResult12, IsVariantMatch1 })
+	local IsApplyButtonDisabled = false
 	
-	if var11 then
-		local var34 = var11[1]
-		local var35 = var11[2]
+	if UseStateResult3 then
+		local UseStateResultEntry = UseStateResult3[1]
+		local UseStateResultEntry1 = UseStateResult3[2]
 		
-		if var2 or var1 then
-			var33 = if var34 ~= nil then if var35 ~= nil then var35.UnixTimestamp < var34.UnixTimestamp else true else true
-		elseif variant == dateTimePickerVariantModule.Single or var3 then
-			local _ = var34 == nil
+		if IsVariantMatch1 or IsVariantMatch then
+			IsApplyButtonDisabled = UseStateResultEntry == nil or (UseStateResultEntry1 == nil or UseStateResultEntry1.UnixTimestamp < UseStateResultEntry.UnixTimestamp)
+		elseif Variant == DateTimePickerVariantModule.Single or IsVariantMatch2 then
+			IsApplyButtonDisabled = UseStateResultEntry == nil
 		end
-	elseif var2 then
-		var33 = true
+	elseif IsVariantMatch1 then
+		IsApplyButtonDisabled = true
 	end
 	return {
-		closeDateTimePicker = var18,
-		isOpen = var4,
-		onFocusGained = var20,
-		onFocusLost = var24,
-		showDateTimePicker = var19,
-		textInputRef = var6,
-		selectedDates = var11,
-		inputText = var8,
-		updateInputText = var23,
-		viewAnchorDate = var14,
-		onDayActivated = var25,
-		onPresetSelected = var26,
-		onSelectedDatesChanged = var27,
-		onApply = var32,
-		onCancel = var29,
-		onReset = var30,
-		isApplyButtonDisabled = var33,
-		isResetButtonDisabled = if var2 or var3 then dateTimeEqualityUtilitiesModule.areDatesEqual(var11, var16) else true
+		closeDateTimePicker = UseResult,
+		isOpen = UseStateResult,
+		onFocusGained = UseResult2,
+		onFocusLost = UseResult5,
+		showDateTimePicker = UseResult1,
+		textInputRef = UseRefResult,
+		selectedDates = UseStateResult3,
+		inputText = UseStateResult1,
+		updateInputText = UseResult4,
+		viewAnchorDate = UseStateResult4,
+		onDayActivated = UseResult6,
+		onPresetSelected = UseResult7,
+		onSelectedDatesChanged = UseResult8,
+		onApply = UseResult13,
+		onCancel = UseResult10,
+		onReset = UseResult11,
+		isApplyButtonDisabled = IsApplyButtonDisabled,
+		isResetButtonDisabled = not IsVariantMatch1 and not IsVariantMatch2 or DateTimeEqualityUtilitiesModule.areDatesEqual(UseStateResult3, UseStateResult5)
 	}
 end

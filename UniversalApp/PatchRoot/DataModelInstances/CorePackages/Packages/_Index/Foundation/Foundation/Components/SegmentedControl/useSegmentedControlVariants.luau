@@ -1,25 +1,25 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local segmentedControlVariantModule = require(foundation.Enums.SegmentedControlVariant)
-local flagsModule = require(foundation.Utility.Flags)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local SegmentedControlVariantModule = require(Foundation.Enums.SegmentedControlVariant)
+local FlagsModule = require(Foundation.Utility.Flags)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function _(p1, p2)
+local function _(p1, Thickness) --[[ Line: 39 | Named "strokeFromStyle" ]]
 	return {
 		Color = p1.Color3,
 		Transparency = p1.Transparency,
-		Thickness = p2,
+		Thickness = Thickness,
 		BorderStrokePosition = Enum.BorderStrokePosition.Outer
 	}
 end
 
-local function variantsFactory_DEPRECATED(p1)
-	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
+local function variantsFactory_DEPRECATED(p1) --[[ Line: 48 ]]
+	-- upvalues: InputSizeModule (copy), IconSizeModule (copy)
 	return {
 		common = {
 			container = { tag = "row align-y-center auto-x bg-surface-300" },
@@ -29,49 +29,49 @@ local function variantsFactory_DEPRECATED(p1)
 			divider = { tag = "row" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				container = { tag = "size-600" },
 				segment = { tag = "padding-small" },
 				text = { tag = "text-caption-small" },
-				icon = { size = iconSizeModule.Small },
+				icon = { size = IconSizeModule.Small },
 				divider = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				container = { tag = "size-800" },
 				segment = { tag = "padding-small" },
 				text = { tag = "text-caption-small" },
-				icon = { size = iconSizeModule.Medium },
+				icon = { size = IconSizeModule.Medium },
 				divider = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = { tag = "size-1000 padding-xsmall" },
 				segment = { tag = "padding-small" },
 				text = { tag = "text-caption-medium" },
-				icon = { size = iconSizeModule.Medium },
+				icon = { size = IconSizeModule.Medium },
 				divider = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				container = { tag = "size-1200 padding-xsmall" },
 				segment = { tag = "padding-medium" },
 				text = { tag = "text-caption-medium" },
-				icon = { size = iconSizeModule.Large },
+				icon = { size = IconSizeModule.Large },
 				divider = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			}
 		},
 		defaultRadius = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				container = { tag = "radius-medium" },
 				segment = { tag = "radius-medium" }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				container = { tag = "radius-medium" },
 				segment = { tag = "radius-medium" }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = { tag = "radius-medium" },
 				segment = { tag = "radius-small" }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				container = { tag = "radius-medium" },
 				segment = { tag = "radius-small" }
 			}
@@ -83,24 +83,9 @@ local function variantsFactory_DEPRECATED(p1)
 	}
 end
 
-local function variantsFactory(p1)
-	-- upvalues: segmentedControlVariantModule (ref), inputSizeModule (ref), iconSizeModule (ref), fillBehaviorModule (ref)
-	local t = {
-		[segmentedControlVariantModule.Filled] = { container = { tag = "bg-shift-200" } }
-	}
-	local stroke = segmentedControlVariantModule.Stroke
-	local t_1 = {}
-	local t_2 = {}
-	local emphasis = p1.Color.Stroke.Emphasis
-	t_2.stroke = {
-		Color = emphasis.Color3,
-		Transparency = emphasis.Transparency,
-		Thickness = p1.Stroke.Standard,
-		BorderStrokePosition = Enum.BorderStrokePosition.Outer
-	}
-	t_1.container = t_2
-	t[stroke] = t_1
-	t[segmentedControlVariantModule.Utility] = {}
+local function variantsFactory(p1) --[[ Line: 124 ]]
+	-- upvalues: SegmentedControlVariantModule (copy), InputSizeModule (copy), IconSizeModule (copy), FillBehaviorModule (copy)
+	local Emphasis = p1.Color.Stroke.Emphasis
 	
 	return {
 		common = {
@@ -119,67 +104,80 @@ local function variantsFactory(p1)
 				icon = { style = p1.Color.Content.Default }
 			}
 		},
-		variantStyles = t,
+		variantStyles = {
+			[SegmentedControlVariantModule.Filled] = { container = { tag = "bg-shift-200" } },
+			[SegmentedControlVariantModule.Stroke] = {
+				container = {
+					stroke = {
+						Color = Emphasis.Color3,
+						Transparency = Emphasis.Transparency,
+						Thickness = p1.Stroke.Standard,
+						BorderStrokePosition = Enum.BorderStrokePosition.Outer
+					}
+				}
+			},
+			[SegmentedControlVariantModule.Utility] = {}
+		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				segment = { tag = "padding-x-small" },
 				text = { tag = "text-label-small" },
-				icon = { size = iconSizeModule.XSmall }
+				icon = { size = IconSizeModule.XSmall }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				segment = { tag = "padding-x-medium" },
 				text = { tag = "text-label-small" },
-				icon = { size = iconSizeModule.Small }
+				icon = { size = IconSizeModule.Small }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = { tag = "padding-xsmall" },
 				segment = { tag = "padding-x-medium" },
 				text = { tag = "text-label-medium" },
-				icon = { size = iconSizeModule.Medium }
+				icon = { size = IconSizeModule.Medium }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				container = { tag = "padding-xsmall" },
 				segment = { tag = "padding-x-large" },
 				text = { tag = "text-label-large" },
-				icon = { size = iconSizeModule.Large }
+				icon = { size = IconSizeModule.Large }
 			}
 		},
 		fitSizes = {
-			[inputSizeModule.XSmall] = { container = { tag = "size-0-600 auto-x" } },
-			[inputSizeModule.Small] = { container = { tag = "size-0-800 auto-x" } },
-			[inputSizeModule.Medium] = { container = { tag = "size-0-1000 auto-x" } },
-			[inputSizeModule.Large] = { container = { tag = "size-0-1200 auto-x" } }
+			[InputSizeModule.XSmall] = { container = { tag = "size-0-600 auto-x" } },
+			[InputSizeModule.Small] = { container = { tag = "size-0-800 auto-x" } },
+			[InputSizeModule.Medium] = { container = { tag = "size-0-1000 auto-x" } },
+			[InputSizeModule.Large] = { container = { tag = "size-0-1200 auto-x" } }
 		},
 		fillBehaviorStyles = {
-			[fillBehaviorModule.Fit] = { segment = { tag = "size-0-full auto-xy" } },
-			[fillBehaviorModule.Fill] = { segment = { tag = "grow auto-xy" } }
+			[FillBehaviorModule.Fit] = { segment = { tag = "size-0-full auto-xy" } },
+			[FillBehaviorModule.Fill] = { segment = { tag = "grow auto-xy" } }
 		},
 		fillSizes = {
-			[inputSizeModule.XSmall] = { container = { tag = "size-full-600" } },
-			[inputSizeModule.Small] = { container = { tag = "size-full-800" } },
-			[inputSizeModule.Medium] = { container = { tag = "size-full-1000" } },
-			[inputSizeModule.Large] = { container = { tag = "size-full-1200" } }
+			[InputSizeModule.XSmall] = { container = { tag = "size-full-600" } },
+			[InputSizeModule.Small] = { container = { tag = "size-full-800" } },
+			[InputSizeModule.Medium] = { container = { tag = "size-full-1000" } },
+			[InputSizeModule.Large] = { container = { tag = "size-full-1200" } }
 		},
 		utilityPadding = {
-			[inputSizeModule.XSmall] = {},
-			[inputSizeModule.Small] = { segment = { tag = "padding-x-medium" } },
-			[inputSizeModule.Medium] = { segment = { tag = "padding-x-large" } },
-			[inputSizeModule.Large] = { segment = { tag = "padding-x-xlarge" } }
+			[InputSizeModule.XSmall] = {},
+			[InputSizeModule.Small] = { segment = { tag = "padding-x-medium" } },
+			[InputSizeModule.Medium] = { segment = { tag = "padding-x-large" } },
+			[InputSizeModule.Large] = { segment = { tag = "padding-x-xlarge" } }
 		},
 		defaultRadius = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				container = { tag = "radius-medium" },
 				segment = { tag = "radius-medium" }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				container = { tag = "radius-medium" },
 				segment = { tag = "radius-medium" }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = { tag = "radius-medium" },
 				segment = { tag = "radius-small" }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				container = { tag = "radius-medium" },
 				segment = { tag = "radius-small" }
 			}
@@ -191,14 +189,15 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: flagsModule (ref), variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), segmentedControlVariantModule (ref), fillBehaviorModule (ref), variantsFactory_DEPRECATED (ref)
-	if flagsModule.FoundationSegmentedControlBeta then
-		local segmentedControl = variantsContextModule.useVariants("SegmentedControl", variantsFactory, p1)
+return function(p1, p2, Utility, Fill, p3, Enabled) --[[ Line: 244 ]]
+	-- upvalues: FlagsModule (copy), VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy), SegmentedControlVariantModule (copy), FillBehaviorModule (copy), variantsFactory_DEPRECATED (copy)
+	if FlagsModule.FoundationSegmentedControlBeta then
+		local SegmentedControl = VariantsContextModule.useVariants("SegmentedControl", variantsFactory, p1)
 		
-		return composeStyleVariantModule(segmentedControl.common, segmentedControl.sizes[p2], if p3 == segmentedControlVariantModule.Utility then segmentedControl.utilityPadding[p2] else {}, if p4 == fillBehaviorModule.Fill then segmentedControl.fillSizes[p2] else segmentedControl.fitSizes[p2], segmentedControl.fillBehaviorStyles[p4], segmentedControl.activeStyles[p6 == true], segmentedControl.variantStyles[p3], if p5 then segmentedControl.circularRadius else segmentedControl.defaultRadius[p2])
+		return ComposeStyleVariantModule(SegmentedControl.common, SegmentedControl.sizes[p2], if Utility == SegmentedControlVariantModule.Utility then SegmentedControl.utilityPadding[p2] else {}, if Fill == FillBehaviorModule.Fill then SegmentedControl.fillSizes[p2] else SegmentedControl.fitSizes[p2], SegmentedControl.fillBehaviorStyles[Fill], SegmentedControl.activeStyles[Enabled == true], SegmentedControl.variantStyles[Utility], if p3 then SegmentedControl.circularRadius else SegmentedControl.defaultRadius[p2])
+	else
+		local SegmentedControl = VariantsContextModule.useVariants("SegmentedControl", variantsFactory_DEPRECATED, p1)
+		
+		return ComposeStyleVariantModule(SegmentedControl.common, SegmentedControl.sizes[p2], if p3 then SegmentedControl.circularRadius else SegmentedControl.defaultRadius[p2])
 	end
-	local segmentedControl = variantsContextModule.useVariants("SegmentedControl", variantsFactory_DEPRECATED, p1)
-	
-	return composeStyleVariantModule(segmentedControl.common, segmentedControl.sizes[p2], if p5 then segmentedControl.circularRadius else segmentedControl.defaultRadius[p2])
 end

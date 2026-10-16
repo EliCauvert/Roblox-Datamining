@@ -1,87 +1,78 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local chipModule = require(foundation.Components.Chip)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
-local chipSizeModule = require(foundation.Enums.ChipSize)
-local chipVariantModule = require(foundation.Enums.ChipVariant)
-local paginationSizeModule = require(foundation.Enums.PaginationSize)
-local paginationVariantModule = require(foundation.Enums.PaginationVariant)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ChipModule = require(Foundation.Components.Chip)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
+local ChipSizeModule = require(Foundation.Enums.ChipSize)
+local ChipVariantModule = require(Foundation.Enums.ChipVariant)
+local PaginationSizeModule = require(Foundation.Enums.PaginationSize)
+local PaginationVariantModule = require(Foundation.Enums.PaginationVariant)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local _ = require(script.Parent.MultiPagePagination)
-local paginationUtilsModule = require(script.Parent.Parent.paginationUtils)
-local usePaginationNavModule = require(script.Parent.Parent.usePaginationNav)
-local t = {
+local PaginationUtilsModule = require(script.Parent.Parent.paginationUtils)
+local UsePaginationNavModule = require(script.Parent.Parent.usePaginationNav)
+local config = {
 	testId = "--foundation-pagination",
-	size = paginationSizeModule.Medium
+	size = PaginationSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), paginationVariantModule (ref), reactModule (ref), usePaginationNavModule (ref), paginationUtilsModule (ref), chipModule (ref), paginationSizeModule (ref), chipSizeModule (ref), chipVariantModule (ref), viewModule (ref), textModule (ref)
-	local var1
-	local var2 = withDefaultsModule(p1, t)
-	local size = var2.size
-	local count = var2.count
-	local var3 = count ~= nil and var2.hasFirstLastButtons == true
-	local var4 = var2.variant == paginationVariantModule.SinglePage
-	
-	if var2.hasPreviousPage == nil then
-		var1 = var2.page <= 1
-	else
-		var1 = var2.hasPreviousPage ~= true
-		var1 = nil
-	end
-	local var5
-	if count ~= nil then
-		local _ = count <= var2.page
-	elseif var2.hasNextPage == nil then
-		var5 = true
-	else
-		var5 = var2.hasNextPage ~= true
-		var5 = nil
-	end
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = usePaginationNavModule(var2, {
-		hasFirstLastButtons = var3,
-		currentPage = var2.page,
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 37 | Named "DirectionalPagination" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), PaginationVariantModule (copy), ReactModule (copy), UsePaginationNavModule (copy), PaginationUtilsModule (copy), ChipModule (copy), PaginationSizeModule (copy), ChipSizeModule (copy), ChipVariantModule (copy), ViewModule (copy), TextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local Size = WithDefaultsModuleResult.size
+	local Count = WithDefaultsModuleResult.count
+	local IsHasFirstLastButtons: boolean = Count ~= nil and WithDefaultsModuleResult.hasFirstLastButtons == true
+	local IsVariantMatch = WithDefaultsModuleResult.variant == PaginationVariantModule.SinglePage
+	local IsPageBelow: boolean = if WithDefaultsModuleResult.hasPreviousPage == nil then WithDefaultsModuleResult.page <= 1 else WithDefaultsModuleResult.hasPreviousPage ~= true
+	local NoHasNextPage: boolean = if Count == nil then WithDefaultsModuleResult.hasNextPage == nil or WithDefaultsModuleResult.hasNextPage ~= true else Count <= WithDefaultsModuleResult.page
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UsePaginationNavModuleResult = UsePaginationNavModule(WithDefaultsModuleResult, {
+		hasFirstLastButtons = IsHasFirstLastButtons,
+		currentPage = WithDefaultsModuleResult.page,
 		disabledState = {
-			isBackDisabled = var1,
-			isFirstDisabled = var1,
-			isForwardDisabled = var5,
-			isLastDisabled = var5
+			isBackDisabled = IsPageBelow,
+			isFirstDisabled = IsPageBelow,
+			isForwardDisabled = NoHasNextPage,
+			isLastDisabled = NoHasNextPage
 		}
-	}, var7)
-	reactModule.useImperativeHandle(p2, function()
-		-- upvalues: var6 (ref)
-		return var6
-	end, { var6 })
+	}, UseStateResult2)
+	ReactModule.useImperativeHandle(p2, function() --[[ Line: 64 ]]
+		-- upvalues: UseStateResult (copy)
+		return UseStateResult
+	end, { UseStateResult })
 	
-	return var8.createLayout(reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var2 (ref), paginationUtilsModule (copy), reactModule (copy), chipModule (copy), size (ref), paginationSizeModule (copy), chipSizeModule (copy), chipVariantModule (copy), viewModule (copy), textModule (copy)
-		if not var4 then
+	return UsePaginationNavModuleResult.createLayout((ReactModule.useMemo(function() --[[ Line: 68 ]]
+		-- upvalues: IsVariantMatch (copy), WithDefaultsModuleResult (copy), PaginationUtilsModule (upval), ReactModule (upval), ChipModule (upval), Size (copy), PaginationSizeModule (upval), ChipSizeModule (upval), ChipVariantModule (upval), ViewModule (upval), TextModule (upval)
+		if IsVariantMatch then
+			local Text = tostring(WithDefaultsModuleResult.page)
+			
+			return if PaginationUtilsModule.needsWidePageSlot(WithDefaultsModuleResult.page) then ReactModule.createElement(ChipModule, {
+				LayoutOrder = 2,
+				isChecked = false,
+				isDisabled = true,
+				onActivated = function() --[[ Line: 80 ]] end,
+				size = if Size == PaginationSizeModule.Small then ChipSizeModule.Small else ChipSizeModule.Medium,
+				testId = `{WithDefaultsModuleResult.testId}--page-label`,
+				text = Text,
+				variant = ChipVariantModule.Utility
+			}) else ReactModule.createElement(ViewModule, {
+				LayoutOrder = 2,
+				tag = PaginationUtilsModule.getCircularSlotTag(Size),
+				testId = `{WithDefaultsModuleResult.testId}--page-label`
+			}, {
+				Text = ReactModule.createElement(TextModule, {
+					LayoutOrder = 1,
+					Text = Text,
+					tag = PaginationUtilsModule.getPageLabelTag(Size)
+				})
+			})
+		else
 			return nil
 		end
-		local var9 = tostring(var2.page)
-		
-		return if paginationUtilsModule.needsWidePageSlot(var2.page) then reactModule.createElement(chipModule, {
-			LayoutOrder = 2,
-			isChecked = false,
-			isDisabled = true,
-			onActivated = function() end,
-			size = if size == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium,
-			testId = `{var2.testId}--page-label`,
-			text = var9,
-			variant = chipVariantModule.Utility
-		}) else reactModule.createElement(viewModule, {
-			LayoutOrder = 2,
-			tag = paginationUtilsModule.getCircularSlotTag(size),
-			testId = `{var2.testId}--page-label`
-		}, {
-			Text = reactModule.createElement(textModule, {
-				LayoutOrder = 1,
-				Text = var9,
-				tag = paginationUtilsModule.getPageLabelTag(size)
-			})
-		})
-	end, { var4, var2.page, size, var2.testId }))
+	end, {
+		IsVariantMatch,
+		WithDefaultsModuleResult.page,
+		Size,
+		WithDefaultsModuleResult.testId
+	})))
 end))

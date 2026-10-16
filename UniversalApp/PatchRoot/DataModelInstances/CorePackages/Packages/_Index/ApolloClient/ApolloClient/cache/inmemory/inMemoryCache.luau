@@ -1,73 +1,72 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local map = luauPolyfillModule.Map
-local object = luauPolyfillModule.Object
-local set = luauPolyfillModule.Set
-local instanceof = luauPolyfillModule.instanceof
-local NULL = require(parent.utilities).NULL
-local promiseModule = require(parent_1.Promise)
-local t = {}
-local _ = require(parent_1.GraphQL)
-local wrap = require(parent.optimism).wrap
-local equalModule = require(parent.jsutils.equal)
-local apolloCache = require(script.Parent.Parent.core.cache).ApolloCache
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Map = LuauPolyfillModule.Map
+local Object = LuauPolyfillModule.Object
+local Set = LuauPolyfillModule.Set
+local InstanceofFunction = LuauPolyfillModule.instanceof
+local NULL = require(Parent.utilities).NULL
+local PromiseModule = require(Parent1.Promise)
+local InMemoryCache = {}
+local _ = require(Parent1.GraphQL)
+local WrapFunction = require(Parent.optimism).wrap
+local EqualModule = require(Parent.jsutils.equal)
+local ApolloCache = require(script.Parent.Parent.core.cache).ApolloCache
 local _ = require(script.Parent.Parent.core.types.Cache)
-local missingFieldError = require(script.Parent.Parent.core.types.common).MissingFieldError
-local utilitiesModule = require(script.Parent.Parent.Parent.utilities)
-local addTypenameToDocument = utilitiesModule.addTypenameToDocument
-local isReference = utilitiesModule.isReference
+local MissingFieldError = require(script.Parent.Parent.core.types.common).MissingFieldError
+local UtilitiesModule = require(script.Parent.Parent.Parent.utilities)
+local AddTypenameToDocumentFunction = UtilitiesModule.addTypenameToDocument
+local IsReferenceFunction = UtilitiesModule.isReference
 local _ = require(script.Parent.types)
-local storeReader = require(script.Parent.readFromStore).StoreReader
-local storeWriter = require(script.Parent.writeToStore).StoreWriter
-local entityStoreModule = require(script.Parent.entityStore)
-local entityStoreRoot = entityStoreModule.EntityStore_Root
-local supportsResultCaching = entityStoreModule.supportsResultCaching
-local reactiveVarsModule = require(script.Parent.reactiveVars)
-local makeVar = reactiveVarsModule.makeVar
-local forgetCache = reactiveVarsModule.forgetCache
-local recallCache = reactiveVarsModule.recallCache
-local policiesModule = require(script.Parent.policies)
-local defaultDataIdFromObject = policiesModule.defaultDataIdFromObject
-local policies = policiesModule.Policies
-local hasOwn = require(script.Parent.helpers).hasOwn
-local canonicalStringify = require(script.Parent["object-canon"]).canonicalStringify
-local t_1 = {
+local StoreReader = require(script.Parent.readFromStore).StoreReader
+local StoreWriter = require(script.Parent.writeToStore).StoreWriter
+local EntityStoreModule = require(script.Parent.entityStore)
+local EntityStoreRoot = EntityStoreModule.EntityStore_Root
+local SupportsResultCachingFunction = EntityStoreModule.supportsResultCaching
+local ReactiveVarsModule = require(script.Parent.reactiveVars)
+local MakeVar = ReactiveVarsModule.makeVar
+local ForgetCacheFunction = ReactiveVarsModule.forgetCache
+local RecallCacheFunction = ReactiveVarsModule.recallCache
+local PoliciesModule = require(script.Parent.policies)
+local Policies = PoliciesModule.Policies
+local HasOwnFunction = require(script.Parent.helpers).hasOwn
+local CanonicalStringifyFunction = require(script.Parent["object-canon"]).canonicalStringify
+local config = {
 	addTypename = true,
 	resultCaching = true,
-	dataIdFromObject = defaultDataIdFromObject,
+	dataIdFromObject = PoliciesModule.defaultDataIdFromObject,
 	typePolicies = {}
 }
-local tbl = setmetatable({}, { __index = apolloCache })
-tbl.__index = tbl
+local self = setmetatable({}, { __index = ApolloCache })
+self.__index = self
 
-function tbl.new(p1)
-	-- upvalues: apolloCache (ref), tbl (ref), set (ref), map (ref), makeVar (ref), object (ref), t_1 (ref), policies (ref)
-	local tbl_1 = setmetatable(apolloCache.new(), tbl)
+function self.new(Cache) --[[ Line: 199 ]]
+	-- upvalues: ApolloCache (copy), self (copy), Set (copy), Map (copy), MakeVar (copy), Object (copy), config (copy), Policies (copy)
+	local self1 = setmetatable(ApolloCache.new(), self)
 	
-	if p1 == nil then
-		p1 = {}
+	if Cache == nil then
+		Cache = {}
 	end
-	tbl_1.watches = set.new()
-	tbl_1.typenameDocumentCache = map.new(nil)
-	tbl_1.makeVar = makeVar
-	tbl_1.txCount = 0
-	tbl_1.config = object.assign({}, t_1, p1)
-	tbl_1.addTypename = tbl_1.config.addTypename
-	tbl_1.policies = policies.new({
-		cache = tbl_1,
-		dataIdFromObject = tbl_1.config.dataIdFromObject,
-		possibleTypes = tbl_1.config.possibleTypes,
-		typePolicies = tbl_1.config.typePolicies
+	self1.watches = Set.new()
+	self1.typenameDocumentCache = Map.new(nil)
+	self1.makeVar = MakeVar
+	self1.txCount = 0
+	self1.config = Object.assign({}, config, Cache)
+	self1.addTypename = self1.config.addTypename
+	self1.policies = Policies.new({
+		cache = self1,
+		dataIdFromObject = self1.config.dataIdFromObject,
+		possibleTypes = self1.config.possibleTypes,
+		typePolicies = self1.config.typePolicies
 	})
-	tbl_1:init()
+	self1:init()
 	
-	return tbl_1
+	return self1
 end
 
-function tbl:init()
-	-- upvalues: entityStoreRoot (ref)
-	self.data = entityStoreRoot.new({
+function self:init() --[[ Line: 227 ]]
+	-- upvalues: EntityStoreRoot (copy)
+	self.data = EntityStoreRoot.new({
 		policies = self.policies,
 		resultCaching = self.config.resultCaching
 	})
@@ -75,40 +74,39 @@ function tbl:init()
 	self:resetResultCache()
 end
 
-function tbl:resetResultCache(p1)
-	-- upvalues: storeReader (ref), storeWriter (ref), wrap (ref), supportsResultCaching (ref), canonicalStringify (ref), set (ref)
-	local storeReader_1 = self.storeReader
-	self.storeReader = storeReader.new({
+function self:resetResultCache(ResetResultIdentities) --[[ Line: 247 ]]
+	-- upvalues: StoreReader (copy), StoreWriter (copy), WrapFunction (copy), SupportsResultCachingFunction (copy), CanonicalStringifyFunction (copy), Set (copy)
+	local StoreReader1 = self.storeReader
+	self.storeReader = StoreReader.new({
 		cache = self,
 		addTypename = self.addTypename,
 		resultCacheMaxSize = self.config.resultCacheMaxSize,
-		canon = if p1 then nil elseif storeReader_1 then storeReader_1.canon else nil
+		canon = if ResetResultIdentities then nil elseif StoreReader1 then StoreReader1.canon else nil
 	})
-	self.storeWriter = storeWriter.new(self, self.storeReader)
-	self.maybeBroadcastWatch = wrap(function(_, p2, p3)
-		-- upvalues: self (write)
-		return self:broadcastWatch(p2, p3)
+	self.storeWriter = StoreWriter.new(self, self.storeReader)
+	self.maybeBroadcastWatch = WrapFunction(function(_, p1, p2) --[[ Line: 264 ]]
+		-- upvalues: self (ref)
+		return self:broadcastWatch(p1, p2)
 	end, {
 		max = self.config.resultCacheMaxSize,
-		makeCacheKey = function(_, p2)
-			-- upvalues: self (write), supportsResultCaching (copy), canonicalStringify (copy)
-			local var1 = if p2.optimistic then self.optimisticData else self.data
+		makeCacheKey = function(_, Query) --[[ Line: 268 ]]
+			-- upvalues: self (ref), SupportsResultCachingFunction (upval), CanonicalStringifyFunction (upval)
+			local OptimisticData = if Query.optimistic then self.optimisticData else self.data
 			
-			if supportsResultCaching(var1) then
-				return var1:makeCacheKey(p2.query, p2.callback, canonicalStringify({
-					optimistic = p2.optimistic,
-					rootId = p2.rootId,
-					variables = p2.variables
-				}))
-			end
+			if not SupportsResultCachingFunction(OptimisticData) then return end
+			return OptimisticData:makeCacheKey(Query.query, Query.callback, CanonicalStringifyFunction({
+				optimistic = Query.optimistic,
+				rootId = Query.rootId,
+				variables = Query.variables
+			}))
 		end
 	}, self)
-	set.new({ self.data.group, self.optimisticData.group }):forEach(function(p2)
-		return p2:resetCaching()
+	Set.new({ self.data.group, self.optimisticData.group }):forEach(function(p1) --[[ Line: 304 ]]
+		return p1:resetCaching()
 	end)
 end
 
-function tbl:restore(p1)
+function self:restore(p1) --[[ Line: 309 ]]
 	self:init()
 	
 	if p1 then
@@ -117,38 +115,40 @@ function tbl:restore(p1)
 	return self
 end
 
-function tbl:extract(p1)
-	if p1 == nil then
-		p1 = false
+function self.extract(p1, p2: boolean) --[[ Line: 322 ]]
+	if p2 == nil then
+		p2 = false
 	end
-	return if p1 then self.optimisticData:extract() else self.data:extract()
+	return if p2 then p1.optimisticData:extract() else p1.data:extract()
 end
 
-function tbl.read(p1, p2)
-	-- upvalues: object (ref), NULL (ref), instanceof (ref), missingFieldError (ref)
-	local var1 = if p2.returnPartialData == nil then false else p2.returnPartialData
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), object (copy), p2 (ref), var1 (write), NULL (copy)
-		return p1.storeReader:diffQueryAgainstStore(object.assign({}, p2, {
-			store = if p2.optimistic then p1.optimisticData else p1.data,
+function self.read(p1, p2) --[[ Line: 334 ]]
+	-- upvalues: Object (copy), NULL (copy), InstanceofFunction (copy), MissingFieldError (copy)
+	local ReturnPartialData = nil
+	ReturnPartialData = p2.returnPartialData ~= nil and p2.returnPartialData
+	local Success, Result = pcall(function() --[[ Line: 349 ]]
+		-- upvalues: p1 (copy), Object (upval), p2 (copy), ReturnPartialData (ref), NULL (upval)
+		return p1.storeReader:diffQueryAgainstStore(Object.assign({}, p2, {
+			store = p2.optimistic and p1.optimisticData or p1.data,
 			config = p1.config,
-			returnPartialData = var1
+			returnPartialData = ReturnPartialData
 		})).result or NULL
 	end)
 	
-	if not ok then
-		if instanceof(status, missingFieldError) then
+	if not Success then
+		if InstanceofFunction(Result, MissingFieldError) then
 			return NULL
 		end
-		error(status)
+		error(Result)
 	end
-	return status
+	return Result
 end
 
-function tbl:write(p1)
-	local ok, status = pcall(function()
-		-- upvalues: self (write), p1 (ref)
-		self.txCount += 1
+function self:write(p1) --[[ Line: 374 ]]
+	local Success, Result = pcall(function() --[[ Line: 376 ]]
+		-- upvalues: self (ref), p1 (copy)
+		local v1 = self
+		v1.txCount += 1
 		
 		return self.storeWriter:writeToStore(self.data, p1)
 	end)
@@ -157,247 +157,253 @@ function tbl:write(p1)
 	if self.txCount == 0 and p1.broadcast ~= false then
 		self:broadcastWatches()
 	end
-	if not ok then
-		error(status)
+	if not Success then
+		error(Result)
 	end
-	return status
+	return Result
 end
 
-function tbl:modify(p1)
-	-- upvalues: hasOwn (ref)
-	if hasOwn(p1, "id") and not p1.id then
+function self:modify(Id) --[[ Line: 394 ]]
+	-- upvalues: HasOwnFunction (copy)
+	if HasOwnFunction(Id, "id") and not Id.id then
 		return false
 	end
-	local var1 = if p1.optimistic then self.optimisticData else self.data
-	local ok, status = pcall(function()
-		-- upvalues: self (write), var1 (write), p1 (ref)
-		self.txCount += 1
+	local OptimisticData = nil
+	OptimisticData = if Id.optimistic then self.optimisticData else self.data
+	local Success, Result = pcall(function() --[[ Line: 419 ]]
+		-- upvalues: self (ref), OptimisticData (ref), Id (copy)
+		local v1 = self
+		v1.txCount += 1
 		
-		return var1:modify(p1.id or "ROOT_QUERY", p1.fields)
+		return OptimisticData:modify(Id.id or "ROOT_QUERY", Id.fields)
 	end)
 	self.txCount -= 1
 	
-	if self.txCount == 0 and p1.broadcast ~= false then
+	if self.txCount == 0 and Id.broadcast ~= false then
 		self:broadcastWatches()
 	end
-	if not ok then
-		error(status)
+	if not Success then
+		error(Result)
 	end
-	return status
+	return Result
 end
 
-function tbl:diff(p1)
-	-- upvalues: object (ref)
-	return self.storeReader:diffQueryAgainstStore(object.assign({}, p1, {
-		store = if p1.optimistic then self.optimisticData else self.data,
+function self:diff(p1) --[[ Line: 439 ]]
+	-- upvalues: Object (copy)
+	return self.storeReader:diffQueryAgainstStore(Object.assign({}, p1, {
+		store = p1.optimistic and self.optimisticData or self.data,
 		rootId = p1.id or "ROOT_QUERY",
 		config = self.config
 	}))
 end
 
-function tbl:watch(p1)
-	-- upvalues: recallCache (ref), forgetCache (ref)
+function self:watch(p1) --[[ Line: 449 ]]
+	-- upvalues: RecallCacheFunction (copy), ForgetCacheFunction (copy)
 	if self.watches.size == 0 then
-		recallCache(self)
+		RecallCacheFunction(self)
 	end
 	self.watches:add(p1)
 	
 	if p1.immediate then
 		self:maybeBroadcastWatch(p1)
 	end
-	return function()
-		-- upvalues: self (write), p1 (ref), forgetCache (copy)
+	return function() --[[ Line: 470 ]]
+		-- upvalues: self (ref), p1 (copy), ForgetCacheFunction (upval)
 		if self.watches:delete(p1) and self.watches.size == 0 then
-			forgetCache(self)
+			ForgetCacheFunction(self)
 		end
 		self.maybeBroadcastWatch:forget(p1)
 	end
 end
 
-function tbl:gc(p1)
-	-- upvalues: canonicalStringify (ref)
-	canonicalStringify:reset()
-	local var1 = self.optimisticData:gc()
+function self:gc(p1) --[[ Line: 486 ]]
+	-- upvalues: CanonicalStringifyFunction (copy)
+	CanonicalStringifyFunction:reset()
+	local v1 = self.optimisticData:gc()
 	
 	if p1 and self.txCount == 0 then
 		if p1.resetResultCache then
 			self:resetResultCache(p1.resetResultIdentities)
 			
-			return var1
-		elseif p1.resetResultIdentities then
+			return v1
+		end
+		if p1.resetResultIdentities then
 			self.storeReader:resetCanon()
 		end
 	end
-	return var1
+	return v1
 end
 
-function tbl:retain(p1, p2)
-	return if p2 then self.optimisticData:retain(p1) else self.data:retain(p1)
+function self.retain(p1, p2, p3) --[[ Line: 518 ]]
+	return if p3 then p1.optimisticData:retain(p2) else p1.data:retain(p2)
 end
 
-function tbl:release(p1, p2)
-	return if p2 then self.optimisticData:release(p1) else self.data:release(p1)
+function self.release(p1, p2, p3) --[[ Line: 533 ]]
+	return if p3 then p1.optimisticData:release(p2) else p1.data:release(p2)
 end
 
-function tbl:identify(p1)
-	-- upvalues: isReference (ref)
-	return if isReference(p1) then p1.__ref else self.policies:identify(p1)[1]
+function self.identify(p1, p2) --[[ Line: 549 ]]
+	-- upvalues: IsReferenceFunction (copy)
+	return if IsReferenceFunction(p2) then p2.__ref else p1.policies:identify(p2)[1]
 end
 
-function tbl:evict(p1)
-	-- upvalues: hasOwn (ref), object (ref)
-	if not p1.id then
-		if hasOwn(p1, "id") then
+function self:evict(Tbl) --[[ Line: 557 ]]
+	-- upvalues: HasOwnFunction (copy), Object (copy)
+	if not Tbl.id then
+		if HasOwnFunction(Tbl, "id") then
 			return false
 		end
-		p1 = object.assign(table.clone(p1), { id = "ROOT_QUERY" })
+		Tbl = Object.assign(table.clone(Tbl), { id = "ROOT_QUERY" })
 	end
-	local ok, status = pcall(function()
-		-- upvalues: self (write), p1 (write)
-		self.txCount += 1
+	local Success, Result = pcall(function() --[[ Line: 572 ]]
+		-- upvalues: self (ref), Tbl (ref)
+		local v1 = self
+		v1.txCount += 1
 		
-		return self.optimisticData:evict(p1)
+		return self.optimisticData:evict(Tbl)
 	end)
 	self.txCount -= 1
 	
-	if self.txCount == 0 and p1.broadcast ~= false then
+	if self.txCount == 0 and Tbl.broadcast ~= false then
 		self:broadcastWatches()
 	end
-	if not ok then
-		error(status)
+	if not Success then
+		error(Result)
 	end
-	return status
+	return Result
 end
 
-function tbl:reset()
-	-- upvalues: canonicalStringify (ref), promiseModule (ref)
+function self:reset() --[[ Line: 594 ]]
+	-- upvalues: CanonicalStringifyFunction (copy), PromiseModule (copy)
 	self:init()
 	self:broadcastWatches()
-	canonicalStringify:reset()
+	CanonicalStringifyFunction:reset()
 	
-	return promiseModule.delay(0)
+	return PromiseModule.delay(0)
 end
 
-function tbl:removeOptimistic(p1)
-	local var1 = self.optimisticData:removeLayer(p1)
+function self:removeOptimistic(p1) --[[ Line: 601 ]]
+	local RemoveLayerResult = self.optimisticData:removeLayer(p1)
 	
-	if var1 ~= self.optimisticData then
-		self.optimisticData = var1
+	if RemoveLayerResult ~= self.optimisticData then
+		self.optimisticData = RemoveLayerResult
 		self:broadcastWatches()
 	end
 end
 
-function tbl:batch(p1)
-	-- upvalues: set (ref), object (ref)
-	local var1 = p1.optimistic == nil or p1.optimistic
-	local removeOptimistic = p1.removeOptimistic
-	local onWatchUpdated = p1.onWatchUpdated
+function self:batch(Tbl) --[[ Line: 609 ]]
+	-- upvalues: Set (copy), Object (copy)
+	local NoOptimistic = Tbl.optimistic == nil or Tbl.optimistic
+	local RemoveOptimistic = Tbl.removeOptimistic
+	local OnWatchUpdatedFunction = Tbl.onWatchUpdated
 	
-	local function perform(p2)
-		-- upvalues: self (write), p1 (ref)
-		local data = self.data
-		local optimisticData = self.optimisticData
-		self.txCount += 1
+	local function perform(OptimisticData) --[[ Line: 614 ]]
+		-- upvalues: self (ref), Tbl (copy)
+		local Data = self.data
+		local OptimisticData1 = self.optimisticData
+		local v1 = self
+		v1.txCount += 1
 		
-		if p2 then
-			self.optimisticData = p2
+		if OptimisticData then
+			self.optimisticData = OptimisticData
 			self.data = self.optimisticData
 		end
-		local ok, status = pcall(p1.update, p1, self)
-		self.txCount -= 1
-		self.data = data
-		self.optimisticData = optimisticData
+		local Success, Result = pcall(Tbl.update, Tbl, self)
+		local v2 = self
+		v2.txCount -= 1
+		self.data = Data
+		self.optimisticData = OptimisticData1
 		
-		if not ok then
-			error(status)
+		if not Success then
+			error(Result)
 		end
 	end
 	
-	local var2 = set.new()
+	local NewSet = Set.new()
 	
-	if onWatchUpdated and self.txCount == 0 then
-		self:broadcastWatches(object.assign(table.clone(p1), {
-			onWatchUpdated = function(_, p2)
-				-- upvalues: var2 (ref)
-				var2:add(p2)
+	if OnWatchUpdatedFunction and self.txCount == 0 then
+		self:broadcastWatches(Object.assign(table.clone(Tbl), {
+			onWatchUpdated = function(_, p1): boolean --[[ Line: 651 ]]
+				-- upvalues: NewSet (copy)
+				NewSet:add(p1)
 				
 				return false
 			end
 		}))
 	end
-	if typeof(var1) == "string" then
-		self.optimisticData = self.optimisticData:addLayer(var1, perform)
-	elseif var1 == false then
+	if typeof(NoOptimistic) == "string" then
+		self.optimisticData = self.optimisticData:addLayer(NoOptimistic, perform)
+	elseif NoOptimistic == false then
 		perform(self.data)
 	else
 		perform()
 	end
-	if typeof(removeOptimistic) == "string" then
-		self.optimisticData = self.optimisticData:removeLayer(removeOptimistic)
+	if typeof(RemoveOptimistic) == "string" then
+		self.optimisticData = self.optimisticData:removeLayer(RemoveOptimistic)
 	end
-	if onWatchUpdated and var2.size > 0 then
-		self:broadcastWatches(object.assign(table.clone(p1), {
-			onWatchUpdated = function(p2, p3, p4)
-				-- upvalues: onWatchUpdated (ref), var2 (ref)
-				local var3 = onWatchUpdated(p2, p3, p4)
+	if OnWatchUpdatedFunction and NewSet.size > 0 then
+		self:broadcastWatches(Object.assign(table.clone(Tbl), {
+			onWatchUpdated = function(p1, p2, p3) --[[ Line: 687 ]]
+				-- upvalues: OnWatchUpdatedFunction (copy), NewSet (copy)
+				local OnWatchUpdatedResult = OnWatchUpdatedFunction(p1, p2, p3)
 				
-				if var3 ~= false then
-					var2:delete(p3)
+				if OnWatchUpdatedResult ~= false then
+					NewSet:delete(p2)
 				end
-				return var3
+				return OnWatchUpdatedResult
 			end
 		}))
 		
-		if var2.size > 0 then
-			var2:forEach(function(p2)
-				-- upvalues: self (write)
-				return self.maybeBroadcastWatch:dirty(p2)
+		if NewSet.size > 0 then
+			NewSet:forEach(function(p1) --[[ Line: 703 ]]
+				-- upvalues: self (ref)
+				return self.maybeBroadcastWatch:dirty(p1)
 			end)
 		end
 	else
-		self:broadcastWatches(p1)
+		self:broadcastWatches(Tbl)
 	end
 end
 
-function tbl:performTransaction(p1, p2)
-	-- upvalues: NULL (ref)
+function self:performTransaction(Callback, NULL1) --[[ Line: 724 ]]
+	-- upvalues: NULL (copy)
 	return self:batch({
-		update = function(_, ...)
-			-- upvalues: p1 (ref)
-			return p1(...)
+		update = function(_, ...) --[[ Line: 727 ]]
+			-- upvalues: Callback (copy)
+			return Callback(...)
 		end,
-		optimistic = p2 or p2 ~= NULL
+		optimistic = NULL1 or NULL1 ~= NULL
 	})
 end
 
-function tbl:transformDocument(p1)
-	-- upvalues: addTypenameToDocument (ref)
+function self:transformDocument(p1) --[[ Line: 736 ]]
+	-- upvalues: AddTypenameToDocumentFunction (copy)
 	if not self.addTypename then
 		return p1
 	end
-	local var1 = self.typenameDocumentCache:get(p1)
+	local GetResult = self.typenameDocumentCache:get(p1)
 	
-	if not var1 then
-		var1 = addTypenameToDocument(p1)
-		self.typenameDocumentCache:set(p1, var1)
-		self.typenameDocumentCache:set(var1, var1)
+	if not GetResult then
+		GetResult = AddTypenameToDocumentFunction(p1)
+		self.typenameDocumentCache:set(p1, GetResult)
+		self.typenameDocumentCache:set(GetResult, GetResult)
 	end
-	return var1
+	return GetResult
 end
 
-function tbl:broadcastWatches(p1)
+function self:broadcastWatches(AssignResult) --[[ Line: 752 ]]
 	if self.txCount == 0 then
-		self.watches:forEach(function(p2)
-			-- upvalues: self (ref), p1 (ref)
-			return self:maybeBroadcastWatch(p2, p1)
+		self.watches:forEach(function(p1) --[[ Line: 755 ]]
+			-- upvalues: self (copy), AssignResult (copy)
+			return self:maybeBroadcastWatch(p1, AssignResult)
 		end)
 	end
 end
 
-function tbl:broadcastWatch(p1, p2)
-	-- upvalues: equalModule (ref)
-	local lastDiff = p1.lastDiff
-	local var1 = self:diff({
+function self:broadcastWatch(p1, p2) --[[ Line: 767 ]]
+	-- upvalues: EqualModule (copy)
+	local LastDiff = p1.lastDiff
+	local DiffResult = self:diff({
 		query = p1.query,
 		variables = p1.variables,
 		optimistic = p1.optimistic
@@ -405,18 +411,18 @@ function tbl:broadcastWatch(p1, p2)
 	
 	if p2 then
 		if p1.optimistic and typeof(p2.optimistic) == "string" then
-			var1.fromOptimisticTransaction = true
+			DiffResult.fromOptimisticTransaction = true
 		end
-		local onWatchUpdated = p2.onWatchUpdated
+		local OnWatchUpdatedFunction = p2.onWatchUpdated
 		
-		if onWatchUpdated and onWatchUpdated(self, p1, var1, lastDiff) == false then return end
+		if OnWatchUpdatedFunction and OnWatchUpdatedFunction(self, p1, DiffResult, LastDiff) == false then return end
 	end
-	if not lastDiff or not equalModule(lastDiff.result, var1.result) then
-		p1.lastDiff = var1
-		p1:callback(p1.lastDiff, lastDiff)
+	if not LastDiff or not EqualModule(LastDiff.result, DiffResult.result) then
+		p1.lastDiff = DiffResult
+		p1:callback(p1.lastDiff, LastDiff)
 	end
 end
 
-t.InMemoryCache = tbl
+InMemoryCache.InMemoryCache = self
 
-return t
+return InMemoryCache

@@ -1,136 +1,111 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
 local t = {}
 local _ = require(script.Parent.custom_options)
-local t_1 = {}
-t_1.__index = t_1
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 225 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		capabilities = if p1 == nil or p1.capabilities == nil then nil else p1.capabilities,
 		categories = if p1 == nil or p1.categories == nil then {} else p1.categories,
 		comment = if p1 == nil or p1.comment == nil then nil else p1.comment,
 		metadata = if p1 == nil or p1.metadata == nil then nil else p1.metadata
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 236 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.capabilities ~= nil then
-		local var2 = self.capabilities:encode()
-		local var3, var4 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var3, var13 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
-		buff = var3
-		var1 = var4
+		local EncodeResult = self.capabilities:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.categories ~= nil and #self.categories > 0 then
-		for i, v in self.categories do
-			local var5 = v:encode()
-			local var6, var7 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-			var6, var16 = protoModule.writeBuffer(var6, var7, var5, buffer.len(var5))
-			buff = var6
-			var1 = var7
+		for _, category in self.categories do
+			local EncodeResult = category:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.comment ~= nil then
-		local var8 = self.comment:encode()
-		local var9, var10 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
-		var9, var19 = protoModule.writeBuffer(var9, var10, var8, buffer.len(var8))
-		buff = var9
-		var1 = var10
+		local EncodeResult = self.comment:encode()
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.metadata ~= nil then
-		local var11 = self.metadata:encode()
-		local var12, var13 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.lengthDelimited)
-		var12, var22 = protoModule.writeBuffer(var12, var13, var11, buffer.len(var11))
-		buff = var12
-		var1 = var13
+		local EncodeResult = self.metadata:encode()
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
-	local var14 = t_1.new()
-	local var15 = 0
-	while var15 < buffer.len(p1) do
-		local _ = nil
-		local var16 = nil
-		local var17, var18, var19 = protoModule.readTag(p1, var15)
-		local var20 = var17
-		var16 = var18
-		var15 = var19
+function Module.decode(Buf) --[[ Line: 271 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), t (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v25 = ProtoModule.readTag(Buf, v1)
 		
-		if var16 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var21, var22 = protoModule.readVarInt(p1, var15)
-			local _ = var21
-			var15 = var22
-			continue
-		end
-		if var16 == protoModule.wireTypes.lengthDelimited then
-			if var20 == 1 then
-				local _ = nil
-				local var23, var24 = protoModule.readBuffer(p1, var15)
-				var15 = var24
-				var14.capabilities = t.UniverseUserVoteFeedbackMetadataData_Capabilities.decode(var23)
-			elseif var20 == 2 then
-				local _ = nil
-				local var25, var26 = protoModule.readBuffer(p1, var15)
-				var15 = var26
-				table.insert(var14.categories, t.UniverseUserVoteFeedbackMetadataData_Category.decode(var25))
-			elseif var20 == 3 then
-				local _ = nil
-				local var27, var28 = protoModule.readBuffer(p1, var15)
-				var15 = var28
-				var14.comment = t.UniverseUserVoteFeedbackMetadataData_Comment.decode(var27)
-			elseif var20 == 4 then
-				local _ = nil
-				local var29, var30 = protoModule.readBuffer(p1, var15)
-				var15 = var30
-				var14.metadata = t.UniverseUserVoteFeedbackMetadataData_Metadata.decode(var29)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v25 = ProtoModule.readVarInt(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v25 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.capabilities = t.UniverseUserVoteFeedbackMetadataData_Capabilities.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v25 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.categories, t.UniverseUserVoteFeedbackMetadataData_Category.decode(Buffer2))
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v25 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.comment = t.UniverseUserVoteFeedbackMetadataData_Comment.decode(Buffer3)
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v25 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.metadata = t.UniverseUserVoteFeedbackMetadataData_Metadata.decode(Buffer4)
 			else
-				local _ = nil
-				local var31, var32 = protoModule.readVarInt(p1, var15)
-				var15 = var32 + var31
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
 			end
-		elseif var16 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var33, var34 = protoModule.readFixed32(p1, var15)
-			local _ = var33
-			var15 = var34
-		elseif var16 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var35, var36 = protoModule.readFixed64(p1, var15)
-			local _ = var35
-			var15 = var36
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v25 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v25 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var26)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var14
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 329 ]]
 	local t = {}
 	
 	if self.capabilities ~= nil then
 		t.capabilities = self.capabilities:jsonEncode()
 	end
 	if self.categories ~= nil and #self.categories > 0 then
-		local t_1 = {}
+		local Categories = {}
 		
-		for i, v in self.categories do
-			table.insert(t_1, v:jsonEncode())
+		for _, category in self.categories do
+			table.insert(Categories, category:jsonEncode())
 		end
-		t.categories = t_1
+		t.categories = Categories
 	end
 	if self.comment ~= nil then
 		t.comment = self.comment:jsonEncode()
@@ -141,133 +116,113 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), t (ref)
-	local var37 = t_1.new()
+function Module:jsonDecode() --[[ Line: 355 ]]
+	-- upvalues: Module (copy), t (copy)
+	local NewModule = Module.new()
 	
 	if self.capabilities ~= nil then
-		var37.capabilities = t.UniverseUserVoteFeedbackMetadataData_Capabilities.jsonDecode(self.capabilities)
+		NewModule.capabilities = t.UniverseUserVoteFeedbackMetadataData_Capabilities.jsonDecode(self.capabilities)
 	end
 	if self.categories ~= nil then
-		local t_2 = {}
+		local Categories = {}
 		
-		for i, v in self.categories do
-			table.insert(t_2, t.UniverseUserVoteFeedbackMetadataData_Category.jsonDecode(v))
+		for _, category in self.categories do
+			table.insert(Categories, t.UniverseUserVoteFeedbackMetadataData_Category.jsonDecode(category))
 		end
-		var37.categories = t_2
+		NewModule.categories = Categories
 	end
 	if self.comment ~= nil then
-		var37.comment = t.UniverseUserVoteFeedbackMetadataData_Comment.jsonDecode(self.comment)
+		NewModule.comment = t.UniverseUserVoteFeedbackMetadataData_Comment.jsonDecode(self.comment)
 	end
 	if self.metadata ~= nil then
-		var37.metadata = t.UniverseUserVoteFeedbackMetadataData_Metadata.jsonDecode(self.metadata)
+		NewModule.metadata = t.UniverseUserVoteFeedbackMetadataData_Metadata.jsonDecode(self.metadata)
 	end
-	return var37
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "UniverseUserVoteFeedbackMetadataData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.UniverseUserVoteFeedbackMetadataData"
 }
-t.UniverseUserVoteFeedbackMetadataData = t_1
-typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData)
-local t_2 = {}
-t_2.__index = t_2
+t.UniverseUserVoteFeedbackMetadataData = Module
+TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData)
+local Module1 = {}
+Module1.__index = Module1
 
-function t_2.new(p2)
-	-- upvalues: t_2 (ref)
-	return setmetatable({
-		can_submit_review = if p2 == nil or p2.can_submit_review == nil then false else p2.can_submit_review,
-		can_submit_comment = if p2 == nil or p2.can_submit_comment == nil then false else p2.can_submit_comment,
-		can_submit_category_options = if p2 == nil or p2.can_submit_category_options == nil then nil else p2.can_submit_category_options
-	}, t_2)
+function Module1.new(p1) --[[ Line: 400 ]]
+	-- upvalues: Module1 (copy)
+	return (setmetatable({
+		can_submit_review = p1 ~= nil and p1.can_submit_review ~= nil and p1.can_submit_review,
+		can_submit_comment = p1 ~= nil and p1.can_submit_comment ~= nil and p1.can_submit_comment,
+		can_submit_category_options = if p1 == nil or p1.can_submit_category_options == nil then nil else p1.can_submit_category_options
+	}, Module1))
 end
 
-function t_2:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var38 = 0
+function Module1:encode() --[[ Line: 419 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.can_submit_review then
-		local var39, var40 = protoModule.writeTag(buff, var38, 1, protoModule.wireTypes.varint)
-		var39, var54 = protoModule.writeVarInt(var39, var40, if self.can_submit_review then 1 else 0)
-		buff = var39
-		var38 = var40
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, if self.can_submit_review then 1 else 0)
 	end
 	if self.can_submit_comment then
-		local var41, var42 = protoModule.writeTag(buff, var38, 2, protoModule.wireTypes.varint)
-		var41, var56 = protoModule.writeVarInt(var41, var42, if self.can_submit_comment then 1 else 0)
-		buff = var41
-		var38 = var42
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, if self.can_submit_comment then 1 else 0)
 	end
 	if self.can_submit_category_options ~= nil then
-		local var43, var44 = protoModule.writeTag(buff, var38, 3, protoModule.wireTypes.varint)
-		var43, var58 = protoModule.writeVarInt(var43, var44, if self.can_submit_category_options then 1 else 0)
-		buff = var43
-		var38 = var44
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, if self.can_submit_category_options then 1 else 0)
 	end
-	local buff_1 = buffer.create(var38)
-	buffer.copy(buff_1, 0, buff, 0, var38)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_2.decode(p2)
-	-- upvalues: t_2 (ref), protoModule (ref)
-	local var38 = t_2.new()
-	local var39 = 0
-	while var39 < buffer.len(p2) do
-		local _ = nil
-		local _ = nil
-		local var40, var41, var42 = protoModule.readTag(p2, var39)
-		local var43 = var40
-		local var44 = var41
-		var39 = var42
+function Module1.decode(Buf) --[[ Line: 445 ]]
+	-- upvalues: Module1 (copy), ProtoModule (copy)
+	local NewModule = Module1.new()
+	local v2 = 0
+	while v2 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v50 = ProtoModule.readTag(Buf, v2)
 		
-		if var44 == protoModule.wireTypes.varint then
-			if var43 == 1 then
-				local _ = nil
-				local var45, var46 = protoModule.readVarInt(p2, var39)
-				var39 = var46
-				var38.can_submit_review = var45 ~= 0
-			elseif var43 == 2 then
-				local _ = nil
-				local var47, var48 = protoModule.readVarInt(p2, var39)
-				var39 = var48
-				var38.can_submit_comment = var47 ~= 0
-			elseif var43 == 3 then
-				local _ = nil
-				local var49, var50 = protoModule.readVarInt(p2, var39)
-				var39 = var50
-				var38.can_submit_category_options = var49 ~= 0
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 1 then
+				local VarInt
+				VarInt, v50 = ProtoModule.readVarInt(Buf, v2)
+				NewModule.can_submit_review = VarInt ~= 0
+			elseif Tag == 2 then
+				local VarInt1
+				VarInt1, v50 = ProtoModule.readVarInt(Buf, v2)
+				NewModule.can_submit_comment = VarInt1 ~= 0
+			elseif Tag == 3 then
+				local VarInt2
+				VarInt2, v50 = ProtoModule.readVarInt(Buf, v2)
+				NewModule.can_submit_category_options = VarInt2 ~= 0
 			else
-				local _ = nil
-				local var51, var52 = protoModule.readVarInt(p2, var39)
-				local _ = var51
-				var39 = var52
+				local _
+				_, v50 = ProtoModule.readVarInt(Buf, v2)
 			end
-		elseif var44 == protoModule.wireTypes.lengthDelimited then
-			local _ = nil
-			local var53, var54 = protoModule.readVarInt(p2, var39)
-			var39 = var54 + var53
-		elseif var44 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var55, var56 = protoModule.readFixed32(p2, var39)
-			local _ = var55
-			var39 = var56
-		elseif var44 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var57, var58 = protoModule.readFixed64(p2, var39)
-			local _ = var57
-			var39 = var58
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			local VarInt3, VarInt2_1 = ProtoModule.readVarInt(Buf, v2)
+			v2 = VarInt2_1 + VarInt3
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v50 = ProtoModule.readFixed32(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v50 = ProtoModule.readFixed64(Buf, v2)
 		else
-			error("Unsupported wire type: " .. var66)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var38
+	return NewModule
 end
 
-function t_2:jsonEncode()
+function Module1:jsonEncode() --[[ Line: 500 ]]
 	local t = {}
 	
 	if self.can_submit_review then
@@ -282,152 +237,128 @@ function t_2:jsonEncode()
 	return t
 end
 
-function t_2:jsonDecode()
-	-- upvalues: t_2 (ref)
-	local var59 = t_2.new()
+function Module1:jsonDecode() --[[ Line: 520 ]]
+	-- upvalues: Module1 (copy)
+	local NewModule = Module1.new()
 	
 	if self.can_submit_review ~= nil then
-		var59.can_submit_review = self.can_submit_review
+		NewModule.can_submit_review = self.can_submit_review
 	end
 	if self.canSubmitReview ~= nil then
-		var59.can_submit_review = self.canSubmitReview
+		NewModule.can_submit_review = self.canSubmitReview
 	end
 	if self.can_submit_comment ~= nil then
-		var59.can_submit_comment = self.can_submit_comment
+		NewModule.can_submit_comment = self.can_submit_comment
 	end
 	if self.canSubmitComment ~= nil then
-		var59.can_submit_comment = self.canSubmitComment
+		NewModule.can_submit_comment = self.canSubmitComment
 	end
 	if self.can_submit_category_options ~= nil then
-		var59.can_submit_category_options = self.can_submit_category_options
+		NewModule.can_submit_category_options = self.can_submit_category_options
 	end
 	if self.canSubmitCategoryOptions ~= nil then
-		var59.can_submit_category_options = self.canSubmitCategoryOptions
+		NewModule.can_submit_category_options = self.canSubmitCategoryOptions
 	end
-	return var59
+	return NewModule
 end
 
-t_2.descriptor = {
+Module1.descriptor = {
 	name = "UniverseUserVoteFeedbackMetadataData_Capabilities",
 	fullName = "roblox.apppageplatform.shared.v1beta1.Capabilities"
 }
-t.UniverseUserVoteFeedbackMetadataData_Capabilities = t_2
-typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Capabilities)
-local t_3 = {}
-t_3.__index = t_3
+t.UniverseUserVoteFeedbackMetadataData_Capabilities = Module1
+TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Capabilities)
+local Module2 = {}
+Module2.__index = Module2
 
-function t_3.new(p3)
-	-- upvalues: t_3 (ref)
-	return setmetatable({
-		type = if p3 == nil or p3.type == nil then "" else p3.type,
-		label = if p3 == nil or p3.label == nil then "" else p3.label,
-		allows_multiple_selections = if p3 == nil or p3.allows_multiple_selections == nil then false else p3.allows_multiple_selections,
-		options = if p3 == nil or p3.options == nil then {} else p3.options
-	}, t_3)
+function Module2.new(p1) --[[ Line: 567 ]]
+	-- upvalues: Module2 (copy)
+	return (setmetatable({
+		type = if p1 == nil or p1.type == nil then "" else p1.type,
+		label = if p1 == nil or p1.label == nil then "" else p1.label,
+		allows_multiple_selections = p1 ~= nil and p1.allows_multiple_selections ~= nil and p1.allows_multiple_selections,
+		options = if p1 == nil or p1.options == nil then {} else p1.options
+	}, Module2))
 end
 
-function t_3:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var59 = 0
+function Module2:encode() --[[ Line: 580 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.type ~= nil and self.type ~= "" then
-		local var60, var61 = protoModule.writeTag(buff, var59, 1, protoModule.wireTypes.lengthDelimited)
-		var60, var86 = protoModule.writeString(var60, var61, self.type)
-		buff = var60
-		var59 = var61
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.type)
 	end
 	if self.label ~= nil and self.label ~= "" then
-		local var62, var63 = protoModule.writeTag(buff, var59, 2, protoModule.wireTypes.lengthDelimited)
-		var62, var88 = protoModule.writeString(var62, var63, self.label)
-		buff = var62
-		var59 = var63
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.label)
 	end
 	if self.allows_multiple_selections then
-		local var64, var65 = protoModule.writeTag(buff, var59, 3, protoModule.wireTypes.varint)
-		var64, var90 = protoModule.writeVarInt(var64, var65, if self.allows_multiple_selections then 1 else 0)
-		buff = var64
-		var59 = var65
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, if self.allows_multiple_selections then 1 else 0)
 	end
 	if self.options ~= nil and #self.options > 0 then
-		for i, v in self.options do
-			local var66 = v:encode()
-			local var67, var68 = protoModule.writeTag(buff, var59, 4, protoModule.wireTypes.lengthDelimited)
-			var67, var93 = protoModule.writeBuffer(var67, var68, var66, buffer.len(var66))
-			buff = var67
-			var59 = var68
+		for _, option in self.options do
+			local EncodeResult = option:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var59)
-	buffer.copy(buff_1, 0, buff, 0, var59)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_3.decode(p3)
-	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
-	local var69 = t_3.new()
-	local var70 = 0
-	while var70 < buffer.len(p3) do
-		local _ = nil
-		local var71 = nil
-		local var72, var73, var74 = protoModule.readTag(p3, var70)
-		local var75 = var72
-		var71 = var73
-		var70 = var74
+function Module2.decode(Buf) --[[ Line: 614 ]]
+	-- upvalues: Module2 (copy), ProtoModule (copy), t (copy)
+	local NewModule = Module2.new()
+	local v3 = 0
+	while v3 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v75 = ProtoModule.readTag(Buf, v3)
 		
-		if var71 == protoModule.wireTypes.varint then
-			if var75 == 3 then
-				local _ = nil
-				local var76, var77 = protoModule.readVarInt(p3, var70)
-				var70 = var77
-				var69.allows_multiple_selections = var76 ~= 0
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 3 then
+				local VarInt
+				VarInt, v75 = ProtoModule.readVarInt(Buf, v3)
+				NewModule.allows_multiple_selections = VarInt ~= 0
 			else
-				local _ = nil
-				local var78, var79 = protoModule.readVarInt(p3, var70)
-				local _ = var78
-				var70 = var79
+				local _
+				_, v75 = ProtoModule.readVarInt(Buf, v3)
 			end
-		end
-		if var71 == protoModule.wireTypes.lengthDelimited then
-			if var75 == 1 then
-				local _ = nil
-				local var80, var81 = protoModule.readBuffer(p3, var70)
-				var70 = var81
-				var69.type = buffer.tostring(var80)
-			elseif var75 == 2 then
-				local _ = nil
-				local var82, var83 = protoModule.readBuffer(p3, var70)
-				var70 = var83
-				var69.label = buffer.tostring(var82)
-			elseif var75 == 4 then
-				local _ = nil
-				local var84, var85 = protoModule.readBuffer(p3, var70)
-				var70 = var85
-				table.insert(var69.options, t.UniverseUserVoteFeedbackMetadataData_Category_Option.decode(var84))
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v75 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.type = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v75 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.label = buffer.tostring(Buffer2)
+			elseif Tag == 4 then
+				local Buffer3
+				Buffer3, v75 = ProtoModule.readBuffer(Buf, v3)
+				table.insert(NewModule.options, t.UniverseUserVoteFeedbackMetadataData_Category_Option.decode(Buffer3))
 			else
-				local _ = nil
-				local var86, var87 = protoModule.readVarInt(p3, var70)
-				var70 = var87 + var86
+				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v3)
+				v3 = VarInt2 + VarInt1
 			end
-		elseif var71 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var88, var89 = protoModule.readFixed32(p3, var70)
-			local _ = var88
-			var70 = var89
-		elseif var71 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var90, var91 = protoModule.readFixed64(p3, var70)
-			local _ = var90
-			var70 = var91
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v75 = ProtoModule.readFixed32(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v75 = ProtoModule.readFixed64(Buf, v3)
 		else
-			error("Unsupported wire type: " .. var97)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var69
+	return NewModule
 end
 
-function t_3:jsonEncode()
+function Module2:jsonEncode() --[[ Line: 677 ]]
 	local t = {}
 	
 	if self.type ~= nil and self.type ~= "" then
@@ -440,136 +371,117 @@ function t_3:jsonEncode()
 		t.allowsMultipleSelections = self.allows_multiple_selections
 	end
 	if self.options ~= nil and #self.options > 0 then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, v:jsonEncode())
+		for _, option in self.options do
+			table.insert(Options, option:jsonEncode())
 		end
-		t.options = t_1
+		t.options = Options
 	end
 	return t
 end
 
-function t_3:jsonDecode()
-	-- upvalues: t_3 (ref), t (ref)
-	local var92 = t_3.new()
+function Module2:jsonDecode() --[[ Line: 705 ]]
+	-- upvalues: Module2 (copy), t (copy)
+	local NewModule = Module2.new()
 	
 	if self.type ~= nil then
-		var92.type = self.type
+		NewModule.type = self.type
 	end
 	if self.label ~= nil then
-		var92.label = self.label
+		NewModule.label = self.label
 	end
 	if self.allows_multiple_selections ~= nil then
-		var92.allows_multiple_selections = self.allows_multiple_selections
+		NewModule.allows_multiple_selections = self.allows_multiple_selections
 	end
 	if self.allowsMultipleSelections ~= nil then
-		var92.allows_multiple_selections = self.allowsMultipleSelections
+		NewModule.allows_multiple_selections = self.allowsMultipleSelections
 	end
 	if self.options ~= nil then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, t.UniverseUserVoteFeedbackMetadataData_Category_Option.jsonDecode(v))
+		for _, option in self.options do
+			table.insert(Options, t.UniverseUserVoteFeedbackMetadataData_Category_Option.jsonDecode(option))
 		end
-		var92.options = t_1
+		NewModule.options = Options
 	end
-	return var92
+	return NewModule
 end
 
-t_3.descriptor = {
+Module2.descriptor = {
 	name = "UniverseUserVoteFeedbackMetadataData_Category",
 	fullName = "roblox.apppageplatform.shared.v1beta1.Category"
 }
-t.UniverseUserVoteFeedbackMetadataData_Category = t_3
-typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Category)
-local t_4 = {}
-t_4.__index = t_4
+t.UniverseUserVoteFeedbackMetadataData_Category = Module2
+TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Category)
+local Module3 = {}
+Module3.__index = Module3
 
-function t_4.new(p4)
-	-- upvalues: t_4 (ref)
-	return setmetatable({
-		id = if p4 == nil or p4.id == nil then "" else p4.id,
-		label = if p4 == nil or p4.label == nil then "" else p4.label
-	}, t_4)
+function Module3.new(p1) --[[ Line: 753 ]]
+	-- upvalues: Module3 (copy)
+	return (setmetatable({
+		id = if p1 == nil or p1.id == nil then "" else p1.id,
+		label = if p1 == nil or p1.label == nil then "" else p1.label
+	}, Module3))
 end
 
-function t_4:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var93 = 0
+function Module3:encode() --[[ Line: 765 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var94, var95 = protoModule.writeTag(buff, var93, 1, protoModule.wireTypes.lengthDelimited)
-		var94, var125 = protoModule.writeString(var94, var95, self.id)
-		buff = var94
-		var93 = var95
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.id)
 	end
 	if self.label ~= nil and self.label ~= "" then
-		local var96, var97 = protoModule.writeTag(buff, var93, 2, protoModule.wireTypes.lengthDelimited)
-		var96, var127 = protoModule.writeString(var96, var97, self.label)
-		buff = var96
-		var93 = var97
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.label)
 	end
-	local buff_1 = buffer.create(var93)
-	buffer.copy(buff_1, 0, buff, 0, var93)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_4.decode(p4)
-	-- upvalues: t_4 (ref), protoModule (ref)
-	local var93 = t_4.new()
-	local var94 = 0
-	while var94 < buffer.len(p4) do
-		local _ = nil
-		local var95 = nil
-		local var96, var97, var98 = protoModule.readTag(p4, var94)
-		local var99 = var96
-		var95 = var97
-		var94 = var98
+function Module3.decode(Buf) --[[ Line: 786 ]]
+	-- upvalues: Module3 (copy), ProtoModule (copy)
+	local NewModule = Module3.new()
+	local v4 = 0
+	while v4 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v98 = ProtoModule.readTag(Buf, v4)
 		
-		if var95 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var100, var101 = protoModule.readVarInt(p4, var94)
-			local _ = var100
-			var94 = var101
-			continue
-		end
-		if var95 == protoModule.wireTypes.lengthDelimited then
-			if var99 == 1 then
-				local _ = nil
-				local var102, var103 = protoModule.readBuffer(p4, var94)
-				var94 = var103
-				var93.id = buffer.tostring(var102)
-			elseif var99 == 2 then
-				local _ = nil
-				local var104, var105 = protoModule.readBuffer(p4, var94)
-				var94 = var105
-				var93.label = buffer.tostring(var104)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v98 = ProtoModule.readVarInt(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v98 = ProtoModule.readBuffer(Buf, v4)
+				NewModule.id = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v98 = ProtoModule.readBuffer(Buf, v4)
+				NewModule.label = buffer.tostring(Buffer2)
 			else
-				local _ = nil
-				local var106, var107 = protoModule.readVarInt(p4, var94)
-				var94 = var107 + var106
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
+				v4 = VarInt2 + VarInt
 			end
-		elseif var95 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var108, var109 = protoModule.readFixed32(p4, var94)
-			local _ = var108
-			var94 = var109
-		elseif var95 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var110, var111 = protoModule.readFixed64(p4, var94)
-			local _ = var110
-			var94 = var111
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v98 = ProtoModule.readFixed32(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v98 = ProtoModule.readFixed64(Buf, v4)
 		else
-			error("Unsupported wire type: " .. var131)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var93
+	return NewModule
 end
 
-function t_4:jsonEncode()
+function Module3:jsonEncode() --[[ Line: 836 ]]
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -581,137 +493,109 @@ function t_4:jsonEncode()
 	return t
 end
 
-function t_4:jsonDecode()
-	-- upvalues: t_4 (ref)
-	local var112 = t_4.new()
+function Module3:jsonDecode() --[[ Line: 852 ]]
+	-- upvalues: Module3 (copy)
+	local NewModule = Module3.new()
 	
 	if self.id ~= nil then
-		var112.id = self.id
+		NewModule.id = self.id
 	end
 	if self.label ~= nil then
-		var112.label = self.label
+		NewModule.label = self.label
 	end
-	return var112
+	return NewModule
 end
 
-t_4.descriptor = {
+Module3.descriptor = {
 	name = "UniverseUserVoteFeedbackMetadataData_Category_Option",
 	fullName = "roblox.apppageplatform.shared.v1beta1.Option"
 }
-t.UniverseUserVoteFeedbackMetadataData_Category_Option = t_4
-typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Category_Option)
-local t_5 = {}
-t_5.__index = t_5
+t.UniverseUserVoteFeedbackMetadataData_Category_Option = Module3
+TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Category_Option)
+local Module4 = {}
+Module4.__index = Module4
 
-function t_5.new(p5)
-	-- upvalues: t_5 (ref)
-	return setmetatable({
-		label = if p5 == nil or p5.label == nil then "" else p5.label,
-		placeholder_text = if p5 == nil or p5.placeholder_text == nil then "" else p5.placeholder_text,
-		minimum_length = if p5 == nil or p5.minimum_length == nil then 0 else p5.minimum_length,
-		maximum_length = if p5 == nil or p5.maximum_length == nil then 0 else p5.maximum_length
-	}, t_5)
+function Module4.new(p1) --[[ Line: 883 ]]
+	-- upvalues: Module4 (copy)
+	return (setmetatable({
+		label = if p1 == nil or p1.label == nil then "" else p1.label,
+		placeholder_text = if p1 == nil or p1.placeholder_text == nil then "" else p1.placeholder_text,
+		minimum_length = if p1 == nil or p1.minimum_length == nil then 0 else p1.minimum_length,
+		maximum_length = if p1 == nil or p1.maximum_length == nil then 0 else p1.maximum_length
+	}, Module4))
 end
 
-function t_5:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var112 = 0
+function Module4:encode() --[[ Line: 894 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.label ~= nil and self.label ~= "" then
-		local var113, var114 = protoModule.writeTag(buff, var112, 1, protoModule.wireTypes.lengthDelimited)
-		var113, var153 = protoModule.writeString(var113, var114, self.label)
-		buff = var113
-		var112 = var114
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.label)
 	end
 	if self.placeholder_text ~= nil and self.placeholder_text ~= "" then
-		local var115, var116 = protoModule.writeTag(buff, var112, 2, protoModule.wireTypes.lengthDelimited)
-		var115, var155 = protoModule.writeString(var115, var116, self.placeholder_text)
-		buff = var115
-		var112 = var116
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.placeholder_text)
 	end
 	if self.minimum_length ~= nil and self.minimum_length ~= 0 then
-		local var117, var118 = protoModule.writeTag(buff, var112, 3, protoModule.wireTypes.varint)
-		var117, var157 = protoModule.writeVarInt(var117, var118, self.minimum_length)
-		buff = var117
-		var112 = var118
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, self.minimum_length)
 	end
 	if self.maximum_length ~= nil and self.maximum_length ~= 0 then
-		local var119, var120 = protoModule.writeTag(buff, var112, 4, protoModule.wireTypes.varint)
-		var119, var159 = protoModule.writeVarInt(var119, var120, self.maximum_length)
-		buff = var119
-		var112 = var120
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult4, WriteTagResult2_3, self.maximum_length)
 	end
-	local buff_1 = buffer.create(var112)
-	buffer.copy(buff_1, 0, buff, 0, var112)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_5.decode(p5)
-	-- upvalues: t_5 (ref), protoModule (ref)
-	local var112 = t_5.new()
-	local var113 = 0
-	while var113 < buffer.len(p5) do
-		local _ = nil
-		local var114 = nil
-		local var115, var116, var117 = protoModule.readTag(p5, var113)
-		local var118 = var115
-		var114 = var116
-		var113 = var117
+function Module4.decode(Buf) --[[ Line: 925 ]]
+	-- upvalues: Module4 (copy), ProtoModule (copy)
+	local NewModule = Module4.new()
+	local v5 = 0
+	while v5 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v121 = ProtoModule.readTag(Buf, v5)
 		
-		if var114 == protoModule.wireTypes.varint then
-			if var118 == 3 then
-				local _ = nil
-				local var119, var120 = protoModule.readVarIntI32(p5, var113)
-				var113 = var120
-				var112.minimum_length = var119
-			elseif var118 == 4 then
-				local _ = nil
-				local var121, var122 = protoModule.readVarIntI32(p5, var113)
-				var113 = var122
-				var112.maximum_length = var121
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 3 then
+				NewModule.minimum_length, v121 = ProtoModule.readVarIntI32(Buf, v5)
+			elseif Tag == 4 then
+				NewModule.maximum_length, v121 = ProtoModule.readVarIntI32(Buf, v5)
 			else
-				local _ = nil
-				local var123, var124 = protoModule.readVarInt(p5, var113)
-				local _ = var123
-				var113 = var124
+				local _
+				_, v121 = ProtoModule.readVarInt(Buf, v5)
 			end
-		end
-		if var114 == protoModule.wireTypes.lengthDelimited then
-			if var118 == 1 then
-				local _ = nil
-				local var125, var126 = protoModule.readBuffer(p5, var113)
-				var113 = var126
-				var112.label = buffer.tostring(var125)
-			elseif var118 == 2 then
-				local _ = nil
-				local var127, var128 = protoModule.readBuffer(p5, var113)
-				var113 = var128
-				var112.placeholder_text = buffer.tostring(var127)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v121 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.label = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v121 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.placeholder_text = buffer.tostring(Buffer2)
 			else
-				local _ = nil
-				local var129, var130 = protoModule.readVarInt(p5, var113)
-				var113 = var130 + var129
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v5)
+				v5 = VarInt2 + VarInt
 			end
-		elseif var114 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var131, var132 = protoModule.readFixed32(p5, var113)
-			local _ = var131
-			var113 = var132
-		elseif var114 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var133, var134 = protoModule.readFixed64(p5, var113)
-			local _ = var133
-			var113 = var134
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v121 = ProtoModule.readFixed32(Buf, v5)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v121 = ProtoModule.readFixed64(Buf, v5)
 		else
-			error("Unsupported wire type: " .. var163)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var112
+	return NewModule
 end
 
-function t_5:jsonEncode()
+function Module4:jsonEncode() --[[ Line: 985 ]]
 	local t = {}
 	
 	if self.label ~= nil and self.label ~= "" then
@@ -729,139 +613,117 @@ function t_5:jsonEncode()
 	return t
 end
 
-function t_5:jsonDecode()
-	-- upvalues: t_5 (ref)
-	local var135 = t_5.new()
+function Module4:jsonDecode() --[[ Line: 1009 ]]
+	-- upvalues: Module4 (copy)
+	local NewModule = Module4.new()
 	
 	if self.label ~= nil then
-		var135.label = self.label
+		NewModule.label = self.label
 	end
 	if self.placeholder_text ~= nil then
-		var135.placeholder_text = self.placeholder_text
+		NewModule.placeholder_text = self.placeholder_text
 	end
 	if self.placeholderText ~= nil then
-		var135.placeholder_text = self.placeholderText
+		NewModule.placeholder_text = self.placeholderText
 	end
 	if self.minimum_length ~= nil then
-		var135.minimum_length = self.minimum_length
+		NewModule.minimum_length = self.minimum_length
 	end
 	if self.minimumLength ~= nil then
-		var135.minimum_length = self.minimumLength
+		NewModule.minimum_length = self.minimumLength
 	end
 	if self.maximum_length ~= nil then
-		var135.maximum_length = self.maximum_length
+		NewModule.maximum_length = self.maximum_length
 	end
 	if self.maximumLength ~= nil then
-		var135.maximum_length = self.maximumLength
+		NewModule.maximum_length = self.maximumLength
 	end
-	return var135
+	return NewModule
 end
 
-t_5.descriptor = {
+Module4.descriptor = {
 	name = "UniverseUserVoteFeedbackMetadataData_Comment",
 	fullName = "roblox.apppageplatform.shared.v1beta1.Comment"
 }
-t.UniverseUserVoteFeedbackMetadataData_Comment = t_5
-typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Comment)
-local t_6 = {}
-t_6.__index = t_6
+t.UniverseUserVoteFeedbackMetadataData_Comment = Module4
+TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Comment)
+local Module5 = {}
+Module5.__index = Module5
 
-function t_6.new(p6)
-	-- upvalues: t_6 (ref)
-	return setmetatable({
-		disclaimer_label = if p6 == nil or p6.disclaimer_label == nil then "" else p6.disclaimer_label,
-		submit_button_label = if p6 == nil or p6.submit_button_label == nil then "" else p6.submit_button_label,
-		form_title_label = if p6 == nil or p6.form_title_label == nil then "" else p6.form_title_label
-	}, t_6)
+function Module5.new(p1) --[[ Line: 1059 ]]
+	-- upvalues: Module5 (copy)
+	return (setmetatable({
+		disclaimer_label = if p1 == nil or p1.disclaimer_label == nil then "" else p1.disclaimer_label,
+		submit_button_label = if p1 == nil or p1.submit_button_label == nil then "" else p1.submit_button_label,
+		form_title_label = if p1 == nil or p1.form_title_label == nil then "" else p1.form_title_label
+	}, Module5))
 end
 
-function t_6:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var135 = 0
+function Module5:encode() --[[ Line: 1071 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.disclaimer_label ~= nil and self.disclaimer_label ~= "" then
-		local var136, var137 = protoModule.writeTag(buff, var135, 1, protoModule.wireTypes.lengthDelimited)
-		var136, var189 = protoModule.writeString(var136, var137, self.disclaimer_label)
-		buff = var136
-		var135 = var137
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.disclaimer_label)
 	end
 	if self.submit_button_label ~= nil and self.submit_button_label ~= "" then
-		local var138, var139 = protoModule.writeTag(buff, var135, 2, protoModule.wireTypes.lengthDelimited)
-		var138, var191 = protoModule.writeString(var138, var139, self.submit_button_label)
-		buff = var138
-		var135 = var139
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.submit_button_label)
 	end
 	if self.form_title_label ~= nil and self.form_title_label ~= "" then
-		local var140, var141 = protoModule.writeTag(buff, var135, 3, protoModule.wireTypes.lengthDelimited)
-		var140, var193 = protoModule.writeString(var140, var141, self.form_title_label)
-		buff = var140
-		var135 = var141
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.form_title_label)
 	end
-	local buff_1 = buffer.create(var135)
-	buffer.copy(buff_1, 0, buff, 0, var135)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_6.decode(p6)
-	-- upvalues: t_6 (ref), protoModule (ref)
-	local var135 = t_6.new()
-	local var136 = 0
-	while var136 < buffer.len(p6) do
-		local _ = nil
-		local var137 = nil
-		local var138, var139, var140 = protoModule.readTag(p6, var136)
-		local var141 = var138
-		var137 = var139
-		var136 = var140
+function Module5.decode(Buf) --[[ Line: 1097 ]]
+	-- upvalues: Module5 (copy), ProtoModule (copy)
+	local NewModule = Module5.new()
+	local v6 = 0
+	while v6 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v142 = ProtoModule.readTag(Buf, v6)
 		
-		if var137 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var142, var143 = protoModule.readVarInt(p6, var136)
-			local _ = var142
-			var136 = var143
-			continue
-		end
-		if var137 == protoModule.wireTypes.lengthDelimited then
-			if var141 == 1 then
-				local _ = nil
-				local var144, var145 = protoModule.readBuffer(p6, var136)
-				var136 = var145
-				var135.disclaimer_label = buffer.tostring(var144)
-			elseif var141 == 2 then
-				local _ = nil
-				local var146, var147 = protoModule.readBuffer(p6, var136)
-				var136 = var147
-				var135.submit_button_label = buffer.tostring(var146)
-			elseif var141 == 3 then
-				local _ = nil
-				local var148, var149 = protoModule.readBuffer(p6, var136)
-				var136 = var149
-				var135.form_title_label = buffer.tostring(var148)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v142 = ProtoModule.readVarInt(Buf, v6)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v142 = ProtoModule.readBuffer(Buf, v6)
+				NewModule.disclaimer_label = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v142 = ProtoModule.readBuffer(Buf, v6)
+				NewModule.submit_button_label = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v142 = ProtoModule.readBuffer(Buf, v6)
+				NewModule.form_title_label = buffer.tostring(Buffer3)
 			else
-				local _ = nil
-				local var150, var151 = protoModule.readVarInt(p6, var136)
-				var136 = var151 + var150
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v6)
+				v6 = VarInt2 + VarInt
 			end
-		elseif var137 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var152, var153 = protoModule.readFixed32(p6, var136)
-			local _ = var152
-			var136 = var153
-		elseif var137 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var154, var155 = protoModule.readFixed64(p6, var136)
-			local _ = var154
-			var136 = var155
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v142 = ProtoModule.readFixed32(Buf, v6)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v142 = ProtoModule.readFixed64(Buf, v6)
 		else
-			error("Unsupported wire type: " .. var197)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var135
+	return NewModule
 end
 
-function t_6:jsonEncode()
+function Module5:jsonEncode() --[[ Line: 1152 ]]
 	local t = {}
 	
 	if self.disclaimer_label ~= nil and self.disclaimer_label ~= "" then
@@ -876,37 +738,37 @@ function t_6:jsonEncode()
 	return t
 end
 
-function t_6:jsonDecode()
-	-- upvalues: t_6 (ref)
-	local var156 = t_6.new()
+function Module5:jsonDecode() --[[ Line: 1172 ]]
+	-- upvalues: Module5 (copy)
+	local NewModule = Module5.new()
 	
 	if self.disclaimer_label ~= nil then
-		var156.disclaimer_label = self.disclaimer_label
+		NewModule.disclaimer_label = self.disclaimer_label
 	end
 	if self.disclaimerLabel ~= nil then
-		var156.disclaimer_label = self.disclaimerLabel
+		NewModule.disclaimer_label = self.disclaimerLabel
 	end
 	if self.submit_button_label ~= nil then
-		var156.submit_button_label = self.submit_button_label
+		NewModule.submit_button_label = self.submit_button_label
 	end
 	if self.submitButtonLabel ~= nil then
-		var156.submit_button_label = self.submitButtonLabel
+		NewModule.submit_button_label = self.submitButtonLabel
 	end
 	if self.form_title_label ~= nil then
-		var156.form_title_label = self.form_title_label
+		NewModule.form_title_label = self.form_title_label
 	end
 	if self.formTitleLabel ~= nil then
-		var156.form_title_label = self.formTitleLabel
+		NewModule.form_title_label = self.formTitleLabel
 	end
-	return var156
+	return NewModule
 end
 
-t_6.descriptor = {
+Module5.descriptor = {
 	name = "UniverseUserVoteFeedbackMetadataData_Metadata",
 	fullName = "roblox.apppageplatform.shared.v1beta1.Metadata"
 }
-t.UniverseUserVoteFeedbackMetadataData_Metadata = t_6
-typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Metadata)
+t.UniverseUserVoteFeedbackMetadataData_Metadata = Module5
+TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Metadata)
 
 return {
 	UniverseUserVoteFeedbackMetadataData = t.UniverseUserVoteFeedbackMetadataData,

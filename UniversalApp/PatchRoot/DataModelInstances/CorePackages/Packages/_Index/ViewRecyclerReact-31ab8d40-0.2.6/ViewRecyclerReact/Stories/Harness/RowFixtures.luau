@@ -1,11 +1,10 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-assert(viewRecyclerReact ~= nil, "RowFixtures must be mounted under view-recycler-react")
-local reactModule = require(viewRecyclerReact.Parent.React)
-local signalsReactModule = require(viewRecyclerReact.Parent.SignalsReact)
-local recyclingStatsModule = require(script.Parent.RecyclingStats)
-local unknownModule = require(viewRecyclerReact)
-local createElement = reactModule.createElement
-local parts = string.split("measurement correction keeps visible content anchored while variable wrapped rows replace estimated geometry", " ")
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+assert(ViewRecyclerReact ~= nil, "RowFixtures must be mounted under view-recycler-react")
+local SignalsReactModule = require(ViewRecyclerReact.Parent.SignalsReact)
+local RecyclingStatsModule = require(script.Parent.RecyclingStats)
+local Module = require(ViewRecyclerReact)
+local CreateElementFunction = require(ViewRecyclerReact.Parent.React).createElement
+local Parts = string.split("measurement correction keeps visible content anchored while variable wrapped rows replace estimated geometry", " ")
 local list = {
 	"Route match resolved",
 	"Background task complete",
@@ -15,35 +14,35 @@ local list = {
 }
 
 return {
-	SimpleRow = unknownModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), recyclingStatsModule (ref), createElement (ref)
-		local var1 = signalsReactModule.useSignalState(p1.itemSignal)
-		local var2 = recyclingStatsModule.useAssignment(var1.id)
+	SimpleRow = Module.createRecyclableView(function(p1) --[[ Line: 29 | Named "SimpleRowView" ]]
+		-- upvalues: SignalsReactModule (copy), RecyclingStatsModule (copy), CreateElementFunction (copy)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
+		local UseAssignmentResult = RecyclingStatsModule.useAssignment(UseSignalStateResult.id)
 		
-		return createElement("TextLabel", {
+		return CreateElementFunction("TextLabel", {
 			BorderSizePixel = 0,
 			TextSize = 17,
-			BackgroundColor3 = Color3.fromHSV((tonumber(var1.id) or 1) % 17 / 17, 0.25, 0.9),
+			BackgroundColor3 = Color3.fromHSV((tonumber(UseSignalStateResult.id) or 1) % 17 / 17, 0.25, 0.9),
 			Font = Enum.Font.BuilderSans,
 			Size = UDim2.fromScale(1, 1),
-			Text = if var2 == 0 then var1.label else `[mount {var2}] {var1.label}`,
+			Text = if UseAssignmentResult == 0 then UseSignalStateResult.label else `[mount {UseAssignmentResult}] {UseSignalStateResult.label}`,
 			TextColor3 = Color3.fromRGB(24, 25, 30)
 		})
 	end, {
 		hideWhilePending = true,
-		readiness = unknownModule.RecyclableViewReadiness.ReadyOnCommit
+		readiness = Module.RecyclableViewReadiness.ReadyOnCommit
 	}),
-	MeasuredRow = unknownModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), recyclingStatsModule (ref), createElement (ref)
-		local var1 = signalsReactModule.useSignalState(p1.itemSignal)
-		local var2 = recyclingStatsModule.useAssignment(var1.id)
+	MeasuredRow = Module.createRecyclableView(function(p1) --[[ Line: 44 | Named "MeasuredRowView" ]]
+		-- upvalues: SignalsReactModule (copy), RecyclingStatsModule (copy), CreateElementFunction (copy)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
+		local UseAssignmentResult = RecyclingStatsModule.useAssignment(UseSignalStateResult.id)
 		
-		return createElement("Frame", {
+		return CreateElementFunction("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0)
 		}, {
-			Content = createElement("TextLabel", {
+			Content = CreateElementFunction("TextLabel", {
 				BorderSizePixel = 0,
 				TextSize = 17,
 				TextWrapped = true,
@@ -51,44 +50,46 @@ return {
 				BackgroundColor3 = Color3.fromRGB(238, 238, 243),
 				Font = Enum.Font.BuilderSans,
 				Size = UDim2.fromScale(1, 0),
-				Text = if var2 == 0 then var1.label else `[mount {var2}] {var1.label}`,
+				Text = if UseAssignmentResult == 0 then UseSignalStateResult.label else `[mount {UseAssignmentResult}] {UseSignalStateResult.label}`,
 				TextColor3 = Color3.fromRGB(24, 25, 30),
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			Padding = createElement("UIPadding", { PaddingBottom = UDim.new(0, var1.gap or 0) })
+			Padding = CreateElementFunction("UIPadding", {
+				PaddingBottom = UDim.new(0, UseSignalStateResult.gap or 0)
+			})
 		})
 	end, {
 		hideWhilePending = true,
-		readiness = unknownModule.RecyclableViewReadiness.ReadyOnCommit
+		readiness = Module.RecyclableViewReadiness.ReadyOnCommit
 	}),
-	ImmediateSimpleRow = unknownModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), createElement (ref)
-		return createElement("TextLabel", {
+	ImmediateSimpleRow = Module.createRecyclableView(function(p1) --[[ Line: 71 | Named "ImmediateSimpleRowView" ]]
+		-- upvalues: SignalsReactModule (copy), CreateElementFunction (copy)
+		return CreateElementFunction("TextLabel", {
 			BorderSizePixel = 0,
 			TextSize = 17,
-			BackgroundColor3 = signalsReactModule.useSignalBinding(function(p2)
-				-- upvalues: p1 (ref)
+			BackgroundColor3 = SignalsReactModule.useSignalBinding(function(p2): Color3 --[[ Line: 72 ]]
+				-- upvalues: p1 (copy)
 				return Color3.fromHSV((tonumber(p1.itemSignal(p2).id) or 1) % 17 / 17, 0.25, 0.9)
 			end),
 			Font = Enum.Font.BuilderSans,
 			Size = UDim2.fromScale(1, 1),
-			Text = signalsReactModule.useSignalBinding(function(p2)
-				-- upvalues: p1 (ref)
+			Text = SignalsReactModule.useSignalBinding(function(p2) --[[ Line: 76 ]]
+				-- upvalues: p1 (copy)
 				return p1.itemSignal(p2).label
 			end),
 			TextColor3 = Color3.fromRGB(24, 25, 30)
 		})
 	end, {
-		readiness = unknownModule.RecyclableViewReadiness.ReadyOnAssignment
+		readiness = Module.RecyclableViewReadiness.ReadyOnAssignment
 	}),
-	ImmediateMeasuredRow = unknownModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), createElement (ref)
-		return createElement("Frame", {
+	ImmediateMeasuredRow = Module.createRecyclableView(function(p1) --[[ Line: 92 | Named "ImmediateMeasuredRowView" ]]
+		-- upvalues: SignalsReactModule (copy), CreateElementFunction (copy)
+		return CreateElementFunction("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0)
 		}, {
-			Content = createElement("TextLabel", {
+			Content = CreateElementFunction("TextLabel", {
 				BorderSizePixel = 0,
 				TextSize = 17,
 				TextWrapped = true,
@@ -96,75 +97,75 @@ return {
 				BackgroundColor3 = Color3.fromRGB(238, 238, 243),
 				Font = Enum.Font.BuilderSans,
 				Size = UDim2.fromScale(1, 0),
-				Text = signalsReactModule.useSignalBinding(function(p2)
-					-- upvalues: p1 (ref)
+				Text = SignalsReactModule.useSignalBinding(function(p2) --[[ Line: 93 ]]
+					-- upvalues: p1 (copy)
 					return p1.itemSignal(p2).label
 				end),
 				TextColor3 = Color3.fromRGB(24, 25, 30),
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			Padding = createElement("UIPadding", {
-				PaddingBottom = signalsReactModule.useSignalBinding(function(p2)
-					-- upvalues: p1 (ref)
+			Padding = CreateElementFunction("UIPadding", {
+				PaddingBottom = SignalsReactModule.useSignalBinding(function(p2): UDim --[[ Line: 97 ]]
+					-- upvalues: p1 (copy)
 					return UDim.new(0, p1.itemSignal(p2).gap or 0)
 				end)
 			})
 		})
 	end, {
-		readiness = unknownModule.RecyclableViewReadiness.ReadyOnAssignment
+		readiness = Module.RecyclableViewReadiness.ReadyOnAssignment
 	}),
-	buildSimpleRows = function(p1, p2)
-		local list = table.create(p1)
+	buildSimpleRows = function(p1, p2) --[[ Line: 142 ]]
+		local Buffer = table.create(p1)
 		
 		for i = 1, p1 do
-			list[i] = { id = tostring(i), label = `{p2 or "Item"} #{i}` }
+			Buffer[i] = { id = tostring(i), label = `{p2 or "Item"} #{i}` }
 		end
-		return list
+		return Buffer
 	end,
-	buildLogRows = function(p3)
-		-- upvalues: list (ref)
-		local list_1 = table.create(p3)
+	buildLogRows = function(p3) --[[ Line: 153 ]]
+		-- upvalues: list (copy)
+		local Buffer = table.create(p3)
 		
 		for i = 1, p3 do
-			list_1[i] = {
+			Buffer[i] = {
 				id = tostring(i),
 				label = `#{string.format("%06d", i)}   {list[(i - 1) % #list + 1]}`
 			}
 		end
-		return list_1
+		return Buffer
 	end,
-	buildKnownVariableRows = function(p4, p5, p6)
-		local list = table.create(p4)
+	buildKnownVariableRows = function(p4, p5, p6) --[[ Line: 164 ]]
+		local Buffer = table.create(p4)
 		
 		for i = 1, p4 do
-			list[i] = {
+			Buffer[i] = {
 				id = tostring(i),
-				label = `Item #{i} \226\128\148 exact {if i % 2 == 1 then p5 else p6}px row`
+				label = `Item #{i} — exact {if i % 2 == 1 then p5 else p6}px row`
 			}
 		end
-		return list
+		return Buffer
 	end,
-	buildMeasuredRows = function(p7, p8)
-		-- upvalues: parts (ref)
-		local random = Random.new(1337)
-		local list = table.create(p7)
+	buildMeasuredRows = function(p7, Gap) --[[ Line: 176 ]]
+		-- upvalues: Parts (copy)
+		local _Random = Random.new(1337)
+		local Buffer = table.create(p7)
 		
-		for i_1 = 1, p7 do
-			local var1 = random:NextInteger(8, 45)
-			local list_1 = table.create(var1)
+		for i = 1, p7 do
+			local NextIntegerResult = _Random:NextInteger(8, 45)
+			local Buffer1 = table.create(NextIntegerResult)
 			
-			for i = 1, var1 do
-				list_1[i] = parts[random:NextInteger(1, #parts)]
+			for i1 = 1, NextIntegerResult do
+				Buffer1[i1] = Parts[_Random:NextInteger(1, #Parts)]
 			end
-			list[i_1] = {
-				id = tostring(i_1),
-				label = `Item #{i_1}: ` .. table.concat(list_1, " "),
-				gap = p8
+			Buffer[i] = {
+				id = tostring(i),
+				label = `Item #{i}: ` .. table.concat(Buffer1, " "),
+				gap = Gap
 			}
 		end
-		return list
+		return Buffer
 	end,
-	getItemKey = function(p9)
-		return p9.id
+	getItemKey = function(p8) --[[ Line: 194 ]]
+		return p8.id
 	end
 }

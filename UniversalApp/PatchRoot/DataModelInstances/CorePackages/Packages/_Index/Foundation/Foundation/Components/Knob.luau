@@ -1,1 +1,1 @@
-﻿return require(script.Knob)
+﻿return (require(script.Knob))

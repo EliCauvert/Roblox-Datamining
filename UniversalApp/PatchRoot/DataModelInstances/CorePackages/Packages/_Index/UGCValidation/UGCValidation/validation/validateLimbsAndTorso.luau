@@ -1,165 +1,164 @@
-﻿local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Constants)
-local validateMeshPartBodyPartModule = require(parent.validation.validateMeshPartBodyPart)
-local validateTagsModule = require(parent.validation.validateTags)
-local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
-local createLimbsAndTorsoSchemaModule = require(parent.util.createLimbsAndTorsoSchema)
-local _ = require(parent.util.Types)
+﻿local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Constants)
+local ValidateMeshPartBodyPartModule = require(Parent.validation.validateMeshPartBodyPart)
+local ValidateTagsModule = require(Parent.validation.validateTags)
+local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
+local CreateLimbsAndTorsoSchemaModule = require(Parent.util.createLimbsAndTorsoSchema)
+local _ = require(Parent.util.Types)
 
-local function _(p1, p2)
-	for i, v in pairs(p1) do
-		if v.Name == p2 then
-			return v
+local function _(List, Name) --[[ Line: 13 | Named "getInstance" ]]
+	for _, value in pairs(List) do
+		if value.Name == Name then
+			return value
 		end
 	end
 	return nil
 end
 
-local function areTopLevelFoldersCorrect(p3, p4)
-	if #p3 ~= #p4 then
+local function areTopLevelFoldersCorrect(Instances, List): boolean --[[ Line: 22 ]]
+	if #Instances ~= #List then
 		return false
 	end
-	for i, v in p4 do
-		local var1
-		for i_1, v_1 in pairs(p3) do
-			if v_1.Name == v then
-				var1 = v_1
-				if not var1 or var1.ClassName ~= "Folder" then
-					return false
-				end
+	local Folder = nil
+	for _, value in List do
+		Folder = nil
+		
+		for _, instance in pairs(Instances) do
+			if instance.Name == value then
+				Folder = instance
+				break
 			end
 		end
-		var1 = nil
+		if not Folder or Folder.ClassName ~= "Folder" then
+			return false
+		end
 	end
 	return true
 end
 
-local _ = function(p5, p6)
-	local fullName = p5:GetFullName()
-	local matchIndex, matchIndex_1 = string.find(fullName, p6 .. "%.")
-	assert(matchIndex and matchIndex_1)
+local _ = function(Object, Text): string --[[ Line: 36 | Named "getFullNameWithoutRootFolder" ]]
+	local FullName: string = Object:GetFullName()
+	local StartIndex, EndIndex = string.find(FullName, Text .. "%.")
+	assert(StartIndex and EndIndex)
 	
-	return string.sub(fullName, matchIndex_1 + 1, #fullName)
+	return (string.sub(FullName, EndIndex + 1, #FullName))
 end
 
-local function compareFolderInfo(p5, p6, p7)
-	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref)
-	local var2 = failureReasonsAccumulatorModule.new()
+local function compareFolderInfo(List, p1, p2) --[[ Line: 43 ]]
+	-- upvalues: FailureReasonsAccumulatorModule (copy), AnalyticsModule (copy)
+	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	
-	for i, v in p5 do
-		if p6[i] == nil or p6[i] ~= v then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateLimbsAndTorso_FolderInfoMismatch, nil, p7)
-			var2:updateReasons(false, {
+	for i, value in List do
+		if p1[i] == nil or p1[i] ~= value then
+			AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLimbsAndTorso_FolderInfoMismatch, nil, p2)
+			NewFailureReasonsAccumulator:updateReasons(false, {
 				`Attribute {i} has different values in different children folders. You need to use the same value in all folders.`
 			})
 		end
 	end
-	return var2:getFinalResults()
+	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-local function validateFolderAssetIdsMatch(value, p8, p9)
-	-- upvalues: failureReasonsAccumulatorModule (ref), constantsModule (ref), compareFolderInfo (ref)
-	if #p8 == 1 then
+local function validateFolderAssetIdsMatch(Instances, List, p3) --[[ Line: 65 ]]
+	-- upvalues: FailureReasonsAccumulatorModule (copy), ConstantsModule (copy), compareFolderInfo (copy)
+	if #List == 1 then
 		return true
 	end
-	local var3 = nil
-	local var4 = failureReasonsAccumulatorModule.new()
+	local v1 = nil
+	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
+	local Object = nil
 	
-	for i, v in p8 do
-		if v ~= constantsModule.FOLDER_NAMES.R6 then
-			local var5
-			for i_1, v_1 in pairs(value) do
-				if v_1.Name == v then
-					var5 = v_1
-					assert(var5)
-					local t = {}
-					
-					for v_1, v_2 in var5:GetDescendants() do
-						local className = constantsModule.CONTENT_ID_FIELDS[v_2.ClassName]
-						
-						if className then
-							for i_3, v_3 in className do
-								local fullName = v_2:GetFullName()
-								local matchIndex, matchIndex_1 = string.find(fullName, v .. "%.")
-								assert(matchIndex and matchIndex_1)
-								t[string.sub(fullName, matchIndex_1 + 1, #fullName) .. "." .. v_3] = v_2[v_3]
-							end
-						end
-					end
-					if var3 then
-						var4:updateReasons(compareFolderInfo(var3, t, p9))
-						var4:updateReasons(compareFolderInfo(t, var3, p9))
-					else
-						var3 = t
+	for _, value in List do
+		if value ~= ConstantsModule.FOLDER_NAMES.R6 then
+			Object = nil
+			
+			for _, instance in pairs(Instances) do
+				if instance.Name == value then
+					Object = instance
+					break
+				end
+			end
+			assert(Object)
+			local t = {}
+			
+			for _, descendant in Object:GetDescendants() do
+				local CONTENTIDFIELD = ConstantsModule.CONTENT_ID_FIELDS[descendant.ClassName]
+				
+				if CONTENTIDFIELD then
+					for _, value1 in CONTENTIDFIELD do
+						local FullName: string = descendant:GetFullName()
+						local StartIndex, EndIndex = string.find(FullName, value .. "%.")
+						assert(StartIndex and EndIndex)
+						t[string.sub(FullName, EndIndex + 1, #FullName) .. "." .. value1] = descendant[value1]
 					end
 				end
 			end
-			var5 = nil
+			if v1 then
+				NewFailureReasonsAccumulator:updateReasons(compareFolderInfo(v1, t, p3))
+				NewFailureReasonsAccumulator:updateReasons(compareFolderInfo(t, v1, p3))
+			else
+				v1 = t
+			end
 		end
 	end
-	return var4:getFinalResults()
+	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-local function validateR6Folder(p10, p11, p12)
-	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref), validateTagsModule (ref)
-	local var6 = failureReasonsAccumulatorModule.new()
+local function validateR6Folder(Object, AssetTypeEnum, p4) --[[ Line: 108 ]]
+	-- upvalues: FailureReasonsAccumulatorModule (copy), AnalyticsModule (copy), ValidateTagsModule (copy)
+	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	
-	if #p10:GetChildren() > 0 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLimbsAndTorso_R6FolderHasChildren, nil, p12)
-		var6:updateReasons(false, {
-			string.format("Deprecated R6 folder for '%s' should be empty. You need to clear that folder and try again.", p11.Name)
+	if #Object:GetChildren() > 0 then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLimbsAndTorso_R6FolderHasChildren, nil, p4)
+		NewFailureReasonsAccumulator:updateReasons(false, {
+			string.format("Deprecated R6 folder for '%s' should be empty. You need to clear that folder and try again.", AssetTypeEnum.Name)
 		})
 	end
-	var6:updateReasons(validateTagsModule(p10, p12))
+	NewFailureReasonsAccumulator:updateReasons(ValidateTagsModule(Object, p4))
 	
-	return var6:getFinalResults()
+	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-return function(p10)
-	-- upvalues: constantsModule (ref), areTopLevelFoldersCorrect (ref), analyticsModule (ref), validateR6Folder (ref), validateMeshPartBodyPartModule (ref), createLimbsAndTorsoSchemaModule (ref), validateFolderAssetIdsMatch (ref)
-	assert(p10.instances ~= nil, "instances required in validationContext for validateLimbsAndTorso")
-	local instances = p10.instances
-	assert(p10.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateLimbsAndTorso")
-	local requireAllFolders = p10.requireAllFolders
-	local assetTypeEnum = p10.assetTypeEnum
-	local list = { constantsModule.FOLDER_NAMES.R15ArtistIntent }
+return function(p4) --[[ Line: 130 | Named "validateLimbsAndTorso" ]]
+	-- upvalues: ConstantsModule (copy), areTopLevelFoldersCorrect (copy), AnalyticsModule (copy), validateR6Folder (copy), ValidateMeshPartBodyPartModule (copy), CreateLimbsAndTorsoSchemaModule (copy), validateFolderAssetIdsMatch (copy)
+	assert(p4.instances ~= nil, "instances required in validationContext for validateLimbsAndTorso")
+	local Instances = p4.instances
+	assert(p4.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateLimbsAndTorso")
+	local AssetTypeEnum = p4.assetTypeEnum
+	local List = { ConstantsModule.FOLDER_NAMES.R15ArtistIntent }
 	
-	if requireAllFolders then
-		table.insert(list, constantsModule.FOLDER_NAMES.R15Fixed)
-		table.insert(list, constantsModule.FOLDER_NAMES.R6)
+	if p4.requireAllFolders then
+		table.insert(List, ConstantsModule.FOLDER_NAMES.R15Fixed)
+		table.insert(List, ConstantsModule.FOLDER_NAMES.R6)
 	end
-	if not areTopLevelFoldersCorrect(instances, list) then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLimbsAndTorso_TopLevelFolders, nil, p10)
+	if not areTopLevelFoldersCorrect(Instances, List) then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLimbsAndTorso_TopLevelFolders, nil, p4)
 		
 		return false, {
-			"Incorrect hierarchy for asset with the following missing folders: " .. table.concat(list, ", ")
+			"Incorrect hierarchy for asset with the following missing folders: " .. table.concat(List, ", ")
 		}
 	end
-	for i, v in list do
-		local var6
-		for i_1, v_1 in pairs(instances) do
-			if v_1.Name == v then
-				var6 = v_1
-				local i_1, var7
-				local var8 = nil
-				local _ = nil
-				
-				if v == constantsModule.FOLDER_NAMES.R6 then
-					var26, i_1 = validateR6Folder(var6, assetTypeEnum, p10)
-					var8 = var26
-					var7 = i_1
-				else
-					var28, i_1 = validateMeshPartBodyPartModule(var6, createLimbsAndTorsoSchemaModule(assetTypeEnum, v, p10), p10)
-					var8 = var28
-					var7 = i_1
-				end
-				if not var8 then
-					return var8, var7
-				end
+	local ValidateR6FolderResult = nil
+	local ValidateR6FolderResult2 = nil
+	local v2 = nil
+	for _, value in List do
+		v2 = nil
+		
+		for _, instance in pairs(Instances) do
+			if instance.Name == value then
+				v2 = instance
+				break
 			end
 		end
-		var6 = nil
+		if value == ConstantsModule.FOLDER_NAMES.R6 then
+			ValidateR6FolderResult, ValidateR6FolderResult2 = validateR6Folder(v2, AssetTypeEnum, p4)
+		else
+			ValidateR6FolderResult, ValidateR6FolderResult2 = ValidateMeshPartBodyPartModule(v2, CreateLimbsAndTorsoSchemaModule(AssetTypeEnum, value, p4), p4)
+		end
+		if not ValidateR6FolderResult then
+			return ValidateR6FolderResult, ValidateR6FolderResult2
+		end
 	end
-	return validateFolderAssetIdsMatch(instances, list, p10)
+	return validateFolderAssetIdsMatch(Instances, List, p4)
 end

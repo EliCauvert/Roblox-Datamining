@@ -1,26 +1,28 @@
-﻿local parent = script.Parent
-local noneModule = require(parent.None)
-local _ = require(parent.Types)
-local forEachModule = require(parent.forEach)
+﻿local Parent = script.Parent
+local NoneModule = require(Parent.None)
+local _ = require(Parent.Types)
+local ForEachModule = require(Parent.forEach)
 
-local function joinDeep(p1, p2)
-	-- upvalues: forEachModule (ref), joinDeep (ref), noneModule (ref)
-	local cloned = table.clone(p1)
-	forEachModule(p2, function(p3, p4)
-		-- upvalues: p1 (ref), cloned (ref), joinDeep (copy), noneModule (copy)
-		if typeof(p1[p4]) == "table" and typeof(p3) == "table" then
-			cloned[p4] = joinDeep(p1[p4], p3)
-			
-			return
-		elseif p3 == noneModule then
-			cloned[p4] = nil
+local function joinDeep(Tbl, NoneModule1) --[[ Line: 21 ]]
+	-- upvalues: ForEachModule (copy), joinDeep (copy), NoneModule (copy)
+	local Copy = table.clone(Tbl)
+	ForEachModule(NoneModule1, function(NoneModule1, Key) --[[ Line: 24 ]]
+		-- upvalues: Tbl (copy), Copy (copy), joinDeep (upval), NoneModule (upval)
+		if typeof(Tbl[Key]) == "table" and typeof(NoneModule1) == "table" then
+			Copy[Key] = joinDeep(Tbl[Key], NoneModule1)
 			
 			return
 		end
-		cloned[p4] = p3
+		if NoneModule1 == NoneModule then
+			Copy[Key] = nil
+			
+			return
+		else
+			Copy[Key] = NoneModule1
+		end
 	end)
 	
-	return cloned
+	return Copy
 end
 
 return joinDeep

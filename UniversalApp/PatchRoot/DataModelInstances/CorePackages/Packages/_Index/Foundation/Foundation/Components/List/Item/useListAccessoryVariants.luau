@@ -1,59 +1,59 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local accessoryTypeModule = require(foundation.Enums.AccessoryType)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local AccessoryTypeModule = require(Foundation.Enums.AccessoryType)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1)
-	-- upvalues: accessoryTypeModule (ref), inputSizeModule (ref)
+local function variantsFactory(p1) --[[ Line: 17 ]]
+	-- upvalues: AccessoryTypeModule (copy), InputSizeModule (copy)
 	return {
 		accessorySize = {
-			[accessoryTypeModule.Icon] = {
-				[inputSizeModule.XSmall] = p1.Size.Size_400,
-				[inputSizeModule.Small] = p1.Size.Size_500,
-				[inputSizeModule.Medium] = p1.Size.Size_600,
-				[inputSizeModule.Large] = p1.Size.Size_600
+			[AccessoryTypeModule.Icon] = {
+				[InputSizeModule.XSmall] = p1.Size.Size_400,
+				[InputSizeModule.Small] = p1.Size.Size_500,
+				[InputSizeModule.Medium] = p1.Size.Size_600,
+				[InputSizeModule.Large] = p1.Size.Size_600
 			},
-			[accessoryTypeModule.Media] = {
-				[inputSizeModule.XSmall] = p1.Size.Size_600,
-				[inputSizeModule.Small] = p1.Size.Size_800,
-				[inputSizeModule.Medium] = p1.Size.Size_1000,
-				[inputSizeModule.Large] = p1.Size.Size_1400
+			[AccessoryTypeModule.Media] = {
+				[InputSizeModule.XSmall] = p1.Size.Size_600,
+				[InputSizeModule.Small] = p1.Size.Size_800,
+				[InputSizeModule.Medium] = p1.Size.Size_1000,
+				[InputSizeModule.Large] = p1.Size.Size_1400
 			},
-			[accessoryTypeModule.Avatar] = {
-				[inputSizeModule.XSmall] = p1.Size.Size_600,
-				[inputSizeModule.Small] = p1.Size.Size_800,
-				[inputSizeModule.Medium] = p1.Size.Size_1000,
-				[inputSizeModule.Large] = p1.Size.Size_1400
+			[AccessoryTypeModule.Avatar] = {
+				[InputSizeModule.XSmall] = p1.Size.Size_600,
+				[InputSizeModule.Small] = p1.Size.Size_800,
+				[InputSizeModule.Medium] = p1.Size.Size_1000,
+				[InputSizeModule.Large] = p1.Size.Size_1400
 			}
 		},
 		containerSize = {
-			[inputSizeModule.XSmall] = p1.Size.Size_600,
-			[inputSizeModule.Small] = p1.Size.Size_800,
-			[inputSizeModule.Medium] = p1.Size.Size_1000,
-			[inputSizeModule.Large] = p1.Size.Size_1400
+			[InputSizeModule.XSmall] = p1.Size.Size_600,
+			[InputSizeModule.Small] = p1.Size.Size_800,
+			[InputSizeModule.Medium] = p1.Size.Size_1000,
+			[InputSizeModule.Large] = p1.Size.Size_1400
 		},
 		cornerRadius = {
-			[inputSizeModule.XSmall] = p1.Radius.Small,
-			[inputSizeModule.Small] = p1.Radius.Medium,
-			[inputSizeModule.Medium] = p1.Radius.Medium,
-			[inputSizeModule.Large] = p1.Radius.Medium
+			[InputSizeModule.XSmall] = p1.Radius.Small,
+			[InputSizeModule.Small] = p1.Radius.Medium,
+			[InputSizeModule.Medium] = p1.Radius.Medium,
+			[InputSizeModule.Large] = p1.Radius.Medium
 		}
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local listAccessory = variantsContextModule.useVariants("ListAccessory", variantsFactory, p1)
+return function(p1, p2, p3) --[[ Line: 60 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local ListAccessory = VariantsContextModule.useVariants("ListAccessory", variantsFactory, p1)
 	
-	return composeStyleVariantModule({
+	return ComposeStyleVariantModule({
 		accessory = {
-			Size = UDim2.fromOffset(listAccessory.accessorySize[p3][p2], listAccessory.accessorySize[p3][p2]),
-			cornerRadius = UDim.new(0, listAccessory.cornerRadius[p2])
+			Size = UDim2.fromOffset(ListAccessory.accessorySize[p3][p2], ListAccessory.accessorySize[p3][p2]),
+			cornerRadius = UDim.new(0, ListAccessory.cornerRadius[p2])
 		},
 		container = {
-			Size = UDim2.fromOffset(listAccessory.containerSize[p2], listAccessory.containerSize[p2])
+			Size = UDim2.fromOffset(ListAccessory.containerSize[p2], ListAccessory.containerSize[p2])
 		}
 	})
 end

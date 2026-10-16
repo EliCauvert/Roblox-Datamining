@@ -1,14 +1,14 @@
-﻿local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local createIndividualBodyPartSchemaModule = require(parent.util.createIndividualBodyPartSchema)
+﻿local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local CreateIndividualBodyPartSchemaModule = require(Parent.util.createIndividualBodyPartSchema)
 
-return function(p1, p2, p3)
-	-- upvalues: constantsModule (ref), createIndividualBodyPartSchemaModule (ref)
-	local t = { ClassName = "Folder", Name = { p2 }, _children = {} }
+return function(p1, p2, p3) --[[ Line: 8 | Named "createLimbsAndTorsoSchema" ]]
+	-- upvalues: ConstantsModule (copy), CreateIndividualBodyPartSchemaModule (copy)
+	local config = { ClassName = "Folder", Name = { p2 }, _children = {} }
 	
-	for i in pairs(constantsModule.ASSET_TYPE_INFO[p1].subParts) do
-		table.insert(t._children, createIndividualBodyPartSchemaModule(p1, i, p3))
+	for subPart in pairs(ConstantsModule.ASSET_TYPE_INFO[p1].subParts) do
+		table.insert(config._children, (CreateIndividualBodyPartSchemaModule(p1, subPart, p3)))
 	end
-	return t
+	return config
 end

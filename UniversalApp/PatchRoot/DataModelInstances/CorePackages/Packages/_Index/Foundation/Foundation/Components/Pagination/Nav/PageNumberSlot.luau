@@ -1,21 +1,20 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useChipVariantsModule = require(foundation.Components.Chip.useChipVariants)
-local chipSizeModule = require(foundation.Enums.ChipSize)
-local chipVariantModule = require(foundation.Enums.ChipVariant)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local paginationSizeModule = require(foundation.Enums.PaginationSize)
-local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local paginationUtilsModule = require(script.Parent.Parent.paginationUtils)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseChipVariantsModule = require(Foundation.Components.Chip.useChipVariants)
+local ChipSizeModule = require(Foundation.Enums.ChipSize)
+local ChipVariantModule = require(Foundation.Enums.ChipVariant)
+local PaginationSizeModule = require(Foundation.Enums.PaginationSize)
+local PresentationContextModule = require(Foundation.Providers.Style.PresentationContext)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local PaginationUtilsModule = require(script.Parent.Parent.paginationUtils)
 
-local function PageNumberText(p1)
-	-- upvalues: reactModule (ref), textModule (ref)
-	return reactModule.createElement(textModule, {
+local function PageNumberText(p1) --[[ Line: 43 ]]
+	-- upvalues: ReactModule (copy), TextModule (copy)
+	return ReactModule.createElement(TextModule, {
 		LayoutOrder = 1,
 		Text = tostring(p1.page),
 		textStyle = p1.textStyle,
@@ -25,85 +24,85 @@ local function PageNumberText(p1)
 	})
 end
 
-local t = {
+local config = {
 	isIconSize = true,
-	colorNamespace = colorNamespaceModule.Color
+	colorNamespace = require(Foundation.Enums.ColorNamespace).Color
 }
-local t_1 = {
-	[paginationSizeModule.Small] = "size-0-600",
-	[paginationSizeModule.Medium] = "size-0-800"
+local config1 = {
+	[PaginationSizeModule.Small] = "size-0-600",
+	[PaginationSizeModule.Medium] = "size-0-800"
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokensModule (ref), paginationUtilsModule (ref), paginationSizeModule (ref), chipSizeModule (ref), useChipVariantsModule (ref), chipVariantModule (ref), t_1 (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), t (ref), PageNumberText (ref)
-	local var1 = useTokensModule()
-	local var2 = not p1.isChecked
-	local var3 = paginationUtilsModule.needsWidePageSlot(p1.page)
-	local var4 = if p1.slotSize == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium
-	local var5 = useChipVariantsModule(var1, var4, chipVariantModule.Utility, true, false, false)
-	local var6 = useChipVariantsModule(var1, var4, chipVariantModule.Utility, false, false, false)
-	local slotSize = `row align-x-center align-y-center auto-x radius-circle {t_1[p1.slotSize]}`
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		p1.onPageActivated(p1.page)
-	end, { p1.onPageActivated, p1.page })
-	local t_2 = {
-		Selectable = var2 and p1.Selectable ~= false,
-		NextSelectionLeft = p1.NextSelectionLeft,
-		NextSelectionRight = p1.NextSelectionRight,
-		NextSelectionUp = p1.NextSelectionUp,
-		NextSelectionDown = p1.NextSelectionDown
+return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 67 | Named "PageNumberSlot" ]]
+	-- upvalues: UseTokensModule (copy), PaginationUtilsModule (copy), PaginationSizeModule (copy), ChipSizeModule (copy), UseChipVariantsModule (copy), ChipVariantModule (copy), config1 (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), PresentationContextModule (copy), config (copy), PageNumberText (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local NoIsChecked = not Frame.isChecked
+	local NeedsWidePageSlotResult = PaginationUtilsModule.needsWidePageSlot(Frame.page)
+	local Small = if Frame.slotSize == PaginationSizeModule.Small then ChipSizeModule.Small else ChipSizeModule.Medium
+	local UseChipVariantsModuleResult = UseChipVariantsModule(UseTokensModuleResult, Small, ChipVariantModule.Utility, true, false, false)
+	local UseChipVariantsModuleResult1 = UseChipVariantsModule(UseTokensModuleResult, Small, ChipVariantModule.Utility, false, false, false)
+	local Message: string = `row align-x-center align-y-center auto-x radius-circle {config1[Frame.slotSize]}`
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 78 ]]
+		-- upvalues: Frame (copy)
+		Frame.onPageActivated(Frame.page)
+	end, { Frame.onPageActivated, Frame.page })
+	local Selection = {
+		Selectable = NoIsChecked and Frame.Selectable ~= false,
+		NextSelectionLeft = Frame.NextSelectionLeft,
+		NextSelectionRight = Frame.NextSelectionRight,
+		NextSelectionUp = Frame.NextSelectionUp,
+		NextSelectionDown = Frame.NextSelectionDown
 	}
 	
-	return if var3 then if var2 then reactModule.createElement(viewModule, withCommonPropsModule({ LayoutOrder = p1.LayoutOrder, testId = p1.testId }, {
-		backgroundStyle = var6.chip.backgroundStyle,
-		padding = var6.chip.padding,
-		cursor = paginationUtilsModule.getSlotCursor(var1),
-		onActivated = var7,
-		ref = p2,
-		selection = t_2,
-		tag = slotSize
+	return if NeedsWidePageSlotResult then if NoIsChecked then ReactModule.createElement(ViewModule, WithCommonPropsModule({ LayoutOrder = Frame.LayoutOrder, testId = Frame.testId }, {
+		backgroundStyle = UseChipVariantsModuleResult1.chip.backgroundStyle,
+		padding = UseChipVariantsModuleResult1.chip.padding,
+		cursor = PaginationUtilsModule.getSlotCursor(UseTokensModuleResult),
+		onActivated = UseResult,
+		ref = Ref,
+		selection = Selection,
+		tag = Message
 	}), {
-		Label = reactModule.createElement(presentationContextModule.Provider, { value = t }, {
-			Text = reactModule.createElement(PageNumberText, {
-				page = p1.page,
-				textStyle = var6.text.contentStyle,
-				textTag = var6.text.tag,
-				padding = var6.text.padding,
-				testId = p1.testId
+		Label = ReactModule.createElement(PresentationContextModule.Provider, { value = config }, {
+			Text = ReactModule.createElement(PageNumberText, {
+				page = Frame.page,
+				textStyle = UseChipVariantsModuleResult1.text.contentStyle,
+				textTag = UseChipVariantsModuleResult1.text.tag,
+				padding = UseChipVariantsModuleResult1.text.padding,
+				testId = Frame.testId
 			})
 		})
-	}) else reactModule.createElement(viewModule, withCommonPropsModule({ LayoutOrder = p1.LayoutOrder, testId = p1.testId }, {
-		backgroundStyle = var5.chip.backgroundStyle,
-		padding = var5.chip.padding,
-		ref = p2,
+	}) else ReactModule.createElement(ViewModule, WithCommonPropsModule({ LayoutOrder = Frame.LayoutOrder, testId = Frame.testId }, {
+		backgroundStyle = UseChipVariantsModuleResult.chip.backgroundStyle,
+		padding = UseChipVariantsModuleResult.chip.padding,
+		ref = Ref,
 		selection = { Selectable = false },
-		tag = slotSize
+		tag = Message
 	}), {
-		Text = reactModule.createElement(PageNumberText, {
-			page = p1.page,
-			textStyle = var5.text.contentStyle,
-			textTag = var5.text.tag,
-			padding = var5.text.padding,
-			testId = p1.testId
+		Text = ReactModule.createElement(PageNumberText, {
+			page = Frame.page,
+			textStyle = UseChipVariantsModuleResult.text.contentStyle,
+			textTag = UseChipVariantsModuleResult.text.tag,
+			padding = UseChipVariantsModuleResult.text.padding,
+			testId = Frame.testId
 		})
-	}) else reactModule.createElement(viewModule, withCommonPropsModule({ LayoutOrder = p1.LayoutOrder, testId = p1.testId }, {
+	}) else ReactModule.createElement(ViewModule, WithCommonPropsModule({ LayoutOrder = Frame.LayoutOrder, testId = Frame.testId }, {
 		backgroundStyle = {
 			Transparency = 1,
-			Color3 = var1.Color.Surface.Surface_0.Color3
+			Color3 = UseTokensModuleResult.Color.Surface.Surface_0.Color3
 		},
-		cursor = if var2 then paginationUtilsModule.getSlotCursor(var1) else nil,
-		onActivated = if var2 then var7 else nil,
-		ref = p2,
-		selection = if var2 then t_2 else { Selectable = false },
-		tag = paginationUtilsModule.getCircularSlotTag(p1.slotSize)
+		cursor = if NoIsChecked then PaginationUtilsModule.getSlotCursor(UseTokensModuleResult) else nil,
+		onActivated = if NoIsChecked then UseResult else nil,
+		ref = Ref,
+		selection = if NoIsChecked then Selection else { Selectable = false },
+		tag = PaginationUtilsModule.getCircularSlotTag(Frame.slotSize)
 	}), {
-		Text = reactModule.createElement(PageNumberText, {
+		Text = ReactModule.createElement(PageNumberText, {
 			padding = nil,
-			page = p1.page,
-			textStyle = if p1.isChecked then var5.text.contentStyle else var1.Color.Content.Default,
-			textTag = paginationUtilsModule.getPageLabelTextTag(p1.slotSize),
-			testId = p1.testId
+			page = Frame.page,
+			textStyle = if Frame.isChecked then UseChipVariantsModuleResult.text.contentStyle else UseTokensModuleResult.Color.Content.Default,
+			textTag = PaginationUtilsModule.getPageLabelTextTag(Frame.slotSize),
+			testId = Frame.testId
 		})
 	})
 end))

@@ -1,343 +1,341 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local error = luauPolyfillModule.Error
-local set = luauPolyfillModule.Set
-local _ = require(parent.Shared)
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Error1 = LuauPolyfillModule.Error
+local Set = LuauPolyfillModule.Set
+local _ = require(Parent.Shared)
 local _ = require(script.Parent.ReactInternalTypes)
 local _ = require(script.Parent.ReactFiberHostConfig)
-local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
-local syncLane = reactFiberLaneModule.SyncLane
-local noTimestamp = reactFiberLaneModule.NoTimestamp
-local reactWorkTagsModule = require(script.Parent.ReactWorkTags)
-local classComponent = reactWorkTagsModule.ClassComponent
-local functionComponent = reactWorkTagsModule.FunctionComponent
-local forwardRef = reactWorkTagsModule.ForwardRef
-local hostComponent = reactWorkTagsModule.HostComponent
-local hostPortal = reactWorkTagsModule.HostPortal
-local hostRoot = reactWorkTagsModule.HostRoot
-local memoComponent = reactWorkTagsModule.MemoComponent
-local simpleMemoComponent = reactWorkTagsModule.SimpleMemoComponent
-local reactSymbols = require(parent.Shared).ReactSymbols
-local REACT_FORWARD_REF_TYPE = reactSymbols.REACT_FORWARD_REF_TYPE
-local REACT_MEMO_TYPE = reactSymbols.REACT_MEMO_TYPE
-local REACT_LAZY_TYPE = reactSymbols.REACT_LAZY_TYPE
-local dEV = reactGlobalsModule.__DEV__
-local var1 = nil
-local var2 = nil
-local t = {
-	setRefreshHandler = function(value)
-		-- upvalues: dEV (ref), var1 (write)
-		if dEV then
-			var1 = value
-		end
-	end,
-	resolveFunctionForHotReloading = function(p1)
-		-- upvalues: dEV (ref), var1 (write)
-		if not dEV then
-			return p1
-		elseif var1 == nil then
-			return p1
-		end
-		local var3 = var1(p1)
-		
-		return if var3 == nil then p1 else var3.current
-	end,
-	resolveClassForHotReloading = function(p1)
-		-- upvalues: dEV (ref), var1 (write)
-		if not dEV then
-			return p1
-		elseif var1 == nil then
-			return p1
-		end
-		local var3 = var1(p1)
-		
-		return if var3 == nil then p1 else var3.current
-	end,
-	resolveForwardRefForHotReloading = function(p1)
-		-- upvalues: dEV (ref), var1 (write), REACT_FORWARD_REF_TYPE (ref)
-		if not dEV then
-			return p1
-		elseif var1 == nil then
-			return p1
-		end
-		local var3 = var1(p1)
-		
-		if var3 ~= nil then
-			return var3.current
-		elseif p1 ~= nil and typeof(p1.render) == "function" then
-			local var4
-			local render = p1.render
-			
-			if not dEV then
-				var4 = render
-			elseif var1 == nil then
-				var4 = render
-			else
-				local var5 = var1(render)
-				var4 = if var5 == nil then render else var5.current
-			end
-			if p1.render == var4 then
-				return p1
-			end
-			local t = {
-				["$$typeof"] = REACT_FORWARD_REF_TYPE,
-				render = var4,
-				displayName = nil
-			}
-			
-			if p1.displayName ~= nil then
-				t.displayName = p1.displayName
-			end
-			return t
-		end
-	end,
-	isCompatibleFamilyForHotReloading = function(p1, p2)
-		-- upvalues: dEV (ref), var1 (write), classComponent (ref), functionComponent (ref), REACT_LAZY_TYPE (ref), forwardRef (ref), REACT_FORWARD_REF_TYPE (ref), memoComponent (ref), simpleMemoComponent (ref), REACT_MEMO_TYPE (ref)
-		if not dEV then
-			return false
-		elseif var1 == nil then
-			return false
-		end
-		local elementType = p1.elementType
-		local type = p2.type
-		local var3 = false
-		local var4 = if typeof(type) == "table" and type ~= nil then type["$$typeof"] else nil
-		local tag = p1.tag
-		
-		if tag == classComponent then
-			if typeof(type) == "function" then
-				var3 = true
-			end
-		elseif tag == functionComponent then
-			if typeof(type) == "function" then
-				var3 = true
-			elseif var4 == REACT_LAZY_TYPE then
-				var3 = true
-			end
-		elseif tag ~= forwardRef then
-			if tag ~= memoComponent and tag ~= simpleMemoComponent then
-				return false
-			elseif var4 == REACT_MEMO_TYPE then
-				var3 = true
-			elseif var4 == REACT_LAZY_TYPE then
-				var3 = true
-			end
-		elseif var4 == REACT_FORWARD_REF_TYPE then
-			var3 = true
-		elseif var4 == REACT_LAZY_TYPE then
-			var3 = true
-		end
-		if var3 then
-			tag = var1(elementType)
-			
-			return tag == nil or tag ~= var1(type)
-		end
-	end,
-	markFailedErrorBoundaryForHotReloading = function(p1)
-		-- upvalues: dEV (ref), var1 (write), var2 (write), set (ref)
-		if dEV then
-			if var1 == nil then return end
-			if var2 == nil then
-				var2 = set.new()
-			end
-			var2:add(p1)
-		end
-	end
-}
-local findChildHostInstancesForFiberShallowly = nil
-local findHostInstancesForFiberShallowly = nil
-local findHostInstancesForMatchingFibersRecursively = nil
-local scheduleFibersWithFamiliesRecursively = nil
-local _ = nil
+local ReactFiberLaneModule = require(script.Parent.ReactFiberLane)
+local SyncLane = ReactFiberLaneModule.SyncLane
+local NoTimestamp = ReactFiberLaneModule.NoTimestamp
+local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
+local ClassComponent = ReactWorkTagsModule.ClassComponent
+local FunctionComponent = ReactWorkTagsModule.FunctionComponent
+local ForwardRef = ReactWorkTagsModule.ForwardRef
+local HostComponent = ReactWorkTagsModule.HostComponent
+local HostPortal = ReactWorkTagsModule.HostPortal
+local HostRoot = ReactWorkTagsModule.HostRoot
+local MemoComponent = ReactWorkTagsModule.MemoComponent
+local SimpleMemoComponent = ReactWorkTagsModule.SimpleMemoComponent
+local ReactSymbols = require(Parent.Shared).ReactSymbols
+local REACTFORWARDREFTYPE = ReactSymbols.REACT_FORWARD_REF_TYPE
+local REACTMEMOTYPE = ReactSymbols.REACT_MEMO_TYPE
+local REACTLAZYTYPE = ReactSymbols.REACT_LAZY_TYPE
+local DEV = require(Parent.ReactGlobals).__DEV__
+local Callback = nil
+local NewResult = nil
+local Callback4 = nil
+local Callback3 = nil
+local Callback2 = nil
+local Callback1 = nil
 
-function t.scheduleRefresh(p1, p2)
-	-- upvalues: dEV (ref), var1 (write), scheduleFibersWithFamiliesRecursively (write)
-	if dEV then
-		if var1 == nil then return end
-		local staleFamilies = p2.staleFamilies
-		local updatedFamilies = p2.updatedFamilies
-		local unknownModule = require(script.Parent["ReactFiberWorkLoop.new"])
-		local flushSync = unknownModule.flushSync
-		unknownModule.flushPassiveEffects()
-		flushSync(function()
-			-- upvalues: scheduleFibersWithFamiliesRecursively (copy), p1 (ref), updatedFamilies (ref), staleFamilies (ref)
-			scheduleFibersWithFamiliesRecursively(p1.current, updatedFamilies, staleFamilies)
+local function scheduleRefresh(p1, p2) --[[ Line: 267 ]]
+	-- upvalues: DEV (copy), Callback (ref), Callback1 (ref)
+	if DEV then
+		if Callback == nil then return end
+		local StaleFamilies = p2.staleFamilies
+		local UpdatedFamilies = p2.updatedFamilies
+		local ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
+		local FlushSyncFunction: (any) -> () = ReactFiberWorkLoopNewModule.flushSync
+		ReactFiberWorkLoopNewModule.flushPassiveEffects()
+		FlushSyncFunction(function() --[[ Line: 279 ]]
+			-- upvalues: Callback1 (upval), p1 (copy), UpdatedFamilies (copy), StaleFamilies (copy)
+			Callback1(p1.current, UpdatedFamilies, StaleFamilies)
 		end)
 	end
 end
 
-local _ = nil
-
-function t.scheduleRoot(p1, p2)
-	-- upvalues: dEV (ref)
-	if dEV then
-		if p1.context ~= require(script.Parent["ReactFiberContext.new"]).emptyContextObject then return end
-		local unknownModule = require(script.Parent["ReactFiberWorkLoop.new"])
-		local flushSync = unknownModule.flushSync
-		unknownModule.flushPassiveEffects()
-		flushSync(function()
-			-- upvalues: p2 (ref), p1 (ref)
-			require(script.Parent["ReactFiberReconciler.new"]).updateContainer(p2, p1, nil, nil)
-		end)
-	end
-end
-
-scheduleFibersWithFamiliesRecursively = function(p1, p2, p3)
-	-- upvalues: dEV (ref), functionComponent (ref), simpleMemoComponent (ref), classComponent (ref), forwardRef (ref), var1 (write), error (ref), var2 (write), syncLane (ref), noTimestamp (ref), scheduleFibersWithFamiliesRecursively (write)
-	if dEV then
-		local alternate = p1.alternate
-		local child = p1.child
-		local sibling = p1.sibling
-		local tag = p1.tag
-		local type = p1.type
-		local render = nil
+Callback1 = function(Child, UpdatedFamilies, StaleFamilies) --[[ Line: 316 | Named "scheduleFibersWithFamiliesRecursively" ]]
+	-- upvalues: DEV (copy), FunctionComponent (copy), SimpleMemoComponent (copy), ClassComponent (copy), ForwardRef (copy), Callback (ref), Error1 (copy), NewResult (ref), SyncLane (copy), NoTimestamp (copy), Callback1 (ref)
+	if DEV then
+		local Alternate = Child.alternate
+		local Child1 = Child.child
+		local Sibling = Child.sibling
+		local Tag = Child.tag
+		local Type = Child.type
+		local Render = nil
 		
-		if tag == functionComponent or tag == simpleMemoComponent or tag == classComponent then
-			render = type
-		elseif tag == forwardRef then
-			render = type.render
+		if Tag == FunctionComponent or Tag == SimpleMemoComponent or Tag == ClassComponent then
+			Render = Type
+		elseif Tag == ForwardRef then
+			Render = Type.render
 		end
-		if var1 == nil then
-			error(error.new("Expected resolveFamily to be set during hot reload."))
+		if Callback == nil then
+			error(Error1.new("Expected resolveFamily to be set during hot reload."))
 		end
-		local var3 = false
-		local var4 = false
+		local Flag = false
+		local Flag1 = false
 		
-		if render ~= nil then
-			local var5 = var1(render)
+		if Render ~= nil then
+			local CallbackResult = Callback(Render)
 			
-			if var5 ~= nil then
-				if p3:has(var5) then
-					var4 = true
-				elseif p2:has(var5) then
-					if tag == classComponent then
-						var4 = true
+			if CallbackResult ~= nil then
+				if StaleFamilies:has(CallbackResult) then
+					Flag1 = true
+				elseif UpdatedFamilies:has(CallbackResult) then
+					if Tag == ClassComponent then
+						Flag1 = true
 					else
-						var3 = true
+						Flag = true
 					end
 				end
 			end
 		end
-		if var2 ~= nil and (var2:has(p1) or alternate ~= nil and var2:has(alternate)) then
-			var4 = true
+		if NewResult ~= nil and (NewResult:has(Child) or Alternate ~= nil and NewResult:has(Alternate)) then
+			Flag1 = true
 		end
-		if var4 then
-			p1._debugNeedsRemount = true
+		if Flag1 then
+			Child._debugNeedsRemount = true
 		end
-		if var4 or var3 then
-			require(script.Parent["ReactFiberWorkLoop.new"]).scheduleUpdateOnFiber(p1, syncLane, noTimestamp)
+		if Flag1 or Flag then
+			require(script.Parent["ReactFiberWorkLoop.new"]).scheduleUpdateOnFiber(Child, SyncLane, NoTimestamp)
 		end
-		if child ~= nil and not var4 then
-			scheduleFibersWithFamiliesRecursively(child, p2, p3)
+		if Child1 ~= nil and not Flag1 then
+			Callback1(Child1, UpdatedFamilies, StaleFamilies)
 		end
-		if sibling ~= nil then
-			scheduleFibersWithFamiliesRecursively(sibling, p2, p3)
+		if Sibling ~= nil then
+			Callback1(Sibling, UpdatedFamilies, StaleFamilies)
 		end
 	end
 end
 
-local _ = nil
-
-function t.findHostInstancesForRefresh(p1, p2)
-	-- upvalues: dEV (ref), set (ref), array (ref), findHostInstancesForMatchingFibersRecursively (write), error (ref)
-	if dEV then
-		local var3 = set.new()
-		findHostInstancesForMatchingFibersRecursively(p1.current, set.new(array.map(p2, function(p3)
-			return p3.current
-		end)), var3)
+local ReactFiberHotReloadingModule = {
+	setRefreshHandler = function(Value) --[[ Line: 92 ]]
+		-- upvalues: DEV (copy), Callback (ref)
+		if DEV then
+			Callback = Value
+		end
+	end,
+	resolveFunctionForHotReloading = function(p1) --[[ Line: 99 ]]
+		-- upvalues: DEV (copy), Callback (ref)
+		if not DEV then
+			return p1
+		elseif Callback == nil then
+			return p1
+		else
+			local CallbackResult = Callback(p1)
+			
+			return if CallbackResult == nil then p1 else CallbackResult.current
+		end
+	end,
+	resolveClassForHotReloading = function(p1) --[[ Line: 117 ]]
+		-- upvalues: DEV (copy), Callback (ref)
+		if not DEV then
+			return p1
+		elseif Callback == nil then
+			return p1
+		else
+			local CallbackResult = Callback(p1)
+			
+			return if CallbackResult == nil then p1 else CallbackResult.current
+		end
+	end,
+	resolveForwardRefForHotReloading = function(p1) --[[ Line: 123 ]]
+		-- upvalues: DEV (copy), Callback (ref), REACTFORWARDREFTYPE (copy)
+		if not DEV then
+			return p1
+		end
+		if Callback == nil then
+			return p1
+		end
+		local CallbackResult = Callback(p1)
 		
-		return var3
-	end
-	error(error.new("Did not expect findHostInstancesForRefresh to be called in production."))
-end
-
-findHostInstancesForMatchingFibersRecursively = function(p1, p2, p3)
-	-- upvalues: dEV (ref), functionComponent (ref), simpleMemoComponent (ref), classComponent (ref), forwardRef (ref), findHostInstancesForFiberShallowly (write), findHostInstancesForMatchingFibersRecursively (write)
-	if dEV then
-		local child = p1.child
-		local sibling = p1.sibling
-		local tag = p1.tag
-		local type = p1.type
-		local render = nil
-		
-		if tag == functionComponent or tag == simpleMemoComponent or tag == classComponent then
-			render = type
-		elseif tag == forwardRef then
-			render = type.render
+		if CallbackResult ~= nil then
+			return CallbackResult.current
 		end
-		if not (render == nil or not p2:has(render)) and true then
-			findHostInstancesForFiberShallowly(p1, p3)
-		elseif child ~= nil then
-			findHostInstancesForMatchingFibersRecursively(child, p2, p3)
-		end
-		if sibling ~= nil then
-			findHostInstancesForMatchingFibersRecursively(sibling, p2, p3)
-		end
-	end
-end
-
-findHostInstancesForFiberShallowly = function(p1, p2)
-	-- upvalues: dEV (ref), findChildHostInstancesForFiberShallowly (write), hostComponent (ref), hostPortal (ref), hostRoot (ref), error (ref)
-	if dEV then
-		if findChildHostInstancesForFiberShallowly(p1, p2) then return end
-		local var3 = p1
-		while true do
-			local tag = var3.tag
-			if tag ~= hostComponent then
-				if tag ~= hostPortal then
-					if tag ~= hostRoot then
-						if var3.return_ == nil then
-							error(error.new("Expected to reach root first."))
-						end
-						var3 = var3.return_
-					end
-					p2:add(var3.stateNode.containerInfo)
-					
-					return
+		if p1 ~= nil and typeof(p1.render) == "function" then
+			local Render = p1.render
+			local Render1 = nil
+			
+			if DEV then
+				if Callback == nil then
+					Render1 = Render
+				else
+					local CallbackResult1 = Callback(Render)
+					Render1 = if CallbackResult1 == nil then Render else CallbackResult1.current
 				end
-				p2:add(var3.stateNode.containerInfo)
+			else
+				Render1 = Render
+			end
+			if p1.render ~= Render1 then
+				local config = {
+					["$$typeof"] = REACTFORWARDREFTYPE,
+					render = Render1,
+					displayName = nil
+				}
 				
-				return
+				if p1.displayName ~= nil then
+					config.displayName = p1.displayName
+				end
+				return config
 			end
-			p2:add(var3.stateNode)
+		end
+		return p1
+	end,
+	isCompatibleFamilyForHotReloading = function(p1, p2): boolean --[[ Line: 160 ]]
+		-- upvalues: DEV (copy), Callback (ref), ClassComponent (copy), FunctionComponent (copy), REACTLAZYTYPE (copy), ForwardRef (copy), REACTFORWARDREFTYPE (copy), MemoComponent (copy), SimpleMemoComponent (copy), REACTMEMOTYPE (copy)
+		if not DEV then
+			return false
+		end
+		if Callback == nil then
+			return false
+		end
+		local ElementType = p1.elementType
+		local Type = p2.type
+		local Flag = false
+		local Typeof = if typeof(Type) == "table" and Type ~= nil then Type["$$typeof"] else nil
+		local Tag = p1.tag
+		
+		if Tag == ClassComponent then
+			if typeof(Type) == "function" then
+				Flag = true
+			end
+		elseif Tag == FunctionComponent then
+			if typeof(Type) == "function" then
+				Flag = true
+			elseif Typeof == REACTLAZYTYPE then
+				Flag = true
+			end
+		elseif Tag == ForwardRef then
+			if Typeof == REACTFORWARDREFTYPE then
+				Flag = true
+			elseif Typeof == REACTLAZYTYPE then
+				Flag = true
+			end
+		else
+			if Tag ~= MemoComponent and Tag ~= SimpleMemoComponent then
+				return false
+			end
+			if Typeof == REACTMEMOTYPE then
+				Flag = true
+			elseif Typeof == REACTLAZYTYPE then
+				Flag = true
+			end
+		end
+		if Flag then
+			local CallbackResult = Callback(ElementType)
+			
+			if CallbackResult ~= nil and CallbackResult == Callback(Type) then
+				return true
+			end
+		end
+		return false
+	end,
+	markFailedErrorBoundaryForHotReloading = function(p1) --[[ Line: 247 ]]
+		-- upvalues: DEV (copy), Callback (ref), NewResult (ref), Set (copy)
+		if DEV then
+			if Callback == nil then return end
+			if NewResult == nil then
+				NewResult = Set.new()
+			end
+			NewResult:add(p1)
+		end
+	end,
+	scheduleRefresh = scheduleRefresh,
+	scheduleRoot = function(p1, p2) --[[ Line: 291 ]]
+		-- upvalues: DEV (copy)
+		if DEV then
+			if p1.context ~= require(script.Parent["ReactFiberContext.new"]).emptyContextObject then return end
+			local ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
+			local FlushSyncFunction: (any) -> () = ReactFiberWorkLoopNewModule.flushSync
+			ReactFiberWorkLoopNewModule.flushPassiveEffects()
+			FlushSyncFunction(function() --[[ Line: 306 ]]
+				-- upvalues: p2 (copy), p1 (copy)
+				require(script.Parent["ReactFiberReconciler.new"]).updateContainer(p2, p1, nil, nil)
+			end)
+		end
+	end,
+	findHostInstancesForRefresh = function(p1, p2) --[[ Line: 383 ]]
+		-- upvalues: DEV (copy), Set (copy), Array (copy), Callback2 (ref), Error1 (copy)
+		if not DEV then
+			error(Error1.new("Did not expect findHostInstancesForRefresh to be called in production."))
 			
 			return
 		end
+		local NewSet = Set.new()
+		Callback2(p1.current, Set.new(Array.map(p2, function(p3) --[[ Line: 389 ]]
+			return p3.current
+		end)), NewSet)
+		
+		return NewSet
+	end
+}
+
+Callback2 = function(Child, NewResult, NewResult1) --[[ Line: 404 | Named "findHostInstancesForMatchingFibersRecursively" ]]
+	-- upvalues: DEV (copy), FunctionComponent (copy), SimpleMemoComponent (copy), ClassComponent (copy), ForwardRef (copy), Callback3 (ref), Callback2 (ref)
+	if DEV then
+		local Child1 = Child.child
+		local Sibling = Child.sibling
+		local Tag = Child.tag
+		local Type = Child.type
+		local Type1 = if Tag == FunctionComponent or Tag == SimpleMemoComponent or Tag == ClassComponent then Type elseif Tag == ForwardRef then Type.render else nil
+		
+		if if Type1 ~= nil and NewResult:has(Type1) then true else false then
+			Callback3(Child, NewResult1)
+		elseif Child1 ~= nil then
+			Callback2(Child1, NewResult, NewResult1)
+		end
+		if Sibling ~= nil then
+			Callback2(Sibling, NewResult, NewResult1)
+		end
 	end
 end
 
-findChildHostInstancesForFiberShallowly = function(p3, p4)
-	-- upvalues: dEV (ref), hostComponent (ref)
-	if dEV then
-		local var4 = p3
-		local var5 = false
+Callback3 = function(Child, p1) --[[ Line: 448 | Named "findHostInstancesForFiberShallowly" ]]
+	-- upvalues: DEV (copy), Callback4 (ref), HostComponent (copy), HostPortal (copy), HostRoot (copy), Error1 (copy)
+	if DEV then
+		if Callback4(Child, p1) then return end
+		local Return = Child
 		while true do
-			if var4.tag == hostComponent then
-				var5 = true
-				p4:add(var4.stateNode)
-			elseif var4.child ~= nil then
-				var4.child.return_ = var4
-				var4 = var4.child
-				continue
+			local Tag = Return.tag
+			if Tag == HostComponent then break end
+			if Tag == HostPortal then
+				p1:add(Return.stateNode.containerInfo)
+				
+				return
+			elseif Tag == HostRoot then
+				p1:add(Return.stateNode.containerInfo)
+				
+				return
+			elseif Return.return_ == nil then
+				error(Error1.new("Expected to reach root first."))
 			end
-			if var4 ~= p3 then
-				while var4.sibling == nil do
-					if var4.return_ ~= nil and var4.return_ ~= p3 then
-						var4 = var4.return_
-						continue
-					end
-					return var5
-				end
-				assert(var4.sibling ~= nil, "should be non-nil")
-				var4.sibling.return_ = var4.return_
-				var4 = var4.sibling
-			end
-			return var5
+			Return = Return.return_
 		end
 	end
+end
+
+Callback4 = function(Child, p2): boolean --[[ Line: 480 | Named "findChildHostInstancesForFiberShallowly" ]]
+	-- upvalues: DEV (copy), HostComponent (copy)
+	repeat
+		if not DEV then break end
+		local Child1 = Child
+		local Flag = false
+		while true do
+			if Child1.tag == HostComponent then
+				Flag = true
+				p2:add(Child1.stateNode)
+			elseif Child1.child ~= nil then
+				Child1.child.return_ = Child1
+				Child1 = Child1.child
+				continue
+			end
+			if Child1 == Child then
+				return Flag
+			end
+			while Child1.sibling == nil do
+				if Child1.return_ == nil or Child1.return_ == Child then
+					return Flag
+				end
+				Child1 = Child1.return_
+			end
+			assert(Child1.sibling ~= nil, "should be non-nil")
+			Child1.sibling.return_ = Child1.return_
+			Child1 = Child1.sibling
+		end
+	until true
 	return false
 end
 
-return t
+return ReactFiberHotReloadingModule

@@ -1,107 +1,104 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local cryoModule = require(parent_2.Cryo)
-local foundationModule = require(parent_2.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local constantsModule = require(parent.Constants)
-local _ = require(parent.StyleTypes)
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local _ = { BASE_SIZE = 16, FACTOR = 1.26 }
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent.Parent.Parent
+local CryoModule = require(Parent1.Cryo)
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.StyleTypes)
 
-local function _(p1, p2)
-	-- upvalues: constantsModule (ref)
-	return if typeof(p1) == "Font" then p1 elseif p1 == Enum.Font.Cartoon then Font.new(constantsModule.ComicNeueFontFamily, p2.Weight, p2.Style) else Font.fromEnum(p1)
+local function _(Cartoon, p1) --[[ Line: 18 | Named "getOverrideFontFace" ]]
+	-- upvalues: ConstantsModule (copy)
+	return if typeof(Cartoon) == "Font" then Cartoon elseif Cartoon == Enum.Font.Cartoon then Font.new(ConstantsModule.ComicNeueFontFamily, p1.Weight, p1.Style) else Font.fromEnum(Cartoon)
 end
 
-local t = {}
-t.__index = t
+local FontLoaderModule = {}
+FontLoaderModule.__index = FontLoaderModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = { _tokens = p1 }
-	setmetatable(t_1, t)
+function FontLoaderModule.new(_tokens) --[[ Line: 31 ]]
+	-- upvalues: FontLoaderModule (copy)
+	local config = { _tokens = _tokens }
+	setmetatable(config, FontLoaderModule)
 	
-	return t_1
+	return config
 end
 
-function t:loadFont(p1)
-	-- upvalues: foundationFontFaceMigration (ref), normalizeFontFace (ref), UIBloxConfigModule (ref), constantsModule (ref), cryoModule (ref)
-	local tokens = self._tokens
-	local t = {
+function FontLoaderModule:loadFont(Cartoon) --[[ Line: 39 ]]
+	-- upvalues: FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ConstantsModule (copy), CryoModule (copy)
+	local Tokens = self._tokens
+	local config = {
 		BaseSize = 20.16,
 		HeadingLarge = {
 			Font = Enum.Font.BuilderSansBold,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.HeadingLarge.Font) else nil,
-			RelativeSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_700 else tokens.Global.Size_350) / 16,
-			RelativeMinSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_600 else tokens.Global.Size_300) / 16
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.HeadingLarge.Font) else nil,
+			RelativeSize = Tokens.Size.Size_700 / 16,
+			RelativeMinSize = Tokens.Size.Size_600 / 16
 		},
 		HeadingSmall = {
 			Font = Enum.Font.BuilderSansBold,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.HeadingSmall.Font) else nil,
-			RelativeSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_500 else tokens.Global.Size_250) / 16,
-			RelativeMinSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_400 else tokens.Global.Size_200) / 16
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.HeadingSmall.Font) else nil,
+			RelativeSize = Tokens.Size.Size_500 / 16,
+			RelativeMinSize = Tokens.Size.Size_400 / 16
 		},
 		TitleLarge = {
 			Font = Enum.Font.BuilderSansBold,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.TitleLarge.Font) else nil,
-			RelativeSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_400 else tokens.Global.Size_200) / 16,
-			RelativeMinSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Size_150) / 16
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.TitleLarge.Font) else nil,
+			RelativeSize = Tokens.Size.Size_400 / 16,
+			RelativeMinSize = Tokens.Size.Size_300 / 16
 		},
 		BodyLarge = {
 			Font = Enum.Font.BuilderSans,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodyLarge.Font) else nil,
-			RelativeSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_400 else tokens.Global.Size_200) / 16,
-			RelativeMinSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Size_150) / 16
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodyLarge.Font) else nil,
+			RelativeSize = Tokens.Size.Size_400 / 16,
+			RelativeMinSize = Tokens.Size.Size_300 / 16
 		},
 		CaptionLarge = {
 			Font = Enum.Font.BuilderSansMedium,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.CaptionLarge.Font) else nil,
-			RelativeSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Size_150) / 16,
-			RelativeMinSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100) / 16
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.CaptionLarge.Font) else nil,
+			RelativeSize = Tokens.Size.Size_300 / 16,
+			RelativeMinSize = Tokens.Size.Size_200 / 16
 		},
 		BodySmall = {
 			Font = Enum.Font.BuilderSans,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.BodySmall.Font) else nil,
-			RelativeSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Size_150) / 16,
-			RelativeMinSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100) / 16
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.BodySmall.Font) else nil,
+			RelativeSize = Tokens.Size.Size_300 / 16,
+			RelativeMinSize = Tokens.Size.Size_200 / 16
 		},
 		CaptionSmall = {
 			Font = Enum.Font.BuilderSansMedium,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(tokens.Typography.CaptionSmall.Font) else nil,
-			RelativeSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_250 else tokens.Global.Size_125) / 16,
-			RelativeMinSize = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100) / 16
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(Tokens.Typography.CaptionSmall.Font) else nil,
+			RelativeSize = Tokens.Size.Size_250 / 16,
+			RelativeMinSize = Tokens.Size.Size_200 / 16
 		}
 	}
 	
-	if p1 ~= nil then
-		for i, v in t do
-			if type(v) == "table" and v.Font ~= nil then
-				v.Font = p1
+	if Cartoon ~= nil then
+		for _, Label in config do
+			if type(Label) == "table" and Label.Font ~= nil then
+				Label.Font = Cartoon
 				
-				if foundationFontFaceMigration then
-					local fontFace = v.FontFace
-					v.FontFace = if typeof(p1) == "Font" then p1 elseif p1 == Enum.Font.Cartoon then Font.new(constantsModule.ComicNeueFontFamily, fontFace.Weight, fontFace.Style) else Font.fromEnum(p1)
+				if FoundationFontFaceMigration then
+					local FontFace = Label.FontFace
+					Label.FontFace = if typeof(Cartoon) == "Font" then Cartoon elseif Cartoon == Enum.Font.Cartoon then Font.new(ConstantsModule.ComicNeueFontFamily, FontFace.Weight, FontFace.Style) else Font.fromEnum(Cartoon)
 				end
 			end
 		end
 	end
-	return cryoModule.Dictionary.join(self:mapLegacyFont(t, 16), t)
+	return CryoModule.Dictionary.join(self:mapLegacyFont(config, 16), config)
 end
 
-function t.mapLegacyFont(_, p2, _)
+function FontLoaderModule:mapLegacyFont(Labels, _) --[[ Line: 125 ]]
 	return {
-		Title = p2.HeadingLarge,
-		Header1 = p2.HeadingSmall,
-		Header2 = p2.TitleLarge,
-		SubHeader1 = p2.TitleLarge,
-		Body = p2.BodyLarge,
-		CaptionHeader = p2.CaptionLarge,
-		CaptionSubHeader = p2.CaptionLarge,
-		CaptionBody = p2.BodySmall,
-		Footer = p2.CaptionSmall
+		Title = Labels.HeadingLarge,
+		Header1 = Labels.HeadingSmall,
+		Header2 = Labels.TitleLarge,
+		SubHeader1 = Labels.TitleLarge,
+		Body = Labels.BodyLarge,
+		CaptionHeader = Labels.CaptionLarge,
+		CaptionSubHeader = Labels.CaptionLarge,
+		CaptionBody = Labels.BodySmall,
+		Footer = Labels.CaptionSmall
 	}
 end
 
-return t
+return FontLoaderModule

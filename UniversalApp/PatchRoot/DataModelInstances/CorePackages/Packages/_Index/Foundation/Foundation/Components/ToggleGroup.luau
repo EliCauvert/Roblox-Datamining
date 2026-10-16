@@ -1,1 +1,1 @@
-﻿return require(script.ToggleGroup)
+﻿return (require(script.ToggleGroup))

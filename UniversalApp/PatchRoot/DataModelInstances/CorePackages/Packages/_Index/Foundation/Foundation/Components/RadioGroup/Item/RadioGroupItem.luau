@@ -1,54 +1,56 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local constantsModule = require(foundation.Constants)
-local components = foundation.Components
-local internalInputModule = require(components.InternalInput)
-local _ = require(components.Types)
-local viewModule = require(components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local useRadioGroupItemVariantsModule = require(script.Parent.useRadioGroupItemVariants)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputPlacementModule = require(foundation.Enums.InputPlacement)
-local useInputGroupDefaultsModule = require(foundation.Components.InternalInputGroup.useInputGroupDefaults)
-local useRadioGroupModule = require(script.Parent.Parent.useRadioGroup)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ConstantsModule = require(Foundation.Constants)
+local Components = Foundation.Components
+local InternalInputModule = require(Components.InternalInput)
+local _ = require(Components.Types)
+local ViewModule = require(Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local UseRadioGroupItemVariantsModule = require(script.Parent.useRadioGroupItemVariants)
+local UseInputGroupDefaultsModule = require(Foundation.Components.InternalInputGroup.useInputGroupDefaults)
+local UseRadioGroupModule = require(script.Parent.Parent.useRadioGroup)
+local config = {
 	isDisabled = false,
-	size = inputSizeModule.Medium,
-	placement = inputPlacementModule.Start
+	size = require(Foundation.Enums.InputSize).Medium,
+	placement = require(Foundation.Enums.InputPlacement).Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useInputGroupDefaultsModule (ref), t (ref), useRadioGroupModule (ref), useTokensModule (ref), reactModule (ref), useRadioGroupItemVariantsModule (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), viewModule (ref)
-	local var1 = useInputGroupDefaultsModule(p1, t)
-	local isDisabled = var1.isDisabled
-	local var2 = useRadioGroupModule()
-	local var3 = var2.value == var1.value
-	local label = var1.label or var1.value
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		var2.onValueChanged(var1.value)
-	end, { isDisabled, var1.value, var2.onValueChanged })
-	local var5 = useRadioGroupItemVariantsModule(useTokensModule(), var1.size)
-	var1.testId = `{var2.testId}--item-{var13.value}`
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 49 | Named "RadioGroupItem" ]]
+	-- upvalues: UseInputGroupDefaultsModule (copy), config (copy), UseRadioGroupModule (copy), UseTokensModule (copy), ReactModule (copy), UseRadioGroupItemVariantsModule (copy), InternalInputModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), ViewModule (copy)
+	local UseInputGroupDefaultsModuleResult = UseInputGroupDefaultsModule(p1, config)
+	local IsDisabled = UseInputGroupDefaultsModuleResult.isDisabled
+	local UseRadioGroupModuleResult = UseRadioGroupModule()
+	local IsValueMatch = UseRadioGroupModuleResult.value == UseInputGroupDefaultsModuleResult.value
+	local Label = UseInputGroupDefaultsModuleResult.label or UseInputGroupDefaultsModuleResult.value
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 59 ]]
+		-- upvalues: UseRadioGroupModuleResult (copy), UseInputGroupDefaultsModuleResult (copy)
+		UseRadioGroupModuleResult.onValueChanged(UseInputGroupDefaultsModuleResult.value)
+	end, {
+		IsDisabled,
+		UseInputGroupDefaultsModuleResult.value,
+		UseRadioGroupModuleResult.onValueChanged
+	})
+	local UseRadioGroupItemVariantsModuleResult = UseRadioGroupItemVariantsModule(UseTokensModule(), UseInputGroupDefaultsModuleResult.size)
+	UseInputGroupDefaultsModuleResult.testId = `{UseRadioGroupModuleResult.testId}--item-{UseInputGroupDefaultsModuleResult.value}`
 	
-	return reactModule.createElement(internalInputModule, withCommonPropsModule(var1, {
-		isChecked = var3,
-		isDisabled = isDisabled,
-		onActivated = var4,
+	return ReactModule.createElement(InternalInputModule, WithCommonPropsModule(UseInputGroupDefaultsModuleResult, {
+		isChecked = IsValueMatch,
+		isDisabled = IsDisabled,
+		onActivated = UseResult,
 		label = {
-			text = label,
-			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var1.placement],
-			hint = var1.hint
+			text = Label,
+			position = ConstantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[UseInputGroupDefaultsModuleResult.placement],
+			hint = UseInputGroupDefaultsModuleResult.hint
 		},
-		customVariantProps = var5.input,
-		size = var1.size,
-		Selectable = var2.Selectable,
-		ref = p2
+		customVariantProps = UseRadioGroupItemVariantsModuleResult.input,
+		size = UseInputGroupDefaultsModuleResult.size,
+		Selectable = UseRadioGroupModuleResult.Selectable,
+		ref = Ref
 	}), {
-		Center = if var3 then reactModule.createElement(viewModule, {
-			tag = var5.checkmark.tag,
-			backgroundStyle = var5.checkmark.style
+		Center = if IsValueMatch then ReactModule.createElement(ViewModule, {
+			tag = UseRadioGroupItemVariantsModuleResult.checkmark.tag,
+			backgroundStyle = UseRadioGroupItemVariantsModuleResult.checkmark.style
 		}) else nil
 	})
 end))

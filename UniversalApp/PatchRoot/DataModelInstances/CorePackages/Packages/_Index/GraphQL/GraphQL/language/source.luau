@@ -1,29 +1,29 @@
-﻿local parent = script.Parent.Parent
-local inspect = require(parent.jsutils.inspect).inspect
-local devAssert = require(parent.jsutils.devAssert).devAssert
-local instanceOfModule = require(parent.jsutils.instanceOf)
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent.Parent
+local InspectFunction = require(Parent.jsutils.inspect).inspect
+local DevAssertFunction = require(Parent.jsutils.devAssert).devAssert
+local InstanceOfModule = require(Parent.jsutils.instanceOf)
+local Module = {}
+Module.__index = Module
 
-function t.new(p1, p2, p3)
-	-- upvalues: devAssert (ref), inspect (ref), t (ref)
-	p2 = p2 or "GraphQL request"
-	p3 = p3 or { line = 1, column = 1 }
-	devAssert(typeof(p1) == "string", "Body must be a string. Received: " .. inspect(p1) .. ".")
-	local t_1 = { body = p1, name = p2, locationOffset = p3 }
-	devAssert(t_1.locationOffset.line > 0, "line in locationOffset is 1-indexed and must be positive.")
-	devAssert(t_1.locationOffset.column > 0, "column in locationOffset is 1-indexed and must be positive.")
+function Module.new(Body, p1, p2) --[[ Line: 39 ]]
+	-- upvalues: DevAssertFunction (copy), InspectFunction (copy), Module (copy)
+	local P1 = p1 or "GraphQL request"
+	local P2 = p2 or { line = 1, column = 1 }
+	DevAssertFunction(typeof(Body) == "string", "Body must be a string. Received: " .. InspectFunction(Body) .. ".")
+	local config = { body = Body, name = P1, locationOffset = P2 }
+	DevAssertFunction(config.locationOffset.line > 0, "line in locationOffset is 1-indexed and must be positive.")
+	DevAssertFunction(config.locationOffset.column > 0, "column in locationOffset is 1-indexed and must be positive.")
 	
-	return setmetatable(t_1, t)
+	return (setmetatable(config, Module))
 end
 
-function t:__tostring()
+function Module:__tostring(): string --[[ Line: 61 ]]
 	return "{table Source}"
 end
 
-function isSource(p1)
-	-- upvalues: instanceOfModule (ref), t (ref)
-	return instanceOfModule(p1, t)
+function isSource(p1) --[[ Line: 71 ]]
+	-- upvalues: InstanceOfModule (copy), Module (copy)
+	return InstanceOfModule(p1, Module)
 end
 
-return { Source = t, isSource = isSource }
+return { Source = Module, isSource = isSource }

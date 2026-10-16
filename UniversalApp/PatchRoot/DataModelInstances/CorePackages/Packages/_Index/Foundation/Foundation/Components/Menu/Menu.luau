@@ -1,48 +1,51 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local baseMenuModule = require(foundation.Components.BaseMenu)
-local popoverModule = require(foundation.Components.Popover)
-local _ = require(foundation.Components.Types)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local radiusModule = require(foundation.Enums.Radius)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local BaseMenuModule = require(Foundation.Components.BaseMenu)
+local PopoverModule = require(Foundation.Components.Popover)
+local _ = require(Foundation.Components.Types)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local RadiusModule = require(Foundation.Enums.Radius)
+local config = {
 	testId = "--foundation-menu",
-	size = require(foundation.Enums.InputSize).Medium,
-	side = require(foundation.Enums.PopoverSide).Bottom,
-	align = require(foundation.Enums.PopoverAlign).Start
+	size = require(Foundation.Enums.InputSize).Medium,
+	side = require(Foundation.Enums.PopoverSide).Bottom,
+	align = require(Foundation.Enums.PopoverAlign).Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), popoverModule (ref), withCommonPropsModule (ref), radiusModule (ref), baseMenuModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 66 | Named "Menu" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), PopoverModule (copy), WithCommonPropsModule (copy), RadiusModule (copy), BaseMenuModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
 	
-	return reactModule.createElement(popoverModule.Root, { isOpen = var1.isOpen, testId = var1.testId }, {
-		Anchor = reactModule.createElement(popoverModule.Anchor, withCommonPropsModule(var1, { anchorRef = var1.anchorRef }), if var1.anchorRef then nil else var1.children),
-		Content = reactModule.createElement(popoverModule.Content, {
+	return ReactModule.createElement(PopoverModule.Root, {
+		isOpen = WithDefaultsModuleResult.isOpen,
+		testId = WithDefaultsModuleResult.testId
+	}, {
+		Anchor = ReactModule.createElement(PopoverModule.Anchor, WithCommonPropsModule(WithDefaultsModuleResult, { anchorRef = WithDefaultsModuleResult.anchorRef }), if WithDefaultsModuleResult.anchorRef then nil else WithDefaultsModuleResult.children),
+		Content = ReactModule.createElement(PopoverModule.Content, {
 			hasArrow = false,
 			side = {
-				position = var1.side,
-				offset = var2.Stroke.Standard + var2.Padding.Small
+				position = WithDefaultsModuleResult.side,
+				offset = UseTokensModuleResult.Stroke.Standard + UseTokensModuleResult.Padding.Small
 			},
-			align = var1.align,
-			onPressedOutside = var1.onPressedOutside,
-			backgroundStyle = var2.Color.Surface.Surface_200,
-			radius = radiusModule.Medium,
-			ref = p2,
-			selection = var1.selection,
-			selectionGroup = var1.selectionGroup
-		}, reactModule.createElement(reactModule.Fragment, nil, {
-			Menu = reactModule.createElement(baseMenuModule.Root, {
-				items = var1.items,
-				size = var1.size,
-				width = var1.width,
-				maxHeight = var1.maxHeight,
-				onActivated = var1.onActivated,
-				onNestedLeafActivated = var1.onPressedOutside,
-				radius = radiusModule.Medium
+			align = WithDefaultsModuleResult.align,
+			onPressedOutside = WithDefaultsModuleResult.onPressedOutside,
+			backgroundStyle = UseTokensModuleResult.Color.Surface.Surface_200,
+			radius = RadiusModule.Medium,
+			ref = Ref,
+			selection = WithDefaultsModuleResult.selection,
+			selectionGroup = WithDefaultsModuleResult.selectionGroup
+		}, ReactModule.createElement(ReactModule.Fragment, nil, {
+			Menu = ReactModule.createElement(BaseMenuModule.Root, {
+				items = WithDefaultsModuleResult.items,
+				size = WithDefaultsModuleResult.size,
+				width = WithDefaultsModuleResult.width,
+				maxHeight = WithDefaultsModuleResult.maxHeight,
+				onActivated = WithDefaultsModuleResult.onActivated,
+				onNestedLeafActivated = WithDefaultsModuleResult.onPressedOutside,
+				radius = RadiusModule.Medium
 			})
 		}))
 	})

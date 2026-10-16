@@ -1,9 +1,9 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
-local reactModule = require(foundation.Parent.React)
-local tileContextModule = require(script.Parent.TileContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
+local ReactModule = require(Foundation.Parent.React)
+local TileContextModule = require(script.Parent.TileContext)
 
-return function()
-	-- upvalues: reactModule (ref), tileContextModule (ref)
-	return reactModule.useContext(tileContextModule)
+return function() --[[ Line: 17 ]]
+	-- upvalues: ReactModule (copy), TileContextModule (copy)
+	return ReactModule.useContext(TileContextModule)
 end

@@ -1,42 +1,48 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local _ = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local headerBarSlotModule = require(foundation.Enums.HeaderBarSlot)
-local iconButtonModule = require(foundation.Components.IconButton)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local constantsModule = require(foundation.Components.HeaderBar.constants)
-local useHeaderBarContextModule = require(foundation.Components.HeaderBar.useHeaderBarContext)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local _ = require(Parent.BuilderIcons)
+local ReactModule = require(Parent.React)
+local HeaderBarSlotModule = require(Foundation.Enums.HeaderBarSlot)
+local IconButtonModule = require(Foundation.Components.IconButton)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local ConstantsModule = require(Foundation.Components.HeaderBar.constants)
+local UseHeaderBarContextModule = require(Foundation.Components.HeaderBar.useHeaderBarContext)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useHeaderBarContextModule (ref), useTokensModule (ref), reactModule (ref), headerBarSlotModule (ref), constantsModule (ref), iconButtonModule (ref), viewModule (ref)
-	local var1 = useHeaderBarContextModule()
-	local var2 = useTokensModule()
-	local var3, var4 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), headerBarSlotModule (copy), constantsModule (copy), var2 (ref)
-		if var1.slot == headerBarSlotModule.Leading then
-			return constantsModule.LEADING_ACTIONS_LAYOUT_ORDER, { left = UDim.new(0, -var2.Size.Size_200) }
-		elseif var1.slot == headerBarSlotModule.Trailing then
-			return constantsModule.TRAILING_ACTIONS_LAYOUT_ORDER, { right = UDim.new(0, -var2.Size.Size_200) }
+return ReactModule.memo(function(p1) --[[ Line: 28 | Named "HeaderBarActions" ]]
+	-- upvalues: UseHeaderBarContextModule (copy), UseTokensModule (copy), ReactModule (copy), HeaderBarSlotModule (copy), ConstantsModule (copy), IconButtonModule (copy), ViewModule (copy)
+	local UseHeaderBarContextModuleResult = UseHeaderBarContextModule()
+	local UseTokensModuleResult = UseTokensModule()
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 32 ]]
+		-- upvalues: UseHeaderBarContextModuleResult (copy), HeaderBarSlotModule (upval), ConstantsModule (upval), UseTokensModuleResult (copy)
+		if UseHeaderBarContextModuleResult.slot == HeaderBarSlotModule.Leading then
+			return ConstantsModule.LEADING_ACTIONS_LAYOUT_ORDER, { left = UDim.new(0, -UseTokensModuleResult.Size.Size_200) }
+		elseif UseHeaderBarContextModuleResult.slot == HeaderBarSlotModule.Trailing then
+			return ConstantsModule.TRAILING_ACTIONS_LAYOUT_ORDER, {
+				right = UDim.new(0, -UseTokensModuleResult.Size.Size_200)
+			}
+		else
+			return nil, nil
 		end
-		return nil, nil
-	end, { var1.slot, var2.Size.Size_200 })
-	local t = {}
+	end, {
+		UseHeaderBarContextModuleResult.slot,
+		UseTokensModuleResult.Size.Size_200
+	})
+	local Elements = {}
 	
-	for i, v in p1.actions do
-		t[tostring(v.id)] = reactModule.createElement(iconButtonModule, {
-			icon = v.icon,
-			onActivated = v.onActivated,
-			LayoutOrder = i,
-			testId = `{var1.testId}--actions--{v.id}`
+	for LayoutOrder, action in p1.actions do
+		Elements[tostring(action.id)] = ReactModule.createElement(IconButtonModule, {
+			icon = action.icon,
+			onActivated = action.onActivated,
+			LayoutOrder = LayoutOrder,
+			testId = `{UseHeaderBarContextModuleResult.testId}--actions--{action.id}`
 		})
 	end
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "row align-y-center shrink gap-small auto-xy",
-		padding = var4,
-		LayoutOrder = var3,
-		testId = `{var1.testId}--actions`
-	}, t)
+		padding = UseMemoResult2,
+		LayoutOrder = UseMemoResult,
+		testId = `{UseHeaderBarContextModuleResult.testId}--actions`
+	}, Elements)
 end)

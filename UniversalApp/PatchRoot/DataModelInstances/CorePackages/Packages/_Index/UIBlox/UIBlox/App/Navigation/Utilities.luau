@@ -1,48 +1,47 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local inputTypeModule = require(parent_1.Enums.InputType)
-local cryoModule = require(parent_1.Parent.Cryo)
-local _ = require(parent.ShortcutBar.Types)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local InputTypeModule = require(Parent1.Enums.InputType)
+local CryoModule = require(Parent1.Parent.Cryo)
+local _ = require(Parent.ShortcutBar.Types)
 
-local _ = function(p1)
-	-- upvalues: inputTypeModule (ref), cryoModule (ref)
-	return function(p2, _)
-		-- upvalues: p1 (ref), inputTypeModule (copy), cryoModule (copy)
-		local icon = p2.icon
+local function _(p1) --[[ Line: 10 ]]
+	-- upvalues: InputTypeModule (copy), CryoModule (copy)
+	return function(p2, _) --[[ Line: 11 ]]
+		-- upvalues: p1 (copy), InputTypeModule (upval), CryoModule (upval)
+		local Icon = p2.icon
 		
-		if typeof(icon) == "string" or typeof(icon) == "table" and icon.Image then return end
-		if typeof(icon) == "EnumItem" or #icon > 0 and typeof(icon[1]) == "EnumItem" and p1 == inputTypeModule.MouseAndKeyboard then
+		if typeof(Icon) == "string" or typeof(Icon) == "table" and Icon.Image then return end
+		if typeof(Icon) == "EnumItem" or #Icon > 0 and typeof(Icon[1]) == "EnumItem" and p1 == InputTypeModule.MouseAndKeyboard then
 			return p2
-		elseif icon[p1] then
-			return cryoModule.Dictionary.join(p2, { icon = icon[p1] })
-		end
+		elseif not Icon[p1] then return end
+		return CryoModule.Dictionary.join(p2, { icon = Icon[p1] })
 	end
 end
 
 return {
-	filterItems = function(p1, p2)
-		-- upvalues: cryoModule (ref), inputTypeModule (ref)
-		local var1 = cryoModule.List.filter(p1, function(p3, _)
-			local icon = p3.icon
+	filterItems = function(p1, MouseAndKeyboard) --[[ Line: 35 ]]
+		-- upvalues: CryoModule (copy), InputTypeModule (copy)
+		local FilterResult = CryoModule.List.filter(p1, function(p2, _) --[[ Line: 37 ]]
+			local Icon = p2.icon
 			
-			return if typeof(icon) ~= "string" then typeof(icon) == "table" and icon.Image else true
+			return typeof(Icon) == "string" or typeof(Icon) == "table" and Icon.Image
 		end)
 		
-		if p2 then
-			assert(p2, "Assert inputType not nil at this point to silence type checker")
+		if MouseAndKeyboard then
+			assert(MouseAndKeyboard, "Assert inputType not nil at this point to silence type checker")
 			
-			return cryoModule.List.join(var1, cryoModule.List.filterMap(p1, function(p3, _)
-				-- upvalues: p2 (ref), inputTypeModule (copy), cryoModule (copy)
-				local icon = p3.icon
+			return (CryoModule.List.join(FilterResult, CryoModule.List.filterMap(p1, function(p2, _) --[[ Line: 11 ]]
+				-- upvalues: MouseAndKeyboard (copy), InputTypeModule (upval), CryoModule (upval)
+				local Icon = p2.icon
 				
-				if typeof(icon) == "string" or typeof(icon) == "table" and icon.Image then return end
-				if typeof(icon) == "EnumItem" or #icon > 0 and typeof(icon[1]) == "EnumItem" and p2 == inputTypeModule.MouseAndKeyboard then
-					return p3
-				elseif icon[p2] then
-					return cryoModule.Dictionary.join(p3, { icon = icon[p2] })
-				end
-			end))
+				if typeof(Icon) == "string" or typeof(Icon) == "table" and Icon.Image then return end
+				if typeof(Icon) == "EnumItem" or #Icon > 0 and typeof(Icon[1]) == "EnumItem" and MouseAndKeyboard == InputTypeModule.MouseAndKeyboard then
+					return p2
+				elseif not Icon[MouseAndKeyboard] then return end
+				return CryoModule.Dictionary.join(p2, { icon = Icon[MouseAndKeyboard] })
+			end)))
+		else
+			return FilterResult
 		end
-		return var1
 	end
 }

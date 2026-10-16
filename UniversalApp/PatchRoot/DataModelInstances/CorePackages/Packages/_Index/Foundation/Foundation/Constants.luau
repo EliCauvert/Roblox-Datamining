@@ -1,8 +1,8 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local _ = require(foundation.Components.Types)
-local stateLayerModeModule = require(foundation.Enums.StateLayerMode)
-local inputPlacementModule = require(foundation.Enums.InputPlacement)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
+local _ = require(Foundation.Components.Types)
+local StateLayerModeModule = require(Foundation.Enums.StateLayerMode)
+local InputPlacementModule = require(Foundation.Enums.InputPlacement)
 
 return {
 	MAX_LAYOUT_ORDER = 2147483648,
@@ -27,20 +27,20 @@ return {
 	},
 	COLOR_NAMESPACE_TO_STATE_LAYER_MODE = {
 		[false] = {
-			[colorNamespaceModule.Color] = stateLayerModeModule.Default,
-			[colorNamespaceModule.Inverse] = stateLayerModeModule.Inverse,
-			[colorNamespaceModule.LightMode] = stateLayerModeModule.Light,
-			[colorNamespaceModule.DarkMode] = stateLayerModeModule.Dark
+			[ColorNamespaceModule.Color] = StateLayerModeModule.Default,
+			[ColorNamespaceModule.Inverse] = StateLayerModeModule.Inverse,
+			[ColorNamespaceModule.LightMode] = StateLayerModeModule.Light,
+			[ColorNamespaceModule.DarkMode] = StateLayerModeModule.Dark
 		},
 		[true] = {
-			[colorNamespaceModule.Color] = stateLayerModeModule.Inverse,
-			[colorNamespaceModule.Inverse] = stateLayerModeModule.Default,
-			[colorNamespaceModule.LightMode] = stateLayerModeModule.Dark,
-			[colorNamespaceModule.DarkMode] = stateLayerModeModule.Light
+			[ColorNamespaceModule.Color] = StateLayerModeModule.Inverse,
+			[ColorNamespaceModule.Inverse] = StateLayerModeModule.Default,
+			[ColorNamespaceModule.LightMode] = StateLayerModeModule.Dark,
+			[ColorNamespaceModule.DarkMode] = StateLayerModeModule.Light
 		}
 	},
 	INPUT_PLACEMENT_TO_LABEL_ALIGNMENT = {
-		[inputPlacementModule.Start] = Enum.HorizontalAlignment.Right,
-		[inputPlacementModule.End] = Enum.HorizontalAlignment.Left
+		[InputPlacementModule.Start] = Enum.HorizontalAlignment.Right,
+		[InputPlacementModule.End] = Enum.HorizontalAlignment.Left
 	}
 }

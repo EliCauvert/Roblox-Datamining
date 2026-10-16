@@ -1,11 +1,11 @@
 ﻿local _ = require(script.Parent.types)
 
-return function(p1)
+return function(StartingValue) --[[ Line: 5 | Named "instant" ]]
 	return {
-		step = function()
-			-- upvalues: p1 (ref)
-			return { complete = true, value = p1 }
+		step = function() --[[ Line: 7 ]]
+			-- upvalues: StartingValue (copy)
+			return { complete = true, value = StartingValue }
 		end,
-		startingValue = p1
+		startingValue = StartingValue
 	}
 end

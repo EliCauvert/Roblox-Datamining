@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return string.gsub(p1, "\n\n*", "\n")
+﻿return function(Text: string): string --[[ Line: 1 ]]
+	return string.gsub(Text, "\n\n*", "\n")
 end

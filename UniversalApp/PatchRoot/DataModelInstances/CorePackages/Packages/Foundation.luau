@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.Foundation.Foundation)
+﻿return (require(script.Parent._Index.Foundation.Foundation))

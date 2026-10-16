@@ -1,41 +1,41 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local floatEqualsModule = require(parent.util.floatEquals)
-local getFIntMaxCoplanarIntersectionsPercentageModule = require(parent.flags.getFIntMaxCoplanarIntersectionsPercentage)
-local getFFlagUGCValidateCoplanarTriTestBodyModule = require(parent.flags.getFFlagUGCValidateCoplanarTriTestBody)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local FloatEqualsModule = require(Parent.util.floatEquals)
+local GetFIntMaxCoplanarIntersectionsPercentageModule = require(Parent.flags.getFIntMaxCoplanarIntersectionsPercentage)
+local GetFFlagUGCValidateCoplanarTriTestBodyModule = require(Parent.flags.getFFlagUGCValidateCoplanarTriTestBody)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: validationEnumsModule (ref), getFFlagUGCValidateCoplanarTriTestBodyModule (ref), floatEqualsModule (ref), UGCValidationService (ref), getFIntMaxCoplanarIntersectionsPercentageModule (ref), errorSourceStringsModule (ref)
-		local uploadCategory = p2.uploadCategory
+	run = function(p1, p2) --[[ Line: 35 ]]
+		-- upvalues: ValidationEnumsModule (copy), GetFFlagUGCValidateCoplanarTriTestBodyModule (copy), FloatEqualsModule (copy), UGCValidationService (copy), GetFIntMaxCoplanarIntersectionsPercentageModule (copy), ErrorSourceStringsModule (copy)
+		local UploadCategory = p2.uploadCategory
 		
-		if (if uploadCategory ~= validationEnumsModule.UploadCategory.TORSO_AND_LIMBS then uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD else true) and not getFFlagUGCValidateCoplanarTriTestBodyModule() then return end
-		for i, v in p2.renderMeshesData do
-			local editable = v.editable
-			local scale = v.scale
-			local originalSize = v.originalSize
+		if (UploadCategory == ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS or UploadCategory == ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD) and not GetFFlagUGCValidateCoplanarTriTestBodyModule() then return end
+		for MeshName, value in p2.renderMeshesData do
+			local Editable = value.editable
+			local Scale = value.scale
+			local OriginalSize = value.originalSize
 			
-			if not floatEqualsModule(originalSize.X, 0) and not floatEqualsModule(originalSize.Y, 0) and not floatEqualsModule(originalSize.Z, 0) then
-				local var1 = UGCValidationService:GetEditableMeshTriCount(editable)
-				local floored = math.floor(getFIntMaxCoplanarIntersectionsPercentageModule() / 100 * var1)
+			if not FloatEqualsModule(OriginalSize.X, 0) and not FloatEqualsModule(OriginalSize.Y, 0) and not FloatEqualsModule(OriginalSize.Z, 0) then
+				local EditableMeshTriCount = UGCValidationService:GetEditableMeshTriCount(Editable)
+				local Floored = math.floor(GetFIntMaxCoplanarIntersectionsPercentageModule() / 100 * EditableMeshTriCount)
 				
-				if UGCValidationService:IsEditableMeshNumCoplanarIntersectionsOverLimit(editable, floored, scale, true) then
-					p1:fail(errorSourceStringsModule.Keys.CoplanarTri_TooMany, {
-						MeshName = i,
-						MaxIntersections = tostring(floored),
-						TriangleCount = tostring(var1)
+				if UGCValidationService:IsEditableMeshNumCoplanarIntersectionsOverLimit(Editable, Floored, Scale, true) then
+					p1:fail(ErrorSourceStringsModule.Keys.CoplanarTri_TooMany, {
+						MeshName = MeshName,
+						MaxIntersections = tostring(Floored),
+						TriangleCount = tostring(EditableMeshTriCount)
 					})
 				end
 			end

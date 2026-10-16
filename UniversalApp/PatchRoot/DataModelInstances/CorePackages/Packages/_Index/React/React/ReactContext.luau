@@ -1,18 +1,18 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local console = require(parent.Shared).console
-local reactSymbols = require(parent.Shared).ReactSymbols
-local REACT_PROVIDER_TYPE = reactSymbols.REACT_PROVIDER_TYPE
-local REACT_CONTEXT_TYPE = reactSymbols.REACT_CONTEXT_TYPE
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local Console = require(Parent.Shared).console
+local ReactSymbols = require(Parent.Shared).ReactSymbols
+local REACTPROVIDERTYPE = ReactSymbols.REACT_PROVIDER_TYPE
+local REACTCONTEXTTYPE = ReactSymbols.REACT_CONTEXT_TYPE
 
 return {
-	createContext = function(p1, p2)
-		-- upvalues: REACT_CONTEXT_TYPE (ref), REACT_PROVIDER_TYPE (ref), reactGlobalsModule (ref), console (ref)
-		local t = {
-			["$$typeof"] = REACT_CONTEXT_TYPE,
-			_calculateChangedBits = p2,
-			_currentValue = p1,
-			_currentValue2 = p1,
+	createContext = function(_currentValue, _calculateChangedBits) --[[ Line: 34 ]]
+		-- upvalues: REACTCONTEXTTYPE (copy), REACTPROVIDERTYPE (copy), ReactGlobalsModule (copy), Console (copy)
+		local config = {
+			["$$typeof"] = REACTCONTEXTTYPE,
+			_calculateChangedBits = _calculateChangedBits,
+			_currentValue = _currentValue,
+			_currentValue2 = _currentValue,
 			_threadCount = 0,
 			Provider = nil,
 			Consumer = nil,
@@ -20,48 +20,51 @@ return {
 			_currentRenderer = nil,
 			_currentRenderer2 = nil
 		}
-		t.Provider = { ["$$typeof"] = REACT_PROVIDER_TYPE, _context = t }
-		local var1 = false
+		config.Provider = { ["$$typeof"] = REACTPROVIDERTYPE, _context = config }
+		local Flag = false
 		
-		if reactGlobalsModule.__DEV__ then
-			local t_1 = {
-				["$$typeof"] = REACT_CONTEXT_TYPE,
-				_context = t,
-				_calculateChangedBits = t._calculateChangedBits
+		if ReactGlobalsModule.__DEV__ then
+			local Consumer = {
+				["$$typeof"] = REACTCONTEXTTYPE,
+				_context = config,
+				_calculateChangedBits = config._calculateChangedBits
 			}
-			setmetatable(t_1, {
-				__index = function(_, p3)
-					-- upvalues: t (ref)
-					return if p3 == "_currentValue" then t._currentValue elseif p3 == "_currentValue2" then t._currentValue2 elseif p3 == "_threadCount" then t._threadCount elseif p3 == "displayName" then t.displayName else nil
+			setmetatable(Consumer, {
+				__index = function(_, p1) --[[ Line: 79 ]]
+					-- upvalues: config (copy)
+					return if p1 == "_currentValue" then config._currentValue elseif p1 == "_currentValue2" then config._currentValue2 elseif p1 == "_threadCount" then config._threadCount elseif p1 == "displayName" then config.displayName else nil
 				end,
-				__newindex = function(_, p3, p4)
-					-- upvalues: t (ref), var1 (write), console (copy)
-					if p3 == "_currentValue" then
-						t._currentValue = p4
+				__newindex = function(_, p1, _currentValue) --[[ Line: 92 ]]
+					-- upvalues: config (copy), Flag (ref), Console (upval)
+					if p1 == "_currentValue" then
+						config._currentValue = _currentValue
 						
 						return
-					elseif p3 == "_currentValue2" then
-						t._currentValue2 = p4
+					end
+					if p1 == "_currentValue2" then
+						config._currentValue2 = _currentValue
 						
 						return
-					elseif p3 == "_threadCount" then
-						t._threadCount = p4
+					end
+					if p1 == "_threadCount" then
+						config._threadCount = _currentValue
 						
 						return
-					elseif p3 == "displayName" and not var1 then
-						console.warn("Setting `displayName` on Context.Consumer has no effect. " .. "You should set it directly on the context with Context.displayName = " .. p4 .. ".")
-						var1 = true
+					end
+					if p1 == "displayName" and not Flag then
+						Console.warn("Setting `displayName` on Context.Consumer has no effect. " .. "You should set it directly on the context with Context.displayName = " .. _currentValue .. ".")
+						Flag = true
 					end
 				end
 			})
-			t.Consumer = t_1
+			config.Consumer = Consumer
 		else
-			t.Consumer = t
+			config.Consumer = config
 		end
-		if reactGlobalsModule.__DEV__ then
-			t._currentRenderer = nil
-			t._currentRenderer2 = nil
+		if ReactGlobalsModule.__DEV__ then
+			config._currentRenderer = nil
+			config._currentRenderer2 = nil
 		end
-		return t
+		return config
 	end
 }

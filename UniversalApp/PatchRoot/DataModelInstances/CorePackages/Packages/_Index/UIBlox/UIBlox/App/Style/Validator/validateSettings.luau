@@ -1,9 +1,9 @@
-﻿local parent = script.Parent.Parent.Parent.Parent.Parent
-local tModule = require(parent.t)
+﻿local Parent = script.Parent.Parent.Parent.Parent.Parent
+local TModule = require(Parent.t)
 
-return tModule.strictInterface({
-	PreferredTransparency = tModule.optional(tModule.number),
-	ReducedMotion = tModule.optional(tModule.boolean),
-	PreferredTextSize = if require(parent.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting") then tModule.optional(tModule.enum(Enum.PreferredTextSize)) else nil,
-	Scale = tModule.optional(tModule.number)
-})
+return (TModule.strictInterface({
+	PreferredTransparency = TModule.optional(TModule.number),
+	ReducedMotion = TModule.optional(TModule.boolean),
+	PreferredTextSize = if require(Parent.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting") then TModule.optional(TModule.enum(Enum.PreferredTextSize)) else nil,
+	Scale = TModule.optional(TModule.number)
+}))

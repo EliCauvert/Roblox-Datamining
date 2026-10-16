@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateRestrictNumFaceControls", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("UGCValidateRestrictNumFaceControls")
 end

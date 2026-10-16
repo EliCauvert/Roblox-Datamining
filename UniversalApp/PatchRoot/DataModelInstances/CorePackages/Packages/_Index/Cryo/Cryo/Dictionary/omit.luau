@@ -1,8 +1,8 @@
-﻿return function(p1, ...)
-	local cloned = table.clone(p1)
+﻿return function(Tbl, ...) --[[ Line: 6 | Named "omit" ]]
+	local Copy = table.clone(Tbl)
 	
-	for i, v in { ... } do
-		cloned[v] = nil
+	for _, value in { ... } do
+		Copy[value] = nil
 	end
-	return cloned
+	return Copy
 end

@@ -1,113 +1,136 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local flagsModule = require(foundation.Utility.Flags)
-local statusIndicatorSizeModule = require(foundation.Enums.StatusIndicatorSize)
-local statusIndicatorVariantModule = require(foundation.Enums.StatusIndicatorVariant)
-local statusIndicatorShapeModule = require(foundation.Enums.StatusIndicatorShape)
-local _ = require(foundation.Components.Types)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local indexBindableModule = require(foundation.Utility.indexBindable)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local var1 = _G.__DEV__ == true
-local font = Font.new(require(foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local FlagsModule = require(Foundation.Utility.Flags)
+local StatusIndicatorSizeModule = require(Foundation.Enums.StatusIndicatorSize)
+local StatusIndicatorVariantModule = require(Foundation.Enums.StatusIndicatorVariant)
+local StatusIndicatorShapeModule = require(Foundation.Enums.StatusIndicatorShape)
+local _ = require(Foundation.Components.Types)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local IndexBindableModule = require(Foundation.Utility.indexBindable)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local IsDEV = _G.__DEV__ == true
+local _Font = Font.new(require(Foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
-function variantsFactory(p1)
-	-- upvalues: font (ref), statusIndicatorVariantModule (ref), flagsModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
+function variantsFactory(p1) --[[ Line: 38 ]]
+	-- upvalues: _Font (copy), FlagsModule (copy), StatusIndicatorVariantModule (copy), StatusIndicatorShapeModule (copy), StatusIndicatorSizeModule (copy)
+	local config = {
+		container = {
+			size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
+		},
+		content = { typography = p1.Typography.LabelSmall }
+	}
+	local config1 = {
+		container = {
+			size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
+		},
+		content = { typography = p1.Typography.LabelMedium }
+	}
+	local config2 = {
+		[StatusIndicatorSizeModule.XSmall] = config,
+		[StatusIndicatorSizeModule.Small] = config,
+		[StatusIndicatorSizeModule.Medium] = config,
+		[StatusIndicatorSizeModule.Large] = config1,
+		[StatusIndicatorSizeModule.Pictogram] = config1
+	}
+	
 	return {
 		common = {
-			content = { tag = "auto-xy text-align-x-left", font = font }
+			content = { tag = "auto-xy text-align-x-left", font = _Font },
+			stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then { Thickness = p1.Stroke.Thicker } else nil
 		},
 		variants = {
-			[statusIndicatorVariantModule.Alert] = {
+			[StatusIndicatorVariantModule.Alert] = {
 				container = { tag = "bg-system-alert" },
 				content = { style = p1.DarkMode.Content.Emphasis }
 			},
-			[statusIndicatorVariantModule.Success] = {
+			[StatusIndicatorVariantModule.Success] = {
 				container = { tag = "bg-system-success" },
 				content = { style = p1.LightMode.Content.Emphasis }
 			},
-			[statusIndicatorVariantModule.Warning] = {
+			[StatusIndicatorVariantModule.Warning] = {
 				container = { tag = "bg-system-warning" },
 				content = { style = p1.LightMode.Content.Emphasis }
 			},
-			[statusIndicatorVariantModule.Emphasis] = if flagsModule.FoundationActionEmphasisStatusIndicator then {
-				container = {
-					tag = if flagsModule.FoundationSystemEmphasisNonActions then "bg-system-emphasis" else "bg-action-emphasis"
-				},
-				content = {
-					style = if flagsModule.FoundationSystemEmphasisNonActions then p1.DarkMode.Content.Emphasis else p1.Color.ActionEmphasis.Foreground
-				}
-			} else {
+			[StatusIndicatorVariantModule.Emphasis] = {
 				container = { tag = "bg-system-emphasis" },
 				content = { style = p1.DarkMode.Content.Emphasis }
 			},
-			[statusIndicatorVariantModule.Neutral] = {
+			[StatusIndicatorVariantModule.Neutral] = {
 				container = { tag = "bg-system-neutral" },
 				content = { style = p1.Inverse.Content.Emphasis }
 			},
-			[statusIndicatorVariantModule.Standard] = {
+			[StatusIndicatorVariantModule.Standard] = {
 				container = { tag = "bg-action-standard" },
 				content = { style = p1.Color.Content.Emphasis }
 			},
-			[statusIndicatorVariantModule.Contrast_Experiment] = {
+			[StatusIndicatorVariantModule.Contrast_Experiment] = {
 				container = { tag = "bg-system-contrast" },
 				content = { style = p1.Inverse.Content.Emphasis }
 			},
-			[statusIndicatorVariantModule.Voice] = {
+			[StatusIndicatorVariantModule.Voice] = {
 				container = { backgroundStyle = p1.Color.Extended.Orange.Orange_600 }
 			}
 		},
 		hasValue = {
 			[true] = {
 				container = {
-					tag = "row align-x-center align-y-center size-400-400 auto-x padding-xsmall"
+					tag = if FlagsModule.FoundationStatusIndicatorDesignUpdate then "row align-x-center align-y-center auto-x padding-xsmall" else "row align-x-center align-y-center size-400-400 auto-x padding-xsmall"
 				}
 			}
 		},
 		shape = {
-			[statusIndicatorShapeModule.Circle] = {
+			[StatusIndicatorShapeModule.Circle] = {
 				container = { tag = "radius-circle" },
 				stroke = { LineJoinMode = Enum.LineJoinMode.Round }
 			},
-			[statusIndicatorShapeModule.Ring] = {
+			[StatusIndicatorShapeModule.Ring] = {
 				container = { tag = "align-x-center align-y-center radius-circle" },
 				ring = { tag = "radius-circle bg-surface-100" },
 				stroke = { LineJoinMode = Enum.LineJoinMode.Round }
 			},
-			[statusIndicatorShapeModule.Square] = {
+			[StatusIndicatorShapeModule.Square] = {
 				container = { tag = "radius-none" },
 				stroke = { LineJoinMode = Enum.LineJoinMode.Miter }
 			}
 		},
 		sizes = {
-			[statusIndicatorSizeModule.XSmall] = {
+			[StatusIndicatorSizeModule.XSmall] = {
 				container = {
 					size = UDim2.fromOffset(p1.Size.Size_150, p1.Size.Size_150)
 				},
 				ring = {
 					size = UDim2.fromOffset(p1.Size.Size_150 / 2, p1.Size.Size_150 / 2)
 				},
-				stroke = { Thickness = p1.Stroke.Standard }
+				stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Stroke.Standard }
 			},
-			[statusIndicatorSizeModule.Small] = {
+			[StatusIndicatorSizeModule.Small] = {
 				container = {
 					size = UDim2.fromOffset(p1.Size.Size_200, p1.Size.Size_200)
 				},
 				ring = {
 					size = UDim2.fromOffset(p1.Size.Size_200 / 2, p1.Size.Size_200 / 2)
 				},
-				stroke = { Thickness = p1.Size.Size_50 }
+				stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Size.Size_50 }
 			},
-			[statusIndicatorSizeModule.Medium] = {
+			[StatusIndicatorSizeModule.Medium] = {
 				container = {
 					size = UDim2.fromOffset(p1.Size.Size_250, p1.Size.Size_250)
 				},
 				ring = {
 					size = UDim2.fromOffset(p1.Size.Size_250 / 2, p1.Size.Size_250 / 2)
 				},
-				stroke = { Thickness = p1.Size.Size_50 }
+				stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then nil else { Thickness = p1.Size.Size_50 }
 			},
-			[statusIndicatorSizeModule.Pictogram] = {
+			[StatusIndicatorSizeModule.Large] = {
+				container = {
+					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
+				},
+				ring = {
+					size = UDim2.fromOffset(p1.Size.Size_500 / 2, p1.Size.Size_500 / 2)
+				},
+				stroke = { Thickness = p1.Stroke.Thicker }
+			},
+			[StatusIndicatorSizeModule.Pictogram] = {
 				container = {
 					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
 				},
@@ -116,26 +139,27 @@ function variantsFactory(p1)
 				},
 				stroke = { Thickness = p1.Stroke.Thicker }
 			}
-		}
+		},
+		numericSizes = if FlagsModule.FoundationStatusIndicatorDesignUpdate then config2 else nil
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: var1 (ref), statusIndicatorVariantModule (ref), indexBindableModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref)
-	if var1 then
-		if p2 == statusIndicatorVariantModule.Contrast_Experiment then
+return function(p1, Alert, p2, p3, p4, p5) --[[ Line: 198 ]]
+	-- upvalues: IsDEV (copy), StatusIndicatorVariantModule (copy), IndexBindableModule (copy), VariantsContextModule (copy), ComposeStyleVariantModule (copy), FlagsModule (copy)
+	if IsDEV then
+		if Alert == StatusIndicatorVariantModule.Contrast_Experiment then
 			error("Contrast is not a supported StatusIndicator variant.")
 		end
-		if p2 == statusIndicatorVariantModule.Alert and p3 then
+		if Alert == StatusIndicatorVariantModule.Alert and p2 then
 			error("Alert is not a supported numeric StatusIndicator variant.")
 		end
 	end
-	local statusIndicator = variantsContextModule.useVariants("StatusIndicator", variantsFactory, p1)
+	local StatusIndicator = VariantsContextModule.useVariants("StatusIndicator", variantsFactory, p1)
 	
-	return composeStyleVariantModule(statusIndicator.common, statusIndicator.variants[p2], statusIndicator.hasValue[p3], statusIndicator.shape[p4], if not p3 then statusIndicator.sizes[p5] else {}, if p6 then {
+	return ComposeStyleVariantModule(StatusIndicator.common, StatusIndicator.variants[Alert], StatusIndicator.hasValue[p2], StatusIndicator.shape[p3], if FlagsModule.FoundationStatusIndicatorDesignUpdate then if p2 then StatusIndicator.numericSizes[p4] else StatusIndicator.sizes[p4] elseif p2 then {} else StatusIndicator.sizes[p4], if p5 then {
 		stroke = {
-			Color = indexBindableModule(p6, "Color3"),
-			Transparency = indexBindableModule(p6, "Transparency")
+			Color = IndexBindableModule(p5, "Color3"),
+			Transparency = IndexBindableModule(p5, "Transparency")
 		}
 	} else nil)
 end

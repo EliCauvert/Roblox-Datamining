@@ -1,1 +1,1 @@
-﻿return require(script.DialogTitle)
+﻿return (require(script.DialogTitle))

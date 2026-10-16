@@ -1,1 +1,1 @@
-﻿return require(script.ScrollView)
+﻿return (require(script.ScrollView))

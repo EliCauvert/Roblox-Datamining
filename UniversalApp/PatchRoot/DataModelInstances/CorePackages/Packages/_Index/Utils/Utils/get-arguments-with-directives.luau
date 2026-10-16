@@ -1,53 +1,54 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local t = {}
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
 local _ = require(script.Parent.types)
-local graphQLModule = require(parent.GraphQL)
-local kind = graphQLModule.Kind
-local valueFromASTUntyped = graphQLModule.valueFromASTUntyped
+local GraphQLModule = require(Parent.GraphQL)
+local Kind = GraphQLModule.Kind
+local ValueFromASTUntypedFunction = GraphQLModule.valueFromASTUntyped
 
-local function isTypeWithFields(p1)
-	-- upvalues: kind (ref)
-	return if p1.kind ~= kind.OBJECT_TYPE_DEFINITION then p1.kind == kind.OBJECT_TYPE_EXTENSION else true
+local function isTypeWithFields(p1): boolean --[[ Line: 31 ]]
+	-- upvalues: Kind (copy)
+	return p1.kind == Kind.OBJECT_TYPE_DEFINITION or p1.kind == Kind.OBJECT_TYPE_EXTENSION
 end
 
-function t.getArgumentsWithDirectives(p1)
-	-- upvalues: array (ref), isTypeWithFields (ref), boolean (ref), object (ref), valueFromASTUntyped (ref)
-	local t = {}
-	
-	for i, v in array.filter(p1.definitions, isTypeWithFields) do
-		if v.fields ~= nil then
-			for i_1, v_1 in v.fields do
-				local var1 = if typeof(v_1.arguments) == "table" then v_1.arguments else nil
-				local var2 = if var1 ~= nil then nil else array.filter(var1, function(p2)
-					-- upvalues: boolean (copy)
-					return boolean.toJSBoolean(if typeof(p2.directives) == "table" then #p2.directives else nil)
-				end)
-				
-				if boolean.toJSBoolean(if typeof(var2) == "table" then #var2 else nil) then
-					t[tostring(("%s.%s"):format(tostring(v.name.value), tostring(v_1.name.value)))] = {}
-					local value = t[tostring(("%s.%s"):format(tostring(v.name.value), tostring(v_1.name.value)))]
+return {
+	getArgumentsWithDirectives = function(p1) --[[ Line: 38 ]]
+		-- upvalues: Array (copy), isTypeWithFields (copy), Boolean (copy), Object (copy), ValueFromASTUntypedFunction (copy)
+		local t = {}
+		
+		for _, value in Array.filter(p1.definitions, isTypeWithFields) do
+			if value.fields ~= nil then
+				for _, field in value.fields do
+					local Arguments = if typeof(field.arguments) == "table" then field.arguments else nil
+					local FilterResult = if Arguments == nil then nil else Array.filter(Arguments, function(p2) --[[ Line: 62 ]]
+						-- upvalues: Boolean (upval)
+						return Boolean.toJSBoolean(if typeof(p2.directives) == "table" then #p2.directives else nil)
+					end)
 					
-					for i_2, v_2 in var2 do
-						value[tostring(v_2.name.value)] = array.map(v_2.directives, function(p2)
-							-- upvalues: array (copy), boolean (copy), object (copy), valueFromASTUntyped (copy)
-							return {
-								name = p2.name.value,
-								args = array.reduce(if boolean.toJSBoolean(p2.arguments) then p2.arguments else {}, function(p3, p4)
-									-- upvalues: object (copy), valueFromASTUntyped (copy)
-									return object.assign({}, p3, { [p4.name.value] = valueFromASTUntyped(p4.value, {}) })
-								end, {})
-							}
-						end)
+					if Boolean.toJSBoolean(if typeof(FilterResult) == "table" then #FilterResult else nil) then
+						t[tostring(("%s.%s"):format(tostring(value.name.value), (tostring(field.name.value))))] = {}
+						local Entry = t[tostring(("%s.%s"):format(tostring(value.name.value), (tostring(field.name.value))))]
+						
+						for _, value1 in FilterResult do
+							Entry[tostring(value1.name.value)] = Array.map(value1.directives, function(p2) --[[ Line: 84 ]]
+								-- upvalues: Array (upval), Boolean (upval), Object (upval), ValueFromASTUntypedFunction (upval)
+								return {
+									name = p2.name.value,
+									args = Array.reduce(Boolean.toJSBoolean(p2.arguments) and p2.arguments or {}, function(p3, p4) --[[ Line: 91 ]]
+										-- upvalues: Object (upval), ValueFromASTUntypedFunction (upval)
+										return Object.assign({}, p3, {
+											[p4.name.value] = ValueFromASTUntypedFunction(p4.value, {})
+										})
+									end, {})
+								}
+							end)
+						end
 					end
 				end
 			end
 		end
+		return t
 	end
-	return t
-end
-
-return t
+}

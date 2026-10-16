@@ -1,9 +1,9 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local constantsModule = require(foundation.Constants)
-local _ = require(foundation.Enums.DialogSize)
-local _ = require(foundation.Enums.OnCloseCallbackReason)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ConstantsModule = require(Foundation.Constants)
+local _ = require(Foundation.Enums.DialogSize)
+local _ = require(Foundation.Enums.OnCloseCallbackReason)
 
 return {
-	nonSelectable = constantsModule.MODAL.DISABLE_SELECTION,
-	isolatedSelectionGroup = constantsModule.MODAL.TRAP_FOCUS
+	nonSelectable = ConstantsModule.MODAL.DISABLE_SELECTION,
+	isolatedSelectionGroup = ConstantsModule.MODAL.TRAP_FOCUS
 }

@@ -1,113 +1,111 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local array = require(parent_1.LuauPolyfill).Array
-local visit = require(parent_1.GraphQL).visit
-local invariant = require(parent.jsutils.invariant).invariant
-local var1 = nil
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Array = require(Parent1.LuauPolyfill).Array
+local VisitFunction = require(Parent1.GraphQL).visit
+local InvariantFunction = require(Parent.jsutils.invariant).invariant
+local Callback = nil
 
-function t.shouldInclude(p1, p2)
-	-- upvalues: array (ref), var1 (write), invariant (ref)
-	local directives = p1.directives
+local function shouldInclude(p1, p2) --[[ Line: 40 ]]
+	-- upvalues: Array (copy), Callback (ref), InvariantFunction (copy)
+	local Directives = p1.directives
 	
-	return if directives and #directives ~= 0 then array.every(var1(directives), function(p3)
-		-- upvalues: p2 (ref), invariant (copy)
-		local var2
-		local directive = p3.directive
-		local ifArgument = p3.ifArgument
-		local _ = false
+	return not Directives or #Directives == 0 or Array.every(Callback(Directives), function(p3) --[[ Line: 47 ]]
+		-- upvalues: p2 (copy), InvariantFunction (upval)
+		local Directive = p3.directive
+		local IfArgument = p3.ifArgument
+		local v1 = nil
 		
-		if ifArgument.value.kind == "Variable" then
-			var2 = p2 ~= nil and p2[ifArgument.value.name.value]
-			invariant(var2 ~= nil, ("Invalid variable referenced in @%s directive."):format(directive.name.value))
+		if IfArgument.value.kind == "Variable" then
+			v1 = p2 ~= nil and p2[IfArgument.value.name.value]
+			InvariantFunction(v1 ~= nil, ("Invalid variable referenced in @%s directive."):format(Directive.name.value))
 		else
-			var2 = ifArgument.value.value
+			v1 = IfArgument.value.value
 		end
-		return if directive.name.value == "skip" then not var2 else var2
-	end) else true
-end
-
-local function getDirectiveNames(p1)
-	-- upvalues: visit (ref)
-	local t = {}
-	visit(p1, {
-		Directive = function(_, p2)
-			-- upvalues: t (ref)
-			table.insert(t, p2.name.value)
-		end
-	})
-	
-	return t
-end
-
-t.getDirectiveNames = getDirectiveNames
-
-function t.hasDirectives(p1, p2)
-	-- upvalues: array (ref), getDirectiveNames (ref)
-	return array.some(getDirectiveNames(p2), function(p3)
-		-- upvalues: array (copy), p1 (ref)
-		return array.indexOf(p1, p3) > -1
+		return if Directive.name.value == "skip" then not v1 else v1
 	end)
 end
 
-function t.hasClientExports(p1)
-	-- upvalues: array (ref), getDirectiveNames (ref)
-	local var2 = false
-	
-	if p1 ~= nil then
-		local list = { "client" }
-		var2 = array.some(getDirectiveNames(p1), function(p2)
-			-- upvalues: array (copy), list (ref)
-			return array.indexOf(list, p2) > -1
-		end)
-		
-		if var2 then
-			local list_1 = { "export" }
-			var2 = array.some(getDirectiveNames(p1), function(p2)
-				-- upvalues: array (copy), list_1 (ref)
-				return array.indexOf(list_1, p2) > -1
-			end)
+local function getDirectiveNames(p1) --[[ Line: 68 ]]
+	-- upvalues: VisitFunction (copy)
+	local List = {}
+	VisitFunction(p1, {
+		Directive = function(_, p2) --[[ Line: 72 ]]
+			-- upvalues: List (copy)
+			table.insert(List, p2.name.value)
 		end
-	end
-	return var2
+	})
+	
+	return List
 end
 
-local function _(p1)
-	local value = p1.name.value
+local function _(p1): boolean --[[ Line: 97 | Named "isInclusionDirective" ]]
+	local Value = p1.name.value
 	
-	return if value ~= "skip" then value == "include" else true
+	return Value == "skip" or Value == "include"
 end
 
-function t.getInclusionDirectives(p1)
-	-- upvalues: array (ref), invariant (ref)
-	local t = {}
+Callback = function(Directives) --[[ Line: 102 | Named "getInclusionDirectives" ]]
+	-- upvalues: Array (copy), InvariantFunction (copy)
+	local List = {}
 	
-	if p1 and #p1 > 0 then
-		array.forEach(p1, function(p2)
-			-- upvalues: invariant (copy), t (ref)
-			local value = p2.name.value
+	if Directives and #Directives > 0 then
+		Array.forEach(Directives, function(Directive) --[[ Line: 108 ]]
+			-- upvalues: InvariantFunction (upval), List (copy)
+			local Value = Directive.name.value
 			
-			if not (if value ~= "skip" then value == "include" else true) then return end
-			local arguments = p2.arguments
-			local value_1 = p2.name.value
+			if Value ~= "skip" and Value ~= "include" then return end
+			local Arguments = Directive.arguments
+			local Value1 = Directive.name.value
 			
-			if not arguments or #arguments ~= 1 then
-				invariant(false, ("Incorrect number of arguments for the @%s directive."):format(value_1))
+			if not Arguments or #Arguments ~= 1 then
+				InvariantFunction(false, ("Incorrect number of arguments for the @%s directive."):format(Value1))
 			end
-			local var2 = arguments[1]
+			local Argument = Arguments[1]
 			
-			if not var2.name or var2.name.value ~= "if" then
-				invariant(false, ("Invalid argument for the @%s directive."):format(value_1))
+			if not Argument.name or Argument.name.value ~= "if" then
+				InvariantFunction(false, ("Invalid argument for the @%s directive."):format(Value1))
 			end
-			local value_2 = var2.value
+			local Value11 = Argument.value
 			
-			if not value_2 or value_2.kind ~= "Variable" and value_2.kind ~= "BooleanValue" then
-				invariant(false, ("Argument for the @%s directive must be a variable or a boolean value."):format(value_1))
+			if not Value11 or Value11.kind ~= "Variable" and Value11.kind ~= "BooleanValue" then
+				InvariantFunction(false, ("Argument for the @%s directive must be a variable or a boolean value."):format(Value1))
 			end
-			table.insert(t, { directive = p2, ifArgument = var2 })
+			table.insert(List, { directive = Directive, ifArgument = Argument })
 		end)
 	end
-	return t
+	return List
 end
 
-return t
+return {
+	shouldInclude = shouldInclude,
+	getDirectiveNames = getDirectiveNames,
+	hasDirectives = function(p1, p2) --[[ Line: 81 ]]
+		-- upvalues: Array (copy), getDirectiveNames (copy)
+		return Array.some(getDirectiveNames(p2), function(p3): boolean --[[ Line: 82 ]]
+			-- upvalues: Array (upval), p1 (copy)
+			return Array.indexOf(p1, p3) > -1
+		end)
+	end,
+	hasClientExports = function(p1) --[[ Line: 88 ]]
+		-- upvalues: Array (copy), getDirectiveNames (copy)
+		local SomeResult = false
+		
+		if p1 ~= nil then
+			local list = { "client" }
+			SomeResult = Array.some(getDirectiveNames(p1), function(p2): boolean --[[ Line: 82 ]]
+				-- upvalues: Array (upval), list (copy)
+				return Array.indexOf(list, p2) > -1
+			end)
+			
+			if SomeResult then
+				local list1 = { "export" }
+				SomeResult = Array.some(getDirectiveNames(p1), function(p2): boolean --[[ Line: 82 ]]
+					-- upvalues: Array (upval), list1 (copy)
+					return Array.indexOf(list1, p2) > -1
+				end)
+			end
+		end
+		return SomeResult
+	end,
+	getInclusionDirectives = Callback
+}

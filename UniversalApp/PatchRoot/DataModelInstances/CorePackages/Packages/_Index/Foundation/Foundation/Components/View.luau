@@ -1,1 +1,1 @@
-﻿return require(script.View)
+﻿return (require(script.View))

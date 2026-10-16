@@ -1,86 +1,84 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roactFitComponents = dependenciesModule.RoactFitComponents
-local fitFrameOnAxis = roactFitComponents.FitFrameOnAxis
-local roact = dependenciesModule.Roact
-local UIBlox = dependenciesModule.UIBlox
-local rect = Rect.new(10, 10, 11, 11)
-local chatBubbleContainer = roact.PureComponent:extend("ChatBubbleContainer")
-chatBubbleContainer.TAIL_WIDTH = 6
-chatBubbleContainer.defaultProps = {
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local RoactFitComponents = DependenciesModule.RoactFitComponents
+local FitFrameOnAxis = RoactFitComponents.FitFrameOnAxis
+local Roact = DependenciesModule.Roact
+local UIBlox = DependenciesModule.UIBlox
+local _Rect = Rect.new(10, 10, 11, 11)
+local ChatBubbleContainer = Roact.PureComponent:extend("ChatBubbleContainer")
+ChatBubbleContainer.TAIL_WIDTH = 6
+ChatBubbleContainer.defaultProps = {
 	isIncoming = false,
 	hasTail = false,
 	padding = 12,
 	LayoutOrder = 0,
 	isPending = false,
-	[roact.Change.AbsoluteSize] = function() end,
+	[Roact.Change.AbsoluteSize] = function() --[[ Line: 24 ]] end,
 	overrideImageColor = false
 }
 
-function chatBubbleContainer.init(p1)
-	-- upvalues: roact (ref)
-	local var1, var2 = roact.createBinding(Vector2.new(0, 0))
-	p1.bubbleSize = var1
-	p1.updateBubbleSize = var2
+function ChatBubbleContainer.init(p1) --[[ Line: 29 ]]
+	-- upvalues: Roact (copy)
+	p1.bubbleSize, p1.updateBubbleSize = Roact.createBinding(Vector2.new(0, 0))
 end
 
-function chatBubbleContainer.render(p1)
-	-- upvalues: UIBlox (ref), roact (ref), fitFrameOnAxis (ref), rect (ref), roactFitComponents (ref)
-	return UIBlox.Style.withStyle(function(p2)
-		-- upvalues: p1 (ref), roact (copy), fitFrameOnAxis (copy), rect (copy), roactFitComponents (copy)
-		local children = p1.props[roact.Children] or {}
-		local hasTail = p1.props.hasTail
-		local isIncoming = p1.props.isIncoming
-		local isPending = p1.props.isPending
-		local var1 = if isIncoming then p2.Theme.UIDefault elseif isPending then p2.Theme.UIMuted else p2.Theme.UIEmphasis
-		local color = var1.Color
-		local transparency = var1.Transparency
+function ChatBubbleContainer.render(p1) --[[ Line: 33 ]]
+	-- upvalues: UIBlox (copy), Roact (copy), FitFrameOnAxis (copy), _Rect (copy), RoactFitComponents (copy)
+	return UIBlox.Style.withStyle(function(p2) --[[ Line: 34 ]]
+		-- upvalues: p1 (copy), Roact (upval), FitFrameOnAxis (upval), _Rect (upval), RoactFitComponents (upval)
+		local Prop = p1.props[Roact.Children] or {}
+		local HasTail = p1.props.hasTail
+		local IsIncoming = p1.props.isIncoming
+		local IsPending = p1.props.isPending
+		local UIDefault = if IsIncoming then p2.Theme.UIDefault elseif IsPending then p2.Theme.UIMuted else p2.Theme.UIEmphasis
+		local Color = UIDefault.Color
+		local Transparency = UIDefault.Transparency
 		
 		if p1.props.overrideImageColor then
-			color = nil
+			Color = nil
 			
-			if not isPending then
-				transparency = nil
+			if not IsPending then
+				Transparency = nil
 			end
 		end
-		return roact.createElement("Frame", {
+		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = p1.bubbleSize:map(function(p3)
-				-- upvalues: p1 (copy)
-				return UDim2.new(0, p3.X + p1.TAIL_WIDTH, 0, p3.Y)
+			Size = p1.bubbleSize:map(function(Vector): UDim2 --[[ Line: 69 ]]
+				-- upvalues: p1 (upval)
+				return UDim2.new(0, Vector.X + p1.TAIL_WIDTH, 0, Vector.Y)
 			end),
 			LayoutOrder = p1.props.LayoutOrder
 		}, {
-			bubble = roact.createElement(fitFrameOnAxis, {
-				AnchorPoint = isIncoming and Vector2.new(0, 0) or Vector2.new(1, 0),
-				axis = fitFrameOnAxis.Axis.Both,
+			bubble = Roact.createElement(FitFrameOnAxis, {
+				AnchorPoint = IsIncoming and Vector2.new(0, 0) or Vector2.new(1, 0),
+				axis = FitFrameOnAxis.Axis.Both,
 				BackgroundTransparency = 1,
-				ImageColor3 = color,
+				ImageColor3 = Color,
 				ImageSet = {
-					Image = if hasTail then if isIncoming then "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self2.png",
+					Image = if HasTail then if IsIncoming then "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self2.png",
 					ScaleType = Enum.ScaleType.Slice,
-					SliceCenter = rect
+					SliceCenter = _Rect
 				},
-				ImageTransparency = transparency,
-				margin = roactFitComponents.Rect.square(p1.props.padding),
-				Position = isIncoming and UDim2.new(0, p1.TAIL_WIDTH, 0, 0) or UDim2.new(1, -p1.TAIL_WIDTH, 0, 0),
-				[roact.Change.AbsoluteSize] = function(p3)
-					-- upvalues: p1 (copy), roact (copy)
-					p1.updateBubbleSize(p3.AbsoluteSize)
-					p1.props[roact.Change.AbsoluteSize](p3)
+				ImageTransparency = Transparency,
+				margin = RoactFitComponents.Rect.square(p1.props.padding),
+				Position = IsIncoming and UDim2.new(0, p1.TAIL_WIDTH, 0, 0) or UDim2.new(1, -p1.TAIL_WIDTH, 0, 0),
+				[Roact.Change.AbsoluteSize] = function(Frame) --[[ Line: 88 ]]
+					-- upvalues: p1 (upval), Roact (upval)
+					p1.updateBubbleSize(Frame.AbsoluteSize)
+					p1.props[Roact.Change.AbsoluteSize](Frame)
 				end
-			}, children),
-			tail = roact.createElement("ImageLabel", {
+			}, Prop),
+			tail = Roact.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
-				AnchorPoint = isIncoming and Vector2.new(0, 0) or Vector2.new(1, 0),
+				AnchorPoint = IsIncoming and Vector2.new(0, 0) or Vector2.new(1, 0),
 				Size = UDim2.new(0, p1.TAIL_WIDTH, 0, p1.TAIL_WIDTH),
-				ImageColor3 = color,
-				Position = isIncoming and UDim2.new(0, 0, 0, 0) or UDim2.new(1, 0, 0, 0),
-				Image = if isIncoming then "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-tip.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self-tip.png",
-				ImageTransparency = transparency,
-				Visible = hasTail
+				ImageColor3 = Color,
+				Position = IsIncoming and UDim2.new(0, 0, 0, 0) or UDim2.new(1, 0, 0, 0),
+				Image = if IsIncoming then "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-tip.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self-tip.png",
+				ImageTransparency = Transparency,
+				Visible = HasTail
 			})
 		})
 	end)
 end
 
-return chatBubbleContainer
+return ChatBubbleContainer

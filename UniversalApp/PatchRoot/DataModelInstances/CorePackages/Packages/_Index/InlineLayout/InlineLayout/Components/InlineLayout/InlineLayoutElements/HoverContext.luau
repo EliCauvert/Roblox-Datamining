@@ -1,49 +1,50 @@
-﻿local reactModule = require(script:FindFirstAncestor("Components").Parent.Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("Components").Parent.Parent.React)
 
-local var1 = function()
+local function OnHover() --[[ Line: 39 ]]
 	warn("Wrap the component using HoverContext with a HoverContext.Provider element")
 end
 
-local var2 = reactModule.createContext({ registerOnHoverCallback = var1, onHover = var1 })
+local Context = ReactModule.createContext({ registerOnHoverCallback = OnHover, onHover = OnHover })
 
-function useHoverContext(p1)
-	-- upvalues: reactModule (ref), var2 (ref)
-	local var3 = reactModule.useContext(var2)
-	local var4, var5 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p1 (ref), var5 (ref)
-		var3.registerOnHoverCallback(p1, var5)
+function useHoverContext(p1) --[[ Line: 54 ]]
+	-- upvalues: ReactModule (copy), Context (copy)
+	local UseContextResult = ReactModule.useContext(Context)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 58 ]]
+		-- upvalues: UseContextResult (copy), p1 (copy), UseStateResult2 (copy)
+		UseContextResult.registerOnHoverCallback(p1, UseStateResult2)
 	end, {})
 	
-	return var4, reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), p1 (ref)
-		var3.onHover(p1, p2)
-	end, { p1 })
+	return UseStateResult, (ReactModule.useCallback(function(p2) --[[ Line: 62 ]]
+		-- upvalues: UseContextResult (copy), p1 (copy)
+		UseContextResult.onHover(p1, p2)
+	end, { p1 }))
 end
 
-function Provider(p1)
-	-- upvalues: reactModule (ref), var2 (ref)
-	local var3 = reactModule.useRef({})
+function Provider(p1) --[[ Line: 69 ]]
+	-- upvalues: ReactModule (copy), Context (copy)
+	local UseRefResult = ReactModule.useRef({})
 	
-	return reactModule.createElement(var2.Provider, {
+	return ReactModule.createElement(Context.Provider, {
 		value = {
-			onHover = reactModule.useCallback(function(p2, p3)
-				-- upvalues: var3 (ref)
-				if not var3.current[p2] then return end
-				for i, v in var3.current[p2] do
-					v(p3)
+			onHover = ReactModule.useCallback(function(p2, p3) --[[ Line: 71 ]]
+				-- upvalues: UseRefResult (copy)
+				if not UseRefResult.current[p2] then return end
+				for _, value in UseRefResult.current[p2] do
+					value(p3)
 				end
 			end, {}),
-			registerOnHoverCallback = reactModule.useCallback(function(p4, p5)
-				-- upvalues: var3 (ref)
-				local var4 = var3.current[p4]
+			registerOnHoverCallback = ReactModule.useCallback(function(p4, p5) --[[ Line: 80 ]]
+				-- upvalues: UseRefResult (copy)
+				local CurrentEntry = UseRefResult.current[p4]
 				
-				if var4 then
-					table.insert(var4, p5)
+				if CurrentEntry then
+					table.insert(CurrentEntry, p5)
 					
 					return
+				else
+					UseRefResult.current[p4] = { p5 }
 				end
-				var3.current[p4] = { p5 }
 			end, {})
 		}
 	}, p1.children)

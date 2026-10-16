@@ -1,54 +1,57 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Types)
-local createEventModule = require(viewRecycler.Internal.createEvent)
-local readDenseRangeModule = require(script.Parent.readDenseRange)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Types)
+local CreateEventModule = require(ViewRecycler.Internal.createEvent)
+local ReadDenseRangeModule = require(script.Parent.readDenseRange)
 
-return function(p1, p2)
-	-- upvalues: createEventModule (ref), dataSourceChangeTypeModule (ref), readDenseRangeModule (ref)
-	local t = {}
-	local var1 = createEventModule()
-	local var2 = 0
-	local var3 = nil
+return function(p1, Callback) --[[ Line: 17 | Named "createMapDataSource" ]]
+	-- upvalues: CreateEventModule (copy), DataSourceChangeTypeModule (copy), ReadDenseRangeModule (copy)
+	local T = {}
+	local EventModule = CreateEventModule()
+	local Count = 0
+	local SubscribeResult = nil
 	
-	local function getItem(p3)
-		-- upvalues: p1 (ref), var2 (write), p2 (ref), t (write)
-		local item = p1.getItem(p3)
+	local function getItem(Index) --[[ Line: 29 ]]
+		-- upvalues: p1 (copy), Count (ref), Callback (copy), T (ref)
+		local Item = p1.getItem(Index)
 		
-		if var2 == 0 then
-			return p2(item, p3)
+		if Count == 0 then
+			return Callback(Item, Index)
 		end
-		local itemKey = p1.getItemKey(p3)
-		local var4 = t[itemKey]
+		local ItemKey = p1.getItemKey(Index)
+		local Entry = T[ItemKey]
 		
-		if var4 == nil or var4.input ~= item or var4.index ~= p3 then
-			local var5 = p2(item, p3)
-			t[itemKey] = { input = item, index = p3, output = var5 }
+		if Entry == nil or Entry.input ~= Item or Entry.index ~= Index then
+			local CallbackResult = Callback(Item, Index)
+			T[ItemKey] = { input = Item, index = Index, output = CallbackResult }
 			
-			return var5
+			return CallbackResult
+		else
+			return Entry.output
 		end
-		return var4.output
 	end
 	
-	local function _()
-		-- upvalues: var3 (write), p1 (ref), dataSourceChangeTypeModule (copy), t (write), var1 (ref)
-		var3 = p1.subscribe(function(p3)
-			-- upvalues: dataSourceChangeTypeModule (copy), t (copy), var1 (copy)
-			for i, v in p3.changes do
-				if v.type ~= dataSourceChangeTypeModule.Reset then
-					if v.type == dataSourceChangeTypeModule.Update or v.type == dataSourceChangeTypeModule.Remove then
-						for i_1, v_1 in if v.type == dataSourceChangeTypeModule.Update then v.keys else v.keys do
-							t[v_1] = nil
+	local function _() --[[ Line: 48 | Named "connectChild" ]]
+		-- upvalues: SubscribeResult (ref), p1 (copy), DataSourceChangeTypeModule (upval), T (ref), EventModule (copy)
+		SubscribeResult = p1.subscribe(function(p2) --[[ Line: 49 ]]
+			-- upvalues: DataSourceChangeTypeModule (upval), T (upval), EventModule (upval)
+			for _, change in p2.changes do
+				if change.type == DataSourceChangeTypeModule.Reset then
+					T = {}
+					break
+				else
+					if change.type == DataSourceChangeTypeModule.Update or change.type == DataSourceChangeTypeModule.Remove then
+						local Keys = if change.type == DataSourceChangeTypeModule.Update then change.keys else change.keys
+						for _, key in Keys do
+							T[key] = nil
 						end
 					end
 				end
-				t = {}
-				break
 			end
-			var1.fire({
-				changes = p3.changes,
-				previousItemCount = p3.previousItemCount,
-				itemCount = p3.itemCount
+			EventModule.fire({
+				changes = p2.changes,
+				previousItemCount = p2.previousItemCount,
+				itemCount = p2.itemCount
 			})
 		end)
 	end
@@ -57,49 +60,51 @@ return function(p1, p2)
 		getItemCount = p1.getItemCount,
 		getItem = getItem,
 		getItemKey = p1.getItemKey,
-		getItems = function(p4, p5)
-			-- upvalues: readDenseRangeModule (copy), p1 (ref), getItem (ref)
-			return readDenseRangeModule(p1.getItemCount(), getItem, p4, p5)
+		getItems = function(p3, p4) --[[ Line: 98 ]]
+			-- upvalues: ReadDenseRangeModule (upval), p1 (copy), getItem (copy)
+			return ReadDenseRangeModule(p1.getItemCount(), getItem, p3, p4)
 		end,
-		subscribe = function(p4)
-			-- upvalues: var2 (write), t (write), var3 (write), p1 (ref), dataSourceChangeTypeModule (copy), var1 (ref)
-			if var2 == 0 then
-				t = {}
-				var3 = p1.subscribe(function(p5)
-					-- upvalues: dataSourceChangeTypeModule (copy), t (copy), var1 (copy)
-					for i, v in p5.changes do
-						if v.type ~= dataSourceChangeTypeModule.Reset then
-							if v.type == dataSourceChangeTypeModule.Update or v.type == dataSourceChangeTypeModule.Remove then
-								for i_1, v_1 in if v.type == dataSourceChangeTypeModule.Update then v.keys else v.keys do
-									t[v_1] = nil
+		subscribe = function(p3) --[[ Line: 71 ]]
+			-- upvalues: Count (ref), T (ref), SubscribeResult (ref), p1 (copy), DataSourceChangeTypeModule (upval), EventModule (copy)
+			if Count == 0 then
+				T = {}
+				SubscribeResult = p1.subscribe(function(p4) --[[ Line: 49 ]]
+					-- upvalues: DataSourceChangeTypeModule (upval), T (upval), EventModule (upval)
+					for _, change in p4.changes do
+						if change.type == DataSourceChangeTypeModule.Reset then
+							T = {}
+							break
+						else
+							if change.type == DataSourceChangeTypeModule.Update or change.type == DataSourceChangeTypeModule.Remove then
+								local Keys = if change.type == DataSourceChangeTypeModule.Update then change.keys else change.keys
+								for _, key in Keys do
+									T[key] = nil
 								end
 							end
 						end
-						t = {}
-						break
 					end
-					var1.fire({
-						changes = p5.changes,
-						previousItemCount = p5.previousItemCount,
-						itemCount = p5.itemCount
+					EventModule.fire({
+						changes = p4.changes,
+						previousItemCount = p4.previousItemCount,
+						itemCount = p4.itemCount
 					})
 				end)
 			end
-			var2 += 1
-			local var4 = var1.connect(p4)
-			local var5 = true
+			Count += 1
+			local ConnectResult = EventModule.connect(p3)
+			local Flag = true
 			
-			return function()
-				-- upvalues: var5 (write), var4 (ref), var2 (copy), var3 (copy), t (copy)
-				if not var5 then return end
-				var5 = false
-				var4()
-				var2 -= 1
+			return function() --[[ Line: 79 ]]
+				-- upvalues: Flag (ref), ConnectResult (copy), Count (upval), SubscribeResult (upval), T (upval)
+				if not Flag then return end
+				Flag = false
+				ConnectResult()
+				Count -= 1
 				
-				if var2 == 0 and var3 ~= nil then
-					var3()
-					var3 = nil
-					t = {}
+				if Count == 0 and SubscribeResult ~= nil then
+					SubscribeResult()
+					SubscribeResult = nil
+					T = {}
 				end
 			end
 		end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ReactGlobals.ReactGlobals)
+﻿return (require(script.Parent.Parent.Parent._Index.ReactGlobals.ReactGlobals))

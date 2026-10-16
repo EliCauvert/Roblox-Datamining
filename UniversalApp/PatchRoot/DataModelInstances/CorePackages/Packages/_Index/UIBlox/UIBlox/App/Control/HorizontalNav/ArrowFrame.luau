@@ -1,82 +1,82 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent.Parent
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local arrowNavModule = require(parent.HorizontalNav.ArrowNav)
-local navigationDirectionModule = require(parent.HorizontalNav.NavigationDirection)
-local imagesModule = require(parent_1.ImageSet.Images)
-local cycleLeft = imagesModule["icons/actions/cycleLeft"]
-local cycleRight = imagesModule["icons/actions/cycleRight"]
-local arrowFrame = roactModule.PureComponent:extend("ArrowFrame")
-arrowFrame.validateProps = tModule.strictInterface({
-	ZIndex = tModule.optional(tModule.number),
-	isVisibleLeft = tModule.optional(tModule.union(tModule.boolean, tModule.table)),
-	isVisibleRight = tModule.optional(tModule.union(tModule.boolean, tModule.table)),
-	onPressHoldInputBegan = tModule.optional(tModule.callback),
-	onPressHoldInputEnded = tModule.optional(tModule.callback),
-	defaultUseProps = tModule.optional(tModule.strictInterface({
-		scrollingFrameRef = tModule.table,
-		buttonRefs = tModule.optional(tModule.table),
-		buttonWidth = tModule.optional(tModule.number),
-		padOutsideEdges = tModule.optional(tModule.boolean),
-		numButtons = tModule.optional(tModule.number),
-		buttonPadding = tModule.number,
-		updateCanvasPosition = tModule.callback
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent.Parent
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local ArrowNavModule = require(Parent.HorizontalNav.ArrowNav)
+local NavigationDirectionModule = require(Parent.HorizontalNav.NavigationDirection)
+local ImagesModule = require(Parent1.ImageSet.Images)
+local IconsActionsCycleLeft = ImagesModule["icons/actions/cycleLeft"]
+local IconsActionsCycleRight = ImagesModule["icons/actions/cycleRight"]
+local ArrowFrame = RoactModule.PureComponent:extend("ArrowFrame")
+ArrowFrame.validateProps = TModule.strictInterface({
+	ZIndex = TModule.optional(TModule.number),
+	isVisibleLeft = TModule.optional(TModule.union(TModule.boolean, TModule.table)),
+	isVisibleRight = TModule.optional(TModule.union(TModule.boolean, TModule.table)),
+	onPressHoldInputBegan = TModule.optional(TModule.callback),
+	onPressHoldInputEnded = TModule.optional(TModule.callback),
+	defaultUseProps = TModule.optional(TModule.strictInterface({
+		scrollingFrameRef = TModule.table,
+		buttonRefs = TModule.optional(TModule.table),
+		buttonWidth = TModule.optional(TModule.number),
+		padOutsideEdges = TModule.optional(TModule.boolean),
+		numButtons = TModule.optional(TModule.number),
+		buttonPadding = TModule.number,
+		updateCanvasPosition = TModule.callback
 	}))
 })
-arrowFrame.defaultProps = { ZIndex = 1, isVisibleRight = true, isVisibleLeft = true }
+ArrowFrame.defaultProps = { ZIndex = 1, isVisibleRight = true, isVisibleLeft = true }
 
-function arrowFrame.init(p1)
+function ArrowFrame.init(p1) --[[ Line: 52 ]]
 	p1.state = { isHovered = false }
 	
-	function p0.onMouseEnter()
-		-- upvalues: p1 (ref)
+	function p1.onMouseEnter() --[[ Line: 57 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ isHovered = true })
 	end
 	
-	function p0.onMouseLeave()
-		-- upvalues: p1 (ref)
+	function p1.onMouseLeave() --[[ Line: 63 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ isHovered = false })
 	end
 end
 
-function arrowFrame.render(p1)
-	-- upvalues: roactModule (ref), arrowNavModule (ref), cycleLeft (ref), navigationDirectionModule (ref), cycleRight (ref)
-	local isVisibleLeft = p1.props.isVisibleLeft
-	local isVisibleRight = p1.props.isVisibleRight
-	local defaultUseProps = p1.props.defaultUseProps
-	local onPressHoldInputBegan = p1.props.onPressHoldInputBegan
-	local onPressHoldInputEnded = p1.props.onPressHoldInputEnded
+function ArrowFrame.render(p1) --[[ Line: 70 ]]
+	-- upvalues: RoactModule (copy), ArrowNavModule (copy), IconsActionsCycleLeft (copy), NavigationDirectionModule (copy), IconsActionsCycleRight (copy)
+	local IsVisibleLeft = p1.props.isVisibleLeft
+	local IsVisibleRight = p1.props.isVisibleRight
+	local DefaultUseProps = p1.props.defaultUseProps
+	local OnPressHoldInputBegan = p1.props.onPressHoldInputBegan
+	local OnPressHoldInputEnded = p1.props.onPressHoldInputEnded
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
 		ZIndex = p1.props.ZIndex,
-		[roactModule.Event.MouseEnter] = p1.onMouseEnter,
-		[roactModule.Event.MouseLeave] = p1.onMouseLeave
+		[RoactModule.Event.MouseEnter] = p1.onMouseEnter,
+		[RoactModule.Event.MouseLeave] = p1.onMouseLeave
 	}, {
-		ArrowLeft = roactModule.createElement(arrowNavModule, {
+		ArrowLeft = RoactModule.createElement(ArrowNavModule, {
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.new(0, -6, 0.5, 0),
-			Image = cycleLeft,
-			Visible = p1.state.isHovered and isVisibleLeft,
-			navDirection = navigationDirectionModule.IsLeft,
-			defaultUseProps = defaultUseProps,
-			onPressHoldInputBegan = onPressHoldInputBegan,
-			onPressHoldInputEnded = onPressHoldInputEnded
+			Image = IconsActionsCycleLeft,
+			Visible = p1.state.isHovered and IsVisibleLeft,
+			navDirection = NavigationDirectionModule.IsLeft,
+			defaultUseProps = DefaultUseProps,
+			onPressHoldInputBegan = OnPressHoldInputBegan,
+			onPressHoldInputEnded = OnPressHoldInputEnded
 		}),
-		ArrowRight = roactModule.createElement(arrowNavModule, {
+		ArrowRight = RoactModule.createElement(ArrowNavModule, {
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.new(1, -30, 0.5, 0),
-			Image = cycleRight,
-			Visible = p1.state.isHovered and isVisibleRight,
-			navDirection = navigationDirectionModule.IsRight,
-			defaultUseProps = defaultUseProps,
-			onPressHoldInputBegan = onPressHoldInputBegan,
-			onPressHoldInputEnded = onPressHoldInputEnded
+			Image = IconsActionsCycleRight,
+			Visible = p1.state.isHovered and IsVisibleRight,
+			navDirection = NavigationDirectionModule.IsRight,
+			defaultUseProps = DefaultUseProps,
+			onPressHoldInputBegan = OnPressHoldInputBegan,
+			onPressHoldInputEnded = OnPressHoldInputEnded
 		})
 	})
 end
 
-return arrowFrame
+return ArrowFrame

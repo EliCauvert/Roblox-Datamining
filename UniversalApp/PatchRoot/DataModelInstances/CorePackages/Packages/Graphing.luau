@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.Graphing.Graphing)
+﻿return (require(script.Parent._Index.Graphing.Graphing))

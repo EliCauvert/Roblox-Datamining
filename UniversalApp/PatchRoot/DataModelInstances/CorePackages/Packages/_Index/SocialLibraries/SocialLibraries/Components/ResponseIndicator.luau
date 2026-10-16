@@ -1,20 +1,20 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roact = dependenciesModule.Roact
-local UIBlox = dependenciesModule.UIBlox
-local foundation = dependenciesModule.Foundation
-local iconSize = foundation.Enums.IconSize
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Roact = DependenciesModule.Roact
+local UIBlox = DependenciesModule.UIBlox
+local Foundation = DependenciesModule.Foundation
+local IconSize = Foundation.Enums.IconSize
 
-return function()
-	-- upvalues: UIBlox (ref), roact (ref), foundation (ref), iconSize (ref)
-	return UIBlox.Style.withStyle(function(p1)
-		-- upvalues: roact (copy), foundation (copy), iconSize (copy)
-		return roact.createElement("ImageButton", {
+return function() --[[ Line: 8 ]]
+	-- upvalues: UIBlox (copy), Roact (copy), Foundation (copy), IconSize (copy)
+	return UIBlox.Style.withStyle(function(p1) --[[ Line: 9 ]]
+		-- upvalues: Roact (upval), Foundation (upval), IconSize (upval)
+		return Roact.createElement("ImageButton", {
 			AutoButtonColor = false,
 			BackgroundTransparency = 1,
 			BackgroundColor3 = p1.Theme.TextEmphasis.Color,
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			visibleFrame = roact.createElement("Frame", {
+			visibleFrame = Roact.createElement("Frame", {
 				ZIndex = 10,
 				BackgroundTransparency = p1.Theme.BackgroundUIContrast.Transparency,
 				BackgroundColor3 = p1.Theme.BackgroundUIContrast.Color,
@@ -22,11 +22,11 @@ return function()
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5)
 			}, {
-				corner = roact.createElement("UICorner"),
-				spinner = roact.createElement(foundation.Loading, {
+				corner = Roact.createElement("UICorner"),
+				spinner = Roact.createElement(Foundation.Loading, {
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
-					size = iconSize.Large
+					size = IconSize.Large
 				})
 			})
 		})

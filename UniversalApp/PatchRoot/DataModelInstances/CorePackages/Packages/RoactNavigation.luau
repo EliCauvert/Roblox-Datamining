@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.RoactNavigation.RoactNavigation)
+﻿return (require(script.Parent._Index.RoactNavigation.RoactNavigation))

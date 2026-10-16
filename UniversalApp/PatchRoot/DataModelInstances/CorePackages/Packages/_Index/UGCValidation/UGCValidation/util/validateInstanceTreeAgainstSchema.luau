@@ -1,126 +1,114 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function _(p1, p2)
-	return if type(p1) == "table" then table.find(p1, p2) ~= nil else p1 == p2
+local function _(List, Value): boolean --[[ Line: 6 | Named "checkName" ]]
+	return if type(List) == "table" then table.find(List, Value) ~= nil else List == Value
 end
 
-local _ = function(p1)
-	return if type(p1) == "table" then table.concat(p1, " or ") elseif type(p1) == "string" then p1 else "*"
+local _ = function(List) --[[ Line: 13 | Named "getReadableName" ]]
+	return if type(List) == "table" then table.concat(List, " or ") elseif type(List) == "string" then List else "*"
 end
 
-local function validateInstancesFromSchema(p1, p2, p3, p4, p5, p6)
-	-- upvalues: validateInstancesFromSchema (ref), errorSourceStringsModule (ref)
-	p3[p1] = true
+local function validateInstancesFromSchema(Object, p1, p2, p3, MissingErrorKey, SkipInstanceContext) --[[ Line: 22 ]]
+	-- upvalues: validateInstancesFromSchema (copy), ErrorSourceStringsModule (copy)
+	p2[Object] = true
 	
-	if p2._ignoreDescendants then
-		assert(not p2._children, "if _ignoreDescendants is true, there should be no descendants in the schema as they would be ignored anyway")
+	if p1._ignoreDescendants then
+		assert(not p1._children, "if _ignoreDescendants is true, there should be no descendants in the schema as they would be ignored anyway")
 		
-		for i, v in p1:GetDescendants() do
-			p3[v] = true
+		for _, descendant in Object:GetDescendants() do
+			p2[descendant] = true
 		end
 		return
 	else
-		local var1, v_1
-		for i, v in p2._children or {} do
-			var1 = false
+		local Children = p1._children or {}
+		local Flag = nil
+		for _, child in Children do
+			Flag = false
 			
-			for i_1, v_1 in p1:GetChildren() do
-				if p3[v_1] == nil and v_1.ClassName == v.ClassName then
-					if v.Name ~= nil then
-						local var2
-						local name = v.Name
-						local name_1 = v_1.Name
-						
-						if type(name) == "table" then
-							var2 = table.find(name, name_1) ~= nil
-							var2 = nil
-						else
-							var2 = name == name_1
-						end
-						if var2 then
-							validateInstancesFromSchema(v_1, v, p3, p4, p5, p6)
-							var1 = true
-							break
-						end
+			for _, child1 in Object:GetChildren() do
+				if p2[child1] == nil and child1.ClassName == child.ClassName then
+					local NoName = child.Name == nil
+					
+					if not NoName then
+						local Name = child.Name
+						local Name1 = child1.Name
+						NoName = if type(Name) == "table" then table.find(Name, Name1) ~= nil else Name == Name1
+					end
+					if NoName then
+						validateInstancesFromSchema(child1, child, p2, p3, MissingErrorKey, SkipInstanceContext)
+						Flag = true
+						break
 					end
 				end
 			end
-			if not var1 and not v._optional then
-				local var3
-				local var4 = if p6 then nil else p1
-				v_1 = p5 or errorSourceStringsModule.Keys.AssetSchemaMissingItem
-				local t = {
-					ParentPath = p1:GetFullName(),
-					ExpectedClass = v.ClassName
+			if not Flag and not child._optional then
+				local Object1 = if SkipInstanceContext then nil else Object
+				local MissingErrorKey1 = MissingErrorKey or ErrorSourceStringsModule.Keys.AssetSchemaMissingItem
+				local Name = child.Name
+				local config = {
+					ParentPath = Object:GetFullName(),
+					ExpectedClass = child.ClassName,
+					ExpectedName = if type(Name) == "table" then table.concat(Name, " or ") elseif type(Name) == "string" then Name else "*"
 				}
-				local name = v.Name
-				t.ExpectedName = if type(name) == "table" then table.concat(name, " or ") elseif type(name) == "string" then name else "*"
-				local className = `missing required {v.ClassName}`
+				local RequiredName: string = `missing required {child.ClassName}`
+				local Named = nil
 				
-				if v.Name then
-					local name_1 = v.Name
-					var3 = ` named '{if type(name_1) == "table" then table.concat(name_1, " or ") elseif type(name_1) == "string" then name_1 else "*"}'`
+				if child.Name then
+					local Name2 = child.Name
+					Named = ` named '{if type(Name2) == "table" then table.concat(Name2, " or ") elseif type(Name2) == "string" then Name2 else "*"}'`
 				else
-					var3 = ""
+					Named = ""
 				end
-				t.detail = className .. var7 .. ` inside '{p3.Name}'`
-				p4:fail(v_1, t, var4)
+				config.detail = RequiredName .. Named .. ` inside '{Object.Name}'`
+				p3:fail(MissingErrorKey1, config, Object1)
 			end
 		end
 	end
 end
 
-local function validateNoInstancesOutsideSchema(p7, p8, p9, p10, p11)
-	-- upvalues: errorSourceStringsModule (ref)
-	local t = {}
+local function validateNoInstancesOutsideSchema(Object, p4, p5, UnauthorizedErrorKey, SkipInstanceContext) --[[ Line: 79 ]]
+	-- upvalues: ErrorSourceStringsModule (copy)
+	local List = {}
 	
-	for i, v in p7:GetDescendants() do
-		if p8[v] == nil then
-			table.insert(t, v:GetFullName())
+	for _, descendant in Object:GetDescendants() do
+		if p4[descendant] == nil then
+			table.insert(List, descendant:GetFullName())
 		end
 	end
-	if #t > 0 then
-		p9:fail(p10 or errorSourceStringsModule.Keys.AssetSchemaUnexpectedItems, {
-			UnexpectedDescendantPaths = table.concat(t, ", "),
-			detail = `unauthorized instances found: {table.concat(t, ", ")}`
-		}, if p11 then nil else p7)
+	if #List > 0 then
+		p5:fail(UnauthorizedErrorKey or ErrorSourceStringsModule.Keys.AssetSchemaUnexpectedItems, {
+			UnexpectedDescendantPaths = table.concat(List, ", "),
+			detail = `unauthorized instances found: {table.concat(List, ", ")}`
+		}, if SkipInstanceContext then nil else Object)
 	end
 end
 
-return function(p12, p13, p14, p15)
-	-- upvalues: errorSourceStringsModule (ref), validateInstancesFromSchema (ref), validateNoInstancesOutsideSchema (ref)
-	local var5 = if p15 then p15.skipRootClassCheck else nil
-	local var6 = if p15 then p15.missingErrorKey else nil
-	local var7 = if p15 then p15.unauthorizedErrorKey else nil
-	local var8 = if p15 then p15.skipInstanceContext else nil
+return function(p6, p7, p8, p9) --[[ Line: 103 | Named "validateInstanceTreeAgainstSchema" ]]
+	-- upvalues: ErrorSourceStringsModule (copy), validateInstancesFromSchema (copy), validateNoInstancesOutsideSchema (copy)
+	local MissingErrorKey = if p9 then p9.missingErrorKey else nil
+	local UnauthorizedErrorKey = if p9 then p9.unauthorizedErrorKey else nil
+	local SkipInstanceContext = if p9 then p9.skipInstanceContext else nil
 	local t = {}
 	
-	if not var5 then
-		if p13.ClassName ~= p12.ClassName then
-			p14:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootClass, { RootClass = p12.ClassName, ExpectedClass = p13.ClassName })
+	if not (if p9 then p9.skipRootClassCheck else nil) then
+		if p7.ClassName ~= p6.ClassName then
+			p8:fail(ErrorSourceStringsModule.Keys.AssetSchemaWrongRootClass, { RootClass = p6.ClassName, ExpectedClass = p7.ClassName })
 			
 			return
-		elseif p13.Name ~= nil then
-			local var9
-			local name = p13.Name
-			local name_1 = p12.Name
+		end
+		if p7.Name ~= nil then
+			local Name = p7.Name
+			local Name1 = p6.Name
 			
-			if type(name) == "table" then
-				var9 = table.find(name, name_1) ~= nil
-				var9 = nil
-			else
-				var9 = name == name_1
-			end
-			if var9 then
-				validateInstancesFromSchema(p12, p13, t, p14, var6, var8)
-				validateNoInstancesOutsideSchema(p12, t, p14, var7, var8)
+			if not (if type(Name) == "table" then table.find(Name, Name1) ~= nil else Name == Name1) then
+				p8:fail(ErrorSourceStringsModule.Keys.AssetSchemaWrongRootName, { RootName = p6.Name, ExpectedName = p7.Name })
 				
 				return
-			else
-				p14:fail(errorSourceStringsModule.Keys.AssetSchemaWrongRootName, { RootName = p12.Name, ExpectedName = p13.Name })
 			end
 		end
 	end
+	validateInstancesFromSchema(p6, p7, t, p8, MissingErrorKey, SkipInstanceContext)
+	validateNoInstancesOutsideSchema(p6, t, p8, UnauthorizedErrorKey, SkipInstanceContext)
 end

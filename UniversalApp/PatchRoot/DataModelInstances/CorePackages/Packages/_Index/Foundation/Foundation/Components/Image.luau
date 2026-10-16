@@ -1,1 +1,1 @@
-﻿return require(script.Image)
+﻿return (require(script.Image))

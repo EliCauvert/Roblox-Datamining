@@ -2,12 +2,12 @@
 
 return table.freeze({
 	Edge = table.freeze({ Start = "start", End = "end" }),
-	resolve = function(p1)
-		local var1 = p1 ~= nil and ((if p1 ~= nil then p1.startItems else nil) or 0)
-		local var2 = p1 ~= nil and ((if p1 ~= nil then p1.endItems else nil) or 0)
-		assert(var1 >= 0 and var1 % 1 == 0, "DataPrefetch: startItems must be a non-negative integer")
-		assert(var2 >= 0 and var2 % 1 == 0, "DataPrefetch: endItems must be a non-negative integer")
+	resolve = function(p1) --[[ Line: 32 ]]
+		local StartItems = if p1 == nil then 0 else p1.startItems or 0
+		local EndItems = if p1 == nil then 0 else p1.endItems or 0
+		assert(StartItems >= 0 and StartItems % 1 == 0, "DataPrefetch: startItems must be a non-negative integer")
+		assert(EndItems >= 0 and EndItems % 1 == 0, "DataPrefetch: endItems must be a non-negative integer")
 		
-		return { startItems = var1, endItems = var2 }
+		return { startItems = StartItems, endItems = EndItems }
 	end
 })

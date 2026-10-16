@@ -1,37 +1,37 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local cryoModule = require(parent_2.Cryo)
-local tModule = require(parent_2.t)
-local imagesModule = require(parent_1.App.ImageSet.Images)
-local tileModule = require(parent.BaseTile.Tile)
-local saveTile = roactModule.PureComponent:extend("SaveTile")
-saveTile.validateProps = tModule.strictInterface({
-	hasRoundedCorners = tModule.optional(tModule.boolean),
-	onActivated = tModule.optional(tModule.callback),
-	isDisabled = tModule.optional(tModule.boolean),
-	thumbnail = tModule.optional(tModule.union(tModule.string, tModule.table)),
-	thumbnailSize = tModule.optional(tModule.UDim2),
-	thumbnailTransparency = tModule.optional(tModule.number),
-	NextSelectionLeft = tModule.optional(tModule.table),
-	NextSelectionRight = tModule.optional(tModule.table),
-	NextSelectionUp = tModule.optional(tModule.table),
-	NextSelectionDown = tModule.optional(tModule.table),
-	thumbnailRef = tModule.optional(tModule.table),
-	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local CryoModule = require(Parent2.Cryo)
+local TModule = require(Parent2.t)
+local ImagesModule = require(Parent1.App.ImageSet.Images)
+local TileModule = require(Parent.BaseTile.Tile)
+local SaveTile = RoactModule.PureComponent:extend("SaveTile")
+SaveTile.validateProps = TModule.strictInterface({
+	hasRoundedCorners = TModule.optional(TModule.boolean),
+	onActivated = TModule.optional(TModule.callback),
+	isDisabled = TModule.optional(TModule.boolean),
+	thumbnail = TModule.optional(TModule.union(TModule.string, TModule.table)),
+	thumbnailSize = TModule.optional(TModule.UDim2),
+	thumbnailTransparency = TModule.optional(TModule.number),
+	NextSelectionLeft = TModule.optional(TModule.table),
+	NextSelectionRight = TModule.optional(TModule.table),
+	NextSelectionUp = TModule.optional(TModule.table),
+	NextSelectionDown = TModule.optional(TModule.table),
+	thumbnailRef = TModule.optional(TModule.table),
+	isRoactGamepadEnabled = TModule.optional(TModule.boolean)
 })
-saveTile.defaultProps = {
+SaveTile.defaultProps = {
 	hasRoundedCorners = true,
 	thumbnailTransparency = 0,
 	isRoactGamepadEnabled = true,
-	thumbnail = imagesModule["icons/actions/edit/add"],
+	thumbnail = ImagesModule["icons/actions/edit/add"],
 	thumbnailSize = UDim2.new(0, 36, 0, 36)
 }
 
-function saveTile.render(p1)
-	-- upvalues: roactModule (ref), tileModule (ref)
-	return roactModule.createElement(tileModule, {
+function SaveTile.render(p1) --[[ Line: 54 ]]
+	-- upvalues: RoactModule (copy), TileModule (copy)
+	return RoactModule.createElement(TileModule, {
 		hasRoundedCorners = p1.props.hasRoundedCorners,
 		name = "",
 		onActivated = p1.props.onActivated,
@@ -44,11 +44,11 @@ function saveTile.render(p1)
 		NextSelectionRight = p1.props.NextSelectionRight,
 		NextSelectionUp = p1.props.NextSelectionUp,
 		NextSelectionDown = p1.props.NextSelectionDown,
-		[roactModule.Ref] = p1.props.thumbnailRef
+		[RoactModule.Ref] = p1.props.thumbnailRef
 	})
 end
 
-return roactModule.forwardRef(function(p1, p2)
-	-- upvalues: roactModule (ref), saveTile (ref), cryoModule (ref)
-	return roactModule.createElement(saveTile, cryoModule.Dictionary.join(p1, { thumbnailRef = p2 }))
+return RoactModule.forwardRef(function(p1, ThumbnailRef) --[[ Line: 79 ]]
+	-- upvalues: RoactModule (copy), SaveTile (copy), CryoModule (copy)
+	return RoactModule.createElement(SaveTile, CryoModule.Dictionary.join(p1, { thumbnailRef = ThumbnailRef }))
 end)

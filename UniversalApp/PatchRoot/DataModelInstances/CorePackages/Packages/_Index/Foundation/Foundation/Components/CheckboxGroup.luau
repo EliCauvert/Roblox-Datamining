@@ -1,1 +1,1 @@
-﻿return require(script.CheckboxGroup)
+﻿return (require(script.CheckboxGroup))

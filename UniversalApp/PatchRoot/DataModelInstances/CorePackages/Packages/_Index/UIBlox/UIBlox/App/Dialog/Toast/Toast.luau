@@ -1,96 +1,95 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local roactModule = require(parent_3.Roact)
-local tModule = require(parent_3.t)
-local slidingDirectionModule = require(parent_2.Core.Animation.Enum.SlidingDirection)
-local slidingContainerModule = require(parent_2.Core.Animation.SlidingContainer)
-local validateColorInfoModule = require(parent_2.Core.Style.Validator.validateColorInfo)
-local stateTableModule = require(parent_2.StateTable.StateTable)
-local buttonTypeModule = require(parent_1.Button.Enum.ButtonType)
-local animationStateModule = require(parent.Enum.AnimationState)
-local informativeToastModule = require(parent.InformativeToast)
-local interactiveToastModule = require(parent.InteractiveToast)
-local toastContainerModule = require(parent.ToastContainer)
-local toast = roactModule.PureComponent:extend("Toast")
-toast.validateProps = tModule.strictInterface({
-	anchorPoint = tModule.optional(tModule.Vector2),
-	duration = tModule.optional(tModule.number),
-	layoutOrder = tModule.optional(tModule.integer),
-	position = tModule.optional(tModule.UDim2),
-	show = tModule.optional(tModule.boolean),
-	size = tModule.optional(tModule.UDim2),
-	springOptions = tModule.optional(tModule.table),
-	toastContent = tModule.strictInterface({
-		buttonText = tModule.optional(tModule.string),
-		iconColorStyle = tModule.optional(validateColorInfoModule),
-		iconImage = tModule.optional(tModule.union(tModule.table, tModule.string, tModule.callback)),
-		iconSize = tModule.optional(tModule.Vector2),
-		iconChildren = tModule.optional(tModule.table),
-		onActivated = tModule.optional(tModule.callback),
-		onAppeared = tModule.optional(tModule.callback),
-		onDismissed = tModule.optional(tModule.callback),
-		swipeUpDismiss = tModule.optional(tModule.boolean),
-		toastSubtitle = tModule.optional(tModule.string),
-		sequenceNumber = tModule.optional(tModule.integer),
-		toastTitle = tModule.string,
-		buttonType = tModule.optional(buttonTypeModule.isEnumValue),
-		onTouchSwipeUp = tModule.optional(tModule.callback)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local RoactModule = require(Parent3.Roact)
+local TModule = require(Parent3.t)
+local SlidingDirectionModule = require(Parent2.Core.Animation.Enum.SlidingDirection)
+local SlidingContainerModule = require(Parent2.Core.Animation.SlidingContainer)
+local StateTableModule = require(Parent2.StateTable.StateTable)
+local AnimationStateModule = require(Parent.Enum.AnimationState)
+local InformativeToastModule = require(Parent.InformativeToast)
+local InteractiveToastModule = require(Parent.InteractiveToast)
+local ToastContainerModule = require(Parent.ToastContainer)
+local Toast = RoactModule.PureComponent:extend("Toast")
+Toast.validateProps = TModule.strictInterface({
+	anchorPoint = TModule.optional(TModule.Vector2),
+	duration = TModule.optional(TModule.number),
+	layoutOrder = TModule.optional(TModule.integer),
+	position = TModule.optional(TModule.UDim2),
+	show = TModule.optional(TModule.boolean),
+	size = TModule.optional(TModule.UDim2),
+	springOptions = TModule.optional(TModule.table),
+	toastContent = TModule.strictInterface({
+		buttonText = TModule.optional(TModule.string),
+		iconColorStyle = TModule.optional((require(Parent2.Core.Style.Validator.validateColorInfo))),
+		iconImage = TModule.optional(TModule.union(TModule.table, TModule.string, TModule.callback)),
+		iconSize = TModule.optional(TModule.Vector2),
+		iconChildren = TModule.optional(TModule.table),
+		onActivated = TModule.optional(TModule.callback),
+		onAppeared = TModule.optional(TModule.callback),
+		onDismissed = TModule.optional(TModule.callback),
+		swipeUpDismiss = TModule.optional(TModule.boolean),
+		toastSubtitle = TModule.optional(TModule.string),
+		sequenceNumber = TModule.optional(TModule.integer),
+		toastTitle = TModule.string,
+		buttonType = TModule.optional(require(Parent1.Button.Enum.ButtonType).isEnumValue),
+		onTouchSwipeUp = TModule.optional(TModule.callback)
 	})
 })
-toast.defaultProps = {
+Toast.defaultProps = {
 	show = true,
 	anchorPoint = Vector2.new(0.5, 0),
 	position = UDim2.new(0.5, 0, 0, 20)
 }
 
-local function toastContentEqual(p1, p2)
-	return p1.iconColorStyle == p2.iconColorStyle and p1.iconImage == p2.iconImage and (p1.iconSize == p2.iconSize and p1.iconChildren == p2.iconChildren) and (p1.onActivated == p2.onActivated and p1.onDismissed == p2.onDismissed and (p1.sequenceNumber == p2.sequenceNumber and p1.swipeUpDismiss == p2.swipeUpDismiss)) and (p1.toastSubtitle == p2.toastSubtitle and p1.toastTitle == p2.toastTitle)
+local function toastContentEqual(ToastContent, ToastContent1): boolean --[[ Line: 90 ]]
+	return ToastContent.iconColorStyle == ToastContent1.iconColorStyle and ToastContent.iconImage == ToastContent1.iconImage and ToastContent.iconSize == ToastContent1.iconSize and ToastContent.iconChildren == ToastContent1.iconChildren and ToastContent.onActivated == ToastContent1.onActivated and ToastContent.onDismissed == ToastContent1.onDismissed and ToastContent.sequenceNumber == ToastContent1.sequenceNumber and ToastContent.swipeUpDismiss == ToastContent1.swipeUpDismiss and ToastContent.toastSubtitle == ToastContent1.toastSubtitle and ToastContent.toastTitle == ToastContent1.toastTitle
 end
 
-function toast.init(p1)
-	-- upvalues: animationStateModule (ref), roactModule (ref), interactiveToastModule (ref), informativeToastModule (ref), stateTableModule (ref)
+function Toast.init(p1) --[[ Line: 108 ]]
+	-- upvalues: AnimationStateModule (copy), RoactModule (copy), InteractiveToastModule (copy), InformativeToastModule (copy), StateTableModule (copy)
 	p1.isMounted = false
 	p1.currentToastContent = p1.props.toastContent
 	
-	function p2.onActivated()
-		-- upvalues: p1 (ref)
+	function p1.onActivated() --[[ Line: 113 ]]
+		-- upvalues: p1 (copy)
 		p1.stateTable.events.Activated({ activated = true })
 	end
 	
-	function p2.onAppeared()
-		-- upvalues: p1 (ref)
+	function p1.onAppeared() --[[ Line: 119 ]]
+		-- upvalues: p1 (copy)
 		if p1.currentToastContent.onAppeared then
 			p1.currentToastContent.onAppeared()
 		end
-		local duration = p1.props.duration
+		local Duration: number = p1.props.duration
 		
-		if duration and duration > 0 then
-			local currentToastContent = p1.currentToastContent
-			delay(duration, function()
-				-- upvalues: currentToastContent (ref), p1 (copy)
-				if currentToastContent == p1.currentToastContent then
+		if Duration and Duration > 0 then
+			local CurrentToastContent = p1.currentToastContent
+			delay(Duration, function() --[[ Line: 126 ]]
+				-- upvalues: CurrentToastContent (copy), p1 (upval)
+				if CurrentToastContent == p1.currentToastContent then
 					p1.stateTable.events.AutoDismiss()
 				end
 			end)
 		end
 	end
 	
-	function p2.onComplete()
-		-- upvalues: p1 (ref), animationStateModule (copy)
-		local duration = p1.props.duration
+	function p1.onComplete() --[[ Line: 134 ]]
+		-- upvalues: p1 (copy), AnimationStateModule (upval)
+		local Duration: number = p1.props.duration
 		
-		if p1.state.currentState == animationStateModule.Appearing and duration and duration <= 0 then
+		if p1.state.currentState == AnimationStateModule.Appearing and Duration and Duration <= 0 then
 			p1.stateTable.events.AutoDismiss()
 			
 			return
+		else
+			p1.stateTable.events.AnimationComplete()
 		end
-		p1.stateTable.events.AnimationComplete()
 	end
 	
-	function p2.onDisappeared()
-		-- upvalues: p1 (ref)
+	function p1.onDisappeared() --[[ Line: 144 ]]
+		-- upvalues: p1 (copy)
 		if p1.state.context.activated then
 			if p1.currentToastContent.onActivated then
 				p1.currentToastContent.onActivated()
@@ -102,9 +101,9 @@ function toast.init(p1)
 		end
 	end
 	
-	function p2.onTouchSwipe(_, p2)
-		-- upvalues: p1 (ref)
-		if p2 == Enum.SwipeDirection.Up then
+	function p1:onTouchSwipe(SwipeDirection) --[[ Line: 156 ]]
+		-- upvalues: p1 (copy)
+		if SwipeDirection == Enum.SwipeDirection.Up then
 			p1.stateTable.events.ForceDismiss()
 			
 			if p1.currentToastContent.onTouchSwipeUp then
@@ -113,22 +112,22 @@ function toast.init(p1)
 		end
 	end
 	
-	function p2.renderInteractiveToast(p2)
-		-- upvalues: roactModule (copy), interactiveToastModule (copy)
-		return roactModule.createElement(interactiveToastModule, p2)
+	function p1.renderInteractiveToast(p2) --[[ Line: 165 ]]
+		-- upvalues: RoactModule (upval), InteractiveToastModule (upval)
+		return RoactModule.createElement(InteractiveToastModule, p2)
 	end
 	
-	function p2.renderInformativeToast(p2)
-		-- upvalues: roactModule (copy), informativeToastModule (copy)
-		return roactModule.createElement(informativeToastModule, p2)
+	function p1.renderInformativeToast(p2) --[[ Line: 169 ]]
+		-- upvalues: RoactModule (upval), InformativeToastModule (upval)
+		return RoactModule.createElement(InformativeToastModule, p2)
 	end
 	
-	function p2.setContext(_, _, p2)
+	function p1:setContext(_, p2) --[[ Line: 173 ]]
 		return p2
 	end
 	
-	function p2.updateToastContent()
-		-- upvalues: p1 (ref)
+	function p1.updateToastContent() --[[ Line: 177 ]]
+		-- upvalues: p1 (copy)
 		if p1.currentToastContent ~= p1.props.toastContent then
 			p1.currentToastContent = p1.props.toastContent
 			
@@ -138,79 +137,79 @@ function toast.init(p1)
 		end
 	end
 	
-	local disappeared = animationStateModule.Disappeared
+	local Disappeared = AnimationStateModule.Disappeared
 	p1.state = {
-		currentState = disappeared,
+		currentState = Disappeared,
 		context = { activated = false }
 	}
-	p1.stateTable = stateTableModule.new(string.format("Animated(%s)", tostring(p1)), disappeared, {}, {
-		[animationStateModule.Appearing] = {
+	p1.stateTable = StateTableModule.new(string.format("Animated(%s)", (tostring(p1))), Disappeared, {}, {
+		[AnimationStateModule.Appearing] = {
 			AnimationComplete = {
-				nextState = animationStateModule.Appeared,
+				nextState = AnimationStateModule.Appeared,
 				action = p1.onAppeared
 			},
 			AutoDismiss = {
-				nextState = animationStateModule.Disappearing,
+				nextState = AnimationStateModule.Disappearing,
 				action = p1.onAppeared
 			},
-			ContentChanged = { nextState = animationStateModule.Disappearing },
-			ForceDismiss = { nextState = animationStateModule.Disappearing }
+			ContentChanged = { nextState = AnimationStateModule.Disappearing },
+			ForceDismiss = { nextState = AnimationStateModule.Disappearing }
 		},
-		[animationStateModule.Appeared] = {
+		[AnimationStateModule.Appeared] = {
 			Activated = {
-				nextState = animationStateModule.Disappearing,
+				nextState = AnimationStateModule.Disappearing,
 				action = p1.setContext
 			},
-			AutoDismiss = { nextState = animationStateModule.Disappearing },
-			ContentChanged = { nextState = animationStateModule.Disappearing },
-			ForceDismiss = { nextState = animationStateModule.Disappearing }
+			AutoDismiss = { nextState = AnimationStateModule.Disappearing },
+			ContentChanged = { nextState = AnimationStateModule.Disappearing },
+			ForceDismiss = { nextState = AnimationStateModule.Disappearing }
 		},
-		[animationStateModule.Disappearing] = {
+		[AnimationStateModule.Disappearing] = {
 			AnimationComplete = {
-				nextState = animationStateModule.Disappeared,
+				nextState = AnimationStateModule.Disappeared,
 				action = p1.onDisappeared
 			}
 		},
-		[animationStateModule.Disappeared] = {
+		[AnimationStateModule.Disappeared] = {
 			ContentChanged = {
-				nextState = animationStateModule.Appearing,
+				nextState = AnimationStateModule.Appearing,
 				action = p1.updateToastContent
 			},
 			ForceAppear = {
-				nextState = animationStateModule.Appearing,
+				nextState = AnimationStateModule.Appearing,
 				action = p1.setContext
 			}
 		}
 	})
-	p1.stateTable:onStateChange(function(p2, p3, p4)
-		-- upvalues: p1 (ref)
-		if p1.isMounted and p2 ~= p3 then
-			p1:setState({ currentState = p3, context = p4 })
+	p1.stateTable:onStateChange(function(CurrentState, CurrentState1, Context) --[[ Line: 220 ]]
+		-- upvalues: p1 (copy)
+		if p1.isMounted and CurrentState ~= CurrentState1 then
+			p1:setState({ currentState = CurrentState1, context = Context })
 		end
 	end)
 end
 
-function toast.isShowing(p1)
-	-- upvalues: animationStateModule (ref)
-	return if p1.state.currentState ~= animationStateModule.Appearing then p1.state.currentState == animationStateModule.Appeared else true
+function Toast.isShowing(p1): boolean --[[ Line: 230 ]]
+	-- upvalues: AnimationStateModule (copy)
+	return p1.state.currentState == AnimationStateModule.Appearing or p1.state.currentState == AnimationStateModule.Appeared
 end
 
-function toast.render(p1)
-	-- upvalues: roactModule (ref), slidingContainerModule (ref), slidingDirectionModule (ref), toastContainerModule (ref)
-	local onActivated = p1.currentToastContent.onActivated
-	local swipeUpDismiss = p1.currentToastContent.swipeUpDismiss
+function Toast.render(p1) --[[ Line: 234 ]]
+	-- upvalues: RoactModule (copy), SlidingContainerModule (copy), SlidingDirectionModule (copy), ToastContainerModule (copy)
+	local OnActivated = p1.currentToastContent.onActivated
+	local SwipeUpDismiss = p1.currentToastContent.swipeUpDismiss
 	
-	if swipeUpDismiss == nil then
-		swipeUpDismiss = true
+	if SwipeUpDismiss == nil then
+		SwipeUpDismiss = true
 	end
-	return roactModule.createElement(slidingContainerModule, {
+	return RoactModule.createElement(SlidingContainerModule, {
 		show = p1:isShowing(),
 		layoutOrder = p1.props.layoutOrder,
 		onComplete = p1.onComplete,
-		slidingDirection = slidingDirectionModule.Down,
+		slidingDirection = SlidingDirectionModule.Down,
 		springOptions = p1.props.springOptions
 	}, {
-		ToastContainer = roactModule.createElement(toastContainerModule, {
+		ToastContainer = RoactModule.createElement(ToastContainerModule, {
 			anchorPoint = p1.props.anchorPoint,
 			buttonText = p1.currentToastContent.buttonText,
 			position = p1.props.position,
@@ -219,9 +218,9 @@ function toast.render(p1)
 			iconImage = p1.currentToastContent.iconImage,
 			iconSize = p1.currentToastContent.iconSize,
 			iconChildren = p1.currentToastContent.iconChildren,
-			onActivated = onActivated and p1.onActivated,
-			onTouchSwipe = swipeUpDismiss and p1.onTouchSwipe,
-			renderToast = if onActivated then p1.renderInteractiveToast else p1.renderInformativeToast,
+			onActivated = OnActivated and p1.onActivated,
+			onTouchSwipe = SwipeUpDismiss and p1.onTouchSwipe,
+			renderToast = OnActivated and p1.renderInteractiveToast or p1.renderInformativeToast,
 			toastSubtitle = p1.currentToastContent.toastSubtitle,
 			toastTitle = p1.currentToastContent.toastTitle,
 			buttonType = p1.currentToastContent.buttonType
@@ -229,7 +228,7 @@ function toast.render(p1)
 	})
 end
 
-function toast.didMount(p1)
+function Toast.didMount(p1) --[[ Line: 267 ]]
 	p1.isMounted = true
 	
 	if p1.props.show then
@@ -237,12 +236,12 @@ function toast.didMount(p1)
 	end
 end
 
-function toast.willUnmount(p1)
+function Toast.willUnmount(p1) --[[ Line: 276 ]]
 	p1.isMounted = false
 end
 
-function toast.didUpdate(p1, p2, p3)
-	-- upvalues: toastContentEqual (ref), animationStateModule (ref)
+function Toast.didUpdate(p1, p2, p3) --[[ Line: 280 ]]
+	-- upvalues: toastContentEqual (copy), AnimationStateModule (copy)
 	if p2.show ~= p1.props.show then
 		if p1.props.show then
 			p1.stateTable.events.ForceAppear({ activated = false })
@@ -253,9 +252,9 @@ function toast.didUpdate(p1, p2, p3)
 	if not toastContentEqual(p2.toastContent, p1.props.toastContent) then
 		p1.stateTable.events.ContentChanged({ activated = false })
 	end
-	if p3.currentState ~= p1.state.currentState and p1.state.currentState == animationStateModule.Disappeared then
+	if p3.currentState ~= p1.state.currentState and p1.state.currentState == AnimationStateModule.Disappeared then
 		p1.updateToastContent()
 	end
 end
 
-return toast
+return Toast

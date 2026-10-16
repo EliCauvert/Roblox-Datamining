@@ -1,20 +1,20 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local cryoModule = require(parent.Cryo)
-local roactModule = require(parent.Roact)
-local tModule = require(parent.t)
-local getPageMarginModule = require(script.Parent.getPageMargin)
-local pageMargin = roactModule.Component:extend("PageMargin")
-pageMargin.validateProps = tModule.interface({
-	anchorPoint = tModule.optional(tModule.Vector2),
-	position = tModule.optional(tModule.UDim2),
-	backgroundColor3 = tModule.optional(tModule.Color3),
-	backgroundTransparency = tModule.optional(tModule.number),
-	layoutOrder = tModule.optional(tModule.number),
-	size = tModule.optional(tModule.UDim2),
-	useAutomaticSizing = tModule.optional(tModule.boolean),
-	zIndex = tModule.optional(tModule.number)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local CryoModule = require(Parent.Cryo)
+local RoactModule = require(Parent.Roact)
+local TModule = require(Parent.t)
+local GetPageMarginModule = require(script.Parent.getPageMargin)
+local PageMargin = RoactModule.Component:extend("PageMargin")
+PageMargin.validateProps = TModule.interface({
+	anchorPoint = TModule.optional(TModule.Vector2),
+	position = TModule.optional(TModule.UDim2),
+	backgroundColor3 = TModule.optional(TModule.Color3),
+	backgroundTransparency = TModule.optional(TModule.number),
+	layoutOrder = TModule.optional(TModule.number),
+	size = TModule.optional(TModule.UDim2),
+	useAutomaticSizing = TModule.optional(TModule.boolean),
+	zIndex = TModule.optional(TModule.number)
 })
-pageMargin.defaultProps = {
+PageMargin.defaultProps = {
 	backgroundTransparency = 0,
 	layoutOrder = 0,
 	useAutomaticSizing = false,
@@ -23,48 +23,48 @@ pageMargin.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function pageMargin.init(p1)
-	-- upvalues: roactModule (ref), getPageMarginModule (ref)
+function PageMargin.init(p1) --[[ Line: 41 ]]
+	-- upvalues: RoactModule (copy), GetPageMarginModule (copy)
 	p1.state = {}
-	p1.ref = roactModule.createRef()
+	p1.ref = RoactModule.createRef()
 	
-	function p0.onResize(p2)
-		-- upvalues: p1 (ref), getPageMarginModule (copy)
+	function p1.onResize(Frame) --[[ Line: 44 ]]
+		-- upvalues: p1 (copy), GetPageMarginModule (upval)
 		if p1.mounted then
-			local x = p2.AbsoluteSize.X
-			p1:setState(function(p3)
-				-- upvalues: getPageMarginModule (copy), x (ref)
-				local var1 = getPageMarginModule(x)
+			local X = Frame.AbsoluteSize.X
+			p1:setState(function(p2) --[[ Line: 47 ]]
+				-- upvalues: GetPageMarginModule (upval), X (copy)
+				local PageMarginModule = GetPageMarginModule(X)
 				
-				return if p3.margin == var1 then nil else { margin = var1 }
+				return if p2.margin == PageMarginModule then nil else { margin = PageMarginModule }
 			end)
 		end
 	end
 end
 
-function pageMargin.render(p1)
-	-- upvalues: roactModule (ref), cryoModule (ref)
-	return roactModule.createElement("Frame", {
+function PageMargin.render(p1) --[[ Line: 61 ]]
+	-- upvalues: RoactModule (copy), CryoModule (copy)
+	return RoactModule.createElement("Frame", {
 		AnchorPoint = p1.props.anchorPoint,
-		AutomaticSize = if p1.props.useAutomaticSizing then Enum.AutomaticSize.Y else Enum.AutomaticSize.None,
+		AutomaticSize = p1.props.useAutomaticSizing and Enum.AutomaticSize.Y or Enum.AutomaticSize.None,
 		BackgroundColor3 = p1.props.backgroundColor3,
 		BackgroundTransparency = p1.props.backgroundTransparency,
 		BorderSizePixel = 0,
 		Position = p1.props.position,
 		Size = p1.props.size,
-		[roactModule.Change.AbsoluteSize] = p1.onResize,
-		[roactModule.Ref] = p1.ref,
+		[RoactModule.Change.AbsoluteSize] = p1.onResize,
+		[RoactModule.Ref] = p1.ref,
 		LayoutOrder = p1.props.layoutOrder,
 		ZIndex = p1.props.zIndex
-	}, cryoModule.Dictionary.join(p1.props[roactModule.Children], {
-		padding = roactModule.createElement("UIPadding", {
+	}, CryoModule.Dictionary.join(p1.props[RoactModule.Children], {
+		padding = RoactModule.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, p1.state.margin),
 			PaddingRight = UDim.new(0, p1.state.margin)
 		})
 	}))
 end
 
-function pageMargin.didMount(p1)
+function PageMargin.didMount(p1) --[[ Line: 86 ]]
 	p1.mounted = true
 	
 	if p1.ref.current then
@@ -72,8 +72,8 @@ function pageMargin.didMount(p1)
 	end
 end
 
-function pageMargin.willUnmount(p1)
+function PageMargin.willUnmount(p1) --[[ Line: 93 ]]
 	p1.mounted = false
 end
 
-return pageMargin
+return PageMargin

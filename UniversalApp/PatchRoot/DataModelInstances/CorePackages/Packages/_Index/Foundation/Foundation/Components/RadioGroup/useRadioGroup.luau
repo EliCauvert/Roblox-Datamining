@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
-local radioGroupContextModule = require(script.Parent.RadioGroupContext)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+local RadioGroupContextModule = require(script.Parent.RadioGroupContext)
 
-return function()
-	-- upvalues: reactModule (ref), radioGroupContextModule (ref)
-	return reactModule.useContext(radioGroupContextModule)
+return function() --[[ Line: 15 ]]
+	-- upvalues: ReactModule (copy), RadioGroupContextModule (copy)
+	return ReactModule.useContext(RadioGroupContextModule)
 end

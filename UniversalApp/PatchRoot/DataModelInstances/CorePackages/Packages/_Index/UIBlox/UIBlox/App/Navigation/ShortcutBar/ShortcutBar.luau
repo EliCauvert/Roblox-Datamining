@@ -1,23 +1,23 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local reactModule = require(parent_2.React)
-local reactOtterModule = require(parent_2.ReactOtter)
-local foundationModule = require(parent_2.Foundation)
-local reactUtilsModule = require(parent_2.ReactUtils)
-local useDelayedActionHandler = reactUtilsModule.useDelayedActionHandler
-local useEventConnection = reactUtilsModule.useEventConnection
-local object = require(parent_2.LuauPolyfill).Object
-local useStyleModule = require(parent_1.Core.Style.useStyle)
+﻿local UserInputService = game:GetService("UserInputService")
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local UIBloxConfigModule = require(Parent1.UIBloxConfig)
+local ReactModule = require(Parent2.React)
+local ReactOtterModule = require(Parent2.ReactOtter)
+local FoundationModule = require(Parent2.Foundation)
+local ReactUtilsModule = require(Parent2.ReactUtils)
+local UseDelayedActionHandlerFunction = ReactUtilsModule.useDelayedActionHandler
+local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
+local Object = require(Parent2.LuauPolyfill).Object
+local UseStyleModule = require(Parent1.Core.Style.useStyle)
 local _ = require(script.Parent.Types)
-local shortcutModule = require(script.Parent.Shortcut)
-local useInputTypeModule = require(parent_1.Utility.useInputType)
-local utilitiesModule = require(parent.Utilities)
-local _ = require(parent_1.Enums.InputType)
-local t = { dampingRatio = 2, frequency = 3 }
-local t_1 = {
+local ShortcutModule = require(script.Parent.Shortcut)
+local UseInputTypeModule = require(Parent1.Utility.useInputType)
+local UtilitiesModule = require(Parent.Utilities)
+local _ = require(Parent1.Enums.InputType)
+local config = { dampingRatio = 2, frequency = 3 }
+local config1 = {
 	spacingTop = 12,
 	spacingTrailing = 30,
 	spacingBottom = 12,
@@ -28,91 +28,92 @@ local t_1 = {
 	items = {}
 }
 
-return function(p1)
-	-- upvalues: object (ref), t_1 (ref), useStyleModule (ref), foundationModule (ref), UIBloxConfigModule (ref), reactModule (ref), useInputTypeModule (ref), reactOtterModule (ref), useDelayedActionHandler (ref), t (ref), utilitiesModule (ref), useEventConnection (ref), userInputService (ref), shortcutModule (ref)
-	local var1 = object.assign({}, t_1, p1)
-	local var2 = useStyleModule()
-	local var3 = foundationModule.Hooks.useTokens()
-	local spacingTop = nil
-	local spacingTrailing = nil
-	local spacingBottom = nil
-	local spacingLeading = nil
-	local itemsGap = nil
-	local itemIconLabelGap = nil
-	local var4 = nil
+return function(p1) --[[ Line: 71 | Named "ShortcutBar" ]]
+	-- upvalues: Object (copy), config1 (copy), UseStyleModule (copy), FoundationModule (copy), UIBloxConfigModule (copy), ReactModule (copy), UseInputTypeModule (copy), ReactOtterModule (copy), UseDelayedActionHandlerFunction (copy), config (copy), UtilitiesModule (copy), UseEventConnectionFunction (copy), UserInputService (copy), ShortcutModule (copy)
+	local AssignResult = Object.assign({}, config1, p1)
+	local UseStyleModuleResult = UseStyleModule()
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local SpacingTop = nil
+	local SpacingTrailing = nil
+	local SpacingBottom = nil
+	local SpacingLeading = nil
+	local ItemsGap = nil
+	local ItemIconLabelGap = nil
+	local ActionTextSpacingLeading = nil
 	
 	if UIBloxConfigModule.useTokenizedShortcutBar then
-		spacingTop = p1.spacingTop or var3.Padding.Small
-		spacingTrailing = p1.spacingTrailing or var3.Padding.XLarge
-		spacingBottom = p1.spacingBottom or var3.Padding.Small
-		spacingLeading = p1.spacingLeading or var3.Padding.Medium
-		itemsGap = p1.itemsGap or var3.Gap.Large
-		itemIconLabelGap = p1.itemIconLabelGap or var3.Gap.XSmall
-		var4 = p1.actionTextSpacingLeading or var3.Padding.Small
+		SpacingTop = p1.spacingTop or UseTokensResult.Padding.Small
+		SpacingTrailing = p1.spacingTrailing or UseTokensResult.Padding.XLarge
+		SpacingBottom = p1.spacingBottom or UseTokensResult.Padding.Small
+		SpacingLeading = p1.spacingLeading or UseTokensResult.Padding.Medium
+		ItemsGap = p1.itemsGap or UseTokensResult.Gap.Large
+		ItemIconLabelGap = p1.itemIconLabelGap or UseTokensResult.Gap.XSmall
+		ActionTextSpacingLeading = p1.actionTextSpacingLeading or UseTokensResult.Padding.Small
 	end
-	local t_2 = {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, spacingTop or var1.spacingTop),
-			PaddingRight = UDim.new(0, spacingTrailing or var1.spacingTrailing),
-			PaddingBottom = UDim.new(0, spacingBottom or var1.spacingBottom),
-			PaddingLeft = UDim.new(0, spacingLeading or var1.spacingLeading)
+	local config2 = {
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, SpacingTop or AssignResult.spacingTop),
+			PaddingRight = UDim.new(0, SpacingTrailing or AssignResult.spacingTrailing),
+			PaddingBottom = UDim.new(0, SpacingBottom or AssignResult.spacingBottom),
+			PaddingLeft = UDim.new(0, SpacingLeading or AssignResult.spacingLeading)
 		}),
-		ListLayout = reactModule.createElement("UIListLayout", {
+		ListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, itemsGap or var1.itemsGap)
+			Padding = UDim.new(0, ItemsGap or AssignResult.itemsGap)
 		})
 	}
-	local var5 = useInputTypeModule()
-	local var6, var7 = reactOtterModule.useAnimatedBinding(0)
-	local var8 = useDelayedActionHandler(if var1.transitionDelaySeconds then var1.transitionDelaySeconds else 0, 0.1, function()
-		-- upvalues: var7 (ref), reactOtterModule (copy), t (copy)
-		var7(reactOtterModule.spring(0, t))
+	local UseInputTypeModuleResult = UseInputTypeModule()
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local UseDelayedActionHandlerResult = UseDelayedActionHandlerFunction(if AssignResult.transitionDelaySeconds then AssignResult.transitionDelaySeconds else 0, 0.1, function() --[[ Line: 114 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(0, config))
 	end)
 	
-	local function onInputChanged()
-		-- upvalues: var1 (ref), var7 (ref), reactOtterModule (copy), t (copy), var8 (ref)
-		if var1.transitionDelaySeconds then
-			var7(reactOtterModule.spring(1, t))
-			var8()
+	local function onInputChanged() --[[ Line: 119 ]]
+		-- upvalues: AssignResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), UseDelayedActionHandlerResult (copy)
+		if AssignResult.transitionDelaySeconds then
+			UseAnimatedBindingResult2(ReactOtterModule.spring(1, config))
+			UseDelayedActionHandlerResult()
 		end
 	end
 	
-	local var9, var10 = reactModule.useState(utilitiesModule.filterItems(var1.items, var5))
-	useEventConnection(userInputService.InputChanged, onInputChanged)
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), utilitiesModule (copy), var1 (ref), var5 (ref)
-		var10(utilitiesModule.filterItems(var1.items, var5))
-	end, { var5, var1.items })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UtilitiesModule.filterItems(AssignResult.items, UseInputTypeModuleResult))
+	UseEventConnectionFunction(UserInputService.InputChanged, onInputChanged)
+	ReactModule.useEffect(function() --[[ Line: 129 ]]
+		-- upvalues: UseStateResult2 (copy), UtilitiesModule (upval), AssignResult (copy), UseInputTypeModuleResult (copy)
+		UseStateResult2(UtilitiesModule.filterItems(AssignResult.items, UseInputTypeModuleResult))
+	end, { UseInputTypeModuleResult, AssignResult.items })
 	
-	for i, v in ipairs(var9) do
-		t_2["Item" .. tostring(i)] = reactModule.createElement(shortcutModule, {
-			index = i,
-			iconLabelGap = itemIconLabelGap or var1.itemIconLabelGap,
-			actionTextSpacingLeading = var4 or var1.actionTextSpacingLeading,
-			publicProps = v
+	for Index, PublicProps in ipairs(UseStateResult) do
+		config2["Item" .. tostring(Index)] = ReactModule.createElement(ShortcutModule, {
+			index = Index,
+			iconLabelGap = ItemIconLabelGap or AssignResult.itemIconLabelGap,
+			actionTextSpacingLeading = ActionTextSpacingLeading or AssignResult.actionTextSpacingLeading,
+			publicProps = PublicProps
 		})
 	end
-	if #var9 > 0 then
-		local var11 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var2.Tokens.Color.OverMedia.OverMedia_0 else var2.Tokens.Semantic.Color.BackgroundUi.Contrast
+	if #UseStateResult > 0 then
+		local OverMedia0 = UseStyleModuleResult.Tokens.Color.OverMedia.OverMedia_0
 		
-		return reactModule.createElement("CanvasGroup", {
+		return ReactModule.createElement("CanvasGroup", {
 			BackgroundTransparency = 1,
-			Position = var1.position,
-			AnchorPoint = var1.anchorPoint,
-			GroupTransparency = if var1.transitionDelaySeconds then var6 else 0,
+			Position = AssignResult.position,
+			AnchorPoint = AssignResult.anchorPoint,
+			GroupTransparency = if AssignResult.transitionDelaySeconds then UseAnimatedBindingResult else 0,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
-			ShortcutBarComponent = reactModule.createElement("Frame", {
+			ShortcutBarComponent = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.fromOffset(0, 0),
-				BackgroundColor3 = var11.Color3,
-				BackgroundTransparency = var11.Transparency,
+				BackgroundColor3 = OverMedia0.Color3,
+				BackgroundTransparency = OverMedia0.Transparency,
 				AutomaticSize = Enum.AutomaticSize.XY
-			}, t_2)
+			}, config2)
 		})
+	else
+		return nil
 	end
-	return nil
 end

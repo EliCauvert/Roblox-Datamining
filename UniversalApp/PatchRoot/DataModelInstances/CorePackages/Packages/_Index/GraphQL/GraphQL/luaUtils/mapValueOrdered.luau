@@ -1,14 +1,14 @@
-﻿local map = require(script.Parent.Parent.Parent.LuauPolyfill).Map
+﻿local Map = require(script.Parent.Parent.Parent.LuauPolyfill).Map
 
 return {
-	mapValueOrdered = function(p1, p2)
-		-- upvalues: map (ref)
-		local var1 = map.new()
+	mapValueOrdered = function(List, Callback) --[[ Line: 17 ]]
+		-- upvalues: Map (copy)
+		local NewMap = Map.new()
 		
-		for i, v in p1 do
-			local var2 = v[1]
-			var1:set(var2, p2(v[2], var2))
+		for _, value in List do
+			local v1 = value[1]
+			NewMap:set(v1, Callback(value[2], v1))
 		end
-		return var1
+		return NewMap
 	end
 }

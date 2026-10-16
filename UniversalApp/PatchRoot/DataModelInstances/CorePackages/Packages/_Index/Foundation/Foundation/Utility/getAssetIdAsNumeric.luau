@@ -1,8 +1,9 @@
-﻿return function(value)
-	if typeof(value) == "number" then
-		return value
+﻿return function(p1) --[[ Line: 3 | Named "getAssetIdAsNumeric" ]]
+	if typeof(p1) == "number" then
+		return p1
+	else
+		local Number: number? = tonumber(p1:match("(%d+)$"))
+		
+		return if Number then Number else -1
 	end
-	local var1 = tonumber(value:match("(%d+)$"))
-	
-	return var1 or -1
 end

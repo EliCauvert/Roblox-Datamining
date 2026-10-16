@@ -1,20 +1,20 @@
-﻿local reduceModule = require(script.Parent.reduce)
+﻿local ReduceModule = require(script.Parent.reduce)
 
-local var1 = function(p1, p2)
+local function v1(p1, p2): boolean --[[ Line: 8 ]]
 	return p1 < p2
 end
 
-return function(a, b, p1)
-	-- upvalues: var1 (ref), reduceModule (ref)
-	p1 = p1 or var1
+return function(p1, Callback, p2) --[[ Line: 48 | Named "min" ]]
+	-- upvalues: v1 (copy), ReduceModule (copy)
+	local Callback1 = p2 or v1
 	
-	return if b then reduceModule(a, function(p2, p3, p4)
-		-- upvalues: b (ref), p1 (ref)
-		local var2 = b(p3, p4)
+	return if Callback then ReduceModule(p1, function(p3, Original, p4) --[[ Line: 52 ]]
+		-- upvalues: Callback (copy), Callback1 (copy)
+		local CallbackResult = Callback(Original, p4)
 		
-		return if p2 then if p1(var2, p2.value) then { value = var2, original = p3 } else p2 else { value = var2, original = p3 }
-	end, nil).original else reduceModule(a, function(p2, p3)
-		-- upvalues: p1 (ref)
-		return if p2 then if p1(p3, p2) then p3 else p2 else p3
+		return if p3 then if Callback1(CallbackResult, p3.value) then { value = CallbackResult, original = Original } else p3 else { value = CallbackResult, original = Original }
+	end, nil).original else ReduceModule(p1, function(p3, p4) --[[ Line: 62 ]]
+		-- upvalues: Callback1 (copy)
+		return if p3 then if Callback1(p4, p3) then p4 else p3 else p4
 	end, nil)
 end

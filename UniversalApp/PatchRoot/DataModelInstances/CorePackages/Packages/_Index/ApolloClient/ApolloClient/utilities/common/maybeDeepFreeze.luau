@@ -1,24 +1,24 @@
-﻿local t = {}
-local luauPolyfillModule = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
-local object = luauPolyfillModule.Object
-local set = luauPolyfillModule.Set
-local array = luauPolyfillModule.Array
+﻿local MaybeDeepFreezeModule = {}
+local LuauPolyfillModule = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
+local Object = LuauPolyfillModule.Object
+local Set = LuauPolyfillModule.Set
+local Array = LuauPolyfillModule.Array
 require(script.Parent.Parent.globals)
-local isNonNullObject = require(script.Parent.objects).isNonNullObject
+local IsNonNullObjectFunction = require(script.Parent.objects).isNonNullObject
 
-local function deepFreeze(p1)
-	-- upvalues: set (ref), isNonNullObject (ref), object (ref), array (ref)
-	local var1 = set.new({ p1 })
+local function deepFreeze(p1) --[[ Line: 22 ]]
+	-- upvalues: Set (copy), IsNonNullObjectFunction (copy), Object (copy), Array (copy)
+	local NewSet = Set.new({ p1 })
 	
-	for i, v in var1 do
-		if isNonNullObject(v) then
-			if not table.isfrozen(v) then
-				object.freeze(v)
+	for _, value in NewSet do
+		if IsNonNullObjectFunction(value) then
+			if not table.isfrozen(value) then
+				Object.freeze(value)
 			end
-			array.forEach(object.keys(v), function(p2)
-				-- upvalues: isNonNullObject (copy), v (ref), var1 (ref)
-				if isNonNullObject(v[p2]) then
-					var1:add(v[p2])
+			Array.forEach(Object.keys(value), function(p2) --[[ Line: 30 ]]
+				-- upvalues: IsNonNullObjectFunction (upval), value (copy), NewSet (copy)
+				if IsNonNullObjectFunction(value[p2]) then
+					NewSet:add(value[p2])
 				end
 			end)
 		end
@@ -26,12 +26,12 @@ local function deepFreeze(p1)
 	return p1
 end
 
-function t.maybeDeepFreeze(p2)
-	-- upvalues: deepFreeze (ref)
+function MaybeDeepFreezeModule.maybeDeepFreeze(p2) --[[ Line: 41 ]]
+	-- upvalues: deepFreeze (copy)
 	if _G.__DEV__ then
 		deepFreeze(p2)
 	end
 	return p2
 end
 
-return t
+return MaybeDeepFreezeModule

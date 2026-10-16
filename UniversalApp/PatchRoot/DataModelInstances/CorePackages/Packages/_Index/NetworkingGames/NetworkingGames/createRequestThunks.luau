@@ -1,15 +1,15 @@
-﻿local networkRequests = script.Parent.networkRequests
-local createGetExperiencesPlayabilityStatusModule = require(networkRequests.createGetExperiencesPlayabilityStatus)
-local createGetExperiencesProductInfoModule = require(networkRequests.createGetExperiencesProductInfo)
-local createGetExperiencesDetailsModule = require(networkRequests.createGetExperiencesDetails)
-local createGetExperienceMediaModule = require(networkRequests.createGetExperienceMedia)
+﻿local NetworkRequests = script.Parent.networkRequests
+local CreateGetExperiencesPlayabilityStatusModule = require(NetworkRequests.createGetExperiencesPlayabilityStatus)
+local CreateGetExperiencesProductInfoModule = require(NetworkRequests.createGetExperiencesProductInfo)
+local CreateGetExperiencesDetailsModule = require(NetworkRequests.createGetExperiencesDetails)
+local CreateGetExperienceMediaModule = require(NetworkRequests.createGetExperienceMedia)
 
-return function(p1)
-	-- upvalues: createGetExperiencesPlayabilityStatusModule (ref), createGetExperiencesProductInfoModule (ref), createGetExperiencesDetailsModule (ref), createGetExperienceMediaModule (ref)
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: CreateGetExperiencesPlayabilityStatusModule (copy), CreateGetExperiencesProductInfoModule (copy), CreateGetExperiencesDetailsModule (copy), CreateGetExperienceMediaModule (copy)
 	return {
-		GetExperiencesPlayabilityStatus = createGetExperiencesPlayabilityStatusModule(p1),
-		GetExperiencesProductInfo = createGetExperiencesProductInfoModule(p1),
-		GetExperiencesDetails = createGetExperiencesDetailsModule(p1),
-		GetExperienceMedia = createGetExperienceMediaModule(p1)
+		GetExperiencesPlayabilityStatus = CreateGetExperiencesPlayabilityStatusModule(p1),
+		GetExperiencesProductInfo = CreateGetExperiencesProductInfoModule(p1),
+		GetExperiencesDetails = CreateGetExperiencesDetailsModule(p1),
+		GetExperienceMedia = CreateGetExperienceMediaModule(p1)
 	}
 end

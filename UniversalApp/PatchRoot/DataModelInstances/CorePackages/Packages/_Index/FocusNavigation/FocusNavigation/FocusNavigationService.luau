@@ -1,93 +1,103 @@
-﻿local parent = script.Parent.Parent
-local eventPropagationModule = require(parent.EventPropagation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigationRefocusSuppression = require(parent.SafeFlags).createGetFFlag("FocusNavigationRefocusSuppression")
-local createSignal = focusNavigationUtilsModule.createSignal
-local shallowEqual = focusNavigationUtilsModule.shallowEqual
-local getAncestors = focusNavigationUtilsModule.getAncestors
-local mockableWarn = focusNavigationUtilsModule.mockableWarn
-local isValidFocusTargetModule = require(script.Parent.isValidFocusTarget)
+﻿local Parent = script.Parent.Parent
+local EventPropagationModule = require(Parent.EventPropagation)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigationRefocusSuppression = require(Parent.SafeFlags).createGetFFlag("FocusNavigationRefocusSuppression")
+local CreateSignalFunction = FocusNavigationUtilsModule.createSignal
+local ShallowEqualFunction = FocusNavigationUtilsModule.shallowEqual
+local GetAncestorsFunction = FocusNavigationUtilsModule.getAncestors
+local MockableWarnFunction = FocusNavigationUtilsModule.mockableWarn
+local IsValidFocusTargetModule = require(script.Parent.isValidFocusTarget)
 local _ = require(script.Parent.types)
-local t = {}
-t.__index = t
+local FocusNavigationService = {}
+FocusNavigationService.__index = FocusNavigationService
 
-function t.new(p1, p2)
-	-- upvalues: createSignal (ref), eventPropagationModule (ref), t (ref)
-	local var1, var2 = createSignal({})
-	local var3, var4 = createSignal(p1.getSelection())
-	local tbl = setmetatable({
+function FocusNavigationService.new(_engineInterface, p1) --[[ Line: 116 ]]
+	-- upvalues: CreateSignalFunction (copy), EventPropagationModule (copy), FocusNavigationService (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
+	local Signal1, Signal2_1 = CreateSignalFunction(_engineInterface.getSelection())
+	local Signal3, Signal2_2 = CreateSignalFunction(nil)
+	local self = setmetatable({
 		_silentFocusTarget = nil,
 		_silentBlurTarget = nil,
-		_eventPropagationService = eventPropagationModule.new(),
-		_engineInterface = p1,
+		_eventPropagationService = EventPropagationModule.new(),
+		_engineInterface = _engineInterface,
 		_eventMapByInstance = setmetatable({}, { __mode = "k" }),
 		_focusBehaviorByInstance = setmetatable({}, { __mode = "k" }),
 		_engineEventConnections = {},
-		_shouldSuppressContainerRefocus = if p2 then p2.shouldSuppressContainerRefocus else nil,
-		_fireActiveEventMapSignal = var2,
-		_fireFocusedGuiObjectSignal = var4,
-		activeEventMap = var1,
-		focusedGuiObject = var3
-	}, t)
-	tbl:_connectToInputEvents()
+		_shouldSuppressContainerRefocus = if p1 then p1.shouldSuppressContainerRefocus else nil,
+		_fireActiveEventMapSignal = Signal2,
+		_fireFocusedGuiObjectSignal = Signal2_1,
+		_fireEventDispatchedSignal = Signal2_2,
+		activeEventMap = Signal,
+		focusedGuiObject = Signal1,
+		eventDispatched = Signal3
+	}, FocusNavigationService)
+	self:_connectToInputEvents()
 	
-	return tbl
+	return self
 end
 
-function t:_fireInputEvent(p1, p2, p3)
-	local keyCode = self.activeEventMap:getValue()[p2.KeyCode]
+function FocusNavigationService:_fireInputEvent(Target, Input, WasProcessed) --[[ Line: 148 ]]
+	local Entry = self.activeEventMap:getValue()[Input.KeyCode]
 	
-	if keyCode then
-		self._eventPropagationService:propagateEvent(p1, keyCode, {
-			Delta = p2.Delta,
-			KeyCode = p2.KeyCode,
-			Position = p2.Position,
-			UserInputState = p2.UserInputState,
-			UserInputType = p2.UserInputType,
-			wasProcessed = p3
-		}, { synthetic = false, silent = false })
+	if Entry then
+		local EventData = {
+			Delta = Input.Delta,
+			KeyCode = Input.KeyCode,
+			Position = Input.Position,
+			UserInputState = Input.UserInputState,
+			UserInputType = Input.UserInputType,
+			wasProcessed = WasProcessed
+		}
+		self._eventPropagationService:propagateEvent(Target, Entry, EventData, { synthetic = false, silent = false })
+		self._fireEventDispatchedSignal({
+			synthetic = false,
+			eventName = Entry,
+			target = Target,
+			eventData = EventData
+		})
 	end
 end
 
-function t:_connectToInputEvents()
-	local function forwardInputEvent(p1, p2)
-		-- upvalues: self (ref)
-		local selection = self._engineInterface.getSelection()
+function FocusNavigationService:_connectToInputEvents() --[[ Line: 173 ]]
+	local function forwardInputEvent(Input, GameProcessed) --[[ Line: 175 ]]
+		-- upvalues: self (copy)
+		local Selection = self._engineInterface.getSelection()
 		
-		if selection then
-			self:_fireInputEvent(selection, p1, p2)
+		if Selection then
+			self:_fireInputEvent(Selection, Input, GameProcessed)
 		end
 	end
 	
 	table.insert(self._engineEventConnections, self._engineInterface.InputBegan:Connect(forwardInputEvent))
 	table.insert(self._engineEventConnections, self._engineInterface.InputChanged:Connect(forwardInputEvent))
 	table.insert(self._engineEventConnections, self._engineInterface.InputEnded:Connect(forwardInputEvent))
-	table.insert(self._engineEventConnections, self._engineInterface.SelectionChanged:Connect(function()
-		-- upvalues: self (ref)
-		local value = self.focusedGuiObject:getValue()
-		local selection = self._engineInterface.getSelection()
+	table.insert(self._engineEventConnections, self._engineInterface.SelectionChanged:Connect(function() --[[ Line: 186 | Named "onFocusChanged" ]]
+		-- upvalues: self (copy)
+		local Value = self.focusedGuiObject:getValue()
+		local Selection = self._engineInterface.getSelection()
 		
-		if value then
-			self._eventPropagationService:propagateEvent(value, "blur", nil, {
+		if Value then
+			self._eventPropagationService:propagateEvent(Value, "blur", nil, {
 				synthetic = false,
-				silent = self._silentBlurTarget == value
+				silent = self._silentBlurTarget == Value
 			})
 			self._silentBlurTarget = nil
 		end
-		self._fireFocusedGuiObjectSignal(selection)
+		self._fireFocusedGuiObjectSignal(Selection)
 		
-		if selection then
-			self._eventPropagationService:propagateEvent(selection, "focus", nil, {
+		if Selection then
+			self._eventPropagationService:propagateEvent(Selection, "focus", nil, {
 				synthetic = false,
-				silent = selection == self._silentFocusTarget
+				silent = Selection == self._silentFocusTarget
 			})
 			self._silentFocusTarget = nil
 		end
-		self:_updateActiveEventMap(value)
+		self:_updateActiveEventMap(Value)
 	end))
 end
 
-function t:_cancelHandler(p1, p2)
+function FocusNavigationService:_cancelHandler(p1, p2) --[[ Line: 213 ]]
 	if p2 ~= "blur" and p2 ~= "focus" then
 		self._eventPropagationService:propagateEvent(p1, p2, {
 			KeyCode = Enum.KeyCode.None,
@@ -97,43 +107,43 @@ function t:_cancelHandler(p1, p2)
 	end
 end
 
-function t:_updateActiveEventMap(p1)
-	-- upvalues: getAncestors (ref), shallowEqual (ref)
+function FocusNavigationService:_updateActiveEventMap(SilentBlurTarget) --[[ Line: 226 ]]
+	-- upvalues: GetAncestorsFunction (copy), ShallowEqualFunction (copy)
 	local t = {}
-	local selection = self._engineInterface.getSelection()
+	local Selection = self._engineInterface.getSelection()
 	
-	if selection then
-		local var1 = getAncestors(selection)
-		local t_1 = {}
+	if Selection then
+		local Ancestors = GetAncestorsFunction(Selection)
+		local t1 = {}
 		
-		for i_1 = #var1, 1, -1 do
-			local var2 = var1[i_1]
-			local var3 = self._eventMapByInstance[var2]
+		for i = #Ancestors, 1, -1 do
+			local Ancestor = Ancestors[i]
+			local EventMapByInstanceEntry = self._eventMapByInstance[Ancestor]
 			
-			if var3 then
-				for i, v in var3 do
-					t_1[i] = v
-					t[i] = nil
+			if EventMapByInstanceEntry then
+				for i1, value in EventMapByInstanceEntry do
+					t1[i1] = value
+					t[i1] = nil
 				end
 			end
-			local var4 = self._eventPropagationService:getRegisteredEventHandlers(var2)
+			local RegisteredEventHandlers = self._eventPropagationService:getRegisteredEventHandlers(Ancestor)
 			
-			if var4 then
-				for v, v_1 in t_1 do
-					if var4[v_1] then
-						t[v] = v_1
+			if RegisteredEventHandlers then
+				for i2, value1 in t1 do
+					if RegisteredEventHandlers[value1] then
+						t[i2] = value1
 					end
 				end
 			end
 		end
 	end
-	local value = self.activeEventMap:getValue()
+	local Value = self.activeEventMap:getValue()
 	
-	if not shallowEqual(value, t) then
-		if p1 then
-			for i_2, v_1 in value do
-				if not t[i_2] then
-					self:_cancelHandler(p1, v_1)
+	if not ShallowEqualFunction(Value, t) then
+		if SilentBlurTarget then
+			for i3, value2 in Value do
+				if not t[i3] then
+					self:_cancelHandler(SilentBlurTarget, value2)
 				end
 			end
 		end
@@ -141,152 +151,148 @@ function t:_updateActiveEventMap(p1)
 	end
 end
 
-function t:registerEventMap(p2, p3)
-	-- upvalues: mockableWarn (ref)
-	local var5 = self._eventMapByInstance[p2] or {}
-	
-	for i, v in p3 do
-		if var5[i] and var5[i] ~= v and _G.__DEV__ then
-			mockableWarn(string.format("New event will replace existing registered event mapped to %s:\n\t     new event: %s\n\texisting event: %s", tostring(i), v, var5[i]))
+function FocusNavigationService:registerEventMap(p1, List) --[[ Line: 270 ]]
+	-- upvalues: MockableWarnFunction (copy)
+	local EventMapByInstanceEntry = self._eventMapByInstance[p1] or {}
+	for i, value in List do
+		if EventMapByInstanceEntry[i] and EventMapByInstanceEntry[i] ~= value and _G.__DEV__ then
+			MockableWarnFunction(string.format("New event will replace existing registered event mapped to %s:\n\t     new event: %s\n\texisting event: %s", tostring(i), value, EventMapByInstanceEntry[i]))
 		end
-		var5[i] = v
+		EventMapByInstanceEntry[i] = value
 	end
-	self._eventMapByInstance[p2] = var5
+	self._eventMapByInstance[p1] = EventMapByInstanceEntry
 	self:_updateActiveEventMap()
 end
 
-function t:deregisterEventMap(p4, p5)
-	-- upvalues: mockableWarn (ref)
-	local var6 = self._eventMapByInstance[p4] or {}
-	
-	for i, v in p5 do
-		if var6[i] == v then
-			var6[i] = nil
+function FocusNavigationService:deregisterEventMap(p2, List) --[[ Line: 292 ]]
+	-- upvalues: MockableWarnFunction (copy)
+	local EventMapByInstanceEntry = self._eventMapByInstance[p2] or {}
+	for i, value in List do
+		if EventMapByInstanceEntry[i] == value then
+			EventMapByInstanceEntry[i] = nil
 		elseif _G.__DEV__ then
-			mockableWarn(string.format("Cannot deregister non-matching event input %s:\n\t  provided event: %s\n\tregistered event: %s", tostring(i), v, var6[i]))
+			MockableWarnFunction(string.format("Cannot deregister non-matching event input %s:\n\t  provided event: %s\n\tregistered event: %s", tostring(i), value, EventMapByInstanceEntry[i]))
 		end
 	end
-	self._eventMapByInstance[p4] = var6
+	self._eventMapByInstance[p2] = EventMapByInstanceEntry
 	self:_updateActiveEventMap(self.focusedGuiObject:getValue())
 end
 
-function t:registerEventHandler(p6, p7, p8, p9)
-	self._eventPropagationService:registerEventHandler(p6, p7, p8, p9)
+function FocusNavigationService:registerEventHandler(p3, p4, p5, p6) --[[ Line: 315 ]]
+	self._eventPropagationService:registerEventHandler(p3, p4, p5, p6)
 	self:_updateActiveEventMap()
 end
 
-function t:deregisterEventHandler(p6, p7, p8, p9)
-	self:_cancelHandler(p6, p7)
-	self._eventPropagationService:deregisterEventHandler(p6, p7, p8, p9)
+function FocusNavigationService:deregisterEventHandler(p3, p4, p5, p6) --[[ Line: 325 ]]
+	self:_cancelHandler(p3, p4)
+	self._eventPropagationService:deregisterEventHandler(p3, p4, p5, p6)
 	self:_updateActiveEventMap(self.focusedGuiObject:getValue())
 end
 
-function t:registerEventHandlers(p6, p7)
-	self._eventPropagationService:registerEventHandlers(p6, p7)
+function FocusNavigationService:registerEventHandlers(p3, p4) --[[ Line: 338 ]]
+	self._eventPropagationService:registerEventHandlers(p3, p4)
 	self:_updateActiveEventMap()
 end
 
-function t:deregisterEventHandlers(p6, p7)
-	for i, v in p7 do
-		self:_cancelHandler(p6, i)
+function FocusNavigationService:deregisterEventHandlers(p3, List) --[[ Line: 343 ]]
+	for i, _ in List do
+		self:_cancelHandler(p3, i)
 	end
-	self._eventPropagationService:deregisterEventHandlers(p6, p7)
+	self._eventPropagationService:deregisterEventHandlers(p3, List)
 	self:_updateActiveEventMap(self.focusedGuiObject:getValue())
 end
 
-function t:registerFocusBehavior(p8, p9)
-	-- upvalues: mockableWarn (ref), focusNavigationRefocusSuppression (ref), isValidFocusTargetModule (ref)
+function FocusNavigationService:registerFocusBehavior(Ancestor, Behavior) --[[ Line: 354 ]]
+	-- upvalues: MockableWarnFunction (copy), FocusNavigationRefocusSuppression (copy), IsValidFocusTargetModule (copy)
 	if _G.__DEV__ then
-		local var7 = self._focusBehaviorByInstance[p8]
+		local FocusBehaviorByInstanceEntry = self._focusBehaviorByInstance[Ancestor]
 		
-		if var7 ~= nil then
-			mockableWarn(string.format("New focus behavior will replace existing registered focus behavior:\n\t     new behavior: %s\n\texisting behavior: %s", tostring(p9), tostring(var7.behavior)))
+		if FocusBehaviorByInstanceEntry ~= nil then
+			MockableWarnFunction(string.format("New focus behavior will replace existing registered focus behavior:\n\t     new behavior: %s\n\texisting behavior: %s", tostring(Behavior), (tostring(FocusBehaviorByInstanceEntry.behavior))))
 		end
 	end
-	self._focusBehaviorByInstance[p8] = {
-		behavior = p9,
-		connection = p8.SelectionChanged:Connect(function(p10, p11, p12)
-			-- upvalues: p8 (ref), focusNavigationRefocusSuppression (copy), self (ref), p9 (ref), isValidFocusTargetModule (copy)
-			if p12 and (p10 or p12:IsDescendantOf(p8)) then
-				if not p11 or not p11:IsDescendantOf(p8) then
-					local var8 = false
+	self._focusBehaviorByInstance[Ancestor] = {
+		behavior = Behavior,
+		connection = Ancestor.SelectionChanged:Connect(function(p4, Object, Object1) --[[ Line: 370 ]]
+			-- upvalues: Ancestor (copy), FocusNavigationRefocusSuppression (upval), self (copy), Behavior (copy), IsValidFocusTargetModule (upval)
+			if Object1 and (p4 or Object1:IsDescendantOf(Ancestor)) then
+				if not Object or not Object:IsDescendantOf(Ancestor) then
+					local Flag = false
 					
-					if not (if focusNavigationRefocusSuppression() then self._shouldSuppressContainerRefocus and self._shouldSuppressContainerRefocus() else false) then
-						for i, v in p9.getTargets() do
-							if isValidFocusTargetModule(v) then
-								self:focusGuiObject(v, false)
-								var8 = true
+					if not (if FocusNavigationRefocusSuppression() then self._shouldSuppressContainerRefocus and self._shouldSuppressContainerRefocus() else false) then
+						for _, value in Behavior.getTargets() do
+							if IsValidFocusTargetModule(value) then
+								self:focusGuiObject(value, false)
+								Flag = true
 								break
 							end
 						end
 					end
-					if var8 or not p9.onDescendantFocusChanged then
-						return
-					else
-						p9.onDescendantFocusChanged(p12)
+					if not Flag and Behavior.onDescendantFocusChanged then
+						Behavior.onDescendantFocusChanged(Object1)
 						
 						return
 					end
-				elseif p9.onDescendantFocusChanged then
-					p9.onDescendantFocusChanged(p12)
+				elseif Behavior.onDescendantFocusChanged then
+					Behavior.onDescendantFocusChanged(Object1)
 				end
 			end
 		end)
 	}
 end
 
-function t:deregisterFocusBehavior(p10, p11)
-	-- upvalues: mockableWarn (ref)
-	local var8 = self._focusBehaviorByInstance[p10]
+function FocusNavigationService:deregisterFocusBehavior(p4, Behavior) --[[ Line: 415 ]]
+	-- upvalues: MockableWarnFunction (copy)
+	local FocusBehaviorByInstanceEntry = self._focusBehaviorByInstance[p4]
 	
 	if _G.__DEV__ then
-		if not var8 then
-			mockableWarn(string.format("Cannot deregister an unregistered focus behavior:\n\t  provided behavior: %s", tostring(p11)))
+		if not FocusBehaviorByInstanceEntry then
+			MockableWarnFunction(string.format("Cannot deregister an unregistered focus behavior:\n\t  provided behavior: %s", (tostring(Behavior))))
 		end
-		if var8 and var8.behavior ~= p11 then
-			mockableWarn(string.format("Cannot deregister non-matching focus behavior:\n\t  provided behavior: %s\n\tregistered behavior: %s", tostring(p11), tostring(var8.behavior)))
+		if FocusBehaviorByInstanceEntry and FocusBehaviorByInstanceEntry.behavior ~= Behavior then
+			MockableWarnFunction(string.format("Cannot deregister non-matching focus behavior:\n\t  provided behavior: %s\n\tregistered behavior: %s", tostring(Behavior), (tostring(FocusBehaviorByInstanceEntry.behavior))))
 		end
 	end
-	if var8 then
-		var8.connection:Disconnect()
-		self._focusBehaviorByInstance[p10] = nil
+	if FocusBehaviorByInstanceEntry then
+		FocusBehaviorByInstanceEntry.connection:Disconnect()
+		self._focusBehaviorByInstance[p4] = nil
 	end
 end
 
-function t:focusGuiObject(p10, p11)
-	if p11 then
+function FocusNavigationService:focusGuiObject(_silentFocusTarget, p4) --[[ Line: 444 ]]
+	if p4 then
 		self._silentBlurTarget = self._engineInterface.getSelection()
-		self._silentFocusTarget = p10
+		self._silentFocusTarget = _silentFocusTarget
 	else
 		self._silentBlurTarget = nil
 		self._silentFocusTarget = nil
 	end
-	self._engineInterface.setSelection(p10)
+	self._engineInterface.setSelection(_silentFocusTarget)
 end
 
-function t:teardown()
-	for i, v in self._engineEventConnections do
-		v:Disconnect()
+function FocusNavigationService.teardown(p4) --[[ Line: 459 ]]
+	for _, engineEventConnection in p4._engineEventConnections do
+		engineEventConnection:Disconnect()
 	end
-	for i, v_1 in self._focusBehaviorByInstance do
-		v_1.connection:Disconnect()
+	for _, value in p4._focusBehaviorByInstance do
+		value.connection:Disconnect()
 	end
 end
 
-function t:canDispatchEvent(p10, p11)
-	-- upvalues: getAncestors (ref)
-	if not p11 then
+function FocusNavigationService:canDispatchEvent(EventName, Target): boolean --[[ Line: 468 ]]
+	-- upvalues: GetAncestorsFunction (copy)
+	if not Target then
 		return false
 	end
-	for i, v in getAncestors(p11) do
-		local var8 = self._eventMapByInstance[v]
+	for _, value in GetAncestorsFunction(Target) do
+		local EventMapByInstanceEntry = self._eventMapByInstance[value]
 		
-		if var8 then
-			for i_1, v_1 in var8 do
-				if v_1 == p10 then
-					local var9 = self._eventPropagationService:getRegisteredEventHandlers(v)
+		if EventMapByInstanceEntry then
+			for _, value1 in EventMapByInstanceEntry do
+				if value1 == EventName then
+					local RegisteredEventHandlers = self._eventPropagationService:getRegisteredEventHandlers(value)
 					
-					if var9 and var9[p10] then
+					if RegisteredEventHandlers and RegisteredEventHandlers[EventName] then
 						return true
 					end
 				end
@@ -296,21 +302,30 @@ function t:canDispatchEvent(p10, p11)
 	return false
 end
 
-function t:dispatchSyntheticEvent(p12, p13, p14)
-	-- upvalues: mockableWarn (ref)
-	if p13 then
-		if self:canDispatchEvent(p12, p13) then
-			self._eventPropagationService:propagateEvent(p13, p12, p14, { synthetic = true, silent = false })
+function FocusNavigationService:dispatchSyntheticEvent(EventName, Target, EventData): boolean --[[ Line: 493 ]]
+	-- upvalues: MockableWarnFunction (copy)
+	if Target then
+		if self:canDispatchEvent(EventName, Target) then
+			self._eventPropagationService:propagateEvent(Target, EventName, EventData, { synthetic = true, silent = false })
+			self._fireEventDispatchedSignal({
+				synthetic = true,
+				eventName = EventName,
+				target = Target,
+				eventData = EventData
+			})
 			
 			return true
-		elseif _G.__DEV__ then
-			mockableWarn("dispatchSyntheticEvent: Cannot dispatch event \"" .. p12 .. "\" on target")
+		end
+		if _G.__DEV__ then
+			MockableWarnFunction("dispatchSyntheticEvent: Cannot dispatch event \"" .. EventName .. "\" on target")
 		end
 		return false
-	elseif _G.__DEV__ then
-		mockableWarn("dispatchSyntheticEvent: No target object")
+	else
+		if _G.__DEV__ then
+			MockableWarnFunction("dispatchSyntheticEvent: No target object")
+		end
+		return false
 	end
-	return false
 end
 
-return t
+return FocusNavigationService

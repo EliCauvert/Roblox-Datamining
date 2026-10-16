@@ -1,47 +1,46 @@
-﻿local parent = script.Parent.Parent
-local promiseModule = require(parent.Parent.Promise)
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.BundlesMetadata)
-local _ = require(parent.util.Types)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
-local destroyEditableInstancesModule = require(parent.util.destroyEditableInstances)
-local _ = require(parent.validation.validateBundleReadyForUpload)
-local legacyValidationAdapterModule = require(parent.util.LegacyValidationAdapter)
-local httpService = game:GetService("HttpService")
+﻿local Parent = script.Parent.Parent
+local PromiseModule = require(Parent.Parent.Promise)
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.BundlesMetadata)
+local _ = require(Parent.util.Types)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local CreateEditableInstancesForContextModule = require(Parent.util.createEditableInstancesForContext)
+local DestroyEditableInstancesModule = require(Parent.util.destroyEditableInstances)
+local _ = require(Parent.validation.validateBundleReadyForUpload)
+local LegacyValidationAdapterModule = require(Parent.util.LegacyValidationAdapter)
+local HttpService = game:GetService("HttpService")
 
-local function hasExactStringValueNames(p1, p2)
+local function hasExactStringValueNames(Folder, List): boolean --[[ Line: 21 ]]
 	local t = {}
 	
-	for i, v in p2 do
-		t[v] = true
+	for _, value in List do
+		t[value] = true
 	end
-	local t_1 = {}
+	local t1 = {}
 	
-	for i_1, v_1 in p1:GetChildren() do
-		if v_1:IsA("StringValue") then
-			if t[v_1.Name] and not t_1[v_1.Name] then
-				t_1[v_1.Name] = true
-				continue
+	for _, StringValue in Folder:GetChildren() do
+		if StringValue:IsA("StringValue") then
+			if not t[StringValue.Name] or t1[StringValue.Name] then
+				return false
 			end
-			return false
+			t1[StringValue.Name] = true
 		end
 	end
-	for i_2, v_1 in p2 do
-		if not t_1[v_1] then
+	for _, value1 in List do
+		if not t1[value1] then
 			return false
 		end
 	end
 	return true
 end
 
-return function(p3, p4, p5, p6, p7, p8)
-	-- upvalues: promiseModule (ref), constantsModule (ref), hasExactStringValueNames (ref), errorSourceStringsModule (ref), httpService (ref), createEditableInstancesForContextModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref)
-	p6 = p6 or function() end
-	assert(p6 ~= nil, "Luau")
+return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) --[[ Line: 46 | Named "validateAnimationBundleReadyForUpload" ]]
+	-- upvalues: PromiseModule (copy), ConstantsModule (copy), hasExactStringValueNames (copy), ErrorSourceStringsModule (copy), HttpService (copy), CreateEditableInstancesForContextModule (copy), LegacyValidationAdapterModule (copy), DestroyEditableInstancesModule (copy)
+	local Callback: (any) -> () = p3 or function() --[[ Line: 54 ]] end
+	assert(Callback ~= nil, "Luau")
 	
-	if not p3:IsA("Model") then
-		return promiseModule.resolve({
+	if not Model:IsA("Model") then
+		return PromiseModule.resolve({
 			errors = {
 				{
 					assetType = nil,
@@ -54,56 +53,58 @@ return function(p3, p4, p5, p6, p7, p8)
 			pieces = {}
 		})
 	end
-	local t_3
 	local t = {}
 	
-	if constantsModule.ANIMATION_ASSET_INFO then
-		local var1
-		local t_1 = {}
-		local t_2 = {}
-		t_3 = {}
+	if ConstantsModule.ANIMATION_ASSET_INFO then
+		local List = {}
+		local List1 = {}
+		local t2 = {}
+		local Flag = nil
 		
-		for i, v in constantsModule.ANIMATION_ASSET_INFO do
-			var1 = false
+		for i, value in ConstantsModule.ANIMATION_ASSET_INFO do
+			Flag = false
 			
-			for i_1, v_1 in p3:GetChildren() do
-				if not t_3[v_1] and (v_1.Name == "R15Anim" and (v_1:IsA("Folder") and hasExactStringValueNames(v_1, v.stringValueNames))) then
-					t[i] = { v_1 }
-					t_3[v_1] = true
-					var1 = true
+			for _, Folder in Model:GetChildren() do
+				local HasExactStringValueNames = Folder.Name == "R15Anim" and (Folder:IsA("Folder") and hasExactStringValueNames(Folder, value.stringValueNames))
+				
+				if not t2[Folder] and HasExactStringValueNames then
+					t[i] = { Folder }
+					t2[Folder] = true
+					Flag = true
 					break
 				end
 			end
-			if not var1 then
-				table.insert(t_2, i.Name)
+			if not Flag then
+				table.insert(List1, i.Name)
 			end
 		end
-		for i_1, v_1 in p3:GetChildren() do
-			if not t_3[v_1] and v_1.Name ~= "R15Anim" then
-				table.insert(t_1, v_1.Name)
+		for _, child in Model:GetChildren() do
+			if not t2[child] and child.Name ~= "R15Anim" then
+				table.insert(List, child.Name)
 			end
 		end
-		if #t_2 > 0 then
-			return promiseModule.resolve({
+		if #List1 > 0 then
+			return PromiseModule.resolve({
 				errors = {
 					{
 						assetType = nil,
 						error = {
 							type = "message",
-							message = string.gsub(errorSourceStringsModule.Values.AnimationPack_InvalidR15AnimChildren, "{missingAnimationTypes}", table.concat(t_2, ", "))
+							message = string.gsub(ErrorSourceStringsModule.Values.AnimationPack_InvalidR15AnimChildren, "{missingAnimationTypes}", table.concat(List1, ", "))
 						}
 					}
 				},
 				pieces = {}
 			})
-		elseif #t_1 > 0 then
-			return promiseModule.resolve({
+		end
+		if #List > 0 then
+			return PromiseModule.resolve({
 				errors = {
 					{
 						assetType = nil,
 						error = {
 							type = "message",
-							message = string.gsub(errorSourceStringsModule.Values.AnimationPack_UnexpectedBundleChildren, "{unexpectedNames}", table.concat(t_1, ", "))
+							message = string.gsub(ErrorSourceStringsModule.Values.AnimationPack_UnexpectedBundleChildren, "{unexpectedNames}", table.concat(List, ", "))
 						}
 					}
 				},
@@ -111,141 +112,136 @@ return function(p3, p4, p5, p6, p7, p8)
 			})
 		end
 	end
-	local t_1 = {}
-	local t_2 = {}
-	t_3 = {}
+	local t3 = {}
+	local Errors = {}
+	local Pieces = {}
 	
-	for i, v in p4[p5].allowedAssetTypeSettings do
-		local var2 = assert(Enum.AssetType[i], "Asset type name doesn't map to an enum item")
+	for i1, allowedAssetTypeSetting in p1[p2].allowedAssetTypeSettings do
+		local AssetTypeNameDoesnTMapToAnEnumItem = assert(Enum.AssetType[i1], "Asset type name doesn't map to an enum item")
 		
-		if v.isEligibleForUpload then
-			local var3 = t[var2]
-			local var4 = var3 and var3[1]
-			t_1[var2] = {
-				assetType = var2,
-				instance = var4,
-				settings = v,
-				status = if var4 == nil then "finished" else "pending"
+		if allowedAssetTypeSetting.isEligibleForUpload then
+			local Entry = t[AssetTypeNameDoesnTMapToAnEnumItem]
+			local Entry1 = Entry and Entry[1]
+			t3[AssetTypeNameDoesnTMapToAnEnumItem] = {
+				assetType = AssetTypeNameDoesnTMapToAnEnumItem,
+				instance = Entry1,
+				settings = allowedAssetTypeSetting,
+				status = if Entry1 == nil then "finished" else "pending"
 			}
 			
-			if var4 == nil then
-				table.insert(t_2, { assetType = var2, error = { type = "notFound" } })
+			if Entry1 == nil then
+				table.insert(Errors, {
+					assetType = AssetTypeNameDoesnTMapToAnEnumItem,
+					error = { type = "notFound" }
+				})
 			end
 		end
 	end
-	if constantsModule.ANIMATION_ASSET_INFO then
-		for i_1, v_1 in constantsModule.ANIMATION_ASSET_INFO do
-			if t_1[i_1] then
-				table.insert(t_3, t_1[i_1])
+	if ConstantsModule.ANIMATION_ASSET_INFO then
+		for i2, _ in ConstantsModule.ANIMATION_ASSET_INFO do
+			if t3[i2] then
+				table.insert(Pieces, t3[i2])
 			end
 		end
 	end
-	local t_4 = { errors = t_2, pieces = t_3 }
-	p6(t_4)
-	local var5 = httpService:GenerateGUID()
+	local Tbl = { errors = Errors, pieces = Pieces }
+	Callback(Tbl)
+	local Guid = HttpService:GenerateGUID()
 	
-	return promiseModule.each(t_3, function(p9, p10)
-		-- upvalues: p7 (ref), p8 (ref), createEditableInstancesForContextModule (copy), legacyValidationAdapterModule (copy), var5 (ref), destroyEditableInstancesModule (copy), t_4 (write), p6 (write)
-		if p9.status == "finished" then return end
-		local var6, var7
-		assert(p9.instance ~= nil, "Unfinished piece doesn't have an instance")
-		local _ = nil
-		local _ = nil
-		local list = { p9.instance }
-		local t = {
-			instances = list,
-			assetTypeEnum = p9.assetType,
-			allowEditableInstances = p7,
-			bypassFlags = p8
+	return PromiseModule.each(Pieces, function(p4, p5) --[[ Line: 208 ]]
+		-- upvalues: AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Tbl (ref), Callback (ref)
+		if p4.status == "finished" then return end
+		assert(p4.instance ~= nil, "Unfinished piece doesn't have an instance")
+		local Instances = { p4.instance }
+		local config = {
+			instances = Instances,
+			assetTypeEnum = p4.assetType,
+			allowEditableInstances = AllowEditableInstances,
+			bypassFlags = BypassFlags
 		}
-		local var8, var9 = createEditableInstancesForContextModule.processAll(list, p7)
+		local ProcessAllResult, ProcessAllResult2 = CreateEditableInstancesForContextModule.processAll(Instances, AllowEditableInstances)
+		local v1 = nil
+		local Messages = nil
 		
-		if var8 then
-			t.editableMeshes = var9.editableMeshes
-			t.editableImages = var9.editableImages
-			local var10, var11 = legacyValidationAdapterModule.studioRFUAssetValidation(t, var5, true, nil)
-			var7 = var10
-			var6 = var11
-			destroyEditableInstancesModule(t.editableMeshes, t.editableImages)
+		if ProcessAllResult then
+			config.editableMeshes = ProcessAllResult2.editableMeshes
+			config.editableImages = ProcessAllResult2.editableImages
+			v1, Messages = LegacyValidationAdapterModule.studioRFUAssetValidation(config, Guid, true, nil)
+			DestroyEditableInstancesModule(config.editableMeshes, config.editableImages)
 		else
-			var6 = var9
-			var7 = false
+			Messages = ProcessAllResult2
+			v1 = false
 		end
-		t_4 = table.clone(t_4)
-		t_4.errors = table.clone(t_4.errors)
+		Tbl = table.clone(Tbl)
+		Tbl.errors = table.clone(Tbl.errors)
 		
-		if not var7 then
-			assert(var6 ~= nil, "Failure without errors")
+		if not v1 then
+			assert(Messages ~= nil, "Failure without errors")
 			
-			for i, v in var6 do
-				table.insert(t_4.errors, {
-					assetType = p9.assetType,
-					error = { type = "message", message = v }
+			for _, message in Messages do
+				table.insert(Tbl.errors, {
+					assetType = p4.assetType,
+					error = { type = "message", message = message }
 				})
 			end
 		end
-		t_4.pieces = table.clone(t_4.pieces)
-		t_4.pieces[p10].status = "finished"
-		p6(t_4)
-	end):andThen(function()
-		-- upvalues: t_4 (write), p7 (ref), p8 (ref), createEditableInstancesForContextModule (copy), legacyValidationAdapterModule (copy), var5 (ref), destroyEditableInstancesModule (copy), p6 (write)
-		local function createFullBodyData(p11)
-			local t = {}
+		Tbl.pieces = table.clone(Tbl.pieces)
+		Tbl.pieces[p5].status = "finished"
+		Callback(Tbl)
+	end):andThen(function() --[[ Line: 267 ]]
+		-- upvalues: Tbl (ref), AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Callback (ref)
+		local FullBodyData = (function(List) --[[ Line: 268 | Named "createFullBodyData" ]]
+			local List1 = {}
 			
-			for i, v in p11 do
-				table.insert(t, {
-					assetTypeEnum = v.assetType,
-					allSelectedInstances = if v.instance then { v.instance } else {}
+			for _, value in List do
+				table.insert(List1, {
+					assetTypeEnum = value.assetType,
+					allSelectedInstances = if value.instance then { value.instance } else {}
 				})
 			end
-			return t
-		end
-		
-		local _ = nil
-		local _ = nil
-		local var12 = createFullBodyData(t_4.pieces)
-		local t = {
+			return List1
+		end)(Tbl.pieces)
+		local config = {
 			isServer = false,
-			fullBodyData = var12,
-			allowEditableInstances = p7,
-			bypassFlags = p8
+			fullBodyData = FullBodyData,
+			allowEditableInstances = AllowEditableInstances,
+			bypassFlags = BypassFlags
 		}
-		local t_1 = {}
+		local List = {}
 		
-		for i, v in var12 do
-			for i_1, v_1 in v.allSelectedInstances do
-				table.insert(t_1, v_1)
+		for _, value in FullBodyData do
+			for _, allSelectedInstance in value.allSelectedInstances do
+				table.insert(List, allSelectedInstance)
 			end
 		end
-		local var13, var14
-		local var15, var16 = createEditableInstancesForContextModule.processAll(t_1, p7)
+		local ProcessAllResult, ProcessAllResult2 = CreateEditableInstancesForContextModule.processAll(List, AllowEditableInstances)
+		local v2 = nil
+		local Messages = nil
 		
-		if var15 then
-			t.editableMeshes = var16.editableMeshes
-			t.editableImages = var16.editableImages
-			local var17, var18 = legacyValidationAdapterModule.studioRFUBundleValidation(var12, Enum.BundleType.Animations, t, var5, true, nil)
-			var14 = var17
-			var13 = var18
-			destroyEditableInstancesModule(t.editableMeshes, t.editableImages)
+		if ProcessAllResult then
+			config.editableMeshes = ProcessAllResult2.editableMeshes
+			config.editableImages = ProcessAllResult2.editableImages
+			v2, Messages = LegacyValidationAdapterModule.studioRFUBundleValidation(FullBodyData, Enum.BundleType.Animations, config, Guid, true, nil)
+			DestroyEditableInstancesModule(config.editableMeshes, config.editableImages)
 		else
-			var13 = var16
-			var14 = false
+			Messages = ProcessAllResult2
+			v2 = false
 		end
-		if not var14 then
-			t_4 = table.clone(t_4)
-			t_4.errors = table.clone(t_4.errors)
-			assert(var13 and #var13 > 0, "There should always be a reason for failure")
+		if not v2 then
+			Tbl = table.clone(Tbl)
+			Tbl.errors = table.clone(Tbl.errors)
+			assert(Messages and #Messages > 0, "There should always be a reason for failure")
 			
-			for i_1, v_1 in var13 do
-				table.insert(t_4.errors, {
+			for _, message in Messages do
+				table.insert(Tbl.errors, {
 					assetType = nil,
-					error = { type = "message", message = v_1 }
+					error = { type = "message", message = message }
 				})
 			end
 		end
-		p6(t_4)
-	end):andThen(function()
-		-- upvalues: t_4 (write)
-		return t_4
+		Callback(Tbl)
+	end):andThen(function() --[[ Line: 339 ]]
+		-- upvalues: Tbl (ref)
+		return Tbl
 	end)
 end

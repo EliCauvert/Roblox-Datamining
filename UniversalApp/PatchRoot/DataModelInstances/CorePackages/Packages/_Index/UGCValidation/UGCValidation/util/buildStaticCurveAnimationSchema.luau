@@ -1,7 +1,7 @@
-﻿local parent = script.Parent.Parent
-local assetCalculatorModule = require(parent.util.AssetCalculator)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local list = {
+﻿local Parent = script.Parent.Parent
+local AssetCalculatorModule = require(Parent.util.AssetCalculator)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local Names = {
 	"ChinRaiserUpperLip", "ChinRaiser", "FlatPucker", "Funneler", "LowerLipSuck",
 	"LipPresser", "LipsTogether", "MouthLeft", "MouthRight", "Pucker",
 	"UpperLipSuck", "LeftCheekPuff", "LeftDimpler", "LeftLipCornerDown",
@@ -16,13 +16,13 @@ local list = {
 	"LeftEyeClosed", "RightCheekRaiser", "RightEyeUpperLidRaiser",
 	"RightEyeClosed", "TongueDown", "TongueOut", "TongueUp"
 }
-local t = {
+local config = {
 	Head = { "Spine", "Chest" },
 	LeftUpperArm = { "Spine", "Chest", "LeftClavicle" },
 	RightUpperArm = { "Spine", "Chest", "RightClavicle" }
 }
 
-local function buildPositionCurveSchema()
+local function buildPositionCurveSchema() --[[ Line: 83 ]]
 	return {
 		ClassName = "Vector3Curve",
 		Name = "Position",
@@ -35,7 +35,7 @@ local function buildPositionCurveSchema()
 	}
 end
 
-local function buildRotationCurveSchema()
+local function buildRotationCurveSchema() --[[ Line: 96 ]]
 	return {
 		ClassName = "EulerRotationCurve",
 		Name = "Rotation",
@@ -48,114 +48,114 @@ local function buildRotationCurveSchema()
 	}
 end
 
-local function buildFaceControlsSchema()
-	-- upvalues: list (ref)
-	local t = {}
+local function buildFaceControlsSchema() --[[ Line: 109 ]]
+	-- upvalues: Names (copy)
+	local _children = {}
 	
-	for i, v in list do
-		table.insert(t, { ClassName = "FloatCurve", _optional = true, Name = v })
+	for _, name in Names do
+		table.insert(_children, { ClassName = "FloatCurve", _optional = true, Name = name })
 	end
 	return {
 		ClassName = "Folder",
 		Name = "FaceControls",
 		_optional = true,
-		_children = t
+		_children = _children
 	}
 end
 
-local function convertBoneSchemaToChildren(p1, p2)
-	-- upvalues: buildPositionCurveSchema (ref), buildRotationCurveSchema (ref), convertBoneSchemaToChildren (ref)
-	local t = {}
+local function convertBoneSchemaToChildren(AvatarBoneSchema, p1) --[[ Line: 129 ]]
+	-- upvalues: buildPositionCurveSchema (copy), buildRotationCurveSchema (copy), convertBoneSchemaToChildren (copy)
+	local List = {}
 	
-	for i, v in p1 do
-		if v.ClassName == "Bone" then
-			local t_1 = {}
-			table.insert(t_1, buildPositionCurveSchema())
-			table.insert(t_1, buildRotationCurveSchema())
+	for Name, Bone in AvatarBoneSchema do
+		if Bone.ClassName == "Bone" then
+			local List1 = {}
+			table.insert(List1, (buildPositionCurveSchema()))
+			table.insert(List1, (buildRotationCurveSchema()))
 			
-			if v._children then
-				for i_1, v_1 in convertBoneSchemaToChildren(v._children, p2) do
-					table.insert(t_1, v_1)
+			if Bone._children then
+				for _, value in convertBoneSchemaToChildren(Bone._children, p1) do
+					table.insert(List1, value)
 				end
 			end
-			if p2 and p2[i] then
-				for i_2, i_1 in p2[i] do
-					table.insert(t_1, i_1)
+			if p1 and p1[Name] then
+				for _, value1 in p1[Name] do
+					table.insert(List1, value1)
 				end
 			end
-			table.insert(t, {
+			table.insert(List, {
 				ClassName = "Folder",
 				_optional = true,
-				Name = i,
-				_children = t_1
+				Name = Name,
+				_children = List1
 			})
 		end
 	end
-	return t
+	return List
 end
 
 local _ = nil
 
-local var1 = function(p3, p4)
-	-- upvalues: buildPositionCurveSchema (ref), buildRotationCurveSchema (ref), assetCalculatorModule (ref), var1 (write), r15plusUtilsModule (ref), t (ref), convertBoneSchemaToChildren (ref), buildFaceControlsSchema (ref)
-	local t_1 = {}
-	table.insert(t_1, buildPositionCurveSchema())
-	table.insert(t_1, buildRotationCurveSchema())
-	local bodyPartsToParents = assetCalculatorModule.getBodyPartsToParents()
-	local t_2 = {}
+local function v10(Name, List) --[[ Line: 176 ]]
+	-- upvalues: buildPositionCurveSchema (copy), buildRotationCurveSchema (copy), AssetCalculatorModule (copy), v10 (ref), R15plusUtilsModule (copy), config (copy), convertBoneSchemaToChildren (copy), buildFaceControlsSchema (copy)
+	local List1 = {}
+	table.insert(List1, (buildPositionCurveSchema()))
+	table.insert(List1, (buildRotationCurveSchema()))
+	local BodyPartsToParents = AssetCalculatorModule.getBodyPartsToParents()
+	local t = {}
 	
-	for i, v in p4 do
-		local t_3 = {}
+	for _, value in List do
+		local List2 = {}
 		
-		for i_2, v_1 in bodyPartsToParents do
-			if v_1 == v then
-				table.insert(t_3, i_2)
+		for i, bodyPartsToParent in BodyPartsToParents do
+			if bodyPartsToParent == value then
+				table.insert(List2, i)
 			end
 		end
-		t_2[v] = var1(v, t_3)
+		t[value] = v10(value, List2)
 	end
-	for i, v_1 in p4 do
-		table.insert(t_1, t_2[v_1])
+	for _, value1 in List do
+		table.insert(List1, t[value1])
 	end
-	local avatarBoneSchema = r15plusUtilsModule.getAvatarBoneSchema(p3)
+	local AvatarBoneSchema = R15plusUtilsModule.getAvatarBoneSchema(Name)
 	
-	if next(avatarBoneSchema) ~= nil then
-		local t_3 = {}
+	if next(AvatarBoneSchema) ~= nil then
+		local t1 = {}
 		
-		if p3 == "UpperTorso" then
-			for i_2, v_2 in t do
-				if t_2[i_2] then
-					for i_3, v_3 in v_2 do
-						if not t_3[v_3] then
-							t_3[v_3] = {}
+		if Name == "UpperTorso" then
+			for i1, value2 in config do
+				if t[i1] then
+					for _, value3 in value2 do
+						if not t1[value3] then
+							t1[value3] = {}
 						end
-						table.insert(t_3[v_3], t_2[i_2])
+						table.insert(t1[value3], t[i1])
 					end
 				end
 			end
 		end
-		for i_2, v_2 in convertBoneSchemaToChildren(avatarBoneSchema, t_3) do
-			table.insert(t_1, v_2)
+		for _, value4 in convertBoneSchemaToChildren(AvatarBoneSchema, t1) do
+			table.insert(List1, value4)
 		end
 	end
-	if p3 == "Head" then
-		table.insert(t_1, buildFaceControlsSchema())
+	if Name == "Head" then
+		table.insert(List1, (buildFaceControlsSchema()))
 	end
 	return {
 		ClassName = "Folder",
 		_optional = true,
-		Name = p3,
-		_children = t_1
+		Name = Name,
+		_children = List1
 	}
 end
 
-return (function()
-	-- upvalues: assetCalculatorModule (ref), var1 (write)
-	local t = {}
+return ((function() --[[ Line: 242 | Named "buildSchema" ]]
+	-- upvalues: AssetCalculatorModule (copy), v10 (ref)
+	local List = {}
 	
-	for i, v in assetCalculatorModule.getBodyPartsToParents() do
-		if v == "LowerTorso" then
-			table.insert(t, i)
+	for i, value in AssetCalculatorModule.getBodyPartsToParents() do
+		if value == "LowerTorso" then
+			table.insert(List, i)
 		end
 	end
 	return {
@@ -166,8 +166,8 @@ return (function()
 			{
 				ClassName = "Folder",
 				Name = "HumanoidRootPart",
-				_children = { var1("LowerTorso", t) }
+				_children = { (v10("LowerTorso", List)) }
 			}
 		}
 	}
-end)()
+end)())

@@ -1,15 +1,15 @@
-﻿local roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
+﻿local Roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
 
-return function(p1, p2)
-	-- upvalues: roact (ref)
-	local t = { blockLayout = p1 }
+return function(BlockLayout, p1) --[[ Line: 5 | Named "new" ]]
+	-- upvalues: Roact (copy)
+	local config = { blockLayout = BlockLayout }
 	
-	for i, v in ipairs(p2 or {}) do
-		t[i .. "-block"] = roact.createElement("Frame", {
+	for LayoutOrder, value in ipairs(p1 or {}) do
+		config[LayoutOrder .. "-block"] = Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = v.size,
-			LayoutOrder = i
-		}, { child = v.element })
+			Size = value.size,
+			LayoutOrder = LayoutOrder
+		}, { child = value.element })
 	end
-	return t
+	return config
 end

@@ -1,13 +1,13 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
-local dividerVariantModule = require(foundation.Enums.DividerVariant)
-local orientationModule = require(foundation.Enums.Orientation)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
+local DividerVariantModule = require(Foundation.Enums.DividerVariant)
+local OrientationModule = require(Foundation.Enums.Orientation)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1)
-	-- upvalues: orientationModule (ref), dividerVariantModule (ref)
+local function variantsFactory(p1) --[[ Line: 26 ]]
+	-- upvalues: OrientationModule (copy), DividerVariantModule (copy)
 	return {
 		common = {
 			container = { tag = "col" },
@@ -19,16 +19,16 @@ local function variantsFactory(p1)
 			}
 		},
 		padding = {
-			[dividerVariantModule.Inset] = { container = { tag = "padding-x-xlarge" } },
-			[dividerVariantModule.InsetLeft] = { container = { tag = "padding-left-xlarge" } },
-			[dividerVariantModule.InsetRight] = { container = { tag = "padding-right-xlarge" } }
+			[DividerVariantModule.Inset] = { container = { tag = "padding-x-xlarge" } },
+			[DividerVariantModule.InsetLeft] = { container = { tag = "padding-left-xlarge" } },
+			[DividerVariantModule.InsetRight] = { container = { tag = "padding-right-xlarge" } }
 		},
 		orientation = {
-			[orientationModule.Horizontal] = {
+			[OrientationModule.Horizontal] = {
 				container = { tag = "size-full-0 auto-y" },
 				stroke = { Size = UDim2.new(1, 0, 0, p1.Stroke.Standard) }
 			},
-			[orientationModule.Vertical] = {
+			[OrientationModule.Vertical] = {
 				container = { tag = "size-0-full auto-x" },
 				stroke = { Size = UDim2.new(0, p1.Stroke.Standard, 1, 0) }
 			}
@@ -36,9 +36,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), orientationModule (ref)
-	local divider = variantsContextModule.useVariants("Divider", variantsFactory, p1)
+return function(p1, p2, Horizontal) --[[ Line: 81 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy), OrientationModule (copy)
+	local Divider = VariantsContextModule.useVariants("Divider", variantsFactory, p1)
 	
-	return composeStyleVariantModule(divider.common, if p3 == orientationModule.Horizontal then divider.padding[p2] else {}, divider.orientation[p3])
+	return ComposeStyleVariantModule(Divider.common, if Horizontal == OrientationModule.Horizontal then Divider.padding[p2] else {}, Divider.orientation[Horizontal])
 end

@@ -1,17 +1,17 @@
-﻿local sceneUnderstanding = script:FindFirstAncestor("SceneUnderstanding")
-local findSourceAssetsFromDescendantModule = require(sceneUnderstanding.findSourceAssetsFromDescendant)
-local getSourceAssetsFromDescendantsModule = require(sceneUnderstanding.getSourceAssetsFromDescendants)
-local isSourceAssetModule = require(sceneUnderstanding.isSourceAsset)
-local rangeQueryOptionsModule = require(sceneUnderstanding.options.RangeQueryOptions)
+﻿local SceneUnderstanding = script:FindFirstAncestor("SceneUnderstanding")
+local FindSourceAssetsFromDescendantModule = require(SceneUnderstanding.findSourceAssetsFromDescendant)
+local GetSourceAssetsFromDescendantsModule = require(SceneUnderstanding.getSourceAssetsFromDescendants)
+local IsSourceAssetModule = require(SceneUnderstanding.isSourceAsset)
+local RangeQueryOptionsModule = require(SceneUnderstanding.options.RangeQueryOptions)
 
-return function(value, p1)
-	-- upvalues: rangeQueryOptionsModule (ref), isSourceAssetModule (ref), findSourceAssetsFromDescendantModule (ref), getSourceAssetsFromDescendantsModule (ref)
-	local t = {}
+return function(Position, p1) --[[ Line: 30 | Named "getSourceAssetsInRange" ]]
+	-- upvalues: RangeQueryOptionsModule (copy), IsSourceAssetModule (copy), FindSourceAssetsFromDescendantModule (copy), GetSourceAssetsFromDescendantsModule (copy)
+	local List = {}
 	
-	for i, v in workspace:GetPartBoundsInRadius(value, rangeQueryOptionsModule.new(p1).maxDistance) do
-		if isSourceAssetModule(v) or #findSourceAssetsFromDescendantModule(v) > 0 then
-			table.insert(t, v)
+	for _, value in workspace:GetPartBoundsInRadius(Position, RangeQueryOptionsModule.new(p1).maxDistance) do
+		if IsSourceAssetModule(value) or #FindSourceAssetsFromDescendantModule(value) > 0 then
+			table.insert(List, value)
 		end
 	end
-	return getSourceAssetsFromDescendantsModule(t)
+	return GetSourceAssetsFromDescendantsModule(List)
 end

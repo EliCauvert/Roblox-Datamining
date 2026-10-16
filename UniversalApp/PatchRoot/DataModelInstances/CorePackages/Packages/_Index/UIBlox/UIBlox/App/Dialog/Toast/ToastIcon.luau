@@ -1,38 +1,37 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local cryoModule = require(parent_1.Cryo)
-local tModule = require(parent_1.t)
-local imageSetComponentModule = require(parent.Core.ImageSet.ImageSetComponent)
-local validateColorInfoModule = require(parent.Core.Style.Validator.validateColorInfo)
-local withStyleModule = require(parent.Core.Style.withStyle)
-local toastIcon = roactModule.PureComponent:extend("ToastIcon")
-toastIcon.validateProps = tModule.interface({
-	Image = tModule.union(tModule.table, tModule.string, tModule.callback),
-	Size = tModule.UDim2,
-	AnchorPoint = tModule.optional(tModule.Vector2),
-	colorStyle = tModule.optional(validateColorInfoModule),
-	LayoutOrder = tModule.optional(tModule.integer),
-	Position = tModule.optional(tModule.UDim2)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local CryoModule = require(Parent1.Cryo)
+local TModule = require(Parent1.t)
+local ImageSetComponentModule = require(Parent.Core.ImageSet.ImageSetComponent)
+local WithStyleModule = require(Parent.Core.Style.withStyle)
+local ToastIcon = RoactModule.PureComponent:extend("ToastIcon")
+ToastIcon.validateProps = TModule.interface({
+	Image = TModule.union(TModule.table, TModule.string, TModule.callback),
+	Size = TModule.UDim2,
+	AnchorPoint = TModule.optional(TModule.Vector2),
+	colorStyle = TModule.optional((require(Parent.Core.Style.Validator.validateColorInfo))),
+	LayoutOrder = TModule.optional(TModule.integer),
+	Position = TModule.optional(TModule.UDim2)
 })
-toastIcon.defaultProps = { BackgroundTransparency = 1 }
+ToastIcon.defaultProps = { BackgroundTransparency = 1 }
 
-function toastIcon.render(p1)
-	-- upvalues: withStyleModule (ref), cryoModule (ref), roactModule (ref), imageSetComponentModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), cryoModule (copy), roactModule (copy), imageSetComponentModule (copy)
-		local theme = p2.Theme
-		local colorStyle = p1.props.colorStyle
+function ToastIcon.render(p1) --[[ Line: 34 ]]
+	-- upvalues: WithStyleModule (copy), CryoModule (copy), RoactModule (copy), ImageSetComponentModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 35 ]]
+		-- upvalues: p1 (copy), CryoModule (upval), RoactModule (upval), ImageSetComponentModule (upval)
+		local Theme = p2.Theme
+		local ColorStyle = p1.props.colorStyle
 		
-		if colorStyle == nil then
-			colorStyle = theme.IconEmphasis
+		if ColorStyle == nil then
+			ColorStyle = Theme.IconEmphasis
 		end
-		return roactModule.createElement(imageSetComponentModule.Label, cryoModule.Dictionary.join(p1.props, {
-			colorStyle = cryoModule.None,
-			ImageColor3 = colorStyle.Color,
-			ImageTransparency = colorStyle.Transparency
-		}))
+		return RoactModule.createElement(ImageSetComponentModule.Label, (CryoModule.Dictionary.join(p1.props, {
+			colorStyle = CryoModule.None,
+			ImageColor3 = ColorStyle.Color,
+			ImageTransparency = ColorStyle.Transparency
+		})))
 	end)
 end
 
-return toastIcon
+return ToastIcon

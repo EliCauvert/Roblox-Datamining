@@ -1,1 +1,1 @@
-﻿return require(script.OverflowScrollContainer)
+﻿return (require(script.OverflowScrollContainer))

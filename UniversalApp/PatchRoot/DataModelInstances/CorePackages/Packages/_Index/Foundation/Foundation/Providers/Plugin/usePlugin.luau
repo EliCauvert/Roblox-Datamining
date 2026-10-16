@@ -1,14 +1,15 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
-local useContext = reactModule.useContext
-local pluginContextModule = require(script.Parent.PluginContext)
-local isPluginElevatedModule = require(script.Parent.isPluginElevated)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+local UseContextFunction = ReactModule.useContext
+local PluginContextModule = require(script.Parent.PluginContext)
+local IsPluginElevatedModule = require(script.Parent.isPluginElevated)
 
-return function()
-	-- upvalues: useContext (ref), pluginContextModule (ref), reactModule (ref), isPluginElevatedModule (ref)
-	local var1 = useContext(pluginContextModule)
+return function() --[[ Line: 10 | Named "usePlugin" ]]
+	-- upvalues: UseContextFunction (copy), PluginContextModule (copy), ReactModule (copy), IsPluginElevatedModule (copy)
+	local UseContextResult = UseContextFunction(PluginContextModule)
 	
-	if var1 and var1 ~= reactModule.None then
-		return var1, isPluginElevatedModule(var1)
+	if UseContextResult and UseContextResult ~= ReactModule.None then
+		return UseContextResult, IsPluginElevatedModule(UseContextResult)
+	else
+		return nil, false
 	end
-	return nil, false
 end

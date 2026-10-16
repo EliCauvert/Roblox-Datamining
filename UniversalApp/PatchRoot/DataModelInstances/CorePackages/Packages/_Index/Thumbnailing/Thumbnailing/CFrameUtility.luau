@@ -1,17 +1,17 @@
-﻿local t = {
-	CalculateTargetCFrame = function(p1)
-		local var1 = if math.abs(p1.LookVector.Y) > 0.9 then p1.UpVector else p1.LookVector
+﻿local CFrameUtilityModule = {
+	CalculateTargetCFrame = function(CF): CFrame --[[ Line: 9 ]]
+		local UpVector = if math.abs(CF.LookVector.Y) > 0.9 then CF.UpVector else CF.LookVector
 		
-		return CFrame.lookAt(p1.Position, p1.Position + Vector3.new(var1.X, 0, var1.Z).Unit)
+		return CFrame.lookAt(CF.Position, CF.Position + Vector3.new(UpVector.X, 0, UpVector.Z).Unit)
 	end,
-	AdjustTargetCFrameWithExtents = function(p1, p2, p3)
-		return p1 + (p1 - p1.Position) * ((p2 + p3) / 2)
+	AdjustTargetCFrameWithExtents = function(TargetCFrame, p1, p2) --[[ Line: 24 ]]
+		return TargetCFrame + (TargetCFrame - TargetCFrame.Position) * ((p1 + p2) / 2)
 	end
 }
 
-function t.CalculateTargetCFrameWithExtents(p1, p2, p3)
-	-- upvalues: t (ref)
-	return t.AdjustTargetCFrameWithExtents(t.CalculateTargetCFrame(p1), p2, p3)
+function CFrameUtilityModule.CalculateTargetCFrameWithExtents(CF, p1, p2) --[[ Line: 47 ]]
+	-- upvalues: CFrameUtilityModule (copy)
+	return CFrameUtilityModule.AdjustTargetCFrameWithExtents(CFrameUtilityModule.CalculateTargetCFrame(CF), p1, p2)
 end
 
-return t
+return CFrameUtilityModule

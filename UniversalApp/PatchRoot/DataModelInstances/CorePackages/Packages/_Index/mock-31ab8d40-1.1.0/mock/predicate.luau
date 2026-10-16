@@ -1,12 +1,12 @@
-﻿local symbolsModule = require(script.Parent.symbols)
+﻿local SymbolsModule = require(script.Parent.symbols)
 
-return function(p1)
-	-- upvalues: symbolsModule (ref)
-	assert(type(p1) == "function", "Mock Error: Mock.predicate must be given a function")
+return function(Callback) --[[ Line: 3 ]]
+	-- upvalues: SymbolsModule (copy)
+	assert(type(Callback) == "function", "Mock Error: Mock.predicate must be given a function")
 	
-	return setmetatable({ [symbolsModule.isPredicate] = true, predicate = p1 }, {
-		__tostring = function()
+	return (setmetatable({ [SymbolsModule.isPredicate] = true, predicate = Callback }, {
+		__tostring = function(): string --[[ Line: 10 ]]
 			return "<Predicate>"
 		end
-	})
+	}))
 end

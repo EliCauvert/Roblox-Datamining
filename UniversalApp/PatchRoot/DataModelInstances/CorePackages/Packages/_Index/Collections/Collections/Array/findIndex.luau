@@ -1,11 +1,10 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2)
+return function(p1, Callback): number --[[ Line: 22 ]]
 	for i = 1, #p1 do
-		if not p2(p1[i], i, p1) then
-			continue
+		if Callback(p1[i], i, p1) then
+			return i
 		end
-		return i
 	end
 	return -1
 end

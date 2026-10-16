@@ -1,7 +1,7 @@
-﻿local appsFlyerUtilModule = require(script.Parent.utils.AppsFlyerUtil)
+﻿local AppsFlyerUtilModule = require(script.Parent.utils.AppsFlyerUtil)
 
-return function(p1)
-	-- upvalues: appsFlyerUtilModule (ref)
+return function(p1) --[[ Line: 4 ]]
+	-- upvalues: AppsFlyerUtilModule (copy)
 	local t = {}
 	t.info = {
 		webpage = p1.fromString("www:games/{placeId}"),
@@ -12,27 +12,28 @@ return function(p1)
 		group = p1.fromString("www:communities/{creatorId}"),
 		user = p1.fromString("www:users/{creatorId}/profile"),
 		pass = p1.fromString("www:game-pass/{passId}"),
-		creator = function(p2)
-			-- upvalues: t (ref)
+		creator = function(p2) --[[ Line: 19 ]]
+			-- upvalues: t (copy)
 			if p2.creatorType == "Group" then
 				return t.info.group(p2)
 			elseif p2.creatorType == "User" then
 				return t.info.user(p2)
+			else
+				warn(string.format("%s - unknown creatorType of %s", tostring(script.name), (tostring(p2.creatorType))))
+				
+				return nil
 			end
-			warn(string.format("%s - unknown creatorType of %s", tostring(script.name), tostring(p2.creatorType)))
-			
-			return nil
 		end,
-		appsflyer = function(p2)
-			-- upvalues: p1 (ref), appsFlyerUtilModule (copy), t (ref)
-			local description = p2.description
-			local image = p2.image
-			local title = p2.title
+		appsflyer = function(p2) --[[ Line: 28 ]]
+			-- upvalues: p1 (copy), AppsFlyerUtilModule (upval), t (copy)
+			local Description = p2.description
+			local Image = p2.image
+			local Title = p2.title
 			
-			return if description and image and title then p1.fromString("appsflyer:Ebh5?pid=share&is_retargeting=true&af_og_title={title}&af_og_image={image}&af_og_description={description}&af_dp={mobileUrl}&af_web_dp={webUrl}")({
-				image = image,
-				title = title,
-				description = appsFlyerUtilModule.sanitizeDescription(description),
+			return if Description and Image and Title then p1.fromString("appsflyer:Ebh5?pid=share&is_retargeting=true&af_og_title={title}&af_og_image={image}&af_og_description={description}&af_dp={mobileUrl}&af_web_dp={webUrl}")({
+				image = Image,
+				title = Title,
+				description = AppsFlyerUtilModule.sanitizeDescription(Description),
 				mobileUrl = p1.fromString("mobilenav:game_details?gameId={universeId}")(p2),
 				webUrl = t.info.webpage(p2)
 			}) else p1.fromString("appsflyer:Ebh5?pid=share&is_retargeting=true&af_dp={mobileUrl}&af_web_dp={webUrl}")({

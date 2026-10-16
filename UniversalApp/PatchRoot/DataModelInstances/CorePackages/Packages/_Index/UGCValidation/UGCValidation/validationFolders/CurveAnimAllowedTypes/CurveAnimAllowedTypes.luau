@@ -1,47 +1,45 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateAddObjectValueToAcceptableTypesModule = require(parent.flags.getFFlagUGCValidateAddObjectValueToAcceptableTypes)
-local t = {
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local CurveAnimAllowedTypesModule = {
 	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.curveAnimations },
+	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	}
 }
-local list = {
+local List = {
 	"MarkerCurve", "AnimationRigData", "Folder", "Vector3Curve",
 	"EulerRotationCurve", "FloatCurve"
 }
 
-if getFFlagUGCValidateAddObjectValueToAcceptableTypesModule() then
-	table.insert(list, "ObjectValue")
+if require(Parent.flags.getFFlagUGCValidateAddObjectValueToAcceptableTypes)() then
+	table.insert(List, "ObjectValue")
 end
-function t.run(p1, p2)
-	-- upvalues: list (ref), errorSourceStringsModule (ref)
-	local var1
-	for i, v in p2.curveAnimations do
-		for i_1, v_1 in v:GetDescendants() do
-			var1 = false
+function CurveAnimAllowedTypesModule.run(p1, p2) --[[ Line: 33 ]]
+	-- upvalues: List (copy), ErrorSourceStringsModule (copy)
+	local Flag = nil
+	for _, curveAnimation in p2.curveAnimations do
+		for _, descendant in curveAnimation:GetDescendants() do
+			Flag = false
 			
-			for i_2, v_2 in list do
-				if v_1:IsA(v_2) then
-					var1 = true
+			for _, ClassName in List do
+				if descendant:IsA(ClassName) then
+					Flag = true
 					break
 				end
 			end
-			if not var1 then
-				p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidInstanceTypes, { allowedTypes = table.concat(list, ", ") })
-				
-				return
+			if not Flag then
+				p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidInstanceTypes, { allowedTypes = table.concat(List, ", ") })
+				break
 			end
 		end
 	end
 end
 
-return t
+return CurveAnimAllowedTypesModule

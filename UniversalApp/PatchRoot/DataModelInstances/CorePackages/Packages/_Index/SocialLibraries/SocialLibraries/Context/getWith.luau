@@ -1,11 +1,11 @@
-﻿local roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
+﻿local Roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
 
-return function(p1)
-	-- upvalues: roact (ref)
-	return function(p2)
-		-- upvalues: roact (copy), p1 (ref)
-		assert(type(p2) == "function", "Expect renderCallback to be a function.")
+return function(p1) --[[ Line: 5 ]]
+	-- upvalues: Roact (copy)
+	return function(Callback) --[[ Line: 6 ]]
+		-- upvalues: Roact (upval), p1 (copy)
+		assert(type(Callback) == "function", "Expect renderCallback to be a function.")
 		
-		return roact.createElement(p1.Consumer, { render = p2 })
+		return Roact.createElement(p1.Consumer, { render = Callback })
 	end
 end

@@ -1,80 +1,79 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local dateTimePickerRangeBandRoleModule = require(foundation.Enums.DateTimePickerRangeBandRole)
-local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
-local localizationService = require(foundation.Utility.Wrappers).Services.LocalizationService
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local DateTimePickerRangeBandRoleModule = require(Foundation.Enums.DateTimePickerRangeBandRole)
+local DateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
+local LocalizationService = require(Foundation.Utility.Wrappers).Services.LocalizationService
 
-local function roundUpToNearestHalfHour(value)
-	-- upvalues: dateTimeUtilitiesModule (ref)
-	local var1 = dateTimeUtilitiesModule.toLocalTime(value)
+local function roundUpToNearestHalfHour(p1) --[[ Line: 35 ]]
+	-- upvalues: DateTimeUtilitiesModule (copy)
+	local LocalTime = DateTimeUtilitiesModule.toLocalTime(p1)
 	
-	if var1.Second == 0 and (var1.Minute == 0 or var1.Minute == 30) then
-		return dateTimeUtilitiesModule.roundDownToNearestMinute(value)
+	if LocalTime.Second == 0 and (LocalTime.Minute == 0 or LocalTime.Minute == 30) then
+		return DateTimeUtilitiesModule.roundDownToNearestMinute(p1)
+	else
+		local RoundToStartOfDayResult = DateTimeUtilitiesModule.roundToStartOfDay(p1)
+		
+		return DateTime.fromUnixTimestamp(RoundToStartOfDayResult + math.min(math.ceil((p1.UnixTimestamp - RoundToStartOfDayResult) / 1800) * 1800, 84600))
 	end
-	local var2 = dateTimeUtilitiesModule.roundToStartOfDay(value)
-	
-	return DateTime.fromUnixTimestamp(var2 + math.min(math.ceil((value.UnixTimestamp - var2) / 1800) * 1800, 84600))
 end
 
 return {
-	getDayOfWeek = function(p1)
-		return tonumber(p1:FormatLocalTime("d", "en-us")) or 0
+	getDayOfWeek = function(p1): number --[[ Line: 117 ]]
+		return tonumber((p1:FormatLocalTime("d", "en-us"))) or 0
 	end,
-	getRangeBandRadiusTag = function(p1, p2, p3)
-		-- upvalues: dateTimeUtilitiesModule (ref), dateTimePickerRangeBandRoleModule (ref)
-		local var1 = dateTimeUtilitiesModule.roundToStartOfDay(p2.startDate)
-		local var2 = dateTimeUtilitiesModule.roundToStartOfDay(p2.endDate)
-		local minValue = math.min(var1, var2)
-		local maxValue = math.max(var1, var2)
-		local var3 = dateTimeUtilitiesModule.roundToStartOfDay(p1)
-		local var4 = minValue < var3
-		maxValue = var3 < maxValue
-		local d = tonumber(p1:FormatLocalTime("d", "en-us")) or 0
-		local var5 = if p3 == dateTimePickerRangeBandRoleModule.Start then false elseif d ~= 0 then not var4 else true
-		local var6 = if p3 == dateTimePickerRangeBandRoleModule.End then false elseif d ~= 6 then not maxValue else true
+	getRangeBandRadiusTag = function(p1, p2, End): string --[[ Line: 130 ]]
+		-- upvalues: DateTimeUtilitiesModule (copy), DateTimePickerRangeBandRoleModule (copy)
+		local RoundToStartOfDayResult: number = DateTimeUtilitiesModule.roundToStartOfDay(p2.startDate)
+		local RoundToStartOfDayResult1: number = DateTimeUtilitiesModule.roundToStartOfDay(p2.endDate)
+		local Smallest = math.min(RoundToStartOfDayResult, RoundToStartOfDayResult1)
+		local Largest = math.max(RoundToStartOfDayResult, RoundToStartOfDayResult1)
+		local RoundToStartOfDayResult2 = DateTimeUtilitiesModule.roundToStartOfDay(p1)
+		local Number: number = tonumber((p1:FormatLocalTime("d", "en-us"))) or 0
+		local IsNumberMatch: boolean = End ~= DateTimePickerRangeBandRoleModule.Start and (Number == 0 or not (Smallest < RoundToStartOfDayResult2))
+		local IsNumberMatch1: boolean = End ~= DateTimePickerRangeBandRoleModule.End and (Number == 6 or not (RoundToStartOfDayResult2 < Largest))
 		
-		return if var5 and var6 then "radius-circle" elseif var5 then "radius-left-circle" elseif var6 then "radius-right-circle" else ""
+		return if IsNumberMatch and IsNumberMatch1 then "radius-circle" elseif IsNumberMatch then "radius-left-circle" elseif IsNumberMatch1 then "radius-right-circle" else ""
 	end,
-	getRangeDayBounds = function(p1)
-		-- upvalues: dateTimeUtilitiesModule (ref)
-		local var1 = dateTimeUtilitiesModule.roundToStartOfDay(p1.startDate)
-		local var2 = dateTimeUtilitiesModule.roundToStartOfDay(p1.endDate)
+	getRangeDayBounds = function(p1) --[[ Line: 123 ]]
+		-- upvalues: DateTimeUtilitiesModule (copy)
+		local RoundToStartOfDayResult: number = DateTimeUtilitiesModule.roundToStartOfDay(p1.startDate)
+		local RoundToStartOfDayResult1: number = DateTimeUtilitiesModule.roundToStartOfDay(p1.endDate)
 		
-		return math.min(var1, var2), math.max(var1, var2)
+		return math.min(RoundToStartOfDayResult, RoundToStartOfDayResult1), (math.max(RoundToStartOfDayResult, RoundToStartOfDayResult1))
 	end,
-	getTimeSlotIndex = function(p1, p2)
-		if p2 == nil then
+	getTimeSlotIndex = function(List, Id) --[[ Line: 104 ]]
+		if Id == nil then
 			return nil
 		end
-		for i, v in p1 do
-			if v.id == p2 then
+		for i, value in List do
+			if value.id == Id then
 				return i
 			end
 		end
 		return nil
 	end,
-	getTimeSlotsForDay = function(p3)
-		-- upvalues: roundUpToNearestHalfHour (ref), dateTimeUtilitiesModule (ref), localizationService (ref)
-		local var1 = dateTimeUtilitiesModule.toLocalTime(roundUpToNearestHalfHour(p3))
-		local unixTimestamp = DateTime.fromLocalTime(var1.Year, var1.Month, var1.Day, var1.Hour, var1.Minute, 0).UnixTimestamp
-		local t = {}
+	getTimeSlotsForDay = function(p1) --[[ Line: 73 ]]
+		-- upvalues: roundUpToNearestHalfHour (copy), DateTimeUtilitiesModule (copy), LocalizationService (copy)
+		local LocalTime = DateTimeUtilitiesModule.toLocalTime((roundUpToNearestHalfHour(p1)))
+		local UnixTimestamp = DateTime.fromLocalTime(LocalTime.Year, LocalTime.Month, LocalTime.Day, LocalTime.Hour, LocalTime.Minute, 0).UnixTimestamp
+		local List = {}
 		
 		for i = 0, 47 do
-			local dateTime = DateTime.fromLocalTime(var1.Year, var1.Month, var1.Day, math.floor(i / 2), i % 2 * 30, 0)
-			table.insert(t, {
-				id = dateTime.UnixTimestamp,
-				text = dateTime:FormatLocalTime("LT", localizationService.RobloxLocaleId)
+			local _DateTime = DateTime.fromLocalTime(LocalTime.Year, LocalTime.Month, LocalTime.Day, math.floor(i / 2), i % 2 * 30, 0)
+			table.insert(List, {
+				id = _DateTime.UnixTimestamp,
+				text = _DateTime:FormatLocalTime("LT", LocalizationService.RobloxLocaleId)
 			})
 		end
-		return t, unixTimestamp
+		return List, UnixTimestamp
 	end,
-	resolveAnchorDate = function(p4, p5)
-		return if p4 and p4[1] then p4[1] else p5 or DateTime.now()
+	resolveAnchorDate = function(Entry, p2) --[[ Line: 53 ]]
+		return if Entry and Entry[1] then Entry[1] elseif p2 then p2 else DateTime.now()
 	end,
 	roundUpToNearestHalfHour = roundUpToNearestHalfHour,
-	toViewDate = function(p4)
-		-- upvalues: dateTimeUtilitiesModule (ref)
-		local var2 = dateTimeUtilitiesModule.toLocalTime(p4)
+	toViewDate = function(p2) --[[ Line: 29 ]]
+		-- upvalues: DateTimeUtilitiesModule (copy)
+		local LocalTime = DateTimeUtilitiesModule.toLocalTime(p2)
 		
-		return { month = var2.Month, year = var2.Year }
+		return { month = LocalTime.Month, year = LocalTime.Year }
 	end
 }

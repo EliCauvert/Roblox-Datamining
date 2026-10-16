@@ -1,62 +1,62 @@
-﻿local t = {}
+﻿local Config = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = { defaultConfig = p1, defaultConfigKeys = {} }
+function Config.new(DefaultConfig) --[[ Line: 19 ]]
+	-- upvalues: Config (copy)
+	local config = { defaultConfig = DefaultConfig, defaultConfigKeys = {} }
 	
-	for i in pairs(p1) do
-		table.insert(t_1.defaultConfigKeys, i)
+	for i in pairs(DefaultConfig) do
+		table.insert(config.defaultConfigKeys, i)
 	end
-	t_1._currentConfig = setmetatable({}, {
-		__index = function(_, p2)
-			-- upvalues: t_1 (ref)
-			error(("Invalid global configuration key %q. Valid configuration keys are: %s"):format(tostring(p2), table.concat(t_1.defaultConfigKeys, ", ")), 3)
+	config._currentConfig = setmetatable({}, {
+		__index = function(_, p1) --[[ Line: 29 ]]
+			-- upvalues: config (copy)
+			error(("Invalid global configuration key %q. Valid configuration keys are: %s"):format(tostring(p1), table.concat(config.defaultConfigKeys, ", ")), 3)
 		end
 	})
 	
-	function t_1.set(...)
-		-- upvalues: t (copy), t_1 (ref)
-		return t.set(t_1, ...)
+	function config.set(...) --[[ Line: 42 ]]
+		-- upvalues: Config (upval), config (copy)
+		return Config.set(config, ...)
 	end
 	
-	function t_1.get(...)
-		-- upvalues: t (copy), t_1 (ref)
-		return t.get(t_1, ...)
+	function config.get(...) --[[ Line: 46 ]]
+		-- upvalues: Config (upval), config (copy)
+		return Config.get(config, ...)
 	end
 	
-	function t_1.scoped(...)
-		-- upvalues: t (copy), t_1 (ref)
-		return t.scoped(t_1, ...)
+	function config.scoped(...) --[[ Line: 50 ]]
+		-- upvalues: Config (upval), config (copy)
+		return Config.scoped(config, ...)
 	end
 	
-	t_1.set(p1)
+	config.set(DefaultConfig)
 	
-	return t_1
+	return config
 end
 
-function t.set(value, p2)
-	local t = {}
-	local t_1 = {}
+function Config.set(p1, List) --[[ Line: 59 ]]
+	local List1 = {}
+	local List2 = {}
 	
-	for i, v in pairs(p2) do
-		if value.defaultConfig[i] == nil then
-			table.insert(t, i)
-		elseif typeof(v) == "boolean" then
-			value._currentConfig[i] = v
+	for i, value in pairs(List) do
+		if p1.defaultConfig[i] == nil then
+			table.insert(List1, i)
+		elseif typeof(value) == "boolean" then
+			p1._currentConfig[i] = value
 		else
-			table.insert(t_1, tostring(i) .. " (type " .. typeof(v) .. ")")
+			table.insert(List2, tostring(i) .. " (type " .. typeof(value) .. ")")
 		end
 	end
-	if next(t) ~= nil then
-		error(("Invalid global configuration keys %s. Valid configuration keys are: %s"):format(table.concat(t, ", "), table.concat(value.defaultConfigKeys, ", ")), 3)
+	if next(List1) ~= nil then
+		error(("Invalid global configuration keys %s. Valid configuration keys are: %s"):format(table.concat(List1, ", "), table.concat(p1.defaultConfigKeys, ", ")), 3)
 	end
-	if next(t_1) ~= nil then
-		error(("Invalid global configuration types for keys %s. All configuration values must be boolean."):format(table.concat(t_1, ", ")), 3)
+	if next(List2) ~= nil then
+		error(("Invalid global configuration types for keys %s. All configuration values must be boolean."):format(table.concat(List2, ", ")), 3)
 	end
 end
 
-function t.get(p3)
-	return p3._currentConfig
+function Config.get(p2) --[[ Line: 98 ]]
+	return p2._currentConfig
 end
 
-return t
+return Config

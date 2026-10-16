@@ -1,56 +1,56 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local genericTextLabelModule = require(parent_1.Core.Text.GenericTextLabel.GenericTextLabel)
-local keyLabelModule = require(parent.Menu.KeyLabel.KeyLabel)
-local controllerBarHintInternalPadding = require(script.Parent.BarConstants).ControllerBarHintInternalPadding
-local controllerBarHint = roactModule.PureComponent:extend("ControllerBarHint")
-controllerBarHint.validateProps = tModule.strictInterface({
-	layoutOrder = tModule.optional(tModule.integer),
-	keyCode = tModule.enum(Enum.KeyCode),
-	text = tModule.string,
-	maxWidth = tModule.optional(tModule.number),
-	hintTextSize = tModule.optional(tModule.number)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local GenericTextLabelModule = require(Parent1.Core.Text.GenericTextLabel.GenericTextLabel)
+local KeyLabelModule = require(Parent.Menu.KeyLabel.KeyLabel)
+local ControllerBarHintInternalPadding = require(script.Parent.BarConstants).ControllerBarHintInternalPadding
+local ControllerBarHint = RoactModule.PureComponent:extend("ControllerBarHint")
+ControllerBarHint.validateProps = TModule.strictInterface({
+	layoutOrder = TModule.optional(TModule.integer),
+	keyCode = TModule.enum(Enum.KeyCode),
+	text = TModule.string,
+	maxWidth = TModule.optional(TModule.number),
+	hintTextSize = TModule.optional(TModule.number)
 })
 
-function controllerBarHint.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref), controllerBarHintInternalPadding (ref), keyLabelModule (ref), genericTextLabelModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), p1 (ref), controllerBarHintInternalPadding (copy), keyLabelModule (copy), genericTextLabelModule (copy)
-		local theme = p2.Theme
+function ControllerBarHint.render(p1) --[[ Line: 34 ]]
+	-- upvalues: WithStyleModule (copy), RoactModule (copy), ControllerBarHintInternalPadding (copy), KeyLabelModule (copy), GenericTextLabelModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 35 ]]
+		-- upvalues: RoactModule (upval), p1 (copy), ControllerBarHintInternalPadding (upval), KeyLabelModule (upval), GenericTextLabelModule (upval)
+		local Theme = p2.Theme
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = p1.props.layoutOrder,
 			AutomaticSize = Enum.AutomaticSize.X
 		}, {
-			Layout = roactModule.createElement("UIListLayout", {
+			Layout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				Padding = UDim.new(0, controllerBarHintInternalPadding)
+				Padding = UDim.new(0, ControllerBarHintInternalPadding)
 			}),
-			ControllerBarHintIcon = roactModule.createElement(keyLabelModule, {
+			ControllerBarHintIcon = RoactModule.createElement(KeyLabelModule, {
 				LayoutOrder = 1,
 				iconThemeKey = "IconEmphasis",
 				keyCode = p1.props.keyCode
 			}),
-			ControllerBarHintText = roactModule.createElement(genericTextLabelModule, {
+			ControllerBarHintText = RoactModule.createElement(GenericTextLabelModule, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				TextSize = p1.props.hintTextSize,
 				maxSize = p1.props.maxWidth and Vector2.new(p1.props.maxWidth) or nil,
 				fontStyle = p2.Font.Header2,
-				colorStyle = theme.TextEmphasis,
-				AutomaticSize = if not p1.props.maxWidth then Enum.AutomaticSize.X else nil,
-				TextTransparency = theme.TextEmphasis.TextTransparency,
+				colorStyle = Theme.TextEmphasis,
+				AutomaticSize = if p1.props.maxWidth then nil else Enum.AutomaticSize.X or nil,
+				TextTransparency = Theme.TextEmphasis.TextTransparency,
 				fluidSizing = if p1.props.maxWidth then true else false,
 				Text = p1.props.text,
-				TextTruncate = if p1.props.maxWidth then Enum.TextTruncate.AtEnd else nil,
+				TextTruncate = p1.props.maxWidth and Enum.TextTruncate.AtEnd or nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center
 			})
@@ -58,4 +58,4 @@ function controllerBarHint.render(p1)
 	end)
 end
 
-return controllerBarHint
+return ControllerBarHint

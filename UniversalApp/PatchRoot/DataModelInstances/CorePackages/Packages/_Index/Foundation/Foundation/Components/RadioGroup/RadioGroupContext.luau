@@ -2,7 +2,7 @@
 	value = nil,
 	Selectable = true,
 	testId = "",
-	onValueChanged = function(_)
+	onValueChanged = function(_) --[[ Line: 8 ]]
 		warn("No RadioGroupProvider found for RadioGroup")
 	end
 })

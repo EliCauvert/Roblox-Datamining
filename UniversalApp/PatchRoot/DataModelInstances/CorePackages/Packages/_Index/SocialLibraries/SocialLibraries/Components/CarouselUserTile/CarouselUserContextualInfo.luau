@@ -1,74 +1,74 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roact = dependenciesModule.Roact
-local llama = dependenciesModule.llama
-local UIBlox = dependenciesModule.UIBlox
-local styledTextLabel = UIBlox.App.Text.StyledTextLabel
-local style = UIBlox.Style
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local images = UIBlox.App.ImageSet.Images
-local iconSize = UIBlox.App.Constant.IconSize
-local getTextHeightModule = require(script.Parent.getTextHeight)
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Roact = DependenciesModule.Roact
+local Llama = DependenciesModule.llama
+local UIBlox = DependenciesModule.UIBlox
+local StyledTextLabel = UIBlox.App.Text.StyledTextLabel
+local Style = UIBlox.Style
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local Images = UIBlox.App.ImageSet.Images
+local IconSize = UIBlox.App.Constant.IconSize
+local GetTextHeightModule = require(script.Parent.getTextHeight)
 local _ = require(script.Parent.StyleTypes)
-local constantsModule = require(script.Parent.Constants)
-local foundationFontFaceMigration = dependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
-local t = {
-	maxNumberOfLines = constantsModule.LINES_MAX,
-	lineWidth = constantsModule.TILE_SIZE
+local ConstantsModule = require(script.Parent.Constants)
+local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
+local config = {
+	maxNumberOfLines = ConstantsModule.LINES_MAX,
+	lineWidth = ConstantsModule.TILE_SIZE
 }
 
-return function(p1)
-	-- upvalues: llama (ref), t (ref), style (ref), roact (ref), iconSize (ref), imageSetLabel (ref), images (ref), styledTextLabel (ref), foundationFontFaceMigration (ref), getTextHeightModule (ref)
-	local var1 = llama.Dictionary.join(t, p1)
-	local icon = var1.icon
-	local label = var1.label
+return function(p1) --[[ Line: 48 ]]
+	-- upvalues: Llama (copy), config (copy), Style (copy), Roact (copy), IconSize (copy), ImageSetLabel (copy), Images (copy), StyledTextLabel (copy), FoundationFontFaceMigration (copy), GetTextHeightModule (copy)
+	local JoinResult = Llama.Dictionary.join(config, p1)
+	local Icon = JoinResult.icon
+	local Label = JoinResult.label
 	
-	return style.withStyle(function(p2)
-		-- upvalues: label (ref), roact (copy), var1 (ref), icon (ref), iconSize (copy), imageSetLabel (copy), images (copy), styledTextLabel (copy), foundationFontFaceMigration (copy), getTextHeightModule (copy)
-		local theme = p2.Theme
-		local font = p2.Font
-		local font_1 = label.font or font.CaptionBody
-		local text = label.text
+	return Style.withStyle(function(p2) --[[ Line: 53 ]]
+		-- upvalues: Label (copy), Roact (upval), JoinResult (copy), Icon (copy), IconSize (upval), ImageSetLabel (upval), Images (upval), StyledTextLabel (upval), FoundationFontFaceMigration (upval), GetTextHeightModule (upval)
+		local Theme = p2.Theme
+		local _Font = p2.Font
+		local _Font1 = Label.font or _Font.CaptionBody
+		local Text = Label.text
 		
-		return roact.createElement("Frame", {
+		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = var1.layoutOrder
+			LayoutOrder = JoinResult.layoutOrder
 		}, {
-			UIListLayout = roact.createElement("UIListLayout", {
+			UIListLayout = Roact.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 2)
 			}),
-			IconFrame = if icon and icon.path then roact.createElement("Frame", {
+			IconFrame = if Icon and Icon.path then Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(iconSize.Small, iconSize.Small)
+				Size = UDim2.fromOffset(IconSize.Small, IconSize.Small)
 			}, {
-				layout = roact.createElement("UIListLayout", {
+				layout = Roact.createElement("UIListLayout", {
 					VerticalAlignment = Enum.VerticalAlignment.Top,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center
 				}),
-				ImageLabel = roact.createElement(imageSetLabel, {
+				ImageLabel = Roact.createElement(ImageSetLabel, {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
-					Image = images[icon.path],
-					ImageColor3 = icon.color or theme.IconDefault.Color,
-					ImageTransparency = icon.transparency or theme.IconDefault.Transparency,
-					Size = icon.size or UDim2.fromOffset(iconSize.Small, iconSize.Small),
+					Image = Images[Icon.path],
+					ImageColor3 = Icon.color or Theme.IconDefault.Color,
+					ImageTransparency = Icon.transparency or Theme.IconDefault.Transparency,
+					Size = Icon.size or UDim2.fromOffset(IconSize.Small, IconSize.Small),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5)
 				})
 			}) else nil,
-			ContextualText = if text then roact.createElement(styledTextLabel, {
+			ContextualText = if Text then Roact.createElement(StyledTextLabel, {
 				layoutOrder = 2,
 				lineHeight = 1,
 				fluidSizing = false,
 				richText = false,
-				size = UDim2.fromOffset(if icon then var1.lineWidth - (iconSize.Small + 2) else var1.lineWidth, (if foundationFontFaceMigration then font.BaseSize * font_1.RelativeSize else getTextHeightModule(text, font_1.Font, font.BaseSize * font_1.RelativeSize)) * var1.maxNumberOfLines),
-				text = text,
+				size = UDim2.fromOffset(Icon and JoinResult.lineWidth - (IconSize.Small + 2) or JoinResult.lineWidth, (if FoundationFontFaceMigration then _Font.BaseSize * _Font1.RelativeSize else GetTextHeightModule(Text, _Font1.Font, _Font.BaseSize * _Font1.RelativeSize)) * JoinResult.maxNumberOfLines),
+				text = Text,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Top,
 				textTruncate = Enum.TextTruncate.AtEnd,
-				fontStyle = font_1,
-				colorStyle = label.colorStyle or theme.SecondaryContent
+				fontStyle = _Font1,
+				colorStyle = Label.colorStyle or Theme.SecondaryContent
 			}) else nil
 		})
 	end)

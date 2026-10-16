@@ -1,161 +1,162 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Types)
-local keyUtilsModule = require(script.Parent.KeyUtils)
-local translatedDataSourceModule = require(script.Parent.TranslatedDataSource)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Types)
+local KeyUtilsModule = require(script.Parent.KeyUtils)
+local TranslatedDataSourceModule = require(script.Parent.TranslatedDataSource)
 
-return function(...)
-	-- upvalues: translatedDataSourceModule (ref), keyUtilsModule (ref), dataSourceChangeTypeModule (ref)
+return function(...) --[[ Line: 18 | Named "createConcatDataSource" ]]
+	-- upvalues: TranslatedDataSourceModule (copy), KeyUtilsModule (copy), DataSourceChangeTypeModule (copy)
 	local list = { ... }
 	
-	local function resolve(p1)
-		-- upvalues: list (ref)
-		for i, v in list do
-			if p1 > v.getItemCount() then
-				p1 -= v.getItemCount()
-				continue
+	local function resolve(p1) --[[ Line: 29 ]]
+		-- upvalues: list (copy)
+		for _, value in list do
+			if p1 <= value.getItemCount() then
+				return value, p1
 			end
-			return v, p1
+			p1 -= value.getItemCount()
 		end
 		error("DataSource.concat: index out of range")
 	end
 	
-	local var1 = translatedDataSourceModule(function()
-		-- upvalues: list (ref)
-		local var2 = 0
+	local TranslatedDataSourceModuleResult = TranslatedDataSourceModule(function(): number --[[ Line: 21 | Named "getItemCount" ]]
+		-- upvalues: list (copy)
+		local NewItemCount = 0
 		
-		for i, v in list do
-			var2 += v.getItemCount()
+		for _, value in list do
+			NewItemCount += value.getItemCount()
 		end
-		return var2
-	end, function(p2)
-		-- upvalues: resolve (ref)
-		local var3, var4 = resolve(p2)
+		return NewItemCount
+	end, function(p2) --[[ Line: 39 ]]
+		-- upvalues: resolve (copy)
+		local ResolveResult, ResolveResult2 = resolve(p2)
 		
-		return var3.getItem(var4)
-	end, function(p2)
-		-- upvalues: resolve (ref)
-		local var3, var4 = resolve(p2)
+		return ResolveResult.getItem(ResolveResult2)
+	end, function(p2) --[[ Line: 42 ]]
+		-- upvalues: resolve (copy)
+		local ResolveResult, ResolveResult2 = resolve(p2)
 		
-		return var3.getItemKey(var4)
-	end, function(p2)
-		-- upvalues: list (ref), keyUtilsModule (copy), dataSourceChangeTypeModule (copy)
+		return ResolveResult.getItemKey(ResolveResult2)
+	end, function(Callback) --[[ Line: 45 ]]
+		-- upvalues: list (copy), KeyUtilsModule (upval), DataSourceChangeTypeModule (upval)
 		local t = {}
 		
-		for i, v in list do
-			local list_1 = table.create(v.getItemCount())
+		for i1, value in list do
+			local Buffer = table.create(value.getItemCount())
 			
-			for i_1 = 1, v.getItemCount() do
-				list_1[i_1] = v.getItemKey(i_1)
+			for i = 1, value.getItemCount() do
+				Buffer[i] = value.getItemKey(i)
 			end
-			t[i] = list_1
+			t[i1] = Buffer
 		end
-		local function collectAllKeys()
-			-- upvalues: t (ref)
-			local t_1 = {}
+		local function collectAllKeys() --[[ Line: 54 ]]
+			-- upvalues: t (copy)
+			local List = {}
 			
-			for i, v in t do
-				for i_1, v_1 in v do
-					table.insert(t_1, v_1)
+			for _, value in t do
+				for _, value1 in value do
+					table.insert(List, value1)
 				end
 			end
-			return t_1
+			return List
 		end
 		
-		local function _()
-			-- upvalues: keyUtilsModule (copy), collectAllKeys (ref)
-			keyUtilsModule.validateUnique(collectAllKeys(), "DataSource.concat")
+		local function _() --[[ Line: 63 | Named "validateCurrentKeys" ]]
+			-- upvalues: KeyUtilsModule (upval), collectAllKeys (copy)
+			KeyUtilsModule.validateUnique(collectAllKeys(), "DataSource.concat")
 		end
 		
-		local t_1 = {}
+		local List = {}
 		
-		for i_1, v_1 in list do
-			table.insert(t_1, v_1.subscribe(function(p3)
-				-- upvalues: i_1 (ref), t (ref), dataSourceChangeTypeModule (copy), collectAllKeys (ref), keyUtilsModule (copy), p2 (ref)
-				local var3 = 0
+		for i2, value1 in list do
+			table.insert(List, value1.subscribe(function(p2) --[[ Line: 70 ]]
+				-- upvalues: i2 (copy), t (copy), DataSourceChangeTypeModule (upval), collectAllKeys (copy), KeyUtilsModule (upval), Callback (copy)
+				local Total = 0
 				
-				for i = 1, i_1 - 1 do
-					var3 += #t[i]
+				for i = 1, i2 - 1 do
+					Total += #t[i]
 				end
-				local var4 = 0
+				local PreviousItemCount = 0
 				
-				for i_2, v in t do
-					var4 += #v
+				for _, value in t do
+					PreviousItemCount += #value
 				end
-				local var5 = t[i_1]
-				local t_1 = {}
+				local Entry = t[i2]
+				local List = {}
 				
-				for i_3, v_1 in p3.changes do
-					if v_1.type ~= dataSourceChangeTypeModule.Insert then
-						if v_1.type ~= dataSourceChangeTypeModule.Remove then
-							if v_1.type == dataSourceChangeTypeModule.Update then
-								table.insert(t_1, {
-									type = dataSourceChangeTypeModule.Update,
-									keys = table.clone(v_1.keys)
-								})
-							elseif v_1.type == dataSourceChangeTypeModule.Move then
-								table.insert(var5, v_1.toIndex, table.remove(var5, v_1.fromIndex))
-								table.insert(t_1, {
-									type = dataSourceChangeTypeModule.Move,
-									fromIndex = var3 + v_1.fromIndex,
-									toIndex = var3 + v_1.toIndex,
-									key = v_1.key
-								})
-							elseif v_1.type == dataSourceChangeTypeModule.Reorder then
-								t[i_1] = table.clone(v_1.keys)
-								var5 = t[i_1]
-								table.insert(t_1, {
-									type = dataSourceChangeTypeModule.Reorder,
-									keys = collectAllKeys()
-								})
-							elseif v_1.type == dataSourceChangeTypeModule.Reset then
-								t[i_1] = table.clone(v_1.keys)
-								var5 = t[i_1]
-								table.insert(t_1, {
-									type = dataSourceChangeTypeModule.Reset,
-									keys = collectAllKeys()
-								})
-							end
+				for _, change in p2.changes do
+					if change.type == DataSourceChangeTypeModule.Insert then
+						for i1, key in change.keys do
+							table.insert(Entry, change.index + i1 - 1, key)
 						end
-						for _ = 1, #v_1.keys do
-							table.remove(var5, v_1.index)
-						end
-						table.insert(t_1, {
-							type = dataSourceChangeTypeModule.Remove,
-							index = var3 + v_1.index,
-							keys = table.clone(v_1.keys)
+						table.insert(List, {
+							type = DataSourceChangeTypeModule.Insert,
+							index = Total + change.index,
+							keys = table.clone(change.keys)
 						})
+						continue
+					else
+						if change.type == DataSourceChangeTypeModule.Remove then
+							for _ = 1, #change.keys do
+								table.remove(Entry, change.index)
+							end
+							table.insert(List, {
+								type = DataSourceChangeTypeModule.Remove,
+								index = Total + change.index,
+								keys = table.clone(change.keys)
+							})
+							continue
+						elseif change.type == DataSourceChangeTypeModule.Update then
+							table.insert(List, {
+								type = DataSourceChangeTypeModule.Update,
+								keys = table.clone(change.keys)
+							})
+						elseif change.type == DataSourceChangeTypeModule.Move then
+							table.insert(Entry, change.toIndex, (table.remove(Entry, change.fromIndex)))
+							table.insert(List, {
+								type = DataSourceChangeTypeModule.Move,
+								fromIndex = Total + change.fromIndex,
+								toIndex = Total + change.toIndex,
+								key = change.key
+							})
+						elseif change.type == DataSourceChangeTypeModule.Reorder then
+							t[i2] = table.clone(change.keys)
+							Entry = t[i2]
+							table.insert(List, {
+								type = DataSourceChangeTypeModule.Reorder,
+								keys = collectAllKeys()
+							})
+						elseif change.type == DataSourceChangeTypeModule.Reset then
+							t[i2] = table.clone(change.keys)
+							Entry = t[i2]
+							table.insert(List, {
+								type = DataSourceChangeTypeModule.Reset,
+								keys = collectAllKeys()
+							})
+						end
 					end
-					for i_4, v_2 in v_1.keys do
-						table.insert(var5, v_1.index + i_4 - 1, v_2)
-					end
-					table.insert(t_1, {
-						type = dataSourceChangeTypeModule.Insert,
-						index = var3 + v_1.index,
-						keys = table.clone(v_1.keys)
-					})
 				end
-				keyUtilsModule.validateUnique(collectAllKeys(), "DataSource.concat")
-				p2({
-					changes = t_1,
-					previousItemCount = var4,
+				KeyUtilsModule.validateUnique(collectAllKeys(), "DataSource.concat")
+				Callback({
+					changes = List,
+					previousItemCount = PreviousItemCount,
 					itemCount = #collectAllKeys()
 				})
 			end))
 		end
-		return function()
-			-- upvalues: t_1 (ref)
-			for i, v in t_1 do
-				v()
+		return function() --[[ Line: 136 ]]
+			-- upvalues: List (copy)
+			for _, value in List do
+				value()
 			end
 		end
 	end)
-	local t = {}
+	local ItemKeys = {}
 	
-	for i = 1, var1.getItemCount() do
-		t[i] = var1.getItemKey(i)
+	for i = 1, TranslatedDataSourceModuleResult.getItemCount() do
+		ItemKeys[i] = TranslatedDataSourceModuleResult.getItemKey(i)
 	end
-	keyUtilsModule.validateUnique(t, "DataSource.concat")
+	KeyUtilsModule.validateUnique(ItemKeys, "DataSource.concat")
 	
-	return var1
+	return TranslatedDataSourceModuleResult
 end

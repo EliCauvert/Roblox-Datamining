@@ -1,1055 +1,1049 @@
-﻿local animationClipProviderService = game:GetService("AnimationClipProvider")
-local insertService = game:GetService("InsertService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local emoteUtilityFallbackKeyframeSequenceAssetId = game:DefineFastString("EmoteUtilityFallbackKeyframeSequenceAssetId", "10921261056")
-local emoteUtilityDefaultMoodFromCharacter = game:DefineFastFlag("EmoteUtilityDefaultMoodFromCharacter", false)
-local emoteUtilityUseIdleAnimationFallback = game:DefineFastFlag("EmoteUtilityUseIdleAnimationFallback", false)
-local emoteUtilityReportPoseAnimationDownloadFailure = game:DefineFastFlag("EmoteUtilityReportPoseAnimationDownloadFailure", false)
-local t = {
-	FallbackKeyframeSequenceAssetId = emoteUtilityFallbackKeyframeSequenceAssetId,
+﻿local AnimationClipProvider = game:GetService("AnimationClipProvider")
+local InsertService = game:GetService("InsertService")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local EmoteUtilityFallbackKeyframeSequenceAssetId = game:DefineFastString("EmoteUtilityFallbackKeyframeSequenceAssetId", "10921261056")
+local EmoteUtilityDefaultMoodFromCharacter = game:DefineFastFlag("EmoteUtilityDefaultMoodFromCharacter", false)
+local EmoteUtilityUseIdleAnimationFallback = game:DefineFastFlag("EmoteUtilityUseIdleAnimationFallback", false)
+local EmoteUtilityReportPoseAnimationDownloadFailure = game:DefineFastFlag("EmoteUtilityReportPoseAnimationDownloadFailure", false)
+local EmoteUtilityModule = {
+	FallbackKeyframeSequenceAssetId = EmoteUtilityFallbackKeyframeSequenceAssetId,
 	debugLoadAssetsFromFiles = false,
 	mapAssetIdToFileName = nil,
 	EmoteUtilitySupportAJU = true,
-	FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL = "http://www.roblox.com/asset/?id=" .. emoteUtilityFallbackKeyframeSequenceAssetId
+	FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL = "http://www.roblox.com/asset/?id=" .. EmoteUtilityFallbackKeyframeSequenceAssetId
 }
-local t_1 = {}
+local T = {}
 
-local function _()
-	-- upvalues: t_1 (write)
-	t_1 = {}
+local function _() --[[ Line: 75 | Named "clearJointBlacklist" ]]
+	-- upvalues: T (ref)
+	T = {}
 end
 
-local _ = function(p1)
-	-- upvalues: t_1 (write)
-	t_1[p1] = true
+local _ = function(Key) --[[ Line: 79 | Named "blacklistJoint" ]]
+	-- upvalues: T (ref)
+	T[Key] = true
 end
 
-local _ = function(p1)
-	-- upvalues: t_1 (write)
-	return t_1[p1]
+local _ = function(p1): boolean --[[ Line: 83 | Named "jointIsBlacklisted" ]]
+	-- upvalues: T (ref)
+	return if T[p1] then true else false
 end
 
-local _ = function(value, p1)
-	return math.sqrt(p1.X ^ 2 + p1.Y ^ 2 + p1.Z ^ 2) / 2 * (1 / math.tan(math.rad(value) / 2))
+local _ = function(Degrees: number, Vector): number --[[ Line: 90 | Named "getCameraOffset" ]]
+	return math.sqrt(Vector.X ^ 2 + Vector.Y ^ 2 + Vector.Z ^ 2) / 2 * (1 / math.tan(math.rad(Degrees) / 2))
 end
 
-local _ = function()
-	local ok, status = pcall(function()
+local _ = function() --[[ Line: 100 | Named "isOnRCC" ]]
+	local Success, Result = pcall(function(): boolean --[[ Line: 106 ]]
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	
-	return ok and status
+	return Success and Result
 end
 
-local _ = function()
-	local ok, status = pcall(function()
+local _ = function(): string --[[ Line: 115 | Named "getAnalyticsTarget" ]]
+	local Success, Result = pcall(function(): boolean --[[ Line: 106 ]]
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	
-	return if ok and status then "RCC" else "Client"
+	return if Success and Result then "RCC" else "Client"
 end
 
-local _ = function(p1, p2)
-	-- upvalues: rbxAnalyticsService (ref)
-	local ok, status = pcall(function()
+local _ = function(Text, p1) --[[ Line: 124 | Named "reportCounter" ]]
+	-- upvalues: RbxAnalyticsService (copy)
+	local Success, Result = pcall(function(): boolean --[[ Line: 106 ]]
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
-	rbxAnalyticsService:ReportCounter((if ok and status then "RCC" else "Client") .. "_" .. p3 .. "_" .. (if p2 then "Success" else "Failure"))
+	RbxAnalyticsService:ReportCounter((if Success and Result then "RCC" else "Client") .. "_" .. Text .. "_" .. (if p1 then "Success" else "Failure"))
 end
 
-local function getAnimationAndIsIdle(p1)
-	-- upvalues: t (ref), rbxAnalyticsService (ref)
-	local var1, var2
-	assert(if typeof(p1) ~= "number" then typeof(p1) == "string" else true, "getAnimationAndIsIdle expects animationAssetIdOrUrl to be a number or string")
-	local var3 = nil
-	local _ = nil
-	local _ = nil
+local function getAnimationAndIsIdle(AnimationAssetIdOrUrl) --[[ Line: 142 ]]
+	-- upvalues: EmoteUtilityModule (copy), RbxAnalyticsService (copy)
+	assert(typeof(AnimationAssetIdOrUrl) == "number" or typeof(AnimationAssetIdOrUrl) == "string", "getAnimationAndIsIdle expects animationAssetIdOrUrl to be a number or string")
+	local Animation = nil
+	local Asset = nil
+	local v1 = nil
 	
-	if typeof(p1) == "number" then
-		local _ = nil
-		local var4, var5 = t.LoadAsset(p1)
-		var1 = var4
-		local var6 = var5
+	if typeof(AnimationAssetIdOrUrl) == "number" then
+		local Asset2
+		Asset, Asset2 = EmoteUtilityModule.LoadAsset(AnimationAssetIdOrUrl)
 		
-		if var1 and var6 then
-			var3 = var6:GetChildren()[1]
+		if Asset and Asset2 then
+			Animation = Asset2:GetChildren()[1]
 		end
-		var2 = "EmoteUtility_LoadAsset"
+		v1 = "EmoteUtility_LoadAsset"
 	else
-		local _ = nil
-		local ok, status = pcall(function()
-			-- upvalues: p1 (ref)
-			return game:GetObjects(p1)[1]
+		local Result
+		Asset, Result = pcall(function() --[[ Line: 161 ]]
+			-- upvalues: AnimationAssetIdOrUrl (copy)
+			return game:GetObjects(AnimationAssetIdOrUrl)[1]
 		end)
-		var1 = ok
-		local var7 = status
 		
-		if var1 and var7 then
-			var3 = var7
+		if Asset and Result then
+			Animation = Result
 		end
-		var2 = "EmoteUtility_GetObjects"
+		v1 = "EmoteUtility_GetObjects"
 	end
-	local var8 = var2
-	local var9 = var1
-	local ok, status = pcall(function()
+	local Success, Result1 = pcall(function(): boolean --[[ Line: 106 ]]
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
-	rbxAnalyticsService:ReportCounter((if ok and status then "RCC" else "Client") .. "_" .. var33 .. "_" .. (if var9 then "Success" else "Failure"))
+	RbxAnalyticsService:ReportCounter((if Success and Result1 then "RCC" else "Client") .. "_" .. v1 .. "_" .. (if Asset then "Success" else "Failure"))
 	
-	if not var1 or not var3 then
-		local text = var2 .. "_Failed"
-		local ok_1, status_1 = pcall(function()
+	if not Asset or not Animation then
+		local Text = v1 .. "_Failed"
+		local Success1, Result2 = pcall(function(): boolean --[[ Line: 106 ]]
 			return game.GetService(game, "ThumbnailGenerator") ~= nil
 		end)
-		rbxAnalyticsService:SendEventDeferred(if ok_1 and status_1 then "RCC" else "Client", "EmoteUtility_getPoseAsset", text, { animationAssetIdOrUrl = p1 })
+		RbxAnalyticsService:SendEventDeferred(if Success1 and Result2 then "RCC" else "Client", "EmoteUtility_getPoseAsset", Text, { animationAssetIdOrUrl = AnimationAssetIdOrUrl })
 		
 		return nil, nil
 	end
-	assert(var3, "animation is non-nil. Silence type checker.")
-	local var10 = false
+	assert(Animation, "animation is non-nil. Silence type checker.")
+	local Flag = false
 	
-	if var3.ClassName == "Folder" then
-		var10 = true
-		local var11 = var3:FindFirstChild("Pose", true) or var3:FindFirstChild("pose", true)
+	if Animation.ClassName == "Folder" then
+		Flag = true
+		local Pose = Animation:FindFirstChild("Pose", true) or Animation:FindFirstChild("pose", true)
 		
-		if var11 == nil then
-			var11 = var3:FindFirstChild("Idle", true) or var3:FindFirstChild("idle", true)
+		if Pose == nil then
+			Pose = Animation:FindFirstChild("Idle", true) or Animation:FindFirstChild("idle", true)
 		end
-		var3 = if var11 then var11:FindFirstChildWhichIsA("Animation", true) else var3:FindFirstChildWhichIsA("Animation", true)
+		if Pose then
+			Animation = Pose:FindFirstChildWhichIsA("Animation", true)
+		else
+			Animation = Animation:FindFirstChildWhichIsA("Animation", true)
+		end
 	end
-	return var3, var10
+	return Animation, Flag
 end
 
-local function getAnimationClipByAssetId(value)
-	-- upvalues: t (ref), animationClipProviderService (ref), rbxAnalyticsService (ref)
-	local var1
-	local _ = nil
-	local var2 = nil
+local function getAnimationClipByAssetId(Text: string) --[[ Line: 207 ]]
+	-- upvalues: EmoteUtilityModule (copy), AnimationClipProvider (copy), RbxAnalyticsService (copy)
+	local v1 = nil
+	local Success = nil
 	
-	if t.debugLoadAssetsFromFiles then
-		local var3 = nil
+	if EmoteUtilityModule.debugLoadAssetsFromFiles then
+		local v2 = nil
 		
-		for i in string.gmatch(value, ".*id=([0-9]+)") do
-			var3 = i
+		for i in string.gmatch(Text, ".*id=([0-9]+)") do
+			v2 = i
 		end
-		assert(var3, "assetId should be non-nil")
-		local var4 = tonumber(var3)
-		assert(var4, "assetIdAsNumber should be non-nil")
-		local _ = nil
-		local var5, var6 = t.LoadAsset(var4)
-		var1 = var5
-		local var7 = var6
+		assert(v2, "assetId should be non-nil")
+		local Number: number? = tonumber(v2)
+		assert(Number, "assetIdAsNumber should be non-nil")
+		local Asset2
+		Success, Asset2 = EmoteUtilityModule.LoadAsset(Number)
 		
-		if var1 and var7 then
-			var2 = var7
+		if Success and Asset2 then
+			v1 = Asset2
 		end
 	else
-		local ok, status = pcall(function()
-			-- upvalues: animationClipProviderService (copy), value (ref)
-			return animationClipProviderService:GetAnimationClipAsync(value)
+		Success, v55 = pcall(function() --[[ Line: 224 ]]
+			-- upvalues: AnimationClipProvider (upval), Text (copy)
+			return AnimationClipProvider:GetAnimationClipAsync(Text)
 		end)
-		var1 = ok
-		var2 = status
 	end
-	local var8 = var1
-	local ok, status = pcall(function()
+	local Success1, Result = pcall(function(): boolean --[[ Line: 106 ]]
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
-	rbxAnalyticsService:ReportCounter((if ok and status then "RCC" else "Client") .. "_" .. "EmoteUtility_GetAnimationClipAsync" .. "_" .. (if var8 then "Success" else "Failure"))
+	RbxAnalyticsService:ReportCounter((if Success1 and Result then "RCC" else "Client") .. "_" .. "EmoteUtility_GetAnimationClipAsync" .. "_" .. (if Success then "Success" else "Failure"))
 	
-	if var1 then
-		return var2
-	end
-	local ok_1, status_1 = pcall(function()
-		return game.GetService(game, "ThumbnailGenerator") ~= nil
-	end)
-	rbxAnalyticsService:SendEventDeferred(if ok_1 and status_1 then "RCC" else "Client", "EmoteUtility_GetAnimationClip", "EmoteUtility_GetAnimationClip_GetAnimationClipAsyncFailed", { keyframeSequenceId = value })
-	
-	return nil
-end
-
-local function getThumbnailKeyframeFromAnimationOrUrl(p1, p2, p3)
-	-- upvalues: getAnimationClipByAssetId (ref), t (ref)
-	local var9
-	local var10 = p3
-	local thumbnailTime = nil
-	local _ = nil
-	
-	if typeof(p1) == "string" then
-		var9 = getAnimationClipByAssetId(p1)
+	if Success then
+		return v1
 	else
-		var10 = t.GetNumberValueWithDefault(p1, "ThumbnailKeyframe", p3)
-		thumbnailTime = t.GetNumberValueWithDefault(p1, "ThumbnailTime", nil)
-		var9 = t.GetAnimationClip(p1)
-	end
-	if not var9 then
+		local Success2, Result1 = pcall(function(): boolean --[[ Line: 106 ]]
+			return game.GetService(game, "ThumbnailGenerator") ~= nil
+		end)
+		RbxAnalyticsService:SendEventDeferred(if Success2 and Result1 then "RCC" else "Client", "EmoteUtility_GetAnimationClip", "EmoteUtility_GetAnimationClip_GetAnimationClipAsyncFailed", { keyframeSequenceId = Text })
+		
 		return nil
-	elseif var9:IsA("KeyframeSequence") then
-		return t.GetThumbnailKeyframe(var10, var9, p2)
-	elseif var9:IsA("CurveAnimation") then
-		return t.GetThumbnailKeyframeFromCurve(thumbnailTime, var9, p2)
 	end
-	error("Unsupported Animation type:" .. var48.ClassName)
-	
-	return nil
 end
 
-local _ = function(value, p1, p2)
-	pcall(function()
-		-- upvalues: value (ref), p1 (ref), p2 (ref)
-		value[p1] = p2
+local function getThumbnailKeyframeFromAnimationOrUrl(FALLBACKKEYFRAMESEQUENCEASSETURL, ThumbnailCharacterRotationNumberValueWithDefault, ThumbnailKeyframeNumberValueWithDefault) --[[ Line: 243 ]]
+	-- upvalues: getAnimationClipByAssetId (copy), EmoteUtilityModule (copy)
+	local ThumbnailKeyframeNumberValueWithDefault1 = ThumbnailKeyframeNumberValueWithDefault
+	local ThumbnailTimeNumberValueWithDefault = nil
+	local AnimationClipByAssetId = nil
+	
+	if typeof(FALLBACKKEYFRAMESEQUENCEASSETURL) == "string" then
+		AnimationClipByAssetId = getAnimationClipByAssetId(FALLBACKKEYFRAMESEQUENCEASSETURL)
+	else
+		ThumbnailKeyframeNumberValueWithDefault1 = EmoteUtilityModule.GetNumberValueWithDefault(FALLBACKKEYFRAMESEQUENCEASSETURL, "ThumbnailKeyframe", ThumbnailKeyframeNumberValueWithDefault)
+		ThumbnailTimeNumberValueWithDefault = EmoteUtilityModule.GetNumberValueWithDefault(FALLBACKKEYFRAMESEQUENCEASSETURL, "ThumbnailTime", nil)
+		AnimationClipByAssetId = EmoteUtilityModule.GetAnimationClip(FALLBACKKEYFRAMESEQUENCEASSETURL)
+	end
+	if not AnimationClipByAssetId then
+		return nil
+	elseif AnimationClipByAssetId:IsA("KeyframeSequence") then
+		return EmoteUtilityModule.GetThumbnailKeyframe(ThumbnailKeyframeNumberValueWithDefault1, AnimationClipByAssetId, ThumbnailCharacterRotationNumberValueWithDefault)
+	elseif AnimationClipByAssetId:IsA("CurveAnimation") then
+		return EmoteUtilityModule.GetThumbnailKeyframeFromCurve(ThumbnailTimeNumberValueWithDefault, AnimationClipByAssetId, ThumbnailCharacterRotationNumberValueWithDefault)
+	else
+		error("Unsupported Animation type:" .. AnimationClipByAssetId.ClassName)
+		
+		return nil
+	end
+end
+
+local _ = function(p1, p2, p3) --[[ Line: 275 | Named "trySetProperty" ]]
+	pcall(function() --[[ Line: 276 ]]
+		-- upvalues: p1 (copy), p2 (copy), p3 (copy)
+		p1[p2] = p3
 	end)
 end
 
-local function applyControlsFolder(p1, p2, p3)
-	if not p2 then return end
-	assert(p2, "parentPose is non-nil. Silence type checker.")
-	local name = p1:FindFirstChild(p2.Name)
+local function applyControlsFolder(Object, p1, Object1) --[[ Line: 284 ]]
+	if not p1 then return end
+	assert(p1, "parentPose is non-nil. Silence type checker.")
+	local Name = Object:FindFirstChild(p1.Name)
 	
-	if not name then return end
-	local name_1 = name:FindFirstChild(p3.Name)
+	if not Name then return end
+	local Name1 = Name:FindFirstChild(Object1.Name)
 	
-	if not name_1 then return end
-	for i, v in p3:GetChildren() do
-		if v:IsA("NumberPose") then
-			local name_2 = v.Name
-			local value = v.Value
-			pcall(function()
-				-- upvalues: name_1 (ref), name_2 (ref), value (ref)
-				name_1[name_2] = value
+	if not Name1 then return end
+	for _, NumberPose in Object1:GetChildren() do
+		if NumberPose:IsA("NumberPose") then
+			local Name2 = NumberPose.Name
+			local Value = NumberPose.Value
+			pcall(function() --[[ Line: 276 ]]
+				-- upvalues: Name1 (copy), Name2 (copy), Value (copy)
+				Name1[Name2] = Value
 			end)
 		end
 	end
 end
 
-local function applyKeyframeInner(p4, p5)
-	-- upvalues: t (ref), t_1 (write), applyControlsFolder (ref)
-	local function recurApplyPoses(p6, p7)
-		-- upvalues: p4 (ref), t (copy), t_1 (copy), applyControlsFolder (copy), recurApplyPoses (ref)
-		if p6 and p7:IsA("Pose") then
-			local jointBetween = t.GetJointBetween(p4:FindFirstChild(p6.Name), p4:FindFirstChild(p7.Name))
+local function applyKeyframeInner(Object, MoodKeyframe) --[[ Line: 313 ]]
+	-- upvalues: EmoteUtilityModule (copy), T (ref), applyControlsFolder (copy)
+	local function recurApplyPoses(Folder, Object1) --[[ Line: 314 ]]
+		-- upvalues: Object (copy), EmoteUtilityModule (upval), T (upval), applyControlsFolder (upval), recurApplyPoses (copy)
+		if Folder and Object1:IsA("Pose") then
+			local JointBetween = EmoteUtilityModule.GetJointBetween(Object:FindFirstChild(Folder.Name), (Object:FindFirstChild(Object1.Name)))
 			
-			if jointBetween and not (if not t_1[jointBetween] then false else true) then
-				assert(jointBetween, "joint is non-nil. Silence type checker.")
-				jointBetween.Transform = p7.CFrame
-				t_1[jointBetween] = true
+			if JointBetween and not (if T[JointBetween] then true else false) then
+				assert(JointBetween, "joint is non-nil. Silence type checker.")
+				JointBetween.Transform = Object1.CFrame
+				T[JointBetween] = true
 			end
 		end
-		if p7:IsA("Folder") then
-			applyControlsFolder(p4, p6, p7)
+		if Object1:IsA("Folder") then
+			applyControlsFolder(Object, Folder, Object1)
 			
 			return
 		end
-		for i, v in p7:GetChildren() do
-			recurApplyPoses(p7, v)
+		for _, child in Object1:GetChildren() do
+			recurApplyPoses(Object1, child)
 		end
 	end
 	
-	if p5 then
-		for i, v in pairs(p5:GetPoses()) do
-			if not v:IsA("Folder") then
-				for i_1, v_1 in v:GetChildren() do
-					recurApplyPoses(v, v_1)
+	if MoodKeyframe then
+		for _, pos in pairs(MoodKeyframe:GetPoses()) do
+			if not pos:IsA("Folder") then
+				for _, child in pos:GetChildren() do
+					recurApplyPoses(pos, child)
 				end
 			end
 		end
 	end
 end
 
-local function getRotatedKeyframe(p8, p9)
-	if not p9 or p9 == 0 then
-		return p8
+local function getRotatedKeyframe(Keyframe, Degrees: number) --[[ Line: 351 ]]
+	if not Degrees or Degrees == 0 then
+		return Keyframe
 	end
-	assert(p9, "rotationDegrees is non-nil. Silence type checker.")
-	local var9 = p8:Clone()
-	local var10 = var9:GetPoses()[1]
+	assert(Degrees, "rotationDegrees is non-nil. Silence type checker.")
+	local KeyframeClone = Keyframe:Clone()
+	local Pos = KeyframeClone:GetPoses()[1]
 	
-	if var10 then
-		local var11 = var10:GetSubPoses()[1]
+	if Pos then
+		local SubPos = Pos:GetSubPoses()[1]
 		
-		if var11 then
-			var11.CFrame *= CFrame.Angles(0, math.rad(p9), 0)
+		if SubPos then
+			SubPos.CFrame *= CFrame.Angles(0, math.rad(Degrees), 0)
 		end
 	end
-	return var9
+	return KeyframeClone
 end
 
-local function getRotationCFrame(p8, p9)
-	if p8:IsA("EulerRotationCurve") then
-		return p8:GetRotationAtTime(p9)
-	elseif p8:IsA("RotationCurve") then
-		return p8:GetValueAtTime(p9)
+local function getRotationCFrame(Object, Time) --[[ Line: 372 ]]
+	if Object:IsA("EulerRotationCurve") then
+		return Object:GetRotationAtTime(Time)
+	elseif Object:IsA("RotationCurve") then
+		return Object:GetValueAtTime(Time)
+	else
+		error("Unsupported rotation type:" .. Object.ClassName)
+		
+		return nil
 	end
-	error("Unsupported rotation type:" .. p20.ClassName)
-	
-	return nil
 end
 
-local function findAttachmentsRecur(p8, p9)
-	-- upvalues: findAttachmentsRecur (ref)
-	for i, v in pairs(p8:GetChildren()) do
-		if v:IsA("Attachment") then
-			p9[v.Name] = v
-		elseif not v:IsA("Tool") and not v:IsA("Accoutrement") then
-			findAttachmentsRecur(v, p9)
+local function findAttachmentsRecur(Parent, p2) --[[ Line: 383 ]]
+	-- upvalues: findAttachmentsRecur (copy)
+	for _, child in pairs(Parent:GetChildren()) do
+		if child:IsA("Attachment") then
+			p2[child.Name] = child
+		elseif not child:IsA("Tool") and not child:IsA("Accoutrement") then
+			findAttachmentsRecur(child, p2)
 		end
 	end
 end
 
-local _ = function(p10)
-	-- upvalues: findAttachmentsRecur (ref)
+local _ = function(p3) --[[ Line: 394 | Named "findAttachmentsInTool" ]]
+	-- upvalues: findAttachmentsRecur (copy)
 	local t = {}
-	findAttachmentsRecur(p10, t)
+	findAttachmentsRecur(p3, t)
 	
 	return t
 end
 
-local _ = function(p10)
-	-- upvalues: findAttachmentsRecur (ref)
+local _ = function(p3) --[[ Line: 400 | Named "findAttachmentsInCharacter" ]]
+	-- upvalues: findAttachmentsRecur (copy)
 	local t = {}
-	findAttachmentsRecur(p10, t)
+	findAttachmentsRecur(p3, t)
 	
 	return t
 end
 
-local _ = function(p10, p11)
-	local weld = Instance.new("Weld")
-	weld.Part0 = p10.Parent
-	weld.Part1 = p11.Parent
-	weld.C0 = p10.CFrame
-	weld.C1 = p11.CFrame
-	weld.Parent = p10.Parent
+local _ = function(p3, p4) --[[ Line: 406 | Named "weldAttachments" ]]
+	local Weld = Instance.new("Weld")
+	Weld.Part0 = p3.Parent
+	Weld.Part1 = p4.Parent
+	Weld.C0 = p3.CFrame
+	Weld.C1 = p4.CFrame
+	Weld.Parent = p3.Parent
 	
-	return weld
+	return Weld
 end
 
-local function attachToolToCharacter(p10, p11, p12)
-	-- upvalues: findAttachmentsRecur (ref)
+local function attachToolToCharacter(Parent, Humanoid: Humanoid, Tool: Tool) --[[ Line: 416 ]]
+	-- upvalues: findAttachmentsRecur (copy)
 	local t = {}
-	findAttachmentsRecur(p10, t)
-	local t_1 = {}
-	findAttachmentsRecur(p12, t_1)
-	local var9 = false
+	findAttachmentsRecur(Parent, t)
+	local t1 = {}
+	findAttachmentsRecur(Tool, t1)
+	local Flag = false
 	
-	for i, v in pairs(t_1) do
-		local name = t[v.Name]
+	for _, value in pairs(t1) do
+		local Entry = t[value.Name]
 		
-		if name then
-			var9 = true
-			local weld = Instance.new("Weld")
-			weld.Part0 = name.Parent
-			weld.Part1 = v.Parent
-			weld.C0 = name.CFrame
-			weld.C1 = v.CFrame
-			weld.Parent = name.Parent
+		if Entry then
+			Flag = true
+			local Weld = Instance.new("Weld")
+			Weld.Part0 = Entry.Parent
+			Weld.Part1 = value.Parent
+			Weld.C0 = Entry.CFrame
+			Weld.C1 = value.CFrame
+			Weld.Parent = Entry.Parent
 		end
 	end
-	if var9 then
-		p12.Parent = p10
+	if Flag then
+		Tool.Parent = Parent
 		
 		return
 	end
-	p12.Parent = nil
-	local handle = p12:FindFirstChild("Handle")
-	local grip = p12.Grip
+	Tool.Parent = nil
+	local Handle = Tool:FindFirstChild("Handle")
+	local Grip = Tool.Grip
 	
-	if handle and grip then
-		local rightGripAttachment = t.RightGripAttachment
+	if Handle and Grip then
+		local RightGripAttachment = t.RightGripAttachment
 		
-		if rightGripAttachment then
-			handle.CFrame = rightGripAttachment.Parent.CFrame * rightGripAttachment.CFrame * grip:Inverse()
+		if RightGripAttachment then
+			Handle.CFrame = RightGripAttachment.Parent.CFrame * RightGripAttachment.CFrame * Grip:Inverse()
 		end
 	end
-	p11:EquipTool(p12)
+	Humanoid:EquipTool(Tool)
 end
 
-local function applyR15KeyframeWithTool(p13, p14, p15, p16, p17, p18, p19)
-	-- upvalues: applyKeyframeInner (ref), attachToolToCharacter (ref)
-	if p19 then
-		applyKeyframeInner(p13, p19)
-		applyKeyframeInner(p13, p17)
+local function applyR15KeyframeWithTool(Parent, Humanoid, Tool, OriginalAnimationAssetId, PoseKeyframe, DefaultToolKeyframe, SuggestedKeyframeFromTool) --[[ Line: 448 ]]
+	-- upvalues: applyKeyframeInner (copy), attachToolToCharacter (copy)
+	if SuggestedKeyframeFromTool then
+		applyKeyframeInner(Parent, SuggestedKeyframeFromTool)
+		applyKeyframeInner(Parent, PoseKeyframe)
 	else
-		applyKeyframeInner(p13, p18)
+		applyKeyframeInner(Parent, DefaultToolKeyframe)
 		
-		if p16 ~= nil then
-			applyKeyframeInner(p13, p17)
+		if OriginalAnimationAssetId ~= nil then
+			applyKeyframeInner(Parent, PoseKeyframe)
 		end
 	end
-	attachToolToCharacter(p13, p14, p15)
+	attachToolToCharacter(Parent, Humanoid, Tool)
 end
 
-local function getMainThumbnailKeyframe(p13, p14, p15, p16)
-	-- upvalues: getAnimationAndIsIdle (ref), t (ref), getThumbnailKeyframeFromAnimationOrUrl (ref), emoteUtilityUseIdleAnimationFallback (ref)
-	local var10 = nil
-	local var11 = false
-	local animationId = nil
+local function getMainThumbnailKeyframe(Object, AnimationAssetIdOrUrl, p3, p4) --[[ Line: 502 ]]
+	-- upvalues: getAnimationAndIsIdle (copy), EmoteUtilityModule (copy), getThumbnailKeyframeFromAnimationOrUrl (copy), EmoteUtilityUseIdleAnimationFallback (copy)
+	local v3 = nil
+	local Flag = false
+	local AnimationId = nil
 	
-	if p14 then
-		animationId = p14
-		local var12, var13 = getAnimationAndIsIdle(p14)
+	if AnimationAssetIdOrUrl then
+		AnimationId = AnimationAssetIdOrUrl
+		local AnimationAndIsIdle, AnimationAndIsIdle2 = getAnimationAndIsIdle(AnimationAssetIdOrUrl)
 		
-		if var12 == nil then
-			return nil, var11, animationId
+		if AnimationAndIsIdle == nil then
+			return nil, Flag, AnimationId
 		end
-		assert(var12, "animation is non-nil. Silence type checker.")
+		assert(AnimationAndIsIdle, "animation is non-nil. Silence type checker.")
 		
-		if not var13 then
-			var11 = true
+		if not AnimationAndIsIdle2 then
+			Flag = true
 		end
-		var10 = getThumbnailKeyframeFromAnimationOrUrl(var12, if p15 then t.GetNumberValueWithDefault(var12, "ThumbnailCharacterRotation", 0) else 0)
+		v3 = getThumbnailKeyframeFromAnimationOrUrl(AnimationAndIsIdle, if p3 then EmoteUtilityModule.GetNumberValueWithDefault(AnimationAndIsIdle, "ThumbnailCharacterRotation", 0) else 0)
 		
-		return var10, var11, animationId
-	elseif p16 then
-		local FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL = t.FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL
-		local animate = p13:FindFirstChild("Animate")
-		
-		if animate then
-			local var14 = animate:FindFirstChild("Pose") or animate:FindFirstChild("pose")
+		return v3, Flag, AnimationId
+	else
+		if p4 then
+			local FALLBACKKEYFRAMESEQUENCEASSETURL = EmoteUtilityModule.FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL
+			local Animate = Object:FindFirstChild("Animate")
 			
-			if not var14 and emoteUtilityUseIdleAnimationFallback then
-				var14 = animate:FindFirstChild("Idle") or animate:FindFirstChild("idle")
+			if Animate then
+				local Pose = Animate:FindFirstChild("Pose") or Animate:FindFirstChild("pose")
+				
+				if not Pose and EmoteUtilityUseIdleAnimationFallback then
+					Pose = Animate:FindFirstChild("Idle") or Animate:FindFirstChild("idle")
+				end
+				local Animation = if Pose then Pose:FindFirstChildOfClass("Animation") else nil
+				
+				if Animation then
+					FALLBACKKEYFRAMESEQUENCEASSETURL = Animation
+				end
 			end
-			local var15 = if var14 then var14:FindFirstChildOfClass("Animation") else nil
+			v3 = getThumbnailKeyframeFromAnimationOrUrl(FALLBACKKEYFRAMESEQUENCEASSETURL, 0, 1)
 			
-			if var15 then
-				FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL = var15
+			if typeof(FALLBACKKEYFRAMESEQUENCEASSETURL) == "string" then
+				return v3, Flag, FALLBACKKEYFRAMESEQUENCEASSETURL
 			end
+			AnimationId = FALLBACKKEYFRAMESEQUENCEASSETURL.AnimationId
 		end
-		var10 = getThumbnailKeyframeFromAnimationOrUrl(FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL, 0, 1)
-		
-		if typeof(FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL) == "string" then
-			return var10, var11, FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL
-		end
-		animationId = FALLBACK_KEYFRAME_SEQUENCE_ASSET_URL.AnimationId
+		return v3, Flag, AnimationId
 	end
-	return var10, var11, animationId
 end
 
-local _ = function(p13)
-	-- upvalues: getAnimationAndIsIdle (ref), getThumbnailKeyframeFromAnimationOrUrl (ref)
-	if not p13 then
+local _ = function(AnimationAssetIdOrUrl) --[[ Line: 570 | Named "getMoodThumbnailKeyframe" ]]
+	-- upvalues: getAnimationAndIsIdle (copy), getThumbnailKeyframeFromAnimationOrUrl (copy)
+	if not AnimationAssetIdOrUrl then
 		return nil
 	end
-	assert(p13, "moodAssetId is non-nil. Silence type checker.")
-	local var10, _ = getAnimationAndIsIdle(p13)
+	assert(AnimationAssetIdOrUrl, "moodAssetId is non-nil. Silence type checker.")
+	local AnimationAndIsIdle, _ = getAnimationAndIsIdle(AnimationAssetIdOrUrl)
 	
-	if var10 == nil then
+	if AnimationAndIsIdle == nil then
 		return nil
+	else
+		assert(AnimationAndIsIdle, "animation is non-nil. Silence type checker.")
+		
+		return getThumbnailKeyframeFromAnimationOrUrl(AnimationAndIsIdle, 0)
 	end
-	assert(var10, "animation is non-nil. Silence type checker.")
-	
-	return getThumbnailKeyframeFromAnimationOrUrl(var10, 0)
 end
 
-local function getToolKeyframes(p13, p14)
-	-- upvalues: t (ref)
-	local thumbnailPose = nil
-	local thumbnailKeyframe = nil
-	local tool = p13:FindFirstChildOfClass("Tool")
+local function getToolKeyframes(Object, p3) --[[ Line: 602 ]]
+	-- upvalues: EmoteUtilityModule (copy)
+	local Keyframe = nil
+	local ThumbnailKeyframe = nil
+	local Tool = Object:FindFirstChildOfClass("Tool")
 	
-	if not tool then
+	if not Tool then
 		return nil, nil
 	end
-	assert(tool, "tool is non-nil. Silence type checker.")
-	local var10 = false
+	assert(Tool, "tool is non-nil. Silence type checker.")
+	local Flag = false
 	
-	if not p14 then
-		thumbnailPose = tool:FindFirstChild("ThumbnailPose")
+	if not p3 then
+		Keyframe = Tool:FindFirstChild("ThumbnailPose")
 		
-		if thumbnailPose and thumbnailPose:IsA("Keyframe") then
-			var10 = true
+		if Keyframe and Keyframe:IsA("Keyframe") then
+			Flag = true
 		end
 	end
-	if not var10 then
-		thumbnailPose = nil
-		local animate = p13:FindFirstChild("Animate")
+	if not Flag then
+		Keyframe = nil
+		local Animate = Object:FindFirstChild("Animate")
 		
-		if not animate then
+		if not Animate then
 			return nil, nil
 		end
-		assert(animate, "animateScript is non-nil. Silence type checker.")
-		local toolnone = animate:FindFirstChild("toolnone")
+		assert(Animate, "animateScript is non-nil. Silence type checker.")
+		local Toolnone = Animate:FindFirstChild("toolnone")
 		
-		if not toolnone then
+		if not Toolnone then
 			return nil, nil
 		end
-		assert(toolnone, "toolNoneStringValue is non-nil. Silence type checker.")
-		local toolNoneAnim = toolnone:FindFirstChild("ToolNoneAnim")
+		assert(Toolnone, "toolNoneStringValue is non-nil. Silence type checker.")
+		local ToolNoneAnim = Toolnone:FindFirstChild("ToolNoneAnim")
 		
-		if toolNoneAnim then
-			local animationClip = t.GetAnimationClip(toolNoneAnim)
+		if ToolNoneAnim then
+			local AnimationClip = EmoteUtilityModule.GetAnimationClip(ToolNoneAnim)
 			
-			if not animationClip then
+			if not AnimationClip then
 				return nil, nil
 			end
-			assert(animationClip, "toolAnimationClip is non-nil. Silence type checker.")
-			assert(animationClip:IsA("KeyframeSequence"), "ToolNoneAnim must be a KeyframeSequence")
-			thumbnailKeyframe = t.GetThumbnailKeyframe(nil, animationClip, 0)
+			assert(AnimationClip, "toolAnimationClip is non-nil. Silence type checker.")
+			assert(AnimationClip:IsA("KeyframeSequence"), "ToolNoneAnim must be a KeyframeSequence")
+			ThumbnailKeyframe = EmoteUtilityModule.GetThumbnailKeyframe(nil, AnimationClip, 0)
 			
-			if tool:IsDescendantOf(p13) then
-				return thumbnailPose, thumbnailKeyframe
-			else
+			if not Tool:IsDescendantOf(Object) then
 				return nil, nil
 			end
 		end
 	end
+	return Keyframe, ThumbnailKeyframe
 end
 
-local function getAttachmentCFrame(p13)
-	local cFrame = p13.CFrame
-	local parent = p13.Parent
-	while parent and parent:IsA("Bone") do
-		cFrame = parent.CFrame * cFrame
-		parent = parent.Parent
+local function getAttachmentCFrame(Attachment) --[[ Line: 661 ]]
+	local AttachmentCFrame = Attachment.CFrame
+	local Parent = Attachment.Parent
+	while Parent and Parent:IsA("Bone") do
+		AttachmentCFrame = Parent.CFrame * AttachmentCFrame
+		Parent = Parent.Parent
 	end
-	return cFrame
+	return AttachmentCFrame
 end
 
-local function getJointParts(p14)
-	if p14:IsA("JointInstance") then
-		return p14.Part0, p14.Part1
-	elseif p14:IsA("Constraint") then
-		local attachment0 = p14.Attachment0
-		local attachment1 = p14.Attachment1
+local function getJointParts(Weld) --[[ Line: 671 ]]
+	if Weld:IsA("JointInstance") then
+		return Weld.Part0, Weld.Part1
+	elseif Weld:IsA("Constraint") then
+		local Attachment0 = Weld.Attachment0
+		local Attachment1 = Weld.Attachment1
 		
-		return attachment0 and attachment0:FindFirstAncestorWhichIsA("BasePart"), attachment1 and attachment1:FindFirstAncestorWhichIsA("BasePart")
+		return Attachment0 and Attachment0:FindFirstAncestorWhichIsA("BasePart"), Attachment1 and Attachment1:FindFirstAncestorWhichIsA("BasePart")
+	else
+		return nil, nil
 	end
-	return nil, nil
 end
 
-local function applyCFrame(p14, p15, p16, p17)
-	-- upvalues: getAttachmentCFrame (ref)
-	if p16:IsA("AnimationConstraint") then
-		p15.CFrame = p14.CFrame * getAttachmentCFrame(p16.Attachment0) * p17 * getAttachmentCFrame(p16.Attachment1):Inverse()
+local function applyCFrame(Part, Part1, Weld, p3) --[[ Line: 684 ]]
+	-- upvalues: getAttachmentCFrame (copy)
+	if Weld:IsA("AnimationConstraint") then
+		Part1.CFrame = Part.CFrame * getAttachmentCFrame(Weld.Attachment0) * p3 * getAttachmentCFrame(Weld.Attachment1):Inverse()
 		
 		return
-	elseif p16:IsA("Motor6D") then
-		local c0 = p16.C0
-		local c1 = p16.C1
-		p15.Anchored = true
-		p15.CFrame = p14.CFrame * c0 * p17 * c1:Inverse()
+	end
+	if Weld:IsA("Motor6D") then
+		Part1.Anchored = true
+		Part1.CFrame = Part.CFrame * Weld.C0 * p3 * Weld.C1:Inverse()
 	end
 end
 
-local function getJointPose(p14)
-	if p14:IsA("AnimationConstraint") then
-		return p14.Transform
-	elseif not p14:IsA("Motor6D") then
-		error("Unsupported joint type:" .. p51.ClassName)
+local function getJointPose(Motor) --[[ Line: 697 ]]
+	if Motor:IsA("AnimationConstraint") then
+		return Motor.Transform
+	end
+	if not Motor:IsA("Motor6D") then
+		error("Unsupported joint type:" .. Motor.ClassName)
 		
 		return CFrame.new()
 	end
-	local transform = p14.Transform
+	local Transform = Motor.Transform
 	
-	if p14.CurrentAngle ~= 0 then
-		transform *= CFrame.Angles(0, 0, p14.CurrentAngle)
+	if Motor.CurrentAngle ~= 0 then
+		Transform *= CFrame.Angles(0, 0, Motor.CurrentAngle)
 	end
-	return transform
+	return Transform
 end
 
-function t.ForceAnimationToStep(p14)
-	-- upvalues: getJointParts (ref), getJointPose (ref), applyCFrame (ref)
-	local v
-	local list = { p14:FindFirstChild("HumanoidRootPart") }
+function EmoteUtilityModule.ForceAnimationToStep(Object) --[[ Line: 717 ]]
+	-- upvalues: getJointParts (copy), getJointPose (copy), applyCFrame (copy)
+	local List = { (Object:FindFirstChild("HumanoidRootPart")) }
 	local t = {}
-	local t_1 = {}
-	while #list > 0 do
-		local removed = table.remove(list, 1)
+	local List1 = {}
+	while #List > 0 do
+		local Removed = table.remove(List, 1)
 		
-		if t[removed] then continue end
-		t[removed] = true
+		if t[Removed] then continue end
+		t[Removed] = true
 		
-		for i, v in removed:GetJoints() do
-			if v:IsA("Motor6D") or v:IsA("AnimationConstraint") then
-				local var10, var11 = getJointParts(v)
+		for _, joint in Removed:GetJoints() do
+			if joint:IsA("Motor6D") or joint:IsA("AnimationConstraint") then
+				local JointParts, JointParts2 = getJointParts(joint)
 				
-				if var10 == removed and var11 and not t[var11] then
-					table.insert(t_1, { part0 = removed, part1 = var11, joint = v })
-					table.insert(list, var11)
+				if JointParts == Removed and JointParts2 and not t[JointParts2] then
+					table.insert(List1, { part0 = Removed, part1 = JointParts2, joint = joint })
+					table.insert(List, JointParts2)
 				end
 			end
 		end
 	end
-	for i, v_1 in p14:GetDescendants() do
-		if v_1:IsA("AnimationConstraint") then
-			v_1.Enabled = false
+	for _, AnimationConstraint in Object:GetDescendants() do
+		if AnimationConstraint:IsA("AnimationConstraint") then
+			AnimationConstraint.Enabled = false
 		end
 	end
-	for i, v_2 in t_1 do
-		v = v_2.joint
+	for _, value in List1 do
+		local Joint = value.joint
 		
-		if v:IsA("Motor6D") or v:IsA("AnimationConstraint") then
-			applyCFrame(v_2.part0, v_2.part1, v, getJointPose(v))
+		if Joint:IsA("Motor6D") or Joint:IsA("AnimationConstraint") then
+			applyCFrame(value.part0, value.part1, Joint, (getJointPose(Joint)))
 		end
 	end
 end
 
-function t.LoadAsset(p15)
-	-- upvalues: t (ref), insertService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: t (copy), p15 (ref), insertService (copy)
-		return if t.debugLoadAssetsFromFiles and t.mapAssetIdToFileName then insertService:LoadLocalAsset("rbxasset://" .. t.mapAssetIdToFileName(p15)) else insertService:LoadAsset(p15)
+function EmoteUtilityModule.LoadAsset(AnimationAssetIdOrUrl) --[[ Line: 763 ]]
+	-- upvalues: EmoteUtilityModule (copy), InsertService (copy)
+	local Success, Result = pcall(function() --[[ Line: 764 ]]
+		-- upvalues: EmoteUtilityModule (upval), AnimationAssetIdOrUrl (copy), InsertService (upval)
+		return if EmoteUtilityModule.debugLoadAssetsFromFiles and EmoteUtilityModule.mapAssetIdToFileName then InsertService:LoadLocalAsset("rbxasset://" .. EmoteUtilityModule.mapAssetIdToFileName(AnimationAssetIdOrUrl)) else InsertService:LoadAsset(AnimationAssetIdOrUrl)
 	end)
 	
-	return ok, status
+	return Success, Result
 end
 
-function t.SetDebugLoadAssetsFromFiles(p15, p16)
-	-- upvalues: t (ref)
-	t.debugLoadAssetsFromFiles = p15
-	t.mapAssetIdToFileName = p16
+function EmoteUtilityModule.SetDebugLoadAssetsFromFiles(DebugLoadAssetsFromFiles, MapAssetIdToFileName) --[[ Line: 785 ]]
+	-- upvalues: EmoteUtilityModule (copy)
+	EmoteUtilityModule.debugLoadAssetsFromFiles = DebugLoadAssetsFromFiles
+	EmoteUtilityModule.mapAssetIdToFileName = MapAssetIdToFileName
 end
 
-function t.GetJointBetween(p15, p16)
-	if not p15 or not p16 then
+function EmoteUtilityModule.GetJointBetween(Part, Name) --[[ Line: 793 ]]
+	if not Part or not Name then
 		return nil
 	end
-	assert(p15, "part0 is non-nil. Silence type checker.")
-	assert(p16, "part1 is non-nil. Silence type checker.")
+	assert(Part, "part0 is non-nil. Silence type checker.")
+	assert(Name, "part1 is non-nil. Silence type checker.")
 	
-	for i, v in p16:GetChildren() do
-		if not v:IsA("Motor6D") or v.Part0 ~= p15 then
-			if v:IsA("AnimationConstraint") and v.Part0 == p15 then
-				return v
-			end
+	for _, child in Name:GetChildren() do
+		if child:IsA("Motor6D") and child.Part0 == Part then
+			return child
+		elseif child:IsA("AnimationConstraint") and child.Part0 == Part then
+			return child
 		end
-		return v
 	end
 	return nil
 end
 
-t.GetMotor6DBetween = t.GetJointBetween
+EmoteUtilityModule.GetMotor6DBetween = EmoteUtilityModule.GetJointBetween
 
-function t.PoseKeyframeHasFaceAnimation(p17)
-	if not p17 then
+function EmoteUtilityModule.PoseKeyframeHasFaceAnimation(PoseKeyframe): boolean --[[ Line: 817 ]]
+	if not PoseKeyframe then
 		return false
 	end
-	assert(p17, "poseKeyframe is non-nil. Silence type checker.")
+	assert(PoseKeyframe, "poseKeyframe is non-nil. Silence type checker.")
 	
-	local function recurHasFaceAnimation(p18)
-		-- upvalues: recurHasFaceAnimation (ref)
-		if p18:IsA("Folder") then
+	local function recurHasFaceAnimation(Folder: Folder): boolean --[[ Line: 823 ]]
+		-- upvalues: recurHasFaceAnimation (copy)
+		if Folder:IsA("Folder") then
 			return true
 		end
-		for i, v in p18:GetChildren() do
-			if recurHasFaceAnimation(v) then
+		for _, child in Folder:GetChildren() do
+			if recurHasFaceAnimation(child) then
 				return true
 			end
 		end
 		return false
 	end
 	
-	for i, v in pairs(p17:GetPoses()) do
-		if recurHasFaceAnimation(v) then
+	for _, pos in pairs(PoseKeyframe:GetPoses()) do
+		if recurHasFaceAnimation(pos) then
 			return true
 		end
 	end
 	return false
 end
 
-function t.ApplyKeyframe(p19, p20)
-	-- upvalues: t_1 (write), applyKeyframeInner (ref), t (ref)
-	t_1 = {}
-	applyKeyframeInner(p19, p20)
-	t_1 = {}
-	local ok, status = pcall(function()
+function EmoteUtilityModule.ApplyKeyframe(p3, p4) --[[ Line: 848 ]]
+	-- upvalues: T (ref), applyKeyframeInner (copy), EmoteUtilityModule (copy)
+	T = {}
+	applyKeyframeInner(p3, p4)
+	T = {}
+	local Success, Result = pcall(function(): boolean --[[ Line: 106 ]]
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	
-	if ok and status then
-		t.ForceAnimationToStep(p19)
+	if Success and Result then
+		EmoteUtilityModule.ForceAnimationToStep(p3)
 	end
 end
 
-function t.GetNumberValueWithDefault(p19, p20, p21)
-	local var12 = p21
-	local var13 = p19:FindFirstChild(p20)
+function EmoteUtilityModule.GetNumberValueWithDefault(KeyframeSequenceId, ChildName, ThumbnailKeyframeNumberValueWithDefault) --[[ Line: 857 ]]
+	local ThumbnailKeyframeNumberValueWithDefault1 = ThumbnailKeyframeNumberValueWithDefault
+	local ChildName1 = KeyframeSequenceId:FindFirstChild(ChildName)
 	
-	if var13 and var13:IsA("NumberValue") then
-		var12 = var13.Value
+	if ChildName1 and ChildName1:IsA("NumberValue") then
+		ThumbnailKeyframeNumberValueWithDefault1 = ChildName1.Value
 	end
-	return var12
+	return ThumbnailKeyframeNumberValueWithDefault1
 end
 
-function t.GetAnimationClip(p19)
-	-- upvalues: getAnimationClipByAssetId (ref)
-	if p19:IsA("KeyframeSequence") then
-		return p19
-	elseif p19:IsA("CurveAnimation") then
-		return p19
-	elseif p19:IsA("Animation") then
-		return getAnimationClipByAssetId(p19.AnimationId)
+function EmoteUtilityModule.GetAnimationClip(Object) --[[ Line: 870 ]]
+	-- upvalues: getAnimationClipByAssetId (copy)
+	if Object:IsA("KeyframeSequence") then
+		return Object
+	elseif Object:IsA("CurveAnimation") then
+		return Object
+	elseif Object:IsA("Animation") then
+		return (getAnimationClipByAssetId(Object.AnimationId))
+	else
+		error("Cannot get AnimationClip from type:" .. Object.ClassName)
+		
+		return nil
 	end
-	error("Cannot get AnimationClip from type:" .. p65.ClassName)
-	
-	return nil
 end
 
-function t.GetThumbnailKeyframe(p19, p20, p21)
-	-- upvalues: getRotatedKeyframe (ref)
-	local keyframes = p20:GetKeyframes()
-	local _ = nil
+function EmoteUtilityModule.GetThumbnailKeyframe(ThumbnailKeyframeNumberValueWithDefault: number, AnimationClip, p3) --[[ Line: 886 ]]
+	-- upvalues: getRotatedKeyframe (copy)
+	local Keyframes = AnimationClip:GetKeyframes()
 	
-	return getRotatedKeyframe(if p19 and p19 > 0 and p19 <= #keyframes then keyframes[p19] else keyframes[math.ceil(#keyframes / 2)], p21)
+	return (getRotatedKeyframe(if ThumbnailKeyframeNumberValueWithDefault and ThumbnailKeyframeNumberValueWithDefault > 0 and ThumbnailKeyframeNumberValueWithDefault <= #Keyframes then Keyframes[ThumbnailKeyframeNumberValueWithDefault] else Keyframes[math.ceil(#Keyframes / 2)], p3))
 end
 
-function t.GetCurveAnimationTimeLength(p19)
-	local var12 = 0
+function EmoteUtilityModule.GetCurveAnimationTimeLength(Object): number --[[ Line: 904 ]]
+	local Largest = 0
 	
-	for i, v in p19:GetDescendants() do
-		if v:IsA("FloatCurve") and v.Length ~= 0 then
-			var12 = math.max(var12, v:GetKeyAtIndex(v.Length).Time)
+	for _, FloatCurve in Object:GetDescendants() do
+		if FloatCurve:IsA("FloatCurve") and FloatCurve.Length ~= 0 then
+			Largest = math.max(Largest, FloatCurve:GetKeyAtIndex(FloatCurve.Length).Time)
 		end
 	end
-	return var12
+	return Largest
 end
 
-function t.GetThumbnailKeyframeFromCurve(p20, p21, p22)
-	-- upvalues: t (ref), getRotationCFrame (ref), getRotatedKeyframe (ref)
-	local curveAnimationTimeLength = t.GetCurveAnimationTimeLength(p21)
+function EmoteUtilityModule.GetThumbnailKeyframeFromCurve(Time: number, AnimationClip, p3) --[[ Line: 922 ]]
+	-- upvalues: EmoteUtilityModule (copy), getRotationCFrame (copy), getRotatedKeyframe (copy)
+	local CurveAnimationTimeLength: number = EmoteUtilityModule.GetCurveAnimationTimeLength(AnimationClip)
 	
-	if not p20 or p20 < 0 or curveAnimationTimeLength < p20 then
-		p20 = curveAnimationTimeLength / 2
+	if not Time or Time < 0 or CurveAnimationTimeLength < Time then
+		Time = CurveAnimationTimeLength / 2
 	end
-	assert(p20, "thumbnailTime should be non-nil. Silence type checker")
-	local t_1 = { Position = true, Rotation = true }
+	assert(Time, "thumbnailTime should be non-nil. Silence type checker")
+	local config = { Position = true, Rotation = true }
 	
-	local function _(p23)
-		for i, v in p23:GetChildren() do
-			if v:IsA("Folder") then
+	local function _(Object): boolean --[[ Line: 940 | Named "hasSubFolders" ]]
+		for _, Folder in Object:GetChildren() do
+			if Folder:IsA("Folder") then
 				return true
 			end
 		end
 		return false
 	end
 	
-	local function recurGenerateKeyframe(p24, p25)
-		-- upvalues: getRotationCFrame (copy), p20 (write), t_1 (ref), recurGenerateKeyframe (ref)
-		local v
-		local var13 = nil
-		local position = p25:FindFirstChild("Position")
-		local rotation = p25:FindFirstChild("Rotation")
+	local function recurGenerateKeyframe(Parent, Object) --[[ Line: 949 ]]
+		-- upvalues: getRotationCFrame (upval), Time (ref), config (copy), recurGenerateKeyframe (copy)
+		local Pose = nil
+		local Position = Object:FindFirstChild("Position")
+		local Rotation = Object:FindFirstChild("Rotation")
 		
-		if position and rotation then
-			local var14 = getRotationCFrame(rotation, p20)
+		if Position and Rotation then
+			local RotationCFrame = getRotationCFrame(Rotation, Time)
 			
-			if var14 then
-				local pose = Instance.new("Pose")
-				pose.CFrame = var14 + Vector3.new(table.unpack(position:GetValueAtTime(p20)))
-				pose.Name = p25.Name
-				pose.Parent = p24
-				var13 = pose
+			if RotationCFrame then
+				local Pose1 = Instance.new("Pose")
+				Pose1.CFrame = RotationCFrame + Vector3.new(table.unpack(Position:GetValueAtTime(Time)))
+				Pose1.Name = Object.Name
+				Pose1.Parent = Parent
+				Pose = Pose1
 			end
 		else
-			local folder
-			for i, v in p25:GetChildren() do
-				if v:IsA("Folder") then
-					folder = true
-					if folder then
-						local pose = Instance.new("Pose")
-						pose.CFrame = CFrame.new()
-						pose.Name = p25.Name
-						pose.Parent = p24
-						var13 = pose
-					else
-						folder = Instance.new("Folder")
-						folder.Name = p25.Name
-						folder.Parent = p24
-						var13 = folder
-					end
+			local Flag = false
+			
+			for _, Folder in Object:GetChildren() do
+				if Folder:IsA("Folder") then
+					Flag = true
+					break
 				end
 			end
-			folder = false
+			if Flag then
+				local Pose2 = Instance.new("Pose")
+				Pose2.CFrame = CFrame.new()
+				Pose2.Name = Object.Name
+				Pose2.Parent = Parent
+				Pose = Pose2
+			else
+				local Folder1 = Instance.new("Folder")
+				Folder1.Name = Object.Name
+				Folder1.Parent = Parent
+				Pose = Folder1
+			end
 		end
-		for i, v in p25:GetChildren() do
-			if v:IsA("FloatCurve") and not t_1[v] then
-				v = Instance.new("NumberPose")
-				v.Name = v.Name
-				local var15 = v:GetValueAtTime(p20) or 0
-				assert(var15, "valueAtTime should be non-nil. Silence type checker.")
-				v.Value = var15
-				v.Parent = var13
-			elseif v:IsA("Folder") then
-				recurGenerateKeyframe(var13, v)
+		for _, child in Object:GetChildren() do
+			if child:IsA("FloatCurve") and not config[child] then
+				local NumberPose = Instance.new("NumberPose")
+				NumberPose.Name = child.Name
+				local ValueAtTime = child:GetValueAtTime(Time) or 0
+				assert(ValueAtTime, "valueAtTime should be non-nil. Silence type checker.")
+				NumberPose.Value = ValueAtTime
+				NumberPose.Parent = Pose
+			elseif child:IsA("Folder") then
+				recurGenerateKeyframe(Pose, child)
 			end
 		end
 	end
 	
-	local keyframe = Instance.new("Keyframe")
-	keyframe.Name = p21.Name
-	keyframe.Time = p20
+	local Keyframe = Instance.new("Keyframe")
+	Keyframe.Name = AnimationClip.Name
+	Keyframe.Time = Time
 	
-	for i, v in p21:GetChildren() do
-		if v:IsA("Folder") then
-			recurGenerateKeyframe(keyframe, v)
+	for _, Folder in AnimationClip:GetChildren() do
+		if Folder:IsA("Folder") then
+			recurGenerateKeyframe(Keyframe, Folder)
 		end
 	end
-	return getRotatedKeyframe(keyframe, p22)
+	return (getRotatedKeyframe(Keyframe, p3))
 end
 
-function t.ClearPlayerCharacterFace(p26)
-	local faceControls = p26:FindFirstChildWhichIsA("FaceControls", true)
+function EmoteUtilityModule.ClearPlayerCharacterFace(Object) --[[ Line: 1015 ]]
+	local FaceControls = Object:FindFirstChildWhichIsA("FaceControls", true)
 	
-	if faceControls then
-		local parent = faceControls.Parent
-		local children = faceControls:GetChildren()
-		local faceControls_1 = Instance.new("FaceControls")
-		faceControls_1.Parent = parent
+	if FaceControls then
+		local FaceControls1 = Instance.new("FaceControls")
+		FaceControls1.Parent = FaceControls.Parent
 		
-		for i, v in children do
-			v.Parent = faceControls_1
+		for _, child in FaceControls:GetChildren() do
+			child.Parent = FaceControls1
 		end
-		faceControls:Destroy()
+		FaceControls:Destroy()
 	end
 end
 
-function t.AdjustArmOnR6ForTool(p27)
-	local tool = p27:FindFirstChildOfClass("Tool")
-	local torso = p27:FindFirstChild("Torso")
+function EmoteUtilityModule.AdjustArmOnR6ForTool(Object) --[[ Line: 1032 ]]
+	local Tool = Object:FindFirstChildOfClass("Tool")
+	local Torso = Object:FindFirstChild("Torso")
 	
-	if torso then
-		local var16 = torso:FindFirstChild("Right Shoulder")
+	if Torso then
+		local RightShoulder = Torso:FindFirstChild("Right Shoulder")
 		
-		if var16 then
-			if tool then
-				var16.CurrentAngle = 1.570796326795
-				var16.DesiredAngle = 1.570796326795
+		if RightShoulder then
+			if Tool then
+				RightShoulder.CurrentAngle = 1.5707963267948966
+				RightShoulder.DesiredAngle = 1.5707963267948966
 				
 				return
 			end
-			var16.CurrentAngle = 0
-			var16.DesiredAngle = 0
+			RightShoulder.CurrentAngle = 0
+			RightShoulder.DesiredAngle = 0
 		end
 	end
 end
 
-function t.SetPlayerCharacterFace(p27, p28)
-	-- upvalues: getAnimationAndIsIdle (ref), getThumbnailKeyframeFromAnimationOrUrl (ref), t (ref)
-	if not p28 then return end
-	if p28 == "" then return end
-	if p28 == 0 then return end
-	local var16
-	assert(if typeof(p28) ~= "number" then typeof(p28) == "string" else true, "EmoteUtility.SetPlayerCharacterFace expects animationAssetIdOrUrl to be a number or string")
+function EmoteUtilityModule.SetPlayerCharacterFace(Object, AnimationAssetIdOrUrl) --[[ Line: 1054 ]]
+	-- upvalues: getAnimationAndIsIdle (copy), getThumbnailKeyframeFromAnimationOrUrl (copy), EmoteUtilityModule (copy)
+	if not AnimationAssetIdOrUrl then return end
+	if AnimationAssetIdOrUrl == "" then return end
+	if AnimationAssetIdOrUrl == 0 then return end
+	assert(typeof(AnimationAssetIdOrUrl) == "number" or typeof(AnimationAssetIdOrUrl) == "string", "EmoteUtility.SetPlayerCharacterFace expects animationAssetIdOrUrl to be a number or string")
 	
-	if not p27:FindFirstChildOfClass("Humanoid") then return end
-	if p28 then
-		assert(p28, "moodAssetId is non-nil. Silence type checker.")
-		local var17, _ = getAnimationAndIsIdle(p28)
+	if not Object:FindFirstChildOfClass("Humanoid") then return end
+	local v3 = nil
+	if AnimationAssetIdOrUrl then
+		assert(AnimationAssetIdOrUrl, "moodAssetId is non-nil. Silence type checker.")
+		local AnimationAndIsIdle, _ = getAnimationAndIsIdle(AnimationAssetIdOrUrl)
 		
-		if var17 == nil then
-			var16 = nil
+		if AnimationAndIsIdle == nil then
+			v3 = nil
 		else
-			assert(var17, "animation is non-nil. Silence type checker.")
-			var16 = getThumbnailKeyframeFromAnimationOrUrl(var17, 0)
+			assert(AnimationAndIsIdle, "animation is non-nil. Silence type checker.")
+			v3 = getThumbnailKeyframeFromAnimationOrUrl(AnimationAndIsIdle, 0)
 		end
 	else
-		var16 = nil
+		v3 = nil
 	end
-	if var16 then
-		t.ClearPlayerCharacterFace(p27)
-		t.ApplyKeyframe(p27, var16)
+	if v3 then
+		EmoteUtilityModule.ClearPlayerCharacterFace(Object)
+		EmoteUtilityModule.ApplyKeyframe(Object, v3)
 		
 		return
 	end
 end
 
-function t.SetPlayerCharacterNeutralPose(p27)
-	-- upvalues: t (ref)
-	local humanoid = p27:FindFirstChildOfClass("Humanoid")
+function EmoteUtilityModule.SetPlayerCharacterNeutralPose(Object) --[[ Line: 1095 ]]
+	-- upvalues: EmoteUtilityModule (copy)
+	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 	
-	if not humanoid then return end
-	assert(humanoid, "humanoid should be non-nil. Silence type checker.")
-	humanoid:BuildRigFromAttachments()
+	if not Humanoid then return end
+	assert(Humanoid, "humanoid should be non-nil. Silence type checker.")
+	Humanoid:BuildRigFromAttachments()
 	
-	if humanoid.RigType == Enum.HumanoidRigType.R15 then
-		t.ClearPlayerCharacterFace(p27)
+	if Humanoid.RigType == Enum.HumanoidRigType.R15 then
+		EmoteUtilityModule.ClearPlayerCharacterFace(Object)
 		
-		local function recurResetJoint(value)
-			-- upvalues: recurResetJoint (ref)
-			if value:IsA("Motor6D") then
-				value.Transform = CFrame.new()
-			elseif value:IsA("AnimationConstraint") then
-				value.Transform = CFrame.new()
+		local function recurResetJoint(Object) --[[ Line: 1110 ]]
+			-- upvalues: recurResetJoint (copy)
+			if Object:IsA("Motor6D") then
+				Object.Transform = CFrame.new()
+			elseif Object:IsA("AnimationConstraint") then
+				Object.Transform = CFrame.new()
 			end
-			for i, v in value:GetChildren() do
-				recurResetJoint(v)
+			for _, child in Object:GetChildren() do
+				recurResetJoint(child)
 			end
 		end
 		
-		recurResetJoint(p27)
+		recurResetJoint(Object)
 		
 		return
 	end
 end
 
-function t.FindDefaultMoodAnimationId(p28)
-	local animate = p28:FindFirstChild("Animate")
+function EmoteUtilityModule.FindDefaultMoodAnimationId(Object) --[[ Line: 1127 ]]
+	local Animate = Object:FindFirstChild("Animate")
 	
-	if not animate then
+	if not Animate then
 		return nil
 	end
-	local mood = animate:FindFirstChild("mood")
+	local Mood = Animate:FindFirstChild("mood")
 	
-	if not mood then
+	if Mood then
+		local Animation = Mood:FindFirstChildOfClass("Animation")
+		
+		return if Animation and Animation.AnimationId ~= "" then Animation.AnimationId else nil
+	else
 		return nil
 	end
-	local animation = mood:FindFirstChildOfClass("Animation")
-	
-	return if animation and animation.AnimationId ~= "" then animation.AnimationId else nil
 end
 
-local function loadKeyframesForPoseR15(p28, p29, p30, p31, p32)
-	-- upvalues: getMainThumbnailKeyframe (ref), getToolKeyframes (ref), emoteUtilityDefaultMoodFromCharacter (ref), t (ref), getAnimationAndIsIdle (ref), getThumbnailKeyframeFromAnimationOrUrl (ref), getAnimationClipByAssetId (ref)
-	local t_1 = { originalAnimationAssetId = p29 }
-	local var16, var17, var18 = getMainThumbnailKeyframe(p28, p29, not p31, if p32 then false else true)
-	local var19 = nil
-	local var20 = nil
+local function loadKeyframesForPoseR15(p4, OriginalAnimationAssetId, AnimationAssetIdOrUrl, p5, p6) --[[ Line: 1146 ]]
+	-- upvalues: getMainThumbnailKeyframe (copy), getToolKeyframes (copy), EmoteUtilityDefaultMoodFromCharacter (copy), EmoteUtilityModule (copy), getAnimationAndIsIdle (copy), getThumbnailKeyframeFromAnimationOrUrl (copy), getAnimationClipByAssetId (copy)
+	local config = { originalAnimationAssetId = OriginalAnimationAssetId }
+	local MainThumbnailKeyframe, MainThumbnailKeyframe2, MainThumbnailKeyframe3 = getMainThumbnailKeyframe(p4, OriginalAnimationAssetId, not p5, not p6)
+	local SuggestedKeyframeFromTool = nil
+	local DefaultToolKeyframe = nil
 	
-	if not p32 and var16 then
-		local var21, var22 = getToolKeyframes(p28, var17)
-		var19 = var21
-		var20 = var22
+	if not p6 and MainThumbnailKeyframe then
+		SuggestedKeyframeFromTool, DefaultToolKeyframe = getToolKeyframes(p4, MainThumbnailKeyframe2)
 	end
-	local var23 = nil
-	local var24 = false
+	local ThumbnailKeyframe = nil
+	local Flag = false
 	
-	if emoteUtilityDefaultMoodFromCharacter or p30 and p30 ~= 0 then
-		if p29 == nil then
-			var24 = true
-		elseif not t.PoseKeyframeHasFaceAnimation(var16) then
-			var24 = true
+	if EmoteUtilityDefaultMoodFromCharacter or AnimationAssetIdOrUrl and AnimationAssetIdOrUrl ~= 0 then
+		if OriginalAnimationAssetId == nil then
+			Flag = true
+		elseif not EmoteUtilityModule.PoseKeyframeHasFaceAnimation(MainThumbnailKeyframe) then
+			Flag = true
 		end
 	end
-	if var24 then
-		if emoteUtilityDefaultMoodFromCharacter then
-			if p30 and p30 ~= 0 then
-				if p30 then
-					assert(p30, "moodAssetId is non-nil. Silence type checker.")
-					local var25, _ = getAnimationAndIsIdle(p30)
+	if Flag then
+		if EmoteUtilityDefaultMoodFromCharacter then
+			if AnimationAssetIdOrUrl and AnimationAssetIdOrUrl ~= 0 then
+				if AnimationAssetIdOrUrl then
+					assert(AnimationAssetIdOrUrl, "moodAssetId is non-nil. Silence type checker.")
+					local AnimationAndIsIdle, _ = getAnimationAndIsIdle(AnimationAssetIdOrUrl)
 					
-					if var25 == nil then
-						var23 = nil
+					if AnimationAndIsIdle == nil then
+						ThumbnailKeyframe = nil
 					else
-						assert(var25, "animation is non-nil. Silence type checker.")
-						var23 = getThumbnailKeyframeFromAnimationOrUrl(var25, 0)
+						assert(AnimationAndIsIdle, "animation is non-nil. Silence type checker.")
+						ThumbnailKeyframe = getThumbnailKeyframeFromAnimationOrUrl(AnimationAndIsIdle, 0)
 					end
 				else
-					var23 = nil
+					ThumbnailKeyframe = nil
 				end
 			end
-			if not var23 then
-				local var26 = t.FindDefaultMoodAnimationId(p28)
+			if not ThumbnailKeyframe then
+				local DefaultMoodAnimationId = EmoteUtilityModule.FindDefaultMoodAnimationId(p4)
 				
-				if var26 then
-					local var27 = getAnimationClipByAssetId(var26)
+				if DefaultMoodAnimationId then
+					local AnimationClipByAssetId = getAnimationClipByAssetId(DefaultMoodAnimationId)
 					
-					if var27 and var27:IsA("KeyframeSequence") then
-						var23 = t.GetThumbnailKeyframe(nil, var27, 0)
+					if AnimationClipByAssetId and AnimationClipByAssetId:IsA("KeyframeSequence") then
+						ThumbnailKeyframe = EmoteUtilityModule.GetThumbnailKeyframe(nil, AnimationClipByAssetId, 0)
 					end
 				end
 			end
-		elseif p30 then
-			assert(p30, "moodAssetId is non-nil. Silence type checker.")
-			local var28, _ = getAnimationAndIsIdle(p30)
+		elseif AnimationAssetIdOrUrl then
+			assert(AnimationAssetIdOrUrl, "moodAssetId is non-nil. Silence type checker.")
+			local AnimationAndIsIdle1, _ = getAnimationAndIsIdle(AnimationAssetIdOrUrl)
 			
-			if var28 == nil then
-				var23 = nil
+			if AnimationAndIsIdle1 == nil then
+				ThumbnailKeyframe = nil
 			else
-				assert(var28, "animation is non-nil. Silence type checker.")
-				var23 = getThumbnailKeyframeFromAnimationOrUrl(var28, 0)
+				assert(AnimationAndIsIdle1, "animation is non-nil. Silence type checker.")
+				ThumbnailKeyframe = getThumbnailKeyframeFromAnimationOrUrl(AnimationAndIsIdle1, 0)
 			end
 		else
-			var23 = nil
+			ThumbnailKeyframe = nil
 		end
 	end
-	t_1.poseKeyframe = var16
-	t_1.moodKeyframe = var23
-	t_1.defaultToolKeyframe = var20
-	t_1.suggestedKeyframeFromTool = var19
-	t_1.finalAnimationAssetIdOrUrl = var18
+	config.poseKeyframe = MainThumbnailKeyframe
+	config.moodKeyframe = ThumbnailKeyframe
+	config.defaultToolKeyframe = DefaultToolKeyframe
+	config.suggestedKeyframeFromTool = SuggestedKeyframeFromTool
+	config.finalAnimationAssetIdOrUrl = MainThumbnailKeyframe3
 	
-	return t_1
+	return config
 end
 
-function t.LoadKeyframesForPose(p28, p29, p30, p31, p32)
-	-- upvalues: loadKeyframesForPoseR15 (ref)
-	assert(p28, "character should be non-nil")
+function EmoteUtilityModule.LoadKeyframesForPose(Object, OriginalAnimationAssetId: number, AnimationAssetIdOrUrl, p4, p5) --[[ Line: 1247 ]]
+	-- upvalues: loadKeyframesForPoseR15 (copy)
+	assert(Object, "character should be non-nil")
 	
-	if p29 ~= nil then
-		assert(typeof(p29) == "number", "EmoteUtility.LoadKeyframesForPose expects animationAssetId to be a number or nil")
-		assert(p29 > 0, "EmoteUtility.LoadKeyframesForPose expects animationAssetId to be a real asset ID (positive number)")
+	if OriginalAnimationAssetId ~= nil then
+		assert(typeof(OriginalAnimationAssetId) == "number", "EmoteUtility.LoadKeyframesForPose expects animationAssetId to be a number or nil")
+		assert(OriginalAnimationAssetId > 0, "EmoteUtility.LoadKeyframesForPose expects animationAssetId to be a real asset ID (positive number)")
 	end
-	if p30 ~= nil then
-		assert(typeof(p30) == "number", "EmoteUtility.LoadKeyframesForPose expects moodAssetId to be a number or nil")
+	if AnimationAssetIdOrUrl ~= nil then
+		assert(typeof(AnimationAssetIdOrUrl) == "number", "EmoteUtility.LoadKeyframesForPose expects moodAssetId to be a number or nil")
 	end
-	local humanoid = p28:FindFirstChildOfClass("Humanoid")
+	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 	
-	if not humanoid then
+	if Humanoid then
+		assert(Humanoid, "humanoid should be non-nil. Silence type checker.")
+		
+		return if Humanoid.RigType == Enum.HumanoidRigType.R15 then loadKeyframesForPoseR15(Object, OriginalAnimationAssetId, AnimationAssetIdOrUrl, p4, p5) else { originalAnimationAssetId = OriginalAnimationAssetId }
+	else
 		return nil
 	end
-	assert(humanoid, "humanoid should be non-nil. Silence type checker.")
-	
-	return if humanoid.RigType == Enum.HumanoidRigType.R15 then loadKeyframesForPoseR15(p28, p29, p30, p31, p32) else { originalAnimationAssetId = p29 }
 end
 
-function t.ApplyKeyframesForPose(p28, p29)
-	-- upvalues: t (ref), t_1 (write), applyR15KeyframeWithTool (ref), applyKeyframeInner (ref)
-	assert(p28, "character should be non-nil")
+function EmoteUtilityModule.ApplyKeyframesForPose(Object, KeyframesForPose) --[[ Line: 1295 ]]
+	-- upvalues: EmoteUtilityModule (copy), T (ref), applyR15KeyframeWithTool (copy), applyKeyframeInner (copy)
+	assert(Object, "character should be non-nil")
 	
-	if not p29 then return end
-	assert(p29, "keyframesForPose should be non-nil. Silence type checker.")
-	local humanoid = p28:FindFirstChildOfClass("Humanoid")
+	if not KeyframesForPose then return end
+	assert(KeyframesForPose, "keyframesForPose should be non-nil. Silence type checker.")
+	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 	
-	if not humanoid then return end
-	assert(humanoid, "humanoid should be non-nil. Silence type checker.")
-	t.SetPlayerCharacterNeutralPose(p28)
-	t_1 = {}
-	local tool = p28:FindFirstChildOfClass("Tool")
+	if not Humanoid then return end
+	assert(Humanoid, "humanoid should be non-nil. Silence type checker.")
+	EmoteUtilityModule.SetPlayerCharacterNeutralPose(Object)
+	T = {}
+	local Tool = Object:FindFirstChildOfClass("Tool")
 	
-	if humanoid.RigType ~= Enum.HumanoidRigType.R15 then
-		t.AdjustArmOnR6ForTool(p28)
-	elseif tool then
-		applyR15KeyframeWithTool(p28, humanoid, tool, p29.originalAnimationAssetId, p29.poseKeyframe, p29.defaultToolKeyframe, p29.suggestedKeyframeFromTool)
+	if Humanoid.RigType == Enum.HumanoidRigType.R15 then
+		if Tool then
+			applyR15KeyframeWithTool(Object, Humanoid, Tool, KeyframesForPose.originalAnimationAssetId, KeyframesForPose.poseKeyframe, KeyframesForPose.defaultToolKeyframe, KeyframesForPose.suggestedKeyframeFromTool)
+		else
+			applyKeyframeInner(Object, KeyframesForPose.poseKeyframe)
+		end
 	else
-		applyKeyframeInner(p28, p29.poseKeyframe)
+		EmoteUtilityModule.AdjustArmOnR6ForTool(Object)
 	end
-	if humanoid.RigType == Enum.HumanoidRigType.R15 then
-		applyKeyframeInner(p28, p29.moodKeyframe)
+	if Humanoid.RigType == Enum.HumanoidRigType.R15 then
+		applyKeyframeInner(Object, KeyframesForPose.moodKeyframe)
 	end
-	t_1 = {}
-	local ok, status = pcall(function()
+	T = {}
+	local Success, Result = pcall(function(): boolean --[[ Line: 106 ]]
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	
-	if ok and status then
-		t.ForceAnimationToStep(p28)
+	if Success and Result then
+		EmoteUtilityModule.ForceAnimationToStep(Object)
 	end
 end
 
-function t.SetPlayerCharacterPoseWithMoodFallback(p28, p29, p30, p31, p32)
-	-- upvalues: t (ref), emoteUtilityReportPoseAnimationDownloadFailure (ref)
-	local humanoid = p28:FindFirstChildOfClass("Humanoid")
+function EmoteUtilityModule.SetPlayerCharacterPoseWithMoodFallback(Object, OriginalAnimationAssetId, p4, p5, p6) --[[ Line: 1361 ]]
+	-- upvalues: EmoteUtilityModule (copy), EmoteUtilityReportPoseAnimationDownloadFailure (copy)
+	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 	
-	if not humanoid then return end
-	assert(humanoid, "humanoid should be non-nil.  Silence type checker.")
-	local var16 = t.LoadKeyframesForPose(p28, p29, p30, p31, p32)
-	t.ApplyKeyframesForPose(p28, var16)
+	if not Humanoid then return end
+	assert(Humanoid, "humanoid should be non-nil.  Silence type checker.")
+	local KeyframesForPose = EmoteUtilityModule.LoadKeyframesForPose(Object, OriginalAnimationAssetId, p4, p5, p6)
+	EmoteUtilityModule.ApplyKeyframesForPose(Object, KeyframesForPose)
 	
-	return if not (not emoteUtilityReportPoseAnimationDownloadFailure or not var16) then if humanoid.RigType == Enum.HumanoidRigType.R15 and p29 ~= nil and var16.poseKeyframe == nil then "Failed to download requested pose animation" else nil else nil
+	return if EmoteUtilityReportPoseAnimationDownloadFailure and KeyframesForPose and (Humanoid.RigType == Enum.HumanoidRigType.R15 and OriginalAnimationAssetId ~= nil and KeyframesForPose.poseKeyframe == nil) then "Failed to download requested pose animation" else nil
 end
 
-function t.ThumbnailZoomExtents(p28, p29, p30, p31, p32)
-	local modelCFrame = p28:GetModelCFrame()
-	local lookVector = modelCFrame.LookVector
-	local humanoidRootPart = p28:FindFirstChild("HumanoidRootPart")
+function EmoteUtilityModule.ThumbnailZoomExtents(Model: Model, Degrees: number, X, p4, p5: number): CFrame --[[ Line: 1394 ]]
+	local ModelCFrame = Model:GetModelCFrame()
+	local LookVector = ModelCFrame.LookVector
+	local HumanoidRootPart = Model:FindFirstChild("HumanoidRootPart")
 	
-	if humanoidRootPart then
-		lookVector = humanoidRootPart.CFrame.LookVector
+	if HumanoidRootPart then
+		LookVector = HumanoidRootPart.CFrame.LookVector
 	end
-	local cFrame = CFrame.new(modelCFrame.Position + lookVector * 5, modelCFrame.Position)
-	local extentsSize = p28:GetExtentsSize()
+	local _CFrame = CFrame.new(ModelCFrame.Position + LookVector * 5, ModelCFrame.Position)
+	local ExtentsSize = Model:GetExtentsSize()
 	
-	return cFrame - cFrame.Position + (modelCFrame.Position + Vector3.new(p30, -p31, 0)) + lookVector * (math.sqrt(extentsSize.X ^ 2 + extentsSize.Y ^ 2 + extentsSize.Z ^ 2) / 2 * (1 / math.tan(math.rad(p29) / 2)) * (1 / p32))
+	return _CFrame - _CFrame.Position + (ModelCFrame.Position + Vector3.new(X, -p4, 0)) + LookVector * (math.sqrt(ExtentsSize.X ^ 2 + ExtentsSize.Y ^ 2 + ExtentsSize.Z ^ 2) / 2 * (1 / math.tan(math.rad(Degrees) / 2)) * (1 / p5))
 end
 
-return t
+return EmoteUtilityModule

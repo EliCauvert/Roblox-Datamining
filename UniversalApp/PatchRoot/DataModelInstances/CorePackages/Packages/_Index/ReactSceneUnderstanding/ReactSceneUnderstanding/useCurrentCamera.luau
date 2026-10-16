@@ -1,30 +1,30 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactSceneUnderstanding").Parent.React)
-local useState = reactModule.useState
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local camera = Instance.new("Camera")
+﻿local ReactModule = require(script:FindFirstAncestor("ReactSceneUnderstanding").Parent.React)
+local UseStateFunction = ReactModule.useState
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local Camera = Instance.new("Camera")
 
-return function()
-	-- upvalues: useState (ref), useCallback (ref), useEffect (ref), camera (ref)
-	local var1, var2 = useState(nil)
-	local var3 = useCallback(function()
-		-- upvalues: var1 (ref), var2 (ref)
-		local currentCamera = workspace.CurrentCamera
+return function() --[[ Line: 11 | Named "useCurrentCamera" ]]
+	-- upvalues: UseStateFunction (copy), UseCallbackFunction (copy), UseEffectFunction (copy), Camera (copy)
+	local UseStateResult, UseStateResult2 = UseStateFunction(nil)
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 14 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
+		local CurrentCamera = workspace.CurrentCamera
 		
-		if currentCamera and currentCamera ~= var1 then
-			var2(currentCamera)
+		if CurrentCamera and CurrentCamera ~= UseStateResult then
+			UseStateResult2(CurrentCamera)
 		end
-	end, { var1 })
-	useEffect(function()
-		-- upvalues: var3 (ref)
-		local var4 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(var3)
+	end, { UseStateResult })
+	UseEffectFunction(function() --[[ Line: 21 ]]
+		-- upvalues: UseCallbackResult (copy)
+		local Connection = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(UseCallbackResult)
 		
-		return function()
-			-- upvalues: var4 (ref)
-			var4:Disconnect()
+		return function() --[[ Line: 24 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { var3 })
-	useEffect(var3, {})
+	end, { UseCallbackResult })
+	UseEffectFunction(UseCallbackResult, {})
 	
-	return var1 or camera
+	return if UseStateResult then UseStateResult else Camera
 end

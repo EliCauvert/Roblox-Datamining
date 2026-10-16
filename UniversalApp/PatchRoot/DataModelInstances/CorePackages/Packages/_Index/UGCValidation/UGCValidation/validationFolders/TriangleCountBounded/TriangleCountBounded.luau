@@ -1,67 +1,66 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFIntUGCValidateTriangleLimitToleranceModule = require(parent.flags.getFIntUGCValidateTriangleLimitTolerance)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	expectedFailures = {}
-}
+local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFIntUGCValidateTriangleLimitToleranceModule = require(Parent.flags.getFIntUGCValidateTriangleLimitTolerance)
 
-local function runAccessoryCheck(p1, p2)
-	-- upvalues: constantsModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
-	local MAX_HAT_TRIANGLES = constantsModule.MAX_HAT_TRIANGLES
+local function runAccessoryCheck(p1, p2) --[[ Line: 22 ]]
+	-- upvalues: ConstantsModule (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy)
+	local MAXHATTRIANGLES = ConstantsModule.MAX_HAT_TRIANGLES
 	
-	for i, v in p2.renderMeshesData do
-		local editableEditableMeshTriCount = UGCValidationService:GetEditableMeshTriCount(v.editable)
+	for MeshName, value in p2.renderMeshesData do
+		local EditableMeshTriCount = UGCValidationService:GetEditableMeshTriCount(value.editable)
 		
-		if MAX_HAT_TRIANGLES < editableEditableMeshTriCount then
-			p1:fail(errorSourceStringsModule.Keys.MeshGeometry_TriangleCountExceeded, {
-				meshName = i,
-				triangleCount = tostring(editableEditableMeshTriCount),
-				maxTriangles = tostring(MAX_HAT_TRIANGLES)
+		if MAXHATTRIANGLES < EditableMeshTriCount then
+			p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_TriangleCountExceeded, {
+				meshName = MeshName,
+				triangleCount = tostring(EditableMeshTriCount),
+				maxTriangles = tostring(MAXHATTRIANGLES)
 			})
 		end
 	end
 end
 
-local function runBodyPartCheck(p3, p4)
-	-- upvalues: constantsModule (ref), UGCValidationService (ref), getFIntUGCValidateTriangleLimitToleranceModule (ref), errorSourceStringsModule (ref)
-	local name = p4.uploadEnum.assetType.Name
-	local var1 = constantsModule.ASSET_RENDER_MESH_MAX_TRIANGLES[name]
+local function runBodyPartCheck(p3, p4) --[[ Line: 38 ]]
+	-- upvalues: ConstantsModule (copy), UGCValidationService (copy), GetFIntUGCValidateTriangleLimitToleranceModule (copy), ErrorSourceStringsModule (copy)
+	local Name = p4.uploadEnum.assetType.Name
+	local ASSETRENDERMESHMAXTRIANGLE = ConstantsModule.ASSET_RENDER_MESH_MAX_TRIANGLES[Name]
 	
-	if not var1 then return end
-	local var2 = 0
+	if not ASSETRENDERMESHMAXTRIANGLE then return end
+	local NewEditableMeshTriCount = 0
 	
-	for i, v in p4.renderMeshesData do
-		var2 += UGCValidationService:GetEditableMeshTriCount(v.editable)
+	for _, value in p4.renderMeshesData do
+		NewEditableMeshTriCount += UGCValidationService:GetEditableMeshTriCount(value.editable)
 	end
-	if var1 + var1 * (getFIntUGCValidateTriangleLimitToleranceModule() / 100) < var2 then
-		p3:fail(errorSourceStringsModule.Keys.MeshGeometry_TotalTriangleCountExceeded, {
-			triangleCount = tostring(var2),
-			assetTypeName = name,
-			maxTriangles = tostring(var1)
+	if ASSETRENDERMESHMAXTRIANGLE + ASSETRENDERMESHMAXTRIANGLE * (GetFIntUGCValidateTriangleLimitToleranceModule() / 100) < NewEditableMeshTriCount then
+		p3:fail(ErrorSourceStringsModule.Keys.MeshGeometry_TotalTriangleCountExceeded, {
+			triangleCount = tostring(NewEditableMeshTriCount),
+			assetTypeName = Name,
+			maxTriangles = tostring(ASSETRENDERMESHMAXTRIANGLE)
 		})
 	end
 end
 
-function t.run(p5, p6)
-	-- upvalues: validationEnumsModule (ref), runBodyPartCheck (ref), runAccessoryCheck (ref)
-	if p6.uploadCategory == validationEnumsModule.UploadCategory.TORSO_AND_LIMBS or p6.uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD then
-		runBodyPartCheck(p5, p6)
-		
-		return
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY,
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+	},
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
+	expectedFailures = {},
+	run = function(p5, p6) --[[ Line: 64 ]]
+		-- upvalues: ValidationEnumsModule (copy), runBodyPartCheck (copy), runAccessoryCheck (copy)
+		if p6.uploadCategory == ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS or p6.uploadCategory == ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD then
+			runBodyPartCheck(p5, p6)
+			
+			return
+		else
+			runAccessoryCheck(p5, p6)
+		end
 	end
-	runAccessoryCheck(p5, p6)
-end
-
-return t
+}

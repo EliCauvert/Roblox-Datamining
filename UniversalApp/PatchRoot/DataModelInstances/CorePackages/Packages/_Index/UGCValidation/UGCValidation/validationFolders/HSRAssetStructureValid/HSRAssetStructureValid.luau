@@ -1,27 +1,27 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
+	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref)
-		if p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC or p2.consumerConfig.source == "AutoSetup" then return end
-		local rootInstance = p2.rootInstance
-		local descendants = rootInstance:GetDescendants()
-		table.insert(descendants, rootInstance)
+	run = function(p1, p2) --[[ Line: 20 ]]
+		-- upvalues: ValidationEnumsModule (copy), ErrorSourceStringsModule (copy)
+		if p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC or p2.consumerConfig.source == "AutoSetup" then return end
+		local RootInstance = p2.rootInstance
+		local Descendants = RootInstance:GetDescendants()
+		table.insert(Descendants, RootInstance)
 		
-		for i, v in descendants do
-			if v:IsA("BaseWrap") and not v:IsHSRReady() then
-				p1:fail(errorSourceStringsModule.Keys.HSRDataNotReady, { InstancePath = v:GetFullName() })
+		for _, BaseWrap in Descendants do
+			if BaseWrap:IsA("BaseWrap") and not BaseWrap:IsHSRReady() then
+				p1:fail(ErrorSourceStringsModule.Keys.HSRDataNotReady, { InstancePath = BaseWrap:GetFullName() })
 			end
 		end
 	end

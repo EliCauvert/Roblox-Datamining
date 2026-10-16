@@ -1,59 +1,56 @@
-﻿local var1 = nil
-pcall(function()
-	-- upvalues: var1 (write)
-	var1 = game:GetService("RbxAnalyticsService")
+﻿local RbxAnalyticsService = nil
+pcall(function() --[[ Line: 5 ]]
+	-- upvalues: RbxAnalyticsService (ref)
+	RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 end)
-local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local core = parent_2.Core
-local roactModule = require(parent_3.Roact)
-local tModule = require(parent_3.t)
-local cryoModule = require(parent_3.Cryo)
-local skeleton = require(parent_3.Foundation).Skeleton
-local debugPropsModule = require(parent.Enum.DebugProps)
-local loadingStrategyModule = require(parent.Enum.LoadingStrategy)
-local withStyleModule = require(parent_2.Core.Style.withStyle)
-local getClosestRadiusModule = require(parent_1.Loading.getClosestRadius)
-local UIBloxConfigModule = require(parent_2.UIBloxConfig)
-local imagesModule = require(parent_2.App.ImageSet.Images)
-local imageSetComponentModule = require(parent_2.Core.ImageSet.ImageSetComponent)
-local validateImageSetDataModule = require(core.ImageSet.Validator.validateImageSetData)
-local contentProviderModule = require(parent_2.App.Context.ContentProvider)
-local loadableImage = roactModule.PureComponent:extend("LoadableImage")
-loadableImage.validateProps = tModule.strictInterface({
-	AnchorPoint = tModule.optional(tModule.Vector2),
-	BackgroundColor3 = tModule.optional(tModule.Color3),
-	BackgroundTransparency = tModule.optional(tModule.number),
-	cornerRadius = tModule.optional(tModule.UDim),
-	Image = tModule.optional(tModule.union(tModule.string, validateImageSetDataModule)),
-	ImageColor3 = tModule.optional(tModule.Color3),
-	ImageTransparency = tModule.optional(tModule.number),
-	ImageRectOffset = tModule.optional(tModule.union(tModule.Vector2, tModule.table)),
-	ImageRectSize = tModule.optional(tModule.union(tModule.Vector2, tModule.table)),
-	LayoutOrder = tModule.optional(tModule.integer),
-	loadingImage = tModule.optional(tModule.union(tModule.string, tModule.table)),
-	loadingStrategy = tModule.optional(loadingStrategyModule.isEnumValue),
-	loadingTimeout = tModule.optional(tModule.numberPositive),
-	renderOnLoading = tModule.optional(tModule.callback),
-	renderOnFailed = tModule.optional(tModule.callback),
-	MaxSize = tModule.optional(tModule.Vector2),
-	MinSize = tModule.optional(tModule.Vector2),
-	onLoaded = tModule.optional(tModule.callback),
-	Position = tModule.optional(tModule.UDim2),
-	ScaleType = tModule.optional(tModule.enum(Enum.ScaleType)),
-	Size = tModule.UDim2,
-	TileSize = tModule.optional(tModule.UDim2),
-	useShimmerAnimationWhileLoading = tModule.optional(tModule.boolean),
-	showFailedStateWhenLoadingFailed = tModule.optional(tModule.boolean),
-	ZIndex = tModule.optional(tModule.integer),
-	shouldHandleReloads = tModule.optional(tModule.boolean),
-	contentProvider = tModule.union(tModule.instanceOf("ContentProvider"), tModule.table),
-	[debugPropsModule.forceLoading] = tModule.optional(tModule.boolean),
-	[debugPropsModule.forceFailed] = tModule.optional(tModule.boolean)
+local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local RoactModule = require(Parent3.Roact)
+local TModule = require(Parent3.t)
+local CryoModule = require(Parent3.Cryo)
+local Skeleton = require(Parent3.Foundation).Skeleton
+local DebugPropsModule = require(Parent.Enum.DebugProps)
+local LoadingStrategyModule = require(Parent.Enum.LoadingStrategy)
+local WithStyleModule = require(Parent2.Core.Style.withStyle)
+local GetClosestRadiusModule = require(Parent1.Loading.getClosestRadius)
+local ImagesModule = require(Parent2.App.ImageSet.Images)
+local ImageSetComponentModule = require(Parent2.Core.ImageSet.ImageSetComponent)
+local ContentProviderModule = require(Parent2.App.Context.ContentProvider)
+local LoadableImage = RoactModule.PureComponent:extend("LoadableImage")
+LoadableImage.validateProps = TModule.strictInterface({
+	AnchorPoint = TModule.optional(TModule.Vector2),
+	BackgroundColor3 = TModule.optional(TModule.Color3),
+	BackgroundTransparency = TModule.optional(TModule.number),
+	cornerRadius = TModule.optional(TModule.UDim),
+	Image = TModule.optional(TModule.union(TModule.string, (require(Parent2.Core.ImageSet.Validator.validateImageSetData)))),
+	ImageColor3 = TModule.optional(TModule.Color3),
+	ImageTransparency = TModule.optional(TModule.number),
+	ImageRectOffset = TModule.optional(TModule.union(TModule.Vector2, TModule.table)),
+	ImageRectSize = TModule.optional(TModule.union(TModule.Vector2, TModule.table)),
+	LayoutOrder = TModule.optional(TModule.integer),
+	loadingImage = TModule.optional(TModule.union(TModule.string, TModule.table)),
+	loadingStrategy = TModule.optional(LoadingStrategyModule.isEnumValue),
+	loadingTimeout = TModule.optional(TModule.numberPositive),
+	renderOnLoading = TModule.optional(TModule.callback),
+	renderOnFailed = TModule.optional(TModule.callback),
+	MaxSize = TModule.optional(TModule.Vector2),
+	MinSize = TModule.optional(TModule.Vector2),
+	onLoaded = TModule.optional(TModule.callback),
+	Position = TModule.optional(TModule.UDim2),
+	ScaleType = TModule.optional(TModule.enum(Enum.ScaleType)),
+	Size = TModule.UDim2,
+	TileSize = TModule.optional(TModule.UDim2),
+	useShimmerAnimationWhileLoading = TModule.optional(TModule.boolean),
+	showFailedStateWhenLoadingFailed = TModule.optional(TModule.boolean),
+	ZIndex = TModule.optional(TModule.integer),
+	shouldHandleReloads = TModule.optional(TModule.boolean),
+	contentProvider = TModule.union(TModule.instanceOf("ContentProvider"), TModule.table),
+	[DebugPropsModule.forceLoading] = TModule.optional(TModule.boolean),
+	[DebugPropsModule.forceFailed] = TModule.optional(TModule.boolean)
 })
-loadableImage.defaultProps = {
+LoadableImage.defaultProps = {
 	BackgroundTransparency = 0,
 	useShimmerAnimationWhileLoading = false,
 	showFailedStateWhenLoadingFailed = false,
@@ -62,344 +59,354 @@ loadableImage.defaultProps = {
 	cornerRadius = UDim.new(0, 0),
 	MaxSize = Vector2.new(1e999, 1e999),
 	MinSize = Vector2.new(0, 0),
-	loadingStrategy = loadingStrategyModule.Default
+	loadingStrategy = LoadingStrategyModule.Default
 }
 
-function loadableImage.init(p1)
-	-- upvalues: roactModule (ref)
+function LoadableImage.init(p1) --[[ Line: 114 ]]
+	-- upvalues: RoactModule (copy)
 	p1.currentImageLoadIndex = 0
 	p1:setState({ eagerRetrying = false })
-	p1.imageRef = roactModule.createRef()
+	p1.imageRef = RoactModule.createRef()
 	p1._isMounted = false
 end
 
-function loadableImage.renderShimmer(p1, p2, p3, p4)
-	-- upvalues: roactModule (ref), skeleton (ref), getClosestRadiusModule (ref), UIBloxConfigModule (ref)
-	return roactModule.createElement("Frame", {
+function LoadableImage.renderShimmer(p1, Theme, UISizeConstraint, Tokens) --[[ Line: 124 ]]
+	-- upvalues: RoactModule (copy), Skeleton (copy), GetClosestRadiusModule (copy)
+	return RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		AnchorPoint = p1.props.AnchorPoint,
-		BackgroundColor3 = p2.PlaceHolder.Color,
-		BackgroundTransparency = p2.PlaceHolder.Transparency,
+		BackgroundColor3 = Theme.PlaceHolder.Color,
+		BackgroundTransparency = Theme.PlaceHolder.Transparency,
 		LayoutOrder = p1.props.LayoutOrder,
 		Position = p1.props.Position,
 		Size = p1.props.Size,
 		ZIndex = p1.props.ZIndex
 	}, {
-		Shimmer = roactModule.createElement(skeleton, {
+		Shimmer = RoactModule.createElement(Skeleton, {
 			Size = UDim2.fromScale(1, 1),
-			radius = getClosestRadiusModule(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then {
-				None = p4.Radius.None,
-				Small = p4.Radius.Small,
-				Medium = p4.Radius.Medium,
-				Large = p4.Size.Size_300,
-				XLarge = p4.Radius.Large,
-				Circle = p4.Radius.Circle
-			} else p4.Semantic.Radius, p1.props.cornerRadius)
+			radius = GetClosestRadiusModule({
+				None = Tokens.Radius.None,
+				Small = Tokens.Radius.Small,
+				Medium = Tokens.Radius.Medium,
+				Large = Tokens.Size.Size_300,
+				XLarge = Tokens.Radius.Large,
+				Circle = Tokens.Radius.Circle
+			}, p1.props.cornerRadius)
 		}),
-		UISizeConstraint = p3,
-		UICorner = roactModule.createElement("UICorner", { CornerRadius = p1.props.cornerRadius }) or nil
+		UISizeConstraint = UISizeConstraint,
+		UICorner = RoactModule.createElement("UICorner", { CornerRadius = p1.props.cornerRadius }) or nil
 	})
 end
 
-function loadableImage.defaultRenderOnFail(p1, p2, p3)
-	-- upvalues: imagesModule (ref), roactModule (ref), imageSetComponentModule (ref)
-	local cornerRadius = p1.props.cornerRadius
-	local imageunavailable = imagesModule["icons/status/imageunavailable"]
-	local var2 = imageunavailable.ImageRectSize / imagesModule.ImagesResolutionScale
+function LoadableImage.defaultRenderOnFail(p1, Theme, UISizeConstraint) --[[ Line: 153 ]]
+	-- upvalues: ImagesModule (copy), RoactModule (copy), ImageSetComponentModule (copy)
+	local CornerRadius = p1.props.cornerRadius
+	local IconsStatusImageunavailable = ImagesModule["icons/status/imageunavailable"]
+	local ImageRectSizeRatio = IconsStatusImageunavailable.ImageRectSize / ImagesModule.ImagesResolutionScale
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		AnchorPoint = p1.props.AnchorPoint,
-		BackgroundColor3 = p2.PlaceHolder.Color,
-		BackgroundTransparency = p2.PlaceHolder.Transparency,
+		BackgroundColor3 = Theme.PlaceHolder.Color,
+		BackgroundTransparency = Theme.PlaceHolder.Transparency,
 		LayoutOrder = p1.props.LayoutOrder,
 		Position = p1.props.Position,
 		Size = p1.props.Size,
 		ZIndex = p1.props.ZIndex
 	}, {
-		EmptyIcon = roactModule.createElement(imageSetComponentModule.Label, {
+		EmptyIcon = RoactModule.createElement(ImageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Image = imageunavailable,
-			ImageColor3 = p2.UIDefault.Color,
-			ImageTransparency = p2.UIDefault.Transparency,
+			Image = IconsStatusImageunavailable,
+			ImageColor3 = Theme.UIDefault.Color,
+			ImageTransparency = Theme.UIDefault.Transparency,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			Size = UDim2.new(0, var2.X, 0, var2.Y)
+			Size = UDim2.new(0, ImageRectSizeRatio.X, 0, ImageRectSizeRatio.Y)
 		}, {
-			UICorner = cornerRadius ~= UDim.new(0, 0) and roactModule.createElement("UICorner", { CornerRadius = cornerRadius }) or nil
+			UICorner = if CornerRadius == UDim.new(0, 0) then nil else RoactModule.createElement("UICorner", { CornerRadius = CornerRadius }) or nil
 		}),
-		UISizeConstraint = p3,
-		UICorner = cornerRadius ~= UDim.new(0, 0) and roactModule.createElement("UICorner", { CornerRadius = cornerRadius }) or nil
+		UISizeConstraint = UISizeConstraint,
+		UICorner = if CornerRadius == UDim.new(0, 0) then nil else RoactModule.createElement("UICorner", { CornerRadius = CornerRadius }) or nil
 	})
 end
 
-function loadableImage.isImageNonNil(p1)
-	-- upvalues: roactModule (ref)
-	return p1.props.Image ~= roactModule.None and p1.props.Image ~= nil
+function LoadableImage.isImageNonNil(p1): boolean --[[ Line: 189 ]]
+	-- upvalues: RoactModule (copy)
+	return p1.props.Image ~= RoactModule.None and p1.props.Image ~= nil
 end
 
-function loadableImage.getCurrentImageAssetFetchStatus(value, p1)
-	local currentImageLoadIndex = p1[value:getAssetFetchStatusStateKey(value.currentImageLoadIndex)]
+function LoadableImage.getCurrentImageAssetFetchStatus(p1, State) --[[ Line: 193 ]]
+	local StateEntry = State[p1:getAssetFetchStatusStateKey(p1.currentImageLoadIndex)]
 	
-	if currentImageLoadIndex == nil then
-		currentImageLoadIndex = Enum.AssetFetchStatus.None
+	if StateEntry == nil then
+		StateEntry = Enum.AssetFetchStatus.None
 	end
-	return currentImageLoadIndex
+	return StateEntry
 end
 
-function loadableImage.isLoadingComplete(p1, p2)
-	local var2 = p1:getCurrentImageAssetFetchStatus(p2)
+function LoadableImage.isLoadingComplete(p1, State): boolean --[[ Line: 203 ]]
+	local CurrentImageAssetFetchStatus = p1:getCurrentImageAssetFetchStatus(State)
 	
-	return if var2 == Enum.AssetFetchStatus.None or var2 == Enum.AssetFetchStatus.Loading then false else (var2 == Enum.AssetFetchStatus.Failure or var2 == Enum.AssetFetchStatus.TimedOut) and p2.eagerRetrying
+	return CurrentImageAssetFetchStatus ~= Enum.AssetFetchStatus.None and CurrentImageAssetFetchStatus ~= Enum.AssetFetchStatus.Loading and (CurrentImageAssetFetchStatus ~= Enum.AssetFetchStatus.Failure and CurrentImageAssetFetchStatus ~= Enum.AssetFetchStatus.TimedOut or not State.eagerRetrying)
 end
 
-function loadableImage.render(p1)
-	-- upvalues: debugPropsModule (ref), roactModule (ref), withStyleModule (ref), loadingStrategyModule (ref), imageSetComponentModule (ref)
-	local anchorPoint = p1.props.AnchorPoint
-	local layoutOrder = p1.props.LayoutOrder
-	local size = p1.props.Size
-	local position = p1.props.Position
-	local backgroundColor3 = p1.props.BackgroundColor3
-	local backgroundTransparency = p1.props.BackgroundTransparency
-	local cornerRadius = p1.props.cornerRadius
-	local scaleType = p1.props.ScaleType
-	local zIndex = p1.props.ZIndex
-	local image = p1.props.Image
-	local imageTransparency = p1.props.ImageTransparency
-	local imageRectOffset = p1.props.ImageRectOffset
-	local imageRectSize = p1.props.ImageRectSize
-	local imageColor3 = p1.props.ImageColor3
-	local maxSize = p1.props.MaxSize
-	local minSize = p1.props.MinSize
-	local renderOnLoading = p1.props.renderOnLoading
-	local renderOnFailed = p1.props.renderOnFailed
-	local loadingImage = p1.props.loadingImage
-	local loadingStrategy = p1.props.loadingStrategy
-	local useShimmerAnimationWhileLoading = p1.props.useShimmerAnimationWhileLoading
-	local showFailedStateWhenLoadingFailed = p1.props.showFailedStateWhenLoadingFailed
-	local state = p1:isImageNonNil() and p1:isLoadingComplete(p1.state)
-	local stateCurrentImageAssetFetchStatus = p1:getCurrentImageAssetFetchStatus(p1.state)
-	local var2 = stateCurrentImageAssetFetchStatus ~= Enum.AssetFetchStatus.None
-	local var3 = stateCurrentImageAssetFetchStatus == Enum.AssetFetchStatus.Failure
-	local var4 = false
+function LoadableImage.render(p1) --[[ Line: 216 ]]
+	-- upvalues: DebugPropsModule (copy), RoactModule (copy), WithStyleModule (copy), LoadingStrategyModule (copy), ImageSetComponentModule (copy)
+	local AnchorPoint = p1.props.AnchorPoint
+	local LayoutOrder = p1.props.LayoutOrder
+	local Size = p1.props.Size
+	local Position = p1.props.Position
+	local BackgroundColor3 = p1.props.BackgroundColor3
+	local BackgroundTransparency = p1.props.BackgroundTransparency
+	local CornerRadius = p1.props.cornerRadius
+	local ScaleType = p1.props.ScaleType
+	local ZIndex = p1.props.ZIndex
+	local Image = p1.props.Image
+	local ImageTransparency = p1.props.ImageTransparency
+	local ImageRectOffset = p1.props.ImageRectOffset
+	local ImageRectSize = p1.props.ImageRectSize
+	local ImageColor3 = p1.props.ImageColor3
+	local MaxSize = p1.props.MaxSize
+	local MinSize = p1.props.MinSize
+	local RenderOnLoadingFunction = p1.props.renderOnLoading
+	local RenderOnFailedFunction = p1.props.renderOnFailed
+	local LoadingImage = p1.props.loadingImage
+	local LoadingStrategy = p1.props.loadingStrategy
+	local UseShimmerAnimationWhileLoading = p1.props.useShimmerAnimationWhileLoading
+	local ShowFailedStateWhenLoadingFailed = p1.props.showFailedStateWhenLoadingFailed
+	local IsLoadingComplete = p1:isImageNonNil() and p1:isLoadingComplete(p1.state)
+	local CurrentImageAssetFetchStatus = p1:getCurrentImageAssetFetchStatus(p1.state)
+	local IsNotCurrentImageAssetFetchStatusMatch = CurrentImageAssetFetchStatus ~= Enum.AssetFetchStatus.None
+	local IsCurrentImageAssetFetchStatusMatch = CurrentImageAssetFetchStatus == Enum.AssetFetchStatus.Failure
+	local Flag = false
 	
-	if p1.props[debugPropsModule.forceLoading] then
-		state = false
+	if p1.props[DebugPropsModule.forceLoading] then
+		IsLoadingComplete = false
 	end
-	if p1.props[debugPropsModule.forceFailed] then
-		var3 = true
+	if p1.props[DebugPropsModule.forceFailed] then
+		IsCurrentImageAssetFetchStatusMatch = true
 	end
-	if maxSize.X ~= 1e999 or maxSize.Y ~= 1e999 or (minSize.X ~= 0 or minSize.Y ~= 0) then
-		var4 = true
+	if MaxSize.X ~= 1e999 or MaxSize.Y ~= 1e999 or MinSize.X ~= 0 or MinSize.Y ~= 0 then
+		Flag = true
 	end
-	local UISizeConstraint = var4 and roactModule.createElement("UISizeConstraint", { MaxSize = maxSize, MinSize = minSize })
+	local UISizeConstraint = Flag and RoactModule.createElement("UISizeConstraint", { MaxSize = MaxSize, MinSize = MinSize })
 	
-	return withStyleModule(function(p2)
-		-- upvalues: var3 (write), renderOnFailed (ref), showFailedStateWhenLoadingFailed (ref), p1 (ref), UISizeConstraint (ref), state (write), renderOnLoading (ref), loadingStrategy (ref), loadingStrategyModule (copy), useShimmerAnimationWhileLoading (ref), var2 (ref), roactModule (copy), imageSetComponentModule (copy), anchorPoint (ref), backgroundColor3 (ref), backgroundTransparency (ref), image (ref), loadingImage (ref), imageTransparency (ref), imageRectOffset (ref), imageRectSize (ref), imageColor3 (ref), layoutOrder (ref), position (ref), scaleType (ref), size (ref), zIndex (ref), cornerRadius (ref)
-		local theme = p2.Theme
-		local tokens = p2.Tokens
+	return WithStyleModule(function(p2) --[[ Line: 264 ]]
+		-- upvalues: IsCurrentImageAssetFetchStatusMatch (ref), RenderOnFailedFunction (copy), ShowFailedStateWhenLoadingFailed (copy), p1 (copy), UISizeConstraint (copy), IsLoadingComplete (ref), RenderOnLoadingFunction (copy), LoadingStrategy (copy), LoadingStrategyModule (upval), UseShimmerAnimationWhileLoading (copy), IsNotCurrentImageAssetFetchStatusMatch (copy), RoactModule (upval), ImageSetComponentModule (upval), AnchorPoint (copy), BackgroundColor3 (copy), BackgroundTransparency (copy), Image (copy), LoadingImage (copy), ImageTransparency (copy), ImageRectOffset (copy), ImageRectSize (copy), ImageColor3 (copy), LayoutOrder (copy), Position (copy), ScaleType (copy), Size (copy), ZIndex (copy), CornerRadius (copy)
+		local Theme = p2.Theme
+		local Tokens = p2.Tokens
 		
-		if var3 and renderOnFailed then
-			return renderOnFailed()
-		elseif var3 and showFailedStateWhenLoadingFailed then
-			return p1:defaultRenderOnFail(theme, UISizeConstraint)
-		elseif not state and renderOnLoading and loadingStrategy ~= loadingStrategyModule.Default then
-			return renderOnLoading()
-		elseif not state and useShimmerAnimationWhileLoading and loadingStrategy ~= loadingStrategyModule.Default then
-			return p1:renderShimmer(theme, UISizeConstraint, tokens)
+		if IsCurrentImageAssetFetchStatusMatch and RenderOnFailedFunction then
+			return RenderOnFailedFunction()
+		elseif IsCurrentImageAssetFetchStatusMatch and ShowFailedStateWhenLoadingFailed then
+			return p1:defaultRenderOnFail(Theme, UISizeConstraint)
+		elseif not IsLoadingComplete and RenderOnLoadingFunction and LoadingStrategy ~= LoadingStrategyModule.Default then
+			return RenderOnLoadingFunction()
+		elseif IsLoadingComplete or not UseShimmerAnimationWhileLoading or LoadingStrategy == LoadingStrategyModule.Default then
+			local IsLoadingComplete1 = IsLoadingComplete or LoadingStrategy == LoadingStrategyModule.Default
+			
+			return RoactModule.createElement(ImageSetComponentModule.Label, {
+				AnchorPoint = AnchorPoint,
+				BackgroundColor3 = BackgroundColor3 or Theme.PlaceHolder.Color,
+				BackgroundTransparency = BackgroundTransparency or Theme.PlaceHolder.Transparency,
+				BorderSizePixel = 0,
+				Image = IsLoadingComplete1 and Image or LoadingImage,
+				ImageTransparency = ImageTransparency,
+				ImageRectOffset = ImageRectOffset,
+				ImageRectSize = ImageRectSize,
+				ImageColor3 = IsLoadingComplete1 and ImageColor3 or nil,
+				LayoutOrder = LayoutOrder,
+				Position = Position,
+				ScaleType = ScaleType,
+				TileSize = p1.props.TileSize,
+				Size = Size,
+				ZIndex = ZIndex,
+				[RoactModule.Ref] = p1.imageRef
+			}, {
+				UISizeConstraint = UISizeConstraint,
+				UICorner = if CornerRadius == UDim.new(0, 0) then nil else RoactModule.createElement("UICorner", { CornerRadius = CornerRadius }) or nil,
+				OnLoading = if IsLoadingComplete or not RenderOnLoadingFunction or LoadingStrategy ~= LoadingStrategyModule.Default then nil else RenderOnLoadingFunction(),
+				Shimmer = if IsLoadingComplete or not UseShimmerAnimationWhileLoading or LoadingStrategy ~= LoadingStrategyModule.Default or not IsNotCurrentImageAssetFetchStatusMatch then nil else p1:renderShimmer(Theme, UISizeConstraint, Tokens)
+			})
+		else
+			return p1:renderShimmer(Theme, UISizeConstraint, Tokens)
 		end
-		local state_1 = state or loadingStrategy == loadingStrategyModule.Default
-		
-		return roactModule.createElement(imageSetComponentModule.Label, {
-			AnchorPoint = anchorPoint,
-			BackgroundColor3 = backgroundColor3 or theme.PlaceHolder.Color,
-			BackgroundTransparency = backgroundTransparency or theme.PlaceHolder.Transparency,
-			BorderSizePixel = 0,
-			Image = if state_1 then image else loadingImage,
-			ImageTransparency = imageTransparency,
-			ImageRectOffset = imageRectOffset,
-			ImageRectSize = imageRectSize,
-			ImageColor3 = if state_1 then imageColor3 else nil,
-			LayoutOrder = layoutOrder,
-			Position = position,
-			ScaleType = scaleType,
-			TileSize = p1.props.TileSize,
-			Size = size,
-			ZIndex = zIndex,
-			[roactModule.Ref] = p1.imageRef
-		}, {
-			UISizeConstraint = UISizeConstraint,
-			UICorner = cornerRadius ~= UDim.new(0, 0) and roactModule.createElement("UICorner", { CornerRadius = cornerRadius }) or nil,
-			OnLoading = if not (state or not renderOnLoading or loadingStrategy ~= loadingStrategyModule.Default) then renderOnLoading() else nil,
-			Shimmer = if not (state or not useShimmerAnimationWhileLoading or (loadingStrategy ~= loadingStrategyModule.Default or not var2)) then p1:renderShimmer(theme, UISizeConstraint, tokens) else nil
-		})
 	end)
 end
 
-function loadableImage.maybeCallOnLoaded(p1, p2)
+function LoadableImage.maybeCallOnLoaded(p1, p2) --[[ Line: 328 ]]
 	if p1.props.onLoaded then
-		if not p1:isLoadingComplete(p2) and p1:isLoadingComplete(p1.state) then
+		local IsLoadingComplete = p1:isLoadingComplete(p1.state)
+		
+		if not p1:isLoadingComplete(p2) and IsLoadingComplete then
 			p1.props.onLoaded()
 		end
 	end
 end
 
-function loadableImage.didUpdate(p1, p2, p3)
+function LoadableImage.didUpdate(p1, p2, p3) --[[ Line: 338 ]]
 	if p2.Image ~= p1.props.Image then
 		p1:loadImage()
 	end
 	p1:maybeCallOnLoaded(p3)
 end
 
-function loadableImage.didMount(p1)
+function LoadableImage.didMount(p1) --[[ Line: 345 ]]
 	p1._isMounted = true
 	p1:loadImage()
 end
 
-function loadableImage.willUnmount(p1)
+function LoadableImage.willUnmount(p1) --[[ Line: 353 ]]
 	p1._isMounted = false
 	p1:dropConnections()
 end
 
-function loadableImage.isTerminalStatus(_, b)
-	return if b ~= Enum.AssetFetchStatus.Success then if b ~= Enum.AssetFetchStatus.Failure then b == Enum.AssetFetchStatus.TimedOut else true else true
+function LoadableImage:isTerminalStatus(AssetFetchStatus): boolean --[[ Line: 358 ]]
+	return AssetFetchStatus == Enum.AssetFetchStatus.Success or (AssetFetchStatus == Enum.AssetFetchStatus.Failure or AssetFetchStatus == Enum.AssetFetchStatus.TimedOut)
 end
 
-function loadableImage.getImageUri(p1)
+function LoadableImage.getImageUri(p1) --[[ Line: 368 ]]
 	return if p1.props.Image then if typeof(p1.props.Image) == "string" then p1.props.Image else p1.props.Image.Image else nil
 end
 
-function loadableImage.awaitImageLoaded(p1, p2, p3)
-	if p1:isTerminalStatus(p3) then return end
-	local imageUri = p1:getImageUri()
+function LoadableImage.awaitImageLoaded(p1, NewCurrentImageLoadIndex, AssetFetchStatus) --[[ Line: 382 ]]
+	if p1:isTerminalStatus(AssetFetchStatus) then return end
+	local ImageUri = p1:getImageUri()
 	
-	local var2 = function(p4)
-		-- upvalues: p1 (ref), p2 (ref), imageUri (ref)
-		p1:updateAssetFetchStatusForImageLoadIndex(p4, p2, imageUri)
-		p1:maybeReportCounter("Await", p4)
+	local function Callback(AssetFetchStatus) --[[ Line: 393 ]]
+		-- upvalues: p1 (copy), NewCurrentImageLoadIndex (copy), ImageUri (copy)
+		p1:updateAssetFetchStatusForImageLoadIndex(AssetFetchStatus, NewCurrentImageLoadIndex, ImageUri)
+		p1:maybeReportCounter("Await", AssetFetchStatus)
 		
-		if p1:isTerminalStatus(p4) and p1.awaitImageLoadedConnection then
+		if p1:isTerminalStatus(AssetFetchStatus) and p1.awaitImageLoadedConnection then
 			p1.awaitImageLoadedConnection:Disconnect()
 			p1.awaitImageLoadedConnection = nil
 		end
 	end
 	
-	if imageUri ~= "" then
-		p1.awaitImageLoadedConnection = p1.props.contentProvider:GetAssetFetchStatusChangedSignal(imageUri):Connect(var2)
+	if ImageUri ~= "" then
+		p1.awaitImageLoadedConnection = p1.props.contentProvider:GetAssetFetchStatusChangedSignal(ImageUri):Connect(Callback)
 		
 		return
 	end
-	local success = Enum.AssetFetchStatus.Success
-	p1:updateAssetFetchStatusForImageLoadIndex(success, p2, imageUri)
-	p1:maybeReportCounter("Await", success)
+	local Success = Enum.AssetFetchStatus.Success
+	p1:updateAssetFetchStatusForImageLoadIndex(Success, NewCurrentImageLoadIndex, ImageUri)
+	p1:maybeReportCounter("Await", Success)
 	
-	if p1:isTerminalStatus(success) and p1.awaitImageLoadedConnection then
+	if p1:isTerminalStatus(Success) and p1.awaitImageLoadedConnection then
 		p1.awaitImageLoadedConnection:Disconnect()
 		p1.awaitImageLoadedConnection = nil
 	end
 end
 
-function loadableImage.maybeReportCounter(_, p1, p2)
-	-- upvalues: var1 (write)
-	pcall(function()
-		-- upvalues: p1 (ref), p2 (ref), var1 (copy)
-		var1:ReportCounter("UIBlox_LoadableImage_" .. p1 .. "_" .. tostring(p2))
+function LoadableImage:maybeReportCounter(p1, AssetFetchStatus) --[[ Line: 411 ]]
+	-- upvalues: RbxAnalyticsService (ref)
+	pcall(function() --[[ Line: 414 ]]
+		-- upvalues: p1 (copy), AssetFetchStatus (copy), RbxAnalyticsService (upval)
+		RbxAnalyticsService:ReportCounter("UIBlox_LoadableImage_" .. p1 .. "_" .. tostring(AssetFetchStatus))
 	end)
 end
 
-function loadableImage.preloadImageWithRetryLogic(p1, p2)
-	local imageUri = p1:getImageUri()
-	local var2 = 0
-	local none = Enum.AssetFetchStatus.None
+function LoadableImage.preloadImageWithRetryLogic(p1, NewCurrentImageLoadIndex) --[[ Line: 426 ]]
+	local ImageUri = p1:getImageUri()
+	local Count = 0
+	local None = Enum.AssetFetchStatus.None
 	while true do
-		if p1._isMounted then
-			if var2 > 0 then
-				task.wait(math.pow(2, var2 - 1) * 1.5)
-			end
-			p1.props.contentProvider:PreloadAsync({ imageUri }, function(_, p3)
-				-- upvalues: p1 (ref), imageUri (ref), none (write), p2 (ref)
-				if p1._isMounted and p1:getImageUri() == imageUri then
-					p1:maybeReportCounter("PreloadAsync", p3)
-					none = p3
-					p1:updateAssetFetchStatusForImageLoadIndex(p3, p2, imageUri)
-				end
-			end)
-			
-			if p1._isMounted and p1:getImageUri() == imageUri then
-				if none == Enum.AssetFetchStatus.Success then break end
-				var2 += 1
-				
-				if none == Enum.AssetFetchStatus.Failure and var2 > 3 or none == Enum.AssetFetchStatus.TimedOut and var2 > 5 then break end
-				p1:setState({ eagerRetrying = true })
-			end
-			return
+		if not p1._isMounted then break end
+		if Count > 0 then
+			task.wait(math.pow(2, Count - 1) * 1.5)
 		end
+		p1.props.contentProvider:PreloadAsync({ ImageUri }, function(_, p2) --[[ Line: 441 ]]
+			-- upvalues: p1 (copy), ImageUri (copy), None (ref), NewCurrentImageLoadIndex (copy)
+			local ImageUri1 = p1:getImageUri()
+			
+			if p1._isMounted and ImageUri1 == ImageUri then
+				p1:maybeReportCounter("PreloadAsync", p2)
+				None = p2
+				p1:updateAssetFetchStatusForImageLoadIndex(p2, NewCurrentImageLoadIndex, ImageUri)
+			end
+		end)
+		local ImageUri1 = p1:getImageUri()
+		
+		if not p1._isMounted or ImageUri1 ~= ImageUri then break end
+		if None ~= Enum.AssetFetchStatus.Success then
+			Count += 1
+			
+			if (None ~= Enum.AssetFetchStatus.Failure or Count <= 3) and (None ~= Enum.AssetFetchStatus.TimedOut or Count <= 5) then
+				p1:setState({ eagerRetrying = true })
+				continue
+			end
+		end
+		p1:setState({ eagerRetrying = false })
+		break
 	end
-	p1:setState({ eagerRetrying = false })
 end
 
-function loadableImage.getAssetFetchStatusStateKey(_, p3)
-	return "assetFetchStatus_" .. tostring(p3)
+function LoadableImage:getAssetFetchStatusStateKey(CurrentImageLoadIndex): string --[[ Line: 488 ]]
+	return "assetFetchStatus_" .. tostring(CurrentImageLoadIndex)
 end
 
-function loadableImage.updateAssetFetchStatusForImageLoadIndex(value, p3, p4, _)
-	value:setState({ [value:getAssetFetchStatusStateKey(p4)] = p3 })
+function LoadableImage.updateAssetFetchStatusForImageLoadIndex(p2, Success, NewCurrentImageLoadIndex, _) --[[ Line: 492 ]]
+	p2:setState({
+		[p2:getAssetFetchStatusStateKey(NewCurrentImageLoadIndex)] = Success
+	})
 end
 
-function loadableImage.dropConnections(p3)
-	if p3.listenForReloadsConnection then
-		p3.listenForReloadsConnection:Disconnect()
-		p3.listenForReloadsConnection = nil
+function LoadableImage.dropConnections(p2) --[[ Line: 499 ]]
+	if p2.listenForReloadsConnection then
+		p2.listenForReloadsConnection:Disconnect()
+		p2.listenForReloadsConnection = nil
 	end
-	if p3.awaitImageLoadedConnection then
-		p3.awaitImageLoadedConnection:Disconnect()
-		p3.awaitImageLoadedConnection = nil
+	if p2.awaitImageLoadedConnection then
+		p2.awaitImageLoadedConnection:Disconnect()
+		p2.awaitImageLoadedConnection = nil
 	end
 end
 
-function loadableImage.loadImage(p3)
-	-- upvalues: loadingStrategyModule (ref)
-	local var3 = p3.currentImageLoadIndex + 1
-	p3.currentImageLoadIndex = var3
-	local imageUri = p3:getImageUri()
-	local loadingStrategy = p3.props.loadingStrategy
-	p3:dropConnections()
+function LoadableImage.loadImage(p2) --[[ Line: 510 ]]
+	-- upvalues: LoadingStrategyModule (copy)
+	local NewCurrentImageLoadIndex = p2.currentImageLoadIndex + 1
+	p2.currentImageLoadIndex = NewCurrentImageLoadIndex
+	local ImageUri = p2:getImageUri()
+	local LoadingStrategy = p2.props.loadingStrategy
+	p2:dropConnections()
 	
-	if imageUri == nil then
-		p3:updateAssetFetchStatusForImageLoadIndex(Enum.AssetFetchStatus.Success, var3, imageUri)
-		p3:setState({ eagerRetrying = false })
+	if ImageUri == nil then
+		p2:updateAssetFetchStatusForImageLoadIndex(Enum.AssetFetchStatus.Success, NewCurrentImageLoadIndex, ImageUri)
+		p2:setState({ eagerRetrying = false })
 		
 		return
 	end
-	local var4 = p3.props.contentProvider:GetAssetFetchStatus(imageUri)
-	p3:maybeReportCounter("InitialStatus", var4)
-	p3:updateAssetFetchStatusForImageLoadIndex(var4, var3, imageUri)
+	local AssetFetchStatus = p2.props.contentProvider:GetAssetFetchStatus(ImageUri)
+	p2:maybeReportCounter("InitialStatus", AssetFetchStatus)
+	p2:updateAssetFetchStatusForImageLoadIndex(AssetFetchStatus, NewCurrentImageLoadIndex, ImageUri)
 	
-	if p3.props.shouldHandleReloads then
-		p3.listenForReloadsConnection = p3.props.contentProvider:GetAssetFetchStatusChangedSignal(imageUri):Connect(function(p4, _)
-			-- upvalues: p3 (ref), var3 (ref), imageUri (ref)
-			p3:maybeReportCounter("Reloads", p4)
-			p3:updateAssetFetchStatusForImageLoadIndex(p4, var3, imageUri)
+	if p2.props.shouldHandleReloads then
+		p2.listenForReloadsConnection = p2.props.contentProvider:GetAssetFetchStatusChangedSignal(ImageUri):Connect(function(p3, _) --[[ Line: 541 ]]
+			-- upvalues: p2 (copy), NewCurrentImageLoadIndex (copy), ImageUri (copy)
+			p2:maybeReportCounter("Reloads", p3)
+			p2:updateAssetFetchStatusForImageLoadIndex(p3, NewCurrentImageLoadIndex, ImageUri)
 		end)
 	end
-	if loadingStrategy == loadingStrategyModule.Eager then
-		task.spawn(function()
-			-- upvalues: p3 (ref), var3 (ref)
-			p3:preloadImageWithRetryLogic(var3)
+	if LoadingStrategy == LoadingStrategyModule.Eager then
+		task.spawn(function() --[[ Line: 550 ]]
+			-- upvalues: p2 (copy), NewCurrentImageLoadIndex (copy)
+			p2:preloadImageWithRetryLogic(NewCurrentImageLoadIndex)
 		end)
 		
 		return
-	elseif loadingStrategy == loadingStrategyModule.Default then
-		p3:awaitImageLoaded(var3, var4)
+	end
+	if LoadingStrategy == LoadingStrategyModule.Default then
+		p2:awaitImageLoaded(NewCurrentImageLoadIndex, AssetFetchStatus)
 	end
 end
 
-return function(p3)
-	-- upvalues: roactModule (ref), contentProviderModule (ref), cryoModule (ref), loadableImage (ref)
-	return roactModule.createElement(contentProviderModule.Consumer, {
-		render = function(p4)
-			-- upvalues: cryoModule (copy), p3 (ref), roactModule (copy), loadableImage (copy)
-			return roactModule.createElement(loadableImage, cryoModule.Dictionary.join(p3, { contentProvider = p4 }))
+return function(p2) --[[ Line: 558 ]]
+	-- upvalues: RoactModule (copy), ContentProviderModule (copy), CryoModule (copy), LoadableImage (copy)
+	return RoactModule.createElement(ContentProviderModule.Consumer, {
+		render = function(ContentProvider) --[[ Line: 560 ]]
+			-- upvalues: CryoModule (upval), p2 (copy), RoactModule (upval), LoadableImage (upval)
+			return RoactModule.createElement(LoadableImage, (CryoModule.Dictionary.join(p2, { contentProvider = ContentProvider })))
 		end
 	})
 end

@@ -1,52 +1,50 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local controlStateModule = require(parent.Enum.ControlState)
-local controlStateEventModule = require(parent.Enum.ControlStateEvent)
-local stateTableModule = require(parent_1.StateTable.StateTable)
+﻿local Parent = script.Parent
+local ControlStateModule = require(Parent.Enum.ControlState)
+local ControlStateEventModule = require(Parent.Enum.ControlStateEvent)
+local StateTableModule = require(Parent.Parent.Parent.StateTable.StateTable)
 
-return function(p1)
-	-- upvalues: stateTableModule (ref), controlStateModule (ref), controlStateEventModule (ref)
-	local _ = nil
-	local guiStateTable = stateTableModule.new("GuiStateTable", controlStateModule.Initialize, {}, {
-		[controlStateModule.Initialize] = {
-			[controlStateEventModule.Idle] = { nextState = controlStateModule.Default },
-			[controlStateEventModule.Enabled] = { nextState = controlStateModule.Default },
-			[controlStateEventModule.Disabled] = { nextState = controlStateModule.Disabled }
+return function(p1) --[[ Line: 17 | Named "createGuiControlStateTable" ]]
+	-- upvalues: StateTableModule (copy), ControlStateModule (copy), ControlStateEventModule (copy)
+	local GuiStateTable = StateTableModule.new("GuiStateTable", ControlStateModule.Initialize, {}, {
+		[ControlStateModule.Initialize] = {
+			[ControlStateEventModule.Idle] = { nextState = ControlStateModule.Default },
+			[ControlStateEventModule.Enabled] = { nextState = ControlStateModule.Default },
+			[ControlStateEventModule.Disabled] = { nextState = ControlStateModule.Disabled }
 		},
-		[controlStateModule.Default] = {
-			[controlStateEventModule.PrimaryPressed] = { nextState = controlStateModule.Pressed },
-			[controlStateEventModule.PointerHover] = { nextState = controlStateModule.Hover },
-			[controlStateEventModule.SelectionGained] = { nextState = controlStateModule.Selected },
-			[controlStateEventModule.Disabled] = { nextState = controlStateModule.Disabled }
+		[ControlStateModule.Default] = {
+			[ControlStateEventModule.PrimaryPressed] = { nextState = ControlStateModule.Pressed },
+			[ControlStateEventModule.PointerHover] = { nextState = ControlStateModule.Hover },
+			[ControlStateEventModule.SelectionGained] = { nextState = ControlStateModule.Selected },
+			[ControlStateEventModule.Disabled] = { nextState = ControlStateModule.Disabled }
 		},
-		[controlStateModule.Hover] = {
-			[controlStateEventModule.SelectionGained] = { nextState = controlStateModule.Selected },
-			[controlStateEventModule.PrimaryPressed] = { nextState = controlStateModule.Pressed },
-			[controlStateEventModule.PointerHoverEnd] = { nextState = controlStateModule.Default },
-			[controlStateEventModule.Disabled] = { nextState = controlStateModule.Disabled }
+		[ControlStateModule.Hover] = {
+			[ControlStateEventModule.SelectionGained] = { nextState = ControlStateModule.Selected },
+			[ControlStateEventModule.PrimaryPressed] = { nextState = ControlStateModule.Pressed },
+			[ControlStateEventModule.PointerHoverEnd] = { nextState = ControlStateModule.Default },
+			[ControlStateEventModule.Disabled] = { nextState = ControlStateModule.Disabled }
 		},
-		[controlStateModule.Pressed] = {
-			[controlStateEventModule.SelectionGained] = { nextState = controlStateModule.SelectedPressed },
-			[controlStateEventModule.PrimaryReleasedHover] = { nextState = controlStateModule.Hover },
-			[controlStateEventModule.PrimaryReleased] = { nextState = controlStateModule.Default },
-			[controlStateEventModule.Disabled] = { nextState = controlStateModule.Disabled }
+		[ControlStateModule.Pressed] = {
+			[ControlStateEventModule.SelectionGained] = { nextState = ControlStateModule.SelectedPressed },
+			[ControlStateEventModule.PrimaryReleasedHover] = { nextState = ControlStateModule.Hover },
+			[ControlStateEventModule.PrimaryReleased] = { nextState = ControlStateModule.Default },
+			[ControlStateEventModule.Disabled] = { nextState = ControlStateModule.Disabled }
 		},
-		[controlStateModule.Selected] = {
-			[controlStateEventModule.SelectionLost] = { nextState = controlStateModule.Default },
-			[controlStateEventModule.PrimaryPressed] = { nextState = controlStateModule.SelectedPressed },
-			[controlStateEventModule.Disabled] = { nextState = controlStateModule.Disabled }
+		[ControlStateModule.Selected] = {
+			[ControlStateEventModule.SelectionLost] = { nextState = ControlStateModule.Default },
+			[ControlStateEventModule.PrimaryPressed] = { nextState = ControlStateModule.SelectedPressed },
+			[ControlStateEventModule.Disabled] = { nextState = ControlStateModule.Disabled }
 		},
-		[controlStateModule.SelectedPressed] = {
-			[controlStateEventModule.SelectionLost] = { nextState = controlStateModule.Default },
-			[controlStateEventModule.PrimaryReleasedHover] = { nextState = controlStateModule.Selected },
-			[controlStateEventModule.PrimaryReleased] = { nextState = controlStateModule.Selected },
-			[controlStateEventModule.Disabled] = { nextState = controlStateModule.Disabled }
+		[ControlStateModule.SelectedPressed] = {
+			[ControlStateEventModule.SelectionLost] = { nextState = ControlStateModule.Default },
+			[ControlStateEventModule.PrimaryReleasedHover] = { nextState = ControlStateModule.Selected },
+			[ControlStateEventModule.PrimaryReleased] = { nextState = ControlStateModule.Selected },
+			[ControlStateEventModule.Disabled] = { nextState = ControlStateModule.Disabled }
 		},
-		[controlStateModule.Disabled] = {
-			[controlStateEventModule.Enabled] = { nextState = controlStateModule.Default }
+		[ControlStateModule.Disabled] = {
+			[ControlStateEventModule.Enabled] = { nextState = ControlStateModule.Default }
 		}
 	})
-	guiStateTable:onStateChange(p1)
+	GuiStateTable:onStateChange(p1)
 	
-	return guiStateTable
+	return GuiStateTable
 end

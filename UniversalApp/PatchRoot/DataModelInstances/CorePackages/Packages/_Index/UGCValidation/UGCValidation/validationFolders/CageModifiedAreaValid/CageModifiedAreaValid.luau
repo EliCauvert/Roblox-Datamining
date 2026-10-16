@@ -1,26 +1,16 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local wrapTargetCageUVReferenceValuesModule = require(parent.WrapTargetCageUVReferenceValues)
-local collisionTestUtilModule = require(parent.util.CollisionTestUtil)
-local stringUtilModule = require(parent.util.StringUtil)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local WrapTargetCageUVReferenceValuesModule = require(Parent.WrapTargetCageUVReferenceValues)
+local CollisionTestUtilModule = require(Parent.util.CollisionTestUtil)
+local StringUtilModule = require(Parent.util.StringUtil)
 local UGCValidateExcludedUVModifyRequirements = game:DefineFastInt("UGCValidateExcludedUVModifyRequirements", 14)
 local UGCValidatePartUVModifyRequirements = game:DefineFastInt("UGCValidatePartUVModifyRequirements", 45)
 local UGCValidateRenderMeshInsideModifiedArea = game:DefineFastInt("UGCValidateRenderMeshInsideModifiedArea", 70)
-local var1 = tonumber(game:DefineFastString("UGCValidateModifiedAreaPaddingModifier", "1.1"))
-local t = {
-	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
-	requiredData = {
-		validationEnumsModule.SharedDataMember.innerCagesData,
-		validationEnumsModule.SharedDataMember.outerCagesData,
-		validationEnumsModule.SharedDataMember.renderMeshesData
-	},
-	conditionalData = {},
-	expectedFailures = {}
-}
-local t_1 = {
+local Number: number? = tonumber((game:DefineFastString("UGCValidateModifiedAreaPaddingModifier", "1.1")))
+local config = {
 	[Enum.AssetType.LeftShoeAccessory] = {
 		allowedParts = {
 			LeftFoot = true,
@@ -39,134 +29,142 @@ local t_1 = {
 	}
 }
 
-local function gatherUVs(p1)
-	-- upvalues: wrapTargetCageUVReferenceValuesModule (ref)
-	local t = {}
+local function gatherUVs(AllowedParts) --[[ Line: 80 ]]
+	-- upvalues: WrapTargetCageUVReferenceValuesModule (copy)
+	local List = {}
 	
-	for i in p1 do
-		for i_1, v in assert(wrapTargetCageUVReferenceValuesModule[i], "Body area not found in UV reference values") do
-			table.insert(t, v)
+	for allowedPart in AllowedParts do
+		for _, value in assert(WrapTargetCageUVReferenceValuesModule[allowedPart], "Body area not found in UV reference values") do
+			table.insert(List, value)
 		end
 	end
-	return t
+	return List
 end
 
-local function lazyGetUVsExcludedForAssetType(value)
-	-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), gatherUVs (ref)
-	if not value.uVsDisallowedForAssetType then
+local function lazyGetUVsExcludedForAssetType(p1) --[[ Line: 92 ]]
+	-- upvalues: WrapTargetCageUVReferenceValuesModule (copy), gatherUVs (copy)
+	if not p1.uVsDisallowedForAssetType then
 		local t = {}
 		
-		for i in wrapTargetCageUVReferenceValuesModule do
-			if not value.allowedParts[i] then
+		for i in WrapTargetCageUVReferenceValuesModule do
+			if not p1.allowedParts[i] then
 				t[i] = true
 			end
 		end
-		value.uVsDisallowedForAssetType = gatherUVs(t)
+		p1.uVsDisallowedForAssetType = gatherUVs(t)
 	end
-	return value.uVsDisallowedForAssetType
+	return p1.uVsDisallowedForAssetType
 end
 
-local function _(value)
-	-- upvalues: gatherUVs (ref)
-	if not value.uVsForAssetType then
-		value.uVsForAssetType = gatherUVs(value.allowedParts)
+local function _(p2) --[[ Line: 106 | Named "lazyGetUVsForAssetType" ]]
+	-- upvalues: gatherUVs (copy)
+	if not p2.uVsForAssetType then
+		p2.uVsForAssetType = gatherUVs(p2.allowedParts)
 	end
-	return value.uVsForAssetType
+	return p2.uVsForAssetType
 end
 
-local _ = function(value)
-	-- upvalues: gatherUVs (ref)
-	if not value.mainUVsForAssetType then
-		value.mainUVsForAssetType = gatherUVs(value.mainParts)
+local _ = function(p2) --[[ Line: 113 | Named "lazyGetMainUVsForAssetType" ]]
+	-- upvalues: gatherUVs (copy)
+	if not p2.mainUVsForAssetType then
+		p2.mainUVsForAssetType = gatherUVs(p2.mainParts)
 	end
-	return value.mainUVsForAssetType
+	return p2.mainUVsForAssetType
 end
 
-function t.run(p2, p3)
-	-- upvalues: t_1 (ref), lazyGetUVsExcludedForAssetType (ref), UGCValidationService (ref), UGCValidateExcludedUVModifyRequirements (ref), errorSourceStringsModule (ref), stringUtilModule (ref), gatherUVs (ref), UGCValidatePartUVModifyRequirements (ref), var1 (ref), collisionTestUtilModule (ref), UGCValidateRenderMeshInsideModifiedArea (ref)
-	local assetType = p3.uploadEnum.assetType
-	local var2 = t_1[assetType]
-	
-	if not var2 then return end
-	local handle = p3.innerCagesData.Handle
-	local handle_1 = p3.outerCagesData.Handle
-	
-	if not handle or not handle_1 then return end
-	local origin = handle.origin
-	local origin_1 = handle_1.origin
-	local var3 = lazyGetUVsExcludedForAssetType(var2)
-	
-	if #var3 > 0 then
-		local var4, var5, var6 = UGCValidationService:CalculateEditableMeshNumModifiedCageUVsInSet(var3, handle.editable, origin, handle_1.editable, origin_1)
-		assert(var4 == #var3, "all the UVs in allExcludedUVsForBodyArea sent in to CalculateEditableMeshNumModifiedCageUVsInSet should be unique")
+return {
+	categories = { ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING },
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.innerCagesData,
+		ValidationEnumsModule.SharedDataMember.outerCagesData,
+		ValidationEnumsModule.SharedDataMember.renderMeshesData
+	},
+	conditionalData = {},
+	expectedFailures = {},
+	run = function(p2, p3) --[[ Line: 120 ]]
+		-- upvalues: config (copy), lazyGetUVsExcludedForAssetType (copy), UGCValidationService (copy), UGCValidateExcludedUVModifyRequirements (copy), ErrorSourceStringsModule (copy), StringUtilModule (copy), gatherUVs (copy), UGCValidatePartUVModifyRequirements (copy), Number (copy), CollisionTestUtilModule (copy), UGCValidateRenderMeshInsideModifiedArea (copy)
+		local AssetType = p3.uploadEnum.assetType
+		local Entry = config[AssetType]
 		
-		if var5 ~= 0 then
-			local var7 = var6 / var5 * 100
+		if not Entry then return end
+		local Handle = p3.innerCagesData.Handle
+		local Handle1 = p3.outerCagesData.Handle
+		
+		if not Handle or not Handle1 then return end
+		local Origin = Handle.origin
+		local Origin1 = Handle1.origin
+		local LazyGetUVsExcludedForAssetTypeResult = lazyGetUVsExcludedForAssetType(Entry)
+		
+		if #LazyGetUVsExcludedForAssetTypeResult > 0 then
+			local EditableMeshNumModifiedCageUVsInSet, EditableMeshNumModifiedCageUVsInSet2, EditableMeshNumModifiedCageUVsInSet3 = UGCValidationService:CalculateEditableMeshNumModifiedCageUVsInSet(LazyGetUVsExcludedForAssetTypeResult, Handle.editable, Origin, Handle1.editable, Origin1)
+			assert(EditableMeshNumModifiedCageUVsInSet == #LazyGetUVsExcludedForAssetTypeResult, "all the UVs in allExcludedUVsForBodyArea sent in to CalculateEditableMeshNumModifiedCageUVsInSet should be unique")
 			
-			if UGCValidateExcludedUVModifyRequirements < var7 then
-				p2:fail(errorSourceStringsModule.Keys.CageUV_TooManyExcludedModified, {
-					modifiedPercent = tostring(math.floor(var7)),
-					assetTypeName = assetType.Name,
-					maxPercent = tostring(UGCValidateExcludedUVModifyRequirements),
-					allowedArea = stringUtilModule.keysToString(var2.allowedParts, "/")
+			if EditableMeshNumModifiedCageUVsInSet2 ~= 0 then
+				local Value = EditableMeshNumModifiedCageUVsInSet3 / EditableMeshNumModifiedCageUVsInSet2 * 100
+				
+				if UGCValidateExcludedUVModifyRequirements < Value then
+					p2:fail(ErrorSourceStringsModule.Keys.CageUV_TooManyExcludedModified, {
+						modifiedPercent = tostring((math.floor(Value))),
+						assetTypeName = AssetType.Name,
+						maxPercent = tostring(UGCValidateExcludedUVModifyRequirements),
+						allowedArea = StringUtilModule.keysToString(Entry.allowedParts, "/")
+					})
+				end
+			end
+		end
+		if not Entry.mainUVsForAssetType then
+			Entry.mainUVsForAssetType = gatherUVs(Entry.mainParts)
+		end
+		local MainUVsForAssetType = Entry.mainUVsForAssetType
+		
+		if #MainUVsForAssetType > 0 then
+			local EditableMeshNumModifiedCageUVsInSet1, _, EditableMeshNumModifiedCageUVsInSet3_1 = UGCValidationService:CalculateEditableMeshNumModifiedCageUVsInSet(MainUVsForAssetType, Handle.editable, Origin, Handle1.editable, Origin1)
+			assert(EditableMeshNumModifiedCageUVsInSet1 == #MainUVsForAssetType, "all the UVs in allUVsForBodyArea sent in to CalculateEditableMeshNumModifiedCageUVsInSet should be unique")
+			local Value2 = EditableMeshNumModifiedCageUVsInSet3_1 / EditableMeshNumModifiedCageUVsInSet1 * 100
+			
+			if Value2 < UGCValidatePartUVModifyRequirements then
+				p2:fail(ErrorSourceStringsModule.Keys.CageUV_TooFewMainModified, {
+					assetTypeName = AssetType.Name,
+					requiredPercent = tostring(UGCValidatePartUVModifyRequirements),
+					mainArea = StringUtilModule.keysToString(Entry.mainParts, "/"),
+					currentPercent = tostring((math.floor(Value2)))
+				})
+			end
+		end
+		if not Entry.uVsForAssetType then
+			Entry.uVsForAssetType = gatherUVs(Entry.allowedParts)
+		end
+		local UVsForAssetType = Entry.uVsForAssetType
+		
+		if #UVsForAssetType > 0 then
+			local Handle2 = p3.renderMeshesData.Handle
+			
+			if not Handle2 then return end
+			local EditableMeshModifiedCageBoundingBox, EditableMeshModifiedCageBoundingBox2 = UGCValidationService:CalculateEditableMeshModifiedCageBoundingBox(UVsForAssetType, Handle.editable, Origin, Handle1.editable, Origin1)
+			local EditableMeshVerts = UGCValidationService:GetEditableMeshVerts(Handle2.editable)
+			
+			if not EditableMeshVerts or #EditableMeshVerts == 0 then
+				p2:fail(ErrorSourceStringsModule.Keys.CageUV_RenderMeshBoundsCheckFailed)
+				
+				return
+			end
+			local ScaledEditableMeshModifiedCageBoundingBox = EditableMeshModifiedCageBoundingBox2 * Number
+			local Count = 0
+			
+			for _, editableMeshVert in EditableMeshVerts do
+				if CollisionTestUtilModule.pointInAxisAlignedBounds(editableMeshVert, EditableMeshModifiedCageBoundingBox, ScaledEditableMeshModifiedCageBoundingBox) then
+					Count += 1
+				end
+			end
+			local Value1 = Count / #EditableMeshVerts * 100
+			
+			if Value1 < UGCValidateRenderMeshInsideModifiedArea then
+				p2:fail(ErrorSourceStringsModule.Keys.CageUV_RenderMeshOutsideModifiedArea, {
+					currentPercent = tostring((math.floor(Value1))),
+					allowedArea = StringUtilModule.keysToString(Entry.allowedParts, "/"),
+					requiredPercent = tostring(UGCValidateRenderMeshInsideModifiedArea)
 				})
 			end
 		end
 	end
-	if not var2.mainUVsForAssetType then
-		var2.mainUVsForAssetType = gatherUVs(var2.mainParts)
-	end
-	local mainUVsForAssetType = var2.mainUVsForAssetType
-	
-	if #mainUVsForAssetType > 0 then
-		local var8, _, var9 = UGCValidationService:CalculateEditableMeshNumModifiedCageUVsInSet(mainUVsForAssetType, handle.editable, origin, handle_1.editable, origin_1)
-		assert(var8 == #mainUVsForAssetType, "all the UVs in allUVsForBodyArea sent in to CalculateEditableMeshNumModifiedCageUVsInSet should be unique")
-		local var10 = var9 / var8 * 100
-		
-		if var10 < UGCValidatePartUVModifyRequirements then
-			p2:fail(errorSourceStringsModule.Keys.CageUV_TooFewMainModified, {
-				assetTypeName = assetType.Name,
-				requiredPercent = tostring(UGCValidatePartUVModifyRequirements),
-				mainArea = stringUtilModule.keysToString(var2.mainParts, "/"),
-				currentPercent = tostring(math.floor(var10))
-			})
-		end
-	end
-	if not var2.uVsForAssetType then
-		var2.uVsForAssetType = gatherUVs(var2.allowedParts)
-	end
-	local uVsForAssetType = var2.uVsForAssetType
-	
-	if #uVsForAssetType > 0 then
-		local handle_2 = p3.renderMeshesData.Handle
-		
-		if not handle_2 then return end
-		local var11, var12 = UGCValidationService:CalculateEditableMeshModifiedCageBoundingBox(uVsForAssetType, handle.editable, origin, handle_1.editable, origin_1)
-		local editableEditableMeshVerts = UGCValidationService:GetEditableMeshVerts(handle_2.editable)
-		
-		if not editableEditableMeshVerts or #editableEditableMeshVerts == 0 then
-			p2:fail(errorSourceStringsModule.Keys.CageUV_RenderMeshBoundsCheckFailed)
-			
-			return
-		end
-		var12 *= var1
-		local var13 = 0
-		
-		for i, v in editableEditableMeshVerts do
-			if collisionTestUtilModule.pointInAxisAlignedBounds(v, var11, var12) then
-				var13 += 1
-			end
-		end
-		local var14 = var13 / #editableEditableMeshVerts * 100
-		
-		if var14 < UGCValidateRenderMeshInsideModifiedArea then
-			p2:fail(errorSourceStringsModule.Keys.CageUV_RenderMeshOutsideModifiedArea, {
-				currentPercent = tostring(math.floor(var14)),
-				allowedArea = stringUtilModule.keysToString(var2.allowedParts, "/"),
-				requiredPercent = tostring(UGCValidateRenderMeshInsideModifiedArea)
-			})
-		end
-	end
-end
-
-return t
+}

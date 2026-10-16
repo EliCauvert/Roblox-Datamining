@@ -1,1 +1,1 @@
-﻿return require(script.SystemBanner)
+﻿return (require(script.SystemBanner))

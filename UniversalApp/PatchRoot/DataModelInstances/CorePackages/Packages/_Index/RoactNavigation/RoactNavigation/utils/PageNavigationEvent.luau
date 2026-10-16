@@ -1,31 +1,31 @@
-﻿local invariantModule = require(script.Parent.invariant)
-local t = {}
-t.__index = t
+﻿local InvariantModule = require(script.Parent.invariant)
+local PageNavigationEventModule = {}
+PageNavigationEventModule.__index = PageNavigationEventModule
 
-function t.new(p1, p2)
-	-- upvalues: invariantModule (ref), t (ref)
-	invariantModule(type(p1) == "string", "pageName should be string")
-	invariantModule(typeof(p2) == "userdata", "event should be RoactNavigation.Event")
-	local t_1 = { event = p2, pageName = p1 }
-	setmetatable(t_1, t)
+function PageNavigationEventModule.new(PageName, Event) --[[ Line: 6 ]]
+	-- upvalues: InvariantModule (copy), PageNavigationEventModule (copy)
+	InvariantModule(type(PageName) == "string", "pageName should be string")
+	InvariantModule(typeof(Event) == "userdata", "event should be RoactNavigation.Event")
+	local config = { event = Event, pageName = PageName }
+	setmetatable(config, PageNavigationEventModule)
 	
-	return t_1
+	return config
 end
 
-function t.isPageNavigationEvent(p1)
-	-- upvalues: t (ref)
-	return getmetatable(p1).__index == t
+function PageNavigationEventModule.isPageNavigationEvent(p1): boolean --[[ Line: 19 ]]
+	-- upvalues: PageNavigationEventModule (copy)
+	return getmetatable(p1).__index == PageNavigationEventModule
 end
 
-function t:__tostring()
+function PageNavigationEventModule:__tostring(): string --[[ Line: 23 ]]
 	return string.format("%-15s - %s", tostring(self.event), self.pageName)
 end
 
-function t:equalTo(p1)
-	-- upvalues: invariantModule (ref), t (ref)
-	invariantModule(t.isPageNavigationEvent(p1), "should be PageNavigationEvent")
+function PageNavigationEventModule:equalTo(p1): boolean --[[ Line: 27 ]]
+	-- upvalues: InvariantModule (copy), PageNavigationEventModule (copy)
+	InvariantModule(PageNavigationEventModule.isPageNavigationEvent(p1), "should be PageNavigationEvent")
 	
 	return self.pageName == p1.pageName and self.event == p1.event
 end
 
-return t
+return PageNavigationEventModule

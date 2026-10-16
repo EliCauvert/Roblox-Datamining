@@ -1,33 +1,33 @@
 ﻿local _ = require(script:FindFirstAncestor("ViewRecycler").Core.Types)
-local keyUtilsModule = require(script.Parent.KeyUtils)
+local KeyUtilsModule = require(script.Parent.KeyUtils)
 
-local var1 = function() end
+local function v2() --[[ Line: 18 ]] end
 
-return function(p1, p2)
-	-- upvalues: keyUtilsModule (ref), var1 (ref)
-	local cloned = table.clone(p1)
-	local var2 = keyUtilsModule.keysFor(cloned, p2)
+return function(Tbl, p1) --[[ Line: 20 | Named "createArrayDataSource" ]]
+	-- upvalues: KeyUtilsModule (copy), v2 (copy)
+	local Copy = table.clone(Tbl)
+	local KeysForResult = KeyUtilsModule.keysFor(Copy, p1)
 	
 	return {
-		getItemCount = function()
-			-- upvalues: cloned (ref)
-			return #cloned
+		getItemCount = function(): number --[[ Line: 24 ]]
+			-- upvalues: Copy (copy)
+			return #Copy
 		end,
-		getItem = function(p3)
-			-- upvalues: cloned (ref)
-			return cloned[p3]
+		getItem = function(p2) --[[ Line: 27 ]]
+			-- upvalues: Copy (copy)
+			return Copy[p2]
 		end,
-		getItemKey = function(p3)
-			-- upvalues: var2 (ref)
-			return var2[p3]
+		getItemKey = function(p2) --[[ Line: 30 ]]
+			-- upvalues: KeysForResult (copy)
+			return KeysForResult[p2]
 		end,
-		getItems = function(p3, p4)
-			-- upvalues: cloned (ref)
-			return table.move(cloned, p3, p4, 1, {})
+		getItems = function(p2, p3) --[[ Line: 33 ]]
+			-- upvalues: Copy (copy)
+			return table.move(Copy, p2, p3, 1, {})
 		end,
-		subscribe = function(_)
-			-- upvalues: var1 (copy)
-			return var1
+		subscribe = function(_) --[[ Line: 36 ]]
+			-- upvalues: v2 (upval)
+			return v2
 		end
 	}
 end

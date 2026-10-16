@@ -1,17 +1,17 @@
-﻿local text = "id-" .. tostring(math.random(100000, 1000000))
-local var1 = 0
+﻿local Text = "id-" .. tostring(math.random(100000, 1000000))
+local Count = 0
 
 return {
-	_TESTING_ONLY_normalize_keys = function()
-		-- upvalues: text (write), var1 (write)
-		text = "id-"
-		var1 = 0
+	_TESTING_ONLY_normalize_keys = function() --[[ Line: 9 ]]
+		-- upvalues: Text (ref), Count (ref)
+		Text = "id-"
+		Count = 0
 	end,
-	generateKey = function()
-		-- upvalues: text (write), var1 (write)
-		local text_1 = text .. tostring(var1)
-		var1 += 1
+	generateKey = function(): string --[[ Line: 15 ]]
+		-- upvalues: Text (ref), Count (ref)
+		local Text1 = Text .. tostring(Count)
+		Count += 1
 		
-		return text_1
+		return Text1
 	end
 }

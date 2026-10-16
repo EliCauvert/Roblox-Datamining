@@ -1,55 +1,55 @@
-﻿local graphing = script:FindFirstAncestor("Graphing")
-local reactModule = require(graphing.Parent.React)
-local styleUtilModule = require(graphing.Util.StyleUtil)
-local _ = require(graphing.Types)
-local useViewportBindingModule = require(graphing.Util.useViewportBinding)
-local useViewportBinding = useViewportBindingModule.useViewportBinding
-local useViewportVisibility = useViewportBindingModule.useViewportVisibility
+﻿local Graphing = script:FindFirstAncestor("Graphing")
+local ReactModule = require(Graphing.Parent.React)
+local StyleUtilModule = require(Graphing.Util.StyleUtil)
+local _ = require(Graphing.Types)
+local UseViewportBindingModule = require(Graphing.Util.useViewportBinding)
+local UseViewportBindingFunction = UseViewportBindingModule.useViewportBinding
+local UseViewportVisibilityFunction = UseViewportBindingModule.useViewportVisibility
 
-function Panel(p1)
-	-- upvalues: useViewportBinding (ref), useViewportVisibility (ref), reactModule (ref), styleUtilModule (ref)
-	local var1 = useViewportBinding(function(p2)
-		-- upvalues: p1 (ref)
-		local var2 = p2.plotToView(p1.Rect.Min)
-		local var3 = p2.plotToView(p1.Rect.Max)
+function Panel(Frame: Frame) --[[ Line: 38 ]]
+	-- upvalues: UseViewportBindingFunction (copy), UseViewportVisibilityFunction (copy), ReactModule (copy), StyleUtilModule (copy)
+	local UseViewportBindingResult = UseViewportBindingFunction(function(p1) --[[ Line: 39 ]]
+		-- upvalues: Frame (copy)
+		local PlotToViewResult = p1.plotToView(Frame.Rect.Min)
+		local PlotToViewResult1 = p1.plotToView(Frame.Rect.Max)
 		
 		return {
-			position = UDim2.fromScale(var2.X, var2.Y),
-			size = UDim2.fromScale(var3.X - var2.X, var3.Y - var2.Y)
+			position = UDim2.fromScale(PlotToViewResult.X, PlotToViewResult.Y),
+			size = UDim2.fromScale(PlotToViewResult1.X - PlotToViewResult.X, PlotToViewResult1.Y - PlotToViewResult.Y)
 		}
-	end, { p1.Rect })
+	end, { Frame.Rect })
 	
-	return if useViewportVisibility(function(p2)
-		-- upvalues: p1 (ref)
-		return p2.isRectInViewport(p1.Rect)
-	end, { p1.Rect }) then if p1.Image then reactModule.createElement("ImageLabel", {
-		Position = var1:map(function(p2)
-			return p2.position
+	return if UseViewportVisibilityFunction(function(p1) --[[ Line: 48 ]]
+		-- upvalues: Frame (copy)
+		return p1.isRectInViewport(Frame.Rect)
+	end, { Frame.Rect }) then if Frame.Image then ReactModule.createElement("ImageLabel", {
+		Position = UseViewportBindingResult:map(function(p1) --[[ Line: 58 ]]
+			return p1.position
 		end),
-		Size = var1:map(function(p2)
-			return p2.size
+		Size = UseViewportBindingResult:map(function(p1) --[[ Line: 61 ]]
+			return p1.size
 		end),
-		Image = p1.Image,
-		ImageColor3 = p1.ImageColor3,
-		ImageTransparency = p1.ImageTransparency,
+		Image = Frame.Image,
+		ImageColor3 = Frame.ImageColor3,
+		ImageTransparency = Frame.ImageTransparency,
 		BackgroundTransparency = 0,
 		BorderSizePixel = 0,
-		ZIndex = p1.ZIndex,
-		[reactModule.Tag] = p1.Tag
-	}, p1.children) else reactModule.createElement("Frame", {
-		Position = var1:map(function(p2)
-			return p2.position
+		ZIndex = Frame.ZIndex,
+		[ReactModule.Tag] = Frame.Tag
+	}, Frame.children) else ReactModule.createElement("Frame", {
+		Position = UseViewportBindingResult:map(function(p1) --[[ Line: 76 ]]
+			return p1.position
 		end),
-		Size = var1:map(function(p2)
-			return p2.size
+		Size = UseViewportBindingResult:map(function(p1) --[[ Line: 79 ]]
+			return p1.size
 		end),
-		BackgroundColor3 = p1.BackgroundColor3 or styleUtilModule.GRID_BOX_BACKGROUND_COLOR3,
-		BackgroundTransparency = p1.BackgroundTransparency or styleUtilModule.GRID_BOX_BACKGROUND_TRANSPARENCY,
-		BorderColor3 = p1.BorderColor3 or styleUtilModule.GRID_BOX_BORDER_COLOR3,
-		BorderSizePixel = p1.BorderThickness or styleUtilModule.GRID_BOX_BORDER_THICKNESS,
-		ZIndex = p1.ZIndex,
-		[reactModule.Tag] = p1.Tag
-	}, p1.children) else nil
+		BackgroundColor3 = Frame.BackgroundColor3 or StyleUtilModule.GRID_BOX_BACKGROUND_COLOR3,
+		BackgroundTransparency = Frame.BackgroundTransparency or StyleUtilModule.GRID_BOX_BACKGROUND_TRANSPARENCY,
+		BorderColor3 = Frame.BorderColor3 or StyleUtilModule.GRID_BOX_BORDER_COLOR3,
+		BorderSizePixel = Frame.BorderThickness or StyleUtilModule.GRID_BOX_BORDER_THICKNESS,
+		ZIndex = Frame.ZIndex,
+		[ReactModule.Tag] = Frame.Tag
+	}, Frame.children) else nil
 end
 
 return Panel

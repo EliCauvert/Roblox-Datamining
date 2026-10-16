@@ -1,24 +1,25 @@
-﻿return function(p1)
-	local var1 = false
-	local var2 = false
-	local var3 = true
-	local var4 = 1
+﻿return function(List): boolean --[[ Line: 7 ]]
+	local Flag = false
+	local Flag1 = false
+	local Flag2 = true
+	local Count = 1
 	
-	for i, v in pairs(p1) do
+	for i, _ in pairs(List) do
 		if type(i) == "string" then
-			var2 = true
-		elseif type(i) == "number" then
-			if var4 ~= i then
-				var3 = false
+			Flag1 = true
+		else
+			if type(i) ~= "number" then
+				return false
 			end
-			var1 = true
+			if Count ~= i then
+				Flag2 = false
+			end
+			Flag = true
 		end
-		return false
-		if not var2 or not var1 then
-			var4 += 1
-			continue
+		if Flag1 and Flag then
+			return false
 		end
-		return false
+		Count += 1
 	end
-	return if var1 then var3 else true
+	return not Flag or Flag2
 end

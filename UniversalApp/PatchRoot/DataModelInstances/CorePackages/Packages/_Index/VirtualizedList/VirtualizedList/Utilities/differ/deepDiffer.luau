@@ -1,68 +1,74 @@
-﻿local luauPolyfillModule = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local var1 = nil
+﻿local LuauPolyfillModule = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local v1 = nil
 
-local function deepDiffer(p1, p2, p3, p4)
-	-- upvalues: var1 (write), boolean (ref), array (ref), deepDiffer (ref)
-	local var2 = if p3 ~= nil then -1 else p3
-	local var3 = if typeof(var2) == "number" then p4 else var2
-	local var4 = if typeof(var2) == "number" then var2 else -1
+local function deepDiffer(List, List1, p1, p2): boolean --[[ Line: 29 ]]
+	-- upvalues: v1 (ref), Boolean (copy), Array (copy), deepDiffer (copy)
+	local v2 = if p1 == nil then -1 else p1
+	local v3 = if typeof(v2) == "number" then p2 else v2
+	local v4 = if typeof(v2) == "number" then v2 else -1
 	
-	if var4 == 0 then
+	if v4 == 0 then
 		return true
-	elseif p1 == p2 then
-		return false
-	elseif typeof(p1) == "function" and typeof(p2) == "function" then
-		local var5 = if var3 == nil then false else var3.unsafelyIgnoreFunctions ~= nil
-		local var6 = if var3 == nil or not var5 then nil else var3.unsafelyIgnoreFunctions
-		
-		if var6 == nil then
-			if var1 ~= nil and boolean.toJSBoolean(var1.onDifferentFunctionsIgnored) and (not boolean.toJSBoolean(var3) or not var5) then
-				var1.onDifferentFunctionsIgnored(debug.info(p1, "n"), debug.info(p2, "n"))
-			end
-			var6 = true
-		end
-		return not var6
-	elseif typeof(p1) ~= "table" or p1 == nil then
-		return p1 ~= p2
-	elseif typeof(p2) ~= "table" or p2 == nil then
-		return true
-	elseif array.isArray(p1) ~= array.isArray(p2) then
-		return true
-	elseif array.isArray(p1) then
-		if #p2 ~= #p1 then
-			return true
-		end
-		for i = 1, #p1 do
-			if not deepDiffer(p1[i], p2[i], var4 - 1, var3) then
-				continue
-			end
-			return true
-		end
-	else
-		for i_1 in pairs(p1) do
-			if deepDiffer(p1[i_1], p2[i_1], var4 - 1, var3) then
-				return true
-			end
-		end
-		for i_1 in pairs(p2) do
-			if p1[i_1] == nil and p2[i_1] ~= nil then
-				return true
-			end
-		end
 	end
-	return false
+	if List == List1 then
+		return false
+	end
+	if typeof(List) == "function" and typeof(List1) == "function" then
+		local HasUnsafelyIgnoreFunctions: boolean = v3 ~= nil and v3.unsafelyIgnoreFunctions ~= nil
+		local UnsafelyIgnoreFunctions = if v3 == nil or not HasUnsafelyIgnoreFunctions then nil else v3.unsafelyIgnoreFunctions
+		
+		if UnsafelyIgnoreFunctions == nil then
+			if v1 ~= nil and Boolean.toJSBoolean(v1.onDifferentFunctionsIgnored) and (not Boolean.toJSBoolean(v3) or not HasUnsafelyIgnoreFunctions) then
+				v1.onDifferentFunctionsIgnored(debug.info(List, "n"), debug.info(List1, "n"))
+			end
+			UnsafelyIgnoreFunctions = true
+		end
+		return not UnsafelyIgnoreFunctions
+	else
+		if typeof(List) ~= "table" or List == nil then
+			return List ~= List1
+		end
+		if typeof(List1) ~= "table" or List1 == nil then
+			return true
+		end
+		if Array.isArray(List) ~= Array.isArray(List1) then
+			return true
+		end
+		if Array.isArray(List) then
+			if #List1 ~= #List then
+				return true
+			end
+			for i = 1, #List do
+				if deepDiffer(List[i], List1[i], v4 - 1, v3) then
+					return true
+				end
+			end
+		else
+			for i1 in pairs(List) do
+				if deepDiffer(List[i1], List1[i1], v4 - 1, v3) then
+					return true
+				end
+			end
+			for i2 in pairs(List1) do
+				if List[i2] == nil and List1[i2] ~= nil then
+					return true
+				end
+			end
+		end
+		return false
+	end
 end
 
-return setmetatable({
-	unstable_setLogListeners = function(value)
-		-- upvalues: var1 (write)
-		var1 = value
+return (setmetatable({
+	unstable_setLogListeners = function(p3) --[[ Line: 22 ]]
+		-- upvalues: v1 (ref)
+		v1 = p3
 	end
 }, {
-	__call = function(_, p5, p6, p7, p8)
-		-- upvalues: deepDiffer (ref)
-		return deepDiffer(p5, p6, p7, p8)
+	__call = function(_, p3, p4, p5, p6) --[[ Line: 110 ]]
+		-- upvalues: deepDiffer (copy)
+		return (deepDiffer(p3, p4, p5, p6))
 	end
-})
+}))

@@ -1,566 +1,579 @@
-﻿local parent = script.Parent.Parent
-local jsutils = parent.jsutils
-local error = parent.error
-local language = parent.language
-local type = parent.type
-local utilities = parent.utilities
-local luaUtils = parent.luaUtils
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local error_1 = luauPolyfillModule.Error
-local map = luauPolyfillModule.Map
-local set = luauPolyfillModule.Set
-local instanceof = luauPolyfillModule.instanceof
-local _ = require(jsutils.ObjMap)
-local _ = require(jsutils.PromiseOrValue)
-local promiseModule = require(parent.Parent.Promise)
-local nullModule = require(luaUtils.null)
-local isNillish = require(luaUtils.isNillish).isNillish
-local inspect = require(jsutils.inspect).inspect
-local memoize3 = require(jsutils.memoize3).memoize3
-local invariant = require(jsutils.invariant).invariant
-local devAssert = require(jsutils.devAssert).devAssert
-local isPromise = require(jsutils.isPromise).isPromise
-local isObjectLike = require(jsutils.isObjectLike).isObjectLike
-local promiseReduce = require(jsutils.promiseReduce).promiseReduce
-local promiseForObject = require(jsutils.promiseForObject).promiseForObject
-local pathModule = require(jsutils.Path)
-local addPath = pathModule.addPath
-local pathToArray = pathModule.pathToArray
-local isIteratableObject = require(jsutils.isIteratableObject).isIteratableObject
-local _ = require(error.formatError)
-local graphQLError = require(error.GraphQLError).GraphQLError
-local locatedError = require(error.locatedError).locatedError
-local _ = require(language.ast)
-local kind = require(parent.language.kinds).Kind
-local _ = require(type.schema)
-local definitionModule = require(type.definition)
-local assertValidSchema = require(type.validate).assertValidSchema
-local introspectionModule = require(type.introspection)
-local schemaMetaFieldDef = introspectionModule.SchemaMetaFieldDef
-local typeMetaFieldDef = introspectionModule.TypeMetaFieldDef
-local typeNameMetaFieldDef = introspectionModule.TypeNameMetaFieldDef
-local directivesModule = require(type.directives)
-local graphQLIncludeDirective = directivesModule.GraphQLIncludeDirective
-local graphQLSkipDirective = directivesModule.GraphQLSkipDirective
-local isObjectType = definitionModule.isObjectType
-local isAbstractType = definitionModule.isAbstractType
-local isLeafType = definitionModule.isLeafType
-local isListType = definitionModule.isListType
-local isNonNullType = definitionModule.isNonNullType
-local typeFromAST = require(utilities.typeFromAST).typeFromAST
-local getOperationRootType = require(utilities.getOperationRootType).getOperationRootType
-local valuesModule = require(script.Parent.values)
-local getVariableValues = valuesModule.getVariableValues
-local getArgumentValues = valuesModule.getArgumentValues
-local getDirectiveValues = valuesModule.getDirectiveValues
-local _ = nil
-local _ = nil
-local assertValidExecutionArguments = nil
-local buildExecutionContext = nil
-local collectFields = nil
-local buildResolveInfo = nil
-local var1 = nil
-local var2 = nil
-local var3 = nil
-local buildResponse = nil
-local executeOperation = nil
-local executeFieldsSerially = nil
-local executeFields = nil
-local shouldIncludeNode = nil
-local doesFragmentConditionMatch = nil
-local getFieldEntryKey = nil
-local resolveField = nil
-local handleFieldError = nil
-local completeValue = nil
-local completeListValue = nil
-local completeLeafValue = nil
-local completeAbstractValue = nil
-local ensureValidRuntimeType = nil
-local completeObjectValue = nil
-local invalidReturnTypeError = nil
-local collectAndExecuteSubfields = nil
-local _ = nil
-local var4 = nil
+﻿local Parent = script.Parent.Parent
+local Jsutils = Parent.jsutils
+local Error1 = Parent.error
+local Type = Parent.type
+local Utilities = Parent.utilities
+local LuaUtils = Parent.luaUtils
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Error2 = LuauPolyfillModule.Error
+local Map = LuauPolyfillModule.Map
+local Set = LuauPolyfillModule.Set
+local InstanceofFunction = LuauPolyfillModule.instanceof
+local _ = require(Jsutils.ObjMap)
+local _ = require(Jsutils.PromiseOrValue)
+local PromiseModule = require(Parent.Parent.Promise)
+local NullModule = require(LuaUtils.null)
+local IsNillishFunction = require(LuaUtils.isNillish).isNillish
+local InspectFunction = require(Jsutils.inspect).inspect
+local Memoize3Function = require(Jsutils.memoize3).memoize3
+local InvariantFunction = require(Jsutils.invariant).invariant
+local DevAssertFunction = require(Jsutils.devAssert).devAssert
+local IsPromiseFunction = require(Jsutils.isPromise).isPromise
+local IsObjectLikeFunction = require(Jsutils.isObjectLike).isObjectLike
+local PromiseReduceFunction = require(Jsutils.promiseReduce).promiseReduce
+local PromiseForObjectFunction = require(Jsutils.promiseForObject).promiseForObject
+local PathModule = require(Jsutils.Path)
+local AddPathFunction = PathModule.addPath
+local PathToArrayFunction = PathModule.pathToArray
+local IsIteratableObjectFunction = require(Jsutils.isIteratableObject).isIteratableObject
+local _ = require(Error1.formatError)
+local GraphQLError = require(Error1.GraphQLError).GraphQLError
+local LocatedErrorFunction = require(Error1.locatedError).locatedError
+local _ = require(Parent.language.ast)
+local Kind = require(Parent.language.kinds).Kind
+local _ = require(Type.schema)
+local DefinitionModule = require(Type.definition)
+local AssertValidSchemaFunction = require(Type.validate).assertValidSchema
+local IntrospectionModule = require(Type.introspection)
+local SchemaMetaFieldDef = IntrospectionModule.SchemaMetaFieldDef
+local TypeMetaFieldDef = IntrospectionModule.TypeMetaFieldDef
+local TypeNameMetaFieldDef = IntrospectionModule.TypeNameMetaFieldDef
+local DirectivesModule = require(Type.directives)
+local GraphQLIncludeDirective = DirectivesModule.GraphQLIncludeDirective
+local GraphQLSkipDirective = DirectivesModule.GraphQLSkipDirective
+local IsObjectTypeFunction = DefinitionModule.isObjectType
+local IsAbstractTypeFunction = DefinitionModule.isAbstractType
+local IsLeafTypeFunction = DefinitionModule.isLeafType
+local IsListTypeFunction = DefinitionModule.isListType
+local IsNonNullTypeFunction = DefinitionModule.isNonNullType
+local TypeFromASTFunction = require(Utilities.typeFromAST).typeFromAST
+local GetOperationRootTypeFunction = require(Utilities.getOperationRootType).getOperationRootType
+local ValuesModule = require(script.Parent.values)
+local GetVariableValuesFunction = ValuesModule.getVariableValues
+local GetArgumentValuesFunction = ValuesModule.getArgumentValues
+local GetDirectiveValuesFunction = ValuesModule.getDirectiveValues
+local execute = nil
+local Callback1 = nil
+local Callback2 = nil
+local Callback4 = nil
+local Callback10 = nil
+local DefaultTypeResolver = nil
+local DefaultFieldResolver = nil
+local Callback9 = nil
+local Callback3 = nil
+local Callback = nil
+local ExecuteFieldsSerially = nil
+local ExecuteFields = nil
+local Callback6 = nil
+local Callback8 = nil
+local Callback7 = nil
+local Callback5 = nil
+local Callback11 = nil
+local Callback12 = nil
+local Callback14 = nil
+local Callback15 = nil
+local Callback16 = nil
+local Callback18 = nil
+local Callback17 = nil
+local Callback19 = nil
+local Callback13 = nil
+local Callback20 = nil
 
-local function execute(p1)
-	-- upvalues: assertValidExecutionArguments (write), buildExecutionContext (write), array (ref), executeOperation (write), buildResponse (write)
-	local schema = p1.schema
-	local document = p1.document
-	local rootValue = p1.rootValue
-	local contextValue = p1.contextValue
-	local variableValues = p1.variableValues
-	local operationName = p1.operationName
-	local fieldResolver = p1.fieldResolver
-	local typeResolver = p1.typeResolver
-	assertValidExecutionArguments(schema, document, variableValues)
-	local var5 = buildExecutionContext(schema, document, rootValue, contextValue, variableValues, operationName, fieldResolver, typeResolver)
+execute = function(p1) --[[ Line: 225 | Named "execute" ]]
+	-- upvalues: Callback1 (ref), Callback2 (ref), Array (copy), Callback (ref), Callback3 (ref)
+	local Schema = p1.schema
+	local Document = p1.document
+	local RootValue = p1.rootValue
+	local ContextValue = p1.contextValue
+	local VariableValues = p1.variableValues
+	local OperationName = p1.operationName
+	local FieldResolver = p1.fieldResolver
+	local TypeResolver = p1.typeResolver
+	Callback1(Schema, Document, VariableValues)
+	local CallbackResult = Callback2(Schema, Document, RootValue, ContextValue, VariableValues, OperationName, FieldResolver, TypeResolver)
 	
-	return if array.isArray(var5) or not var5.schema then { errors = var5 } else buildResponse(var5, executeOperation(var5, var5.operation, rootValue))
+	return if Array.isArray(CallbackResult) or not CallbackResult.schema then { errors = CallbackResult } else Callback3(CallbackResult, (Callback(CallbackResult, CallbackResult.operation, RootValue)))
 end
 
-local function executeSync(p1)
-	-- upvalues: execute (write), isPromise (ref), error_1 (ref)
-	local var5 = execute(p1)
+local function executeSync(p1) --[[ Line: 278 ]]
+	-- upvalues: execute (ref), IsPromiseFunction (copy), Error2 (copy)
+	local ExecuteResult = execute(p1)
 	
-	if isPromise(var5) then
-		error(error_1.new("GraphQL execution failed to complete synchronously."))
+	if IsPromiseFunction(ExecuteResult) then
+		error(Error2.new("GraphQL execution failed to complete synchronously."))
 	end
-	return var5
+	return ExecuteResult
 end
 
-buildResponse = function(p1, p2)
-	-- upvalues: isPromise (ref), buildResponse (write)
-	return if isPromise(p2) then p2:andThen(function(p3)
-		-- upvalues: buildResponse (copy), p1 (ref)
-		return buildResponse(p1, p3)
-	end) elseif #p1.errors == 0 then { data = p2 } else { errors = p1.errors, data = p2 }
+Callback3 = function(Errors, Data) --[[ Line: 294 | Named "buildResponse" ]]
+	-- upvalues: IsPromiseFunction (copy), Callback3 (ref)
+	return if IsPromiseFunction(Data) then Data:andThen(function(Result) --[[ Line: 301 ]]
+		-- upvalues: Callback3 (upval), Errors (copy)
+		return Callback3(Errors, Result)
+	end) elseif #Errors.errors == 0 then { data = Data } else { errors = Errors.errors, data = Data }
 end
 
-assertValidExecutionArguments = function(p1, p2, p3)
-	-- upvalues: devAssert (ref), assertValidSchema (ref), isObjectLike (ref)
-	devAssert(p2, "Must provide document.")
-	assertValidSchema(p1)
-	devAssert(if p3 ~= nil then isObjectLike(p3) else true, "Variables must be provided as an Object where each property is a variable value. Perhaps look to see if an unparsed JSON string was provided.")
+Callback1 = function(Schema, Document, VariableValues) --[[ Line: 320 | Named "assertValidExecutionArguments" ]]
+	-- upvalues: DevAssertFunction (copy), AssertValidSchemaFunction (copy), IsObjectLikeFunction (copy)
+	DevAssertFunction(Document, "Must provide document.")
+	AssertValidSchemaFunction(Schema)
+	DevAssertFunction(VariableValues == nil or IsObjectLikeFunction(VariableValues), "Variables must be provided as an Object where each property is a variable value. Perhaps look to see if an unparsed JSON string was provided.")
 end
 
-buildExecutionContext = function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: kind (ref), graphQLError (ref), getVariableValues (ref), var2 (write), var1 (write)
-	local var5 = nil
-	local t = {}
+Callback2 = function(Schema, Document, RootValue, ContextValue, VariableValues, OperationName, FieldResolver, TypeResolver) --[[ Line: 345 | Named "buildExecutionContext" ]]
+	-- upvalues: Kind (copy), GraphQLError (copy), GetVariableValuesFunction (copy), DefaultFieldResolver (ref), DefaultTypeResolver (ref)
+	local Operation = nil
+	local Fragments = {}
 	
-	for i, v in ipairs(p2.definitions) do
-		if v.kind == kind.OPERATION_DEFINITION then
-			if p6 == nil then
-				if var5 == nil then
-					var5 = v
-					continue
-				end
-				return {
-					graphQLError.new("Must provide operation name if query contains multiple operations.")
-				}
-			elseif (v.name and v.name.value) == p6 then
-				var5 = v
+	for _, definition in ipairs(Document.definitions) do
+		if definition.kind ~= Kind.OPERATION_DEFINITION then
+			if definition.kind == Kind.FRAGMENT_DEFINITION then
+				Fragments[definition.name.value] = definition
+				continue
 			end
-		elseif v.kind == kind.FRAGMENT_DEFINITION then
-			t[v.name.value] = v
+			continue
+		end
+		if OperationName == nil then
+			if Operation ~= nil then
+				return {
+					GraphQLError.new("Must provide operation name if query contains multiple operations.")
+				}
+			end
+			Operation = definition
+		elseif (definition.name and definition.name.value) == OperationName then
+			Operation = definition
 		end
 	end
-	if var5 then
-		local var6 = getVariableValues(p1, var5.variableDefinitions or {}, p5 or {}, { maxErrors = 50 })
+	if Operation then
+		local VariableValues1 = GetVariableValuesFunction(Schema, Operation.variableDefinitions or {}, if VariableValues then VariableValues else {}, { maxErrors = 50 })
 		
-		return if var6.errors then var6.errors else {
-			schema = p1,
-			fragments = t,
-			rootValue = p3,
-			contextValue = p4,
-			operation = var5,
-			variableValues = var6.coerced,
-			fieldResolver = p7 or var2,
-			typeResolver = p8 or var1,
+		return if VariableValues1.errors then VariableValues1.errors else {
+			schema = Schema,
+			fragments = Fragments,
+			rootValue = RootValue,
+			contextValue = ContextValue,
+			operation = Operation,
+			variableValues = VariableValues1.coerced,
+			fieldResolver = FieldResolver or DefaultFieldResolver,
+			typeResolver = TypeResolver or DefaultTypeResolver,
 			errors = {}
 		}
-	end
-	return if p6 == nil then { graphQLError.new("Must provide an operation.") } else {
-		graphQLError.new(("Unknown operation named \"%s\"."):format(p6))
-	}
-end
-
-executeOperation = function(p9, p10, p11)
-	-- upvalues: getOperationRootType (ref), collectFields (write), map (ref), executeFieldsSerially (write), executeFields (write), isPromise (ref), promiseModule (ref), nullModule (ref)
-	local var7, var8
-	local var9 = getOperationRootType(p9.schema, p10)
-	local var10 = collectFields(p9, var9, p10.selectionSet, map.new(), {})
-	local _ = nil
-	local _ = nil
-	
-	if p10.operation == "mutation" then
-		local ok, status = pcall(executeFieldsSerially, p9, var9, p11, nil, var10)
-		var7 = ok
-		var8 = status
 	else
-		local ok, status = pcall(executeFields, p9, var9, p11, nil, var10)
-		var7 = ok
-		var8 = status
+		return if OperationName == nil then { GraphQLError.new("Must provide an operation.") } else {
+			GraphQLError.new(("Unknown operation named \"%s\"."):format(OperationName))
+		}
 	end
-	if isPromise(var8) then
-		return var8:andThen(nil, function(p12)
-			-- upvalues: p9 (ref), promiseModule (copy), nullModule (copy)
-			table.insert(p9.errors, p12)
-			
-			return promiseModule.resolve(nullModule)
-		end)
-	elseif var7 then
-		return var8
-	end
-	table.insert(p9.errors, var8)
-	
-	return nullModule
 end
 
-executeFieldsSerially = function(p9, p10, p11, p12, p13)
-	-- upvalues: promiseReduce (ref), addPath (ref), resolveField (write), isPromise (ref)
-	return promiseReduce(p13:keys(), function(p14, p15)
-		-- upvalues: p13 (ref), addPath (copy), p12 (ref), p10 (ref), resolveField (copy), p9 (ref), p11 (ref), isPromise (copy)
-		local var7 = resolveField(p9, p10, p11, p13[p15], addPath(p12, p15, p10.name))
+Callback = function(Errors, Operation, RootValue) --[[ Line: 421 | Named "executeOperation" ]]
+	-- upvalues: GetOperationRootTypeFunction (copy), Callback4 (ref), Map (copy), ExecuteFieldsSerially (ref), ExecuteFields (ref), IsPromiseFunction (copy), PromiseModule (copy), NullModule (copy)
+	local OperationRootType = GetOperationRootTypeFunction(Errors.schema, Operation)
+	local CallbackResult = Callback4(Errors, OperationRootType, Operation.selectionSet, Map.new(), {})
+	local Success = nil
+	local Result = nil
+	
+	if Operation.operation == "mutation" then
+		Success, Result = pcall(ExecuteFieldsSerially, Errors, OperationRootType, RootValue, nil, CallbackResult)
+	else
+		Success, Result = pcall(ExecuteFields, Errors, OperationRootType, RootValue, nil, CallbackResult)
+	end
+	if IsPromiseFunction(Result) then
+		return Result:andThen(nil, function(p1) --[[ Line: 450 ]]
+			-- upvalues: Errors (copy), PromiseModule (upval), NullModule (upval)
+			table.insert(Errors.errors, p1)
+			
+			return PromiseModule.resolve(NullModule)
+		end)
+	elseif Success then
+		return Result
+	else
+		table.insert(Errors.errors, Result)
 		
-		if var7 == nil then
-			return p14
-		elseif isPromise(var7) then
-			return var7:andThen(function(p16)
-				-- upvalues: p14 (ref), p15 (ref)
-				p14[p15] = p16
+		return NullModule
+	end
+end
+
+ExecuteFieldsSerially = function(p1, p2, p3, p4, p5) --[[ Line: 467 | Named "executeFieldsSerially" ]]
+	-- upvalues: PromiseReduceFunction (copy), AddPathFunction (copy), Callback5 (ref), IsPromiseFunction (copy)
+	return PromiseReduceFunction(p5:keys(), function(Promises, Key) --[[ Line: 477 ]]
+		-- upvalues: p5 (copy), AddPathFunction (upval), p4 (copy), p2 (copy), Callback5 (upval), p1 (copy), p3 (copy), IsPromiseFunction (upval)
+		local CallbackResult = Callback5(p1, p2, p3, p5[Key], (AddPathFunction(p4, Key, p2.name)))
+		
+		if CallbackResult == nil then
+			return Promises
+		elseif IsPromiseFunction(CallbackResult) then
+			return CallbackResult:andThen(function(Result) --[[ Line: 489 ]]
+				-- upvalues: Promises (copy), Key (copy)
+				Promises[Key] = Result
 				
-				return p14
+				return Promises
 			end)
+		else
+			Promises[Key] = CallbackResult
+			
+			return Promises
 		end
-		p14[p15] = var7
-		
-		return p14
 	end, {})
 end
 
-executeFields = function(p9, p10, p11, p12, p13)
-	-- upvalues: addPath (ref), resolveField (write), isPromise (ref), promiseForObject (ref)
+ExecuteFields = function(p1, p2, p3, p4, p5) --[[ Line: 508 | Named "executeFields" ]]
+	-- upvalues: AddPathFunction (copy), Callback5 (ref), IsPromiseFunction (copy), PromiseForObjectFunction (copy)
 	local t = {}
-	local var7 = false
+	local Flag = false
 	
-	for i, v in ipairs(p13:keys()) do
-		local var8 = resolveField(p9, p10, p11, p13[v], addPath(p12, v, p10.name))
+	for _, value in ipairs(p5:keys()) do
+		local CallbackResult = Callback5(p1, p2, p3, p5[value], (AddPathFunction(p4, value, p2.name)))
 		
-		if var8 ~= nil then
-			t[v] = var8
+		if CallbackResult ~= nil then
+			t[value] = CallbackResult
 			
-			if isPromise(var8) then
-				var7 = true
+			if IsPromiseFunction(CallbackResult) then
+				Flag = true
 			end
 		end
 	end
-	return if var7 then promiseForObject(t) else t
+	return if Flag then PromiseForObjectFunction(t) else t
 end
 
-collectFields = function(p14, p15, p16, p17, p18)
-	-- upvalues: kind (ref), shouldIncludeNode (write), getFieldEntryKey (write), doesFragmentConditionMatch (write), collectFields (write)
-	for i, v in ipairs(p16.selections) do
-		if v.kind == kind.FIELD then
-			if shouldIncludeNode(p14, v) then
-				local var9 = getFieldEntryKey(v)
+Callback4 = function(p6, p7, SelectionSet, NewResult, p8) --[[ Line: 555 | Named "collectFields" ]]
+	-- upvalues: Kind (copy), Callback6 (ref), Callback7 (ref), Callback8 (ref), Callback4 (ref)
+	for _, selection in ipairs(SelectionSet.selections) do
+		if selection.kind == Kind.FIELD then
+			if Callback6(p6, selection) then
+				local CallbackResult = Callback7(selection)
 				
-				if not p17[var9] then
-					p17[var9] = {}
+				if not NewResult[CallbackResult] then
+					NewResult[CallbackResult] = {}
 				end
-				table.insert(p17[var9], v)
+				table.insert(NewResult[CallbackResult], selection)
 			end
-		elseif v.kind == kind.INLINE_FRAGMENT then
-			if shouldIncludeNode(p14, v) and doesFragmentConditionMatch(p14, v, p15) then
-				collectFields(p14, p15, v.selectionSet, p17, p18)
+		elseif selection.kind == Kind.INLINE_FRAGMENT then
+			if Callback6(p6, selection) and Callback8(p6, selection, p7) then
+				Callback4(p6, p7, selection.selectionSet, NewResult, p8)
 			end
-		elseif v.kind == kind.FRAGMENT_SPREAD then
-			local value = v.name.value
+		elseif selection.kind == Kind.FRAGMENT_SPREAD then
+			local Value = selection.name.value
 			
-			if not p18[value] and shouldIncludeNode(p14, v) then
-				p18[value] = true
-				local var10 = p14.fragments[value]
+			if not p8[Value] and Callback6(p6, selection) then
+				p8[Value] = true
+				local Fragment = p6.fragments[Value]
 				
-				if var10 and doesFragmentConditionMatch(p14, var10, p15) then
-					collectFields(p14, p15, var10.selectionSet, p17, p18)
+				if Fragment and Callback8(p6, Fragment, p7) then
+					Callback4(p6, p7, Fragment.selectionSet, NewResult, p8)
 				end
 			end
 		end
 	end
-	return p17
+	return NewResult
 end
 
-shouldIncludeNode = function(p19, p20)
-	-- upvalues: getDirectiveValues (ref), graphQLSkipDirective (ref), graphQLIncludeDirective (ref)
-	local var11 = getDirectiveValues(graphQLSkipDirective, p20, p19.variableValues)
+Callback6 = function(p9, p10): boolean --[[ Line: 616 | Named "shouldIncludeNode" ]]
+	-- upvalues: GetDirectiveValuesFunction (copy), GraphQLSkipDirective (copy), GraphQLIncludeDirective (copy)
+	local DirectiveValues = GetDirectiveValuesFunction(GraphQLSkipDirective, p10, p9.variableValues)
 	
-	if (var11 and var11["if"]) == true then
+	if (DirectiveValues and DirectiveValues["if"]) == true then
 		return false
+	else
+		local DirectiveValues1 = GetDirectiveValuesFunction(GraphQLIncludeDirective, p10, p9.variableValues)
+		
+		return (DirectiveValues1 and DirectiveValues1["if"]) ~= false
 	end
-	local var12 = getDirectiveValues(graphQLIncludeDirective, p20, p19.variableValues)
-	
-	return (var12 and var12["if"]) ~= false
 end
 
-doesFragmentConditionMatch = function(p19, p20, p21)
-	-- upvalues: typeFromAST (ref), isAbstractType (ref)
-	local typeCondition = p20.typeCondition
+Callback8 = function(p9, Fragment, p10) --[[ Line: 638 | Named "doesFragmentConditionMatch" ]]
+	-- upvalues: TypeFromASTFunction (copy), IsAbstractTypeFunction (copy)
+	local TypeCondition = Fragment.typeCondition
 	
-	if not typeCondition then
+	if TypeCondition then
+		local TypeFromASTResult = TypeFromASTFunction(p9.schema, TypeCondition)
+		
+		return TypeFromASTResult == p10 or (if IsAbstractTypeFunction(TypeFromASTResult) then p9.schema:isSubType(TypeFromASTResult, p10) else false)
+	else
 		return true
 	end
-	local var11 = typeFromAST(p19.schema, typeCondition)
-	
-	return var11 == p21 or (if isAbstractType(var11) then p19.schema:isSubType(var11, p21) else false)
 end
 
-getFieldEntryKey = function(p19)
-	return if p19.alias then p19.alias.value else p19.name.value
+Callback7 = function(p9) --[[ Line: 670 | Named "getFieldEntryKey" ]]
+	return if p9.alias then p9.alias.value else p9.name.value
 end
 
-resolveField = function(p19, p20, p21, p22, p23)
-	-- upvalues: var3 (write), buildResolveInfo (write), getArgumentValues (ref), isPromise (ref), completeValue (write), locatedError (ref), pathToArray (ref), handleFieldError (write)
-	local var11 = var3(p19.schema, p20, p22[1].name.value)
+Callback5 = function(ResolveInfo, ParentType, p9, Entry, Path) --[[ Line: 680 | Named "resolveField" ]]
+	-- upvalues: Callback9 (ref), Callback10 (ref), GetArgumentValuesFunction (copy), IsPromiseFunction (copy), Callback12 (ref), LocatedErrorFunction (copy), PathToArrayFunction (copy), Callback11 (ref)
+	local CallbackResult = Callback9(ResolveInfo.schema, ParentType, Entry[1].name.value)
 	
-	if not var11 then return end
-	local type = var11.type
-	local var12 = if var11.resolve then var11.resolve else p19.fieldResolver
-	local var13 = buildResolveInfo(p19, var11, p22, p20, p23)
-	local ok, status = pcall(function()
-		-- upvalues: getArgumentValues (copy), var11 (ref), p22 (ref), p19 (ref), var12 (ref), p21 (ref), var13 (ref), isPromise (copy), completeValue (copy), type (ref), p23 (ref), locatedError (copy), pathToArray (copy), handleFieldError (copy)
-		local var14 = var12(p21, getArgumentValues(var11, p22[1], p19.variableValues), p19.contextValue, var13)
-		local var15 = if isPromise(var14) then var14:andThen(function(p24)
-			-- upvalues: completeValue (copy), p19 (copy), type (copy), p22 (copy), var13 (copy), p23 (copy)
-			return completeValue(p19, type, p22, var13, p23, p24)
-		end) else completeValue(p19, type, p22, var13, p23, var14)
+	if not CallbackResult then return end
+	local Type = CallbackResult.type
+	local Resolve = if CallbackResult.resolve then CallbackResult.resolve else ResolveInfo.fieldResolver
+	local CallbackResult1 = Callback10(ResolveInfo, CallbackResult, Entry, ParentType, Path)
+	local Success, Result = pcall(function() --[[ Line: 711 ]]
+		-- upvalues: GetArgumentValuesFunction (upval), CallbackResult (copy), Entry (copy), ResolveInfo (copy), Resolve (copy), p9 (copy), CallbackResult1 (copy), IsPromiseFunction (upval), Callback12 (upval), Type (copy), Path (copy), LocatedErrorFunction (upval), PathToArrayFunction (upval), Callback11 (upval)
+		local ResolveResult = Resolve(p9, GetArgumentValuesFunction(CallbackResult, Entry[1], ResolveInfo.variableValues), ResolveInfo.contextValue, CallbackResult1)
+		local CallbackResult2 = if IsPromiseFunction(ResolveResult) then ResolveResult:andThen(function(Result) --[[ Line: 736 ]]
+			-- upvalues: Callback12 (upval), ResolveInfo (upval), Type (upval), Entry (upval), CallbackResult1 (upval), Path (upval)
+			return Callback12(ResolveInfo, Type, Entry, CallbackResult1, Path, Result)
+		end) else Callback12(ResolveInfo, Type, Entry, CallbackResult1, Path, ResolveResult)
 		
-		return if isPromise(var15) then var15:andThen(nil, function(p24)
-			-- upvalues: locatedError (copy), p22 (copy), pathToArray (copy), p23 (copy), handleFieldError (copy), type (copy), p19 (copy)
-			return handleFieldError(locatedError(p24, p22, pathToArray(p23)), type, p19)
-		end) else var15
+		return if IsPromiseFunction(CallbackResult2) then CallbackResult2:andThen(nil, function(p10) --[[ Line: 746 ]]
+			-- upvalues: LocatedErrorFunction (upval), Entry (upval), PathToArrayFunction (upval), Path (upval), Callback11 (upval), Type (upval), ResolveInfo (upval)
+			return Callback11(LocatedErrorFunction(p10, Entry, PathToArrayFunction(Path)), Type, ResolveInfo)
+		end) else CallbackResult2
 	end)
 	
-	return if ok then status else handleFieldError(locatedError(status, p22, pathToArray(p23)), type, p19)
+	return if Success then Result else Callback11(LocatedErrorFunction(Result, Entry, PathToArrayFunction(Path)), Type, ResolveInfo)
 end
 
-buildResolveInfo = function(p19, p20, p21, p22, p23)
+Callback10 = function(ResolveInfo, p9, FieldNodes, ParentType, Path) --[[ Line: 766 | Named "buildResolveInfo" ]]
 	return {
-		fieldName = p20.name,
-		fieldNodes = p21,
-		returnType = p20.type,
-		parentType = p22,
-		path = p23,
-		schema = p19.schema,
-		fragments = p19.fragments,
-		rootValue = p19.rootValue,
-		operation = p19.operation,
-		variableValues = p19.variableValues
+		fieldName = p9.name,
+		fieldNodes = FieldNodes,
+		returnType = p9.type,
+		parentType = ParentType,
+		path = Path,
+		schema = ResolveInfo.schema,
+		fragments = ResolveInfo.fragments,
+		rootValue = ResolveInfo.rootValue,
+		operation = ResolveInfo.operation,
+		variableValues = ResolveInfo.variableValues
 	}
 end
 
-handleFieldError = function(p19, p20, p21)
-	-- upvalues: isNonNullType (ref), nullModule (ref)
-	if isNonNullType(p20) then
-		error(p19)
+Callback11 = function(p9, OfType, p10) --[[ Line: 789 | Named "handleFieldError" ]]
+	-- upvalues: IsNonNullTypeFunction (copy), NullModule (copy)
+	if IsNonNullTypeFunction(OfType) then
+		error(p9)
 	end
-	table.insert(p21.errors, p19)
+	table.insert(p10.errors, p9)
 	
-	return nullModule
+	return NullModule
 end
 
-completeValue = function(p19, p20, p21, p22, p23, p24)
-	-- upvalues: instanceof (ref), error_1 (ref), isNonNullType (ref), completeValue (write), isNillish (ref), nullModule (ref), isListType (ref), completeListValue (write), isLeafType (ref), completeLeafValue (write), isAbstractType (ref), completeAbstractValue (write), isObjectType (ref), completeObjectValue (write), invariant (ref), inspect (ref)
-	if instanceof(p24, error_1) then
-		error(p24)
+Callback12 = function(p9, OfType, FieldNodes, ResolveInfo, Path, Promise) --[[ Line: 827 | Named "completeValue" ]]
+	-- upvalues: InstanceofFunction (copy), Error2 (copy), IsNonNullTypeFunction (copy), Callback12 (ref), IsNillishFunction (copy), NullModule (copy), IsListTypeFunction (copy), Callback14 (ref), IsLeafTypeFunction (copy), Callback15 (ref), IsAbstractTypeFunction (copy), Callback16 (ref), IsObjectTypeFunction (copy), Callback17 (ref), InvariantFunction (copy), InspectFunction (copy)
+	if InstanceofFunction(Promise, Error2) then
+		error(Promise)
 	end
-	if isNonNullType(p20) then
-		local var11 = completeValue(p19, p20.ofType, p21, p22, p23, p24)
+	if IsNonNullTypeFunction(OfType) then
+		local CallbackResult = Callback12(p9, OfType.ofType, FieldNodes, ResolveInfo, Path, Promise)
 		
-		if isNillish(var11) then
-			error(error_1.new(("Cannot return null for non-nullable field %s.%s."):format(p22.parentType.name, p22.fieldName)))
+		if IsNillishFunction(CallbackResult) then
+			error(Error2.new(("Cannot return null for non-nullable field %s.%s."):format(ResolveInfo.parentType.name, ResolveInfo.fieldName)))
 		end
-		return var11
-	elseif isNillish(p24) then
-		return nullModule
-	elseif isListType(p20) then
-		return completeListValue(p19, p20, p21, p22, p23, p24)
-	elseif isLeafType(p20) then
-		return completeLeafValue(p20, p24)
-	elseif isAbstractType(p20) then
-		return completeAbstractValue(p19, p20, p21, p22, p23, p24)
-	elseif isObjectType(p20) then
-		return completeObjectValue(p19, p20, p21, p22, p23, p24)
+		return CallbackResult
+	elseif IsNillishFunction(Promise) then
+		return NullModule
+	elseif IsListTypeFunction(OfType) then
+		return Callback14(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
+	elseif IsLeafTypeFunction(OfType) then
+		return Callback15(OfType, Promise)
+	elseif IsAbstractTypeFunction(OfType) then
+		return Callback16(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
+	elseif IsObjectTypeFunction(OfType) then
+		return Callback17(p9, OfType, FieldNodes, ResolveInfo, Path, Promise)
+	else
+		InvariantFunction(false, "Cannot complete value of unexpected output type: " .. InspectFunction(OfType))
+		assert(false, "Cannot complete value of unexpected output type: " .. InspectFunction(OfType))
 	end
-	invariant(false, "Cannot complete value of unexpected output type: " .. inspect(p20))
-	assert(false, "Cannot complete value of unexpected output type: " .. inspect(p20))
 end
 
-completeListValue = function(p19, p20, p21, p22, p23, p24)
-	-- upvalues: instanceof (ref), set (ref), isIteratableObject (ref), graphQLError (ref), array (ref), addPath (ref), isPromise (ref), completeValue (write), locatedError (ref), pathToArray (ref), handleFieldError (write), promiseModule (ref)
-	if instanceof(p24, set) then
-		local t = {}
+Callback14 = function(p9, p10, p11, ResolveInfo, p12, List) --[[ Line: 932 | Named "completeListValue" ]]
+	-- upvalues: InstanceofFunction (copy), Set (copy), IsIteratableObjectFunction (copy), GraphQLError (copy), Array (copy), AddPathFunction (copy), IsPromiseFunction (copy), Callback12 (ref), LocatedErrorFunction (copy), PathToArrayFunction (copy), Callback11 (ref), PromiseModule (copy)
+	if InstanceofFunction(List, Set) then
+		local List1 = {}
 		
-		for i, v in p24 do
-			table.insert(t, v)
+		for _, value in List do
+			table.insert(List1, value)
 		end
-		p24 = t
+		List = List1
 	end
-	if not isIteratableObject(p24) then
-		error(graphQLError.new(("Expected Iterable, but did not find one for field \"%s.%s\"."):format(p22.parentType.name, p22.fieldName)))
+	if not IsIteratableObjectFunction(List) then
+		error(GraphQLError.new(("Expected Iterable, but did not find one for field \"%s.%s\"."):format(ResolveInfo.parentType.name, ResolveInfo.fieldName)))
 	end
-	local ofType = p20.ofType
-	local var11 = false
-	local var12 = false
-	local var13 = array.from(p24, function(p25, p26)
-		-- upvalues: addPath (copy), p23 (ref), isPromise (copy), completeValue (copy), p19 (ref), ofType (ref), p21 (ref), p22 (ref), var11 (write), locatedError (copy), pathToArray (copy), handleFieldError (copy), var12 (write)
-		local var14 = addPath(p23, p26, nil)
-		local ok, status = pcall(function()
-			-- upvalues: isPromise (copy), p25 (ref), completeValue (copy), p19 (copy), ofType (copy), p21 (copy), p22 (copy), var14 (ref), var11 (copy), locatedError (copy), pathToArray (copy), handleFieldError (copy), var12 (copy)
-			local var15 = if isPromise(p25) then p25:andThen(function(p27)
-				-- upvalues: completeValue (copy), p19 (copy), ofType (copy), p21 (copy), p22 (copy), var14 (copy)
-				return completeValue(p19, ofType, p21, p22, var14, p27)
-			end) else completeValue(p19, ofType, p21, p22, var14, p25)
+	local OfType = p10.ofType
+	local Flag = false
+	local Flag1 = false
+	local FromResult = Array.from(List, function(Promise, p13) --[[ Line: 967 ]]
+		-- upvalues: AddPathFunction (upval), p12 (copy), IsPromiseFunction (upval), Callback12 (upval), p9 (copy), OfType (copy), p11 (copy), ResolveInfo (copy), Flag (ref), LocatedErrorFunction (upval), PathToArrayFunction (upval), Callback11 (upval), Flag1 (ref)
+		local AddPathResult = AddPathFunction(p12, p13, nil)
+		local Success, Result = pcall(function() --[[ Line: 972 ]]
+			-- upvalues: IsPromiseFunction (upval), Promise (copy), Callback12 (upval), p9 (upval), OfType (upval), p11 (upval), ResolveInfo (upval), AddPathResult (copy), Flag (upval), LocatedErrorFunction (upval), PathToArrayFunction (upval), Callback11 (upval), Flag1 (upval)
+			local CallbackResult = if IsPromiseFunction(Promise) then Promise:andThen(function(Result) --[[ Line: 975 ]]
+				-- upvalues: Callback12 (upval), p9 (upval), OfType (upval), p11 (upval), ResolveInfo (upval), AddPathResult (upval)
+				return Callback12(p9, OfType, p11, ResolveInfo, AddPathResult, Result)
+			end) else Callback12(p9, OfType, p11, ResolveInfo, AddPathResult, Promise)
 			
-			if isPromise(var15) then
-				var11 = true
+			if IsPromiseFunction(CallbackResult) then
+				Flag = true
 				
-				return var15:andThen(nil, function(p27)
-					-- upvalues: locatedError (copy), p21 (copy), pathToArray (copy), var14 (copy), handleFieldError (copy), ofType (copy), p19 (copy)
-					return handleFieldError(locatedError(p27, p21, pathToArray(var14)), ofType, p19)
+				return CallbackResult:andThen(nil, function(p14) --[[ Line: 993 ]]
+					-- upvalues: LocatedErrorFunction (upval), p11 (upval), PathToArrayFunction (upval), AddPathResult (upval), Callback11 (upval), OfType (upval), p9 (upval)
+					return Callback11(LocatedErrorFunction(p14, p11, PathToArrayFunction(AddPathResult)), OfType, p9)
 				end)
+			else
+				Flag1 = true
+				
+				return CallbackResult
 			end
-			var12 = true
-			
-			return var15
 		end)
 		
-		return if ok then status else handleFieldError(locatedError(status, p21, pathToArray(var14)), ofType, p19)
+		return if Success then Result else Callback11(LocatedErrorFunction(Result, p11, PathToArrayFunction(AddPathResult)), OfType, p9)
 	end)
-	local var14 = var13
-	return var14
-end
-
-completeLeafValue = function(p25, p26)
-	-- upvalues: error_1 (ref), inspect (ref)
-	local var15 = p25:serialize(p26)
 	
-	if var15 == nil then
-		error(error_1.new(("Expected a value of type \"%s\" but "):format(inspect(p25)) .. ("received: %s"):format(inspect(p26))))
+	if Flag1 and Flag then
+		FromResult = Array.map(FromResult, function(p13) --[[ Line: 1015 ]]
+			-- upvalues: IsPromiseFunction (upval), PromiseModule (upval)
+			return if IsPromiseFunction(p13) then p13 else PromiseModule.resolve(p13)
+		end)
 	end
-	return var15
+	return if Flag then PromiseModule.all(FromResult) else FromResult
 end
 
-completeAbstractValue = function(value, p25, p26, p27, p28, p29)
-	-- upvalues: isPromise (ref), completeObjectValue (write), ensureValidRuntimeType (write)
-	local var15 = (if p25.resolveType then p25.resolveType else value.typeResolver)(p29, value.contextValue, p27, p25)
+Callback15 = function(p13, p14) --[[ Line: 1028 | Named "completeLeafValue" ]]
+	-- upvalues: Error2 (copy), InspectFunction (copy)
+	local SerializeResult = p13:serialize(p14)
 	
-	return if isPromise(var15) then var15:andThen(function(p30)
-		-- upvalues: completeObjectValue (copy), value (ref), ensureValidRuntimeType (copy), p25 (ref), p26 (ref), p27 (ref), p29 (ref), p28 (ref)
-		return completeObjectValue(value, ensureValidRuntimeType(p30, value, p25, p26, p27, p29), p26, p27, p28, p29)
-	end) else completeObjectValue(value, ensureValidRuntimeType(var15, value, p25, p26, p27, p29), p26, p27, p28, p29)
+	if SerializeResult == nil then
+		error(Error2.new(("Expected a value of type \"%s\" but "):format(InspectFunction(p13)) .. ("received: %s"):format(InspectFunction(p14))))
+	end
+	return SerializeResult
 end
 
-ensureValidRuntimeType = function(p25, p26, p27, p28, p29, p30)
-	-- upvalues: graphQLError (ref), isObjectType (ref), inspect (ref)
-	if p25 == nil then
-		error(graphQLError.new(("Abstract type \"%s\" must resolve to an Object type at runtime for field \"%s.%s\". Either the \"%s\" type should provide a \"resolveType\" function or each possible type should provide an \"isTypeOf\" function."):format(p27.name, p29.parentType.name, p29.fieldName, p27.name), p28))
-	end
-	if isObjectType(p25) then
-		error(graphQLError.new("Support for returning GraphQLObjectType from resolveType was removed in graphql-js@16.0.0 please return type name instead."))
-	end
-	if typeof(p25) ~= "string" then
-		error(graphQLError.new(("Abstract type \"%s\" must resolve to an Object type at runtime for field \"%s.%s\" with "):format(p27.name, p29.parentType.name, p29.fieldName) .. ("value %s, received \"%s\"."):format(inspect(p30), inspect(p25))))
-	end
-	local var15 = p26.schema:getType(p25)
+Callback16 = function(p13, p14, p15, p16, p17, p18) --[[ Line: 1048 | Named "completeAbstractValue" ]]
+	-- upvalues: IsPromiseFunction (copy), Callback17 (ref), Callback18 (ref)
+	local Promise = (if p14.resolveType then p14.resolveType else p13.typeResolver)(p18, p13.contextValue, p16, p14)
 	
-	if var15 == nil then
-		error(graphQLError.new(("Abstract type \"%s\" was resolve to a type \"%s\" that does not exist inside schema."):format(p27.name, p25), p28))
-	end
-	if not isObjectType(var15) then
-		error(graphQLError.new(("Abstract type \"%s\" was resolve to a non-object type \"%s\"."):format(p27.name, p25), p28))
-	end
-	if not p26.schema:isSubType(p27, var15) then
-		error(graphQLError.new(("Runtime Object type \"%s\" is not a possible type for \"%s\"."):format(var15.name, p27.name), p28))
-	end
-	return var15
+	return if IsPromiseFunction(Promise) then Promise:andThen(function(Result) --[[ Line: 1066 ]]
+		-- upvalues: Callback17 (upval), p13 (copy), Callback18 (upval), p14 (copy), p15 (copy), p16 (copy), p18 (copy), p17 (copy)
+		return Callback17(p13, Callback18(Result, p13, p14, p15, p16, p18), p15, p16, p17, p18)
+	end) else Callback17(p13, Callback18(Promise, p13, p14, p15, p16, p18), p15, p16, p17, p18)
 end
 
-completeObjectValue = function(p25, p26, p27, p28, p29, p30)
-	-- upvalues: isPromise (ref), invalidReturnTypeError (write), collectAndExecuteSubfields (write)
-	if p26.isTypeOf ~= nil then
-		local var15 = p26:isTypeOf(p30, p25.contextValue, p28)
+Callback18 = function(Promise, p13, p14, p15, ResolveInfo, p16) --[[ Line: 1103 | Named "ensureValidRuntimeType" ]]
+	-- upvalues: GraphQLError (copy), IsObjectTypeFunction (copy), InspectFunction (copy)
+	if Promise == nil then
+		error(GraphQLError.new(("Abstract type \"%s\" must resolve to an Object type at runtime for field \"%s.%s\". Either the \"%s\" type should provide a \"resolveType\" function or each possible type should provide an \"isTypeOf\" function."):format(p14.name, ResolveInfo.parentType.name, ResolveInfo.fieldName, p14.name), p15))
+	end
+	if IsObjectTypeFunction(Promise) then
+		error(GraphQLError.new("Support for returning GraphQLObjectType from resolveType was removed in graphql-js@16.0.0 please return type name instead."))
+	end
+	if typeof(Promise) ~= "string" then
+		error(GraphQLError.new(("Abstract type \"%s\" must resolve to an Object type at runtime for field \"%s.%s\" with "):format(p14.name, ResolveInfo.parentType.name, ResolveInfo.fieldName) .. ("value %s, received \"%s\"."):format(InspectFunction(p16), InspectFunction(Promise))))
+	end
+	local Type = p13.schema:getType(Promise)
+	
+	if Type == nil then
+		error(GraphQLError.new(("Abstract type \"%s\" was resolve to a type \"%s\" that does not exist inside schema."):format(p14.name, Promise), p15))
+	end
+	if not IsObjectTypeFunction(Type) then
+		error(GraphQLError.new(("Abstract type \"%s\" was resolve to a non-object type \"%s\"."):format(p14.name, Promise), p15))
+	end
+	if not p13.schema:isSubType(p14, Type) then
+		error(GraphQLError.new(("Runtime Object type \"%s\" is not a possible type for \"%s\"."):format(Type.name, p14.name), p15))
+	end
+	return Type
+end
+
+Callback17 = function(p13, p14, p15, p16, p17, p18) --[[ Line: 1190 | Named "completeObjectValue" ]]
+	-- upvalues: IsPromiseFunction (copy), Callback19 (ref), Callback13 (ref)
+	if p14.isTypeOf ~= nil then
+		local IsTypeOf = p14.isTypeOf(p14, p18, p13.contextValue, p16)
 		
-		if isPromise(var15) then
-			return var15:andThen(function(p31)
-				-- upvalues: invalidReturnTypeError (copy), p26 (ref), p30 (ref), p27 (ref), collectAndExecuteSubfields (copy), p25 (ref), p29 (ref)
-				if not p31 then
-					error(invalidReturnTypeError(p26, p30, p27))
+		if IsPromiseFunction(IsTypeOf) then
+			return IsTypeOf:andThen(function(Result) --[[ Line: 1206 ]]
+				-- upvalues: Callback19 (upval), p14 (copy), p18 (copy), p15 (copy), Callback13 (upval), p13 (copy), p17 (copy)
+				if not Result then
+					error(Callback19(p14, p18, p15))
 				end
-				return collectAndExecuteSubfields(p25, p26, p27, p29, p30)
+				return Callback13(p13, p14, p15, p17, p18)
 			end)
-		elseif not var15 then
-			error(invalidReturnTypeError(p26, p30, p27))
+		end
+		if not IsTypeOf then
+			error(Callback19(p14, p18, p15))
 		end
 	end
-	return collectAndExecuteSubfields(p25, p26, p27, p29, p30)
+	return Callback13(p13, p14, p15, p17, p18)
 end
 
-invalidReturnTypeError = function(p25, p26, p27)
-	-- upvalues: graphQLError (ref), inspect (ref)
-	return graphQLError.new(("Expected value of type \"%s\" but got: %s."):format(p25.name, inspect(p26)), p27)
+Callback19 = function(p13, p14, p15) --[[ Line: 1223 | Named "invalidReturnTypeError" ]]
+	-- upvalues: GraphQLError (copy), InspectFunction (copy)
+	return GraphQLError.new(("Expected value of type \"%s\" but got: %s."):format(p13.name, InspectFunction(p14)), p15)
 end
 
-collectAndExecuteSubfields = function(p25, p26, p27, p28, p29)
-	-- upvalues: var4 (write), executeFields (write)
-	return executeFields(p25, p26, p29, p28, var4(p25, p26, p27))
+Callback13 = function(p13, p14, p15, p16, p17) --[[ Line: 1234 | Named "collectAndExecuteSubfields" ]]
+	-- upvalues: Callback20 (ref), ExecuteFields (ref)
+	return ExecuteFields(p13, p14, p17, p16, (Callback20(p13, p14, p15)))
 end
 
-var4 = memoize3(function(p25, p26, p27)
-	-- upvalues: map (ref), collectFields (write)
-	local var15 = map.new()
+Callback20 = Memoize3Function(function(p13, p14, List) --[[ Line: 1250 | Named "_collectSubfields" ]]
+	-- upvalues: Map (copy), Callback4 (ref)
+	local NewMap = Map.new()
 	local t = {}
 	
-	for i, v in ipairs(p27) do
-		if v.selectionSet then
-			var15 = collectFields(p25, p26, v.selectionSet, var15, t)
+	for _, value in ipairs(List) do
+		if value.selectionSet then
+			NewMap = Callback4(p13, p14, value.selectionSet, NewMap, t)
 		end
 	end
-	return var15
+	return NewMap
 end)
+
+DefaultTypeResolver = function(p15, p16, p17, p18) --[[ Line: 1290 ]]
+	-- upvalues: IsObjectLikeFunction (copy), IsPromiseFunction (copy), PromiseModule (copy)
+	if IsObjectLikeFunction(p15) and typeof(p15.__typename) == "string" then
+		return p15.__typename
+	end
+	local PossibleTypes = p17.schema:getPossibleTypes(p18)
+	local t = {}
+	local PossibleType = nil
+	
+	for i = 1, #PossibleTypes do
+		PossibleType = PossibleTypes[i]
+		
+		if PossibleType.isTypeOf then
+			local IsTypeOf = PossibleType:isTypeOf(p15, p16, p17)
+			
+			if IsPromiseFunction(IsTypeOf) then
+				t[i] = IsTypeOf
+			elseif IsTypeOf then
+				return PossibleType.name
+			end
+		end
+	end
+	return if #t > 0 then PromiseModule.all(t):andThen(function(Result) --[[ Line: 1315 ]]
+		-- upvalues: PossibleTypes (copy)
+		for i = 1, #Result do
+			if Result[i] then
+				return PossibleTypes[i].name
+			end
+		end
+		return nil
+	end) else nil
+end
+
+DefaultFieldResolver = function(p19, p20, p21, p22) --[[ Line: 1334 ]]
+	-- upvalues: IsObjectLikeFunction (copy)
+	if IsObjectLikeFunction(p19) or typeof(p19) == "function" then
+		local v1 = p19[p22.fieldName]
+		
+		return if typeof(v1) == "function" then p19[p22.fieldName](p19, p20, p21, p22) else v1
+	else
+		return nil
+	end
+end
+
+Callback9 = function(Schema, QueryType, Name) --[[ Line: 1358 | Named "getFieldDef" ]]
+	-- upvalues: SchemaMetaFieldDef (copy), TypeMetaFieldDef (copy), TypeNameMetaFieldDef (copy)
+	return if Name == SchemaMetaFieldDef.name and Schema:getQueryType() == QueryType then SchemaMetaFieldDef elseif Name == TypeMetaFieldDef.name and Schema:getQueryType() == QueryType then TypeMetaFieldDef elseif Name == TypeNameMetaFieldDef.name then TypeNameMetaFieldDef else QueryType:getFields():get(Name)
+end
 
 return {
 	execute = execute,
 	executeSync = executeSync,
-	assertValidExecutionArguments = assertValidExecutionArguments,
-	buildExecutionContext = buildExecutionContext,
-	collectFields = collectFields,
-	buildResolveInfo = buildResolveInfo,
-	getFieldDef = function(p28, p29, p30)
-		-- upvalues: schemaMetaFieldDef (ref), typeMetaFieldDef (ref), typeNameMetaFieldDef (ref)
-		return if p30 == schemaMetaFieldDef.name and p28:getQueryType() == p29 then schemaMetaFieldDef elseif p30 == typeMetaFieldDef.name and p28:getQueryType() == p29 then typeMetaFieldDef elseif p30 == typeNameMetaFieldDef.name then typeNameMetaFieldDef else p29:getFields():get(p30)
-	end,
-	defaultFieldResolver = function(p28, p29, p30, p31)
-		-- upvalues: isObjectLike (ref)
-		if not isObjectLike(p28) and typeof(p28) ~= "function" then
-			return nil
-		end
-		local fieldName = p28[p31.fieldName]
-		
-		return if typeof(fieldName) == "function" then p28[p31.fieldName](p28, p29, p30, p31) else fieldName
-	end,
-	defaultTypeResolver = function(p28, p29, p30, p31)
-		-- upvalues: isObjectLike (ref), isPromise (ref), promiseModule (ref)
-		if isObjectLike(p28) and typeof(p28.__typename) == "string" then
-			return p28.__typename
-		end
-		local var16 = p30.schema:getPossibleTypes(p31)
-		local t = {}
-		
-		for i = 1, #var16 do
-			local var17 = var16[i]
-			
-			if not var17.isTypeOf then
-				continue
-			end
-			local var18 = var17:isTypeOf(p28, p29, p30)
-			
-			if isPromise(var18) then
-				t[i] = var18
-			elseif not var18 then
-				continue
-			end
-			return var17.name
-		end
-		return if #t > 0 then promiseModule.all(t):andThen(function(p32)
-			-- upvalues: var16 (ref)
-			for i = 1, #p32 do
-				if not p32[i] then
-					continue
-				end
-				return var16[i].name
-			end
-			return nil
-		end) else nil
-	end
+	assertValidExecutionArguments = Callback1,
+	buildExecutionContext = Callback2,
+	collectFields = Callback4,
+	buildResolveInfo = Callback10,
+	getFieldDef = Callback9,
+	defaultFieldResolver = DefaultFieldResolver,
+	defaultTypeResolver = DefaultTypeResolver
 }

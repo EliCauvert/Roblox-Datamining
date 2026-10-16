@@ -1,6 +1,6 @@
-﻿local makeRequestApiModule = require(script.Parent.makeRequestApi)
+﻿local MakeRequestApiModule = require(script.Parent.makeRequestApi)
 
-return function(p1)
-	-- upvalues: makeRequestApiModule (ref)
-	return makeRequestApiModule(p1, "GET")
+return function(p1) --[[ Line: 4 ]]
+	-- upvalues: MakeRequestApiModule (copy)
+	return MakeRequestApiModule(p1, "GET")
 end

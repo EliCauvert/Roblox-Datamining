@@ -1,19 +1,20 @@
-﻿local foundationModule = require(script.Parent.Parent.Parent.Foundation)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local getTextSizeOffset = foundationModule.Utility.getTextSizeOffset
-local textService = game:GetService("TextService")
+﻿local FoundationModule = require(script.Parent.Parent.Parent.Foundation)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local GetTextSizeOffsetFunction = FoundationModule.Utility.getTextSizeOffset
+local TextService = game:GetService("TextService")
 
-return function(p1)
-	-- upvalues: foundationFontFaceMigration (ref), getTextSizeOffset (ref), textService (ref)
-	if foundationFontFaceMigration then
-		local var1 = getTextSizeOffset()
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeOffsetFunction (copy), TextService (copy)
+	if FoundationFontFaceMigration then
+		local TextSizeOffset = GetTextSizeOffsetFunction()
 		
-		return var1 ~= nil, var1
+		return TextSizeOffset ~= nil, TextSizeOffset
+	else
+		local Success, Result = pcall(function() --[[ Line: 14 ]]
+			-- upvalues: TextService (upval), p1 (copy)
+			return TextService:GetTextSize("", 0, p1, Vector2.new(1e999, 1e999)).Y
+		end)
+		
+		return Success, Result
 	end
-	local ok, status = pcall(function()
-		-- upvalues: textService (copy), p1 (ref)
-		return textService:GetTextSize("", 0, p1, Vector2.new(1e999, 1e999)).Y
-	end)
-	
-	return ok, status
 end

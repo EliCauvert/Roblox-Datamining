@@ -1,163 +1,205 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local icon = require(parent.BuilderIcons).Icon
-local buttonVariantModule = require(foundation.Enums.ButtonVariant)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local linkVariantModule = require(foundation.Enums.LinkVariant)
-local iconButtonModule = require(foundation.Components.IconButton)
-local linkModule = require(foundation.Components.Link)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local devAssertModule = require(foundation.Utility.devAssert)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local breadcrumbAccessoryModule = require(script.Parent.BreadcrumbAccessory)
-local useBreadcrumbVariantsModule = require(script.Parent.useBreadcrumbVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local t = {
-	separator = "/",
-	maxItems = 8,
-	itemsBeforeCollapse = 1,
-	itemsAfterCollapse = 1,
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local Icon = require(Parent.BuilderIcons).Icon
+local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
+local LinkVariantModule = require(Foundation.Enums.LinkVariant)
+local IconModule = require(Foundation.Components.Icon)
+local IconButtonModule = require(Foundation.Components.IconButton)
+local LinkModule = require(Foundation.Components.Link)
+local MenuModule = require(Foundation.Components.Menu)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local BreadcrumbAccessoryModule = require(script.Parent.BreadcrumbAccessory)
+local UseBreadcrumbVariantsModule = require(script.Parent.useBreadcrumbVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local config = {
 	testId = "--foundation-breadcrumb",
-	size = inputSizeModule.Medium
+	size = require(Foundation.Enums.InputSize).Medium
 }
 
-local function BreadcrumbItem(p1)
-	-- upvalues: reactModule (ref), textModule (ref), linkModule (ref), linkVariantModule (ref), viewModule (ref), breadcrumbAccessoryModule (ref)
-	local item = p1.item
-	local variantProps = p1.variantProps
-	local testId = p1.testId
-	local _ = nil
+local function BreadcrumbItem(Frame) --[[ Line: 90 ]]
+	-- upvalues: ReactModule (copy), TextModule (copy), LinkModule (copy), LinkVariantModule (copy), ViewModule (copy), BreadcrumbAccessoryModule (copy), IconModule (copy), Icon (copy)
+	local Item = Frame.item
+	local VariantProps = Frame.variantProps
+	local TestId = Frame.testId
 	
-	return reactModule.createElement(viewModule, {
-		tag = variantProps.item.tag,
-		LayoutOrder = p1.LayoutOrder,
-		testId = testId
+	return ReactModule.createElement(ViewModule, {
+		tag = VariantProps.item.tag,
+		ref = Item.ref,
+		onActivated = if Frame.hasDropdown then Frame.onDropdownActivated else nil,
+		LayoutOrder = Frame.LayoutOrder,
+		testId = TestId
 	}, {
-		Leading = if item.leading ~= nil then nil else reactModule.createElement(breadcrumbAccessoryModule, {
+		Leading = if Item.leading == nil then nil else ReactModule.createElement(BreadcrumbAccessoryModule, {
 			LayoutOrder = 1,
-			config = item.leading,
-			variant = variantProps.accessory,
-			testId = `{testId}--leading`
+			config = Item.leading,
+			variant = VariantProps.accessory,
+			testId = `{TestId}--leading`
 		}),
-		ItemText = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = variantProps.itemText.tag }, {
-			Text = if p1.isCurrent or item.onActivated == nil then reactModule.createElement(textModule, {
+		ItemText = ReactModule.createElement(ViewModule, { LayoutOrder = 2, tag = VariantProps.itemText.tag }, {
+			Text = if Frame.isCurrent or Item.onActivated == nil then ReactModule.createElement(TextModule, {
 				LayoutOrder = 1,
-				Text = item.text,
-				tag = if p1.isCurrent then variantProps.current.tag else variantProps.label.tag,
-				textStyle = if p1.isCurrent then variantProps.current.style else variantProps.label.style,
-				testId = `{testId}--text`
-			}) else reactModule.createElement(linkModule, {
+				Text = Item.text,
+				tag = if Frame.isCurrent then VariantProps.current.tag else VariantProps.label.tag,
+				testId = `{TestId}--text`
+			}) else ReactModule.createElement(LinkModule, {
 				hasUnderline = false,
 				LayoutOrder = 1,
-				text = item.text,
-				onActivated = item.onActivated,
-				variant = linkVariantModule.Standard,
-				size = p1.size,
-				testId = `{testId}--link`
+				text = Item.text,
+				onActivated = Item.onActivated,
+				variant = LinkVariantModule.Standard,
+				size = Frame.size,
+				testId = `{TestId}--link`
 			}),
-			Trailing = if item.trailing ~= nil then nil else reactModule.createElement(breadcrumbAccessoryModule, {
+			Chevron = if Frame.hasDropdown then ReactModule.createElement(IconModule, {
 				LayoutOrder = 2,
-				config = item.trailing,
-				variant = variantProps.accessory,
-				testId = `{testId}--trailing`
-			})
+				name = Icon.ChevronLargeDown,
+				size = VariantProps.accessory.iconSize,
+				style = VariantProps.accessory.style,
+				testId = `{TestId}--chevron`
+			}) else nil
 		})
 	})
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useBreadcrumbVariantsModule (ref), devAssertModule (ref), reactModule (ref), iconButtonModule (ref), icon (ref), buttonVariantModule (ref), BreadcrumbItem (ref), viewModule (ref), textModule (ref), withCommonPropsModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useBreadcrumbVariantsModule(useTokensModule(), var1.size)
-	devAssertModule(#var1.items > 0, "Breadcrumb: `items` must contain at least one item.")
-	local itemsCount = #var1.items
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		var4(true)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 | Named "Breadcrumb" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseBreadcrumbVariantsModule (copy), ReactModule (copy), IconButtonModule (copy), Icon (copy), ButtonVariantModule (copy), BreadcrumbItem (copy), ViewModule (copy), TextModule (copy), MenuModule (copy), WithCommonPropsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseBreadcrumbVariantsModuleResult = UseBreadcrumbVariantsModule(UseTokensModule(), WithDefaultsModuleResult.size)
+	local CountItems = #WithDefaultsModuleResult.items
+	local IsCountItemsAbove = CountItems > 4
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 158 ]]
+		-- upvalues: IsCountItemsAbove (copy), UseStateResult2 (copy)
+		if not IsCountItemsAbove then
+			UseStateResult2(false)
+		end
+	end, { IsCountItemsAbove })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 164 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(function(p2): boolean --[[ Line: 165 ]]
+			return not p2
+		end)
 	end, {})
-	local var6 = reactModule.useRef(itemsCount)
-	
-	if var6.current ~= itemsCount then
-		var6.current = itemsCount
-		var4(false)
-	end
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var3 (ref), itemsCount (ref)
-		local itemsBeforeCollapse = var1.itemsBeforeCollapse
-		local itemsAfterCollapse = var1.itemsAfterCollapse
-		local t = {}
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 169 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, {})
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 173 ]]
+		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
+		UseStateResult2(false)
+		local Item = WithDefaultsModuleResult.items[p2]
 		
-		if var3 or var1.maxItems >= itemsCount or itemsBeforeCollapse + itemsAfterCollapse >= itemsCount then
-			for i_2, v in var1.items do
-				table.insert(t, { item = v, index = i_2 })
-			end
-			return t
-		else
-			for i = 1, itemsBeforeCollapse do
-				table.insert(t, { item = var1.items[i], index = i })
-			end
-			table.insert(t, { overflow = true })
-			
-			for i_1 = itemsCount - itemsAfterCollapse + 1, itemsCount do
-				table.insert(t, { item = var1.items[i_1], index = i_1 })
-			end
-			return t
+		if Item and Item.onActivated then
+			Item.onActivated()
 		end
+	end, { WithDefaultsModuleResult.items })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 181 ]]
+		-- upvalues: IsCountItemsAbove (copy), WithDefaultsModuleResult (copy), CountItems (copy)
+		if IsCountItemsAbove then
+			return {
+				{ index = 1, item = WithDefaultsModuleResult.items[1] },
+				{ overflow = true },
+				{
+					item = WithDefaultsModuleResult.items[CountItems],
+					index = CountItems
+				}
+			}
+		end
+		local List = {}
+		
+		for Index, item in WithDefaultsModuleResult.items do
+			table.insert(List, { item = item, index = Index })
+		end
+		return List
 	end, {
-		var1.items, var1.maxItems, var1.itemsBeforeCollapse,
-		var1.itemsAfterCollapse, var3, itemsCount
+		WithDefaultsModuleResult.items,
+		CountItems,
+		IsCountItemsAbove
 	})
-	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = var2.container.tag, ref = p2 }), reactModule.useMemo(function()
-		-- upvalues: var7 (ref), reactModule (copy), iconButtonModule (copy), icon (copy), var5 (ref), var2 (ref), buttonVariantModule (copy), var1 (ref), BreadcrumbItem (copy), itemsCount (ref), viewModule (copy), textModule (copy)
-		local t = {}
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 196 ]]
+		-- upvalues: IsCountItemsAbove (copy), CountItems (copy), WithDefaultsModuleResult (copy)
+		local List = {}
 		
-		for i, v in var7 do
-			if v.overflow then
-				t.Overflow = reactModule.createElement(iconButtonModule, {
-					icon = icon.ThreeDotsHorizontal,
-					onActivated = var5,
-					size = var2.overflow.size,
-					variant = buttonVariantModule.Standard,
-					LayoutOrder = 2 * i - 1,
-					testId = `{var1.testId}--overflow`
-				})
-			else
-				local item = v.item
-				local index = v.index
-				t[`Item{index}`] = reactModule.createElement(BreadcrumbItem, {
-					item = item,
-					isCurrent = index == itemsCount,
-					size = var1.size,
-					variantProps = var2,
-					LayoutOrder = 2 * i - 1,
-					testId = item.testId or `{var1.testId}--item-{index}`
-				})
-			end
-			if i ~= #var7 then
-				local var8 = if v.overflow then "overflow" else v.index
-				t[`Separator{var8}`] = reactModule.createElement(viewModule, {
-					tag = var2.separator.tag,
-					LayoutOrder = 2 * i,
-					testId = `{var1.testId}--separator-{var27}`
-				}, {
-					Slash = reactModule.createElement(textModule, {
-						LayoutOrder = 1,
-						Text = var1.separator,
-						tag = var2.separator.textTag,
-						textStyle = var2.separator.style,
-						testId = `{var1.testId}--separator-{var27}--text`
-					})
+		if IsCountItemsAbove then
+			for i = 2, CountItems - 1 do
+				local Item = WithDefaultsModuleResult.items[i]
+				table.insert(List, {
+					id = i,
+					text = Item.text,
+					isDisabled = Item.onActivated == nil
 				})
 			end
 		end
-		return t
+		return List
 	end, {
-		var7, var2, var1.size, var1.separator, var1.testId, var5, itemsCount
-	}))
+		WithDefaultsModuleResult.items,
+		CountItems,
+		IsCountItemsAbove
+	})
+	local Elements = {}
+	
+	for i, value in UseMemoResult do
+		if value.overflow then
+			Elements.Overflow = ReactModule.createElement(IconButtonModule, {
+				icon = Icon.ThreeDotsHorizontal,
+				onActivated = UseResult,
+				ref = UseRefResult,
+				size = UseBreadcrumbVariantsModuleResult.overflow.size,
+				variant = ButtonVariantModule.Standard,
+				LayoutOrder = 2 * i - 1,
+				testId = `{WithDefaultsModuleResult.testId}--overflow`
+			})
+		else
+			local Item = value.item
+			local Index = value.index
+			local IsIndexMatch = Index == CountItems
+			Elements[`Item{Index}`] = ReactModule.createElement(BreadcrumbItem, {
+				item = Item,
+				isCurrent = IsIndexMatch,
+				hasDropdown = IsIndexMatch and WithDefaultsModuleResult.onDropdownActivated ~= nil,
+				onDropdownActivated = if IsIndexMatch then WithDefaultsModuleResult.onDropdownActivated else nil,
+				size = WithDefaultsModuleResult.size,
+				variantProps = UseBreadcrumbVariantsModuleResult,
+				LayoutOrder = 2 * i - 1,
+				testId = Item.testId or `{WithDefaultsModuleResult.testId}--item-{Index}`
+			})
+		end
+		if i ~= #UseMemoResult then
+			local Overflow = if value.overflow then "overflow" else value.index
+			Elements[`Separator{Overflow}`] = ReactModule.createElement(ViewModule, {
+				tag = UseBreadcrumbVariantsModuleResult.separator.tag,
+				LayoutOrder = 2 * i,
+				testId = `{WithDefaultsModuleResult.testId}--separator-{Overflow}`
+			}, {
+				Slash = ReactModule.createElement(TextModule, {
+					Text = "/",
+					LayoutOrder = 1,
+					tag = UseBreadcrumbVariantsModuleResult.separator.textTag,
+					testId = `{WithDefaultsModuleResult.testId}--separator-{Overflow}--text`
+				})
+			})
+		end
+	end
+	if IsCountItemsAbove then
+		Elements.OverflowMenu = ReactModule.createElement(MenuModule, {
+			isOpen = UseStateResult,
+			items = UseMemoResult1,
+			size = WithDefaultsModuleResult.size,
+			anchorRef = UseRefResult,
+			onActivated = UseResult2,
+			onPressedOutside = UseResult1,
+			LayoutOrder = #UseMemoResult * 2,
+			testId = `{WithDefaultsModuleResult.testId}--overflow-menu`
+		})
+	end
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseBreadcrumbVariantsModuleResult.container.tag,
+		ref = Ref
+	}), Elements)
 end))

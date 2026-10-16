@@ -1,10 +1,10 @@
-﻿return function(p1, p2)
-	local var1
-	for i, v in pairs(p2) do
-		var1 = p1:FindFirstChild(v)
+﻿return function(Object, ChildNames) --[[ Line: 1 | Named "getAttachment" ]]
+	local Child = nil
+	for _, childName in pairs(ChildNames) do
+		Child = Object:FindFirstChild(childName)
 		
-		if var1 then
-			return if var1:IsA("Attachment") then var1 else var1
+		if Child then
+			return if Child:IsA("Attachment") then Child else Child
 		end
 	end
 	return nil

@@ -1,1 +1,1 @@
-﻿return require(script.Empty)
+﻿return (require(script.Empty))

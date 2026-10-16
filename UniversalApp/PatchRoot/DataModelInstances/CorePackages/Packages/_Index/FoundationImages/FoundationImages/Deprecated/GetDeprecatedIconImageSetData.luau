@@ -1,8 +1,8 @@
-﻿local var1 = nil
+﻿local Config = nil
 
-function make_assets_1x()
-	-- upvalues: var1 (write)
-	var1 = {
+function make_assets_1x() --[[ Line: 7 ]]
+	-- upvalues: Config (ref)
+	Config = {
 		["icons/actions/accept"] = {
 			ImageSet = "img_set_1x_6",
 			ImageRectOffset = Vector2.new(398, 0),
@@ -3721,11 +3721,11 @@ function make_assets_1x()
 	}
 end
 
-local var2 = nil
+local Config1 = nil
 
-function make_assets_2x()
-	-- upvalues: var2 (write)
-	var2 = {
+function make_assets_2x() --[[ Line: 756 ]]
+	-- upvalues: Config1 (ref)
+	Config1 = {
 		["icons/actions/accept"] = {
 			ImageSet = "img_set_2x_14",
 			ImageRectOffset = Vector2.new(340, 380),
@@ -7444,11 +7444,11 @@ function make_assets_2x()
 	}
 end
 
-local var3 = nil
+local Config2 = nil
 
-function make_assets_3x()
-	-- upvalues: var3 (write)
-	var3 = {
+function make_assets_3x() --[[ Line: 1505 ]]
+	-- upvalues: Config2 (ref)
+	Config2 = {
 		["icons/actions/accept"] = {
 			ImageSet = "img_set_3x_10",
 			ImageRectOffset = Vector2.new(550, 902),
@@ -11167,20 +11167,22 @@ function make_assets_3x()
 	}
 end
 
-return function(p1)
-	-- upvalues: var3 (write), var2 (write), var1 (write)
+return function(p1: number) --[[ Line: 2253 ]]
+	-- upvalues: Config2 (ref), Config1 (ref), Config (ref)
 	if p1 > 2.5 then
-		if not var3 then
+		if not Config2 then
 			make_assets_3x()
 		end
-		return var3, 3
+		return Config2, 3
 	elseif p1 > 1.5 then
-		if not var2 then
+		if not Config1 then
 			make_assets_2x()
 		end
-		return var2, 2
-	elseif not var1 then
-		make_assets_1x()
+		return Config1, 2
+	else
+		if not Config then
+			make_assets_1x()
+		end
+		return Config, 1
 	end
-	return var1, 1
 end

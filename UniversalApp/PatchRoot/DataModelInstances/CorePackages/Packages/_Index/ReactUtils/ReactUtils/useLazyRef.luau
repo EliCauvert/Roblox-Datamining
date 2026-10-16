@@ -1,13 +1,13 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
+return function(Callback) --[[ Line: 21 | Named "useLazyRef" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var1.current == nil then
-		var1.current = p1()
+	if UseRefResult.current == nil then
+		UseRefResult.current = Callback()
 	end
-	assert(var1.current ~= nil, "Ref must be defined after initialization function is called")
+	assert(UseRefResult.current ~= nil, "Ref must be defined after initialization function is called")
 	
-	return var1
+	return UseRefResult
 end

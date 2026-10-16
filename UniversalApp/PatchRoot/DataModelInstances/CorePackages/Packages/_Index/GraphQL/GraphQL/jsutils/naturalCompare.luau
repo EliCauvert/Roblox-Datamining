@@ -1,58 +1,57 @@
-﻿local luauPolyfillModule = require(script.Parent.Parent.Parent.LuauPolyfill)
-local string = luauPolyfillModule.String
-local isNaN = luauPolyfillModule.Number.isNaN
-local var1 = nil
-local var2 = nil
-local _ = nil
+﻿local LuauPolyfillModule = require(script.Parent.Parent.Parent.LuauPolyfill)
+local String = LuauPolyfillModule.String
+local IsNaNFunction = LuauPolyfillModule.Number.isNaN
+local Callback = nil
+local v1 = nil
+local v2 = nil
 
-local function naturalCompare(p1, p2)
-	-- upvalues: string (ref), var1 (write), var2 (write)
-	local var3, var4
-	local var5 = 1
-	local var6 = 1
-	while var5 <= #p1 and var6 <= #p2 do
-		var3 = string.charCodeAt(p1, var5)
-		var4 = string.charCodeAt(p2, var6)
+local function naturalCompare(p1, p2): number --[[ Line: 23 ]]
+	-- upvalues: String (copy), Callback (ref), v1 (ref)
+	local Count = 1
+	local Count1 = 1
+	while Count <= #p1 and Count1 <= #p2 do
+		local CharCodeAtResult = String.charCodeAt(p1, Count)
+		local CharCodeAtResult1 = String.charCodeAt(p2, Count1)
 		
-		if not var1(var3) or not var1(var4) then
-			if var3 >= var4 then
-				if var4 >= var3 then
-					var5 += 1
-					var6 += 1
-					continue
-				end
+		if Callback(CharCodeAtResult) and Callback(CharCodeAtResult1) then
+			local v3 = 0
+			repeat
+				Count += 1
+				v3 = v3 * 10 + CharCodeAtResult - v1
+				CharCodeAtResult = String.charCodeAt(p1, Count)
+			until not Callback(CharCodeAtResult) or v3 <= 0
+			local v4 = 0
+			repeat
+				Count1 += 1
+				v4 = v4 * 10 + CharCodeAtResult1 - v1
+				CharCodeAtResult1 = String.charCodeAt(p2, Count1)
+			until not Callback(CharCodeAtResult1) or v4 <= 0
+			if v3 < v4 then
+				return -1
+			end
+			if v4 < v3 then
 				return 1
 			end
-			return -1
-		end
-		local var7 = 0
-		repeat
-			var5 += 1
-			var7 = var7 * 10 + var3 - var2
-			var3 = string.charCodeAt(p1, var5)
-		until not (var1(var3) and var7 > 0)
-		local var8 = 0
-		repeat
-			var6 += 1
-			var8 = var8 * 10 + var4 - var2
-			var4 = string.charCodeAt(p2, var6)
-		until not (var1(var4) and var8 > 0)
-		if var7 >= var8 then
-			if var8 < var7 then
+		else
+			if CharCodeAtResult < CharCodeAtResult1 then
+				return -1
+			end
+			if CharCodeAtResult1 < CharCodeAtResult then
 				return 1
 			end
+			Count += 1
+			Count1 += 1
 		end
-		return -1
 	end
 	return #p1 - #p2
 end
 
-var2 = 48
-local var9 = 57
+v1 = 48
+v2 = 57
 
-var1 = function(p3)
-	-- upvalues: isNaN (ref), var2 (write), var9 (write)
-	return not isNaN(p3) and (var2 <= p3 and p3 <= var9)
+Callback = function(CharCodeAtResult): boolean --[[ Line: 71 ]]
+	-- upvalues: IsNaNFunction (copy), v1 (ref), v2 (ref)
+	return not IsNaNFunction(CharCodeAtResult) and (v1 <= CharCodeAtResult and CharCodeAtResult <= v2)
 end
 
 return { naturalCompare = naturalCompare }

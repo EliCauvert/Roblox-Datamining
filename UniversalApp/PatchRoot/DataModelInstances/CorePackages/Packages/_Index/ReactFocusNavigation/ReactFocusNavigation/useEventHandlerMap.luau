@@ -1,25 +1,25 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.FocusNavigation)
-local focusNavigationContextModule = require(script.Parent.FocusNavigationContext)
-local useComposedRefModule = require(script.Parent.useComposedRef)
-local useEventLifecycleRefModule = require(script.Parent.useEventLifecycleRef)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.FocusNavigation)
+local FocusNavigationContextModule = require(script.Parent.FocusNavigationContext)
+local UseComposedRefModule = require(script.Parent.useComposedRef)
+local UseEventLifecycleRefModule = require(script.Parent.useEventLifecycleRef)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), focusNavigationContextModule (ref), useEventLifecycleRefModule (ref), useComposedRefModule (ref)
-	local var1 = reactModule.useContext(focusNavigationContextModule)
+return function(p1, p2) --[[ Line: 12 | Named "useEventHandlerMap" ]]
+	-- upvalues: ReactModule (copy), FocusNavigationContextModule (copy), UseEventLifecycleRefModule (copy), UseComposedRefModule (copy)
+	local UseContextResult = ReactModule.useContext(FocusNavigationContextModule)
 	
-	return useComposedRefModule(useEventLifecycleRefModule(reactModule.useCallback(function(p3)
-		-- upvalues: var1 (ref), p1 (ref)
-		if var1 then
-			assert(p3:IsA("GuiObject"), "Event handler maps can only be applied to GuiObjects")
-			var1:registerEventHandlers(p3, p1)
+	return UseComposedRefModule(UseEventLifecycleRefModule(ReactModule.useCallback(function(Gui) --[[ Line: 15 ]]
+		-- upvalues: UseContextResult (copy), p1 (copy)
+		if UseContextResult then
+			assert(Gui:IsA("GuiObject"), "Event handler maps can only be applied to GuiObjects")
+			UseContextResult:registerEventHandlers(Gui, p1)
 		end
-	end, { var1, p1 }), reactModule.useCallback(function(p3)
-		-- upvalues: var1 (ref), p1 (ref)
-		if var1 then
-			assert(p3:IsA("GuiObject"), "Event handler maps can only be applied to GuiObjects")
-			var1:deregisterEventHandlers(p3, p1)
+	end, { UseContextResult, p1 }), (ReactModule.useCallback(function(Gui) --[[ Line: 22 ]]
+		-- upvalues: UseContextResult (copy), p1 (copy)
+		if UseContextResult then
+			assert(Gui:IsA("GuiObject"), "Event handler maps can only be applied to GuiObjects")
+			UseContextResult:deregisterEventHandlers(Gui, p1)
 		end
-	end, { var1, p1 })), p2)
+	end, { UseContextResult, p1 }))), p2)
 end

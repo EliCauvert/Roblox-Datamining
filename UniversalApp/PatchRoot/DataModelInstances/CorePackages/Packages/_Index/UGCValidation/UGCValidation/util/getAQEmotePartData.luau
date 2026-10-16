@@ -1,10 +1,10 @@
-﻿return function(p1)
-	if not p1 then
+﻿return function(List) --[[ Line: 4 | Named "getAQEmotePartData" ]]
+	if not List then
 		return nil
 	end
-	for i, v in pairs(p1) do
-		if i ~= "measurement_score" and type(v) == "table" then
-			return v
+	for i, value in pairs(List) do
+		if i ~= "measurement_score" and type(value) == "table" then
+			return value
 		end
 	end
 	return nil

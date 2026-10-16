@@ -1,5 +1,5 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p1)
-	return table.clone(p1)
+return function(Tbl) --[[ Line: 15 | Named "copy" ]]
+	return table.clone(Tbl)
 end

@@ -1,1 +1,1 @@
-﻿return require(script.ChipGroup)
+﻿return (require(script.ChipGroup))

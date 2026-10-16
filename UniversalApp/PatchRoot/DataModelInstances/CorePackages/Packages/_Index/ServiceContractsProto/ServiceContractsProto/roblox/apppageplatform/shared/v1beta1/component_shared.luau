@@ -1,99 +1,79 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local hydrationDataSpecModule = require(script.Parent.hydration_data_spec)
-local uiComponentTypeModule = require(script.Parent.ui_component_type)
-local analyticsDataModule = require(script.Parent.analytics_data)
-local propTypesModule = require(script.Parent.prop_types)
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local HydrationDataSpecModule = require(script.Parent.hydration_data_spec)
+local UiComponentTypeModule = require(script.Parent.ui_component_type)
+local AnalyticsDataModule = require(script.Parent.analytics_data)
+local PropTypesModule = require(script.Parent.prop_types)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 106 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		hidden = if p1 == nil or p1.hidden == nil then nil else p1.hidden,
 		label = if p1 == nil or p1.label == nil then nil else p1.label
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 113 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.hidden ~= nil then
-		local var2 = self.hidden:encode()
-		local var3, var4 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var3, var14 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
-		buff = var3
-		var1 = var4
+		local EncodeResult = self.hidden:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.label ~= nil then
-		local var5 = self.label:encode()
-		local var6, var7 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var6, var17 = protoModule.writeBuffer(var6, var7, var5, buffer.len(var5))
-		buff = var6
-		var1 = var7
+		local EncodeResult = self.label:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), propTypesModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 134 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), PropTypesModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v19 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var8, var9 = protoModule.readVarInt(p1, var2)
-			local _ = var8
-			var2 = var9
-			continue
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 1 then
-				local _ = nil
-				local var10, var11 = protoModule.readBuffer(p1, var2)
-				var2 = var11
-				var1.hidden = propTypesModule.BoolProp.decode(var10)
-			elseif var7 == 2 then
-				local _ = nil
-				local var12, var13 = protoModule.readBuffer(p1, var2)
-				var2 = var13
-				var1.label = propTypesModule.StringProp.decode(var12)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v19 = ProtoModule.readVarInt(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.hidden = PropTypesModule.BoolProp.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.label = PropTypesModule.StringProp.decode(Buffer2)
 			else
-				local _ = nil
-				local var14, var15 = protoModule.readVarInt(p1, var2)
-				var2 = var15 + var14
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var16, var17 = protoModule.readFixed32(p1, var2)
-			local _ = var16
-			var2 = var17
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var18, var19 = protoModule.readFixed64(p1, var2)
-			local _ = var18
-			var2 = var19
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v19 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v19 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var21)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 182 ]]
 	local t = {}
 	
 	if self.hidden ~= nil then
@@ -105,186 +85,157 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), propTypesModule (ref)
-	local var20 = t_1.new()
+function Module:jsonDecode() --[[ Line: 196 ]]
+	-- upvalues: Module (copy), PropTypesModule (copy)
+	local NewModule = Module.new()
 	
 	if self.hidden ~= nil then
-		var20.hidden = propTypesModule.BoolProp.jsonDecode(self.hidden)
+		NewModule.hidden = PropTypesModule.BoolProp.jsonDecode(self.hidden)
 	end
 	if self.label ~= nil then
-		var20.label = propTypesModule.StringProp.jsonDecode(self.label)
+		NewModule.label = PropTypesModule.StringProp.jsonDecode(self.label)
 	end
-	return var20
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "AccessibilityProps",
 	fullName = "roblox.apppageplatform.shared.v1beta1.AccessibilityProps"
 }
-t.AccessibilityProps = t_1
-typeRegistryModule.default:register(t.AccessibilityProps)
-local t_2 = {}
-t_2.__index = t_2
+local config = { AccessibilityProps = Module }
+TypeRegistryModule.default:register(config.AccessibilityProps)
+local Module1 = {}
+Module1.__index = Module1
 
-function t_2.new(p2)
-	-- upvalues: uiComponentTypeModule (ref), t_2 (ref)
-	return setmetatable({
-		component_type = if p2 == nil or p2.component_type == nil then assert(uiComponentTypeModule.UiComponentType.fromNumber(0), "Enum has no 0 default") else p2.component_type,
-		data = if p2 == nil or p2.data == nil then {} else p2.data,
-		analytics_data = if p2 == nil or p2.analytics_data == nil then {} else p2.analytics_data,
-		is_component_filtered = if p2 == nil or p2.is_component_filtered == nil then nil else p2.is_component_filtered,
-		accessibility = if p2 == nil or p2.accessibility == nil then nil else p2.accessibility
-	}, t_2)
+function Module1.new(p1) --[[ Line: 224 ]]
+	-- upvalues: UiComponentTypeModule (copy), Module1 (copy)
+	return (setmetatable({
+		component_type = if p1 == nil or p1.component_type == nil then assert(UiComponentTypeModule.UiComponentType.fromNumber(0), "Enum has no 0 default") else p1.component_type,
+		data = if p1 == nil or p1.data == nil then {} else p1.data,
+		analytics_data = if p1 == nil or p1.analytics_data == nil then {} else p1.analytics_data,
+		is_component_filtered = if p1 == nil or p1.is_component_filtered == nil then nil else p1.is_component_filtered,
+		accessibility = if p1 == nil or p1.accessibility == nil then nil else p1.accessibility
+	}, Module1))
 end
 
-function t_2:encode()
-	-- upvalues: uiComponentTypeModule (ref), protoModule (ref)
-	local buff = buffer.create(0)
-	local var20 = 0
+function Module1:encode() --[[ Line: 241 ]]
+	-- upvalues: UiComponentTypeModule (copy), ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
-	if self.component_type ~= nil and (self.component_type ~= nil and self.component_type ~= 0 or self.component_type ~= uiComponentTypeModule.UiComponentType.fromNumber(0)) then
-		local var21, var22 = protoModule.writeTag(buff, var20, 1, protoModule.wireTypes.varint)
-		var21, var43 = protoModule.writeVarInt(var21, var22, uiComponentTypeModule.UiComponentType.toNumber(self.component_type))
-		buff = var21
-		var20 = var22
+	if self.component_type ~= nil and (self.component_type ~= nil and self.component_type ~= 0 or self.component_type ~= UiComponentTypeModule.UiComponentType.fromNumber(0)) then
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, UiComponentTypeModule.UiComponentType.toNumber(self.component_type))
 	end
 	if self.data ~= nil and #self.data > 0 then
-		for i, v in self.data do
-			local var23 = v:encode()
-			local var24, var25 = protoModule.writeTag(buff, var20, 2, protoModule.wireTypes.lengthDelimited)
-			var24, var46 = protoModule.writeBuffer(var24, var25, var23, buffer.len(var23))
-			buff = var24
-			var20 = var25
+		for _, entry in self.data do
+			local EncodeResult = entry:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.analytics_data ~= nil and next(self.analytics_data) ~= nil then
-		for i, v in self.analytics_data do
-			local var26, var27 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var26, var48 = protoModule.writeString(var26, var27, i)
-			local var28 = v:encode()
-			var27, var50 = protoModule.writeTag(var26, var27, 2, protoModule.wireTypes.lengthDelimited)
-			var27, var50 = protoModule.writeBuffer(var27, var50, var28, buffer.len(var28))
-			local var29 = var27
-			local var30 = var50
-			local var31, var32 = protoModule.writeTag(buff, var20, 3, protoModule.wireTypes.lengthDelimited)
-			var31, var54 = protoModule.writeBuffer(var31, var32, var29, var30)
-			buff = var31
-			var20 = var32
+		for i, value in self.analytics_data do
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, i)
+			local EncodeResult = value:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult, WriteBufferResult2 = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, WriteBufferResult, WriteBufferResult2)
 		end
 	end
 	if self.is_component_filtered ~= nil then
-		local var33 = self.is_component_filtered:encode()
-		local var34, var35 = protoModule.writeTag(buff, var20, 4, protoModule.wireTypes.lengthDelimited)
-		var34, var57 = protoModule.writeBuffer(var34, var35, var33, buffer.len(var33))
-		buff = var34
-		var20 = var35
+		local EncodeResult = self.is_component_filtered:encode()
+		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.accessibility ~= nil then
-		local var36 = self.accessibility:encode()
-		local var37, var38 = protoModule.writeTag(buff, var20, 5, protoModule.wireTypes.lengthDelimited)
-		var37, var60 = protoModule.writeBuffer(var37, var38, var36, buffer.len(var36))
-		buff = var37
-		var20 = var38
+		local EncodeResult = self.accessibility:encode()
+		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var20)
-	buffer.copy(buff_1, 0, buff, 0, var20)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_2.decode(p2)
-	-- upvalues: t_2 (ref), protoModule (ref), uiComponentTypeModule (ref), hydrationDataSpecModule (ref), t (ref), analyticsDataModule (ref), propTypesModule (ref)
-	local var39 = t_2.new()
-	local var40 = 0
-	while var40 < buffer.len(p2) do
-		local _ = nil
-		local var41 = nil
-		local var42, var43, var44 = protoModule.readTag(p2, var40)
-		local var45 = var42
-		var41 = var43
-		var40 = var44
+function Module1.decode(Buf) --[[ Line: 302 ]]
+	-- upvalues: Module1 (copy), ProtoModule (copy), UiComponentTypeModule (copy), HydrationDataSpecModule (copy), config (copy), AnalyticsDataModule (copy), PropTypesModule (copy)
+	local NewModule = Module1.new()
+	local v2 = 0
+	while v2 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v56 = ProtoModule.readTag(Buf, v2)
 		
-		if var41 == protoModule.wireTypes.varint then
-			if var45 == 1 then
-				local _ = nil
-				local var46, var47 = protoModule.readVarIntI32(p2, var40)
-				local var48 = var46
-				var40 = var47
-				var39.component_type = uiComponentTypeModule.UiComponentType.fromNumber(var48) or var48
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 1 then
+				local VarIntI32
+				VarIntI32, v56 = ProtoModule.readVarIntI32(Buf, v2)
+				NewModule.component_type = UiComponentTypeModule.UiComponentType.fromNumber(VarIntI32) or VarIntI32
 			else
-				local _ = nil
-				local var49, var50 = protoModule.readVarInt(p2, var40)
-				local _ = var49
-				var40 = var50
+				local _
+				_, v56 = ProtoModule.readVarInt(Buf, v2)
 			end
-		end
-		if var41 == protoModule.wireTypes.lengthDelimited then
-			if var45 == 2 then
-				local _ = nil
-				local var51, var52 = protoModule.readBuffer(p2, var40)
-				var40 = var52
-				table.insert(var39.data, hydrationDataSpecModule.HydrationDataSpec.decode(var51))
-			elseif var45 == 3 then
-				local _ = nil
-				local var53, var54 = protoModule.readBuffer(p2, var40)
-				var40 = var54
-				var53 = t.ComponentShared_AnalyticsDataEntry.decode(var53)
-				var39.analytics_data[var53.key or ""] = var53.value or analyticsDataModule.AnalyticsDataField.new()
-			elseif var45 == 4 then
-				local _ = nil
-				local var55, var56 = protoModule.readBuffer(p2, var40)
-				var40 = var56
-				var39.is_component_filtered = propTypesModule.BoolProp.decode(var55)
-			elseif var45 == 5 then
-				local _ = nil
-				local var57, var58 = protoModule.readBuffer(p2, var40)
-				var40 = var58
-				var39.accessibility = t.AccessibilityProps.decode(var57)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 2 then
+				local Buffer1
+				Buffer1, v56 = ProtoModule.readBuffer(Buf, v2)
+				table.insert(NewModule.data, HydrationDataSpecModule.HydrationDataSpec.decode(Buffer1))
+			elseif Tag == 3 then
+				local Buffer2
+				Buffer2, v56 = ProtoModule.readBuffer(Buf, v2)
+				local DecodeResult = config.ComponentShared_AnalyticsDataEntry.decode(Buffer2)
+				local NewResult = AnalyticsDataModule.AnalyticsDataField.new()
+				NewModule.analytics_data[DecodeResult.key or ""] = DecodeResult.value or NewResult
+			elseif Tag == 4 then
+				local Buffer3
+				Buffer3, v56 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.is_component_filtered = PropTypesModule.BoolProp.decode(Buffer3)
+			elseif Tag == 5 then
+				local Buffer4
+				Buffer4, v56 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.accessibility = config.AccessibilityProps.decode(Buffer4)
 			else
-				local _ = nil
-				local var59, var60 = protoModule.readVarInt(p2, var40)
-				var40 = var60 + var59
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v2)
+				v2 = VarInt2 + VarInt
 			end
-		elseif var41 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var61, var62 = protoModule.readFixed32(p2, var40)
-			local _ = var61
-			var40 = var62
-		elseif var41 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var63, var64 = protoModule.readFixed64(p2, var40)
-			local _ = var63
-			var40 = var64
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v56 = ProtoModule.readFixed32(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v56 = ProtoModule.readFixed64(Buf, v2)
 		else
-			error("Unsupported wire type: " .. var64)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var39
+	return NewModule
 end
 
-function t_2:jsonEncode()
-	-- upvalues: uiComponentTypeModule (ref)
+function Module1:jsonEncode() --[[ Line: 379 ]]
+	-- upvalues: UiComponentTypeModule (copy)
 	local t = {}
 	
-	if self.component_type ~= nil and (self.component_type ~= nil and self.component_type ~= 0 or self.component_type ~= uiComponentTypeModule.UiComponentType.fromNumber(0)) then
-		t.componentType = if typeof(self.component_type) == "number" then self.component_type else uiComponentTypeModule.UiComponentType.toNumber(self.component_type)
+	if self.component_type ~= nil and (self.component_type ~= nil and self.component_type ~= 0 or self.component_type ~= UiComponentTypeModule.UiComponentType.fromNumber(0)) then
+		t.componentType = if typeof(self.component_type) == "number" then self.component_type else UiComponentTypeModule.UiComponentType.toNumber(self.component_type)
 	end
 	if self.data ~= nil and #self.data > 0 then
-		local t_1 = {}
+		local Data = {}
 		
-		for i, v in self.data do
-			table.insert(t_1, v:jsonEncode())
+		for _, entry in self.data do
+			table.insert(Data, entry:jsonEncode())
 		end
-		t.data = t_1
+		t.data = Data
 	end
 	if self.analytics_data ~= nil and next(self.analytics_data) ~= nil then
-		local t_1 = {}
+		local AnalyticsData = {}
 		
-		for i, v in self.analytics_data do
-			t_1[i] = v:jsonEncode()
+		for i, value in self.analytics_data do
+			AnalyticsData[i] = value:jsonEncode()
 		end
-		t.analyticsData = t_1
+		t.analyticsData = AnalyticsData
 	end
 	if self.is_component_filtered ~= nil then
 		t.isComponentFiltered = self.is_component_filtered:jsonEncode()
@@ -295,146 +246,127 @@ function t_2:jsonEncode()
 	return t
 end
 
-function t_2:jsonDecode()
-	-- upvalues: t_2 (ref), uiComponentTypeModule (ref), hydrationDataSpecModule (ref), analyticsDataModule (ref), propTypesModule (ref), t (ref)
-	local var65 = t_2.new()
+function Module1:jsonDecode() --[[ Line: 424 ]]
+	-- upvalues: Module1 (copy), UiComponentTypeModule (copy), HydrationDataSpecModule (copy), AnalyticsDataModule (copy), PropTypesModule (copy), config (copy)
+	local NewModule = Module1.new()
 	
 	if self.component_type ~= nil then
-		var65.component_type = if typeof(self.component_type) == "number" then uiComponentTypeModule.UiComponentType.fromNumber(self.component_type) or self.component_type else uiComponentTypeModule.UiComponentType.fromName(self.component_type) or self.component_type
+		NewModule.component_type = (if typeof(self.component_type) == "number" then UiComponentTypeModule.UiComponentType.fromNumber(self.component_type) else UiComponentTypeModule.UiComponentType.fromName(self.component_type)) or self.component_type
 	end
 	if self.componentType ~= nil then
-		var65.component_type = if typeof(self.componentType) == "number" then uiComponentTypeModule.UiComponentType.fromNumber(self.componentType) or self.componentType else uiComponentTypeModule.UiComponentType.fromName(self.componentType) or self.componentType
+		NewModule.component_type = (if typeof(self.componentType) == "number" then UiComponentTypeModule.UiComponentType.fromNumber(self.componentType) else UiComponentTypeModule.UiComponentType.fromName(self.componentType)) or self.componentType
 	end
 	if self.data ~= nil then
-		local t_1 = {}
+		local Data = {}
 		
-		for i, v in self.data do
-			table.insert(t_1, hydrationDataSpecModule.HydrationDataSpec.jsonDecode(v))
+		for _, entry in self.data do
+			table.insert(Data, HydrationDataSpecModule.HydrationDataSpec.jsonDecode(entry))
 		end
-		var65.data = t_1
+		NewModule.data = Data
 	end
 	if self.analytics_data ~= nil then
-		local t_1 = {}
+		local Analytics_data = {}
 		
-		for i, v in self.analytics_data do
-			t_1[i] = analyticsDataModule.AnalyticsDataField.jsonDecode(v)
+		for i, value in self.analytics_data do
+			Analytics_data[i] = AnalyticsDataModule.AnalyticsDataField.jsonDecode(value)
 		end
-		var65.analytics_data = t_1
+		NewModule.analytics_data = Analytics_data
 	end
 	if self.analyticsData ~= nil then
-		local t_1 = {}
+		local Analytics_data = {}
 		
-		for i, v in self.analyticsData do
-			t_1[i] = analyticsDataModule.AnalyticsDataField.jsonDecode(v)
+		for i1, value1 in self.analyticsData do
+			Analytics_data[i1] = AnalyticsDataModule.AnalyticsDataField.jsonDecode(value1)
 		end
-		var65.analytics_data = t_1
+		NewModule.analytics_data = Analytics_data
 	end
 	if self.is_component_filtered ~= nil then
-		var65.is_component_filtered = propTypesModule.BoolProp.jsonDecode(self.is_component_filtered)
+		NewModule.is_component_filtered = PropTypesModule.BoolProp.jsonDecode(self.is_component_filtered)
 	end
 	if self.isComponentFiltered ~= nil then
-		var65.is_component_filtered = propTypesModule.BoolProp.jsonDecode(self.isComponentFiltered)
+		NewModule.is_component_filtered = PropTypesModule.BoolProp.jsonDecode(self.isComponentFiltered)
 	end
 	if self.accessibility ~= nil then
-		var65.accessibility = t.AccessibilityProps.jsonDecode(self.accessibility)
+		NewModule.accessibility = config.AccessibilityProps.jsonDecode(self.accessibility)
 	end
-	return var65
+	return NewModule
 end
 
-t_2.descriptor = {
+Module1.descriptor = {
 	name = "ComponentShared",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ComponentShared"
 }
-t.ComponentShared = t_2
-typeRegistryModule.default:register(t.ComponentShared)
-local t_3 = {}
-t_3.__index = t_3
+config.ComponentShared = Module1
+TypeRegistryModule.default:register(config.ComponentShared)
+local Module2 = {}
+Module2.__index = Module2
 
-function t_3.new(p3)
-	-- upvalues: t_3 (ref)
-	return setmetatable({
-		key = if p3 == nil or p3.key == nil then "" else p3.key,
-		value = if p3 == nil or p3.value == nil then nil else p3.value
-	}, t_3)
+function Module2.new(p1) --[[ Line: 510 ]]
+	-- upvalues: Module2 (copy)
+	return (setmetatable({
+		key = if p1 == nil or p1.key == nil then "" else p1.key,
+		value = if p1 == nil or p1.value == nil then nil else p1.value
+	}, Module2))
 end
 
-function t_3:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var66 = 0
+function Module2:encode() --[[ Line: 519 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var67, var68 = protoModule.writeTag(buff, var66, 1, protoModule.wireTypes.lengthDelimited)
-		var67, var98 = protoModule.writeString(var67, var68, self.key)
-		buff = var67
-		var66 = var68
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.key)
 	end
 	if self.value ~= nil then
-		local var69 = self.value:encode()
-		local var70, var71 = protoModule.writeTag(buff, var66, 2, protoModule.wireTypes.lengthDelimited)
-		var70, var101 = protoModule.writeBuffer(var70, var71, var69, buffer.len(var69))
-		buff = var70
-		var66 = var71
+		local EncodeResult = self.value:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var66)
-	buffer.copy(buff_1, 0, buff, 0, var66)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_3.decode(p3)
-	-- upvalues: t_3 (ref), protoModule (ref), analyticsDataModule (ref)
-	local var66 = t_3.new()
-	local var67 = 0
-	while var67 < buffer.len(p3) do
-		local _ = nil
-		local var68 = nil
-		local var69, var70, var71 = protoModule.readTag(p3, var67)
-		local var72 = var69
-		var68 = var70
-		var67 = var71
+function Module2.decode(Buf) --[[ Line: 539 ]]
+	-- upvalues: Module2 (copy), ProtoModule (copy), AnalyticsDataModule (copy)
+	local NewModule = Module2.new()
+	local v3 = 0
+	while v3 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v86 = ProtoModule.readTag(Buf, v3)
 		
-		if var68 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var73, var74 = protoModule.readVarInt(p3, var67)
-			local _ = var73
-			var67 = var74
-			continue
-		end
-		if var68 == protoModule.wireTypes.lengthDelimited then
-			if var72 == 1 then
-				local _ = nil
-				local var75, var76 = protoModule.readBuffer(p3, var67)
-				var67 = var76
-				var66.key = buffer.tostring(var75)
-			elseif var72 == 2 then
-				local _ = nil
-				local var77, var78 = protoModule.readBuffer(p3, var67)
-				var67 = var78
-				var66.value = analyticsDataModule.AnalyticsDataField.decode(var77)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v86 = ProtoModule.readVarInt(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v86 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.key = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v86 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.value = AnalyticsDataModule.AnalyticsDataField.decode(Buffer2)
 			else
-				local _ = nil
-				local var79, var80 = protoModule.readVarInt(p3, var67)
-				var67 = var80 + var79
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
+				v3 = VarInt2 + VarInt
 			end
-		elseif var68 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var81, var82 = protoModule.readFixed32(p3, var67)
-			local _ = var81
-			var67 = var82
-		elseif var68 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var83, var84 = protoModule.readFixed64(p3, var67)
-			local _ = var83
-			var67 = var84
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v86 = ProtoModule.readFixed32(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v86 = ProtoModule.readFixed64(Buf, v3)
 		else
-			error("Unsupported wire type: " .. var105)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var66
+	return NewModule
 end
 
-function t_3:jsonEncode()
+function Module2:jsonEncode() --[[ Line: 587 ]]
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -446,27 +378,27 @@ function t_3:jsonEncode()
 	return t
 end
 
-function t_3:jsonDecode()
-	-- upvalues: t_3 (ref), analyticsDataModule (ref)
-	local var85 = t_3.new()
+function Module2:jsonDecode() --[[ Line: 601 ]]
+	-- upvalues: Module2 (copy), AnalyticsDataModule (copy)
+	local NewModule = Module2.new()
 	
 	if self.key ~= nil then
-		var85.key = self.key
+		NewModule.key = self.key
 	end
 	if self.value ~= nil then
-		var85.value = analyticsDataModule.AnalyticsDataField.jsonDecode(self.value)
+		NewModule.value = AnalyticsDataModule.AnalyticsDataField.jsonDecode(self.value)
 	end
-	return var85
+	return NewModule
 end
 
-t_3.descriptor = {
+Module2.descriptor = {
 	name = "ComponentShared_AnalyticsDataEntry",
 	fullName = "roblox.apppageplatform.shared.v1beta1.AnalyticsDataEntry"
 }
-t.ComponentShared_AnalyticsDataEntry = t_3
-typeRegistryModule.default:register(t.ComponentShared_AnalyticsDataEntry)
+config.ComponentShared_AnalyticsDataEntry = Module2
+TypeRegistryModule.default:register(config.ComponentShared_AnalyticsDataEntry)
 
 return {
-	AccessibilityProps = t.AccessibilityProps,
-	ComponentShared = t.ComponentShared
+	AccessibilityProps = config.AccessibilityProps,
+	ComponentShared = config.ComponentShared
 }

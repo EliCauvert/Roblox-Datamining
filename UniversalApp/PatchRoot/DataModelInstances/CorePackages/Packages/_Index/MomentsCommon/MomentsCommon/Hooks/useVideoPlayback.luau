@@ -1,177 +1,197 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
-local useState = reactModule.useState
-local useToggleStateModule = require(momentsCommon.Hooks.useToggleState)
-local signalModule = require(momentsCommon.Utils.Signal)
-local _ = require(momentsCommon.Types)
-local t = {
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
+local UseStateFunction = ReactModule.useState
+local UseToggleStateModule = require(MomentsCommon.Hooks.useToggleState)
+local SignalModule = require(MomentsCommon.Utils.Signal)
+local _ = require(MomentsCommon.Types)
+local config = {
 	autoplay = false,
 	looping = false,
 	playbackRegion = NumberRange.new(0, 1e999)
 }
 
-return function(p1, p2, p3)
-	-- upvalues: cryoModule (ref), t (ref), useRef (ref), useToggleStateModule (ref), useState (ref), signalModule (ref), useCallback (ref), useEffect (ref)
-	local var1 = cryoModule.Dictionary.union(t, p3 or {})
-	local var2 = useRef(nil)
-	local var3 = useToggleStateModule(false)
-	local var4 = useToggleStateModule(var1.autoplay)
-	local var5 = useToggleStateModule(false)
-	local var6, var7 = useState(0)
-	local var8, var9 = useState(0)
-	local var10, var11 = useState(0)
-	local var12, var13 = useState(0)
-	local var14 = useRef(signalModule.new())
-	local var15 = useRef(signalModule.new())
-	local var16 = useCallback(function(p4)
-		-- upvalues: var2 (ref), var1 (ref), var6 (ref)
-		local current = var2.current
+return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseRefFunction (copy), UseToggleStateModule (copy), UseStateFunction (copy), SignalModule (copy), UseCallbackFunction (copy), UseEffectFunction (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p2 or {})
+	local UseRefResult = UseRefFunction(nil)
+	local UseToggleStateModuleResult = UseToggleStateModule(false)
+	local UseToggleStateModuleResult1 = UseToggleStateModule(UnionResult.autoplay)
+	local UseToggleStateModuleResult2 = UseToggleStateModule(false)
+	local UseStateResult, UseStateResult2 = UseStateFunction(0)
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(0)
+	local UseStateResult3, UseStateResult2_2 = UseStateFunction(0)
+	local UseStateResult4, UseStateResult2_3 = UseStateFunction(0)
+	local UseRefResult1 = UseRefFunction(SignalModule.new())
+	local UseRefResult2 = UseRefFunction(SignalModule.new())
+	local UseCallbackResult = UseCallbackFunction(function(p3) --[[ Line: 64 ]]
+		-- upvalues: UseRefResult (copy), UnionResult (copy), UseStateResult (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current.TimePosition = math.clamp(p4 + var1.playbackRegion.Min, 0, var6)
+		if Current then
+			Current.TimePosition = math.clamp(p3 + UnionResult.playbackRegion.Min, 0, UseStateResult)
 		end
-	end, { var6, var1.playbackRegion })
-	local var17 = useCallback(function()
-		-- upvalues: var2 (ref), var15 (ref), var1 (ref), var5 (ref), var11 (ref), var7 (ref)
-		local current = var2.current
+	end, { UseStateResult, UnionResult.playbackRegion })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 72 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult2 (copy), UnionResult (copy), UseToggleStateModuleResult2 (copy), UseStateResult2_2 (copy), UseStateResult2 (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			var15.current:fire()
-			local var18 = var1.playbackRegion.Max - var1.playbackRegion.Min
-			current.Volume = if var5.enabled then 0 else 0.2
-			var11(math.min(var18, current.TimeLength))
-			var7(current.TimeLength)
+		if Current then
+			UseRefResult2.current:fire()
+			local MaxDelta = UnionResult.playbackRegion.Max - UnionResult.playbackRegion.Min
+			Current.Volume = if UseToggleStateModuleResult2.enabled then 0 else 0.2
+			UseStateResult2_2((math.min(MaxDelta, Current.TimeLength)))
+			UseStateResult2(Current.TimeLength)
 		end
-	end, { var1.playbackRegion, var5.enabled })
-	local var18 = useCallback(function()
-		-- upvalues: p1 (ref), var2 (ref), var13 (ref), var1 (ref), var9 (ref)
+	end, {
+		UnionResult.playbackRegion,
+		UseToggleStateModuleResult2.enabled
+	})
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 83 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2_3 (copy), UnionResult (copy), UseStateResult2_1 (copy)
 		if not p1 then return end
-		local current = var2.current
+		local Current = UseRefResult.current
 		
-		if current then
-			var13(current.TimePosition - var1.playbackRegion.Min)
-			var9(current.TimePosition)
+		if Current then
+			UseStateResult2_3(Current.TimePosition - UnionResult.playbackRegion.Min)
+			UseStateResult2_1(Current.TimePosition)
 		end
-	end, { p1, var1.playbackRegion })
-	local var19 = useCallback(function()
-		-- upvalues: var2 (ref), var1 (ref), var14 (ref)
-		if var2.current then
-			var2.current.TimePosition = var1.playbackRegion.Min
-			var14.current:fire()
+	end, { p1, UnionResult.playbackRegion })
+	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 95 ]]
+		-- upvalues: UseRefResult (copy), UnionResult (copy), UseRefResult1 (copy)
+		if UseRefResult.current then
+			UseRefResult.current.TimePosition = UnionResult.playbackRegion.Min
+			UseRefResult1.current:fire()
 			
 			return
 		end
-	end, { var1.playbackRegion })
-	useEffect(function()
-		-- upvalues: var2 (ref), p2 (ref)
-		local current = var2.current
+	end, { UnionResult.playbackRegion })
+	UseEffectFunction(function() --[[ Line: 106 ]]
+		-- upvalues: UseRefResult (copy), VideoContent (copy)
+		local Current = UseRefResult.current
 		
-		if not current then return end
-		if p2 then
-			current.VideoContent = p2
+		if not Current then return end
+		if VideoContent then
+			Current.VideoContent = VideoContent
 		end
-	end, { var3.enabled, p2 })
-	useEffect(function()
-		-- upvalues: var2 (ref), var17 (ref), var18 (ref), var19 (ref)
-		local current = var2.current
+	end, { UseToggleStateModuleResult.enabled, VideoContent })
+	UseEffectFunction(function() --[[ Line: 117 ]]
+		-- upvalues: UseRefResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy), UseCallbackResult3 (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			local loadedConnection = current.Loaded:Connect(var17)
-			local renderSteppedConnection = game:GetService("RunService").RenderStepped:Connect(var18)
-			local didLoopConnection = current.DidLoop:Connect(var19)
-			
-			return function()
-				-- upvalues: loadedConnection (ref), renderSteppedConnection (ref), didLoopConnection (ref)
-				loadedConnection:Disconnect()
-				renderSteppedConnection:Disconnect()
-				didLoopConnection:Disconnect()
-			end
+		if not Current then return end
+		local LoadedConnection = Current.Loaded:Connect(UseCallbackResult1)
+		local RenderSteppedConnection = game:GetService("RunService").RenderStepped:Connect(UseCallbackResult2)
+		local DidLoopConnection = Current.DidLoop:Connect(UseCallbackResult3)
+		
+		return function() --[[ Line: 127 ]]
+			-- upvalues: LoadedConnection (copy), RenderSteppedConnection (copy), DidLoopConnection (copy)
+			LoadedConnection:Disconnect()
+			RenderSteppedConnection:Disconnect()
+			DidLoopConnection:Disconnect()
 		end
-	end, { var3.enabled, var18, var17, var19 })
-	useEffect(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		local current = var2.current
+	end, {
+		UseToggleStateModuleResult.enabled,
+		UseCallbackResult2,
+		UseCallbackResult1,
+		UseCallbackResult3
+	})
+	UseEffectFunction(function() --[[ Line: 134 ]]
+		-- upvalues: UseRefResult (copy), UnionResult (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current.Looped = var1.looping
+		if Current then
+			Current.Looped = UnionResult.looping
 		end
-	end, { var3.enabled, var1.looping })
-	useEffect(function()
-		-- upvalues: var2 (ref), var4 (ref)
-		local current = var2.current
+	end, { UseToggleStateModuleResult.enabled, UnionResult.looping })
+	UseEffectFunction(function() --[[ Line: 141 ]]
+		-- upvalues: UseRefResult (copy), UseToggleStateModuleResult1 (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current.Playing = var4.enabled
+		if Current then
+			Current.Playing = UseToggleStateModuleResult1.enabled
 		end
-	end, { var3.enabled, var4.enabled })
-	useEffect(function()
-		-- upvalues: var2 (ref), var5 (ref)
-		local current = var2.current
+	end, {
+		UseToggleStateModuleResult.enabled,
+		UseToggleStateModuleResult1.enabled
+	})
+	UseEffectFunction(function() --[[ Line: 148 ]]
+		-- upvalues: UseRefResult (copy), UseToggleStateModuleResult2 (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current.Volume = if var5.enabled then 0 else 0.2
+		if Current then
+			Current.Volume = if UseToggleStateModuleResult2.enabled then 0 else 0.2
 		end
-	end, { var3.enabled, var5.enabled })
-	useEffect(function()
-		-- upvalues: var2 (ref), var8 (write), var1 (ref), var4 (ref), var14 (ref)
-		local current = var2.current
+	end, {
+		UseToggleStateModuleResult.enabled,
+		UseToggleStateModuleResult2.enabled
+	})
+	UseEffectFunction(function() --[[ Line: 155 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult1 (ref), UnionResult (copy), UseToggleStateModuleResult1 (copy), UseRefResult1 (copy)
+		local Current = UseRefResult.current
 		
-		if not current then return end
-		if var1.playbackRegion.Max + 0.001 <= var8 then
-			if not var4.enabled then
-				var8 = var1.playbackRegion.Max
-			elseif var1.looping then
-				current.TimePosition = var1.playbackRegion.Min
-				var14.current:fire()
+		if not Current then return end
+		if UnionResult.playbackRegion.Max + 0.001 <= UseStateResult1 then
+			if UseToggleStateModuleResult1.enabled then
+				if UnionResult.looping then
+					Current.TimePosition = UnionResult.playbackRegion.Min
+					UseRefResult1.current:fire()
+				else
+					UseToggleStateModuleResult1.disable()
+				end
 			else
-				var4.disable()
+				UseStateResult1 = UnionResult.playbackRegion.Max
 			end
 		end
-		if var8 < var1.playbackRegion.Min - 0.001 then
-			current.TimePosition = var1.playbackRegion.Min
+		if UseStateResult1 < UnionResult.playbackRegion.Min - 0.001 then
+			Current.TimePosition = UnionResult.playbackRegion.Min
 		end
-	end, { var8, var1.playbackRegion, var1.looping, var4.disable })
-	useEffect(function()
-		-- upvalues: var2 (ref), var1 (ref), var11 (ref)
-		local current = var2.current
+	end, {
+		UseStateResult1,
+		UnionResult.playbackRegion,
+		UnionResult.looping,
+		UseToggleStateModuleResult1.disable
+	})
+	UseEffectFunction(function() --[[ Line: 182 ]]
+		-- upvalues: UseRefResult (copy), UnionResult (copy), UseStateResult2_2 (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			var11(math.min(var1.playbackRegion.Max - var1.playbackRegion.Min, current.TimeLength))
+		if Current then
+			UseStateResult2_2((math.min(UnionResult.playbackRegion.Max - UnionResult.playbackRegion.Min, Current.TimeLength)))
 		end
-	end, { var1.playbackRegion })
+	end, { UnionResult.playbackRegion })
 	
 	return {
 		timeline = {
-			duration = var10,
-			elapsed = var12,
-			seek = var16,
-			timeLength = var6,
-			timePosition = var8
+			duration = UseStateResult3,
+			elapsed = UseStateResult4,
+			seek = UseCallbackResult,
+			timeLength = UseStateResult,
+			timePosition = UseStateResult1
 		},
 		playback = {
-			isPlaying = var4.enabled,
-			pause = var4.disable,
-			play = var4.enable,
-			toggle = var4.toggle
+			isPlaying = UseToggleStateModuleResult1.enabled,
+			pause = UseToggleStateModuleResult1.disable,
+			play = UseToggleStateModuleResult1.enable,
+			toggle = UseToggleStateModuleResult1.toggle
 		},
 		volume = {
-			isMuted = var5.enabled,
-			mute = var5.enable,
-			unmute = var5.disable,
-			toggle = var5.toggle
+			isMuted = UseToggleStateModuleResult2.enabled,
+			mute = UseToggleStateModuleResult2.enable,
+			unmute = UseToggleStateModuleResult2.disable,
+			toggle = UseToggleStateModuleResult2.toggle
 		},
-		onVideoDidLoopSignalRef = var14,
-		onVideoLoadedSignalRef = var15,
-		ref = var2,
-		updateRef = useCallback(function(p4)
-			-- upvalues: var3 (ref), var2 (ref)
-			var3.toggle()
-			var2.current = p4
-		end, { var3.toggle })
+		onVideoDidLoopSignalRef = UseRefResult1,
+		onVideoLoadedSignalRef = UseRefResult2,
+		ref = UseRefResult,
+		updateRef = UseCallbackFunction(function(Current) --[[ Line: 190 ]]
+			-- upvalues: UseToggleStateModuleResult (copy), UseRefResult (copy)
+			UseToggleStateModuleResult.toggle()
+			UseRefResult.current = Current
+		end, { UseToggleStateModuleResult.toggle })
 	}
 end

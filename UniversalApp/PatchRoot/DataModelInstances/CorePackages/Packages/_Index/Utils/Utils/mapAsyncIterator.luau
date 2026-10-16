@@ -1,64 +1,64 @@
-﻿local parent = script.Parent.Parent
-local boolean = require(parent.LuauPolyfill).Boolean
-local promiseModule = require(parent.Promise)
-local asyncMapValue = nil
-local iteratorResult = nil
-local t = {
-	mapAsyncIterator = function(p1, p2, p3)
-		-- upvalues: promiseModule (ref), boolean (ref), asyncMapValue (write), iteratorResult (write)
-		local _return = nil
-		local var1 = nil
+﻿local Parent = script.Parent.Parent
+local Boolean = require(Parent.LuauPolyfill).Boolean
+local PromiseModule = require(Parent.Promise)
+local Callback = nil
+local IteratorResult = nil
+local MapAsyncIteratorModule = {
+	mapAsyncIterator = function(p1, p2, p3) --[[ Line: 25 ]]
+		-- upvalues: PromiseModule (copy), Boolean (copy), Callback (ref), IteratorResult (ref)
+		local ReturnFunction = nil
+		local v1: ((any) -> any)? = nil
 		
 		if typeof(p1["return"]) == "function" then
-			_return = p1["return"]
+			ReturnFunction = p1["return"]
 			
-			var1 = function(p4)
-				-- upvalues: promiseModule (copy), _return (write), p1 (ref)
-				local function rethrow()
-					-- upvalues: promiseModule (copy), p4 (ref)
-					return promiseModule.reject(p4)
+			v1 = function(Err) --[[ Line: 35 ]]
+				-- upvalues: PromiseModule (upval), ReturnFunction (ref), p1 (copy)
+				local function rethrow() --[[ Line: 36 ]]
+					-- upvalues: PromiseModule (upval), Err (copy)
+					return PromiseModule.reject(Err)
 				end
 				
-				return _return(p1):andThen(rethrow, rethrow)
+				return ReturnFunction(p1):andThen(rethrow, rethrow)
 			end
 		end
-		local function mapResult(p4)
-			-- upvalues: boolean (copy), asyncMapValue (copy), p2 (ref), iteratorResult (copy), var1 (write)
-			return if boolean.toJSBoolean(p4.done) then p4 else asyncMapValue(p4.value, p2):andThen(iteratorResult, var1)
+		local function mapResult(Result) --[[ Line: 47 ]]
+			-- upvalues: Boolean (upval), Callback (upval), p2 (copy), IteratorResult (upval), v1 (ref)
+			return if Boolean.toJSBoolean(Result.done) then Result else Callback(Result.value, p2):andThen(IteratorResult, v1)
 		end
 		
-		local var2 = if p3 then function(p4)
-			-- upvalues: asyncMapValue (copy), p3 (ref), iteratorResult (copy), var1 (write)
-			return asyncMapValue(p4, p3):andThen(iteratorResult, var1)
+		local v2 = if p3 then function(p4) --[[ Line: 62 ]]
+			-- upvalues: Callback (upval), p3 (copy), IteratorResult (upval), v1 (ref)
+			return Callback(p4, p3):andThen(IteratorResult, v1)
 		end else nil
 		
 		return {
-			next = function(_)
-				-- upvalues: p1 (ref), mapResult (ref), var2 (write)
-				return p1:next():andThen(mapResult, var2)
+			next = function(_) --[[ Line: 70 ]]
+				-- upvalues: p1 (copy), mapResult (copy), v2 (ref)
+				return p1:next():andThen(mapResult, v2)
 			end,
-			["return"] = function(_)
-				-- upvalues: boolean (copy), _return (write), p1 (ref), mapResult (ref), var2 (write), promiseModule (copy)
-				return if boolean.toJSBoolean(_return) then _return(p1):andThen(mapResult, var2) else promiseModule.resolve({ value = nil, done = true })
+			["return"] = function(_) --[[ Line: 76 ]]
+				-- upvalues: Boolean (upval), ReturnFunction (ref), p1 (copy), mapResult (copy), v2 (ref), PromiseModule (upval)
+				return if Boolean.toJSBoolean(ReturnFunction) then ReturnFunction(p1):andThen(mapResult, v2) else PromiseModule.resolve({ value = nil, done = true })
 			end,
-			throw = function(_, p4)
-				-- upvalues: p1 (ref), mapResult (ref), var2 (write), promiseModule (copy), var1 (write)
-				return if typeof(p1.throw) == "function" then p1:throw(p4):andThen(mapResult, var2) else promiseModule.reject(p4):catch(var1)
+			throw = function(_, p4) --[[ Line: 88 ]]
+				-- upvalues: p1 (copy), mapResult (copy), v2 (ref), PromiseModule (upval), v1 (ref)
+				return if typeof(p1.throw) == "function" then p1.throw(p1, p4):andThen(mapResult, v2) else PromiseModule.reject(p4):catch(v1)
 			end
 		}
 	end
 }
 
-asyncMapValue = function(p1, p2)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p3)
-		-- upvalues: p2 (ref), p1 (ref)
-		return p3(p2(p1))
+Callback = function(p1, Callback) --[[ Line: 108 | Named "asyncMapValue" ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(Callback1) --[[ Line: 110 ]]
+		-- upvalues: Callback (copy), p1 (copy)
+		return Callback1(Callback(p1))
 	end)
 end
 
-iteratorResult = function(p1)
-	return { done = false, value = p1 }
+IteratorResult = function(Result) --[[ Line: 116 | Named "iteratorResult" ]]
+	return { done = false, value = Result }
 end
 
-return t
+return MapAsyncIteratorModule

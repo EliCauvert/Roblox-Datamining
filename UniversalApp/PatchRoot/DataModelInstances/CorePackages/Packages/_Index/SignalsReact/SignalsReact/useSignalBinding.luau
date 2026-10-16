@@ -1,19 +1,19 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local createEffect = require(parent.Signals).createEffect
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local CreateEffectFunction = require(Parent.Signals).createEffect
 
-return function(value)
-	-- upvalues: reactModule (ref), createEffect (ref)
-	local var1, var2 = reactModule.useBinding(value(false))
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), value (ref), createEffect (copy)
-		var2(value(false))
+return function(Callback) --[[ Line: 9 | Named "useSignalBinding" ]]
+	-- upvalues: ReactModule (copy), CreateEffectFunction (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Callback(false))
+	ReactModule.useLayoutEffect(function() --[[ Line: 12 ]]
+		-- upvalues: UseBindingResult2 (copy), Callback (copy), CreateEffectFunction (upval)
+		UseBindingResult2(Callback(false))
 		
-		return createEffect(function(p1)
-			-- upvalues: var2 (copy), value (copy)
-			var2(value(p1))
+		return CreateEffectFunction(function(p1) --[[ Line: 14 ]]
+			-- upvalues: UseBindingResult2 (upval), Callback (upval)
+			UseBindingResult2(Callback(p1))
 		end)
-	end, { value })
+	end, { Callback })
 	
-	return var1
+	return UseBindingResult
 end

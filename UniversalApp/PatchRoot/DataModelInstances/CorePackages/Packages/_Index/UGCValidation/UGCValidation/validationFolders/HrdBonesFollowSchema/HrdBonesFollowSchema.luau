@@ -1,143 +1,141 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getAllInstancesIsAModule = require(parent.util.getAllInstancesIsA)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
-local shouldValidateR15LegacyDuplicateModule = require(parent.util.shouldValidateR15LegacyDuplicate)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.uploadEnum,
-		validationEnumsModule.SharedDataMember.consumerConfig
-	},
-	fflag = r15plusUtilsModule.checkFlagEnabledForAllowHrd
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetAllInstancesIsAModule = require(Parent.util.getAllInstancesIsA)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule = require(Parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
+local ShouldValidateR15LegacyDuplicateModule = require(Parent.util.shouldValidateR15LegacyDuplicate)
 local UGCValidationRemoveHRDBlocker = game:DefineFastFlag("UGCValidationRemoveHRDBlocker", false)
 
-local function fillBoneTreeFlatList(p1, p2, p3)
-	-- upvalues: fillBoneTreeFlatList (ref)
-	for i, v in p1:GetChildren() do
-		local var1 = if v:IsA("Bone") then true else p2
+local function fillBoneTreeFlatList(Bone, p1, List) --[[ Line: 23 ]]
+	-- upvalues: fillBoneTreeFlatList (copy)
+	for _, Bone1 in Bone:GetChildren() do
+		local v1 = if Bone1:IsA("Bone") then true else p1
 		
-		if var1 then
-			table.insert(p3, v)
+		if v1 then
+			table.insert(List, Bone1)
 		end
-		fillBoneTreeFlatList(v, var1, p3)
+		fillBoneTreeFlatList(Bone1, v1, List)
 	end
 end
 
-local function nameIsMappedInRigDescriptions(p4, p5, p6)
-	-- upvalues: r15plusUtilsModule (ref)
-	for i, v in r15plusUtilsModule.getHrdJointLabels() do
-		if p4.Name == v.Name then
-			local var2 = p5:GetJoint(v)
+local function nameIsMappedInRigDescriptions(p2, HumanoidRigDescription, DigitsRigDescription): boolean --[[ Line: 38 ]]
+	-- upvalues: R15plusUtilsModule (copy)
+	for _, value in R15plusUtilsModule.getHrdJointLabels() do
+		if p2.Name == value.Name then
+			local Joint = HumanoidRigDescription:GetJoint(value)
 			
-			return var2 and var2.UniqueId == p4.UniqueId
+			return Joint and Joint.UniqueId == p2.UniqueId
 		end
 	end
-	if p6 then
-		for i, v in r15plusUtilsModule.getDrdJointLabels() do
-			if p4.Name == `{p6.Side.Name}Hand{v.Name}` then
-				local var3 = p6:GetJoint(v)
+	if DigitsRigDescription then
+		for _, value1 in R15plusUtilsModule.getDrdJointLabels() do
+			if p2.Name == `{DigitsRigDescription.Side.Name}Hand{value1.Name}` then
+				local Joint = DigitsRigDescription:GetJoint(value1)
 				
-				return var3 and var3.UniqueId == p4.UniqueId
+				return Joint and Joint.UniqueId == p2.UniqueId
 			end
 		end
 	end
 	return false
 end
 
-local function validateBonesForRoot(p7, p8)
-	-- upvalues: getAllInstancesIsAModule (ref), UGCValidationRemoveHRDBlocker (ref), errorSourceStringsModule (ref), r15plusUtilsModule (ref), fillBoneTreeFlatList (ref), nameIsMappedInRigDescriptions (ref)
-	for i, v in getAllInstancesIsAModule(p7, "MeshPart") do
-		local name = v.Name
-		local humanoidRigDescription = v:FindFirstChildWhichIsA("HumanoidRigDescription")
-		local digitsRigDescription = v:FindFirstChildWhichIsA("DigitsRigDescription")
+local function validateBonesForRoot(R15LegacyDuplicateRoot, p3) --[[ Line: 64 ]]
+	-- upvalues: GetAllInstancesIsAModule (copy), UGCValidationRemoveHRDBlocker (copy), ErrorSourceStringsModule (copy), R15plusUtilsModule (copy), fillBoneTreeFlatList (copy), nameIsMappedInRigDescriptions (copy)
+	for _, Object in GetAllInstancesIsAModule(R15LegacyDuplicateRoot, "MeshPart") do
+		local Name = Object.Name
+		local HumanoidRigDescription = Object:FindFirstChildWhichIsA("HumanoidRigDescription")
+		local DigitsRigDescription = Object:FindFirstChildWhichIsA("DigitsRigDescription")
 		
-		if humanoidRigDescription ~= nil and not UGCValidationRemoveHRDBlocker then
-			p8:fail(errorSourceStringsModule.Keys.HrdCheck_TempR15BonesUploadNotAllowed, nil, humanoidRigDescription)
+		if HumanoidRigDescription ~= nil and not UGCValidationRemoveHRDBlocker then
+			p3:fail(ErrorSourceStringsModule.Keys.HrdCheck_TempR15BonesUploadNotAllowed, nil, HumanoidRigDescription)
 		end
-		if humanoidRigDescription == nil then
-			for i_1, v_1 in getAllInstancesIsAModule(v, "Bone") do
-				p8:fail(errorSourceStringsModule.Keys.HrdCheck_BoneWithoutHrd, { bonePath = v_1:GetFullName() }, v_1)
+		if HumanoidRigDescription == nil then
+			for _, value in GetAllInstancesIsAModule(Object, "Bone") do
+				p3:fail(ErrorSourceStringsModule.Keys.HrdCheck_BoneWithoutHrd, { bonePath = value:GetFullName() }, value)
 			end
-			if digitsRigDescription ~= nil then
-				p8:fail(errorSourceStringsModule.Keys.HrdCheck_DrdWithoutHrd, nil, digitsRigDescription)
+			if DigitsRigDescription ~= nil then
+				p3:fail(ErrorSourceStringsModule.Keys.HrdCheck_DrdWithoutHrd, nil, DigitsRigDescription)
 			end
-		end
-		local path
-		local schemaFlatHierarchyList = r15plusUtilsModule.getSchemaFlatHierarchyList(r15plusUtilsModule.getAvatarBoneSchema(name), { name })
-		local t = {}
-		fillBoneTreeFlatList(v, false, t)
-		local t_1 = { [name] = true }
-		
-		for i_1, v_1 in t do
-			p8:setReportingInstance(v_1)
-			local name_1 = v_1.Name
-			path = schemaFlatHierarchyList[name_1]
+		else
+			local SchemaFlatHierarchyList = R15plusUtilsModule.getSchemaFlatHierarchyList(R15plusUtilsModule.getAvatarBoneSchema(Name), { Name })
+			local t = {}
+			fillBoneTreeFlatList(Object, false, t)
+			local config = { [Name] = true }
 			
-			if name_1 ~= r15plusUtilsModule.JointRotationName then
-				if path == nil or path.ClassName ~= v_1.ClassName then
-					p8:fail(errorSourceStringsModule.Keys.HrdCheck_UndefinedInstanceInBoneTree, { instName = name_1, className = v_1.ClassName })
-				elseif t_1[name_1] then
-					p8:fail(errorSourceStringsModule.Keys.HrdCheck_DuplicateInstance, { instName = name_1 })
-				else
-					t_1[name_1] = true
+			for _, value1 in t do
+				p3:setReportingInstance(value1)
+				local Name1 = value1.Name
+				local SchemaFlatHierarchy = SchemaFlatHierarchyList[Name1]
+				
+				if Name1 ~= R15plusUtilsModule.JointRotationName then
+					if SchemaFlatHierarchy == nil or SchemaFlatHierarchy.ClassName ~= value1.ClassName then
+						p3:fail(ErrorSourceStringsModule.Keys.HrdCheck_UndefinedInstanceInBoneTree, { instName = Name1, className = value1.ClassName })
+					elseif config[Name1] then
+						p3:fail(ErrorSourceStringsModule.Keys.HrdCheck_DuplicateInstance, { instName = Name1 })
+					else
+						config[Name1] = true
+						
+						if SchemaFlatHierarchy.ClassName == "Bone" and not nameIsMappedInRigDescriptions(value1, HumanoidRigDescription, DigitsRigDescription) then
+							p3:fail(ErrorSourceStringsModule.Keys.HrdCheck_BoneNotMappedInHRD, { boneName = Name1 })
+						end
+					end
+				end
+			end
+			for _, Attachment in Object:GetDescendants() do
+				p3:setReportingInstance(Attachment)
+				local SchemaFlatHierarchy = SchemaFlatHierarchyList[Attachment.Name]
+				
+				if SchemaFlatHierarchy and Attachment:IsA("Attachment") and Attachment.Name ~= R15plusUtilsModule.JointRotationName then
+					local Path = SchemaFlatHierarchy.path
+					local Count = #Path - 1
 					
-					if path.ClassName == "Bone" and not nameIsMappedInRigDescriptions(v_1, humanoidRigDescription, digitsRigDescription) then
-						p8:fail(errorSourceStringsModule.Keys.HrdCheck_BoneNotMappedInHRD, { boneName = name_1 })
+					if Attachment.ClassName == "Attachment" then
+						while Count > 1 and not config[Path[Count]] do
+							Count -= 1
+						end
 					end
-				end
-			end
-		end
-		for i_1, v_1 in v:GetDescendants() do
-			p8:setReportingInstance(v_1)
-			local name_1 = schemaFlatHierarchyList[v_1.Name]
-			
-			if name_1 and v_1:IsA("Attachment") and v_1.Name ~= r15plusUtilsModule.JointRotationName then
-				path = name_1.path
-				local var4 = #path - 1
-				
-				if v_1.ClassName == "Attachment" then
-					while var4 > 1 and not t_1[path[var4]] do
-						var4 -= 1
+					local PathEntry = SchemaFlatHierarchy.path[Count]
+					local Name2 = Attachment.Parent.Name
+					
+					if Name2 ~= PathEntry then
+						p3:fail(ErrorSourceStringsModule.Keys.HrdCheck_ImproperParent, {
+							instName = Attachment.Name,
+							parentName = Name2,
+							expectedParentName = PathEntry
+						})
 					end
-				end
-				local var5 = name_1.path[var4]
-				local name_2 = v_1.Parent.Name
-				
-				if name_2 ~= var5 then
-					p8:fail(errorSourceStringsModule.Keys.HrdCheck_ImproperParent, {
-						instName = v_1.Name,
-						parentName = name_2,
-						expectedParentName = var5
-					})
 				end
 			end
 		end
 	end
 end
 
-function t.run(p9, p10)
-	-- upvalues: validateBonesForRoot (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), shouldValidateR15LegacyDuplicateModule (ref), errorSourceStringsModule (ref)
-	validateBonesForRoot(p10.rootInstance, p9)
-	
-	if getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() and shouldValidateR15LegacyDuplicateModule(p10) then
-		if p10.r15LegacyDuplicateRoot == nil then
-			p9:fail(errorSourceStringsModule.Keys.FolderStructureMismatch)
-			
-			return
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+	},
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.uploadEnum,
+		ValidationEnumsModule.SharedDataMember.consumerConfig
+	},
+	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
+	run = function(p4, p5) --[[ Line: 159 ]]
+		-- upvalues: validateBonesForRoot (copy), GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), ShouldValidateR15LegacyDuplicateModule (copy), ErrorSourceStringsModule (copy)
+		validateBonesForRoot(p5.rootInstance, p4)
+		
+		if GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule() and ShouldValidateR15LegacyDuplicateModule(p5) then
+			if p5.r15LegacyDuplicateRoot == nil then
+				p4:fail(ErrorSourceStringsModule.Keys.FolderStructureMismatch)
+				
+				return
+			end
+			p4:setReportingRoot(p5.r15LegacyDuplicateRoot)
+			validateBonesForRoot(p5.r15LegacyDuplicateRoot, p4)
+			p4:setReportingRoot(p5.rootInstance)
 		end
-		p9:setReportingRoot(p10.r15LegacyDuplicateRoot)
-		validateBonesForRoot(p10.r15LegacyDuplicateRoot, p9)
-		p9:setReportingRoot(p10.rootInstance)
 	end
-end
-
-return t
+}

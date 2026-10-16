@@ -1,80 +1,82 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local _ = require(parent.Otter)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local backgroundStyleContextModule = require(foundation.Providers.Style.BackgroundStyleContext)
-local iconModule = require(foundation.Components.Icon)
-local _ = require(foundation.Enums.InputSize)
-local tokensModule = require(foundation.Providers.Style.Tokens)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useBackgroundStyle = backgroundStyleContextModule.useBackgroundStyle
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local useScrimVariantsModule = require(script.Parent.useScrimVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local t = {
-	easingStyle = tokensModule.defaultTokens.Ease.StandardOut,
-	duration = tokensModule.defaultTokens.Time.Time_200
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local _ = require(Parent.Otter)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local IconModule = require(Foundation.Components.Icon)
+local _ = require(Foundation.Enums.InputSize)
+local TokensModule = require(Foundation.Providers.Style.Tokens)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseBackgroundStyleFunction = require(Foundation.Providers.Style.BackgroundStyleContext).useBackgroundStyle
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local UseScrimVariantsModule = require(script.Parent.useScrimVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local config = {
+	easingStyle = TokensModule.defaultTokens.Ease.StandardOut,
+	duration = TokensModule.defaultTokens.Time.Time_200
 }
 
-local function lerpNumberSequence(startValue, endValue, alpha)
-	local keypoints = startValue.Keypoints
-	local keypoints_1 = endValue.Keypoints
-	local t = {}
+local function lerpNumberSequence(Gradient, HoverGradient, p1): NumberSequence --[[ Line: 29 ]]
+	local Keypoints = HoverGradient.Keypoints
+	local NumberSequenceKeypoints = {}
 	
-	for i, v in keypoints do
-		local var1 = keypoints_1[i]
-		t[i] = NumberSequenceKeypoint.new(v.Time + (var1.Time - v.Time) * alpha, v.Value + (var1.Value - v.Value) * alpha)
+	for i, keypoint in Gradient.Keypoints do
+		local Keypoint = Keypoints[i]
+		NumberSequenceKeypoints[i] = NumberSequenceKeypoint.new(keypoint.Time + (Keypoint.Time - keypoint.Time) * p1, keypoint.Value + (Keypoint.Value - keypoint.Value) * p1)
 	end
-	return NumberSequence.new(t)
+	return NumberSequence.new(NumberSequenceKeypoints)
 end
 
-return function(p1)
-	-- upvalues: useTokensModule (ref), useBackgroundStyle (ref), useScrimVariantsModule (ref), reactOtterModule (ref), reactModule (ref), t (ref), lerpNumberSequence (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), iconModule (ref)
-	local var2 = useBackgroundStyle()
-	local var3 = useScrimVariantsModule(useTokensModule(), p1.alignment, p1.preferredInput)
-	local var4 = p1.alignment == Enum.HorizontalAlignment.Right
-	local var5 = if p1.preferredInput ~= Enum.PreferredInput.Touch then p1.preferredInput == Enum.PreferredInput.Gamepad else true
-	local var6, var7 = reactOtterModule.useAnimatedBinding(if p1.isHovered then 1 else 0)
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), reactOtterModule (copy), p1 (ref), t (copy)
-		var7(reactOtterModule.ease(if p1.isHovered then 1 else 0, t))
-	end, { p1.isHovered })
-	local var8 = var6:map(function(p2)
-		-- upvalues: var5 (ref), var4 (ref)
-		return if var5 then UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0.5 + (if var4 then 1 else -1) * (1 - p2), 0.5)
+return function(p2) --[[ Line: 54 | Named "Scrim" ]]
+	-- upvalues: UseTokensModule (copy), UseBackgroundStyleFunction (copy), UseScrimVariantsModule (copy), ReactOtterModule (copy), ReactModule (copy), config (copy), lerpNumberSequence (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), IconModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseBackgroundStyleResult = UseBackgroundStyleFunction()
+	local UseScrimVariantsModuleResult = UseScrimVariantsModule(UseTokensModuleResult, p2.alignment, p2.preferredInput)
+	local IsAlignmentMatch = p2.alignment == Enum.HorizontalAlignment.Right
+	local IsPreferredInputMatch: boolean = p2.preferredInput == Enum.PreferredInput.Touch or p2.preferredInput == Enum.PreferredInput.Gamepad
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if p2.isHovered then 1 else 0)
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), p2 (copy), config (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.ease(if p2.isHovered then 1 else 0, config))
+	end, { p2.isHovered })
+	local MapResult = UseAnimatedBindingResult:map(function(p3: number): UDim2 --[[ Line: 68 ]]
+		-- upvalues: IsPreferredInputMatch (copy), IsAlignmentMatch (copy)
+		return if IsPreferredInputMatch then UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0.5 + (if IsAlignmentMatch then 1 else -1) * (1 - p3), 0.5)
 	end)
-	local var9 = p1.rowHeight:map(function(p2)
-		-- upvalues: var3 (ref)
-		return UDim2.new(0, p2 + var3.fade, 1, 0)
+	local MapResult1 = p2.rowHeight:map(function(p3): UDim2 --[[ Line: 76 ]]
+		-- upvalues: UseScrimVariantsModuleResult (copy)
+		return UDim2.new(0, p3 + UseScrimVariantsModuleResult.fade, 1, 0)
 	end)
-	local var10 = var6:map(function(p2)
-		-- upvalues: var5 (ref), var3 (ref), lerpNumberSequence (copy)
-		return if var5 then var3.hoverGradient else lerpNumberSequence(var3.gradient, var3.hoverGradient, p2)
+	local MapResult2 = UseAnimatedBindingResult:map(function(p3) --[[ Line: 80 ]]
+		-- upvalues: IsPreferredInputMatch (copy), UseScrimVariantsModuleResult (copy), lerpNumberSequence (upval)
+		return if IsPreferredInputMatch then UseScrimVariantsModuleResult.hoverGradient else lerpNumberSequence(UseScrimVariantsModuleResult.gradient, UseScrimVariantsModuleResult.hoverGradient, p3)
 	end)
-	local var11, var12 = reactOtterModule.useAnimatedBinding(if p1.isVisible then 0 else 1)
-	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), reactOtterModule (copy), p1 (ref), t (copy)
-		var12(reactOtterModule.ease(if p1.isVisible then 0 else 1, t))
-	end, { p1.isVisible })
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(if p2.isVisible then 0 else 1)
+	ReactModule.useEffect(function() --[[ Line: 88 ]]
+		-- upvalues: UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), p2 (copy), config (upval)
+		UseAnimatedBindingResult2_1(ReactOtterModule.ease(if p2.isVisible then 0 else 1, config))
+	end, { p2.isVisible })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { Size = var9, GroupTransparency = var11 }), {
-		Scrim = reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p2, {
+		Size = MapResult1,
+		GroupTransparency = UseAnimatedBindingResult1
+	}), {
+		Scrim = ReactModule.createElement(ViewModule, {
 			tag = "size-full",
-			backgroundStyle = var2,
-			onActivated = p1.onActivated,
-			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			onStateChanged = p1.onStateChanged,
-			isDisabled = not p1.isVisible,
+			backgroundStyle = UseBackgroundStyleResult,
+			onActivated = p2.onActivated,
+			stateLayer = { affordance = StateLayerAffordanceModule.None },
+			onStateChanged = p2.onStateChanged,
+			isDisabled = not p2.isVisible,
 			selection = { Selectable = false },
-			testId = `{p1.testId}--button`
+			testId = `{p2.testId}--button`
 		}, {
-			Gradient = reactModule.createElement("UIGradient", { Transparency = var10 }),
-			DirectionIcon = reactModule.createElement(viewModule, {
+			Gradient = ReactModule.createElement("UIGradient", { Transparency = MapResult2 }),
+			DirectionIcon = ReactModule.createElement(ViewModule, {
 				ZIndex = 2,
-				tag = var3.iconAlignmentTag,
+				tag = UseScrimVariantsModuleResult.iconAlignmentTag,
 				Size = UDim2.fromScale(0, 1),
 				aspectRatio = {
 					AspectRatio = 1,
@@ -82,12 +84,12 @@ return function(p1)
 					DominantAxis = Enum.DominantAxis.Height
 				}
 			}, {
-				Icon = reactModule.createElement(iconModule, {
+				Icon = ReactModule.createElement(IconModule, {
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = var8,
-					size = p1.size,
-					name = var3.directionIcon,
-					testId = `{p1.testId}--direction-indicator`
+					Position = MapResult,
+					size = p2.size,
+					name = UseScrimVariantsModuleResult.directionIcon,
+					testId = `{p2.testId}--direction-indicator`
 				})
 			})
 		})

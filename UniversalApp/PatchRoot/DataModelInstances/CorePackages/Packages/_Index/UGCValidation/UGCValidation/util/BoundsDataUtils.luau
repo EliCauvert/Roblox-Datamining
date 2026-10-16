@@ -1,61 +1,58 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local calculateMinMaxModule = require(parent.util.calculateMinMax)
-local t = {}
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local CalculateMinMaxModule = require(Parent.util.calculateMinMax)
+local BoundsDataUtils = {}
 
-function t.combineBounds(p1, p2)
-	-- upvalues: calculateMinMaxModule (ref), t (ref)
-	local t_1 = {}
-	local var1, var2 = calculateMinMaxModule(p1.minMeshCorner, p1.maxMeshCorner, p2.minMeshCorner, p2.maxMeshCorner)
-	t_1.minMeshCorner = var1
-	t_1.maxMeshCorner = var2
-	local var3, var4 = calculateMinMaxModule(p1.minRigAttachment, p1.maxRigAttachment, p2.minRigAttachment, p2.maxRigAttachment)
-	t_1.minRigAttachment = var3
-	t_1.maxRigAttachment = var4
-	t.setOverallBounds(t_1)
+function BoundsDataUtils.combineBounds(p1, p2) --[[ Line: 23 ]]
+	-- upvalues: CalculateMinMaxModule (copy), BoundsDataUtils (copy)
+	local MinMaxModule, MinMaxModule2 = CalculateMinMaxModule(p1.minMeshCorner, p1.maxMeshCorner, p2.minMeshCorner, p2.maxMeshCorner)
+	local MinMaxModule1, MinMaxModule2_1 = CalculateMinMaxModule(p1.minRigAttachment, p1.maxRigAttachment, p2.minRigAttachment, p2.maxRigAttachment)
+	local config = {
+		minMeshCorner = MinMaxModule,
+		maxMeshCorner = MinMaxModule2,
+		minRigAttachment = MinMaxModule1,
+		maxRigAttachment = MinMaxModule2_1
+	}
+	BoundsDataUtils.setOverallBounds(config)
 	
-	return t_1
+	return config
 end
 
-function t.expandMeshBounds(p1, p2)
-	-- upvalues: calculateMinMaxModule (ref)
-	local var1, var2 = calculateMinMaxModule(p1.minMeshCorner, p1.maxMeshCorner, p2, p2)
-	p1.minMeshCorner = var1
-	p1.maxMeshCorner = var2
+function BoundsDataUtils.expandMeshBounds(p1, p2) --[[ Line: 36 ]]
+	-- upvalues: CalculateMinMaxModule (copy)
+	p1.minMeshCorner, p1.maxMeshCorner = CalculateMinMaxModule(p1.minMeshCorner, p1.maxMeshCorner, p2, p2)
 end
 
-function t.expandRigAttachmentBounds(p1, p2)
-	-- upvalues: calculateMinMaxModule (ref)
-	local var1, var2 = calculateMinMaxModule(p1.minRigAttachment, p1.maxRigAttachment, p2, p2)
-	p1.minRigAttachment = var1
-	p1.maxRigAttachment = var2
+function BoundsDataUtils.expandRigAttachmentBounds(p1, p2) --[[ Line: 41 ]]
+	-- upvalues: CalculateMinMaxModule (copy)
+	p1.minRigAttachment, p1.maxRigAttachment = CalculateMinMaxModule(p1.minRigAttachment, p1.maxRigAttachment, p2, p2)
 end
 
-function t.setOverallBounds(value)
-	-- upvalues: calculateMinMaxModule (ref)
-	local var1, var2 = calculateMinMaxModule(value.minMeshCorner, value.maxMeshCorner, value.minRigAttachment, value.maxRigAttachment)
-	value.minOverall = var1
-	value.maxOverall = var2
+function BoundsDataUtils.setOverallBounds(p1) --[[ Line: 46 ]]
+	-- upvalues: CalculateMinMaxModule (copy)
+	p1.minOverall, p1.maxOverall = CalculateMinMaxModule(p1.minMeshCorner, p1.maxMeshCorner, p1.minRigAttachment, p1.maxRigAttachment)
 end
 
-function t.calculateBoundsCenters(p1)
-	local var1 = if p1.minMeshCorner and p1.maxMeshCorner then (p1.minMeshCorner + p1.maxMeshCorner) / 2 else nil
-	local var2 = if p1.minRigAttachment and p1.maxRigAttachment then (p1.minRigAttachment + p1.maxRigAttachment) / 2 else nil
+function BoundsDataUtils.calculateBoundsCenters(p1) --[[ Line: 52 ]]
+	local MinMeshCornerRatio = if p1.minMeshCorner and p1.maxMeshCorner then (p1.minMeshCorner + p1.maxMeshCorner) / 2 else nil
+	local MinRigAttachmentRatio = if p1.minRigAttachment and p1.maxRigAttachment then (p1.minRigAttachment + p1.maxRigAttachment) / 2 else nil
 	
 	if p1.minOverall and p1.maxOverall then
-		return var1, var2, (p1.minOverall + p1.maxOverall) / 2
+		return MinMeshCornerRatio, MinRigAttachmentRatio, (p1.minOverall + p1.maxOverall) / 2
+	else
+		return MinMeshCornerRatio, MinRigAttachmentRatio, nil
 	end
-	return var1, var2, nil
 end
 
-function t.calculateBoundsDimensions(p1)
-	local var1 = if p1.minMeshCorner and p1.maxMeshCorner then p1.maxMeshCorner - p1.minMeshCorner else nil
-	local var2 = if p1.minRigAttachment and p1.maxRigAttachment then p1.maxRigAttachment - p1.minRigAttachment else nil
+function BoundsDataUtils.calculateBoundsDimensions(p1) --[[ Line: 66 ]]
+	local MaxMeshCornerDelta = if p1.minMeshCorner and p1.maxMeshCorner then p1.maxMeshCorner - p1.minMeshCorner else nil
+	local MaxRigAttachmentDelta = if p1.minRigAttachment and p1.maxRigAttachment then p1.maxRigAttachment - p1.minRigAttachment else nil
 	
 	if p1.minOverall and p1.maxOverall then
-		return var1, var2, p1.maxOverall - p1.minOverall
+		return MaxMeshCornerDelta, MaxRigAttachmentDelta, p1.maxOverall - p1.minOverall
+	else
+		return MaxMeshCornerDelta, MaxRigAttachmentDelta, nil
 	end
-	return var1, var2, nil
 end
 
-return t
+return BoundsDataUtils

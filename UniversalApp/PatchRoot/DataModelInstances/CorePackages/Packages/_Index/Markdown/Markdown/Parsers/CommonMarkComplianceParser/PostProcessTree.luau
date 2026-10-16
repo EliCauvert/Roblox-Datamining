@@ -1,283 +1,366 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
-local insert = table.insert
-local constantsModule = require(script.Parent.Parent.Constants)
-local CONTAINERS = constantsModule.CONTAINERS
-local INLINE_TEXT = constantsModule.INLINE_TEXT
-local PLAIN_TEXT = constantsModule.PLAIN_TEXT
-local STYLED_TEXT = constantsModule.STYLED_TEXT
-local getNodeTypeModule = require(script.Parent.Parent.getNodeType)
-local isNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
+local InsertFunction = table.insert
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local CONTAINERS = ConstantsModule.CONTAINERS
+local INLINETEXT = ConstantsModule.INLINE_TEXT
+local PLAINTEXT = ConstantsModule.PLAIN_TEXT
+local STYLEDTEXT = ConstantsModule.STYLED_TEXT
+local GetNodeTypeModule = require(script.Parent.Parent.getNodeType)
+local IsNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
 local t = {}
 
-function t.postProcessTree(p1, p2)
-	-- upvalues: CONTAINERS (ref), INLINE_TEXT (ref), t (ref), insert (ref), PLAIN_TEXT (ref), isNodeBlockModule (ref)
-	local var1
-	local t_1 = {}
-	local var2 = 1
-	local children = p1.children
-	local var3 = CONTAINERS[p1.name] and not (p1.name == "TAG" and p2.inlineTags[p1.text])
-	while var2 <= #children do
-		var1 = children[var2]
-		
-		if (INLINE_TEXT[var1.name] or (var1.name == "TAG" and (var1.text and p2.inlineTags[var1.text]))) and var3 then
-			local var4, var5 = t.buildParagraph(children, var2, p2)
-			assert(var4 > 0, "Did not find an inline node when expected")
+local function trimLeadingWhitespace(Children, IsSegmentMatch) --[[ Line: 26 ]]
+	-- upvalues: InsertFunction (copy)
+	local t = {}
+	local IsSegmentMatch1: boolean = IsSegmentMatch
+	
+	for _, child in Children do
+		if IsSegmentMatch1 and child.name == "TEXT" and child.text then
+			child.text = child.text:gsub("^[ \t]+", "")
 			
-			if #var5.children > 0 then
-				insert(t_1, var5)
+			if #child.text == 0 then
+				continue
 			end
-			var2 += var4
 		end
-		if PLAIN_TEXT[var1.name] then
-			local var6, var7 = t.mergeTextNodes(children, var2, nil, p2)
-			assert(var6 > 0, "Did not find a text node when expected")
-			
-			if var7.text and #var7.text > 0 then
-				insert(t_1, var7)
-			end
-			var2 += var6
-		elseif var1.name == "LIST_ITEM" then
-			local var8, var9 = t.buildList(children, var2, p2)
-			insert(t_1, var9)
-			assert(var8 > 0, "Did not find a list node when expected")
-			var2 += var8
-		elseif var1.name == "TABLE_ROW" then
-			local var10, var11 = t.buildTable(children, var2, p2)
-			insert(t_1, var11)
-			assert(var10 > 0, "Did not find a table row node when expected")
-			var2 += var10
-		elseif var1.name == "LINE_BREAK" then
-			var2 += 1
-		else
-			var1.children = t.postProcessTree(var1, p2)
-			insert(t_1, var1)
-			var2 += 1
-		end
+		IsSegmentMatch1 = child.name == "BREAK" and (child.text ~= nil and string.sub(child.text, -1) == "\n")
+		InsertFunction(t, child)
 	end
-	if isNodeBlockModule(p1) then
-		var1 = t_1[1]
-		
-		if var1 and var1.text then
-			var1.text = var1.text:gsub("^%s+", "")
-		end
-		local var12 = t_1[#t_1]
-		
-		if var12 and var12.text then
-			var12.text = var12.text:gsub("%s+$", "")
-		end
-	end
-	return t_1
+	return t
 end
 
-function t.buildParagraph(p3, p4, p5, p6)
-	-- upvalues: INLINE_TEXT (ref), PLAIN_TEXT (ref), t (ref), insert (ref), getNodeTypeModule (ref)
-	local var13, name
-	local t_1 = {}
-	local var14 = 0
-	local var15 = p4
-	while var15 <= #p3 do
-		var13 = p3[var15]
-		name = INLINE_TEXT[var13.name] or (var13.name == "TAG" and (var13.text and p5.inlineTags[var13.text]))
+function t.postProcessTree(Node, p1) --[[ Line: 43 ]]
+	-- upvalues: CONTAINERS (copy), INLINETEXT (copy), t (copy), InsertFunction (copy), PLAINTEXT (copy), IsNodeBlockModule (copy), trimLeadingWhitespace (copy)
+	local t1 = {}
+	local Total = 1
+	local Children = Node.children
+	local InlineTag = Node.name == "TAG" and p1.inlineTags[Node.text]
+	local NoInlineTag: boolean = CONTAINERS[Node.name] and not InlineTag
+	while Total <= #Children do
+		local Child = Children[Total]
+		local InlineTag1 = Child.name == "TAG" and (Child.text and p1.inlineTags[Child.text])
 		
-		if PLAIN_TEXT[var13.name] then
-			local var16, var17 = t.mergeTextNodes(p3, var15, p6, p5)
+		if (INLINETEXT[Child.name] or InlineTag1) and NoInlineTag then
+			local Paragraph, Paragraph2 = t.buildParagraph(Children, Total, p1)
+			assert(Paragraph > 0, "Did not find an inline node when expected")
 			
-			if var17.text and #var17.text > 0 then
-				insert(t_1, var17)
+			if #Paragraph2.children > 0 then
+				InsertFunction(t1, Paragraph2)
 			end
-			assert(var16 > 0, "Did not find a rich text node when expected")
-			var14 += var16
-			var15 += var16
-		elseif var13.name == "STYLED_TEXT" then
-			local _, var18 = t.buildParagraph(var13.children, 1, p5, true)
+			Total += Paragraph
+		elseif PLAINTEXT[Child.name] then
+			local MergeTextNodesResult, MergeTextNodesResult2 = t.mergeTextNodes(Children, Total, nil, p1)
+			assert(MergeTextNodesResult > 0, "Did not find a text node when expected")
 			
-			if var13.attributes and var13.attributes.style == "INLINE_CODE" then
-				var13.children = t.applyCodeSpanRules(var18.children)
+			if MergeTextNodesResult2.text and #MergeTextNodesResult2.text > 0 then
+				InsertFunction(t1, MergeTextNodesResult2)
+			end
+			Total += MergeTextNodesResult
+		elseif Child.name == "LIST_ITEM" then
+			local List, List2 = t.buildList(Children, Total, p1)
+			InsertFunction(t1, List2)
+			assert(List > 0, "Did not find a list node when expected")
+			Total += List
+		elseif Child.name == "TABLE_ROW" then
+			local Table1, Table2 = t.buildTable(Children, Total, p1)
+			InsertFunction(t1, Table2)
+			assert(Table1 > 0, "Did not find a table row node when expected")
+			Total += Table1
+		elseif Child.name == "QUOTE" then
+			local Quote, Quote2 = t.buildQuote(Children, Total, p1)
+			InsertFunction(t1, Quote2)
+			assert(Quote > 0, "Did not find a quote node when expected")
+			Total += Quote
+		elseif Child.name == "LINE_BREAK" then
+			Total += 1
+		else
+			Child.children = t.postProcessTree(Child, p1)
+			InsertFunction(t1, Child)
+			Total += 1
+		end
+	end
+	if IsNodeBlockModule(Node) then
+		t1 = trimLeadingWhitespace(t1, false)
+		local Entry = t1[1]
+		
+		if Entry and Entry.text then
+			Entry.text = Entry.text:gsub("^%s+", "")
+		end
+		local Entry1 = t1[#t1]
+		
+		if Entry1 and Entry1.text then
+			Entry1.text = Entry1.text:gsub("%s+$", "")
+		end
+	end
+	return t1
+end
+
+function t.buildParagraph(Children, Total: number, p2, p3) --[[ Line: 115 ]]
+	-- upvalues: INLINETEXT (copy), PLAINTEXT (copy), t (copy), InsertFunction (copy), trimLeadingWhitespace (copy), GetNodeTypeModule (copy)
+	local Children1 = {}
+	local Count = 0
+	local Count1: number = Total
+	while Count1 <= #Children do
+		local Child = Children[Count1]
+		local InlineTag = Child.name == "TAG" and (Child.text and p2.inlineTags[Child.text])
+		local INLINETEXTEntry = INLINETEXT[Child.name] or InlineTag
+		
+		if PLAINTEXT[Child.name] then
+			local MergeTextNodesResult, MergeTextNodesResult2 = t.mergeTextNodes(Children, Count1, p3, p2)
+			
+			if MergeTextNodesResult2.text and #MergeTextNodesResult2.text > 0 then
+				InsertFunction(Children1, MergeTextNodesResult2)
+			end
+			assert(MergeTextNodesResult > 0, "Did not find a rich text node when expected")
+			Count += MergeTextNodesResult
+			Count1 += MergeTextNodesResult
+		elseif Child.name == "STYLED_TEXT" then
+			local _, Paragraph2 = t.buildParagraph(Child.children, 1, p2, true)
+			
+			if Child.attributes and Child.attributes.style == "INLINE_CODE" then
+				Child.children = t.applyCodeSpanRules(Paragraph2.children)
 			else
-				var13.children = var18.children
+				Child.children = trimLeadingWhitespace(Paragraph2.children, false)
 			end
-			insert(t_1, var13)
-			var14 += 1
-			var15 += 1
-		elseif not name then
-			break
+			InsertFunction(Children1, Child)
+			Count += 1
+			Count1 += 1
+		else
+			if not INLINETEXTEntry then break end
+			InsertFunction(Children1, Child)
+			Count += 1
+			Count1 += 1
 		end
-		insert(t_1, var13)
-		var14 += 1
-		var15 += 1
 	end
-	return var14, {
+	if not p3 then
+		local Child = Children[Total - 1]
+		Children1 = trimLeadingWhitespace(Children1, not (Child and Child.name == "TAG"))
+	end
+	return Count, {
 		name = "PARAGRAPH",
-		children = t_1,
-		offset = p3[p4].offset,
-		type = getNodeTypeModule("PARAGRAPH", p5)
+		children = Children1,
+		offset = Children[Total].offset,
+		type = GetNodeTypeModule("PARAGRAPH", p2)
 	}
 end
 
-function t.outputRichText(p7, p8)
-	-- upvalues: STYLED_TEXT (ref), t (ref)
-	local var19 = if p7.attributes then STYLED_TEXT[p7.attributes.style] else nil
+function t.outputRichText(p4, p5) --[[ Line: 174 ]]
+	-- upvalues: STYLEDTEXT (copy), t (copy)
+	local STYLEDTEXTEntry = if p4.attributes then STYLEDTEXT[p4.attributes.style] else nil
 	
-	if var19 then
-		local var20, var21 = t.mergeTextNodes(p7.children, 1, nil, p8)
-		assert(var20 == #p7.children, `Found non-inline content inside inline element at {p7.offset}`)
+	if STYLEDTEXTEntry then
+		local MergeTextNodesResult, MergeTextNodesResult2 = t.mergeTextNodes(p4.children, 1, nil, p5)
+		assert(MergeTextNodesResult == #p4.children, `Found non-inline content inside inline element at {p4.offset}`)
 		
-		return `<{var19}>{var21.text}</{var19}>`
-	elseif p7.text then
-		return p7.text
+		return `<{STYLEDTEXTEntry}>{MergeTextNodesResult2.text}</{STYLEDTEXTEntry}>`
+	elseif p4.text then
+		return p4.text
+	else
+		assert(false, `No text for node at {p4.offset}`)
 	end
-	assert(false, `No text for node at {p7.offset}`)
 end
 
-function t.buildList(p9, p10, p11)
-	-- upvalues: t (ref), insert (ref), getNodeTypeModule (ref)
-	local var22 = 0
-	local depth = p9[p10].attributes.depth
-	local t_1 = {}
-	local var23 = p10
-	while var23 <= #p9 do
-		local var24 = p9[var23]
+function t.buildList(Children, Count, p6) --[[ Line: 188 ]]
+	-- upvalues: t (copy), InsertFunction (copy), GetNodeTypeModule (copy)
+	local Count1 = 0
+	local Depth = Children[Count].attributes.depth
+	local Children1 = {}
+	local Count2: number = Count
+	while Count2 <= #Children do
+		local Child = Children[Count2]
 		
-		if var24.name ~= "LIST_ITEM" then break end
-		if var24.attributes.depth == depth then
-			var24.children = t.postProcessTree(var24, p11)
-			insert(t_1, var24)
-			var22 += 1
-			var23 += 1
-			continue
-		elseif depth >= var24.attributes.depth then
-			break
+		if Child.name ~= "LIST_ITEM" then break end
+		if Child.attributes.depth == Depth then
+			Child.children = t.postProcessTree(Child, p6)
+			InsertFunction(Children1, Child)
+			Count1 += 1
+			Count2 += 1
+		else
+			if Depth >= Child.attributes.depth then break end
+			local List, List2 = t.buildList(Children, Count2, p6)
+			InsertFunction(Children1, List2)
+			assert(List > 0, "Did not find a list node when expected")
+			Count2 += List
+			Count1 += List
 		end
-		local var25, var26 = t.buildList(p9, var23, p11)
-		insert(t_1, var26)
-		assert(var25 > 0, "Did not find a list node when expected")
-		var23 += var25
-		var22 += var25
 	end
-	return var22, {
+	return Count1, {
 		name = "LIST",
-		attributes = { depth = depth },
-		children = t_1,
-		offset = p9[p10].offset,
-		type = getNodeTypeModule("LIST", p11)
+		attributes = { depth = Depth },
+		children = Children1,
+		offset = Children[Count].offset,
+		type = GetNodeTypeModule("LIST", p6)
 	}
 end
 
-function t.buildTable(p12, p13, p14)
-	-- upvalues: t (ref), insert (ref), getNodeTypeModule (ref)
-	local var27 = 0
-	local TABLE_HEADER = {}
-	
-	for i = p13, #p12 do
-		local var28 = p12[i]
-		
-		if var28.name ~= "TABLE_ROW" then break end
-		local var29 = t.buildTableCells(var28, p14)
-		
-		if var29 then
-			var28.children = var29
-			insert(TABLE_HEADER, var28)
-		elseif #TABLE_HEADER > 0 then
-			TABLE_HEADER[#TABLE_HEADER].name = "TABLE_HEADER"
+local function isEmptyQuoteLine(Children): boolean --[[ Line: 228 ]]
+	for _, child in Children do
+		if child.name ~= "TEXT" or child.text and #child.text > 0 then
+			return false
 		end
-		var27 += 1
 	end
-	return var27, {
+	return true
+end
+
+function t.buildQuote(Children, Total, p7) --[[ Line: 240 ]]
+	-- upvalues: t (copy), InsertFunction (copy), isEmptyQuoteLine (copy), GetNodeTypeModule (copy)
+	local Count = 0
+	local t2 = {}
+	local Count1: number = Total
+	while Count1 <= #Children and Children[Count1].name == "QUOTE" do
+		local Child = Children[Count1]
+		InsertFunction(t2, { node = Child, children = t.postProcessTree(Child, p7) })
+		Count += 1
+		Count1 += 1
+	end
+	local Count2 = 1
+	local CountT1 = #t2
+	while Count2 <= CountT1 and isEmptyQuoteLine(t2[Count2].children) do
+		Count2 += 1
+	end
+	while Count2 <= CountT1 and isEmptyQuoteLine(t2[CountT1].children) do
+		CountT1 -= 1
+	end
+	local Children1 = {}
+	
+	for i = Count2, CountT1 do
+		local Entry = t2[i]
+		
+		if Count2 < i then
+			InsertFunction(Children1, {
+				name = "BREAK",
+				children = {},
+				offset = Entry.node.offset,
+				type = GetNodeTypeModule("BREAK", p7)
+			})
+		end
+		for _, child in Entry.children do
+			if child.name ~= "TEXT" or child.text ~= "" then
+				InsertFunction(Children1, child)
+			end
+		end
+	end
+	local Child = Children[Total]
+	Child.children = Children1
+	
+	return Count, Child
+end
+
+function t.buildTable(Children, Total, p8) --[[ Line: 285 ]]
+	-- upvalues: t (copy), InsertFunction (copy), GetNodeTypeModule (copy)
+	local Count = 0
+	local Children1 = {}
+	
+	for i = Total, #Children do
+		local Child = Children[i]
+		
+		if Child.name ~= "TABLE_ROW" then break end
+		local TableCells = t.buildTableCells(Child, p8)
+		
+		if TableCells then
+			Child.children = TableCells
+			InsertFunction(Children1, Child)
+		elseif #Children1 > 0 then
+			Children1[#Children1].name = "TABLE_HEADER"
+		end
+		Count += 1
+	end
+	return Count, {
 		name = "TABLE",
-		children = TABLE_HEADER,
-		offset = p12[p13].offset,
-		type = getNodeTypeModule("TABLE", p14)
+		children = Children1,
+		offset = Children[Total].offset,
+		type = GetNodeTypeModule("TABLE", p8)
 	}
 end
 
-function t.buildTableCells(p15, p16)
-	-- upvalues: getNodeTypeModule (ref), t (ref), insert (ref)
-	local t_1 = {}
-	local t_2 = {}
-	local var30 = true
-	local var31 = p15.children[1]
+function t.buildTableCells(p9, p10) --[[ Line: 315 ]]
+	-- upvalues: GetNodeTypeModule (copy), t (copy), InsertFunction (copy)
+	local t3 = {}
+	local Children = {}
+	local v1 = true
+	local Child = p9.children[1]
 	
-	for i = 1, #p15.children do
-		local var32 = p15.children[i]
+	for i = 1, #p9.children do
+		local Child1 = p9.children[i]
 		
-		if var32.name == "TABLE_DIVIDER" then
-			local t_3 = {
+		if Child1.name == "TABLE_DIVIDER" then
+			local config = {
 				name = "TABLE_CELL",
-				children = t_2,
-				offset = if t_2[1] then t_2[1].offset else p15.offset,
-				type = getNodeTypeModule("TABLE_CELL", p16)
+				children = Children,
+				offset = if Children[1] then Children[1].offset else p9.offset,
+				type = GetNodeTypeModule("TABLE_CELL", p10)
 			}
-			t_3.children = t.postProcessTree(t_3, p16)
-			insert(t_1, t_3)
-			var30 = if var30 then var31.text and var31.text:match("^[ \t-=]+$") ~= nil else false
-			t_2 = {}
+			config.children = t.postProcessTree(config, p10)
+			InsertFunction(t3, config)
+			local v2: boolean = Child.text and Child.text:match("^[ \t-=]+$") ~= nil
+			v1 = v1 and v2 or false
+			Children = {}
 		else
-			insert(t_2, var32)
+			InsertFunction(Children, Child1)
 		end
 	end
-	return if var30 then nil else t_1
+	return if v1 then nil else t3
 end
 
-function t.mergeTextNodes(p17, p18, p19, p20)
-	-- upvalues: PLAIN_TEXT (ref), getNodeTypeModule (ref)
-	local var33 = ""
-	local var34 = 0
+function t.mergeTextNodes(Children, Count, p11, p12) --[[ Line: 348 ]]
+	-- upvalues: PLAINTEXT (copy), GetNodeTypeModule (copy)
+	local Text = ""
+	local Count1 = 0
 	
-	for i = p18, #p17 do
-		local var35 = p17[i]
+	for i = Count, #Children do
+		local Child = Children[i]
 		
-		if not PLAIN_TEXT[var35.name] then break end
-		var33 ..= var35.text
-		var34 += 1
+		if not PLAINTEXT[Child.name] then break end
+		Text ..= Child.text
+		Count1 += 1
 	end
-	if not p19 then
-		var33 = var33:gsub("^\n*(.-)\n*$", "%1")
+	if not p11 then
+		Text = Text:gsub("^\n*(.-)\n*$", "%1")
 	end
-	return var34, {
+	return Count1, {
 		name = "TEXT",
-		text = var33,
+		text = Text,
 		children = {},
-		offset = p17[p18].offset,
-		type = getNodeTypeModule("TEXT", p20)
+		offset = Children[Count].offset,
+		type = GetNodeTypeModule("TEXT", p12)
 	}
 end
 
-function t.applyCodeSpanRules(p21)
-	local var36 = nil
-	local var37 = nil
-	local var38 = false
+function t.applyCodeSpanRules(Children) --[[ Line: 379 ]]
+	local v3 = nil
+	local v4 = nil
+	local Flag = false
 	
-	for i, v in p21 do
-		if v.text and #v.text > 0 then
-			if var36 == nil then
-				var36 = v
+	for _, child in Children do
+		if child.text and #child.text > 0 then
+			if v3 == nil then
+				v3 = child
 			end
-			var37 = v
+			v4 = child
 			
-			if v.text:find("[^\n ]") then
-				var38 = true
+			if child.text:find("[^\n ]") then
+				Flag = true
 			end
 		end
 	end
-	if var36 == nil or var37 == nil then
-		return p21
+	if v3 == nil or v4 == nil then
+		return Children
 	end
-	local var39 = (var36.text or ""):gsub("\n", " ")
-	local var40 = (var37.text or ""):gsub("\n", " ")
+	local Text = (v3.text or ""):gsub("\n", " ")
+	local Text1 = (v4.text or ""):gsub("\n", " ")
 	
-	if var39:sub(1, 1) == " " and var40:sub(-1, -1) == " " and var38 then
-		if var36 == var37 then
-			var39 = var39:sub(2, -2)
-			var40 = var39
+	if Text:sub(1, 1) == " " and Text1:sub(-1, -1) == " " and Flag then
+		if v3 == v4 then
+			Text = Text:sub(2, -2)
+			Text1 = Text
 		else
-			var39 = var39:sub(2)
-			var40 = var40:sub(1, -2)
+			Text = Text:sub(2)
+			Text1 = Text1:sub(1, -2)
 		end
 	end
-	var36.text = var39
-	var37.text = var40
+	v3.text = Text
+	v4.text = Text1
 	
-	return p21
+	return Children
 end
 
 return t.postProcessTree

@@ -1,13 +1,13 @@
-﻿local roduxModule = require(script:FindFirstAncestor("RoduxFriends").Parent.Rodux)
-local byUserIdModule = require(script.byUserId)
-local bySourceModule = require(script.bySource)
-local hasIncomingFriendRequestModule = require(script.hasIncomingFriendRequest)
+﻿local RoduxModule = require(script:FindFirstAncestor("RoduxFriends").Parent.Rodux)
+local ByUserIdModule = require(script.byUserId)
+local BySourceModule = require(script.bySource)
+local HasIncomingFriendRequestModule = require(script.hasIncomingFriendRequest)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), byUserIdModule (ref), bySourceModule (ref), hasIncomingFriendRequestModule (ref)
-	return roduxModule.combineReducers({
-		byUserId = byUserIdModule(p1),
-		bySource = bySourceModule(p1),
-		hasIncomingFriendRequest = hasIncomingFriendRequestModule(p1)
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: RoduxModule (copy), ByUserIdModule (copy), BySourceModule (copy), HasIncomingFriendRequestModule (copy)
+	return RoduxModule.combineReducers({
+		byUserId = ByUserIdModule(p1),
+		bySource = BySourceModule(p1),
+		hasIncomingFriendRequest = HasIncomingFriendRequestModule(p1)
 	})
 end

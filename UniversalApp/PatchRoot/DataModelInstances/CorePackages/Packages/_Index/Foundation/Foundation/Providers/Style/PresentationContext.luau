@@ -1,14 +1,14 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local var1 = reactModule.createContext({
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local Context = ReactModule.createContext({
 	isIconSize = false,
-	colorNamespace = require(foundation.Enums.ColorNamespace).Color
+	colorNamespace = require(Foundation.Enums.ColorNamespace).Color
 })
 
 return {
-	Provider = var1.Provider,
-	usePresentationContext = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		return reactModule.useContext(var1)
+	Provider = Context.Provider,
+	usePresentationContext = function() --[[ Line: 19 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.useContext(Context)
 	end
 }

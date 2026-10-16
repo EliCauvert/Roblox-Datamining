@@ -1,5 +1,5 @@
-﻿local var1 = require(script.Parent.Parent.Parent.Parent.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting")
-local t = {
+﻿local EnablePreferredTextSizeSetting = require(script.Parent.Parent.Parent.Parent.UIBlox.Core.Utility.GetEngineFeatureSafe)("EnablePreferredTextSizeSetting")
+local ConstantsModule = {
 	ThemeName = { Dark = "Dark", Light = "Light" },
 	FontName = { Gotham = "Gotham", Classic = "Classic" },
 	ComicNeueFontFamily = "rbxassetid://127896232205472",
@@ -13,14 +13,14 @@ local t = {
 	},
 	Layout = { ActionBar = { PositionOffset = 24 } }
 }
-t.DefaultThemeName = t.ThemeName.Light
-t.DefaultFontName = t.FontName.Gotham
-t.DefaultDeviceType = t.DeviceType.Desktop
-t.DefaultSettings = {
+ConstantsModule.DefaultThemeName = ConstantsModule.ThemeName.Light
+ConstantsModule.DefaultFontName = ConstantsModule.FontName.Gotham
+ConstantsModule.DefaultDeviceType = ConstantsModule.DeviceType.Desktop
+ConstantsModule.DefaultSettings = {
 	preferredTransparency = 1,
 	reducedMotion = false,
 	scale = 1,
-	preferredTextSize = if var1 then Enum.PreferredTextSize.Medium else nil
+	preferredTextSize = if EnablePreferredTextSizeSetting then Enum.PreferredTextSize.Medium else nil
 }
 
-return t
+return ConstantsModule

@@ -1,28 +1,28 @@
-﻿local defaultTokenColorsModule = require(script.defaultTokenColors)
+﻿local DefaultTokenColorsModule = require(script.defaultTokenColors)
 local _ = require(script:FindFirstAncestor("Utils").Parent.Types)
-local t = {
+local ThemeModule = {
 	tokenColors = {},
-	defaultColors = defaultTokenColorsModule
+	defaultColors = DefaultTokenColorsModule
 }
 
-function t.setColors(value)
-	-- upvalues: t (ref)
-	assert(type(value) == "table", "Theme.updateColors expects a table")
+function ThemeModule.setColors(DefaultTokenColorsModule) --[[ Line: 11 ]]
+	-- upvalues: ThemeModule (copy)
+	assert(type(DefaultTokenColorsModule) == "table", "Theme.updateColors expects a table")
 	
-	for i, v in value do
-		t.tokenColors[i] = v
+	for i, value in DefaultTokenColorsModule do
+		ThemeModule.tokenColors[i] = value
 	end
 end
 
-function t.getColoredRichText(p1, p2)
-	return "<font color=\"#" .. p0:ToHex() .. "\">" .. p1 .. "</font>"
+function ThemeModule.getColoredRichText(p1, Text): string --[[ Line: 19 ]]
+	return "<font color=\"#" .. p1:ToHex() .. "\">" .. Text .. "</font>"
 end
 
-function t.getColor(p1)
-	-- upvalues: t (ref)
-	return t.tokenColors[p1]
+function ThemeModule.getColor(p1) --[[ Line: 23 ]]
+	-- upvalues: ThemeModule (copy)
+	return ThemeModule.tokenColors[p1]
 end
 
-t.setColors(defaultTokenColorsModule)
+ThemeModule.setColors(DefaultTokenColorsModule)
 
-return t
+return ThemeModule

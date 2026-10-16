@@ -1,27 +1,27 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState({ status = "loading" })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2({ status = "loading" })
-		local thread = task.spawn(function()
-			-- upvalues: var2 (copy), p1 (copy)
-			xpcall(function()
-				-- upvalues: var2 (copy), p1 (copy)
-				var2({ status = "ok", value = p1() })
-			end, function(p3)
-				-- upvalues: var2 (copy)
-				var2({ status = "error", problem = p3 })
+return function(Callback, p1) --[[ Line: 17 | Named "useAsync" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({ status = "loading" })
+	ReactModule.useEffect(function() --[[ Line: 22 ]]
+		-- upvalues: UseStateResult2 (copy), Callback (copy)
+		UseStateResult2({ status = "loading" })
+		local SpawnedThread = task.spawn(function() --[[ Line: 27 ]]
+			-- upvalues: UseStateResult2 (upval), Callback (upval)
+			xpcall(function() --[[ Line: 28 ]]
+				-- upvalues: UseStateResult2 (upval), Callback (upval)
+				UseStateResult2({ status = "ok", value = Callback() })
+			end, function(Err) --[[ Line: 33 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2({ status = "error", problem = Err })
 			end)
 		end)
 		
-		return function()
-			-- upvalues: thread (ref)
-			task.cancel(thread)
+		return function() --[[ Line: 41 ]]
+			-- upvalues: SpawnedThread (copy)
+			task.cancel(SpawnedThread)
 		end
-	end, p2)
+	end, p1)
 	
-	return var1
+	return UseStateResult
 end

@@ -1,268 +1,279 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local error = luauPolyfillModule.Error
-local object = luauPolyfillModule.Object
-local console = luauPolyfillModule.console
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local graphQLDirective = graphQLModule.GraphQLDirective
-local graphQLEnumType = graphQLModule.GraphQLEnumType
-local graphQLInputObjectType = graphQLModule.GraphQLInputObjectType
-local graphQLInterfaceType = graphQLModule.GraphQLInterfaceType
-local graphQLList = graphQLModule.GraphQLList
-local graphQLObjectType = graphQLModule.GraphQLObjectType
-local graphQLNonNull = graphQLModule.GraphQLNonNull
-local graphQLScalarType = graphQLModule.GraphQLScalarType
-local graphQLUnionType = graphQLModule.GraphQLUnionType
-local isInterfaceType = graphQLModule.isInterfaceType
-local isEnumType = graphQLModule.isEnumType
-local isInputObjectType = graphQLModule.isInputObjectType
-local isListType = graphQLModule.isListType
-local isNamedType = graphQLModule.isNamedType
-local isNonNullType = graphQLModule.isNonNullType
-local isObjectType = graphQLModule.isObjectType
-local isScalarType = graphQLModule.isScalarType
-local isUnionType = graphQLModule.isUnionType
-local isSpecifiedScalarType = graphQLModule.isSpecifiedScalarType
-local isSpecifiedDirective = graphQLModule.isSpecifiedDirective
-local stubModule = require(script.Parent.stub)
-local getBuiltInForStub = stubModule.getBuiltInForStub
-local isNamedStub = stubModule.isNamedStub
-local map = luauPolyfillModule.Map
-local string = luauPolyfillModule.String
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Error1 = LuauPolyfillModule.Error
+local Object = LuauPolyfillModule.Object
+local Console = LuauPolyfillModule.console
+local GraphQLModule = require(Parent.GraphQL)
+local GraphQLDirective = GraphQLModule.GraphQLDirective
+local GraphQLEnumType = GraphQLModule.GraphQLEnumType
+local GraphQLInputObjectType = GraphQLModule.GraphQLInputObjectType
+local GraphQLInterfaceType = GraphQLModule.GraphQLInterfaceType
+local GraphQLList = GraphQLModule.GraphQLList
+local GraphQLObjectType = GraphQLModule.GraphQLObjectType
+local GraphQLNonNull = GraphQLModule.GraphQLNonNull
+local GraphQLScalarType = GraphQLModule.GraphQLScalarType
+local GraphQLUnionType = GraphQLModule.GraphQLUnionType
+local IsInterfaceTypeFunction = GraphQLModule.isInterfaceType
+local IsEnumTypeFunction = GraphQLModule.isEnumType
+local IsInputObjectTypeFunction = GraphQLModule.isInputObjectType
+local IsListTypeFunction = GraphQLModule.isListType
+local IsNamedTypeFunction = GraphQLModule.isNamedType
+local IsNonNullTypeFunction = GraphQLModule.isNonNullType
+local IsObjectTypeFunction = GraphQLModule.isObjectType
+local IsScalarTypeFunction = GraphQLModule.isScalarType
+local IsUnionTypeFunction = GraphQLModule.isUnionType
+local IsSpecifiedScalarTypeFunction = GraphQLModule.isSpecifiedScalarType
+local IsSpecifiedDirectiveFunction = GraphQLModule.isSpecifiedDirective
+local StubModule = require(script.Parent.stub)
+local GetBuiltInForStubFunction = StubModule.getBuiltInForStub
+local IsNamedStubFunction = StubModule.isNamedStub
+local Map = LuauPolyfillModule.Map
+local String = LuauPolyfillModule.String
 
-function t.rewireTypes(p1, p2)
-	-- upvalues: isSpecifiedDirective (ref), graphQLDirective (ref), map (ref), isObjectType (ref), object (ref), graphQLObjectType (ref), isInterfaceType (ref), array (ref), graphQLInterfaceType (ref), isUnionType (ref), graphQLUnionType (ref), isInputObjectType (ref), graphQLInputObjectType (ref), isEnumType (ref), graphQLEnumType (ref), isScalarType (ref), isSpecifiedScalarType (ref), graphQLScalarType (ref), error (ref), isListType (ref), graphQLList (ref), isNonNullType (ref), graphQLNonNull (ref), isNamedType (ref), isNamedStub (ref), getBuiltInForStub (ref), string (ref), console (ref)
-	local var1 = nil
-	local var2 = nil
-	local _ = nil
-	local rewireArgs = nil
-	local _ = nil
-	local rewireFields = nil
-	local rewireInputFields = nil
-	local rewireNamedTypes = nil
-	local rewireType = nil
-	
-	local function rewireDirective(p3)
-		-- upvalues: isSpecifiedDirective (copy), rewireArgs (write), graphQLDirective (copy)
-		if isSpecifiedDirective(p3) then
-			return p3
-		end
-		local var3 = p3:toConfig()
-		var3.args = rewireArgs(var3.args)
+return {
+	rewireTypes = function(List, p1) --[[ Line: 92 ]]
+		-- upvalues: IsSpecifiedDirectiveFunction (copy), GraphQLDirective (copy), Map (copy), IsObjectTypeFunction (copy), Object (copy), GraphQLObjectType (copy), IsInterfaceTypeFunction (copy), Array (copy), GraphQLInterfaceType (copy), IsUnionTypeFunction (copy), GraphQLUnionType (copy), IsInputObjectTypeFunction (copy), GraphQLInputObjectType (copy), IsEnumTypeFunction (copy), GraphQLEnumType (copy), IsScalarTypeFunction (copy), IsSpecifiedScalarTypeFunction (copy), GraphQLScalarType (copy), Error1 (copy), IsListTypeFunction (copy), GraphQLList (copy), IsNonNullTypeFunction (copy), GraphQLNonNull (copy), IsNamedTypeFunction (copy), IsNamedStubFunction (copy), GetBuiltInForStubFunction (copy), String (copy), Console (copy)
+		local NewResult = nil
+		local NewResult1 = nil
+		local rewireDirective = nil
+		local Callback = nil
+		local rewireNamedType = nil
+		local Callback2 = nil
+		local Callback4 = nil
+		local Callback3 = nil
+		local Callback1 = nil
 		
-		return graphQLDirective.new(var3)
-	end
-	
-	rewireArgs = function(p3)
-		-- upvalues: map (copy), rewireType (write)
-		local var3 = map.new()
-		
-		for i, v in p3 do
-			local var4 = v[1]
-			local var5 = p3:get(var4)
-			local var6 = rewireType(var5.type)
-			
-			if var6 ~= nil then
-				var5.type = var6
-				var3:set(var4, var5)
+		rewireDirective = function(p2) --[[ Line: 114 | Named "rewireDirective" ]]
+			-- upvalues: IsSpecifiedDirectiveFunction (upval), Callback (ref), GraphQLDirective (upval)
+			if IsSpecifiedDirectiveFunction(p2) then
+				return p2
+			else
+				local Config = p2:toConfig()
+				Config.args = Callback(Config.args)
+				
+				return GraphQLDirective.new(Config)
 			end
 		end
-		return var3
-	end
-	
-	local function rewireNamedType(p4)
-		-- upvalues: isObjectType (copy), object (copy), rewireFields (write), rewireNamedTypes (write), graphQLObjectType (copy), isInterfaceType (copy), array (copy), graphQLInterfaceType (copy), isUnionType (copy), graphQLUnionType (copy), isInputObjectType (copy), rewireInputFields (write), graphQLInputObjectType (copy), isEnumType (copy), graphQLEnumType (copy), isScalarType (copy), isSpecifiedScalarType (copy), graphQLScalarType (copy), error (copy)
-		if isObjectType(p4) then
-			local var7 = p4:toConfig()
+		
+		Callback = function(Args) --[[ Line: 123 | Named "rewireArgs" ]]
+			-- upvalues: Map (upval), Callback1 (ref)
+			local NewMap = Map.new()
 			
-			return graphQLObjectType.new(object.assign({}, var7, {
-				fields = function()
-					-- upvalues: rewireFields (copy), var7 (ref)
-					return rewireFields(var7.fields)
-				end,
-				interfaces = function()
-					-- upvalues: rewireNamedTypes (copy), var7 (ref)
-					return rewireNamedTypes(var7.interfaces)
-				end
-			}))
-		elseif isInterfaceType(p4) then
-			local var8 = p4:toConfig()
-			local var9 = object.assign({}, var8, {
-				fields = function()
-					-- upvalues: rewireFields (copy), var8 (ref)
-					return rewireFields(var8.fields)
-				end
-			})
-			
-			if array.indexOf(object.keys(var9), "interfaces") ~= -1 then
-				function var24.interfaces(_)
-					-- upvalues: rewireNamedTypes (copy), var8 (ref)
-					return rewireNamedTypes(var8.interfaces)
+			for _, arg in Args do
+				local v1 = arg[1]
+				local GetResult = Args:get(v1)
+				local CallbackResult = Callback1(GetResult.type)
+				
+				if CallbackResult ~= nil then
+					GetResult.type = CallbackResult
+					NewMap:set(v1, GetResult)
 				end
 			end
-			return graphQLInterfaceType.new(var9)
-		elseif isUnionType(p4) then
-			local var10 = p4:toConfig()
-			
-			return graphQLUnionType.new(object.assign({}, var10, {
-				types = function()
-					-- upvalues: rewireNamedTypes (copy), var10 (ref)
-					return rewireNamedTypes(var10.types)
+			return NewMap
+		end
+		
+		rewireNamedType = function(GetResult) --[[ Line: 138 | Named "rewireNamedType" ]]
+			-- upvalues: IsObjectTypeFunction (upval), Object (upval), Callback2 (ref), Callback3 (ref), GraphQLObjectType (upval), IsInterfaceTypeFunction (upval), Array (upval), GraphQLInterfaceType (upval), IsUnionTypeFunction (upval), GraphQLUnionType (upval), IsInputObjectTypeFunction (upval), Callback4 (ref), GraphQLInputObjectType (upval), IsEnumTypeFunction (upval), GraphQLEnumType (upval), IsScalarTypeFunction (upval), IsSpecifiedScalarTypeFunction (upval), GraphQLScalarType (upval), Error1 (upval)
+			if IsObjectTypeFunction(GetResult) then
+				local Config = GetResult:toConfig()
+				
+				return GraphQLObjectType.new((Object.assign({}, Config, {
+					fields = function() --[[ Line: 143 ]]
+						-- upvalues: Callback2 (upval), Config (copy)
+						return Callback2(Config.fields)
+					end,
+					interfaces = function() --[[ Line: 146 ]]
+						-- upvalues: Callback3 (upval), Config (copy)
+						return Callback3(Config.interfaces)
+					end
+				})))
+			end
+			if IsInterfaceTypeFunction(GetResult) then
+				local Config1 = GetResult:toConfig()
+				local AssignResult = Object.assign({}, Config1, {
+					fields = function() --[[ Line: 154 ]]
+						-- upvalues: Callback2 (upval), Config1 (copy)
+						return Callback2(Config1.fields)
+					end
+				})
+				
+				if Array.indexOf(Object.keys(AssignResult), "interfaces") ~= -1 then
+					function AssignResult:interfaces() --[[ Line: 159 ]]
+						-- upvalues: Callback3 (upval), Config1 (copy)
+						return Callback3(Config1.interfaces)
+					end
 				end
-			}))
-		elseif isInputObjectType(p4) then
-			local var11 = p4:toConfig()
-			
-			return graphQLInputObjectType.new(object.assign({}, var11, {
-				fields = function()
-					-- upvalues: rewireInputFields (copy), var11 (ref)
-					return rewireInputFields(var11.fields)
+				return GraphQLInterfaceType.new(AssignResult)
+			else
+				if IsUnionTypeFunction(GetResult) then
+					local Config2 = GetResult:toConfig()
+					
+					return GraphQLUnionType.new((Object.assign({}, Config2, {
+						types = function() --[[ Line: 169 ]]
+							-- upvalues: Callback3 (upval), Config2 (copy)
+							return Callback3(Config2.types)
+						end
+					})))
 				end
-			}))
-		elseif isEnumType(p4) then
-			return graphQLEnumType.new(p4:toConfig())
-		elseif not isScalarType(p4) then
-			error(error.new(("Unexpected schema type: %s"):format(tostring(p4))))
-			
-			return
-		elseif isSpecifiedScalarType(p4) then
-			return p4
-		end
-		local var12 = p4:toConfig()
-		local serialize = var12.serialize
-		local parseValue = var12.parseValue
-		local parseLiteral = var12.parseLiteral
-		
-		if serialize then
-			function var27.serialize(...)
-				-- upvalues: serialize (ref), var12 (ref)
-				return serialize(var12, ...)
+				if IsInputObjectTypeFunction(GetResult) then
+					local Config3 = GetResult:toConfig()
+					
+					return GraphQLInputObjectType.new((Object.assign({}, Config3, {
+						fields = function() --[[ Line: 177 ]]
+							-- upvalues: Callback4 (upval), Config3 (copy)
+							return Callback4(Config3.fields)
+						end
+					})))
+				end
+				if IsEnumTypeFunction(GetResult) then
+					return GraphQLEnumType.new((GetResult:toConfig()))
+				end
+				if not IsScalarTypeFunction(GetResult) then
+					error(Error1.new(("Unexpected schema type: %s"):format((tostring(GetResult)))))
+					
+					return
+				end
+				if IsSpecifiedScalarTypeFunction(GetResult) then
+					return GetResult
+				end
+				local Config4 = GetResult:toConfig()
+				local SerializeFunction = Config4.serialize
+				local ParseValueFunction = Config4.parseValue
+				local ParseLiteralFunction = Config4.parseLiteral
+				
+				if SerializeFunction then
+					function Config4.serialize(...) --[[ Line: 196 ]]
+						-- upvalues: SerializeFunction (copy), Config4 (copy)
+						return SerializeFunction(Config4, ...)
+					end
+				end
+				if ParseValueFunction then
+					function Config4.parseValue(...) --[[ Line: 202 ]]
+						-- upvalues: ParseValueFunction (copy), Config4 (copy)
+						return ParseValueFunction(Config4, ...)
+					end
+				end
+				if ParseLiteralFunction then
+					function Config4.parseLiteral(...) --[[ Line: 208 ]]
+						-- upvalues: ParseLiteralFunction (copy), Config4 (copy)
+						return ParseLiteralFunction(Config4, ...)
+					end
+				end
+				return GraphQLScalarType.new(Config4)
 			end
 		end
-		if parseValue then
-			function var27.parseValue(...)
-				-- upvalues: parseValue (ref), var12 (ref)
-				return parseValue(var12, ...)
-			end
-		end
-		if parseLiteral then
-			function var27.parseLiteral(...)
-				-- upvalues: parseLiteral (ref), var12 (ref)
-				return parseLiteral(var12, ...)
-			end
-		end
-		return graphQLScalarType.new(var12)
-	end
-	
-	rewireFields = function(p4)
-		-- upvalues: map (copy), rewireType (write), rewireArgs (write)
-		local var7 = map.new()
 		
-		for i, v in p4 do
-			local var8 = v[1]
-			local var9 = p4:get(var8)
-			local var10 = rewireType(var9.type)
+		Callback2 = function(Fields) --[[ Line: 220 | Named "rewireFields" ]]
+			-- upvalues: Map (upval), Callback1 (ref), Callback (ref)
+			local NewMap = Map.new()
 			
-			if var10 ~= nil and var9.args then
-				var9.type = var10
-				var9.args = rewireArgs(var9.args)
-				var7:set(var8, var9)
+			for _, field in Fields do
+				local v2 = field[1]
+				local GetResult = Fields:get(v2)
+				local CallbackResult = Callback1(GetResult.type)
+				
+				if CallbackResult ~= nil and GetResult.args then
+					GetResult.type = CallbackResult
+					GetResult.args = Callback(GetResult.args)
+					NewMap:set(v2, GetResult)
+				end
 			end
+			return NewMap
 		end
-		return var7
-	end
-	
-	rewireInputFields = function(p5)
-		-- upvalues: map (copy), rewireType (write)
-		local var11 = map.new()
 		
-		for i, v in p5 do
-			local var12 = v[1]
-			local var13 = p5:get(var12)
-			local var14 = rewireType(var13.type)
+		Callback4 = function(Fields) --[[ Line: 235 | Named "rewireInputFields" ]]
+			-- upvalues: Map (upval), Callback1 (ref)
+			local NewMap = Map.new()
 			
-			if var14 ~= nil then
-				var13.type = var14
-				var11:set(var12, var13)
+			for _, field in Fields do
+				local v3 = field[1]
+				local GetResult = Fields:get(v3)
+				local CallbackResult = Callback1(GetResult.type)
+				
+				if CallbackResult ~= nil then
+					GetResult.type = CallbackResult
+					NewMap:set(v3, GetResult)
+				end
 			end
+			return NewMap
 		end
-		return var11
-	end
-	
-	rewireNamedTypes = function(p6)
-		-- upvalues: rewireType (write), object (copy)
-		local t = {}
 		
-		for i, v in p6 do
-			local var15 = rewireType(v)
+		Callback3 = function(Interfaces) --[[ Line: 249 | Named "rewireNamedTypes" ]]
+			-- upvalues: Callback1 (ref), Object (upval)
+			local List = {}
 			
-			if var15 ~= nil and var15 ~= object.None then
-				table.insert(t, var15)
+			for _, interface in Interfaces do
+				local CallbackResult = Callback1(interface)
+				
+				if CallbackResult ~= nil and CallbackResult ~= Object.None then
+					table.insert(List, CallbackResult)
+				end
 			end
+			return List
 		end
-		return t
-	end
-	
-	rewireType = function(p7)
-		-- upvalues: isListType (copy), rewireType (write), object (copy), graphQLList (copy), isNonNullType (copy), graphQLNonNull (copy), isNamedType (copy), var1 (write), isNamedStub (copy), getBuiltInForStub (copy), rewireNamedType (write), var2 (write)
-		if isListType(p7) then
-			local var16 = rewireType(p7.ofType)
-			
-			return if var16 == nil or var16 == object.None then nil else graphQLList.new(var16)
-		elseif isNonNullType(p7) then
-			local var17 = rewireType(p7.ofType)
-			
-			return if var17 == nil or var17 == object.None then nil else graphQLNonNull.new(var17)
-		elseif not isNamedType(p7) then
-			return nil
-		end
-		local name = var1:get(p7.name)
 		
-		if name == nil then
-			name = if isNamedStub(p7) then getBuiltInForStub(p7) else rewireNamedType(p7)
-			var1:set(p7.name, name)
-			var2:set(name.name, var1:get(p7.name))
-		end
-		return if name == nil or name == object.None then nil else var2:get(name.name)
-	end
-	
-	var1 = map.new()
-	
-	for i, v in p1 do
-		local var16 = v[1]
-		var1:set(var16, p1:get(var16))
-	end
-	var2 = map.new()
-	
-	for i, v_1 in var1 do
-		local var17 = v_1[1]
-		local var18 = var1:get(var17)
-		
-		if var18 ~= nil and var18 ~= object.None and not string.startsWith(var17, "__") then
-			local name = var18.name
+		Callback1 = function(Type) --[[ Line: 260 | Named "rewireType" ]]
+			-- upvalues: IsListTypeFunction (upval), Callback1 (ref), Object (upval), GraphQLList (upval), IsNonNullTypeFunction (upval), GraphQLNonNull (upval), IsNamedTypeFunction (upval), NewResult (ref), IsNamedStubFunction (upval), GetBuiltInForStubFunction (upval), rewireNamedType (ref), NewResult1 (ref)
+			if IsListTypeFunction(Type) then
+				local CallbackResult = Callback1(Type.ofType)
+				
+				return if CallbackResult == nil or CallbackResult == Object.None then nil else GraphQLList.new(CallbackResult)
+			end
+			if IsNonNullTypeFunction(Type) then
+				local CallbackResult = Callback1(Type.ofType)
+				
+				return if CallbackResult == nil or CallbackResult == Object.None then nil else GraphQLNonNull.new(CallbackResult)
+			end
+			if not IsNamedTypeFunction(Type) then
+				return nil
+			end
+			local GetResult = NewResult:get(Type.name)
 			
-			if not string.startsWith(name, "__") then
-				if var2:get(name) == nil then
-					var2:set(name, var18)
+			if GetResult == nil then
+				GetResult = if IsNamedStubFunction(Type) then GetBuiltInForStubFunction(Type) else rewireNamedType(Type)
+				NewResult:set(Type.name, GetResult)
+				NewResult1:set(GetResult.name, (NewResult:get(Type.name)))
+			end
+			return if GetResult == nil or GetResult == Object.None then nil else NewResult1:get(GetResult.name)
+		end
+		
+		NewResult = Map.new()
+		
+		for _, value in List do
+			local v4 = value[1]
+			NewResult:set(v4, (List:get(v4)))
+		end
+		NewResult1 = Map.new()
+		
+		for _, value1 in NewResult do
+			local v5 = value1[1]
+			local GetResult = NewResult:get(v5)
+			local NoGetResult = GetResult == nil or GetResult == Object.None or String.startsWith(v5, "__")
+			local Name = nil
+			
+			if not NoGetResult then
+				Name = GetResult.name
+				NoGetResult = String.startsWith(Name, "__")
+			end
+			if not NoGetResult then
+				if NewResult1:get(Name) == nil then
+					NewResult1:set(Name, GetResult)
 				else
-					console.warn(("Duplicate schema type name %s found; keeping the existing one found in the schema"):format(tostring(name)))
+					Console.warn(("Duplicate schema type name %s found; keeping the existing one found in the schema"):format((tostring(Name))))
 				end
 			end
 		end
+		for _, value2 in NewResult1 do
+			local v6 = value2[1]
+			NewResult1:set(v6, rewireNamedType(NewResult1:get(v6)))
+		end
+		return {
+			typeMap = NewResult1,
+			directives = Array.map(p1, function(p2) --[[ Line: 360 ]]
+				-- upvalues: rewireDirective (ref)
+				return rewireDirective(p2)
+			end)
+		}
 	end
-	for i, v_2 in var2 do
-		local var19 = v_2[1]
-		var2:set(var19, rewireNamedType(var2:get(var19)))
-	end
-	return {
-		typeMap = var2,
-		directives = array.map(p2, function(p7)
-			-- upvalues: rewireDirective (write)
-			return rewireDirective(p7)
-		end)
-	}
-end
-
-return t
+}

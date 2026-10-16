@@ -1,128 +1,127 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local roactModule = require(parent_3.Roact)
-local tModule = require(parent_3.t)
-local foundationFontFaceMigration = require(parent_3.Foundation).Utility.Flags.FoundationFontFaceMigration
-local alertModule = require(parent.Alert)
-local alertTypeModule = require(parent.Enum.AlertType)
-local fitFrameOnAxis = require(parent_3.FitFrame).FitFrameOnAxis
-local var1 = 272
-local var2 = 400
-local genericTextLabelModule = require(parent_2.Core.Text.GenericTextLabel.GenericTextLabel)
-local imageSetComponentModule = require(parent_2.Core.ImageSet.ImageSetComponent)
-local getTextHeightModule = require(parent_2.Core.Text.GetTextHeight)
-local getFontFromFontStyleModule = require(parent_2.Core.Text.GetFontFromFontStyle)
-local withStyleModule = require(parent_2.Core.Style.withStyle)
-local UIBloxConfigModule = require(parent_2.UIBloxConfig)
-local interactiveAlert = roactModule.PureComponent:extend("InteractiveAlert")
-interactiveAlert.validateProps = tModule.strictInterface({
-	anchorPoint = tModule.optional(tModule.Vector2),
-	position = tModule.optional(tModule.UDim2),
-	screenSize = tModule.Vector2,
-	onMounted = tModule.optional(tModule.callback),
-	onAbsoluteSizeChanged = tModule.optional(tModule.callback),
-	title = tModule.string,
-	titleIcon = tModule.optional(tModule.union(tModule.table, tModule.string)),
-	titleContent = tModule.optional(tModule.callback),
-	bodyText = tModule.optional(tModule.string),
-	richText = tModule.optional(tModule.boolean),
-	middleContent = tModule.optional(tModule.callback),
-	buttonStackInfo = require(parent_1.Button.ButtonStack).validateProps,
-	footerText = tModule.optional(tModule.string),
-	footerContent = tModule.optional(tModule.callback),
-	onCloseClicked = tModule.optional(tModule.callback),
-	bottomMargin = tModule.optional(tModule.number),
-	defaultChildRef = tModule.optional(tModule.union(tModule.table, tModule.callback)),
-	isMiddleContentFocusable = tModule.optional(tModule.boolean),
-	isFooterContentFocusable = tModule.optional(tModule.boolean),
-	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local RoactModule = require(Parent3.Roact)
+local TModule = require(Parent3.t)
+local FoundationFontFaceMigration = require(Parent3.Foundation).Utility.Flags.FoundationFontFaceMigration
+local AlertModule = require(Parent.Alert)
+local AlertTypeModule = require(Parent.Enum.AlertType)
+local FitFrameOnAxis = require(Parent3.FitFrame).FitFrameOnAxis
+local MinValue = 272
+local MaxValue = 400
+local GenericTextLabelModule = require(Parent2.Core.Text.GenericTextLabel.GenericTextLabel)
+local ImageSetComponentModule = require(Parent2.Core.ImageSet.ImageSetComponent)
+local GetTextHeightModule = require(Parent2.Core.Text.GetTextHeight)
+local GetFontFromFontStyleModule = require(Parent2.Core.Text.GetFontFromFontStyle)
+local WithStyleModule = require(Parent2.Core.Style.withStyle)
+local InteractiveAlert = RoactModule.PureComponent:extend("InteractiveAlert")
+InteractiveAlert.validateProps = TModule.strictInterface({
+	anchorPoint = TModule.optional(TModule.Vector2),
+	position = TModule.optional(TModule.UDim2),
+	screenSize = TModule.Vector2,
+	onMounted = TModule.optional(TModule.callback),
+	onAbsoluteSizeChanged = TModule.optional(TModule.callback),
+	title = TModule.string,
+	titleIcon = TModule.optional(TModule.union(TModule.table, TModule.string)),
+	titleContent = TModule.optional(TModule.callback),
+	bodyText = TModule.optional(TModule.string),
+	richText = TModule.optional(TModule.boolean),
+	middleContent = TModule.optional(TModule.callback),
+	buttonStackInfo = require(Parent1.Button.ButtonStack).validateProps,
+	footerText = TModule.optional(TModule.string),
+	footerContent = TModule.optional(TModule.callback),
+	onCloseClicked = TModule.optional(TModule.callback),
+	bottomMargin = TModule.optional(TModule.number),
+	defaultChildRef = TModule.optional(TModule.union(TModule.table, TModule.callback)),
+	isMiddleContentFocusable = TModule.optional(TModule.boolean),
+	isFooterContentFocusable = TModule.optional(TModule.boolean),
+	isRoactGamepadEnabled = TModule.optional(TModule.boolean)
 })
-interactiveAlert.defaultProps = { bottomMargin = 24 }
+InteractiveAlert.defaultProps = { bottomMargin = 24 }
 
-function interactiveAlert.render(p1)
-	-- upvalues: withStyleModule (ref), var1 (write), UIBloxConfigModule (ref), var2 (write), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), getTextHeightModule (ref), genericTextLabelModule (ref), alertModule (ref), alertTypeModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: var1 (copy), UIBloxConfigModule (copy), var2 (copy), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), p1 (ref), roactModule (copy), fitFrameOnAxis (copy), imageSetComponentModule (copy), getTextHeightModule (copy), genericTextLabelModule (copy), alertModule (copy), alertTypeModule (copy)
-		var1 = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_400 else p2.Tokens.Global.Size_200) * 17
-		var2 = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_1000 else p2.Tokens.Global.Size_500) * 10
-		local theme = p2.Theme
-		local font = p2.Font
-		local var3 = if foundationFontFaceMigration then getFontFromFontStyleModule(font.Body) else font.Body.Font
-		local var4 = font.BaseSize * font.Body.RelativeSize
-		local var5 = if p1.props.titleIcon then function()
-			-- upvalues: roactModule (copy), fitFrameOnAxis (copy), imageSetComponentModule (copy), p1 (copy), theme (ref)
-			return roactModule.createElement(fitFrameOnAxis, {
+function InteractiveAlert.render(p1) --[[ Line: 87 ]]
+	-- upvalues: WithStyleModule (copy), MinValue (ref), MaxValue (ref), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), RoactModule (copy), FitFrameOnAxis (copy), ImageSetComponentModule (copy), GetTextHeightModule (copy), GenericTextLabelModule (copy), AlertModule (copy), AlertTypeModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 88 ]]
+		-- upvalues: MinValue (upval), MaxValue (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), p1 (copy), RoactModule (upval), FitFrameOnAxis (upval), ImageSetComponentModule (upval), GetTextHeightModule (upval), GenericTextLabelModule (upval), AlertModule (upval), AlertTypeModule (upval)
+		MinValue = p2.Tokens.Size.Size_400 * 17
+		MaxValue = p2.Tokens.Size.Size_1000 * 10
+		local Theme = p2.Theme
+		local _Font = p2.Font
+		local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.Body) else _Font.Body.Font
+		local ScaledBaseSize = _Font.BaseSize * _Font.Body.RelativeSize
+		local TitleContent = if p1.props.titleIcon then function() --[[ Line: 99 ]]
+			-- upvalues: RoactModule (upval), FitFrameOnAxis (upval), ImageSetComponentModule (upval), p1 (upval), Theme (copy)
+			return RoactModule.createElement(FitFrameOnAxis, {
 				BackgroundTransparency = 1,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				margin = { top = 12, bottom = 0, left = 0, right = 0 },
 				minimumSize = UDim2.new(1, 0, 0, 0)
 			}, {
-				Icon = roactModule.createElement(imageSetComponentModule.Label, {
+				Icon = RoactModule.createElement(ImageSetComponentModule.Label, {
 					BackgroundTransparency = 1,
 					Image = p1.props.titleIcon,
-					ImageColor3 = theme.IconEmphasis.Color,
-					ImageTransparency = theme.IconEmphasis.Transparency,
+					ImageColor3 = Theme.IconEmphasis.Color,
+					ImageTransparency = Theme.IconEmphasis.Transparency,
 					Size = UDim2.new(0, 48, 0, 48)
 				})
 			})
 		end else p1.props.titleContent
-		local var6 = math.clamp(p1.props.screenSize.X - 48, var1, var2) - 48
-		local footerContent = p1.props.footerContent
+		local ClampedValueDelta = math.clamp(p1.props.screenSize.X - 48, MinValue, MaxValue) - 48
+		local FooterContent: () -> any = p1.props.footerContent
 		
 		if p1.props.footerText then
-			local var7 = if foundationFontFaceMigration then font.BaseSize * font.Footer.RelativeSize else nil
-			local footerText = p1.props.footerText and getTextHeightModule(p1.props.footerText, if foundationFontFaceMigration then getFontFromFontStyleModule(font.Footer) else font.Footer.Font, font.BaseSize * font.Footer.RelativeSize, var6, 100) or 0
+			local ScaledBaseSize1 = if FoundationFontFaceMigration then _Font.BaseSize * _Font.Footer.RelativeSize else nil
+			local TextHeightModule = p1.props.footerText and GetTextHeightModule(p1.props.footerText, if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.Footer) else _Font.Footer.Font, _Font.BaseSize * _Font.Footer.RelativeSize, ClampedValueDelta, 100) or 0
 			
-			footerContent = function()
-				-- upvalues: roactModule (copy), genericTextLabelModule (copy), theme (ref), font (ref), p1 (copy), foundationFontFaceMigration (copy), var7 (ref), var4 (ref), footerText (ref)
-				return roactModule.createElement(genericTextLabelModule, {
+			FooterContent = function() --[[ Line: 140 ]]
+				-- upvalues: RoactModule (upval), GenericTextLabelModule (upval), Theme (copy), _Font (copy), p1 (upval), FoundationFontFaceMigration (upval), ScaledBaseSize1 (copy), ScaledBaseSize (copy), TextHeightModule (copy)
+				return RoactModule.createElement(GenericTextLabelModule, {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
-					colorStyle = theme.TextDefault,
-					fontStyle = font.Footer,
+					colorStyle = Theme.TextDefault,
+					fontStyle = _Font.Footer,
 					Text = p1.props.footerText,
-					TextSize = if foundationFontFaceMigration then var7 else var4,
+					TextSize = if FoundationFontFaceMigration then ScaledBaseSize1 else ScaledBaseSize,
 					TextXAlignment = Enum.TextXAlignment.Center,
-					Size = UDim2.new(1, 0, 0, footerText)
+					Size = UDim2.new(1, 0, 0, TextHeightModule)
 				})
 			end
 		end
-		local bodyText = p1.props.bodyText and getTextHeightModule(p1.props.bodyText, var3, var4, var6, 200) or 0
+		local TextHeightModule1 = p1.props.bodyText and GetTextHeightModule(p1.props.bodyText, FontFromFontStyleModule, ScaledBaseSize, ClampedValueDelta, 200) or 0
 		
-		return roactModule.createElement(alertModule, {
+		return RoactModule.createElement(AlertModule, {
 			anchorPoint = p1.props.anchorPoint,
-			alertType = alertTypeModule.Interactive,
+			alertType = AlertTypeModule.Interactive,
 			margin = {
 				top = 0,
 				left = 24,
 				right = 24,
 				bottom = p1.props.bottomMargin
 			},
-			maxWidth = var2,
-			minWidth = var1,
+			maxWidth = MaxValue,
+			minWidth = MinValue,
 			buttonStackInfo = p1.props.buttonStackInfo,
-			middleContent = if p1.props.bodyText then function()
-				-- upvalues: roactModule (copy), fitFrameOnAxis (copy), genericTextLabelModule (copy), theme (ref), font (ref), p1 (copy), var4 (ref), bodyText (ref)
-				return roactModule.createElement(fitFrameOnAxis, {
+			middleContent = if p1.props.bodyText then function() --[[ Line: 160 ]]
+				-- upvalues: RoactModule (upval), FitFrameOnAxis (upval), GenericTextLabelModule (upval), Theme (copy), _Font (copy), p1 (upval), ScaledBaseSize (copy), TextHeightModule1 (copy)
+				return RoactModule.createElement(FitFrameOnAxis, {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					contentPadding = UDim.new(0, 12),
 					minimumSize = UDim2.new(1, 0, 0, 0)
 				}, {
-					BodyText = roactModule.createElement(genericTextLabelModule, {
+					BodyText = RoactModule.createElement(GenericTextLabelModule, {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
-						colorStyle = theme.TextDefault,
-						fontStyle = font.Body,
+						colorStyle = Theme.TextDefault,
+						fontStyle = _Font.Body,
 						Text = p1.props.bodyText,
 						RichText = p1.props.richText,
-						TextSize = var4,
+						TextSize = ScaledBaseSize,
 						TextXAlignment = Enum.TextXAlignment.Center,
-						Size = UDim2.new(1, 0, 0, bodyText)
+						Size = UDim2.new(1, 0, 0, TextHeightModule1)
 					}),
-					CustomContent = p1.props.middleContent and roactModule.createElement(fitFrameOnAxis, {
+					CustomContent = p1.props.middleContent and RoactModule.createElement(FitFrameOnAxis, {
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
 						minimumSize = UDim2.new(1, 0, 0, 0)
@@ -135,8 +134,8 @@ function interactiveAlert.render(p1)
 			position = p1.props.position,
 			screenSize = p1.props.screenSize,
 			title = p1.props.title,
-			titleContent = var5,
-			footerContent = footerContent,
+			titleContent = TitleContent,
+			footerContent = FooterContent,
 			isFooterContentFocusable = p1.props.isFooterContentFocusable,
 			onCloseClicked = p1.props.onCloseClicked,
 			defaultChildRef = p1.props.defaultChildRef,
@@ -145,4 +144,4 @@ function interactiveAlert.render(p1)
 	end)
 end
 
-return interactiveAlert
+return InteractiveAlert

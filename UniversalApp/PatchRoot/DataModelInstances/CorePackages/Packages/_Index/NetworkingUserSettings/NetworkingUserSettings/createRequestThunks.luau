@@ -1,15 +1,15 @@
-﻿local parent = script.Parent
-local networkRequests = parent.networkRequests
-local createGetUserSettingsModule = require(networkRequests.createGetUserSettings)
-local createUpdateUserSettingsModule = require(networkRequests.createUpdateUserSettings)
-local createGetUserSettingsMetadataModule = require(networkRequests.createGetUserSettingsMetadata)
-local _ = require(parent.Types.networkRequestsTypes)
+﻿local Parent = script.Parent
+local NetworkRequests = Parent.networkRequests
+local CreateGetUserSettingsModule = require(NetworkRequests.createGetUserSettings)
+local CreateUpdateUserSettingsModule = require(NetworkRequests.createUpdateUserSettings)
+local CreateGetUserSettingsMetadataModule = require(NetworkRequests.createGetUserSettingsMetadata)
+local _ = require(Parent.Types.networkRequestsTypes)
 
-return function(p1)
-	-- upvalues: createGetUserSettingsModule (ref), createUpdateUserSettingsModule (ref), createGetUserSettingsMetadataModule (ref)
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: CreateGetUserSettingsModule (copy), CreateUpdateUserSettingsModule (copy), CreateGetUserSettingsMetadataModule (copy)
 	return {
-		GetUserSettings = createGetUserSettingsModule(p1),
-		UpdateUserSettings = createUpdateUserSettingsModule(p1),
-		GetUserSettingsMetadata = createGetUserSettingsMetadataModule(p1)
+		GetUserSettings = CreateGetUserSettingsModule(p1),
+		UpdateUserSettings = CreateUpdateUserSettingsModule(p1),
+		GetUserSettingsMetadata = CreateGetUserSettingsMetadataModule(p1)
 	}
 end

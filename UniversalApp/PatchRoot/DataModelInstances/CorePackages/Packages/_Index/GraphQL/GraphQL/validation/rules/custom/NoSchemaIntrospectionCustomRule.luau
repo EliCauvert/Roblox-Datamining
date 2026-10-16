@@ -1,18 +1,18 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local getNamedType = require(parent.type.definition).getNamedType
-local isIntrospectionType = require(parent.type.introspection).isIntrospectionType
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local GetNamedTypeFunction = require(Parent.type.definition).getNamedType
+local IsIntrospectionTypeFunction = require(Parent.type.introspection).isIntrospectionType
 
 return {
-	NoSchemaIntrospectionCustomRule = function(p1)
-		-- upvalues: getNamedType (ref), isIntrospectionType (ref), graphQLError (ref)
+	NoSchemaIntrospectionCustomRule = function(p1) --[[ Line: 27 ]]
+		-- upvalues: GetNamedTypeFunction (copy), IsIntrospectionTypeFunction (copy), GraphQLError (copy)
 		return {
-			Field = function(_, p2)
-				-- upvalues: getNamedType (copy), p1 (ref), isIntrospectionType (copy), graphQLError (copy)
-				local var1 = getNamedType(p1:getType())
+			Field = function(_, p2) --[[ Line: 29 ]]
+				-- upvalues: GetNamedTypeFunction (upval), p1 (copy), IsIntrospectionTypeFunction (upval), GraphQLError (upval)
+				local NamedType = GetNamedTypeFunction(p1:getType())
 				
-				if var1 and isIntrospectionType(var1) then
-					p1:reportError(graphQLError.new(("GraphQL introspection has been disabled, but the requested query contained the field \"%s\"."):format(p2.name.value), p2))
+				if NamedType and IsIntrospectionTypeFunction(NamedType) then
+					p1:reportError(GraphQLError.new(("GraphQL introspection has been disabled, but the requested query contained the field \"%s\"."):format(p2.name.value), p2))
 				end
 			end
 		}

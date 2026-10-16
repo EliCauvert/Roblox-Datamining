@@ -1,8 +1,8 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
+﻿local Foundation = script:FindFirstAncestor("Foundation")
 
-return require(foundation.Parent.React).createContext({
+return require(Foundation.Parent.React).createContext({
 	config = {
-		breakpoint = require(foundation.Utility.Responsive.BreakpointConfig),
-		grid = require(foundation.Utility.Responsive.GridConfig)
+		breakpoint = require(Foundation.Utility.Responsive.BreakpointConfig),
+		grid = require(Foundation.Utility.Responsive.GridConfig)
 	}
 })

@@ -1,61 +1,60 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local view = foundationModule.View
-local useCallback = reactModule.useCallback
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useTokens = foundationModule.Hooks.useTokens
-local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
-local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local UseCallbackFunction = ReactModule.useCallback
+local UseDeviceInsetsFunction = require(Parent.MomentsCommon).Hooks.useDeviceInsets
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local CreationFlowContextModule = require(MomentsCreationFlow.Context.CreationFlowContext)
+local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), useCallback (ref), view (ref), button (ref), foundationModule (ref), creationFlowLocalizationModule (ref)
-	local var1 = useDeviceInsets()
-	local var2 = useTokens()
-	local var3 = reactModule.useContext(creationFlowContextModule)
+return function(p1) --[[ Line: 25 ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), UseCallbackFunction (copy), View (copy), Button (copy), FoundationModule (copy), CreationFlowLocalizationModule (copy)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "align-x-center auto-y align-y-bottom anchor-bottom-center col gap-large position-bottom-center size-full-0",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var2.Padding.Small),
-			PaddingBottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Small)),
-			PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
-			PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, UseTokensResult.Padding.Small),
+			PaddingBottom = UDim.new(0, (math.max(UseDeviceInsetsResult.bottom, UseTokensResult.Padding.Small))),
+			PaddingLeft = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.XLarge))),
+			PaddingRight = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge)))
 		}),
-		Nav = reactModule.createElement(view, {
+		Nav = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "align-x-center align-y-center auto-y gap-small row size-full-0 flex-x-between"
 		}, {
-			BackButton = reactModule.createElement(button, {
+			BackButton = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
-				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var3.getLocalization(creationFlowLocalizationModule.GeneralCtaBack),
-				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function()
-					-- upvalues: p1 (ref)
+				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
+				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaBack),
+				variant = FoundationModule.Enums.ButtonVariant.Text,
+				onActivated = UseCallbackFunction(function() --[[ Line: 30 ]]
+					-- upvalues: p1 (copy)
 					if p1.onTextOverlayDiscard then
 						p1.onTextOverlayDiscard()
 					end
 				end, { p1.onTextOverlayDiscard }),
-				size = foundationModule.Enums.InputSize.Medium
+				size = FoundationModule.Enums.InputSize.Medium
 			}),
-			DoneButton = reactModule.createElement(button, {
+			DoneButton = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
-				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var3.getLocalization(creationFlowLocalizationModule.GeneralCtaDone),
-				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function()
-					-- upvalues: p1 (ref)
+				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
+				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaDone),
+				variant = FoundationModule.Enums.ButtonVariant.Text,
+				onActivated = UseCallbackFunction(function() --[[ Line: 36 ]]
+					-- upvalues: p1 (copy)
 					if p1.onTextOverlaySave then
 						p1.onTextOverlaySave()
 					end
 				end, { p1.onTextOverlaySave }),
-				size = foundationModule.Enums.InputSize.Medium
+				size = FoundationModule.Enums.InputSize.Medium
 			})
 		})
 	})

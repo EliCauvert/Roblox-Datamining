@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.GraphQL.GraphQL)
+﻿return (require(script.Parent._Index.GraphQL.GraphQL))

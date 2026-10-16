@@ -1,30 +1,30 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFIntMaxTotalSurfaceAreaModule = require(parent.flags.getFIntMaxTotalSurfaceArea)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFIntMaxTotalSurfaceAreaModule = require(Parent.flags.getFIntMaxTotalSurfaceArea)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY,
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: UGCValidationService (ref), getFIntMaxTotalSurfaceAreaModule (ref), errorSourceStringsModule (ref)
-		for i, v in p2.renderMeshesData do
-			local editable = UGCValidationService:CalculateEditableMeshTotalSurfaceArea(v.editable, v.scale)
+	run = function(p1, p2) --[[ Line: 21 ]]
+		-- upvalues: UGCValidationService (copy), GetFIntMaxTotalSurfaceAreaModule (copy), ErrorSourceStringsModule (copy)
+		for MeshName, value in p2.renderMeshesData do
+			local EditableMeshTotalSurfaceArea = UGCValidationService:CalculateEditableMeshTotalSurfaceArea(value.editable, value.scale)
 			
-			if getFIntMaxTotalSurfaceAreaModule() < editable then
-				p1:fail(errorSourceStringsModule.Keys.MeshGeometry_SurfaceAreaExceeded, {
-					meshName = i,
-					surfaceArea = string.format("%.2f", editable),
-					maxSurfaceArea = tostring(getFIntMaxTotalSurfaceAreaModule())
+			if GetFIntMaxTotalSurfaceAreaModule() < EditableMeshTotalSurfaceArea then
+				p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_SurfaceAreaExceeded, {
+					meshName = MeshName,
+					surfaceArea = string.format("%.2f", EditableMeshTotalSurfaceArea),
+					maxSurfaceArea = tostring(GetFIntMaxTotalSurfaceAreaModule())
 				})
 			end
 		end

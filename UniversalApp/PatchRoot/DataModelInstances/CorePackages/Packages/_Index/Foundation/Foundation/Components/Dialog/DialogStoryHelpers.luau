@@ -1,98 +1,93 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local buttonModule = require(foundation.Components.Button)
-local buttonVariantModule = require(foundation.Enums.ButtonVariant)
-local dialogModule = require(foundation.Components.Dialog)
-local _ = require(foundation.Components.Dialog.Actions)
-local dialogSizeModule = require(foundation.Enums.DialogSize)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local listModule = require(foundation.Components.List)
-local _ = require(foundation.Enums.OnCloseCallbackReason)
-local _ = require(foundation.Enums.Orientation)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local ButtonModule = require(Foundation.Components.Button)
+local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
+local DialogModule = require(Foundation.Components.Dialog)
+local _ = require(Foundation.Components.Dialog.Actions)
+local DialogSizeModule = require(Foundation.Enums.DialogSize)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local ListModule = require(Foundation.Components.List)
+local _ = require(Foundation.Enums.OnCloseCallbackReason)
+local _ = require(Foundation.Enums.Orientation)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local Medium = DialogSizeModule.Medium
 local list = {
-	dialogSizeModule.Small,
-	dialogSizeModule.Medium,
-	dialogSizeModule.Large
-}
-local medium = dialogSizeModule.Medium
-local list_1 = {
 	{
 		text = "Cancel",
-		variant = buttonVariantModule.Standard,
-		onActivated = function() end
+		variant = ButtonVariantModule.Standard,
+		onActivated = function() --[[ Line: 80 ]] end
 	},
 	{
 		text = "Confirm",
-		variant = buttonVariantModule.Emphasis,
-		onActivated = function() end
+		variant = ButtonVariantModule.Emphasis,
+		onActivated = function() --[[ Line: 85 ]] end
 	}
 }
 
-local function makeScrollableListItems(p1)
-	-- upvalues: reactModule (ref), listModule (ref)
-	local t = {}
+local function makeScrollableListItems(p1) --[[ Line: 89 ]]
+	-- upvalues: ReactModule (copy), ListModule (copy)
+	local Elements = {}
 	
 	for i = 1, p1 do
-		t[`Item{i}`] = reactModule.createElement(listModule.Item, {
+		Elements[`Item{i}`] = ReactModule.createElement(ListModule.Item, {
 			title = `Item {i}`,
-			onActivated = function() end,
+			onActivated = function() --[[ Line: 94 ]] end,
 			LayoutOrder = i
 		})
 	end
-	return t
+	return Elements
 end
 
-local function dialogStoryList(p2, p3)
-	-- upvalues: reactModule (ref), listModule (ref), inputSizeModule (ref), makeScrollableListItems (ref)
-	return reactModule.createElement(listModule.Root, {
-		LayoutOrder = p3,
+local function dialogStoryList(p2, LayoutOrder) --[[ Line: 101 ]]
+	-- upvalues: ReactModule (copy), ListModule (copy), InputSizeModule (copy), makeScrollableListItems (copy)
+	return ReactModule.createElement(ListModule.Root, {
+		LayoutOrder = LayoutOrder,
 		isContained = { isContained = false, hasMargin = false },
 		hasDivider = { hasDivider = true, isInset = false },
-		size = inputSizeModule.Small
-	}, makeScrollableListItems(p2))
+		size = InputSizeModule.Small
+	}, (makeScrollableListItems(p2)))
 end
 
-local function makeDialogChildren(p2)
-	-- upvalues: reactModule (ref), dialogModule (ref), list_1 (ref)
-	p2 = p2 or {}
-	local heroMedia = p2.heroMedia
+local function makeDialogChildren(p2) --[[ Line: 116 ]]
+	-- upvalues: ReactModule (copy), DialogModule (copy), list (copy)
+	local P3 = p2 or {}
+	local HeroMedia = P3.heroMedia
 	
 	return {
-		DialogMedia = if p2.hasHeroMedia then reactModule.createElement(dialogModule.HeroMedia, {
-			media = if heroMedia then heroMedia.media else "rbxassetid://103403748802347",
-			aspectRatio = if heroMedia then heroMedia.aspectRatio else 1.777777777778,
-			mediaStyle = if heroMedia then heroMedia.mediaStyle else nil,
-			backgroundStyle = if heroMedia then heroMedia.backgroundStyle else nil,
-			height = if heroMedia then heroMedia.height else nil,
-			scaleType = if heroMedia then heroMedia.scaleType else nil
+		DialogMedia = if P3.hasHeroMedia then ReactModule.createElement(DialogModule.HeroMedia, {
+			media = HeroMedia and HeroMedia.media or "rbxassetid://103403748802347",
+			aspectRatio = if HeroMedia then HeroMedia.aspectRatio else 1.7777777777777777,
+			mediaStyle = if HeroMedia then HeroMedia.mediaStyle else nil,
+			backgroundStyle = if HeroMedia then HeroMedia.backgroundStyle else nil,
+			height = if HeroMedia then HeroMedia.height else nil,
+			scaleType = if HeroMedia then HeroMedia.scaleType else nil
 		}) else nil,
-		DialogTitle = if p2.hasTitle ~= false then nil else reactModule.createElement(dialogModule.Title, { text = p2.title or "Dialog title" }),
-		DialogContent = reactModule.createElement(dialogModule.Content, { LayoutOrder = 2, Selectable = p2.contentSelectable }, if p2.contentChildren then p2.contentChildren else {
-			DialogText = reactModule.createElement(dialogModule.Text, {
+		DialogTitle = if P3.hasTitle == false then nil else ReactModule.createElement(DialogModule.Title, { text = P3.title or "Dialog title" }),
+		DialogContent = ReactModule.createElement(DialogModule.Content, { LayoutOrder = 2, Selectable = P3.contentSelectable }, if P3.contentChildren then P3.contentChildren else {
+			DialogText = ReactModule.createElement(DialogModule.Text, {
 				LayoutOrder = 1,
-				Text = p2.content or "Dialog.Text content goes here."
+				Text = P3.content or "Dialog.Text content goes here."
 			})
 		}),
-		DialogActions = if p2.hasActions then reactModule.createElement(dialogModule.Actions, {
+		DialogActions = if P3.hasActions then ReactModule.createElement(DialogModule.Actions, {
 			LayoutOrder = 3,
-			orientation = p2.actionsOrientation,
-			label = p2.actionsLabel,
-			actions = p2.actions or list_1
+			orientation = P3.actionsOrientation,
+			label = P3.actionsLabel,
+			actions = P3.actions or list
 		}) else nil
 	}
 end
 
-local function DialogExample(p2)
-	-- upvalues: reactModule (ref), dialogModule (ref), medium (ref)
-	return reactModule.createElement(dialogModule.Root, {
+local function DialogExample(p2) --[[ Line: 229 ]]
+	-- upvalues: ReactModule (copy), DialogModule (copy), Medium (copy)
+	return ReactModule.createElement(DialogModule.Root, {
 		hasBackdrop = true,
 		disablePortal = false,
-		size = p2.size or medium,
+		size = p2.size or Medium,
 		onClose = p2.onClose
 	}, {
 		DialogMedia = p2.children.DialogMedia,
@@ -105,111 +100,115 @@ end
 return {
 	SHORT_CONTENT = "Dialog.Text content goes here.",
 	HERO_MEDIA = "rbxassetid://103403748802347",
-	DEFAULT_SIZE = medium,
-	DEFAULT_ACTIONS = list_1,
-	SIZE_ORDER = list,
-	Section = function(p2)
-		-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
-		return reactModule.createElement(viewModule, {
+	DEFAULT_SIZE = Medium,
+	DEFAULT_ACTIONS = list,
+	SIZE_ORDER = {
+		DialogSizeModule.Small,
+		DialogSizeModule.Medium,
+		DialogSizeModule.Large
+	},
+	Section = function(p2) --[[ Line: 190 ]]
+		-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
+		return ReactModule.createElement(ViewModule, {
 			tag = "col gap-medium size-full-0 auto-y",
 			LayoutOrder = p2.layoutOrder
 		}, {
-			Title = if p2.note then reactModule.createElement(viewModule, { tag = "col gap-xsmall auto-xy", LayoutOrder = 1 }, {
-				Name = reactModule.createElement(textModule, {
+			Title = if p2.note then ReactModule.createElement(ViewModule, { tag = "col gap-xsmall auto-xy", LayoutOrder = 1 }, {
+				Name = ReactModule.createElement(TextModule, {
 					tag = "auto-xy text-label-medium content-default",
 					LayoutOrder = 1,
 					Text = p2.name
 				}),
-				Note = reactModule.createElement(textModule, {
+				Note = ReactModule.createElement(TextModule, {
 					tag = "auto-xy text-body-small content-muted",
 					LayoutOrder = 2,
 					Text = p2.note
 				})
-			}) else reactModule.createElement(textModule, {
+			}) else ReactModule.createElement(TextModule, {
 				tag = "auto-xy text-label-medium content-default",
 				LayoutOrder = 1,
 				Text = p2.name
 			}),
-			Content = reactModule.createElement(viewModule, {
+			Content = ReactModule.createElement(ViewModule, {
 				LayoutOrder = 2,
 				tag = p2.contentTag or "row gap-large align-y-start auto-xy wrap"
 			}, p2.children)
 		})
 	end,
 	makeDialogChildren = makeDialogChildren,
-	minimalDialogChildren = function(a, b)
-		-- upvalues: makeDialogChildren (ref)
-		return makeDialogChildren({ title = a, content = b })
+	minimalDialogChildren = function(Title, Content) --[[ Line: 162 ]]
+		-- upvalues: makeDialogChildren (copy)
+		return (makeDialogChildren({ title = Title, content = Content }))
 	end,
-	listDialogChildren = function(p2, p3)
-		-- upvalues: makeDialogChildren (ref), dialogStoryList (ref)
-		return makeDialogChildren({
-			contentSelectable = p3,
+	listDialogChildren = function(p2, ContentSelectable) --[[ Line: 169 ]]
+		-- upvalues: makeDialogChildren (copy), dialogStoryList (copy)
+		return (makeDialogChildren({
+			contentSelectable = ContentSelectable,
 			contentChildren = { List = dialogStoryList(p2) }
-		})
+		}))
 	end,
-	heroMediaDialogChildren = function(p2)
-		-- upvalues: dashModule (ref), makeDialogChildren (ref)
-		local var1 = p2 or {}
+	heroMediaDialogChildren = function(p2) --[[ Line: 178 ]]
+		-- upvalues: DashModule (copy), makeDialogChildren (copy)
+		local P8 = p2 or {}
 		
-		if var1.aspectRatio == nil then
-			var1 = dashModule.join(var1, { aspectRatio = 1.777777777778 })
+		if P8.aspectRatio == nil then
+			P8 = DashModule.join(P8, { aspectRatio = 1.7777777777777777 })
 		end
-		return makeDialogChildren({ hasHeroMedia = true, heroMedia = var1 })
+		return (makeDialogChildren({ hasHeroMedia = true, heroMedia = P8 }))
 	end,
 	dialogStoryList = dialogStoryList,
 	DialogExample = DialogExample,
-	LabeledDialogTrigger = function(p2)
-		-- upvalues: reactModule (ref), viewModule (ref), textModule (ref), buttonModule (ref), buttonVariantModule (ref), DialogExample (ref)
-		local var1, var2 = reactModule.useState(false)
+	LabeledDialogTrigger = function(p2) --[[ Line: 247 ]]
+		-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy), ButtonModule (copy), ButtonVariantModule (copy), DialogExample (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		
-		return reactModule.createElement(viewModule, {
+		return ReactModule.createElement(ViewModule, {
 			tag = "col gap-small auto-xy",
 			LayoutOrder = p2.layoutOrder
 		}, {
-			Label = if p2.label then reactModule.createElement(textModule, {
+			Label = if p2.label then ReactModule.createElement(TextModule, {
 				tag = "auto-xy text-caption-small text-align-x-left content-default",
 				LayoutOrder = 1,
 				Text = p2.label
 			}) else nil,
-			OpenButton = reactModule.createElement(viewModule, { tag = "auto-xy", LayoutOrder = 2 }, {
-				Button = reactModule.createElement(buttonModule, {
-					text = if var1 then "Close" else p2.buttonText or "Open",
-					onActivated = function()
-						-- upvalues: var2 (ref), var1 (ref)
-						var2(not var1)
+			OpenButton = ReactModule.createElement(ViewModule, { tag = "auto-xy", LayoutOrder = 2 }, {
+				Button = ReactModule.createElement(ButtonModule, {
+					text = if UseStateResult then "Close" else p2.buttonText or "Open",
+					onActivated = function() --[[ Line: 273 ]]
+						-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+						UseStateResult2(not UseStateResult)
 					end,
-					variant = if var1 then buttonVariantModule.Standard else buttonVariantModule.Emphasis
+					variant = if UseStateResult then ButtonVariantModule.Standard else ButtonVariantModule.Emphasis
 				})
 			}),
-			DialogRoot = if var1 then reactModule.createElement(DialogExample, {
+			DialogRoot = if UseStateResult then ReactModule.createElement(DialogExample, {
 				size = p2.size,
-				onClose = function()
-					-- upvalues: var2 (ref)
-					var2(false)
+				onClose = function() --[[ Line: 282 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(false)
 				end,
 				children = p2.children
 			}) else nil
 		})
 	end,
-	RootStory = function(p2)
-		-- upvalues: reactModule (ref), viewModule (ref), buttonModule (ref), buttonVariantModule (ref), DialogExample (ref), makeDialogChildren (ref)
-		local var1, var2 = reactModule.useState(false)
+	RootStory = function(p2) --[[ Line: 291 ]]
+		-- upvalues: ReactModule (copy), ViewModule (copy), ButtonModule (copy), ButtonVariantModule (copy), DialogExample (copy), makeDialogChildren (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		
-		return reactModule.createElement(viewModule, { tag = "auto-xy" }, {
-			ToggleButton = reactModule.createElement(buttonModule, {
-				text = if var1 then "Close Dialog" else "Open Dialog",
-				onActivated = function()
-					-- upvalues: var2 (ref), var1 (ref)
-					var2(not var1)
+		return ReactModule.createElement(ViewModule, { tag = "auto-xy" }, {
+			ToggleButton = ReactModule.createElement(ButtonModule, {
+				text = if UseStateResult then "Close Dialog" else "Open Dialog",
+				onActivated = function() --[[ Line: 299 ]]
+					-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+					UseStateResult2(not UseStateResult)
 				end,
-				variant = buttonVariantModule.Emphasis
+				variant = ButtonVariantModule.Emphasis
 			}),
-			DialogRoot = if var1 then reactModule.createElement(DialogExample, {
+			DialogRoot = if UseStateResult then ReactModule.createElement(DialogExample, {
 				size = p2.controls.size,
-				onClose = function()
-					-- upvalues: var2 (ref)
-					var2(false)
+				onClose = function() --[[ Line: 307 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(false)
 				end,
 				children = p2.children or makeDialogChildren({ title = nil, content = nil })
 			}) else nil

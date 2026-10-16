@@ -1,142 +1,144 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local badgeVariantModule = require(foundation.Enums.BadgeVariant)
-local dashModule = require(foundation.Parent.Dash)
-local badgeShapeModule = require(foundation.Enums.BadgeShape)
-local badgeSizeModule = require(foundation.Enums.BadgeSize)
-local iconPositionModule = require(foundation.Enums.IconPosition)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local _ = require(foundation.Components.Types)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local flagsModule = require(foundation.Utility.Flags)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local BadgeVariantModule = require(Foundation.Enums.BadgeVariant)
+local DashModule = require(Foundation.Parent.Dash)
+local BadgeShapeModule = require(Foundation.Enums.BadgeShape)
+local BadgeSizeModule = require(Foundation.Enums.BadgeSize)
+local IconPositionModule = require(Foundation.Enums.IconPosition)
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local _ = require(Foundation.Components.Types)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-function variantsFactory(p1)
-	-- upvalues: flagsModule (ref), badgeVariantModule (ref), badgeSizeModule (ref), iconSizeModule (ref), badgeShapeModule (ref), iconPositionModule (ref), dashModule (ref)
+function variantsFactory(p1) --[[ Line: 36 ]]
+	-- upvalues: FlagsModule (copy), BadgeVariantModule (copy), BadgeSizeModule (copy), IconSizeModule (copy), BadgeShapeModule (copy), IconPositionModule (copy), DashModule (copy)
+	local Config = if FlagsModule.FoundationBadgeBetaUpdate then nil else {
+		[true] = { container = { tag = "size-600" } },
+		[false] = {
+			container = { tag = "size-0-600 auto-x padding-x-small" }
+		}
+	}
+	
 	return {
 		common = {
 			container = {
-				tag = if flagsModule.FoundationBadgeBetaUpdate then "row align-x-center align-y-center auto-xy" else "row align-x-center align-y-center gap-xsmall"
+				tag = if FlagsModule.FoundationBadgeBetaUpdate then "row align-x-center align-y-center auto-xy" else "row align-x-center align-y-center gap-xsmall"
 			},
 			text = {
-				tag = if flagsModule.FoundationBadgeBetaUpdate then "auto-xy text-align-x-left text-truncate-split" else "auto-xy text-label-small text-align-x-left text-truncate-split"
+				tag = if FlagsModule.FoundationBadgeBetaUpdate then "auto-xy text-align-x-left text-truncate-split" else "auto-xy text-label-small text-align-x-left text-truncate-split"
 			}
 		},
 		variants = {
-			[badgeVariantModule.Alert] = {
+			[BadgeVariantModule.Alert] = {
 				container = {
-					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then {
+					backgroundStyle = if FlagsModule.FoundationBadgeBetaUpdate then {
 						Transparency = 0.8,
 						Color3 = p1.Color.System.Alert.Color3
 					} else p1.Color.System.Alert
 				},
 				content = {
-					style = if flagsModule.FoundationBadgeBetaUpdate then p1.Color.Content.Emphasis else p1.DarkMode.Content.Emphasis
+					style = if FlagsModule.FoundationBadgeBetaUpdate then p1.Color.Content.Emphasis else p1.DarkMode.Content.Emphasis
 				},
 				icon = { style = p1.Color.System.Alert }
 			},
-			[badgeVariantModule.Success] = {
+			[BadgeVariantModule.Success] = {
 				container = {
-					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then {
+					backgroundStyle = if FlagsModule.FoundationBadgeBetaUpdate then {
 						Transparency = 0.8,
 						Color3 = p1.Color.System.Success.Color3
 					} else p1.Color.System.Success
 				},
 				content = {
-					style = if flagsModule.FoundationBadgeBetaUpdate then p1.Color.Content.Emphasis else p1.LightMode.Content.Emphasis
+					style = if FlagsModule.FoundationBadgeBetaUpdate then p1.Color.Content.Emphasis else p1.LightMode.Content.Emphasis
 				},
 				icon = { style = p1.Color.System.Success }
 			},
-			[badgeVariantModule.Warning] = {
+			[BadgeVariantModule.Warning] = {
 				container = {
-					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then {
+					backgroundStyle = if FlagsModule.FoundationBadgeBetaUpdate then {
 						Transparency = 0.8,
 						Color3 = p1.Color.System.Warning.Color3
 					} else p1.Color.System.Warning
 				},
 				content = {
-					style = if flagsModule.FoundationBadgeBetaUpdate then p1.Color.Content.Emphasis else p1.LightMode.Content.Emphasis
+					style = if FlagsModule.FoundationBadgeBetaUpdate then p1.Color.Content.Emphasis else p1.LightMode.Content.Emphasis
 				},
 				icon = { style = p1.Color.System.Warning }
 			},
-			[badgeVariantModule.Contrast] = {
+			[BadgeVariantModule.Contrast] = {
 				container = { backgroundStyle = p1.Color.System.Contrast },
 				content = { style = p1.Inverse.Content.Emphasis },
 				icon = { style = p1.Inverse.Content.Emphasis }
 			},
-			[badgeVariantModule.Standard] = {
+			[BadgeVariantModule.Standard] = {
 				container = { backgroundStyle = p1.Color.ActionStandard.Background },
 				content = { style = p1.Color.ActionStandard.Foreground },
 				icon = { style = p1.Color.ActionStandard.Foreground }
 			},
-			[badgeVariantModule.Neutral] = if flagsModule.FoundationBadgeBetaUpdate then nil else {
+			[BadgeVariantModule.Neutral] = if FlagsModule.FoundationBadgeBetaUpdate then nil else {
 				container = { backgroundStyle = p1.Color.Shift.Shift_300 },
 				content = { style = p1.Color.Content.Emphasis },
 				icon = { style = p1.Color.ActionStandard.Foreground }
 			},
-			[badgeVariantModule.OverMedia] = {
+			[BadgeVariantModule.OverMedia] = {
 				container = {
-					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then p1.Color.OverMedia.OverMedia_0 else p1.LightMode.Surface.Surface_100,
-					stroke = if flagsModule.FoundationBadgeBetaUpdate then nil else {
+					backgroundStyle = if FlagsModule.FoundationBadgeBetaUpdate then p1.Color.OverMedia.OverMedia_0 else p1.LightMode.Surface.Surface_100,
+					stroke = if FlagsModule.FoundationBadgeBetaUpdate then nil else {
 						Color = p1.LightMode.Stroke.Default.Color3,
 						Transparency = p1.LightMode.Stroke.Default.Transparency
 					}
 				},
 				content = {
-					style = if flagsModule.FoundationBadgeBetaUpdate then p1.Inverse.OverMedia.OverMedia_0 else p1.LightMode.Content.Emphasis
+					style = if FlagsModule.FoundationBadgeBetaUpdate then p1.Inverse.OverMedia.OverMedia_0 else p1.LightMode.Content.Emphasis
 				},
 				icon = { style = p1.Inverse.OverMedia.OverMedia_0 }
 			},
-			[badgeVariantModule.Emphasis] = {
+			[BadgeVariantModule.Emphasis] = {
 				container = {
-					backgroundStyle = if flagsModule.FoundationSystemEmphasisNonActions then p1.Color.System.Emphasis else p1.Color.ActionEmphasis.Background
+					backgroundStyle = if FlagsModule.FoundationSystemEmphasisNonActions then p1.Color.System.Emphasis else p1.Color.ActionEmphasis.Background
 				},
 				content = {
-					style = if flagsModule.FoundationSystemEmphasisNonActions then p1.DarkMode.Content.Emphasis else p1.Color.ActionEmphasis.Foreground
+					style = if FlagsModule.FoundationSystemEmphasisNonActions then p1.DarkMode.Content.Emphasis else p1.Color.ActionEmphasis.Foreground
 				},
 				icon = {
-					style = if flagsModule.FoundationSystemEmphasisNonActions then p1.DarkMode.Content.Emphasis else p1.Color.ActionEmphasis.Foreground
+					style = if FlagsModule.FoundationSystemEmphasisNonActions then p1.DarkMode.Content.Emphasis else p1.Color.ActionEmphasis.Foreground
 				}
 			}
 		},
 		shapes = {
-			[badgeShapeModule.Pill] = { container = { tag = "radius-circle" } },
-			[badgeShapeModule.Box] = { container = { tag = "radius-small" } }
+			[BadgeShapeModule.Pill] = { container = { tag = "radius-circle" } },
+			[BadgeShapeModule.Box] = { container = { tag = "radius-small" } }
 		},
-		iconOnly = if flagsModule.FoundationBadgeBetaUpdate then nil elseif flagsModule.FoundationBadgeBetaUpdate then nil else {
-			[true] = { container = { tag = "size-600" } },
-			[false] = {
-				container = { tag = "size-0-600 auto-x padding-x-small" }
-			}
-		},
-		sizes = if flagsModule.FoundationBadgeBetaUpdate then {
-			[badgeSizeModule.XSmall] = {
+		iconOnly = if FlagsModule.FoundationBadgeBetaUpdate then nil else Config,
+		sizes = if FlagsModule.FoundationBadgeBetaUpdate then {
+			[BadgeSizeModule.XSmall] = {
 				container = { tag = "gap-xxsmall size-0-400 padding-x-xsmall" },
 				text = { tag = "text-caption-small" },
-				icon = { size = iconSizeModule.XSmall }
+				icon = { size = IconSizeModule.XSmall }
 			},
-			[badgeSizeModule.Small] = {
+			[BadgeSizeModule.Small] = {
 				container = { tag = "gap-xsmall size-0-600 padding-x-small" },
 				text = { tag = "text-caption-medium" },
-				icon = { size = iconSizeModule.XSmall }
+				icon = { size = IconSizeModule.XSmall }
 			},
-			[badgeSizeModule.Medium] = {
+			[BadgeSizeModule.Medium] = {
 				container = { tag = "gap-xsmall size-0-600 padding-x-small" },
 				text = { tag = "text-caption-medium" },
-				icon = { size = iconSizeModule.XSmall }
+				icon = { size = IconSizeModule.XSmall }
 			}
 		} else nil,
-		iconPlacement = if flagsModule.FoundationBadgeBetaUpdate then {
-			[iconPositionModule.Left] = { text = { tag = "padding-right-xsmall" } },
-			[iconPositionModule.Right] = { text = { tag = "padding-left-xsmall" } },
-			[dashModule.None] = { text = { tag = "padding-x-xsmall" } }
+		iconPlacement = if FlagsModule.FoundationBadgeBetaUpdate then {
+			[IconPositionModule.Left] = { text = { tag = "padding-right-xsmall" } },
+			[IconPositionModule.Right] = { text = { tag = "padding-left-xsmall" } },
+			[DashModule.None] = { text = { tag = "padding-x-xsmall" } }
 		} else nil
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: variantsContextModule (ref), composeStyleVariantModule (ref), flagsModule (ref), dashModule (ref)
-	local badge = variantsContextModule.useVariants("Badge", variantsFactory, p1)
+return function(p1, p2, p3, p4, p5, p6) --[[ Line: 227 ]]
+	-- upvalues: VariantsContextModule (copy), ComposeStyleVariantModule (copy), FlagsModule (copy), DashModule (copy)
+	local Badge = VariantsContextModule.useVariants("Badge", variantsFactory, p1)
 	
-	return composeStyleVariantModule(badge.common, badge.variants[p2], badge.shapes[p3], if flagsModule.FoundationBadgeBetaUpdate then badge.sizes[p4] else nil, if flagsModule.FoundationBadgeBetaUpdate then badge.iconPlacement[p5 or dashModule.None] else nil, if flagsModule.FoundationBadgeBetaUpdate then nil else badge.iconOnly[p6])
+	return ComposeStyleVariantModule(Badge.common, Badge.variants[p2], Badge.shapes[p3], if FlagsModule.FoundationBadgeBetaUpdate then Badge.sizes[p4] else nil, if FlagsModule.FoundationBadgeBetaUpdate then Badge.iconPlacement[if p5 then p5 else DashModule.None] else nil, if FlagsModule.FoundationBadgeBetaUpdate then nil else Badge.iconOnly[p6])
 end

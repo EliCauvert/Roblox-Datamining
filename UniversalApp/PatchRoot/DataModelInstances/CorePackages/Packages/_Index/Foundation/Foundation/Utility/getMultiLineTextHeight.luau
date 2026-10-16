@@ -1,18 +1,19 @@
-﻿local fontScalesModule = require(script:FindFirstAncestor("Foundation").Components.Text.FontScales)
+﻿local FontScalesModule = require(script:FindFirstAncestor("Foundation").Components.Text.FontScales)
 
-return function(p1, p2, p3)
-	-- upvalues: fontScalesModule (ref)
-	if p1 <= 0 or p2 <= 0 then
+return function(Value: number, p1: number, p2: number): number --[[ Line: 5 ]]
+	-- upvalues: FontScalesModule (copy)
+	if Value <= 0 or p1 <= 0 then
 		return 0
-	elseif p3 <= 1 then
-		p3 = 1
 	end
-	local floored = math.floor(p1)
-	floored = 0
-	local family = fontScalesModule[Font.fromEnum(Enum.Font.BuilderSans).Family]
+	if p2 <= 1 then
+		p2 = 1
+	end
+	local Floored = math.floor(Value)
+	local Value1 = 0
+	local FontScalesModuleEntry = FontScalesModule[Font.fromEnum(Enum.Font.BuilderSans).Family]
 	
-	if family ~= nil then
-		floored = (floored / family * (p3 * family) - floored) / 2
+	if FontScalesModuleEntry ~= nil then
+		Value1 = (Floored / FontScalesModuleEntry * (p2 * FontScalesModuleEntry) - Floored) / 2
 	end
-	return math.ceil((p2 - 1) * p3 * floored) + floored + (if floored >= 1 then math.ceil(floored) else math.floor(floored))
+	return math.ceil((p1 - 1) * p2 * Floored) + Floored + (if Value1 >= 1 then math.ceil(Value1) else math.floor(Value1))
 end

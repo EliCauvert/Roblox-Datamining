@@ -1,106 +1,84 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 46 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		user_vote = if p1 == nil or p1.user_vote == nil then nil else p1.user_vote,
-		can_vote = if p1 == nil or p1.can_vote == nil then false else p1.can_vote,
+		can_vote = p1 ~= nil and p1.can_vote ~= nil and p1.can_vote,
 		reason_for_not_voteable = if p1 == nil or p1.reason_for_not_voteable == nil then "" else p1.reason_for_not_voteable
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 56 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.user_vote ~= nil then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.varint)
-		var2, var7 = protoModule.writeVarInt(var2, var3, if self.user_vote then 1 else 0)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, if self.user_vote then 1 else 0)
 	end
 	if self.can_vote then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.varint)
-		var4, var9 = protoModule.writeVarInt(var4, var5, if self.can_vote then 1 else 0)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, if self.can_vote then 1 else 0)
 	end
 	if self.reason_for_not_voteable ~= nil and self.reason_for_not_voteable ~= "" then
-		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
-		var6, var11 = protoModule.writeString(var6, var7, self.reason_for_not_voteable)
-		buff = var6
-		var1 = var7
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.reason_for_not_voteable)
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 80 ]]
+	-- upvalues: Module (copy), ProtoModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v13 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			if var7 == 1 then
-				local _ = nil
-				local var8, var9 = protoModule.readVarInt(p1, var2)
-				var2 = var9
-				var1.user_vote = var8 ~= 0
-			elseif var7 == 2 then
-				local _ = nil
-				local var10, var11 = protoModule.readVarInt(p1, var2)
-				var2 = var11
-				var1.can_vote = var10 ~= 0
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 1 then
+				local VarInt
+				VarInt, v13 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.user_vote = VarInt ~= 0
+			elseif Tag == 2 then
+				local VarInt1
+				VarInt1, v13 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.can_vote = VarInt1 ~= 0
 			else
-				local _ = nil
-				local var12, var13 = protoModule.readVarInt(p1, var2)
-				local _ = var12
-				var2 = var13
+				local _
+				_, v13 = ProtoModule.readVarInt(Buf, v1)
 			end
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 3 then
-				local _ = nil
-				local var14, var15 = protoModule.readBuffer(p1, var2)
-				var2 = var15
-				var1.reason_for_not_voteable = buffer.tostring(var14)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 3 then
+				local Buffer1
+				Buffer1, v13 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.reason_for_not_voteable = buffer.tostring(Buffer1)
 			else
-				local _ = nil
-				local var16, var17 = protoModule.readVarInt(p1, var2)
-				var2 = var17 + var16
+				local VarInt2, VarInt2_1 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2_1 + VarInt2
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var18, var19 = protoModule.readFixed32(p1, var2)
-			local _ = var18
-			var2 = var19
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var20, var21 = protoModule.readFixed64(p1, var2)
-			local _ = var20
-			var2 = var21
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v13 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v13 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var15)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 133 ]]
 	local t = {}
 	
 	if self.user_vote ~= nil then
@@ -115,36 +93,36 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref)
-	local var22 = t_1.new()
+function Module:jsonDecode() --[[ Line: 151 ]]
+	-- upvalues: Module (copy)
+	local NewModule = Module.new()
 	
 	if self.user_vote ~= nil then
-		var22.user_vote = self.user_vote
+		NewModule.user_vote = self.user_vote
 	end
 	if self.userVote ~= nil then
-		var22.user_vote = self.userVote
+		NewModule.user_vote = self.userVote
 	end
 	if self.can_vote ~= nil then
-		var22.can_vote = self.can_vote
+		NewModule.can_vote = self.can_vote
 	end
 	if self.canVote ~= nil then
-		var22.can_vote = self.canVote
+		NewModule.can_vote = self.canVote
 	end
 	if self.reason_for_not_voteable ~= nil then
-		var22.reason_for_not_voteable = self.reason_for_not_voteable
+		NewModule.reason_for_not_voteable = self.reason_for_not_voteable
 	end
 	if self.reasonForNotVoteable ~= nil then
-		var22.reason_for_not_voteable = self.reasonForNotVoteable
+		NewModule.reason_for_not_voteable = self.reasonForNotVoteable
 	end
-	return var22
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "UniverseUserVoteData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.UniverseUserVoteData"
 }
-t.UniverseUserVoteData = t_1
-typeRegistryModule.default:register(t.UniverseUserVoteData)
+local config = { UniverseUserVoteData = Module }
+TypeRegistryModule.default:register(config.UniverseUserVoteData)
 
-return { UniverseUserVoteData = t.UniverseUserVoteData }
+return { UniverseUserVoteData = config.UniverseUserVoteData }

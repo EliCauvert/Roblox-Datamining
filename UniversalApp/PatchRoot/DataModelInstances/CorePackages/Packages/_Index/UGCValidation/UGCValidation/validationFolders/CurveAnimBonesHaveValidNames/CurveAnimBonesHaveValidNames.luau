@@ -1,42 +1,34 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local curveAnimationHierarchyUtilsModule = require(parent.util.CurveAnimationHierarchyUtils)
-local curveAnimBoneHierarchyUtilsModule = require(parent.util.CurveAnimBoneHierarchyUtils)
-local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
-local getFFlagUGCValidateAnimBonesSupportModule = require(parent.flags.getFFlagUGCValidateAnimBonesSupport)
-local t = {
-	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local CurveAnimationHierarchyUtilsModule = require(Parent.util.CurveAnimationHierarchyUtils)
+local CurveAnimBoneHierarchyUtilsModule = require(Parent.util.CurveAnimBoneHierarchyUtils)
 
-if getFFlagUGCValidateAnimBonesSupportModule() then
-	table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
-end
-t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }
-t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
-
-function t.fflag()
-	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimBonesSupportModule (ref)
-	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimBonesSupportModule()
-end
-
-t.expectedFailures = {}
-t.prereqTests = {
-	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
-}
-
-function t.run(p1, p2)
-	-- upvalues: curveAnimationHierarchyUtilsModule (ref), curveAnimBoneHierarchyUtilsModule (ref), errorSourceStringsModule (ref)
-	for i, v in p2.curveAnimations do
-		for i_1, v_1 in v:GetDescendants() do
-			if v_1:IsA("Folder") then
-				if curveAnimationHierarchyUtilsModule.folderHasAnimationTracks(v_1) and not curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) and not curveAnimBoneHierarchyUtilsModule.isBoneFolderName(v_1.Name) then
-					p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBoneName, { boneName = v_1.Name })
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
+	},
+	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
+	conditionalData = { ValidationEnumsModule.SharedDataMember.curveAnimBoneData },
+	expectedFailures = {},
+	prereqTests = {
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	},
+	run = function(p1, p2) --[[ Line: 20 ]]
+		-- upvalues: CurveAnimationHierarchyUtilsModule (copy), CurveAnimBoneHierarchyUtilsModule (copy), ErrorSourceStringsModule (copy)
+		for _, curveAnimation in p2.curveAnimations do
+			for _, Folder in curveAnimation:GetDescendants() do
+				if Folder:IsA("Folder") then
+					local IsBodyPartFolderNameValid = CurveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(Folder.Name)
+					local IsBoneFolderName = CurveAnimBoneHierarchyUtilsModule.isBoneFolderName(Folder.Name)
+					
+					if CurveAnimationHierarchyUtilsModule.folderHasAnimationTracks(Folder) and not IsBodyPartFolderNameValid and not IsBoneFolderName then
+						p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidBoneName, { boneName = Folder.Name })
+					end
 				end
 			end
 		end
 	end
-end
-
-return t
+}

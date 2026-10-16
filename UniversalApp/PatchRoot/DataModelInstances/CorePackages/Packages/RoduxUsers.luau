@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.RoduxUsers.RoduxUsers)
+﻿return (require(script.Parent._Index.RoduxUsers.RoduxUsers))

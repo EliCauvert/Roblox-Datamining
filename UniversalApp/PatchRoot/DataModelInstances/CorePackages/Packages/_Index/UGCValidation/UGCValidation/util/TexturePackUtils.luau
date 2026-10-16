@@ -1,66 +1,40 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent
-local parseContentIdsModule = require(parent.util.ParseContentIds)
-local getFFlagUGCValidateEmptySurfaceAppearanceModule = require(parent.flags.getFFlagUGCValidateEmptySurfaceAppearance)
-local t = {}
+local Parent = script.Parent.Parent
+local ParseContentIdsModule = require(Parent.util.ParseContentIds)
+local GetFFlagUGCValidateEmptySurfaceAppearanceModule = require(Parent.flags.getFFlagUGCValidateEmptySurfaceAppearance)
 
-local function findSurfaceAppearances(p1, p2)
-	-- upvalues: UGCValidationService (ref), parseContentIdsModule (ref), getFFlagUGCValidateEmptySurfaceAppearanceModule (ref)
-	local t = {}
-	local t_1 = {}
-	local descendants = p1:GetDescendants()
-	table.insert(descendants, p1)
+local function findSurfaceAppearances(Object, p1) --[[ Line: 17 ]]
+	-- upvalues: UGCValidationService (copy), ParseContentIdsModule (copy), GetFFlagUGCValidateEmptySurfaceAppearanceModule (copy)
+	local List = {}
+	local List1 = {}
+	local Descendants = Object:GetDescendants()
+	table.insert(Descendants, Object)
 	
-	for i, v in descendants do
-		if v:IsA("SurfaceAppearance") then
-			local var1 = UGCValidationService:GetPropertyValue(v, "TexturePack")
+	for _, SurfaceAppearance in Descendants do
+		if SurfaceAppearance:IsA("SurfaceAppearance") then
+			local TexturePackPropertyValue = UGCValidationService:GetPropertyValue(SurfaceAppearance, "TexturePack")
 			
-			if if var1 then parseContentIdsModule.tryGetAssetIdFromContentId(var1) else nil then
-				table.insert(t, v)
-			elseif getFFlagUGCValidateEmptySurfaceAppearanceModule() then
-				local var2
-				if v.ColorMap then
-					var2 = true
-					
-					if v.ColorMap == "" then
-						if v.MetalnessMap then
-							var2 = true
-							
-							if v.MetalnessMap == "" then
-								if v.NormalMap then
-									var2 = true
-									
-									if v.NormalMap == "" then
-										if v.RoughnessMap then
-											var2 = if v.RoughnessMap == "" then v.EmissiveMaskContent and (v.EmissiveMaskContent.SourceType == Enum.ContentSourceType.Uri and (v.EmissiveMaskContent.Uri and v.EmissiveMaskContent.Uri ~= "")) else true
-										end
-									end
-								end
-							end
-						end
-					end
-					if var2 or not p2 then
-						table.insert(t_1, v)
-					end
-				end
-			else
-				table.insert(t_1, v)
+			if if TexturePackPropertyValue then ParseContentIdsModule.tryGetAssetIdFromContentId(TexturePackPropertyValue) else nil then
+				table.insert(List, SurfaceAppearance)
+			elseif not GetFFlagUGCValidateEmptySurfaceAppearanceModule() then
+				table.insert(List1, SurfaceAppearance)
+			elseif SurfaceAppearance.ColorMap and SurfaceAppearance.ColorMap ~= "" or (SurfaceAppearance.MetalnessMap and SurfaceAppearance.MetalnessMap ~= "" or (SurfaceAppearance.NormalMap and SurfaceAppearance.NormalMap ~= "" or (SurfaceAppearance.RoughnessMap and SurfaceAppearance.RoughnessMap ~= "" or SurfaceAppearance.EmissiveMaskContent and (SurfaceAppearance.EmissiveMaskContent.SourceType == Enum.ContentSourceType.Uri and (SurfaceAppearance.EmissiveMaskContent.Uri and SurfaceAppearance.EmissiveMaskContent.Uri ~= ""))))) or not p1 then
+				table.insert(List1, SurfaceAppearance)
 			end
 		end
 	end
-	return t, t_1
+	return List, List1
 end
 
-function t.findSurfaceAppearancesMissingTexturePacks(p3, p4)
-	-- upvalues: findSurfaceAppearances (ref)
-	local _, var3 = findSurfaceAppearances(p3, p4)
-	
-	return var3
-end
-
-function t.findSurfaceAppearancesWithTexturePacks(p3)
-	-- upvalues: findSurfaceAppearances (ref)
-	return findSurfaceAppearances(p3, false)
-end
-
-return t
+return {
+	findSurfaceAppearancesMissingTexturePacks = function(p2, p3) --[[ Line: 60 ]]
+		-- upvalues: findSurfaceAppearances (copy)
+		local _, SurfaceAppearances2 = findSurfaceAppearances(p2, p3)
+		
+		return SurfaceAppearances2
+	end,
+	findSurfaceAppearancesWithTexturePacks = function(p2) --[[ Line: 68 ]]
+		-- upvalues: findSurfaceAppearances (copy)
+		return (findSurfaceAppearances(p2, false))
+	end
+}

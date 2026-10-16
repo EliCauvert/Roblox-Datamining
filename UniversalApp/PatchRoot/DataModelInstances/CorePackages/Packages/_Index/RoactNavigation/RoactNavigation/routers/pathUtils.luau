@@ -1,218 +1,231 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local luauPolyfillModule = require(parent_2.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local string = luauPolyfillModule.String
-local regExpModule = require(parent_2.RegExp)
-local invariantModule = require(parent_1.utils.invariant)
-local navigationActionsModule = require(parent_1.NavigationActions)
-local pathToRegexpModule = require(parent.pathToRegexp)
-local compile = pathToRegexpModule.compile
-local pathToRegexp = pathToRegexpModule.pathToRegexp
-local queryStringModule = require(parent.queryString)
-local unknownModule = require(parent:FindFirstChild("ChildIsScreenRouterSymbol.roblox"))
-local unknownModule_1 = require(parent:FindFirstChild("NullPathSymbol.roblox"))
-local decodeURIComponentModule = require(parent.decodeURIComponent)
-local t = {
-	getParamsFromPath = function(p1, p2, p3)
-		-- upvalues: array (ref), decodeURIComponentModule (ref)
-		return array.reduce(array.slice(p2, 2), function(p4, p5, p6)
-			-- upvalues: p3 (ref), decodeURIComponentModule (copy)
-			local var1 = p3[p6]
-			
-			if not var1 or var1.pattern == ".*" then
-				return p4
-			end
-			local name = var1.name
-			local var2 = nil
-			
-			if p5 then
-				local ok, status = pcall(decodeURIComponentModule, p5)
-				
-				if ok then
-					var2 = status
-				end
-			end
-			p4[name] = var2 or p5
-			
-			return p4
-		end, table.clone(p1))
-	end
-}
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local LuauPolyfillModule = require(Parent2.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local String1 = LuauPolyfillModule.String
+local RegExpModule = require(Parent2.RegExp)
+local InvariantModule = require(Parent1.utils.invariant)
+local NavigationActionsModule = require(Parent1.NavigationActions)
+local PathToRegexpModule = require(Parent.pathToRegexp)
+local CompileFunction = PathToRegexpModule.compile
+local PathToRegexpFunction = PathToRegexpModule.pathToRegexp
+local QueryStringModule = require(Parent.queryString)
+local ChildIsScreenRouterSymbolRobloxModule = require(Parent:FindFirstChild("ChildIsScreenRouterSymbol.roblox"))
+local NullPathSymbolRobloxModule = require(Parent:FindFirstChild("NullPathSymbol.roblox"))
+local DecodeURIComponentModule = require(Parent.decodeURIComponent)
 
-local function _(p1, p2)
-	-- upvalues: array (ref)
-	return p1[array.findIndex(p2, function(p3)
+local function _(p1, p2) --[[ Line: 59 | Named "getRestOfPath" ]]
+	-- upvalues: Array (copy)
+	return p1[Array.findIndex(p2, function(p3): boolean --[[ Line: 62 ]]
 		return p3.pattern == ".*"
 	end) + 1]
 end
 
-local function determineDelimiter(a, b)
-	-- upvalues: array (ref), string (ref)
-	if not array.isArray(b) then
-		return b
-	elseif #b == 1 then
-		return b[1]
+local function determineDelimiter(p1, Entry) --[[ Line: 69 ]]
+	-- upvalues: Array (copy), String1 (copy)
+	if not Array.isArray(Entry) then
+		return Entry
 	end
-	for i, v in b do
-		if string.startsWith(a, v) then
-			return v
+	if #Entry == 1 then
+		return Entry[1]
+	end
+	for _, value in Entry do
+		if String1.startsWith(p1, value) then
+			return value
 		end
 	end
 	return nil
 end
 
-function t.urlToPathAndParams(p1, p2)
-	-- upvalues: regExpModule (ref), queryStringModule (ref), determineDelimiter (ref)
-	local var1 = regExpModule("^(.*)\\?(.*)$"):exec(p1)
-	local var2 = if var1 then var1[2] else p1
-	local var3 = queryStringModule.parse(if var1 then var1[3] else {})
-	local var4 = determineDelimiter(var2, p2)
-	
-	if var4 == nil or var4 == "" then
-		var4 = "://"
-	end
-	local var5 = string.split(var2, var4)[2]
-	
-	if var5 == nil then
-		var5 = var2
-	end
-	if var5 == "/" then
-		var5 = ""
-	end
-	if string.sub(var5, -1, -1) == "/" then
-		var5 = string.sub(var5, 1, -2)
-	end
-	return { path = var5, params = var3 }
-end
-
-function t.createPathParser(p1, p2, p3)
-	-- upvalues: unknownModule_1 (ref), invariantModule (ref), pathToRegexp (ref), compile (ref), object (ref), array (ref), navigationActionsModule (ref), t (ref), unknownModule (ref)
-	local paths = p3.paths or {}
-	local disableRouteNamePaths = p3.disableRouteNamePaths
-	local t_1 = {}
-	local _ = {}
-	
-	for i in p1 do
-		local var1 = nil
+local PathUtils = {
+	getParamsFromPath = function(Tbl, ExecResult, ExactReKeys) --[[ Line: 27 ]]
+		-- upvalues: Array (copy), DecodeURIComponentModule (copy)
+		return (Array.reduce(Array.slice(ExecResult, 2), function(p2, p3, p4) --[[ Line: 31 ]]
+			-- upvalues: ExactReKeys (copy), DecodeURIComponentModule (upval)
+			local ExactReKey = ExactReKeys[p4]
+			
+			if not ExactReKey or ExactReKey.pattern == ".*" then
+				return p2
+			end
+			local Name = ExactReKey.name
+			local v1 = nil
+			
+			if p3 then
+				local Success, Result = pcall(DecodeURIComponentModule, p3)
+				
+				if Success then
+					v1 = Result
+				end
+			end
+			p2[Name] = v1 or p3
+			
+			return p2
+		end, table.clone(Tbl)))
+	end,
+	urlToPathAndParams = function(p2, p3) --[[ Line: 85 ]]
+		-- upvalues: RegExpModule (copy), QueryStringModule (copy), determineDelimiter (copy)
+		local ExecResult = RegExpModule("^(.*)\\?(.*)$"):exec(p2)
+		local Text = if ExecResult then ExecResult[2] else p2
+		local ParseResult = QueryStringModule.parse(if ExecResult then ExecResult[3] else {})
+		local DetermineDelimiterResult = determineDelimiter(Text, p3)
 		
-		if paths[i] ~= nil then
-			var1 = paths[i]
-		elseif type(p2[i]) == "table" then
-			var1 = p2[i].path
+		if DetermineDelimiterResult == nil or DetermineDelimiterResult == "" then
+			DetermineDelimiterResult = "://"
 		end
-		if var1 == nil then
-			var1 = if disableRouteNamePaths then unknownModule_1 else i
+		local Part = string.split(Text, DetermineDelimiterResult)[2]
+		
+		if Part == nil then
+			Part = Text
 		end
-		invariantModule(if var1 ~= unknownModule_1 then type(var1) == "string" else true, "Route path for %s must be specified as a string, or RoactNavigation.NoPath.", i)
-		local var2 = var1 ~= unknownModule_1
-		local t_2 = {}
-		local var3 = if var2 then pathToRegexp(var1, t_2) else nil
-		local t_3 = {}
-		local var4 = if var1 ~= "" then not var2 else true
-		t_1[i] = {
-			exactRe = var3,
-			exactReKeys = t_2,
-			extendedPathRe = pathToRegexp(if var4 then "(.*)" else ("%s/(.*)"):format(var1), t_3),
-			extendedPathReKeys = t_3,
-			isWildcard = var4,
-			toPath = if var1 == unknownModule_1 then function()
+		if Part == "/" then
+			Part = ""
+		end
+		if string.sub(Part, -1, -1) == "/" then
+			Part = string.sub(Part, 1, -2)
+		end
+		return { path = Part, params = ParseResult }
+	end
+}
+
+function PathUtils.createPathParser(List, p2, p3) --[[ Line: 112 ]]
+	-- upvalues: NullPathSymbolRobloxModule (copy), InvariantModule (copy), PathToRegexpFunction (copy), CompileFunction (copy), Object (copy), Array (copy), NavigationActionsModule (copy), PathUtils (copy), ChildIsScreenRouterSymbolRobloxModule (copy)
+	local Paths = p3.paths or {}
+	local DisableRouteNamePaths = p3.disableRouteNamePaths
+	local t = {}
+	local EntriesResult = {}
+	
+	for i in List do
+		local NullPathSymbolRobloxModule1 = nil
+		
+		if Paths[i] == nil then
+			if type(p2[i]) == "table" then
+				NullPathSymbolRobloxModule1 = p2[i].path
+			end
+		else
+			NullPathSymbolRobloxModule1 = Paths[i]
+		end
+		if NullPathSymbolRobloxModule1 == nil then
+			NullPathSymbolRobloxModule1 = if DisableRouteNamePaths then NullPathSymbolRobloxModule else i
+		end
+		InvariantModule(NullPathSymbolRobloxModule1 == NullPathSymbolRobloxModule or type(NullPathSymbolRobloxModule1) == "string", "Route path for %s must be specified as a string, or RoactNavigation.NoPath.", i)
+		local IsNotNullPathSymbolRobloxModuleMatch = NullPathSymbolRobloxModule1 ~= NullPathSymbolRobloxModule
+		local ExactReKeys = {}
+		local ExtendedPathReKeys = {}
+		local IsNullPathSymbolRobloxModuleMatch: boolean = NullPathSymbolRobloxModule1 == "" or not IsNotNullPathSymbolRobloxModuleMatch
+		t[i] = {
+			exactRe = if IsNotNullPathSymbolRobloxModuleMatch then PathToRegexpFunction(NullPathSymbolRobloxModule1, ExactReKeys) else nil,
+			exactReKeys = ExactReKeys,
+			extendedPathRe = PathToRegexpFunction(if IsNullPathSymbolRobloxModuleMatch then "(.*)" else ("%s/(.*)"):format(NullPathSymbolRobloxModule1), ExtendedPathReKeys),
+			extendedPathReKeys = ExtendedPathReKeys,
+			isWildcard = IsNullPathSymbolRobloxModuleMatch,
+			toPath = NullPathSymbolRobloxModule1 == NullPathSymbolRobloxModule and function(): string --[[ Line: 172 ]]
 				return ""
-			end else compile(var1)
+			end or CompileFunction(NullPathSymbolRobloxModule1)
 		}
 	end
-	local var5 = object.entries(t_1)
+	EntriesResult = Object.entries(t)
 	
 	return {
-		getActionForPathAndParams = function(p4, p5)
-			-- upvalues: var5 (write), p1 (ref), array (copy), navigationActionsModule (copy), t (copy)
+		getActionForPathAndParams = function(p4: string, p5) --[[ Line: 180 ]]
+			-- upvalues: EntriesResult (ref), List (copy), Array (upval), NavigationActionsModule (upval), PathUtils (upval)
 			if p4 == nil then
 				p4 = ""
 			end
 			if p5 == nil then
 				p5 = {}
 			end
-			local var6
-			for i, v in var5 do
-				local var7 = v[1]
-				local var8 = v[2]
-				local exactRe = var8.exactRe
-				local exactReKeys = var8.exactReKeys
-				local extendedPathRe = var8.extendedPathRe
-				local extendedPathReKeys = var8.extendedPathReKeys
-				local var9 = p1[var7]
-				var6 = exactRe and exactRe:exec(p4)
+			local RouteName = nil
+			local ExactReKeys = nil
+			local ExecResult = nil
+			local ExtendedPathRe = nil
+			local ExtendedPathReKeys = nil
+			local Entry = nil
+			for _, value in EntriesResult do
+				RouteName = value[1]
+				local v1 = value[2]
+				local ExactRe = v1.exactRe
+				ExactReKeys = v1.exactReKeys
+				ExtendedPathRe = v1.extendedPathRe
+				ExtendedPathReKeys = v1.extendedPathReKeys
+				Entry = List[RouteName]
+				ExecResult = ExactRe and ExactRe:exec(p4)
 				
-				if var6 and var6.n ~= 0 then
-					local var10 = extendedPathRe and extendedPathRe:exec(p4)
+				if ExecResult and ExecResult.n ~= 0 then
+					local ExecResult1 = ExtendedPathRe and ExtendedPathRe:exec(p4)
 					
-					return navigationActionsModule.navigate({
-						routeName = var7,
-						params = t.getParamsFromPath(p5, var6, exactReKeys),
-						action = if var10 and var9 then var9.getActionForPathAndParams(var10[array.findIndex(extendedPathReKeys, function(p6)
+					return NavigationActionsModule.navigate({
+						routeName = RouteName,
+						params = PathUtils.getParamsFromPath(p5, ExecResult, ExactReKeys),
+						action = if ExecResult1 and Entry then Entry.getActionForPathAndParams(ExecResult1[Array.findIndex(ExtendedPathReKeys, function(p6): boolean --[[ Line: 62 ]]
 							return p6.pattern == ".*"
 						end) + 1], p5) else nil
 					})
 				end
 			end
-			for i, v_1 in var5 do
-				local var11 = v_1[1]
-				local var12 = v_1[2]
-				local extendedPathRe = var12.extendedPathRe
-				local extendedPathReKeys = var12.extendedPathReKeys
-				local var13 = p1[var11]
-				local var14 = extendedPathRe and extendedPathRe:exec(p4)
+			local RouteName1 = nil
+			local ExtendedPathReKeys1 = nil
+			local ExecResult2 = nil
+			local ActionForPathAndParams = nil
+			for _, value1 in EntriesResult do
+				RouteName1 = value1[1]
+				local v2 = value1[2]
+				local ExtendedPathRe1 = v2.extendedPathRe
+				ExtendedPathReKeys1 = v2.extendedPathReKeys
+				local Entry1 = List[RouteName1]
+				ExecResult2 = ExtendedPathRe1 and ExtendedPathRe1:exec(p4)
 				
-				if var14 and var14.n ~= 0 then
-					var6 = if var13 then var13.getActionForPathAndParams(var14[array.findIndex(extendedPathReKeys, function(p6)
+				if ExecResult2 and ExecResult2.n ~= 0 then
+					local ExecResultEntry = ExecResult2[Array.findIndex(ExtendedPathReKeys1, function(p6): boolean --[[ Line: 62 ]]
 						return p6.pattern == ".*"
-					end) + 1], p5) else nil
+					end) + 1]
+					ActionForPathAndParams = if Entry1 then Entry1.getActionForPathAndParams(ExecResultEntry, p5) else nil
 					
-					if var6 then
-						return navigationActionsModule.navigate({
-							routeName = var11,
-							params = t.getParamsFromPath(p5, var14, extendedPathReKeys),
-							action = var6
+					if ActionForPathAndParams then
+						return NavigationActionsModule.navigate({
+							routeName = RouteName1,
+							params = PathUtils.getParamsFromPath(p5, ExecResult2, ExtendedPathReKeys1),
+							action = ActionForPathAndParams
 						})
 					end
 				end
 			end
 			return nil
 		end,
-		getPathAndParamsForRoute = function(p6)
-			-- upvalues: p1 (ref), t_1 (ref), array (copy), object (copy), unknownModule (copy)
-			local routeName = p6.routeName
-			local params = p6.params
-			local var15 = p1[routeName]
-			local var16 = t_1[routeName]
-			local exactReKeys = var16.exactReKeys
-			local var17 = var16.toPath(params)
-			local t = {}
+		getPathAndParamsForRoute = function(p6) --[[ Line: 247 ]]
+			-- upvalues: List (copy), t (copy), Array (upval), Object (upval), ChildIsScreenRouterSymbolRobloxModule (upval)
+			local RouteName = p6.routeName
+			local Params = p6.params
+			local Entry = List[RouteName]
+			local Entry1 = t[RouteName]
+			local ExactReKeys = Entry1.exactReKeys
+			local Path = Entry1.toPath(Params)
+			local Params1 = {}
 			
-			if params then
-				for i, v in array.filter(object.keys(params), function(p7)
-					-- upvalues: array (copy), exactReKeys (ref)
-					return not array.find(exactReKeys, function(p8)
-						-- upvalues: p7 (ref)
-						return p8.name == p7
+			if Params then
+				for _, value in Array.filter(Object.keys(Params), function(Name): boolean --[[ Line: 257 ]]
+					-- upvalues: Array (upval), ExactReKeys (copy)
+					return not Array.find(ExactReKeys, function(p7): boolean --[[ Line: 258 ]]
+						-- upvalues: Name (copy)
+						return p7.name == Name
 					end)
 				end) do
-					t[v] = params[v]
+					Params1[value] = Params[value]
 				end
 			end
-			if not var15 or var15 == unknownModule then
-				return { path = var17, params = t }
+			if Entry and Entry ~= ChildIsScreenRouterSymbolRobloxModule then
+				local PathAndParamsForState = Entry.getPathAndParamsForState(p6)
+				
+				return {
+					path = if Path and Path ~= "" then ("%s/%s"):format(Path, PathAndParamsForState.path) else PathAndParamsForState.path,
+					params = if PathAndParamsForState.params then Object.assign(Params1, PathAndParamsForState.params) else Params1
+				}
+			else
+				return { path = Path, params = Params1 }
 			end
-			local pathAndParamsForState = var15.getPathAndParamsForState(p6)
-			
-			return {
-				path = if var17 and var17 ~= "" then ("%s/%s"):format(var17, pathAndParamsForState.path) else pathAndParamsForState.path,
-				params = if pathAndParamsForState.params then object.assign(t, pathAndParamsForState.params) else t
-			}
 		end
 	}
 end
 
-return t
+return PathUtils

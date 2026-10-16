@@ -1,38 +1,37 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local pcallDeferredModule = require(parent.util.pcallDeferred)
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Constants)
+local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local PcallDeferredModule = require(Parent.util.pcallDeferred)
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Constants)
 
-return function(vectorA, vectorB, p1)
-	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), constantsModule (ref), analyticsModule (ref)
-	local isServer = p1.isServer
-	local var1, var2 = pcallDeferredModule(function()
-		-- upvalues: UGCValidationService (copy), vectorA (ref)
-		return UGCValidationService:GetEditableMeshTriCount(vectorA.editableMesh)
-	end, p1)
+return function(p1, p2, p3) --[[ Line: 12 | Named "validateMeshTriangles" ]]
+	-- upvalues: PcallDeferredModule (copy), UGCValidationService (copy), ConstantsModule (copy), AnalyticsModule (copy)
+	local IsServer = p3.isServer
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 19 ]]
+		-- upvalues: UGCValidationService (upval), p1 (copy)
+		return UGCValidationService:GetEditableMeshTriCount(p1.editableMesh)
+	end, p3)
 	
-	if vectorB == nil then
-		vectorB = constantsModule.MAX_HAT_TRIANGLES
+	if p2 == nil then
+		p2 = ConstantsModule.MAX_HAT_TRIANGLES
 	end
-	if var1 then
-		if vectorB < var2 then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshTriangles_TooManyTriangles, nil, p1)
-			
-			return false, {
-				string.format("Model mesh %s resolution of %d is higher than max support value of %d. You need to retopologize your model and try again.", vectorA.fullName, var2, vectorB)
-			}
-		end
-		return true
-	else
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshTriangles_FailedToLoadMesh, nil, p1)
+	if not PcallDeferredModuleResult then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateMeshTriangles_FailedToLoadMesh, nil, p3)
 		
-		if isServer ~= nil and isServer then
-			error(string.format("Failed to load model mesh %s. Make sure the mesh exists and try again.", vectorA.fullName))
+		if IsServer ~= nil and IsServer then
+			error(string.format("Failed to load model mesh %s. Make sure the mesh exists and try again.", p1.fullName))
 		end
 		return false, {
-			string.format("Failed to load model mesh %s. Make sure the mesh exists and try again.", vectorA.fullName)
+			string.format("Failed to load model mesh %s. Make sure the mesh exists and try again.", p1.fullName)
 		}
+	elseif p2 < PcallDeferredModuleResult2 then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateMeshTriangles_TooManyTriangles, nil, p3)
+		
+		return false, {
+			string.format("Model mesh %s resolution of %d is higher than max support value of %d. You need to retopologize your model and try again.", p1.fullName, PcallDeferredModuleResult2, p2)
+		}
+	else
+		return true
 	end
 end

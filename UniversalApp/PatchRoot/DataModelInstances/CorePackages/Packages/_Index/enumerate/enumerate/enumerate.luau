@@ -1,100 +1,100 @@
-﻿local function strict(p1, p2)
-	p2 = p2 or tostring(p1)
+﻿local function strict(p1, p2) --[[ Line: 2 ]]
+	local P1 = p2 or tostring(p1)
 	
-	return setmetatable(p1, {
-		__index = function(_, p3)
-			-- upvalues: p2 (ref)
-			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), p2), 2)
+	return (setmetatable(p1, {
+		__index = function(_, p3) --[[ Line: 6 ]]
+			-- upvalues: P1 (copy)
+			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), P1), 2)
 		end,
-		__newindex = function(_, p3, _)
-			-- upvalues: p2 (ref)
-			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), p2), 2)
+		__newindex = function(_, p3, _) --[[ Line: 12 ]]
+			-- upvalues: P1 (copy)
+			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), P1), 2)
 		end
-	})
+	}))
 end
 
-local function addEnumValue(p1, p2, p3, p4, p5)
-	-- upvalues: strict (ref)
-	local isString = typeof(p4) == "string"
-	assert(isString, "Only string names are supported for enums!")
+local function addEnumValue(Proxies, Proxies1, p1, Key, Key1) --[[ Line: 20 ]]
+	-- upvalues: strict (copy)
+	local IsString = typeof(Key) == "string"
+	assert(IsString, "Only string names are supported for enums!")
 	
-	if isString then
-		assert(p4 ~= "fromRawValue", "fromRawValue is reserved")
-		assert(p4 ~= "isEnumValue", "isEnumValue is reserved")
-		assert(p4 ~= "allValues", "allValues is reserved")
+	if IsString then
+		assert(Key ~= "fromRawValue", "fromRawValue is reserved")
+		assert(Key ~= "isEnumValue", "isEnumValue is reserved")
+		assert(Key ~= "allValues", "allValues is reserved")
 	end
-	assert(p1[p4] == nil, "Enum value names can only be used once!")
-	assert(p2[p4] == nil, "Enum values can only be used once!")
-	local var1 = newproxy(true)
-	local var2 = getmetatable(var1)
+	assert(Proxies[Key] == nil, "Enum value names can only be used once!")
+	assert(Proxies1[Key] == nil, "Enum values can only be used once!")
+	local Proxy = newproxy(true)
+	local Meta = getmetatable(Proxy)
 	
-	function var5.__tostring()
-		-- upvalues: p3 (ref), p4 (ref)
-		return ("%s.%s"):format(p3, p4)
+	function Meta.__tostring(): string --[[ Line: 34 ]]
+		-- upvalues: p1 (copy), Key (copy)
+		return ("%s.%s"):format(p1, Key)
 	end
 	
-	var2.__index = strict({
-		rawValue = function()
-			-- upvalues: p5 (ref)
-			return p5
+	Meta.__index = strict({
+		rawValue = function() --[[ Line: 39 ]]
+			-- upvalues: Key1 (copy)
+			return Key1
 		end
 	})
-	p1[p4] = var1
-	p2[p5] = var1
+	Proxies[Key] = Proxy
+	Proxies1[Key1] = Proxy
 end
 
-return function(p1, p2)
-	-- upvalues: addEnumValue (ref), strict (ref)
+return function(p1, Entry) --[[ Line: 51 | Named "enumerate" ]]
+	-- upvalues: addEnumValue (copy), strict (copy)
 	assert(typeof(p1) == "string", "Bad argument #1 - enums must be created using a string name!")
-	assert(typeof(p2) == "table", "Bad argument #2 - enums must be created using a table!")
+	assert(typeof(Entry) == "table", "Bad argument #2 - enums must be created using a table!")
 	local t = {}
-	local t_1 = {}
+	local t1 = {}
 	
-	if p2[1] == nil then
-		for i, v in pairs(p2) do
-			addEnumValue(t, t_1, p1, i, v)
+	if Entry[1] == nil then
+		for i, value1 in pairs(Entry) do
+			addEnumValue(t, t1, p1, i, value1)
 		end
 	else
-		for i, v in ipairs(p2) do
-			addEnumValue(t, t_1, p1, v, v)
+		for _, value in ipairs(Entry) do
+			addEnumValue(t, t1, p1, value, value)
 		end
 	end
-	function t.fromRawValue(p3)
-		-- upvalues: t_1 (ref)
-		return t_1[p3]
+	function t.fromRawValue(p2) --[[ Line: 69 ]]
+		-- upvalues: t1 (copy)
+		return t1[p2]
 	end
 	
-	function t.isEnumValue(p3)
-		-- upvalues: t (ref)
-		if typeof(p3) ~= "userdata" then
+	function t.isEnumValue(p2): boolean --[[ Line: 73 ]]
+		-- upvalues: t (copy)
+		if typeof(p2) ~= "userdata" then
 			return false
 		end
-		for i, v in pairs(t) do
-			if v == p3 then
+		for _, value in pairs(t) do
+			if value == p2 then
 				return true
 			end
 		end
 		return false
 	end
 	
-	function t.allValues()
-		-- upvalues: t_1 (ref)
-		local t = {}
+	function t.allValues() --[[ Line: 87 ]]
+		-- upvalues: t1 (copy)
+		local List = {}
 		
-		for i, v in pairs(t_1) do
-			table.insert(t, v)
+		for _, value in pairs(t1) do
+			table.insert(List, value)
 		end
-		return t
+		return List
 	end
 	
-	local var1 = newproxy(true)
-	local var2 = getmetatable(var1)
-	var2.__index = strict(t, p1)
+	local Proxy = newproxy(true)
+	local Meta = getmetatable(Proxy)
+	Meta.__index = strict(t, p1)
 	
-	function var9.__tostring()
-		-- upvalues: p1 (ref)
+	function Meta.__tostring() --[[ Line: 100 ]]
+		-- upvalues: p1 (copy)
 		return p1
 	end
 	
-	return var1
+	return Proxy
 end

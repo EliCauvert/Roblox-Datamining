@@ -1,153 +1,155 @@
-﻿local parent = script.Parent.Parent
-local roactModule = require(parent.Roact)
-local cryoModule = require(parent.Cryo)
-local tModule = require(parent.t)
-local focusContextModule = require(script.Parent.FocusContext)
-local focusNodeModule = require(script.Parent.FocusNode)
-local getEngineInterfaceModule = require(script.Parent.getEngineInterface)
-local focusControllerInternalApiModule = require(script.Parent.FocusControllerInternalApi)
-local t = {
-	parentFocusNode = cryoModule.None,
-	parentNeighbors = cryoModule.None,
-	focusController = cryoModule.None,
-	onFocusGained = cryoModule.None,
-	onFocusLost = cryoModule.None,
-	onFocusChanged = cryoModule.None,
-	inputBindings = cryoModule.None,
-	innerRef = cryoModule.None,
-	restorePreviousChildFocus = cryoModule.None,
-	defaultChild = cryoModule.None
+﻿local Parent = script.Parent.Parent
+local RoactModule = require(Parent.Roact)
+local CryoModule = require(Parent.Cryo)
+local TModule = require(Parent.t)
+local FocusContextModule = require(script.Parent.FocusContext)
+local FocusNodeModule = require(script.Parent.FocusNode)
+local GetEngineInterfaceModule = require(script.Parent.getEngineInterface)
+local FocusControllerInternalApiModule = require(script.Parent.FocusControllerInternalApi)
+local config = {
+	parentFocusNode = CryoModule.None,
+	parentNeighbors = CryoModule.None,
+	focusController = CryoModule.None,
+	onFocusGained = CryoModule.None,
+	onFocusLost = CryoModule.None,
+	onFocusChanged = CryoModule.None,
+	inputBindings = CryoModule.None,
+	innerRef = CryoModule.None,
+	restorePreviousChildFocus = CryoModule.None,
+	defaultChild = CryoModule.None
 }
-local t_1 = {}
-local var1 = tModule.intersection(tModule.interface({
-	parentFocusNode = tModule.optional(tModule.table),
-	focusController = tModule.optional(tModule.table),
-	innerRef = tModule.optional(tModule.table),
-	restorePreviousChildFocus = tModule.boolean,
-	inputBindings = tModule.table,
-	defaultChild = tModule.optional(tModule.table),
-	onFocusGained = tModule.optional(tModule.callback),
-	onFocusLost = tModule.optional(tModule.callback),
-	onFocusChanged = tModule.optional(tModule.callback)
-}), function(p1)
+local t = {}
+local IntersectionResult = TModule.intersection(TModule.interface({
+	parentFocusNode = TModule.optional(TModule.table),
+	focusController = TModule.optional(TModule.table),
+	innerRef = TModule.optional(TModule.table),
+	restorePreviousChildFocus = TModule.boolean,
+	inputBindings = TModule.table,
+	defaultChild = TModule.optional(TModule.table),
+	onFocusGained = TModule.optional(TModule.callback),
+	onFocusLost = TModule.optional(TModule.callback),
+	onFocusChanged = TModule.optional(TModule.callback)
+}), function(p1) --[[ Line: 34 | Named "checkFocusManager" ]]
 	if p1.focusController == nil or p1.parentFocusNode == nil then
 		return true
+	else
+		return false, "Cannot attach a new focusController beneath an existing one"
 	end
-	return false, "Cannot attach a new focusController beneath an existing one"
 end)
-local t_2 = { restorePreviousChildFocus = false, inputBindings = {} }
+local DefaultProps = { restorePreviousChildFocus = false, inputBindings = {} }
 
-return function(p1)
-	-- upvalues: roactModule (ref), var1 (ref), t_2 (ref), t_1 (ref), focusNodeModule (ref), getEngineInterfaceModule (ref), focusControllerInternalApiModule (ref), cryoModule (ref), t (ref), focusContextModule (ref)
-	local var2 = roactModule.Component:extend(("Focusable(%s)"):format(tostring(p1)))
-	var2.validateProps = var1
-	var2.defaultProps = t_2
+return function(p1) --[[ Line: 69 | Named "asFocusable" ]]
+	-- upvalues: RoactModule (copy), IntersectionResult (copy), DefaultProps (copy), t (copy), FocusNodeModule (copy), GetEngineInterfaceModule (copy), FocusControllerInternalApiModule (copy), CryoModule (copy), config (copy), FocusContextModule (copy)
+	local ExtendResult = RoactModule.Component:extend((("Focusable(%s)"):format((tostring(p1)))))
+	ExtendResult.validateProps = IntersectionResult
+	ExtendResult.defaultProps = DefaultProps
 	
-	function var11.init(p2)
-		-- upvalues: roactModule (copy), t_1 (copy), focusNodeModule (copy), getEngineInterfaceModule (copy)
+	function ExtendResult.init(p2) --[[ Line: 79 ]]
+		-- upvalues: RoactModule (upval), t (upval), FocusNodeModule (upval), GetEngineInterfaceModule (upval)
 		p2.focused = false
-		p2.defaultRef = roactModule.createRef()
-		local parentNeighbors = p2.props.parentNeighbors or t_1
+		p2.defaultRef = RoactModule.createRef()
+		local ParentNeighbors = p2.props.parentNeighbors or t
 		p2:setState({
 			needsDescendantAddedRefocusCounter = 0,
 			needsDescendantRemovedRefocusCounter = 0,
-			focusNode = focusNodeModule.new(p2.props, p2:getRef()),
-			parentNeighbors = parentNeighbors,
+			focusNode = FocusNodeModule.new(p2.props, p2:getRef()),
+			parentNeighbors = ParentNeighbors,
 			neighbors = {
-				NextSelectionLeft = p2.props.NextSelectionLeft or parentNeighbors.NextSelectionLeft,
-				NextSelectionRight = p2.props.NextSelectionRight or parentNeighbors.NextSelectionRight,
-				NextSelectionUp = p2.props.NextSelectionUp or parentNeighbors.NextSelectionUp,
-				NextSelectionDown = p2.props.NextSelectionDown or parentNeighbors.NextSelectionDown
+				NextSelectionLeft = p2.props.NextSelectionLeft or ParentNeighbors.NextSelectionLeft,
+				NextSelectionRight = p2.props.NextSelectionRight or ParentNeighbors.NextSelectionRight,
+				NextSelectionUp = p2.props.NextSelectionUp or ParentNeighbors.NextSelectionUp,
+				NextSelectionDown = p2.props.NextSelectionDown or ParentNeighbors.NextSelectionDown
 			}
 		})
 		
-		function p2.updateFocusedState(p3)
-			-- upvalues: p2 (ref)
+		function p2.updateFocusedState(p3) --[[ Line: 97 ]]
+			-- upvalues: p2 (copy)
 			if not p2.focused and p3 then
 				p2:gainFocus()
 				
 				return
-			elseif p2.focused and not p3 then
+			end
+			if p2.focused and not p3 then
 				p2:loseFocus()
 			end
 		end
 		
 		if p2:isRoot() then
-			local var3 = false
+			local Flag = false
 			
-			function p2.ancestryChanged(p3)
-				-- upvalues: var3 (write), p2 (ref), getEngineInterfaceModule (copy)
-				if not var3 and p3:IsDescendantOf(game) then
-					var3 = true
-					p2:getFocusControllerInternal():initialize(getEngineInterfaceModule(p3))
+			function p2.ancestryChanged(Object) --[[ Line: 111 ]]
+				-- upvalues: Flag (ref), p2 (copy), GetEngineInterfaceModule (upval)
+				if not Flag and Object:IsDescendantOf(game) then
+					Flag = true
+					p2:getFocusControllerInternal():initialize(GetEngineInterfaceModule(Object))
 				end
 			end
 			
-			function p2.ancestryChangedListener(p3)
-				-- upvalues: p2 (ref), roactModule (copy)
+			function p2.ancestryChangedListener(p3) --[[ Line: 121 ]]
+				-- upvalues: p2 (copy), RoactModule (upval)
 				p2.ancestryChanged(p3)
-				local ancestryChanged = p2.props[roactModule.Event.AncestryChanged]
+				local Prop: (any) -> () = p2.props[RoactModule.Event.AncestryChanged]
 				
-				if ancestryChanged ~= nil then
-					ancestryChanged(p3)
+				if Prop ~= nil then
+					Prop(p3)
 				end
 			end
 			
-			function p2.refreshFocusOnDescendantAdded(p3)
-				-- upvalues: p2 (ref), roactModule (copy)
+			function p2.refreshFocusOnDescendantAdded(p3) --[[ Line: 130 ]]
+				-- upvalues: p2 (copy), RoactModule (upval)
 				if p2:getFocusControllerInternal():needsDescendantAddedRefocus() then
-					p2:setState(function(p4)
+					p2:setState(function(p4) --[[ Line: 132 ]]
 						return {
 							needsDescendantAddedRefocusCounter = p4.needsDescendantAddedRefocusCounter + 1
 						}
 					end)
 				end
-				local descendantAdded = p2.props[roactModule.Event.DescendantAdded]
+				local Prop: (any) -> () = p2.props[RoactModule.Event.DescendantAdded]
 				
-				if descendantAdded ~= nil then
-					descendantAdded(p3)
+				if Prop ~= nil then
+					Prop(p3)
 				end
 			end
 			
-			function p2.refreshFocusOnDescendantRemoved(p3)
-				-- upvalues: p2 (ref), roactModule (copy)
+			function p2.refreshFocusOnDescendantRemoved(p3) --[[ Line: 145 ]]
+				-- upvalues: p2 (copy), RoactModule (upval)
 				if p2:getFocusControllerInternal():needsDescendantRemovedRefocus() then
-					p2:setState(function(p4)
+					p2:setState(function(p4) --[[ Line: 147 ]]
 						return {
 							needsDescendantRemovedRefocusCounter = p4.needsDescendantRemovedRefocusCounter + 1
 						}
 					end)
 				end
-				local descendantRemoving = p2.props[roactModule.Event.DescendantRemoving]
+				local Prop: (any) -> () = p2.props[RoactModule.Event.DescendantRemoving]
 				
-				if descendantRemoving ~= nil then
-					descendantRemoving(p3)
+				if Prop ~= nil then
+					Prop(p3)
 				end
 			end
 		end
 	end
 	
-	function var11.getDerivedStateFromProps(p2, p3)
-		-- upvalues: t_1 (copy)
-		local neighbors = p3.neighbors or t_1
-		local parentNeighbors = p2.parentNeighbors or t_1
-		local nextSelectionLeft = p2.NextSelectionLeft or parentNeighbors.NextSelectionLeft
-		local nextSelectionRight = p2.NextSelectionRight or parentNeighbors.NextSelectionRight
-		local nextSelectionUp = p2.NextSelectionUp or parentNeighbors.NextSelectionUp
-		local nextSelectionDown = p2.NextSelectionDown or parentNeighbors.NextSelectionDown
+	function ExtendResult.getDerivedStateFromProps(Gui, p2) --[[ Line: 162 ]]
+		-- upvalues: t (upval)
+		local Neighbors = p2.neighbors or t
+		local ParentNeighbors = Gui.parentNeighbors or t
+		local NextSelectionLeft = Gui.NextSelectionLeft or ParentNeighbors.NextSelectionLeft
+		local NextSelectionRight = Gui.NextSelectionRight or ParentNeighbors.NextSelectionRight
+		local NextSelectionUp = Gui.NextSelectionUp or ParentNeighbors.NextSelectionUp
+		local NextSelectionDown = Gui.NextSelectionDown or ParentNeighbors.NextSelectionDown
 		
-		return if nextSelectionLeft == neighbors.NextSelectionLeft and nextSelectionRight == neighbors.NextSelectionRight and (nextSelectionDown == neighbors.NextSelectionDown and nextSelectionUp == neighbors.NextSelectionUp) then nil else {
-			parentNeighbors = parentNeighbors,
+		return if NextSelectionLeft == Neighbors.NextSelectionLeft and NextSelectionRight == Neighbors.NextSelectionRight and NextSelectionDown == Neighbors.NextSelectionDown and NextSelectionUp == Neighbors.NextSelectionUp then nil else {
+			parentNeighbors = ParentNeighbors,
 			neighbors = {
-				NextSelectionLeft = nextSelectionLeft,
-				NextSelectionRight = nextSelectionRight,
-				NextSelectionUp = nextSelectionUp,
-				NextSelectionDown = nextSelectionDown
+				NextSelectionLeft = NextSelectionLeft,
+				NextSelectionRight = NextSelectionRight,
+				NextSelectionUp = NextSelectionUp,
+				NextSelectionDown = NextSelectionDown
 			}
 		}
 	end
 	
-	function var11.gainFocus(p2)
+	function ExtendResult.gainFocus(p2) --[[ Line: 195 ]]
 		p2.focused = true
 		
 		if p2.props.onFocusGained ~= nil then
@@ -158,7 +160,7 @@ return function(p1)
 		end
 	end
 	
-	function var11.loseFocus(p2)
+	function ExtendResult.loseFocus(p2) --[[ Line: 207 ]]
 		p2.focused = false
 		
 		if p2.props.onFocusLost ~= nil then
@@ -169,39 +171,38 @@ return function(p1)
 		end
 	end
 	
-	function var11.isRoot(p2)
+	function ExtendResult.isRoot(p2): boolean --[[ Line: 222 ]]
 		return p2.props.focusController ~= nil and p2.props.parentFocusNode == nil
 	end
 	
-	function var11.getFocusControllerInternal(p2)
-		-- upvalues: focusControllerInternalApiModule (copy)
-		return p2.state.focusNode.focusController[focusControllerInternalApiModule]
+	function ExtendResult.getFocusControllerInternal(p2) --[[ Line: 226 ]]
+		-- upvalues: FocusControllerInternalApiModule (upval)
+		return p2.state.focusNode.focusController[FocusControllerInternalApiModule]
 	end
 	
-	function var11.getRef(p2)
+	function ExtendResult.getRef(p2) --[[ Line: 230 ]]
 		return p2.props.innerRef or p2.defaultRef
 	end
 	
-	function var11.render(p2)
-		-- upvalues: roactModule (copy), cryoModule (copy), t (copy), t_1 (copy), focusContextModule (copy), p1 (ref)
-		local ref = p2:getRef()
-		local t_2 = {
-			NextSelectionLeft = ref,
-			NextSelectionRight = ref,
-			NextSelectionDown = ref,
-			NextSelectionUp = ref,
-			[roactModule.Ref] = ref
+	function ExtendResult.render(p2) --[[ Line: 234 ]]
+		-- upvalues: RoactModule (upval), CryoModule (upval), config (upval), t (upval), FocusContextModule (upval), p1 (copy)
+		local Ref = p2:getRef()
+		local config1 = {
+			NextSelectionLeft = Ref,
+			NextSelectionRight = Ref,
+			NextSelectionDown = Ref,
+			NextSelectionUp = Ref,
+			[RoactModule.Ref] = Ref
 		}
-		local _ = nil
 		
-		return roactModule.createElement(focusContextModule.Provider, { value = p2.state }, roactModule.createElement(p1, if p2:isRoot() then cryoModule.Dictionary.join(t_2, p2.props, {
-			[roactModule.Event.AncestryChanged] = p2.ancestryChangedListener,
-			[roactModule.Event.DescendantAdded] = p2.refreshFocusOnDescendantAdded,
-			[roactModule.Event.DescendantRemoving] = p2.refreshFocusOnDescendantRemoved
-		}, t) else cryoModule.Dictionary.join(t_2, p2.props.parentNeighbors or t_1, p2.props, t)))
+		return RoactModule.createElement(FocusContextModule.Provider, { value = p2.state }, RoactModule.createElement(p1, if p2:isRoot() then CryoModule.Dictionary.join(config1, p2.props, {
+			[RoactModule.Event.AncestryChanged] = p2.ancestryChangedListener,
+			[RoactModule.Event.DescendantAdded] = p2.refreshFocusOnDescendantAdded,
+			[RoactModule.Event.DescendantRemoving] = p2.refreshFocusOnDescendantRemoved
+		}, config) else CryoModule.Dictionary.join(config1, p2.props.parentNeighbors or t, p2.props, config)))
 	end
 	
-	function var11.didMount(p2)
+	function ExtendResult.didMount(p2) --[[ Line: 272 ]]
 		p2.state.focusNode:attachToTree(p2.props.parentFocusNode, p2.updateFocusedState)
 		
 		if p2:isRoot() then
@@ -209,7 +210,7 @@ return function(p1)
 		end
 	end
 	
-	function var11.didUpdate(p2, _, p3)
+	function ExtendResult.didUpdate(p2, _, p3) --[[ Line: 283 ]]
 		p2.state.focusNode:updateNavProps(p2.props)
 		
 		if p2.state.focusNode.ref ~= (p2.props.innerRef or p2.defaultRef) then
@@ -223,7 +224,7 @@ return function(p1)
 		end
 	end
 	
-	function var11.willUnmount(p2)
+	function ExtendResult.willUnmount(p2) --[[ Line: 305 ]]
 		p2.state.focusNode:detachFromTree()
 		
 		if p2:isRoot() then
@@ -231,16 +232,16 @@ return function(p1)
 		end
 	end
 	
-	return roactModule.forwardRef(function(p2, p3)
-		-- upvalues: roactModule (copy), focusContextModule (copy), cryoModule (copy), t (copy), p1 (ref), var2 (ref)
-		return roactModule.createElement(focusContextModule.Consumer, {
-			render = function(p4)
-				-- upvalues: p2 (ref), cryoModule (copy), t (copy), roactModule (copy), p3 (ref), p1 (copy), var2 (copy)
-				return if p4 == nil and p2.focusController == nil then roactModule.createElement(p1, cryoModule.Dictionary.join(p2, t, { [roactModule.Ref] = p3 })) else roactModule.createElement(var2, cryoModule.Dictionary.join(p2, {
-					parentFocusNode = if p4 then p4.focusNode else nil,
-					parentNeighbors = if p4 then p4.neighbors else nil,
-					innerRef = p3
-				}))
+	return RoactModule.forwardRef(function(p2, InnerRef) --[[ Line: 313 ]]
+		-- upvalues: RoactModule (upval), FocusContextModule (upval), CryoModule (upval), config (upval), p1 (copy), ExtendResult (copy)
+		return RoactModule.createElement(FocusContextModule.Consumer, {
+			render = function(p3) --[[ Line: 315 ]]
+				-- upvalues: p2 (copy), CryoModule (upval), config (upval), RoactModule (upval), InnerRef (copy), p1 (upval), ExtendResult (upval)
+				return if p3 == nil and p2.focusController == nil then RoactModule.createElement(p1, (CryoModule.Dictionary.join(p2, config, { [RoactModule.Ref] = InnerRef }))) else RoactModule.createElement(ExtendResult, (CryoModule.Dictionary.join(p2, {
+					parentFocusNode = p3 and p3.focusNode or nil,
+					parentNeighbors = p3 and p3.neighbors or nil,
+					innerRef = InnerRef
+				})))
 			end
 		})
 	end)

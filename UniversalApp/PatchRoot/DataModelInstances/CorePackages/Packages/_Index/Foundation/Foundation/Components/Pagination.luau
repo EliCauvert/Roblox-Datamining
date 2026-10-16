@@ -1,1 +1,1 @@
-﻿return require(script.Pagination)
+﻿return (require(script.Pagination))

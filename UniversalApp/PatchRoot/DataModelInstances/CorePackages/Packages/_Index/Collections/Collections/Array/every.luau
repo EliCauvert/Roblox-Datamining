@@ -1,27 +1,25 @@
-﻿local dEV = _G.__DEV__
+﻿local DEV = _G.__DEV__
 local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3)
-	-- upvalues: dEV (ref)
-	if dEV then
+return function(p1, Callback, p2): boolean --[[ Line: 27 ]]
+	-- upvalues: DEV (copy)
+	if DEV then
 		if typeof(p1) ~= "table" then
-			error(string.format("Array.every called on %s", typeof(p1)))
+			error(string.format("Array.every called on %s", (typeof(p1))))
 		end
-		if typeof(p2) ~= "function" then
+		if typeof(Callback) ~= "function" then
 			error("callback is not a function")
 		end
 	end
-	local p0Count = #p1
-	local var1 = 1
-	while var1 <= p0Count do
-		local var2 = p1[var1]
-		local _ = nil
+	local CountP0 = #p1
+	local Count = 1
+	while Count <= CountP0 do
+		local v1 = p1[Count]
 		
-		if var2 == nil or (if p3 ~= nil then p2(var2, var1, p1) else p2(p3, var2, var1, p1)) then
-			var1 += 1
-			continue
+		if v1 ~= nil and not (if p2 == nil then Callback(v1, Count, p1) else Callback(p2, v1, Count, p1)) then
+			return false
 		end
-		return false
+		Count += 1
 	end
 	return true
 end

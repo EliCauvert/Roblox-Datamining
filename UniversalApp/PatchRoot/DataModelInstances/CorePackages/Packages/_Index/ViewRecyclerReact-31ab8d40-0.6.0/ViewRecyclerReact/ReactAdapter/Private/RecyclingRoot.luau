@@ -1,156 +1,157 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local viewRecyclerModule = require(viewRecyclerReact.Parent.ViewRecycler)
-local reactModule = require(viewRecyclerReact.Parent.React)
-local recyclableViewModule = require(script.Parent.RecyclableView)
-local recyclableViewHostModule = require(viewRecyclerReact.ReactAdapter.RecyclableViewHost)
-local recyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistry)
-local signalsExperimentalModule = require(viewRecyclerReact.Parent.SignalsExperimental)
-local createElement = reactModule.createElement
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local ViewRecyclerModule = require(ViewRecyclerReact.Parent.ViewRecycler)
+local RecyclableViewModule = require(script.Parent.RecyclableView)
+local RecyclableViewHostModule = require(ViewRecyclerReact.ReactAdapter.RecyclableViewHost)
+local RecyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistry)
+local SignalsExperimentalModule = require(ViewRecyclerReact.Parent.SignalsExperimental)
+local CreateElementFunction = require(ViewRecyclerReact.Parent.React).createElement
 
 return {
-	new = function(p1)
-		-- upvalues: viewRecyclerModule (ref), recyclableViewRegistryModule (ref), recyclableViewModule (ref), createElement (ref), recyclableViewHostModule (ref), signalsExperimentalModule (ref)
-		local t = {}
-		local var1 = 1
-		local var2 = false
-		local var3 = nil
+	new = function(Callback) --[[ Line: 37 ]]
+		-- upvalues: ViewRecyclerModule (copy), RecyclableViewRegistryModule (copy), RecyclableViewModule (copy), CreateElementFunction (copy), RecyclableViewHostModule (copy), SignalsExperimentalModule (copy)
+		local Tbl = {}
+		local Count = 1
+		local Flag = false
+		local Config = nil
 		
-		local function _()
-			-- upvalues: var2 (write), p1 (ref)
-			if not var2 then
-				p1()
+		local function _() --[[ Line: 43 | Named "notifyChanged" ]]
+			-- upvalues: Flag (ref), Callback (copy)
+			if not Flag then
+				Callback()
 			end
 		end
 		
-		local _ = nil
-		local t_1 = {
-			allocateId = function()
-				-- upvalues: var2 (write), var1 (write)
-				assert(not var2, "RecyclingRoot: cannot allocate after destroy")
-				var1 += 1
+		local config = nil
+		config = {
+			allocateId = function(): number --[[ Line: 51 ]]
+				-- upvalues: Flag (ref), Count (ref)
+				assert(not Flag, "RecyclingRoot: cannot allocate after destroy")
+				local Count1: number = Count
+				Count += 1
 				
-				return var1
+				return Count1
 			end,
-			addHosts = function(p2, p3, p4)
-				-- upvalues: var2 (write), t (ref), p1 (ref)
-				assert(not var2, "RecyclingRoot: cannot add hosts after destroy")
-				local var4 = false
+			addHosts = function(List, Callback1, Callback2) --[[ Line: 57 ]]
+				-- upvalues: Flag (ref), Tbl (copy), Callback (copy)
+				assert(not Flag, "RecyclingRoot: cannot add hosts after destroy")
+				local Flag1 = false
 				
-				for i, v in p2 do
-					assert(t[v] == nil, "RecyclingRoot: resource host is already registered")
-					t[v] = { key = p3(v), render = p4(v) }
-					var4 = true
+				for _, value in List do
+					assert(Tbl[value] == nil, "RecyclingRoot: resource host is already registered")
+					Tbl[value] = { key = Callback1(value), render = Callback2(value) }
+					Flag1 = true
 				end
-				if var4 and not var2 then
-					p1()
+				if Flag1 and not Flag then
+					Callback()
 				end
 			end,
-			removeHosts = function(p5)
-				-- upvalues: t (ref), var2 (write), p1 (ref)
-				local var5 = false
+			removeHosts = function(List) --[[ Line: 72 ]]
+				-- upvalues: Tbl (copy), Flag (ref), Callback (copy)
+				local Flag1 = false
 				
-				for i, v in p5 do
-					if t[v] ~= nil then
-						t[v] = nil
-						var5 = true
+				for _, value in List do
+					if Tbl[value] ~= nil then
+						Tbl[value] = nil
+						Flag1 = true
 					end
 				end
-				if var5 and not var2 then
-					p1()
+				if Flag1 and not Flag then
+					Callback()
 				end
 			end
 		}
 		
 		return {
-			getScope = function(p6)
-				-- upvalues: var2 (write), var3 (write), viewRecyclerModule (copy), recyclableViewRegistryModule (copy), recyclableViewModule (copy), t_1 (write), createElement (copy), recyclableViewHostModule (copy), signalsExperimentalModule (copy)
-				assert(not var2, "RecyclingRoot: cannot get a Recycling scope after destroy")
+			getScope = function(p1) --[[ Line: 86 ]]
+				-- upvalues: Flag (ref), Config (ref), ViewRecyclerModule (upval), RecyclableViewRegistryModule (upval), RecyclableViewModule (upval), config (ref), CreateElementFunction (upval), RecyclableViewHostModule (upval), SignalsExperimentalModule (upval)
+				assert(not Flag, "RecyclingRoot: cannot get a Recycling scope after destroy")
 				
-				if var3 == nil then
-					local maxPoolSize = p6.maxPoolSize
-					local var6 = viewRecyclerModule.Adapter.createRecyclingScope({
-						onPoolChanged = if p6.diagnostics == nil then nil else function(p7)
-							-- upvalues: p6 (ref), viewRecyclerModule (copy)
-							p6.diagnostics({
-								kind = viewRecyclerModule.Diagnostics.EventKind.PoolChanged,
-								action = p7.action,
-								itemViewType = p7.viewType,
-								occupiedDelta = p7.occupiedDelta,
-								vacantDelta = p7.vacantDelta,
-								totalDelta = p7.totalDelta
+				if Config == nil then
+					local MaxPoolSize = p1.maxPoolSize
+					local RecyclingScope = ViewRecyclerModule.Adapter.createRecyclingScope({
+						onPoolChanged = if p1.diagnostics == nil then nil else function(p2) --[[ Line: 96 ]]
+							-- upvalues: p1 (copy), ViewRecyclerModule (upval)
+							p1.diagnostics({
+								kind = ViewRecyclerModule.Diagnostics.EventKind.PoolChanged,
+								action = p2.action,
+								itemViewType = p2.viewType,
+								occupiedDelta = p2.occupiedDelta,
+								vacantDelta = p2.vacantDelta,
+								totalDelta = p2.totalDelta
 							})
 						end,
 						adapter = {
-							create = function(p7)
-								-- upvalues: recyclableViewRegistryModule (copy), recyclableViewModule (copy), t_1 (copy)
-								local metadata = recyclableViewRegistryModule.getMetadata(p7)
-								assert(metadata ~= nil, "RecyclingScope: cannot create an unregistered Recyclable view type")
+							create = function(p2) --[[ Line: 107 ]]
+								-- upvalues: RecyclableViewRegistryModule (upval), RecyclableViewModule (upval), config (upval)
+								local Metadata = RecyclableViewRegistryModule.getMetadata(p2)
+								assert(Metadata ~= nil, "RecyclingScope: cannot create an unregistered Recyclable view type")
 								
-								return recyclableViewModule(t_1.allocateId(), p7, nil, metadata.readiness, metadata.hideWhilePending)
+								return RecyclableViewModule(config.allocateId(), p2, nil, Metadata.readiness, Metadata.hideWhilePending)
 							end,
-							destroy = function(p7)
-								p7.destroy()
+							destroy = function(p2) --[[ Line: 118 ]]
+								p2.destroy()
 							end,
-							onCreated = function(p7)
-								-- upvalues: t_1 (copy), createElement (copy), recyclableViewHostModule (copy)
-								t_1.addHosts(p7, function(p8)
-									return `RecyclableView{p8.id}`
-								end, function(p8)
-									-- upvalues: createElement (copy), recyclableViewHostModule (copy)
-									return function(p9)
-										-- upvalues: createElement (copy), recyclableViewHostModule (copy), p8 (ref)
-										return createElement(recyclableViewHostModule, { itemView = p8, createPortal = p9 })
+							onCreated = function(p2) --[[ Line: 121 ]]
+								-- upvalues: config (upval), CreateElementFunction (upval), RecyclableViewHostModule (upval)
+								config.addHosts(p2, function(p3): string --[[ Line: 122 ]]
+									return `RecyclableView{p3.id}`
+								end, function(ItemView) --[[ Line: 124 ]]
+									-- upvalues: CreateElementFunction (upval), RecyclableViewHostModule (upval)
+									return function(CreatePortal) --[[ Line: 125 ]]
+										-- upvalues: CreateElementFunction (upval), RecyclableViewHostModule (upval), ItemView (copy)
+										return CreateElementFunction(RecyclableViewHostModule, { itemView = ItemView, createPortal = CreatePortal })
 									end
 								end)
 							end,
-							onEvicted = function(p7)
-								-- upvalues: t_1 (copy)
-								t_1.removeHosts(p7)
+							onEvicted = function(p2) --[[ Line: 133 ]]
+								-- upvalues: config (upval)
+								config.removeHosts(p2)
 							end,
-							batch = signalsExperimentalModule.batch
+							batch = SignalsExperimentalModule.batch
 						}
 					})
-					var3 = {
-						bind = function(p7)
-							-- upvalues: maxPoolSize (write), var6 (ref)
-							local cloned = table.clone(p7)
+					Config = {
+						bind = function(Tbl) --[[ Line: 140 ]]
+							-- upvalues: MaxPoolSize (ref), RecyclingScope (copy)
+							local Copy = table.clone(Tbl)
 							
-							if cloned.updateCapacity then
-								maxPoolSize = cloned.capacity
-								cloned.updateCapacity = nil
-							elseif cloned.capacity == nil then
-								cloned.capacity = maxPoolSize
+							if Copy.updateCapacity then
+								MaxPoolSize = Copy.capacity
+								Copy.updateCapacity = nil
+							elseif Copy.capacity == nil then
+								Copy.capacity = MaxPoolSize
 							else
-								maxPoolSize = cloned.capacity
+								MaxPoolSize = Copy.capacity
 							end
-							return var6.bind(cloned)
+							return RecyclingScope.bind(Copy)
 						end,
-						dispose = var6.dispose
+						dispose = RecyclingScope.dispose
 					}
 					
-					return var3
+					return Config
+				else
+					return Config
 				end
-				return var3
 			end,
-			getPortalChildren = function(p6)
-				-- upvalues: t (ref)
-				local t_1 = {}
+			getPortalChildren = function(p1) --[[ Line: 161 ]]
+				-- upvalues: Tbl (copy)
+				local RenderResults = {}
 				
-				for i, v in t do
-					t_1[v.key] = v.render(p6)
+				for _, value in Tbl do
+					RenderResults[value.key] = value.render(p1)
 				end
-				return t_1
+				return RenderResults
 			end,
-			destroy = function()
-				-- upvalues: var2 (write), var3 (write), t (ref)
-				if var2 then return end
-				var2 = true
+			destroy = function() --[[ Line: 168 ]]
+				-- upvalues: Flag (ref), Config (ref), Tbl (copy)
+				if Flag then return end
+				Flag = true
 				
-				if var3 ~= nil then
-					var3.dispose()
+				if Config ~= nil then
+					Config.dispose()
 				end
-				var3 = nil
-				table.clear(t)
+				Config = nil
+				table.clear(Tbl)
 			end
 		}
 	end

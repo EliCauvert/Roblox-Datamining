@@ -1,148 +1,148 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local constantsModule = require(parent.Constants)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local boundsCalculatorModule = require(parent.util.BoundsCalculator)
-local boundsDataUtilsModule = require(parent.util.BoundsDataUtils)
-local meshSpaceUtilsModule = require(parent.util.MeshSpaceUtils)
-local prettyPrintVector3Module = require(parent.util.prettyPrintVector3)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
-local getFStringUGCValidationAttachmentErrorLinkModule = require(parent.flags.getFStringUGCValidationAttachmentErrorLink)
-local getFFlagUGCValidateAttachmentBoundsErrorMessageModule = require(parent.flags.getFFlagUGCValidateAttachmentBoundsErrorMessage)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.uploadEnum,
-		validationEnumsModule.SharedDataMember.consumerConfig
-	},
-	conditionalData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	expectedFailures = {}
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ConstantsModule = require(Parent.Constants)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local BoundsCalculatorModule = require(Parent.util.BoundsCalculator)
+local BoundsDataUtilsModule = require(Parent.util.BoundsDataUtils)
+local MeshSpaceUtilsModule = require(Parent.util.MeshSpaceUtils)
+local PrettyPrintVector3Module = require(Parent.util.prettyPrintVector3)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local GetAttachmentCFrameInPartSpaceModule = require(Parent.util.getAttachmentCFrameInPartSpace)
+local GetFStringUGCValidationAttachmentErrorLinkModule = require(Parent.flags.getFStringUGCValidationAttachmentErrorLink)
+local GetFFlagUGCValidateAttachmentBoundsErrorMessageModule = require(Parent.flags.getFFlagUGCValidateAttachmentBoundsErrorMessage)
 
-local function validateInMeshSpace(p1, p2, p3, p4, p5, p6)
-	-- upvalues: getAttachmentCFrameInPartSpaceModule (ref), boundsDataUtilsModule (ref), errorSourceStringsModule (ref), meshSpaceUtilsModule (ref), getFFlagUGCValidateAttachmentBoundsErrorMessageModule (ref), prettyPrintVector3Module (ref), getFStringUGCValidationAttachmentErrorLinkModule (ref)
-	local var1 = p4.cframe * getAttachmentCFrameInPartSpaceModule(p1)
-	local var2 = boundsDataUtilsModule.calculateBoundsCenters(p4.boundsData)
-	local var3 = boundsDataUtilsModule.calculateBoundsDimensions(p4.boundsData)
+local function validateInMeshSpace(Name, p1, Bounds, p2, p3, HasFoundAt) --[[ Line: 34 ]]
+	-- upvalues: GetAttachmentCFrameInPartSpaceModule (copy), BoundsDataUtilsModule (copy), ErrorSourceStringsModule (copy), MeshSpaceUtilsModule (copy), GetFFlagUGCValidateAttachmentBoundsErrorMessageModule (copy), PrettyPrintVector3Module (copy), GetFStringUGCValidationAttachmentErrorLinkModule (copy)
+	local ScaledCframe = p2.cframe * GetAttachmentCFrameInPartSpaceModule(Name)
+	local BoundsCenters = BoundsDataUtilsModule.calculateBoundsCenters(p2.boundsData)
+	local BoundsDimensions: number = BoundsDataUtilsModule.calculateBoundsDimensions(p2.boundsData)
 	
-	if not var2 or not var3 then
-		p5:fail(errorSourceStringsModule.Keys.AttachmentBoundsCalculationFailed, { AttachmentName = p1.Name, PartName = p2.Name })
+	if not BoundsCenters or not BoundsDimensions then
+		p3:fail(ErrorSourceStringsModule.Keys.AttachmentBoundsCalculationFailed, { AttachmentName = Name.Name, PartName = p1.Name })
 		
 		return
 	end
-	local var4 = (var1.Position - var2) / (var3 / 2)
-	local min = p3.min
-	local max = p3.max
+	local PositionRatio = (ScaledCframe.Position - BoundsCenters) / (BoundsDimensions / 2)
+	local Min = Bounds.min
+	local Max = Bounds.max
 	
-	for i, v in { "X", "Y", "Z" } do
-		if var4[v] < min[v] or max[v] < var4[v] then
-			local var5 = meshSpaceUtilsModule.clampAttachmentToBounds(p1, p4, p3, 0.001)
-			local var6, var7 = meshSpaceUtilsModule.calculateAcceptableBoundsLocalSpace(p3, p4, var3, var2)
-			local position = var6.Position
-			local var8, var9, var10 = var6.Rotation:ToOrientation()
-			local vector3 = Vector3.new(math.deg(var8), math.deg(var9), math.deg(var10))
+	for _, value in { "X", "Y", "Z" } do
+		if PositionRatio[value] < Min[value] or Max[value] < PositionRatio[value] then
+			local ClampAttachmentToBoundsResult = MeshSpaceUtilsModule.clampAttachmentToBounds(Name, p2, Bounds, 0.001)
+			local AcceptableBoundsLocalSpace, AcceptableBoundsLocalSpace2 = MeshSpaceUtilsModule.calculateAcceptableBoundsLocalSpace(Bounds, p2, BoundsDimensions, BoundsCenters)
+			local Position = AcceptableBoundsLocalSpace.Position
+			local Rx, Ry, Rz = AcceptableBoundsLocalSpace.Rotation:ToOrientation()
+			local _Vector3 = Vector3.new(math.deg(Rx), math.deg(Ry), (math.deg(Rz)))
 			
-			if getFFlagUGCValidateAttachmentBoundsErrorMessageModule() then
-				p5:fail(if p6 then errorSourceStringsModule.Keys.RigAttachmentOutOfBounds else errorSourceStringsModule.Keys.AccessoryAttachmentOutOfBounds, {
-					AttachmentName = p1.Name,
-					PartName = p2.Name,
-					CurrentPosition = prettyPrintVector3Module(p1.CFrame.Position, 3),
-					ClosestValidPosition = prettyPrintVector3Module(var5.Position, 3),
-					HelpLink = getFStringUGCValidationAttachmentErrorLinkModule()
+			if GetFFlagUGCValidateAttachmentBoundsErrorMessageModule() then
+				p3:fail(if HasFoundAt then ErrorSourceStringsModule.Keys.RigAttachmentOutOfBounds else ErrorSourceStringsModule.Keys.AccessoryAttachmentOutOfBounds, {
+					AttachmentName = Name.Name,
+					PartName = p1.Name,
+					CurrentPosition = PrettyPrintVector3Module(Name.CFrame.Position, 3),
+					ClosestValidPosition = PrettyPrintVector3Module(ClampAttachmentToBoundsResult.Position, 3),
+					HelpLink = GetFStringUGCValidationAttachmentErrorLinkModule()
 				})
+				break
+			else
+				p3:fail(ErrorSourceStringsModule.Keys.AttachmentOutOfBounds, {
+					AttachmentName = Name.Name,
+					PartName = p1.Name,
+					CurrentPosition = PrettyPrintVector3Module(Name.CFrame.Position, 3),
+					ClosestValidPosition = PrettyPrintVector3Module(ClampAttachmentToBoundsResult.Position, 3),
+					BoundsPosition = PrettyPrintVector3Module(Position, 3),
+					BoundsOrientation = PrettyPrintVector3Module(_Vector3, 3),
+					BoundsSize = PrettyPrintVector3Module(AcceptableBoundsLocalSpace2, 3),
+					HelpLink = GetFStringUGCValidationAttachmentErrorLinkModule()
+				})
+				break
+			end
+		end
+	end
+end
+
+local function checkAll(Object, Head, p4, p5) --[[ Line: 105 ]]
+	-- upvalues: R15plusUtilsModule (copy), validateInMeshSpace (copy)
+	local Name = Object:FindFirstChild(Head.rigAttachmentToParent.name, R15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	
+	if not Name then return end
+	validateInMeshSpace(Name, Object, Head.rigAttachmentToParent.bounds, p4, p5, true)
+	
+	for ChildName, otherAttachment in pairs(Head.otherAttachments) do
+		local Child = Object:FindFirstChild(ChildName, R15plusUtilsModule.checkFlagEnabledForAllowHrd())
+		
+		if Child then
+			validateInMeshSpace(Child, Object, otherAttachment.bounds, p4, p5, string.find(ChildName, "RigAttachment$") ~= nil)
+		end
+	end
+end
+
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+	},
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.uploadEnum,
+		ValidationEnumsModule.SharedDataMember.consumerConfig
+	},
+	conditionalData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
+	expectedFailures = {},
+	run = function(p6, p7) --[[ Line: 141 ]]
+		-- upvalues: ConstantsModule (copy), ValidationEnumsModule (copy), BoundsCalculatorModule (copy), ErrorSourceStringsModule (copy), checkAll (copy)
+		local RootInstance = p7.rootInstance
+		local AssetType = p7.uploadEnum.assetType
+		local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[AssetType]
+		
+		if not ASSETTYPE then return end
+		local EditableMeshes = {}
+		
+		if p7.renderMeshesData then
+			local Descendants = RootInstance:GetDescendants()
+			table.insert(Descendants, RootInstance)
+			
+			for _, descendant in Descendants do
+				local RenderMeshes = p7.renderMeshesData[descendant.Name]
+				
+				if RenderMeshes and RenderMeshes.editable then
+					EditableMeshes[descendant] = {
+						MeshId = { created = false, instance = RenderMeshes.editable }
+					}
+				end
+			end
+		end
+		local IndividualAssetPartsData, _, IndividualAssetPartsData3 = BoundsCalculatorModule.calculateIndividualAssetPartsData(RootInstance, {
+			assetTypeEnum = AssetType,
+			isServer = p7.consumerConfig.validationEnv == ValidationEnumsModule.ValidationEnv.Backend,
+			editableMeshes = EditableMeshes
+		})
+		
+		if not IndividualAssetPartsData then
+			p6:fail(ErrorSourceStringsModule.Keys.AttachmentBoundsAssetCalculationFailed, { InstancePath = RootInstance:GetFullName() })
+			
+			return
+		end
+		if Enum.AssetType.DynamicHead == AssetType then
+			local IndividualAssetParts = IndividualAssetPartsData3[RootInstance.Name]
+			
+			if IndividualAssetParts then
+				checkAll(RootInstance, ASSETTYPE.subParts.Head, IndividualAssetParts, p6)
 				
 				return
 			end
-			p5:fail(errorSourceStringsModule.Keys.AttachmentOutOfBounds, {
-				AttachmentName = p1.Name,
-				PartName = p2.Name,
-				CurrentPosition = prettyPrintVector3Module(p1.CFrame.Position, 3),
-				ClosestValidPosition = prettyPrintVector3Module(var5.Position, 3),
-				BoundsPosition = prettyPrintVector3Module(position, 3),
-				BoundsOrientation = prettyPrintVector3Module(vector3, 3),
-				BoundsSize = prettyPrintVector3Module(var7, 3),
-				HelpLink = getFStringUGCValidationAttachmentErrorLinkModule()
-			})
-			
-			return
-		end
-	end
-end
-
-local function checkAll(p7, p8, p9, p10)
-	-- upvalues: r15plusUtilsModule (ref), validateInMeshSpace (ref)
-	local name = p7:FindFirstChild(p8.rigAttachmentToParent.name, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-	
-	if not name then return end
-	validateInMeshSpace(name, p7, p8.rigAttachmentToParent.bounds, p9, p10, true)
-	
-	for i, v in pairs(p8.otherAttachments) do
-		local var11 = p7:FindFirstChild(i, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-		
-		if var11 then
-			validateInMeshSpace(var11, p7, v.bounds, p9, p10, string.find(i, "RigAttachment$") ~= nil)
-		end
-	end
-end
-
-function t.run(p11, p12)
-	-- upvalues: constantsModule (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref), checkAll (ref)
-	local rootInstance = p12.rootInstance
-	local assetType = p12.uploadEnum.assetType
-	local var12 = constantsModule.ASSET_TYPE_INFO[assetType]
-	
-	if not var12 then return end
-	local t = {}
-	
-	if p12.renderMeshesData then
-		local descendants = rootInstance:GetDescendants()
-		table.insert(descendants, rootInstance)
-		
-		for i, v in descendants do
-			local name = p12.renderMeshesData[v.Name]
-			
-			if name and name.editable then
-				t[v] = { MeshId = { created = false, instance = name.editable } }
-			end
-		end
-	end
-	local var13, _, var14 = boundsCalculatorModule.calculateIndividualAssetPartsData(rootInstance, {
-		assetTypeEnum = assetType,
-		isServer = p12.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend,
-		editableMeshes = t
-	})
-	
-	if not var13 then
-		p11:fail(errorSourceStringsModule.Keys.AttachmentBoundsAssetCalculationFailed, { InstancePath = rootInstance:GetFullName() })
-		
-		return
-	elseif Enum.AssetType.DynamicHead == assetType then
-		local name = var14[rootInstance.Name]
-		
-		if name then
-			checkAll(rootInstance, var12.subParts.Head, name, p11)
-			
-			return
-		end
-	else
-		for i, v in pairs(var12.subParts) do
-			local var15 = rootInstance:FindFirstChild(i)
-			
-			if var15 then
-				local var16 = var14[i]
+		else
+			for ChildName, subPart in pairs(ASSETTYPE.subParts) do
+				local Child = RootInstance:FindFirstChild(ChildName)
 				
-				if var16 then
-					checkAll(var15, v, var16, p11)
+				if Child then
+					local IndividualAssetParts = IndividualAssetPartsData3[ChildName]
+					
+					if IndividualAssetParts then
+						checkAll(Child, subPart, IndividualAssetParts, p6)
+					end
 				end
 			end
 		end
 	end
-end
-
-return t
+}

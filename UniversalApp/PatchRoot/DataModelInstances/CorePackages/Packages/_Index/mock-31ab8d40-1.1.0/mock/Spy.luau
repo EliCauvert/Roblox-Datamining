@@ -1,42 +1,45 @@
-﻿local symbolsModule = require(script.Parent.symbols)
-local isAMagicMockModule = require(script.Parent.isAMagicMock)
-local t = {}
-t.__index = t
+﻿local SymbolsModule = require(script.Parent.symbols)
+local IsAMagicMockModule = require(script.Parent.isAMagicMock)
+local SpyModule = {}
+SpyModule.__index = SpyModule
 
-function t:__call(...)
+function SpyModule:__call(...) --[[ Line: 9 ]]
 	return self.inner(...)
 end
 
-local t_1 = {}
-setmetatable(t_1, { __mode = "kv" })
+local t = {}
+setmetatable(t, { __mode = "kv" })
 
-function t.new(p1)
-	-- upvalues: symbolsModule (ref), t (ref), t_1 (ref)
-	local t_2 = { [symbolsModule.isSpy] = true, [symbolsModule.Calls] = {} }
-	setmetatable(t_2, t)
+function SpyModule.new(Callback) --[[ Line: 16 ]]
+	-- upvalues: SymbolsModule (copy), SpyModule (copy), t (copy)
+	local config = { [SymbolsModule.isSpy] = true, [SymbolsModule.Calls] = {} }
+	setmetatable(config, SpyModule)
 	
-	local var1 = function(...)
-		-- upvalues: p1 (ref), t_2 (ref), symbolsModule (copy)
-		local t = { args = table.pack(...), result = table.pack(p1(...)) }
-		table.insert(t_2[symbolsModule.Calls], t)
+	local function Inner(...) --[[ Line: 23 ]]
+		-- upvalues: Callback (copy), config (copy), SymbolsModule (upval)
+		local config1 = {
+			args = table.pack(...),
+			result = table.pack(Callback(...))
+		}
+		table.insert(config[SymbolsModule.Calls], config1)
 		
-		return table.unpack(t.result)
+		return table.unpack(config1.result)
 	end
 	
-	t_2.inner = var1
-	t_1[var1] = t_2
+	config.inner = Inner
+	t[Inner] = config
 	
-	return t_2, var1
+	return config, Inner
 end
 
-function t.lookup(p1)
-	-- upvalues: t_1 (ref)
-	return t_1[p1]
+function SpyModule.lookup(p1) --[[ Line: 38 ]]
+	-- upvalues: t (copy)
+	return t[p1]
 end
 
-function t:is()
-	-- upvalues: isAMagicMockModule (ref), symbolsModule (ref)
-	return if isAMagicMockModule(self) then false else type(self) == "table" and self[symbolsModule.isSpy] ~= nil
+function SpyModule:is(): boolean --[[ Line: 42 ]]
+	-- upvalues: IsAMagicMockModule (copy), SymbolsModule (copy)
+	return not IsAMagicMockModule(self) and (type(self) == "table" and self[SymbolsModule.isSpy] ~= nil)
 end
 
-return t
+return SpyModule

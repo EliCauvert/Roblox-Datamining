@@ -1,178 +1,182 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local object = luauPolyfillModule.Object
-local error = luauPolyfillModule.Error
-local dEV = reactGlobalsModule.__DEV__
-local dISABLEALLWARNINGSEXCEPTPROPVALIDATION = reactGlobalsModule.__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__
-local console = require(parent.Shared).console
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Object = LuauPolyfillModule.Object
+local Error1 = LuauPolyfillModule.Error
+local DEV = ReactGlobalsModule.__DEV__
+local DISABLEALLWARNINGSEXCEPTPROPVALIDATION = ReactGlobalsModule.__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__
+local Console = require(Parent.Shared).console
 local _ = require(script.Parent.ReactInternalTypes)
-local unknownModule = require(script.Parent["ReactFiberStack.new"])
-local isFiberMounted = require(script.Parent.ReactFiberTreeReflection).isFiberMounted
-local disableLegacyContext = require(parent.Shared).ReactFeatureFlags.disableLegacyContext
-local reactWorkTagsModule = require(script.Parent.ReactWorkTags)
-local classComponent = reactWorkTagsModule.ClassComponent
-local hostRoot = reactWorkTagsModule.HostRoot
-local getComponentName = require(parent.Shared).getComponentName
-local checkPropTypes = require(parent.Shared).checkPropTypes
-local createCursor = unknownModule.createCursor
-local push = unknownModule.push
-local pop = unknownModule.pop
-local var1 = if dEV then {} else nil
-local t = {}
+local ReactFiberStackNewModule = require(script.Parent["ReactFiberStack.new"])
+local IsFiberMountedFunction = require(script.Parent.ReactFiberTreeReflection).isFiberMounted
+local DisableLegacyContext = require(Parent.Shared).ReactFeatureFlags.disableLegacyContext
+local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
+local ClassComponent = ReactWorkTagsModule.ClassComponent
+local HostRoot = ReactWorkTagsModule.HostRoot
+local GetComponentNameFunction = require(Parent.Shared).getComponentName
+local CheckPropTypesFunction = require(Parent.Shared).checkPropTypes
+local CreateCursorFunction = ReactFiberStackNewModule.createCursor
+local PushFunction = ReactFiberStackNewModule.push
+local PopFunction = ReactFiberStackNewModule.pop
+local T = if DEV then {} else nil
+local EmptyContextObject = {}
 
-if dEV then
-	object.freeze(t)
+if DEV then
+	Object.freeze(EmptyContextObject)
 end
-local var2 = createCursor(t)
-local var3 = createCursor(false)
-local var4 = t
-local var5 = nil
+local Cursor = CreateCursorFunction(EmptyContextObject)
+local Cursor1 = CreateCursorFunction(false)
+local Current = EmptyContextObject
+local Callback = nil
 
-local function processChildContext(p1, p2, p3)
-	-- upvalues: dEV (ref), getComponentName (ref), var1 (write), console (ref), error (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), object (ref)
-	local stateNode = p1.stateNode
-	local childContextTypes = p2.childContextTypes
+local function getUnmaskedContext(_, p1, p2) --[[ Line: 70 ]]
+	-- upvalues: Callback (ref), Current (ref), Cursor (copy)
+	return if p2 and Callback(p1) then Current else Cursor.current
+end
+
+Callback = function(Callback): boolean --[[ Line: 163 | Named "isContextProvider" ]]
+	return type(Callback) ~= "function" and Callback.childContextTypes ~= nil
+end
+
+local function processChildContext(p1, p2, Current) --[[ Line: 221 ]]
+	-- upvalues: DEV (copy), GetComponentNameFunction (copy), T (ref), Console (copy), Error1 (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), Object (copy)
+	local StateNode = p1.stateNode
+	local ChildContextTypes = p2.childContextTypes
 	
-	if stateNode.getChildContext == nil or type(stateNode.getChildContext) ~= "function" then
-		if dEV then
-			local var6 = getComponentName(p2) or "Unknown"
+	if StateNode.getChildContext == nil or type(StateNode.getChildContext) ~= "function" then
+		if DEV then
+			local ComponentName = GetComponentNameFunction(p2) or "Unknown"
 			
-			if not var1[var6] then
-				var1[var6] = true
-				console.error("%s.childContextTypes is specified but there is no getChildContext() method on the instance. You can either define getChildContext() on %s or remove childContextTypes from it.", var6, var6)
+			if not T[ComponentName] then
+				T[ComponentName] = true
+				Console.error("%s.childContextTypes is specified but there is no getChildContext() method on the instance. You can either define getChildContext() on %s or remove childContextTypes from it.", ComponentName, ComponentName)
 			end
 		end
-		return p3
+		return Current
 	else
-		local childContext = stateNode:getChildContext()
+		local ChildContext = StateNode:getChildContext()
 		
-		for i, v in childContext do
-			if childContextTypes[i] == nil then
-				error(error.new(string.format("%s.getChildContext(): key \"%s\" is not defined in childContextTypes.", getComponentName(p2) or "Unknown", i)))
+		for i, _ in ChildContext do
+			if ChildContextTypes[i] == nil then
+				error(Error1.new(string.format("%s.getChildContext(): key \"%s\" is not defined in childContextTypes.", GetComponentNameFunction(p2) or "Unknown", i)))
 			end
 		end
-		if dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION then
-			checkPropTypes(childContextTypes, nil, childContext, "child context", getComponentName(p2) or "Unknown")
+		if DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION then
+			CheckPropTypesFunction(ChildContextTypes, nil, ChildContext, "child context", GetComponentNameFunction(p2) or "Unknown")
 		end
-		return object.assign({}, p3, childContext)
+		return Object.assign({}, Current, ChildContext)
 	end
 end
 
 return {
-	emptyContextObject = t,
-	getUnmaskedContext = function(_, p4, p5)
-		-- upvalues: var5 (write), var4 (write), var2 (ref)
-		return if p5 and var5(p4) then var4 else var2.current
+	emptyContextObject = EmptyContextObject,
+	getUnmaskedContext = getUnmaskedContext,
+	cacheContext = function(p3, p4, p5) --[[ Line: 90 ]]
+		local StateNode = p3.stateNode
+		StateNode.__reactInternalMemoizedUnmaskedChildContext = p4
+		StateNode.__reactInternalMemoizedMaskedChildContext = p5
 	end,
-	cacheContext = function(p4, p5, p6)
-		local stateNode = p4.stateNode
-		stateNode.__reactInternalMemoizedUnmaskedChildContext = p5
-		stateNode.__reactInternalMemoizedMaskedChildContext = p6
-	end,
-	getMaskedContext = function(p4, p5)
-		-- upvalues: t (ref), dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), getComponentName (ref), checkPropTypes (ref)
-		local type = p4.type
+	getMaskedContext = function(p3, ReactInternalMemoizedUnmaskedChildContext) --[[ Line: 105 ]]
+		-- upvalues: EmptyContextObject (copy), DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), GetComponentNameFunction (copy), CheckPropTypesFunction (copy)
+		local TypeFunction = p3.type
 		
-		if type(type) == "function" then
-			return p5
+		if type(TypeFunction) == "function" then
+			return ReactInternalMemoizedUnmaskedChildContext
 		end
-		local contextTypes = type.contextTypes
+		local ContextTypes = TypeFunction.contextTypes
 		
-		if not contextTypes then
-			return t
+		if not ContextTypes then
+			return EmptyContextObject
 		end
-		local stateNode = p4.stateNode
+		local StateNode = p3.stateNode
 		
-		if stateNode and stateNode.__reactInternalMemoizedUnmaskedChildContext == p5 then
-			return stateNode.__reactInternalMemoizedMaskedChildContext
+		if StateNode and StateNode.__reactInternalMemoizedUnmaskedChildContext == ReactInternalMemoizedUnmaskedChildContext then
+			return StateNode.__reactInternalMemoizedMaskedChildContext
 		end
-		local t_1 = {}
+		local t = {}
 		
-		for i, v in contextTypes do
-			t_1[i] = p5[i]
+		for i, _ in ContextTypes do
+			t[i] = ReactInternalMemoizedUnmaskedChildContext[i]
 		end
-		if dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION then
-			checkPropTypes(contextTypes, nil, t_1, "context", getComponentName(type) or "Unknown")
+		if DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION then
+			CheckPropTypesFunction(ContextTypes, nil, t, "context", GetComponentNameFunction(TypeFunction) or "Unknown")
 		end
-		if stateNode then
-			local stateNode_1 = p4.stateNode
-			stateNode_1.__reactInternalMemoizedUnmaskedChildContext = p5
-			stateNode_1.__reactInternalMemoizedMaskedChildContext = t_1
+		if StateNode then
+			local StateNode1 = p3.stateNode
+			StateNode1.__reactInternalMemoizedUnmaskedChildContext = ReactInternalMemoizedUnmaskedChildContext
+			StateNode1.__reactInternalMemoizedMaskedChildContext = t
 		end
-		return t_1
+		return t
 	end,
-	hasContextChanged = function()
-		-- upvalues: disableLegacyContext (ref), var3 (ref)
-		return if disableLegacyContext then false else var3.current
+	hasContextChanged = function() --[[ Line: 154 ]]
+		-- upvalues: DisableLegacyContext (copy), Cursor1 (copy)
+		return not DisableLegacyContext and Cursor1.current
 	end,
-	popContext = function(p6)
-		-- upvalues: pop (ref), var3 (ref), var2 (ref)
-		pop(var3, p6)
-		pop(var2, p6)
+	popContext = function(p4) --[[ Line: 178 ]]
+		-- upvalues: PopFunction (copy), Cursor1 (copy), Cursor (copy)
+		PopFunction(Cursor1, p4)
+		PopFunction(Cursor, p4)
 	end,
-	popTopLevelContextObject = function(p6)
-		-- upvalues: pop (ref), var3 (ref), var2 (ref)
-		pop(var3, p6)
-		pop(var2, p6)
+	popTopLevelContextObject = function(p4) --[[ Line: 188 ]]
+		-- upvalues: PopFunction (copy), Cursor1 (copy), Cursor (copy)
+		PopFunction(Cursor1, p4)
+		PopFunction(Cursor, p4)
 	end,
-	pushTopLevelContextObject = function(p6, p7, p8)
-		-- upvalues: var2 (ref), t (ref), error (ref), push (ref), var3 (ref)
-		if var2.current ~= t then
-			error(error.new("Unexpected context found on stack. This error is likely caused by a bug in React. Please file an issue."))
+	pushTopLevelContextObject = function(p4, p5, p6) --[[ Line: 198 ]]
+		-- upvalues: Cursor (copy), EmptyContextObject (copy), Error1 (copy), PushFunction (copy), Cursor1 (copy)
+		if Cursor.current ~= EmptyContextObject then
+			error(Error1.new("Unexpected context found on stack. This error is likely caused by a bug in React. Please file an issue."))
 		end
-		push(var2, p7, p6)
-		push(var3, p8, p6)
+		PushFunction(Cursor, p5, p4)
+		PushFunction(Cursor1, p6, p4)
 	end,
 	processChildContext = processChildContext,
-	isContextProvider = function(p6)
-		return if type(p6) == "function" then false else p6.childContextTypes ~= nil
-	end,
-	pushContextProvider = function(p6)
-		-- upvalues: t (ref), var4 (write), var2 (ref), push (ref), var3 (ref)
-		local stateNode = p6.stateNode
-		var4 = var2.current
-		push(var2, if stateNode then stateNode.__reactInternalMemoizedMergedChildContext else t, p6)
-		push(var3, var3.current, p6)
+	isContextProvider = Callback,
+	pushContextProvider = function(p4): boolean --[[ Line: 281 ]]
+		-- upvalues: EmptyContextObject (copy), Current (ref), Cursor (copy), PushFunction (copy), Cursor1 (copy)
+		local StateNode = p4.stateNode
+		Current = Cursor.current
+		PushFunction(Cursor, StateNode and StateNode.__reactInternalMemoizedMergedChildContext or EmptyContextObject, p4)
+		PushFunction(Cursor1, Cursor1.current, p4)
 		
 		return true
 	end,
-	invalidateContextProvider = function(p6, p7, p8)
-		-- upvalues: error (ref), processChildContext (ref), var4 (write), pop (ref), var3 (ref), var2 (ref), push (ref)
-		local stateNode = p6.stateNode
+	invalidateContextProvider = function(p4, p5, p6) --[[ Line: 304 ]]
+		-- upvalues: Error1 (copy), processChildContext (copy), Current (ref), PopFunction (copy), Cursor1 (copy), Cursor (copy), PushFunction (copy)
+		local StateNode = p4.stateNode
 		
-		if not stateNode then
-			error(error.new("Expected to have an instance by this point. This error is likely caused by a bug in React. Please file an issue."))
+		if not StateNode then
+			error(Error1.new("Expected to have an instance by this point. This error is likely caused by a bug in React. Please file an issue."))
 		end
-		if p8 then
-			local var7 = processChildContext(p6, p7, var4)
-			stateNode.__reactInternalMemoizedMergedChildContext = var7
-			pop(var3, p6)
-			pop(var2, p6)
-			push(var2, var7, p6)
-			push(var3, p8, p6)
+		if p6 then
+			local ProcessChildContextResult = processChildContext(p4, p5, Current)
+			StateNode.__reactInternalMemoizedMergedChildContext = ProcessChildContextResult
+			PopFunction(Cursor1, p4)
+			PopFunction(Cursor, p4)
+			PushFunction(Cursor, ProcessChildContextResult, p4)
+			PushFunction(Cursor1, p6, p4)
 			
 			return
+		else
+			PopFunction(Cursor1, p4)
+			PushFunction(Cursor1, p6, p4)
 		end
-		pop(var3, p6)
-		push(var3, p8, p6)
 	end,
-	findCurrentUnmaskedContext = function(p6)
-		-- upvalues: classComponent (ref), isFiberMounted (ref), error (ref), hostRoot (ref)
-		if p6.tag ~= classComponent or not isFiberMounted(p6) then
-			error(error.new("Expected subtree parent to be a mounted class component. This error is likely caused by a bug in React. Please file an issue."))
+	findCurrentUnmaskedContext = function(Return) --[[ Line: 345 ]]
+		-- upvalues: ClassComponent (copy), IsFiberMountedFunction (copy), Error1 (copy), HostRoot (copy)
+		if Return.tag ~= ClassComponent or not IsFiberMountedFunction(Return) then
+			error(Error1.new("Expected subtree parent to be a mounted class component. This error is likely caused by a bug in React. Please file an issue."))
 		end
-		local var7 = p6
+		local Return1 = Return
 		repeat
-			if var7.tag ~= hostRoot then
-				if var7.tag ~= classComponent or var7.type.childContextTypes == nil then
-					var7 = var7.return_
-					continue
-				end
-				return var7.stateNode.__reactInternalMemoizedMergedChildContext
+			if Return1.tag == HostRoot then
+				return Return1.stateNode.context
+			elseif Return1.tag == ClassComponent and Return1.type.childContextTypes ~= nil then
+				return Return1.stateNode.__reactInternalMemoizedMergedChildContext
+			else
+				Return1 = Return1.return_
 			end
-			return var7.stateNode.context
-		until var7 == nil
-		error(error.new("Found unexpected detached subtree parent. This error is likely caused by a bug in React. Please file an issue."))
+		until Return1 == nil
+		error(Error1.new("Found unexpected detached subtree parent. This error is likely caused by a bug in React. Please file an issue."))
 	end
 }

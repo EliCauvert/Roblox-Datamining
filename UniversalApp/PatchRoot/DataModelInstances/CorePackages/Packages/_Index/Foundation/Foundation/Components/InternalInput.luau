@@ -1,1 +1,1 @@
-﻿return require(script.InternalInput)
+﻿return (require(script.InternalInput))

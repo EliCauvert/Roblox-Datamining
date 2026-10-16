@@ -1,14 +1,14 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
-local foundationImagesModule = require(foundation.Parent.FoundationImages)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
+local FoundationImagesModule = require(Foundation.Parent.FoundationImages)
 
-return function(p1, p2)
-	-- upvalues: foundationImagesModule (ref)
-	local resolutionScale = foundationImagesModule.getResolutionScale()
+return function(Center: Rect, Scale) --[[ Line: 9 | Named "getScaledSlice" ]]
+	-- upvalues: FoundationImagesModule (copy)
+	local ResolutionScale = FoundationImagesModule.getResolutionScale()
 	
-	if p1 then
-		p1 = Rect.new(p1.Min * resolutionScale, p1.Max * resolutionScale)
-		p2 = (p2 or 1) / resolutionScale
+	if Center then
+		Center = Rect.new(Center.Min * ResolutionScale, Center.Max * ResolutionScale)
+		Scale = (Scale or 1) / ResolutionScale
 	end
-	return { center = p1, scale = p2 }
+	return { center = Center, scale = Scale }
 end

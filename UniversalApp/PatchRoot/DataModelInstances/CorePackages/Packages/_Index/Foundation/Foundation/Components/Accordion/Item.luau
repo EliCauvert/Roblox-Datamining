@@ -1,1 +1,1 @@
-﻿return require(script.AccordionItem)
+﻿return (require(script.AccordionItem))

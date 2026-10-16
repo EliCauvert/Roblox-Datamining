@@ -1,126 +1,112 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Constants)
-local validateInstanceTreeModule = require(parent.validation.validateInstanceTree)
-local validateTagsModule = require(parent.validation.validateTags)
-local validateSingleInstanceModule = require(parent.validation.validateSingleInstance)
-local validateRigidMeshNotSkinnedModule = require(parent.validation.validateRigidMeshNotSkinned)
-local validateMeshSizePropertyModule = require(parent.validation.ValidateMeshSizeProperty)
-local validatePropertiesSensibleModule = require(parent.validation.ValidatePropertiesSensible)
-local validateDependenciesModule = require(parent.validation.validateDependencies)
-local createMeshPartAccessorySchemaModule = require(parent.util.createMeshPartAccessorySchema)
-local getAttachmentModule = require(parent.util.getAttachment)
-local getMeshSizeModule = require(parent.util.getMeshSize)
-local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
-local getEditableImageFromContextModule = require(parent.util.getEditableImageFromContext)
-local pcallDeferredModule = require(parent.util.pcallDeferred)
-local rigidOrLayeredAllowedModule = require(parent.util.RigidOrLayeredAllowed)
-local getEngineFeatureEngineUGCValidateRigidNonSkinnedModule = require(parent.flags.getEngineFeatureEngineUGCValidateRigidNonSkinned)
-local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Constants)
+local ValidateInstanceTreeModule = require(Parent.validation.validateInstanceTree)
+local ValidateTagsModule = require(Parent.validation.validateTags)
+local ValidateSingleInstanceModule = require(Parent.validation.validateSingleInstance)
+local ValidateMeshSizePropertyModule = require(Parent.validation.ValidateMeshSizeProperty)
+local ValidatePropertiesSensibleModule = require(Parent.validation.ValidatePropertiesSensible)
+local ValidateDependenciesModule = require(Parent.validation.validateDependencies)
+local CreateMeshPartAccessorySchemaModule = require(Parent.util.createMeshPartAccessorySchema)
+local GetAttachmentModule = require(Parent.util.getAttachment)
+local GetMeshSizeModule = require(Parent.util.getMeshSize)
+local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
+local GetEditableImageFromContextModule = require(Parent.util.getEditableImageFromContext)
+local PcallDeferredModule = require(Parent.util.pcallDeferred)
+local RigidOrLayeredAllowedModule = require(Parent.util.RigidOrLayeredAllowed)
+local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 
-return function(p1)
-	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), createMeshPartAccessorySchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref), getAttachmentModule (ref), validateTagsModule (ref), validateMeshSizePropertyModule (ref), getEngineFeatureEngineUGCValidateRigidNonSkinnedModule (ref), validateRigidMeshNotSkinnedModule (ref)
+return function(p1) --[[ Line: 26 | Named "validateMeshPartAccessory" ]]
+	-- upvalues: RigidOrLayeredAllowedModule (copy), AnalyticsModule (copy), ConstantsModule (copy), ValidateSingleInstanceModule (copy), CreateMeshPartAccessorySchemaModule (copy), ValidateInstanceTreeModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), ValidateDependenciesModule (copy), FailureReasonsAccumulatorModule (copy), GetEditableMeshFromContextModule (copy), GetEditableImageFromContextModule (copy), PcallDeferredModule (copy), GetMeshSizeModule (copy), GetAttachmentModule (copy), ValidateTagsModule (copy), ValidateMeshSizePropertyModule (copy)
 	assert(p1.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateMeshPartAccessory")
-	local instances = p1.instances
-	local assetTypeEnum = p1.assetTypeEnum
+	local Instances = p1.instances
+	local AssetTypeEnum = p1.assetTypeEnum
 	
-	if not rigidOrLayeredAllowedModule.isRigidAccessoryAllowed(assetTypeEnum) then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLegacyAccessory_AssetTypeNotAllowedAsRigidAccessory, nil, p1)
+	if not RigidOrLayeredAllowedModule.isRigidAccessoryAllowed(AssetTypeEnum) then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLegacyAccessory_AssetTypeNotAllowedAsRigidAccessory, nil, p1)
 		
 		return false, {
-			string.format("Asset type '%s' is not a rigid accessory category. It can only be used with layered clothing.", assetTypeEnum.Name)
+			string.format("Asset type '%s' is not a rigid accessory category. It can only be used with layered clothing.", AssetTypeEnum.Name)
 		}
 	end
-	local var1 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]
-	local _ = nil
-	local _ = nil
-	local var2, var3 = validateSingleInstanceModule(instances, p1)
+	local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[AssetTypeEnum]
+	local ValidateSingleInstanceModuleResult, ValidateSingleInstanceModuleResult2 = ValidateSingleInstanceModule(Instances, p1)
 	
-	if not var2 then
-		return false, var3
+	if not ValidateSingleInstanceModuleResult then
+		return false, ValidateSingleInstanceModuleResult2
 	end
-	local var4 = instances[1]
-	local var5, var6 = validateInstanceTreeModule(createMeshPartAccessorySchemaModule(var1.attachmentNames), var4, p1)
-	local var7 = var6
+	local InstancesEntry = Instances[1]
+	local ValidateInstanceTreeModuleResult, ValidateInstanceTreeModuleResult2 = ValidateInstanceTreeModule(CreateMeshPartAccessorySchemaModule(ASSETTYPE.attachmentNames), InstancesEntry, p1)
 	
-	if not var5 then
-		return false, var7
-	elseif getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-		local var8, var9 = validatePropertiesSensibleModule.validate(var4, p1)
-		local var10 = var9
+	if not ValidateInstanceTreeModuleResult then
+		return false, ValidateInstanceTreeModuleResult2
+	end
+	if GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
+		local ValidateResult, ValidateResult2 = ValidatePropertiesSensibleModule.validate(InstancesEntry, p1)
 		
-		if not var8 then
-			return false, var10
+		if not ValidateResult then
+			return false, ValidateResult2
 		end
 	end
-	local var11, var12 = validateDependenciesModule(var4, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
+	local ValidateDependenciesModuleResult, ValidateDependenciesModuleResult2 = ValidateDependenciesModule(InstancesEntry, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
 	
-	if not var11 then
-		return false, var12
+	if not ValidateDependenciesModuleResult then
+		return false, ValidateDependenciesModuleResult2
 	end
-	local handle = var4:FindFirstChild("Handle")
-	local t = {
+	local Handle = InstancesEntry:FindFirstChild("Handle")
+	local config = {
 		fieldName = "MeshId",
-		fullName = handle:GetFullName(),
-		contentId = handle.MeshId,
-		context = var4.Name
+		fullName = Handle:GetFullName(),
+		contentId = Handle.MeshId,
+		context = InstancesEntry.Name
 	}
-	local var13 = failureReasonsAccumulatorModule.new()
+	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	
-	if handle.DoubleSided then
-		var13:updateReasons(false, {
-			string.format("MeshPart '%s' is double-sided. Double-sided meshes are not allowed in rigid accessories.", handle:GetFullName())
+	if Handle.DoubleSided then
+		NewFailureReasonsAccumulator:updateReasons(false, {
+			string.format("MeshPart '%s' is double-sided. Double-sided meshes are not allowed in rigid accessories.", Handle:GetFullName())
 		})
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshPartAccessory_DoubleSided, nil, p1)
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateMeshPartAccessory_DoubleSided, nil, p1)
 	end
-	local var14 = t.contentId ~= nil and t.contentId ~= ""
-	local var15, var16 = getEditableMeshFromContextModule(handle, "MeshId", p1)
+	local MeshId, MeshId2 = GetEditableMeshFromContextModule(Handle, "MeshId", p1)
 	
-	if not var15 then
-		if t.contentId then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshPartAccessory_FailedToLoadMesh, nil, p1)
+	if not MeshId then
+		if config.contentId then
+			AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateMeshPartAccessory_FailedToLoadMesh, nil, p1)
 			
 			return false, {
-				string.format("Failed to load mesh for accessory '%s'. Make sure mesh exists and try again.", var4.Name)
+				string.format("Failed to load mesh for accessory '%s'. Make sure mesh exists and try again.", InstancesEntry.Name)
 			}
 		end
-		var14 = false
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshPartAccessory_NoMeshId, nil, p1)
-		var13:updateReasons(false, {
-			string.format("Accessory MeshPart '%s' must contain a valid meshId. Make sure the mesh referred to by the meshId exists and try again.", handle:GetFullName())
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateMeshPartAccessory_NoMeshId, nil, p1)
+		NewFailureReasonsAccumulator:updateReasons(false, {
+			string.format("Accessory MeshPart '%s' must contain a valid meshId. Make sure the mesh referred to by the meshId exists and try again.", Handle:GetFullName())
 		})
 	end
-	t.editableMesh = var16
-	var14 = true
-	local t_1 = {
-		fieldName = "TextureID",
-		fullName = handle:GetFullName(),
-		contentId = handle.TextureID
-	}
-	local _, var17 = getEditableImageFromContextModule(handle, "TextureID", p1)
-	t_1.editableImage = var17
-	local var18, _ = pcallDeferredModule(function()
-		-- upvalues: getMeshSizeModule (copy), t (ref)
-		return getMeshSizeModule(t)
+	config.editableMesh = MeshId2
+	local _ = Handle.TextureID
+	local _ = Handle:GetFullName()
+	local _, _ = GetEditableImageFromContextModule(Handle, "TextureID", p1)
+	local PcallDeferredModuleResult, _ = PcallDeferredModule(function() --[[ Line: 142 ]]
+		-- upvalues: GetMeshSizeModule (upval), config (copy)
+		return GetMeshSizeModule(config)
 	end, p1)
 	
-	if not var18 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshPartAccessory_FailedToLoadMesh, nil, p1)
+	if PcallDeferredModuleResult then
+		local AttachmentModule = GetAttachmentModule(Handle, ASSETTYPE.attachmentNames)
+		assert(AttachmentModule)
+		assert(ASSETTYPE.bounds[AttachmentModule.Name], "Could not find bounds for " .. AttachmentModule.Name)
+		NewFailureReasonsAccumulator:updateReasons(ValidateTagsModule(InstancesEntry, p1))
+		NewFailureReasonsAccumulator:updateReasons(ValidateMeshSizePropertyModule.validateSingleMeshPart(Handle, p1))
+		
+		return NewFailureReasonsAccumulator:getFinalResults()
+	else
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateMeshPartAccessory_FailedToLoadMesh, nil, p1)
 		
 		return false, {
-			string.format("Failed to load mesh for accessory '%s'. Make sure mesh exists and try again.", var4.Name)
+			string.format("Failed to load mesh for accessory '%s'. Make sure mesh exists and try again.", InstancesEntry.Name)
 		}
 	end
-	local var19 = getAttachmentModule(handle, var1.attachmentNames)
-	assert(var19)
-	assert(var1.bounds[var19.Name], "Could not find bounds for " .. var19.Name)
-	var13:updateReasons(validateTagsModule(var4, p1))
-	var13:updateReasons(validateMeshSizePropertyModule.validateSingleMeshPart(handle, p1))
-	
-	if getEngineFeatureEngineUGCValidateRigidNonSkinnedModule() and not p1.allowEditableInstances then
-		var13:updateReasons(validateRigidMeshNotSkinnedModule(t.contentId, p1))
-	end
-	return var13:getFinalResults()
 end

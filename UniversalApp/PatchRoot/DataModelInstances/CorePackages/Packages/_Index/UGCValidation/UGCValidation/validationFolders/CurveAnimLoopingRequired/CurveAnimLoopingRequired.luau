@@ -1,25 +1,24 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.ANIMATION },
+	categories = { ValidationEnumsModule.UploadCategory.ANIMATION },
 	requiredData = {
-		validationEnumsModule.SharedDataMember.curveAnimations,
-		validationEnumsModule.SharedDataMember.uploadEnum
+		ValidationEnumsModule.SharedDataMember.curveAnimations,
+		ValidationEnumsModule.SharedDataMember.uploadEnum
 	},
-	fflag = require(parent.flags.getFFlagUGCValidateCurveAnimLoopingRequired),
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref)
+	run = function(p1, p2) --[[ Line: 17 ]]
+		-- upvalues: ErrorSourceStringsModule (copy)
 		if p2.uploadEnum.assetType == Enum.AssetType.JumpAnimation then return end
-		for i, v in p2.curveAnimations do
-			if not v.Loop then
-				p1:fail(errorSourceStringsModule.Keys.CurveAnim_LoopingNotEnabled, { animationName = v:GetFullName() })
+		for _, curveAnimation in p2.curveAnimations do
+			if not curveAnimation.Loop then
+				p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_LoopingNotEnabled, { animationName = curveAnimation:GetFullName() })
 			end
 		end
 	end

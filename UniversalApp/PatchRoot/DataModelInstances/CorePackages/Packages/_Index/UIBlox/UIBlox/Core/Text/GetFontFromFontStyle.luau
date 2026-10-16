@@ -1,7 +1,7 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.Core.Style.Validator.validateFontInfo)
-local _ = require(parent.App.Style.StyleTypes)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.Core.Style.Validator.validateFontInfo)
+local _ = require(Parent.App.Style.StyleTypes)
 
-return function(p1)
-	return p1.FontFace or p1.Font
+return function(Label) --[[ Line: 9 | Named "getFontFromFontStyle" ]]
+	return Label.FontFace or Label.Font
 end

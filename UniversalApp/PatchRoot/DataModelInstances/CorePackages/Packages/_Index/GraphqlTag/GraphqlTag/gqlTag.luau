@@ -1,137 +1,139 @@
-﻿local parent = script.Parent.Parent
-local parse = require(parent.GraphQL).parse
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local map = luauPolyfillModule.Map
-local set = luauPolyfillModule.Set
-local string = luauPolyfillModule.String
-local object = luauPolyfillModule.Object
-local array = luauPolyfillModule.Array
-local console = luauPolyfillModule.console
-local var1 = map.new(nil)
-local var2 = map.new(nil)
-local var3 = true
-local var4 = false
+﻿local Parent = script.Parent.Parent
+local ParseFunction = require(Parent.GraphQL).parse
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Map = LuauPolyfillModule.Map
+local Set = LuauPolyfillModule.Set
+local String = LuauPolyfillModule.String
+local Object = LuauPolyfillModule.Object
+local Array = LuauPolyfillModule.Array
+local Console = LuauPolyfillModule.console
+local NewMap = Map.new(nil)
+local NewMap1 = Map.new(nil)
+local Flag = true
+local ExperimentalFragmentVariables = false
 
-local function normalize(p1)
-	-- upvalues: string (ref)
-	return string.trim(p1:gsub(",+%s+", " "))
+local function normalize(Text: string) --[[ Line: 30 ]]
+	-- upvalues: String (copy)
+	return String.trim((Text:gsub(",+%s+", " ")))
 end
 
-local function _(p1)
-	-- upvalues: normalize (ref)
+local function _(p1) --[[ Line: 35 | Named "cacheKeyFromLoc" ]]
+	-- upvalues: normalize (copy)
 	return normalize(p1.source.body:sub(p1.start, p1._end))
 end
 
-local function processFragments(p1)
-	-- upvalues: set (ref), string (ref), var2 (ref), var3 (write), console (ref), object (ref)
-	local var5
-	local var6 = set.new(nil)
-	local t = {}
+local function processFragments(p1) --[[ Line: 39 ]]
+	-- upvalues: Set (copy), String (copy), NewMap1 (copy), Flag (ref), Console (copy), Object (copy)
+	local NewSet = Set.new(nil)
+	local Definitions = {}
 	
 	for i = 1, #p1.definitions do
-		var5 = p1.definitions[i]
+		local Definition = p1.definitions[i]
 		
-		if var5.kind ~= "FragmentDefinition" then
-			table.insert(t, var5)
+		if Definition.kind ~= "FragmentDefinition" then
+			table.insert(Definitions, Definition)
 			continue
 		end
-		local value = var5.name.value
-		local loc = var5.loc
-		local var7 = string.trim(loc.source.body:sub(loc.start, loc._end):gsub(",+%s+", " "))
-		loc = var2:get(value)
+		local Value = Definition.name.value
+		local Loc = Definition.loc
+		local TrimResult = String.trim((Loc.source.body:sub(Loc.start, Loc._end):gsub(",+%s+", " ")))
+		local GetResult = NewMap1:get(Value)
 		
-		if loc and not loc:has(var7) then
-			if var3 then
-				console.warn("Warning: fragment with name " .. value .. " already exists.\n" .. "graphql-tag enforces all fragment names across your application to be unique; read more about\n" .. "this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names")
+		if GetResult and not GetResult:has(TrimResult) then
+			if Flag then
+				Console.warn("Warning: fragment with name " .. Value .. " already exists.\n" .. "graphql-tag enforces all fragment names across your application to be unique; read more about\n" .. "this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names")
 			end
-		elseif not loc then
-			loc = set.new()
-			var2:set(value, loc)
+		elseif not GetResult then
+			GetResult = Set.new()
+			NewMap1:set(Value, GetResult)
 		end
-		loc:add(var7)
+		GetResult:add(TrimResult)
 		
-		if not var6:has(var7) then
-			var6:add(var7)
-			table.insert(t, var5)
+		if not NewSet:has(TrimResult) then
+			NewSet:add(TrimResult)
+			table.insert(Definitions, Definition)
 		end
 	end
-	return object.assign({}, p1, { definitions = t })
+	return Object.assign({}, p1, { definitions = Definitions })
 end
 
-local function stripLoc(p2)
-	-- upvalues: set (ref), object (ref), array (ref)
-	local var8 = set.new(nil)
+local function stripLoc(p2) --[[ Line: 83 ]]
+	-- upvalues: Set (copy), Object (copy), Array (copy)
+	local NewSet = Set.new(nil)
 	
-	for i_1 = 1, #var8 do
-		local var9 = var8[i_1]
+	for i = 1, #NewSet do
+		local NewSetEntry = NewSet[i]
 		
-		if var9.loc then
-			var8:delete(var9.loc)
+		if NewSetEntry.loc then
+			NewSet:delete(NewSetEntry.loc)
 		end
-		for i = 1, #object.keys(var9) do
-			local var10 = var9[tostring(object.keys(var9)[i])]
+		for i1 = 1, #Object.keys(NewSetEntry) do
+			local NewSetEntry1 = NewSetEntry[tostring(Object.keys(NewSetEntry)[i1])]
 			
-			if var10 and typeof(var10) == "table" and not array.isArray(var10) then
-				var8:add(var10)
+			if NewSetEntry1 and typeof(NewSetEntry1) == "table" and not Array.isArray(NewSetEntry1) then
+				NewSet:add(NewSetEntry1)
 			end
 		end
 	end
-	local loc = p2.loc
+	local Loc = p2.loc
 	
-	if loc then
-		loc.startToken = nil
-		loc.endToken = nil
+	if Loc then
+		Loc.startToken = nil
+		Loc.endToken = nil
 	end
 	return p2
 end
 
-local function parseDocument(p3)
-	-- upvalues: string (ref), var1 (ref), parse (ref), var4 (write), stripLoc (ref), processFragments (ref)
-	local var11 = string.trim(p3:gsub(",+%s+", " "))
+local function parseDocument(Text: string) --[[ Line: 107 ]]
+	-- upvalues: String (copy), NewMap (copy), ParseFunction (copy), ExperimentalFragmentVariables (ref), stripLoc (copy), processFragments (copy)
+	local TrimResult = String.trim((Text:gsub(",+%s+", " ")))
 	
-	if not var1:has(var11) then
-		local var12 = parse(p3, { experimentalFragmentVariables = var4 })
+	if not NewMap:has(TrimResult) then
+		local ParseResult = ParseFunction(Text, {
+			experimentalFragmentVariables = ExperimentalFragmentVariables
+		})
 		
-		if not var12 or var12.kind ~= "Document" then
+		if not ParseResult or ParseResult.kind ~= "Document" then
 			error("Not a valid GraphQL document.")
 		end
-		var1:set(var11, stripLoc(processFragments(var12)))
+		NewMap:set(TrimResult, (stripLoc(processFragments(ParseResult))))
 	end
-	return var1:get(var11)
+	return (NewMap:get(TrimResult))
 end
 
-local function gql(p3)
-	-- upvalues: parseDocument (ref)
+local function gql(p3) --[[ Line: 130 ]]
+	-- upvalues: parseDocument (copy)
 	if typeof(p3) == "string" then
-		return parseDocument(p3)
+		return (parseDocument(p3))
 	elseif typeof(p3) == "table" and p3.kind == "Document" then
 		return p3
+	else
+		error("graphql-tag-lua does not currently support non-strings or Fragments. Please file an issue or PR if you need this feature added.")
 	end
-	error("graphql-tag-lua does not currently support non-strings or Fragments. Please file an issue or PR if you need this feature added.")
 end
 
-function resetCaches()
-	-- upvalues: var1 (ref), var2 (ref)
-	var1:clear()
-	var2:clear()
+function resetCaches() --[[ Line: 159 ]]
+	-- upvalues: NewMap (copy), NewMap1 (copy)
+	NewMap:clear()
+	NewMap1:clear()
 end
 
-function disableFragmentWarnings()
-	-- upvalues: var3 (write)
-	var3 = false
+function disableFragmentWarnings() --[[ Line: 164 ]]
+	-- upvalues: Flag (ref)
+	Flag = false
 end
 
-function enableExperimentalFragmentVariables()
-	-- upvalues: var4 (write)
-	var4 = true
+function enableExperimentalFragmentVariables() --[[ Line: 168 ]]
+	-- upvalues: ExperimentalFragmentVariables (ref)
+	ExperimentalFragmentVariables = true
 end
 
-function disableExperimentalFragmentVariables()
-	-- upvalues: var4 (write)
-	var4 = false
+function disableExperimentalFragmentVariables() --[[ Line: 172 ]]
+	-- upvalues: ExperimentalFragmentVariables (ref)
+	ExperimentalFragmentVariables = false
 end
 
-local t = {
+local config = {
 	gql = gql,
 	resetCaches = resetCaches,
 	disableFragmentWarnings = disableFragmentWarnings,
@@ -142,8 +144,8 @@ local t = {
 return {
 	default = gql,
 	gql = gql,
-	resetCaches = t.resetCaches,
-	disableFragmentWarnings = t.disableFragmentWarnings,
-	enableExperimentalFragmentVariables = t.enableExperimentalFragmentVariables,
-	disableExperimentalFragmentVariables = t.disableExperimentalFragmentVariables
+	resetCaches = config.resetCaches,
+	disableFragmentWarnings = config.disableFragmentWarnings,
+	enableExperimentalFragmentVariables = config.enableExperimentalFragmentVariables,
+	disableExperimentalFragmentVariables = config.disableExperimentalFragmentVariables
 }

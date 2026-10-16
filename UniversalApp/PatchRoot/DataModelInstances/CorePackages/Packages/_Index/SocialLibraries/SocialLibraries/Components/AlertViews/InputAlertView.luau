@@ -1,11 +1,11 @@
-﻿local socialLibraries = script:FindFirstAncestor("SocialLibraries")
-local dependenciesModule = require(socialLibraries.dependencies)
-local roact = dependenciesModule.Roact
-local buttonType = dependenciesModule.UIBlox.App.Button.Enum.ButtonType
-local userInputService = dependenciesModule.UserInputService
-local alertViewBuilderModule = require(socialLibraries.Components.AlertViewBuilder.AlertViewBuilder)
-local inputAlertView = roact.Component:extend("InputAlertView")
-inputAlertView.defaultProps = {
+﻿local SocialLibraries = script:FindFirstAncestor("SocialLibraries")
+local DependenciesModule = require(SocialLibraries.dependencies)
+local Roact = DependenciesModule.Roact
+local ButtonType = DependenciesModule.UIBlox.App.Button.Enum.ButtonType
+local UserInputService = DependenciesModule.UserInputService
+local AlertViewBuilderModule = require(SocialLibraries.Components.AlertViewBuilder.AlertViewBuilder)
+local InputAlertView = Roact.Component:extend("InputAlertView")
+InputAlertView.defaultProps = {
 	titleText = "TestTitle",
 	cancelText = "TestCancel",
 	confirmText = "TestConfirm",
@@ -14,38 +14,38 @@ inputAlertView.defaultProps = {
 	maxCharacters = 150,
 	soakAreaTransparency = 0.9,
 	shouldAdjustForKeyboard = true,
-	onActivated = function() end,
-	onModalClose = function() end,
+	onActivated = function() --[[ Line: 23 ]] end,
+	onModalClose = function() --[[ Line: 25 ]] end,
 	screenSize = Vector2.new(0, 0),
 	soakAreaColor3 = Color3.fromRGB(0, 0, 255)
 }
 
-function inputAlertView.init(p1)
-	-- upvalues: roact (ref), userInputService (ref)
-	p1.ref = roact.createRef()
+function InputAlertView.init(p1) --[[ Line: 34 ]]
+	-- upvalues: Roact (copy), UserInputService (copy)
+	p1.ref = Roact.createRef()
 	
-	function p0.onTextChanged(p2)
-		-- upvalues: p1 (ref)
+	function p1.onTextChanged(InputText) --[[ Line: 36 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({
-			inputText = p2,
-			inputLengthExceeded = p1.props.maxCharacters < #p2
+			inputText = InputText,
+			inputLengthExceeded = p1.props.maxCharacters < #InputText
 		})
 	end
 	
-	function p0.onButtonActivated()
-		-- upvalues: p1 (ref)
+	function p1.onButtonActivated() --[[ Line: 43 ]]
+		-- upvalues: p1 (copy)
 		p1.closing = true
 	end
 	
-	function p0.updateModalPosition()
-		-- upvalues: p1 (ref), userInputService (copy)
+	function p1.updateModalPosition() --[[ Line: 47 ]]
+		-- upvalues: p1 (copy), UserInputService (upval)
 		p1:setState({
-			keyboardOffset = if userInputService.OnScreenKeyboardVisible then p1.state.yPosition + p1.ref:getValue().AbsoluteSize.Y - userInputService.OnScreenKeyboardPosition.Y else 0
+			keyboardOffset = UserInputService.OnScreenKeyboardVisible and p1.state.yPosition + p1.ref:getValue().AbsoluteSize.Y - UserInputService.OnScreenKeyboardPosition.Y or 0
 		})
 	end
 	
-	function p0.onModalStayOpen()
-		-- upvalues: p1 (ref)
+	function p1.onModalStayOpen() --[[ Line: 57 ]]
+		-- upvalues: p1 (copy)
 		p1.closing = false
 		
 		if p1.props.shouldAdjustForKeyboard then
@@ -54,10 +54,10 @@ function inputAlertView.init(p1)
 	end
 	
 	if p1.props.shouldAdjustForKeyboard then
-		p1.keyboardConnection = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):connect(function()
-			-- upvalues: p1 (ref)
-			spawn(function()
-				-- upvalues: p1 (copy)
+		p1.keyboardConnection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):connect(function() --[[ Line: 69 ]]
+			-- upvalues: p1 (copy)
+			spawn(function() --[[ Line: 71 ]]
+				-- upvalues: p1 (upval)
 				if p1.isMounted and not p1.closing then
 					p1.updateModalPosition()
 					
@@ -66,11 +66,11 @@ function inputAlertView.init(p1)
 			end)
 		end)
 	end
-	function p0.onPositionChanged(p2)
-		-- upvalues: p1 (ref)
+	function p1.onPositionChanged(Frame: Frame) --[[ Line: 82 ]]
+		-- upvalues: p1 (copy)
 		if not p1.isMounted then return end
-		if p2.AbsolutePosition.Y ~= p1.state.yPosition then
-			p1:setState({ yPosition = p2.AbsolutePosition.Y })
+		if Frame.AbsolutePosition.Y ~= p1.state.yPosition then
+			p1:setState({ yPosition = Frame.AbsolutePosition.Y })
 		end
 	end
 	
@@ -83,69 +83,68 @@ function inputAlertView.init(p1)
 	}
 end
 
-function inputAlertView.render(p1)
-	-- upvalues: buttonType (ref), roact (ref), alertViewBuilderModule (ref)
-	local props = p1.props
-	local _ = nil
-	local maxCharacters = props.maxCharacters
+function InputAlertView.render(p1) --[[ Line: 102 ]]
+	-- upvalues: ButtonType (copy), Roact (copy), AlertViewBuilderModule (copy)
+	local Props = p1.props
+	local MaxCharacters = Props.maxCharacters
 	
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		Size = UDim2.new(1, 0, 1, -p1.state.keyboardOffset),
 		Transparency = 1,
-		[roact.Change.AbsolutePosition] = p1.onPositionChanged,
-		[roact.Ref] = p1.ref
+		[Roact.Change.AbsolutePosition] = p1.onPositionChanged,
+		[Roact.Ref] = p1.ref
 	}, {
-		AlertView = roact.createElement(alertViewBuilderModule, {
-			buttons = if not props.displayFailed then {
+		AlertView = Roact.createElement(AlertViewBuilderModule, {
+			buttons = if Props.displayFailed then {
 				{
-					buttonType = buttonType.Secondary,
-					props = {
-						text = props.cancelText,
-						onActivated = function() end
-					}
-				},
-				{
-					buttonType = buttonType.PrimarySystem,
-					props = {
-						text = props.confirmText,
-						isDisabled = p1.state.inputLengthExceeded,
-						onActivated = props.onActivated
-					}
+					buttonType = ButtonType.Alert,
+					props = { text = Props.failedText, onActivated = Props.onActivated }
 				}
 			} else {
 				{
-					buttonType = buttonType.Alert,
-					props = { text = props.failedText, onActivated = props.onActivated }
+					buttonType = ButtonType.Secondary,
+					props = {
+						text = Props.cancelText,
+						onActivated = function() --[[ Line: 113 ]] end
+					}
+				},
+				{
+					buttonType = ButtonType.PrimarySystem,
+					props = {
+						text = Props.confirmText,
+						isDisabled = p1.state.inputLengthExceeded,
+						onActivated = Props.onActivated
+					}
 				}
 			},
 			inputLengthExceeded = p1.state.inputLengthExceeded,
 			onActivated = p1.onButtonActivated,
-			onModalClose = props.onModalClose,
+			onModalClose = Props.onModalClose,
 			onModalStayOpen = p1.onModalStayOpen,
 			soakAreaColor3 = p1.props.soakAreaColor3,
 			soakAreaTransparency = p1.props.soakAreaTransparency,
 			textboxes = {
 				InputBox = {
 					LayoutOrder = 1,
-					belowText = maxCharacters and #p1.state.inputText .. "/" .. maxCharacters,
+					belowText = MaxCharacters and #p1.state.inputText .. "/" .. MaxCharacters,
 					belowTextAlignment = Enum.TextXAlignment.Right,
 					onTextChanged = p1.onTextChanged,
-					PlaceholderText = props.placeholderText,
-					Text = props.inputText,
+					PlaceholderText = Props.placeholderText,
+					Text = Props.inputText,
 					warningText = p1.props.warningText
 				}
 			},
-			title = props.titleText,
-			screenSize = props.screenSize
+			title = Props.titleText,
+			screenSize = Props.screenSize
 		})
 	})
 end
 
-function inputAlertView.didMount(p1)
+function InputAlertView.didMount(p1) --[[ Line: 168 ]]
 	p1.isMounted = true
 end
 
-function inputAlertView.willUnmount(p1)
+function InputAlertView.willUnmount(p1) --[[ Line: 172 ]]
 	p1.isMounted = false
 	
 	if p1.keyboardConnection then
@@ -154,4 +153,4 @@ function inputAlertView.willUnmount(p1)
 	end
 end
 
-return inputAlertView
+return InputAlertView

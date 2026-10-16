@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local var1 = require(parent.flags.getFIntUGCValidationMaxMsPerFrame)() / 1000
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local v1 = require(Parent.flags.getFIntUGCValidationMaxMsPerFrame)() / 1000
 
-return function(p1)
-	-- upvalues: var1 (ref)
-	if p1.shouldYield and var1 <= tick() - p1.lastTickSeconds then
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: v1 (copy)
+	if p1.shouldYield and v1 <= tick() - p1.lastTickSeconds then
 		task.wait()
 		p1.lastTickSeconds = tick()
 	end

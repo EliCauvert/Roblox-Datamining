@@ -1,64 +1,62 @@
-﻿local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local encodeURIComponentModule = require(parent.luaUtils.encodeURIComponent)
-local t = {}
-local serializeFetchParameter = require(script.Parent.serializeFetchParameter).serializeFetchParameter
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local EncodeURIComponentModule = require(Parent.luaUtils.encodeURIComponent)
+local SerializeFetchParameterFunction = require(script.Parent.serializeFetchParameter).serializeFetchParameter
 local _ = require(script.Parent.selectHttpOptionsAndBody)
 
-function t.rewriteURIForGET(p1, p2)
-	-- upvalues: encodeURIComponentModule (ref), array (ref), object (ref), boolean (ref), serializeFetchParameter (ref)
-	local substring
-	local t = {}
-	
-	local function _(p3, p4)
-		-- upvalues: t (ref), encodeURIComponentModule (copy)
-		table.insert(t, ("%s=%s"):format(p3, encodeURIComponentModule(p4)))
-	end
-	
-	if array.indexOf(object.keys(p2), "query") ~= -1 then
-		table.insert(t, ("%s=%s"):format("query", encodeURIComponentModule(p2.query)))
-	end
-	if boolean.toJSBoolean(p2.operationName) then
-		table.insert(t, ("%s=%s"):format("operationName", encodeURIComponentModule(p2.operationName)))
-	end
-	if boolean.toJSBoolean(p2.variables) then
-		substring = nil
-		local ok, status = pcall(function()
-			-- upvalues: substring (write), serializeFetchParameter (copy), p2 (ref)
-			substring = serializeFetchParameter(p2.variables, "Variables map", true)
-		end)
+return {
+	rewriteURIForGET = function(Text: string, p1) --[[ Line: 29 ]]
+		-- upvalues: EncodeURIComponentModule (copy), Array (copy), Object (copy), Boolean (copy), SerializeFetchParameterFunction (copy)
+		local List = {}
 		
-		if not ok then
-			return { parseError = status }
+		local function _(p2, p3) --[[ Line: 39 | Named "addQueryParam" ]]
+			-- upvalues: List (copy), EncodeURIComponentModule (upval)
+			table.insert(List, ("%s=%s"):format(p2, EncodeURIComponentModule(p3)))
 		end
-		table.insert(t, ("%s=%s"):format("variables", encodeURIComponentModule(substring)))
-	end
-	if boolean.toJSBoolean(p2.extensions) then
-		substring = nil
-		local ok, status = pcall(function()
-			-- upvalues: substring (write), serializeFetchParameter (copy), p2 (ref)
-			substring = serializeFetchParameter(p2.extensions, "Extensions map")
-		end)
 		
-		if not ok then
-			return { parseError = status }
+		if Array.indexOf(Object.keys(p1), "query") ~= -1 then
+			table.insert(List, ("%s=%s"):format("query", EncodeURIComponentModule(p1.query)))
 		end
-		table.insert(t, ("%s=%s"):format("extensions", encodeURIComponentModule(substring)))
+		if Boolean.toJSBoolean(p1.operationName) then
+			table.insert(List, ("%s=%s"):format("operationName", EncodeURIComponentModule(p1.operationName)))
+		end
+		if Boolean.toJSBoolean(p1.variables) then
+			local VariablesMap = nil
+			local Success, Result = pcall(function() --[[ Line: 51 ]]
+				-- upvalues: VariablesMap (ref), SerializeFetchParameterFunction (upval), p1 (copy)
+				VariablesMap = SerializeFetchParameterFunction(p1.variables, "Variables map", true)
+			end)
+			
+			if not Success then
+				return { parseError = Result }
+			end
+			table.insert(List, ("%s=%s"):format("variables", EncodeURIComponentModule(VariablesMap)))
+		end
+		if Boolean.toJSBoolean(p1.extensions) then
+			local ExtensionsMap = nil
+			local Success1, Result1 = pcall(function() --[[ Line: 62 ]]
+				-- upvalues: ExtensionsMap (ref), SerializeFetchParameterFunction (upval), p1 (copy)
+				ExtensionsMap = SerializeFetchParameterFunction(p1.extensions, "Extensions map")
+			end)
+			
+			if not Success1 then
+				return { parseError = Result1 }
+			end
+			table.insert(List, ("%s=%s"):format("extensions", EncodeURIComponentModule(ExtensionsMap)))
+		end
+		local Segment = ""
+		local Text1: string = Text
+		local FoundAt: number? = string.find(Text, "#")
+		
+		if FoundAt ~= nil then
+			Segment = string.sub(Text, FoundAt)
+			Text1 = string.sub(Text, 1, FoundAt - 1)
+		end
+		return {
+			newURI = Text1 .. (if string.find(Text1, "?") == nil then "?" else "&") .. Array.join(List, "&") .. Segment
+		}
 	end
-	substring = ""
-	local var1 = p1
-	local matchIndex = string.find(p1, "#")
-	
-	if matchIndex ~= nil then
-		substring = string.sub(p1, matchIndex)
-		var1 = string.sub(p1, 1, matchIndex - 1)
-	end
-	return {
-		newURI = var1 .. (if string.find(var1, "?") == nil then "?" else "&") .. array.join(t, "&") .. substring
-	}
-end
-
-return t
+}

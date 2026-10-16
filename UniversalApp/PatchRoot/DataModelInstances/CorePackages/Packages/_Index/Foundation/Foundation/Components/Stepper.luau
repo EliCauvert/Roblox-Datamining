@@ -1,1 +1,1 @@
-﻿return require(script.Stepper)
+﻿return (require(script.Stepper))

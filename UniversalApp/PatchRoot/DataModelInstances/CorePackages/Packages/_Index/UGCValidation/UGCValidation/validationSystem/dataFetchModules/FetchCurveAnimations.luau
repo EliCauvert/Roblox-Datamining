@@ -1,41 +1,44 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local getAllInstancesIsAModule = require(parent.util.getAllInstancesIsA)
-local getFFlagUGCValidateCurveAnimSingleRootModule = require(parent.flags.getFFlagUGCValidateCurveAnimSingleRoot)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local GetAllInstancesIsAModule = require(Parent.util.getAllInstancesIsA)
+local GetFFlagUGCValidateCurveAnimSingleRootModule = require(Parent.flags.getFFlagUGCValidateCurveAnimSingleRoot)
 
 return {
-	getData = function(p1)
-		-- upvalues: getAllInstancesIsAModule (ref), getFFlagUGCValidateCurveAnimSingleRootModule (ref)
-		local status
-		local t = {}
+	getData = function(p1, p2) --[[ Line: 23 ]]
+		-- upvalues: GetAllInstancesIsAModule (copy), GetFFlagUGCValidateCurveAnimSingleRootModule (copy)
+		local List = {}
 		
-		for i, v in getAllInstancesIsAModule(p1, "Animation") do
-			local animationId = v.AnimationId
+		for _, Animation in GetAllInstancesIsAModule(p1, "Animation") do
+			local AnimationId = Animation.AnimationId
 			
-			if animationId ~= "" then
-				ok, status = pcall(function()
-					-- upvalues: animationId (ref)
-					return game:GetObjectsAllOrNone(animationId)
+			if AnimationId ~= "" then
+				local PreloadedCurveAnimation = p2 and p2.preloadedCurveAnimations[AnimationId]
+				
+				if PreloadedCurveAnimation then
+					table.insert(List, PreloadedCurveAnimation)
+					continue
+				end
+				local Success, Result = pcall(function() --[[ Line: 41 ]]
+					-- upvalues: AnimationId (copy)
+					return game:GetObjectsAllOrNone(AnimationId)
 				end)
 				
-				if ok and status ~= nil then
-					if getFFlagUGCValidateCurveAnimSingleRootModule() then
-						if #status == 1 and status[1]:IsA("CurveAnimation") then
-							table.insert(t, status[1])
-							continue
-						end
-						return nil
-					else
-						for i_1, v_1 in status do
-							if v_1:IsA("CurveAnimation") then
-								table.insert(t, v_1)
-							end
+				if not Success or Result == nil then
+					return nil
+				end
+				if not GetFFlagUGCValidateCurveAnimSingleRootModule() then
+					for _, CurveAnimation in Result do
+						if CurveAnimation:IsA("CurveAnimation") then
+							table.insert(List, CurveAnimation)
 						end
 					end
+				elseif #Result ~= 1 or not Result[1]:IsA("CurveAnimation") then
+					return nil
+				else
+					table.insert(List, Result[1])
 				end
-				return nil
 			end
 		end
-		return t
+		return List
 	end
 }

@@ -1,66 +1,69 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Enums.MediaType)
-local _ = require(foundation.Enums.ThumbnailType)
-local _ = require(foundation.Enums.ThumbnailSize)
-local mediaShapeModule = require(foundation.Enums.MediaShape)
-local getRbxThumbModule = require(foundation.Utility.getRbxThumb)
-local useTileModule = require(foundation.Components.Tile_DEPRECATED.useTile)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local imageModule = require(foundation.Components.Image)
-local viewModule = require(foundation.Components.View)
-local _ = require(foundation.Components.Types)
-local t = {
-	[mediaShapeModule.Circle] = 1,
-	[mediaShapeModule.Square] = 1,
-	[mediaShapeModule.Landscape] = 1.777777777778,
-	[mediaShapeModule.Portrait] = 0.5625
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Enums.MediaType)
+local _ = require(Foundation.Enums.ThumbnailType)
+local _ = require(Foundation.Enums.ThumbnailSize)
+local MediaShapeModule = require(Foundation.Enums.MediaShape)
+local GetRbxThumbModule = require(Foundation.Utility.getRbxThumb)
+local UseTileModule = require(Foundation.Components.Tile_DEPRECATED.useTile)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local ImageModule = require(Foundation.Components.Image)
+local ViewModule = require(Foundation.Components.View)
+local _ = require(Foundation.Components.Types)
+local config = {
+	[MediaShapeModule.Circle] = 1,
+	[MediaShapeModule.Square] = 1,
+	[MediaShapeModule.Landscape] = 1.7777777777777777,
+	[MediaShapeModule.Portrait] = 0.5625
 }
-local t_1 = { LayoutOrder = 1, shape = mediaShapeModule.Square }
+local config1 = { LayoutOrder = 1, shape = MediaShapeModule.Square }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), useTileModule (ref), reactModule (ref), getRbxThumbModule (ref), imageModule (ref), viewModule (ref), t (ref), mediaShapeModule (ref)
-	local var1 = withDefaultsModule(p1, t_1)
-	local var2 = useTileModule()
-	local var3 = if var1.background then var1.background.style else nil
-	local var4 = if var1.background then var1.background.image else nil
+return function(p1) --[[ Line: 54 | Named "TileMedia" ]]
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTileModule (copy), ReactModule (copy), GetRbxThumbModule (copy), ImageModule (copy), ViewModule (copy), config (copy), MediaShapeModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
+	local UseTileModuleResult = UseTileModule()
+	local Style = if WithDefaultsModuleResult.background then WithDefaultsModuleResult.background.style else nil
+	local Image = if WithDefaultsModuleResult.background then WithDefaultsModuleResult.background.image else nil
 	
-	return reactModule.createElement(if var4 then imageModule else viewModule, {
+	return ReactModule.createElement(if Image then ImageModule else ViewModule, {
 		ZIndex = 0,
-		Image = var4,
-		imageStyle = if var4 then var3 else nil,
-		backgroundStyle = if var4 then nil else var3,
-		Size = if var2.fillDirection == Enum.FillDirection.Vertical then UDim2.fromScale(1, 0) else UDim2.fromScale(0, 1),
-		LayoutOrder = var1.LayoutOrder,
+		Image = Image,
+		imageStyle = if Image then Style else nil,
+		backgroundStyle = if Image then nil else Style,
+		Size = if UseTileModuleResult.fillDirection == Enum.FillDirection.Vertical then UDim2.fromScale(1, 0) else UDim2.fromScale(0, 1),
+		LayoutOrder = WithDefaultsModuleResult.LayoutOrder,
 		aspectRatio = {
-			AspectRatio = t[var1.shape],
+			AspectRatio = config[WithDefaultsModuleResult.shape],
 			AspectType = Enum.AspectType.ScaleWithParentSize,
-			DominantAxis = if var2.fillDirection == Enum.FillDirection.Vertical then Enum.DominantAxis.Width else Enum.DominantAxis.Height
+			DominantAxis = if UseTileModuleResult.fillDirection == Enum.FillDirection.Vertical then Enum.DominantAxis.Width else Enum.DominantAxis.Height
 		},
 		tag = {
-			["radius-top-medium"] = var2.fillDirection == Enum.FillDirection.Vertical and var2.isContained,
-			["radius-left-medium"] = var2.fillDirection == Enum.FillDirection.Horizontal and var2.isContained,
-			["radius-medium"] = var1.shape ~= mediaShapeModule.Circle and not var2.isContained,
-			["radius-circle"] = var1.shape == mediaShapeModule.Circle and not var2.isContained
+			["radius-top-medium"] = UseTileModuleResult.fillDirection == Enum.FillDirection.Vertical and UseTileModuleResult.isContained,
+			["radius-left-medium"] = UseTileModuleResult.fillDirection == Enum.FillDirection.Horizontal and UseTileModuleResult.isContained,
+			["radius-medium"] = WithDefaultsModuleResult.shape ~= MediaShapeModule.Circle and not UseTileModuleResult.isContained,
+			["radius-circle"] = WithDefaultsModuleResult.shape == MediaShapeModule.Circle and not UseTileModuleResult.isContained
 		},
-		onStateChanged = var1.onStateChanged,
-		testId = `{var2.testId}--media`
+		onStateChanged = WithDefaultsModuleResult.onStateChanged,
+		testId = `{UseTileModuleResult.testId}--media`
 	}, {
-		Image = reactModule.createElement(imageModule, {
-			Image = reactModule.useMemo(function()
-				-- upvalues: var1 (ref), getRbxThumbModule (copy)
-				return if var1.id == nil or var1.type == nil then nil else getRbxThumbModule(var1.type, var1.id)
-			end, { var1.type, var1.id }),
-			imageStyle = var1.style,
+		Image = ReactModule.createElement(ImageModule, {
+			Image = ReactModule.useMemo(function() --[[ Line: 62 ]]
+				-- upvalues: WithDefaultsModuleResult (copy), GetRbxThumbModule (upval)
+				return if WithDefaultsModuleResult.id == nil or WithDefaultsModuleResult.type == nil then nil else GetRbxThumbModule(WithDefaultsModuleResult.type, WithDefaultsModuleResult.id)
+			end, {
+				WithDefaultsModuleResult.type,
+				WithDefaultsModuleResult.id
+			}),
+			imageStyle = WithDefaultsModuleResult.style,
 			tag = {
 				["size-full"] = true,
-				["padding-medium"] = var1.children ~= nil,
-				["radius-top-medium"] = var2.fillDirection == Enum.FillDirection.Vertical and var2.isContained,
-				["radius-left-medium"] = var2.fillDirection == Enum.FillDirection.Horizontal and var2.isContained,
-				["radius-medium"] = var1.shape ~= mediaShapeModule.Circle and not var2.isContained,
-				["radius-circle"] = var1.shape == mediaShapeModule.Circle
+				["padding-medium"] = WithDefaultsModuleResult.children ~= nil,
+				["radius-top-medium"] = UseTileModuleResult.fillDirection == Enum.FillDirection.Vertical and UseTileModuleResult.isContained,
+				["radius-left-medium"] = UseTileModuleResult.fillDirection == Enum.FillDirection.Horizontal and UseTileModuleResult.isContained,
+				["radius-medium"] = WithDefaultsModuleResult.shape ~= MediaShapeModule.Circle and not UseTileModuleResult.isContained,
+				["radius-circle"] = WithDefaultsModuleResult.shape == MediaShapeModule.Circle
 			},
-			testId = `{var2.testId}--media-image`
-		}, var1.children)
+			testId = `{UseTileModuleResult.testId}--media-image`
+		}, WithDefaultsModuleResult.children)
 	})
 end

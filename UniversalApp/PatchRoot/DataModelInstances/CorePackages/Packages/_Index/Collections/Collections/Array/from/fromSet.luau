@@ -1,18 +1,16 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3)
-	local _ = {}
-	
-	if not p2 then
-		return table.clone(p1._array)
+return function(List, Callback, p1) --[[ Line: 25 ]]
+	if not Callback then
+		return (table.clone(List._array))
 	end
 	local t = {}
 	
-	for i, v in p1 do
-		if p3 == nil then
-			t[i] = p2(v, i)
+	for i, value in List do
+		if p1 == nil then
+			t[i] = Callback(value, i)
 		else
-			t[i] = p2(p3, v, i)
+			t[i] = Callback(p1, value, i)
 		end
 	end
 	return t

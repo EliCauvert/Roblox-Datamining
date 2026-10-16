@@ -1,24 +1,24 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local scrollViewModule = require(foundation.Components.ScrollView)
-local _ = require(foundation.Components.Types)
-local visibilityModule = require(foundation.Enums.Visibility)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local useScrollBarPaddingModule = require(script.Parent.useScrollBarPadding)
-local useDialogVariants = require(script.Parent.Parent.useDialogVariants).useDialogVariants
-local useDialogModule = require(script.Parent.Parent.useDialog)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ScrollViewModule = require(Foundation.Components.ScrollView)
+local _ = require(Foundation.Components.Types)
+local VisibilityModule = require(Foundation.Enums.Visibility)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local UseScrollBarPaddingModule = require(script.Parent.useScrollBarPadding)
+local UseDialogVariantsFunction = require(script.Parent.Parent.useDialogVariants).useDialogVariants
+local UseDialogModule = require(script.Parent.Parent.useDialog)
 
-return function(p1)
-	-- upvalues: useScrollBarPaddingModule (ref), useDialogVariants (ref), useDialogModule (ref), reactModule (ref), scrollViewModule (ref), withCommonPropsModule (ref), visibilityModule (ref)
-	local var1, var2, var3 = useScrollBarPaddingModule()
-	local var4 = useDialogVariants()
-	p1.testId = `{useDialogModule().testId}--content`
+return function(Gui) --[[ Line: 19 | Named "DialogContent" ]]
+	-- upvalues: UseScrollBarPaddingModule (copy), UseDialogVariantsFunction (copy), UseDialogModule (copy), ReactModule (copy), ScrollViewModule (copy), WithCommonPropsModule (copy), VisibilityModule (copy)
+	local UseScrollBarPaddingModuleResult, UseScrollBarPaddingModuleResult2, UseScrollBarPaddingModuleResult3 = UseScrollBarPaddingModule()
+	local UseDialogVariantsResult = UseDialogVariantsFunction()
+	Gui.testId = `{UseDialogModule().testId}--content`
 	
-	return reactModule.createElement(scrollViewModule, withCommonPropsModule(p1, {
+	return ReactModule.createElement(ScrollViewModule, WithCommonPropsModule(Gui, {
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			CanvasSize = UDim2.new(0, 0, 0, 0),
-			scrollBarVisibility = if var1 then visibilityModule.Auto else visibilityModule.None
+			scrollBarVisibility = if UseScrollBarPaddingModuleResult then VisibilityModule.Auto else VisibilityModule.None
 		},
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
@@ -26,21 +26,21 @@ return function(p1)
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
 		selection = {
-			Selectable = (p1.Selectable == nil or p1.Selectable) and var1,
-			NextSelectionUp = p1.NextSelectionUp,
-			NextSelectionDown = p1.NextSelectionDown,
-			NextSelectionLeft = p1.NextSelectionLeft,
-			NextSelectionRight = p1.NextSelectionRight
+			Selectable = (Gui.Selectable == nil or Gui.Selectable) and UseScrollBarPaddingModuleResult,
+			NextSelectionUp = Gui.NextSelectionUp,
+			NextSelectionDown = Gui.NextSelectionDown,
+			NextSelectionLeft = Gui.NextSelectionLeft,
+			NextSelectionRight = Gui.NextSelectionRight
 		},
-		onAbsoluteCanvasSizeChanged = var3,
-		onAbsoluteWindowSizeChanged = var3,
-		tag = var4.content.tag
+		onAbsoluteCanvasSizeChanged = UseScrollBarPaddingModuleResult3,
+		onAbsoluteWindowSizeChanged = UseScrollBarPaddingModuleResult3,
+		tag = UseDialogVariantsResult.content.tag
 	}), {
-		ScrollPadding = reactModule.createElement("UIPadding", {
-			PaddingRight = var2:map(function(p2)
-				return UDim.new(0, p2)
+		ScrollPadding = ReactModule.createElement("UIPadding", {
+			PaddingRight = UseScrollBarPaddingModuleResult2:map(function(Offset): UDim --[[ Line: 55 ]]
+				return UDim.new(0, Offset)
 			end)
 		}),
-		ScrollContent = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+		ScrollContent = ReactModule.createElement(ReactModule.Fragment, nil, Gui.children)
 	})
 end

@@ -1,4 +1,4 @@
-﻿local foundationImagesModule = require(script.Parent.Parent.Parent.Parent.FoundationImages)
-foundationImagesModule.Images.ImagesResolutionScale = foundationImagesModule.getResolutionScale()
+﻿local FoundationImagesModule = require(script.Parent.Parent.Parent.Parent.FoundationImages)
+FoundationImagesModule.Images.ImagesResolutionScale = FoundationImagesModule.getResolutionScale()
 
-return foundationImagesModule.Images
+return FoundationImagesModule.Images

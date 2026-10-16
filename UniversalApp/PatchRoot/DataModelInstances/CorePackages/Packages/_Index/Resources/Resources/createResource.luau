@@ -1,83 +1,84 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p1)
-	local var1 = false
+local function _(p1) --[[ Line: 5 | Named "once" ]]
+	local v1 = false
 	
-	return function()
-		-- upvalues: var1 (write), p1 (ref)
-		if not var1 then
-			var1 = true
+	return function() --[[ Line: 7 | Named "notAgain" ]]
+		-- upvalues: v1 (ref), p1 (copy)
+		if not v1 then
+			v1 = true
 			p1()
 		end
 	end
 end
 
-local function disposeChildren(p1)
-	local t = {}
+local function disposeChildren(p1) --[[ Line: 16 ]]
+	local List = {}
 	
 	for i = #p1, 1, -1 do
-		local ok, status = pcall(p1[i])
+		local Success, Result = pcall(p1[i])
 		
-		if not ok then
-			table.insert(t, status)
+		if not Success then
+			table.insert(List, Result)
 		end
 	end
-	if #t > 0 then
-		error(table.concat(t, "\n"))
+	if #List > 0 then
+		error(table.concat(List, "\n"))
 	end
 end
 
-return function(p2)
-	-- upvalues: disposeChildren (ref)
-	local var1 = false
-	local t = {}
+return function(p2) --[[ Line: 32 | Named "createResource" ]]
+	-- upvalues: disposeChildren (copy)
+	local Flag = false
+	local List = {}
 	
-	local function dispose()
-		-- upvalues: var1 (write), t (write), disposeChildren (copy)
-		if not var1 then
-			var1 = true
-			local var2 = t
-			t = {}
-			disposeChildren(var2)
+	local function dispose() --[[ Line: 37 ]]
+		-- upvalues: Flag (ref), List (ref), disposeChildren (upval)
+		if not Flag then
+			Flag = true
+			local List1 = List
+			List = {}
+			disposeChildren(List1)
 		end
 	end
 	
-	local function _(p3)
-		-- upvalues: var1 (write), t (write)
-		if var1 then
+	local function _(p3) --[[ Line: 46 | Named "capture" ]]
+		-- upvalues: Flag (ref), List (ref)
+		if Flag then
 			error("attempted to track a child after the resource has been disposed")
 			
 			return
+		else
+			table.insert(List, p3)
 		end
-		table.insert(t, p3)
 	end
 	
-	local var2 = false
+	local v1 = false
 	
-	return function()
-		-- upvalues: var2 (write), dispose (ref)
-		if not var2 then
-			var2 = true
+	return function() --[[ Line: 7 | Named "notAgain" ]]
+		-- upvalues: v1 (ref), dispose (copy)
+		if not v1 then
+			v1 = true
 			dispose()
 		end
-	end, (function(p3, ...)
-		-- upvalues: var1 (write), t (write), disposeChildren (copy)
+	end, (function(p3, ...) --[[ Line: 59 | Named "handleError" ]]
+		-- upvalues: Flag (ref), List (ref), disposeChildren (upval)
 		if not p3 then
-			if not var1 then
-				var1 = true
-				local var3 = t
-				t = {}
-				disposeChildren(var3)
+			if not Flag then
+				Flag = true
+				local List1 = List
+				List = {}
+				disposeChildren(List1)
 			end
-			error(select(1, ...))
+			error((select(1, ...)))
 		end
 		return ...
-	end)(pcall(p2, function(p4, ...)
-		-- upvalues: var1 (write), t (write)
-		if var1 then
+	end)(pcall(p2, function(p3, ...) --[[ Line: 54 | Named "own" ]]
+		-- upvalues: Flag (ref), List (ref)
+		if Flag then
 			error("attempted to track a child after the resource has been disposed")
 		else
-			table.insert(t, p4)
+			table.insert(List, p3)
 		end
 		return ...
 	end))

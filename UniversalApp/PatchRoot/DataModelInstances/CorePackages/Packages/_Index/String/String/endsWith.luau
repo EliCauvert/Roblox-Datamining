@@ -1,19 +1,20 @@
-﻿return function(p1, p2, p3)
-	local var1 = p2:len()
+﻿return function(Text: string, Text1, p1): boolean --[[ Line: 16 | Named "endsWith" ]]
+	local Length: number = Text1:len()
 	
-	if var1 == 0 then
+	if Length == 0 then
 		return true
 	end
-	local var2 = p1:len()
-	p3 = p3 or var2
+	local Length1 = Text:len()
+	local P2 = p1 or Length1
 	
-	if var2 < p3 then
-		p3 = var2
+	if Length1 < P2 then
+		P2 = Length1
 	end
-	if p3 < 1 then
+	if P2 < 1 then
 		return false
+	else
+		local NewP = P2 - Length + 1
+		
+		return Text:find(Text1, NewP, true) == NewP
 	end
-	local var3 = p3 - var1 + 1
-	
-	return p1:find(p2, var3, true) == var3
 end

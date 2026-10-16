@@ -1,40 +1,39 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local dashModule = require(foundation.Parent.Dash)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local DashModule = require(Foundation.Parent.Dash)
+local _ = require(Foundation.Components.Types)
 
-local function _(p1)
+local function _(p1) --[[ Line: 11 | Named "tagToTable" ]]
 	return if type(p1) == "string" then { [p1] = true } else p1
 end
 
-local function mergeTags(p1, p2)
-	-- upvalues: dashModule (ref)
-	return if p1 then if p2 then if type(p1) == "table" or type(p2) == "table" then dashModule.join(if type(p1) == "string" then { [p1] = true } else p1, if type(p2) == "string" then { [p2] = true } else p2) else `{p1} {p2}` else p1 else p2
+local function mergeTags(Tag, Tag1) --[[ Line: 20 ]]
+	-- upvalues: DashModule (copy)
+	return if Tag then if Tag1 then if type(Tag) == "table" or type(Tag1) == "table" then DashModule.join(if type(Tag) == "string" then { [Tag] = true } else Tag, if type(Tag1) == "string" then { [Tag1] = true } else Tag1) else `{Tag} {Tag1}` else Tag else Tag1
 end
 
-local _ = function(p1, p2)
-	-- upvalues: dashModule (ref), mergeTags (ref)
-	local var1 = dashModule.join(p1, p2)
-	var1.tag = mergeTags(p1.tag, p2.tag)
+local _ = function(p1, p2) --[[ Line: 40 | Named "mergeProps" ]]
+	-- upvalues: DashModule (copy), mergeTags (copy)
+	local JoinResult = DashModule.join(p1, p2)
+	JoinResult.tag = mergeTags(p1.tag, p2.tag)
 	
-	return var1
+	return JoinResult
 end
 
-function composeStyleVariant(p1, ...)
-	-- upvalues: dashModule (ref), mergeTags (ref)
-	local var1 = dashModule.copy(p1)
-	dashModule.forEachArgs(function(p2)
-		-- upvalues: var1 (ref), dashModule (copy), mergeTags (copy)
-		if p2 == nil then return end
-		for i, v in p2 do
-			local var2 = var1
-			local var3 = var1[i] or {}
-			local var4 = dashModule.join(var3, v)
-			var4.tag = mergeTags(var3.tag, v.tag)
-			var2[i] = var4
+function composeStyleVariant(p1, ...) --[[ Line: 48 ]]
+	-- upvalues: DashModule (copy), mergeTags (copy)
+	local CopyResult = DashModule.copy(p1)
+	DashModule.forEachArgs(function(List) --[[ Line: 50 ]]
+		-- upvalues: CopyResult (copy), DashModule (upval), mergeTags (upval)
+		if List == nil then return end
+		for i, value in List do
+			local CopyResultEntry = CopyResult[i] or {}
+			local JoinResult = DashModule.join(CopyResultEntry, value)
+			JoinResult.tag = mergeTags(CopyResultEntry.tag, value.tag)
+			CopyResult[i] = JoinResult
 		end
 	end, ...)
 	
-	return var1
+	return CopyResult
 end
 
 return composeStyleVariant

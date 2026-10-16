@@ -1,1 +1,1 @@
-﻿return require(script.KeyLabel)
+﻿return (require(script.KeyLabel))

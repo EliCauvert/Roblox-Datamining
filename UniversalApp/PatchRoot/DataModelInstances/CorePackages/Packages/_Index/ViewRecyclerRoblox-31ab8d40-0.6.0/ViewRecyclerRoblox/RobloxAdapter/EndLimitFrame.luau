@@ -1,39 +1,39 @@
-﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
-local transparentFrameModule = require(viewRecyclerRoblox.RobloxAdapter.transparentFrame)
-local axis = require(viewRecyclerRoblox.Parent.ViewRecycler).Axis
+﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+local TransparentFrameModule = require(ViewRecyclerRoblox.RobloxAdapter.transparentFrame)
+local Axis = require(ViewRecyclerRoblox.Parent.ViewRecycler).Axis
 
 return {
-	new = function()
-		-- upvalues: transparentFrameModule (ref), axis (ref)
-		local var1 = transparentFrameModule("ViewRecyclerEndLimit")
-		local var2 = transparentFrameModule("Spacer")
-		var2.Parent = var1
+	new = function() --[[ Line: 20 ]]
+		-- upvalues: TransparentFrameModule (copy), Axis (copy)
+		local ViewRecyclerEndLimit = TransparentFrameModule("ViewRecyclerEndLimit")
+		local Spacer = TransparentFrameModule("Spacer")
+		Spacer.Parent = ViewRecyclerEndLimit
 		
 		return {
-			instance = var1,
-			place = function(p1, p2, p3, p4, p5)
-				-- upvalues: axis (copy), var1 (ref), var2 (ref)
-				local maxValue = math.max(0, p4 - p3)
+			instance = ViewRecyclerEndLimit,
+			place = function(Parent, X, p1, XOffset, ZIndex) --[[ Line: 27 ]]
+				-- upvalues: Axis (upval), ViewRecyclerEndLimit (copy), Spacer (copy)
+				local Largest = math.max(0, XOffset - p1)
 				
-				if p2 == axis.X then
-					var1.AnchorPoint = Vector2.xAxis
-					var1.Position = UDim2.fromOffset(p4, 0)
-					var1.Size = UDim2.fromScale(0, 1)
-					var1.AutomaticSize = Enum.AutomaticSize.X
-					var2.Size = UDim2.fromOffset(maxValue, 0)
+				if X == Axis.X then
+					ViewRecyclerEndLimit.AnchorPoint = Vector2.xAxis
+					ViewRecyclerEndLimit.Position = UDim2.fromOffset(XOffset, 0)
+					ViewRecyclerEndLimit.Size = UDim2.fromScale(0, 1)
+					ViewRecyclerEndLimit.AutomaticSize = Enum.AutomaticSize.X
+					Spacer.Size = UDim2.fromOffset(Largest, 0)
 				else
-					var1.AnchorPoint = Vector2.yAxis
-					var1.Position = UDim2.fromOffset(0, p4)
-					var1.Size = UDim2.fromScale(1, 0)
-					var1.AutomaticSize = Enum.AutomaticSize.Y
-					var2.Size = UDim2.fromOffset(0, maxValue)
+					ViewRecyclerEndLimit.AnchorPoint = Vector2.yAxis
+					ViewRecyclerEndLimit.Position = UDim2.fromOffset(0, XOffset)
+					ViewRecyclerEndLimit.Size = UDim2.fromScale(1, 0)
+					ViewRecyclerEndLimit.AutomaticSize = Enum.AutomaticSize.Y
+					Spacer.Size = UDim2.fromOffset(0, Largest)
 				end
-				var1.ZIndex = p5
-				var1.Parent = p1
+				ViewRecyclerEndLimit.ZIndex = ZIndex
+				ViewRecyclerEndLimit.Parent = Parent
 			end,
-			destroy = function()
-				-- upvalues: var1 (ref)
-				var1:Destroy()
+			destroy = function() --[[ Line: 45 ]]
+				-- upvalues: ViewRecyclerEndLimit (copy)
+				ViewRecyclerEndLimit:Destroy()
 			end
 		}
 	end

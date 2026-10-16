@@ -1,33 +1,33 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.FocusNavigation)
-local focusBehaviorsModule = require(parent.FocusBehaviors)
-local reactModule = require(parent.React)
-local default = focusBehaviorsModule.default
-local mostRecent = focusBehaviorsModule.mostRecent
-local mostRecentOrDefault = focusBehaviorsModule.mostRecentOrDefault
-local useContainerFocusBehaviorModule = require(script.Parent.useContainerFocusBehavior)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.FocusNavigation)
+local FocusBehaviorsModule = require(Parent.FocusBehaviors)
+local ReactModule = require(Parent.React)
+local DefaultFunction = FocusBehaviorsModule.default
+local MostRecent = FocusBehaviorsModule.mostRecent
+local MostRecentOrDefaultFunction = FocusBehaviorsModule.mostRecentOrDefault
+local UseContainerFocusBehaviorModule = require(script.Parent.useContainerFocusBehavior)
 
 return {
-	useDefaultFocusBehavior = function(p1)
-		-- upvalues: reactModule (ref), default (ref), useContainerFocusBehaviorModule (ref)
-		local var1, var2 = reactModule.useState(nil)
+	useDefaultFocusBehavior = function(p1) --[[ Line: 15 ]]
+		-- upvalues: ReactModule (copy), DefaultFunction (copy), UseContainerFocusBehaviorModule (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 		
-		return var2, useContainerFocusBehaviorModule(reactModule.useMemo(function()
-			-- upvalues: default (copy), var1 (ref)
-			return default(var1)
-		end, { var1 }), p1)
+		return UseStateResult2, (UseContainerFocusBehaviorModule(ReactModule.useMemo(function() --[[ Line: 20 ]]
+			-- upvalues: DefaultFunction (upval), UseStateResult (copy)
+			return DefaultFunction(UseStateResult)
+		end, { UseStateResult }), p1))
 	end,
-	useMostRecentFocusBehavior = function(p1)
-		-- upvalues: reactModule (ref), mostRecent (ref), useContainerFocusBehaviorModule (ref)
-		return useContainerFocusBehaviorModule(reactModule.useMemo(mostRecent, {}), p1)
+	useMostRecentFocusBehavior = function(p1) --[[ Line: 29 ]]
+		-- upvalues: ReactModule (copy), MostRecent (copy), UseContainerFocusBehaviorModule (copy)
+		return UseContainerFocusBehaviorModule(ReactModule.useMemo(MostRecent, {}), p1)
 	end,
-	useMostRecentOrDefaultFocusBehavior = function(p1)
-		-- upvalues: reactModule (ref), mostRecentOrDefault (ref), useContainerFocusBehaviorModule (ref)
-		local var1, var2 = reactModule.useState(nil)
+	useMostRecentOrDefaultFocusBehavior = function(p1) --[[ Line: 35 ]]
+		-- upvalues: ReactModule (copy), MostRecentOrDefaultFunction (copy), UseContainerFocusBehaviorModule (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 		
-		return var2, useContainerFocusBehaviorModule(reactModule.useMemo(function()
-			-- upvalues: mostRecentOrDefault (copy), var1 (ref)
-			return mostRecentOrDefault(var1)
-		end, { var1 }), p1)
+		return UseStateResult2, (UseContainerFocusBehaviorModule(ReactModule.useMemo(function() --[[ Line: 40 ]]
+			-- upvalues: MostRecentOrDefaultFunction (upval), UseStateResult (copy)
+			return MostRecentOrDefaultFunction(UseStateResult)
+		end, { UseStateResult }), p1))
 	end
 }

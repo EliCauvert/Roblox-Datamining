@@ -1,19 +1,18 @@
-﻿local parent = script.Parent.Parent.Parent
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local language = parent.language
-local kind = require(language.kinds).Kind
-local isExecutableDefinitionNode = require(language.predicates).isExecutableDefinitionNode
+﻿local Parent = script.Parent.Parent.Parent
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local Language = Parent.language
+local Kind = require(Language.kinds).Kind
+local IsExecutableDefinitionNodeFunction = require(Language.predicates).isExecutableDefinitionNode
 
 return {
-	ExecutableDefinitionsRule = function(p1)
-		-- upvalues: isExecutableDefinitionNode (ref), kind (ref), graphQLError (ref)
+	ExecutableDefinitionsRule = function(p1) --[[ Line: 23 ]]
+		-- upvalues: IsExecutableDefinitionNodeFunction (copy), Kind (copy), GraphQLError (copy)
 		return {
-			Document = function(_, p2)
-				-- upvalues: isExecutableDefinitionNode (copy), kind (copy), p1 (ref), graphQLError (copy)
-				for i, v in ipairs(p2.definitions) do
-					if not isExecutableDefinitionNode(v) then
-						local _ = nil
-						p1:reportError(graphQLError.new(("The %s definition is not executable."):format(if v.kind == kind.SCHEMA_DEFINITION or v.kind == kind.SCHEMA_EXTENSION then "schema" else "\"" .. v.name.value .. "\""), v))
+			Document = function(_, p2): boolean --[[ Line: 25 ]]
+				-- upvalues: IsExecutableDefinitionNodeFunction (upval), Kind (upval), p1 (copy), GraphQLError (upval)
+				for _, definition in ipairs(p2.definitions) do
+					if not IsExecutableDefinitionNodeFunction(definition) then
+						p1:reportError(GraphQLError.new(("The %s definition is not executable."):format(if definition.kind == Kind.SCHEMA_DEFINITION or definition.kind == Kind.SCHEMA_EXTENSION then "schema" else "\"" .. definition.name.value .. "\""), definition))
 					end
 				end
 				return false

@@ -1,1 +1,1 @@
-﻿return require(script["ReactGlobals.global"])
+﻿return (require(script["ReactGlobals.global"]))

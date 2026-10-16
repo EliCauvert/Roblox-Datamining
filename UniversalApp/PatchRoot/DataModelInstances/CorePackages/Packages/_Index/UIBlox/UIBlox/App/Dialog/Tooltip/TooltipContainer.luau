@@ -1,169 +1,167 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local roactModule = require(parent_3.Roact)
-local tModule = require(parent_3.t)
-local otterModule = require(parent_3.Otter)
-local withStyleModule = require(parent_2.Core.Style.withStyle)
-local imagesModule = require(parent_1.ImageSet.Images)
-local label = require(parent_2.Core.ImageSet.ImageSetComponent).Label
-local genericTextLabelModule = require(parent_2.Core.Text.GenericTextLabel.GenericTextLabel)
-local getTextSizeModule = require(parent_2.Core.Text.GetTextSize)
-local getTextHeightModule = require(parent_2.Core.Text.GetTextHeight)
-local divideTransparencyModule = require(parent_2.Utility.divideTransparency)
-local lerpModule = require(parent_2.Utility.lerp)
-local tooltipOrientationModule = require(parent.Enum.TooltipOrientation)
-local getPositionInfoModule = require(parent.getPositionInfo)
-local t = {
-	[tooltipOrientationModule.Bottom] = imagesModule["component_assets/triangleUp_16"],
-	[tooltipOrientationModule.Top] = imagesModule["component_assets/triangleDown_16"],
-	[tooltipOrientationModule.Right] = imagesModule["component_assets/triangleLeft_16"],
-	[tooltipOrientationModule.Left] = imagesModule["component_assets/triangleRight_16"]
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local RoactModule = require(Parent3.Roact)
+local TModule = require(Parent3.t)
+local OtterModule = require(Parent3.Otter)
+local WithStyleModule = require(Parent2.Core.Style.withStyle)
+local ImagesModule = require(Parent1.ImageSet.Images)
+local Label = require(Parent2.Core.ImageSet.ImageSetComponent).Label
+local GenericTextLabelModule = require(Parent2.Core.Text.GenericTextLabel.GenericTextLabel)
+local GetTextSizeModule = require(Parent2.Core.Text.GetTextSize)
+local GetTextHeightModule = require(Parent2.Core.Text.GetTextHeight)
+local DivideTransparencyModule = require(Parent2.Utility.divideTransparency)
+local LerpModule = require(Parent2.Utility.lerp)
+local TooltipOrientationModule = require(Parent.Enum.TooltipOrientation)
+local GetPositionInfoModule = require(Parent.getPositionInfo)
+local config = {
+	[TooltipOrientationModule.Bottom] = ImagesModule["component_assets/triangleUp_16"],
+	[TooltipOrientationModule.Top] = ImagesModule["component_assets/triangleDown_16"],
+	[TooltipOrientationModule.Right] = ImagesModule["component_assets/triangleLeft_16"],
+	[TooltipOrientationModule.Left] = ImagesModule["component_assets/triangleRight_16"]
 }
-local t_1 = { frequency = 50, dampingRatio = 1 }
-local tooltipContainer = roactModule.PureComponent:extend("TooltipContainer")
-tooltipContainer.validateProps = tModule.strictInterface({
-	triggerPosition = tModule.Vector2,
-	triggerSize = tModule.Vector2,
-	bodyText = tModule.string,
-	headerText = tModule.optional(tModule.string),
-	screenSize = tModule.optional(tModule.Vector2),
-	position = tModule.optional(tModule.UDim2),
-	orientation = tModule.optional(tooltipOrientationModule.isEnumValue),
-	isDirectChild = tModule.optional(tModule.boolean)
+local config1 = { frequency = 50, dampingRatio = 1 }
+local TooltipContainer = RoactModule.PureComponent:extend("TooltipContainer")
+TooltipContainer.validateProps = TModule.strictInterface({
+	triggerPosition = TModule.Vector2,
+	triggerSize = TModule.Vector2,
+	bodyText = TModule.string,
+	headerText = TModule.optional(TModule.string),
+	screenSize = TModule.optional(TModule.Vector2),
+	position = TModule.optional(TModule.UDim2),
+	orientation = TModule.optional(TooltipOrientationModule.isEnumValue),
+	isDirectChild = TModule.optional(TModule.boolean)
 })
-tooltipContainer.defaultProps = {
+TooltipContainer.defaultProps = {
 	isDirectChild = false,
 	screenSize = Vector2.new(10000, 10000),
-	orientation = tooltipOrientationModule.Bottom
+	orientation = TooltipOrientationModule.Bottom
 }
 
-function tooltipContainer.init(p1)
-	-- upvalues: roactModule (ref), otterModule (ref), t_1 (ref)
+function TooltipContainer.init(p1) --[[ Line: 61 ]]
+	-- upvalues: RoactModule (copy), OtterModule (copy), config1 (copy)
 	p1.visible = true
-	local _ = nil
-	local var1, var2 = roactModule.createBinding(0)
-	p1.progress = var1
-	p1.progressMotor = otterModule.createSingleMotor(0)
-	p1.progressMotor:onStep(var2)
-	p1.progressMotor:setGoal(otterModule.spring(1, t_1))
+	local Binding2
+	p1.progress, Binding2 = RoactModule.createBinding(0)
+	p1.progressMotor = OtterModule.createSingleMotor(0)
+	p1.progressMotor:onStep(Binding2)
+	p1.progressMotor:setGoal(OtterModule.spring(1, config1))
 end
 
-function tooltipContainer.render(p1)
-	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), getTextHeightModule (ref), getPositionInfoModule (ref), lerpModule (ref), divideTransparencyModule (ref), roactModule (ref), label (ref), t (ref), genericTextLabelModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: getTextSizeModule (copy), p1 (ref), getTextHeightModule (copy), getPositionInfoModule (copy), lerpModule (copy), divideTransparencyModule (copy), roactModule (copy), label (copy), t (copy), genericTextLabelModule (copy)
-		local font = p2.Font
-		local theme = p2.Theme
-		local captionHeader = font.CaptionHeader
-		local captionBody = font.CaptionBody
-		local var1 = font.BaseSize * font.CaptionBody.RelativeSize
-		local x = getTextSizeModule(p1.props.bodyText, var1, captionBody.Font, Vector2.new()).X
+function TooltipContainer.render(p1) --[[ Line: 72 ]]
+	-- upvalues: WithStyleModule (copy), GetTextSizeModule (copy), GetTextHeightModule (copy), GetPositionInfoModule (copy), LerpModule (copy), DivideTransparencyModule (copy), RoactModule (copy), Label (copy), config (copy), GenericTextLabelModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 73 ]]
+		-- upvalues: GetTextSizeModule (upval), p1 (copy), GetTextHeightModule (upval), GetPositionInfoModule (upval), LerpModule (upval), DivideTransparencyModule (upval), RoactModule (upval), Label (upval), config (upval), GenericTextLabelModule (upval)
+		local _Font = p2.Font
+		local Theme = p2.Theme
+		local CaptionHeader = _Font.CaptionHeader
+		local CaptionBody = _Font.CaptionBody
+		local ScaledBaseSize = _Font.BaseSize * _Font.CaptionBody.RelativeSize
+		local X = GetTextSizeModule(p1.props.bodyText, ScaledBaseSize, CaptionBody.Font, Vector2.new()).X
 		
 		if p1.props.headerText then
-			x = math.max(x, getTextSizeModule(p1.props.headerText, font.BaseSize * captionHeader.RelativeSize, captionHeader.Font, Vector2.new()).X)
+			X = math.max(X, GetTextSizeModule(p1.props.headerText, _Font.BaseSize * CaptionHeader.RelativeSize, CaptionHeader.Font, Vector2.new()).X)
 		end
-		local minValue = math.min(x, 216)
-		local var2 = minValue + 24
-		local var3 = getTextHeightModule(p1.props.bodyText, captionBody.Font, var1, minValue)
-		local headerText = p1.props.headerText and getTextHeightModule(p1.props.headerText, captionHeader.Font, var1, minValue) or 0
-		local var4 = if p1.props.headerText then headerText + var3 + 24 + 4 else var3 + 24
-		local var5 = getPositionInfoModule(var2, var4, p1.props.orientation, p1.props.triggerPosition, p1.props.triggerSize, p1.props.screenSize, p1.props.position)
-		local var6 = p1.progress:map(function(p3)
-			-- upvalues: p1 (copy), var5 (ref)
-			local var7 = if p1.props.position then p1.props.position elseif p1.props.isDirectChild then var5.position else var5.absolutePosition
-			
-			return var7:lerp(var7 + var5.animatedDistance, p3)
+		local Smallest = math.min(X, 216)
+		local XOffset = Smallest + 24
+		local TextHeightModule: number = GetTextHeightModule(p1.props.bodyText, CaptionBody.Font, ScaledBaseSize, Smallest)
+		local TextHeightModule1 = p1.props.headerText and GetTextHeightModule(p1.props.headerText, CaptionHeader.Font, ScaledBaseSize, Smallest) or 0
+		local YOffset: number = p1.props.headerText and TextHeightModule1 + TextHeightModule + 24 + 4 or TextHeightModule + 24
+		local PositionInfoModule = GetPositionInfoModule(XOffset, YOffset, p1.props.orientation, p1.props.triggerPosition, p1.props.triggerSize, p1.props.screenSize, p1.props.position)
+		local MapResult = p1.progress:map(function(p3) --[[ Line: 124 ]]
+			-- upvalues: Theme (copy), LerpModule (upval), DivideTransparencyModule (upval)
+			return LerpModule(1, DivideTransparencyModule(Theme.BackgroundMuted.Transparency, 1), p3)
 		end)
-		local var7 = p1.progress:map(function(p3)
-			-- upvalues: theme (ref), lerpModule (copy), divideTransparencyModule (copy)
-			return lerpModule(1, divideTransparencyModule(theme.BackgroundMuted.Transparency, 1), p3)
-		end)
-		local var8 = p1.progress:map(function(p3)
-			-- upvalues: theme (ref), lerpModule (copy), divideTransparencyModule (copy)
-			return lerpModule(1, divideTransparencyModule(theme.TextEmphasis.Transparency, 2), p3)
+		local MapResult1 = p1.progress:map(function(p3) --[[ Line: 130 ]]
+			-- upvalues: Theme (copy), LerpModule (upval), DivideTransparencyModule (upval)
+			return LerpModule(1, DivideTransparencyModule(Theme.TextEmphasis.Transparency, 2), p3)
 		end)
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Visible = p1.visible,
-			Position = var6,
-			Size = var5.fillDirection == Enum.FillDirection.Vertical and UDim2.fromOffset(var2, var4 + 8) or UDim2.fromOffset(var2 + 8, var4)
+			Position = p1.progress:map(function(p3) --[[ Line: 113 ]]
+				-- upvalues: p1 (upval), PositionInfoModule (copy)
+				local Position = if p1.props.position then p1.props.position else p1.props.isDirectChild and PositionInfoModule.position or PositionInfoModule.absolutePosition
+				
+				return Position:lerp(Position + PositionInfoModule.animatedDistance, p3)
+			end),
+			Size = PositionInfoModule.fillDirection == Enum.FillDirection.Vertical and UDim2.fromOffset(XOffset, YOffset + 8) or UDim2.fromOffset(XOffset + 8, YOffset)
 		}, {
-			UIListLayout = roactModule.createElement("UIListLayout", {
+			UIListLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				FillDirection = var5.fillDirection
+				FillDirection = PositionInfoModule.fillDirection
 			}),
-			CaretFrame = roactModule.createElement("Frame", {
+			CaretFrame = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = var5.caretFrameSize,
-				LayoutOrder = var5.caretLayoutOrder
+				Size = PositionInfoModule.caretFrameSize,
+				LayoutOrder = PositionInfoModule.caretLayoutOrder
 			}, {
-				Caret = roactModule.createElement(label, {
+				Caret = RoactModule.createElement(Label, {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					Position = var5.caretPosition,
-					AnchorPoint = var5.caretAnchorPoint,
-					Size = var5.caretImageSize,
-					Image = t[var5.updatedOrientation],
-					ImageColor3 = theme.BackgroundMuted.Color,
-					ImageTransparency = var7,
-					[roactModule.Ref] = p1.caretRef
+					Position = PositionInfoModule.caretPosition,
+					AnchorPoint = PositionInfoModule.caretAnchorPoint,
+					Size = PositionInfoModule.caretImageSize,
+					Image = config[PositionInfoModule.updatedOrientation],
+					ImageColor3 = Theme.BackgroundMuted.Color,
+					ImageTransparency = MapResult,
+					[RoactModule.Ref] = p1.caretRef
 				})
 			}),
-			Content = roactModule.createElement("TextButton", {
+			Content = RoactModule.createElement("TextButton", {
 				AutoButtonColor = false,
 				Text = "",
 				Selectable = false,
 				BorderSizePixel = 0,
-				Size = UDim2.fromOffset(var2, var4),
-				BackgroundColor3 = theme.BackgroundMuted.Color,
-				BackgroundTransparency = var7,
-				LayoutOrder = var5.contentLayoutOrder
+				Size = UDim2.fromOffset(XOffset, YOffset),
+				BackgroundColor3 = Theme.BackgroundMuted.Color,
+				BackgroundTransparency = MapResult,
+				LayoutOrder = PositionInfoModule.contentLayoutOrder
 			}, {
-				VerticalLayout = roactModule.createElement("UIListLayout", {
+				VerticalLayout = RoactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Vertical,
 					Padding = UDim.new(0, 4),
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}),
-				Padding = roactModule.createElement("UIPadding", {
+				Padding = RoactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 12),
 					PaddingBottom = UDim.new(0, 12),
 					PaddingLeft = UDim.new(0, 12),
 					PaddingRight = UDim.new(0, 12)
 				}),
-				Header = p1.props.headerText and roactModule.createElement(genericTextLabelModule, {
+				Header = p1.props.headerText and RoactModule.createElement(GenericTextLabelModule, {
 					LayoutOrder = 1,
-					colorStyle = theme.TextEmphasis,
-					fontStyle = captionHeader,
+					colorStyle = Theme.TextEmphasis,
+					fontStyle = CaptionHeader,
 					Text = p1.props.headerText,
-					TextTransparency = var8,
+					TextTransparency = MapResult1,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(1, 0, 0, headerText)
+					Size = UDim2.new(1, 0, 0, TextHeightModule1)
 				}),
-				Body = roactModule.createElement(genericTextLabelModule, {
+				Body = RoactModule.createElement(GenericTextLabelModule, {
 					LayoutOrder = 2,
-					colorStyle = theme.TextDefault,
-					fontStyle = captionBody,
+					colorStyle = Theme.TextDefault,
+					fontStyle = CaptionBody,
 					Text = p1.props.bodyText,
-					TextTransparency = var8,
+					TextTransparency = MapResult1,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Size = UDim2.new(1, 0, 0, var3)
+					Size = UDim2.new(1, 0, 0, TextHeightModule)
 				})
 			})
 		})
 	end)
 end
 
-function tooltipContainer.didMount(p1)
+function TooltipContainer.didMount(p1) --[[ Line: 212 ]]
 	p1.progressMotor:start()
 end
 
-function tooltipContainer.didUpdate(p1, p2, _)
+function TooltipContainer.didUpdate(p1, p2, _) --[[ Line: 216 ]]
 	if p2.triggerPosition ~= p1.props.triggerPosition then
 		if p1.props.triggerPosition.Y < 0 or p1.props.screenSize.Y < p1.props.triggerPosition.Y + p1.props.triggerSize.Y then
 			p1.visible = false
@@ -174,9 +172,9 @@ function tooltipContainer.didUpdate(p1, p2, _)
 	end
 end
 
-function tooltipContainer.willUnmount(p1)
+function TooltipContainer.willUnmount(p1) --[[ Line: 229 ]]
 	p1.progressMotor:destroy()
 	p1.progressMotor = nil
 end
 
-return tooltipContainer
+return TooltipContainer

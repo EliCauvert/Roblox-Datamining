@@ -1,20 +1,19 @@
-﻿local noneModule = require(script.Parent.Parent.None)
+﻿local NoneModule = require(script.Parent.Parent.None)
 
-return function(...)
-	-- upvalues: noneModule (ref)
+return function(...) --[[ Line: 4 | Named "join" ]]
+	-- upvalues: NoneModule (copy)
 	local t = {}
-	local var1 = 1
+	local Count = 1
 	
-	for i_1 = 1, select("#", ...) do
-		local var2 = select(i_1, ...)
+	for i = 1, select("#", ...) do
+		local Selected = select(i, ...)
 		
-		if not var2 then
-			continue
-		end
-		for i = 1, #var2 do
-			if var2[i] ~= noneModule then
-				t[var1] = var2[i]
-				var1 += 1
+		if Selected then
+			for i1 = 1, #Selected do
+				if Selected[i1] ~= NoneModule then
+					t[Count] = Selected[i1]
+					Count += 1
+				end
 			end
 		end
 	end

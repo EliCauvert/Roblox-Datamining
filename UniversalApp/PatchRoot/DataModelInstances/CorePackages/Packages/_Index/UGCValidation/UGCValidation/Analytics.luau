@@ -1,29 +1,27 @@
-﻿local parent = script.Parent
-local _ = require(parent.util.Types)
-local runService = game:GetService("RunService")
+﻿local Parent = script.Parent
+local _ = require(Parent.util.Types)
+local RunService = game:GetService("RunService")
 local UGCValidationService = game:GetService("UGCValidationService")
-local var1 = if runService:IsStudio() then game:GetService("StudioService") else nil
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local getEngineFeatureEngineUGCValidationReportScriptTimeModule = require(parent.flags.getEngineFeatureEngineUGCValidationReportScriptTime)
-local getEngineFeatureEngineUGCValidationIECTelemetryModule = require(parent.flags.getEngineFeatureEngineUGCValidationIECTelemetry)
-local getEngineFeatureEngineUGCValidateRigidNonSkinnedModule = require(parent.flags.getEngineFeatureEngineUGCValidateRigidNonSkinned)
-local getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = require(parent.flags.getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBounds)
-local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local getFFlagUGCValidationEyebrowEyelashSupportModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
-local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
+local StudioService = if RunService:IsStudio() then game:GetService("StudioService") else nil
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local GetEngineFeatureEngineUGCValidationReportScriptTimeModule = require(Parent.flags.getEngineFeatureEngineUGCValidationReportScriptTime)
+local GetEngineFeatureEngineUGCValidationIECTelemetryModule = require(Parent.flags.getEngineFeatureEngineUGCValidationIECTelemetry)
+local GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = require(Parent.flags.getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBounds)
+local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
+local GetFFlagUGCValidationEyebrowEyelashSupportModule = require(Parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 
-local function joinTables(...)
+local function joinTables(...) --[[ Line: 25 ]]
 	local t = {}
 	
-	for i_1 = 1, select("#", ...) do
-		for i, v in select(i_1, ...) do
-			t[i] = v
+	for i = 1, select("#", ...) do
+		for i1, value in select(i, ...) do
+			t[i1] = value
 		end
 	end
 	return t
 end
 
-local t = {
+local AnalyticsModule = {
 	ErrorType = {
 		resetPhysicsData_FailedToLoadMesh = "resetPhysicsData_FailedToLoadMesh",
 		validateAccurateBoundingBox = "validateAccurateBoundingBox",
@@ -117,121 +115,110 @@ local t = {
 	}
 }
 
-if getFFlagUGCValidateTexturePackModule() then
-	t.ErrorType.validateTexturePack_InvalidTexturePackURL = "validateTexturePack_InvalidTexturePackURL"
-	t.ErrorType.validateTexturePack_FailedToDownloadTexturePack = "validateTexturePack_FailedToDownloadTexturePack"
-	t.ErrorType.validateTexturePack_TexturePackMismatch = "validateTexturePack_TexturePackMismatch"
+if require(Parent.flags.getFFlagUGCValidateTexturePack)() then
+	AnalyticsModule.ErrorType.validateTexturePack_InvalidTexturePackURL = "validateTexturePack_InvalidTexturePackURL"
+	AnalyticsModule.ErrorType.validateTexturePack_FailedToDownloadTexturePack = "validateTexturePack_FailedToDownloadTexturePack"
+	AnalyticsModule.ErrorType.validateTexturePack_TexturePackMismatch = "validateTexturePack_TexturePackMismatch"
 end
-if getEngineFeatureEngineUGCValidateRigidNonSkinnedModule() then
-	t.ErrorType.validateRigidMeshSkinning_FailedToDownload = "validateRigidMeshSkinning_FailedToDownload"
-	t.ErrorType.validateRigidMeshSkinning_BonesFoundInMesh = "validateRigidMeshSkinning_BonesFoundInMesh"
-end
-t.ErrorType.validateMeshSizeProperty_FailedToLoadMesh = "validateMeshSizeProperty_FailedToLoadMesh"
-t.ErrorType.validateMeshSizeProperty_Mismatch = "validateMeshSizeProperty_Mismatch"
-t.ErrorType.validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning = "validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning"
-t.ErrorType.validateBodyPartVertsSkinnedToR15_BodyIsSkinnedToFakeJoints = "validateBodyPartVertsSkinnedToR15_BodyIsSkinnedToFakeJoints"
-t.ErrorType.validateSkinningTransfer_FailedToExecute = "validateSkinningTransfer_FailedToExecute"
-t.ErrorType.validateSkinningTransfer_BodyPartsWithSpecialJoints = "validateSkinningTransfer_BodyPartsWithSpecialJoints"
-t.ErrorType.validateSkinningTransfer_SkinningTransferOverride = "validateSkinningTransfer_SkinningTransferOverride"
-t.ErrorType.validateSkinningTransfer_Weights = "validateSkinningTransfer_Weights"
+AnalyticsModule.ErrorType.validateMeshSizeProperty_FailedToLoadMesh = "validateMeshSizeProperty_FailedToLoadMesh"
+AnalyticsModule.ErrorType.validateMeshSizeProperty_Mismatch = "validateMeshSizeProperty_Mismatch"
+AnalyticsModule.ErrorType.validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning = "validateBodyPartVertsSkinnedToR15_FailedToFetchSkinning"
+AnalyticsModule.ErrorType.validateBodyPartVertsSkinnedToR15_BodyIsSkinnedToFakeJoints = "validateBodyPartVertsSkinnedToR15_BodyIsSkinnedToFakeJoints"
+AnalyticsModule.ErrorType.validateSkinningTransfer_FailedToExecute = "validateSkinningTransfer_FailedToExecute"
+AnalyticsModule.ErrorType.validateSkinningTransfer_BodyPartsWithSpecialJoints = "validateSkinningTransfer_BodyPartsWithSpecialJoints"
+AnalyticsModule.ErrorType.validateSkinningTransfer_SkinningTransferOverride = "validateSkinningTransfer_SkinningTransferOverride"
+AnalyticsModule.ErrorType.validateSkinningTransfer_Weights = "validateSkinningTransfer_Weights"
 
-if getFFlagUGCValidationEyebrowEyelashSupportModule() then
-	t.ErrorType.validateSkinningTransfer_RequiredAssetTypes = "validateSkinningTransfer_RequiredAssetTypes"
+if GetFFlagUGCValidationEyebrowEyelashSupportModule() then
+	AnalyticsModule.ErrorType.validateSkinningTransfer_RequiredAssetTypes = "validateSkinningTransfer_RequiredAssetTypes"
 end
-if getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-	t.ErrorType.validatePropertiesSensible_IncorrectPropertiesFound = "validatePropertiesSensible_IncorrectPropertiesFound"
+if GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
+	AnalyticsModule.ErrorType.validatePropertiesSensible_IncorrectPropertiesFound = "validatePropertiesSensible_IncorrectPropertiesFound"
 end
-t.ErrorType.validateHSR_FileDataInvalid = "validateHSR_FileDataInvalid"
-t.ErrorType.validataHSR_HSRMeshIdsMismatch = "validataHSR_HSRMeshIdsMismatch"
+AnalyticsModule.ErrorType.validateHSR_FileDataInvalid = "validateHSR_FileDataInvalid"
+AnalyticsModule.ErrorType.validataHSR_HSRMeshIdsMismatch = "validataHSR_HSRMeshIdsMismatch"
 
-if getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then
-	t.ErrorType.validateFACSJointTransformsWithinBounds_Error = "validateFACSJointTransformsWithinBounds_Error"
-	t.ErrorType.validateFACSJointTransformsWithinBounds_OOB = "validateFACSJointTransformsWithinBounds_OOB"
+if GetEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then
+	AnalyticsModule.ErrorType.validateFACSJointTransformsWithinBounds_Error = "validateFACSJointTransformsWithinBounds_Error"
+	AnalyticsModule.ErrorType.validateFACSJointTransformsWithinBounds_OOB = "validateFACSJointTransformsWithinBounds_OOB"
 end
-setmetatable(t.ErrorType, {
-	__index = function(_, p1)
+setmetatable(AnalyticsModule.ErrorType, {
+	__index = function(_, p1): string --[[ Line: 170 ]]
 		return `UNREGISTERED_{p1}`
 	end
 })
-t.metadata = {}
+AnalyticsModule.metadata = {}
 
-function t.setMetadata(value)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function AnalyticsModule.setMetadata(List) --[[ Line: 177 ]]
+	-- upvalues: AnalyticsModule (copy)
+	local Metadata = {}
 	
-	for i, v in value do
-		t_1[i] = tostring(v)
+	for i, value in List do
+		Metadata[i] = tostring(value)
 	end
-	t.metadata = t_1
+	AnalyticsModule.metadata = Metadata
 end
 
-function t.shouldReportIECTelemetry(p1)
-	-- upvalues: getEngineFeatureEngineUGCValidationIECTelemetryModule (ref), runService (ref)
-	return if getEngineFeatureEngineUGCValidationIECTelemetryModule() then if p1 then runService:IsStudio() or not p1.allowEditableInstances or not p1.isServer else false else false
+function AnalyticsModule.shouldReportIECTelemetry(p1) --[[ Line: 185 ]]
+	-- upvalues: GetEngineFeatureEngineUGCValidationIECTelemetryModule (copy), RunService (copy)
+	return if GetEngineFeatureEngineUGCValidationIECTelemetryModule() and p1 then not RunService:IsStudio() and p1.allowEditableInstances and p1.isServer else false
 end
 
-function t.reportCounter(p1, p2, p3)
-	-- upvalues: t (ref), UGCValidationService (ref)
-	if t.shouldReportIECTelemetry(p3) then
-		UGCValidationService:ReportUGCValidationCounter(p1, p2)
+function AnalyticsModule.reportCounter(Success, ValidationType, p1) --[[ Line: 201 ]]
+	-- upvalues: AnalyticsModule (copy), UGCValidationService (copy)
+	if AnalyticsModule.shouldReportIECTelemetry(p1) then
+		UGCValidationService:ReportUGCValidationCounter(Success, ValidationType)
 	end
 end
 
-function t.reportFailure(p1, p2, p3)
-	-- upvalues: runService (ref), joinTables (ref), t (ref), rbxAnalyticsService (ref), var1 (ref), UGCValidationService (ref)
-	rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "rcc", "ugcValidation", "failure", joinTables(t.metadata, p2 or {}, {
-		errorType = p1,
-		studioSid = rbxAnalyticsService:GetSessionId(),
-		clientId = rbxAnalyticsService:GetClientId(),
+function AnalyticsModule.reportFailure(ErrorType, p1, p2) --[[ Line: 207 ]]
+	-- upvalues: RunService (copy), joinTables (copy), AnalyticsModule (copy), RbxAnalyticsService (copy), StudioService (copy), UGCValidationService (copy)
+	RbxAnalyticsService:SendEventDeferred(if RunService:IsStudio() then "studio" else "rcc", "ugcValidation", "failure", (joinTables(AnalyticsModule.metadata, p1 or {}, {
+		errorType = ErrorType,
+		studioSid = RbxAnalyticsService:GetSessionId(),
+		clientId = RbxAnalyticsService:GetClientId(),
 		placeId = game.PlaceId,
-		userId = if var1 then var1:GetUserId() else 0
-	}))
+		userId = if StudioService then StudioService:GetUserId() else 0
+	})))
 	
-	if t.shouldReportIECTelemetry(p3) then
-		UGCValidationService:ReportUGCValidationFailureTelemetry(p1)
+	if AnalyticsModule.shouldReportIECTelemetry(p2) then
+		UGCValidationService:ReportUGCValidationFailureTelemetry(ErrorType)
 	end
 end
 
-function t.reportThumbnailing(p1, p2)
-	-- upvalues: runService (ref), joinTables (ref), t (ref), rbxAnalyticsService (ref), var1 (ref)
-	rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "rcc", "ugcValidation", "thumbnailing", joinTables(t.metadata, p2 or {}, {
-		time = p1,
-		studioSid = rbxAnalyticsService:GetSessionId(),
-		clientId = rbxAnalyticsService:GetClientId(),
+function AnalyticsModule.reportThumbnailing(Time, p1) --[[ Line: 227 ]]
+	-- upvalues: RunService (copy), joinTables (copy), AnalyticsModule (copy), RbxAnalyticsService (copy), StudioService (copy)
+	RbxAnalyticsService:SendEventDeferred(if RunService:IsStudio() then "studio" else "rcc", "ugcValidation", "thumbnailing", (joinTables(AnalyticsModule.metadata, p1 or {}, {
+		time = Time,
+		studioSid = RbxAnalyticsService:GetSessionId(),
+		clientId = RbxAnalyticsService:GetClientId(),
 		placeId = game.PlaceId,
-		userId = if var1 then var1:GetUserId() else 0
-	}))
+		userId = if StudioService then StudioService:GetUserId() else 0
+	})))
 end
 
-function t.recordScriptTime(p1, p2, p3)
-	-- upvalues: getEngineFeatureEngineUGCValidationReportScriptTimeModule (ref)
-	if not getEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
-	if not p3.scriptTimes then
-		p3.scriptTimes = {}
+function AnalyticsModule.recordScriptTime(Key, p1, p2) --[[ Line: 239 ]]
+	-- upvalues: GetEngineFeatureEngineUGCValidationReportScriptTimeModule (copy)
+	if not GetEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
+	if not p2.scriptTimes then
+		p2.scriptTimes = {}
 	end
-	local scriptTimes = p3.scriptTimes
+	local ScriptTimes = p2.scriptTimes
 	
-	if not scriptTimes[p1] then
-		scriptTimes[p1] = 0
+	if not ScriptTimes[Key] then
+		ScriptTimes[Key] = 0
 	end
-	scriptTimes[p1] += tick() - p2
+	ScriptTimes[Key] += tick() - p1
 end
 
-function t.reportScriptTimes(p1)
-	-- upvalues: getEngineFeatureEngineUGCValidationReportScriptTimeModule (ref), runService (ref), t (ref), UGCValidationService (ref)
-	if not getEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
-	if p1.isServer and not runService:IsStudio() and p1.scriptTimes then
-		assert(t.metadata, "Metadata is never nil")
-		local entrypoint = t.metadata.entrypoint
-		local var2 = "FullBody"
-		
-		if p1.assetTypeEnum then
-			var2 = p1.assetTypeEnum.Name
-		elseif entrypoint and type(entrypoint) == "string" and #entrypoint > 0 then
-			var2 = entrypoint
-		end
-		UGCValidationService:ReportUGCValidationTelemetry(var2, p1.scriptTimes)
+function AnalyticsModule.reportScriptTimes(p1) --[[ Line: 257 ]]
+	-- upvalues: GetEngineFeatureEngineUGCValidationReportScriptTimeModule (copy), RunService (copy), AnalyticsModule (copy), UGCValidationService (copy)
+	if not GetEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
+	if p1.isServer and not RunService:IsStudio() and p1.scriptTimes then
+		assert(AnalyticsModule.metadata, "Metadata is never nil")
+		local Entrypoint = AnalyticsModule.metadata.entrypoint
+		UGCValidationService:ReportUGCValidationTelemetry(if p1.assetTypeEnum then p1.assetTypeEnum.Name elseif Entrypoint and type(Entrypoint) == "string" and #Entrypoint > 0 then Entrypoint else "FullBody", p1.scriptTimes)
 	end
 end
 
-return t
+return AnalyticsModule

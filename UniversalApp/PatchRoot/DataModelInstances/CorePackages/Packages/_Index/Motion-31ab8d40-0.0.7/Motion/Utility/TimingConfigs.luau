@@ -1,36 +1,36 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Types)
-local transitionPresetModule = require(parent.Enums.TransitionPreset)
-local t = {
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Types)
+local TransitionPresetModule = require(Parent.Enums.TransitionPreset)
+local TimingConfigsModule = {
 	presets = {
-		[transitionPresetModule.Default] = {
+		[TransitionPresetModule.Default] = {
 			duration = 0.3,
 			delay = 0,
 			easingStyle = { 0.2, 0, 0, 1 }
 		},
-		[transitionPresetModule.Quick] = {
+		[TransitionPresetModule.Quick] = {
 			duration = 0.05,
 			delay = 0,
 			easingStyle = { 0.2, 0, 0, 1 }
 		},
-		[transitionPresetModule.Slow] = { duration = 1, delay = 0, easingStyle = { 0.2, 0, 0, 1 } }
+		[TransitionPresetModule.Slow] = { duration = 1, delay = 0, easingStyle = { 0.2, 0, 0, 1 } }
 	}
 }
 
-function t.getDefaultTransition()
-	-- upvalues: t (ref), transitionPresetModule (ref)
-	local default = t.presets[transitionPresetModule.Default]
+function TimingConfigsModule.getDefaultTransition() --[[ Line: 28 ]]
+	-- upvalues: TimingConfigsModule (copy), TransitionPresetModule (copy)
+	local Preset = TimingConfigsModule.presets[TransitionPresetModule.Default]
 	
 	return {
-		duration = default.duration,
-		easingStyle = default.easingStyle,
-		delay = default.delay
+		duration = Preset.duration,
+		easingStyle = Preset.easingStyle,
+		delay = Preset.delay
 	}
 end
 
-function t.createDefaultTransitionState()
-	-- upvalues: t (ref)
-	return { default = t.getDefaultTransition() }
+function TimingConfigsModule.createDefaultTransitionState() --[[ Line: 39 ]]
+	-- upvalues: TimingConfigsModule (copy)
+	return { default = TimingConfigsModule.getDefaultTransition() }
 end
 
-return t
+return TimingConfigsModule

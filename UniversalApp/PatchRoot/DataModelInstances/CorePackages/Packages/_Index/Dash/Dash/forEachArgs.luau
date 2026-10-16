@@ -1,5 +1,5 @@
-﻿return function(p1, ...)
+﻿return function(Callback: (any, any) -> (), ...) --[[ Line: 9 | Named "forEachArgs" ]]
 	for i = 1, select("#", ...) do
-		p1(select(i, ...), i)
+		Callback(select(i, ...), i)
 	end
 end

@@ -1,51 +1,51 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
+return function(p1) --[[ Line: 7 | Named "useClippingRect" ]]
+	-- upvalues: ReactModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
+	ReactModule.useEffect(function() --[[ Line: 10 ]]
+		-- upvalues: p1 (copy), UseBindingResult2 (copy)
 		if not p1.current then return end
-		local var3 = nil
-		local parent = p1.current.Parent
-		while parent do
-			if not parent:IsA("GuiObject") or not parent.ClipsDescendants then
-				parent = parent.Parent
+		local Frame = nil
+		local Parent = p1.current.Parent
+		while Parent do
+			if not Parent:IsA("GuiObject") or not Parent.ClipsDescendants then
+				Parent = Parent.Parent
 				continue
 			end
-			var3 = parent
+			Frame = Parent
 			break
 		end
-		if not var3 then
-			local layerCollector = p1.current:FindFirstAncestorWhichIsA("LayerCollector")
+		if not Frame then
+			local LayerCollector = p1.current:FindFirstAncestorWhichIsA("LayerCollector")
 			
-			if layerCollector and layerCollector:IsA("GuiBase2d") then
-				var3 = layerCollector
+			if LayerCollector and LayerCollector:IsA("GuiBase2d") then
+				Frame = LayerCollector
 			end
 		end
-		local function update()
-			-- upvalues: var3 (write), var2 (copy)
-			if var3 then
-				var2(Rect.new(var3.AbsolutePosition, var3.AbsolutePosition + var3.AbsoluteSize))
+		local function update() --[[ Line: 32 ]]
+			-- upvalues: Frame (ref), UseBindingResult2 (upval)
+			if Frame then
+				UseBindingResult2(Rect.new(Frame.AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize))
 			end
 		end
 		
-		local t = {}
+		local List = {}
 		
-		if var3 then
-			table.insert(t, var3:GetPropertyChangedSignal("AbsolutePosition"):Connect(update))
-			table.insert(t, var3:GetPropertyChangedSignal("AbsoluteSize"):Connect(update))
+		if Frame then
+			table.insert(List, Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(update))
+			table.insert(List, Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(update))
 		end
-		if var3 then
-			var2(Rect.new(var3.AbsolutePosition, var3.AbsolutePosition + var3.AbsoluteSize))
+		if Frame then
+			UseBindingResult2(Rect.new(Frame.AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize))
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 46 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
 	end, {})
 	
-	return var1
+	return UseBindingResult
 end

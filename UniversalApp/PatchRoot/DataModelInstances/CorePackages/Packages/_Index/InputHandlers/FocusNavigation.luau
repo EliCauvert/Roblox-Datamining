@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.FocusNavigation.FocusNavigation)
+﻿return (require(script.Parent.Parent.Parent._Index.FocusNavigation.FocusNavigation))

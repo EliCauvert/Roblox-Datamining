@@ -1,31 +1,31 @@
-﻿local var1 = newproxy(false)
+﻿local Proxy = newproxy(false)
 
-return function(p1)
-	-- upvalues: var1 (ref)
+return function(Callback) --[[ Line: 24 ]]
+	-- upvalues: Proxy (copy)
 	return {
-		setTimeout = function(value, p2, ...)
-			-- upvalues: var1 (copy), p1 (ref)
+		setTimeout = function(Callback1, p1: number, ...) --[[ Line: 25 ]]
+			-- upvalues: Proxy (upval), Callback (copy)
 			local list = { ... }
-			local t = { [var1] = 1 }
+			local config = { [Proxy] = 1 }
 			
-			if p2 == nil then
-				p2 = 0
+			if p1 == nil then
+				p1 = 0
 			end
-			p1(p2 / 1000, function()
-				-- upvalues: t (ref), var1 (copy), value (ref), list (ref)
-				if t[var1] == 1 then
-					value(unpack(list))
-					t[var1] = 2
+			Callback(p1 / 1000, function() --[[ Line: 38 ]]
+				-- upvalues: config (copy), Proxy (upval), Callback1 (copy), list (copy)
+				if config[Proxy] == 1 then
+					Callback1(unpack(list))
+					config[Proxy] = 2
 				end
 			end)
 			
-			return t
+			return config
 		end,
-		clearTimeout = function(p2)
-			-- upvalues: var1 (copy)
-			if p2 == nil then return end
-			if p2[var1] == 1 then
-				p2[var1] = 3
+		clearTimeout = function(p1) --[[ Line: 48 ]]
+			-- upvalues: Proxy (upval)
+			if p1 == nil then return end
+			if p1[Proxy] == 1 then
+				p1[Proxy] = 3
 			end
 		end
 	}

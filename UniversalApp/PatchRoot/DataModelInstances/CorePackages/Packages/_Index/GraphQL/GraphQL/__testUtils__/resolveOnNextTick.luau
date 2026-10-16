@@ -1,8 +1,8 @@
-﻿local promiseModule = require(script.Parent.Parent.Parent.Promise)
+﻿local PromiseModule = require(script.Parent.Parent.Parent.Promise)
 
-return function()
-	-- upvalues: promiseModule (ref)
-	return promiseModule.defer(function(p1)
-		p1(nil)
+return function() --[[ Line: 11 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.defer(function(Callback: (any) -> ()) --[[ Line: 13 ]]
+		Callback(nil)
 	end)
 end

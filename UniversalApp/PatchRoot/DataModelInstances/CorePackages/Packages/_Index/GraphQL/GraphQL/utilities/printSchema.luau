@@ -1,269 +1,273 @@
-﻿local luauPolyfillModule = require(script.Parent.Parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local inspect = require(script.Parent.Parent.jsutils.inspect).inspect
-local invariant = require(script.Parent.Parent.jsutils.invariant).invariant
-local print = require(script.Parent.Parent.language.printer).print
-local printBlockString = require(script.Parent.Parent.language.blockString).printBlockString
-local isIntrospectionType = require(script.Parent.Parent.type.introspection).isIntrospectionType
-local graphQLString = require(script.Parent.Parent.type.scalars).GraphQLString
-local isSpecifiedScalarType = require(script.Parent.Parent.type.scalars).isSpecifiedScalarType
-local directivesModule = require(script.Parent.Parent.type.directives)
-local DEFAULT_DEPRECATION_REASON = directivesModule.DEFAULT_DEPRECATION_REASON
-local isSpecifiedDirective = directivesModule.isSpecifiedDirective
-local definitionModule = require(script.Parent.Parent.type.definition)
-local isScalarType = definitionModule.isScalarType
-local isObjectType = definitionModule.isObjectType
-local isInterfaceType = definitionModule.isInterfaceType
-local isUnionType = definitionModule.isUnionType
-local isEnumType = definitionModule.isEnumType
-local isInputObjectType = definitionModule.isInputObjectType
+﻿local LuauPolyfillModule = require(script.Parent.Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local InspectFunction = require(script.Parent.Parent.jsutils.inspect).inspect
+local InvariantFunction = require(script.Parent.Parent.jsutils.invariant).invariant
+local PrintFunction = require(script.Parent.Parent.language.printer).print
+local PrintBlockStringFunction = require(script.Parent.Parent.language.blockString).printBlockString
+local IsIntrospectionTypeFunction = require(script.Parent.Parent.type.introspection).isIntrospectionType
+local GraphQLString = require(script.Parent.Parent.type.scalars).GraphQLString
+local IsSpecifiedScalarTypeFunction = require(script.Parent.Parent.type.scalars).isSpecifiedScalarType
+local DirectivesModule = require(script.Parent.Parent.type.directives)
+local DEFAULTDEPRECATIONREASON = DirectivesModule.DEFAULT_DEPRECATION_REASON
+local IsSpecifiedDirectiveFunction = DirectivesModule.isSpecifiedDirective
+local DefinitionModule = require(script.Parent.Parent.type.definition)
+local IsScalarTypeFunction = DefinitionModule.isScalarType
+local IsObjectTypeFunction = DefinitionModule.isObjectType
+local IsInterfaceTypeFunction = DefinitionModule.isInterfaceType
+local IsUnionTypeFunction = DefinitionModule.isUnionType
+local IsEnumTypeFunction = DefinitionModule.isEnumType
+local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
 local _ = require(script.Parent.Parent.type.schema)
 local _ = require(script.Parent.Parent.language.ast)
-local astFromValue = require(script.Parent.astFromValue).astFromValue
-local NULL = require(script.Parent.astFromValue).NULL
-local isNillishModule = require(script.Parent.Parent.luaUtils.isNillish)
-local isNillish = isNillishModule.isNillish
-local isNotNillish = isNillishModule.isNotNillish
-local printScalar = nil
-local printDescription = nil
-local printFilteredSchema = nil
-local isDefinedType = nil
-local printSchemaDefinition = nil
-local printDirective = nil
-local printType = nil
-local isSchemaOfCommonNames = nil
-local printObject = nil
-local printArgs = nil
-local printInputValue = nil
-local printDeprecated = nil
-local printBlock = nil
-local printInterface = nil
-local printUnion = nil
-local printEnum = nil
-local printInputObject = nil
-local printSpecifiedByUrl = nil
-local printFields = nil
+local AstFromValueFunction = require(script.Parent.astFromValue).astFromValue
+local IsNillishModule = require(script.Parent.Parent.luaUtils.isNillish)
+local IsNillishFunction = IsNillishModule.isNillish
+local IsNotNillishFunction = IsNillishModule.isNotNillish
+local Callback7 = nil
+local Callback6 = nil
+local Callback = nil
+local IsDefinedType = nil
+local Callback3 = nil
+local Callback4 = nil
+local Callback2 = nil
+local Callback5 = nil
+local Callback8 = nil
+local Callback17 = nil
+local Callback16 = nil
+local Callback15 = nil
+local Callback14 = nil
+local Callback9 = nil
+local Callback10 = nil
+local Callback1 = nil
+local Callback11 = nil
+local Callback12 = nil
+local Callback13 = nil
 
-local function printSchema(p1)
-	-- upvalues: printFilteredSchema (write), isSpecifiedDirective (ref), isDefinedType (write)
-	return printFilteredSchema(p1, function(p2)
-		-- upvalues: isSpecifiedDirective (copy)
-		return not isSpecifiedDirective(p2)
-	end, isDefinedType)
+local function printSchema(p1) --[[ Line: 76 ]]
+	-- upvalues: Callback (ref), IsSpecifiedDirectiveFunction (copy), IsDefinedType (ref)
+	return Callback(p1, function(p2): boolean --[[ Line: 77 ]]
+		-- upvalues: IsSpecifiedDirectiveFunction (upval)
+		return not IsSpecifiedDirectiveFunction(p2)
+	end, IsDefinedType)
 end
 
-local function printIntrospectionSchema(p1)
-	-- upvalues: printFilteredSchema (write), isSpecifiedDirective (ref), isIntrospectionType (ref)
-	return printFilteredSchema(p1, isSpecifiedDirective, isIntrospectionType)
+local function printIntrospectionSchema(p1) --[[ Line: 82 ]]
+	-- upvalues: Callback (ref), IsSpecifiedDirectiveFunction (copy), IsIntrospectionTypeFunction (copy)
+	return Callback(p1, IsSpecifiedDirectiveFunction, IsIntrospectionTypeFunction)
 end
 
-isDefinedType = function(p1)
-	-- upvalues: isSpecifiedScalarType (ref), isIntrospectionType (ref)
-	return not isSpecifiedScalarType(p1) and not isIntrospectionType(p1)
+IsDefinedType = function(p1): boolean --[[ Line: 86 | Named "isDefinedType" ]]
+	-- upvalues: IsSpecifiedScalarTypeFunction (copy), IsIntrospectionTypeFunction (copy)
+	return not IsSpecifiedScalarTypeFunction(p1) and not IsIntrospectionTypeFunction(p1)
 end
 
-printFilteredSchema = function(p1, p2, p3)
-	-- upvalues: array (ref), printSchemaDefinition (write), printDirective (write), printType (write), boolean (ref)
-	return array.join(array.filter(array.concat({ printSchemaDefinition(p1) }, array.map(array.filter(p1:getDirectives(), p2), function(p4)
-		-- upvalues: printDirective (copy)
-		return printDirective(p4)
-	end), array.map(array.filter(p1:getTypeMap():values(), p3), function(p4)
-		-- upvalues: printType (copy)
-		return printType(p4)
-	end)), function(p4)
-		-- upvalues: boolean (copy)
-		return boolean.toJSBoolean(p4)
+Callback = function(p1, IsSpecifiedDirective, IsDefinedType): string --[[ Line: 90 | Named "printFilteredSchema" ]]
+	-- upvalues: Array (copy), Callback3 (ref), Callback4 (ref), Callback2 (ref), Boolean (copy)
+	return Array.join(Array.filter(Array.concat({ Callback3(p1) }, Array.map(Array.filter(p1:getDirectives(), IsSpecifiedDirective), function(p2) --[[ Line: 103 ]]
+		-- upvalues: Callback4 (upval)
+		return Callback4(p2)
+	end), Array.map(Array.filter(p1:getTypeMap():values(), IsDefinedType), function(p2) --[[ Line: 106 ]]
+		-- upvalues: Callback2 (upval)
+		return Callback2(p2)
+	end)), function(p2) --[[ Line: 111 ]]
+		-- upvalues: Boolean (upval)
+		return Boolean.toJSBoolean(p2)
 	end), "\n\n") .. "\n"
 end
 
-printSchemaDefinition = function(p1)
-	-- upvalues: isNillish (ref), isSchemaOfCommonNames (write), isNotNillish (ref), printDescription (write), array (ref)
-	if isNillish(p1.description) and isSchemaOfCommonNames(p1) then return end
-	local t = {}
-	local queryType = p1:getQueryType()
+Callback3 = function(p1): string? --[[ Line: 118 | Named "printSchemaDefinition" ]]
+	-- upvalues: IsNillishFunction (copy), Callback5 (ref), IsNotNillishFunction (copy), Callback6 (ref), Array (copy)
+	if IsNillishFunction(p1.description) and Callback5(p1) then return end
+	local List = {}
+	local QueryType = p1:getQueryType()
 	
-	if isNotNillish(queryType) then
-		table.insert(t, ("  query: %s"):format(queryType.name))
+	if IsNotNillishFunction(QueryType) then
+		table.insert(List, ("  query: %s"):format(QueryType.name))
 	end
-	local mutationType = p1:getMutationType()
+	local MutationType = p1:getMutationType()
 	
-	if isNotNillish(mutationType) then
-		table.insert(t, ("  mutation: %s"):format(mutationType.name))
+	if IsNotNillishFunction(MutationType) then
+		table.insert(List, ("  mutation: %s"):format(MutationType.name))
 	end
-	local subscriptionType = p1:getSubscriptionType()
+	local SubscriptionType = p1:getSubscriptionType()
 	
-	if isNotNillish(subscriptionType) then
-		table.insert(t, ("  subscription: %s"):format(subscriptionType.name))
+	if IsNotNillishFunction(SubscriptionType) then
+		table.insert(List, ("  subscription: %s"):format(SubscriptionType.name))
 	end
-	return printDescription(p1) .. ("schema {\n%s\n}"):format(array.join(t, "\n"))
+	return Callback6(p1) .. ("schema {\n%s\n}"):format(Array.join(List, "\n"))
 end
 
-isSchemaOfCommonNames = function(p1)
-	-- upvalues: isNotNillish (ref)
-	local queryType = p1:getQueryType()
+Callback5 = function(p1): boolean --[[ Line: 164 | Named "isSchemaOfCommonNames" ]]
+	-- upvalues: IsNotNillishFunction (copy)
+	local QueryType = p1:getQueryType()
 	
-	if isNotNillish(queryType) and queryType.name ~= "Query" then
+	if IsNotNillishFunction(QueryType) and QueryType.name ~= "Query" then
 		return false
 	end
-	local mutationType = p1:getMutationType()
+	local MutationType = p1:getMutationType()
 	
-	if isNotNillish(mutationType) and mutationType.name ~= "Mutation" then
+	if IsNotNillishFunction(MutationType) and MutationType.name ~= "Mutation" then
 		return false
+	else
+		local SubscriptionType = p1:getSubscriptionType()
+		
+		return not IsNotNillishFunction(SubscriptionType) or SubscriptionType.name == "Subscription"
 	end
-	local subscriptionType = p1:getSubscriptionType()
-	
-	return isNotNillish(subscriptionType) and subscriptionType.name ~= "Subscription"
 end
 
-printType = function(p1)
-	-- upvalues: isScalarType (ref), printScalar (write), isObjectType (ref), printObject (write), isInterfaceType (ref), printInterface (write), isUnionType (ref), printUnion (write), isEnumType (ref), printEnum (write), isInputObjectType (ref), printInputObject (write), invariant (ref), inspect (ref)
-	if isScalarType(p1) then
-		return printScalar(p1)
-	elseif isObjectType(p1) then
-		return printObject(p1)
-	elseif isInterfaceType(p1) then
-		return printInterface(p1)
-	elseif isUnionType(p1) then
-		return printUnion(p1)
-	elseif isEnumType(p1) then
-		return printEnum(p1)
-	elseif isInputObjectType(p1) then
-		return printInputObject(p1)
+Callback2 = function(p1) --[[ Line: 190 | Named "printType" ]]
+	-- upvalues: IsScalarTypeFunction (copy), Callback7 (ref), IsObjectTypeFunction (copy), Callback8 (ref), IsInterfaceTypeFunction (copy), Callback9 (ref), IsUnionTypeFunction (copy), Callback10 (ref), IsEnumTypeFunction (copy), Callback1 (ref), IsInputObjectTypeFunction (copy), Callback11 (ref), InvariantFunction (copy), InspectFunction (copy)
+	if IsScalarTypeFunction(p1) then
+		return Callback7(p1)
+	elseif IsObjectTypeFunction(p1) then
+		return Callback8(p1)
+	elseif IsInterfaceTypeFunction(p1) then
+		return Callback9(p1)
+	elseif IsUnionTypeFunction(p1) then
+		return Callback10(p1)
+	elseif IsEnumTypeFunction(p1) then
+		return Callback1(p1)
+	elseif IsInputObjectTypeFunction(p1) then
+		return Callback11(p1)
+	else
+		InvariantFunction(false, "Unexpected type: " .. InspectFunction(p1))
+		
+		return ""
 	end
-	invariant(false, "Unexpected type: " .. inspect(p1))
-	
-	return ""
 end
 
-printScalar = function(p1)
-	-- upvalues: printDescription (write), printSpecifiedByUrl (write)
-	return printDescription(p1) .. ("scalar %s"):format(p1.name) .. printSpecifiedByUrl(p1)
+Callback7 = function(p1): string --[[ Line: 218 | Named "printScalar" ]]
+	-- upvalues: Callback6 (ref), Callback12 (ref)
+	return Callback6(p1) .. ("scalar %s"):format(p1.name) .. Callback12(p1)
 end
 
-local function printImplementedInterfaces(p1)
-	-- upvalues: array (ref)
-	local interfaces = p1:getInterfaces()
+local function printImplementedInterfaces(p1): string --[[ Line: 222 ]]
+	-- upvalues: Array (copy)
+	local Interfaces = p1.getInterfaces(p1)
 	
-	return if #interfaces > 0 then " implements " .. array.join(array.map(interfaces, function(p2)
+	return if #Interfaces > 0 then " implements " .. Array.join(Array.map(Interfaces, function(p2) --[[ Line: 230 ]]
 		return p2.name
 	end), " & ") else ""
 end
 
-printObject = function(p1)
-	-- upvalues: printDescription (write), printImplementedInterfaces (ref), printFields (write)
-	return printDescription(p1) .. ("type %s"):format(p1.name) .. printImplementedInterfaces(p1) .. printFields(p1)
+Callback8 = function(p1): string --[[ Line: 238 | Named "printObject" ]]
+	-- upvalues: Callback6 (ref), printImplementedInterfaces (copy), Callback13 (ref)
+	return Callback6(p1) .. ("type %s"):format(p1.name) .. printImplementedInterfaces(p1) .. Callback13(p1)
 end
 
-printInterface = function(p1)
-	-- upvalues: printDescription (write), printImplementedInterfaces (ref), printFields (write)
-	return printDescription(p1) .. ("interface %s"):format(p1.name) .. printImplementedInterfaces(p1) .. printFields(p1)
+Callback9 = function(p1): string --[[ Line: 245 | Named "printInterface" ]]
+	-- upvalues: Callback6 (ref), printImplementedInterfaces (copy), Callback13 (ref)
+	return Callback6(p1) .. ("interface %s"):format(p1.name) .. printImplementedInterfaces(p1) .. Callback13(p1)
 end
 
-printUnion = function(p1)
-	-- upvalues: array (ref), printDescription (write)
-	local types = p1:getTypes()
+Callback10 = function(p1): string --[[ Line: 252 | Named "printUnion" ]]
+	-- upvalues: Array (copy), Callback6 (ref)
+	local Types = p1:getTypes()
 	
-	return printDescription(p1) .. "union " .. p18.name .. (if #types > 0 then " = " .. array.join(types, " | ") else "")
+	return Callback6(p1) .. "union " .. p1.name .. (if #Types > 0 then " = " .. Array.join(Types, " | ") else "")
 end
 
-printEnum = function(p1)
-	-- upvalues: array (ref), printDescription (write), printDeprecated (write), printBlock (write)
-	return printDescription(p1) .. ("enum %s"):format(p1.name) .. printBlock(array.map(p1:getValues(), function(p2, p3)
-		-- upvalues: printDescription (copy), printDeprecated (copy)
-		return printDescription(p2, "  ", p3 == 1) .. "  " .. p20.name .. printDeprecated(p2.deprecationReason)
-	end))
+Callback1 = function(p1): string --[[ Line: 259 | Named "printEnum" ]]
+	-- upvalues: Array (copy), Callback6 (ref), Callback15 (ref), Callback14 (ref)
+	return Callback6(p1) .. ("enum %s"):format(p1.name) .. Callback14((Array.map(p1:getValues(), function(p2, p3): string --[[ Line: 261 ]]
+		-- upvalues: Callback6 (upval), Callback15 (upval)
+		return Callback6(p2, "  ", p3 == 1) .. "  " .. p2.name .. Callback15(p2.deprecationReason)
+	end)))
 end
 
-printInputObject = function(p1)
-	-- upvalues: array (ref), printDescription (write), printInputValue (write), printBlock (write)
-	return printDescription(p1) .. ("input %s"):format(p1.name) .. printBlock(array.map(p1:getFields():values(), function(p2, p3)
-		-- upvalues: printDescription (copy), printInputValue (copy)
-		return printDescription(p2, "  ", p3 == 1) .. "  " .. printInputValue(p2)
-	end))
+Callback11 = function(p1): string --[[ Line: 271 | Named "printInputObject" ]]
+	-- upvalues: Array (copy), Callback6 (ref), Callback16 (ref), Callback14 (ref)
+	return Callback6(p1) .. ("input %s"):format(p1.name) .. Callback14((Array.map(p1:getFields():values(), function(p2, p3): string --[[ Line: 274 ]]
+		-- upvalues: Callback6 (upval), Callback16 (upval)
+		return Callback6(p2, "  ", p3 == 1) .. "  " .. Callback16(p2)
+	end)))
 end
 
-printFields = function(p1)
-	-- upvalues: array (ref), printDescription (write), printArgs (write), printDeprecated (write), printBlock (write)
-	return printBlock(array.map(p1:getFields():values(), function(p2, p3)
-		-- upvalues: printDescription (copy), printArgs (copy), printDeprecated (copy)
-		return printDescription(p2, "  ", p3 == 1) .. "  " .. p26.name .. printArgs(p2.args, "  ") .. ": " .. tostring(p2.type) .. printDeprecated(p2.deprecationReason)
-	end))
+Callback13 = function(p1) --[[ Line: 281 | Named "printFields" ]]
+	-- upvalues: Array (copy), Callback6 (ref), Callback17 (ref), Callback15 (ref), Callback14 (ref)
+	return Callback14((Array.map(p1.getFields(p1):values(), function(p2, p3): string --[[ Line: 287 ]]
+		-- upvalues: Callback6 (upval), Callback17 (upval), Callback15 (upval)
+		return Callback6(p2, "  ", p3 == 1) .. "  " .. p2.name .. Callback17(p2.args, "  ") .. ": " .. tostring(p2.type) .. Callback15(p2.deprecationReason)
+	end)))
 end
 
-printBlock = function(p1)
-	-- upvalues: array (ref)
-	return if #p1 == 0 then "" else " {\n" .. array.join(p1, "\n") .. "\n}"
+Callback14 = function(MapResult): string --[[ Line: 301 | Named "printBlock" ]]
+	-- upvalues: Array (copy)
+	return if #MapResult == 0 then "" else " {\n" .. Array.join(MapResult, "\n") .. "\n}"
 end
 
-printArgs = function(p1, p2)
-	-- upvalues: array (ref), isNillish (ref), printInputValue (write), printDescription (write)
-	local var1 = if p2 ~= nil then "" else p2
+Callback17 = function(Args, p1): string --[[ Line: 305 | Named "printArgs" ]]
+	-- upvalues: Array (copy), IsNillishFunction (copy), Callback16 (ref), Callback6 (ref)
+	local v1 = if p1 == nil then "" else p1
 	
-	return if #p1 == 0 then "" elseif array.every(p1, function(p3)
-		-- upvalues: isNillish (copy)
-		return isNillish(p3.description)
-	end) then "(" .. array.join(array.map(p1, printInputValue), ", ") .. ")" else "(\n" .. array.join(array.map(p1, function(p3, p4)
-		-- upvalues: printDescription (copy), var1 (ref), printInputValue (copy)
-		return printDescription(p3, "  " .. var35, p4 == 1) .. "  " .. var35 .. printInputValue(p3)
-	end), "\n") .. "\n" .. var35 .. ")"
+	return if #Args == 0 then "" elseif Array.every(Args, function(p2) --[[ Line: 314 ]]
+		-- upvalues: IsNillishFunction (upval)
+		return IsNillishFunction(p2.description)
+	end) then "(" .. Array.join(Array.map(Args, Callback16), ", ") .. ")" else "(\n" .. Array.join(Array.map(Args, function(p2, p3): string --[[ Line: 326 ]]
+		-- upvalues: Callback6 (upval), v1 (copy), Callback16 (upval)
+		return Callback6(p2, "  " .. v1, p3 == 1) .. "  " .. v1 .. Callback16(p2)
+	end), "\n") .. "\n" .. v1 .. ")"
 end
 
-printInputValue = function(p1)
-	-- upvalues: astFromValue (ref), isNotNillish (ref), print (ref), printDeprecated (write)
-	local var1 = astFromValue(p1.defaultValue, p1.type)
-	local text = p1.name .. ": " .. tostring(p1.type)
+Callback16 = function(p1): string --[[ Line: 339 | Named "printInputValue" ]]
+	-- upvalues: AstFromValueFunction (copy), IsNotNillishFunction (copy), PrintFunction (copy), Callback15 (ref)
+	local AstFromValueResult = AstFromValueFunction(p1.defaultValue, p1.type)
+	local Text = p1.name .. ": " .. tostring(p1.type)
 	
-	if isNotNillish(var1) then
-		text ..= (" = %s"):format(print(var1))
+	if IsNotNillishFunction(AstFromValueResult) then
+		Text ..= (" = %s"):format(PrintFunction(AstFromValueResult))
 	end
-	return text .. printDeprecated(p1.deprecationReason)
+	return Text .. Callback15(p1.deprecationReason)
 end
 
-printDirective = function(p1)
-	-- upvalues: printDescription (write), printArgs (write), array (ref)
-	return printDescription(p1) .. "directive @" .. p35.name .. printArgs(p1.args) .. (if p1.isRepeatable then " repeatable" else "") .. " on " .. array.join(p1.locations, " | ")
+Callback4 = function(p1): string --[[ Line: 351 | Named "printDirective" ]]
+	-- upvalues: Callback6 (ref), Callback17 (ref), Array (copy)
+	return Callback6(p1) .. "directive @" .. p1.name .. Callback17(p1.args) .. (if p1.isRepeatable then " repeatable" else "") .. " on " .. Array.join(p1.locations, " | ")
 end
 
-printDeprecated = function(p1)
-	-- upvalues: isNillish (ref), astFromValue (ref), graphQLString (ref), DEFAULT_DEPRECATION_REASON (ref), print (ref)
-	if isNillish(p1) then
+Callback15 = function(DeprecationReason): string --[[ Line: 361 | Named "printDeprecated" ]]
+	-- upvalues: IsNillishFunction (copy), AstFromValueFunction (copy), GraphQLString (copy), DEFAULTDEPRECATIONREASON (copy), PrintFunction (copy)
+	if IsNillishFunction(DeprecationReason) then
 		return ""
+	else
+		local AstFromValueResult = AstFromValueFunction(DeprecationReason, GraphQLString)
+		
+		return if AstFromValueResult and DeprecationReason ~= DEFAULTDEPRECATIONREASON then " @deprecated(reason: " .. PrintFunction(AstFromValueResult) .. ")" else " @deprecated"
 	end
-	local var1 = astFromValue(p1, graphQLString)
-	
-	return if var1 and p1 ~= DEFAULT_DEPRECATION_REASON then " @deprecated(reason: " .. print(var1) .. ")" else " @deprecated"
 end
 
-printSpecifiedByUrl = function(p1)
-	-- upvalues: isNillish (ref), astFromValue (ref), graphQLString (ref), invariant (ref), print (ref)
-	if isNillish(p1.specifiedByUrl) then
+Callback12 = function(p1): string --[[ Line: 376 | Named "printSpecifiedByUrl" ]]
+	-- upvalues: IsNillishFunction (copy), AstFromValueFunction (copy), GraphQLString (copy), InvariantFunction (copy), PrintFunction (copy)
+	if IsNillishFunction(p1.specifiedByUrl) then
 		return ""
+	else
+		local AstFromValueResult = AstFromValueFunction(p1.specifiedByUrl, GraphQLString)
+		InvariantFunction(AstFromValueResult, "Unexpected null value returned from `astFromValue` for specifiedByUrl")
+		
+		return " @specifiedBy(url: " .. PrintFunction(AstFromValueResult) .. ")"
 	end
-	local var1 = astFromValue(p1.specifiedByUrl, graphQLString)
-	invariant(var1, "Unexpected null value returned from `astFromValue` for specifiedByUrl")
-	
-	return " @specifiedBy(url: " .. print(var1) .. ")"
 end
 
-printDescription = function(p1, p2, p3)
-	-- upvalues: isNillish (ref), printBlockString (ref), boolean (ref)
-	local var1 = if p2 ~= nil then "" else p2
-	local var2 = p3 ~= nil or p3
-	local description = p1.description
+Callback6 = function(p1, p2, p3): string --[[ Line: 390 | Named "printDescription" ]]
+	-- upvalues: IsNillishFunction (copy), PrintBlockStringFunction (copy), Boolean (copy)
+	local v1 = if p2 == nil then "" else p2
+	local v2 = p3 == nil or p3
+	local Description: string = p1.description
 	
-	if isNillish(description) then
+	if IsNillishFunction(Description) then
 		return ""
+	else
+		local Text = if Boolean.toJSBoolean(v1) and not v2 then "\n" .. v1 else v1
+		local Replaced, _ = string.gsub(PrintBlockStringFunction(Description, "", string.len(Description) > 70), "\n", "\n" .. v1)
+		
+		return Text .. Replaced .. "\n"
 	end
-	local var3 = if boolean.toJSBoolean(var1) and not var2 then "\n" .. var40 else var1
-	local replaced, _ = string.gsub(printBlockString(description, "", string.len(description) > 70), "\n", "\n" .. var40)
-	
-	return var3 .. replaced .. "\n"
 end
 
 return {
 	printSchema = printSchema,
 	printIntrospectionSchema = printIntrospectionSchema,
-	printType = printType,
-	NULL = NULL
+	printType = Callback2,
+	NULL = require(script.Parent.astFromValue).NULL
 }

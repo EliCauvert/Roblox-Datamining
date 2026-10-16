@@ -1,13 +1,13 @@
 ﻿game:DefineFastString("UGCValidateAllowedLegOverlapMultiplier", "0.25")
-local t = {
-	asString = function()
+local GetFStringUGCValidateAllowedLegOverlapMultiplierModule = {
+	asString = function() --[[ Line: 9 ]]
 		return game:GetFastString("UGCValidateAllowedLegOverlapMultiplier")
 	end
 }
 
-function t.asNumber()
-	-- upvalues: t (ref)
-	return tonumber(t.asString())
+function GetFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber(): number --[[ Line: 13 ]]
+	-- upvalues: GetFStringUGCValidateAllowedLegOverlapMultiplierModule (copy)
+	return (tonumber(GetFStringUGCValidateAllowedLegOverlapMultiplierModule.asString()))
 end
 
-return t
+return GetFStringUGCValidateAllowedLegOverlapMultiplierModule

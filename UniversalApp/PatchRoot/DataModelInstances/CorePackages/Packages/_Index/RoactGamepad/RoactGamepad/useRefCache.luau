@@ -1,12 +1,12 @@
-﻿local reactModule = require(script.Parent.Parent.React)
-local createRefCacheModule = require(script.Parent.createRefCache)
+﻿local ReactModule = require(script.Parent.Parent.React)
+local CreateRefCacheModule = require(script.Parent.createRefCache)
 
-return function()
-	-- upvalues: reactModule (ref), createRefCacheModule (ref)
-	local var1 = reactModule.useRef(nil)
+return function() --[[ Line: 18 | Named "useRefCache" ]]
+	-- upvalues: ReactModule (copy), CreateRefCacheModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var1.current == nil then
-		var1.current = createRefCacheModule()
+	if UseRefResult.current == nil then
+		UseRefResult.current = CreateRefCacheModule()
 	end
-	return var1.current
+	return UseRefResult.current
 end

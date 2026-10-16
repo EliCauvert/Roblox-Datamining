@@ -1,63 +1,62 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent
-local getFIntMaxCoplanarIntersectionsPercentageModule = require(parent.flags.getFIntMaxCoplanarIntersectionsPercentage)
-local _ = require(parent.util.Types)
-local pcallDeferredModule = require(parent.util.pcallDeferred)
-local analyticsModule = require(parent.Analytics)
+local Parent = script.Parent.Parent
+local GetFIntMaxCoplanarIntersectionsPercentageModule = require(Parent.flags.getFIntMaxCoplanarIntersectionsPercentage)
+local _ = require(Parent.util.Types)
+local PcallDeferredModule = require(Parent.util.pcallDeferred)
+local AnalyticsModule = require(Parent.Analytics)
 
-local function getTriangleCount(vectorA, vectorB, p1)
-	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
-	local var1, var2 = pcallDeferredModule(function()
-		-- upvalues: UGCValidationService (copy), vectorA (ref)
-		return UGCValidationService:GetEditableMeshTriCount(vectorA.editableMesh)
-	end, vectorB)
+local function getTriangleCount(p1, p2, IsServer) --[[ Line: 16 ]]
+	-- upvalues: PcallDeferredModule (copy), UGCValidationService (copy), AnalyticsModule (copy)
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 21 ]]
+		-- upvalues: UGCValidationService (upval), p1 (copy)
+		return UGCValidationService:GetEditableMeshTriCount(p1.editableMesh)
+	end, p2)
 	
-	if var1 then
-		return true, nil, var2
+	if PcallDeferredModuleResult then
+		return true, nil, PcallDeferredModuleResult2
 	end
-	local formattedText = string.format("Failed to load model mesh %s. Make sure the mesh exists and try again.", vectorA.fullName)
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateCoplanarIntersection_FailedToExecute, nil, vectorB)
+	local Formatted = string.format("Failed to load model mesh %s. Make sure the mesh exists and try again.", p1.fullName)
+	AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateCoplanarIntersection_FailedToExecute, nil, p2)
 	
-	if p1 ~= nil and p1 then
-		error(formattedText)
+	if IsServer ~= nil and IsServer then
+		error(Formatted)
 	end
-	return false, { formattedText }
+	return false, { Formatted }
 end
 
-return function(p1, p2, p3)
-	-- upvalues: getTriangleCount (ref), getFIntMaxCoplanarIntersectionsPercentageModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
-	local currentTime = tick()
-	local isServer = p3.isServer
-	local var1, var2, var3 = getTriangleCount(p1, p3, isServer)
+return function(p1, MeshScale, p2) --[[ Line: 44 | Named "validateCoplanarIntersection" ]]
+	-- upvalues: getTriangleCount (copy), GetFIntMaxCoplanarIntersectionsPercentageModule (copy), PcallDeferredModule (copy), UGCValidationService (copy), AnalyticsModule (copy)
+	local CurrentTime = tick()
+	local IsServer = p2.isServer
+	local TriangleCount, TriangleCount2, TriangleCount3 = getTriangleCount(p1, p2, IsServer)
 	
-	if not var1 then
-		return false, var2
+	if not TriangleCount then
+		return false, TriangleCount2
 	end
-	local floored = math.floor(getFIntMaxCoplanarIntersectionsPercentageModule() / 100 * var3)
-	local var4, var5 = pcallDeferredModule(function()
-		-- upvalues: UGCValidationService (copy), p1 (ref), floored (ref), p2 (ref)
-		return UGCValidationService:IsEditableMeshNumCoplanarIntersectionsOverLimit(p1.editableMesh, floored, p2, true)
-	end, p3)
+	local Floored = math.floor(GetFIntMaxCoplanarIntersectionsPercentageModule() / 100 * TriangleCount3)
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 62 ]]
+		-- upvalues: UGCValidationService (upval), p1 (copy), Floored (copy), MeshScale (copy)
+		return UGCValidationService:IsEditableMeshNumCoplanarIntersectionsOverLimit(p1.editableMesh, Floored, MeshScale, true)
+	end, p2)
 	
-	if var4 then
-		if var5 then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateCoplanarIntersection_CoplanarIntersection, nil, p3)
-			
-			return false, {
-				string.format("Detected too many coplanar triangles intersecting in model mesh '%s'. The maximum is %d intersections in a %d triangle mesh. Edit your mesh to reduce the number of coplanar triangle intersections.", p1.fullName, floored, var3)
-			}
+	if not PcallDeferredModuleResult then
+		local Formatted = string.format("Failed to execute coplanar triangle intersection check for '%s'. Make sure mesh exists and try again.", p1.fullName)
+		
+		if IsServer ~= nil and IsServer then
+			error(Formatted)
 		end
-		analyticsModule.recordScriptTime(script.Name, currentTime, p3)
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateCoplanarIntersection_FailedToExecute, nil, p2)
+		
+		return false, { Formatted }
+	elseif PcallDeferredModuleResult2 then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateCoplanarIntersection_CoplanarIntersection, nil, p2)
+		
+		return false, {
+			string.format("Detected too many coplanar triangles intersecting in model mesh '%s'. The maximum is %d intersections in a %d triangle mesh. Edit your mesh to reduce the number of coplanar triangle intersections.", p1.fullName, Floored, TriangleCount3)
+		}
+	else
+		AnalyticsModule.recordScriptTime(script.Name, CurrentTime, p2)
 		
 		return true
-	else
-		local formattedText = string.format("Failed to execute coplanar triangle intersection check for '%s'. Make sure mesh exists and try again.", p1.fullName)
-		
-		if isServer ~= nil and isServer then
-			error(formattedText)
-		end
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateCoplanarIntersection_FailedToExecute, nil, p3)
-		
-		return false, { formattedText }
 	end
 end

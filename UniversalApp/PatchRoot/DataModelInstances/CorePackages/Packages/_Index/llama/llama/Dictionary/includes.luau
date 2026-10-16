@@ -1,9 +1,9 @@
-﻿return function(p1, p2)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var0)
+﻿return function(List, p1): boolean --[[ Line: 2 | Named "includes" ]]
+	local ValueType = type(List)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	
-	for i, v in pairs(p1) do
-		if v == p2 then
+	for _, value in pairs(List) do
+		if value == p1 then
 			return true
 		end
 	end

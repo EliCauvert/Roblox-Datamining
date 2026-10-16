@@ -1,76 +1,60 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local curveAnimationHierarchyUtilsModule = require(parent.util.CurveAnimationHierarchyUtils)
-local getFFlagUGCValidateMaxTotalInstancesModule = require(parent.flags.getFFlagUGCValidateMaxTotalInstances)
-local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local CurveAnimationHierarchyUtilsModule = require(Parent.util.CurveAnimationHierarchyUtils)
+local GetFFlagUGCValidateMaxTotalInstancesModule = require(Parent.flags.getFFlagUGCValidateMaxTotalInstances)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.curveAnimations },
+	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2)
-		-- upvalues: getFFlagUGCValidateMaxTotalInstancesModule (ref), errorSourceStringsModule (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateEmotesBonesAllowedModule (ref)
-		for i, v in p2.curveAnimations do
-			local count = #v:GetDescendants()
+	run = function(p1, p2) --[[ Line: 20 ]]
+		-- upvalues: GetFFlagUGCValidateMaxTotalInstancesModule (copy), ErrorSourceStringsModule (copy), CurveAnimationHierarchyUtilsModule (copy)
+		local Count = nil
+		for _, curveAnimation in p2.curveAnimations do
+			Count = #curveAnimation:GetDescendants()
 			
-			if getFFlagUGCValidateMaxTotalInstancesModule() >= count then
-				local var1 = 0
-				
-				for i_1, v_1 in v:GetChildren() do
-					if v_1:IsA("Folder") and curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) then
-						var1 += 1
-						
-						if var1 > 1 then
-							p1:fail(errorSourceStringsModule.Keys.CurveAnim_MultipleBodyRoots)
-							
-							return
-						end
-					end
-				end
-				if var1 ~= 0 then
-					for i_1, v_1 in v:GetChildren() do
-						if v_1:IsA("MarkerCurve") or v_1:IsA("AnimationRigData") then
-							if #v_1:GetChildren() > 0 then
-								p1:fail(errorSourceStringsModule.Keys.CurveAnim_ChildrenOnMarkerOrRig)
-								
-								return
-							end
-						end
-						if v_1:IsA("Folder") then
-							if curveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(v_1.Name) or getFFlagUGCValidateEmotesBonesAllowedModule() then
-								if not getFFlagUGCValidateEmotesBonesAllowedModule() and not curveAnimationHierarchyUtilsModule.validateCurveAnimationBodyPartFolder(v_1) then
-									p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidBodyPartHierarchy, { folderName = v_1.Name })
-									
-									return
-								end
-							end
-							p1:fail(errorSourceStringsModule.Keys.CurveAnim_UnexpectedChild, { childName = v_1.Name })
-							
-							return
-						end
-						p1:fail(errorSourceStringsModule.Keys.CurveAnim_UnexpectedChild, { childName = v_1.Name })
-						
-						return
-					end
-				end
-				p1:fail(errorSourceStringsModule.Keys.CurveAnim_NoBodyRoot)
-				
-				return
+			if GetFFlagUGCValidateMaxTotalInstancesModule() < Count then
+				p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_TooManyDescendants, {
+					count = tostring(Count),
+					maxAllowed = tostring(GetFFlagUGCValidateMaxTotalInstancesModule())
+				})
+				break
 			end
-			p1:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyDescendants, {
-				count = tostring(count),
-				maxAllowed = tostring(getFFlagUGCValidateMaxTotalInstancesModule())
-			})
+			local Count1 = 0
 			
-			return
+			for _, Folder in curveAnimation:GetChildren() do
+				if Folder:IsA("Folder") and CurveAnimationHierarchyUtilsModule.isBodyPartFolderNameValid(Folder.Name) then
+					Count1 += 1
+					
+					if Count1 > 1 then
+						p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_MultipleBodyRoots)
+						break
+					end
+				end
+			end
+			if Count1 == 0 then
+				p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_NoBodyRoot)
+				break
+			end
+			for _, child in curveAnimation:GetChildren() do
+				if child:IsA("MarkerCurve") or child:IsA("AnimationRigData") then
+					if #child:GetChildren() > 0 then
+						p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_ChildrenOnMarkerOrRig)
+						break
+					end
+				elseif not child:IsA("Folder") then
+					p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_UnexpectedChild, { childName = child.Name })
+					break
+				end
+			end
 		end
 	end
 }

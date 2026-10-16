@@ -1,30 +1,30 @@
-﻿local parent = script.Parent
-local responsive = parent.Parent.Responsive
-local roactModule = require(parent.Parent.Parent.Parent.Parent.Roact)
-local responsiveLayoutContextModule = require(responsive.ResponsiveLayoutContext)
-local responsiveLayoutConfigReaderModule = require(responsive.ResponsiveLayoutConfigReader)
+﻿local Parent = script.Parent
+local Responsive = Parent.Parent.Responsive
+local RoactModule = require(Parent.Parent.Parent.Parent.Parent.Roact)
+local ResponsiveLayoutContextModule = require(Responsive.ResponsiveLayoutContext)
+local ResponsiveLayoutConfigReaderModule = require(Responsive.ResponsiveLayoutConfigReader)
 
-return function(p1, p2)
-	-- upvalues: roactModule (ref), responsiveLayoutContextModule (ref), responsiveLayoutConfigReaderModule (ref)
-	return function(p3)
-		-- upvalues: roactModule (copy), responsiveLayoutContextModule (copy), p1 (ref), responsiveLayoutConfigReaderModule (copy), p2 (ref)
-		return roactModule.createElement(responsiveLayoutContextModule.Consumer, {
-			render = function(p4)
-				-- upvalues: p1 (copy), responsiveLayoutConfigReaderModule (copy), p2 (copy), p3 (ref)
+return function(p1, p2) --[[ Line: 27 ]]
+	-- upvalues: RoactModule (copy), ResponsiveLayoutContextModule (copy), ResponsiveLayoutConfigReaderModule (copy)
+	return function(Callback) --[[ Line: 28 ]]
+		-- upvalues: RoactModule (upval), ResponsiveLayoutContextModule (upval), p1 (copy), ResponsiveLayoutConfigReaderModule (upval), p2 (copy)
+		return RoactModule.createElement(ResponsiveLayoutContextModule.Consumer, {
+			render = function(p3) --[[ Line: 30 ]]
+				-- upvalues: p1 (upval), ResponsiveLayoutConfigReaderModule (upval), p2 (upval), Callback (copy)
 				local t = {}
 				
-				for i, v in pairs(p1) do
-					t[i] = responsiveLayoutConfigReaderModule.getValue({
-						config = p4.config,
-						breakpoint = p4.breakpoint,
-						kind = p2 or p4.kind
+				for i, value in pairs(p1) do
+					t[i] = ResponsiveLayoutConfigReaderModule.getValue({
+						config = p3.config,
+						breakpoint = p3.breakpoint,
+						kind = p2 or p3.kind
 					}, i)
 					
 					if t[i] == nil then
-						t[i] = v
+						t[i] = value
 					end
 				end
-				return p3(t)
+				return Callback(t)
 			end
 		})
 	end

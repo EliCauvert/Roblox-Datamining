@@ -1,69 +1,72 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useStatusIndicatorVariantsModule = require(script.Parent.useStatusIndicatorVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local var1 = _G.__DEV__ == true
-local statusIndicatorSizeModule = require(foundation.Enums.StatusIndicatorSize)
-local statusIndicatorVariantModule = require(foundation.Enums.StatusIndicatorVariant)
-local statusIndicatorShapeModule = require(foundation.Enums.StatusIndicatorShape)
-local validNumericVariantsModule = require(script.Parent.ValidNumericVariants)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local FlagsModule = require(Foundation.Utility.Flags)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseStatusIndicatorVariantsModule = require(script.Parent.useStatusIndicatorVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local IsDEV = _G.__DEV__ == true
+local StatusIndicatorShapeModule = require(Foundation.Enums.StatusIndicatorShape)
+local ValidNumericVariantsModule = require(script.Parent.ValidNumericVariants)
+local config = {
 	max = 1e999,
 	testId = "--foundation-status-indicator",
-	variant = statusIndicatorVariantModule.Standard,
-	shape = statusIndicatorShapeModule.Circle,
-	size = statusIndicatorSizeModule.Small
+	variant = require(Foundation.Enums.StatusIndicatorVariant).Standard,
+	shape = StatusIndicatorShapeModule.Circle,
+	size = require(Foundation.Enums.StatusIndicatorSize).Small
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), statusIndicatorShapeModule (ref), var1 (ref), validNumericVariantsModule (ref), dashModule (ref), useTokensModule (ref), useStatusIndicatorVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref), reactIsModule (ref)
-	local var2 = withDefaultsModule(p1, t)
-	local var3 = if var2.value then statusIndicatorShapeModule.Circle else var2.shape
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 67 | Named "StatusIndicator" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), StatusIndicatorShapeModule (copy), IsDEV (copy), ValidNumericVariantsModule (copy), DashModule (copy), UseTokensModule (copy), UseStatusIndicatorVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), TextModule (copy), ReactIsModule (copy), FlagsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local Circle = if WithDefaultsModuleResult.value then StatusIndicatorShapeModule.Circle else WithDefaultsModuleResult.shape
 	
-	if var1 and var2.value ~= nil then
-		assert(validNumericVariantsModule[var2.variant], `{var2.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(dashModule.filter(dashModule.keys(validNumericVariantsModule), function(p3, _)
-			-- upvalues: validNumericVariantsModule (copy)
-			return validNumericVariantsModule[p3] == true
+	if IsDEV and WithDefaultsModuleResult.value ~= nil then
+		assert(ValidNumericVariantsModule[WithDefaultsModuleResult.variant], `{WithDefaultsModuleResult.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(DashModule.filter(DashModule.keys(ValidNumericVariantsModule), function(p2, _): boolean --[[ Line: 75 ]]
+			-- upvalues: ValidNumericVariantsModule (upval)
+			return ValidNumericVariantsModule[p2] == true
 		end), ",")}`)
 	end
-	local var4 = useTokensModule()
-	local var5 = var2.value ~= nil
-	local var6 = useStatusIndicatorVariantsModule(var4, var2.variant, var5, var3, var2.size, var2.mask)
-	local var7 = reactModule.useCallback(function(p3)
-		-- upvalues: var2 (ref)
-		return if var2.max and var2.max < p3 then `{var2.max}+` else tostring(p3)
-	end, { var2.max })
+	local UseTokensModuleResult = UseTokensModule()
+	local HasValue = WithDefaultsModuleResult.value ~= nil
+	local UseStatusIndicatorVariantsModuleResult = UseStatusIndicatorVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.variant, HasValue, Circle, WithDefaultsModuleResult.size, WithDefaultsModuleResult.mask)
+	local UseResult = ReactModule.useCallback(function(p2): string --[[ Line: 88 ]]
+		-- upvalues: WithDefaultsModuleResult (copy)
+		return if WithDefaultsModuleResult.max and WithDefaultsModuleResult.max < p2 then `{WithDefaultsModuleResult.max}+` else tostring(p2)
+	end, { WithDefaultsModuleResult.max })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var2, {
-		tag = var6.container.tag,
-		backgroundStyle = if var6.container.backgroundStyle then var6.container.backgroundStyle else nil,
-		stroke = if var2.mask then var6.stroke else nil,
-		ref = p2,
-		Size = var6.container.size
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseStatusIndicatorVariantsModuleResult.container.tag,
+		backgroundStyle = if UseStatusIndicatorVariantsModuleResult.container.backgroundStyle then UseStatusIndicatorVariantsModuleResult.container.backgroundStyle else nil,
+		stroke = if WithDefaultsModuleResult.mask then UseStatusIndicatorVariantsModuleResult.stroke else nil,
+		ref = Ref,
+		Size = UseStatusIndicatorVariantsModuleResult.container.size
 	}), {
-		Text = if var5 and var6.content.style then reactModule.createElement(textModule, {
-			Text = if reactIsModule.isBinding(var2.value) then var2.value:map(var7) else var7(var2.value),
-			textStyle = var6.content.style,
-			fontStyle = {
-				Font = var6.content.font,
-				FontSize = var4.Typography.LabelSmall.FontSize,
-				LineHeight = var4.Typography.LabelSmall.LineHeight
+		Text = if HasValue and UseStatusIndicatorVariantsModuleResult.content.style then ReactModule.createElement(TextModule, {
+			Text = if ReactIsModule.isBinding(WithDefaultsModuleResult.value) then WithDefaultsModuleResult.value:map(UseResult) else UseResult(WithDefaultsModuleResult.value),
+			textStyle = UseStatusIndicatorVariantsModuleResult.content.style,
+			fontStyle = if FlagsModule.FoundationStatusIndicatorDesignUpdate and UseStatusIndicatorVariantsModuleResult.content.typography then {
+				Font = UseStatusIndicatorVariantsModuleResult.content.font,
+				FontSize = UseStatusIndicatorVariantsModuleResult.content.typography.FontSize,
+				LineHeight = UseStatusIndicatorVariantsModuleResult.content.typography.LineHeight
+			} else {
+				Font = UseStatusIndicatorVariantsModuleResult.content.font,
+				FontSize = UseTokensModuleResult.Typography.LabelSmall.FontSize,
+				LineHeight = UseTokensModuleResult.Typography.LabelSmall.LineHeight
 			},
-			tag = var6.content.tag,
-			testId = `{var2.testId}--text`
+			tag = UseStatusIndicatorVariantsModuleResult.content.tag,
+			testId = `{WithDefaultsModuleResult.testId}--text`
 		}) else nil,
-		InnerRing = if var3 == statusIndicatorShapeModule.Ring and var6.ring then reactModule.createElement(viewModule, {
-			tag = var6.ring.tag,
-			Size = var6.ring.size,
-			testId = `{var2.testId}--ring`
+		InnerRing = if Circle == StatusIndicatorShapeModule.Ring and UseStatusIndicatorVariantsModuleResult.ring then ReactModule.createElement(ViewModule, {
+			tag = UseStatusIndicatorVariantsModuleResult.ring.tag,
+			Size = UseStatusIndicatorVariantsModuleResult.ring.size,
+			testId = `{WithDefaultsModuleResult.testId}--ring`
 		}) else nil
 	})
 end))

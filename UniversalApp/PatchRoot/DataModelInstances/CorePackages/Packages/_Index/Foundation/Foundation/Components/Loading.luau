@@ -1,1 +1,1 @@
-﻿return require(script.Loading)
+﻿return (require(script.Loading))

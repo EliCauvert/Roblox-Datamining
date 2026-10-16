@@ -1,30 +1,30 @@
-﻿local roduxModule = require(script:FindFirstAncestor("RoduxFriends").Parent.Rodux)
+﻿local RoduxModule = require(script:FindFirstAncestor("RoduxFriends").Parent.Rodux)
 local t = {}
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref)
-	return roduxModule.createReducer(t, {
-		[p1.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3)
-			p2 = p2 or {}
-			local count = p2.count or 0
-			local requestsById = p2.requestsById or {}
-			local data = p3.responseBody.data
-			local nextPageCursor = p3.responseBody.nextPageCursor
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: RoduxModule (copy), t (copy)
+	return RoduxModule.createReducer(t, {
+		[p1.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3) --[[ Line: 13 ]]
+			local P1 = p2 or {}
+			local Count = P1.count or 0
+			local RequestsById = P1.requestsById or {}
+			local Data = p3.responseBody.data
+			local NextPageCursor = p3.responseBody.nextPageCursor
 			
-			if nextPageCursor == p2.lastCursor and nextPageCursor ~= nil then
-				return p2
+			if NextPageCursor == P1.lastCursor and NextPageCursor ~= nil then
+				return P1
 			end
-			for i, v in ipairs(data) do
-				local var1 = count + i
+			for i, entry in ipairs(Data) do
+				local NewCount = Count + i
 				
-				if not requestsById[tostring(v.id)] then
-					requestsById[tostring(v.id)] = var1
+				if not RequestsById[tostring(entry.id)] then
+					RequestsById[tostring(entry.id)] = NewCount
 				end
 			end
 			return {
-				count = count + #data,
-				lastCursor = nextPageCursor,
-				requestsById = requestsById
+				count = Count + #Data,
+				lastCursor = NextPageCursor,
+				requestsById = RequestsById
 			}
 		end
 	})

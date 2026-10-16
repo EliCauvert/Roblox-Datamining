@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index["string-utilities"]["string-utilities"])
+﻿return (require(script.Parent.Parent.Parent._Index["string-utilities"]["string-utilities"]))

@@ -1,56 +1,56 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local flagsModule = require(foundation.Utility.Flags)
-local _ = require(foundation.Utility.Plugin.StudioUri)
-local usePluginModule = require(foundation.Providers.Plugin.usePlugin)
-local widgetManagerModule = require(script.Parent.WidgetManager)
-local widgetsContextModule = require(script.Parent.WidgetsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Foundation.Utility.Plugin.StudioUri)
+local UsePluginModule = require(Foundation.Providers.Plugin.usePlugin)
+local WidgetManagerModule = require(script.Parent.WidgetManager)
+local WidgetsContextModule = require(script.Parent.WidgetsContext)
 local _ = require(script.Parent.Types)
 
-return function(p1)
-	-- upvalues: usePluginModule (ref), reactModule (ref), widgetManagerModule (ref), flagsModule (ref), widgetsContextModule (ref)
-	local var1 = usePluginModule()
+return function(p1) --[[ Line: 22 | Named "WidgetsProvider" ]]
+	-- upvalues: UsePluginModule (copy), ReactModule (copy), WidgetManagerModule (copy), FlagsModule (copy), WidgetsContextModule (copy)
+	local UsePluginModuleResult = UsePluginModule()
 	
-	if var1 == nil then
+	if UsePluginModuleResult == nil then
 		error("WidgetsProvider must be used within a Plugin context")
 	end
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: widgetManagerModule (copy), var1 (ref)
-		return widgetManagerModule.new(var1:GetPluginComponent("Widgets"))
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		return function()
-			-- upvalues: var2 (copy)
-			var2:destroy()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+		-- upvalues: WidgetManagerModule (upval), UsePluginModuleResult (copy)
+		return WidgetManagerModule.new(UsePluginModuleResult:GetPluginComponent("Widgets"))
+	end, { UsePluginModuleResult })
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: UseMemoResult (copy)
+		return function() --[[ Line: 33 ]]
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult:destroy()
 		end
-	end, { var2 })
-	local var3 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var2 (ref)
-		var2:register(p2, p3)
-	end, { var2 })
-	local var4 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var2 (ref)
-		var2:deregister(p2, p3)
-	end, { var2 })
-	local var5 = if flagsModule.FoundationPopoverPluginAnchorRefresh then reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		return var2:refreshAsync(p2)
-	end, { var2 }) else nil
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		return var2:nextId()
-	end, { var2 })
+	end, { UseMemoResult })
+	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 38 ]]
+		-- upvalues: UseMemoResult (copy)
+		UseMemoResult:register(p2, p3)
+	end, { UseMemoResult })
+	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 42 ]]
+		-- upvalues: UseMemoResult (copy)
+		UseMemoResult:deregister(p2, p3)
+	end, { UseMemoResult })
+	local UseResult2 = if FlagsModule.FoundationPopoverPluginAnchorRefresh then ReactModule.useCallback(function(p2) --[[ Line: 47 ]]
+		-- upvalues: UseMemoResult (copy)
+		return UseMemoResult:refreshAsync(p2)
+	end, { UseMemoResult }) else nil
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 52 ]]
+		-- upvalues: UseMemoResult (copy)
+		return UseMemoResult:nextId()
+	end, { UseMemoResult })
 	
-	return reactModule.createElement(widgetsContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var3 (ref), var4 (ref), flagsModule (copy), var5 (ref), var6 (ref)
+	return ReactModule.createElement(WidgetsContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 56 ]]
+			-- upvalues: UseResult (copy), UseResult1 (copy), FlagsModule (upval), UseResult2 (copy), UseResult3 (copy)
 			return {
-				register = var3,
-				deregister = var4,
-				refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then var5 else nil,
-				nextId = var6
+				register = UseResult,
+				deregister = UseResult1,
+				refreshAsync = if FlagsModule.FoundationPopoverPluginAnchorRefresh then UseResult2 else nil,
+				nextId = UseResult3
 			}
-		end, { var3, var4, var5, var6 })
+		end, { UseResult, UseResult1, UseResult2, UseResult3 })
 	}, p1.children)
 end

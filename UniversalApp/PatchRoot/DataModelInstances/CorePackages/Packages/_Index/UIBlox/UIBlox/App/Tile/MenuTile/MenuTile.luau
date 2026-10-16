@@ -1,92 +1,83 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local core = parent_1.Core
-local parent_2 = parent_1.Parent
-local otterModule = require(parent_2.Otter)
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local cryoModule = require(parent_2.Cryo)
-local foundationModule = require(parent_2.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local badgeStatesModule = require(parent.Indicator.Enum.BadgeStates)
-local iconSizeModule = require(parent.ImageSet.Enum.IconSize)
-local getIconSizeModule = require(parent.ImageSet.getIconSize)
-local badgeVariantModule = require(parent.Indicator.Enum.BadgeVariant)
-local statusIndicator = foundationModule.StatusIndicator
-local controlStateModule = require(core.Control.Enum.ControlState)
-local interactableModule = require(core.Control.Interactable)
-local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
-local validateImageModule = require(core.ImageSet.Validator.validateImage)
-local validateColorInfoModule = require(parent_1.Core.Style.Validator.validateColorInfo)
-local validateFontInfoModule = require(parent_1.Core.Style.Validator.validateFontInfo)
-local validateTypographyInfoModule = require(parent_1.Core.Style.Validator.validateTypographyInfo)
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local divideTransparencyModule = require(parent_1.Utility.divideTransparency)
-local cursorTypeModule = require(parent.SelectionCursor.CursorType)
-local useCursorByTypeModule = require(parent.SelectionCursor.useCursorByType)
-local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local migrateBadgeVariantModule = require(parent_1.Utility.migrateBadgeVariant)
-local uDim = UDim.new(0, 12)
-local uDim_1 = UDim.new(0, 8)
-local t = { frequency = 6, dampingRatio = 1 }
-local _ = {
-	BACKGROUND = 1,
-	HOVER_MASK = 2,
-	ICON_AND_TITLE_CONTAINER = 3,
-	BADGE_CONTAINER = 4,
-	ROUNDED_CORNERS_MASK = 5
-}
-local _ = { ICON = 1, TITLE = 2 }
-local menuTile = roactModule.Component:extend("MenuTile")
-menuTile.defaultProps = { size = UDim2.fromScale(1, 1), styleProps = {} }
-menuTile.validateProps = tModule.strictInterface({
-	size = tModule.optional(tModule.UDim2),
-	position = tModule.optional(tModule.UDim2),
-	layoutOrder = tModule.optional(tModule.number),
-	cursor = tModule.table,
-	badgeValue = tModule.optional(tModule.union(tModule.string, tModule.number, badgeStatesModule.isEnumValue)),
-	badgeVariant = tModule.optional(badgeVariantModule.isEnumValue),
-	icon = tModule.optional(validateImageModule),
-	title = tModule.string,
-	onActivated = tModule.callback,
-	styleProps = tModule.optional(tModule.strictInterface({
-		iconStyle = tModule.optional(validateColorInfoModule),
-		iconSize = tModule.optional(iconSizeModule.isEnumValue),
-		titleStyle = tModule.optional(validateColorInfoModule),
-		titleFont = tModule.optional(tModule.union(validateFontInfoModule, validateTypographyInfoModule))
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Core = Parent1.Core
+local Parent2 = Parent1.Parent
+local OtterModule = require(Parent2.Otter)
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local CryoModule = require(Parent2.Cryo)
+local FoundationModule = require(Parent2.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local BadgeStatesModule = require(Parent.Indicator.Enum.BadgeStates)
+local IconSizeModule = require(Parent.ImageSet.Enum.IconSize)
+local GetIconSizeModule = require(Parent.ImageSet.getIconSize)
+local BadgeVariantModule = require(Parent.Indicator.Enum.BadgeVariant)
+local StatusIndicator = FoundationModule.StatusIndicator
+local ControlStateModule = require(Core.Control.Enum.ControlState)
+local InteractableModule = require(Core.Control.Interactable)
+local ImageSetComponentModule = require(Core.ImageSet.ImageSetComponent)
+local ValidateImageModule = require(Core.ImageSet.Validator.validateImage)
+local ValidateColorInfoModule = require(Parent1.Core.Style.Validator.validateColorInfo)
+local ValidateFontInfoModule = require(Parent1.Core.Style.Validator.validateFontInfo)
+local ValidateTypographyInfoModule = require(Parent1.Core.Style.Validator.validateTypographyInfo)
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local DivideTransparencyModule = require(Parent1.Utility.divideTransparency)
+local CursorTypeModule = require(Parent.SelectionCursor.CursorType)
+local UseCursorByTypeModule = require(Parent.SelectionCursor.useCursorByType)
+local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local MigrateBadgeVariantModule = require(Parent1.Utility.migrateBadgeVariant)
+local _UDim = UDim.new(0, 12)
+local _UDim1 = UDim.new(0, 8)
+local config = { frequency = 6, dampingRatio = 1 }
+local MenuTile = RoactModule.Component:extend("MenuTile")
+MenuTile.defaultProps = { size = UDim2.fromScale(1, 1), styleProps = {} }
+MenuTile.validateProps = TModule.strictInterface({
+	size = TModule.optional(TModule.UDim2),
+	position = TModule.optional(TModule.UDim2),
+	layoutOrder = TModule.optional(TModule.number),
+	cursor = TModule.table,
+	badgeValue = TModule.optional(TModule.union(TModule.string, TModule.number, BadgeStatesModule.isEnumValue)),
+	badgeVariant = TModule.optional(BadgeVariantModule.isEnumValue),
+	icon = TModule.optional(ValidateImageModule),
+	title = TModule.string,
+	onActivated = TModule.callback,
+	styleProps = TModule.optional(TModule.strictInterface({
+		iconStyle = TModule.optional(ValidateColorInfoModule),
+		iconSize = TModule.optional(IconSizeModule.isEnumValue),
+		titleStyle = TModule.optional(ValidateColorInfoModule),
+		titleFont = TModule.optional(TModule.union(ValidateFontInfoModule, ValidateTypographyInfoModule))
 	}))
 })
 
-local function withProviders(p1, p2)
-	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p3)
-		-- upvalues: p1 (ref), p2 (ref)
-		return p1(p3, nil, p2)
+local function withProviders(Callback, Cursor) --[[ Line: 104 ]]
+	-- upvalues: WithStyleModule (copy)
+	return WithStyleModule(function(p1) --[[ Line: 105 ]]
+		-- upvalues: Callback (copy), Cursor (copy)
+		return Callback(p1, nil, Cursor)
 	end)
 end
 
-local function getStyleProps(p1, p2)
-	-- upvalues: getIconSizeModule (ref), iconSizeModule (ref)
-	local theme = p2.Theme
+local function getStyleProps(StyleProps, p1) --[[ Line: 110 ]]
+	-- upvalues: GetIconSizeModule (copy), IconSizeModule (copy)
+	local Theme = p1.Theme
+	local _Font = p1.Font
 	
 	return {
-		iconStyle = p1.iconStyle or theme.IconDefault,
-		iconSize = if p1.iconSize then getIconSizeModule(p1.iconSize, p2) else getIconSizeModule(iconSizeModule.Large),
-		titleStyle = p1.titleStyle or theme.TextDefault,
-		titleFont = p1.titleFont or p2.Font.SubHeader1
+		iconStyle = StyleProps.iconStyle or Theme.IconDefault,
+		iconSize = if StyleProps.iconSize then GetIconSizeModule(StyleProps.iconSize, p1) else GetIconSizeModule(IconSizeModule.Large),
+		titleStyle = StyleProps.titleStyle or Theme.TextDefault,
+		titleFont = StyleProps.titleFont or _Font.SubHeader1
 	}
 end
 
-function menuTile.init(p1)
-	-- upvalues: roactModule (ref), otterModule (ref)
-	local var1, var2 = roactModule.createBinding(1)
-	p1.hoverTransparency = var1
-	p1.updateHoverTransparency = var2
-	p1.hoverTransparencyMotor = otterModule.createSingleMotor(1)
+function MenuTile.init(p1) --[[ Line: 126 ]]
+	-- upvalues: RoactModule (copy), OtterModule (copy)
+	p1.hoverTransparency, p1.updateHoverTransparency = RoactModule.createBinding(1)
+	p1.hoverTransparencyMotor = OtterModule.createSingleMotor(1)
 	p1.hoverTransparencyMotor:onStep(p1.updateHoverTransparency)
-	p1.hoverTransparencyMotor:onComplete(function(p2)
-		-- upvalues: p1 (ref)
+	p1.hoverTransparencyMotor:onComplete(function(p2) --[[ Line: 130 ]]
+		-- upvalues: p1 (copy)
 		if p2 == 1 then
 			p1:setState({ showHoverMask = false })
 		end
@@ -99,151 +90,153 @@ function menuTile.init(p1)
 	})
 end
 
-function menuTile.render(p1)
-	-- upvalues: withProviders (ref), getStyleProps (ref), getTextSizeModule (ref), controlStateModule (ref), otterModule (ref), t (ref), divideTransparencyModule (ref), roactModule (ref), interactableModule (ref), uDim (ref), uDim_1 (ref), imageSetComponentModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), statusIndicator (ref), migrateBadgeVariantModule (ref)
-	local backgroundTransparency = p1.state.backgroundTransparency
-	local iconTransparency = p1.state.iconTransparency
-	local titleTransparency = p1.state.titleTransparency
-	local badgeValue = p1.props.badgeValue
-	local icon = p1.props.icon
-	local layoutOrder = p1.props.layoutOrder
-	local onActivated = p1.props.onActivated
-	local position = p1.props.position
-	local size = p1.props.size
-	local title = p1.props.title
+function MenuTile.render(p1) --[[ Line: 146 ]]
+	-- upvalues: withProviders (copy), getStyleProps (copy), GetTextSizeModule (copy), ControlStateModule (copy), OtterModule (copy), config (copy), DivideTransparencyModule (copy), RoactModule (copy), InteractableModule (copy), _UDim (copy), _UDim1 (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), StatusIndicator (copy), MigrateBadgeVariantModule (copy)
+	local BackgroundTransparency = p1.state.backgroundTransparency
+	local IconTransparency = p1.state.iconTransparency
+	local TitleTransparency = p1.state.titleTransparency
+	local BadgeValue = p1.props.badgeValue
+	local Icon = p1.props.icon
+	local LayoutOrder = p1.props.layoutOrder
+	local OnActivated = p1.props.onActivated
+	local Position = p1.props.position
+	local Size = p1.props.size
+	local Title = p1.props.title
 	
-	return withProviders(function(p2, _, p3)
-		-- upvalues: getStyleProps (copy), p1 (ref), getTextSizeModule (copy), title (ref), controlStateModule (copy), otterModule (copy), t (copy), divideTransparencyModule (copy), roactModule (copy), interactableModule (copy), size (ref), position (ref), layoutOrder (ref), onActivated (ref), backgroundTransparency (ref), uDim (copy), uDim_1 (copy), icon (ref), imageSetComponentModule (copy), iconTransparency (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), titleTransparency (ref), badgeValue (ref), statusIndicator (copy), migrateBadgeVariantModule (copy)
-		local theme = p2.Theme
-		local var1 = getStyleProps(p1.props.styleProps, p2)
-		local backgroundUIDefault = theme.BackgroundUIDefault
-		local backgroundOnHover = theme.BackgroundOnHover
-		local iconStyle = var1.iconStyle
-		local iconSize = var1.iconSize
-		local titleStyle = var1.titleStyle
-		local titleFont = var1.titleFont
-		local var2 = if titleFont.RelativeSize then titleFont.RelativeSize * p2.Font.BaseSize else titleFont.FontSize
-		local y = getTextSizeModule(title, var2, titleFont.Font, Vector2.new(100, var2)).Y
+	return withProviders(function(p2, _, SelectionImageObject) --[[ Line: 159 ]]
+		-- upvalues: getStyleProps (upval), p1 (copy), GetTextSizeModule (upval), Title (copy), ControlStateModule (upval), OtterModule (upval), config (upval), DivideTransparencyModule (upval), RoactModule (upval), InteractableModule (upval), Size (copy), Position (copy), LayoutOrder (copy), OnActivated (copy), BackgroundTransparency (copy), _UDim (upval), _UDim1 (upval), Icon (copy), ImageSetComponentModule (upval), IconTransparency (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), TitleTransparency (copy), BadgeValue (copy), StatusIndicator (upval), MigrateBadgeVariantModule (upval)
+		local Theme = p2.Theme
+		local StyleProps = getStyleProps(p1.props.styleProps, p2)
+		local BackgroundUIDefault = Theme.BackgroundUIDefault
+		local BackgroundOnHover = Theme.BackgroundOnHover
+		local IconStyle = StyleProps.iconStyle
+		local IconSize = StyleProps.iconSize
+		local TitleStyle = StyleProps.titleStyle
+		local TitleFont = StyleProps.titleFont
+		local ScaledRelativeSize = if TitleFont.RelativeSize then TitleFont.RelativeSize * p2.Font.BaseSize else TitleFont.FontSize
+		local Y: number = GetTextSizeModule(Title, ScaledRelativeSize, TitleFont.Font, Vector2.new(100, ScaledRelativeSize)).Y
 		
-		return roactModule.createElement(interactableModule, {
-			Size = size,
-			Position = position,
+		return RoactModule.createElement(InteractableModule, {
+			Size = Size,
+			Position = Position,
 			BackgroundTransparency = 1,
-			SelectionImageObject = p3,
-			LayoutOrder = layoutOrder,
-			onStateChanged = function(_, p4)
-				-- upvalues: controlStateModule (copy), p1 (copy), backgroundUIDefault (ref), iconStyle (ref), titleStyle (ref), otterModule (copy), backgroundOnHover (ref), t (copy), divideTransparencyModule (copy)
-				if p4 == controlStateModule.Hover then
+			SelectionImageObject = SelectionImageObject,
+			LayoutOrder = LayoutOrder,
+			onStateChanged = function(_, Default) --[[ Line: 180 ]]
+				-- upvalues: ControlStateModule (upval), p1 (upval), BackgroundUIDefault (copy), IconStyle (copy), TitleStyle (copy), OtterModule (upval), BackgroundOnHover (copy), config (upval), DivideTransparencyModule (upval)
+				if Default == ControlStateModule.Hover then
 					p1:setState({
 						showHoverMask = true,
-						backgroundTransparency = backgroundUIDefault.Transparency,
-						iconTransparency = iconStyle.Transparency,
-						titleTransparency = titleStyle.Transparency
+						backgroundTransparency = BackgroundUIDefault.Transparency,
+						iconTransparency = IconStyle.Transparency,
+						titleTransparency = TitleStyle.Transparency
 					})
-					p1.hoverTransparencyMotor:setGoal(otterModule.spring(backgroundOnHover.Transparency, t))
+					p1.hoverTransparencyMotor:setGoal(OtterModule.spring(BackgroundOnHover.Transparency, config))
 					
 					return
-				elseif p4 == controlStateModule.Default then
+				end
+				if Default == ControlStateModule.Default then
 					p1:setState({
-						backgroundTransparency = backgroundUIDefault.Transparency,
-						iconTransparency = iconStyle.Transparency,
-						titleTransparency = titleStyle.Transparency
+						backgroundTransparency = BackgroundUIDefault.Transparency,
+						iconTransparency = IconStyle.Transparency,
+						titleTransparency = TitleStyle.Transparency
 					})
-					p1.hoverTransparencyMotor:setGoal(otterModule.spring(1, t))
+					p1.hoverTransparencyMotor:setGoal(OtterModule.spring(1, config))
 					
 					return
-				elseif p4 == controlStateModule.Pressed then
+				end
+				if Default == ControlStateModule.Pressed then
 					p1:setState({
 						showHoverMask = false,
-						backgroundTransparency = divideTransparencyModule(backgroundUIDefault.Transparency, 2),
-						iconTransparency = divideTransparencyModule(iconStyle.Transparency, 2),
-						titleTransparency = divideTransparencyModule(titleStyle.Transparency, 2)
+						backgroundTransparency = DivideTransparencyModule(BackgroundUIDefault.Transparency, 2),
+						iconTransparency = DivideTransparencyModule(IconStyle.Transparency, 2),
+						titleTransparency = DivideTransparencyModule(TitleStyle.Transparency, 2)
 					})
-					p1.hoverTransparencyMotor:setGoal(otterModule.instant(1))
+					p1.hoverTransparencyMotor:setGoal(OtterModule.instant(1))
 				end
 			end,
-			[roactModule.Event.Activated] = onActivated
+			[RoactModule.Event.Activated] = OnActivated
 		}, {
-			MenuTileFrame = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = size }, {
-				Background = roactModule.createElement("Frame", {
+			MenuTileFrame = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = Size }, {
+				Background = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					ZIndex = 1,
-					BackgroundColor3 = backgroundUIDefault.Color,
-					BackgroundTransparency = backgroundTransparency,
+					BackgroundColor3 = BackgroundUIDefault.Color,
+					BackgroundTransparency = BackgroundTransparency,
 					Size = UDim2.fromScale(1, 1)
 				}, {
-					RoundedCornerUI = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
+					RoundedCornerUI = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 				}),
-				HoverMask = p1.state.showHoverMask and roactModule.createElement("Frame", {
+				HoverMask = p1.state.showHoverMask and RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					ZIndex = 2,
-					BackgroundColor3 = backgroundOnHover.Color,
+					BackgroundColor3 = BackgroundOnHover.Color,
 					BackgroundTransparency = p1.hoverTransparency,
 					Size = UDim2.fromScale(1, 1)
 				}, {
-					RoundedCornerUI = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
+					RoundedCornerUI = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 				}),
-				IconAndTitleContainer = roactModule.createElement("Frame", {
+				IconAndTitleContainer = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					ZIndex = 3,
 					Size = UDim2.fromScale(1, 1)
 				}, {
-					IconAndTitleUIListLayout = roactModule.createElement("UIListLayout", {
+					IconAndTitleUIListLayout = RoactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
-						Padding = uDim,
+						Padding = _UDim,
 						VerticalAlignment = Enum.VerticalAlignment.Center
 					}),
-					IconAndTitleUIPadding = roactModule.createElement("UIPadding", {
-						PaddingBottom = uDim_1,
-						PaddingLeft = uDim_1,
-						PaddingRight = uDim_1,
-						PaddingTop = uDim_1 + UDim.new(0, y)
+					IconAndTitleUIPadding = RoactModule.createElement("UIPadding", {
+						PaddingBottom = _UDim1,
+						PaddingLeft = _UDim1,
+						PaddingRight = _UDim1,
+						PaddingTop = _UDim1 + UDim.new(0, Y)
 					}),
-					Icon = icon and roactModule.createElement(imageSetComponentModule.Label, {
+					Icon = Icon and RoactModule.createElement(ImageSetComponentModule.Label, {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
-						Image = icon,
-						ImageColor3 = iconStyle.Color,
-						ImageTransparency = iconTransparency,
-						Size = UDim2.fromOffset(iconSize, iconSize)
+						Image = Icon,
+						ImageColor3 = IconStyle.Color,
+						ImageTransparency = IconTransparency,
+						Size = UDim2.fromOffset(IconSize, IconSize)
 					}),
-					Title = title and roactModule.createElement("TextLabel", {
+					Title = Title and RoactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
 						TextWrapped = true,
-						Font = if foundationFontFaceMigration then nil else titleFont.Font,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(titleFont.Font) else nil,
-						Size = UDim2.new(1, 0, 0, y * 2),
-						Text = title,
-						TextColor3 = titleStyle.Color,
-						TextSize = var2,
-						TextTransparency = titleTransparency,
+						Font = if FoundationFontFaceMigration then nil else TitleFont.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleFont.Font) else nil,
+						Size = UDim2.new(1, 0, 0, Y * 2),
+						Text = Title,
+						TextColor3 = TitleStyle.Color,
+						TextSize = ScaledRelativeSize,
+						TextTransparency = TitleTransparency,
 						TextTruncate = Enum.TextTruncate.AtEnd,
 						TextYAlignment = Enum.TextYAlignment.Top
 					})
 				}),
-				BadgeContainer = badgeValue and roactModule.createElement("Frame", {
+				BadgeContainer = BadgeValue and RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					ZIndex = 4,
 					Size = UDim2.fromScale(1, 1)
 				}, {
-					BadgeUIListLayout = roactModule.createElement("UIListLayout", {
+					BadgeUIListLayout = RoactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						HorizontalAlignment = Enum.HorizontalAlignment.Right,
-						Padding = uDim,
+						Padding = _UDim,
 						VerticalAlignment = Enum.VerticalAlignment.Top
 					}),
-					BadgeUIPadding = roactModule.createElement("UIPadding", {
-						PaddingBottom = uDim_1,
-						PaddingLeft = uDim_1,
-						PaddingRight = uDim_1,
-						PaddingTop = uDim_1
+					BadgeUIPadding = RoactModule.createElement("UIPadding", {
+						PaddingBottom = _UDim1,
+						PaddingLeft = _UDim1,
+						PaddingRight = _UDim1,
+						PaddingTop = _UDim1
 					}),
-					Badge = roactModule.createElement(statusIndicator, {
-						value = tonumber(badgeValue),
-						max = if tonumber(badgeValue) then 99 else nil,
-						variant = migrateBadgeVariantModule(p1.props.badgeVariant)
+					Badge = RoactModule.createElement(StatusIndicator, {
+						value = tonumber(BadgeValue),
+						max = if tonumber(BadgeValue) then 99 else nil,
+						variant = MigrateBadgeVariantModule(p1.props.badgeVariant)
 					})
 				})
 			})
@@ -251,16 +244,16 @@ function menuTile.render(p1)
 	end, p1.props.cursor)
 end
 
-function menuTile.willUnmount(p1)
+function MenuTile.willUnmount(p1) --[[ Line: 316 ]]
 	if p1.hoverTransparencyMotor then
 		p1.hoverTransparencyMotor:destroy()
 	end
 end
 
-function MenuTileFunctionalWrapper(p1)
-	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), menuTile (ref), cryoModule (ref)
-	return roactModule.createElement(menuTile, cryoModule.Dictionary.join(p1, {
-		cursor = useCursorByTypeModule(cursorTypeModule.RoundedRect)
+function MenuTileFunctionalWrapper(p1) --[[ Line: 321 ]]
+	-- upvalues: UseCursorByTypeModule (copy), CursorTypeModule (copy), RoactModule (copy), MenuTile (copy), CryoModule (copy)
+	return RoactModule.createElement(MenuTile, CryoModule.Dictionary.join(p1, {
+		cursor = UseCursorByTypeModule(CursorTypeModule.RoundedRect)
 	}))
 end
 

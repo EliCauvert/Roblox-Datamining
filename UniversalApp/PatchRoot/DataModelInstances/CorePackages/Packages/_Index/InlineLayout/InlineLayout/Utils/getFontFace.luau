@@ -1,5 +1,5 @@
-﻿return function(p1)
-	local font = p1 and p1.Font
+﻿return function(p1) --[[ Line: 9 | Named "getFontFace" ]]
+	local _Font = p1 and p1.Font
 	
-	return if typeof(font) == "EnumItem" and font:IsA("Font") then Font.fromEnum(font) else font
+	return if typeof(_Font) == "EnumItem" and _Font:IsA("Font") then Font.fromEnum(_Font) else _Font
 end

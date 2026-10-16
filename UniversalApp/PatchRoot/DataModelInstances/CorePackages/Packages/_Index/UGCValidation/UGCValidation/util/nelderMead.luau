@@ -1,180 +1,181 @@
-﻿local floatVectorModule = require(script.Parent.Parent.util.FloatVector)
-local t = {}
-t.__index = t
+﻿local FloatVectorModule = require(script.Parent.Parent.util.FloatVector)
+local NelderMeadModule = {}
+NelderMeadModule.__index = NelderMeadModule
 
-function t.new(p1, p2, p3)
-	-- upvalues: t (ref), floatVectorModule (ref)
-	local tbl = setmetatable({}, t)
+function NelderMeadModule.new(Entry, ObjectFunction, TerminateFunction) --[[ Line: 24 ]]
+	-- upvalues: NelderMeadModule (copy), FloatVectorModule (copy)
+	local self = setmetatable({}, NelderMeadModule)
 	
-	if p1 and #p1 > 0 then
-		local var1 = p1[1]
+	if Entry and #Entry > 0 then
+		local Entry1 = Entry[1]
 		
-		for i, v in p1 do
-			if not var1:checkCompatible(v) then
+		for _, value in Entry do
+			if not Entry1:checkCompatible(value) then
 				error("initial simplex has vectors that are not compatible")
 			end
 		end
 	else
 		error("must provide an initial simplex")
 	end
-	tbl.simplex = {}
+	self.simplex = {}
 	
-	for i, v in p1 do
-		table.insert(tbl.simplex, floatVectorModule.new(v))
+	for _, value1 in Entry do
+		table.insert(self.simplex, FloatVectorModule.new(value1))
 	end
-	tbl.objectFunction = p2
-	tbl.terminateFunction = p3
+	self.objectFunction = ObjectFunction
+	self.terminateFunction = TerminateFunction
 	
-	return tbl
+	return self
 end
 
-function t:evaluate()
-	-- upvalues: floatVectorModule (ref)
-	local simplex = self.simplex
-	local t = {}
+function NelderMeadModule:evaluate() --[[ Line: 51 ]]
+	-- upvalues: FloatVectorModule (copy)
+	local Simplex = self.simplex
+	local ObjectResults = {}
 	
-	local _ = function(p4)
-		-- upvalues: t (write), self (ref)
-		local var2 = t[p4]
+	local function _(Key) --[[ Line: 55 ]]
+		-- upvalues: ObjectResults (ref), self (copy)
+		local ObjectResult = ObjectResults[Key]
 		
-		if not var2 then
-			var2 = self.objectFunction(p4)
-			t[p4] = var2
+		if not ObjectResult then
+			ObjectResult = self.objectFunction(Key)
+			ObjectResults[Key] = ObjectResult
 		end
-		return var2
+		return ObjectResult
 	end
 	
-	local var2 = 0
-	while not self.terminateFunction(simplex, var2) do
-		t = {}
-		table.sort(simplex, function(p4, p5)
-			-- upvalues: t (write), self (ref)
-			local var3 = t[p4]
+	local Count = 0
+	while not self.terminateFunction(Simplex, Count) do
+		ObjectResults = {}
+		table.sort(Simplex, function(A, B): boolean --[[ Line: 68 ]]
+			-- upvalues: ObjectResults (ref), self (copy)
+			local ObjectResult = ObjectResults[A]
 			
-			if not var3 then
-				var3 = self.objectFunction(p4)
-				t[p4] = var3
+			if not ObjectResult then
+				ObjectResult = self.objectFunction(A)
+				ObjectResults[A] = ObjectResult
 			end
-			local var4 = t[p5]
+			local ObjectResult1 = ObjectResult
+			local ObjectResult2 = ObjectResults[B]
 			
-			if not var4 then
-				var4 = self.objectFunction(p5)
-				t[p5] = var4
+			if not ObjectResult2 then
+				ObjectResult2 = self.objectFunction(B)
+				ObjectResults[B] = ObjectResult2
 			end
-			return var3 < var4
+			return ObjectResult1 < ObjectResult2
 		end)
-		local var3 = simplex[#simplex]
-		local t_1 = {}
+		local SimplexEntry = Simplex[#Simplex]
+		local List = {}
 		
-		for _ = 1, simplex[1]:getSize() do
-			table.insert(t_1, 0)
+		for _ = 1, Simplex[1]:getSize() do
+			table.insert(List, 0)
 		end
-		local i
-		local var4 = floatVectorModule.new(t_1)
+		local NewFloatVector = FloatVectorModule.new(List)
 		
-		for i = 1, #simplex - 1 do
-			var4 += simplex[i]
+		for i = 1, #Simplex - 1 do
+			NewFloatVector += Simplex[i]
 		end
-		local var5 = var4 / (#simplex - 1) - var3
-		var10 = var3 + var5 * 2
-		local var6 = t[var10]
+		local NewFloatVectorDelta = NewFloatVector / (#Simplex - 1) - SimplexEntry
+		local NewSimplexEntry = SimplexEntry + NewFloatVectorDelta * 2
+		local ObjectResult = ObjectResults[NewSimplexEntry]
 		
-		if not var6 then
-			var6 = self.objectFunction(var10)
-			t[var10] = var6
+		if not ObjectResult then
+			ObjectResult = self.objectFunction(NewSimplexEntry)
+			ObjectResults[NewSimplexEntry] = ObjectResult
 		end
-		i = var6
-		local var7 = simplex[1]
-		local var8 = t[var7]
+		local ObjectResult1 = ObjectResult
+		local SimplexEntry1 = Simplex[1]
+		local ObjectResult2 = ObjectResults[SimplexEntry1]
 		
-		if not var8 then
-			var8 = self.objectFunction(var7)
-			t[var7] = var8
+		if not ObjectResult2 then
+			ObjectResult2 = self.objectFunction(SimplexEntry1)
+			ObjectResults[SimplexEntry1] = ObjectResult2
 		end
-		if var8 < i then
-			local var9 = simplex[#simplex - 1]
-			var8 = t[var9]
+		if ObjectResult2 < ObjectResult1 then
+			local SimplexEntry2 = Simplex[#Simplex - 1]
+			local ObjectResult3 = ObjectResults[SimplexEntry2]
 			
-			if not var8 then
-				var8 = self.objectFunction(var9)
-				t[var9] = var8
+			if not ObjectResult3 then
+				ObjectResult3 = self.objectFunction(SimplexEntry2)
+				ObjectResults[SimplexEntry2] = ObjectResult3
 			end
-			if i < var8 then
-				simplex[#simplex] = var10
+			if ObjectResult1 < ObjectResult3 then
+				Simplex[#Simplex] = NewSimplexEntry
+				continue
+			end
+		end
+		local SimplexEntry3 = Simplex[1]
+		local ObjectResult21 = ObjectResults[SimplexEntry3]
+		
+		if not ObjectResult21 then
+			ObjectResult21 = self.objectFunction(SimplexEntry3)
+			ObjectResults[SimplexEntry3] = ObjectResult21
+		end
+		if ObjectResult1 < ObjectResult21 then
+			local NewNewSimplexEntry = NewSimplexEntry + NewFloatVectorDelta
+			local ObjectResult4 = ObjectResults[NewNewSimplexEntry]
+			
+			if not ObjectResult4 then
+				ObjectResult4 = self.objectFunction(NewNewSimplexEntry)
+				ObjectResults[NewNewSimplexEntry] = ObjectResult4
+			end
+			if ObjectResult4 < ObjectResult1 then
+				Simplex[#Simplex] = NewNewSimplexEntry
 			else
-				local var10 = simplex[1]
-				var8 = t[var10]
-				
-				if not var8 then
-					var8 = self.objectFunction(var10)
-					t[var10] = var8
-				end
-				if i < var8 then
-					local var11 = var10 + var5
-					var8 = t[var11]
-					
-					if not var8 then
-						var8 = self.objectFunction(var11)
-						t[var11] = var8
-					end
-					if var8 < i then
-						simplex[#simplex] = var11
-					else
-						simplex[#simplex] = var10
-					end
-				else
-					local var12 = var3 + var5 * 0.5
-					local var13 = var3 + var5 * 1.5
-					var8 = nil
-					local var14 = t[var12]
-					
-					if not var14 then
-						var14 = self.objectFunction(var12)
-						t[var12] = var14
-					end
-					local var15 = t[var13]
-					
-					if not var15 then
-						var15 = self.objectFunction(var13)
-						t[var13] = var15
-					end
-					var8 = if var14 < var15 then var12 else var13
-					var15 = t[var8]
-					
-					if not var15 then
-						var15 = self.objectFunction(var8)
-						t[var8] = var15
-					end
-					var15 = simplex[#simplex - 1]
-					local var16 = t[var15]
-					
-					if not var16 then
-						var16 = self.objectFunction(var15)
-						t[var15] = var16
-					end
-					if var15 < var16 then
-						simplex[#simplex] = var8
-					else
-						for var15 = 1, #simplex do
-							simplex[var15] = (simplex[var15] - simplex[1]) * 0.8 + simplex[1]
-						end
-					end
+				Simplex[#Simplex] = NewSimplexEntry
+			end
+		else
+			local NewSimplexEntry1 = SimplexEntry + NewFloatVectorDelta * 0.5
+			local NewSimplexEntry2 = SimplexEntry + NewFloatVectorDelta * 1.5
+			local ObjectResult3 = ObjectResults[NewSimplexEntry1]
+			
+			if not ObjectResult3 then
+				ObjectResult3 = self.objectFunction(NewSimplexEntry1)
+				ObjectResults[NewSimplexEntry1] = ObjectResult3
+			end
+			local ObjectResult5 = ObjectResult3
+			local ObjectResult4 = ObjectResults[NewSimplexEntry2]
+			
+			if not ObjectResult4 then
+				ObjectResult4 = self.objectFunction(NewSimplexEntry2)
+				ObjectResults[NewSimplexEntry2] = ObjectResult4
+			end
+			local NewSimplexEntry3 = if ObjectResult5 < ObjectResult4 then NewSimplexEntry1 else NewSimplexEntry2
+			local ObjectResult6 = ObjectResults[NewSimplexEntry3]
+			
+			if not ObjectResult6 then
+				ObjectResult6 = self.objectFunction(NewSimplexEntry3)
+				ObjectResults[NewSimplexEntry3] = ObjectResult6
+			end
+			local ObjectResult51 = ObjectResult6
+			local SimplexEntry4 = Simplex[#Simplex - 1]
+			local ObjectResult7 = ObjectResults[SimplexEntry4]
+			
+			if not ObjectResult7 then
+				ObjectResult7 = self.objectFunction(SimplexEntry4)
+				ObjectResults[SimplexEntry4] = ObjectResult7
+			end
+			if ObjectResult51 < ObjectResult7 then
+				Simplex[#Simplex] = NewSimplexEntry3
+			else
+				for i1 = 1, #Simplex do
+					Simplex[i1] = (Simplex[i1] - Simplex[1]) * 0.8 + Simplex[1]
 				end
 			end
-			var2 += 1
 		end
+		Count += 1
 	end
 end
 
-function t:calculateMaxLengthBetweenVertices()
-	local var17 = 0
+function NelderMeadModule:calculateMaxLengthBetweenVertices(): number --[[ Line: 122 ]]
+	local Largest = 0
 	
-	for i_1 = 1, #self - 1 do
-		for i = i_1 + 1, #self do
-			var17 = math.max(var17, (self[i] - self[i_1]):magnitude())
+	for i = 1, #self - 1 do
+		for i1 = i + 1, #self do
+			Largest = math.max(Largest, ((self[i1] - self[i]):magnitude()))
 		end
 	end
-	return var17
+	return Largest
 end
 
-return t
+return NelderMeadModule

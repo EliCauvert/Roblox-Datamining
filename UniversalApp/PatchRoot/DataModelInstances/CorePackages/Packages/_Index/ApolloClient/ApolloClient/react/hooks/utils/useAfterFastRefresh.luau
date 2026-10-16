@@ -1,27 +1,26 @@
-﻿local t = {}
-local reactModule = require(script.Parent.Parent.Parent.Parent.Parent.React)
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
+﻿local ReactModule = require(script.Parent.Parent.Parent.Parent.Parent.React)
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
 
-function t.useAfterFastRefresh(p1)
-	-- upvalues: useRef (ref), useEffect (ref)
-	if _G.__DEV__ then
-		local var1 = useRef(false)
-		useEffect(function()
-			-- upvalues: var1 (ref)
-			return function()
-				-- upvalues: var1 (copy)
-				var1.current = true
-			end
-		end, {})
-		useEffect(function()
-			-- upvalues: var1 (ref), p1 (ref)
-			if var1.current == true then
-				var1.current = false
-				p1()
-			end
-		end, {})
+return {
+	useAfterFastRefresh = function(Callback) --[[ Line: 16 ]]
+		-- upvalues: UseRefFunction (copy), UseEffectFunction (copy)
+		if _G.__DEV__ then
+			local UseRefResult = UseRefFunction(false)
+			UseEffectFunction(function() --[[ Line: 19 ]]
+				-- upvalues: UseRefResult (copy)
+				return function() --[[ Line: 20 ]]
+					-- upvalues: UseRefResult (upval)
+					UseRefResult.current = true
+				end
+			end, {})
+			UseEffectFunction(function() --[[ Line: 24 ]]
+				-- upvalues: UseRefResult (copy), Callback (copy)
+				if UseRefResult.current == true then
+					UseRefResult.current = false
+					Callback()
+				end
+			end, {})
+		end
 	end
-end
-
-return t
+}

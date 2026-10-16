@@ -1,195 +1,229 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local cryoModule = require(parent_2.Cryo)
-local foundationModule = require(parent_2.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local _ = require(parent.ImageSet.ImagesTypes)
-local _ = require(parent.Style.StyleTypes)
-local label = require(parent_1.Core.ImageSet.ImageSetComponent).Label
-local skeleton = foundationModule.Skeleton
-local useStyleModule = require(parent_1.Core.Style.useStyle)
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local openTypeSupportModule = require(parent_1.Utility.OpenTypeSupport)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local ReactModule = require(Parent2.React)
+local CryoModule = require(Parent2.Cryo)
+local FoundationModule = require(Parent2.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local _ = require(Parent.ImageSet.ImagesTypes)
+local _ = require(Parent.Style.StyleTypes)
+local Label = require(Parent1.Core.ImageSet.ImageSetComponent).Label
+local Skeleton = FoundationModule.Skeleton
+local UseStyleModule = require(Parent1.Core.Style.useStyle)
+local UIBloxConfigModule = require(Parent1.UIBloxConfig)
+local OpenTypeSupportModule = require(Parent1.Utility.OpenTypeSupport)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function getStyleDefaults(p1)
-	-- upvalues: UIBloxConfigModule (ref)
+local function _(p1) --[[ Line: 84 | Named "getStyleDefaults" ]]
 	return {
-		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_50 else p1.Global.Space_25,
-		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_400 else p1.Semantic.Icon.Size.Small,
-		iconColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Icon.Default,
-		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Typography.CaptionMedium else p1.Semantic.Typography.CaptionHeader,
-		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Text.Default
+		iconLabelSpacing = p1.Size.Size_50,
+		iconSize = p1.Size.Size_400,
+		iconColorStyle = p1.Color.Content.Default,
+		labelTypography = p1.Typography.CaptionMedium,
+		labelColorStyle = p1.Color.Content.Default
 	}
 end
 
-local function getDisplayNameStyleDefaults(p1)
-	-- upvalues: UIBloxConfigModule (ref)
+local _ = function(p1) --[[ Line: 94 | Named "getDisplayNameStyleDefaults" ]]
 	return {
-		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_50 else p1.Global.Space_25,
-		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_400 else p1.Semantic.Icon.Size.Small,
-		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Typography.TitleLarge else p1.Semantic.Typography.Subheader,
-		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Emphasis else p1.Semantic.Color.Text.Emphasis
+		iconLabelSpacing = p1.Size.Size_50,
+		iconSize = p1.Size.Size_400,
+		labelTypography = p1.Typography.TitleLarge,
+		labelColorStyle = p1.Color.Content.Emphasis
 	}
 end
 
-local function getUserNameStyleDefaults(p1)
-	-- upvalues: UIBloxConfigModule (ref)
+local _ = function(p1) --[[ Line: 103 | Named "getUserNameStyleDefaults" ]]
 	return {
-		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_50 else p1.Global.Space_25,
-		iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_300 else p1.Global.Size_150,
-		iconColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Icon.Default,
-		labelTypography = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Typography.CaptionMedium else p1.Semantic.Typography.CaptionHeader,
-		labelColorStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Color.Content.Default else p1.Semantic.Color.Text.Default
+		iconLabelSpacing = p1.Size.Size_50,
+		iconSize = p1.Size.Size_300,
+		iconColorStyle = p1.Color.Content.Default,
+		labelTypography = p1.Typography.CaptionMedium,
+		labelColorStyle = p1.Color.Content.Default
 	}
 end
 
-local function NameItem(p1)
-	-- upvalues: cryoModule (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), label (ref), skeleton (ref), UIBloxConfigModule (ref)
-	local createElement_1
-	local layoutOrder = p1.layoutOrder
-	local isReversed = p1.isReversed
-	local itemProps = p1.itemProps
-	local itemStyleDefaults = p1.itemStyleDefaults
-	local icon = itemProps.icon
-	local labelText = itemProps.labelText
-	local useTextAsIcon = itemProps.useTextAsIcon
-	local onActivated = itemProps.onActivated
-	local var1 = if itemProps.isLoading ~= nil then false else itemProps.isLoading
-	local var2 = cryoModule.Dictionary.join(itemStyleDefaults, itemProps.styleProps or {})
-	local iconLabelSpacing = var2.iconLabelSpacing
-	local iconSize = var2.iconSize
-	local iconColorStyle = var2.iconColorStyle or {}
-	local labelTypography = var2.labelTypography
-	local labelColorStyle = var2.labelColorStyle
-	local var3 = if var1 or not icon then false else true
-	local var4 = if var1 or not onActivated then false else true
-	local var5 = if var1 then if icon then math.max(iconSize, labelTypography.FontSize) else labelTypography.FontSize else nil
-	local var6 = if var3 then if useTextAsIcon then reactModule.createElement("TextLabel", {
-		BackgroundTransparency = 1,
-		Selectable = false,
-		LayoutOrder = if isReversed then 2 else 1,
-		Size = UDim2.fromOffset(iconSize, iconSize),
-		Text = icon,
-		TextXAlignment = Enum.TextXAlignment.Center,
-		TextYAlignment = Enum.TextYAlignment.Center,
-		Font = if foundationFontFaceMigration then nil else labelTypography.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(labelTypography.Font) else nil,
-		TextSize = iconSize,
-		TextColor3 = iconColorStyle.Color3,
-		TextTransparency = if iconColorStyle.Transparency then iconColorStyle.Transparency else 0
-	}) else reactModule.createElement(label, {
-		BackgroundTransparency = 1,
-		Selectable = false,
-		LayoutOrder = if isReversed then 2 else 1,
-		Size = UDim2.fromOffset(iconSize, iconSize),
-		Image = icon,
-		ImageColor3 = iconColorStyle.Color3,
-		ImageTransparency = if iconColorStyle.Transparency then iconColorStyle.Transparency else 0
-	}) else nil
-	local createElement = reactModule.createElement
-	local var7 = if var4 then "TextButton" else "Frame"
-	local t = {
-		Text = if var4 then "" else nil,
-		AutoButtonColor = if var4 then false else nil,
+local function NameItem(p1) --[[ Line: 113 ]]
+	-- upvalues: CryoModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Label (copy), Skeleton (copy), UIBloxConfigModule (copy)
+	local IsReversed = p1.isReversed
+	local ItemProps = p1.itemProps
+	local Icon = ItemProps.icon
+	local LabelText = ItemProps.labelText
+	local UseTextAsIcon = ItemProps.useTextAsIcon
+	local OnActivated = ItemProps.onActivated
+	local IsLoading = ItemProps.isLoading ~= nil and ItemProps.isLoading
+	local JoinResult = CryoModule.Dictionary.join(p1.itemStyleDefaults, ItemProps.styleProps or {})
+	local IconSize: number = JoinResult.iconSize
+	local IconColorStyle = JoinResult.iconColorStyle or {}
+	local LabelTypography = JoinResult.labelTypography
+	local LabelColorStyle = JoinResult.labelColorStyle
+	local Icon1 = not IsLoading and Icon
+	local OnActivated1 = not IsLoading and OnActivated
+	local Largest = if IsLoading then if Icon then math.max(IconSize, LabelTypography.FontSize) else LabelTypography.FontSize else nil
+	
+	return ReactModule.createElement(if OnActivated1 then "TextButton" else "Frame", {
+		Text = if OnActivated1 then "" else nil,
+		AutoButtonColor = not OnActivated1 and nil,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
-		LayoutOrder = layoutOrder,
-		Selectable = if var4 then true else false,
-		[reactModule.Event.Activated] = if var4 then onActivated else nil
-	}
-	local t_1 = {
-		ListLayout = reactModule.createElement("UIListLayout", {
+		LayoutOrder = p1.layoutOrder,
+		Selectable = if OnActivated1 then true else false,
+		[ReactModule.Event.Activated] = if OnActivated1 then OnActivated else nil
+	}, {
+		ListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, iconLabelSpacing)
+			Padding = UDim.new(0, JoinResult.iconLabelSpacing)
 		}),
-		Shimmer = if var1 then reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, var5) }) else nil,
-		Icon = var6
-	}
-	
-	if var1 then
-		createElement_1 = nil
-	else
-		createElement_1 = reactModule.createElement
-		createElement_1 = createElement_1("TextLabel", {
+		Shimmer = if IsLoading then ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, Largest) }) else nil,
+		Icon = if Icon1 then if UseTextAsIcon then ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			Selectable = false,
-			LayoutOrder = if isReversed then 1 else 2,
+			LayoutOrder = if IsReversed then 2 else 1,
+			Size = UDim2.fromOffset(IconSize, IconSize),
+			Text = Icon,
+			TextXAlignment = Enum.TextXAlignment.Center,
+			TextYAlignment = Enum.TextYAlignment.Center,
+			Font = if FoundationFontFaceMigration then nil else LabelTypography.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(LabelTypography.Font) else nil,
+			TextSize = IconSize,
+			TextColor3 = IconColorStyle.Color3,
+			TextTransparency = if IconColorStyle.Transparency then IconColorStyle.Transparency else 0
+		}) else ReactModule.createElement(Label, {
+			BackgroundTransparency = 1,
+			Selectable = false,
+			LayoutOrder = if IsReversed then 2 else 1,
+			Size = UDim2.fromOffset(IconSize, IconSize),
+			Image = Icon,
+			ImageColor3 = IconColorStyle.Color3,
+			ImageTransparency = if IconColorStyle.Transparency then IconColorStyle.Transparency else 0
+		}) else nil,
+		Label = if IsLoading then nil else ReactModule.createElement("TextLabel", {
+			BackgroundTransparency = 1,
+			Selectable = false,
+			LayoutOrder = if IsReversed then 1 else 2,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Size = UDim2.fromScale(0, 0),
-			Text = labelText,
+			Text = LabelText,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center,
-			Font = if foundationFontFaceMigration then nil else labelTypography.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(labelTypography.Font) else nil,
-			TextSize = labelTypography.FontSize,
-			TextColor3 = labelColorStyle.Color3,
-			TextTransparency = labelColorStyle.Transparency,
+			Font = if FoundationFontFaceMigration then nil else LabelTypography.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(LabelTypography.Font) else nil,
+			TextSize = LabelTypography.FontSize,
+			TextColor3 = LabelColorStyle.Color3,
+			TextTransparency = LabelColorStyle.Transparency,
 			OpenTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport and p1.openTypeFeatures then p1.openTypeFeatures else nil
 		})
-	end
-	t_1.Label = createElement_1
-	
-	return createElement(var7, t, t_1)
+	})
 end
 
-return function(p1)
-	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), NameItem (ref), getDisplayNameStyleDefaults (ref), openTypeSupportModule (ref), getUserNameStyleDefaults (ref), getStyleDefaults (ref)
-	local var1 = useStyleModule()
-	local position = p1.position
-	local anchorPoint = p1.anchorPoint
-	local size = p1.size
-	local automaticSize = p1.automaticSize or Enum.AutomaticSize.Y
-	local layoutOrder = p1.layoutOrder
-	local namesSpacing = p1.namesSpacing or (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var1.Tokens.Size.Size_100 else var1.Tokens.Global.Space_50)
-	local displayNameItem = p1.displayNameItem
-	local userNameItem = p1.userNameItem
-	local vendorNameItem = p1.vendorNameItem
-	local aliasItem = p1.aliasItem
-	
-	return reactModule.createElement("Frame", {
+return function(p1) --[[ Line: 220 | Named "PlayerName" ]]
+	-- upvalues: UseStyleModule (copy), ReactModule (copy), NameItem (copy), UIBloxConfigModule (copy), OpenTypeSupportModule (copy)
+	local UseStyleModuleResult = UseStyleModule()
+	local DisplayNameItem = p1.displayNameItem
+	local UserNameItem = p1.userNameItem
+	local VendorNameItem = p1.vendorNameItem
+	local AliasItem = p1.aliasItem
+	local CreateElementFunction = ReactModule.createElement
+	local v1 = "Frame"
+	local config = {
 		BackgroundTransparency = 1,
 		Selectable = false,
-		Position = position,
-		AnchorPoint = anchorPoint,
-		Size = size,
-		AutomaticSize = automaticSize,
-		LayoutOrder = layoutOrder
-	}, {
-		ListLayout = reactModule.createElement("UIListLayout", {
+		Position = p1.position,
+		AnchorPoint = p1.anchorPoint,
+		Size = p1.size,
+		AutomaticSize = p1.automaticSize or Enum.AutomaticSize.Y,
+		LayoutOrder = p1.layoutOrder
+	}
+	local config1 = {
+		ListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, namesSpacing)
-		}),
-		DisplayName = if displayNameItem then reactModule.createElement(NameItem, {
+			Padding = UDim.new(0, p1.namesSpacing or UseStyleModuleResult.Tokens.Size.Size_100)
+		})
+	}
+	local Element = nil
+	
+	if DisplayNameItem then
+		local Tokens = UseStyleModuleResult.Tokens
+		Element = ReactModule.createElement(NameItem, {
 			layoutOrder = 1,
 			isReversed = true,
-			itemProps = displayNameItem,
-			itemStyleDefaults = getDisplayNameStyleDefaults(var1.Tokens)
-		}) else nil,
-		UserName = if userNameItem then reactModule.createElement(NameItem, {
+			itemProps = DisplayNameItem,
+			itemStyleDefaults = {
+				iconLabelSpacing = Tokens.Size.Size_50,
+				iconSize = Tokens.Size.Size_400,
+				labelTypography = Tokens.Typography.TitleLarge,
+				labelColorStyle = Tokens.Color.Content.Emphasis
+			}
+		})
+	else
+		Element = nil
+	end
+	config1.DisplayName = Element
+	local Element1 = nil
+	
+	if UserNameItem then
+		local Tokens = UseStyleModuleResult.Tokens
+		Element1 = ReactModule.createElement(NameItem, {
 			layoutOrder = 2,
-			itemProps = userNameItem,
-			openTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport then openTypeSupportModule:getUserNameStylisticAlternative() else nil,
-			itemStyleDefaults = getUserNameStyleDefaults(var1.Tokens)
-		}) else nil,
-		VendorName = if vendorNameItem then reactModule.createElement(NameItem, {
+			itemProps = UserNameItem,
+			openTypeFeatures = if UIBloxConfigModule.enableOpenTypeSupport then OpenTypeSupportModule:getUserNameStylisticAlternative() else nil,
+			itemStyleDefaults = {
+				iconLabelSpacing = Tokens.Size.Size_50,
+				iconSize = Tokens.Size.Size_300,
+				iconColorStyle = Tokens.Color.Content.Default,
+				labelTypography = Tokens.Typography.CaptionMedium,
+				labelColorStyle = Tokens.Color.Content.Default
+			}
+		})
+	else
+		Element1 = nil
+	end
+	config1.UserName = Element1
+	local Element2 = nil
+	
+	if VendorNameItem then
+		local Tokens = UseStyleModuleResult.Tokens
+		Element2 = ReactModule.createElement(NameItem, {
 			layoutOrder = 3,
-			itemProps = vendorNameItem,
-			itemStyleDefaults = getStyleDefaults(var1.Tokens)
-		}) else nil,
-		Alias = if aliasItem then reactModule.createElement(NameItem, {
+			itemProps = VendorNameItem,
+			itemStyleDefaults = {
+				iconLabelSpacing = Tokens.Size.Size_50,
+				iconSize = Tokens.Size.Size_400,
+				iconColorStyle = Tokens.Color.Content.Default,
+				labelTypography = Tokens.Typography.CaptionMedium,
+				labelColorStyle = Tokens.Color.Content.Default
+			}
+		})
+	else
+		Element2 = nil
+	end
+	config1.VendorName = Element2
+	local Element3 = nil
+	
+	if AliasItem then
+		local Tokens = UseStyleModuleResult.Tokens
+		Element3 = ReactModule.createElement(NameItem, {
 			layoutOrder = 4,
-			itemProps = aliasItem,
-			itemStyleDefaults = getStyleDefaults(var1.Tokens)
-		}) else nil
-	})
+			itemProps = AliasItem,
+			itemStyleDefaults = {
+				iconLabelSpacing = Tokens.Size.Size_50,
+				iconSize = Tokens.Size.Size_400,
+				iconColorStyle = Tokens.Color.Content.Default,
+				labelTypography = Tokens.Typography.CaptionMedium,
+				labelColorStyle = Tokens.Color.Content.Default
+			}
+		})
+	else
+		Element3 = nil
+	end
+	config1.Alias = Element3
+	
+	return CreateElementFunction(v1, config, config1)
 end

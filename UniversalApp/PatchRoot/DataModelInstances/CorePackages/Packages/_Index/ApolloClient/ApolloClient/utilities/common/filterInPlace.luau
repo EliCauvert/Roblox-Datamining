@@ -1,17 +1,17 @@
-﻿local array = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).Array
+﻿local Array = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).Array
 
 return {
-	filterInPlace = function(p1, p2, p3)
-		-- upvalues: array (ref)
-		local var1 = 1
-		array.forEach(p1, function(p4, p5)
-			-- upvalues: p2 (ref), p1 (ref), var1 (write)
-			if p2(p4, p5, p1) then
-				p1[var1] = p4
-				var1 += 1
+	filterInPlace = function(p1, Callback, p2) --[[ Line: 23 ]]
+		-- upvalues: Array (copy)
+		local Count = 1
+		Array.forEach(p1, function(p3, p4) --[[ Line: 25 ]]
+			-- upvalues: Callback (copy), p1 (copy), Count (ref)
+			if Callback(p3, p4, p1) then
+				p1[Count] = p3
+				Count += 1
 			end
-		end, p3)
-		p1[var1] = nil
+		end, p2)
+		p1[Count] = nil
 		
 		return p1
 	end

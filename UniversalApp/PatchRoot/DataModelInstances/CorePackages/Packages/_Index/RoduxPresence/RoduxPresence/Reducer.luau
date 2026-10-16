@@ -1,13 +1,13 @@
-﻿local byUserIdModule = require(script.Presence.byUserId)
-local byGameIdModule = require(script.Presence.byGameId)
-local byGameInstanceIdModule = require(script.Presence.byGameInstanceId)
-local byPlaceIdModule = require(script.Presence.byPlaceId)
+﻿local ByUserIdModule = require(script.Presence.byUserId)
+local ByGameIdModule = require(script.Presence.byGameId)
+local ByGameInstanceIdModule = require(script.Presence.byGameInstanceId)
+local ByPlaceIdModule = require(script.Presence.byPlaceId)
 
-return function(p1)
-	-- upvalues: byUserIdModule (ref), byGameInstanceIdModule (ref), byGameIdModule (ref), byPlaceIdModule (ref)
-	return function(p2, p3)
-		-- upvalues: byUserIdModule (copy), p1 (ref), byGameInstanceIdModule (copy), byGameIdModule (copy), byPlaceIdModule (copy)
-		p2 = p2 or {
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: ByUserIdModule (copy), ByGameInstanceIdModule (copy), ByGameIdModule (copy), ByPlaceIdModule (copy)
+	return function(p2, p3) --[[ Line: 7 ]]
+		-- upvalues: ByUserIdModule (upval), p1 (copy), ByGameInstanceIdModule (upval), ByGameIdModule (upval), ByPlaceIdModule (upval)
+		local P1 = p2 or {
 			byUserId = {},
 			byGameInstanceId = {},
 			byGameId = {},
@@ -15,10 +15,10 @@ return function(p1)
 		}
 		
 		return {
-			byUserId = byUserIdModule(p1)(p2.byUserId, p3),
-			byGameInstanceId = byGameInstanceIdModule(p1)(p2, p3),
-			byGameId = byGameIdModule(p1)(p2, p3),
-			byPlaceId = byPlaceIdModule(p1)(p2, p3)
+			byUserId = ByUserIdModule(p1)(P1.byUserId, p3),
+			byGameInstanceId = ByGameInstanceIdModule(p1)(P1, p3),
+			byGameId = ByGameIdModule(p1)(P1, p3),
+			byPlaceId = ByPlaceIdModule(p1)(P1, p3)
 		}
 	end
 end

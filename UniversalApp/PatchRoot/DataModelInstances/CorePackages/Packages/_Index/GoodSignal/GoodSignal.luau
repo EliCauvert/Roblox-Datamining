@@ -1,28 +1,34 @@
-﻿local var1 = nil
+﻿local Thread = nil
 
-local function acquireRunnerThreadAndCallEventHandler(p1, ...)
-	-- upvalues: var1 (write)
-	var1 = nil
-	p1(...)
-	var1 = var1
+local function acquireRunnerThreadAndCallEventHandler(Callback: (any) -> (), ...) --[[ Line: 35 ]]
+	-- upvalues: Thread (ref)
+	local Thread1 = Thread
+	Thread = nil
+	Callback(...)
+	Thread = Thread1
 end
 
-local function runEventHandlerInFreeThread()
-	-- upvalues: acquireRunnerThreadAndCallEventHandler (ref)
+local function runEventHandlerInFreeThread() --[[ Line: 46 ]]
+	-- upvalues: acquireRunnerThreadAndCallEventHandler (copy)
 	while true do
 		acquireRunnerThreadAndCallEventHandler(coroutine.yield())
 	end
 end
 
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-function t.new(p1, p2)
-	-- upvalues: t (ref)
-	return setmetatable({ _connected = true, _next = false, _signal = p1, _fn = p2 }, t)
+function Module.new(_signal, _fn) --[[ Line: 61 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
+		_connected = true,
+		_next = false,
+		_signal = _signal,
+		_fn = _fn
+	}, Module))
 end
 
-function t:Disconnect()
+function Module:Disconnect() --[[ Line: 70 ]]
 	self._connected = false
 	
 	if self._signal._handlerListHead == self then
@@ -30,96 +36,98 @@ function t:Disconnect()
 		
 		return
 	end
-	local handlerListHead = self._signal._handlerListHead
-	while handlerListHead and handlerListHead._next ~= self do
-		handlerListHead = handlerListHead._next
+	local HandlerListHead1 = self._signal._handlerListHead
+	while HandlerListHead1 and HandlerListHead1._next ~= self do
+		HandlerListHead1 = HandlerListHead1._next
 	end
-	if handlerListHead then
-		handlerListHead._next = self._next
+	if HandlerListHead1 then
+		HandlerListHead1._next = self._next
 	end
 end
 
-setmetatable(t, {
-	__index = function(_, p1)
-		error(("Attempt to get Connection::%s (not a valid member)"):format(tostring(p1)), 2)
+setmetatable(Module, {
+	__index = function(_, p1) --[[ Line: 92 ]]
+		error(("Attempt to get Connection::%s (not a valid member)"):format((tostring(p1))), 2)
 	end,
-	__newindex = function(_, p1)
-		error(("Attempt to set Connection::%s (not a valid member)"):format(tostring(p1)), 2)
+	__newindex = function(_, p1) --[[ Line: 95 ]]
+		error(("Attempt to set Connection::%s (not a valid member)"):format((tostring(p1))), 2)
 	end
 })
-local t_1 = {}
-t_1.__index = t_1
+local GoodSignalModule = {}
+GoodSignalModule.__index = GoodSignalModule
 
-function t_1.new()
-	-- upvalues: t_1 (ref)
-	return setmetatable({ _handlerListHead = false }, t_1)
+function GoodSignalModule.new() --[[ Line: 115 ]]
+	-- upvalues: GoodSignalModule (copy)
+	return (setmetatable({ _handlerListHead = false }, GoodSignalModule))
 end
 
-function t_1:Connect(p1)
-	-- upvalues: t (ref)
-	local var2 = t.new(self, p1)
+function GoodSignalModule:Connect(Fn) --[[ Line: 121 ]]
+	-- upvalues: Module (copy)
+	local NewModule = Module.new(self, Fn)
 	
 	if self._handlerListHead then
-		var2._next = self._handlerListHead
-		self._handlerListHead = var2
+		NewModule._next = self._handlerListHead
+		self._handlerListHead = NewModule
 		
-		return var2
+		return NewModule
+	else
+		self._handlerListHead = NewModule
+		
+		return NewModule
 	end
-	self._handlerListHead = var2
-	
-	return var2
 end
 
-function t_1:DisconnectAll()
+function GoodSignalModule:DisconnectAll() --[[ Line: 134 ]]
 	self._handlerListHead = false
 end
 
-function t_1:Fire(...)
-	-- upvalues: var1 (write), runEventHandlerInFreeThread (ref)
-	local handlerListHead = self._handlerListHead
-	while handlerListHead do
-		if handlerListHead._connected then
-			if not var1 then
-				var1 = coroutine.create(runEventHandlerInFreeThread)
-				coroutine.resume(var1)
+function GoodSignalModule:Fire(...) --[[ Line: 142 ]]
+	-- upvalues: Thread (ref), runEventHandlerInFreeThread (copy)
+	local HandlerListHead = self._handlerListHead
+	while HandlerListHead do
+		if HandlerListHead._connected then
+			if not Thread then
+				Thread = coroutine.create(runEventHandlerInFreeThread)
+				coroutine.resume(Thread)
 			end
-			task.spawn(var1, handlerListHead._fn, ...)
+			task.spawn(Thread, HandlerListHead._fn, ...)
 		end
-		handlerListHead = handlerListHead._next
+		HandlerListHead = HandlerListHead._next
 	end
 end
 
-function t_1:Wait()
-	local currentThread = coroutine.running()
-	local var2 = nil
-	var2 = self:Connect(function(...)
-		-- upvalues: var2 (write), currentThread (ref)
-		var2:Disconnect()
-		task.spawn(currentThread, ...)
+function GoodSignalModule:Wait() --[[ Line: 159 ]]
+	local CurrentThread = coroutine.running()
+	local Connection = nil
+	Connection = self:Connect(function(...) --[[ Line: 162 ]]
+		-- upvalues: Connection (ref), CurrentThread (copy)
+		Connection:Disconnect()
+		task.spawn(CurrentThread, ...)
 	end)
 	
 	return coroutine.yield()
 end
 
-function t_1:Once(p1)
-	local var2 = nil
-	
-	return self:Connect(function(...)
-		-- upvalues: var2 (write), p1 (ref)
-		if var2._connected then
-			var2:Disconnect()
+function GoodSignalModule:Once(Callback) --[[ Line: 171 ]]
+	local Connection = nil
+	Connection = self:Connect(function(...) --[[ Line: 173 ]]
+		-- upvalues: Connection (ref), Callback (copy)
+		if Connection._connected then
+			Connection:Disconnect()
 		end
-		p1(...)
+		Callback(...)
 	end)
+	
+	return Connection
 end
 
-setmetatable(t_1, {
-	__index = function(_, p1)
-		error(("Attempt to get Signal::%s (not a valid member)"):format(tostring(p1)), 2)
+setmetatable(GoodSignalModule, {
+	__index = function(_, p1) --[[ Line: 184 ]]
+		error(("Attempt to get Signal::%s (not a valid member)"):format((tostring(p1))), 2)
 	end,
-	__newindex = function(_, p1)
-		error(("Attempt to set Signal::%s (not a valid member)"):format(tostring(p1)), 2)
+	__newindex = function(_, p1) --[[ Line: 187 ]]
+		error(("Attempt to set Signal::%s (not a valid member)"):format((tostring(p1))), 2)
 	end
 })
 
-return t_1
+return GoodSignalModule

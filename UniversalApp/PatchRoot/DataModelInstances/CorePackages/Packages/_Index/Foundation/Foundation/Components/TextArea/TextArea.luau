@@ -1,63 +1,62 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local components = foundation.Components
-local inputFieldModule = require(components.InputField)
-local internalTextInputModule = require(components.InternalTextInput)
-local _ = require(foundation.Components.Types)
-local getInputTextSizeModule = require(foundation.Utility.getInputTextSize)
-local useTextInputVariantsModule = require(components.TextInput.useTextInputVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Enums.InputVariant)
-local _ = require(foundation.Enums.ControlState)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local Components = Foundation.Components
+local InputFieldModule = require(Components.InputField)
+local InternalTextInputModule = require(Components.InternalTextInput)
+local _ = require(Foundation.Components.Types)
+local GetInputTextSizeModule = require(Foundation.Utility.getInputTextSize)
+local UseTextInputVariantsModule = require(Components.TextInput.useTextInputVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Enums.InputVariant)
+local _ = require(Foundation.Enums.ControlState)
+local config = {
 	numLines = 3,
 	testId = "--foundation-text-area",
-	size = inputSizeModule.Medium
+	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), internalTextInputModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3 = useTextInputVariantsModule(var2, var1.size, var1.variant)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 | Named "TextArea" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), ReactModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), GetInputTextSizeModule (copy), InternalTextInputModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseTextInputVariantsModuleResult = UseTextInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
 	
-	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var1, {
-		width = if var1.width then var1.width else nil,
-		label = var1.label,
-		size = getInputTextSizeModule(var1.size),
-		hint = var1.hint,
-		hasError = var1.hasError,
-		isDisabled = var1.isDisabled,
-		isRequired = var1.isRequired,
-		input = function(p3)
-			-- upvalues: reactModule (copy), internalTextInputModule (copy), var1 (ref), var3 (ref), var2 (ref)
-			return reactModule.createElement(internalTextInputModule, {
+	return ReactModule.createElement(InputFieldModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		width = if WithDefaultsModuleResult.width then WithDefaultsModuleResult.width else nil,
+		label = WithDefaultsModuleResult.label,
+		size = GetInputTextSizeModule(WithDefaultsModuleResult.size),
+		hint = WithDefaultsModuleResult.hint,
+		hasError = WithDefaultsModuleResult.hasError,
+		isDisabled = WithDefaultsModuleResult.isDisabled,
+		isRequired = WithDefaultsModuleResult.isRequired,
+		input = function(Ref) --[[ Line: 54 ]]
+			-- upvalues: ReactModule (upval), InternalTextInputModule (upval), WithDefaultsModuleResult (copy), UseTextInputVariantsModuleResult (copy), UseTokensModuleResult (copy)
+			return ReactModule.createElement(InternalTextInputModule, {
 				LayoutOrder = 2,
-				inputRef = var1.inputRef,
-				size = var1.size,
-				variant = var1.variant,
-				numLines = var1.numLines,
-				focusBehavior = var1.focusBehavior,
-				onFocus = var1.onFocusGained,
-				onFocusLost = var1.onFocusLost,
-				onChanged = var1.onChanged,
-				text = var1.text,
-				hasError = var1.hasError,
-				isDisabled = var1.isDisabled,
-				hasClearButton = var1.hasClearButton,
-				placeholder = var1.placeholder,
+				inputRef = WithDefaultsModuleResult.inputRef,
+				size = WithDefaultsModuleResult.size,
+				variant = WithDefaultsModuleResult.variant,
+				numLines = WithDefaultsModuleResult.numLines,
+				focusBehavior = WithDefaultsModuleResult.focusBehavior,
+				onFocus = WithDefaultsModuleResult.onFocusGained,
+				onFocusLost = WithDefaultsModuleResult.onFocusLost,
+				onChanged = WithDefaultsModuleResult.onChanged,
+				text = WithDefaultsModuleResult.text,
+				hasError = WithDefaultsModuleResult.hasError,
+				isDisabled = WithDefaultsModuleResult.isDisabled,
+				hasClearButton = WithDefaultsModuleResult.hasClearButton,
+				placeholder = WithDefaultsModuleResult.placeholder,
 				horizontalPadding = {
-					left = var3.container.horizontalPadding,
-					right = var3.container.horizontalPadding - UDim.new(0, var2.Size.Size_150)
+					left = UseTextInputVariantsModuleResult.container.horizontalPadding,
+					right = UseTextInputVariantsModuleResult.container.horizontalPadding - UDim.new(0, UseTokensModuleResult.Size.Size_150)
 				},
-				ref = p3,
-				testId = `{var1.testId}--input`
+				ref = Ref,
+				testId = `{WithDefaultsModuleResult.testId}--input`
 			})
 		end,
-		textBoxRef = var1.textBoxRef,
-		ref = p2
+		textBoxRef = WithDefaultsModuleResult.textBoxRef,
+		ref = Ref
 	}))
 end))

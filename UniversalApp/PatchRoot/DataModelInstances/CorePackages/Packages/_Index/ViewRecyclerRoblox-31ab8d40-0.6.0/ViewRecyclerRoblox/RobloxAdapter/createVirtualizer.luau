@@ -1,13 +1,13 @@
-﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
-local viewRecyclerModule = require(viewRecyclerRoblox.Parent.ViewRecycler)
-local hostPlacementModule = require(viewRecyclerRoblox.RobloxAdapter.HostPlacement)
-local hostPresentationPhaseModule = require(viewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
-local scrollHostModule = require(viewRecyclerRoblox.RobloxAdapter.ScrollHost)
-local _ = require(viewRecyclerRoblox.RobloxAdapter.createRecyclingScope)
-local axis = viewRecyclerModule.Axis
-local _ = viewRecyclerModule.Layout
-local shallowTable = viewRecyclerModule.Adapter._Private.ShallowTable
-local frozen = table.freeze({
+﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+local ViewRecyclerModule = require(ViewRecyclerRoblox.Parent.ViewRecycler)
+local HostPlacementModule = require(ViewRecyclerRoblox.RobloxAdapter.HostPlacement)
+local HostPresentationPhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
+local ScrollHostModule = require(ViewRecyclerRoblox.RobloxAdapter.ScrollHost)
+local _ = require(ViewRecyclerRoblox.RobloxAdapter.createRecyclingScope)
+local Axis = ViewRecyclerModule.Axis
+local _ = ViewRecyclerModule.Layout
+local ShallowTable = ViewRecyclerModule.Adapter._Private.ShallowTable
+local Frozen = table.freeze({
 	"scrollingFrame", "viewportOverlay", "axis", "dataSource", "layout",
 	"overscan", "dataPrefetch", "contentAlignment", "isItemStickyHeader",
 	"pinnedStartItem", "pinnedEndItem", "preserveScrollPositionOnChange",
@@ -17,65 +17,47 @@ local frozen = table.freeze({
 	"onContentLengthChanged", "onVisibleRangeChanged", "onMountedRangeChanged",
 	"onDataPrefetchRequested"
 })
-local frozen_1 = table.freeze({
+local Frozen1 = table.freeze({
 	"axis", "onStartReached", "onEndReached", "onViewportChanged",
 	"onScrollOffsetChanged", "onContentLengthChanged"
 })
-local frozen_2 = table.freeze({
+local Frozen2 = table.freeze({
 	"overscan", "dataPrefetch", "contentAlignment", "endReachedThreshold",
 	"initialScrollAlignment", "autoScrollOnChange", "autoScrollThreshold",
 	"startReachedThreshold", "preserveScrollPositionOnChange", "isItemStickyHeader"
 })
 
-local function _(p1)
-	-- upvalues: frozen (ref)
+local function _(p1) --[[ Line: 169 | Named "pick" ]]
+	-- upvalues: Frozen (copy)
 	local t = {}
 	
-	for i, v in frozen do
-		t[v] = p1[v]
+	for _, value in Frozen do
+		t[value] = p1[value]
 	end
 	return t
 end
 
-local _ = function(p2, p3)
-	-- upvalues: shallowTable (ref)
-	return shallowTable.equal(p2 or {}, p3 or {})
+local _ = function(p2, p3) --[[ Line: 177 | Named "samePinnedItem" ]]
+	-- upvalues: ShallowTable (copy)
+	return ShallowTable.equal(p2 or {}, p3 or {})
 end
 
-local function samePolicy(p2, p3)
-	-- upvalues: shallowTable (ref), frozen_2 (ref)
-	local var1 = shallowTable.containsEqual(p2, p3, frozen_2)
+local function samePolicy(p2, p3) --[[ Line: 181 ]]
+	-- upvalues: ShallowTable (copy), Frozen2 (copy)
+	return ShallowTable.containsEqual(p2, p3, Frozen2) and (p2.onStartReached == nil == (p3.onStartReached == nil) and p2.onEndReached == nil == (p3.onEndReached == nil) and (ShallowTable.equal(p2.pinnedStartItem or {}, p3.pinnedStartItem or {}) and ShallowTable.equal(p2.pinnedEndItem or {}, p3.pinnedEndItem or {})))
+end
+
+local _ = function(p2) --[[ Line: 189 | Named "stackedSpacing" ]]
+	local StackedSpacingFunction = p2.layout.stackedSpacing
 	
-	if var1 then
-		var1 = false
-		
-		if p2.onStartReached == nil == (p3.onStartReached == nil) then
-			var1 = false
-			
-			if p2.onEndReached == nil == (p3.onEndReached == nil) then
-				var1 = shallowTable.equal(p2.pinnedStartItem or {}, p3.pinnedStartItem or {})
-				
-				if var1 then
-					local pinnedEndItem = p3.pinnedEndItem
-					var1 = shallowTable.equal(p2.pinnedEndItem or {}, pinnedEndItem or {})
-				end
-			end
-		end
-	end
-	return var1
+	return if StackedSpacingFunction == nil then nil else StackedSpacingFunction()
 end
 
-local _ = function(p2)
-	local stackedSpacing = p2.layout.stackedSpacing
-	
-	return if stackedSpacing == nil then nil else stackedSpacing()
-end
-
-local _ = function(p2)
+local _ = function(p2) --[[ Line: 196 | Named "assertPlaceable" ]]
 	assert(not p2.requiresItemMeasurement() or p2.stackedSpacing ~= nil, "createVirtualizer: a Layout that requires Item measurement must be a Stacked layout")
 end
 
-local function corePolicy(p2)
+local function corePolicy(p2) --[[ Line: 203 ]]
 	return {
 		overscan = p2.overscan,
 		dataPrefetch = p2.dataPrefetch,
@@ -96,455 +78,454 @@ local function corePolicy(p2)
 	}
 end
 
-return function(p2)
-	-- upvalues: axis (ref), frozen (ref), hostPlacementModule (ref), hostPresentationPhaseModule (ref), corePolicy (ref), viewRecyclerModule (ref), scrollHostModule (ref), samePolicy (ref), shallowTable (ref), frozen_1 (ref)
-	assert(if p2.axis ~= axis.X then p2.axis == axis.Y else true, "createVirtualizer: invalid axis")
-	local layout = p2.layout
-	assert(not layout.requiresItemMeasurement() or layout.stackedSpacing ~= nil, "createVirtualizer: a Layout that requires Item measurement must be a Stacked layout")
+return function(p2) --[[ Line: 224 | Named "createVirtualizer" ]]
+	-- upvalues: Axis (copy), Frozen (copy), HostPlacementModule (copy), HostPresentationPhaseModule (copy), corePolicy (copy), ViewRecyclerModule (copy), ScrollHostModule (copy), samePolicy (copy), ShallowTable (copy), Frozen1 (copy)
+	local Flag: boolean = p2.axis == Axis.X or p2.axis == Axis.Y
+	assert(Flag, "createVirtualizer: invalid axis")
+	local Layout = p2.layout
+	assert(not Layout.requiresItemMeasurement() or Layout.stackedSpacing ~= nil, "createVirtualizer: a Layout that requires Item measurement must be a Stacked layout")
 	local t = {}
 	
-	for i, v in frozen do
-		t[v] = p2[v]
+	for _, value in Frozen do
+		t[value] = p2[value]
 	end
-	local var1 = t
-	local var2 = false
-	local var3 = false
-	local var4 = false
-	local var5 = false
-	local var6 = false
-	local var7 = nil
-	local var8 = nil
-	local new = hostPlacementModule.new
-	local t_1 = {
-		container = var1.scrollingFrame,
-		viewportContainer = var1.viewportOverlay,
-		axis = var1.axis,
-		selfSizing = var1.layout.requiresItemMeasurement()
-	}
-	local stackedSpacing = var1.layout.stackedSpacing
-	t_1.stackedSpacing = if stackedSpacing == nil then nil else stackedSpacing()
-	
-	function t_1.onItemMeasurements(p3)
-		-- upvalues: var7 (write)
-		var7.submitMeasurements(p3)
-	end
-	
-	t_1.onItemViewPresentationChanged = p2.onItemViewPresentationChanged
-	
-	function t_1.getCanvasOriginOffset()
-		-- upvalues: var8 (write)
-		return if var8 == nil then 0 else var8.getCanvasOriginOffset()
-	end
-	
-	new = new(t_1)
-	local frozen_2 = table.freeze({
-		apply = new.apply,
-		setMeasurementDependencies = new.setMeasurementDependencies
+	local Tbl = t
+	Flag = false
+	local Flag1 = false
+	local Flag2 = false
+	local Flag3 = false
+	local Flag4 = false
+	local Virtualizer = nil
+	local NewResult = nil
+	local StackedSpacingFunction = Tbl.layout.stackedSpacing
+	local NewHostPlacement = HostPlacementModule.new({
+		container = Tbl.scrollingFrame,
+		viewportContainer = Tbl.viewportOverlay,
+		axis = Tbl.axis,
+		selfSizing = Tbl.layout.requiresItemMeasurement(),
+		stackedSpacing = if StackedSpacingFunction == nil then nil else StackedSpacingFunction(),
+		onItemMeasurements = function(p3) --[[ Line: 243 ]]
+			-- upvalues: Virtualizer (ref)
+			Virtualizer.submitMeasurements(p3)
+		end,
+		onItemViewPresentationChanged = p2.onItemViewPresentationChanged,
+		getCanvasOriginOffset = function() --[[ Line: 247 ]]
+			-- upvalues: NewResult (ref)
+			return if NewResult == nil then 0 else NewResult.getCanvasOriginOffset()
+		end
 	})
-	local presentItemView = p2.presentItemView or function(p3, p4, p5, p6)
-		-- upvalues: p2 (ref), hostPresentationPhaseModule (copy)
-		local transition = p2.transition
+	local Frozen2 = table.freeze({
+		apply = NewHostPlacement.apply,
+		setMeasurementDependencies = NewHostPlacement.setMeasurementDependencies
+	})
+	local PresentItemView = p2.presentItemView or function(p3, State, p4, p5) --[[ Line: 257 ]]
+		-- upvalues: p2 (copy), HostPresentationPhaseModule (upval)
+		local TransitionFunction: (any, any) -> () = p2.transition
 		
-		if p4 == nil then
-			p6.apply(p3, nil)
+		if State == nil then
+			p5.apply(p3, nil)
 			
-			if p5 and transition ~= nil then
-				transition(p3, nil)
+			if p4 and TransitionFunction ~= nil then
+				TransitionFunction(p3, nil)
 			end
 			return
 		else
-			local var9 = if p2.getInstance ~= nil then p3 else p2.getInstance(p3)
-			assert(typeof(var9) == "Instance" and var9:IsA("GuiObject"), "createVirtualizer: ItemView host must be a GuiObject")
+			local _Instance = if p2.getInstance == nil then p3 else p2.getInstance(p3)
+			assert(typeof(_Instance) == "Instance" and _Instance:IsA("GuiObject"), "createVirtualizer: ItemView host must be a GuiObject")
 			
-			if p5 then
-				p6.apply(p3, {
-					host = var9,
-					phase = hostPresentationPhaseModule.Hidden,
-					state = p4
+			if p4 then
+				p5.apply(p3, {
+					host = _Instance,
+					phase = HostPresentationPhaseModule.Hidden,
+					state = State
 				})
 				
-				if transition ~= nil then
-					transition(p3, p4.assignment)
+				if TransitionFunction ~= nil then
+					TransitionFunction(p3, State.assignment)
 				end
 			end
-			p6.apply(p3, {
-				host = var9,
-				phase = hostPresentationPhaseModule.Presented,
-				state = p4
+			p5.apply(p3, {
+				host = _Instance,
+				phase = HostPresentationPhaseModule.Presented,
+				state = State
 			})
 		end
 	end
-	local tbl = setmetatable({}, { __mode = "k" })
+	local self = setmetatable({}, { __mode = "k" })
 	
-	local function _(p3, p4)
-		-- upvalues: tbl (ref), presentItemView (ref), frozen_2 (ref)
-		local var9 = if p4 == nil then nil else p4.assignment
-		local var10 = tbl[p3] ~= var9
+	local function _(Key, p3) --[[ Line: 290 | Named "present" ]]
+		-- upvalues: self (copy), PresentItemView (copy), Frozen2 (copy)
+		local Assignment = if p3 == nil then nil else p3.assignment
+		local IsNotSelfEntryMatch = self[Key] ~= Assignment
 		
-		if var10 then
-			tbl[p3] = var9
+		if IsNotSelfEntryMatch then
+			self[Key] = Assignment
 		end
-		presentItemView(p3, p4, var10, frozen_2)
+		PresentItemView(Key, p3, IsNotSelfEntryMatch, Frozen2)
 	end
 	
-	local var9 = nil
+	local v1 = nil
 	
-	local function presentChanges()
-		-- upvalues: var9 (write), new (ref), tbl (ref), presentItemView (ref), frozen_2 (ref)
-		var9 = nil
-		new.setMountedWindow(var9, function()
-			-- upvalues: var9 (ref), tbl (copy), presentItemView (copy), frozen_2 (copy)
-			for i, v in var9.departed do
-				local var10 = tbl[v] ~= nil
+	local function presentChanges() --[[ Line: 301 ]]
+		-- upvalues: v1 (ref), NewHostPlacement (copy), self (copy), PresentItemView (copy), Frozen2 (copy)
+		local v2 = v1
+		v1 = nil
+		NewHostPlacement.setMountedWindow(v2, function() --[[ Line: 304 ]]
+			-- upvalues: v2 (copy), self (upval), PresentItemView (upval), Frozen2 (upval)
+			for _, value in v2.departed do
+				local HasSelfEntry = self[value] ~= nil
 				
-				if var10 then
-					tbl[v] = nil
+				if HasSelfEntry then
+					self[value] = nil
 				end
-				presentItemView(v, nil, var10, frozen_2)
+				PresentItemView(value, nil, HasSelfEntry, Frozen2)
 			end
-			for i, v_1 in var9.entered do
-				local itemView = v_1.itemView
-				local state = v_1.state
-				local var11 = if state == nil then nil else state.assignment
-				local var12 = tbl[itemView] ~= var11
+			for _, value1 in v2.entered do
+				local ItemView = value1.itemView
+				local State = value1.state
+				local Assignment = if State == nil then nil else State.assignment
+				local IsNotSelfEntryMatch = self[ItemView] ~= Assignment
 				
-				if var12 then
-					tbl[itemView] = var11
+				if IsNotSelfEntryMatch then
+					self[ItemView] = Assignment
 				end
-				presentItemView(itemView, state, var12, frozen_2)
+				PresentItemView(ItemView, State, IsNotSelfEntryMatch, Frozen2)
 			end
-			for i, v_2 in var9.updated do
-				local itemView = v_2.itemView
-				local state = v_2.state
-				local var13 = if state == nil then nil else state.assignment
-				local var14 = tbl[itemView] ~= var13
+			for _, value2 in v2.updated do
+				local ItemView = value2.itemView
+				local State = value2.state
+				local Assignment = if State == nil then nil else State.assignment
+				local IsNotSelfEntryMatch = self[ItemView] ~= Assignment
 				
-				if var14 then
-					tbl[itemView] = var13
+				if IsNotSelfEntryMatch then
+					self[ItemView] = Assignment
 				end
-				presentItemView(itemView, state, var14, frozen_2)
+				PresentItemView(ItemView, State, IsNotSelfEntryMatch, Frozen2)
 			end
 		end)
 	end
 	
-	local var15 = corePolicy(var1)
-	var7 = viewRecyclerModule.Adapter.createVirtualizer({
-		dataSource = var1.dataSource,
-		layout = var1.layout,
+	local function applyRecord(p3, p4) --[[ Line: 317 ]]
+		-- upvalues: v1 (ref), NewResult (ref), presentChanges (copy), Flag1 (ref), Flag2 (ref), Flag3 (ref), Tbl (ref), Flag4 (ref)
+		v1 = p4
+		NewResult.applyRecord(p4, presentChanges)
+		
+		if not Flag1 then return end
+		if p3.visibleRange ~= p4.visibleRange then
+			if Flag2 then
+				Flag3 = true
+			end
+			if Tbl.onVisibleRangeChanged ~= nil then
+				Tbl.onVisibleRangeChanged(p4.visibleRange)
+			end
+		end
+		if p3.mountedRange ~= p4.mountedRange then
+			if Flag2 then
+				Flag4 = true
+			end
+			if Tbl.onMountedRangeChanged ~= nil then
+				Tbl.onMountedRangeChanged(p4.mountedRange)
+			end
+		end
+		if Tbl.onDataPrefetchRequested ~= nil then
+			for _, dataPrefetchRequest in p4.dataPrefetchRequests do
+				Tbl.onDataPrefetchRequested(dataPrefetchRequest)
+			end
+		end
+	end
+	
+	local CorePolicyResult = corePolicy(Tbl)
+	Virtualizer = ViewRecyclerModule.Adapter.createVirtualizer({
+		dataSource = Tbl.dataSource,
+		layout = Tbl.layout,
 		recyclingScope = p2.recyclingScope,
 		getItemViewType = p2.getItemViewType,
-		overscan = var15.overscan,
-		dataPrefetch = var15.dataPrefetch,
-		contentAlignment = var15.contentAlignment,
-		endThreshold = var15.endThreshold,
-		initialScrollAlignment = var15.initialScrollAlignment,
-		autoScrollOnChange = var15.autoScrollOnChange,
-		autoScrollThreshold = var15.autoScrollThreshold,
-		startReachedThreshold = var15.startReachedThreshold,
-		startReachedEnabled = var15.startReachedEnabled,
-		endReachedEnabled = var15.endReachedEnabled,
-		isItemStickyHeader = var15.pinnedItems.isItemStickyHeader,
-		pinnedStartItem = var15.pinnedItems.pinnedStartItem,
-		pinnedEndItem = var15.pinnedItems.pinnedEndItem,
-		preserveScrollPositionOnChange = var15.preserveScrollPositionOnChange,
+		overscan = CorePolicyResult.overscan,
+		dataPrefetch = CorePolicyResult.dataPrefetch,
+		contentAlignment = CorePolicyResult.contentAlignment,
+		endThreshold = CorePolicyResult.endThreshold,
+		initialScrollAlignment = CorePolicyResult.initialScrollAlignment,
+		autoScrollOnChange = CorePolicyResult.autoScrollOnChange,
+		autoScrollThreshold = CorePolicyResult.autoScrollThreshold,
+		startReachedThreshold = CorePolicyResult.startReachedThreshold,
+		startReachedEnabled = CorePolicyResult.startReachedEnabled,
+		endReachedEnabled = CorePolicyResult.endReachedEnabled,
+		isItemStickyHeader = CorePolicyResult.pinnedItems.isItemStickyHeader,
+		pinnedStartItem = CorePolicyResult.pinnedItems.pinnedStartItem,
+		pinnedEndItem = CorePolicyResult.pinnedItems.pinnedEndItem,
+		preserveScrollPositionOnChange = CorePolicyResult.preserveScrollPositionOnChange,
 		diagnostics = p2.diagnostics,
-		onTransaction = function(p3, p4)
-			-- upvalues: var9 (write), var8 (write), presentChanges (ref), var3 (write), var4 (write), var5 (write), var1 (write), var6 (write)
-			var9 = p4
-			var8.applyRecord(p4, presentChanges)
-			
-			if not var3 then return end
-			if p3.visibleRange ~= p4.visibleRange then
-				if var4 then
-					var5 = true
-				end
-				if var1.onVisibleRangeChanged ~= nil then
-					var1.onVisibleRangeChanged(p4.visibleRange)
-				end
-			end
-			if p3.mountedRange ~= p4.mountedRange then
-				if var4 then
-					var6 = true
-				end
-				if var1.onMountedRangeChanged ~= nil then
-					var1.onMountedRangeChanged(p4.mountedRange)
-				end
-			end
-			if var1.onDataPrefetchRequested ~= nil then
-				for i, v in p4.dataPrefetchRequests do
-					var1.onDataPrefetchRequested(v)
-				end
-			end
-		end
+		onTransaction = applyRecord
 	})
-	var8 = scrollHostModule.new({
-		observeScrollOffset = var7.observeScrollOffset,
-		setViewportSize = var7.setViewportSize,
-		getCurrent = var7.getCurrent,
-		getInstance = function()
-			-- upvalues: var2 (write), var1 (write)
-			return if var2 then nil else var1.scrollingFrame
+	NewResult = ScrollHostModule.new({
+		observeScrollOffset = Virtualizer.observeScrollOffset,
+		setViewportSize = Virtualizer.setViewportSize,
+		getCurrent = Virtualizer.getCurrent,
+		getInstance = function() --[[ Line: 377 ]]
+			-- upvalues: Flag (ref), Tbl (ref)
+			return if Flag then nil else Tbl.scrollingFrame
 		end,
-		getConfiguration = function()
-			-- upvalues: var1 (write)
-			return var1
+		getConfiguration = function() --[[ Line: 380 ]]
+			-- upvalues: Tbl (ref)
+			return Tbl
 		end,
-		onCanvasOriginMoved = new.reposition
+		onCanvasOriginMoved = NewHostPlacement.reposition
 	})
 	
-	local function update(p5)
-		-- upvalues: var2 (write), var1 (write), frozen (copy), axis (copy), new (ref), var7 (write), samePolicy (copy), corePolicy (copy), shallowTable (copy), frozen_1 (copy), var8 (write)
-		if var2 then return end
+	local function update(p5) --[[ Line: 386 ]]
+		-- upvalues: Flag (ref), Tbl (ref), Frozen (upval), Axis (upval), NewHostPlacement (copy), Virtualizer (ref), samePolicy (upval), corePolicy (upval), ShallowTable (upval), Frozen1 (upval), NewResult (ref)
+		if Flag then return end
+		local Tbl1 = Tbl
 		local t = {}
 		
-		for i, v in frozen do
-			t[v] = p5[v]
+		for _, value in Frozen do
+			t[value] = p5[value]
 		end
-		assert(if t.axis ~= axis.X then t.axis == axis.Y else true, "createVirtualizer: invalid axis")
-		t = t.layout
-		assert(not t.requiresItemMeasurement() or t.stackedSpacing ~= nil, "createVirtualizer: a Layout that requires Item measurement must be a Stacked layout")
-		t = t.dataSource ~= var1.dataSource
-		local var16 = t.layout ~= var1.layout
-		local var17 = t.scrollingFrame ~= var1.scrollingFrame
-		local var18 = var17 or (if t.viewportOverlay == var1.viewportOverlay then if t.axis == var1.axis then var16 or t.isItemStickyHeader == nil ~= (var1.isItemStickyHeader == nil) else true else true)
-		var1 = t
+		assert(t.axis == Axis.X or t.axis == Axis.Y, "createVirtualizer: invalid axis")
+		local Layout = t.layout
+		assert(not Layout.requiresItemMeasurement() or Layout.stackedSpacing ~= nil, "createVirtualizer: a Layout that requires Item measurement must be a Stacked layout")
+		local IsNotDataSourceMatch = t.dataSource ~= Tbl1.dataSource
+		local IsNotLayoutMatch = t.layout ~= Tbl1.layout
+		local IsNotScrollingFrameMatch = t.scrollingFrame ~= Tbl1.scrollingFrame
+		local IsNotScrollingFrameMatch1: boolean = IsNotScrollingFrameMatch or (t.viewportOverlay ~= Tbl1.viewportOverlay or t.axis ~= Tbl1.axis or (IsNotLayoutMatch or t.isItemStickyHeader == nil ~= (Tbl1.isItemStickyHeader == nil)))
+		Tbl = t
 		
-		if t or var16 then
-			new.cancelPendingMeasurements()
+		if IsNotDataSourceMatch or IsNotLayoutMatch then
+			NewHostPlacement.cancelPendingMeasurements()
 			
-			if t and var16 then
-				var7.setDataSourceAndLayout(t.dataSource, t.layout)
-			elseif t then
-				var7.setDataSource(t.dataSource)
+			if IsNotDataSourceMatch and IsNotLayoutMatch then
+				Virtualizer.setDataSourceAndLayout(t.dataSource, t.layout)
+			elseif IsNotDataSourceMatch then
+				Virtualizer.setDataSource(t.dataSource)
 			else
-				var7.setLayout(t.layout)
+				Virtualizer.setLayout(t.layout)
 			end
 		end
-		if var18 then
-			local setConfiguration = new.setConfiguration
-			local t_1 = {
+		if IsNotScrollingFrameMatch1 then
+			local StackedSpacingFunction = t.layout.stackedSpacing
+			NewHostPlacement.setConfiguration({
 				container = t.scrollingFrame,
 				viewportContainer = t.viewportOverlay,
 				axis = t.axis,
-				selfSizing = t.layout.requiresItemMeasurement()
-			}
-			local stackedSpacing = t.layout.stackedSpacing
-			t_1.stackedSpacing = if stackedSpacing == nil then nil else stackedSpacing()
-			setConfiguration(t_1)
+				selfSizing = t.layout.requiresItemMeasurement(),
+				stackedSpacing = if StackedSpacingFunction == nil then nil else StackedSpacingFunction()
+			})
 		end
-		if not samePolicy(var1, t) then
-			var7.setPolicy(corePolicy(t))
+		if not samePolicy(Tbl1, t) then
+			Virtualizer.setPolicy((corePolicy(t)))
 		end
-		if not shallowTable.containsEqual(var1, t, frozen_1) then
-			var8.configurationChanged()
+		if not ShallowTable.containsEqual(Tbl1, t, Frozen1) then
+			NewResult.configurationChanged()
 		end
-		if var17 then
-			var8.scrollingFrameChanged()
+		if IsNotScrollingFrameMatch then
+			NewResult.scrollingFrameChanged()
 		end
 	end
 	
-	local _ = function(p6)
-		-- upvalues: var1 (write), update (ref)
-		local cloned = table.clone(var1)
-		p6(cloned)
-		update(cloned)
+	local _ = function(Callback: (any) -> ()) --[[ Line: 434 | Named "updateWith" ]]
+		-- upvalues: Tbl (ref), update (copy)
+		local Copy = table.clone(Tbl)
+		Callback(Copy)
+		update(Copy)
 	end
 	
-	local var19 = nil
+	local Callback: (() -> ())? = nil
 	
-	local function destroy()
-		-- upvalues: var2 (write), var19 (write), var7 (write), new (ref)
-		if var2 then return end
-		var2 = true
+	local function destroy() --[[ Line: 442 ]]
+		-- upvalues: Flag (ref), Callback (ref), Virtualizer (ref), NewHostPlacement (copy)
+		if Flag then return end
+		Flag = true
 		
-		if var19 ~= nil then
-			var19()
-			var19 = nil
+		if Callback ~= nil then
+			Callback()
+			Callback = nil
 		end
-		var7.destroy()
-		new.destroy()
+		Virtualizer.destroy()
+		NewHostPlacement.destroy()
 	end
 	
 	if p2.active == false then
-		var7.setActive(false)
+		Virtualizer.setActive(false)
 	end
-	var19 = var8.connect()
-	var3 = true
-	var4 = true
-	local ok, status = pcall(var7.activate)
-	var4 = false
+	Callback = NewResult.connect()
+	Flag1 = true
+	Flag2 = true
+	local Success, Result = pcall(Virtualizer.activate)
+	Flag2 = false
 	
-	if not ok then
-		var2 = true
-		
-		if var19 ~= nil then
-			var19()
-			var19 = nil
+	if not Success then
+		if not Flag then
+			Flag = true
+			
+			if Callback ~= nil then
+				Callback()
+				Callback = nil
+			end
+			Virtualizer.destroy()
+			NewHostPlacement.destroy()
 		end
-		var7.destroy()
-		new.destroy()
-		error(status, 0)
+		error(Result, 0)
 	end
-	local current = var7.getCurrent()
+	local Current = Virtualizer.getCurrent()
 	
-	if var1.onVisibleRangeChanged ~= nil then
-		var1.onVisibleRangeChanged(current.visibleRange)
+	if not Flag3 and Tbl.onVisibleRangeChanged ~= nil then
+		Tbl.onVisibleRangeChanged(Current.visibleRange)
 	end
-	if var1.onMountedRangeChanged ~= nil then
-		var1.onMountedRangeChanged(current.mountedRange)
+	if not Flag4 and Tbl.onMountedRangeChanged ~= nil then
+		Tbl.onMountedRangeChanged(Current.mountedRange)
 	end
 	return {
 		update = update,
-		setActive = function(value)
-			-- upvalues: var2 (write), var7 (write)
-			if not var2 then
-				var7.setActive(value)
+		setActive = function(p6) --[[ Line: 477 ]]
+			-- upvalues: Flag (ref), Virtualizer (ref)
+			if not Flag then
+				Virtualizer.setActive(p6)
 			end
 		end,
-		setScrollOffset = function(value)
-			-- upvalues: var7 (write)
-			var7.setScrollOffset(value)
+		setScrollOffset = function(p6) --[[ Line: 482 ]]
+			-- upvalues: Virtualizer (ref)
+			Virtualizer.setScrollOffset(p6)
 		end,
-		scrollToOffset = function(value)
-			-- upvalues: var7 (write)
-			return var7.scrollToOffset(value).scrollState.scrollOffset
+		scrollToOffset = function(p6) --[[ Line: 485 ]]
+			-- upvalues: Virtualizer (ref)
+			return Virtualizer.scrollToOffset(p6).scrollState.scrollOffset
 		end,
-		scrollToStart = function()
-			-- upvalues: var7 (write)
-			var7.scrollToStart()
+		scrollToStart = function() --[[ Line: 488 ]]
+			-- upvalues: Virtualizer (ref)
+			Virtualizer.scrollToStart()
 		end,
-		scrollToEnd = function()
-			-- upvalues: var7 (write)
-			var7.scrollToEnd()
+		scrollToEnd = function() --[[ Line: 491 ]]
+			-- upvalues: Virtualizer (ref)
+			Virtualizer.scrollToEnd()
 		end,
-		scrollBy = function(p6)
-			-- upvalues: var7 (write)
-			return var7.scrollBy(p6).scrollState.scrollOffset
+		scrollBy = function(p6) --[[ Line: 494 ]]
+			-- upvalues: Virtualizer (ref)
+			return Virtualizer.scrollBy(p6).scrollState.scrollOffset
 		end,
-		scrollToIndex = function(p6, p7)
-			-- upvalues: var8 (write), var7 (write)
-			if var8.isReady() then
-				var7.scrollToIndex(p6, p7 and p7.alignment)
+		scrollToIndex = function(p6, Alignment) --[[ Line: 497 ]]
+			-- upvalues: NewResult (ref), Virtualizer (ref)
+			if NewResult.isReady() then
+				Virtualizer.scrollToIndex(p6, Alignment and Alignment.alignment)
 			end
 		end,
-		setDataSource = function(value)
-			-- upvalues: var1 (write), update (ref)
-			local _ = function(p6)
-				-- upvalues: value (ref)
-				p6.dataSource = value
-			end
-			
-			local cloned = table.clone(var1)
-			cloned.dataSource = value
-			update(cloned)
-		end,
-		setLayout = function(value)
-			-- upvalues: var1 (write), update (ref)
-			local _ = function(p6)
-				-- upvalues: value (ref)
-				p6.layout = value
+		setDataSource = function(DataSource) --[[ Line: 502 ]]
+			-- upvalues: Tbl (ref), update (copy)
+			local function _(p6) --[[ Line: 503 ]]
+				-- upvalues: DataSource (copy)
+				p6.dataSource = DataSource
 			end
 			
-			local cloned = table.clone(var1)
-			cloned.layout = value
-			update(cloned)
+			local Copy = table.clone(Tbl)
+			Copy.dataSource = DataSource
+			update(Copy)
 		end,
-		setDataSourceAndLayout = function(value, p6)
-			-- upvalues: var1 (write), update (ref)
-			local _ = function(p7)
-				-- upvalues: value (ref), p6 (ref)
-				p7.dataSource = value
-				p7.layout = p6
+		setLayout = function(Layout) --[[ Line: 507 ]]
+			-- upvalues: Tbl (ref), update (copy)
+			local function _(p6) --[[ Line: 508 ]]
+				-- upvalues: Layout (copy)
+				p6.layout = Layout
 			end
 			
-			local cloned = table.clone(var1)
-			cloned.dataSource = value
-			cloned.layout = p6
-			update(cloned)
+			local Copy = table.clone(Tbl)
+			Copy.layout = Layout
+			update(Copy)
 		end,
-		setOverscan = function(value)
-			-- upvalues: var1 (write), update (ref)
-			local _ = function(p6)
-				-- upvalues: value (ref)
-				p6.overscan = value
+		setDataSourceAndLayout = function(DataSource, Layout) --[[ Line: 512 ]]
+			-- upvalues: Tbl (ref), update (copy)
+			local function _(p6) --[[ Line: 513 ]]
+				-- upvalues: DataSource (copy), Layout (copy)
+				p6.dataSource = DataSource
+				p6.layout = Layout
 			end
 			
-			local cloned = table.clone(var1)
-			cloned.overscan = value
-			update(cloned)
+			local Copy = table.clone(Tbl)
+			Copy.dataSource = DataSource
+			Copy.layout = Layout
+			update(Copy)
 		end,
-		setDataPrefetch = function(value)
-			-- upvalues: var1 (write), update (ref)
-			local _ = function(p6)
-				-- upvalues: value (ref)
-				p6.dataPrefetch = value
+		setOverscan = function(Overscan) --[[ Line: 518 ]]
+			-- upvalues: Tbl (ref), update (copy)
+			local function _(p6) --[[ Line: 519 ]]
+				-- upvalues: Overscan (copy)
+				p6.overscan = Overscan
 			end
 			
-			local cloned = table.clone(var1)
-			cloned.dataPrefetch = value
-			update(cloned)
+			local Copy = table.clone(Tbl)
+			Copy.overscan = Overscan
+			update(Copy)
 		end,
-		setContentAlignment = function(value)
-			-- upvalues: var1 (write), update (ref)
-			local _ = function(p6)
-				-- upvalues: value (ref)
-				p6.contentAlignment = value
+		setDataPrefetch = function(DataPrefetch) --[[ Line: 523 ]]
+			-- upvalues: Tbl (ref), update (copy)
+			local function _(p6) --[[ Line: 524 ]]
+				-- upvalues: DataPrefetch (copy)
+				p6.dataPrefetch = DataPrefetch
 			end
 			
-			local cloned = table.clone(var1)
-			cloned.contentAlignment = value
-			update(cloned)
+			local Copy = table.clone(Tbl)
+			Copy.dataPrefetch = DataPrefetch
+			update(Copy)
 		end,
-		setPinnedItems = function(value)
-			-- upvalues: var1 (write), update (ref)
-			local _ = function(p6)
-				-- upvalues: value (ref)
-				p6.isItemStickyHeader = value.isItemStickyHeader
-				p6.pinnedStartItem = value.pinnedStartItem
-				p6.pinnedEndItem = value.pinnedEndItem
+		setContentAlignment = function(ContentAlignment) --[[ Line: 528 ]]
+			-- upvalues: Tbl (ref), update (copy)
+			local function _(p6) --[[ Line: 529 ]]
+				-- upvalues: ContentAlignment (copy)
+				p6.contentAlignment = ContentAlignment
 			end
 			
-			local cloned = table.clone(var1)
-			cloned.isItemStickyHeader = value.isItemStickyHeader
-			cloned.pinnedStartItem = value.pinnedStartItem
-			cloned.pinnedEndItem = value.pinnedEndItem
-			update(cloned)
+			local Copy = table.clone(Tbl)
+			Copy.contentAlignment = ContentAlignment
+			update(Copy)
 		end,
-		setPreserveScrollPositionOnChange = function(value)
-			-- upvalues: var1 (write), update (ref)
-			local _ = function(p6)
-				-- upvalues: value (ref)
-				p6.preserveScrollPositionOnChange = value
+		setPinnedItems = function(p6) --[[ Line: 533 ]]
+			-- upvalues: Tbl (ref), update (copy)
+			local function _(p7) --[[ Line: 534 ]]
+				-- upvalues: p6 (copy)
+				p7.isItemStickyHeader = p6.isItemStickyHeader
+				p7.pinnedStartItem = p6.pinnedStartItem
+				p7.pinnedEndItem = p6.pinnedEndItem
 			end
 			
-			local cloned = table.clone(var1)
-			cloned.preserveScrollPositionOnChange = value
-			update(cloned)
+			local Copy = table.clone(Tbl)
+			Copy.isItemStickyHeader = p6.isItemStickyHeader
+			Copy.pinnedStartItem = p6.pinnedStartItem
+			Copy.pinnedEndItem = p6.pinnedEndItem
+			update(Copy)
 		end,
-		refreshItemViews = function()
-			-- upvalues: var7 (write)
-			var7.refresh()
+		setPreserveScrollPositionOnChange = function(PreserveScrollPositionOnChange) --[[ Line: 540 ]]
+			-- upvalues: Tbl (ref), update (copy)
+			local function _(p6) --[[ Line: 541 ]]
+				-- upvalues: PreserveScrollPositionOnChange (copy)
+				p6.preserveScrollPositionOnChange = PreserveScrollPositionOnChange
+			end
+			
+			local Copy = table.clone(Tbl)
+			Copy.preserveScrollPositionOnChange = PreserveScrollPositionOnChange
+			update(Copy)
 		end,
-		isReady = var8.isReady,
-		getVisibleRange = function()
-			-- upvalues: var7 (write)
-			return var7.getCurrent().visibleRange
+		refreshItemViews = function() --[[ Line: 545 ]]
+			-- upvalues: Virtualizer (ref)
+			Virtualizer.refresh()
 		end,
-		getMountedRange = function()
-			-- upvalues: var7 (write)
-			return var7.getCurrent().mountedRange
+		isReady = NewResult.isReady,
+		getVisibleRange = function() --[[ Line: 549 ]]
+			-- upvalues: Virtualizer (ref)
+			return Virtualizer.getCurrent().visibleRange
 		end,
-		getScrollState = function()
-			-- upvalues: var7 (write)
-			return var7.getCurrent().scrollState
+		getMountedRange = function() --[[ Line: 552 ]]
+			-- upvalues: Virtualizer (ref)
+			return Virtualizer.getCurrent().mountedRange
 		end,
-		captureScrollAnchorSnapshot = function()
-			-- upvalues: var7 (write)
-			return var7.captureScrollAnchorSnapshot()
+		getScrollState = function() --[[ Line: 555 ]]
+			-- upvalues: Virtualizer (ref)
+			return Virtualizer.getCurrent().scrollState
 		end,
-		restoreScrollAnchorSnapshot = function(p6)
-			-- upvalues: var7 (write)
-			return var7.restoreScrollAnchorSnapshot(p6).scrollState.scrollOffset
+		captureScrollAnchorSnapshot = function() --[[ Line: 558 ]]
+			-- upvalues: Virtualizer (ref)
+			return Virtualizer.captureScrollAnchorSnapshot()
+		end,
+		restoreScrollAnchorSnapshot = function(p6) --[[ Line: 561 ]]
+			-- upvalues: Virtualizer (ref)
+			return Virtualizer.restoreScrollAnchorSnapshot(p6).scrollState.scrollOffset
 		end,
 		destroy = destroy
 	}

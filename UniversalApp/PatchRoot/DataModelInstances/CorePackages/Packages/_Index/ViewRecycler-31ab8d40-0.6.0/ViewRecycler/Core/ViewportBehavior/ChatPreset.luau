@@ -1,26 +1,26 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local autoScrollPolicyModule = require(viewRecycler.Core.Enums.AutoScrollPolicy)
-local reachedThresholdModule = require(viewRecycler.Core.ViewportBehavior.ReachedThreshold)
-local scrollAlignmentModule = require(viewRecycler.Core.Enums.ScrollAlignment)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local AutoScrollPolicyModule = require(ViewRecycler.Core.Enums.AutoScrollPolicy)
+local ReachedThresholdModule = require(ViewRecycler.Core.ViewportBehavior.ReachedThreshold)
+local ScrollAlignmentModule = require(ViewRecycler.Core.Enums.ScrollAlignment)
 
 return table.freeze({
-	create = function(p1)
-		-- upvalues: reachedThresholdModule (ref), scrollAlignmentModule (ref), autoScrollPolicyModule (ref)
-		local var1 = p1 ~= nil and ((if p1 ~= nil then p1.startReachedThreshold else nil) or 0)
-		local var2 = p1 ~= nil and ((if p1 ~= nil then p1.endReachedThreshold else nil) or 1)
-		reachedThresholdModule.validate(var1, "ChatPreset: startReachedThreshold")
-		local var3 = p1 ~= nil and ((if p1 ~= nil then p1.autoScrollThreshold else nil) or 1)
-		reachedThresholdModule.validate(var2, "ChatPreset: endReachedThreshold")
-		reachedThresholdModule.validate(var3, "ChatPreset: autoScrollThreshold")
+	create = function(p1) --[[ Line: 25 ]]
+		-- upvalues: ReachedThresholdModule (copy), ScrollAlignmentModule (copy), AutoScrollPolicyModule (copy)
+		local StartReachedThreshold = if p1 == nil then 0 else p1.startReachedThreshold or 0
+		local EndReachedThreshold = if p1 == nil then 1 else p1.endReachedThreshold or 1
+		ReachedThresholdModule.validate(StartReachedThreshold, "ChatPreset: startReachedThreshold")
+		local AutoScrollThreshold = if p1 == nil then 1 else p1.autoScrollThreshold or 1
+		ReachedThresholdModule.validate(EndReachedThreshold, "ChatPreset: endReachedThreshold")
+		ReachedThresholdModule.validate(AutoScrollThreshold, "ChatPreset: autoScrollThreshold")
 		
 		return table.freeze({
 			preserveScrollPositionOnChange = true,
-			initialScrollAlignment = scrollAlignmentModule.End,
-			contentAlignment = scrollAlignmentModule.End,
-			autoScrollOnChange = autoScrollPolicyModule.WhenAtEnd,
-			autoScrollThreshold = var3,
-			startReachedThreshold = var1,
-			endReachedThreshold = var2
+			initialScrollAlignment = ScrollAlignmentModule.End,
+			contentAlignment = ScrollAlignmentModule.End,
+			autoScrollOnChange = AutoScrollPolicyModule.WhenAtEnd,
+			autoScrollThreshold = AutoScrollThreshold,
+			startReachedThreshold = StartReachedThreshold,
+			endReachedThreshold = EndReachedThreshold
 		})
 	end
 })

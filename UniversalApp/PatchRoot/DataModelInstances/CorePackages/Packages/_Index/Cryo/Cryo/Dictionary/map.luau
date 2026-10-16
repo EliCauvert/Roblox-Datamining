@@ -1,12 +1,12 @@
-﻿return function(p1, p2)
+﻿return function(List, Callback) --[[ Line: 8 | Named "map" ]]
 	local t = {}
 	
-	for i, v in p1 do
-		local var1, var2 = p2(v, i)
-		local var3 = if var2 == nil then i else var2
+	for i, value in List do
+		local CallbackResult, CallbackResult2 = Callback(value, i)
+		local CallbackResult1 = if CallbackResult2 == nil then i else CallbackResult2
 		
-		if var1 ~= nil then
-			t[var3] = var1
+		if CallbackResult ~= nil then
+			t[CallbackResult1] = CallbackResult
 		end
 	end
 	return t

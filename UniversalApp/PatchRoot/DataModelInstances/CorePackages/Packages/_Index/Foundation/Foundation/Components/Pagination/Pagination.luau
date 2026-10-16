@@ -1,18 +1,18 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local paginationVariantModule = require(foundation.Enums.PaginationVariant)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local directionalPaginationModule = require(script.Parent.Variants.DirectionalPagination)
-local multiPagePaginationModule = require(script.Parent.Variants.MultiPagePagination)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local PaginationVariantModule = require(Foundation.Enums.PaginationVariant)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local DirectionalPaginationModule = require(script.Parent.Variants.DirectionalPagination)
+local MultiPagePaginationModule = require(script.Parent.Variants.MultiPagePagination)
+local config = {
 	testId = "--foundation-pagination",
-	variant = paginationVariantModule.MultiPage
+	variant = PaginationVariantModule.MultiPage
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), paginationVariantModule (ref), reactModule (ref), multiPagePaginationModule (ref), directionalPaginationModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	var1.ref = p2
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 22 | Named "Pagination" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), PaginationVariantModule (copy), ReactModule (copy), MultiPagePaginationModule (copy), DirectionalPaginationModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	WithDefaultsModuleResult.ref = Ref
 	
-	return if var1.variant == paginationVariantModule.MultiPage then reactModule.createElement(multiPagePaginationModule, var1) else reactModule.createElement(directionalPaginationModule, var1)
+	return if WithDefaultsModuleResult.variant == PaginationVariantModule.MultiPage then ReactModule.createElement(MultiPagePaginationModule, WithDefaultsModuleResult) else ReactModule.createElement(DirectionalPaginationModule, WithDefaultsModuleResult)
 end))

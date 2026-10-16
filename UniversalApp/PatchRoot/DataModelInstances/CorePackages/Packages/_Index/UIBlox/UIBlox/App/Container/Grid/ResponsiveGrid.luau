@@ -1,46 +1,47 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local reactUtilsModule = require(parent_1.ReactUtils)
-local useProperties = reactUtilsModule.useProperties
-local usePropertiesDeferred = reactUtilsModule.usePropertiesDeferred
-local UIBloxConfigModule = require(parent.UIBloxConfig)
-local responsiveRowModule = require(parent.Core.Layout.Responsive.ResponsiveRow)
-local useResponsiveLayoutModule = require(parent.Core.Layout.Responsive.useResponsiveLayout)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local ReactUtilsModule = require(Parent1.ReactUtils)
+local UseProperties = ReactUtilsModule.useProperties
+local UsePropertiesDeferred = ReactUtilsModule.usePropertiesDeferred
+local ResponsiveRowModule = require(Parent.Core.Layout.Responsive.ResponsiveRow)
+local UseResponsiveLayoutModule = require(Parent.Core.Layout.Responsive.useResponsiveLayout)
 
-local function useCellAbsoluteHeight(value, p1)
-	-- upvalues: useResponsiveLayoutModule (ref), reactModule (ref)
-	local columns = useResponsiveLayoutModule("columns", p1) or 1
-	local gutter = useResponsiveLayoutModule("gutter", p1) or 0
-	local verticalGutter = useResponsiveLayoutModule("verticalGutter", p1) or gutter
-	local margin = useResponsiveLayoutModule("margin", p1) or 0
-	local value_1 = value or useResponsiveLayoutModule("relativeHeight", p1)
+local function useCellAbsoluteHeight(RelativeHeight, Kind) --[[ Line: 60 ]]
+	-- upvalues: UseResponsiveLayoutModule (copy), ReactModule (copy)
+	local Columns = UseResponsiveLayoutModule("columns", Kind) or 1
+	local Gutter = UseResponsiveLayoutModule("gutter", Kind) or 0
+	local VerticalGutter = UseResponsiveLayoutModule("verticalGutter", Kind) or Gutter
+	local Margin = UseResponsiveLayoutModule("margin", Kind) or 0
+	local RelativeHeight1 = UseResponsiveLayoutModule("relativeHeight", Kind)
+	local RelativeHeight2 = RelativeHeight or RelativeHeight1
 	
-	return reactModule.useCallback(function(p2)
-		-- upvalues: value_1 (ref), margin (ref), gutter (ref), columns (ref), verticalGutter (ref)
-		return if value_1 then math.max(((p2 - 2 * margin + gutter) / columns - gutter) * value_1.Scale + value_1.Offset, 0) + verticalGutter else nil
+	return ReactModule.useCallback(function(p1) --[[ Line: 69 ]]
+		-- upvalues: RelativeHeight2 (copy), Margin (copy), Gutter (copy), Columns (copy), VerticalGutter (copy)
+		return if RelativeHeight2 then math.max(((p1 - 2 * Margin + Gutter) / Columns - Gutter) * RelativeHeight2.Scale + RelativeHeight2.Offset, 0) + VerticalGutter else nil
 	end, {
-		columns,
-		gutter,
-		verticalGutter,
-		margin,
-		value_1
+		Columns,
+		Gutter,
+		VerticalGutter,
+		Margin,
+		RelativeHeight2
 	})
 end
 
-local var1 = if UIBloxConfigModule.responsiveGridDisplayLinesNonNil then NumberRange.new(0, 0) else nil
+local _NumberRange = NumberRange.new(0, 0)
+local _NumberRange1 = if require(Parent.UIBloxConfig).responsiveGridDisplayLinesNonNil then _NumberRange else nil
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), var1 (ref), useCellAbsoluteHeight (ref), usePropertiesDeferred (ref), useProperties (ref), responsiveRowModule (ref)
-	local var2, var3 = reactModule.useState(var1)
-	local var4 = useCellAbsoluteHeight(p1.relativeHeight, p1.kind)
+return ReactModule.forwardRef(function(p1, p2) --[[ Line: 83 | Named "ResponsiveGrid" ]]
+	-- upvalues: ReactModule (copy), _NumberRange1 (copy), useCellAbsoluteHeight (copy), UsePropertiesDeferred (copy), UseProperties (copy), ResponsiveRowModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(_NumberRange1)
+	local UseCellAbsoluteHeightResult = useCellAbsoluteHeight(p1.relativeHeight, p1.kind)
 	
-	return reactModule.createElement(responsiveRowModule, {
+	return ReactModule.createElement(ResponsiveRowModule, {
 		scrollable = false,
 		multiLine = true,
 		kind = p1.kind,
 		layoutOrder = p1.layoutOrder,
-		displayLines = if p1.absoluteWindowTop and p1.absoluteWindowHeight then var2 else nil,
+		displayLines = if p1.absoluteWindowTop and p1.absoluteWindowHeight then UseStateResult else nil,
 		relativeHeight = p1.relativeHeight,
 		data = p1.data,
 		getItem = p1.getItem,
@@ -50,23 +51,23 @@ return reactModule.forwardRef(function(p1, p2)
 		getCellColspan = p1.getCellColspan,
 		getCellRowspan = p1.getCellRowspan,
 		getCellOrder = p1.getCellOrder,
-		ref = (if p1.enableDeferredRefPropEvents then usePropertiesDeferred else useProperties)(p2, reactModule.useCallback(function(p3, p4)
-			-- upvalues: p1 (ref), var4 (ref), var3 (ref), var1 (copy)
+		ref = (if p1.enableDeferredRefPropEvents then UsePropertiesDeferred else UseProperties)(p2, ReactModule.useCallback(function(p3, p4) --[[ Line: 87 ]]
+			-- upvalues: p1 (copy), UseCellAbsoluteHeightResult (copy), UseStateResult2 (copy), _NumberRange1 (upval)
 			if p1.absoluteWindowTop and p1.absoluteWindowHeight then
-				local var5 = var4(p4.X)
+				local UseCellAbsoluteHeightResultResult: number = UseCellAbsoluteHeightResult(p4.X)
 				
-				if var5 and var5 > 0 then
-					local var6 = math.floor(math.max(p1.absoluteWindowTop - p3.Y, 0) / var5) + 1
+				if UseCellAbsoluteHeightResultResult and UseCellAbsoluteHeightResultResult > 0 then
+					local NewFloored = math.floor(math.max(p1.absoluteWindowTop - p3.Y, 0) / UseCellAbsoluteHeightResultResult) + 1
 					
-					return var3(NumberRange.new(var6, var6 + (math.ceil(math.max(p1.absoluteWindowHeight, 0) / var5) + 1) - 1))
+					return UseStateResult2(NumberRange.new(NewFloored, NewFloored + (math.ceil(math.max(p1.absoluteWindowHeight, 0) / UseCellAbsoluteHeightResultResult) + 1) - 1))
 				end
 			end
-			return var3(var1)
+			return UseStateResult2(_NumberRange1)
 		end, {
-			var4,
+			UseCellAbsoluteHeightResult,
 			p1.absoluteWindowTop,
 			p1.absoluteWindowHeight,
-			var3
+			UseStateResult2
 		}), { "AbsolutePosition", "AbsoluteSize" })
 	})
 end)

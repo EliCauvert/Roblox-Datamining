@@ -1,9 +1,8 @@
-﻿return function(...)
+﻿return function(...): boolean --[[ Line: 2 | Named "equalObjects" ]]
 	for i = 1, select("#", ...) - 1 do
-		if select(i, ...) == select(i + 1, ...) then
-			continue
+		if select(i, ...) ~= select(i + 1, ...) then
+			return false
 		end
-		return false
 	end
 	return true
 end

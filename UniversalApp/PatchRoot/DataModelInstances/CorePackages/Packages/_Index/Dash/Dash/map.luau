@@ -1,15 +1,15 @@
-﻿local parent = script.Parent
-local _ = require(parent.Types)
-local assertEqualModule = require(parent.assertEqual)
+﻿local Parent = script.Parent
+local _ = require(Parent.Types)
+local AssertEqualModule = require(Parent.assertEqual)
 
-return function(p1, p2)
-	-- upvalues: assertEqualModule (ref)
+return function(List, Callback) --[[ Line: 20 | Named "map" ]]
+	-- upvalues: AssertEqualModule (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		local var1 = p2(v, i)
-		assertEqualModule(var1 == nil, false, "Returned nil from a Dash.map handler")
-		t[i] = var1
+	for i, value in List do
+		local CallbackResult = Callback(value, i)
+		AssertEqualModule(CallbackResult == nil, false, "Returned nil from a Dash.map handler")
+		t[i] = CallbackResult
 	end
 	return t
 end

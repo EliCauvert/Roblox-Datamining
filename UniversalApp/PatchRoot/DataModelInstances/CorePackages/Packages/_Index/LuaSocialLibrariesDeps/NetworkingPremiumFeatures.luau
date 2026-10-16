@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.NetworkingPremiumFeatures.NetworkingPremiumFeatures)
+﻿return (require(script.Parent.Parent.Parent._Index.NetworkingPremiumFeatures.NetworkingPremiumFeatures))

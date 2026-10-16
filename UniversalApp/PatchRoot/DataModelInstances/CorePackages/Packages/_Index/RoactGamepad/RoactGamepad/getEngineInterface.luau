@@ -1,82 +1,83 @@
-﻿local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local userInputService = game:GetService("UserInputService")
-local coreGuiService = game:GetService("CoreGui")
-local t = {
-	getGamepadConnected = function(p1)
-		-- upvalues: userInputService (ref)
-		return userInputService:GetGamepadConnected(p1)
+﻿local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local CoreGui = game:GetService("CoreGui")
+local config = {
+	getGamepadConnected = function(GamepadNum) --[[ Line: 13 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService:GetGamepadConnected(GamepadNum)
 	end,
-	getGamepadState = function(p1)
-		-- upvalues: userInputService (ref)
-		return userInputService:GetGamepadState(p1)
+	getGamepadState = function(GamepadNum) --[[ Line: 17 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService:GetGamepadState(GamepadNum)
 	end,
-	getNavigationGamepads = function()
-		-- upvalues: userInputService (ref)
-		return userInputService:GetNavigationGamepads()
+	getNavigationGamepads = function() --[[ Line: 21 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService:GetNavigationGamepads()
 	end,
-	getSelection = function()
-		-- upvalues: guiService (ref)
-		return guiService.SelectedCoreObject
+	getSelection = function() --[[ Line: 25 ]]
+		-- upvalues: GuiService (copy)
+		return GuiService.SelectedCoreObject
 	end,
-	setSelection = function(value)
-		-- upvalues: guiService (ref)
-		guiService.SelectedCoreObject = value
+	setSelection = function(SelectedCoreObject) --[[ Line: 29 ]]
+		-- upvalues: GuiService (copy)
+		GuiService.SelectedCoreObject = SelectedCoreObject
 	end,
-	subscribeToSelectionChanged = function(p1)
-		-- upvalues: guiService (ref)
-		return guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(p1)
+	subscribeToSelectionChanged = function(Callback) --[[ Line: 33 ]]
+		-- upvalues: GuiService (copy)
+		return GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(Callback)
 	end,
-	subscribeToRenderStepped = function(p1)
-		-- upvalues: runService (ref)
-		return runService.RenderStepped:Connect(p1)
+	subscribeToRenderStepped = function(Callback) --[[ Line: 37 ]]
+		-- upvalues: RunService (copy)
+		return RunService.RenderStepped:Connect(Callback)
 	end,
-	subscribeToGamepadConnected = function(p1)
-		-- upvalues: userInputService (ref)
-		return userInputService.GamepadConnected:Connect(p1)
+	subscribeToGamepadConnected = function(Callback) --[[ Line: 41 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService.GamepadConnected:Connect(Callback)
 	end,
-	subscribeToGamepadDisconnected = function(p1)
-		-- upvalues: userInputService (ref)
-		return userInputService.GamepadDisconnected:Connect(p1)
+	subscribeToGamepadDisconnected = function(Callback) --[[ Line: 45 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService.GamepadDisconnected:Connect(Callback)
 	end,
-	subscribeToInputBegan = function(p1)
-		-- upvalues: userInputService (ref)
-		return userInputService.InputBegan:Connect(p1)
+	subscribeToInputBegan = function(Callback) --[[ Line: 49 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService.InputBegan:Connect(Callback)
 	end,
-	subscribeToInputEnded = function(p1)
-		-- upvalues: userInputService (ref)
-		return userInputService.InputEnded:Connect(p1)
+	subscribeToInputEnded = function(Callback) --[[ Line: 53 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService.InputEnded:Connect(Callback)
 	end
 }
-local t_1 = {
-	getSelection = function()
-		-- upvalues: guiService (ref)
-		return guiService.SelectedObject
+local config1 = {
+	getSelection = function() --[[ Line: 63 ]]
+		-- upvalues: GuiService (copy)
+		return GuiService.SelectedObject
 	end,
-	setSelection = function(value)
-		-- upvalues: guiService (ref)
-		guiService.SelectedObject = value
+	setSelection = function(SelectedObject) --[[ Line: 67 ]]
+		-- upvalues: GuiService (copy)
+		GuiService.SelectedObject = SelectedObject
 	end,
-	subscribeToSelectionChanged = function(p1)
-		-- upvalues: guiService (ref)
-		return guiService:GetPropertyChangedSignal("SelectedObject"):Connect(p1)
+	subscribeToSelectionChanged = function(Callback) --[[ Line: 71 ]]
+		-- upvalues: GuiService (copy)
+		return GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(Callback)
 	end,
-	getGamepadConnected = t.getGamepadConnected,
-	getGamepadState = t.getGamepadState,
-	getNavigationGamepads = t.getNavigationGamepads,
-	subscribeToRenderStepped = t.subscribeToRenderStepped,
-	subscribeToGamepadConnected = t.subscribeToGamepadConnected,
-	subscribeToGamepadDisconnected = t.subscribeToGamepadDisconnected,
-	subscribeToInputBegan = t.subscribeToInputBegan,
-	subscribeToInputEnded = t.subscribeToInputEnded
+	getGamepadConnected = config.getGamepadConnected,
+	getGamepadState = config.getGamepadState,
+	getNavigationGamepads = config.getNavigationGamepads,
+	subscribeToRenderStepped = config.subscribeToRenderStepped,
+	subscribeToGamepadConnected = config.subscribeToGamepadConnected,
+	subscribeToGamepadDisconnected = config.subscribeToGamepadDisconnected,
+	subscribeToInputBegan = config.subscribeToInputBegan,
+	subscribeToInputEnded = config.subscribeToInputEnded
 }
 
-return function(p1)
-	-- upvalues: coreGuiService (ref), t (ref), t_1 (ref)
-	if p1:IsDescendantOf(coreGuiService) then
-		return t
-	elseif p1:FindFirstAncestorWhichIsA("PlayerGui") == nil then
+return function(Object) --[[ Line: 87 ]]
+	-- upvalues: CoreGui (copy), config (copy), config1 (copy)
+	if Object:IsDescendantOf(CoreGui) then
+		return config
+	end
+	if Object:FindFirstAncestorWhichIsA("PlayerGui") == nil then
 		error("Gamepad navigation not supported. Must be a child of CoreGui or a PlayerGui")
 	end
-	return t_1
+	return config1
 end

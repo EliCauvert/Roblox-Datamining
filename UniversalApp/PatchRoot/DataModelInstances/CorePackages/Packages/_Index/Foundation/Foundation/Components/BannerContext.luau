@@ -1,1 +1,1 @@
-﻿return require(script.BannerContext)
+﻿return (require(script.BannerContext))

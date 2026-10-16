@@ -1,9 +1,9 @@
-﻿local parent = script.Parent
+﻿local Parent = script.Parent
 
 return {
 	projects = {
-		require(parent.Components.Tests)["jest.config"],
-		require(parent.Hooks.Tests)["jest.config"],
-		require(parent.Utils.Tests)["jest.config"]
+		require(Parent.Components.Tests)["jest.config"],
+		require(Parent.Hooks.Tests)["jest.config"],
+		require(Parent.Utils.Tests)["jest.config"]
 	}
 }

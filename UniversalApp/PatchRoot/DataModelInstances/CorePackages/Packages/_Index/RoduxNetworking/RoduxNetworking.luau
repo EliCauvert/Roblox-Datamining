@@ -1,40 +1,40 @@
-﻿local roduxNetworkingModule = require(script.RoduxNetworking)
-local networkStatusModule = require(script.NetworkStatus)
+﻿local RoduxNetworkingModule = require(script.RoduxNetworking)
+local NetworkStatusModule = require(script.NetworkStatus)
 local _ = require(script.Types)
 
 return {
-	config = function(p1)
-		-- upvalues: roduxNetworkingModule (ref), networkStatusModule (ref)
-		local var1 = roduxNetworkingModule(p1)
-		local var2 = networkStatusModule(p1)
+	config = function(p1) --[[ Line: 11 ]]
+		-- upvalues: RoduxNetworkingModule (copy), NetworkStatusModule (copy)
+		local RoduxNetworkingModuleResult = RoduxNetworkingModule(p1)
+		local NetworkStatusModuleResult = NetworkStatusModule(p1)
 		
 		return {
-			GET = function(p2, p3)
-				-- upvalues: var1 (ref)
-				return var1.GET(p2, p3)
+			GET = function(p2, p3) --[[ Line: 16 ]]
+				-- upvalues: RoduxNetworkingModuleResult (copy)
+				return RoduxNetworkingModuleResult.GET(p2, p3)
 			end,
-			POST = function(p2, p3)
-				-- upvalues: var1 (ref)
-				return var1.POST(p2, p3)
+			POST = function(p2, p3) --[[ Line: 19 ]]
+				-- upvalues: RoduxNetworkingModuleResult (copy)
+				return RoduxNetworkingModuleResult.POST(p2, p3)
 			end,
-			PATCH = function(p2, p3)
-				-- upvalues: var1 (ref)
-				return var1.PATCH(p2, p3)
+			PATCH = function(p2, p3) --[[ Line: 22 ]]
+				-- upvalues: RoduxNetworkingModuleResult (copy)
+				return RoduxNetworkingModuleResult.PATCH(p2, p3)
 			end,
-			DELETE = function(p2, p3)
-				-- upvalues: var1 (ref)
-				return var1.DELETE(p2, p3)
+			DELETE = function(p2, p3) --[[ Line: 25 ]]
+				-- upvalues: RoduxNetworkingModuleResult (copy)
+				return RoduxNetworkingModuleResult.DELETE(p2, p3)
 			end,
-			getNetworkImpl = function()
-				-- upvalues: var1 (ref)
-				return var1.getNetworkImpl()
+			getNetworkImpl = function() --[[ Line: 28 ]]
+				-- upvalues: RoduxNetworkingModuleResult (copy)
+				return RoduxNetworkingModuleResult.getNetworkImpl()
 			end,
-			setNetworkImpl = function(...)
-				-- upvalues: var1 (ref)
-				var1.setNetworkImpl(...)
+			setNetworkImpl = function(...) --[[ Line: 31 ]]
+				-- upvalues: RoduxNetworkingModuleResult (copy)
+				RoduxNetworkingModuleResult.setNetworkImpl(...)
 			end,
-			installReducer = var2.installReducer,
-			Enum = { NetworkStatus = var2.Enum.Status }
+			installReducer = NetworkStatusModuleResult.installReducer,
+			Enum = { NetworkStatus = NetworkStatusModuleResult.Enum.Status }
 		}
 	end,
 	mock = require(script.mockRoduxNetworking)

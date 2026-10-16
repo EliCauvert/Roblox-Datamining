@@ -1,39 +1,39 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFIntUGCLCCageVerticesSimilarityMaximumModule = require(parent.flags.getFIntUGCLCCageVerticesSimilarityMaximum)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFIntUGCLCCageVerticesSimilarityMaximumModule = require(Parent.flags.getFIntUGCLCCageVerticesSimilarityMaximum)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
 	requiredData = {
-		validationEnumsModule.SharedDataMember.innerCagesData,
-		validationEnumsModule.SharedDataMember.outerCagesData
+		ValidationEnumsModule.SharedDataMember.innerCagesData,
+		ValidationEnumsModule.SharedDataMember.outerCagesData
 	},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: getFIntUGCLCCageVerticesSimilarityMaximumModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
-		local var1 = getFIntUGCLCCageVerticesSimilarityMaximumModule()
-		local t = {}
+	run = function(p1, p2) --[[ Line: 23 ]]
+		-- upvalues: GetFIntUGCLCCageVerticesSimilarityMaximumModule (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy)
+		local FIntUGCLCCageVerticesSimilarityMaximumModule = GetFIntUGCLCCageVerticesSimilarityMaximumModule()
+		local List = {}
 		
-		for i, v in p2.innerCagesData do
-			table.insert(t, { name = i .. " (inner cage)", data = v })
+		for i, Data in p2.innerCagesData do
+			table.insert(List, { name = i .. " (inner cage)", data = Data })
 		end
-		for i_1, v_1 in p2.outerCagesData do
-			table.insert(t, { name = i_1 .. " (outer cage)", data = v_1 })
+		for i1, Data1 in p2.outerCagesData do
+			table.insert(List, { name = i1 .. " (outer cage)", data = Data1 })
 		end
-		for i_2, v_2 in t do
-			local floored = math.floor(UGCValidationService:GetEditableMeshVerticesSimilarityRate(v_2.data.editable, Vector3.new(1, 1, 1)) * 100)
+		for _, value in List do
+			local Floored = math.floor(UGCValidationService:GetEditableMeshVerticesSimilarityRate(value.data.editable, vector.create(1, 1, 1)) * 100)
 			
-			if var1 < floored then
-				p1:fail(errorSourceStringsModule.Keys.VerticesNotCoincident_TooManySimilar, {
-					cageName = v_2.name,
-					percentage = tostring(floored),
-					threshold = tostring(var1)
+			if FIntUGCLCCageVerticesSimilarityMaximumModule < Floored then
+				p1:fail(ErrorSourceStringsModule.Keys.VerticesNotCoincident_TooManySimilar, {
+					cageName = value.name,
+					percentage = tostring(Floored),
+					threshold = tostring(FIntUGCLCCageVerticesSimilarityMaximumModule)
 				})
 			end
 		end

@@ -1,13 +1,14 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local reactModule = require(parent_3.React)
-local cryoModule = require(parent_3.Cryo)
-local useStyleModule = require(parent_1.Style.useStyle)
-local useCursorModule = require(parent_2.App.SelectionCursor.useCursor)
-local interactableModule = require(parent.Interactable)
-local t = {
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local ReactModule = require(Parent3.React)
+local CryoModule = require(Parent3.Cryo)
+local UseStyleModule = require(Parent1.Style.useStyle)
+local UseCursorModule = require(Parent2.App.SelectionCursor.useCursor)
+local InteractableModule = require(Parent.Interactable)
+local ControlStateModule = require(Parent.Enum.ControlState)
+local config = {
 	isDisabled = false,
 	selectable = true,
 	affordance = "Background",
@@ -22,68 +23,82 @@ local t = {
 		left = UDim.new(0, 0)
 	}
 }
-local var1 = require(parent.Enum.ControlState).Initialize.rawValue()
+local RawValueResult = ControlStateModule.Initialize.rawValue()
+local config1 = {
+	[ControlStateModule.Initialize.rawValue()] = "Idle",
+	[ControlStateModule.Default.rawValue()] = "Idle",
+	[ControlStateModule.Pressed.rawValue()] = "Press",
+	[ControlStateModule.Hover.rawValue()] = "Hover",
+	[ControlStateModule.Selected.rawValue()] = "Idle",
+	[ControlStateModule.SelectedPressed.rawValue()] = "Press",
+	[ControlStateModule.Disabled.rawValue()] = "Idle"
+}
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), var1 (ref), reactModule (ref), useCursorModule (ref), interactableModule (ref)
-	local var2 = cryoModule.Dictionary.join(t, p1)
-	local stateLayer = useStyleModule().Tokens.Component.StateLayer
-	local color = stateLayer[var2.stateStyle][var1].Color
-	local var3, var4 = reactModule.useBinding(color.Color3)
-	local var5, var6 = reactModule.useBinding(color.Transparency)
-	local var7 = useCursorModule(var2.cornerRadius)
-	local t_1 = {
+local function _(p1, p2) --[[ Line: 86 | Named "getStateTokens" ]]
+	return if p2 == "Standard" then p1.Color.State elseif p2 == "Inverse" then p1.Inverse.State elseif p2 == "Lighten" then p1.DarkMode.State else p1.LightMode.State
+end
+
+return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 98 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), config1 (copy), RawValueResult (copy), ReactModule (copy), UseCursorModule (copy), InteractableModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local Tokens = UseStyleModule().Tokens
+	local StateStyle = JoinResult.stateStyle
+	local State = if StateStyle == "Standard" then Tokens.Color.State elseif StateStyle == "Inverse" then Tokens.Inverse.State elseif StateStyle == "Lighten" then Tokens.DarkMode.State else Tokens.LightMode.State
+	local StateEntry = State[config1[RawValueResult]]
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(StateEntry.Color3)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(StateEntry.Transparency)
+	local UseCursorModuleResult = UseCursorModule(JoinResult.cornerRadius)
+	local config2 = {
 		BackgroundTransparency = 1,
-		ref = p2,
-		AnchorPoint = var2.anchorPoint,
-		Position = var2.position,
-		Size = var2.size,
-		LayoutOrder = var2.layoutOrder,
-		ZIndex = var2.zIndex
+		ref = Ref,
+		AnchorPoint = JoinResult.anchorPoint,
+		Position = JoinResult.position,
+		Size = JoinResult.size,
+		LayoutOrder = JoinResult.layoutOrder,
+		ZIndex = JoinResult.zIndex
 	}
-	local t_2 = {}
+	local t = {}
 	
-	if var2.cornerRadius ~= nil then
-		t_2.UICorner = reactModule.createElement("UICorner", { CornerRadius = var2.cornerRadius })
+	if JoinResult.cornerRadius ~= nil then
+		t.UICorner = ReactModule.createElement("UICorner", { CornerRadius = JoinResult.cornerRadius })
 	end
-	if var2.affordance == "Border" then
-		t_2.UIStroke = reactModule.createElement("UIStroke", {
-			Thickness = stateLayer.Base.BorderWidth,
-			Color = var3,
-			Transparency = var5
+	if JoinResult.affordance == "Border" then
+		t.UIStroke = ReactModule.createElement("UIStroke", {
+			Thickness = Tokens.Stroke.Standard,
+			Color = UseBindingResult,
+			Transparency = UseBindingResult1
 		})
-		t_1.BackgroundTransparency = 1
-	elseif var2.affordance == "Background" then
-		t_1.BackgroundColor3 = var3
-		t_1.BackgroundTransparency = var5
+		config2.BackgroundTransparency = 1
+	elseif JoinResult.affordance == "Background" then
+		config2.BackgroundColor3 = UseBindingResult
+		config2.BackgroundTransparency = UseBindingResult1
 	end
-	local outset = var2.outset
-	t_2.Button = reactModule.createElement(interactableModule, {
-		Size = UDim2.new(1 + outset.left.Scale + outset.right.Scale, outset.left.Offset + outset.right.Offset, 1 + outset.top.Scale + outset.bottom.Scale, outset.top.Offset + outset.bottom.Offset),
-		Position = UDim2.new(-outset.left.Scale, -outset.left.Offset, -outset.top.Scale, -outset.top.Offset),
+	local Outset = JoinResult.outset
+	t.Button = ReactModule.createElement(InteractableModule, {
+		Size = UDim2.new(1 + Outset.left.Scale + Outset.right.Scale, Outset.left.Offset + Outset.right.Offset, 1 + Outset.top.Scale + Outset.bottom.Scale, Outset.top.Offset + Outset.bottom.Offset),
+		Position = UDim2.new(-Outset.left.Scale, -Outset.left.Offset, -Outset.top.Scale, -Outset.top.Offset),
 		BackgroundTransparency = 1,
-		Selectable = not var2.isDisabled and var2.selectable,
-		SelectionImageObject = var7,
-		[reactModule.Event.Activated] = var2.onActivated,
-		onStateChanged = reactModule.useCallback(function(p3, p4)
-			-- upvalues: stateLayer (ref), var2 (ref), var4 (ref), var6 (ref)
-			local color = stateLayer[var2.stateStyle][p4.rawValue()].Color
-			var4(color.Color3)
-			var6(color.Transparency)
+		Selectable = not JoinResult.isDisabled and JoinResult.selectable,
+		SelectionImageObject = UseCursorModuleResult,
+		[ReactModule.Event.Activated] = JoinResult.onActivated,
+		onStateChanged = ReactModule.useCallback(function(p2, p3) --[[ Line: 145 ]]
+			-- upvalues: State (copy), config1 (upval), UseBindingResult2 (copy), UseBindingResult2_1 (copy), JoinResult (copy)
+			local StateEntry = State[config1[p3.rawValue()]]
+			UseBindingResult2(StateEntry.Color3)
+			UseBindingResult2_1(StateEntry.Transparency)
 			
-			if var2.onStateChanged then
-				var2.onStateChanged(p3, p4)
+			if JoinResult.onStateChanged then
+				JoinResult.onStateChanged(p2, p3)
 			end
 		end, {
-			stateLayer,
-			var4,
-			var6,
-			var2.stateStyle,
-			var2.onStateChanged
+			State,
+			UseBindingResult2,
+			UseBindingResult2_1,
+			JoinResult.onStateChanged
 		}),
-		isDisabled = var2.isDisabled,
-		userInteractionEnabled = not var2.isDisabled
+		isDisabled = JoinResult.isDisabled,
+		userInteractionEnabled = not JoinResult.isDisabled
 	})
 	
-	return reactModule.createElement("Frame", t_1, t_2)
-end))
+	return ReactModule.createElement("Frame", config2, t)
+end)))

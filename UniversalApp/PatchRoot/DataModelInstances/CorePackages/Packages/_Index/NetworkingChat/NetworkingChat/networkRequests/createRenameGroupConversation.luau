@@ -1,11 +1,11 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.networkingChatTypes)
-local CHAT_URLModule = require(parent.CHAT_URL)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.networkingChatTypes)
+local CHATURLModule = require(Parent.CHAT_URL)
 
-return function(p1)
-	-- upvalues: CHAT_URLModule (ref)
-	return p1.roduxNetworking.POST({ Name = "RenameGroupConversation" }, function(p2, p3, p4)
-		-- upvalues: CHAT_URLModule (copy)
-		return p2(CHAT_URLModule):path("v2"):path("rename-group-conversation"):body({ conversationId = p3, newTitle = p4 }):setStatusIds({ p3 })
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: CHATURLModule (copy)
+	return p1.roduxNetworking.POST({ Name = "RenameGroupConversation" }, function(Callback, ConversationId, NewTitle) --[[ Line: 9 ]]
+		-- upvalues: CHATURLModule (upval)
+		return Callback(CHATURLModule):path("v2"):path("rename-group-conversation"):body({ conversationId = ConversationId, newTitle = NewTitle }):setStatusIds({ ConversationId })
 	end)
 end

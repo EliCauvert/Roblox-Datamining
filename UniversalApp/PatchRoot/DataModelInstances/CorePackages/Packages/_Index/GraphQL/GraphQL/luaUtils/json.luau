@@ -1,77 +1,82 @@
-﻿local t = {}
+﻿local JsonModule = {}
 
-local function kind_of(p1)
-	if type(p1) ~= "table" then
-		return type(p1)
+local function kind_of(List): string --[[ Line: 5 ]]
+	if type(List) ~= "table" then
+		return (type(List))
 	end
-	local var1 = 1
+	local Count = 1
 	
-	for i in pairs(p1) do
-		if p1[var1] ~= nil then
+	for _ in pairs(List) do
+		if List[Count] == nil then
 			return "table"
 		end
-		var1 += 1
+		Count += 1
 	end
-	return if var1 == 1 then "table" else "array"
+	return if Count == 1 then "table" else "array"
 end
 
-local function escape_str(p2)
+local function escape_str(Text: string): string --[[ Line: 24 ]]
 	local list = {
 		"\\", "\"", "/", "b", "f", "n", "r", "t"
 	}
 	
-	for i, v in ipairs({
+	for i, value in ipairs({
 		"\\", "\"", "/", "\b", "\f", "\n", "\r", "\t"
 	}) do
-		p2 = p2:gsub(v, "\\" .. list[i])
+		Text = Text:gsub(value, "\\" .. list[i])
 	end
-	return p2
+	return Text
 end
 
-function t.stringify(p3, p4)
-	-- upvalues: kind_of (ref), t (ref), escape_str (ref)
-	local t_1 = {}
-	local var2 = kind_of(p3)
+function JsonModule.stringify(List, p1): string --[[ Line: 33 ]]
+	-- upvalues: kind_of (copy), JsonModule (copy), escape_str (copy)
+	local StringifyResults = {}
+	local Kind_ofResult = kind_of(List)
 	
-	if var2 == "array" then
-		if p4 then
+	if Kind_ofResult == "array" then
+		if p1 then
 			error("Can't encode array as key.")
 		end
-		t_1[#t_1 + 1] = "["
+		StringifyResults[#StringifyResults + 1] = "["
 		
-		for i, v in ipairs(p3) do
+		for i, value in ipairs(List) do
 			if i > 1 then
-				t_1[#t_1 + 1] = ", "
+				StringifyResults[#StringifyResults + 1] = ", "
 			end
-			t_1[#t_1 + 1] = t.stringify(v)
+			StringifyResults[#StringifyResults + 1] = JsonModule.stringify(value)
 		end
-		t_1[#t_1 + 1] = "]"
-	elseif var2 == "table" then
-		if p4 then
+		StringifyResults[#StringifyResults + 1] = "]"
+	elseif Kind_ofResult == "table" then
+		if p1 then
 			error("Can't encode table as key.")
 		end
-		t_1[#t_1 + 1] = "{"
+		StringifyResults[#StringifyResults + 1] = "{"
 		
-		for i, v in pairs(p3) do
-			if #t_1 > 1 then
-				t_1[#t_1 + 1] = ", "
+		for i1, value1 in pairs(List) do
+			if #StringifyResults > 1 then
+				StringifyResults[#StringifyResults + 1] = ", "
 			end
-			t_1[#t_1 + 1] = t.stringify(i, true)
-			t_1[#t_1 + 1] = ":"
-			t_1[#t_1 + 1] = t.stringify(v)
+			StringifyResults[#StringifyResults + 1] = JsonModule.stringify(i1, true)
+			StringifyResults[#StringifyResults + 1] = ":"
+			StringifyResults[#StringifyResults + 1] = JsonModule.stringify(value1)
 		end
-		t_1[#t_1 + 1] = "}"
-	elseif var2 == "string" then
-		return "\"" .. escape_str(p3) .. "\""
-	elseif var2 == "number" then
-		return if p4 then "\"" .. tostring(p3) .. "\"" else tostring(p3)
-	elseif var2 == "boolean" then
-		return tostring(p3)
-	elseif var2 == "nil" then
-		return "null"
+		StringifyResults[#StringifyResults + 1] = "}"
+	else
+		if Kind_ofResult == "string" then
+			return "\"" .. escape_str(List) .. "\""
+		end
+		if Kind_ofResult == "number" then
+			return if p1 then "\"" .. tostring(List) .. "\"" else tostring(List)
+		end
+		if Kind_ofResult == "boolean" then
+			return (tostring(List))
+		end
+		if Kind_ofResult == "nil" then
+			return "null"
+		end
+		error("Unjsonifiable type: " .. Kind_ofResult .. ".")
 	end
-	error("Unjsonifiable type: " .. var6 .. ".")
-	return table.concat(t_1)
+	return table.concat(StringifyResults)
 end
 
-return t
+return JsonModule

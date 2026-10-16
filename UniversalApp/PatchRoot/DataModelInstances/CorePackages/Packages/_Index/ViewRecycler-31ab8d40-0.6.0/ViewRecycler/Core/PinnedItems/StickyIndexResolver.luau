@@ -1,1089 +1,1115 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Virtualizer.ItemSequence)
-local _ = require(viewRecycler.Core.Types)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Virtualizer.ItemSequence)
+local _ = require(ViewRecycler.Core.Types)
 
-return function(p1, p2)
-	-- upvalues: dataSourceChangeTypeModule (ref)
-	local var1 = p1
-	local var2 = p2
-	local var3 = nil
-	local var4 = true
+return function(ItemSequence, Predicate) --[[ Line: 24 | Named "createStickyIndexResolver" ]]
+	-- upvalues: DataSourceChangeTypeModule (copy)
+	local ItemSequence1 = ItemSequence
+	local Callback = Predicate
+	local v1 = nil
+	local Flag = true
 	
-	local function _(p3, p4)
-		if p3 ~= nil then
-			p3.index += p4
-			p3.lazy += p4
+	local function _(Node, p1) --[[ Line: 33 | Named "applyShift" ]]
+		if Node ~= nil then
+			Node.index += p1
+			Node.lazy += p1
 		end
 	end
 	
-	local _ = function(p3)
-		local lazy = p3.lazy
+	local _ = function(Node) --[[ Line: 40 | Named "push" ]]
+		local Lazy = Node.lazy
 		
-		if lazy ~= 0 then
-			local left = p3.left
+		if Lazy ~= 0 then
+			local Left = Node.left
 			
-			if left ~= nil then
-				left.index += lazy
-				left.lazy += lazy
+			if Left ~= nil then
+				Left.index += Lazy
+				Left.lazy += Lazy
 			end
-			local right = p3.right
+			local Right = Node.right
 			
-			if right ~= nil then
-				right.index += lazy
-				right.lazy += lazy
+			if Right ~= nil then
+				Right.index += Lazy
+				Right.lazy += Lazy
 			end
-			p3.lazy = 0
+			Node.lazy = 0
 		end
 	end
 	
-	local _ = function(p3)
-		return if p3 == nil then 0 else p3.height
+	local _ = function(p1) --[[ Line: 49 | Named "height" ]]
+		return if p1 == nil then 0 else p1.height
 	end
 	
-	local _ = function(p3)
-		local left = p3.left
-		local right = p3.right
-		p3.height = math.max(if left == nil then 0 else left.height, if right == nil then 0 else right.height) + 1
+	local _ = function(Node) --[[ Line: 53 | Named "updateHeight" ]]
+		local Left = Node.left
+		local Right = Node.right
+		Node.height = math.max(if Left == nil then 0 else Left.height, if Right == nil then 0 else Right.height) + 1
 	end
 	
-	local _ = function(p3)
-		local right = p3.right
-		local lazy = p3.lazy
+	local _ = function(Left) --[[ Line: 57 | Named "rotateLeft" ]]
+		local Right = Left.right
+		local Lazy = Left.lazy
 		
-		if lazy ~= 0 then
-			local left = p3.left
+		if Lazy ~= 0 then
+			local Left1 = Left.left
 			
-			if left ~= nil then
-				left.index += lazy
-				left.lazy += lazy
+			if Left1 ~= nil then
+				Left1.index += Lazy
+				Left1.lazy += Lazy
 			end
-			local right_1 = p3.right
+			local Right1 = Left.right
 			
-			if right_1 ~= nil then
-				right_1.index += lazy
-				right_1.lazy += lazy
+			if Right1 ~= nil then
+				Right1.index += Lazy
+				Right1.lazy += Lazy
 			end
-			p3.lazy = 0
+			Left.lazy = 0
 		end
-		local lazy_1 = right.lazy
+		local Lazy1 = Right.lazy
 		
-		if lazy_1 ~= 0 then
-			local left = right.left
+		if Lazy1 ~= 0 then
+			local Left2 = Right.left
 			
-			if left ~= nil then
-				left.index += lazy_1
-				left.lazy += lazy_1
+			if Left2 ~= nil then
+				Left2.index += Lazy1
+				Left2.lazy += Lazy1
 			end
-			local right_1 = right.right
+			local Right4 = Right.right
 			
-			if right_1 ~= nil then
-				right_1.index += lazy_1
-				right_1.lazy += lazy_1
+			if Right4 ~= nil then
+				Right4.index += Lazy1
+				Right4.lazy += Lazy1
 			end
-			right.lazy = 0
+			Right.lazy = 0
 		end
-		p3.right = right.left
-		right.left = p3
-		local left = p3.left
-		local right_1 = p3.right
-		p3.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-		local left_1 = right.left
-		local right_2 = right.right
-		right.height = math.max(if left_1 == nil then 0 else left_1.height, if right_2 == nil then 0 else right_2.height) + 1
+		Left.right = Right.left
+		Right.left = Left
+		local Left3 = Left.left
+		local Right2 = Left.right
+		Left.height = math.max(if Left3 == nil then 0 else Left3.height, if Right2 == nil then 0 else Right2.height) + 1
+		local Left4 = Right.left
+		local Right3 = Right.right
+		Right.height = math.max(if Left4 == nil then 0 else Left4.height, if Right3 == nil then 0 else Right3.height) + 1
 		
-		return right
+		return Right
 	end
 	
-	local _ = function(p3)
-		local left = p3.left
-		local lazy = p3.lazy
+	local _ = function(Node) --[[ Line: 68 | Named "rotateRight" ]]
+		local Left = Node.left
+		local Lazy = Node.lazy
 		
-		if lazy ~= 0 then
-			local left_1 = p3.left
+		if Lazy ~= 0 then
+			local Left1 = Node.left
 			
-			if left_1 ~= nil then
-				left_1.index += lazy
-				left_1.lazy += lazy
+			if Left1 ~= nil then
+				Left1.index += Lazy
+				Left1.lazy += Lazy
 			end
-			local right = p3.right
+			local Right = Node.right
 			
-			if right ~= nil then
-				right.index += lazy
-				right.lazy += lazy
+			if Right ~= nil then
+				Right.index += Lazy
+				Right.lazy += Lazy
 			end
-			p3.lazy = 0
+			Node.lazy = 0
 		end
-		local lazy_1 = left.lazy
+		local Lazy1 = Left.lazy
 		
-		if lazy_1 ~= 0 then
-			local left_1 = left.left
+		if Lazy1 ~= 0 then
+			local Left2 = Left.left
 			
-			if left_1 ~= nil then
-				left_1.index += lazy_1
-				left_1.lazy += lazy_1
+			if Left2 ~= nil then
+				Left2.index += Lazy1
+				Left2.lazy += Lazy1
 			end
-			local right = left.right
+			local Right = Left.right
 			
-			if right ~= nil then
-				right.index += lazy_1
-				right.lazy += lazy_1
+			if Right ~= nil then
+				Right.index += Lazy1
+				Right.lazy += Lazy1
 			end
-			left.lazy = 0
+			Left.lazy = 0
 		end
-		p3.left = left.right
-		left.right = p3
-		local left_1 = p3.left
-		local right = p3.right
-		p3.height = math.max(if left_1 == nil then 0 else left_1.height, if right == nil then 0 else right.height) + 1
-		local left_2 = left.left
-		local right_1 = left.right
-		left.height = math.max(if left_2 == nil then 0 else left_2.height, if right_1 == nil then 0 else right_1.height) + 1
+		Node.left = Left.right
+		Left.right = Node
+		local Left3 = Node.left
+		local Right = Node.right
+		Node.height = math.max(if Left3 == nil then 0 else Left3.height, if Right == nil then 0 else Right.height) + 1
+		local Left4 = Left.left
+		local Right1 = Left.right
+		Left.height = math.max(if Left4 == nil then 0 else Left4.height, if Right1 == nil then 0 else Right1.height) + 1
 		
-		return left
+		return Left
 	end
 	
-	local function balance(p3)
-		local left = p3.left
-		local right = p3.right
-		p3.height = math.max(if left == nil then 0 else left.height, if right == nil then 0 else right.height) + 1
-		local left_1 = p3.left
-		local right_1 = p3.right
-		local var5 = (if left_1 == nil then 0 else left_1.height) - (if right_1 == nil then 0 else right_1.height)
+	local function balance(Left) --[[ Line: 79 ]]
+		local Left1 = Left.left
+		local Right = Left.right
+		Left.height = math.max(if Left1 == nil then 0 else Left1.height, if Right == nil then 0 else Right.height) + 1
+		local Left2 = Left.left
+		local Right1 = Left.right
+		local v2 = (if Left2 == nil then 0 else Left2.height) - (if Right1 == nil then 0 else Right1.height)
 		
-		if var5 > 1 then
-			local left_2 = p3.left
-			local lazy = left_2.lazy
+		if v2 > 1 then
+			local Left3 = Left.left
+			local Lazy = Left3.lazy
 			
-			if lazy ~= 0 then
-				local left_3 = left_2.left
+			if Lazy ~= 0 then
+				local Left4 = Left3.left
 				
-				if left_3 ~= nil then
-					left_3.index += lazy
-					left_3.lazy += lazy
+				if Left4 ~= nil then
+					Left4.index += Lazy
+					Left4.lazy += Lazy
 				end
-				local right_2 = left_2.right
+				local Right2 = Left3.right
 				
-				if right_2 ~= nil then
-					right_2.index += lazy
-					right_2.lazy += lazy
+				if Right2 ~= nil then
+					Right2.index += Lazy
+					Right2.lazy += Lazy
 				end
-				left_2.lazy = 0
+				Left3.lazy = 0
 			end
-			local left_3 = left_2.left
-			local right_2 = left_2.right
+			local Left5 = Left3.left
+			local Right3 = Left3.right
 			
-			if (if left_3 == nil then 0 else left_3.height) < (if right_2 == nil then 0 else right_2.height) then
-				left_3 = left_2.right
-				right_2 = left_2.lazy
+			if (if Left5 == nil then 0 else Left5.height) < (if Right3 == nil then 0 else Right3.height) then
+				local Right4 = Left3.right
+				local Lazy1 = Left3.lazy
 				
-				if right_2 ~= 0 then
-					local left_4 = left_2.left
+				if Lazy1 ~= 0 then
+					local Left7 = Left3.left
 					
-					if left_4 ~= nil then
-						left_4.index += right_2
-						left_4.lazy += right_2
+					if Left7 ~= nil then
+						Left7.index += Lazy1
+						Left7.lazy += Lazy1
 					end
-					local right_3 = left_2.right
+					local Right11 = Left3.right
 					
-					if right_3 ~= nil then
-						right_3.index += right_2
-						right_3.lazy += right_2
+					if Right11 ~= nil then
+						Right11.index += Lazy1
+						Right11.lazy += Lazy1
 					end
-					left_2.lazy = 0
+					Left3.lazy = 0
 				end
-				right_2 = left_3.lazy
+				local Lazy2 = Right4.lazy
 				
-				if right_2 ~= 0 then
-					local left_4 = left_3.left
+				if Lazy2 ~= 0 then
+					local Left8 = Right4.left
 					
-					if left_4 ~= nil then
-						left_4.index += right_2
-						left_4.lazy += right_2
+					if Left8 ~= nil then
+						Left8.index += Lazy2
+						Left8.lazy += Lazy2
 					end
-					local right_3 = left_3.right
+					local Right41 = Right4.right
 					
-					if right_3 ~= nil then
-						right_3.index += right_2
-						right_3.lazy += right_2
+					if Right41 ~= nil then
+						Right41.index += Lazy2
+						Right41.lazy += Lazy2
 					end
-					left_3.lazy = 0
+					Right4.lazy = 0
 				end
-				left_2.right = left_3.left
-				left_3.left = left_2
-				local left_4 = left_2.left
-				local right_3 = left_2.right
-				left_2.height = math.max(if left_4 == nil then 0 else left_4.height, if right_3 == nil then 0 else right_3.height) + 1
-				local left_5 = left_3.left
-				local right_4 = left_3.right
-				left_3.height = math.max(if left_5 == nil then 0 else left_5.height, if right_4 == nil then 0 else right_4.height) + 1
-				p3.left = left_3
+				Left3.right = Right4.left
+				Right4.left = Left3
+				local Left9 = Left3.left
+				local Right2 = Left3.right
+				Left3.height = math.max(if Left9 == nil then 0 else Left9.height, if Right2 == nil then 0 else Right2.height) + 1
+				local Left10 = Right4.left
+				local Right31 = Right4.right
+				Right4.height = math.max(if Left10 == nil then 0 else Left10.height, if Right31 == nil then 0 else Right31.height) + 1
+				Left.left = Right4
 			end
-			local left_4 = p3.left
-			local lazy_1 = p3.lazy
+			local Left6 = Left.left
+			local Lazy1 = Left.lazy
 			
-			if lazy_1 ~= 0 then
-				local left_5 = p3.left
+			if Lazy1 ~= 0 then
+				local Left11 = Left.left
 				
-				if left_5 ~= nil then
-					left_5.index += lazy_1
-					left_5.lazy += lazy_1
+				if Left11 ~= nil then
+					Left11.index += Lazy1
+					Left11.lazy += Lazy1
 				end
-				local right_3 = p3.right
+				local Right5 = Left.right
 				
-				if right_3 ~= nil then
-					right_3.index += lazy_1
-					right_3.lazy += lazy_1
+				if Right5 ~= nil then
+					Right5.index += Lazy1
+					Right5.lazy += Lazy1
 				end
-				p3.lazy = 0
+				Left.lazy = 0
 			end
-			local lazy_2 = left_4.lazy
+			local Lazy3 = Left6.lazy
 			
-			if lazy_2 ~= 0 then
-				local left_5 = left_4.left
+			if Lazy3 ~= 0 then
+				local Left12 = Left6.left
 				
-				if left_5 ~= nil then
-					left_5.index += lazy_2
-					left_5.lazy += lazy_2
+				if Left12 ~= nil then
+					Left12.index += Lazy3
+					Left12.lazy += Lazy3
 				end
-				local right_3 = left_4.right
+				local Right6 = Left6.right
 				
-				if right_3 ~= nil then
-					right_3.index += lazy_2
-					right_3.lazy += lazy_2
+				if Right6 ~= nil then
+					Right6.index += Lazy3
+					Right6.lazy += Lazy3
 				end
-				left_4.lazy = 0
+				Left6.lazy = 0
 			end
-			p3.left = left_4.right
-			left_4.right = p3
-			local left_5 = p3.left
-			local right_3 = p3.right
-			p3.height = math.max(if left_5 == nil then 0 else left_5.height, if right_3 == nil then 0 else right_3.height) + 1
-			local left_6 = left_4.left
-			local right_4 = left_4.right
-			left_4.height = math.max(if left_6 == nil then 0 else left_6.height, if right_4 == nil then 0 else right_4.height) + 1
+			Left.left = Left6.right
+			Left6.right = Left
+			local Left13 = Left.left
+			local Right7 = Left.right
+			Left.height = math.max(if Left13 == nil then 0 else Left13.height, if Right7 == nil then 0 else Right7.height) + 1
+			local Left14 = Left6.left
+			local Right8 = Left6.right
+			Left6.height = math.max(if Left14 == nil then 0 else Left14.height, if Right8 == nil then 0 else Right8.height) + 1
 			
-			return left_4
-		elseif var5 >= -1 then
-			return p3
+			return Left6
+		else
+			if v2 >= -1 then
+				return Left
+			end
+			local Right9 = Left.right
+			local Lazy = Right9.lazy
+			
+			if Lazy ~= 0 then
+				local Left15 = Right9.left
+				
+				if Left15 ~= nil then
+					Left15.index += Lazy
+					Left15.lazy += Lazy
+				end
+				local Right6 = Right9.right
+				
+				if Right6 ~= nil then
+					Right6.index += Lazy
+					Right6.lazy += Lazy
+				end
+				Right9.lazy = 0
+			end
+			local Right5 = Right9.right
+			local Left16 = Right9.left
+			
+			if (if Right5 == nil then 0 else Right5.height) < (if Left16 == nil then 0 else Left16.height) then
+				local Left17 = Right9.left
+				local Lazy4 = Right9.lazy
+				
+				if Lazy4 ~= 0 then
+					local Left18 = Right9.left
+					
+					if Left18 ~= nil then
+						Left18.index += Lazy4
+						Left18.lazy += Lazy4
+					end
+					local Right8 = Right9.right
+					
+					if Right8 ~= nil then
+						Right8.index += Lazy4
+						Right8.lazy += Lazy4
+					end
+					Right9.lazy = 0
+				end
+				local Lazy41 = Left17.lazy
+				
+				if Lazy41 ~= 0 then
+					local Left19 = Left17.left
+					
+					if Left19 ~= nil then
+						Left19.index += Lazy41
+						Left19.lazy += Lazy41
+					end
+					local Right10 = Left17.right
+					
+					if Right10 ~= nil then
+						Right10.index += Lazy41
+						Right10.lazy += Lazy41
+					end
+					Left17.lazy = 0
+				end
+				Right9.left = Left17.right
+				Left17.right = Right9
+				local Left20 = Right9.left
+				local Right91 = Right9.right
+				Right9.height = math.max(if Left20 == nil then 0 else Left20.height, if Right91 == nil then 0 else Right91.height) + 1
+				local Left21 = Left17.left
+				local Right12 = Left17.right
+				Left17.height = math.max(if Left21 == nil then 0 else Left21.height, if Right12 == nil then 0 else Right12.height) + 1
+				Left.right = Left17
+			end
+			local Right7 = Left.right
+			local Lazy3 = Left.lazy
+			
+			if Lazy3 ~= 0 then
+				local Left22 = Left.left
+				
+				if Left22 ~= nil then
+					Left22.index += Lazy3
+					Left22.lazy += Lazy3
+				end
+				local Right13 = Left.right
+				
+				if Right13 ~= nil then
+					Right13.index += Lazy3
+					Right13.lazy += Lazy3
+				end
+				Left.lazy = 0
+			end
+			local Lazy5 = Right7.lazy
+			
+			if Lazy5 ~= 0 then
+				local Left23 = Right7.left
+				
+				if Left23 ~= nil then
+					Left23.index += Lazy5
+					Left23.lazy += Lazy5
+				end
+				local Right14 = Right7.right
+				
+				if Right14 ~= nil then
+					Right14.index += Lazy5
+					Right14.lazy += Lazy5
+				end
+				Right7.lazy = 0
+			end
+			Left.right = Right7.left
+			Right7.left = Left
+			local Left24 = Left.left
+			local Right15 = Left.right
+			Left.height = math.max(if Left24 == nil then 0 else Left24.height, if Right15 == nil then 0 else Right15.height) + 1
+			local Left25 = Right7.left
+			local Right16 = Right7.right
+			Right7.height = math.max(if Left25 == nil then 0 else Left25.height, if Right16 == nil then 0 else Right16.height) + 1
+			
+			return Right7
 		end
-		local right_2 = p3.right
-		local lazy = right_2.lazy
-		
-		if lazy ~= 0 then
-			local left_2 = right_2.left
-			
-			if left_2 ~= nil then
-				left_2.index += lazy
-				left_2.lazy += lazy
-			end
-			local right_3 = right_2.right
-			
-			if right_3 ~= nil then
-				right_3.index += lazy
-				right_3.lazy += lazy
-			end
-			right_2.lazy = 0
-		end
-		local right_3 = right_2.right
-		local left_2 = right_2.left
-		
-		if (if right_3 == nil then 0 else right_3.height) < (if left_2 == nil then 0 else left_2.height) then
-			right_3 = right_2.left
-			left_2 = right_2.lazy
-			
-			if left_2 ~= 0 then
-				local left_3 = right_2.left
-				
-				if left_3 ~= nil then
-					left_3.index += left_2
-					left_3.lazy += left_2
-				end
-				local right_4 = right_2.right
-				
-				if right_4 ~= nil then
-					right_4.index += left_2
-					right_4.lazy += left_2
-				end
-				right_2.lazy = 0
-			end
-			left_2 = right_3.lazy
-			
-			if left_2 ~= 0 then
-				local left_3 = right_3.left
-				
-				if left_3 ~= nil then
-					left_3.index += left_2
-					left_3.lazy += left_2
-				end
-				local right_4 = right_3.right
-				
-				if right_4 ~= nil then
-					right_4.index += left_2
-					right_4.lazy += left_2
-				end
-				right_3.lazy = 0
-			end
-			right_2.left = right_3.right
-			right_3.right = right_2
-			local left_3 = right_2.left
-			local right_4 = right_2.right
-			right_2.height = math.max(if left_3 == nil then 0 else left_3.height, if right_4 == nil then 0 else right_4.height) + 1
-			local left_4 = right_3.left
-			local right_5 = right_3.right
-			right_3.height = math.max(if left_4 == nil then 0 else left_4.height, if right_5 == nil then 0 else right_5.height) + 1
-			p3.right = right_3
-		end
-		local right_4 = p3.right
-		local lazy_1 = p3.lazy
-		
-		if lazy_1 ~= 0 then
-			local left_3 = p3.left
-			
-			if left_3 ~= nil then
-				left_3.index += lazy_1
-				left_3.lazy += lazy_1
-			end
-			local right_5 = p3.right
-			
-			if right_5 ~= nil then
-				right_5.index += lazy_1
-				right_5.lazy += lazy_1
-			end
-			p3.lazy = 0
-		end
-		local lazy_2 = right_4.lazy
-		
-		if lazy_2 ~= 0 then
-			local left_3 = right_4.left
-			
-			if left_3 ~= nil then
-				left_3.index += lazy_2
-				left_3.lazy += lazy_2
-			end
-			local right_5 = right_4.right
-			
-			if right_5 ~= nil then
-				right_5.index += lazy_2
-				right_5.lazy += lazy_2
-			end
-			right_4.lazy = 0
-		end
-		p3.right = right_4.left
-		right_4.left = p3
-		local left_3 = p3.left
-		local right_5 = p3.right
-		p3.height = math.max(if left_3 == nil then 0 else left_3.height, if right_5 == nil then 0 else right_5.height) + 1
-		local left_4 = right_4.left
-		local right_6 = right_4.right
-		right_4.height = math.max(if left_4 == nil then 0 else left_4.height, if right_6 == nil then 0 else right_6.height) + 1
-		
-		return right_4
 	end
 	
 	local _ = nil
 	
-	local var5 = function(p3, p4, p5)
-		-- upvalues: var5 (write), balance (ref)
-		local var6 = if p3 == nil then 0 else p3.height
-		local var7 = if p5 == nil then 0 else p5.height
+	local function v15(Left, Node, Right) --[[ Line: 101 ]]
+		-- upvalues: v15 (ref), balance (copy)
+		local Height = if Left == nil then 0 else Left.height
+		local Height1 = if Right == nil then 0 else Right.height
 		
-		if var7 + 1 < var6 then
-			local lazy = p3.lazy
+		if Height1 + 1 < Height then
+			local Lazy = Left.lazy
 			
-			if lazy ~= 0 then
-				local left = p3.left
+			if Lazy ~= 0 then
+				local Left1 = Left.left
 				
-				if left ~= nil then
-					left.index += lazy
-					left.lazy += lazy
+				if Left1 ~= nil then
+					Left1.index += Lazy
+					Left1.lazy += Lazy
 				end
-				local right = p3.right
+				local Right1 = Left.right
 				
-				if right ~= nil then
-					right.index += lazy
-					right.lazy += lazy
+				if Right1 ~= nil then
+					Right1.index += Lazy
+					Right1.lazy += Lazy
 				end
-				p3.lazy = 0
+				Left.lazy = 0
 			end
-			p3.right = var5(p3.right, p4, p5)
+			Left.right = v15(Left.right, Node, Right)
 			
-			return balance(p3)
-		elseif var6 + 1 >= var7 then
-			p4.left = p3
-			p4.right = p5
-			p4.lazy = 0
-			local left = p4.left
-			local right = p4.right
-			p4.height = math.max(if left == nil then 0 else left.height, if right == nil then 0 else right.height) + 1
+			return (balance(Left))
+		else
+			if Height + 1 >= Height1 then
+				Node.left = Left
+				Node.right = Right
+				Node.lazy = 0
+				local Left2 = Node.left
+				local Right2 = Node.right
+				Node.height = math.max(if Left2 == nil then 0 else Left2.height, if Right2 == nil then 0 else Right2.height) + 1
+				
+				return Node
+			end
+			local Lazy = Right.lazy
 			
-			return p4
+			if Lazy ~= 0 then
+				local Left3 = Right.left
+				
+				if Left3 ~= nil then
+					Left3.index += Lazy
+					Left3.lazy += Lazy
+				end
+				local Right3 = Right.right
+				
+				if Right3 ~= nil then
+					Right3.index += Lazy
+					Right3.lazy += Lazy
+				end
+				Right.lazy = 0
+			end
+			Right.left = v15(Left, Node, Right.left)
+			
+			return (balance(Right))
 		end
-		local lazy = p5.lazy
-		
-		if lazy ~= 0 then
-			local left = p5.left
-			
-			if left ~= nil then
-				left.index += lazy
-				left.lazy += lazy
-			end
-			local right = p5.right
-			
-			if right ~= nil then
-				right.index += lazy
-				right.lazy += lazy
-			end
-			p5.lazy = 0
-		end
-		p5.left = var5(p3, p4, p5.left)
-		
-		return balance(p5)
 	end
 	
-	local function split(p3, p4)
-		-- upvalues: split (ref), var5 (write)
-		if p3 == nil then
+	local function split(Node, FromIndex) --[[ Line: 122 ]]
+		-- upvalues: split (copy), v15 (ref)
+		if Node == nil then
 			return nil, nil
 		end
-		local lazy = p3.lazy
+		local Lazy = Node.lazy
 		
-		if lazy ~= 0 then
-			local left = p3.left
+		if Lazy ~= 0 then
+			local Left = Node.left
 			
-			if left ~= nil then
-				left.index += lazy
-				left.lazy += lazy
+			if Left ~= nil then
+				Left.index += Lazy
+				Left.lazy += Lazy
 			end
-			local right = p3.right
+			local Right = Node.right
 			
-			if right ~= nil then
-				right.index += lazy
-				right.lazy += lazy
+			if Right ~= nil then
+				Right.index += Lazy
+				Right.lazy += Lazy
 			end
-			p3.lazy = 0
+			Node.lazy = 0
 		end
-		if p3.index < p4 then
-			local var6, var7 = split(p3.right, p4)
-			local left = p3.left
-			p3.left = nil
-			p3.right = nil
+		if Node.index < FromIndex then
+			local SplitResult, SplitResult2 = split(Node.right, FromIndex)
+			Node.left = nil
+			Node.right = nil
 			
-			return var5(left, p3, var6), var7
-		end
-		local var8, var9 = split(p3.left, p4)
-		local right = p3.right
-		p3.left = nil
-		p3.right = nil
-		
-		return var8, var5(var9, p3, right)
-	end
-	
-	local function removeFirst(p3)
-		-- upvalues: removeFirst (ref), balance (ref)
-		local lazy = p3.lazy
-		
-		if lazy ~= 0 then
-			local left = p3.left
-			
-			if left ~= nil then
-				left.index += lazy
-				left.lazy += lazy
-			end
-			local right = p3.right
-			
-			if right ~= nil then
-				right.index += lazy
-				right.lazy += lazy
-			end
-			p3.lazy = 0
-		end
-		if p3.left == nil then
-			local right = p3.right
-			p3.right = nil
-			local left = p3.left
-			local right_1 = p3.right
-			p3.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-			
-			return right, p3
-		end
-		local var6, var7 = removeFirst(p3.left)
-		p3.left = var6
-		
-		return balance(p3), var7
-	end
-	
-	local _ = function(p3, p4)
-		-- upvalues: removeFirst (ref), balance (ref), var5 (write)
-		if p3 == nil then
-			return p4
-		elseif p4 == nil then
-			return p3
-		end
-		local var6, var7
-		local lazy = p4.lazy
-		
-		if lazy ~= 0 then
-			local left = p4.left
-			
-			if left ~= nil then
-				left.index += lazy
-				left.lazy += lazy
-			end
-			local right = p4.right
-			
-			if right ~= nil then
-				right.index += lazy
-				right.lazy += lazy
-			end
-			p4.lazy = 0
-		end
-		if p4.left == nil then
-			local right = p4.right
-			p4.right = nil
-			local left = p4.left
-			local right_1 = p4.right
-			p4.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-			var6 = right
-			var7 = p4
+			return v15(Node.left, Node, SplitResult), SplitResult2
 		else
-			local var8, var9 = removeFirst(p4.left)
-			p4.left = var8
-			var6 = balance(p4)
-			var7 = var9
+			local SplitResult1, SplitResult2_1 = split(Node.left, FromIndex)
+			Node.left = nil
+			Node.right = nil
+			
+			return SplitResult1, v15(SplitResult2_1, Node, Node.right)
 		end
-		return var5(p3, var7, var6)
 	end
 	
-	local _ = function(p3)
+	local function removeFirst(Left) --[[ Line: 141 ]]
+		-- upvalues: removeFirst (copy), balance (copy)
+		local Lazy = Left.lazy
+		
+		if Lazy ~= 0 then
+			local Left1 = Left.left
+			
+			if Left1 ~= nil then
+				Left1.index += Lazy
+				Left1.lazy += Lazy
+			end
+			local Right = Left.right
+			
+			if Right ~= nil then
+				Right.index += Lazy
+				Right.lazy += Lazy
+			end
+			Left.lazy = 0
+		end
+		if Left.left == nil then
+			local Right = Left.right
+			Left.right = nil
+			local Left2 = Left.left
+			local Right1 = Left.right
+			Left.height = math.max(if Left2 == nil then 0 else Left2.height, if Right1 == nil then 0 else Right1.height) + 1
+			
+			return Right, Left
+		else
+			local RemoveFirstResult2
+			Left.left, RemoveFirstResult2 = removeFirst(Left.left)
+			
+			return balance(Left), RemoveFirstResult2
+		end
+	end
+	
+	local _ = function(Left, Node) --[[ Line: 154 | Named "join" ]]
+		-- upvalues: removeFirst (copy), balance (copy), v15 (ref)
+		if Left == nil then
+			return Node
+		end
+		if Node == nil then
+			return Left
+		end
+		local Lazy = Node.lazy
+		
+		if Lazy ~= 0 then
+			local Left1 = Node.left
+			
+			if Left1 ~= nil then
+				Left1.index += Lazy
+				Left1.lazy += Lazy
+			end
+			local Right = Node.right
+			
+			if Right ~= nil then
+				Right.index += Lazy
+				Right.lazy += Lazy
+			end
+			Node.lazy = 0
+		end
+		local Right2 = nil
+		local Node1 = nil
+		if Node.left == nil then
+			local Right = Node.right
+			Node.right = nil
+			local Left2 = Node.left
+			local Right1 = Node.right
+			Node.height = math.max(if Left2 == nil then 0 else Left2.height, if Right1 == nil then 0 else Right1.height) + 1
+			Right2 = Right
+			Node1 = Node
+		else
+			local RemoveFirstResult2
+			Node.left, RemoveFirstResult2 = removeFirst(Node.left)
+			Right2 = balance(Node)
+			Node1 = RemoveFirstResult2
+		end
+		return v15(Left, Node1, Right2)
+	end
+	
+	local _ = function(Index) --[[ Line: 164 | Named "newNode" ]]
 		return {
 			height = 1,
 			lazy = 0,
 			left = nil,
 			right = nil,
-			index = p3
+			index = Index
 		}
 	end
 	
-	local function buildBalanced(p3, p4, p5)
-		-- upvalues: buildBalanced (ref)
-		if p5 < p4 then
+	local function buildBalanced(p1, p2, Count) --[[ Line: 174 ]]
+		-- upvalues: buildBalanced (copy)
+		if Count < p2 then
 			return nil
+		else
+			local Floored = math.floor((p2 + Count) / 2)
+			local config = {
+				height = 1,
+				lazy = 0,
+				left = nil,
+				right = nil,
+				index = p1[Floored]
+			}
+			config.left = buildBalanced(p1, p2, Floored - 1)
+			config.right = buildBalanced(p1, Floored + 1, Count)
+			local Left = config.left
+			local Right = config.right
+			config.height = math.max(if Left == nil then 0 else Left.height, if Right == nil then 0 else Right.height) + 1
+			
+			return config
 		end
-		local floored = math.floor((p4 + p5) / 2)
-		local t = {
-			height = 1,
-			lazy = 0,
-			left = nil,
-			right = nil,
-			index = p3[floored],
-			left = buildBalanced(p3, p4, floored - 1),
-			right = buildBalanced(p3, floored + 1, p5)
-		}
-		local left = t.left
-		local right = t.right
-		t.height = math.max(if left == nil then 0 else left.height, if right == nil then 0 else right.height) + 1
-		
-		return t
 	end
 	
-	local function rebuild()
-		-- upvalues: var2 (write), var1 (write), var3 (write), buildBalanced (ref), var4 (write)
-		local t = {}
+	local function rebuild() --[[ Line: 186 ]]
+		-- upvalues: Callback (ref), ItemSequence1 (ref), v1 (ref), buildBalanced (copy), Flag (ref)
+		local List = {}
 		
-		if var2 ~= nil then
-			for i = 1, var1.getItemCount() do
-				if var2(var1.getItemKey(i)) then
-					table.insert(t, i)
+		if Callback ~= nil then
+			for i = 1, ItemSequence1.getItemCount() do
+				if Callback((ItemSequence1.getItemKey(i))) then
+					table.insert(List, i)
 				end
 			end
 		end
-		var3 = buildBalanced(t, 1, #t)
-		var4 = false
+		v1 = buildBalanced(List, 1, #List)
+		Flag = false
 	end
 	
 	return {
-		setPredicate = function(value)
-			-- upvalues: var2 (write), var4 (write)
-			if var2 == value then
+		setPredicate = function(Value): boolean --[[ Line: 221 ]]
+			-- upvalues: Callback (ref), Flag (ref)
+			if Callback == Value then
 				return false
-			end
-			var2 = value
-			var4 = true
-			
-			return true
-		end,
-		setItemSequence = function(value)
-			-- upvalues: var1 (write), var4 (write)
-			if var1 ~= value then
-				var1 = value
-				var4 = true
-			end
-		end,
-		applyDataSourceChange = function(p3)
-			-- upvalues: var4 (write), var2 (write), dataSourceChangeTypeModule (copy), split (ref), var3 (write), buildBalanced (ref), removeFirst (ref), balance (ref), var5 (write)
-			if var4 or var2 == nil then return end
-			for i, v in p3.changes do
-				if v.type ~= dataSourceChangeTypeModule.Reset and v.type ~= dataSourceChangeTypeModule.Reorder then
-					local index, keysCount, i_1, v_1
-					if v.type ~= dataSourceChangeTypeModule.Insert then
-						if v.type == dataSourceChangeTypeModule.Remove then
-							local var6
-							index = v.index
-							keysCount = index + #v.keys - 1
-							local var7, var8 = split(var3, index)
-							local _, var9 = split(var8, keysCount + 1)
-							local var10 = -#v.keys
-							
-							if var9 ~= nil then
-								var9.index += var10
-								var9.lazy += var10
-							end
-							if var7 == nil then
-								var6 = var9
-							elseif var9 == nil then
-								var6 = var7
-							else
-								local var11
-								v_1 = var9.lazy
-								
-								if v_1 ~= 0 then
-									local left = var9.left
-									
-									if left ~= nil then
-										left.index += v_1
-										left.lazy += v_1
-									end
-									local right = var9.right
-									
-									if right ~= nil then
-										right.index += v_1
-										right.lazy += v_1
-									end
-									var9.lazy = 0
-								end
-								if var9.left == nil then
-									v_1 = var9.right
-									var9.right = nil
-									local left = var9.left
-									local right = var9.right
-									var9.height = math.max(if left == nil then 0 else left.height, if right == nil then 0 else right.height) + 1
-									var11 = v_1
-									i_1 = var9
-								else
-									v_1, var45 = removeFirst(var9.left)
-									var9.left = v_1
-									var11 = balance(var9)
-									i_1 = var45
-								end
-								var6 = var5(var7, i_1, var11)
-							end
-							var3 = var6
-						elseif v.type == dataSourceChangeTypeModule.Move then
-							index = v.fromIndex
-							keysCount = v.toIndex
-							
-							if index >= keysCount then
-								local var12
-								local var13, var14 = split(var3, keysCount)
-								local var15, var16 = split(var14, index)
-								local var17, var18 = split(var16, index + 1)
-								
-								if var15 ~= nil then
-									var15.index += 1
-									var15.lazy += 1
-								end
-								if var17 ~= nil then
-									var17.index = keysCount
-								end
-								if var13 == nil then
-									var12 = var17
-								elseif var17 == nil then
-									var12 = var13
-								else
-									local var19, var20
-									local lazy = var17.lazy
-									
-									if lazy ~= 0 then
-										local left = var17.left
-										
-										if left ~= nil then
-											left.index += lazy
-											left.lazy += lazy
-										end
-										local right = var17.right
-										
-										if right ~= nil then
-											right.index += lazy
-											right.lazy += lazy
-										end
-										var17.lazy = 0
-									end
-									if var17.left == nil then
-										local right = var17.right
-										var17.right = nil
-										local left = var17.left
-										local right_1 = var17.right
-										var17.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-										var19 = right
-										var20 = var17
-									else
-										local var21, var22 = removeFirst(var17.left)
-										var17.left = var21
-										var19 = balance(var17)
-										var20 = var22
-									end
-									var12 = var5(var13, var20, var19)
-								end
-								if var12 == nil then
-									v_1 = var15
-								elseif var15 == nil then
-									v_1 = var12
-								else
-									local var23, var24
-									local lazy = var15.lazy
-									
-									if lazy ~= 0 then
-										local left = var15.left
-										
-										if left ~= nil then
-											left.index += lazy
-											left.lazy += lazy
-										end
-										local right = var15.right
-										
-										if right ~= nil then
-											right.index += lazy
-											right.lazy += lazy
-										end
-										var15.lazy = 0
-									end
-									if var15.left == nil then
-										local right = var15.right
-										var15.right = nil
-										local left = var15.left
-										local right_1 = var15.right
-										var15.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-										var23 = right
-										var24 = var15
-									else
-										local var25, var26 = removeFirst(var15.left)
-										var15.left = var25
-										var23 = balance(var15)
-										var24 = var26
-									end
-									v_1 = var5(var12, var24, var23)
-								end
-								if v_1 == nil then
-									i_1 = var18
-								elseif var18 == nil then
-									i_1 = v_1
-								else
-									local var27, var28
-									local lazy = var18.lazy
-									
-									if lazy ~= 0 then
-										local left = var18.left
-										
-										if left ~= nil then
-											left.index += lazy
-											left.lazy += lazy
-										end
-										local right = var18.right
-										
-										if right ~= nil then
-											right.index += lazy
-											right.lazy += lazy
-										end
-										var18.lazy = 0
-									end
-									if var18.left == nil then
-										local right = var18.right
-										var18.right = nil
-										local left = var18.left
-										local right_1 = var18.right
-										var18.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-										var27 = right
-										var28 = var18
-									else
-										local var29, var30 = removeFirst(var18.left)
-										var18.left = var29
-										var27 = balance(var18)
-										var28 = var30
-									end
-									i_1 = var5(v_1, var28, var27)
-								end
-								var3 = i_1
-							end
-							local var31
-							local var32, var33 = split(var3, index)
-							local var34, var35 = split(var33, index + 1)
-							local var36, var37 = split(var35, keysCount + 1)
-							
-							if var36 ~= nil then
-								var36.index += -1
-								var36.lazy += -1
-							end
-							if var34 ~= nil then
-								var34.index = keysCount
-							end
-							if var32 == nil then
-								var31 = var36
-							elseif var36 == nil then
-								var31 = var32
-							else
-								local var38, var39
-								local lazy = var36.lazy
-								
-								if lazy ~= 0 then
-									local left = var36.left
-									
-									if left ~= nil then
-										left.index += lazy
-										left.lazy += lazy
-									end
-									local right = var36.right
-									
-									if right ~= nil then
-										right.index += lazy
-										right.lazy += lazy
-									end
-									var36.lazy = 0
-								end
-								if var36.left == nil then
-									local right = var36.right
-									var36.right = nil
-									local left = var36.left
-									local right_1 = var36.right
-									var36.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-									var38 = right
-									var39 = var36
-								else
-									local var40, var41 = removeFirst(var36.left)
-									var36.left = var40
-									var38 = balance(var36)
-									var39 = var41
-								end
-								var31 = var5(var32, var39, var38)
-							end
-							if var31 == nil then
-								v_1 = var34
-							elseif var34 == nil then
-								v_1 = var31
-							else
-								local var42, var43
-								local lazy = var34.lazy
-								
-								if lazy ~= 0 then
-									local left = var34.left
-									
-									if left ~= nil then
-										left.index += lazy
-										left.lazy += lazy
-									end
-									local right = var34.right
-									
-									if right ~= nil then
-										right.index += lazy
-										right.lazy += lazy
-									end
-									var34.lazy = 0
-								end
-								if var34.left == nil then
-									local right = var34.right
-									var34.right = nil
-									local left = var34.left
-									local right_1 = var34.right
-									var34.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-									var42 = right
-									var43 = var34
-								else
-									local var44, var45 = removeFirst(var34.left)
-									var34.left = var44
-									var42 = balance(var34)
-									var43 = var45
-								end
-								v_1 = var5(var31, var43, var42)
-							end
-							if v_1 == nil then
-								i_1 = var37
-							elseif var37 == nil then
-								i_1 = v_1
-							else
-								local var46, var47
-								local lazy = var37.lazy
-								
-								if lazy ~= 0 then
-									local left = var37.left
-									
-									if left ~= nil then
-										left.index += lazy
-										left.lazy += lazy
-									end
-									local right = var37.right
-									
-									if right ~= nil then
-										right.index += lazy
-										right.lazy += lazy
-									end
-									var37.lazy = 0
-								end
-								if var37.left == nil then
-									local right = var37.right
-									var37.right = nil
-									local left = var37.left
-									local right_1 = var37.right
-									var37.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-									var46 = right
-									var47 = var37
-								else
-									local var48, var49 = removeFirst(var37.left)
-									var37.left = var48
-									var46 = balance(var37)
-									var47 = var49
-								end
-								i_1 = var5(v_1, var47, var46)
-							end
-							var3 = i_1
-						end
-					end
-					index = v.index
-					keysCount = #v.keys
-					local var50, var51 = split(var3, index)
-					
-					if var51 ~= nil then
-						var51.index += keysCount
-						var51.lazy += keysCount
-					end
-					local t = {}
-					
-					for i_1, v_1 in v.keys do
-						if var2(v_1) then
-							table.insert(t, index + i_1 - 1)
-						end
-					end
-					local var52
-					local var53 = buildBalanced(t, 1, #t)
-					
-					if var50 == nil then
-						var52 = var53
-					elseif var53 == nil then
-						var52 = var50
-					else
-						local lazy = var53.lazy
-						
-						if lazy ~= 0 then
-							local left = var53.left
-							
-							if left ~= nil then
-								left.index += lazy
-								left.lazy += lazy
-							end
-							local right = var53.right
-							
-							if right ~= nil then
-								right.index += lazy
-								right.lazy += lazy
-							end
-							var53.lazy = 0
-						end
-						if var53.left == nil then
-							local right = var53.right
-							var53.right = nil
-							local left = var53.left
-							local right_1 = var53.right
-							var53.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-							i_1 = right
-							v_1 = var53
-						else
-							local var54, var55 = removeFirst(var53.left)
-							var53.left = var54
-							i_1 = balance(var53)
-							v_1 = var55
-						end
-						var52 = var5(var50, v_1, i_1)
-					end
-					local var56
-					if var52 == nil then
-						var56 = var51
-					elseif var51 == nil then
-						var56 = var52
-					else
-						local lazy = var51.lazy
-						
-						if lazy ~= 0 then
-							local left = var51.left
-							
-							if left ~= nil then
-								left.index += lazy
-								left.lazy += lazy
-							end
-							local right = var51.right
-							
-							if right ~= nil then
-								right.index += lazy
-								right.lazy += lazy
-							end
-							var51.lazy = 0
-						end
-						if var51.left == nil then
-							local right = var51.right
-							var51.right = nil
-							local left = var51.left
-							local right_1 = var51.right
-							var51.height = math.max(if left == nil then 0 else left.height, if right_1 == nil then 0 else right_1.height) + 1
-							i_1 = right
-							v_1 = var51
-						else
-							local var57, var58 = removeFirst(var51.left)
-							var51.left = var57
-							i_1 = balance(var51)
-							v_1 = var58
-						end
-						var56 = var5(var52, v_1, i_1)
-					end
-					var3 = var56
-				end
-				var4 = true
+			else
+				Callback = Value
+				Flag = true
 				
-				return
+				return true
 			end
 		end,
-		resolveActive = function(p4)
-			-- upvalues: var4 (write), rebuild (ref), var3 (write)
-			if var4 then
+		setItemSequence = function(Value) --[[ Line: 229 ]]
+			-- upvalues: ItemSequence1 (ref), Flag (ref)
+			if ItemSequence1 ~= Value then
+				ItemSequence1 = Value
+				Flag = true
+			end
+		end,
+		applyDataSourceChange = function(p1) --[[ Line: 235 ]]
+			-- upvalues: Flag (ref), Callback (ref), DataSourceChangeTypeModule (upval), split (copy), v1 (ref), buildBalanced (copy), removeFirst (copy), balance (copy), v15 (ref)
+			if Flag or Callback == nil then return end
+			for _, change in p1.changes do
+				if change.type == DataSourceChangeTypeModule.Reset or change.type == DataSourceChangeTypeModule.Reorder then
+					Flag = true
+					break
+				end
+				if change.type == DataSourceChangeTypeModule.Insert then
+					local Index = change.index
+					local CountKeys = #change.keys
+					local SplitResult, SplitResult2 = split(v1, Index)
+					
+					if SplitResult2 ~= nil then
+						SplitResult2.index += CountKeys
+						SplitResult2.lazy += CountKeys
+					end
+					local List = {}
+					
+					for i, key in change.keys do
+						if Callback(key) then
+							table.insert(List, Index + i - 1)
+						end
+					end
+					local Balanced = buildBalanced(List, 1, #List)
+					local Left = nil
+					
+					if SplitResult == nil then
+						Left = Balanced
+					elseif Balanced == nil then
+						Left = SplitResult
+					else
+						local Lazy = Balanced.lazy
+						
+						if Lazy ~= 0 then
+							local Left1 = Balanced.left
+							
+							if Left1 ~= nil then
+								Left1.index += Lazy
+								Left1.lazy += Lazy
+							end
+							local Right = Balanced.right
+							
+							if Right ~= nil then
+								Right.index += Lazy
+								Right.lazy += Lazy
+							end
+							Balanced.lazy = 0
+						end
+						local Balanced1 = nil
+						local Right4 = nil
+						if Balanced.left == nil then
+							local Right = Balanced.right
+							Balanced.right = nil
+							local Left2 = Balanced.left
+							local Right3 = Balanced.right
+							Balanced.height = math.max(if Left2 == nil then 0 else Left2.height, if Right3 == nil then 0 else Right3.height) + 1
+							Right4 = Right
+							Balanced1 = Balanced
+						else
+							local RemoveFirstResult2_1
+							Balanced.left, RemoveFirstResult2_1 = removeFirst(Balanced.left)
+							Right4 = balance(Balanced)
+							Balanced1 = RemoveFirstResult2_1
+						end
+						Left = v15(SplitResult, Balanced1, Right4)
+					end
+					local SplitResult1 = nil
+					if Left == nil then
+						SplitResult1 = SplitResult2
+					elseif SplitResult2 == nil then
+						SplitResult1 = Left
+					else
+						local Lazy = SplitResult2.lazy
+						
+						if Lazy ~= 0 then
+							local Left4 = SplitResult2.left
+							
+							if Left4 ~= nil then
+								Left4.index += Lazy
+								Left4.lazy += Lazy
+							end
+							local Right = SplitResult2.right
+							
+							if Right ~= nil then
+								Right.index += Lazy
+								Right.lazy += Lazy
+							end
+							SplitResult2.lazy = 0
+						end
+						local Right6 = nil
+						local SplitResult3 = nil
+						if SplitResult2.left == nil then
+							local Right = SplitResult2.right
+							SplitResult2.right = nil
+							local Left7 = SplitResult2.left
+							local Right5 = SplitResult2.right
+							SplitResult2.height = math.max(if Left7 == nil then 0 else Left7.height, if Right5 == nil then 0 else Right5.height) + 1
+							Right6 = Right
+							SplitResult3 = SplitResult2
+						else
+							local RemoveFirstResult2_3
+							SplitResult2.left, RemoveFirstResult2_3 = removeFirst(SplitResult2.left)
+							Right6 = balance(SplitResult2)
+							SplitResult3 = RemoveFirstResult2_3
+						end
+						SplitResult1 = v15(Left, SplitResult3, Right6)
+					end
+					v1 = SplitResult1
+				else
+					if change.type ~= DataSourceChangeTypeModule.Remove then
+						if change.type == DataSourceChangeTypeModule.Move then
+							local FromIndex: number = change.fromIndex
+							local ToIndex: number = change.toIndex
+							
+							if FromIndex < ToIndex then
+								local SplitResult7, SplitResult2_3 = split(v1, FromIndex)
+								local SplitResult8, SplitResult2_4 = split(SplitResult2_3, FromIndex + 1)
+								local SplitResult9, SplitResult2_5 = split(SplitResult2_4, ToIndex + 1)
+								
+								if SplitResult9 ~= nil then
+									SplitResult9.index += -1
+									SplitResult9.lazy += -1
+								end
+								if SplitResult8 ~= nil then
+									SplitResult8.index = ToIndex
+								end
+								local Left9 = nil
+								if SplitResult7 == nil then
+									Left9 = SplitResult9
+								elseif SplitResult9 == nil then
+									Left9 = SplitResult7
+								else
+									local Lazy3 = SplitResult9.lazy
+									
+									if Lazy3 ~= 0 then
+										local Left10 = SplitResult9.left
+										
+										if Left10 ~= nil then
+											Left10.index += Lazy3
+											Left10.lazy += Lazy3
+										end
+										local Right = SplitResult9.right
+										
+										if Right ~= nil then
+											Right.index += Lazy3
+											Right.lazy += Lazy3
+										end
+										SplitResult9.lazy = 0
+									end
+									local Right10 = nil
+									local SplitResult13 = nil
+									if SplitResult9.left == nil then
+										local Right = SplitResult9.right
+										SplitResult9.right = nil
+										local Left11 = SplitResult9.left
+										local Right9 = SplitResult9.right
+										SplitResult9.height = math.max(if Left11 == nil then 0 else Left11.height, if Right9 == nil then 0 else Right9.height) + 1
+										Right10 = Right
+										SplitResult13 = SplitResult9
+									else
+										local RemoveFirstResult2_5
+										SplitResult9.left, RemoveFirstResult2_5 = removeFirst(SplitResult9.left)
+										Right10 = balance(SplitResult9)
+										SplitResult13 = RemoveFirstResult2_5
+									end
+									Left9 = v15(SplitResult7, SplitResult13, Right10)
+								end
+								local Left = nil
+								if Left9 == nil then
+									Left = SplitResult8
+								elseif SplitResult8 == nil then
+									Left = Left9
+								else
+									local Lazy2 = SplitResult8.lazy
+									
+									if Lazy2 ~= 0 then
+										local Left12 = SplitResult8.left
+										
+										if Left12 ~= nil then
+											Left12.index += Lazy2
+											Left12.lazy += Lazy2
+										end
+										local Right = SplitResult8.right
+										
+										if Right ~= nil then
+											Right.index += Lazy2
+											Right.lazy += Lazy2
+										end
+										SplitResult8.lazy = 0
+									end
+									local Right12 = nil
+									local SplitResult14 = nil
+									if SplitResult8.left == nil then
+										local Right = SplitResult8.right
+										SplitResult8.right = nil
+										local Left13 = SplitResult8.left
+										local Right11 = SplitResult8.right
+										SplitResult8.height = math.max(if Left13 == nil then 0 else Left13.height, if Right11 == nil then 0 else Right11.height) + 1
+										Right12 = Right
+										SplitResult14 = SplitResult8
+									else
+										local RemoveFirstResult2_6
+										SplitResult8.left, RemoveFirstResult2_6 = removeFirst(SplitResult8.left)
+										Right12 = balance(SplitResult8)
+										SplitResult14 = RemoveFirstResult2_6
+									end
+									Left = v15(Left9, SplitResult14, Right12)
+								end
+								local SplitResult15 = nil
+								if Left == nil then
+									SplitResult15 = SplitResult2_5
+								elseif SplitResult2_5 == nil then
+									SplitResult15 = Left
+								else
+									local Lazy = SplitResult2_5.lazy
+									
+									if Lazy ~= 0 then
+										local Left14 = SplitResult2_5.left
+										
+										if Left14 ~= nil then
+											Left14.index += Lazy
+											Left14.lazy += Lazy
+										end
+										local Right = SplitResult2_5.right
+										
+										if Right ~= nil then
+											Right.index += Lazy
+											Right.lazy += Lazy
+										end
+										SplitResult2_5.lazy = 0
+									end
+									local Right14 = nil
+									local SplitResult16 = nil
+									if SplitResult2_5.left == nil then
+										local Right = SplitResult2_5.right
+										SplitResult2_5.right = nil
+										local Left15 = SplitResult2_5.left
+										local Right13 = SplitResult2_5.right
+										SplitResult2_5.height = math.max(if Left15 == nil then 0 else Left15.height, if Right13 == nil then 0 else Right13.height) + 1
+										Right14 = Right
+										SplitResult16 = SplitResult2_5
+									else
+										local RemoveFirstResult2_7
+										SplitResult2_5.left, RemoveFirstResult2_7 = removeFirst(SplitResult2_5.left)
+										Right14 = balance(SplitResult2_5)
+										SplitResult16 = RemoveFirstResult2_7
+									end
+									SplitResult15 = v15(Left, SplitResult16, Right14)
+								end
+								v1 = SplitResult15
+							else
+								local SplitResult10, SplitResult2_6 = split(v1, ToIndex)
+								local SplitResult11, SplitResult2_7 = split(SplitResult2_6, FromIndex)
+								local SplitResult12, SplitResult2_8 = split(SplitResult2_7, FromIndex + 1)
+								
+								if SplitResult11 ~= nil then
+									SplitResult11.index += 1
+									SplitResult11.lazy += 1
+								end
+								if SplitResult12 ~= nil then
+									SplitResult12.index = ToIndex
+								end
+								local Left6 = nil
+								if SplitResult10 == nil then
+									Left6 = SplitResult12
+								elseif SplitResult12 == nil then
+									Left6 = SplitResult10
+								else
+									local Lazy = SplitResult12.lazy
+									
+									if Lazy ~= 0 then
+										local Left5 = SplitResult12.left
+										
+										if Left5 ~= nil then
+											Left5.index += Lazy
+											Left5.lazy += Lazy
+										end
+										local Right = SplitResult12.right
+										
+										if Right ~= nil then
+											Right.index += Lazy
+											Right.lazy += Lazy
+										end
+										SplitResult12.lazy = 0
+									end
+									local RemoveFirstResult = nil
+									local BalanceResult = nil
+									if SplitResult12.left == nil then
+										local Right = SplitResult12.right
+										SplitResult12.right = nil
+										local Left = SplitResult12.left
+										local Right15 = SplitResult12.right
+										SplitResult12.height = math.max(if Left == nil then 0 else Left.height, if Right15 == nil then 0 else Right15.height) + 1
+										BalanceResult = Right
+										RemoveFirstResult = SplitResult12
+									else
+										local RemoveFirstResult2_2
+										SplitResult12.left, RemoveFirstResult2_2 = removeFirst(SplitResult12.left)
+										BalanceResult = balance(SplitResult12)
+										RemoveFirstResult = RemoveFirstResult2_2
+									end
+									Left6 = v15(SplitResult10, RemoveFirstResult, BalanceResult)
+								end
+								local Left = nil
+								if Left6 == nil then
+									Left = SplitResult11
+								elseif SplitResult11 == nil then
+									Left = Left6
+								else
+									local Lazy = SplitResult11.lazy
+									
+									if Lazy ~= 0 then
+										local Left3 = SplitResult11.left
+										
+										if Left3 ~= nil then
+											Left3.index += Lazy
+											Left3.lazy += Lazy
+										end
+										local Right = SplitResult11.right
+										
+										if Right ~= nil then
+											Right.index += Lazy
+											Right.lazy += Lazy
+										end
+										SplitResult11.lazy = 0
+									end
+									local Right17 = nil
+									local SplitResult17 = nil
+									if SplitResult11.left == nil then
+										local Right = SplitResult11.right
+										SplitResult11.right = nil
+										local Left16 = SplitResult11.left
+										local Right16 = SplitResult11.right
+										SplitResult11.height = math.max(if Left16 == nil then 0 else Left16.height, if Right16 == nil then 0 else Right16.height) + 1
+										Right17 = Right
+										SplitResult17 = SplitResult11
+									else
+										local RemoveFirstResult2_8
+										SplitResult11.left, RemoveFirstResult2_8 = removeFirst(SplitResult11.left)
+										Right17 = balance(SplitResult11)
+										SplitResult17 = RemoveFirstResult2_8
+									end
+									Left = v15(Left6, SplitResult17, Right17)
+								end
+								local SplitResult18 = nil
+								if Left == nil then
+									SplitResult18 = SplitResult2_8
+								elseif SplitResult2_8 == nil then
+									SplitResult18 = Left
+								else
+									local Lazy = SplitResult2_8.lazy
+									
+									if Lazy ~= 0 then
+										local Left17 = SplitResult2_8.left
+										
+										if Left17 ~= nil then
+											Left17.index += Lazy
+											Left17.lazy += Lazy
+										end
+										local Right = SplitResult2_8.right
+										
+										if Right ~= nil then
+											Right.index += Lazy
+											Right.lazy += Lazy
+										end
+										SplitResult2_8.lazy = 0
+									end
+									local Right2 = nil
+									local v2 = nil
+									if SplitResult2_8.left == nil then
+										local Right = SplitResult2_8.right
+										SplitResult2_8.right = nil
+										local Left8 = SplitResult2_8.left
+										local Right1 = SplitResult2_8.right
+										SplitResult2_8.height = math.max(if Left8 == nil then 0 else Left8.height, if Right1 == nil then 0 else Right1.height) + 1
+										Right2 = Right
+										v2 = SplitResult2_8
+									else
+										local RemoveFirstResult2
+										SplitResult2_8.left, RemoveFirstResult2 = removeFirst(SplitResult2_8.left)
+										Right2 = balance(SplitResult2_8)
+										v2 = RemoveFirstResult2
+									end
+									SplitResult18 = v15(Left, v2, Right2)
+								end
+								v1 = SplitResult18
+							end
+						end
+						continue
+					end
+					local Index = change.index
+					local IndexDelta = Index + #change.keys - 1
+					local SplitResult4, SplitResult2_1 = split(v1, Index)
+					local _, SplitResult2_2 = split(SplitResult2_1, IndexDelta + 1)
+					local Negated = -#change.keys
+					
+					if SplitResult2_2 ~= nil then
+						SplitResult2_2.index += Negated
+						SplitResult2_2.lazy += Negated
+					end
+					local SplitResult5 = nil
+					if SplitResult4 == nil then
+						SplitResult5 = SplitResult2_2
+					elseif SplitResult2_2 == nil then
+						SplitResult5 = SplitResult4
+					else
+						local Lazy1 = SplitResult2_2.lazy
+						
+						if Lazy1 ~= 0 then
+							local Left = SplitResult2_2.left
+							
+							if Left ~= nil then
+								Left.index += Lazy1
+								Left.lazy += Lazy1
+							end
+							local Right = SplitResult2_2.right
+							
+							if Right ~= nil then
+								Right.index += Lazy1
+								Right.lazy += Lazy1
+							end
+							SplitResult2_2.lazy = 0
+						end
+						local Right8 = nil
+						local SplitResult6 = nil
+						if SplitResult2_2.left == nil then
+							local Right = SplitResult2_2.right
+							SplitResult2_2.right = nil
+							local Left8 = SplitResult2_2.left
+							local Right7 = SplitResult2_2.right
+							SplitResult2_2.height = math.max(if Left8 == nil then 0 else Left8.height, if Right7 == nil then 0 else Right7.height) + 1
+							Right8 = Right
+							SplitResult6 = SplitResult2_2
+						else
+							local RemoveFirstResult2_4
+							SplitResult2_2.left, RemoveFirstResult2_4 = removeFirst(SplitResult2_2.left)
+							Right8 = balance(SplitResult2_2)
+							SplitResult6 = RemoveFirstResult2_4
+						end
+						SplitResult5 = v15(SplitResult4, SplitResult6, Right8)
+					end
+					v1 = SplitResult5
+				end
+			end
+		end,
+		resolveActive = function(Callback) --[[ Line: 200 ]]
+			-- upvalues: Flag (ref), rebuild (copy), v1 (ref)
+			if Flag then
 				rebuild()
 			end
-			local index = nil
-			local index_1 = nil
-			local var59 = var3
-			while var59 ~= nil do
-				local lazy = var59.lazy
+			local Index = nil
+			local Index1 = nil
+			local Left = v1
+			while Left ~= nil do
+				local Node = Left
+				local Lazy = Node.lazy
 				
-				if lazy ~= 0 then
-					local left = var59.left
+				if Lazy ~= 0 then
+					local Left1 = Node.left
 					
-					if left ~= nil then
-						left.index += lazy
-						left.lazy += lazy
+					if Left1 ~= nil then
+						Left1.index += Lazy
+						Left1.lazy += Lazy
 					end
-					local right = var59.right
+					local Right = Node.right
 					
-					if right ~= nil then
-						right.index += lazy
-						right.lazy += lazy
+					if Right ~= nil then
+						Right.index += Lazy
+						Right.lazy += Lazy
 					end
-					var59.lazy = 0
+					Node.lazy = 0
 				end
-				if p4(var59.index) then
-					index = var59.index
-					var59 = var59.right
+				if Callback(Left.index) then
+					Index = Left.index
+					Left = Left.right
 				else
-					index_1 = var59.index
-					var59 = var59.left
+					Index1 = Left.index
+					Left = Left.left
 				end
 			end
-			return index, index_1
+			return Index, Index1
 		end
 	}
 end

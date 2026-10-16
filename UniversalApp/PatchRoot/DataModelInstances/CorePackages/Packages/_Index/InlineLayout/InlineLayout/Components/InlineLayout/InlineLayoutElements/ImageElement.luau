@@ -1,19 +1,16 @@
-﻿local parent = script:FindFirstAncestor("Components").Parent.Parent
-local inlineLayoutElements = script:FindFirstAncestor("InlineLayoutElements")
-local foundationModule = require(parent.Foundation)
-local dashModule = require(parent.Dash)
-local renderableInlineElementModule = require(inlineLayoutElements.RenderableInlineElement)
-local image = foundationModule.Image
-local t = {}
+﻿local Parent = script:FindFirstAncestor("Components").Parent.Parent
+local DashModule = require(Parent.Dash)
+local RenderableInlineElementModule = require(script:FindFirstAncestor("InlineLayoutElements").RenderableInlineElement)
+local Image = require(Parent.Foundation).Image
 
-local function mapProps(p1)
-	-- upvalues: dashModule (ref)
-	return dashModule.omit(p1, { "id" })
+local function mapProps(p1) --[[ Line: 13 ]]
+	-- upvalues: DashModule (copy)
+	return DashModule.omit(p1, { "id" })
 end
 
-function t.new(p1)
-	-- upvalues: renderableInlineElementModule (ref), image (ref), mapProps (ref)
-	return renderableInlineElementModule.new(image, p1, mapProps)
-end
-
-return t
+return {
+	new = function(Image1) --[[ Line: 17 ]]
+		-- upvalues: RenderableInlineElementModule (copy), Image (copy), mapProps (copy)
+		return RenderableInlineElementModule.new(Image, Image1, mapProps)
+	end
+}

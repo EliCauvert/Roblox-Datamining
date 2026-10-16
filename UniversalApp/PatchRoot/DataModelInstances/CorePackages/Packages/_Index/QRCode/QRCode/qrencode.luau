@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	[0] = {
 		0, 0, 0, 0, 0, 0, 0, 0
 	},
@@ -769,44 +769,42 @@
 	}
 }
 
-local function _(p1)
-	local p0Count = #p1
-	local var1 = 0
-	local var2 = 1
+local function _(p1): number --[[ Line: 116 | Named "tbl_to_number" ]]
+	local Total = 0
+	local v1 = 1
 	
-	for i = 1, p0Count do
-		var1 += p1[i] * var2
-		var2 *= 2
+	for i = 1, #p1 do
+		Total += p1[i] * v1
+		v1 *= 2
 	end
-	return var1
+	return Total
 end
 
-local function bit_xor(p2, p3)
-	-- upvalues: t (ref)
-	local var3 = t[p2]
-	local var4 = t[p3]
-	local t_1 = {}
+local function bit_xor(p2, p3): number --[[ Line: 128 ]]
+	-- upvalues: config (copy)
+	local Entry = config[p2]
+	local Entry1 = config[p3]
+	local t = {}
 	
 	for i = 1, 8 do
-		if var3[i] == var4[i] then
-			t_1[i] = 0
+		if Entry[i] == Entry1[i] then
+			t[i] = 0
 		else
-			t_1[i] = 1
+			t[i] = 1
 		end
 	end
-	local t_1Count = #t_1
-	local var5 = 0
-	local var6 = 1
+	local Total = 0
+	local v2 = 1
 	
-	for i_1 = 1, t_1Count do
-		var5 += t_1[i_1] * var6
-		var6 *= 2
+	for i1 = 1, #t do
+		Total += t[i1] * v2
+		v2 *= 2
 	end
-	return var5
+	return Total
 end
 
-local function binary(p4, p5)
-	local t = {
+local function binary(TmpTabEntry, p4): string --[[ Line: 143 ]]
+	local config = {
 		["0"] = "000",
 		["1"] = "001",
 		["2"] = "010",
@@ -817,138 +815,124 @@ local function binary(p4, p5)
 		["7"] = "111"
 	}
 	
-	return string.gsub(string.format(string.format("%%%ds", p5), string.gsub(string.gsub(string.format("%o", p4), "(.)", function(p6)
-		-- upvalues: t (ref)
-		return t[p6]
-	end), "^0*(.*)$", "%1")), " ", "0")
+	return string.gsub(string.format(string.format("%%%ds", p4), (string.gsub(string.gsub(string.format("%o", TmpTabEntry), "(.)", function(Match) --[[ Line: 147 ]]
+		-- upvalues: config (copy)
+		return config[Match]
+	end), "^0*(.*)$", "%1"))), " ", "0")
 end
 
-local _ = function(p4, p5, p6, p7)
+local _ = function(p4, p5, p6, p7) --[[ Line: 158 | Named "fill_matrix_position" ]]
 	if p5 == "1" then
 		p4[p6][p7] = 2
 		
 		return
+	else
+		p4[p6][p7] = -2
 	end
-	p4[p6][p7] = -2
-end
-
-local function get_mode(p4)
-	return if string.match(p4, "^[0-9]+$") then 1 elseif string.match(p4, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
 end
 
 local list = {
-	{ 19, 16, 13, 9 }, { 34, 28, 22, 16 }, { 55, 44, 34, 26 }, { 80, 64, 48, 36 },
-	{ 108, 86, 62, 46 }, { 136, 108, 76, 60 }, { 156, 124, 88, 66 },
-	{ 194, 154, 110, 86 }, { 232, 182, 132, 100 }, { 274, 216, 154, 122 },
-	{ 324, 254, 180, 140 }, { 370, 290, 206, 158 }, { 428, 334, 244, 180 },
-	{ 461, 365, 261, 197 }, { 523, 415, 295, 223 }, { 589, 453, 325, 253 },
-	{ 647, 507, 367, 283 }, { 721, 563, 397, 313 }, { 795, 627, 445, 341 },
-	{ 861, 669, 485, 385 }, { 932, 714, 512, 406 }, { 1006, 782, 568, 442 },
-	{ 1094, 860, 614, 464 }, { 1174, 914, 664, 514 }, { 1276, 1000, 718, 538 },
-	{ 1370, 1062, 754, 596 }, { 1468, 1128, 808, 628 }, { 1531, 1193, 871, 661 },
-	{ 1631, 1267, 911, 701 }, { 1735, 1373, 985, 745 }, { 1843, 1455, 1033, 793 },
-	{ 1955, 1541, 1115, 845 }, { 2071, 1631, 1171, 901 },
-	{ 2191, 1725, 1231, 961 }, { 2306, 1812, 1286, 986 },
-	{ 2434, 1914, 1354, 1054 }, { 2566, 1992, 1426, 1096 },
-	{ 2702, 2102, 1502, 1142 }, { 2812, 2216, 1582, 1222 },
+	{ 19, 16, 13, 9 },
+	{ 34, 28, 22, 16 },
+	{ 55, 44, 34, 26 },
+	{ 80, 64, 48, 36 },
+	{ 108, 86, 62, 46 },
+	{ 136, 108, 76, 60 },
+	{ 156, 124, 88, 66 },
+	{ 194, 154, 110, 86 },
+	{ 232, 182, 132, 100 },
+	{ 274, 216, 154, 122 },
+	{ 324, 254, 180, 140 },
+	{ 370, 290, 206, 158 },
+	{ 428, 334, 244, 180 },
+	{ 461, 365, 261, 197 },
+	{ 523, 415, 295, 223 },
+	{ 589, 453, 325, 253 },
+	{ 647, 507, 367, 283 },
+	{ 721, 563, 397, 313 },
+	{ 795, 627, 445, 341 },
+	{ 861, 669, 485, 385 },
+	{ 932, 714, 512, 406 },
+	{ 1006, 782, 568, 442 },
+	{ 1094, 860, 614, 464 },
+	{ 1174, 914, 664, 514 },
+	{ 1276, 1000, 718, 538 },
+	{ 1370, 1062, 754, 596 },
+	{ 1468, 1128, 808, 628 },
+	{ 1531, 1193, 871, 661 },
+	{ 1631, 1267, 911, 701 },
+	{ 1735, 1373, 985, 745 },
+	{ 1843, 1455, 1033, 793 },
+	{ 1955, 1541, 1115, 845 },
+	{ 2071, 1631, 1171, 901 },
+	{ 2191, 1725, 1231, 961 },
+	{ 2306, 1812, 1286, 986 },
+	{ 2434, 1914, 1354, 1054 },
+	{ 2566, 1992, 1426, 1096 },
+	{ 2702, 2102, 1502, 1142 },
+	{ 2812, 2216, 1582, 1222 },
 	{ 2956, 2334, 1666, 1276 }
 }
 
-local function get_version_eclevel(p4, p5, p6)
-	-- upvalues: list (ref)
-	local var7 = p5
+local function get_version_eclevel(Count, p4, p5: number) --[[ Line: 224 ]]
+	-- upvalues: list (copy)
+	local v3 = if p4 == 4 then 3 elseif p4 == 8 then 4 else p4
+	assert(v3 <= 4)
+	local v4 = nil
+	local list1 = { { 10, 9, 8, 8 }, { 12, 11, 16, 10 }, { 14, 13, 16, 12 } }
+	local v5 = 40
+	local P12 = p5 or 1
+	local v6 = 1
+	local v7 = 4
 	
-	if p5 == 4 then
-		var7 = 3
-	elseif p5 == 8 then
-		var7 = 4
+	if p5 and p5 >= 1 and p5 <= 4 then
+		v6 = p5
+		v7 = p5
 	end
-	assert(var7 <= 4)
-	local _ = nil
-	local _ = nil
-	local var8 = nil
-	local _ = nil
-	local _ = nil
-	local list_1 = { { 10, 9, 8, 8 }, { 12, 11, 16, 10 }, { 14, 13, 16, 12 } }
-	local var9 = 40
-	p6 = p6 or 1
-	local var10 = 1
-	local var11 = 4
-	
-	if p6 and p6 >= 1 and p6 <= 4 then
-		var10 = p6
-		var11 = p6
-	end
-	for i_1 = var10, var11 do
-		for i = 1, #list do
-			local var12 = list[i][i_1] * 8 - 4
+	for i = v6, v7 do
+		for i1 = 1, #list do
+			local EntryDelta = list[i1][i] * 8 - 4
 			
-			if i < 10 then
-				var8 = list_1[1][var7]
-			elseif i < 27 then
-				var8 = list_1[2][var7]
-			elseif i <= 40 then
-				var8 = list_1[3][var7]
+			if i1 < 10 then
+				v4 = list1[1][v3]
+			elseif i1 < 27 then
+				v4 = list1[2][v3]
+			elseif i1 <= 40 then
+				v4 = list1[3][v3]
 			end
-			local var13 = var12 - var8
+			local EntryDeltaDelta = EntryDelta - v4
 			
-			if p4 > (if var7 == 1 then math.floor(var13 * 3 / 10) elseif var7 == 2 then math.floor(var13 * 2 / 11) elseif var7 == 3 then math.floor(var13 * 1 / 8) else math.floor(var13 * 1 / 13)) then
+			if Count > (if v3 == 1 then math.floor(EntryDeltaDelta * 3 / 10) elseif v3 == 2 then math.floor(EntryDeltaDelta * 2 / 11) elseif v3 == 3 then math.floor(EntryDeltaDelta * 1 / 8) else math.floor(EntryDeltaDelta * 1 / 13)) then
 				continue
-			elseif i > var9 then
-				break
-			end
-			var9 = i
-			p6 = i_1
+			elseif i1 > v5 then break end
+			v5 = i1
+			P12 = i
 			break
 		end
 	end
-	return var9, p6
+	return v5, P12
 end
 
-local function get_length(p7, p8, p9)
-	-- upvalues: binary (ref)
-	local var14 = p9
-	
-	if p9 == 4 then
-		var14 = 3
-	elseif p9 == 8 then
-		var14 = 4
-	end
-	assert(var14 <= 4)
+local function get_length(p6, p7: number, p8) --[[ Line: 277 ]]
+	-- upvalues: binary (copy)
+	local v8 = if p8 == 4 then 3 elseif p8 == 8 then 4 else p8
+	assert(v8 <= 4)
 	local list = { { 10, 9, 8, 8 }, { 12, 11, 16, 10 }, { 14, 13, 16, 12 } }
-	local var15 = nil
+	local v9 = nil
 	
-	if p8 < 10 then
-		var15 = list[1][var14]
-	elseif p8 < 27 then
-		var15 = list[2][var14]
-	elseif p8 <= 40 then
-		var15 = list[3][var14]
+	if p7 < 10 then
+		v9 = list[1][v8]
+	elseif p7 < 27 then
+		v9 = list[2][v8]
+	elseif p7 <= 40 then
+		v9 = list[3][v8]
 	else
 		assert(false, "get_length, version > 40 not supported")
 	end
-	return binary(#p7, var15)
+	return (binary(#p6, v9))
 end
 
-local function get_version_eclevel_mode_bistringlength(p7, p8, p9)
-	-- upvalues: get_version_eclevel (ref), get_length (ref), binary (ref)
-	local var14
-	local _ = nil
-	
-	if p9 then
-		assert(false, "not implemented")
-		var14 = p9
-	else
-		var14 = if string.match(p7, "^[0-9]+$") then 1 elseif string.match(p7, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
-	end
-	local _ = nil
-	local _ = nil
-	local var15, var16 = get_version_eclevel(#p7, var14, p8)
-	
-	return var15, var16, binary(var14, 4), var14, get_length(p7, var15, var14)
-end
-
-local list_1 = {
+local list1 = {
 	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 36, -1, -1, -1, 37, 38, -1, -1, -1,
 	-1, 39, 40, -1, 41, 42, 43, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 44, -1, -1, -1, -1,
@@ -956,137 +940,96 @@ local list_1 = {
 	28, 29, 30, 31, 32, 33, 34, 35, -1, -1, -1, -1, -1
 }
 
-local function encode_string_numeric(p7)
-	-- upvalues: binary (ref)
-	local var14 = ""
-	local var15 = nil
-	string.gsub(p7, "..?.?", function(p8)
-		-- upvalues: var15 (write), var14 (write), binary (copy)
-		var15 = tonumber(p8)
-		
-		if #p8 == 3 then
-			var14 ..= binary(var15, 10)
-			
-			return
-		elseif #p8 == 2 then
-			var14 ..= binary(var15, 7)
-			
-			return
-		end
-		var14 ..= binary(var15, 4)
+local function encode_string_binary(Text): string --[[ Line: 378 ]]
+	-- upvalues: binary (copy)
+	local List = {}
+	string.gsub(Text, ".", function(Text: string) --[[ Line: 380 ]]
+		-- upvalues: List (copy), binary (upval)
+		List[#List + 1] = binary(string.byte(Text), 8)
 	end)
 	
-	return var14
+	return table.concat(List)
 end
 
-local function encode_string_ascii(p7)
-	-- upvalues: list_1 (ref), binary (ref)
-	local var14 = ""
-	local var15 = nil
-	local var16 = nil
-	local var17 = nil
-	string.gsub(p7, "..?", function(p8)
-		-- upvalues: var16 (write), list_1 (copy), var17 (write), var15 (write), var14 (write), binary (copy)
-		if #p8 == 2 then
-			var16 = list_1[string.byte(string.sub(p8, 1, 1))]
-			var17 = list_1[string.byte(string.sub(p8, 2, 2))]
-			var15 = var16 * 45 + var17
-			var14 ..= binary(var15, 11)
+local _ = function(Text, p6) --[[ Line: 387 | Named "encode_data" ]]
+	-- upvalues: binary (copy), list1 (copy), encode_string_binary (copy)
+	if p6 == 1 then
+		local Text1 = ""
+		local Number = nil
+		string.gsub(Text, "..?.?", function(Match) --[[ Line: 342 ]]
+			-- upvalues: Number (ref), Text1 (ref), binary (upval)
+			Number = tonumber(Match)
 			
-			return
-		end
-		var15 = list_1[string.byte(p8)]
-		var14 ..= binary(var15, 6)
-	end)
-	
-	return var14
-end
-
-local function encode_string_binary(p7)
-	-- upvalues: binary (ref)
-	local t = {}
-	string.gsub(p7, ".", function(p8)
-		-- upvalues: t (ref), binary (copy)
-		t[#t + 1] = binary(string.byte(p8), 8)
-	end)
-	
-	return table.concat(t)
-end
-
-local _ = function(p7, p8)
-	-- upvalues: binary (ref), list_1 (ref), encode_string_binary (ref)
-	local var14, var15
-	if p8 == 1 then
-		var14 = ""
-		var15 = nil
-		string.gsub(p7, "..?.?", function(p9)
-			-- upvalues: var15 (write), var14 (write), binary (copy)
-			var61 = tonumber(p9)
-			
-			if #p9 == 3 then
-				var60 ..= binary(var61, 10)
-				
-				return
-			elseif #p9 == 2 then
-				var60 ..= binary(var61, 7)
+			if #Match == 3 then
+				Text1 ..= binary(Number, 10)
 				
 				return
 			end
-			var60 ..= binary(var61, 4)
-		end)
-		
-		return var14
-	elseif p8 == 2 then
-		var14 = ""
-		var15 = nil
-		local var16 = nil
-		local var17 = nil
-		string.gsub(p7, "..?", function(p9)
-			-- upvalues: var16 (write), list_1 (copy), var17 (write), var15 (write), var14 (write), binary (copy)
-			if #p9 == 2 then
-				var64 = list_1[string.byte(string.sub(p9, 1, 1))]
-				var65 = list_1[string.byte(string.sub(p9, 2, 2))]
-				var63 = var64 * 45 + var65
-				var62 ..= binary(var63, 11)
+			if #Match == 2 then
+				Text1 ..= binary(Number, 7)
 				
 				return
+			else
+				Text1 ..= binary(Number, 4)
 			end
-			var63 = list_1[string.byte(p9)]
-			var62 ..= binary(var63, 6)
 		end)
 		
-		return var14
-	elseif p8 == 4 then
-		return encode_string_binary(p7)
+		return Text1
+	elseif p6 == 2 then
+		local Text1 = ""
+		local Number = nil
+		local v8 = nil
+		local v9 = nil
+		string.gsub(Text, "..?", function(Text: string) --[[ Line: 361 ]]
+			-- upvalues: v8 (ref), list1 (upval), v9 (ref), Number (ref), Text1 (ref), binary (upval)
+			if #Text == 2 then
+				v8 = list1[string.byte((string.sub(Text, 1, 1)))]
+				v9 = list1[string.byte((string.sub(Text, 2, 2)))]
+				Number = v8 * 45 + v9
+				Text1 ..= binary(Number, 11)
+				
+				return
+			else
+				Number = list1[string.byte(Text)]
+				Text1 ..= binary(Number, 6)
+			end
+		end)
+		
+		return Text1
+	elseif p6 == 4 then
+		local Text1 = Text
+		
+		return encode_string_binary(Text1)
+	else
+		local Text1 = false
+		local Number = "not implemented yet"
+		assert(Text1, Number)
 	end
-	assert(false, "not implemented yet")
 end
 
-local function add_pad_data(p7, p8, p9)
-	-- upvalues: list (ref)
-	local _ = nil
-	local _ = nil
-	local var14 = list[p7][p8] * 8
-	local minValue = math.min(4, var14 - #p9)
+local function add_pad_data(p6, p7, Text: string): string --[[ Line: 401 ]]
+	-- upvalues: list (copy)
+	local ScaledEntry = list[p6][p7] * 8
+	local Smallest = math.min(4, ScaledEntry - #Text)
 	
-	if minValue > 0 then
-		p9 ..= string.rep("0", minValue)
+	if Smallest > 0 then
+		Text ..= string.rep("0", Smallest)
 	end
-	if math.fmod(#p9, 8) ~= 0 then
-		p9 ..= string.rep("0", 8 - math.fmod(#p9, 8))
+	if math.fmod(#Text, 8) ~= 0 then
+		Text ..= string.rep("0", 8 - math.fmod(#Text, 8))
 	end
-	assert(math.fmod(#p9, 8) == 0)
-	while #p9 < var14 do
-		p9 ..= "11101100"
+	assert(math.fmod(#Text, 8) == 0)
+	while #Text < ScaledEntry do
+		Text ..= "11101100"
 		
-		if #p9 < var14 then
-			p9 ..= "00010001"
+		if #Text < ScaledEntry then
+			Text ..= "00010001"
 		end
 	end
-	return p9
+	return Text
 end
 
-local t_1 = {
+local config1 = {
 	[0] = 1,
 	2,
 	4,
@@ -1345,7 +1288,7 @@ local t_1 = {
 	0,
 	0
 }
-local t_2 = {
+local config2 = {
 	[0] = 256,
 	0,
 	1,
@@ -1603,7 +1546,7 @@ local t_2 = {
 	88,
 	175
 }
-local t_3 = {
+local config3 = {
 	[7] = {
 		21, 102, 238, 149, 146, 229, 87, 0
 	},
@@ -1653,148 +1596,130 @@ local t_3 = {
 	}
 }
 
-local function convert_bitstring_to_bytes(p10)
-	local t = {}
-	local _ = string.gsub(p10, "(........)", function(p11)
-		-- upvalues: t (ref)
-		t[#t + 1] = tonumber(p11, 2)
-	end)
+local function get_generator_polynominal_adjusted(p8: number, Count: number) --[[ Line: 506 ]]
+	-- upvalues: config3 (copy)
+	local config = { [0] = 0 }
 	
-	return t
+	for i = 0, Count - p8 - 1 do
+		config[i] = 0
+	end
+	local Entry = config3[p8]
+	
+	for i1 = 1, p8 + 1 do
+		config[Count - p8 + i1 - 1] = Entry[i1]
+	end
+	return config
 end
 
-local function get_generator_polynominal_adjusted(a, b)
-	-- upvalues: t_3 (ref)
-	local t = { [0] = 0 }
-	
-	for i = 0, b - a - 1 do
-		t[i] = 0
-	end
-	local var15 = t_3[a]
-	
-	for i_1 = 1, a + 1 do
-		t[b - a + i_1 - 1] = var15[i_1]
-	end
-	return t
-end
-
-local _ = function(x)
-	-- upvalues: t_2 (ref)
+local _ = function(p9) --[[ Line: 521 | Named "convert_to_alpha" ]]
+	-- upvalues: config2 (copy)
 	local t = {}
 	
-	for i = 0, #x do
-		t[i] = t_2[x[i]]
+	for i = 0, #p9 do
+		t[i] = config2[p9[i]]
 	end
 	return t
 end
 
-local _ = function(p10, _)
-	-- upvalues: t_1 (ref)
+local _ = function(p10, _) --[[ Line: 530 | Named "convert_to_int" ]]
+	-- upvalues: config1 (copy)
 	local t = {}
 	
 	for i = 0, #p10 do
-		t[i] = t_1[p10[i]]
+		t[i] = config1[p10[i]]
 	end
 	return t
 end
 
-local function calculate_error_correction(p11, p12)
-	-- upvalues: t_2 (ref), get_generator_polynominal_adjusted (ref), t_1 (ref), bit_xor (ref)
-	local var16 = nil
+local function calculate_error_correction(Text: string, p11: number) --[[ Line: 539 ]]
+	-- upvalues: config2 (copy), get_generator_polynominal_adjusted (copy), config1 (copy), bit_xor (copy)
+	local v8: string? = nil
 	
-	if type(p11) == "string" then
-		local t = {}
-		local _ = string.gsub(p11, "(........)", function(p13)
-			-- upvalues: t (ref)
-			t[#t + 1] = tonumber(p13, 2)
+	if type(Text) == "string" then
+		local Numbers = {}
+		local _ = string.gsub(Text, "(........)", function(Match) --[[ Line: 498 ]]
+			-- upvalues: Numbers (copy)
+			Numbers[#Numbers + 1] = tonumber(Match, 2)
 		end)
-		var16 = t
-	elseif type(p11) == "table" then
-		var16 = p11
+		v8 = Numbers
+	elseif type(Text) == "table" then
+		v8 = Text
 	else
-		assert(false, "Unknown type for data: %s", type(p11))
+		assert(false, "Unknown type for data: %s", (type(Text)))
 	end
-	local var78Count = #var16
-	local var17 = var78Count + p12 - 1
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = {}
+	local CountV79 = #v8
+	local CountVDelta = CountV79 + p11 - 1
 	local t = {}
-	local _ = {}
 	
-	for i = 1, var78Count do
-		t[var17 - i + 1] = var16[i]
+	for i = 1, CountV79 do
+		t[CountVDelta - i + 1] = v8[i]
 	end
-	for i_1 = 1, var17 - var78Count do
-		t[i_1] = 0
+	for i1 = 1, CountVDelta - CountV79 do
+		t[i1] = 0
 	end
 	t[0] = 0
-	local var18 = t
-	local t_3 = {}
+	local t1 = t
+	local t2 = {}
 	
-	for i_2 = 0, #var18 do
-		t_3[i_2] = t_2[var18[i_2]]
+	for i2 = 0, #t1 do
+		t2[i2] = config2[t1[i2]]
 	end
-	local var19, var20
-	local var21 = t_3
-	while p12 <= var17 do
-		var19 = get_generator_polynominal_adjusted(p12, var17)
-		var20 = var21[var17]
+	local t3 = t2
+	while p11 <= CountVDelta do
+		local Generator_polynominal_adjusted = get_generator_polynominal_adjusted(p11, CountVDelta)
+		local Entry = t3[CountVDelta]
 		
-		for i_3 = var17, var17 - p12, -1 do
-			if var20 == 256 then
-				var19[i_3] = 256
-				continue
-			end
-			if var19[i_3] + var20 >= 255 then
-				var19[i_3] = math.fmod(var19[i_3] + var20, 255)
+		for i3 = CountVDelta, CountVDelta - p11, -1 do
+			if Entry == 256 then
+				Generator_polynominal_adjusted[i3] = 256
+			elseif Generator_polynominal_adjusted[i3] + Entry >= 255 then
+				Generator_polynominal_adjusted[i3] = math.fmod(Generator_polynominal_adjusted[i3] + Entry, 255)
 			else
-				var19[i_3] += var20
+				Generator_polynominal_adjusted[i3] += Entry
 			end
 		end
-		for i_3 = var17 - p12 - 1, 0, -1 do
-			var19[i_3] = 256
+		for i5 = CountVDelta - p11 - 1, 0, -1 do
+			Generator_polynominal_adjusted[i5] = 256
 		end
-		local t_4 = {}
+		local t4 = {}
 		
-		for i_4 = 0, #var19 do
-			t_4[i_4] = t_1[var19[i_4]]
+		for i6 = 0, #Generator_polynominal_adjusted do
+			t4[i6] = config1[Generator_polynominal_adjusted[i6]]
 		end
-		local var22 = t_4
-		local t_5 = {}
+		local t5 = t3
+		local t6 = {}
 		
-		for i_4 = 0, #var21 do
-			t_5[i_4] = t_1[var21[i_4]]
+		for i7 = 0, #t5 do
+			t6[i7] = config1[t5[i7]]
 		end
-		local t_6 = {}
+		local t7 = {}
 		
-		for i_3 = var17, 0, -1 do
-			t_6[i_3] = bit_xor(var22[i_3], t_5[i_3])
+		for i8 = CountVDelta, 0, -1 do
+			t7[i8] = bit_xor(t4[i8], t6[i8])
 		end
-		for i_3 = var17, 0, -1 do
-			if i_3 < p12 or t_6[i_3] ~= 0 then break end
-			t_6[i_3] = nil
-			var17 -= 1
+		for i9 = CountVDelta, 0, -1 do
+			if i9 < p11 or t7[i9] ~= 0 then break end
+			t7[i9] = nil
+			CountVDelta -= 1
 		end
-		t = t_6
-		local var23 = t
-		local t_7 = {}
+		t = t7
+		local t8 = t
+		local t9 = {}
 		
-		for i_4 = 0, #var23 do
-			t_7[i_4] = t_2[var23[i_4]]
+		for i10 = 0, #t8 do
+			t9[i10] = config2[t8[i10]]
 		end
-		var21 = t_7
+		t3 = t9
 	end
-	var20 = {}
+	local t10 = {}
 	
-	for i_5 = #t, 0, -1 do
-		var20[#var20 + 1] = t[i_5]
+	for i4 = #t, 0, -1 do
+		t10[#t10 + 1] = t[i4]
 	end
-	return var20
+	return t10
 end
 
-local list_2 = {
+local list2 = {
 	{
 		{ 1, { 26, 19, 2 } },
 		{ 1, { 26, 16, 4 } },
@@ -2036,126 +1961,122 @@ local list_2 = {
 		{ 20, { 45, 15, 15 }, 61, { 46, 16, 15 } }
 	}
 }
-local list_3 = {
+local Remainder = {
 	0, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4,
 	4, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0
 }
 
-local function arrange_codewords_and_calculate_ec(p13, p14, p15)
-	-- upvalues: binary (ref), list_2 (ref), calculate_error_correction (ref)
-	if type(p15) == "table" then
-		local var24 = ""
+local function arrange_codewords_and_calculate_ec(p12, p13, Text: string): string --[[ Line: 710 ]]
+	-- upvalues: binary (copy), list2 (copy), calculate_error_correction (copy)
+	if type(Text) == "table" then
+		local Text1 = ""
 		
-		for i = 1, #p15 do
-			var24 ..= binary(p15[i], 8)
+		for i = 1, #Text do
+			Text1 ..= binary(Text[i], 8)
 		end
-		p15 = var24
+		Text = Text1
 	end
-	local var25 = list_2[p13][p14]
-	local _ = nil
-	local _ = nil
+	local Entry = list2[p12][p13]
+	local Segments = {}
 	local t = {}
-	local t_1 = {}
-	local var26 = 1
-	local var27 = 0
-	local var28 = 0
+	local Count = 1
+	local Total = 0
+	local Count1 = 0
 	
-	for i_2 = 1, #var25 / 2 do
-		for _ = 1, var25[i_2 * 2 - 1] do
-			local var29 = var25[i_2 * 2][2]
-			local var30 = var25[i_2 * 2][1] - var25[i_2 * 2][2]
-			var28 += var30 * 8
-			t[#t + 1] = string.sub(p15, var27 * 8 + 1, (var27 + var29) * 8)
-			tmp_tab = calculate_error_correction(t[#t], var30)
+	for i1 = 1, #Entry / 2 do
+		for _ = 1, Entry[i1 * 2 - 1] do
+			local Entry1: number = Entry[i1 * 2][2]
+			local EntryDelta = Entry[i1 * 2][1] - Entry[i1 * 2][2]
+			Count1 += EntryDelta * 8
+			Segments[#Segments + 1] = string.sub(Text, Total * 8 + 1, (Total + Entry1) * 8)
+			tmp_tab = calculate_error_correction(Segments[#Segments], EntryDelta)
 			tmp_str = ""
 			
-			for i_1 = 1, #tmp_tab do
-				tmp_str ..= binary(tmp_tab[i_1], 8)
+			for i2 = 1, #tmp_tab do
+				tmp_str ..= binary(tmp_tab[i2], 8)
 			end
-			t_1[#t_1 + 1] = tmp_str
-			var27 += var29
-			var26 += 1
+			t[#t + 1] = tmp_str
+			Total += Entry1
+			Count += 1
 		end
 	end
-	local var31 = ""
-	local var32 = 1
+	local Text2 = ""
+	local StartIndex = 1
 	repeat
-		for i_3 = 1, #t do
-			if var32 < #t[i_3] then
-				var31 ..= string.sub(t[i_3], var32, var32 + 7)
+		for i3 = 1, #Segments do
+			if StartIndex < #Segments[i3] then
+				Text2 ..= string.sub(Segments[i3], StartIndex, StartIndex + 7)
 			end
 		end
-		var32 += 8
-	until #var31 == #p15
-	local var33 = ""
-	local var34 = 1
+		StartIndex += 8
+	until #Text2 == #Text
+	local Text3 = ""
+	local StartIndex1 = 1
 	repeat
-		for i_4 = 1, #t_1 do
-			if var34 < #t_1[i_4] then
-				var33 ..= string.sub(t_1[i_4], var34, var34 + 7)
+		for i4 = 1, #t do
+			if StartIndex1 < #t[i4] then
+				Text3 ..= string.sub(t[i4], StartIndex1, StartIndex1 + 7)
 			end
 		end
-		var34 += 8
-	until #var33 == var28
-	return var31 .. var105
+		StartIndex1 += 8
+	until #Text3 == Count1
+	return Text2 .. Text3
 end
 
-local function add_position_detection_patterns(p16)
-	local p42Count = #p16
+local function add_position_detection_patterns(Entry) --[[ Line: 786 ]]
+	local CountEntry = #Entry
 	
-	for i_1 = 1, 8 do
-		for i = 1, 8 do
-			p16[i_1][i] = -2
-			p16[p42Count - 8 + i_1][i] = -2
-			p16[i_1][p42Count - 8 + i] = -2
+	for i = 1, 8 do
+		for i1 = 1, 8 do
+			Entry[i][i1] = -2
+			Entry[CountEntry - 8 + i][i1] = -2
+			Entry[i][CountEntry - 8 + i1] = -2
 		end
 	end
-	for i_2 = 1, 7 do
-		p16[1][i_2] = 2
-		p16[7][i_2] = 2
-		p16[i_2][1] = 2
-		p16[i_2][7] = 2
-		p16[p42Count][i_2] = 2
-		p16[p42Count - 6][i_2] = 2
-		p16[p42Count - i_2 + 1][1] = 2
-		p16[p42Count - i_2 + 1][7] = 2
-		p16[1][p42Count - i_2 + 1] = 2
-		p16[7][p42Count - i_2 + 1] = 2
-		p16[i_2][p42Count - 6] = 2
-		p16[i_2][p42Count] = 2
+	for i2 = 1, 7 do
+		Entry[1][i2] = 2
+		Entry[7][i2] = 2
+		Entry[i2][1] = 2
+		Entry[i2][7] = 2
+		Entry[CountEntry][i2] = 2
+		Entry[CountEntry - 6][i2] = 2
+		Entry[CountEntry - i2 + 1][1] = 2
+		Entry[CountEntry - i2 + 1][7] = 2
+		Entry[1][CountEntry - i2 + 1] = 2
+		Entry[7][CountEntry - i2 + 1] = 2
+		Entry[i2][CountEntry - 6] = 2
+		Entry[i2][CountEntry] = 2
 	end
-	for i_4 = 1, 3 do
-		for i_3 = 1, 3 do
-			p16[i_3 + 2][i_4 + 2] = 2
-			p16[p42Count - i_3 - 1][i_4 + 2] = 2
-			p16[i_3 + 2][p42Count - i_4 - 1] = 2
+	for i3 = 1, 3 do
+		for i4 = 1, 3 do
+			Entry[i4 + 2][i3 + 2] = 2
+			Entry[CountEntry - i4 - 1][i3 + 2] = 2
+			Entry[i4 + 2][CountEntry - i3 - 1] = 2
 		end
 	end
 end
 
-local function add_timing_pattern(a)
-	local _ = nil
-	local _ = nil
-	local var35 = 7
-	local var36 = 9
+local function add_timing_pattern(p14) --[[ Line: 831 ]]
+	local v9 = 7
+	local v10 = 9
 	
-	for i = var36, #a - 8 do
+	for i = v10, #p14 - 8 do
 		if math.fmod(i, 2) == 1 then
-			a[i][var35] = 2
+			p14[i][v9] = 2
 		else
-			a[i][var35] = -2
+			p14[i][v9] = -2
 		end
 	end
-	for i_1 = var36, #a - 8 do
-		if math.fmod(i_1, 2) == 1 then
-			a[var35][i_1] = 2
+	for i1 = v10, #p14 - 8 do
+		if math.fmod(i1, 2) == 1 then
+			p14[v9][i1] = 2
 		else
-			a[var35][i_1] = -2
+			p14[v9][i1] = -2
 		end
 	end
 end
 
-local list_4 = {
+local list3 = {
 	{},
 	{ 6, 18 },
 	{ 6, 22 },
@@ -2266,48 +2187,46 @@ local list_4 = {
 	}
 }
 
-local function add_alignment_pattern(p17)
-	-- upvalues: list_4 (ref)
-	local var37 = list_4[(#p17 - 17) / 4]
-	local _ = nil
-	local _ = nil
+local function add_alignment_pattern(p15) --[[ Line: 873 ]]
+	-- upvalues: list3 (copy)
+	local Entry = list3[(#p15 - 17) / 4]
 	
-	for i_1 = 1, #var37 do
-		for i = 1, #var37 do
-			if (i_1 ~= 1 or i ~= 1) and (i_1 ~= #var37 or i ~= 1) and (i_1 ~= 1 or i ~= #var37) then
-				local var38 = var37[i_1] + 1
-				local var39 = var37[i] + 1
-				p17[var38][var39] = 2
-				p17[var38 + 1][var39] = -2
-				p17[var38 - 1][var39] = -2
-				p17[var38 + 2][var39] = 2
-				p17[var38 - 2][var39] = 2
-				p17[var38][var39 - 2] = 2
-				p17[var38 + 1][var39 - 2] = 2
-				p17[var38 - 1][var39 - 2] = 2
-				p17[var38 + 2][var39 - 2] = 2
-				p17[var38 - 2][var39 - 2] = 2
-				p17[var38][var39 + 2] = 2
-				p17[var38 + 1][var39 + 2] = 2
-				p17[var38 - 1][var39 + 2] = 2
-				p17[var38 + 2][var39 + 2] = 2
-				p17[var38 - 2][var39 + 2] = 2
-				p17[var38][var39 - 1] = -2
-				p17[var38 + 1][var39 - 1] = -2
-				p17[var38 - 1][var39 - 1] = -2
-				p17[var38 + 2][var39 - 1] = 2
-				p17[var38 - 2][var39 - 1] = 2
-				p17[var38][var39 + 1] = -2
-				p17[var38 + 1][var39 + 1] = -2
-				p17[var38 - 1][var39 + 1] = -2
-				p17[var38 + 2][var39 + 1] = 2
-				p17[var38 - 2][var39 + 1] = 2
+	for i = 1, #Entry do
+		for i1 = 1, #Entry do
+			if (i ~= 1 or i1 ~= 1) and (i ~= #Entry or i1 ~= 1) and (i ~= 1 or i1 ~= #Entry) then
+				local NewEntry = Entry[i] + 1
+				local NewEntry1 = Entry[i1] + 1
+				p15[NewEntry][NewEntry1] = 2
+				p15[NewEntry + 1][NewEntry1] = -2
+				p15[NewEntry - 1][NewEntry1] = -2
+				p15[NewEntry + 2][NewEntry1] = 2
+				p15[NewEntry - 2][NewEntry1] = 2
+				p15[NewEntry][NewEntry1 - 2] = 2
+				p15[NewEntry + 1][NewEntry1 - 2] = 2
+				p15[NewEntry - 1][NewEntry1 - 2] = 2
+				p15[NewEntry + 2][NewEntry1 - 2] = 2
+				p15[NewEntry - 2][NewEntry1 - 2] = 2
+				p15[NewEntry][NewEntry1 + 2] = 2
+				p15[NewEntry + 1][NewEntry1 + 2] = 2
+				p15[NewEntry - 1][NewEntry1 + 2] = 2
+				p15[NewEntry + 2][NewEntry1 + 2] = 2
+				p15[NewEntry - 2][NewEntry1 + 2] = 2
+				p15[NewEntry][NewEntry1 - 1] = -2
+				p15[NewEntry + 1][NewEntry1 - 1] = -2
+				p15[NewEntry - 1][NewEntry1 - 1] = -2
+				p15[NewEntry + 2][NewEntry1 - 1] = 2
+				p15[NewEntry - 2][NewEntry1 - 1] = 2
+				p15[NewEntry][NewEntry1 + 1] = -2
+				p15[NewEntry + 1][NewEntry1 + 1] = -2
+				p15[NewEntry - 1][NewEntry1 + 1] = -2
+				p15[NewEntry + 2][NewEntry1 + 1] = 2
+				p15[NewEntry - 2][NewEntry1 + 1] = 2
 			end
 		end
 	end
 end
 
-local list_5 = {
+local list4 = {
 	{
 		[-1] = "111111111111111",
 		[0] = "111011111000100",
@@ -2354,63 +2273,62 @@ local list_5 = {
 	}
 }
 
-local function add_typeinfo_to_matrix(p18, p19, p20)
-	-- upvalues: list_5 (ref)
-	local var40 = list_5[p19][p20]
-	local _ = nil
+local function add_typeinfo_to_matrix(Entry, p16, p17) --[[ Line: 929 ]]
+	-- upvalues: list4 (copy)
+	local Entry1: string = list4[p16][p17]
 	
 	for i = 1, 7 do
-		local var41 = #p18 - i + 1
+		local NewI = #Entry - i + 1
 		
-		if string.sub(var40, i, i) == "1" then
-			p18[9][var41] = 2
+		if string.sub(Entry1, i, i) == "1" then
+			Entry[9][NewI] = 2
 		else
-			p18[9][var41] = -2
+			Entry[9][NewI] = -2
 		end
 	end
-	if string.sub(var40, 8, 8) == "1" then
-		p18[9][9] = 2
+	if string.sub(Entry1, 8, 8) == "1" then
+		Entry[9][9] = 2
 	else
-		p18[9][9] = -2
+		Entry[9][9] = -2
 	end
-	if string.sub(var40, 9, 9) == "1" then
-		p18[9][8] = 2
+	if string.sub(Entry1, 9, 9) == "1" then
+		Entry[9][8] = 2
 	else
-		p18[9][8] = -2
+		Entry[9][8] = -2
 	end
-	for i_1 = 10, 15 do
-		local var42 = 16 - i_1
+	for i1 = 10, 15 do
+		local v11 = 16 - i1
 		
-		if string.sub(var40, i_1, i_1) == "1" then
-			p18[9][var42] = 2
+		if string.sub(Entry1, i1, i1) == "1" then
+			Entry[9][v11] = 2
 		else
-			p18[9][var42] = -2
+			Entry[9][v11] = -2
 		end
 	end
-	for i_2 = 1, 6 do
-		if string.sub(var40, i_2, i_2) == "1" then
-			p18[i_2][9] = 2
+	for i2 = 1, 6 do
+		if string.sub(Entry1, i2, i2) == "1" then
+			Entry[i2][9] = 2
 		else
-			p18[i_2][9] = -2
+			Entry[i2][9] = -2
 		end
 	end
-	if string.sub(var40, 7, 7) == "1" then
-		p18[8][9] = 2
+	if string.sub(Entry1, 7, 7) == "1" then
+		Entry[8][9] = 2
 	else
-		p18[8][9] = -2
+		Entry[8][9] = -2
 	end
-	for i_3 = 8, 15 do
-		local var43 = #p18 - 15 + i_3
+	for i3 = 8, 15 do
+		local NewI = #Entry - 15 + i3
 		
-		if string.sub(var40, i_3, i_3) == "1" then
-			p18[var43][9] = 2
+		if string.sub(Entry1, i3, i3) == "1" then
+			Entry[NewI][9] = 2
 		else
-			p18[var43][9] = -2
+			Entry[NewI][9] = -2
 		end
 	end
 end
 
-local list_6 = {
+local list5 = {
 	"001010010011111000", "001111011010000100", "100110010101100100",
 	"110010110010010100", "011011111101110100", "010001101110001100",
 	"111000100001101100", "101100000110011100", "000101001001111100",
@@ -2425,460 +2343,510 @@ local list_6 = {
 	"100101100011000101"
 }
 
-local function add_version_information(p21, p22)
-	-- upvalues: list_6 (ref)
-	if p22 < 7 then return end
-	local _ = #p21
-	local var44 = list_6[p22 - 6]
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var45 = #p21 - 10
-	local var46 = 1
+local function add_version_information(p18, p19: number) --[[ Line: 970 ]]
+	-- upvalues: list5 (copy)
+	if p19 < 7 then return end
+	local _ = #p18
+	local Entry: string = list5[p19 - 6]
+	local v12 = #p18 - 10
+	local v13 = 1
 	
-	for i = 1, #var44 do
-		local substring = string.sub(var44, i, i)
-		local var47 = var45 + math.fmod(i - 1, 3)
-		local var48 = var46 + math.floor((i - 1) / 3)
-		local var49 = substring
-		local var50 = var47
-		local var51 = var48
+	for i = 1, #Entry do
+		local NewRemainder = v12 + math.fmod(i - 1, 3)
+		local NewFloored = v13 + math.floor((i - 1) / 3)
 		
-		if var49 == "1" then
-			p21[var50][var51] = 2
+		if string.sub(Entry, i, i) == "1" then
+			p18[NewRemainder][NewFloored] = 2
 		else
-			p21[var50][var51] = -2
+			p18[NewRemainder][NewFloored] = -2
 		end
 	end
-	local var52 = 1
-	local var53 = #p21 - 10
+	local v14 = 1
+	local v15 = #p18 - 10
 	
-	for i_1 = 1, #var44 do
-		local substring_1 = string.sub(var44, i_1, i_1)
-		local var54 = var52 + math.floor((i_1 - 1) / 3)
-		local var55 = var53 + math.fmod(i_1 - 1, 3)
-		local var56 = substring_1
-		local var57 = var54
-		local var58 = var55
+	for i1 = 1, #Entry do
+		local NewFloored = v14 + math.floor((i1 - 1) / 3)
+		local NewRemainder = v15 + math.fmod(i1 - 1, 3)
 		
-		if var56 == "1" then
-			p21[var57][var58] = 2
+		if string.sub(Entry, i1, i1) == "1" then
+			p18[NewFloored][NewRemainder] = 2
 		else
-			p21[var57][var58] = -2
+			p18[NewFloored][NewRemainder] = -2
 		end
 	end
 end
 
-local function prepare_matrix_with_mask(p23, p24, p25)
-	-- upvalues: add_position_detection_patterns (ref), add_timing_pattern (ref), add_version_information (ref), add_alignment_pattern (ref), add_typeinfo_to_matrix (ref)
-	local _ = nil
+local function prepare_matrix_with_mask(p20: number, p21, p22) --[[ Line: 998 ]]
+	-- upvalues: add_position_detection_patterns (copy), add_timing_pattern (copy), add_version_information (copy), add_alignment_pattern (copy), add_typeinfo_to_matrix (copy)
 	local t = {}
-	local var59 = p23 * 4 + 17
+	local v16 = p20 * 4 + 17
 	
-	for i_1 = 1, var59 do
-		t[i_1] = {}
+	for i = 1, v16 do
+		t[i] = {}
 		
-		for i = 1, var59 do
-			t[i_1][i] = 0
+		for i1 = 1, v16 do
+			t[i][i1] = 0
 		end
 	end
 	add_position_detection_patterns(t)
 	add_timing_pattern(t)
-	add_version_information(t, p23)
-	t[9][var59 - 7] = 2
+	add_version_information(t, p20)
+	t[9][v16 - 7] = 2
 	add_alignment_pattern(t)
-	add_typeinfo_to_matrix(t, p24, p25)
+	add_typeinfo_to_matrix(t, p21, p22)
 	
 	return t
 end
 
-local function get_pixel_with_mask(p26, p27, p28, p29)
-	p27 -= 1
-	p28 -= 1
-	local var60 = false
+local function get_pixel_with_mask(p23, p24: number, p25: number, Segment): number --[[ Line: 1035 ]]
+	local v17 = p24 - 1
+	local v18 = p25 - 1
+	local Flag = false
 	
-	if p26 ~= -1 then
-		if p26 == 0 then
-			if math.fmod(p27 + p28, 2) == 0 then
-				var60 = true
+	if p23 ~= -1 then
+		if p23 == 0 then
+			if math.fmod(v17 + v18, 2) == 0 then
+				Flag = true
 			end
-		elseif p26 == 1 then
-			if math.fmod(p28, 2) == 0 then
-				var60 = true
+		elseif p23 == 1 then
+			if math.fmod(v18, 2) == 0 then
+				Flag = true
 			end
-		elseif p26 == 2 then
-			if math.fmod(p27, 3) == 0 then
-				var60 = true
+		elseif p23 == 2 then
+			if math.fmod(v17, 3) == 0 then
+				Flag = true
 			end
-		elseif p26 == 3 then
-			if math.fmod(p27 + p28, 3) == 0 then
-				var60 = true
+		elseif p23 == 3 then
+			if math.fmod(v17 + v18, 3) == 0 then
+				Flag = true
 			end
-		elseif p26 == 4 then
-			if math.fmod(math.floor(p28 / 2) + math.floor(p27 / 3), 2) == 0 then
-				var60 = true
+		elseif p23 == 4 then
+			if math.fmod(math.floor(v18 / 2) + math.floor(v17 / 3), 2) == 0 then
+				Flag = true
 			end
-		elseif p26 == 5 then
-			if math.fmod(p27 * p28, 2) + math.fmod(p27 * p28, 3) == 0 then
-				var60 = true
+		elseif p23 == 5 then
+			if math.fmod(v17 * v18, 2) + math.fmod(v17 * v18, 3) == 0 then
+				Flag = true
 			end
-		elseif p26 == 6 then
-			if math.fmod(math.fmod(p27 * p28, 2) + math.fmod(p27 * p28, 3), 2) == 0 then
-				var60 = true
+		elseif p23 == 6 then
+			if math.fmod(math.fmod(v17 * v18, 2) + math.fmod(v17 * v18, 3), 2) == 0 then
+				Flag = true
 			end
-		elseif p26 ~= 7 then
+		elseif p23 == 7 then
+			if math.fmod(math.fmod(v17 * v18, 3) + math.fmod(v17 + v18, 2), 2) == 0 then
+				Flag = true
+			end
+		else
 			assert(false, "This can't happen (mask must be <= 7)")
-		elseif math.fmod(math.fmod(p27 * p28, 3) + math.fmod(p27 + p28, 2), 2) == 0 then
-			var60 = true
 		end
 	end
-	return if var60 then 1 - tonumber(p29) * 2 else tonumber(p29) * 2 + -1
+	return if Flag then 1 - tonumber(Segment) * 2 else tonumber(Segment) * 2 + -1
 end
 
-local function get_next_free_positions(p26, p27, p28, p29, p30)
+local function get_next_free_positions(p23, p24: number, Count: number, p25: string, p26) --[[ Line: 1074 ]]
 	local t = {}
-	local var60 = 1
-	local var61 = "right"
-	while var60 <= #p30 do
-		if var61 == "right" and p26[p27][p28] == 0 then
-			t[#t + 1] = { p27, p28 }
-			var61 = "left"
-			var60 += 1
-		elseif var61 == "left" and p26[p27 - 1][p28] == 0 then
-			t[#t + 1] = { p27 - 1, p28 }
-			var61 = "right"
-			var60 += 1
-			p28 = if p29 == "up" then p28 - 1 else p28 + 1
-		elseif var61 == "right" and p26[p27 - 1][p28] == 0 then
-			t[#t + 1] = { p27 - 1, p28 }
-			var60 += 1
-			p28 = if p29 == "up" then p28 - 1 else p28 + 1
+	local Count1 = 1
+	local v17 = "right"
+	while Count1 <= #p26 do
+		if v17 == "right" and p23[p24][Count] == 0 then
+			t[#t + 1] = { p24, Count }
+			v17 = "left"
+			Count1 += 1
+		elseif v17 == "left" and p23[p24 - 1][Count] == 0 then
+			t[#t + 1] = { p24 - 1, Count }
+			v17 = "right"
+			Count1 += 1
+			
+			if p25 == "up" then
+				Count -= 1
+			else
+				Count += 1
+			end
+		elseif v17 == "right" and p23[p24 - 1][Count] == 0 then
+			t[#t + 1] = { p24 - 1, Count }
+			Count1 += 1
+			
+			if p25 == "up" then
+				Count -= 1
+			else
+				Count += 1
+			end
+		elseif p25 == "up" then
+			Count -= 1
 		else
-			p28 = if p29 == "up" then p28 - 1 else p28 + 1
+			Count += 1
 		end
-		if p28 >= 1 and #p26 >= p28 then continue end
-		p27 -= 2
+		if Count >= 1 and #p23 >= Count then continue end
+		p24 -= 2
 		
-		if p27 == 7 then
-			p27 = 6
+		if p24 == 7 then
+			p24 = 6
 		end
-		if p29 == "up" then
-			p29 = "down"
-			p28 = 1
+		if p25 == "up" then
+			p25 = "down"
+			Count = 1
 		else
-			p29 = "up"
-			p28 = #p26
+			p25 = "up"
+			Count = #p23
 		end
 	end
-	return t, p27, p28, p29
+	return t, p24, Count, p25
 end
 
-local _ = function(p31, p32, p33)
-	-- upvalues: get_next_free_positions (ref), get_pixel_with_mask (ref)
-	size = #p31
-	local _ = nil
-	local _ = nil
-	local var62 = nil
-	local var63 = nil
-	local var64 = nil
-	local var65 = nil
-	local var66 = "up"
-	local var67 = 0
-	local _size = size
-	local _size_1 = size
-	string.gsub(p32, ".?.?.?.?.?.?.?.?", function(p34)
-		-- upvalues: var67 (write), var62 (write), _size (write), _size_1 (write), var66 (write), get_next_free_positions (copy), p31 (ref), p33 (ref), var63 (write), var64 (write), var65 (write), get_pixel_with_mask (copy)
-		var67 += 1
-		local var68, var69, var70, var71 = get_next_free_positions(p31, _size, _size_1, var66, p34, p33)
-		var62 = var68
-		_size = var69
-		_size_1 = var70
-		var66 = var71
+local _ = function(p27, Text, p28) --[[ Line: 1124 | Named "add_data_to_matrix" ]]
+	-- upvalues: get_next_free_positions (copy), get_pixel_with_mask (copy)
+	size = #p27
+	local v18 = nil
+	local Count = nil
+	local v19 = nil
+	local v20 = nil
+	local v21 = nil
+	local v22 = nil
+	local v23 = "up"
+	local v24 = 0
+	v18 = size
+	Count = size
+	string.gsub(Text, ".?.?.?.?.?.?.?.?", function(Text: string) --[[ Line: 1131 ]]
+		-- upvalues: v24 (ref), v19 (ref), v18 (ref), Count (ref), v23 (ref), get_next_free_positions (upval), p27 (copy), p28 (copy), v20 (ref), v21 (ref), v22 (ref), get_pixel_with_mask (upval)
+		v24 += 1
+		v19, v18, Count, v142 = get_next_free_positions(p27, v18, Count, v23, Text, p28)
 		
-		for i = 1, #p34 do
-			var63 = var62[i][1]
-			var64 = var62[i][2]
-			var65 = get_pixel_with_mask(p33, var63, var64, string.sub(p34, i, i))
+		for i = 1, #Text do
+			v20 = v19[i][1]
+			v21 = v19[i][2]
+			v22 = get_pixel_with_mask(p28, v20, v21, (string.sub(Text, i, i)))
 			
 			if debugging then
-				p31[var63][var64] = var65 * (i + 10)
+				p27[v20][v21] = v22 * (i + 10)
 			else
-				p31[var63][var64] = var65
+				p27[v20][v21] = v22
 			end
 		end
 	end)
 end
 
-local function calculate_penalty(p34)
-	local var68 = 0
-	local var69 = 0
-	local var70 = 0
-	local _ = 0
-	local p65Count = #p34
-	local var71 = 0
-	local _ = nil
-	local _ = nil
-	local _ = nil
+local function calculate_penalty(p29): number --[[ Line: 1158 ]]
+	local v25 = 0
+	local Count = 0
+	local Count1 = 0
+	local CountP52 = #p29
+	local Count2 = 0
 	
-	for i_1 = 1, p65Count do
-		local var72 = 0
-		local var73 = nil
+	for i = 1, CountP52 do
+		local Count3 = 0
+		local v26: boolean? = nil
 		
-		for i = 1, p65Count do
-			if p34[i_1][i] > 0 then
-				var71 += 1
-				local _ = false
+		for i1 = 1, CountP52 do
+			if p29[i][i1] > 0 then
+				Count2 += 1
+			end
+			local v27 = p29[i][i1] < 0
+			
+			if v26 == v27 then
+				Count3 += 1
 			else
-				local _ = true
+				if Count3 >= 5 then
+					v25 = v25 + Count3 - 2
+				end
+				Count3 = 1
 			end
-			local var74 = p34[i_1][i] < 0
-			
-			if var73 == var74 then
-				var72 += 1
-			elseif var72 >= 5 then
-				var68 = var68 + var72 - 2
-			end
-			var72 = 1
-			var73 = var74
+			v26 = v27
 		end
-		if var72 >= 5 then
-			var68 = var68 + var72 - 2
+		if Count3 >= 5 then
+			v25 = v25 + Count3 - 2
 		end
 	end
-	for i_3 = 1, p65Count do
-		local var75 = 0
-		local var76 = nil
+	for i2 = 1, CountP52 do
+		local Count4 = 0
+		local v28: boolean? = nil
 		
-		for i_2 = 1, p65Count do
-			local var77 = p34[i_2][i_3] < 0
+		for i3 = 1, CountP52 do
+			local v29 = p29[i3][i2] < 0
 			
-			if var76 == var77 then
-				var75 += 1
-			elseif var75 >= 5 then
-				var68 = var68 + var75 - 2
+			if v28 == v29 then
+				Count4 += 1
+			else
+				if Count4 >= 5 then
+					v25 = v25 + Count4 - 2
+				end
+				Count4 = 1
 			end
-			var75 = 1
-			var76 = var77
+			v28 = v29
 		end
-		if var75 >= 5 then
-			var68 = var68 + var75 - 2
-		end
-	end
-	for i_5 = 1, p65Count do
-		for i_4 = 1, p65Count do
-			if i_4 < p65Count - 1 and i_5 < p65Count - 1 and (p34[i_5][i_4] < 0 and p34[i_5 + 1][i_4] < 0 and (p34[i_5][i_4 + 1] < 0 and p34[i_5 + 1][i_4 + 1] < 0) or p34[i_5][i_4] > 0 and p34[i_5 + 1][i_4] > 0 and (p34[i_5][i_4 + 1] > 0 and p34[i_5 + 1][i_4 + 1] > 0)) then
-				var69 += 3
-			end
-			if i_4 + 6 < p65Count and p34[i_5][i_4] > 0 and (p34[i_5][i_4 + 1] < 0 and p34[i_5][i_4 + 2] > 0) and (p34[i_5][i_4 + 3] > 0 and p34[i_5][i_4 + 4] > 0 and (p34[i_5][i_4 + 5] < 0 and p34[i_5][i_4 + 6] > 0)) and (i_4 + 10 < p65Count and p34[i_5][i_4 + 7] < 0 and (p34[i_5][i_4 + 8] < 0 and p34[i_5][i_4 + 9] < 0) and p34[i_5][i_4 + 10] < 0 or i_4 - 4 >= 1 and p34[i_5][i_4 - 1] < 0 and (p34[i_5][i_4 - 2] < 0 and p34[i_5][i_4 - 3] < 0) and p34[i_5][i_4 - 4] < 0) then
-				var70 += 40
-			end
-			if i_5 + 6 <= p65Count and p34[i_5][i_4] > 0 and (p34[i_5 + 1][i_4] < 0 and p34[i_5 + 2][i_4] > 0) and (p34[i_5 + 3][i_4] > 0 and p34[i_5 + 4][i_4] > 0 and (p34[i_5 + 5][i_4] < 0 and p34[i_5 + 6][i_4] > 0)) and (i_5 + 10 <= p65Count and p34[i_5 + 7][i_4] < 0 and (p34[i_5 + 8][i_4] < 0 and p34[i_5 + 9][i_4] < 0) and p34[i_5 + 10][i_4] < 0 or i_5 - 4 >= 1 and p34[i_5 - 1][i_4] < 0 and (p34[i_5 - 2][i_4] < 0 and p34[i_5 - 3][i_4] < 0) and p34[i_5 - 4][i_4] < 0) then
-				var70 += 40
-			end
+		if Count4 >= 5 then
+			v25 = v25 + Count4 - 2
 		end
 	end
-	return var68 + var69 + var70 + math.floor(math.abs(var71 / (p65Count * p65Count) * 100 - 50)) * 2
+	for i4 = 1, CountP52 do
+		for i5 = 1, CountP52 do
+			if i5 < CountP52 - 1 and i4 < CountP52 - 1 and (p29[i4][i5] < 0 and p29[i4 + 1][i5] < 0 and p29[i4][i5 + 1] < 0 and p29[i4 + 1][i5 + 1] < 0 or p29[i4][i5] > 0 and p29[i4 + 1][i5] > 0 and p29[i4][i5 + 1] > 0 and p29[i4 + 1][i5 + 1] > 0) then
+				Count += 3
+			end
+			if i5 + 6 < CountP52 and p29[i4][i5] > 0 and p29[i4][i5 + 1] < 0 and p29[i4][i5 + 2] > 0 and p29[i4][i5 + 3] > 0 and p29[i4][i5 + 4] > 0 and p29[i4][i5 + 5] < 0 and p29[i4][i5 + 6] > 0 and (i5 + 10 < CountP52 and p29[i4][i5 + 7] < 0 and p29[i4][i5 + 8] < 0 and p29[i4][i5 + 9] < 0 and p29[i4][i5 + 10] < 0 or i5 - 4 >= 1 and p29[i4][i5 - 1] < 0 and p29[i4][i5 - 2] < 0 and p29[i4][i5 - 3] < 0 and p29[i4][i5 - 4] < 0) then
+				Count1 += 40
+			end
+			if i4 + 6 <= CountP52 and p29[i4][i5] > 0 and p29[i4 + 1][i5] < 0 and p29[i4 + 2][i5] > 0 and p29[i4 + 3][i5] > 0 and p29[i4 + 4][i5] > 0 and p29[i4 + 5][i5] < 0 and p29[i4 + 6][i5] > 0 and (i4 + 10 <= CountP52 and (p29[i4 + 7][i5] < 0 and (p29[i4 + 8][i5] < 0 and (p29[i4 + 9][i5] < 0 and p29[i4 + 10][i5] < 0))) or i4 - 4 >= 1 and p29[i4 - 1][i5] < 0 and p29[i4 - 2][i5] < 0 and p29[i4 - 3][i5] < 0 and p29[i4 - 4][i5] < 0) then
+				Count1 += 40
+			end
+		end
+	end
+	return v25 + Count + Count1 + math.floor((math.abs(Count2 / (CountP52 * CountP52) * 100 - 50))) * 2
 end
 
-local _ = function(p35, p36, p37, p38)
-	-- upvalues: prepare_matrix_with_mask (ref), get_next_free_positions (ref), get_pixel_with_mask (ref), calculate_penalty (ref)
-	local var78 = prepare_matrix_with_mask(p35, p36, p38)
-	size = #var78
-	local _ = nil
-	local _ = nil
-	local var79 = nil
-	local var80 = nil
-	local var81 = nil
-	local var82 = nil
-	local var83 = "up"
-	local var84 = 0
-	local _size = size
-	local _size_1 = size
-	string.gsub(p37, ".?.?.?.?.?.?.?.?", function(p39)
-		-- upvalues: var84 (write), var79 (write), _size (write), _size_1 (write), var83 (write), get_next_free_positions (copy), var78 (ref), p38 (ref), var80 (write), var81 (write), var82 (write), get_pixel_with_mask (copy)
-		var84 += 1
-		local var85, var86, var87, var88 = get_next_free_positions(var78, _size, _size_1, var83, p39, p38)
+local _ = function(p30, p31, Text, p32) --[[ Line: 1280 | Named "get_matrix_and_penalty" ]]
+	-- upvalues: prepare_matrix_with_mask (copy), get_next_free_positions (copy), get_pixel_with_mask (copy), calculate_penalty (copy)
+	local Prepare_matrix_with_maskResult = prepare_matrix_with_mask(p30, p31, p32)
+	size = #Prepare_matrix_with_maskResult
+	local v30 = nil
+	local Count = nil
+	local v31 = nil
+	local v32 = nil
+	local v33 = nil
+	local v34 = nil
+	local v35 = "up"
+	local v36 = 0
+	v30 = size
+	Count = size
+	string.gsub(Text, ".?.?.?.?.?.?.?.?", function(Text: string) --[[ Line: 1131 ]]
+		-- upvalues: v36 (ref), v31 (ref), v30 (ref), Count (ref), v35 (ref), get_next_free_positions (upval), Prepare_matrix_with_maskResult (copy), p32 (copy), v32 (ref), v33 (ref), v34 (ref), get_pixel_with_mask (upval)
+		v36 += 1
+		v31, v30, Count, v164 = get_next_free_positions(Prepare_matrix_with_maskResult, v30, Count, v35, Text, p32)
 		
-		for i = 1, #p39 do
-			var63 = var85[i][1]
-			var64 = var85[i][2]
-			var65 = get_pixel_with_mask(p38, var63, var64, string.sub(p39, i, i))
+		for i = 1, #Text do
+			v32 = v31[i][1]
+			v33 = v31[i][2]
+			v34 = get_pixel_with_mask(p32, v32, v33, (string.sub(Text, i, i)))
 			
 			if debugging then
-				var78[var63][var64] = var65 * (i + 10)
+				Prepare_matrix_with_maskResult[v32][v33] = v34 * (i + 10)
 			else
-				var78[var63][var64] = var65
+				Prepare_matrix_with_maskResult[v32][v33] = v34
 			end
 		end
 	end)
 	
-	return var78, calculate_penalty(var78)
+	return Prepare_matrix_with_maskResult, (calculate_penalty(Prepare_matrix_with_maskResult))
 end
 
-local function get_matrix_with_lowest_penalty(p39, p40, p41)
-	-- upvalues: prepare_matrix_with_mask (ref), get_next_free_positions (ref), get_pixel_with_mask (ref), calculate_penalty (ref)
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var85 = prepare_matrix_with_mask(p39, p40, 0)
-	size = #var85
-	local _ = nil
-	local _ = nil
-	local var86 = nil
-	local _size = nil
-	local _size_1 = nil
-	local var87 = nil
-	local var88 = "up"
-	local var89 = 0
-	local _size_2 = size
-	local _size_3 = size
-	local var90 = 0
-	string.gsub(p41, ".?.?.?.?.?.?.?.?", function(p42)
-		-- upvalues: var89 (write), var86 (write), _size_2 (write), _size_3 (write), var88 (write), get_next_free_positions (copy), var85 (ref), var90 (ref), _size (write), _size_1 (write), var87 (write), get_pixel_with_mask (copy)
-		var84 += 1
-		local var91, var92, var93, var94 = get_next_free_positions(var85, _size_2, _size_3, var88, p42, var90)
+local function get_matrix_with_lowest_penalty(p33, p34, Text) --[[ Line: 1290 ]]
+	-- upvalues: prepare_matrix_with_mask (copy), get_next_free_positions (copy), get_pixel_with_mask (copy), calculate_penalty (copy)
+	local Prepare_matrix_with_maskResult = prepare_matrix_with_mask(p33, p34, 0)
+	size = #Prepare_matrix_with_maskResult
+	local v37 = nil
+	local Count = nil
+	local v38 = nil
+	local v39 = nil
+	local v40 = nil
+	local v41 = nil
+	local v42 = "up"
+	local v43 = 0
+	v37 = size
+	Count = size
+	local v44 = 0
+	string.gsub(Text, ".?.?.?.?.?.?.?.?", function(Text: string) --[[ Line: 1131 ]]
+		-- upvalues: v43 (ref), v38 (ref), v37 (ref), Count (ref), v42 (ref), get_next_free_positions (upval), Prepare_matrix_with_maskResult (copy), v44 (copy), v39 (ref), v40 (ref), v41 (ref), get_pixel_with_mask (upval)
+		v43 += 1
+		v38, v37, Count, v175 = get_next_free_positions(Prepare_matrix_with_maskResult, v37, Count, v42, Text, v44)
 		
-		for i = 1, #p42 do
-			var63 = var91[i][1]
-			var64 = var91[i][2]
-			var65 = get_pixel_with_mask(var90, var63, var64, string.sub(p42, i, i))
+		for i = 1, #Text do
+			v39 = v38[i][1]
+			v40 = v38[i][2]
+			v41 = get_pixel_with_mask(v44, v39, v40, (string.sub(Text, i, i)))
 			
 			if debugging then
-				var85[var63][var64] = var65 * (i + 10)
+				Prepare_matrix_with_maskResult[v39][v40] = v41 * (i + 10)
 			else
-				var85[var63][var64] = var65
+				Prepare_matrix_with_maskResult[v39][v40] = v41
 			end
 		end
 	end)
-	local var95 = var85
-	local var96 = calculate_penalty(var85)
+	local Prepare_matrix_with_maskResult1 = Prepare_matrix_with_maskResult
+	local Penalty = calculate_penalty(Prepare_matrix_with_maskResult)
 	
 	for i = 1, 7 do
-		var86 = prepare_matrix_with_mask(p39, p40, i)
-		size = #var86
-		_size = nil
-		_size_1 = nil
-		var87 = nil
-		var88 = nil
-		var89 = nil
-		local var97 = nil
-		local var98 = "up"
-		local var99 = 0
-		_size = size
-		_size_1 = size
-		string.gsub(p41, ".?.?.?.?.?.?.?.?", function(p43)
-			-- upvalues: var99 (write), var87 (write), _size (write), _size_1 (write), var98 (write), get_next_free_positions (copy), var86 (ref), i (ref), var88 (write), var89 (write), var97 (write), get_pixel_with_mask (copy)
-			var84 += 1
-			local var100, var101, var102, var103 = get_next_free_positions(var86, _size, _size_1, var98, p43, i)
+		local Prepare_matrix_with_maskResult2 = prepare_matrix_with_mask(p33, p34, i)
+		size = #Prepare_matrix_with_maskResult2
+		local v45 = nil
+		local Count1 = nil
+		local v46 = nil
+		local v47 = nil
+		local v48 = nil
+		local v49 = nil
+		local v50 = "up"
+		local v51 = 0
+		v45 = size
+		Count1 = size
+		string.gsub(Text, ".?.?.?.?.?.?.?.?", function(Text: string) --[[ Line: 1131 ]]
+			-- upvalues: v51 (ref), v46 (ref), v45 (ref), Count1 (ref), v50 (ref), get_next_free_positions (upval), Prepare_matrix_with_maskResult2 (copy), i (copy), v47 (ref), v48 (ref), v49 (ref), get_pixel_with_mask (upval)
+			v51 += 1
+			v46, v45, Count1, v189 = get_next_free_positions(Prepare_matrix_with_maskResult2, v45, Count1, v50, Text, i)
 			
-			for i = 1, #p43 do
-				var63 = var100[i][1]
-				var64 = var100[i][2]
-				var65 = get_pixel_with_mask(i, var63, var64, string.sub(p43, i, i))
+			for i = 1, #Text do
+				v47 = v46[i][1]
+				v48 = v46[i][2]
+				v49 = get_pixel_with_mask(i, v47, v48, (string.sub(Text, i, i)))
 				
 				if debugging then
-					var86[var63][var64] = var65 * (i + 10)
+					Prepare_matrix_with_maskResult2[v47][v48] = v49 * (i + 10)
 				else
-					var86[var63][var64] = var65
+					Prepare_matrix_with_maskResult2[v47][v48] = v49
 				end
 			end
 		end)
-		local var104 = var86
-		local var105 = calculate_penalty(var86)
+		local Prepare_matrix_with_maskResult3 = Prepare_matrix_with_maskResult2
+		local Penalty1 = calculate_penalty(Prepare_matrix_with_maskResult2)
 		
-		if var105 < var96 then
-			var95 = var104
-			var96 = var105
+		if Penalty1 < Penalty then
+			Prepare_matrix_with_maskResult1 = Prepare_matrix_with_maskResult3
+			Penalty = Penalty1
 		end
 	end
-	return var95
+	return Prepare_matrix_with_maskResult1
 end
 
 return {
-	encode_string_numeric = encode_string_numeric,
-	encode_string_ascii = encode_string_ascii,
-	qrcode = function(p43, p44, _)
-		-- upvalues: get_version_eclevel (ref), get_length (ref), binary (ref), list_1 (ref), encode_string_binary (ref), add_pad_data (ref), arrange_codewords_and_calculate_ec (ref), list_3 (ref), get_matrix_with_lowest_penalty (ref)
-		local var100, var101, var102
-		local _ = nil
-		local _ = nil
-		local _ = nil
-		local _ = nil
-		local _ = nil
-		local var103 = p44
-		local var104 = if string.match(p43, "^[0-9]+$") then 1 elseif string.match(p43, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
-		local _ = nil
-		local _ = nil
-		local var105, var106 = get_version_eclevel(#p43, var104, var103)
-		local var107 = var105
-		local var108 = var106
-		local var109 = var104
-		local text = binary(var104, 4) .. get_length(p43, var107, var104)
-		
-		if var109 == 1 then
-			var100 = ""
-			var101 = nil
-			string.gsub(p43, "..?.?", function(p45)
-				-- upvalues: var101 (write), var100 (write), binary (copy)
-				var61 = tonumber(p45)
+	encode_string_numeric = function(Text): string --[[ Line: 339 ]]
+		-- upvalues: binary (copy)
+		local Text1 = ""
+		local Number = nil
+		string.gsub(Text, "..?.?", function(Match) --[[ Line: 342 ]]
+			-- upvalues: Number (ref), Text1 (ref), binary (upval)
+			Number = tonumber(Match)
+			
+			if #Match == 3 then
+				Text1 ..= binary(Number, 10)
 				
-				if #p45 == 3 then
-					var60 ..= binary(var61, 10)
-					
-					return
-				elseif #p45 == 2 then
-					var60 ..= binary(var61, 7)
+				return
+			end
+			if #Match == 2 then
+				Text1 ..= binary(Number, 7)
+				
+				return
+			else
+				Text1 ..= binary(Number, 4)
+			end
+		end)
+		
+		return Text1
+	end,
+	encode_string_ascii = function(Text): string --[[ Line: 357 ]]
+		-- upvalues: list1 (copy), binary (copy)
+		local Text1 = ""
+		local v52 = nil
+		local v53 = nil
+		local v54 = nil
+		string.gsub(Text, "..?", function(Text: string) --[[ Line: 361 ]]
+			-- upvalues: v53 (ref), list1 (upval), v54 (ref), v52 (ref), Text1 (ref), binary (upval)
+			if #Text == 2 then
+				v53 = list1[string.byte((string.sub(Text, 1, 1)))]
+				v54 = list1[string.byte((string.sub(Text, 2, 2)))]
+				v52 = v53 * 45 + v54
+				Text1 ..= binary(v52, 11)
+				
+				return
+			else
+				v52 = list1[string.byte(Text)]
+				Text1 ..= binary(v52, 6)
+			end
+		end)
+		
+		return Text1
+	end,
+	qrcode = function(Text: string, p35, _) --[[ Line: 1314 ]]
+		-- upvalues: get_version_eclevel (copy), get_length (copy), binary (copy), list1 (copy), encode_string_binary (copy), add_pad_data (copy), arrange_codewords_and_calculate_ec (copy), Remainder (copy), get_matrix_with_lowest_penalty (copy)
+		local v52: number = if string.match(Text, "^[0-9]+$") then 1 elseif string.match(Text, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
+		local Version_eclevel, Version_eclevel2 = get_version_eclevel(#Text, v52, p35)
+		local v53: number = v52
+		local Text1 = binary(v52, 4) .. get_length(Text, Version_eclevel, v52)
+		local Text3 = nil
+		
+		if v53 == 1 then
+			local Text2 = ""
+			local Number = nil
+			string.gsub(Text, "..?.?", function(Match) --[[ Line: 342 ]]
+				-- upvalues: Number (ref), Text2 (ref), binary (upval)
+				Number = tonumber(Match)
+				
+				if #Match == 3 then
+					Text2 ..= binary(Number, 10)
 					
 					return
 				end
-				var60 ..= binary(var61, 4)
-			end)
-			var102 = var100
-		elseif var109 == 2 then
-			var100 = ""
-			var101 = nil
-			local var110 = nil
-			local var111 = nil
-			string.gsub(p43, "..?", function(p45)
-				-- upvalues: var110 (write), list_1 (copy), var111 (write), var101 (write), var100 (write), binary (copy)
-				if #p45 == 2 then
-					var64 = list_1[string.byte(string.sub(p45, 1, 1))]
-					var65 = list_1[string.byte(string.sub(p45, 2, 2))]
-					var63 = var64 * 45 + var65
-					var62 ..= binary(var63, 11)
+				if #Match == 2 then
+					Text2 ..= binary(Number, 7)
 					
 					return
+				else
+					Text2 ..= binary(Number, 4)
 				end
-				var63 = list_1[string.byte(p45)]
-				var62 ..= binary(var63, 6)
 			end)
-			var102 = var100
-		elseif var109 == 4 then
-			var102 = encode_string_binary(p43)
+			Text3 = Text2
+		elseif v53 == 2 then
+			local Text4 = ""
+			local v54 = nil
+			local v55 = nil
+			local v56 = nil
+			string.gsub(Text, "..?", function(Text: string) --[[ Line: 361 ]]
+				-- upvalues: v55 (ref), list1 (upval), v56 (ref), v54 (ref), Text4 (ref), binary (upval)
+				if #Text == 2 then
+					v55 = list1[string.byte((string.sub(Text, 1, 1)))]
+					v56 = list1[string.byte((string.sub(Text, 2, 2)))]
+					v54 = v55 * 45 + v56
+					Text4 ..= binary(v54, 11)
+					
+					return
+				else
+					v54 = list1[string.byte(Text)]
+					Text4 ..= binary(v54, 6)
+				end
+			end)
+			Text3 = Text4
+		elseif v53 == 4 then
+			Text3 = encode_string_binary(Text)
 		else
 			assert(false, "not implemented yet")
-			var102 = nil
+			Text3 = nil
 		end
-		local var112 = arrange_codewords_and_calculate_ec(var107, var108, add_pad_data(var107, var108, text .. var199))
+		local Arrange_codewords_and_calculate_ecResult = arrange_codewords_and_calculate_ec(Version_eclevel, Version_eclevel2, (add_pad_data(Version_eclevel, Version_eclevel2, Text1 .. Text3)))
 		
-		if math.fmod(#var112, 8) == 0 then
-			return true, get_matrix_with_lowest_penalty(var107, var108, var112 .. string.rep("0", list_3[var107]))
+		if math.fmod(#Arrange_codewords_and_calculate_ecResult, 8) == 0 then
+			return true, (get_matrix_with_lowest_penalty(Version_eclevel, Version_eclevel2, Arrange_codewords_and_calculate_ecResult .. string.rep("0", Remainder[Version_eclevel])))
+		else
+			return false, string.format("Arranged data %% 8 != 0: data length = %d, mod 8 = %d", #Arrange_codewords_and_calculate_ecResult, (math.fmod(#Arrange_codewords_and_calculate_ecResult, 8)))
 		end
-		return false, string.format("Arranged data %% 8 != 0: data length = %d, mod 8 = %d", #var112, math.fmod(#var112, 8))
 	end,
 	binary = binary,
-	get_mode = get_mode,
+	get_mode = function(Text: string): number --[[ Line: 177 ]]
+		return if string.match(Text, "^[0-9]+$") then 1 elseif string.match(Text, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
+	end,
 	get_length = get_length,
 	add_pad_data = add_pad_data,
 	get_generator_polynominal_adjusted = get_generator_polynominal_adjusted,
 	get_pixel_with_mask = get_pixel_with_mask,
-	get_version_eclevel_mode_bistringlength = get_version_eclevel_mode_bistringlength,
-	remainder = list_3,
+	get_version_eclevel_mode_bistringlength = function(Text: string, p35, p36) --[[ Line: 303 ]]
+		-- upvalues: get_version_eclevel (copy), get_length (copy), binary (copy)
+		local v52 = nil
+		if p36 then
+			assert(false, "not implemented")
+			v52 = p36
+		else
+			v52 = if string.match(Text, "^[0-9]+$") then 1 elseif string.match(Text, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
+		end
+		local Version_eclevel, Version_eclevel2 = get_version_eclevel(#Text, v52, p35)
+		
+		return Version_eclevel, Version_eclevel2, binary(v52, 4), v52, (get_length(Text, Version_eclevel, v52))
+	end,
+	remainder = Remainder,
 	arrange_codewords_and_calculate_ec = arrange_codewords_and_calculate_ec,
 	calculate_error_correction = calculate_error_correction,
-	convert_bitstring_to_bytes = convert_bitstring_to_bytes,
+	convert_bitstring_to_bytes = function(Text: string) --[[ Line: 496 ]]
+		local Numbers = {}
+		local _ = string.gsub(Text, "(........)", function(Match) --[[ Line: 498 ]]
+			-- upvalues: Numbers (copy)
+			Numbers[#Numbers + 1] = tonumber(Match, 2)
+		end)
+		
+		return Numbers
+	end,
 	bit_xor = bit_xor
 }

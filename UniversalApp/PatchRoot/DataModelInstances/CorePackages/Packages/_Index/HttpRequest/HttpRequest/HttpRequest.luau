@@ -1,55 +1,56 @@
-﻿local cryoModule = require(script:FindFirstAncestor("HttpRequest").Parent.Cryo)
-local httpService = game:GetService("HttpService")
-local statusCodeModule = require(script.Parent.StatusCode)
-local httpSessionModule = require(script.Parent.HttpSession)
-local httpResponseModule = require(script.Parent.HttpResponse)
-local t = {
-	[statusCodeModule.REQUEST_TIMEOUT] = true,
-	[statusCodeModule.SERVICE_UNAVAILABLE] = true,
-	[statusCodeModule.GATEWAY_TIMEOUT] = true
+﻿local CryoModule = require(script:FindFirstAncestor("HttpRequest").Parent.Cryo)
+local HttpService = game:GetService("HttpService")
+local StatusCodeModule = require(script.Parent.StatusCode)
+local HttpSessionModule = require(script.Parent.HttpSession)
+local HttpResponseModule = require(script.Parent.HttpResponse)
+local config = {
+	[StatusCodeModule.REQUEST_TIMEOUT] = true,
+	[StatusCodeModule.SERVICE_UNAVAILABLE] = true,
+	[StatusCodeModule.GATEWAY_TIMEOUT] = true
 }
-local t_1 = {}
-t_1.__index = t_1
+local HttpRequestModule = {}
+HttpRequestModule.__index = HttpRequestModule
 
-function t_1.new(p1, p2, p3, p4)
-	-- upvalues: cryoModule (ref), httpSessionModule (ref), t_1 (ref)
-	p1 = p1 or {}
-	p1 = {
+function HttpRequestModule.new(p1, Url, RequestMethod, p2) --[[ Line: 34 ]]
+	-- upvalues: CryoModule (copy), HttpSessionModule (copy), HttpRequestModule (copy)
+	local P0 = p1 or {}
+	local config = {
 		resolve = nil,
 		reject = nil,
 		retryCount = 0,
 		httpRequest = nil,
 		canceled = false,
-		requestFunction = p1.requestFunction,
-		postRequestFunction = p1.postRequestFunction,
-		url = p2,
-		requestMethod = p3,
-		options = cryoModule.Dictionary.join(p1.defaultOptions or {}, p4 or {}),
-		waitImpl = p1.waitImpl or delay,
-		maxRetryCount = p1.maxRetryCount or 4,
-		maxWaitTime = p1.maxWaitTime or 16,
-		session = httpSessionModule.currentSession()
+		requestFunction = P0.requestFunction,
+		postRequestFunction = P0.postRequestFunction,
+		url = Url,
+		requestMethod = RequestMethod,
+		options = CryoModule.Dictionary.join(P0.defaultOptions or {}, p2 or {}),
+		waitImpl = P0.waitImpl or delay,
+		maxRetryCount = P0.maxRetryCount or 4,
+		maxWaitTime = P0.maxWaitTime or 16,
+		session = HttpSessionModule.currentSession()
 	}
-	setmetatable(p1, t_1)
+	setmetatable(config, HttpRequestModule)
 	
-	return p1
+	return config
 end
 
-function t_1:start(p1, p2)
-	self.resolve = p1
-	self.reject = p2
+function HttpRequestModule:start(Resolve, Reject) --[[ Line: 59 ]]
+	self.resolve = Resolve
+	self.reject = Reject
 	self:makeRequest()
 end
 
-function t_1:processResponse(p1)
-	-- upvalues: httpService (ref), httpResponseModule (ref)
-	local ok, status = pcall(httpService.JSONDecode, httpService, p1.Body)
+function HttpRequestModule:processResponse(p1) --[[ Line: 65 ]]
+	-- upvalues: HttpService (copy), HttpResponseModule (copy)
+	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1.Body)
 	
-	if not ok then
-		self.reject(httpResponseModule.error(Enum.HttpError.OK))
+	if not Success then
+		self.reject(HttpResponseModule.error(Enum.HttpError.OK))
 		
 		return
-	elseif self.postRequestFunction then
+	end
+	if self.postRequestFunction then
 		pcall(self.postRequestFunction, p1, {
 			url = self.url,
 			requestMethod = self.requestMethod,
@@ -57,77 +58,83 @@ function t_1:processResponse(p1)
 			retryCount = self.retryCount
 		})
 	end
-	self.resolve(httpResponseModule.success(p1.StatusCode, status))
+	self.resolve(HttpResponseModule.success(p1.StatusCode, Result))
 end
 
-function t_1:retry(p1, p2)
+function HttpRequestModule:retry(p1, Number) --[[ Line: 84 ]]
 	self.retryCount += 1
 	
 	if self.maxRetryCount < self.retryCount then
 		self.reject(p1)
 		
 		return
+	else
+		self:wait(Number or math.pow(2, self.retryCount))
 	end
-	self:wait(p2 or math.pow(2, self.retryCount))
 end
 
-function t_1:wait(p1)
-	self.waitImpl(p1, function()
-		-- upvalues: self (ref)
+function HttpRequestModule:wait(p1) --[[ Line: 94 ]]
+	self.waitImpl(p1, function() --[[ Line: 95 ]]
+		-- upvalues: self (copy)
 		self:makeRequest()
 	end)
 end
 
-function t_1:makeRequest()
-	-- upvalues: httpSessionModule (ref), t (ref), statusCodeModule (ref), httpResponseModule (ref)
-	if self.canceled then
+function HttpRequestModule:makeRequest() --[[ Line: 100 ]]
+	-- upvalues: HttpSessionModule (copy), config (copy), StatusCodeModule (copy), HttpResponseModule (copy)
+	if not self.canceled then
+		self.httpRequest = self.requestFunction(self.url, self.requestMethod, self.options)
+		self.httpRequest:Start(function(p1, p2) --[[ Line: 105 ]]
+			-- upvalues: self (copy), HttpSessionModule (upval), config (upval), StatusCodeModule (upval), HttpResponseModule (upval)
+			if self.session ~= HttpSessionModule.currentSession() then
+				warn("Http request aborted", self.url)
+				
+				return
+			end
+			if p1 then
+				if p2.StatusCode >= 200 and p2.StatusCode < 400 then
+					self:processResponse(p2)
+					
+					return
+				end
+				if config[p2.StatusCode] then
+					self:retry(p2)
+					
+					return
+				end
+				if p2.StatusCode ~= StatusCodeModule.TOO_MANY_REQUESTS or not p2.Headers["Retry-After"] then
+					self.reject(p2)
+					
+					return
+				end
+				local Number: number? = tonumber(p2.Headers["Retry-After"])
+				
+				if Number == nil or Number > self.maxWaitTime then
+					self.reject(p2)
+					
+					return
+				else
+					self:retry(p2, Number)
+					
+					return
+				end
+			elseif not self.canceled then
+				self:retry(HttpResponseModule.error(p2.HttpError))
+			end
+		end)
+		
 		return
 	end
-	self.httpRequest = self.requestFunction(self.url, self.requestMethod, self.options)
-	self.httpRequest:Start(function(p1, p2)
-		-- upvalues: self (ref), httpSessionModule (copy), t (copy), statusCodeModule (copy), httpResponseModule (copy)
-		if self.session ~= httpSessionModule.currentSession() then
-			warn("Http request aborted", self.url)
-			
-			return
-		elseif p1 then
-			if p2.StatusCode >= 200 and p2.StatusCode < 400 then
-				self:processResponse(p2)
-				
-				return
-			elseif t[p2.StatusCode] then
-				self:retry(p2)
-				
-				return
-			elseif p2.StatusCode ~= statusCodeModule.TOO_MANY_REQUESTS or not p2.Headers["Retry-After"] then
-				self.reject(p2)
-				
-				return
-			end
-			local var1 = tonumber(p2.Headers["Retry-After"])
-			
-			if var1 == nil or var1 > self.maxWaitTime then
-				self.reject(p2)
-				
-				return
-			end
-			self:retry(p2, var1)
-			
-			return
-		elseif not self.canceled then
-			self:retry(httpResponseModule.error(p2.HttpError))
-		end
-	end)
 end
 
-function t_1:cancel()
-	-- upvalues: httpResponseModule (ref)
+function HttpRequestModule:cancel() --[[ Line: 132 ]]
+	-- upvalues: HttpResponseModule (copy)
 	self.canceled = true
-	self.reject(httpResponseModule.error(Enum.HttpError.Aborted))
+	self.reject(HttpResponseModule.error(Enum.HttpError.Aborted))
 	
 	if self.httpRequest then
 		self.httpRequest:Cancel()
 	end
 end
 
-return t_1
+return HttpRequestModule

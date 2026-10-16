@@ -1,33 +1,23 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local wrappersModule = require(foundation.Utility.Wrappers)
-local coreGui = wrappersModule.Services.CoreGui
-local runService = wrappersModule.Services.RunService
-local players = wrappersModule.Services.Players
-local flagsModule = require(foundation.Utility.Flags)
-local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
-local var1 = false
-local var2 = nil
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local WrappersModule = require(Foundation.Utility.Wrappers)
+local CoreGui = WrappersModule.Services.CoreGui
+local RunService = WrappersModule.Services.RunService
+local Players = WrappersModule.Services.Players
+local IsPluginSecurityModule = require(Foundation.Utility.isPluginSecurity)
+local PlayerGui = nil
 
-local function _()
-	-- upvalues: runService (ref), players (ref)
-	return if runService:IsClient() and players.LocalPlayer and runService:IsRunning() then players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
+local function _() --[[ Line: 12 | Named "getPlayerGui" ]]
+	-- upvalues: RunService (copy), Players (copy)
+	return if RunService:IsClient() and Players.LocalPlayer and RunService:IsRunning() then Players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
 end
 
-return function()
-	-- upvalues: isPluginSecurityModule (ref), coreGui (ref), flagsModule (ref), var2 (write), runService (ref), players (ref), var1 (write)
-	if isPluginSecurityModule() then
-		return coreGui
-	elseif flagsModule.FoundationOverlayResilientMainGui then
-		if var2 == nil then
-			var2 = if runService:IsClient() and players.LocalPlayer and runService:IsRunning() then players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
-		end
-		return var2
-	elseif not var1 then
-		var2 = if runService:IsClient() and players.LocalPlayer and runService:IsRunning() then players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
-		var1 = true
+return function() --[[ Line: 20 | Named "getMainGui" ]]
+	-- upvalues: IsPluginSecurityModule (copy), CoreGui (copy), PlayerGui (ref), RunService (copy), Players (copy)
+	if IsPluginSecurityModule() then
+		return CoreGui
 	end
-	if var2 then
-		return var2
+	if PlayerGui == nil then
+		PlayerGui = if RunService:IsClient() and Players.LocalPlayer and RunService:IsRunning() then Players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
 	end
-	error("PlayerGui not found")
+	return PlayerGui
 end

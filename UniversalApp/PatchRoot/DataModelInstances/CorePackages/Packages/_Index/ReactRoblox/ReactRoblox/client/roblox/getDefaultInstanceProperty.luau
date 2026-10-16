@@ -1,37 +1,38 @@
-﻿local _nil = require(script.Parent.Parent.Parent.Parent.Shared).Symbol.named("Nil")
+﻿local Nil = require(script.Parent.Parent.Parent.Parent.Shared).Symbol.named("Nil")
 local t = {}
 
-local function tryPropertyName(p1, p2)
+local function tryPropertyName(p1, p2) --[[ Line: 33 ]]
 	return p1[p2]
 end
 
-return function(p1, p2)
-	-- upvalues: t (ref), _nil (ref), tryPropertyName (ref)
-	local var1 = t[p1]
+return function(Key, Key1) --[[ Line: 37 | Named "getDefaultInstanceProperty" ]]
+	-- upvalues: t (copy), Nil (copy), tryPropertyName (copy)
+	local Entry = t[Key]
 	
-	if var1 then
-		local var2 = var1[p2]
+	if Entry then
+		local Entry1 = Entry[Key1]
 		
-		if var2 == _nil then
+		if Entry1 == Nil then
 			return true, nil
-		elseif var2 ~= nil then
-			return true, var2
+		end
+		if Entry1 ~= nil then
+			return true, Entry1
 		end
 	else
-		var1 = {}
-		t[p1] = var1
+		Entry = {}
+		t[Key] = Entry
 	end
-	local var3 = Instance.new(p1)
-	local ok, status = pcall(tryPropertyName, var3, p2)
-	var3:Destroy()
+	local NewInstance = Instance.new(Key)
+	local Success, Result = pcall(tryPropertyName, NewInstance, Key1)
+	NewInstance:Destroy()
 	
-	if ok then
-		if status == nil then
-			var1[p2] = _nil
+	if Success then
+		if Result == nil then
+			Entry[Key1] = Nil
 			
-			return ok, status
+			return Success, Result
 		end
-		var1[p2] = status
+		Entry[Key1] = Result
 	end
-	return ok, status
+	return Success, Result
 end

@@ -1,93 +1,95 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local overlayContextModule = require(foundation.Providers.Overlay.OverlayContext)
-local _ = require(foundation.Utility.Plugin.StudioUri)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useUniqueWidgetModule = require(foundation.Providers.StudioWidgets.useUniqueWidget)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local OverlayContextModule = require(Foundation.Providers.Overlay.OverlayContext)
+local _ = require(Foundation.Utility.Plugin.StudioUri)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseUniqueWidgetModule = require(Foundation.Providers.StudioWidgets.useUniqueWidget)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), overlayContextModule (ref), useUniqueWidgetModule (ref), viewModule (ref), reactRobloxModule (ref)
-	local var1 = reactModule.useContext(overlayContextModule)
-	local var2 = p1 ~= nil and typeof(p1) ~= "Instance"
-	local var3 = reactModule.useRef(nil)
+return function(Frame: Frame, p1) --[[ Line: 19 | Named "usePluginAnchor" ]]
+	-- upvalues: ReactModule (copy), OverlayContextModule (copy), UseUniqueWidgetModule (copy), ViewModule (copy), ReactRobloxModule (copy)
+	local UseContextResult = ReactModule.useContext(OverlayContextModule)
+	local IsNotInstance: boolean = Frame ~= nil and typeof(Frame) ~= "Instance"
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if not var2 and typeof(p1) == "Instance" then
-		var3.current = p1
+	if not IsNotInstance and typeof(Frame) == "Instance" then
+		UseRefResult.current = Frame
 	end
-	local var4, var5 = reactModule.useState(nil)
-	local var6 = reactModule.useRef(nil)
-	var6.current = var4
-	local var7 = reactModule.useCallback(function(p3)
-		-- upvalues: var5 (ref)
-		var5(p3)
-	end, { var5 })
-	local var8 = useUniqueWidgetModule({ forwardRef = if var2 then var6 else var3 })
-	local var9, var10 = reactModule.useState(Vector2.zero)
-	local var11, var12 = reactModule.useState(Vector2.one)
-	local var13, var14 = reactModule.useState(Vector2.zero)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), var10 (ref), var12 (ref)
-		if var2 and p1 ~= nil then
-			local function updateFromAnchor()
-				-- upvalues: var10 (copy), p1 (ref), var12 (copy)
-				var10(p1.AbsolutePosition)
-				var12(p1.AbsoluteSize)
-			end
-			
-			var10(p1.AbsolutePosition)
-			var12(p1.AbsoluteSize)
-			local var15 = p1:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateFromAnchor)
-			local var16 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateFromAnchor)
-			
-			return function()
-				-- upvalues: var15 (ref), var16 (ref)
-				var15:Disconnect()
-				var16:Disconnect()
-			end
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	UseRefResult1.current = UseStateResult
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 38 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(p2)
+	end, { UseStateResult2 })
+	local UseUniqueWidgetModuleResult = UseUniqueWidgetModule({
+		forwardRef = if IsNotInstance then UseRefResult1 else UseRefResult
+	})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.zero)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.one)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(Vector2.zero)
+	ReactModule.useLayoutEffect(function() --[[ Line: 50 ]]
+		-- upvalues: IsNotInstance (copy), Frame (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		if not IsNotInstance or Frame == nil then return end
+		local function updateFromAnchor() --[[ Line: 56 ]]
+			-- upvalues: UseStateResult2_1 (upval), Frame (copy), UseStateResult2_2 (upval)
+			UseStateResult2_1(Frame.AbsolutePosition)
+			UseStateResult2_2(Frame.AbsoluteSize)
 		end
-	end, { p1, var2 })
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		if var2 then
-			var1.requestOverlay()
-		end
-	end, { var1.requestOverlay, var2 })
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), var1 (ref), var14 (ref)
-		if not var2 then return end
-		local instance = var1.instance
 		
-		if instance == nil or not instance:IsA("GuiObject") then
-			var14(Vector2.zero)
+		UseStateResult2_1(Frame.AbsolutePosition)
+		UseStateResult2_2(Frame.AbsoluteSize)
+		local Connection = Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateFromAnchor)
+		local Connection1 = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateFromAnchor)
+		
+		return function() --[[ Line: 66 ]]
+			-- upvalues: Connection (copy), Connection1 (copy)
+			Connection:Disconnect()
+			Connection1:Disconnect()
+		end
+	end, { Frame, IsNotInstance })
+	ReactModule.useLayoutEffect(function() --[[ Line: 72 ]]
+		-- upvalues: IsNotInstance (copy), UseContextResult (copy)
+		if IsNotInstance then
+			UseContextResult.requestOverlay()
+		end
+	end, { UseContextResult.requestOverlay, IsNotInstance })
+	ReactModule.useLayoutEffect(function() --[[ Line: 78 ]]
+		-- upvalues: IsNotInstance (copy), UseContextResult (copy), UseStateResult2_3 (copy)
+		if not IsNotInstance then return end
+		local UseContextResultInstance = UseContextResult.instance
+		
+		if UseContextResultInstance == nil or not UseContextResultInstance:IsA("GuiObject") then
+			UseStateResult2_3(Vector2.zero)
 			
 			return
 		end
-		local function updateOffset()
-			-- upvalues: var14 (copy), instance (ref)
-			var14(instance.AbsolutePosition)
+		local function updateOffset() --[[ Line: 89 ]]
+			-- upvalues: UseStateResult2_3 (upval), UseContextResultInstance (copy)
+			UseStateResult2_3(UseContextResultInstance.AbsolutePosition)
 		end
 		
-		var14(instance.AbsolutePosition)
-		local var15 = instance:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateOffset)
+		UseStateResult2_3(UseContextResultInstance.AbsolutePosition)
+		local Connection = UseContextResultInstance:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateOffset)
 		
-		return function()
-			-- upvalues: var15 (ref)
-			var15:Disconnect()
+		return function() --[[ Line: 95 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { var1.instance, var2 })
+	end, { UseContextResult.instance, IsNotInstance })
+	local NoIsNotInstance: boolean = Frame ~= nil and (not IsNotInstance or UseContextResult.instance ~= nil)
 	
 	return {
-		uri = if p2 ~= nil then var8.uri else p2,
-		element = if var2 and var1.instance then reactRobloxModule.createPortal(reactModule.createElement(viewModule, {
+		uri = if p1 == nil then UseUniqueWidgetModuleResult.uri else p1,
+		element = if IsNotInstance and UseContextResult.instance then ReactRobloxModule.createPortal(ReactModule.createElement(ViewModule, {
 			Visible = true,
-			Position = UDim2.fromOffset(var9.X - var13.X, var9.Y - var13.Y),
-			Size = UDim2.fromOffset(var11.X, var11.Y),
-			ref = var7
-		}), var1.instance) else nil,
-		isVirtual = var2,
-		isReady = if p2 ~= nil then p1 ~= nil and (not var2 or var1.instance ~= nil) else true
+			Position = UDim2.fromOffset(UseStateResult1.X - UseStateResult4.X, UseStateResult1.Y - UseStateResult4.Y),
+			Size = UDim2.fromOffset(UseStateResult3.X, UseStateResult3.Y),
+			ref = UseResult
+		}), UseContextResult.instance) else nil,
+		isVirtual = IsNotInstance,
+		isReady = p1 ~= nil or NoIsNotInstance
 	}
 end

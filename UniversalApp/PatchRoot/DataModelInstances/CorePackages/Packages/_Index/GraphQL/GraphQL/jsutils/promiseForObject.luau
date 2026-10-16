@@ -1,27 +1,27 @@
-﻿local parent = script.Parent.Parent.Parent
-local promiseModule = require(parent.Promise)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
+﻿local Parent = script.Parent.Parent.Parent
+local PromiseModule = require(Parent.Promise)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
 local _ = require(script.Parent.ObjMap)
 
 return {
-	promiseForObject = function(p1)
-		-- upvalues: object (ref), array (ref), promiseModule (ref)
-		local var1 = object.keys(p1)
+	promiseForObject = function(p1) --[[ Line: 19 ]]
+		-- upvalues: Object (copy), Array (copy), PromiseModule (copy)
+		local KeysResult = Object.keys(p1)
 		
-		return promiseModule.all(array.map(var1, function(p2)
-			-- upvalues: p1 (ref), promiseModule (copy)
-			local var2 = p1[p2]
+		return PromiseModule.all((Array.map(KeysResult, function(p2) --[[ Line: 21 ]]
+			-- upvalues: p1 (copy), PromiseModule (upval)
+			local v1 = p1[p2]
 			
-			return if promiseModule.is(var2) then var2 else promiseModule.resolve(var2)
-		end)):andThen(function(p2)
-			-- upvalues: array (copy), var1 (ref)
-			return array.reduce(p2, function(p3, p4, p5)
-				-- upvalues: var1 (copy)
-				p3[var1[p5]] = p4
+			return if PromiseModule.is(v1) then v1 else PromiseModule.resolve(v1)
+		end))):andThen(function(Result) --[[ Line: 31 ]]
+			-- upvalues: Array (upval), KeysResult (copy)
+			return Array.reduce(Result, function(p2, p3, p4) --[[ Line: 32 ]]
+				-- upvalues: KeysResult (upval)
+				p2[KeysResult[p4]] = p3
 				
-				return p3
+				return p2
 			end, {})
 		end)
 	end

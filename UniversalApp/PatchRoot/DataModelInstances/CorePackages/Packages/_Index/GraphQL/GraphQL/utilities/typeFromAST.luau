@@ -1,31 +1,30 @@
-﻿local parent = script.Parent.Parent
-local inspect = require(parent.jsutils.inspect).inspect
-local invariant = require(parent.jsutils.invariant).invariant
-local _ = require(parent.language.ast)
-local kind = require(parent.language.kinds).Kind
-local definitionModule = require(parent.type.definition)
-local graphQLList = definitionModule.GraphQLList
-local graphQLNonNull = definitionModule.GraphQLNonNull
-local _ = require(parent.type.schema)
+﻿local Parent = script.Parent.Parent
+local InspectFunction = require(Parent.jsutils.inspect).inspect
+local InvariantFunction = require(Parent.jsutils.invariant).invariant
+local _ = require(Parent.language.ast)
+local Kind = require(Parent.language.kinds).Kind
+local DefinitionModule = require(Parent.type.definition)
+local GraphQLList = DefinitionModule.GraphQLList
+local GraphQLNonNull = DefinitionModule.GraphQLNonNull
+local _ = require(Parent.type.schema)
 
-local function typeFromAST(p1, p2)
-	-- upvalues: kind (ref), typeFromAST (ref), graphQLList (ref), graphQLNonNull (ref), invariant (ref), inspect (ref)
-	local _ = nil
-	
-	if p2.kind == kind.LIST_TYPE then
-		local var1 = typeFromAST(p1, p2.type)
+local function typeFromAST(p1, Type) --[[ Line: 33 ]]
+	-- upvalues: Kind (copy), typeFromAST (copy), GraphQLList (copy), GraphQLNonNull (copy), InvariantFunction (copy), InspectFunction (copy)
+	if Type.kind == Kind.LIST_TYPE then
+		local TypeFromASTResult = typeFromAST(p1, Type.type)
 		
-		return var1 and graphQLList.new(var1)
-	elseif p2.kind == kind.NON_NULL_TYPE then
-		local var2 = typeFromAST(p1, p2.type)
+		return TypeFromASTResult and GraphQLList.new(TypeFromASTResult)
+	elseif Type.kind == Kind.NON_NULL_TYPE then
+		local TypeFromASTResult = typeFromAST(p1, Type.type)
 		
-		return var2 and graphQLNonNull.new(var2)
-	elseif p2.kind == kind.NAMED_TYPE then
-		return p1:getType(p2.name.value)
+		return TypeFromASTResult and GraphQLNonNull.new(TypeFromASTResult)
+	elseif Type.kind == Kind.NAMED_TYPE then
+		return p1:getType(Type.name.value)
+	else
+		InvariantFunction(false, "Unexpected type node: " .. InspectFunction(Type))
+		
+		return nil
 	end
-	invariant(false, "Unexpected type node: " .. inspect(p2))
-	
-	return nil
 end
 
 return { typeFromAST = typeFromAST }

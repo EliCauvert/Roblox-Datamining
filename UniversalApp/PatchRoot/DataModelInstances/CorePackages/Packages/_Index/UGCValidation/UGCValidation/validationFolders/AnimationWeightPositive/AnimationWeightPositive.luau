@@ -1,29 +1,29 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.ANIMATION },
+	categories = { ValidationEnumsModule.UploadCategory.ANIMATION },
 	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.uploadEnum
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.uploadEnum
 	},
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.ExpectedRootSchema
+		ValidationEnumsModule.ValidationModule.ExpectedRootSchema
 	},
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref)
+	run = function(p1, p2) --[[ Line: 17 ]]
+		-- upvalues: ErrorSourceStringsModule (copy)
 		if p2.uploadEnum.assetType ~= Enum.AssetType.IdleAnimation then return end
-		for i, v in p2.rootInstance:GetDescendants() do
-			if v:IsA("NumberValue") and v.Name == "Weight" then
-				local value = v.Value
+		for _, NumberValue in p2.rootInstance:GetDescendants() do
+			if NumberValue:IsA("NumberValue") and NumberValue.Name == "Weight" then
+				local Value: number = NumberValue.Value
 				
-				if value <= 0 then
-					p1:fail(errorSourceStringsModule.Keys.Animation_WeightNotPositive, {
-						animationName = if v.Parent then v.Parent:GetFullName() else "Unknown",
-						weight = tostring(value)
+				if Value <= 0 then
+					p1:fail(ErrorSourceStringsModule.Keys.Animation_WeightNotPositive, {
+						animationName = if NumberValue.Parent then NumberValue.Parent:GetFullName() else "Unknown",
+						weight = tostring(Value)
 					})
 				end
 			end

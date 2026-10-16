@@ -1,20 +1,20 @@
-﻿return function(...)
-	local var1
+﻿return function(...) --[[ Line: 2 | Named "intersect" ]]
 	local t = {}
-	local var2 = select("#", ...)
+	local Selected = select("#", ...)
+	local Flag = nil
 	
-	for i, v in pairs(select(1, ...)) do
-		var1 = true
+	for i1, _ in pairs((select(1, ...))) do
+		Flag = true
 		
-		for i_1 = 2, var2 do
-			if select(i_1, ...)[i] ~= nil then
+		for i = 2, Selected do
+			if select(i, ...)[i1] ~= nil then
 				continue
 			end
-			var1 = false
+			Flag = false
 			break
 		end
-		if var1 then
-			t[i] = true
+		if Flag then
+			t[i1] = true
 		end
 	end
 	return t

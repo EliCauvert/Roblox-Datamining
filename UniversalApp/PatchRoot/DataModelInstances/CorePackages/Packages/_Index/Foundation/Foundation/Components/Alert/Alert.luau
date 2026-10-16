@@ -1,277 +1,256 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local alertConstantsModule = require(foundation.Components.AlertActions.AlertConstants)
-local alertSeverityModule = require(foundation.Enums.AlertSeverity)
-local alertVariantModule = require(foundation.Enums.AlertVariant)
-local breakpointModule = require(foundation.Enums.Breakpoint)
-local breakpointConfigModule = require(foundation.Utility.Responsive.BreakpointConfig)
-local buttonGroupModule = require(foundation.Components.ButtonGroup)
-local buttonVariantModule = require(foundation.Enums.ButtonVariant)
-local closeAffordanceModule = require(foundation.Components.CloseAffordance)
-local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local flagsModule = require(foundation.Utility.Flags)
-local iconModule = require(foundation.Components.Icon)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local escapeRichTextModule = require(foundation.Utility.escapeRichText)
-local isBuilderIconModule = require(foundation.Utility.isBuilderIcon)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local useAlertVariantsModule = require(script.Parent.useAlertVariants)
-local iconVariant = builderIconsModule.IconVariant
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local AlertConstantsModule = require(Foundation.Components.AlertActions.AlertConstants)
+local AlertSeverityModule = require(Foundation.Enums.AlertSeverity)
+local AlertVariantModule = require(Foundation.Enums.AlertVariant)
+local ButtonGroupModule = require(Foundation.Components.ButtonGroup)
+local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
+local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
+local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
+local FlagsModule = require(Foundation.Utility.Flags)
+local IconModule = require(Foundation.Components.Icon)
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local EscapeRichTextModule = require(Foundation.Utility.escapeRichText)
+local IsBuilderIconModule = require(Foundation.Utility.isBuilderIcon)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local UseAlertVariantsModule = require(script.Parent.useAlertVariants)
+local IconVariant = require(Parent.BuilderIcons).IconVariant
+local config = {
 	testId = "--foundation-alert",
-	variant = alertVariantModule.Feedback,
-	severity = alertSeverityModule.Info
+	variant = AlertVariantModule.Feedback,
+	severity = AlertSeverityModule.Info
 }
-local t_1 = {
-	[alertVariantModule.Standard] = alertVariantModule.Feedback,
-	[alertVariantModule.Emphasis] = alertVariantModule.Feedback
+local config1 = {
+	[AlertVariantModule.Standard] = AlertVariantModule.Feedback,
+	[AlertVariantModule.Emphasis] = AlertVariantModule.Feedback
 }
-local xSmall = breakpointConfigModule.widths[breakpointModule.XSmall]
+local Width = require(Foundation.Utility.Responsive.BreakpointConfig).widths[require(Foundation.Enums.Breakpoint).XSmall]
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 102 | Named "getTrailingLabels" ]]
 	return if p1 then p1.text elseif p2 then `{p2.primary.text}|{if p2.secondary then p2.secondary.text else ""}` else ""
 end
 
-local function WrappingRichText(p3)
-	-- upvalues: reactModule (ref), textModule (ref), viewModule (ref)
-	local var1, var2 = reactModule.useState(0)
-	local alertWidth = p3.alertWidth
+local function WrappingRichText(Frame) --[[ Line: 114 ]]
+	-- upvalues: ReactModule (copy), TextModule (copy), ViewModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local AlertWidth = Frame.alertWidth
 	
-	return reactModule.createElement(viewModule, {
-		tag = p3.slot.tag,
-		LayoutOrder = p3.LayoutOrder,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p4)
-			-- upvalues: alertWidth (ref), var2 (ref)
-			local x = p4.AbsoluteSize.X
+	return ReactModule.createElement(ViewModule, {
+		tag = Frame.slot.tag,
+		LayoutOrder = Frame.LayoutOrder,
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 125 ]]
+			-- upvalues: AlertWidth (copy), UseStateResult2 (copy)
+			local X = Frame.AbsoluteSize.X
 			
-			if alertWidth <= 0 or x <= alertWidth then
-				var2(x)
+			if AlertWidth <= 0 or X <= AlertWidth then
+				UseStateResult2(X)
 			end
-		end, { alertWidth })
+		end, { AlertWidth })
 	}, {
-		[`Label-{math.floor(var1)}`] = reactModule.createElement(textModule, {
+		[`Label-{math.floor(UseStateResult)}`] = ReactModule.createElement(TextModule, {
 			RichText = true,
-			Text = p3.text,
-			tag = { ["size-full-0"] = true, [p3.slot.tag] = true },
-			padding = p3.slot.padding,
-			sizeConstraint = if var1 > 0 then { MaxSize = Vector2.new(var1, 1e999) } else nil,
-			stateLayer = p3.stateLayer,
-			onActivated = p3.onActivated,
-			testId = p3.testId
+			Text = Frame.text,
+			tag = { ["size-full-0"] = true, [Frame.slot.tag] = true },
+			padding = Frame.slot.padding,
+			sizeConstraint = if UseStateResult > 0 then { MaxSize = Vector2.new(UseStateResult, 1e999) } else nil,
+			stateLayer = Frame.stateLayer,
+			onActivated = Frame.onActivated,
+			testId = Frame.testId
 		})
 	})
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p3, p4)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), t_1 (ref), reactModule (ref), xSmall (ref), flagsModule (ref), useAlertVariantsModule (ref), buttonVariantModule (ref), alertConstantsModule (ref), iconVariant (ref), alertSeverityModule (ref), isBuilderIconModule (ref), iconModule (ref), iconSizeModule (ref), viewModule (ref), WrappingRichText (ref), textModule (ref), escapeRichTextModule (ref), stateLayerAffordanceModule (ref), buttonGroupModule (ref), inputSizeModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), withCommonPropsModule (ref), alertVariantModule (ref)
-	local var1
-	local var2 = withDefaultsModule(p3, t)
-	local var3 = useTokensModule()
-	local variant = t_1[var2.variant] or var2.variant
-	local var4, var5 = reactModule.useState(Vector2.zero)
-	local var6 = reactModule.useCallback(function(p5)
-		-- upvalues: var5 (ref), var2 (ref)
-		var5(p5.AbsoluteSize)
+return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref) --[[ Line: 162 | Named "Alert" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), config1 (copy), ReactModule (copy), Width (copy), FlagsModule (copy), UseAlertVariantsModule (copy), ButtonVariantModule (copy), AlertConstantsModule (copy), IconVariant (copy), AlertSeverityModule (copy), IsBuilderIconModule (copy), IconModule (copy), IconSizeModule (copy), ViewModule (copy), WrappingRichText (copy), TextModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), ButtonGroupModule (copy), InputSizeModule (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy), AlertVariantModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p3, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local Entry = config1[WithDefaultsModuleResult.variant] or WithDefaultsModuleResult.variant
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 169 ]]
+		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
+		UseStateResult2(Frame.AbsoluteSize)
 		
-		if var2.onAbsoluteSizeChanged then
-			var2.onAbsoluteSizeChanged(p5)
+		if WithDefaultsModuleResult.onAbsoluteSizeChanged then
+			WithDefaultsModuleResult.onAbsoluteSizeChanged(Frame)
 		end
-	end, { var2.onAbsoluteSizeChanged })
-	local var7, var8 = reactModule.useState(0)
-	local var9 = reactModule.useCallback(function(p5)
-		-- upvalues: var8 (ref)
-		var8(p5.AbsoluteSize.X)
+	end, { WithDefaultsModuleResult.onAbsoluteSizeChanged })
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 177 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(Frame.AbsoluteSize.X)
 	end, {})
-	local link = var2.link
-	local actions = var2.actions
-	local var10 = if link then link.text elseif actions then `{actions.primary.text}|{if actions.secondary then actions.secondary.text else ""}` else ""
-	local var11 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var8 (ref)
-		if var11.current then
-			var8(0)
+	local Link = WithDefaultsModuleResult.link
+	local Actions = WithDefaultsModuleResult.actions
+	local Text = if Link then Link.text elseif Actions then `{Actions.primary.text}|{if Actions.secondary then Actions.secondary.text else ""}` else ""
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 184 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
+		if UseRefResult.current then
+			UseStateResult2_1(0)
 		end
-		var11.current = true
-	end, { var10 })
-	local var12 = var4.X > 0 and var4.X <= xSmall
-	local var13 = var4.X * (if flagsModule.FoundationAlertStackTrailingOnOverflow then 0.3 else 0.4)
-	
-	if flagsModule.FoundationAlertStackTrailingOnOverflow then
-		var1 = var12
-		
-		if not var1 then
-			var1 = false
-			
-			if var13 > 0 then
-				var1 = var13 < var7
-				var1 = nil
-			end
-		end
-	else
-		var1 = var12 or (var2.actions ~= nil and (var13 > 0 and var13 < var7))
-	end
-	local var14 = useAlertVariantsModule(var3, var2.severity, variant, var1)
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), buttonVariantModule (copy)
-		if not var2.actions then
+		UseRefResult.current = true
+	end, { Text })
+	local IsXBelow: boolean = UseStateResult.X > 0 and UseStateResult.X <= Width
+	local ScaledX = UseStateResult.X * (if FlagsModule.FoundationAlertStackTrailingOnOverflow then 0.3 else 0.4)
+	local IsXBelow1: boolean = if FlagsModule.FoundationAlertStackTrailingOnOverflow then IsXBelow or ScaledX > 0 and ScaledX < UseStateResult1 else IsXBelow or WithDefaultsModuleResult.actions ~= nil and (ScaledX > 0 and ScaledX < UseStateResult1)
+	local UseAlertVariantsModuleResult = UseAlertVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.severity, Entry, IsXBelow1)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 203 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), ButtonVariantModule (upval)
+		if not WithDefaultsModuleResult.actions then
 			return nil
 		end
-		local list = {
+		local List = {
 			{
-				text = var2.actions.primary.text,
-				onActivated = var2.actions.primary.onActivated,
-				variant = buttonVariantModule.Standard
+				text = WithDefaultsModuleResult.actions.primary.text,
+				onActivated = WithDefaultsModuleResult.actions.primary.onActivated,
+				variant = ButtonVariantModule.Standard
 			}
 		}
 		
-		if var2.actions.secondary then
-			table.insert(list, {
-				text = var2.actions.secondary.text,
-				onActivated = var2.actions.secondary.onActivated,
-				variant = buttonVariantModule.Utility
+		if WithDefaultsModuleResult.actions.secondary then
+			table.insert(List, {
+				text = WithDefaultsModuleResult.actions.secondary.text,
+				onActivated = WithDefaultsModuleResult.actions.secondary.onActivated,
+				variant = ButtonVariantModule.Utility
 			})
 		end
-		return list
-	end, { var2.actions })
-	local severity = alertConstantsModule.SEVERITY_TO_ICON[var2.severity]
-	local filled = iconVariant.Filled
-	local iconBackplate = var14.iconBackplate
-	local icon = var2.icon
+		return List
+	end, { WithDefaultsModuleResult.actions })
+	local SEVERITYTOICONEntry = AlertConstantsModule.SEVERITY_TO_ICON[WithDefaultsModuleResult.severity]
+	local Filled = IconVariant.Filled
+	local IconBackplate = UseAlertVariantsModuleResult.iconBackplate
+	local Icon = WithDefaultsModuleResult.icon
 	
-	if icon ~= nil and var2.severity == alertSeverityModule.Info then
-		local var16 = if typeof(icon) == "string" then icon else icon.name
+	if Icon ~= nil and WithDefaultsModuleResult.severity == AlertSeverityModule.Info then
+		local Icon1 = if typeof(Icon) == "string" then Icon else Icon.name
 		
-		if isBuilderIconModule(var16) then
-			severity = var16
-			filled = if typeof(icon) == "table" and icon.variant then icon.variant else iconVariant.Filled
-			iconBackplate = nil
+		if IsBuilderIconModule(Icon1) then
+			SEVERITYTOICONEntry = Icon1
+			Filled = if typeof(Icon) == "table" and Icon.variant then Icon.variant else IconVariant.Filled
+			IconBackplate = nil
 		end
 	end
-	local var17
-	local var18 = reactModule.createElement(iconModule, {
+	local Element = ReactModule.createElement(IconModule, {
 		LayoutOrder = 2,
 		ZIndex = 2,
-		name = severity,
-		size = iconSizeModule.Medium,
-		variant = filled,
-		style = var14.icon.style,
-		testId = `{var2.testId}--icon`
+		name = SEVERITYTOICONEntry,
+		size = IconSizeModule.Medium,
+		variant = Filled,
+		style = UseAlertVariantsModuleResult.icon.style,
+		testId = `{WithDefaultsModuleResult.testId}--icon`
 	})
-	local var19 = reactModule.createElement(viewModule, {
+	local Element1 = ReactModule.createElement(ViewModule, {
 		tag = "align-y-center size-0-800 auto-x",
 		LayoutOrder = 1
 	}, {
-		Content = if iconBackplate then reactModule.createElement(viewModule, { LayoutOrder = 1, Size = var14.iconFrame.Size }, {
-			Backplate = reactModule.createElement(viewModule, {
+		Content = if IconBackplate then ReactModule.createElement(ViewModule, {
+			LayoutOrder = 1,
+			Size = UseAlertVariantsModuleResult.iconFrame.Size
+		}, {
+			Backplate = ReactModule.createElement(ViewModule, {
 				LayoutOrder = 1,
 				ZIndex = 1,
-				Size = iconBackplate.Size,
-				Position = iconBackplate.Position,
-				tag = iconBackplate.tag,
-				backgroundStyle = iconBackplate.backgroundStyle,
-				testId = `{var2.testId}--icon-backplate`
+				Size = IconBackplate.Size,
+				Position = IconBackplate.Position,
+				tag = IconBackplate.tag,
+				backgroundStyle = IconBackplate.backgroundStyle,
+				testId = `{WithDefaultsModuleResult.testId}--icon-backplate`
 			}),
-			Icon = var18
-		}) else var18
+			Icon = Element
+		}) else Element
 	})
-	local var20 = if var2.richText then reactModule.createElement(WrappingRichText, {
+	local Element2 = if WithDefaultsModuleResult.richText then ReactModule.createElement(WrappingRichText, {
 		LayoutOrder = 2,
-		slot = var14.message,
-		text = var2.text,
-		testId = `{var2.testId}--message`,
-		alertWidth = var4.X
-	}) else reactModule.createElement(textModule, {
+		slot = UseAlertVariantsModuleResult.message,
+		text = WithDefaultsModuleResult.text,
+		testId = `{WithDefaultsModuleResult.testId}--message`,
+		alertWidth = UseStateResult.X
+	}) else ReactModule.createElement(TextModule, {
 		LayoutOrder = 2,
-		Text = var2.text,
-		tag = var14.message.tag,
-		padding = var14.message.padding,
-		testId = `{var2.testId}--message`
+		Text = WithDefaultsModuleResult.text,
+		tag = UseAlertVariantsModuleResult.message.tag,
+		padding = UseAlertVariantsModuleResult.message.padding,
+		testId = `{WithDefaultsModuleResult.testId}--message`
 	})
-	local var21 = if not var1 then var9 else nil
-	
-	if not var2.link then
-		var17 = if var15 then reactModule.createElement(buttonGroupModule, {
-			LayoutOrder = 3,
-			buttons = var15,
-			size = inputSizeModule.Small,
-			testId = `{var2.testId}--actions`,
-			onAbsoluteSizeChanged = var21
-		}) else nil
-	elseif var1 and flagsModule.FoundationAlertLinkWrap then
-		var17 = reactModule.createElement(WrappingRichText, {
-			LayoutOrder = 3,
-			slot = var14.link,
-			text = `<u>{escapeRichTextModule(var2.link.text)}</u>`,
-			testId = `{var2.testId}--link`,
-			alertWidth = var4.X,
-			onActivated = var2.link.onActivated,
-			stateLayer = { affordance = stateLayerAffordanceModule.None }
-		})
-	else
-		var17 = reactModule.createElement
-		var17 = var17(textModule, {
-			RichText = true,
-			LayoutOrder = 3,
-			Text = `<u>{escapeRichTextModule(var2.link.text)}</u>`,
-			tag = var14.link.tag,
-			padding = var14.link.padding,
-			sizeConstraint = if flagsModule.FoundationAlertStackTrailingOnOverflow then nil elseif var1 or var13 <= 0 then nil else { MaxSize = Vector2.new(var13, 1e999) },
-			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			onActivated = var2.link.onActivated,
-			testId = `{var2.testId}--link`,
-			onAbsoluteSizeChanged = var21
-		})
-	end
-	local var22 = if var2.onClose then reactModule.createElement(closeAffordanceModule, {
-		LayoutOrder = 4,
-		onActivated = var2.onClose,
-		size = inputSizeModule.Small,
-		variant = closeAffordanceVariantModule.Utility,
-		testId = `{var2.testId}--close`
+	local UseResult2 = if IsXBelow1 then nil else UseResult1
+	local Element21 = if WithDefaultsModuleResult.link then if IsXBelow1 and FlagsModule.FoundationAlertLinkWrap then ReactModule.createElement(WrappingRichText, {
+		LayoutOrder = 3,
+		slot = UseAlertVariantsModuleResult.link,
+		text = `<u>{EscapeRichTextModule(WithDefaultsModuleResult.link.text)}</u>`,
+		testId = `{WithDefaultsModuleResult.testId}--link`,
+		alertWidth = UseStateResult.X,
+		onActivated = WithDefaultsModuleResult.link.onActivated,
+		stateLayer = { affordance = StateLayerAffordanceModule.None }
+	}) else ReactModule.createElement(TextModule, {
+		RichText = true,
+		LayoutOrder = 3,
+		Text = `<u>{EscapeRichTextModule(WithDefaultsModuleResult.link.text)}</u>`,
+		tag = UseAlertVariantsModuleResult.link.tag,
+		padding = UseAlertVariantsModuleResult.link.padding,
+		sizeConstraint = if FlagsModule.FoundationAlertStackTrailingOnOverflow then nil elseif IsXBelow1 or ScaledX <= 0 then nil else { MaxSize = Vector2.new(ScaledX, 1e999) },
+		stateLayer = { affordance = StateLayerAffordanceModule.None },
+		onActivated = WithDefaultsModuleResult.link.onActivated,
+		testId = `{WithDefaultsModuleResult.testId}--link`,
+		onAbsoluteSizeChanged = UseResult2
+	}) elseif UseMemoResult then ReactModule.createElement(ButtonGroupModule, {
+		LayoutOrder = 3,
+		buttons = UseMemoResult,
+		size = InputSizeModule.Small,
+		testId = `{WithDefaultsModuleResult.testId}--actions`,
+		onAbsoluteSizeChanged = UseResult2
 	}) else nil
-	local var23 = if var1 then {
-		Icon = var19,
-		Stack = reactModule.createElement(viewModule, {
+	local Element3 = if WithDefaultsModuleResult.onClose then ReactModule.createElement(CloseAffordanceModule, {
+		LayoutOrder = 4,
+		onActivated = WithDefaultsModuleResult.onClose,
+		size = InputSizeModule.Small,
+		variant = CloseAffordanceVariantModule.Utility,
+		testId = `{WithDefaultsModuleResult.testId}--close`
+	}) else nil
+	local Config = if IsXBelow1 then {
+		Icon = Element1,
+		Stack = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
-			tag = var14.stack.tag,
-			testId = `{var2.testId}--stack`
-		}, { Message = var20, Trailing = var17 }),
-		Close = var22
+			tag = UseAlertVariantsModuleResult.stack.tag,
+			testId = `{WithDefaultsModuleResult.testId}--stack`
+		}, { Message = Element2, Trailing = Element21 }),
+		Close = Element3
 	} else {
-		Icon = var19,
-		Message = var20,
-		Trailing = var17,
-		Close = var22
+		Icon = Element1,
+		Message = Element2,
+		Trailing = Element21,
+		Close = Element3
 	}
-	local var24 = withCommonPropsModule(var2, {
-		tag = var14.container.tag,
-		backgroundStyle = var14.container.backgroundStyle,
-		ref = p4
+	local WithCommonPropsModuleResult = WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseAlertVariantsModuleResult.container.tag,
+		backgroundStyle = UseAlertVariantsModuleResult.container.backgroundStyle,
+		ref = Ref
 	})
-	var24.onAbsoluteSizeChanged = var6
+	WithCommonPropsModuleResult.onAbsoluteSizeChanged = UseResult
 	
-	return reactModule.createElement(viewModule, var24, if variant == alertVariantModule.System then {
-		TopBorder = reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModuleResult, if Entry == AlertVariantModule.System then {
+		TopBorder = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 1,
-			Size = var14.border.Size,
-			backgroundStyle = var14.border.backgroundStyle,
-			testId = `{var2.testId}--top-border`
+			Size = UseAlertVariantsModuleResult.border.Size,
+			backgroundStyle = UseAlertVariantsModuleResult.border.backgroundStyle,
+			testId = `{WithDefaultsModuleResult.testId}--top-border`
 		}),
-		Main = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = var14.main.tag }, var23),
-		BottomBorder = reactModule.createElement(viewModule, {
+		Main = ReactModule.createElement(ViewModule, {
+			LayoutOrder = 2,
+			tag = UseAlertVariantsModuleResult.main.tag
+		}, Config),
+		BottomBorder = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 3,
-			Size = var14.border.Size,
-			backgroundStyle = var14.border.backgroundStyle,
-			testId = `{var2.testId}--bottom-border`
+			Size = UseAlertVariantsModuleResult.border.Size,
+			backgroundStyle = UseAlertVariantsModuleResult.border.backgroundStyle,
+			testId = `{WithDefaultsModuleResult.testId}--bottom-border`
 		})
-	} else var23)
+	} else Config)
 end))

@@ -1,11 +1,11 @@
-﻿return function(p1, p2)
+﻿return function(p1, p2) --[[ Line: 4 | Named "removeValue" ]]
 	local t = {}
-	local var1 = 1
+	local Count = 1
 	
 	for i = 1, #p1 do
 		if p1[i] ~= p2 then
-			t[var1] = p1[i]
-			var1 += 1
+			t[Count] = p1[i]
+			Count += 1
 		end
 	end
 	return t

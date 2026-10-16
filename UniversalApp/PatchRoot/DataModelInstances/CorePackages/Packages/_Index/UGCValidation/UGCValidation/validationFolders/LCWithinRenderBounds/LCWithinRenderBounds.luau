@@ -1,50 +1,53 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getEngineFeatureEngineUGCValidationLCOOBModule = require(parent.flags.getEngineFeatureEngineUGCValidationLCOOB)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetEngineFeatureEngineUGCValidationLCOOBModule = require(Parent.flags.getEngineFeatureEngineUGCValidationLCOOB)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: getEngineFeatureEngineUGCValidationLCOOBModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref)
+	run = function(p1, p2) --[[ Line: 20 ]]
+		-- upvalues: GetEngineFeatureEngineUGCValidationLCOOBModule (copy), ErrorSourceStringsModule (copy), UGCValidationService (copy)
 		if p2.consumerConfig.consumerEnv == "IEC" then return end
-		local rootInstance = p2.rootInstance
+		local RootInstance = p2.rootInstance
 		
-		if not getEngineFeatureEngineUGCValidationLCOOBModule() then
-			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_EngineFeatureDisabled, { accessoryName = rootInstance.Name })
+		if not GetEngineFeatureEngineUGCValidationLCOOBModule() then
+			p1:fail(ErrorSourceStringsModule.Keys.LCWithinRenderBounds_EngineFeatureDisabled, { accessoryName = RootInstance.Name })
 			
 			return
 		end
-		local handle = rootInstance:FindFirstChild("Handle")
+		local Handle = RootInstance:FindFirstChild("Handle")
 		
-		if not handle then
-			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_NoHandle, { accessoryName = rootInstance.Name })
+		if not Handle then
+			p1:fail(ErrorSourceStringsModule.Keys.LCWithinRenderBounds_NoHandle, { accessoryName = RootInstance.Name })
 			
 			return
 		end
-		local wrapLayer = handle:FindFirstChildWhichIsA("WrapLayer")
+		local WrapLayer = Handle:FindFirstChildWhichIsA("WrapLayer")
 		
-		if not wrapLayer then
-			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_NoWrapLayer, { accessoryName = rootInstance.Name })
+		if not WrapLayer then
+			p1:fail(ErrorSourceStringsModule.Keys.LCWithinRenderBounds_NoWrapLayer, { accessoryName = RootInstance.Name })
 			
 			return
-		elseif wrapLayer.MaxSize ~= Vector3.new(0, 0, 0) then
-			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_NonZeroMaxSize, {})
+		end
+		if WrapLayer.MaxSize ~= vector.create(0, 0, 0) then
+			p1:fail(ErrorSourceStringsModule.Keys.LCWithinRenderBounds_NonZeroMaxSize, {})
 			
 			return
-		elseif wrapLayer.Offset ~= Vector3.new(0, 0, 0) then
-			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_NonZeroOffset, {})
+		end
+		if WrapLayer.Offset ~= vector.create(0, 0, 0) then
+			p1:fail(ErrorSourceStringsModule.Keys.LCWithinRenderBounds_NonZeroOffset, {})
 			
 			return
-		elseif UGCValidationService:IsDeformedLayeredClothingOutOfRenderBounds(rootInstance) then
-			p1:fail(errorSourceStringsModule.Keys.LCWithinRenderBounds_OutOfBounds, { accessoryName = rootInstance.Name })
+		end
+		if UGCValidationService:IsDeformedLayeredClothingOutOfRenderBounds(RootInstance) then
+			p1:fail(ErrorSourceStringsModule.Keys.LCWithinRenderBounds_OutOfBounds, { accessoryName = RootInstance.Name })
 		end
 	end
 }

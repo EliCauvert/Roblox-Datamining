@@ -1,99 +1,99 @@
-﻿local cryoModule = require(script.Parent.Parent.Parent.Cryo)
-local t = {}
-t.__index = t
+﻿local CryoModule = require(script.Parent.Parent.Parent.Cryo)
+local StateTableModule = {}
+StateTableModule.__index = StateTableModule
 
-local function _(p1, p2)
-	local var1 = typeof(p1)
-	assert(if var1 ~= "string" then var1 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", p2, tostring(p1), var1))
+local function _(p1, p2) --[[ Line: 9 | Named "validateStateTableItem" ]]
+	local ValueType = typeof(p1)
+	assert(ValueType == "string" or ValueType == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", p2, tostring(p1), ValueType))
 end
 
-function t.new(p1, p2, p3, p4)
-	-- upvalues: t (ref)
-	assert(typeof(p1) == "string", "name must be a string")
-	assert(#p1 > 0, "name must not be an empty string")
-	local var1 = typeof(p2)
-	assert(if var1 ~= "string" then var1 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "initialState", tostring(p2), var1))
-	assert(if p3 ~= nil then typeof(p3) == "table" else true, "initialContext must be a table or nil")
-	assert(typeof(p4) == "table", "transitionTable must be a table")
-	assert(typeof(p4[p2]) == "table", "initialState must be present in transitionTable")
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.name = p1
-	t_1.currentState = p2
-	t_1.currentContext = p3 or {}
-	t_1.transitionTable = {}
-	t_1.events = {}
+function StateTableModule.new(Name, CurrentState, p1, List) --[[ Line: 72 ]]
+	-- upvalues: StateTableModule (copy)
+	assert(typeof(Name) == "string", "name must be a string")
+	assert(#Name > 0, "name must not be an empty string")
+	local ValueType = typeof(CurrentState)
+	assert(ValueType == "string" or ValueType == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "initialState", tostring(CurrentState), ValueType))
+	assert(p1 == nil or typeof(p1) == "table", "initialContext must be a table or nil")
+	assert(typeof(List) == "table", "transitionTable must be a table")
+	assert(typeof(List[CurrentState]) == "table", "initialState must be present in transitionTable")
+	local t = {}
+	setmetatable(t, StateTableModule)
+	t.name = Name
+	t.currentState = CurrentState
+	t.currentContext = p1 or {}
+	t.transitionTable = {}
+	t.events = {}
 	
-	for i, v in pairs(p4) do
-		local var2 = typeof(i)
-		assert(if var2 ~= "string" then var2 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "state", tostring(i), var2))
-		assert(typeof(v) == "table", string.format("state '%s' must map to a table", tostring(i)))
-		local t_2 = {}
+	for i, value in pairs(List) do
+		local ValueType1 = typeof(i)
+		assert(ValueType1 == "string" or ValueType1 == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "state", tostring(i), ValueType1))
+		assert(typeof(value) == "table", string.format("state '%s' must map to a table", (tostring(i))))
+		local t1 = {}
 		
-		for i_1, v_1 in pairs(v) do
-			local var3 = typeof(i_1)
-			assert(if var3 ~= "string" then var3 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(i_1), var3))
-			assert(typeof(v_1) == "table", string.format("event '%s' must map to a table", tostring(i_1)))
-			local nextState = v_1.nextState
-			local action = v_1.action
+		for i1, value1 in pairs(value) do
+			local ValueType2 = typeof(i1)
+			assert(ValueType2 == "string" or ValueType2 == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(i1), ValueType2))
+			assert(typeof(value1) == "table", string.format("event '%s' must map to a table", (tostring(i1))))
+			local NextState = value1.nextState
+			local Action = value1.action
 			
-			if nextState ~= nil then
-				local var4 = typeof(nextState)
-				assert(if var4 ~= "string" then var4 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "nextState", tostring(nextState), var4))
-				assert(p4[nextState] ~= nil, string.format("nextState '%s' does not exist in transitionTable", tostring(nextState)))
+			if NextState ~= nil then
+				local ValueType3 = typeof(NextState)
+				assert(ValueType3 == "string" or ValueType3 == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "nextState", tostring(NextState), ValueType3))
+				assert(List[NextState] ~= nil, string.format("nextState '%s' does not exist in transitionTable", (tostring(NextState))))
 			end
-			assert(if action ~= nil then typeof(action) == "function" else true, "action must be a function")
-			t_2[i_1] = v_1
+			assert(Action == nil or typeof(Action) == "function", "action must be a function")
+			t1[i1] = value1
 			
-			if t_1.events[i_1] == nil then
-				t_1.events[i_1] = function(p5)
-					-- upvalues: t_1 (ref), i_1 (ref)
-					return t_1:handleEvent(i_1, p5)
+			if t.events[i1] == nil then
+				t.events[i1] = function(p2) --[[ Line: 119 ]]
+					-- upvalues: t (copy), i1 (copy)
+					return t:handleEvent(i1, p2)
 				end
 			end
 		end
-		t_1.transitionTable[i] = t_2
+		t.transitionTable[i] = t1
 	end
-	setmetatable(t_1.events, {
-		__index = function(_, p5)
-			-- upvalues: t_1 (ref)
-			error(string.format("'%s' is not a valid event in StateTable '%s'", tostring(p5), t_1.name), 2)
+	setmetatable(t.events, {
+		__index = function(_, p2) --[[ Line: 130 ]]
+			-- upvalues: t (copy)
+			error(string.format("'%s' is not a valid event in StateTable '%s'", tostring(p2), t.name), 2)
 		end
 	})
 	
-	return t_1
+	return t
 end
 
-function t:handleEvent(p5, p6)
-	-- upvalues: cryoModule (ref)
-	local var5 = typeof(p5)
-	assert(if var5 ~= "string" then var5 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(p5), var5))
-	assert(if p6 ~= nil then typeof(p6) == "table" else true, "args must be nil or valid table")
-	local currentState = self.currentState
-	local var6 = self.transitionTable[currentState]
-	assert(var6 ~= nil, "no transition events for current state")
+function StateTableModule:handleEvent(p2, p3) --[[ Line: 150 ]]
+	-- upvalues: CryoModule (copy)
+	local ValueType = typeof(p2)
+	assert(ValueType == "string" or ValueType == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(p2), ValueType))
+	assert(p3 == nil or typeof(p3) == "table", "args must be nil or valid table")
+	local CurrentState = self.currentState
+	local Transition = self.transitionTable[CurrentState]
+	assert(Transition ~= nil, "no transition events for current state")
 	
-	if var6[p5] ~= nil then
-		local var7 = var6[p5]
-		local nextState = var7.nextState or currentState
-		local action = var7.action
-		local currentContext = self.currentContext
+	if Transition[p2] ~= nil then
+		local TransitionEntry = Transition[p2]
+		local NextState = TransitionEntry.nextState or CurrentState
+		local ActionFunction = TransitionEntry.action
+		local CurrentContext = self.currentContext
 		
-		if action ~= nil then
-			currentContext = cryoModule.Dictionary.join(self.currentContext, action(currentState, nextState, p6, self.currentContext) or {})
-			self.currentContext = currentContext
+		if ActionFunction ~= nil then
+			CurrentContext = CryoModule.Dictionary.join(self.currentContext, ActionFunction(CurrentState, NextState, p3, self.currentContext) or {})
+			self.currentContext = CurrentContext
 		end
-		self.currentState = nextState
+		self.currentState = NextState
 		
 		if self.stateChangeHandler ~= nil then
-			self.stateChangeHandler(currentState, nextState, currentContext)
+			self.stateChangeHandler(CurrentState, NextState, CurrentContext)
 		end
 	end
 end
 
-function t:onStateChange(p5)
-	assert(if p5 ~= nil then typeof(p5) == "function" else true, "stateChangeHandler must be nil or a function")
-	self.stateChangeHandler = p5
+function StateTableModule:onStateChange(StateChangeHandler) --[[ Line: 191 ]]
+	assert(StateChangeHandler == nil or typeof(StateChangeHandler) == "function", "stateChangeHandler must be nil or a function")
+	self.stateChangeHandler = StateChangeHandler
 end
 
-return t
+return StateTableModule

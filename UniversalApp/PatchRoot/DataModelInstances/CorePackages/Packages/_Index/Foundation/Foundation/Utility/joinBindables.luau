@@ -1,30 +1,30 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local _ = require(Foundation.Components.Types)
 
-return function(p1, p2)
-	-- upvalues: reactIsModule (ref), reactModule (ref)
+return function(List, Callback) --[[ Line: 9 | Named "joinBindables" ]]
+	-- upvalues: ReactIsModule (copy), ReactModule (copy)
 	local t = {}
-	local t_1 = {}
-	local var1 = false
+	local Tbl = {}
+	local Flag = false
 	
-	for i, v in p1 do
-		if reactIsModule.isBinding(v) then
-			t[i] = v
-			var1 = true
+	for i, value in List do
+		if ReactIsModule.isBinding(value) then
+			t[i] = value
+			Flag = true
 		else
-			t_1[i] = v
+			Tbl[i] = value
 		end
 	end
-	return if var1 then reactModule.joinBindings(t):map(function(p3)
-		-- upvalues: t_1 (ref), p2 (ref)
-		local cloned = table.clone(t_1)
+	return if Flag then ReactModule.joinBindings(t):map(function(List) --[[ Line: 30 ]]
+		-- upvalues: Tbl (copy), Callback (copy)
+		local Copy = table.clone(Tbl)
 		
-		for i, v in p3 do
-			cloned[i] = v
+		for i, value in List do
+			Copy[i] = value
 		end
-		return p2(cloned)
-	end) else p2(t_1)
+		return Callback(Copy)
+	end) else Callback(Tbl)
 end

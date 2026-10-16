@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("MomentsCreationFlow").Parent
-local dashModule = require(parent.Dash)
+﻿local Parent = script:FindFirstAncestor("MomentsCreationFlow").Parent
+local DashModule = require(Parent.Dash)
 
-return require(parent.React).createContext({
+return require(Parent.React).createContext({
 	captures = {},
-	capturesPagesIsFinished = dashModule.noop,
-	createMoment = dashModule.noop,
-	exitCreationFlow = dashModule.noop,
-	fetchAdditionalCaptures = dashModule.noop,
-	fetchInitialCaptures = dashModule.noop,
-	fireEvent = dashModule.noop,
-	getLocalization = dashModule.noop,
-	getUserConfiguration = dashModule.noop,
-	isTextFiltered = dashModule.noop,
-	setScreenOrientation = dashModule.noop
+	capturesPagesIsFinished = DashModule.noop,
+	createMoment = DashModule.noop,
+	exitCreationFlow = DashModule.noop,
+	fetchAdditionalCaptures = DashModule.noop,
+	fetchInitialCaptures = DashModule.noop,
+	fireEvent = DashModule.noop,
+	getLocalization = DashModule.noop,
+	getUserConfiguration = DashModule.noop,
+	isTextFiltered = DashModule.noop,
+	setScreenOrientation = DashModule.noop
 })

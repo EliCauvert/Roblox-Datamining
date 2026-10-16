@@ -1,55 +1,55 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local console = require(parent.Shared).console
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local Console = require(Parent.Shared).console
 local t = {}
 
-local function _(p1, p2)
-	-- upvalues: reactGlobalsModule (ref), t (ref), console (ref)
-	if reactGlobalsModule.__DEV__ then
-		local componentName = p1.__componentName or "ReactClass"
-		local text = componentName .. "." .. p1
+local function _(p1, Text) --[[ Line: 16 | Named "warnNoop" ]]
+	-- upvalues: ReactGlobalsModule (copy), t (copy), Console (copy)
+	if ReactGlobalsModule.__DEV__ then
+		local ComponentName = p1.__componentName or "ReactClass"
+		local Text1 = ComponentName .. "." .. Text
 		
-		if t[text] then return end
-		console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `self.state` directly with the desired state in the %s component's `init` method.", p2, componentName)
-		t[text] = true
+		if t[Text1] then return end
+		Console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `self.state` directly with the desired state in the %s component's `init` method.", Text, ComponentName)
+		t[Text1] = true
 	end
 end
 
 return {
-	isMounted = function(_)
+	isMounted = function(_): boolean --[[ Line: 51 ]]
 		return false
 	end,
-	enqueueForceUpdate = function(p1, _, _)
-		-- upvalues: reactGlobalsModule (ref), t (ref), console (ref)
-		if reactGlobalsModule.__DEV__ then
-			local componentName = p1.__componentName or "ReactClass"
-			local text = componentName .. "." .. "forceUpdate"
+	enqueueForceUpdate = function(p1, _, _) --[[ Line: 69 ]]
+		-- upvalues: ReactGlobalsModule (copy), t (copy), Console (copy)
+		if ReactGlobalsModule.__DEV__ then
+			local ComponentName = p1.__componentName or "ReactClass"
+			local Text = ComponentName .. "." .. "forceUpdate"
 			
-			if t[text] then return end
-			console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `self.state` directly with the desired state in the %s component's `init` method.", "forceUpdate", componentName)
-			t[text] = true
+			if t[Text] then return end
+			Console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `self.state` directly with the desired state in the %s component's `init` method.", "forceUpdate", ComponentName)
+			t[Text] = true
 		end
 	end,
-	enqueueReplaceState = function(p1, _, _, _)
-		-- upvalues: reactGlobalsModule (ref), t (ref), console (ref)
-		if reactGlobalsModule.__DEV__ then
-			local componentName = p1.__componentName or "ReactClass"
-			local text = componentName .. "." .. "replaceState"
+	enqueueReplaceState = function(p1, _, _, _) --[[ Line: 85 ]]
+		-- upvalues: ReactGlobalsModule (copy), t (copy), Console (copy)
+		if ReactGlobalsModule.__DEV__ then
+			local ComponentName = p1.__componentName or "ReactClass"
+			local Text = ComponentName .. "." .. "replaceState"
 			
-			if t[text] then return end
-			console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `self.state` directly with the desired state in the %s component's `init` method.", "replaceState", componentName)
-			t[text] = true
+			if t[Text] then return end
+			Console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `self.state` directly with the desired state in the %s component's `init` method.", "replaceState", ComponentName)
+			t[Text] = true
 		end
 	end,
-	enqueueSetState = function(value, _, _, _)
-		-- upvalues: reactGlobalsModule (ref), t (ref), console (ref)
-		if reactGlobalsModule.__DEV__ then
-			local componentName = value.__componentName or "ReactClass"
-			local text = componentName .. "." .. "setState"
+	enqueueSetState = function(p1, _, _, _) --[[ Line: 100 ]]
+		-- upvalues: ReactGlobalsModule (copy), t (copy), Console (copy)
+		if ReactGlobalsModule.__DEV__ then
+			local ComponentName = p1.__componentName or "ReactClass"
+			local Text = ComponentName .. "." .. "setState"
 			
-			if t[text] then return end
-			console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `self.state` directly with the desired state in the %s component's `init` method.", "setState", componentName)
-			t[text] = true
+			if t[Text] then return end
+			Console.error("Can't call %s on a component that is not yet mounted. This is a no-op, but it might indicate a bug in your application. Instead, assign to `self.state` directly with the desired state in the %s component's `init` method.", "setState", ComponentName)
+			t[Text] = true
 		end
 	end
 }

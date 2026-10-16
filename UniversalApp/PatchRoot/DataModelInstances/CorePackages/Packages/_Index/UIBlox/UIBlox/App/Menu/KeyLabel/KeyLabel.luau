@@ -1,86 +1,87 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local foundationModule = require(parent_3.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local reactModule = require(parent_3.React)
-local luauPolyfillModule = require(parent_3.LuauPolyfill)
-local _ = require(parent.Types)
-local constantsModule = require(parent.Constants)
-local utilitiesModule = require(parent.Utilities)
-local useStyleModule = require(parent_2.Core.Style.useStyle)
-local getFontFromFontStyleModule = require(parent_2.Core.Text.GetFontFromFontStyle)
-local imagesModule = require(parent_1.ImageSet.Images)
-local label = require(parent_2.Core.ImageSet.ImageSetComponent).Label
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local FoundationModule = require(Parent3.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ReactModule = require(Parent3.React)
+local LuauPolyfillModule = require(Parent3.LuauPolyfill)
+local _ = require(Parent.Types)
+local ConstantsModule = require(Parent.Constants)
+local UtilitiesModule = require(Parent.Utilities)
+local UseStyleModule = require(Parent2.Core.Style.useStyle)
+local GetFontFromFontStyleModule = require(Parent2.Core.Text.GetFontFromFontStyle)
+local ImagesModule = require(Parent1.ImageSet.Images)
+local Label = require(Parent2.Core.ImageSet.ImageSetComponent).Label
 
-return function(p1)
-	-- upvalues: useStyleModule (ref), constantsModule (ref), utilitiesModule (ref), reactModule (ref), imagesModule (ref), label (ref), luauPolyfillModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), getFontFromFontStyleModule (ref)
-	local var1 = useStyleModule()
-	local var2 = var1.Theme[p1.iconThemeKey or constantsModule.DEFAULT_ICON_THEME]
-	local keyCodeContent = utilitiesModule.getKeyCodeContent(p1.keyCode)
-	local t = {
-		AnchorPoint = p1.AnchorPoint,
-		Position = p1.Position,
-		LayoutOrder = p1.LayoutOrder,
-		ZIndex = p1.ZIndex,
-		[reactModule.Change.AbsoluteSize] = p1[reactModule.Change.AbsoluteSize],
-		Size = UDim2.fromOffset(utilitiesModule.getWidthFromContent(keyCodeContent, var1.Font), constantsModule.HEIGHT)
+return function(Frame: Frame) --[[ Line: 44 | Named "KeyLabel" ]]
+	-- upvalues: UseStyleModule (copy), ConstantsModule (copy), UtilitiesModule (copy), ReactModule (copy), ImagesModule (copy), Label (copy), LuauPolyfillModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetFontFromFontStyleModule (copy)
+	local UseStyleModuleResult = UseStyleModule()
+	local ThemeEntry = UseStyleModuleResult.Theme[Frame.iconThemeKey or ConstantsModule.DEFAULT_ICON_THEME]
+	local KeyCodeContent = UtilitiesModule.getKeyCodeContent(Frame.keyCode)
+	local config = {
+		AnchorPoint = Frame.AnchorPoint,
+		Position = Frame.Position,
+		LayoutOrder = Frame.LayoutOrder,
+		ZIndex = Frame.ZIndex,
+		[ReactModule.Change.AbsoluteSize] = Frame[ReactModule.Change.AbsoluteSize],
+		Size = UDim2.fromOffset(UtilitiesModule.getWidthFromContent(KeyCodeContent, UseStyleModuleResult.Font), ConstantsModule.HEIGHT)
 	}
 	
-	if keyCodeContent.inputType == "keyboard" then
-		local var3 = var1.Theme[p1.textThemeKey or constantsModule.DEFAULT_TEXT_THEME]
-		local font = var1.Font
-		local captionHeader = font.CaptionHeader
-		local var4 = font.BaseSize * captionHeader.RelativeSize
-		local var5 = ""
-		local var6 = nil
+	if KeyCodeContent.inputType == "keyboard" then
+		local ThemeEntry1 = UseStyleModuleResult.Theme[Frame.textThemeKey or ConstantsModule.DEFAULT_TEXT_THEME]
+		local UseStyleModuleResultFont = UseStyleModuleResult.Font
+		local CaptionHeader = UseStyleModuleResultFont.CaptionHeader
+		local ScaledBaseSize = UseStyleModuleResultFont.BaseSize * CaptionHeader.RelativeSize
+		local Content = ""
+		local Element = nil
 		
-		if type(keyCodeContent.content) == "string" then
-			var5 = keyCodeContent.content
+		if type(KeyCodeContent.content) == "string" then
+			Content = KeyCodeContent.content
 		else
-			local var7 = keyCodeContent.content.ImageRectSize / imagesModule.ImagesResolutionScale
-			var6 = reactModule.createElement(label, {
+			local ImageRectSizeRatio = KeyCodeContent.content.ImageRectSize / ImagesModule.ImagesResolutionScale
+			Element = ReactModule.createElement(Label, {
 				BackgroundTransparency = 1,
-				Image = keyCodeContent.content,
-				ImageColor3 = var3.Color,
-				ImageTransparency = var3.Transparency,
-				Size = UDim2.fromOffset(var7.X, var7.Y),
+				Image = KeyCodeContent.content,
+				ImageColor3 = ThemeEntry1.Color,
+				ImageTransparency = ThemeEntry1.Transparency,
+				Size = UDim2.fromOffset(ImageRectSizeRatio.X, ImageRectSizeRatio.Y),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5)
 			})
 		end
-		return reactModule.createElement(label, luauPolyfillModule.Object.assign(t, {
+		return ReactModule.createElement(Label, LuauPolyfillModule.Object.assign(config, {
 			BackgroundTransparency = 1,
-			ImageTransparency = var2.Transparency,
-			ImageColor3 = var2.Color,
-			Image = imagesModule["icons/controls/keys/key_single"],
+			ImageTransparency = ThemeEntry.Transparency,
+			ImageColor3 = ThemeEntry.Color,
+			Image = ImagesModule["icons/controls/keys/key_single"],
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(Vector2.new(10, 9), Vector2.new(25, 25))
 		}), {
-			LabelContent = reactModule.createElement("TextLabel", {
+			LabelContent = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				RichText = false,
-				Text = var5,
-				TextColor3 = var3.Color,
-				TextTransparency = var3.Transparency,
+				Text = Content,
+				TextColor3 = ThemeEntry1.Color,
+				TextTransparency = ThemeEntry1.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				TextSize = var4,
-				Font = if foundationFontFaceMigration then nil else captionHeader.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(getFontFromFontStyleModule(captionHeader)) else nil,
-				Position = UDim2.fromOffset(0, constantsModule.TEXT_CENTER_OFFSET),
+				TextSize = ScaledBaseSize,
+				Font = if FoundationFontFaceMigration then nil else CaptionHeader.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(GetFontFromFontStyleModule(CaptionHeader)) else nil,
+				Position = UDim2.fromOffset(0, ConstantsModule.TEXT_CENTER_OFFSET),
 				Size = UDim2.fromScale(1, 1)
-			}, { Icon = var6 })
+			}, { Icon = Element })
 		})
-	elseif keyCodeContent.inputType == "gamepad" then
-		return reactModule.createElement(label, luauPolyfillModule.Object.assign(t, {
+	elseif KeyCodeContent.inputType == "gamepad" then
+		return ReactModule.createElement(Label, LuauPolyfillModule.Object.assign(config, {
 			BackgroundTransparency = 1,
-			Image = keyCodeContent.content,
-			ImageColor3 = var2.Color,
-			ImageTransparency = var2.Transparency
+			Image = KeyCodeContent.content,
+			ImageColor3 = ThemeEntry.Color,
+			ImageTransparency = ThemeEntry.Transparency
 		}))
+	else
+		assert(false, string.format("Unreachable: Invalid inputType value: \"%s\"", KeyCodeContent.inputType))
 	end
-	assert(false, string.format("Unreachable: Invalid inputType value: \"%s\"", keyCodeContent.inputType))
 end

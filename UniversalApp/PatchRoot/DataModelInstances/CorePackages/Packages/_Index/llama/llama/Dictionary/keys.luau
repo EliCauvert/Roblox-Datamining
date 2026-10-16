@@ -1,12 +1,12 @@
-﻿return function(p1)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var0)
+﻿return function(List) --[[ Line: 2 | Named "keys" ]]
+	local ValueType = type(List)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local t = {}
-	local var2 = 1
+	local Count = 1
 	
-	for i, v in pairs(p1) do
-		t[var2] = i
-		var2 += 1
+	for i, _ in pairs(List) do
+		t[Count] = i
+		Count += 1
 	end
 	return t
 end

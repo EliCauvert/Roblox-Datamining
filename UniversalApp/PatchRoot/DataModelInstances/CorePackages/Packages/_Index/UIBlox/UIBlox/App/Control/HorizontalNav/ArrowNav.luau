@@ -1,112 +1,115 @@
-﻿local runService = game:GetService("RunService")
-local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local core = parent.Core
-local roactModule = require(parent_1.Roact)
-local tModule = require(parent_1.t)
-local otterModule = require(parent_1.Otter)
-local button = require(core.ImageSet.ImageSetComponent).Button
-local withStyleModule = require(core.Style.withStyle)
-local navigationDirectionModule = require(script.Parent.NavigationDirection)
-local t = { dampingRatio = 1, frequency = 3.5 }
-local arrowNav = roactModule.PureComponent:extend("ArrowNav")
-arrowNav.validateProps = tModule.intersection(tModule.strictInterface({
-	AnchorPoint = tModule.optional(tModule.Vector2),
-	Position = tModule.optional(tModule.UDim2),
-	Image = tModule.table,
-	Visible = tModule.optional(tModule.union(tModule.boolean, tModule.table)),
-	navDirection = tModule.optional(tModule.userdata),
-	onPressHoldInputBegan = tModule.optional(tModule.callback),
-	onPressHoldInputEnded = tModule.optional(tModule.callback),
-	defaultUseProps = tModule.optional(tModule.strictInterface({
-		scrollingFrameRef = tModule.table,
-		buttonRefs = tModule.optional(tModule.table),
-		buttonWidth = tModule.optional(tModule.number),
-		numButtons = tModule.optional(tModule.number),
-		padOutsideEdges = tModule.optional(tModule.boolean),
-		buttonPadding = tModule.number,
-		updateCanvasPosition = tModule.callback
+﻿local RunService = game:GetService("RunService")
+local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Core = Parent.Core
+local RoactModule = require(Parent1.Roact)
+local TModule = require(Parent1.t)
+local OtterModule = require(Parent1.Otter)
+local Button = require(Core.ImageSet.ImageSetComponent).Button
+local WithStyleModule = require(Core.Style.withStyle)
+local NavigationDirectionModule = require(script.Parent.NavigationDirection)
+local config = { dampingRatio = 1, frequency = 3.5 }
+local ArrowNav = RoactModule.PureComponent:extend("ArrowNav")
+ArrowNav.validateProps = TModule.intersection(TModule.strictInterface({
+	AnchorPoint = TModule.optional(TModule.Vector2),
+	Position = TModule.optional(TModule.UDim2),
+	Image = TModule.table,
+	Visible = TModule.optional(TModule.union(TModule.boolean, TModule.table)),
+	navDirection = TModule.optional(TModule.userdata),
+	onPressHoldInputBegan = TModule.optional(TModule.callback),
+	onPressHoldInputEnded = TModule.optional(TModule.callback),
+	defaultUseProps = TModule.optional(TModule.strictInterface({
+		scrollingFrameRef = TModule.table,
+		buttonRefs = TModule.optional(TModule.table),
+		buttonWidth = TModule.optional(TModule.number),
+		numButtons = TModule.optional(TModule.number),
+		padOutsideEdges = TModule.optional(TModule.boolean),
+		buttonPadding = TModule.number,
+		updateCanvasPosition = TModule.callback
 	}))
-}), function(p1)
+}), function(p1) --[[ Line: 63 ]]
 	if p1.defaultUseProps then
 		if p1.defaultUseProps.buttonRefs ~= nil then
 			if p1.defaultUseProps.buttonWidth ~= nil then
 				return false, "Cannot set both buttonWidth and buttonRefs"
 			elseif p1.defaultUseProps.numButtons ~= nil then
 				return false, "Cannot set both numButtons and buttonRefs"
-			elseif p1.defaultUseProps.buttonWidth ~= nil and p1.defaultUseProps.numButtons == nil then
-				return false, "If setting buttonWidth must also set numButtons"
-			elseif p1.defaultUseProps.buttonWidth == nil and p1.defaultUseProps.numButtons ~= nil then
-				return false, "If setting numButtons must also set buttonWidth"
-			elseif p1.defaultUseProps.buttonRefs == nil and p1.defaultUseProps.buttonWidth == nil and p1.defaultUseProps.numButtons == nil then
-				return false, "Must set either buttonRefs or (buttonWidth and numButtons)"
 			end
+		end
+		if p1.defaultUseProps.buttonWidth ~= nil and p1.defaultUseProps.numButtons == nil then
+			return false, "If setting buttonWidth must also set numButtons"
+		elseif p1.defaultUseProps.buttonWidth == nil and p1.defaultUseProps.numButtons ~= nil then
+			return false, "If setting numButtons must also set buttonWidth"
+		elseif p1.defaultUseProps.buttonRefs == nil and p1.defaultUseProps.buttonWidth == nil and p1.defaultUseProps.numButtons == nil then
+			return false, "Must set either buttonRefs or (buttonWidth and numButtons)"
 		end
 	end
 	return true
 end)
-arrowNav.defaultProps = {
+ArrowNav.defaultProps = {
 	Visible = true,
 	AnchorPoint = Vector2.new(0, 0),
 	Position = UDim2.new(0, 0, 0, 0)
 }
 
-function arrowNav.init(p1)
+function ArrowNav.init(p1) --[[ Line: 97 ]]
 	p1.holdConn = nil
 	p1.timeOfInputBegan = 0
 	
-	function p1.handleInputBegan(_, p2)
-		-- upvalues: p1 (ref)
-		local navDirection = p1.props.navDirection
+	function p1:handleInputBegan(Input) --[[ Line: 101 ]]
+		-- upvalues: p1 (copy)
+		local NavDirection = p1.props.navDirection
 		
 		if p1.props.onPressHoldInputBegan then
-			p1.props.onPressHoldInputBegan(p2, navDirection)
+			p1.props.onPressHoldInputBegan(Input, NavDirection)
 			
 			return
+		else
+			p1:onPressHoldInputBegan(Input, NavDirection)
 		end
-		p1:onPressHoldInputBegan(p2, navDirection)
 	end
 	
-	function p1.handleInputEnded(_, p2)
-		-- upvalues: p1 (ref)
-		local navDirection = p1.props.navDirection
+	function p1:handleInputEnded(Input) --[[ Line: 110 ]]
+		-- upvalues: p1 (copy)
+		local NavDirection = p1.props.navDirection
 		
 		if p1.props.onPressHoldInputEnded then
-			p1.props.onPressHoldInputEnded(p2, navDirection)
+			p1.props.onPressHoldInputEnded(Input, NavDirection)
 			
 			return
+		else
+			p1:onPressHoldInputEnded(Input, NavDirection)
 		end
-		p1:onPressHoldInputEnded(p2, navDirection)
 	end
 end
 
-function arrowNav.getGoal(p1, p2)
-	-- upvalues: otterModule (ref), t (ref)
-	return otterModule.spring(p1:getScrollToLocation(p2), t)
+function ArrowNav.getGoal(p1, p2) --[[ Line: 120 ]]
+	-- upvalues: OtterModule (copy), config (copy)
+	return OtterModule.spring(p1:getScrollToLocation(p2), config)
 end
 
-function arrowNav.didMount(p1)
+function ArrowNav.didMount(p1) --[[ Line: 124 ]]
 	p1:setMotor(0)
 end
 
-function arrowNav.setMotor(value, p1)
-	-- upvalues: otterModule (ref)
-	value.motor = otterModule.createSingleMotor(p1)
-	value.motor:onStep(function(p2)
-		-- upvalues: value (ref)
-		value.props.defaultUseProps.updateCanvasPosition(Vector2.new(p2, 0))
+function ArrowNav.setMotor(p1, X) --[[ Line: 128 ]]
+	-- upvalues: OtterModule (copy)
+	p1.motor = OtterModule.createSingleMotor(X)
+	p1.motor:onStep(function(X) --[[ Line: 130 ]]
+		-- upvalues: p1 (copy)
+		p1.props.defaultUseProps.updateCanvasPosition(Vector2.new(X, 0))
 	end)
-	value.motor:onComplete(function(p2)
-		-- upvalues: value (ref)
-		value.props.defaultUseProps.updateCanvasPosition(Vector2.new(p2, 0))
+	p1.motor:onComplete(function(X) --[[ Line: 133 ]]
+		-- upvalues: p1 (copy)
+		p1.props.defaultUseProps.updateCanvasPosition(Vector2.new(X, 0))
 	end)
 end
 
-function arrowNav.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref), button (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), button (copy), p1 (ref)
-		return roactModule.createElement(button, {
+function ArrowNav.render(p1) --[[ Line: 138 ]]
+	-- upvalues: WithStyleModule (copy), RoactModule (copy), Button (copy)
+	return WithStyleModule(function(p2) --[[ Line: 139 ]]
+		-- upvalues: RoactModule (upval), Button (upval), p1 (copy)
+		return RoactModule.createElement(Button, {
 			AnchorPoint = p1.props.AnchorPoint,
 			Position = p1.props.Position,
 			Image = p1.props.Image,
@@ -114,13 +117,13 @@ function arrowNav.render(p1)
 			BackgroundTransparency = 1,
 			ImageColor3 = p2.Theme.IconEmphasis.Color,
 			Size = UDim2.fromOffset(36, 36),
-			[roactModule.Event.InputBegan] = p1.handleInputBegan,
-			[roactModule.Event.InputEnded] = p1.handleInputEnded
+			[RoactModule.Event.InputBegan] = p1.handleInputBegan,
+			[RoactModule.Event.InputEnded] = p1.handleInputEnded
 		})
 	end)
 end
 
-function arrowNav.willUnmount(p1)
+function ArrowNav.willUnmount(p1) --[[ Line: 155 ]]
 	p1:disconnectHoldConn()
 	
 	if p1.motor then
@@ -129,106 +132,104 @@ function arrowNav.willUnmount(p1)
 	end
 end
 
-function arrowNav.getNewCanvasPosition(p1, p2)
-	return p1.props.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new(p2, 0)
+function ArrowNav.getNewCanvasPosition(p1, X): Vector2 --[[ Line: 163 ]]
+	return p1.props.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new(X, 0)
 end
 
-function arrowNav.disconnectHoldConn(p1)
-	if p1.holdConn == nil then
+function ArrowNav.disconnectHoldConn(p1) --[[ Line: 168 ]]
+	if p1.holdConn ~= nil then
+		p1.holdConn:Disconnect()
+		p1.holdConn = nil
+		
 		return
 	end
-	p1.holdConn:Disconnect()
-	p1.holdConn = nil
 end
 
-function arrowNav.onPressHoldInputBegan(p1, p2, p3)
-	-- upvalues: runService (ref), navigationDirectionModule (ref)
-	if p2.UserInputState == Enum.UserInputState.Begin then
+function ArrowNav.onPressHoldInputBegan(p1, Input, NavDirection) --[[ Line: 176 ]]
+	-- upvalues: RunService (copy), NavigationDirectionModule (copy)
+	if Input.UserInputState == Enum.UserInputState.Begin then
 		p1.timeOfInputBegan = tick()
 		p1:disconnectHoldConn()
-		p1.holdConn = runService.RenderStepped:connect(function(p4)
-			-- upvalues: p1 (ref), navigationDirectionModule (copy), p3 (ref)
-			p1.props.defaultUseProps.updateCanvasPosition(p1:getNewCanvasPosition((if p3 == navigationDirectionModule.IsLeft then -1 else 1) * 500 * p4 * (tick() - p1.timeOfInputBegan) ^ 2))
+		p1.holdConn = RunService.RenderStepped:connect(function(DeltaTime) --[[ Line: 182 ]]
+			-- upvalues: p1 (copy), NavigationDirectionModule (upval), NavDirection (copy)
+			p1.props.defaultUseProps.updateCanvasPosition((p1:getNewCanvasPosition((if NavDirection == NavigationDirectionModule.IsLeft then -1 else 1) * 500 * DeltaTime * (tick() - p1.timeOfInputBegan) ^ 2)))
 		end)
 		
 		return
 	end
 end
 
-function arrowNav.onPressHoldInputEnded(p1, p2, p3)
-	-- upvalues: otterModule (ref)
-	if p2.UserInputState ~= Enum.UserInputState.End then return end
-	local current = p1.props.defaultUseProps.scrollingFrameRef.current
+function ArrowNav.onPressHoldInputEnded(p1, Input, NavDirection) --[[ Line: 191 ]]
+	-- upvalues: OtterModule (copy)
+	if Input.UserInputState ~= Enum.UserInputState.End then return end
+	local Current = p1.props.defaultUseProps.scrollingFrameRef.current
 	
 	if tick() - p1.timeOfInputBegan <= 0.5 then
 		if p1.motor then
 			p1.motor:destroy()
 		end
-		p1:setMotor(current.CanvasPosition.X)
-		p1.motor:setGoal(p1:getGoal(p3))
+		p1:setMotor(Current.CanvasPosition.X)
+		p1.motor:setGoal(p1:getGoal(NavDirection))
 	else
-		p1.motor:setGoal(otterModule.instant(current.CanvasPosition.X))
+		p1.motor:setGoal(OtterModule.instant(Current.CanvasPosition.X))
 	end
 	p1:disconnectHoldConn()
 end
 
-function arrowNav.getScrollToLocation(p1, p2)
-	-- upvalues: navigationDirectionModule (ref)
-	local buttonSizes = p1:getButtonSizes()
+function ArrowNav.getScrollToLocation(p1, IsLeft) --[[ Line: 209 ]]
+	-- upvalues: NavigationDirectionModule (copy)
+	local ButtonSizes = p1:getButtonSizes()
 	
-	return if p2 == navigationDirectionModule.IsLeft then p1:getScrollToLeftLocation(buttonSizes) else p1:getScrollToRightLocation(buttonSizes)
+	return if IsLeft == NavigationDirectionModule.IsLeft then p1:getScrollToLeftLocation(ButtonSizes) else p1:getScrollToRightLocation(ButtonSizes)
 end
 
-function arrowNav.getButtonSizes(p1)
-	local buttonRefs = p1.props.defaultUseProps.buttonRefs
-	local buttonWidth = p1.props.defaultUseProps.buttonWidth
-	local numButtons = p1.props.defaultUseProps.numButtons
+function ArrowNav.getButtonSizes(p1) --[[ Line: 219 ]]
+	local ButtonRefs = p1.props.defaultUseProps.buttonRefs
+	local ButtonWidth = p1.props.defaultUseProps.buttonWidth
+	local NumButtons = p1.props.defaultUseProps.numButtons
 	
-	if buttonWidth and numButtons then
-		return table.create(numButtons, buttonWidth)
+	if ButtonWidth and NumButtons then
+		return table.create(NumButtons, ButtonWidth)
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in ipairs(buttonRefs) do
-		table.insert(t, if v.current then v.current.AbsoluteSize.X else 0)
+	for _, buttonRef in ipairs(ButtonRefs) do
+		table.insert(List, buttonRef.current and buttonRef.current.AbsoluteSize.X or 0)
 	end
-	return t
+	return List
 end
 
-function arrowNav.getScrollToLeftLocation(p2, p3)
-	local current = p2.props.defaultUseProps.scrollingFrameRef.current
-	local buttonPadding = p2.props.defaultUseProps.buttonPadding
-	local var1 = current.CanvasPosition.X - current.AbsoluteSize.X * 0.4
-	local var2 = 0
+function ArrowNav.getScrollToLeftLocation(p2, ButtonSizes): number --[[ Line: 236 ]]
+	local Current = p2.props.defaultUseProps.scrollingFrameRef.current
+	local ButtonPadding: number = p2.props.defaultUseProps.buttonPadding
+	local XDelta = Current.CanvasPosition.X - Current.AbsoluteSize.X * 0.4
+	local Total = 0
 	
-	for i, v in ipairs(p3) do
-		if var1 > var2 + v + buttonPadding then
-			var2 += v + buttonPadding
-			continue
+	for _, buttonSize in ipairs(ButtonSizes) do
+		if XDelta <= Total + buttonSize + ButtonPadding then
+			return Total
 		end
-		return var2
+		Total += buttonSize + ButtonPadding
 	end
-	return var2
+	return Total
 end
 
-function arrowNav.getScrollToRightLocation(p4, p5)
-	local current = p4.props.defaultUseProps.scrollingFrameRef.current
-	local buttonPadding = p4.props.defaultUseProps.buttonPadding
-	local padOutsideEdges = p4.props.defaultUseProps.padOutsideEdges
-	local var3 = current.CanvasPosition.X + current.AbsoluteSize.X * 0.4
-	local var4 = -current.AbsoluteSize.X
+function ArrowNav.getScrollToRightLocation(p3, ButtonSizes) --[[ Line: 253 ]]
+	local Current = p3.props.defaultUseProps.scrollingFrameRef.current
+	local ButtonPadding = p3.props.defaultUseProps.buttonPadding
+	local NewX = Current.CanvasPosition.X + Current.AbsoluteSize.X * 0.4
+	local Negated = -Current.AbsoluteSize.X
 	
-	if padOutsideEdges then
-		var4 += buttonPadding
+	if p3.props.defaultUseProps.padOutsideEdges then
+		Negated += ButtonPadding
 	end
-	for i, v in ipairs(p5) do
-		if var3 >= var4 then
-			var4 += v + buttonPadding
-			continue
+	for _, buttonSize in ipairs(ButtonSizes) do
+		if NewX < Negated then
+			return Negated
 		end
-		return var4
+		Negated += buttonSize + ButtonPadding
 	end
-	return var4
+	return Negated
 end
 
-return arrowNav
+return ArrowNav

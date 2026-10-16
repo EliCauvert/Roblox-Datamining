@@ -1,71 +1,71 @@
-﻿local t = {}
-t.__index = t
+﻿local RatelimitModule = {}
+RatelimitModule.__index = RatelimitModule
 
-local function _(p1)
+local function _(p1) --[[ Line: 13 | Named "log" ]]
 	return p1
 end
 
-if not t.ratelimit then
-	t.ratelimit = {}
+if not RatelimitModule.ratelimit then
+	RatelimitModule.ratelimit = {}
 end
-function t.get(p1, p2, p3)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
+function RatelimitModule.get(Id, Rate, Window_size) --[[ Line: 22 ]]
+	-- upvalues: RatelimitModule (copy)
+	local self = setmetatable({}, RatelimitModule)
 	
-	if not t.ratelimit[p1] then
-		t.ratelimit[p1] = {}
-		t.ratelimit[p1].windows = {}
+	if not RatelimitModule.ratelimit[Id] then
+		RatelimitModule.ratelimit[Id] = {}
+		RatelimitModule.ratelimit[Id].windows = {}
 	end
-	t.ratelimit[p1].window_size = p3
-	t.ratelimit[p1].rate = p2
-	tbl.id = p1
-	tbl.window_size = t.ratelimit[p1].window_size
-	tbl.rate = t.ratelimit[p1].rate
-	local _ = tbl.id
+	RatelimitModule.ratelimit[Id].window_size = Window_size
+	RatelimitModule.ratelimit[Id].rate = Rate
+	self.id = Id
+	self.window_size = RatelimitModule.ratelimit[Id].window_size
+	self.rate = RatelimitModule.ratelimit[Id].rate
+	local _ = self.id
 	
-	return tbl
+	return self
 end
 
-function t.window(p1)
-	return math.floor(tick() / p1.window_size)
+function RatelimitModule.window(p1): number --[[ Line: 44 ]]
+	return (math.floor(tick() / p1.window_size))
 end
 
-function t.progress(p1)
+function RatelimitModule.progress(p1) --[[ Line: 48 ]]
 	return tick() % p1.window_size / p1.window_size
 end
 
-function t.increment(p1)
-	-- upvalues: t (ref)
-	local var1 = p1:window()
+function RatelimitModule.increment(p1) --[[ Line: 54 ]]
+	-- upvalues: RatelimitModule (copy)
+	local WindowResult = p1:window()
 	
-	if not t.ratelimit[p1.id].windows[var1] then
-		t.ratelimit[p1.id].windows[var1] = 0
+	if not RatelimitModule.ratelimit[p1.id].windows[WindowResult] then
+		RatelimitModule.ratelimit[p1.id].windows[WindowResult] = 0
 	end
-	t.ratelimit[p1.id].windows[var1] += 1
+	RatelimitModule.ratelimit[p1.id].windows[WindowResult] += 1
 	
-	return t.ratelimit[p1.id].windows[var1]
+	return RatelimitModule.ratelimit[p1.id].windows[WindowResult]
 end
 
-function t.weighted(p1, p2)
-	-- upvalues: t (ref)
-	p2 = p2 or 0
-	local var1 = p1:progress()
-	local var2 = p1:window()
+function RatelimitModule.weighted(p1, p2) --[[ Line: 70 ]]
+	-- upvalues: RatelimitModule (copy)
+	local ProgressResult: number = p1:progress()
+	local WindowResult: number = p1:window()
 	
-	return ((t.ratelimit[p1.id].windows[var2] or 0) + p2) * var1 + (t.ratelimit[p1.id].windows[var2 - 1] or 0) * (1 - var1)
+	return ((RatelimitModule.ratelimit[p1.id].windows[WindowResult] or 0) + (p2 or 0)) * ProgressResult + (RatelimitModule.ratelimit[p1.id].windows[WindowResult - 1] or 0) * (1 - ProgressResult)
 end
 
-function t.consumption(p1)
+function RatelimitModule.consumption(p1) --[[ Line: 84 ]]
 	return p1:weighted() / p1.rate
 end
 
-function t.request(p1)
+function RatelimitModule.request(p1): boolean --[[ Line: 90 ]]
 	if p1.rate < p1:weighted(1) then
 		return false
+	else
+		p1:increment()
+		
+		return true
 	end
-	p1:increment()
-	
-	return true
 end
 
-return t
+return RatelimitModule

@@ -1,26 +1,28 @@
-﻿local parent = script.Parent
-local noneModule = require(parent.None)
-local _ = require(parent.Types)
-local forEachModule = require(parent.forEach)
-local forEachArgsModule = require(parent.forEachArgs)
+﻿local Parent = script.Parent
+local NoneModule = require(Parent.None)
+local _ = require(Parent.Types)
+local ForEachModule = require(Parent.forEach)
+local ForEachArgsModule = require(Parent.forEachArgs)
 
-return function(value, ...)
-	-- upvalues: forEachArgsModule (ref), noneModule (ref), forEachModule (ref)
-	forEachArgsModule(function(p1)
-		-- upvalues: noneModule (copy), forEachModule (copy), value (ref)
-		if p1 == nil or p1 == noneModule then
+return function(NoneModules, ...) --[[ Line: 54 | Named "assign" ]]
+	-- upvalues: ForEachArgsModule (copy), NoneModule (copy), ForEachModule (copy)
+	ForEachArgsModule(function(NoneModule1) --[[ Line: 56 ]]
+		-- upvalues: NoneModule (upval), ForEachModule (upval), NoneModules (copy)
+		if NoneModule1 ~= nil and NoneModule1 ~= NoneModule then
+			ForEachModule(NoneModule1, function(NoneModule1, Key) --[[ Line: 62 ]]
+				-- upvalues: NoneModule (upval), NoneModules (upval)
+				if NoneModule1 == NoneModule then
+					NoneModules[Key] = nil
+					
+					return
+				else
+					NoneModules[Key] = NoneModule1
+				end
+			end)
+			
 			return
 		end
-		forEachModule(p1, function(p2, p3)
-			-- upvalues: noneModule (copy), value (copy)
-			if p2 == noneModule then
-				value[p3] = nil
-				
-				return
-			end
-			value[p3] = p2
-		end)
 	end, ...)
 	
-	return value
+	return NoneModules
 end

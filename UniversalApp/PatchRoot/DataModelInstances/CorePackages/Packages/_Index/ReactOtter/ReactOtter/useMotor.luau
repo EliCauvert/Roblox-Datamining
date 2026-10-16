@@ -1,53 +1,54 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local otterModule = require(parent.Otter)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local OtterModule = require(Parent.Otter)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), otterModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
+return function(p1, p2, p3) --[[ Line: 13 | Named "useMotor" ]]
+	-- upvalues: ReactModule (copy), OtterModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
 	
-	if not var1.current then
-		local var3 = if typeof(p1) == "number" then otterModule.createSingleMotor(p1) else otterModule.createGroupMotor(p1)
+	if not UseRefResult.current then
+		local SingleMotor = nil
+		SingleMotor = if typeof(p1) == "number" then OtterModule.createSingleMotor(p1) else OtterModule.createGroupMotor(p1)
 		
-		function var3.current(p4)
-			-- upvalues: var3 (write)
-			var3:setGoal(p4)
+		function UseRefResult1.current(p4) --[[ Line: 26 ]]
+			-- upvalues: SingleMotor (ref)
+			SingleMotor:setGoal(p4)
 		end
 		
-		var1.current = var3
+		UseRefResult.current = SingleMotor
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p3 (ref), p2 (ref)
-		local var4 = nil
-		local var5 = nil
+	ReactModule.useEffect(function() --[[ Line: 34 ]]
+		-- upvalues: UseRefResult (copy), p3 (copy), p2 (copy)
+		local Callback = nil
+		local Callback1 = nil
 		
-		if var1.current then
+		if UseRefResult.current then
 			if p3 then
-				var4 = var1.current:onComplete(p3)
+				Callback = UseRefResult.current:onComplete(p3)
 			end
-			var5 = var1.current:onStep(p2)
+			Callback1 = UseRefResult.current:onStep(p2)
 		end
-		return function()
-			-- upvalues: var4 (write), var5 (write)
-			if var4 then
-				var4()
+		return function() --[[ Line: 43 ]]
+			-- upvalues: Callback (ref), Callback1 (ref)
+			if Callback then
+				Callback()
 			end
-			if var5 then
-				var5()
+			if Callback1 then
+				Callback1()
 			end
 		end
 	end, { p2, p3 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		return function()
-			-- upvalues: var1 (copy)
-			if var1.current then
-				var1.current:destroy()
-				var1.current = nil
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 55 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				UseRefResult.current:destroy()
+				UseRefResult.current = nil
 			end
 		end
-	end, { var1.current })
+	end, { UseRefResult.current })
 	
-	return var2.current
+	return UseRefResult1.current
 end

@@ -1,38 +1,42 @@
-﻿local t = {}
-t.__index = t
+﻿local LinkedListModule = {}
+LinkedListModule.__index = LinkedListModule
 
-function t.createNode(p1)
-	-- upvalues: t (ref)
-	local t_1 = { previous = nil, next = nil, value = p1 }
-	setmetatable(t_1, t)
+function LinkedListModule.createNode(Value) --[[ Line: 4 ]]
+	-- upvalues: LinkedListModule (copy)
+	local config = { previous = nil, next = nil, value = Value }
+	setmetatable(config, LinkedListModule)
 	
-	return t_1
+	return config
 end
 
-function t.CreateNext(p1, p2)
-	-- upvalues: t (ref)
-	local t_1 = { previous = p1, next = p1.next, value = p2 or {} }
+function LinkedListModule.CreateNext(Previous, p1) --[[ Line: 17 ]]
+	-- upvalues: LinkedListModule (copy)
+	local Previous1 = {
+		previous = Previous,
+		next = Previous.next,
+		value = p1 or {}
+	}
 	
-	if p1.next then
-		p1.next.previous = t_1
+	if Previous.next then
+		Previous.next.previous = Previous1
 	end
-	setmetatable(t_1, t)
-	p1.next = t_1
+	setmetatable(Previous1, LinkedListModule)
+	Previous.next = Previous1
 	
-	return t_1
+	return Previous1
 end
 
-function t.CreatePrevious(p1, p2)
-	-- upvalues: t (ref)
-	local t_1 = { previous = p1.previous, next = p1, value = p2 or {} }
+function LinkedListModule.CreatePrevious(p1, p2) --[[ Line: 34 ]]
+	-- upvalues: LinkedListModule (copy)
+	local Previous = { previous = p1.previous, next = p1, value = p2 or {} }
 	
 	if p1.previous then
-		p1.previous.next = t_1
+		p1.previous.next = Previous
 	end
-	setmetatable(t_1, t)
-	p1.previous = t_1
+	setmetatable(Previous, LinkedListModule)
+	p1.previous = Previous
 	
-	return t_1
+	return Previous
 end
 
-return t
+return LinkedListModule

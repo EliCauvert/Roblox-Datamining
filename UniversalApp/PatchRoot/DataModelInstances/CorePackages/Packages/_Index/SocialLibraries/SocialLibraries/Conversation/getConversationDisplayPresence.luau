@@ -1,20 +1,23 @@
-﻿local user = script:FindFirstAncestor("SocialLibraries").User
-local presenceImageByPresenceModule = require(user.presenceImageByPresence)
-local getPresenceTextFromUserModule = require(user.getPresenceTextFromUser)
-local getOtherParticipantModule = require(script.Parent.getOtherParticipant)
+﻿local User = script:FindFirstAncestor("SocialLibraries").User
+local PresenceImageByPresenceModule = require(User.presenceImageByPresence)
+local GetPresenceTextFromUserModule = require(User.getPresenceTextFromUser)
+local GetOtherParticipantModule = require(script.Parent.getOtherParticipant)
 
-return function(p1, p2)
-	-- upvalues: getOtherParticipantModule (ref), presenceImageByPresenceModule (ref), getPresenceTextFromUserModule (ref)
+return function(p1, p2) --[[ Line: 8 ]]
+	-- upvalues: GetOtherParticipantModule (copy), PresenceImageByPresenceModule (copy), GetPresenceTextFromUserModule (copy)
 	if p2.conversationType == "OneToOneConversation" then
-		local var1 = getOtherParticipantModule(p1, p2.participants)
+		local OtherParticipantModule = GetOtherParticipantModule(p1, p2.participants)
 		
-		if var1 then
-			local var2 = p1.Users[var1]
+		if OtherParticipantModule then
+			local User = p1.Users[OtherParticipantModule]
 			
-			return if var2 then {
-				image = presenceImageByPresenceModule[var2.presence],
-				text = getPresenceTextFromUserModule(var2)
-			} else nil
+			if User then
+				return {
+					image = PresenceImageByPresenceModule[User.presence],
+					text = GetPresenceTextFromUserModule(User)
+				}
+			end
 		end
 	end
+	return nil
 end

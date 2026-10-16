@@ -1,60 +1,58 @@
-﻿local textService = game:GetService("TextService")
-local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local cryoModule = require(parent_1.Cryo)
-local foundationModule = require(parent_1.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local UIBloxConfigModule = require(parent.UIBloxConfig)
-local loggerModule = require(parent.Logger)
-local controlStateModule = require(parent.Core.Control.Enum.ControlState)
-local stateLayerModule = require(parent.Core.Control.StateLayer)
-local useStyleModule = require(parent.Core.Style.useStyle)
-local label = require(parent.Core.ImageSet.ImageSetComponent).Label
-local navigationTabLayoutModule = require(parent.App.Navigation.Enum.NavigationTabLayout)
-local _ = require(parent.App.ImageSet.ImagesTypes)
-local _ = require(parent.App.Style.StyleTypes)
-local getTextSizeModule = require(parent.Core.Text.GetTextSize)
-local isBuilderIcon = foundationModule.Utility.isBuilderIcon
-local inputSize = foundationModule.Enums.InputSize
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local radius = foundationModule.Enums.Radius
-local icon = foundationModule.Icon
-local popover = foundationModule.Popover
-local statusIndicator = foundationModule.StatusIndicator
-local text = foundationModule.Text
-local view = foundationModule.View
-local migrateBadgeVariantModule = require(parent.Utility.migrateBadgeVariant)
-local vector2 = Vector2.new(1e999, 1e999)
-local t = {
+﻿local TextService = game:GetService("TextService")
+local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local CryoModule = require(Parent1.Cryo)
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UIBloxConfigModule = require(Parent.UIBloxConfig)
+local LoggerModule = require(Parent.Logger)
+local ControlStateModule = require(Parent.Core.Control.Enum.ControlState)
+local StateLayerModule = require(Parent.Core.Control.StateLayer)
+local UseStyleModule = require(Parent.Core.Style.useStyle)
+local Label = require(Parent.Core.ImageSet.ImageSetComponent).Label
+local NavigationTabLayoutModule = require(Parent.App.Navigation.Enum.NavigationTabLayout)
+local _ = require(Parent.App.ImageSet.ImagesTypes)
+local _ = require(Parent.App.Style.StyleTypes)
+local GetTextSizeModule = require(Parent.Core.Text.GetTextSize)
+local IsBuilderIconFunction = FoundationModule.Utility.isBuilderIcon
+local InputSize = FoundationModule.Enums.InputSize
+local Radius = FoundationModule.Enums.Radius
+local Icon = FoundationModule.Icon
+local Popover = FoundationModule.Popover
+local StatusIndicator = FoundationModule.StatusIndicator
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local MigrateBadgeVariantModule = require(Parent.Utility.migrateBadgeVariant)
+local _Vector2 = Vector2.new(1e999, 1e999)
+local config = {
 	hasLabel = false,
 	isChecked = false,
 	badgeValue = nil,
-	layout = navigationTabLayoutModule.Stacked,
-	tooltipSide = popoverSide.Right,
-	tooltipAlign = popoverAlign.Center
+	layout = NavigationTabLayoutModule.Stacked,
+	tooltipSide = FoundationModule.Enums.PopoverSide.Right,
+	tooltipAlign = FoundationModule.Enums.PopoverAlign.Center
 }
 
-local function NavigationTabTooltip(p1)
-	-- upvalues: useStyleModule (ref), reactModule (ref), popover (ref), radius (ref), view (ref), text (ref)
-	local tokens = useStyleModule().Tokens
+local function NavigationTabTooltip(p1) --[[ Line: 114 ]]
+	-- upvalues: UseStyleModule (copy), ReactModule (copy), Popover (copy), Radius (copy), View (copy), Text (copy)
+	local Tokens = UseStyleModule().Tokens
 	
-	return reactModule.createElement(popover.Root, { isOpen = p1.isOpen }, {
-		Anchor = reactModule.createElement(popover.Anchor, { anchorRef = p1.anchorRef }),
-		Content = reactModule.createElement(popover.Content, {
+	return ReactModule.createElement(Popover.Root, { isOpen = p1.isOpen }, {
+		Anchor = ReactModule.createElement(Popover.Anchor, { anchorRef = p1.anchorRef }),
+		Content = ReactModule.createElement(Popover.Content, {
 			hasArrow = false,
 			selectionGroup = false,
 			align = p1.align,
 			side = {
 				position = p1.side,
-				offset = p1.offset or tokens.Size.Size_200
+				offset = p1.offset or Tokens.Size.Size_200
 			},
-			radius = radius.Small,
-			backgroundStyle = tokens.Inverse.Surface.Surface_0
-		}, reactModule.createElement(view, { tag = "auto-xy padding-x-small padding-y-xsmall" }, {
-			Title = reactModule.createElement(text, {
+			radius = Radius.Small,
+			backgroundStyle = Tokens.Inverse.Surface.Surface_0
+		}, ReactModule.createElement(View, { tag = "auto-xy padding-x-small padding-y-xsmall" }, {
+			Title = ReactModule.createElement(Text, {
 				tag = "auto-xy text-body-small content-inverse-emphasis",
 				Text = p1.labelText
 			})
@@ -62,266 +60,265 @@ local function NavigationTabTooltip(p1)
 	})
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), UIBloxConfigModule (ref), navigationTabLayoutModule (ref), reactModule (ref), loggerModule (ref), controlStateModule (ref), foundationFontFaceMigration (ref), getTextSizeModule (ref), vector2 (ref), textService (ref), isBuilderIcon (ref), view (ref), icon (ref), inputSize (ref), label (ref), statusIndicator (ref), migrateBadgeVariantModule (ref), normalizeFontFace (ref), stateLayerModule (ref), NavigationTabTooltip (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local tokens = useStyleModule().Tokens
-	local var2 = UIBloxConfigModule.addNavigationTabTooltipAndTruncation and (var1.layout == navigationTabLayoutModule.Stacked and (if var1.width == nil then var1.fillWidth == true else true))
-	local var3 = if var1.width then var1.width.Scale else 0
-	local var4 = if var1.width then var1.width.Offset else 0
-	local var5, var6 = reactModule.useBinding(Vector2.zero)
-	local var7 = reactModule.useCallback(function(p3)
-		-- upvalues: var5 (ref), var2 (ref), var6 (ref)
-		local var8
-		local absoluteSize = p3.AbsoluteSize
-		local value = var5:getValue()
+return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), UIBloxConfigModule (copy), NavigationTabLayoutModule (copy), ReactModule (copy), LoggerModule (copy), ControlStateModule (copy), FoundationFontFaceMigration (copy), GetTextSizeModule (copy), _Vector2 (copy), TextService (copy), IsBuilderIconFunction (copy), View (copy), Icon (copy), InputSize (copy), Label (copy), StatusIndicator (copy), MigrateBadgeVariantModule (copy), NormalizeFontFaceFunction (copy), StateLayerModule (copy), NavigationTabTooltip (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local Tokens = UseStyleModule().Tokens
+	local HasWidth: boolean = UIBloxConfigModule.addNavigationTabTooltipAndTruncation and (JoinResult.layout == NavigationTabLayoutModule.Stacked and (JoinResult.width ~= nil or JoinResult.fillWidth == true))
+	local Scale = if JoinResult.width then JoinResult.width.Scale else 0
+	local Offset = if JoinResult.width then JoinResult.width.Offset else 0
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.zero)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 159 ]]
+		-- upvalues: UseBindingResult (copy), HasWidth (copy), UseBindingResult2 (copy)
+		local AbsoluteSize = Frame.AbsoluteSize
+		local Value = UseBindingResult:getValue()
 		
-		if var2 then
-			var8 = value.Y ~= absoluteSize.Y
-			var8 = nil
-		else
-			var8 = value ~= absoluteSize
+		if if HasWidth then Value.Y ~= AbsoluteSize.Y else Value ~= AbsoluteSize then
+			UseBindingResult2(AbsoluteSize)
 		end
-		if var8 then
-			var6(absoluteSize)
-		end
-	end, { var2 })
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var2 (ref), var3 (ref), var4 (ref)
-		return var5:map(function(p3)
-			-- upvalues: var2 (copy), var3 (copy), var4 (copy)
-			return if var2 then UDim2.new(var3, var4, 0, p3.Y) else UDim2.fromOffset(p3.X, p3.Y)
+	end, { HasWidth })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 168 ]]
+		-- upvalues: UseBindingResult (copy), HasWidth (copy), Scale (copy), Offset (copy)
+		return UseBindingResult:map(function(Vector): UDim2 --[[ Line: 169 ]]
+			-- upvalues: HasWidth (upval), Scale (upval), Offset (upval)
+			return if HasWidth then UDim2.new(Scale, Offset, 0, Vector.Y) else UDim2.fromOffset(Vector.X, Vector.Y)
 		end)
-	end, { var2, var3, var4 })
-	local var9 = reactModule.useRef(nil)
-	local var10, var11 = reactModule.useState(false)
-	local var12 = UIBloxConfigModule.addNavigationTabTooltipAndTruncation and (var1.enableTooltip and (var1.layout == navigationTabLayoutModule.Stacked and (var1.hasLabel and var1.labelText ~= nil)))
+	end, { HasWidth, Scale, Offset })
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local HasLabelText: boolean = UIBloxConfigModule.addNavigationTabTooltipAndTruncation and (JoinResult.enableTooltip and (JoinResult.layout == NavigationTabLayoutModule.Stacked and (JoinResult.hasLabel and JoinResult.labelText ~= nil)))
 	
-	if UIBloxConfigModule.addNavigationTabTooltipAndTruncation and var1.enableTooltip and (not var1.hasLabel or var1.labelText == nil) then
-		loggerModule:warning("NavigationTab enableTooltip requires hasLabel and labelText")
+	if UIBloxConfigModule.addNavigationTabTooltipAndTruncation and JoinResult.enableTooltip and (not JoinResult.hasLabel or JoinResult.labelText == nil) then
+		LoggerModule:warning("NavigationTab enableTooltip requires hasLabel and labelText")
 	end
-	local var13 = reactModule.useRef(nil)
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref)
-		if var13.current then
-			task.cancel(var13.current)
-			var13.current = nil
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 197 ]]
+		-- upvalues: UseRefResult1 (copy)
+		if UseRefResult1.current then
+			task.cancel(UseRefResult1.current)
+			UseRefResult1.current = nil
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var14 (ref)
-		return var14
-	end, { var14 })
-	local var15 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var1 (ref), var12 (ref), var14 (ref), controlStateModule (copy), var11 (ref), tokens (ref), var13 (ref)
-		if var1.onStateChanged then
-			var1.onStateChanged(p3, p4)
+	ReactModule.useEffect(function() --[[ Line: 204 ]]
+		-- upvalues: UseResult1 (copy)
+		return UseResult1
+	end, { UseResult1 })
+	local UseResult2 = ReactModule.useCallback(function(p2, Hover) --[[ Line: 208 ]]
+		-- upvalues: JoinResult (copy), HasLabelText (copy), UseResult1 (copy), ControlStateModule (upval), UseStateResult2 (copy), Tokens (copy), UseRefResult1 (copy)
+		if JoinResult.onStateChanged then
+			JoinResult.onStateChanged(p2, Hover)
 		end
-		if not var12 then return end
-		var14()
+		if not HasLabelText then return end
+		UseResult1()
 		
-		if p4 == controlStateModule.Hover or p4 == controlStateModule.Selected or p4 == controlStateModule.SelectedPressed then
-			local var16 = nil
-			var13.current = task.delay(tokens.Time.Time_500, function()
-				-- upvalues: var13 (copy), var16 (write), var11 (copy)
-				if var13.current == var16 then
-					var13.current = nil
-					var11(true)
+		if Hover == ControlStateModule.Hover or Hover == ControlStateModule.Selected or Hover == ControlStateModule.SelectedPressed then
+			local Current = nil
+			Current = task.delay(Tokens.Time.Time_500, function() --[[ Line: 229 ]]
+				-- upvalues: UseRefResult1 (upval), Current (ref), UseStateResult2 (upval)
+				if UseRefResult1.current == Current then
+					UseRefResult1.current = nil
+					UseStateResult2(true)
 					
 					return
 				end
 			end)
+			UseRefResult1.current = Current
 			
 			return
+		else
+			UseStateResult2(false)
 		end
-		var11(false)
-	end, { var1.onStateChanged, var12, var14, tokens.Time.Time_500 })
-	local _ = nil
-	local value = nil
+	end, {
+		JoinResult.onStateChanged,
+		HasLabelText,
+		UseResult1,
+		Tokens.Time.Time_500
+	})
+	local FontSize = nil
 	
-	if var1.labelTypography then
-		value = var1.labelTypography.FontSize
+	if JoinResult.labelTypography then
+		FontSize = JoinResult.labelTypography.FontSize
 		
-		if value ~= nil and typeof(value) ~= "number" then
-			value = value:getValue()
+		if FontSize ~= nil and typeof(FontSize) ~= "number" then
+			FontSize = FontSize:getValue()
 		end
 	end
-	local var16
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), foundationFontFaceMigration (copy), getTextSizeModule (copy), value (write), vector2 (copy), textService (copy)
-		if var1.hasLabel and var1.labelText and var1.labelTypography then
-			local var18 = if foundationFontFaceMigration then getTextSizeModule(var1.labelText, value, var1.labelTypography.Font, vector2) else textService:GetTextSize(var1.labelText, value, var1.labelTypography.Font, vector2)
+	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2? --[[ Line: 249 ]]
+		-- upvalues: JoinResult (copy), FoundationFontFaceMigration (upval), GetTextSizeModule (upval), FontSize (ref), _Vector2 (upval), TextService (upval)
+		if JoinResult.hasLabel and JoinResult.labelText and JoinResult.labelTypography then
+			local TextSizeModule = if FoundationFontFaceMigration then GetTextSizeModule(JoinResult.labelText, FontSize, JoinResult.labelTypography.Font, _Vector2) else TextService:GetTextSize(JoinResult.labelText, FontSize, JoinResult.labelTypography.Font, _Vector2)
 			
-			return UDim2.new(0, var18.X + 2, 0, var18.Y + 2)
+			return UDim2.new(0, TextSizeModule.X + 2, 0, TextSizeModule.Y + 2)
+		else
+			return nil
 		end
-		return nil
 	end, {
-		var1.hasLabel,
-		var1.labelText,
-		var1.labelTypography,
-		value
+		JoinResult.hasLabel,
+		JoinResult.labelText,
+		JoinResult.labelTypography,
+		FontSize
 	})
-	local _ = nil
-	local uDim2 = UDim2.fromOffset(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_700 else tokens.Global.Size_350, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_700 else tokens.Global.Size_350)
+	local _UDim2 = UDim2.fromOffset(Tokens.Size.Size_700, Tokens.Size.Size_700)
+	local RenderIconResult = nil
 	
-	if var1.renderIcon then
-		var16 = var1.renderIcon(var1.isChecked)
+	if JoinResult.renderIcon then
+		RenderIconResult = JoinResult.renderIcon(JoinResult.isChecked)
 	else
-		local var18 = if var1.isChecked and var1.iconCheckedImage then var1.iconCheckedImage else var1.iconImage
-		local var19 = if var1.isChecked then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Icon.Emphasis elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Default else tokens.Semantic.Color.Icon.Default
-		local name = nil
-		local variant = nil
+		local IconCheckedImage = if JoinResult.isChecked and JoinResult.iconCheckedImage then JoinResult.iconCheckedImage else JoinResult.iconImage
+		local Emphasis = if JoinResult.isChecked then Tokens.Color.Content.Emphasis else Tokens.Color.Content.Default
+		local Name = nil
+		local Variant = nil
 		
 		if UIBloxConfigModule.addFoundationNavigationTabIcon then
-			if typeof(var18) == "string" then
-				if isBuilderIcon(var18) then
-					name = var18
+			if typeof(IconCheckedImage) == "string" then
+				if IsBuilderIconFunction(IconCheckedImage) then
+					Name = IconCheckedImage
 				end
-			elseif typeof(var18) == "table" and var18.name ~= nil and isBuilderIcon(var18.name) then
-				name = var18.name
-				variant = var18.variant
+			elseif typeof(IconCheckedImage) == "table" and IconCheckedImage.name ~= nil and IsBuilderIconFunction(IconCheckedImage.name) then
+				Name = IconCheckedImage.name
+				Variant = IconCheckedImage.variant
 			end
 		end
-		var16 = if UIBloxConfigModule.addFoundationNavigationTabIcon and name ~= nil then reactModule.createElement(view, { tag = "size-0-0 auto-xy padding-xxsmall" }, {
-			Icon = reactModule.createElement(icon, {
-				name = name,
-				size = inputSize.Large,
-				variant = variant,
-				style = var19
+		RenderIconResult = if UIBloxConfigModule.addFoundationNavigationTabIcon and Name ~= nil then ReactModule.createElement(View, { tag = "size-0-0 auto-xy padding-xxsmall" }, {
+			Icon = ReactModule.createElement(Icon, {
+				name = Name,
+				size = InputSize.Large,
+				variant = Variant,
+				style = Emphasis
 			})
-		}) else reactModule.createElement(label, {
+		}) else ReactModule.createElement(Label, {
 			BackgroundTransparency = 1,
-			Size = uDim2,
-			Image = var18,
+			Size = _UDim2,
+			Image = IconCheckedImage,
 			ScaleType = Enum.ScaleType.Fit,
-			ImageColor3 = var19.Color3,
-			ImageTransparency = var19.Transparency
+			ImageColor3 = Emphasis.Color3,
+			ImageTransparency = Emphasis.Transparency
 		})
 	end
-	if var1.layout == navigationTabLayoutModule.Stacked and var1.badgeValue ~= nil then
-		var16 = reactModule.createElement("Frame", {
+	if JoinResult.layout == NavigationTabLayoutModule.Stacked and JoinResult.badgeValue ~= nil then
+		RenderIconResult = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = uDim2
+			Size = _UDim2
 		}, {
-			Icon = var16,
-			Badge = reactModule.createElement(statusIndicator, {
+			Icon = RenderIconResult,
+			Badge = ReactModule.createElement(StatusIndicator, {
 				Position = UDim2.fromScale(1, 0),
 				AnchorPoint = Vector2.new(0.6, 0.35),
-				value = tonumber(var1.badgeValue),
-				variant = migrateBadgeVariantModule(var1.badgeVariant),
-				max = if tonumber(var1.badgeValue) then 99 else nil
+				value = tonumber(JoinResult.badgeValue),
+				variant = MigrateBadgeVariantModule(JoinResult.badgeVariant),
+				max = if tonumber(JoinResult.badgeValue) then 99 else nil
 			})
 		})
 	end
-	local textLabel = nil
+	local Label1 = nil
 	
-	if var1.hasLabel and var1.labelText then
-		local var20 = if var1.isChecked then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Text.Emphasis elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Default else tokens.Semantic.Color.Text.Default
-		textLabel = reactModule.createElement("TextLabel", {
+	if JoinResult.hasLabel and JoinResult.labelText then
+		local Emphasis = if JoinResult.isChecked then Tokens.Color.Content.Emphasis else Tokens.Color.Content.Default
+		Label1 = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			TextWrapped = false,
-			AutomaticSize = if var2 then Enum.AutomaticSize.Y elseif var17 then nil else Enum.AutomaticSize.XY,
-			Size = if var2 then UDim2.fromScale(1, 0) else var17,
+			AutomaticSize = if HasWidth then Enum.AutomaticSize.Y elseif UseMemoResult1 then nil else Enum.AutomaticSize.XY,
+			Size = if HasWidth then UDim2.fromScale(1, 0) else UseMemoResult1,
 			TextXAlignment = Enum.TextXAlignment.Center,
-			TextTruncate = if var2 then Enum.TextTruncate.AtEnd else nil,
-			Text = var1.labelText,
-			Font = if foundationFontFaceMigration or var1.labelTypography == nil then nil else var1.labelTypography.Font,
-			FontFace = if foundationFontFaceMigration and var1.labelTypography then normalizeFontFace(var1.labelTypography.Font) else nil,
-			TextSize = if var1.labelTypography then var1.labelTypography.FontSize else nil,
-			LineHeight = if var1.labelTypography then var1.labelTypography.LineHeight else nil,
-			TextColor3 = var20.Color3,
-			TextTransparency = var20.Transparency
+			TextTruncate = if HasWidth then Enum.TextTruncate.AtEnd else nil,
+			Text = JoinResult.labelText,
+			Font = if FoundationFontFaceMigration or JoinResult.labelTypography == nil then nil else JoinResult.labelTypography.Font,
+			FontFace = if FoundationFontFaceMigration and JoinResult.labelTypography then NormalizeFontFaceFunction(JoinResult.labelTypography.Font) else nil,
+			TextSize = if JoinResult.labelTypography then JoinResult.labelTypography.FontSize else nil,
+			LineHeight = if JoinResult.labelTypography then JoinResult.labelTypography.LineHeight else nil,
+			TextColor3 = Emphasis.Color3,
+			TextTransparency = Emphasis.Transparency
 		}, {
-			UITextSizeConstraint = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation and var1.labelMaxTextSize then reactModule.createElement("UITextSizeConstraint", { MaxTextSize = var1.labelMaxTextSize }) else nil
+			UITextSizeConstraint = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation and JoinResult.labelMaxTextSize then ReactModule.createElement("UITextSizeConstraint", { MaxTextSize = JoinResult.labelMaxTextSize }) else nil
 		})
 	end
-	local frame = nil
-	local uDim = nil
+	local Frame = nil
+	local _UDim: UDim? = nil
 	
-	if var1.layout == navigationTabLayoutModule.Stacked then
-		uDim = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Radius.Medium else tokens.Semantic.Radius.Medium)
-		local var21 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_1200 else tokens.Global.Space_600
-		frame = reactModule.createElement("Frame", {
-			AutomaticSize = if var2 then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
+	if JoinResult.layout == NavigationTabLayoutModule.Stacked then
+		_UDim = UDim.new(0, Tokens.Radius.Medium)
+		local Size1200 = Tokens.Size.Size_1200
+		Frame = ReactModule.createElement("Frame", {
+			AutomaticSize = if HasWidth then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
-			Size = if var2 then UDim2.new(1, 0, 0, var21) else UDim2.fromOffset(var21, var21),
-			ref = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation then var9 else nil,
-			[reactModule.Change.AbsoluteSize] = var7
+			Size = if HasWidth then UDim2.new(1, 0, 0, Size1200) else UDim2.fromOffset(Size1200, Size1200),
+			ref = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation then UseRefResult else nil,
+			[ReactModule.Change.AbsoluteSize] = UseResult
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100),
-				PaddingBottom = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100)
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, Tokens.Size.Size_200),
+				PaddingBottom = UDim.new(0, Tokens.Size.Size_200)
 			}),
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = if UIBloxConfigModule.removeStackedNavigationTabIconLabelSpacing then nil else UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50)
+				Padding = if UIBloxConfigModule.removeStackedNavigationTabIconLabelSpacing then nil else UDim.new(0, Tokens.Size.Size_100)
 			}),
-			Icon = var16,
-			Label = textLabel
+			Icon = RenderIconResult,
+			Label = Label1
 		})
-	elseif var1.layout == navigationTabLayoutModule.Inline then
-		uDim = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Semantic.Radius.Large)
-		local var22 = if var1.isChecked then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.State.Press else tokens.Semantic.Color.State.Standard.Pressed else { Transparency = 1, Color3 = nil }
-		frame = reactModule.createElement("Frame", {
+	elseif JoinResult.layout == NavigationTabLayoutModule.Inline then
+		_UDim = UDim.new(0, Tokens.Size.Size_300)
+		local Press = if JoinResult.isChecked then Tokens.Color.State.Press else { Transparency = 1, Color3 = nil }
+		Frame = ReactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.XY,
-			BackgroundTransparency = var22.Transparency,
-			BackgroundColor3 = var22.Color3,
-			Size = UDim2.fromOffset(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_1200 else tokens.Global.Space_600, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_1000 else tokens.Global.Space_500),
-			[reactModule.Change.AbsoluteSize] = var7
+			BackgroundTransparency = Press.Transparency,
+			BackgroundColor3 = Press.Color3,
+			Size = UDim2.fromOffset(Tokens.Size.Size_1200, Tokens.Size.Size_1000),
+			[ReactModule.Change.AbsoluteSize] = UseResult
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50),
-				PaddingBottom = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Space_50),
-				PaddingLeft = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Space_150),
-				PaddingRight = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Space_150)
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, Tokens.Size.Size_100),
+				PaddingBottom = UDim.new(0, Tokens.Size.Size_100),
+				PaddingLeft = UDim.new(0, Tokens.Size.Size_300),
+				PaddingRight = UDim.new(0, Tokens.Size.Size_300)
 			}),
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_300 else tokens.Global.Space_150)
+				Padding = UDim.new(0, Tokens.Size.Size_300)
 			}),
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = uDim }),
-			Icon = var16,
-			Label = textLabel,
-			Badge = if var1.badgeValue ~= nil then nil else reactModule.createElement(statusIndicator, {
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = _UDim }),
+			Icon = RenderIconResult,
+			Label = Label1,
+			Badge = if JoinResult.badgeValue == nil then nil else ReactModule.createElement(StatusIndicator, {
 				LayoutOrder = 3,
-				value = tonumber(var1.badgeValue),
-				variant = migrateBadgeVariantModule(var1.badgeVariant),
-				max = if tonumber(var1.badgeValue) then 99 else nil
+				value = tonumber(JoinResult.badgeValue),
+				variant = MigrateBadgeVariantModule(JoinResult.badgeVariant),
+				max = if tonumber(JoinResult.badgeValue) then 99 else nil
 			})
 		})
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		ref = p2,
-		Size = var8,
-		AnchorPoint = var1.anchorPoint,
-		Position = var1.position,
-		LayoutOrder = var1.layoutOrder
+		ref = Ref,
+		Size = UseMemoResult,
+		AnchorPoint = JoinResult.anchorPoint,
+		Position = JoinResult.position,
+		LayoutOrder = JoinResult.layoutOrder
 	}, {
-		UIFlexItem = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation and var1.layout == navigationTabLayoutModule.Stacked and var1.fillWidth then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,
-		Contents = frame,
-		StateLayer = reactModule.createElement(stateLayerModule, {
+		UIFlexItem = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation and JoinResult.layout == NavigationTabLayoutModule.Stacked and JoinResult.fillWidth then ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }) else nil,
+		Contents = Frame,
+		StateLayer = ReactModule.createElement(StateLayerModule, {
 			affordance = "Background",
 			zIndex = 10,
-			cornerRadius = uDim,
-			onActivated = var1.onActivated,
-			onStateChanged = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation then var15 else var1.onStateChanged
+			cornerRadius = _UDim,
+			onActivated = JoinResult.onActivated,
+			onStateChanged = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation then UseResult2 else JoinResult.onStateChanged
 		}),
-		Tooltip = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation and var12 then reactModule.createElement(NavigationTabTooltip, {
-			isOpen = var10,
-			anchorRef = var9,
-			labelText = var1.labelText,
-			side = var1.tooltipSide,
-			align = var1.tooltipAlign,
-			offset = var1.tooltipOffset
+		Tooltip = if UIBloxConfigModule.addNavigationTabTooltipAndTruncation and HasLabelText then ReactModule.createElement(NavigationTabTooltip, {
+			isOpen = UseStateResult,
+			anchorRef = UseRefResult,
+			labelText = JoinResult.labelText,
+			side = JoinResult.tooltipSide,
+			align = JoinResult.tooltipAlign,
+			offset = JoinResult.tooltipOffset
 		}) else nil
 	})
-end)
+end))

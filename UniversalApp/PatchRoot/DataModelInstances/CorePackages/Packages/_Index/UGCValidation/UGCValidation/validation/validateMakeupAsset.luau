@@ -1,35 +1,32 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local validateTagsModule = require(parent.validation.validateTags)
-local validateSingleInstanceModule = require(parent.validation.validateSingleInstance)
-local validateDependenciesModule = require(parent.validation.validateDependencies)
-local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
-local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidateTagsModule = require(Parent.validation.validateTags)
+local ValidateSingleInstanceModule = require(Parent.validation.validateSingleInstance)
+local ValidateDependenciesModule = require(Parent.validation.validateDependencies)
+local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
+local GetFFlagUGCValidateMakeupCategoryParityModule = require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 
-return function(value)
-	-- upvalues: getFFlagUGCValidateMakeupCategoryParityModule (ref), validateSingleInstanceModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), validateTagsModule (ref)
-	local instances = value.instances
-	local _ = nil
-	local _ = nil
+return function(p1) --[[ Line: 12 | Named "validateMakeupAsset" ]]
+	-- upvalues: GetFFlagUGCValidateMakeupCategoryParityModule (copy), ValidateSingleInstanceModule (copy), ValidateDependenciesModule (copy), FailureReasonsAccumulatorModule (copy), ValidateTagsModule (copy)
+	local Instances = p1.instances
 	
-	if not getFFlagUGCValidateMakeupCategoryParityModule() then
-		local var1, var2 = validateSingleInstanceModule(instances, value)
-		local var3 = var2
+	if not GetFFlagUGCValidateMakeupCategoryParityModule() then
+		local ValidateSingleInstanceModuleResult, ValidateSingleInstanceModuleResult2 = ValidateSingleInstanceModule(Instances, p1)
 		
-		if not var1 then
-			return false, var3
+		if not ValidateSingleInstanceModuleResult then
+			return false, ValidateSingleInstanceModuleResult2
 		end
 	end
-	local var4 = instances[1]
-	local var5, var6 = validateDependenciesModule(var4, value, { skipExistenceCheck = true, skipOwnershipCheck = true })
+	local InstancesEntry = Instances[1]
+	local ValidateDependenciesModuleResult, ValidateDependenciesModuleResult2 = ValidateDependenciesModule(InstancesEntry, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
 	
-	if not var5 then
-		return false, var6
+	if not ValidateDependenciesModuleResult then
+		return false, ValidateDependenciesModuleResult2
 	end
-	local var7 = failureReasonsAccumulatorModule.new()
+	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	
-	if not getFFlagUGCValidateMakeupCategoryParityModule() then
-		var7:updateReasons(validateTagsModule(var4, value))
+	if not GetFFlagUGCValidateMakeupCategoryParityModule() then
+		NewFailureReasonsAccumulator:updateReasons(ValidateTagsModule(InstancesEntry, p1))
 	end
-	return var7:getFinalResults()
+	return NewFailureReasonsAccumulator:getFinalResults()
 end

@@ -1,28 +1,25 @@
-﻿local parent = script:FindFirstAncestor("Components").Parent
-local parent_1 = parent.Parent
-local inlineLayoutElements = script:FindFirstAncestor("InlineLayoutElements")
-local dashModule = require(parent_1.Dash)
-local foundationModule = require(parent_1.Foundation)
-local reactModule = require(parent_1.React)
-local baseTextElementModule = require(inlineLayoutElements.BaseTextElement)
-local getFontFaceModule = require(parent.Utils.getFontFace)
-local view = foundationModule.View
-local t = {}
+﻿local Parent = script:FindFirstAncestor("Components").Parent
+local Parent1 = Parent.Parent
+local DashModule = require(Parent1.Dash)
+local ReactModule = require(Parent1.React)
+local BaseTextElementModule = require(script:FindFirstAncestor("InlineLayoutElements").BaseTextElement)
+local GetFontFaceModule = require(Parent.Utils.getFontFace)
+local View = require(Parent1.Foundation).View
 
-function mapProps(p1)
-	-- upvalues: dashModule (ref)
-	return dashModule.omit(p1, { "id", "EngineTags" })
+function mapProps(p1) --[[ Line: 23 ]]
+	-- upvalues: DashModule (copy)
+	return DashModule.omit(p1, { "id", "EngineTags" })
 end
 
-local function TextElementWrapper(p1)
-	-- upvalues: getFontFaceModule (ref), reactModule (ref), view (ref), dashModule (ref)
-	local var1 = if typeof(p1.textStyle) == "table" then p1.textStyle else {}
+local function TextElementWrapper(Frame) --[[ Line: 27 ]]
+	-- upvalues: GetFontFaceModule (copy), ReactModule (copy), View (copy), DashModule (copy)
+	local TextStyle = if typeof(Frame.textStyle) == "table" then Frame.textStyle else {}
 	
-	return reactModule.createElement(view, {
-		tag = dashModule.join({ ["size-0-0 auto-xy"] = true }, if typeof(p1.viewTags) == "string" then { [p1.viewTags] = true } else p1.viewTags or {}),
-		LayoutOrder = p1.LayoutOrder
+	return ReactModule.createElement(View, {
+		tag = DashModule.join({ ["size-full-0 auto-y"] = true }, typeof(Frame.viewTags) == "string" and { [Frame.viewTags] = true } or (Frame.viewTags or {})),
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		SelectableText = reactModule.createElement("TextBox", {
+		SelectableText = ReactModule.createElement("TextBox", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			TextEditable = false,
@@ -30,21 +27,21 @@ local function TextElementWrapper(p1)
 			TextWrapped = false,
 			ClearTextOnFocus = false,
 			RichText = false,
-			Text = p1.Text,
-			FontFace = getFontFaceModule(p1.fontStyle),
-			TextSize = p1.fontStyle and p1.fontStyle.FontSize,
-			TextColor3 = var1.Color3,
-			TextTransparency = var1.Transparency,
-			Size = UDim2.fromScale(0, 0),
-			AutomaticSize = Enum.AutomaticSize.XY,
+			Text = Frame.Text,
+			FontFace = GetFontFaceModule(Frame.fontStyle),
+			TextSize = Frame.fontStyle and Frame.fontStyle.FontSize,
+			TextColor3 = TextStyle.Color3,
+			TextTransparency = TextStyle.Transparency,
+			Size = UDim2.fromScale(1, 0),
+			AutomaticSize = Enum.AutomaticSize.Y,
 			TextXAlignment = Enum.TextXAlignment.Left
 		})
 	})
 end
 
-function t.new(p1)
-	-- upvalues: baseTextElementModule (ref), TextElementWrapper (ref), dashModule (ref)
-	return baseTextElementModule.new(TextElementWrapper, dashModule.omit(p1, { "EngineTags" }), mapProps)
-end
-
-return t
+return {
+	new = function(TextElementWrapper1) --[[ Line: 60 ]]
+		-- upvalues: BaseTextElementModule (copy), TextElementWrapper (copy), DashModule (copy)
+		return BaseTextElementModule.new(TextElementWrapper, DashModule.omit(TextElementWrapper1, { "EngineTags" }), mapProps)
+	end
+}

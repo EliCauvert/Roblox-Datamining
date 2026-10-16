@@ -1,81 +1,80 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local elevationModule = require(script.Parent.elevation)
-local elevationLayerModule = require(foundation.Enums.ElevationLayer)
-local var1 = reactModule.createContext(nil)
-local var2 = reactModule.createContext(nil)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ElevationModule = require(script.Parent.elevation)
+local ElevationLayerModule = require(Foundation.Enums.ElevationLayer)
+local Context = ReactModule.createContext(nil)
+local Context1 = ReactModule.createContext(nil)
 
 return {
-	ElevationProvider = function(p1)
-		-- upvalues: reactModule (ref), elevationLayerModule (ref), elevationModule (ref), var1 (ref)
-		local var3 = reactModule.useRef({
-			[elevationLayerModule.Popover] = 0,
-			[elevationLayerModule.Drawer] = 0,
-			[elevationLayerModule.Sheet] = 0,
-			[elevationLayerModule.Dialog] = 0,
-			[elevationLayerModule.Notification] = 0
+	ElevationProvider = function(p1) --[[ Line: 24 ]]
+		-- upvalues: ReactModule (copy), ElevationLayerModule (copy), ElevationModule (copy), Context (copy)
+		local UseRefResult = ReactModule.useRef({
+			[ElevationLayerModule.Popover] = 0,
+			[ElevationLayerModule.Drawer] = 0,
+			[ElevationLayerModule.Sheet] = 0,
+			[ElevationLayerModule.Dialog] = 0,
+			[ElevationLayerModule.Notification] = 0
 		})
 		
-		return reactModule.createElement(var1.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: elevationModule (copy), var3 (ref)
+		return ReactModule.createElement(Context.Provider, {
+			value = ReactModule.useMemo(function() --[[ Line: 33 ]]
+				-- upvalues: ElevationModule (upval), UseRefResult (copy)
 				return {
-					acquire = function(p2, p3)
-						-- upvalues: elevationModule (copy), var3 (copy)
-						local var4
-						local var5 = elevationModule.ELEVATION_LAYERS[p2]
-						local var6 = -1
-						local _ = nil
-						local var7 = true
+					acquire = function(Layer, p2) --[[ Line: 35 ]]
+						-- upvalues: ElevationModule (upval), UseRefResult (upval)
+						local ELEVATIONLAYER = ElevationModule.ELEVATION_LAYERS[Layer]
+						local Index = -1
+						local IsZIndexBelow = true
+						local NewZIndex = nil
 						
-						if p3.owner then
-							var4 = p3.owner.zIndex + 1
-							local _ = p3.owner.zIndex <= var5.finish
-						elseif p3.reserve then
-							local var8 = var3.current[p2] or 0
-							var4 = var5.start + (var8 + 1) * var5.step
-							var3.current[p2] = var8 + 1
-							var6 = var8
+						if p2.owner then
+							NewZIndex = p2.owner.zIndex + 1
+							IsZIndexBelow = p2.owner.zIndex <= ELEVATIONLAYER.finish
+						elseif p2.reserve then
+							local CurrentEntry = UseRefResult.current[Layer] or 0
+							NewZIndex = ELEVATIONLAYER.start + (CurrentEntry + 1) * ELEVATIONLAYER.step
+							UseRefResult.current[Layer] = CurrentEntry + 1
+							Index = CurrentEntry
 						else
-							var4 = var5.start
+							NewZIndex = ELEVATIONLAYER.start
 						end
-						if var7 and var5.finish < var4 then
-							warn(string.format("Layer '%s' capacity exceeded (%d/%d). Capping zIndex at %d.", tostring(p2), var4, var5.finish, var5.finish))
-							var4 = var5.finish
+						if IsZIndexBelow and ELEVATIONLAYER.finish < NewZIndex then
+							warn(string.format("Layer '%s' capacity exceeded (%d/%d). Capping zIndex at %d.", tostring(Layer), NewZIndex, ELEVATIONLAYER.finish, ELEVATIONLAYER.finish))
+							NewZIndex = ELEVATIONLAYER.finish
 						end
-						return { layer = p2, index = var6, zIndex = var4 }
+						return { layer = Layer, index = Index, zIndex = NewZIndex }
 					end,
-					peek = function(p2)
-						-- upvalues: var3 (copy)
-						return var3.current[p2] or 0
+					peek = function(p2) --[[ Line: 68 ]]
+						-- upvalues: UseRefResult (upval)
+						return UseRefResult.current[p2] or 0
 					end,
-					releaseIfTop = function(p2, p3)
-						-- upvalues: var3 (copy)
-						local var4 = var3.current[p2] or 0
+					releaseIfTop = function(p2, p3: number) --[[ Line: 71 ]]
+						-- upvalues: UseRefResult (upval)
+						local CurrentEntry = UseRefResult.current[p2] or 0
 						
-						if p3 ~= nil and p3 >= 0 and p3 == var4 - 1 then
-							var3.current[p2] = var4 - 1
+						if p3 ~= nil and p3 >= 0 and p3 == CurrentEntry - 1 then
+							UseRefResult.current[p2] = CurrentEntry - 1
 						end
 					end
 				}
 			end, {})
 		}, p1.children)
 	end,
-	ElevationOwnerScope = function(p1)
-		-- upvalues: reactModule (ref), var2 (ref)
-		return reactModule.createElement(var2.Provider, { value = p1.owner }, p1.children)
+	ElevationOwnerScope = function(p1) --[[ Line: 86 ]]
+		-- upvalues: ReactModule (copy), Context1 (copy)
+		return ReactModule.createElement(Context1.Provider, { value = p1.owner }, p1.children)
 	end,
-	useElevationManager = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		local var3 = reactModule.useContext(var1)
+	useElevationManager = function() --[[ Line: 90 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		local UseContextResult = ReactModule.useContext(Context)
 		
-		if not var3 then
+		if not UseContextResult then
 			error("useElevationManager must be used under <ElevationProvider>")
 		end
-		return var3
+		return UseContextResult
 	end,
-	useOwnerToken = function()
-		-- upvalues: reactModule (ref), var2 (ref)
-		return reactModule.useContext(var2)
+	useOwnerToken = function() --[[ Line: 100 ]]
+		-- upvalues: ReactModule (copy), Context1 (copy)
+		return (ReactModule.useContext(Context1))
 	end
 }

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateLCCageUVScoreCheck", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("UGCValidateLCCageUVScoreCheck")
 end

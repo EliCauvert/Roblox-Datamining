@@ -1,25 +1,25 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local wrapTargetCageUVReferenceValuesModule = require(parent.WrapTargetCageUVReferenceValues)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local WrapTargetCageUVReferenceValuesModule = require(Parent.WrapTargetCageUVReferenceValues)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.outerCagesData },
+	requiredData = { ValidationEnumsModule.SharedDataMember.outerCagesData },
 	conditionalData = {},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
-		for i, v in p2.outerCagesData do
-			local var1 = wrapTargetCageUVReferenceValuesModule[i]
+	run = function(p1, p2) --[[ Line: 34 ]]
+		-- upvalues: WrapTargetCageUVReferenceValuesModule (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy)
+		for PartName, value in p2.outerCagesData do
+			local WrapTargetCageUVReferenceValuesModuleEntry = WrapTargetCageUVReferenceValuesModule[PartName]
 			
-			if var1 and not UGCValidationService:ValidateEditableMeshUVValuesInReference(var1, v.editable) then
-				p1:fail(errorSourceStringsModule.Keys.CageUV_InvalidUVValue, { partName = i })
+			if WrapTargetCageUVReferenceValuesModuleEntry and not UGCValidationService:ValidateEditableMeshUVValuesInReference(WrapTargetCageUVReferenceValuesModuleEntry, value.editable) then
+				p1:fail(ErrorSourceStringsModule.Keys.CageUV_InvalidUVValue, { partName = PartName })
 			end
 		end
 	end

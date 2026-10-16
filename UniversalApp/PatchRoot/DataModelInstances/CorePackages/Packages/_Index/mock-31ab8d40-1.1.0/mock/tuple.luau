@@ -1,19 +1,19 @@
-﻿local symbolsModule = require(script.Parent.symbols)
+﻿local SymbolsModule = require(script.Parent.symbols)
 
-return function(...)
-	-- upvalues: symbolsModule (ref)
-	local list = { ... }
-	assert(#list > 1, "Mock Error: tuple only accepts more than 1 value.")
+return function(...) --[[ Line: 3 ]]
+	-- upvalues: SymbolsModule (copy)
+	local Values = { ... }
+	assert(#Values > 1, "Mock Error: tuple only accepts more than 1 value.")
 	
-	return setmetatable({ [symbolsModule.isTuple] = true, values = list }, {
-		__tostring = function(_)
-			-- upvalues: list (ref)
-			local t = {}
+	return (setmetatable({ [SymbolsModule.isTuple] = true, values = Values }, {
+		__tostring = function(_): string --[[ Line: 11 ]]
+			-- upvalues: Values (copy)
+			local List = {}
 			
-			for i, v in ipairs(list) do
-				table.insert(t, tostring(v))
+			for _, value in ipairs(Values) do
+				table.insert(List, (tostring(value)))
 			end
-			return "<Tuple values=[" .. table.concat(t, ", ") .. "]>"
+			return "<Tuple values=[" .. table.concat(List, ", ") .. "]>"
 		end
-	})
+	}))
 end

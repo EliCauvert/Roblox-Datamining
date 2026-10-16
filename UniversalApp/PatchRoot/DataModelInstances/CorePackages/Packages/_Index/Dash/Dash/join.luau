@@ -1,8 +1,8 @@
-﻿local parent = script.Parent
-local _ = require(parent.Types)
-local assignModule = require(parent.assign)
+﻿local Parent = script.Parent
+local _ = require(Parent.Types)
+local AssignModule = require(Parent.assign)
 
-return function(...)
-	-- upvalues: assignModule (ref)
-	return assignModule({}, ...)
+return function(...) --[[ Line: 13 | Named "join" ]]
+	-- upvalues: AssignModule (copy)
+	return AssignModule({}, ...)
 end

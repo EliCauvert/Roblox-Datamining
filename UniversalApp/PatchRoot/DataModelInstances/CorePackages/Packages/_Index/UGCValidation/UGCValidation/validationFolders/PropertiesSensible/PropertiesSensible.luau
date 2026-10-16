@@ -1,91 +1,90 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
-local getFIntUGCValidateMaxHSRDataLenModule = require(parent.flags.getFIntUGCValidateMaxHSRDataLen)
-local getFFlagUGCValidateWrapDataCapsModule = require(parent.flags.getFFlagUGCValidateWrapDataCaps)
-local getFIntUGCValidateMaxHSRMeshIdDataLenModule = require(parent.flags.getFIntUGCValidateMaxHSRMeshIdDataLen)
-local getFFlagUGCValidateDisallowAeroMeshDataModule = require(parent.flags.getFFlagUGCValidateDisallowAeroMeshData)
-local describeProblematicPropertiesModule = require(script.Parent.describeProblematicProperties)
-local list = {
-	validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-	validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-	validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-	validationEnumsModule.UploadCategory.EYEBROW_EYELASH
-}
-local t = {
-	categories = if require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)() then constantsModule.AllAssetUploadCategories else constantsModule.AllAssetUploadCategoriesIncludingMakeup,
-	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.hsrAssets,
-		validationEnumsModule.SharedDataMember.consumerConfig,
-		validationEnumsModule.SharedDataMember.uploadCategory
-	},
-	expectedFailures = {}
+local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
+local GetFIntUGCValidateMaxHSRDataLenModule = require(Parent.flags.getFIntUGCValidateMaxHSRDataLen)
+local GetFFlagUGCValidateWrapDataCapsModule = require(Parent.flags.getFFlagUGCValidateWrapDataCaps)
+local GetFIntUGCValidateMaxHSRMeshIdDataLenModule = require(Parent.flags.getFIntUGCValidateMaxHSRMeshIdDataLen)
+local GetFFlagUGCValidateDisallowAeroMeshDataModule = require(Parent.flags.getFFlagUGCValidateDisallowAeroMeshData)
+local GetFFlagUGCValidateTemporaryIdsBackendOnlyModule = require(Parent.flags.getFFlagUGCValidateTemporaryIdsBackendOnly)
+local DescribeProblematicPropertiesModule = require(script.Parent.describeProblematicProperties)
+local List = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+	ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+	ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 }
 
-local function walkInstanceTree(p1, p2, p3)
-	-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref), describeProblematicPropertiesModule (ref)
-	local descendants = p2:GetDescendants()
-	table.insert(descendants, p2)
+local function walkInstanceTree(p1, RootInstance, p2) --[[ Line: 41 ]]
+	-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy), DescribeProblematicPropertiesModule (copy)
+	local Descendants = RootInstance:GetDescendants()
+	table.insert(Descendants, RootInstance)
 	
-	for i, v in descendants do
-		local className = p3[v.ClassName]
-		local var1, var2 = UGCValidationService:ValidatePropertiesSensible(v, className)
+	for _, descendant in Descendants do
+		local StringLenRestrictions = p2[descendant.ClassName]
+		local ValidatePropertiesSensibleResult, ValidatePropertiesSensibleResult2 = UGCValidationService:ValidatePropertiesSensible(descendant, StringLenRestrictions)
 		
-		if not var1 then
-			p1:fail(errorSourceStringsModule.Keys.PropertiesNotSensible, {
-				ClassName = v.ClassName,
-				InstancePath = v:GetFullName(),
-				ProblematicProperties = describeProblematicPropertiesModule(var2, className)
+		if not ValidatePropertiesSensibleResult then
+			p1:fail(ErrorSourceStringsModule.Keys.PropertiesNotSensible, {
+				ClassName = descendant.ClassName,
+				InstancePath = descendant:GetFullName(),
+				ProblematicProperties = DescribeProblematicPropertiesModule(ValidatePropertiesSensibleResult2, StringLenRestrictions)
 			})
 		end
 	end
 end
 
-function t.run(p4, p5)
-	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), getFIntUGCValidateMaxHSRDataLenModule (ref), getFFlagUGCValidateDisallowAeroMeshDataModule (ref), getFFlagUGCValidateWrapDataCapsModule (ref), validationEnumsModule (ref), list (ref), getFIntUGCValidateMaxHSRMeshIdDataLenModule (ref), walkInstanceTree (ref)
-	if not getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then return end
-	local t = {
-		HiddenSurfaceRemovalAsset = { HSRData = getFIntUGCValidateMaxHSRDataLenModule() }
-	}
-	
-	if getFFlagUGCValidateDisallowAeroMeshDataModule() then
-		t.MeshPart = { AeroMeshData = 0 }
-	end
-	if getFFlagUGCValidateWrapDataCapsModule() then
-		local consumerEnv = p5.consumerConfig.consumerEnv
-		local var3 = consumerEnv == validationEnumsModule.ConsumerEnv.Backend
-		local var4 = consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC and table.find(list, p5.uploadCategory) ~= nil
-		local t_1 = {
-			HSRMeshIdData = getFIntUGCValidateMaxHSRMeshIdDataLenModule()
-		}
-		local t_2 = {
-			HSRMeshIdData = getFIntUGCValidateMaxHSRMeshIdDataLenModule()
+return {
+	categories = if require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)() then ConstantsModule.AllAssetUploadCategories else ConstantsModule.AllAssetUploadCategoriesIncludingMakeup,
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.hsrAssets,
+		ValidationEnumsModule.SharedDataMember.consumerConfig,
+		ValidationEnumsModule.SharedDataMember.uploadCategory
+	},
+	expectedFailures = {},
+	run = function(p3, p4) --[[ Line: 66 ]]
+		-- upvalues: GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), GetFIntUGCValidateMaxHSRDataLenModule (copy), GetFFlagUGCValidateDisallowAeroMeshDataModule (copy), GetFFlagUGCValidateWrapDataCapsModule (copy), ValidationEnumsModule (copy), GetFFlagUGCValidateTemporaryIdsBackendOnlyModule (copy), List (copy), GetFIntUGCValidateMaxHSRMeshIdDataLenModule (copy), walkInstanceTree (copy)
+		if not GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then return end
+		local config = {
+			HiddenSurfaceRemovalAsset = { HSRData = GetFIntUGCValidateMaxHSRDataLenModule() }
 		}
 		
-		if var3 then
-			t_1.HSRData = 0
-			t_2.HSRData = 0
+		if GetFFlagUGCValidateDisallowAeroMeshDataModule() then
+			config.MeshPart = { AeroMeshData = 0 }
 		end
-		if var4 then
-			t_1.TemporaryCageMeshId = 0
-			t_2.TemporaryCageMeshId = 0
-			t_2.TemporaryReferenceId = 0
+		if GetFFlagUGCValidateWrapDataCapsModule() then
+			local ConsumerEnv = p4.consumerConfig.consumerEnv
+			local IsConsumerEnvMatch = ConsumerEnv == ValidationEnumsModule.ConsumerEnv.Backend
+			local HasFoundIndex: boolean = if GetFFlagUGCValidateTemporaryIdsBackendOnlyModule() then ConsumerEnv == ValidationEnumsModule.ConsumerEnv.Backend and table.find(List, p4.uploadCategory) ~= nil else ConsumerEnv ~= ValidationEnumsModule.ConsumerEnv.IEC and table.find(List, p4.uploadCategory) ~= nil
+			local WrapTarget = {
+				HSRMeshIdData = GetFIntUGCValidateMaxHSRMeshIdDataLenModule()
+			}
+			local WrapLayer = {
+				HSRMeshIdData = GetFIntUGCValidateMaxHSRMeshIdDataLenModule()
+			}
+			
+			if IsConsumerEnvMatch then
+				WrapTarget.HSRData = 0
+				WrapLayer.HSRData = 0
+			end
+			if HasFoundIndex then
+				WrapTarget.TemporaryCageMeshId = 0
+				WrapLayer.TemporaryCageMeshId = 0
+				WrapLayer.TemporaryReferenceId = 0
+			end
+			config.WrapTarget = WrapTarget
+			config.WrapLayer = WrapLayer
 		end
-		t.WrapTarget = t_1
-		t.WrapLayer = t_2
+		walkInstanceTree(p3, p4.rootInstance, config)
+		
+		for _, hsrAsset in p4.hsrAssets do
+			for _, value in hsrAsset do
+				walkInstanceTree(p3, value, config)
+			end
+		end
 	end
-	walkInstanceTree(p4, p5.rootInstance, t)
-	
-	for i, v in p5.hsrAssets do
-		for i_1, v_1 in v do
-			walkInstanceTree(p4, v_1, t)
-		end
-	end
-end
-
-return t
+}

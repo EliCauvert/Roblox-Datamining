@@ -1,64 +1,66 @@
-﻿local t = {}
-t.__index = t
-local var1 = newproxy(true)
+﻿local Module = {}
+Module.__index = Module
+local Proxy = newproxy(true)
 
-function t.new(p1, p2)
-	-- upvalues: var1 (ref), t (ref)
-	assert(typeof(p1) == "boolean")
-	local t_1 = {
+function Module.new(_status, _value) --[[ Line: 6 ]]
+	-- upvalues: Proxy (copy), Module (copy)
+	assert(typeof(_status) == "boolean")
+	local config = {
 		_source = debug.traceback(),
-		[var1] = true,
-		_status = p1,
-		_value = p2
+		[Proxy] = true,
+		_status = _status,
+		_value = _value
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, Module)
 	
-	return t_1
+	return config
 end
 
-function t.success(p1)
-	-- upvalues: t (ref)
-	return t.new(true, p1)
+function Module.success(p1) --[[ Line: 27 ]]
+	-- upvalues: Module (copy)
+	return Module.new(true, p1)
 end
 
-function t.error(p1)
-	-- upvalues: t (ref)
-	return t.new(false, p1)
+function Module.error(p1) --[[ Line: 31 ]]
+	-- upvalues: Module (copy)
+	return Module.new(false, p1)
 end
 
-function t:is()
-	-- upvalues: var1 (ref)
-	return typeof(self) == "table" and self[var1]
+function Module:is() --[[ Line: 38 ]]
+	-- upvalues: Proxy (copy)
+	return typeof(self) == "table" and self[Proxy]
 end
 
-function t:match(p1, p2)
-	-- upvalues: t (ref)
-	assert(if typeof(p1) ~= "function" then typeof(p1) == "nil" else true, string.format("Result:match expects successHandler to be a function or nil, got %s", typeof(p1)))
-	assert(if typeof(p2) ~= "function" then typeof(p2) == "nil" else true, string.format("Result:match expects errorHandler to be a function or nil, got %s", typeof(p2)))
-	local var2 = nil
+function Module:match(Callback, Callback1) --[[ Line: 51 ]]
+	-- upvalues: Module (copy)
+	assert(typeof(Callback) == "function" or typeof(Callback) == "nil", string.format("Result:match expects successHandler to be a function or nil, got %s", (typeof(Callback))))
+	assert(typeof(Callback1) == "function" or typeof(Callback1) == "nil", string.format("Result:match expects errorHandler to be a function or nil, got %s", (typeof(Callback1))))
+	local v1 = nil
 	
 	if self._status then
-		if p1 == nil then
+		if Callback == nil then
 			return self
 		end
-		var2 = p1(self._value)
-	elseif p2 == nil then
-		return self
+		v1 = Callback(self._value)
+	else
+		if Callback1 == nil then
+			return self
+		end
+		v1 = Callback1(self._value)
 	end
-	var2 = p2(self._value)
-	return if t.is(var2) then var2 else t.success(var2)
+	return if Module.is(v1) then v1 else Module.success(v1)
 end
 
-function t:matchSuccess(p1)
+function Module:matchSuccess(p1) --[[ Line: 83 ]]
 	return self:match(p1, nil)
 end
 
-function t:matchError(p1)
+function Module:matchError(p1) --[[ Line: 92 ]]
 	return self:match(nil, p1)
 end
 
-function t:unwrap()
+function Module:unwrap() --[[ Line: 96 ]]
 	return self._status, self._value
 end
 
-return t
+return Module

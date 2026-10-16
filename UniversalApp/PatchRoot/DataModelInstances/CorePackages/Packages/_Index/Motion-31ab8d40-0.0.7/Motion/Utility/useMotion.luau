@@ -1,88 +1,86 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.Parent.React)
-local useAnimatedValueModule = require(parent.useAnimatedValue)
-local _ = require(parent_1.Types)
-local timingConfigsModule = require(parent.TimingConfigs)
-local transitionPresetModule = require(parent_1.Enums.TransitionPreset)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.Parent.React)
+local UseAnimatedValueModule = require(Parent.useAnimatedValue)
+local _ = require(Parent1.Types)
+local TimingConfigsModule = require(Parent.TimingConfigs)
+local TransitionPresetModule = require(Parent1.Enums.TransitionPreset)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useAnimatedValueModule (ref), transitionPresetModule (ref), timingConfigsModule (ref)
+return function(List) --[[ Line: 20 | Named "useMotion" ]]
+	-- upvalues: ReactModule (copy), UseAnimatedValueModule (copy), TransitionPresetModule (copy), TimingConfigsModule (copy)
 	local t = {}
-	local t_1 = {}
-	local var1 = reactModule.useRef({})
+	local t1 = {}
+	local UseRefResult = ReactModule.useRef({})
 	
-	for i, v in p1 do
-		if type(v) ~= "table" or i ~= "transition" then
-			local var2, var3 = useAnimatedValueModule(v)
-			t[i] = var2
-			t_1[i] = var3
+	for i, value in List do
+		if type(value) ~= "table" or i ~= "transition" then
+			t[i], t1[i] = UseAnimatedValueModule(value)
 		end
 	end
-	return t, function(p2, p3)
-		-- upvalues: t_1 (ref), var1 (ref), transitionPresetModule (copy), timingConfigsModule (copy)
-		if not p2 then return end
-		local var4 = 0
+	return t, function(p1, p2) --[[ Line: 40 | Named "animate" ]]
+		-- upvalues: t1 (copy), UseRefResult (copy), TransitionPresetModule (upval), TimingConfigsModule (upval)
+		if not p1 then return end
+		local Count = 0
 		local t = {}
 		
-		for i in t_1 do
-			if i ~= "transition" and p2[i] ~= nil then
-				var4 += 1
+		for i in t1 do
+			if i ~= "transition" and p1[i] ~= nil then
+				Count += 1
 			end
 		end
-		local var5 = 0
+		local Count1 = 0
 		
-		local function _(p4)
-			-- upvalues: t (ref), p2 (ref), var5 (write), p3 (ref), var4 (write)
-			t[p4] = p2[p4]
-			var5 += 1
+		local function _(Key) --[[ Line: 57 | Named "propertyOnComplete" ]]
+			-- upvalues: t (copy), p1 (copy), Count1 (ref), p2 (copy), Count (ref)
+			t[Key] = p1[Key]
+			Count1 += 1
 			
-			if p3 and p3.onAnimationComplete then
-				p3.onAnimationComplete(p4)
+			if p2 and p2.onAnimationComplete then
+				p2.onAnimationComplete(Key)
 			end
-			if var5 == var4 and p3 and p3.onAnimationComplete then
-				p3.onAnimationComplete(true)
+			if Count1 == Count and p2 and p2.onAnimationComplete then
+				p2.onAnimationComplete(true)
 			end
 		end
 		
-		for i_1, v in t_1 do
-			if i_1 ~= "transition" and p2[i_1] ~= nil then
-				if var1.current[i_1] then
-					local var6 = var1.current[i_1]
+		for i1, value in t1 do
+			if i1 ~= "transition" and p1[i1] ~= nil then
+				if UseRefResult.current[i1] then
+					local CurrentEntry = UseRefResult.current[i1]
 					
-					if var6 then
-						task.cancel(var6)
+					if CurrentEntry then
+						task.cancel(CurrentEntry)
 					end
-					var1.current[i_1] = nil
+					UseRefResult.current[i1] = nil
 				end
-				local transition = p2.transition or {
-					[transitionPresetModule.Default] = timingConfigsModule.getDefaultTransition()
+				local Transition = p1.transition or {
+					[TransitionPresetModule.Default] = TimingConfigsModule.getDefaultTransition()
 				}
-				local cloned = table.clone(transition[i_1] or (transition[transitionPresetModule.Default] or timingConfigsModule.getDefaultTransition()))
+				local Copy = table.clone(Transition[i1] or (Transition[TransitionPresetModule.Default] or TimingConfigsModule.getDefaultTransition()))
 				
-				function cloned.onComplete()
-					-- upvalues: i_1 (ref), t (ref), p2 (ref), var5 (write), p3 (ref), var4 (write)
-					t[i_1] = p2[i_1]
-					var5 += 1
+				function Copy.onComplete() --[[ Line: 94 ]]
+					-- upvalues: i1 (copy), t (copy), p1 (copy), Count1 (ref), p2 (copy), Count (ref)
+					t[i1] = p1[i1]
+					Count1 += 1
 					
-					if p3 and p3.onAnimationComplete then
-						p3.onAnimationComplete(i_1)
+					if p2 and p2.onAnimationComplete then
+						p2.onAnimationComplete(i1)
 					end
-					if var5 == var4 and p3 and p3.onAnimationComplete then
-						p3.onAnimationComplete(true)
+					if Count1 == Count and p2 and p2.onAnimationComplete then
+						p2.onAnimationComplete(true)
 					end
 				end
 				
-				local delay = cloned.delay or 0
+				local Delay = Copy.delay or 0
 				
-				if delay > 0 then
-					var1.current[i_1] = task.delay(delay, function()
-						-- upvalues: var1 (copy), i_1 (ref), v (ref), p2 (ref), cloned (ref)
-						var1.current[i_1] = nil
-						v(p2[i_1], cloned)
+				if Delay > 0 then
+					UseRefResult.current[i1] = task.delay(Delay, function() --[[ Line: 103 ]]
+						-- upvalues: UseRefResult (upval), i1 (copy), value (copy), p1 (copy), Copy (copy)
+						UseRefResult.current[i1] = nil
+						value(p1[i1], Copy)
 					end)
 				else
-					v(p2[i_1], cloned)
+					value(p1[i1], Copy)
 				end
 			end
 		end

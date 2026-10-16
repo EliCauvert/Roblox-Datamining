@@ -1,3 +1,3 @@
-﻿return function(p1, p2)
-	return p1:sub(-p2:len()) == p2
+﻿return function(Text: string, Text1): boolean --[[ Line: 14 | Named "endsWith" ]]
+	return Text:sub(-Text1:len()) == Text1
 end

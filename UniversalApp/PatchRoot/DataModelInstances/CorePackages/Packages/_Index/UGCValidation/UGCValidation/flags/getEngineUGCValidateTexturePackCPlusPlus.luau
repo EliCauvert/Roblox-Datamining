@@ -1,3 +1,3 @@
-﻿return function()
+﻿return function() --[[ Line: 1 ]]
 	return game:GetEngineFeature("EngineUGCValidateTexturePackCPlusPlus")
 end

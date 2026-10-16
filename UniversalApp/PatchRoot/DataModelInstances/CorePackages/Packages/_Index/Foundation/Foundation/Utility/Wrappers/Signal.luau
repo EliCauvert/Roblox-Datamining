@@ -1,5 +1,5 @@
 ﻿return {
-	Connect = function(p1, p2)
-		return p1:Connect(p2)
+	Connect = function(Signal, Callback) --[[ Line: 2 ]]
+		return Signal:Connect(Callback)
 	end
 }

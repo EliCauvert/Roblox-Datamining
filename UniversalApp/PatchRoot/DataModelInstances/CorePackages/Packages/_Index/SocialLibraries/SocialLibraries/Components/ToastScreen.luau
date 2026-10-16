@@ -1,90 +1,90 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roact = dependenciesModule.Roact
-local UIBlox = dependenciesModule.UIBlox
-local t = dependenciesModule.t
-local images = UIBlox.App.ImageSet.Images
-local iconSize = UIBlox.App.Constant.IconSize
-local toast = UIBlox.App.Dialog.Toast
-local validateColorInfo = UIBlox.Style.Validator.validateColorInfo
-local toastScreen = roact.PureComponent:extend("ToastScreen")
-toastScreen.defaultProps = { navigation = nil }
-local var1 = t.strictInterface({
-	toastTitle = t.optional(t.string),
-	toastSubtitle = t.optional(t.string),
-	iconColorStyle = t.optional(validateColorInfo),
-	iconImage = t.optional(t.union(t.table, t.string)),
-	iconSize = t.optional(t.Vector2),
-	swipeUpDismiss = t.optional(t.boolean),
-	onAppeared = t.optional(t.callback),
-	onActivated = t.optional(t.callback),
-	onDismissed = t.optional(t.callback),
-	hideIcon = t.optional(t.boolean)
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Roact = DependenciesModule.Roact
+local UIBlox = DependenciesModule.UIBlox
+local T = DependenciesModule.t
+local Images = UIBlox.App.ImageSet.Images
+local IconSize = UIBlox.App.Constant.IconSize
+local Toast = UIBlox.App.Dialog.Toast
+local ValidateColorInfo = UIBlox.Style.Validator.validateColorInfo
+local ToastScreen = Roact.PureComponent:extend("ToastScreen")
+ToastScreen.defaultProps = { navigation = nil }
+local StrictInterfaceResult = T.strictInterface({
+	toastTitle = T.optional(T.string),
+	toastSubtitle = T.optional(T.string),
+	iconColorStyle = T.optional(ValidateColorInfo),
+	iconImage = T.optional(T.union(T.table, T.string)),
+	iconSize = T.optional(T.Vector2),
+	swipeUpDismiss = T.optional(T.boolean),
+	onAppeared = T.optional(T.callback),
+	onActivated = T.optional(T.callback),
+	onDismissed = T.optional(T.callback),
+	hideIcon = T.optional(T.boolean)
 })
-local var2 = t.strictInterface({
-	toastContent = t.optional(t.table),
-	anchorPoint = t.optional(t.Vector2),
-	duration = t.optional(t.integer),
-	layoutOrder = t.optional(t.integer),
-	position = t.optional(t.UDim2),
-	size = t.optional(t.UDim2),
-	show = t.optional(t.boolean)
+local StrictInterfaceResult1 = T.strictInterface({
+	toastContent = T.optional(T.table),
+	anchorPoint = T.optional(T.Vector2),
+	duration = T.optional(T.integer),
+	layoutOrder = T.optional(T.integer),
+	position = T.optional(T.UDim2),
+	size = T.optional(T.UDim2),
+	show = T.optional(T.boolean)
 })
 
-function toastScreen.init(p1)
-	-- upvalues: var2 (ref), var1 (ref), images (ref), iconSize (ref)
+function ToastScreen.init(p1) --[[ Line: 41 ]]
+	-- upvalues: StrictInterfaceResult1 (copy), StrictInterfaceResult (copy), Images (copy), IconSize (copy)
 	p1.hasToastChanged = false
 	
-	function p0.getToastProps(p2)
-		-- upvalues: var2 (copy), var1 (copy), images (copy), iconSize (copy), p1 (ref)
-		local toastContent = p2.toastContent or {}
-		assert(var2(p2))
-		assert(var1(toastContent))
+	function p1.getToastProps(ToastProps) --[[ Line: 44 ]]
+		-- upvalues: StrictInterfaceResult1 (upval), StrictInterfaceResult (upval), Images (upval), IconSize (upval), p1 (copy)
+		local ToastContent = ToastProps.toastContent or {}
+		assert(StrictInterfaceResult1(ToastProps))
+		assert(StrictInterfaceResult(ToastContent))
 		
 		return {
 			toastContent = {
-				toastTitle = toastContent.toastTitle or "",
-				toastSubtitle = toastContent.toastSubtitle,
-				iconColorStyle = toastContent.iconColorStyle,
-				iconImage = if not toastContent.hideIcon then toastContent.iconImage or images["icons/status/alert"] else nil,
-				iconSize = if not toastContent.hideIcon then toastContent.iconSize or Vector2.new(iconSize.Regular, iconSize.Regular) else nil,
-				swipeUpDismiss = toastContent.swipeUpDismiss,
-				onAppeared = function()
-					-- upvalues: toastContent (ref), p1 (copy)
-					if toastContent.onAppeared then
-						toastContent.onAppeared()
+				toastTitle = ToastContent.toastTitle or "",
+				toastSubtitle = ToastContent.toastSubtitle,
+				iconColorStyle = ToastContent.iconColorStyle,
+				iconImage = if ToastContent.hideIcon then nil else ToastContent.iconImage or Images["icons/status/alert"],
+				iconSize = if ToastContent.hideIcon then nil else ToastContent.iconSize or Vector2.new(IconSize.Regular, IconSize.Regular),
+				swipeUpDismiss = ToastContent.swipeUpDismiss,
+				onAppeared = function() --[[ Line: 62 ]]
+					-- upvalues: ToastContent (copy), p1 (upval)
+					if ToastContent.onAppeared then
+						ToastContent.onAppeared()
 					end
 					p1.hasToastChanged = false
 				end,
-				onActivated = toastContent.onActivated,
-				onDismissed = function()
-					-- upvalues: toastContent (ref), p1 (copy)
-					if toastContent.onDismissed then
-						toastContent.onDismissed()
+				onActivated = ToastContent.onActivated,
+				onDismissed = function() --[[ Line: 69 ]]
+					-- upvalues: ToastContent (copy), p1 (upval)
+					if ToastContent.onDismissed then
+						ToastContent.onDismissed()
 					end
 					if not p1.hasToastChanged then
 						p1.props.navigation.goBack()
 					end
 				end
 			},
-			anchorPoint = p2.anchorPoint,
-			duration = p2.duration or 2,
-			layoutOrder = p2.layoutOrder,
-			position = p2.position,
-			size = p2.size,
-			show = p2.show
+			anchorPoint = ToastProps.anchorPoint,
+			duration = ToastProps.duration or 2,
+			layoutOrder = ToastProps.layoutOrder,
+			position = ToastProps.position,
+			size = ToastProps.size,
+			show = ToastProps.show
 		}
 	end
 end
 
-function toastScreen.render(p1)
-	-- upvalues: roact (ref), toast (ref)
+function ToastScreen.render(p1) --[[ Line: 90 ]]
+	-- upvalues: Roact (copy), Toast (copy)
 	assert(type(p1.props.navigation) ~= "nil", "ToastScreen should be wrapped with Roact Navigation")
 	
-	return roact.createElement(toast, p1.getToastProps(p1.props.navigation.getParam("toastProps", {})))
+	return Roact.createElement(Toast, (p1.getToastProps(p1.props.navigation.getParam("toastProps", {}))))
 end
 
-function toastScreen.didUpdate(p1, _, _)
+function ToastScreen.didUpdate(p1, _, _) --[[ Line: 98 ]]
 	p1.hasToastChanged = true
 end
 
-return toastScreen
+return ToastScreen

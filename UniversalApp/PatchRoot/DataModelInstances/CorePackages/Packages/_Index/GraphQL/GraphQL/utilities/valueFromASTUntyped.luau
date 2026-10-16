@@ -1,45 +1,45 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local jsutils = parent.jsutils
-local language = parent.language
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local coerceToTable = luauPolyfillModule.coerceToTable
-local nullModule = require(parent.luaUtils.null)
-local _ = require(jsutils.ObjMap)
-local inspect = require(jsutils.inspect).inspect
-local invariant = require(jsutils.invariant).invariant
-local keyValMap = require(jsutils.keyValMap).keyValMap
-local kind = require(language.kinds).Kind
-local _ = require(language.ast)
+﻿local Parent = script.Parent.Parent
+local Jsutils = Parent.jsutils
+local Language = Parent.language
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local CoerceToTableFunction = LuauPolyfillModule.coerceToTable
+local NullModule = require(Parent.luaUtils.null)
+local _ = require(Jsutils.ObjMap)
+local InspectFunction = require(Jsutils.inspect).inspect
+local InvariantFunction = require(Jsutils.invariant).invariant
+local KeyValMapFunction = require(Jsutils.keyValMap).keyValMap
+local Kind = require(Language.kinds).Kind
+local _ = require(Language.ast)
 
-local function valueFromASTUntyped(p1, p2)
-	-- upvalues: kind (ref), nullModule (ref), array (ref), valueFromASTUntyped (ref), coerceToTable (ref), keyValMap (ref), invariant (ref), inspect (ref)
-	if p1.kind == kind.NULL then
-		return nullModule
-	elseif p1.kind == kind.INT then
-		return tonumber(p1.value, 10)
-	elseif p1.kind == kind.FLOAT then
-		return tonumber(p1.value)
-	elseif p1.kind == kind.STRING or p1.kind == kind.ENUM or p1.kind == kind.BOOLEAN then
+local function valueFromASTUntyped(p1, p2) --[[ Line: 48 ]]
+	-- upvalues: Kind (copy), NullModule (copy), Array (copy), valueFromASTUntyped (copy), CoerceToTableFunction (copy), KeyValMapFunction (copy), InvariantFunction (copy), InspectFunction (copy)
+	if p1.kind == Kind.NULL then
+		return NullModule
+	elseif p1.kind == Kind.INT then
+		return (tonumber(p1.value, 10))
+	elseif p1.kind == Kind.FLOAT then
+		return (tonumber(p1.value))
+	elseif p1.kind == Kind.STRING or p1.kind == Kind.ENUM or p1.kind == Kind.BOOLEAN then
 		return p1.value
-	elseif p1.kind == kind.LIST then
-		return array.map(p1.values, function(p3)
-			-- upvalues: valueFromASTUntyped (copy), p2 (ref)
+	elseif p1.kind == Kind.LIST then
+		return Array.map(p1.values, function(p3) --[[ Line: 66 ]]
+			-- upvalues: valueFromASTUntyped (upval), p2 (copy)
 			return valueFromASTUntyped(p3, p2)
 		end)
-	elseif p1.kind == kind.OBJECT then
-		return coerceToTable(keyValMap(p1.fields, function(p3)
+	elseif p1.kind == Kind.OBJECT then
+		return CoerceToTableFunction(KeyValMapFunction(p1.fields, function(p3) --[[ Line: 71 ]]
 			return p3.name.value
-		end, function(p3)
-			-- upvalues: valueFromASTUntyped (copy), p2 (ref)
+		end, function(p3) --[[ Line: 73 ]]
+			-- upvalues: valueFromASTUntyped (upval), p2 (copy)
 			return valueFromASTUntyped(p3.value, p2)
 		end))
-	elseif p1.kind == kind.VARIABLE then
+	elseif p1.kind == Kind.VARIABLE then
 		return p2 and p2[p1.name.value]
+	else
+		InvariantFunction(false, "Unexpected value node: " .. InspectFunction(p1))
+		error("Unexpected value node: " .. InspectFunction(p1))
 	end
-	invariant(false, "Unexpected value node: " .. inspect(p1))
-	error("Unexpected value node: " .. inspect(p1))
 end
 
 return { valueFromASTUntyped = valueFromASTUntyped }

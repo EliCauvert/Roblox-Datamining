@@ -1,11 +1,11 @@
-﻿local reactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
-local cryoModule = require(reactSceneUnderstanding.Parent.Cryo)
-local sceneUnderstandingModule = require(reactSceneUnderstanding.Parent.SceneUnderstanding)
+﻿local ReactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
+local CryoModule = require(ReactSceneUnderstanding.Parent.Cryo)
+local SceneUnderstandingModule = require(ReactSceneUnderstanding.Parent.SceneUnderstanding)
 
-return function(p1)
-	-- upvalues: cryoModule (ref), sceneUnderstandingModule (ref)
-	return cryoModule.List.sort(cryoModule.List.filter(p1, sceneUnderstandingModule.isAudible), function(p2, p3)
-		-- upvalues: sceneUnderstandingModule (copy)
-		return sceneUnderstandingModule.calculatePotentialAudibility(p3) < sceneUnderstandingModule.calculatePotentialAudibility(p2)
+return function(p1) --[[ Line: 6 | Named "sortByAudibleVolume" ]]
+	-- upvalues: CryoModule (copy), SceneUnderstandingModule (copy)
+	return CryoModule.List.sort(CryoModule.List.filter(p1, SceneUnderstandingModule.isAudible), function(p2, p3): boolean --[[ Line: 9 ]]
+		-- upvalues: SceneUnderstandingModule (upval)
+		return SceneUnderstandingModule.calculatePotentialAudibility(p3) < SceneUnderstandingModule.calculatePotentialAudibility(p2)
 	end)
 end

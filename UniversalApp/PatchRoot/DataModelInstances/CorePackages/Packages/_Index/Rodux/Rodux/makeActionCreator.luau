@@ -1,15 +1,15 @@
-﻿return function(p1, p2)
-	assert(type(p1) == "string", "Bad argument #1: Expected a string name for the action creator")
-	assert(type(p2) == "function", "Bad argument #2: Expected a function that creates action objects")
+﻿return function(Name, Callback) --[[ Line: 4 | Named "makeActionCreator" ]]
+	assert(type(Name) == "string", "Bad argument #1: Expected a string name for the action creator")
+	assert(type(Callback) == "function", "Bad argument #2: Expected a function that creates action objects")
 	
-	return setmetatable({ name = p1 }, {
-		__call = function(_, ...)
-			-- upvalues: p2 (ref), p1 (ref)
-			local var1 = p2(...)
-			assert(type(var1) == "table", "Invalid action: An action creator must return a table")
-			var1.type = p1
+	return (setmetatable({ name = Name }, {
+		__call = function(_, ...) --[[ Line: 12 ]]
+			-- upvalues: Callback (copy), Name (copy)
+			local CallbackResult = Callback(...)
+			assert(type(CallbackResult) == "table", "Invalid action: An action creator must return a table")
+			CallbackResult.type = Name
 			
-			return var1
+			return CallbackResult
 		end
-	})
+	}))
 end

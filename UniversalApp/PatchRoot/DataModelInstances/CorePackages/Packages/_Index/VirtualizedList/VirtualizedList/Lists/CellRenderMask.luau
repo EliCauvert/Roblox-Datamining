@@ -1,98 +1,98 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local t = {}
-local invariantModule = require(parent.jsUtils.invariant)
-local t_1 = {}
-t_1.__index = t_1
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local InvariantModule = require(Parent.jsUtils.invariant)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref), invariantModule (ref)
-	local tbl = setmetatable({}, t_1)
-	invariantModule(p1 >= 0, "CellRenderMask must contain a non-negative number os cells")
-	tbl._numCells = p1
+function Module.new(_numCells: number) --[[ Line: 36 ]]
+	-- upvalues: Module (copy), InvariantModule (copy)
+	local self = setmetatable({}, Module)
+	InvariantModule(_numCells >= 0, "CellRenderMask must contain a non-negative number os cells")
+	self._numCells = _numCells
 	
-	if p1 == 0 then
-		tbl._regions = {}
+	if _numCells == 0 then
+		self._regions = {}
 		
-		return tbl
+		return self
+	else
+		self._regions = { { first = 0, isSpacer = true, last = _numCells - 1 } }
+		
+		return self
 	end
-	tbl._regions = { { first = 0, isSpacer = true, last = p1 - 1 } }
-	
-	return tbl
 end
 
-function t_1:enumerateRegions()
+function Module:enumerateRegions() --[[ Line: 47 ]]
 	return self._regions
 end
 
-function t_1:addCells(p1)
-	-- upvalues: invariantModule (ref), object (ref), array (ref)
-	invariantModule(p1.first >= 0 and (p1.first < self._numCells and (p1.last >= 0 and (p1.last < self._numCells and p1.first <= p1.last))), "CellRenderMask.addCells called with invalid cell range")
-	local first, first_1 = self:_findRegion(p1.first)
-	local last, last_1 = self:_findRegion(p1.last)
+function Module:addCells(p1) --[[ Line: 50 ]]
+	-- upvalues: InvariantModule (copy), Object (copy), Array (copy)
+	InvariantModule(p1.first >= 0 and (p1.first < self._numCells and (p1.last >= 0 and p1.last < self._numCells)) and p1.first <= p1.last, "CellRenderMask.addCells called with invalid cell range")
+	local Region, Region2 = self:_findRegion(p1.first)
+	local Region1, Region2_1 = self:_findRegion(p1.last)
 	
-	if first_1 == last_1 and not first.isSpacer then return end
-	local t = {}
-	local t_1 = {}
-	local var1 = object.assign({}, p1, { isSpacer = false })
+	if Region2 == Region2_1 and not Region.isSpacer then return end
+	local List = {}
+	local List1 = {}
+	local AssignResult = Object.assign({}, p1, { isSpacer = false })
 	
-	if first.first < var1.first then
-		if first.isSpacer then
-			table.insert(t, {
+	if Region.first < AssignResult.first then
+		if Region.isSpacer then
+			table.insert(List, {
 				isSpacer = true,
-				first = first.first,
-				last = var1.first - 1
+				first = Region.first,
+				last = AssignResult.first - 1
 			})
 		else
-			var1.first = first.first
+			AssignResult.first = Region.first
 		end
 	end
-	if var1.last < last.last then
-		if last.isSpacer then
-			table.insert(t_1, {
+	if AssignResult.last < Region1.last then
+		if Region1.isSpacer then
+			table.insert(List1, {
 				isSpacer = true,
-				first = var1.last + 1,
-				last = last.last
+				first = AssignResult.last + 1,
+				last = Region1.last
 			})
 		else
-			var1.last = last.last
+			AssignResult.last = Region1.last
 		end
 	end
-	array.splice(self._regions, first_1, last_1 - first_1 + 1, table.unpack(array.concat(t, { var1 }, t_1)))
+	Array.splice(self._regions, Region2, Region2_1 - Region2 + 1, table.unpack((Array.concat(List, { AssignResult }, List1))))
 end
 
-function t_1:equals(p1)
-	-- upvalues: array (ref)
-	return self._numCells == p1._numCells and (#self._regions == #p1._regions and array.every(self._regions, function(p2, p3)
-		-- upvalues: p1 (ref)
-		return p2.first == p1._regions[p3].first and (p2.last == p1._regions[p3].last and p2.isSpacer == p1._regions[p3].isSpacer)
-	end))
+function Module:equals(p1) --[[ Line: 95 ]]
+	-- upvalues: Array (copy)
+	return self._numCells == p1._numCells and #self._regions == #p1._regions and Array.every(self._regions, function(p2, p3): boolean --[[ Line: 98 ]]
+		-- upvalues: p1 (copy)
+		return p2.first == p1._regions[p3].first and p2.last == p1._regions[p3].last and p2.isSpacer == p1._regions[p3].isSpacer
+	end)
 end
 
-function t_1:_findRegion(p1)
-	-- upvalues: invariantModule (ref)
-	local var1 = 1
-	local regionsCount = #self._regions
-	while var1 <= regionsCount do
-		local floored = math.floor((var1 + regionsCount) / 2)
-		local var2 = self._regions[floored]
+function Module:_findRegion(First) --[[ Line: 105 ]]
+	-- upvalues: InvariantModule (copy)
+	local v1 = 1
+	local CountRegions = #self._regions
+	local Floored = nil
+	local Region = nil
+	while v1 <= CountRegions do
+		Floored = math.floor((v1 + CountRegions) / 2)
+		Region = self._regions[Floored]
 		
-		if var2.first > p1 or p1 > var2.last then
-			if p1 < var2.first then
-				regionsCount = floored - 1
-			elseif var2.last < p1 then
-				var1 = floored + 1
-			end
+		if Region.first <= First and First <= Region.last then
+			return Region, Floored
 		end
-		return var2, floored
+		if First < Region.first then
+			CountRegions = Floored - 1
+		elseif Region.last < First then
+			v1 = Floored + 1
+		end
 	end
-	invariantModule(false, string.format("A region was not found containing cellIdx %s", tostring(p1)))
+	InvariantModule(false, string.format("A region was not found containing cellIdx %s", (tostring(First))))
 	
 	return nil, nil
 end
 
-t.CellRenderMask = t_1
-
-return t
+return { CellRenderMask = Module }

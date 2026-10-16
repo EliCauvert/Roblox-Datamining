@@ -4,39 +4,39 @@ local PATCHModule = require(script.Parent.PATCH)
 local DELETEModule = require(script.Parent.DELETE)
 local _ = require(script.Parent.Types)
 
-return function(p1)
-	-- upvalues: GETModule (ref), POSTModule (ref), PATCHModule (ref), DELETEModule (ref)
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: GETModule (copy), POSTModule (copy), PATCHModule (copy), DELETEModule (copy)
 	assert(p1, "Expected options to be passed into RoduxNetworking")
 	assert(p1.keyPath, "Expected options.keyPath to be passed into RoduxNetworking")
 	assert(p1.networkImpl, "Expected options.networkImpl to be passed into RoduxNetworking")
 	
 	return {
-		GET = function(p2, p3)
-			-- upvalues: GETModule (copy), p1 (ref)
+		GET = function(p2, p3) --[[ Line: 14 ]]
+			-- upvalues: GETModule (upval), p1 (copy)
 			assert(p2, "RoduxNetworking:GET expects moduleScript argument")
 			assert(p2, "RoduxNetworking:GET expects constructBuilderFunction argument")
 			
 			return GETModule(p1)(p2, p3)
 		end,
-		POST = function(p2, p3)
-			-- upvalues: POSTModule (copy), p1 (ref)
+		POST = function(p2, p3) --[[ Line: 19 ]]
+			-- upvalues: POSTModule (upval), p1 (copy)
 			return POSTModule(p1)(p2, p3)
 		end,
-		PATCH = function(p2, p3)
-			-- upvalues: PATCHModule (copy), p1 (ref)
+		PATCH = function(p2, p3) --[[ Line: 22 ]]
+			-- upvalues: PATCHModule (upval), p1 (copy)
 			return PATCHModule(p1)(p2, p3)
 		end,
-		DELETE = function(p2, p3)
-			-- upvalues: DELETEModule (copy), p1 (ref)
+		DELETE = function(p2, p3) --[[ Line: 25 ]]
+			-- upvalues: DELETEModule (upval), p1 (copy)
 			return DELETEModule(p1)(p2, p3)
 		end,
-		getNetworkImpl = function()
-			-- upvalues: p1 (ref)
+		getNetworkImpl = function() --[[ Line: 28 ]]
+			-- upvalues: p1 (copy)
 			return p1.networkImpl
 		end,
-		setNetworkImpl = function(value)
-			-- upvalues: p1 (ref)
-			p1.networkImpl = value
+		setNetworkImpl = function(NetworkImpl) --[[ Line: 31 ]]
+			-- upvalues: p1 (copy)
+			p1.networkImpl = NetworkImpl
 		end
 	}
 end

@@ -1,5 +1,5 @@
-﻿local createBrickColorsFromIdsModule = require(script.Parent.createBrickColorsFromIds)
-local t = {
+﻿local CreateBrickColorsFromIdsModule = require(script.Parent.createBrickColorsFromIds)
+local config = {
 	MAIN = {
 		141, 301, 107, 26, 1012, 303, 1011, 304, 28, 1018, 302, 305, 306, 307, 308,
 		1021, 309, 310, 1019, 135, 102, 23, 1010, 312, 313, 37, 1022, 1020, 1027, 311,
@@ -17,6 +17,6 @@ local t = {
 }
 
 return {
-	MAIN = createBrickColorsFromIdsModule(t.MAIN),
-	BOTTOM = createBrickColorsFromIdsModule(t.BOTTOM)
+	MAIN = CreateBrickColorsFromIdsModule(config.MAIN),
+	BOTTOM = CreateBrickColorsFromIdsModule(config.BOTTOM)
 }

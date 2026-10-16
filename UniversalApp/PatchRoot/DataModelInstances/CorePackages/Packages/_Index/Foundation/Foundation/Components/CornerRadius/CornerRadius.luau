@@ -1,74 +1,78 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local getTestIdTagModule = require(foundation.Utility.getTestIdTag)
-local mapBindableModule = require(foundation.Utility.mapBindable)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
+local MapBindableModule = require(Foundation.Utility.mapBindable)
+local _ = require(Foundation.Components.Types)
 
-local function _(p1)
-	-- upvalues: mapBindableModule (ref)
-	return if p1 == nil then nil else mapBindableModule(p1, function(p2)
-		return if typeof(p2) == "number" then UDim.new(0, p2) else p2
+local function _(p1) --[[ Line: 16 | Named "toUDim" ]]
+	-- upvalues: MapBindableModule (copy)
+	return if p1 == nil then nil else MapBindableModule(p1, function(Offset) --[[ Line: 20 ]]
+		return if typeof(Offset) == "number" then UDim.new(0, Offset) else Offset
 	end)
 end
 
-local function getCornerRadius(p1)
-	-- upvalues: reactIsModule (ref), mapBindableModule (ref)
-	if reactIsModule.isBinding(p1) then
+local function getCornerRadius(Offset) --[[ Line: 28 ]]
+	-- upvalues: ReactIsModule (copy), MapBindableModule (copy)
+	if ReactIsModule.isBinding(Offset) then
 		return {
-			TopLeftRadius = p1,
-			TopRightRadius = p1,
-			BottomRightRadius = p1,
-			BottomLeftRadius = p1
+			TopLeftRadius = Offset,
+			TopRightRadius = Offset,
+			BottomRightRadius = Offset,
+			BottomLeftRadius = Offset
 		}
-	elseif typeof(p1) == "number" then
+	elseif typeof(Offset) == "number" then
 		return {
-			TopLeftRadius = UDim.new(0, p1),
-			TopRightRadius = UDim.new(0, p1),
-			BottomRightRadius = UDim.new(0, p1),
-			BottomLeftRadius = UDim.new(0, p1)
+			TopLeftRadius = UDim.new(0, Offset),
+			TopRightRadius = UDim.new(0, Offset),
+			BottomRightRadius = UDim.new(0, Offset),
+			BottomLeftRadius = UDim.new(0, Offset)
 		}
-	elseif typeof(p1) == "UDim" then
+	elseif typeof(Offset) == "UDim" then
 		return {
-			TopLeftRadius = p1,
-			TopRightRadius = p1,
-			BottomRightRadius = p1,
-			BottomLeftRadius = p1
+			TopLeftRadius = Offset,
+			TopRightRadius = Offset,
+			BottomRightRadius = Offset,
+			BottomLeftRadius = Offset
 		}
-	elseif typeof(p1) == "table" then
-		local t = {}
-		local topLeft = p1.topLeft
-		t.TopLeftRadius = if topLeft == nil then nil else mapBindableModule(topLeft, function(p2)
-			return if typeof(p2) == "number" then UDim.new(0, p2) else p2
+	elseif typeof(Offset) == "table" then
+		local TopLeft = Offset.topLeft
+		local MapBindableModuleResult = if TopLeft == nil then nil else MapBindableModule(TopLeft, function(Offset) --[[ Line: 20 ]]
+			return if typeof(Offset) == "number" then UDim.new(0, Offset) else Offset
 		end)
-		local topRight = p1.topRight
-		t.TopRightRadius = if topRight == nil then nil else mapBindableModule(topRight, function(p2)
-			return if typeof(p2) == "number" then UDim.new(0, p2) else p2
+		local TopRight = Offset.topRight
+		local MapBindableModuleResult1 = if TopRight == nil then nil else MapBindableModule(TopRight, function(Offset) --[[ Line: 20 ]]
+			return if typeof(Offset) == "number" then UDim.new(0, Offset) else Offset
 		end)
-		local bottomRight = p1.bottomRight
-		t.BottomRightRadius = if bottomRight == nil then nil else mapBindableModule(bottomRight, function(p2)
-			return if typeof(p2) == "number" then UDim.new(0, p2) else p2
+		local BottomRight = Offset.bottomRight
+		local MapBindableModuleResult2 = if BottomRight == nil then nil else MapBindableModule(BottomRight, function(Offset) --[[ Line: 20 ]]
+			return if typeof(Offset) == "number" then UDim.new(0, Offset) else Offset
 		end)
-		local bottomLeft = p1.bottomLeft
-		t.BottomLeftRadius = if bottomLeft == nil then nil else mapBindableModule(bottomLeft, function(p2)
-			return if typeof(p2) == "number" then UDim.new(0, p2) else p2
-		end)
+		local BottomLeft = Offset.bottomLeft
 		
-		return t
+		return {
+			TopLeftRadius = MapBindableModuleResult,
+			TopRightRadius = MapBindableModuleResult1,
+			BottomRightRadius = MapBindableModuleResult2,
+			BottomLeftRadius = if BottomLeft == nil then nil else MapBindableModule(BottomLeft, function(Offset) --[[ Line: 20 ]]
+				return if typeof(Offset) == "number" then UDim.new(0, Offset) else Offset
+			end)
+		}
+	else
+		return {}
 	end
-	return {}
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: getCornerRadius (ref), reactModule (ref), getTestIdTagModule (ref)
-	local var1 = getCornerRadius(p1.value)
+return ReactModule.memo(function(p1) --[[ Line: 73 | Named "CornerRadius" ]]
+	-- upvalues: getCornerRadius (copy), ReactModule (copy), GetTestIdTagModule (copy)
+	local CornerRadius = getCornerRadius(p1.value)
 	
-	return reactModule.createElement("UICorner", {
-		TopLeftRadius = var1.TopLeftRadius,
-		TopRightRadius = var1.TopRightRadius,
-		BottomRightRadius = var1.BottomRightRadius,
-		BottomLeftRadius = var1.BottomLeftRadius,
-		[reactModule.Tag] = getTestIdTagModule(p1.testId)
+	return ReactModule.createElement("UICorner", {
+		TopLeftRadius = CornerRadius.TopLeftRadius,
+		TopRightRadius = CornerRadius.TopRightRadius,
+		BottomRightRadius = CornerRadius.BottomRightRadius,
+		BottomLeftRadius = CornerRadius.BottomLeftRadius,
+		[ReactModule.Tag] = GetTestIdTagModule(p1.testId)
 	})
 end)

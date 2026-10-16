@@ -1,4 +1,4 @@
-﻿return table.freeze({
+﻿return (table.freeze({
 	VisibleRangeChanged = "VisibleRangeChanged",
 	MountedRangeChanged = "MountedRangeChanged",
 	DataPrefetchRequested = "DataPrefetchRequested",
@@ -6,4 +6,4 @@
 	ScrollPositionChanged = "ScrollPositionChanged",
 	DataSourceChanged = "DataSourceChanged",
 	Diagnostic = "Diagnostic"
-})
+}))

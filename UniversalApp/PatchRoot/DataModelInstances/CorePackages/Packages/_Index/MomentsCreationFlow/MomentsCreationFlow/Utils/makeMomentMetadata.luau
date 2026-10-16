@@ -1,13 +1,13 @@
-﻿local momentsCommonModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.MomentsCommon)
+﻿local MomentsCommonModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.MomentsCommon)
 
-return function(p1, p2, p3)
-	-- upvalues: momentsCommonModule (ref)
+return function(Sound, Description, Edits) --[[ Line: 9 | Named "makeMomentMetadata" ]]
+	-- upvalues: MomentsCommonModule (copy)
 	return {
-		assetTotalDuration = if p1.CaptureType == Enum.CaptureType.Screenshot then momentsCommonModule.Constants.ScreenshotMusicDuration else p1.TimeLength,
-		captureType = p1.CaptureType,
-		description = p2,
-		universeId = p1.SourceUniverseId,
-		placeId = p1.SourcePlaceId,
-		edits = p3
+		assetTotalDuration = if Sound.CaptureType == Enum.CaptureType.Screenshot then MomentsCommonModule.Constants.ScreenshotMusicDuration else Sound.TimeLength,
+		captureType = Sound.CaptureType,
+		description = Description,
+		universeId = Sound.SourceUniverseId,
+		placeId = Sound.SourcePlaceId,
+		edits = Edits
 	}
 end

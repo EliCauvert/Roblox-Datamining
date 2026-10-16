@@ -1,116 +1,119 @@
-﻿local map = require(script.Parent.Parent.Parent.LuauPolyfill).Map
-local t = {}
+﻿local Map = require(script.Parent.Parent.Parent.LuauPolyfill).Map
 
-local function defaultDispose() end
+local function defaultDispose() --[[ Line: 21 ]] end
 
-local t_1 = {}
-t_1.__index = t_1
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1, p2)
-	-- upvalues: defaultDispose (ref), t_1 (ref), map (ref)
-	local var1 = p1
-	local var2 = p2
+function Module.new(Max, Dispose) --[[ Line: 51 ]]
+	-- upvalues: defaultDispose (copy), Module (copy), Map (copy)
+	local Max1: number = Max
+	local Dispose1 = Dispose
 	
-	if var1 == nil then
-		var1 = 1e999
+	if Max1 == nil then
+		Max1 = 1e999
 	end
-	if var2 == nil then
-		var2 = defaultDispose
+	if Dispose1 == nil then
+		Dispose1 = defaultDispose
 	end
-	local tbl = setmetatable({}, t_1)
-	tbl.map = map.new(nil)
-	tbl.newest = nil
-	tbl.oldest = nil
-	tbl.max = var1
-	tbl.dispose = var2
+	local self = setmetatable({}, Module)
+	self.map = Map.new(nil)
+	self.newest = nil
+	self.oldest = nil
+	self.max = Max1
+	self.dispose = Dispose1
 	
-	return tbl
+	return self
 end
 
-function t_1:has(p1)
+function Module:has(p1) --[[ Line: 73 ]]
 	return self.map:has(p1)
 end
 
-function t_1:get(p1)
-	local var1 = self:getNode(p1)
+function Module:get(p1) --[[ Line: 77 ]]
+	local Node = self:getNode(p1)
 	
-	return var1 and var1.value
+	return if Node then Node.value else Node
 end
 
-function t_1:getNode(p1)
-	local var1 = self.map:get(p1)
+function Module:getNode(Key) --[[ Line: 87 ]]
+	local GetResult = self.map:get(Key)
 	
-	if var1 and var1 ~= self.newest then
-		local older = var1.older
-		local newer = var1.newer
+	if GetResult and GetResult ~= self.newest then
+		local Older = GetResult.older
+		local Newer = GetResult.newer
 		
-		if newer then
-			newer.older = older
+		if Newer then
+			Newer.older = Older
 		end
-		if older then
-			older.newer = newer
+		if Older then
+			Older.newer = Newer
 		end
-		var1.older = self.newest
-		var1.older.newer = var1
-		var1.newer = nil
-		self.newest = var1
+		GetResult.older = self.newest
+		GetResult.older.newer = GetResult
+		GetResult.newer = nil
+		self.newest = GetResult
 		
-		if var1 == self.oldest then
-			self.oldest = newer
+		if GetResult == self.oldest then
+			self.oldest = Newer
 		end
 	end
-	return var1
+	return GetResult
 end
 
-function t_1:set(p1, p2)
-	local var1 = self:getNode(p1)
+function Module:set(Key, Value) --[[ Line: 121 ]]
+	local Node = self:getNode(Key)
 	
-	if var1 then
-		var1.value = p2
+	if Node then
+		Node.value = Value
 		
-		return var1.value
+		return Node.value
 	end
-	local t = { newer = nil, key = p1, value = p2, older = self.newest }
+	local Newer = {
+		newer = nil,
+		key = Key,
+		value = Value,
+		older = self.newest
+	}
 	
 	if self.newest then
-		self.newest.newer = t
+		self.newest.newer = Newer
 	end
-	self.newest = t
-	self.oldest = self.oldest or t
-	self.map:set(p1, t)
+	self.newest = Newer
+	self.oldest = self.oldest or Newer
+	self.map:set(Key, Newer)
 	
-	return t.value
+	return Newer.value
 end
 
-function t_1:clean()
+function Module:clean() --[[ Line: 152 ]]
 	while self.oldest and self.max < self.map.size do
 		self:delete(self.oldest.key)
 	end
 end
 
-function t_1:delete(p1)
-	local var1 = self.map:get(p1)
+function Module:delete(Key): boolean --[[ Line: 160 ]]
+	local GetResult = self.map:get(Key)
 	
-	if not var1 then
+	if not GetResult then
 		return false
-	elseif var1 == self.newest then
-		self.newest = var1.older
 	end
-	if var1 == self.oldest then
-		self.oldest = var1.newer
+	if GetResult == self.newest then
+		self.newest = GetResult.older
 	end
-	if var1.newer then
-		var1.newer.older = var1.older
+	if GetResult == self.oldest then
+		self.oldest = GetResult.newer
 	end
-	if var1.older then
-		var1.older.newer = var1.newer
+	if GetResult.newer then
+		GetResult.newer.older = GetResult.older
 	end
-	self.map:delete(p1)
-	self.dispose(var1.value, p1)
+	if GetResult.older then
+		GetResult.older.newer = GetResult.newer
+	end
+	self.map:delete(Key)
+	self.dispose(GetResult.value, Key)
 	
 	return true
 end
 
-t.Cache = t_1
-
-return t
+return { Cache = Module }

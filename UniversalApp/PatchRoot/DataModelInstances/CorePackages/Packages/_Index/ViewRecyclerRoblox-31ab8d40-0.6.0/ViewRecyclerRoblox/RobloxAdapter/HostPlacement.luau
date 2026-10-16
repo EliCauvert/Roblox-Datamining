@@ -1,405 +1,402 @@
-﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
-local _ = require(viewRecyclerRoblox.Parent.ViewRecycler)
-local absolutePlacementModule = require(viewRecyclerRoblox.RobloxAdapter.AbsolutePlacement)
-local canvasItemPlacerModule = require(viewRecyclerRoblox.RobloxAdapter.CanvasItemPlacer)
-local hostMeasurementModule = require(viewRecyclerRoblox.RobloxAdapter.HostMeasurement)
-local hostPresentationPhaseModule = require(viewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
-local reparentableHostModule = require(viewRecyclerRoblox.RobloxAdapter.ReparentableHost)
-local stackPlacementModule = require(viewRecyclerRoblox.RobloxAdapter.StackPlacement)
-local t = {}
+﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
+local AbsolutePlacementModule = require(ViewRecyclerRoblox.RobloxAdapter.AbsolutePlacement)
+local CanvasItemPlacerModule = require(ViewRecyclerRoblox.RobloxAdapter.CanvasItemPlacer)
+local HostMeasurementModule = require(ViewRecyclerRoblox.RobloxAdapter.HostMeasurement)
+local HostPresentationPhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
+local ReparentableHostModule = require(ViewRecyclerRoblox.RobloxAdapter.ReparentableHost)
+local StackPlacementModule = require(ViewRecyclerRoblox.RobloxAdapter.StackPlacement)
 
-local function zero()
+local function zero(): number --[[ Line: 68 ]]
 	return 0
 end
 
-function t.new(p1)
-	-- upvalues: zero (ref), absolutePlacementModule (ref), hostMeasurementModule (ref), reparentableHostModule (ref), canvasItemPlacerModule (ref), stackPlacementModule (ref), hostPresentationPhaseModule (ref)
-	local t = {
-		container = p1.container,
-		viewportContainer = p1.viewportContainer,
-		axis = p1.axis,
-		selfSizing = p1.selfSizing,
-		stackedSpacing = p1.stackedSpacing
-	}
-	local t_1 = {}
-	local var1 = nil
-	local var2 = nil
-	local var3 = false
-	local var4 = 0
-	local var5 = false
-	local getCanvasOriginOffset = p1.getCanvasOriginOffset or zero
-	local var6 = absolutePlacementModule.new(t.axis, t.selfSizing, getCanvasOriginOffset)
-	
-	local function _()
-		-- upvalues: var1 (write), var3 (write)
-		if var1 ~= nil and not var3 then
-			var1.commit()
+return {
+	new = function(Configuration) --[[ Line: 72 ]]
+		-- upvalues: zero (copy), AbsolutePlacementModule (copy), HostMeasurementModule (copy), ReparentableHostModule (copy), CanvasItemPlacerModule (copy), StackPlacementModule (copy), HostPresentationPhaseModule (copy)
+		local Configuration1 = {
+			container = Configuration.container,
+			viewportContainer = Configuration.viewportContainer,
+			axis = Configuration.axis,
+			selfSizing = Configuration.selfSizing,
+			stackedSpacing = Configuration.stackedSpacing
+		}
+		local Tbl = {}
+		local v1 = nil
+		local MountedWindow = nil
+		local Flag = false
+		local Count = 0
+		local Flag1 = false
+		local GetCanvasOriginOffset = Configuration.getCanvasOriginOffset or zero
+		local NewAbsolutePlacement = AbsolutePlacementModule.new(Configuration1.axis, Configuration1.selfSizing, GetCanvasOriginOffset)
+		
+		local function _() --[[ Line: 89 | Named "commitStack" ]]
+			-- upvalues: v1 (ref), Flag (ref)
+			if v1 ~= nil and not Flag then
+				v1.commit()
+			end
 		end
-	end
-	
-	local var7 = hostMeasurementModule.new({
-		axis = t.axis,
-		isUnchanged = function()
-			-- upvalues: var1 (write), t_1 (ref)
-			local var8 = if var1 ~= nil then not var1.takeChanged() else true
-			
-			for i, v in t_1 do
-				local host = v.host
-				
-				if v.measuring and host ~= nil and (var1 == nil or not var1.isStacked(host)) then
-					local absoluteSize = host.AbsoluteSize
+		
+		local NewHostMeasurement = HostMeasurementModule.new({
+			axis = Configuration1.axis,
+			isUnchanged = function(): boolean --[[ Line: 97 ]]
+				-- upvalues: v1 (ref), Tbl (copy)
+				local v2 = v1
+				local Flag: boolean = v2 == nil or not v2.takeChanged()
+				for _, value in Tbl do
+					local Host = value.host
 					
-					if v.checkedSize ~= absoluteSize then
-						v.checkedSize = absoluteSize
-						var8 = false
+					if value.measuring and Host ~= nil and (v2 == nil or not v2.isStacked(Host)) then
+						local AbsoluteSize = Host.AbsoluteSize
+						
+						if value.checkedSize ~= AbsoluteSize then
+							value.checkedSize = AbsoluteSize
+							Flag = false
+						end
 					end
 				end
-			end
-			return var8
-		end,
-		onItemMeasurements = p1.onItemMeasurements
-	})
-	
-	local _ = function(p2, p3)
-		-- upvalues: var7 (ref)
-		p3.checkedSize = nil
+				return Flag
+			end,
+			onItemMeasurements = Configuration.onItemMeasurements
+		})
 		
-		if p3.measuring then
-			p3.measuring = false
-			var7.measure(p2, nil, nil)
-		end
-	end
-	
-	local function detachHost(p2, p3)
-		-- upvalues: var1 (write), reparentableHostModule (copy), canvasItemPlacerModule (copy), var6 (ref), var7 (ref)
-		local host = p3.host
-		
-		if host ~= nil then
-			if var1 ~= nil then
-				var1.remove(host)
-			end
-			reparentableHostModule.clearSelection(host)
-			canvasItemPlacerModule.detachForTransfer(host, p3.placerState)
-			var6.remove(host)
-			p3.host = nil
-		end
-		p3.checkedSize = nil
-		
-		if p3.measuring then
-			p3.measuring = false
-			var7.measure(p2, nil, nil)
-		end
-	end
-	
-	local _ = function(p2)
-		-- upvalues: t_1 (ref), canvasItemPlacerModule (copy), var4 (write)
-		local var9 = t_1[p2]
-		
-		if var9 == nil then
-			var9 = {
-				host = nil,
-				physicalState = nil,
-				presentedAssignment = nil,
-				measuring = false,
-				checkedSize = nil,
-				measurementDependencies = nil,
-				placerState = canvasItemPlacerModule.createState()
-			}
-			t_1[p2] = var9
-			var4 += 1
-		end
-		return var9
-	end
-	
-	local _ = function(p2, p3, p4)
-		-- upvalues: p1 (ref)
-		if p3.presentedAssignment == p4 then return end
-		p3.presentedAssignment = p4
-		local onItemViewPresentationChanged = p1.onItemViewPresentationChanged
-		
-		if onItemViewPresentationChanged ~= nil then
-			onItemViewPresentationChanged(p2, p4)
-		end
-	end
-	
-	local function applyPhysical(p2, p3)
-		-- upvalues: detachHost (ref), p1 (ref), t (write), var1 (write), stackPlacementModule (copy), var6 (ref), reparentableHostModule (copy), hostPresentationPhaseModule (copy), var7 (ref)
-		local physicalState = p3.physicalState
-		
-		if physicalState == nil then
-			detachHost(p2, p3)
+		local _ = function(p1, p2) --[[ Line: 119 | Named "stopMeasuring" ]]
+			-- upvalues: NewHostMeasurement (copy)
+			p2.checkedSize = nil
 			
-			if p3.presentedAssignment == nil then return end
-			p3.presentedAssignment = nil
-			local onItemViewPresentationChanged = p1.onItemViewPresentationChanged
-			
-			if onItemViewPresentationChanged ~= nil then
-				onItemViewPresentationChanged(p2, nil)
+			if p2.measuring then
+				p2.measuring = false
+				NewHostMeasurement.measure(p1, nil, nil)
 			end
-			return
-		else
-			local state = physicalState.state
-			local host = physicalState.host
+		end
+		
+		local function detachHost(p1, p2) --[[ Line: 127 ]]
+			-- upvalues: v1 (ref), ReparentableHostModule (upval), CanvasItemPlacerModule (upval), NewAbsolutePlacement (copy), NewHostMeasurement (copy)
+			local Host = p2.host
 			
-			if p3.host ~= nil and p3.host ~= host then
-				detachHost(p2, p3)
-			end
-			local var9 = state.viewportPlacement ~= nil and t.viewportContainer ~= nil
-			local var10 = if var9 then t.viewportContainer else t.container
-			
-			if var10 == nil then
-				detachHost(p2, p3)
-				
-				if p3.presentedAssignment == nil then return end
-				p3.presentedAssignment = nil
-				local onItemViewPresentationChanged = p1.onItemViewPresentationChanged
-				
-				if onItemViewPresentationChanged ~= nil then
-					onItemViewPresentationChanged(p2, nil)
+			if Host ~= nil then
+				if v1 ~= nil then
+					v1.remove(Host)
 				end
-				return
-			else
-				local var11
-				local _ = nil
-				
-				if var1 == nil or var9 or not stackPlacementModule.isPlacedFromLayoutOffsets(state) then
-					if var1 ~= nil then
-						var1.remove(host)
-					end
-					var11 = var6.place(host, p3.placerState, var10, state, not var9, physicalState.phase)
-				else
-					var11 = var1.place(host, p3.placerState, state, physicalState.phase)
-					var6.remove(host)
-				end
-				if not var11 then
-					reparentableHostModule.clearSelection(host)
-				end
-				p3.host = host
-				local var12 = physicalState.phase == hostPresentationPhaseModule.Presented
-				local selfSizing = var12 and (t.selfSizing or state.pinnedPosition ~= nil)
-				p3.measuring = selfSizing
-				var7.measure(p2, host, if selfSizing then state else nil, p3.measurementDependencies)
-				local var13 = if var12 then state.assignment else nil
-				
-				if p3.presentedAssignment == var13 then return end
-				p3.presentedAssignment = var13
-				local onItemViewPresentationChanged = p1.onItemViewPresentationChanged
-				
-				if onItemViewPresentationChanged ~= nil then
-					onItemViewPresentationChanged(p2, var13)
-				end
+				ReparentableHostModule.clearSelection(Host)
+				CanvasItemPlacerModule.detachForTransfer(Host, p2.placerState)
+				NewAbsolutePlacement.remove(Host)
+				p2.host = nil
+			end
+			p2.checkedSize = nil
+			
+			if p2.measuring then
+				p2.measuring = false
+				NewHostMeasurement.measure(p1, nil, nil)
 			end
 		end
-	end
-	
-	local function syncStack()
-		-- upvalues: t (write), var1 (write), t_1 (ref), detachHost (ref), stackPlacementModule (copy), var2 (write), getCanvasOriginOffset (ref)
-		local container = t.container
-		local stackedSpacing = t.stackedSpacing
-		local var9 = stackedSpacing ~= nil and container ~= nil
 		
-		if var1 ~= nil and var9 and var1.matches(container, t.axis, stackedSpacing, t.selfSizing) then return end
-		if var1 ~= nil then
-			for i, v in t_1 do
-				if v.host ~= nil and var1.isStacked(v.host) then
-					detachHost(i, v)
-				end
-			end
-			var1.destroy()
-			var1 = nil
-		end
-		if var9 then
-			local var10 = stackPlacementModule.new(container, t.axis, stackedSpacing, t.selfSizing)
+		local _ = function(Key) --[[ Line: 141 | Named "getEntry" ]]
+			-- upvalues: Tbl (copy), CanvasItemPlacerModule (upval), Count (ref)
+			local Entry = Tbl[Key]
 			
-			if var2 ~= nil then
-				var10.setWindow(var2, getCanvasOriginOffset())
-			end
-			var1 = var10
-		end
-	end
-	
-	local _ = function(p2, p3)
-		-- upvalues: t_1 (ref), var4 (write)
-		if p3.physicalState == nil and p3.measurementDependencies == nil and t_1[p2] == p3 then
-			t_1[p2] = nil
-			var4 -= 1
-		end
-	end
-	
-	syncStack()
-	
-	return {
-		apply = function(p2, p3)
-			-- upvalues: var5 (write), t_1 (ref), canvasItemPlacerModule (copy), var4 (write), applyPhysical (ref), var1 (write), var3 (write)
-			assert(not var5, "HostPlacement: cannot apply physical state after destroy")
-			local var11 = t_1[p2]
-			
-			if var11 == nil then
-				var11 = {
+			if Entry == nil then
+				Entry = {
 					host = nil,
 					physicalState = nil,
 					presentedAssignment = nil,
 					measuring = false,
 					checkedSize = nil,
 					measurementDependencies = nil,
-					placerState = canvasItemPlacerModule.createState()
+					placerState = CanvasItemPlacerModule.createState()
 				}
-				t_1[p2] = var11
-				var4 += 1
+				Tbl[Key] = Entry
+				Count += 1
 			end
-			var11.physicalState = p3
-			applyPhysical(p2, var11)
+			return Entry
+		end
+		
+		local _ = function(p1, p2, PresentedAssignment) --[[ Line: 159 | Named "reportPresentation" ]]
+			-- upvalues: Configuration (copy)
+			if p2.presentedAssignment == PresentedAssignment then return end
+			p2.presentedAssignment = PresentedAssignment
+			local OnItemViewPresentationChangedFunction: (any, any) -> () = Configuration.onItemViewPresentationChanged
 			
-			if var11.physicalState == nil and var11.measurementDependencies == nil and t_1[p2] == var11 then
-				t_1[p2] = nil
-				var4 -= 1
+			if OnItemViewPresentationChangedFunction ~= nil then
+				OnItemViewPresentationChangedFunction(p1, PresentedAssignment)
 			end
-			if var1 ~= nil and not var3 then
-				var1.commit()
-			end
-		end,
-		setMeasurementDependencies = function(value, p2)
-			-- upvalues: var5 (write), t_1 (ref), canvasItemPlacerModule (copy), var4 (write), applyPhysical (ref), var1 (write), var3 (write)
-			assert(not var5, "HostPlacement: cannot register Measurement dependencies after destroy")
-			local var11 = t_1[value]
+		end
+		
+		local function applyPhysical(Key, p1) --[[ Line: 170 ]]
+			-- upvalues: detachHost (copy), Configuration (copy), Configuration1 (ref), v1 (ref), StackPlacementModule (upval), NewAbsolutePlacement (copy), ReparentableHostModule (upval), HostPresentationPhaseModule (upval), NewHostMeasurement (copy)
+			local PhysicalState = p1.physicalState
 			
-			if var11 == nil and p2 == nil then return end
-			if var11 == nil then
-				local var12 = t_1[value]
+			if PhysicalState == nil then
+				detachHost(Key, p1)
 				
-				if var12 == nil then
-					var12 = {
+				if p1.presentedAssignment == nil then return end
+				p1.presentedAssignment = nil
+				local OnItemViewPresentationChangedFunction: (any, any) -> () = Configuration.onItemViewPresentationChanged
+				
+				if OnItemViewPresentationChangedFunction ~= nil then
+					OnItemViewPresentationChangedFunction(Key, nil)
+				end
+				return
+			else
+				local State = PhysicalState.state
+				local Host = PhysicalState.host
+				
+				if p1.host ~= nil and p1.host ~= Host then
+					detachHost(Key, p1)
+				end
+				local HasViewportContainer: boolean = State.viewportPlacement ~= nil and Configuration1.viewportContainer ~= nil
+				local ViewportContainer = if HasViewportContainer then Configuration1.viewportContainer else Configuration1.container
+				
+				if ViewportContainer == nil then
+					detachHost(Key, p1)
+					
+					if p1.presentedAssignment == nil then return end
+					p1.presentedAssignment = nil
+					local OnItemViewPresentationChangedFunction1: (any, any) -> () = Configuration.onItemViewPresentationChanged
+					
+					if OnItemViewPresentationChangedFunction1 ~= nil then
+						OnItemViewPresentationChangedFunction1(Key, nil)
+					end
+					return
+				else
+					local v3 = v1
+					local PlaceResult = nil
+					
+					if v3 == nil or HasViewportContainer or not StackPlacementModule.isPlacedFromLayoutOffsets(State) then
+						if v3 ~= nil then
+							v3.remove(Host)
+						end
+						PlaceResult = NewAbsolutePlacement.place(Host, p1.placerState, ViewportContainer, State, not HasViewportContainer, PhysicalState.phase)
+					else
+						PlaceResult = v3.place(Host, p1.placerState, State, PhysicalState.phase)
+						NewAbsolutePlacement.remove(Host)
+					end
+					if not PlaceResult then
+						ReparentableHostModule.clearSelection(Host)
+					end
+					p1.host = Host
+					local IsPhaseMatch = PhysicalState.phase == HostPresentationPhaseModule.Presented
+					local SelfSizing = IsPhaseMatch and (Configuration1.selfSizing or State.pinnedPosition ~= nil)
+					p1.measuring = SelfSizing
+					NewHostMeasurement.measure(Key, Host, if SelfSizing then State else nil, p1.measurementDependencies)
+					local Assignment = if IsPhaseMatch then State.assignment else nil
+					
+					if p1.presentedAssignment == Assignment then return end
+					p1.presentedAssignment = Assignment
+					local OnItemViewPresentationChangedFunction2: (any, any) -> () = Configuration.onItemViewPresentationChanged
+					
+					if OnItemViewPresentationChangedFunction2 ~= nil then
+						OnItemViewPresentationChangedFunction2(Key, Assignment)
+					end
+				end
+			end
+		end
+		
+		local function syncStack() --[[ Line: 214 ]]
+			-- upvalues: Configuration1 (ref), v1 (ref), Tbl (copy), detachHost (copy), StackPlacementModule (upval), MountedWindow (ref), GetCanvasOriginOffset (copy)
+			local Container = Configuration1.container
+			local StackedSpacing = Configuration1.stackedSpacing
+			local v3 = v1
+			local HasContainer: boolean = StackedSpacing ~= nil and Container ~= nil
+			
+			if v3 ~= nil and HasContainer and v3.matches(Container, Configuration1.axis, StackedSpacing, Configuration1.selfSizing) then return end
+			if v3 ~= nil then
+				for i, value in Tbl do
+					if value.host ~= nil and v3.isStacked(value.host) then
+						detachHost(i, value)
+					end
+				end
+				v3.destroy()
+				v1 = nil
+			end
+			if HasContainer then
+				local NewStackPlacement = StackPlacementModule.new(Container, Configuration1.axis, StackedSpacing, Configuration1.selfSizing)
+				
+				if MountedWindow ~= nil then
+					NewStackPlacement.setWindow(MountedWindow, GetCanvasOriginOffset())
+				end
+				v1 = NewStackPlacement
+			end
+		end
+		
+		local _ = function(Key, p1) --[[ Line: 249 | Named "releaseEntryIfVacant" ]]
+			-- upvalues: Tbl (copy), Count (ref)
+			if p1.physicalState == nil and p1.measurementDependencies == nil and Tbl[Key] == p1 then
+				Tbl[Key] = nil
+				Count -= 1
+			end
+		end
+		
+		syncStack()
+		
+		return {
+			apply = function(Key, PhysicalState) --[[ Line: 259 ]]
+				-- upvalues: Flag1 (ref), Tbl (copy), CanvasItemPlacerModule (upval), Count (ref), applyPhysical (copy), v1 (ref), Flag (ref)
+				assert(not Flag1, "HostPlacement: cannot apply physical state after destroy")
+				local Entry = Tbl[Key]
+				
+				if Entry == nil then
+					Entry = {
 						host = nil,
 						physicalState = nil,
 						presentedAssignment = nil,
 						measuring = false,
 						checkedSize = nil,
 						measurementDependencies = nil,
-						placerState = canvasItemPlacerModule.createState()
+						placerState = CanvasItemPlacerModule.createState()
 					}
-					t_1[value] = var12
-					var4 += 1
+					Tbl[Key] = Entry
+					Count += 1
 				end
-				var11 = var12
-			end
-			if var11.measurementDependencies == p2 then
-				local var13 = var11
+				Entry.physicalState = PhysicalState
+				applyPhysical(Key, Entry)
 				
-				if var13.physicalState == nil and var13.measurementDependencies == nil and t_1[value] == var13 then
-					t_1[value] = nil
-					var4 -= 1
+				if Entry.physicalState == nil and Entry.measurementDependencies == nil and Tbl[Key] == Entry then
+					Tbl[Key] = nil
+					Count -= 1
 				end
-				return
-			else
-				var11.measurementDependencies = p2
-				applyPhysical(value, var11)
+				if v1 ~= nil and not Flag then
+					v1.commit()
+				end
+			end,
+			setMeasurementDependencies = function(Key, MeasurementDependencies) --[[ Line: 267 ]]
+				-- upvalues: Flag1 (ref), Tbl (copy), CanvasItemPlacerModule (upval), Count (ref), applyPhysical (copy), v1 (ref), Flag (ref)
+				assert(not Flag1, "HostPlacement: cannot register Measurement dependencies after destroy")
+				local Entry = Tbl[Key]
 				
-				if var11.physicalState == nil and var11.measurementDependencies == nil and t_1[value] == var11 then
-					t_1[value] = nil
-					var4 -= 1
+				if Entry == nil and MeasurementDependencies == nil then return end
+				if Entry == nil then
+					local Entry1 = Tbl[Key]
+					
+					if Entry1 == nil then
+						Entry1 = {
+							host = nil,
+							physicalState = nil,
+							presentedAssignment = nil,
+							measuring = false,
+							checkedSize = nil,
+							measurementDependencies = nil,
+							placerState = CanvasItemPlacerModule.createState()
+						}
+						Tbl[Key] = Entry1
+						Count += 1
+					end
+					Entry = Entry1
 				end
-				if var1 ~= nil and not var3 then
-					var1.commit()
+				if Entry.measurementDependencies ~= MeasurementDependencies then
+					Entry.measurementDependencies = MeasurementDependencies
+					applyPhysical(Key, Entry)
+					
+					if Entry.physicalState == nil and Entry.measurementDependencies == nil and Tbl[Key] == Entry then
+						Tbl[Key] = nil
+						Count -= 1
+					end
+					if v1 ~= nil and not Flag then
+						v1.commit()
+					end
+					return
+				elseif Entry.physicalState == nil and Entry.measurementDependencies == nil and Tbl[Key] == Entry then
+					Tbl[Key] = nil
+					Count -= 1
 				end
-			end
-		end,
-		setConfiguration = function(value)
-			-- upvalues: var5 (write), t (write), var7 (ref), var6 (ref), syncStack (ref), t_1 (ref), applyPhysical (ref), var1 (write), var3 (write)
-			if not var5 then
-				t = value
-				var7.setAxis(t.axis)
-				var6.setConfiguration(t.axis, t.selfSizing)
-				syncStack()
-				
-				for i, v in t_1 do
-					applyPhysical(i, v)
-				end
-				if var1 ~= nil and not var3 then
-					var1.commit()
-				end
-			end
-		end,
-		reposition = function()
-			-- upvalues: var5 (write), getCanvasOriginOffset (ref), var6 (ref), var1 (write)
-			if var5 then return end
-			local var11 = getCanvasOriginOffset()
-			var6.setOriginOffset(var11)
-			
-			if var1 ~= nil then
-				var1.setOriginOffset(var11)
-			end
-		end,
-		setMountedWindow = function(value, p2)
-			-- upvalues: var5 (write), var2 (write), var1 (write), getCanvasOriginOffset (ref), var3 (write), t_1 (ref), applyPhysical (ref)
-			if var5 then
-				p2()
-				
-				return
-			end
-			var2 = value
-			
-			if var1 == nil then
-				p2()
-				
-				return
-			end
-			var1.setWindow(value, getCanvasOriginOffset())
-			var3 = true
-			local ok, status = pcall(p2)
-			var3 = false
-			
-			if var1 == var1 then
-				local t = {}
-				
-				for i, v in var1.getStaleHosts() do
-					t[v] = true
-				end
-				for i_1, v_1 in t_1 do
-					if v_1.host ~= nil and t[v_1.host] then
-						applyPhysical(i_1, v_1)
+			end,
+			setConfiguration = function(Value) --[[ Line: 283 ]]
+				-- upvalues: Flag1 (ref), Configuration1 (ref), NewHostMeasurement (copy), NewAbsolutePlacement (copy), syncStack (copy), Tbl (copy), applyPhysical (copy), v1 (ref), Flag (ref)
+				if not Flag1 then
+					Configuration1 = Value
+					NewHostMeasurement.setAxis(Configuration1.axis)
+					NewAbsolutePlacement.setConfiguration(Configuration1.axis, Configuration1.selfSizing)
+					syncStack()
+					
+					for i, value in Tbl do
+						applyPhysical(i, value)
+					end
+					if v1 ~= nil and not Flag then
+						v1.commit()
 					end
 				end
-				var1.commit()
+			end,
+			reposition = function() --[[ Line: 295 ]]
+				-- upvalues: Flag1 (ref), GetCanvasOriginOffset (copy), NewAbsolutePlacement (copy), v1 (ref)
+				if Flag1 then return end
+				local CanvasOriginOffset = GetCanvasOriginOffset()
+				NewAbsolutePlacement.setOriginOffset(CanvasOriginOffset)
+				
+				if v1 ~= nil then
+					v1.setOriginOffset(CanvasOriginOffset)
+				end
+			end,
+			setMountedWindow = function(Value, Callback: () -> ()) --[[ Line: 305 ]]
+				-- upvalues: Flag1 (ref), MountedWindow (ref), v1 (ref), GetCanvasOriginOffset (copy), Flag (ref), Tbl (copy), applyPhysical (copy)
+				if Flag1 then
+					Callback()
+					
+					return
+				end
+				MountedWindow = Value
+				local v4 = v1
+				
+				if v4 == nil then
+					Callback()
+					
+					return
+				end
+				v4.setWindow(Value, GetCanvasOriginOffset())
+				Flag = true
+				local Success, Result = pcall(Callback)
+				Flag = false
+				
+				if v1 == v4 then
+					local t = {}
+					
+					for i, value in v4.getStaleHosts() do
+						t[value] = true
+					end
+					for i, value1 in Tbl do
+						if value1.host ~= nil and t[value1.host] then
+							applyPhysical(i, value1)
+						end
+					end
+					v4.commit()
+				end
+				if not Success then
+					error(Result, 0)
+				end
+			end,
+			cancelPendingMeasurements = function() --[[ Line: 336 ]]
+				-- upvalues: NewHostMeasurement (copy)
+				NewHostMeasurement.cancelPending()
+			end,
+			getTrackedItemViewCount = function() --[[ Line: 339 ]]
+				-- upvalues: Count (ref)
+				return Count
+			end,
+			isPrePaintPassConnected = function() --[[ Line: 342 ]]
+				-- upvalues: NewHostMeasurement (copy)
+				return NewHostMeasurement.isPassConnected()
+			end,
+			getPrePaintReadCount = function() --[[ Line: 345 ]]
+				-- upvalues: NewHostMeasurement (copy)
+				return NewHostMeasurement.getPassReadCount()
+			end,
+			destroy = function() --[[ Line: 348 ]]
+				-- upvalues: Flag1 (ref), NewHostMeasurement (copy), Tbl (copy), detachHost (copy), NewAbsolutePlacement (copy), v1 (ref), Count (ref)
+				if Flag1 then return end
+				Flag1 = true
+				NewHostMeasurement.destroy()
+				
+				for i, value in Tbl do
+					detachHost(i, value)
+				end
+				NewAbsolutePlacement.destroy()
+				
+				if v1 ~= nil then
+					v1.destroy()
+					v1 = nil
+				end
+				table.clear(Tbl)
+				Count = 0
 			end
-			if not ok then
-				error(status, 0)
-			end
-		end,
-		cancelPendingMeasurements = function()
-			-- upvalues: var7 (ref)
-			var7.cancelPending()
-		end,
-		getTrackedItemViewCount = function()
-			-- upvalues: var4 (write)
-			return var4
-		end,
-		isPrePaintPassConnected = function()
-			-- upvalues: var7 (ref)
-			return var7.isPassConnected()
-		end,
-		getPrePaintReadCount = function()
-			-- upvalues: var7 (ref)
-			return var7.getPassReadCount()
-		end,
-		destroy = function()
-			-- upvalues: var5 (write), var7 (ref), t_1 (ref), detachHost (ref), var6 (ref), var1 (write), var4 (write)
-			if var5 then return end
-			var5 = true
-			var7.destroy()
-			
-			for i, v in t_1 do
-				detachHost(i, v)
-			end
-			var6.destroy()
-			
-			if var1 ~= nil then
-				var1.destroy()
-				var1 = nil
-			end
-			table.clear(t_1)
-			var4 = 0
-		end
-	}
-end
-
-return t
+		}
+	end
+}

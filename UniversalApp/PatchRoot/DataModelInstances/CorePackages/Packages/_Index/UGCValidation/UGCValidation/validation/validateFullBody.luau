@@ -1,109 +1,110 @@
-﻿local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Constants)
-local constantsInterfaceModule = require(parent.ConstantsInterface)
-local _ = require(parent.util.Types)
-local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
-local validateWithSchemaModule = require(parent.util.validateWithSchema)
-local validateSingleInstanceModule = require(parent.validation.validateSingleInstance)
-local createDynamicHeadMeshPartSchemaModule = require(parent.util.createDynamicHeadMeshPartSchema)
-local createLimbsAndTorsoSchemaModule = require(parent.util.createLimbsAndTorsoSchema)
-local resetPhysicsDataModule = require(parent.util.resetPhysicsData)
-local parseContentIdsModule = require(parent.util.ParseContentIds)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local getFFlagDebugAllowHRDUploadOnBundleBackendModule = require(parent.flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
+﻿local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Constants)
+local ConstantsInterfaceModule = require(Parent.ConstantsInterface)
+local _ = require(Parent.util.Types)
+local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
+local ValidateWithSchemaModule = require(Parent.util.validateWithSchema)
+local ValidateSingleInstanceModule = require(Parent.validation.validateSingleInstance)
+local CreateDynamicHeadMeshPartSchemaModule = require(Parent.util.createDynamicHeadMeshPartSchema)
+local CreateLimbsAndTorsoSchemaModule = require(Parent.util.createLimbsAndTorsoSchema)
+local ResetPhysicsDataModule = require(Parent.util.resetPhysicsData)
+local ParseContentIdsModule = require(Parent.util.ParseContentIds)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local GetFFlagDebugAllowHRDUploadOnBundleBackendModule = require(Parent.flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
 
-local function _(p1, p2)
-	for i, v in p1 do
-		if v.Name == p2 then
-			return v
+local function _(List, Name) --[[ Line: 24 | Named "getInstance" ]]
+	for _, value in List do
+		if value.Name == Name then
+			return value
 		end
 	end
 	return nil
 end
 
-local function validateAllAssetsWithSchema(value, p3, p4)
-	-- upvalues: validateSingleInstanceModule (ref), validateWithSchemaModule (ref), createDynamicHeadMeshPartSchemaModule (ref), createLimbsAndTorsoSchemaModule (ref)
-	for i, v in value do
-		if Enum.AssetType.DynamicHead == v.assetTypeEnum then
-			if validateSingleInstanceModule(v.allSelectedInstances, p4) then
-				if not validateWithSchemaModule(createDynamicHeadMeshPartSchemaModule(p4), v.allSelectedInstances[1], p4).success then
+local function validateAllAssetsWithSchema(List, List1, p1): boolean --[[ Line: 35 ]]
+	-- upvalues: ValidateSingleInstanceModule (copy), ValidateWithSchemaModule (copy), CreateDynamicHeadMeshPartSchemaModule (copy), CreateLimbsAndTorsoSchemaModule (copy)
+	local v1 = nil
+	for _, value in List do
+		if Enum.AssetType.DynamicHead ~= value.assetTypeEnum then
+			for _, value1 in List1 do
+				v1 = nil
+				
+				for _, allSelectedInstance in value.allSelectedInstances do
+					if allSelectedInstance.Name == value1 then
+						v1 = allSelectedInstance
+						break
+					end
+				end
+				if not v1 then
+					return false
+				elseif not ValidateWithSchemaModule(CreateLimbsAndTorsoSchemaModule(value.assetTypeEnum, value1, p1), v1, p1).success then
 					return false
 				end
 			end
-			return false
-		else
-			for i_1, v_1 in p3 do
-				local var1
-				for i_2, v_2 in v.allSelectedInstances do
-					if v_2.Name == v_1 then
-						var1 = v_2
-						if var1 then
-							if not validateWithSchemaModule(createLimbsAndTorsoSchemaModule(v.assetTypeEnum, v_1, p4), var1, p4).success then
-								return false
-							end
-						end
-						return false
-					end
-				end
-				var1 = nil
+		elseif ValidateSingleInstanceModule(value.allSelectedInstances, p1) then
+			if not ValidateWithSchemaModule(CreateDynamicHeadMeshPartSchemaModule(p1), value.allSelectedInstances[1], p1).success then
+				return false
 			end
+		else
+			return false
 		end
 	end
 	return true
 end
 
-local function validateCorrectAssetTypesExist(value)
-	-- upvalues: constantsInterfaceModule (ref)
+local function validateCorrectAssetTypesExist(List): boolean --[[ Line: 74 ]]
+	-- upvalues: ConstantsInterfaceModule (copy)
 	local t = {}
-	local count = #constantsInterfaceModule.getBodyPartAssets()
-	local var2 = 0
+	local Count = #ConstantsInterfaceModule.getBodyPartAssets()
+	local Count1 = 0
 	
-	for i, v in value do
-		if constantsInterfaceModule.isBodyPart(v.assetTypeEnum) then
-			if not t[v.assetTypeEnum] then
-				t[v.assetTypeEnum] = true
-				var2 += 1
-				continue
-			end
+	for _, value in List do
+		if not ConstantsInterfaceModule.isBodyPart(value.assetTypeEnum) then
 			return false
 		end
-		return false
+		if t[value.assetTypeEnum] then
+			return false
+		end
+		t[value.assetTypeEnum] = true
+		Count1 += 1
 	end
-	return var2 == count
+	return Count1 == Count
 end
 
-local function createAllBodyPartsTable(p5, p6)
-	local t = {}
+local function createAllBodyPartsTable(Name, FullBodyData) --[[ Line: 92 ]]
+	local AllSelectedInstances = {}
+	local Object = nil
 	
-	for i, v in p6 do
-		if Enum.AssetType.DynamicHead == v.assetTypeEnum then
-			t[v.allSelectedInstances[1].Name] = v.allSelectedInstances[1]
+	for _, value in FullBodyData do
+		if Enum.AssetType.DynamicHead == value.assetTypeEnum then
+			AllSelectedInstances[value.allSelectedInstances[1].Name] = value.allSelectedInstances[1]
 			continue
 		end
-		local var3
-		for i_1, v_1 in v.allSelectedInstances do
-			if v_1.Name == p5 then
-				var3 = v_1
-				for i_2, i_1 in var3:GetChildren() do
-					t[i_1.Name] = i_1
-				end
+		Object = nil
+		
+		for _, allSelectedInstance in value.allSelectedInstances do
+			if allSelectedInstance.Name == Name then
+				Object = allSelectedInstance
+				break
 			end
 		end
-		var3 = nil
+		for _, child in Object:GetChildren() do
+			AllSelectedInstances[child.Name] = child
+		end
 	end
-	return t
+	return AllSelectedInstances
 end
 
-local function validateMeshIds(p7, p8)
-	-- upvalues: parseContentIdsModule (ref), analyticsModule (ref)
-	local t = { MeshPart = { "MeshId" } }
-	local t_1 = { MeshPart = { MeshId = true } }
+local function validateMeshIds(List, p2) --[[ Line: 107 ]]
+	-- upvalues: ParseContentIdsModule (copy), AnalyticsModule (copy)
+	local config = { MeshPart = { "MeshId" } }
+	local config1 = { MeshPart = { MeshId = true } }
 	
-	for i, v in p7 do
-		for i_1, v_1 in v.allSelectedInstances do
-			if not parseContentIdsModule.parseWithErrorCheck({}, {}, v_1, t, t_1, p8) then
-				analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_MeshIdsMissing, nil, p8)
+	for _, value in List do
+		for _, allSelectedInstance in value.allSelectedInstances do
+			if not ParseContentIdsModule.parseWithErrorCheck({}, {}, allSelectedInstance, config, config1, p2) then
+				AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateFullBody_MeshIdsMissing, nil, p2)
 				
 				return false, {
 					"Unable to run full body validation due to previous errors detected while processing individual body parts"
@@ -114,83 +115,89 @@ local function validateMeshIds(p7, p8)
 	return true
 end
 
-local function validateInstanceHierarchy(p9, p10, p11)
-	-- upvalues: validateCorrectAssetTypesExist (ref), analyticsModule (ref), validateAllAssetsWithSchema (ref), validateMeshIds (ref)
-	local var4 = if p11 then p11.isServer else nil
+local function validateInstanceHierarchy(FullBodyData, p3, p4) --[[ Line: 144 ]]
+	-- upvalues: validateCorrectAssetTypesExist (copy), AnalyticsModule (copy), validateAllAssetsWithSchema (copy), validateMeshIds (copy)
+	local IsServer = if p4 then p4.isServer else nil
 	
-	if validateCorrectAssetTypesExist(p9) then
-		if not validateAllAssetsWithSchema(p9, p10, p11) then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_InstancesMissing, nil, p11)
-			
-			return false, {
-				"Unable to run full body validation due to previous errors detected while processing individual body parts."
-			}
-		end
-		local var5, var6 = validateMeshIds(p9, p11)
+	if not validateCorrectAssetTypesExist(FullBodyData) then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateFullBody_IncorrectAssetTypeSet, nil, p4)
 		
-		if var5 then
-			return true
-		end
-		return false, var6
-	else
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateFullBody_IncorrectAssetTypeSet, nil, p11)
-		
-		if var4 then
+		if IsServer then
 			error("Full body check did not receive the correct set of body part Asset Types (i.e. Head, Torso, LeftArm, RightArm, LeftLeg, RightLeg). Make sure the body model is valid and try again.")
 		end
 		return false, {
 			"Full body check did not receive the correct set of body part Asset Types (i.e. Head, Torso, LeftArm, RightArm, LeftLeg, RightLeg). Make sure the body model is valid and try again."
 		}
+	elseif not validateAllAssetsWithSchema(FullBodyData, p3, p4) then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateFullBody_InstancesMissing, nil, p4)
+		
+		return false, {
+			"Unable to run full body validation due to previous errors detected while processing individual body parts."
+		}
+	else
+		local ValidateMeshIdsResult, ValidateMeshIdsResult2 = validateMeshIds(FullBodyData, p4)
+		
+		if ValidateMeshIdsResult then
+			return true
+		else
+			return false, ValidateMeshIdsResult2
+		end
 	end
 end
 
-local function resetAllPhysicsData(value)
-	-- upvalues: resetPhysicsDataModule (ref)
-	for i, v in value.fullBodyData do
-		local var4, var5 = resetPhysicsDataModule(v.allSelectedInstances, value)
+local function resetAllPhysicsData(p3) --[[ Line: 178 ]]
+	-- upvalues: ResetPhysicsDataModule (copy)
+	local ResetPhysicsDataModuleResult2 = nil
+	for _, value in p3.fullBodyData do
+		local ResetPhysicsDataModuleResult
+		ResetPhysicsDataModuleResult, ResetPhysicsDataModuleResult2 = ResetPhysicsDataModule(value.allSelectedInstances, p3)
 		
-		if not var4 then
-			return false, { var5 }
+		if not ResetPhysicsDataModuleResult then
+			return false, { ResetPhysicsDataModuleResult2 }
 		end
 	end
 	return true
 end
 
-return function(p9)
-	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), constantsModule (ref), validateInstanceHierarchy (ref), resetAllPhysicsData (ref), failureReasonsAccumulatorModule (ref), createAllBodyPartsTable (ref)
-	assert(p9.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBody")
-	local fullBodyData = p9.fullBodyData
-	local requireAllFolders = p9.requireAllFolders
+return function(p4) --[[ Line: 191 | Named "validateFullBody" ]]
+	-- upvalues: GetFFlagDebugAllowHRDUploadOnBundleBackendModule (copy), R15plusUtilsModule (copy), ConstantsModule (copy), validateInstanceHierarchy (copy), resetAllPhysicsData (copy), FailureReasonsAccumulatorModule (copy), createAllBodyPartsTable (copy)
+	assert(p4.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBody")
+	local FullBodyData = p4.fullBodyData
+	local RequireAllFolders = p4.requireAllFolders
 	
-	if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
-		r15plusUtilsModule.setIsBackendBundleUpload(p9.isBackendBundleUpload == true)
+	if GetFFlagDebugAllowHRDUploadOnBundleBackendModule() then
+		R15plusUtilsModule.setIsBackendBundleUpload(p4.isBackendBundleUpload == true)
 	end
-	local list = { constantsModule.FOLDER_NAMES.R15ArtistIntent }
+	local List = { ConstantsModule.FOLDER_NAMES.R15ArtistIntent }
 	
-	if requireAllFolders then
-		table.insert(list, constantsModule.FOLDER_NAMES.R15Fixed)
+	if RequireAllFolders then
+		table.insert(List, ConstantsModule.FOLDER_NAMES.R15Fixed)
 	end
-	local var6, var7 = validateInstanceHierarchy(fullBodyData, list, p9)
+	local ValidateInstanceHierarchyResult, ValidateInstanceHierarchyResult2 = validateInstanceHierarchy(FullBodyData, List, p4)
 	
-	if var6 then
-		local var8, var9 = resetAllPhysicsData(p9)
+	if ValidateInstanceHierarchyResult then
+		local ResetAllPhysicsDataResult, ResetAllPhysicsDataResult2 = resetAllPhysicsData(p4)
 		
-		if var8 then
-			local var10 = failureReasonsAccumulatorModule.new()
+		if ResetAllPhysicsDataResult then
+			local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 			
-			for i, v in list do
-				assert(createAllBodyPartsTable(v, fullBodyData))
+			for _, value in List do
+				assert((createAllBodyPartsTable(value, FullBodyData)))
 			end
-			if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
-				r15plusUtilsModule.setIsBackendBundleUpload(false)
+			if GetFFlagDebugAllowHRDUploadOnBundleBackendModule() then
+				R15plusUtilsModule.setIsBackendBundleUpload(false)
 			end
-			return var10:getFinalResults()
-		elseif getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
-			r15plusUtilsModule.setIsBackendBundleUpload(false)
+			return NewFailureReasonsAccumulator:getFinalResults()
+		else
+			if GetFFlagDebugAllowHRDUploadOnBundleBackendModule() then
+				R15plusUtilsModule.setIsBackendBundleUpload(false)
+			end
+			return false, ResetAllPhysicsDataResult2
 		end
-		return false, var9
-	elseif getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
-		r15plusUtilsModule.setIsBackendBundleUpload(false)
+	else
+		if GetFFlagDebugAllowHRDUploadOnBundleBackendModule() then
+			R15plusUtilsModule.setIsBackendBundleUpload(false)
+		end
+		return false, ValidateInstanceHierarchyResult2
 	end
-	return false, var7
 end

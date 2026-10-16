@@ -1,1 +1,1 @@
-﻿return require(script["Regexp.global"])
+﻿return (require(script["Regexp.global"]))

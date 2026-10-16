@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p1, p2)
-	local t = {}
+return function(List, Callback) --[[ Line: 16 | Named "filter" ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		if p2(v, i) then
-			table.insert(t, v)
+	for i, value in List do
+		if Callback(value, i) then
+			table.insert(List1, value)
 		end
 	end
-	return t
+	return List1
 end

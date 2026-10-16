@@ -1,14 +1,14 @@
-﻿local guiService = require(script:FindFirstAncestor("Foundation").Utility.Wrappers).Services.GuiService
+﻿local GuiService = require(script:FindFirstAncestor("Foundation").Utility.Wrappers).Services.GuiService
 
-return function()
-	-- upvalues: guiService (ref)
-	local deviceSafeInsetsInsetArea = guiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
-	local noneInsetArea = guiService:GetInsetArea(Enum.ScreenInsets.None)
+return function() --[[ Line: 9 | Named "getHardwareSafeAreaInsets" ]]
+	-- upvalues: GuiService (copy)
+	local InsetArea = GuiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets)
+	local InsetArea1 = GuiService:GetInsetArea(Enum.ScreenInsets.None)
 	
 	return {
-		left = deviceSafeInsetsInsetArea.Min.X - noneInsetArea.Min.X,
-		top = deviceSafeInsetsInsetArea.Min.Y - noneInsetArea.Min.Y,
-		right = noneInsetArea.Max.X - deviceSafeInsetsInsetArea.Max.X,
-		bottom = noneInsetArea.Max.Y - deviceSafeInsetsInsetArea.Max.Y
+		left = InsetArea.Min.X - InsetArea1.Min.X,
+		top = InsetArea.Min.Y - InsetArea1.Min.Y,
+		right = InsetArea1.Max.X - InsetArea.Max.X,
+		bottom = InsetArea1.Max.Y - InsetArea.Max.Y
 	}
 end

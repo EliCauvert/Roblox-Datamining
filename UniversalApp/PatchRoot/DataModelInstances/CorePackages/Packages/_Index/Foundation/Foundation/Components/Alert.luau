@@ -1,1 +1,1 @@
-﻿return require(script.Alert)
+﻿return (require(script.Alert))

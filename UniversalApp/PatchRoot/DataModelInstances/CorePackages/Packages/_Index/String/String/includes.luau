@@ -1,27 +1,29 @@
-﻿local text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
+﻿local Text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
 
-return function(p1, p2, p3)
-	-- upvalues: text (ref)
-	local charCount, charCount_1 = utf8.len(p1)
-	assert(charCount ~= nil, ("string `%s` has an invalid byte at position %s"):format(p1, tostring(charCount_1)))
+return function(Text1: string, Text2: string, p1): boolean --[[ Line: 20 | Named "includes" ]]
+	-- upvalues: Text (copy)
+	local Length, Length2 = utf8.len(Text1)
+	assert(Length ~= nil, ("string `%s` has an invalid byte at position %s"):format(Text1, (tostring(Length2))))
 	
-	if charCount == 0 then
+	if Length == 0 then
 		return false
-	elseif #p2 == 0 then
+	end
+	if #Text2 == 0 then
 		return true
 	end
-	local var1 = 1
+	local Number = 1
 	
-	if p3 ~= nil then
-		var1 = tonumber(p3) or 1
+	if p1 ~= nil then
+		Number = tonumber(p1) or 1
 		
-		if charCount < var1 then
+		if Length < Number then
 			return false
-		elseif var1 < 1 then
-			var1 = 1
 		end
-		local matchIndex, _ = string.find(p1, p2:gsub(text, "%%%1"), utf8.offset(p1, var1))
-		
-		return matchIndex ~= nil
 	end
+	if Number < 1 then
+		Number = 1
+	end
+	local StartIndex, _ = string.find(Text1, Text2:gsub(Text, "%%%1"), (utf8.offset(Text1, Number)))
+	
+	return StartIndex ~= nil
 end

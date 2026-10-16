@@ -1,34 +1,36 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local fetchAllDesiredDataModule = require(parent.validationSystem.dataFetchModules.FetchAllDesiredData)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local FetchAllDesiredDataModule = require(Parent.validationSystem.dataFetchModules.FetchAllDesiredData)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: fetchAllDesiredDataModule (ref), errorSourceStringsModule (ref)
-		local curveAnimations = p2.curveAnimations
+	run = function(p1, p2) --[[ Line: 15 ]]
+		-- upvalues: FetchAllDesiredDataModule (copy), ErrorSourceStringsModule (copy)
+		local CurveAnimations = p2.curveAnimations
 		
-		if not curveAnimations or curveAnimations == fetchAllDesiredDataModule.DATA_FETCH_FAILURE then
-			p1:fail(errorSourceStringsModule.Keys.CurveAnim_FetchFailed)
-			
-			return
-		elseif #curveAnimations == 0 then
-			p1:fail(errorSourceStringsModule.Keys.CurveAnim_NotCurveAnimation)
+		if not CurveAnimations or CurveAnimations == FetchAllDesiredDataModule.DATA_FETCH_FAILURE then
+			p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_FetchFailed)
 			
 			return
 		end
-		local curveAnimComputedFrames = p2.curveAnimComputedFrames
-		
-		if curveAnimComputedFrames and curveAnimComputedFrames ~= fetchAllDesiredDataModule.DATA_FETCH_FAILURE then
+		if #CurveAnimations == 0 then
+			p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_NotCurveAnimation)
+			
 			return
 		end
-		p1:fail(errorSourceStringsModule.Keys.CurveAnim_FetchFailed)
+		local CurveAnimComputedFrames = p2.curveAnimComputedFrames
+		
+		if not CurveAnimComputedFrames or CurveAnimComputedFrames == FetchAllDesiredDataModule.DATA_FETCH_FAILURE then
+			p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_FetchFailed)
+			
+			return
+		end
 	end
 }

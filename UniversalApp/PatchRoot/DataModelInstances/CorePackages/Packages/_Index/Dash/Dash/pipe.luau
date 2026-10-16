@@ -1,18 +1,19 @@
-﻿return function(p1, ...)
-	local var1 = select("#", ...)
+﻿return function(Callback, ...) --[[ Line: 22 | Named "pipe" ]]
+	local Selected = select("#", ...)
 	
-	if var1 == 0 then
-		return p1
-	end
-	local list = { ... }
-	
-	return function(...)
-		-- upvalues: p1 (ref), var1 (ref), list (ref)
-		local list_1 = { p1(...) }
+	if Selected == 0 then
+		return Callback
+	else
+		local list = { ... }
 		
-		for i = 1, var1 do
-			list_1 = { list[i](unpack(list_1)) }
+		return function(...) --[[ Line: 28 ]]
+			-- upvalues: Callback (copy), Selected (copy), list (copy)
+			local list1 = { Callback(...) }
+			
+			for i = 1, Selected do
+				list1 = { list[i](unpack(list1)) }
+			end
+			return unpack(list1)
 		end
-		return unpack(list_1)
 	end
 end

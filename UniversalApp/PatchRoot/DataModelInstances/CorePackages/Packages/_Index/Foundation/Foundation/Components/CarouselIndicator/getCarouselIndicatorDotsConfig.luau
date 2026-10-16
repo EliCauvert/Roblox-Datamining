@@ -1,41 +1,43 @@
-﻿local function _(p1)
-	return math.max(p1 - 2, 1)
+﻿local function _(p1: number): number --[[ Line: 16 | Named "getOverflowWindowStart" ]]
+	return (math.max(p1 - 2, 1))
 end
 
-local function getDefaultDots(vectorA, vectorB, p1)
-	local t = {}
+local function getDefaultDots(ClampedValue, Smallest, Size) --[[ Line: 20 ]]
+	local List = {}
 	
-	for i = 1, vectorB do
-		table.insert(t, { isActive = i == vectorA, page = i, size = p1 })
+	for i = 1, Smallest do
+		local config = { isActive = i == ClampedValue }
+		config.page = i
+		config.size = Size
+		table.insert(List, config)
 	end
-	return t
+	return List
 end
 
-local function getOverflowDots(vectorA, vectorB, p2, p3, p4)
-	local t = {}
+local function getOverflowDots(ClampedValue: number, Largest: number, Largest1, p1, p2) --[[ Line: 34 ]]
+	local List = {}
 	
-	for i = p2, math.min(vectorA + 2, vectorB) do
-		table.insert(t, {
-			isActive = i == vectorA,
-			page = i,
-			size = if math.abs(i - vectorA) == 2 then p4 else p3
-		})
+	for i = Largest1, math.min(ClampedValue + 2, Largest) do
+		local config = { isActive = i == ClampedValue }
+		config.page = i
+		config.size = if math.abs(i - ClampedValue) == 2 then p2 else p1
+		table.insert(List, config)
 	end
-	return t
+	return List
 end
 
-return function(vectorA, vectorB, p5, p6)
-	-- upvalues: getOverflowDots (ref), getDefaultDots (ref)
-	local maxValue = math.max(math.floor(p6), 1)
-	local clampedValue = math.clamp(math.floor(p5), 1, maxValue)
-	local minValue = math.min(maxValue, 5)
-	local var1 = maxValue > 5
-	local var2 = if var1 then math.max(clampedValue - 2, 1) else 1
+return function(Size, p3, Value1: number, Value: number) --[[ Line: 55 | Named "getCarouselIndicatorDotsConfig" ]]
+	-- upvalues: getOverflowDots (copy), getDefaultDots (copy)
+	local Largest = math.max(math.floor(Value), 1)
+	local ClampedValue = math.clamp(math.floor(Value1), 1, Largest)
+	local Smallest = math.min(Largest, 5)
+	local IsLargestAbove = Largest > 5
+	local Largest1: number = if IsLargestAbove then math.max(ClampedValue - 2, 1) else 1
 	
 	return {
-		activeVisibleIndex = clampedValue - var2 + 1,
-		page = clampedValue,
-		dots = if var1 then getOverflowDots(clampedValue, maxValue, var2, vectorA, vectorB) else getDefaultDots(clampedValue, minValue, vectorA),
-		count = maxValue
+		activeVisibleIndex = ClampedValue - Largest1 + 1,
+		page = ClampedValue,
+		dots = if IsLargestAbove then getOverflowDots(ClampedValue, Largest, Largest1, Size, p3) else getDefaultDots(ClampedValue, Smallest, Size),
+		count = Largest
 	}
 end

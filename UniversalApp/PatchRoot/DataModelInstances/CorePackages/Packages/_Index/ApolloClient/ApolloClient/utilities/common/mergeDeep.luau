@@ -1,101 +1,101 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent
-local set = require(parent.Parent.LuauPolyfill).Set
-local var1 = newproxy(true)
+﻿local Parent = script.Parent.Parent.Parent
+local Set = require(Parent.Parent.LuauPolyfill).Set
+local Proxy = newproxy(true)
 
-getmetatable(var1).__tostring = function()
+getmetatable(Proxy).__tostring = function(): string --[[ Line: 23 ]]
 	return "Value.None"
 end
 
-local isNonNullObject = require(script.Parent.objects).isNonNullObject
-local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
-local objectKeysForEachModule = require(parent.luaUtils.objectKeysForEach)
-local var2 = nil
+local IsNonNullObjectFunction = require(script.Parent.objects).isNonNullObject
+local HasOwnPropertyModule = require(Parent.luaUtils.hasOwnProperty)
+local ObjectKeysForEachModule = require(Parent.luaUtils.objectKeysForEach)
+local Callback = nil
+local Module = {}
 
-function t.mergeDeep(...)
-	-- upvalues: var2 (write)
-	return var2({ ... })
-end
-
-local t_1 = {}
-
-function t.mergeDeepArray(p1)
-	-- upvalues: t_1 (ref)
-	local var3 = p1[1] or {}
-	local p0Count = #p1
+Callback = function(Entry) --[[ Line: 73 | Named "mergeDeepArray" ]]
+	-- upvalues: Module (copy)
+	local Entry1 = Entry[1] or {}
+	local CountEntry = #Entry
 	
-	if p0Count > 1 then
-		local var4 = t_1.new()
+	if CountEntry > 1 then
+		local NewModule = Module.new()
 		
-		for i = 2, p0Count do
-			var3 = var4:merge(var3, p1[i])
+		for i = 2, CountEntry do
+			Entry1 = NewModule:merge(Entry1, Entry[i])
 		end
 	end
-	return var3
+	return Entry1
 end
 
-t_1.__index = t_1
+Module.__index = Module
 
-function t_1.new(p2)
-	-- upvalues: t_1 (ref), isNonNullObject (ref), set (ref)
-	local tbl = setmetatable({}, t_1)
+function Module.new(Reconciler) --[[ Line: 107 ]]
+	-- upvalues: Module (copy), IsNonNullObjectFunction (copy), Set (copy)
+	local self = setmetatable({}, Module)
 	
-	local var5 = function(p3, p4, p5, p6)
-		return p3:merge(p4[p6], p5[p6])
+	local function v10(p1, p2, p3, p4) --[[ Line: 110 ]]
+		return p1:merge(p2[p4], p3[p4])
 	end
 	
-	if p2 == nil then
-		p2 = var5
+	if Reconciler == nil then
+		Reconciler = v10
 	end
-	tbl.reconciler = p2
-	tbl.isObject = isNonNullObject
-	tbl.pastCopies = set.new()
+	self.reconciler = Reconciler
+	self.isObject = IsNonNullObjectFunction
+	self.pastCopies = Set.new()
 	
-	return tbl
+	return self
 end
 
-function t_1.merge(p2, p3, p4, ...)
-	-- upvalues: isNonNullObject (ref), objectKeysForEachModule (ref), hasOwnPropertyModule (ref), var1 (ref)
-	local packed = table.pack(...)
+function Module.merge(p1, MergeResult, p2, ...) --[[ Line: 124 ]]
+	-- upvalues: IsNonNullObjectFunction (copy), ObjectKeysForEachModule (copy), HasOwnPropertyModule (copy), Proxy (copy)
+	local Packed = table.pack(...)
 	
-	if isNonNullObject(p4) and isNonNullObject(p3) then
-		objectKeysForEachModule(p4, function(p5)
-			-- upvalues: hasOwnPropertyModule (copy), p3 (write), p4 (ref), p2 (ref), packed (ref), var1 (copy)
-			if hasOwnPropertyModule(p3, p5) then
-				local var5 = p3[p5]
+	if IsNonNullObjectFunction(p2) and IsNonNullObjectFunction(MergeResult) then
+		ObjectKeysForEachModule(p2, function(Key) --[[ Line: 130 ]]
+			-- upvalues: HasOwnPropertyModule (upval), MergeResult (ref), p2 (copy), p1 (copy), Packed (copy), Proxy (upval)
+			if HasOwnPropertyModule(MergeResult, Key) then
+				local MergeResultEntry = MergeResult[Key]
 				
-				if p4[p5] ~= var5 then
-					local var6 = p2:reconciler(p3, p4, p5, table.unpack(packed))
+				if p2[Key] ~= MergeResultEntry then
+					local ReconcilerResult = p1:reconciler(MergeResult, p2, Key, table.unpack(Packed))
 					
-					if var6 ~= var5 then
-						p3 = p2:shallowCopyForMerge(p3)
-						p3[p5] = var6
+					if ReconcilerResult ~= MergeResultEntry then
+						MergeResult = p1:shallowCopyForMerge(MergeResult)
+						MergeResult[Key] = ReconcilerResult
 					end
 				end
 			else
-				p3 = p2:shallowCopyForMerge(p3)
-				p3[p5] = p4[p5]
+				MergeResult = p1:shallowCopyForMerge(MergeResult)
+				MergeResult[Key] = p2[Key]
 			end
-			if p3[p5] == var1 then
-				p3[p5] = nil
+			if MergeResult[Key] == Proxy then
+				MergeResult[Key] = nil
 			end
 		end)
 		
-		return p3
+		return MergeResult
+	else
+		return p2
 	end
-	return p4
 end
 
-function t_1:shallowCopyForMerge(p2)
-	-- upvalues: isNonNullObject (ref)
-	if isNonNullObject(p2) and not self.pastCopies:has(p2) then
-		p2 = table.clone(p2)
-		self.pastCopies:add(p2)
+function Module:shallowCopyForMerge(Tbl) --[[ Line: 163 ]]
+	-- upvalues: IsNonNullObjectFunction (copy)
+	if IsNonNullObjectFunction(Tbl) and not self.pastCopies:has(Tbl) then
+		Tbl = table.clone(Tbl)
+		self.pastCopies:add(Tbl)
 	end
-	return p2
+	return Tbl
 end
 
-t_1.None = var1
-t.DeepMerger = t_1
+Module.None = Proxy
 
-return t
+return {
+	mergeDeep = function(...) --[[ Line: 59 ]]
+		-- upvalues: Callback (ref)
+		return Callback({ ... })
+	end,
+	mergeDeepArray = Callback,
+	DeepMerger = Module
+}

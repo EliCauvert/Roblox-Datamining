@@ -1,1 +1,1 @@
-﻿return require(script.Tabs)
+﻿return (require(script.Tabs))

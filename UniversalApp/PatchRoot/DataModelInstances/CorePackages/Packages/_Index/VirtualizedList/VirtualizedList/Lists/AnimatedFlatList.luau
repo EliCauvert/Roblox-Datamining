@@ -1,28 +1,28 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local object = require(parent.LuauPolyfill).Object
-local flatListModule = require(script.Parent.FlatList)
-local useFocusNavigationScrolling = require(script.Parent.Hooks).useFocusNavigationScrolling
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local Object = require(Parent.LuauPolyfill).Object
+local FlatListModule = require(script.Parent.FlatList)
+local UseFocusNavigationScrollingFunction = require(script.Parent.Hooks).useFocusNavigationScrolling
 
-return function(p1)
-	-- upvalues: reactModule (ref), useFocusNavigationScrolling (ref), object (ref), flatListModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2, var3 = useFocusNavigationScrolling({
-		listRef = p1.listRef or var1,
-		onSelectedIndexChanged = p1.onSelectedIndexChanged,
-		initialIndex = p1.initialScrollIndex,
-		cellRendererKey = p1.cellRendererKey,
-		viewOffset = p1.viewOffset,
-		animated = p1.animated,
-		data = p1.data
+return function(Tbl) --[[ Line: 38 | Named "AnimatedFlatList" ]]
+	-- upvalues: ReactModule (copy), UseFocusNavigationScrollingFunction (copy), Object (copy), FlatListModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseFocusNavigationScrollingResult, UseFocusNavigationScrollingResult2 = UseFocusNavigationScrollingFunction({
+		listRef = Tbl.listRef or UseRefResult,
+		onSelectedIndexChanged = Tbl.onSelectedIndexChanged,
+		initialIndex = Tbl.initialScrollIndex,
+		cellRendererKey = Tbl.cellRendererKey,
+		viewOffset = Tbl.viewOffset,
+		animated = Tbl.animated,
+		data = Tbl.data
 	})
 	
-	return reactModule.createElement(flatListModule, object.assign(table.clone(p1), {
-		viewOffset = object.None,
-		animated = object.None,
-		onSelectedIndexChanged = object.None,
-		ref = p1.listRef or var1,
-		onScrollToIndexFailed = if p1.getItemLayout then nil else var3,
-		onSelectionChanged = var2
-	}))
+	return ReactModule.createElement(FlatListModule, (Object.assign(table.clone(Tbl), {
+		viewOffset = Object.None,
+		animated = Object.None,
+		onSelectedIndexChanged = Object.None,
+		ref = Tbl.listRef or UseRefResult,
+		onScrollToIndexFailed = if Tbl.getItemLayout then nil else UseFocusNavigationScrollingResult2,
+		onSelectionChanged = UseFocusNavigationScrollingResult
+	})))
 end

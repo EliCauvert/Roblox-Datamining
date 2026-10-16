@@ -1,1 +1,1 @@
-﻿return require(script.InputLabel)
+﻿return (require(script.InputLabel))

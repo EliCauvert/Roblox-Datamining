@@ -1,1 +1,1 @@
-﻿return require(script.Badge)
+﻿return (require(script.Badge))

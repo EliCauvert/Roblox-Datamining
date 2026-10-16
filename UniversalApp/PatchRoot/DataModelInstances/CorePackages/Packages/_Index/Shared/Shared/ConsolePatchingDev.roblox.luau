@@ -1,56 +1,56 @@
-﻿local reactGlobalsModule = require(script.Parent.Parent.ReactGlobals)
-local consoleModule = require(script.Parent.console)
-local var1 = 0
-local var2 = nil
-local var3 = nil
-local var4 = nil
-local var5 = nil
-local var6 = nil
-local var7 = nil
-local var8 = nil
+﻿local ReactGlobalsModule = require(script.Parent.Parent.ReactGlobals)
+local ConsoleModule = require(script.Parent.console)
+local Count = 0
+local Log = nil
+local Info = nil
+local Warn = nil
+local Error = nil
+local Group = nil
+local GroupCollapsed = nil
+local GroupEnd = nil
 
-local var9 = function() end
+local function DisabledLog() --[[ Line: 34 ]] end
 
 return {
-	disabledLog = var9,
-	disableLogs = function()
-		-- upvalues: reactGlobalsModule (ref), var1 (write), var2 (write), consoleModule (ref), var3 (write), var4 (write), var5 (write), var6 (write), var7 (write), var8 (write), var9 (ref)
-		if reactGlobalsModule.__DEV__ then
-			if var1 == 0 then
-				var2 = consoleModule.log
-				var3 = consoleModule.info
-				var4 = consoleModule.warn
-				var5 = consoleModule.error
-				var6 = consoleModule.group
-				var7 = consoleModule.groupCollapsed
-				var8 = consoleModule.groupEnd
-				consoleModule.info = var9
-				consoleModule.log = var9
-				consoleModule.warn = var9
-				consoleModule.error = var9
-				consoleModule.group = var9
-				consoleModule.groupCollapsed = var9
-				consoleModule.groupEnd = var9
+	disabledLog = DisabledLog,
+	disableLogs = function() --[[ Line: 43 ]]
+		-- upvalues: ReactGlobalsModule (copy), Count (ref), Log (ref), ConsoleModule (copy), Info (ref), Warn (ref), Error (ref), Group (ref), GroupCollapsed (ref), GroupEnd (ref), DisabledLog (copy)
+		if ReactGlobalsModule.__DEV__ then
+			if Count == 0 then
+				Log = ConsoleModule.log
+				Info = ConsoleModule.info
+				Warn = ConsoleModule.warn
+				Error = ConsoleModule.error
+				Group = ConsoleModule.group
+				GroupCollapsed = ConsoleModule.groupCollapsed
+				GroupEnd = ConsoleModule.groupEnd
+				ConsoleModule.info = DisabledLog
+				ConsoleModule.log = DisabledLog
+				ConsoleModule.warn = DisabledLog
+				ConsoleModule.error = DisabledLog
+				ConsoleModule.group = DisabledLog
+				ConsoleModule.groupCollapsed = DisabledLog
+				ConsoleModule.groupEnd = DisabledLog
 			end
-			var1 += 1
+			Count += 1
 		end
 	end,
-	reenableLogs = function()
-		-- upvalues: reactGlobalsModule (ref), var1 (write), consoleModule (ref), var2 (write), var3 (write), var4 (write), var5 (write), var6 (write), var7 (write), var8 (write)
-		if reactGlobalsModule.__DEV__ then
-			var1 -= 1
+	reenableLogs = function() --[[ Line: 67 ]]
+		-- upvalues: ReactGlobalsModule (copy), Count (ref), ConsoleModule (copy), Log (ref), Info (ref), Warn (ref), Error (ref), Group (ref), GroupCollapsed (ref), GroupEnd (ref)
+		if ReactGlobalsModule.__DEV__ then
+			Count -= 1
 			
-			if var1 == 0 then
-				consoleModule.log = var2
-				consoleModule.info = var3
-				consoleModule.warn = var4
-				consoleModule.error = var5
-				consoleModule.group = var6
-				consoleModule.groupCollapsed = var7
-				consoleModule.groupEnd = var8
+			if Count == 0 then
+				ConsoleModule.log = Log
+				ConsoleModule.info = Info
+				ConsoleModule.warn = Warn
+				ConsoleModule.error = Error
+				ConsoleModule.group = Group
+				ConsoleModule.groupCollapsed = GroupCollapsed
+				ConsoleModule.groupEnd = GroupEnd
 			end
-			if var1 < 0 then
-				consoleModule.error("disabledDepth fell below zero. This is a bug in React. Please file an issue.")
+			if Count < 0 then
+				ConsoleModule.error("disabledDepth fell below zero. This is a bug in React. Please file an issue.")
 			end
 		end
 	end

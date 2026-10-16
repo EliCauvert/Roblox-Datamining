@@ -1,52 +1,53 @@
-﻿local cryoModule = require(script:FindFirstAncestor("UsageTracker").Parent.Cryo)
-local isReactComponentModule = require(script.Parent.isReactComponent)
-local usageGraphModule = require(script.Parent.UsageGraph)
+﻿local CryoModule = require(script:FindFirstAncestor("UsageTracker").Parent.Cryo)
+local IsReactComponentModule = require(script.Parent.isReactComponent)
+local UsageGraphModule = require(script.Parent.UsageGraph)
 
-return function(p1, p2, p3)
-	-- upvalues: isReactComponentModule (ref), cryoModule (ref), usageGraphModule (ref)
+return function(p1, p2, p3) --[[ Line: 11 | Named "trackMemberAccess" ]]
+	-- upvalues: IsReactComponentModule (copy), CryoModule (copy), UsageGraphModule (copy)
+	local JoinResults = {}
 	local t = {}
-	local t_1 = {}
-	p3 = p3 or isReactComponentModule
+	local Callback = p3 or IsReactComponentModule
 	
-	local function wrap(p4, p5)
-		-- upvalues: p3 (ref), t (ref), t_1 (ref), wrap (ref), cryoModule (copy)
-		local t_2 = {}
-		local t_3 = {}
+	local function wrap(Text, List) --[[ Line: 17 ]]
+		-- upvalues: Callback (copy), JoinResults (copy), t (copy), wrap (copy), CryoModule (upval)
+		local t1 = {}
+		local t2 = {}
 		
-		for i, v in p5 do
+		for i, value in List do
 			if i ~= "__index" and typeof(i) == "string" then
-				local text = p4 .. "." .. i
+				local Text1 = Text .. "." .. i
 				
-				if p3(v) then
-					t[text] = {}
-					t_2[i] = v
-				elseif typeof(v) == "table" and not t_1[v] then
-					t_3[i] = wrap(text, v)
+				if Callback(value) then
+					JoinResults[Text1] = {}
+					t1[i] = value
+				elseif typeof(value) == "table" and not t[value] then
+					t2[i] = wrap(Text1, value)
 				else
-					t_3[i] = v
+					t2[i] = value
 				end
-				t_1[v] = true
+				t[value] = true
 			end
 		end
-		return setmetatable(t_3, {
-			__index = function(_, p6)
-				-- upvalues: t_2 (ref), t_3 (ref), p4 (ref), t (copy), cryoModule (copy)
-				local var1 = t_2[p6]
+		return (setmetatable(t2, {
+			__index = function(_, Text1) --[[ Line: 41 ]]
+				-- upvalues: t1 (copy), t2 (copy), Text (copy), JoinResults (upval), CryoModule (upval)
+				local Entry = t1[Text1]
 				
-				if var1 then
-					local text = p4 .. "." .. p5
-					local debugInfo, debugInfo_1 = debug.info(2, "sl")
-					t[text] = cryoModule.List.join(t[text], { { dmPath = debugInfo, lineNumber = debugInfo_1 } })
+				if Entry then
+					local Text2 = Text .. "." .. Text1
+					local DebugInfo, DebugInfo2 = debug.info(2, "sl")
+					JoinResults[Text2] = CryoModule.List.join(JoinResults[Text2], { { dmPath = DebugInfo, lineNumber = DebugInfo2 } })
 					
-					return var1
+					return Entry
+				else
+					return (rawget(t2, Text1))
 				end
-				return rawget(t_3, p6)
 			end
-		})
+		}))
 	end
 	
-	local var1 = wrap(p1, p2)
-	var1[usageGraphModule.UsageGraphKey] = t
+	local WrapResult = wrap(p1, p2)
+	WrapResult[UsageGraphModule.UsageGraphKey] = JoinResults
 	
-	return var1
+	return WrapResult
 end

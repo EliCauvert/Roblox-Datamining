@@ -1,37 +1,37 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function _(vectorA, vectorB, p1)
-	-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref)
-	if not UGCValidationService:ValidateEditableMeshTriangleArea(vectorB) then
-		vectorA:fail(errorSourceStringsModule.Keys.MeshGeometry_ZeroAreaTriangle, { meshName = p1 })
+local function _(p1, EditableMesh, MeshName) --[[ Line: 18 | Named "checkTriangleArea" ]]
+	-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy)
+	if not UGCValidationService:ValidateEditableMeshTriangleArea(EditableMesh) then
+		p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ZeroAreaTriangle, { meshName = MeshName })
 	end
 end
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	conditionalData = { validationEnumsModule.SharedDataMember.outerCagesData },
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
+	conditionalData = { ValidationEnumsModule.SharedDataMember.outerCagesData },
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref)
-		for i, v in p2.renderMeshesData do
-			if not UGCValidationService:ValidateEditableMeshTriangleArea(v.editable) then
-				p1:fail(errorSourceStringsModule.Keys.MeshGeometry_ZeroAreaTriangle, { meshName = i })
+	run = function(p1, p2) --[[ Line: 28 ]]
+		-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy)
+		for MeshName, value in p2.renderMeshesData do
+			if not UGCValidationService:ValidateEditableMeshTriangleArea(value.editable) then
+				p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ZeroAreaTriangle, { meshName = MeshName })
 			end
 		end
 		if p2.outerCagesData then
-			for i_1, v_1 in p2.outerCagesData do
-				local text = i_1 .. "OuterCage"
+			for i, value1 in p2.outerCagesData do
+				local Text = i .. "OuterCage"
 				
-				if not UGCValidationService:ValidateEditableMeshTriangleArea(v_1.editable) then
-					p1:fail(errorSourceStringsModule.Keys.MeshGeometry_ZeroAreaTriangle, { meshName = text })
+				if not UGCValidationService:ValidateEditableMeshTriangleArea(value1.editable) then
+					p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ZeroAreaTriangle, { meshName = Text })
 				end
 			end
 		end

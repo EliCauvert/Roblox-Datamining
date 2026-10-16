@@ -1,39 +1,39 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local image = foundationModule.Image
-local skeleton = foundationModule.Skeleton
-local getRbxThumb = foundationModule.Utility.getRbxThumb
-local useImageLoadingStateModule = require(momentsCommon.Hooks.useImageLoadingState)
-local musicThumbnailIconSizeModule = require(momentsCommon.Enums.MusicThumbnailIconSize)
-local t = {
-	[musicThumbnailIconSizeModule.Small] = 24,
-	[musicThumbnailIconSizeModule.Large] = 40
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Image = FoundationModule.Image
+local Skeleton = FoundationModule.Skeleton
+local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
+local UseImageLoadingStateModule = require(MomentsCommon.Hooks.useImageLoadingState)
+local MusicThumbnailIconSizeModule = require(MomentsCommon.Enums.MusicThumbnailIconSize)
+local config = {
+	[MusicThumbnailIconSizeModule.Small] = 24,
+	[MusicThumbnailIconSizeModule.Large] = 40
 }
-local t_1 = {
-	[musicThumbnailIconSizeModule.Small] = 2,
-	[musicThumbnailIconSizeModule.Large] = 4
+local config1 = {
+	[MusicThumbnailIconSizeModule.Small] = 2,
+	[MusicThumbnailIconSizeModule.Large] = 4
 }
 
-return function(p1)
-	-- upvalues: getRbxThumb (ref), foundationModule (ref), useImageLoadingStateModule (ref), t (ref), reactModule (ref), image (ref), t_1 (ref), skeleton (ref)
-	local var1 = getRbxThumb(foundationModule.Enums.ThumbnailType.Asset, p1.assetId)
-	local size = t[p1.size]
+return function(p1) --[[ Line: 31 ]]
+	-- upvalues: GetRbxThumbFunction (copy), FoundationModule (copy), UseImageLoadingStateModule (copy), config (copy), ReactModule (copy), Image (copy), config1 (copy), Skeleton (copy)
+	local RbxThumb = GetRbxThumbFunction(FoundationModule.Enums.ThumbnailType.Asset, p1.assetId)
+	local Entry = config[p1.size]
 	
-	return if useImageLoadingStateModule(var1) then reactModule.createElement(image, {
+	return if UseImageLoadingStateModule(RbxThumb) then ReactModule.createElement(Image, {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		cornerRadius = UDim.new(0, t_1[p1.size]),
-		Image = var1,
+		cornerRadius = UDim.new(0, config1[p1.size]),
+		Image = RbxThumb,
 		Position = UDim2.fromScale(0.5, 0.5),
 		ScaleType = Enum.ScaleType.Fit,
-		Size = UDim2.fromOffset(size, size)
-	}) else reactModule.createElement(skeleton, {
+		Size = UDim2.fromOffset(Entry, Entry)
+	}) else ReactModule.createElement(Skeleton, {
 		LayoutOrder = 1,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5),
-		Size = UDim2.fromOffset(size, size)
+		Size = UDim2.fromOffset(Entry, Entry)
 	})
 end

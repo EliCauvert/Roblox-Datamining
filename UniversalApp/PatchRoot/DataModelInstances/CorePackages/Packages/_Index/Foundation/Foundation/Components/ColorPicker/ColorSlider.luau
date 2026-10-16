@@ -1,114 +1,117 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Components.Types)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local imageModule = require(foundation.Components.Image)
-local knobModule = require(foundation.Components.Knob)
-local sliderModule = require(foundation.Components.Slider)
-local viewModule = require(foundation.Components.View)
-local colorSliderTypeModule = require(foundation.Enums.ColorSliderType)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local sliderVariantModule = require(foundation.Enums.SliderVariant)
-local visibilityModule = require(foundation.Enums.Visibility)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local colorSequence = ColorSequence.new({
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Components.Types)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local ImageModule = require(Foundation.Components.Image)
+local KnobModule = require(Foundation.Components.Knob)
+local SliderModule = require(Foundation.Components.Slider)
+local ViewModule = require(Foundation.Components.View)
+local ColorSliderTypeModule = require(Foundation.Enums.ColorSliderType)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local SliderVariantModule = require(Foundation.Enums.SliderVariant)
+local VisibilityModule = require(Foundation.Enums.Visibility)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local ColorSequence1 = ColorSequence.new({
 	ColorSequenceKeypoint.new(0, Color3.new(1, 0, 0)),
-	ColorSequenceKeypoint.new(0.166666666667, Color3.new(1, 1, 0)),
-	ColorSequenceKeypoint.new(0.333333333333, Color3.new(0, 1, 0)),
+	ColorSequenceKeypoint.new(0.16666666666666666, Color3.new(1, 1, 0)),
+	ColorSequenceKeypoint.new(0.3333333333333333, Color3.new(0, 1, 0)),
 	ColorSequenceKeypoint.new(0.5, Color3.new(0, 1, 1)),
-	ColorSequenceKeypoint.new(0.666666666667, Color3.new(0, 0, 1)),
-	ColorSequenceKeypoint.new(0.833333333333, Color3.new(1, 0, 1)),
+	ColorSequenceKeypoint.new(0.6666666666666666, Color3.new(0, 0, 1)),
+	ColorSequenceKeypoint.new(0.8333333333333334, Color3.new(1, 0, 1)),
 	ColorSequenceKeypoint.new(1, Color3.new(1, 0, 0))
 })
 
-local function createAlphaGradient(x)
+local function createAlphaGradient(p1): ColorSequence --[[ Line: 44 ]]
 	return ColorSequence.new({
-		ColorSequenceKeypoint.new(0, x),
-		ColorSequenceKeypoint.new(1, x)
+		ColorSequenceKeypoint.new(0, p1),
+		ColorSequenceKeypoint.new(1, p1)
 	})
 end
 
-local t = {
-	sliderType = colorSliderTypeModule.Hue,
-	baseColor = reactModule.createBinding(Color3.new(1, 1, 1))
+local config = {
+	sliderType = ColorSliderTypeModule.Hue,
+	baseColor = ReactModule.createBinding(Color3.new(1, 1, 1))
 }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), colorSliderTypeModule (ref), colorSequence (ref), createAlphaGradient (ref), reactModule (ref), sliderModule (ref), inputSizeModule (ref), sliderVariantModule (ref), visibilityModule (ref), knobModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local sliderType = var1.sliderType
-	local value = var1.value
-	local onValueChanged = var1.onValueChanged
-	local var3 = if sliderType == colorSliderTypeModule.Hue then colorSequence else var1.baseColor:map(createAlphaGradient)
-	local var4 = nil
-	local numberSequence = nil
+return function(p1) --[[ Line: 56 | Named "ColorSlider" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ColorSliderTypeModule (copy), ColorSequence1 (copy), createAlphaGradient (copy), ReactModule (copy), SliderModule (copy), InputSizeModule (copy), SliderVariantModule (copy), VisibilityModule (copy), KnobModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local SliderType = WithDefaultsModuleResult.sliderType
+	local Value = WithDefaultsModuleResult.value
+	local OnValueChanged = WithDefaultsModuleResult.onValueChanged
+	local ColorSequence2 = if SliderType == ColorSliderTypeModule.Hue then ColorSequence1 else WithDefaultsModuleResult.baseColor:map(createAlphaGradient)
+	local MapResult = nil
+	local NumberSequence1: NumberSequence? = nil
 	
-	if sliderType == colorSliderTypeModule.Hue then
-		var4 = value:map(function(p2)
-			return { Transparency = 0, Color3 = Color3.fromHSV(p2, 1, 1) }
+	if SliderType == ColorSliderTypeModule.Hue then
+		MapResult = Value:map(function(Hue) --[[ Line: 71 ]]
+			return { Transparency = 0, Color3 = Color3.fromHSV(Hue, 1, 1) }
 		end)
-	elseif sliderType == colorSliderTypeModule.Alpha then
-		numberSequence = NumberSequence.new({
+	elseif SliderType == ColorSliderTypeModule.Alpha then
+		NumberSequence1 = NumberSequence.new({
 			NumberSequenceKeypoint.new(0, 1),
 			NumberSequenceKeypoint.new(1, 0)
 		})
-		var4 = reactModule.joinBindings({ baseColor = var1.baseColor, value = value }):map(function(p2)
+		MapResult = ReactModule.joinBindings({
+			baseColor = WithDefaultsModuleResult.baseColor,
+			value = Value
+		}):map(function(p2) --[[ Line: 82 ]]
 			return { Color3 = p2.baseColor, Transparency = 1 - p2.value }
 		end)
 	end
-	local var5 = reactModule.createElement(sliderModule, {
+	local Element = ReactModule.createElement(SliderModule, {
 		isContained = true,
-		value = value,
-		onValueChanged = onValueChanged,
-		onDragStarted = var1.onDragStarted,
-		onDragEnded = var1.onDragEnded,
-		size = inputSizeModule.Medium,
-		variant = sliderVariantModule.Utility,
+		value = Value,
+		onValueChanged = OnValueChanged,
+		onDragStarted = WithDefaultsModuleResult.onDragStarted,
+		onDragEnded = WithDefaultsModuleResult.onDragEnded,
+		size = InputSizeModule.Medium,
+		variant = SliderVariantModule.Utility,
 		width = UDim.new(1, 0),
-		knobVisibility = visibilityModule.Always,
-		knob = reactModule.createElement(knobModule, {
+		knobVisibility = VisibilityModule.Always,
+		knob = ReactModule.createElement(KnobModule, {
 			hasShadow = true,
-			size = inputSizeModule.Small,
-			style = var4,
+			size = InputSizeModule.Small,
+			style = MapResult,
 			stroke = {
-				Color = var2.Color.System.Contrast.Color3,
-				Thickness = var2.Stroke.Thicker,
-				Transparency = var2.Color.System.Contrast.Transparency
+				Color = UseTokensModuleResult.Color.System.Contrast.Color3,
+				Thickness = UseTokensModuleResult.Stroke.Thicker,
+				Transparency = UseTokensModuleResult.Color.System.Contrast.Transparency
 			}
 		})
 	})
 	
-	return if sliderType == colorSliderTypeModule.Alpha then reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "size-full-300" }), {
-		Background = reactModule.createElement(viewModule, {
+	return if SliderType == ColorSliderTypeModule.Alpha then ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "size-full-300" }), {
+		Background = ReactModule.createElement(ViewModule, {
 			tag = "size-full stroke-standard stroke-emphasis radius-circle",
 			ClipsDescendants = true,
 			ZIndex = 1
 		}, {
-			Checkerboard = reactModule.createElement(imageModule, {
+			Checkerboard = ReactModule.createElement(ImageModule, {
 				Image = "component_assets/checkerboard_12",
 				tag = "size-full",
 				ZIndex = 1,
 				ScaleType = Enum.ScaleType.Tile,
-				TileSize = UDim2.fromOffset(var2.Size.Size_300, var2.Size.Size_300),
+				TileSize = UDim2.fromOffset(UseTokensModuleResult.Size.Size_300, UseTokensModuleResult.Size.Size_300),
 				cornerRadius = UDim.new(1, 0)
 			}),
-			GradientOverlay = reactModule.createElement(viewModule, {
+			GradientOverlay = ReactModule.createElement(ViewModule, {
 				tag = "size-full",
 				ZIndex = 2,
 				backgroundStyle = { Transparency = 0, Color3 = Color3.new(1, 1, 1) },
 				cornerRadius = UDim.new(1, 0)
 			}, {
-				Gradient = reactModule.createElement("UIGradient", { Color = var3, Transparency = numberSequence })
+				Gradient = ReactModule.createElement("UIGradient", { Color = ColorSequence2, Transparency = NumberSequence1 })
 			})
 		}),
-		SliderContainer = reactModule.createElement(viewModule, { tag = "row align-y-center size-full", ZIndex = 2 }, { Slider = var5 })
-	}) else reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		SliderContainer = ReactModule.createElement(ViewModule, { tag = "row align-y-center size-full", ZIndex = 2 }, { Slider = Element })
+	}) else ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = "row align-y-center size-full-300 stroke-standard stroke-emphasis radius-circle",
-		backgroundStyle = var2.Color.Extended.White.White_100
+		backgroundStyle = UseTokensModuleResult.Color.Extended.White.White_100
 	}), {
-		Gradient = reactModule.createElement("UIGradient", { Color = var3 }),
-		Slider = var5
+		Gradient = ReactModule.createElement("UIGradient", { Color = ColorSequence2 }),
+		Slider = Element
 	})
 end

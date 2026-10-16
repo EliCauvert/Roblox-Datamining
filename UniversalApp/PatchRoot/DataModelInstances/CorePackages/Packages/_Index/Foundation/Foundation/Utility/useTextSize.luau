@@ -1,50 +1,52 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactUtilsModule = require(parent.ReactUtils)
-local _ = require(foundation.Components.Types)
-local flagsModule = require(foundation.Utility.Flags)
-local getTextBoundsAsyncModule = require(foundation.Utility.getTextBoundsAsync)
-local normalizeFontFaceModule = require(foundation.Utility.normalizeFontFace)
-local usePreferencesModule = require(foundation.Providers.Preferences.usePreferences)
-local textService = require(foundation.Utility.Wrappers.Services).TextService
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
+local _ = require(Foundation.Components.Types)
+local FlagsModule = require(Foundation.Utility.Flags)
+local GetTextBoundsAsyncModule = require(Foundation.Utility.getTextBoundsAsync)
+local NormalizeFontFaceModule = require(Foundation.Utility.normalizeFontFace)
+local UsePreferencesModule = require(Foundation.Providers.Preferences.usePreferences)
+local TextService = require(Foundation.Utility.Wrappers.Services).TextService
 
-return function(value, p1, p2)
-	-- upvalues: flagsModule (ref), usePreferencesModule (ref), normalizeFontFaceModule (ref), reactUtilsModule (ref), getTextBoundsAsyncModule (ref), reactModule (ref), textService (ref)
-	if not flagsModule.FoundationFontFaceMigration then
-		local var1, var2 = reactModule.useState(nil)
-		reactModule.useEffect(function()
-			-- upvalues: value (ref), var2 (ref), textService (copy), p1 (ref), p2 (ref)
-			if value == nil then
-				var2(nil)
+return function(String, p1, p2) --[[ Line: 18 | Named "useTextSize" ]]
+	-- upvalues: FlagsModule (copy), UsePreferencesModule (copy), NormalizeFontFaceModule (copy), ReactUtilsModule (copy), GetTextBoundsAsyncModule (copy), ReactModule (copy), TextService (copy)
+	if FlagsModule.FoundationFontFaceMigration then
+		local PreferredTextSize = UsePreferencesModule().preferredTextSize
+		local NormalizeFontFaceModuleResult = NormalizeFontFaceModule(p1.Font)
+		local FontSize = p1.FontSize
+		local UseAsyncResult = ReactUtilsModule.useAsync(function() --[[ Line: 25 ]]
+			-- upvalues: String (copy), FontSize (copy), NormalizeFontFaceModuleResult (copy), GetTextBoundsAsyncModule (upval), p2 (copy)
+			return if String == nil or FontSize == nil or typeof(NormalizeFontFaceModuleResult) ~= "Font" then nil else GetTextBoundsAsyncModule(String, NormalizeFontFaceModuleResult, FontSize, if p2 then p2.X else nil)
+		end, {
+			String,
+			p1.Font,
+			FontSize,
+			p2,
+			PreferredTextSize
+		})
+		local UseRefResult = ReactModule.useRef(nil)
+		ReactModule.useEffect(function() --[[ Line: 42 ]]
+			-- upvalues: UseAsyncResult (copy), UseRefResult (copy)
+			if UseAsyncResult.status == "ok" then
+				UseRefResult.current = UseAsyncResult.value
+			end
+		end, { UseAsyncResult })
+		
+		return if UseAsyncResult.status == "ok" then UseAsyncResult.value else UseRefResult.current
+	else
+		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+		ReactModule.useEffect(function() --[[ Line: 54 ]]
+			-- upvalues: String (copy), UseStateResult2 (copy), TextService (upval), p1 (copy), p2 (copy)
+			if String == nil then
+				UseStateResult2(nil)
 				
 				return
+			else
+				UseStateResult2(TextService:GetTextSize(String, p1.FontSize, p1.Font, if p2 then p2 else Vector2.new(1e999, 1e999)))
 			end
-			var2(textService:GetTextSize(value, p1.FontSize, p1.Font, p2 or Vector2.new(1e999, 1e999)))
-		end, { value, p1, p2, usePreferencesModule().preferredTextSize })
+		end, { String, p1, p2, UsePreferencesModule().preferredTextSize })
 		
-		return var1
+		return UseStateResult
 	end
-	local preferredTextSize = usePreferencesModule().preferredTextSize
-	local var3 = normalizeFontFaceModule(p1.Font)
-	local fontSize = p1.FontSize
-	local var4 = reactUtilsModule.useAsync(function()
-		-- upvalues: value (ref), fontSize (ref), var3 (ref), getTextBoundsAsyncModule (copy), p2 (ref)
-		return if value == nil or fontSize == nil or typeof(var3) ~= "Font" then nil else getTextBoundsAsyncModule(value, var3, fontSize, if p2 then p2.X else nil)
-	end, {
-		value,
-		p1.Font,
-		fontSize,
-		p2,
-		preferredTextSize
-	})
-	local var5 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var5 (ref)
-		if var4.status == "ok" then
-			var5.current = var4.value
-		end
-	end, { var4 })
-	
-	return if var4.status == "ok" then var4.value else var5.current
 end

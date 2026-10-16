@@ -1,113 +1,112 @@
-﻿local parent = script.Parent
-local _ = require(parent.Types)
+﻿local Parent = script.Parent
+local _ = require(Parent.Types)
 
-local function _(p1)
-	-- upvalues: parent (ref)
-	require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw(p1)
+local function _(p1) --[[ Line: 4 | Named "throwNotImplemented" ]]
+	-- upvalues: Parent (copy)
+	require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw(p1)
 end
 
-local var1 = function()
+local function v3() --[[ Line: 13 ]]
 	return {}
 end
 
-local function class(p1, p2)
-	-- upvalues: var1 (ref), class (ref), parent (ref)
-	p2 = p2 or var1
-	local t = { name = p1 }
+local function class(ClassName, p1) --[[ Line: 49 ]]
+	-- upvalues: v3 (copy), class (copy), Parent (copy)
+	local Callback = p1 or v3
+	local Class = { name = ClassName }
 	
-	function t.new(...)
-		-- upvalues: p2 (ref), t (ref)
-		local var2 = p2(...)
-		setmetatable(var2, {
-			__index = t,
-			__tostring = t.toString,
-			__eq = t.equals,
-			__lt = t.__lt,
-			__le = t.__le,
-			__add = t.__add,
-			__sub = t.__sub,
-			__mul = t.__mul,
-			__div = t.__div,
-			__mod = t.__mod
+	function Class.new(...) --[[ Line: 65 ]]
+		-- upvalues: Callback (copy), Class (copy)
+		local CallbackResult = Callback(...)
+		setmetatable(CallbackResult, {
+			__index = Class,
+			__tostring = Class.toString,
+			__eq = Class.equals,
+			__lt = Class.__lt,
+			__le = Class.__le,
+			__add = Class.__add,
+			__sub = Class.__sub,
+			__mul = Class.__mul,
+			__div = Class.__div,
+			__mod = Class.__mod
 		})
-		var2.Class = t
-		var2:_init(...)
+		CallbackResult.Class = Class
+		CallbackResult:_init(...)
 		
-		return var2
+		return CallbackResult
 	end
 	
-	function t._init(_) end
+	function Class:_init() --[[ Line: 114 ]] end
 	
-	function t.isInstance(p3)
-		-- upvalues: t (ref)
-		local ok, status = pcall(function()
-			-- upvalues: p3 (ref), t (copy)
-			local var2 = getmetatable(p3)
-			while var2 do
-				if var2.__index ~= t then
-					var2 = getmetatable(var2.__index)
-					continue
+	function Class.isInstance(p2) --[[ Line: 133 ]]
+		-- upvalues: Class (copy)
+		local Success, Result = pcall(function(): boolean --[[ Line: 134 ]]
+			-- upvalues: p2 (copy), Class (upval)
+			local Meta = getmetatable(p2)
+			while Meta do
+				if Meta.__index == Class then
+					return true
 				end
-				return true
+				Meta = getmetatable(Meta.__index)
 			end
 			return false
 		end)
 		
-		return ok and status
+		return Success and Result
 	end
 	
-	function t.extend(p4, p5, p6)
-		-- upvalues: class (copy), t (ref)
-		local var2 = class(p5, p6 or t.new)
-		setmetatable(var2, { __index = p4 })
+	function Class.extend(p3, ClassName, p4) --[[ Line: 184 ]]
+		-- upvalues: class (upval), Class (copy)
+		local ClassResult = class(ClassName, p4 or Class.new)
+		setmetatable(ClassResult, { __index = p3 })
 		
-		return var2
+		return ClassResult
 	end
 	
-	function t.toString(p4)
-		return p4.name
+	function Class.toString(p3) --[[ Line: 222 ]]
+		return p3.name
 	end
 	
-	function t.equals(p4, p5)
-		return rawequal(p4, p5)
+	function Class.equals(p3, p4) --[[ Line: 230 ]]
+		return (rawequal(p3, p4))
 	end
 	
-	function t:__lt(_)
-		-- upvalues: p1 (ref), parent (copy)
-		require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__lt", className = p1 })
+	function Class:__lt(_) --[[ Line: 238 ]]
+		-- upvalues: ClassName (copy), Parent (upval)
+		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__lt", className = ClassName })
 	end
 	
-	function t:__le(_)
-		-- upvalues: p1 (ref), parent (copy)
-		require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__le", className = p1 })
+	function Class:__le(_) --[[ Line: 250 ]]
+		-- upvalues: ClassName (copy), Parent (upval)
+		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__le", className = ClassName })
 	end
 	
-	function t:__add()
-		-- upvalues: p1 (ref), parent (copy)
-		require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__add", className = p1 })
+	function Class:__add() --[[ Line: 257 ]]
+		-- upvalues: ClassName (copy), Parent (upval)
+		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__add", className = ClassName })
 	end
 	
-	function t:__sub()
-		-- upvalues: p1 (ref), parent (copy)
-		require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__sub", className = p1 })
+	function Class:__sub() --[[ Line: 263 ]]
+		-- upvalues: ClassName (copy), Parent (upval)
+		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__sub", className = ClassName })
 	end
 	
-	function t:__mul()
-		-- upvalues: p1 (ref), parent (copy)
-		require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__mul", className = p1 })
+	function Class:__mul() --[[ Line: 269 ]]
+		-- upvalues: ClassName (copy), Parent (upval)
+		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__mul", className = ClassName })
 	end
 	
-	function t:__div()
-		-- upvalues: p1 (ref), parent (copy)
-		require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__div", className = p1 })
+	function Class:__div() --[[ Line: 275 ]]
+		-- upvalues: ClassName (copy), Parent (upval)
+		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__div", className = ClassName })
 	end
 	
-	function t:__mod()
-		-- upvalues: p1 (ref), parent (copy)
-		require(parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__mod", className = p1 })
+	function Class:__mod() --[[ Line: 281 ]]
+		-- upvalues: ClassName (copy), Parent (upval)
+		require(Parent.Error).new("NotImplemented", "The method \"{methodName}\" is not implemented on the class \"{className}\""):throw({ methodName = "__mod", className = ClassName })
 	end
 	
-	return t
+	return Class
 end
 
 return class

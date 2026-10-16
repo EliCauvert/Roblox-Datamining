@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.Dash.Dash)
+﻿return (require(script.Parent._Index.Dash.Dash))

@@ -1,5 +1,5 @@
 ﻿return {
-	GetPropertyChangedSignal = function(value, p1)
-		return value:GetPropertyChangedSignal(p1)
+	GetPropertyChangedSignal = function(Object, PropertyName) --[[ Line: 2 ]]
+		return Object:GetPropertyChangedSignal(PropertyName)
 	end
 }

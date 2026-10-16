@@ -1,11 +1,11 @@
-﻿local byUserIdModule = require(script.Parent.Friends.byUserId)
-local countsByUserIdModule = require(script.Parent.Friends.countsByUserId)
-local requestsModule = require(script.Parent.Friends.requests)
-local recommendationsModule = require(script.Parent.Friends.recommendations)
-local friendshipStatusModule = require(script.Parent.Friends.friendshipStatus)
-local friendsRankByUserIdModule = require(script.Parent.Friends.friendsRankByUserId)
-local contactNamesByUserIdModule = require(script.Parent.Friends.contactNamesByUserId)
-local t = {
+﻿local ByUserIdModule = require(script.Parent.Friends.byUserId)
+local CountsByUserIdModule = require(script.Parent.Friends.countsByUserId)
+local RequestsModule = require(script.Parent.Friends.requests)
+local RecommendationsModule = require(script.Parent.Friends.recommendations)
+local FriendshipStatusModule = require(script.Parent.Friends.friendshipStatus)
+local FriendsRankByUserIdModule = require(script.Parent.Friends.friendsRankByUserId)
+local ContactNamesByUserIdModule = require(script.Parent.Friends.contactNamesByUserId)
+local config = {
 	countsByUserId = {},
 	byUserId = {},
 	requests = { receivedCount = 0 },
@@ -15,20 +15,20 @@ local t = {
 	contactNamesByUserId = {}
 }
 
-return function(p1)
-	-- upvalues: t (ref), byUserIdModule (ref), countsByUserIdModule (ref), requestsModule (ref), recommendationsModule (ref), friendshipStatusModule (ref), friendsRankByUserIdModule (ref), contactNamesByUserIdModule (ref)
-	return function(p2, p3)
-		-- upvalues: t (copy), byUserIdModule (copy), p1 (ref), countsByUserIdModule (copy), requestsModule (copy), recommendationsModule (copy), friendshipStatusModule (copy), friendsRankByUserIdModule (copy), contactNamesByUserIdModule (copy)
-		p2 = p2 or t
+return function(p1) --[[ Line: 21 ]]
+	-- upvalues: config (copy), ByUserIdModule (copy), CountsByUserIdModule (copy), RequestsModule (copy), RecommendationsModule (copy), FriendshipStatusModule (copy), FriendsRankByUserIdModule (copy), ContactNamesByUserIdModule (copy)
+	return function(p2, p3) --[[ Line: 22 ]]
+		-- upvalues: config (upval), ByUserIdModule (upval), p1 (copy), CountsByUserIdModule (upval), RequestsModule (upval), RecommendationsModule (upval), FriendshipStatusModule (upval), FriendsRankByUserIdModule (upval), ContactNamesByUserIdModule (upval)
+		local P1 = p2 or config
 		
 		return {
-			byUserId = byUserIdModule(p1)(p2.byUserId, p3),
-			countsByUserId = countsByUserIdModule(p1)(p2, p3),
-			requests = requestsModule(p1)(p2.requests, p3),
-			recommendations = recommendationsModule(p1)(p2.recommendations, p3),
-			friendshipStatus = friendshipStatusModule(p1)(p2.friendshipStatus, p3),
-			friendsRankByUserId = friendsRankByUserIdModule(p1)(p2.friendsRankByUserId, p3),
-			contactNamesByUserId = contactNamesByUserIdModule(p1)(p2.contactNamesByUserId, p3)
+			byUserId = ByUserIdModule(p1)(P1.byUserId, p3),
+			countsByUserId = CountsByUserIdModule(p1)(p2, p3),
+			requests = RequestsModule(p1)(P1.requests, p3),
+			recommendations = RecommendationsModule(p1)(P1.recommendations, p3),
+			friendshipStatus = FriendshipStatusModule(p1)(P1.friendshipStatus, p3),
+			friendsRankByUserId = FriendsRankByUserIdModule(p1)(P1.friendsRankByUserId, p3),
+			contactNamesByUserId = ContactNamesByUserIdModule(p1)(P1.contactNamesByUserId, p3)
 		}
 	end
 end

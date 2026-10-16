@@ -1,6 +1,6 @@
-﻿local floatEqualsModule = require(script.Parent.Parent.util.floatEquals)
+﻿local FloatEqualsModule = require(script.Parent.Parent.util.floatEquals)
 
-return function(p1)
-	-- upvalues: floatEqualsModule (ref)
-	return not floatEqualsModule(p1.X, 0) or (not floatEqualsModule(p1.Y, 0) or not floatEqualsModule(p1.Z, 0))
+return function(Vector): boolean --[[ Line: 9 | Named "canBeNormalized" ]]
+	-- upvalues: FloatEqualsModule (copy)
+	return not FloatEqualsModule(Vector.X, 0) or (not FloatEqualsModule(Vector.Y, 0) or not FloatEqualsModule(Vector.Z, 0))
 end

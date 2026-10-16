@@ -1,11 +1,11 @@
-﻿return function(p1, ...)
+﻿return function(List, ...) --[[ Line: 2 | Named "add" ]]
 	local t = {}
 	
-	for i, v in pairs(p1) do
+	for i, _ in pairs(List) do
 		t[i] = true
 	end
-	for i_1 = 1, select("#", ...) do
-		t[select(i_1, ...)] = true
+	for i1 = 1, select("#", ...) do
+		t[select(i1, ...)] = true
 	end
 	return t
 end

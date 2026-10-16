@@ -1,109 +1,109 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local chip = foundationModule.Chip
-local inputSize = foundationModule.Enums.InputSize
-local text = foundationModule.Text
-local view = foundationModule.View
-local image = builderIconsModule.Icon.Image
-local videoCamera = builderIconsModule.Icon.VideoCamera
-local captureItemModule = require(momentsCreationFlow.Components.CaptureItem)
-local scrollingGridView = momentsCommonModule.ScrollingGridView
-local useCallback = reactModule.useCallback
-local useContext = reactModule.useContext
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useTokens = foundationModule.Hooks.useTokens
-local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
-local constantsModule = require(momentsCreationFlow.Constants)
-local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
-local eventNamesModule = require(momentsCreationFlow.Analytics.EventNames)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Chip = FoundationModule.Chip
+local InputSize = FoundationModule.Enums.InputSize
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Image = BuilderIconsModule.Icon.Image
+local VideoCamera = BuilderIconsModule.Icon.VideoCamera
+local CaptureItemModule = require(MomentsCreationFlow.Components.CaptureItem)
+local ScrollingGridView = MomentsCommonModule.ScrollingGridView
+local UseCallbackFunction = ReactModule.useCallback
+local UseContextFunction = ReactModule.useContext
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local CreationFlowContextModule = require(MomentsCreationFlow.Context.CreationFlowContext)
+local ConstantsModule = require(MomentsCreationFlow.Constants)
+local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
+local EventNamesModule = require(MomentsCreationFlow.Analytics.EventNames)
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), useContext (ref), creationFlowContextModule (ref), reactModule (ref), cryoModule (ref), eventNamesModule (ref), useCallback (ref), captureItemModule (ref), view (ref), text (ref), creationFlowLocalizationModule (ref), chip (ref), foundationModule (ref), image (ref), videoCamera (ref), scrollingGridView (ref), constantsModule (ref), button (ref), inputSize (ref), buttonVariant (ref)
-	local var1 = useDeviceInsets()
-	local var2 = useTokens()
-	local var3 = useContext(creationFlowContextModule)
-	local var4, var5 = reactModule.useState(nil)
-	local var6 = reactModule.useRef(false)
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), p1 (ref), cryoModule (copy)
-		return if var4 then cryoModule.List.filter(p1.captures, function(p2)
-			-- upvalues: var4 (copy)
-			return p2.CaptureType == var4
+return function(p1) --[[ Line: 50 ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseContextFunction (copy), CreationFlowContextModule (copy), ReactModule (copy), CryoModule (copy), EventNamesModule (copy), UseCallbackFunction (copy), CaptureItemModule (copy), View (copy), Text (copy), CreationFlowLocalizationModule (copy), Chip (copy), FoundationModule (copy), Image (copy), VideoCamera (copy), ScrollingGridView (copy), ConstantsModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseContextResult = UseContextFunction(CreationFlowContextModule)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy), CryoModule (upval)
+		return if UseStateResult then CryoModule.List.filter(p1.captures, function(p2): boolean --[[ Line: 62 ]]
+			-- upvalues: UseStateResult (upval)
+			return p2.CaptureType == UseStateResult
 		end) else p1.captures
-	end, { p1.captures, var4 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var6 (ref), var3 (ref), eventNamesModule (copy)
-		if #p1.captures == 0 and var6.current == false then
-			var6.current = true
-			var3.fireEvent(eventNamesModule.EditingFlowGalleryNoCapturesAvailable)
+	end, { p1.captures, UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 67 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseContextResult (copy), EventNamesModule (upval)
+		if #p1.captures == 0 and UseRefResult.current == false then
+			UseRefResult.current = true
+			UseContextResult.fireEvent(EventNamesModule.EditingFlowGalleryNoCapturesAvailable)
 		end
 	end, { p1.captures })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "align-x-center auto-y align-y-bottom anchor-bottom-center gap-large position-bottom-center col shrink size-full-0",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var2.Padding.Large),
-			PaddingBottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Large))
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, UseTokensResult.Padding.Large),
+			PaddingBottom = UDim.new(0, (math.max(UseDeviceInsetsResult.bottom, UseTokensResult.Padding.Large)))
 		}),
-		FilterButtons = reactModule.createElement(view, {
+		FilterButtons = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "auto-y anchor-top-center gap-small position-top-center row size-full-0"
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
-				PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
+			Padding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.XLarge))),
+				PaddingRight = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge)))
 			}),
-			AllChip = reactModule.createElement(chip, {
+			AllChip = ReactModule.createElement(Chip, {
 				LayoutOrder = 1,
-				isChecked = var4 == nil,
-				onActivated = useCallback(function()
-					-- upvalues: var5 (ref)
-					var5(nil)
+				isChecked = UseStateResult == nil,
+				onActivated = UseCallbackFunction(function() --[[ Line: 94 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(nil)
 				end, {}),
-				size = foundationModule.Enums.ChipSize.Small,
-				text = var3.getLocalization(creationFlowLocalizationModule.GeneralAllChipLabel)
+				size = FoundationModule.Enums.ChipSize.Small,
+				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralAllChipLabel)
 			}),
-			PhotosChip = reactModule.createElement(chip, {
+			PhotosChip = ReactModule.createElement(Chip, {
 				LayoutOrder = 2,
-				isChecked = var4 == Enum.CaptureType.Screenshot,
-				leading = image,
-				onActivated = useCallback(function()
-					-- upvalues: var5 (ref)
-					var5(Enum.CaptureType.Screenshot)
+				isChecked = UseStateResult == Enum.CaptureType.Screenshot,
+				leading = Image,
+				onActivated = UseCallbackFunction(function() --[[ Line: 98 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(Enum.CaptureType.Screenshot)
 				end, {}),
-				size = foundationModule.Enums.ChipSize.Small,
-				text = var3.getLocalization(creationFlowLocalizationModule.GeneralPhotosChipLabel)
+				size = FoundationModule.Enums.ChipSize.Small,
+				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralPhotosChipLabel)
 			}),
-			VideosChip = reactModule.createElement(chip, {
+			VideosChip = ReactModule.createElement(Chip, {
 				LayoutOrder = 3,
-				isChecked = var4 == Enum.CaptureType.Video,
-				leading = videoCamera,
-				onActivated = useCallback(function()
-					-- upvalues: var5 (ref)
-					var5(Enum.CaptureType.Video)
+				isChecked = UseStateResult == Enum.CaptureType.Video,
+				leading = VideoCamera,
+				onActivated = UseCallbackFunction(function() --[[ Line: 102 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(Enum.CaptureType.Video)
 				end, {}),
-				size = foundationModule.Enums.ChipSize.Small,
-				text = var3.getLocalization(creationFlowLocalizationModule.GeneralVideosChipLabel)
+				size = FoundationModule.Enums.ChipSize.Small,
+				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralVideosChipLabel)
 			})
 		}),
-		CaptureGrid = reactModule.createElement(view, {
+		CaptureGrid = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "anchor-top-center gap-small position-top-center row shrink size-full-full"
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var1.left),
-				PaddingRight = UDim.new(0, var1.right)
+			Padding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, UseDeviceInsetsResult.left),
+				PaddingRight = UDim.new(0, UseDeviceInsetsResult.right)
 			}),
-			CaptureGrid = reactModule.createElement(scrollingGridView, {
+			CaptureGrid = ReactModule.createElement(ScrollingGridView, {
 				aspectRatio = 1,
 				layoutOrder = 1,
 				itemConfig = {
@@ -112,54 +112,54 @@ return function(p1)
 					minItemsPerPage = 6,
 					minItemWidth = 100
 				},
-				items = var7,
-				onShowMoreCallback = useCallback(function()
-					-- upvalues: var3 (ref)
-					var3.fetchAdditionalCaptures()
-				end, { var3 }),
-				padding = { bottom = UDim.new(0, var2.Padding.Large) },
-				renderEmptyState = useCallback(function()
-					-- upvalues: reactModule (copy), view (copy), text (copy), var3 (ref), creationFlowLocalizationModule (copy)
-					return reactModule.createElement(view, { tag = "shrink size-full-full" }, {
-						EmptyState = reactModule.createElement(text, {
+				items = UseMemoResult,
+				onShowMoreCallback = UseCallbackFunction(function() --[[ Line: 106 ]]
+					-- upvalues: UseContextResult (copy)
+					UseContextResult.fetchAdditionalCaptures()
+				end, { UseContextResult }),
+				padding = { bottom = UDim.new(0, UseTokensResult.Padding.Large) },
+				renderEmptyState = UseCallbackFunction(function() --[[ Line: 83 ]]
+					-- upvalues: ReactModule (upval), View (upval), Text (upval), UseContextResult (copy), CreationFlowLocalizationModule (upval)
+					return ReactModule.createElement(View, { tag = "shrink size-full-full" }, {
+						EmptyState = ReactModule.createElement(Text, {
 							tag = "anchor-top-center auto-xy content-action-emphasis padding-large position-top-center text-align-x-center text-align-y-center text-body-medium",
-							Text = var3.getLocalization(creationFlowLocalizationModule.GeneralEmptyStateText)
+							Text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralEmptyStateText)
 						})
 					})
-				end, { var3 }),
-				renderItem = useCallback(function(p2, _)
-					-- upvalues: reactModule (copy), captureItemModule (copy), p1 (ref)
-					return reactModule.createElement(captureItemModule, {
+				end, { UseContextResult }),
+				renderItem = UseCallbackFunction(function(Capture, _) --[[ Line: 74 ]]
+					-- upvalues: ReactModule (upval), CaptureItemModule (upval), p1 (copy)
+					return ReactModule.createElement(CaptureItemModule, {
 						zIndex = 1,
-						capture = p2,
+						capture = Capture,
 						onActivated = p1.onCaptureSelected,
-						selected = p1.selectedCapture == p2
+						selected = p1.selectedCapture == Capture
 					})
 				end, { p1.selectedCapture, p1.onCaptureSelected }),
-				shouldShowShowMoreButton = not var3.capturesPagesIsFinished(),
-				showMoreButtonText = var3.getLocalization(creationFlowLocalizationModule.GeneralCtaShowMore)
+				shouldShowShowMoreButton = not UseContextResult.capturesPagesIsFinished(),
+				showMoreButtonText = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaShowMore)
 			})
 		}),
-		ButtonContainer = reactModule.createElement(view, {
+		ButtonContainer = ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "align-x-center auto-y size-full-0"
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
-				PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
+			Padding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.XLarge))),
+				PaddingRight = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge)))
 			}),
-			ButtonConstraint = reactModule.createElement(view, {
+			ButtonConstraint = ReactModule.createElement(View, {
 				tag = "auto-y size-full-0",
-				sizeConstraint = { MaxSize = constantsModule.BottomBarSizeConstraint }
+				sizeConstraint = { MaxSize = ConstantsModule.BottomBarSizeConstraint }
 			}, {
-				NextButton = reactModule.createElement(button, {
+				NextButton = ReactModule.createElement(Button, {
 					LayoutOrder = 1,
-					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
+					fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
 					isDisabled = not p1.selectedCapture,
 					onActivated = p1.onNextCallback,
-					size = inputSize.Medium,
-					text = var3.getLocalization(creationFlowLocalizationModule.PublishingCtaContinue),
-					variant = buttonVariant.Emphasis
+					size = InputSize.Medium,
+					text = UseContextResult.getLocalization(CreationFlowLocalizationModule.PublishingCtaContinue),
+					variant = ButtonVariant.Emphasis
 				})
 			})
 		})

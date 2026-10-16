@@ -1,6 +1,6 @@
-﻿local safeFlagsModule = require(script:FindFirstAncestor("FoundationImages").Parent.SafeFlags)
+﻿local SafeFlagsModule = require(script:FindFirstAncestor("FoundationImages").Parent.SafeFlags)
 
 return {
-	FoundationImagesWhitelistedIconAssets = safeFlagsModule.createGetFString("FoundationImagesWhitelistedIconAssets", "")(),
-	FoundationImagesStaticPath = safeFlagsModule.createGetFFlag("FoundationImagesStaticPath")()
+	FoundationImagesWhitelistedIconAssets = SafeFlagsModule.createGetFString("FoundationImagesWhitelistedIconAssets", "")(),
+	FoundationImagesStaticPath = SafeFlagsModule.createGetFFlag("FoundationImagesStaticPath")()
 }

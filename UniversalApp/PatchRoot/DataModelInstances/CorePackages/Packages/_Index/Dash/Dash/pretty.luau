@@ -1,153 +1,157 @@
-﻿local parent = script.Parent
-local _ = require(parent.Types)
-local appendModule = require(parent.append)
-local assignModule = require(parent.assign)
-local cyclesModule = require(parent.cycles)
-local includesModule = require(parent.includes)
-local joinModule = require(parent.join)
-local mapModule = require(parent.map)
-local keysModule = require(parent.keys)
-local sliceModule = require(parent.slice)
-local concat = table.concat
-local insert = table.insert
-local sort = table.sort
+﻿local Parent = script.Parent
+local _ = require(Parent.Types)
+local AppendModule = require(Parent.append)
+local AssignModule = require(Parent.assign)
+local CyclesModule = require(Parent.cycles)
+local IncludesModule = require(Parent.includes)
+local JoinModule = require(Parent.join)
+local MapModule = require(Parent.map)
+local KeysModule = require(Parent.keys)
+local SliceModule = require(Parent.slice)
+local ConcatFunction = table.concat
+local InsertFunction = table.insert
+local SortFunction = table.sort
 
-local function indentLines(p1, p2)
-	-- upvalues: mapModule (ref)
-	return mapModule(p1, function(p3)
-		-- upvalues: p2 (ref)
-		return p2 .. p2
+local function indentLines(p1, Indent) --[[ Line: 38 ]]
+	-- upvalues: MapModule (copy)
+	return MapModule(p1, function(Text): string --[[ Line: 39 ]]
+		-- upvalues: Indent (copy)
+		return Indent .. Text
 	end)
 end
 
-local function _(p1)
-	-- upvalues: keysModule (ref), sort (ref)
-	local var1 = keysModule(p1)
-	sort(var1, function(p2, p3)
+local function _(p1) --[[ Line: 44 | Named "sortObjectKeys" ]]
+	-- upvalues: KeysModule (copy), SortFunction (copy)
+	local KeysModuleResult = KeysModule(p1)
+	SortFunction(KeysModuleResult, function(p2, p3): boolean --[[ Line: 46 ]]
 		return if type(p2) == "number" and type(p3) == "number" then p2 < p3 else tostring(p2) < tostring(p3)
 	end)
 	
-	return var1
+	return KeysModuleResult
 end
 
-local function constructValueOptions(p1, p2)
-	-- upvalues: assignModule (ref), cyclesModule (ref)
-	return assignModule({ indent = "\t", depth = 2, visited = {} }, p1, {
-		depth = if p1.depth then p1.depth - 1 else nil,
-		cycles = p1.cycles or cyclesModule(p2, p1.depth, {
+local function constructValueOptions(p1, p2) --[[ Line: 56 ]]
+	-- upvalues: AssignModule (copy), CyclesModule (copy)
+	return (AssignModule({ indent = "\t", depth = 2, visited = {} }, p1, {
+		depth = p1.depth and p1.depth - 1 or nil,
+		cycles = p1.cycles or CyclesModule(p2, p1.depth, {
 			nextRef = 0,
 			visited = {},
 			refs = {},
 			depth = p1.depth,
 			omit = p1.omit or {}
 		})
-	})
+	}))
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: insert (ref)
+local _ = function(p1, p2, p3) --[[ Line: 78 | Named "insertClosedBracket" ]]
+	-- upvalues: InsertFunction (copy)
 	if not p2 then
 		p1[#p1] = ("%s}"):format(p1[#p1])
 		
 		return
-	elseif p3 then
+	end
+	if p3 then
 		p1[#p1] ..= "}"
 		
 		return
+	else
+		InsertFunction(p1, "}")
 	end
-	insert(p1, "}")
 end
 
-local var1 = nil
+local Callback = nil
 
-local function prettyLines(p1, p2)
-	-- upvalues: constructValueOptions (ref), joinModule (ref), keysModule (ref), sort (ref), includesModule (ref), appendModule (ref), indentLines (ref), prettyLines (ref), mapModule (ref), sliceModule (ref), var1 (write), insert (ref)
-	p2 = p2 or {}
+local function prettyLines(p1, p2) --[[ Line: 93 ]]
+	-- upvalues: constructValueOptions (copy), JoinModule (copy), KeysModule (copy), SortFunction (copy), IncludesModule (copy), AppendModule (copy), indentLines (copy), prettyLines (copy), MapModule (copy), SliceModule (copy), Callback (ref), InsertFunction (copy)
+	local P12 = p2 or {}
 	
-	if type(p1) == "table" then
-		local var2 = constructValueOptions(p2, p1)
-		
-		if var2.depth == -1 then
-			return { "..." }
-		elseif var2.visited[p1] then
-			return { "&" .. var14.cycles.refs[p1] }
+	if type(p1) ~= "table" then
+		return if type(p1) == "string" and P12 and not P12.noQuotes then { ("\"%s\""):format(p1) } else { (tostring(p1)) }
+	end
+	local ConstructValueOptionsResult = constructValueOptions(P12, p1)
+	
+	if ConstructValueOptionsResult.depth == -1 then
+		return { "..." }
+	end
+	if ConstructValueOptionsResult.visited[p1] then
+		return { "&" .. ConstructValueOptionsResult.cycles.refs[p1] }
+	end
+	ConstructValueOptionsResult.visited[p1] = true
+	local Multiline = ConstructValueOptionsResult.multiline
+	local v1: string = if Multiline then "," else ", "
+	local Ref = ConstructValueOptionsResult.cycles.refs[p1]
+	local list = { (Ref and ("<%s>"):format(Ref) or "") .. "{" }
+	local JoinModuleResult = JoinModule(ConstructValueOptionsResult, { noQuotes = true, multiline = false })
+	local v2 = 0
+	local Flag = true
+	local KeysModuleResult = KeysModule(p1)
+	SortFunction(KeysModuleResult, function(p3, p4): boolean --[[ Line: 46 ]]
+		return if type(p3) == "number" and type(p4) == "number" then p3 < p4 else tostring(p3) < tostring(p4)
+	end)
+	
+	if #p1 > 0 and ConstructValueOptionsResult.arrayLength then
+		list[1] = ("#%d %s"):format(#p1, list[1])
+	end
+	for _, value in ipairs(KeysModuleResult) do
+		if type(value) == "number" and value == v2 + 1 then
+			v2 = value
 		end
-		var2.visited[p1] = true
-		local multiline = var2.multiline
-		local var3 = if multiline then "," else ", "
-		local var4 = var2.cycles.refs[p1]
-		local list = { (var4 and ("<%s>"):format(var4) or "") .. "{" }
-		local var5 = joinModule(var2, { noQuotes = true, multiline = false })
-		local var6 = 0
-		local var7 = true
-		local var8 = keysModule(p1)
-		sort(var8, function(p3, p4)
-			return if type(p3) == "number" and type(p4) == "number" then p3 < p4 else tostring(p3) < tostring(p4)
-		end)
-		local var9 = var8
-		
-		if #p1 > 0 and var2.arrayLength then
-			list[1] = ("#%d %s"):format(#p1, list[1])
-		end
-		for i, v in ipairs(var9) do
-			if type(v) == "number" and v == var6 + 1 then
-				var6 = v
-			end
-			if not var2.omit or not includesModule(var2.omit, v) then
-				local var10 = p1[v]
-				local var11 = type(v) == "number" and (v >= 1 and v <= var6)
-				
-				if var7 then
-					var7 = false
-				else
-					list[#list] ..= var3
-				end
-				if multiline then
-					if var11 then
-						appendModule(list, indentLines(prettyLines(var10, var2), var2.indent))
-					else
-						local indent = var2.indent
-						local var12 = mapModule(prettyLines(v, var5), function(p3)
-							-- upvalues: indent (ref)
-							return indent .. p15
-						end)
-						local var13 = prettyLines(var10, var2)
-						local indent_1 = var2.indent
-						local var14 = mapModule(sliceModule(var13, 2), function(p3)
-							-- upvalues: indent_1 (ref)
-							return indent_1 .. p16
-						end)
-						var12[#var12] = ("%s = %s"):format(var12[#var12], var13[1])
-						appendModule(list, var12)
-						appendModule(list, var14)
-					end
-				elseif var11 then
-					list[#list] ..= var1(var10, var2)
-				else
-					list[#list] ..= var1(v, var5) .. " = " .. var10(var10, var2)
-				end
-			end
-		end
-		local var15 = var7
-		
-		if not multiline then
-			list[#list] = ("%s}"):format(list[#list])
+		if not ConstructValueOptionsResult.omit or not IncludesModule(ConstructValueOptionsResult.omit, value) then
+			local v3 = p1[value]
+			local IsValueBelow: boolean = type(value) == "number" and (value >= 1 and v2 >= value)
 			
-			return list
-		elseif var15 then
-			list[#list] ..= "}"
-			
-			return list
+			if Flag then
+				Flag = false
+			else
+				list[#list] ..= v1
+			end
+			if Multiline then
+				if IsValueBelow then
+					AppendModule(list, indentLines(prettyLines(v3, ConstructValueOptionsResult), ConstructValueOptionsResult.indent))
+				else
+					local Indent = ConstructValueOptionsResult.indent
+					local MapModuleResult = MapModule(prettyLines(value, JoinModuleResult), function(Text): string --[[ Line: 39 ]]
+						-- upvalues: Indent (copy)
+						return Indent .. Text
+					end)
+					local PrettyLinesResult = prettyLines(v3, ConstructValueOptionsResult)
+					local Indent1 = ConstructValueOptionsResult.indent
+					local MapModuleResult1 = MapModule(SliceModule(PrettyLinesResult, 2), function(Text): string --[[ Line: 39 ]]
+						-- upvalues: Indent1 (copy)
+						return Indent1 .. Text
+					end)
+					MapModuleResult[#MapModuleResult] = ("%s = %s"):format(MapModuleResult[#MapModuleResult], PrettyLinesResult[1])
+					AppendModule(list, MapModuleResult)
+					AppendModule(list, MapModuleResult1)
+				end
+			elseif IsValueBelow then
+				list[#list] ..= Callback(v3, ConstructValueOptionsResult)
+			else
+				list[#list] ..= Callback(value, JoinModuleResult) .. " = " .. Callback(v3, ConstructValueOptionsResult)
+			end
 		end
-		insert(list, "}")
+	end
+	local Flag1: boolean = Flag
+	
+	if not Multiline then
+		list[#list] = ("%s}"):format(list[#list])
+		
+		return list
+	elseif Flag1 then
+		list[#list] ..= "}"
 		
 		return list
 	else
-		return if type(p1) == "string" and p2 and not p2.noQuotes then { ("\"%s\""):format(p1) } else { tostring(p1) }
+		InsertFunction(list, "}")
+		
+		return list
 	end
 end
 
-return function(p3, p4)
-	-- upvalues: concat (ref), prettyLines (ref)
-	return concat(prettyLines(p3, p4), "\n")
+Callback = function(p3, p4) --[[ Line: 199 ]]
+	-- upvalues: ConcatFunction (copy), prettyLines (copy)
+	return ConcatFunction(prettyLines(p3, p4), "\n")
 end
+
+return Callback

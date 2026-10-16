@@ -1,31 +1,30 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local musicNote = builderIconsModule.Icon.MusicNote
-local useMusicInfoModule = require(momentsCreationFlow.Hooks.useMusicInfo)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local MusicNote = require(Parent.BuilderIcons).Icon.MusicNote
+local UseMusicInfoModule = require(MomentsCreationFlow.Hooks.useMusicInfo)
 
-return function(p1)
-	-- upvalues: useMusicInfoModule (ref), reactModule (ref), view (ref), icon (ref), musicNote (ref), foundationModule (ref), text (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 23 | Named "MusicChip" ]]
+	-- upvalues: UseMusicInfoModule (copy), ReactModule (copy), View (copy), Icon (copy), MusicNote (copy), FoundationModule (copy), Text (copy)
+	return ReactModule.createElement(View, {
 		tag = "align-x-center align-y-center auto-x bg-over-media-0 gap-medium padding-x-medium padding-y-xsmall radius-circle row size-0-800",
 		LayoutOrder = 1,
 		onActivated = p1.onActivated
 	}, {
-		Icon = reactModule.createElement(icon, {
+		Icon = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
-			name = musicNote,
-			size = foundationModule.Enums.IconSize.Small
+			name = MusicNote,
+			size = FoundationModule.Enums.IconSize.Small
 		}),
-		MusicTitle = reactModule.createElement(text, {
+		MusicTitle = ReactModule.createElement(Text, {
 			tag = "auto-xy content-action-standard text-align-x-left text-align-y-center text-caption-medium text-truncate-split",
 			LayoutOrder = 2,
 			sizeConstraint = { MaxSize = Vector2.new(100, 1e999) },
-			Text = useMusicInfoModule(p1.musicAssetId).Title
+			Text = UseMusicInfoModule(p1.musicAssetId).Title
 		})
 	})
 end

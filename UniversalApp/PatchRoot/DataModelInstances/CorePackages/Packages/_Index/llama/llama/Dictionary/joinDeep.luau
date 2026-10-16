@@ -1,29 +1,28 @@
-﻿local noneModule = require(script.Parent.Parent.None)
-local copyDeepModule = require(script.Parent.copyDeep)
+﻿local NoneModule = require(script.Parent.Parent.None)
+local CopyDeepModule = require(script.Parent.copyDeep)
 
-local function joinDeep(...)
-	-- upvalues: noneModule (ref), copyDeepModule (ref), joinDeep (ref)
-	local t = {}
+local function joinDeep(...) --[[ Line: 5 ]]
+	-- upvalues: NoneModule (copy), CopyDeepModule (copy), joinDeep (copy)
+	local NoneModules = {}
 	
 	for i = 1, select("#", ...) do
-		local var1 = select(i, ...)
+		local Selected = select(i, ...)
 		
-		if not var1 then
-			continue
-		end
-		for i, v in pairs(var1) do
-			if v == noneModule then
-				t[i] = nil
-			elseif type(v) ~= "table" then
-				t[i] = v
-			elseif t[i] == nil or type(t[i] ~= "table") then
-				t[i] = copyDeepModule(v)
-			else
-				t[i] = joinDeep(t[i], v)
+		if Selected then
+			for i1, value in pairs(Selected) do
+				if value == NoneModule then
+					NoneModules[i1] = nil
+				elseif type(value) ~= "table" then
+					NoneModules[i1] = value
+				elseif NoneModules[i1] == nil or type(NoneModules[i1] ~= "table") then
+					NoneModules[i1] = CopyDeepModule(value)
+				else
+					NoneModules[i1] = joinDeep(NoneModules[i1], value)
+				end
 			end
 		end
 	end
-	return t
+	return NoneModules
 end
 
 return joinDeep

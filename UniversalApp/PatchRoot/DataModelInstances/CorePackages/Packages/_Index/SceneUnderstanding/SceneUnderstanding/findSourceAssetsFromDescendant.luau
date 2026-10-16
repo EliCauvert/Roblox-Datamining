@@ -1,14 +1,14 @@
-﻿local isSourceAssetModule = require(script:FindFirstAncestor("SceneUnderstanding").isSourceAsset)
+﻿local IsSourceAssetModule = require(script:FindFirstAncestor("SceneUnderstanding").isSourceAsset)
 
-return function(value)
-	-- upvalues: isSourceAssetModule (ref)
-	local t = {}
-	local parent = value.Parent
-	while parent do
-		if isSourceAssetModule(parent) then
-			table.insert(t, parent)
+return function(p1) --[[ Line: 5 | Named "findSourceAssetsFromDescendant" ]]
+	-- upvalues: IsSourceAssetModule (copy)
+	local List = {}
+	local Parent = p1.Parent
+	while Parent do
+		if IsSourceAssetModule(Parent) then
+			table.insert(List, Parent)
 		end
-		parent = parent.Parent
+		Parent = Parent.Parent
 	end
-	return t
+	return List
 end

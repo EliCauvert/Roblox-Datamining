@@ -1,87 +1,86 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local knobModule = require(foundation.Components.Knob)
-local viewModule = require(foundation.Components.View)
-local colorUtilsModule = require(foundation.Components.ColorPicker.colorUtils)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local _ = require(foundation.Components.Types)
-local t = { showSelectionKnob = true }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local KnobModule = require(Foundation.Components.Knob)
+local ViewModule = require(Foundation.Components.View)
+local ColorUtilsModule = require(Foundation.Components.ColorPicker.colorUtils)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Components.Types)
+local config = { showSelectionKnob = true }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), colorUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), knobModule (ref), inputSizeModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local hue = var1.hue
-	local saturation = var1.saturation
-	local value = var1.value
-	local onChanged = var1.onChanged
-	local onDragStarted = var1.onDragStarted
-	local onDragEnded = var1.onDragEnded
-	local var2 = useTokensModule()
-	local var3 = hue:map(function(p2)
-		return Color3.fromHSV(p2, 1, 1)
-	end)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), colorUtilsModule (copy), onChanged (ref)
-		local current = var4.current
+return function(p1) --[[ Line: 31 | Named "SVPicker" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ColorUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), KnobModule (copy), InputSizeModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local Hue = WithDefaultsModuleResult.hue
+	local Saturation = WithDefaultsModuleResult.saturation
+	local Value = WithDefaultsModuleResult.value
+	local OnChangedFunction = WithDefaultsModuleResult.onChanged
+	local OnDragStartedFunction = WithDefaultsModuleResult.onDragStarted
+	local OnDragEnded = WithDefaultsModuleResult.onDragEnded
+	local UseTokensModuleResult = UseTokensModule()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 45 ]]
+		-- upvalues: UseRefResult (copy), ColorUtilsModule (upval), OnChangedFunction (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			local var6, var7 = colorUtilsModule.calculateSVFromPosition(p2, current.AbsolutePosition, current.AbsoluteSize)
-			onChanged(var6, var7)
+		if Current then
+			local SVFromPosition, SVFromPosition2 = ColorUtilsModule.calculateSVFromPosition(p2, Current.AbsolutePosition, Current.AbsoluteSize)
+			OnChangedFunction(SVFromPosition, SVFromPosition2)
 			
 			return
 		end
-	end, { onChanged })
+	end, { OnChangedFunction })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = "size-full radius-small",
 		ClipsDescendants = true,
-		ref = var4
+		ref = UseRefResult
 	}), {
-		DragDetector = reactModule.createElement("UIDragDetector", {
+		DragDetector = ReactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
-			[reactModule.Event.DragStart] = reactModule.useCallback(function(_, p2)
-				-- upvalues: onDragStarted (ref), var5 (ref)
-				if onDragStarted then
-					onDragStarted()
+			[ReactModule.Event.DragStart] = ReactModule.useCallback(function(_, p2) --[[ Line: 57 ]]
+				-- upvalues: OnDragStartedFunction (copy), UseResult (copy)
+				if OnDragStartedFunction then
+					OnDragStartedFunction()
 				end
-				var5(p2)
-			end, { var5, onDragStarted }),
-			[reactModule.Event.DragContinue] = reactModule.useCallback(function(_, p2)
-				-- upvalues: var5 (ref)
-				var5(p2)
-			end, { var5 }),
-			[reactModule.Event.DragEnd] = onDragEnded
+				UseResult(p2)
+			end, { UseResult, OnDragStartedFunction }),
+			[ReactModule.Event.DragContinue] = ReactModule.useCallback(function(_, p2) --[[ Line: 64 ]]
+				-- upvalues: UseResult (copy)
+				UseResult(p2)
+			end, { UseResult }),
+			[ReactModule.Event.DragEnd] = OnDragEnded
 		}),
-		Base = reactModule.createElement("Frame", {
+		Base = ReactModule.createElement("Frame", {
 			ZIndex = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = var2.Color.Extended.White.White_100.Color3
+			BackgroundColor3 = UseTokensModuleResult.Color.Extended.White.White_100.Color3
 		}),
-		Saturation = reactModule.createElement("Frame", {
+		Saturation = ReactModule.createElement("Frame", {
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = var3
+			BackgroundColor3 = Hue:map(function(Hue): Color3 --[[ Line: 40 ]]
+				return Color3.fromHSV(Hue, 1, 1)
+			end)
 		}, {
-			Gradient = reactModule.createElement("UIGradient", {
+			Gradient = ReactModule.createElement("UIGradient", {
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 1),
 					NumberSequenceKeypoint.new(1, 0)
 				})
 			})
 		}),
-		Value = reactModule.createElement("Frame", {
+		Value = ReactModule.createElement("Frame", {
 			ZIndex = 3,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = var2.Color.Extended.Black.Black_100.Color3
+			BackgroundColor3 = UseTokensModuleResult.Color.Extended.Black.Black_100.Color3
 		}, {
-			Gradient = reactModule.createElement("UIGradient", {
+			Gradient = ReactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 1),
@@ -89,24 +88,24 @@ return function(p1)
 				})
 			})
 		}),
-		Knob = if var1.showSelectionKnob then reactModule.createElement(knobModule, {
+		Knob = if WithDefaultsModuleResult.showSelectionKnob then ReactModule.createElement(KnobModule, {
 			hasShadow = true,
 			ZIndex = 4,
-			size = inputSizeModule.Medium,
+			size = InputSizeModule.Medium,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = reactModule.joinBindings({ saturation, value }):map(function(p2)
-				return UDim2.fromScale(p2[1], 1 - p2[2])
+			Position = ReactModule.joinBindings({ Saturation, Value }):map(function(Entry): UDim2 --[[ Line: 119 ]]
+				return UDim2.fromScale(Entry[1], 1 - Entry[2])
 			end),
-			style = reactModule.joinBindings({ hue, saturation, value }):map(function(p2)
+			style = ReactModule.joinBindings({ Hue, Saturation, Value }):map(function(Entry) --[[ Line: 124 ]]
 				return {
 					Transparency = 0,
-					Color3 = Color3.fromHSV(p2[1], p2[2], p2[3])
+					Color3 = Color3.fromHSV(Entry[1], Entry[2], Entry[3])
 				}
 			end),
 			stroke = {
-				Color = var2.Color.System.Contrast.Color3,
-				Thickness = var2.Stroke.Thicker,
-				Transparency = var2.Color.System.Contrast.Transparency
+				Color = UseTokensModuleResult.Color.System.Contrast.Color3,
+				Thickness = UseTokensModuleResult.Stroke.Thicker,
+				Transparency = UseTokensModuleResult.Color.System.Contrast.Transparency
 			}
 		}) else nil
 	})

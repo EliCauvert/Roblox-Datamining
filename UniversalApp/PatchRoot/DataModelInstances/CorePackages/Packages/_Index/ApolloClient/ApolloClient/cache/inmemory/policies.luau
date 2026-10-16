@@ -1,728 +1,738 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local httpService = game:GetService("HttpService")
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local set = luauPolyfillModule.Set
-local map = luauPolyfillModule.Map
-local isCallableModule = require(parent.luaUtils.isCallable)
-local objectKeysForEachModule = require(parent.luaUtils.objectKeysForEach)
-local luauRegExpModule = require(parent_1.LuauRegExp)
-local t = {}
-local makeFieldFunctionOptions = nil
-local makeMergeObjectsFunction = nil
-local keyArgsFnFromSpecifier = nil
-local keyFieldsFnFromSpecifier = nil
-local makeAliasMap = nil
-local computeKeyObject = nil
-local _ = require(parent_1.GraphQL)
-local trie = require(parent.wry.trie).Trie
-local invariantModule = require(parent.jsutils.invariant)
-local invariant = invariantModule.invariant
-local invariantError = invariantModule.InvariantError
-local utilitiesModule = require(script.Parent.Parent.Parent.utilities)
-local getFragmentFromSelection = utilitiesModule.getFragmentFromSelection
-local isField = utilitiesModule.isField
-local getTypenameFromResult = utilitiesModule.getTypenameFromResult
-local storeKeyNameFromField = utilitiesModule.storeKeyNameFromField
-local argumentsObjectFromField = utilitiesModule.argumentsObjectFromField
-local isReference = utilitiesModule.isReference
-local getStoreKeyName = utilitiesModule.getStoreKeyName
-local canUseWeakMap = utilitiesModule.canUseWeakMap
-local isNonNullObject = utilitiesModule.isNonNullObject
-local stringifyForDisplay = utilitiesModule.stringifyForDisplay
-local helpersModule = require(script.Parent.helpers)
-local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
-local fieldNameFromStoreName = helpersModule.fieldNameFromStoreName
-local storeValueIsStoreObject = helpersModule.storeValueIsStoreObject
-local selectionSetMatchesResult = helpersModule.selectionSetMatchesResult
-local typeOrFieldNameRegExp = helpersModule.TypeOrFieldNameRegExp
-local cacheSlot = require(script.Parent.reactiveVars).cacheSlot
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local HttpService = game:GetService("HttpService")
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local Set = LuauPolyfillModule.Set
+local Map = LuauPolyfillModule.Map
+local IsCallableModule = require(Parent.luaUtils.isCallable)
+local ObjectKeysForEachModule = require(Parent.luaUtils.objectKeysForEach)
+local LuauRegExpModule = require(Parent1.LuauRegExp)
+local PoliciesModule = {}
+local Callback2 = nil
+local Callback3 = nil
+local Callback = nil
+local Callback1 = nil
+local Callback5 = nil
+local Callback4 = nil
+local _ = require(Parent1.GraphQL)
+local Trie = require(Parent.wry.trie).Trie
+local InvariantModule = require(Parent.jsutils.invariant)
+local InvariantFunction = InvariantModule.invariant
+local InvariantError = InvariantModule.InvariantError
+local UtilitiesModule = require(script.Parent.Parent.Parent.utilities)
+local GetFragmentFromSelectionFunction = UtilitiesModule.getFragmentFromSelection
+local IsFieldFunction = UtilitiesModule.isField
+local GetTypenameFromResultFunction = UtilitiesModule.getTypenameFromResult
+local StoreKeyNameFromFieldFunction = UtilitiesModule.storeKeyNameFromField
+local ArgumentsObjectFromFieldFunction = UtilitiesModule.argumentsObjectFromField
+local IsReferenceFunction = UtilitiesModule.isReference
+local GetStoreKeyNameFunction = UtilitiesModule.getStoreKeyName
+local CanUseWeakMap = UtilitiesModule.canUseWeakMap
+local IsNonNullObjectFunction = UtilitiesModule.isNonNullObject
+local StringifyForDisplayFunction = UtilitiesModule.stringifyForDisplay
+local HelpersModule = require(script.Parent.helpers)
+local HasOwnPropertyModule = require(Parent.luaUtils.hasOwnProperty)
+local FieldNameFromStoreNameFunction = HelpersModule.fieldNameFromStoreName
+local StoreValueIsStoreObjectFunction = HelpersModule.storeValueIsStoreObject
+local SelectionSetMatchesResultFunction = HelpersModule.selectionSetMatchesResult
+local TypeOrFieldNameRegExp = HelpersModule.TypeOrFieldNameRegExp
+local CacheSlot = require(script.Parent.reactiveVars).cacheSlot
 local _ = require(script.Parent.Parent.core.types.common)
 local _ = require(script.Parent.writeToStore_types)
-getStoreKeyName:setStringify(require(script.Parent["object-canon"]).canonicalStringify)
+GetStoreKeyNameFunction:setStringify(require(script.Parent["object-canon"]).canonicalStringify)
 local _ = require(script.Parent.policies_types)
 
-local function _(p1)
-	-- upvalues: argumentsObjectFromField (ref)
-	return if p1.args == nil then if p1.field then argumentsObjectFromField(p1.field, p1.variables) else nil else p1.args
+local function _(FieldFunctionOptions) --[[ Line: 145 | Named "argsFromFieldSpecifier" ]]
+	-- upvalues: ArgumentsObjectFromFieldFunction (copy)
+	return if FieldFunctionOptions.args == nil then if FieldFunctionOptions.field then ArgumentsObjectFromFieldFunction(FieldFunctionOptions.field, FieldFunctionOptions.variables) else nil else FieldFunctionOptions.args
 end
 
-local function defaultDataIdFromObject(_, p1, p2)
-	-- upvalues: httpService (ref)
-	local typename = p1.__typename
-	local id = p1.id
-	local id_1 = p1._id
+local function defaultDataIdFromObject(_, p1, p2): string? --[[ Line: 159 ]]
+	-- upvalues: HttpService (copy)
+	local Typename = p1.__typename
+	local Id = p1.id
+	local Id1 = p1._id
 	
-	if type(typename) == "string" then
+	if type(Typename) == "string" then
 		if p2 then
-			if id ~= nil then
-				p2.keyObject = { id = id }
-			elseif id_1 == nil then
-				p2.keyObject = nil
+			if Id == nil then
+				if Id1 == nil then
+					p2.keyObject = nil
+				else
+					p2.keyObject = { _id = Id1 }
+				end
 			else
-				p2.keyObject = { _id = id_1 }
+				p2.keyObject = { id = Id }
 			end
 		end
-		if id == nil then
-			id = id_1
+		if Id == nil then
+			Id = Id1
 		end
-		if id == nil then
-			return nil
+		if Id ~= nil then
+			local ValueType = type(Id)
+			
+			return string.format("%s:%s", Typename, if ValueType == "number" or ValueType == "string" then Id else HttpService:JSONEncode(Id))
 		end
-		local var1 = type(id)
-		
-		return string.format("%s:%s", typename, if var1 == "number" or var1 == "string" then id else httpService:JSONEncode(id))
 	end
-end
-
-t.defaultDataIdFromObject = defaultDataIdFromObject
-
-local function nullKeyFieldsFn(_)
 	return nil
 end
 
-local function simpleKeyArgsFn(_, p1)
+PoliciesModule.defaultDataIdFromObject = defaultDataIdFromObject
+
+local function nullKeyFieldsFn(_) --[[ Line: 191 ]]
+	return nil
+end
+
+local function simpleKeyArgsFn(_, p1) --[[ Line: 194 ]]
 	return p1.fieldName
 end
 
-local _ = nil
+local mergeTrueFn = nil
 
-local function mergeTrueFn(_, p1, p2, p3)
+mergeTrueFn = function(_, p1, p2, p3) --[[ Line: 201 | Named "mergeTrueFn" ]]
 	return p3:mergeObjects(p1, p2)
 end
 
-local _ = nil
+local mergeFalseFn = nil
 
-local function mergeFalseFn(_, _, p1)
+mergeFalseFn = function(_, _, p1) --[[ Line: 205 | Named "mergeFalseFn" ]]
 	return p1
 end
 
-local t_1 = {}
-t_1.__index = t_1
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref), map (ref), object (ref), defaultDataIdFromObject (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.typePolicies = {}
-	tbl.toBeAdded = {}
-	tbl.supertypeMap = map.new(nil)
-	tbl.fuzzySubtypes = map.new(nil)
-	tbl.cache = nil
-	tbl.rootIdsByTypename = {}
-	tbl.rootTypenamesById = {}
-	tbl.usingPossibleTypes = false
-	tbl.config = p1
-	tbl.config = object.assign({ dataIdFromObject = defaultDataIdFromObject }, p1)
-	tbl.cache = tbl.config.cache
-	tbl:setRootTypename("Query")
-	tbl:setRootTypename("Mutation")
-	tbl:setRootTypename("Subscription")
+function Module.new(Config) --[[ Line: 312 ]]
+	-- upvalues: Module (copy), Map (copy), Object (copy), defaultDataIdFromObject (copy)
+	local self = setmetatable({}, Module)
+	self.typePolicies = {}
+	self.toBeAdded = {}
+	self.supertypeMap = Map.new(nil)
+	self.fuzzySubtypes = Map.new(nil)
+	self.cache = nil
+	self.rootIdsByTypename = {}
+	self.rootTypenamesById = {}
+	self.usingPossibleTypes = false
+	self.config = Config
+	self.config = Object.assign({ dataIdFromObject = defaultDataIdFromObject }, Config)
+	self.cache = self.config.cache
+	self:setRootTypename("Query")
+	self:setRootTypename("Mutation")
+	self:setRootTypename("Subscription")
 	
-	if p1.possibleTypes then
-		tbl:addPossibleTypes(p1.possibleTypes)
+	if Config.possibleTypes then
+		self:addPossibleTypes(Config.possibleTypes)
 	end
-	if p1.typePolicies then
-		tbl:addTypePolicies(p1.typePolicies)
+	if Config.typePolicies then
+		self:addTypePolicies(Config.typePolicies)
 	end
-	return tbl
+	return self
 end
 
-function t_1:identify(p1, p2, p3)
-	-- upvalues: getTypenameFromResult (ref), keyFieldsFnFromSpecifier (write)
-	local _ = nil
-	local var1 = if p2 and p3 then getTypenameFromResult(p1, p2, p3) else p1.__typename
+function Module:identify(p1, SelectionSet, FragmentMap) --[[ Line: 353 ]]
+	-- upvalues: GetTypenameFromResultFunction (copy), Callback1 (ref)
+	local TypenameFromResult = if SelectionSet and FragmentMap then GetTypenameFromResultFunction(p1, SelectionSet, FragmentMap) else p1.__typename
 	
-	if var1 == self.rootTypenamesById.ROOT_QUERY then
+	if TypenameFromResult == self.rootTypenamesById.ROOT_QUERY then
 		return { "ROOT_QUERY" }
 	end
-	local var2
-	local t = { typename = var1, selectionSet = p2, fragmentMap = p3 }
-	local var3 = nil
-	local var4 = var1 and self:getTypePolicy(var1)
-	local _ = nil
-	local var5 = if var4 and var4.keyFn then var4.keyFn else self.config.dataIdFromObject
-	while var5 do
-		var2 = var5(var4, p1, t)
+	local config = {
+		typename = TypenameFromResult,
+		selectionSet = SelectionSet,
+		fragmentMap = FragmentMap
+	}
+	local v1 = nil
+	local TypePolicy = if TypenameFromResult then self:getTypePolicy(TypenameFromResult) else TypenameFromResult
+	local KeyFn = if TypePolicy and TypePolicy.keyFn then TypePolicy.keyFn else self.config.dataIdFromObject
+	local KeyFnResult = nil
+	while KeyFn do
+		KeyFnResult = KeyFn(TypePolicy, p1, config)
 		
-		if type(var2) == "table" then
-			var5 = keyFieldsFnFromSpecifier(var2)
+		if type(KeyFnResult) == "table" then
+			KeyFn = Callback1(KeyFnResult)
 			continue
 		end
-		var3 = var2
+		v1 = KeyFnResult
 		break
 	end
-	var3 = if var3 then tostring(var3) else nil
+	local Text = if v1 then tostring(v1) else nil
 	
-	return if t.keyObject then { var3, t.keyObject } else { var3 }
+	return if config.keyObject then { Text, config.keyObject } else { Text }
 end
 
-function t_1.addTypePolicies(p4, p5)
-	-- upvalues: objectKeysForEachModule (ref), object (ref), hasOwnPropertyModule (ref)
-	objectKeysForEachModule(p5, function(p6)
-		-- upvalues: p5 (ref), object (copy), p4 (ref), hasOwnPropertyModule (copy)
-		local var6 = p5[p6]
-		local queryType = var6.queryType
-		local mutationType = var6.mutationType
-		local subscriptionType = var6.subscriptionType
-		local var7 = object.assign({}, var6, {
-			queryType = object.None,
-			mutationType = object.None,
-			subscriptionType = object.None
+function Module.addTypePolicies(p2, TypePolicies) --[[ Line: 425 ]]
+	-- upvalues: ObjectKeysForEachModule (copy), Object (copy), HasOwnPropertyModule (copy)
+	ObjectKeysForEachModule(TypePolicies, function(p3) --[[ Line: 427 ]]
+		-- upvalues: TypePolicies (copy), Object (upval), p2 (copy), HasOwnPropertyModule (upval)
+		local TypePolicy = TypePolicies[p3]
+		local MutationType = TypePolicy.mutationType
+		local SubscriptionType = TypePolicy.subscriptionType
+		local AssignResult = Object.assign({}, TypePolicy, {
+			queryType = Object.None,
+			mutationType = Object.None,
+			subscriptionType = Object.None
 		})
 		
-		if queryType then
-			p4:setRootTypename("Query", p6)
+		if TypePolicy.queryType then
+			p2:setRootTypename("Query", p3)
 		end
-		if mutationType then
-			p4:setRootTypename("Mutation", p6)
+		if MutationType then
+			p2:setRootTypename("Mutation", p3)
 		end
-		if subscriptionType then
-			p4:setRootTypename("Subscription", p6)
+		if SubscriptionType then
+			p2:setRootTypename("Subscription", p3)
 		end
-		if hasOwnPropertyModule(p4.toBeAdded, p6) then
-			table.insert(p4.toBeAdded[p6], var7)
+		if HasOwnPropertyModule(p2.toBeAdded, p3) then
+			table.insert(p2.toBeAdded[p3], AssignResult)
 			
 			return
+		else
+			p2.toBeAdded[p3] = { AssignResult }
 		end
-		p4.toBeAdded[p6] = { var7 }
 	end)
 end
 
-function t_1:updateTypePolicy(p4, p5)
-	-- upvalues: isCallableModule (ref), mergeTrueFn (write), mergeFalseFn (write), nullKeyFieldsFn (ref), keyFieldsFnFromSpecifier (write), objectKeysForEachModule (ref), simpleKeyArgsFn (ref), keyArgsFnFromSpecifier (write)
-	local var6 = self:getTypePolicy(p4)
-	local keyFields = p5.keyFields
-	local fields = p5.fields
+function Module:updateTypePolicy(p2, p3) --[[ Line: 471 ]]
+	-- upvalues: IsCallableModule (copy), mergeTrueFn (ref), mergeFalseFn (ref), nullKeyFieldsFn (copy), Callback1 (ref), ObjectKeysForEachModule (copy), simpleKeyArgsFn (copy), Callback (ref)
+	local TypePolicy = self:getTypePolicy(p2)
+	local KeyFields = p3.keyFields
+	local Fields = p3.fields
 	
-	local function _(value, p6)
-		-- upvalues: isCallableModule (copy), mergeTrueFn (copy), mergeFalseFn (copy)
-		if isCallableModule(p6) then
-			value.merge = p6
-			
-			return
-		elseif p6 == true then
-			value.merge = mergeTrueFn
-			
-			return
-		elseif p6 == false then
-			value.merge = mergeFalseFn
+	local function _(p4, Enabled) --[[ Line: 475 | Named "setMerge" ]]
+		-- upvalues: IsCallableModule (upval), mergeTrueFn (upval), mergeFalseFn (upval)
+		if IsCallableModule(Enabled) then
+			p4.merge = Enabled
 			
 			return
 		end
-		value.merge = value.merge
-	end
-	
-	local merge = p5.merge
-	
-	if isCallableModule(merge) then
-		var6.merge = merge
-	elseif merge == true then
-		var6.merge = mergeTrueFn
-	elseif merge == false then
-		var6.merge = mergeFalseFn
-	else
-		var6.merge = var6.merge
-	end
-	if keyFields == false then
-		var6.keyFn = nullKeyFieldsFn
-	else
-		local var7 = type(keyFields)
-		
-		if var7 == "table" then
-			var6.keyFn = keyFieldsFnFromSpecifier(keyFields)
-		elseif var7 == "function" then
-			var6.keyFn = keyFields
+		if Enabled == true then
+			p4.merge = mergeTrueFn
+			
+			return
+		end
+		if Enabled == false then
+			p4.merge = mergeFalseFn
+			
+			return
 		else
-			var6.keyFn = var6.keyFn
+			p4.merge = p4.merge
 		end
 	end
-	if fields then
-		objectKeysForEachModule(fields, function(p6)
-			-- upvalues: self (ref), p4 (ref), fields (ref), simpleKeyArgsFn (copy), keyArgsFnFromSpecifier (copy), isCallableModule (copy), mergeTrueFn (copy), mergeFalseFn (copy)
-			local var8 = self:getFieldPolicy(p4, p6, true)
-			local var9 = fields[p6]
+	
+	local Merge = p3.merge
+	
+	if IsCallableModule(Merge) then
+		TypePolicy.merge = Merge
+	elseif Merge == true then
+		TypePolicy.merge = mergeTrueFn
+	elseif Merge == false then
+		TypePolicy.merge = mergeFalseFn
+	else
+		TypePolicy.merge = TypePolicy.merge
+	end
+	if KeyFields == false then
+		TypePolicy.keyFn = nullKeyFieldsFn
+	else
+		local ValueType = type(KeyFields)
+		
+		if ValueType == "table" then
+			TypePolicy.keyFn = Callback1(KeyFields)
+		elseif ValueType == "function" then
+			TypePolicy.keyFn = KeyFields
+		else
+			TypePolicy.keyFn = TypePolicy.keyFn
+		end
+	end
+	if Fields then
+		ObjectKeysForEachModule(Fields, function(p4) --[[ Line: 530 ]]
+			-- upvalues: self (copy), p2 (copy), Fields (copy), simpleKeyArgsFn (upval), Callback (upval), IsCallableModule (upval), mergeTrueFn (upval), mergeFalseFn (upval)
+			local FieldPolicy = self:getFieldPolicy(p2, p4, true)
+			local Field = Fields[p4]
 			
-			if type(var9) == "function" then
-				var8.read = var9
+			if type(Field) == "function" then
+				FieldPolicy.read = Field
 			else
-				local keyArgs = var9.keyArgs
-				local read = var9.read
-				local merge = var9.merge
+				local KeyArgs = Field.keyArgs
+				local ReadFunction = Field.read
+				local Merge = Field.merge
 				
-				if keyArgs == false then
-					var8.keyFn = simpleKeyArgsFn
+				if KeyArgs == false then
+					FieldPolicy.keyFn = simpleKeyArgsFn
 				else
-					local var10 = type(keyArgs)
+					local ValueType = type(KeyArgs)
 					
-					if var10 == "table" then
-						var8.keyFn = keyArgsFnFromSpecifier(keyArgs)
-					elseif var10 == "function" then
-						var8.keyFn = keyArgs
+					if ValueType == "table" then
+						FieldPolicy.keyFn = Callback(KeyArgs)
+					elseif ValueType == "function" then
+						FieldPolicy.keyFn = KeyArgs
 					else
-						var8.keyFn = var8.keyFn
+						FieldPolicy.keyFn = FieldPolicy.keyFn
 					end
 				end
-				if type(read) == "function" then
-					var8.read = read
+				if type(ReadFunction) == "function" then
+					FieldPolicy.read = ReadFunction
 				end
-				if isCallableModule(merge) then
-					var8.merge = merge
-				elseif merge == true then
-					var8.merge = mergeTrueFn
-				elseif merge == false then
-					var8.merge = mergeFalseFn
+				if IsCallableModule(Merge) then
+					FieldPolicy.merge = Merge
+				elseif Merge == true then
+					FieldPolicy.merge = mergeTrueFn
+				elseif Merge == false then
+					FieldPolicy.merge = mergeFalseFn
 				else
-					var8.merge = var8.merge
+					FieldPolicy.merge = FieldPolicy.merge
 				end
 			end
-			if var8.read and var8.merge then
-				var8.keyFn = var8.keyFn or simpleKeyArgsFn
+			if FieldPolicy.read and FieldPolicy.merge then
+				FieldPolicy.keyFn = FieldPolicy.keyFn or simpleKeyArgsFn
 			end
 		end)
 	end
 end
 
-function t_1:setRootTypename(p4, p5)
-	-- upvalues: invariant (ref)
-	local var6 = p5
+function Module:setRootTypename(Text: string, p2) --[[ Line: 588 ]]
+	-- upvalues: InvariantFunction (copy)
+	local RootTypenamesByIdEntry: string = p2
 	
-	if var6 == nil then
-		var6 = p4
+	if RootTypenamesByIdEntry == nil then
+		RootTypenamesByIdEntry = Text
 	end
-	local text = "ROOT_" .. string.upper(p4)
-	local var7 = self.rootTypenamesById[text]
+	local Text1 = "ROOT_" .. string.upper(Text)
+	local RootTypenamesByIdEntry1 = self.rootTypenamesById[Text1]
 	
-	if var6 ~= var7 then
-		local var8 = not var7 or var7 == p4
+	if RootTypenamesByIdEntry ~= RootTypenamesByIdEntry1 then
+		local NoRootTypenamesByIdEntry1: boolean = not RootTypenamesByIdEntry1 or RootTypenamesByIdEntry1 == Text
 		
-		if not var8 then
-			invariant(var8, ("Cannot change root %s __typename more than once"):format(p4))
+		if not NoRootTypenamesByIdEntry1 then
+			InvariantFunction(NoRootTypenamesByIdEntry1, ("Cannot change root %s __typename more than once"):format(Text))
 		end
-		if var7 then
-			self.rootIdsByTypename[var7] = nil
+		if RootTypenamesByIdEntry1 then
+			self.rootIdsByTypename[RootTypenamesByIdEntry1] = nil
 		end
-		self.rootIdsByTypename[var6] = text
-		self.rootTypenamesById[text] = var6
+		self.rootIdsByTypename[RootTypenamesByIdEntry] = Text1
+		self.rootTypenamesById[Text1] = RootTypenamesByIdEntry
 	end
 end
 
-function t_1:addPossibleTypes(p4)
-	-- upvalues: objectKeysForEachModule (ref), array (ref), typeOrFieldNameRegExp (ref), luauRegExpModule (ref)
+function Module:addPossibleTypes(PossibleTypes) --[[ Line: 617 ]]
+	-- upvalues: ObjectKeysForEachModule (copy), Array (copy), TypeOrFieldNameRegExp (copy), LuauRegExpModule (copy)
 	self.usingPossibleTypes = true
-	objectKeysForEachModule(p4, function(p5)
-		-- upvalues: self (ref), array (copy), p4 (ref), typeOrFieldNameRegExp (copy), luauRegExpModule (copy)
-		self:getSupertypeSet(p5, true)
-		array.forEach(p4[p5], function(p6)
-			-- upvalues: self (copy), p5 (ref), typeOrFieldNameRegExp (copy), luauRegExpModule (copy)
-			self:getSupertypeSet(p6, true):add(p5)
-			local var6 = typeOrFieldNameRegExp:exec(p6)
+	ObjectKeysForEachModule(PossibleTypes, function(p2) --[[ Line: 620 ]]
+		-- upvalues: self (copy), Array (upval), PossibleTypes (copy), TypeOrFieldNameRegExp (upval), LuauRegExpModule (upval)
+		self:getSupertypeSet(p2, true)
+		Array.forEach(PossibleTypes[p2], function(p3) --[[ Line: 627 ]]
+			-- upvalues: self (upval), p2 (copy), TypeOrFieldNameRegExp (upval), LuauRegExpModule (upval)
+			self:getSupertypeSet(p3, true):add(p2)
+			local ExecResult = TypeOrFieldNameRegExp:exec(p3)
 			
-			if not var6 or var6[1] ~= p6 then
-				self.fuzzySubtypes:set(p6, luauRegExpModule.new(p6))
+			if not ExecResult or ExecResult[1] ~= p3 then
+				self.fuzzySubtypes:set(p3, LuauRegExpModule.new(p3))
 			end
 		end)
 	end)
 end
 
-function t_1:getTypePolicy(p4)
-	-- upvalues: hasOwnPropertyModule (ref), object (ref), array (ref)
-	if not hasOwnPropertyModule(self.typePolicies, p4) then
-		self.typePolicies[p4] = {}
-		local var6 = self.typePolicies[p4]
-		var6.fields = {}
-		local var7 = self.supertypeMap:get(p4)
+function Module:getTypePolicy(Typename) --[[ Line: 639 ]]
+	-- upvalues: HasOwnPropertyModule (copy), Object (copy), Array (copy)
+	if not HasOwnPropertyModule(self.typePolicies, Typename) then
+		self.typePolicies[Typename] = {}
+		local TypePolicy = self.typePolicies[Typename]
+		TypePolicy.fields = {}
+		local GetResult = self.supertypeMap:get(Typename)
 		
-		if var7 and var7.size > 0 then
-			var7:forEach(function(p5)
-				-- upvalues: self (ref), object (copy), var6 (ref)
-				local var8 = self:getTypePolicy(p5)
-				local fields = var8.fields
-				object.assign(var6, object.assign(table.clone(var8), { fields = object.None }))
-				object.assign(var6.fields, fields)
+		if GetResult and GetResult.size > 0 then
+			GetResult:forEach(function(p2) --[[ Line: 673 ]]
+				-- upvalues: self (copy), Object (upval), TypePolicy (copy)
+				local TypePolicy1 = self:getTypePolicy(p2)
+				local Fields = TypePolicy1.fields
+				Object.assign(TypePolicy, (Object.assign(table.clone(TypePolicy1), { fields = Object.None })))
+				Object.assign(TypePolicy.fields, Fields)
 			end)
 		end
 	end
-	local var8 = self.toBeAdded[p4]
+	local ToBeAddedEntry = self.toBeAdded[Typename]
 	
-	if var8 and #var8 > 0 then
-		array.forEach(array.splice(var8, 1), function(p5)
-			-- upvalues: self (ref), p4 (ref)
-			self:updateTypePolicy(p4, p5)
+	if ToBeAddedEntry and #ToBeAddedEntry > 0 then
+		Array.forEach(Array.splice(ToBeAddedEntry, 1), function(p2) --[[ Line: 690 ]]
+			-- upvalues: self (copy), Typename (copy)
+			self:updateTypePolicy(Typename, p2)
 		end)
 	end
-	return self.typePolicies[p4]
+	return self.typePolicies[Typename]
 end
 
-function t_1:getFieldPolicy(p4, p5, p6)
-	if not p4 then
+function Module:getFieldPolicy(Typename, FieldName, p2) --[[ Line: 698 ]]
+	if not Typename then
 		return nil
 	end
-	local fields = self:getTypePolicy(p4).fields
+	local Fields = self:getTypePolicy(Typename).fields
 	
-	if fields[p5] then
-		return fields[p5]
-	elseif p6 then
-		fields[p5] = {}
+	if Fields[FieldName] then
+		return Fields[FieldName]
+	elseif p2 then
+		Fields[FieldName] = {}
 		
-		return fields[p5]
+		return Fields[FieldName]
+	else
+		return nil
 	end
-	return nil
 end
 
-function t_1:getSupertypeSet(p4, p5)
-	-- upvalues: set (ref)
-	local var6 = self.supertypeMap:get(p4)
+function Module:getSupertypeSet(p2, p3) --[[ Line: 725 ]]
+	-- upvalues: Set (copy)
+	local GetResult = self.supertypeMap:get(p2)
 	
-	if not var6 and p5 then
-		var6 = set.new()
-		self.supertypeMap:set(p4, var6)
+	if not GetResult and p3 then
+		GetResult = Set.new()
+		self.supertypeMap:set(p2, GetResult)
 	end
-	return var6
+	return GetResult
 end
 
-function t_1:fragmentMatches(p4, p5, p6, p7)
-	-- upvalues: array (ref), invariant (ref), selectionSetMatchesResult (ref)
-	if not p4.typeCondition then
+function Module:fragmentMatches(p2, p3, p4, p5): boolean --[[ Line: 736 ]]
+	-- upvalues: Array (copy), InvariantFunction (copy), SelectionSetMatchesResultFunction (copy)
+	if not p2.typeCondition then
 		return true
-	elseif not p5 then
+	end
+	if not p3 then
 		return false
 	end
-	local value = p4.typeCondition.name.value
+	local Value = p2.typeCondition.name.value
 	
-	if p5 == value then
+	if p3 == Value then
 		return true
-	elseif self.usingPossibleTypes and self.supertypeMap:has(value) then
-		local var6 = self:getSupertypeSet(p5, true)
-		local list = { var6 }
+	end
+	if self.usingPossibleTypes and self.supertypeMap:has(Value) then
+		local SupertypeSet = self:getSupertypeSet(p3, true)
+		local List = { SupertypeSet }
 		
-		local function maybeEnqueue(p8)
-			-- upvalues: self (ref), array (copy), list (ref)
-			local var7 = self:getSupertypeSet(p8, false)
+		local function maybeEnqueue(p6) --[[ Line: 767 ]]
+			-- upvalues: self (copy), Array (upval), List (copy)
+			local SupertypeSet = self:getSupertypeSet(p6, false)
 			
-			if var7 and var7.size > 0 and array.indexOf(list, var7) < 1 then
-				table.insert(list, var7)
+			if SupertypeSet and SupertypeSet.size > 0 and Array.indexOf(List, SupertypeSet) < 1 then
+				table.insert(List, SupertypeSet)
 			end
 		end
 		
-		local var7 = p6 ~= nil and self.fuzzySubtypes.size > 0
-		local var8 = false
+		local IsSizeAbove: boolean = p4 ~= nil and self.fuzzySubtypes.size > 0
+		local Flag = false
 		
-		for i, v in list do
-			local var9 = list[i]
+		for i, _ in List do
+			local Entry = List[i]
 			
-			if not var9:has(value) then
-				var9:forEach(maybeEnqueue)
+			if Entry:has(Value) then
+				if not SupertypeSet:has(Value) then
+					if Flag then
+						InvariantFunction.warn(("Inferring subtype %s of supertype %s"):format(p3, Value))
+					end
+					SupertypeSet:add(Value)
+				end
+				return true
+			else
+				Entry:forEach(maybeEnqueue)
 				
-				if var7 and i == #list and selectionSetMatchesResult(p4.selectionSet, p6, p7) then
-					var7 = false
-					var8 = true
-					array.forEach(self.fuzzySubtypes:entries(), function(p8)
-						-- upvalues: p5 (ref), self (ref), array (copy), list (ref)
-						local var10 = p8[1]
-						local var11 = p8[2]:exec(p5)
+				if IsSizeAbove and i == #List and SelectionSetMatchesResultFunction(p2.selectionSet, p4, p5) then
+					IsSizeAbove = false
+					Flag = true
+					Array.forEach(self.fuzzySubtypes:entries(), function(Entry): number --[[ Line: 834 ]]
+						-- upvalues: p3 (copy), self (copy), Array (upval), List (copy)
+						local Entry1 = Entry[1]
+						local ExecResult = Entry[2]:exec(p3)
 						
-						if var11 and var11[1] == p5 then
-							local var12 = self:getSupertypeSet(var10, false)
+						if ExecResult and ExecResult[1] == p3 then
+							local SupertypeSet = self:getSupertypeSet(Entry1, false)
 							
-							if var12 and var12.size > 0 and array.indexOf(list, var12) < 1 then
-								table.insert(list, var12)
+							if SupertypeSet and SupertypeSet.size > 0 and Array.indexOf(List, SupertypeSet) < 1 then
+								table.insert(List, SupertypeSet)
 							end
 						end
 						return 1
 					end)
+					continue
 				end
 			end
-			if not var6:has(value) then
-				if var8 then
-					invariant.warn(("Inferring subtype %s of supertype %s"):format(p5, value))
-				end
-				var6:add(value)
-			end
-			return true
 		end
 	end
 	return false
 end
 
-function t_1:hasKeyArgs(p8, p9)
-	local var10 = self:getFieldPolicy(p8, p9, false)
+function Module:hasKeyArgs(p6, p7): boolean --[[ Line: 852 ]]
+	local FieldPolicy = self:getFieldPolicy(p6, p7, false)
 	
-	return var10 ~= nil and var10.keyFn ~= nil
+	return FieldPolicy ~= nil and FieldPolicy.keyFn ~= nil
 end
 
-function t_1:getStoreFieldName(p8)
-	-- upvalues: argumentsObjectFromField (ref), keyArgsFnFromSpecifier (write), storeKeyNameFromField (ref), getStoreKeyName (ref), fieldNameFromStoreName (ref)
-	local typename = p8.typename
-	local fieldName = p8.fieldName
-	local var10 = self:getFieldPolicy(typename, fieldName, false)
-	local var11 = nil
-	local var12 = if var10 then var10.keyFn else nil
+function Module:getStoreFieldName(FieldFunctionOptions) --[[ Line: 859 ]]
+	-- upvalues: ArgumentsObjectFromFieldFunction (copy), Callback (ref), StoreKeyNameFromFieldFunction (copy), GetStoreKeyNameFunction (copy), FieldNameFromStoreNameFunction (copy)
+	local Typename = FieldFunctionOptions.typename
+	local FieldName = FieldFunctionOptions.fieldName
+	local FieldPolicy = self:getFieldPolicy(Typename, FieldName, false)
+	local Enabled = nil
+	local KeyFn = if FieldPolicy then FieldPolicy.keyFn else nil
 	
-	if var12 and typename then
-		local var13
-		local t = {
-			typename = typename,
-			fieldName = fieldName,
-			field = p8.field or nil,
-			variables = p8.variables
+	if KeyFn and Typename then
+		local config = {
+			typename = Typename,
+			fieldName = FieldName,
+			field = FieldFunctionOptions.field or nil,
+			variables = FieldFunctionOptions.variables
 		}
-		local var14 = if p8.args ~= nil then if p8.field then argumentsObjectFromField(p8.field, p8.variables) else nil else p8.args
-		while var12 do
-			var13 = var12(var14, t)
+		local ArgumentsObjectFromFieldResult = if FieldFunctionOptions.args == nil then if FieldFunctionOptions.field then ArgumentsObjectFromFieldFunction(FieldFunctionOptions.field, FieldFunctionOptions.variables) else nil else FieldFunctionOptions.args
+		local KeyFnResult = nil
+		while KeyFn do
+			KeyFnResult = KeyFn(ArgumentsObjectFromFieldResult, config)
 			
-			if type(var13) == "table" then
-				var12 = keyArgsFnFromSpecifier(var13)
+			if type(KeyFnResult) == "table" then
+				KeyFn = Callback(KeyFnResult)
 				continue
 			end
-			var11 = var13 or fieldName
+			Enabled = KeyFnResult or FieldName
 			break
 		end
 	end
-	if var11 == nil then
-		var11 = if p8.field then storeKeyNameFromField(p8.field, p8.variables) else getStoreKeyName(fieldName, if p8.args ~= nil then if p8.field then argumentsObjectFromField(p8.field, p8.variables) else nil else p8.args)
+	if Enabled == nil then
+		Enabled = if FieldFunctionOptions.field then StoreKeyNameFromFieldFunction(FieldFunctionOptions.field, FieldFunctionOptions.variables) else GetStoreKeyNameFunction(FieldName, if FieldFunctionOptions.args == nil then if FieldFunctionOptions.field then ArgumentsObjectFromFieldFunction(FieldFunctionOptions.field, FieldFunctionOptions.variables) else nil else FieldFunctionOptions.args)
 	end
-	return if var11 == false then fieldName elseif fieldName == fieldNameFromStoreName(var11) then var11 else fieldName .. ":" .. var60
+	return if Enabled == false then FieldName elseif FieldName == FieldNameFromStoreNameFunction(Enabled) then Enabled else FieldName .. ":" .. Enabled
 end
 
-function t_1:readField(p9, p10)
-	-- upvalues: fieldNameFromStoreName (ref), makeFieldFunctionOptions (write), cacheSlot (ref)
-	local from = p9.from
+function Module:readField(FieldFunctionOptions, p6) --[[ Line: 930 ]]
+	-- upvalues: FieldNameFromStoreNameFunction (copy), Callback2 (ref), CacheSlot (copy)
+	local From = FieldFunctionOptions.from
 	
-	if not from then return end
-	if not p9.field and not p9.fieldName then return end
-	if p9.typename == nil then
-		local var15 = p10.store:getFieldValue(from, "__typename")
+	if not From then return end
+	if not FieldFunctionOptions.field and not FieldFunctionOptions.fieldName then return end
+	if FieldFunctionOptions.typename == nil then
+		local TypenameFieldValue = p6.store:getFieldValue(From, "__typename")
 		
-		if var15 then
-			p9.typename = var15
+		if TypenameFieldValue then
+			FieldFunctionOptions.typename = TypenameFieldValue
 		end
 	end
-	local var16 = self:getStoreFieldName(p9)
-	local var17 = p10.store:getFieldValue(from, var16)
-	local typenameFieldPolicy = self:getFieldPolicy(p9.typename, fieldNameFromStoreName(var16), false)
-	local var18 = if typenameFieldPolicy then typenameFieldPolicy.read else nil
+	local StoreFieldName = self:getStoreFieldName(FieldFunctionOptions)
+	local FieldValue = p6.store:getFieldValue(From, StoreFieldName)
+	local FieldPolicy = self:getFieldPolicy(FieldFunctionOptions.typename, FieldNameFromStoreNameFunction(StoreFieldName), false)
+	local Read = if FieldPolicy then FieldPolicy.read else nil
 	
-	return if var18 then cacheSlot:withValue(self.cache, var18, {
-		var17,
-		makeFieldFunctionOptions(self, from, p9, p10, p10.store:getStorage(if from.__ref then from.__ref else from, var16))
-	}) else var17
+	return if Read then CacheSlot:withValue(self.cache, Read, {
+		FieldValue,
+		(Callback2(self, From, FieldFunctionOptions, p6, p6.store:getStorage(if From.__ref then From.__ref else From, StoreFieldName)))
+	}) else FieldValue
 end
 
-function t_1:getMergeFunction(p9, p10, p11)
-	local var15 = self:getFieldPolicy(p9, p10, false)
-	local var16 = var15 and var15.merge
+function Module:getMergeFunction(p6, p7, p8) --[[ Line: 990 ]]
+	local FieldPolicy = self:getFieldPolicy(p6, p7, false)
+	local Merge = if FieldPolicy then FieldPolicy.merge else FieldPolicy
 	
-	if not var16 and p11 then
-		local var17 = self:getTypePolicy(p11)
+	if not Merge and p8 then
+		local TypePolicy = self:getTypePolicy(p8)
 		
-		if var17 then
-			return var17.merge
+		if TypePolicy then
+			return TypePolicy.merge
 		end
-		var16 = var17
+		Merge = TypePolicy
 	end
-	return var16
+	return Merge
 end
 
-function t_1.runMergeFunction(p9, p10, p11, p12, p13, p14)
-	-- upvalues: mergeTrueFn (write), makeMergeObjectsFunction (write), mergeFalseFn (write), makeFieldFunctionOptions (write)
-	local field = p12.field
-	local typename = p12.typename
-	local merge = p12.merge
+function Module.runMergeFunction(p6, p7, p8, p9, p10, p11) --[[ Line: 1021 ]]
+	-- upvalues: mergeTrueFn (ref), Callback3 (ref), mergeFalseFn (ref), Callback2 (ref)
+	local Field = p9.field
+	local Typename = p9.typename
+	local MergeFunction = p9.merge
 	
-	if merge == mergeTrueFn then
-		return makeMergeObjectsFunction(p13.store)(p12, p10, p11)
-	elseif merge == mergeFalseFn then
-		return p11
-	elseif p13.overwrite then
-		p10 = nil
+	if MergeFunction == mergeTrueFn then
+		return Callback3(p10.store)(p9, p7, p8)
 	end
-	return merge(p12, p10, p11, makeFieldFunctionOptions(p9, nil, {
-		typename = typename,
-		fieldName = field.name.value,
-		field = field,
-		variables = p13.variables
-	}, p13, p14 or {}))
+	if MergeFunction == mergeFalseFn then
+		return p8
+	end
+	if p10.overwrite then
+		p7 = nil
+	end
+	return MergeFunction(p9, p7, p8, Callback2(p6, nil, {
+		typename = Typename,
+		fieldName = Field.name.value,
+		field = Field,
+		variables = p10.variables
+	}, p10, p11 or {}))
 end
 
-t.Policies = t_1
+PoliciesModule.Policies = Module
 
-makeFieldFunctionOptions = function(p9, p10, p11, p12, p13)
-	-- upvalues: fieldNameFromStoreName (ref), argumentsObjectFromField (ref), isReference (ref), object (ref), hasOwnPropertyModule (ref), invariant (ref), stringifyForDisplay (ref), array (ref), makeMergeObjectsFunction (write)
-	local var15 = p9:getStoreFieldName(p11)
-	local variables = p11.variables or p12.variables
+Callback2 = function(p6, From, FieldFunctionOptions, p7, Storage) --[[ Line: 1081 | Named "makeFieldFunctionOptions" ]]
+	-- upvalues: FieldNameFromStoreNameFunction (copy), ArgumentsObjectFromFieldFunction (copy), IsReferenceFunction (copy), Object (copy), HasOwnPropertyModule (copy), InvariantFunction (copy), StringifyForDisplayFunction (copy), Array (copy), Callback3 (ref)
+	local StoreFieldName = p6:getStoreFieldName(FieldFunctionOptions)
+	local Variables = FieldFunctionOptions.variables or p7.variables
 	
 	return {
-		args = if p11.args ~= nil then if p11.field then argumentsObjectFromField(p11.field, p11.variables) else nil else p11.args,
-		field = p11.field or nil,
-		fieldName = fieldNameFromStoreName(var15),
-		storeFieldName = var15,
-		variables = variables,
-		isReference = function(_, ...)
-			-- upvalues: isReference (copy)
-			return isReference(...)
+		args = if FieldFunctionOptions.args == nil then if FieldFunctionOptions.field then ArgumentsObjectFromFieldFunction(FieldFunctionOptions.field, FieldFunctionOptions.variables) else nil else FieldFunctionOptions.args,
+		field = FieldFunctionOptions.field or nil,
+		fieldName = FieldNameFromStoreNameFunction(StoreFieldName),
+		storeFieldName = StoreFieldName,
+		variables = Variables,
+		isReference = function(_, ...) --[[ Line: 1101 ]]
+			-- upvalues: IsReferenceFunction (upval)
+			return IsReferenceFunction(...)
 		end,
-		toReference = p12.store.toReference,
-		storage = p13,
-		cache = p9.cache,
-		canRead = p12.store.canRead,
-		readField = function(_, p14, ...)
-			-- upvalues: object (copy), p10 (ref), hasOwnPropertyModule (copy), invariant (copy), stringifyForDisplay (copy), array (copy), variables (ref), p9 (ref), p12 (ref)
-			local var16 = type(p14)
+		toReference = p7.store.toReference,
+		storage = Storage,
+		cache = p6.cache,
+		canRead = p7.store.canRead,
+		readField = function(_, Tbl, ...) --[[ Line: 1108 ]]
+			-- upvalues: Object (upval), From (copy), HasOwnPropertyModule (upval), InvariantFunction (upval), StringifyForDisplayFunction (upval), Array (upval), Variables (copy), p6 (copy), p7 (copy)
+			local ValueType = type(Tbl)
 			local list = {
-				if var16 == "table" then object.assign(table.clone(p14), if p14.from == object.None then { from = "<Object.None>" } else nil) else p14,
+				if ValueType == "table" then Object.assign(table.clone(Tbl), if Tbl.from == Object.None then { from = "<Object.None>" } else nil) else Tbl,
 				if select("#", ...) >= 1 then "<nil>" else nil
 			}
-			local var17 = nil
+			local AssignResult = nil
 			
-			if var16 == "string" then
-				var17 = {
-					fieldName = p14,
-					from = if select("#", ...) >= 1 then ... else p10
+			if ValueType == "string" then
+				AssignResult = {
+					fieldName = Tbl,
+					from = if select("#", ...) >= 1 then (...) else From
 				}
-			elseif var16 ~= "table" then
-				invariant.warn(("Unexpected readField arguments: %s"):format(stringifyForDisplay(array.from(list))))
+			else
+				if ValueType ~= "table" then
+					InvariantFunction.warn(("Unexpected readField arguments: %s"):format(StringifyForDisplayFunction(Array.from(list))))
+					
+					return
+				end
+				AssignResult = Object.assign({}, Tbl)
 				
-				return
+				if not HasOwnPropertyModule(Tbl, "from") then
+					AssignResult.from = From
+				end
 			end
-			var17 = object.assign({}, p14)
-			
-			if not hasOwnPropertyModule(p14, "from") then
-				var17.from = p10
+			if _G.__DEV__ and AssignResult.from == nil then
+				InvariantFunction.warn(("Undefined 'from' passed to readField with arguments %s"):format(StringifyForDisplayFunction(Array.from(list))))
 			end
-			if _G.__DEV__ and var17.from == nil then
-				invariant.warn(("Undefined 'from' passed to readField with arguments %s"):format(stringifyForDisplay(array.from(list))))
+			if AssignResult.variables == nil then
+				AssignResult.variables = Variables
 			end
-			if var17.variables == nil then
-				var17.variables = variables
-			end
-			return p9:readField(var17, p12)
+			return p6:readField(AssignResult, p7)
 		end,
-		mergeObjects = makeMergeObjectsFunction(p12.store)
+		mergeObjects = Callback3(p7.store)
 	}
 end
 
-makeMergeObjectsFunction = function(p14)
-	-- upvalues: array (ref), invariantError (ref), isNonNullObject (ref), isReference (ref), storeValueIsStoreObject (ref), object (ref)
-	return function(_, p15, p16)
-		-- upvalues: array (copy), invariantError (copy), isNonNullObject (copy), p14 (ref), isReference (copy), storeValueIsStoreObject (copy), object (copy)
-		if array.isArray(p15) or array.isArray(p16) then
-			error(invariantError.new("Cannot automatically merge arrays"))
+Callback3 = function(Store) --[[ Line: 1175 | Named "makeMergeObjectsFunction" ]]
+	-- upvalues: Array (copy), InvariantError (copy), IsNonNullObjectFunction (copy), IsReferenceFunction (copy), StoreValueIsStoreObjectFunction (copy), Object (copy)
+	return function(_, p8, p9) --[[ Line: 1176 ]]
+		-- upvalues: Array (upval), InvariantError (upval), IsNonNullObjectFunction (upval), Store (copy), IsReferenceFunction (upval), StoreValueIsStoreObjectFunction (upval), Object (upval)
+		if Array.isArray(p8) or Array.isArray(p9) then
+			error(InvariantError.new("Cannot automatically merge arrays"))
 		end
-		if isNonNullObject(p15) and isNonNullObject(p16) then
-			local var16 = p14:getFieldValue(p15, "__typename")
-			local var17 = p14:getFieldValue(p16, "__typename")
+		if IsNonNullObjectFunction(p8) and IsNonNullObjectFunction(p9) then
+			local TypenameFieldValue = Store:getFieldValue(p8, "__typename")
+			local TypenameFieldValue1 = Store:getFieldValue(p9, "__typename")
 			
-			if var16 ~= nil and (var17 ~= nil and var16 ~= var17) then
-				return p16
-			elseif isReference(p15) and storeValueIsStoreObject(p16) then
-				p14:merge(p15.__ref, p16)
+			if TypenameFieldValue ~= nil and (TypenameFieldValue1 ~= nil and TypenameFieldValue ~= TypenameFieldValue1) then
+				return p9
+			elseif IsReferenceFunction(p8) and StoreValueIsStoreObjectFunction(p9) then
+				Store:merge(p8.__ref, p9)
 				
-				return p15
-			elseif storeValueIsStoreObject(p15) and isReference(p16) then
-				p14:merge(p15, p16.__ref)
+				return p8
+			elseif StoreValueIsStoreObjectFunction(p8) and IsReferenceFunction(p9) then
+				Store:merge(p8, p9.__ref)
 				
-				return p16
+				return p9
+			elseif StoreValueIsStoreObjectFunction(p8) and StoreValueIsStoreObjectFunction(p9) then
+				return Object.assign({}, p8, p9)
 			end
-			return if storeValueIsStoreObject(p15) and storeValueIsStoreObject(p16) then object.assign({}, p15, p16) else p16
 		end
+		return p9
 	end
 end
 
-local function keyObjEncode(p14, p15)
-	-- upvalues: array (ref), keyObjEncode (ref), httpService (ref)
-	assert(typeof(p15) == "table", "specifier must be an array")
+local function keyObjEncode(KeyObject, p8): string --[[ Line: 1226 ]]
+	-- upvalues: Array (copy), keyObjEncode (copy), HttpService (copy)
+	assert(typeof(p8) == "table", "specifier must be an array")
 	
-	return if next(p15) then "{" .. array.join(array.filter(array.map(p15, function(p16, p17)
-		-- upvalues: array (copy), p14 (ref), p15 (ref), keyObjEncode (copy), httpService (copy)
-		if array.isArray(p16) then
-			return ""
-		end
-		local _ = nil
-		
-		return if p14[p16] then if p17 < #p15 then httpService:JSONEncode(p16) .. ":" .. (if array.isArray(p15[p17 + 1]) then keyObjEncode(p14[p16], p15[p17 + 1]) else httpService:JSONEncode(p14[p16])) else httpService:JSONEncode(p16) .. ":" .. httpService:JSONEncode(p14[p16]) else ""
-	end), function(p16)
-		return p16 ~= ""
+	return if next(p8) then "{" .. Array.join(Array.filter(Array.map(p8, function(Input, p9: number): string --[[ Line: 1236 ]]
+		-- upvalues: Array (upval), KeyObject (copy), p8 (copy), keyObjEncode (upval), HttpService (upval)
+		return if Array.isArray(Input) then "" elseif KeyObject[Input] then if p9 < #p8 then HttpService:JSONEncode(Input) .. ":" .. (if Array.isArray(p8[p9 + 1]) then keyObjEncode(KeyObject[Input], p8[p9 + 1]) else HttpService:JSONEncode(KeyObject[Input])) else HttpService:JSONEncode(Input) .. ":" .. HttpService:JSONEncode(KeyObject[Input]) else ""
+	end), function(p9): boolean --[[ Line: 1259 ]]
+		return p9 ~= ""
 	end), ",") .. "}" else "[]"
 end
 
-keyArgsFnFromSpecifier = function(p14)
-	-- upvalues: keyObjEncode (ref), computeKeyObject (write)
-	return function(p15, p16)
-		-- upvalues: keyObjEncode (copy), computeKeyObject (copy), p14 (ref)
-		return if p15 then ("%s:%s"):format(p16.fieldName, keyObjEncode(computeKeyObject(p15, p14, false), p14)) else p16.fieldName
+Callback = function(KeyArgs) --[[ Line: 1268 | Named "keyArgsFnFromSpecifier" ]]
+	-- upvalues: keyObjEncode (copy), Callback4 (ref)
+	return function(p8, p9) --[[ Line: 1269 ]]
+		-- upvalues: keyObjEncode (upval), Callback4 (upval), KeyArgs (copy)
+		return if p8 then ("%s:%s"):format(p9.fieldName, (keyObjEncode(Callback4(p8, KeyArgs, false), KeyArgs))) else p9.fieldName
 	end
 end
 
-keyFieldsFnFromSpecifier = function(p14)
-	-- upvalues: trie (ref), canUseWeakMap (ref), makeAliasMap (write), computeKeyObject (write), keyObjEncode (ref)
-	local var16 = trie.new(canUseWeakMap)
+Callback1 = function(KeyFields) --[[ Line: 1281 | Named "keyFieldsFnFromSpecifier" ]]
+	-- upvalues: Trie (copy), CanUseWeakMap (copy), Callback5 (ref), Callback4 (ref), keyObjEncode (copy)
+	local NewTrie = Trie.new(CanUseWeakMap)
 	
-	return function(_, p15, p16)
-		-- upvalues: var16 (ref), makeAliasMap (copy), computeKeyObject (copy), p14 (ref), keyObjEncode (copy)
-		local aliasMap = nil
+	return function(_, p8, p9): string --[[ Line: 1283 ]]
+		-- upvalues: NewTrie (copy), Callback5 (upval), Callback4 (upval), KeyFields (copy), keyObjEncode (upval)
+		local AliasMap = nil
 		
-		if p16.selectionSet and p16.fragmentMap then
-			local var17 = var16:lookupArray({ p16.selectionSet, p16.fragmentMap })
+		if p9.selectionSet and p9.fragmentMap then
+			local LookupArrayResult = NewTrie:lookupArray({ p9.selectionSet, p9.fragmentMap })
 			
-			if var17.aliasMap then
-				aliasMap = var17.aliasMap
+			if LookupArrayResult.aliasMap then
+				AliasMap = LookupArrayResult.aliasMap
 			else
-				var17.aliasMap = makeAliasMap(p16.selectionSet, p16.fragmentMap)
-				aliasMap = var17.aliasMap
+				LookupArrayResult.aliasMap = Callback5(p9.selectionSet, p9.fragmentMap)
+				AliasMap = LookupArrayResult.aliasMap
 			end
 		end
-		p16.keyObject = computeKeyObject(p15, p14, true, aliasMap)
+		p9.keyObject = Callback4(p8, KeyFields, true, AliasMap)
 		
-		return ("%s:%s"):format(p16.typename or "null", keyObjEncode(p16.keyObject, p14))
+		return ("%s:%s"):format(p9.typename or "null", (keyObjEncode(p9.keyObject, KeyFields)))
 	end
 end
 
-makeAliasMap = function(p14, p15)
-	-- upvalues: set (ref), array (ref), isField (ref), makeAliasMap (write), getFragmentFromSelection (ref)
+Callback5 = function(SelectionSet, FragmentMap) --[[ Line: 1311 | Named "makeAliasMap" ]]
+	-- upvalues: Set (copy), Array (copy), IsFieldFunction (copy), Callback5 (ref), GetFragmentFromSelectionFunction (copy)
 	local t = {}
-	local var16 = set.new({ p14 })
+	local NewSet = Set.new({ SelectionSet })
 	
-	for i, v in var16 do
-		array.forEach(v.selections, function(p16)
-			-- upvalues: isField (copy), t (ref), makeAliasMap (copy), p15 (ref), getFragmentFromSelection (copy), var16 (ref)
-			if isField(p16) then
-				if p16.alias then
-					local value = p16.alias.value
-					local value_1 = p16.name.value
+	for _, value in NewSet do
+		Array.forEach(value.selections, function(p8) --[[ Line: 1316 ]]
+			-- upvalues: IsFieldFunction (upval), t (copy), Callback5 (upval), FragmentMap (copy), GetFragmentFromSelectionFunction (upval), NewSet (copy)
+			if IsFieldFunction(p8) then
+				if p8.alias then
+					local Value = p8.alias.value
+					local Value1 = p8.name.value
 					
-					if value_1 ~= value then
-						local aliases
-						local _ = nil
-						
+					if Value1 ~= Value then
+						local Aliases = nil
 						if t.aliases then
-							aliases = t.aliases
+							Aliases = t.aliases
 						else
 							t.aliases = {}
-							aliases = t.aliases
+							Aliases = t.aliases
 						end
-						aliases[value_1] = value
+						Aliases[Value1] = Value
 					end
 				end
-				if not p16.selectionSet then return end
-				local subsets
-				local _ = nil
-				
-				if t.subsets then
-					subsets = t.subsets
-				else
-					t.subsets = {}
-					subsets = t.subsets
+				if p8.selectionSet then
+					local Subsets = nil
+					if t.subsets then
+						Subsets = t.subsets
+					else
+						t.subsets = {}
+						Subsets = t.subsets
+					end
+					Subsets[p8.name.value] = Callback5(p8.selectionSet, FragmentMap)
+					
+					return
 				end
-				subsets[p16.name.value] = makeAliasMap(p16.selectionSet, p15)
-				
-				return
 			else
-				local var17 = getFragmentFromSelection(p16, p15)
+				local FragmentFromSelection = GetFragmentFromSelectionFunction(p8, FragmentMap)
 				
-				if var17 then
-					var16:add(var17.selectionSet)
+				if FragmentFromSelection then
+					NewSet:add(FragmentFromSelection.selectionSet)
 				end
 			end
 		end)
@@ -730,34 +740,31 @@ makeAliasMap = function(p14, p15)
 	return t
 end
 
-computeKeyObject = function(p16, p17, p18, p19)
-	-- upvalues: computeKeyObject (write), hasOwnPropertyModule (ref), invariant (ref)
+Callback4 = function(p8, List, p9, AliasMap) --[[ Line: 1361 | Named "computeKeyObject" ]]
+	-- upvalues: Callback4 (ref), HasOwnPropertyModule (copy), InvariantFunction (copy)
 	local t = {}
-	local var17 = nil
+	local v2 = nil
 	
-	for i, v in p17 do
-		local var18
-		if type(v) == "table" then
-			if type(var17) == "string" then
-				var18 = p19 and p19.subsets
-				t[var17] = computeKeyObject(p16[var17], v, p18, var18 and var18[var17])
+	for _, value in List do
+		if type(value) ~= "table" then
+			local Aliases = if AliasMap then AliasMap.aliases else AliasMap
+			local Alias = if Aliases and Aliases[value] then Aliases[value] else value
+			
+			if HasOwnPropertyModule(p8, Alias) then
+				v2 = value
+				t[v2] = p8[Alias]
+			else
+				InvariantFunction(not p9, ("Missing field '%s' while computing key fields"):format(Alias))
+				v2 = nil
 			end
-		end
-		var18 = p19 and p19.aliases
-		local _ = nil
-		local var19 = if var18 and var18[v] then var18[v] else v
-		
-		if hasOwnPropertyModule(p16, var19) then
-			var17 = v
-			t[var17] = p16[var19]
-		else
-			invariant(not p18, ("Missing field '%s' while computing key fields"):format(var19))
-			var17 = nil
+		elseif type(v2) == "string" then
+			local Subsets = if AliasMap then AliasMap.subsets else AliasMap
+			t[v2] = Callback4(p8[v2], value, p9, if Subsets then Subsets[v2] else Subsets)
 		end
 	end
 	return t
 end
 
-t.None = object.None
+PoliciesModule.None = Object.None
 
-return t
+return PoliciesModule

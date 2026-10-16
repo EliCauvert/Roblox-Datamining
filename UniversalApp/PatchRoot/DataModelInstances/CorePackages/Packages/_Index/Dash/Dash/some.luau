@@ -1,6 +1,6 @@
-﻿return function(p1, p2)
-	for i, v in p1 do
-		if p2(v, i) then
+﻿return function(List, Callback): boolean --[[ Line: 12 | Named "some" ]]
+	for i, value in List do
+		if Callback(value, i) then
 			return true
 		end
 	end

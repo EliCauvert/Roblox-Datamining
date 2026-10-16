@@ -1,1 +1,1 @@
-﻿return require(script.InputDetector)
+﻿return (require(script.InputDetector))

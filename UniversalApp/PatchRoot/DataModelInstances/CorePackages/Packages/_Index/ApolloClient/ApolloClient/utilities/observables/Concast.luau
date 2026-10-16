@@ -1,161 +1,159 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local set = luauPolyfillModule.Set
-local array = luauPolyfillModule.Array
-local error = luauPolyfillModule.Error
-local promiseModule = require(parent.Promise)
-local t_1 = {}
-local observable = require(script.Parent.Observable).Observable
-local iterateObserversSafely = require(script.Parent.iteration).iterateObserversSafely
-local fixObservableSubclass = require(script.Parent.subclassing).fixObservableSubclass
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local Set = LuauPolyfillModule.Set
+local Array = LuauPolyfillModule.Array
+local Error = LuauPolyfillModule.Error
+local PromiseModule = require(Parent.Promise)
+local Sub = {}
+local Observable = require(script.Parent.Observable).Observable
+local IterateObserversSafelyFunction = require(script.Parent.iteration).iterateObserversSafely
+local FixObservableSubclassFunction: (any) -> () = require(script.Parent.subclassing).fixObservableSubclass
 
-local function _(p1)
-	-- upvalues: boolean (ref)
-	return boolean.toJSBoolean(p1) and typeof(p1.andThen) == "function"
+local function _(p1): boolean --[[ Line: 50 | Named "isPromiseLike" ]]
+	-- upvalues: Boolean (copy)
+	return Boolean.toJSBoolean(p1) and typeof(p1.andThen) == "function"
 end
 
-local tbl = setmetatable({}, { __index = observable })
-tbl.__index = tbl
+local self = setmetatable({}, { __index = Observable })
+self.__index = self
 
-function tbl.new(p1)
-	-- upvalues: observable (ref), tbl (ref), set (ref), t_1 (ref), promiseModule (ref), iterateObserversSafely (ref), boolean (ref)
-	local tbl_1 = nil
-	tbl_1 = setmetatable(observable.new(function(p2)
-		-- upvalues: tbl_1 (write)
-		tbl_1:addObserver(p2)
+function self.new(Promise) --[[ Line: 125 ]]
+	-- upvalues: Observable (copy), self (copy), Set (copy), Sub (copy), PromiseModule (copy), IterateObserversSafelyFunction (copy), Boolean (copy)
+	local v1 = nil
+	v1 = setmetatable(Observable.new(function(p1) --[[ Line: 129 ]]
+		-- upvalues: v1 (ref)
+		v1:addObserver(p1)
 		
-		return function()
-			-- upvalues: tbl_1 (copy), p2 (ref)
-			return tbl_1:removeObserver(p2)
+		return function() --[[ Line: 131 ]]
+			-- upvalues: v1 (upval), p1 (copy)
+			return v1:removeObserver(p1)
 		end
-	end), tbl)
-	tbl_1.observers = set.new()
-	tbl_1.sub = t_1
-	tbl_1.source = {}
-	tbl_1.latest = nil
-	tbl_1.addCount = 0
-	tbl_1.promise = promiseModule.new(function(p2, p3)
-		-- upvalues: tbl_1 (write)
-		function tbl_1.resolve(_, ...)
-			-- upvalues: p2 (ref)
-			p2(...)
+	end), self)
+	v1.observers = Set.new()
+	v1.sub = Sub
+	v1.source = {}
+	v1.latest = nil
+	v1.addCount = 0
+	v1.promise = PromiseModule.new(function(Callback, Callback1) --[[ Line: 163 ]]
+		-- upvalues: v1 (ref)
+		function v1:resolve(...) --[[ Line: 164 ]]
+			-- upvalues: Callback (copy)
+			Callback(...)
 		end
 		
-		function tbl_1.reject(_, ...)
-			-- upvalues: p3 (ref)
-			p3(...)
+		function v1:reject(...) --[[ Line: 167 ]]
+			-- upvalues: Callback1 (copy)
+			Callback1(...)
 		end
 	end)
-	tbl_1.handlers = {
-		next = function(_, p2)
-			-- upvalues: tbl_1 (write), iterateObserversSafely (copy)
-			if tbl_1.sub ~= nil then
-				tbl_1.latest = { "next", p2 }
-				iterateObserversSafely(tbl_1.observers, "next", p2)
+	v1.handlers = {
+		next = function(_, p1) --[[ Line: 175 ]]
+			-- upvalues: v1 (ref), IterateObserversSafelyFunction (upval)
+			if v1.sub ~= nil then
+				v1.latest = { "next", p1 }
+				IterateObserversSafelyFunction(v1.observers, "next", p1)
 			end
 		end,
-		error = function(_, p2)
-			-- upvalues: tbl_1 (write), boolean (copy), promiseModule (copy), iterateObserversSafely (copy)
-			local sub = tbl_1.sub
+		error = function(_, p1) --[[ Line: 181 ]]
+			-- upvalues: v1 (ref), Boolean (upval), PromiseModule (upval), IterateObserversSafelyFunction (upval)
+			local Sub = v1.sub
 			
-			if sub ~= nil then
-				if boolean.toJSBoolean(sub) then
-					promiseModule.delay(0):andThen(function()
-						-- upvalues: sub (ref)
-						return sub:unsubscribe()
+			if Sub ~= nil then
+				if Boolean.toJSBoolean(Sub) then
+					PromiseModule.delay(0):andThen(function() --[[ Line: 188 ]]
+						-- upvalues: Sub (copy)
+						return Sub:unsubscribe()
 					end)
 				end
-				tbl_1.sub = nil
-				tbl_1.latest = { "error", p2 }
-				tbl_1:reject(p2)
-				iterateObserversSafely(tbl_1.observers, "error", p2)
+				v1.sub = nil
+				v1.latest = { "error", p1 }
+				v1:reject(p1)
+				IterateObserversSafelyFunction(v1.observers, "error", p1)
 			end
 		end,
-		complete = function(_)
-			-- upvalues: tbl_1 (write), boolean (copy), iterateObserversSafely (copy)
-			if tbl_1.sub ~= nil then
-				local removed = table.remove(tbl_1.sources, 1)
+		complete = function(_) --[[ Line: 198 ]]
+			-- upvalues: v1 (ref), Boolean (upval), IterateObserversSafelyFunction (upval)
+			if v1.sub ~= nil then
+				local Removed = table.remove(v1.sources, 1)
 				
-				if boolean.toJSBoolean(removed) then
-					if boolean.toJSBoolean(removed) and typeof(removed.andThen) == "function" then
-						removed:andThen(function(p2)
-							-- upvalues: tbl_1 (copy)
-							tbl_1.sub = p2:subscribe(tbl_1.handlers)
-						end)
-						
-						return
-					end
-					tbl_1.sub = removed:subscribe(tbl_1.handlers)
-				else
-					tbl_1.sub = nil
+				if not Boolean.toJSBoolean(Removed) then
+					v1.sub = nil
 					
-					if tbl_1.latest == nil or tbl_1.latest[1] ~= "next" then
-						tbl_1:resolve()
+					if v1.latest == nil or v1.latest[1] ~= "next" then
+						v1:resolve()
 					else
-						tbl_1:resolve(tbl_1.latest[2])
+						v1:resolve(v1.latest[2])
 					end
-					iterateObserversSafely(tbl_1.observers, "complete")
+					IterateObserversSafelyFunction(v1.observers, "complete")
 					
 					return
+				elseif Boolean.toJSBoolean(Removed) and typeof(Removed.andThen) == "function" then
+					Removed:andThen(function(Result) --[[ Line: 216 ]]
+						-- upvalues: v1 (upval)
+						v1.sub = Result:subscribe(v1.handlers)
+					end)
+					
+					return
+				else
+					v1.sub = Removed:subscribe(v1.handlers)
 				end
 			end
 		end
 	}
 	
-	function tbl_1.cancel(_, p2)
-		-- upvalues: tbl_1 (write)
-		tbl_1:reject(p2)
-		tbl_1.sources = {}
-		tbl_1.handlers:complete()
+	function v1:cancel(p1) --[[ Line: 227 ]]
+		-- upvalues: v1 (ref)
+		v1:reject(p1)
+		v1.sources = {}
+		v1.handlers:complete()
 	end
 	
-	tbl_1.promise:catch(function() end)
+	v1.promise:catch(function() --[[ Line: 236 ]] end)
 	
-	if typeof(p1) == "function" then
-		p1 = { observable.new(p1) }
+	if typeof(Promise) == "function" then
+		Promise = { Observable.new(Promise) }
 	end
-	if boolean.toJSBoolean(p1) and typeof(p1.andThen) == "function" then
-		p1:andThen(function(p2)
-			-- upvalues: tbl_1 (write)
-			tbl_1:start(p2)
-		end, function(...)
-			-- upvalues: tbl_1 (write)
-			tbl_1.handlers:error(...)
+	if Boolean.toJSBoolean(Promise) and typeof(Promise.andThen) == "function" then
+		Promise:andThen(function(Result) --[[ Line: 246 ]]
+			-- upvalues: v1 (ref)
+			v1:start(Result)
+		end, function(...) --[[ Line: 248 ]]
+			-- upvalues: v1 (ref)
+			v1.handlers:error(...)
 		end)
 	else
-		tbl_1:start(p1)
+		v1:start(Promise)
 	end
-	return tbl_1
+	return v1
 end
 
-function tbl:start(p1)
-	-- upvalues: t_1 (ref), array (ref)
-	if self.sub == t_1 then
-		self.sources = array.from(p1)
+function self:start(Promise) --[[ Line: 261 ]]
+	-- upvalues: Sub (copy), Array (copy)
+	if self.sub == Sub then
+		self.sources = Array.from(Promise)
 		self.handlers:complete()
 		
 		return
 	end
 end
 
-function tbl:deliverLastMessage(p1)
-	-- upvalues: boolean (ref)
-	if boolean.toJSBoolean(self.latest) then
-		local var1 = self.latest[1]
-		local var2 = p1[var1]
+function self:deliverLastMessage(p1) --[[ Line: 278 ]]
+	-- upvalues: Boolean (copy)
+	if Boolean.toJSBoolean(self.latest) then
+		local LatestEntry = self.latest[1]
+		local Callback: (any, any) -> () = p1[LatestEntry]
 		
-		if boolean.toJSBoolean(var2) then
-			var2(p1, self.latest[2])
+		if Boolean.toJSBoolean(Callback) then
+			Callback(p1, self.latest[2])
 		end
-		if self.sub == nil and var1 == "next" and p1.complete ~= nil then
-			p1:complete()
+		if self.sub == nil and LatestEntry == "next" and p1.complete ~= nil then
+			p1.complete(p1)
 		end
 	end
 end
 
-function tbl:addObserver(p1)
+function self:addObserver(p1) --[[ Line: 296 ]]
 	if not self.observers:has(p1) then
 		self:deliverLastMessage(p1)
 		self.observers:add(p1)
@@ -163,46 +161,47 @@ function tbl:addObserver(p1)
 	end
 end
 
-function tbl:removeObserver(p1, p2)
-	-- upvalues: error (ref)
+function self:removeObserver(p1, p2) --[[ Line: 306 ]]
+	-- upvalues: Error (copy)
 	if self.observers:delete(p1) then
 		self.addCount -= 1
 		
 		if self.addCount < 1 and not p2 then
-			self.handlers:error(error.new("Observable cancelled prematurely"))
+			self.handlers:error(Error.new("Observable cancelled prematurely"))
 		end
 	end
 end
 
-function tbl:cleanup(p1)
-	local var1 = false
-	local var2 = nil
+function self:cleanup(Callback) --[[ Line: 322 ]]
+	local Flag = false
+	local v1 = nil
 	
-	local function once()
-		-- upvalues: var1 (write), self (ref), var2 (write), p1 (ref)
-		if not var1 then
-			var1 = true
-			self.observers:delete(var2)
-			p1()
+	local function once() --[[ Line: 325 ]]
+		-- upvalues: Flag (ref), self (copy), v1 (ref), Callback (copy)
+		if not Flag then
+			Flag = true
+			self.observers:delete(v1)
+			Callback()
 		end
 	end
 	
-	local addCount = self.addCount
-	self:addObserver({ next = once, error = once, complete = once })
-	self.addCount = addCount
+	v1 = { next = once, error = once, complete = once }
+	local AddCount = self.addCount
+	self:addObserver(v1)
+	self.addCount = AddCount
 end
 
-function tbl.of(...)
-	-- upvalues: observable (ref), tbl (ref)
-	return observable.of(tbl, ...)
+function self.of(...) --[[ Line: 345 ]]
+	-- upvalues: Observable (copy), self (copy)
+	return Observable.of(self, ...)
 end
 
-function tbl.from(...)
-	-- upvalues: observable (ref), tbl (ref)
-	return observable.from(tbl, ...)
+function self.from(...) --[[ Line: 349 ]]
+	-- upvalues: Observable (copy), self (copy)
+	return Observable.from(self, ...)
 end
 
-t.Concast = tbl
-fixObservableSubclass(tbl)
+local ConcastModule = { Concast = self }
+FixObservableSubclassFunction(self)
 
-return t
+return ConcastModule

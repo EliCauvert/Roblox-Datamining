@@ -1,19 +1,19 @@
-﻿return function(p1, p2)
-	if p1 == nil or typeof(p1) ~= "table" then
+﻿return function(List, List1): boolean --[[ Line: 1 | Named "verifySummaryFormat" ]]
+	if List == nil or typeof(List) ~= "table" then
 		return false
 	end
 	local t = {}
 	
-	for i, v in p2 do
-		t[v] = true
+	for _, value in List1 do
+		t[value] = true
 	end
-	for i_1, v_1 in p2 do
-		if p1[v_1] == nil or typeof(p1[v_1]) ~= "number" then
+	for _, value1 in List1 do
+		if List[value1] == nil or typeof(List[value1]) ~= "number" then
 			return false
 		end
 	end
-	for i_2, v_1 in p1 do
-		if not t[i_2] then
+	for i, _ in List do
+		if not t[i] then
 			return false
 		end
 	end

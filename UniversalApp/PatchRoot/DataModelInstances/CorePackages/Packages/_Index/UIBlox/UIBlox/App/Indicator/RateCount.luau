@@ -1,26 +1,26 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local roactModule = require(parent_3.Roact)
-local tModule = require(parent_3.t)
-local label = require(parent_2.Core.ImageSet.ImageSetComponent).Label
-local cryoModule = require(parent_3.Cryo)
-local _ = require(parent_1.Style.StyleTypes)
-local validateColorInfoModule = require(parent_2.Core.Style.Validator.validateColorInfo)
-local imagesModule = require(parent_1.ImageSet.Images)
-local iconButtonModule = require(parent_1.Button.IconButton)
-local getIconSizeModule = require(parent_1.ImageSet.getIconSize)
-local iconSizeModule = require(parent_1.ImageSet.Enum.IconSize)
-local genericTextLabelModule = require(parent_2.Core.Text.GenericTextLabel.GenericTextLabel)
-local withStyleModule = require(parent_2.Core.Style.withStyle)
-local voteStatesModule = require(parent.Enum.VoteStates)
-local ratingLarge = imagesModule["icons/status/games/rating_large"]
-local voteDownOff = imagesModule["icons/actions/vote/voteDownOff"]
-local voteDownOn = imagesModule["icons/actions/vote/voteDownOn"]
-local voteUpOff = imagesModule["icons/actions/vote/voteUpOff"]
-local voteUpOn = imagesModule["icons/actions/vote/voteUpOn"]
-local t = {
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local RoactModule = require(Parent3.Roact)
+local TModule = require(Parent3.t)
+local Label = require(Parent2.Core.ImageSet.ImageSetComponent).Label
+local CryoModule = require(Parent3.Cryo)
+local _ = require(Parent1.Style.StyleTypes)
+local ValidateColorInfoModule = require(Parent2.Core.Style.Validator.validateColorInfo)
+local ImagesModule = require(Parent1.ImageSet.Images)
+local IconButtonModule = require(Parent1.Button.IconButton)
+local GetIconSizeModule = require(Parent1.ImageSet.getIconSize)
+local IconSizeModule = require(Parent1.ImageSet.Enum.IconSize)
+local GenericTextLabelModule = require(Parent2.Core.Text.GenericTextLabel.GenericTextLabel)
+local WithStyleModule = require(Parent2.Core.Style.withStyle)
+local VoteStatesModule = require(Parent.Enum.VoteStates)
+local IconsStatusGamesRatingLarge = ImagesModule["icons/status/games/rating_large"]
+local IconsActionsVoteVoteDownOff = ImagesModule["icons/actions/vote/voteDownOff"]
+local IconsActionsVoteVoteDownOn = ImagesModule["icons/actions/vote/voteDownOn"]
+local IconsActionsVoteVoteUpOff = ImagesModule["icons/actions/vote/voteUpOff"]
+local IconsActionsVoteVoteUpOn = ImagesModule["icons/actions/vote/voteUpOn"]
+local config = {
 	containerSpacingTop = 12,
 	containerSpacingTrailing = 12,
 	containerSpacingBottom = 12,
@@ -31,176 +31,171 @@ local t = {
 	statWidgetDataGap = 0,
 	buttonGroupGap = 12,
 	buttonSize = 44,
-	statWidgetIconSize = getIconSizeModule(iconSizeModule.Large),
-	buttonIconSizeEnum = iconSizeModule.Medium
+	statWidgetIconSize = GetIconSizeModule(IconSizeModule.Large),
+	buttonIconSizeEnum = IconSizeModule.Medium
 }
-local rateCount = roactModule.PureComponent:extend("RateCount")
-rateCount.validateProps = tModule.strictInterface({
-	position = tModule.optional(tModule.UDim2),
-	layoutOrder = tModule.optional(tModule.integer),
-	anchorPoint = tModule.optional(tModule.Vector2),
-	width = tModule.optional(tModule.integer),
-	height = tModule.optional(tModule.integer),
-	rateText = tModule.optional(tModule.string),
-	rateLabel = tModule.optional(tModule.string),
-	voteState = tModule.optional(voteStatesModule.isEnumValue),
-	onVoteDownActivated = tModule.optional(tModule.callback),
-	onVoteUpActivated = tModule.optional(tModule.callback),
-	styleProps = tModule.optional(tModule.strictInterface({
-		containerSpacingTop = tModule.optional(tModule.integer),
-		containerSpacingTrailing = tModule.optional(tModule.integer),
-		containerSpacingBottom = tModule.optional(tModule.integer),
-		containerSpacingLeading = tModule.optional(tModule.integer),
-		containerBorderRadius = tModule.optional(tModule.integer),
-		containerBackgroundColor = tModule.optional(validateColorInfoModule),
-		containerGap = tModule.optional(tModule.integer),
-		statWidgetContainerGap = tModule.optional(tModule.integer),
-		statWidgetIconSize = tModule.optional(tModule.integer),
-		statWidgetIconContentColor = tModule.optional(validateColorInfoModule),
-		statWidgetDataGap = tModule.optional(tModule.integer),
-		statWidgetDataContentColor = tModule.optional(validateColorInfoModule),
-		statWidgetDataLabelContentColor = tModule.optional(validateColorInfoModule),
-		buttonGroupGap = tModule.optional(tModule.integer),
-		buttonSize = tModule.optional(tModule.integer),
-		buttonIconSizeEnum = tModule.optional(iconSizeModule.isEnumValue)
+local RateCount = RoactModule.PureComponent:extend("RateCount")
+RateCount.validateProps = TModule.strictInterface({
+	position = TModule.optional(TModule.UDim2),
+	layoutOrder = TModule.optional(TModule.integer),
+	anchorPoint = TModule.optional(TModule.Vector2),
+	width = TModule.optional(TModule.integer),
+	height = TModule.optional(TModule.integer),
+	rateText = TModule.optional(TModule.string),
+	rateLabel = TModule.optional(TModule.string),
+	voteState = TModule.optional(VoteStatesModule.isEnumValue),
+	onVoteDownActivated = TModule.optional(TModule.callback),
+	onVoteUpActivated = TModule.optional(TModule.callback),
+	styleProps = TModule.optional(TModule.strictInterface({
+		containerSpacingTop = TModule.optional(TModule.integer),
+		containerSpacingTrailing = TModule.optional(TModule.integer),
+		containerSpacingBottom = TModule.optional(TModule.integer),
+		containerSpacingLeading = TModule.optional(TModule.integer),
+		containerBorderRadius = TModule.optional(TModule.integer),
+		containerBackgroundColor = TModule.optional(ValidateColorInfoModule),
+		containerGap = TModule.optional(TModule.integer),
+		statWidgetContainerGap = TModule.optional(TModule.integer),
+		statWidgetIconSize = TModule.optional(TModule.integer),
+		statWidgetIconContentColor = TModule.optional(ValidateColorInfoModule),
+		statWidgetDataGap = TModule.optional(TModule.integer),
+		statWidgetDataContentColor = TModule.optional(ValidateColorInfoModule),
+		statWidgetDataLabelContentColor = TModule.optional(ValidateColorInfoModule),
+		buttonGroupGap = TModule.optional(TModule.integer),
+		buttonSize = TModule.optional(TModule.integer),
+		buttonIconSizeEnum = TModule.optional(IconSizeModule.isEnumValue)
 	}))
 })
-rateCount.defaultProps = {
+RateCount.defaultProps = {
 	height = 72,
 	rateText = "",
 	rateLabel = "",
-	voteState = voteStatesModule.notVoted
+	voteState = VoteStatesModule.notVoted
 }
 
-function rateCount.init(p1)
-	function p0.onVoteDownActivated()
-		-- upvalues: p1 (ref)
-		local onVoteDownActivated = p1.props.onVoteDownActivated
+function RateCount.init(p1) --[[ Line: 151 ]]
+	function p1.onVoteDownActivated() --[[ Line: 152 ]]
+		-- upvalues: p1 (copy)
+		local OnVoteDownActivatedFunction: () -> () = p1.props.onVoteDownActivated
 		
-		if onVoteDownActivated then
-			onVoteDownActivated()
+		if OnVoteDownActivatedFunction then
+			OnVoteDownActivatedFunction()
 		end
 	end
 	
-	function p0.onVoteUpActivated()
-		-- upvalues: p1 (ref)
-		local onVoteUpActivated = p1.props.onVoteUpActivated
+	function p1.onVoteUpActivated() --[[ Line: 159 ]]
+		-- upvalues: p1 (copy)
+		local OnVoteUpActivatedFunction: () -> () = p1.props.onVoteUpActivated
 		
-		if onVoteUpActivated then
-			onVoteUpActivated()
+		if OnVoteUpActivatedFunction then
+			OnVoteUpActivatedFunction()
 		end
 	end
 end
 
-function rateCount.render(p1)
-	-- upvalues: voteStatesModule (ref), withStyleModule (ref), cryoModule (ref), t (ref), getIconSizeModule (ref), roactModule (ref), label (ref), ratingLarge (ref), genericTextLabelModule (ref), iconButtonModule (ref), voteDownOn (ref), voteDownOff (ref), voteUpOn (ref), voteUpOff (ref)
-	local position = p1.props.position
-	local layoutOrder = p1.props.layoutOrder
-	local anchorPoint = p1.props.anchorPoint
-	local width = p1.props.width
-	local height = p1.props.height
-	local var1 = if width then UDim2.new(0, width, 0, height) else UDim2.new(1, 0, 0, height)
-	local rateText = p1.props.rateText
-	local rateLabel = p1.props.rateLabel
-	local voteState = p1.props.voteState
-	local var2 = voteState == voteStatesModule.votedDown
-	local var3 = voteState == voteStatesModule.votedUp
+function RateCount.render(p1) --[[ Line: 167 ]]
+	-- upvalues: VoteStatesModule (copy), WithStyleModule (copy), CryoModule (copy), config (copy), GetIconSizeModule (copy), RoactModule (copy), Label (copy), IconsStatusGamesRatingLarge (copy), GenericTextLabelModule (copy), IconButtonModule (copy), IconsActionsVoteVoteDownOn (copy), IconsActionsVoteVoteDownOff (copy), IconsActionsVoteVoteUpOn (copy), IconsActionsVoteVoteUpOff (copy)
+	local Position = p1.props.position
+	local LayoutOrder = p1.props.layoutOrder
+	local AnchorPoint = p1.props.anchorPoint
+	local Width = p1.props.width
+	local Height = p1.props.height
+	local _UDim2 = nil
+	_UDim2 = if Width then UDim2.new(0, Width, 0, Height) else UDim2.new(1, 0, 0, Height)
+	local RateText = p1.props.rateText
+	local RateLabel = p1.props.rateLabel
+	local VoteState = p1.props.voteState
+	local IsVoteStateMatch = VoteState == VoteStatesModule.votedDown
+	local IsVoteStateMatch1 = VoteState == VoteStatesModule.votedUp
 	
-	return withStyleModule(function(p2)
-		-- upvalues: cryoModule (copy), t (copy), p1 (ref), getIconSizeModule (copy), roactModule (copy), var1 (write), position (ref), anchorPoint (ref), layoutOrder (ref), label (copy), ratingLarge (copy), genericTextLabelModule (copy), rateText (ref), rateLabel (ref), iconButtonModule (copy), var2 (ref), voteDownOn (copy), voteDownOff (copy), var3 (ref), voteUpOn (copy), voteUpOff (copy)
-		local var4 = cryoModule.Dictionary.join(t, p1.props.styleProps or {})
-		local containerSpacingLeading = var4.containerSpacingLeading
-		local containerSpacingTrailing = var4.containerSpacingTrailing
-		local containerBorderRadius = var4.containerBorderRadius
-		local containerBackgroundColor = var4.containerBackgroundColor or p2.Theme.BackgroundContrast
-		local containerGap = var4.containerGap
-		local statWidgetContainerGap = var4.statWidgetContainerGap
-		local statWidgetIconSize = var4.statWidgetIconSize
-		local statWidgetIconContentColor = var4.statWidgetIconContentColor or p2.Theme.IconEmphasis
-		local statWidgetDataGap = var4.statWidgetDataGap
-		local statWidgetDataContentColor = var4.statWidgetDataContentColor or p2.Theme.TextEmphasis
-		local statWidgetDataLabelContentColor = var4.statWidgetDataLabelContentColor or p2.Theme.TextEmphasis
-		local buttonGroupGap = var4.buttonGroupGap
-		local buttonSize = var4.buttonSize
-		local buttonIconSizeEnum = var4.buttonIconSizeEnum
+	return WithStyleModule(function(p2) --[[ Line: 187 ]]
+		-- upvalues: CryoModule (upval), config (upval), p1 (copy), GetIconSizeModule (upval), RoactModule (upval), _UDim2 (ref), Position (copy), AnchorPoint (copy), LayoutOrder (copy), Label (upval), IconsStatusGamesRatingLarge (upval), GenericTextLabelModule (upval), RateText (copy), RateLabel (copy), IconButtonModule (upval), IsVoteStateMatch (copy), IconsActionsVoteVoteDownOn (upval), IconsActionsVoteVoteDownOff (upval), IsVoteStateMatch1 (copy), IconsActionsVoteVoteUpOn (upval), IconsActionsVoteVoteUpOff (upval)
+		local JoinResult = CryoModule.Dictionary.join(config, p1.props.styleProps or {})
+		local ContainerBackgroundColor = JoinResult.containerBackgroundColor or p2.Theme.BackgroundContrast
+		local ContainerGap = JoinResult.containerGap
+		local StatWidgetIconSize = JoinResult.statWidgetIconSize
+		local StatWidgetIconContentColor = JoinResult.statWidgetIconContentColor or p2.Theme.IconEmphasis
+		local ButtonSize: number = JoinResult.buttonSize
+		local ButtonIconSizeEnum = JoinResult.buttonIconSizeEnum
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = var1,
-			Position = position,
-			AnchorPoint = anchorPoint,
-			BackgroundColor3 = containerBackgroundColor.Color,
-			BackgroundTransparency = containerBackgroundColor.Transparency,
-			LayoutOrder = layoutOrder
+			Size = _UDim2,
+			Position = Position,
+			AnchorPoint = AnchorPoint,
+			BackgroundColor3 = ContainerBackgroundColor.Color,
+			BackgroundTransparency = ContainerBackgroundColor.Transparency,
+			LayoutOrder = LayoutOrder
 		}, {
-			RoundCorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, containerBorderRadius) }),
-			ListLayout = roactModule.createElement("UIListLayout", {
+			RoundCorner = RoactModule.createElement("UICorner", {
+				CornerRadius = UDim.new(0, JoinResult.containerBorderRadius)
+			}),
+			ListLayout = RoactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, containerGap)
+				Padding = UDim.new(0, ContainerGap)
 			}),
-			Padding = roactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, containerSpacingLeading),
-				PaddingRight = UDim.new(0, containerSpacingTrailing)
+			Padding = RoactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, JoinResult.containerSpacingLeading),
+				PaddingRight = UDim.new(0, JoinResult.containerSpacingTrailing)
 			}),
-			Icon = roactModule.createElement(label, {
+			Icon = RoactModule.createElement(Label, {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(statWidgetIconSize, statWidgetIconSize),
-				Image = ratingLarge,
-				ImageColor3 = statWidgetIconContentColor.Color,
-				ImageTransparency = statWidgetIconContentColor.Transparency
+				Size = UDim2.fromOffset(StatWidgetIconSize, StatWidgetIconSize),
+				Image = IconsStatusGamesRatingLarge,
+				ImageColor3 = StatWidgetIconContentColor.Color,
+				ImageTransparency = StatWidgetIconContentColor.Transparency
 			}),
-			TextSection = roactModule.createElement("Frame", {
+			TextSection = RoactModule.createElement("Frame", {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(1, -(statWidgetIconSize + math.max(getIconSizeModule(buttonIconSizeEnum, p2), buttonSize) * 2 + statWidgetContainerGap + containerGap + buttonGroupGap), 0, 0),
+				Size = UDim2.new(1, -(StatWidgetIconSize + math.max(GetIconSizeModule(ButtonIconSizeEnum, p2), ButtonSize) * 2 + JoinResult.statWidgetContainerGap + ContainerGap + JoinResult.buttonGroupGap), 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				ListLayout = roactModule.createElement("UIListLayout", {
+				ListLayout = RoactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Vertical,
-					Padding = UDim.new(0, statWidgetDataGap)
+					Padding = UDim.new(0, JoinResult.statWidgetDataGap)
 				}),
-				RateText = roactModule.createElement(genericTextLabelModule, {
+				RateText = RoactModule.createElement(GenericTextLabelModule, {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Text = rateText,
-					colorStyle = statWidgetDataContentColor,
+					Text = RateText,
+					colorStyle = JoinResult.statWidgetDataContentColor or p2.Theme.TextEmphasis,
 					fontStyle = p2.Font.Title
 				}),
-				RateLabel = roactModule.createElement(genericTextLabelModule, {
+				RateLabel = RoactModule.createElement(GenericTextLabelModule, {
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Text = rateLabel,
-					colorStyle = statWidgetDataLabelContentColor,
+					Text = RateLabel,
+					colorStyle = JoinResult.statWidgetDataLabelContentColor or p2.Theme.TextEmphasis,
 					fontStyle = p2.Font.CaptionHeader
 				})
 			}),
-			VoteDown = roactModule.createElement(iconButtonModule, {
+			VoteDown = RoactModule.createElement(IconButtonModule, {
 				layoutOrder = 3,
 				showBackground = true,
-				size = UDim2.fromOffset(buttonSize, buttonSize),
-				icon = if var2 then voteDownOn else voteDownOff,
+				size = UDim2.fromOffset(ButtonSize, ButtonSize),
+				icon = IsVoteStateMatch and IconsActionsVoteVoteDownOn or IconsActionsVoteVoteDownOff,
 				iconColor3 = p2.Theme.IconEmphasis.Color,
-				iconSize = buttonIconSizeEnum,
+				iconSize = ButtonIconSizeEnum,
 				onActivated = p1.onVoteDownActivated
 			}),
-			VoteUp = roactModule.createElement(iconButtonModule, {
+			VoteUp = RoactModule.createElement(IconButtonModule, {
 				layoutOrder = 4,
 				showBackground = true,
-				size = UDim2.fromOffset(buttonSize, buttonSize),
-				icon = if var3 then voteUpOn else voteUpOff,
+				size = UDim2.fromOffset(ButtonSize, ButtonSize),
+				icon = IsVoteStateMatch1 and IconsActionsVoteVoteUpOn or IconsActionsVoteVoteUpOff,
 				iconColor3 = p2.Theme.IconEmphasis.Color,
-				iconSize = buttonIconSizeEnum,
+				iconSize = ButtonIconSizeEnum,
 				onActivated = p1.onVoteUpActivated
 			})
 		})
 	end)
 end
 
-return rateCount
+return RateCount

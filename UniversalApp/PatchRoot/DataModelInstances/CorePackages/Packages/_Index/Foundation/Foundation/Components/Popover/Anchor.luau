@@ -1,1 +1,1 @@
-﻿return require(script.PopoverAnchor)
+﻿return (require(script.PopoverAnchor))

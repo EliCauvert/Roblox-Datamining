@@ -1,1 +1,1 @@
-﻿return require(script.Menu)
+﻿return (require(script.Menu))

@@ -1,36 +1,36 @@
-﻿local t = {
+﻿local MockLoggerModule = {
 	Levels = {
 		Error = "MockError",
 		Warning = "MockWarning",
 		Info = "MockInfo",
 		Debug = "MockDebug",
 		Trace = "MockTrace",
-		fromString = function()
+		fromString = function(): string --[[ Line: 12 ]]
 			return "MockInfo"
 		end
 	}
 }
-t.__index = t
+MockLoggerModule.__index = MockLoggerModule
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({}, t)
+function MockLoggerModule.new() --[[ Line: 19 ]]
+	-- upvalues: MockLoggerModule (copy)
+	return (setmetatable({}, MockLoggerModule))
 end
 
-function t.setParent() end
+function MockLoggerModule.setParent() --[[ Line: 23 ]] end
 
-function t.setContext() end
+function MockLoggerModule.setContext() --[[ Line: 26 ]] end
 
-function t.addSink() end
+function MockLoggerModule.addSink() --[[ Line: 29 ]] end
 
-function t.error() end
+function MockLoggerModule.error() --[[ Line: 32 ]] end
 
-function t.warning() end
+function MockLoggerModule.warning() --[[ Line: 35 ]] end
 
-function t.info() end
+function MockLoggerModule.info() --[[ Line: 38 ]] end
 
-function t.debug() end
+function MockLoggerModule.debug() --[[ Line: 41 ]] end
 
-function t.trace() end
+function MockLoggerModule.trace() --[[ Line: 44 ]] end
 
-return t
+return MockLoggerModule

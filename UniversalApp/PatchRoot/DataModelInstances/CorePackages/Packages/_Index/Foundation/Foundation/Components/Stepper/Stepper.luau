@@ -1,123 +1,126 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local overflowScrollContainerModule = require(foundation.Components.OverflowScrollContainer)
-local stepperStepStateModule = require(foundation.Enums.StepperStepState)
-local stepItemModule = require(script.Parent.StepItem)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useAnimatedHighlightModule = require(foundation.Utility.useAnimatedHighlight)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local OverflowScrollContainerModule = require(Foundation.Components.OverflowScrollContainer)
+local StepperStepStateModule = require(Foundation.Enums.StepperStepState)
+local StepItemModule = require(script.Parent.StepItem)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseAnimatedHighlightModule = require(Foundation.Utility.useAnimatedHighlight)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	testId = "--foundation-stepper",
 	ZIndex = 1,
-	fillBehavior = fillBehaviorModule.Fill,
-	size = inputSizeModule.Medium
+	fillBehavior = FillBehaviorModule.Fill,
+	size = require(Foundation.Enums.InputSize).Medium
 }
 
-local function _(p1, p2, p3)
-	-- upvalues: stepperStepStateModule (ref)
-	return if p3 then stepperStepStateModule.Current elseif p1 < p2 then stepperStepStateModule.Complete else stepperStepStateModule.Incomplete
+local function _(p1, p2, p3) --[[ Line: 46 | Named "getStepState" ]]
+	-- upvalues: StepperStepStateModule (copy)
+	return if p3 then StepperStepStateModule.Current elseif p1 < p2 then StepperStepStateModule.Complete else StepperStepStateModule.Incomplete
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), dashModule (ref), fillBehaviorModule (ref), reactModule (ref), useAnimatedHighlightModule (ref), stepperStepStateModule (ref), stepItemModule (ref), viewModule (ref), withCommonPropsModule (ref), overflowScrollContainerModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local activeStepId = var1.activeStepId or dashModule.get(var1, { "steps", 1, "id" })
-	local steps = dashModule.findIndex(var1.steps, function(p3)
-		-- upvalues: activeStepId (ref)
-		return p3.id == activeStepId
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 56 | Named "Stepper" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), DashModule (copy), FillBehaviorModule (copy), ReactModule (copy), UseAnimatedHighlightModule (copy), StepperStepStateModule (copy), StepItemModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local ActiveStepId = WithDefaultsModuleResult.activeStepId or DashModule.get(WithDefaultsModuleResult, { "steps", 1, "id" })
+	local Index = DashModule.findIndex(WithDefaultsModuleResult.steps, function(p3): boolean --[[ Line: 61 ]]
+		-- upvalues: ActiveStepId (copy)
+		return p3.id == ActiveStepId
 	end) or 1
-	local var3 = var1.fillBehavior == fillBehaviorModule.Fill
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef({})
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var1 (ref), reactModule (copy)
-		local current = var5.current
+	local IsFillBehaviorMatch = WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 70 ]]
+		-- upvalues: UseRefResult1 (copy), WithDefaultsModuleResult (copy), ReactModule (upval)
+		local Current = UseRefResult1.current
 		
-		for i, v in var1.steps do
-			if not current[v.id] then
-				current[v.id] = reactModule.createRef()
+		for _, step in WithDefaultsModuleResult.steps do
+			if not Current[step.id] then
+				Current[step.id] = ReactModule.createRef()
 			end
 		end
-		return current
-	end, { var1.steps })
-	local var7 = useAnimatedHighlightModule(activeStepId, p2 or var4, var6, var1.size, var1.fillBehavior)
-	local var8, var9 = reactModule.useBinding(0)
-	local var10 = reactModule.useCallback(function(p3)
-		-- upvalues: var9 (ref)
-		var9(p3.AbsoluteSize.X)
+		return Current
+	end, { WithDefaultsModuleResult.steps })
+	local UseAnimatedHighlightModuleResult = UseAnimatedHighlightModule(ActiveStepId, p2 or UseRefResult, UseMemoResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.fillBehavior)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 85 ]]
+		-- upvalues: UseBindingResult2 (copy)
+		UseBindingResult2(Frame.AbsoluteSize.X)
 	end, {})
-	local standard = var2.Stroke.Standard
-	local t_1 = {}
+	local Standard = UseTokensModuleResult.Stroke.Standard
+	local Elements = {}
 	
-	for i, v in ipairs(var1.steps) do
-		t_1[`Step{v.id}`] = reactModule.createElement(stepItemModule, {
-			step = v,
-			index = i,
-			stepState = if activeStepId == v.id then stepperStepStateModule.Current elseif i < steps then stepperStepStateModule.Complete else stepperStepStateModule.Incomplete,
-			size = var1.size,
-			fillBehavior = var1.fillBehavior,
-			LayoutOrder = i,
-			testId = `{var1.testId}--step-{v.id}`,
-			ref = var6[v.id]
+	for Index1, step in ipairs(WithDefaultsModuleResult.steps) do
+		local IsActiveStepIdMatch = ActiveStepId == step.id
+		Elements[`Step{step.id}`] = ReactModule.createElement(StepItemModule, {
+			step = step,
+			index = Index1,
+			stepState = if IsActiveStepIdMatch then StepperStepStateModule.Current elseif Index1 < Index then StepperStepStateModule.Complete else StepperStepStateModule.Incomplete,
+			size = WithDefaultsModuleResult.size,
+			fillBehavior = WithDefaultsModuleResult.fillBehavior,
+			LayoutOrder = Index1,
+			testId = `{WithDefaultsModuleResult.testId}--step-{step.id}`,
+			ref = UseMemoResult[step.id]
 		})
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = "size-full-0 auto-y no-clip",
-		sizeConstraint = if not var3 then {
-			MaxSize = var8:map(function(p3)
-				return Vector2.new(p3, 1e999)
+		sizeConstraint = if IsFillBehaviorMatch then nil else {
+			MaxSize = UseBindingResult:map(function(X): Vector2 --[[ Line: 114 ]]
+				return Vector2.new(X, 1e999)
 			end)
-		} else nil
+		}
 	}), {
-		Stepper = reactModule.createElement(viewModule, {
+		Stepper = ReactModule.createElement(ViewModule, {
 			tag = "col size-full-0 auto-y",
-			ref = p2 or var4,
-			ZIndex = var1.ZIndex,
-			testId = `{var1.testId}--container`
+			ref = p2 or UseRefResult,
+			ZIndex = WithDefaultsModuleResult.ZIndex,
+			testId = `{WithDefaultsModuleResult.testId}--container`
 		}, {
-			ScrollContainer = reactModule.createElement(overflowScrollContainerModule, {
+			ScrollContainer = ReactModule.createElement(OverflowScrollContainerModule, {
 				LayoutOrder = 1,
-				size = var1.size,
-				scrimBottomInset = standard,
-				testId = `{var1.testId}--scroll-container`
+				size = WithDefaultsModuleResult.size,
+				scrimBottomInset = Standard,
+				testId = `{WithDefaultsModuleResult.testId}--scroll-container`
 			}, {
-				StepList = reactModule.createElement(viewModule, {
-					onAbsoluteSizeChanged = var10,
+				StepList = ReactModule.createElement(ViewModule, {
+					onAbsoluteSizeChanged = UseResult,
 					tag = {
 						["row flex-y-fill auto-xy"] = true,
-						["size-full-0"] = var3
+						["size-full-0"] = IsFillBehaviorMatch
 					},
-					testId = `{var1.testId}--list`
-				}, t_1)
+					testId = `{WithDefaultsModuleResult.testId}--list`
+				}, Elements)
 			}),
-			Border = reactModule.createElement(viewModule, {
+			Border = ReactModule.createElement(ViewModule, {
 				LayoutOrder = 2,
 				tag = "position-bottom-left anchor-bottom-left",
-				Size = UDim2.new(1, 0, 0, var2.Stroke.Standard),
-				backgroundStyle = var2.Color.Stroke.Default,
-				testId = `{var1.testId}--border`
+				Size = UDim2.new(1, 0, 0, UseTokensModuleResult.Stroke.Standard),
+				backgroundStyle = UseTokensModuleResult.Color.Stroke.Default,
+				testId = `{WithDefaultsModuleResult.testId}--border`
 			})
 		}),
-		AnimatedBorder = reactModule.createElement(viewModule, {
+		AnimatedBorder = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 0,
 			tag = "anchor-bottom-left bg-system-contrast",
-			ZIndex = var1.ZIndex + 1,
-			Size = var7.highlightWidth:map(function(p3)
-				-- upvalues: standard (ref)
-				return UDim2.fromOffset(p3, standard)
+			ZIndex = WithDefaultsModuleResult.ZIndex + 1,
+			Size = UseAnimatedHighlightModuleResult.highlightWidth:map(function(XOffset): UDim2 --[[ Line: 154 ]]
+				-- upvalues: Standard (copy)
+				return UDim2.fromOffset(XOffset, Standard)
 			end),
-			Position = reactModule.joinBindings({ var7.highlightPosition, var7.activeItemHeight }):map(function(p3)
-				return UDim2.fromOffset(p3[1], p3[2])
+			Position = ReactModule.joinBindings({
+				UseAnimatedHighlightModuleResult.highlightPosition,
+				UseAnimatedHighlightModuleResult.activeItemHeight
+			}):map(function(Entry): UDim2 --[[ Line: 158 ]]
+				return UDim2.fromOffset(Entry[1], Entry[2])
 			end),
-			testId = `{var1.testId}--animated-border`
+			testId = `{WithDefaultsModuleResult.testId}--animated-border`
 		})
 	})
 end))

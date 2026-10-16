@@ -1,9 +1,9 @@
-﻿local reactModule = require(script.Parent.Parent.React)
-local focusContextModule = require(script.Parent.FocusContext)
+﻿local ReactModule = require(script.Parent.Parent.React)
+local FocusContextModule = require(script.Parent.FocusContext)
 
-return function()
-	-- upvalues: reactModule (ref), focusContextModule (ref)
-	local var1 = reactModule.useContext(focusContextModule)
+return function() --[[ Line: 10 | Named "useFocusController" ]]
+	-- upvalues: ReactModule (copy), FocusContextModule (copy)
+	local UseContextResult = ReactModule.useContext(FocusContextModule)
 	
-	return if var1 then var1.focusNode.focusController else nil
+	return if UseContextResult then UseContextResult.focusNode.focusController else nil
 end

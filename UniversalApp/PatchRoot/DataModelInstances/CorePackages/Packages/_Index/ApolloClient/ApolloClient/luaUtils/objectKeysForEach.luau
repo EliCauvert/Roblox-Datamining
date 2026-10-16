@@ -1,5 +1,5 @@
-﻿return function(p1, p2)
-	for i, v in p1 do
-		p2(i)
+﻿return function(List, Callback: (any) -> ()) --[[ Line: 7 ]]
+	for i, _ in List do
+		Callback(i)
 	end
 end

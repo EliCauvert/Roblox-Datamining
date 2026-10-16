@@ -1,16 +1,16 @@
 ﻿return {
-	resolveDefaultProps = function(p1, p2)
+	resolveDefaultProps = function(p1, Tbl) --[[ Line: 14 ]]
 		if not p1 or typeof(p1) ~= "table" or not p1.defaultProps then
-			return p2
+			return Tbl
 		end
-		local cloned = table.clone(p2)
-		local defaultProps = p1.defaultProps
+		local Copy = table.clone(Tbl)
+		local DefaultProps = p1.defaultProps
 		
-		for i, v in defaultProps do
-			if cloned[i] == nil then
-				cloned[i] = defaultProps[i]
+		for i, _ in DefaultProps do
+			if Copy[i] == nil then
+				Copy[i] = DefaultProps[i]
 			end
 		end
-		return cloned
+		return Copy
 	end
 }

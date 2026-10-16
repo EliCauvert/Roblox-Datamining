@@ -1,56 +1,56 @@
-﻿local parent = script.Parent.Parent.Parent
-local map = require(parent.Parent.LuauPolyfill).Map
-local isNotNillish = require(parent.luaUtils.isNillish).isNotNillish
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local definitionModule = require(parent.type.definition)
-local isObjectType = definitionModule.isObjectType
-local isInterfaceType = definitionModule.isInterfaceType
-local isInputObjectType = definitionModule.isInputObjectType
-local t = {}
-local hasField = nil
-
-function t.UniqueFieldDefinitionNamesRule(p1)
-	-- upvalues: map (ref), hasField (write), graphQLError (ref)
-	local schema = p1:getSchema()
-	local var1 = schema and schema:getTypeMap() or map.new()
-	local t = {}
-	
-	local function checkFieldUniqueness(_, p2)
-		-- upvalues: t (ref), hasField (copy), var1 (ref), p1 (ref), graphQLError (copy)
-		local value = p2.name.value
+﻿local Parent = script.Parent.Parent.Parent
+local Map = require(Parent.Parent.LuauPolyfill).Map
+local IsNotNillishFunction = require(Parent.luaUtils.isNillish).isNotNillish
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local DefinitionModule = require(Parent.type.definition)
+local IsObjectTypeFunction = DefinitionModule.isObjectType
+local IsInterfaceTypeFunction = DefinitionModule.isInterfaceType
+local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
+local Callback = nil
+local UniqueFieldDefinitionNamesRuleModule = {
+	UniqueFieldDefinitionNamesRule = function(p1) --[[ Line: 32 ]]
+		-- upvalues: Map (copy), Callback (ref), GraphQLError (copy)
+		local Schema = p1:getSchema()
+		local TypeMap = Schema and Schema:getTypeMap() or Map.new()
+		local t = {}
 		
-		if not t[value] then
-			t[value] = {}
-		end
-		local var2 = t[value]
-		
-		for i, v in ipairs(p2.fields or {}) do
-			local value_1 = v.name.value
+		local function checkFieldUniqueness(_, p2): boolean --[[ Line: 40 ]]
+			-- upvalues: t (copy), Callback (upval), TypeMap (copy), p1 (copy), GraphQLError (upval)
+			local Value = p2.name.value
 			
-			if hasField(var1:get(value), value_1) then
-				p1:reportError(graphQLError.new(("Field \"%s.%s\" already exists in the schema. It cannot also be defined in this type extension."):format(value, value_1), v.name))
-			elseif var2[value_1] then
-				p1:reportError(graphQLError.new(("Field \"%s.%s\" can only be defined once."):format(value, value_1), { var2[value_1], v.name }))
-			else
-				var2[value_1] = v.name
+			if not t[Value] then
+				t[Value] = {}
 			end
+			local Entry = t[Value]
+			
+			for _, value in ipairs(p2.fields or {}) do
+				local Value1 = value.name.value
+				
+				if Callback(TypeMap:get(Value), Value1) then
+					p1:reportError(GraphQLError.new(("Field \"%s.%s\" already exists in the schema. It cannot also be defined in this type extension."):format(Value, Value1), value.name))
+				elseif Entry[Value1] then
+					p1:reportError(GraphQLError.new(("Field \"%s.%s\" can only be defined once."):format(Value, Value1), { Entry[Value1], value.name }))
+				else
+					Entry[Value1] = value.name
+				end
+			end
+			return false
 		end
-		return false
+		
+		return {
+			InputObjectTypeDefinition = checkFieldUniqueness,
+			InputObjectTypeExtension = checkFieldUniqueness,
+			InterfaceTypeDefinition = checkFieldUniqueness,
+			InterfaceTypeExtension = checkFieldUniqueness,
+			ObjectTypeDefinition = checkFieldUniqueness,
+			ObjectTypeExtension = checkFieldUniqueness
+		}
 	end
-	
-	return {
-		InputObjectTypeDefinition = checkFieldUniqueness,
-		InputObjectTypeExtension = checkFieldUniqueness,
-		InterfaceTypeDefinition = checkFieldUniqueness,
-		InterfaceTypeExtension = checkFieldUniqueness,
-		ObjectTypeDefinition = checkFieldUniqueness,
-		ObjectTypeExtension = checkFieldUniqueness
-	}
+}
+
+Callback = function(GetResult, p2) --[[ Line: 88 | Named "hasField" ]]
+	-- upvalues: IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsInputObjectTypeFunction (copy), IsNotNillishFunction (copy)
+	return if IsObjectTypeFunction(GetResult) or IsInterfaceTypeFunction(GetResult) or IsInputObjectTypeFunction(GetResult) then IsNotNillishFunction(GetResult:getFields():get(p2)) else false
 end
 
-hasField = function(p2, p3)
-	-- upvalues: isObjectType (ref), isInterfaceType (ref), isInputObjectType (ref), isNotNillish (ref)
-	return if isObjectType(p2) or isInterfaceType(p2) or isInputObjectType(p2) then isNotNillish(p2:getFields():get(p3)) else false
-end
-
-return t
+return UniqueFieldDefinitionNamesRuleModule

@@ -1,146 +1,144 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local presenceChildModule = require(script.Parent.PresenceChild)
-local presenceStateModule = require(parent.Enums.PresenceState)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local PresenceChildModule = require(script.Parent.PresenceChild)
+local PresenceStateModule = require(Parent.Enums.PresenceState)
 
-local function _(p1, p2)
-	return if typeof(p2) == "table" and p2.props and p2.props.presenceId then string.format("%s:%s", p1, tostring(p2.props.presenceId)) else p1
+local function _(p1, p2) --[[ Line: 55 | Named "getCompositeKey" ]]
+	return if typeof(p2) == "table" and p2.props and p2.props.presenceId then string.format("%s:%s", p1, (tostring(p2.props.presenceId))) else p1
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), presenceStateModule (ref), presenceChildModule (ref)
-	local children = p1.children
-	local var1 = if p1.childData ~= nil then nil else p1.childData
-	local var2 = if p1.onExitComplete ~= nil then nil else p1.onExitComplete
-	local var3, var4 = reactModule.useState({})
-	local var5 = reactModule.useRef({})
-	reactModule.useEffect(function()
-		-- upvalues: children (ref), presenceStateModule (copy), var3 (ref), var4 (ref), var5 (ref)
+return function(p1) --[[ Line: 63 | Named "AnimatePresence" ]]
+	-- upvalues: ReactModule (copy), PresenceStateModule (copy), PresenceChildModule (copy)
+	local Children = p1.children
+	local ChildData = if p1.childData == nil then nil else p1.childData
+	local OnExitComplete = if p1.onExitComplete == nil then nil else p1.onExitComplete
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseRefResult = ReactModule.useRef({})
+	ReactModule.useEffect(function() --[[ Line: 73 ]]
+		-- upvalues: Children (copy), PresenceStateModule (upval), UseStateResult (copy), UseStateResult2 (copy), UseRefResult (copy)
 		local t = {}
 		
-		if children ~= nil and typeof(children) == "table" then
-			for i, v in pairs(children) do
-				if typeof(v) == "table" and v.type ~= nil then
-					t[if typeof(v) == "table" and v.props and v.props.presenceId then string.format("%s:%s", i, tostring(v.props.presenceId)) else i] = {
-						type = presenceStateModule.Entering,
-						component = v,
-						dictionaryKey = i
+		if Children ~= nil and typeof(Children) == "table" then
+			for DictionaryKey, child in pairs(Children) do
+				if typeof(child) == "table" and child.type ~= nil then
+					t[if typeof(child) == "table" and child.props and child.props.presenceId then string.format("%s:%s", DictionaryKey, (tostring(child.props.presenceId))) else DictionaryKey] = {
+						type = PresenceStateModule.Entering,
+						component = child,
+						dictionaryKey = DictionaryKey
 					}
 				end
 			end
 		end
-		local var6
-		for i, v in pairs(var3) do
-			var6 = false
+		local Flag = nil
+		for i, value in pairs(UseStateResult) do
+			Flag = false
 			
-			if children ~= nil and typeof(children) == "table" then
-				for i_1, v_2 in pairs(children) do
-					if typeof(v_2) == "table" and v_2.type ~= nil then
-						if (if typeof(v_2) == "table" and v_2.props and v_2.props.presenceId then string.format("%s:%s", i_1, tostring(v_2.props.presenceId)) else i_1) == i then
-							var6 = true
-							break
-						end
+			if Children ~= nil and typeof(Children) == "table" then
+				for i1, child1 in pairs(Children) do
+					if typeof(child1) == "table" and child1.type ~= nil and (if typeof(child1) == "table" and child1.props and child1.props.presenceId then string.format("%s:%s", i1, (tostring(child1.props.presenceId))) else i1) == i then
+						Flag = true
+						break
 					end
 				end
 			end
-			if not var6 and v.isPresent then
+			if not Flag and value.isPresent then
 				t[i] = {
-					type = presenceStateModule.Exiting,
-					component = v.component,
-					dictionaryKey = v.dictionaryKey
+					type = PresenceStateModule.Exiting,
+					component = value.component,
+					dictionaryKey = value.dictionaryKey
 				}
 			end
 		end
 		if next(t) ~= nil then
-			var4(function(p2)
-				-- upvalues: t (ref), presenceStateModule (copy), var5 (copy)
-				local cloned = table.clone(p2)
+			UseStateResult2(function(Tbl) --[[ Line: 120 ]]
+				-- upvalues: t (copy), PresenceStateModule (upval), UseRefResult (upval)
+				local Copy = table.clone(Tbl)
 				
-				for i, v in pairs(t) do
-					if v.type == presenceStateModule.Entering then
-						cloned[i] = {
+				for i, value in pairs(t) do
+					if value.type == PresenceStateModule.Entering then
+						Copy[i] = {
 							isPresent = true,
 							safeToRemove = false,
-							component = v.component,
-							dictionaryKey = v.dictionaryKey
+							component = value.component,
+							dictionaryKey = value.dictionaryKey
 						}
-					elseif v.type == presenceStateModule.Exiting and cloned[i] and cloned[i].isPresent then
-						cloned[i] = {
+					elseif value.type == PresenceStateModule.Exiting and Copy[i] and Copy[i].isPresent then
+						Copy[i] = {
 							isPresent = false,
 							safeToRemove = false,
-							component = v.component,
-							dictionaryKey = v.dictionaryKey
+							component = value.component,
+							dictionaryKey = value.dictionaryKey
 						}
-						var5.current[i] = true
+						UseRefResult.current[i] = true
 					end
 				end
-				return cloned
+				return Copy
 			end)
 		end
-	end, { children })
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var5 (ref), var4 (ref)
-		if var5.current[p2] then
-			var5.current[p2] = nil
-			var4(function(p3)
-				-- upvalues: p2 (ref)
-				local cloned = table.clone(p3)
+	end, { Children })
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 150 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+		if UseRefResult.current[p2] then
+			UseRefResult.current[p2] = nil
+			UseStateResult2(function(Tbl) --[[ Line: 154 ]]
+				-- upvalues: p2 (copy)
+				local Copy = table.clone(Tbl)
 				
-				if cloned[p2] then
-					cloned[p2] = {
+				if Copy[p2] then
+					Copy[p2] = {
 						isPresent = false,
 						safeToRemove = true,
-						component = cloned[p2].component,
-						dictionaryKey = cloned[p2].dictionaryKey
+						component = Copy[p2].component,
+						dictionaryKey = Copy[p2].dictionaryKey
 					}
 				end
-				return cloned
+				return Copy
 			end)
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var4 (ref), var2 (ref)
+	ReactModule.useEffect(function() --[[ Line: 170 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), OnExitComplete (copy)
 		local t = {}
-		local var8 = false
+		local Flag = false
 		
-		for i, v in pairs(var3) do
-			if v.safeToRemove then
-				var8 = true
+		for i, value in pairs(UseStateResult) do
+			if value.safeToRemove then
+				Flag = true
 				t[i] = true
 			end
 		end
-		if var8 then
-			var4(function(p2)
-				-- upvalues: t (ref), var2 (copy)
-				local t_1 = {}
+		if Flag then
+			UseStateResult2(function(List) --[[ Line: 182 ]]
+				-- upvalues: t (copy), OnExitComplete (upval)
+				local t1 = {}
 				
-				for i, v in pairs(p2) do
+				for i, value in pairs(List) do
 					if not t[i] then
-						t_1[i] = v
-					elseif var2 then
-						var2(i)
+						t1[i] = value
+					elseif OnExitComplete then
+						OnExitComplete(i)
 					end
 				end
-				return t_1
+				return t1
 			end)
 		end
-	end, { var3 })
-	local t = {}
+	end, { UseStateResult })
+	local Elements = {}
 	
-	for i, v in pairs(var3) do
-		if not v.safeToRemove then
-			table.insert(t, reactModule.createElement(presenceChildModule, {
-				key = i,
-				presenceId = i,
-				isPresent = v.isPresent,
-				onExitComplete = function()
-					-- upvalues: var7 (ref), i (ref)
-					var7(i)
+	for Key, value in pairs(UseStateResult) do
+		if not value.safeToRemove then
+			table.insert(Elements, ReactModule.createElement(PresenceChildModule, {
+				key = Key,
+				presenceId = Key,
+				isPresent = value.isPresent,
+				onExitComplete = function() --[[ Line: 208 ]]
+					-- upvalues: UseResult (copy), Key (copy)
+					UseResult(Key)
 				end,
-				childData = var1,
-				children = v.component
-			}, v.component))
+				childData = ChildData,
+				children = value.component
+			}, value.component))
 		end
 	end
-	return reactModule.createElement(reactModule.Fragment, {}, t)
+	return ReactModule.createElement(ReactModule.Fragment, {}, Elements)
 end

@@ -1,22 +1,27 @@
-﻿local number = require(script.Parent.Parent.Parent.LuauPolyfill).Number
-local nullModule = require(script.Parent.null)
+﻿local Number = require(script.Parent.Parent.Parent.LuauPolyfill).Number
+local NullModule = require(script.Parent.null)
 
-local function deepContains(p1, p2)
-	-- upvalues: number (ref), nullModule (ref), deepContains (ref)
-	if typeof(p1) ~= typeof(p2) then
-		return false, ("{1}: value of type '%s'\n{2}: value of type '%s'"):format(typeof(p1), typeof(p2))
-	elseif number.isNaN(p1) and number.isNaN(p2) then
-		return true
-	elseif p1 == p2 then
-		return true
-	elseif p1 == nullModule or p2 == nullModule or typeof(p1) ~= "table" then
-		return false, string.format("{1} (%s) ~= {2} (%s)", tostring(p1), tostring(p2))
+local function deepContains(NullModule1, List) --[[ Line: 4 ]]
+	-- upvalues: Number (copy), NullModule (copy), deepContains (copy)
+	if typeof(NullModule1) ~= typeof(List) then
+		return false, (("{1}: value of type '%s'\n{2}: value of type '%s'"):format(typeof(NullModule1), (typeof(List))))
 	end
-	for i, v in pairs(p2) do
-		local var1, var2 = deepContains(p1[i], v)
+	if Number.isNaN(NullModule1) and Number.isNaN(List) then
+		return true
+	end
+	if NullModule1 == List then
+		return true
+	end
+	if NullModule1 == NullModule or List == NullModule or typeof(NullModule1) ~= "table" then
+		return false, string.format("{1} (%s) ~= {2} (%s)", tostring(NullModule1), (tostring(List)))
+	end
+	local DeepContainsResult2 = nil
+	for i, value in pairs(List) do
+		local DeepContainsResult
+		DeepContainsResult, DeepContainsResult2 = deepContains(NullModule1[i], value)
 		
-		if not var1 then
-			return false, var2:gsub("{1}", ("{1}[%s]"):format(tostring(i))):gsub("{2}", ("{2}[%s]"):format(tostring(i)))
+		if not DeepContainsResult then
+			return false, (DeepContainsResult2:gsub("{1}", ("{1}[%s]"):format((tostring(i)))):gsub("{2}", ("{2}[%s]"):format((tostring(i)))))
 		end
 	end
 	return true

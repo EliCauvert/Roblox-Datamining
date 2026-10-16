@@ -1,275 +1,276 @@
-﻿local collectionService = game:GetService("CollectionService")
-local parent = script.Parent.Parent.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local object = luauPolyfillModule.Object
-local inspect = luauPolyfillModule.util.inspect
-local dEV = reactGlobalsModule.__DEV__
-local console = require(parent.Shared).console
-local reactModule = require(parent.React)
-local reactSymbols = require(parent.Shared).ReactSymbols
-local singleEventManagerModule = require(script.Parent.SingleEventManager)
-local type = require(parent.Shared).Type
-local getDefaultInstancePropertyModule = require(script.Parent.getDefaultInstanceProperty)
+﻿local CollectionService = game:GetService("CollectionService")
+local Parent = script.Parent.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Object = LuauPolyfillModule.Object
+local InspectFunction = LuauPolyfillModule.util.inspect
+local DEV = require(Parent.ReactGlobals).__DEV__
+local Console = require(Parent.Shared).console
+local ReactModule = require(Parent.React)
+local ReactSymbols = require(Parent.Shared).ReactSymbols
+local SingleEventManagerModule = require(script.Parent.SingleEventManager)
+local Type = require(Parent.Shared).Type
+local GetDefaultInstancePropertyModule = require(script.Parent.getDefaultInstanceProperty)
 local _ = require(script.Parent.Parent["ReactRobloxHostTypes.roblox"])
-local tag = require(parent.React).Tag
-local t = {}
-local t_1 = {}
+local Tag = require(Parent.React).Tag
+local _instanceToEventManager = {}
+local _instanceToBindings = {}
 
-local function identity(...)
+local function identity(...) --[[ Line: 72 ]]
 	return ...
 end
 
-local function setRobloxInstanceProperty(value, p1, p2)
-	-- upvalues: getDefaultInstancePropertyModule (ref)
+local function setRobloxInstanceProperty(p1, Key, p2) --[[ Line: 76 ]]
+	-- upvalues: GetDefaultInstancePropertyModule (copy)
 	if p2 == nil then
-		local ok, _ = pcall(value.ResetPropertyToDefault, value, p1)
+		local Success, _ = pcall(p1.ResetPropertyToDefault, p1, Key)
 		
-		if ok then return end
-		local _, var1 = getDefaultInstancePropertyModule(value.ClassName, p1)
-		p2 = var1
+		if Success then return end
+		local _, DefaultInstancePropertyModule2 = GetDefaultInstancePropertyModule(p1.ClassName, Key)
+		p2 = DefaultInstancePropertyModule2
 	end
-	value[p1] = p2
+	p1[Key] = p2
 end
 
-local function _(p1, p2)
-	-- upvalues: t_1 (ref)
-	local var1 = t_1[p1]
+local function _(p1, Key) --[[ Line: 92 | Named "removeBinding" ]]
+	-- upvalues: _instanceToBindings (copy)
+	local InstanceToBinding = _instanceToBindings[p1]
 	
-	if var1 ~= nil then
-		var1[p2]()
-		var1[p2] = nil
+	if InstanceToBinding ~= nil then
+		InstanceToBinding[Key]()
+		InstanceToBinding[Key] = nil
 	end
 end
 
-local function attachBinding(p1, p2, p3)
-	-- upvalues: setRobloxInstanceProperty (ref), identity (ref), console (ref), t_1 (ref), reactModule (ref)
-	local function updateBoundProperty(p4)
-		-- upvalues: setRobloxInstanceProperty (copy), identity (copy), p1 (ref), p2 (ref), p3 (ref), console (copy)
-		local ok, status = xpcall(setRobloxInstanceProperty, identity, p1, p2, p4)
+local function attachBinding(Key, Key1, p1) --[[ Line: 101 ]]
+	-- upvalues: setRobloxInstanceProperty (copy), identity (copy), Console (copy), _instanceToBindings (copy), ReactModule (copy)
+	local function updateBoundProperty(p2) --[[ Line: 102 ]]
+		-- upvalues: setRobloxInstanceProperty (upval), identity (upval), Key (copy), Key1 (copy), p1 (copy), Console (upval)
+		local Success, Result = xpcall(setRobloxInstanceProperty, identity, Key, Key1, p2)
 		
-		if not ok then
-			local formattedText = string.format("Error updating binding or ref assigned to key %s of '%s' (%s).\n\nUpdated value:\n  %s\n\nError:\n  %s\n\n%s\n", p2, p1.Name, p1.ClassName, tostring(p4), status, p3._source or "<enable DEV mode for stack>")
-			console.error(formattedText)
-			error(formattedText, 0)
+		if not Success then
+			local Formatted = string.format("Error updating binding or ref assigned to key %s of '%s' (%s).\n\nUpdated value:\n  %s\n\nError:\n  %s\n\n%s\n", Key1, Key.Name, Key.ClassName, tostring(p2), Result, p1._source or "<enable DEV mode for stack>")
+			Console.error(Formatted)
+			error(Formatted, 0)
 		end
 	end
 	
-	if t_1[p1] == nil then
-		t_1[p1] = {}
+	if _instanceToBindings[Key] == nil then
+		_instanceToBindings[Key] = {}
 	end
-	t_1[p1][p2] = reactModule.__subscribeToBinding(p3, updateBoundProperty)
-	updateBoundProperty(p3:getValue())
+	_instanceToBindings[Key][Key1] = ReactModule.__subscribeToBinding(p1, updateBoundProperty)
+	updateBoundProperty(p1:getValue())
 end
 
-local function applyTags(p1, p2, p3)
-	-- upvalues: dEV (ref), console (ref), inspect (ref), collectionService (ref)
-	if dEV and p3 ~= nil and typeof(p3) ~= "string" then
-		console.error("Type provided for ReactRoblox.Tag is invalid - tags should be specified as a single string, with individual tags delimited by spaces. Instead received:\n%s", inspect(p3))
+local function applyTags(Key, p1, p2) --[[ Line: 134 ]]
+	-- upvalues: DEV (copy), Console (copy), InspectFunction (copy), CollectionService (copy)
+	if DEV and p2 ~= nil and typeof(p2) ~= "string" then
+		Console.error("Type provided for ReactRoblox.Tag is invalid - tags should be specified as a single string, with individual tags delimited by spaces. Instead received:\n%s", InspectFunction(p2))
 		
 		return
 	end
 	local t = {}
 	
-	for i in string.gmatch(p2 or "", "%S+") do
+	for i in string.gmatch(p1 or "", "%S+") do
 		t[i] = true
 	end
-	local t_1 = {}
+	local t1 = {}
 	
-	for i_1 in string.gmatch(p3 or "", "%S+") do
-		t_1[i_1] = true
+	for i1 in string.gmatch(p2 or "", "%S+") do
+		t1[i1] = true
 	end
-	for i_2, v in t do
-		if not t_1[i_2] then
-			collectionService:RemoveTag(p1, i_2)
+	for Tag, _ in t do
+		if not t1[Tag] then
+			CollectionService:RemoveTag(Key, Tag)
 		end
 	end
-	for i_3, v in t_1 do
-		if not t[i_3] then
-			collectionService:AddTag(p1, i_3)
+	for Tag1, _ in t1 do
+		if not t[Tag1] then
+			CollectionService:AddTag(Key, Tag1)
 		end
 	end
 end
 
-local _ = function(p4)
-	-- upvalues: collectionService (ref)
-	for i, v in collectionService:GetTags(p4) do
-		collectionService:RemoveTag(p4, v)
+local _ = function(p3) --[[ Line: 168 | Named "removeAllTags" ]]
+	-- upvalues: CollectionService (copy)
+	for _, tag in CollectionService:GetTags(p3) do
+		CollectionService:RemoveTag(p3, tag)
 	end
 end
 
-local function applyProp(p5, p6, p7, p8)
-	-- upvalues: type (ref), t (ref), singleEventManagerModule (ref), reactSymbols (ref), t_1 (ref), attachBinding (ref), tag (ref), applyTags (ref), getDefaultInstancePropertyModule (ref)
-	local var1 = type.of(p6)
+local function applyProp(Key, Key1, None, p4) --[[ Line: 174 ]]
+	-- upvalues: Type (copy), _instanceToEventManager (copy), SingleEventManagerModule (copy), ReactSymbols (copy), _instanceToBindings (copy), attachBinding (copy), Tag (copy), applyTags (copy), GetDefaultInstancePropertyModule (copy)
+	local OfResult = Type.of(Key1)
 	
-	if var1 == type.HostEvent or var1 == type.HostChangeEvent then
-		local var2 = t[p5]
+	if OfResult == Type.HostEvent or OfResult == Type.HostChangeEvent then
+		local InstanceToEventManagerEntry = _instanceToEventManager[Key]
 		
-		if var2 == nil then
-			var2 = singleEventManagerModule.new(p5)
-			t[p5] = var2
+		if InstanceToEventManagerEntry == nil then
+			InstanceToEventManagerEntry = SingleEventManagerModule.new(Key)
+			_instanceToEventManager[Key] = InstanceToEventManagerEntry
 		end
-		local name = p6.name
+		local Name = Key1.name
 		
-		if var1 == type.HostChangeEvent then
-			var2:connectPropertyChange(name, p7)
+		if OfResult == Type.HostChangeEvent then
+			InstanceToEventManagerEntry:connectPropertyChange(Name, None)
+			
+			return
+		else
+			InstanceToEventManagerEntry:connectEvent(Name, None)
 			
 			return
 		end
-		var2:connectEvent(name, p7)
-		
-		return
 	else
-		local var3 = typeof(p7) == "table" and p7["$$typeof"] == reactSymbols.REACT_BINDING_TYPE
+		local IsTypeofMatch: boolean = typeof(None) == "table" and None["$$typeof"] == ReactSymbols.REACT_BINDING_TYPE
 		
-		if p8 ~= nil and (typeof(p8) == "table" and p8["$$typeof"] == reactSymbols.REACT_BINDING_TYPE) then
-			local var4 = t_1[p5]
+		if p4 ~= nil and (typeof(p4) == "table" and p4["$$typeof"] == ReactSymbols.REACT_BINDING_TYPE) then
+			local InstanceToBinding = _instanceToBindings[Key]
 			
-			if var4 ~= nil then
-				var4[p6]()
-				var4[p6] = nil
+			if InstanceToBinding ~= nil then
+				InstanceToBinding[Key1]()
+				InstanceToBinding[Key1] = nil
 			end
 		end
-		if var3 then
-			attachBinding(p5, p6, p7)
-			
-			return
-		elseif p6 == tag then
-			applyTags(p5, p8, p7)
+		if IsTypeofMatch then
+			attachBinding(Key, Key1, None)
 			
 			return
 		end
-		local var5 = p7
+		if Key1 == Tag then
+			applyTags(Key, p4, None)
+			
+			return
+		end
+		local None1 = None
 		
-		if var5 == nil then
-			local ok, _ = pcall(p5.ResetPropertyToDefault, p5, p6)
+		if None1 == nil then
+			local Success, _ = pcall(Key.ResetPropertyToDefault, Key, Key1)
 			
-			if ok then return end
-			local _, var6 = getDefaultInstancePropertyModule(p5.ClassName, p6)
-			var5 = var6
+			if Success then return end
+			local _, DefaultInstancePropertyModule2 = GetDefaultInstancePropertyModule(Key.ClassName, Key1)
+			None1 = DefaultInstancePropertyModule2
 		end
-		p5[p6] = var5
+		Key[Key1] = None1
 	end
 end
 
-local function applyProps(p5, p6)
-	-- upvalues: applyProp (ref)
-	for i, v in p6 do
+local function applyProps(p4, List) --[[ Line: 219 ]]
+	-- upvalues: applyProp (copy)
+	for i, value in List do
 		if i ~= "ref" and i ~= "children" then
-			applyProp(p5, i, v)
+			applyProp(p4, i, value)
 		end
 	end
 end
 
-local function setInitialProperties(value, _, p7, _)
-	-- upvalues: applyProps (ref), identity (ref), console (ref), t (ref)
-	local ok, status = xpcall(applyProps, identity, value, p7)
+local function setInitialProperties(p5, _, p6, _) --[[ Line: 230 ]]
+	-- upvalues: applyProps (copy), identity (copy), Console (copy), _instanceToEventManager (copy)
+	local Success, Result = xpcall(applyProps, identity, p5, p6)
 	
-	if not ok then
-		local formattedText = string.format("Error applying initial props to Roblox Instance '%s' (%s):\n  %s\n", value.Name, value.ClassName, tostring(status))
-		console.error(formattedText)
-		error(formattedText, 0)
+	if not Success then
+		local Formatted = string.format("Error applying initial props to Roblox Instance '%s' (%s):\n  %s\n", p5.Name, p5.ClassName, (tostring(Result)))
+		Console.error(Formatted)
+		error(Formatted, 0)
 	end
-	if t[value] ~= nil then
-		t[value]:resume()
+	if _instanceToEventManager[p5] ~= nil then
+		_instanceToEventManager[p5]:resume()
 	end
 end
 
-local function safelyApplyProperties(p7, p8, p9)
-	-- upvalues: object (ref), applyProp (ref)
-	for i = 1, #p8, 2 do
-		local var1 = p8[i]
-		local var2 = p8[i + 1]
+local function safelyApplyProperties(p5, p6, p7) --[[ Line: 259 ]]
+	-- upvalues: Object (copy), applyProp (copy)
+	for i = 1, #p6, 2 do
+		local Key = p6[i]
+		local None = p6[i + 1]
 		
-		if var2 == object.None then
-			var2 = nil
+		if None == Object.None then
+			None = nil
 		end
-		if var1 ~= "ref" and var1 ~= "children" then
-			applyProp(p7, var1, var2, p9[var1])
+		if Key ~= "ref" and Key ~= "children" then
+			applyProp(p5, Key, None, p7[Key])
 		end
 	end
 end
 
-local function updateProperties(p10, p11, p12)
-	-- upvalues: t (ref), safelyApplyProperties (ref), identity (ref), console (ref)
-	if t[p10] ~= nil then
-		t[p10]:suspend()
+local function updateProperties(p8, p9, p10) --[[ Line: 278 ]]
+	-- upvalues: _instanceToEventManager (copy), safelyApplyProperties (copy), identity (copy), Console (copy)
+	if _instanceToEventManager[p8] ~= nil then
+		_instanceToEventManager[p8]:suspend()
 	end
-	local ok, status = xpcall(safelyApplyProperties, identity, p10, p11, p12)
+	local Success, Result = xpcall(safelyApplyProperties, identity, p8, p9, p10)
 	
-	if not ok then
-		local formattedText = string.format("Error updating props on Roblox Instance '%s' (%s):\n  %s\n", p10.Name, p10.ClassName, status)
-		console.error(formattedText)
-		error(formattedText, 0)
+	if not Success then
+		local Formatted = string.format("Error updating props on Roblox Instance '%s' (%s):\n  %s\n", p8.Name, p8.ClassName, Result)
+		Console.error(Formatted)
+		error(Formatted, 0)
 	end
-	if t[p10] ~= nil then
-		t[p10]:resume()
+	if _instanceToEventManager[p8] ~= nil then
+		_instanceToEventManager[p8]:resume()
 	end
 end
 
-local _, status = xpcall(function()
+local _, Result = xpcall(function() --[[ Line: 312 ]]
 	return game:DefineFastFlag("ReactFixBindingMemoryLeak", false)
-end, function()
+end, function(): boolean --[[ Line: 314 ]]
 	return true
 end)
 
-local _ = function(p10)
-	-- upvalues: t_1 (ref)
-	local var3 = t_1[p10]
+local _ = function(Key) --[[ Line: 318 | Named "cleanupBindings" ]]
+	-- upvalues: _instanceToBindings (copy)
+	local InstanceToBinding = _instanceToBindings[Key]
 	
-	if var3 ~= nil then
-		for i, v in var3 do
-			v()
+	if InstanceToBinding ~= nil then
+		for _, value in InstanceToBinding do
+			value()
 		end
-		t_1[p10] = nil
+		_instanceToBindings[Key] = nil
 	end
 end
 
 return {
 	setInitialProperties = setInitialProperties,
 	updateProperties = updateProperties,
-	cleanupHostComponent = function(p11)
-		-- upvalues: t (ref), status (ref), t_1 (ref), collectionService (ref)
-		if t[p11] ~= nil then
-			t[p11] = nil
+	cleanupHostComponent = function(Key) --[[ Line: 331 ]]
+		-- upvalues: _instanceToEventManager (copy), Result (copy), _instanceToBindings (copy), CollectionService (copy)
+		if _instanceToEventManager[Key] ~= nil then
+			_instanceToEventManager[Key] = nil
 		end
-		if status then
-			local var4 = t_1[p11]
+		if Result then
+			local InstanceToBinding = _instanceToBindings[Key]
 			
-			if var4 ~= nil then
-				for i, v in var4 do
-					v()
+			if InstanceToBinding ~= nil then
+				for _, value in InstanceToBinding do
+					value()
 				end
-				t_1[p11] = nil
+				_instanceToBindings[Key] = nil
 			end
-		elseif t_1[p11] ~= nil then
-			t_1[p11] = nil
+		elseif _instanceToBindings[Key] ~= nil then
+			_instanceToBindings[Key] = nil
 		end
-		if typeof(p11) ~= "Instance" then return end
-		for i, v in collectionService:GetTags(p11) do
-			collectionService:RemoveTag(p11, v)
+		if typeof(Key) ~= "Instance" then return end
+		for _, tag in CollectionService:GetTags(Key) do
+			CollectionService:RemoveTag(Key, tag)
 		end
-		for i, v_1 in p11:GetDescendants() do
-			if t[v_1] ~= nil then
-				t[v_1] = nil
+		for _, descendant in Key:GetDescendants() do
+			if _instanceToEventManager[descendant] ~= nil then
+				_instanceToEventManager[descendant] = nil
 			end
-			if status then
-				local var5 = t_1[v_1]
+			if Result then
+				local InstanceToBinding = _instanceToBindings[descendant]
 				
-				if var5 ~= nil then
-					for i_2, v_2 in var5 do
-						v_2()
+				if InstanceToBinding ~= nil then
+					for _, value1 in InstanceToBinding do
+						value1()
 					end
-					t_1[v_1] = nil
+					_instanceToBindings[descendant] = nil
 				end
-			elseif t_1[v_1] ~= nil then
-				t_1[v_1] = nil
+			elseif _instanceToBindings[descendant] ~= nil then
+				_instanceToBindings[descendant] = nil
 			end
-			for i_3, i_2 in collectionService:GetTags(p11) do
-				collectionService:RemoveTag(p11, i_2)
+			for _, tag1 in CollectionService:GetTags(Key) do
+				CollectionService:RemoveTag(Key, tag1)
 			end
 		end
 	end,
-	_instanceToEventManager = t,
-	_instanceToBindings = t_1
+	_instanceToEventManager = _instanceToEventManager,
+	_instanceToBindings = _instanceToBindings
 }

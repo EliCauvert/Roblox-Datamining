@@ -1,6 +1,6 @@
-﻿local dev = script:FindFirstAncestor("ViewRecycler").Parent:FindFirstChild("Dev")
+﻿local Dev = script:FindFirstAncestor("ViewRecycler").Parent:FindFirstChild("Dev")
 
-if dev == nil then
-	dev = game:GetService("CorePackages").Packages.Dev
+if Dev == nil then
+	Dev = game:GetService("CorePackages").Packages.Dev
 end
-return { JestGlobals = require(dev.JestGlobals) }
+return { JestGlobals = require(Dev.JestGlobals) }

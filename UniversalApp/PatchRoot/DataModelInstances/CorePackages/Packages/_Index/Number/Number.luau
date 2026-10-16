@@ -1,5 +1,5 @@
 ﻿return {
-	NaN = -9223372036854775808,
+	NaN = -(0 / 0),
 	isFinite = require(script.isFinite),
 	isInteger = require(script.isInteger),
 	isNaN = require(script.isNaN),

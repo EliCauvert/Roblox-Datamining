@@ -1,1 +1,1 @@
-﻿return require(script.Diagnostics)
+﻿return (require(script.Diagnostics))

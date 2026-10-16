@@ -1,79 +1,77 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local dateTimeCalendarConstantsModule = require(script.Parent.Parent.Utilities.DateTimeCalendarConstants)
-local dateTimeCalendarDayConfigUtilitiesModule = require(script.Parent.Parent.Utilities.DateTimeCalendarDayConfigUtilities)
-local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
-local rangeCalendarDayCellModule = require(script.Parent.RangeCalendarDayCell)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
-local DAYS_PER_WEEK = dateTimeCalendarConstantsModule.DAYS_PER_WEEK
-local buildTwoMonthPaneCellConfigs = dateTimeCalendarDayConfigUtilitiesModule.buildTwoMonthPaneCellConfigs
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local DateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
+local RangeCalendarDayCellModule = require(script.Parent.RangeCalendarDayCell)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
+local DAYSPERWEEK = require(script.Parent.Parent.Utilities.DateTimeCalendarConstants).DAYS_PER_WEEK
+local BuildTwoMonthPaneCellConfigsFunction = require(script.Parent.Parent.Utilities.DateTimeCalendarDayConfigUtilities).buildTwoMonthPaneCellConfigs
 
-local function EmptyCell(p1)
-	-- upvalues: reactModule (ref), viewModule (ref)
-	return reactModule.createElement(viewModule, {
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.fromOffset(p1.cellSize, p1.cellSize)
+local function EmptyCell(Frame) --[[ Line: 37 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy)
+	return ReactModule.createElement(ViewModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.fromOffset(Frame.cellSize, Frame.cellSize)
 	})
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), buildTwoMonthPaneCellConfigs (ref), DAYS_PER_WEEK (ref), dateTimeUtilitiesModule (ref), textModule (ref), EmptyCell (ref), rangeCalendarDayCellModule (ref), viewModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: buildTwoMonthPaneCellConfigs (copy), p1 (ref)
-		return buildTwoMonthPaneCellConfigs(p1.month, p1.year)
-	end, { p1.month, p1.year })
-	local list = {
-		reactModule.createElement("UIGridLayout", {
+return function(Frame: Frame) --[[ Line: 44 | Named "TwoMonthCalendarPane" ]]
+	-- upvalues: ReactModule (copy), BuildTwoMonthPaneCellConfigsFunction (copy), DAYSPERWEEK (copy), DateTimeUtilitiesModule (copy), TextModule (copy), EmptyCell (copy), RangeCalendarDayCellModule (copy), ViewModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 45 ]]
+		-- upvalues: BuildTwoMonthPaneCellConfigsFunction (upval), Frame (copy)
+		return BuildTwoMonthPaneCellConfigsFunction(Frame.month, Frame.year)
+	end, { Frame.month, Frame.year })
+	local Elements = {
+		ReactModule.createElement("UIGridLayout", {
 			key = "layout",
 			CellPadding = UDim2.fromOffset(0, 0),
-			CellSize = UDim2.fromOffset(p1.cellSize, p1.cellSize),
+			CellSize = UDim2.fromOffset(Frame.cellSize, Frame.cellSize),
 			FillDirection = Enum.FillDirection.Horizontal,
-			FillDirectionMaxCells = DAYS_PER_WEEK,
+			FillDirectionMaxCells = DAYSPERWEEK,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		})
 	}
-	local var2 = 1
+	local LayoutOrder = 1
 	
-	for i, v in dateTimeUtilitiesModule.weekdays do
-		table.insert(list, reactModule.createElement(textModule, {
+	for _, weekday in DateTimeUtilitiesModule.weekdays do
+		table.insert(Elements, ReactModule.createElement(TextModule, {
 			tag = "text-body-small text-align-x-center text-align-y-center",
-			key = `weekday-{v}`,
-			LayoutOrder = var2,
-			Text = v
+			key = `weekday-{weekday}`,
+			LayoutOrder = LayoutOrder,
+			Text = weekday
 		}))
-		var2 += 1
+		LayoutOrder += 1
 	end
-	for i, v_1 in var1 do
-		if v_1.day == nil then
-			table.insert(list, reactModule.createElement(EmptyCell, {
-				key = v_1.key,
-				cellSize = p1.cellSize,
-				LayoutOrder = v_1.LayoutOrder
+	for _, Frame1 in UseMemoResult do
+		if Frame1.day == nil then
+			table.insert(Elements, ReactModule.createElement(EmptyCell, {
+				key = Frame1.key,
+				cellSize = Frame.cellSize,
+				LayoutOrder = Frame1.LayoutOrder
 			}))
 		else
-			table.insert(list, reactModule.createElement(rangeCalendarDayCellModule, {
-				key = v_1.key,
-				cellSize = p1.cellSize,
-				day = v_1.day,
-				hoveredDate = p1.hoveredDate,
-				LayoutOrder = v_1.LayoutOrder,
-				month = v_1.month,
-				onDayActivated = p1.onDayActivated,
-				onHoverEnter = p1.onHoverEnter,
-				selectableDateRange = p1.selectableDateRange,
-				selectedDates = p1.selectedDates,
-				testId = p1.testId,
-				year = v_1.year
+			table.insert(Elements, ReactModule.createElement(RangeCalendarDayCellModule, {
+				key = Frame1.key,
+				cellSize = Frame.cellSize,
+				day = Frame1.day,
+				hoveredDate = Frame.hoveredDate,
+				LayoutOrder = Frame1.LayoutOrder,
+				month = Frame1.month,
+				onDayActivated = Frame.onDayActivated,
+				onHoverEnter = Frame.onHoverEnter,
+				selectableDateRange = Frame.selectableDateRange,
+				selectedDates = Frame.selectedDates,
+				testId = Frame.testId,
+				year = Frame1.year
 			}))
 		end
 	end
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "auto-y",
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.fromOffset(p1.paneWidth, 0),
-		testId = `{p1.testId}--pane-{p1.LayoutOrder}`
-	}, list)
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.fromOffset(Frame.paneWidth, 0),
+		testId = `{Frame.testId}--pane-{Frame.LayoutOrder}`
+	}, Elements)
 end

@@ -1,19 +1,21 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1)
-	assert(p1 ~= nil, "cannot get entries from a nil value")
-	local var1 = typeof(p1)
-	local t = {}
+return function(Text: string) --[[ Line: 24 ]]
+	assert(Text ~= nil, "cannot get entries from a nil value")
+	local ValueType = typeof(Text)
+	local List = {}
 	
-	if var1 == "table" then
-		for i, v in pairs(p1) do
-			table.insert(t, { i, v })
+	if ValueType == "table" then
+		for i, value in pairs(Text) do
+			table.insert(List, { i, value })
 		end
-		return t
-	elseif var1 == "string" then
-		for i = 1, string.len(p1) do
-			t[i] = { tostring(i), string.sub(p1, i, i) }
+		return List
+	else
+		if ValueType == "string" then
+			for i1 = 1, string.len(Text) do
+				List[i1] = { tostring(i1), (string.sub(Text, i1, i1)) }
+			end
 		end
+		return List
 	end
-	return t
 end

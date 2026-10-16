@@ -1,95 +1,98 @@
-﻿local runService = game:GetService("RunService")
-local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
-local _ = require(viewRecyclerRoblox.Parent.ViewRecycler)
-local axisMapModule = require(viewRecyclerRoblox.RobloxAdapter.axisMap)
+﻿local RunService = game:GetService("RunService")
+local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
+local AxisMapModule = require(ViewRecyclerRoblox.RobloxAdapter.axisMap)
 
 return {
-	attach = function(p1)
-		-- upvalues: runService (ref), axisMapModule (ref)
-		local instance = p1.instance
-		local axis = p1.axis
-		local getIdentity = p1.getIdentity
-		local onItemMeasured = p1.onItemMeasured
-		local t = {}
-		local t_1 = {}
+	attach = function(p1) --[[ Line: 43 ]]
+		-- upvalues: RunService (copy), AxisMapModule (copy)
+		local _Instance = p1.instance
+		local Axis = p1.axis
+		local GetIdentityFunction = p1.getIdentity
+		local OnItemMeasuredFunction = p1.onItemMeasured
+		local Tbl = {}
+		local Tbl1 = {}
 		
-		local function scheduleSettle()
-			-- upvalues: getIdentity (ref), t_1 (ref), runService (copy), t (ref), instance (ref), axisMapModule (copy), axis (ref), onItemMeasured (ref)
-			local var1 = getIdentity()
+		local function scheduleSettle() --[[ Line: 66 ]]
+			-- upvalues: GetIdentityFunction (copy), Tbl1 (copy), RunService (upval), Tbl (copy), _Instance (copy), AxisMapModule (upval), Axis (copy), OnItemMeasuredFunction (copy)
+			local Identity = GetIdentityFunction()
 			
-			if var1 == nil then return end
-			local assignmentGeneration = t_1[var1.assignmentGeneration]
+			if Identity == nil then return end
+			local Entry = Tbl1[Identity.assignmentGeneration]
 			
-			if assignmentGeneration == nil then
-				assignmentGeneration = {}
-				t_1[var1.assignmentGeneration] = assignmentGeneration
+			if Entry == nil then
+				Entry = {}
+				Tbl1[Identity.assignmentGeneration] = Entry
 			end
-			local itemIndex = var1.itemIndex or (var1.pinnedPosition or false)
-			itemIndex = itemIndex ~= false and ((if itemIndex ~= false then var1.index else nil) or false)
-			local var2 = assignmentGeneration[u110]
+			local ItemIndex = Identity.itemIndex or (Identity.pinnedPosition or false)
 			
-			if var2 == nil then
-				var2 = {}
-				assignmentGeneration[u110] = var2
+			if ItemIndex == false then
+				ItemIndex = Identity.index or false
 			end
-			if var2[var1.itemRevision] == nil then
-				local itemKey = var1.itemKey
-				local itemIndex_1 = var1.itemIndex
-				local assignmentGeneration_1 = var1.assignmentGeneration
-				local itemRevision = var1.itemRevision
-				local pinnedPosition = var1.pinnedPosition
-				local heartbeatConnection = nil
-				heartbeatConnection = runService.Heartbeat:Once(function()
-					-- upvalues: t (copy), heartbeatConnection (write), var2 (write), itemRevision (ref), assignmentGeneration (write), ? (write), t_1 (copy), assignmentGeneration_1 (ref), getIdentity (copy), itemKey (ref), itemIndex_1 (ref), pinnedPosition (ref), instance (copy), axisMapModule (copy), axis (copy), onItemMeasured (copy)
-					t[heartbeatConnection] = nil
+			local Entry1 = Entry[ItemIndex]
+			
+			if Entry1 == nil then
+				Entry1 = {}
+				Entry[ItemIndex] = Entry1
+			end
+			if Entry1[Identity.itemRevision] == nil then
+				local ItemKey = Identity.itemKey
+				local ItemIndex1 = Identity.itemIndex
+				local AssignmentGeneration = Identity.assignmentGeneration
+				local ItemRevision = Identity.itemRevision
+				local PinnedPosition = Identity.pinnedPosition
+				local HeartbeatConnection = nil
+				HeartbeatConnection = RunService.Heartbeat:Once(function() --[[ Line: 97 ]]
+					-- upvalues: Tbl (upval), HeartbeatConnection (ref), Entry1 (ref), ItemRevision (copy), Entry (ref), ItemIndex (ref), Tbl1 (upval), AssignmentGeneration (copy), GetIdentityFunction (upval), ItemKey (copy), ItemIndex1 (copy), PinnedPosition (copy), _Instance (upval), AxisMapModule (upval), Axis (upval), OnItemMeasuredFunction (upval)
+					Tbl[HeartbeatConnection] = nil
 					
-					if var2[itemRevision] == heartbeatConnection then
-						var2[itemRevision] = nil
+					if Entry1[ItemRevision] == HeartbeatConnection then
+						Entry1[ItemRevision] = nil
 						
-						if next(var2) == nil then
-							assignmentGeneration[u5] = nil
+						if next(Entry1) == nil then
+							Entry[ItemIndex] = nil
 							
-							if next(assignmentGeneration) == nil then
-								t_1[assignmentGeneration_1] = nil
+							if next(Entry) == nil then
+								Tbl1[AssignmentGeneration] = nil
 							end
 						end
 					end
-					local var3 = getIdentity()
+					local Identity = GetIdentityFunction()
 					
-					if var3 == nil or var3.itemKey ~= itemKey or (var3.itemIndex ~= itemIndex_1 or var3.assignmentGeneration ~= assignmentGeneration_1) or (var3.itemRevision ~= itemRevision or var3.pinnedPosition ~= pinnedPosition) then return end
-					if axisMapModule.crossOf(instance.AbsoluteSize, axis) > 0 then
-						onItemMeasured(var3, axisMapModule.mainOf(instance.AbsoluteSize, axis))
+					if Identity == nil or Identity.itemKey ~= ItemKey or Identity.itemIndex ~= ItemIndex1 or Identity.assignmentGeneration ~= AssignmentGeneration or Identity.itemRevision ~= ItemRevision or Identity.pinnedPosition ~= PinnedPosition then return end
+					if AxisMapModule.crossOf(_Instance.AbsoluteSize, Axis) > 0 then
+						OnItemMeasuredFunction(Identity, AxisMapModule.mainOf(_Instance.AbsoluteSize, Axis))
 					end
 				end)
-				t[heartbeatConnection] = true
-				var2[itemRevision] = heartbeatConnection
+				Tbl[HeartbeatConnection] = true
+				Entry1[ItemRevision] = HeartbeatConnection
 				
 				return
 			end
 		end
 		
-		local var1 = instance:GetPropertyChangedSignal("AbsoluteSize"):Connect(scheduleSettle)
+		local Connection = _Instance:GetPropertyChangedSignal("AbsoluteSize"):Connect(scheduleSettle)
 		
 		return {
 			scheduleSettle = scheduleSettle,
-			getPendingCount = function()
-				-- upvalues: t (ref)
-				local var2 = 0
+			getPendingCount = function(): number --[[ Line: 154 ]]
+				-- upvalues: Tbl (copy)
+				local Count = 0
 				
-				for i in t do
-					var2 += 1
+				for _ in Tbl do
+					Count += 1
 				end
-				return var2
+				return Count
 			end,
-			disconnect = function()
-				-- upvalues: var1 (ref), t (ref), t_1 (ref)
-				var1:Disconnect()
+			disconnect = function() --[[ Line: 143 ]]
+				-- upvalues: Connection (copy), Tbl (copy), Tbl1 (copy)
+				Connection:Disconnect()
 				
-				for i in t do
-					i:Disconnect()
+				for Connection1 in Tbl do
+					Connection1:Disconnect()
 				end
-				table.clear(t)
-				table.clear(t_1)
+				table.clear(Tbl)
+				table.clear(Tbl1)
 			end
 		}
 	end

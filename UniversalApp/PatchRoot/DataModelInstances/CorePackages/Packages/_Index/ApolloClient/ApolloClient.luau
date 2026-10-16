@@ -1,8 +1,8 @@
-﻿local t = {}
-local object = require(script.Parent.LuauPolyfill).Object
-local coreModule = require(script.core)
-object.assign(t, coreModule)
-t.None = coreModule.None
-object.assign(t, require(script.react))
+﻿local ApolloClientModule = {}
+local Object = require(script.Parent.LuauPolyfill).Object
+local CoreModule = require(script.core)
+Object.assign(ApolloClientModule, CoreModule)
+ApolloClientModule.None = CoreModule.None
+Object.assign(ApolloClientModule, (require(script.react)))
 
-return t
+return ApolloClientModule

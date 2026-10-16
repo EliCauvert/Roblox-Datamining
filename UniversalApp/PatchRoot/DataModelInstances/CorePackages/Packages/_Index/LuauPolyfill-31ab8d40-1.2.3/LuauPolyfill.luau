@@ -1,36 +1,30 @@
-﻿local parent = script.Parent
-local booleanModule = require(parent.Boolean)
-local collectionsModule = require(parent.Collections)
-local consoleModule = require(parent.Console)
-local mathModule = require(parent.Math)
-local numberModule = require(parent.Number)
-local stringModule = require(parent.String)
-local symbolModule = require(parent.Symbol)
-local timersModule = require(parent.Timers)
-local _ = require(parent.ES7Types)
+﻿local Parent = script.Parent
+local CollectionsModule = require(Parent.Collections)
+local TimersModule = require(Parent.Timers)
+local _ = require(Parent.ES7Types)
 local _ = require(script.Promise)
 
 return {
-	Array = collectionsModule.Array,
+	Array = CollectionsModule.Array,
 	AssertionError = require(script.AssertionError),
-	Boolean = booleanModule,
-	console = consoleModule,
+	Boolean = require(Parent.Boolean),
+	console = require(Parent.Console),
 	Error = require(script.Error),
 	extends = require(script.extends),
-	instanceof = require(parent.InstanceOf),
-	Math = mathModule,
-	Number = numberModule,
-	Object = collectionsModule.Object,
-	Map = collectionsModule.Map,
-	coerceToMap = collectionsModule.coerceToMap,
-	coerceToTable = collectionsModule.coerceToTable,
-	Set = collectionsModule.Set,
-	WeakMap = collectionsModule.WeakMap,
-	String = stringModule,
-	Symbol = symbolModule,
-	setTimeout = timersModule.setTimeout,
-	clearTimeout = timersModule.clearTimeout,
-	setInterval = timersModule.setInterval,
-	clearInterval = timersModule.clearInterval,
-	util = { inspect = collectionsModule.inspect }
+	instanceof = require(Parent.InstanceOf),
+	Math = require(Parent.Math),
+	Number = require(Parent.Number),
+	Object = CollectionsModule.Object,
+	Map = CollectionsModule.Map,
+	coerceToMap = CollectionsModule.coerceToMap,
+	coerceToTable = CollectionsModule.coerceToTable,
+	Set = CollectionsModule.Set,
+	WeakMap = CollectionsModule.WeakMap,
+	String = require(Parent.String),
+	Symbol = require(Parent.Symbol),
+	setTimeout = TimersModule.setTimeout,
+	clearTimeout = TimersModule.clearTimeout,
+	setInterval = TimersModule.setInterval,
+	clearInterval = TimersModule.clearInterval,
+	util = { inspect = CollectionsModule.inspect }
 }

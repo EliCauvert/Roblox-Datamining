@@ -1,35 +1,34 @@
-﻿local recommendationContextType = require(script:FindFirstAncestor("SocialLibraries").dependencies).RoduxFriends.Enums.RecommendationContextType
-local _ = {
-	SingularMutualFriend = "Feature.Friends.Label.SingularMutualFriend",
-	MutualFriends = "Feature.Friends.Label.MutualFriends",
-	PlayedTogether = "Feature.Friends.Label.Frequent"
-}
+﻿local RecommendationContextType = require(script:FindFirstAncestor("SocialLibraries").dependencies).RoduxFriends.Enums.RecommendationContextType
 
-local _ = function(p1)
-	return if p1.mutualFriendsCount then p1.mutualFriendsCount elseif p1.mutualFriendsList then #p1.mutualFriendsList else 0
+local function _(p1) --[[ Line: 49 ]]
+	return if p1.mutualFriendsCount then p1.mutualFriendsCount else p1.mutualFriendsList and #p1.mutualFriendsList or 0
 end
 
-return function(p1)
-	-- upvalues: recommendationContextType (ref)
-	local t = nil
-	local var1 = nil
-	local var2 = nil
-	local var3 = p1.contextType and p1.contextType.rawValue() or nil
-	local var4 = if p1.mutualFriendsCount then p1.mutualFriendsCount elseif p1.mutualFriendsList then #p1.mutualFriendsList else 0
+return function(p1) --[[ Line: 55 ]]
+	-- upvalues: RecommendationContextType (copy)
+	local Icon = nil
+	local FeatureFriendsLabelSingularMutualFriend: string? = nil
+	local Formatter: ((string) -> any)? = nil
+	local RawValueResult = p1.contextType and p1.contextType.rawValue() or nil
+	local MutualFriendsCount = if p1.mutualFriendsCount then p1.mutualFriendsCount else p1.mutualFriendsList and #p1.mutualFriendsList or 0
 	
-	if var3 == recommendationContextType.MutualFriends.rawValue() and var4 > 0 then
-		var2 = function(p2)
-			-- upvalues: var4 (ref)
-			return if p2 then tostring(var4) .. " " .. string.lower(p2) else nil
+	if RawValueResult == RecommendationContextType.MutualFriends.rawValue() and MutualFriendsCount > 0 then
+		Formatter = function(Text: string) --[[ Line: 65 ]]
+			-- upvalues: MutualFriendsCount (copy)
+			return if Text then tostring(MutualFriendsCount) .. " " .. string.lower(Text) else nil
 		end
 		
-		var1 = if var4 == 1 then "Feature.Friends.Label.SingularMutualFriend" else "Feature.Friends.Label.MutualFriends"
-		t = { path = "icons/status/player/friend" }
-	elseif var3 == recommendationContextType.Frequents.rawValue() then
-		var1 = "Feature.Friends.Label.Frequent"
+		FeatureFriendsLabelSingularMutualFriend = if MutualFriendsCount == 1 then "Feature.Friends.Label.SingularMutualFriend" else "Feature.Friends.Label.MutualFriends"
+		Icon = { path = "icons/status/player/friend" }
+	elseif RawValueResult == RecommendationContextType.Frequents.rawValue() then
+		FeatureFriendsLabelSingularMutualFriend = "Feature.Friends.Label.Frequent"
 	end
 	return {
-		icon = t,
-		label = { text = nil, formatter = var2, textKey = var1 }
+		icon = Icon,
+		label = {
+			text = nil,
+			formatter = Formatter,
+			textKey = FeatureFriendsLabelSingularMutualFriend
+		}
 	}
 end

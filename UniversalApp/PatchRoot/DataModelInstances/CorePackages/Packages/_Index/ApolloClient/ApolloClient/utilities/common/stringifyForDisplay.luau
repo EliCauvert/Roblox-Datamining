@@ -1,32 +1,31 @@
-﻿local t = {}
-local luauPolyfillModule = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local string = luauPolyfillModule.String
-local httpService = game:GetService("HttpService")
-local makeUniqueId = require(script.Parent.makeUniqueId).makeUniqueId
+﻿local LuauPolyfillModule = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local String = LuauPolyfillModule.String
+local HttpService = game:GetService("HttpService")
+local MakeUniqueIdFunction = require(script.Parent.makeUniqueId).makeUniqueId
 
-function replaceUndefined(p1, p2)
-	-- upvalues: array (ref)
-	if not array.isArray(p1) then
+function replaceUndefined(p1, p2) --[[ Line: 20 ]]
+	-- upvalues: Array (copy)
+	if not Array.isArray(p1) then
 		return p1
 	end
-	local t = {}
+	local List = {}
 	
 	for i = 1, #p1 do
 		if p1[i] == nil then
-			table.insert(t, p2)
+			table.insert(List, p2)
 		else
-			table.insert(t, p1[i])
+			table.insert(List, p1[i])
 		end
 	end
-	return t
+	return List
 end
 
-function t.stringifyForDisplay(p3)
-	-- upvalues: makeUniqueId (ref), array (ref), string (ref), httpService (ref)
-	local var1 = makeUniqueId("stringifyForDisplay")
-	
-	return array.join(string.split(httpService:JSONEncode(replaceUndefined(p3, var1)), httpService:JSONEncode(var1)), "<undefined>")
-end
-
-return t
+return {
+	stringifyForDisplay = function(p3) --[[ Line: 35 ]]
+		-- upvalues: MakeUniqueIdFunction (copy), Array (copy), String (copy), HttpService (copy)
+		local StringifyForDisplay = MakeUniqueIdFunction("stringifyForDisplay")
+		
+		return Array.join(String.split(HttpService:JSONEncode(replaceUndefined(p3, StringifyForDisplay)), HttpService:JSONEncode(StringifyForDisplay)), "<undefined>")
+	end
+}

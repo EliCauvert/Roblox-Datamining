@@ -1,6 +1,6 @@
-﻿local numberModule = require(script.Parent.Parent.Number)
+﻿local NumberModule = require(script.Parent.Parent.Number)
 
-return function(p1)
-	-- upvalues: numberModule (ref)
-	return not not p1 and (p1 ~= 0 and (p1 ~= "" and not numberModule.isNaN(p1)))
+return function(p1): boolean --[[ Line: 20 ]]
+	-- upvalues: NumberModule (copy)
+	return not not p1 and (p1 ~= 0 and (p1 ~= "" and not NumberModule.isNaN(p1)))
 end

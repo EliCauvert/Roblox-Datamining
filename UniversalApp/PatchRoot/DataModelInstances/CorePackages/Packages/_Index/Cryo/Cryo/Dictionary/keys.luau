@@ -1,10 +1,10 @@
-﻿return function(p1)
+﻿return function(List) --[[ Line: 4 | Named "keys" ]]
 	local t = {}
-	local var1 = 1
+	local Count = 1
 	
-	for i in pairs(p1) do
-		t[var1] = i
-		var1 += 1
+	for i in pairs(List) do
+		t[Count] = i
+		Count += 1
 	end
 	return t
 end

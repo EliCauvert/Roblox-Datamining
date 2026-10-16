@@ -1,15 +1,15 @@
-﻿local controlStateModule = require(script.Parent.Parent.Control.Enum.ControlState)
+﻿local ControlStateModule = require(script.Parent.Parent.Control.Enum.ControlState)
 
-return function(p1, p2, p3)
-	-- upvalues: controlStateModule (ref)
-	local var1 = p1[p2] or p1[controlStateModule.Default]
-	local t = {
-		Color = p3.Theme[var1].Color,
-		Transparency = p3.Theme[var1].Transparency
+return function(p1, Disabled, p2) --[[ Line: 6 ]]
+	-- upvalues: ControlStateModule (copy)
+	local v1 = p1[Disabled] or p1[ControlStateModule.Default]
+	local config = {
+		Color = p2.Theme[v1].Color,
+		Transparency = p2.Theme[v1].Transparency
 	}
 	
-	if p2 == controlStateModule.Disabled or p2 == controlStateModule.Pressed then
-		t.Transparency = 0.5 * t.Transparency + 0.5
+	if Disabled == ControlStateModule.Disabled or Disabled == ControlStateModule.Pressed then
+		config.Transparency = 0.5 * config.Transparency + 0.5
 	end
-	return t
+	return config
 end

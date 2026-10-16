@@ -1,64 +1,61 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roact = dependenciesModule.Roact
-local UIBlox = dependenciesModule.UIBlox
-local cryo = dependenciesModule.Cryo
-local imagesModule = require(script.Parent.Images)
-local foundationFontFaceMigration = dependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
-local normalizeFontFace = dependenciesModule.Foundation.Utility.normalizeFontFace
-local color = Color3.fromRGB(200, 200, 200)
-local rect = Rect.new(7, 8, 7, 8)
-local alertViewTextbox = roact.PureComponent:extend("AlertViewTextbox")
-alertViewTextbox.defaultProps = { LayoutOrder = 0, Text = "", PlaceholderText = nil }
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Roact = DependenciesModule.Roact
+local UIBlox = DependenciesModule.UIBlox
+local Cryo = DependenciesModule.Cryo
+local ImagesModule = require(script.Parent.Images)
+local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = DependenciesModule.Foundation.Utility.normalizeFontFace
+local _Color3 = Color3.fromRGB(200, 200, 200)
+local _Rect = Rect.new(7, 8, 7, 8)
+local AlertViewTextbox = Roact.PureComponent:extend("AlertViewTextbox")
+AlertViewTextbox.defaultProps = { LayoutOrder = 0, Text = "", PlaceholderText = nil }
 
-function alertViewTextbox.render(p1)
-	-- upvalues: UIBlox (ref), rect (ref), roact (ref), imagesModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), color (ref)
-	return UIBlox.Style.withStyle(function(p2)
-		-- upvalues: p1 (ref), rect (copy), roact (copy), imagesModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), color (copy)
-		local vector2 = Vector2.new(0, 0)
-		local vector2_1 = Vector2.new(0, 0)
-		local _ = nil
-		local font = p2.Font
-		local theme = p2.Theme
+function AlertViewTextbox.render(p1) --[[ Line: 21 ]]
+	-- upvalues: UIBlox (copy), _Rect (copy), Roact (copy), ImagesModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), _Color3 (copy)
+	return UIBlox.Style.withStyle(function(p2) --[[ Line: 22 ]]
+		-- upvalues: p1 (copy), _Rect (upval), Roact (upval), ImagesModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), _Color3 (upval)
+		local _Font = p2.Font
+		local Theme = p2.Theme
 		
-		return roact.createElement("ImageLabel", {
+		return Roact.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
-			ImageRectSize = vector2_1,
-			Image = imagesModule.buttonStroke.Image,
-			ImageColor3 = theme.UIDefault.Color,
-			ImageRectOffset = vector2,
+			ImageRectSize = Vector2.new(0, 0),
+			Image = ImagesModule.buttonStroke.Image,
+			ImageColor3 = Theme.UIDefault.Color,
+			ImageRectOffset = Vector2.new(0, 0),
 			LayoutOrder = p1.props.LayoutOrder,
 			ScaleType = Enum.ScaleType.Slice,
 			Size = UDim2.new(1, 0, 0, 30),
-			SliceCenter = rect
+			SliceCenter = _Rect
 		}, {
-			Textbox = roact.createElement("TextBox", {
+			Textbox = Roact.createElement("TextBox", {
 				BackgroundTransparency = 1,
 				ClearTextOnFocus = false,
-				Font = if foundationFontFaceMigration then nil else font.Header2.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(font.Header2.Font) else nil,
+				Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font.Header2.Font) else nil,
 				PlaceholderText = p1.props.PlaceholderText,
-				PlaceholderColor3 = color,
+				PlaceholderColor3 = _Color3,
 				Position = UDim2.new(0, 6, 0, 0),
 				Size = UDim2.new(1, -12, 1, 0),
 				Text = p1.props.Text,
-				TextColor3 = theme.TextDefault.Color,
-				TextSize = font.BaseSize * font.CaptionBody.RelativeSize,
+				TextColor3 = Theme.TextDefault.Color,
+				TextSize = _Font.BaseSize * _Font.CaptionBody.RelativeSize,
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextWrapped = true,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				[roact.Change.Text] = function(p3)
-					-- upvalues: p1 (copy)
+				[Roact.Change.Text] = function(p3) --[[ Line: 62 ]]
+					-- upvalues: p1 (upval)
 					if p1.props.onTextChanged then
 						p1.props.onTextChanged(p3.Text)
 					end
 				end,
-				[roact.Ref] = p1.props.forwardRef
+				[Roact.Ref] = p1.props.forwardRef
 			})
 		})
 	end)
 end
 
-return roact.forwardRef(function(p1, p2)
-	-- upvalues: roact (ref), alertViewTextbox (ref), cryo (ref)
-	return roact.createElement(alertViewTextbox, cryo.Dictionary.join(p1, { forwardRef = p2 }))
+return Roact.forwardRef(function(p1, ForwardRef) --[[ Line: 74 ]]
+	-- upvalues: Roact (copy), AlertViewTextbox (copy), Cryo (copy)
+	return Roact.createElement(AlertViewTextbox, Cryo.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

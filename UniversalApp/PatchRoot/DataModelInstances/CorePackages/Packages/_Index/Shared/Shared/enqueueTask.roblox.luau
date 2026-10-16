@@ -1,6 +1,6 @@
-﻿local setTimeout = require(script.Parent.Parent.LuauPolyfill).setTimeout
+﻿local SetTimeoutFunction = require(script.Parent.Parent.LuauPolyfill).setTimeout
 
-return function(p1)
-	-- upvalues: setTimeout (ref)
-	return setTimeout(p1, 0)
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: SetTimeoutFunction (copy)
+	return SetTimeoutFunction(p1, 0)
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.ApolloClient.ApolloClient)
+﻿return (require(script.Parent._Index.ApolloClient.ApolloClient))

@@ -1,1 +1,1 @@
-﻿return require(script.Progress)
+﻿return (require(script.Progress))

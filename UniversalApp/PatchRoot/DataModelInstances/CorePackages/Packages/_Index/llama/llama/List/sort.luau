@@ -1,11 +1,11 @@
-﻿local copyModule = require(script.Parent.copy)
+﻿local CopyModule = require(script.Parent.copy)
 
-return function(p1, p2)
-	-- upvalues: copyModule (ref)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var1)
-	local var2 = copyModule(p1)
-	table.sort(var2, p2)
+return function(p1, p2) --[[ Line: 4 | Named "sort" ]]
+	-- upvalues: CopyModule (copy)
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
+	local CopyModuleResult = CopyModule(p1)
+	table.sort(CopyModuleResult, p2)
 	
-	return var2
+	return CopyModuleResult
 end

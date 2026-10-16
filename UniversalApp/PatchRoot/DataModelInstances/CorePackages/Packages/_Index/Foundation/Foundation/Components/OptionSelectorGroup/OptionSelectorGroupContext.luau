@@ -1,14 +1,15 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Enums.FillBehavior)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Enums.FillBehavior)
+local OptionSelectorGroupSizeModule = require(Foundation.Enums.OptionSelectorGroupSize)
 
-return require(foundation.Parent.React).createContext({
+return require(Foundation.Parent.React).createContext({
 	value = nil,
 	Selectable = true,
 	testId = "",
 	fillBehavior = nil,
-	onValueChanged = function(_)
+	onValueChanged = function(_) --[[ Line: 25 ]]
 		warn("No OptionSelectorGroupProvider found for OptionSelectorGroup")
 	end,
-	orientation = require(foundation.Enums.Orientation).Vertical,
-	size = if require(foundation.Utility.Flags).FoundationOptionSelectorGroupBeta then require(foundation.Enums.OptionSelectorGroupSize).Medium else nil
+	orientation = require(Foundation.Enums.Orientation).Vertical,
+	size = if require(Foundation.Utility.Flags).FoundationOptionSelectorGroupBeta then OptionSelectorGroupSizeModule.Medium else nil
 })

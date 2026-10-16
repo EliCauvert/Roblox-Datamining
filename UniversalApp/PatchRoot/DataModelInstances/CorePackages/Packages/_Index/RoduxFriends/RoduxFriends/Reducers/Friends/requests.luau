@@ -1,25 +1,25 @@
-﻿local roduxModule = require(script:FindFirstAncestor("RoduxFriends").Parent.Rodux)
-local receivedCountModule = require(script.receivedCount)
-local byUserIdModule = require(script.byUserId)
-local mutualFriendsModule = require(script.mutualFriends)
-local sourceUniverseIdsModule = require(script.sourceUniverseIds)
-local nextPageCursorModule = require(script.nextPageCursor)
-local sentAtModule = require(script.sentAt)
-local originSourceTypeModule = require(script.originSourceType)
-local orderModule = require(script.order)
-local senderNicknameModule = require(script.senderNickname)
+﻿local RoduxModule = require(script:FindFirstAncestor("RoduxFriends").Parent.Rodux)
+local ReceivedCountModule = require(script.receivedCount)
+local ByUserIdModule = require(script.byUserId)
+local MutualFriendsModule = require(script.mutualFriends)
+local SourceUniverseIdsModule = require(script.sourceUniverseIds)
+local NextPageCursorModule = require(script.nextPageCursor)
+local SentAtModule = require(script.sentAt)
+local OriginSourceTypeModule = require(script.originSourceType)
+local OrderModule = require(script.order)
+local SenderNicknameModule = require(script.senderNickname)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), receivedCountModule (ref), byUserIdModule (ref), mutualFriendsModule (ref), sourceUniverseIdsModule (ref), nextPageCursorModule (ref), sentAtModule (ref), originSourceTypeModule (ref), orderModule (ref), senderNicknameModule (ref)
-	return roduxModule.combineReducers({
-		receivedCount = receivedCountModule(p1),
-		byUserId = byUserIdModule(p1),
-		mutualFriends = mutualFriendsModule(p1),
-		sourceUniverseIds = sourceUniverseIdsModule(p1),
-		nextPageCursor = nextPageCursorModule(p1),
-		sentAt = sentAtModule(p1),
-		originSourceType = originSourceTypeModule(p1),
-		order = orderModule(p1),
-		senderNickname = senderNicknameModule(p1)
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: RoduxModule (copy), ReceivedCountModule (copy), ByUserIdModule (copy), MutualFriendsModule (copy), SourceUniverseIdsModule (copy), NextPageCursorModule (copy), SentAtModule (copy), OriginSourceTypeModule (copy), OrderModule (copy), SenderNicknameModule (copy)
+	return RoduxModule.combineReducers({
+		receivedCount = ReceivedCountModule(p1),
+		byUserId = ByUserIdModule(p1),
+		mutualFriends = MutualFriendsModule(p1),
+		sourceUniverseIds = SourceUniverseIdsModule(p1),
+		nextPageCursor = NextPageCursorModule(p1),
+		sentAt = SentAtModule(p1),
+		originSourceType = OriginSourceTypeModule(p1),
+		order = OrderModule(p1),
+		senderNickname = SenderNicknameModule(p1)
 	})
 end

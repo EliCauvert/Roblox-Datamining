@@ -1,35 +1,35 @@
-﻿local axis = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler).Axis
+﻿local Axis = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler).Axis
 
 return {
-	mainOf = function(p1, p2)
-		-- upvalues: axis (ref)
-		return if p2 == axis.X then p1.X else p1.Y
+	mainOf = function(Vector, X) --[[ Line: 13 ]]
+		-- upvalues: Axis (copy)
+		return if X == Axis.X then Vector.X else Vector.Y
 	end,
-	crossOf = function(vectorA, vectorB)
-		-- upvalues: axis (ref)
-		return if vectorB == axis.X then vectorA.Y else vectorA.X
+	crossOf = function(Vector, X) --[[ Line: 17 ]]
+		-- upvalues: Axis (copy)
+		return if X == Axis.X then Vector.Y else Vector.X
 	end,
-	positionFor = function(p1, p2, p3)
-		-- upvalues: axis (ref)
-		local crossAxisIndex = p1.crossAxisIndex or 1
-		local crossAxisCount = p1.crossAxisCount or 1
-		local var1 = (crossAxisIndex - 1) / crossAxisCount
-		local var2 = (crossAxisIndex - 1) * (p1.crossAxisSpacing or 0) / crossAxisCount
-		local var3 = p1.startOffset + (p3 or 0)
+	positionFor = function(p1, X, p2): UDim2 --[[ Line: 23 ]]
+		-- upvalues: Axis (copy)
+		local CrossAxisIndex = p1.crossAxisIndex or 1
+		local CrossAxisCount = p1.crossAxisCount or 1
+		local YScale = (CrossAxisIndex - 1) / CrossAxisCount
+		local YOffset = (CrossAxisIndex - 1) * (p1.crossAxisSpacing or 0) / CrossAxisCount
+		local NewStartOffset = p1.startOffset + (p2 or 0)
 		
-		return if p2 == axis.X then UDim2.new(0, var3, var1, var2) else UDim2.new(var1, var2, 0, var3)
+		return if X == Axis.X then UDim2.new(0, NewStartOffset, YScale, YOffset) else UDim2.new(YScale, YOffset, 0, NewStartOffset)
 	end,
-	sizeFor = function(p1, p2, p3)
-		-- upvalues: axis (ref)
-		local crossAxisCount = p1.crossAxisCount or 1
-		local var1 = 1 / crossAxisCount
-		local var2 = -(crossAxisCount - 1) * (p1.crossAxisSpacing or 0) / crossAxisCount
-		local var3 = if p3 then 0 else p1.length
+	sizeFor = function(p1, X, p2): UDim2 --[[ Line: 38 ]]
+		-- upvalues: Axis (copy)
+		local CrossAxisCount = p1.crossAxisCount or 1
+		local YScale = 1 / CrossAxisCount
+		local YOffset = -(CrossAxisCount - 1) * (p1.crossAxisSpacing or 0) / CrossAxisCount
+		local Length = if p2 then 0 else p1.length
 		
-		return if p2 == axis.X then UDim2.new(0, var3, var1, var2) else UDim2.new(var1, var2, 0, var3)
+		return if X == Axis.X then UDim2.new(0, Length, YScale, YOffset) else UDim2.new(YScale, YOffset, 0, Length)
 	end,
-	canvasSizeFor = function(p1, p2)
-		-- upvalues: axis (ref)
-		return if p2 == axis.X then UDim2.fromOffset(p1, 0) else UDim2.fromOffset(0, p1)
+	canvasSizeFor = function(XOffset, X): UDim2 --[[ Line: 49 ]]
+		-- upvalues: Axis (copy)
+		return if X == Axis.X then UDim2.fromOffset(XOffset, 0) else UDim2.fromOffset(0, XOffset)
 	end
 }

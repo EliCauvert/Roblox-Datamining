@@ -1,69 +1,66 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local texturePackUtilsModule = require(parent.util.TexturePackUtils)
-local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
-local getFFlagUGCValidateTexturePackOnRCCOnlyModule = require(parent.flags.getFFlagUGCValidateTexturePackOnRCCOnly)
-local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
-local t = {
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local TexturePackUtilsModule = require(Parent.util.TexturePackUtils)
+local GetFFlagUGCValidateTexturePackModule = require(Parent.flags.getFFlagUGCValidateTexturePack)
+local GetFFlagUGCValidateTexturePackOnRCCOnlyModule = require(Parent.flags.getFFlagUGCValidateTexturePackOnRCCOnly)
+local GetFFlagUGCValidationAllowFullVaasModule = require(Parent.flags.getFFlagUGCValidationAllowFullVaas)
+local config = {
 	Publish = true,
 	Backend = true,
 	InExpServer = true,
 	Internal = true
 }
-local t_1 = { InExpServer = true, InExpClient = true }
+local config1 = { InExpServer = true, InExpClient = true }
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: getFFlagUGCValidateTexturePackModule (ref), t_1 (ref), getFFlagUGCValidationAllowFullVaasModule (ref), validationEnumsModule (ref), t (ref), getFFlagUGCValidateTexturePackOnRCCOnlyModule (ref), texturePackUtilsModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref)
-		if not getFFlagUGCValidateTexturePackModule() then return end
-		local var1
-		local rootInstance = p2.rootInstance
-		local consumerConfig = p2.consumerConfig
+	run = function(p1, p2) --[[ Line: 47 ]]
+		-- upvalues: GetFFlagUGCValidateTexturePackModule (copy), config1 (copy), GetFFlagUGCValidationAllowFullVaasModule (copy), ValidationEnumsModule (copy), config (copy), GetFFlagUGCValidateTexturePackOnRCCOnlyModule (copy), TexturePackUtilsModule (copy), ErrorSourceStringsModule (copy), UGCValidationService (copy)
+		if not GetFFlagUGCValidateTexturePackModule() then return end
+		local RootInstance = p2.rootInstance
+		local ConsumerConfig = p2.consumerConfig
 		
-		if t_1[consumerConfig.source] == true then return end
-		if getFFlagUGCValidationAllowFullVaasModule() and consumerConfig.isVaaS then
-			var1 = consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
-			var1 = nil
+		if config1[ConsumerConfig.source] == true then return end
+		local IsVaaS = GetFFlagUGCValidationAllowFullVaasModule() and ConsumerConfig.isVaaS
+		local IsValidationEnvMatch: boolean = if IsVaaS then ConsumerConfig.validationEnv == ValidationEnumsModule.ValidationEnv.Backend else config[ConsumerConfig.source] == true
+		local UploadCategory = p2.uploadCategory
+		local IsUploadCategoryMatch: boolean = UploadCategory == ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS or UploadCategory == ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		
+		if GetFFlagUGCValidateTexturePackOnRCCOnlyModule() then
+			if IsValidationEnvMatch then
+				for _, value in TexturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(RootInstance, IsUploadCategoryMatch) do
+					p1:fail(ErrorSourceStringsModule.Keys.TexturePackInvalidURL, { SurfaceAppearanceName = value:GetFullName() }, value)
+				end
+			end
 		else
-			var1 = t[consumerConfig.source] == true
-		end
-		local uploadCategory = p2.uploadCategory
-		local var2 = if uploadCategory ~= validationEnumsModule.UploadCategory.TORSO_AND_LIMBS then uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD else true
-		
-		if not getFFlagUGCValidateTexturePackOnRCCOnlyModule() then
-			for i, v in texturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(rootInstance, var2) do
-				p1:fail(errorSourceStringsModule.Keys.TexturePackInvalidURL, { SurfaceAppearanceName = v:GetFullName() }, v)
-			end
-		elseif var1 then
-			for i, v in texturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(rootInstance, var2) do
-				p1:fail(errorSourceStringsModule.Keys.TexturePackInvalidURL, { SurfaceAppearanceName = v:GetFullName() }, v)
+			for _, value1 in TexturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(RootInstance, IsUploadCategoryMatch) do
+				p1:fail(ErrorSourceStringsModule.Keys.TexturePackInvalidURL, { SurfaceAppearanceName = value1:GetFullName() }, value1)
 			end
 		end
-		for i, v in texturePackUtilsModule.findSurfaceAppearancesWithTexturePacks(rootInstance) do
-			local ok, status = pcall(function()
-				-- upvalues: UGCValidationService (copy), v (ref)
-				return UGCValidationService:DoesSurfaceAppearanceMatchTexturePackAsync(v)
+		for _, Object in TexturePackUtilsModule.findSurfaceAppearancesWithTexturePacks(RootInstance) do
+			local Success, Result = pcall(function() --[[ Line: 94 ]]
+				-- upvalues: UGCValidationService (upval), Object (copy)
+				return UGCValidationService:DoesSurfaceAppearanceMatchTexturePackAsync(Object)
 			end)
 			
-			if not ok then
-				if var1 then
-					p1:forceError(`Failed to download TexturePack for SurfaceAppearance '{v:GetFullName()}'.`)
+			if not Success then
+				if IsValidationEnvMatch then
+					p1:forceError(`Failed to download TexturePack for SurfaceAppearance '{Object:GetFullName()}'.`)
 				end
-				p1:fail(errorSourceStringsModule.Keys.TexturePack_DownloadFailed, { SurfaceAppearanceName = v:GetFullName() }, v)
-			elseif not status then
-				p1:fail(errorSourceStringsModule.Keys.TexturePack_Mismatch, { SurfaceAppearanceName = v:GetFullName() }, v)
+				p1:fail(ErrorSourceStringsModule.Keys.TexturePack_DownloadFailed, { SurfaceAppearanceName = Object:GetFullName() }, Object)
+			elseif not Result then
+				p1:fail(ErrorSourceStringsModule.Keys.TexturePack_Mismatch, { SurfaceAppearanceName = Object:GetFullName() }, Object)
 			end
 		end
 	end

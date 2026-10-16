@@ -1,6 +1,6 @@
-﻿local subscribeModule = require(script.subscribe)
+﻿local SubscribeModule = require(script.subscribe)
 
 return {
-	subscribe = subscribeModule.subscribe,
-	createSourceEventStream = subscribeModule.createSourceEventStream
+	subscribe = SubscribeModule.subscribe,
+	createSourceEventStream = SubscribeModule.createSourceEventStream
 }

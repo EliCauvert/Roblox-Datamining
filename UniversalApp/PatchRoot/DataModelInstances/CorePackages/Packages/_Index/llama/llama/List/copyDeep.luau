@@ -1,7 +1,7 @@
-﻿local function copyDeep(p1)
-	-- upvalues: copyDeep (ref)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var1)
+﻿local function copyDeep(p1) --[[ Line: 2 ]]
+	-- upvalues: copyDeep (copy)
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local t = {}
 	
 	for i = 1, #p1 do

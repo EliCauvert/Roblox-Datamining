@@ -1,18 +1,19 @@
-﻿local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
+﻿local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
+return function(p1): boolean --[[ Line: 10 | Named "shouldValidateR15LegacyDuplicate" ]]
+	-- upvalues: ConstantsModule (copy)
 	if not p1 or not p1.consumerConfig or not p1.consumerConfig.enforceR15FolderStructure then
 		return false
 	end
-	local uploadEnum = p1.uploadEnum
+	local UploadEnum = p1.uploadEnum
 	
-	if uploadEnum.bundleType == Enum.BundleType.BodyParts then
+	if UploadEnum.bundleType == Enum.BundleType.BodyParts then
 		return true
+	else
+		local AssetType = UploadEnum.assetType
+		
+		return AssetType ~= nil and ConstantsModule.AssetUploadsWithFolderStructure[AssetType] == true
 	end
-	local assetType = uploadEnum.assetType
-	
-	return assetType ~= nil and constantsModule.AssetUploadsWithFolderStructure[assetType] == true
 end

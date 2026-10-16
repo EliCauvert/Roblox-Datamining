@@ -1,90 +1,89 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local _ = require(parent_1.Parent.LuauPolyfill)
-local _ = require(parent_1.error)
-local tokenKindModule = require(parent.tokenKind)
-local location = require(parent.ast).Location
-local source = require(parent.source).Source
-local lexerModule = require(parent.lexer)
-local lexer = lexerModule.Lexer
-local isPunctuatorTokenKind = lexerModule.isPunctuatorTokenKind
-local tokenKind = tokenKindModule.TokenKind
-local directiveLocation = require(parent.directiveLocation).DirectiveLocation
-local kind = require(parent.kinds).Kind
-local syntaxError = require(script.Parent.Parent.error.syntaxError).syntaxError
-local getTokenDesc = nil
-local getTokenKindDesc = nil
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local _ = require(Parent1.Parent.LuauPolyfill)
+local _ = require(Parent1.error)
+local Location = require(Parent.ast).Location
+local Source = require(Parent.source).Source
+local LexerModule = require(Parent.lexer)
+local Lexer = LexerModule.Lexer
+local IsPunctuatorTokenKindFunction = LexerModule.isPunctuatorTokenKind
+local TokenKind = require(Parent.tokenKind).TokenKind
+local DirectiveLocation = require(Parent.directiveLocation).DirectiveLocation
+local Kind = require(Parent.kinds).Kind
+local SyntaxErrorFunction = require(script.Parent.Parent.error.syntaxError).syntaxError
+local Callback1 = nil
+local Callback = nil
+local Module = {}
+Module.__index = Module
 
-local function parse(p1, p2)
-	-- upvalues: t (ref)
-	return t.new(p1, p2):parseDocument()
+local function parse(p1, Options) --[[ Line: 221 ]]
+	-- upvalues: Module (copy)
+	return Module.new(p1, Options):parseDocument()
 end
 
-local function parseValue(p1, p2)
-	-- upvalues: t (ref), tokenKind (ref)
-	local var1 = t.new(p1, p2)
-	var1:expectToken(tokenKind.SOF)
-	local var2 = var1:parseValueLiteral(false)
-	var1:expectToken(tokenKind.EOF)
+local function parseValue(p1, Options) --[[ Line: 236 ]]
+	-- upvalues: Module (copy), TokenKind (copy)
+	local NewModule = Module.new(p1, Options)
+	NewModule:expectToken(TokenKind.SOF)
+	local ParseValueLiteralResult = NewModule:parseValueLiteral(false)
+	NewModule:expectToken(TokenKind.EOF)
 	
-	return var2
+	return ParseValueLiteralResult
 end
 
-local function parseType(value, p1)
-	-- upvalues: t (ref), tokenKind (ref)
-	local var1 = t.new(value, p1)
-	var1:expectToken(tokenKind.SOF)
-	local var2 = var1:parseTypeReference()
-	var1:expectToken(tokenKind.EOF)
+local function parseType(p1, Options) --[[ Line: 254 ]]
+	-- upvalues: Module (copy), TokenKind (copy)
+	local NewModule = Module.new(p1, Options)
+	NewModule:expectToken(TokenKind.SOF)
+	local ParseTypeReferenceResult = NewModule:parseTypeReference()
+	NewModule:expectToken(TokenKind.EOF)
 	
-	return var2
+	return ParseTypeReferenceResult
 end
 
-function t.new(p1, p2)
-	-- upvalues: source (ref), lexer (ref), t (ref)
-	return setmetatable({
-		_lexer = lexer.new(if typeof(p1) == "string" then source.new(p1) else p1),
-		_options = p2
-	}, t)
+function Module.new(NewResult, Options) --[[ Line: 262 ]]
+	-- upvalues: Source (copy), Lexer (copy), Module (copy)
+	return (setmetatable({
+		_lexer = Lexer.new(if typeof(NewResult) == "string" then Source.new(NewResult) else NewResult),
+		_options = Options
+	}, Module))
 end
 
-function t:parseName()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local name = self:expectToken(tokenKind.NAME)
+function Module:parseName() --[[ Line: 280 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local ExpectTokenResult = self:expectToken(TokenKind.NAME)
 	
 	return {
-		kind = kind.NAME,
-		value = name.value,
-		loc = self:loc(name)
+		kind = Kind.NAME,
+		value = ExpectTokenResult.value,
+		loc = self:loc(ExpectTokenResult)
 	}
 end
 
-function t:parseDocument()
-	-- upvalues: kind (ref), tokenKind (ref)
+function Module:parseDocument() --[[ Line: 294 ]]
+	-- upvalues: Kind (copy), TokenKind (copy)
 	return {
-		kind = kind.DOCUMENT,
-		definitions = self:many(tokenKind.SOF, self.parseDefinition, tokenKind.EOF),
+		kind = Kind.DOCUMENT,
+		definitions = self:many(TokenKind.SOF, self.parseDefinition, TokenKind.EOF),
 		loc = self:loc(self._lexer.token)
 	}
 end
 
-function t:parseDefinition()
-	-- upvalues: tokenKind (ref)
-	if self:peek(tokenKind.NAME) then
-		local value = self._lexer.token.value
+function Module:parseDefinition() --[[ Line: 314 ]]
+	-- upvalues: TokenKind (copy)
+	if self:peek(TokenKind.NAME) then
+		local Value = self._lexer.token.value
 		
-		if value == "query" or value == "mutation" or value == "subscription" then
+		if Value == "query" or Value == "mutation" or Value == "subscription" then
 			return self:parseOperationDefinition()
-		elseif value == "fragment" then
+		elseif Value == "fragment" then
 			return self:parseFragmentDefinition()
-		elseif value == "schema" or value == "scalar" or (value == "type" or value == "interface") or (value == "union" or value == "enum" or (value == "input" or value == "directive")) then
+		elseif Value == "schema" or Value == "scalar" or Value == "type" or Value == "interface" or Value == "union" or Value == "enum" or Value == "input" or Value == "directive" then
 			return self:parseTypeSystemDefinition()
-		elseif value == "extend" then
+		elseif Value == "extend" then
 			return self:parseTypeSystemExtension()
 		end
-	elseif self:peek(tokenKind.BRACE_L) then
+	elseif self:peek(TokenKind.BRACE_L) then
 		return self:parseOperationDefinition()
 	elseif self:peekDescription() then
 		return self:parseTypeSystemDefinition()
@@ -92,579 +91,579 @@ function t:parseDefinition()
 	error(self:unexpected())
 end
 
-function t:parseOperationDefinition()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
+function Module:parseOperationDefinition() --[[ Line: 351 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
 	
-	return if self:peek(tokenKind.BRACE_L) then {
+	return if self:peek(TokenKind.BRACE_L) then {
 		operation = "query",
 		name = nil,
-		kind = kind.OPERATION_DEFINITION,
+		kind = Kind.OPERATION_DEFINITION,
 		variableDefinitions = {},
 		directives = {},
 		selectionSet = self:parseSelectionSet(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	} else {
-		kind = kind.OPERATION_DEFINITION,
+		kind = Kind.OPERATION_DEFINITION,
 		operation = self:parseOperationType(),
-		name = if self:peek(tokenKind.NAME) then self:parseName() else nil,
+		name = if self:peek(TokenKind.NAME) then self:parseName() else nil,
 		variableDefinitions = self:parseVariableDefinitions(),
 		directives = self:parseDirectives(false),
 		selectionSet = self:parseSelectionSet(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseOperationType()
-	-- upvalues: tokenKind (ref)
-	local name = self:expectToken(tokenKind.NAME)
+function Module:parseOperationType(): string? --[[ Line: 384 ]]
+	-- upvalues: TokenKind (copy)
+	local ExpectTokenResult = self:expectToken(TokenKind.NAME)
 	
-	if name.value == "query" then
+	if ExpectTokenResult.value == "query" then
 		return "query"
-	elseif name.value == "mutation" then
+	elseif ExpectTokenResult.value == "mutation" then
 		return "mutation"
-	elseif name.value == "subscription" then
+	elseif ExpectTokenResult.value == "subscription" then
 		return "subscription"
+	else
+		error(self:unexpected(ExpectTokenResult))
 	end
-	error(self:unexpected(name))
 end
 
-function t:parseVariableDefinitions()
-	-- upvalues: tokenKind (ref)
-	return self:optionalMany(tokenKind.PAREN_L, self.parseVariableDefinition, tokenKind.PAREN_R)
+function Module:parseVariableDefinitions() --[[ Line: 401 ]]
+	-- upvalues: TokenKind (copy)
+	return self:optionalMany(TokenKind.PAREN_L, self.parseVariableDefinition, TokenKind.PAREN_R)
 end
 
-function t:parseVariableDefinition()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseVariable()
-	self:expectToken(tokenKind.COLON)
+function Module:parseVariableDefinition() --[[ Line: 408 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseVariableResult = self:parseVariable()
+	self:expectToken(TokenKind.COLON)
 	
 	return {
-		kind = kind.VARIABLE_DEFINITION,
-		variable = var1,
+		kind = Kind.VARIABLE_DEFINITION,
+		variable = ParseVariableResult,
 		type = self:parseTypeReference(),
-		defaultValue = if self:expectOptionalToken(tokenKind.EQUALS) then self:parseValueLiteral(true) else nil,
+		defaultValue = if self:expectOptionalToken(TokenKind.EQUALS) then self:parseValueLiteral(true) else nil,
 		directives = self:parseDirectives(true),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseVariable()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	self:expectToken(tokenKind.DOLLAR)
+function Module:parseVariable() --[[ Line: 428 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	self:expectToken(TokenKind.DOLLAR)
 	
 	return {
-		kind = kind.VARIABLE,
+		kind = Kind.VARIABLE,
 		name = self:parseName(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseSelectionSet()
-	-- upvalues: kind (ref), tokenKind (ref)
+function Module:parseSelectionSet() --[[ Line: 441 ]]
+	-- upvalues: Kind (copy), TokenKind (copy)
 	return {
-		kind = kind.SELECTION_SET,
-		selections = self:many(tokenKind.BRACE_L, self.parseSelection, tokenKind.BRACE_R),
+		kind = Kind.SELECTION_SET,
+		selections = self:many(TokenKind.BRACE_L, self.parseSelection, TokenKind.BRACE_R),
 		loc = self:loc(self._lexer.token)
 	}
 end
 
-function t:parseSelection()
-	-- upvalues: tokenKind (ref)
-	return if self:peek(tokenKind.SPREAD) then self:parseFragment() else self:parseField()
+function Module.parseSelection(p1) --[[ Line: 456 ]]
+	-- upvalues: TokenKind (copy)
+	return if p1:peek(TokenKind.SPREAD) then p1:parseFragment() else p1:parseField()
 end
 
-function t:parseField()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local var1
-	local token = self._lexer.token
-	local var2 = self:parseName()
-	local var3 = nil
-	local _ = nil
+function Module:parseField() --[[ Line: 469 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseNameResult = self:parseName()
+	local Alias = nil
+	local ParseNameResult1 = nil
 	
-	if self:expectOptionalToken(tokenKind.COLON) then
-		var3 = var2
-		var1 = self:parseName()
+	if self:expectOptionalToken(TokenKind.COLON) then
+		Alias = ParseNameResult
+		ParseNameResult1 = self:parseName()
 	else
-		var1 = var2
+		ParseNameResult1 = ParseNameResult
 	end
 	return {
-		kind = kind.FIELD,
-		alias = var3,
-		name = var1,
+		kind = Kind.FIELD,
+		alias = Alias,
+		name = ParseNameResult1,
 		arguments = self:parseArguments(false),
 		directives = self:parseDirectives(false),
-		selectionSet = self:peek(tokenKind.BRACE_L) and self:parseSelectionSet() or nil,
-		loc = self:loc(token)
+		selectionSet = self:peek(TokenKind.BRACE_L) and self:parseSelectionSet() or nil,
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseArguments(p1)
-	-- upvalues: tokenKind (ref)
-	return self:optionalMany(tokenKind.PAREN_L, if p1 then self.parseConstArgument else self.parseArgument, tokenKind.PAREN_R)
+function Module:parseArguments(p1) --[[ Line: 497 ]]
+	-- upvalues: TokenKind (copy)
+	return self:optionalMany(TokenKind.PAREN_L, if p1 then self.parseConstArgument else self.parseArgument, TokenKind.PAREN_R)
 end
 
-function t:parseArgument()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseName()
-	self:expectToken(tokenKind.COLON)
+function Module:parseArgument() --[[ Line: 510 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseNameResult = self:parseName()
+	self:expectToken(TokenKind.COLON)
 	
 	return {
-		kind = kind.ARGUMENT,
-		name = var1,
+		kind = Kind.ARGUMENT,
+		name = ParseNameResult,
 		value = self:parseValueLiteral(false),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseConstArgument()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseName()
-	self:expectToken(tokenKind.COLON)
+function Module:parseConstArgument() --[[ Line: 523 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseNameResult = self:parseName()
+	self:expectToken(TokenKind.COLON)
 	
 	return {
-		kind = kind.ARGUMENT,
-		name = var1,
+		kind = Kind.ARGUMENT,
+		name = ParseNameResult,
 		value = self:parseValueLiteral(true),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseFragment()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	self:expectToken(tokenKind.SPREAD)
-	local on = self:expectOptionalKeyword("on")
+function Module:parseFragment() --[[ Line: 545 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	self:expectToken(TokenKind.SPREAD)
+	local On = self:expectOptionalKeyword("on")
 	
-	return if on or not self:peek(tokenKind.NAME) then {
-		kind = kind.INLINE_FRAGMENT,
-		typeCondition = if on then self:parseNamedType() else nil,
+	return if On or not self:peek(TokenKind.NAME) then {
+		kind = Kind.INLINE_FRAGMENT,
+		typeCondition = if On then self:parseNamedType() else nil,
 		directives = self:parseDirectives(false),
 		selectionSet = self:parseSelectionSet(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	} else {
-		kind = kind.FRAGMENT_SPREAD,
+		kind = Kind.FRAGMENT_SPREAD,
 		name = self:parseFragmentName(),
 		directives = self:parseDirectives(false),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseFragmentDefinition()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
+function Module:parseFragmentDefinition() --[[ Line: 573 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
 	self:expectKeyword("fragment")
 	
 	if (self._options and self._options.experimentalFragmentVariables) == true then
-		local var1 = self:parseFragmentName()
-		local var2 = self:parseVariableDefinitions()
+		local ParseFragmentNameResult = self:parseFragmentName()
+		local ParseVariableDefinitionsResult = self:parseVariableDefinitions()
 		self:expectKeyword("on")
 		
 		return {
-			kind = kind.FRAGMENT_DEFINITION,
-			name = var1,
-			variableDefinitions = var2,
+			kind = Kind.FRAGMENT_DEFINITION,
+			name = ParseFragmentNameResult,
+			variableDefinitions = ParseVariableDefinitionsResult,
 			typeCondition = self:parseNamedType(),
 			directives = self:parseDirectives(false),
 			selectionSet = self:parseSelectionSet(),
-			loc = self:loc(token)
+			loc = self:loc(Token)
+		}
+	else
+		local ParseFragmentNameResult = self:parseFragmentName()
+		self:expectKeyword("on")
+		
+		return {
+			kind = Kind.FRAGMENT_DEFINITION,
+			name = ParseFragmentNameResult,
+			typeCondition = self:parseNamedType(),
+			directives = self:parseDirectives(false),
+			selectionSet = self:parseSelectionSet(),
+			loc = self:loc(Token)
 		}
 	end
-	local var3 = self:parseFragmentName()
-	self:expectKeyword("on")
-	
-	return {
-		kind = kind.FRAGMENT_DEFINITION,
-		name = var3,
-		typeCondition = self:parseNamedType(),
-		directives = self:parseDirectives(false),
-		selectionSet = self:parseSelectionSet(),
-		loc = self:loc(token)
-	}
 end
 
-function t:parseFragmentName()
+function Module:parseFragmentName() --[[ Line: 616 ]]
 	if self._lexer.token.value == "on" then
 		error(self:unexpected())
 	end
 	return self:parseName()
 end
 
-function t:parseValueLiteral(p1)
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local kind_1 = token.kind
+function Module:parseValueLiteral(p1) --[[ Line: 643 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local Kind1 = Token.kind
 	
-	if kind_1 == tokenKind.BRACKET_L then
+	if Kind1 == TokenKind.BRACKET_L then
 		return self:parseList(p1)
-	elseif kind_1 == tokenKind.BRACE_L then
+	elseif Kind1 == TokenKind.BRACE_L then
 		return self:parseObject(p1)
-	elseif kind_1 == tokenKind.INT then
+	elseif Kind1 == TokenKind.INT then
 		self._lexer:advance()
 		
 		return {
-			kind = kind.INT,
-			value = token.value,
-			loc = self:loc(token)
+			kind = Kind.INT,
+			value = Token.value,
+			loc = self:loc(Token)
 		}
-	elseif kind_1 == tokenKind.FLOAT then
+	elseif Kind1 == TokenKind.FLOAT then
 		self._lexer:advance()
 		
 		return {
-			kind = kind.FLOAT,
-			value = token.value,
-			loc = self:loc(token)
+			kind = Kind.FLOAT,
+			value = Token.value,
+			loc = self:loc(Token)
 		}
-	elseif kind_1 == tokenKind.STRING or kind_1 == tokenKind.BLOCK_STRING then
+	elseif Kind1 == TokenKind.STRING or Kind1 == TokenKind.BLOCK_STRING then
 		return self:parseStringLiteral()
-	elseif kind_1 == tokenKind.NAME then
+	elseif Kind1 == TokenKind.NAME then
 		self._lexer:advance()
-		local value = token.value
+		local Value = Token.value
 		
-		return if value == "true" then { value = true, kind = kind.BOOLEAN, loc = self:loc(token) } elseif value == "false" then {
+		return if Value == "true" then { value = true, kind = Kind.BOOLEAN, loc = self:loc(Token) } elseif Value == "false" then {
 			value = false,
-			kind = kind.BOOLEAN,
-			loc = self:loc(token)
-		} elseif value == "null" then { kind = kind.NULL, loc = self:loc(token) } else { kind = kind.ENUM, value = value, loc = self:loc(token) }
-	elseif kind_1 == tokenKind.DOLLAR and not p1 then
+			kind = Kind.BOOLEAN,
+			loc = self:loc(Token)
+		} elseif Value == "null" then { kind = Kind.NULL, loc = self:loc(Token) } else { kind = Kind.ENUM, value = Value, loc = self:loc(Token) }
+	elseif Kind1 == TokenKind.DOLLAR and not p1 then
 		return self:parseVariable()
+	else
+		error(self:unexpected())
 	end
-	error(self:unexpected())
 end
 
-function t:parseStringLiteral()
-	-- upvalues: kind (ref), tokenKind (ref)
-	local token = self._lexer.token
+function Module:parseStringLiteral() --[[ Line: 692 ]]
+	-- upvalues: Kind (copy), TokenKind (copy)
+	local Token = self._lexer.token
 	self._lexer:advance()
 	
 	return {
-		kind = kind.STRING,
-		value = token.value,
-		block = token.kind == tokenKind.BLOCK_STRING,
-		loc = self:loc(token)
+		kind = Kind.STRING,
+		value = Token.value,
+		block = Token.kind == TokenKind.BLOCK_STRING,
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseList(p1)
-	-- upvalues: kind (ref), tokenKind (ref)
+function Module:parseList(p1) --[[ Line: 708 ]]
+	-- upvalues: Kind (copy), TokenKind (copy)
 	return {
-		kind = kind.LIST,
-		values = self:any(tokenKind.BRACKET_L, function()
-			-- upvalues: self (ref), p1 (ref)
+		kind = Kind.LIST,
+		values = self:any(TokenKind.BRACKET_L, function() --[[ Line: 710 ]]
+			-- upvalues: self (copy), p1 (copy)
 			return self:parseValueLiteral(p1)
-		end, tokenKind.BRACKET_R),
+		end, TokenKind.BRACKET_R),
 		loc = self:loc(self._lexer.token)
 	}
 end
 
-function t:parseObject(p1)
-	-- upvalues: kind (ref), tokenKind (ref)
+function Module:parseObject(p1) --[[ Line: 725 ]]
+	-- upvalues: Kind (copy), TokenKind (copy)
 	return {
-		kind = kind.OBJECT,
-		fields = self:any(tokenKind.BRACE_L, function()
-			-- upvalues: self (ref), p1 (ref)
+		kind = Kind.OBJECT,
+		fields = self:any(TokenKind.BRACE_L, function() --[[ Line: 727 ]]
+			-- upvalues: self (copy), p1 (copy)
 			return self:parseObjectField(p1)
-		end, tokenKind.BRACE_R),
+		end, TokenKind.BRACE_R),
 		loc = self:loc(self._lexer.token)
 	}
 end
 
-function t:parseObjectField(p1)
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseName()
-	self:expectToken(tokenKind.COLON)
+function Module:parseObjectField(p1) --[[ Line: 740 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseNameResult = self:parseName()
+	self:expectToken(TokenKind.COLON)
 	
 	return {
-		kind = kind.OBJECT_FIELD,
-		name = var1,
+		kind = Kind.OBJECT_FIELD,
+		name = ParseNameResult,
 		value = self:parseValueLiteral(p1),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseDirectives(p1)
-	-- upvalues: tokenKind (ref)
-	local t = {}
-	while self:peek(tokenKind.AT) do
-		table.insert(t, self:parseDirective(p1))
+function Module:parseDirectives(p1) --[[ Line: 753 ]]
+	-- upvalues: TokenKind (copy)
+	local List = {}
+	while self:peek(TokenKind.AT) do
+		table.insert(List, self:parseDirective(p1))
 	end
-	return t
+	return List
 end
 
-function t:parseDirective(p2)
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	self:expectToken(tokenKind.AT)
+function Module:parseDirective(p2) --[[ Line: 764 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	self:expectToken(TokenKind.AT)
 	
 	return {
-		kind = kind.DIRECTIVE,
+		kind = Kind.DIRECTIVE,
 		name = self:parseName(),
 		arguments = self:parseArguments(p2),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseTypeReference()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local t
-	local token = self._lexer.token
-	local _ = nil
+function Module:parseTypeReference() --[[ Line: 783 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseNamedTypeResult = nil
 	
-	if self:expectOptionalToken(tokenKind.BRACKET_L) then
-		local var1 = self:parseTypeReference()
-		self:expectToken(tokenKind.BRACKET_R)
-		t = {
-			kind = kind.LIST_TYPE,
-			type = var1,
-			loc = self:loc(token)
+	if self:expectOptionalToken(TokenKind.BRACKET_L) then
+		local ParseTypeReferenceResult = self:parseTypeReference()
+		self:expectToken(TokenKind.BRACKET_R)
+		ParseNamedTypeResult = {
+			kind = Kind.LIST_TYPE,
+			type = ParseTypeReferenceResult,
+			loc = self:loc(Token)
 		}
 	else
-		t = self:parseNamedType()
+		ParseNamedTypeResult = self:parseNamedType()
 	end
-	return if self:expectOptionalToken(tokenKind.BANG) then {
-		kind = kind.NON_NULL_TYPE,
-		type = t,
-		loc = self:loc(token)
-	} else t
+	return if self:expectOptionalToken(TokenKind.BANG) then {
+		kind = Kind.NON_NULL_TYPE,
+		type = ParseNamedTypeResult,
+		loc = self:loc(Token)
+	} else ParseNamedTypeResult
 end
 
-function t:parseNamedType()
-	-- upvalues: kind (ref)
+function Module:parseNamedType() --[[ Line: 816 ]]
+	-- upvalues: Kind (copy)
 	return {
-		kind = kind.NAMED_TYPE,
+		kind = Kind.NAMED_TYPE,
 		name = self:parseName(),
 		loc = self:loc(self._lexer.token)
 	}
 end
 
-function t:parseTypeSystemDefinition()
-	-- upvalues: tokenKind (ref)
-	local var1 = if self:peekDescription() then self._lexer:lookahead() else self._lexer.token
+function Module:parseTypeSystemDefinition() --[[ Line: 839 ]]
+	-- upvalues: TokenKind (copy)
+	local LookaheadResult = if self:peekDescription() then self._lexer:lookahead() else self._lexer.token
 	
-	if var1.kind == tokenKind.NAME then
-		local value = var1.value
+	if LookaheadResult.kind == TokenKind.NAME then
+		local Value = LookaheadResult.value
 		
-		if value == "schema" then
+		if Value == "schema" then
 			return self:parseSchemaDefinition()
-		elseif value == "scalar" then
+		elseif Value == "scalar" then
 			return self:parseScalarTypeDefinition()
-		elseif value == "type" then
+		elseif Value == "type" then
 			return self:parseObjectTypeDefinition()
-		elseif value == "interface" then
+		elseif Value == "interface" then
 			return self:parseInterfaceTypeDefinition()
-		elseif value == "union" then
+		elseif Value == "union" then
 			return self:parseUnionTypeDefinition()
-		elseif value == "enum" then
+		elseif Value == "enum" then
 			return self:parseEnumTypeDefinition()
-		elseif value == "input" then
+		elseif Value == "input" then
 			return self:parseInputObjectTypeDefinition()
-		elseif value == "directive" then
+		elseif Value == "directive" then
 			return self:parseDirectiveDefinition()
 		end
 	end
-	error(self:unexpected(var1))
+	error(self:unexpected(LookaheadResult))
 end
 
-function t:peekDescription()
-	-- upvalues: tokenKind (ref)
-	return self:peek(tokenKind.STRING) or self:peek(tokenKind.BLOCK_STRING)
+function Module:peekDescription() --[[ Line: 869 ]]
+	-- upvalues: TokenKind (copy)
+	return self:peek(TokenKind.STRING) or self:peek(TokenKind.BLOCK_STRING)
 end
 
-function t:parseDescription()
-	if self:peekDescription() then
-		return self:parseStringLiteral()
-	end
+function Module:parseDescription() --[[ Line: 876 ]]
+	if not self:peekDescription() then return end
+	return self:parseStringLiteral()
 end
 
-function t:parseSchemaDefinition()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
+function Module:parseSchemaDefinition() --[[ Line: 886 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
 	self:expectKeyword("schema")
 	
 	return {
-		kind = kind.SCHEMA_DEFINITION,
-		description = var1,
+		kind = Kind.SCHEMA_DEFINITION,
+		description = ParseDescriptionResult,
 		directives = self:parseDirectives(true),
-		operationTypes = self:many(tokenKind.BRACE_L, self.parseOperationTypeDefinition, tokenKind.BRACE_R),
-		loc = self:loc(token)
+		operationTypes = self:many(TokenKind.BRACE_L, self.parseOperationTypeDefinition, TokenKind.BRACE_R),
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseOperationTypeDefinition()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseOperationType()
-	self:expectToken(tokenKind.COLON)
+function Module:parseOperationTypeDefinition() --[[ Line: 908 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseOperationTypeResult = self:parseOperationType()
+	self:expectToken(TokenKind.COLON)
 	
 	return {
-		kind = kind.OPERATION_TYPE_DEFINITION,
-		operation = var1,
+		kind = Kind.OPERATION_TYPE_DEFINITION,
+		operation = ParseOperationTypeResult,
 		type = self:parseNamedType(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseScalarTypeDefinition()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
+function Module:parseScalarTypeDefinition() --[[ Line: 925 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
 	self:expectKeyword("scalar")
 	
 	return {
-		kind = kind.SCALAR_TYPE_DEFINITION,
-		description = var1,
+		kind = Kind.SCALAR_TYPE_DEFINITION,
+		description = ParseDescriptionResult,
 		name = self:parseName(),
 		directives = self:parseDirectives(true),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseObjectTypeDefinition()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
+function Module:parseObjectTypeDefinition() --[[ Line: 945 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
 	self:expectKeyword("type")
 	
 	return {
-		kind = kind.OBJECT_TYPE_DEFINITION,
-		description = var1,
+		kind = Kind.OBJECT_TYPE_DEFINITION,
+		description = ParseDescriptionResult,
 		name = self:parseName(),
 		interfaces = self:parseImplementsInterfaces(),
 		directives = self:parseDirectives(true),
 		fields = self:parseFieldsDefinition(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseImplementsInterfaces()
-	-- upvalues: tokenKind (ref)
-	return if self:expectOptionalKeyword("implements") then self:delimitedMany(tokenKind.AMP, self.parseNamedType) else {}
+function Module.parseImplementsInterfaces(p2) --[[ Line: 969 ]]
+	-- upvalues: TokenKind (copy)
+	return if p2:expectOptionalKeyword("implements") then p2:delimitedMany(TokenKind.AMP, p2.parseNamedType) else {}
 end
 
-function t:parseFieldsDefinition()
-	-- upvalues: tokenKind (ref)
-	return self:optionalMany(tokenKind.BRACE_L, self.parseFieldDefinition, tokenKind.BRACE_R)
+function Module:parseFieldsDefinition() --[[ Line: 980 ]]
+	-- upvalues: TokenKind (copy)
+	return self:optionalMany(TokenKind.BRACE_L, self.parseFieldDefinition, TokenKind.BRACE_R)
 end
 
-function t:parseFieldDefinition()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
-	local var2 = self:parseName()
-	local var3 = self:parseArgumentDefs()
-	self:expectToken(tokenKind.COLON)
+function Module:parseFieldDefinition() --[[ Line: 988 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
+	local ParseNameResult = self:parseName()
+	local ParseArgumentDefsResult = self:parseArgumentDefs()
+	self:expectToken(TokenKind.COLON)
 	
 	return {
-		kind = kind.FIELD_DEFINITION,
-		description = var1,
-		name = var2,
-		arguments = var3,
+		kind = Kind.FIELD_DEFINITION,
+		description = ParseDescriptionResult,
+		name = ParseNameResult,
+		arguments = ParseArgumentDefsResult,
 		type = self:parseTypeReference(),
 		directives = self:parseDirectives(true),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseArgumentDefs()
-	-- upvalues: tokenKind (ref)
-	return self:optionalMany(tokenKind.PAREN_L, self.parseInputValueDef, tokenKind.PAREN_R)
+function Module:parseArgumentDefs() --[[ Line: 1010 ]]
+	-- upvalues: TokenKind (copy)
+	return self:optionalMany(TokenKind.PAREN_L, self.parseInputValueDef, TokenKind.PAREN_R)
 end
 
-function t:parseInputValueDef()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
-	local var2 = self:parseName()
-	self:expectToken(tokenKind.COLON)
+function Module:parseInputValueDef() --[[ Line: 1018 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
+	local ParseNameResult = self:parseName()
+	self:expectToken(TokenKind.COLON)
 	
 	return {
-		kind = kind.INPUT_VALUE_DEFINITION,
-		description = var1,
-		name = var2,
+		kind = Kind.INPUT_VALUE_DEFINITION,
+		description = ParseDescriptionResult,
+		name = ParseNameResult,
 		type = self:parseTypeReference(),
-		defaultValue = if self:expectOptionalToken(tokenKind.EQUALS) then self:parseValueLiteral(true) else nil,
+		defaultValue = if self:expectOptionalToken(TokenKind.EQUALS) then self:parseValueLiteral(true) else nil,
 		directives = self:parseDirectives(true),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseInterfaceTypeDefinition()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
+function Module:parseInterfaceTypeDefinition() --[[ Line: 1044 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
 	self:expectKeyword("interface")
 	
 	return {
-		kind = kind.INTERFACE_TYPE_DEFINITION,
-		description = var1,
+		kind = Kind.INTERFACE_TYPE_DEFINITION,
+		description = ParseDescriptionResult,
 		name = self:parseName(),
 		interfaces = self:parseImplementsInterfaces(),
 		directives = self:parseDirectives(true),
 		fields = self:parseFieldsDefinition(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseUnionTypeDefinition()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
+function Module:parseUnionTypeDefinition() --[[ Line: 1067 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
 	self:expectKeyword("union")
 	
 	return {
-		kind = kind.UNION_TYPE_DEFINITION,
-		description = var1,
+		kind = Kind.UNION_TYPE_DEFINITION,
+		description = ParseDescriptionResult,
 		name = self:parseName(),
 		directives = self:parseDirectives(true),
 		types = self:parseUnionMemberTypes(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseUnionMemberTypes()
-	-- upvalues: tokenKind (ref)
-	local t = {}
+function Module:parseUnionMemberTypes() --[[ Line: 1089 ]]
+	-- upvalues: TokenKind (copy)
+	local List = {}
 	
-	if self:expectOptionalToken(tokenKind.EQUALS) then
-		self:expectOptionalToken(tokenKind.PIPE)
+	if self:expectOptionalToken(TokenKind.EQUALS) then
+		self:expectOptionalToken(TokenKind.PIPE)
 		repeat
-			table.insert(t, self:parseNamedType())
-		until not self:expectOptionalToken(tokenKind.PIPE)
+			table.insert(List, self:parseNamedType())
+		until not self:expectOptionalToken(TokenKind.PIPE)
 	end
-	return t
+	return List
 end
 
-function t:parseEnumTypeDefinition()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
+function Module:parseEnumTypeDefinition() --[[ Line: 1105 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
 	self:expectKeyword("enum")
 	
 	return {
-		kind = kind.ENUM_TYPE_DEFINITION,
-		description = var1,
+		kind = Kind.ENUM_TYPE_DEFINITION,
+		description = ParseDescriptionResult,
 		name = self:parseName(),
 		directives = self:parseDirectives(true),
 		values = self:parseEnumValuesDefinition(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseEnumValuesDefinition()
-	-- upvalues: tokenKind (ref)
-	return self:optionalMany(tokenKind.BRACE_L, self.parseEnumValueDefinition, tokenKind.BRACE_R)
+function Module:parseEnumValuesDefinition() --[[ Line: 1125 ]]
+	-- upvalues: TokenKind (copy)
+	return self:optionalMany(TokenKind.BRACE_L, self.parseEnumValueDefinition, TokenKind.BRACE_R)
 end
 
-function t:parseEnumValueDefinition()
-	-- upvalues: kind (ref)
+function Module:parseEnumValueDefinition() --[[ Line: 1134 ]]
+	-- upvalues: Kind (copy)
 	return {
-		kind = kind.ENUM_VALUE_DEFINITION,
+		kind = Kind.ENUM_VALUE_DEFINITION,
 		description = self:parseDescription(),
 		name = self:parseName(),
 		directives = self:parseDirectives(true),
@@ -672,360 +671,368 @@ function t:parseEnumValueDefinition()
 	}
 end
 
-function t:parseInputObjectTypeDefinition()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
+function Module:parseInputObjectTypeDefinition() --[[ Line: 1152 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
 	self:expectKeyword("input")
 	
 	return {
-		kind = kind.INPUT_OBJECT_TYPE_DEFINITION,
-		description = var1,
+		kind = Kind.INPUT_OBJECT_TYPE_DEFINITION,
+		description = ParseDescriptionResult,
 		name = self:parseName(),
 		directives = self:parseDirectives(true),
 		fields = self:parseInputFieldsDefinition(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseInputFieldsDefinition()
-	-- upvalues: tokenKind (ref)
-	return self:optionalMany(tokenKind.BRACE_L, self.parseInputValueDef, tokenKind.BRACE_R)
+function Module:parseInputFieldsDefinition() --[[ Line: 1172 ]]
+	-- upvalues: TokenKind (copy)
+	return self:optionalMany(TokenKind.BRACE_L, self.parseInputValueDef, TokenKind.BRACE_R)
 end
 
-function t:parseTypeSystemExtension()
-	-- upvalues: tokenKind (ref)
-	local var1 = self._lexer:lookahead()
+function Module:parseTypeSystemExtension() --[[ Line: 1189 ]]
+	-- upvalues: TokenKind (copy)
+	local LookaheadResult = self._lexer:lookahead()
 	
-	if var1.kind == tokenKind.NAME then
-		local value = var1.value
+	if LookaheadResult.kind == TokenKind.NAME then
+		local Value = LookaheadResult.value
 		
-		if value == "schema" then
+		if Value == "schema" then
 			return self:parseSchemaExtension()
-		elseif value == "scalar" then
+		elseif Value == "scalar" then
 			return self:parseScalarTypeExtension()
-		elseif value == "type" then
+		elseif Value == "type" then
 			return self:parseObjectTypeExtension()
-		elseif value == "interface" then
+		elseif Value == "interface" then
 			return self:parseInterfaceTypeExtension()
-		elseif value == "union" then
+		elseif Value == "union" then
 			return self:parseUnionTypeExtension()
-		elseif value == "enum" then
+		elseif Value == "enum" then
 			return self:parseEnumTypeExtension()
-		elseif value == "input" then
+		elseif Value == "input" then
 			return self:parseInputObjectTypeExtension()
 		end
 	end
-	error(self:unexpected(var1))
+	error(self:unexpected(LookaheadResult))
 end
 
-function t:parseSchemaExtension()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
+function Module:parseSchemaExtension() --[[ Line: 1219 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
 	self:expectKeyword("extend")
 	self:expectKeyword("schema")
-	local var1 = self:parseDirectives(true)
-	local brace_l = self:optionalMany(tokenKind.BRACE_L, self.parseOperationTypeDefinition, tokenKind.BRACE_R)
+	local ParseDirectivesResult = self:parseDirectives(true)
+	local OptionalManyResult = self:optionalMany(TokenKind.BRACE_L, self.parseOperationTypeDefinition, TokenKind.BRACE_R)
 	
-	if #var1 == 0 and #brace_l == 0 then
+	if #ParseDirectivesResult == 0 and #OptionalManyResult == 0 then
 		error(self:unexpected())
 	end
 	return {
-		kind = kind.SCHEMA_EXTENSION,
-		directives = var1,
-		operationTypes = brace_l,
-		loc = self:loc(token)
+		kind = Kind.SCHEMA_EXTENSION,
+		directives = ParseDirectivesResult,
+		operationTypes = OptionalManyResult,
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseScalarTypeExtension()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
+function Module:parseScalarTypeExtension() --[[ Line: 1244 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
 	self:expectKeyword("extend")
 	self:expectKeyword("scalar")
-	local var1 = self:parseName()
-	local var2 = self:parseDirectives(true)
+	local ParseNameResult = self:parseName()
+	local ParseDirectivesResult = self:parseDirectives(true)
 	
-	if #var2 == 0 then
+	if #ParseDirectivesResult == 0 then
 		error(self:unexpected())
 	end
 	return {
-		kind = kind.SCALAR_TYPE_EXTENSION,
-		name = var1,
-		directives = var2,
-		loc = self:loc(token)
+		kind = Kind.SCALAR_TYPE_EXTENSION,
+		name = ParseNameResult,
+		directives = ParseDirectivesResult,
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseObjectTypeExtension()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
+function Module:parseObjectTypeExtension() --[[ Line: 1267 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
 	self:expectKeyword("extend")
 	self:expectKeyword("type")
-	local var1 = self:parseName()
-	local var2 = self:parseImplementsInterfaces()
-	local var3 = self:parseDirectives(true)
-	local var4 = self:parseFieldsDefinition()
+	local ParseNameResult = self:parseName()
+	local ParseImplementsInterfacesResult = self:parseImplementsInterfaces()
+	local ParseDirectivesResult = self:parseDirectives(true)
+	local ParseFieldsDefinitionResult = self:parseFieldsDefinition()
 	
-	if #var2 == 0 and #var3 == 0 and #var4 == 0 then
+	if #ParseImplementsInterfacesResult == 0 and #ParseDirectivesResult == 0 and #ParseFieldsDefinitionResult == 0 then
 		error(self:unexpected())
 	end
 	return {
-		kind = kind.OBJECT_TYPE_EXTENSION,
-		name = var1,
-		interfaces = var2,
-		directives = var3,
-		fields = var4,
-		loc = self:loc(token)
+		kind = Kind.OBJECT_TYPE_EXTENSION,
+		name = ParseNameResult,
+		interfaces = ParseImplementsInterfacesResult,
+		directives = ParseDirectivesResult,
+		fields = ParseFieldsDefinitionResult,
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseInterfaceTypeExtension()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
+function Module:parseInterfaceTypeExtension() --[[ Line: 1294 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
 	self:expectKeyword("extend")
 	self:expectKeyword("interface")
-	local var1 = self:parseName()
-	local var2 = self:parseImplementsInterfaces()
-	local var3 = self:parseDirectives(true)
-	local var4 = self:parseFieldsDefinition()
+	local ParseNameResult = self:parseName()
+	local ParseImplementsInterfacesResult = self:parseImplementsInterfaces()
+	local ParseDirectivesResult = self:parseDirectives(true)
+	local ParseFieldsDefinitionResult = self:parseFieldsDefinition()
 	
-	if #var2 == 0 and #var3 == 0 and #var4 == 0 then
+	if #ParseImplementsInterfacesResult == 0 and #ParseDirectivesResult == 0 and #ParseFieldsDefinitionResult == 0 then
 		error(self:unexpected())
 	end
 	return {
-		kind = kind.INTERFACE_TYPE_EXTENSION,
-		name = var1,
-		interfaces = var2,
-		directives = var3,
-		fields = var4,
-		loc = self:loc(token)
+		kind = Kind.INTERFACE_TYPE_EXTENSION,
+		name = ParseNameResult,
+		interfaces = ParseImplementsInterfacesResult,
+		directives = ParseDirectivesResult,
+		fields = ParseFieldsDefinitionResult,
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseUnionTypeExtension()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
+function Module:parseUnionTypeExtension() --[[ Line: 1320 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
 	self:expectKeyword("extend")
 	self:expectKeyword("union")
-	local var1 = self:parseName()
-	local var2 = self:parseDirectives(true)
-	local var3 = self:parseUnionMemberTypes()
+	local ParseNameResult = self:parseName()
+	local ParseDirectivesResult = self:parseDirectives(true)
+	local ParseUnionMemberTypesResult = self:parseUnionMemberTypes()
 	
-	if #var2 == 0 and #var3 == 0 then
+	if #ParseDirectivesResult == 0 and #ParseUnionMemberTypesResult == 0 then
 		error(self:unexpected())
 	end
 	return {
-		kind = kind.UNION_TYPE_EXTENSION,
-		name = var1,
-		directives = var2,
-		types = var3,
-		loc = self:loc(token)
+		kind = Kind.UNION_TYPE_EXTENSION,
+		name = ParseNameResult,
+		directives = ParseDirectivesResult,
+		types = ParseUnionMemberTypesResult,
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseEnumTypeExtension()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
+function Module:parseEnumTypeExtension() --[[ Line: 1344 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
 	self:expectKeyword("extend")
 	self:expectKeyword("enum")
-	local var1 = self:parseName()
-	local var2 = self:parseDirectives(true)
-	local var3 = self:parseEnumValuesDefinition()
+	local ParseNameResult = self:parseName()
+	local ParseDirectivesResult = self:parseDirectives(true)
+	local ParseEnumValuesDefinitionResult = self:parseEnumValuesDefinition()
 	
-	if #var2 == 0 and #var3 == 0 then
+	if #ParseDirectivesResult == 0 and #ParseEnumValuesDefinitionResult == 0 then
 		error(self:unexpected())
 	end
 	return {
-		kind = kind.ENUM_TYPE_EXTENSION,
-		name = var1,
-		directives = var2,
-		values = var3,
-		loc = self:loc(token)
+		kind = Kind.ENUM_TYPE_EXTENSION,
+		name = ParseNameResult,
+		directives = ParseDirectivesResult,
+		values = ParseEnumValuesDefinitionResult,
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseInputObjectTypeExtension()
-	-- upvalues: kind (ref)
-	local token = self._lexer.token
+function Module:parseInputObjectTypeExtension() --[[ Line: 1368 ]]
+	-- upvalues: Kind (copy)
+	local Token = self._lexer.token
 	self:expectKeyword("extend")
 	self:expectKeyword("input")
-	local var1 = self:parseName()
-	local var2 = self:parseDirectives(true)
-	local var3 = self:parseInputFieldsDefinition()
+	local ParseNameResult = self:parseName()
+	local ParseDirectivesResult = self:parseDirectives(true)
+	local ParseInputFieldsDefinitionResult = self:parseInputFieldsDefinition()
 	
-	if #var2 == 0 and #var3 == 0 then
+	if #ParseDirectivesResult == 0 and #ParseInputFieldsDefinitionResult == 0 then
 		error(self:unexpected())
 	end
 	return {
-		kind = kind.INPUT_OBJECT_TYPE_EXTENSION,
-		name = var1,
-		directives = var2,
-		fields = var3,
-		loc = self:loc(token)
+		kind = Kind.INPUT_OBJECT_TYPE_EXTENSION,
+		name = ParseNameResult,
+		directives = ParseDirectivesResult,
+		fields = ParseInputFieldsDefinitionResult,
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseDirectiveDefinition()
-	-- upvalues: tokenKind (ref), kind (ref)
-	local token = self._lexer.token
-	local var1 = self:parseDescription()
+function Module:parseDirectiveDefinition() --[[ Line: 1391 ]]
+	-- upvalues: TokenKind (copy), Kind (copy)
+	local Token = self._lexer.token
+	local ParseDescriptionResult = self:parseDescription()
 	self:expectKeyword("directive")
-	self:expectToken(tokenKind.AT)
-	local var2 = self:parseName()
-	local var3 = self:parseArgumentDefs()
-	local repeatable = self:expectOptionalKeyword("repeatable")
+	self:expectToken(TokenKind.AT)
+	local ParseNameResult = self:parseName()
+	local ParseArgumentDefsResult = self:parseArgumentDefs()
+	local Repeatable = self:expectOptionalKeyword("repeatable")
 	self:expectKeyword("on")
 	
 	return {
-		kind = kind.DIRECTIVE_DEFINITION,
-		description = var1,
-		name = var2,
-		arguments = var3,
-		repeatable = repeatable,
+		kind = Kind.DIRECTIVE_DEFINITION,
+		description = ParseDescriptionResult,
+		name = ParseNameResult,
+		arguments = ParseArgumentDefsResult,
+		repeatable = Repeatable,
 		locations = self:parseDirectiveLocations(),
-		loc = self:loc(token)
+		loc = self:loc(Token)
 	}
 end
 
-function t:parseDirectiveLocations()
-	-- upvalues: tokenKind (ref)
-	self:expectOptionalToken(tokenKind.PIPE)
-	local t = {}
+function Module:parseDirectiveLocations() --[[ Line: 1417 ]]
+	-- upvalues: TokenKind (copy)
+	self:expectOptionalToken(TokenKind.PIPE)
+	local List = {}
 	repeat
-		table.insert(t, self:parseDirectiveLocation())
-	until not self:expectOptionalToken(tokenKind.PIPE)
-	return t
+		table.insert(List, self:parseDirectiveLocation())
+	until not self:expectOptionalToken(TokenKind.PIPE)
+	return List
 end
 
-function t:parseDirectiveLocation()
-	-- upvalues: directiveLocation (ref)
-	local token = self._lexer.token
-	local var1 = self:parseName()
+function Module:parseDirectiveLocation() --[[ Line: 1454 ]]
+	-- upvalues: DirectiveLocation (copy)
+	local Token = self._lexer.token
+	local ParseNameResult = self:parseName()
 	
-	if directiveLocation[var1.value] == nil then
-		error(self:unexpected(token))
+	if DirectiveLocation[ParseNameResult.value] == nil then
+		error(self:unexpected(Token))
+		
+		return
+	else
+		return ParseNameResult
+	end
+end
+
+function Module:loc(Token) --[[ Line: 1467 ]]
+	-- upvalues: Location (copy)
+	local NoLocation = self._options and self._options.noLocation
+	
+	return if NoLocation == true then nil else Location.new(Token, self._lexer.lastToken, self._lexer.source)
+end
+
+function Module:peek(BRACEL): boolean --[[ Line: 1477 ]]
+	return self._lexer.token.kind == BRACEL
+end
+
+function Module:expectToken(COLON) --[[ Line: 1485 ]]
+	-- upvalues: SyntaxErrorFunction (copy), Callback (ref), Callback1 (ref)
+	local Token = self._lexer.token
+	
+	if Token.kind ~= COLON then
+		error(SyntaxErrorFunction(self._lexer.source, Token.start, "Expected " .. Callback(COLON) .. ", found " .. Callback1(Token) .. "."))
 		
 		return
 	end
-	return var1
-end
-
-function t:loc(p2)
-	-- upvalues: location (ref)
-	return if (self._options and self._options.noLocation) == true then nil else location.new(p2, self._lexer.lastToken, self._lexer.source)
-end
-
-function t:peek(p2)
-	return self._lexer.token.kind == p2
-end
-
-function t:expectToken(p2)
-	-- upvalues: syntaxError (ref), getTokenKindDesc (write), getTokenDesc (write)
-	local token = self._lexer.token
+	self._lexer:advance()
 	
-	if token.kind == p2 then
+	return Token
+end
+
+function Module:expectOptionalToken(PIPE) --[[ Line: 1505 ]]
+	local Token = self._lexer.token
+	
+	if Token.kind == PIPE then
 		self._lexer:advance()
 		
-		return token
+		return Token
+	else
+		return nil
 	end
-	error(syntaxError(self._lexer.source, token.start, "Expected " .. getTokenKindDesc(p2) .. ", found " .. getTokenDesc(token) .. "."))
 end
 
-function t:expectOptionalToken(p2)
-	local token = self._lexer.token
+function Module:expectKeyword(Text) --[[ Line: 1518 ]]
+	-- upvalues: TokenKind (copy), SyntaxErrorFunction (copy), Callback1 (ref)
+	local Token = self._lexer.token
 	
-	if token.kind == p2 then
-		self._lexer:advance()
-		
-		return token
-	end
-	return nil
-end
-
-function t:expectKeyword(p2)
-	-- upvalues: tokenKind (ref), syntaxError (ref), getTokenDesc (write)
-	local token = self._lexer.token
-	
-	if token.kind == tokenKind.NAME and token.value == p2 then
+	if Token.kind == TokenKind.NAME and Token.value == Text then
 		self._lexer:advance()
 		
 		return
+	else
+		error(SyntaxErrorFunction(self._lexer.source, Token.start, "Expected \"" .. Text .. "\", found " .. Callback1(Token) .. "."))
 	end
-	error(syntaxError(self._lexer.source, token.start, "Expected \"" .. p18 .. "\", found " .. getTokenDesc(token) .. "."))
 end
 
-function t:expectOptionalKeyword(p2)
-	-- upvalues: tokenKind (ref)
-	local token = self._lexer.token
+function Module:expectOptionalKeyword(p2): boolean --[[ Line: 1537 ]]
+	-- upvalues: TokenKind (copy)
+	local Token = self._lexer.token
 	
-	if token.kind == tokenKind.NAME and token.value == p2 then
+	if Token.kind == TokenKind.NAME and Token.value == p2 then
 		self._lexer:advance()
 		
 		return true
+	else
+		return false
 	end
-	return false
 end
 
-function t:unexpected(p2)
-	-- upvalues: syntaxError (ref), getTokenDesc (write)
-	local var1 = if p2 ~= nil then p2 else self._lexer.token
+function Module:unexpected(LookaheadResult) --[[ Line: 1550 ]]
+	-- upvalues: SyntaxErrorFunction (copy), Callback1 (ref)
+	local Token = if LookaheadResult == nil then self._lexer.token else LookaheadResult or self._lexer.token
 	
-	return syntaxError(self._lexer.source, var1.start, "Unexpected " .. getTokenDesc(var1) .. ".")
+	return SyntaxErrorFunction(self._lexer.source, Token.start, "Unexpected " .. Callback1(Token) .. ".")
 end
 
-function t:any(p2, p3, p4)
-	self:expectToken(p2)
-	local t = {}
-	while not self:expectOptionalToken(p4) do
-		table.insert(t, p3(self))
+function Module:any(BRACEL, Callback, BRACER) --[[ Line: 1561 ]]
+	self:expectToken(BRACEL)
+	local List = {}
+	while not self:expectOptionalToken(BRACER) do
+		table.insert(List, Callback(self))
 	end
-	return t
+	return List
 end
 
-function t:optionalMany(p5, p6, p7)
-	if not self:expectOptionalToken(p5) then
+function Module:optionalMany(BRACEL, Callback, BRACER) --[[ Line: 1582 ]]
+	if not self:expectOptionalToken(BRACEL) then
 		return {}
 	end
-	local t = {}
+	local List = {}
 	repeat
-		table.insert(t, p6(self))
-	until self:expectOptionalToken(p7)
-	return t
+		table.insert(List, Callback(self))
+	until self:expectOptionalToken(BRACER)
+	return List
 end
 
-function t:many(p5, p6, p7)
-	self:expectToken(p5)
-	local t = {}
+function Module:many(BRACEL, Callback, BRACER) --[[ Line: 1604 ]]
+	self:expectToken(BRACEL)
+	local List = {}
 	repeat
-		table.insert(t, p6(self))
-	until self:expectOptionalToken(p7)
-	return t
+		table.insert(List, Callback(self))
+	until self:expectOptionalToken(BRACER)
+	return List
 end
 
-function t:delimitedMany(p5, p6)
-	self:expectOptionalToken(p5)
-	local t = {}
+function Module:delimitedMany(AMP, Callback) --[[ Line: 1623 ]]
+	self:expectOptionalToken(AMP)
+	local List = {}
 	repeat
-		table.insert(t, p6(self))
-	until not self:expectOptionalToken(p5)
-	return t
+		table.insert(List, Callback(self))
+	until not self:expectOptionalToken(AMP)
+	return List
 end
 
-getTokenDesc = function(p5)
-	-- upvalues: getTokenKindDesc (write)
-	local value = p5.value
+Callback1 = function(Token): string --[[ Line: 1640 | Named "getTokenDesc" ]]
+	-- upvalues: Callback (ref)
+	local Value = Token.value
 	
-	return getTokenKindDesc(p5.kind) .. (if value ~= nil then " \"" .. value .. "\"" else "")
+	return Callback(Token.kind) .. (if Value == nil then "" else " \"" .. Value .. "\"" or "")
 end
 
-getTokenKindDesc = function(p5)
-	-- upvalues: isPunctuatorTokenKind (ref)
-	return if isPunctuatorTokenKind(p5) then "\"" .. p33 .. "\"" else p5
+Callback = function(Kind) --[[ Line: 1648 | Named "getTokenKindDesc" ]]
+	-- upvalues: IsPunctuatorTokenKindFunction (copy)
+	return IsPunctuatorTokenKindFunction(Kind) and "\"" .. Kind .. "\"" or Kind
 end
 
 return {
-	Parser = t,
+	Parser = Module,
 	parse = parse,
 	parseValue = parseValue,
 	parseType = parseType

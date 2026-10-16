@@ -1,83 +1,85 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Layout.LayoutRuntime)
-local typesModule = require(viewRecycler.Core.Types)
-local staticPartsModule = require(viewRecycler.Core.Layout.staticParts)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Layout.LayoutRuntime)
+local TypesModule = require(ViewRecycler.Core.Types)
+local StaticPartsModule = require(ViewRecycler.Core.Layout.staticParts)
 
-return function(p1)
-	-- upvalues: typesModule (ref), dataSourceChangeTypeModule (ref), staticPartsModule (ref)
+return function(p1) --[[ Line: 21 | Named "uniform" ]]
+	-- upvalues: TypesModule (copy), DataSourceChangeTypeModule (copy), StaticPartsModule (copy)
 	assert(p1.itemLength > 0, "Layout.uniform: itemLength must be positive")
-	local itemLength = p1.itemLength
-	local spacing = p1.spacing or 0
-	local paddingBefore = p1.paddingBefore or 0
-	local paddingAfter = p1.paddingAfter or 0
-	local var1 = itemLength + spacing
-	local var2 = 0
+	local ItemLength = p1.itemLength
+	local Spacing = p1.spacing or 0
+	local PaddingBefore = p1.paddingBefore or 0
+	local PaddingAfter = p1.paddingAfter or 0
+	local NewItemLength = ItemLength + Spacing
+	local CountKeys = 0
 	
 	return {
-		getItemCount = function()
-			-- upvalues: var2 (write)
-			return var2
+		getItemCount = function() --[[ Line: 32 ]]
+			-- upvalues: CountKeys (ref)
+			return CountKeys
 		end,
-		getContentLength = function()
-			-- upvalues: var2 (write), paddingBefore (ref), itemLength (ref), spacing (ref), paddingAfter (ref)
-			return if var2 == 0 then 0 else paddingBefore + var2 * itemLength + (var2 - 1) * spacing + paddingAfter
+		getContentLength = function() --[[ Line: 36 ]]
+			-- upvalues: CountKeys (ref), PaddingBefore (copy), ItemLength (copy), Spacing (copy), PaddingAfter (copy)
+			return if CountKeys == 0 then 0 else PaddingBefore + CountKeys * ItemLength + (CountKeys - 1) * Spacing + PaddingAfter
 		end,
-		getIntersectingIndexRange = function(p2, p3)
-			-- upvalues: var2 (write), typesModule (copy), paddingBefore (ref), var1 (ref), itemLength (ref)
-			if var2 == 0 or p3 <= p2 then
-				return typesModule.EMPTY_INDEX_RANGE
+		getIntersectingIndexRange = function(p2, p3) --[[ Line: 50 ]]
+			-- upvalues: CountKeys (ref), TypesModule (upval), PaddingBefore (copy), NewItemLength (copy), ItemLength (copy)
+			if CountKeys == 0 or p3 <= p2 then
+				return TypesModule.EMPTY_INDEX_RANGE
 			end
-			local var3 = 1
-			local var4 = p2 - paddingBefore
+			local Count = 1
+			local v1 = p2 - PaddingBefore
 			
-			if var4 > 0 then
-				var3 = var4 // var1 + 1
+			if v1 > 0 then
+				Count = v1 // NewItemLength + 1
 				
-				if paddingBefore + (var3 - 1) * var1 + itemLength <= p2 then
-					var3 += 1
+				if PaddingBefore + (Count - 1) * NewItemLength + ItemLength <= p2 then
+					Count += 1
 				end
 			end
-			local var5 = p3 - paddingBefore
+			local v2 = p3 - PaddingBefore
 			
-			if var5 <= 0 then
-				return typesModule.EMPTY_INDEX_RANGE
+			if v2 <= 0 then
+				return TypesModule.EMPTY_INDEX_RANGE
 			end
-			local var6 = var5 // var1 + 1
+			local NewNewItemLength = v2 // NewItemLength + 1
 			
-			if p3 <= paddingBefore + (var6 - 1) * var1 then
-				var6 -= 1
+			if p3 <= PaddingBefore + (NewNewItemLength - 1) * NewItemLength then
+				NewNewItemLength -= 1
 			end
-			local maxValue = math.max(1, var3)
-			local minValue = math.min(var2, var6)
+			local Largest = math.max(1, Count)
+			local Smallest = math.min(CountKeys, NewNewItemLength)
 			
-			return if minValue < maxValue then typesModule.EMPTY_INDEX_RANGE else { firstIndex = maxValue, lastIndex = minValue }
+			return if Smallest < Largest then TypesModule.EMPTY_INDEX_RANGE else { firstIndex = Largest, lastIndex = Smallest }
 		end,
-		expandIndexRange = function(p2, p3, p4)
-			-- upvalues: staticPartsModule (copy), var2 (write)
-			return staticPartsModule.expandItemRange(p2, p3, p4 or p3, var2)
+		expandIndexRange = function(p2, p3, p4) --[[ Line: 103 ]]
+			-- upvalues: StaticPartsModule (upval), CountKeys (ref)
+			return StaticPartsModule.expandItemRange(p2, p3, p4 or p3, CountKeys)
 		end,
-		getItemLayout = function(p2)
-			-- upvalues: paddingBefore (ref), var1 (ref), itemLength (ref)
+		getItemLayout = function(p2: number) --[[ Line: 43 ]]
+			-- upvalues: PaddingBefore (copy), NewItemLength (copy), ItemLength (copy)
 			return {
-				startOffset = paddingBefore + (p2 - 1) * var1,
-				length = itemLength
+				startOffset = PaddingBefore + (p2 - 1) * NewItemLength,
+				length = ItemLength
 			}
 		end,
-		updateItemMeasurement = staticPartsModule.updateItemMeasurementNoop,
-		requiresItemMeasurement = staticPartsModule.requiresItemMeasurementFalse,
-		applyDataSourceChange = function(p2)
-			-- upvalues: var2 (write), dataSourceChangeTypeModule (copy)
-			if p2.type == dataSourceChangeTypeModule.Reset then
-				var2 = #p2.keys
-			elseif p2.type == dataSourceChangeTypeModule.Insert then
-				var2 += #p2.keys
-			elseif p2.type == dataSourceChangeTypeModule.Remove then
-				var2 -= #p2.keys
+		updateItemMeasurement = StaticPartsModule.updateItemMeasurementNoop,
+		requiresItemMeasurement = StaticPartsModule.requiresItemMeasurementFalse,
+		applyDataSourceChange = function(p2): boolean --[[ Line: 86 ]]
+			-- upvalues: CountKeys (ref), DataSourceChangeTypeModule (upval)
+			local CountKeys1: number = CountKeys
+			
+			if p2.type == DataSourceChangeTypeModule.Reset then
+				CountKeys = #p2.keys
+			elseif p2.type == DataSourceChangeTypeModule.Insert then
+				CountKeys += #p2.keys
+			elseif p2.type == DataSourceChangeTypeModule.Remove then
+				CountKeys -= #p2.keys
 			end
-			return var2 ~= var2
+			return CountKeys ~= CountKeys1
 		end,
-		setViewportCrossAxisLength = staticPartsModule.geometryUnchanged,
-		destroy = staticPartsModule.noop
+		setViewportCrossAxisLength = StaticPartsModule.geometryUnchanged,
+		destroy = StaticPartsModule.noop
 	}
 end

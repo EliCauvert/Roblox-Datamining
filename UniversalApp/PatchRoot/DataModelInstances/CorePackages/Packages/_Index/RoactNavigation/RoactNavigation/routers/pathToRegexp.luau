@@ -1,628 +1,640 @@
-﻿local parent = script.Parent.Parent.Parent
-local array = require(parent.LuauPolyfill).Array
-local regExpModule = require(parent.RegExp)
+﻿local Parent = script.Parent.Parent.Parent
+local Array = require(Parent.LuauPolyfill).Array
+local RegExpModule = require(Parent.RegExp)
 
-local function _(p1)
+local function _(p1) --[[ Line: 35 | Named "TypeError" ]]
 	return p1
 end
 
-local t = {}
-local escapeString = nil
-local flags = nil
+local Callback = nil
+local Callback1 = nil
 
-local function lexer(p1)
-	local var1
-	local t = {}
-	local var2 = 1
+local function lexer(Text: string) --[[ Line: 65 ]]
+	local List1 = {}
+	local StartIndex1 = 1
 	
-	local function _(p2)
-		-- upvalues: var2 (write)
-		var2 += 1
+	local function _(p1) --[[ Line: 72 | Named "preIncrement_i" ]]
+		-- upvalues: StartIndex1 (ref)
+		StartIndex1 += 1
 		
-		return p2
+		return p1
 	end
 	
-	local _ = function(p2)
-		-- upvalues: p1 (ref)
-		return string.sub(p1, p2, p2)
+	local _ = function(StartIndex: number): string --[[ Line: 77 | Named "getChar" ]]
+		-- upvalues: Text (copy)
+		return (string.sub(Text, StartIndex, StartIndex))
 	end
 	
-	local var3 = string.len(p1)
-	while var2 <= var3 do
-		local var4, var5
-		local substring = string.sub(p1, var2, var2)
+	local Length = string.len(Text)
+	local Count = nil
+	while StartIndex1 <= Length do
+		local Segment = string.sub(Text, StartIndex1, StartIndex1)
 		
-		if substring == "*" or substring == "+" or substring == "?" then
-			var1 = { type = "MODIFIER", index = var2 }
-			var4 = var2
-			var2 += 1
-			local var6 = var4
-			var1.value = string.sub(p1, var6, var6)
-			table.insert(t, var1)
-		elseif substring == "\\" then
-			local t_1 = { type = "ESCAPED_CHAR" }
-			local var7 = var2
-			var2 += 1
-			t_1.index = var7
-			var4 = var2
-			var2 += 1
-			local var8 = var4
-			t_1.value = string.sub(p1, var8, var8)
-			table.insert(t, t_1)
-		elseif substring == "{" then
-			local t_1 = { type = "OPEN", index = var2 }
-			var4 = var2
-			var2 += 1
-			local var9 = var4
-			t_1.value = string.sub(p1, var9, var9)
-			table.insert(t, t_1)
-		elseif substring == "}" then
-			local t_1 = { type = "CLOSE", index = var2 }
-			var4 = var2
-			var2 += 1
-			local var10 = var4
-			t_1.value = string.sub(p1, var10, var10)
-			table.insert(t, t_1)
-		elseif substring == ":" then
-			local var11 = ""
-			var5 = var2 + 1
+		if Segment == "*" or Segment == "+" or Segment == "?" then
+			local StartIndex: number = StartIndex1
+			StartIndex1 += 1
+			table.insert(List1, {
+				type = "MODIFIER",
+				index = StartIndex1,
+				value = string.sub(Text, StartIndex, StartIndex)
+			})
+		elseif Segment == "\\" then
+			local Index: number = StartIndex1
+			StartIndex1 += 1
+			local StartIndex4: number = StartIndex1
+			StartIndex1 += 1
+			table.insert(List1, {
+				type = "ESCAPED_CHAR",
+				index = Index,
+				value = string.sub(Text, StartIndex4, StartIndex4)
+			})
+		elseif Segment == "{" then
+			local StartIndex5: number = StartIndex1
+			StartIndex1 += 1
+			table.insert(List1, {
+				type = "OPEN",
+				index = StartIndex1,
+				value = string.sub(Text, StartIndex5, StartIndex5)
+			})
+		elseif Segment == "}" then
+			local StartIndex3: number = StartIndex1
+			StartIndex1 += 1
+			table.insert(List1, {
+				type = "CLOSE",
+				index = StartIndex1,
+				value = string.sub(Text, StartIndex3, StartIndex3)
+			})
+		elseif Segment == ":" then
+			local Text1 = ""
+			local NewStartIndex = StartIndex1 + 1
 			
-			local _ = function(p2)
-				-- upvalues: var5 (write)
-				var5 += 1
+			local _ = function(p1) --[[ Line: 129 | Named "preIncrement_j" ]]
+				-- upvalues: NewStartIndex (ref)
+				NewStartIndex += 1
 				
-				return p2
+				return p1
 			end
-			while var5 <= var3 do
-				local byteValue = string.byte(p1, var5)
+			while NewStartIndex <= Length do
+				local ByteValue = string.byte(Text, NewStartIndex)
 				
-				if (byteValue < 48 or byteValue > 57) and (byteValue < 65 or byteValue > 90) and ((byteValue < 97 or byteValue > 122) and byteValue ~= 95) then break end
-				local var12 = var11
-				local var13 = var5
-				var5 += 1
-				local var14 = var13
-				var11 = var12 .. string.sub(p1, var14, var14)
+				if (ByteValue < 48 or ByteValue > 57) and (ByteValue < 65 or ByteValue > 90) and (ByteValue < 97 or ByteValue > 122) and ByteValue ~= 95 then break end
+				local StartIndex8: number = NewStartIndex
+				NewStartIndex += 1
+				Text1 ..= string.sub(Text, StartIndex8, StartIndex8)
 			end
-			if var11 == "" then
-				error(("Missing parameter name at %d"):format(var2))
+			if Text1 == "" then
+				error((("Missing parameter name at %d"):format(StartIndex1)))
 			end
-			table.insert(t, { type = "NAME", index = var2, value = var11 })
-			var2 = var5
-		elseif substring == "(" then
-			local var15 = 1
-			var5 = ""
-			var1 = var2 + 1
-			local var16 = var1
+			table.insert(List1, { type = "NAME", index = StartIndex1, value = Text1 })
+			StartIndex1 = NewStartIndex
+		elseif Segment == "(" then
+			local Count1 = 1
+			local NewStartIndex = ""
+			Count = StartIndex1 + 1
+			local StartIndex11: number = Count
 			
-			if string.sub(p1, var16, var16) == "?" then
-				error(("Pattern cannot start with \"?\" at %d"):format(var1))
+			if string.sub(Text, StartIndex11, StartIndex11) == "?" then
+				error((("Pattern cannot start with \"?\" at %d"):format(Count)))
 			end
-			local function byteValue(p2)
-				-- upvalues: var1 (write)
-				var1 += 1
+			local _ = function(p1) --[[ Line: 179 | Named "preIncrement_j" ]]
+				-- upvalues: Count (ref)
+				Count += 1
 				
-				return p2
+				return p1
 			end
-			while var1 <= var3 do
-				var4 = var1
+			while Count <= Length do
+				local StartIndex6: number = Count
 				
-				if string.sub(p1, var4, var4) == "\\" then
-					local var17 = var5
-					local var18 = var1
-					var1 += 1
-					local substring_1 = string.sub(p1, var18, var18)
-					local var19 = var1
-					var1 += 1
-					local var20 = var19
-					var5 = var17 .. (substring_1 .. string.sub(p1, var20, var20))
+				if string.sub(Text, StartIndex6, StartIndex6) == "\\" then
+					local StartIndex13: number = Count
+					Count += 1
+					local Segment1 = string.sub(Text, StartIndex13, StartIndex13)
+					local StartIndex7: number = Count
+					Count += 1
+					NewStartIndex ..= Segment1 .. string.sub(Text, StartIndex7, StartIndex7)
 				end
-				var4 = var1
+				local StartIndex14: number = Count
 				
-				if string.sub(p1, var4, var4) == ")" then
-					var15 -= 1
+				if string.sub(Text, StartIndex14, StartIndex14) == ")" then
+					Count1 -= 1
 					
-					if var15 ~= 0 then
-						local var21 = var5
-						local var22 = var1
-						var1 += 1
-						local var23 = var22
-						var5 = var21 .. string.sub(p1, var23, var23)
-						continue
+					if Count1 == 0 then
+						Count += 1
+						break
 					end
-					var1 += 1
-					break
 				else
-					var4 = var1
+					local StartIndex10: number = Count
 					
-					if string.sub(p1, var4, var4) == "(" then
-						var15 += 1
-						var4 = var1 + 1
+					if string.sub(Text, StartIndex10, StartIndex10) == "(" then
+						Count1 += 1
+						local StartIndex2 = Count + 1
 						
-						if string.sub(p1, var4, var4) ~= "?" then
-							error(("Capturing groups are not allowed at %d"):format(var1))
+						if string.sub(Text, StartIndex2, StartIndex2) ~= "?" then
+							error((("Capturing groups are not allowed at %d"):format(Count)))
 						end
 					end
 				end
+				local StartIndex9: number = Count
+				Count += 1
+				NewStartIndex ..= string.sub(Text, StartIndex9, StartIndex9)
 			end
-			if var15 ~= 0 then
-				error(("Unbalanced pattern at %d"):format(var2))
+			if Count1 ~= 0 then
+				error((("Unbalanced pattern at %d"):format(StartIndex1)))
 			end
-			if var5 == "" then
-				error(("Missing pattern at %d"):format(var2))
+			if NewStartIndex == "" then
+				error((("Missing pattern at %d"):format(StartIndex1)))
 			end
-			table.insert(t, { type = "PATTERN", index = var2, value = var5 })
-			var2 = var1
+			table.insert(List1, {
+				type = "PATTERN",
+				index = StartIndex1,
+				value = NewStartIndex
+			})
+			StartIndex1 = Count
 		else
-			var1 = { type = "CHAR", index = var2 }
-			var4 = var2
-			var2 += 1
-			local var24 = var4
-			var1.value = string.sub(p1, var24, var24)
-			table.insert(t, var1)
-		end
-	end
-	table.insert(t, { type = "END", value = "", index = var2 })
-	
-	return t
-end
-
-function t.parse(p2, p3)
-	-- upvalues: lexer (ref), escapeString (write)
-	p3 = p3 or {}
-	local var25 = lexer(p2)
-	local var26 = if not (p3.prefixes == nil or p3.prefixes == "") then p3.prefixes else "./"
-	local formattedText = string.format("[^%s]+?", escapeString(p3.delimiter or "/#?"))
-	local t = {}
-	local var27 = 0
-	local var28 = 1
-	local var29 = ""
-	
-	local function _(p4)
-		-- upvalues: var28 (write)
-		var28 += 1
-		
-		return p4
-	end
-	
-	local _ = function(p4)
-		-- upvalues: var27 (write)
-		var27 += 1
-		
-		return p4
-	end
-	
-	local _ = function(p4)
-		-- upvalues: var28 (write), var25 (ref)
-		if var28 <= #var25 and var25[var28].type == p4 then
-			local var30 = var25
-			local var31 = var28
-			var28 += 1
-			
-			return var30[var31].value
-		end
-		return nil
-	end
-	
-	local function mustConsume(p4)
-		-- upvalues: var28 (write), var25 (ref)
-		local value
-		if var28 <= #var25 and var25[var28].type == p4 then
-			local var30 = var25
-			local var31 = var28
-			var28 += 1
-			value = var30[var31].value
-		else
-			value = nil
-		end
-		if value ~= nil then
-			return value
-		end
-		local var32 = var25[var28]
-		
-		if var32 == nil then
-			error(("Expected token %s, got nil"):format(p4))
-		end
-		error(("Unexpected %s at %d, expected %s"):format(var32.type, var32.index, p4))
-	end
-	
-	local function consumeText()
-		-- upvalues: var28 (write), var25 (ref)
-		local var30
-		local var31 = ""
-		
-		if var28 <= #var25 and var25[var28].type == "CHAR" then
-			local var32 = var25
-			local var33 = var28
-			var28 += 1
-			var30 = var32[var33].value
-		else
-			var30 = nil
-		end
-		if not var30 then
-			if var28 <= #var25 and var25[var28].type == "ESCAPED_CHAR" then
-				local var34 = var25
-				local var35 = var28
-				var28 += 1
-				var30 = var34[var35].value
-			else
-				var30 = nil
-			end
-		end
-		while var30 and var30 ~= "" do
-			local value
-			var31 ..= var30
-			
-			if var28 <= #var25 and var25[var28].type == "CHAR" then
-				local var36 = var25
-				local var37 = var28
-				var28 += 1
-				value = var36[var37].value
-			else
-				value = nil
-			end
-			if not value then
-				if var28 <= #var25 and var25[var28].type == "ESCAPED_CHAR" then
-					local var38 = var25
-					local var39 = var28
-					var28 += 1
-					value = var38[var39].value
-				else
-					value = nil
-				end
-			end
-			var30 = value
-		end
-		return var31
-	end
-	while var28 <= #var25 do
-		local value, var40
-		if var28 <= #var25 and var25[var28].type == "CHAR" then
-			var40 = var28
-			var28 += 1
-			value = var25[var40].value
-		else
-			value = nil
-		end
-		local value_1, var41
-		if var28 <= #var25 and var25[var28].type == "NAME" then
-			var41 = var28
-			var28 += 1
-			value_1 = var25[var41].value
-		else
-			value_1 = nil
-		end
-		local value_2
-		if var28 <= #var25 and var25[var28].type == "PATTERN" then
-			local var42 = var28
-			var28 += 1
-			value_2 = var25[var42].value
-		else
-			value_2 = nil
-		end
-		if value_1 and value_1 ~= "" or value_2 and value_2 ~= "" then
-			var40 = value or ""
-			
-			if string.find(var26, var40) == nil then
-				var29 ..= var40
-				var40 = ""
-			end
-			if var29 ~= nil and var29 ~= "" then
-				table.insert(t, var29)
-				var29 = ""
-			end
-			var41 = value_1
-			
-			if value_1 == nil or value_1 == "" then
-				local var43 = var27
-				var27 += 1
-				var41 = var43
-			end
-			local value_5
-			local t_1 = {
-				suffix = "",
-				name = var41,
-				prefix = var40,
-				pattern = if value_2 == nil or value_2 == "" then formattedText else value_2
+			local StartIndex12: number = StartIndex1
+			StartIndex1 += 1
+			Count = {
+				type = "CHAR",
+				index = StartIndex1,
+				value = string.sub(Text, StartIndex12, StartIndex12)
 			}
-			
-			if var28 <= #var25 and var25[var28].type == "MODIFIER" then
-				local var44 = var28
-				var28 += 1
-				value_5 = var25[var44].value
-			else
-				value_5 = nil
-			end
-			t_1.modifier = value_5 or ""
-			table.insert(t, t_1)
-		else
-			local var45
-			var40 = value
-			
-			if not var40 then
-				if var28 <= #var25 and var25[var28].type == "ESCAPED_CHAR" then
-					local var46 = var28
-					var28 += 1
-					var40 = var25[var46].value
-				else
-					var40 = nil
-				end
-			end
-			if var40 and var40 ~= "" then
-				var29 ..= var40
-			elseif var29 and var29 ~= "" then
-				table.insert(t, var29)
-				var29 = ""
-			end
-			if var28 <= #var25 and var25[var28].type == "OPEN" then
-				var45 = var28
-				var28 += 1
-				var41 = var25[var45].value
-			else
-				var41 = nil
-			end
-			if var41 and var41 ~= "" then
-				local var47 = consumeText()
-				
-				if var28 <= #var25 and var25[var28].type == "NAME" then
-					local var48 = var28
-					var28 += 1
-					var45 = var25[var48].value
-				else
-					var45 = nil
-				end
-				local value_3
-				local var49 = var45 or ""
-				
-				if var28 <= #var25 and var25[var28].type == "PATTERN" then
-					local var50 = var28
-					var28 += 1
-					value_3 = var25[var50].value
-				else
-					value_3 = nil
-				end
-				var45 = value_3 or ""
-				local var51 = consumeText()
-				mustConsume("CLOSE")
-				
-				if var49 == "" and var45 ~= "" then
-					local var52 = var27
-					var27 += 1
-					var49 = var52
-				end
-				if var49 ~= "" and var49 ~= 0 and (var45 == nil or var45 == "") then
-					var45 = formattedText
-				end
-				local value_4
-				local t_1 = {
-					name = var49,
-					pattern = var45,
-					prefix = var47,
-					suffix = var51
-				}
-				
-				if var28 <= #var25 and var25[var28].type == "MODIFIER" then
-					local var53 = var28
-					var28 += 1
-					value_4 = var25[var53].value
-				else
-					value_4 = nil
-				end
-				t_1.modifier = value_4 or ""
-				table.insert(t, t_1)
-			else
-				mustConsume("END")
-			end
+			local NewStartIndex = List1
+			table.insert(NewStartIndex, Count)
 		end
 	end
-	return t
-end
-
-function t.compile(p4, p5)
-	-- upvalues: t (ref)
-	return t.tokensToFunction(t.parse(p4, p5), p5)
-end
-
-function t.tokensToFunction(p4, p5)
-	-- upvalues: flags (write), array (ref), regExpModule (ref)
-	if p5 == nil then
-		p5 = {}
-	end
-	local var54 = flags(p5)
-	local encode = p5.encode or function(p6)
-		return p6
-	end
-	local validate = p5.validate
+	table.insert(List1, { type = "END", value = "", index = StartIndex1 })
 	
-	if validate == nil then
-		validate = true
+	return List1
+end
+
+local PathToRegexpModule = {
+	parse = function(p1, p2) --[[ Line: 252 ]]
+		-- upvalues: lexer (copy), Callback (ref)
+		local P5 = p2 or {}
+		local LexerResult = lexer(p1)
+		local Prefixes = if P5.prefixes == nil or P5.prefixes == "" then "./" else P5.prefixes
+		local Formatted = string.format("[^%s]+?", Callback(P5.delimiter or "/#?"))
+		local List = {}
+		local Count = 0
+		local Count1 = 1
+		local Text = ""
+		
+		local function _(p3) --[[ Line: 269 | Named "preIncrement_i" ]]
+			-- upvalues: Count1 (ref)
+			Count1 += 1
+			
+			return p3
+		end
+		
+		local _ = function(p3) --[[ Line: 277 | Named "preIncrement_key" ]]
+			-- upvalues: Count (ref)
+			Count += 1
+			
+			return p3
+		end
+		
+		local _ = function(Type1) --[[ Line: 282 | Named "tryConsume" ]]
+			-- upvalues: Count1 (ref), LexerResult (copy)
+			if Count1 <= #LexerResult and LexerResult[Count1].type == Type1 then
+				local Count: number = Count1
+				Count1 += 1
+				
+				return LexerResult[Count].value
+			else
+				return nil
+			end
+		end
+		
+		local function mustConsume(Type1) --[[ Line: 290 ]]
+			-- upvalues: Count1 (ref), LexerResult (copy)
+			local v1 = nil
+			if Count1 <= #LexerResult and LexerResult[Count1].type == Type1 then
+				local Count: number = Count1
+				Count1 += 1
+				v1 = LexerResult[Count].value
+			else
+				v1 = nil
+			end
+			if v1 ~= nil then
+				return v1
+			end
+			local LexerResultEntry = LexerResult[Count1]
+			
+			if LexerResultEntry == nil then
+				error((("Expected token %s, got nil"):format(Type1)))
+			end
+			error((("Unexpected %s at %d, expected %s"):format(LexerResultEntry.type, LexerResultEntry.index, Type1)))
+		end
+		
+		local function consumeText(): string --[[ Line: 304 ]]
+			-- upvalues: Count1 (ref), LexerResult (copy)
+			local Text = ""
+			local Value = nil
+			
+			if Count1 <= #LexerResult and LexerResult[Count1].type == "CHAR" then
+				local Count: number = Count1
+				Count1 += 1
+				Value = LexerResult[Count].value
+			else
+				Value = nil
+			end
+			if not Value then
+				if Count1 <= #LexerResult and LexerResult[Count1].type == "ESCAPED_CHAR" then
+					local Count: number = Count1
+					Count1 += 1
+					Value = LexerResult[Count].value
+				else
+					Value = nil
+				end
+			end
+			while Value and Value ~= "" do
+				Text ..= Value
+				local Value1 = nil
+				
+				if Count1 <= #LexerResult and LexerResult[Count1].type == "CHAR" then
+					local Count: number = Count1
+					Count1 += 1
+					Value1 = LexerResult[Count].value
+				else
+					Value1 = nil
+				end
+				if not Value1 then
+					if Count1 <= #LexerResult and LexerResult[Count1].type == "ESCAPED_CHAR" then
+						local Count: number = Count1
+						Count1 += 1
+						Value1 = LexerResult[Count].value
+					else
+						Value1 = nil
+					end
+				end
+				Value = Value1
+			end
+			return Text
+		end
+		while Count1 <= #LexerResult do
+			local v1 = nil
+			if Count1 <= #LexerResult and LexerResult[Count1].type == "CHAR" then
+				local Count2: number = Count1
+				Count1 += 1
+				v1 = LexerResult[Count2].value
+			else
+				v1 = nil
+			end
+			local v2 = nil
+			if Count1 <= #LexerResult and LexerResult[Count1].type == "NAME" then
+				local Count3: number = Count1
+				Count1 += 1
+				v2 = LexerResult[Count3].value
+			else
+				v2 = nil
+			end
+			local v3 = nil
+			if Count1 <= #LexerResult and LexerResult[Count1].type == "PATTERN" then
+				local Count4: number = Count1
+				Count1 += 1
+				v3 = LexerResult[Count4].value
+			else
+				v3 = nil
+			end
+			if v2 and v2 ~= "" or v3 and v3 ~= "" then
+				local Pattern = v1 or ""
+				
+				if string.find(Prefixes, Pattern) == nil then
+					Text ..= Pattern
+					Pattern = ""
+				end
+				if Text ~= nil and Text ~= "" then
+					table.insert(List, Text)
+					Text = ""
+				end
+				local Name: number = v2
+				
+				if v2 == nil or v2 == "" then
+					local Count5: number = Count
+					Count += 1
+					Name = Count5
+				end
+				local config = {
+					suffix = "",
+					name = Name,
+					prefix = Pattern,
+					pattern = if v3 == nil or v3 == "" then Formatted else v3
+				}
+				local v4 = nil
+				
+				if Count1 <= #LexerResult and LexerResult[Count1].type == "MODIFIER" then
+					local Count6: number = Count1
+					Count1 += 1
+					v4 = LexerResult[Count6].value
+				else
+					v4 = nil
+				end
+				config.modifier = v4 or ""
+				table.insert(List, config)
+			else
+				local v5 = v1
+				
+				if not v5 then
+					if Count1 <= #LexerResult and LexerResult[Count1].type == "ESCAPED_CHAR" then
+						local Count8: number = Count1
+						Count1 += 1
+						v5 = LexerResult[Count8].value
+					else
+						v5 = nil
+					end
+				end
+				if v5 and v5 ~= "" then
+					Text ..= v5
+				else
+					if Text and Text ~= "" then
+						table.insert(List, Text)
+						Text = ""
+					end
+					local v6 = nil
+					if Count1 <= #LexerResult and LexerResult[Count1].type == "OPEN" then
+						local Count9: number = Count1
+						Count1 += 1
+						v6 = LexerResult[Count9].value
+					else
+						v6 = nil
+					end
+					if v6 and v6 ~= "" then
+						local ConsumeTextResult: string = consumeText()
+						local v7 = nil
+						
+						if Count1 <= #LexerResult and LexerResult[Count1].type == "NAME" then
+							local Count10: number = Count1
+							Count1 += 1
+							v7 = LexerResult[Count10].value
+						else
+							v7 = nil
+						end
+						local V54 = v7 or ""
+						local v8 = nil
+						
+						if Count1 <= #LexerResult and LexerResult[Count1].type == "PATTERN" then
+							local Count11: number = Count1
+							Count1 += 1
+							v8 = LexerResult[Count11].value
+						else
+							v8 = nil
+						end
+						local Pattern1 = v8 or ""
+						local ConsumeTextResult1: string = consumeText()
+						mustConsume("CLOSE")
+						
+						if V54 == "" and Pattern1 ~= "" then
+							local Count12: number = Count
+							Count += 1
+							V54 = Count12
+						end
+						if V54 ~= "" and V54 ~= 0 and (Pattern1 == nil or Pattern1 == "") then
+							Pattern1 = Formatted
+						end
+						local config = {
+							name = V54,
+							pattern = Pattern1,
+							prefix = ConsumeTextResult,
+							suffix = ConsumeTextResult1
+						}
+						local Value = nil
+						
+						if Count1 <= #LexerResult and LexerResult[Count1].type == "MODIFIER" then
+							local Count7: number = Count1
+							Count1 += 1
+							Value = LexerResult[Count7].value
+						else
+							Value = nil
+						end
+						config.modifier = Value or ""
+						table.insert(List, config)
+					else
+						mustConsume("END")
+					end
+				end
+			end
+		end
+		return List
 	end
-	local var55 = array.map(p4, function(p6)
-		-- upvalues: regExpModule (copy), var54 (ref)
-		return if type(p6) == "table" then regExpModule(("^(?:%s)$"):format(p6.pattern), var54) else nil
+}
+
+function PathToRegexpModule.compile(p3, p4) --[[ Line: 416 ]]
+	-- upvalues: PathToRegexpModule (copy)
+	return PathToRegexpModule.tokensToFunction(PathToRegexpModule.parse(p3, p4), p4)
+end
+
+function PathToRegexpModule.tokensToFunction(ParseResult, p3) --[[ Line: 425 ]]
+	-- upvalues: Callback1 (ref), Array (copy), RegExpModule (copy)
+	if p3 == nil then
+		p3 = {}
+	end
+	local CallbackResult = Callback1(p3)
+	local Encode = p3.encode or function(p4) --[[ Line: 431 ]]
+		return p4
+	end
+	local Validate = p3.validate
+	
+	if Validate == nil then
+		Validate = true
+	end
+	local MapResult = Array.map(ParseResult, function(p4) --[[ Line: 440 ]]
+		-- upvalues: RegExpModule (upval), CallbackResult (copy)
+		return if type(p4) == "table" then RegExpModule(("^(?:%s)$"):format(p4.pattern), CallbackResult) else nil
 	end)
 	
-	return function(p6)
-		-- upvalues: p4 (ref), array (copy), encode (ref), validate (write), var55 (ref)
-		local var56 = ""
+	return function(p4): string --[[ Line: 447 ]]
+		-- upvalues: ParseResult (copy), Array (upval), Encode (copy), Validate (ref), MapResult (copy)
+		local Text = ""
 		
-		for i, v in p4 do
-			if type(v) == "string" then
-				var56 ..= v
+		for i, value in ParseResult do
+			if type(value) == "string" then
+				Text ..= value
 				continue
 			end
-			local var57 = if p6 then p6[tostring(v.name)] else nil
-			local var58 = if v.modifier ~= "?" then v.modifier == "*" else true
-			local var59 = if v.modifier ~= "*" then v.modifier == "+" else true
+			local v9 = if p4 then p4[tostring(value.name)] else nil
+			local IsModifierMatch: boolean = value.modifier == "?" or value.modifier == "*"
+			local IsModifierMatch1: boolean = value.modifier == "*" or value.modifier == "+"
 			
-			if array.isArray(var57) then
-				if not var59 then
-					error(("Expected \"%s\" to not repeat, but got an array"):format(v.name))
+			if Array.isArray(v9) then
+				if not IsModifierMatch1 then
+					error((("Expected \"%s\" to not repeat, but got an array"):format(value.name)))
 				end
-				if #var57 == 0 then
-					if not var58 then
-						error(("Expected \"%s\" to not be empty"):format(v.name))
+				if #v9 == 0 then
+					if not IsModifierMatch then
+						error((("Expected \"%s\" to not be empty"):format(value.name)))
+					else
+						continue
 					end
 				end
-				for i_1, v_1 in var57 do
-					local var60 = encode(v_1, v)
+				for _, value1 in v9 do
+					local EncodeResult = Encode(value1, value)
 					
-					if validate and not var55[i]:test(var60) then
-						error(("Expected all \"%s\" to match \"%s\", but got \"%s\""):format(v.name, v.pattern, var60))
+					if Validate and not MapResult[i]:test(EncodeResult) then
+						error((("Expected all \"%s\" to match \"%s\", but got \"%s\""):format(value.name, value.pattern, EncodeResult)))
 					end
-					var56 ..= v.prefix .. var88 .. v.suffix
+					Text ..= value.prefix .. EncodeResult .. value.suffix
 				end
 			else
-				local var61 = type(var57)
+				local ValueType = type(v9)
 				
-				if var61 == "string" or var61 == "number" then
-					local var62 = encode(tostring(var57), v)
+				if ValueType == "string" or ValueType == "number" then
+					local EncodeResult = Encode(tostring(v9), value)
 					
-					if validate and not var55[i]:test(var62) then
-						error(("Expected \"%s\" to match \"%s\", but got \"%s\""):format(v.name, v.pattern, var62))
+					if Validate and not MapResult[i]:test(EncodeResult) then
+						error((("Expected \"%s\" to match \"%s\", but got \"%s\""):format(value.name, value.pattern, EncodeResult)))
 					end
-					var56 ..= v.prefix .. var87 .. v.suffix
-				elseif not var58 then
-					error(("Expected \"%s\" to be %s"):format(tostring(v.name), if var59 then "an array" else "a string"))
+					Text ..= value.prefix .. EncodeResult .. value.suffix
+					continue
+				elseif not IsModifierMatch then
+					error((("Expected \"%s\" to be %s"):format(tostring(value.name), if IsModifierMatch1 then "an array" else "a string")))
 				end
 			end
 		end
-		return var56
+		return Text
 	end
 end
 
-function t.match(p7, p8)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function PathToRegexpModule.match(p5, p6) --[[ Line: 554 ]]
+	-- upvalues: PathToRegexpModule (copy)
+	local t = {}
 	
-	return t.regexpToFunction(t.pathToRegexp(p7, t_1, p8), t_1, p8)
+	return PathToRegexpModule.regexpToFunction(PathToRegexpModule.pathToRegexp(p5, t, p6), t, p6)
 end
 
-function t.regexpToFunction(p7, p8, p9)
-	-- upvalues: array (ref)
-	if p9 == nil then
-		p9 = {}
+function PathToRegexpModule.regexpToFunction(PathToRegexpResult, p5, p6) --[[ Line: 563 ]]
+	-- upvalues: Array (copy)
+	if p6 == nil then
+		p6 = {}
 	end
-	local decode = p9.decode or function(p10)
-		return p10
+	local Decode = p6.decode or function(p7) --[[ Line: 567 ]]
+		return p7
 	end
 	
-	return function(p10)
-		-- upvalues: p7 (ref), p8 (ref), array (copy), decode (ref)
-		local var63 = p7:exec(p10)
+	return function(p7) --[[ Line: 571 ]]
+		-- upvalues: PathToRegexpResult (copy), p5 (copy), Array (upval), Decode (copy)
+		local ExecResult = PathToRegexpResult:exec(p7)
 		
-		if not var63 then
+		if not ExecResult then
 			return false
 		end
-		local var64 = var63[1]
-		local index = var63.index or 0
-		local t = {}
+		local ExecResultEntry = ExecResult[1]
+		local Index = ExecResult.index or 0
+		local Params = {}
 		
-		for i = 2, var63.n do
-			if var63[i] == nil then
-				continue
-			end
-			local var65 = p8[i - 1]
-			
-			if var65.modifier == "*" or var65.modifier == "+" then
-				t[var65.name] = array.map(string.split(var63[i], var65.prefix .. var95.suffix), function(p11)
-					-- upvalues: decode (copy), var65 (ref)
-					return decode(p11, var65)
-				end)
-			else
-				t[var65.name] = decode(var63[i], var65)
+		for i = 2, ExecResult.n do
+			if ExecResult[i] ~= nil then
+				local v10 = p5[i - 1]
+				
+				if v10.modifier == "*" or v10.modifier == "+" then
+					Params[v10.name] = Array.map(string.split(ExecResult[i], v10.prefix .. v10.suffix), function(p8) --[[ Line: 592 ]]
+						-- upvalues: Decode (upval), v10 (copy)
+						return Decode(p8, v10)
+					end)
+				else
+					Params[v10.name] = Decode(ExecResult[i], v10)
+				end
 			end
 		end
-		return { path = var64, index = index, params = t }
+		return { path = ExecResultEntry, index = Index, params = Params }
 	end
 end
 
-escapeString = function(p10)
-	return string.gsub(p10, "[%.%+%*%?=%^!:${}%(%)%[%]|/\\]", function(p11)
-		return "\\" .. p28
+Callback = function(Text: string): string --[[ Line: 611 | Named "escapeString" ]]
+	return string.gsub(Text, "[%.%+%*%?=%^!:${}%(%)%[%]|/\\]", function(Match): string --[[ Line: 612 ]]
+		return "\\" .. Match
 	end)
 end
 
-flags = function(p10)
-	return if p10 and p10.sensitive then "" else "i"
+Callback1 = function(p7): string --[[ Line: 620 | Named "flags" ]]
+	return if p7 and p7.sensitive then "" else "i"
 end
 
-local function arrayToRegexp(p10, p11, p12)
-	-- upvalues: array (ref), t (ref), regExpModule (ref), flags (write)
-	return regExpModule(("(?:%s)"):format(table.concat(array.map(p10, function(p13)
-		-- upvalues: t (copy), p11 (ref), p12 (ref)
-		return t.pathToRegexp(p13, p11, p12).source
-	end), "|")), flags(p12))
+local function arrayToRegexp(p7, p8, p9) --[[ Line: 686 ]]
+	-- upvalues: Array (copy), PathToRegexpModule (copy), RegExpModule (copy), Callback1 (ref)
+	return RegExpModule(("(?:%s)"):format(table.concat(Array.map(p7, function(p10) --[[ Line: 691 ]]
+		-- upvalues: PathToRegexpModule (upval), p8 (copy), p9 (copy)
+		return PathToRegexpModule.pathToRegexp(p10, p8, p9).source
+	end), "|")), Callback1(p9))
 end
 
-local function stringToRegexp(p10, p11, p12)
-	-- upvalues: t (ref)
-	return t.tokensToRegexp(t.parse(p10, p12), p11, p12)
+local function stringToRegexp(p7, p8, p9) --[[ Line: 701 ]]
+	-- upvalues: PathToRegexpModule (copy)
+	return PathToRegexpModule.tokensToRegexp(PathToRegexpModule.parse(p7, p9), p8, p9)
 end
 
-function t.tokensToRegexp(p10, p11, p12)
-	-- upvalues: escapeString (write), regExpModule (ref), flags (write)
-	local var63 = if p12 ~= nil then p12 else {}
-	local strict = var63.strict
+function PathToRegexpModule.tokensToRegexp(ParseResult, List, p7) --[[ Line: 739 ]]
+	-- upvalues: Callback (ref), RegExpModule (copy), Callback1 (ref)
+	local T = if p7 == nil then {} else p7
+	local Strict = T.strict
 	
-	if strict == nil then
-		strict = false
+	if Strict == nil then
+		Strict = false
 	end
-	local start = var63.start
+	local Start = T.start
 	
-	if start == nil then
-		start = true
+	if Start == nil then
+		Start = true
 	end
-	local _end = var63.end_
+	local End = T.end_
 	
-	if _end == nil then
-		_end = true
+	if End == nil then
+		End = true
 	end
-	local encode = var63.encode or function(p13)
-		return p13
+	local Encode = T.encode or function(p8) --[[ Line: 756 ]]
+		return p8
 	end
-	local var64 = if var63.endsWith then ("[%s]|$"):format(escapeString(var63.endsWith or "")) else "$"
-	local var65 = ("[%s]"):format(escapeString(var63.delimiter or "/#?"))
-	local var66 = if start then "^" else ""
-	
-	for i, v in p10 do
-		if type(v) == "string" then
-			var66 ..= escapeString(encode(v))
+	local Text: string = if T.endsWith then ("[%s]|$"):format(Callback(T.endsWith or "")) else "$"
+	local Text1: string = ("[%s]"):format(Callback(T.delimiter or "/#?"))
+	local Text2: string = if Start then "^" else ""
+	for _, value in ParseResult do
+		if type(value) == "string" then
+			Text2 ..= Callback(Encode(value))
 		else
-			local var67 = escapeString(encode(v.prefix))
-			local var68 = escapeString(encode(v.suffix))
+			local CallbackResult = Callback(Encode(value.prefix))
+			local CallbackResult1 = Callback(Encode(value.suffix))
 			
-			if v.pattern and v.pattern ~= "" then
-				if p11 then
-					table.insert(p11, v)
-				end
-				var66 = if (not var67 or var67 == "") and (not var68 or var68 == "") then if v.modifier == "+" or v.modifier == "*" then var66 .. ("(?:%s((?:%s)(?:%s%s(?:%s))*)%s)%s"):format(var67, v.pattern, var68, var67, v.pattern, var68, if v.modifier == "*" then "?" else "") else var66 .. ("(?:%s(%s)%s)%s"):format(var67, v.pattern, var68, v.modifier) else var66 .. ("(%s)%s"):format(v.pattern, v.modifier)
+			if not value.pattern or value.pattern == "" then
+				Text2 ..= ("(?:%s%s)%s"):format(CallbackResult, CallbackResult1, value.modifier)
+				continue
+			end
+			if List then
+				table.insert(List, value)
+			end
+			if (not CallbackResult or CallbackResult == "") and (not CallbackResult1 or CallbackResult1 == "") then
+				Text2 ..= ("(%s)%s"):format(value.pattern, value.modifier)
+			elseif value.modifier == "+" or value.modifier == "*" then
+				Text2 ..= ("(?:%s((?:%s)(?:%s%s(?:%s))*)%s)%s"):format(CallbackResult, value.pattern, CallbackResult1, CallbackResult, value.pattern, CallbackResult1, if value.modifier == "*" then "?" else "")
 			else
-				var66 ..= ("(?:%s%s)%s"):format(var67, var68, v.modifier)
+				Text2 ..= ("(?:%s(%s)%s)%s"):format(CallbackResult, value.pattern, CallbackResult1, value.modifier)
 			end
 		end
 	end
-	if _end then
-		if not strict then
-			var66 ..= ("%s?"):format(var65)
+	if End then
+		if not Strict then
+			Text2 ..= ("%s?"):format(Text1)
 		end
-		var66 = if var63.endsWith and var63.endsWith ~= "" then var66 .. ("(?=%s)"):format(var64) else var66 .. "$"
+		if T.endsWith and T.endsWith ~= "" then
+			Text2 ..= ("(?=%s)"):format(Text)
+		else
+			Text2 ..= "$"
+		end
 	else
-		local var69 = p10[#p10]
-		local var70 = if type(var69) == "string" then string.find(var65, var69:sub(-1)) ~= nil else var69 == nil
+		local ParseResultEntry: string = ParseResult[#ParseResult]
+		local HasFoundAt: boolean = if type(ParseResultEntry) == "string" then string.find(Text1, ParseResultEntry:sub(-1)) ~= nil else ParseResultEntry == nil
 		
-		if not strict then
-			var66 ..= string.format("(?:%s(?=%s))?", var65, var64)
+		if not Strict then
+			Text2 ..= string.format("(?:%s(?=%s))?", Text1, Text)
 		end
-		if not var70 then
-			var66 ..= string.format("(?=%s|%s)", var65, var64)
+		if not HasFoundAt then
+			Text2 ..= string.format("(?=%s|%s)", Text1, Text)
 		end
 	end
-	return regExpModule(var66, flags(var63))
+	return RegExpModule(Text2, Callback1(T))
 end
 
-function t.pathToRegexp(p13, p14, p15)
-	-- upvalues: array (ref), arrayToRegexp (ref), stringToRegexp (ref)
-	return if array.isArray(p13) then arrayToRegexp(p13, p14, p15) else stringToRegexp(p13, p14, p15)
+function PathToRegexpModule.pathToRegexp(p8, p9, p10) --[[ Line: 841 ]]
+	-- upvalues: Array (copy), arrayToRegexp (copy), stringToRegexp (copy)
+	return if Array.isArray(p8) then arrayToRegexp(p8, p9, p10) else stringToRegexp(p8, p9, p10)
 end
 
-return t
+return PathToRegexpModule

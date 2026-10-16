@@ -1,287 +1,273 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local console = require(parent.Shared).console
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local Console = require(Parent.Shared).console
 local _ = require(script.Parent.ReactInternalTypes)
 local _ = require(script.Parent.ReactFiberHostConfig)
 local _ = require(script.Parent["ReactFiberSuspenseComponent.new"])
-local invariant = require(parent.Shared).invariant
-local get = require(parent.Shared).ReactInstanceMap.get
-local reactSharedInternals = require(parent.Shared).ReactSharedInternals
-local getComponentName = require(parent.Shared).getComponentName
-local reactWorkTagsModule = require(script.Parent.ReactWorkTags)
-local classComponent = reactWorkTagsModule.ClassComponent
-local hostComponent = reactWorkTagsModule.HostComponent
-local hostRoot = reactWorkTagsModule.HostRoot
-local hostPortal = reactWorkTagsModule.HostPortal
-local hostText = reactWorkTagsModule.HostText
-local fundamentalComponent = reactWorkTagsModule.FundamentalComponent
-local suspenseComponent = reactWorkTagsModule.SuspenseComponent
-local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
-local noFlags = reactFiberFlagsModule.NoFlags
-local placement = reactFiberFlagsModule.Placement
-local hydrating = reactFiberFlagsModule.Hydrating
-local enableFundamentalAPI = require(parent.Shared).ReactFeatureFlags.enableFundamentalAPI
-local reactCurrentOwner = reactSharedInternals.ReactCurrentOwner
-local t = {}
+local InvariantFunction = require(Parent.Shared).invariant
+local GetFunction = require(Parent.Shared).ReactInstanceMap.get
+local GetComponentNameFunction = require(Parent.Shared).getComponentName
+local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
+local ClassComponent = ReactWorkTagsModule.ClassComponent
+local HostComponent = ReactWorkTagsModule.HostComponent
+local HostRoot = ReactWorkTagsModule.HostRoot
+local HostPortal = ReactWorkTagsModule.HostPortal
+local HostText = ReactWorkTagsModule.HostText
+local FundamentalComponent = ReactWorkTagsModule.FundamentalComponent
+local SuspenseComponent = ReactWorkTagsModule.SuspenseComponent
+local ReactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
+local NoFlags = ReactFiberFlagsModule.NoFlags
+local Placement = ReactFiberFlagsModule.Placement
+local Hydrating = ReactFiberFlagsModule.Hydrating
+local EnableFundamentalAPI = require(Parent.Shared).ReactFeatureFlags.enableFundamentalAPI
+local ReactCurrentOwner = require(Parent.Shared).ReactSharedInternals.ReactCurrentOwner
 
-local function getNearestMountedFiber(p1)
-	-- upvalues: placement (ref), hydrating (ref), noFlags (ref), hostRoot (ref)
-	local var1 = p1
-	local var2 = p1
+local function getNearestMountedFiber(Return) --[[ Line: 50 ]]
+	-- upvalues: Placement (copy), Hydrating (copy), NoFlags (copy), HostRoot (copy)
+	local Return1 = Return
+	local Return2 = Return
 	
-	if not p1.alternate then
-		local var3 = var1
-		repeat
-			var1 = var3
-			if bit32.band(var1.flags, bit32.bor(placement, hydrating)) ~= noFlags then
-				var2 = var1.return_
-			end
-			var3 = var1.return_
-		until not var3
-	while var1.return_ do
-		var1 = var1.return_
-	end
-	return if var1.tag == hostRoot then var2 else nil
-end
-
-t.getNearestMountedFiber = getNearestMountedFiber
-
-function t.getSuspenseInstanceFromFiber(p2)
-	-- upvalues: suspenseComponent (ref)
-	if p2.tag == suspenseComponent then
-		local memoizedState = p2.memoizedState
-		
-		if memoizedState == nil then
-			local alternate = p2.alternate
-			
-			if alternate ~= nil then
-				memoizedState = alternate.memoizedState
-			end
-		end
-		return if memoizedState then memoizedState.dehydrated else nil
-	end
-end
-
-function t.getContainerFromFiber(p2)
-	-- upvalues: hostRoot (ref)
-	return if p2.tag == hostRoot then p2.stateNode.containerInfo else nil
-end
-
-function t.isFiberMounted(p2)
-	-- upvalues: getNearestMountedFiber (ref)
-	return getNearestMountedFiber(p2) == p2
-end
-
-function t.isMounted(p2)
-	-- upvalues: reactGlobalsModule (ref), reactCurrentOwner (ref), classComponent (ref), console (ref), getComponentName (ref), get (ref), getNearestMountedFiber (ref)
-	if reactGlobalsModule.__DEV__ then
-		local current = reactCurrentOwner.current
-		
-		if current ~= nil and current.tag == classComponent then
-			local stateNode = current.stateNode
-			
-			if not stateNode._warnedAboutRefsInRender then
-				console.error("%s is accessing isMounted inside its render() function. render() should be a pure function of props and state. It should never access something that requires stale data from the previous render, such as refs. Move this logic to componentDidMount and componentDidUpdate instead.", getComponentName(current.type) or "A component")
-			end
-			stateNode._warnedAboutRefsInRender = true
-		end
-	end
-	local var4 = get(p2)
-	
-	return if var4 then getNearestMountedFiber(var4) == var4 else false
-end
-
-local function _(p2)
-	-- upvalues: invariant (ref), getNearestMountedFiber (ref)
-	invariant(getNearestMountedFiber(p2) == p2, "Unable to find node on an unmounted component.")
-end
-
-local function findCurrentFiberUsingSlowPath(p2)
-	-- upvalues: getNearestMountedFiber (ref), invariant (ref), hostRoot (ref)
-	local alternate = p2.alternate
-	
-	if alternate then
-		local alternate_1, _return_1, _return
-		local var4 = p2
-		local var5 = alternate
-		while true do
-			_return = var4.return_
-			if _return == nil then break end
-			alternate_1 = _return.alternate
-			
-			if alternate_1 == nil then
-				_return_1 = _return.return_
-				
-				if _return_1 == nil then break end
-				var4 = _return_1
-				var5 = _return_1
-			end
-			if _return.child == alternate_1.child then
-				_return_1 = _return.child
-				while _return_1 do
-					if _return_1 ~= var4 then
-						if _return_1 ~= var5 then
-							_return_1 = _return_1.sibling
-							continue
-						end
-						invariant(getNearestMountedFiber(_return) == _return, "Unable to find node on an unmounted component.")
-						
-						return alternate
-					end
-					invariant(getNearestMountedFiber(_return) == _return, "Unable to find node on an unmounted component.")
-					
-					return p2
-				end
-				invariant(false, "Unable to find node on an unmounted component.")
-			end
-			if var4.return_ == var5.return_ then
-				_return_1 = false
-				local child = _return.child
-				while child do
-					if child == var4 then
-						_return_1 = true
-						var4 = _return
-						var5 = alternate_1
-						break
-					elseif child ~= var5 then
-						child = child.sibling
-						continue
-					else
-						_return_1 = true
-						var5 = _return
-						var4 = alternate_1
-						break
-					end
-					elseif not _return_1 then
-						local child_1 = alternate_1.child
-						while child_1 do
-							if child_1 == var4 then
-								_return_1 = true
-								var4 = alternate_1
-								var5 = _return
-								break
-							elseif child_1 ~= var5 then
-								child_1 = child_1.sibling
-								continue
-							else
-								_return_1 = true
-								var5 = alternate_1
-								var4 = _return
-								break
-							end
-						end
-						invariant(_return_1, "Child was not found in either parent set. This indicates a bug in React related to the return pointer. Please file an issue.")
-					end
-				end
-				-- [0.001s] <RUNTIME-ERROR> : Error block 49 analysis at pc 0 (list.remove(x): x not in list)
-			else
-				var4 = _return
-				var5 = alternate_1
-			end
-			invariant(var4.alternate == var5, "Return fibers should always be each others' alternates. This error is likely caused by a bug in React. Please file an issue.")
+	if Return.alternate then
+		while Return1.return_ do
+			Return1 = Return1.return_
 		end
 	else
-		local var6 = getNearestMountedFiber(p2)
-		invariant(var6 ~= nil, "Unable to find node on an unmounted component.")
+		local Return3 = Return1
+		repeat
+			Return1 = Return3
+			if bit32.band(Return1.flags, (bit32.bor(Placement, Hydrating))) ~= NoFlags then
+				Return2 = Return1.return_
+			end
+			Return3 = Return1.return_
+		until not Return3
+	end
+	return if Return1.tag == HostRoot then Return2 else nil
+end
+
+local function _(Return) --[[ Line: 140 | Named "assertIsMounted" ]]
+	-- upvalues: InvariantFunction (copy), getNearestMountedFiber (copy)
+	InvariantFunction(getNearestMountedFiber(Return) == Return, "Unable to find node on an unmounted component.")
+end
+
+local function findCurrentFiberUsingSlowPath(Return) --[[ Line: 147 ]]
+	-- upvalues: getNearestMountedFiber (copy), InvariantFunction (copy), HostRoot (copy)
+	local Alternate = Return.alternate
+	
+	if not Alternate then
+		local NearestMountedFiber = getNearestMountedFiber(Return)
+		InvariantFunction(NearestMountedFiber ~= nil, "Unable to find node on an unmounted component.")
 		
-		return if var6 == p2 then p2 else nil
+		return if NearestMountedFiber == Return then Return else nil
 	end
-end
-
-t.findCurrentFiberUsingSlowPath = findCurrentFiberUsingSlowPath
-
-function t.findCurrentHostFiber(p3)
-	-- upvalues: findCurrentFiberUsingSlowPath (ref), hostComponent (ref), hostText (ref)
-	local var7 = findCurrentFiberUsingSlowPath(p3)
-	
-	if not var7 then
-		return nil
-	end
-	local child
-	local var8 = var7
+	local Child = Return
+	local Child1 = Alternate
+	local Return2 = nil
+	local Alternate1 = nil
+	local Flag = nil
 	while true do
-		child = var8.child
-		if var8.tag ~= hostComponent and var8.tag ~= hostText then
-			if child then
-				child.return_ = var8
-				var8 = child
-				continue
+		Return2 = Child.return_
+		if Return2 == nil then break end
+		Alternate1 = Return2.alternate
+		
+		if Alternate1 == nil then
+			local Return1 = Return2.return_
+			
+			if Return1 == nil then break end
+			Child = Return1
+			Child1 = Return1
+		else
+			if Return2.child == Alternate1.child then
+				local Child2 = Return2.child
+				while Child2 do
+					if Child2 == Child then
+						InvariantFunction(getNearestMountedFiber(Return2) == Return2, "Unable to find node on an unmounted component.")
+						
+						return Return
+					elseif Child2 == Child1 then
+						InvariantFunction(getNearestMountedFiber(Return2) == Return2, "Unable to find node on an unmounted component.")
+						
+						return Alternate
+					else
+						Child2 = Child2.sibling
+					end
+				end
+				InvariantFunction(false, "Unable to find node on an unmounted component.")
 			end
-			if var8 ~= var7 then
-				local _return = var8.return_
-				local sibling = var8.sibling
-				while not sibling do
-					if _return and _return ~= var7 then
-						var8 = _return
+			if Child.return_ == Child1.return_ then
+				Flag = false
+				local Child3 = Return2.child
+				while Child3 do
+					if Child3 == Child then
+						Flag = true
+						Child = Return2
+						Child1 = Alternate1
+						break
+					end
+					if Child3 ~= Child1 then
+						Child3 = Child3.sibling
 						continue
 					end
-					return nil
+					Flag = true
+					Child1 = Return2
+					Child = Alternate1
+					break
 				end
-				sibling.return_ = _return
-				var8 = sibling
-			end
-			return nil
-		end
-		return var8
-	end
-	return nil
-end
-
-function t.findCurrentHostFiberWithNoPortals(p4)
-	-- upvalues: findCurrentFiberUsingSlowPath (ref), hostComponent (ref), hostText (ref), enableFundamentalAPI (ref), fundamentalComponent (ref), hostPortal (ref)
-	local var9 = findCurrentFiberUsingSlowPath(p4)
-	
-	if not var9 then
-		return nil
-	end
-	local child
-	local var10 = var9
-	while true do
-		child = var10.child
-		if var10.tag ~= hostComponent and var10.tag ~= hostText and (not enableFundamentalAPI or var10.tag ~= fundamentalComponent) then
-			if child and var10.tag ~= hostPortal then
-				child.return_ = var10
-				var10 = child
-				continue
-			end
-			if var10 ~= var9 then
-				local _return = var10.return_
-				local sibling = var10.sibling
-				while not sibling do
-					if _return and _return ~= var9 then
-						var10 = _return
-						continue
+				if not Flag then
+					local Child4 = Alternate1.child
+					while Child4 do
+						if Child4 == Child then
+							Flag = true
+							Child = Alternate1
+							Child1 = Return2
+							break
+						end
+						if Child4 ~= Child1 then
+							Child4 = Child4.sibling
+							continue
+						end
+						Flag = true
+						Child1 = Alternate1
+						Child = Return2
+						break
 					end
-					return nil
+					InvariantFunction(Flag, "Child was not found in either parent set. This indicates a bug in React related to the return pointer. Please file an issue.")
 				end
-				sibling.return_ = _return
-				var10 = sibling
+			else
+				Child = Return2
+				Child1 = Alternate1
 			end
+			InvariantFunction(Child.alternate == Child1, "Return fibers should always be each others' alternates. This error is likely caused by a bug in React. Please file an issue.")
+		end
+	end
+	InvariantFunction(Child.tag == HostRoot, "Unable to find node on an unmounted component.")
+	
+	return if Child.stateNode.current == Child then Return else Alternate
+end
+
+return {
+	getNearestMountedFiber = getNearestMountedFiber,
+	getSuspenseInstanceFromFiber = function(p1) --[[ Line: 84 ]]
+		-- upvalues: SuspenseComponent (copy)
+		if p1.tag == SuspenseComponent then
+			local MemoizedState = p1.memoizedState
+			
+			if MemoizedState == nil then
+				local Alternate = p1.alternate
+				
+				if Alternate ~= nil then
+					MemoizedState = Alternate.memoizedState
+				end
+			end
+			if MemoizedState then
+				return MemoizedState.dehydrated
+			end
+		end
+		return nil
+	end,
+	getContainerFromFiber = function(p1) --[[ Line: 100 ]]
+		-- upvalues: HostRoot (copy)
+		return if p1.tag == HostRoot then p1.stateNode.containerInfo else nil
+	end,
+	isFiberMounted = function(Return): boolean --[[ Line: 104 ]]
+		-- upvalues: getNearestMountedFiber (copy)
+		return getNearestMountedFiber(Return) == Return
+	end,
+	isMounted = function(p1): boolean --[[ Line: 110 ]]
+		-- upvalues: ReactGlobalsModule (copy), ReactCurrentOwner (copy), ClassComponent (copy), Console (copy), GetComponentNameFunction (copy), GetFunction (copy), getNearestMountedFiber (copy)
+		if ReactGlobalsModule.__DEV__ then
+			local Current = ReactCurrentOwner.current
+			
+			if Current ~= nil and Current.tag == ClassComponent then
+				local StateNode = Current.stateNode
+				
+				if not StateNode._warnedAboutRefsInRender then
+					Console.error("%s is accessing isMounted inside its render() function. render() should be a pure function of props and state. It should never access something that requires stale data from the previous render, such as refs. Move this logic to componentDidMount and componentDidUpdate instead.", GetComponentNameFunction(Current.type) or "A component")
+				end
+				StateNode._warnedAboutRefsInRender = true
+			end
+		end
+		local GetResult = GetFunction(p1)
+		
+		return if GetResult then getNearestMountedFiber(GetResult) == GetResult else false
+	end,
+	findCurrentFiberUsingSlowPath = findCurrentFiberUsingSlowPath,
+	findCurrentHostFiber = function(p1) --[[ Line: 282 ]]
+		-- upvalues: findCurrentFiberUsingSlowPath (copy), HostComponent (copy), HostText (copy)
+		local CurrentFiberUsingSlowPath = findCurrentFiberUsingSlowPath(p1)
+		
+		if not CurrentFiberUsingSlowPath then
 			return nil
 		end
-		return var10
-	end
-	return nil
-end
-
-function t.isFiberSuspenseAndTimedOut(p5)
-	-- upvalues: suspenseComponent (ref)
-	local memoizedState = p5.memoizedState
-	
-	return p5.tag == suspenseComponent and (memoizedState ~= nil and memoizedState.dehydrated == nil)
-end
-
-function t.doesFiberContain(p5, p6)
-	local var11 = p6
-	local alternate = p5.alternate
-	while var11 ~= nil do
-		if var11 ~= p5 and var11 ~= alternate then
-			var11 = var11.return_
-			continue
+		local Return_ = CurrentFiberUsingSlowPath
+		while true do
+			local Child = Return_.child
+			if Return_.tag == HostComponent or Return_.tag == HostText then
+				return Return_
+			elseif Child then
+				Child.return_ = Return_
+				Return_ = Child
+			else
+				if Return_ == CurrentFiberUsingSlowPath then
+					return nil
+				end
+				local Return = Return_.return_
+				local Sibling = Return_.sibling
+				while not Sibling do
+					if not Return or Return == CurrentFiberUsingSlowPath then
+						return nil
+					end
+				end
+				Sibling.return_ = Return
+				Return_ = Sibling
+			end
 		end
-		return true
+	end,
+	findCurrentHostFiberWithNoPortals = function(p2) --[[ Line: 321 ]]
+		-- upvalues: findCurrentFiberUsingSlowPath (copy), HostComponent (copy), HostText (copy), EnableFundamentalAPI (copy), FundamentalComponent (copy), HostPortal (copy)
+		local CurrentFiberUsingSlowPath = findCurrentFiberUsingSlowPath(p2)
+		
+		if not CurrentFiberUsingSlowPath then
+			return nil
+		end
+		local Return_ = CurrentFiberUsingSlowPath
+		while true do
+			local Child = Return_.child
+			if Return_.tag == HostComponent or (Return_.tag == HostText or EnableFundamentalAPI and Return_.tag == FundamentalComponent) then
+				return Return_
+			elseif Child and Return_.tag ~= HostPortal then
+				Child.return_ = Return_
+				Return_ = Child
+			else
+				if Return_ == CurrentFiberUsingSlowPath then
+					return nil
+				end
+				local Return = Return_.return_
+				local Sibling = Return_.sibling
+				while not Sibling do
+					if not Return or Return == CurrentFiberUsingSlowPath then
+						return nil
+					end
+				end
+				Sibling.return_ = Return
+				Return_ = Sibling
+			end
+		end
+	end,
+	isFiberSuspenseAndTimedOut = function(p3): boolean --[[ Line: 363 ]]
+		-- upvalues: SuspenseComponent (copy)
+		local MemoizedState = p3.memoizedState
+		
+		return p3.tag == SuspenseComponent and (MemoizedState ~= nil and MemoizedState.dehydrated == nil)
+	end,
+	doesFiberContain = function(Return, Return1): boolean --[[ Line: 370 ]]
+		local Return2 = Return1
+		local Alternate = Return.alternate
+		while Return2 ~= nil do
+			if Return2 == Return or Return2 == Alternate then
+				return true
+			end
+			Return2 = Return2.return_
+		end
+		return false
 	end
-	return false
-end
-
-return t
+}

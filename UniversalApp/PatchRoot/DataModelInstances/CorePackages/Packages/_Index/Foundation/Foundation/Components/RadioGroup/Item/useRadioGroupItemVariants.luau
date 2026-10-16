@@ -1,14 +1,14 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.InternalInput)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Enums.ControlState)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local _ = require(foundation.Components.Types)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.InternalInput)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local _ = require(Foundation.Enums.ControlState)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local _ = require(Foundation.Components.Types)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1)
-	-- upvalues: inputSizeModule (ref)
+local function variantsFactory(p1) --[[ Line: 28 ]]
+	-- upvalues: InputSizeModule (copy)
 	return {
 		common = {
 			input = {
@@ -21,25 +21,25 @@ local function variantsFactory(p1)
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				input = {
 					size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
 				},
 				checkmark = { tag = "size-150" }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				input = {
 					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
 				},
 				checkmark = { tag = "size-200" }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				input = {
 					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
 				},
 				checkmark = { tag = "size-250" }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				input = {
 					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
 				},
@@ -49,9 +49,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local radioItem = variantsContextModule.useVariants("RadioItem", variantsFactory, p1)
+return function(p1, p2) --[[ Line: 61 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local RadioItem = VariantsContextModule.useVariants("RadioItem", variantsFactory, p1)
 	
-	return composeStyleVariantModule(radioItem.common, radioItem.sizes[p2])
+	return ComposeStyleVariantModule(RadioItem.common, RadioItem.sizes[p2])
 end

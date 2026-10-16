@@ -1,6 +1,6 @@
-﻿local t = {}
+﻿local ImagesInverseModule = {}
 
-for i, v in require(script.Parent.Images) do
-	t[v] = i
+for i, value in require(script.Parent.Images) do
+	ImagesInverseModule[value] = i
 end
-return t
+return ImagesInverseModule

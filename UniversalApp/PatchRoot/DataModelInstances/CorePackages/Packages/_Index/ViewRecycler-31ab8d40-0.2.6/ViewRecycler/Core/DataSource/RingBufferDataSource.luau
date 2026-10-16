@@ -1,127 +1,135 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Types)
-local itemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
-local mutationControllerModule = require(script.Parent.MutationController)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Types)
+local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
+local MutationControllerModule = require(script.Parent.MutationController)
 
-local function getItems(p1, p2, p3, p4)
-	local list = table.create(math.max(0, p4 - p3 + 1))
+local function getItems(Count: number, Callback, p1: number, p2: number) --[[ Line: 26 ]]
+	local Buffer = table.create((math.max(0, p2 - p1 + 1)))
 	
-	for i = p3, math.min(p4, p1) do
-		table.insert(list, p2(i))
+	for i = p1, math.min(p2, Count) do
+		table.insert(Buffer, Callback(i))
 	end
-	return list
+	return Buffer
 end
 
-return function(p5, p6, p7)
-	-- upvalues: itemKeyRegistryModule (ref), mutationControllerModule (ref), getItems (ref), dataSourceChangeTypeModule (ref)
-	assert(p5 > 0 and p5 % 1 == 0, "DataSource.ringBuffer: capacity must be a positive integer")
-	p6 = p6 or {}
-	assert(#p6 <= p5, "DataSource.ringBuffer: initial values exceed capacity")
-	local t = {}
-	local t_1 = {}
-	local var1 = itemKeyRegistryModule.create(p7, "DataSource.ringBuffer")
-	local var2 = var1.rebuild(p6)
-	local var3 = 1
-	local p5Count = #p6
+return function(Index: number, p3, p4) --[[ Line: 34 | Named "createRingBufferDataSource" ]]
+	-- upvalues: ItemKeyRegistryModule (copy), MutationControllerModule (copy), getItems (copy), DataSourceChangeTypeModule (copy)
+	local Values: boolean = Index > 0 and Index % 1 == 0
+	assert(Values, "DataSource.ringBuffer: capacity must be a positive integer")
+	local P4 = p3 or {}
+	assert(#P4 <= Index, "DataSource.ringBuffer: initial values exceed capacity")
+	Values = {}
+	local Keys = {}
+	local DataSourceRingBuffer = ItemKeyRegistryModule.create(p4, "DataSource.ringBuffer")
+	local RebuildResult = DataSourceRingBuffer.rebuild(P4)
+	local Head = 1
+	local CountP4 = #P4
 	
-	for i, v in p6 do
-		t[i] = v
-		t_1[i] = var2[i]
+	for i, value in P4 do
+		Values[i] = value
+		Keys[i] = RebuildResult[i]
 	end
-	local var4 = mutationControllerModule(function()
-		-- upvalues: p5Count (write)
-		return p5Count
-	end, function()
-		-- upvalues: t (write), t_1 (write), var3 (write), p5Count (write), var1 (ref)
+	local MutationControllerModuleResult = MutationControllerModule(function() --[[ Line: 49 ]]
+		-- upvalues: CountP4 (ref)
+		return CountP4
+	end, function() --[[ Line: 51 ]]
+		-- upvalues: Values (ref), Keys (ref), Head (ref), CountP4 (ref), DataSourceRingBuffer (copy)
 		return {
-			values = table.clone(t),
-			keys = table.clone(t_1),
-			head = var3,
-			count = p5Count,
-			keyRegistry = var1.snapshot()
+			values = table.clone(Values),
+			keys = table.clone(Keys),
+			head = Head,
+			count = CountP4,
+			keyRegistry = DataSourceRingBuffer.snapshot()
 		}
-	end, function(p8)
-		-- upvalues: t (write), t_1 (write), var3 (write), p5Count (write), var1 (ref)
-		t = p8.values
-		t_1 = p8.keys
-		var3 = p8.head
-		p5Count = p8.count
-		var1.restore(p8.keyRegistry)
+	end, function(p5) --[[ Line: 59 ]]
+		-- upvalues: Values (ref), Keys (ref), Head (ref), CountP4 (ref), DataSourceRingBuffer (copy)
+		Values = p5.values
+		Keys = p5.keys
+		Head = p5.head
+		CountP4 = p5.count
+		DataSourceRingBuffer.restore(p5.keyRegistry)
 	end)
 	
-	local function _(p8)
-		-- upvalues: var3 (write), p5 (ref)
-		return (var3 + p8 - 2) % p5 + 1
+	local function _(p5): number --[[ Line: 67 | Named "physical" ]]
+		-- upvalues: Head (ref), Index (copy)
+		return (Head + p5 - 2) % Index + 1
 	end
 	
-	local var5 = nil
-	
-	return {
-		getItemCount = function()
-			-- upvalues: p5Count (write)
-			return p5Count
+	local v1 = nil
+	v1 = {
+		getItemCount = function() --[[ Line: 73 ]]
+			-- upvalues: CountP4 (ref)
+			return CountP4
 		end,
-		getItem = function(p8)
-			-- upvalues: t (write), var3 (write), p5 (ref)
-			return t[(var3 + p8 - 2) % p5 + 1]
+		getItem = function(p5) --[[ Line: 76 ]]
+			-- upvalues: Values (ref), Head (ref), Index (copy)
+			return Values[(Head + p5 - 2) % Index + 1]
 		end,
-		getItemKey = function(p8)
-			-- upvalues: t_1 (write), var3 (write), p5 (ref)
-			return t_1[(var3 + p8 - 2) % p5 + 1]
+		getItemKey = function(p5) --[[ Line: 79 ]]
+			-- upvalues: Keys (ref), Head (ref), Index (copy)
+			return Keys[(Head + p5 - 2) % Index + 1]
 		end,
-		getItems = function(p8, p9)
-			-- upvalues: getItems (copy), p5Count (write), var5 (write)
-			return getItems(p5Count, var5.getItem, p8, p9)
+		getItems = function(p5, p6) --[[ Line: 82 ]]
+			-- upvalues: getItems (upval), CountP4 (ref), v1 (ref)
+			return (getItems(CountP4, v1.getItem, p5, p6))
 		end,
-		subscribe = var4.subscribe,
-		transaction = var4.transaction,
-		push = function(p8)
-			-- upvalues: p5Count (write), p5 (ref), var3 (write), t_1 (write), var1 (ref), t (write), var4 (ref), dataSourceChangeTypeModule (copy)
-			if p5Count == p5 then
-				local var6 = var3
-				local var7 = t_1[var6]
-				local var8 = var1.replace(var7, p8, p5)
-				t[var6] = p8
-				t_1[var6] = var8
-				var3 = var3 % p5 + 1
-				var4.emitMany({
+		subscribe = MutationControllerModuleResult.subscribe,
+		transaction = MutationControllerModuleResult.transaction,
+		push = function(p5) --[[ Line: 89 ]]
+			-- upvalues: CountP4 (ref), Index (copy), Head (ref), Keys (ref), DataSourceRingBuffer (copy), Values (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+			local Count: number = CountP4
+			
+			if CountP4 == Index then
+				local Head1: number = Head
+				local Key = Keys[Head1]
+				local ReplaceResult = DataSourceRingBuffer.replace(Key, p5, Index)
+				Values[Head1] = p5
+				Keys[Head1] = ReplaceResult
+				Head = Head % Index + 1
+				MutationControllerModuleResult.emitMany({
 					{
 						index = 1,
-						type = dataSourceChangeTypeModule.Remove,
-						keys = { var7 }
+						type = DataSourceChangeTypeModule.Remove,
+						keys = { Key }
 					},
 					{
-						type = dataSourceChangeTypeModule.Insert,
-						index = p5,
-						keys = { var8 }
+						type = DataSourceChangeTypeModule.Insert,
+						index = Index,
+						keys = { ReplaceResult }
 					}
-				}, p5Count)
+				}, Count)
+				
+				return
+			else
+				local ClaimResult = DataSourceRingBuffer.claim(p5, CountP4 + 1)
+				local NewHead = (Head + (CountP4 + 1) - 2) % Index + 1
+				Values[NewHead] = p5
+				Keys[NewHead] = ClaimResult
+				CountP4 += 1
+				MutationControllerModuleResult.emit({
+					type = DataSourceChangeTypeModule.Insert,
+					index = CountP4,
+					keys = { ClaimResult }
+				}, Count)
+			end
+		end,
+		clear = function() --[[ Line: 113 ]]
+			-- upvalues: CountP4 (ref), Values (ref), Keys (ref), DataSourceRingBuffer (copy), Head (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+			local Count: number = CountP4
+			
+			if Count ~= 0 then
+				Values = {}
+				Keys = {}
+				DataSourceRingBuffer.clear()
+				Head = 1
+				CountP4 = 0
+				MutationControllerModuleResult.emit({ type = DataSourceChangeTypeModule.Reset, keys = {} }, Count)
 				
 				return
 			end
-			local var9 = var1.claim(p8, p5Count + 1)
-			local var10 = (var3 + (p5Count + 1) - 2) % p5 + 1
-			t[var10] = p8
-			t_1[var10] = var9
-			p5Count += 1
-			var4.emit({
-				type = dataSourceChangeTypeModule.Insert,
-				index = p5Count,
-				keys = { var9 }
-			}, p5Count)
-		end,
-		clear = function()
-			-- upvalues: p5Count (write), t (write), t_1 (write), var1 (ref), var3 (write), var4 (ref), dataSourceChangeTypeModule (copy)
-			if p5Count == 0 then
-				return
-			end
-			t = {}
-			t_1 = {}
-			var1.clear()
-			var3 = 1
-			p5Count = 0
-			var4.emit({ type = dataSourceChangeTypeModule.Reset, keys = {} }, p5Count)
 		end
 	}
+	
+	return v1
 end

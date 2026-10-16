@@ -1,47 +1,41 @@
-﻿local assignModule = require(script.Parent.assign)
+﻿local AssignModule = require(script.Parent.assign)
 
-return function(p1, p2, p3)
-	-- upvalues: assignModule (ref)
-	local var1 = assignModule({ leading = false, trailing = true }, p3)
-	local var2 = 0
-	local var3 = nil
-	local var4 = false
-	
-	local var5 = function() end
-	
-	if var1.trailing then
-		var5 = function(p4, p5, ...)
-			-- upvalues: var2 (write), var4 (write), p1 (ref)
-			if var2 == p4 then
-				var4 = false
-				
-				if not p5 then
-					p1(...)
-				end
+return function(Callback, Delay, p1) --[[ Line: 30 | Named "debounce" ]]
+	-- upvalues: AssignModule (copy)
+	local AssignModuleResult = AssignModule({ leading = false, trailing = true }, p1)
+	local Count = 0
+	local DelayedThread = nil
+	local Flag = false
+	local v1 = if AssignModuleResult.trailing then function(Count1, p2, ...) --[[ Line: 44 ]]
+		-- upvalues: Count (ref), Flag (ref), Callback (copy)
+		if Count == Count1 then
+			Flag = false
+			
+			if not p2 then
+				Callback(...)
 			end
 		end
-	elseif var1.leading then
-		var5 = function(p4)
-			-- upvalues: var2 (write), var4 (write)
-			if var2 == p4 then
-				var4 = false
-			end
+	end elseif AssignModuleResult.leading then function(Count1) --[[ Line: 56 ]]
+		-- upvalues: Count (ref), Flag (ref)
+		if Count == Count1 then
+			Flag = false
 		end
-	end
-	return function(...)
-		-- upvalues: var2 (write), var1 (ref), var4 (write), var3 (write), p1 (ref), p2 (ref), var5 (write)
-		var2 += 1
-		local var6 = var2
-		local var7 = var1.leading and not var4
+	end else function() --[[ Line: 41 ]] end
+	
+	return function(...) --[[ Line: 63 ]]
+		-- upvalues: Count (ref), AssignModuleResult (copy), Flag (ref), DelayedThread (ref), Callback (copy), Delay (copy), v1 (ref)
+		Count += 1
+		local Count1: number = Count
+		local NoFlag: boolean = AssignModuleResult.leading and not Flag
 		
-		if var3 then
-			task.cancel(var3)
-			var3 = nil
+		if DelayedThread then
+			task.cancel(DelayedThread)
+			DelayedThread = nil
 		end
-		if var7 then
-			var4 = true
-			p1(...)
+		if NoFlag then
+			Flag = true
+			Callback(...)
 		end
-		var3 = task.delay(p2, var5, var6, var7, ...)
+		DelayedThread = task.delay(Delay, v1, Count1, NoFlag, ...)
 	end
 end

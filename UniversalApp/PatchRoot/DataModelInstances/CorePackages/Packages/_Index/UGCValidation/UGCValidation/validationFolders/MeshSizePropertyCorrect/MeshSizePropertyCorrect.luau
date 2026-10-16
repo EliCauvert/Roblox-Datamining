@@ -1,96 +1,96 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local floatEqualsModule = require(parent.util.floatEquals)
-local getMeshSizeModule = require(parent.util.getMeshSize)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.uploadEnum,
-		validationEnumsModule.SharedDataMember.consumerConfig
-	},
-	conditionalData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	expectedFailures = {}
-}
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local FloatEqualsModule = require(Parent.util.floatEquals)
+local GetMeshSizeModule = require(Parent.util.getMeshSize)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
 
-local function _(p1, p2)
-	-- upvalues: floatEqualsModule (ref)
-	return floatEqualsModule(p1.X, p2.X, 0.00001) and (floatEqualsModule(p1.Y, p2.Y, 0.00001) and floatEqualsModule(p1.Z, p2.Z, 0.00001))
+local function _(Vector, Vector1) --[[ Line: 27 | Named "vector3Equals" ]]
+	-- upvalues: FloatEqualsModule (copy)
+	return FloatEqualsModule(Vector.X, Vector1.X, 0.00001) and (FloatEqualsModule(Vector.Y, Vector1.Y, 0.00001) and FloatEqualsModule(Vector.Z, Vector1.Z, 0.00001))
 end
 
-local function validateSingleMeshPart(p1, p2, p3)
-	-- upvalues: getEditableMeshFromContextModule (ref), errorSourceStringsModule (ref), getMeshSizeModule (ref), floatEqualsModule (ref)
-	local t = {
+local function validateSingleMeshPart(RootInstance, p1, p2) --[[ Line: 32 ]]
+	-- upvalues: GetEditableMeshFromContextModule (copy), ErrorSourceStringsModule (copy), GetMeshSizeModule (copy), FloatEqualsModule (copy)
+	local config = {
 		fieldName = "MeshId",
-		fullName = p1:GetFullName(),
-		contentId = p1.MeshId,
-		context = p1.Name
+		fullName = RootInstance:GetFullName(),
+		contentId = RootInstance.MeshId,
+		context = RootInstance.Name
 	}
-	local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p2)
+	local MeshId, MeshId2 = GetEditableMeshFromContextModule(RootInstance, "MeshId", p1)
 	
-	if not var1 then
-		p3:fail(errorSourceStringsModule.Keys.MeshSize_LoadFailed, { meshName = p1.Name }, p1)
+	if not MeshId then
+		p2:fail(ErrorSourceStringsModule.Keys.MeshSize_LoadFailed, { meshName = RootInstance.Name }, RootInstance)
 		
 		return
 	end
-	t.editableMesh = var2
-	local var3 = getMeshSizeModule(t)
-	local meshSize = p1.MeshSize
+	config.editableMesh = MeshId2
+	local MeshSizeModule = GetMeshSizeModule(config)
+	local MeshSize = RootInstance.MeshSize
 	
-	if not floatEqualsModule(meshSize.X, var3.X, 0.00001) or (not floatEqualsModule(meshSize.Y, var3.Y, 0.00001) or not floatEqualsModule(meshSize.Z, var3.Z, 0.00001)) then
-		p3:fail(errorSourceStringsModule.Keys.MeshSize_Mismatch, { meshName = p1.Name }, p1)
+	if not FloatEqualsModule(MeshSize.X, MeshSizeModule.X, 0.00001) or (not FloatEqualsModule(MeshSize.Y, MeshSizeModule.Y, 0.00001) or not FloatEqualsModule(MeshSize.Z, MeshSizeModule.Z, 0.00001)) then
+		p2:fail(ErrorSourceStringsModule.Keys.MeshSize_Mismatch, { meshName = RootInstance.Name }, RootInstance)
 	end
 end
 
-function t.run(p1, p2)
-	-- upvalues: validationEnumsModule (ref), validateSingleMeshPart (ref), constantsModule (ref)
-	local rootInstance = p2.rootInstance
-	local assetType = p2.uploadEnum.assetType
-	local var1 = p2.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
-	
-	if p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then return end
-	local t = {}
-	
-	if p2.renderMeshesData then
-		local descendants = rootInstance:GetDescendants()
-		table.insert(descendants, rootInstance)
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+	},
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.uploadEnum,
+		ValidationEnumsModule.SharedDataMember.consumerConfig
+	},
+	conditionalData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
+	expectedFailures = {},
+	run = function(p1, p2) --[[ Line: 55 ]]
+		-- upvalues: ValidationEnumsModule (copy), validateSingleMeshPart (copy), ConstantsModule (copy)
+		local RootInstance = p2.rootInstance
+		local AssetType = p2.uploadEnum.assetType
+		local IsValidationEnvMatch = p2.consumerConfig.validationEnv == ValidationEnumsModule.ValidationEnv.Backend
 		
-		for i, v in descendants do
-			local name = p2.renderMeshesData[v.Name]
+		if p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC then return end
+		local EditableMeshes = {}
+		
+		if p2.renderMeshesData then
+			local Descendants = RootInstance:GetDescendants()
+			table.insert(Descendants, RootInstance)
 			
-			if name and name.editable then
-				t[v] = { MeshId = { created = false, instance = name.editable } }
+			for _, descendant in Descendants do
+				local RenderMeshes = p2.renderMeshesData[descendant.Name]
+				
+				if RenderMeshes and RenderMeshes.editable then
+					EditableMeshes[descendant] = {
+						MeshId = { created = false, instance = RenderMeshes.editable }
+					}
+				end
+			end
+		end
+		local config = {
+			assetTypeEnum = AssetType,
+			isServer = IsValidationEnvMatch,
+			editableMeshes = EditableMeshes
+		}
+		
+		if Enum.AssetType.DynamicHead == AssetType then
+			validateSingleMeshPart(RootInstance, config, p1)
+			
+			return
+		end
+		local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[AssetType]
+		
+		if not ASSETTYPE then return end
+		for subPart in pairs(ASSETTYPE.subParts) do
+			local Child = RootInstance:FindFirstChild(subPart)
+			
+			if Child then
+				validateSingleMeshPart(Child, config, p1)
 			end
 		end
 	end
-	local t_1 = {
-		assetTypeEnum = assetType,
-		isServer = var1,
-		editableMeshes = t
-	}
-	
-	if Enum.AssetType.DynamicHead == assetType then
-		validateSingleMeshPart(rootInstance, t_1, p1)
-		
-		return
-	end
-	local var2 = constantsModule.ASSET_TYPE_INFO[assetType]
-	
-	if not var2 then return end
-	for i in pairs(var2.subParts) do
-		local var3 = rootInstance:FindFirstChild(i)
-		
-		if var3 then
-			validateSingleMeshPart(var3, t_1, p1)
-		end
-	end
-end
-
-return t
+}

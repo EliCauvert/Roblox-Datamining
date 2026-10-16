@@ -1,166 +1,170 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script.Parent
-local isArrayModule = require(parent.Array.isArray)
-local _ = require(parent.Parent.ES7Types)
-local formatValue = nil
-local formatObjectValue = nil
-local formatArray = nil
-local formatObject = nil
-local getObjectTag = nil
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script.Parent
+local IsArrayModule = require(Parent.Array.isArray)
+local _ = require(Parent.Parent.ES7Types)
+local Callback = nil
+local Callback1 = nil
+local Callback4 = nil
+local Callback3 = nil
+local Callback2 = nil
 
-local function inspect(p1, p2)
-	-- upvalues: formatValue (write)
-	p2 = p2 or { depth = 2 }
-	local depth = p2.depth or 2
-	p2.depth = if depth >= 0 then depth else 2
+local function inspect(p1, p2) --[[ Line: 51 ]]
+	-- upvalues: Callback (ref)
+	local P1 = p2 or { depth = 2 }
+	local Depth = P1.depth or 2
+	P1.depth = if Depth >= 0 then Depth else 2
 	
-	return formatValue(p1, {}, p2)
+	return Callback(p1, {}, P1)
 end
 
-local function _(p1, p2)
-	return type(p1) == "number" and (p1 <= p2 and (p1 >= 1 and math.floor(p1) == p1))
+local function _(Value: number, p1): boolean --[[ Line: 58 | Named "isIndexKey" ]]
+	return type(Value) == "number" and (Value <= p1 and Value >= 1) and math.floor(Value) == Value
 end
 
-local _ = function(p1)
-	local var1 = 1
-	local var2 = rawget(p1, var1)
-	while var2 ~= nil do
-		var1 += 1
-		var2 = rawget(p1, var1)
+local _ = function(p1): number --[[ Line: 65 | Named "getTableLength" ]]
+	local Count = 1
+	local RawValue = rawget(p1, Count)
+	while RawValue ~= nil do
+		Count += 1
+		RawValue = rawget(p1, Count)
 	end
-	return var1 - 1
+	return Count - 1
 end
 
-local function sortKeysForPrinting(p2, p3)
-	local var3 = type(p2)
-	local var4 = type(p3)
+local function sortKeysForPrinting(A, B): boolean --[[ Line: 75 ]]
+	local ValueType = type(A)
+	local ValueType1 = type(B)
 	
-	return if var3 == var4 and (var3 == "number" or var3 == "string") then p2 < p3 else var3 < var4
+	return if ValueType == ValueType1 and (ValueType == "number" or ValueType == "string") then A < B else ValueType < ValueType1
 end
 
-local _ = function(p2)
+local _ = function(p2) --[[ Line: 88 | Named "rawpairs" ]]
 	return next, p2, nil
 end
 
-local function getFragmentedKeys(p2)
-	-- upvalues: sortKeysForPrinting (ref)
-	local t = {}
-	local var3 = 0
-	local var4 = 1
-	local var5 = rawget(p2, var4)
-	while var5 ~= nil do
-		var4 += 1
-		var5 = rawget(p2, var4)
+local function getFragmentedKeys(p2) --[[ Line: 92 ]]
+	-- upvalues: sortKeysForPrinting (copy)
+	local List = {}
+	local Count = 0
+	local Count1 = 1
+	local RawValue = rawget(p2, Count1)
+	while RawValue ~= nil do
+		Count1 += 1
+		RawValue = rawget(p2, Count1)
 	end
-	local var6 = var4 - 1
+	local CountDelta = Count1 - 1
 	
-	for i, v in next, p2 do
-		if not (type(i) == "number" and (i <= var6 and (i >= 1 and math.floor(i) == i))) then
-			var3 += 1
-			t[var3] = i
+	for i, _ in next, p2 do
+		if type(i) ~= "number" or (i > CountDelta or (i < 1 or math.floor(i) ~= i)) then
+			Count += 1
+			List[Count] = i
 		end
 	end
-	table.sort(t, sortKeysForPrinting)
+	table.sort(List, sortKeysForPrinting)
 	
-	return t, var3, var6
+	return List, Count, CountDelta
 end
 
-formatValue = function(p3, p4, p5)
-	-- upvalues: httpService (ref), formatObjectValue (write)
-	local var7 = typeof(p3)
+Callback = function(JSON, p3, p4) --[[ Line: 106 | Named "formatValue" ]]
+	-- upvalues: HttpService (copy), Callback1 (ref)
+	local ValueType = typeof(JSON)
 	
-	if var7 == "string" then
-		return httpService:JSONEncode(p3)
-	elseif var7 == "number" then
-		return if p3 == p3 then if p3 == 1e999 then "Infinity" elseif p3 == -1e999 then "-Infinity" else tostring(p3) else "NaN"
-	elseif var7 == "function" then
-		local var8 = "[function"
-		local debugInfo = debug.info(p3, "n")
-		
-		if debugInfo ~= nil and debugInfo ~= "" then
-			var8 ..= " " .. debugInfo
-		end
-		return var8 .. "]"
-	else
-		return if var7 == "table" then formatObjectValue(p3, p4, p5) else tostring(p3)
+	if ValueType == "string" then
+		return HttpService:JSONEncode(JSON)
 	end
+	if ValueType == "number" then
+		return if JSON == JSON then if JSON == 1e999 then "Infinity" elseif JSON == -1e999 then "-Infinity" else tostring(JSON) else "NaN"
+	end
+	if ValueType ~= "function" then
+		return if ValueType == "table" then Callback1(JSON, p3, p4) else tostring(JSON)
+	end
+	local Text = "[function"
+	local DebugInfo = debug.info(JSON, "n")
+	
+	if DebugInfo ~= nil and DebugInfo ~= "" then
+		Text ..= " " .. DebugInfo
+	end
+	return Text .. "]"
 end
 
-formatObjectValue = function(p3, p4, p5)
-	-- upvalues: formatValue (write), isArrayModule (ref), formatArray (write), formatObject (write)
-	if table.find(p4, p3) ~= nil then
+Callback1 = function(Value, List, p3) --[[ Line: 139 | Named "formatObjectValue" ]]
+	-- upvalues: Callback (ref), IsArrayModule (copy), Callback4 (ref), Callback3 (ref)
+	if table.find(List, Value) ~= nil then
 		return "[Circular]"
 	end
-	local list = { unpack(p4) }
-	table.insert(list, p3)
+	local List1 = { unpack(List) }
+	table.insert(List1, Value)
 	
-	if typeof(p3.toJSON) == "function" then
-		local var7 = p3:toJSON(p3)
+	if typeof(Value.toJSON) == "function" then
+		local JSON = Value:toJSON(Value)
 		
-		if var7 == p3 then
+		if JSON ~= Value then
+			return if typeof(JSON) == "string" then JSON else Callback(JSON, List1, p3)
 		end
-		return if typeof(var7) == "string" then var7 else formatValue(var7, list, p5)
-	else
-		return if isArrayModule(p3) then formatArray(p3, list, p5) else formatObject(p3, list, p5)
+	elseif IsArrayModule(Value) then
+		return Callback4(Value, List1, p3)
 	end
+	return Callback3(Value, List1, p3)
 end
 
-formatObject = function(p3, p4, p5)
-	-- upvalues: getFragmentedKeys (ref), getObjectTag (write), formatValue (write)
-	local var7 = ""
-	local var8 = getmetatable(p3)
+Callback3 = function(p3, p4, p5): string --[[ Line: 164 | Named "formatObject" ]]
+	-- upvalues: getFragmentedKeys (copy), Callback2 (ref), Callback (ref)
+	local Text = ""
+	local Meta = getmetatable(p3)
 	
-	if var8 and rawget(var8, "__tostring") then
-		return tostring(p3)
+	if Meta and rawget(Meta, "__tostring") then
+		return (tostring(p3))
 	end
-	local var9, var10, var11 = getFragmentedKeys(p3)
+	local FragmentedKeys, FragmentedKeys2, FragmentedKeys3 = getFragmentedKeys(p3)
 	
-	if var11 == 0 and var10 == 0 then
-		var7 ..= "{}"
+	if FragmentedKeys3 == 0 and FragmentedKeys2 == 0 then
+		Text ..= "{}"
 		
-		return var7
-	elseif p5.depth < #p4 then
-		var7 ..= "[" .. getObjectTag(p3) .. "]"
+		return Text
+	end
+	if p5.depth < #p4 then
+		Text ..= "[" .. Callback2(p3) .. "]"
 		
-		return var7
+		return Text
 	end
-	local t = {}
+	local List = {}
 	
-	for i = 1, var11 do
-		table.insert(t, formatValue(p3[i], p4, p5))
+	for i = 1, FragmentedKeys3 do
+		table.insert(List, (Callback(p3[i], p4, p5)))
 	end
-	for i_1 = 1, var10 do
-		local var12 = var9[i_1]
-		table.insert(t, var12 .. ": " .. formatValue(p3[var12], p4, p5))
+	for i1 = 1, FragmentedKeys2 do
+		local FragmentedKey = FragmentedKeys[i1]
+		table.insert(List, FragmentedKey .. ": " .. Callback(p3[FragmentedKey], p4, p5))
 	end
-	return var7 .. "{ " .. table.concat(t, ", ") .. " }"
+	return Text .. "{ " .. table.concat(List, ", ") .. " }"
 end
 
-formatArray = function(p6, p7, p8)
-	-- upvalues: formatValue (write)
-	local p18Count = #p6
+Callback4 = function(p6, p7, p8): string --[[ Line: 200 | Named "formatArray" ]]
+	-- upvalues: Callback (ref)
+	local CountP15 = #p6
 	
-	if p18Count == 0 then
+	if CountP15 == 0 then
 		return "[]"
-	elseif p8.depth < #p7 then
+	end
+	if p8.depth < #p7 then
 		return "[Array]"
 	end
-	local minValue = math.min(10, p18Count)
-	local var13 = p18Count - minValue
-	local t = {}
+	local Smallest = math.min(10, CountP15)
+	local CountPDelta = CountP15 - Smallest
+	local List = {}
 	
-	for i = 1, minValue do
-		t[i] = formatValue(p6[i], p7, p8)
+	for i = 1, Smallest do
+		List[i] = Callback(p6[i], p7, p8)
 	end
-	if var13 == 1 then
-		table.insert(t, "... 1 more item")
-	elseif var13 > 1 then
-		table.insert(t, ("... %s more items"):format(tostring(var13)))
+	if CountPDelta == 1 then
+		table.insert(List, "... 1 more item")
+	elseif CountPDelta > 1 then
+		table.insert(List, ("... %s more items"):format((tostring(CountPDelta))))
 	end
-	return "[" .. table.concat(t, ", ") .. "]"
+	return "[" .. table.concat(List, ", ") .. "]"
 end
 
-getObjectTag = function(_)
+Callback2 = function(_): string --[[ Line: 226 | Named "getObjectTag" ]]
 	return "Object"
 end
 

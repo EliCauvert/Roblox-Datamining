@@ -1,22 +1,16 @@
-﻿return function(p1, p2, p3)
-	local var1 = string.len(p1)
-	local var2 = if p3 and p3 < 1 then 1 else p3 or var1
+﻿return function(Text: string, Pattern, p1: number) --[[ Line: 16 | Named "lastIndexOf" ]]
+	local Length = string.len(Text)
+	local Length1 = if p1 and Length < p1 then Length elseif p1 and p1 < 1 then 1 elseif p1 then p1 else Length
 	
-	if p3 and var1 < p3 then
-		var2 = var1
+	if Pattern == "" then
+		return Length1
 	end
-	if p2 == "" then
-		return var2
-	end
-	local var3
-	local _ = nil
-	local var4 = nil
-	local var5 = 0
+	local v1 = nil
+	local v2 = 0
+	local v3 = nil
 	repeat
-		var3 = var4
-		local matchIndex, matchIndex_1 = string.find(p1, p2, var5 + 1, true)
-		var4 = matchIndex
-		var5 = matchIndex_1
-	until var4 == nil or var2 < var4
-	return if var3 == nil then -1 else var3
+		v3 = v1
+		v1, v3 = string.find(Text, Pattern, v2 + 1, true)
+	until v1 == nil or Length1 < v1
+	return if v3 == nil then -1 else v3
 end

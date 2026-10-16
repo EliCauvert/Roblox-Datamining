@@ -1,6 +1,6 @@
-﻿local t = {}
+﻿local WhitelistedIconAssetsModule = {}
 
-for i, v in string.split(require(script.Parent.Flags).FoundationImagesWhitelistedIconAssets, ",") do
-	t[v] = true
+for _, value in string.split(require(script.Parent.Flags).FoundationImagesWhitelistedIconAssets, ",") do
+	WhitelistedIconAssetsModule[value] = true
 end
-return t
+return WhitelistedIconAssetsModule

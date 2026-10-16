@@ -1,13 +1,13 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local object = require(parent.LuauPolyfill).Object
-local t = {}
-local var1 = require(parent.React).createContext(nil)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Object = require(Parent.LuauPolyfill).Object
+local ScrollViewContextModule = {}
+local Context = require(Parent.React).createContext(nil)
 
 if _G.__DEV__ then
-	var1.displayName = "ScrollViewContext"
+	Context.displayName = "ScrollViewContext"
 end
-t.default = var1
-t.HORIZONTAL = object.freeze({ horizontal = true })
-t.VERTICAL = object.freeze({ horizontal = false })
+ScrollViewContextModule.default = Context
+ScrollViewContextModule.HORIZONTAL = Object.freeze({ horizontal = true })
+ScrollViewContextModule.VERTICAL = Object.freeze({ horizontal = false })
 
-return t
+return ScrollViewContextModule

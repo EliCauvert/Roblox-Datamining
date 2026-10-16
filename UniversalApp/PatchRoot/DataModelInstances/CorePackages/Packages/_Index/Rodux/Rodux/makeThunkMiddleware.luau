@@ -1,27 +1,28 @@
-﻿local function tracebackReporter(p1)
-	return debug.traceback(p1)
+﻿local function tracebackReporter(Err) --[[ Line: 9 ]]
+	return debug.traceback(Err)
 end
 
-return function(p1)
-	-- upvalues: tracebackReporter (ref)
-	return function(p2, p3)
-		-- upvalues: p1 (ref), tracebackReporter (copy)
-		return function(p4)
-			-- upvalues: p3 (ref), p1 (copy), tracebackReporter (copy), p2 (ref)
-			if typeof(p4) ~= "function" then
-				return p2(p4)
+return function(p1) --[[ Line: 13 | Named "makeThunkMiddleware" ]]
+	-- upvalues: tracebackReporter (copy)
+	return function(Callback, p2) --[[ Line: 14 | Named "thunkMiddleware" ]]
+		-- upvalues: p1 (copy), tracebackReporter (upval)
+		return function(Callback1) --[[ Line: 15 ]]
+			-- upvalues: p2 (copy), p1 (upval), tracebackReporter (upval), Callback (copy)
+			if typeof(Callback1) ~= "function" then
+				return Callback(Callback1)
 			end
-			local ok, status = xpcall(function()
-				-- upvalues: p4 (ref), p3 (copy), p1 (copy)
-				return p4(p3, p1)
+			local Success, Result = xpcall(function() --[[ Line: 17 ]]
+				-- upvalues: Callback1 (copy), p2 (upval), p1 (upval)
+				return Callback1(p2, p1)
 			end, tracebackReporter)
 			
-			if ok then
-				return status
+			if Success then
+				return Result
+			else
+				p2._errorReporter.reportReducerError(p2:getState(), Callback1, { message = "Caught error in thunk", thrownValue = Result })
+				
+				return nil
 			end
-			p3._errorReporter.reportReducerError(p3:getState(), p4, { message = "Caught error in thunk", thrownValue = status })
-			
-			return nil
 		end
 	end
 end

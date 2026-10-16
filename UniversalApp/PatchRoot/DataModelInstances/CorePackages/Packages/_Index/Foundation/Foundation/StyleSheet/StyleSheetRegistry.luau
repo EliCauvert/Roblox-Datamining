@@ -1,225 +1,225 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = script.Parent.Parent
-local _ = require(parent.Enums.ColorMode)
-local deviceModule = require(parent.Enums.Device)
-local themeNameModule = require(parent.Enums.ThemeName)
-local _ = require(parent.Providers.Style.Tokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = script.Parent.Parent
+local _ = require(Parent.Enums.ColorMode)
+local DeviceModule = require(Parent.Enums.Device)
+local ThemeNameModule = require(Parent.Enums.ThemeName)
+local _ = require(Parent.Providers.Style.Tokens)
 local _ = require(script.Parent.Rules.Types)
-local flagsModule = require(parent.Utility.Flags)
-local devAssertModule = require(parent.Utility.devAssert)
-local getGeneratedRulesModule = require(parent.Utility.getGeneratedRules)
-local getMainGuiModule = require(parent.Utility.getMainGui)
-local getOverrideAttributesModule = require(script.Parent.getOverrideAttributes)
-local scaleValueModule = require(parent.Utility.scaleValue)
-local httpService = game:GetService("HttpService")
-local foundationStyleSheets = Instance.new("Folder")
+local FlagsModule = require(Parent.Utility.Flags)
+local DevAssertModule: (any, any) -> () = require(Parent.Utility.devAssert)
+local GetGeneratedRulesModule = require(Parent.Utility.getGeneratedRules)
+local GetMainGuiModule = require(Parent.Utility.getMainGui)
+local GetOverrideAttributesModule = require(script.Parent.getOverrideAttributes)
+local ScaleValueModule = require(Parent.Utility.scaleValue)
+local HttpService = game:GetService("HttpService")
+local FoundationStyleSheets = Instance.new("Folder")
 
-if flagsModule.FoundationDontParentToFoundationModule then
-	foundationStyleSheets.Name = "FoundationStyleSheets" .. httpService:GenerateGUID(false)
+if FlagsModule.FoundationDontParentToFoundationModule then
+	FoundationStyleSheets.Name = "FoundationStyleSheets" .. HttpService:GenerateGUID(false)
 else
-	foundationStyleSheets.Name = "FoundationStyleSheets"
+	FoundationStyleSheets.Name = "FoundationStyleSheets"
 end
-if flagsModule.FoundationDontParentToFoundationModule then
-	local var1 = getMainGuiModule()
-	devAssertModule(var1 ~= nil, "MainGui not found")
-	foundationStyleSheets.Parent = var1
+if FlagsModule.FoundationDontParentToFoundationModule then
+	local MainGuiModule = GetMainGuiModule()
+	DevAssertModule(MainGuiModule ~= nil, "MainGui not found")
+	FoundationStyleSheets.Parent = MainGuiModule
 else
-	foundationStyleSheets.Parent = foundation
+	FoundationStyleSheets.Parent = Foundation
 end
 local t = {}
-local t_1 = {}
-local var2 = false
+local t1 = {}
+local Flag = false
 
-local function createStyleSheet(p1, p2, p3, p4, p5)
-	-- upvalues: deviceModule (ref), themeNameModule (ref), foundationStyleSheets (ref), getOverrideAttributesModule (ref), getGeneratedRulesModule (ref)
-	p2 = p2 or deviceModule.Desktop
-	p3 = p3 or 1
-	p5 = p5 or themeNameModule.Default
-	local styleSheet = Instance.new("StyleSheet")
-	local var3 = `{p5}-`
-	styleSheet.Name = if p4 ~= nil then `{var3}{p1}-{p2}-{p3}` else `{var3}{p1}-{p2}-{p3}-{tostring(p4)}`
-	styleSheet.Parent = foundationStyleSheets
+local function createStyleSheet(ColorMode, Device, Scale, TokenOverrides, ThemeName) --[[ Line: 71 ]]
+	-- upvalues: DeviceModule (copy), ThemeNameModule (copy), FoundationStyleSheets (copy), GetOverrideAttributesModule (copy), GetGeneratedRulesModule (copy)
+	local Device1 = Device or DeviceModule.Desktop
+	local Scale1 = Scale or 1
+	local ThemeName1 = ThemeName or ThemeNameModule.Default
+	local StyleSheet = Instance.new("StyleSheet")
+	local Text: string = `{ThemeName1}-`
+	StyleSheet.Name = if TokenOverrides == nil then `{Text}{ColorMode}-{Device1}-{Scale1}` else `{Text}{ColorMode}-{Device1}-{Scale1}-{tostring(TokenOverrides)}`
+	StyleSheet.Parent = FoundationStyleSheets
 	
 	return {
 		refCount = 0,
-		themeName = p5,
-		colorMode = p1,
-		device = p2,
-		scale = p3,
-		tokenOverrides = p4,
-		overrideAttributes = getOverrideAttributesModule(p5, p1, p2, p4),
-		instance = styleSheet,
+		themeName = ThemeName1,
+		colorMode = ColorMode,
+		device = Device1,
+		scale = Scale1,
+		tokenOverrides = TokenOverrides,
+		overrideAttributes = GetOverrideAttributesModule(ThemeName1, ColorMode, Device1, TokenOverrides),
+		instance = StyleSheet,
 		tags = {},
-		rules = getGeneratedRulesModule(p5, p1, p2),
+		rules = GetGeneratedRulesModule(ThemeName1, ColorMode, Device1),
 		attributes = {}
 	}
 end
 
-local function createStyleRule(p1, p2)
-	-- upvalues: flagsModule (ref)
-	local text = "." .. p6
-	local var3 = if p1.modifier ~= nil then "" else ":" .. p5.modifier
-	local text_1 = text .. var28 .. (if p1.pseudo ~= nil then "" else " ::" .. p5.pseudo)
+local function createStyleRule(Rule, Tag) --[[ Line: 102 ]]
+	-- upvalues: FlagsModule (copy)
+	local Text = "." .. Tag
+	local Text1: string = if Rule.modifier == nil then "" else ":" .. Rule.modifier
+	local Text2 = Text .. Text1 .. (if Rule.pseudo == nil then "" else " ::" .. Rule.pseudo)
 	
-	if flagsModule.FoundationStyleRulePseudoName then
-		if p1.pseudoName ~= nil then
-			text_1 ..= " #" .. p5.pseudoName
+	if FlagsModule.FoundationStyleRulePseudoName then
+		if Rule.pseudoName ~= nil then
+			Text2 ..= " #" .. Rule.pseudoName
 		end
-		if p1.pseudo ~= nil and p1.pseudoName == nil then
-			text_1 ..= ", " .. text .. var28 .. " > " .. p5.pseudo
+		if Rule.pseudo ~= nil and Rule.pseudoName == nil then
+			Text2 ..= ", " .. Text .. Text1 .. " > " .. Rule.pseudo
 		end
-	elseif p1.pseudo ~= nil then
-		text_1 ..= ", " .. text .. var28 .. " > " .. p5.pseudo
+	elseif Rule.pseudo ~= nil then
+		Text2 ..= ", " .. Text .. Text1 .. " > " .. Rule.pseudo
 	end
-	local styleRule = Instance.new("StyleRule")
-	styleRule.Name = text_1
-	styleRule.Priority = p1.priority or 1
-	styleRule.Selector = text_1
-	styleRule:SetProperties(p1.properties)
+	local StyleRule = Instance.new("StyleRule")
+	StyleRule.Name = Text2
+	StyleRule.Priority = Rule.priority or 1
+	StyleRule.Selector = Text2
+	StyleRule:SetProperties(Rule.properties)
 	
-	return styleRule
+	return StyleRule
 end
 
-local function applyAttributes(p1, p2)
-	-- upvalues: flagsModule (ref), scaleValueModule (ref)
-	if not p2 then return end
-	for i, v in p2 do
-		if not p1.attributes[v.name] then
-			local name = p1.overrideAttributes[v.name]
-			local var3 = if name ~= nil then v.value else name
-			local var4 = if flagsModule.FoundationDisableTokenScaling then var3 else scaleValueModule(var3, p1.scale)
-			p1.attributes[v.name] = true
-			p1.instance:SetAttribute(v.name, var4)
+local function applyAttributes(StyleSheet, Attributes) --[[ Line: 130 ]]
+	-- upvalues: FlagsModule (copy), ScaleValueModule (copy)
+	if not Attributes then return end
+	for _, attribute in Attributes do
+		if not StyleSheet.attributes[attribute.name] then
+			local OverrideAttribute = StyleSheet.overrideAttributes[attribute.name]
+			local Value = if OverrideAttribute == nil then attribute.value else OverrideAttribute
+			StyleSheet.attributes[attribute.name] = true
+			StyleSheet.instance:SetAttribute(attribute.name, if FlagsModule.FoundationDisableTokenScaling then Value else ScaleValueModule(Value, StyleSheet.scale))
 		end
 	end
 end
 
-local function addRegisteredStyleSheetTags(p3, p4)
-	-- upvalues: flagsModule (ref), createStyleRule (ref), applyAttributes (ref)
-	for i, v in p4 do
-		if not p3.tags[v] then
-			local var5 = p3.rules[v]
+local function addRegisteredStyleSheetTags(StyleSheet, List) --[[ Line: 148 ]]
+	-- upvalues: FlagsModule (copy), createStyleRule (copy), applyAttributes (copy)
+	for _, value in List do
+		if not StyleSheet.tags[value] then
+			local Rule = StyleSheet.rules[value]
 			
-			if var5 and (flagsModule.FoundationStyleRulePseudoName or var5.pseudoName == nil) then
-				createStyleRule(var5, v).Parent = p3.instance
-				applyAttributes(p3, var5.attributes)
+			if Rule and (FlagsModule.FoundationStyleRulePseudoName or Rule.pseudoName == nil) then
+				createStyleRule(Rule, value).Parent = StyleSheet.instance
+				applyAttributes(StyleSheet, Rule.attributes)
 				
-				if var5.children then
-					for i_1, v_1 in var5.children do
-						createStyleRule(v_1, v_1.tag).Parent = p3.instance
-						applyAttributes(p3, v_1.attributes)
+				if Rule.children then
+					for _, child in Rule.children do
+						createStyleRule(child, child.tag).Parent = StyleSheet.instance
+						applyAttributes(StyleSheet, child.attributes)
 					end
 				end
-				p3.tags[v] = true
+				StyleSheet.tags[value] = true
 			end
 		end
 	end
 end
 
-local function resolveStyleSheet(p5, p6, p7, p8, p9)
-	-- upvalues: deviceModule (ref), themeNameModule (ref), t (ref), t_1 (ref), createStyleSheet (ref)
-	p6 = p6 or deviceModule.Desktop
-	p7 = p7 or 1
-	p9 = p9 or themeNameModule.Default
-	
-	for i, v in t do
-		if v.themeName == p9 and v.colorMode == p5 and (v.device == p6 and v.scale == p7) and v.tokenOverrides == p8 then
-			t_1[i] = nil
+local function resolveStyleSheet(ColorMode, p1, p2, TokenOverrides, p3) --[[ Line: 188 ]]
+	-- upvalues: DeviceModule (copy), ThemeNameModule (copy), t (copy), t1 (copy), createStyleSheet (copy)
+	local P12 = p1 or DeviceModule.Desktop
+	local P13 = p2 or 1
+	local P15 = p3 or ThemeNameModule.Default
+	for i, StyleSheet in t do
+		if StyleSheet.themeName == P15 and StyleSheet.colorMode == ColorMode and StyleSheet.device == P12 and StyleSheet.scale == P13 and StyleSheet.tokenOverrides == TokenOverrides then
+			t1[i] = nil
 			
 			return i
 		end
 	end
-	local var6 = createStyleSheet(p5, p6, p7, p8, p9)
-	t[var6.instance] = var6
+	local StyleSheet1 = createStyleSheet(ColorMode, P12, P13, TokenOverrides, P15)
+	t[StyleSheet1.instance] = StyleSheet1
 	
-	return var6.instance
+	return StyleSheet1.instance
 end
 
-local function addStyleTags(p10, p11)
-	-- upvalues: t (ref), addRegisteredStyleSheetTags (ref)
-	local var7 = t[p10]
+local function _(Key) --[[ Line: 233 | Named "destroyStyleSheet" ]]
+	-- upvalues: t (copy)
+	local Entry = t[Key]
 	
-	if not var7 then
-		error("StyleSheet not found in registry")
-	end
-	addRegisteredStyleSheetTags(var7, p11)
-end
-
-local function _(p10)
-	-- upvalues: t (ref)
-	local var7 = t[p10]
-	
-	if var7 == nil or var7.refCount > 0 then
+	if Entry ~= nil and Entry.refCount <= 0 then
+		t[Key] = nil
+		Key:Destroy()
+		
 		return
 	end
-	t[p10] = nil
-	p10:Destroy()
 end
 
-local function flushPendingCleanup()
-	-- upvalues: var2 (write), t_1 (ref), t (ref)
-	var2 = false
+local function flushPendingCleanup() --[[ Line: 242 ]]
+	-- upvalues: Flag (ref), t1 (copy), t (copy)
+	Flag = false
 	
-	for i in t_1 do
-		t_1[i] = nil
-		local var7 = t[i]
+	for i in t1 do
+		t1[i] = nil
+		local Entry = t[i]
 		
-		if var7 ~= nil and var7.refCount <= 0 then
+		if Entry ~= nil and Entry.refCount <= 0 then
 			t[i] = nil
 			i:Destroy()
 		end
 	end
 end
 
-local _ = function(p10)
-	-- upvalues: t_1 (ref), var2 (write), flushPendingCleanup (ref)
-	t_1[p10] = true
+local _ = function(Key) --[[ Line: 250 | Named "scheduleCleanup" ]]
+	-- upvalues: t1 (copy), Flag (ref), flushPendingCleanup (copy)
+	t1[Key] = true
 	
-	if var2 then
+	if not Flag then
+		Flag = true
+		task.delay(5, flushPendingCleanup)
+		
 		return
 	end
-	var2 = true
-	task.delay(5, flushPendingCleanup)
 end
 
 return {
 	resolveStyleSheet = resolveStyleSheet,
-	getStyleSheet = function(p10, p11, p12, p13, p14)
-		-- upvalues: resolveStyleSheet (ref), t (ref), t_1 (ref)
-		local var8 = resolveStyleSheet(p10, p11, p12, p13, p14)
-		local var9 = t[var8]
+	getStyleSheet = function(ColorMode, p4, p5, TokenOverrides, p6) --[[ Line: 294 ]]
+		-- upvalues: resolveStyleSheet (copy), t (copy), t1 (copy)
+		local ResolveStyleSheetResult = resolveStyleSheet(ColorMode, p4, p5, TokenOverrides, p6)
+		local Entry = t[ResolveStyleSheetResult]
 		
-		if var9 == nil then
-			return var8
+		if Entry == nil then
+			return ResolveStyleSheetResult
+		else
+			Entry.refCount += 1
+			t1[ResolveStyleSheetResult] = nil
+			
+			return ResolveStyleSheetResult
 		end
-		var9.refCount += 1
-		t_1[var8] = nil
-		
-		return var8
 	end,
-	addStyleTags = addStyleTags,
-	acquireStyleSheet = function(p10)
-		-- upvalues: t (ref), t_1 (ref)
-		local var8 = t[p10]
+	addStyleTags = function(p4, p5) --[[ Line: 215 ]]
+		-- upvalues: t (copy), addRegisteredStyleSheetTags (copy)
+		local Entry = t[p4]
 		
-		if var8 == nil then
+		if not Entry then
+			error("StyleSheet not found in registry")
+		end
+		addRegisteredStyleSheetTags(Entry, p5)
+	end,
+	acquireStyleSheet = function(Key) --[[ Line: 259 ]]
+		-- upvalues: t (copy), t1 (copy)
+		local Entry = t[Key]
+		
+		if Entry ~= nil then
+			Entry.refCount += 1
+			t1[Key] = nil
+			
 			return
 		end
-		var8.refCount += 1
-		t_1[p10] = nil
 	end,
-	releaseStyleSheet = function(p10)
-		-- upvalues: t (ref), t_1 (ref), var2 (write), flushPendingCleanup (ref)
-		local var8 = t[p10]
+	releaseStyleSheet = function(Key) --[[ Line: 269 ]]
+		-- upvalues: t (copy), t1 (copy), Flag (ref), flushPendingCleanup (copy)
+		local Entry = t[Key]
 		
-		if var8 == nil or var8.refCount == 0 then return end
-		var8.refCount -= 1
+		if Entry == nil or Entry.refCount == 0 then return end
+		Entry.refCount -= 1
 		
-		if var8.refCount == 0 then
-			t_1[p10] = true
+		if Entry.refCount == 0 then
+			t1[Key] = true
 			
-			if var2 then return end
-			var2 = true
+			if Flag then return end
+			Flag = true
 			task.delay(5, flushPendingCleanup)
 		end
 	end,

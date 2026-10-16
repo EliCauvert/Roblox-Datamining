@@ -1,9 +1,9 @@
-﻿local reactModule = require(script:FindFirstAncestor("ultimate-list").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ultimate-list").Parent.React)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref)
-	return reactModule.joinBindings({ p2, p3, p4 }):map(function(p5)
-		-- upvalues: p1 (ref)
-		return p1(unpack(p5))
+return function(Callback, p1, p2, p3) --[[ Line: 6 | Named "joinAndMapBindings" ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.joinBindings({ p1, p2, p3 }):map(function(p4) --[[ Line: 12 ]]
+		-- upvalues: Callback (copy)
+		return Callback(unpack(p4))
 	end)
 end

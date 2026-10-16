@@ -1,151 +1,152 @@
-﻿local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local error = luauPolyfillModule.Error
-local object = luauPolyfillModule.Object
-local t = {}
-local print = require(parent.GraphQL).print
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Error1 = LuauPolyfillModule.Error
+local Object = LuauPolyfillModule.Object
+local PrintFunction = require(Parent.GraphQL).print
 local _ = require(script.Parent["merge-typedefs_types"])
-local isSome = require(parent.Utils).isSome
-local deduplicateLists = nil
+local IsSome = require(Parent.Utils).isSome
+local Callback = nil
 
-local function directiveAlreadyExists(p1, p2)
-	-- upvalues: boolean (ref), array (ref)
-	return boolean.toJSBoolean(array.find(p1, function(p3)
-		-- upvalues: p2 (ref)
-		return p3.name.value == p2.name.value
+local function directiveAlreadyExists(FilterResult, p1) --[[ Line: 43 ]]
+	-- upvalues: Boolean (copy), Array (copy)
+	return Boolean.toJSBoolean(Array.find(FilterResult, function(p2): boolean --[[ Line: 49 ]]
+		-- upvalues: p1 (copy)
+		return p2.name.value == p1.name.value
 	end))
 end
 
-local function _(p1, p2)
-	-- upvalues: array (ref)
-	return array.some(p2, function(p3)
-		-- upvalues: p1 (ref)
+local function _(p1, p2) --[[ Line: 54 | Named "nameAlreadyExists" ]]
+	-- upvalues: Array (copy)
+	return Array.some(p2, function(p3): boolean --[[ Line: 55 ]]
+		-- upvalues: p1 (copy)
 		return p3.value == p1.value
 	end)
 end
 
-local function mergeArguments(p1, p2)
-	-- upvalues: array (ref), deduplicateLists (write), boolean (ref)
-	local var1 = array.concat({}, p2)
+local function mergeArguments(Arguments, Arguments1) --[[ Line: 60 ]]
+	-- upvalues: Array (copy), Callback (ref), Boolean (copy)
+	local ConcatResult = Array.concat({}, Arguments1)
 	
-	for i, v in p1 do
-		local var2 = array.findIndex(var1, function(p3)
-			-- upvalues: v (ref)
-			return p3.name.value == v.name.value
+	for _, argument in Arguments do
+		local Index: number = Array.findIndex(ConcatResult, function(p1): boolean --[[ Line: 73 ]]
+			-- upvalues: argument (copy)
+			return p1.name.value == argument.name.value
 		end)
 		
-		if var2 > -1 then
-			local var3 = var1[var2]
-			
-			if var3.value.kind == "ListValue" then
-				var3.value.values = deduplicateLists(var3.value.values, v.value.values, function(p3, p4)
-					-- upvalues: boolean (copy), array (copy)
-					local value = p3.value
-					
-					return not boolean.toJSBoolean(value) or not array.some(p4, function(p5)
-						-- upvalues: value (ref)
-						return p5.value == value
-					end)
+		if Index <= -1 then
+			table.insert(ConcatResult, argument)
+			continue
+		end
+		local ConcatResultEntry = ConcatResult[Index]
+		
+		if ConcatResultEntry.value.kind == "ListValue" then
+			ConcatResultEntry.value.values = Callback(ConcatResultEntry.value.values, argument.value.values, function(p1, p2): boolean --[[ Line: 87 ]]
+				-- upvalues: Boolean (upval), Array (upval)
+				local Value = p1.value
+				
+				return not Boolean.toJSBoolean(Value) or not Array.some(p2, function(p3): boolean --[[ Line: 94 ]]
+					-- upvalues: Value (copy)
+					return p3.value == Value
 				end)
-			else
-				var3.value = v.value
-			end
-		else
-			table.insert(var1, v)
-		end
-	end
-	return var1
-end
-
-local _ = function(p3)
-	-- upvalues: array (ref), mergeArguments (ref), isSome (ref)
-	return array.filter(array.map(p3, function(p4, p5, p6)
-		-- upvalues: array (copy), mergeArguments (copy)
-		local var4 = array.findIndex(p6, function(p7)
-			-- upvalues: p4 (ref)
-			return p7.name.value == p4.name.value
-		end)
-		
-		if var4 == p5 then
-			return p4
-		end
-		p4.arguments = mergeArguments(p4.arguments, p6[var4].arguments)
-		
-		return nil
-	end), isSome)
-end
-
-function t.mergeDirectives(p3, p4, p5)
-	-- upvalues: boolean (ref), array (ref), mergeArguments (ref), isSome (ref), directiveAlreadyExists (ref)
-	local var4 = if p3 ~= nil then {} else p3
-	local var5 = if p4 ~= nil then {} else p4
-	local var6 = p5 and p5.reverseDirectives
-	local var7 = array.filter(array.map(array.concat({}, if boolean.toJSBoolean(var6) then var4 else var5), function(p6, p7, p8)
-		-- upvalues: array (copy), mergeArguments (copy)
-		local var8 = array.findIndex(p8, function(p9)
-			-- upvalues: p6 (ref)
-			return p9.name.value == p6.name.value
-		end)
-		
-		if var8 == p7 then
-			return p6
-		end
-		p6.arguments = mergeArguments(p6.arguments, p8[var8].arguments)
-		
-		return nil
-	end), isSome)
-	
-	for i, v in if boolean.toJSBoolean(var6) then var5 else var4 do
-		if boolean.toJSBoolean(directiveAlreadyExists(var7, v)) then
-			local var8 = array.findIndex(var7, function(p6)
-				-- upvalues: v (ref)
-				return p6.name.value == v.name.value
 			end)
-			local var9 = var7[var8]
-			var7[var8].arguments = mergeArguments(if boolean.toJSBoolean(v.arguments) then v.arguments else {}, if boolean.toJSBoolean(var9.arguments) then var9.arguments else {})
 		else
-			table.insert(var7, v)
+			ConcatResultEntry.value = argument.value
 		end
 	end
-	return var7
+	return ConcatResult
 end
 
-local function validateInputs(p6, p7)
-	-- upvalues: print (ref), object (ref), boolean (ref), error (ref)
-	local var10 = print(object.assign({}, p6, { description = object.None }))
-	local var11 = print(object.assign({}, p7, { description = object.None }))
-	
-	if not boolean.toJSBoolean(var10:gsub("directive @w*d*", ""):gsub(" on .*$", "") == var11:gsub("directive @w*d*", ""):gsub(" on .*$", "")) then
-		error(error.new(("Unable to merge GraphQL directive \"%s\". \nExisting directive:  \n\t%s \nReceived directive: \n\t%s"):format(tostring(p6.name.value), tostring(var11), tostring(var10))))
-	end
-end
-
-function t.mergeDirective(p6, p7)
-	-- upvalues: validateInputs (ref), object (ref), array (ref)
-	if p7 then
-		validateInputs(p6, p7)
+local _ = function(p1) --[[ Line: 108 | Named "deduplicateDirectives" ]]
+	-- upvalues: Array (copy), mergeArguments (copy), IsSome (copy)
+	return (Array.filter(Array.map(p1, function(p2, Index, p3) --[[ Line: 112 ]]
+		-- upvalues: Array (upval), mergeArguments (upval)
+		local Index1 = Array.findIndex(p3, function(p4): boolean --[[ Line: 114 ]]
+			-- upvalues: p2 (copy)
+			return p4.name.value == p2.name.value
+		end)
 		
-		return object.assign({}, p6, {
-			locations = array.concat({}, p7.locations, array.filter(p6.locations, function(p8)
-				-- upvalues: p7 (ref), array (copy)
-				return not array.some(p7.locations, function(p9)
-					-- upvalues: p8 (ref)
-					return p9.value == p8.value
-				end)
-			end))
-		})
-	end
-	return p6
+		if Index1 == Index then
+			return p2
+		else
+			p2.arguments = mergeArguments(p2.arguments, p3[Index1].arguments)
+			
+			return nil
+		end
+	end), IsSome))
 end
 
-deduplicateLists = function(p6, p7, p8)
-	-- upvalues: array (ref)
-	return array.concat(p6, array.filter(p7, function(p9)
-		-- upvalues: p8 (ref), p6 (ref)
-		return p8(p9, p6)
+local function validateInputs(p1, p2) --[[ Line: 176 ]]
+	-- upvalues: PrintFunction (copy), Object (copy), Boolean (copy), Error1 (copy)
+	local PrintResult: string = PrintFunction(Object.assign({}, p1, { description = Object.None }))
+	local PrintResult1: string = PrintFunction(Object.assign({}, p2, { description = Object.None }))
+	
+	if not Boolean.toJSBoolean(PrintResult:gsub("directive @w*d*", ""):gsub(" on .*$", "") == PrintResult1:gsub("directive @w*d*", ""):gsub(" on .*$", "")) then
+		error(Error1.new(("Unable to merge GraphQL directive \"%s\". \nExisting directive:  \n\t%s \nReceived directive: \n\t%s"):format(tostring(p1.name.value), tostring(PrintResult1), (tostring(PrintResult)))))
+	end
+end
+
+Callback = function(Values, Values1, Callback) --[[ Line: 229 | Named "deduplicateLists" ]]
+	-- upvalues: Array (copy)
+	return Array.concat(Values, Array.filter(Values1, function(p1) --[[ Line: 247 ]]
+		-- upvalues: Callback (copy), Values (copy)
+		return Callback(p1, Values)
 	end))
 end
 
-return t
+return {
+	mergeDirectives = function(p1, p2, p3) --[[ Line: 133 ]]
+		-- upvalues: Boolean (copy), Array (copy), mergeArguments (copy), IsSome (copy), directiveAlreadyExists (copy)
+		local T = if p1 == nil then {} else p1
+		local T1 = if p2 == nil then {} else p2
+		local ReverseDirectives = if p3 then p3.reverseDirectives else p3
+		local FilterResult = Array.filter(Array.map(Array.concat({}, if Boolean.toJSBoolean(ReverseDirectives) then T else T1), function(p4, Index, p5) --[[ Line: 112 ]]
+			-- upvalues: Array (upval), mergeArguments (upval)
+			local Index1 = Array.findIndex(p5, function(p6): boolean --[[ Line: 114 ]]
+				-- upvalues: p4 (copy)
+				return p6.name.value == p4.name.value
+			end)
+			
+			if Index1 == Index then
+				return p4
+			else
+				p4.arguments = mergeArguments(p4.arguments, p5[Index1].arguments)
+				
+				return nil
+			end
+		end), IsSome)
+		
+		for _, value in if Boolean.toJSBoolean(ReverseDirectives) then T1 else T do
+			if Boolean.toJSBoolean(directiveAlreadyExists(FilterResult, value)) then
+				local Index = Array.findIndex(FilterResult, function(p4): boolean --[[ Line: 155 ]]
+					-- upvalues: value (copy)
+					return p4.name.value == value.name.value
+				end)
+				local FilterResultEntry = FilterResult[Index]
+				FilterResult[Index].arguments = mergeArguments(Boolean.toJSBoolean(value.arguments) and value.arguments or {}, Boolean.toJSBoolean(FilterResultEntry.arguments) and FilterResultEntry.arguments or {})
+			else
+				table.insert(FilterResult, value)
+			end
+		end
+		return FilterResult
+	end,
+	mergeDirective = function(p4, p5) --[[ Line: 201 ]]
+		-- upvalues: validateInputs (copy), Object (copy), Array (copy)
+		if p5 then
+			validateInputs(p4, p5)
+			
+			return Object.assign({}, p4, {
+				locations = Array.concat({}, p5.locations, Array.filter(p4.locations, function(p6): boolean --[[ Line: 219 ]]
+					-- upvalues: p5 (copy), Array (upval)
+					return not Array.some(p5.locations, function(p7): boolean --[[ Line: 55 ]]
+						-- upvalues: p6 (copy)
+						return p7.value == p6.value
+					end)
+				end))
+			})
+		else
+			return p4
+		end
+	end
+}

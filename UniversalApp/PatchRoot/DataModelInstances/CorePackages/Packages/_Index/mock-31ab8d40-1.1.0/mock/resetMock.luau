@@ -1,19 +1,19 @@
-﻿local symbolsModule = require(script.Parent.symbols)
+﻿local SymbolsModule = require(script.Parent.symbols)
 
-local function resetMock(value, p1)
-	-- upvalues: symbolsModule (ref), resetMock (ref)
-	local var1 = getmetatable(value)
-	var1[symbolsModule.Calls] = {}
+local function resetMock(p1, p2) --[[ Line: 3 ]]
+	-- upvalues: SymbolsModule (copy), resetMock (copy)
+	local Meta = getmetatable(p1)
+	Meta[SymbolsModule.Calls] = {}
 	
-	for i, v in pairs(var1[symbolsModule.Children]) do
-		if not p1[v] then
-			p1[v] = true
-			resetMock(v, p1)
+	for _, value in pairs(Meta[SymbolsModule.Children]) do
+		if not p2[value] then
+			p2[value] = true
+			resetMock(value, p2)
 		end
 	end
 end
 
-return function(p2)
-	-- upvalues: resetMock (ref)
-	resetMock(p2, {})
+return function(p3) --[[ Line: 15 ]]
+	-- upvalues: resetMock (copy)
+	resetMock(p3, {})
 end

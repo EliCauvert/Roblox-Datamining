@@ -1,13 +1,13 @@
-﻿local dashModule = require(script:FindFirstAncestor("NetworkingCurrentlyWearing").Parent.Dash)
-local CATALOG_URLModule = require(script.Parent.Parent.CATALOG_URL)
+﻿local DashModule = require(script:FindFirstAncestor("NetworkingCurrentlyWearing").Parent.Dash)
+local CATALOGURLModule = require(script.Parent.Parent.CATALOG_URL)
 
-return function(p1)
-	-- upvalues: CATALOG_URLModule (ref), dashModule (ref)
-	return p1.roduxNetworking.POST({ Name = "GetItemDetails" }, function(p2, p3)
-		-- upvalues: CATALOG_URLModule (copy), dashModule (copy)
-		return p2(CATALOG_URLModule):path("v1"):path("catalog"):path("items"):path("details"):body({
-			items = dashModule.map(p3, function(p4)
-				return { itemType = "Asset", id = p4 }
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: CATALOGURLModule (copy), DashModule (copy)
+	return p1.roduxNetworking.POST({ Name = "GetItemDetails" }, function(Callback, p2) --[[ Line: 14 ]]
+		-- upvalues: CATALOGURLModule (upval), DashModule (upval)
+		return Callback(CATALOGURLModule):path("v1"):path("catalog"):path("items"):path("details"):body({
+			items = DashModule.map(p2, function(Id) --[[ Line: 16 ]]
+				return { itemType = "Asset", id = Id }
 			end)
 		})
 	end)

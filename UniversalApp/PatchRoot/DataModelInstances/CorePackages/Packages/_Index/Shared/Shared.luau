@@ -1,8 +1,7 @@
 ﻿local _ = require(script.Parent.LuauPolyfill)
-local reactTypesModule = require(script.ReactTypes)
 local _ = require(script["flowtypes.roblox"])
 local _ = require(script.ReactElementType)
-local unknownModule = require(script["ErrorHandling.roblox"])
+local ErrorHandlingRobloxModule = require(script["ErrorHandling.roblox"])
 
 return {
 	checkPropTypes = require(script.checkPropTypes),
@@ -16,6 +15,7 @@ return {
 	invariant = require(script.invariant),
 	invokeGuardedCallbackImpl = require(script.invokeGuardedCallbackImpl),
 	isValidElementType = require(script.isValidElementType),
+	MemoValues = require(script["MemoValues.roblox"]),
 	objectIs = require(script.objectIs),
 	ReactComponentStackFrame = require(script.ReactComponentStackFrame),
 	ReactElementType = require(script.ReactElementType),
@@ -28,10 +28,10 @@ return {
 	ReactVersion = require(script.ReactVersion),
 	shallowEqual = require(script.shallowEqual),
 	UninitializedState = require(script["UninitializedState.roblox"]),
-	ReactTypes = reactTypesModule,
-	describeError = unknownModule.describeError,
-	errorToString = unknownModule.errorToString,
-	parseReactError = unknownModule.parseReactError,
+	ReactTypes = require(script.ReactTypes),
+	describeError = ErrorHandlingRobloxModule.describeError,
+	errorToString = ErrorHandlingRobloxModule.errorToString,
+	parseReactError = ErrorHandlingRobloxModule.parseReactError,
 	Symbol = require(script["Symbol.roblox"]),
 	Type = require(script["Type.roblox"]),
 	Change = require(script.PropMarkers.Change),

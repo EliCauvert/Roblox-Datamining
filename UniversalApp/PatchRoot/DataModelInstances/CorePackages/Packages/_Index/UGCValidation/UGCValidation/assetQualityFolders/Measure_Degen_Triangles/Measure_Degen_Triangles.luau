@@ -1,58 +1,55 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateAQMeshQualityBlockUploadModule = require(parent.flags.getFFlagUGCValidateAQMeshQualityBlockUpload)
-local t = {
-	[validationEnumsModule.UploadCategory.FULL_BODY] = true,
-	[validationEnumsModule.UploadCategory.DYNAMIC_HEAD] = true
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFFlagUGCValidateAQMeshQualityBlockUploadModule = require(Parent.flags.getFFlagUGCValidateAQMeshQualityBlockUpload)
+local config = {
+	[ValidationEnumsModule.UploadCategory.FULL_BODY] = true,
+	[ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD] = true
 }
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.FULL_BODY,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.FULL_BODY,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
-	fflag = require(parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p1, p2)
-		-- upvalues: getFFlagUGCValidateAQMeshQualityBlockUploadModule (ref), t (ref), errorSourceStringsModule (ref)
-		local measureDegenTriangles = p2.aqsSummaryData.Measure_Degen_Triangles
-		local uploadCategory = getFFlagUGCValidateAQMeshQualityBlockUploadModule() and t[p2.uploadCategory]
+	fflag = require(Parent.flags.getFFlagUGCValidateAQMeshQuality),
+	run = function(p1, p2) --[[ Line: 23 ]]
+		-- upvalues: GetFFlagUGCValidateAQMeshQualityBlockUploadModule (copy), config (copy), ErrorSourceStringsModule (copy)
+		local MeasureDegenTriangles = p2.aqsSummaryData.Measure_Degen_Triangles
+		local Entry = GetFFlagUGCValidateAQMeshQualityBlockUploadModule() and config[p2.uploadCategory]
 		
-		if measureDegenTriangles == nil then
-			if uploadCategory then
-				error("Measure_Degen_Triangles: AQS summary data is nil")
-				
-				return
+		if MeasureDegenTriangles ~= nil then
+			for PartName, measureDegenTriangle in MeasureDegenTriangles do
+				if PartName ~= "measurement_score" then
+					if measureDegenTriangle == nil or measureDegenTriangle.score == nil then
+						p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Degen_Triangles" })
+						break
+					end
+					if tonumber(measureDegenTriangle.score) ~= 100 then
+						local config1 = {
+							partName = PartName,
+							degenerate_triangle_percent = string.format("%.2f", (tonumber(measureDegenTriangle.degenerate_triangle_percent) or 0) * 100)
+						}
+						
+						if Entry then
+							p1:fail(ErrorSourceStringsModule.Keys.AQSWarn_DegenTriangles, config1)
+						else
+							p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_DegenTriangles, config1)
+						end
+					end
+				end
 			end
-			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Degen_Triangles" })
+			return
+		elseif Entry then
+			error("Measure_Degen_Triangles: AQS summary data is nil")
 			
 			return
 		else
-			for i, v in measureDegenTriangles do
-				if i ~= "measurement_score" then
-					if v ~= nil and v.score ~= nil then
-						if tonumber(v.score) ~= 100 then
-							local t_1 = {
-								partName = i,
-								degenerate_triangle_percent = string.format("%.2f", (tonumber(v.degenerate_triangle_percent) or 0) * 100)
-							}
-							
-							if uploadCategory then
-								p1:fail(errorSourceStringsModule.Keys.AQSWarn_DegenTriangles, t_1)
-							else
-								p1:warn(errorSourceStringsModule.Keys.AQSWarn_DegenTriangles, t_1)
-							end
-						end
-					end
-					p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Degen_Triangles" })
-					
-					return
-				end
-			end
+			p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Degen_Triangles" })
 		end
 	end
 }

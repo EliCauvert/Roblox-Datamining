@@ -1,67 +1,67 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local validationRulesUtilModule = require(parent.util.ValidationRulesUtil)
-local getEngineFeatureEngineUGCValidateMeshPartBoundsFromRulesModule = require(parent.flags.getEngineFeatureEngineUGCValidateMeshPartBoundsFromRules)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local ValidationRulesUtilModule = require(Parent.util.ValidationRulesUtil)
+local GetEngineFeatureEngineUGCValidateMeshPartBoundsFromRulesModule = require(Parent.flags.getEngineFeatureEngineUGCValidateMeshPartBoundsFromRules)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.uploadEnum,
-		validationEnumsModule.SharedDataMember.renderMeshesData
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.uploadEnum,
+		ValidationEnumsModule.SharedDataMember.renderMeshesData
 	},
 	conditionalData = {},
-	fflag = require(parent.flags.getFFlagUGCValidateIndividualMeshPartBounds),
+	fflag = require(Parent.flags.getFFlagUGCValidateIndividualMeshPartBounds),
 	expectedFailures = {},
 	prereqTests = {},
-	run = function(p1, p2)
-		-- upvalues: getEngineFeatureEngineUGCValidateMeshPartBoundsFromRulesModule (ref), validationRulesUtilModule (ref), errorSourceStringsModule (ref)
-		local meshPartBoundsMin, meshPartBoundsMax
-		local rootInstance = p2.rootInstance
-		local renderMeshesData = p2.renderMeshesData
-		local _ = nil
-		local _ = nil
+	run = function(p1, p2) --[[ Line: 28 ]]
+		-- upvalues: GetEngineFeatureEngineUGCValidateMeshPartBoundsFromRulesModule (copy), ValidationRulesUtilModule (copy), ErrorSourceStringsModule (copy)
+		local RootInstance = p2.rootInstance
+		local RenderMeshesData = p2.renderMeshesData
+		local MeshPartBoundsMin = nil
+		local MeshPartBoundsMax = nil
 		
-		if getEngineFeatureEngineUGCValidateMeshPartBoundsFromRulesModule() then
-			local meshRules = validationRulesUtilModule:getRules().MeshRules
-			meshPartBoundsMin = meshRules.MeshPartBoundsMin
-			meshPartBoundsMax = meshRules.MeshPartBoundsMax
+		if GetEngineFeatureEngineUGCValidateMeshPartBoundsFromRulesModule() then
+			local MeshRules = ValidationRulesUtilModule:getRules().MeshRules
+			MeshPartBoundsMin = MeshRules.MeshPartBoundsMin
+			MeshPartBoundsMax = MeshRules.MeshPartBoundsMax
 		else
-			meshPartBoundsMin = 0.05
-			meshPartBoundsMax = 4
+			MeshPartBoundsMin = 0.05
+			MeshPartBoundsMax = 4
 		end
-		for i, v in renderMeshesData do
-			local var1 = v.originalSize * v.scale
+		for PartName, value in RenderMeshesData do
+			local ScaledOriginalSize = value.originalSize * value.scale
 			
-			local function checkAxis(p3, p4)
-				-- upvalues: meshPartBoundsMin (write), p1 (ref), errorSourceStringsModule (copy), i (ref), rootInstance (ref), meshPartBoundsMax (write)
-				if p4 < meshPartBoundsMin then
-					p1:fail(errorSourceStringsModule.Keys.MeshPartBounds_TooSmall, {
-						partName = i,
-						axis = p3,
-						currentSize = string.format("%.2f", p4),
-						minSize = string.format("%.2f", meshPartBoundsMin)
-					}, rootInstance)
+			local function checkAxis(Axis, X) --[[ Line: 45 ]]
+				-- upvalues: MeshPartBoundsMin (ref), p1 (copy), ErrorSourceStringsModule (upval), PartName (copy), RootInstance (copy), MeshPartBoundsMax (ref)
+				if X < MeshPartBoundsMin then
+					p1:fail(ErrorSourceStringsModule.Keys.MeshPartBounds_TooSmall, {
+						partName = PartName,
+						axis = Axis,
+						currentSize = string.format("%.2f", X),
+						minSize = string.format("%.2f", MeshPartBoundsMin)
+					}, RootInstance)
 					
 					return
-				elseif meshPartBoundsMax < p4 then
-					p1:fail(errorSourceStringsModule.Keys.MeshPartBounds_TooLarge, {
-						partName = i,
-						axis = p3,
-						currentSize = string.format("%.2f", p4),
-						maxSize = string.format("%.2f", meshPartBoundsMax)
-					}, rootInstance)
+				end
+				if MeshPartBoundsMax < X then
+					p1:fail(ErrorSourceStringsModule.Keys.MeshPartBounds_TooLarge, {
+						partName = PartName,
+						axis = Axis,
+						currentSize = string.format("%.2f", X),
+						maxSize = string.format("%.2f", MeshPartBoundsMax)
+					}, RootInstance)
 				end
 			end
 			
-			checkAxis("X", var1.X)
-			checkAxis("Y", var1.Y)
-			checkAxis("Z", var1.Z)
+			checkAxis("X", ScaledOriginalSize.X)
+			checkAxis("Y", ScaledOriginalSize.Y)
+			checkAxis("Z", ScaledOriginalSize.Z)
 		end
 	end
 }

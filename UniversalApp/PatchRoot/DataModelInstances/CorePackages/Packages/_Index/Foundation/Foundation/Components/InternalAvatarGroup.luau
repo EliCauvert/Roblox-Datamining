@@ -1,1 +1,1 @@
-﻿return require(script.InternalAvatarGroup)
+﻿return (require(script.InternalAvatarGroup))

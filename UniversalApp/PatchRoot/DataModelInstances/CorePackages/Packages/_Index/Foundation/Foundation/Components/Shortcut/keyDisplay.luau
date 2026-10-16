@@ -1,20 +1,20 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local userInputService = require(foundation.Utility.Wrappers.Services).UserInputService
-local _ = require(foundation.Enums.InputPlatform)
-local getIconForKeyCodeModule = require(foundation.Utility.getIconForKeyCode)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInputService
+local _ = require(Foundation.Enums.InputPlatform)
+local GetIconForKeyCodeModule = require(Foundation.Utility.getIconForKeyCode)
 local t = {}
 
-for i, v in Enum.KeyCode:GetEnumItems() do
-	t[v.Name] = v
+for _, enumItem in Enum.KeyCode:GetEnumItems() do
+	t[enumItem.Name] = enumItem
 end
-local t_1 = {
+local config = {
 	RightAlt = "LeftAlt",
 	RightControl = "LeftControl",
 	RightMeta = "LeftMeta",
 	RightShift = "LeftShift",
 	RightSuper = "LeftSuper"
 }
-local t_2 = {
+local config1 = {
 	BackSlash = "\\",
 	Backquote = "`",
 	Comma = ",",
@@ -46,7 +46,7 @@ local t_2 = {
 	LeftCurly = "{",
 	RightCurly = "}",
 	Tilde = "~",
-	Euro = "\226\130\172",
+	Euro = "€",
 	MouseLeftButton = "Left mouse button",
 	MouseMiddleButton = "Middle mouse button",
 	MouseRightButton = "Right mouse button",
@@ -60,7 +60,7 @@ local t_2 = {
 	Thumbstick2Left = "Right stick left",
 	Thumbstick2Right = "Right stick right"
 }
-local t_3 = {
+local config2 = {
 	MouseDelta = true,
 	MousePosition = true,
 	None = true,
@@ -70,60 +70,63 @@ local t_3 = {
 	Unknown = true
 }
 
-i = function(p1)
-	local name = p1.Name
+local function _(p1): boolean --[[ Line: 93 | Named "isGamepadKeyCode" ]]
+	local Name = p1.Name
 	
-	return if name:match("^Button") == nil then if name:match("^DPad") == nil then name:match("^Thumbstick") ~= nil else true else true
+	return Name:match("^Button") ~= nil or Name:match("^DPad") ~= nil or Name:match("^Thumbstick") ~= nil
 end
 
-local function _(p1)
-	-- upvalues: t_1 (ref), t (ref)
-	local name = t_1[p1.Name]
+local _ = function(p1) --[[ Line: 98 | Named "normalizeModifier" ]]
+	-- upvalues: config (copy), t (copy)
+	local Entry = config[p1.Name]
 	
-	return if name == nil then p1 else t[name] or p1
+	return if Entry == nil then p1 else t[Entry] or p1
 end
 
-local _ = function(p1)
-	-- upvalues: userInputService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: userInputService (copy), p1 (ref)
-		return userInputService:GetStringForKeyCode(p1)
+local _ = function(p1) --[[ Line: 108 | Named "getStringForKeyCode" ]]
+	-- upvalues: UserInputService (copy)
+	local Success, Result = pcall(function() --[[ Line: 109 ]]
+		-- upvalues: UserInputService (upval), p1 (copy)
+		return UserInputService:GetStringForKeyCode(p1)
 	end)
 	
-	return if ok and typeof(status) == "string" and status ~= "" then status else nil
+	return if Success and typeof(Result) == "string" and Result ~= "" then Result else nil
 end
 
 return {
-	isNonDisplayable = function(p1)
-		-- upvalues: t_3 (ref)
-		return t_3[p1.Name] == true
+	isNonDisplayable = function(p1): boolean --[[ Line: 120 ]]
+		-- upvalues: config2 (copy)
+		return config2[p1.Name] == true
 	end,
-	resolveKey = function(p1, p2)
-		-- upvalues: t_3 (ref), t_1 (ref), t (ref), getIconForKeyCodeModule (ref), t_2 (ref), userInputService (ref)
-		if t_3[p1.Name] == true then
+	resolveKey = function(p1, p2) --[[ Line: 124 ]]
+		-- upvalues: config2 (copy), config (copy), t (copy), GetIconForKeyCodeModule (copy), config1 (copy), UserInputService (copy)
+		if config2[p1.Name] == true then
 			return nil
 		end
-		local name = t_1[p1.Name]
-		local var1 = if name == nil then p1 else t[name] or p1
-		local var2 = getIconForKeyCodeModule(var1, p2)
+		local Entry = config[p1.Name]
+		local Entry1 = if Entry == nil then p1 else t[Entry] or p1
+		local IconForKeyCodeModule = GetIconForKeyCodeModule(Entry1, p2)
 		
-		if var2 then
-			local name_1 = var1.Name
+		if IconForKeyCodeModule then
+			local Name = Entry1.Name
+			local HasButton: boolean = Name:match("^Button") ~= nil or Name:match("^DPad") ~= nil or Name:match("^Thumbstick") ~= nil
 			
-			return if if name_1:match("^Button") == nil then if name_1:match("^DPad") == nil then name_1:match("^Thumbstick") ~= nil else true else true then { kind = "GamepadIcon", icon = var2 } else { kind = "Icon", icon = var2 }
+			return if HasButton then { kind = "GamepadIcon", icon = IconForKeyCodeModule } else { kind = "Icon", icon = IconForKeyCodeModule }
 		end
-		local name_1 = t_2[var1.Name]
+		local Entry2 = config1[Entry1.Name]
 		
-		if name_1 then
-			return { kind = "Text", text = name_1 }
+		if Entry2 then
+			return { kind = "Text", text = Entry2 }
+		else
+			local Success, Result = pcall(function() --[[ Line: 109 ]]
+				-- upvalues: UserInputService (upval), Entry1 (copy)
+				return UserInputService:GetStringForKeyCode(Entry1)
+			end)
+			
+			return {
+				kind = "Text",
+				text = (if Success and typeof(Result) == "string" and Result ~= "" then Result else nil) or Entry1.Name
+			}
 		end
-		local t_4 = { kind = "Text" }
-		local ok, status = pcall(function()
-			-- upvalues: userInputService (copy), var1 (ref)
-			return userInputService:GetStringForKeyCode(var1)
-		end)
-		t_4.text = (if ok and typeof(status) == "string" and status ~= "" then status else nil) or var1.Name
-		
-		return t_4
 	end
 }

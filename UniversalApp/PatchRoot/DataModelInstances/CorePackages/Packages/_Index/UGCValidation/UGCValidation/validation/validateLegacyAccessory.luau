@@ -1,147 +1,118 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Constants)
-local validateInstanceTreeModule = require(parent.validation.validateInstanceTree)
-local validateTagsModule = require(parent.validation.validateTags)
-local validateSingleInstanceModule = require(parent.validation.validateSingleInstance)
-local validateThumbnailConfigurationModule = require(parent.validation.validateThumbnailConfiguration)
-local validateScaleTypeModule = require(parent.validation.validateScaleType)
-local validateRigidMeshNotSkinnedModule = require(parent.validation.validateRigidMeshNotSkinned)
-local validateDependenciesModule = require(parent.validation.validateDependencies)
-local validatePropertiesSensibleModule = require(parent.validation.ValidatePropertiesSensible)
-local rigidOrLayeredAllowedModule = require(parent.util.RigidOrLayeredAllowed)
-local createAccessorySchemaModule = require(parent.util.createAccessorySchema)
-local getAttachmentModule = require(parent.util.getAttachment)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
-local getEditableImageFromContextModule = require(parent.util.getEditableImageFromContext)
-local getEngineFeatureEngineUGCValidateRigidNonSkinnedModule = require(parent.flags.getEngineFeatureEngineUGCValidateRigidNonSkinned)
-local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Constants)
+local ValidateInstanceTreeModule = require(Parent.validation.validateInstanceTree)
+local ValidateTagsModule = require(Parent.validation.validateTags)
+local ValidateSingleInstanceModule = require(Parent.validation.validateSingleInstance)
+local ValidateThumbnailConfigurationModule = require(Parent.validation.validateThumbnailConfiguration)
+local ValidateScaleTypeModule = require(Parent.validation.validateScaleType)
+local ValidateDependenciesModule = require(Parent.validation.validateDependencies)
+local ValidatePropertiesSensibleModule = require(Parent.validation.ValidatePropertiesSensible)
+local RigidOrLayeredAllowedModule = require(Parent.util.RigidOrLayeredAllowed)
+local CreateAccessorySchemaModule = require(Parent.util.createAccessorySchema)
+local GetAttachmentModule = require(Parent.util.getAttachment)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
+local GetEditableImageFromContextModule = require(Parent.util.getEditableImageFromContext)
+local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 
-return function(p1)
-	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), createAccessorySchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), validateDependenciesModule (ref), getAttachmentModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), validateTagsModule (ref), validateScaleTypeModule (ref), validateThumbnailConfigurationModule (ref), getEngineFeatureEngineUGCValidateRigidNonSkinnedModule (ref), validateRigidMeshNotSkinnedModule (ref)
-	local instances = p1.instances
-	local assetTypeEnum = p1.assetTypeEnum
+return function(p1) --[[ Line: 24 | Named "validateLegacyAccessory" ]]
+	-- upvalues: RigidOrLayeredAllowedModule (copy), AnalyticsModule (copy), ConstantsModule (copy), ValidateSingleInstanceModule (copy), CreateAccessorySchemaModule (copy), ValidateInstanceTreeModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), ValidateDependenciesModule (copy), GetAttachmentModule (copy), GetEditableMeshFromContextModule (copy), GetEditableImageFromContextModule (copy), ValidateTagsModule (copy), ValidateScaleTypeModule (copy), ValidateThumbnailConfigurationModule (copy)
+	local Instances = p1.instances
+	local AssetTypeEnum = p1.assetTypeEnum
 	
-	if not rigidOrLayeredAllowedModule.isRigidAccessoryAllowed(assetTypeEnum) then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateLegacyAccessory_AssetTypeNotAllowedAsRigidAccessory, nil, p1)
+	if not RigidOrLayeredAllowedModule.isRigidAccessoryAllowed(AssetTypeEnum) then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateLegacyAccessory_AssetTypeNotAllowedAsRigidAccessory, nil, p1)
 		
 		return false, {
-			string.format("Asset type '%s' is not a rigid accessory category. It can only be used with layered clothing.", assetTypeEnum.Name)
+			string.format("Asset type '%s' is not a rigid accessory category. It can only be used with layered clothing.", AssetTypeEnum.Name)
 		}
 	end
-	local var1 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]
-	local _ = nil
-	local _ = nil
-	local var2, var3 = validateSingleInstanceModule(instances, p1)
+	local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[AssetTypeEnum]
+	local ValidateSingleInstanceModuleResult, ValidateSingleInstanceModuleResult2 = ValidateSingleInstanceModule(Instances, p1)
 	
-	if not var2 then
-		return false, var3
+	if not ValidateSingleInstanceModuleResult then
+		return false, ValidateSingleInstanceModuleResult2
 	end
-	local var4 = instances[1]
-	local var5, var6 = validateInstanceTreeModule(createAccessorySchemaModule(var1.attachmentNames), var4, p1)
-	local var7 = var6
+	local InstancesEntry = Instances[1]
+	local ValidateInstanceTreeModuleResult, ValidateInstanceTreeModuleResult2 = ValidateInstanceTreeModule(CreateAccessorySchemaModule(ASSETTYPE.attachmentNames), InstancesEntry, p1)
 	
-	if not var5 then
-		return false, var7
-	elseif getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-		local var8, var9 = validatePropertiesSensibleModule.validate(var4, p1)
-		local var10 = var9
+	if not ValidateInstanceTreeModuleResult then
+		return false, ValidateInstanceTreeModuleResult2
+	end
+	if GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
+		local ValidateResult, ValidateResult2 = ValidatePropertiesSensibleModule.validate(InstancesEntry, p1)
 		
-		if not var8 then
-			return false, var10
+		if not ValidateResult then
+			return false, ValidateResult2
 		end
 	end
-	local var11, var12 = validateDependenciesModule(var4, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
+	local ValidateDependenciesModuleResult, ValidateDependenciesModuleResult2 = ValidateDependenciesModule(InstancesEntry, p1, { skipExistenceCheck = true, skipOwnershipCheck = true })
 	
-	if not var11 then
-		return false, var12
+	if not ValidateDependenciesModuleResult then
+		return false, ValidateDependenciesModuleResult2
 	end
-	local handle = var4:FindFirstChild("Handle")
-	local specialMesh = handle:FindFirstChildOfClass("SpecialMesh")
-	local t = {
+	local Handle = InstancesEntry:FindFirstChild("Handle")
+	local SpecialMesh = Handle:FindFirstChildOfClass("SpecialMesh")
+	local config = {
 		fieldName = "MeshId",
-		fullName = specialMesh:GetFullName(),
-		contentId = specialMesh.MeshId,
-		context = var4.Name
+		fullName = SpecialMesh:GetFullName(),
+		contentId = SpecialMesh.MeshId,
+		context = InstancesEntry.Name
 	}
-	local scale = specialMesh.Scale
-	local var13 = getAttachmentModule(handle, var1.attachmentNames)
-	assert(var1.bounds[var13.Name], "Could not find bounds for " .. var13.Name)
-	local var14 = true
-	local t_1 = {}
-	local var15 = t.contentId ~= nil and t.contentId ~= ""
-	local var16, var17 = getEditableMeshFromContextModule(specialMesh, "MeshId", p1)
+	local Scale = SpecialMesh.Scale
+	local AttachmentModule = GetAttachmentModule(Handle, ASSETTYPE.attachmentNames)
+	assert(ASSETTYPE.bounds[AttachmentModule.Name], "Could not find bounds for " .. AttachmentModule.Name)
+	local Flag = true
+	local List = {}
+	local MeshId, MeshId2 = GetEditableMeshFromContextModule(SpecialMesh, "MeshId", p1)
 	
-	if not var16 then
-		if t.contentId then
+	if not MeshId then
+		if config.contentId then
 			return false, {
-				string.format("Failed to load mesh for legacy accessory '%s'. Make sure mesh exists and try again.", var4.Name)
+				string.format("Failed to load mesh for legacy accessory '%s'. Make sure mesh exists and try again.", InstancesEntry.Name)
 			}
 		end
-		var15 = false
-		var14 = false
-		table.insert(t_1, {
-			string.format("Missing meshId on legacy accessory '%s'. Make sure you are using a valid meshId and try again.\n", var4.Name)
+		Flag = false
+		table.insert(List, {
+			string.format("Missing meshId on legacy accessory '%s'. Make sure you are using a valid meshId and try again.\n", InstancesEntry.Name)
 		})
 	end
-	t.editableMesh = var17
-	var15 = true
-	local t_2 = {
+	config.editableMesh = MeshId2
+	local config1 = {
 		fieldName = "TextureId",
-		fullName = specialMesh:GetFullName(),
-		contentId = specialMesh.TextureId
+		fullName = SpecialMesh:GetFullName(),
+		contentId = SpecialMesh.TextureId
 	}
-	local var18, var19 = getEditableImageFromContextModule(specialMesh, "TextureId", p1)
+	local TextureId, TextureId2 = GetEditableImageFromContextModule(SpecialMesh, "TextureId", p1)
 	
-	if not var18 then
+	if not TextureId then
 		return false, {
-			string.format("Failed to load texture for legacy accessory '%s'. Make sure texture exists and try again.", var4.Name)
+			string.format("Failed to load texture for legacy accessory '%s'. Make sure texture exists and try again.", InstancesEntry.Name)
 		}
 	end
-	t_2.editableImage = var19
-	local _ = {}
-	local var20, var21 = validateTagsModule(var4, p1)
-	local var22 = var21
+	config1.editableImage = TextureId2
+	local ValidateTagsModuleResult, ValidateTagsModuleResult2 = ValidateTagsModule(InstancesEntry, p1)
 	
-	if not var20 then
-		table.insert(t_1, table.concat(var22, "\n"))
-		var14 = false
+	if not ValidateTagsModuleResult then
+		table.insert(List, table.concat(ValidateTagsModuleResult2, "\n"))
+		Flag = false
 	end
-	local var23
-	local avatarPartScaleType = handle:FindFirstChild("AvatarPartScaleType")
+	local AvatarPartScaleType = Handle:FindFirstChild("AvatarPartScaleType")
 	
-	if avatarPartScaleType then
-		if avatarPartScaleType:IsA("StringValue") then
-			local var24, var25 = validateScaleTypeModule(avatarPartScaleType, p1)
-			local var26 = var25
-			
-			if not var24 then
-				table.insert(t_1, table.concat(var26, "\n"))
-				var23 = false
-				var23 = var14
-			end
-		else
-			var23 = var14
-		end
-	else
-		var23 = var14
-	end
-	local var27, var28 = validateThumbnailConfigurationModule(var4, handle, t, scale, p1)
-	local var29 = var28
-	
-	if not var27 then
-		table.insert(t_1, table.concat(var29, "\n"))
-		var23 = false
-	end
-	if getEngineFeatureEngineUGCValidateRigidNonSkinnedModule() then
-		local var30, var31 = validateRigidMeshNotSkinnedModule(t.contentId, p1)
-		local var32 = var31
+	if AvatarPartScaleType and AvatarPartScaleType:IsA("StringValue") then
+		local ValidateScaleTypeModuleResult, ValidateScaleTypeModuleResult2 = ValidateScaleTypeModule(AvatarPartScaleType, p1)
 		
-		if not var30 then
-			table.insert(t_1, table.concat(var32, "\n"))
-			var23 = false
+		if not ValidateScaleTypeModuleResult then
+			table.insert(List, table.concat(ValidateScaleTypeModuleResult2, "\n"))
+			Flag = false
 		end
 	end
-	return var23, t_1
+	local ValidateThumbnailConfigurationModuleResult, ValidateThumbnailConfigurationModuleResult2 = ValidateThumbnailConfigurationModule(InstancesEntry, Handle, config, Scale, p1)
+	
+	if not ValidateThumbnailConfigurationModuleResult then
+		table.insert(List, table.concat(ValidateThumbnailConfigurationModuleResult2, "\n"))
+		Flag = false
+	end
+	return Flag, List
 end

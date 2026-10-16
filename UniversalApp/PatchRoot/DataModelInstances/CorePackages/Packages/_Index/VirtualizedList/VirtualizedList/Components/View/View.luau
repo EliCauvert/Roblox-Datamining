@@ -1,42 +1,42 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local reactModule = require(parent.React)
-local change = reactModule.Change
-local view = reactModule.Component:extend("View")
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local ReactModule = require(Parent.React)
+local Change = ReactModule.Change
+local View = ReactModule.Component:extend("View")
 
-function view.init(p1, p2)
-	-- upvalues: reactModule (ref)
-	p1.props = p2
-	p1._nativeRef = p1.props.nativeRef or reactModule.createRef()
+function View.init(p1, Props) --[[ Line: 46 ]]
+	-- upvalues: ReactModule (copy)
+	p1.props = Props
+	p1._nativeRef = p1.props.nativeRef or ReactModule.createRef()
 end
 
-function view.render(p1)
-	-- upvalues: array (ref), object (ref), change (ref), reactModule (ref)
-	local var1 = object.assign(table.clone(p1.props), if array.isArray(p1.props.style) then array.reduce(p1.props.style, function(p2, p3)
-		-- upvalues: object (copy)
-		return object.assign(p2, p3)
+function View.render(p1) --[[ Line: 51 ]]
+	-- upvalues: Array (copy), Object (copy), Change (copy), ReactModule (copy)
+	local AssignResult = Object.assign(table.clone(p1.props), if Array.isArray(p1.props.style) then Array.reduce(p1.props.style, function(p2, p3) --[[ Line: 53 ]]
+		-- upvalues: Object (upval)
+		return Object.assign(p2, p3)
 	end, {}) else p1.props.style)
 	p1.nativeProps = {
 		ref = p1._nativeRef,
-		BackgroundColor3 = var1.BackgroundColor3,
-		Name = var1.Name or "View",
-		Size = var1.Size or UDim2.new(1, 0, 0, 0),
-		AutomaticSize = var1.AutomaticSize or Enum.AutomaticSize.Y,
-		ZIndex = var1.ZIndex or nil,
-		LayoutOrder = var1.LayoutOrder or nil,
-		BorderSizePixel = var1.BorderSizePixel or 0,
-		BackgroundTransparency = var1.BackgroundTransparency or 1,
-		SelectionGroup = var1.SelectionGroup,
-		SelectionBehaviorLeft = var1.SelectionBehaviorLeft,
-		SelectionBehaviorRight = var1.SelectionBehaviorRight,
-		SelectionBehaviorUp = var1.SelectionBehaviorUp,
-		SelectionBehaviorDown = var1.SelectionBehaviorDown,
-		[change.AbsoluteSize] = var1.onLayout
+		BackgroundColor3 = AssignResult.BackgroundColor3,
+		Name = AssignResult.Name or "View",
+		Size = AssignResult.Size or UDim2.new(1, 0, 0, 0),
+		AutomaticSize = AssignResult.AutomaticSize or Enum.AutomaticSize.Y,
+		ZIndex = AssignResult.ZIndex or nil,
+		LayoutOrder = AssignResult.LayoutOrder or nil,
+		BorderSizePixel = AssignResult.BorderSizePixel or 0,
+		BackgroundTransparency = AssignResult.BackgroundTransparency or 1,
+		SelectionGroup = AssignResult.SelectionGroup,
+		SelectionBehaviorLeft = AssignResult.SelectionBehaviorLeft,
+		SelectionBehaviorRight = AssignResult.SelectionBehaviorRight,
+		SelectionBehaviorUp = AssignResult.SelectionBehaviorUp,
+		SelectionBehaviorDown = AssignResult.SelectionBehaviorDown,
+		[Change.AbsoluteSize] = AssignResult.onLayout
 	}
 	
-	return reactModule.createElement("Frame", p1.nativeProps, p1.props.children)
+	return ReactModule.createElement("Frame", p1.nativeProps, p1.props.children)
 end
 
-return view
+return View

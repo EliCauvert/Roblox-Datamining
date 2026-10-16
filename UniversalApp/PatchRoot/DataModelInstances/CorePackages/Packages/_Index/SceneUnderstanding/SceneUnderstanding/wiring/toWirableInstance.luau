@@ -1,8 +1,8 @@
-﻿local sceneUnderstanding = script:FindFirstAncestor("SceneUnderstanding")
-local isWirableModule = require(sceneUnderstanding.wiring.isWirable)
-local _ = require(sceneUnderstanding.wiring.types)
+﻿local SceneUnderstanding = script:FindFirstAncestor("SceneUnderstanding")
+local IsWirableModule = require(SceneUnderstanding.wiring.isWirable)
+local _ = require(SceneUnderstanding.wiring.types)
 
-return function(p1)
-	-- upvalues: isWirableModule (ref)
-	return if p1 and isWirableModule(p1) then p1 else nil
+return function(p1) --[[ Line: 8 | Named "toWirableInstance" ]]
+	-- upvalues: IsWirableModule (copy)
+	return if p1 and IsWirableModule(p1) then p1 else nil
 end

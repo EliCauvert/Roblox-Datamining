@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.RegExp.RegExp)
+﻿return (require(script.Parent._Index.RegExp.RegExp))

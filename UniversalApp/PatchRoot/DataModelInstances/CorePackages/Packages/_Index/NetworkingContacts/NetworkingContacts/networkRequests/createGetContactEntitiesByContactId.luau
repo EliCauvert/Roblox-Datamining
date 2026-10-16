@@ -1,11 +1,11 @@
-﻿local parent = script.Parent.Parent
-local API_URLModule = require(parent.API_URL)
-local _ = require(parent.Types.networkRequestsTypes)
+﻿local Parent = script.Parent.Parent
+local APIURLModule = require(Parent.API_URL)
+local _ = require(Parent.Types.networkRequestsTypes)
 
-return function(p1)
-	-- upvalues: API_URLModule (ref)
-	return p1.roduxNetworking.POST({ Name = "GetContactEntitiesByContactId" }, function(p2, p3)
-		-- upvalues: API_URLModule (copy)
-		return p2(API_URLModule):path("contacts-api"):path("v1"):path("contacts"):path("entities"):body({ userContactIds = p3 })
+return function(p1) --[[ Line: 5 ]]
+	-- upvalues: APIURLModule (copy)
+	return p1.roduxNetworking.POST({ Name = "GetContactEntitiesByContactId" }, function(Callback, UserContactIds) --[[ Line: 10 ]]
+		-- upvalues: APIURLModule (upval)
+		return Callback(APIURLModule):path("contacts-api"):path("v1"):path("contacts"):path("entities"):body({ userContactIds = UserContactIds })
 	end)
 end

@@ -1,15 +1,12 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local interactableModule = require(parent.Interactable)
-local describe = require(parent_2.Dev.JestGlobals).describe
-local benchmarksModule = require(parent_1.Utility.benchmarks)
-local mountComponentTimes = benchmarksModule.mountComponentTimes
-local scrollComponentTimes = benchmarksModule.scrollComponentTimes
-local var1 = roactModule.createElement(interactableModule, { onStateChanged = function() end })
-describe("Interactable", function()
-	-- upvalues: mountComponentTimes (ref), var1 (ref), scrollComponentTimes (ref)
-	mountComponentTimes(var1, 100, "Interactable")
-	scrollComponentTimes(var1, 100, "Interactable")
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local BenchmarksModule = require(Parent1.Utility.benchmarks)
+local MountComponentTimesFunction = BenchmarksModule.mountComponentTimes
+local ScrollComponentTimesFunction = BenchmarksModule.scrollComponentTimes
+local Element = require(Parent2.Roact).createElement(require(Parent.Interactable), { onStateChanged = function() --[[ Line: 17 ]] end })
+require(Parent2.Dev.JestGlobals).describe("Interactable", function() --[[ Line: 20 ]]
+	-- upvalues: MountComponentTimesFunction (copy), Element (copy), ScrollComponentTimesFunction (copy)
+	MountComponentTimesFunction(Element, 100, "Interactable")
+	ScrollComponentTimesFunction(Element, 100, "Interactable")
 end)

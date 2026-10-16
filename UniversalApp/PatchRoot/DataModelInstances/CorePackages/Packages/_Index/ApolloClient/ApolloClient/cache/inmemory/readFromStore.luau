@@ -1,411 +1,420 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local boolean = luauPolyfillModule.Boolean
-local set = luauPolyfillModule.Set
-local weakMap = luauPolyfillModule.WeakMap
-local httpService = game:GetService("HttpService")
-local NULL = require(parent.utilities).NULL
-local assertSelectionSetForIdValue = nil
-local t = {}
-local _ = require(parent_1.GraphQL)
-local wrap = require(parent.optimism).wrap
-local invariantModule = require(parent.jsutils.invariant)
-local invariant = invariantModule.invariant
-local invariantError = invariantModule.InvariantError
-local utilitiesModule = require(script.Parent.Parent.Parent.utilities)
-local isField = utilitiesModule.isField
-local resultKeyNameFromField = utilitiesModule.resultKeyNameFromField
-local isReference = utilitiesModule.isReference
-local makeReference = utilitiesModule.makeReference
-local createFragmentMap = utilitiesModule.createFragmentMap
-local shouldInclude = utilitiesModule.shouldInclude
-local addTypenameToDocument = utilitiesModule.addTypenameToDocument
-local getDefaultValues = utilitiesModule.getDefaultValues
-local getFragmentDefinitions = utilitiesModule.getFragmentDefinitions
-local getMainDefinition = utilitiesModule.getMainDefinition
-local getQueryDefinition = utilitiesModule.getQueryDefinition
-local mergeDeepArray = utilitiesModule.mergeDeepArray
-local getFragmentFromSelection = utilitiesModule.getFragmentFromSelection
-local maybeDeepFreeze = utilitiesModule.maybeDeepFreeze
-local isNonNullObject = utilitiesModule.isNonNullObject
-local _ = utilitiesModule.canUseWeakMap
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local Boolean = LuauPolyfillModule.Boolean
+local Set = LuauPolyfillModule.Set
+local WeakMap = LuauPolyfillModule.WeakMap
+local HttpService = game:GetService("HttpService")
+local NULL = require(Parent.utilities).NULL
+local Callback = nil
+local ReadFromStore = {}
+local _ = require(Parent1.GraphQL)
+local WrapFunction = require(Parent.optimism).wrap
+local InvariantModule = require(Parent.jsutils.invariant)
+local InvariantFunction = InvariantModule.invariant
+local InvariantError = InvariantModule.InvariantError
+local UtilitiesModule = require(script.Parent.Parent.Parent.utilities)
+local IsFieldFunction = UtilitiesModule.isField
+local ResultKeyNameFromFieldFunction = UtilitiesModule.resultKeyNameFromField
+local IsReferenceFunction = UtilitiesModule.isReference
+local MakeReferenceFunction = UtilitiesModule.makeReference
+local CreateFragmentMapFunction = UtilitiesModule.createFragmentMap
+local ShouldIncludeFunction = UtilitiesModule.shouldInclude
+local AddTypenameToDocument = UtilitiesModule.addTypenameToDocument
+local GetDefaultValuesFunction = UtilitiesModule.getDefaultValues
+local GetFragmentDefinitionsFunction = UtilitiesModule.getFragmentDefinitions
+local GetMainDefinitionFunction = UtilitiesModule.getMainDefinition
+local GetQueryDefinitionFunction = UtilitiesModule.getQueryDefinition
+local MergeDeepArrayFunction = UtilitiesModule.mergeDeepArray
+local GetFragmentFromSelectionFunction = UtilitiesModule.getFragmentFromSelection
+local MaybeDeepFreezeFunction = UtilitiesModule.maybeDeepFreeze
+local IsNonNullObjectFunction = UtilitiesModule.isNonNullObject
+local _ = UtilitiesModule.canUseWeakMap
 local _ = require(script.Parent.Parent.core.types.Cache)
 local _ = require(script.Parent.types)
-local entityStoreModule = require(script.Parent.entityStore)
-local maybeDependOnExistenceOfEntity = entityStoreModule.maybeDependOnExistenceOfEntity
-local supportsResultCaching = entityStoreModule.supportsResultCaching
-local getTypenameFromStoreObject = require(script.Parent.helpers).getTypenameFromStoreObject
+local EntityStoreModule = require(script.Parent.entityStore)
+local MaybeDependOnExistenceOfEntityFunction = EntityStoreModule.maybeDependOnExistenceOfEntity
+local SupportsResultCachingFunction = EntityStoreModule.supportsResultCaching
+local GetTypenameFromStoreObjectFunction = require(script.Parent.helpers).getTypenameFromStoreObject
 local _ = require(script.Parent.policies)
-local missingFieldError = require(script.Parent.Parent.core.types.common).MissingFieldError
-local unknownModule = require(script.Parent["object-canon"])
-local canonicalStringify = unknownModule.canonicalStringify
-local objectCanon = unknownModule.ObjectCanon
+local MissingFieldError = require(script.Parent.Parent.core.types.common).MissingFieldError
+local ObjectCanonModule = require(script.Parent["object-canon"])
+local CanonicalStringifyFunction = ObjectCanonModule.canonicalStringify
+local ObjectCanon = ObjectCanonModule.ObjectCanon
 
-local function missingFromInvariant(a, b)
-	-- upvalues: missingFieldError (ref), array (ref)
-	return missingFieldError.new(a.message, array.slice(b.path), b.query, b.variables)
+local function missingFromInvariant(NewResult, Context) --[[ Line: 114 ]]
+	-- upvalues: MissingFieldError (copy), Array (copy)
+	return MissingFieldError.new(NewResult.message, Array.slice(Context.path), Context.query, Context.variables)
 end
 
-local function _(value)
+local function _(p1) --[[ Line: 147 | Named "execSelectionSetKeyArgs" ]]
 	return {
-		value.selectionSet,
-		value.objectOrReference,
-		value.context,
-		value.context.canonizeResults
+		p1.selectionSet,
+		p1.objectOrReference,
+		p1.context,
+		p1.context.canonizeResults
 	}
 end
 
-local t_1 = {}
-t_1.__index = t_1
+local Module = {}
+Module.__index = Module
 
-function t_1:resetCanon()
-	-- upvalues: objectCanon (ref)
-	self.canon = objectCanon.new()
+function Module:resetCanon() --[[ Line: 195 ]]
+	-- upvalues: ObjectCanon (copy)
+	self.canon = ObjectCanon.new()
 end
 
-local function makeSelectionSetCacheKey(_, p1, p2, p3, p4)
-	-- upvalues: supportsResultCaching (ref), isReference (ref)
-	return if supportsResultCaching(p3.store) then p3.store:makeCacheKey(p1, if isReference(p2) then p2.__ref else p2, p3.varString, p4) else nil
+local function makeSelectionSetCacheKey(_, p1, p2, p3, p4) --[[ Line: 200 ]]
+	-- upvalues: SupportsResultCachingFunction (copy), IsReferenceFunction (copy)
+	return if SupportsResultCachingFunction(p3.store) then p3.store:makeCacheKey(p1, IsReferenceFunction(p2) and p2.__ref or p2, p3.varString, p4) else nil
 end
 
-local function makeSubSelectedCacheKey(_, p1)
-	-- upvalues: supportsResultCaching (ref)
-	local context = p1.context
+local function makeSubSelectedCacheKey(_, p1) --[[ Line: 212 ]]
+	-- upvalues: SupportsResultCachingFunction (copy)
+	local Field = p1.field
+	local Array = p1.array
+	local Context = p1.context
 	
-	return if supportsResultCaching(context.store) then context.store:makeCacheKey(p1.field, p1.array, context.varString) else nil
+	return if SupportsResultCachingFunction(Context.store) then Context.store:makeCacheKey(Field, Array, Context.varString) else nil
 end
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref), weakMap (ref), object (ref), objectCanon (ref), wrap (ref), maybeDependOnExistenceOfEntity (ref), makeSelectionSetCacheKey (ref), makeSubSelectedCacheKey (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.knownResults = weakMap.new()
-	tbl.config = object.assign(table.clone(p1), { addTypename = p1.addTypename ~= false })
-	tbl.canon = p1.canon or objectCanon.new()
-	tbl.executeSelectionSet = wrap(function(_, p2)
-		-- upvalues: tbl (ref), object (copy), maybeDependOnExistenceOfEntity (copy)
-		local canonizeResults = p2.context.canonizeResults
-		local var1 = tbl.executeSelectionSet:peek(table.unpack({
-			p2.selectionSet,
-			p2.objectOrReference,
-			p2.context,
-			p2.context.canonizeResults,
-			[4] = not canonizeResults
+function Module.new(Tbl) --[[ Line: 221 ]]
+	-- upvalues: Module (copy), WeakMap (copy), Object (copy), ObjectCanon (copy), WrapFunction (copy), MaybeDependOnExistenceOfEntityFunction (copy), makeSelectionSetCacheKey (copy), makeSubSelectedCacheKey (copy)
+	local self = setmetatable({}, Module)
+	self.knownResults = WeakMap.new()
+	self.config = Object.assign(table.clone(Tbl), { addTypename = Tbl.addTypename ~= false })
+	self.canon = Tbl.canon or ObjectCanon.new()
+	self.executeSelectionSet = WrapFunction(function(_, p1) --[[ Line: 236 ]]
+		-- upvalues: self (copy), Object (upval), MaybeDependOnExistenceOfEntityFunction (upval)
+		local CanonizeResults = p1.context.canonizeResults
+		local PeekResult = self.executeSelectionSet:peek(table.unpack({
+			p1.selectionSet,
+			p1.objectOrReference,
+			p1.context,
+			p1.context.canonizeResults,
+			[4] = not CanonizeResults
 		}))
 		
-		if var1 == nil then
-			maybeDependOnExistenceOfEntity(p2.context.store, p2.enclosingRef.__ref)
+		if PeekResult == nil then
+			MaybeDependOnExistenceOfEntityFunction(p1.context.store, p1.enclosingRef.__ref)
 			
-			return tbl:execSelectionSetImpl(p2)
+			return self:execSelectionSetImpl(p1)
+		else
+			return if CanonizeResults then Object.assign(table.clone(PeekResult), { result = self.canon:admit(PeekResult.result) }) else PeekResult
 		end
-		return if canonizeResults then object.assign(table.clone(var1), { result = tbl.canon:admit(var1.result) }) else var1
 	end, {
-		max = tbl.config.resultCacheMaxSize,
-		keyArgs = function(_, ...)
-			local var1 = ...
+		max = self.config.resultCacheMaxSize,
+		keyArgs = function(_, ...) --[[ Line: 271 ]]
+			local v1 = (...)
 			
 			return {
-				var1.selectionSet,
-				var1.objectOrReference,
-				var1.context,
-				var1.context.canonizeResults
+				v1.selectionSet,
+				v1.objectOrReference,
+				v1.context,
+				v1.context.canonizeResults
 			}
 		end,
 		makeCacheKey = makeSelectionSetCacheKey
-	}, tbl)
-	tbl.executeSubSelectedArray = wrap(function(_, p2)
-		-- upvalues: maybeDependOnExistenceOfEntity (copy), tbl (ref)
-		maybeDependOnExistenceOfEntity(p2.context.store, p2.enclosingRef.__ref)
+	}, self)
+	self.executeSubSelectedArray = WrapFunction(function(_, p1) --[[ Line: 281 ]]
+		-- upvalues: MaybeDependOnExistenceOfEntityFunction (upval), self (copy)
+		MaybeDependOnExistenceOfEntityFunction(p1.context.store, p1.enclosingRef.__ref)
 		
-		return tbl:execSubSelectedArrayImpl(p2)
+		return self:execSubSelectedArrayImpl(p1)
 	end, {
-		max = tbl.config.resultCacheMaxSize,
+		max = self.config.resultCacheMaxSize,
 		makeCacheKey = makeSubSelectedCacheKey
-	}, tbl)
+	}, self)
 	
-	return tbl
+	return self
 end
 
-function t_1:diffQueryAgainstStore(p1)
-	-- upvalues: object (ref), getDefaultValues (ref), getQueryDefinition (ref), makeReference (ref), getMainDefinition (ref), canonicalStringify (ref), createFragmentMap (ref), getFragmentDefinitions (ref)
-	local store = p1.store
-	local query = p1.query
-	local rootId = p1.rootId
-	local variables = p1.variables
-	local returnPartialData = p1.returnPartialData
-	local canonizeResults = p1.canonizeResults
+function Module:diffQueryAgainstStore(p1) --[[ Line: 301 ]]
+	-- upvalues: Object (copy), GetDefaultValuesFunction (copy), GetQueryDefinitionFunction (copy), MakeReferenceFunction (copy), GetMainDefinitionFunction (copy), CanonicalStringifyFunction (copy), CreateFragmentMapFunction (copy), GetFragmentDefinitionsFunction (copy)
+	local Store = p1.store
+	local Query = p1.query
+	local RootId = p1.rootId
+	local Variables = p1.variables
+	local ReturnPartialData = p1.returnPartialData
+	local CanonizeResults = p1.canonizeResults
 	
-	if rootId == nil then
-		rootId = "ROOT_QUERY"
+	if RootId == nil then
+		RootId = "ROOT_QUERY"
 	end
-	if returnPartialData == nil then
-		returnPartialData = true
+	if ReturnPartialData == nil then
+		ReturnPartialData = true
 	end
-	if canonizeResults == nil then
-		canonizeResults = true
+	if CanonizeResults == nil then
+		CanonizeResults = true
 	end
-	local policies = self.config.cache.policies
-	local var1 = object.assign({}, getDefaultValues(getQueryDefinition(query)), variables)
-	local var2 = makeReference(rootId)
-	local var3 = self:executeSelectionSet({
-		selectionSet = getMainDefinition(query).selectionSet,
-		objectOrReference = var2,
-		enclosingRef = var2,
+	local Policies = self.config.cache.policies
+	local AssignResult = Object.assign({}, GetDefaultValuesFunction(GetQueryDefinitionFunction(Query)), Variables)
+	local Reference = MakeReferenceFunction(RootId)
+	local ExecuteSelectionSetResult = self:executeSelectionSet({
+		selectionSet = GetMainDefinitionFunction(Query).selectionSet,
+		objectOrReference = Reference,
+		enclosingRef = Reference,
 		context = {
-			store = store,
-			query = query,
-			policies = policies,
-			variables = var1,
-			varString = canonicalStringify(var1),
-			canonizeResults = canonizeResults,
-			fragmentMap = createFragmentMap(getFragmentDefinitions(query)),
+			store = Store,
+			query = Query,
+			policies = Policies,
+			variables = AssignResult,
+			varString = CanonicalStringifyFunction(AssignResult),
+			canonizeResults = CanonizeResults,
+			fragmentMap = CreateFragmentMapFunction(GetFragmentDefinitionsFunction(Query)),
 			path = {}
 		}
 	})
-	local var4 = var3.missing and #var3.missing > 0
+	local v1: boolean = ExecuteSelectionSetResult.missing and #ExecuteSelectionSetResult.missing > 0
 	
-	if var4 and not returnPartialData then
-		error(var3.missing[1])
+	if v1 and not ReturnPartialData then
+		error(ExecuteSelectionSetResult.missing[1])
 	end
 	return {
-		result = var3.result,
-		missing = var3.missing,
-		complete = not var4
+		result = ExecuteSelectionSetResult.result,
+		missing = ExecuteSelectionSetResult.missing,
+		complete = not v1
 	}
 end
 
-function t_1:isFresh(p1, p2, p3, p4)
-	-- upvalues: supportsResultCaching (ref)
-	if supportsResultCaching(p4.store) and self.knownResults:get(p1) == p3 then
-		local var1 = self.executeSelectionSet:peek(p3, p2, p4, self.canon:isKnown(p1))
+function Module:isFresh(p1, p2, p3, p4): boolean --[[ Line: 349 ]]
+	-- upvalues: SupportsResultCachingFunction (copy)
+	if SupportsResultCachingFunction(p4.store) and self.knownResults:get(p1) == p3 then
+		local PeekResult = self.executeSelectionSet:peek(p3, p2, p4, self.canon:isKnown(p1))
 		
-		return var1 and p1 == var1.result
+		if PeekResult and p1 == PeekResult.result then
+			return true
+		end
 	end
+	return false
 end
 
-function t_1:execSelectionSetImpl(p1)
-	-- upvalues: missingFromInvariant (ref), invariantError (ref), NULL (ref), set (ref), shouldInclude (ref), isField (ref), resultKeyNameFromField (ref), addTypenameToDocument (ref), isReference (ref), httpService (ref), array (ref), invariant (ref), getFragmentFromSelection (ref), mergeDeepArray (ref), maybeDeepFreeze (ref)
-	local selectionSet = p1.selectionSet
-	local objectOrReference = p1.objectOrReference
-	local enclosingRef = p1.enclosingRef
-	local context = p1.context
+function Module:execSelectionSetImpl(p1) --[[ Line: 375 ]]
+	-- upvalues: missingFromInvariant (copy), InvariantError (copy), NULL (copy), Set (copy), ShouldIncludeFunction (copy), IsFieldFunction (copy), ResultKeyNameFromFieldFunction (copy), AddTypenameToDocument (copy), IsReferenceFunction (copy), HttpService (copy), Array (copy), InvariantFunction (copy), GetFragmentFromSelectionFunction (copy), MergeDeepArrayFunction (copy), MaybeDeepFreezeFunction (copy)
+	local SelectionSet = p1.selectionSet
+	local ObjectOrReference = p1.objectOrReference
+	local EnclosingRef = p1.enclosingRef
+	local Context = p1.context
 	
-	if objectOrReference.__ref and not context.policies.rootTypenamesById[objectOrReference.__ref] and not context.store:has(objectOrReference.__ref) then
+	if ObjectOrReference.__ref and not Context.policies.rootTypenamesById[ObjectOrReference.__ref] and not Context.store:has(ObjectOrReference.__ref) then
 		return {
 			result = self.canon.empty,
 			missing = {
-				missingFromInvariant(invariantError.new(("Dangling reference to missing %s object"):format(objectOrReference.__ref)), context)
+				missingFromInvariant(InvariantError.new(("Dangling reference to missing %s object"):format(ObjectOrReference.__ref)), Context)
 			}
 		}
 	end
-	local variables = context.variables
-	local policies = context.policies
-	local store = context.store
-	local t = {}
-	local t_1 = { result = NULL }
-	local var1 = store:getFieldValue(objectOrReference, "__typename")
+	local Variables = Context.variables
+	local Policies = Context.policies
+	local List = {}
+	local config = { result = NULL }
+	local TypenameFieldValue = Context.store:getFieldValue(ObjectOrReference, "__typename")
 	
-	if self.config.addTypename and type(var1) == "string" and not policies.rootIdsByTypename[var1] then
-		table.insert(t, { __typename = var1 })
+	if self.config.addTypename and type(TypenameFieldValue) == "string" and not Policies.rootIdsByTypename[TypenameFieldValue] then
+		table.insert(List, { __typename = TypenameFieldValue })
 	end
-	local function _()
-		-- upvalues: t_1 (ref)
-		if not t_1.missing then
-			t_1.missing = {}
+	local function _() --[[ Line: 412 | Named "getMissing" ]]
+		-- upvalues: config (copy)
+		if not config.missing then
+			config.missing = {}
 		end
-		return t_1.missing
+		return config.missing
 	end
 	
-	local _ = function(p2)
-		-- upvalues: t_1 (ref)
+	local _ = function(p2) --[[ Line: 421 | Named "handleMissing" ]]
+		-- upvalues: config (copy)
 		if p2.missing then
-			if not t_1.missing then
-				t_1.missing = {}
+			if not config.missing then
+				config.missing = {}
 			end
-			local missing = t_1.missing
+			local Missing = config.missing
 			
-			for i, v in p2.missing do
-				table.insert(missing, v)
+			for _, value in p2.missing do
+				table.insert(Missing, value)
 			end
 		end
 		return p2.result
 	end
 	
-	local var2 = set.new(selectionSet.selections)
+	local NewSet = Set.new(SelectionSet.selections)
 	
-	for i, v in var2 do
-		if shouldInclude(v, variables) then
-			if not isField(v) then
-				local var3 = getFragmentFromSelection(v, context.fragmentMap)
+	for _, Field in NewSet do
+		if ShouldIncludeFunction(Field, Variables) then
+			if not IsFieldFunction(Field) then
+				local FragmentFromSelection = GetFragmentFromSelectionFunction(Field, Context.fragmentMap)
 				
-				if var3 and policies:fragmentMatches(var3, var1) then
-					array.forEach(var3.selectionSet.selections, var2.add, var2)
+				if FragmentFromSelection and Policies:fragmentMatches(FragmentFromSelection, TypenameFieldValue) then
+					Array.forEach(FragmentFromSelection.selectionSet.selections, NewSet.add, NewSet)
+					continue
 				end
+				continue
 			end
-			local var4 = policies:readField({
-				fieldName = v.name.value,
-				field = v,
-				variables = context.variables,
-				from = objectOrReference
-			}, context)
-			local var5 = resultKeyNameFromField(v)
-			table.insert(context.path, var5)
+			local Field1 = Policies:readField({
+				fieldName = Field.name.value,
+				field = Field,
+				variables = Context.variables,
+				from = ObjectOrReference
+			}, Context)
+			local ResultKeyNameFromFieldResult = ResultKeyNameFromFieldFunction(Field)
+			table.insert(Context.path, ResultKeyNameFromFieldResult)
 			
-			if var4 == nil then
-				if not addTypenameToDocument:added(v) then
-					if not t_1.missing then
-						t_1.missing = {}
+			if Field1 == nil then
+				if not AddTypenameToDocument:added(Field) then
+					if not config.missing then
+						config.missing = {}
 					end
-					table.insert(t_1.missing, missingFromInvariant(invariantError.new(("Can't find field '%s' on %s"):format(v.name.value, if isReference(objectOrReference) then objectOrReference.__ref .. " object" else "object " .. httpService:JSONEncode(objectOrReference))), context))
+					table.insert(config.missing, missingFromInvariant(InvariantError.new(("Can't find field '%s' on %s"):format(Field.name.value, IsReferenceFunction(ObjectOrReference) and ObjectOrReference.__ref .. " object" or "object " .. HttpService:JSONEncode(ObjectOrReference))), Context))
 				end
-			elseif array.isArray(var4) then
-				local var6 = self:executeSubSelectedArray({
-					field = v,
-					array = var4,
-					enclosingRef = enclosingRef,
-					context = context
+			elseif Array.isArray(Field1) then
+				local ExecuteSubSelectedArrayResult = self:executeSubSelectedArray({
+					field = Field,
+					array = Field1,
+					enclosingRef = EnclosingRef,
+					context = Context
 				})
 				
-				if var6.missing then
-					if not t_1.missing then
-						t_1.missing = {}
+				if ExecuteSubSelectedArrayResult.missing then
+					if not config.missing then
+						config.missing = {}
 					end
-					local missing = t_1.missing
+					local Missing = config.missing
 					
-					for i_1, v_1 in var6.missing do
-						table.insert(missing, v_1)
+					for _, value in ExecuteSubSelectedArrayResult.missing do
+						table.insert(Missing, value)
 					end
 				end
-				var4 = var6.result
-			elseif v.selectionSet then
-				if var4 ~= NULL then
-					local var7 = self:executeSelectionSet({
-						selectionSet = v.selectionSet,
-						objectOrReference = var4,
-						enclosingRef = if isReference(var4) then var4 else enclosingRef,
-						context = context
+				Field1 = ExecuteSubSelectedArrayResult.result
+			elseif Field.selectionSet then
+				if Field1 ~= NULL then
+					local ExecuteSelectionSetResult = self:executeSelectionSet({
+						selectionSet = Field.selectionSet,
+						objectOrReference = Field1,
+						enclosingRef = IsReferenceFunction(Field1) and Field1 or EnclosingRef,
+						context = Context
 					})
 					
-					if var7.missing then
-						if not t_1.missing then
-							t_1.missing = {}
+					if ExecuteSelectionSetResult.missing then
+						if not config.missing then
+							config.missing = {}
 						end
-						local missing = t_1.missing
+						local Missing = config.missing
 						
-						for i_1, v_1 in var7.missing do
-							table.insert(missing, v_1)
+						for _, value1 in ExecuteSelectionSetResult.missing do
+							table.insert(Missing, value1)
 						end
 					end
-					var4 = var7.result
+					Field1 = ExecuteSelectionSetResult.result
 				end
-			elseif context.canonizeResults then
-				var4 = self.canon:pass(var4)
+			elseif Context.canonizeResults then
+				Field1 = self.canon:pass(Field1)
 			end
-			if var4 ~= nil then
-				table.insert(t, { [var5] = var4 })
+			if Field1 ~= nil then
+				table.insert(List, { [ResultKeyNameFromFieldResult] = Field1 })
 			end
-			local var8 = table.remove(context.path) == var5
+			local IsRemovedMatch = table.remove(Context.path) == ResultKeyNameFromFieldResult
 			
-			if not var8 then
-				invariant(var8)
+			if not IsRemovedMatch then
+				InvariantFunction(IsRemovedMatch)
 			end
 		end
 	end
-	local var9 = mergeDeepArray(t)
+	local MergeDeepArrayResult = MergeDeepArrayFunction(List)
 	
-	if context.canonizeResults then
-		t_1.result = self.canon:admit(var9)
+	if Context.canonizeResults then
+		config.result = self.canon:admit(MergeDeepArrayResult)
 	else
-		t_1.result = maybeDeepFreeze(var9)
+		config.result = MaybeDeepFreezeFunction(MergeDeepArrayResult)
 	end
-	self.knownResults:set(t_1.result, selectionSet)
+	self.knownResults:set(config.result, SelectionSet)
 	
-	return t_1
+	return config
 end
 
-function t_1:execSubSelectedArrayImpl(p3)
-	-- upvalues: invariant (ref), array (ref), NULL (ref), boolean (ref), isReference (ref), assertSelectionSetForIdValue (write)
-	local field = p3.field
-	local array_1 = p3.array
-	local enclosingRef = p3.enclosingRef
-	local context = p3.context
-	local var10 = nil
+function Module.execSubSelectedArrayImpl(p3, p4) --[[ Line: 553 ]]
+	-- upvalues: InvariantFunction (copy), Array (copy), NULL (copy), Boolean (copy), IsReferenceFunction (copy), Callback (ref)
+	local Field = p4.field
+	local Array1 = p4.array
+	local EnclosingRef = p4.enclosingRef
+	local Context = p4.context
+	local List = nil
 	
-	local function handleMissing(p4, p5)
-		-- upvalues: var10 (write), invariant (copy), context (ref)
-		if p4.missing then
-			var10 = var10 or {}
-			local missing = p4.missing
+	local function handleMissing(ExecuteSelectionSetResult, Removed) --[[ Line: 558 ]]
+		-- upvalues: List (ref), InvariantFunction (upval), Context (copy)
+		if ExecuteSelectionSetResult.missing then
+			List = List or {}
+			local Missing = ExecuteSelectionSetResult.missing
 			
-			for i = 1, #missing do
-				table.insert(var10, missing[i])
+			for i = 1, #Missing do
+				table.insert(List, Missing[i])
 			end
 		end
-		invariant(table.remove(context.path) == p5)
+		InvariantFunction(table.remove(Context.path) == Removed)
 		
-		return p4.result
+		return ExecuteSelectionSetResult.result
 	end
 	
-	if field.selectionSet then
-		array_1 = array.filter(array_1, function(p6)
-			-- upvalues: context (ref)
-			return context.store:canRead(p6)
+	if Field.selectionSet then
+		Array1 = Array.filter(Array1, function(p5) --[[ Line: 577 ]]
+			-- upvalues: Context (copy)
+			return Context.store:canRead(p5)
 		end)
 	end
-	local var11 = array.map(array_1, function(p6, p7)
-		-- upvalues: NULL (copy), context (ref), array (copy), handleMissing (ref), self (ref), field (ref), enclosingRef (ref), boolean (copy), isReference (copy), assertSelectionSetForIdValue (copy), invariant (copy)
-		if p6 == NULL then
+	local MapResult = Array.map(Array1, function(Array1, Removed) --[[ Line: 582 ]]
+		-- upvalues: NULL (upval), Context (copy), Array (upval), handleMissing (copy), p3 (copy), Field (copy), EnclosingRef (copy), Boolean (upval), IsReferenceFunction (upval), Callback (upval), InvariantFunction (upval)
+		if Array1 == NULL then
 			return NULL
 		end
-		table.insert(context.path, p7)
+		table.insert(Context.path, Removed)
 		
-		if array.isArray(p6) and #p6 > 0 then
-			return handleMissing(self:executeSubSelectedArray({
-				field = field,
-				array = p6,
-				enclosingRef = enclosingRef,
-				context = context
-			}), p7)
-		elseif boolean.toJSBoolean(field.selectionSet) then
-			return handleMissing(self:executeSelectionSet({
-				selectionSet = field.selectionSet,
-				objectOrReference = p6,
-				enclosingRef = if isReference(p6) then p6 else enclosingRef,
-				context = context
-			}), p7)
-		elseif _G.__DEV__ then
-			assertSelectionSetForIdValue(context.store, field, p6)
+		if Array.isArray(Array1) and #Array1 > 0 then
+			return (handleMissing(p3:executeSubSelectedArray({
+				field = Field,
+				array = Array1,
+				enclosingRef = EnclosingRef,
+				context = Context
+			}), Removed))
 		end
-		local var12 = table.remove(context.path) == p7
+		if Boolean.toJSBoolean(Field.selectionSet) then
+			return (handleMissing(p3:executeSelectionSet({
+				selectionSet = Field.selectionSet,
+				objectOrReference = Array1,
+				enclosingRef = IsReferenceFunction(Array1) and Array1 or EnclosingRef,
+				context = Context
+			}), Removed))
+		end
+		if _G.__DEV__ then
+			Callback(Context.store, Field, Array1)
+		end
+		local IsRemovedMatch = table.remove(Context.path) == Removed
 		
-		if not var12 then
-			invariant(var12)
+		if not IsRemovedMatch then
+			InvariantFunction(IsRemovedMatch)
 		end
-		return p6
+		return Array1
 	end)
 	
 	return {
-		result = if context.canonizeResults then self.canon:admit(var11) else var11,
-		missing = var10
+		result = if Context.canonizeResults then p3.canon:admit(MapResult) else MapResult,
+		missing = List
 	}
 end
 
-t.StoreReader = t_1
+ReadFromStore.StoreReader = Module
 
-assertSelectionSetForIdValue = function(value, p4, p5)
-	-- upvalues: set (ref), isNonNullObject (ref), invariant (ref), isReference (ref), getTypenameFromStoreObject (ref), array (ref), object (ref)
-	if not p4.selectionSet then
-		local var11 = set.new({ p5 })
+Callback = function(Store, Field, Array1) --[[ Line: 643 | Named "assertSelectionSetForIdValue" ]]
+	-- upvalues: Set (copy), IsNonNullObjectFunction (copy), InvariantFunction (copy), IsReferenceFunction (copy), GetTypenameFromStoreObjectFunction (copy), Array (copy), Object (copy)
+	if not Field.selectionSet then
+		local NewSet = Set.new({ Array1 })
 		
-		for i, v in var11 do
-			if isNonNullObject(v) then
-				invariant(not isReference(v), ("Missing selection set for object of type %s returned for query field %s"):format(getTypenameFromStoreObject(value, v) or "nil", p4.name.value))
-				array.forEach(object.values(v), var11.add, var11)
+		for _, value in NewSet do
+			if IsNonNullObjectFunction(value) then
+				InvariantFunction(not IsReferenceFunction(value), ("Missing selection set for object of type %s returned for query field %s"):format(GetTypenameFromStoreObjectFunction(Store, value) or "nil", Field.name.value))
+				Array.forEach(Object.values(value), NewSet.add, NewSet)
 			end
 		end
 	end
 end
 
-return t
+return ReadFromStore

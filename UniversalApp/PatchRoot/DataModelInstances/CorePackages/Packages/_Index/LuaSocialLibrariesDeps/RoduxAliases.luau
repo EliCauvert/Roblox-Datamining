@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RoduxAliases.RoduxAliases)
+﻿return (require(script.Parent.Parent.Parent._Index.RoduxAliases.RoduxAliases))

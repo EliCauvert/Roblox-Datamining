@@ -2,11 +2,11 @@
 local _ = require(script.Parent.ObjMap)
 
 return {
-	keyMap = function(p1, p2)
+	keyMap = function(List, Callback) --[[ Line: 38 ]]
 		local t = {}
 		
-		for i, v in ipairs(p1) do
-			t[p2(v)] = v
+		for _, value in ipairs(List) do
+			t[Callback(value)] = value
 		end
 		return t
 	end

@@ -1,10 +1,10 @@
-﻿local toRectModule = require(script.Parent.toRect)
-local returnValueModule = require(script.Parent.returnValue)
+﻿local ToRectModule = require(script.Parent.toRect)
+local ReturnValueModule = require(script.Parent.returnValue)
 
-return function(p1, p2)
-	-- upvalues: toRectModule (ref), returnValueModule (ref)
-	local var1 = toRectModule(p1)
-	local var2 = toRectModule(p2)
+return function(p1, p2) --[[ Line: 24 | Named "intersect" ]]
+	-- upvalues: ToRectModule (copy), ReturnValueModule (copy)
+	local RectModule = ToRectModule(p1)
+	local RectModule1 = ToRectModule(p2)
 	
-	return returnValueModule(math.abs(var1.Min.X - var2.Min.X) * 2 < var1.Width + var2.Width and math.abs(var1.Min.Y - var2.Min.Y) * 2 < var1.Height + var2.Height, "Intersects the element", "Does not intersect the element")
+	return ReturnValueModule(math.abs(RectModule.Min.X - RectModule1.Min.X) * 2 < RectModule.Width + RectModule1.Width and math.abs(RectModule.Min.Y - RectModule1.Min.Y) * 2 < RectModule.Height + RectModule1.Height, "Intersects the element", "Does not intersect the element")
 end

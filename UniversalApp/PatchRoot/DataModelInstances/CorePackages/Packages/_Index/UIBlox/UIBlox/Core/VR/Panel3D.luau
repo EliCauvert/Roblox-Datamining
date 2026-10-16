@@ -1,14 +1,13 @@
-﻿local runService = game:GetService("RunService")
-local parent = script.Parent
-local constantsModule = require(parent.Constants)
-local usePanel3DRenderStepModule = require(parent.usePanel3DRenderStep)
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local roactModule = require(parent_2.Roact)
-local object = require(parent_2.LuauPolyfill).Object
-local var1 = require(parent_1.Core.Utility.GetEngineFeatureSafe)("CurvedSurfaceGuisEnabled")
-local t = {
+﻿local Parent = script.Parent
+local ConstantsModule = require(Parent.Constants)
+local UsePanel3DRenderStepModule = require(Parent.usePanel3DRenderStep)
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local ReactModule = require(Parent2.React)
+local RoactModule = require(Parent2.Roact)
+local Object = require(Parent2.LuauPolyfill).Object
+local CurvedSurfaceGuisEnabled = require(Parent1.Core.Utility.GetEngineFeatureSafe)("CurvedSurfaceGuisEnabled")
+local config = {
 	lerp = false,
 	tilt = 0,
 	faceCamera = false,
@@ -22,64 +21,69 @@ local t = {
 	partSize = Vector2.new(10, 10),
 	virtualScreenSize = Vector2.new(10, 10),
 	offset = CFrame.new(0, 0, 0),
-	anchoring = constantsModule.AnchoringTypes.World,
-	movementUpdateEvent = runService.RenderStepped,
+	anchoring = ConstantsModule.AnchoringTypes.World,
+	movementUpdateEvent = game:GetService("RunService").RenderStepped,
 	vrService = game:GetService("VRService"),
 	parent = workspace
 }
 
-return function(p1)
-	-- upvalues: object (ref), t (ref), reactModule (ref), usePanel3DRenderStepModule (ref), constantsModule (ref), roactModule (ref), var1 (ref)
-	local var2 = object.assign({}, t, p1)
-	local partRef = var2.partRef or reactModule.useRef(nil)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	usePanel3DRenderStepModule(var2, partRef)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), constantsModule (copy), var3 (ref)
-		if var2.anchoring ~= constantsModule.AnchoringTypes.PanelManaged then
-			return function() end
-		elseif var2.connectPanelManagerFunction == nil then
-			return function() end
-		elseif var3 == nil or not var2.connectPanelManagerFunction then
-			return function() end
+return function(p1) --[[ Line: 43 | Named "Panel3D" ]]
+	-- upvalues: Object (copy), config (copy), ReactModule (copy), UsePanel3DRenderStepModule (copy), ConstantsModule (copy), RoactModule (copy), CurvedSurfaceGuisEnabled (copy)
+	local AssignResult = Object.assign({}, config, p1)
+	local PartRef = AssignResult.partRef or ReactModule.useRef(nil)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	UsePanel3DRenderStepModule(AssignResult, PartRef)
+	ReactModule.useEffect(function() --[[ Line: 51 ]]
+		-- upvalues: AssignResult (copy), ConstantsModule (upval), UseRefResult (copy)
+		if AssignResult.anchoring ~= ConstantsModule.AnchoringTypes.PanelManaged then
+			return function() --[[ Line: 53 ]] end
+		elseif AssignResult.connectPanelManagerFunction == nil then
+			return function() --[[ Line: 57 ]] end
+		elseif UseRefResult == nil or not AssignResult.connectPanelManagerFunction then
+			return function() --[[ Line: 68 ]] end
+		else
+			AssignResult.connectPanelManagerFunction(UseRefResult)
+			
+			return function() --[[ Line: 63 ]]
+				-- upvalues: AssignResult (upval)
+				AssignResult.connectPanelManagerFunction(nil)
+			end
 		end
-		var2.connectPanelManagerFunction(var3)
-		
-		return function()
-			-- upvalues: var2 (copy)
-			var2.connectPanelManagerFunction(nil)
-		end
-	end, { var3, var2.anchoring, var2.connectPanelManagerFunction })
+	end, {
+		UseRefResult,
+		AssignResult.anchoring,
+		AssignResult.connectPanelManagerFunction
+	})
 	
-	return reactModule.createElement("Folder", { Archivable = false, ref = var4 }, {
-		WorkspacePortal = reactModule.createElement(roactModule.Portal, { target = var2.parent }, {
-			GUIPart = if var2.hidden then nil else reactModule.createElement("Part", {
+	return ReactModule.createElement("Folder", { Archivable = false, ref = UseRefResult1 }, {
+		WorkspacePortal = ReactModule.createElement(RoactModule.Portal, { target = AssignResult.parent }, {
+			GUIPart = if AssignResult.hidden then nil else ReactModule.createElement("Part", {
 				Anchored = true,
 				Transparency = 1,
 				CanCollide = false,
 				CanTouch = false,
-				Name = var2.panelName .. "_Part",
-				ref = partRef,
-				CFrame = var2.offset * CFrame.Angles(math.rad(var2.tilt), 0, 0),
-				Size = Vector3.new(var2.partSize.X, var2.partSize.Y, 0.05),
+				Name = AssignResult.panelName .. "_Part",
+				ref = PartRef,
+				CFrame = AssignResult.offset * CFrame.Angles(math.rad(AssignResult.tilt), 0, 0),
+				Size = Vector3.new(AssignResult.partSize.X, AssignResult.partSize.Y, 0.05),
 				Color = Color3.new(0, 0, 0)
 			})
 		}),
-		AppUI = reactModule.createElement("SurfaceGui", {
+		AppUI = ReactModule.createElement("SurfaceGui", {
 			Active = true,
 			LightInfluence = 0,
-			Name = var2.panelName .. "_SurfaceGui",
-			ref = var3,
-			Adornee = partRef,
-			Enabled = not var2.hidden,
-			CanvasSize = var2.virtualScreenSize,
+			Name = AssignResult.panelName .. "_SurfaceGui",
+			ref = UseRefResult,
+			Adornee = PartRef,
+			Enabled = not AssignResult.hidden,
+			CanvasSize = AssignResult.virtualScreenSize,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-			children = var2.children,
-			AlwaysOnTop = var2.alwaysOnTop,
-			Shape = if var1 and var2.curvature ~= 0 then Enum.SurfaceGuiShape.CurvedHorizontally else nil,
-			HorizontalCurvature = if var1 then var2.curvature else nil,
-			ZOffset = var2.zOffset
+			children = AssignResult.children,
+			AlwaysOnTop = AssignResult.alwaysOnTop,
+			Shape = if CurvedSurfaceGuisEnabled and AssignResult.curvature ~= 0 then Enum.SurfaceGuiShape.CurvedHorizontally else nil,
+			HorizontalCurvature = if CurvedSurfaceGuisEnabled then AssignResult.curvature else nil,
+			ZOffset = AssignResult.zOffset
 		})
 	})
 end

@@ -1,26 +1,26 @@
-﻿local createComputed = require(script.Parent.Parent.Signals).createComputed
+﻿local CreateComputedFunction = require(script.Parent.Parent.Signals).createComputed
 
-return function(p1, p2)
-	-- upvalues: createComputed (ref)
-	local var1 = false
-	local var2 = nil
+return function(Callback1, Callback) --[[ Line: 8 | Named "createReducer" ]]
+	-- upvalues: CreateComputedFunction (copy)
+	local Flag = false
+	local v1 = nil
 	
-	local function _()
-		-- upvalues: var1 (write), var2 (write), p2 (ref)
-		if not var1 then
-			var1 = true
-			var2 = if typeof(p2) == "function" then p2() else p2
+	local function _() --[[ Line: 12 | Named "ensureInitialized" ]]
+		-- upvalues: Flag (ref), v1 (ref), Callback (copy)
+		if not Flag then
+			Flag = true
+			v1 = if typeof(Callback) == "function" then Callback() else Callback
 		end
 	end
 	
-	return createComputed(function(p3)
-		-- upvalues: var1 (write), var2 (write), p2 (ref), p1 (ref)
-		if not var1 then
-			var1 = true
-			var2 = if typeof(p2) == "function" then p2() else p2
+	return CreateComputedFunction(function(p1) --[[ Line: 19 ]]
+		-- upvalues: Flag (ref), v1 (ref), Callback (copy), Callback1 (copy)
+		if not Flag then
+			Flag = true
+			v1 = if typeof(Callback) == "function" then Callback() else Callback
 		end
-		var2 = p1(p3, var2)
+		v1 = Callback1(p1, v1)
 		
-		return var2
+		return v1
 	end)
 end

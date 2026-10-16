@@ -1,232 +1,223 @@
-﻿local t = {}
-local var1 = 0
-local var2 = nil
-local var3 = nil
-local var4 = -1
-local var5 = nil
-local var6 = -1
-local var7 = false
-local var8 = false
-local var9 = false
-local var10 = false
-local parent = script.Parent.Parent.Parent
-local console = require(parent.Shared).console
-local disabledLog = require(parent.Shared).ConsolePatchingDev.disabledLog
-
-function t.requestHostCallback(p1)
-	-- upvalues: var2 (write)
-	var2 = p1
-end
-
-function t.cancelHostCallback()
-	-- upvalues: var2 (write)
-	var2 = nil
-end
-
-function t.requestHostTimeout(p1, p2)
-	-- upvalues: var3 (write), var4 (write), var1 (write)
-	var3 = p1
-	var4 = var1 + p2
-end
-
-function t.cancelHostTimeout()
-	-- upvalues: var3 (write), var4 (write)
-	var3 = nil
-	var4 = -1
-end
-
-function t.shouldYieldToHost()
-	-- upvalues: var5 (write), var6 (write), var10 (write), var9 (write), var7 (write)
-	if (var6 == -1 or var5 == nil or var6 > #var5) and (not var10 or not var9) then
-		return false
-	end
-	var7 = true
-	
-	return true
-end
-
-function t.getCurrentTime()
-	-- upvalues: var1 (write)
-	return var1
-end
-
-function t.forceFrameRate() end
-
-function t.reset()
-	-- upvalues: var8 (write), var1 (write), var2 (write), var3 (write), var4 (write), var5 (write), var6 (write), var7 (write), var9 (write)
-	if var8 then
-		error("Cannot reset while already flushing work.")
-	end
-	var1 = 0
-	var2 = nil
-	var3 = nil
-	var4 = -1
-	var5 = nil
-	var6 = -1
-	var7 = false
-	var8 = false
-	var9 = false
-end
-
-function t.unstable_flushNumberOfYields(p1)
-	-- upvalues: var8 (write), var2 (write), var6 (write), var1 (write), var7 (write)
-	if var8 then
-		error("Already flushing work.")
-	end
-	if var2 ~= nil then
-		local var11 = var2
-		var6 = p1
-		var8 = true
-		local ok, status = pcall(function()
-			-- upvalues: var11 (ref), var1 (copy), var7 (copy), var2 (copy)
-			local var12
-			local _ = true
+﻿local Total = 0
+local Callback = nil
+local Callback1: ((any) -> ())? = nil
+local v1 = -1
+local List = nil
+local v2 = -1
+local Flag = false
+local Flag1 = false
+local Flag2 = false
+local Flag3 = false
+local Parent = script.Parent.Parent.Parent
+local Console = require(Parent.Shared).console
+local DisabledLog = require(Parent.Shared).ConsolePatchingDev.disabledLog
+local SchedulerHostConfig = {
+	requestHostCallback = function(p1) --[[ Line: 28 ]]
+		-- upvalues: Callback (ref)
+		Callback = p1
+	end,
+	cancelHostCallback = function() --[[ Line: 32 ]]
+		-- upvalues: Callback (ref)
+		Callback = nil
+	end,
+	requestHostTimeout = function(p1, p2) --[[ Line: 36 ]]
+		-- upvalues: Callback1 (ref), v1 (ref), Total (ref)
+		Callback1 = p1
+		v1 = Total + p2
+	end,
+	cancelHostTimeout = function() --[[ Line: 41 ]]
+		-- upvalues: Callback1 (ref), v1 (ref)
+		Callback1 = nil
+		v1 = -1
+	end,
+	shouldYieldToHost = function(): boolean --[[ Line: 46 ]]
+		-- upvalues: List (ref), v2 (ref), Flag3 (ref), Flag2 (ref), Flag (ref)
+		local List1 = List
+		
+		if (v2 == -1 or List1 == nil or v2 > #List1) and (not Flag3 or not Flag2) then
+			return false
+		else
+			Flag = true
+			
+			return true
+		end
+	end,
+	getCurrentTime = function() --[[ Line: 65 ]]
+		-- upvalues: Total (ref)
+		return Total
+	end,
+	forceFrameRate = function() --[[ Line: 69 ]] end,
+	reset = function() --[[ Line: 73 ]]
+		-- upvalues: Flag1 (ref), Total (ref), Callback (ref), Callback1 (ref), v1 (ref), List (ref), v2 (ref), Flag (ref), Flag2 (ref)
+		if Flag1 then
+			error("Cannot reset while already flushing work.")
+		end
+		Total = 0
+		Callback = nil
+		Callback1 = nil
+		v1 = -1
+		List = nil
+		v2 = -1
+		Flag = false
+		Flag1 = false
+		Flag2 = false
+	end,
+	unstable_flushNumberOfYields = function(p1) --[[ Line: 90 ]]
+		-- upvalues: Flag1 (ref), Callback (ref), v2 (ref), Total (ref), Flag (ref)
+		if Flag1 then
+			error("Already flushing work.")
+		end
+		if Callback ~= nil then
+			local Callback1 = Callback
+			v2 = p1
+			Flag1 = true
+			local Success, Result = pcall(function() --[[ Line: 100 ]]
+				-- upvalues: Callback1 (copy), Total (upval), Flag (upval), Callback (upval)
+				local CallbackResult = nil
+				repeat
+					CallbackResult = Callback1(true, Total)
+				until not CallbackResult or Flag
+				if not CallbackResult then
+					Callback = nil
+				end
+			end)
+			v2 = -1
+			Flag = false
+			Flag1 = false
+			
+			if not Success then
+				error(Result)
+			end
+		end
+	end,
+	unstable_flushUntilNextPaint = function() --[[ Line: 121 ]]
+		-- upvalues: Flag1 (ref), Callback (ref), Flag3 (ref), Flag2 (ref), Total (ref), Flag (ref)
+		if Flag1 then
+			error("Already flushing work.")
+		end
+		if Callback ~= nil then
+			local Callback1 = Callback
+			Flag3 = true
+			Flag2 = false
+			Flag1 = true
+			local Success, Result = pcall(function() --[[ Line: 132 ]]
+				-- upvalues: Callback1 (copy), Total (upval), Flag (upval), Callback (upval)
+				local CallbackResult = nil
+				repeat
+					CallbackResult = Callback1(true, Total)
+				until not CallbackResult or Flag
+				if not CallbackResult then
+					Callback = nil
+				end
+			end)
+			Flag3 = false
+			Flag = false
+			Flag1 = false
+			
+			if not Success then
+				error(Result)
+			end
+		end
+	end,
+	unstable_flushExpired = function() --[[ Line: 154 ]]
+		-- upvalues: Flag1 (ref), Callback (ref), Total (ref)
+		if Flag1 then
+			error("Already flushing work.")
+		end
+		if Callback ~= nil then
+			Flag1 = true
+			local Success, Result = pcall(function() --[[ Line: 160 ]]
+				-- upvalues: Callback (upval), Total (upval)
+				if not Callback(false, Total) then
+					Callback = nil
+				end
+			end)
+			Flag1 = false
+			
+			if not Success then
+				error(Result)
+			end
+		end
+	end,
+	unstable_flushAllWithoutAsserting = function(): boolean --[[ Line: 178 ]]
+		-- upvalues: Flag1 (ref), Callback (ref), Total (ref)
+		if Flag1 then
+			error("Already flushing work.")
+		end
+		if Callback == nil then
+			return false
+		end
+		local Callback1 = Callback
+		Flag1 = true
+		local Success, Result = pcall(function() --[[ Line: 186 ]]
+			-- upvalues: Callback1 (copy), Total (upval), Callback (upval)
+			local CallbackResult = nil
 			repeat
-				var12 = var11(true, var1)
-			until not (var12 and not var7)
-			if not var12 then
-				var2 = nil
+				CallbackResult = Callback1(true, Total)
+			until not CallbackResult
+			if not CallbackResult then
+				Callback = nil
 			end
 		end)
-		var6 = -1
-		var7 = false
-		var8 = false
+		Flag1 = false
 		
-		if not ok then
-			error(status)
+		if not Success then
+			error(Result)
+		end
+		return true
+	end,
+	unstable_clearYields = function() --[[ Line: 209 ]]
+		-- upvalues: List (ref)
+		if List == nil then
+			return {}
+		else
+			local List1 = List
+			List = nil
+			
+			return List1
 		end
 	end
-end
+}
 
-function t.unstable_flushUntilNextPaint()
-	-- upvalues: var8 (write), var2 (write), var10 (write), var9 (write), var1 (write), var7 (write)
-	if var8 then
-		error("Already flushing work.")
-	end
-	if var2 ~= nil then
-		local var11 = var2
-		var10 = true
-		var9 = false
-		var8 = true
-		local ok, status = pcall(function()
-			-- upvalues: var11 (ref), var1 (copy), var7 (copy), var2 (copy)
-			local var12
-			local _ = true
-			repeat
-				var12 = var11(true, var1)
-			until not (var12 and not var7)
-			if not var12 then
-				var2 = nil
-			end
-		end)
-		var10 = false
-		var7 = false
-		var8 = false
-		
-		if not ok then
-			error(status)
-		end
-	end
-end
-
-function t.unstable_flushExpired()
-	-- upvalues: var8 (write), var2 (write), var1 (write)
-	if var8 then
-		error("Already flushing work.")
-	end
-	if var2 ~= nil then
-		var8 = true
-		local ok, status = pcall(function()
-			-- upvalues: var2 (copy), var1 (copy)
-			if not var2(false, var1) then
-				var2 = nil
-			end
-		end)
-		var8 = false
-		
-		if not ok then
-			error(status)
-		end
-	end
-end
-
-function t.unstable_flushAllWithoutAsserting()
-	-- upvalues: var8 (write), var2 (write), var1 (write)
-	if var8 then
-		error("Already flushing work.")
-	end
-	if var2 == nil then
-		return false
-	end
-	local var11 = var2
-	var8 = true
-	local ok, status = pcall(function()
-		-- upvalues: var11 (ref), var1 (copy), var2 (copy)
-		local var12
-		local _ = true
-		repeat
-			var12 = var11(true, var1)
-		until not var12
-		if not var12 then
-			var2 = nil
-		end
-	end)
-	var8 = false
-	
-	if not ok then
-		error(status)
-	end
-	return true
-end
-
-function t.unstable_clearYields()
-	-- upvalues: var5 (write)
-	if var5 == nil then
-		return {}
-	end
-	var5 = nil
-	
-	return var5
-end
-
-function t.unstable_flushAll()
-	-- upvalues: var5 (write), t (ref)
-	if var5 ~= nil then
+function SchedulerHostConfig.unstable_flushAll() --[[ Line: 218 ]]
+	-- upvalues: List (ref), SchedulerHostConfig (copy)
+	if List ~= nil then
 		error("Log is not empty. Assert on the log of yielded values before flushing additional work.")
 	end
-	t.unstable_flushAllWithoutAsserting()
+	SchedulerHostConfig.unstable_flushAllWithoutAsserting()
 	
-	if var5 ~= nil then
+	if List ~= nil then
 		error("While flushing work, something yielded a value. Use an assertion helper to assert on the log of yielded values, e.g. expect(Scheduler).toFlushAndYield([...])")
 	end
 end
 
-function t.unstable_yieldValue(p1)
-	-- upvalues: console (ref), disabledLog (ref), var5 (write)
-	if console.log == disabledLog then return end
-	if var5 == nil then
-		var5 = { p1 }
+function SchedulerHostConfig.unstable_yieldValue(p1) --[[ Line: 235 ]]
+	-- upvalues: Console (copy), DisabledLog (copy), List (ref)
+	if Console.log == DisabledLog then return end
+	if List == nil then
+		List = { p1 }
 		
 		return
+	else
+		table.insert(List, p1)
 	end
-	table.insert(var5, p1)
 end
 
-function t.unstable_advanceTime(p1)
-	-- upvalues: console (ref), disabledLog (ref), var1 (write), var3 (write), var4 (write)
-	if console.log == disabledLog then return end
-	var1 += p1
+function SchedulerHostConfig.unstable_advanceTime(Amount) --[[ Line: 252 ]]
+	-- upvalues: Console (copy), DisabledLog (copy), Total (ref), Callback1 (ref), v1 (ref)
+	if Console.log == DisabledLog then return end
+	Total += Amount
 	
-	if var3 ~= nil and var4 <= var1 then
-		var3(var1)
-		var4 = -1
-		var3 = nil
+	if Callback1 ~= nil and v1 <= Total then
+		Callback1(Total)
+		v1 = -1
+		Callback1 = nil
 	end
 end
 
-function t.requestPaint()
-	-- upvalues: var9 (write)
-	var9 = true
+function SchedulerHostConfig.requestPaint() --[[ Line: 271 ]]
+	-- upvalues: Flag2 (ref)
+	Flag2 = true
 end
 
-return t
+return SchedulerHostConfig

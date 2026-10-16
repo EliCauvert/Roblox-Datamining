@@ -1,67 +1,72 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local uiblox = require(parent_2.BuilderIcons).Migration.uiblox
-local foundationModule = require(parent_2.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local useTextSizeOffset = foundationModule.Hooks.useTextSizeOffset
-local scaleSliceToResolutionModule = require(parent_1.App.ImageSet.scaleSliceToResolution)
-local imagesInverseModule = require(parent_1.App.ImageSet.ImagesInverse)
-local getBuilderIconElementModule = require(parent.getBuilderIconElement)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local Uiblox = require(Parent2.BuilderIcons).Migration.uiblox
+local FoundationModule = require(Parent2.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseTextSizeOffsetFunction = FoundationModule.Hooks.useTextSizeOffset
+local ScaleSliceToResolutionModule = require(Parent1.App.ImageSet.scaleSliceToResolution)
+local ImagesInverseModule = require(Parent1.App.ImageSet.ImagesInverse)
+local GetBuilderIconElementModule = require(Parent.getBuilderIconElement)
 
-return function(p1, p2)
-	-- upvalues: roactModule (ref), uiblox (ref), useTokens (ref), useTextSizeOffset (ref), imagesInverseModule (ref), getBuilderIconElementModule (ref), scaleSliceToResolutionModule (ref)
+return function(p1, p2: number) --[[ Line: 16 ]]
+	-- upvalues: RoactModule (copy), Uiblox (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), ImagesInverseModule (copy), GetBuilderIconElementModule (copy), ScaleSliceToResolutionModule (copy)
 	assert(p2 > 0, "resolutionScale for ImageSet must be greater than 0! got " .. tostring(p2))
 	
-	return roactModule.forwardRef(function(p3, p4)
-		-- upvalues: roactModule (copy), uiblox (copy), useTokens (copy), useTextSizeOffset (copy), imagesInverseModule (copy), getBuilderIconElementModule (copy), p1 (ref), p2 (ref), scaleSliceToResolutionModule (copy)
-		local t = {
-			[roactModule.Ref] = p4,
-			[roactModule.Children] = p3[roactModule.Children]
+	return RoactModule.forwardRef(function(List, p3) --[[ Line: 22 ]]
+		-- upvalues: RoactModule (upval), Uiblox (upval), UseTokensFunction (upval), UseTextSizeOffsetFunction (upval), ImagesInverseModule (upval), GetBuilderIconElementModule (upval), p1 (copy), p2 (copy), ScaleSliceToResolutionModule (upval)
+		local config = {
+			[RoactModule.Ref] = p3,
+			[RoactModule.Children] = List[RoactModule.Children]
 		}
-		local var1 = nil
-		local image = nil
-		local var2 = false
-		local var3 = false
+		local v1 = nil
+		local Image = nil
+		local Flag = false
+		local Flag1 = false
 		
-		for i, v in pairs(p3) do
-			if i ~= "Image" or typeof(v) ~= "table" then
-				t[i] = v
-			elseif uiblox[v.Image] then
-				var3 = true
-				image = v.Image
+		for i, value in pairs(List) do
+			if i ~= "Image" or typeof(value) ~= "table" then
+				config[i] = value
+				continue
+			end
+			if Uiblox[value.Image] then
+				Flag1 = true
+				Image = value.Image
 			else
-				var2 = true
-				var1 = v
+				Flag = true
+				v1 = value
 			end
 		end
-		local var4 = useTokens()
-		local var5 = useTextSizeOffset()
+		local UseTokensResult = UseTokensFunction()
+		local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 		
-		if var2 or var3 then
-			local var6 = if var3 then image else imagesInverseModule[var1]
+		if Flag or Flag1 then
+			local Image1 = if Flag1 then Image else ImagesInverseModule[v1]
 			
-			if var6 and uiblox[var6] then
-				if not var4.Stroke then
-					error(`No StyleProvider in tree for migrated icon ImageSetComponent.\n UIBlox Icon: {var6}, BuilderIcon: {uiblox[var6]}`)
+			if Image1 and Uiblox[Image1] then
+				if not UseTokensResult.Stroke then
+					error(`No StyleProvider in tree for migrated icon ImageSetComponent.\n UIBlox Icon: {Image1}, BuilderIcon: {Uiblox[Image1]}`)
 				end
-				return getBuilderIconElementModule(t, p1, uiblox[var6], var6, var4, var5, var4.Stroke.Standard)
-			elseif var2 then
-				for i_1, v_1 in pairs(var1) do
-					if not t[i_1] then
-						t[i_1] = v_1
-					elseif i_1 == "ImageRectOffset" then
-						t[i_1] = v_1 + t[i_1] * p2
-					elseif i_1 == "ImageRectSize" then
-						t[i_1] *= p2
-					end
-				end
+				return GetBuilderIconElementModule(config, p1, Uiblox[Image1], Image1, UseTokensResult, UseTextSizeOffsetResult, UseTokensResult.Stroke.Standard)
 			end
-			if var2 then
-				t = scaleSliceToResolutionModule(t, p2)
-			end
-			return roactModule.createElement(p1, t)
 		end
+		if Flag then
+			for i1, value1 in pairs(v1) do
+				if not config[i1] then
+					config[i1] = value1
+					continue
+				end
+				if i1 == "ImageRectOffset" then
+					config[i1] = value1 + config[i1] * p2
+				elseif i1 == "ImageRectSize" then
+					config[i1] *= p2
+				end
+			end
+		end
+		if Flag then
+			config = ScaleSliceToResolutionModule(config, p2)
+		end
+		return RoactModule.createElement(p1, config)
 	end)
 end

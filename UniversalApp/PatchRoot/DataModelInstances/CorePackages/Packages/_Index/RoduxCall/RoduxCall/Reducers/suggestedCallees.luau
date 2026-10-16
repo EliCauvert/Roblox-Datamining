@@ -1,26 +1,26 @@
-﻿local roduxCall = script:FindFirstAncestor("RoduxCall")
-local roduxModule = require(roduxCall.Parent.Rodux)
-local suggestedCalleeModel = require(roduxCall.Models).SuggestedCalleeModel
-local clearSuggestedCallees = require(roduxCall.Actions).ClearSuggestedCallees
+﻿local RoduxCall = script:FindFirstAncestor("RoduxCall")
+local RoduxModule = require(RoduxCall.Parent.Rodux)
+local SuggestedCalleeModel = require(RoduxCall.Models).SuggestedCalleeModel
+local ClearSuggestedCallees = require(RoduxCall.Actions).ClearSuggestedCallees
 local _ = require(script.Parent.Parent.roduxCallTypes)
-local t = { suggestedCallees = {} }
+local config = { suggestedCallees = {} }
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref), suggestedCalleeModel (ref), clearSuggestedCallees (ref)
-	return roduxModule.createReducer(t, {
-		[p1.NetworkingCall.GetSuggestedCallees.Succeeded.name] = function(_, p2)
-			-- upvalues: suggestedCalleeModel (copy)
-			local t = {}
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: RoduxModule (copy), config (copy), SuggestedCalleeModel (copy), ClearSuggestedCallees (copy)
+	return RoduxModule.createReducer(config, {
+		[p1.NetworkingCall.GetSuggestedCallees.Succeeded.name] = function(_, p2) --[[ Line: 14 ]]
+			-- upvalues: SuggestedCalleeModel (upval)
+			local SuggestedCallees = {}
 			
-			for i, v in ipairs(p2.responseBody.suggestedCallees) do
-				assert(suggestedCalleeModel.isValid(v))
-				t[#t + 1] = suggestedCalleeModel.format(v)
+			for _, suggestedCallee in ipairs(p2.responseBody.suggestedCallees) do
+				assert(SuggestedCalleeModel.isValid(suggestedCallee))
+				SuggestedCallees[#SuggestedCallees + 1] = SuggestedCalleeModel.format(suggestedCallee)
 			end
-			return { suggestedCallees = t }
+			return { suggestedCallees = SuggestedCallees }
 		end,
-		[clearSuggestedCallees.name] = function(_, _)
-			-- upvalues: t (copy)
-			return t
+		[ClearSuggestedCallees.name] = function(_, _) --[[ Line: 29 ]]
+			-- upvalues: config (upval)
+			return config
 		end
 	})
 end

@@ -1,32 +1,31 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local useStyleModule = require(parent.Core.Style.useStyle)
-local UIBloxConfigModule = require(parent.UIBloxConfig)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local UseStyleModule = require(Parent.Core.Style.useStyle)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(p1)
-	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useStyleModule()
-	local var2 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var1.Tokens.Typography.CaptionSmall else var1.Tokens.Component.HelperText.Base.Typography
-	local var3 = if p1.error then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var1.Tokens.Color.ActionAlert.Foreground else var1.Tokens.Component.HelperText.Error.ContentColor elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var1.Tokens.Color.Content.Default else var1.Tokens.Component.HelperText.Base.ContentColor
+return function(Frame) --[[ Line: 22 | Named "HelperText" ]]
+	-- upvalues: UseStyleModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseStyleModuleResult = UseStyleModule()
+	local CaptionSmall = UseStyleModuleResult.Tokens.Typography.CaptionSmall
+	local Foreground = if Frame.error then UseStyleModuleResult.Tokens.Color.ActionAlert.Foreground else UseStyleModuleResult.Tokens.Color.Content.Default
 	
-	return reactModule.createElement("TextLabel", {
+	return ReactModule.createElement("TextLabel", {
 		TextWrapped = true,
 		BackgroundTransparency = 1,
-		Text = p1.text,
-		TextTransparency = var3.Transparency,
+		Text = Frame.text,
+		TextTransparency = Foreground.Transparency,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Top,
-		TextColor3 = var3.Color3,
-		Font = if foundationFontFaceMigration then nil else var2.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Font) else nil,
-		TextSize = var2.FontSize,
-		LineHeight = var2.LineHeight,
+		TextColor3 = Foreground.Color3,
+		Font = if FoundationFontFaceMigration then nil else CaptionSmall.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(CaptionSmall.Font) else nil,
+		TextSize = CaptionSmall.FontSize,
+		LineHeight = CaptionSmall.LineHeight,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	})
 end

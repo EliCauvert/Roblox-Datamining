@@ -1,1 +1,1 @@
-﻿return require(script.HeaderBarTrailing)
+﻿return (require(script.HeaderBarTrailing))

@@ -1,440 +1,436 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local avatarModule = require(foundation.Components.Avatar)
-local avatarSizeModule = require(foundation.Enums.AvatarSize)
-local breakpointModule = require(foundation.Enums.Breakpoint)
-local breakpointConfigModule = require(foundation.Utility.Responsive.BreakpointConfig)
-local headerBarModule = require(foundation.Components.HeaderBar)
-local iconButtonModule = require(foundation.Components.IconButton)
-local _ = require(foundation.Providers.Responsive.ResponsiveContext)
-local responsiveProviderModule = require(foundation.Providers.Responsive.ResponsiveProvider)
-local searchInputModule = require(foundation.Components.SearchInput)
-local storySectionModule = require(foundation.Utility.Stories.Shared.StorySection)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
-local useResponsiveModule = require(foundation.Providers.Responsive.useResponsive)
-local labeledCell = storySectionModule.LabeledCell
-local icon = builderIconsModule.Icon
-local list = {
-	breakpointModule.XSmall, breakpointModule.Small, breakpointModule.Medium,
-	breakpointModule.Large, breakpointModule.XLarge, breakpointModule.XXLarge
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local AvatarModule = require(Foundation.Components.Avatar)
+local AvatarSizeModule = require(Foundation.Enums.AvatarSize)
+local BreakpointModule = require(Foundation.Enums.Breakpoint)
+local BreakpointConfigModule = require(Foundation.Utility.Responsive.BreakpointConfig)
+local HeaderBarModule = require(Foundation.Components.HeaderBar)
+local IconButtonModule = require(Foundation.Components.IconButton)
+local _ = require(Foundation.Providers.Responsive.ResponsiveContext)
+local ResponsiveProviderModule = require(Foundation.Providers.Responsive.ResponsiveProvider)
+local SearchInputModule = require(Foundation.Components.SearchInput)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
+local UseResponsiveModule = require(Foundation.Providers.Responsive.useResponsive)
+local LabeledCell = require(Foundation.Utility.Stories.Shared.StorySection).LabeledCell
+local Icon = require(Parent.BuilderIcons).Icon
+local Order = {
+	BreakpointModule.XSmall, BreakpointModule.Small, BreakpointModule.Medium,
+	BreakpointModule.Large, BreakpointModule.XLarge, BreakpointModule.XXLarge
 }
-local xSmall = breakpointModule.XSmall
-local list_1 = {
+local XSmall = BreakpointModule.XSmall
+local Presets = {}
+local t = {}
+
+for i, value in {
 	{
 		preset = "XSmall (360px)",
-		breakpoint = breakpointModule.XSmall,
-		width = breakpointConfigModule.widths[breakpointModule.XSmall]
+		breakpoint = BreakpointModule.XSmall,
+		width = BreakpointConfigModule.widths[BreakpointModule.XSmall]
 	},
 	{
 		preset = "Small (600px)",
-		breakpoint = breakpointModule.Small,
-		width = breakpointConfigModule.widths[breakpointModule.Small]
+		breakpoint = BreakpointModule.Small,
+		width = BreakpointConfigModule.widths[BreakpointModule.Small]
 	},
 	{
 		preset = "Medium (1140px)",
-		breakpoint = breakpointModule.Medium,
-		width = breakpointConfigModule.widths[breakpointModule.Medium]
+		breakpoint = BreakpointModule.Medium,
+		width = BreakpointConfigModule.widths[BreakpointModule.Medium]
 	},
 	{
 		preset = "Large (1520px)",
-		breakpoint = breakpointModule.Large,
-		width = breakpointConfigModule.widths[breakpointModule.Large]
+		breakpoint = BreakpointModule.Large,
+		width = BreakpointConfigModule.widths[BreakpointModule.Large]
 	},
 	{
 		preset = "XLarge (1920px)",
-		breakpoint = breakpointModule.XLarge,
-		width = breakpointConfigModule.widths[breakpointModule.XLarge]
+		breakpoint = BreakpointModule.XLarge,
+		width = BreakpointConfigModule.widths[BreakpointModule.XLarge]
 	},
 	{
 		preset = "XXLarge (2560px)",
 		width = 2560,
-		breakpoint = breakpointModule.XXLarge
+		breakpoint = BreakpointModule.XXLarge
 	}
-}
-local t = {}
-local t_1 = {}
-
-for i, v in list_1 do
-	t[i] = v.preset
-	t_1[v.preset] = v
+} do
+	Presets[i] = value.preset
+	t[value.preset] = value
 end
-local list_2 = {
-	{ width = 360, label = `Mobile, parent width {360}px` },
-	{ width = 720, label = `Desktop, parent width {720}px` }
-}
-local list_3 = {
-	{
-		label = "XSmall, Small",
-		breakpoint = breakpointModule.Small
-	},
-	{
-		label = "Medium, Large",
-		breakpoint = breakpointModule.Large
-	},
-	{
-		label = "XLarge, XXLarge",
-		breakpoint = breakpointModule.XXLarge
-	}
-}
-local list_4 = { 1, 2, 3 }
-local list_5 = {
-	{
-		id = "close",
-		icon = icon.X,
-		onActivated = function() end
-	},
-	{
-		id = "back",
-		icon = icon.ChevronLargeLeft,
-		onActivated = function() end
-	}
-}
-local list_6 = {
+local Actions = {
 	{
 		id = "search",
-		icon = icon.MagnifyingGlass,
-		onActivated = function() end
+		icon = Icon.MagnifyingGlass,
+		onActivated = function() --[[ Line: 168 ]] end
 	},
 	{
 		id = "robux",
-		icon = icon.Robux,
-		onActivated = function() end
+		icon = Icon.Robux,
+		onActivated = function() --[[ Line: 173 ]] end
 	},
 	{
 		id = "notifications",
-		icon = icon.Bell,
-		onActivated = function() end
+		icon = Icon.Bell,
+		onActivated = function() --[[ Line: 178 ]] end
 	}
 }
 
-local function takeActions(p1, p2)
-	return table.move(p1, 1, math.min(p2, #p1), 1, {})
-end
-
-local function slotChip(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
-	local var1 = if p4 then "row align-x-center align-y-center padding-small radius-medium bg-action-emphasis" else "row align-x-center align-y-center padding-small radius-medium bg-shift-200"
+local function slotChip(Text, XOffset, LayoutOrder, IsIsSubject) --[[ Line: 198 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
+	local RowAlignXCenterAlignYCenterPaddingSmallRadiusMediumBgActionEmphasis: string = if IsIsSubject then "row align-x-center align-y-center padding-small radius-medium bg-action-emphasis" else "row align-x-center align-y-center padding-small radius-medium bg-shift-200"
 	
-	return reactModule.createElement(viewModule, {
-		tag = if p2 then var1 else `auto-x {var1}`,
-		Size = if p2 then UDim2.new(0, p2, 1, 0) else UDim2.fromScale(0, 1),
-		LayoutOrder = p3
+	return ReactModule.createElement(ViewModule, {
+		tag = if XOffset then RowAlignXCenterAlignYCenterPaddingSmallRadiusMediumBgActionEmphasis else `auto-x {RowAlignXCenterAlignYCenterPaddingSmallRadiusMediumBgActionEmphasis}`,
+		Size = if XOffset then UDim2.new(0, XOffset, 1, 0) else UDim2.fromScale(0, 1),
+		LayoutOrder = LayoutOrder
 	}, {
-		Label = reactModule.createElement(textModule, {
+		Label = ReactModule.createElement(TextModule, {
 			LayoutOrder = 1,
-			Text = p1,
-			tag = if p4 then "auto-xy text-caption-small content-inverse-emphasis" else "auto-xy text-caption-small content-muted"
+			Text = Text,
+			tag = if IsIsSubject then "auto-xy text-caption-small content-inverse-emphasis" else "auto-xy text-caption-small content-muted"
 		})
 	})
 end
 
-local function slotPlaceholders(p1, p2, p3, p4, p5)
-	-- upvalues: reactModule (ref), viewModule (ref), slotChip (ref)
-	p5 = p5 or {}
-	local childCount = p5.childCount or 1
-	local var1 = p5.isSubject == true
+local function slotPlaceholders(p1, p2, p3, p4, p5) --[[ Line: 216 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), slotChip (copy)
+	local P9 = p5 or {}
+	local ChildCount = P9.childCount or 1
+	local IsIsSubject = P9.isSubject == true
 	
-	if childCount == 1 then
-		local demand = p5.demand or p2
-		local var2 = p5.fill == true
+	if ChildCount == 1 then
+		local Demand = P9.demand or p2
+		local IsFill = P9.fill == true
 		
 		return {
-			Band = reactModule.createElement(viewModule, {
+			Band = ReactModule.createElement(ViewModule, {
 				LayoutOrder = 1,
-				tag = `{if var1 then "fill row align-y-center radius-medium stroke-system-emphasis" else "fill row align-y-center radius-medium stroke-default"} {p3}`,
-				Size = if var2 then UDim2.fromScale(1, 1) else UDim2.new(0, demand, 1, 0)
+				tag = `{if IsIsSubject then "fill row align-y-center radius-medium stroke-system-emphasis" else "fill row align-y-center radius-medium stroke-default"} {p3}`,
+				Size = if IsFill then UDim2.fromScale(1, 1) else UDim2.new(0, Demand, 1, 0)
 			}, {
-				Chip = slotChip(if var2 then `{p1} 100%` elseif p5.showDemand then `{p1} {demand}px` else p1, if var2 or p4 then nil else demand, 1, var1)
+				Chip = slotChip(if IsFill then `{p1} 100%` elseif P9.showDemand then `{p1} {Demand}px` else p1, if IsFill or p4 then nil else Demand, 1, IsIsSubject)
 			})
 		}
 	end
 	local t = {}
 	
-	for i = 1, childCount do
-		t[`Child{i}`] = slotChip(`Child {i}`, nil, i, var1)
+	for i = 1, ChildCount do
+		t[`Child{i}`] = slotChip(`Child {i}`, nil, i, IsIsSubject)
 	end
 	return t
 end
 
-local function leadingSlot(p6)
-	-- upvalues: reactModule (ref), headerBarModule (ref)
-	return reactModule.createElement(headerBarModule.Leading, nil, p6)
+local function leadingSlot(Leading) --[[ Line: 253 ]]
+	-- upvalues: ReactModule (copy), HeaderBarModule (copy)
+	return ReactModule.createElement(HeaderBarModule.Leading, nil, Leading)
 end
 
-local function contentSlot(p6)
-	-- upvalues: reactModule (ref), headerBarModule (ref)
-	return reactModule.createElement(headerBarModule.Content, nil, p6)
+local function contentSlot(Content) --[[ Line: 257 ]]
+	-- upvalues: ReactModule (copy), HeaderBarModule (copy)
+	return ReactModule.createElement(HeaderBarModule.Content, nil, Content)
 end
 
-local function trailingSlot(p6)
-	-- upvalues: reactModule (ref), headerBarModule (ref)
-	return reactModule.createElement(headerBarModule.Trailing, nil, p6)
+local function trailingSlot(Elements) --[[ Line: 261 ]]
+	-- upvalues: ReactModule (copy), HeaderBarModule (copy)
+	return ReactModule.createElement(HeaderBarModule.Trailing, nil, Elements)
 end
 
-local function leadingPlaceholder(p6)
-	-- upvalues: leadingSlot (ref), slotPlaceholders (ref)
-	return leadingSlot(slotPlaceholders("Leading", 96, "align-x-left", true, p6))
-end
-
-local function contentPlaceholder(p6)
-	-- upvalues: contentSlot (ref), slotPlaceholders (ref)
-	return contentSlot(slotPlaceholders("Content", 128, "align-x-center", false, p6))
-end
-
-local function trailingPlaceholder(p6)
-	-- upvalues: trailingSlot (ref), slotPlaceholders (ref)
-	return trailingSlot(slotPlaceholders("Trailing", 96, "align-x-right", true, p6))
-end
-
-local function ForcedBreakpoint(p6)
-	-- upvalues: useResponsiveModule (ref), reactModule (ref), list (ref), responsiveProviderModule (ref)
-	local config = useResponsiveModule().config
+local function ForcedBreakpoint(p6) --[[ Line: 277 ]]
+	-- upvalues: UseResponsiveModule (copy), ReactModule (copy), Order (copy), ResponsiveProviderModule (copy)
+	local Config = UseResponsiveModule().config
 	
-	return reactModule.createElement(responsiveProviderModule, {
-		config = reactModule.useMemo(function()
-			-- upvalues: list (copy), p6 (ref), config (ref)
-			local t = {}
-			local var3 = false
+	return ReactModule.createElement(ResponsiveProviderModule, {
+		config = ReactModule.useMemo(function() --[[ Line: 283 ]]
+			-- upvalues: Order (upval), p6 (copy), Config (copy)
+			local Widths = {}
+			local Flag = false
 			
-			for i, v in list do
-				if v == p6.breakpoint then
-					var3 = true
+			for _, value in Order do
+				if value == p6.breakpoint then
+					Flag = true
 				end
-				t[v] = if var3 then 1e999 else -1
+				Widths[value] = if Flag then 1e999 else -1
 			end
 			return {
 				breakpoint = {
-					order = list,
-					shortNames = config.breakpoint.shortNames,
-					widths = t
+					order = Order,
+					shortNames = Config.breakpoint.shortNames,
+					widths = Widths
 				},
-				grid = config.grid
+				grid = Config.grid
 			}
-		end, { config, p6.breakpoint })
+		end, { Config, p6.breakpoint })
 	}, p6.children)
 end
 
-local function Shell(p7)
-	-- upvalues: reactModule (ref), viewModule (ref), headerBarModule (ref), slotPlaceholders (ref), ForcedBreakpoint (ref), xSmall (ref)
-	return reactModule.createElement(ForcedBreakpoint, { breakpoint = p7.breakpoint or xSmall }, reactModule.createElement(viewModule, {
+local function Shell(Frame) --[[ Line: 308 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), HeaderBarModule (copy), slotPlaceholders (copy), ForcedBreakpoint (copy), XSmall (copy)
+	return ReactModule.createElement(ForcedBreakpoint, { breakpoint = Frame.breakpoint or XSmall }, (ReactModule.createElement(ViewModule, {
 		tag = "col auto-y stroke-default bg-surface-100",
-		Size = UDim2.fromOffset(p7.width or 360, 0),
-		LayoutOrder = p7.LayoutOrder
+		Size = UDim2.fromOffset(Frame.width or 360, 0),
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		HeaderBar = reactModule.createElement(headerBarModule.Root, { LayoutOrder = 1, hasBackground = p7.hasBackground }, {
-			Leading = if p7.hasPlaceholderSlots then reactModule.createElement(headerBarModule.Leading, nil, slotPlaceholders("Leading", 96, "align-x-left", true, nil)) else p7.leading,
-			Content = if p7.hasPlaceholderSlots then reactModule.createElement(headerBarModule.Content, nil, slotPlaceholders("Content", 128, "align-x-center", false, nil)) else p7.content,
-			Trailing = if p7.hasPlaceholderSlots then reactModule.createElement(headerBarModule.Trailing, nil, slotPlaceholders("Trailing", 96, "align-x-right", true, nil)) else p7.trailing
+		HeaderBar = ReactModule.createElement(HeaderBarModule.Root, { LayoutOrder = 1, hasBackground = Frame.hasBackground }, {
+			Leading = if Frame.hasPlaceholderSlots then ReactModule.createElement(HeaderBarModule.Leading, nil, (slotPlaceholders("Leading", 96, "align-x-left", true, nil))) else Frame.leading,
+			Content = if Frame.hasPlaceholderSlots then ReactModule.createElement(HeaderBarModule.Content, nil, (slotPlaceholders("Content", 128, "align-x-center", false, nil))) else Frame.content,
+			Trailing = if Frame.hasPlaceholderSlots then ReactModule.createElement(HeaderBarModule.Trailing, nil, (slotPlaceholders("Trailing", 96, "align-x-right", true, nil))) else Frame.trailing
 		})
-	}))
+	})))
 end
 
-local function LabeledShell(p7)
-	-- upvalues: reactModule (ref), Shell (ref), labeledCell (ref)
-	local var3 = reactModule.createElement(Shell, {
-		LayoutOrder = if p7.label then 1 else p7.LayoutOrder,
-		width = p7.width,
-		breakpoint = p7.breakpoint,
-		hasBackground = p7.hasBackground,
-		hasPlaceholderSlots = p7.hasPlaceholderSlots,
-		leading = p7.leading,
-		content = p7.content,
-		trailing = p7.trailing
+local function LabeledShell(Frame: Frame) --[[ Line: 331 ]]
+	-- upvalues: ReactModule (copy), Shell (copy), LabeledCell (copy)
+	local Element = ReactModule.createElement(Shell, {
+		LayoutOrder = if Frame.label then 1 else Frame.LayoutOrder,
+		width = Frame.width,
+		breakpoint = Frame.breakpoint,
+		hasBackground = Frame.hasBackground,
+		hasPlaceholderSlots = Frame.hasPlaceholderSlots,
+		leading = Frame.leading,
+		content = Frame.content,
+		trailing = Frame.trailing
 	})
 	
-	return if p7.label then reactModule.createElement(labeledCell, { LayoutOrder = p7.LayoutOrder or 1, label = p7.label }, { Shell = var3 }) else var3
+	return if Frame.label then ReactModule.createElement(LabeledCell, {
+		LayoutOrder = Frame.LayoutOrder or 1,
+		label = Frame.label
+	}, { Shell = Element }) else Element
 end
 
-local function tierCells(p7)
-	-- upvalues: reactModule (ref), LabeledShell (ref)
-	local t = {}
-	
-	for i, v in p7 do
-		t[v.label] = reactModule.createElement(LabeledShell, {
-			hasPlaceholderSlots = true,
-			LayoutOrder = i,
-			label = v.label,
-			width = v.width,
-			breakpoint = v.breakpoint
-		})
-	end
-	return t
+local Widths = { 360, 720 }
+local _UDim = UDim.new(0, 176)
+local _UDim1 = UDim.new(0, 320)
+local _UDim2 = UDim.new(1, 0)
+
+local function noop() --[[ Line: 380 ]] end
+
+local function _(p7: number): boolean --[[ Line: 382 | Named "isCompact" ]]
+	return p7 <= 360
 end
 
-local list_7 = { 360, 720 }
-local uDim = UDim.new(0, 176)
-local uDim_1 = UDim.new(0, 320)
-local uDim_2 = UDim.new(1, 0)
-
-local function noop() end
-
-local function _(p8)
-	return p8 <= 360
+local _ = function(p7) --[[ Line: 386 | Named "searchWidth" ]]
+	-- upvalues: _UDim (copy), _UDim1 (copy)
+	return if p7 then _UDim else _UDim1
 end
 
-local _ = function(p8)
-	-- upvalues: uDim (ref), uDim_1 (ref)
-	return if p8 then uDim else uDim_1
-end
-
-local _ = function(p8)
-	-- upvalues: reactModule (ref), textModule (ref)
-	return reactModule.createElement(textModule, {
+local _ = function(LayoutOrder) --[[ Line: 390 | Named "pageTitle" ]]
+	-- upvalues: ReactModule (copy), TextModule (copy)
+	return ReactModule.createElement(TextModule, {
 		Text = "Page Title",
 		tag = "auto-xy text-heading-medium content-emphasis",
-		LayoutOrder = p8
+		LayoutOrder = LayoutOrder
 	})
 end
 
-local _ = function(p8, p9)
-	-- upvalues: reactModule (ref), iconButtonModule (ref), noop (ref)
-	return reactModule.createElement(iconButtonModule, { icon = p8, onActivated = noop, LayoutOrder = p9 })
+local _ = function(Icon, LayoutOrder) --[[ Line: 398 | Named "iconButton" ]]
+	-- upvalues: ReactModule (copy), IconButtonModule (copy), noop (copy)
+	return ReactModule.createElement(IconButtonModule, {
+		icon = Icon,
+		onActivated = noop,
+		LayoutOrder = LayoutOrder
+	})
 end
 
-local _ = function(p8)
-	-- upvalues: reactModule (ref), avatarModule (ref), avatarSizeModule (ref)
-	return reactModule.createElement(avatarModule, {
+local _ = function(LayoutOrder) --[[ Line: 406 | Named "accountAvatar" ]]
+	-- upvalues: ReactModule (copy), AvatarModule (copy), AvatarSizeModule (copy)
+	return ReactModule.createElement(AvatarModule, {
 		userId = 24813339,
-		size = avatarSizeModule.Small,
-		LayoutOrder = p8
+		size = AvatarSizeModule.Small,
+		LayoutOrder = LayoutOrder
 	})
 end
 
-local function SearchContent(p8)
-	-- upvalues: reactModule (ref), contentSlot (ref), searchInputModule (ref)
-	local var3, var4 = reactModule.useBinding("")
+local function SearchContent(p7) --[[ Line: 414 ]]
+	-- upvalues: ReactModule (copy), contentSlot (copy), SearchInputModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding("")
 	
 	return contentSlot({
-		Search = reactModule.createElement(searchInputModule, {
+		Search = ReactModule.createElement(SearchInputModule, {
 			LayoutOrder = 1,
-			text = var3,
-			onChanged = var4,
-			width = p8.width
+			text = UseBindingResult,
+			onChanged = UseBindingResult2,
+			width = p7.width
 		})
 	})
 end
 
-local _ = function(p8)
-	-- upvalues: reactModule (ref), SearchContent (ref)
-	return reactModule.createElement(SearchContent, { width = p8 })
+local _ = function(Width) --[[ Line: 427 | Named "searchContent" ]]
+	-- upvalues: ReactModule (copy), SearchContent (copy)
+	return ReactModule.createElement(SearchContent, { width = Width })
 end
 
-local function utilityTrailing(p8)
-	-- upvalues: trailingSlot (ref), reactModule (ref), headerBarModule (ref), list_6 (ref), iconButtonModule (ref), noop (ref), avatarModule (ref), avatarSizeModule (ref)
-	if not p8 then
+local function utilityTrailing(p7) --[[ Line: 431 ]]
+	-- upvalues: trailingSlot (copy), ReactModule (copy), HeaderBarModule (copy), Actions (copy), IconButtonModule (copy), noop (copy), AvatarModule (copy), AvatarSizeModule (copy)
+	if not p7 then
 		return trailingSlot({
-			Actions = reactModule.createElement(headerBarModule.Actions, { actions = list_6 })
+			Actions = ReactModule.createElement(HeaderBarModule.Actions, { actions = Actions })
 		})
 	end
-	local t = {}
+	local Elements = {}
 	
-	for i, v in list_6 do
-		t[tostring(v.id)] = reactModule.createElement(iconButtonModule, { icon = v.icon, onActivated = noop, LayoutOrder = i })
+	for LayoutOrder, action in Actions do
+		Elements[tostring(action.id)] = ReactModule.createElement(IconButtonModule, {
+			icon = action.icon,
+			onActivated = noop,
+			LayoutOrder = LayoutOrder
+		})
 	end
-	t.Account = reactModule.createElement(avatarModule, {
+	Elements.Account = ReactModule.createElement(AvatarModule, {
 		userId = 24813339,
-		size = avatarSizeModule.Small,
-		LayoutOrder = #list_6 + 1
+		size = AvatarSizeModule.Small,
+		LayoutOrder = #Actions + 1
 	})
 	
-	return trailingSlot(t)
+	return trailingSlot(Elements)
 end
 
-local _ = function(p9)
-	-- upvalues: trailingSlot (ref), icon (ref), reactModule (ref), iconButtonModule (ref), noop (ref), utilityTrailing (ref)
-	return if p9 then trailingSlot({
-		Filter = reactModule.createElement(iconButtonModule, {
+local _ = function(p8) --[[ Line: 449 | Named "searchTrailing" ]]
+	-- upvalues: trailingSlot (copy), Icon (copy), ReactModule (copy), IconButtonModule (copy), noop (copy), utilityTrailing (copy)
+	return if p8 then trailingSlot({
+		Filter = ReactModule.createElement(IconButtonModule, {
 			LayoutOrder = 1,
-			icon = icon.ThreeSlidersHorizontal,
+			icon = Icon.ThreeSlidersHorizontal,
 			onActivated = noop
 		})
 	}) else utilityTrailing(true)
 end
 
-local function CompositionShell(p9)
-	-- upvalues: reactModule (ref), LabeledShell (ref), breakpointModule (ref)
-	return reactModule.createElement(LabeledShell, {
-		LayoutOrder = p9.LayoutOrder,
-		label = `{p9.width}px`,
-		width = p9.width,
-		breakpoint = if p9.width <= 360 then breakpointModule.XSmall else breakpointModule.Small,
-		leading = p9.leading,
-		content = p9.content,
-		trailing = p9.trailing
+local function CompositionShell(Frame) --[[ Line: 459 ]]
+	-- upvalues: ReactModule (copy), LabeledShell (copy), BreakpointModule (copy)
+	local IsWidthBelow = Frame.width <= 360
+	
+	return ReactModule.createElement(LabeledShell, {
+		LayoutOrder = Frame.LayoutOrder,
+		label = `{Frame.width}px`,
+		width = Frame.width,
+		breakpoint = if IsWidthBelow then BreakpointModule.XSmall else BreakpointModule.Small,
+		leading = Frame.leading,
+		content = Frame.content,
+		trailing = Frame.trailing
 	})
 end
 
-local function CompositionGroup(p9)
-	-- upvalues: list_7 (ref), reactModule (ref), viewModule (ref)
-	local t = {}
+local function CompositionGroup(Frame) --[[ Line: 598 ]]
+	-- upvalues: Widths (copy), ReactModule (copy), ViewModule (copy)
+	local Elements = {}
 	
-	for i, v in list_7 do
-		t[`Width{v}`] = reactModule.createElement(p9.Cell, { LayoutOrder = i, width = v })
+	for LayoutOrder, width in Widths do
+		Elements[`Width{width}`] = ReactModule.createElement(Frame.Cell, { LayoutOrder = LayoutOrder, width = width })
 	end
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "col align-x-left gap-medium auto-xy",
-		LayoutOrder = p9.LayoutOrder
-	}, t)
+		LayoutOrder = Frame.LayoutOrder
+	}, Elements)
 end
 
 return {
 	MOBILE_PARENT_WIDTH = 360,
 	OVERSIZED_DEMAND = 400,
-	WIDTH_TIERS = list_2,
-	HEIGHT_TIERS = list_3,
-	VIEWPORT_ORDER = t,
-	VIEWPORT_BY_PRESET = t_1,
-	SLOT_CHILD_COUNTS = list_4,
-	LEADING_ACTIONS = list_5,
-	TRAILING_ACTIONS = list_6,
-	takeActions = takeActions,
-	leadingPlaceholder = leadingPlaceholder,
-	contentPlaceholder = contentPlaceholder,
-	trailingPlaceholder = trailingPlaceholder,
+	WIDTH_TIERS = {
+		{ width = 360, label = `Mobile, parent width {360}px` },
+		{ width = 720, label = `Desktop, parent width {720}px` }
+	},
+	HEIGHT_TIERS = {
+		{
+			label = "XSmall, Small",
+			breakpoint = BreakpointModule.Small
+		},
+		{
+			label = "Medium, Large",
+			breakpoint = BreakpointModule.Large
+		},
+		{
+			label = "XLarge, XXLarge",
+			breakpoint = BreakpointModule.XXLarge
+		}
+	},
+	VIEWPORT_ORDER = Presets,
+	VIEWPORT_BY_PRESET = t,
+	SLOT_CHILD_COUNTS = { 1, 2, 3 },
+	LEADING_ACTIONS = {
+		{
+			id = "close",
+			icon = Icon.X,
+			onActivated = function() --[[ Line: 155 ]] end
+		},
+		{
+			id = "back",
+			icon = Icon.ChevronLargeLeft,
+			onActivated = function() --[[ Line: 160 ]] end
+		}
+	},
+	TRAILING_ACTIONS = Actions,
+	takeActions = function(p8, p9: number) --[[ Line: 182 ]]
+		return table.move(p8, 1, math.min(p9, #p8), 1, {})
+	end,
+	leadingPlaceholder = function(p8) --[[ Line: 265 ]]
+		-- upvalues: leadingSlot (copy), slotPlaceholders (copy)
+		return leadingSlot((slotPlaceholders("Leading", 96, "align-x-left", true, p8)))
+	end,
+	contentPlaceholder = function(p8) --[[ Line: 269 ]]
+		-- upvalues: contentSlot (copy), slotPlaceholders (copy)
+		return contentSlot((slotPlaceholders("Content", 128, "align-x-center", false, p8)))
+	end,
+	trailingPlaceholder = function(p8) --[[ Line: 273 ]]
+		-- upvalues: trailingSlot (copy), slotPlaceholders (copy)
+		return trailingSlot((slotPlaceholders("Trailing", 96, "align-x-right", true, p8)))
+	end,
 	LabeledShell = LabeledShell,
 	Shell = Shell,
-	SlotPattern = function(p10)
-		-- upvalues: reactModule (ref), viewModule (ref), LabeledShell (ref), CompositionGroup (ref)
-		return reactModule.createElement(viewModule, {
+	SlotPattern = function(Frame) --[[ Line: 616 ]]
+		-- upvalues: ReactModule (copy), ViewModule (copy), LabeledShell (copy), CompositionGroup (copy)
+		return ReactModule.createElement(ViewModule, {
 			tag = "col align-x-left gap-medium auto-xy",
-			LayoutOrder = p10.LayoutOrder
+			LayoutOrder = Frame.LayoutOrder
 		}, {
-			Placeholder = reactModule.createElement(LabeledShell, {
+			Placeholder = ReactModule.createElement(LabeledShell, {
 				LayoutOrder = 1,
-				label = p10.label,
-				hasPlaceholderSlots = p10.hasPlaceholderSlots,
-				leading = p10.leading,
-				content = p10.content,
-				trailing = p10.trailing
+				label = Frame.label,
+				hasPlaceholderSlots = Frame.hasPlaceholderSlots,
+				leading = Frame.leading,
+				content = Frame.content,
+				trailing = Frame.trailing
 			}),
-			Composition = if p10.Cell then reactModule.createElement(CompositionGroup, { LayoutOrder = 2, Cell = p10.Cell }) else nil
+			Composition = if Frame.Cell then ReactModule.createElement(CompositionGroup, { LayoutOrder = 2, Cell = Frame.Cell }) else nil
 		})
 	end,
-	tierCells = tierCells,
-	CenteredDetailCell = function(p10)
-		-- upvalues: reactModule (ref), CompositionShell (ref), icon (ref), iconButtonModule (ref), noop (ref), headerBarModule (ref), viewModule (ref), textModule (ref)
-		return reactModule.createElement(CompositionShell, {
-			LayoutOrder = p10.LayoutOrder,
-			width = p10.width,
-			leading = reactModule.createElement(headerBarModule.Leading, nil, {
-				Close = reactModule.createElement(iconButtonModule, { LayoutOrder = 1, icon = icon.X, onActivated = noop }),
-				Back = reactModule.createElement(iconButtonModule, {
+	tierCells = function(List) --[[ Line: 355 ]]
+		-- upvalues: ReactModule (copy), LabeledShell (copy)
+		local Elements = {}
+		
+		for LayoutOrder, value in List do
+			Elements[value.label] = ReactModule.createElement(LabeledShell, {
+				hasPlaceholderSlots = true,
+				LayoutOrder = LayoutOrder,
+				label = value.label,
+				width = value.width,
+				breakpoint = value.breakpoint
+			})
+		end
+		return Elements
+	end,
+	CenteredDetailCell = function(Frame) --[[ Line: 570 ]]
+		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), HeaderBarModule (copy), ViewModule (copy), TextModule (copy)
+		return ReactModule.createElement(CompositionShell, {
+			LayoutOrder = Frame.LayoutOrder,
+			width = Frame.width,
+			leading = ReactModule.createElement(HeaderBarModule.Leading, nil, {
+				Close = ReactModule.createElement(IconButtonModule, { LayoutOrder = 1, icon = Icon.X, onActivated = noop }),
+				Back = ReactModule.createElement(IconButtonModule, {
 					LayoutOrder = 2,
-					icon = icon.ChevronLargeLeft,
+					icon = Icon.ChevronLargeLeft,
 					onActivated = noop
 				})
 			}),
-			content = reactModule.createElement(headerBarModule.Content, nil, {
-				Stack = reactModule.createElement(viewModule, { tag = "col align-x-center auto-xy", LayoutOrder = 1 }, {
-					Title = reactModule.createElement(textModule, {
+			content = ReactModule.createElement(HeaderBarModule.Content, nil, {
+				Stack = ReactModule.createElement(ViewModule, { tag = "col align-x-center auto-xy", LayoutOrder = 1 }, {
+					Title = ReactModule.createElement(TextModule, {
 						Text = "Title",
 						tag = "auto-xy text-label-medium content-emphasis",
 						LayoutOrder = 1
 					}),
-					Subtitle = reactModule.createElement(textModule, {
+					Subtitle = ReactModule.createElement(TextModule, {
 						Text = "Username: 13+",
 						tag = "auto-xy text-caption-small content-muted",
 						LayoutOrder = 2
@@ -443,157 +439,161 @@ return {
 			})
 		})
 	end,
-	ContentAndTrailingCell = function(p10)
-		-- upvalues: reactModule (ref), CompositionShell (ref), uDim (ref), uDim_1 (ref), SearchContent (ref), icon (ref), iconButtonModule (ref), noop (ref), headerBarModule (ref), utilityTrailing (ref)
-		local var3 = p10.width <= 360
+	ContentAndTrailingCell = function(Frame) --[[ Line: 503 ]]
+		-- upvalues: ReactModule (copy), CompositionShell (copy), _UDim (copy), _UDim1 (copy), SearchContent (copy), Icon (copy), IconButtonModule (copy), noop (copy), HeaderBarModule (copy), utilityTrailing (copy)
+		local IsWidthBelow = Frame.width <= 360
 		
-		return reactModule.createElement(CompositionShell, {
-			LayoutOrder = p10.LayoutOrder,
-			width = p10.width,
-			content = reactModule.createElement(SearchContent, { width = if var3 then uDim else uDim_1 }),
-			trailing = if var3 then reactModule.createElement(headerBarModule.Trailing, nil, {
-				Filter = reactModule.createElement(iconButtonModule, {
+		return ReactModule.createElement(CompositionShell, {
+			LayoutOrder = Frame.LayoutOrder,
+			width = Frame.width,
+			content = ReactModule.createElement(SearchContent, { width = if IsWidthBelow then _UDim else _UDim1 }),
+			trailing = if IsWidthBelow then ReactModule.createElement(HeaderBarModule.Trailing, nil, {
+				Filter = ReactModule.createElement(IconButtonModule, {
 					LayoutOrder = 1,
-					icon = icon.ThreeSlidersHorizontal,
+					icon = Icon.ThreeSlidersHorizontal,
 					onActivated = noop
 				})
 			}) else utilityTrailing(true)
 		})
 	end,
-	ContentFillCell = function(p10)
-		-- upvalues: reactModule (ref), CompositionShell (ref), textModule (ref), headerBarModule (ref), uDim_2 (ref), SearchContent (ref)
-		return reactModule.createElement(CompositionShell, {
-			LayoutOrder = p10.LayoutOrder,
-			width = p10.width,
-			leading = reactModule.createElement(headerBarModule.Leading, nil, {
-				Title = reactModule.createElement(textModule, {
+	ContentFillCell = function(Frame) --[[ Line: 514 ]]
+		-- upvalues: ReactModule (copy), CompositionShell (copy), TextModule (copy), HeaderBarModule (copy), _UDim2 (copy), SearchContent (copy)
+		return ReactModule.createElement(CompositionShell, {
+			LayoutOrder = Frame.LayoutOrder,
+			width = Frame.width,
+			leading = ReactModule.createElement(HeaderBarModule.Leading, nil, {
+				Title = ReactModule.createElement(TextModule, {
 					Text = "Page Title",
 					tag = "auto-xy text-heading-medium content-emphasis",
 					LayoutOrder = 1
 				})
 			}),
-			content = reactModule.createElement(SearchContent, { width = uDim_2 })
+			content = ReactModule.createElement(SearchContent, { width = _UDim2 })
 		})
 	end,
-	ContentFillWithTrailingCell = function(p10)
-		-- upvalues: reactModule (ref), CompositionShell (ref), textModule (ref), headerBarModule (ref), uDim_2 (ref), SearchContent (ref), icon (ref), iconButtonModule (ref), noop (ref)
-		return reactModule.createElement(CompositionShell, {
-			LayoutOrder = p10.LayoutOrder,
-			width = p10.width,
-			leading = reactModule.createElement(headerBarModule.Leading, nil, {
-				Title = reactModule.createElement(textModule, {
+	ContentFillWithTrailingCell = function(Frame) --[[ Line: 525 ]]
+		-- upvalues: ReactModule (copy), CompositionShell (copy), TextModule (copy), HeaderBarModule (copy), _UDim2 (copy), SearchContent (copy), Icon (copy), IconButtonModule (copy), noop (copy)
+		return ReactModule.createElement(CompositionShell, {
+			LayoutOrder = Frame.LayoutOrder,
+			width = Frame.width,
+			leading = ReactModule.createElement(HeaderBarModule.Leading, nil, {
+				Title = ReactModule.createElement(TextModule, {
 					Text = "Page Title",
 					tag = "auto-xy text-heading-medium content-emphasis",
 					LayoutOrder = 1
 				})
 			}),
-			content = reactModule.createElement(SearchContent, { width = uDim_2 }),
-			trailing = reactModule.createElement(headerBarModule.Trailing, nil, {
-				Filter = reactModule.createElement(iconButtonModule, {
+			content = ReactModule.createElement(SearchContent, { width = _UDim2 }),
+			trailing = ReactModule.createElement(HeaderBarModule.Trailing, nil, {
+				Filter = ReactModule.createElement(IconButtonModule, {
 					LayoutOrder = 1,
-					icon = icon.ThreeSlidersHorizontal,
+					icon = Icon.ThreeSlidersHorizontal,
 					onActivated = noop
 				})
 			})
 		})
 	end,
-	CrowdedLeadingCell = function(p10)
-		-- upvalues: reactModule (ref), CompositionShell (ref), icon (ref), iconButtonModule (ref), noop (ref), headerBarModule (ref), uDim (ref), uDim_1 (ref), SearchContent (ref), avatarModule (ref), avatarSizeModule (ref)
-		return reactModule.createElement(CompositionShell, {
-			LayoutOrder = p10.LayoutOrder,
-			width = p10.width,
-			leading = reactModule.createElement(headerBarModule.Leading, nil, {
-				Menu = reactModule.createElement(iconButtonModule, {
+	CrowdedLeadingCell = function(Frame) --[[ Line: 539 ]]
+		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), HeaderBarModule (copy), _UDim (copy), _UDim1 (copy), SearchContent (copy), AvatarModule (copy), AvatarSizeModule (copy)
+		local IsWidthBelow = Frame.width <= 360
+		
+		return ReactModule.createElement(CompositionShell, {
+			LayoutOrder = Frame.LayoutOrder,
+			width = Frame.width,
+			leading = ReactModule.createElement(HeaderBarModule.Leading, nil, {
+				Menu = ReactModule.createElement(IconButtonModule, {
 					LayoutOrder = 1,
-					icon = icon.ThreeBarsHorizontal,
+					icon = Icon.ThreeBarsHorizontal,
 					onActivated = noop
 				}),
-				Back = reactModule.createElement(iconButtonModule, {
+				Back = ReactModule.createElement(IconButtonModule, {
 					LayoutOrder = 2,
-					icon = icon.ChevronLargeLeft,
+					icon = Icon.ChevronLargeLeft,
 					onActivated = noop
 				})
 			}),
-			content = reactModule.createElement(SearchContent, { width = if p10.width <= 360 then uDim else uDim_1 }),
-			trailing = reactModule.createElement(headerBarModule.Trailing, nil, {
-				Account = reactModule.createElement(avatarModule, {
+			content = ReactModule.createElement(SearchContent, { width = if IsWidthBelow then _UDim else _UDim1 }),
+			trailing = ReactModule.createElement(HeaderBarModule.Trailing, nil, {
+				Account = ReactModule.createElement(AvatarModule, {
 					userId = 24813339,
 					LayoutOrder = 1,
-					size = avatarSizeModule.Small
+					size = AvatarSizeModule.Small
 				})
 			})
 		})
 	end,
-	CrowdedTrailingCell = function(p10)
-		-- upvalues: reactModule (ref), CompositionShell (ref), icon (ref), iconButtonModule (ref), noop (ref), headerBarModule (ref), uDim (ref), uDim_1 (ref), SearchContent (ref), avatarModule (ref), avatarSizeModule (ref)
-		return reactModule.createElement(CompositionShell, {
-			LayoutOrder = p10.LayoutOrder,
-			width = p10.width,
-			leading = reactModule.createElement(headerBarModule.Leading, nil, {
-				Menu = reactModule.createElement(iconButtonModule, {
+	CrowdedTrailingCell = function(Frame) --[[ Line: 554 ]]
+		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), HeaderBarModule (copy), _UDim (copy), _UDim1 (copy), SearchContent (copy), AvatarModule (copy), AvatarSizeModule (copy)
+		local IsWidthBelow = Frame.width <= 360
+		
+		return ReactModule.createElement(CompositionShell, {
+			LayoutOrder = Frame.LayoutOrder,
+			width = Frame.width,
+			leading = ReactModule.createElement(HeaderBarModule.Leading, nil, {
+				Menu = ReactModule.createElement(IconButtonModule, {
 					LayoutOrder = 1,
-					icon = icon.ThreeBarsHorizontal,
+					icon = Icon.ThreeBarsHorizontal,
 					onActivated = noop
 				})
 			}),
-			content = reactModule.createElement(SearchContent, { width = if p10.width <= 360 then uDim else uDim_1 }),
-			trailing = reactModule.createElement(headerBarModule.Trailing, nil, {
-				Currency = reactModule.createElement(iconButtonModule, { LayoutOrder = 1, icon = icon.Robux, onActivated = noop }),
-				Notifications = reactModule.createElement(iconButtonModule, { LayoutOrder = 2, icon = icon.Bell, onActivated = noop }),
-				Account = reactModule.createElement(avatarModule, {
+			content = ReactModule.createElement(SearchContent, { width = if IsWidthBelow then _UDim else _UDim1 }),
+			trailing = ReactModule.createElement(HeaderBarModule.Trailing, nil, {
+				Currency = ReactModule.createElement(IconButtonModule, { LayoutOrder = 1, icon = Icon.Robux, onActivated = noop }),
+				Notifications = ReactModule.createElement(IconButtonModule, { LayoutOrder = 2, icon = Icon.Bell, onActivated = noop }),
+				Account = ReactModule.createElement(AvatarModule, {
 					userId = 24813339,
 					LayoutOrder = 3,
-					size = avatarSizeModule.Small
+					size = AvatarSizeModule.Small
 				})
 			})
 		})
 	end,
-	GlobalNavigationCell = function(p10)
-		-- upvalues: reactModule (ref), CompositionShell (ref), icon (ref), iconButtonModule (ref), noop (ref), textModule (ref), headerBarModule (ref), utilityTrailing (ref)
-		local var3 = p10.width <= 360
+	GlobalNavigationCell = function(Frame) --[[ Line: 474 ]]
+		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), TextModule (copy), HeaderBarModule (copy), utilityTrailing (copy)
+		local IsWidthBelow = Frame.width <= 360
 		
-		return reactModule.createElement(CompositionShell, {
-			LayoutOrder = p10.LayoutOrder,
-			width = p10.width,
-			leading = reactModule.createElement(headerBarModule.Leading, nil, {
-				Menu = if var3 then reactModule.createElement(iconButtonModule, {
+		return ReactModule.createElement(CompositionShell, {
+			LayoutOrder = Frame.LayoutOrder,
+			width = Frame.width,
+			leading = ReactModule.createElement(HeaderBarModule.Leading, nil, {
+				Menu = if IsWidthBelow then ReactModule.createElement(IconButtonModule, {
 					LayoutOrder = 1,
-					icon = icon.ThreeBarsHorizontal,
+					icon = Icon.ThreeBarsHorizontal,
 					onActivated = noop
 				}) else nil,
-				Title = reactModule.createElement(textModule, {
+				Title = ReactModule.createElement(TextModule, {
 					Text = "Page Title",
 					tag = "auto-xy text-heading-medium content-emphasis",
 					LayoutOrder = 2
 				})
 			}),
-			trailing = utilityTrailing(not var3)
+			trailing = utilityTrailing(not IsWidthBelow)
 		})
 	end,
-	SearchCell = function(p10)
-		-- upvalues: reactModule (ref), CompositionShell (ref), icon (ref), iconButtonModule (ref), noop (ref), textModule (ref), headerBarModule (ref), uDim (ref), uDim_1 (ref), SearchContent (ref), utilityTrailing (ref)
-		local var3 = p10.width <= 360
+	SearchCell = function(Frame) --[[ Line: 488 ]]
+		-- upvalues: ReactModule (copy), CompositionShell (copy), Icon (copy), IconButtonModule (copy), noop (copy), TextModule (copy), HeaderBarModule (copy), _UDim (copy), _UDim1 (copy), SearchContent (copy), utilityTrailing (copy)
+		local IsWidthBelow = Frame.width <= 360
 		
-		return reactModule.createElement(CompositionShell, {
-			LayoutOrder = p10.LayoutOrder,
-			width = p10.width,
-			leading = reactModule.createElement(headerBarModule.Leading, nil, {
-				Back = if var3 then reactModule.createElement(iconButtonModule, {
+		return ReactModule.createElement(CompositionShell, {
+			LayoutOrder = Frame.LayoutOrder,
+			width = Frame.width,
+			leading = ReactModule.createElement(HeaderBarModule.Leading, nil, {
+				Back = if IsWidthBelow then ReactModule.createElement(IconButtonModule, {
 					LayoutOrder = 1,
-					icon = icon.ChevronLargeLeft,
+					icon = Icon.ChevronLargeLeft,
 					onActivated = noop
 				}) else nil,
-				Title = if var3 then nil else reactModule.createElement(textModule, {
+				Title = if IsWidthBelow then nil else ReactModule.createElement(TextModule, {
 					Text = "Page Title",
 					tag = "auto-xy text-heading-medium content-emphasis",
 					LayoutOrder = 2
 				})
 			}),
-			content = reactModule.createElement(SearchContent, { width = if var3 then uDim else uDim_1 }),
-			trailing = if var3 then reactModule.createElement(headerBarModule.Trailing, nil, {
-				Filter = reactModule.createElement(iconButtonModule, {
+			content = ReactModule.createElement(SearchContent, { width = if IsWidthBelow then _UDim else _UDim1 }),
+			trailing = if IsWidthBelow then ReactModule.createElement(HeaderBarModule.Trailing, nil, {
+				Filter = ReactModule.createElement(IconButtonModule, {
 					LayoutOrder = 1,
-					icon = icon.ThreeSlidersHorizontal,
+					icon = Icon.ThreeSlidersHorizontal,
 					onActivated = noop
 				})
 			}) else utilityTrailing(true)

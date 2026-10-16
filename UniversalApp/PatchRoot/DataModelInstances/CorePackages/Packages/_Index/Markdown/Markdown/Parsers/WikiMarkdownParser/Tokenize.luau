@@ -1,10 +1,9 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
-local insert = table.insert
+local InsertFunction = table.insert
 
-return function(p1)
-	-- upvalues: insert (ref)
-	local var1, var2, var3, var4, var5
-	local t = {
+return function(Text: string) --[[ Line: 11 | Named "tokenize" ]]
+	-- upvalues: InsertFunction (copy)
+	local config = {
 		["\n"] = {
 			{ "LINE_BREAK", "^\n", "^\n", 1 },
 			{ "HEADING", "^[#]+", "^([#]+)" },
@@ -59,57 +58,63 @@ return function(p1)
 			{ "INLINE_CODE", "^`[^\n`]+$", "^`([^\n`]+)$" }
 		}
 	}
-	local var6 = 0
-	local var7 = 0
-	local t_1 = {}
-	while var6 <= #p1 do
-		var1 = if var6 == 0 then "\n" else p1:sub(var6, var6)
-		local var8 = t[var1]
-		var2 = false
+	local Offset = 0
+	local Offset1 = 0
+	local t = {}
+	local Segment1 = nil
+	local v1 = nil
+	local Segment = nil
+	local Flag = nil
+	while Offset <= #Text do
+		Segment1 = if Offset == 0 then "\n" else Text:sub(Offset, Offset)
+		local Entry = config[Segment1]
+		Flag = false
 		
-		if var8 then
-			var3 = if var1 == "\n" then 1 else 0
-			var4 = p1:sub(var6 + var3)
+		if Entry then
+			v1 = if Segment1 == "\n" then 1 else 0
+			Segment = Text:sub(Offset + v1)
+			local MatchResult = nil
 			
-			for i, v in var8 do
-				var5 = var4:match(v[2])
+			for _, value in Entry do
+				MatchResult = Segment:match(value[2])
 				
-				if var5 then
-					local var9 = v[1]
-					local var10 = v[3]
-					local var11 = #var5 - (v[4] or 0)
+				if MatchResult then
+					local Entry1 = value[1]
+					local Entry11 = value[3]
+					local v2 = #MatchResult - (value[4] or 0)
 					
-					if var6 ~= var7 then
-						insert(t_1, {
+					if Offset ~= Offset1 then
+						InsertFunction(t, {
 							name = "TEXT",
-							text = p1:sub(var7, var6 - 1),
-							offset = var7
+							text = Text:sub(Offset1, Offset - 1),
+							offset = Offset1
 						})
 					end
-					insert(t_1, {
-						name = var9,
-						text = var5,
-						capture = if var10 then { var4:match(var10) } else nil,
-						isBlock = var1 == "\n",
-						offset = var6
-					})
-					var6 += var3 + var11
-					var7 = var6
-					var2 = true
+					local config1 = {
+						name = Entry1,
+						text = MatchResult,
+						capture = if Entry11 then { Segment:match(Entry11) } else nil,
+						isBlock = Segment1 == "\n"
+					}
+					config1.offset = Offset
+					InsertFunction(t, config1)
+					Offset += v1 + v2
+					Offset1 = Offset
+					Flag = true
 					break
 				end
 			end
 		end
-		if not var2 then
-			var6 += 1
+		if not Flag then
+			Offset += 1
 		end
 	end
-	if var6 ~= var7 then
-		insert(t_1, {
+	if Offset ~= Offset1 then
+		InsertFunction(t, {
 			name = "TEXT",
-			text = p1:sub(var7, var6 - 1),
-			offset = var7
+			text = Text:sub(Offset1, Offset - 1),
+			offset = Offset1
 		})
 	end
-	return t_1
+	return t
 end

@@ -1,21 +1,22 @@
-﻿local roactModule = require(script.Parent.Parent.Roact)
-local storeContextModule = require(script.Parent.StoreContext)
-local storeProvider = roactModule.Component:extend("StoreProvider")
+﻿local RoactModule = require(script.Parent.Parent.Roact)
+local StoreContextModule = require(script.Parent.StoreContext)
+local StoreProvider = RoactModule.Component:extend("StoreProvider")
 
-function storeProvider.validateProps(p1)
+function StoreProvider.validateProps(p1) --[[ Line: 7 ]]
 	if p1.store == nil then
 		return false, "Error initializing StoreProvider. Expected a `store` prop to be a Rodux store."
+	else
+		return true
 	end
-	return true
 end
 
-function storeProvider.init(p1, p2)
+function StoreProvider.init(p1, p2) --[[ Line: 15 ]]
 	p1.store = p2.store
 end
 
-function storeProvider.render(p1)
-	-- upvalues: roactModule (ref), storeContextModule (ref)
-	return roactModule.createElement(storeContextModule.Provider, { value = p1.store }, roactModule.oneChild(p1.props[roactModule.Children]))
+function StoreProvider.render(p1) --[[ Line: 19 ]]
+	-- upvalues: RoactModule (copy), StoreContextModule (copy)
+	return RoactModule.createElement(StoreContextModule.Provider, { value = p1.store }, RoactModule.oneChild(p1.props[RoactModule.Children]))
 end
 
-return storeProvider
+return StoreProvider

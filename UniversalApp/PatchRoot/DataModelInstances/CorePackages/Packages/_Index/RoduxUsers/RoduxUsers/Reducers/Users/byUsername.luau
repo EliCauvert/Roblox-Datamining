@@ -1,85 +1,84 @@
-﻿local roduxUsers = script:FindFirstAncestor("RoduxUsers")
-local parent = roduxUsers.Parent
-local roduxModule = require(parent.Rodux)
-local cryoModule = require(parent.Cryo)
-local actions = roduxUsers.Actions
-local models = roduxUsers.Models
-local userRemovedModule = require(actions.UserRemoved)
-local userUpdatedModule = require(actions.UserUpdated)
-local userModelModule = require(models.UserModel)
+﻿local RoduxUsers = script:FindFirstAncestor("RoduxUsers")
+local Parent = RoduxUsers.Parent
+local RoduxModule = require(Parent.Rodux)
+local CryoModule = require(Parent.Cryo)
+local Actions = RoduxUsers.Actions
+local UserRemovedModule = require(Actions.UserRemoved)
+local UserUpdatedModule = require(Actions.UserUpdated)
+local UserModelModule = require(RoduxUsers.Models.UserModel)
 
-local _ = function(p1, p2)
-	local var1 = nil
+local function _(p1, List) --[[ Line: 13 ]]
+	local v1 = nil
 	
-	for i, v in pairs(p2) do
-		if v == p1 then
-			var1 = i
+	for i, value in pairs(List) do
+		if value == p1 then
+			v1 = i
 			
-			return var1
+			return v1
 		end
 	end
-	return var1
+	return v1
 end
 
-local var2 = function(p3, p4)
-	-- upvalues: cryoModule (ref)
+local function v9(p2, List) --[[ Line: 25 ]]
+	-- upvalues: CryoModule (copy)
 	local t = {}
 	
-	for i, v in ipairs(p4) do
-		if v.name then
-			t[v.name] = tostring(v.id)
+	for _, value in ipairs(List) do
+		if value.name then
+			t[value.name] = tostring(value.id)
 		end
 	end
-	return cryoModule.Dictionary.join(p3, t)
+	return CryoModule.Dictionary.join(p2, t)
 end
 
 local t = {}
 
-return function(p5)
-	-- upvalues: roduxModule (ref), t (ref), var2 (ref), userUpdatedModule (ref), userModelModule (ref), cryoModule (ref), userRemovedModule (ref)
-	local usersNetworking = p5.usersNetworking
-	local friendsNetworking = p5.friendsNetworking
+return function(p3) --[[ Line: 37 ]]
+	-- upvalues: RoduxModule (copy), t (copy), v9 (copy), UserUpdatedModule (copy), UserModelModule (copy), CryoModule (copy), UserRemovedModule (copy)
+	local UsersNetworking = p3.usersNetworking
+	local FriendsNetworking = p3.friendsNetworking
 	
-	return roduxModule.createReducer(t, {
-		[usersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p6, p7)
-			-- upvalues: var2 (copy)
-			return var2(p6, { p7.responseBody })
+	return RoduxModule.createReducer(t, {
+		[UsersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p4, p5) --[[ Line: 42 ]]
+			-- upvalues: v9 (upval)
+			return v9(p4, { p5.responseBody })
 		end,
-		[usersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p6, p7)
-			-- upvalues: var2 (copy)
-			return var2(p6, p7.responseBody.data)
+		[UsersNetworking.GetSkinnyUsersFromUserIds.Succeeded.name] = function(p4, p5) --[[ Line: 46 ]]
+			-- upvalues: v9 (upval)
+			return v9(p4, p5.responseBody.data)
 		end,
-		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p6, p7)
-			-- upvalues: var2 (copy)
-			return var2(p6, p7.responseBody.data)
+		[FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p4, p5) --[[ Line: 50 ]]
+			-- upvalues: v9 (upval)
+			return v9(p4, p5.responseBody.data)
 		end,
-		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p6, p7)
-			-- upvalues: var2 (copy)
-			return var2(p6, p7.responseBody.data)
+		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p4, p5) --[[ Line: 54 ]]
+			-- upvalues: v9 (upval)
+			return v9(p4, p5.responseBody.data)
 		end,
-		[friendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p6, p7)
-			-- upvalues: var2 (copy)
-			return var2(p6, p7.responseBody.data)
+		[FriendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p4, p5) --[[ Line: 58 ]]
+			-- upvalues: v9 (upval)
+			return v9(p4, p5.responseBody.data)
 		end,
-		[userUpdatedModule.name] = function(p6, p7)
-			-- upvalues: userModelModule (copy), cryoModule (copy)
-			assert(userModelModule.isValid(p7.payload))
+		[UserUpdatedModule.name] = function(p4, p5) --[[ Line: 62 ]]
+			-- upvalues: UserModelModule (upval), CryoModule (upval)
+			assert(UserModelModule.isValid(p5.payload))
 			
-			return cryoModule.Dictionary.join(p6, { [p7.payload.username] = p7.payload.id })
+			return CryoModule.Dictionary.join(p4, { [p5.payload.username] = p5.payload.id })
 		end,
-		[userRemovedModule.name] = function(p6, p7)
-			-- upvalues: cryoModule (copy)
-			assert(type(p7.payload.id) == "string", "Expected id to be a string")
-			local id = p7.payload.id
-			local var3 = nil
+		[UserRemovedModule.name] = function(Ids, p4) --[[ Line: 70 ]]
+			-- upvalues: CryoModule (upval)
+			assert(type(p4.payload.id) == "string", "Expected id to be a string")
+			local Id = p4.payload.id
+			local v2 = nil
 			
-			for i, v in pairs(p6) do
-				if v == id then
-					var3 = i
+			for i, id in pairs(Ids) do
+				if id == Id then
+					v2 = i
 					break
 				end
 			end
-			return if var3 then cryoModule.Dictionary.join(p6, { [var3] = cryoModule.None }) else p6
+			return if v2 then CryoModule.Dictionary.join(Ids, { [v2] = CryoModule.None }) else Ids
 		end
 	})
 end

@@ -1,9 +1,9 @@
-﻿local _script = script
+﻿local v1 = script
 
 return {
-	presenceSortComparator = require(_script.presenceSortComparator),
-	pruneConsecutiveNewLines = require(_script.pruneConsecutiveNewLines),
-	formatAlias = require(_script.formatAlias),
-	searchFilterPredicate = require(_script.searchFilterPredicate),
-	isEnum = require(_script.isEnum)
+	presenceSortComparator = require(v1.presenceSortComparator),
+	pruneConsecutiveNewLines = require(v1.pruneConsecutiveNewLines),
+	formatAlias = require(v1.formatAlias),
+	searchFilterPredicate = require(v1.searchFilterPredicate),
+	isEnum = require(v1.isEnum)
 }

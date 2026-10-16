@@ -1,9 +1,9 @@
 ﻿return {
-	transformTriangleToWorld = function(vectorA, vectorB, p1, p2, p3)
-		local var1 = p2 * (vectorA * p3)
-		local var2 = p2 * (vectorB * p3)
-		local var3 = p2 * (p1 * p3)
+	transformTriangleToWorld = function(p1, p2, p3, p4, p5) --[[ Line: 8 ]]
+		local v1 = p4 * (p1 * p5)
+		local v2 = p4 * (p2 * p5)
+		local v3 = p4 * (p3 * p5)
 		
-		return var1, var2, var3, (var2 - var1):Cross(var3 - var1).Unit
+		return v1, v2, v3, (v2 - v1):Cross(v3 - v1).Unit
 	end
 }

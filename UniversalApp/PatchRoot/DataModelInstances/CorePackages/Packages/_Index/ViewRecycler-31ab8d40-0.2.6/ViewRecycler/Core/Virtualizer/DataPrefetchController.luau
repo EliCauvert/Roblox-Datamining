@@ -1,128 +1,133 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataPrefetchModule = require(viewRecycler.Core.DataPrefetch)
-local _ = require(viewRecycler.Core.DataSource)
-local typesModule = require(viewRecycler.Core.Types)
-local frozen = table.freeze({})
-local frozen_1 = table.freeze({ startItems = 0, endItems = 0 })
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataPrefetchModule = require(ViewRecycler.Core.DataPrefetch)
+local _ = require(ViewRecycler.Core.DataSource)
+local TypesModule = require(ViewRecycler.Core.Types)
+local Frozen = table.freeze({})
+local Frozen1 = table.freeze({ startItems = 0, endItems = 0 })
 
-local function _(p1, p2)
+local function _(p1, p2): boolean --[[ Line: 28 | Named "sameRange" ]]
 	return p1.firstIndex == p2.firstIndex and p1.lastIndex == p2.lastIndex
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2): boolean --[[ Line: 32 | Named "sameOptions" ]]
 	return p1.startItems == p2.startItems and p1.endItems == p2.endItems
 end
 
-return function(p1)
-	-- upvalues: dataPrefetchModule (ref), typesModule (ref), frozen_1 (ref), frozen (ref)
-	local var1 = false
-	local var2 = nil
-	local var3 = dataPrefetchModule.resolve(p1)
-	local t = {}
+return function(p1) --[[ Line: 36 | Named "createDataPrefetchController" ]]
+	-- upvalues: DataPrefetchModule (copy), TypesModule (copy), Frozen1 (copy), Frozen (copy)
+	local Flag = false
+	local DataSource = nil
+	local ResolveResult = DataPrefetchModule.resolve(p1)
+	local Tbl = {}
 	
-	local function createRequest(p2, p3)
-		-- upvalues: t (ref), var1 (write)
-		local t_1 = { range = table.freeze(p3) }
-		t[p2] = t_1
+	local function createRequest(Edge, Tbl1) --[[ Line: 42 ]]
+		-- upvalues: Tbl (copy), Flag (ref)
+		local config = { range = table.freeze(Tbl1) }
+		Tbl[Edge] = config
 		
 		return table.freeze({
-			edge = p2,
-			range = t_1.range,
-			isCurrent = function()
-				-- upvalues: var1 (copy), t (copy), p2 (ref), t_1 (ref)
-				return not var1 and t[p2] == t_1
+			edge = Edge,
+			range = config.range,
+			isCurrent = function(): boolean --[[ Line: 50 ]]
+				-- upvalues: Flag (upval), Tbl (upval), Edge (copy), config (copy)
+				return not Flag and Tbl[Edge] == config
 			end
 		})
 	end
 	
-	local function desiredRange(p2, p3, p4, p5)
-		-- upvalues: dataPrefetchModule (copy), typesModule (copy)
-		local var4 = if p2 == dataPrefetchModule.Edge.Start then p5.startItems else p5.endItems
+	local function desiredRange(Start, ItemCount: number, MountedRange, ResolveResult) --[[ Line: 56 ]]
+		-- upvalues: DataPrefetchModule (upval), TypesModule (upval)
+		local StartItems = if Start == DataPrefetchModule.Edge.Start then ResolveResult.startItems else ResolveResult.endItems
 		
-		if var4 == 0 then
+		if StartItems == 0 then
 			return nil
+		else
+			local Config = if Start == DataPrefetchModule.Edge.Start then {
+				firstIndex = math.max(1, MountedRange.firstIndex - StartItems),
+				lastIndex = MountedRange.firstIndex - 1
+			} else {
+				firstIndex = MountedRange.lastIndex + 1,
+				lastIndex = math.min(ItemCount, MountedRange.lastIndex + StartItems)
+			}
+			
+			return if TypesModule.isIndexRangeEmpty(Config) then nil else Config
 		end
-		local var5 = if p2 == dataPrefetchModule.Edge.Start then {
-			firstIndex = math.max(1, p4.firstIndex - var4),
-			lastIndex = p4.firstIndex - 1
-		} else {
-			firstIndex = p4.lastIndex + 1,
-			lastIndex = math.min(p3, p4.lastIndex + var4)
-		}
-		
-		return if typesModule.isIndexRangeEmpty(var5) then nil else var5
 	end
 	
-	local function reconcileEdge(p2, p3, p4)
-		-- upvalues: t (ref), createRequest (ref)
-		local var4 = t[p2]
+	local function reconcileEdge(Edge, p2, List) --[[ Line: 78 ]]
+		-- upvalues: Tbl (copy), createRequest (copy)
+		local Entry = Tbl[Edge]
 		
-		if p3 == nil then
-			t[p2] = nil
+		if p2 == nil then
+			Tbl[Edge] = nil
 			
-			return p4
-		elseif var4 ~= nil then
-			local range = var4.range
-			
-			if not (range.firstIndex == p3.firstIndex and range.lastIndex == p3.lastIndex) then
-				p4 = p4 or {}
-				table.insert(p4, createRequest(p2, p3))
-			end
-			return p4
+			return List
 		end
+		repeat
+			if Entry ~= nil then
+				local Range = Entry.range
+				
+				if Range.firstIndex == p2.firstIndex and Range.lastIndex == p2.lastIndex then break end
+			end
+			List = List or {}
+			table.insert(List, createRequest(Edge, p2))
+		until true
+		return List
 	end
 	
 	return {
-		reconcile = function(p2)
-			-- upvalues: var1 (write), var2 (write), var3 (write), frozen_1 (copy), t (ref), frozen (copy), dataPrefetchModule (copy), typesModule (copy), desiredRange (ref), reconcileEdge (ref)
-			assert(not var1, "DataPrefetchController: cannot reconcile after destroy")
-			local options = p2.options
-			local var4 = if options == nil then 0 else options.startItems or 0
-			local var5 = options ~= nil and ((if options ~= nil then options.endItems else nil) or 0)
-			if var4 == 0 and var5 == 0 then
-				if var2 == p2.dataSource then
-					local var6 = var3
-					local var7 = frozen_1
-					
-					if not (var6.startItems == var7.startItems and var6.endItems == var7.endItems) then
-						table.clear(t)
+		reconcile = function(p2) --[[ Line: 93 ]]
+			-- upvalues: Flag (ref), DataSource (ref), ResolveResult (ref), Frozen1 (upval), Tbl (copy), Frozen (upval), DataPrefetchModule (upval), TypesModule (upval), desiredRange (copy), reconcileEdge (copy)
+			assert(not Flag, "DataPrefetchController: cannot reconcile after destroy")
+			local Options = p2.options
+			local EndItems = if Options == nil then 0 else Options.endItems or 0
+			
+			if (if Options == nil then 0 else Options.startItems or 0) == 0 and EndItems == 0 then
+				repeat
+					if DataSource == p2.dataSource then
+						local ResolveResult2 = ResolveResult
+						
+						if ResolveResult2.startItems == Frozen1.startItems and ResolveResult2.endItems == Frozen1.endItems then break end
 					end
-					var2 = p2.dataSource
-					var3 = frozen_1
-					
-					return frozen
-				end
-			else
-				local var8 = dataPrefetchModule.resolve(p2.options)
-				local mountedRange = p2.mountedRange
-				local var9 = if typesModule.isIndexRangeEmpty(mountedRange) then 0 else p2.dataSource.getItemCount()
-				local var10 = nil
-				local var11 = nil
+					table.clear(Tbl)
+				until true
+				DataSource = p2.dataSource
+				ResolveResult = Frozen1
 				
-				if not typesModule.isIndexRangeEmpty(mountedRange) then
-					var10 = desiredRange(dataPrefetchModule.Edge.Start, var9, mountedRange, var8)
-					var11 = desiredRange(dataPrefetchModule.Edge.End, var9, mountedRange, var8)
+				return Frozen
+			else
+				local ResolveResult1 = DataPrefetchModule.resolve(p2.options)
+				local MountedRange = p2.mountedRange
+				local ItemCount = if TypesModule.isIndexRangeEmpty(MountedRange) then 0 else p2.dataSource.getItemCount()
+				local v1 = nil
+				local v2 = nil
+				
+				if not TypesModule.isIndexRangeEmpty(MountedRange) then
+					v1 = desiredRange(DataPrefetchModule.Edge.Start, ItemCount, MountedRange, ResolveResult1)
+					v2 = desiredRange(DataPrefetchModule.Edge.End, ItemCount, MountedRange, ResolveResult1)
 				end
-				if var2 == p2.dataSource then
-					local var12 = var3
-					
-					if not (var12.startItems == var8.startItems and var12.endItems == var8.endItems) then
-						table.clear(t)
+				repeat
+					if DataSource == p2.dataSource then
+						local ResolveResult3 = ResolveResult
+						
+						if ResolveResult3.startItems == ResolveResult1.startItems and ResolveResult3.endItems == ResolveResult1.endItems then break end
 					end
-					var2 = p2.dataSource
-					var3 = var8
-					
-					return reconcileEdge(dataPrefetchModule.Edge.End, var11, reconcileEdge(dataPrefetchModule.Edge.Start, var10, nil)) or frozen
-				end
+					table.clear(Tbl)
+				until true
+				DataSource = p2.dataSource
+				ResolveResult = ResolveResult1
+				
+				return reconcileEdge(DataPrefetchModule.Edge.End, v2, (reconcileEdge(DataPrefetchModule.Edge.Start, v1, nil))) or Frozen
 			end
 		end,
-		destroy = function()
-			-- upvalues: var1 (write), t (ref)
-			if var1 then
+		destroy = function() --[[ Line: 130 ]]
+			-- upvalues: Flag (ref), Tbl (copy)
+			if not Flag then
+				Flag = true
+				table.clear(Tbl)
+				
 				return
 			end
-			var1 = true
-			table.clear(t)
 		end
 	}
 end

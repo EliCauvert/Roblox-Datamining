@@ -1,27 +1,27 @@
-﻿local reducersModule = require(script.Reducers)
-local actionsModule = require(script.Actions)
-local modelsModule = require(script.Models)
-local enumsModule = require(script.Enums)
-local parent = script.Parent
-local cryoModule = require(parent.Cryo)
-local roduxNetworkingModule = require(parent.RoduxNetworking)
-local shareLinksNetworkingModule = require(parent.ShareLinksNetworking)
+﻿local ReducersModule = require(script.Reducers)
+local ActionsModule = require(script.Actions)
+local ModelsModule = require(script.Models)
+local EnumsModule = require(script.Enums)
+local Parent = script.Parent
+local CryoModule = require(Parent.Cryo)
+local RoduxNetworkingModule = require(Parent.RoduxNetworking)
+local ShareLinksNetworkingModule = require(Parent.ShareLinksNetworking)
 
 return {
-	config = function(p1)
-		-- upvalues: cryoModule (ref), shareLinksNetworkingModule (ref), roduxNetworkingModule (ref), reducersModule (ref), actionsModule (ref), modelsModule (ref), enumsModule (ref)
-		p1 = cryoModule.Dictionary.join(p1, {
-			shareLinksNetworking = shareLinksNetworkingModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
+	config = function(p1) --[[ Line: 13 ]]
+		-- upvalues: CryoModule (copy), ShareLinksNetworkingModule (copy), RoduxNetworkingModule (copy), ReducersModule (copy), ActionsModule (copy), ModelsModule (copy), EnumsModule (copy)
+		local JoinResult = CryoModule.Dictionary.join(p1, {
+			shareLinksNetworking = ShareLinksNetworkingModule.config({ roduxNetworking = RoduxNetworkingModule.mock() })
 		})
 		
 		return {
-			installReducer = function()
-				-- upvalues: reducersModule (copy), p1 (write)
-				return reducersModule(p1)
+			installReducer = function() --[[ Line: 21 ]]
+				-- upvalues: ReducersModule (upval), JoinResult (ref)
+				return ReducersModule(JoinResult)
 			end,
-			Actions = actionsModule,
-			Models = modelsModule,
-			Enums = enumsModule
+			Actions = ActionsModule,
+			Models = ModelsModule,
+			Enums = EnumsModule
 		}
 	end
 }

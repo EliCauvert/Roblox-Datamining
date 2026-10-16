@@ -1,190 +1,194 @@
-﻿local function unimplemented(p1)
+﻿local function unimplemented(Text) --[[ Line: 11 ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	print("UNIMPLEMENTED ERROR: " .. tostring(p1))
-	error("FIXME (roblox): " .. p1 .. " is unimplemented", 2)
+	print("UNIMPLEMENTED ERROR: " .. tostring(Text))
+	error("FIXME (roblox): " .. Text .. " is unimplemented", 2)
 end
 
-local var1 = 0
+local Count = 0
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 25 | Named "isCallable" ]]
 	if typeof(p1) == "function" then
 		return true
-	elseif typeof(p1) == "table" then
-		local var2 = getmetatable(p1)
-		
-		return if var2 and rawget(var2, "__call") then true else p1._isMockFunction
 	end
+	if typeof(p1) == "table" then
+		local Meta = getmetatable(p1)
+		
+		if Meta and rawget(Meta, "__call") then
+			return true
+		elseif p1._isMockFunction then
+			return true
+		end
+	end
+	return false
 end
 
-local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local console = require(parent.Shared).console
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local error = luauPolyfillModule.Error
-local set = luauPolyfillModule.Set
-local dEV = reactGlobalsModule.__DEV__
-local yOLO = reactGlobalsModule.__YOLO__
-local reactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
+local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local Console = require(Parent.Shared).console
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Error1 = LuauPolyfillModule.Error
+local Set = LuauPolyfillModule.Set
+local DEV = ReactGlobalsModule.__DEV__
+local YOLO = ReactGlobalsModule.__YOLO__
+local ReactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
 local _ = require(script.Parent.ReactInternalTypes)
 local _ = require(script.Parent["ReactFiberSuspenseComponent.new"])
-local unknownModule = require(script.Parent["ReactUpdateQueue.new"])
-local _ = require(parent.Shared)
+local _ = require(Parent.Shared)
 local _ = require(script.Parent.ReactFiberOffscreenComponent)
-local reactHookEffectTagsModule = require(script.Parent.ReactHookEffectTags)
-local unstableWrap = require(parent.Scheduler).tracing.unstable_wrap
-local reactFeatureFlags = require(parent.Shared).ReactFeatureFlags
-local enableSchedulerTracing = reactFeatureFlags.enableSchedulerTracing
-local enableProfilerTimer = reactFeatureFlags.enableProfilerTimer
-local enableProfilerCommitHooks = reactFeatureFlags.enableProfilerCommitHooks
-local enableSuspenseCallback = reactFeatureFlags.enableSuspenseCallback
-local enableDoubleInvokingEffects = reactFeatureFlags.enableDoubleInvokingEffects
-local enableNewTreeCleanupPath = reactFeatureFlags.enableNewTreeCleanupPath
-local reactWorkTagsModule = require(script.Parent.ReactWorkTags)
-local functionComponent = reactWorkTagsModule.FunctionComponent
-local forwardRef = reactWorkTagsModule.ForwardRef
-local classComponent = reactWorkTagsModule.ClassComponent
-local hostRoot = reactWorkTagsModule.HostRoot
-local hostComponent = reactWorkTagsModule.HostComponent
-local hostText = reactWorkTagsModule.HostText
-local hostPortal = reactWorkTagsModule.HostPortal
-local profiler = reactWorkTagsModule.Profiler
-local suspenseComponent = reactWorkTagsModule.SuspenseComponent
-local dehydratedFragment = reactWorkTagsModule.DehydratedFragment
-local incompleteClassComponent = reactWorkTagsModule.IncompleteClassComponent
-local memoComponent = reactWorkTagsModule.MemoComponent
-local simpleMemoComponent = reactWorkTagsModule.SimpleMemoComponent
-local suspenseListComponent = reactWorkTagsModule.SuspenseListComponent
-local fundamentalComponent = reactWorkTagsModule.FundamentalComponent
-local scopeComponent = reactWorkTagsModule.ScopeComponent
-local block = reactWorkTagsModule.Block
-local offscreenComponent = reactWorkTagsModule.OffscreenComponent
-local legacyHiddenComponent = reactWorkTagsModule.LegacyHiddenComponent
-local reactErrorUtils = require(parent.Shared).ReactErrorUtils
-local invokeGuardedCallback = reactErrorUtils.invokeGuardedCallback
-local hasCaughtError = reactErrorUtils.hasCaughtError
-local clearCaughtError = reactErrorUtils.clearCaughtError
-local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
-local noFlags = reactFiberFlagsModule.NoFlags
-local contentReset = reactFiberFlagsModule.ContentReset
-local placement = reactFiberFlagsModule.Placement
-local snapshot = reactFiberFlagsModule.Snapshot
-local update = reactFiberFlagsModule.Update
-local callback = reactFiberFlagsModule.Callback
-local layoutMask = reactFiberFlagsModule.LayoutMask
-local passiveMask = reactFiberFlagsModule.PassiveMask
-local ref = reactFiberFlagsModule.Ref
-local getComponentName = require(parent.Shared).getComponentName
-local invariant = require(parent.Shared).invariant
-local describeError = require(parent.Shared).describeError
-local reactCurrentFiberModule = require(script.Parent.ReactCurrentFiber)
-local current = reactCurrentFiberModule.current
-local resetCurrentFiber = reactCurrentFiberModule.resetCurrentFiber
-local setCurrentFiber = reactCurrentFiberModule.setCurrentFiber
-local onCommitUnmount = require(script.Parent["ReactFiberDevToolsHook.new"]).onCommitUnmount
-local resolveDefaultProps = require(script.Parent["ReactFiberLazyComponent.new"]).resolveDefaultProps
-local unknownModule_1 = require(script.Parent["ReactProfilerTimer.new"])
-local startLayoutEffectTimer = unknownModule_1.startLayoutEffectTimer
-local recordPassiveEffectDuration = unknownModule_1.recordPassiveEffectDuration
-local recordLayoutEffectDuration = unknownModule_1.recordLayoutEffectDuration
-local startPassiveEffectTimer = unknownModule_1.startPassiveEffectTimer
-local getCommitTime = unknownModule_1.getCommitTime
-local profileMode = require(script.Parent.ReactTypeOfMode).ProfileMode
-local commitUpdateQueue = unknownModule.commitUpdateQueue
-local getPublicInstance = reactFiberHostConfigModule.getPublicInstance
-local supportsMutation = reactFiberHostConfigModule.supportsMutation
-local supportsPersistence = reactFiberHostConfigModule.supportsPersistence
-local supportsHydration = reactFiberHostConfigModule.supportsHydration
-local commitMount = reactFiberHostConfigModule.commitMount
-local commitUpdate = reactFiberHostConfigModule.commitUpdate
-local resetTextContent = reactFiberHostConfigModule.resetTextContent
-local commitTextUpdate = reactFiberHostConfigModule.commitTextUpdate
-local appendChild = reactFiberHostConfigModule.appendChild
-local appendChildToContainer = reactFiberHostConfigModule.appendChildToContainer
-local insertBefore = reactFiberHostConfigModule.insertBefore
-local insertInContainerBefore = reactFiberHostConfigModule.insertInContainerBefore
-local removeChild = reactFiberHostConfigModule.removeChild
-local removeChildFromContainer = reactFiberHostConfigModule.removeChildFromContainer
-local hideInstance = reactFiberHostConfigModule.hideInstance
-local hideTextInstance = reactFiberHostConfigModule.hideTextInstance
-local unhideInstance = reactFiberHostConfigModule.unhideInstance
-local unhideTextInstance = reactFiberHostConfigModule.unhideTextInstance
-local commitHydratedSuspenseInstance = reactFiberHostConfigModule.commitHydratedSuspenseInstance
-local clearContainer = reactFiberHostConfigModule.clearContainer
-local var2 = nil
+local ReactHookEffectTagsModule = require(script.Parent.ReactHookEffectTags)
+local UnstableWrapFunction = require(Parent.Scheduler).tracing.unstable_wrap
+local ReactFeatureFlags = require(Parent.Shared).ReactFeatureFlags
+local EnableSchedulerTracing = ReactFeatureFlags.enableSchedulerTracing
+local EnableProfilerTimer = ReactFeatureFlags.enableProfilerTimer
+local EnableProfilerCommitHooks = ReactFeatureFlags.enableProfilerCommitHooks
+local EnableSuspenseCallback = ReactFeatureFlags.enableSuspenseCallback
+local EnableDoubleInvokingEffects = ReactFeatureFlags.enableDoubleInvokingEffects
+local EnableNewTreeCleanupPath = ReactFeatureFlags.enableNewTreeCleanupPath
+local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
+local FunctionComponent = ReactWorkTagsModule.FunctionComponent
+local ForwardRef = ReactWorkTagsModule.ForwardRef
+local ClassComponent = ReactWorkTagsModule.ClassComponent
+local HostRoot = ReactWorkTagsModule.HostRoot
+local HostComponent = ReactWorkTagsModule.HostComponent
+local HostText = ReactWorkTagsModule.HostText
+local HostPortal = ReactWorkTagsModule.HostPortal
+local Profiler = ReactWorkTagsModule.Profiler
+local SuspenseComponent = ReactWorkTagsModule.SuspenseComponent
+local DehydratedFragment = ReactWorkTagsModule.DehydratedFragment
+local IncompleteClassComponent = ReactWorkTagsModule.IncompleteClassComponent
+local MemoComponent = ReactWorkTagsModule.MemoComponent
+local SimpleMemoComponent = ReactWorkTagsModule.SimpleMemoComponent
+local SuspenseListComponent = ReactWorkTagsModule.SuspenseListComponent
+local FundamentalComponent = ReactWorkTagsModule.FundamentalComponent
+local ScopeComponent = ReactWorkTagsModule.ScopeComponent
+local Block = ReactWorkTagsModule.Block
+local OffscreenComponent = ReactWorkTagsModule.OffscreenComponent
+local LegacyHiddenComponent = ReactWorkTagsModule.LegacyHiddenComponent
+local ReactErrorUtils = require(Parent.Shared).ReactErrorUtils
+local InvokeGuardedCallbackFunction = ReactErrorUtils.invokeGuardedCallback
+local HasCaughtErrorFunction = ReactErrorUtils.hasCaughtError
+local ClearCaughtErrorFunction = ReactErrorUtils.clearCaughtError
+local ReactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
+local NoFlags = ReactFiberFlagsModule.NoFlags
+local ContentReset = ReactFiberFlagsModule.ContentReset
+local Placement = ReactFiberFlagsModule.Placement
+local Snapshot = ReactFiberFlagsModule.Snapshot
+local Update = ReactFiberFlagsModule.Update
+local Callback7 = ReactFiberFlagsModule.Callback
+local LayoutMask = ReactFiberFlagsModule.LayoutMask
+local PassiveMask = ReactFiberFlagsModule.PassiveMask
+local Ref = ReactFiberFlagsModule.Ref
+local GetComponentNameFunction = require(Parent.Shared).getComponentName
+local InvariantFunction = require(Parent.Shared).invariant
+local DescribeError = require(Parent.Shared).describeError
+local ReactCurrentFiberModule = require(script.Parent.ReactCurrentFiber)
+local Current = ReactCurrentFiberModule.current
+local ResetCurrentFiberFunction = ReactCurrentFiberModule.resetCurrentFiber
+local SetCurrentFiberFunction = ReactCurrentFiberModule.setCurrentFiber
+local OnCommitUnmountFunction = require(script.Parent["ReactFiberDevToolsHook.new"]).onCommitUnmount
+local ResolveDefaultPropsFunction = require(script.Parent["ReactFiberLazyComponent.new"]).resolveDefaultProps
+local ReactProfilerTimerNewModule = require(script.Parent["ReactProfilerTimer.new"])
+local StartLayoutEffectTimerFunction = ReactProfilerTimerNewModule.startLayoutEffectTimer
+local RecordPassiveEffectDurationFunction = ReactProfilerTimerNewModule.recordPassiveEffectDuration
+local RecordLayoutEffectDurationFunction = ReactProfilerTimerNewModule.recordLayoutEffectDuration
+local StartPassiveEffectTimerFunction = ReactProfilerTimerNewModule.startPassiveEffectTimer
+local GetCommitTimeFunction = ReactProfilerTimerNewModule.getCommitTime
+local ProfileMode = require(script.Parent.ReactTypeOfMode).ProfileMode
+local CommitUpdateQueueFunction = require(script.Parent["ReactUpdateQueue.new"]).commitUpdateQueue
+local GetPublicInstanceFunction = ReactFiberHostConfigModule.getPublicInstance
+local SupportsMutation = ReactFiberHostConfigModule.supportsMutation
+local IsNotSupportsChildOrdering: boolean = ReactFeatureFlags.enableSkipHostSiblingLookup and ReactFiberHostConfigModule.supportsChildOrdering == false
+local SupportsPersistence = ReactFiberHostConfigModule.supportsPersistence
+local SupportsHydration = ReactFiberHostConfigModule.supportsHydration
+local CommitMountFunction = ReactFiberHostConfigModule.commitMount
+local CommitUpdateFunction = ReactFiberHostConfigModule.commitUpdate
+local ResetTextContentFunction = ReactFiberHostConfigModule.resetTextContent
+local CommitTextUpdateFunction = ReactFiberHostConfigModule.commitTextUpdate
+local AppendChildFunction = ReactFiberHostConfigModule.appendChild
+local AppendChildToContainerFunction = ReactFiberHostConfigModule.appendChildToContainer
+local InsertBeforeFunction = ReactFiberHostConfigModule.insertBefore
+local InsertInContainerBeforeFunction = ReactFiberHostConfigModule.insertInContainerBefore
+local RemoveChildFunction = ReactFiberHostConfigModule.removeChild
+local RemoveChildFromContainerFunction = ReactFiberHostConfigModule.removeChildFromContainer
+local HideInstanceFunction = ReactFiberHostConfigModule.hideInstance
+local HideTextInstanceFunction = ReactFiberHostConfigModule.hideTextInstance
+local UnhideInstanceFunction = ReactFiberHostConfigModule.unhideInstance
+local UnhideTextInstanceFunction = ReactFiberHostConfigModule.unhideTextInstance
+local CommitHydratedSuspenseInstanceFunction = ReactFiberHostConfigModule.commitHydratedSuspenseInstance
+local ClearContainerFunction = ReactFiberHostConfigModule.clearContainer
+local ReactFiberWorkLoopNewModule = nil
 
-local function resolveRetryWakeable(p1, p2)
-	-- upvalues: var2 (write)
-	if not var2 then
-		var2 = require(script.Parent["ReactFiberWorkLoop.new"])
+local function resolveRetryWakeable(p1, Promise) --[[ Line: 199 ]]
+	-- upvalues: ReactFiberWorkLoopNewModule (ref)
+	if not ReactFiberWorkLoopNewModule then
+		ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
 	end
-	var2.resolveRetryWakeable(p1, p2)
+	ReactFiberWorkLoopNewModule.resolveRetryWakeable(p1, Promise)
 end
 
-local _ = function()
-	-- upvalues: var2 (write)
-	if not var2 then
-		var2 = require(script.Parent["ReactFiberWorkLoop.new"])
+local _ = function() --[[ Line: 206 | Named "markCommitTimeOfFallback" ]]
+	-- upvalues: ReactFiberWorkLoopNewModule (ref)
+	if not ReactFiberWorkLoopNewModule then
+		ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
 	end
-	var2.markCommitTimeOfFallback()
+	ReactFiberWorkLoopNewModule.markCommitTimeOfFallback()
 end
 
-local function schedulePassiveEffectCallback()
-	-- upvalues: console (ref)
-	console.warn("ReactFiberCommitWork: schedulePassiveEffectCallback causes a dependency cycle\n" .. debug.traceback())
+local function schedulePassiveEffectCallback() --[[ Line: 214 ]]
+	-- upvalues: Console (copy)
+	Console.warn("ReactFiberCommitWork: schedulePassiveEffectCallback causes a dependency cycle\n" .. debug.traceback())
 end
 
-local function captureCommitPhaseError(_, _, p1)
-	-- upvalues: console (ref)
-	console.warn("ReactFiberCommitWork: captureCommitPhaseError causes a dependency cycle")
+local function captureCommitPhaseError(_, _, p1) --[[ Line: 222 ]]
+	-- upvalues: Console (copy)
+	Console.warn("ReactFiberCommitWork: captureCommitPhaseError causes a dependency cycle")
 	error(p1)
 end
 
-local noFlags_1 = reactHookEffectTagsModule.NoFlags
-local hasEffect = reactHookEffectTagsModule.HasEffect
-local layout = reactHookEffectTagsModule.Layout
-local passive = reactHookEffectTagsModule.Passive
-local var3 = nil
+local NoFlags1 = ReactHookEffectTagsModule.NoFlags
+local HasEffect = ReactHookEffectTagsModule.HasEffect
+local Layout = ReactHookEffectTagsModule.Layout
+local Passive = ReactHookEffectTagsModule.Passive
+local DidWarnAboutReassigningProps = nil
 
-local var4 = function()
-	-- upvalues: var3 (write)
-	if not var3 then
-		var3 = require(script.Parent["ReactFiberBeginWork.new"]).didWarnAboutReassigningProps
+local function v74() --[[ Line: 240 ]]
+	-- upvalues: DidWarnAboutReassigningProps (ref)
+	if not DidWarnAboutReassigningProps then
+		DidWarnAboutReassigningProps = require(script.Parent["ReactFiberBeginWork.new"]).didWarnAboutReassigningProps
 	end
-	return var3
+	return DidWarnAboutReassigningProps
 end
 
-local isHostParent = nil
-local _ = nil
-local insertOrAppendPlacementNode = nil
-local insertOrAppendPlacementNodeIntoContainer = nil
-local commitLayoutEffectsForHostRoot = nil
-local commitLayoutEffectsForHostComponent = nil
-local commitLayoutEffectsForClassComponent = nil
-local unmountHostComponents = nil
-local _ = nil
-local _ = nil
-local var5 = nil
+local Callback5 = nil
+local getHostSibling = nil
+local Callback = nil
+local Callback6 = nil
+local Callback1 = nil
+local Callback3 = nil
+local Callback2 = nil
+local Callback4 = nil
+local commitNestedUnmounts = nil
+local commitUnmount = nil
+local v1 = nil
 
-local function callComponentWillUnmountWithTimer(p1, p2)
-	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), profileMode (ref), startLayoutEffectTimer (ref), describeError (ref), recordLayoutEffectDuration (ref)
+local function callComponentWillUnmountWithTimer(p1, p2) --[[ Line: 265 ]]
+	-- upvalues: EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), RecordLayoutEffectDurationFunction (copy)
 	p2.props = p1.memoizedProps
 	p2.state = p1.memoizedState
 	
-	if enableProfilerTimer and enableProfilerCommitHooks and bit32.band(p1.mode, profileMode) ~= 0 then
-		local ok, status = xpcall(function()
-			-- upvalues: startLayoutEffectTimer (copy), p2 (ref)
-			startLayoutEffectTimer()
+	if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p1.mode, ProfileMode) ~= 0 then
+		local Success, Result = xpcall(function() --[[ Line: 274 ]]
+			-- upvalues: StartLayoutEffectTimerFunction (upval), p2 (copy)
+			StartLayoutEffectTimerFunction()
 			p2:componentWillUnmount()
-		end, describeError)
-		recordLayoutEffectDuration(p1)
+		end, DescribeError)
+		RecordLayoutEffectDurationFunction(p1)
 		
-		if ok then
-			return
-		else
-			error(status)
+		if not Success then
+			error(Result)
 			
 			return
 		end
@@ -193,1035 +197,1140 @@ local function callComponentWillUnmountWithTimer(p1, p2)
 	end
 end
 
-function safelyCallComponentWillUnmount(p1, p2, p3)
-	-- upvalues: callComponentWillUnmountWithTimer (ref), describeError (ref), captureCommitPhaseError (write)
-	local ok, status = xpcall(callComponentWillUnmountWithTimer, describeError, p1, p2)
+function safelyCallComponentWillUnmount(p1, p2, p3) --[[ Line: 292 ]]
+	-- upvalues: callComponentWillUnmountWithTimer (copy), DescribeError (copy), captureCommitPhaseError (ref)
+	local Success, Result = xpcall(callComponentWillUnmountWithTimer, DescribeError, p1, p2)
 	
-	if not ok then
-		captureCommitPhaseError(p1, p3, status)
+	if not Success then
+		captureCommitPhaseError(p1, p3, Result)
 	end
 end
 
-local _ = function(p1, p2)
-	-- upvalues: describeError (ref), captureCommitPhaseError (write)
-	local ref = p1.ref
+local _ = function(p1, p2) --[[ Line: 306 | Named "safelyDetachRef" ]]
+	-- upvalues: DescribeError (copy), captureCommitPhaseError (ref)
+	local Ref = p1.ref
 	
-	if ref ~= nil then
-		if typeof(ref) == "function" then
-			local ok, status = xpcall(ref, describeError)
+	if Ref ~= nil then
+		if typeof(Ref) == "function" then
+			local Success, Result = xpcall(Ref, DescribeError)
 			
-			if ok then
-				return
-			else
-				captureCommitPhaseError(p1, p2, status)
+			if not Success then
+				captureCommitPhaseError(p1, p2, Result)
 				
 				return
 			end
 		else
-			ref.current = nil
+			Ref.current = nil
 		end
 	end
 end
 
-local function safelyCallDestroy(p1, p2, p3)
-	-- upvalues: describeError (ref), captureCommitPhaseError (write)
-	local ok, status = xpcall(p3, describeError)
+local function safelyCallDestroy(p1, p2, p3) --[[ Line: 322 ]]
+	-- upvalues: DescribeError (copy), captureCommitPhaseError (ref)
+	local Success, Result = xpcall(p3, DescribeError)
 	
-	if not ok then
-		captureCommitPhaseError(p1, p2, status)
+	if not Success then
+		captureCommitPhaseError(p1, p2, Result)
 	end
 end
 
-local function commitBeforeMutationLifeCycles(p1, p2)
-	-- upvalues: functionComponent (ref), forwardRef (ref), simpleMemoComponent (ref), block (ref), classComponent (ref), snapshot (ref), dEV (ref), var4 (ref), console (ref), getComponentName (ref), resolveDefaultProps (ref), hostRoot (ref), supportsMutation (ref), clearContainer (ref), hostComponent (ref), hostText (ref), hostPortal (ref), incompleteClassComponent (ref), invariant (ref)
-	if p2.tag == functionComponent or p2.tag == forwardRef or (p2.tag == simpleMemoComponent or p2.tag == block) then return end
-	if p2.tag == classComponent then
-		if bit32.band(p2.flags, snapshot) ~= 0 and p1 ~= nil then
-			local memoizedProps = p1.memoizedProps
-			local memoizedState = p1.memoizedState
-			local stateNode = p2.stateNode
+local function commitBeforeMutationLifeCycles(p1, p2) --[[ Line: 334 ]]
+	-- upvalues: FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ClassComponent (copy), Snapshot (copy), DEV (copy), v74 (copy), Console (copy), GetComponentNameFunction (copy), ResolveDefaultPropsFunction (copy), HostRoot (copy), SupportsMutation (copy), ClearContainerFunction (copy), HostComponent (copy), HostText (copy), HostPortal (copy), IncompleteClassComponent (copy), InvariantFunction (copy)
+	if p2.tag == FunctionComponent or p2.tag == ForwardRef or p2.tag == SimpleMemoComponent or p2.tag == Block then return end
+	if p2.tag == ClassComponent then
+		if bit32.band(p2.flags, Snapshot) ~= 0 and p1 ~= nil then
+			local MemoizedProps = p1.memoizedProps
+			local MemoizedState = p1.memoizedState
+			local StateNode = p2.stateNode
 			
-			if dEV and p2.type == p2.elementType and not var4 then
-				if stateNode.props ~= p2.memoizedProps then
-					console.error("Expected %s props to match memoized props before getSnapshotBeforeUpdate. This might either be because of a bug in React, or because a component reassigns its own `this.props`. Please file an issue.", getComponentName(p2.type) or "instance")
+			if DEV and p2.type == p2.elementType and not v74 then
+				if StateNode.props ~= p2.memoizedProps then
+					Console.error("Expected %s props to match memoized props before getSnapshotBeforeUpdate. This might either be because of a bug in React, or because a component reassigns its own `this.props`. Please file an issue.", GetComponentNameFunction(p2.type) or "instance")
 				end
-				if stateNode.state ~= p2.memoizedState then
-					console.error("Expected %s state to match memoized state before getSnapshotBeforeUpdate. This might either be because of a bug in React, or because a component reassigns its own `this.state`. Please file an issue.", getComponentName(p2.type) or "instance")
+				if StateNode.state ~= p2.memoizedState then
+					Console.error("Expected %s state to match memoized state before getSnapshotBeforeUpdate. This might either be because of a bug in React, or because a component reassigns its own `this.state`. Please file an issue.", GetComponentNameFunction(p2.type) or "instance")
 				end
 			end
-			stateNode.__reactInternalSnapshotBeforeUpdate = stateNode:getSnapshotBeforeUpdate(if p2.elementType == p2.type then memoizedProps else resolveDefaultProps(p2.type, memoizedProps), memoizedState)
+			StateNode.__reactInternalSnapshotBeforeUpdate = StateNode:getSnapshotBeforeUpdate(p2.elementType == p2.type and MemoizedProps or ResolveDefaultPropsFunction(p2.type, MemoizedProps), MemoizedState)
 		end
 		return
-	elseif p2.tag == hostRoot then
-		if supportsMutation and bit32.band(p2.flags, snapshot) ~= 0 then
-			clearContainer(p2.stateNode.containerInfo)
+	elseif p2.tag == HostRoot then
+		if SupportsMutation and bit32.band(p2.flags, Snapshot) ~= 0 then
+			ClearContainerFunction(p2.stateNode.containerInfo)
 		end
 		return
-	elseif p2.tag == hostComponent or p2.tag == hostText or (p2.tag == hostPortal or p2.tag == incompleteClassComponent) then
-		return
-	end
-	invariant(false, "This unit of work tag should not have side-effects. This error is likely caused by a bug in React. Please file an issue.")
-end
-
-local function commitHookEffectListUnmount(p1, p2, p3)
-	-- upvalues: describeError (ref), captureCommitPhaseError (write)
-	local updateQueue = p2.updateQueue
-	local var6 = if updateQueue ~= nil then updateQueue.lastEffect else nil
-	
-	if var6 ~= nil then
-		local next = var6.next
-		local var7 = next
-		repeat
-			if bit32.band(var7.tag, p1) == p1 then
-				local destroy = var7.destroy
-				var7.destroy = nil
-				
-				if destroy ~= nil then
-					local ok, status = xpcall(destroy, describeError)
-					
-					if not ok then
-						captureCommitPhaseError(p2, p3, status)
-					end
-				end
-			end
-			var7 = var7.next
-		until var7 == next
-	end
-end
-
-local function commitHookEffectListMount(p1, p2)
-	-- upvalues: dEV (ref), console (ref)
-	local updateQueue = p2.updateQueue
-	local var6 = if updateQueue ~= nil then nil else updateQueue.lastEffect
-	
-	if var6 ~= nil then
-		local next = var6.next
-		local var7 = next
-		repeat
-			if bit32.band(var7.tag, p1) == p1 then
-				var7.destroy = var7.create()
-				
-				if dEV then
-					local destroy = var7.destroy
-					
-					if destroy ~= nil and typeof(destroy) ~= "function" then
-						console.error("An effect function must not return anything besides a function, which is used for clean-up.%s", if destroy == nil then " You returned nil. If your effect does not require clean up, return nil (or nothing)." elseif typeof(destroy.andThen) == "function" then "\n\nIt looks like you wrote useEffect(Promise.new(function() --[[...]] end) or returned a Promise. Instead, write the async function inside your effect and call it immediately:\n\nuseEffect(function()\n  function fetchData()\n    -- You can await here\n    local response = MyAPI.getData(someId):await()\n    -- ...\n  end\n  fetchData()\nend, {someId}) -- Or {} if effect doesn't need props or state\n\nLearn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-fetching" else " You returned: " .. destroy)
-					end
-				end
-			end
-			var7 = var7.next
-		until var7 == next
-	end
-end
-
-function commitProfilerPassiveEffect(startValue, endValue)
-	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), profiler (ref), getCommitTime (ref), enableSchedulerTracing (ref)
-	if enableProfilerTimer and enableProfilerCommitHooks and endValue.tag == profiler then
-		local passiveEffectDuration = endValue.stateNode.passiveEffectDuration
-		local id = endValue.memoizedProps.id
-		local onPostCommit = endValue.memoizedProps.onPostCommit
-		local var6 = getCommitTime()
-		
-		if typeof(onPostCommit) == "function" then
-			if enableSchedulerTracing then
-				onPostCommit(id, if endValue.alternate == nil then "mount" else "update", passiveEffectDuration, var6, startValue.memoizedInteractions)
-				
-				return
-			end
-			onPostCommit(id, if endValue.alternate == nil then "mount" else "update", passiveEffectDuration, var6)
-		end
-	end
-end
-
-local function recursivelyCommitLayoutEffects(p1, p2, p3, p4)
-	-- upvalues: captureCommitPhaseError (write), schedulePassiveEffectCallback (write), profiler (ref), enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var5 (write), layoutMask (ref), noFlags (ref), dEV (ref), current (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), recursivelyCommitLayoutEffects (ref), hasCaughtError (ref), clearCaughtError (ref), resetCurrentFiber (ref), describeError (ref), update (ref), callback (ref), reactCurrentFiberModule (ref), var1 (write), yOLO (ref), functionComponent (ref), forwardRef (ref), simpleMemoComponent (ref), block (ref), profileMode (ref), startLayoutEffectTimer (ref), commitHookEffectListMount (ref), layout (ref), hasEffect (ref), recordLayoutEffectDuration (ref), passiveMask (ref), classComponent (ref), commitLayoutEffectsForClassComponent (write), hostRoot (ref), commitLayoutEffectsForHostRoot (write), hostComponent (ref), commitLayoutEffectsForHostComponent (write), suspenseComponent (ref), fundamentalComponent (ref), hostPortal (ref), hostText (ref), incompleteClassComponent (ref), legacyHiddenComponent (ref), offscreenComponent (ref), scopeComponent (ref), suspenseListComponent (ref), invariant (ref), ref (ref)
-	if p3 ~= nil then
-		captureCommitPhaseError = p3
-	end
-	if p4 ~= nil then
-		schedulePassiveEffectCallback = p4
-	end
-	local flags = p1.flags
-	local tag = p1.tag
-	
-	if tag == profiler then
-		local var6 = nil
-		
-		if enableProfilerTimer and enableProfilerCommitHooks then
-			var6 = var5
-			var5 = p1
-		end
-		local child = p1.child
-		while child ~= nil do
-			if bit32.band(p1.subtreeFlags, layoutMask) ~= noFlags then
-				if dEV then
-					local var7 = current
-					setCurrentFiber(child)
-					invokeGuardedCallback(nil, recursivelyCommitLayoutEffects, nil, child, p2, captureCommitPhaseError, schedulePassiveEffectCallback)
-					
-					if hasCaughtError() then
-						captureCommitPhaseError(child, p1, clearCaughtError())
-					end
-					if var7 == nil then
-						resetCurrentFiber()
-					else
-						setCurrentFiber(var7)
-					end
-				else
-					local ok, status = xpcall(recursivelyCommitLayoutEffects, describeError, child, p2, captureCommitPhaseError, schedulePassiveEffectCallback)
-					
-					if not ok then
-						captureCommitPhaseError(child, p1, status)
-					end
-				end
-			end
-			child = child.sibling
-		end
-		if bit32.band(flags, bit32.bor(update, callback)) ~= noFlags and enableProfilerTimer then
-			if dEV then
-				local var8 = current
-				setCurrentFiber(p1)
-				invokeGuardedCallback(nil, commitLayoutEffectsForProfiler, nil, p1, p2)
-				
-				if hasCaughtError() then
-					captureCommitPhaseError(p1, p1.return_, clearCaughtError())
-				end
-				if var8 == nil then
-					resetCurrentFiber()
-				else
-					setCurrentFiber(var8)
-				end
-			else
-				local ok, status = xpcall(commitLayoutEffectsForProfiler, describeError, p1, p2)
-				
-				if not ok then
-					captureCommitPhaseError(p1, p1.return_, status)
-				end
-			end
-		end
-		if not enableProfilerTimer or not enableProfilerCommitHooks then return end
-		if var6 ~= nil then
-			var6.stateNode.effectDuration += p1.stateNode.effectDuration
-		end
-		var5 = var6
+	elseif p2.tag ~= HostComponent and p2.tag ~= HostText and p2.tag ~= HostPortal and p2.tag ~= IncompleteClassComponent then
+		InvariantFunction(false, "This unit of work tag should not have side-effects. This error is likely caused by a bug in React. Please file an issue.")
 		
 		return
 	else
-		local child = p1.child
-		while child ~= nil do
-			if bit32.band(p1.subtreeFlags, layoutMask) == noFlags then
-				child = child.sibling
-				continue
-			end
-			if dEV then
-				local current_1 = reactCurrentFiberModule.current
-				setCurrentFiber(child)
-				
-				if var1 < 20 then
-					var1 += 1
-					invokeGuardedCallback(nil, recursivelyCommitLayoutEffects, nil, child, p2, captureCommitPhaseError, schedulePassiveEffectCallback)
-					var1 -= 1
-					
-					if hasCaughtError() then
-						captureCommitPhaseError(child, p1, clearCaughtError())
-					end
-				else
-					recursivelyCommitLayoutEffects(child, p2, captureCommitPhaseError, schedulePassiveEffectCallback)
-				end
-				if current_1 == nil then
-					resetCurrentFiber()
-				else
-					setCurrentFiber(current_1)
-				end
-			else
-				local var9
-				local _ = nil
-				local var10 = nil
-				
-				if yOLO or var1 >= 20 then
-					var9 = true
-					recursivelyCommitLayoutEffects(child, p2, captureCommitPhaseError, schedulePassiveEffectCallback)
-				else
-					var1 += 1
-					local ok, status = xpcall(recursivelyCommitLayoutEffects, describeError, child, p2, captureCommitPhaseError, schedulePassiveEffectCallback)
-					var9 = ok
-					var10 = status
-					var1 -= 1
-				end
-				if not var9 then
-					captureCommitPhaseError(child, p1, var10)
-				end
-			end
-		end
-		if bit32.band(flags, bit32.bor(update, callback)) ~= noFlags then
-			if tag == functionComponent or tag == forwardRef or (tag == simpleMemoComponent or tag == block) then
-				if enableProfilerTimer and enableProfilerCommitHooks and bit32.band(p1.mode, profileMode) ~= 0 then
-					local ok, status = xpcall(function()
-						-- upvalues: startLayoutEffectTimer (copy), commitHookEffectListMount (copy), layout (copy), hasEffect (copy), p1 (ref)
-						startLayoutEffectTimer()
-						commitHookEffectListMount(bit32.bor(layout, hasEffect), p1)
-					end, describeError)
-					recordLayoutEffectDuration(p1)
-					
-					if not ok then
-						error(status)
-					end
-				else
-					commitHookEffectListMount(bit32.bor(layout, hasEffect), p1)
-				end
-				if bit32.band(p1.subtreeFlags, passiveMask) ~= noFlags then
-					schedulePassiveEffectCallback()
-				end
-			elseif tag == classComponent then
-				commitLayoutEffectsForClassComponent(p1)
-			elseif tag == hostRoot then
-				commitLayoutEffectsForHostRoot(p1)
-			elseif tag == hostComponent then
-				commitLayoutEffectsForHostComponent(p1)
-			elseif tag == suspenseComponent then
-				commitSuspenseHydrationCallbacks(p2, p1)
-			elseif tag ~= fundamentalComponent and tag ~= hostPortal and (tag ~= hostText and tag ~= incompleteClassComponent) and (tag ~= legacyHiddenComponent and tag ~= offscreenComponent and (tag ~= scopeComponent and tag ~= suspenseListComponent)) then
-				invariant(false, "This unit of work tag should not have side-effects. This error is likely caused by a bug in React. Please file an issue.")
-			end
-		end
-		if bit32.band(flags, ref) ~= 0 then
-			commitAttachRef(p1)
-		end
 	end
 end
 
-function commitLayoutEffectsForProfiler(p5, p6)
-	-- upvalues: enableProfilerTimer (ref), getCommitTime (ref), update (ref), callback (ref), noFlags (ref), enableSchedulerTracing (ref), enableProfilerCommitHooks (ref)
-	if enableProfilerTimer then
-		local var11
-		local flags = p5.flags
-		local alternate = p5.alternate
-		local onCommit = p5.memoizedProps.onCommit
-		local onRender = p5.memoizedProps.onRender
-		local effectDuration = p5.stateNode.effectDuration
-		local var12 = getCommitTime()
-		local var13 = callback
-		
-		if bit32.band(flags, update) ~= noFlags then
-			local var14
-			if typeof(onRender) == "function" then
-				var14 = true
-			elseif typeof(onRender) == "table" then
-				var11 = getmetatable(onRender)
-				var14 = if var11 and rawget(var11, "__call") then true elseif onRender._isMockFunction then true else false
-			end
-			if var14 then
-				if enableSchedulerTracing then
-					onRender(p5.memoizedProps.id, if alternate == nil then "mount" else "update", p5.actualDuration, p5.treeBaseDuration, p5.actualStartTime, var12, p6.memoizedInteractions)
-				else
-					onRender(p5.memoizedProps.id, if alternate == nil then "mount" else "update", p5.actualDuration, p5.treeBaseDuration, p5.actualStartTime, var12)
-				end
-			end
-		end
-		if enableProfilerCommitHooks and bit32.band(flags, var13) ~= noFlags then
-			local var15
-			if typeof(onCommit) == "function" then
-				var15 = true
-			elseif typeof(onCommit) == "table" then
-				var11 = getmetatable(onCommit)
-				var15 = if var11 and rawget(var11, "__call") then true elseif onCommit._isMockFunction then true else false
-			end
-			if var15 then
-				if enableSchedulerTracing then
-					onCommit(p5.memoizedProps.id, if alternate == nil then "mount" else "update", effectDuration, var12, p6.memoizedInteractions)
-					
-					return
-				end
-				onCommit(p5.memoizedProps.id, if alternate == nil then "mount" else "update", effectDuration, var12)
-			end
-		end
-	end
-end
-
-commitLayoutEffectsForClassComponent = function(p5)
-	-- upvalues: update (ref), dEV (ref), var4 (ref), console (ref), getComponentName (ref), enableProfilerTimer (ref), enableProfilerCommitHooks (ref), profileMode (ref), startLayoutEffectTimer (ref), describeError (ref), recordLayoutEffectDuration (ref), resolveDefaultProps (ref), commitUpdateQueue (ref)
-	local stateNode = p5.stateNode
-	local alternate = p5.alternate
+local function commitHookEffectListUnmount(Mask: number, Child, Return) --[[ Line: 427 ]]
+	-- upvalues: ReactFeatureFlags (copy), DescribeError (copy), captureCommitPhaseError (ref)
+	local UpdateQueue = Child.updateQueue
+	local LastEffect = if UpdateQueue ~= nil then UpdateQueue.lastEffect else nil
 	
-	if bit32.band(p5.flags, update) ~= 0 then
-		if alternate == nil then
-			if dEV and p5.type == p5.elementType and not var4 then
-				if stateNode.props ~= p5.memoizedProps then
-					console.error("Expected %s props to match memoized props before componentDidMount. This might either be because of a bug in React, or because a component reassigns its own `this.props`. Please file an issue.", getComponentName(p5.type) or "instance")
+	if LastEffect ~= nil then
+		local Next = LastEffect.next
+		local Next1 = Next
+		repeat
+			if bit32.band(Next1.tag, Mask) == Mask then
+				local Destroy = Next1.destroy
+				
+				if ReactFeatureFlags.enableWorkLoopTrims then
+					if Destroy ~= nil then
+						Next1.destroy = nil
+					end
+				else
+					Next1.destroy = nil
 				end
-				if stateNode.state ~= p5.memoizedState then
-					console.error("Expected %s state to match memoized state before componentDidMount. This might either be because of a bug in React, or because a component reassigns its own `this.state`. Please file an issue.", getComponentName(p5.type) or "instance")
+				local NoDestroy = Destroy == nil
+				local Result = nil
+				
+				if not NoDestroy then
+					local Success
+					Success, Result = xpcall(Destroy, DescribeError)
+					NoDestroy = Success
+				end
+				if not NoDestroy then
+					captureCommitPhaseError(Child, Return, Result)
 				end
 			end
-			if enableProfilerTimer and enableProfilerCommitHooks and bit32.band(p5.mode, profileMode) ~= 0 then
-				local ok, status = xpcall(function()
-					-- upvalues: startLayoutEffectTimer (copy), stateNode (ref)
-					startLayoutEffectTimer()
-					stateNode:componentDidMount()
-				end, describeError)
-				recordLayoutEffectDuration(p5)
+			Next1 = Next1.next
+		until Next1 == Next
+	end
+end
+
+local function commitHookEffectListMount(Mask: number, p1) --[[ Line: 463 ]]
+	-- upvalues: ReactFeatureFlags (copy), DEV (copy), Console (copy)
+	local UpdateQueue = p1.updateQueue
+	local LastEffect = if UpdateQueue == nil then nil else UpdateQueue.lastEffect
+	
+	if LastEffect ~= nil then
+		local Next = LastEffect.next
+		local Next1 = Next
+		repeat
+			if bit32.band(Next1.tag, Mask) == Mask then
+				local CreateFunction = Next1.create
 				
-				if not ok then
-					error(status)
+				if ReactFeatureFlags.enableWorkLoopTrims then
+					local CreateResult = CreateFunction()
+					
+					if CreateResult ~= nil or Next1.destroy ~= nil then
+						Next1.destroy = CreateResult
+					end
+				else
+					Next1.destroy = CreateFunction()
 				end
-			else
-				stateNode:componentDidMount()
+				if DEV then
+					local Destroy = Next1.destroy
+					
+					if Destroy ~= nil and typeof(Destroy) ~= "function" then
+						Console.error("An effect function must not return anything besides a function, which is used for clean-up.%s", if Destroy == nil then " You returned nil. If your effect does not require clean up, return nil (or nothing)." elseif typeof(Destroy.andThen) == "function" then "\n\nIt looks like you wrote useEffect(Promise.new(function() --[[...]] end) or returned a Promise. Instead, write the async function inside your effect and call it immediately:\n\nuseEffect(function()\n  function fetchData()\n    -- You can await here\n    local response = MyAPI.getData(someId):await()\n    -- ...\n  end\n  fetchData()\nend, {someId}) -- Or {} if effect doesn't need props or state\n\nLearn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-fetching" else " You returned: " .. Destroy)
+					end
+				end
+			end
+			Next1 = Next1.next
+		until Next1 == Next
+	end
+end
+
+function commitProfilerPassiveEffect(p1, p2) --[[ Line: 511 ]]
+	-- upvalues: EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), Profiler (copy), GetCommitTimeFunction (copy), EnableSchedulerTracing (copy)
+	if EnableProfilerTimer and EnableProfilerCommitHooks and p2.tag == Profiler then
+		local PassiveEffectDuration = p2.stateNode.passiveEffectDuration
+		local Id = p2.memoizedProps.id
+		local OnPostCommitFunction: (any, any, any, any, any) -> () = p2.memoizedProps.onPostCommit
+		local CommitTime = GetCommitTimeFunction()
+		
+		if typeof(OnPostCommitFunction) == "function" then
+			if EnableSchedulerTracing then
+				OnPostCommitFunction(Id, if p2.alternate == nil then "mount" else "update", PassiveEffectDuration, CommitTime, p1.memoizedInteractions)
+				
+				return
+			end
+			OnPostCommitFunction(Id, if p2.alternate == nil then "mount" else "update", PassiveEffectDuration, CommitTime)
+		end
+	end
+end
+
+local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError, SchedulePassiveEffectCallback) --[[ Line: 544 ]]
+	-- upvalues: captureCommitPhaseError (ref), schedulePassiveEffectCallback (ref), Profiler (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v1 (ref), ReactFeatureFlags (copy), LayoutMask (copy), NoFlags (copy), DEV (copy), Current (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), recursivelyCommitLayoutEffects (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ResetCurrentFiberFunction (copy), DescribeError (copy), Update (copy), Callback7 (copy), ReactCurrentFiberModule (copy), Count (ref), YOLO (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), RecordLayoutEffectDurationFunction (copy), PassiveMask (copy), ClassComponent (copy), Callback2 (ref), HostRoot (copy), Callback1 (ref), HostComponent (copy), Callback3 (ref), SuspenseComponent (copy), FundamentalComponent (copy), HostPortal (copy), HostText (copy), IncompleteClassComponent (copy), LegacyHiddenComponent (copy), OffscreenComponent (copy), ScopeComponent (copy), SuspenseListComponent (copy), InvariantFunction (copy), Ref (copy)
+	if CaptureCommitPhaseError ~= nil then
+		captureCommitPhaseError = CaptureCommitPhaseError
+	end
+	if SchedulePassiveEffectCallback ~= nil then
+		schedulePassiveEffectCallback = SchedulePassiveEffectCallback
+	end
+	local Flags: number = Child.flags
+	local Tag = Child.tag
+	
+	if Tag == Profiler then
+		local v2 = nil
+		
+		if EnableProfilerTimer and EnableProfilerCommitHooks then
+			v2 = v1
+			v1 = Child
+		end
+		if ReactFeatureFlags.enableCommitTraversalTrims then
+			local Child1 = if bit32.band(Child.subtreeFlags, LayoutMask) == NoFlags then nil else Child.child
+			while Child1 ~= nil do
+				if bit32.band(bit32.bor(Child1.flags, Child1.subtreeFlags), LayoutMask) ~= NoFlags or Child1.tag == Profiler then
+					if DEV then
+						SetCurrentFiberFunction(Child1)
+						InvokeGuardedCallbackFunction(nil, recursivelyCommitLayoutEffects, nil, Child1, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+						
+						if HasCaughtErrorFunction() then
+							captureCommitPhaseError(Child1, Child, (ClearCaughtErrorFunction()))
+						end
+						if Current == nil then
+							ResetCurrentFiberFunction()
+						else
+							SetCurrentFiberFunction(Current)
+						end
+					else
+						local Success, Result = xpcall(recursivelyCommitLayoutEffects, DescribeError, Child1, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+						
+						if not Success then
+							captureCommitPhaseError(Child1, Child, Result)
+						end
+					end
+				end
+				Child1 = Child1.sibling
 			end
 		else
-			local var11 = if p5.elementType == p5.type then alternate.memoizedProps else resolveDefaultProps(p5.type, alternate.memoizedProps)
-			local memoizedState = alternate.memoizedState
-			
-			if dEV and p5.type == p5.elementType and not var4 then
-				if stateNode.props ~= p5.memoizedProps then
-					console.error("Expected %s props to match memoized props before componentDidUpdate. This might either be because of a bug in React, or because a component reassigns its own `this.props`. Please file an issue.", getComponentName(p5.type) or "instance")
-				end
-				if stateNode.state ~= p5.memoizedState then
-					console.error("Expected %s state to match memoized state before componentDidUpdate. This might either be because of a bug in React, or because a component reassigns its own `this.state`. Please file an issue.", getComponentName(p5.type) or "instance")
-				end
-			end
-			if enableProfilerTimer and enableProfilerCommitHooks and bit32.band(p5.mode, profileMode) ~= 0 then
-				local ok, status = xpcall(function()
-					-- upvalues: startLayoutEffectTimer (copy), stateNode (ref), var11 (ref), memoizedState (ref)
-					startLayoutEffectTimer()
-					stateNode:componentDidUpdate(var11, memoizedState, stateNode.__reactInternalSnapshotBeforeUpdate)
-				end, describeError)
-				recordLayoutEffectDuration(p5)
-				
-				if not ok then
-					error(status)
-				end
-			else
-				stateNode:componentDidUpdate(var11, memoizedState, stateNode.__reactInternalSnapshotBeforeUpdate)
-			end
-		end
-	end
-	local updateQueue = p5.updateQueue
-	
-	if updateQueue ~= nil then
-		if dEV and p5.type == p5.elementType and not var4 then
-			if stateNode.props ~= p5.memoizedProps then
-				console.error("Expected %s props to match memoized props before processing the update queue. This might either be because of a bug in React, or because a component reassigns its own `this.props`. Please file an issue.", getComponentName(p5.type) or "instance")
-			end
-			if stateNode.state ~= p5.memoizedState then
-				console.error("Expected %s state to match memoized state before processing the update queue. This might either be because of a bug in React, or because a component reassigns its own `this.state`. Please file an issue.", getComponentName(p5.type) or "instance")
-			end
-		end
-		commitUpdateQueue(p5, updateQueue, stateNode)
-	end
-end
-
-commitLayoutEffectsForHostRoot = function(p5)
-	-- upvalues: hostComponent (ref), getPublicInstance (ref), classComponent (ref), commitUpdateQueue (ref)
-	local updateQueue = p5.updateQueue
-	
-	if updateQueue ~= nil then
-		local stateNode = nil
-		
-		if p5.child ~= nil then
-			local child = p5.child
-			
-			if child.tag == hostComponent then
-				stateNode = getPublicInstance(child.stateNode)
-			elseif child.tag == classComponent then
-				stateNode = child.stateNode
-			end
-		end
-		commitUpdateQueue(p5, updateQueue, stateNode)
-	end
-end
-
-commitLayoutEffectsForHostComponent = function(p5)
-	-- upvalues: update (ref), commitMount (ref)
-	local stateNode = p5.stateNode
-	
-	if p5.alternate == nil and bit32.band(p5.flags, update) ~= 0 then
-		commitMount(stateNode, p5.type, p5.memoizedProps, p5)
-	end
-end
-
-local function hideOrUnhideAllChildren(p5, p6)
-	-- upvalues: supportsMutation (ref), hostComponent (ref), hideInstance (ref), unhideInstance (ref), hostText (ref), hideTextInstance (ref), unhideTextInstance (ref), offscreenComponent (ref), legacyHiddenComponent (ref)
-	if supportsMutation then
-		local var11 = p5
-		while true do
-			if var11.tag == hostComponent then
-				local stateNode = var11.stateNode
-				
-				if p6 then
-					hideInstance(stateNode)
-				else
-					unhideInstance(var11.stateNode, var11.memoizedProps)
-				end
-			elseif var11.tag == hostText then
-				local stateNode = var11.stateNode
-				
-				if p6 then
-					hideTextInstance(stateNode)
-				else
-					unhideTextInstance(stateNode, var11.memoizedProps)
-				end
-			elseif (var11.tag == offscreenComponent or var11.tag == legacyHiddenComponent) and (var11.memoizedState ~= nil and var11 ~= p5) or var11.child == nil then
-				if var11 ~= p5 then
-					while var11.sibling == nil do
-						if var11.return_ ~= nil and var11.return_ ~= p5 then
-							var11 = var11.return_
-							continue
+			local Child2 = Child.child
+			while Child2 ~= nil do
+				if bit32.band(Child.subtreeFlags, LayoutMask) ~= NoFlags then
+					if DEV then
+						SetCurrentFiberFunction(Child2)
+						InvokeGuardedCallbackFunction(nil, recursivelyCommitLayoutEffects, nil, Child2, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+						
+						if HasCaughtErrorFunction() then
+							captureCommitPhaseError(Child2, Child, (ClearCaughtErrorFunction()))
 						end
-						return
-					end
-					var11.sibling.return_ = var11.return_
-					var11 = var11.sibling
-				end
-				return
-			else
-				var11.child.return_ = var11
-				var11 = var11.child
-			end
-		end
-	end
-end
-
-function commitAttachRef(p7)
-	-- upvalues: hostComponent (ref), getPublicInstance (ref), dEV (ref), console (ref), getComponentName (ref)
-	local ref = p7.ref
-	
-	if ref ~= nil then
-		local stateNode = p7.stateNode
-		local var12 = if p7.tag == hostComponent then getPublicInstance(stateNode) else stateNode
-		
-		if typeof(ref) == "function" then
-			ref(var12)
-			
-			return
-		elseif dEV and typeof(ref) ~= "table" then
-			console.error("Unexpected ref object provided for %s. Use either a ref-setter function or React.createRef().", getComponentName(p7.type) or "instance")
-			
-			return
-		end
-		ref.current = var12
-	end
-end
-
-function commitDetachRef(p7)
-	local ref = p7.ref
-	
-	if ref ~= nil then
-		if typeof(ref) == "function" then
-			ref(nil)
-			
-			return
-		end
-		ref.current = nil
-	end
-end
-
-local function commitUnmount(p7, p8, p9, p10)
-	-- upvalues: onCommitUnmount (ref), functionComponent (ref), forwardRef (ref), memoComponent (ref), simpleMemoComponent (ref), block (ref), layout (ref), noFlags_1 (ref), enableProfilerTimer (ref), enableProfilerCommitHooks (ref), profileMode (ref), startLayoutEffectTimer (ref), describeError (ref), captureCommitPhaseError (write), recordLayoutEffectDuration (ref), classComponent (ref), hostComponent (ref), hostPortal (ref), supportsMutation (ref), unmountHostComponents (write), supportsPersistence (ref), unimplemented (ref)
-	onCommitUnmount(p8)
-	
-	if p8.tag == functionComponent or p8.tag == forwardRef or (p8.tag == memoComponent or p8.tag == simpleMemoComponent) or p8.tag == block then
-		local updateQueue = p8.updateQueue
-		
-		if updateQueue ~= nil then
-			local lastEffect = updateQueue.lastEffect
-			
-			if lastEffect ~= nil then
-				local next = lastEffect.next
-				local var12 = next
-				repeat
-					if var12.destroy ~= nil and bit32.band(var12.tag, layout) ~= noFlags_1 then
-						if enableProfilerTimer and enableProfilerCommitHooks and bit32.band(p8.mode, profileMode) ~= 0 then
-							startLayoutEffectTimer()
-							local ok, status = xpcall(var12.destroy, describeError)
-							
-							if not ok then
-								captureCommitPhaseError(p8, p9, status)
-							end
-							recordLayoutEffectDuration(p8)
+						if Current == nil then
+							ResetCurrentFiberFunction()
 						else
-							local ok, status = xpcall(var12.destroy, describeError)
+							SetCurrentFiberFunction(Current)
+						end
+					else
+						local Success1, Result1 = xpcall(recursivelyCommitLayoutEffects, DescribeError, Child2, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+						
+						if not Success1 then
+							captureCommitPhaseError(Child2, Child, Result1)
+						end
+					end
+				end
+				Child2 = Child2.sibling
+			end
+		end
+		if bit32.band(Flags, (bit32.bor(Update, Callback7))) ~= NoFlags and EnableProfilerTimer then
+			if DEV then
+				SetCurrentFiberFunction(Child)
+				InvokeGuardedCallbackFunction(nil, commitLayoutEffectsForProfiler, nil, Child, p1)
+				
+				if HasCaughtErrorFunction() then
+					captureCommitPhaseError(Child, Child.return_, (ClearCaughtErrorFunction()))
+				end
+				if Current == nil then
+					ResetCurrentFiberFunction()
+				else
+					SetCurrentFiberFunction(Current)
+				end
+			else
+				local Success2, Result2 = xpcall(commitLayoutEffectsForProfiler, DescribeError, Child, p1)
+				
+				if not Success2 then
+					captureCommitPhaseError(Child, Child.return_, Result2)
+				end
+			end
+		end
+		if EnableProfilerTimer and EnableProfilerCommitHooks then
+			if v2 ~= nil then
+				local StateNode = v2.stateNode
+				StateNode.effectDuration += Child.stateNode.effectDuration
+			end
+			v1 = v2
+			
+			return
+		end
+	else
+		if ReactFeatureFlags.enableCommitTraversalTrims then
+			local Child3 = if bit32.band(Child.subtreeFlags, LayoutMask) == NoFlags then nil else Child.child
+			while Child3 ~= nil do
+				if bit32.band(bit32.bor(Child3.flags, Child3.subtreeFlags), LayoutMask) ~= NoFlags or Child3.tag == Profiler then
+					if DEV then
+						local Current1 = ReactCurrentFiberModule.current
+						SetCurrentFiberFunction(Child3)
+						
+						if Count < 20 then
+							Count += 1
+							InvokeGuardedCallbackFunction(nil, recursivelyCommitLayoutEffects, nil, Child3, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+							Count -= 1
 							
-							if not ok then
-								captureCommitPhaseError(p8, p9, status)
+							if HasCaughtErrorFunction() then
+								captureCommitPhaseError(Child3, Child, (ClearCaughtErrorFunction()))
+							end
+						else
+							recursivelyCommitLayoutEffects(Child3, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+						end
+						if Current1 == nil then
+							ResetCurrentFiberFunction()
+						else
+							SetCurrentFiberFunction(Current1)
+						end
+					else
+						local v3 = nil
+						local v4 = nil
+						
+						if YOLO or Count >= 20 then
+							v4 = true
+							recursivelyCommitLayoutEffects(Child3, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+						else
+							Count += 1
+							v4, v143 = xpcall(recursivelyCommitLayoutEffects, DescribeError, Child3, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+							Count -= 1
+						end
+						if not v4 then
+							captureCommitPhaseError(Child3, Child, v3)
+						end
+					end
+				end
+				Child3 = Child3.sibling
+			end
+		else
+			local Child4 = Child.child
+			while Child4 ~= nil do
+				if bit32.band(Child.subtreeFlags, LayoutMask) ~= NoFlags then
+					if DEV then
+						local Current2 = ReactCurrentFiberModule.current
+						SetCurrentFiberFunction(Child4)
+						
+						if Count < 20 then
+							Count += 1
+							InvokeGuardedCallbackFunction(nil, recursivelyCommitLayoutEffects, nil, Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+							Count -= 1
+							
+							if HasCaughtErrorFunction() then
+								captureCommitPhaseError(Child4, Child, (ClearCaughtErrorFunction()))
+							end
+						else
+							recursivelyCommitLayoutEffects(Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+						end
+						if Current2 == nil then
+							ResetCurrentFiberFunction()
+						else
+							SetCurrentFiberFunction(Current2)
+						end
+					else
+						local v5 = nil
+						local v6 = nil
+						
+						if YOLO or Count >= 20 then
+							v6 = true
+							recursivelyCommitLayoutEffects(Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+						else
+							Count += 1
+							v6, v146 = xpcall(recursivelyCommitLayoutEffects, DescribeError, Child4, p1, captureCommitPhaseError, schedulePassiveEffectCallback)
+							Count -= 1
+						end
+						if not v6 then
+							captureCommitPhaseError(Child4, Child, v5)
+						end
+					end
+				end
+				Child4 = Child4.sibling
+			end
+		end
+		if bit32.band(Flags, (bit32.bor(Update, Callback7))) ~= NoFlags then
+			if Tag == FunctionComponent or (Tag == ForwardRef or Tag == SimpleMemoComponent or Tag == Block) then
+				if EnableProfilerTimer and (EnableProfilerCommitHooks and bit32.band(Child.mode, ProfileMode) ~= 0) then
+					local Success3, Result3 = xpcall(function() --[[ Line: 915 ]]
+						-- upvalues: StartLayoutEffectTimerFunction (upval), commitHookEffectListMount (upval), Layout (upval), HasEffect (upval), Child (copy)
+						StartLayoutEffectTimerFunction()
+						commitHookEffectListMount(bit32.bor(Layout, HasEffect), Child)
+					end, DescribeError)
+					RecordLayoutEffectDurationFunction(Child)
+					
+					if not Success3 then
+						error(Result3)
+					end
+				else
+					commitHookEffectListMount(bit32.bor(Layout, HasEffect), Child)
+				end
+				if bit32.band(Child.subtreeFlags, PassiveMask) ~= NoFlags then
+					schedulePassiveEffectCallback()
+				end
+			elseif Tag == ClassComponent then
+				Callback2(Child)
+			elseif Tag == HostRoot then
+				Callback1(Child)
+			elseif Tag == HostComponent then
+				Callback3(Child)
+			elseif Tag == SuspenseComponent then
+				commitSuspenseHydrationCallbacks(p1, Child)
+			elseif Tag ~= FundamentalComponent and Tag ~= HostPortal and Tag ~= HostText and Tag ~= IncompleteClassComponent and Tag ~= LegacyHiddenComponent and (Tag ~= OffscreenComponent and Tag ~= ScopeComponent and Tag ~= SuspenseListComponent) then
+				InvariantFunction(false, "This unit of work tag should not have side-effects. This error is likely caused by a bug in React. Please file an issue.")
+			end
+		end
+		if bit32.band(Flags, Ref) ~= 0 then
+			commitAttachRef(Child)
+		end
+	end
+end
+
+function commitLayoutEffectsForProfiler(p2, p3) --[[ Line: 980 ]]
+	-- upvalues: EnableProfilerTimer (copy), GetCommitTimeFunction (copy), Update (copy), Callback7 (copy), NoFlags (copy), EnableSchedulerTracing (copy), EnableProfilerCommitHooks (copy)
+	if EnableProfilerTimer then
+		local Flags: number = p2.flags
+		local Alternate = p2.alternate
+		local OnCommitFunction: (any, any, any, any, any) -> () = p2.memoizedProps.onCommit
+		local OnRenderFunction: (any, any, any, any, any, any, any) -> () = p2.memoizedProps.onRender
+		local EffectDuration = p2.stateNode.effectDuration
+		local CommitTime = GetCommitTimeFunction()
+		local Flag = nil
+		
+		if bit32.band(Flags, Update) ~= NoFlags then
+			repeat
+				if typeof(OnRenderFunction) == "function" then
+					Flag = true
+					break
+				end
+				if typeof(OnRenderFunction) == "table" then
+					local Meta = getmetatable(OnRenderFunction)
+					
+					if Meta and rawget(Meta, "__call") then
+						Flag = true
+						break
+					end
+					if OnRenderFunction._isMockFunction then
+						Flag = true
+						break
+					end
+				end
+				Flag = false
+			until true
+			if Flag then
+				if EnableSchedulerTracing then
+					OnRenderFunction(p2.memoizedProps.id, if Alternate == nil then "mount" else "update", p2.actualDuration, p2.treeBaseDuration, p2.actualStartTime, CommitTime, p3.memoizedInteractions)
+				else
+					OnRenderFunction(p2.memoizedProps.id, if Alternate == nil then "mount" else "update", p2.actualDuration, p2.treeBaseDuration, p2.actualStartTime, CommitTime)
+				end
+			end
+		end
+		local Flag1 = nil
+		if EnableProfilerCommitHooks and bit32.band(Flags, Callback7) ~= NoFlags then
+			repeat
+				if typeof(OnCommitFunction) == "function" then
+					Flag1 = true
+					break
+				end
+				if typeof(OnCommitFunction) == "table" then
+					local Meta = getmetatable(OnCommitFunction)
+					
+					if Meta and rawget(Meta, "__call") then
+						Flag1 = true
+						break
+					end
+					if OnCommitFunction._isMockFunction then
+						Flag1 = true
+						break
+					end
+				end
+				Flag1 = false
+			until true
+			if Flag1 then
+				if EnableSchedulerTracing then
+					OnCommitFunction(p2.memoizedProps.id, if Alternate == nil then "mount" else "update", EffectDuration, CommitTime, p3.memoizedInteractions)
+					
+					return
+				end
+				OnCommitFunction(p2.memoizedProps.id, if Alternate == nil then "mount" else "update", EffectDuration, CommitTime)
+			end
+		end
+	end
+end
+
+Callback2 = function(p2) --[[ Line: 1048 | Named "commitLayoutEffectsForClassComponent" ]]
+	-- upvalues: Update (copy), DEV (copy), v74 (copy), Console (copy), GetComponentNameFunction (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), RecordLayoutEffectDurationFunction (copy), ResolveDefaultPropsFunction (copy), CommitUpdateQueueFunction (copy)
+	local StateNode = p2.stateNode
+	local Alternate = p2.alternate
+	
+	if bit32.band(p2.flags, Update) ~= 0 then
+		if Alternate == nil then
+			if DEV and p2.type == p2.elementType and not v74 then
+				if StateNode.props ~= p2.memoizedProps then
+					Console.error("Expected %s props to match memoized props before componentDidMount. This might either be because of a bug in React, or because a component reassigns its own `this.props`. Please file an issue.", GetComponentNameFunction(p2.type) or "instance")
+				end
+				if StateNode.state ~= p2.memoizedState then
+					Console.error("Expected %s state to match memoized state before componentDidMount. This might either be because of a bug in React, or because a component reassigns its own `this.state`. Please file an issue.", GetComponentNameFunction(p2.type) or "instance")
+				end
+			end
+			if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p2.mode, ProfileMode) ~= 0 then
+				local Success, Result = xpcall(function() --[[ Line: 1088 ]]
+					-- upvalues: StartLayoutEffectTimerFunction (upval), StateNode (copy)
+					StartLayoutEffectTimerFunction()
+					StateNode:componentDidMount()
+				end, DescribeError)
+				RecordLayoutEffectDurationFunction(p2)
+				
+				if not Success then
+					error(Result)
+				end
+			else
+				StateNode:componentDidMount()
+			end
+		else
+			local MemoizedProps = p2.elementType == p2.type and Alternate.memoizedProps or ResolveDefaultPropsFunction(p2.type, Alternate.memoizedProps)
+			local MemoizedState = Alternate.memoizedState
+			
+			if DEV and p2.type == p2.elementType and not v74 then
+				if StateNode.props ~= p2.memoizedProps then
+					Console.error("Expected %s props to match memoized props before componentDidUpdate. This might either be because of a bug in React, or because a component reassigns its own `this.props`. Please file an issue.", GetComponentNameFunction(p2.type) or "instance")
+				end
+				if StateNode.state ~= p2.memoizedState then
+					Console.error("Expected %s state to match memoized state before componentDidUpdate. This might either be because of a bug in React, or because a component reassigns its own `this.state`. Please file an issue.", GetComponentNameFunction(p2.type) or "instance")
+				end
+			end
+			if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p2.mode, ProfileMode) ~= 0 then
+				local Success1, Result1 = xpcall(function() --[[ Line: 1142 ]]
+					-- upvalues: StartLayoutEffectTimerFunction (upval), StateNode (copy), MemoizedProps (copy), MemoizedState (copy)
+					StartLayoutEffectTimerFunction()
+					StateNode:componentDidUpdate(MemoizedProps, MemoizedState, StateNode.__reactInternalSnapshotBeforeUpdate)
+				end, DescribeError)
+				RecordLayoutEffectDurationFunction(p2)
+				
+				if not Success1 then
+					error(Result1)
+				end
+			else
+				StateNode:componentDidUpdate(MemoizedProps, MemoizedState, StateNode.__reactInternalSnapshotBeforeUpdate)
+			end
+		end
+	end
+	local UpdateQueue = p2.updateQueue
+	
+	if UpdateQueue ~= nil then
+		if DEV and p2.type == p2.elementType and not v74 then
+			if StateNode.props ~= p2.memoizedProps then
+				Console.error("Expected %s props to match memoized props before processing the update queue. This might either be because of a bug in React, or because a component reassigns its own `this.props`. Please file an issue.", GetComponentNameFunction(p2.type) or "instance")
+			end
+			if StateNode.state ~= p2.memoizedState then
+				Console.error("Expected %s state to match memoized state before processing the update queue. This might either be because of a bug in React, or because a component reassigns its own `this.state`. Please file an issue.", GetComponentNameFunction(p2.type) or "instance")
+			end
+		end
+		CommitUpdateQueueFunction(p2, UpdateQueue, StateNode)
+	end
+end
+
+Callback1 = function(p2) --[[ Line: 1205 | Named "commitLayoutEffectsForHostRoot" ]]
+	-- upvalues: HostComponent (copy), GetPublicInstanceFunction (copy), ClassComponent (copy), CommitUpdateQueueFunction (copy)
+	local UpdateQueue = p2.updateQueue
+	
+	if UpdateQueue ~= nil then
+		local StateNode = nil
+		
+		if p2.child ~= nil then
+			local Child = p2.child
+			
+			if Child.tag == HostComponent then
+				StateNode = GetPublicInstanceFunction(Child.stateNode)
+			elseif Child.tag == ClassComponent then
+				StateNode = Child.stateNode
+			end
+		end
+		CommitUpdateQueueFunction(p2, UpdateQueue, StateNode)
+	end
+end
+
+Callback3 = function(p2) --[[ Line: 1224 | Named "commitLayoutEffectsForHostComponent" ]]
+	-- upvalues: Update (copy), CommitMountFunction (copy)
+	local StateNode = p2.stateNode
+	
+	if p2.alternate == nil and bit32.band(p2.flags, Update) ~= 0 then
+		CommitMountFunction(StateNode, p2.type, p2.memoizedProps, p2)
+	end
+end
+
+local function hideOrUnhideAllChildren(Child, HasMemoizedState) --[[ Line: 1239 ]]
+	-- upvalues: SupportsMutation (copy), HostComponent (copy), HideInstanceFunction (copy), UnhideInstanceFunction (copy), HostText (copy), HideTextInstanceFunction (copy), UnhideTextInstanceFunction (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy)
+	if SupportsMutation then
+		local Child1 = Child
+		while true do
+			if Child1.tag == HostComponent then
+				local StateNode = Child1.stateNode
+				
+				if HasMemoizedState then
+					HideInstanceFunction(StateNode)
+				else
+					UnhideInstanceFunction(Child1.stateNode, Child1.memoizedProps)
+				end
+			elseif Child1.tag == HostText then
+				local StateNode = Child1.stateNode
+				
+				if HasMemoizedState then
+					HideTextInstanceFunction(StateNode)
+				else
+					UnhideTextInstanceFunction(StateNode, Child1.memoizedProps)
+				end
+			elseif (Child1.tag ~= OffscreenComponent and Child1.tag ~= LegacyHiddenComponent or (Child1.memoizedState == nil or Child1 == Child)) and Child1.child ~= nil then
+				Child1.child.return_ = Child1
+				Child1 = Child1.child
+				continue
+			end
+			if Child1 == Child then break end
+			while Child1.sibling == nil do
+				if Child1.return_ == nil or Child1.return_ == Child then break end
+				Child1 = Child1.return_
+			end
+			Child1.sibling.return_ = Child1.return_
+			Child1 = Child1.sibling
+		end
+	end
+end
+
+function commitAttachRef(p2) --[[ Line: 1289 ]]
+	-- upvalues: HostComponent (copy), GetPublicInstanceFunction (copy), DEV (copy), Console (copy), GetComponentNameFunction (copy)
+	local RefFunction: (any) -> () = p2.ref
+	
+	if RefFunction ~= nil then
+		local StateNode = p2.stateNode
+		local PublicInstance = if p2.tag == HostComponent then GetPublicInstanceFunction(StateNode) else StateNode
+		
+		if typeof(RefFunction) == "function" then
+			RefFunction(PublicInstance)
+			
+			return
+		end
+		if DEV and typeof(RefFunction) ~= "table" then
+			Console.error("Unexpected ref object provided for %s. Use either a ref-setter function or React.createRef().", GetComponentNameFunction(p2.type) or "instance")
+			
+			return
+		end
+		RefFunction.current = PublicInstance
+	end
+end
+
+function commitDetachRef(p2) --[[ Line: 1328 ]]
+	local RefFunction: (any) -> () = p2.ref
+	
+	if RefFunction ~= nil then
+		if typeof(RefFunction) == "function" then
+			RefFunction(nil)
+			
+			return
+		end
+		RefFunction.current = nil
+	end
+end
+
+commitUnmount = function(p2, Child, p3, p4) --[[ Line: 1342 | Named "commitUnmount" ]]
+	-- upvalues: OnCommitUnmountFunction (copy), FunctionComponent (copy), ForwardRef (copy), MemoComponent (copy), SimpleMemoComponent (copy), Block (copy), Layout (copy), NoFlags1 (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), captureCommitPhaseError (ref), RecordLayoutEffectDurationFunction (copy), ClassComponent (copy), HostComponent (copy), HostPortal (copy), SupportsMutation (copy), Callback4 (ref), SupportsPersistence (copy), unimplemented (copy)
+	OnCommitUnmountFunction(Child)
+	
+	if Child.tag == FunctionComponent or Child.tag == ForwardRef or Child.tag == MemoComponent or Child.tag == SimpleMemoComponent or Child.tag == Block then
+		local UpdateQueue = Child.updateQueue
+		
+		if UpdateQueue ~= nil then
+			local LastEffect = UpdateQueue.lastEffect
+			
+			if LastEffect ~= nil then
+				local Next = LastEffect.next
+				local Next1 = Next
+				repeat
+					if Next1.destroy ~= nil and bit32.band(Next1.tag, Layout) ~= NoFlags1 then
+						if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(Child.mode, ProfileMode) ~= 0 then
+							StartLayoutEffectTimerFunction()
+							local Success1, Result1 = xpcall(Next1.destroy, DescribeError)
+							
+							if not Success1 then
+								captureCommitPhaseError(Child, p3, Result1)
+							end
+							RecordLayoutEffectDurationFunction(Child)
+						else
+							local Success, Result = xpcall(Next1.destroy, DescribeError)
+							
+							if not Success then
+								captureCommitPhaseError(Child, p3, Result)
 							end
 						end
 					end
-					var12 = var12.next
-				until var12 == next
+					Next1 = Next1.next
+				until Next1 == Next
 			end
 		end
 		return
-	elseif p8.tag == classComponent then
-		local ref = p8.ref
+	elseif Child.tag == ClassComponent then
+		local Ref = Child.ref
 		
-		if ref ~= nil then
-			if typeof(ref) == "function" then
-				local ok, status = xpcall(ref, describeError)
+		if Ref ~= nil then
+			if typeof(Ref) == "function" then
+				local Success2, Result2 = xpcall(Ref, DescribeError)
 				
-				if not ok then
-					captureCommitPhaseError(p8, p9, status)
+				if not Success2 then
+					captureCommitPhaseError(Child, p3, Result2)
 				end
 			else
-				ref.current = nil
+				Ref.current = nil
 			end
 		end
-		local stateNode = p8.stateNode
+		local StateNode = Child.stateNode
 		
-		if typeof(stateNode.componentWillUnmount) == "function" then
-			safelyCallComponentWillUnmount(p8, stateNode, p9)
+		if typeof(StateNode.componentWillUnmount) == "function" then
+			safelyCallComponentWillUnmount(Child, StateNode, p3)
 		end
 		return
-	elseif p8.tag == hostComponent then
-		local ref = p8.ref
+	elseif Child.tag == HostComponent then
+		local Ref = Child.ref
 		
-		if ref ~= nil then
-			if typeof(ref) == "function" then
-				local ok, status = xpcall(ref, describeError)
+		if Ref ~= nil then
+			if typeof(Ref) == "function" then
+				local Success3, Result3 = xpcall(Ref, DescribeError)
 				
-				if ok then
-					return
-				else
-					captureCommitPhaseError(p8, p9, status)
+				if not Success3 then
+					captureCommitPhaseError(Child, p3, Result3)
 					
 					return
 				end
 			else
-				ref.current = nil
+				Ref.current = nil
 			end
 		end
-	elseif p8.tag ~= hostPortal then return end
-	if supportsMutation then
-		unmountHostComponents(p7, p8, p9, p10)
+		return
+	elseif Child.tag ~= HostPortal then return end
+	if SupportsMutation then
+		Callback4(p2, Child, p3, p4)
 		
 		return
-	elseif supportsPersistence then
+	end
+	if SupportsPersistence then
 		unimplemented("emptyPortalContainer")
 	end
 end
 
-local function commitNestedUnmounts(p7, p8, p9, p10)
-	-- upvalues: commitUnmount (write), supportsMutation (ref), hostPortal (ref)
-	local var12 = p8
+commitNestedUnmounts = function(p2, Child, p3, p4) --[[ Line: 1449 | Named "commitNestedUnmounts" ]]
+	-- upvalues: commitUnmount (ref), SupportsMutation (copy), HostPortal (copy)
+	local Child1 = Child
 	while true do
-		commitUnmount(p7, var12, p9, p10)
-		if var12.child ~= nil and (not supportsMutation or var12.tag ~= hostPortal) then
-			var12.child.return_ = var12
-			var12 = var12.child
-			continue
-		end
-		if var12 ~= p8 then
-			while var12.sibling == nil do
-				if var12.return_ ~= nil and var12.return_ ~= p8 then
-					var12 = var12.return_
-					continue
-				end
-				return
+		commitUnmount(p2, Child1, p3, p4)
+		if Child1.child ~= nil and (not SupportsMutation or Child1.tag ~= HostPortal) then
+			Child1.child.return_ = Child1
+			Child1 = Child1.child
+		elseif Child1 ~= Child then
+			while Child1.sibling == nil do
+				if Child1.return_ == nil or Child1.return_ == Child then return end
+				Child1 = Child1.return_
 			end
-			var12.sibling.return_ = var12.return_
-			var12 = var12.sibling
+			Child1.sibling.return_ = Child1.return_
+			Child1 = Child1.sibling
+		else
+			return
 		end
 	end
 end
 
-local _ = function(p11)
-	-- upvalues: enableNewTreeCleanupPath (ref)
-	local alternate = p11.alternate
+local _ = function(p5) --[[ Line: 1489 | Named "detachFiberMutation" ]]
+	-- upvalues: EnableNewTreeCleanupPath (copy)
+	local Alternate = p5.alternate
 	
-	if alternate ~= nil then
-		alternate.return_ = nil
+	if Alternate ~= nil then
+		Alternate.return_ = nil
 		
-		if not enableNewTreeCleanupPath then
-			p11.alternate = nil
+		if not EnableNewTreeCleanupPath then
+			p5.alternate = nil
 		end
 	end
-	p11.return_ = nil
+	p5.return_ = nil
 end
 
-local function getHostParentFiber(p11)
-	-- upvalues: isHostParent (write), error (ref)
-	local _return = p11.return_
-	while _return ~= nil do
-		if not isHostParent(_return) then
-			_return = _return.return_
-			continue
+local function getHostParentFiber(p5) --[[ Line: 1558 ]]
+	-- upvalues: Callback5 (ref), Error1 (copy)
+	local Return = p5.return_
+	while Return ~= nil do
+		if Callback5(Return) then
+			return Return
 		end
-		return _return
+		Return = Return.return_
 	end
-	error(error.new("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue."))
+	error(Error1.new("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue."))
 end
 
-isHostParent = function(p12)
-	-- upvalues: hostComponent (ref), hostRoot (ref), hostPortal (ref)
-	return if p12.tag ~= hostComponent then if p12.tag ~= hostRoot then p12.tag == hostPortal else true else true
+Callback5 = function(Return): boolean --[[ Line: 1576 | Named "isHostParent" ]]
+	-- upvalues: HostComponent (copy), HostRoot (copy), HostPortal (copy)
+	return Return.tag == HostComponent or (Return.tag == HostRoot or Return.tag == HostPortal)
 end
 
-local function getHostSibling(p12)
-	-- upvalues: isHostParent (write), hostComponent (ref), hostText (ref), dehydratedFragment (ref), placement (ref), hostPortal (ref)
-	local var13
-	local var14 = p12
+getHostSibling = function(Child) --[[ Line: 1580 | Named "getHostSibling" ]]
+	-- upvalues: Callback5 (ref), HostComponent (copy), HostText (copy), DehydratedFragment (copy), Placement (copy), HostPortal (copy)
+	local Child1 = Child
+	local Flag = nil
 	while true do
-		var13 = false
-		while var14.sibling == nil do
-			if var14.return_ ~= nil and not isHostParent(var14.return_) then
-				var14 = var14.return_
-				continue
+		Flag = false
+		while Child1.sibling == nil do
+			if Child1.return_ == nil or Callback5(Child1.return_) then
+				return nil
 			end
-			return nil
+			Child1 = Child1.return_
 		end
-		var14.sibling.return_ = var14.return_
-		var14 = var14.sibling
-		while var14.tag ~= hostComponent and (var14.tag ~= hostText and var14.tag ~= dehydratedFragment) do
-			if bit32.band(var14.flags, placement) ~= 0 then
-				var13 = true
-				break
-			elseif var14.child ~= nil and var14.tag ~= hostPortal then
-				var14.child.return_ = var14
-				var14 = var14.child
-				continue
-			else
-				var13 = true
+		Child1.sibling.return_ = Child1.return_
+		Child1 = Child1.sibling
+		while Child1.tag ~= HostComponent and (Child1.tag ~= HostText and Child1.tag ~= DehydratedFragment) do
+			if bit32.band(Child1.flags, Placement) ~= 0 then
+				Flag = true
 				break
 			end
-			elseif not var13 and bit32.band(var14.flags, placement) == 0 then
-				return var14.stateNode
+			if Child1.child ~= nil and Child1.tag ~= HostPortal then
+				Child1.child.return_ = Child1
+				Child1 = Child1.child
+				continue
 			end
+			Flag = true
+			break
 		end
-		-- [0.042s] <RUNTIME-ERROR> : Error block 26 analysis at pc 0 (list.remove(x): x not in list)
+		if not Flag and bit32.band(Child1.flags, Placement) == 0 then
+			return Child1.stateNode
+		end
 	end
 end
 
-local function commitPlacement(p13)
-	-- upvalues: supportsMutation (ref), getHostParentFiber (ref), hostComponent (ref), hostRoot (ref), hostPortal (ref), invariant (ref), contentReset (ref), resetTextContent (ref), getHostSibling (write), insertOrAppendPlacementNodeIntoContainer (write), insertOrAppendPlacementNode (write)
-	if not supportsMutation then return end
-	local var15 = getHostParentFiber(p13)
-	local containerInfo = nil
-	local var16 = nil
-	local stateNode = var15.stateNode
+local function commitPlacement(p6) --[[ Line: 1634 ]]
+	-- upvalues: SupportsMutation (copy), getHostParentFiber (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), InvariantFunction (copy), ContentReset (copy), ResetTextContentFunction (copy), IsNotSupportsChildOrdering (copy), getHostSibling (ref), Callback6 (ref), Callback (ref)
+	if not SupportsMutation then return end
+	local HostParentFiber = getHostParentFiber(p6)
+	local ContainerInfo = nil
+	local Flag: boolean? = nil
+	local StateNode = HostParentFiber.stateNode
 	
-	if var15.tag == hostComponent then
-		containerInfo = stateNode
-		var16 = false
-	elseif var15.tag == hostRoot then
-		containerInfo = stateNode.containerInfo
-		var16 = true
-	elseif var15.tag == hostPortal then
-		containerInfo = stateNode.containerInfo
-		var16 = true
+	if HostParentFiber.tag == HostComponent then
+		ContainerInfo = StateNode
+		Flag = false
+	elseif HostParentFiber.tag == HostRoot then
+		ContainerInfo = StateNode.containerInfo
+		Flag = true
+	elseif HostParentFiber.tag == HostPortal then
+		ContainerInfo = StateNode.containerInfo
+		Flag = true
 	else
-		invariant(false, "Invalid host parent fiber. This error is likely caused by a bug in React. Please file an issue.")
+		InvariantFunction(false, "Invalid host parent fiber. This error is likely caused by a bug in React. Please file an issue.")
 	end
-	if bit32.band(var15.flags, contentReset) ~= 0 then
-		resetTextContent(containerInfo)
-		var15.flags = bit32.band(var15.flags, bit32.bnot(contentReset))
+	if bit32.band(HostParentFiber.flags, ContentReset) ~= 0 then
+		ResetTextContentFunction(ContainerInfo)
+		HostParentFiber.flags = bit32.band(HostParentFiber.flags, (bit32.bnot(ContentReset)))
 	end
-	local var17 = getHostSibling(p13)
+	local HostSibling = if IsNotSupportsChildOrdering then nil else getHostSibling(p6)
 	
-	if var16 then
-		insertOrAppendPlacementNodeIntoContainer(p13, var17, containerInfo)
+	if Flag then
+		Callback6(p6, HostSibling, ContainerInfo)
 		
 		return
+	else
+		Callback(p6, HostSibling, ContainerInfo)
 	end
-	insertOrAppendPlacementNode(p13, var17, containerInfo)
 end
 
-insertOrAppendPlacementNodeIntoContainer = function(p13, p14, p15)
-	-- upvalues: hostComponent (ref), hostText (ref), insertInContainerBefore (ref), appendChildToContainer (ref), hostPortal (ref), insertOrAppendPlacementNodeIntoContainer (write)
-	local tag = p13.tag
+Callback6 = function(Child, p6, ContainerInfo) --[[ Line: 1691 | Named "insertOrAppendPlacementNodeIntoContainer" ]]
+	-- upvalues: HostComponent (copy), HostText (copy), InsertInContainerBeforeFunction (copy), AppendChildToContainerFunction (copy), HostPortal (copy), Callback6 (ref)
+	local Tag = Child.tag
 	
-	if if tag ~= hostComponent then tag == hostText else true then
-		local stateNode = p13.stateNode
+	if Tag == HostComponent or Tag == HostText then
+		local StateNode = Child.stateNode
 		
-		if p14 then
-			insertInContainerBefore(p15, stateNode, p14)
+		if p6 then
+			InsertInContainerBeforeFunction(ContainerInfo, StateNode, p6)
+			
+			return
+		else
+			AppendChildToContainerFunction(ContainerInfo, StateNode)
 			
 			return
 		end
-		appendChildToContainer(p15, stateNode)
+	else
+		if Tag == HostPortal then return end
+		local Child1 = Child.child
 		
-		return
-	elseif tag == hostPortal then return end
-	local child = p13.child
-	
-	if child ~= nil then
-		insertOrAppendPlacementNodeIntoContainer(child, p14, p15)
-		local sibling = child.sibling
-		while sibling ~= nil do
-			insertOrAppendPlacementNodeIntoContainer(sibling, p14, p15)
-			sibling = sibling.sibling
+		if Child1 ~= nil then
+			Callback6(Child1, p6, ContainerInfo)
+			local Sibling = Child1.sibling
+			while Sibling ~= nil do
+				Callback6(Sibling, p6, ContainerInfo)
+				Sibling = Sibling.sibling
+			end
 		end
 	end
 end
 
-insertOrAppendPlacementNode = function(p16, p17, p18)
-	-- upvalues: hostComponent (ref), hostText (ref), insertBefore (ref), appendChild (ref), hostPortal (ref), insertOrAppendPlacementNode (write)
-	local tag = p16.tag
+Callback = function(Child, p7, ContainerInfo) --[[ Line: 1723 | Named "insertOrAppendPlacementNode" ]]
+	-- upvalues: HostComponent (copy), HostText (copy), InsertBeforeFunction (copy), AppendChildFunction (copy), HostPortal (copy), Callback (ref)
+	local Tag = Child.tag
 	
-	if if tag ~= hostComponent then tag == hostText else true then
-		local stateNode = p16.stateNode
+	if Tag == HostComponent or Tag == HostText then
+		local StateNode = Child.stateNode
 		
-		if p17 then
-			insertBefore(p18, stateNode, p17)
+		if p7 then
+			InsertBeforeFunction(ContainerInfo, StateNode, p7)
+			
+			return
+		else
+			AppendChildFunction(ContainerInfo, StateNode)
 			
 			return
 		end
-		appendChild(p18, stateNode)
+	else
+		if Tag == HostPortal then return end
+		local Child1 = Child.child
 		
-		return
-	elseif tag == hostPortal then return end
-	local child = p16.child
-	
-	if child ~= nil then
-		insertOrAppendPlacementNode(child, p17, p18)
-		local sibling = child.sibling
-		while sibling ~= nil do
-			insertOrAppendPlacementNode(sibling, p17, p18)
-			sibling = sibling.sibling
+		if Child1 ~= nil then
+			Callback(Child1, p7, ContainerInfo)
+			local Sibling = Child1.sibling
+			while Sibling ~= nil do
+				Callback(Sibling, p7, ContainerInfo)
+				Sibling = Sibling.sibling
+			end
 		end
 	end
 end
 
-unmountHostComponents = function(p19, p20, p21, p22)
-	-- upvalues: error (ref), hostComponent (ref), hostRoot (ref), hostPortal (ref), hostText (ref), commitNestedUnmounts (write), removeChildFromContainer (ref), removeChild (ref), commitUnmount (write)
-	local stateNode
-	local var15 = p20
-	local var16 = false
-	local containerInfo = nil
-	local var17 = nil
+Callback4 = function(p8, Child, p9, p10) --[[ Line: 1751 | Named "unmountHostComponents" ]]
+	-- upvalues: Error1 (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), HostText (copy), commitNestedUnmounts (ref), RemoveChildFromContainerFunction (copy), RemoveChildFunction (copy), commitUnmount (ref)
+	local Child1 = Child
+	local Flag = false
+	local ContainerInfo = nil
+	local Flag1: boolean? = nil
 	while true do
-		if not var16 then
-			local _return = var15.return_
+		if not Flag then
+			local Return = Child1.return_
+			local StateNode = nil
 			while true do
-				if _return == nil then
-					error(error.new("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue."))
+				if Return == nil then
+					error(Error1.new("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue."))
 				end
-				stateNode = _return.stateNode
+				StateNode = Return.stateNode
 				
-				if _return.tag == hostComponent then
-					containerInfo = stateNode
-					var17 = false
-					break
-				elseif _return.tag == hostRoot then
-					containerInfo = stateNode.containerInfo
-					var17 = true
-					break
-				elseif _return.tag ~= hostPortal then
-					_return = _return.return_
-					continue
-				else
-					containerInfo = stateNode.containerInfo
-					var17 = true
+				if Return.tag == HostComponent then
+					ContainerInfo = StateNode
+					Flag1 = false
 					break
 				end
-				var16 = true
+				if Return.tag == HostRoot then
+					ContainerInfo = StateNode.containerInfo
+					Flag1 = true
+					break
+				end
+				if Return.tag ~= HostPortal then
+					Return = Return.return_
+					continue
+				end
+				ContainerInfo = StateNode.containerInfo
+				Flag1 = true
+				break
+			end
+			Flag = true
+		end
+		if Child1.tag == HostComponent or Child1.tag == HostText then
+			commitNestedUnmounts(p8, Child1, p9, p10)
+			
+			if Flag1 then
+				RemoveChildFromContainerFunction(ContainerInfo, Child1.stateNode)
+			else
+				RemoveChildFunction(ContainerInfo, Child1.stateNode)
+			end
+		elseif Child1.tag == HostPortal then
+			if Child1.child ~= nil then
+				ContainerInfo = Child1.stateNode.containerInfo
+				Flag1 = true
+				Child1.child.return_ = Child1
+				Child1 = Child1.child
+			end
+		else
+			commitUnmount(p8, Child1, p9, p10)
+			
+			if Child1.child ~= nil then
+				Child1.child.return_ = Child1
+				Child1 = Child1.child
 			end
 		end
-		if var15.tag == hostComponent or var15.tag == hostText then
-			commitNestedUnmounts(p19, var15, p21, p22)
+		if Child1 == Child then return end
+		while Child1.sibling == nil do
+			if Child1.return_ == nil or Child1.return_ == Child then return end
+			Child1 = Child1.return_
 			
-			if var17 then
-				removeChildFromContainer(containerInfo, var15.stateNode)
-			else
-				removeChild(containerInfo, var15.stateNode)
+			if Child1.tag == HostPortal then
+				Flag = false
 			end
-		elseif var15.tag == hostPortal then
-			if var15.child == nil then
-				if var15 ~= p20 then
-					while var15.sibling == nil do
-						if var15.return_ ~= nil and var15.return_ ~= p20 then
-							var15 = var15.return_
-							
-							if var15.tag == hostPortal then
-								var16 = false
-							end
-						end
+		end
+		Child1.sibling.return_ = Child1.return_
+		Child1 = Child1.sibling
+	end
+end
+
+local function commitDeletion(p11, Child, p12, p13) --[[ Line: 1929 ]]
+	-- upvalues: Callback4 (ref), EnableNewTreeCleanupPath (copy)
+	Callback4(p11, Child, p12, p13)
+	local Alternate = if EnableNewTreeCleanupPath then nil else Child.alternate
+	local Alternate1 = Child.alternate
+	
+	if Alternate1 ~= nil then
+		Alternate1.return_ = nil
+		
+		if not EnableNewTreeCleanupPath then
+			Child.alternate = nil
+		end
+	end
+	Child.return_ = nil
+	
+	if not EnableNewTreeCleanupPath and Alternate ~= nil then
+		local Alternate2 = Alternate.alternate
+		
+		if Alternate2 ~= nil then
+			Alternate2.return_ = nil
+			
+			if not EnableNewTreeCleanupPath then
+				Alternate.alternate = nil
+			end
+		end
+		Alternate.return_ = nil
+	end
+end
+
+local function commitWork(p11, Child) --[[ Line: 1964 ]]
+	-- upvalues: FunctionComponent (copy), ForwardRef (copy), MemoComponent (copy), SimpleMemoComponent (copy), Block (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListUnmount (copy), Layout (copy), HasEffect (copy), DescribeError (copy), RecordLayoutEffectDurationFunction (copy), ClassComponent (copy), HostComponent (copy), CommitUpdateFunction (copy), HostText (copy), InvariantFunction (copy), CommitTextUpdateFunction (copy), HostRoot (copy), SupportsHydration (copy), unimplemented (copy), Profiler (copy), SuspenseComponent (copy), SuspenseListComponent (copy), IncompleteClassComponent (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), hideOrUnhideAllChildren (copy)
+	if Child.tag ~= FunctionComponent and Child.tag ~= ForwardRef and Child.tag ~= MemoComponent and Child.tag ~= SimpleMemoComponent and Child.tag ~= Block then
+		if Child.tag == ClassComponent then return end
+		if Child.tag == HostComponent then
+			local StateNode = Child.stateNode
+			
+			if StateNode ~= nil then
+				local MemoizedProps = Child.memoizedProps
+				local MemoizedProps1 = if p11 then p11.memoizedProps else MemoizedProps
+				local Type = Child.type
+				local UpdateQueue = Child.updateQueue
+				Child.updateQueue = nil
+				
+				if UpdateQueue ~= nil then
+					CommitUpdateFunction(StateNode, UpdateQueue, Type, MemoizedProps1, MemoizedProps, Child)
+				end
+			end
+			return
+		elseif Child.tag == HostText then
+			InvariantFunction(Child.stateNode ~= nil, "This should have a text node initialized. This error is likely caused by a bug in React. Please file an issue.")
+			local StateNode = Child.stateNode
+			local MemoizedProps = Child.memoizedProps
+			local v7 = nil
+			
+			if p11 ~= nil then
+				local _ = p11.memoizedProps
+				v7 = MemoizedProps
+			end
+			CommitTextUpdateFunction(StateNode, v7, MemoizedProps)
+			
+			return
+		else
+			if Child.tag ~= HostRoot then
+				if Child.tag == Profiler then return end
+				if Child.tag == SuspenseComponent then
+					commitSuspenseComponent(Child)
+					attachSuspenseRetryListeners(Child)
+					
+					return
+				end
+				if Child.tag == SuspenseListComponent then
+					unimplemented("commitWork: SuspenseListComponent")
+				else
+					if Child.tag == IncompleteClassComponent then return end
+					if Child.tag == OffscreenComponent or Child.tag == LegacyHiddenComponent then
+						hideOrUnhideAllChildren(Child, Child.memoizedState ~= nil)
+						
 						return
 					end
-					var15.sibling.return_ = var15.return_
-					var15 = var15.sibling
-					continue
 				end
+				InvariantFunction(false, "This unit of work tag should not have side-effects. This error is likely caused by a bug in React. Please file an issue.")
+				
 				return
-			else
-				containerInfo = var15.stateNode.containerInfo
-				var17 = true
-				var15.child.return_ = var15
-				var15 = var15.child
+			elseif SupportsHydration then
+				local StateNode = Child.stateNode
+				
+				if StateNode.hydrate then
+					StateNode.hydrate = false
+					unimplemented("commitWork: HostRoot: commitHydratedContainer")
+				end
 			end
-		else
-			commitUnmount(p19, var15, p21, p22)
-			
-			if var15.child == nil then
-			else
-				var15.child.return_ = var15
-				var15 = var15.child
-			end
+			return
 		end
+	elseif EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(Child.mode, ProfileMode) ~= 0 then
+		local Success, Result = xpcall(function() --[[ Line: 2053 ]]
+			-- upvalues: StartLayoutEffectTimerFunction (upval), commitHookEffectListUnmount (upval), Layout (upval), HasEffect (upval), Child (copy)
+			StartLayoutEffectTimerFunction()
+			commitHookEffectListUnmount(bit32.bor(Layout, HasEffect), Child, Child.return_)
+		end, DescribeError)
+		RecordLayoutEffectDurationFunction(Child)
+		
+		if not Success then
+			error(Result)
+			
+			return
+		end
+	else
+		commitHookEffectListUnmount(bit32.bor(Layout, HasEffect), Child, Child.return_)
 	end
 end
 
-local function commitDeletion(p23, p24, p25, p26)
-	-- upvalues: unmountHostComponents (write), enableNewTreeCleanupPath (ref)
-	unmountHostComponents(p23, p24, p25, p26)
-	local var18 = if not enableNewTreeCleanupPath then p24.alternate else nil
-	local alternate = p24.alternate
+function commitSuspenseComponent(p11) --[[ Line: 2179 ]]
+	-- upvalues: ReactFiberWorkLoopNewModule (ref), SupportsMutation (copy), hideOrUnhideAllChildren (copy), EnableSuspenseCallback (copy), DEV (copy), Console (copy)
+	local MemoizedState = p11.memoizedState
 	
-	if alternate ~= nil then
-		alternate.return_ = nil
+	if MemoizedState ~= nil then
+		if not ReactFiberWorkLoopNewModule then
+			ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
+		end
+		ReactFiberWorkLoopNewModule.markCommitTimeOfFallback()
 		
-		if not enableNewTreeCleanupPath then
-			p24.alternate = nil
+		if SupportsMutation then
+			hideOrUnhideAllChildren(p11.child, true)
 		end
 	end
-	p24.return_ = nil
-	
-	if not enableNewTreeCleanupPath and var18 ~= nil then
-		local var19 = var18
-		local alternate_1 = var19.alternate
+	if EnableSuspenseCallback and MemoizedState ~= nil then
+		local SuspenseCallbackFunction: (any) -> () = p11.memoizedProps.suspenseCallback
 		
-		if alternate_1 ~= nil then
-			alternate_1.return_ = nil
+		if typeof(SuspenseCallbackFunction) == "function" then
+			local UpdateQueue = p11.updateQueue
 			
-			if not enableNewTreeCleanupPath then
-				var19.alternate = nil
-			end
-		end
-		var19.return_ = nil
-	end
-end
-
-local function commitWork(p23, p24)
-	-- upvalues: functionComponent (ref), forwardRef (ref), memoComponent (ref), simpleMemoComponent (ref), block (ref), enableProfilerTimer (ref), enableProfilerCommitHooks (ref), profileMode (ref), startLayoutEffectTimer (ref), commitHookEffectListUnmount (ref), layout (ref), hasEffect (ref), describeError (ref), recordLayoutEffectDuration (ref), classComponent (ref), hostComponent (ref), commitUpdate (ref), hostText (ref), invariant (ref), commitTextUpdate (ref), hostRoot (ref), supportsHydration (ref), unimplemented (ref), profiler (ref), suspenseComponent (ref), suspenseListComponent (ref), incompleteClassComponent (ref), offscreenComponent (ref), legacyHiddenComponent (ref), hideOrUnhideAllChildren (ref)
-	if p24.tag == functionComponent or p24.tag == forwardRef or (p24.tag == memoComponent or p24.tag == simpleMemoComponent) or p24.tag == block then
-		if enableProfilerTimer and enableProfilerCommitHooks and bit32.band(p24.mode, profileMode) ~= 0 then
-			local ok, status = xpcall(function()
-				-- upvalues: startLayoutEffectTimer (copy), commitHookEffectListUnmount (copy), layout (copy), hasEffect (copy), p24 (ref)
-				startLayoutEffectTimer()
-				commitHookEffectListUnmount(bit32.bor(layout, hasEffect), p24, p24.return_)
-			end, describeError)
-			recordLayoutEffectDuration(p24)
-			
-			if ok then
-				return
-			else
-				error(status)
+			if UpdateQueue ~= nil then
+				SuspenseCallbackFunction(table.clone(UpdateQueue))
 				
 				return
 			end
-		else
-			commitHookEffectListUnmount(bit32.bor(layout, hasEffect), p24, p24.return_)
-		end
-	elseif p24.tag == classComponent then return end
-	if p24.tag == hostComponent then
-		local stateNode = p24.stateNode
-		
-		if stateNode ~= nil then
-			local memoizedProps = p24.memoizedProps
-			local var18 = if p23 then p23.memoizedProps else memoizedProps
-			local type = p24.type
-			local updateQueue = p24.updateQueue
-			p24.updateQueue = nil
-			
-			if updateQueue ~= nil then
-				commitUpdate(stateNode, updateQueue, type, var18, memoizedProps, p24)
-			end
-		end
-		return
-	elseif p24.tag == hostText then
-		invariant(p24.stateNode ~= nil, "This should have a text node initialized. This error is likely caused by a bug in React. Please file an issue.")
-		local stateNode = p24.stateNode
-		local memoizedProps = p24.memoizedProps
-		local var19 = nil
-		
-		if p23 ~= nil then
-			local _ = p23.memoizedProps
-			var19 = memoizedProps
-		end
-		commitTextUpdate(stateNode, var19, memoizedProps)
-		
-		return
-	elseif p24.tag == hostRoot then
-		if supportsHydration then
-			local stateNode = p24.stateNode
-			
-			if stateNode.hydrate then
-				stateNode.hydrate = false
-				unimplemented("commitWork: HostRoot: commitHydratedContainer")
-			end
-		end
-		return
-	elseif p24.tag == profiler then return end
-	if p24.tag == suspenseComponent then
-		commitSuspenseComponent(p24)
-		attachSuspenseRetryListeners(p24)
-		
-		return
-	elseif p24.tag == suspenseListComponent then
-		unimplemented("commitWork: SuspenseListComponent")
-	elseif p24.tag == incompleteClassComponent then return end
-	if p24.tag == offscreenComponent or p24.tag == legacyHiddenComponent then
-		hideOrUnhideAllChildren(p24, p24.memoizedState ~= nil)
-		
-		return
-	end
-	invariant(false, "This unit of work tag should not have side-effects. This error is likely caused by a bug in React. Please file an issue.")
-end
-
-function commitSuspenseComponent(p23)
-	-- upvalues: var2 (write), supportsMutation (ref), hideOrUnhideAllChildren (ref), enableSuspenseCallback (ref), dEV (ref), console (ref)
-	local memoizedState = p23.memoizedState
-	
-	if memoizedState ~= nil then
-		if not var2 then
-			var2 = require(script.Parent["ReactFiberWorkLoop.new"])
-		end
-		var2.markCommitTimeOfFallback()
-		
-		if supportsMutation then
-			hideOrUnhideAllChildren(p23.child, true)
-		end
-	end
-	if enableSuspenseCallback and memoizedState ~= nil then
-		local suspenseCallback = p23.memoizedProps.suspenseCallback
-		
-		if typeof(suspenseCallback) == "function" then
-			local updateQueue = p23.updateQueue
-			
-			if updateQueue == nil then
-				return
-			else
-				suspenseCallback(table.clone(updateQueue))
-				
-				return
-			end
-		elseif dEV and suspenseCallback ~= nil then
-			console.error("Unexpected type for suspenseCallback: %s", tostring(suspenseCallback))
+		elseif DEV and SuspenseCallbackFunction ~= nil then
+			Console.error("Unexpected type for suspenseCallback: %s", (tostring(SuspenseCallbackFunction)))
 		end
 	end
 end
 
-function commitSuspenseHydrationCallbacks(p23, p24)
-	-- upvalues: supportsHydration (ref), commitHydratedSuspenseInstance (ref), enableSuspenseCallback (ref)
-	if not supportsHydration then return end
-	if p24.memoizedState == nil then
-		local alternate = p24.alternate
+function commitSuspenseHydrationCallbacks(p11, p12) --[[ Line: 2218 ]]
+	-- upvalues: SupportsHydration (copy), CommitHydratedSuspenseInstanceFunction (copy), EnableSuspenseCallback (copy)
+	if not SupportsHydration then return end
+	if p12.memoizedState == nil then
+		local Alternate = p12.alternate
 		
-		if alternate ~= nil then
-			local memoizedState = alternate.memoizedState
+		if Alternate ~= nil then
+			local MemoizedState = Alternate.memoizedState
 			
-			if memoizedState ~= nil then
-				local dehydrated = memoizedState.dehydrated
+			if MemoizedState ~= nil then
+				local Dehydrated = MemoizedState.dehydrated
 				
-				if dehydrated ~= nil then
-					commitHydratedSuspenseInstance(dehydrated)
+				if Dehydrated ~= nil then
+					CommitHydratedSuspenseInstanceFunction(Dehydrated)
 					
-					if enableSuspenseCallback then
-						local hydrationCallbacks = p23.hydrationCallbacks
+					if EnableSuspenseCallback then
+						local HydrationCallbacks = p11.hydrationCallbacks
 						
-						if hydrationCallbacks ~= nil then
-							local onHydrated = hydrationCallbacks.onHydrated
+						if HydrationCallbacks ~= nil then
+							local OnHydratedFunction: (any) -> () = HydrationCallbacks.onHydrated
 							
-							if onHydrated then
-								onHydrated(dehydrated)
+							if OnHydratedFunction then
+								OnHydratedFunction(Dehydrated)
 							end
 						end
 					end
@@ -1231,171 +1340,175 @@ function commitSuspenseHydrationCallbacks(p23, p24)
 	end
 end
 
-function attachSuspenseRetryListeners(p23)
-	-- upvalues: set (ref), resolveRetryWakeable (ref), enableSchedulerTracing (ref), unstableWrap (ref)
-	local updateQueue = p23.updateQueue
+function attachSuspenseRetryListeners(p11) --[[ Line: 2246 ]]
+	-- upvalues: Set (copy), resolveRetryWakeable (copy), EnableSchedulerTracing (copy), UnstableWrapFunction (copy)
+	local UpdateQueue = p11.updateQueue
 	
-	if updateQueue ~= nil then
-		p23.updateQueue = nil
-		local stateNode = p23.stateNode
+	if UpdateQueue ~= nil then
+		p11.updateQueue = nil
+		local StateNode = p11.stateNode
 		
-		if stateNode == nil then
-			p23.stateNode = set.new()
-			stateNode = p23.stateNode
+		if StateNode == nil then
+			p11.stateNode = Set.new()
+			StateNode = p11.stateNode
 		end
-		for i, v in updateQueue do
-			local var18 = function()
-				-- upvalues: resolveRetryWakeable (copy), p23 (ref), i (ref)
-				return resolveRetryWakeable(p23, i)
+		for Promise, _ in UpdateQueue do
+			local function v238() --[[ Line: 2260 ]]
+				-- upvalues: resolveRetryWakeable (upval), p11 (copy), Promise (copy)
+				return resolveRetryWakeable(p11, Promise)
 			end
 			
-			if not stateNode:has(i) then
-				if enableSchedulerTracing and i.__reactDoNotTraceInteractions ~= true then
-					var18 = unstableWrap(var18)
+			if not StateNode:has(Promise) then
+				if EnableSchedulerTracing and Promise.__reactDoNotTraceInteractions ~= true then
+					v238 = UnstableWrapFunction(v238)
 				end
-				stateNode:add(i)
-				i:andThen(function()
-					-- upvalues: var18 (write)
-					return var18()
-				end, function()
-					-- upvalues: var18 (write)
-					return var18()
+				StateNode:add(Promise)
+				Promise:andThen(function() --[[ Line: 2271 ]]
+					-- upvalues: v238 (ref)
+					return v238()
+				end, function() --[[ Line: 2273 ]]
+					-- upvalues: v238 (ref)
+					return v238()
 				end)
 			end
 		end
 	end
 end
 
-function isSuspenseBoundaryBeingHidden(p24, p25)
-	if p24 ~= nil then
-		local memoizedState = p24.memoizedState
+function isSuspenseBoundaryBeingHidden(p12, p13): boolean --[[ Line: 2284 ]]
+	if p12 ~= nil then
+		local MemoizedState = p12.memoizedState
 		
-		if memoizedState ~= nil and memoizedState.dehydrated == nil then
-			return false
+		if MemoizedState == nil or MemoizedState.dehydrated ~= nil then
+			local MemoizedState1 = p13.memoizedState
+			
+			return MemoizedState1 ~= nil and MemoizedState1.dehydrated == nil
 		end
-		local memoizedState_1 = p25.memoizedState
-		
-		return memoizedState_1 ~= nil and memoizedState_1.dehydrated == nil
 	end
+	return false
 end
 
-function commitResetTextContent(value)
-	-- upvalues: supportsMutation (ref), resetTextContent (ref)
-	if supportsMutation then
-		resetTextContent(value.stateNode)
+function commitResetTextContent(p12) --[[ Line: 2296 ]]
+	-- upvalues: SupportsMutation (copy), ResetTextContentFunction (copy)
+	if SupportsMutation then
+		ResetTextContentFunction(p12.stateNode)
 		
 		return
 	end
 end
 
-local function commitPassiveUnmount(p24)
-	-- upvalues: functionComponent (ref), forwardRef (ref), simpleMemoComponent (ref), block (ref), enableProfilerTimer (ref), enableProfilerCommitHooks (ref), profileMode (ref), startPassiveEffectTimer (ref), commitHookEffectListUnmount (ref), passive (ref), hasEffect (ref), recordPassiveEffectDuration (ref)
-	if p24.tag == functionComponent or p24.tag == forwardRef or (p24.tag == simpleMemoComponent or p24.tag == block) then
-		if enableProfilerTimer and enableProfilerCommitHooks and bit32.band(p24.mode, profileMode) ~= 0 then
-			startPassiveEffectTimer()
-			commitHookEffectListUnmount(bit32.bor(passive, hasEffect), p24, p24.return_)
-			recordPassiveEffectDuration(p24)
+local function commitPassiveUnmount(p12) --[[ Line: 2303 ]]
+	-- upvalues: FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartPassiveEffectTimerFunction (copy), commitHookEffectListUnmount (copy), Passive (copy), HasEffect (copy), RecordPassiveEffectDurationFunction (copy)
+	if p12.tag == FunctionComponent or p12.tag == ForwardRef or p12.tag == SimpleMemoComponent or p12.tag == Block then
+		if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p12.mode, ProfileMode) ~= 0 then
+			StartPassiveEffectTimerFunction()
+			commitHookEffectListUnmount(bit32.bor(Passive, HasEffect), p12, p12.return_)
+			RecordPassiveEffectDurationFunction(p12)
 			
-			return
-		end
-		commitHookEffectListUnmount(bit32.bor(passive, hasEffect), p24, p24.return_)
-	end
-end
-
-local function commitPassiveUnmountInsideDeletedTree(p24, p25)
-	-- upvalues: functionComponent (ref), forwardRef (ref), simpleMemoComponent (ref), block (ref), enableProfilerTimer (ref), enableProfilerCommitHooks (ref), profileMode (ref), startPassiveEffectTimer (ref), commitHookEffectListUnmount (ref), passive (ref), recordPassiveEffectDuration (ref)
-	if p24.tag == functionComponent or p24.tag == forwardRef or (p24.tag == simpleMemoComponent or p24.tag == block) then
-		if enableProfilerTimer and enableProfilerCommitHooks and bit32.band(p24.mode, profileMode) ~= 0 then
-			startPassiveEffectTimer()
-			commitHookEffectListUnmount(passive, p24, p25)
-			recordPassiveEffectDuration(p24)
-			
-			return
-		end
-		commitHookEffectListUnmount(passive, p24, p25)
-	end
-end
-
-local function commitPassiveMount(p24, p25)
-	-- upvalues: functionComponent (ref), forwardRef (ref), simpleMemoComponent (ref), block (ref), enableProfilerTimer (ref), enableProfilerCommitHooks (ref), profileMode (ref), startPassiveEffectTimer (ref), commitHookEffectListMount (ref), describeError (ref), passive (ref), hasEffect (ref), recordPassiveEffectDuration (ref), profiler (ref)
-	if p25.tag == functionComponent or p25.tag == forwardRef or (p25.tag == simpleMemoComponent or p25.tag == block) then
-		if not enableProfilerTimer or not enableProfilerCommitHooks or bit32.band(p25.mode, profileMode) == 0 then
-			commitHookEffectListMount(bit32.bor(passive, hasEffect), p25)
-			
-			return
-		end
-		startPassiveEffectTimer()
-		local ok, status = xpcall(commitHookEffectListMount, describeError, bit32.bor(passive, hasEffect), p25)
-		recordPassiveEffectDuration(p25)
-		
-		if ok then
 			return
 		else
-			error(status)
+			commitHookEffectListUnmount(bit32.bor(Passive, HasEffect), p12, p12.return_)
+		end
+	end
+end
+
+local function commitPassiveUnmountInsideDeletedTree(p12, p13) --[[ Line: 2332 ]]
+	-- upvalues: FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartPassiveEffectTimerFunction (copy), commitHookEffectListUnmount (copy), Passive (copy), RecordPassiveEffectDurationFunction (copy)
+	if p12.tag == FunctionComponent or p12.tag == ForwardRef or p12.tag == SimpleMemoComponent or p12.tag == Block then
+		if EnableProfilerTimer and EnableProfilerCommitHooks and bit32.band(p12.mode, ProfileMode) ~= 0 then
+			StartPassiveEffectTimerFunction()
+			commitHookEffectListUnmount(Passive, p12, p13)
+			RecordPassiveEffectDurationFunction(p12)
+			
+			return
+		else
+			commitHookEffectListUnmount(Passive, p12, p13)
+		end
+	end
+end
+
+local function commitPassiveMount(p12, p13) --[[ Line: 2356 ]]
+	-- upvalues: FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartPassiveEffectTimerFunction (copy), commitHookEffectListMount (copy), DescribeError (copy), Passive (copy), HasEffect (copy), RecordPassiveEffectDurationFunction (copy), Profiler (copy)
+	if p13.tag == FunctionComponent or p13.tag == ForwardRef or p13.tag == SimpleMemoComponent or p13.tag == Block then
+		if not EnableProfilerTimer or not EnableProfilerCommitHooks or bit32.band(p13.mode, ProfileMode) == 0 then
+			commitHookEffectListMount(bit32.bor(Passive, HasEffect), p13)
 			
 			return
 		end
-	elseif p25.tag == profiler then
-		commitProfilerPassiveEffect(p24, p25)
+		StartPassiveEffectTimerFunction()
+		local Success, Result = xpcall(commitHookEffectListMount, DescribeError, bit32.bor(Passive, HasEffect), p13)
+		RecordPassiveEffectDurationFunction(p13)
+		
+		if not Success then
+			error(Result)
+			
+			return
+		end
+	elseif p13.tag == Profiler then
+		commitProfilerPassiveEffect(p12, p13)
 	end
 end
 
-function invokeLayoutEffectMountInDEV(p24)
-	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), functionComponent (ref), forwardRef (ref), simpleMemoComponent (ref), block (ref), invokeGuardedCallback (ref), commitHookEffectListMount (ref), layout (ref), hasEffect (ref), hasCaughtError (ref), clearCaughtError (ref), captureCommitPhaseError (write), classComponent (ref)
-	if dEV and enableDoubleInvokingEffects then
-		if p24.tag ~= functionComponent and p24.tag ~= forwardRef and (p24.tag ~= simpleMemoComponent and p24.tag ~= block) then return end
-		invokeGuardedCallback(nil, commitHookEffectListMount, nil, bit32.bor(layout, hasEffect), p24)
+function invokeLayoutEffectMountInDEV(p12) --[[ Line: 2389 ]]
+	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), InvokeGuardedCallbackFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), captureCommitPhaseError (ref), ClassComponent (copy)
+	if DEV and EnableDoubleInvokingEffects then
+		if p12.tag == FunctionComponent or p12.tag == ForwardRef or p12.tag == SimpleMemoComponent or p12.tag == Block then
+			InvokeGuardedCallbackFunction(nil, commitHookEffectListMount, nil, bit32.bor(Layout, HasEffect), p12)
+			
+			if HasCaughtErrorFunction() then
+				captureCommitPhaseError(p12, p12.return_, (ClearCaughtErrorFunction()))
+			end
+			return
+		end
+	elseif p12.tag == ClassComponent then
+		local StateNode = p12.stateNode
+		InvokeGuardedCallbackFunction(nil, StateNode.componentDidMount, StateNode)
 		
-		if hasCaughtError() then
-			captureCommitPhaseError(p24, p24.return_, clearCaughtError())
+		if HasCaughtErrorFunction() then
+			captureCommitPhaseError(p12, p12.return_, (ClearCaughtErrorFunction()))
 		end
 		return
-	elseif p24.tag ~= classComponent then return end
-	local stateNode = p24.stateNode
-	invokeGuardedCallback(nil, stateNode.componentDidMount, stateNode)
-	
-	if hasCaughtError() then
-		captureCommitPhaseError(p24, p24.return_, clearCaughtError())
-	end
-	return
-end
-
-function invokePassiveEffectMountInDEV(p24)
-	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), functionComponent (ref), forwardRef (ref), simpleMemoComponent (ref), block (ref), invokeGuardedCallback (ref), commitHookEffectListMount (ref), passive (ref), hasEffect (ref), hasCaughtError (ref), clearCaughtError (ref), captureCommitPhaseError (write)
-	if not dEV or not enableDoubleInvokingEffects or p24.tag ~= functionComponent and p24.tag ~= forwardRef and (p24.tag ~= simpleMemoComponent and p24.tag ~= block) then return end
-	invokeGuardedCallback(nil, commitHookEffectListMount, nil, bit32.bor(passive, hasEffect), p24)
-	
-	if hasCaughtError() then
-		captureCommitPhaseError(p24, p24.return_, clearCaughtError())
 	end
 end
 
-function invokeLayoutEffectUnmountInDEV(p24)
-	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), functionComponent (ref), forwardRef (ref), simpleMemoComponent (ref), block (ref), invokeGuardedCallback (ref), commitHookEffectListUnmount (ref), layout (ref), hasEffect (ref), hasCaughtError (ref), clearCaughtError (ref), captureCommitPhaseError (write), classComponent (ref)
-	if dEV and enableDoubleInvokingEffects then
-		if p24.tag ~= functionComponent and p24.tag ~= forwardRef and (p24.tag ~= simpleMemoComponent and p24.tag ~= block) then return end
-		invokeGuardedCallback(nil, commitHookEffectListUnmount, nil, bit32.bor(layout, hasEffect), p24, p24.return_)
+function invokePassiveEffectMountInDEV(p12) --[[ Line: 2421 ]]
+	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), InvokeGuardedCallbackFunction (copy), commitHookEffectListMount (copy), Passive (copy), HasEffect (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), captureCommitPhaseError (ref)
+	if not DEV or not EnableDoubleInvokingEffects or p12.tag ~= FunctionComponent and p12.tag ~= ForwardRef and p12.tag ~= SimpleMemoComponent and p12.tag ~= Block then return end
+	InvokeGuardedCallbackFunction(nil, commitHookEffectListMount, nil, bit32.bor(Passive, HasEffect), p12)
+	
+	if HasCaughtErrorFunction() then
+		captureCommitPhaseError(p12, p12.return_, (ClearCaughtErrorFunction()))
+	end
+end
+
+function invokeLayoutEffectUnmountInDEV(p12) --[[ Line: 2445 ]]
+	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), InvokeGuardedCallbackFunction (copy), commitHookEffectListUnmount (copy), Layout (copy), HasEffect (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), captureCommitPhaseError (ref), ClassComponent (copy)
+	if DEV and EnableDoubleInvokingEffects then
+		if p12.tag == FunctionComponent or p12.tag == ForwardRef or p12.tag == SimpleMemoComponent or p12.tag == Block then
+			InvokeGuardedCallbackFunction(nil, commitHookEffectListUnmount, nil, bit32.bor(Layout, HasEffect), p12, p12.return_)
+			
+			if HasCaughtErrorFunction() then
+				captureCommitPhaseError(p12, p12.return_, (ClearCaughtErrorFunction()))
+			end
+			return
+		end
+	elseif p12.tag == ClassComponent then
+		local StateNode = p12.stateNode
 		
-		if hasCaughtError() then
-			captureCommitPhaseError(p24, p24.return_, clearCaughtError())
+		if typeof(StateNode.componentWillUnmount) == "function" then
+			safelyCallComponentWillUnmount(p12, StateNode, p12.return_)
 		end
 		return
-	elseif p24.tag ~= classComponent then return end
-	local stateNode = p24.stateNode
-	
-	if typeof(stateNode.componentWillUnmount) == "function" then
-		safelyCallComponentWillUnmount(p24, stateNode, p24.return_)
 	end
-	return
 end
 
-function invokePassiveEffectUnmountInDEV(p24)
-	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), functionComponent (ref), forwardRef (ref), simpleMemoComponent (ref), block (ref), invokeGuardedCallback (ref), commitHookEffectListUnmount (ref), passive (ref), hasEffect (ref), hasCaughtError (ref), clearCaughtError (ref), captureCommitPhaseError (write)
-	if not dEV or not enableDoubleInvokingEffects or p24.tag ~= functionComponent and p24.tag ~= forwardRef and (p24.tag ~= simpleMemoComponent and p24.tag ~= block) then return end
-	invokeGuardedCallback(nil, commitHookEffectListUnmount, nil, bit32.bor(passive, hasEffect), p24, p24.return_)
+function invokePassiveEffectUnmountInDEV(p12) --[[ Line: 2476 ]]
+	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), InvokeGuardedCallbackFunction (copy), commitHookEffectListUnmount (copy), Passive (copy), HasEffect (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), captureCommitPhaseError (ref)
+	if not DEV or not EnableDoubleInvokingEffects or p12.tag ~= FunctionComponent and p12.tag ~= ForwardRef and p12.tag ~= SimpleMemoComponent and p12.tag ~= Block then return end
+	InvokeGuardedCallbackFunction(nil, commitHookEffectListUnmount, nil, bit32.bor(Passive, HasEffect), p12, p12.return_)
 	
-	if hasCaughtError() then
-		captureCommitPhaseError(p24, p24.return_, clearCaughtError())
+	if HasCaughtErrorFunction() then
+		captureCommitPhaseError(p12, p12.return_, (ClearCaughtErrorFunction()))
 	end
 end
 

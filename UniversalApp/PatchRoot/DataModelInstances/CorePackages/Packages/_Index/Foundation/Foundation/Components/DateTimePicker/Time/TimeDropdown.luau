@@ -1,60 +1,59 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local dateTimeUtilitiesModule = require(foundation.Components.DateTimePicker.DateTimeUtilities)
-local dropdownModule = require(foundation.Components.Dropdown)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local localizationService = require(foundation.Utility.Wrappers).Services.LocalizationService
-local translatorModule = require(foundation.Utility.Localization.Translator)
-local useScaledValueModule = require(foundation.Utility.useScaledValue)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local DateTimeUtilitiesModule = require(Foundation.Components.DateTimePicker.DateTimeUtilities)
+local DropdownModule = require(Foundation.Components.Dropdown)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local LocalizationService = require(Foundation.Utility.Wrappers).Services.LocalizationService
+local TranslatorModule = require(Foundation.Utility.Localization.Translator)
+local UseScaledValueModule = require(Foundation.Utility.useScaledValue)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	testId = "--foundation-time-dropdown",
 	dateTime = DateTime.fromLocalTime(2000, 1, 1, 0, 0, 0)
 }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), dateTimeUtilitiesModule (ref), useScaledValueModule (ref), localizationService (ref), reactModule (ref), dropdownModule (ref), translatorModule (ref), inputSizeModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = dateTimeUtilitiesModule.roundDownToNearestMinute(var1.dateTime)
-	local var3 = var2:ToLocalTime()
+return function(p1) --[[ Line: 36 | Named "TimeSelector" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), DateTimeUtilitiesModule (copy), UseScaledValueModule (copy), LocalizationService (copy), ReactModule (copy), DropdownModule (copy), TranslatorModule (copy), InputSizeModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local RoundDownToNearestMinuteResult = DateTimeUtilitiesModule.roundDownToNearestMinute(WithDefaultsModuleResult.dateTime)
+	local LocalTime = RoundDownToNearestMinuteResult:ToLocalTime()
 	
-	return reactModule.createElement(dropdownModule.Root, {
+	return ReactModule.createElement(DropdownModule.Root, {
 		label = "",
-		items = (function()
-			-- upvalues: var3 (ref), var2 (ref), localizationService (copy)
-			local t = {}
-			local var4 = var3.Minute % 30 ~= 0
-			
+		items = (function() --[[ Line: 44 ]]
+			-- upvalues: LocalTime (copy), RoundDownToNearestMinuteResult (copy), LocalizationService (upval)
+			local List = {}
+			local IsNotMinuteMatch = LocalTime.Minute % 30 ~= 0
 			for i = 0, 47 do
-				local dateTime = DateTime.fromLocalTime(var3.Year, var3.Month, var3.Day, math.floor(i / 2), i % 2 * 30, var3.Second)
+				local _DateTime = DateTime.fromLocalTime(LocalTime.Year, LocalTime.Month, LocalTime.Day, math.floor(i / 2), i % 2 * 30, LocalTime.Second)
 				
-				if var4 and var2.UnixTimestamp < dateTime.UnixTimestamp then
-					table.insert(t, {
+				if IsNotMinuteMatch and RoundDownToNearestMinuteResult.UnixTimestamp < _DateTime.UnixTimestamp then
+					table.insert(List, {
 						icon = nil,
 						isChecked = true,
 						isDisabled = true,
-						id = var2.UnixTimestamp,
-						text = var2:FormatLocalTime("LT", localizationService.RobloxLocaleId)
+						id = RoundDownToNearestMinuteResult.UnixTimestamp,
+						text = RoundDownToNearestMinuteResult:FormatLocalTime("LT", LocalizationService.RobloxLocaleId)
 					})
-					var4 = false
+					IsNotMinuteMatch = false
 				end
-				table.insert(t, {
+				table.insert(List, {
 					icon = nil,
-					id = dateTime.UnixTimestamp,
-					isChecked = dateTime.UnixTimestamp == var2.UnixTimestamp,
-					isDisabled = dateTime.UnixTimestamp == var2.UnixTimestamp,
-					text = dateTime:FormatLocalTime("LT", localizationService.RobloxLocaleId)
+					id = _DateTime.UnixTimestamp,
+					isChecked = _DateTime.UnixTimestamp == RoundDownToNearestMinuteResult.UnixTimestamp,
+					isDisabled = _DateTime.UnixTimestamp == RoundDownToNearestMinuteResult.UnixTimestamp,
+					text = _DateTime:FormatLocalTime("LT", LocalizationService.RobloxLocaleId)
 				})
 			end
-			return t
+			return List
 		end)(),
-		LayoutOrder = var1.LayoutOrder,
-		maxHeight = useScaledValueModule(200),
-		onItemChanged = var1.onItemChanged,
-		placeholder = translatorModule:FormatByKey("CommonUI.Controls.Label.SelectTheTime"),
-		size = inputSizeModule.Medium,
-		testId = var1.testId,
-		width = var1.width,
-		value = var2.UnixTimestamp
+		LayoutOrder = WithDefaultsModuleResult.LayoutOrder,
+		maxHeight = UseScaledValueModule(200),
+		onItemChanged = WithDefaultsModuleResult.onItemChanged,
+		placeholder = TranslatorModule:FormatByKey("CommonUI.Controls.Label.SelectTheTime"),
+		size = InputSizeModule.Medium,
+		testId = WithDefaultsModuleResult.testId,
+		width = WithDefaultsModuleResult.width,
+		value = RoundDownToNearestMinuteResult.UnixTimestamp
 	})
 end

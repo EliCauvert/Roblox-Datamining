@@ -1,42 +1,42 @@
-﻿local parent = script.Parent
-local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Providers.Style.Tokens)
-local _ = require(parent.Rules.Types)
-local createStyleSheetRulesModule = require(parent.createStyleSheetRules)
-local getOverrideAttributesModule = require(parent.getOverrideAttributes)
-local useGeneratedRulesModule = require(foundation.Utility.useGeneratedRules)
-local _ = require(foundation.Enums.ColorMode)
-local _ = require(foundation.Enums.Device)
-local _ = require(foundation.Enums.ThemeName)
+﻿local Parent = script.Parent
+local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Providers.Style.Tokens)
+local _ = require(Parent.Rules.Types)
+local CreateStyleSheetRulesModule = require(Parent.createStyleSheetRules)
+local GetOverrideAttributesModule = require(Parent.getOverrideAttributes)
+local UseGeneratedRulesModule = require(Foundation.Utility.useGeneratedRules)
+local _ = require(Foundation.Enums.ColorMode)
+local _ = require(Foundation.Enums.Device)
+local _ = require(Foundation.Enums.ThemeName)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useGeneratedRulesModule (ref), getOverrideAttributesModule (ref), createStyleSheetRulesModule (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3 = reactModule.useRef({})
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), var1 (ref)
+return ReactModule.memo(function(p1) --[[ Line: 34 | Named "StyleSheet" ]]
+	-- upvalues: ReactModule (copy), UseGeneratedRulesModule (copy), GetOverrideAttributesModule (copy), CreateStyleSheetRulesModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef({})
+	ReactModule.useLayoutEffect(function() --[[ Line: 38 ]]
+		-- upvalues: p1 (copy), UseStateResult (copy)
 		if p1.setStyleSheetRef and p1.setStyleSheetRef.current then
-			p1.setStyleSheetRef.current(var1)
+			p1.setStyleSheetRef.current(UseStateResult)
 		end
-	end, { var1 })
-	local var4 = useGeneratedRulesModule(p1.themeName, p1.colorMode, p1.device)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: getOverrideAttributesModule (copy), p1 (ref)
-		return getOverrideAttributesModule(p1.themeName, p1.colorMode, p1.device, p1.tokenOverrides)
+	end, { UseStateResult })
+	local UseGeneratedRulesModuleResult = UseGeneratedRulesModule(p1.themeName, p1.colorMode, p1.device)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 47 ]]
+		-- upvalues: GetOverrideAttributesModule (upval), p1 (copy)
+		return GetOverrideAttributesModule(p1.themeName, p1.colorMode, p1.device, p1.tokenOverrides)
 	end, { p1.themeName, p1.colorMode, p1.device, p1.tokenOverrides })
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		FoundationStyleSheet = reactModule.createElement("StyleSheet", { ref = var2 }, reactModule.useMemo(function()
-			-- upvalues: var1 (ref), createStyleSheetRulesModule (copy), var4 (ref), p1 (ref), var3 (ref), var5 (ref)
-			return if var1 then createStyleSheetRulesModule(var4, p1.tags, var1, var3.current, p1.scale, var5) else nil
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		FoundationStyleSheet = ReactModule.createElement("StyleSheet", { ref = UseStateResult2 }, (ReactModule.useMemo(function() --[[ Line: 58 ]]
+			-- upvalues: UseStateResult (copy), CreateStyleSheetRulesModule (upval), UseGeneratedRulesModuleResult (copy), p1 (copy), UseRefResult (copy), UseMemoResult (copy)
+			return if UseStateResult then CreateStyleSheetRulesModule(UseGeneratedRulesModuleResult, p1.tags, UseStateResult, UseRefResult.current, p1.scale, UseMemoResult) else nil
 		end, {
-			var1,
-			var4,
+			UseStateResult,
+			UseGeneratedRulesModuleResult,
 			p1.tags,
 			p1.scale,
-			var5
-		})),
-		FoundationStyleLink = reactModule.createElement("StyleLink", { StyleSheet = var1 })
+			UseMemoResult
+		}))),
+		FoundationStyleLink = ReactModule.createElement("StyleLink", { StyleSheet = UseStateResult })
 	})
 end)

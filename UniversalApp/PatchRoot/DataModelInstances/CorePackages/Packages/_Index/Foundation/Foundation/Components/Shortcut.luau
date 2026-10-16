@@ -1,1 +1,1 @@
-﻿return require(script.Shortcut)
+﻿return (require(script.Shortcut))

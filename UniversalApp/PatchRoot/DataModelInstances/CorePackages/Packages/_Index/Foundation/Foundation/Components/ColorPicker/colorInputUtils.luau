@@ -1,61 +1,61 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local _ = require(parent.React)
-local colorInputModeModule = require(foundation.Enums.ColorInputMode)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local _ = require(Parent.React)
+local ColorInputModeModule = require(Foundation.Enums.ColorInputMode)
 
 return {
-	createInputConfigs = function(p1, p2, p3, p4, p5, p6, p7, p8, _)
-		-- upvalues: dashModule (ref), colorInputModeModule (ref)
-		local var1 = dashModule.map({ "R", "G", "B" }, function(p9)
-			-- upvalues: p1 (ref), p5 (ref)
+	createInputConfigs = function(p1, p2, Value, Value1, Handler, Handler1, Handler2, Handler3, _) --[[ Line: 24 ]]
+		-- upvalues: DashModule (copy), ColorInputModeModule (copy)
+		local MapResult = DashModule.map({ "R", "G", "B" }, function(Text: string) --[[ Line: 35 ]]
+			-- upvalues: p1 (copy), Handler (copy)
 			return {
 				minimum = 0,
 				maximum = 255,
 				step = 1,
-				key = p9,
-				component = p9:lower(),
-				value = p1:map(function(p10)
-					-- upvalues: p9 (ref)
-					return p10[p9:lower()]
+				key = Text,
+				component = Text:lower(),
+				value = p1:map(function(p3) --[[ Line: 39 ]]
+					-- upvalues: Text (copy)
+					return p3[Text:lower()]
 				end),
-				handler = p5
+				handler = Handler
 			}
 		end)
-		local cloned = table.clone(var1)
-		table.insert(cloned, {
+		local Copy = table.clone(MapResult)
+		table.insert(Copy, {
 			key = "A",
 			minimum = 0,
 			maximum = 1,
 			step = 0.01,
 			precision = 3,
-			value = p4,
-			handler = p8
+			value = Value1,
+			handler = Handler3
 		})
 		
 		return {
-			[colorInputModeModule.RGB] = var1,
-			[colorInputModeModule.RGBA] = cloned,
-			[colorInputModeModule.HSV] = dashModule.map({ "H", "S", "V" }, function(p9)
-				-- upvalues: p2 (ref), p6 (ref)
+			[ColorInputModeModule.RGB] = MapResult,
+			[ColorInputModeModule.RGBA] = Copy,
+			[ColorInputModeModule.HSV] = DashModule.map({ "H", "S", "V" }, function(Text: string) --[[ Line: 60 ]]
+				-- upvalues: p2 (copy), Handler1 (copy)
 				return {
 					minimum = 0,
-					key = p9,
-					component = p9:lower(),
-					value = p2:map(function(p10)
-						-- upvalues: p9 (ref)
-						return p10[p9:lower()]
+					key = Text,
+					component = Text:lower(),
+					value = p2:map(function(p3) --[[ Line: 64 ]]
+						-- upvalues: Text (copy)
+						return p3[Text:lower()]
 					end),
-					handler = p6,
-					maximum = if p9 == "H" then 360 else nil
+					handler = Handler1,
+					maximum = if Text == "H" then 360 else nil
 				}
 			end),
-			[colorInputModeModule.Hex] = {
+			[ColorInputModeModule.Hex] = {
 				{
 					placeholder = "#000000",
-					key = tostring(colorInputModeModule.Hex),
-					value = p3,
-					handler = p7,
+					key = tostring(ColorInputModeModule.Hex),
+					value = Value,
+					handler = Handler2,
 					width = UDim.new(1, 0)
 				}
 			}

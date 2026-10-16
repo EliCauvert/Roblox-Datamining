@@ -1,17 +1,17 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local builderIconsModule = require(foundation.Parent.BuilderIcons)
-local _ = require(foundation.Components.Types)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputVariantModule = require(foundation.Enums.InputVariant)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local _ = require(foundation.Enums.Radius)
-local flagsModule = require(foundation.Utility.Flags)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local getInputVariantsFactoryModule = require(foundation.Components.InputField.getInputVariantsFactory)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local BuilderIconsModule = require(Foundation.Parent.BuilderIcons)
+local _ = require(Foundation.Components.Types)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local InputVariantModule = require(Foundation.Enums.InputVariant)
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local _ = require(Foundation.Enums.Radius)
+local FlagsModule = require(Foundation.Utility.Flags)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local GetInputVariantsFactoryModule = require(Foundation.Components.InputField.getInputVariantsFactory)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function computeProps(p1)
+local function computeProps(p1) --[[ Line: 63 ]]
 	return {
 		container = {
 			minHeight = p1.minContainerHeight,
@@ -28,13 +28,13 @@ local function computeProps(p1)
 	}
 end
 
-local function variantsFactory(p1)
-	-- upvalues: flagsModule (ref), inputSizeModule (ref), computeProps (ref), iconSizeModule (ref), builderIconsModule (ref)
+local function variantsFactory(p1) --[[ Line: 93 ]]
+	-- upvalues: FlagsModule (copy), InputSizeModule (copy), computeProps (copy), IconSizeModule (copy), BuilderIconsModule (copy)
 	return {
 		common = {
 			container = {
 				tag = "row",
-				fgStyle = if flagsModule.FoundationFixColorOnScrubbableNumberInput then p1.Color.Shift.Shift_200 else nil,
+				fgStyle = if FlagsModule.FoundationFixColorOnScrubbableNumberInput then p1.Color.Shift.Shift_200 else nil,
 				strokeStyle = p1.Color.Stroke.Emphasis,
 				strokeThickness = p1.Stroke.Standard
 			},
@@ -45,55 +45,55 @@ local function variantsFactory(p1)
 			clearButton = { tag = "auto-xy" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = computeProps({
+			[InputSizeModule.XSmall] = computeProps({
 				containerTag = "size-full-600 gap-small",
 				radius = p1.Radius.Small,
 				horizontalPadding = p1.Padding.XSmall,
 				typography = p1.Typography.BodySmall,
-				iconSize = iconSizeModule.XSmall,
+				iconSize = IconSizeModule.XSmall,
 				minContainerHeight = p1.Size.Size_600,
-				clearButtonIcon = builderIconsModule.Icon.XSmall,
+				clearButtonIcon = BuilderIconsModule.Icon.XSmall,
 				clearButtonPadding = p1.Padding.XSmall
 			}),
-			[inputSizeModule.Small] = computeProps({
+			[InputSizeModule.Small] = computeProps({
 				containerTag = "size-full-800 gap-medium",
 				radius = p1.Radius.Medium,
 				horizontalPadding = p1.Padding.Small,
 				typography = p1.Typography.BodyMedium,
-				iconSize = iconSizeModule.XSmall,
+				iconSize = IconSizeModule.XSmall,
 				minContainerHeight = p1.Size.Size_800,
-				clearButtonIcon = builderIconsModule.Icon.XSmall,
+				clearButtonIcon = BuilderIconsModule.Icon.XSmall,
 				clearButtonPadding = p1.Size.Size_150
 			}),
-			[inputSizeModule.Medium] = computeProps({
+			[InputSizeModule.Medium] = computeProps({
 				containerTag = "size-full-1000 gap-large",
 				radius = p1.Radius.Medium,
-				horizontalPadding = if flagsModule.FoundationNumberInputBeta then p1.Padding.Medium else p1.Padding.Small,
+				horizontalPadding = if FlagsModule.FoundationNumberInputBeta then p1.Padding.Medium else p1.Padding.Small,
 				typography = p1.Typography.BodyMedium,
-				iconSize = iconSizeModule.Small,
+				iconSize = IconSizeModule.Small,
 				minContainerHeight = p1.Size.Size_1000,
-				clearButtonIcon = builderIconsModule.Icon.X,
+				clearButtonIcon = BuilderIconsModule.Icon.X,
 				clearButtonPadding = p1.Padding.Small
 			}),
-			[inputSizeModule.Large] = computeProps({
+			[InputSizeModule.Large] = computeProps({
 				containerTag = "size-full-1200 gap-large",
 				radius = p1.Radius.Medium,
 				horizontalPadding = p1.Padding.Medium,
 				typography = p1.Typography.BodyLarge,
-				iconSize = iconSizeModule.Small,
+				iconSize = IconSizeModule.Small,
 				minContainerHeight = p1.Size.Size_1200,
-				clearButtonIcon = builderIconsModule.Icon.X,
+				clearButtonIcon = BuilderIconsModule.Icon.X,
 				clearButtonPadding = p1.Padding.Small
 			})
 		}
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref)
-	local textInput = variantsContextModule.useVariants("TextInput", variantsFactory, p1)
-	local inputField = variantsContextModule.useVariants("InputField", getInputVariantsFactoryModule, p1)
-	local var1 = inputField.variants[p3 or inputVariantModule.Standard]
+return function(p1, p2, Utility, p3, p4, p5) --[[ Line: 161 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), GetInputVariantsFactoryModule (copy), InputVariantModule (copy), ComposeStyleVariantModule (copy)
+	local TextInput = VariantsContextModule.useVariants("TextInput", variantsFactory, p1)
+	local InputField = VariantsContextModule.useVariants("InputField", GetInputVariantsFactoryModule, p1)
+	local Variant = InputField.variants[Utility or InputVariantModule.Standard]
 	
-	return composeStyleVariantModule(textInput.common, inputField.sizes[p2], textInput.sizes[p2], if p3 ~= inputVariantModule.Utility then {} else var1, if p4 then inputField.radius[p4] else inputField.defaultRadius[p2], if p5 ~= nil then {} else inputField.focusedState[p5], if p6 ~= nil then {} else inputField.errorState[p6], if p3 == inputVariantModule.Utility then var1 else {})
+	return ComposeStyleVariantModule(TextInput.common, InputField.sizes[p2], TextInput.sizes[p2], if Utility == InputVariantModule.Utility then {} else Variant, if p3 then InputField.radius[p3] else InputField.defaultRadius[p2], if p4 == nil then {} else InputField.focusedState[p4], if p5 == nil then {} else InputField.errorState[p5], if Utility == InputVariantModule.Utility then Variant else {})
 end

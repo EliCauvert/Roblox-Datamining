@@ -1,12 +1,12 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local mapModule = require(parent.Map)
-local objectModule = require(parent_1.Object)
-local instanceOfModule = require(parent_2.InstanceOf)
-local _ = require(parent_2.ES7Types)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local MapModule = require(Parent.Map)
+local ObjectModule = require(Parent1.Object)
+local InstanceOfModule = require(Parent2.InstanceOf)
+local _ = require(Parent2.ES7Types)
 
-return function(p1)
-	-- upvalues: instanceOfModule (ref), mapModule (ref), objectModule (ref)
-	return if instanceOfModule(p1, mapModule) then p1 else mapModule.new(objectModule.entries(p1))
+return function(p1) --[[ Line: 27 | Named "coerceToMap" ]]
+	-- upvalues: InstanceOfModule (copy), MapModule (copy), ObjectModule (copy)
+	return InstanceOfModule(p1, MapModule) and p1 or MapModule.new(ObjectModule.entries(p1))
 end

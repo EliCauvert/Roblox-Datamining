@@ -1,18 +1,17 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local _ = require(foundation.Enums.ColorMode)
-local _ = require(foundation.Enums.Device)
-local reactModule = require(parent.React)
-local _ = require(foundation.Enums.ThemeName)
-local _ = require(foundation.Providers.Style.Tokens)
-local styleSheetRegistryModule = require(foundation.StyleSheet.StyleSheetRegistry)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Enums.ColorMode)
+local _ = require(Foundation.Enums.Device)
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Enums.ThemeName)
+local _ = require(Foundation.Providers.Style.Tokens)
+local StyleSheetRegistryModule = require(Foundation.StyleSheet.StyleSheetRegistry)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: reactModule (ref), styleSheetRegistryModule (ref)
-	local var1 = reactModule.useRef({})
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: styleSheetRegistryModule (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p1 (ref)
-		return styleSheetRegistryModule.resolveStyleSheet(p2, p3, p4, p5, p1)
+return function(p1, p2, p3, p4, p5) --[[ Line: 16 | Named "useRegistryStyleSheet" ]]
+	-- upvalues: ReactModule (copy), StyleSheetRegistryModule (copy)
+	local UseRefResult = ReactModule.useRef({})
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 26 ]]
+		-- upvalues: StyleSheetRegistryModule (upval), p2 (copy), p3 (copy), p4 (copy), p5 (copy), p1 (copy)
+		return StyleSheetRegistryModule.resolveStyleSheet(p2, p3, p4, p5, p1)
 	end, {
 		p1,
 		p2,
@@ -20,30 +19,30 @@ return function(p1, p2, p3, p4, p5)
 		p4,
 		p5
 	})
-	local var3 = reactModule.useRef(var2)
-	var3.current = var2
-	local var4 = reactModule.useCallback(function(p6)
-		-- upvalues: var1 (ref), styleSheetRegistryModule (copy), var3 (ref)
-		for i, v in p6 do
-			var1.current[v] = true
+	local UseRefResult1 = ReactModule.useRef(UseMemoResult)
+	UseRefResult1.current = UseMemoResult
+	local UseResult = ReactModule.useCallback(function(List) --[[ Line: 32 ]]
+		-- upvalues: UseRefResult (copy), StyleSheetRegistryModule (upval), UseRefResult1 (copy)
+		for _, value in List do
+			UseRefResult.current[value] = true
 		end
-		styleSheetRegistryModule.addStyleTags(var3.current, p6)
+		StyleSheetRegistryModule.addStyleTags(UseRefResult1.current, List)
 	end, {})
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), styleSheetRegistryModule (copy), var2 (ref)
-		local t = {}
+	ReactModule.useLayoutEffect(function() --[[ Line: 39 ]]
+		-- upvalues: UseRefResult (copy), StyleSheetRegistryModule (upval), UseMemoResult (copy)
+		local List = {}
 		
-		for i in var1.current do
-			table.insert(t, i)
+		for i in UseRefResult.current do
+			table.insert(List, i)
 		end
-		styleSheetRegistryModule.addStyleTags(var2, t)
-		styleSheetRegistryModule.acquireStyleSheet(var2)
+		StyleSheetRegistryModule.addStyleTags(UseMemoResult, List)
+		StyleSheetRegistryModule.acquireStyleSheet(UseMemoResult)
 		
-		return function()
-			-- upvalues: styleSheetRegistryModule (copy), var2 (copy)
-			styleSheetRegistryModule.releaseStyleSheet(var2)
+		return function() --[[ Line: 48 ]]
+			-- upvalues: StyleSheetRegistryModule (upval), UseMemoResult (upval)
+			StyleSheetRegistryModule.releaseStyleSheet(UseMemoResult)
 		end
-	end, { var2 })
+	end, { UseMemoResult })
 	
-	return var2, var4
+	return UseMemoResult, UseResult
 end

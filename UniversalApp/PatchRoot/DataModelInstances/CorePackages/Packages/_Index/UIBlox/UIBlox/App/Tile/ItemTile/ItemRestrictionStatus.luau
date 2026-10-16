@@ -1,102 +1,104 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local foundationModule = require(parent_2.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
-local imagesModule = require(parent_1.App.ImageSet.Images)
-local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
-local itemTileEnumsModule = require(parent.Enum.ItemTileEnums)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local itemRestrictionStatus = roactModule.PureComponent:extend("ItemRestrictionStatus")
-local vector2 = Vector2.new(50, 20)
-local vector2_1 = Vector2.new(8, 8)
-itemRestrictionStatus.validateProps = tModule.strictInterface({
-	restrictionTypes = tModule.map(itemTileEnumsModule.Restriction.isEnumValue, tModule.boolean),
-	restrictionInfo = tModule.optional(tModule.table)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local FoundationModule = require(Parent2.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
+local ImagesModule = require(Parent1.App.ImageSet.Images)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local ItemTileEnumsModule = require(Parent.Enum.ItemTileEnums)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ItemRestrictionStatus = RoactModule.PureComponent:extend("ItemRestrictionStatus")
+local _Vector2 = Vector2.new(50, 20)
+local _Vector2_1 = Vector2.new(8, 8)
+ItemRestrictionStatus.validateProps = TModule.strictInterface({
+	restrictionTypes = TModule.map(ItemTileEnumsModule.Restriction.isEnumValue, TModule.boolean),
+	restrictionInfo = TModule.optional(TModule.table)
 })
 
-local function _(p1, p2)
-	-- upvalues: itemTileEnumsModule (ref)
-	local var1 = if p1[itemTileEnumsModule.Restriction.LimitedUnique] then "#" else ""
+local function _(p1, p2): string --[[ Line: 37 | Named "getAdditionalText" ]]
+	-- upvalues: ItemTileEnumsModule (copy)
+	local Text: string = if p1[ItemTileEnumsModule.Restriction.LimitedUnique] then "#" else ""
 	
-	if p1[itemTileEnumsModule.Restriction.Collectible] then
+	if p1[ItemTileEnumsModule.Restriction.Collectible] then
 		return "#"
-	elseif p2 and p2.limitedSerialNumber then
-		var1 ..= " " .. p2.limitedSerialNumber
 	end
-	return var1
+	if p2 and p2.limitedSerialNumber then
+		Text ..= " " .. p2.limitedSerialNumber
+	end
+	return Text
 end
 
-local _ = function(p1)
-	-- upvalues: itemTileEnumsModule (ref), imagesModule (ref)
-	return if p1[itemTileEnumsModule.Restriction.Collectible] then imagesModule["icons/status/item/limited"] elseif p1[itemTileEnumsModule.Restriction.Limited] or p1[itemTileEnumsModule.Restriction.LimitedUnique] then imagesModule["icons/status/item/limited"] else nil
+local _ = function(p1) --[[ Line: 55 | Named "getRestrictionIcon" ]]
+	-- upvalues: ItemTileEnumsModule (copy), ImagesModule (copy)
+	return if p1[ItemTileEnumsModule.Restriction.Collectible] then ImagesModule["icons/status/item/limited"] elseif p1[ItemTileEnumsModule.Restriction.Limited] or p1[ItemTileEnumsModule.Restriction.LimitedUnique] then ImagesModule["icons/status/item/limited"] else nil
 end
 
-function itemRestrictionStatus.render(p1)
-	-- upvalues: withStyleModule (ref), itemTileEnumsModule (ref), getTextSizeModule (ref), vector2 (ref), imagesModule (ref), vector2_1 (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), itemTileEnumsModule (copy), getTextSizeModule (copy), vector2 (copy), imagesModule (copy), vector2_1 (copy), roactModule (copy), imageSetComponentModule (copy), UIBloxConfigModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-		local var1
-		local theme = p2.Theme
-		local font = p2.Font
-		local tokens = p2.Tokens
-		local restrictionInfo = p1.props.restrictionInfo
-		local restrictionTypes = p1.props.restrictionTypes
-		local var2 = if restrictionTypes[itemTileEnumsModule.Restriction.LimitedUnique] then "#" else ""
+function ItemRestrictionStatus.render(p1) --[[ Line: 70 ]]
+	-- upvalues: WithStyleModule (copy), ItemTileEnumsModule (copy), GetTextSizeModule (copy), _Vector2 (copy), ImagesModule (copy), _Vector2_1 (copy), RoactModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	return WithStyleModule(function(p2) --[[ Line: 71 ]]
+		-- upvalues: p1 (copy), ItemTileEnumsModule (upval), GetTextSizeModule (upval), _Vector2 (upval), ImagesModule (upval), _Vector2_1 (upval), RoactModule (upval), ImageSetComponentModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		local Theme = p2.Theme
+		local _Font = p2.Font
+		local Tokens = p2.Tokens
+		local RestrictionInfo = p1.props.restrictionInfo
+		local RestrictionTypes = p1.props.restrictionTypes
+		local Text: string = if RestrictionTypes[ItemTileEnumsModule.Restriction.LimitedUnique] then "#" else ""
+		local Text1 = nil
 		
-		if restrictionTypes[itemTileEnumsModule.Restriction.Collectible] then
-			var1 = "#"
-		elseif restrictionInfo and restrictionInfo.limitedSerialNumber then
-			var2 ..= " " .. restrictionInfo.limitedSerialNumber
+		if RestrictionTypes[ItemTileEnumsModule.Restriction.Collectible] then
+			Text1 = "#"
+		else
+			if RestrictionInfo and RestrictionInfo.limitedSerialNumber then
+				Text ..= " " .. RestrictionInfo.limitedSerialNumber
+			end
+			Text1 = Text
 		end
-		var1 = var2
-		local font_1 = font.CaptionHeader.Font
-		local var3 = font.BaseSize * font.CaptionHeader.RelativeSize
-		local var4 = getTextSizeModule(var1, var3, font_1, vector2)
-		local var5 = if restrictionTypes[itemTileEnumsModule.Restriction.Collectible] then imagesModule["icons/status/item/limited"] elseif restrictionTypes[itemTileEnumsModule.Restriction.Limited] or restrictionTypes[itemTileEnumsModule.Restriction.LimitedUnique] then imagesModule["icons/status/item/limited"] else nil
-		local var6 = if var5 then var5.ImageRectSize / imagesModule.ImagesResolutionScale else Vector2.new(0, 0)
+		local CaptionHeaderFont = _Font.CaptionHeader.Font
+		local ScaledBaseSize = _Font.BaseSize * _Font.CaptionHeader.RelativeSize
+		local TextSizeModule = GetTextSizeModule(Text1, ScaledBaseSize, CaptionHeaderFont, _Vector2)
+		local IconsStatusItemLimited = if RestrictionTypes[ItemTileEnumsModule.Restriction.Collectible] then ImagesModule["icons/status/item/limited"] elseif RestrictionTypes[ItemTileEnumsModule.Restriction.Limited] or RestrictionTypes[ItemTileEnumsModule.Restriction.LimitedUnique] then ImagesModule["icons/status/item/limited"] else nil
+		local ImageRectSizeRatio = IconsStatusItemLimited and IconsStatusItemLimited.ImageRectSize / ImagesModule.ImagesResolutionScale or Vector2.new(0, 0)
 		
-		return roactModule.createElement(imageSetComponentModule.Label, {
+		return RoactModule.createElement(ImageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0, 1),
-			Image = imagesModule["component_assets/circle_17"],
-			ImageColor3 = theme.UIDefault.Color,
-			ImageTransparency = theme.UIDefault.Transparency,
+			Image = ImagesModule["component_assets/circle_17"],
+			ImageColor3 = Theme.UIDefault.Color,
+			ImageTransparency = Theme.UIDefault.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(8, 8, 9, 9),
-			Position = UDim2.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100, 1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_200 else -tokens.Global.Size_100),
-			Size = UDim2.new(0, var6.X + var4.X + vector2_1.X, 0, math.max(var6.Y, var4.Y) + vector2_1.Y)
+			Position = UDim2.new(0, Tokens.Size.Size_200, 1, -Tokens.Size.Size_200),
+			Size = UDim2.new(0, ImageRectSizeRatio.X + TextSizeModule.X + _Vector2_1.X, 0, math.max(ImageRectSizeRatio.Y, TextSizeModule.Y) + _Vector2_1.Y)
 		}, {
-			Icon = var5 and roactModule.createElement(imageSetComponentModule.Label, {
+			Icon = IconsStatusItemLimited and RoactModule.createElement(ImageSetComponentModule.Label, {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0, 0.5),
-				Image = var5,
-				ImageColor3 = theme.IconEmphasis.Color,
-				ImageTransparency = theme.IconEmphasis.Transparency,
-				Position = UDim2.new(0, vector2_1.X / 2, 0.5, 0),
-				Size = UDim2.new(0, var6.X, 0, var6.Y)
+				Image = IconsStatusItemLimited,
+				ImageColor3 = Theme.IconEmphasis.Color,
+				ImageTransparency = Theme.IconEmphasis.Transparency,
+				Position = UDim2.new(0, _Vector2_1.X / 2, 0.5, 0),
+				Size = UDim2.new(0, ImageRectSizeRatio.X, 0, ImageRectSizeRatio.Y)
 			}),
-			Text = roactModule.createElement("TextLabel", {
+			Text = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Font = if foundationFontFaceMigration then nil else font_1,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(font_1) else nil,
-				TextSize = var3,
-				Text = var1,
-				TextColor3 = theme.TextMuted.Color,
-				TextTransparency = theme.TextMuted.TextTransparency,
+				Font = if FoundationFontFaceMigration then nil else CaptionHeaderFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(CaptionHeaderFont) else nil,
+				TextSize = ScaledBaseSize,
+				Text = Text1,
+				TextColor3 = Theme.TextMuted.Color,
+				TextTransparency = Theme.TextMuted.TextTransparency,
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Position = UDim2.new(0, var6.X, 0, 0),
-				Size = UDim2.new(0, var4.X + 10, 1, 0)
+				Position = UDim2.new(0, ImageRectSizeRatio.X, 0, 0),
+				Size = UDim2.new(0, TextSizeModule.X + 10, 1, 0)
 			})
 		})
 	end)
 end
 
-return itemRestrictionStatus
+return ItemRestrictionStatus

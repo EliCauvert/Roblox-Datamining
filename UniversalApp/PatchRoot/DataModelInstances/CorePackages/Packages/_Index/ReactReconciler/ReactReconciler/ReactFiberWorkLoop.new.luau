@@ -1,108 +1,108 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local console = require(parent.Shared).console
-local set = require(parent.LuauPolyfill).Set
-local dEV = reactGlobalsModule.__DEV__
-local yOLO = reactGlobalsModule.__YOLO__
-local t = { NoContext = 0, RetryAfterError = 64 }
-local _ = require(parent.Shared)
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local Console = require(Parent.Shared).console
+local Set = require(Parent.LuauPolyfill).Set
+local DEV = ReactGlobalsModule.__DEV__
+local YOLO = ReactGlobalsModule.__YOLO__
+local ReactFiberWorkLoopModule = {}
+local _ = require(Parent.Shared)
 local _ = require(script.Parent.ReactInternalTypes)
-local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
-local schedulerModule = require(parent.Scheduler)
+local ReactFiberLaneModule = require(script.Parent.ReactFiberLane)
+local SchedulerModule = require(Parent.Scheduler)
 local _ = require(script.Parent["ReactFiberSuspenseComponent.new"])
-local unknownModule = require(script.Parent["ReactFiberStack.new"])
-local reactFeatureFlags = require(parent.Shared).ReactFeatureFlags
-local enableDebugTracing = reactFeatureFlags.enableDebugTracing
-local enableSchedulingProfiler = reactFeatureFlags.enableSchedulingProfiler
-local skipUnmountedBoundaries = reactFeatureFlags.skipUnmountedBoundaries
-local enableDoubleInvokingEffects = reactFeatureFlags.enableDoubleInvokingEffects
-local deletedTreeCleanUpLevel = reactFeatureFlags.deletedTreeCleanUpLevel
-local enableNewTreeCleanupPath = reactFeatureFlags.enableNewTreeCleanupPath
-local sharedModule = require(parent.Shared)
-local describeError = require(parent.Shared).describeError
-local reactSharedInternals = sharedModule.ReactSharedInternals
-local invariant = sharedModule.invariant
-local unknownModule_1 = require(script.Parent["SchedulerWithReactIntegration.new"])
-local scheduleCallback = unknownModule_1.scheduleCallback
-local cancelCallback = unknownModule_1.cancelCallback
-local getCurrentPriorityLevel = unknownModule_1.getCurrentPriorityLevel
-local runWithPriority = unknownModule_1.runWithPriority
-local shouldYield = unknownModule_1.shouldYield
-local requestPaint = unknownModule_1.requestPaint
-local now = unknownModule_1.now
-local noPriority = unknownModule_1.NoPriority
-local immediatePriority = unknownModule_1.ImmediatePriority
-local userBlockingPriority = unknownModule_1.UserBlockingPriority
-local normalPriority = unknownModule_1.NormalPriority
-local flushSyncCallbackQueue = unknownModule_1.flushSyncCallbackQueue
-local scheduleSyncCallback = unknownModule_1.scheduleSyncCallback
-local debugTracingModule = require(script.Parent.DebugTracing)
-local schedulingProfilerModule = require(script.Parent.SchedulingProfiler)
-local tracing = require(parent.Scheduler).tracing
-local interactionsRef = tracing.__interactionsRef
-local subscriberRef = tracing.__subscriberRef
-local reactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
-local unknownModule_2 = require(script.Parent["ReactFiber.new"])
-local reactTypeOfModeModule = require(script.Parent.ReactTypeOfMode)
-local reactWorkTagsModule = require(script.Parent.ReactWorkTags)
-local legacyRoot = require(script.Parent.ReactRootTags).LegacyRoot
-local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
-local syncLane = reactFiberLaneModule.SyncLane
-local syncBatchedLane = reactFiberLaneModule.SyncBatchedLane
-local noTimestamp = reactFiberLaneModule.NoTimestamp
-local findUpdateLane = reactFiberLaneModule.findUpdateLane
-local findTransitionLane = reactFiberLaneModule.findTransitionLane
-local findRetryLane = reactFiberLaneModule.findRetryLane
-local includesSomeLane = reactFiberLaneModule.includesSomeLane
-local isSubsetOfLanes = reactFiberLaneModule.isSubsetOfLanes
-local mergeLanes = reactFiberLaneModule.mergeLanes
-local removeLanes = reactFiberLaneModule.removeLanes
-local pickArbitraryLane = reactFiberLaneModule.pickArbitraryLane
-local hasDiscreteLanes = reactFiberLaneModule.hasDiscreteLanes
-local includesNonIdleWork = reactFiberLaneModule.includesNonIdleWork
-local includesOnlyRetries = reactFiberLaneModule.includesOnlyRetries
-local includesOnlyTransitions = reactFiberLaneModule.includesOnlyTransitions
-local getNextLanes = reactFiberLaneModule.getNextLanes
-local returnNextLanesPriority = reactFiberLaneModule.returnNextLanesPriority
-local setCurrentUpdateLanePriority = reactFiberLaneModule.setCurrentUpdateLanePriority
-local getCurrentUpdateLanePriority = reactFiberLaneModule.getCurrentUpdateLanePriority
-local markStarvedLanesAsExpired = reactFiberLaneModule.markStarvedLanesAsExpired
-local getLanesToRetrySynchronouslyOnError = reactFiberLaneModule.getLanesToRetrySynchronouslyOnError
-local markRootUpdated = reactFiberLaneModule.markRootUpdated
-local markRootPinged = reactFiberLaneModule.markRootPinged
-local markRootExpired = reactFiberLaneModule.markRootExpired
-local markDiscreteUpdatesExpired = reactFiberLaneModule.markDiscreteUpdatesExpired
-local markRootFinished = reactFiberLaneModule.markRootFinished
-local schedulerPriorityToLanePriority = reactFiberLaneModule.schedulerPriorityToLanePriority
-local lanePriorityToSchedulerPriority = reactFiberLaneModule.lanePriorityToSchedulerPriority
-local reactFiberTransitionModule = require(script.Parent.ReactFiberTransition)
-local unknownModule_3 = require(script.Parent["ReactFiberUnwindWork.new"])
-local unwindWork = unknownModule_3.unwindWork
-local unwindInterruptedWork = unknownModule_3.unwindInterruptedWork
-local unknownModule_4 = require(script.Parent["ReactFiberThrow.new"])
-local throwException = unknownModule_4.throwException
-local createRootErrorUpdate = unknownModule_4.createRootErrorUpdate
-local createClassErrorUpdate = unknownModule_4.createClassErrorUpdate
-local unknownModule_5 = require(script.Parent["ReactFiberCommitWork.new"])
-local commitBeforeMutationLifeCycles = unknownModule_5.commitBeforeMutationLifeCycles
-local commitPlacement = unknownModule_5.commitPlacement
-local commitWork = unknownModule_5.commitWork
-local commitDeletion = unknownModule_5.commitDeletion
-local commitPassiveUnmount = unknownModule_5.commitPassiveUnmount
-local commitPassiveUnmountInsideDeletedTree = unknownModule_5.commitPassiveUnmountInsideDeletedTree
-local commitPassiveMount = unknownModule_5.commitPassiveMount
-local commitDetachRef = unknownModule_5.commitDetachRef
-local invokeLayoutEffectMountInDEV = unknownModule_5.invokeLayoutEffectMountInDEV
-local invokePassiveEffectMountInDEV = unknownModule_5.invokePassiveEffectMountInDEV
-local invokeLayoutEffectUnmountInDEV = unknownModule_5.invokeLayoutEffectUnmountInDEV
-local invokePassiveEffectUnmountInDEV = unknownModule_5.invokePassiveEffectUnmountInDEV
-local recursivelyCommitLayoutEffects = unknownModule_5.recursivelyCommitLayoutEffects
-local promiseModule = require(parent.Promise)
-local enqueueUpdate = require(script.Parent["ReactUpdateQueue.new"]).enqueueUpdate
-local resetContextDependencies = require(script.Parent["ReactFiberNewContext.new"]).resetContextDependencies
-local robloxReactProfilingModule = require(script.Parent.RobloxReactProfiling)
-local var1 = nil
-local t_1 = {
+local ReactFiberStackNewModule = require(script.Parent["ReactFiberStack.new"])
+local ReactFeatureFlags = require(Parent.Shared).ReactFeatureFlags
+local EnableDebugTracing = ReactFeatureFlags.enableDebugTracing
+local EnableSchedulingProfiler = ReactFeatureFlags.enableSchedulingProfiler
+local SkipUnmountedBoundaries = ReactFeatureFlags.skipUnmountedBoundaries
+local EnableDoubleInvokingEffects = ReactFeatureFlags.enableDoubleInvokingEffects
+local DeletedTreeCleanUpLevel = ReactFeatureFlags.deletedTreeCleanUpLevel
+local EnableNewTreeCleanupPath = ReactFeatureFlags.enableNewTreeCleanupPath
+local SharedModule = require(Parent.Shared)
+local DescribeError = require(Parent.Shared).describeError
+local ReactSharedInternals = SharedModule.ReactSharedInternals
+local InvariantFunction = SharedModule.invariant
+local SchedulerWithReactIntegrationNewModule = require(script.Parent["SchedulerWithReactIntegration.new"])
+local ScheduleCallbackFunction = SchedulerWithReactIntegrationNewModule.scheduleCallback
+local CancelCallbackFunction = SchedulerWithReactIntegrationNewModule.cancelCallback
+local GetCurrentPriorityLevelFunction = SchedulerWithReactIntegrationNewModule.getCurrentPriorityLevel
+local RunWithPriorityFunction = SchedulerWithReactIntegrationNewModule.runWithPriority
+local ShouldYield = SchedulerWithReactIntegrationNewModule.shouldYield
+local RequestPaintFunction = SchedulerWithReactIntegrationNewModule.requestPaint
+local NowFunction = SchedulerWithReactIntegrationNewModule.now
+local NoPriority = SchedulerWithReactIntegrationNewModule.NoPriority
+local ImmediatePriority = SchedulerWithReactIntegrationNewModule.ImmediatePriority
+local UserBlockingPriority = SchedulerWithReactIntegrationNewModule.UserBlockingPriority
+local NormalPriority = SchedulerWithReactIntegrationNewModule.NormalPriority
+local FlushSyncCallbackQueueFunction = SchedulerWithReactIntegrationNewModule.flushSyncCallbackQueue
+local ScheduleSyncCallbackFunction = SchedulerWithReactIntegrationNewModule.scheduleSyncCallback
+local DebugTracingModule = require(script.Parent.DebugTracing)
+local SchedulingProfilerModule = require(script.Parent.SchedulingProfiler)
+local Tracing = require(Parent.Scheduler).tracing
+local InteractionsRef = Tracing.__interactionsRef
+local SubscriberRef = Tracing.__subscriberRef
+local ReactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
+local ReactFiberNewModule = require(script.Parent["ReactFiber.new"])
+local ReactTypeOfModeModule = require(script.Parent.ReactTypeOfMode)
+local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
+local LegacyRoot = require(script.Parent.ReactRootTags).LegacyRoot
+local ReactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
+local SyncLane = ReactFiberLaneModule.SyncLane
+local SyncBatchedLane = ReactFiberLaneModule.SyncBatchedLane
+local NoTimestamp = ReactFiberLaneModule.NoTimestamp
+local FindUpdateLaneFunction = ReactFiberLaneModule.findUpdateLane
+local FindTransitionLaneFunction = ReactFiberLaneModule.findTransitionLane
+local FindRetryLaneFunction = ReactFiberLaneModule.findRetryLane
+local IncludesSomeLaneFunction = ReactFiberLaneModule.includesSomeLane
+local IsSubsetOfLanesFunction = ReactFiberLaneModule.isSubsetOfLanes
+local MergeLanesFunction = ReactFiberLaneModule.mergeLanes
+local RemoveLanesFunction = ReactFiberLaneModule.removeLanes
+local PickArbitraryLaneFunction = ReactFiberLaneModule.pickArbitraryLane
+local HasDiscreteLanesFunction = ReactFiberLaneModule.hasDiscreteLanes
+local IncludesNonIdleWorkFunction = ReactFiberLaneModule.includesNonIdleWork
+local IncludesOnlyRetriesFunction = ReactFiberLaneModule.includesOnlyRetries
+local IncludesOnlyTransitionsFunction = ReactFiberLaneModule.includesOnlyTransitions
+local GetNextLanesFunction = ReactFiberLaneModule.getNextLanes
+local ReturnNextLanesPriorityFunction = ReactFiberLaneModule.returnNextLanesPriority
+local SetCurrentUpdateLanePriorityFunction = ReactFiberLaneModule.setCurrentUpdateLanePriority
+local GetCurrentUpdateLanePriorityFunction = ReactFiberLaneModule.getCurrentUpdateLanePriority
+local MarkStarvedLanesAsExpiredFunction = ReactFiberLaneModule.markStarvedLanesAsExpired
+local GetLanesToRetrySynchronouslyOnErrorFunction = ReactFiberLaneModule.getLanesToRetrySynchronouslyOnError
+local MarkRootUpdatedFunction = ReactFiberLaneModule.markRootUpdated
+local MarkRootPingedFunction = ReactFiberLaneModule.markRootPinged
+local MarkRootExpiredFunction = ReactFiberLaneModule.markRootExpired
+local MarkDiscreteUpdatesExpiredFunction = ReactFiberLaneModule.markDiscreteUpdatesExpired
+local MarkRootFinishedFunction = ReactFiberLaneModule.markRootFinished
+local SchedulerPriorityToLanePriorityFunction = ReactFiberLaneModule.schedulerPriorityToLanePriority
+local LanePriorityToSchedulerPriorityFunction = ReactFiberLaneModule.lanePriorityToSchedulerPriority
+local ReactFiberTransitionModule = require(script.Parent.ReactFiberTransition)
+local ReactFiberUnwindWorkNewModule = require(script.Parent["ReactFiberUnwindWork.new"])
+local UnwindWorkFunction = ReactFiberUnwindWorkNewModule.unwindWork
+local UnwindInterruptedWorkFunction = ReactFiberUnwindWorkNewModule.unwindInterruptedWork
+local ReactFiberThrowNewModule = require(script.Parent["ReactFiberThrow.new"])
+local ThrowExceptionFunction = ReactFiberThrowNewModule.throwException
+local CreateRootErrorUpdateFunction = ReactFiberThrowNewModule.createRootErrorUpdate
+local CreateClassErrorUpdateFunction = ReactFiberThrowNewModule.createClassErrorUpdate
+local ReactFiberCommitWorkNewModule = require(script.Parent["ReactFiberCommitWork.new"])
+local CommitBeforeMutationLifeCyclesFunction = ReactFiberCommitWorkNewModule.commitBeforeMutationLifeCycles
+local CommitPlacementFunction = ReactFiberCommitWorkNewModule.commitPlacement
+local CommitWorkFunction = ReactFiberCommitWorkNewModule.commitWork
+local CommitDeletion = ReactFiberCommitWorkNewModule.commitDeletion
+local CommitPassiveUnmountFunction = ReactFiberCommitWorkNewModule.commitPassiveUnmount
+local CommitPassiveUnmountInsideDeletedTreeFunction = ReactFiberCommitWorkNewModule.commitPassiveUnmountInsideDeletedTree
+local CommitPassiveMountFunction = ReactFiberCommitWorkNewModule.commitPassiveMount
+local CommitDetachRefFunction = ReactFiberCommitWorkNewModule.commitDetachRef
+local InvokeLayoutEffectMountInDEV = ReactFiberCommitWorkNewModule.invokeLayoutEffectMountInDEV
+local InvokePassiveEffectMountInDEV = ReactFiberCommitWorkNewModule.invokePassiveEffectMountInDEV
+local InvokeLayoutEffectUnmountInDEV = ReactFiberCommitWorkNewModule.invokeLayoutEffectUnmountInDEV
+local InvokePassiveEffectUnmountInDEV = ReactFiberCommitWorkNewModule.invokePassiveEffectUnmountInDEV
+local RecursivelyCommitLayoutEffectsFunction = ReactFiberCommitWorkNewModule.recursivelyCommitLayoutEffects
+local PromiseModule = require(Parent.Promise)
+local EnqueueUpdateFunction = require(script.Parent["ReactUpdateQueue.new"]).enqueueUpdate
+local ResetContextDependenciesFunction = require(script.Parent["ReactFiberNewContext.new"]).resetContextDependencies
+local RobloxReactProfilingModule = require(script.Parent.RobloxReactProfiling)
+local Callback = nil
+local config = {
 	resetHooksAfterThrowRef = nil,
 	ContextOnlyDispatcherRef = nil,
 	getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = nil,
@@ -110,2271 +110,2483 @@ local t_1 = {
 	completeWorkRef = nil
 }
 
-local var2 = function(p1, p2, p3)
-	-- upvalues: t_1 (ref)
-	if not t_1.originalBeginWorkRef then
-		t_1.originalBeginWorkRef = require(script.Parent["ReactFiberBeginWork.new"]).beginWork
+local function BeginWork(p1, p2, p3) --[[ Line: 246 ]]
+	-- upvalues: config (copy)
+	if not config.originalBeginWorkRef then
+		config.originalBeginWorkRef = require(script.Parent["ReactFiberBeginWork.new"]).beginWork
 	end
-	return t_1.originalBeginWorkRef(p1, p2, p3)
+	return config.originalBeginWorkRef(p1, p2, p3)
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: t_1 (ref)
-	if not t_1.completeWorkRef then
-		t_1.completeWorkRef = require(script.Parent["ReactFiberCompleteWork.new"]).completeWork
+local function _(p1, p2, p3) --[[ Line: 258 ]]
+	-- upvalues: config (copy)
+	if not config.completeWorkRef then
+		config.completeWorkRef = require(script.Parent["ReactFiberCompleteWork.new"]).completeWork
 	end
-	return t_1.completeWorkRef(p1, p2, p3)
+	return config.completeWorkRef(p1, p2, p3)
 end
 
-local var3 = nil
+local ReactFiberHooksNewModule = nil
 
-local function _()
-	-- upvalues: var3 (write), t_1 (ref)
-	var3 = require(script.Parent["ReactFiberHooks.new"])
-	t_1.resetHooksAfterThrowRef = var3.resetHooksAfterThrow
-	t_1.ContextOnlyDispatcherRef = var3.ContextOnlyDispatcher
-	t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+local _ = function() --[[ Line: 272 | Named "initReactFiberHooks" ]]
+	-- upvalues: ReactFiberHooksNewModule (ref), config (copy)
+	ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+	config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
+	config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
+	config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 end
 
-local _ = function()
-	-- upvalues: t_1 (ref), var3 (write)
-	if not t_1.resetHooksAfterThrowRef then
-		var3 = require(script.Parent["ReactFiberHooks.new"])
-		t_1.resetHooksAfterThrowRef = var3.resetHooksAfterThrow
-		t_1.ContextOnlyDispatcherRef = var3.ContextOnlyDispatcher
-		t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+local _ = function() --[[ Line: 281 ]]
+	-- upvalues: config (copy), ReactFiberHooksNewModule (ref)
+	if not config.resetHooksAfterThrowRef then
+		ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+		config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
+		config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
+		config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 	end
-	return t_1.resetHooksAfterThrowRef()
+	return config.resetHooksAfterThrowRef()
 end
 
-local _ = function()
-	-- upvalues: t_1 (ref), var3 (write)
-	if not t_1.ContextOnlyDispatcherRef then
-		var3 = require(script.Parent["ReactFiberHooks.new"])
-		t_1.resetHooksAfterThrowRef = var3.resetHooksAfterThrow
-		t_1.ContextOnlyDispatcherRef = var3.ContextOnlyDispatcher
-		t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+local _ = function() --[[ Line: 289 ]]
+	-- upvalues: config (copy), ReactFiberHooksNewModule (ref)
+	if not config.ContextOnlyDispatcherRef then
+		ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+		config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
+		config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
+		config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 	end
-	return t_1.ContextOnlyDispatcherRef
+	return config.ContextOnlyDispatcherRef
 end
 
-local _ = function()
-	-- upvalues: t_1 (ref), var3 (write)
-	if not t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef then
-		var3 = require(script.Parent["ReactFiberHooks.new"])
-		t_1.resetHooksAfterThrowRef = var3.resetHooksAfterThrow
-		t_1.ContextOnlyDispatcherRef = var3.ContextOnlyDispatcher
-		t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+local _ = function() --[[ Line: 297 ]]
+	-- upvalues: config (copy), ReactFiberHooksNewModule (ref)
+	if not config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef then
+		ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+		config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
+		config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
+		config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 	end
-	return t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef()
+	return config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef()
 end
 
-local createCapturedValue = require(script.Parent.ReactCapturedValue).createCapturedValue
-local push = unknownModule.push
-local pop = unknownModule.pop
-local createCursor = unknownModule.createCursor
-local unknownModule_6 = require(script.Parent["ReactProfilerTimer.new"])
-local getComponentName = require(parent.Shared).getComponentName
-local unknownModule_7 = require(script.Parent["ReactStrictModeWarnings.new"])
-local reactCurrentFiberModule = require(script.Parent.ReactCurrentFiber)
-local current = reactCurrentFiberModule.current
-local resetCurrentFiber = reactCurrentFiberModule.resetCurrentFiber
-local setCurrentFiber = reactCurrentFiberModule.setCurrentFiber
-local reactErrorUtils = require(parent.Shared).ReactErrorUtils
-local invokeGuardedCallback = reactErrorUtils.invokeGuardedCallback
-local hasCaughtError = reactErrorUtils.hasCaughtError
-local clearCaughtError = reactErrorUtils.clearCaughtError
-local onCommitRoot = require(script.Parent["ReactFiberDevToolsHook.new"]).onCommitRoot
-local onCommitRoot_1 = require(script.Parent.ReactTestSelectors).onCommitRoot
-local enqueueTask = require(parent.Shared).enqueueTask
-local doesFiberContain = require(script.Parent.ReactFiberTreeReflection).doesFiberContain
-local reactCurrentDispatcher = reactSharedInternals.ReactCurrentDispatcher
-local reactCurrentOwner = reactSharedInternals.ReactCurrentOwner
-local isSomeRendererActing = reactSharedInternals.IsSomeRendererActing
-local var4 = nil
+local CreateCapturedValueFunction = require(script.Parent.ReactCapturedValue).createCapturedValue
+local PushFunction = ReactFiberStackNewModule.push
+local PopFunction = ReactFiberStackNewModule.pop
+local CreateCursorFunction = ReactFiberStackNewModule.createCursor
+local ReactProfilerTimerNewModule = require(script.Parent["ReactProfilerTimer.new"])
+local GetComponentNameFunction = require(Parent.Shared).getComponentName
+local ReactStrictModeWarningsNewModule = require(script.Parent["ReactStrictModeWarnings.new"])
+local ReactCurrentFiberModule = require(script.Parent.ReactCurrentFiber)
+local Current = ReactCurrentFiberModule.current
+local ResetCurrentFiberFunction = ReactCurrentFiberModule.resetCurrentFiber
+local SetCurrentFiberFunction = ReactCurrentFiberModule.setCurrentFiber
+local ReactErrorUtils = require(Parent.Shared).ReactErrorUtils
+local InvokeGuardedCallbackFunction = ReactErrorUtils.invokeGuardedCallback
+local HasCaughtErrorFunction = ReactErrorUtils.hasCaughtError
+local ClearCaughtErrorFunction = ReactErrorUtils.clearCaughtError
+local OnCommitRootFunction = require(script.Parent["ReactFiberDevToolsHook.new"]).onCommitRoot
+local OnCommitRootFunction1 = require(script.Parent.ReactTestSelectors).onCommitRoot
+local EnqueueTask = require(Parent.Shared).enqueueTask
+local DoesFiberContainFunction = require(script.Parent.ReactFiberTreeReflection).doesFiberContain
+local ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher
+local ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner
+local IsSomeRendererActing = ReactSharedInternals.IsSomeRendererActing
+local Callback1 = nil
 local _ = nil
-local t_2 = {}
-local _ = {
-	Incomplete = 0,
-	FatalErrored = 1,
-	Errored = 2,
-	Suspended = 3,
-	SuspendedWithDelay = 4,
-	Completed = 5
+local config1 = {
+	MutationWorkFlags = bit32.bor(ReactFiberFlagsModule.Placement, ReactFiberFlagsModule.Update, ReactFiberFlagsModule.Ref, ReactFiberFlagsModule.HostUpdate)
 }
-local var5 = 0
-local var6 = nil
-local var7 = nil
-local noLanes = reactFiberLaneModule.NoLanes
-t.subtreeRenderLanes = reactFiberLaneModule.NoLanes
-local var8 = createCursor(reactFiberLaneModule.NoLanes)
-local var9 = 0
-local var10 = nil
-local noLanes_1 = reactFiberLaneModule.NoLanes
-local reactFiberWorkInProgressModule = require(script.Parent.ReactFiberWorkInProgress)
-local workInProgressRootSkippedLanes = reactFiberWorkInProgressModule.workInProgressRootSkippedLanes
-local noLanes_2 = reactFiberLaneModule.NoLanes
-local noLanes_3 = reactFiberLaneModule.NoLanes
-local var11 = nil
-local var12 = 0
-local var13 = 1e999
-local var14 = nil
+ReactFiberWorkLoopModule.NoContext = 0
+ReactFiberWorkLoopModule.RetryAfterError = 64
+local Bits = 0
+local v1 = nil
+local WorkInProgress = nil
+local NoLanes = ReactFiberLaneModule.NoLanes
+ReactFiberWorkLoopModule.subtreeRenderLanes = ReactFiberLaneModule.NoLanes
+local Cursor = CreateCursorFunction(ReactFiberLaneModule.NoLanes)
+local v2 = 0
+local v3 = nil
+local NoLanes1 = ReactFiberLaneModule.NoLanes
+local ReactFiberWorkInProgressModule = require(script.Parent.ReactFiberWorkInProgress)
+local WorkInProgressRootSkippedLanesFunction = ReactFiberWorkInProgressModule.workInProgressRootSkippedLanes
+local NoLanes2 = ReactFiberLaneModule.NoLanes
+local NoLanes3 = ReactFiberLaneModule.NoLanes
+local v4 = nil
+local v5 = 0
+local v6 = 1e999
+local v7 = nil
 
-local _ = function()
-	-- upvalues: var13 (write), now (ref)
-	var13 = now() + 500
+local _ = function() --[[ Line: 443 | Named "resetRenderTimer" ]]
+	-- upvalues: v6 (ref), NowFunction (copy)
+	v6 = NowFunction() + 500
 end
 
-function t.getRenderTargetTime()
-	-- upvalues: var13 (write)
-	return var13
+function ReactFiberWorkLoopModule.getRenderTargetTime() --[[ Line: 447 ]]
+	-- upvalues: v6 (ref)
+	return v6
 end
 
-local var15 = false
-local var16 = nil
-local var17 = nil
-local var18 = false
-local var19 = nil
-local var20 = noPriority
-local noLanes_4 = reactFiberLaneModule.NoLanes
-local var21 = nil
-local var22 = 0
-local var23 = nil
-local var24 = 0
-local var25 = nil
-local var26 = noTimestamp
-local noLanes_5 = reactFiberLaneModule.NoLanes
-local noLanes_6 = reactFiberLaneModule.NoLanes
-local var27 = nil
-local var28 = false
+local Flag = false
+local v8 = nil
+local NewResult = nil
+local Flag1 = false
+local v9 = nil
+local NoPriority1 = NoPriority
+local NoLanes4 = ReactFiberLaneModule.NoLanes
+local NewResult1 = nil
+local Count = 0
+local v10 = nil
+local Count1 = 0
+local List = nil
+local NoTimestamp1 = NoTimestamp
+local NoLanes5 = ReactFiberLaneModule.NoLanes
+local NoLanes6 = ReactFiberLaneModule.NoLanes
+local PrepareForCommitResult = nil
+local Flag2 = false
 
-function t.getWorkInProgressRoot()
-	-- upvalues: var6 (write)
-	return var6
+function ReactFiberWorkLoopModule.getWorkInProgressRoot() --[[ Line: 487 ]]
+	-- upvalues: v1 (ref)
+	return v1
 end
 
-function t.requestEventTime()
-	-- upvalues: var5 (write), now (ref), var26 (write), noTimestamp (ref)
-	if bit32.band(var5, 48) ~= 0 then
-		return now()
-	elseif var26 == noTimestamp then
-		var26 = now()
+function ReactFiberWorkLoopModule.requestEventTime() --[[ Line: 491 ]]
+	-- upvalues: Bits (ref), NowFunction (copy), NoTimestamp1 (ref), NoTimestamp (copy)
+	if bit32.band(Bits, 48) ~= 0 then
+		return NowFunction()
+	elseif NoTimestamp1 == NoTimestamp then
+		NoTimestamp1 = NowFunction()
 		
-		return var26
-	end
-	return var26
-end
-
-function t.requestUpdateLane(p1)
-	-- upvalues: reactTypeOfModeModule (ref), syncLane (ref), getCurrentPriorityLevel (ref), immediatePriority (ref), syncBatchedLane (ref), reactFeatureFlags (ref), var5 (write), noLanes (write), reactFiberLaneModule (ref), pickArbitraryLane (ref), noLanes_5 (write), noLanes_1 (write), reactFiberTransitionModule (ref), noLanes_6 (write), var11 (write), findTransitionLane (ref), userBlockingPriority (ref), findUpdateLane (ref), schedulerPriorityToLanePriority (ref), getCurrentUpdateLanePriority (ref), dEV (ref), console (ref)
-	local mode = p1.mode
-	
-	if bit32.band(mode, reactTypeOfModeModule.BlockingMode) == reactTypeOfModeModule.NoMode then
-		return syncLane
-	elseif bit32.band(mode, reactTypeOfModeModule.ConcurrentMode) == reactTypeOfModeModule.NoMode then
-		return if getCurrentPriorityLevel() == immediatePriority then syncLane else syncBatchedLane
-	elseif not reactFeatureFlags.deferRenderPhaseUpdateToNextBatch and bit32.band(var5, 16) ~= 0 and noLanes ~= reactFiberLaneModule.NoLanes then
-		return pickArbitraryLane(noLanes)
-	elseif noLanes_5 == reactFiberLaneModule.NoLanes then
-		noLanes_5 = noLanes_1
-	end
-	if reactFiberTransitionModule.requestCurrentTransition() ~= reactFiberTransitionModule.NoTransition then
-		if noLanes_6 ~= reactFiberLaneModule.NoLanes then
-			noLanes_6 = if var11 ~= nil then reactFiberLaneModule.NoLanes else var11.pendingLanes
-		end
-		return findTransitionLane(noLanes_5, noLanes_6)
+		return NoTimestamp1
 	else
-		local var29 = getCurrentPriorityLevel()
-		local _ = nil
-		
-		if bit32.band(var5, 4) ~= 0 and var29 == userBlockingPriority then
-			return findUpdateLane(reactFiberLaneModule.InputDiscreteLanePriority, noLanes_5)
+		return NoTimestamp1
+	end
+end
+
+function ReactFiberWorkLoopModule.requestUpdateLane(p1) --[[ Line: 513 ]]
+	-- upvalues: ReactTypeOfModeModule (copy), SyncLane (copy), GetCurrentPriorityLevelFunction (copy), ImmediatePriority (copy), SyncBatchedLane (copy), ReactFeatureFlags (copy), Bits (ref), NoLanes (ref), ReactFiberLaneModule (copy), PickArbitraryLaneFunction (copy), NoLanes5 (ref), NoLanes1 (ref), ReactFiberTransitionModule (copy), NoLanes6 (ref), v4 (ref), FindTransitionLaneFunction (copy), UserBlockingPriority (copy), FindUpdateLaneFunction (copy), SchedulerPriorityToLanePriorityFunction (copy), GetCurrentUpdateLanePriorityFunction (copy), DEV (copy), Console (copy)
+	local Mode: number = p1.mode
+	
+	if bit32.band(Mode, ReactTypeOfModeModule.BlockingMode) == ReactTypeOfModeModule.NoMode then
+		return SyncLane
+	end
+	if bit32.band(Mode, ReactTypeOfModeModule.ConcurrentMode) == ReactTypeOfModeModule.NoMode then
+		return if GetCurrentPriorityLevelFunction() == ImmediatePriority then SyncLane else SyncBatchedLane
+	end
+	if not ReactFeatureFlags.deferRenderPhaseUpdateToNextBatch and bit32.band(Bits, 16) ~= 0 and NoLanes ~= ReactFiberLaneModule.NoLanes then
+		return PickArbitraryLaneFunction(NoLanes)
+	end
+	if NoLanes5 == ReactFiberLaneModule.NoLanes then
+		NoLanes5 = NoLanes1
+	end
+	if ReactFiberTransitionModule.requestCurrentTransition() ~= ReactFiberTransitionModule.NoTransition then
+		if NoLanes6 ~= ReactFiberLaneModule.NoLanes then
+			NoLanes6 = if v4 == nil then ReactFiberLaneModule.NoLanes else v4.pendingLanes
 		end
-		local var30 = schedulerPriorityToLanePriority(var29)
+		return FindTransitionLaneFunction(NoLanes5, NoLanes6)
+	else
+		local CurrentPriorityLevel = GetCurrentPriorityLevelFunction()
 		
-		if reactFeatureFlags.decoupleUpdatePriorityFromScheduler then
-			local var31 = getCurrentUpdateLanePriority()
+		if bit32.band(Bits, 4) ~= 0 and CurrentPriorityLevel == UserBlockingPriority then
+			return (FindUpdateLaneFunction(ReactFiberLaneModule.InputDiscreteLanePriority, NoLanes5))
+		end
+		local SchedulerPriorityToLanePriorityResult = SchedulerPriorityToLanePriorityFunction(CurrentPriorityLevel)
+		
+		if ReactFeatureFlags.decoupleUpdatePriorityFromScheduler then
+			local CurrentUpdateLanePriority = GetCurrentUpdateLanePriorityFunction()
 			
-			if var30 ~= var31 and var31 ~= reactFiberLaneModule.NoLanePriority and dEV then
-				console.error("Expected current scheduler lane priority %s to match current update lane priority %s", tostring(var30), tostring(var31))
+			if SchedulerPriorityToLanePriorityResult ~= CurrentUpdateLanePriority and CurrentUpdateLanePriority ~= ReactFiberLaneModule.NoLanePriority and DEV then
+				Console.error("Expected current scheduler lane priority %s to match current update lane priority %s", tostring(SchedulerPriorityToLanePriorityResult), (tostring(CurrentUpdateLanePriority)))
 			end
 		end
-		return findUpdateLane(var30, noLanes_5)
+		return (FindUpdateLaneFunction(SchedulerPriorityToLanePriorityResult, NoLanes5))
 	end
 end
 
-function requestRetryLane(p1)
-	-- upvalues: reactTypeOfModeModule (ref), syncLane (ref), getCurrentPriorityLevel (ref), immediatePriority (ref), syncBatchedLane (ref), noLanes_5 (write), reactFiberLaneModule (ref), noLanes_1 (write), findRetryLane (ref)
-	local mode = p1.mode
+function requestRetryLane(p1) --[[ Line: 617 ]]
+	-- upvalues: ReactTypeOfModeModule (copy), SyncLane (copy), GetCurrentPriorityLevelFunction (copy), ImmediatePriority (copy), SyncBatchedLane (copy), NoLanes5 (ref), ReactFiberLaneModule (copy), NoLanes1 (ref), FindRetryLaneFunction (copy)
+	local Mode: number = p1.mode
 	
-	if bit32.band(mode, reactTypeOfModeModule.BlockingMode) == reactTypeOfModeModule.NoMode then
-		return syncLane
-	elseif bit32.band(mode, reactTypeOfModeModule.ConcurrentMode) == reactTypeOfModeModule.NoMode then
-		return if getCurrentPriorityLevel() == immediatePriority then syncLane else syncBatchedLane
-	elseif noLanes_5 == reactFiberLaneModule.NoLanes then
-		noLanes_5 = noLanes_1
+	if bit32.band(Mode, ReactTypeOfModeModule.BlockingMode) == ReactTypeOfModeModule.NoMode then
+		return SyncLane
 	end
-	return findRetryLane(noLanes_5)
+	if bit32.band(Mode, ReactTypeOfModeModule.ConcurrentMode) == ReactTypeOfModeModule.NoMode then
+		return if GetCurrentPriorityLevelFunction() == ImmediatePriority then SyncLane else SyncBatchedLane
+	end
+	if NoLanes5 == ReactFiberLaneModule.NoLanes then
+		NoLanes5 = NoLanes1
+	end
+	return FindRetryLaneFunction(NoLanes5)
 end
 
-function t.scheduleUpdateOnFiber(p1, p2, p3)
-	-- upvalues: t_2 (ref), markRootUpdated (ref), var6 (write), reactFeatureFlags (ref), var5 (write), noLanes_2 (write), mergeLanes (ref), var9 (write), noLanes (write), getCurrentPriorityLevel (ref), syncLane (ref), var1 (write), var13 (write), now (ref), flushSyncCallbackQueue (ref), userBlockingPriority (ref), immediatePriority (ref), var21 (write), set (ref), var11 (write)
-	t_2.checkForNestedUpdates()
-	local var29 = t_2.markUpdateLaneFromFiberToRoot(p1, p2)
+function ReactFiberWorkLoopModule.scheduleUpdateOnFiber(p1, SyncLane1, p2) --[[ Line: 639 ]]
+	-- upvalues: config1 (copy), MarkRootUpdatedFunction (copy), v1 (ref), ReactFeatureFlags (copy), Bits (ref), NoLanes2 (ref), MergeLanesFunction (copy), v2 (ref), NoLanes (ref), GetCurrentPriorityLevelFunction (copy), SyncLane (copy), Callback (ref), v6 (ref), NowFunction (copy), FlushSyncCallbackQueueFunction (copy), UserBlockingPriority (copy), ImmediatePriority (copy), NewResult1 (ref), Set (copy), v4 (ref)
+	config1.checkForNestedUpdates()
+	local MarkUpdateLaneFromFiberToRootResult = config1.markUpdateLaneFromFiberToRoot(p1, SyncLane1)
 	
-	if var29 == nil then
+	if MarkUpdateLaneFromFiberToRootResult == nil then
 		return nil
 	end
-	markRootUpdated(var29, p2, p3)
+	MarkRootUpdatedFunction(MarkUpdateLaneFromFiberToRootResult, SyncLane1, p2)
 	
-	if var29 == var6 then
-		t_2.warnAboutRenderPhaseUpdatesInDEV(p1)
+	if MarkUpdateLaneFromFiberToRootResult == v1 then
+		config1.warnAboutRenderPhaseUpdatesInDEV(p1)
 		
-		if reactFeatureFlags.deferRenderPhaseUpdateToNextBatch or bit32.band(var5, 16) == 0 then
-			noLanes_2 = mergeLanes(noLanes_2, p2)
+		if ReactFeatureFlags.deferRenderPhaseUpdateToNextBatch or bit32.band(Bits, 16) == 0 then
+			NoLanes2 = MergeLanesFunction(NoLanes2, SyncLane1)
 		end
-		if var9 == 4 then
-			t_2.markRootSuspended(var29, noLanes)
+		if v2 == 4 then
+			config1.markRootSuspended(MarkUpdateLaneFromFiberToRootResult, NoLanes)
 		end
 	end
-	local var30 = getCurrentPriorityLevel()
+	local CurrentPriorityLevel = GetCurrentPriorityLevelFunction()
 	
-	if p2 ~= syncLane then
-		if bit32.band(var5, 4) ~= 0 and (var30 == userBlockingPriority or var30 == immediatePriority) then
-			if var21 == nil then
-				var21 = set.new({ var29 })
+	if SyncLane1 == SyncLane then
+		if bit32.band(Bits, 8) == 0 or bit32.band(Bits, 48) ~= 0 then
+			Callback(MarkUpdateLaneFromFiberToRootResult, p2)
+			config1.schedulePendingInteractions(MarkUpdateLaneFromFiberToRootResult, SyncLane1)
+			
+			if Bits == 0 then
+				v6 = NowFunction() + 500
+				FlushSyncCallbackQueueFunction()
+			end
+		else
+			config1.schedulePendingInteractions(MarkUpdateLaneFromFiberToRootResult, SyncLane1)
+			config1.performSyncWorkOnRoot(MarkUpdateLaneFromFiberToRootResult)
+		end
+	else
+		if bit32.band(Bits, 4) ~= 0 and (CurrentPriorityLevel == UserBlockingPriority or CurrentPriorityLevel == ImmediatePriority) then
+			if NewResult1 == nil then
+				NewResult1 = Set.new({ MarkUpdateLaneFromFiberToRootResult })
 			else
-				var21:add(var29)
+				NewResult1:add(MarkUpdateLaneFromFiberToRootResult)
 			end
 		end
-		var1(var29, p3)
-		t_2.schedulePendingInteractions(var29, p2)
-	elseif bit32.band(var5, 8) == 0 or bit32.band(var5, 48) ~= 0 then
-		var1(var29, p3)
-		t_2.schedulePendingInteractions(var29, p2)
-		
-		if var5 == 0 then
-			var13 = now() + 500
-			flushSyncCallbackQueue()
-		end
-	else
-		t_2.schedulePendingInteractions(var29, p2)
-		t_2.performSyncWorkOnRoot(var29)
+		Callback(MarkUpdateLaneFromFiberToRootResult, p2)
+		config1.schedulePendingInteractions(MarkUpdateLaneFromFiberToRootResult, SyncLane1)
 	end
-	var11 = var29
+	v4 = MarkUpdateLaneFromFiberToRootResult
 	
-	return var29
+	return MarkUpdateLaneFromFiberToRootResult
 end
 
-function t_2.markUpdateLaneFromFiberToRoot(p1, p2)
-	-- upvalues: mergeLanes (ref), dEV (ref), reactFiberFlagsModule (ref), t_2 (ref), reactWorkTagsModule (ref)
-	p1.lanes = mergeLanes(p1.lanes, p2)
-	local alternate = p1.alternate
+function config1.markUpdateLaneFromFiberToRoot(Return, SyncLane) --[[ Line: 749 ]]
+	-- upvalues: MergeLanesFunction (copy), DEV (copy), ReactFiberFlagsModule (copy), config1 (copy), ReactWorkTagsModule (copy)
+	Return.lanes = MergeLanesFunction(Return.lanes, SyncLane)
+	local Alternate = Return.alternate
 	
-	if alternate ~= nil then
-		alternate.lanes = mergeLanes(alternate.lanes, p2)
+	if Alternate ~= nil then
+		Alternate.lanes = MergeLanesFunction(Alternate.lanes, SyncLane)
 	end
-	if dEV and alternate == nil and bit32.band(p1.flags, bit32.bor(reactFiberFlagsModule.Placement, reactFiberFlagsModule.Hydrating)) ~= reactFiberFlagsModule.NoFlags then
-		t_2.warnAboutUpdateOnNotYetMountedFiberInDEV(p1)
+	if DEV and Alternate == nil and bit32.band(Return.flags, (bit32.bor(ReactFiberFlagsModule.Placement, ReactFiberFlagsModule.Hydrating))) ~= ReactFiberFlagsModule.NoFlags then
+		config1.warnAboutUpdateOnNotYetMountedFiberInDEV(Return)
 	end
-	local var29 = p1
-	local _return = p1.return_
-	while _return ~= nil do
-		_return.childLanes = mergeLanes(_return.childLanes, p2)
-		local alternate_1 = _return.alternate
+	local Return1 = Return
+	local Return2 = Return.return_
+	while Return2 ~= nil do
+		Return2.childLanes = MergeLanesFunction(Return2.childLanes, SyncLane)
+		local Alternate1 = Return2.alternate
 		
-		if alternate_1 ~= nil then
-			alternate_1.childLanes = mergeLanes(alternate_1.childLanes, p2)
-		elseif dEV and bit32.band(_return.flags, bit32.bor(reactFiberFlagsModule.Placement, reactFiberFlagsModule.Hydrating)) ~= reactFiberFlagsModule.NoFlags then
-			t_2.warnAboutUpdateOnNotYetMountedFiberInDEV(p1)
+		if Alternate1 == nil then
+			if DEV and bit32.band(Return2.flags, (bit32.bor(ReactFiberFlagsModule.Placement, ReactFiberFlagsModule.Hydrating))) ~= ReactFiberFlagsModule.NoFlags then
+				config1.warnAboutUpdateOnNotYetMountedFiberInDEV(Return)
+			end
+		else
+			Alternate1.childLanes = MergeLanesFunction(Alternate1.childLanes, SyncLane)
 		end
-		var29 = _return
-		_return = _return.return_
+		Return1 = Return2
+		Return2 = Return2.return_
 	end
-	return if var29.tag == reactWorkTagsModule.HostRoot then var29.stateNode else nil
+	return if Return1.tag == ReactWorkTagsModule.HostRoot then Return1.stateNode else nil
 end
 
-var1 = function(p3, p4)
-	-- upvalues: markStarvedLanesAsExpired (ref), var6 (write), noLanes (write), reactFiberLaneModule (ref), getNextLanes (ref), returnNextLanesPriority (ref), cancelCallback (ref), scheduleSyncCallback (ref), robloxReactProfilingModule (ref), t_2 (ref), scheduleCallback (ref), immediatePriority (ref), lanePriorityToSchedulerPriority (ref)
-	local callbackNode = p3.callbackNode
-	markStarvedLanesAsExpired(p3, p4)
-	local var30 = returnNextLanesPriority()
+Callback = function(MarkUpdateLaneFromFiberToRootResult, RequestEventTimeResult) --[[ Line: 804 ]]
+	-- upvalues: MarkStarvedLanesAsExpiredFunction (copy), v1 (ref), NoLanes (ref), ReactFiberLaneModule (copy), GetNextLanesFunction (copy), ReturnNextLanesPriorityFunction (copy), CancelCallbackFunction (copy), ScheduleSyncCallbackFunction (copy), RobloxReactProfilingModule (copy), config1 (copy), ScheduleCallbackFunction (copy), ImmediatePriority (copy), LanePriorityToSchedulerPriorityFunction (copy)
+	local CallbackNode = MarkUpdateLaneFromFiberToRootResult.callbackNode
+	MarkStarvedLanesAsExpiredFunction(MarkUpdateLaneFromFiberToRootResult, RequestEventTimeResult)
+	local NextLanes = GetNextLanesFunction(MarkUpdateLaneFromFiberToRootResult, if MarkUpdateLaneFromFiberToRootResult == v1 then NoLanes else ReactFiberLaneModule.NoLanes)
+	local NextLanesPriority = ReturnNextLanesPriorityFunction()
 	
-	if getNextLanes(p3, if p3 == var6 then noLanes else reactFiberLaneModule.NoLanes) == reactFiberLaneModule.NoLanes then
-		if callbackNode ~= nil then
-			cancelCallback(callbackNode)
-			p3.callbackNode = nil
-			p3.callbackPriority = reactFiberLaneModule.NoLanePriority
+	if NextLanes ~= ReactFiberLaneModule.NoLanes then
+		if CallbackNode ~= nil then
+			if MarkUpdateLaneFromFiberToRootResult.callbackPriority == NextLanesPriority then return end
+			CancelCallbackFunction(CallbackNode)
 		end
+		MarkUpdateLaneFromFiberToRootResult.callbackPriority = NextLanesPriority
+		MarkUpdateLaneFromFiberToRootResult.callbackNode = if NextLanesPriority == ReactFiberLaneModule.SyncLanePriority then ScheduleSyncCallbackFunction(function() --[[ Line: 849 ]]
+			-- upvalues: RobloxReactProfilingModule (upval), MarkUpdateLaneFromFiberToRootResult (copy), config1 (upval)
+			local PerformSyncWorkOnRootResult = config1.performSyncWorkOnRoot(MarkUpdateLaneFromFiberToRootResult)
+			RobloxReactProfilingModule.profileRootAfterYielding((RobloxReactProfilingModule.profileRootBeforeUnitOfWork(MarkUpdateLaneFromFiberToRootResult)))
+			
+			return PerformSyncWorkOnRootResult
+		end) elseif NextLanesPriority == ReactFiberLaneModule.SyncBatchedLanePriority then ScheduleCallbackFunction(ImmediatePriority, function() --[[ Line: 857 ]]
+			-- upvalues: RobloxReactProfilingModule (upval), MarkUpdateLaneFromFiberToRootResult (copy), config1 (upval)
+			local PerformSyncWorkOnRootResult = config1.performSyncWorkOnRoot(MarkUpdateLaneFromFiberToRootResult)
+			RobloxReactProfilingModule.profileRootAfterYielding((RobloxReactProfilingModule.profileRootBeforeUnitOfWork(MarkUpdateLaneFromFiberToRootResult)))
+			
+			return PerformSyncWorkOnRootResult
+		end) else ScheduleCallbackFunction(LanePriorityToSchedulerPriorityFunction(NextLanesPriority), function() --[[ Line: 867 ]]
+			-- upvalues: RobloxReactProfilingModule (upval), MarkUpdateLaneFromFiberToRootResult (copy), config1 (upval)
+			local PerformConcurrentWorkOnRootResult = config1.performConcurrentWorkOnRoot(MarkUpdateLaneFromFiberToRootResult)
+			RobloxReactProfilingModule.profileRootAfterYielding((RobloxReactProfilingModule.profileRootBeforeUnitOfWork(MarkUpdateLaneFromFiberToRootResult)))
+			
+			return PerformConcurrentWorkOnRootResult
+		end)
+		
 		return
-	elseif callbackNode ~= nil then
-		if p3.callbackPriority == var30 then return end
-		cancelCallback(callbackNode)
+	elseif CallbackNode ~= nil then
+		CancelCallbackFunction(CallbackNode)
+		MarkUpdateLaneFromFiberToRootResult.callbackNode = nil
+		MarkUpdateLaneFromFiberToRootResult.callbackPriority = ReactFiberLaneModule.NoLanePriority
 	end
-	local var31 = if var30 == reactFiberLaneModule.SyncLanePriority then scheduleSyncCallback(function()
-		-- upvalues: robloxReactProfilingModule (copy), p3 (ref), t_2 (copy)
-		local var32 = t_2.performSyncWorkOnRoot(p3)
-		robloxReactProfilingModule.profileRootAfterYielding(robloxReactProfilingModule.profileRootBeforeUnitOfWork(p3))
-		
-		return var32
-	end) elseif var30 == reactFiberLaneModule.SyncBatchedLanePriority then scheduleCallback(immediatePriority, function()
-		-- upvalues: robloxReactProfilingModule (copy), p3 (ref), t_2 (copy)
-		local var32 = t_2.performSyncWorkOnRoot(p3)
-		robloxReactProfilingModule.profileRootAfterYielding(robloxReactProfilingModule.profileRootBeforeUnitOfWork(p3))
-		
-		return var32
-	end) else scheduleCallback(lanePriorityToSchedulerPriority(var30), function()
-		-- upvalues: robloxReactProfilingModule (copy), p3 (ref), t_2 (copy)
-		local var32 = t_2.performConcurrentWorkOnRoot(p3)
-		robloxReactProfilingModule.profileRootAfterYielding(robloxReactProfilingModule.profileRootBeforeUnitOfWork(p3))
-		
-		return var32
-	end)
-	p3.callbackPriority = var30
-	p3.callbackNode = var31
 end
 
-function t_2.performConcurrentWorkOnRoot(p3)
-	-- upvalues: var26 (write), noTimestamp (ref), noLanes_5 (write), reactFiberLaneModule (ref), noLanes_6 (write), invariant (ref), var5 (write), t (ref), getNextLanes (ref), var6 (write), noLanes (write), t_2 (ref), includesSomeLane (ref), noLanes_1 (write), noLanes_2 (write), reactFiberHostConfigModule (ref), getLanesToRetrySynchronouslyOnError (ref), var10 (write), var1 (write), now (ref), robloxReactProfilingModule (ref)
-	var26 = noTimestamp
-	noLanes_5 = reactFiberLaneModule.NoLanes
-	noLanes_6 = reactFiberLaneModule.NoLanes
-	invariant(bit32.band(var5, 48) == 0, "Should not already be working.")
-	local callbackNode = p3.callbackNode
+function config1.performConcurrentWorkOnRoot(p1) --[[ Line: 883 ]]
+	-- upvalues: NoTimestamp1 (ref), NoTimestamp (copy), NoLanes5 (ref), ReactFiberLaneModule (copy), NoLanes6 (ref), InvariantFunction (copy), Bits (ref), ReactFiberWorkLoopModule (copy), GetNextLanesFunction (copy), v1 (ref), NoLanes (ref), config1 (copy), IncludesSomeLaneFunction (copy), NoLanes1 (ref), NoLanes2 (ref), ReactFiberHostConfigModule (copy), GetLanesToRetrySynchronouslyOnErrorFunction (copy), v3 (ref), Callback (ref), NowFunction (copy), RobloxReactProfilingModule (copy)
+	NoTimestamp1 = NoTimestamp
+	NoLanes5 = ReactFiberLaneModule.NoLanes
+	NoLanes6 = ReactFiberLaneModule.NoLanes
+	InvariantFunction(bit32.band(Bits, 48) == 0, "Should not already be working.")
+	local CallbackNode = p1.callbackNode
 	
-	if t.flushPassiveEffects() and p3.callbackNode ~= callbackNode then
+	if ReactFiberWorkLoopModule.flushPassiveEffects() and p1.callbackNode ~= CallbackNode then
 		return nil
 	end
-	local var30 = getNextLanes(p3, if p3 == var6 then noLanes else reactFiberLaneModule.NoLanes)
+	local NextLanes = GetNextLanesFunction(p1, if p1 == v1 then NoLanes else ReactFiberLaneModule.NoLanes)
 	
-	if var30 == reactFiberLaneModule.NoLanes then
+	if NextLanes == ReactFiberLaneModule.NoLanes then
 		return nil
 	end
-	local var31 = t_2.renderRootConcurrent(p3, var30)
+	local RenderRootConcurrentResult = config1.renderRootConcurrent(p1, NextLanes)
 	
-	if includesSomeLane(noLanes_1, noLanes_2) then
-		t_2.prepareFreshStack(p3, reactFiberLaneModule.NoLanes)
-	elseif var31 ~= 0 then
-		if var31 == 2 then
-			var5 = bit32.bor(var5, 64)
+	if IncludesSomeLaneFunction(NoLanes1, NoLanes2) then
+		config1.prepareFreshStack(p1, ReactFiberLaneModule.NoLanes)
+	elseif RenderRootConcurrentResult ~= 0 then
+		if RenderRootConcurrentResult == 2 then
+			Bits = bit32.bor(Bits, 64)
 			
-			if p3.hydrate then
-				p3.hydrate = false
-				reactFiberHostConfigModule.clearContainer(p3.containerInfo)
+			if p1.hydrate then
+				p1.hydrate = false
+				ReactFiberHostConfigModule.clearContainer(p1.containerInfo)
 			end
-			var30 = getLanesToRetrySynchronouslyOnError(p3)
+			NextLanes = GetLanesToRetrySynchronouslyOnErrorFunction(p1)
 			
-			if var30 ~= reactFiberLaneModule.NoLanes then
-				var31 = t_2.renderRootSync(p3, var30)
+			if NextLanes ~= ReactFiberLaneModule.NoLanes then
+				RenderRootConcurrentResult = config1.renderRootSync(p1, NextLanes)
 			end
 		end
-		if var31 == 1 then
-			local var32 = var10
-			t_2.prepareFreshStack(p3, reactFiberLaneModule.NoLanes)
-			t_2.markRootSuspended(p3, var30)
-			var1(p3, now())
-			error(var32)
+		if RenderRootConcurrentResult == 1 then
+			local v11 = v3
+			config1.prepareFreshStack(p1, ReactFiberLaneModule.NoLanes)
+			config1.markRootSuspended(p1, NextLanes)
+			Callback(p1, NowFunction())
+			error(v11)
 		end
-		p3.finishedWork = p3.current.alternate
-		p3.finishedLanes = var30
-		t_2.finishConcurrentRender(p3, var31, var30)
+		p1.finishedWork = p1.current.alternate
+		p1.finishedLanes = NextLanes
+		config1.finishConcurrentRender(p1, RenderRootConcurrentResult, NextLanes)
 	end
-	var1(p3, now())
+	Callback(p1, NowFunction())
 	
-	return if p3.callbackNode == callbackNode then function()
-		-- upvalues: robloxReactProfilingModule (copy), p3 (ref), t_2 (copy)
-		local var33 = t_2.performConcurrentWorkOnRoot(p3)
-		robloxReactProfilingModule.profileRootAfterYielding(robloxReactProfilingModule.profileRootBeforeUnitOfWork(p3))
+	return if p1.callbackNode == CallbackNode then function() --[[ Line: 978 ]]
+		-- upvalues: RobloxReactProfilingModule (upval), p1 (copy), config1 (upval)
+		local PerformConcurrentWorkOnRootResult = config1.performConcurrentWorkOnRoot(p1)
+		RobloxReactProfilingModule.profileRootAfterYielding((RobloxReactProfilingModule.profileRootBeforeUnitOfWork(p1)))
 		
-		return var33
+		return PerformConcurrentWorkOnRootResult
 	end else nil
 end
 
-local var30 = 0
-local var31 = false
+local Count2 = 0
+local Enabled1 = false
 
-function shouldForceFlushFallbacksInDEV()
-	-- upvalues: dEV (ref), var30 (write)
-	return dEV and var30 > 0
+function shouldForceFlushFallbacksInDEV(): boolean --[[ Line: 995 ]]
+	-- upvalues: DEV (copy), Count2 (ref)
+	return DEV and Count2 > 0
 end
 
-function t_2.finishConcurrentRender(p3, p4, p5)
-	-- upvalues: invariant (ref), t_2 (ref), includesOnlyRetries (ref), var12 (write), now (ref), getNextLanes (ref), reactFiberLaneModule (ref), isSubsetOfLanes (ref), t (ref), markRootPinged (ref), reactFiberHostConfigModule (ref), includesOnlyTransitions (ref)
-	if p4 == 0 or p4 == 1 then
-		invariant(false, "Root did not complete. This is a bug in React.")
+function config1.finishConcurrentRender(p1, RenderRootConcurrentResult, FinishedLanes) --[[ Line: 1000 ]]
+	-- upvalues: InvariantFunction (copy), config1 (copy), IncludesOnlyRetriesFunction (copy), v5 (ref), NowFunction (copy), GetNextLanesFunction (copy), ReactFiberLaneModule (copy), IsSubsetOfLanesFunction (copy), ReactFiberWorkLoopModule (copy), MarkRootPingedFunction (copy), ReactFiberHostConfigModule (copy), IncludesOnlyTransitionsFunction (copy)
+	if RenderRootConcurrentResult == 0 or RenderRootConcurrentResult == 1 then
+		InvariantFunction(false, "Root did not complete. This is a bug in React.")
 		
 		return
-	elseif p4 == 2 then
-		t_2.commitRoot(p3)
+	end
+	if RenderRootConcurrentResult == 2 then
+		config1.commitRoot(p1)
 		
 		return
-	elseif p4 == 3 then
-		t_2.markRootSuspended(p3, p5)
+	end
+	if RenderRootConcurrentResult == 3 then
+		config1.markRootSuspended(p1, FinishedLanes)
 		
-		if includesOnlyRetries(p5) and not shouldForceFlushFallbacksInDEV() then
-			local var32 = var12 + 500 - now()
+		if IncludesOnlyRetriesFunction(FinishedLanes) and not shouldForceFlushFallbacksInDEV() then
+			local v11 = v5 + 500 - NowFunction()
 			
-			if var32 > 10 then
-				if getNextLanes(p3, reactFiberLaneModule.NoLanes) ~= reactFiberLaneModule.NoLanes then return end
-				local suspendedLanes = p3.suspendedLanes
+			if v11 > 10 then
+				if GetNextLanesFunction(p1, ReactFiberLaneModule.NoLanes) ~= ReactFiberLaneModule.NoLanes then return end
+				local SuspendedLanes = p1.suspendedLanes
 				
-				if isSubsetOfLanes(suspendedLanes, p5) then
-					p3.timeoutHandle = reactFiberHostConfigModule.scheduleTimeout(function()
-						-- upvalues: t_2 (copy), p3 (ref)
-						return t_2.commitRoot(p3)
-					end, var32)
+				if IsSubsetOfLanesFunction(SuspendedLanes, FinishedLanes) then
+					p1.timeoutHandle = ReactFiberHostConfigModule.scheduleTimeout(function() --[[ Line: 1049 ]]
+						-- upvalues: config1 (upval), p1 (copy)
+						return config1.commitRoot(p1)
+					end, v11)
+					
+					return
+				else
+					MarkRootPingedFunction(p1, SuspendedLanes, (ReactFiberWorkLoopModule.requestEventTime()))
 					
 					return
 				end
-				markRootPinged(p3, suspendedLanes, t.requestEventTime())
-				
-				return
-			else
-				t_2.commitRoot(p3)
-				
-				return
 			end
 		end
-	elseif p4 == 4 then
-		t_2.markRootSuspended(p3, p5)
+		config1.commitRoot(p1)
 		
-		if includesOnlyTransitions(p5) then return end
+		return
+	elseif RenderRootConcurrentResult == 4 then
+		config1.markRootSuspended(p1, FinishedLanes)
+		
+		if IncludesOnlyTransitionsFunction(FinishedLanes) then return end
 		if not shouldForceFlushFallbacksInDEV() then
-			local var33 = now() - reactFiberLaneModule.getMostRecentEventTime(p3, p5)
-			local var34 = jnd(var33) - var33
+			local NowResultDelta = NowFunction() - ReactFiberLaneModule.getMostRecentEventTime(p1, FinishedLanes)
+			local JndResultDelta = jnd(NowResultDelta) - NowResultDelta
 			
-			if var34 > 10 then
-				p3.timeoutHandle = reactFiberHostConfigModule.scheduleTimeout(function()
-					-- upvalues: t_2 (copy), p3 (ref)
-					return t_2.commitRoot(p3)
-				end, var34)
+			if JndResultDelta > 10 then
+				p1.timeoutHandle = ReactFiberHostConfigModule.scheduleTimeout(function() --[[ Line: 1084 ]]
+					-- upvalues: config1 (upval), p1 (copy)
+					return config1.commitRoot(p1)
+				end, JndResultDelta)
 				
 				return
 			end
 		end
-		t_2.commitRoot(p3)
+		config1.commitRoot(p1)
 		
 		return
-	elseif p4 == 5 then
-		t_2.commitRoot(p3)
+	elseif RenderRootConcurrentResult == 5 then
+		config1.commitRoot(p1)
 		
 		return
+	else
+		InvariantFunction(false, "Unknown root exit status.")
 	end
-	invariant(false, "Unknown root exit status.")
 end
 
-function t_2.markRootSuspended(p3, p4)
-	-- upvalues: removeLanes (ref), noLanes_3 (write), noLanes_2 (write), reactFiberLaneModule (ref)
-	reactFiberLaneModule.markRootSuspended(p3, removeLanes(removeLanes(p4, noLanes_3), noLanes_2))
+function config1.markRootSuspended(MarkUpdateLaneFromFiberToRootResult, FinishedLanes) --[[ Line: 1100 ]]
+	-- upvalues: RemoveLanesFunction (copy), NoLanes3 (ref), NoLanes2 (ref), ReactFiberLaneModule (copy)
+	ReactFiberLaneModule.markRootSuspended(MarkUpdateLaneFromFiberToRootResult, (RemoveLanesFunction(RemoveLanesFunction(FinishedLanes, NoLanes3), NoLanes2)))
 end
 
-function t_2.performSyncWorkOnRoot(p3)
-	-- upvalues: invariant (ref), var5 (write), t (ref), var6 (write), includesSomeLane (ref), noLanes (write), t_2 (ref), noLanes_1 (write), noLanes_2 (write), getNextLanes (ref), reactFiberLaneModule (ref), legacyRoot (ref), reactFiberHostConfigModule (ref), getLanesToRetrySynchronouslyOnError (ref), var10 (write), var1 (write), now (ref)
-	local var32, var33
-	invariant(bit32.band(var5, 48) == 0, "Should not already be working.")
-	t.flushPassiveEffects()
-	local _ = nil
-	local _ = nil
+function config1.performSyncWorkOnRoot(MarkUpdateLaneFromFiberToRootResult) --[[ Line: 1112 ]]
+	-- upvalues: InvariantFunction (copy), Bits (ref), ReactFiberWorkLoopModule (copy), v1 (ref), IncludesSomeLaneFunction (copy), NoLanes (ref), config1 (copy), NoLanes1 (ref), NoLanes2 (ref), GetNextLanesFunction (copy), ReactFiberLaneModule (copy), LegacyRoot (copy), ReactFiberHostConfigModule (copy), GetLanesToRetrySynchronouslyOnErrorFunction (copy), v3 (ref), Callback (ref), NowFunction (copy)
+	InvariantFunction(bit32.band(Bits, 48) == 0, "Should not already be working.")
+	ReactFiberWorkLoopModule.flushPassiveEffects()
+	local NextLanes = nil
+	local RenderRootSyncResult = nil
 	
-	if p3 == var6 and includesSomeLane(p3.expiredLanes, noLanes) then
-		var32 = noLanes
-		var33 = t_2.renderRootSync(p3, var32)
+	if MarkUpdateLaneFromFiberToRootResult == v1 and IncludesSomeLaneFunction(MarkUpdateLaneFromFiberToRootResult.expiredLanes, NoLanes) then
+		NextLanes = NoLanes
+		RenderRootSyncResult = config1.renderRootSync(MarkUpdateLaneFromFiberToRootResult, NextLanes)
 		
-		if includesSomeLane(noLanes_1, noLanes_2) then
-			var32 = getNextLanes(p3, var32)
-			var33 = t_2.renderRootSync(p3, var32)
+		if IncludesSomeLaneFunction(NoLanes1, NoLanes2) then
+			NextLanes = GetNextLanesFunction(MarkUpdateLaneFromFiberToRootResult, NextLanes)
+			RenderRootSyncResult = config1.renderRootSync(MarkUpdateLaneFromFiberToRootResult, NextLanes)
 		end
 	else
-		var32 = getNextLanes(p3, reactFiberLaneModule.NoLanes)
-		var33 = t_2.renderRootSync(p3, var32)
+		NextLanes = GetNextLanesFunction(MarkUpdateLaneFromFiberToRootResult, ReactFiberLaneModule.NoLanes)
+		RenderRootSyncResult = config1.renderRootSync(MarkUpdateLaneFromFiberToRootResult, NextLanes)
 	end
-	if p3.tag ~= legacyRoot and var33 == 2 then
-		var5 = bit32.bor(var5, 64)
+	if MarkUpdateLaneFromFiberToRootResult.tag ~= LegacyRoot and RenderRootSyncResult == 2 then
+		Bits = bit32.bor(Bits, 64)
 		
-		if p3.hydrate then
-			p3.hydrate = false
-			reactFiberHostConfigModule.clearContainer(p3.containerInfo)
+		if MarkUpdateLaneFromFiberToRootResult.hydrate then
+			MarkUpdateLaneFromFiberToRootResult.hydrate = false
+			ReactFiberHostConfigModule.clearContainer(MarkUpdateLaneFromFiberToRootResult.containerInfo)
 		end
-		var32 = getLanesToRetrySynchronouslyOnError(p3)
+		NextLanes = GetLanesToRetrySynchronouslyOnErrorFunction(MarkUpdateLaneFromFiberToRootResult)
 		
-		if var32 ~= reactFiberLaneModule.NoLanes then
-			var33 = t_2.renderRootSync(p3, var32)
+		if NextLanes ~= ReactFiberLaneModule.NoLanes then
+			RenderRootSyncResult = config1.renderRootSync(MarkUpdateLaneFromFiberToRootResult, NextLanes)
 		end
 	end
-	if var33 == 1 then
-		local var34 = var10
-		t_2.prepareFreshStack(p3, reactFiberLaneModule.NoLanes)
-		t_2.markRootSuspended(p3, var32)
-		var1(p3, now())
-		error(var34)
+	if RenderRootSyncResult == 1 then
+		local v11 = v3
+		config1.prepareFreshStack(MarkUpdateLaneFromFiberToRootResult, ReactFiberLaneModule.NoLanes)
+		config1.markRootSuspended(MarkUpdateLaneFromFiberToRootResult, NextLanes)
+		Callback(MarkUpdateLaneFromFiberToRootResult, NowFunction())
+		error(v11)
 	end
-	p3.finishedWork = p3.current.alternate
-	p3.finishedLanes = var32
-	t_2.commitRoot(p3)
-	var1(p3, now())
+	MarkUpdateLaneFromFiberToRootResult.finishedWork = MarkUpdateLaneFromFiberToRootResult.current.alternate
+	MarkUpdateLaneFromFiberToRootResult.finishedLanes = NextLanes
+	config1.commitRoot(MarkUpdateLaneFromFiberToRootResult)
+	Callback(MarkUpdateLaneFromFiberToRootResult, NowFunction())
 	
 	return nil
 end
 
-function t.flushRoot(p3, p4)
-	-- upvalues: markRootExpired (ref), var1 (write), now (ref), var5 (write), var13 (write), flushSyncCallbackQueue (ref)
-	markRootExpired(p3, p4)
-	var1(p3, now())
+function ReactFiberWorkLoopModule.flushRoot(p1, p2) --[[ Line: 1194 ]]
+	-- upvalues: MarkRootExpiredFunction (copy), Callback (ref), NowFunction (copy), Bits (ref), v6 (ref), FlushSyncCallbackQueueFunction (copy)
+	MarkRootExpiredFunction(p1, p2)
+	Callback(p1, NowFunction())
 	
-	if bit32.band(var5, 48) == 0 then
-		var13 = now() + 500
-		flushSyncCallbackQueue()
+	if bit32.band(Bits, 48) == 0 then
+		v6 = NowFunction() + 500
+		FlushSyncCallbackQueueFunction()
 	end
 end
 
-function t.getExecutionContext()
-	-- upvalues: var5 (write)
-	return var5
+function ReactFiberWorkLoopModule.getExecutionContext() --[[ Line: 1206 ]]
+	-- upvalues: Bits (ref)
+	return Bits
 end
 
-function t.flushDiscreteUpdates()
-	-- upvalues: var5 (write), dEV (ref), console (ref), t_2 (ref), t (ref)
-	if bit32.band(var5, 49) == 0 then
-		t_2.flushPendingDiscreteUpdates()
-		t.flushPassiveEffects()
+function ReactFiberWorkLoopModule.flushDiscreteUpdates() --[[ Line: 1210 ]]
+	-- upvalues: Bits (ref), DEV (copy), Console (copy), config1 (copy), ReactFiberWorkLoopModule (copy)
+	if bit32.band(Bits, 49) == 0 then
+		config1.flushPendingDiscreteUpdates()
+		ReactFiberWorkLoopModule.flushPassiveEffects()
 		
 		return
-	elseif dEV and bit32.band(var5, 16) ~= 0 then
-		console.error("unstable_flushDiscreteUpdates: Cannot flush updates when React is already rendering.")
+	end
+	if DEV and bit32.band(Bits, 16) ~= 0 then
+		Console.error("unstable_flushDiscreteUpdates: Cannot flush updates when React is already rendering.")
 	end
 end
 
-function t.deferredUpdates(p3)
-	-- upvalues: reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), yOLO (ref), setCurrentUpdateLanePriority (ref), reactFiberLaneModule (ref), runWithPriority (ref), describeError (ref), normalPriority (ref)
-	if not reactFeatureFlags.decoupleUpdatePriorityFromScheduler then
-		return runWithPriority(normalPriority, p3)
+function ReactFiberWorkLoopModule.deferredUpdates(p1) --[[ Line: 1240 ]]
+	-- upvalues: ReactFeatureFlags (copy), GetCurrentUpdateLanePriorityFunction (copy), YOLO (copy), SetCurrentUpdateLanePriorityFunction (copy), ReactFiberLaneModule (copy), RunWithPriorityFunction (copy), DescribeError (copy), NormalPriority (copy)
+	if not ReactFeatureFlags.decoupleUpdatePriorityFromScheduler then
+		return RunWithPriorityFunction(NormalPriority, p1)
 	end
-	local var32, var33
-	local var34 = getCurrentUpdateLanePriority()
-	local _ = nil
-	local _ = nil
+	local CurrentUpdateLanePriority = GetCurrentUpdateLanePriorityFunction()
+	local Success = nil
+	local Result = nil
 	
-	if yOLO then
-		var32 = true
-		setCurrentUpdateLanePriority(reactFiberLaneModule.DefaultLanePriority)
-		var33 = runWithPriority(normalPriority, p3)
+	if YOLO then
+		Success = true
+		SetCurrentUpdateLanePriorityFunction(ReactFiberLaneModule.DefaultLanePriority)
+		Result = RunWithPriorityFunction(NormalPriority, p1)
 	else
-		setCurrentUpdateLanePriority(reactFiberLaneModule.DefaultLanePriority)
-		local ok, status = xpcall(runWithPriority, describeError, normalPriority, p3)
-		var32 = ok
-		var33 = status
+		SetCurrentUpdateLanePriorityFunction(ReactFiberLaneModule.DefaultLanePriority)
+		Success, Result = xpcall(RunWithPriorityFunction, DescribeError, NormalPriority, p1)
 	end
-	setCurrentUpdateLanePriority(var34)
+	SetCurrentUpdateLanePriorityFunction(CurrentUpdateLanePriority)
 	
-	if var32 then
-		return var33
+	if Success then
+		return Result
+	else
+		error(Result)
 	end
-	error(var33)
 end
 
-function t_2.flushPendingDiscreteUpdates()
-	-- upvalues: var21 (write), markDiscreteUpdatesExpired (ref), var1 (write), now (ref), flushSyncCallbackQueue (ref)
-	if var21 ~= nil then
-		local var32 = var21
-		var21 = nil
-		var32:forEach(function(p3)
-			-- upvalues: markDiscreteUpdatesExpired (copy), var1 (copy), now (copy)
-			markDiscreteUpdatesExpired(p3)
-			var1(p3, now())
+function config1.flushPendingDiscreteUpdates() --[[ Line: 1269 ]]
+	-- upvalues: NewResult1 (ref), MarkDiscreteUpdatesExpiredFunction (copy), Callback (ref), NowFunction (copy), FlushSyncCallbackQueueFunction (copy)
+	if NewResult1 ~= nil then
+		local NewResult = NewResult1
+		NewResult1 = nil
+		NewResult:forEach(function(p1) --[[ Line: 1275 ]]
+			-- upvalues: MarkDiscreteUpdatesExpiredFunction (upval), Callback (upval), NowFunction (upval)
+			MarkDiscreteUpdatesExpiredFunction(p1)
+			Callback(p1, NowFunction())
 		end)
 	end
-	flushSyncCallbackQueue()
+	FlushSyncCallbackQueueFunction()
 end
 
-function t.batchedUpdates(p3, p4)
-	-- upvalues: var5 (write), yOLO (ref), describeError (ref), var13 (write), now (ref), flushSyncCallbackQueue (ref)
-	local var32, var33
-	var5 = bit32.bor(var5, 1)
-	local _ = nil
-	local _ = nil
+function ReactFiberWorkLoopModule.batchedUpdates(Callback, p1) --[[ Line: 1284 ]]
+	-- upvalues: Bits (ref), YOLO (copy), DescribeError (copy), v6 (ref), NowFunction (copy), FlushSyncCallbackQueueFunction (copy)
+	local Bits1: number = Bits
+	Bits = bit32.bor(Bits, 1)
+	local Success = nil
+	local Result = nil
 	
-	if yOLO then
-		var32 = true
-		var33 = p3(p4)
+	if YOLO then
+		Success = true
+		Result = Callback(p1)
 	else
-		local ok, status = xpcall(p3, describeError, p4)
-		var32 = ok
-		var33 = status
+		Success, Result = xpcall(Callback, DescribeError, p1)
 	end
-	var5 = var5
+	Bits = Bits1
 	
-	if var5 == 0 then
-		var13 = now() + 500
-		flushSyncCallbackQueue()
+	if Bits == 0 then
+		v6 = NowFunction() + 500
+		FlushSyncCallbackQueueFunction()
 	end
-	if var32 then
-		return var33
-	end
-	error(var33)
-end
-
-function t.batchedEventUpdates(p3, p4)
-	-- upvalues: var5 (write), yOLO (ref), describeError (ref), var13 (write), now (ref), flushSyncCallbackQueue (ref)
-	local var32, var33
-	var5 = bit32.bor(var5, 2)
-	local _ = nil
-	local _ = nil
-	
-	if yOLO then
-		var32 = true
-		var33 = p3(p4)
+	if Success then
+		return Result
 	else
-		local ok, status = xpcall(p3, describeError, p4)
-		var32 = ok
-		var33 = status
+		error(Result)
 	end
-	var5 = var5
-	
-	if var5 == 0 then
-		var13 = now() + 500
-		flushSyncCallbackQueue()
-	end
-	if var32 then
-		return var33
-	end
-	error(var33)
 end
 
-function t.discreteUpdates(p3, p4, p5, p6, p7)
-	-- upvalues: var5 (write), reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), reactFiberLaneModule (ref), runWithPriority (ref), describeError (ref), userBlockingPriority (ref), var13 (write), now (ref), flushSyncCallbackQueue (ref)
-	var5 = bit32.bor(var5, 4)
+function ReactFiberWorkLoopModule.batchedEventUpdates(Callback, p1) --[[ Line: 1312 ]]
+	-- upvalues: Bits (ref), YOLO (copy), DescribeError (copy), v6 (ref), NowFunction (copy), FlushSyncCallbackQueueFunction (copy)
+	local Bits1: number = Bits
+	Bits = bit32.bor(Bits, 2)
+	local Success = nil
+	local Result = nil
 	
-	if reactFeatureFlags.decoupleUpdatePriorityFromScheduler then
-		local var32 = getCurrentUpdateLanePriority()
-		setCurrentUpdateLanePriority(reactFiberLaneModule.InputDiscreteLanePriority)
-		local ok, status = xpcall(runWithPriority, describeError, userBlockingPriority, function()
-			-- upvalues: p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref)
-			return p3(p4, p5, p6, p7)
+	if YOLO then
+		Success = true
+		Result = Callback(p1)
+	else
+		Success, Result = xpcall(Callback, DescribeError, p1)
+	end
+	Bits = Bits1
+	
+	if Bits == 0 then
+		v6 = NowFunction() + 500
+		FlushSyncCallbackQueueFunction()
+	end
+	if Success then
+		return Result
+	else
+		error(Result)
+	end
+end
+
+function ReactFiberWorkLoopModule.discreteUpdates(Callback, p1, p2, p3, p4) --[[ Line: 1340 ]]
+	-- upvalues: Bits (ref), ReactFeatureFlags (copy), GetCurrentUpdateLanePriorityFunction (copy), SetCurrentUpdateLanePriorityFunction (copy), ReactFiberLaneModule (copy), RunWithPriorityFunction (copy), DescribeError (copy), UserBlockingPriority (copy), v6 (ref), NowFunction (copy), FlushSyncCallbackQueueFunction (copy)
+	local Bits1: number = Bits
+	Bits = bit32.bor(Bits, 4)
+	
+	if ReactFeatureFlags.decoupleUpdatePriorityFromScheduler then
+		local CurrentUpdateLanePriority = GetCurrentUpdateLanePriorityFunction()
+		SetCurrentUpdateLanePriorityFunction(ReactFiberLaneModule.InputDiscreteLanePriority)
+		local Success, Result = xpcall(RunWithPriorityFunction, DescribeError, UserBlockingPriority, function() --[[ Line: 1352 ]]
+			-- upvalues: Callback (copy), p1 (copy), p2 (copy), p3 (copy), p4 (copy)
+			return Callback(p1, p2, p3, p4)
 		end)
-		setCurrentUpdateLanePriority(var32)
-		var5 = var5
+		SetCurrentUpdateLanePriorityFunction(CurrentUpdateLanePriority)
+		Bits = Bits1
 		
-		if var5 == 0 then
-			var13 = now() + 500
-			flushSyncCallbackQueue()
+		if Bits == 0 then
+			v6 = NowFunction() + 500
+			FlushSyncCallbackQueueFunction()
 		end
-		if ok then
-			return status
-		end
-		error(status)
-		
-		return
-	else
-		local ok, status = xpcall(runWithPriority, describeError, userBlockingPriority, function()
-			-- upvalues: p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref)
-			return p3(p4, p5, p6, p7)
-		end)
-		var5 = var5
-		
-		if var5 == 0 then
-			var13 = now() + 500
-			flushSyncCallbackQueue()
-		end
-		if ok then
-			return status
-		end
-		error(status)
-	end
-end
-
-function t.unbatchedUpdates(p3, p4)
-	-- upvalues: var5 (write), yOLO (ref), describeError (ref), var13 (write), now (ref), flushSyncCallbackQueue (ref)
-	local var32, var33
-	var5 = bit32.band(var5, 4294967294)
-	var5 = bit32.bor(var5, 8)
-	local _ = nil
-	local _ = nil
-	
-	if yOLO then
-		var32 = true
-		var33 = p3(p4)
-	else
-		local ok, status = xpcall(p3, describeError, p4)
-		var32 = ok
-		var33 = status
-	end
-	var5 = var5
-	
-	if var5 == 0 then
-		var13 = now() + 500
-		flushSyncCallbackQueue()
-	end
-	if var32 then
-		return var33
-	end
-	error(var33)
-end
-
-function t.flushSync(p3, p4)
-	-- upvalues: var5 (write), dEV (ref), console (ref), reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), reactFiberLaneModule (ref), yOLO (ref), runWithPriority (ref), describeError (ref), immediatePriority (ref), flushSyncCallbackQueue (ref)
-	if bit32.band(var5, 48) == 0 then
-		var5 = bit32.bor(var5, 1)
-		
-		if reactFeatureFlags.decoupleUpdatePriorityFromScheduler then
-			local var32, var33
-			local var34 = getCurrentUpdateLanePriority()
-			setCurrentUpdateLanePriority(reactFiberLaneModule.SyncLanePriority)
-			local _ = nil
-			local _ = nil
-			
-			if yOLO then
-				var32 = true
-				setCurrentUpdateLanePriority(reactFiberLaneModule.SyncLanePriority)
-				var33 = if p3 then runWithPriority(immediatePriority, function()
-					-- upvalues: p3 (ref), p4 (ref)
-					return p3(p4)
-				end) else nil
-			elseif p3 then
-				local ok, status = xpcall(runWithPriority, describeError, immediatePriority, function()
-					-- upvalues: p3 (ref), p4 (ref)
-					return p3(p4)
-				end)
-				var32 = ok
-				var33 = status
-			else
-				var32 = true
-				var33 = nil
-			end
-			setCurrentUpdateLanePriority(var34)
-			var5 = var5
-			flushSyncCallbackQueue()
-			
-			if not var32 then
-				error(var33)
-			end
-			return var33
+		if Success then
+			return Result
 		else
-			local var35, var36
-			local _ = nil
-			local _ = nil
-			
-			if yOLO then
-				var35 = true
-				var36 = if p3 then runWithPriority(immediatePriority, function()
-					-- upvalues: p3 (ref), p4 (ref)
-					return p3(p4)
-				end) else nil
-			elseif p3 then
-				local ok, status = xpcall(runWithPriority, describeError, immediatePriority, function()
-					-- upvalues: p3 (ref), p4 (ref)
-					return p3(p4)
-				end)
-				var35 = ok
-				var36 = status
-			else
-				var35 = true
-				var36 = nil
-			end
-			var5 = var5
-			flushSyncCallbackQueue()
-			
-			if not var35 then
-				error(var36)
-			end
-			return var36
-		end
-	elseif dEV then
-		console.error("flushSync was called from inside a lifecycle method. React cannot flush when React is already rendering. Consider moving this call to a scheduler task or micro task.")
-	end
-	return p3(p4)
-end
-
-function t.flushControlled(p3)
-	-- upvalues: var5 (write), reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), reactFiberLaneModule (ref), runWithPriority (ref), describeError (ref), immediatePriority (ref), var13 (write), now (ref), flushSyncCallbackQueue (ref)
-	var5 = bit32.bor(var5, 1)
-	
-	if reactFeatureFlags.decoupleUpdatePriorityFromScheduler then
-		local var32 = getCurrentUpdateLanePriority()
-		setCurrentUpdateLanePriority(reactFiberLaneModule.SyncLanePriority)
-		local ok, status = xpcall(runWithPriority, describeError, immediatePriority, p3)
-		setCurrentUpdateLanePriority(var32)
-		var5 = var5
-		
-		if var5 == 0 then
-			var13 = now() + 500
-			flushSyncCallbackQueue()
-		end
-		if ok then
-			return
-		else
-			error(status)
+			error(Result)
 			
 			return
 		end
 	else
-		local ok, status = xpcall(runWithPriority, describeError, immediatePriority, p3)
-		var5 = var5
+		local Success1, Result1 = xpcall(RunWithPriorityFunction, DescribeError, UserBlockingPriority, function() --[[ Line: 1376 ]]
+			-- upvalues: Callback (copy), p1 (copy), p2 (copy), p3 (copy), p4 (copy)
+			return Callback(p1, p2, p3, p4)
+		end)
+		Bits = Bits1
 		
-		if var5 == 0 then
-			var13 = now() + 500
-			flushSyncCallbackQueue()
+		if Bits == 0 then
+			v6 = NowFunction() + 500
+			FlushSyncCallbackQueueFunction()
 		end
-		if not ok then
-			error(status)
+		if Success1 then
+			return Result1
+		else
+			error(Result1)
 		end
 	end
 end
 
-function t.pushRenderLanes(p3, p4)
-	-- upvalues: push (ref), var8 (ref), t (ref), mergeLanes (ref), noLanes_1 (write)
-	push(var8, t.subtreeRenderLanes, p3)
-	t.subtreeRenderLanes = mergeLanes(t.subtreeRenderLanes, p4)
-	noLanes_1 = mergeLanes(noLanes_1, p4)
-end
-
-function t.popRenderLanes(p3)
-	-- upvalues: t (ref), var8 (ref), pop (ref)
-	t.subtreeRenderLanes = var8.current
-	pop(var8, p3)
-end
-
-function t_2.prepareFreshStack(p3, p4)
-	-- upvalues: reactFiberLaneModule (ref), reactFiberHostConfigModule (ref), var7 (write), unwindInterruptedWork (ref), var6 (write), unknownModule_2 (ref), noLanes (write), t (ref), noLanes_1 (write), var9 (write), var10 (write), workInProgressRootSkippedLanes (ref), noLanes_2 (write), noLanes_3 (write), reactFeatureFlags (ref), var25 (write), dEV (ref), unknownModule_7 (ref)
-	p3.finishedWork = nil
-	p3.finishedLanes = reactFiberLaneModule.NoLanes
-	local timeoutHandle = p3.timeoutHandle
+function ReactFiberWorkLoopModule.unbatchedUpdates(Callback, p1) --[[ Line: 1397 ]]
+	-- upvalues: Bits (ref), YOLO (copy), DescribeError (copy), v6 (ref), NowFunction (copy), FlushSyncCallbackQueueFunction (copy)
+	local Bits1: number = Bits
+	Bits = bit32.band(Bits, 4294967294)
+	Bits = bit32.bor(Bits, 8)
+	local Success = nil
+	local Result = nil
 	
-	if timeoutHandle ~= reactFiberHostConfigModule.noTimeout then
-		p3.timeoutHandle = reactFiberHostConfigModule.noTimeout
-		reactFiberHostConfigModule.cancelTimeout(timeoutHandle)
+	if YOLO then
+		Success = true
+		Result = Callback(p1)
+	else
+		Success, Result = xpcall(Callback, DescribeError, p1)
 	end
-	if var7 ~= nil then
-		local _return = var7.return_
-		while _return ~= nil do
-			unwindInterruptedWork(_return)
-			_return = _return.return_
-		end
-	end
-	var6 = p3
-	var7 = unknownModule_2.createWorkInProgress(p3.current, nil)
-	noLanes = p4
-	t.subtreeRenderLanes = p4
-	noLanes_1 = p4
-	var9 = 0
-	var10 = nil
-	workInProgressRootSkippedLanes(reactFiberLaneModule.NoLanes)
-	noLanes_2 = reactFiberLaneModule.NoLanes
-	noLanes_3 = reactFiberLaneModule.NoLanes
+	Bits = Bits1
 	
-	if reactFeatureFlags.enableSchedulerTracing then
-		var25 = nil
+	if Bits == 0 then
+		v6 = NowFunction() + 500
+		FlushSyncCallbackQueueFunction()
 	end
-	if dEV then
-		unknownModule_7.discardPendingWarnings()
+	if Success then
+		return Result
+	else
+		error(Result)
 	end
 end
 
-function t_2.handleError(p5, p6)
-	-- upvalues: var7 (write), resetContextDependencies (ref), t_1 (ref), var3 (write), resetCurrentFiber (ref), reactCurrentOwner (ref), var9 (write), var10 (write), reactFeatureFlags (ref), reactTypeOfModeModule (ref), unknownModule_6 (ref), throwException (ref), noLanes (write), t (ref), t_2 (ref)
+function ReactFiberWorkLoopModule.flushSync(Callback, p1) --[[ Line: 1425 ]]
+	-- upvalues: Bits (ref), DEV (copy), Console (copy), ReactFeatureFlags (copy), GetCurrentUpdateLanePriorityFunction (copy), SetCurrentUpdateLanePriorityFunction (copy), ReactFiberLaneModule (copy), YOLO (copy), RunWithPriorityFunction (copy), DescribeError (copy), ImmediatePriority (copy), FlushSyncCallbackQueueFunction (copy)
+	local Value: number = Bits
+	
+	if bit32.band(Value, 48) == 0 then
+		Bits = bit32.bor(Bits, 1)
+		
+		if ReactFeatureFlags.decoupleUpdatePriorityFromScheduler then
+			local CurrentUpdateLanePriority = GetCurrentUpdateLanePriorityFunction()
+			SetCurrentUpdateLanePriorityFunction(ReactFiberLaneModule.SyncLanePriority)
+			local RunWithPriorityResult = nil
+			local Flag = nil
+			
+			if YOLO then
+				Flag = true
+				SetCurrentUpdateLanePriorityFunction(ReactFiberLaneModule.SyncLanePriority)
+				RunWithPriorityResult = if Callback then RunWithPriorityFunction(ImmediatePriority, function() --[[ Line: 1468 ]]
+					-- upvalues: Callback (copy), p1 (copy)
+					return Callback(p1)
+				end) else nil
+			elseif Callback then
+				Flag, RunWithPriorityResult = xpcall(RunWithPriorityFunction, DescribeError, ImmediatePriority, function() --[[ Line: 1455 ]]
+					-- upvalues: Callback (copy), p1 (copy)
+					return Callback(p1)
+				end)
+			else
+				Flag = true
+				RunWithPriorityResult = nil
+			end
+			SetCurrentUpdateLanePriorityFunction(CurrentUpdateLanePriority)
+			Bits = Value
+			FlushSyncCallbackQueueFunction()
+			
+			if not Flag then
+				error(RunWithPriorityResult)
+			end
+			return RunWithPriorityResult
+		else
+			local RunWithPriorityResult = nil
+			local Flag = nil
+			if YOLO then
+				Flag = true
+				RunWithPriorityResult = if Callback then RunWithPriorityFunction(ImmediatePriority, function() --[[ Line: 1510 ]]
+					-- upvalues: Callback (copy), p1 (copy)
+					return Callback(p1)
+				end) else nil
+			elseif Callback then
+				Flag, RunWithPriorityResult = xpcall(RunWithPriorityFunction, DescribeError, ImmediatePriority, function() --[[ Line: 1498 ]]
+					-- upvalues: Callback (copy), p1 (copy)
+					return Callback(p1)
+				end)
+			else
+				Flag = true
+				RunWithPriorityResult = nil
+			end
+			Bits = Value
+			FlushSyncCallbackQueueFunction()
+			
+			if not Flag then
+				error(RunWithPriorityResult)
+			end
+			return RunWithPriorityResult
+		end
+	else
+		if DEV then
+			Console.error("flushSync was called from inside a lifecycle method. React cannot flush when React is already rendering. Consider moving this call to a scheduler task or micro task.")
+		end
+		return Callback(p1)
+	end
+end
+
+function ReactFiberWorkLoopModule.flushControlled(p1) --[[ Line: 1531 ]]
+	-- upvalues: Bits (ref), ReactFeatureFlags (copy), GetCurrentUpdateLanePriorityFunction (copy), SetCurrentUpdateLanePriorityFunction (copy), ReactFiberLaneModule (copy), RunWithPriorityFunction (copy), DescribeError (copy), ImmediatePriority (copy), v6 (ref), NowFunction (copy), FlushSyncCallbackQueueFunction (copy)
+	local Bits1: number = Bits
+	Bits = bit32.bor(Bits, 1)
+	
+	if ReactFeatureFlags.decoupleUpdatePriorityFromScheduler then
+		local CurrentUpdateLanePriority = GetCurrentUpdateLanePriorityFunction()
+		SetCurrentUpdateLanePriorityFunction(ReactFiberLaneModule.SyncLanePriority)
+		local Success, Result = xpcall(RunWithPriorityFunction, DescribeError, ImmediatePriority, p1)
+		SetCurrentUpdateLanePriorityFunction(CurrentUpdateLanePriority)
+		Bits = Bits1
+		
+		if Bits == 0 then
+			v6 = NowFunction() + 500
+			FlushSyncCallbackQueueFunction()
+		end
+		if not Success then
+			error(Result)
+			
+			return
+		end
+	else
+		local Success1, Result1 = xpcall(RunWithPriorityFunction, DescribeError, ImmediatePriority, p1)
+		Bits = Bits1
+		
+		if Bits == 0 then
+			v6 = NowFunction() + 500
+			FlushSyncCallbackQueueFunction()
+		end
+		if not Success1 then
+			error(Result1)
+		end
+	end
+end
+
+function ReactFiberWorkLoopModule.pushRenderLanes(p1, p2) --[[ Line: 1571 ]]
+	-- upvalues: PushFunction (copy), Cursor (copy), ReactFiberWorkLoopModule (copy), MergeLanesFunction (copy), NoLanes1 (ref)
+	PushFunction(Cursor, ReactFiberWorkLoopModule.subtreeRenderLanes, p1)
+	ReactFiberWorkLoopModule.subtreeRenderLanes = MergeLanesFunction(ReactFiberWorkLoopModule.subtreeRenderLanes, p2)
+	NoLanes1 = MergeLanesFunction(NoLanes1, p2)
+end
+
+function ReactFiberWorkLoopModule.popRenderLanes(p1) --[[ Line: 1577 ]]
+	-- upvalues: ReactFiberWorkLoopModule (copy), Cursor (copy), PopFunction (copy)
+	ReactFiberWorkLoopModule.subtreeRenderLanes = Cursor.current
+	PopFunction(Cursor, p1)
+end
+
+function config1.prepareFreshStack(p1, NoLanes4) --[[ Line: 1582 ]]
+	-- upvalues: ReactFiberLaneModule (copy), ReactFiberHostConfigModule (copy), WorkInProgress (ref), UnwindInterruptedWorkFunction (copy), v1 (ref), ReactFiberNewModule (copy), NoLanes (ref), ReactFiberWorkLoopModule (copy), NoLanes1 (ref), v2 (ref), v3 (ref), WorkInProgressRootSkippedLanesFunction (copy), NoLanes2 (ref), NoLanes3 (ref), ReactFeatureFlags (copy), List (ref), DEV (copy), ReactStrictModeWarningsNewModule (copy)
+	p1.finishedWork = nil
+	p1.finishedLanes = ReactFiberLaneModule.NoLanes
+	local TimeoutHandle = p1.timeoutHandle
+	
+	if TimeoutHandle ~= ReactFiberHostConfigModule.noTimeout then
+		p1.timeoutHandle = ReactFiberHostConfigModule.noTimeout
+		ReactFiberHostConfigModule.cancelTimeout(TimeoutHandle)
+	end
+	if WorkInProgress ~= nil then
+		local Return = WorkInProgress.return_
+		while Return ~= nil do
+			UnwindInterruptedWorkFunction(Return)
+			Return = Return.return_
+		end
+	end
+	v1 = p1
+	WorkInProgress = ReactFiberNewModule.createWorkInProgress(p1.current, nil)
+	NoLanes = NoLanes4
+	ReactFiberWorkLoopModule.subtreeRenderLanes = NoLanes4
+	NoLanes1 = NoLanes4
+	v2 = 0
+	v3 = nil
+	WorkInProgressRootSkippedLanesFunction(ReactFiberLaneModule.NoLanes)
+	NoLanes2 = ReactFiberLaneModule.NoLanes
+	NoLanes3 = ReactFiberLaneModule.NoLanes
+	
+	if ReactFeatureFlags.enableSchedulerTracing then
+		List = nil
+	end
+	if DEV then
+		ReactStrictModeWarningsNewModule.discardPendingWarnings()
+	end
+end
+
+function config1.handleError(p2, p3) --[[ Line: 1622 ]]
+	-- upvalues: WorkInProgress (ref), ResetContextDependenciesFunction (copy), config (copy), ReactFiberHooksNewModule (ref), ResetCurrentFiberFunction (copy), ReactCurrentOwner (copy), v2 (ref), v3 (ref), ReactFeatureFlags (copy), ReactTypeOfModeModule (copy), ReactProfilerTimerNewModule (copy), ThrowExceptionFunction (copy), NoLanes (ref), ReactFiberWorkLoopModule (copy), config1 (copy)
 	while true do
-		local var32 = var7
-		local ok, status = pcall(function()
-			-- upvalues: resetContextDependencies (copy), t_1 (copy), var3 (copy), resetCurrentFiber (copy), reactCurrentOwner (copy), var32 (write), var9 (copy), var10 (copy), p6 (write), var7 (copy), reactFeatureFlags (copy), reactTypeOfModeModule (copy), unknownModule_6 (copy), throwException (copy), p5 (ref), noLanes (copy), t (copy), t_2 (copy)
-			resetContextDependencies()
+		local Return = WorkInProgress
+		local Success, Result = pcall(function() --[[ Line: 1626 ]]
+			-- upvalues: ResetContextDependenciesFunction (upval), config (upval), ReactFiberHooksNewModule (upval), ResetCurrentFiberFunction (upval), ReactCurrentOwner (upval), Return (ref), v2 (upval), v3 (upval), p3 (ref), WorkInProgress (upval), ReactFeatureFlags (upval), ReactTypeOfModeModule (upval), ReactProfilerTimerNewModule (upval), ThrowExceptionFunction (upval), p2 (copy), NoLanes (upval), ReactFiberWorkLoopModule (upval), config1 (upval)
+			ResetContextDependenciesFunction()
 			
-			if not t_1.resetHooksAfterThrowRef then
-				var3 = require(script.Parent["ReactFiberHooks.new"])
-				t_1.resetHooksAfterThrowRef = var3.resetHooksAfterThrow
-				t_1.ContextOnlyDispatcherRef = var3.ContextOnlyDispatcher
-				t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+			if not config.resetHooksAfterThrowRef then
+				ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+				config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
+				config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
+				config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 			end
-			local _ = t_1.resetHooksAfterThrowRef()
-			resetCurrentFiber()
-			reactCurrentOwner.current = nil
+			local _ = config.resetHooksAfterThrowRef()
+			ResetCurrentFiberFunction()
+			ReactCurrentOwner.current = nil
 			
-			if var32 == nil or var32.return_ == nil then
-				var9 = 1
-				var10 = p6
-				var7 = nil
+			if Return == nil or Return.return_ == nil then
+				v2 = 1
+				v3 = p3
+				WorkInProgress = nil
 				
 				return
-			elseif reactFeatureFlags.enableProfilerTimer and bit32.band(var32.mode, reactTypeOfModeModule.ProfileMode) ~= 0 then
-				unknownModule_6.stopProfilerTimerIfRunningAndRecordDelta(var32, true)
 			end
-			throwException(p5, var32.return_, var32, p6, noLanes, t.onUncaughtError, t.renderDidError)
-			t_2.completeUnitOfWork(var32)
+			if ReactFeatureFlags.enableProfilerTimer and bit32.band(Return.mode, ReactTypeOfModeModule.ProfileMode) ~= 0 then
+				ReactProfilerTimerNewModule.stopProfilerTimerIfRunningAndRecordDelta(Return, true)
+			end
+			ThrowExceptionFunction(p2, Return.return_, Return, p3, NoLanes, ReactFiberWorkLoopModule.onUncaughtError, ReactFiberWorkLoopModule.renderDidError)
+			config1.completeUnitOfWork(Return)
 		end)
-		if not ok then
-			p6 = status
+		if Success then return end
+		p3 = Result
+		
+		if WorkInProgress == Return and Return ~= nil then
+			Return = Return.return_
+			WorkInProgress = Return
+		else
+			Return = WorkInProgress
+		end
+	end
+end
+
+function config1.pushDispatcher() --[[ Line: 1701 ]]
+	-- upvalues: ReactCurrentDispatcher (copy), config (copy), ReactFiberHooksNewModule (ref)
+	local Current = ReactCurrentDispatcher.current
+	
+	if not config.ContextOnlyDispatcherRef then
+		ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+		config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
+		config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
+		config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+	end
+	ReactCurrentDispatcher.current = config.ContextOnlyDispatcherRef
+	
+	if Current ~= nil then
+		return Current
+	end
+	if not config.ContextOnlyDispatcherRef then
+		ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+		config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
+		config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
+		config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+	end
+	return config.ContextOnlyDispatcherRef
+end
+
+function config1.popDispatcher(PushDispatcherResult) --[[ Line: 1718 ]]
+	-- upvalues: ReactCurrentDispatcher (copy)
+	ReactCurrentDispatcher.current = PushDispatcherResult
+end
+
+function config1.pushInteractions(p4) --[[ Line: 1722 ]]
+	-- upvalues: ReactFeatureFlags (copy), InteractionsRef (copy)
+	if ReactFeatureFlags.enableSchedulerTracing then
+		local Current = InteractionsRef.current
+		InteractionsRef.current = p4.memoizedInteractions
+		
+		return Current
+	else
+		return nil
+	end
+end
+
+function config1.popInteractions(PushInteractionsResult) --[[ Line: 1731 ]]
+	-- upvalues: ReactFeatureFlags (copy), InteractionsRef (copy)
+	if ReactFeatureFlags.enableSchedulerTracing then
+		InteractionsRef.current = PushInteractionsResult
+	end
+end
+
+function ReactFiberWorkLoopModule.markCommitTimeOfFallback() --[[ Line: 1737 ]]
+	-- upvalues: v5 (ref), NowFunction (copy)
+	v5 = NowFunction()
+end
+
+function ReactFiberWorkLoopModule.markSkippedUpdateLanes(p4) --[[ Line: 1741 ]]
+	-- upvalues: ReactFiberWorkInProgressModule (copy)
+	ReactFiberWorkInProgressModule.markSkippedUpdateLanes(p4)
+end
+
+function ReactFiberWorkLoopModule.renderDidSuspend() --[[ Line: 1745 ]]
+	-- upvalues: v2 (ref)
+	if v2 == 0 then
+		v2 = 3
+	end
+end
+
+function ReactFiberWorkLoopModule.renderDidSuspendDelayIfPossible() --[[ Line: 1751 ]]
+	-- upvalues: v2 (ref), v1 (ref), IncludesNonIdleWorkFunction (copy), WorkInProgressRootSkippedLanesFunction (copy), NoLanes2 (ref), config1 (copy), NoLanes (ref)
+	if v2 == 0 or v2 == 3 then
+		v2 = 4
+	end
+	if v1 ~= nil and (IncludesNonIdleWorkFunction(WorkInProgressRootSkippedLanesFunction()) or IncludesNonIdleWorkFunction(NoLanes2)) then
+		config1.markRootSuspended(v1, NoLanes)
+	end
+end
+
+function ReactFiberWorkLoopModule.renderDidError() --[[ Line: 1779 ]]
+	-- upvalues: v2 (ref)
+	if v2 ~= 5 then
+		v2 = 2
+	end
+end
+
+function ReactFiberWorkLoopModule.renderHasNotSuspendedYet(): boolean --[[ Line: 1787 ]]
+	-- upvalues: v2 (ref)
+	return v2 == 0
+end
+
+function config1.renderRootSync(p4, FinishedLanes) --[[ Line: 1793 ]]
+	-- upvalues: Bits (ref), config1 (copy), v1 (ref), NoLanes (ref), DEV (copy), EnableDebugTracing (copy), DebugTracingModule (copy), EnableSchedulingProfiler (copy), SchedulingProfilerModule (copy), YOLO (copy), DescribeError (copy), ResetContextDependenciesFunction (copy), ReactFeatureFlags (copy), WorkInProgress (ref), InvariantFunction (copy), ReactFiberLaneModule (copy), v2 (ref)
+	local Bits1: number = Bits
+	Bits = bit32.bor(Bits, 16)
+	local PushDispatcherResult = config1.pushDispatcher()
+	
+	if v1 ~= p4 or NoLanes ~= FinishedLanes then
+		config1.prepareFreshStack(p4, FinishedLanes)
+		config1.startWorkOnPendingInteractions(p4, FinishedLanes)
+	end
+	local PushInteractionsResult = config1.pushInteractions(p4)
+	
+	if DEV and EnableDebugTracing then
+		DebugTracingModule.logRenderStarted(FinishedLanes)
+	end
+	if EnableSchedulingProfiler then
+		SchedulingProfilerModule.markRenderStarted(FinishedLanes)
+	end
+	local Success = nil
+	while true do
+		local v11 = nil
+		if YOLO then
+			Success = true
+			config1.workLoopSync()
+		else
+			Success, v188 = xpcall(config1.workLoopSync, DescribeError)
+		end
+		if Success then break end
+		config1.handleError(p4, v11)
+	end
+	ResetContextDependenciesFunction()
+	
+	if ReactFeatureFlags.enableSchedulerTracing then
+		config1.popInteractions(PushInteractionsResult)
+	end
+	Bits = Bits1
+	config1.popDispatcher(PushDispatcherResult)
+	
+	if WorkInProgress ~= nil then
+		InvariantFunction(false, "Cannot commit an incomplete root. This error is likely caused by a bug in React. Please file an issue.")
+	end
+	if DEV and EnableDebugTracing then
+		DebugTracingModule.logRenderStopped()
+	end
+	if EnableSchedulingProfiler then
+		SchedulingProfilerModule.markRenderStopped()
+	end
+	v1 = nil
+	NoLanes = ReactFiberLaneModule.NoLanes
+	
+	return v2
+end
+
+function config1.workLoopSync() --[[ Line: 1869 ]]
+	-- upvalues: WorkInProgress (ref), config1 (copy)
+	while WorkInProgress ~= nil do
+		config1.performUnitOfWork(WorkInProgress)
+	end
+end
+
+function config1.renderRootConcurrent(p5, FinishedLanes) --[[ Line: 1876 ]]
+	-- upvalues: Bits (ref), config1 (copy), v1 (ref), NoLanes (ref), v6 (ref), NowFunction (copy), DEV (copy), EnableDebugTracing (copy), DebugTracingModule (copy), EnableSchedulingProfiler (copy), SchedulingProfilerModule (copy), YOLO (copy), DescribeError (copy), ResetContextDependenciesFunction (copy), ReactFeatureFlags (copy), WorkInProgress (ref), ReactFiberLaneModule (copy), v2 (ref)
+	local Bits1: number = Bits
+	Bits = bit32.bor(Bits, 16)
+	local PushDispatcherResult = config1.pushDispatcher()
+	
+	if v1 ~= p5 or NoLanes ~= FinishedLanes then
+		v6 = NowFunction() + 500
+		config1.prepareFreshStack(p5, FinishedLanes)
+		config1.startWorkOnPendingInteractions(p5, FinishedLanes)
+	end
+	local PushInteractionsResult = config1.pushInteractions(p5)
+	
+	if DEV and EnableDebugTracing then
+		DebugTracingModule.logRenderStarted(FinishedLanes)
+	end
+	if EnableSchedulingProfiler then
+		SchedulingProfilerModule.markRenderStarted(FinishedLanes)
+	end
+	local Success = nil
+	local Result = nil
+	while true do
+		if YOLO then
+			Success = true
+			Result = "break"
+			config1.workLoopConcurrent()
+		else
+			Success, Result = xpcall(config1.workLoopConcurrent, DescribeError)
 			
-			if var7 == var32 and var32 ~= nil then
-				var7 = var32.return_
-			else
-				var32 = var7
+			if Success then
+				Result = "break"
 			end
 		end
+		if Result == "break" then break end
+		if not Success then
+			config1.handleError(p5, Result)
+		end
 	end
-end
-
-function t_2.pushDispatcher()
-	-- upvalues: reactCurrentDispatcher (ref), t_1 (ref), var3 (write)
-	local current = reactCurrentDispatcher.current
-	local var33 = reactCurrentDispatcher
+	ResetContextDependenciesFunction()
 	
-	if not t_1.ContextOnlyDispatcherRef then
-		var3 = require(script.Parent["ReactFiberHooks.new"])
-		t_1.resetHooksAfterThrowRef = var3.resetHooksAfterThrow
-		t_1.ContextOnlyDispatcherRef = var3.ContextOnlyDispatcher
-		t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+	if ReactFeatureFlags.enableSchedulerTracing then
+		config1.popInteractions(PushInteractionsResult)
 	end
-	var33.current = t_1.ContextOnlyDispatcherRef
+	config1.popDispatcher(PushDispatcherResult)
+	Bits = Bits1
 	
-	if current ~= nil then
-		return current
-	elseif not t_1.ContextOnlyDispatcherRef then
-		var3 = require(script.Parent["ReactFiberHooks.new"])
-		t_1.resetHooksAfterThrowRef = var3.resetHooksAfterThrow
-		t_1.ContextOnlyDispatcherRef = var3.ContextOnlyDispatcher
-		t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+	if DEV and EnableDebugTracing then
+		DebugTracingModule.logRenderStopped()
 	end
-	return t_1.ContextOnlyDispatcherRef
-end
-
-function t_2.popDispatcher(p7)
-	-- upvalues: reactCurrentDispatcher (ref)
-	reactCurrentDispatcher.current = p7
-end
-
-function t_2.pushInteractions(p7)
-	-- upvalues: reactFeatureFlags (ref), interactionsRef (ref)
-	if reactFeatureFlags.enableSchedulerTracing then
-		local current = interactionsRef.current
-		interactionsRef.current = p7.memoizedInteractions
+	if WorkInProgress == nil then
+		if EnableSchedulingProfiler then
+			SchedulingProfilerModule.markRenderStopped()
+		end
+		v1 = nil
+		NoLanes = ReactFiberLaneModule.NoLanes
 		
-		return current
-	end
-	return nil
-end
-
-function t_2.popInteractions(p7)
-	-- upvalues: reactFeatureFlags (ref), interactionsRef (ref)
-	if reactFeatureFlags.enableSchedulerTracing then
-		interactionsRef.current = p7
-	end
-end
-
-function t.markCommitTimeOfFallback()
-	-- upvalues: var12 (write), now (ref)
-	var12 = now()
-end
-
-function t.markSkippedUpdateLanes(p7)
-	-- upvalues: reactFiberWorkInProgressModule (ref)
-	reactFiberWorkInProgressModule.markSkippedUpdateLanes(p7)
-end
-
-function t.renderDidSuspend()
-	-- upvalues: var9 (write)
-	if var9 == 0 then
-		var9 = 3
-	end
-end
-
-function t.renderDidSuspendDelayIfPossible()
-	-- upvalues: var9 (write), var6 (write), includesNonIdleWork (ref), workInProgressRootSkippedLanes (ref), noLanes_2 (write), t_2 (ref), noLanes (write)
-	if var9 == 0 or var9 == 3 then
-		var9 = 4
-	end
-	if var6 ~= nil and (includesNonIdleWork(workInProgressRootSkippedLanes()) or includesNonIdleWork(noLanes_2)) then
-		t_2.markRootSuspended(var6, noLanes)
-	end
-end
-
-function t.renderDidError()
-	-- upvalues: var9 (write)
-	if var9 ~= 5 then
-		var9 = 2
-	end
-end
-
-function t.renderHasNotSuspendedYet()
-	-- upvalues: var9 (write)
-	return var9 == 0
-end
-
-function t_2.renderRootSync(p7, p8)
-	-- upvalues: var5 (write), t_2 (ref), var6 (write), noLanes (write), dEV (ref), enableDebugTracing (ref), debugTracingModule (ref), enableSchedulingProfiler (ref), schedulingProfilerModule (ref), yOLO (ref), describeError (ref), resetContextDependencies (ref), reactFeatureFlags (ref), var7 (write), invariant (ref), reactFiberLaneModule (ref), var9 (write)
-	var5 = bit32.bor(var5, 16)
-	local var33 = t_2.pushDispatcher()
-	
-	if var6 ~= p7 or noLanes ~= p8 then
-		t_2.prepareFreshStack(p7, p8)
-		t_2.startWorkOnPendingInteractions(p7, p8)
-	end
-	local var34 = t_2.pushInteractions(p7)
-	
-	if dEV and enableDebugTracing then
-		debugTracingModule.logRenderStarted(p8)
-	end
-	if enableSchedulingProfiler then
-		schedulingProfilerModule.markRenderStarted(p8)
-	end
-	while true do
-		local var35 = nil
-		local var36 = nil
-		if yOLO then
-			var35 = true
-			t_2.workLoopSync()
-		else
-			local ok, status = xpcall(t_2.workLoopSync, describeError)
-			var35 = ok
-			var36 = status
+		return v2
+	else
+		if EnableSchedulingProfiler then
+			SchedulingProfilerModule.markRenderYielded()
 		end
-		if var35 then break end
-		t_2.handleError(p7, var36)
-	end
-	resetContextDependencies()
-	
-	if reactFeatureFlags.enableSchedulerTracing then
-		t_2.popInteractions(var34)
-	end
-	var5 = var5
-	t_2.popDispatcher(var33)
-	
-	if var7 ~= nil then
-		invariant(false, "Cannot commit an incomplete root. This error is likely caused by a bug in React. Please file an issue.")
-	end
-	if dEV and enableDebugTracing then
-		debugTracingModule.logRenderStopped()
-	end
-	if enableSchedulingProfiler then
-		schedulingProfilerModule.markRenderStopped()
-	end
-	var6 = nil
-	noLanes = reactFiberLaneModule.NoLanes
-	
-	return var9
-end
-
-function t_2.workLoopSync()
-	-- upvalues: var7 (write), t_2 (ref)
-	while var7 ~= nil do
-		t_2.performUnitOfWork(var7)
+		return 0
 	end
 end
 
-function t_2.renderRootConcurrent(p9, p10)
-	-- upvalues: var5 (write), t_2 (ref), var6 (write), noLanes (write), var13 (write), now (ref), dEV (ref), enableDebugTracing (ref), debugTracingModule (ref), enableSchedulingProfiler (ref), schedulingProfilerModule (ref), yOLO (ref), describeError (ref), resetContextDependencies (ref), reactFeatureFlags (ref), var7 (write), reactFiberLaneModule (ref), var9 (write)
-	var5 = bit32.bor(var5, 16)
-	local var37 = t_2.pushDispatcher()
-	
-	if var6 ~= p9 or noLanes ~= p10 then
-		var13 = now() + 500
-		t_2.prepareFreshStack(p9, p10)
-		t_2.startWorkOnPendingInteractions(p9, p10)
+function config1.workLoopConcurrent() --[[ Line: 1960 ]]
+	-- upvalues: WorkInProgress (ref), ShouldYield (copy), config1 (copy)
+	while WorkInProgress ~= nil and not ShouldYield() do
+		config1.performUnitOfWork(WorkInProgress)
 	end
-	local var38 = t_2.pushInteractions(p9)
-	
-	if dEV and enableDebugTracing then
-		debugTracingModule.logRenderStarted(p10)
-	end
-	if enableSchedulingProfiler then
-		schedulingProfilerModule.markRenderStarted(p10)
-	end
-	local var39
-	while true do
-		local _ = nil
-		local var40 = nil
-		if yOLO then
-			var39 = true
-			var40 = "break"
-			t_2.workLoopConcurrent()
-		else
-			local ok, status = xpcall(t_2.workLoopConcurrent, describeError)
-			var39 = ok
-			var40 = if var39 then "break" else status
-		end
-		if var40 == "break" then break end
-		if not var39 then
-			t_2.handleError(p9, var40)
-		end
-	end
-	resetContextDependencies()
-	
-	if reactFeatureFlags.enableSchedulerTracing then
-		t_2.popInteractions(var38)
-	end
-	t_2.popDispatcher(var37)
-	var5 = var5
-	
-	if dEV and enableDebugTracing then
-		debugTracingModule.logRenderStopped()
-	end
-	if var7 == nil then
-		if enableSchedulingProfiler then
-			schedulingProfilerModule.markRenderStopped()
-		end
-		var6 = nil
-		noLanes = reactFiberLaneModule.NoLanes
+end
+
+if ReactFeatureFlags.enableWorkLoopTrims then
+	function config1.performUnitOfWork(WorkInProgress1) --[[ Line: 1968 ]]
+		-- upvalues: RobloxReactProfilingModule (copy), DEV (copy), SetCurrentFiberFunction (copy), ReactFeatureFlags (copy), ReactTypeOfModeModule (copy), ReactProfilerTimerNewModule (copy), config1 (copy), ReactFiberWorkLoopModule (copy), ResetCurrentFiberFunction (copy), WorkInProgress (ref), ReactCurrentOwner (copy)
+		local EnableUnitOfWorkProfiling = RobloxReactProfilingModule.enableUnitOfWorkProfiling
+		local ProfileUnitOfWorkBeforeResult = if EnableUnitOfWorkProfiling then RobloxReactProfilingModule.profileUnitOfWorkBefore(WorkInProgress1) else nil
+		local Alternate = WorkInProgress1.alternate
 		
-		return var9
-	elseif enableSchedulingProfiler then
-		schedulingProfilerModule.markRenderYielded()
+		if DEV then
+			SetCurrentFiberFunction(WorkInProgress1)
+		end
+		local BeginWorkResult = nil
+		if ReactFeatureFlags.enableProfilerTimer and bit32.band(WorkInProgress1.mode, ReactTypeOfModeModule.ProfileMode) ~= ReactTypeOfModeModule.NoMode then
+			ReactProfilerTimerNewModule.startProfilerTimer(WorkInProgress1)
+			BeginWorkResult = config1.beginWork(Alternate, WorkInProgress1, ReactFiberWorkLoopModule.subtreeRenderLanes)
+			ReactProfilerTimerNewModule.stopProfilerTimerIfRunningAndRecordDelta(WorkInProgress1, true)
+		else
+			BeginWorkResult = config1.beginWork(Alternate, WorkInProgress1, ReactFiberWorkLoopModule.subtreeRenderLanes)
+		end
+		if DEV then
+			ResetCurrentFiberFunction()
+		end
+		WorkInProgress1.memoizedProps = WorkInProgress1.pendingProps
+		
+		if BeginWorkResult == nil then
+			config1.completeUnitOfWork(WorkInProgress1)
+		else
+			WorkInProgress = BeginWorkResult
+		end
+		ReactCurrentOwner.current = nil
+		
+		if EnableUnitOfWorkProfiling then
+			RobloxReactProfilingModule.profileUnitOfWorkAfter(ProfileUnitOfWorkBeforeResult)
+		end
 	end
-	return 0
+else
+	function config1.performUnitOfWork(p6) --[[ Line: 2016 ]]
+		-- upvalues: RobloxReactProfilingModule (copy), SetCurrentFiberFunction (copy), ReactFeatureFlags (copy), ReactTypeOfModeModule (copy), ReactProfilerTimerNewModule (copy), config1 (copy), ReactFiberWorkLoopModule (copy), ResetCurrentFiberFunction (copy), WorkInProgress (ref), ReactCurrentOwner (copy)
+		local ProfileUnitOfWorkBeforeResult = RobloxReactProfilingModule.profileUnitOfWorkBefore(p6)
+		local Alternate = p6.alternate
+		SetCurrentFiberFunction(p6)
+		local BeginWorkResult = nil
+		
+		if ReactFeatureFlags.enableProfilerTimer and bit32.band(p6.mode, ReactTypeOfModeModule.ProfileMode) ~= ReactTypeOfModeModule.NoMode then
+			ReactProfilerTimerNewModule.startProfilerTimer(p6)
+			BeginWorkResult = config1.beginWork(Alternate, p6, ReactFiberWorkLoopModule.subtreeRenderLanes)
+			ReactProfilerTimerNewModule.stopProfilerTimerIfRunningAndRecordDelta(p6, true)
+		else
+			BeginWorkResult = config1.beginWork(Alternate, p6, ReactFiberWorkLoopModule.subtreeRenderLanes)
+		end
+		ResetCurrentFiberFunction()
+		p6.memoizedProps = p6.pendingProps
+		
+		if BeginWorkResult == nil then
+			config1.completeUnitOfWork(p6)
+		else
+			WorkInProgress = BeginWorkResult
+		end
+		ReactCurrentOwner.current = nil
+		RobloxReactProfilingModule.profileUnitOfWorkAfter(ProfileUnitOfWorkBeforeResult)
+	end
 end
-
-function t_2.workLoopConcurrent()
-	-- upvalues: var7 (write), shouldYield (ref), t_2 (ref)
-	while var7 ~= nil and not shouldYield() do
-		t_2.performUnitOfWork(var7)
-	end
-end
-
-function t_2.performUnitOfWork(p11)
-	-- upvalues: robloxReactProfilingModule (ref), setCurrentFiber (ref), reactFeatureFlags (ref), reactTypeOfModeModule (ref), unknownModule_6 (ref), t_2 (ref), t (ref), resetCurrentFiber (ref), var7 (write), reactCurrentOwner (ref)
-	local var41
-	local var42 = robloxReactProfilingModule.profileUnitOfWorkBefore(p11)
-	local alternate = p11.alternate
-	setCurrentFiber(p11)
-	local _ = nil
-	
-	if reactFeatureFlags.enableProfilerTimer and bit32.band(p11.mode, reactTypeOfModeModule.ProfileMode) ~= reactTypeOfModeModule.NoMode then
-		unknownModule_6.startProfilerTimer(p11)
-		var41 = t_2.beginWork(alternate, p11, t.subtreeRenderLanes)
-		unknownModule_6.stopProfilerTimerIfRunningAndRecordDelta(p11, true)
-	else
-		var41 = t_2.beginWork(alternate, p11, t.subtreeRenderLanes)
-	end
-	resetCurrentFiber()
-	p11.memoizedProps = p11.pendingProps
-	
-	if var41 == nil then
-		t_2.completeUnitOfWork(p11)
-	else
-		var7 = var41
-	end
-	reactCurrentOwner.current = nil
-	robloxReactProfilingModule.profileUnitOfWorkAfter(var42)
-end
-
-function t_2.completeUnitOfWork(p11)
-	-- upvalues: reactFiberFlagsModule (ref), setCurrentFiber (ref), reactFeatureFlags (ref), reactTypeOfModeModule (ref), t (ref), t_1 (ref), unknownModule_6 (ref), resetCurrentFiber (ref), var7 (write), unwindWork (ref), var9 (write)
-	local sibling
-	local var41 = p11
+function config1.completeUnitOfWork(Return) --[[ Line: 2055 ]]
+	-- upvalues: ReactFiberFlagsModule (copy), ReactFeatureFlags (copy), DEV (copy), SetCurrentFiberFunction (copy), ReactTypeOfModeModule (copy), ReactFiberWorkLoopModule (copy), config (copy), ReactProfilerTimerNewModule (copy), ResetCurrentFiberFunction (copy), WorkInProgress (ref), UnwindWorkFunction (copy), v2 (ref)
+	local Return1 = Return
+	local Sibling = nil
+	local UnwindWorkResult = nil
+	local CompleteWorkRefResult = nil
 	repeat
-		local alternate = var41.alternate
-		local _return = var41.return_
-		if bit32.band(var41.flags, reactFiberFlagsModule.Incomplete) ~= reactFiberFlagsModule.NoFlags then
-			sibling = unwindWork(var41, t.subtreeRenderLanes)
-			
-			if sibling == nil then
-				if reactFeatureFlags.enableProfilerTimer and bit32.band(var41.mode, reactTypeOfModeModule.ProfileMode) ~= reactTypeOfModeModule.NoMode then
-					unknownModule_6.stopProfilerTimerIfRunningAndRecordDelta(var41, false)
-					local actualDuration = var41.actualDuration or 0
-					local child = var41.child
-					while child ~= nil do
-						actualDuration += child.actualDuration or 0
-						child = child.sibling
-					end
-					var41.actualDuration = actualDuration
+		local Alternate = Return1.alternate
+		local Return4 = Return1.return_
+		if bit32.band(Return1.flags, ReactFiberFlagsModule.Incomplete) == ReactFiberFlagsModule.NoFlags then
+			if ReactFeatureFlags.enableWorkLoopTrims then
+				if DEV then
+					SetCurrentFiberFunction(Return1)
 				end
-				if _return ~= nil then
-					_return.flags = bit32.bor(_return.flags, reactFiberFlagsModule.Incomplete)
-					_return.subtreeFlags = reactFiberFlagsModule.NoFlags
-					_return.deletions = nil
-				end
-				sibling = var41.sibling
+			else
+				SetCurrentFiberFunction(Return1)
+			end
+			if ReactFeatureFlags.enableProfilerTimer and bit32.band(Return1.mode, ReactTypeOfModeModule.ProfileMode) ~= ReactTypeOfModeModule.NoMode then
+				ReactProfilerTimerNewModule.startProfilerTimer(Return1)
+				local Return3 = Return1
+				local SubtreeRenderLanes1 = ReactFiberWorkLoopModule.subtreeRenderLanes
 				
-				if sibling == nil then
-					var41 = _return
-					var7 = var41
-					continue
+				if not config.completeWorkRef then
+					config.completeWorkRef = require(script.Parent["ReactFiberCompleteWork.new"]).completeWork
 				end
-				var7 = sibling
+				CompleteWorkRefResult = config.completeWorkRef(Alternate, Return3, SubtreeRenderLanes1)
+				ReactProfilerTimerNewModule.stopProfilerTimerIfRunningAndRecordDelta(Return1, false)
+			else
+				local Return2 = Return1
+				local SubtreeRenderLanes = ReactFiberWorkLoopModule.subtreeRenderLanes
+				
+				if not config.completeWorkRef then
+					config.completeWorkRef = require(script.Parent["ReactFiberCompleteWork.new"]).completeWork
+				end
+				CompleteWorkRefResult = config.completeWorkRef(Alternate, Return2, SubtreeRenderLanes)
+			end
+			if ReactFeatureFlags.enableWorkLoopTrims then
+				if DEV then
+					ResetCurrentFiberFunction()
+				end
+			else
+				ResetCurrentFiberFunction()
+			end
+			if CompleteWorkRefResult ~= nil then
+				WorkInProgress = CompleteWorkRefResult
 				
 				return
 			end
-			sibling.flags = bit32.band(sibling.flags, reactFiberFlagsModule.HostEffectMask)
-			var7 = sibling
+		else
+			UnwindWorkResult = UnwindWorkFunction(Return1, ReactFiberWorkLoopModule.subtreeRenderLanes)
+			
+			if UnwindWorkResult ~= nil then
+				UnwindWorkResult.flags = bit32.band(UnwindWorkResult.flags, ReactFiberFlagsModule.HostEffectMask)
+				WorkInProgress = UnwindWorkResult
+				
+				return
+			elseif ReactFeatureFlags.enableProfilerTimer and bit32.band(Return1.mode, ReactTypeOfModeModule.ProfileMode) ~= ReactTypeOfModeModule.NoMode then
+				ReactProfilerTimerNewModule.stopProfilerTimerIfRunningAndRecordDelta(Return1, false)
+				local ActualDuration = Return1.actualDuration or 0
+				local Child = Return1.child
+				while Child ~= nil do
+					ActualDuration += Child.actualDuration or 0
+					Child = Child.sibling
+				end
+				Return1.actualDuration = ActualDuration
+			end
+			if Return4 ~= nil then
+				Return4.flags = bit32.bor(Return4.flags, ReactFiberFlagsModule.Incomplete)
+				Return4.subtreeFlags = ReactFiberFlagsModule.NoFlags
+				Return4.deletions = nil
+			end
+		end
+		Sibling = Return1.sibling
+		
+		if Sibling ~= nil then
+			WorkInProgress = Sibling
 			
 			return
 		end
-		setCurrentFiber(var41)
-		sibling = nil
-		
-		if reactFeatureFlags.enableProfilerTimer and bit32.band(var41.mode, reactTypeOfModeModule.ProfileMode) ~= reactTypeOfModeModule.NoMode then
-			unknownModule_6.startProfilerTimer(var41)
-			local subtreeRenderLanes = t.subtreeRenderLanes
-			
-			if not t_1.completeWorkRef then
-				t_1.completeWorkRef = require(script.Parent["ReactFiberCompleteWork.new"]).completeWork
-			end
-			sibling = t_1.completeWorkRef(alternate, var41, subtreeRenderLanes)
-			unknownModule_6.stopProfilerTimerIfRunningAndRecordDelta(var41, false)
-		else
-			local var42 = var41
-			local subtreeRenderLanes = t.subtreeRenderLanes
-			
-			if not t_1.completeWorkRef then
-				t_1.completeWorkRef = require(script.Parent["ReactFiberCompleteWork.new"]).completeWork
-			end
-			sibling = t_1.completeWorkRef(alternate, var42, subtreeRenderLanes)
-		end
-		resetCurrentFiber()
-		
-		if sibling == nil then
-		end
-		var7 = sibling
-		
-		return
-	until var41 == nil
-	if var9 == 0 then
-		var9 = 5
+		Return1 = Return4
+		WorkInProgress = Return1
+	until Return1 == nil
+	if v2 == 0 then
+		v2 = 5
 	end
 end
 
-function t_2.commitRoot(p11)
-	-- upvalues: getCurrentPriorityLevel (ref), runWithPriority (ref), immediatePriority (ref), robloxReactProfilingModule (ref), t_2 (ref)
-	local var41 = getCurrentPriorityLevel()
-	runWithPriority(immediatePriority, function()
-		-- upvalues: robloxReactProfilingModule (copy), t_2 (copy), p11 (ref), var41 (ref)
-		robloxReactProfilingModule.profileCommitBefore()
-		local var42 = t_2.commitRootImpl(p11, var41)
-		robloxReactProfilingModule.profileCommitAfter()
+function config1.commitRoot(p6) --[[ Line: 2176 ]]
+	-- upvalues: GetCurrentPriorityLevelFunction (copy), RunWithPriorityFunction (copy), ImmediatePriority (copy), RobloxReactProfilingModule (copy), config1 (copy)
+	local CurrentPriorityLevel = GetCurrentPriorityLevelFunction()
+	RunWithPriorityFunction(ImmediatePriority, function() --[[ Line: 2178 ]]
+		-- upvalues: RobloxReactProfilingModule (upval), config1 (upval), p6 (copy), CurrentPriorityLevel (copy)
+		RobloxReactProfilingModule.profileCommitBefore()
+		local CommitRootImplResult = config1.commitRootImpl(p6, CurrentPriorityLevel)
+		RobloxReactProfilingModule.profileCommitAfter()
 		
-		return var42
+		return CommitRootImplResult
 	end)
 	
 	return nil
 end
 
-function t_2.commitRootImpl(p11, p12)
-	-- upvalues: t (ref), var19 (write), invariant (ref), var5 (write), dEV (ref), enableDebugTracing (ref), debugTracingModule (ref), enableSchedulingProfiler (ref), schedulingProfilerModule (ref), reactFiberLaneModule (ref), mergeLanes (ref), markRootFinished (ref), var21 (write), hasDiscreteLanes (ref), var6 (write), var7 (write), noLanes (write), reactFiberFlagsModule (ref), reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), t_2 (ref), reactCurrentOwner (ref), var27 (write), reactFiberHostConfigModule (ref), var28 (write), unknownModule_6 (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), recursivelyCommitLayoutEffects (ref), hasCaughtError (ref), clearCaughtError (ref), var4 (write), resetCurrentFiber (ref), yOLO (ref), describeError (ref), var18 (write), scheduleCallback (ref), normalPriority (ref), requestPaint (ref), noLanes_4 (write), var20 (write), var25 (write), var17 (write), enableDoubleInvokingEffects (ref), syncLane (ref), var23 (write), var22 (write), onCommitRoot (ref), onCommitRoot_1 (ref), var1 (write), now (ref), var15 (write), var16 (write), flushSyncCallbackQueue (ref)
+function config1.commitRootImpl(p6, p7) --[[ Line: 2189 ]]
+	-- upvalues: ReactFiberWorkLoopModule (copy), v9 (ref), InvariantFunction (copy), Bits (ref), DEV (copy), EnableDebugTracing (copy), DebugTracingModule (copy), EnableSchedulingProfiler (copy), SchedulingProfilerModule (copy), ReactFiberLaneModule (copy), MergeLanesFunction (copy), MarkRootFinishedFunction (copy), NewResult1 (ref), HasDiscreteLanesFunction (copy), v1 (ref), WorkInProgress (ref), NoLanes (ref), ReactFiberFlagsModule (copy), ReactFeatureFlags (copy), GetCurrentUpdateLanePriorityFunction (copy), SetCurrentUpdateLanePriorityFunction (copy), config1 (copy), ReactCurrentOwner (copy), Flag1 (ref), ScheduleCallbackFunction (copy), NormalPriority (copy), PrepareForCommitResult (ref), ReactFiberHostConfigModule (copy), Flag2 (ref), ReactProfilerTimerNewModule (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), RecursivelyCommitLayoutEffectsFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), Callback1 (ref), ResetCurrentFiberFunction (copy), YOLO (copy), DescribeError (copy), RequestPaintFunction (copy), NoLanes4 (ref), NoPriority1 (ref), List (ref), NewResult (ref), EnableDoubleInvokingEffects (copy), SyncLane (copy), v10 (ref), Count (ref), OnCommitRootFunction (copy), OnCommitRootFunction1 (copy), Callback (ref), NowFunction (copy), Flag (ref), v8 (ref), FlushSyncCallbackQueueFunction (copy)
 	repeat
-		t.flushPassiveEffects()
-	until var19 == nil
+		ReactFiberWorkLoopModule.flushPassiveEffects()
+	until v9 == nil
 	flushRenderPhaseStrictModeWarningsInDEV()
-	invariant(bit32.band(var5, 48) == 0, "Should not already be working.")
-	local finishedWork = p11.finishedWork
-	local finishedLanes = p11.finishedLanes
+	InvariantFunction(bit32.band(Bits, 48) == 0, "Should not already be working.")
+	local FinishedWork = p6.finishedWork
+	local FinishedLanes = p6.finishedLanes
 	
-	if dEV and enableDebugTracing then
-		debugTracingModule.logCommitStarted(finishedLanes)
+	if DEV and EnableDebugTracing then
+		DebugTracingModule.logCommitStarted(FinishedLanes)
 	end
-	if enableSchedulingProfiler then
-		schedulingProfilerModule.markCommitStarted(finishedLanes)
+	if EnableSchedulingProfiler then
+		SchedulingProfilerModule.markCommitStarted(FinishedLanes)
 	end
-	if finishedWork == nil then
-		if dEV and enableDebugTracing then
-			debugTracingModule.logCommitStopped()
+	if FinishedWork == nil then
+		if DEV and EnableDebugTracing then
+			DebugTracingModule.logCommitStopped()
 		end
-		if enableSchedulingProfiler then
-			schedulingProfilerModule.markCommitStopped(p11)
+		if EnableSchedulingProfiler then
+			SchedulingProfilerModule.markCommitStopped(p6)
 		end
 		return nil
 	else
-		p11.finishedWork = nil
-		p11.finishedLanes = reactFiberLaneModule.NoLanes
-		invariant(finishedWork ~= p11.current, "Cannot commit the same tree as before. This error is likely caused by a bug in React. Please file an issue.")
-		p11.callbackNode = nil
-		local var41 = mergeLanes(finishedWork.lanes, finishedWork.childLanes)
-		markRootFinished(p11, var41)
+		p6.finishedWork = nil
+		p6.finishedLanes = ReactFiberLaneModule.NoLanes
+		InvariantFunction(FinishedWork ~= p6.current, "Cannot commit the same tree as before. This error is likely caused by a bug in React. Please file an issue.")
+		p6.callbackNode = nil
+		local MergeLanesResult = MergeLanesFunction(FinishedWork.lanes, FinishedWork.childLanes)
+		MarkRootFinishedFunction(p6, MergeLanesResult)
 		
-		if var21 ~= nil and not hasDiscreteLanes(var41) and var21:has(p11) then
-			var21:delete(p11)
+		if NewResult1 ~= nil and not HasDiscreteLanesFunction(MergeLanesResult) and NewResult1:has(p6) then
+			NewResult1:delete(p6)
 		end
-		if p11 == var6 then
-			var6 = nil
-			var7 = nil
-			noLanes = reactFiberLaneModule.NoLanes
+		if p6 == v1 then
+			v1 = nil
+			WorkInProgress = nil
+			NoLanes = ReactFiberLaneModule.NoLanes
 		end
-		if bit32.band(finishedWork.subtreeFlags, bit32.bor(reactFiberFlagsModule.BeforeMutationMask, reactFiberFlagsModule.MutationMask, reactFiberFlagsModule.LayoutMask, reactFiberFlagsModule.PassiveMask)) ~= reactFiberFlagsModule.NoFlags or bit32.band(finishedWork.flags, bit32.bor(reactFiberFlagsModule.BeforeMutationMask, reactFiberFlagsModule.MutationMask, reactFiberFlagsModule.LayoutMask, reactFiberFlagsModule.PassiveMask)) ~= reactFiberFlagsModule.NoFlags then
-			local var42 = nil
+		local IsNotBitsMatch = bit32.band(FinishedWork.flags, (bit32.bor(ReactFiberFlagsModule.BeforeMutationMask, ReactFiberFlagsModule.MutationMask, ReactFiberFlagsModule.LayoutMask, ReactFiberFlagsModule.PassiveMask))) ~= ReactFiberFlagsModule.NoFlags
+		
+		if bit32.band(FinishedWork.subtreeFlags, (bit32.bor(ReactFiberFlagsModule.BeforeMutationMask, ReactFiberFlagsModule.MutationMask, ReactFiberFlagsModule.LayoutMask, ReactFiberFlagsModule.PassiveMask))) ~= ReactFiberFlagsModule.NoFlags or IsNotBitsMatch then
+			local v12 = nil
 			
-			if reactFeatureFlags.decoupleUpdatePriorityFromScheduler then
-				var42 = getCurrentUpdateLanePriority()
-				setCurrentUpdateLanePriority(reactFiberLaneModule.SyncLanePriority)
+			if ReactFeatureFlags.decoupleUpdatePriorityFromScheduler then
+				v12 = GetCurrentUpdateLanePriorityFunction()
+				SetCurrentUpdateLanePriorityFunction(ReactFiberLaneModule.SyncLanePriority)
 			end
-			local var43 = var5
-			var5 = bit32.bor(var5, 32)
-			local var44 = t_2.pushInteractions(p11)
-			reactCurrentOwner.current = nil
-			var27 = reactFiberHostConfigModule.prepareForCommit(p11.containerInfo)
-			var28 = false
-			t_2.commitBeforeMutationEffects(finishedWork)
-			var27 = nil
+			local Bits1: number = Bits
+			Bits = bit32.bor(Bits, 32)
+			local PushInteractionsResult = config1.pushInteractions(p6)
+			ReactCurrentOwner.current = nil
 			
-			if reactFeatureFlags.enableProfilerTimer then
-				unknownModule_6.recordCommitTime()
-			end
-			t_2.commitMutationEffects(finishedWork, p11, p12)
-			reactFiberHostConfigModule.resetAfterCommit(p11.containerInfo)
-			p11.current = finishedWork
-			
-			if dEV and enableDebugTracing then
-				debugTracingModule.logLayoutEffectsStarted(finishedLanes)
-			end
-			if enableSchedulingProfiler then
-				schedulingProfilerModule.markLayoutEffectsStarted(finishedLanes)
-			end
-			if dEV then
-				setCurrentFiber(finishedWork)
-				invokeGuardedCallback(nil, recursivelyCommitLayoutEffects, nil, finishedWork, p11, t.captureCommitPhaseError, t.schedulePassiveEffectCallback)
-				
-				if hasCaughtError() then
-					var4(finishedWork, finishedWork, clearCaughtError())
-				end
-				resetCurrentFiber()
-			else
-				local var45
-				local _ = nil
-				local var46 = nil
-				
-				if yOLO then
-					var45 = true
-					recursivelyCommitLayoutEffects(finishedWork, p11, t.captureCommitPhaseError, t.schedulePassiveEffectCallback)
-				else
-					local ok, status = xpcall(recursivelyCommitLayoutEffects, describeError, finishedWork, p11, t.captureCommitPhaseError, t.schedulePassiveEffectCallback)
-					var45 = ok
-					var46 = status
-				end
-				if not var45 then
-					var4(finishedWork, finishedWork, var46)
-				end
-			end
-			if dEV and enableDebugTracing then
-				debugTracingModule.logLayoutEffectsStopped()
-			end
-			if enableSchedulingProfiler then
-				schedulingProfilerModule.markLayoutEffectsStopped()
-			end
-			if (bit32.band(finishedWork.subtreeFlags, reactFiberFlagsModule.PassiveMask) ~= reactFiberFlagsModule.NoFlags or bit32.band(finishedWork.flags, reactFiberFlagsModule.PassiveMask) ~= reactFiberFlagsModule.NoFlags) and not var18 then
-				var18 = true
-				scheduleCallback(normalPriority, function()
-					-- upvalues: t (copy)
-					t.flushPassiveEffects()
+			if ReactFeatureFlags.enableCommitTraversalTrims and bit32.band(bit32.bor(FinishedWork.subtreeFlags, FinishedWork.flags), ReactFiberFlagsModule.Passive) ~= ReactFiberFlagsModule.NoFlags and not Flag1 then
+				Flag1 = true
+				ScheduleCallbackFunction(NormalPriority, function() --[[ Line: 2326 ]]
+					-- upvalues: ReactFiberWorkLoopModule (upval)
+					ReactFiberWorkLoopModule.flushPassiveEffects()
 					
 					return nil
 				end)
 			end
-			requestPaint()
+			PrepareForCommitResult = ReactFiberHostConfigModule.prepareForCommit(p6.containerInfo)
+			Flag2 = false
+			config1.commitBeforeMutationEffects(FinishedWork)
+			PrepareForCommitResult = nil
 			
-			if reactFeatureFlags.enableSchedulerTracing then
-				t_2.popInteractions(var44)
+			if ReactFeatureFlags.enableProfilerTimer then
+				ReactProfilerTimerNewModule.recordCommitTime()
 			end
-			var5 = var43
+			config1.commitMutationEffects(FinishedWork, p6, p7)
 			
-			if reactFeatureFlags.decoupleUpdatePriorityFromScheduler and var42 ~= nil then
-				setCurrentUpdateLanePriority(var42)
+			if Flag2 then
+				ReactFiberHostConfigModule.afterActiveInstanceBlur()
 			end
-		else
-			p11.current = finishedWork
+			ReactFiberHostConfigModule.resetAfterCommit(p6.containerInfo)
+			p6.current = FinishedWork
 			
-			if reactFeatureFlags.enableProfilerTimer then
-				unknownModule_6.recordCommitTime()
+			if DEV and EnableDebugTracing then
+				DebugTracingModule.logLayoutEffectsStarted(FinishedLanes)
 			end
-		end
-		local var47 = var18
-		
-		if var18 then
-			var18 = false
-			var19 = p11
-			noLanes_4 = finishedLanes
-			var20 = p12
-		end
-		local pendingLanes = p11.pendingLanes
-		
-		if pendingLanes == reactFiberLaneModule.NoLanes then
-			var17 = nil
-		elseif reactFeatureFlags.enableSchedulerTracing then
-			if var25 ~= nil then
-				local var48 = var25
-				var25 = nil
+			if EnableSchedulingProfiler then
+				SchedulingProfilerModule.markLayoutEffectsStarted(FinishedLanes)
+			end
+			if DEV then
+				SetCurrentFiberFunction(FinishedWork)
+				InvokeGuardedCallbackFunction(nil, RecursivelyCommitLayoutEffectsFunction, nil, FinishedWork, p6, ReactFiberWorkLoopModule.captureCommitPhaseError, ReactFiberWorkLoopModule.schedulePassiveEffectCallback)
 				
-				for i = 1, #var48 do
-					scheduleInteractions(p11, var48[i], p11.memoizedInteractions)
+				if HasCaughtErrorFunction() then
+					Callback1(FinishedWork, FinishedWork, (ClearCaughtErrorFunction()))
 				end
-			end
-			t_2.schedulePendingInteractions(p11, pendingLanes)
-		end
-		if dEV and enableDoubleInvokingEffects and not var47 then
-			commitDoubleInvokeEffectsInDEV(p11.current, false)
-		end
-		if reactFeatureFlags.enableSchedulerTracing and not var47 then
-			t_2.finishPendingInteractions(p11, finishedLanes)
-		end
-		if pendingLanes ~= syncLane then
-			var22 = 0
-		elseif p11 == var23 then
-			var22 += 1
-		else
-			var22 = 0
-			var23 = p11
-		end
-		onCommitRoot(finishedWork.stateNode, p12)
-		
-		if dEV then
-			onCommitRoot_1()
-		end
-		var1(p11, now())
-		
-		if var15 then
-			var15 = false
-			local var49 = var16
-			var16 = nil
-			error(var49)
-		end
-		if bit32.band(var5, 8) == 0 then
-			flushSyncCallbackQueue()
-			
-			if dEV and enableDebugTracing then
-				debugTracingModule.logCommitStopped()
-			end
-			if enableSchedulingProfiler then
-				schedulingProfilerModule.markCommitStopped(p11)
-			end
-			return nil
-		elseif dEV and enableDebugTracing then
-			debugTracingModule.logCommitStopped()
-		end
-		if enableSchedulingProfiler then
-			schedulingProfilerModule.markCommitStopped(p11)
-		end
-		return nil
-	end
-end
-
-function t_2.commitBeforeMutationEffects(p13)
-	-- upvalues: t_2 (ref), reactFiberFlagsModule (ref), dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), hasCaughtError (ref), clearCaughtError (ref), t (ref), resetCurrentFiber (ref), yOLO (ref), describeError (ref)
-	local var50 = p13
-	while var50 ~= nil do
-		if var50.deletions ~= nil then
-			t_2.commitBeforeMutationEffectsDeletions(var50.deletions)
-		end
-		if var50.child ~= nil and bit32.band(var50.subtreeFlags, reactFiberFlagsModule.BeforeMutationMask) ~= reactFiberFlagsModule.NoFlags then
-			t_2.commitBeforeMutationEffects(var50.child)
-		end
-		if dEV then
-			setCurrentFiber(var50)
-			invokeGuardedCallback(nil, t_2.commitBeforeMutationEffectsImpl, nil, var50)
-			
-			if hasCaughtError() then
-				t.captureCommitPhaseError(var50, var50.return_, clearCaughtError())
-			end
-			resetCurrentFiber()
-		else
-			local var51
-			local _ = nil
-			local var52 = nil
-			
-			if yOLO then
-				var51 = true
-				t_2.commitBeforeMutationEffectsImpl(var50)
+				ResetCurrentFiberFunction()
 			else
-				local ok, status = xpcall(t_2.commitBeforeMutationEffectsImpl, describeError, var50)
-				var51 = ok
-				var52 = status
-			end
-			if not var51 then
-				t.captureCommitPhaseError(var50, var50.return_, var52)
-			end
-		end
-		var50 = var50.sibling
-	end
-end
-
-function t_2.commitBeforeMutationEffectsImpl(p14)
-	-- upvalues: var28 (write), var27 (write), reactWorkTagsModule (ref), unknownModule_5 (ref), doesFiberContain (ref), reactFiberHostConfigModule (ref), reactFiberFlagsModule (ref), setCurrentFiber (ref), commitBeforeMutationLifeCycles (ref), resetCurrentFiber (ref), var18 (write), scheduleCallback (ref), normalPriority (ref), t (ref)
-	local alternate = p14.alternate
-	local flags = p14.flags
-	
-	if not var28 and var27 ~= nil and (p14.tag == reactWorkTagsModule.SuspenseComponent and unknownModule_5.isSuspenseBoundaryBeingHidden(alternate, p14)) and doesFiberContain(p14, var27) then
-		var28 = true
-		reactFiberHostConfigModule.beforeActiveInstanceBlur()
-	end
-	if bit32.band(flags, reactFiberFlagsModule.Snapshot) ~= reactFiberFlagsModule.NoFlags then
-		setCurrentFiber(p14)
-		commitBeforeMutationLifeCycles(alternate, p14)
-		resetCurrentFiber()
-	end
-	if bit32.band(flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags and not var18 then
-		var18 = true
-		scheduleCallback(normalPriority, function()
-			-- upvalues: t (copy)
-			t.flushPassiveEffects()
-			
-			return nil
-		end)
-	end
-end
-
-function t_2.commitBeforeMutationEffectsDeletions(p14)
-	-- upvalues: doesFiberContain (ref), var27 (write), var28 (write), reactFiberHostConfigModule (ref)
-	for i = 1, #p14 do
-		if doesFiberContain(p14[i], var27) then
-			var28 = true
-			reactFiberHostConfigModule.beforeActiveInstanceBlur()
-		end
-	end
-end
-
-function t_2.commitMutationEffects(p15, p16, p17)
-	-- upvalues: commitDeletion (ref), describeError (ref), t (ref), reactFiberFlagsModule (ref), t_2 (ref), dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), hasCaughtError (ref), clearCaughtError (ref), resetCurrentFiber (ref), yOLO (ref)
-	local var53 = p15
-	while var53 ~= nil do
-		local deletions = var53.deletions
-		
-		if deletions ~= nil then
-			for status, v in deletions do
-				local ok, status = xpcall(commitDeletion, describeError, p16, v, var53, p17)
+				local v13 = nil
+				local Success = nil
 				
-				if not ok then
-					t.captureCommitPhaseError(v, var53, status)
-				end
-			end
-		end
-		if var53.child ~= nil and bit32.band(var53.subtreeFlags, reactFiberFlagsModule.MutationMask) ~= reactFiberFlagsModule.NoFlags then
-			t_2.commitMutationEffects(var53.child, p16, p17)
-		end
-		if dEV then
-			setCurrentFiber(var53)
-			invokeGuardedCallback(nil, t_2.commitMutationEffectsImpl, nil, var53, p16, p17)
-			
-			if hasCaughtError() then
-				t.captureCommitPhaseError(var53, var53.return_, clearCaughtError())
-			end
-			resetCurrentFiber()
-		else
-			local var54
-			local _ = nil
-			local var55 = nil
-			
-			if yOLO then
-				var54 = true
-				t_2.commitMutationEffectsImpl(var53, p16, p17)
-			else
-				local ok, status = xpcall(t_2.commitMutationEffectsImpl, describeError, var53, p16, p17)
-				var54 = ok
-				var55 = status
-			end
-			if not var54 then
-				t.captureCommitPhaseError(var53, var53.return_, var55)
-			end
-		end
-		var53 = var53.sibling
-	end
-end
-
-function t_2.commitMutationEffectsImpl(p18, _, _)
-	-- upvalues: reactFiberFlagsModule (ref), commitDetachRef (ref), commitPlacement (ref), commitWork (ref)
-	local flags = p18.flags
-	
-	if bit32.band(flags, reactFiberFlagsModule.Ref) ~= 0 then
-		local alternate = p18.alternate
-		
-		if alternate ~= nil then
-			commitDetachRef(alternate)
-		end
-	end
-	local bits = bit32.band(flags, bit32.bor(reactFiberFlagsModule.Placement, reactFiberFlagsModule.Update, reactFiberFlagsModule.Hydrating))
-	
-	if bits == reactFiberFlagsModule.Placement then
-		commitPlacement(p18)
-		p18.flags = bit32.band(p18.flags, bit32.bnot(reactFiberFlagsModule.Placement))
-		
-		return
-	elseif bits == reactFiberFlagsModule.PlacementAndUpdate then
-		commitPlacement(p18)
-		p18.flags = bit32.band(p18.flags, bit32.bnot(reactFiberFlagsModule.Placement))
-		commitWork(p18.alternate, p18)
-		
-		return
-	elseif bits == reactFiberFlagsModule.Update then
-		commitWork(p18.alternate, p18)
-	end
-end
-
-function t_2.commitMutationEffectsDeletions(p18, p19, p20, p21)
-	-- upvalues: commitDeletion (ref), describeError (ref), t (ref)
-	for i, v in p18 do
-		local ok, status = xpcall(commitDeletion, describeError, p20, v, p19, p21)
-		
-		if not ok then
-			t.captureCommitPhaseError(v, p19, status)
-		end
-	end
-end
-
-function t.schedulePassiveEffectCallback()
-	-- upvalues: var18 (write), scheduleCallback (ref), normalPriority (ref), t (ref)
-	if not var18 then
-		var18 = true
-		scheduleCallback(normalPriority, function()
-			-- upvalues: t (copy)
-			t.flushPassiveEffects()
-			
-			return nil
-		end)
-	end
-end
-
-local var56 = nil
-
-function t.flushPassiveEffects()
-	-- upvalues: var20 (write), noPriority (ref), normalPriority (ref), reactFeatureFlags (ref), getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), schedulerPriorityToLanePriority (ref), yOLO (ref), runWithPriority (ref), describeError (ref), var56 (write)
-	if var20 == noPriority then
-		return false
-	end
-	local var57 = if normalPriority < var20 then normalPriority else var20
-	var20 = noPriority
-	
-	if not reactFeatureFlags.decoupleUpdatePriorityFromScheduler then
-		return runWithPriority(var57, var56)
-	end
-	local var58, var59
-	local var60 = getCurrentUpdateLanePriority()
-	setCurrentUpdateLanePriority(schedulerPriorityToLanePriority(var57))
-	local _ = nil
-	local _ = nil
-	
-	if yOLO then
-		var58 = true
-		setCurrentUpdateLanePriority(schedulerPriorityToLanePriority(var57))
-		var59 = runWithPriority(var57, var56)
-	else
-		local ok, status = xpcall(runWithPriority, describeError, var57, var56)
-		var58 = ok
-		var59 = status
-	end
-	setCurrentUpdateLanePriority(var60)
-	
-	if not var58 then
-		error(var59)
-	end
-	return var59
-end
-
-local var57 = function(p22, p23)
-	-- upvalues: reactFeatureFlags (ref), reactWorkTagsModule (ref), var14 (write), reactFiberFlagsModule (ref), var57 (write), dEV (ref), setCurrentFiber (ref), invokeGuardedCallback (ref), commitPassiveMount (ref), hasCaughtError (ref), clearCaughtError (ref), t (ref), resetCurrentFiber (ref), yOLO (ref), describeError (ref)
-	local var58 = p23
-	while var58 ~= nil do
-		local var59 = nil
-		
-		if reactFeatureFlags.enableProfilerTimer and reactFeatureFlags.enableProfilerCommitHooks and var58.tag == reactWorkTagsModule.Profiler then
-			var59 = var14
-			var14 = var58
-		end
-		if var58.child ~= nil and bit32.band(var58.subtreeFlags, reactFiberFlagsModule.PassiveMask) ~= reactFiberFlagsModule.NoFlags then
-			var57(p22, var58.child)
-		end
-		if bit32.band(var58.flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags then
-			if dEV then
-				setCurrentFiber(var58)
-				invokeGuardedCallback(nil, commitPassiveMount, nil, p22, var58)
-				
-				if hasCaughtError() then
-					t.captureCommitPhaseError(var58, var58.return_, clearCaughtError())
-				end
-				resetCurrentFiber()
-			else
-				local var60
-				local _ = nil
-				local var61 = nil
-				
-				if yOLO then
-					var60 = true
-					commitPassiveMount(p22, var58)
+				if YOLO then
+					Success = true
+					RecursivelyCommitLayoutEffectsFunction(FinishedWork, p6, ReactFiberWorkLoopModule.captureCommitPhaseError, ReactFiberWorkLoopModule.schedulePassiveEffectCallback)
 				else
-					local ok, status = xpcall(commitPassiveMount, describeError, p22, var58)
-					var60 = ok
-					var61 = status
+					Success, v223 = xpcall(RecursivelyCommitLayoutEffectsFunction, DescribeError, FinishedWork, p6, ReactFiberWorkLoopModule.captureCommitPhaseError, ReactFiberWorkLoopModule.schedulePassiveEffectCallback)
 				end
-				if not var60 then
-					t.captureCommitPhaseError(var58, var58.return_, var61)
+				if not Success then
+					Callback1(FinishedWork, FinishedWork, v13)
 				end
 			end
-		end
-		if reactFeatureFlags.enableProfilerTimer and reactFeatureFlags.enableProfilerCommitHooks and var58.tag == reactWorkTagsModule.Profiler then
-			if var59 ~= nil then
-				var59.stateNode.passiveEffectDuration += var58.stateNode.passiveEffectDuration
+			if DEV and EnableDebugTracing then
+				DebugTracingModule.logLayoutEffectsStopped()
 			end
-			var14 = var59
+			if EnableSchedulingProfiler then
+				SchedulingProfilerModule.markLayoutEffectsStopped()
+			end
+			if (bit32.band(FinishedWork.subtreeFlags, ReactFiberFlagsModule.PassiveMask) ~= ReactFiberFlagsModule.NoFlags or bit32.band(FinishedWork.flags, ReactFiberFlagsModule.PassiveMask) ~= ReactFiberFlagsModule.NoFlags) and not Flag1 then
+				Flag1 = true
+				ScheduleCallbackFunction(NormalPriority, function() --[[ Line: 2443 ]]
+					-- upvalues: ReactFiberWorkLoopModule (upval)
+					ReactFiberWorkLoopModule.flushPassiveEffects()
+					
+					return nil
+				end)
+			end
+			RequestPaintFunction()
+			
+			if ReactFeatureFlags.enableSchedulerTracing then
+				config1.popInteractions(PushInteractionsResult)
+			end
+			Bits = Bits1
+			
+			if ReactFeatureFlags.decoupleUpdatePriorityFromScheduler and v12 ~= nil then
+				SetCurrentUpdateLanePriorityFunction(v12)
+			end
+		else
+			p6.current = FinishedWork
+			
+			if ReactFeatureFlags.enableProfilerTimer then
+				ReactProfilerTimerNewModule.recordCommitTime()
+			end
 		end
-		var58 = var58.sibling
+		local Flag3: boolean = Flag1
+		
+		if Flag1 then
+			Flag1 = false
+			v9 = p6
+			NoLanes4 = FinishedLanes
+			NoPriority1 = p7
+		end
+		local PendingLanes = p6.pendingLanes
+		
+		if PendingLanes == ReactFiberLaneModule.NoLanes then
+			NewResult = nil
+		elseif ReactFeatureFlags.enableSchedulerTracing then
+			if List ~= nil then
+				local List1 = List
+				List = nil
+				
+				for i = 1, #List1 do
+					scheduleInteractions(p6, List1[i], p6.memoizedInteractions)
+				end
+			end
+			config1.schedulePendingInteractions(p6, PendingLanes)
+		end
+		if DEV and (EnableDoubleInvokingEffects and not Flag3) then
+			commitDoubleInvokeEffectsInDEV(p6.current, false)
+		end
+		if ReactFeatureFlags.enableSchedulerTracing and not Flag3 then
+			config1.finishPendingInteractions(p6, FinishedLanes)
+		end
+		if PendingLanes == SyncLane then
+			if p6 == v10 then
+				Count += 1
+			else
+				Count = 0
+				v10 = p6
+			end
+		else
+			Count = 0
+		end
+		OnCommitRootFunction(FinishedWork.stateNode, p7)
+		
+		if DEV then
+			OnCommitRootFunction1()
+		end
+		Callback(p6, NowFunction())
+		
+		if Flag then
+			Flag = false
+			local v14 = v8
+			v8 = nil
+			error(v14)
+		end
+		if bit32.band(Bits, 8) == 0 then
+			FlushSyncCallbackQueueFunction()
+			
+			if DEV and EnableDebugTracing then
+				DebugTracingModule.logCommitStopped()
+			end
+			if EnableSchedulingProfiler then
+				SchedulingProfilerModule.markCommitStopped(p6)
+			end
+			return nil
+		else
+			if DEV and EnableDebugTracing then
+				DebugTracingModule.logCommitStopped()
+			end
+			if EnableSchedulingProfiler then
+				SchedulingProfilerModule.markCommitStopped(p6)
+			end
+			return nil
+		end
 	end
 end
 
-local function flushPassiveUnmountEffects(p24)
-	-- upvalues: t_2 (ref), enableNewTreeCleanupPath (ref), deletedTreeCleanUpLevel (ref), reactFiberFlagsModule (ref), flushPassiveUnmountEffects (ref), setCurrentFiber (ref), commitPassiveUnmount (ref), resetCurrentFiber (ref)
-	local var62 = p24
-	while var62 ~= nil do
-		local deletions = var62.deletions
-		
-		if deletions ~= nil then
-			local i
-			for i = 1, #deletions do
-				local var63 = deletions[i]
-				t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(var63, var62)
-				
-				if not enableNewTreeCleanupPath or deletedTreeCleanUpLevel < 2 then
-					t_2.detachFiberAfterEffects(var63)
-				end
-			end
-			if enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 1 then
-				local alternate = var62.alternate
-				
-				if alternate ~= nil then
-					local child = alternate.child
+function config1.commitBeforeMutationEffects(Child) --[[ Line: 2596 ]]
+	-- upvalues: config1 (copy), ReactFiberFlagsModule (copy), ReactFeatureFlags (copy), PrepareForCommitResult (ref), DEV (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ReactFiberWorkLoopModule (copy), ResetCurrentFiberFunction (copy), YOLO (copy), DescribeError (copy)
+	local Sibling = Child
+	while Sibling ~= nil do
+		if Sibling.deletions ~= nil then
+			config1.commitBeforeMutationEffectsDeletions(Sibling.deletions)
+		end
+		if Sibling.child ~= nil and bit32.band(Sibling.subtreeFlags, ReactFiberFlagsModule.BeforeMutationMask) ~= ReactFiberFlagsModule.NoFlags then
+			config1.commitBeforeMutationEffects(Sibling.child)
+		end
+		if ReactFeatureFlags.enableCommitTraversalTrims then
+			if PrepareForCommitResult ~= nil or bit32.band(Sibling.flags, ReactFiberFlagsModule.Snapshot) ~= ReactFiberFlagsModule.NoFlags then
+				if DEV then
+					SetCurrentFiberFunction(Sibling)
+					InvokeGuardedCallbackFunction(nil, config1.commitBeforeMutationEffectsImpl, nil, Sibling)
 					
-					if child ~= nil then
-						alternate.child = nil
-						repeat
-							i = child.sibling
-							child.sibling = nil
-							child = i
-						until child ~= nil
+					if HasCaughtErrorFunction() then
+						ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, (ClearCaughtErrorFunction()))
+					end
+					ResetCurrentFiberFunction()
+				else
+					local v15 = nil
+					local Success = nil
+					
+					if YOLO then
+						Success = true
+						config1.commitBeforeMutationEffectsImpl(Sibling)
+					else
+						Success, v230 = xpcall(config1.commitBeforeMutationEffectsImpl, DescribeError, Sibling)
+					end
+					if not Success then
+						ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v15)
 					end
 				end
 			end
+		elseif DEV then
+			SetCurrentFiberFunction(Sibling)
+			InvokeGuardedCallbackFunction(nil, config1.commitBeforeMutationEffectsImpl, nil, Sibling)
+			
+			if HasCaughtErrorFunction() then
+				ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, (ClearCaughtErrorFunction()))
+			end
+			ResetCurrentFiberFunction()
+		else
+			local v16 = nil
+			local Success1 = nil
+			
+			if YOLO then
+				Success1 = true
+				config1.commitBeforeMutationEffectsImpl(Sibling)
+			else
+				Success1, v232 = xpcall(config1.commitBeforeMutationEffectsImpl, DescribeError, Sibling)
+			end
+			if not Success1 then
+				ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v16)
+			end
 		end
-		local child = var62.child
+		Sibling = Sibling.sibling
+	end
+end
+
+function config1.commitBeforeMutationEffectsImpl(Sibling) --[[ Line: 2686 ]]
+	-- upvalues: Flag2 (ref), PrepareForCommitResult (ref), ReactWorkTagsModule (copy), ReactFiberCommitWorkNewModule (copy), DoesFiberContainFunction (copy), ReactFiberHostConfigModule (copy), ReactFiberFlagsModule (copy), SetCurrentFiberFunction (copy), CommitBeforeMutationLifeCyclesFunction (copy), ResetCurrentFiberFunction (copy), ReactFeatureFlags (copy), Flag1 (ref), ScheduleCallbackFunction (copy), NormalPriority (copy), ReactFiberWorkLoopModule (copy)
+	local Alternate = Sibling.alternate
+	local Flags: number = Sibling.flags
+	
+	if not Flag2 and PrepareForCommitResult ~= nil and Sibling.tag == ReactWorkTagsModule.SuspenseComponent and ReactFiberCommitWorkNewModule.isSuspenseBoundaryBeingHidden(Alternate, Sibling) and DoesFiberContainFunction(Sibling, PrepareForCommitResult) then
+		Flag2 = true
+		ReactFiberHostConfigModule.beforeActiveInstanceBlur()
+	end
+	if bit32.band(Flags, ReactFiberFlagsModule.Snapshot) ~= ReactFiberFlagsModule.NoFlags then
+		SetCurrentFiberFunction(Sibling)
+		CommitBeforeMutationLifeCyclesFunction(Alternate, Sibling)
+		ResetCurrentFiberFunction()
+	end
+	if not ReactFeatureFlags.enableCommitTraversalTrims and bit32.band(Flags, ReactFiberFlagsModule.Passive) ~= ReactFiberFlagsModule.NoFlags and not Flag1 then
+		Flag1 = true
+		ScheduleCallbackFunction(NormalPriority, function() --[[ Line: 2716 ]]
+			-- upvalues: ReactFiberWorkLoopModule (upval)
+			ReactFiberWorkLoopModule.flushPassiveEffects()
+			
+			return nil
+		end)
+	end
+end
+
+function config1.commitBeforeMutationEffectsDeletions(Deletions) --[[ Line: 2725 ]]
+	-- upvalues: DoesFiberContainFunction (copy), PrepareForCommitResult (ref), Flag2 (ref), ReactFiberHostConfigModule (copy)
+	for i = 1, #Deletions do
+		if DoesFiberContainFunction(Deletions[i], PrepareForCommitResult) then
+			Flag2 = true
+			ReactFiberHostConfigModule.beforeActiveInstanceBlur()
+		end
+	end
+end
+
+function config1.commitMutationEffects(Child, p8, p9) --[[ Line: 2740 ]]
+	-- upvalues: CommitDeletion (copy), DescribeError (copy), ReactFiberWorkLoopModule (copy), ReactFiberFlagsModule (copy), config1 (copy), ReactFeatureFlags (copy), DEV (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ResetCurrentFiberFunction (copy), YOLO (copy)
+	local Sibling = Child
+	while Sibling ~= nil do
+		local Deletions = Sibling.deletions
 		
-		if child ~= nil and bit32.band(var62.subtreeFlags, reactFiberFlagsModule.PassiveMask) ~= reactFiberFlagsModule.NoFlags then
-			flushPassiveUnmountEffects(child)
+		if Deletions ~= nil then
+			for _, deletion in Deletions do
+				local Success, Result = xpcall(CommitDeletion, DescribeError, p8, deletion, Sibling, p9)
+				
+				if not Success then
+					ReactFiberWorkLoopModule.captureCommitPhaseError(deletion, Sibling, Result)
+				end
+			end
 		end
-		if bit32.band(var62.flags, reactFiberFlagsModule.Passive) ~= reactFiberFlagsModule.NoFlags then
-			setCurrentFiber(var62)
-			commitPassiveUnmount(var62)
-			resetCurrentFiber()
+		if Sibling.child ~= nil and bit32.band(Sibling.subtreeFlags, ReactFiberFlagsModule.MutationMask) ~= ReactFiberFlagsModule.NoFlags then
+			config1.commitMutationEffects(Sibling.child, p8, p9)
 		end
-		var62 = var62.sibling
+		if ReactFeatureFlags.enableCommitTraversalTrims then
+			if bit32.band(Sibling.flags, config1.MutationWorkFlags) ~= ReactFiberFlagsModule.NoFlags then
+				if DEV then
+					SetCurrentFiberFunction(Sibling)
+					InvokeGuardedCallbackFunction(nil, config1.commitMutationEffectsImpl, nil, Sibling, p8, p9)
+					
+					if HasCaughtErrorFunction() then
+						ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, (ClearCaughtErrorFunction()))
+					end
+					ResetCurrentFiberFunction()
+				else
+					local v17 = nil
+					local Success1 = nil
+					
+					if YOLO then
+						Success1 = true
+						config1.commitMutationEffectsImpl(Sibling, p8, p9)
+					else
+						Success1, v240 = xpcall(config1.commitMutationEffectsImpl, DescribeError, Sibling, p8, p9)
+					end
+					if not Success1 then
+						ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v17)
+					end
+				end
+			end
+		elseif DEV then
+			SetCurrentFiberFunction(Sibling)
+			InvokeGuardedCallbackFunction(nil, config1.commitMutationEffectsImpl, nil, Sibling, p8, p9)
+			
+			if HasCaughtErrorFunction() then
+				ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, (ClearCaughtErrorFunction()))
+			end
+			ResetCurrentFiberFunction()
+		else
+			local v18 = nil
+			local Success2 = nil
+			
+			if YOLO then
+				Success2 = true
+				config1.commitMutationEffectsImpl(Sibling, p8, p9)
+			else
+				Success2, v242 = xpcall(config1.commitMutationEffectsImpl, DescribeError, Sibling, p8, p9)
+			end
+			if not Success2 then
+				ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v18)
+			end
+		end
+		Sibling = Sibling.sibling
 	end
 end
 
-function t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(p25, p26)
-	-- upvalues: reactFiberFlagsModule (ref), enableNewTreeCleanupPath (ref), deletedTreeCleanUpLevel (ref), t_2 (ref), setCurrentFiber (ref), commitPassiveUnmountInsideDeletedTree (ref), resetCurrentFiber (ref)
-	if bit32.band(p25.subtreeFlags, reactFiberFlagsModule.PassiveStatic) ~= reactFiberFlagsModule.NoFlags or enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 2 then
-		local child = p25.child
-		while child ~= nil do
-			local sibling = child.sibling
-			t_2.flushPassiveUnmountEffectsInsideOfDeletedTree(child, p26)
-			child = sibling
+function config1.commitMutationEffectsImpl(Sibling, _, _) --[[ Line: 2855 ]]
+	-- upvalues: ReactFiberFlagsModule (copy), CommitDetachRefFunction (copy), ReactFeatureFlags (copy), CommitPlacementFunction (copy), CommitWorkFunction (copy)
+	local Flags: number = Sibling.flags
+	
+	if bit32.band(Flags, ReactFiberFlagsModule.Ref) ~= 0 then
+		local Alternate = Sibling.alternate
+		
+		if Alternate ~= nil then
+			CommitDetachRefFunction(Alternate)
 		end
 	end
-	if bit32.band(p25.flags, reactFiberFlagsModule.PassiveStatic) ~= reactFiberFlagsModule.NoFlags then
-		setCurrentFiber(p25)
-		commitPassiveUnmountInsideDeletedTree(p25, p26)
-		resetCurrentFiber()
+	local Bits = bit32.band(Flags, (bit32.bor(ReactFiberFlagsModule.Placement, ReactFiberFlagsModule.Update, ReactFiberFlagsModule.Hydrating)))
+	
+	if ReactFeatureFlags.enableCommitTraversalTrims and bit32.band(Flags, ReactFiberFlagsModule.HostUpdate) ~= ReactFiberFlagsModule.NoFlags then
+		Bits = bit32.bor(Bits, ReactFiberFlagsModule.Update)
 	end
-	if enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 2 then
-		t_2.detachFiberAfterEffects(p25)
+	if Bits == ReactFiberFlagsModule.Placement then
+		CommitPlacementFunction(Sibling)
+		Sibling.flags = bit32.band(Sibling.flags, (bit32.bnot(ReactFiberFlagsModule.Placement)))
+		
+		return
+	end
+	if Bits == ReactFiberFlagsModule.PlacementAndUpdate then
+		CommitPlacementFunction(Sibling)
+		Sibling.flags = bit32.band(Sibling.flags, (bit32.bnot(ReactFiberFlagsModule.Placement)))
+		CommitWorkFunction(Sibling.alternate, Sibling)
+		
+		return
+	elseif Bits == ReactFiberFlagsModule.Update then
+		CommitWorkFunction(Sibling.alternate, Sibling)
 	end
 end
 
-var56 = function()
-	-- upvalues: var19 (write), noLanes_4 (write), reactFiberLaneModule (ref), invariant (ref), var5 (write), dEV (ref), enableDebugTracing (ref), debugTracingModule (ref), enableSchedulingProfiler (ref), schedulingProfilerModule (ref), t_2 (ref), flushPassiveUnmountEffects (ref), var57 (write), enableDoubleInvokingEffects (ref), reactFeatureFlags (ref), flushSyncCallbackQueue (ref), var24 (write)
-	if var19 == nil then
+function config1.commitMutationEffectsDeletions(List, p10, p11, p12) --[[ Line: 2930 ]]
+	-- upvalues: CommitDeletion (copy), DescribeError (copy), ReactFiberWorkLoopModule (copy)
+	for _, value in List do
+		local Success, Result = xpcall(CommitDeletion, DescribeError, p11, value, p10, p12)
+		
+		if not Success then
+			ReactFiberWorkLoopModule.captureCommitPhaseError(value, p10, Result)
+		end
+	end
+end
+
+function ReactFiberWorkLoopModule.schedulePassiveEffectCallback() --[[ Line: 2953 ]]
+	-- upvalues: Flag1 (ref), ScheduleCallbackFunction (copy), NormalPriority (copy), ReactFiberWorkLoopModule (copy)
+	if not Flag1 then
+		Flag1 = true
+		ScheduleCallbackFunction(NormalPriority, function() --[[ Line: 2956 ]]
+			-- upvalues: ReactFiberWorkLoopModule (upval)
+			ReactFiberWorkLoopModule.flushPassiveEffects()
+			
+			return nil
+		end)
+	end
+end
+
+local v19 = nil
+
+function ReactFiberWorkLoopModule.flushPassiveEffects() --[[ Line: 2965 ]]
+	-- upvalues: NoPriority1 (ref), NoPriority (copy), NormalPriority (copy), ReactFeatureFlags (copy), GetCurrentUpdateLanePriorityFunction (copy), SetCurrentUpdateLanePriorityFunction (copy), SchedulerPriorityToLanePriorityFunction (copy), YOLO (copy), RunWithPriorityFunction (copy), DescribeError (copy), v19 (ref)
+	if NoPriority1 == NoPriority then
 		return false
 	end
-	var19 = nil
-	noLanes_4 = reactFiberLaneModule.NoLanes
-	invariant(bit32.band(var5, 48) == 0, "Cannot flush passive effects while already rendering.")
+	local NormalPriority1 = if NormalPriority < NoPriority1 then NormalPriority else NoPriority1
+	NoPriority1 = NoPriority
 	
-	if dEV and enableDebugTracing then
-		debugTracingModule.logPassiveEffectsStarted(noLanes_4)
+	if not ReactFeatureFlags.decoupleUpdatePriorityFromScheduler then
+		return RunWithPriorityFunction(NormalPriority1, v19)
 	end
-	if enableSchedulingProfiler then
-		schedulingProfilerModule.markPassiveEffectsStarted(noLanes_4)
-	end
-	var5 = bit32.bor(var5, 32)
-	local var64 = t_2.pushInteractions(var19)
-	flushPassiveUnmountEffects(var19.current)
-	var57(var19, var19.current)
+	local CurrentUpdateLanePriority = GetCurrentUpdateLanePriorityFunction()
+	SetCurrentUpdateLanePriorityFunction(SchedulerPriorityToLanePriorityFunction(NormalPriority1))
+	local Success = nil
+	local Result = nil
 	
-	if dEV and enableDebugTracing then
-		debugTracingModule.logPassiveEffectsStopped()
+	if YOLO then
+		Success = true
+		SetCurrentUpdateLanePriorityFunction(SchedulerPriorityToLanePriorityFunction(NormalPriority1))
+		Result = RunWithPriorityFunction(NormalPriority1, v19)
+	else
+		Success, Result = xpcall(RunWithPriorityFunction, DescribeError, NormalPriority1, v19)
 	end
-	if enableSchedulingProfiler then
-		schedulingProfilerModule.markPassiveEffectsStopped(var19)
-	end
-	if dEV and enableDoubleInvokingEffects then
-		commitDoubleInvokeEffectsInDEV(var19.current, true)
-	end
-	if reactFeatureFlags.enableSchedulerTracing then
-		t_2.popInteractions(var64)
-		t_2.finishPendingInteractions(var19, noLanes_4)
-	end
-	var5 = var5
-	flushSyncCallbackQueue()
-	var24 = if var19 == nil then 0 else var24 + 1
+	SetCurrentUpdateLanePriorityFunction(CurrentUpdateLanePriority)
 	
+	if not Success then
+		error(Result)
+	end
+	return Result
+end
+
+local function v107(p13, Current) --[[ Line: 3009 ]]
+	-- upvalues: ReactFeatureFlags (copy), ReactWorkTagsModule (copy), v7 (ref), ReactFiberFlagsModule (copy), v107 (ref), DEV (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), CommitPassiveMountFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ReactFiberWorkLoopModule (copy), ResetCurrentFiberFunction (copy), YOLO (copy), DescribeError (copy)
+	local Sibling = Current
+	while Sibling ~= nil do
+		local v20 = nil
+		
+		if ReactFeatureFlags.enableProfilerTimer and ReactFeatureFlags.enableProfilerCommitHooks and Sibling.tag == ReactWorkTagsModule.Profiler then
+			v20 = v7
+			v7 = Sibling
+		end
+		local Bits = bit32.band(Sibling.subtreeFlags, ReactFiberFlagsModule.PassiveMask)
+		
+		if Sibling.child ~= nil and Bits ~= ReactFiberFlagsModule.NoFlags then
+			v107(p13, Sibling.child)
+		end
+		if bit32.band(Sibling.flags, ReactFiberFlagsModule.Passive) ~= ReactFiberFlagsModule.NoFlags then
+			if DEV then
+				SetCurrentFiberFunction(Sibling)
+				InvokeGuardedCallbackFunction(nil, CommitPassiveMountFunction, nil, p13, Sibling)
+				
+				if HasCaughtErrorFunction() then
+					ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, (ClearCaughtErrorFunction()))
+				end
+				ResetCurrentFiberFunction()
+			else
+				local v21 = nil
+				local Success = nil
+				
+				if YOLO then
+					Success = true
+					CommitPassiveMountFunction(p13, Sibling)
+				else
+					Success, v256 = xpcall(CommitPassiveMountFunction, DescribeError, p13, Sibling)
+				end
+				if not Success then
+					ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Sibling.return_, v21)
+				end
+			end
+		end
+		if ReactFeatureFlags.enableProfilerTimer and ReactFeatureFlags.enableProfilerCommitHooks and Sibling.tag == ReactWorkTagsModule.Profiler then
+			if v20 ~= nil then
+				local StateNode = v20.stateNode
+				StateNode.passiveEffectDuration += Sibling.stateNode.passiveEffectDuration
+			end
+			v7 = v20
+		end
+		Sibling = Sibling.sibling
+	end
+end
+
+function config1.commitPassiveMountEffectsOnFibers(p14, PassiveMountFibers) --[[ Line: 3078 ]]
+	-- upvalues: DEV (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), CommitPassiveMountFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ReactFiberWorkLoopModule (copy), ResetCurrentFiberFunction (copy), YOLO (copy), DescribeError (copy)
+	for i = 1, #PassiveMountFibers do
+		local PassiveMountFiber = PassiveMountFibers[i]
+		
+		if DEV then
+			SetCurrentFiberFunction(PassiveMountFiber)
+			InvokeGuardedCallbackFunction(nil, CommitPassiveMountFunction, nil, p14, PassiveMountFiber)
+			
+			if HasCaughtErrorFunction() then
+				ReactFiberWorkLoopModule.captureCommitPhaseError(PassiveMountFiber, PassiveMountFiber.return_, (ClearCaughtErrorFunction()))
+			end
+			ResetCurrentFiberFunction()
+		else
+			local v22 = nil
+			local Success = nil
+			
+			if YOLO then
+				Success = true
+				CommitPassiveMountFunction(p14, PassiveMountFiber)
+			else
+				Success, v260 = xpcall(CommitPassiveMountFunction, DescribeError, p14, PassiveMountFiber)
+			end
+			if not Success then
+				ReactFiberWorkLoopModule.captureCommitPhaseError(PassiveMountFiber, PassiveMountFiber.return_, v22)
+			end
+		end
+	end
+end
+
+local function flushPassiveUnmountEffects(Current) --[[ Line: 3106 ]]
+	-- upvalues: config1 (copy), EnableNewTreeCleanupPath (copy), DeletedTreeCleanUpLevel (copy), ReactFiberFlagsModule (copy), flushPassiveUnmountEffects (copy), SetCurrentFiberFunction (copy), CommitPassiveUnmountFunction (copy), ResetCurrentFiberFunction (copy)
+	local Sibling = Current
+	while Sibling ~= nil do
+		local Deletions = Sibling.deletions
+		
+		if Deletions ~= nil then
+			for i = 1, #Deletions do
+				local Deletion = Deletions[i]
+				config1.flushPassiveUnmountEffectsInsideOfDeletedTree(Deletion, Sibling)
+				
+				if not EnableNewTreeCleanupPath or DeletedTreeCleanUpLevel < 2 then
+					config1.detachFiberAfterEffects(Deletion)
+				end
+			end
+			if EnableNewTreeCleanupPath and DeletedTreeCleanUpLevel >= 1 then
+				local Alternate = Sibling.alternate
+				local NoAlternate = Alternate == nil
+				local Child1 = nil
+				
+				if not NoAlternate then
+					Child1 = Alternate.child
+					NoAlternate = Child1 == nil
+				end
+				if not NoAlternate then
+					Alternate.child = nil
+					repeat
+						Child1.sibling = nil
+						Child1 = Child1.sibling
+					until Child1 == nil
+				end
+			end
+		end
+		local Child = Sibling.child
+		
+		if Child ~= nil and bit32.band(Sibling.subtreeFlags, ReactFiberFlagsModule.PassiveMask) ~= ReactFiberFlagsModule.NoFlags then
+			flushPassiveUnmountEffects(Child)
+		end
+		if bit32.band(Sibling.flags, ReactFiberFlagsModule.Passive) ~= ReactFiberFlagsModule.NoFlags then
+			SetCurrentFiberFunction(Sibling)
+			CommitPassiveUnmountFunction(Sibling)
+			ResetCurrentFiberFunction()
+		end
+		Sibling = Sibling.sibling
+	end
+end
+
+function config1.flushPassiveUnmountEffectsCollecting(Child, List) --[[ Line: 3177 ]]
+	-- upvalues: config1 (copy), EnableNewTreeCleanupPath (copy), DeletedTreeCleanUpLevel (copy), ReactFiberFlagsModule (copy), SetCurrentFiberFunction (copy), CommitPassiveUnmountFunction (copy), ResetCurrentFiberFunction (copy)
+	local Sibling = Child
+	while Sibling ~= nil do
+		local Deletions = Sibling.deletions
+		
+		if Deletions ~= nil then
+			for i = 1, #Deletions do
+				local Deletion = Deletions[i]
+				config1.flushPassiveUnmountEffectsInsideOfDeletedTree(Deletion, Sibling)
+				
+				if not EnableNewTreeCleanupPath or DeletedTreeCleanUpLevel < 2 then
+					config1.detachFiberAfterEffects(Deletion)
+				end
+			end
+			if EnableNewTreeCleanupPath and DeletedTreeCleanUpLevel >= 1 then
+				local Alternate = Sibling.alternate
+				local NoAlternate = Alternate == nil
+				local Child2 = nil
+				
+				if not NoAlternate then
+					Child2 = Alternate.child
+					NoAlternate = Child2 == nil
+				end
+				if not NoAlternate then
+					Alternate.child = nil
+					repeat
+						Child2.sibling = nil
+						Child2 = Child2.sibling
+					until Child2 == nil
+				end
+			end
+		end
+		local Child1 = Sibling.child
+		
+		if Child1 ~= nil and bit32.band(Sibling.subtreeFlags, ReactFiberFlagsModule.PassiveMask) ~= ReactFiberFlagsModule.NoFlags then
+			config1.flushPassiveUnmountEffectsCollecting(Child1, List)
+		end
+		if bit32.band(Sibling.flags, ReactFiberFlagsModule.Passive) ~= ReactFiberFlagsModule.NoFlags then
+			table.insert(List, Sibling)
+			SetCurrentFiberFunction(Sibling)
+			CommitPassiveUnmountFunction(Sibling)
+			ResetCurrentFiberFunction()
+		end
+		Sibling = Sibling.sibling
+	end
+end
+
+function config1.flushPassiveUnmountEffectsInsideOfDeletedTree(Child, Sibling) --[[ Line: 3250 ]]
+	-- upvalues: ReactFiberFlagsModule (copy), EnableNewTreeCleanupPath (copy), DeletedTreeCleanUpLevel (copy), config1 (copy), SetCurrentFiberFunction (copy), CommitPassiveUnmountInsideDeletedTreeFunction (copy), ResetCurrentFiberFunction (copy)
+	if bit32.band(Child.subtreeFlags, ReactFiberFlagsModule.PassiveStatic) ~= ReactFiberFlagsModule.NoFlags or EnableNewTreeCleanupPath and DeletedTreeCleanUpLevel >= 2 then
+		local Child1 = Child.child
+		while Child1 ~= nil do
+			local Sibling1 = Child1.sibling
+			config1.flushPassiveUnmountEffectsInsideOfDeletedTree(Child1, Sibling)
+			Child1 = Sibling1
+		end
+	end
+	if bit32.band(Child.flags, ReactFiberFlagsModule.PassiveStatic) ~= ReactFiberFlagsModule.NoFlags then
+		SetCurrentFiberFunction(Child)
+		CommitPassiveUnmountInsideDeletedTreeFunction(Child, Sibling)
+		ResetCurrentFiberFunction()
+	end
+	if EnableNewTreeCleanupPath and DeletedTreeCleanUpLevel >= 2 then
+		config1.detachFiberAfterEffects(Child)
+	end
+end
+
+v19 = function(): boolean --[[ Line: 3291 ]]
+	-- upvalues: v9 (ref), NoLanes4 (ref), ReactFiberLaneModule (copy), InvariantFunction (copy), Bits (ref), DEV (copy), EnableDebugTracing (copy), DebugTracingModule (copy), EnableSchedulingProfiler (copy), SchedulingProfilerModule (copy), config1 (copy), ReactFeatureFlags (copy), flushPassiveUnmountEffects (copy), v107 (ref), EnableDoubleInvokingEffects (copy), FlushSyncCallbackQueueFunction (copy), Count1 (ref)
+	if v9 == nil then
+		return false
+	end
+	local v23 = v9
+	local NoLanes = NoLanes4
+	v9 = nil
+	NoLanes4 = ReactFiberLaneModule.NoLanes
+	InvariantFunction(bit32.band(Bits, 48) == 0, "Cannot flush passive effects while already rendering.")
+	
+	if DEV and EnableDebugTracing then
+		DebugTracingModule.logPassiveEffectsStarted(NoLanes)
+	end
+	if EnableSchedulingProfiler then
+		SchedulingProfilerModule.markPassiveEffectsStarted(NoLanes)
+	end
+	local Bits1: number = Bits
+	Bits = bit32.bor(Bits, 32)
+	local PushInteractionsResult = config1.pushInteractions(v23)
+	
+	if ReactFeatureFlags.enableCommitTraversalTrims then
+		if ReactFeatureFlags.enableProfilerTimer and ReactFeatureFlags.enableProfilerCommitHooks then
+			flushPassiveUnmountEffects(v23.current)
+			v107(v23, v23.current)
+		else
+			local PassiveMountFibers = config1.passiveMountFibers or {}
+			config1.passiveMountFibers = nil
+			config1.flushPassiveUnmountEffectsCollecting(v23.current, PassiveMountFibers)
+			config1.commitPassiveMountEffectsOnFibers(v23, PassiveMountFibers)
+			table.clear(PassiveMountFibers)
+			config1.passiveMountFibers = PassiveMountFibers
+		end
+	else
+		flushPassiveUnmountEffects(v23.current)
+		v107(v23, v23.current)
+	end
+	if DEV and EnableDebugTracing then
+		DebugTracingModule.logPassiveEffectsStopped()
+	end
+	if EnableSchedulingProfiler then
+		SchedulingProfilerModule.markPassiveEffectsStopped(v23)
+	end
+	if DEV and EnableDoubleInvokingEffects then
+		commitDoubleInvokeEffectsInDEV(v23.current, true)
+	end
+	if ReactFeatureFlags.enableSchedulerTracing then
+		config1.popInteractions(PushInteractionsResult)
+		config1.finishPendingInteractions(v23, NoLanes)
+	end
+	Bits = Bits1
+	FlushSyncCallbackQueueFunction()
+	
+	if v9 == nil then
+		Count1 = 0
+	else
+		Count1 += 1
+	end
 	return true
 end
 
-function t.isAlreadyFailedLegacyErrorBoundary(p27)
-	-- upvalues: var17 (write)
-	return var17 ~= nil and var17:has(p27)
+function ReactFiberWorkLoopModule.isAlreadyFailedLegacyErrorBoundary(StateNode) --[[ Line: 3386 ]]
+	-- upvalues: NewResult (ref)
+	return NewResult ~= nil and NewResult:has(StateNode)
 end
 
-function t.markLegacyErrorBoundaryAsFailed(p27)
-	-- upvalues: var17 (write), set (ref)
-	if var17 == nil then
-		var17 = set.new({ p27 })
+function ReactFiberWorkLoopModule.markLegacyErrorBoundaryAsFailed(p15) --[[ Line: 3391 ]]
+	-- upvalues: NewResult (ref), Set (copy)
+	if NewResult == nil then
+		NewResult = Set.new({ p15 })
 		
 		return
-	end
-	var17:add(p27)
-end
-
-function t.prepareToThrowUncaughtError(p27)
-	-- upvalues: var15 (write), var16 (write)
-	if not var15 then
-		var15 = true
-		var16 = p27
+	else
+		NewResult:add(p15)
 	end
 end
 
-var4 = function(p27, p28, p29)
-	-- upvalues: createCapturedValue (ref), createRootErrorUpdate (ref), syncLane (ref), t (ref), enqueueUpdate (ref), t_2 (ref), markRootUpdated (ref), var1 (write)
-	enqueueUpdate(p27, createRootErrorUpdate(p27, createCapturedValue(p29, p28), syncLane, t.onUncaughtError))
-	local var64 = t.requestEventTime()
-	local var65 = t_2.markUpdateLaneFromFiberToRoot(p27, syncLane)
+function ReactFiberWorkLoopModule.onUncaughtError(p15) --[[ Line: 3400 ]]
+	-- upvalues: Flag (ref), v8 (ref)
+	if not Flag then
+		Flag = true
+		v8 = p15
+	end
+end
+
+Callback1 = function(FinishedWork, FinishedWork1, p15) --[[ Line: 3408 ]]
+	-- upvalues: CreateCapturedValueFunction (copy), CreateRootErrorUpdateFunction (copy), SyncLane (copy), ReactFiberWorkLoopModule (copy), EnqueueUpdateFunction (copy), config1 (copy), MarkRootUpdatedFunction (copy), Callback (ref)
+	EnqueueUpdateFunction(FinishedWork, (CreateRootErrorUpdateFunction(FinishedWork, CreateCapturedValueFunction(p15, FinishedWork1), SyncLane, ReactFiberWorkLoopModule.onUncaughtError)))
+	local RequestEventTimeResult = ReactFiberWorkLoopModule.requestEventTime()
+	local MarkUpdateLaneFromFiberToRootResult = config1.markUpdateLaneFromFiberToRoot(FinishedWork, SyncLane)
 	
-	if var65 ~= nil then
-		markRootUpdated(var65, syncLane, var64)
-		var1(var65, var64)
-		t_2.schedulePendingInteractions(var65, syncLane)
+	if MarkUpdateLaneFromFiberToRootResult ~= nil then
+		MarkRootUpdatedFunction(MarkUpdateLaneFromFiberToRootResult, SyncLane, RequestEventTimeResult)
+		Callback(MarkUpdateLaneFromFiberToRootResult, RequestEventTimeResult)
+		config1.schedulePendingInteractions(MarkUpdateLaneFromFiberToRootResult, SyncLane)
 	end
 end
 
-function t.captureCommitPhaseError(p27, p28, p29)
-	-- upvalues: reactWorkTagsModule (ref), var4 (write), skipUnmountedBoundaries (ref), t (ref), createCapturedValue (ref), createClassErrorUpdate (ref), syncLane (ref), enqueueUpdate (ref), t_2 (ref), markRootUpdated (ref), var1 (write)
-	if p27.tag == reactWorkTagsModule.HostRoot then
-		var4(p27, p27, p29)
+function ReactFiberWorkLoopModule.captureCommitPhaseError(Sibling, Return, p15) --[[ Line: 3428 ]]
+	-- upvalues: ReactWorkTagsModule (copy), Callback1 (ref), SkipUnmountedBoundaries (copy), ReactFiberWorkLoopModule (copy), CreateCapturedValueFunction (copy), CreateClassErrorUpdateFunction (copy), SyncLane (copy), EnqueueUpdateFunction (copy), config1 (copy), MarkRootUpdatedFunction (copy), Callback (ref)
+	if Sibling.tag == ReactWorkTagsModule.HostRoot then
+		Callback1(Sibling, Sibling, p15)
 		
 		return
 	end
-	local _ = nil
-	local var64 = if skipUnmountedBoundaries then p28 else p27.return_
-	while var64 ~= nil do
-		if var64.tag ~= reactWorkTagsModule.HostRoot then
-			if var64.tag == reactWorkTagsModule.ClassComponent then
-				local stateNode = var64.stateNode
+	local Return1 = if SkipUnmountedBoundaries then Return else Sibling.return_
+	while Return1 ~= nil do
+		if Return1.tag == ReactWorkTagsModule.HostRoot then
+			Callback1(Return1, Sibling, p15)
+			break
+		end
+		if Return1.tag == ReactWorkTagsModule.ClassComponent then
+			local StateNode = Return1.stateNode
+			
+			if typeof(Return1.type.getDerivedStateFromError) == "function" or typeof(StateNode.componentDidCatch) == "function" and not ReactFiberWorkLoopModule.isAlreadyFailedLegacyErrorBoundary(StateNode) then
+				EnqueueUpdateFunction(Return1, (CreateClassErrorUpdateFunction(Return1, CreateCapturedValueFunction(p15, Sibling), SyncLane)))
+				local RequestEventTimeResult = ReactFiberWorkLoopModule.requestEventTime()
+				local MarkUpdateLaneFromFiberToRootResult = config1.markUpdateLaneFromFiberToRoot(Return1, SyncLane)
 				
-				if typeof(var64.type.getDerivedStateFromError) ~= "function" and (typeof(stateNode.componentDidCatch) ~= "function" or t.isAlreadyFailedLegacyErrorBoundary(stateNode)) then
-					var64 = var64.return_
-					continue
+				if MarkUpdateLaneFromFiberToRootResult ~= nil then
+					MarkRootUpdatedFunction(MarkUpdateLaneFromFiberToRootResult, SyncLane, RequestEventTimeResult)
+					Callback(MarkUpdateLaneFromFiberToRootResult, RequestEventTimeResult)
+					config1.schedulePendingInteractions(MarkUpdateLaneFromFiberToRootResult, SyncLane)
 				end
-				enqueueUpdate(var64, createClassErrorUpdate(var64, createCapturedValue(p29, p27), syncLane))
-				local var65 = t.requestEventTime()
-				local var66 = t_2.markUpdateLaneFromFiberToRoot(var64, syncLane)
-				
-				if var66 ~= nil then
-					markRootUpdated(var66, syncLane, var65)
-					var1(var66, var65)
-					t_2.schedulePendingInteractions(var66, syncLane)
-				end
-				return
+				break
 			end
 		end
-		var4(var64, p27, p29)
-		
-		return
+		Return1 = Return1.return_
 	end
 end
 
-function t.pingSuspendedRoot(p30, p31, p32)
-	-- upvalues: t (ref), markRootPinged (ref), var6 (write), isSubsetOfLanes (ref), noLanes (write), var9 (write), includesOnlyRetries (ref), now (ref), var12 (write), t_2 (ref), reactFiberLaneModule (ref), noLanes_3 (write), mergeLanes (ref), var1 (write)
-	local pingCache = p30.pingCache
+function ReactFiberWorkLoopModule.pingSuspendedRoot(p16, Key, p17) --[[ Line: 3480 ]]
+	-- upvalues: ReactFiberWorkLoopModule (copy), MarkRootPingedFunction (copy), v1 (ref), IsSubsetOfLanesFunction (copy), NoLanes (ref), v2 (ref), IncludesOnlyRetriesFunction (copy), NowFunction (copy), v5 (ref), config1 (copy), ReactFiberLaneModule (copy), NoLanes3 (ref), MergeLanesFunction (copy), Callback (ref)
+	local PingCache = p16.pingCache
 	
-	if pingCache ~= nil then
-		pingCache[p31] = nil
+	if PingCache ~= nil then
+		PingCache[Key] = nil
 	end
-	local var67 = t.requestEventTime()
-	markRootPinged(p30, p32, var67)
+	local RequestEventTimeResult = ReactFiberWorkLoopModule.requestEventTime()
+	MarkRootPingedFunction(p16, p17, RequestEventTimeResult)
 	
-	if var6 == p30 and isSubsetOfLanes(noLanes, p32) then
-		if var9 == 4 or var9 == 3 and includesOnlyRetries(noLanes) and now() - var12 < 500 then
-			t_2.prepareFreshStack(p30, reactFiberLaneModule.NoLanes)
+	if v1 == p16 and IsSubsetOfLanesFunction(NoLanes, p17) then
+		if v2 == 4 or v2 == 3 and IncludesOnlyRetriesFunction(NoLanes) and NowFunction() - v5 < 500 then
+			config1.prepareFreshStack(p16, ReactFiberLaneModule.NoLanes)
 		else
-			noLanes_3 = mergeLanes(noLanes_3, p32)
+			NoLanes3 = MergeLanesFunction(NoLanes3, p17)
 		end
 	end
-	var1(p30, var67)
-	t_2.schedulePendingInteractions(p30, p32)
+	Callback(p16, RequestEventTimeResult)
+	config1.schedulePendingInteractions(p16, p17)
 end
 
-function retryTimedOutBoundary(p30, p31)
-	-- upvalues: reactFiberLaneModule (ref), t (ref), t_2 (ref), markRootUpdated (ref), var1 (write)
-	if p31 == reactFiberLaneModule.NoLane then
-		p31 = requestRetryLane(p30)
+function retryTimedOutBoundary(p16, NoLane) --[[ Line: 3528 ]]
+	-- upvalues: ReactFiberLaneModule (copy), ReactFiberWorkLoopModule (copy), config1 (copy), MarkRootUpdatedFunction (copy), Callback (ref)
+	if NoLane == ReactFiberLaneModule.NoLane then
+		NoLane = requestRetryLane(p16)
 	end
-	local var67 = t.requestEventTime()
-	local var68 = t_2.markUpdateLaneFromFiberToRoot(p30, p31)
+	local RequestEventTimeResult = ReactFiberWorkLoopModule.requestEventTime()
+	local MarkUpdateLaneFromFiberToRootResult = config1.markUpdateLaneFromFiberToRoot(p16, NoLane)
 	
-	if var68 ~= nil then
-		markRootUpdated(var68, p31, var67)
-		var1(var68, var67)
-		t_2.schedulePendingInteractions(var68, p31)
+	if MarkUpdateLaneFromFiberToRootResult ~= nil then
+		MarkRootUpdatedFunction(MarkUpdateLaneFromFiberToRootResult, NoLane, RequestEventTimeResult)
+		Callback(MarkUpdateLaneFromFiberToRootResult, RequestEventTimeResult)
+		config1.schedulePendingInteractions(MarkUpdateLaneFromFiberToRootResult, NoLane)
 	end
 end
 
-function t.resolveRetryWakeable(p30, p31)
-	-- upvalues: reactFiberLaneModule (ref)
-	local noLane = reactFiberLaneModule.NoLane
-	local _ = nil
-	local stateNode = p30.stateNode
+function ReactFiberWorkLoopModule.resolveRetryWakeable(p16, p17) --[[ Line: 3555 ]]
+	-- upvalues: ReactFiberLaneModule (copy)
+	local NoLane = ReactFiberLaneModule.NoLane
+	local StateNode = p16.stateNode
 	
-	if stateNode ~= nil then
-		stateNode:delete(p31)
+	if StateNode ~= nil then
+		StateNode:delete(p17)
 	end
-	retryTimedOutBoundary(p30, noLane)
+	retryTimedOutBoundary(p16, NoLane)
 end
 
-function jnd(p30)
-	return if p30 < 120 then 120 elseif p30 < 480 then 480 elseif p30 < 1080 then 1080 elseif p30 < 1920 then 1920 elseif p30 < 3000 then 3000 elseif p30 < 4320 then 4320 else math.ceil(p30 / 1960) * 1960
+function jnd(p16: number): number --[[ Line: 3599 ]]
+	return if p16 < 120 then 120 elseif p16 < 480 then 480 elseif p16 < 1080 then 1080 elseif p16 < 1920 then 1920 elseif p16 < 3000 then 3000 elseif p16 < 4320 then 4320 else math.ceil(p16 / 1960) * 1960
 end
 
-function t_2.checkForNestedUpdates()
-	-- upvalues: var22 (write), var23 (write), invariant (ref), dEV (ref), var24 (write), console (ref)
-	if var22 > 50 then
-		var22 = 0
-		var23 = nil
-		invariant(false, "Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.")
+function config1.checkForNestedUpdates() --[[ Line: 3617 ]]
+	-- upvalues: Count (ref), v10 (ref), InvariantFunction (copy), DEV (copy), Count1 (ref), Console (copy)
+	if Count > 50 then
+		Count = 0
+		v10 = nil
+		InvariantFunction(false, "Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.")
 	end
-	if dEV and var24 > 50 then
-		var24 = 0
-		console.error("Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.")
+	if DEV and Count1 > 50 then
+		Count1 = 0
+		Console.error("Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.")
 	end
 end
 
-function flushRenderPhaseStrictModeWarningsInDEV()
-	-- upvalues: dEV (ref), unknownModule_7 (ref), reactFeatureFlags (ref)
-	if dEV then
-		unknownModule_7.flushLegacyContextWarning()
+function flushRenderPhaseStrictModeWarningsInDEV() --[[ Line: 3643 ]]
+	-- upvalues: DEV (copy), ReactStrictModeWarningsNewModule (copy), ReactFeatureFlags (copy)
+	if DEV then
+		ReactStrictModeWarningsNewModule.flushLegacyContextWarning()
 		
-		if reactFeatureFlags.warnAboutDeprecatedLifecycles then
-			unknownModule_7.flushPendingUnsafeLifecycleWarnings()
+		if ReactFeatureFlags.warnAboutDeprecatedLifecycles then
+			ReactStrictModeWarningsNewModule.flushPendingUnsafeLifecycleWarnings()
 		end
 	end
 end
 
-function commitDoubleInvokeEffectsInDEV(p30, p31)
-	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), setCurrentFiber (ref), reactFiberFlagsModule (ref), invokeLayoutEffectUnmountInDEV (ref), invokePassiveEffectUnmountInDEV (ref), invokeLayoutEffectMountInDEV (ref), invokePassiveEffectMountInDEV (ref), resetCurrentFiber (ref)
-	if dEV and enableDoubleInvokingEffects then
-		setCurrentFiber(p30)
-		invokeEffectsInDev(p30, reactFiberFlagsModule.MountLayoutDev, invokeLayoutEffectUnmountInDEV)
+function commitDoubleInvokeEffectsInDEV(p16, p17) --[[ Line: 3653 ]]
+	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), SetCurrentFiberFunction (copy), ReactFiberFlagsModule (copy), InvokeLayoutEffectUnmountInDEV (copy), InvokePassiveEffectUnmountInDEV (copy), InvokeLayoutEffectMountInDEV (copy), InvokePassiveEffectMountInDEV (copy), ResetCurrentFiberFunction (copy)
+	if DEV and EnableDoubleInvokingEffects then
+		SetCurrentFiberFunction(p16)
+		invokeEffectsInDev(p16, ReactFiberFlagsModule.MountLayoutDev, InvokeLayoutEffectUnmountInDEV)
 		
-		if p31 then
-			invokeEffectsInDev(p30, reactFiberFlagsModule.MountPassiveDev, invokePassiveEffectUnmountInDEV)
+		if p17 then
+			invokeEffectsInDev(p16, ReactFiberFlagsModule.MountPassiveDev, InvokePassiveEffectUnmountInDEV)
 		end
-		invokeEffectsInDev(p30, reactFiberFlagsModule.MountLayoutDev, invokeLayoutEffectMountInDEV)
+		invokeEffectsInDev(p16, ReactFiberFlagsModule.MountLayoutDev, InvokeLayoutEffectMountInDEV)
 		
-		if p31 then
-			invokeEffectsInDev(p30, reactFiberFlagsModule.MountPassiveDev, invokePassiveEffectMountInDEV)
+		if p17 then
+			invokeEffectsInDev(p16, ReactFiberFlagsModule.MountPassiveDev, InvokePassiveEffectMountInDEV)
 		end
-		resetCurrentFiber()
+		ResetCurrentFiberFunction()
 	end
 end
 
-function invokeEffectsInDev(p30, p31, p32)
-	-- upvalues: dEV (ref), enableDoubleInvokingEffects (ref), reactFiberFlagsModule (ref)
-	if dEV and enableDoubleInvokingEffects then
-		local var67 = p30
-		while var67 ~= nil do
-			if var67.child ~= nil and bit32.band(var67.subtreeFlags, p31) ~= reactFiberFlagsModule.NoFlags then
-				invokeEffectsInDev(var67.child, p31, p32)
+function invokeEffectsInDev(Sibling, Mask: number, Callback: (any) -> ()) --[[ Line: 3685 ]]
+	-- upvalues: DEV (copy), EnableDoubleInvokingEffects (copy), ReactFiberFlagsModule (copy)
+	if DEV and EnableDoubleInvokingEffects then
+		local Sibling1 = Sibling
+		while Sibling1 ~= nil do
+			if Sibling1.child ~= nil and bit32.band(Sibling1.subtreeFlags, Mask) ~= ReactFiberFlagsModule.NoFlags then
+				invokeEffectsInDev(Sibling1.child, Mask, Callback)
 			end
-			if bit32.band(var67.flags, p31) ~= reactFiberFlagsModule.NoFlags then
-				p32(var67)
+			if bit32.band(Sibling1.flags, Mask) ~= ReactFiberFlagsModule.NoFlags then
+				Callback(Sibling1)
 			end
-			var67 = var67.sibling
+			Sibling1 = Sibling1.sibling
 		end
 	end
 end
 
-local var68 = nil
+local Config = nil
 
-function t_2.warnAboutUpdateOnNotYetMountedFiberInDEV(p33)
-	-- upvalues: dEV (ref), var5 (write), reactTypeOfModeModule (ref), reactWorkTagsModule (ref), getComponentName (ref), var68 (write), reactCurrentFiberModule (ref), setCurrentFiber (ref), console (ref), resetCurrentFiber (ref)
-	if dEV then
-		if bit32.band(var5, 16) ~= 0 then return end
-		if bit32.band(p33.mode, bit32.bor(reactTypeOfModeModule.BlockingMode, reactTypeOfModeModule.ConcurrentMode)) == 0 then return end
-		local tag = p33.tag
+function config1.warnAboutUpdateOnNotYetMountedFiberInDEV(p16) --[[ Line: 3711 ]]
+	-- upvalues: DEV (copy), Bits (ref), ReactTypeOfModeModule (copy), ReactWorkTagsModule (copy), GetComponentNameFunction (copy), Config (ref), ReactCurrentFiberModule (copy), SetCurrentFiberFunction (copy), Console (copy), ResetCurrentFiberFunction (copy)
+	if DEV then
+		if bit32.band(Bits, 16) ~= 0 then return end
+		if bit32.band(p16.mode, (bit32.bor(ReactTypeOfModeModule.BlockingMode, ReactTypeOfModeModule.ConcurrentMode))) == 0 then return end
+		local Tag = p16.tag
 		
-		if tag ~= reactWorkTagsModule.IndeterminateComponent and tag ~= reactWorkTagsModule.HostRoot and (tag ~= reactWorkTagsModule.ClassComponent and tag ~= reactWorkTagsModule.FunctionComponent) and (tag ~= reactWorkTagsModule.ForwardRef and tag ~= reactWorkTagsModule.MemoComponent and (tag ~= reactWorkTagsModule.SimpleMemoComponent and tag ~= reactWorkTagsModule.Block)) then return end
-		local type = getComponentName(p33.type) or "ReactComponent"
+		if Tag ~= ReactWorkTagsModule.IndeterminateComponent and Tag ~= ReactWorkTagsModule.HostRoot and Tag ~= ReactWorkTagsModule.ClassComponent and Tag ~= ReactWorkTagsModule.FunctionComponent and Tag ~= ReactWorkTagsModule.ForwardRef and Tag ~= ReactWorkTagsModule.MemoComponent and Tag ~= ReactWorkTagsModule.SimpleMemoComponent and Tag ~= ReactWorkTagsModule.Block then return end
+		local ComponentName = GetComponentNameFunction(p16.type) or "ReactComponent"
 		
-		if var68 == nil then
-			var68 = { [type] = true }
-		elseif var68[type] then return end
-		var68[type] = true
-		local current = reactCurrentFiberModule.current
-		local ok, status = pcall(function()
-			-- upvalues: setCurrentFiber (copy), p33 (ref), console (copy)
-			setCurrentFiber(p33)
-			console.error("Can't perform a React state update on a component that hasn't mounted yet. This indicates that you have a side-effect in your render function that asynchronously later calls tries to update the component. Move this work to useEffect instead.")
+		if Config == nil then
+			Config = { [ComponentName] = true }
+		else
+			if Config[ComponentName] then return end
+			Config[ComponentName] = true
+		end
+		local Current = ReactCurrentFiberModule.current
+		local Success, Result = pcall(function() --[[ Line: 3756 ]]
+			-- upvalues: SetCurrentFiberFunction (upval), p16 (copy), Console (upval)
+			SetCurrentFiberFunction(p16)
+			Console.error("Can't perform a React state update on a component that hasn't mounted yet. This indicates that you have a side-effect in your render function that asynchronously later calls tries to update the component. Move this work to useEffect instead.")
 		end)
 		
-		if current then
-			setCurrentFiber(p33)
+		if Current then
+			SetCurrentFiberFunction(p16)
 		else
-			resetCurrentFiber()
+			ResetCurrentFiberFunction()
 		end
-		if not ok then
-			error(status)
+		if not Success then
+			error(Result)
 		end
 	end
 end
 
-if dEV and reactFeatureFlags.replayFailedUnitOfWorkWithInvokeGuardedCallback then
-	function t_2.beginWork(p33, p34, p35)
-		-- upvalues: unknownModule_2 (ref), var2 (ref), describeError (ref), resetContextDependencies (ref), t_1 (ref), var3 (write), unwindInterruptedWork (ref), reactFeatureFlags (ref), reactTypeOfModeModule (ref), unknownModule_6 (ref), invokeGuardedCallback (ref), hasCaughtError (ref), clearCaughtError (ref)
-		local var69 = unknownModule_2.assignFiberPropertiesInDEV(nil, p34)
-		local ok, status = xpcall(var2, describeError, p33, p34, p35)
+if DEV and ReactFeatureFlags.replayFailedUnitOfWorkWithInvokeGuardedCallback then
+	function config1.beginWork(Alternate, p16, SubtreeRenderLanes) --[[ Line: 3782 ]]
+		-- upvalues: ReactFiberNewModule (copy), BeginWork (copy), DescribeError (copy), ResetContextDependenciesFunction (copy), config (copy), ReactFiberHooksNewModule (ref), UnwindInterruptedWorkFunction (copy), ReactFeatureFlags (copy), ReactTypeOfModeModule (copy), ReactProfilerTimerNewModule (copy), InvokeGuardedCallbackFunction (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy)
+		local AssignFiberPropertiesInDEVResult = ReactFiberNewModule.assignFiberPropertiesInDEV(nil, p16)
+		local Success, Result = xpcall(BeginWork, DescribeError, Alternate, p16, SubtreeRenderLanes)
 		
-		if not ok then
-			if status ~= nil and typeof(status) == "table" and typeof(status.andThen) == "function" then
-				error(status)
+		if not Success then
+			if Result ~= nil and typeof(Result) == "table" and typeof(Result.andThen) == "function" then
+				error(Result)
 			end
-			resetContextDependencies()
+			ResetContextDependenciesFunction()
 			
-			if not t_1.resetHooksAfterThrowRef then
-				var3 = require(script.Parent["ReactFiberHooks.new"])
-				t_1.resetHooksAfterThrowRef = var3.resetHooksAfterThrow
-				t_1.ContextOnlyDispatcherRef = var3.ContextOnlyDispatcher
-				t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+			if not config.resetHooksAfterThrowRef then
+				ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+				config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
+				config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
+				config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 			end
-			local _ = t_1.resetHooksAfterThrowRef()
-			unwindInterruptedWork(p34)
-			unknownModule_2.assignFiberPropertiesInDEV(p34, var69)
+			local _ = config.resetHooksAfterThrowRef()
+			UnwindInterruptedWorkFunction(p16)
+			ReactFiberNewModule.assignFiberPropertiesInDEV(p16, AssignFiberPropertiesInDEVResult)
 			
-			if reactFeatureFlags.enableProfilerTimer and bit32.band(p34.mode, reactTypeOfModeModule.ProfileMode) ~= 0 then
-				unknownModule_6.startProfilerTimer(p34)
+			if ReactFeatureFlags.enableProfilerTimer and bit32.band(p16.mode, ReactTypeOfModeModule.ProfileMode) ~= 0 then
+				ReactProfilerTimerNewModule.startProfilerTimer(p16)
 			end
-			invokeGuardedCallback(nil, var2, nil, p33, p34, p35)
+			InvokeGuardedCallbackFunction(nil, BeginWork, nil, Alternate, p16, SubtreeRenderLanes)
 			
-			if hasCaughtError() then
-				error(clearCaughtError())
+			if HasCaughtErrorFunction() then
+				error((ClearCaughtErrorFunction()))
 				
-				return status
+				return Result
 			end
-			error(status)
+			error(Result)
 		end
-		return status
+		return Result
 	end
 else
-	t_2.beginWork = var2
+	config1.beginWork = BeginWork
 end
-local var69 = false
-local var70 = if dEV then {} else nil
+local Flag3 = false
+local T = if DEV then {} else nil
 
-function t_2.warnAboutRenderPhaseUpdatesInDEV(p33)
-	-- upvalues: dEV (ref), reactCurrentFiberModule (ref), var5 (write), t_1 (ref), var3 (write), reactWorkTagsModule (ref), var7 (write), getComponentName (ref), var70 (write), console (ref), var69 (write)
-	if dEV and reactCurrentFiberModule.isRendering and bit32.band(var5, 16) ~= 0 then
-		if not t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef then
-			var3 = require(script.Parent["ReactFiberHooks.new"])
-			t_1.resetHooksAfterThrowRef = var3.resetHooksAfterThrow
-			t_1.ContextOnlyDispatcherRef = var3.ContextOnlyDispatcher
-			t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = var3.getIsUpdatingOpaqueValueInRenderPhaseInDEV
+function config1.warnAboutRenderPhaseUpdatesInDEV(p16) --[[ Line: 3852 ]]
+	-- upvalues: DEV (copy), ReactCurrentFiberModule (copy), Bits (ref), config (copy), ReactFiberHooksNewModule (ref), ReactWorkTagsModule (copy), WorkInProgress (ref), GetComponentNameFunction (copy), T (ref), Console (copy), Flag3 (ref)
+	if DEV and ReactCurrentFiberModule.isRendering and bit32.band(Bits, 16) ~= 0 then
+		if not config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef then
+			ReactFiberHooksNewModule = require(script.Parent["ReactFiberHooks.new"])
+			config.resetHooksAfterThrowRef = ReactFiberHooksNewModule.resetHooksAfterThrow
+			config.ContextOnlyDispatcherRef = ReactFiberHooksNewModule.ContextOnlyDispatcher
+			config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef = ReactFiberHooksNewModule.getIsUpdatingOpaqueValueInRenderPhaseInDEV
 		end
-		if not t_1.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef() then
-			if p33.tag == reactWorkTagsModule.FunctionComponent or p33.tag == reactWorkTagsModule.ForwardRef or p33.tag == reactWorkTagsModule.SimpleMemoComponent then
-				local type = var7 and getComponentName(var7.type) or "Unknown"
+		if not config.getIsUpdatingOpaqueValueInRenderPhaseInDEVRef() then
+			if p16.tag == ReactWorkTagsModule.FunctionComponent or p16.tag == ReactWorkTagsModule.ForwardRef or p16.tag == ReactWorkTagsModule.SimpleMemoComponent then
+				local ComponentName = WorkInProgress and GetComponentNameFunction(WorkInProgress.type) or "Unknown"
 				
-				if var70[type] == nil then
-					var70[type] = true
-					console.error("Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render", getComponentName(p33.type) or "Unknown", type, type)
+				if T[ComponentName] == nil then
+					T[ComponentName] = true
+					Console.error("Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render", GetComponentNameFunction(p16.type) or "Unknown", ComponentName, ComponentName)
 					
 					return
 				end
-			elseif p33.tag == reactWorkTagsModule.ClassComponent and not var69 then
-				console.error("Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.")
-				var69 = true
+			elseif p16.tag == ReactWorkTagsModule.ClassComponent and not Flag3 then
+				Console.error("Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.")
+				Flag3 = true
 			end
 		end
 	end
 end
 
-t.IsThisRendererActing = { current = false }
+ReactFiberWorkLoopModule.IsThisRendererActing = { current = false }
 
-function t.warnIfNotScopedWithMatchingAct(p33)
-	-- upvalues: dEV (ref), reactFiberHostConfigModule (ref), isSomeRendererActing (ref), t (ref), reactCurrentFiberModule (ref), setCurrentFiber (ref), console (ref), resetCurrentFiber (ref)
-	if dEV and reactFiberHostConfigModule.warnsIfNotActing == true and (isSomeRendererActing.current == true and t.IsThisRendererActing.current ~= true) then
-		local current = reactCurrentFiberModule.current
-		local ok, status = pcall(function()
-			-- upvalues: setCurrentFiber (copy), p33 (ref), console (copy)
-			setCurrentFiber(p33)
-			console.error("It looks like you're using the wrong act() around your test interactions.\nBe sure to use the matching version of act() corresponding to your renderer:\n\n-- for react-roblox:\nlocal React = require(Packages.React)\n-- ...\nReact.TestUtils.act(function() ... end)\n\n-- for react-test-renderer:\nlocal TestRenderer = require(Packages.ReactTestRenderer)\n-- ...\nTestRenderer.act(function() ... end)")
+function ReactFiberWorkLoopModule.warnIfNotScopedWithMatchingAct(p16) --[[ Line: 3903 ]]
+	-- upvalues: DEV (copy), ReactFiberHostConfigModule (copy), IsSomeRendererActing (copy), ReactFiberWorkLoopModule (copy), ReactCurrentFiberModule (copy), SetCurrentFiberFunction (copy), Console (copy), ResetCurrentFiberFunction (copy)
+	if DEV and ReactFiberHostConfigModule.warnsIfNotActing == true and IsSomeRendererActing.current == true and ReactFiberWorkLoopModule.IsThisRendererActing.current ~= true then
+		local Current = ReactCurrentFiberModule.current
+		local Success, Result = pcall(function() --[[ Line: 3911 ]]
+			-- upvalues: SetCurrentFiberFunction (upval), p16 (copy), Console (upval)
+			SetCurrentFiberFunction(p16)
+			Console.error("It looks like you're using the wrong act() around your test interactions.\nBe sure to use the matching version of act() corresponding to your renderer:\n\n-- for react-roblox:\nlocal React = require(Packages.React)\n-- ...\nReact.TestUtils.act(function() ... end)\n\n-- for react-test-renderer:\nlocal TestRenderer = require(Packages.ReactTestRenderer)\n-- ...\nTestRenderer.act(function() ... end)")
 		end)
 		
-		if current then
-			setCurrentFiber(p33)
+		if Current then
+			SetCurrentFiberFunction(p16)
 		else
-			resetCurrentFiber()
+			ResetCurrentFiberFunction()
 		end
-		if not ok then
-			error(status)
+		if not Success then
+			error(Result)
 		end
 	end
 end
 
-function t.warnIfNotCurrentlyActingEffectsInDEV(p33)
-	-- upvalues: dEV (ref), reactFiberHostConfigModule (ref), reactTypeOfModeModule (ref), isSomeRendererActing (ref), t (ref), console (ref), getComponentName (ref)
-	if dEV and reactFiberHostConfigModule.warnsIfNotActing == true and (bit32.band(p33.mode, reactTypeOfModeModule.StrictMode) ~= reactTypeOfModeModule.NoMode and isSomeRendererActing.current == false) and t.IsThisRendererActing.current == false then
-		console.error("An update to %s ran an effect, but was not wrapped in act(...).\n\nWhen testing, code that causes React state updates should be wrapped into act(...):\n\nact(function()\n  --[[ fire events that update state ]]\nend)\n--[[ assert on the output ]]\n\nThis ensures that you're testing the behavior the user would see in the real client. Learn more at https://reactjs.org/link/wrap-tests-with-act", getComponentName(p33.type))
+function ReactFiberWorkLoopModule.warnIfNotCurrentlyActingEffectsInDEV(p16) --[[ Line: 3946 ]]
+	-- upvalues: DEV (copy), ReactFiberHostConfigModule (copy), ReactTypeOfModeModule (copy), IsSomeRendererActing (copy), ReactFiberWorkLoopModule (copy), Console (copy), GetComponentNameFunction (copy)
+	if DEV and ReactFiberHostConfigModule.warnsIfNotActing == true and bit32.band(p16.mode, ReactTypeOfModeModule.StrictMode) ~= ReactTypeOfModeModule.NoMode and IsSomeRendererActing.current == false and ReactFiberWorkLoopModule.IsThisRendererActing.current == false then
+		Console.error("An update to %s ran an effect, but was not wrapped in act(...).\n\nWhen testing, code that causes React state updates should be wrapped into act(...):\n\nact(function()\n  --[[ fire events that update state ]]\nend)\n--[[ assert on the output ]]\n\nThis ensures that you're testing the behavior the user would see in the real client. Learn more at https://reactjs.org/link/wrap-tests-with-act", GetComponentNameFunction(p16.type))
 	end
 end
 
-function t.warnIfNotCurrentlyActingUpdatesInDEV(p33)
-	-- upvalues: dEV (ref), reactFiberHostConfigModule (ref), var5 (write), isSomeRendererActing (ref), t (ref), current (ref), setCurrentFiber (ref), console (ref), getComponentName (ref), resetCurrentFiber (ref)
-	if dEV and reactFiberHostConfigModule.warnsIfNotActing == true and (var5 == 0 and isSomeRendererActing.current == false) and t.IsThisRendererActing.current == false then
-		local var71 = current
-		local ok, status = pcall(function()
-			-- upvalues: setCurrentFiber (copy), p33 (ref), console (copy), getComponentName (copy)
-			setCurrentFiber(p33)
-			console.error("An update to %s inside a test was not wrapped in act(...).\n\nWhen testing, code that causes React state updates should be wrapped into act(...):\n\nact(function()\n  --[[ fire events that update state ]]\nend)\n--[[ assert on the output ]]\n\nThis ensures that you're testing the behavior the user would see in the client application. Learn more at https://reactjs.org/link/wrap-tests-with-act", getComponentName(p33.type))
+function ReactFiberWorkLoopModule.warnIfNotCurrentlyActingUpdatesInDEV(p16) --[[ Line: 3972 ]]
+	-- upvalues: DEV (copy), ReactFiberHostConfigModule (copy), Bits (ref), IsSomeRendererActing (copy), ReactFiberWorkLoopModule (copy), Current (copy), SetCurrentFiberFunction (copy), Console (copy), GetComponentNameFunction (copy), ResetCurrentFiberFunction (copy)
+	if DEV and ReactFiberHostConfigModule.warnsIfNotActing == true and Bits == 0 and IsSomeRendererActing.current == false and ReactFiberWorkLoopModule.IsThisRendererActing.current == false then
+		local Success, Result = pcall(function() --[[ Line: 3981 ]]
+			-- upvalues: SetCurrentFiberFunction (upval), p16 (copy), Console (upval), GetComponentNameFunction (upval)
+			SetCurrentFiberFunction(p16)
+			Console.error("An update to %s inside a test was not wrapped in act(...).\n\nWhen testing, code that causes React state updates should be wrapped into act(...):\n\nact(function()\n  --[[ fire events that update state ]]\nend)\n--[[ assert on the output ]]\n\nThis ensures that you're testing the behavior the user would see in the client application. Learn more at https://reactjs.org/link/wrap-tests-with-act", GetComponentNameFunction(p16.type))
 		end)
 		
-		if var71 then
-			setCurrentFiber(p33)
+		if Current then
+			SetCurrentFiberFunction(p16)
 		else
-			resetCurrentFiber()
+			ResetCurrentFiberFunction()
 		end
-		if ok then
-			return status
+		if Success then
+			return Result
 		end
 	end
 end
 
-local var71 = false
+local Enabled = false
 
-function t.warnIfUnmockedScheduler(p33)
-	-- upvalues: dEV (ref), var71 (write), schedulerModule (ref), reactTypeOfModeModule (ref), console (ref), reactFeatureFlags (ref)
-	if dEV and var71 == false and schedulerModule.unstable_flushAllWithoutAsserting == nil then
-		if bit32.band(p33.mode, reactTypeOfModeModule.BlockingMode) ~= 0 or bit32.band(p33.mode, reactTypeOfModeModule.ConcurrentMode) ~= 0 then
-			var71 = true
-			console.error("In Concurrent or Sync modes, the 'scheduler' module needs to be mocked to guarantee consistent behaviour across tests and client application. For example, with Jest: \njest.mock('scheduler', function() return require(Packages.Scheduler).unstable_mock end)\n\nFor more info, visit https://reactjs.org/link/mock-scheduler")
+function ReactFiberWorkLoopModule.warnIfUnmockedScheduler(p16) --[[ Line: 4022 ]]
+	-- upvalues: DEV (copy), Enabled (ref), SchedulerModule (copy), ReactTypeOfModeModule (copy), Console (copy), ReactFeatureFlags (copy)
+	if DEV and Enabled == false and SchedulerModule.unstable_flushAllWithoutAsserting == nil then
+		if bit32.band(p16.mode, ReactTypeOfModeModule.BlockingMode) ~= 0 or bit32.band(p16.mode, ReactTypeOfModeModule.ConcurrentMode) ~= 0 then
+			Enabled = true
+			Console.error("In Concurrent or Sync modes, the 'scheduler' module needs to be mocked to guarantee consistent behaviour across tests and client application. For example, with Jest: \njest.mock('scheduler', function() return require(Packages.Scheduler).unstable_mock end)\n\nFor more info, visit https://reactjs.org/link/mock-scheduler")
 			
 			return
-		elseif reactFeatureFlags.warnAboutUnmockedScheduler == true then
-			var71 = true
-			console.error("Starting from React v18, the 'scheduler' module will need to be mocked to guarantee consistent behaviour across tests and client applications. For example, with Jest: \njest.mock('scheduler', function() return require(Packages.Scheduler).unstable_mock end)\n\nFor more info, visit https://reactjs.org/link/mock-scheduler")
+		end
+		if ReactFeatureFlags.warnAboutUnmockedScheduler == true then
+			Enabled = true
+			Console.error("Starting from React v18, the 'scheduler' module will need to be mocked to guarantee consistent behaviour across tests and client applications. For example, with Jest: \njest.mock('scheduler', function() return require(Packages.Scheduler).unstable_mock end)\n\nFor more info, visit https://reactjs.org/link/mock-scheduler")
 		end
 	end
 end
 
-function computeThreadID(p33, p34)
-	return p34 * 1000 + p33.interactionThreadID
+function computeThreadID(p16, p17: number): number --[[ Line: 4066 ]]
+	return p17 * 1000 + p16.interactionThreadID
 end
 
-function t.markSpawnedWork(p33)
-	-- upvalues: reactFeatureFlags (ref), var25 (write)
-	if not reactFeatureFlags.enableSchedulerTracing then return end
-	if var25 == nil then
-		var25 = { p33 }
+function ReactFiberWorkLoopModule.markSpawnedWork(p16) --[[ Line: 4074 ]]
+	-- upvalues: ReactFeatureFlags (copy), List (ref)
+	if not ReactFeatureFlags.enableSchedulerTracing then return end
+	if List == nil then
+		List = { p16 }
 		
 		return
+	else
+		table.insert(List, p16)
 	end
-	table.insert(var25, p33)
 end
 
-function scheduleInteractions(p33, p34, p35)
-	-- upvalues: reactFeatureFlags (ref), set (ref), subscriberRef (ref)
-	if not reactFeatureFlags.enableSchedulerTracing then return end
-	if p35.size > 0 then
-		local pendingInteractionMap = p33.pendingInteractionMap
-		local var72 = pendingInteractionMap:get(p34)
+function scheduleInteractions(p16, p17, List) --[[ Line: 4086 ]]
+	-- upvalues: ReactFeatureFlags (copy), Set (copy), SubscriberRef (copy)
+	if not ReactFeatureFlags.enableSchedulerTracing then return end
+	if List.size > 0 then
+		local PendingInteractionMap = p16.pendingInteractionMap
+		local GetResult = PendingInteractionMap:get(p17)
 		
-		if var72 == nil then
-			pendingInteractionMap:set(p34, set.new(p35))
+		if GetResult == nil then
+			PendingInteractionMap:set(p17, Set.new(List))
 			
-			for i, v in p35 do
-				v.__count += 1
+			for _, value in List do
+				value.__count += 1
 			end
 		else
-			p35:forEach(function(p36)
-				-- upvalues: var72 (ref)
-				if not var72:has(p36) then
-					p36.__count += 1
+			List:forEach(function(p18) --[[ Line: 4099 ]]
+				-- upvalues: GetResult (copy)
+				if not GetResult:has(p18) then
+					p18.__count += 1
 				end
-				var72:add(p36)
+				GetResult:add(p18)
 			end)
 		end
-		local current = subscriberRef.current
+		local Current = SubscriberRef.current
 		
-		if current ~= nil then
-			current.onWorkScheduled(p35, computeThreadID(p33, p34))
+		if Current ~= nil then
+			Current.onWorkScheduled(List, (computeThreadID(p16, p17)))
 		end
 	end
 end
 
-function t_2.schedulePendingInteractions(p36, p37)
-	-- upvalues: reactFeatureFlags (ref), interactionsRef (ref)
-	if reactFeatureFlags.enableSchedulerTracing then
-		scheduleInteractions(p36, p37, interactionsRef.current)
+function config1.schedulePendingInteractions(MarkUpdateLaneFromFiberToRootResult, SyncLane) --[[ Line: 4124 ]]
+	-- upvalues: ReactFeatureFlags (copy), InteractionsRef (copy)
+	if ReactFeatureFlags.enableSchedulerTracing then
+		scheduleInteractions(MarkUpdateLaneFromFiberToRootResult, SyncLane, InteractionsRef.current)
 		
 		return
 	end
 end
 
-function t_2.startWorkOnPendingInteractions(p36, p37)
-	-- upvalues: reactFeatureFlags (ref), set (ref), includesSomeLane (ref), subscriberRef (ref), describeError (ref), scheduleCallback (ref), immediatePriority (ref)
-	if not reactFeatureFlags.enableSchedulerTracing then return end
-	local var73 = set.new()
-	p36.pendingInteractionMap:forEach(function(p38, p39)
-		-- upvalues: includesSomeLane (copy), p37 (ref), var73 (ref)
-		if includesSomeLane(p37, p39) then
-			p38:forEach(function(p40)
-				-- upvalues: var73 (copy)
-				var73:add(p40)
+function config1.startWorkOnPendingInteractions(p18, SubtreeRenderLanes) --[[ Line: 4135 ]]
+	-- upvalues: ReactFeatureFlags (copy), Set (copy), IncludesSomeLaneFunction (copy), SubscriberRef (copy), DescribeError (copy), ScheduleCallbackFunction (copy), ImmediatePriority (copy)
+	if not ReactFeatureFlags.enableSchedulerTracing then return end
+	local NewSet = Set.new()
+	p18.pendingInteractionMap:forEach(function(p19, p20) --[[ Line: 4145 ]]
+		-- upvalues: IncludesSomeLaneFunction (upval), SubtreeRenderLanes (copy), NewSet (copy)
+		if IncludesSomeLaneFunction(SubtreeRenderLanes, p20) then
+			p19:forEach(function(p21) --[[ Line: 4147 ]]
+				-- upvalues: NewSet (upval)
+				NewSet:add(p21)
 			end)
 		end
 	end)
-	p36.memoizedInteractions = var73
+	p18.memoizedInteractions = NewSet
 	
-	if var73.size > 0 then
-		local current = subscriberRef.current
+	if NewSet.size > 0 then
+		local Current = SubscriberRef.current
 		
-		if current ~= nil then
-			local ok, status = xpcall(current.onWorkStarted, describeError, var73, computeThreadID(p36, p37))
+		if Current ~= nil then
+			local Success, Result = xpcall(Current.onWorkStarted, DescribeError, NewSet, (computeThreadID(p18, SubtreeRenderLanes)))
 			
-			if not ok then
-				scheduleCallback(immediatePriority, function()
-					-- upvalues: status (ref)
-					error(status)
+			if not Success then
+				ScheduleCallbackFunction(ImmediatePriority, function() --[[ Line: 4169 ]]
+					-- upvalues: Result (copy)
+					error(Result)
 				end)
 			end
 		end
 	end
 end
 
-function t_2.finishPendingInteractions(p36, p37)
-	-- upvalues: reactFeatureFlags (ref), subscriberRef (ref), describeError (ref), includesSomeLane (ref), scheduleCallback (ref), immediatePriority (ref)
-	if not reactFeatureFlags.enableSchedulerTracing then return end
-	local pendingLanes = p36.pendingLanes
-	local current = nil
-	local var73 = true
-	local var74 = nil
+function config1.finishPendingInteractions(p18, FinishedLanes) --[[ Line: 4177 ]]
+	-- upvalues: ReactFeatureFlags (copy), SubscriberRef (copy), DescribeError (copy), IncludesSomeLaneFunction (copy), ScheduleCallbackFunction (copy), ImmediatePriority (copy)
+	if not ReactFeatureFlags.enableSchedulerTracing then return end
+	local PendingLanes = p18.pendingLanes
+	local Current = nil
+	local v23 = true
+	local v24 = nil
 	
-	if current ~= nil and p36.memoizedInteractions.size > 0 then
-		current = subscriberRef.current
-		local ok, status = xpcall(current.onWorkStopped, describeError, p36.memoizedInteractions, computeThreadID(p36, p37))
-		var73 = ok
-		var74 = status
+	if Current ~= nil and p18.memoizedInteractions.size > 0 then
+		Current = SubscriberRef.current
+		v23, v321 = xpcall(Current.onWorkStopped, DescribeError, p18.memoizedInteractions, (computeThreadID(p18, FinishedLanes)))
 	end
-	local pendingInteractionMap = p36.pendingInteractionMap
-	pendingInteractionMap:forEach(function(p38, p39)
-		-- upvalues: includesSomeLane (copy), pendingLanes (ref), pendingInteractionMap (ref), current (write), describeError (copy), scheduleCallback (copy), immediatePriority (copy)
-		if not includesSomeLane(pendingLanes, p39) then
-			pendingInteractionMap:delete(p39)
-			p38:forEach(function(p40)
-				-- upvalues: current (copy), describeError (copy), scheduleCallback (copy), immediatePriority (copy)
-				p40.__count -= 1
+	local PendingInteractionMap = p18.pendingInteractionMap
+	PendingInteractionMap:forEach(function(p19, p20) --[[ Line: 4208 ]]
+		-- upvalues: IncludesSomeLaneFunction (upval), PendingLanes (copy), PendingInteractionMap (copy), Current (ref), DescribeError (upval), ScheduleCallbackFunction (upval), ImmediatePriority (upval)
+		if not IncludesSomeLaneFunction(PendingLanes, p20) then
+			PendingInteractionMap:delete(p20)
+			p19:forEach(function(p21) --[[ Line: 4214 ]]
+				-- upvalues: Current (upval), DescribeError (upval), ScheduleCallbackFunction (upval), ImmediatePriority (upval)
+				p21.__count -= 1
 				
-				if current ~= nil and p40.__count == 0 then
-					local ok, status = xpcall(current.onInteractionScheduledWorkCompleted, describeError, p40)
+				if Current ~= nil and p21.__count == 0 then
+					local Success, Result = xpcall(Current.onInteractionScheduledWorkCompleted, DescribeError, p21)
 					
-					if not ok then
-						scheduleCallback(immediatePriority, function()
-							-- upvalues: status (ref)
-							error(status)
+					if not Success then
+						ScheduleCallbackFunction(ImmediatePriority, function() --[[ Line: 4225 ]]
+							-- upvalues: Result (copy)
+							error(Result)
 						end)
 					end
 				end
@@ -2382,262 +2594,270 @@ function t_2.finishPendingInteractions(p36, p37)
 		end
 	end)
 	
-	if not var73 then
-		scheduleCallback(immediatePriority, function()
-			-- upvalues: var74 (write)
-			error(var74)
+	if not v23 then
+		ScheduleCallbackFunction(ImmediatePriority, function() --[[ Line: 4237 ]]
+			-- upvalues: v24 (ref)
+			error(v24)
 		end)
 	end
 end
 
-local var73 = false
-local var74 = false
-local unstableFlushAllWithoutAsserting = schedulerModule.unstable_flushAllWithoutAsserting
-local isFunction = typeof(unstableFlushAllWithoutAsserting) == "function"
+local Flag4 = false
+local Flag5 = false
+local UnstableFlushAllWithoutAsserting = SchedulerModule.unstable_flushAllWithoutAsserting
+local IsFunction = typeof(UnstableFlushAllWithoutAsserting) == "function"
 
-local function flushActWork()
-	-- upvalues: unstableFlushAllWithoutAsserting (ref), var73 (write), describeError (ref), t (ref)
-	if unstableFlushAllWithoutAsserting == nil then
-		local var75 = var73
-		var73 = true
-		local ok, status = xpcall(function()
-			-- upvalues: t (copy)
-			local var76 = false
-			while t.flushPassiveEffects() do
-				var76 = true
+local function flushActWork() --[[ Line: 4256 ]]
+	-- upvalues: UnstableFlushAllWithoutAsserting (copy), Flag4 (ref), DescribeError (copy), ReactFiberWorkLoopModule (copy)
+	if UnstableFlushAllWithoutAsserting == nil then
+		local Flag: boolean = Flag4
+		Flag4 = true
+		local Success1, Result1 = xpcall(function(): boolean --[[ Line: 4276 ]]
+			-- upvalues: ReactFiberWorkLoopModule (upval)
+			local Flag = false
+			while ReactFiberWorkLoopModule.flushPassiveEffects() do
+				Flag = true
 			end
-			return var76
-		end, describeError)
-		var73 = var75
+			return Flag
+		end, DescribeError)
+		Flag4 = Flag
 		
-		if ok then
-			return status
+		if Success1 then
+			return Result1
+		else
+			error(Result1)
+			
+			return
 		end
-		error(status)
-		
-		return
 	else
-		local var77 = var73
-		var73 = true
-		local ok, status = xpcall(unstableFlushAllWithoutAsserting, describeError)
-		var73 = var77
+		local Flag: boolean = Flag4
+		Flag4 = true
+		local Success, Result = xpcall(UnstableFlushAllWithoutAsserting, DescribeError)
+		Flag4 = Flag
 		
-		if ok then
-			return status
+		if Success then
+			return Result
+		else
+			error(Result)
 		end
-		error(status)
 	end
 end
 
-local function flushWorkAndMicroTasks(p36)
-	-- upvalues: flushActWork (ref), describeError (ref), enqueueTask (ref), flushWorkAndMicroTasks (ref)
-	local ok, status = xpcall(flushActWork, describeError)
+local function flushWorkAndMicroTasks(Callback: (any) -> ()) --[[ Line: 4295 ]]
+	-- upvalues: flushActWork (copy), DescribeError (copy), EnqueueTask (copy), flushWorkAndMicroTasks (copy)
+	local Success, Result = xpcall(flushActWork, DescribeError)
 	
-	if ok then
-		local ok_1, status_1 = xpcall(enqueueTask, describeError, function()
-			-- upvalues: flushActWork (copy), flushWorkAndMicroTasks (copy), p36 (ref)
+	if Success then
+		Success, Result = xpcall(EnqueueTask, DescribeError, function() --[[ Line: 4299 ]]
+			-- upvalues: flushActWork (upval), flushWorkAndMicroTasks (upval), Callback (copy)
 			if flushActWork() then
-				flushWorkAndMicroTasks(p36)
+				flushWorkAndMicroTasks(Callback)
 				
 				return
+			else
+				Callback()
 			end
-			p36()
 		end)
-		ok = ok_1
-		status = status_1
 	end
-	if not ok then
-		p36(status)
+	if not Success then
+		Callback(Result)
 	end
 end
 
-function t.act(p36)
-	-- upvalues: dEV (ref), reactGlobalsModule (ref), var31 (write), console (ref), var30 (write), isSomeRendererActing (ref), t (ref), var74 (write), describeError (ref), promiseModule (ref), isFunction (ref), flushWorkAndMicroTasks (ref), flushActWork (ref)
-	if not dEV and not reactGlobalsModule.__ROACT_17_MOCK_SCHEDULER__ and var31 == false then
-		var31 = true
-		console.error("act(...) is not supported in production builds of React, and might not behave as expected.")
+function ReactFiberWorkLoopModule.act(p18) --[[ Line: 4313 ]]
+	-- upvalues: DEV (copy), ReactGlobalsModule (copy), Enabled1 (ref), Console (copy), Count2 (ref), IsSomeRendererActing (copy), ReactFiberWorkLoopModule (copy), Flag5 (ref), DescribeError (copy), PromiseModule (copy), IsFunction (copy), flushWorkAndMicroTasks (copy), flushActWork (copy)
+	if not DEV and not ReactGlobalsModule.__ROACT_17_MOCK_SCHEDULER__ and Enabled1 == false then
+		Enabled1 = true
+		Console.error("act(...) is not supported in production builds of React, and might not behave as expected.")
 	end
-	local ok_1
-	var30 += 1
-	local current = isSomeRendererActing.current
-	local current_1 = t.IsThisRendererActing.current
-	isSomeRendererActing.current = true
-	t.IsThisRendererActing.current = true
-	var74 = true
+	local Count: number = Count2
+	Count2 += 1
+	local Current = IsSomeRendererActing.current
+	local Current1 = ReactFiberWorkLoopModule.IsThisRendererActing.current
+	local Flag: boolean = Flag5
+	IsSomeRendererActing.current = true
+	ReactFiberWorkLoopModule.IsThisRendererActing.current = true
+	Flag5 = true
 	
-	local function _()
-		-- upvalues: var30 (copy), isSomeRendererActing (copy), current (ref), t (copy), current_1 (ref), var74 (copy), var74 (ref), dEV (copy), var30 (ref), console (copy)
-		var30 -= 1
-		isSomeRendererActing.current = current
-		t.IsThisRendererActing.current = current_1
-		var74 = var74
+	local function _() --[[ Line: 4338 | Named "onDone" ]]
+		-- upvalues: Count2 (upval), IsSomeRendererActing (upval), Current (copy), ReactFiberWorkLoopModule (upval), Current1 (copy), Flag5 (upval), Flag (copy), DEV (upval), Count (copy), Console (upval)
+		Count2 -= 1
+		IsSomeRendererActing.current = Current
+		ReactFiberWorkLoopModule.IsThisRendererActing.current = Current1
+		Flag5 = Flag
 		
-		if dEV and var30 < var30 then
-			console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
+		if DEV and Count < Count2 then
+			Console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 		end
 	end
 	
-	local ok, status = xpcall(t.batchedUpdates, describeError, p36)
+	local Success, Result = xpcall(ReactFiberWorkLoopModule.batchedUpdates, DescribeError, p18)
 	
-	if not ok then
-		var30 -= 1
-		isSomeRendererActing.current = current
-		t.IsThisRendererActing.current = current_1
-		var74 = var74
+	if not Success then
+		Count2 -= 1
+		IsSomeRendererActing.current = Current
+		ReactFiberWorkLoopModule.IsThisRendererActing.current = Current1
+		Flag5 = Flag
 		
-		if dEV and var30 < var30 then
-			console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
+		if DEV and Count < Count2 then
+			Console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 		end
-		error(status)
+		error(Result)
 	end
-	if status == nil or typeof(status) ~= "table" or typeof(status.andThen) ~= "function" then
-		if dEV and status ~= nil then
-			console.error("The callback passed to act(...) function must return nil, or a Promise. You returned %s", tostring(status))
+	if Result == nil or typeof(Result) ~= "table" or typeof(Result.andThen) ~= "function" then
+		local Enabled = DEV
+		
+		if Enabled and Result ~= nil then
+			Enabled = Console
+			Enabled = Enabled.error
+			Enabled("The callback passed to act(...) function must return nil, or a Promise. You returned %s", (tostring(Result)))
 		end
-		ok_1, status_1 = xpcall(function()
-			-- upvalues: var30 (copy), isFunction (copy), current (ref), flushActWork (copy), isSomeRendererActing (copy), t (copy), current_1 (ref), var74 (copy), var74 (ref), dEV (copy), var30 (ref), console (copy)
-			if var30 == 1 and (isFunction == false or current == false) then
+		Enabled = xpcall
+		local CallbackResult, CallbackResult2 = Enabled(function() --[[ Line: 4433 ]]
+			-- upvalues: Count2 (upval), IsFunction (upval), Current (copy), flushActWork (upval), IsSomeRendererActing (upval), ReactFiberWorkLoopModule (upval), Current1 (copy), Flag5 (upval), Flag (copy), DEV (upval), Count (copy), Console (upval)
+			if Count2 == 1 and (IsFunction == false or Current == false) then
 				flushActWork()
 			end
-			var30 -= 1
-			isSomeRendererActing.current = current
-			t.IsThisRendererActing.current = current_1
-			var74 = var74
+			Count2 -= 1
+			IsSomeRendererActing.current = Current
+			ReactFiberWorkLoopModule.IsThisRendererActing.current = Current1
+			Flag5 = Flag
 			
-			if dEV and var30 < var30 then
-				console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
+			if DEV and Count < Count2 then
+				Console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 			end
-		end, describeError)
+		end, DescribeError)
 		
-		if not ok_1 then
-			var30 -= 1
-			isSomeRendererActing.current = current
-			t.IsThisRendererActing.current = current_1
-			var74 = var74
+		if not CallbackResult then
+			Count2 -= 1
+			IsSomeRendererActing.current = Current
+			ReactFiberWorkLoopModule.IsThisRendererActing.current = Current1
+			Flag5 = Flag
 			
-			if dEV and var30 < var30 then
-				console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
+			if DEV and Count < Count2 then
+				Console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 			end
-			error(status_1)
+			error(CallbackResult2)
 		end
 		return {
-			andThen = function(_, p37, _)
-				-- upvalues: dEV (copy), console (copy)
-				if dEV then
-					console.error("Do not await the result of calling act(...) with sync logic, it is not a Promise.")
+			andThen = function(_, Callback: () -> (), _) --[[ Line: 4453 ]]
+				-- upvalues: DEV (upval), Console (upval)
+				if DEV then
+					Console.error("Do not await the result of calling act(...) with sync logic, it is not a Promise.")
 				end
-				p37()
+				Callback()
 			end
 		}
 	else
-		ok_1 = false
+		local Enabled = false
 		
-		if dEV and typeof(promiseModule) ~= nil then
-			promiseModule.resolve():andThen(function() end):andThen(function()
-				-- upvalues: ok_1 (write), console (copy)
-				if ok_1 == false then
-					console.error("You called act(Promise.new(function() --[[ ... ]] end)) without :await() or :expect(). This could lead to unexpected testing behaviour, interleaving multiple act calls and mixing their scopes. You should - act(function() Promise.new(function() --[[ ... ]] end):await() end);")
+		if DEV and typeof(PromiseModule) ~= nil then
+			PromiseModule.resolve():andThen(function() --[[ Line: 4371 ]] end):andThen(function() --[[ Line: 4371 ]]
+				-- upvalues: Enabled (ref), Console (upval)
+				if Enabled == false then
+					Console.error("You called act(Promise.new(function() --[[ ... ]] end)) without :await() or :expect(). This could lead to unexpected testing behaviour, interleaving multiple act calls and mixing their scopes. You should - act(function() Promise.new(function() --[[ ... ]] end):await() end);")
 				end
 			end)
 		end
 		return {
-			andThen = function(_, p37, p38)
-				-- upvalues: ok_1 (write), status (ref), var30 (copy), isFunction (copy), current (ref), isSomeRendererActing (copy), t (copy), current_1 (ref), var74 (copy), var74 (ref), dEV (copy), var30 (ref), console (copy), flushWorkAndMicroTasks (copy)
-				ok_1 = true
+			andThen = function(_, Callback, Callback1) --[[ Line: 4390 ]]
+				-- upvalues: Enabled (ref), Result (copy), Count2 (upval), IsFunction (upval), Current (copy), IsSomeRendererActing (upval), ReactFiberWorkLoopModule (upval), Current1 (copy), Flag5 (upval), Flag (copy), DEV (upval), Count (copy), Console (upval), flushWorkAndMicroTasks (upval)
+				Enabled = true
 				
-				return status:andThen(function()
-					-- upvalues: var30 (copy), isFunction (copy), current (copy), isSomeRendererActing (copy), t (copy), current_1 (copy), var74 (copy), var74 (copy), dEV (copy), var30 (copy), console (copy), p37 (ref), flushWorkAndMicroTasks (copy), p38 (ref)
-					if var30 <= 1 and (isFunction ~= true or current ~= true) then
-						flushWorkAndMicroTasks(function(p39)
-							-- upvalues: var30 (copy), isSomeRendererActing (copy), current (copy), t (copy), current_1 (copy), var74 (copy), var74 (copy), dEV (copy), var30 (copy), console (copy), p38 (copy), p37 (copy)
-							var30 -= 1
-							isSomeRendererActing.current = current
-							t.IsThisRendererActing.current = current_1
-							var74 = var74
+				return Result:andThen(function() --[[ Line: 4392 ]]
+					-- upvalues: Count2 (upval), IsFunction (upval), Current (upval), IsSomeRendererActing (upval), ReactFiberWorkLoopModule (upval), Current1 (upval), Flag5 (upval), Flag (upval), DEV (upval), Count (upval), Console (upval), Callback (copy), flushWorkAndMicroTasks (upval), Callback1 (copy)
+					if Count2 <= 1 and (IsFunction ~= true or Current ~= true) then
+						flushWorkAndMicroTasks(function(p19) --[[ Line: 4406 ]]
+							-- upvalues: Count2 (upval), IsSomeRendererActing (upval), Current (upval), ReactFiberWorkLoopModule (upval), Current1 (upval), Flag5 (upval), Flag (upval), DEV (upval), Count (upval), Console (upval), Callback1 (upval), Callback (upval)
+							Count2 -= 1
+							IsSomeRendererActing.current = Current
+							ReactFiberWorkLoopModule.IsThisRendererActing.current = Current1
+							Flag5 = Flag
 							
-							if dEV and var30 < var30 then
-								console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
+							if DEV and Count < Count2 then
+								Console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 							end
-							if p39 then
-								p38(p39)
+							if p19 then
+								Callback1(p19)
 								
 								return
+							else
+								Callback()
 							end
-							p37()
 						end)
 						
 						return
 					end
-					var30 -= 1
-					isSomeRendererActing.current = current
-					t.IsThisRendererActing.current = current_1
-					var74 = var74
+					Count2 -= 1
+					IsSomeRendererActing.current = Current
+					ReactFiberWorkLoopModule.IsThisRendererActing.current = Current1
+					Flag5 = Flag
 					
-					if dEV and var30 < var30 then
-						console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
+					if DEV and Count < Count2 then
+						Console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 					end
-					p37()
-				end, function(p39)
-					-- upvalues: var30 (copy), isSomeRendererActing (copy), current (copy), t (copy), current_1 (copy), var74 (copy), var74 (copy), dEV (copy), var30 (copy), console (copy), p38 (ref)
-					var30 -= 1
-					isSomeRendererActing.current = current
-					t.IsThisRendererActing.current = current_1
-					var74 = var74
+					Callback()
+				end, function(p19) --[[ Line: 4414 ]]
+					-- upvalues: Count2 (upval), IsSomeRendererActing (upval), Current (upval), ReactFiberWorkLoopModule (upval), Current1 (upval), Flag5 (upval), Flag (upval), DEV (upval), Count (upval), Console (upval), Callback1 (copy)
+					Count2 -= 1
+					IsSomeRendererActing.current = Current
+					ReactFiberWorkLoopModule.IsThisRendererActing.current = Current1
+					Flag5 = Flag
 					
-					if dEV and var30 < var30 then
-						console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
+					if DEV and Count < Count2 then
+						Console.error("You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls before making a new one. ")
 					end
-					p38(p39)
+					Callback1(p19)
 				end)
 			end
 		}
 	end
 end
 
-function t_2.detachFiberAfterEffects(p36)
-	-- upvalues: enableNewTreeCleanupPath (ref), t_2 (ref), deletedTreeCleanUpLevel (ref), dEV (ref)
-	if enableNewTreeCleanupPath then
-		local alternate = p36.alternate
+function config1.detachFiberAfterEffects(Alternate) --[[ Line: 4465 ]]
+	-- upvalues: EnableNewTreeCleanupPath (copy), config1 (copy), DeletedTreeCleanUpLevel (copy), DEV (copy)
+	if EnableNewTreeCleanupPath then
+		local Alternate1 = Alternate.alternate
 		
-		if alternate ~= nil then
-			p36.alternate = nil
-			t_2.detachFiberAfterEffects(alternate)
+		if Alternate1 ~= nil then
+			Alternate.alternate = nil
+			config1.detachFiberAfterEffects(Alternate1)
 		end
 	end
-	if enableNewTreeCleanupPath and deletedTreeCleanUpLevel >= 2 then
-		p36.child = nil
-		p36.deletions = nil
-		p36.sibling = nil
+	if EnableNewTreeCleanupPath and DeletedTreeCleanUpLevel >= 2 then
+		Alternate.child = nil
+		Alternate.deletions = nil
+		Alternate.sibling = nil
 		
-		if dEV then
-			p36._debugOwner = nil
+		if DEV then
+			Alternate._debugOwner = nil
 		end
-		if deletedTreeCleanUpLevel >= 3 then
-			p36.return_ = nil
-			p36.dependencies = nil
-			p36.memoizedProps = nil
-			p36.memoizedState = nil
-			p36.pendingProps = nil
-			p36.stateNode = nil
-			p36.updateQueue = nil
+		if DeletedTreeCleanUpLevel >= 3 then
+			Alternate.return_ = nil
+			Alternate.dependencies = nil
+			Alternate.memoizedProps = nil
+			Alternate.memoizedState = nil
+			Alternate.pendingProps = nil
+			Alternate.stateNode = nil
+			Alternate.updateQueue = nil
 		end
 	else
-		p36.child = nil
-		p36.deletions = nil
-		p36.dependencies = nil
-		p36.memoizedProps = nil
-		p36.memoizedState = nil
-		p36.pendingProps = nil
-		p36.sibling = nil
-		p36.stateNode = nil
-		p36.updateQueue = nil
+		Alternate.child = nil
+		Alternate.deletions = nil
+		Alternate.dependencies = nil
+		Alternate.memoizedProps = nil
+		Alternate.memoizedState = nil
+		Alternate.pendingProps = nil
+		Alternate.sibling = nil
+		Alternate.stateNode = nil
+		Alternate.updateQueue = nil
 		
-		if dEV then
-			p36._debugOwner = nil
+		if DEV then
+			Alternate._debugOwner = nil
 			
 			return
 		end
 	end
 end
 
-return t
+return ReactFiberWorkLoopModule

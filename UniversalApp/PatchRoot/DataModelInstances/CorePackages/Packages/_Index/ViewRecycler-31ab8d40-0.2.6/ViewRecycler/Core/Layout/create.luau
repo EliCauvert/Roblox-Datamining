@@ -1,82 +1,84 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Layout.LayoutRuntime)
-local typesModule = require(viewRecycler.Core.Types)
-local staticPartsModule = require(viewRecycler.Core.Layout.staticParts)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Layout.LayoutRuntime)
+local TypesModule = require(ViewRecycler.Core.Types)
+local StaticPartsModule = require(ViewRecycler.Core.Layout.staticParts)
 
-return function(p1)
-	-- upvalues: typesModule (ref), dataSourceChangeTypeModule (ref), staticPartsModule (ref)
-	local getItemLayout = p1.getItemLayout
-	local var1 = 0
+return function(p1) --[[ Line: 17 | Named "create" ]]
+	-- upvalues: TypesModule (copy), DataSourceChangeTypeModule (copy), StaticPartsModule (copy)
+	local GetItemLayoutFunction = p1.getItemLayout
+	local CountKeys = 0
 	
 	return {
-		getItemCount = function()
-			-- upvalues: var1 (write)
-			return var1
+		getItemCount = function() --[[ Line: 21 ]]
+			-- upvalues: CountKeys (ref)
+			return CountKeys
 		end,
-		getContentLength = function()
-			-- upvalues: var1 (write), getItemLayout (ref)
-			if var1 == 0 then
+		getContentLength = function() --[[ Line: 25 ]]
+			-- upvalues: CountKeys (ref), GetItemLayoutFunction (copy)
+			if CountKeys == 0 then
 				return 0
-			end
-			local var2 = getItemLayout(var1)
-			
-			return var2.startOffset + var2.length
-		end,
-		getIntersectingIndexRange = function(p2, p3)
-			-- upvalues: var1 (write), typesModule (copy), getItemLayout (ref)
-			if var1 == 0 or p3 <= p2 then
-				return typesModule.EMPTY_INDEX_RANGE
-			end
-			local var2 = 1
-			local var3 = var1
-			while var2 < var3 do
-				local var4 = (var2 + var3) // 2
-				local var5 = getItemLayout(var4)
+			else
+				local ItemLayout = GetItemLayoutFunction(CountKeys)
 				
-				if p2 < var5.startOffset + var5.length then
-					var3 = var4
+				return ItemLayout.startOffset + ItemLayout.length
+			end
+		end,
+		getIntersectingIndexRange = function(p2, p3) --[[ Line: 33 ]]
+			-- upvalues: CountKeys (ref), TypesModule (upval), GetItemLayoutFunction (copy)
+			if CountKeys == 0 or p3 <= p2 then
+				return TypesModule.EMPTY_INDEX_RANGE
+			end
+			local v1 = 1
+			local CountKeys1: number = CountKeys
+			while v1 < CountKeys1 do
+				local CountKeysRatio = (v1 + CountKeys1) // 2
+				local ItemLayout = GetItemLayoutFunction(CountKeysRatio)
+				
+				if p2 < ItemLayout.startOffset + ItemLayout.length then
+					CountKeys1 = CountKeysRatio
 				else
-					var2 = var4 + 1
+					v1 = CountKeysRatio + 1
 				end
 			end
-			local var6 = getItemLayout(var2)
+			local FirstIndex: number = v1
+			local ItemLayout = GetItemLayoutFunction(FirstIndex)
 			
-			if var6.startOffset + var6.length <= p2 then
-				return typesModule.EMPTY_INDEX_RANGE
+			if ItemLayout.startOffset + ItemLayout.length <= p2 then
+				return TypesModule.EMPTY_INDEX_RANGE
 			end
-			local var7 = 1
-			local var8 = var1
-			while var7 < var8 do
-				local var9 = (var7 + var8 + 1) // 2
+			local LastIndex = 1
+			local CountKeys2: number = CountKeys
+			while LastIndex < CountKeys2 do
+				local LastIndexRatio = (LastIndex + CountKeys2 + 1) // 2
 				
-				if getItemLayout(var9).startOffset < p3 then
-					var7 = var9
+				if GetItemLayoutFunction(LastIndexRatio).startOffset < p3 then
+					LastIndex = LastIndexRatio
 				else
-					var8 = var9 - 1
+					CountKeys2 = LastIndexRatio - 1
 				end
 			end
-			return if p3 <= getItemLayout(var7).startOffset or var7 < var2 then typesModule.EMPTY_INDEX_RANGE else { firstIndex = var2, lastIndex = var7 }
+			return if p3 <= GetItemLayoutFunction(LastIndex).startOffset or LastIndex < FirstIndex then TypesModule.EMPTY_INDEX_RANGE else { firstIndex = FirstIndex, lastIndex = LastIndex }
 		end,
-		expandIndexRange = function(p4, p5, p6)
-			-- upvalues: staticPartsModule (copy), var1 (write)
-			return staticPartsModule.expandItemRange(p4, p5, p6 or p5, var1)
+		expandIndexRange = function(p4, p5, p6) --[[ Line: 90 ]]
+			-- upvalues: StaticPartsModule (upval), CountKeys (ref)
+			return StaticPartsModule.expandItemRange(p4, p5, p6 or p5, CountKeys)
 		end,
-		getItemLayout = getItemLayout,
-		updateItemMeasurement = staticPartsModule.updateItemMeasurementNoop,
-		requiresItemMeasurement = staticPartsModule.requiresItemMeasurementFalse,
-		applyDataSourceChange = function(p4)
-			-- upvalues: dataSourceChangeTypeModule (copy), var1 (write)
-			if p4.type == dataSourceChangeTypeModule.Reset then
-				var1 = #p4.keys
-			elseif p4.type == dataSourceChangeTypeModule.Insert then
-				var1 += #p4.keys
-			elseif p4.type == dataSourceChangeTypeModule.Remove then
-				var1 -= #p4.keys
+		getItemLayout = GetItemLayoutFunction,
+		updateItemMeasurement = StaticPartsModule.updateItemMeasurementNoop,
+		requiresItemMeasurement = StaticPartsModule.requiresItemMeasurementFalse,
+		applyDataSourceChange = function(p4): boolean --[[ Line: 73 ]]
+			-- upvalues: DataSourceChangeTypeModule (upval), CountKeys (ref)
+			if p4.type == DataSourceChangeTypeModule.Reset then
+				CountKeys = #p4.keys
+			elseif p4.type == DataSourceChangeTypeModule.Insert then
+				CountKeys += #p4.keys
+			elseif p4.type == DataSourceChangeTypeModule.Remove then
+				CountKeys -= #p4.keys
 			end
 			return true
 		end,
-		setViewportCrossAxisLength = staticPartsModule.geometryUnchanged,
-		destroy = staticPartsModule.noop
+		setViewportCrossAxisLength = StaticPartsModule.geometryUnchanged,
+		destroy = StaticPartsModule.noop
 	}
 end

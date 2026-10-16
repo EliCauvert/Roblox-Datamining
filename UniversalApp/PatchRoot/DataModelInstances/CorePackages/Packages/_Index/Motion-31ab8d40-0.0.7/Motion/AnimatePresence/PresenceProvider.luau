@@ -1,79 +1,79 @@
-﻿local motion = script:FindFirstAncestor("Motion")
-local reactModule = require(motion.Parent.React)
-local presenceContextModule = require(motion.AnimatePresence.PresenceContext)
-local useIdFallback = require(motion.AnimatePresence.utils).useIdFallback
+﻿local Motion = script:FindFirstAncestor("Motion")
+local ReactModule = require(Motion.Parent.React)
+local PresenceContextModule = require(Motion.AnimatePresence.PresenceContext)
+local UseIdFallbackFunction = require(Motion.AnimatePresence.utils).useIdFallback
 
-return function(p1)
-	-- upvalues: useIdFallback (ref), reactModule (ref), presenceContextModule (ref)
+return function(p1) --[[ Line: 30 | Named "PresenceProvider" ]]
+	-- upvalues: UseIdFallbackFunction (copy), ReactModule (copy), PresenceContextModule (copy)
 	if p1 == nil then
 		error("PresenceProvider: props cannot be nil")
 	end
-	local children = p1.children
-	local isPresent = p1.isPresent
+	local Children = p1.children
+	local IsPresent = p1.isPresent
 	
-	if isPresent == nil then
-		isPresent = true
+	if IsPresent == nil then
+		IsPresent = true
 	end
-	local passThroughData = p1.passThroughData
-	local text = nil
-	local ok, status = pcall(function()
-		-- upvalues: text (write), useIdFallback (copy)
-		text = useIdFallback()
+	local PassThroughData = p1.passThroughData
+	local Id: string? = nil
+	local Success, Result = pcall(function() --[[ Line: 53 ]]
+		-- upvalues: Id (ref), UseIdFallbackFunction (upval)
+		Id = UseIdFallbackFunction()
 	end)
 	
-	if not ok then
-		warn("PresenceProvider: Error generating ID:", status)
-		text = "presence-" .. useIdFallback()
+	if not Success then
+		warn("PresenceProvider: Error generating ID:", Result)
+		Id = "presence-" .. UseIdFallbackFunction()
 	end
-	local t = nil
-	local ok_1, status_1 = pcall(function()
-		-- upvalues: t (write), reactModule (copy)
-		t = reactModule.useRef({})
+	local UseRefResult = nil
+	local Success1, Result1 = pcall(function() --[[ Line: 64 ]]
+		-- upvalues: UseRefResult (ref), ReactModule (upval)
+		UseRefResult = ReactModule.useRef({})
 	end)
 	
-	if not ok_1 then
-		warn("PresenceProvider: Error creating childrenPresence ref:", status_1)
-		t = { current = {} }
+	if not Success1 then
+		warn("PresenceProvider: Error creating childrenPresence ref:", Result1)
+		UseRefResult = { current = {} }
 	end
-	local t_1 = {
-		id = text,
-		isPresent = isPresent,
-		register = function(p2)
-			-- upvalues: t (write)
-			t.current[p2] = false
+	local config = {
+		id = Id,
+		isPresent = IsPresent,
+		register = function(p2) --[[ Line: 95 ]]
+			-- upvalues: UseRefResult (ref)
+			UseRefResult.current[p2] = false
 			
-			return function()
-				-- upvalues: t (copy), p2 (ref)
-				t.current[p2] = nil
+			return function() --[[ Line: 99 ]]
+				-- upvalues: UseRefResult (upval), p2 (copy)
+				UseRefResult.current[p2] = nil
 			end
 		end,
-		onExitComplete = function(p2)
-			-- upvalues: t (write), p1 (ref)
-			if t.current then
-				t.current[p2] = true
+		onExitComplete = function(p2) --[[ Line: 74 ]]
+			-- upvalues: UseRefResult (ref), p1 (copy)
+			if UseRefResult.current then
+				UseRefResult.current[p2] = true
 			end
-			local var1 = true
+			local Flag = true
 			
-			for i, v in pairs(t.current) do
-				if not v then
-					var1 = false
+			for _, value in pairs(UseRefResult.current) do
+				if not value then
+					Flag = false
 					break
 				end
 			end
-			if var1 and p1.onExitComplete then
+			if Flag and p1.onExitComplete then
 				p1.onExitComplete()
 			end
 		end,
-		passThroughData = passThroughData
+		passThroughData = PassThroughData
 	}
-	local var2 = nil
-	local ok_2, status_2 = pcall(function()
-		-- upvalues: var2 (write), reactModule (copy), presenceContextModule (copy), t_1 (ref), children (ref)
-		var2 = reactModule.createElement(presenceContextModule.Provider, { value = t_1 }, children)
+	local Element = nil
+	local Success2, Result2 = pcall(function() --[[ Line: 114 ]]
+		-- upvalues: Element (ref), ReactModule (upval), PresenceContextModule (upval), config (copy), Children (copy)
+		Element = ReactModule.createElement(PresenceContextModule.Provider, { value = config }, Children)
 	end)
 	
-	if not ok_2 then
-		warn("PresenceProvider: Error creating PresenceContext.Provider:", status_2)
+	if not Success2 then
+		warn("PresenceProvider: Error creating PresenceContext.Provider:", Result2)
 	end
-	return var2 or reactModule.createElement(reactModule.Fragment, {}, children)
+	return Element or ReactModule.createElement(ReactModule.Fragment, {}, Children)
 end

@@ -1,35 +1,35 @@
-﻿local reactUtils = script:FindFirstAncestor("ReactUtils")
-local reactModule = require(reactUtils.Parent.React)
-local LUAU_ANALYZE_ERRORModule = require(reactUtils.LUAU_ANALYZE_ERROR)
+﻿local ReactUtils = script:FindFirstAncestor("ReactUtils")
+local ReactModule = require(ReactUtils.Parent.React)
+local LUAUANALYZEERRORModule = require(ReactUtils.LUAU_ANALYZE_ERROR)
 
-return function(p1)
-	-- upvalues: reactModule (ref), LUAU_ANALYZE_ERRORModule (ref)
-	local var1 = reactModule.useRef(p1 or {})
-	assert(var1.current ~= nil, LUAU_ANALYZE_ERRORModule)
-	local var2, var3 = reactModule.useState(#var1.current)
+return function(p1) --[[ Line: 9 | Named "useStackState" ]]
+	-- upvalues: ReactModule (copy), LUAUANALYZEERRORModule (copy)
+	local UseRefResult = ReactModule.useRef(p1 or {})
+	assert(UseRefResult.current ~= nil, LUAUANALYZEERRORModule)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(#UseRefResult.current)
 	
 	return {
-		push = reactModule.useCallback(function(p2)
-			-- upvalues: var1 (ref), var3 (ref)
-			table.insert(var1.current, p2)
-			var3(#var1.current)
+		push = ReactModule.useCallback(function(p2) --[[ Line: 21 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+			table.insert(UseRefResult.current, p2)
+			UseStateResult2(#UseRefResult.current)
 		end, {}),
-		pop = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), var3 (ref)
-			local removed = table.remove(var1.current)
-			var3(#var1.current)
+		pop = ReactModule.useCallback(function() --[[ Line: 26 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+			local Removed = table.remove(UseRefResult.current)
+			UseStateResult2(#UseRefResult.current)
 			
-			return removed
+			return Removed
 		end, {}),
-		getTop = reactModule.useCallback(function()
-			-- upvalues: var1 (ref)
-			return var1.current[#var1.current]
+		getTop = ReactModule.useCallback(function() --[[ Line: 32 ]]
+			-- upvalues: UseRefResult (copy)
+			return UseRefResult.current[#UseRefResult.current]
 		end, {}),
-		clear = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), var3 (ref)
-			table.clear(var1.current)
-			var3(0)
+		clear = ReactModule.useCallback(function() --[[ Line: 36 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+			table.clear(UseRefResult.current)
+			UseStateResult2(0)
 		end, {}),
-		size = var2
+		size = UseStateResult
 	}
 end

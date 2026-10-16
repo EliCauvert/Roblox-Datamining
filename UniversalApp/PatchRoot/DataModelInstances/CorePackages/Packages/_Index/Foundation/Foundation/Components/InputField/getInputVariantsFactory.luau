@@ -1,59 +1,59 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local dashModule = require(foundation.Parent.Dash)
-local _ = require(foundation.Components.Types)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputVariantModule = require(foundation.Enums.InputVariant)
-local _ = require(foundation.Enums.IconSize)
-local radiusModule = require(foundation.Enums.Radius)
-local _ = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local flagsModule = require(foundation.Utility.Flags)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local DashModule = require(Foundation.Parent.Dash)
+local _ = require(Foundation.Components.Types)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local InputVariantModule = require(Foundation.Enums.InputVariant)
+local _ = require(Foundation.Enums.IconSize)
+local RadiusModule = require(Foundation.Enums.Radius)
+local _ = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local FlagsModule = require(Foundation.Utility.Flags)
 
-return function(p1)
-	-- upvalues: flagsModule (ref), inputSizeModule (ref), inputVariantModule (ref), dashModule (ref), radiusModule (ref)
+return function(p1) --[[ Line: 42 | Named "getInputVariantsFactory" ]]
+	-- upvalues: FlagsModule (copy), InputSizeModule (copy), InputVariantModule (copy), DashModule (copy), RadiusModule (copy)
 	return {
 		common = {
 			container = {
-				fgStyle = if flagsModule.FoundationFixColorOnScrubbableNumberInput then p1.Color.Shift.Shift_200 else nil,
+				fgStyle = if FlagsModule.FoundationFixColorOnScrubbableNumberInput then p1.Color.Shift.Shift_200 else nil,
 				strokeStyle = p1.Color.Stroke.Emphasis,
 				strokeThickness = p1.Stroke.Standard
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = { container = { tag = "size-full-600" } },
-			[inputSizeModule.Small] = { container = { tag = "size-full-800" } },
-			[inputSizeModule.Medium] = { container = { tag = "size-full-1000" } },
-			[inputSizeModule.Large] = { container = { tag = "size-full-1200" } }
+			[InputSizeModule.XSmall] = { container = { tag = "size-full-600" } },
+			[InputSizeModule.Small] = { container = { tag = "size-full-800" } },
+			[InputSizeModule.Medium] = { container = { tag = "size-full-1000" } },
+			[InputSizeModule.Large] = { container = { tag = "size-full-1200" } }
 		},
 		variants = {
-			[inputVariantModule.Standard] = {},
-			[inputVariantModule.Contrast] = {
+			[InputVariantModule.Standard] = {},
+			[InputVariantModule.Contrast] = {
 				container = {
-					fgStyle = if flagsModule.FoundationFixColorOnScrubbableNumberInput then p1.Color.Shift.Shift_300 else nil,
+					fgStyle = if FlagsModule.FoundationFixColorOnScrubbableNumberInput then p1.Color.Shift.Shift_300 else nil,
 					bgStyle = p1.Color.Shift.Shift_200,
-					strokeStyle = dashModule.None
+					strokeStyle = DashModule.None
 				}
 			},
-			[inputVariantModule.Utility] = {
+			[InputVariantModule.Utility] = {
 				container = {
-					fgStyle = dashModule.None,
-					bgStyle = dashModule.None,
-					strokeStyle = dashModule.None
+					fgStyle = DashModule.None,
+					bgStyle = DashModule.None,
+					strokeStyle = DashModule.None
 				}
 			}
 		},
 		defaultRadius = {
-			[inputSizeModule.XSmall] = { container = { tag = { ["radius-small"] = true } } },
-			[inputSizeModule.Small] = { container = { tag = { ["radius-medium"] = true } } },
-			[inputSizeModule.Medium] = { container = { tag = { ["radius-medium"] = true } } },
-			[inputSizeModule.Large] = { container = { tag = { ["radius-medium"] = true } } }
+			[InputSizeModule.XSmall] = { container = { tag = { ["radius-small"] = true } } },
+			[InputSizeModule.Small] = { container = { tag = { ["radius-medium"] = true } } },
+			[InputSizeModule.Medium] = { container = { tag = { ["radius-medium"] = true } } },
+			[InputSizeModule.Large] = { container = { tag = { ["radius-medium"] = true } } }
 		},
 		radius = {
-			[radiusModule.None] = { container = { tag = { ["radius-none"] = true } } },
-			[radiusModule.XSmall] = { container = { tag = { ["radius-xsmall"] = true } } },
-			[radiusModule.Small] = { container = { tag = { ["radius-small"] = true } } },
-			[radiusModule.Medium] = { container = { tag = { ["radius-medium"] = true } } },
-			[radiusModule.Large] = { container = { tag = { ["radius-large"] = true } } }
+			[RadiusModule.None] = { container = { tag = { ["radius-none"] = true } } },
+			[RadiusModule.XSmall] = { container = { tag = { ["radius-xsmall"] = true } } },
+			[RadiusModule.Small] = { container = { tag = { ["radius-small"] = true } } },
+			[RadiusModule.Medium] = { container = { tag = { ["radius-medium"] = true } } },
+			[RadiusModule.Large] = { container = { tag = { ["radius-large"] = true } } }
 		},
 		errorState = {
 			[true] = { container = { strokeStyle = p1.Color.System.Alert } },

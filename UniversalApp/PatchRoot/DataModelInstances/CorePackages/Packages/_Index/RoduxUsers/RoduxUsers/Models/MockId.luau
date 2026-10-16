@@ -1,8 +1,8 @@
-﻿local var1 = 0
+﻿local Count = 0
 
-return function()
-	-- upvalues: var1 (write)
-	var1 += 1
+return function(): string --[[ Line: 14 ]]
+	-- upvalues: Count (ref)
+	Count += 1
 	
-	return tostring(var1)
+	return (tostring(Count))
 end

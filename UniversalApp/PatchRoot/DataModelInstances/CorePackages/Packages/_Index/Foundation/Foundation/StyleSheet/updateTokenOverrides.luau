@@ -1,21 +1,21 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Enums.ColorMode)
-local _ = require(foundation.Enums.Device)
-local flagsModule = require(foundation.Utility.Flags)
-local _ = require(foundation.Enums.ThemeName)
-local _ = require(foundation.Providers.Style.Tokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Enums.ColorMode)
+local _ = require(Foundation.Enums.Device)
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Foundation.Enums.ThemeName)
+local _ = require(Foundation.Providers.Style.Tokens)
 local _ = require(script.Parent.createStyleSheetRules)
-local getOverrideAttributesModule = require(script.Parent.getOverrideAttributes)
-local scaleValueModule = require(foundation.Utility.scaleValue)
+local GetOverrideAttributesModule = require(script.Parent.getOverrideAttributes)
+local ScaleValueModule = require(Foundation.Utility.scaleValue)
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: getOverrideAttributesModule (ref), flagsModule (ref), scaleValueModule (ref)
-	for i, v in getOverrideAttributesModule(p2, p3, p4, p6) do
-		local var1 = if flagsModule.FoundationDisableTokenScaling then v else scaleValueModule(v, p5)
-		p1:SetAttribute(i, var1)
+return function(Object, p1, p2, p3, p4, p5, p6) --[[ Line: 17 | Named "updateTokenOverrides" ]]
+	-- upvalues: GetOverrideAttributesModule (copy), FlagsModule (copy), ScaleValueModule (copy)
+	for AttributeName, value in GetOverrideAttributesModule(p1, p2, p3, p5) do
+		local ScaleValueModuleResult = if FlagsModule.FoundationDisableTokenScaling then value else ScaleValueModule(value, p4)
+		Object:SetAttribute(AttributeName, ScaleValueModuleResult)
 		
-		if p7 then
-			p7[i] = var1
+		if p6 then
+			p6[AttributeName] = ScaleValueModuleResult
 		end
 	end
 end

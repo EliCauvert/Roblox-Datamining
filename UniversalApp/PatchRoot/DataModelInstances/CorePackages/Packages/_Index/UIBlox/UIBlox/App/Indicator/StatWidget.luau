@@ -1,33 +1,29 @@
-﻿local app = script:FindFirstAncestor("App")
-local parent = app.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local cryoModule = require(parent_1.Cryo)
-local _ = require(app.ImageSet.ImagesTypes)
-local _ = require(app.Style.StyleTypes)
-local iconSizeModule = require(app.ImageSet.Enum.IconSize)
-local getIconSizeModule = require(app.ImageSet.getIconSize)
-local label = require(parent.Core.ImageSet.ImageSetComponent).Label
-local genericTextLabelModule = require(parent.Core.Text.GenericTextLabel.GenericTextLabel)
-local useStyleModule = require(parent.Core.Style.useStyle)
-local t = {
+﻿local App = script:FindFirstAncestor("App")
+local Parent = App.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local CryoModule = require(Parent1.Cryo)
+local _ = require(App.ImageSet.ImagesTypes)
+local _ = require(App.Style.StyleTypes)
+local Label = require(Parent.Core.ImageSet.ImageSetComponent).Label
+local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
+local UseStyleModule = require(Parent.Core.Style.useStyle)
+local config = {
 	containerPaddingLeft = 12,
 	containerPaddingRight = 12,
 	containerGap = 12,
 	dataGap = 0,
-	iconSize = getIconSizeModule(iconSizeModule.Large)
+	iconSize = require(App.ImageSet.getIconSize)(require(App.ImageSet.Enum.IconSize).Large)
 }
 
-return function(p1)
-	-- upvalues: useStyleModule (ref), cryoModule (ref), t (ref), reactModule (ref), label (ref), genericTextLabelModule (ref)
-	local var1 = useStyleModule()
-	local var2 = cryoModule.Dictionary.join(t, p1.styleProps or {})
-	local containerPaddingLeft = var2.containerPaddingLeft
-	local containerPaddingRight = var2.containerPaddingRight
-	local containerGap = var2.containerGap
-	local iconSize = var2.iconSize
+return function(p1) --[[ Line: 65 | Named "StatWidget" ]]
+	-- upvalues: UseStyleModule (copy), CryoModule (copy), config (copy), ReactModule (copy), Label (copy), GenericTextLabelModule (copy)
+	local UseStyleModuleResult = UseStyleModule()
+	local JoinResult = CryoModule.Dictionary.join(config, p1.styleProps or {})
+	local ContainerGap = JoinResult.containerGap
+	local IconSize = JoinResult.iconSize
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Position = p1.position,
 		AnchorPoint = p1.anchorPoint,
@@ -35,35 +31,35 @@ return function(p1)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p1.layoutOrder
 	}, {
-		ListLayout = reactModule.createElement("UIListLayout", {
+		ListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = p1.horizontalAlignment,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, containerGap)
+			Padding = UDim.new(0, ContainerGap)
 		}),
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, containerPaddingLeft),
-			PaddingRight = UDim.new(0, containerPaddingRight)
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingLeft = UDim.new(0, JoinResult.containerPaddingLeft),
+			PaddingRight = UDim.new(0, JoinResult.containerPaddingRight)
 		}),
-		Icon = reactModule.createElement(label, {
+		Icon = ReactModule.createElement(Label, {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, iconSize, 0, iconSize),
+			Size = UDim2.new(0, IconSize, 0, IconSize),
 			Image = p1.icon,
-			ImageColor3 = (var2.iconContentColor or var1.Theme.IconEmphasis).Color,
+			ImageColor3 = (JoinResult.iconContentColor or UseStyleModuleResult.Theme.IconEmphasis).Color,
 			Position = UDim2.new(0, 0, 0, 0)
 		}),
-		TextSection = reactModule.createElement("Frame", {
+		TextSection = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
-			Position = UDim2.new(0, iconSize + containerGap, 0, 0)
+			Position = UDim2.new(0, IconSize + ContainerGap, 0, 0)
 		}, {
-			ListLayout = reactModule.createElement("UIListLayout", {
+			ListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
-				Padding = UDim.new(0, var2.dataGap)
+				Padding = UDim.new(0, JoinResult.dataGap)
 			}),
-			Number = reactModule.createElement(genericTextLabelModule, {
+			Number = ReactModule.createElement(GenericTextLabelModule, {
 				LayoutOrder = 1,
 				fluidSizing = true,
 				TextWrapped = false,
@@ -72,11 +68,11 @@ return function(p1)
 				AutomaticSize = Enum.AutomaticSize.XY,
 				Text = p1.countText,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				colorStyle = var2.dataContentColor or var1.Theme.TextEmphasis,
-				fontStyle = var1.Font.Title,
+				colorStyle = JoinResult.dataContentColor or UseStyleModuleResult.Theme.TextEmphasis,
+				fontStyle = UseStyleModuleResult.Font.Title,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}),
-			Label = reactModule.createElement(genericTextLabelModule, {
+			Label = ReactModule.createElement(GenericTextLabelModule, {
 				LayoutOrder = 2,
 				fluidSizing = true,
 				TextWrapped = false,
@@ -85,8 +81,8 @@ return function(p1)
 				AutomaticSize = Enum.AutomaticSize.XY,
 				Text = p1.labelText,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				colorStyle = var2.dataLabelContentColor or var1.Theme.TextEmphasis,
-				fontStyle = var1.Font.CaptionHeader,
+				colorStyle = JoinResult.dataLabelContentColor or UseStyleModuleResult.Theme.TextEmphasis,
+				fontStyle = UseStyleModuleResult.Font.CaptionHeader,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			})
 		})

@@ -1,181 +1,182 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local brickColorPickerModule = require(foundation.Components.ColorPicker.BrickColorPicker)
-local colorInputModeModule = require(foundation.Enums.ColorInputMode)
-local colorInputsModule = require(foundation.Components.ColorPicker.ColorInputs)
-local colorSliderModule = require(foundation.Components.ColorPicker.ColorSlider)
-local colorSliderTypeModule = require(foundation.Enums.ColorSliderType)
-local SVPickerModule = require(foundation.Components.ColorPicker.SVPicker)
-local viewModule = require(foundation.Components.View)
-local colorUtilsModule = require(foundation.Components.ColorPicker.colorUtils)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local _ = require(foundation.Components.Types)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local BrickColorPickerModule = require(Foundation.Components.ColorPicker.BrickColorPicker)
+local ColorInputModeModule = require(Foundation.Enums.ColorInputMode)
+local ColorInputsModule = require(Foundation.Components.ColorPicker.ColorInputs)
+local ColorSliderModule = require(Foundation.Components.ColorPicker.ColorSlider)
+local ColorSliderTypeModule = require(Foundation.Enums.ColorSliderType)
+local SVPickerModule = require(Foundation.Components.ColorPicker.SVPicker)
+local ViewModule = require(Foundation.Components.View)
+local ColorUtilsModule = require(Foundation.Components.ColorPicker.colorUtils)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Components.Types)
+local config = {
 	initialAlpha = 1,
 	testId = "--foundation-color-picker",
-	initialMode = colorInputModeModule.RGB
+	initialMode = ColorInputModeModule.RGB
 }
 
-local function _(p1)
+local function _(p1) --[[ Line: 40 | Named "resolveInitialHSV" ]]
 	if type(p1) == "table" then
 		return p1.H / 360, (p1.S or 100) / 100, (p1.V or 100) / 100
+	else
+		return p1:ToHSV()
 	end
-	return p1:ToHSV()
 end
 
-return function(p1)
-	-- upvalues: colorInputModeModule (ref), withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), colorUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), colorInputsModule (ref), brickColorPickerModule (ref), SVPickerModule (ref), colorSliderModule (ref), colorSliderTypeModule (ref)
-	local var1, var2, var3
-	local availableModes = p1.availableModes or {
-		colorInputModeModule.RGB,
-		colorInputModeModule.HSV,
-		colorInputModeModule.Hex,
-		colorInputModeModule.Brick
+return function(p1) --[[ Line: 48 | Named "ColorPicker" ]]
+	-- upvalues: ColorInputModeModule (copy), WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ColorUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ColorInputsModule (copy), BrickColorPickerModule (copy), SVPickerModule (copy), ColorSliderModule (copy), ColorSliderTypeModule (copy)
+	local AvailableModes = p1.availableModes or {
+		ColorInputModeModule.RGB,
+		ColorInputModeModule.HSV,
+		ColorInputModeModule.Hex,
+		ColorInputModeModule.Brick
 	}
-	local var4 = withDefaultsModule(p1, t)
-	local initialColor = var4.initialColor or useTokensModule().Color.Extended.Magenta.Magenta_700.Color3
-	local var5, var6 = reactModule.useBinding(initialColor)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local MagentaColor3 = UseTokensModule().Color.Extended.Magenta.Magenta_700.Color3
+	local InitialColor = WithDefaultsModuleResult.initialColor or MagentaColor3
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(InitialColor)
+	local v1 = nil
+	local HRatio = nil
+	local v2 = nil
 	
-	if type(initialColor) == "table" then
-		var1 = initialColor.H / 360
-		var2 = (initialColor.S or 100) / 100
-		var3 = (initialColor.V or 100) / 100
+	if type(InitialColor) == "table" then
+		HRatio = InitialColor.H / 360
+		v1 = (InitialColor.S or 100) / 100
+		v2 = (InitialColor.V or 100) / 100
 	else
-		local var7, var8, var9 = initialColor:ToHSV()
-		var1 = var7
-		var2 = var8
-		var3 = var9
+		HRatio, v1, v24 = InitialColor:ToHSV()
 	end
-	local var10, var11 = reactModule.useBinding(var1)
-	local var12, var13 = reactModule.useBinding(var2)
-	local var14, var15 = reactModule.useBinding(var3)
-	local var16, var17 = reactModule.useBinding(var4.initialAlpha or 1)
-	local var18, var19 = reactModule.useState(var4.initialMode or colorInputModeModule.RGB)
-	local toColor3 = var5:map(colorUtilsModule.toColor3)
-	local var20 = var5:map(function(p2)
-		-- upvalues: colorUtilsModule (copy)
-		return not colorUtilsModule.isPartialHSV(p2)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(HRatio)
+	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(v1)
+	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(v2)
+	local UseBindingResult5, UseBindingResult2_4 = ReactModule.useBinding(WithDefaultsModuleResult.initialAlpha or 1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.initialMode or ColorInputModeModule.RGB)
+	local MapResult = UseBindingResult:map(ColorUtilsModule.toColor3)
+	local MapResult1 = UseBindingResult:map(function(p2): boolean --[[ Line: 70 ]]
+		-- upvalues: ColorUtilsModule (upval)
+		return not ColorUtilsModule.isPartialHSV(p2)
 	end)
-	local var21 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), availableModes (ref), var19 (ref)
-		local initialMode = var4.initialMode
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 76 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), AvailableModes (copy), UseStateResult2 (copy)
+		local InitialMode = WithDefaultsModuleResult.initialMode
 		
-		if initialMode then
-			local var22 = false
+		if InitialMode then
+			local Flag = false
 			
-			for i, v in availableModes do
-				if v == initialMode then
-					var22 = true
+			for _, availableMode in AvailableModes do
+				if availableMode == InitialMode then
+					Flag = true
 					break
 				end
 			end
-			if not var22 then
-				warn(`ColorPicker: initialMode {initialMode} is not in availableModes. Using first available mode.`)
-				var19(availableModes[1])
+			if not Flag then
+				warn(`ColorPicker: initialMode {InitialMode} is not in availableModes. Using first available mode.`)
+				UseStateResult2(AvailableModes[1])
 			end
 		end
-	end, { var4.initialMode })
-	local var23 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var6 (ref), var4 (ref)
-		var6(p2)
-		var4.onColorChanged(p2, p3)
-	end, { var4.onColorChanged })
-	local var24 = reactModule.useCallback(function(p2)
-		-- upvalues: var17 (ref), var4 (ref)
-		var17(p2)
+	end, { WithDefaultsModuleResult.initialMode })
+	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 95 ]]
+		-- upvalues: UseBindingResult2 (copy), WithDefaultsModuleResult (copy)
+		UseBindingResult2(p2)
+		WithDefaultsModuleResult.onColorChanged(p2, p3)
+	end, { WithDefaultsModuleResult.onColorChanged })
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 100 ]]
+		-- upvalues: UseBindingResult2_4 (copy), WithDefaultsModuleResult (copy)
+		UseBindingResult2_4(p2)
 		
-		if var4.onAlphaChanged then
-			var4.onAlphaChanged(p2)
+		if WithDefaultsModuleResult.onAlphaChanged then
+			WithDefaultsModuleResult.onAlphaChanged(p2)
 		end
-	end, { var4.onAlphaChanged })
-	local var25 = reactModule.useCallback(function(p2)
-		-- upvalues: var23 (ref)
-		var23(p2.Color, p2)
-	end, { var23 })
-	local var26 = var4.onAlphaChanged ~= nil
-	local var27 = reactModule.useCallback(function(p2)
-		-- upvalues: var23 (ref)
-		var23(p2, nil)
-	end, { var23 })
-	local var28 = reactModule.useCallback(colorUtilsModule.createHSVUpdateHandler(var11, var13, var15, var27, var21), {
-		var27,
-		var11,
-		var13,
-		var15,
-		var6
+	end, { WithDefaultsModuleResult.onAlphaChanged })
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 107 ]]
+		-- upvalues: UseResult (copy)
+		UseResult(p2.Color, p2)
+	end, { UseResult })
+	local HasOnAlphaChanged = WithDefaultsModuleResult.onAlphaChanged ~= nil
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 113 ]]
+		-- upvalues: UseResult (copy)
+		UseResult(p2, nil)
+	end, { UseResult })
+	local UseResult4 = ReactModule.useCallback(ColorUtilsModule.createHSVUpdateHandler(UseBindingResult2_1, UseBindingResult2_2, UseBindingResult2_3, UseResult3, UseRefResult), {
+		UseResult3,
+		UseBindingResult2_1,
+		UseBindingResult2_2,
+		UseBindingResult2_3,
+		UseBindingResult2
 	})
-	local var29 = reactModule.useCallback(colorUtilsModule.createColorInputChangeHandler(var27, var21, var11, var13, var15), {
-		var27,
-		var21,
-		var11,
-		var13,
-		var15
+	local UseResult5 = ReactModule.useCallback(ColorUtilsModule.createColorInputChangeHandler(UseResult3, UseRefResult, UseBindingResult2_1, UseBindingResult2_2, UseBindingResult2_3), {
+		UseResult3,
+		UseRefResult,
+		UseBindingResult2_1,
+		UseBindingResult2_2,
+		UseBindingResult2_3
 	})
-	reactModule.useEffect(function()
-		-- upvalues: toColor3 (ref), var11 (ref), var13 (ref), var15 (ref)
-		local var30, var31, var32 = toColor3:getValue():ToHSV()
-		var11(var30)
-		var13(var31)
-		var15(var32)
+	ReactModule.useEffect(function() --[[ Line: 139 ]]
+		-- upvalues: MapResult (copy), UseBindingResult2_1 (copy), UseBindingResult2_2 (copy), UseBindingResult2_3 (copy)
+		local HSV, HSV2, HSV3 = MapResult:getValue():ToHSV()
+		UseBindingResult2_1(HSV)
+		UseBindingResult2_2(HSV2)
+		UseBindingResult2_3(HSV3)
 	end, {})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var4, { tag = "col gap-small size-full-0 auto-y padding-small" }), {
-		ColorInputs = reactModule.createElement(colorInputsModule, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "col gap-small size-full-0 auto-y padding-small" }), {
+		ColorInputs = ReactModule.createElement(ColorInputsModule, {
 			LayoutOrder = 1,
-			color = var5,
-			alpha = var16,
-			onColorChanged = var29,
-			onAlphaChanged = if var26 then var24 else nil,
-			mode = var18,
-			onModeChanged = var19,
-			availableModes = availableModes,
-			testId = `{var4.testId}--input`
+			color = UseBindingResult,
+			alpha = UseBindingResult5,
+			onColorChanged = UseResult5,
+			onAlphaChanged = if HasOnAlphaChanged then UseResult1 else nil,
+			mode = UseStateResult,
+			onModeChanged = UseStateResult2,
+			availableModes = AvailableModes,
+			testId = `{WithDefaultsModuleResult.testId}--input`
 		}),
-		BrickPicker = if var18 == colorInputModeModule.Brick then reactModule.createElement(brickColorPickerModule, {
+		BrickPicker = if UseStateResult == ColorInputModeModule.Brick then ReactModule.createElement(BrickColorPickerModule, {
 			LayoutOrder = 2,
-			selectedColor = toColor3,
-			onBrickColorChanged = var25,
-			testId = `{var4.testId}--brick-picker`
+			selectedColor = MapResult,
+			onBrickColorChanged = UseResult2,
+			testId = `{WithDefaultsModuleResult.testId}--brick-picker`
 		}) else nil,
-		SVPickerContainer = if var18 ~= colorInputModeModule.Brick then nil else reactModule.createElement(viewModule, { LayoutOrder = 2, Size = UDim2.new(1, 0, 0, 156) }, {
-			SVPicker = reactModule.createElement(SVPickerModule, {
-				hue = var10,
-				saturation = var12,
-				value = var14,
-				onChanged = function(p2, p3)
-					-- upvalues: var28 (ref), var10 (ref)
-					var28(var10:getValue(), p2, p3)
+		SVPickerContainer = if UseStateResult == ColorInputModeModule.Brick then nil else ReactModule.createElement(ViewModule, { LayoutOrder = 2, Size = UDim2.new(1, 0, 0, 156) }, {
+			SVPicker = ReactModule.createElement(SVPickerModule, {
+				hue = UseBindingResult1,
+				saturation = UseBindingResult3,
+				value = UseBindingResult4,
+				onChanged = function(p2, p3) --[[ Line: 182 ]]
+					-- upvalues: UseResult4 (copy), UseBindingResult1 (copy)
+					UseResult4(UseBindingResult1:getValue(), p2, p3)
 				end,
-				onDragStarted = var4.onDragStarted,
-				onDragEnded = var4.onDragEnded,
-				showSelectionKnob = var20:getValue(),
-				testId = `{var4.testId}--sv-picker`
+				onDragStarted = WithDefaultsModuleResult.onDragStarted,
+				onDragEnded = WithDefaultsModuleResult.onDragEnded,
+				showSelectionKnob = MapResult1:getValue(),
+				testId = `{WithDefaultsModuleResult.testId}--sv-picker`
 			})
 		}),
-		HueSlider = if var18 ~= colorInputModeModule.Brick then nil else reactModule.createElement(colorSliderModule, {
+		HueSlider = if UseStateResult == ColorInputModeModule.Brick then nil else ReactModule.createElement(ColorSliderModule, {
 			LayoutOrder = 3,
-			sliderType = colorSliderTypeModule.Hue,
-			value = var10,
-			onValueChanged = function(p2)
-				-- upvalues: var28 (ref), var12 (ref), var14 (ref)
-				var28(p2, var12:getValue(), var14:getValue())
+			sliderType = ColorSliderTypeModule.Hue,
+			value = UseBindingResult1,
+			onValueChanged = function(p2) --[[ Line: 197 ]]
+				-- upvalues: UseResult4 (copy), UseBindingResult3 (copy), UseBindingResult4 (copy)
+				UseResult4(p2, UseBindingResult3:getValue(), UseBindingResult4:getValue())
 			end,
-			onDragStarted = var4.onDragStarted,
-			onDragEnded = var4.onDragEnded,
-			testId = `{var4.testId}--hue-slider`
+			onDragStarted = WithDefaultsModuleResult.onDragStarted,
+			onDragEnded = WithDefaultsModuleResult.onDragEnded,
+			testId = `{WithDefaultsModuleResult.testId}--hue-slider`
 		}),
-		AlphaSlider = if var26 then reactModule.createElement(colorSliderModule, {
+		AlphaSlider = if HasOnAlphaChanged then ReactModule.createElement(ColorSliderModule, {
 			LayoutOrder = 4,
-			sliderType = colorSliderTypeModule.Alpha,
-			value = var16,
-			baseColor = toColor3,
-			onValueChanged = var24,
-			onDragStarted = var4.onDragStarted,
-			onDragEnded = var4.onDragEnded,
-			testId = `{var4.testId}--alpha-slider`
+			sliderType = ColorSliderTypeModule.Alpha,
+			value = UseBindingResult5,
+			baseColor = MapResult,
+			onValueChanged = UseResult1,
+			onDragStarted = WithDefaultsModuleResult.onDragStarted,
+			onDragEnded = WithDefaultsModuleResult.onDragEnded,
+			testId = `{WithDefaultsModuleResult.testId}--alpha-slider`
 		}) else nil
 	})
 end

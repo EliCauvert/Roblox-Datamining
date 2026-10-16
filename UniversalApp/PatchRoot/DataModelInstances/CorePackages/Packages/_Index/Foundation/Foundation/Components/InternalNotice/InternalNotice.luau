@@ -1,123 +1,123 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local closeAffordanceModule = require(foundation.Components.CloseAffordance)
-local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local iconModule = require(foundation.Components.Icon)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local escapeRichTextModule = require(foundation.Utility.escapeRichText)
-local useInternalNoticeLayoutModule = require(script.Parent.useInternalNoticeLayout)
-local useInternalNoticeVariantsPropsModule = require(script.Parent.useInternalNoticeVariantsProps)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
+local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
+local IconModule = require(Foundation.Components.Icon)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local EscapeRichTextModule = require(Foundation.Utility.escapeRichText)
+local UseInternalNoticeLayoutModule = require(script.Parent.useInternalNoticeLayout)
+local UseInternalNoticeVariantsPropsModule = require(script.Parent.useInternalNoticeVariantsProps)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokensModule (ref), reactModule (ref), useInternalNoticeLayoutModule (ref), useInternalNoticeVariantsPropsModule (ref), iconModule (ref), viewModule (ref), textModule (ref), escapeRichTextModule (ref), stateLayerAffordanceModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref), withCommonPropsModule (ref)
-	local testId = p1.testId or "--foundation-internal-notice"
-	local size600 = useTokensModule().Size.Size_600
-	local uDim2 = UDim2.fromOffset(0, size600)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: size600 (ref)
-		return { MinSize = Vector2.new(0, size600) }
-	end, { size600 })
-	local var2 = useInternalNoticeLayoutModule(p1.onAbsoluteSizeChanged)
-	local isStacked = var2.isStacked
-	local var3 = useInternalNoticeVariantsPropsModule(p1.variantProps, isStacked, p1.truncation == true)
-	local var4 = if typeof(p1.icon) == "string" then { variant = nil, name = p1.icon } else p1.icon
-	local var5 = if var4 then reactModule.createElement(iconModule, {
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 43 | Named "InternalNotice" ]]
+	-- upvalues: UseTokensModule (copy), ReactModule (copy), UseInternalNoticeLayoutModule (copy), UseInternalNoticeVariantsPropsModule (copy), IconModule (copy), ViewModule (copy), TextModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), CloseAffordanceModule (copy), InputSizeModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy)
+	local TestId = p1.testId or "--foundation-internal-notice"
+	local Size600 = UseTokensModule().Size.Size_600
+	local _UDim2 = UDim2.fromOffset(0, Size600)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 50 ]]
+		-- upvalues: Size600 (copy)
+		return { MinSize = Vector2.new(0, Size600) }
+	end, { Size600 })
+	local UseInternalNoticeLayoutModuleResult = UseInternalNoticeLayoutModule(p1.onAbsoluteSizeChanged)
+	local IsStacked = UseInternalNoticeLayoutModuleResult.isStacked
+	local UseInternalNoticeVariantsPropsModuleResult = UseInternalNoticeVariantsPropsModule(p1.variantProps, IsStacked, p1.truncation == true)
+	local Config = if typeof(p1.icon) == "string" then { variant = nil, name = p1.icon } else p1.icon
+	local Element = if Config then ReactModule.createElement(IconModule, {
 		LayoutOrder = 1,
-		name = var4.name,
-		variant = var4.variant,
-		size = var3.icon.size,
-		style = var3.icon.style,
-		testId = `{testId}--icon`
+		name = Config.name,
+		variant = Config.variant,
+		size = UseInternalNoticeVariantsPropsModuleResult.icon.size,
+		style = UseInternalNoticeVariantsPropsModuleResult.icon.style,
+		testId = `{TestId}--icon`
 	}) else nil
-	local var6 = if var5 then reactModule.createElement(viewModule, {
+	local Element1 = if Element then ReactModule.createElement(ViewModule, {
 		tag = "col align-y-center auto-x",
 		LayoutOrder = 1,
-		Size = uDim2
-	}, { Icon = var5 }) else nil
-	local var7 = reactModule.createElement(textModule, {
+		Size = _UDim2
+	}, { Icon = Element }) else nil
+	local Element2 = ReactModule.createElement(TextModule, {
 		LayoutOrder = 2,
 		Text = p1.text,
-		tag = var3.message.tag,
-		padding = var3.message.padding,
-		testId = `{testId}--message`
+		tag = UseInternalNoticeVariantsPropsModuleResult.message.tag,
+		padding = UseInternalNoticeVariantsPropsModuleResult.message.padding,
+		testId = `{TestId}--message`
 	})
-	local var8 = if p1.link then reactModule.createElement(textModule, {
+	local Element21 = if p1.link then ReactModule.createElement(TextModule, {
 		RichText = true,
-		Text = `<u>{escapeRichTextModule(p1.link.text)}</u>`,
-		tag = var3.link.tag,
-		padding = var3.link.padding,
-		sizeConstraint = var2.stackedLinkConstraint,
-		stateLayer = { affordance = stateLayerAffordanceModule.None },
+		Text = `<u>{EscapeRichTextModule(p1.link.text)}</u>`,
+		tag = UseInternalNoticeVariantsPropsModuleResult.link.tag,
+		padding = UseInternalNoticeVariantsPropsModuleResult.link.padding,
+		sizeConstraint = UseInternalNoticeLayoutModuleResult.stackedLinkConstraint,
+		stateLayer = { affordance = StateLayerAffordanceModule.None },
 		onActivated = p1.link.onActivated,
-		LayoutOrder = if isStacked then 3 else 2,
-		testId = `{testId}--link`,
-		onAbsoluteSizeChanged = var2.measureInlineLink
+		LayoutOrder = if IsStacked then 3 else 2,
+		testId = `{TestId}--link`,
+		onAbsoluteSizeChanged = UseInternalNoticeLayoutModuleResult.measureInlineLink
 	}) else nil
-	local var9 = if p1.onClose then reactModule.createElement(viewModule, {
+	local Element3 = if p1.onClose then ReactModule.createElement(ViewModule, {
 		tag = "col align-y-center auto-x",
 		LayoutOrder = 3,
-		Size = uDim2
+		Size = _UDim2
 	}, {
-		Close = reactModule.createElement(closeAffordanceModule, {
+		Close = ReactModule.createElement(CloseAffordanceModule, {
 			hasPadding = false,
 			LayoutOrder = 1,
 			onActivated = p1.onClose,
-			size = inputSizeModule.Small,
-			variant = closeAffordanceVariantModule.Utility,
-			testId = `{testId}--close`
+			size = InputSizeModule.Small,
+			variant = CloseAffordanceVariantModule.Utility,
+			testId = `{TestId}--close`
 		})
 	}) else nil
-	local container = var3.container
-	local var10 = withCommonPropsModule(p1, {
-		tag = if container then container.tag else nil,
-		backgroundStyle = if container then container.backgroundStyle else nil,
-		ref = p2
+	local Container = UseInternalNoticeVariantsPropsModuleResult.container
+	local WithCommonPropsModuleResult = WithCommonPropsModule(p1, {
+		tag = if Container then Container.tag else nil,
+		backgroundStyle = if Container then Container.backgroundStyle else nil,
+		ref = Ref
 	})
-	var10.onAbsoluteSizeChanged = var2.onNoticeAbsoluteSizeChanged
-	local var11 = reactModule.createElement(viewModule, {
-		tag = var3.content.tag,
-		padding = var3.content.padding,
-		LayoutOrder = if var3.border then 2 else 1
-	}, if isStacked then {
-		Icon = var6,
-		Stack = reactModule.createElement(viewModule, {
+	WithCommonPropsModuleResult.onAbsoluteSizeChanged = UseInternalNoticeLayoutModuleResult.onNoticeAbsoluteSizeChanged
+	local Element4 = ReactModule.createElement(ViewModule, {
+		tag = UseInternalNoticeVariantsPropsModuleResult.content.tag,
+		padding = UseInternalNoticeVariantsPropsModuleResult.content.padding,
+		LayoutOrder = if UseInternalNoticeVariantsPropsModuleResult.border then 2 else 1
+	}, if IsStacked then {
+		Icon = Element1,
+		Stack = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
-			tag = var3.stack.tag,
-			sizeConstraint = var1,
-			onAbsoluteSizeChanged = var2.onStackedColumnAbsoluteSizeChanged,
-			testId = `{testId}--stack`
-		}, { Message = var7, Link = var8 }),
-		Close = var9
+			tag = UseInternalNoticeVariantsPropsModuleResult.stack.tag,
+			sizeConstraint = UseMemoResult,
+			onAbsoluteSizeChanged = UseInternalNoticeLayoutModuleResult.onStackedColumnAbsoluteSizeChanged,
+			testId = `{TestId}--stack`
+		}, { Message = Element2, Link = Element21 }),
+		Close = Element3
 	} else {
-		Leading = reactModule.createElement(viewModule, {
+		Leading = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 1,
-			tag = var3.leading.tag,
-			sizeConstraint = var1,
-			testId = `{testId}--leading`
-		}, { Icon = var6, Message = var7 }),
-		Link = var8,
-		Close = var9
+			tag = UseInternalNoticeVariantsPropsModuleResult.leading.tag,
+			sizeConstraint = UseMemoResult,
+			testId = `{TestId}--leading`
+		}, { Icon = Element1, Message = Element2 }),
+		Link = Element21,
+		Close = Element3
 	})
 	
-	return reactModule.createElement(viewModule, var10, if var3.border then {
-		TopBorder = reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModuleResult, if UseInternalNoticeVariantsPropsModuleResult.border then {
+		TopBorder = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 1,
-			Size = var3.border.Size,
-			backgroundStyle = var3.border.backgroundStyle,
-			testId = `{testId}--top-border`
+			Size = UseInternalNoticeVariantsPropsModuleResult.border.Size,
+			backgroundStyle = UseInternalNoticeVariantsPropsModuleResult.border.backgroundStyle,
+			testId = `{TestId}--top-border`
 		}),
-		Main = var11,
-		BottomBorder = reactModule.createElement(viewModule, {
+		Main = Element4,
+		BottomBorder = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 3,
-			Size = var3.border.Size,
-			backgroundStyle = var3.border.backgroundStyle,
-			testId = `{testId}--bottom-border`
+			Size = UseInternalNoticeVariantsPropsModuleResult.border.Size,
+			backgroundStyle = UseInternalNoticeVariantsPropsModuleResult.border.backgroundStyle,
+			testId = `{TestId}--bottom-border`
 		})
-	} else { Main = var11 })
+	} else { Main = Element4 })
 end))

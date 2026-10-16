@@ -1,39 +1,39 @@
 ﻿local _ = require(script.Parent.Parent.Parent.LuauPolyfill)
 
 return {
-	didYouMean = function(p1, p2)
-		local var1
-		local var2 = nil
-		local _ = nil
+	didYouMean = function(p1, p2): string --[[ Line: 20 ]]
+		local v1 = nil
+		local v2 = nil
 		
 		if p2 then
-			var2 = p1
-			var1 = p2
+			v1 = p1
+			v2 = p2
 		else
-			var1 = p1
+			v2 = p1
 		end
-		local var3 = " Did you mean "
+		local Text = " Did you mean "
 		
-		if var2 then
-			var3 ..= var2 .. " "
+		if v1 then
+			Text ..= v1 .. " "
 		end
 		local t = {}
 		
-		for i = 1, #var1 do
-			t[i] = ("%q"):format(var1[i])
+		for i = 1, #v2 do
+			t[i] = ("%q"):format(v2[i])
 		end
-		local tCount = #t
+		local CountT = #t
 		
-		if tCount == 0 then
+		if CountT == 0 then
 			return ""
-		elseif tCount == 1 then
-			return var3 .. t[1] .. "?"
-		elseif tCount == 2 then
-			return var3 .. t[1] .. " or " .. t[2] .. "?"
+		elseif CountT == 1 then
+			return Text .. t[1] .. "?"
+		elseif CountT == 2 then
+			return Text .. t[1] .. " or " .. t[2] .. "?"
+		else
+			local List = {}
+			table.move(t, 1, 5, 1, List)
+			
+			return Text .. table.concat(List, ", ") .. ", or " .. tostring((table.remove(List))) .. "?"
 		end
-		local t_1 = {}
-		table.move(t, 1, 5, 1, t_1)
-		
-		return var3 .. table.concat(t_1, ", ") .. ", or " .. tostring(table.remove(t_1)) .. "?"
 	end
 }

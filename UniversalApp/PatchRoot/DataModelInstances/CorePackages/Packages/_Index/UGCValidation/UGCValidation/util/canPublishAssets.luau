@@ -1,104 +1,108 @@
-﻿local parent = script.Parent.Parent
-local promiseModule = require(parent.Parent.Promise)
+﻿local Parent = script.Parent.Parent
+local PromiseModule = require(Parent.Parent.Promise)
 game:DefineFastInt("UGCValidationCanPublishRequestPageSize", 50)
 game:DefineFastInt("UGCValidationMaxAssetSizeAllowed", 500)
-local APIUtilModule = require(parent.util.APIUtil)
-local constantsModule = require(parent.Constants)
-local getFStringUGCValidationReferenceMeshIdWhitelistForIECModule = require(parent.flags.getFStringUGCValidationReferenceMeshIdWhitelistForIEC)
-local _ = require(parent.util.Types)
-local httpService = game:GetService("HttpService")
-local formattedText = string.format("https://apis.%s", APIUtilModule.getBaseDomain())
+local ConstantsModule = require(Parent.Constants)
+local GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule = require(Parent.flags.getFStringUGCValidationReferenceMeshIdWhitelistForIEC)
+local _ = require(Parent.util.Types)
+local HttpService = game:GetService("HttpService")
+local Formatted = string.format("https://apis.%s", (require(Parent.util.APIUtil).getBaseDomain()))
 
-local function getWhitelistIds()
-	-- upvalues: getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref)
+local function getWhitelistIds() --[[ Line: 35 ]]
+	-- upvalues: GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule (copy)
 	local t = {}
-	local var1 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule()
+	local FStringUGCValidationReferenceMeshIdWhitelistForIECModule: string = GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule()
 	
-	if #var1 == 0 then
+	if #FStringUGCValidationReferenceMeshIdWhitelistForIECModule == 0 then
 		return t
 	end
-	for i in string.gmatch(var1, "([^,%s]+)") do
+	for i in string.gmatch(FStringUGCValidationReferenceMeshIdWhitelistForIECModule, "([^,%s]+)") do
 		t[i] = true
 	end
 	return t
 end
 
-local function createCanPublishPromise(p1, p2, p3, p4, p5)
-	-- upvalues: promiseModule (ref), httpService (ref), constantsModule (ref)
-	return if #p2 == 0 then promiseModule.resolve() else promiseModule.new(function(p6, p7)
-		-- upvalues: httpService (copy), p2 (ref), p3 (ref), p5 (ref), p1 (ref), constantsModule (copy), p4 (ref)
-		httpService:RequestInternal({
+local function createCanPublishPromise(Url, AssetIds, RestrictedEntities, p1, UniverseId) --[[ Line: 49 ]]
+	-- upvalues: PromiseModule (copy), HttpService (copy), ConstantsModule (copy)
+	return if #AssetIds == 0 then PromiseModule.resolve() else PromiseModule.new(function(Callback1, Callback) --[[ Line: 59 ]]
+		-- upvalues: HttpService (upval), AssetIds (copy), RestrictedEntities (copy), UniverseId (copy), Url (copy), ConstantsModule (upval), p1 (copy)
+		HttpService:RequestInternal({
 			Method = "POST",
-			Url = p1,
-			Body = httpService:JSONEncode({ assetIds = p2, restrictedEntities = p3, universeId = p5 }),
+			Url = Url,
+			Body = HttpService:JSONEncode({
+				assetIds = AssetIds,
+				restrictedEntities = RestrictedEntities,
+				universeId = UniverseId
+			}),
 			Headers = {
-				[constantsModule.ExperienceAuthHeaderKey] = p4,
-				[constantsModule.ContentType] = constantsModule.ApplicationJson
+				[ConstantsModule.ExperienceAuthHeaderKey] = p1,
+				[ConstantsModule.ContentType] = ConstantsModule.ApplicationJson
 			}
-		}):Start(function(p8, p9)
-			-- upvalues: p6 (ref), httpService (copy), p7 (ref)
-			if p8 and p9.StatusCode == 200 then
-				p6(httpService:JSONDecode(p9.Body))
+		}):Start(function(p2, p3) --[[ Line: 76 ]]
+			-- upvalues: Callback1 (copy), HttpService (upval), Callback (copy)
+			if p2 and p3.StatusCode == 200 then
+				Callback1(HttpService:JSONDecode(p3.Body))
 				
 				return
+			else
+				Callback()
 			end
-			p7()
 		end)
 	end)
 end
 
-return function(value, p1, p2, p3, p4)
-	-- upvalues: formattedText (ref), createCanPublishPromise (ref), promiseModule (ref), getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref), getWhitelistIds (ref)
+return function(List, RestrictedEntities, p1, UniverseId, p2) --[[ Line: 86 | Named "canPublishAssets" ]]
+	-- upvalues: Formatted (copy), createCanPublishPromise (copy), PromiseModule (copy), GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule (copy), getWhitelistIds (copy)
 	local UGCValidationCanPublishRequestPageSizeFastInt = game:GetFastInt("UGCValidationCanPublishRequestPageSize")
 	local UGCValidationMaxAssetSizeAllowedFastInt = game:GetFastInt("UGCValidationMaxAssetSizeAllowed")
-	local text = formattedText .. (if p4 then "packages-api/v1/rcc/canPublish" else "packages-api/v1/canPublish")
+	local Text = Formatted .. (if p2 then "packages-api/v1/rcc/canPublish" else "packages-api/v1/canPublish")
 	local t = {}
-	local t_1 = {}
+	local List1 = {}
 	
-	for i, v in value do
+	for i, _ in List do
 		if not t[i] then
 			t[i] = true
-			table.insert(t_1, i)
+			table.insert(List1, i)
 		end
 	end
-	if UGCValidationMaxAssetSizeAllowedFastInt < #t_1 then
+	if UGCValidationMaxAssetSizeAllowedFastInt < #List1 then
 		return { status = "tooManyAssets" }
 	end
-	local t_2 = {}
-	local t_3 = {}
+	local List2 = {}
+	local AssetIds = {}
 	
-	for i_1, v_1 in t_1 do
-		table.insert(t_3, v_1)
+	for _, value in List1 do
+		table.insert(AssetIds, value)
 		
-		if UGCValidationCanPublishRequestPageSizeFastInt <= #t_3 then
-			table.insert(t_2, createCanPublishPromise(text, t_3, p1, p2, p3))
-			t_3 = {}
+		if UGCValidationCanPublishRequestPageSizeFastInt <= #AssetIds then
+			table.insert(List2, createCanPublishPromise(Text, AssetIds, RestrictedEntities, p1, UniverseId))
+			AssetIds = {}
 		end
 	end
-	if #t_3 > 0 then
-		table.insert(t_2, createCanPublishPromise(text, t_3, p1, p2, p3))
+	if #AssetIds > 0 then
+		table.insert(List2, createCanPublishPromise(Text, AssetIds, RestrictedEntities, p1, UniverseId))
 	end
-	local var2, var3 = promiseModule.all(t_2):await()
+	local v1, v2 = PromiseModule.all(List2):await()
 	
-	if not var2 then
+	if not v1 then
 		return { status = "loadFailed" }
 	end
-	local var4 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule() ~= ""
-	local var5 = if var4 then getWhitelistIds() else {}
-	local t_4 = {}
+	local IsNotFStringUGCValidationReferenceMeshIdWhitelistForIECModuleMatch = GetFStringUGCValidationReferenceMeshIdWhitelistForIECModule() ~= ""
+	local WhitelistIds = if IsNotFStringUGCValidationReferenceMeshIdWhitelistForIECModuleMatch then getWhitelistIds() else {}
+	local Verdicts = {}
 	
-	for i_2, v_2 in var3 do
-		for i_3, v_3 in v_2.result do
-			local var6 = value[i_3]
+	for _, value1 in v2 do
+		for AssetId, value2 in value1.result do
+			local Entry = List[AssetId]
 			
-			if var6 then
-				table.insert(t_4, {
-					assetId = i_3,
-					allowed = if var4 and not v_3 and var5[i_3] then true else v_3,
-					entry = var6[1]
+			if Entry then
+				table.insert(Verdicts, {
+					assetId = AssetId,
+					allowed = if IsNotFStringUGCValidationReferenceMeshIdWhitelistForIECModuleMatch and not value2 and WhitelistIds[AssetId] then true else value2,
+					entry = Entry[1]
 				})
 			end
 		end
 	end
-	return { status = "ok", verdicts = t_4 }
+	return { status = "ok", verdicts = Verdicts }
 end

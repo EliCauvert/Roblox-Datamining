@@ -1,26 +1,26 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local _ = require(parent_1.LuauPolyfill)
-local reactModule = require(parent_1.React)
-local getApolloContext = require(script.Parent.ApolloContext).getApolloContext
-local invariant = require(parent.jsutils.invariant).invariant
-local _ = require(parent.core.ApolloClient)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local _ = require(Parent1.LuauPolyfill)
+local ReactModule = require(Parent1.React)
+local GetApolloContextFunction = require(script.Parent.ApolloContext).getApolloContext
+local InvariantFunction = require(Parent.jsutils.invariant).invariant
+local _ = require(Parent.core.ApolloClient)
 
-function ApolloProvider(p1)
-	-- upvalues: getApolloContext (ref), reactModule (ref), invariant (ref)
-	local var1 = getApolloContext()
+function ApolloProvider(p1) --[[ Line: 29 ]]
+	-- upvalues: GetApolloContextFunction (copy), ReactModule (copy), InvariantFunction (copy)
+	local ApolloContext = GetApolloContextFunction()
 	
-	return reactModule.createElement(var1.Consumer, nil, function(p2)
-		-- upvalues: p1 (ref), invariant (copy), reactModule (copy), var1 (ref)
-		if p2 == nil then
-			p2 = {}
+	return ReactModule.createElement(ApolloContext.Consumer, nil, function(Value) --[[ Line: 31 ]]
+		-- upvalues: p1 (copy), InvariantFunction (upval), ReactModule (upval), ApolloContext (copy)
+		if Value == nil then
+			Value = {}
 		end
-		if p1.client and p2.client ~= p1.client then
-			p2.client = p1.client
+		if p1.client and Value.client ~= p1.client then
+			Value.client = p1.client
 		end
-		invariant(p2.client, "ApolloProvider was not passed a client instance. Make sure you pass in your client via the \"client\" prop.")
+		InvariantFunction(Value.client, "ApolloProvider was not passed a client instance. Make sure you pass in your client via the \"client\" prop.")
 		
-		return reactModule.createElement(var1.Provider, { value = p2 }, p1.children)
+		return ReactModule.createElement(ApolloContext.Provider, { value = Value }, p1.children)
 	end)
 end
 

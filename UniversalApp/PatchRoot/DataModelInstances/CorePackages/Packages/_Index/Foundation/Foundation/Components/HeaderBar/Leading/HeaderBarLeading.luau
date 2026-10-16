@@ -1,18 +1,21 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local headerBarContextModule = require(foundation.Components.HeaderBar.HeaderBarContext)
-local headerBarSlotModule = require(foundation.Enums.HeaderBarSlot)
-local viewModule = require(foundation.Components.View)
-local constantsModule = require(foundation.Components.HeaderBar.constants)
-local useHeaderBarContextModule = require(foundation.Components.HeaderBar.useHeaderBarContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local HeaderBarContextModule = require(Foundation.Components.HeaderBar.HeaderBarContext)
+local HeaderBarSlotModule = require(Foundation.Enums.HeaderBarSlot)
+local ViewModule = require(Foundation.Components.View)
+local ConstantsModule = require(Foundation.Components.HeaderBar.constants)
+local UseHeaderBarContextModule = require(Foundation.Components.HeaderBar.useHeaderBarContext)
 
-return function(p1)
-	-- upvalues: useHeaderBarContextModule (ref), reactModule (ref), headerBarContextModule (ref), headerBarSlotModule (ref), viewModule (ref), constantsModule (ref)
-	local var1 = useHeaderBarContextModule()
+return function(p1) --[[ Line: 16 | Named "HeaderBarLeading" ]]
+	-- upvalues: UseHeaderBarContextModule (copy), ReactModule (copy), HeaderBarContextModule (copy), HeaderBarSlotModule (copy), ViewModule (copy), ConstantsModule (copy)
+	local UseHeaderBarContextModuleResult = UseHeaderBarContextModule()
 	
-	return reactModule.createElement(headerBarContextModule.Provider, { testId = var1.testId, slot = headerBarSlotModule.Leading }, reactModule.createElement(viewModule, {
+	return ReactModule.createElement(HeaderBarContextModule.Provider, {
+		testId = UseHeaderBarContextModuleResult.testId,
+		slot = HeaderBarSlotModule.Leading
+	}, ReactModule.createElement(ViewModule, {
 		tag = "row align-y-center shrink gap-small size-full",
-		LayoutOrder = constantsModule.LEADING_LAYOUT_ORDER,
-		testId = `{var1.testId}--leading`
+		LayoutOrder = ConstantsModule.LEADING_LAYOUT_ORDER,
+		testId = `{UseHeaderBarContextModuleResult.testId}--leading`
 	}, p1.children))
 end

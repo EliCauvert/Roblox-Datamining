@@ -1,69 +1,68 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local fitFrameOnAxis = require(parent_2.FitFrame).FitFrameOnAxis
-local isCallableModule = require(parent_1.Utility.isCallable)
-local carouselHeaderModule = require(parent.CarouselHeader)
-local horizontalCarouselModule = require(parent.HorizontalCarousel)
-local freeFlowCarousel = roactModule.PureComponent:extend("FreeFlowCarousel")
-freeFlowCarousel.validateProps = tModule.strictInterface({
-	identifier = tModule.optional(tModule.callback),
-	headerText = tModule.optional(tModule.string),
-	onSeeAll = tModule.optional(tModule.callback),
-	itemList = tModule.array(tModule.any),
-	renderItem = tModule.callback,
-	itemSize = tModule.optional(tModule.Vector2),
-	itemPadding = tModule.optional(tModule.number),
-	carouselMargin = tModule.optional(tModule.number),
-	innerPadding = tModule.optional(tModule.number),
-	layoutOrder = tModule.optional(tModule.integer),
-	loadNext = tModule.optional(tModule.callback),
-	maxNumOfItemsVisible = tModule.optional(tModule.integer),
-	viewabilityConfigCallbackPairs = tModule.optional(tModule.array(tModule.strictInterface({
-		viewabilityConfig = tModule.strictInterface({
-			minimumViewTime = tModule.optional(tModule.number),
-			viewAreaCoveragePercentThreshold = tModule.optional(tModule.number),
-			itemVisiblePercentThreshold = tModule.optional(tModule.number),
-			waitForInteraction = tModule.optional(tModule.boolean)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local FitFrameOnAxis = require(Parent2.FitFrame).FitFrameOnAxis
+local CarouselHeaderModule = require(Parent.CarouselHeader)
+local HorizontalCarouselModule = require(Parent.HorizontalCarousel)
+local FreeFlowCarousel = RoactModule.PureComponent:extend("FreeFlowCarousel")
+FreeFlowCarousel.validateProps = TModule.strictInterface({
+	identifier = TModule.optional(TModule.callback),
+	headerText = TModule.optional(TModule.string),
+	onSeeAll = TModule.optional(TModule.callback),
+	itemList = TModule.array(TModule.any),
+	renderItem = TModule.callback,
+	itemSize = TModule.optional(TModule.Vector2),
+	itemPadding = TModule.optional(TModule.number),
+	carouselMargin = TModule.optional(TModule.number),
+	innerPadding = TModule.optional(TModule.number),
+	layoutOrder = TModule.optional(TModule.integer),
+	loadNext = TModule.optional(TModule.callback),
+	maxNumOfItemsVisible = TModule.optional(TModule.integer),
+	viewabilityConfigCallbackPairs = TModule.optional(TModule.array(TModule.strictInterface({
+		viewabilityConfig = TModule.strictInterface({
+			minimumViewTime = TModule.optional(TModule.number),
+			viewAreaCoveragePercentThreshold = TModule.optional(TModule.number),
+			itemVisiblePercentThreshold = TModule.optional(TModule.number),
+			waitForInteraction = TModule.optional(TModule.boolean)
 		}),
-		onViewableItemsChanged = isCallableModule
+		onViewableItemsChanged = require(Parent1.Utility.isCallable)
 	})))
 })
-freeFlowCarousel.defaultProps = {
+FreeFlowCarousel.defaultProps = {
 	headerText = "",
 	innerPadding = 12,
 	itemPadding = 12,
 	carouselMargin = 24
 }
 
-function freeFlowCarousel.render(p1)
-	-- upvalues: roactModule (ref), fitFrameOnAxis (ref), carouselHeaderModule (ref), horizontalCarouselModule (ref)
-	local innerPadding = p1.props.innerPadding
-	local carouselMargin = p1.props.carouselMargin
+function FreeFlowCarousel.render(p1) --[[ Line: 77 ]]
+	-- upvalues: RoactModule (copy), FitFrameOnAxis (copy), CarouselHeaderModule (copy), HorizontalCarouselModule (copy)
+	local InnerPadding = p1.props.innerPadding
+	local CarouselMargin = p1.props.carouselMargin
 	
-	return roactModule.createElement(fitFrameOnAxis, {
+	return RoactModule.createElement(FitFrameOnAxis, {
 		BackgroundTransparency = 1,
-		axis = fitFrameOnAxis.Axis.Vertical,
+		axis = FitFrameOnAxis.Axis.Vertical,
 		minimumSize = UDim2.fromScale(1, 0),
 		LayoutOrder = p1.props.layoutOrder,
-		contentPadding = UDim.new(0, innerPadding)
+		contentPadding = UDim.new(0, InnerPadding)
 	}, {
-		CarouselHeader = roactModule.createElement(carouselHeaderModule, {
+		CarouselHeader = RoactModule.createElement(CarouselHeaderModule, {
 			layoutOrder = 1,
 			headerText = p1.props.headerText,
 			onSeeAll = p1.props.onSeeAll,
-			carouselMargin = carouselMargin
+			carouselMargin = CarouselMargin
 		}),
-		Carousel = roactModule.createElement(horizontalCarouselModule, {
+		Carousel = RoactModule.createElement(HorizontalCarouselModule, {
 			layoutOrder = 2,
 			identifier = p1.props.identifier,
 			itemList = p1.props.itemList,
 			renderItem = p1.props.renderItem,
 			itemSize = p1.props.itemSize,
-			itemPadding = innerPadding,
-			carouselMargin = carouselMargin,
+			itemPadding = InnerPadding,
+			carouselMargin = CarouselMargin,
 			loadNext = p1.props.loadNext,
 			maxNumOfItemsVisible = p1.props.maxNumOfItemsVisible,
 			viewabilityConfigCallbackPairs = p1.props.viewabilityConfigCallbackPairs
@@ -71,4 +70,4 @@ function freeFlowCarousel.render(p1)
 	})
 end
 
-return freeFlowCarousel
+return FreeFlowCarousel

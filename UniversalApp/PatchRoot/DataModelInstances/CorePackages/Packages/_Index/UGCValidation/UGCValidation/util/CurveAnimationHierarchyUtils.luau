@@ -1,61 +1,47 @@
-﻿local parent = script.Parent.Parent
-local assetCalculatorModule = require(parent.util.AssetCalculator)
-local flags = parent.flags
-local getFFlagUGCValidateRestrictNumFaceControlsModule = require(flags.getFFlagUGCValidateRestrictNumFaceControls)
-local getFIntUGCValidateMaxTotalFaceControlsModule = require(flags.getFIntUGCValidateMaxTotalFaceControls)
-local t = {}
-local var1 = nil
-
-function t.getBodyPartToParentMap()
-	-- upvalues: var1 (write), assetCalculatorModule (ref)
-	if not var1 then
-		var1 = assetCalculatorModule.getBodyPartsToParents()
-	end
-	return var1
-end
-
-t.humanoidRootPartName = "HumanoidRootPart"
-t.FaceControlsName = "FaceControls"
-
-function t.folderHasAnimationTracks(p1)
-	local vector3Curve
-	local position = p1:FindFirstChild("Position")
-	local rotation = p1:FindFirstChild("Rotation")
-	
-	if position ~= nil then
-		vector3Curve = position:IsA("Vector3Curve")
-		
-		if not vector3Curve then
-			vector3Curve = rotation ~= nil and (rotation:IsA("EulerRotationCurve") or rotation:IsA("RotationCurve"))
+﻿local AssetCalculatorModule = require(script.Parent.Parent.util.AssetCalculator)
+local BodyPartsToParents = nil
+local CurveAnimationHierarchyUtils = {
+	getBodyPartToParentMap = function() --[[ Line: 9 ]]
+		-- upvalues: BodyPartsToParents (ref), AssetCalculatorModule (copy)
+		if not BodyPartsToParents then
+			BodyPartsToParents = AssetCalculatorModule.getBodyPartsToParents()
 		end
-		return vector3Curve
+		return BodyPartsToParents
+	end,
+	humanoidRootPartName = "HumanoidRootPart",
+	FaceControlsName = "FaceControls",
+	folderHasAnimationTracks = function(Object) --[[ Line: 19 ]]
+		local Position = Object:FindFirstChild("Position")
+		local Rotation = Object:FindFirstChild("Rotation")
+		
+		return if Position == nil then Rotation ~= nil and (Rotation:IsA("EulerRotationCurve") or Rotation:IsA("RotationCurve")) else Position:IsA("Vector3Curve") or Rotation ~= nil and (Rotation:IsA("EulerRotationCurve") or Rotation:IsA("RotationCurve"))
 	end
+}
+
+function CurveAnimationHierarchyUtils.isBodyPartFolderNameValid(Name): boolean --[[ Line: 26 ]]
+	-- upvalues: CurveAnimationHierarchyUtils (copy)
+	return CurveAnimationHierarchyUtils.getBodyPartToParentMap()[Name] ~= nil or Name == CurveAnimationHierarchyUtils.humanoidRootPartName
 end
 
-function t.isBodyPartFolderNameValid(p1)
-	-- upvalues: t (ref)
-	return if t.getBodyPartToParentMap()[p1] == nil then p1 == t.humanoidRootPartName else true
-end
-
-function t.getBodyPartFolderRoot(p1)
-	-- upvalues: t (ref)
-	for i, v in p1:GetChildren() do
-		if v:IsA("Folder") and t.isBodyPartFolderNameValid(v.Name) then
-			return v
+function CurveAnimationHierarchyUtils.getBodyPartFolderRoot(Object) --[[ Line: 31 ]]
+	-- upvalues: CurveAnimationHierarchyUtils (copy)
+	for _, Folder in Object:GetChildren() do
+		if Folder:IsA("Folder") and CurveAnimationHierarchyUtils.isBodyPartFolderNameValid(Folder.Name) then
+			return Folder
 		end
 	end
 	return nil
 end
 
-function t.areChildrenAcceptable(p2, p3)
-	if not p2 then
+function CurveAnimationHierarchyUtils.areChildrenAcceptable(Object, List): boolean --[[ Line: 40 ]]
+	if not Object then
 		return true
 	end
-	local function findAndRemoveMatching(p4)
-		-- upvalues: p3 (ref)
-		for i, v in p3 do
-			if v.ClassName == p4.ClassName and v.Name == p4.Name then
-				table.remove(p3, i)
+	local function findAndRemoveMatching(p1): boolean --[[ Line: 45 ]]
+		-- upvalues: List (copy)
+		for i, value in List do
+			if value.ClassName == p1.ClassName and value.Name == p1.Name then
+				table.remove(List, i)
 				
 				return true
 			end
@@ -63,48 +49,27 @@ function t.areChildrenAcceptable(p2, p3)
 		return false
 	end
 	
-	for i, v in p2:GetChildren() do
-		if not findAndRemoveMatching(v) then
+	for _, child in Object:GetChildren() do
+		if not findAndRemoveMatching(child) then
 			return false
 		end
 	end
 	return true
 end
 
-function t.calculateAcceptableChildBodyPartFolders(p5)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function CurveAnimationHierarchyUtils.calculateAcceptableChildBodyPartFolders(p2) --[[ Line: 65 ]]
+	-- upvalues: CurveAnimationHierarchyUtils (copy)
+	local List = {}
 	
-	for i, v in t.getBodyPartToParentMap() do
-		if v == p5 then
-			table.insert(t_1, { ClassName = "Folder", Name = i })
+	for Name, value in CurveAnimationHierarchyUtils.getBodyPartToParentMap() do
+		if value == p2 then
+			table.insert(List, { ClassName = "Folder", Name = Name })
 		end
 	end
-	return t_1
+	return List
 end
 
-function t.calculateAcceptableBodyPartFolderChildrenArray(p6, p7)
-	-- upvalues: t (ref)
-	local var2 = t.calculateAcceptableChildBodyPartFolders(p6.Name)
-	
-	if p6.Name == t.humanoidRootPartName then
-		return var2
-	end
-	table.insert(var2, { ClassName = "Vector3Curve", Name = "Position" })
-	table.insert(var2, {
-		Name = "Rotation",
-		ClassName = if p7 then "EulerRotationCurve" else "RotationCurve"
-	})
-	
-	if p6.Name == "Head" then
-		table.insert(var2, { ClassName = "Folder", Name = t.FaceControlsName })
-		
-		return var2
-	end
-	return var2
-end
-
-function t.calculateAcceptableCurveChildrenArray()
+function CurveAnimationHierarchyUtils.calculateAcceptableCurveChildrenArray() --[[ Line: 78 ]]
 	return {
 		{ ClassName = "FloatCurve", Name = "X" },
 		{ ClassName = "FloatCurve", Name = "Y" },
@@ -112,52 +77,8 @@ function t.calculateAcceptableCurveChildrenArray()
 	}
 end
 
-function t.containsGrandChildren(p6)
-	return if p6 then #p6:GetChildren() < #p6:GetDescendants() else false
+function CurveAnimationHierarchyUtils.containsGrandChildren(Object): boolean --[[ Line: 95 ]]
+	return if Object then #Object:GetChildren() < #Object:GetDescendants() else false
 end
 
-function t.validateBodyPartFolderChildren(p6)
-	-- upvalues: t (ref), getFFlagUGCValidateRestrictNumFaceControlsModule (ref), getFIntUGCValidateMaxTotalFaceControlsModule (ref)
-	if not t.areChildrenAcceptable(p6, t.calculateAcceptableBodyPartFolderChildrenArray(p6, true)) then
-		return false
-	elseif not t.areChildrenAcceptable(p6:FindFirstChild("Position"), t.calculateAcceptableCurveChildrenArray()) then
-		return false
-	elseif not t.areChildrenAcceptable(p6:FindFirstChild("Rotation"), t.calculateAcceptableCurveChildrenArray()) then
-		return false
-	end
-	local faceControlsName = p6:FindFirstChild(t.FaceControlsName)
-	
-	if faceControlsName then
-		local children = faceControlsName:GetChildren()
-		
-		if getFFlagUGCValidateRestrictNumFaceControlsModule() and getFIntUGCValidateMaxTotalFaceControlsModule() < #children then
-			return false
-		end
-		for i, v in children do
-			if not v:IsA("FloatCurve") then
-				return false
-			end
-		end
-	end
-	return if t.containsGrandChildren(p6:FindFirstChild("Position")) then false elseif t.containsGrandChildren(p6:FindFirstChild("Rotation")) then false else t.containsGrandChildren(faceControlsName)
-end
-
-function t.validateCurveAnimationBodyPartFolder(p7)
-	-- upvalues: t (ref)
-	local function validateBodyPartFolderInternal(p8)
-		-- upvalues: t (copy), validateBodyPartFolderInternal (ref)
-		if not t.validateBodyPartFolderChildren(p8) then
-			return false
-		end
-		for i, v in p8:GetChildren() do
-			if v:IsA("Folder") and v.Name ~= t.FaceControlsName and not validateBodyPartFolderInternal(v) then
-				return false
-			end
-		end
-		return true
-	end
-	
-	return if t.isBodyPartFolderNameValid(p7.Name) then validateBodyPartFolderInternal(p7) else true
-end
-
-return t
+return CurveAnimationHierarchyUtils

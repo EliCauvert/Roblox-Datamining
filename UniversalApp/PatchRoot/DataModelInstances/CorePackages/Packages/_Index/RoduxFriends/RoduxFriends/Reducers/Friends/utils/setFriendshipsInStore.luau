@@ -1,53 +1,53 @@
-﻿local llamaModule = require(script:FindFirstAncestor("RoduxFriends").Parent.llama)
-local addUserModule = require(script.Parent.addUser)
-local removeUserModule = require(script.Parent.removeUser)
+﻿local LlamaModule = require(script:FindFirstAncestor("RoduxFriends").Parent.llama)
+local AddUserModule = require(script.Parent.addUser)
+local RemoveUserModule = require(script.Parent.removeUser)
 
-function difference(p1, p2)
+function difference(List, List1) --[[ Line: 8 ]]
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		t[v] = true
+	for _, value in pairs(List) do
+		t[value] = true
 	end
-	for i, v_1 in pairs(p2) do
-		t[v_1] = nil
+	for _, value1 in pairs(List1) do
+		t[value1] = nil
 	end
-	local t_1 = {}
-	local var1 = 0
+	local t1 = {}
+	local Count = 0
 	
-	for i_2, v_2 in pairs(p1) do
-		if t[v_2] then
-			var1 += 1
-			t_1[var1] = v_2
+	for _, value2 in pairs(List) do
+		if t[value2] then
+			Count += 1
+			t1[Count] = value2
 		end
 	end
-	return t_1
+	return t1
 end
 
-return function(p3, p4)
-	-- upvalues: llamaModule (ref), addUserModule (ref), removeUserModule (ref)
-	local var2 = tostring(p4.namedIds.users)
-	local var3 = p3[var2] or {}
-	local var4 = llamaModule.List.map(llamaModule.Dictionary.values(p4.responseBody.data), function(p5)
-		return tostring(p5.id)
+return function(JoinResult, p1) --[[ Line: 33 ]]
+	-- upvalues: LlamaModule (copy), AddUserModule (copy), RemoveUserModule (copy)
+	local Text = tostring(p1.namedIds.users)
+	local JoinResultEntry = JoinResult[Text] or {}
+	local MapResult = LlamaModule.List.map(LlamaModule.Dictionary.values(p1.responseBody.data), function(p2): string --[[ Line: 37 ]]
+		return (tostring(p2.id))
 	end)
-	local var5 = difference(var3, var4)
+	local DifferenceResult = difference(JoinResultEntry, MapResult)
 	
-	for i, v in pairs(difference(var4, var3)) do
-		p3 = llamaModule.Dictionary.join(p3, {
-			[var2] = addUserModule(p3[var2], v),
-			[v] = addUserModule(p3[v], var2)
+	for i, value in pairs((difference(MapResult, JoinResultEntry))) do
+		JoinResult = LlamaModule.Dictionary.join(JoinResult, {
+			[Text] = AddUserModule(JoinResult[Text], value),
+			[value] = AddUserModule(JoinResult[value], Text)
 		})
 	end
-	for i_1, v_1 in pairs(var5) do
-		p3 = llamaModule.Dictionary.join(p3, {
-			[var2] = removeUserModule(p3[var2], v_1),
-			[v_1] = removeUserModule(p3[v_1], var2)
+	for i, value1 in pairs(DifferenceResult) do
+		JoinResult = LlamaModule.Dictionary.join(JoinResult, {
+			[Text] = RemoveUserModule(JoinResult[Text], value1),
+			[value1] = RemoveUserModule(JoinResult[value1], Text)
 		})
 	end
-	for i_2, v_2 in pairs(p3) do
-		if llamaModule.isEmpty(v_2) then
-			p3[i_2] = nil
+	for i, value2 in pairs(JoinResult) do
+		if LlamaModule.isEmpty(value2) then
+			JoinResult[i] = nil
 		end
 	end
-	return p3
+	return JoinResult
 end

@@ -1,10 +1,10 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roact = dependenciesModule.Roact
-local imageSetLabel = dependenciesModule.UIBlox.Core.ImageSet.ImageSetLabel
-local foundationFontFaceMigration = dependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
-local normalizeFontFace = dependenciesModule.Foundation.Utility.normalizeFontFace
-local callbackInputBox = roact.PureComponent:extend("CallbackInputBox")
-callbackInputBox.defaultProps = {
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Roact = DependenciesModule.Roact
+local ImageSetLabel = DependenciesModule.UIBlox.Core.ImageSet.ImageSetLabel
+local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = DependenciesModule.Foundation.Utility.normalizeFontFace
+local CallbackInputBox = Roact.PureComponent:extend("CallbackInputBox")
+CallbackInputBox.defaultProps = {
 	initialInputText = "",
 	inputTextFont = Enum.Font.BuilderSans,
 	inputTextColor3 = Color3.new(1, 0, 1),
@@ -31,22 +31,22 @@ callbackInputBox.defaultProps = {
 	clearButtonSelectionImageObject = nil,
 	clearButtonDisabled = nil,
 	textChangedCallback = nil,
-	focusChangedCallback = function() end,
-	onSelectCallback = function() end,
-	returnPressedFromOnScreenKeyboardCallback = function() end,
+	focusChangedCallback = function() --[[ Line: 42 ]] end,
+	onSelectCallback = function() --[[ Line: 43 ]] end,
+	returnPressedFromOnScreenKeyboardCallback = function() --[[ Line: 44 ]] end,
 	inputBoxRef = nil,
-	[roact.Change.AbsoluteSize] = function() end
+	[Roact.Change.AbsoluteSize] = function() --[[ Line: 48 ]] end
 }
 
-function callbackInputBox.init(p1)
-	-- upvalues: roact (ref)
-	p1.clearRef = roact.createRef()
-	p1.inputBoxRef = p1.props.inputBoxRef or roact.createRef()
+function CallbackInputBox.init(p1) --[[ Line: 51 ]]
+	-- upvalues: Roact (copy)
+	p1.clearRef = Roact.createRef()
+	p1.inputBoxRef = p1.props.inputBoxRef or Roact.createRef()
 	p1.inputText = p1.props.initialInputText
 	p1.textChangedEventUnlocked = false
 	
-	function p0.focusTextbox()
-		-- upvalues: p1 (ref)
+	function p1.focusTextbox() --[[ Line: 62 ]]
+		-- upvalues: p1 (copy)
 		p1.props.onSelectCallback()
 		
 		if not p1.inputBoxRef.current:IsFocused() then
@@ -55,39 +55,38 @@ function callbackInputBox.init(p1)
 	end
 end
 
-function callbackInputBox.render(p1)
-	-- upvalues: roact (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref)
-	local placeholderTextTransparency = p1.props.placeholderTextTransparency
-	local inputTextTransparency = p1.props.inputTextTransparency
-	local _ = nil
+function CallbackInputBox.render(p1) --[[ Line: 70 ]]
+	-- upvalues: Roact (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy)
+	local PlaceholderTextTransparency = p1.props.placeholderTextTransparency
+	local InputTextTransparency = p1.props.inputTextTransparency
 	
-	return roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		layout = roact.createElement("UIListLayout", {
+	return Roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		layout = Roact.createElement("UIListLayout", {
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		inputBox = roact.createElement("Frame", {
+		inputBox = Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			layout = roact.createElement("UIListLayout", {
+			layout = Roact.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			inputTextBox = roact.createElement("TextBox", {
+			inputTextBox = Roact.createElement("TextBox", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, -p1.props.clearButtonSize, 1, 0),
 				Position = UDim2.new(0, 0, 0, 0),
 				TextColor3 = p1.props.inputTextColor3,
 				TextSize = p1.props.inputTextSize,
-				TextTransparency = if p1.inputText and p1.inputText ~= "" then inputTextTransparency else placeholderTextTransparency,
-				Font = if foundationFontFaceMigration then nil else p1.props.inputTextFont,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.props.inputTextFont) else nil,
+				TextTransparency = if p1.inputText and p1.inputText ~= "" then InputTextTransparency else PlaceholderTextTransparency,
+				Font = if FoundationFontFaceMigration then nil else p1.props.inputTextFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.props.inputTextFont) else nil,
 				PlaceholderText = p1.props.placeholderText,
 				PlaceholderColor3 = p1.props.placeholderTextColor3,
 				TextXAlignment = p1.props.inputTextXAlignment,
@@ -102,56 +101,58 @@ function callbackInputBox.render(p1)
 				TextInputType = p1.props.textInputType,
 				ReturnKeyType = p1.props.returnKeyType,
 				SelectionImageObject = p1.props.inputBoxSelectionImageObject,
-				[roact.Event.ReturnPressedFromOnScreenKeyboard] = p1.props.returnPressedFromOnScreenKeyboardCallback,
-				[roact.Event.TouchTap] = p1.focusTextbox,
-				[roact.Event.Focused] = function(p2)
-					-- upvalues: p1 (ref), inputTextTransparency (ref), placeholderTextTransparency (ref)
+				[Roact.Event.ReturnPressedFromOnScreenKeyboard] = p1.props.returnPressedFromOnScreenKeyboardCallback,
+				[Roact.Event.TouchTap] = p1.focusTextbox,
+				[Roact.Event.Focused] = function(Label) --[[ Line: 139 ]]
+					-- upvalues: p1 (copy), InputTextTransparency (copy), PlaceholderTextTransparency (copy)
 					if p1.inputBoxRef.current and p1.inputBoxRef.current.Text ~= "" then
 						if p1.clearRef.current and not p1.props.clearButtonDisabled then
 							p1.clearRef.current.Visible = true
 						end
-						p2.TextColor3 = p1.props.inputTextColor3
-						p2.TextTransparency = inputTextTransparency
+						Label.TextColor3 = p1.props.inputTextColor3
+						Label.TextTransparency = InputTextTransparency
 					else
-						p2.TextColor3 = p1.props.placeholderTextColor3
-						p2.TextTransparency = placeholderTextTransparency
+						Label.TextColor3 = p1.props.placeholderTextColor3
+						Label.TextTransparency = PlaceholderTextTransparency
 					end
 					p1.props.focusChangedCallback(true)
 				end,
-				[roact.Event.FocusLost] = function(p2, p3)
-					-- upvalues: p1 (ref), placeholderTextTransparency (ref)
+				[Roact.Event.FocusLost] = function(Label, p2) --[[ Line: 155 ]]
+					-- upvalues: p1 (copy), PlaceholderTextTransparency (copy)
 					if p1.inputBoxRef.current and p1.inputBoxRef.current.Text == "" then
-						p2.TextColor3 = p1.props.placeholderTextColor3
-						p2.TextTransparency = placeholderTextTransparency
+						Label.TextColor3 = p1.props.placeholderTextColor3
+						Label.TextTransparency = PlaceholderTextTransparency
 					end
-					p1.props.focusChangedCallback(false, p3)
+					p1.props.focusChangedCallback(false, p2)
 				end,
-				[roact.Change.Text] = function(p2)
-					-- upvalues: p1 (ref), inputTextTransparency (ref), placeholderTextTransparency (ref)
-					if p2.Text ~= "" or p1.textChangedEventUnlocked then
-						if p2.Text == "" then
+				[Roact.Change.Text] = function(Label) --[[ Line: 164 ]]
+					-- upvalues: p1 (copy), InputTextTransparency (copy), PlaceholderTextTransparency (copy)
+					if Label.Text ~= "" or p1.textChangedEventUnlocked then
+						if Label.Text == "" then
 							if p1.clearRef.current then
 								p1.clearRef.current.Visible = false
 							end
-							p2.TextColor3 = p1.props.placeholderTextColor3
-							p2.TextTransparency = placeholderTextTransparency
-						elseif p1.clearRef.current and not p1.props.clearButtonDisabled then
-							p1.clearRef.current.Visible = true
+							Label.TextColor3 = p1.props.placeholderTextColor3
+							Label.TextTransparency = PlaceholderTextTransparency
+						else
+							if p1.clearRef.current and not p1.props.clearButtonDisabled then
+								p1.clearRef.current.Visible = true
+							end
+							Label.TextColor3 = p1.props.inputTextColor3
+							Label.TextTransparency = InputTextTransparency
 						end
-						p2.TextColor3 = p1.props.inputTextColor3
-						p2.TextTransparency = inputTextTransparency
-						p1.inputText = p2.Text
+						p1.inputText = Label.Text
 						
 						if p1.props.textChangedCallback then
-							p1.props.textChangedCallback(p2.Text)
+							p1.props.textChangedCallback(Label.Text)
 						end
 					end
 					p1.textChangedEventUnlocked = true
 				end,
-				[roact.Ref] = p1.inputBoxRef,
-				[roact.Change.AbsoluteSize] = p1.props[roact.Change.AbsoluteSize]
+				[Roact.Ref] = p1.inputBoxRef,
+				[Roact.Change.AbsoluteSize] = p1.props[Roact.Change.AbsoluteSize]
 			}),
-			Clear = roact.createElement("ImageButton", {
+			Clear = Roact.createElement("ImageButton", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, p1.props.clearButtonSize, 0, p1.props.clearButtonSize),
 				AutoButtonColor = false,
@@ -159,8 +160,8 @@ function callbackInputBox.render(p1)
 				Visible = not p1.props.clearButtonDisabled,
 				SelectionImageObject = p1.props.clearButtonSelectionImageObject,
 				Selectable = p1.clearRef.current and p1.clearRef.current.Visible == true,
-				[roact.Event.Activated] = function()
-					-- upvalues: p1 (ref)
+				[Roact.Event.Activated] = function() --[[ Line: 205 ]]
+					-- upvalues: p1 (copy)
 					if p1.inputBoxRef.current then
 						p1.inputBoxRef.current.Text = ""
 					end
@@ -171,31 +172,31 @@ function callbackInputBox.render(p1)
 					end
 				end
 			}, {
-				layout = roact.createElement("UIListLayout", {
+				layout = Roact.createElement("UIListLayout", {
 					VerticalAlignment = "Center",
 					HorizontalAlignment = "Center"
 				}),
-				Icon = roact.createElement(imageSetLabel, {
+				Icon = Roact.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0, p1.props.clearButtonSize, 0, p1.props.clearButtonSize),
 					Image = p1.props.clearIcon,
 					ImageColor3 = p1.props.clearIconColor3,
 					ImageTransparency = p1.props.clearIconTransparency,
 					Visible = p1.props.showCancelIconOnLoad,
-					[roact.Ref] = p1.clearRef
+					[Roact.Ref] = p1.clearRef
 				})
 			})
 		})
 	})
 end
 
-function callbackInputBox.didMount(p1)
+function CallbackInputBox.didMount(p1) --[[ Line: 237 ]]
 	if p1.inputBoxRef.current then
 		p1.inputBoxRef.current.Text = p1.inputText
 		
 		if p1.props.captureFocusOnMount then
-			spawn(function()
-				-- upvalues: p1 (ref)
+			spawn(function() --[[ Line: 242 ]]
+				-- upvalues: p1 (copy)
 				if p1.inputBoxRef and p1.inputBoxRef.current then
 					p1.inputBoxRef.current:captureFocus()
 				end
@@ -204,4 +205,4 @@ function callbackInputBox.didMount(p1)
 	end
 end
 
-return callbackInputBox
+return CallbackInputBox

@@ -1,12 +1,11 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 77 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
 		title = if p1 == nil or p1.title == nil then "" else p1.title,
 		name = if p1 == nil or p1.name == nil then "" else p1.name,
@@ -16,7 +15,7 @@ function t_1.new(p1)
 		default_subcategory_id = if p1 == nil or p1.default_subcategory_id == nil then "" else p1.default_subcategory_id,
 		asset_types = if p1 == nil or p1.asset_types == nil then {} else p1.asset_types,
 		bundle_types = if p1 == nil or p1.bundle_types == nil then {} else p1.bundle_types,
-		can_animate_camera_based_mood = if p1 == nil or p1.can_animate_camera_based_mood == nil then false else p1.can_animate_camera_based_mood,
+		can_animate_camera_based_mood = p1 ~= nil and p1.can_animate_camera_based_mood ~= nil and p1.can_animate_camera_based_mood,
 		camera_focus = if p1 == nil or p1.camera_focus == nil then "" else p1.camera_focus,
 		camera_zoom_radius = if p1 == nil or p1.camera_zoom_radius == nil then 0 else p1.camera_zoom_radius,
 		tile_type = if p1 == nil or p1.tile_type == nil then "" else p1.tile_type,
@@ -24,262 +23,191 @@ function t_1.new(p1)
 		time_to_refresh = if p1 == nil or p1.time_to_refresh == nil then 0 else p1.time_to_refresh,
 		category_id = if p1 == nil or p1.category_id == nil then 0 else p1.category_id,
 		subcategory_id = if p1 == nil or p1.subcategory_id == nil then 0 else p1.subcategory_id
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 108 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var2, var7 = protoModule.writeString(var2, var3, self.id)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.id)
 	end
 	if self.title ~= nil and self.title ~= "" then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var4, var9 = protoModule.writeString(var4, var5, self.title)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.title)
 	end
 	if self.name ~= nil and self.name ~= "" then
-		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
-		var6, var11 = protoModule.writeString(var6, var7, self.name)
-		buff = var6
-		var1 = var7
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.name)
 	end
 	if self.taxonomy_id ~= nil and self.taxonomy_id ~= "" then
-		local var8, var9 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.lengthDelimited)
-		var8, var13 = protoModule.writeString(var8, var9, self.taxonomy_id)
-		buff = var8
-		var1 = var9
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.taxonomy_id)
 	end
 	if self.buttons_enabled ~= nil and #self.buttons_enabled > 0 then
-		for i, v in self.buttons_enabled do
-			local var10, var11 = protoModule.writeTag(buff, var1, 5, protoModule.wireTypes.lengthDelimited)
-			var10, var15 = protoModule.writeString(var10, var11, v)
-			buff = var10
-			var1 = var11
+		for _, value in self.buttons_enabled do
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, value)
 		end
 	end
 	if self.subcategories ~= nil and #self.subcategories > 0 then
-		for i, v in self.subcategories do
-			local var12, var13 = protoModule.writeTag(buff, var1, 6, protoModule.wireTypes.lengthDelimited)
-			var12, var17 = protoModule.writeString(var12, var13, v)
-			buff = var12
-			var1 = var13
+		for _, subcategory in self.subcategories do
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, subcategory)
 		end
 	end
 	if self.default_subcategory_id ~= nil and self.default_subcategory_id ~= "" then
-		local var14, var15 = protoModule.writeTag(buff, var1, 7, protoModule.wireTypes.lengthDelimited)
-		var14, var19 = protoModule.writeString(var14, var15, self.default_subcategory_id)
-		buff = var14
-		var1 = var15
+		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.default_subcategory_id)
 	end
 	if self.asset_types ~= nil and #self.asset_types > 0 then
-		for i, v in self.asset_types do
-			local var16, var17 = protoModule.writeTag(buff, var1, 8, protoModule.wireTypes.lengthDelimited)
-			var16, var21 = protoModule.writeString(var16, var17, v)
-			buff = var16
-			var1 = var17
+		for _, assetType in self.asset_types do
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult8, WriteTagResult2_7, assetType)
 		end
 	end
 	if self.bundle_types ~= nil and #self.bundle_types > 0 then
-		for i, v in self.bundle_types do
-			local var18, var19 = protoModule.writeTag(buff, var1, 9, protoModule.wireTypes.lengthDelimited)
-			var18, var23 = protoModule.writeString(var18, var19, v)
-			buff = var18
-			var1 = var19
+		for _, bundleType in self.bundle_types do
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult9, WriteTagResult2_8, bundleType)
 		end
 	end
 	if self.can_animate_camera_based_mood then
-		local var20, var21 = protoModule.writeTag(buff, var1, 10, protoModule.wireTypes.varint)
-		var20, var25 = protoModule.writeVarInt(var20, var21, if self.can_animate_camera_based_mood then 1 else 0)
-		buff = var20
-		var1 = var21
+		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult10, WriteTagResult2_9, if self.can_animate_camera_based_mood then 1 else 0)
 	end
 	if self.camera_focus ~= nil and self.camera_focus ~= "" then
-		local var22, var23 = protoModule.writeTag(buff, var1, 11, protoModule.wireTypes.lengthDelimited)
-		var22, var27 = protoModule.writeString(var22, var23, self.camera_focus)
-		buff = var22
-		var1 = var23
+		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult11, WriteTagResult2_10, self.camera_focus)
 	end
 	if self.camera_zoom_radius ~= nil and self.camera_zoom_radius ~= 0 then
-		local var24, var25 = protoModule.writeTag(buff, var1, 12, protoModule.wireTypes.i32)
-		var24, var29 = protoModule.writeFloat(var24, var25, self.camera_zoom_radius)
-		buff = var24
-		var1 = var25
+		local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.i32)
+		Buf, Count = ProtoModule.writeFloat(WriteTagResult12, WriteTagResult2_11, self.camera_zoom_radius)
 	end
 	if self.tile_type ~= nil and self.tile_type ~= "" then
-		local var26, var27 = protoModule.writeTag(buff, var1, 13, protoModule.wireTypes.lengthDelimited)
-		var26, var31 = protoModule.writeString(var26, var27, self.tile_type)
-		buff = var26
-		var1 = var27
+		local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult13, WriteTagResult2_12, self.tile_type)
 	end
 	if self.looks_widget_context_for_organic_content ~= nil and self.looks_widget_context_for_organic_content ~= "" then
-		local var28, var29 = protoModule.writeTag(buff, var1, 14, protoModule.wireTypes.lengthDelimited)
-		var28, var33 = protoModule.writeString(var28, var29, self.looks_widget_context_for_organic_content)
-		buff = var28
-		var1 = var29
+		local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult14, WriteTagResult2_13, self.looks_widget_context_for_organic_content)
 	end
 	if self.time_to_refresh ~= nil and self.time_to_refresh ~= 0 then
-		local var30, var31 = protoModule.writeTag(buff, var1, 15, protoModule.wireTypes.varint)
-		var30, var35 = protoModule.writeVarInt(var30, var31, self.time_to_refresh)
-		buff = var30
-		var1 = var31
+		local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult15, WriteTagResult2_14, self.time_to_refresh)
 	end
 	if self.category_id ~= nil and self.category_id ~= 0 then
-		local var32, var33 = protoModule.writeTag(buff, var1, 16, protoModule.wireTypes.varint)
-		var32, var37 = protoModule.writeVarInt(var32, var33, self.category_id)
-		buff = var32
-		var1 = var33
+		local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult16, WriteTagResult2_15, self.category_id)
 	end
 	if self.subcategory_id ~= nil and self.subcategory_id ~= 0 then
-		local var34, var35 = protoModule.writeTag(buff, var1, 17, protoModule.wireTypes.varint)
-		var34, var39 = protoModule.writeVarInt(var34, var35, self.subcategory_id)
-		buff = var34
-		var1 = var35
+		local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult17, WriteTagResult2_16, self.subcategory_id)
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref)
-	local var36 = t_1.new()
-	local var37 = 0
-	while var37 < buffer.len(p1) do
-		local _ = nil
-		local var38 = nil
-		local var39, var40, var41 = protoModule.readTag(p1, var37)
-		local var42 = var39
-		var38 = var40
-		var37 = var41
+function Module.decode(Buf) --[[ Line: 213 ]]
+	-- upvalues: Module (copy), ProtoModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v41 = ProtoModule.readTag(Buf, v1)
 		
-		if var38 == protoModule.wireTypes.varint then
-			if var42 == 10 then
-				local _ = nil
-				local var43, var44 = protoModule.readVarInt(p1, var37)
-				var37 = var44
-				var36.can_animate_camera_based_mood = var43 ~= 0
-			elseif var42 == 15 then
-				local _ = nil
-				local var45, var46 = protoModule.readVarIntI64(p1, var37)
-				var37 = var46
-				var36.time_to_refresh = var45
-			elseif var42 == 16 then
-				local _ = nil
-				local var47, var48 = protoModule.readVarIntI64(p1, var37)
-				var37 = var48
-				var36.category_id = var47
-			elseif var42 == 17 then
-				local _ = nil
-				local var49, var50 = protoModule.readVarIntI64(p1, var37)
-				var37 = var50
-				var36.subcategory_id = var49
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 10 then
+				local VarInt
+				VarInt, v41 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.can_animate_camera_based_mood = VarInt ~= 0
+			elseif Tag == 15 then
+				NewModule.time_to_refresh, v41 = ProtoModule.readVarIntI64(Buf, v1)
+			elseif Tag == 16 then
+				NewModule.category_id, v41 = ProtoModule.readVarIntI64(Buf, v1)
+			elseif Tag == 17 then
+				NewModule.subcategory_id, v41 = ProtoModule.readVarIntI64(Buf, v1)
 			else
-				local _ = nil
-				local var51, var52 = protoModule.readVarInt(p1, var37)
-				local _ = var51
-				var37 = var52
+				local _
+				_, v41 = ProtoModule.readVarInt(Buf, v1)
 			end
-		end
-		if var38 == protoModule.wireTypes.lengthDelimited then
-			if var42 == 1 then
-				local _ = nil
-				local var53, var54 = protoModule.readBuffer(p1, var37)
-				var37 = var54
-				var36.id = buffer.tostring(var53)
-			elseif var42 == 2 then
-				local _ = nil
-				local var55, var56 = protoModule.readBuffer(p1, var37)
-				var37 = var56
-				var36.title = buffer.tostring(var55)
-			elseif var42 == 3 then
-				local _ = nil
-				local var57, var58 = protoModule.readBuffer(p1, var37)
-				var37 = var58
-				var36.name = buffer.tostring(var57)
-			elseif var42 == 4 then
-				local _ = nil
-				local var59, var60 = protoModule.readBuffer(p1, var37)
-				var37 = var60
-				var36.taxonomy_id = buffer.tostring(var59)
-			elseif var42 == 5 then
-				local _ = nil
-				local var61, var62 = protoModule.readBuffer(p1, var37)
-				var37 = var62
-				table.insert(var36.buttons_enabled, buffer.tostring(var61))
-			elseif var42 == 6 then
-				local _ = nil
-				local var63, var64 = protoModule.readBuffer(p1, var37)
-				var37 = var64
-				table.insert(var36.subcategories, buffer.tostring(var63))
-			elseif var42 == 7 then
-				local _ = nil
-				local var65, var66 = protoModule.readBuffer(p1, var37)
-				var37 = var66
-				var36.default_subcategory_id = buffer.tostring(var65)
-			elseif var42 == 8 then
-				local _ = nil
-				local var67, var68 = protoModule.readBuffer(p1, var37)
-				var37 = var68
-				table.insert(var36.asset_types, buffer.tostring(var67))
-			elseif var42 == 9 then
-				local _ = nil
-				local var69, var70 = protoModule.readBuffer(p1, var37)
-				var37 = var70
-				table.insert(var36.bundle_types, buffer.tostring(var69))
-			elseif var42 == 11 then
-				local _ = nil
-				local var71, var72 = protoModule.readBuffer(p1, var37)
-				var37 = var72
-				var36.camera_focus = buffer.tostring(var71)
-			elseif var42 == 13 then
-				local _ = nil
-				local var73, var74 = protoModule.readBuffer(p1, var37)
-				var37 = var74
-				var36.tile_type = buffer.tostring(var73)
-			elseif var42 == 14 then
-				local _ = nil
-				local var75, var76 = protoModule.readBuffer(p1, var37)
-				var37 = var76
-				var36.looks_widget_context_for_organic_content = buffer.tostring(var75)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.id = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.title = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer4
+				Buffer4, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.name = buffer.tostring(Buffer4)
+			elseif Tag == 4 then
+				local Buffer6
+				Buffer6, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.taxonomy_id = buffer.tostring(Buffer6)
+			elseif Tag == 5 then
+				local Buffer7
+				Buffer7, v41 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.buttons_enabled, buffer.tostring(Buffer7))
+			elseif Tag == 6 then
+				local Buffer9
+				Buffer9, v41 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.subcategories, buffer.tostring(Buffer9))
+			elseif Tag == 7 then
+				local Buffer11
+				Buffer11, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.default_subcategory_id = buffer.tostring(Buffer11)
+			elseif Tag == 8 then
+				local Buffer12
+				Buffer12, v41 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.asset_types, buffer.tostring(Buffer12))
+			elseif Tag == 9 then
+				local Buffer3
+				Buffer3, v41 = ProtoModule.readBuffer(Buf, v1)
+				table.insert(NewModule.bundle_types, buffer.tostring(Buffer3))
+			elseif Tag == 11 then
+				local Buffer5
+				Buffer5, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.camera_focus = buffer.tostring(Buffer5)
+			elseif Tag == 13 then
+				local Buffer8
+				Buffer8, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.tile_type = buffer.tostring(Buffer8)
+			elseif Tag == 14 then
+				local Buffer10
+				Buffer10, v41 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.looks_widget_context_for_organic_content = buffer.tostring(Buffer10)
 			else
-				local _ = nil
-				local var77, var78 = protoModule.readVarInt(p1, var37)
-				var37 = var78 + var77
+				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt1
 			end
-		elseif var38 == protoModule.wireTypes.i32 then
-			if var42 == 12 then
-				local _ = nil
-				local var79, var80 = protoModule.readFloat(p1, var37)
-				var37 = var80
-				var36.camera_zoom_radius = var79
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			if Tag == 12 then
+				NewModule.camera_zoom_radius, v41 = ProtoModule.readFloat(Buf, v1)
 			else
-				local _ = nil
-				local var81, var82 = protoModule.readFixed32(p1, var37)
-				local _ = var81
-				var37 = var82
+				local _
+				_, v41 = ProtoModule.readFixed32(Buf, v1)
 			end
-		elseif var38 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var83, var84 = protoModule.readFixed64(p1, var37)
-			local _ = var83
-			var37 = var84
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v41 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var43)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var36
+	return NewModule
 end
 
-function t_1:jsonEncode()
-	-- upvalues: protoModule (ref)
+function Module:jsonEncode() --[[ Line: 336 ]]
+	-- upvalues: ProtoModule (copy)
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -295,39 +223,39 @@ function t_1:jsonEncode()
 		t.taxonomyId = self.taxonomy_id
 	end
 	if self.buttons_enabled ~= nil and #self.buttons_enabled > 0 then
-		local t_1 = {}
+		local ButtonsEnabled = {}
 		
-		for i, v in self.buttons_enabled do
-			table.insert(t_1, v)
+		for _, value in self.buttons_enabled do
+			table.insert(ButtonsEnabled, value)
 		end
-		t.buttonsEnabled = t_1
+		t.buttonsEnabled = ButtonsEnabled
 	end
 	if self.subcategories ~= nil and #self.subcategories > 0 then
-		local t_1 = {}
+		local Subcategories = {}
 		
-		for i, v in self.subcategories do
-			table.insert(t_1, v)
+		for _, subcategory in self.subcategories do
+			table.insert(Subcategories, subcategory)
 		end
-		t.subcategories = t_1
+		t.subcategories = Subcategories
 	end
 	if self.default_subcategory_id ~= nil and self.default_subcategory_id ~= "" then
 		t.defaultSubcategoryId = self.default_subcategory_id
 	end
 	if self.asset_types ~= nil and #self.asset_types > 0 then
-		local t_1 = {}
+		local AssetTypes = {}
 		
-		for i, v in self.asset_types do
-			table.insert(t_1, v)
+		for _, assetType in self.asset_types do
+			table.insert(AssetTypes, assetType)
 		end
-		t.assetTypes = t_1
+		t.assetTypes = AssetTypes
 	end
 	if self.bundle_types ~= nil and #self.bundle_types > 0 then
-		local t_1 = {}
+		local BundleTypes = {}
 		
-		for i, v in self.bundle_types do
-			table.insert(t_1, v)
+		for _, bundleType in self.bundle_types do
+			table.insert(BundleTypes, bundleType)
 		end
-		t.bundleTypes = t_1
+		t.bundleTypes = BundleTypes
 	end
 	if self.can_animate_camera_based_mood then
 		t.canAnimateCameraBasedMood = self.can_animate_camera_based_mood
@@ -336,7 +264,7 @@ function t_1:jsonEncode()
 		t.cameraFocus = self.camera_focus
 	end
 	if self.camera_zoom_radius ~= nil and self.camera_zoom_radius ~= 0 then
-		t.cameraZoomRadius = protoModule.json.serializeNumber(self.camera_zoom_radius)
+		t.cameraZoomRadius = ProtoModule.json.serializeNumber(self.camera_zoom_radius)
 	end
 	if self.tile_type ~= nil and self.tile_type ~= "" then
 		t.tileType = self.tile_type
@@ -356,145 +284,145 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), protoModule (ref)
-	local var85 = t_1.new()
+function Module:jsonDecode() --[[ Line: 429 ]]
+	-- upvalues: Module (copy), ProtoModule (copy)
+	local NewModule = Module.new()
 	
 	if self.id ~= nil then
-		var85.id = self.id
+		NewModule.id = self.id
 	end
 	if self.title ~= nil then
-		var85.title = self.title
+		NewModule.title = self.title
 	end
 	if self.name ~= nil then
-		var85.name = self.name
+		NewModule.name = self.name
 	end
 	if self.taxonomy_id ~= nil then
-		var85.taxonomy_id = self.taxonomy_id
+		NewModule.taxonomy_id = self.taxonomy_id
 	end
 	if self.taxonomyId ~= nil then
-		var85.taxonomy_id = self.taxonomyId
+		NewModule.taxonomy_id = self.taxonomyId
 	end
 	if self.buttons_enabled ~= nil then
-		local t = {}
+		local Buttons_enabled = {}
 		
-		for i, v in self.buttons_enabled do
-			table.insert(t, v)
+		for _, value in self.buttons_enabled do
+			table.insert(Buttons_enabled, value)
 		end
-		var85.buttons_enabled = t
+		NewModule.buttons_enabled = Buttons_enabled
 	end
 	if self.buttonsEnabled ~= nil then
-		local t = {}
+		local Buttons_enabled = {}
 		
-		for i, v in self.buttonsEnabled do
-			table.insert(t, v)
+		for _, value1 in self.buttonsEnabled do
+			table.insert(Buttons_enabled, value1)
 		end
-		var85.buttons_enabled = t
+		NewModule.buttons_enabled = Buttons_enabled
 	end
 	if self.subcategories ~= nil then
-		local t = {}
+		local Subcategories = {}
 		
-		for i, v in self.subcategories do
-			table.insert(t, v)
+		for _, subcategory in self.subcategories do
+			table.insert(Subcategories, subcategory)
 		end
-		var85.subcategories = t
+		NewModule.subcategories = Subcategories
 	end
 	if self.default_subcategory_id ~= nil then
-		var85.default_subcategory_id = self.default_subcategory_id
+		NewModule.default_subcategory_id = self.default_subcategory_id
 	end
 	if self.defaultSubcategoryId ~= nil then
-		var85.default_subcategory_id = self.defaultSubcategoryId
+		NewModule.default_subcategory_id = self.defaultSubcategoryId
 	end
 	if self.asset_types ~= nil then
-		local t = {}
+		local Asset_types = {}
 		
-		for i, v in self.asset_types do
-			table.insert(t, v)
+		for _, assetType in self.asset_types do
+			table.insert(Asset_types, assetType)
 		end
-		var85.asset_types = t
+		NewModule.asset_types = Asset_types
 	end
 	if self.assetTypes ~= nil then
-		local t = {}
+		local Asset_types = {}
 		
-		for i, v in self.assetTypes do
-			table.insert(t, v)
+		for _, assetType1 in self.assetTypes do
+			table.insert(Asset_types, assetType1)
 		end
-		var85.asset_types = t
+		NewModule.asset_types = Asset_types
 	end
 	if self.bundle_types ~= nil then
-		local t = {}
+		local Bundle_types = {}
 		
-		for i, v in self.bundle_types do
-			table.insert(t, v)
+		for _, bundleType in self.bundle_types do
+			table.insert(Bundle_types, bundleType)
 		end
-		var85.bundle_types = t
+		NewModule.bundle_types = Bundle_types
 	end
 	if self.bundleTypes ~= nil then
-		local t = {}
+		local Bundle_types = {}
 		
-		for i, v in self.bundleTypes do
-			table.insert(t, v)
+		for _, bundleType1 in self.bundleTypes do
+			table.insert(Bundle_types, bundleType1)
 		end
-		var85.bundle_types = t
+		NewModule.bundle_types = Bundle_types
 	end
 	if self.can_animate_camera_based_mood ~= nil then
-		var85.can_animate_camera_based_mood = self.can_animate_camera_based_mood
+		NewModule.can_animate_camera_based_mood = self.can_animate_camera_based_mood
 	end
 	if self.canAnimateCameraBasedMood ~= nil then
-		var85.can_animate_camera_based_mood = self.canAnimateCameraBasedMood
+		NewModule.can_animate_camera_based_mood = self.canAnimateCameraBasedMood
 	end
 	if self.camera_focus ~= nil then
-		var85.camera_focus = self.camera_focus
+		NewModule.camera_focus = self.camera_focus
 	end
 	if self.cameraFocus ~= nil then
-		var85.camera_focus = self.cameraFocus
+		NewModule.camera_focus = self.cameraFocus
 	end
 	if self.camera_zoom_radius ~= nil then
-		var85.camera_zoom_radius = protoModule.json.deserializeNumber(self.camera_zoom_radius)
+		NewModule.camera_zoom_radius = ProtoModule.json.deserializeNumber(self.camera_zoom_radius)
 	end
 	if self.cameraZoomRadius ~= nil then
-		var85.camera_zoom_radius = protoModule.json.deserializeNumber(self.cameraZoomRadius)
+		NewModule.camera_zoom_radius = ProtoModule.json.deserializeNumber(self.cameraZoomRadius)
 	end
 	if self.tile_type ~= nil then
-		var85.tile_type = self.tile_type
+		NewModule.tile_type = self.tile_type
 	end
 	if self.tileType ~= nil then
-		var85.tile_type = self.tileType
+		NewModule.tile_type = self.tileType
 	end
 	if self.looks_widget_context_for_organic_content ~= nil then
-		var85.looks_widget_context_for_organic_content = self.looks_widget_context_for_organic_content
+		NewModule.looks_widget_context_for_organic_content = self.looks_widget_context_for_organic_content
 	end
 	if self.looksWidgetContextForOrganicContent ~= nil then
-		var85.looks_widget_context_for_organic_content = self.looksWidgetContextForOrganicContent
+		NewModule.looks_widget_context_for_organic_content = self.looksWidgetContextForOrganicContent
 	end
 	if self.time_to_refresh ~= nil then
-		var85.time_to_refresh = self.time_to_refresh
+		NewModule.time_to_refresh = self.time_to_refresh
 	end
 	if self.timeToRefresh ~= nil then
-		var85.time_to_refresh = self.timeToRefresh
+		NewModule.time_to_refresh = self.timeToRefresh
 	end
 	if self.category_id ~= nil then
-		var85.category_id = self.category_id
+		NewModule.category_id = self.category_id
 	end
 	if self.categoryId ~= nil then
-		var85.category_id = self.categoryId
+		NewModule.category_id = self.categoryId
 	end
 	if self.subcategory_id ~= nil then
-		var85.subcategory_id = self.subcategory_id
+		NewModule.subcategory_id = self.subcategory_id
 	end
 	if self.subcategoryId ~= nil then
-		var85.subcategory_id = self.subcategoryId
+		NewModule.subcategory_id = self.subcategoryId
 	end
-	return var85
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "MarketplaceCatalogCategoryData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.MarketplaceCatalogCategoryData"
 }
-t.MarketplaceCatalogCategoryData = t_1
-typeRegistryModule.default:register(t.MarketplaceCatalogCategoryData)
+local config = { MarketplaceCatalogCategoryData = Module }
+TypeRegistryModule.default:register(config.MarketplaceCatalogCategoryData)
 
 return {
-	MarketplaceCatalogCategoryData = t.MarketplaceCatalogCategoryData
+	MarketplaceCatalogCategoryData = config.MarketplaceCatalogCategoryData
 }

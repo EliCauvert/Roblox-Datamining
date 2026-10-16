@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("MomentsCreationFlow").Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { musics = p1 }
+﻿return require(script:FindFirstAncestor("MomentsCreationFlow").Parent.Rodux).makeActionCreator(script.Name, function(Musics) --[[ Line: 10 ]]
+	return { musics = Musics }
 end)

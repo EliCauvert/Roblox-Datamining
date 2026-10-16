@@ -1,80 +1,85 @@
 ﻿local _ = require(script.Parent)
-local exhaustiveMatchModule = require(script:FindFirstAncestor("ultimate-list").Util.exhaustiveMatch)
+local ExhaustiveMatchModule = require(script:FindFirstAncestor("ultimate-list").Util.exhaustiveMatch)
 
 return {
-	get = function(p1, p2)
-		-- upvalues: exhaustiveMatchModule (ref)
+	get = function(p1, p2: number) --[[ Line: 8 ]]
+		-- upvalues: ExhaustiveMatchModule (copy)
 		assert(p2 >= 1, "index < 1")
 		
 		if p1.type == "array" then
-			local function get(p3)
-				-- upvalues: p1 (ref), get (ref)
+			local function get(p3: number) --[[ Line: 15 ]]
+				-- upvalues: p1 (copy), get (copy)
 				return if p3 < 1 or #p1.array < p3 then nil else {
-					before = function()
-						-- upvalues: get (copy), p3 (ref)
+					before = function() --[[ Line: 21 ]]
+						-- upvalues: get (upval), p3 (copy)
 						return get(p3 - 1)
 					end,
 					value = p1.array[p3],
-					after = function()
-						-- upvalues: get (copy), p3 (ref)
+					after = function() --[[ Line: 27 ]]
+						-- upvalues: get (upval), p3 (copy)
 						return get(p3 + 1)
 					end
 				}
 			end
 			
-			return get(p2)
+			return (get(p2))
+		else
+			return if p1.type == "mutableSource" then p1.methods.get(p2) else ExhaustiveMatchModule(p1.type)
 		end
-		return if p1.type == "mutableSource" then p1.methods.get(p2) else exhaustiveMatchModule(p1.type)
 	end,
-	getByRange = function(p1, p2)
-		-- upvalues: exhaustiveMatchModule (ref)
+	getByRange = function(p1, Vector) --[[ Line: 41 ]]
+		-- upvalues: ExhaustiveMatchModule (copy)
 		if p1.type == "array" then
-			return table.move(p1.array, p2.X, p2.Y, 1, {})
-		elseif p1.type ~= "mutableSource" then
-			return exhaustiveMatchModule(p1.type)
-		elseif p1.methods.getByRange ~= nil then
-			return p1.methods.getByRange(p2.X, p2.Y)
+			return table.move(p1.array, Vector.X, Vector.Y, 1, {})
 		end
-		local t = {}
-		local var1 = p1.methods.get(p2.X)
+		if p1.type ~= "mutableSource" then
+			return ExhaustiveMatchModule(p1.type)
+		end
+		if p1.methods.getByRange ~= nil then
+			return p1.methods.getByRange(Vector.X, Vector.Y)
+		end
+		local List = {}
+		local GetResult = p1.methods.get(Vector.X)
 		
-		for _ = 0, p2.Y - p2.X do
-			if var1 == nil then break end
-			table.insert(t, var1.value)
-			var1 = var1.after()
+		for _ = 0, Vector.Y - Vector.X do
+			if GetResult == nil then break end
+			table.insert(List, GetResult.value)
+			GetResult = GetResult.after()
 		end
-		return t
+		return List
 	end,
-	back = function(p3)
-		-- upvalues: exhaustiveMatchModule (ref)
-		if p3.type == "array" then
-			return p3.array[#p3.array]
-		elseif p3.type ~= "mutableSource" then
-			return exhaustiveMatchModule(p3.type)
-		elseif p3.methods.back == nil then
-			local var2 = p3.methods.get(p3.methods.length())
+	back = function(p2) --[[ Line: 67 ]]
+		-- upvalues: ExhaustiveMatchModule (copy)
+		if p2.type == "array" then
+			return p2.array[#p2.array]
+		elseif p2.type ~= "mutableSource" then
+			return ExhaustiveMatchModule(p2.type)
+		elseif p2.methods.back == nil then
+			local GetResult = p2.methods.get(p2.methods.length())
 			
-			return var2 and var2.value
+			return GetResult and GetResult.value
+		else
+			return p2.methods.back()
 		end
-		return p3.methods.back()
 	end,
-	length = function(p3)
-		-- upvalues: exhaustiveMatchModule (ref)
-		return if p3.type == "array" then #p3.array elseif p3.type == "mutableSource" then p3.methods.length() else exhaustiveMatchModule(p3.type)
+	length = function(p2) --[[ Line: 82 ]]
+		-- upvalues: ExhaustiveMatchModule (copy)
+		return if p2.type == "array" then #p2.array elseif p2.type == "mutableSource" then p2.methods.length() else ExhaustiveMatchModule(p2.type)
 	end,
-	equals = function(p3, p4)
-		-- upvalues: exhaustiveMatchModule (ref)
-		if p3.type ~= p4.type then
+	equals = function(p2, p3) --[[ Line: 93 ]]
+		-- upvalues: ExhaustiveMatchModule (copy)
+		if p2.type ~= p3.type then
 			return false
-		elseif p3.type == "array" then
-			assert(p4.type == "array", "Luau")
+		elseif p2.type == "array" then
+			assert(p3.type == "array", "Luau")
 			
-			return p3.array == p4.array
-		elseif p3.type == "mutableSource" then
-			assert(p4.type == "mutableSource", "Luau")
+			return p2.array == p3.array
+		elseif p2.type == "mutableSource" then
+			assert(p3.type == "mutableSource", "Luau")
 			
-			return p3.methods == p4.methods
+			return p2.methods == p3.methods
+		else
+			return ExhaustiveMatchModule(p2.type)
 		end
-		return exhaustiveMatchModule(p3.type)
 	end
 }

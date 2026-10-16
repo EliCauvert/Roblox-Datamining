@@ -1,27 +1,32 @@
-﻿local array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
+﻿local Array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
 
-return function(p1)
-	-- upvalues: array (ref)
-	local scene = p1.scene
-	local scenes = p1.scenes
-	local index = scene.index
-	local scenesCount = #scenes
+return function(p1) --[[ Line: 5 | Named "getSceneIndicesForInterpolationInputRange" ]]
+	-- upvalues: Array (copy)
+	local Scene = p1.scene
+	local Scenes = p1.scenes
+	local Index: number = Scene.index
+	local CountScenes = #Scenes
 	
-	if scenes[scenesCount].isActive then
-		local var1 = array.indexOf(scenes, scene)
-		local var2 = nil
+	if not Scenes[CountScenes].isActive then
+		local IndexOfResult = Array.indexOf(Scenes, Scene)
+		local v1 = nil
 		
-		for i, v in scenes do
-			if v.isActive then
-				var2 = i
+		for i, scene in Scenes do
+			if scene.isActive then
+				v1 = i
 				break
 			end
 		end
-		local index_1 = scenes[var2].index
+		local Index1: number = Scenes[v1].index
+		local Index2: number = Scenes[CountScenes].index
 		
-		return if not (index ~= index_1 and var1 == scenesCount) then if index == index_1 and var1 == var2 then {
-			first = index - 1,
-			last = math.max(scenes[scenesCount].index, index + 1)
-		} elseif index == index_1 or var2 < var1 then nil else { first = index - 1, last = index + 1 } else { first = math.min(index_1, index - 1), last = index + 1 }
+		if Index ~= Index1 and IndexOfResult == CountScenes then
+			return { first = math.min(Index1, Index - 1), last = Index + 1 }
+		elseif Index == Index1 and IndexOfResult == v1 then
+			return { first = Index - 1, last = math.max(Index2, Index + 1) }
+		elseif Index == Index1 or v1 < IndexOfResult then
+			return nil
+		end
 	end
+	return { first = Index - 1, last = Index + 1 }
 end

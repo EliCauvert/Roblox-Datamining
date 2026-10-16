@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.lumberyak.lumberyak)
+﻿return (require(script.Parent._Index.lumberyak.lumberyak))

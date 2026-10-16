@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.enumerate.enumerate)
+﻿return (require(script.Parent._Index.enumerate.enumerate))

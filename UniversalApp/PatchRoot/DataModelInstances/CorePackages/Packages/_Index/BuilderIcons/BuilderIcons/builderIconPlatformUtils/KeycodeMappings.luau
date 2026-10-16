@@ -1,91 +1,91 @@
-﻿local platformModule = require(script.Parent.Platform)
-local iconModule = require(script.Parent.Parent.Icon)
+﻿local PlatformModule = require(script.Parent.Platform)
+local IconModule = require(script.Parent.Parent.Icon)
 
-local function _(p1, p2)
-	for i, v in p2 do
-		p1[i] = v
+local function _(p1, List) --[[ Line: 4 | Named "merge" ]]
+	for i, value in List do
+		p1[i] = value
 	end
 	return p1
 end
 
-local t = {
-	ButtonA = iconModule.PsX,
-	ButtonB = iconModule.PsCircle,
-	ButtonX = iconModule.PsSquare,
-	ButtonY = iconModule.PsTriagle,
-	ButtonL1 = iconModule.PsL1,
-	ButtonL2 = iconModule.PsL2,
-	ButtonL3 = iconModule.PsL3,
-	ButtonR1 = iconModule.PsR1,
-	ButtonR2 = iconModule.PsR2,
-	ButtonR3 = iconModule.PsR3,
-	Thumbstick1 = iconModule.PsStickLeft,
-	Thumbstick2 = iconModule.PsStickRight,
-	DPadDown = iconModule.PsDpadDown,
-	DPadUp = iconModule.PsDpadUp,
-	DPadLeft = iconModule.PsDpadLeft,
-	DPadRight = iconModule.PsDpadRight
+local config = {
+	ButtonA = IconModule.PsX,
+	ButtonB = IconModule.PsCircle,
+	ButtonX = IconModule.PsSquare,
+	ButtonY = IconModule.PsTriagle,
+	ButtonL1 = IconModule.PsL1,
+	ButtonL2 = IconModule.PsL2,
+	ButtonL3 = IconModule.PsL3,
+	ButtonR1 = IconModule.PsR1,
+	ButtonR2 = IconModule.PsR2,
+	ButtonR3 = IconModule.PsR3,
+	Thumbstick1 = IconModule.PsStickLeft,
+	Thumbstick2 = IconModule.PsStickRight,
+	DPadDown = IconModule.PsDpadDown,
+	DPadUp = IconModule.PsDpadUp,
+	DPadLeft = IconModule.PsDpadLeft,
+	DPadRight = IconModule.PsDpadRight
 }
-local t_1 = {}
-local pS4 = platformModule.PS4
+local KeycodeMappingsModule = {}
+local PS4 = PlatformModule.PS4
 
-for i, v in {
-	ButtonStart = iconModule.Ps4Options,
-	ButtonSelect = iconModule.Ps4Share
+for i, value in {
+	ButtonStart = IconModule.Ps4Options,
+	ButtonSelect = IconModule.Ps4Share
 } do
-	t[i] = v
+	config[i] = value
 end
-t_1[pS4] = t
-local pS5 = platformModule.PS5
+KeycodeMappingsModule[PS4] = config
+local PS5 = PlatformModule.PS5
 
-for i_1, v_1 in {
-	ButtonStart = iconModule.Ps5Options,
-	ButtonSelect = iconModule.Ps5Share
+for i1, value1 in {
+	ButtonStart = IconModule.Ps5Options,
+	ButtonSelect = IconModule.Ps5Share
 } do
-	t[i_1] = v_1
+	config[i1] = value1
 end
-t_1[pS5] = t
-t_1[platformModule.Xbox] = {
-	ButtonA = iconModule.XboxA,
-	ButtonB = iconModule.XboxB,
-	ButtonX = iconModule.XboxX,
-	ButtonY = iconModule.XboxY,
-	ButtonL1 = iconModule.XboxLb,
-	ButtonL2 = iconModule.XboxLt,
-	ButtonL3 = iconModule.XboxStickLeft,
-	ButtonR1 = iconModule.XboxRb,
-	ButtonR2 = iconModule.XboxRt,
-	ButtonR3 = iconModule.XboxStickRight,
-	ButtonStart = iconModule.XboxMenu,
-	ButtonSelect = iconModule.XboxView,
-	Thumbstick1 = iconModule.XboxStickLeftDirectional,
-	Thumbstick2 = iconModule.XboxStickRightDirectional,
-	DPadDown = iconModule.XboxDpadDown,
-	DPadUp = iconModule.XboxDpadUp,
-	DPadLeft = iconModule.XboxDpadLeft,
-	DPadRight = iconModule.XboxDpadRight
+KeycodeMappingsModule[PS5] = config
+KeycodeMappingsModule[PlatformModule.Xbox] = {
+	ButtonA = IconModule.XboxA,
+	ButtonB = IconModule.XboxB,
+	ButtonX = IconModule.XboxX,
+	ButtonY = IconModule.XboxY,
+	ButtonL1 = IconModule.XboxLb,
+	ButtonL2 = IconModule.XboxLt,
+	ButtonL3 = IconModule.XboxStickLeft,
+	ButtonR1 = IconModule.XboxRb,
+	ButtonR2 = IconModule.XboxRt,
+	ButtonR3 = IconModule.XboxStickRight,
+	ButtonStart = IconModule.XboxMenu,
+	ButtonSelect = IconModule.XboxView,
+	Thumbstick1 = IconModule.XboxStickLeftDirectional,
+	Thumbstick2 = IconModule.XboxStickRightDirectional,
+	DPadDown = IconModule.XboxDpadDown,
+	DPadUp = IconModule.XboxDpadUp,
+	DPadLeft = IconModule.XboxDpadLeft,
+	DPadRight = IconModule.XboxDpadRight
 }
-t_1[platformModule.Default] = {
-	LeftAlt = iconModule.KeyAlt,
-	RightAlt = iconModule.KeyAlt,
-	Down = iconModule.KeyArrowDown,
-	Up = iconModule.KeyArrowUp,
-	Left = iconModule.KeyArrowLeft,
-	Right = iconModule.KeyArrowRight,
-	Asterisk = iconModule.KeyAsterisk,
-	Backspace = iconModule.KeyBackspace,
-	CapsLock = iconModule.KeyCapsLock,
-	Caret = iconModule.KeyCaret,
-	Comma = iconModule.KeyComma,
-	LeftControl = iconModule.KeyControl,
-	RightControl = iconModule.KeyControl,
-	Backquote = iconModule.KeyGraveAccent,
-	Period = iconModule.KeyPeriod,
-	Return = iconModule.KeyReturn,
-	LeftShift = iconModule.KeyShift,
-	RightShift = iconModule.KeyShift,
-	Space = iconModule.KeySpace,
-	Tab = iconModule.KeyTab
+KeycodeMappingsModule[PlatformModule.Default] = {
+	LeftAlt = IconModule.KeyAlt,
+	RightAlt = IconModule.KeyAlt,
+	Down = IconModule.KeyArrowDown,
+	Up = IconModule.KeyArrowUp,
+	Left = IconModule.KeyArrowLeft,
+	Right = IconModule.KeyArrowRight,
+	Asterisk = IconModule.KeyAsterisk,
+	Backspace = IconModule.KeyBackspace,
+	CapsLock = IconModule.KeyCapsLock,
+	Caret = IconModule.KeyCaret,
+	Comma = IconModule.KeyComma,
+	LeftControl = IconModule.KeyControl,
+	RightControl = IconModule.KeyControl,
+	Backquote = IconModule.KeyGraveAccent,
+	Period = IconModule.KeyPeriod,
+	Return = IconModule.KeyReturn,
+	LeftShift = IconModule.KeyShift,
+	RightShift = IconModule.KeyShift,
+	Space = IconModule.KeySpace,
+	Tab = IconModule.KeyTab
 }
 
-return t_1
+return KeycodeMappingsModule

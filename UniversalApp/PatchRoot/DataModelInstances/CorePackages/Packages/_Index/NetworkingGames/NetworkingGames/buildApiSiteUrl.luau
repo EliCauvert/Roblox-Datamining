@@ -1,18 +1,18 @@
-﻿local contentProviderService = game:GetService("ContentProvider")
-local _, _, var1 = (function()
-	-- upvalues: contentProviderService (ref)
-	local baseUrl = contentProviderService.BaseUrl
+﻿local ContentProvider = game:GetService("ContentProvider")
+local _, _, v1 = (function() --[[ Line: 4 | Named "parseBaseUrlInformation" ]]
+	-- upvalues: ContentProvider (copy)
+	local BaseUrl = ContentProvider.BaseUrl
 	
-	if baseUrl:sub(#baseUrl) ~= "/" then
-		baseUrl ..= "/"
+	if BaseUrl:sub(#BaseUrl) ~= "/" then
+		BaseUrl ..= "/"
 	end
-	local _, var2 = baseUrl:find("://")
-	local var3, var4 = baseUrl:find("%.", var2 + 1)
+	local _, EndIndex = BaseUrl:find("://")
+	local StartIndex, EndIndex1 = BaseUrl:find("%.", EndIndex + 1)
 	
-	return baseUrl, baseUrl:sub(var2 + 1, var3 - 1), baseUrl:sub(var4 + 1)
+	return BaseUrl, BaseUrl:sub(EndIndex + 1, StartIndex - 1), (BaseUrl:sub(EndIndex1 + 1))
 end)()
 
-return function(p1)
-	-- upvalues: var1 (ref)
-	return string.format("https://%s.%s", p1, var1)
+return function(p1): string --[[ Line: 29 ]]
+	-- upvalues: v1 (copy)
+	return string.format("https://%s.%s", p1, v1)
 end

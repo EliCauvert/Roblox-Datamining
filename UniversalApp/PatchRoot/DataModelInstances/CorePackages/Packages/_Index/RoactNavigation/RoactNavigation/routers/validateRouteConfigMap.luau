@@ -1,22 +1,22 @@
-﻿local parent = script.Parent.Parent
-local invariantModule = require(parent.utils.invariant)
-local isValidScreenComponentModule = require(parent.utils.isValidScreenComponent)
+﻿local Parent = script.Parent.Parent
+local InvariantModule = require(Parent.utils.invariant)
+local IsValidScreenComponentModule = require(Parent.utils.isValidScreenComponent)
 
-local function _(p1)
+local function _(p1) --[[ Line: 6 | Named "getScreenComponent" ]]
 	return if p1 then if type(p1) == "table" and p1.screen then p1.screen else p1 else nil
 end
 
-return function(p1)
-	-- upvalues: invariantModule (ref), isValidScreenComponentModule (ref)
-	invariantModule(next(p1) ~= nil, "Please specify at least one route when configuring a navigator.")
+return function(List) --[[ Line: 36 ]]
+	-- upvalues: InvariantModule (copy), IsValidScreenComponentModule (copy)
+	InvariantModule(next(List) ~= nil, "Please specify at least one route when configuring a navigator.")
 	
-	for i, v in p1 do
-		local isTable = type(v) == "table"
-		invariantModule(isValidScreenComponentModule(if not v then if type(v) == "table" and v.screen then v.screen else v else nil) or isTable and type(v.getScreen) == "function", "The component for route '%s' must be a Roact component or table with 'getScreen'. For example:\n\nlocal MyScreen = require(script.Parent.MyScreen)\n...\n%s = MyScreen,\n}\n\nYou can also use a navigator:\n\nlocal MyNavigator = require(script.Parent.MyNavigator)\n...\n%s = MyNavigator,\n}", i, i, i)
+	for i, value in List do
+		local IsTable = type(value) == "table"
+		InvariantModule(IsValidScreenComponentModule(if value then if type(value) == "table" and value.screen then value.screen else value else nil) or IsTable and type(value.getScreen) == "function", "The component for route '%s' must be a Roact component or table with 'getScreen'. For example:\n\nlocal MyScreen = require(script.Parent.MyScreen)\n...\n%s = MyScreen,\n}\n\nYou can also use a navigator:\n\nlocal MyNavigator = require(script.Parent.MyNavigator)\n...\n%s = MyNavigator,\n}", i, i, i)
 		
-		if isTable then
-			invariantModule(if v.screen ~= nil then v.getScreen == nil else true, "Route '%s' should declare a screen or a getScreen, not both.", i)
+		if IsTable then
+			InvariantModule(value.screen == nil or value.getScreen == nil, "Route '%s' should declare a screen or a getScreen, not both.", i)
 		end
 	end
-	return p1
+	return List
 end

@@ -1,1 +1,1 @@
-﻿return require(script.HeaderBarActions)
+﻿return (require(script.HeaderBarActions))

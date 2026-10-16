@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("MarkdownCore").Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local map = dashModule.map
-local flagsModule = require(script:FindFirstAncestor("MarkdownCore").Flags)
-local view = foundationModule.View
-local image = foundationModule.Image
-local text = foundationModule.Text
-local flags = foundationModule.Utility.Flags
-local t = {
+﻿local Parent = script:FindFirstAncestor("MarkdownCore").Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local MapFunction = DashModule.map
+local FlagsModule = require(script:FindFirstAncestor("MarkdownCore").Flags)
+local View = FoundationModule.View
+local Image = FoundationModule.Image
+local Text = FoundationModule.Text
+local Flags = FoundationModule.Utility.Flags
+local Label = {
 	ItemOffset = 12,
 	MarkerImage = "rbxasset://textures/StudioSharedUI/dot.png",
 	MarkerSize = 4,
@@ -21,130 +21,127 @@ local t = {
 	SubItemStyle = { ItemIndentation = 20, ItemOffset = 12 }
 }
 
-local function _(value, p1)
-	return p1 + value
+local function _(p1, p2) --[[ Line: 61 | Named "calculateItemOffset" ]]
+	return p2 + p1
 end
 
-local _ = function(p1)
+local _ = function(p1: string): boolean --[[ Line: 102 | Named "isOrdered" ]]
 	return p1 and (not p1:find("^*") and not p1:find("^-"))
 end
 
-return function(p1)
-	-- upvalues: foundationModule (ref), t (ref), flagsModule (ref), map (ref), reactModule (ref), text (ref), flags (ref), view (ref), image (ref), dashModule (ref)
-	local font, textSize, textColor, var1
-	local var2 = foundationModule.Hooks.useTokens()
-	local textWrapped = p1.TextWrapped
-	local textTruncate = p1.TextTruncate
-	local listStyle = p1.ListStyle or t
-	local items = p1.Items
-	local itemIndentation = listStyle.ItemIndentation or t.ItemIndentation
-	local uDim2 = UDim2.new(1, -((listStyle.MarkerSize or t.MarkerSize) + var2.Gap.Small), 0, 0)
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
+return function(Frame) --[[ Line: 106 | Named "BulletList" ]]
+	-- upvalues: FoundationModule (copy), Label (copy), FlagsModule (copy), MapFunction (copy), ReactModule (copy), Text (copy), Flags (copy), View (copy), Image (copy), DashModule (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local TextWrapped = Frame.TextWrapped
+	local TextTruncate = Frame.TextTruncate
+	local ListStyle = Frame.ListStyle or Label
+	local Items = Frame.Items
+	local ItemIndentation = ListStyle.ItemIndentation or Label.ItemIndentation
+	local _UDim2 = UDim2.new(1, -((ListStyle.MarkerSize or Label.MarkerSize) + UseTokensResult.Gap.Small), 0, 0)
+	local _Font = nil
+	local TextSize = nil
+	local TextColor = nil
+	local LineHeight = nil
 	
-	if flagsModule.FFlagMarkdownAssistantParity then
-		local bodyMedium = var2.Typography.BodyMedium
-		font = listStyle.Font or bodyMedium.Font
-		textSize = listStyle.TextSize or bodyMedium.FontSize
-		textColor = listStyle.TextColor or var2.Color.Content.Default.Color3
-		var1 = listStyle.LineHeight or textSize * bodyMedium.LineHeight
+	if FlagsModule.FFlagMarkdownAssistantParity then
+		local BodyMedium = UseTokensResult.Typography.BodyMedium
+		_Font = ListStyle.Font or BodyMedium.Font
+		TextSize = ListStyle.TextSize or BodyMedium.FontSize
+		TextColor = ListStyle.TextColor or UseTokensResult.Color.Content.Default.Color3
+		LineHeight = ListStyle.LineHeight or TextSize * BodyMedium.LineHeight
 	else
-		font = listStyle.Font or t.Font
-		textSize = listStyle.TextSize or t.TextSize
-		textColor = listStyle.TextColor or t.TextColor
-		var1 = listStyle.LineHeight or t.LineHeight
+		_Font = ListStyle.Font or Label.Font
+		TextSize = ListStyle.TextSize or Label.TextSize
+		TextColor = ListStyle.TextColor or Label.TextColor
+		LineHeight = ListStyle.LineHeight or Label.LineHeight
 	end
-	local size = p1.Size
+	local Size = Frame.Size
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		testId = "--markdown--bullet-list",
 		tag = "col align-x-left gap-xsmall",
-		AutomaticSize = if size and (size.X.Scale > 0 or size.X.Offset > 0) then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
+		AutomaticSize = if Size and (Size.X.Scale > 0 or Size.X.Offset > 0) then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 		backgroundStyle = { Transparency = 1 },
-		LayoutOrder = p1.LayoutOrder or 1,
-		Position = p1.Position,
-		Size = size
-	}, dashModule.assign(map(items, function(p2, p3)
-		-- upvalues: itemIndentation (ref), listStyle (ref), t (copy), reactModule (copy), text (copy), flags (copy), font (write), textSize (write), uDim2 (ref), textColor (write), textTruncate (ref), textWrapped (ref), view (copy), var1 (write), image (copy)
-		local var3
-		local _ = nil
-		local var4 = itemIndentation
-		local var5 = listStyle.MarkerImage or t.MarkerImage
+		LayoutOrder = Frame.LayoutOrder or 1,
+		Position = Frame.Position,
+		Size = Size
+	}, DashModule.assign(MapFunction(Items, function(ContentElement, LayoutOrder) --[[ Line: 134 ]]
+		-- upvalues: ItemIndentation (copy), ListStyle (copy), Label (upval), ReactModule (upval), Text (upval), Flags (upval), _Font (ref), TextSize (ref), _UDim2 (copy), TextColor (ref), TextTruncate (copy), TextWrapped (copy), View (upval), LineHeight (ref), Image (upval)
+		local MarkerImage = ListStyle.MarkerImage or Label.MarkerImage
 		local UIPadding = nil
-		local prefix = nil
+		local Prefix = nil
+		local Element = nil
 		
-		if type(p2) == "string" then
-			var3 = reactModule.createElement(text, {
+		if type(ContentElement) == "string" then
+			Element = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Font = if flags.FoundationFontFaceMigration then nil else font,
-				fontStyle = if flags.FoundationFontFaceMigration then { Font = font, FontSize = textSize } else nil,
-				Size = uDim2,
-				Text = p2,
-				TextColor = if flags.FoundationFontFaceMigration then nil else textColor,
-				textStyle = if flags.FoundationFontFaceMigration then { Color3 = textColor } else nil,
-				TextSize = if flags.FoundationFontFaceMigration then nil else textSize,
-				TextTruncate = textTruncate,
-				TextWrapped = textWrapped,
-				Padding = listStyle.Padding or t.Padding,
+				Font = if Flags.FoundationFontFaceMigration then nil else _Font,
+				fontStyle = if Flags.FoundationFontFaceMigration then { Font = _Font, FontSize = TextSize } else nil,
+				Size = _UDim2,
+				Text = ContentElement,
+				TextColor = if Flags.FoundationFontFaceMigration then nil else TextColor,
+				textStyle = if Flags.FoundationFontFaceMigration then { Color3 = TextColor } else nil,
+				TextSize = if Flags.FoundationFontFaceMigration then nil else TextSize,
+				TextTruncate = TextTruncate,
+				TextWrapped = TextWrapped,
+				Padding = ListStyle.Padding or Label.Padding,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})
-		elseif typeof(p2) == "table" and p2.Text then
-			prefix = p2.Prefix
-			local subItemStyle = listStyle.SubItemStyle
-			local uDim2_1 = UDim2.new(1, -subItemStyle.ItemOffset or t.SubItemStyle.ItemOffset, 0, 0)
-			var4 = subItemStyle.ItemIndentation or var4
-			var5 = subItemStyle.MarkerStyle or var5
+		elseif typeof(ContentElement) == "table" and ContentElement.Text then
+			Prefix = ContentElement.Prefix
+			local SubItemStyle = ListStyle.SubItemStyle
+			local _UDim2_1 = UDim2.new(1, -SubItemStyle.ItemOffset or Label.SubItemStyle.ItemOffset, 0, 0)
+			local ItemIndentation1 = SubItemStyle.ItemIndentation or ItemIndentation
+			MarkerImage = SubItemStyle.MarkerStyle or MarkerImage
 			
-			if var4 then
-				UIPadding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, var4) })
+			if ItemIndentation1 then
+				UIPadding = ReactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, ItemIndentation1) })
 			end
-			var3 = reactModule.createElement(text, {
+			Element = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Size = uDim2_1,
-				textStyle = { Color3 = textColor },
-				FontStyle = if flags.FoundationFontFaceMigration then nil else { Font = font, FontSize = textSize },
-				fontStyle = if flags.FoundationFontFaceMigration then { Font = font, FontSize = textSize } else nil,
-				Text = p2.Text,
-				TextWrapped = textWrapped,
-				TextTruncate = textTruncate,
+				Size = _UDim2_1,
+				textStyle = { Color3 = TextColor },
+				FontStyle = if Flags.FoundationFontFaceMigration then nil else { Font = _Font, FontSize = TextSize },
+				fontStyle = if Flags.FoundationFontFaceMigration then { Font = _Font, FontSize = TextSize } else nil,
+				Text = ContentElement.Text,
+				TextWrapped = TextWrapped,
+				TextTruncate = TextTruncate,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})
-		elseif typeof(p2) == "table" and p2.Item then
-			prefix = p2.Prefix
-			var3 = reactModule.createElement(view, { tag = "auto-y", LayoutOrder = 2, Size = uDim2 }, { ContentElement = p2.Item })
+		elseif typeof(ContentElement) == "table" and ContentElement.Item then
+			Prefix = ContentElement.Prefix
+			Element = ReactModule.createElement(View, { tag = "auto-y", LayoutOrder = 2, Size = _UDim2 }, { ContentElement = ContentElement.Item })
 		else
-			var3 = reactModule.createElement(view, { tag = "auto-y", LayoutOrder = 2, Size = uDim2 }, { ContentElement = p2 })
+			Element = ReactModule.createElement(View, { tag = "auto-y", LayoutOrder = 2, Size = _UDim2 }, { ContentElement = ContentElement })
 		end
-		return reactModule.createElement(view, {
+		return ReactModule.createElement(View, {
 			testId = "--markdown--bullet-list-item",
 			tag = "gap-xsmall auto-xy row align-x-left align-y-top",
-			key = tostring(p3),
-			LayoutOrder = p3
+			key = tostring(LayoutOrder),
+			LayoutOrder = LayoutOrder
 		}, {
-			Marker = reactModule.createElement(view, {
+			Marker = ReactModule.createElement(View, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(listStyle.MarkerSize or t.MarkerSize, var1)
+				Size = UDim2.fromOffset(ListStyle.MarkerSize or Label.MarkerSize, LineHeight)
 			}, {
-				Image = if prefix and (not prefix:find("^*") and not prefix:find("^-")) then reactModule.createElement(text, {
+				Image = if Prefix and (not Prefix:find("^*") and not Prefix:find("^-")) then ReactModule.createElement(Text, {
 					tag = "position-center-left anchor-center-left",
-					Text = `{prefix}.`,
-					fontStyle = { Font = font, FontSize = textSize },
-					textStyle = { Color3 = textColor },
-					Size = UDim2.fromOffset(listStyle.MarkerSize or t.MarkerSize, listStyle.MarkerSize or t.MarkerSize)
-				}) else reactModule.createElement(image, {
+					Text = `{Prefix}.`,
+					fontStyle = { Font = _Font, FontSize = TextSize },
+					textStyle = { Color3 = TextColor },
+					Size = UDim2.fromOffset(ListStyle.MarkerSize or Label.MarkerSize, ListStyle.MarkerSize or Label.MarkerSize)
+				}) else ReactModule.createElement(Image, {
 					tag = "position-center-left anchor-center-left",
 					LayoutOrder = 1,
-					Image = var5,
-					imageStyle = { Color3 = textColor },
-					Size = UDim2.fromOffset(listStyle.MarkerSize or t.MarkerSize, listStyle.MarkerSize or t.MarkerSize)
+					Image = MarkerImage,
+					imageStyle = { Color3 = TextColor },
+					Size = UDim2.fromOffset(ListStyle.MarkerSize or Label.MarkerSize, ListStyle.MarkerSize or Label.MarkerSize)
 				})
 			}),
-			Content = var3,
+			Content = Element,
 			Padding = UIPadding
 		})
-	end), p1.children or {}))
+	end), Frame.children or {}))
 end

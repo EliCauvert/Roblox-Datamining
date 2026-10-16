@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("ViewRecyclerRoblox").Parent
-local dev = parent:FindFirstChild("Dev")
+﻿local Parent = script:FindFirstAncestor("ViewRecyclerRoblox").Parent
+local Dev = Parent:FindFirstChild("Dev")
 
-if dev == nil then
-	local packages = game:GetService("CorePackages").Packages
-	dev = packages.Dev
-	parent = packages
+if Dev == nil then
+	local Packages = game:GetService("CorePackages").Packages
+	Dev = Packages.Dev
+	Parent = Packages
 end
 return {
-	JestGlobals = require(dev.JestGlobals),
-	ReactRoblox = require(parent:FindFirstChild("ReactRoblox") or dev.ReactRoblox)
+	JestGlobals = require(Dev.JestGlobals),
+	ReactRoblox = require(Parent:FindFirstChild("ReactRoblox") or Dev.ReactRoblox)
 }

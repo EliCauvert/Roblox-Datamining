@@ -1,25 +1,25 @@
-﻿local roactModule = require(script.Parent.Parent.Roact)
+﻿local RoactModule = require(script.Parent.Parent.Roact)
 
-return function()
-	-- upvalues: roactModule (ref)
-	local t = {}
-	setmetatable(t, {
-		__index = function(_, p1)
-			-- upvalues: roactModule (copy), t (ref)
-			local var1 = roactModule.createRef()
-			t[p1] = var1
+return function() --[[ Line: 10 | Named "createRefCache" ]]
+	-- upvalues: RoactModule (copy)
+	local Refs = {}
+	setmetatable(Refs, {
+		__index = function(_, Key) --[[ Line: 14 ]]
+			-- upvalues: RoactModule (upval), Refs (copy)
+			local Ref = RoactModule.createRef()
+			Refs[Key] = Ref
 			
-			return var1
+			return Ref
 		end,
-		__tostring = function(p1)
-			local var1 = "{"
+		__tostring = function(List): string --[[ Line: 20 ]]
+			local Message = "{"
 			
-			for i, v in pairs(p1) do
-				var1 = ("%s\n\t%s -> %s"):format(var1, tostring(i), tostring(v))
+			for i, value in pairs(List) do
+				Message = ("%s\n\t%s -> %s"):format(Message, tostring(i), (tostring(value)))
 			end
-			return var1 .. "\n}"
+			return Message .. "\n}"
 		end
 	})
 	
-	return t
+	return Refs
 end

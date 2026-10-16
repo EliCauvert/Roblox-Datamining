@@ -1,26 +1,26 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roduxModule = require(parent_1.Rodux)
-local llamaModule = require(parent_1.llama)
-local _ = require(parent.roduxFriendsTypes)
-local friendRequestCreatedModule = require(parent.Actions.FriendRequestCreated)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoduxModule = require(Parent1.Rodux)
+local LlamaModule = require(Parent1.llama)
+local _ = require(Parent.roduxFriendsTypes)
+local FriendRequestCreatedModule = require(Parent.Actions.FriendRequestCreated)
 local t = {}
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref), llamaModule (ref), friendRequestCreatedModule (ref)
-	return roduxModule.createReducer(t, {
-		[p1.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3)
-			-- upvalues: llamaModule (copy)
-			local t = {}
+return function(p1) --[[ Line: 16 ]]
+	-- upvalues: RoduxModule (copy), t (copy), LlamaModule (copy), FriendRequestCreatedModule (copy)
+	return RoduxModule.createReducer(t, {
+		[p1.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3) --[[ Line: 20 ]]
+			-- upvalues: LlamaModule (upval)
+			local ContactNames = {}
 			
-			for i, v in pairs(p3.responseBody.data) do
-				t[tostring(v.id)] = v.friendRequest.contactName
+			for _, entry in pairs(p3.responseBody.data) do
+				ContactNames[tostring(entry.id)] = entry.friendRequest.contactName
 			end
-			return llamaModule.Dictionary.join(p2, t)
+			return LlamaModule.Dictionary.join(p2, ContactNames)
 		end,
-		[friendRequestCreatedModule.name] = function(p4, p5)
-			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p4, { [tostring(p5.requesteeId)] = p5.contactName })
+		[FriendRequestCreatedModule.name] = function(p4, p5) --[[ Line: 31 ]]
+			-- upvalues: LlamaModule (upval)
+			return LlamaModule.Dictionary.join(p4, { [tostring(p5.requesteeId)] = p5.contactName })
 		end
 	})
 end

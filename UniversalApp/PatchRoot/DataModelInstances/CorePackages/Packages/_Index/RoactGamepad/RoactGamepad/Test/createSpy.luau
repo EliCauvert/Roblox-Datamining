@@ -1,48 +1,46 @@
-﻿return function(p1)
-	local t = { callCount = 0, valuesLength = 0, values = {} }
+﻿return function(Callback) --[[ Line: 8 | Named "createSpy" ]]
+	local config = { callCount = 0, valuesLength = 0, values = {} }
 	
-	function t.value(...)
-		-- upvalues: t (ref), p1 (ref)
-		t.callCount += 1
-		t.values = { ... }
-		t.valuesLength = select("#", ...)
+	function config.value(...) --[[ Line: 15 ]]
+		-- upvalues: config (copy), Callback (copy)
+		config.callCount += 1
+		config.values = { ... }
+		config.valuesLength = select("#", ...)
 		
-		if p1 == nil then
-			return
-		end
-		return p1(...)
+		if Callback == nil then return end
+		return Callback(...)
 	end
 	
-	function t.assertCalledWith(_, ...)
-		-- upvalues: t (ref)
-		local var1 = select("#", ...)
+	function config:assertCalledWith(...) --[[ Line: 27 ]]
+		-- upvalues: config (copy)
+		local Selected = select("#", ...)
 		
-		if t.valuesLength ~= var1 then
-			error(("Expected %d arguments, but was called with %d arguments"):format(t.valuesLength, var1), 2)
+		if config.valuesLength ~= Selected then
+			error(("Expected %d arguments, but was called with %d arguments"):format(config.valuesLength, Selected), 2)
 		end
-		for i = 1, var1 do
-			local var2 = select(i, ...)
-			assert(t.values[i] == var2, "value differs; got " .. tostring(t.values[i]) .. ", expected " .. tostring(var2))
+		for i = 1, Selected do
+			local Selected1 = select(i, ...)
+			assert(config.values[i] == Selected1, "value differs; got " .. tostring(config.values[i]) .. ", expected " .. tostring(Selected1))
 		end
 	end
 	
-	function t.captureValues(_, ...)
-		-- upvalues: t (ref)
-		local var3 = select("#", ...)
-		local t_1 = {}
-		assert(t.valuesLength == var3, "length of expected values differs from stored values")
+	function config:captureValues(...) --[[ Line: 44 ]]
+		-- upvalues: config (copy)
+		local Selected = select("#", ...)
+		local t = {}
+		assert(config.valuesLength == Selected, "length of expected values differs from stored values")
 		
-		for i = 1, var3 do
-			t_1[select(i, ...)] = t.values[i]
+		for i = 1, Selected do
+			t[select(i, ...)] = config.values[i]
 		end
-		return t_1
+		return t
 	end
 	
-	setmetatable(t, {
-		__index = function(_, p2)
-			error(("%q is not a valid member of spy"):format(p2))
+	setmetatable(config, {
+		__index = function(_, p1) --[[ Line: 59 ]]
+			error(("%q is not a valid member of spy"):format(p1))
 		end
 	})
 	
-	return t
+	return config
 end

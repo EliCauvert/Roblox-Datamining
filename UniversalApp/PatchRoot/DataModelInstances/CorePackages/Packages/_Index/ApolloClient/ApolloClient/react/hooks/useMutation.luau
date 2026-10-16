@@ -1,50 +1,49 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local object = require(parent_1.LuauPolyfill).Object
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Object = require(Parent1.LuauPolyfill).Object
 local _ = require(script.Parent.Parent.Parent.core)
-local reactModule = require(parent_1.React)
-local useContext = reactModule.useContext
-local useState = reactModule.useState
-local useRef = reactModule.useRef
-local useEffect = reactModule.useEffect
-local _ = require(parent_1.GraphQL)
-local _ = require(parent.jsutils.typedDocumentNode)
+local ReactModule = require(Parent1.React)
+local UseContextFunction = ReactModule.useContext
+local UseStateFunction = ReactModule.useState
+local UseRefFunction = ReactModule.useRef
+local UseEffectFunction = ReactModule.useEffect
+local _ = require(Parent1.GraphQL)
+local _ = require(Parent.jsutils.typedDocumentNode)
 local _ = require(script.Parent.Parent.types.types)
-local mutationData = require(script.Parent.Parent.data).MutationData
-local getApolloContext = require(script.Parent.Parent.context).getApolloContext
+local MutationData = require(script.Parent.Parent.data).MutationData
+local GetApolloContextFunction = require(script.Parent.Parent.context).getApolloContext
 
-function t.useMutation(p1, p2)
-	-- upvalues: useContext (ref), getApolloContext (ref), useState (ref), object (ref), useRef (ref), mutationData (ref), useEffect (ref)
-	local var1 = useContext(getApolloContext())
-	local var2, var3 = useState({ called = false, loading = false })
-	local var4 = if p2 then object.assign({}, p2, { mutation = p1 }) else { mutation = p1 }
-	local var5 = useRef(nil)
-	local var6 = (function()
-		-- upvalues: var5 (ref), mutationData (copy), var4 (ref), var1 (ref), var2 (ref), var3 (ref)
-		if not var5.current then
-			var5.current = mutationData.new({
-				options = var4,
-				context = var1,
-				result = var2,
-				setResult = function(_, p3)
-					-- upvalues: var3 (copy)
-					var3(p3)
-					
-					return nil
-				end
-			})
-		end
-		return var5.current
-	end)()
-	var6:setOptions(var4)
-	var6.context = var1
-	useEffect(function()
-		-- upvalues: var6 (ref)
-		return var6:afterExecute()
-	end)
-	
-	return var6:execute(var2)
-end
-
-return t
+return {
+	useMutation = function(Mutation, p1) --[[ Line: 40 ]]
+		-- upvalues: UseContextFunction (copy), GetApolloContextFunction (copy), UseStateFunction (copy), Object (copy), UseRefFunction (copy), MutationData (copy), UseEffectFunction (copy)
+		local UseContextResult = UseContextFunction(GetApolloContextFunction())
+		local UseStateResult, UseStateResult2 = UseStateFunction({ called = false, loading = false })
+		local AssignResult = if p1 then Object.assign({}, p1, { mutation = Mutation }) else { mutation = Mutation }
+		local UseRefResult = UseRefFunction(nil)
+		local v1 = (function() --[[ Line: 52 | Named "getMutationDataRef" ]]
+			-- upvalues: UseRefResult (copy), MutationData (upval), AssignResult (copy), UseContextResult (copy), UseStateResult (copy), UseStateResult2 (copy)
+			if not UseRefResult.current then
+				UseRefResult.current = MutationData.new({
+					options = AssignResult,
+					context = UseContextResult,
+					result = UseStateResult,
+					setResult = function(_, p2) --[[ Line: 58 ]]
+						-- upvalues: UseStateResult2 (upval)
+						UseStateResult2(p2)
+						
+						return nil
+					end
+				})
+			end
+			return UseRefResult.current
+		end)()
+		v1:setOptions(AssignResult)
+		v1.context = UseContextResult
+		UseEffectFunction(function() --[[ Line: 72 ]]
+			-- upvalues: v1 (copy)
+			return v1:afterExecute()
+		end)
+		
+		return v1:execute(UseStateResult)
+	end
+}

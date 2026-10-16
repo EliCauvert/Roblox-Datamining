@@ -1,55 +1,60 @@
-﻿local parent = script.Parent.Parent
-local language = parent.language
-local string = require(parent.Parent.LuauPolyfill).String
-local sourceModule = require(language.source)
-local source = sourceModule.Source
-local isSource = sourceModule.isSource
-local tokenKind = require(language.tokenKind).TokenKind
-local lexerModule = require(language.lexer)
-local lexer = lexerModule.Lexer
-local isPunctuatorTokenKind = lexerModule.isPunctuatorTokenKind
-local blockStringModule = require(language.blockString)
-local dedentBlockStringValue = blockStringModule.dedentBlockStringValue
-local getBlockStringIndentation = blockStringModule.getBlockStringIndentation
-local dedentBlockString = nil
+﻿local Parent = script.Parent.Parent
+local Language = Parent.language
+local String = require(Parent.Parent.LuauPolyfill).String
+local SourceModule = require(Language.source)
+local Source = SourceModule.Source
+local IsSourceFunction = SourceModule.isSource
+local TokenKind = require(Language.tokenKind).TokenKind
+local LexerModule = require(Language.lexer)
+local Lexer = LexerModule.Lexer
+local IsPunctuatorTokenKindFunction = LexerModule.isPunctuatorTokenKind
+local BlockStringModule = require(Language.blockString)
+local DedentBlockStringValueFunction = BlockStringModule.dedentBlockStringValue
+local GetBlockStringIndentationFunction = BlockStringModule.getBlockStringIndentation
+local Callback = nil
 
-local function stripIgnoredCharacters(p1)
-	-- upvalues: isSource (ref), source (ref), lexer (ref), tokenKind (ref), isPunctuatorTokenKind (ref), string (ref), dedentBlockString (write)
-	local var1 = if isSource(p1) then p1 else source.new(p1)
-	local body = var1.body
-	local var2 = lexer.new(var1)
-	local var3 = ""
-	local var4 = false
-	while var2:advance().kind ~= tokenKind.EOF do
-		local token = var2.token
-		local kind = token.kind
-		local var5 = not isPunctuatorTokenKind(token.kind)
+local function stripIgnoredCharacters(p1): string --[[ Line: 81 ]]
+	-- upvalues: IsSourceFunction (copy), Source (copy), Lexer (copy), TokenKind (copy), IsPunctuatorTokenKindFunction (copy), String (copy), Callback (ref)
+	local NewSource = if IsSourceFunction(p1) then p1 else Source.new(p1)
+	local Body = NewSource.body
+	local NewLexer = Lexer.new(NewSource)
+	local Text = ""
+	local v1 = false
+	while NewLexer:advance().kind ~= TokenKind.EOF do
+		local Token = NewLexer.token
+		local Kind = Token.kind
+		local Inverted = not IsPunctuatorTokenKindFunction(Token.kind)
 		
-		if var4 and (var5 or token.kind == tokenKind.SPREAD) then
-			var3 ..= " "
+		if v1 and (Inverted or Token.kind == TokenKind.SPREAD) then
+			Text ..= " "
 		end
-		local var6 = string.slice(body, token.start, token._end)
-		var3 = if kind == tokenKind.BLOCK_STRING then var3 .. dedentBlockString(var6) else var3 .. var10
-		var4 = var5
+		local SliceResult = String.slice(Body, Token.start, Token._end)
+		
+		if Kind == TokenKind.BLOCK_STRING then
+			Text ..= Callback(SliceResult)
+		else
+			Text ..= SliceResult
+		end
+		v1 = Inverted
 	end
-	return var3
+	return Text
 end
 
-dedentBlockString = function(p2)
-	-- upvalues: string (ref), dedentBlockStringValue (ref), getBlockStringIndentation (ref)
-	local var7 = dedentBlockStringValue(string.slice(p2, 4, -3))
+Callback = function(SliceResult): string --[[ Line: 118 | Named "dedentBlockString" ]]
+	-- upvalues: String (copy), DedentBlockStringValueFunction (copy), GetBlockStringIndentationFunction (copy)
+	local DedentBlockStringValueResult = DedentBlockStringValueFunction((String.slice(SliceResult, 4, -3)))
 	
-	if getBlockStringIndentation(var7) > 0 then
-		var7 = "\n" .. var11
+	if GetBlockStringIndentationFunction(DedentBlockStringValueResult) > 0 then
+		DedentBlockStringValueResult = "\n" .. DedentBlockStringValueResult
 	end
-	local charCount = utf8.len(var7)
-	assert(charCount ~= nil, "invalid utf8 detected: " .. var11)
-	local var8 = string.slice(var7, charCount)
+	local Length = utf8.len(DedentBlockStringValueResult)
+	assert(Length ~= nil, "invalid utf8 detected: " .. DedentBlockStringValueResult)
+	local SliceResult1 = String.slice(DedentBlockStringValueResult, Length)
 	
-	if (var8 == "\"" and string.slice(var7, -4) ~= "\\\"\"\"") or var8 == "\\" then
-		var7 ..= "\n"
+	if SliceResult1 == "\"" and String.slice(DedentBlockStringValueResult, -4) ~= "\\\"\"\"" or SliceResult1 == "\\" then
+		DedentBlockStringValueResult ..= "\n"
 	end
-	return "\"\"\"" .. var11 .. "\"\"\""
+	return "\"\"\"" .. DedentBlockStringValueResult .. "\"\"\""
 end
 
 return { stripIgnoredCharacters = stripIgnoredCharacters }

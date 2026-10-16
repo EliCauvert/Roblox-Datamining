@@ -1,1 +1,1 @@
-﻿return require(script.SignalsScheduler)
+﻿return (require(script.SignalsScheduler))

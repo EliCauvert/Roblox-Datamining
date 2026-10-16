@@ -1,289 +1,293 @@
-﻿local diagnosticsModule = require(script:FindFirstAncestor("ViewRecycler").Core.Diagnostics)
-local frozen = table.freeze({})
+﻿local DiagnosticsModule = require(script:FindFirstAncestor("ViewRecycler").Core.Diagnostics)
+local Frozen = table.freeze({})
 
-local function _(a)
-	return if a ~= nil then a >= 0 and a % 1 == 0 else true
+local function _(p1: number): boolean --[[ Line: 65 | Named "validMaximum" ]]
+	return p1 == nil or p1 >= 0 and p1 % 1 == 0
 end
 
-local _ = function(p1, p2, p3, p4, p5, p6)
-	table.insert(p1, {
+local _ = function(List, p1, p2, p3, p4, p5) --[[ Line: 69 | Named "appendChange" ]]
+	table.insert(List, {
+		p1,
 		p2,
 		p3,
 		p4,
-		p5,
-		p6
+		p5
 	})
 end
 
-return function(p1)
-	-- upvalues: frozen (ref), diagnosticsModule (ref)
-	local maxPoolSize = p1.maxPoolSize
-	assert(if maxPoolSize ~= nil then maxPoolSize >= 0 and maxPoolSize % 1 == 0 else true, "RecyclingScope: maxPoolSize must be a non-negative integer")
-	local adapter = p1.adapter
-	local maxPoolSize_1 = p1.maxPoolSize
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	local var1 = 1
-	local var2 = 1
-	local var3 = false
-	local var4 = false
-	local batch = adapter.batch or function(p2)
-		p2()
+return function(p1) --[[ Line: 73 | Named "createRecyclingScope" ]]
+	-- upvalues: Frozen (copy), DiagnosticsModule (copy)
+	local MaxPoolSize: number = p1.maxPoolSize
+	local MaxPoolSize1: boolean = MaxPoolSize == nil or MaxPoolSize >= 0 and MaxPoolSize % 1 == 0
+	assert(MaxPoolSize1, "RecyclingScope: maxPoolSize must be a non-negative integer")
+	local Adapter = p1.adapter
+	MaxPoolSize1 = p1.maxPoolSize
+	local Tbl = {}
+	local Tbl1 = {}
+	local Tbl2 = {}
+	local Count = 1
+	local Count1 = 1
+	local Flag = false
+	local Flag1 = false
+	local Batch = Adapter.batch or function(Callback: () -> ()) --[[ Line: 84 ]]
+		Callback()
 	end
 	
-	local function poolFor(p2)
-		-- upvalues: t (ref)
-		local var5 = t[p2]
+	local function poolFor(ViewType) --[[ Line: 88 ]]
+		-- upvalues: Tbl (copy)
+		local Entry = Tbl[ViewType]
 		
-		if var5 == nil then
-			var5 = { first = 1, last = 0, viewType = p2, items = {} }
-			t[p2] = var5
+		if Entry == nil then
+			Entry = { first = 1, last = 0, viewType = ViewType, items = {} }
+			Tbl[ViewType] = Entry
 		end
-		return var5
+		return Entry
 	end
 	
-	local function _(p2)
-		-- upvalues: t_1 (ref), t_2 (ref)
-		local var5 = t_1[p2]
-		local t_2Count = #t_2
-		local var6 = t_2[t_2Count]
+	local function _(Key) --[[ Line: 97 | Named "removeInventory" ]]
+		-- upvalues: Tbl1 (copy), Tbl2 (copy)
+		local Entry = Tbl1[Key]
+		local CountTbl2 = #Tbl2
+		local Entry1 = Tbl2[CountTbl2]
 		
-		if var5.inventoryIndex ~= t_2Count then
-			t_2[var5.inventoryIndex] = var6
-			t_1[var6].inventoryIndex = var5.inventoryIndex
+		if Entry.inventoryIndex ~= CountTbl2 then
+			Tbl2[Entry.inventoryIndex] = Entry1
+			Tbl1[Entry1].inventoryIndex = Entry.inventoryIndex
 		end
-		t_2[t_2Count] = nil
-		t_1[p2] = nil
+		Tbl2[CountTbl2] = nil
+		Tbl1[Key] = nil
 	end
 	
-	local function notify(p2, p3, p4, p5, p6)
-		-- upvalues: p1 (ref)
+	local function notify(Action, ViewType, OccupiedDelta, VacantDelta, TotalDelta) --[[ Line: 110 ]]
+		-- upvalues: p1 (copy)
 		if p1.onPoolChanged ~= nil then
 			p1.onPoolChanged({
-				action = p2,
-				viewType = p3,
-				occupiedDelta = p4,
-				vacantDelta = p5,
-				totalDelta = p6
+				action = Action,
+				viewType = ViewType,
+				occupiedDelta = OccupiedDelta,
+				vacantDelta = VacantDelta,
+				totalDelta = TotalDelta
 			})
 		end
 	end
 	
-	local function evictExcess()
-		-- upvalues: t (ref), maxPoolSize_1 (write), t_1 (ref), t_2 (ref), diagnosticsModule (copy), p1 (ref), adapter (ref)
-		local t_3 = {}
-		local t_4 = {}
+	local function evictExcess() --[[ Line: 314 ]]
+		-- upvalues: Tbl (copy), MaxPoolSize1 (ref), Tbl1 (copy), Tbl2 (copy), DiagnosticsModule (upval), p1 (copy), Adapter (copy)
+		local Items = {}
+		local List = {}
 		
-		for i, v in t do
-			while maxPoolSize_1 ~= nil and maxPoolSize_1 < v.last - v.first + 1 do
-				local first = v.items[v.first]
-				v.items[v.first] = nil
-				v.first += 1
-				local var5 = t_1[first]
-				local t_2Count = #t_2
-				local var6 = t_2[t_2Count]
+		for _, value in Tbl do
+			while MaxPoolSize1 ~= nil and MaxPoolSize1 < value.last - value.first + 1 do
+				local Item = value.items[value.first]
+				value.items[value.first] = nil
+				value.first += 1
+				local Entry = Tbl1[Item]
+				local CountTbl2 = #Tbl2
+				local Entry1 = Tbl2[CountTbl2]
 				
-				if var5.inventoryIndex ~= t_2Count then
-					t_2[var5.inventoryIndex] = var6
-					t_1[var6].inventoryIndex = var5.inventoryIndex
+				if Entry.inventoryIndex ~= CountTbl2 then
+					Tbl2[Entry.inventoryIndex] = Entry1
+					Tbl1[Entry1].inventoryIndex = Entry.inventoryIndex
 				end
-				t_2[t_2Count] = nil
-				t_1[first] = nil
-				table.insert(t_3, first)
-				table.insert(t_4, { v.viewType })
+				Tbl2[CountTbl2] = nil
+				Tbl1[Item] = nil
+				table.insert(Items, Item)
+				table.insert(List, { value.viewType })
 			end
 		end
-		for i, v_1 in t_4 do
-			local evict = diagnosticsModule.PoolAction.Evict
-			local var7 = v_1[1]
+		for _, value1 in List do
+			local Evict = DiagnosticsModule.PoolAction.Evict
+			local ViewType = value1[1]
 			
 			if p1.onPoolChanged ~= nil then
 				p1.onPoolChanged({
 					occupiedDelta = 0,
 					vacantDelta = -1,
 					totalDelta = -1,
-					action = evict,
-					viewType = var7
+					action = Evict,
+					viewType = ViewType
 				})
 			end
 		end
-		for i, v_2 in t_3 do
-			adapter.destroy(v_2)
+		for _, item in Items do
+			Adapter.destroy(item)
 		end
 	end
 	
 	return {
-		exchange = function(p2, p3, p4)
-			-- upvalues: var3 (write), var4 (write), var2 (write), t_1 (ref), p1 (ref), frozen (copy), t (ref), maxPoolSize_1 (write), t_2 (ref), batch (ref), adapter (ref), diagnosticsModule (copy), poolFor (ref), var1 (write)
-			assert(not var3, "RecyclingScope: cannot exchange after destruction")
-			assert(not var4, "RecyclingScope: cannot mutate during an exchange")
-			assert(p2 ~= nil, "RecyclingScope: exchange requires an owner")
-			var2 += 1
-			local var8 = if #p4 == 0 then nil else {}
-			
-			for i, v in p3 do
-				local view = t_1[v.view]
-				assert(view ~= nil and (view.owner == p2 and view.leaseToken == v.leaseToken), "RecyclingScope: cannot use a stale Lease")
-				assert(view.validationToken ~= var2, "RecyclingScope: cannot release one Lease more than once")
-				view.validationToken = var2
+		exchange = function(Owner, List1, List2) --[[ Line: 122 ]]
+			-- upvalues: Flag (ref), Flag1 (ref), Count1 (ref), Tbl1 (copy), p1 (copy), Frozen (upval), Tbl (copy), MaxPoolSize1 (ref), Tbl2 (copy), Batch (copy), Adapter (copy), DiagnosticsModule (upval), poolFor (copy), Count (ref)
+			assert(not Flag, "RecyclingScope: cannot exchange after destruction")
+			assert(not Flag1, "RecyclingScope: cannot mutate during an exchange")
+			assert(Owner ~= nil, "RecyclingScope: exchange requires an owner")
+			local ValidationToken: number = Count1
+			Count1 += 1
+			local T = if #List2 == 0 then nil else {}
+			for _, value in List1 do
+				local Entry = Tbl1[value.view]
+				assert(Entry ~= nil and (Entry.owner == Owner and Entry.leaseToken == value.leaseToken), "RecyclingScope: cannot use a stale Lease")
+				assert(Entry.validationToken ~= ValidationToken, "RecyclingScope: cannot release one Lease more than once")
+				Entry.validationToken = ValidationToken
 			end
-			if #p4 == 0 and p1.onPoolChanged == nil then
-				local t_3 = { acquired = frozen, releasedCount = #p3 }
-				local t_4 = {}
-				var4 = true
+			if #List2 == 0 and p1.onPoolChanged == nil then
+				local config = { acquired = Frozen, releasedCount = #List1 }
+				local Items = {}
+				Flag1 = true
 				
-				for i_1, v_1 in p3 do
-					local view = t_1[v_1.view]
-					view.owner = nil
-					view.leaseToken = nil
-					view.pool.last += 1
-					view.pool.items[view.pool.last] = v_1.view
+				for _, value1 in List1 do
+					local Entry = Tbl1[value1.view]
+					Entry.owner = nil
+					Entry.leaseToken = nil
+					local Pool = Entry.pool
+					Pool.last += 1
+					Entry.pool.items[Entry.pool.last] = value1.view
 				end
-				for i_2, v_2 in t do
-					while maxPoolSize_1 ~= nil and maxPoolSize_1 < v_2.last - v_2.first + 1 do
-						local first = v_2.items[v_2.first]
-						v_2.items[v_2.first] = nil
-						v_2.first += 1
-						local var9 = t_1[first]
-						local t_2Count = #t_2
-						local var10 = t_2[t_2Count]
+				for _, value2 in Tbl do
+					while MaxPoolSize1 ~= nil and MaxPoolSize1 < value2.last - value2.first + 1 do
+						local Item = value2.items[value2.first]
+						value2.items[value2.first] = nil
+						value2.first += 1
+						local Entry = Tbl1[Item]
+						local CountTbl2 = #Tbl2
+						local Entry1 = Tbl2[CountTbl2]
 						
-						if var9.inventoryIndex ~= t_2Count then
-							t_2[var9.inventoryIndex] = var10
-							t_1[var10].inventoryIndex = var9.inventoryIndex
+						if Entry.inventoryIndex ~= CountTbl2 then
+							Tbl2[Entry.inventoryIndex] = Entry1
+							Tbl1[Entry1].inventoryIndex = Entry.inventoryIndex
 						end
-						t_2[t_2Count] = nil
-						t_1[first] = nil
-						table.insert(t_4, first)
+						Tbl2[CountTbl2] = nil
+						Tbl1[Item] = nil
+						table.insert(Items, Item)
 					end
 				end
-				var4 = false
-				batch(function()
-					-- upvalues: t_4 (ref), adapter (copy)
-					for i, v in t_4 do
-						adapter.destroy(v)
+				Flag1 = false
+				Batch(function() --[[ Line: 167 ]]
+					-- upvalues: Items (copy), Adapter (upval)
+					for _, item in Items do
+						Adapter.destroy(item)
 					end
 				end)
 				
-				return t_3
+				return config
 			else
-				var4 = true
-				local t_3 = {}
+				Flag1 = true
+				local NewLasts = {}
 				
-				for i_1, v_1 in t do
-					t_3[i_1] = v_1.last - v_1.first + 1
+				for i, value3 in Tbl do
+					NewLasts[i] = value3.last - value3.first + 1
 				end
-				local var11 = if #p3 == 0 then nil else {}
+				local T1 = if #List1 == 0 then nil else {}
 				
-				if var11 ~= nil then
-					for i_2, v_2 in p3 do
-						local view = t_1[v_2.view]
-						local viewType = var11[view.viewType]
+				if T1 ~= nil then
+					for _, value4 in List1 do
+						local Entry = Tbl1[value4.view]
+						local List = T1[Entry.viewType]
 						
-						if viewType == nil then
-							viewType = {}
-							var11[view.viewType] = viewType
+						if List == nil then
+							List = {}
+							T1[Entry.viewType] = List
 						end
-						table.insert(viewType, v_2.view)
+						table.insert(List, value4.view)
 					end
 				end
-				local t_4 = {}
-				local var12 = if var11 == nil then nil else {}
-				local var13 = if var12 == nil then frozen else {}
-				local ok, status = pcall(function()
-					-- upvalues: p4 (ref), var11 (ref), var12 (ref), var13 (ref), t_3 (ref), adapter (copy), t_1 (copy), var8 (ref), t_4 (ref)
-					for i, v in p4 do
-						local var14 = if var11 == nil then nil else var11[v.viewType]
-						local var15 = if var14 == nil then nil else table.remove(var14)
+				local CreateResults = {}
+				local T2 = if T1 == nil then nil else {}
+				local Frozen1 = if T2 == nil then Frozen else {}
+				local Success, Result = pcall(function() --[[ Line: 197 ]]
+					-- upvalues: List2 (copy), T1 (copy), T2 (copy), Frozen1 (copy), NewLasts (copy), Adapter (upval), Tbl1 (upval), T (copy), CreateResults (copy)
+					for i, value in List2 do
+						local Entry = if T1 == nil then nil else T1[value.viewType]
+						local Removed = if Entry == nil then nil else table.remove(Entry)
 						
-						if var15 == nil then
-							local viewType = t_3[v.viewType] or 0
+						if Removed == nil then
+							local NewLast = NewLasts[value.viewType] or 0
 							
-							if viewType > 0 then
-								t_3[v.viewType] = viewType - 1
+							if NewLast > 0 then
+								NewLasts[value.viewType] = NewLast - 1
 							else
-								local var16 = adapter.create(v.viewType)
-								assert(t_1[var16] == nil and not var8[var16], "RecyclingScope: create must return a new view")
-								var8[var16] = true
-								t_4[i] = var16
+								local NewAdapter = Adapter.create(value.viewType)
+								assert(Tbl1[NewAdapter] == nil and not T[NewAdapter], "RecyclingScope: create must return a new view")
+								T[NewAdapter] = true
+								CreateResults[i] = NewAdapter
 							end
 						else
-							var12[i] = var15
-							var13[var15] = true
+							T2[i] = Removed
+							Frozen1[Removed] = true
 						end
 					end
 				end)
 				
-				if not ok then
-					var4 = false
+				if not Success then
+					Flag1 = false
 					
-					for i_2, v_2 in t_4 do
-						adapter.destroy(v_2)
+					for _, createResult in CreateResults do
+						Adapter.destroy(createResult)
 					end
-					error(status, 0)
+					error(Result, 0)
 				end
-				local t_5 = { releasedCount = 0, acquired = table.create(#p4) }
-				local t_6 = {}
-				local var17 = if p1.onPoolChanged == nil then nil else {}
-				
-				for i_2, v_2 in p3 do
-					if not var13[v_2.view] then
-						local view = t_1[v_2.view]
-						view.owner = nil
-						view.leaseToken = nil
-						local pool = view.pool
-						pool.last += 1
-						pool.items[pool.last] = v_2.view
-						t_5.releasedCount += 1
-						
-						if var17 ~= nil then
-							table.insert(var17, {
-								diagnosticsModule.PoolAction.Release,
-								view.viewType,
-								-1,
-								1,
-								0
-							})
-						end
-					end
-				end
-				for i_3, v_3 in p4 do
-					local var18 = poolFor(v_3.viewType)
-					local var19 = if var12 == nil then nil else var12[i_3]
+				local config = { releasedCount = 0, acquired = table.create(#List2) }
+				local Items1 = {}
+				local T3 = if p1.onPoolChanged == nil then nil else {}
+				for _, value5 in List1 do
+					local FrozenEntry = Frozen1[value5.view]
+					local Entry = nil
 					
-					if var19 == nil then
-						if var18.first <= var18.last then
-							var19 = var18.items[var18.last]
-							var18.items[var18.last] = nil
-							var18.last -= 1
+					if not FrozenEntry then
+						Entry = Tbl1[value5.view]
+						Entry.owner = nil
+						Entry.leaseToken = nil
+						local Pool = Entry.pool
+						Pool.last += 1
+						Pool.items[Pool.last] = value5.view
+						config.releasedCount += 1
+						FrozenEntry = T3 == nil
+					end
+					if not FrozenEntry then
+						table.insert(T3, {
+							DiagnosticsModule.PoolAction.Release,
+							Entry.viewType,
+							-1,
+							1,
+							0
+						})
+					end
+				end
+				for i1, value6 in List2 do
+					local PoolForResult = poolFor(value6.viewType)
+					local Entry = if T2 == nil then nil else T2[i1]
+					
+					if Entry == nil then
+						if PoolForResult.first <= PoolForResult.last then
+							Entry = PoolForResult.items[PoolForResult.last]
+							PoolForResult.items[PoolForResult.last] = nil
+							PoolForResult.last -= 1
 							
-							if var17 ~= nil then
-								table.insert(var17, {
-									diagnosticsModule.PoolAction.Acquire,
-									v_3.viewType,
+							if T3 ~= nil then
+								table.insert(T3, {
+									DiagnosticsModule.PoolAction.Acquire,
+									value6.viewType,
 									1,
 									-1,
 									0
 								})
 							end
 						else
-							local var20 = t_4[i_3]
-							var19 = var20
-							t_1[var20] = {
+							local CreateResult = CreateResults[i1]
+							Entry = CreateResult
+							Tbl1[CreateResult] = {
 								owner = nil,
 								leaseToken = nil,
 								validationToken = nil,
-								viewType = v_3.viewType,
-								pool = var18,
-								inventoryIndex = #t_2 + 1
+								viewType = value6.viewType,
+								pool = PoolForResult,
+								inventoryIndex = #Tbl2 + 1
 							}
-							table.insert(t_2, var20)
+							table.insert(Tbl2, CreateResult)
 							
-							if var17 ~= nil then
-								table.insert(var17, {
-									diagnosticsModule.PoolAction.Create,
-									v_3.viewType,
+							if T3 ~= nil then
+								table.insert(T3, {
+									DiagnosticsModule.PoolAction.Create,
+									value6.viewType,
 									1,
 									0,
 									1
@@ -291,35 +295,34 @@ return function(p1)
 							end
 						end
 					end
-					local var21 = var19
-					local var22 = t_1[var21]
-					local var23 = var1
-					var1 += 1
-					var22.owner = p2
-					var22.leaseToken = var23
-					table.insert(t_5.acquired, { view = var21, leaseToken = var23 })
+					local Entry4 = Tbl1[Entry]
+					local LeaseToken: number = Count
+					Count += 1
+					Entry4.owner = Owner
+					Entry4.leaseToken = LeaseToken
+					table.insert(config.acquired, { view = Entry, leaseToken = LeaseToken })
 				end
-				for i_4, v_4 in t do
-					while maxPoolSize_1 ~= nil and maxPoolSize_1 < v_4.last - v_4.first + 1 do
-						local first = v_4.items[v_4.first]
-						v_4.items[v_4.first] = nil
-						v_4.first += 1
-						local var24 = t_1[first]
-						local t_2Count = #t_2
-						local var25 = t_2[t_2Count]
+				for _, value7 in Tbl do
+					while MaxPoolSize1 ~= nil and MaxPoolSize1 < value7.last - value7.first + 1 do
+						local Item = value7.items[value7.first]
+						value7.items[value7.first] = nil
+						value7.first += 1
+						local Entry2 = Tbl1[Item]
+						local CountTbl2 = #Tbl2
+						local Entry3 = Tbl2[CountTbl2]
 						
-						if var24.inventoryIndex ~= t_2Count then
-							t_2[var24.inventoryIndex] = var25
-							t_1[var25].inventoryIndex = var24.inventoryIndex
+						if Entry2.inventoryIndex ~= CountTbl2 then
+							Tbl2[Entry2.inventoryIndex] = Entry3
+							Tbl1[Entry3].inventoryIndex = Entry2.inventoryIndex
 						end
-						t_2[t_2Count] = nil
-						t_1[first] = nil
-						table.insert(t_6, first)
+						Tbl2[CountTbl2] = nil
+						Tbl1[Item] = nil
+						table.insert(Items1, Item)
 						
-						if var17 ~= nil then
-							table.insert(var17, {
-								diagnosticsModule.PoolAction.Evict,
-								v_4.viewType,
+						if T3 ~= nil then
+							table.insert(T3, {
+								DiagnosticsModule.PoolAction.Evict,
+								value7.viewType,
 								0,
 								-1,
 								-1
@@ -327,112 +330,116 @@ return function(p1)
 						end
 					end
 				end
-				var4 = false
-				batch(function()
-					-- upvalues: var17 (ref), p1 (copy), t_6 (ref), adapter (copy)
-					if var17 ~= nil then
-						for i, v in var17 do
-							local var26 = v[1]
-							local var27 = v[2]
-							local var28 = v[3]
-							local var29 = v[4]
-							local var30 = v[5]
+				Flag1 = false
+				Batch(function() --[[ Line: 301 ]]
+					-- upvalues: T3 (copy), p1 (upval), Items1 (copy), Adapter (upval)
+					if T3 ~= nil then
+						for _, value in T3 do
+							local Action = value[1]
+							local ViewType = value[2]
+							local OccupiedDelta = value[3]
+							local VacantDelta = value[4]
+							local TotalDelta = value[5]
 							
 							if p1.onPoolChanged ~= nil then
 								p1.onPoolChanged({
-									action = var26,
-									viewType = var27,
-									occupiedDelta = var28,
-									vacantDelta = var29,
-									totalDelta = var30
+									action = Action,
+									viewType = ViewType,
+									occupiedDelta = OccupiedDelta,
+									vacantDelta = VacantDelta,
+									totalDelta = TotalDelta
 								})
 							end
 						end
 					end
-					for i, v in t_6 do
-						adapter.destroy(v)
+					for _, value1 in Items1 do
+						Adapter.destroy(value1)
 					end
 				end)
 				
-				return t_5
+				return config
 			end
 		end,
-		batch = batch,
-		isLeaseCurrent = function(p5, p6, p7)
-			-- upvalues: t_1 (ref), var3 (write)
-			local var26 = t_1[p6]
+		batch = Batch,
+		isLeaseCurrent = function(Owner, p2, LeaseToken): boolean --[[ Line: 338 ]]
+			-- upvalues: Tbl1 (copy), Flag (ref)
+			local Entry = Tbl1[p2]
 			
-			return not var3 and (var26 ~= nil and (var26.owner == p5 and var26.leaseToken == p7))
+			return not Flag and (Entry ~= nil and (Entry.owner == Owner and Entry.leaseToken == LeaseToken))
 		end,
-		setMaxPoolSize = function(a)
-			-- upvalues: var3 (write), var4 (write), maxPoolSize_1 (write), evictExcess (ref)
-			assert(not var3 and not var4, "RecyclingScope: cannot set capacity now")
-			assert(if a ~= nil then a >= 0 and a % 1 == 0 else true, "RecyclingScope: maxPoolSize must be a non-negative integer")
-			maxPoolSize_1 = a
+		setMaxPoolSize = function(Value: number) --[[ Line: 342 ]]
+			-- upvalues: Flag (ref), Flag1 (ref), MaxPoolSize1 (ref), evictExcess (copy)
+			assert(not Flag and not Flag1, "RecyclingScope: cannot set capacity now")
+			assert(Value == nil or Value >= 0 and Value % 1 == 0, "RecyclingScope: maxPoolSize must be a non-negative integer")
+			MaxPoolSize1 = Value
 			evictExcess()
 		end,
-		getScopeInventory = function()
-			-- upvalues: t_2 (ref)
-			return table.clone(t_2)
+		getScopeInventory = function() --[[ Line: 348 ]]
+			-- upvalues: Tbl2 (copy)
+			return table.clone(Tbl2)
 		end,
-		getVacantViews = function()
-			-- upvalues: t (ref)
-			local t_1 = {}
+		getVacantViews = function() --[[ Line: 351 ]]
+			-- upvalues: Tbl (copy)
+			local Items = {}
 			
-			for i, v in t do
-				for i_1 = v.first, v.last do
-					table.insert(t_1, v.items[i_1])
+			for _, value in Tbl do
+				for i = value.first, value.last do
+					table.insert(Items, value.items[i])
 				end
 			end
-			return t_1
+			return Items
 		end,
-		destroy = function()
-			-- upvalues: var3 (write), var4 (write), t_2 (ref), p1 (ref), t_1 (ref), t (ref), batch (ref), notify (ref), diagnosticsModule (copy), adapter (ref)
-			if var3 then return end
-			assert(not var4, "RecyclingScope: cannot destroy during an exchange")
-			var3 = true
-			local cloned = table.clone(t_2)
-			local var26 = if p1.onPoolChanged == nil then nil else table.create(#cloned)
+		destroy = function() --[[ Line: 360 ]]
+			-- upvalues: Flag (ref), Flag1 (ref), Tbl2 (copy), p1 (copy), Tbl1 (copy), Tbl (copy), Batch (copy), notify (copy), DiagnosticsModule (upval), Adapter (copy)
+			if Flag then return end
+			assert(not Flag1, "RecyclingScope: cannot destroy during an exchange")
+			Flag = true
+			local Copy = table.clone(Tbl2)
+			local Buffer = if p1.onPoolChanged == nil then nil else table.create(#Copy)
 			
-			if var26 ~= nil then
-				for i, v in cloned do
-					local var27 = t_1[v]
-					var26[i] = { viewType = var27.viewType, occupied = var27.owner ~= nil }
+			if Buffer ~= nil then
+				for i, value in Copy do
+					local Entry = Tbl1[value]
+					Buffer[i] = { viewType = Entry.viewType, occupied = Entry.owner ~= nil }
 				end
 			end
-			table.clear(t_2)
-			table.clear(t_1)
-			table.clear(t)
-			local var28 = nil
+			table.clear(Tbl2)
+			table.clear(Tbl1)
+			table.clear(Tbl)
+			local v1 = nil
 			
-			local function _(p5, p6)
-				-- upvalues: var28 (write)
-				if not p5 and var28 == nil then
-					var28 = p6
+			local function _(p2, p3) --[[ Line: 384 | Named "captureFailure" ]]
+				-- upvalues: v1 (ref)
+				if not p2 and v1 == nil then
+					v1 = p3
 				end
 			end
 			
-			batch(function()
-				-- upvalues: cloned (ref), var26 (ref), notify (copy), diagnosticsModule (copy), var28 (write), adapter (copy)
-				for i, v in cloned do
-					if var26 ~= nil then
-						local var29 = var26[i]
-						local ok, status = pcall(notify, diagnosticsModule.PoolAction.Evict, var29.viewType, if var29.occupied then -1 else 0, if var29.occupied then 0 else -1, -1)
-						
-						if not ok and var28 == nil then
-							var28 = status
-						end
-					end
-					local ok, status = pcall(adapter.destroy, v)
+			Batch(function() --[[ Line: 389 ]]
+				-- upvalues: Copy (copy), Buffer (copy), notify (upval), DiagnosticsModule (upval), v1 (ref), Adapter (upval)
+				for i, value in Copy do
+					local NoBuffer = Buffer == nil
+					local Result = nil
 					
-					if not ok and var28 == nil then
-						var28 = status
+					if not NoBuffer then
+						local BufferEntry = Buffer[i]
+						local Success
+						Success, Result = pcall(notify, DiagnosticsModule.PoolAction.Evict, BufferEntry.viewType, if BufferEntry.occupied then -1 else 0, if BufferEntry.occupied then 0 else -1, -1)
+						NoBuffer = Success or v1 ~= nil
+					end
+					if not NoBuffer then
+						v1 = Result
+					end
+					local Success1, Result1 = pcall(Adapter.destroy, value)
+					
+					if not Success1 and v1 == nil then
+						v1 = Result1
 					end
 				end
 			end)
 			
-			if var28 ~= nil then
-				error(var28, 0)
+			if v1 ~= nil then
+				error(v1, 0)
 			end
 		end
 	}

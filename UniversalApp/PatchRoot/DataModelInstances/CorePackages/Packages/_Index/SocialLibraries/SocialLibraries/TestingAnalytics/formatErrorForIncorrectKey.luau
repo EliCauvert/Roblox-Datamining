@@ -1,11 +1,12 @@
-﻿return function(p1)
-	return function(p2, p3)
-		-- upvalues: p1 (ref)
-		local var1, var2 = p1(p2)
+﻿return function(Callback) --[[ Line: 1 ]]
+	return function(p1, Text) --[[ Line: 2 ]]
+		-- upvalues: Callback (copy)
+		local CallbackResult, CallbackResult2 = Callback(p1)
 		
-		if var1 == false then
-			return var1, var2 .. ". Issue with: " .. p2
+		if CallbackResult == false then
+			return CallbackResult, CallbackResult2 .. ". Issue with: " .. Text
+		else
+			return CallbackResult
 		end
-		return var1
 	end
 end

@@ -1,14 +1,12 @@
 ﻿local _ = require(script.Parent.EventPropagation)
-local focusNavigationServiceModule = require(script.FocusNavigationService)
-local isValidFocusTargetModule = require(script.isValidFocusTarget)
-local engineInterfaceModule = require(script.EngineInterface)
+local EngineInterfaceModule = require(script.EngineInterface)
 local _ = require(script.types)
 
 return {
-	isValidFocusTarget = isValidFocusTargetModule,
-	FocusNavigationService = focusNavigationServiceModule,
+	isValidFocusTarget = require(script.isValidFocusTarget),
+	FocusNavigationService = require(script.FocusNavigationService),
 	EngineInterface = {
-		CoreGui = engineInterfaceModule.CoreGui,
-		PlayerGui = engineInterfaceModule.PlayerGui
+		CoreGui = EngineInterfaceModule.CoreGui,
+		PlayerGui = EngineInterfaceModule.PlayerGui
 	}
 }

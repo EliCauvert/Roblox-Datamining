@@ -1,131 +1,135 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local autoScrollModule = require(script.Parent.AutoScroll)
-local autoScrollTargetModule = require(viewRecycler.Core.Enums.AutoScrollTarget)
-local paginationEdgesModule = require(script.Parent.PaginationEdges)
-local reachedThresholdModule = require(script.Parent.ReachedThreshold)
-local scrollAlignmentModule = require(viewRecycler.Core.Enums.ScrollAlignment)
-local _ = require(viewRecycler.Core.Types)
-local initialScrollPositionModule = require(script.Parent.InitialScrollPosition)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local AutoScrollModule = require(script.Parent.AutoScroll)
+local AutoScrollTargetModule = require(ViewRecycler.Core.Enums.AutoScrollTarget)
+local PaginationEdgesModule = require(script.Parent.PaginationEdges)
+local ReachedThresholdModule = require(script.Parent.ReachedThreshold)
+local ScrollAlignmentModule = require(ViewRecycler.Core.Enums.ScrollAlignment)
+local _ = require(ViewRecycler.Core.Types)
+local InitialScrollPositionModule = require(script.Parent.InitialScrollPosition)
 
-local function _(p1)
-	-- upvalues: reachedThresholdModule (ref)
+local function _(p1) --[[ Line: 47 | Named "validate" ]]
+	-- upvalues: ReachedThresholdModule (copy)
 	if p1.autoScrollThreshold ~= nil then
-		reachedThresholdModule.validate(p1.autoScrollThreshold, "Virtualizer: autoScrollThreshold")
+		ReachedThresholdModule.validate(p1.autoScrollThreshold, "Virtualizer: autoScrollThreshold")
 	end
 	if p1.startReachedThreshold ~= nil then
-		reachedThresholdModule.validate(p1.startReachedThreshold, "Virtualizer: startReachedThreshold")
+		ReachedThresholdModule.validate(p1.startReachedThreshold, "Virtualizer: startReachedThreshold")
 	end
 end
 
-return function(p1)
-	-- upvalues: reachedThresholdModule (ref), initialScrollPositionModule (ref), autoScrollModule (ref), paginationEdgesModule (ref), scrollAlignmentModule (ref), autoScrollTargetModule (ref)
+return function(p1) --[[ Line: 56 | Named "createScrollPolicy" ]]
+	-- upvalues: ReachedThresholdModule (copy), InitialScrollPositionModule (copy), AutoScrollModule (copy), PaginationEdgesModule (copy), ScrollAlignmentModule (copy), AutoScrollTargetModule (copy)
 	if p1.autoScrollThreshold ~= nil then
-		reachedThresholdModule.validate(p1.autoScrollThreshold, "Virtualizer: autoScrollThreshold")
+		ReachedThresholdModule.validate(p1.autoScrollThreshold, "Virtualizer: autoScrollThreshold")
 	end
 	if p1.startReachedThreshold ~= nil then
-		reachedThresholdModule.validate(p1.startReachedThreshold, "Virtualizer: startReachedThreshold")
+		ReachedThresholdModule.validate(p1.startReachedThreshold, "Virtualizer: startReachedThreshold")
 	end
-	local var1 = p1
-	local var2 = initialScrollPositionModule()
-	local var3 = autoScrollModule.create()
-	local var4 = paginationEdgesModule.create()
+	local v1 = p1
+	local InitialScrollPositionModuleResult = InitialScrollPositionModule()
+	local NewAutoScroll = AutoScrollModule.create()
+	local NewPaginationEdges = PaginationEdgesModule.create()
 	
-	local function _(value, p2)
-		-- upvalues: var1 (write), scrollAlignmentModule (copy), var3 (ref), autoScrollTargetModule (copy)
-		if value ~= nil and p2 > 0 and var1.initialScrollAlignment == scrollAlignmentModule.End then
-			var3.settleAt(autoScrollTargetModule.End)
+	local function _(p2, p3: number) --[[ Line: 65 | Named "settleInitialEnd" ]]
+		-- upvalues: v1 (ref), ScrollAlignmentModule (upval), NewAutoScroll (copy), AutoScrollTargetModule (upval)
+		if p2 ~= nil and p3 > 0 and v1.initialScrollAlignment == ScrollAlignmentModule.End then
+			NewAutoScroll.settleAt(AutoScrollTargetModule.End)
 		end
-		return value
+		return p2
 	end
 	
-	local function followThreshold(p2)
-		-- upvalues: reachedThresholdModule (copy), var1 (write)
-		return reachedThresholdModule.resolve(var1.autoScrollThreshold, p2, 1)
+	local function followThreshold(ViewportLength) --[[ Line: 72 ]]
+		-- upvalues: ReachedThresholdModule (upval), v1 (ref)
+		return ReachedThresholdModule.resolve(v1.autoScrollThreshold, ViewportLength, 1)
 	end
 	
 	return {
-		configure = function(p2)
-			-- upvalues: reachedThresholdModule (copy), var1 (write)
+		configure = function(p2) --[[ Line: 77 ]]
+			-- upvalues: ReachedThresholdModule (upval), v1 (ref)
 			if p2.autoScrollThreshold ~= nil then
-				reachedThresholdModule.validate(p2.autoScrollThreshold, "Virtualizer: autoScrollThreshold")
+				ReachedThresholdModule.validate(p2.autoScrollThreshold, "Virtualizer: autoScrollThreshold")
 			end
 			if p2.startReachedThreshold ~= nil then
-				reachedThresholdModule.validate(p2.startReachedThreshold, "Virtualizer: startReachedThreshold")
+				ReachedThresholdModule.validate(p2.startReachedThreshold, "Virtualizer: startReachedThreshold")
 			end
-			var1 = p2
+			v1 = p2
 		end,
-		contentLengthChanged = function(p2)
-			-- upvalues: var3 (ref)
-			return var3.getSettleOffset(p2.contentLength, p2.viewportLength)
+		contentLengthChanged = function(p2) --[[ Line: 81 ]]
+			-- upvalues: NewAutoScroll (copy)
+			return NewAutoScroll.getSettleOffset(p2.contentLength, p2.viewportLength)
 		end,
-		dataChanged = function(p2, p3, p4)
-			-- upvalues: var2 (ref), var1 (write), var3 (ref), autoScrollModule (copy), followThreshold (ref), scrollAlignmentModule (copy), autoScrollTargetModule (copy)
-			local var5 = var2.onDataSourceChange(p2.itemCount, var1.initialScrollAlignment, p2.getScrollOffsetForItem)
-			local var6 = var3.onDataSourceChanged(autoScrollModule.resolveTarget(var1.autoScrollOnChange, p3, p4, followThreshold(p4.viewportLength)))
+		dataChanged = function(p2, p3, p4) --[[ Line: 84 ]]
+			-- upvalues: InitialScrollPositionModuleResult (copy), v1 (ref), NewAutoScroll (copy), AutoScrollModule (upval), followThreshold (copy), ScrollAlignmentModule (upval), AutoScrollTargetModule (upval)
+			local OnDataSourceChangeResult = InitialScrollPositionModuleResult.onDataSourceChange(p2.itemCount, v1.initialScrollAlignment, p2.getScrollOffsetForItem)
+			local OnDataSourceChangedResult = NewAutoScroll.onDataSourceChanged(AutoScrollModule.resolveTarget(v1.autoScrollOnChange, p3, p4, followThreshold(p4.viewportLength)))
 			
-			if var6 ~= false then
-				return autoScrollModule.getTargetOffset(var6, p2.scrollState.contentLength, p2.scrollState.viewportLength)
-			elseif var5 ~= nil and p2.itemCount > 0 and var1.initialScrollAlignment == scrollAlignmentModule.End then
-				var3.settleAt(autoScrollTargetModule.End)
+			if OnDataSourceChangedResult ~= false then
+				return AutoScrollModule.getTargetOffset(OnDataSourceChangedResult, p2.scrollState.contentLength, p2.scrollState.viewportLength)
 			end
-			return var5
-		end,
-		dataReplaced = function(p2)
-			-- upvalues: var2 (ref), var1 (write), scrollAlignmentModule (copy), var3 (ref), autoScrollTargetModule (copy)
-			local var5 = var2.onDataSourceReplaced(p2.itemCount, var1.initialScrollAlignment, p2.getScrollOffsetForItem)
+			local ItemCount: number = p2.itemCount
 			
-			if var5 ~= nil and p2.itemCount > 0 and var1.initialScrollAlignment == scrollAlignmentModule.End then
-				var3.settleAt(autoScrollTargetModule.End)
+			if OnDataSourceChangeResult ~= nil and ItemCount > 0 and v1.initialScrollAlignment == ScrollAlignmentModule.End then
+				NewAutoScroll.settleAt(AutoScrollTargetModule.End)
 			end
-			return var5
+			return OnDataSourceChangeResult
 		end,
-		viewportChanged = function(p2)
-			-- upvalues: var2 (ref), var1 (write), scrollAlignmentModule (copy), var3 (ref), autoScrollTargetModule (copy)
-			local scrollState = p2.scrollState
+		dataReplaced = function(p2) --[[ Line: 107 ]]
+			-- upvalues: InitialScrollPositionModuleResult (copy), v1 (ref), ScrollAlignmentModule (upval), NewAutoScroll (copy), AutoScrollTargetModule (upval)
+			local OnDataSourceReplacedResult = InitialScrollPositionModuleResult.onDataSourceReplaced(p2.itemCount, v1.initialScrollAlignment, p2.getScrollOffsetForItem)
+			local ItemCount: number = p2.itemCount
 			
-			if p2.itemCount ~= 0 and scrollState.contentLength <= 0 then
+			if OnDataSourceReplacedResult ~= nil and ItemCount > 0 and v1.initialScrollAlignment == ScrollAlignmentModule.End then
+				NewAutoScroll.settleAt(AutoScrollTargetModule.End)
+			end
+			return OnDataSourceReplacedResult
+		end,
+		viewportChanged = function(p2) --[[ Line: 117 ]]
+			-- upvalues: InitialScrollPositionModuleResult (copy), v1 (ref), ScrollAlignmentModule (upval), NewAutoScroll (copy), AutoScrollTargetModule (upval)
+			local ScrollState = p2.scrollState
+			
+			if p2.itemCount ~= 0 and ScrollState.contentLength <= 0 then
 				return nil
 			end
-			local var5 = var2.onViewportChanged(p2.itemCount, var1.initialScrollAlignment, p2.getScrollOffsetForItem)
+			local OnViewportChangedResult = InitialScrollPositionModuleResult.onViewportChanged(p2.itemCount, v1.initialScrollAlignment, p2.getScrollOffsetForItem)
+			local ItemCount: number = p2.itemCount
 			
-			if var5 ~= nil and p2.itemCount > 0 and var1.initialScrollAlignment == scrollAlignmentModule.End then
-				var3.settleAt(autoScrollTargetModule.End)
+			if OnViewportChangedResult ~= nil and ItemCount > 0 and v1.initialScrollAlignment == ScrollAlignmentModule.End then
+				NewAutoScroll.settleAt(AutoScrollTargetModule.End)
 			end
-			local var6 = var5
-			
-			return if var6 == nil then var3.getSettleOffset(scrollState.contentLength, scrollState.viewportLength) else var6
+			return if OnViewportChangedResult == nil then NewAutoScroll.getSettleOffset(ScrollState.contentLength, ScrollState.viewportLength) else OnViewportChangedResult
 		end,
-		observe = function(p2)
-			-- upvalues: var3 (ref), reachedThresholdModule (copy), var1 (write), autoScrollModule (copy)
-			var3.onScrollOffsetChanged(p2, reachedThresholdModule.resolve(var1.autoScrollThreshold, p2.viewportLength, 1), autoScrollModule.followedEdge(var1.autoScrollOnChange))
+		observe = function(p2) --[[ Line: 139 ]]
+			-- upvalues: NewAutoScroll (copy), ReachedThresholdModule (upval), v1 (ref), AutoScrollModule (upval)
+			NewAutoScroll.onScrollOffsetChanged(p2, ReachedThresholdModule.resolve(v1.autoScrollThreshold, p2.viewportLength, 1), AutoScrollModule.followedEdge(v1.autoScrollOnChange))
 		end,
-		pin = var3.pin,
-		checkEdges = function(p2, p3, p4)
-			-- upvalues: var1 (write), var4 (ref), reachedThresholdModule (copy)
-			if not var1.startReachedEnabled and not var1.endReachedEnabled then
+		pin = NewAutoScroll.pin,
+		checkEdges = function(p2, p3: number, RearmAfterStructureChange) --[[ Line: 147 ]]
+			-- upvalues: v1 (ref), NewPaginationEdges (copy), ReachedThresholdModule (upval)
+			if not v1.startReachedEnabled and not v1.endReachedEnabled then
 				return false, false
 			end
-			local viewportLength = p2.viewportLength
+			local ViewportLength: number = p2.viewportLength
 			
-			if viewportLength <= 0 or p3 > 0 and p2.contentLength == 0 then
+			if ViewportLength <= 0 or p3 > 0 and p2.contentLength == 0 then
 				return false, false
+			else
+				local CheckResult = NewPaginationEdges.check({
+					scrollOffset = p2.scrollOffset,
+					viewportLength = ViewportLength,
+					contentLength = p2.contentLength,
+					startThreshold = ReachedThresholdModule.resolve(v1.startReachedThreshold, ViewportLength, 0),
+					atEnd = p2.atEnd,
+					canReachStart = v1.startReachedEnabled,
+					canReachEnd = v1.endReachedEnabled,
+					rearmAfterStructureChange = RearmAfterStructureChange
+				})
+				
+				return CheckResult.startReached, CheckResult.endReached
 			end
-			local var5 = var4.check({
-				scrollOffset = p2.scrollOffset,
-				viewportLength = viewportLength,
-				contentLength = p2.contentLength,
-				startThreshold = reachedThresholdModule.resolve(var1.startReachedThreshold, viewportLength, 0),
-				atEnd = p2.atEnd,
-				canReachStart = var1.startReachedEnabled,
-				canReachEnd = var1.endReachedEnabled,
-				rearmAfterStructureChange = p4
-			})
-			
-			return var5.startReached, var5.endReached
 		end,
-		reachesEdges = function()
-			-- upvalues: var1 (write)
-			return var1.startReachedEnabled or var1.endReachedEnabled
+		reachesEdges = function() --[[ Line: 167 ]]
+			-- upvalues: v1 (ref)
+			return v1.startReachedEnabled or v1.endReachedEnabled
 		end
 	}
 end

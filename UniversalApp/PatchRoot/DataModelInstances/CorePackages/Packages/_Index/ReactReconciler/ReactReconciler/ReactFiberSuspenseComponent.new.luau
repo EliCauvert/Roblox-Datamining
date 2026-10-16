@@ -1,62 +1,62 @@
 ﻿local _ = require(script.Parent.Parent.Shared)
 local _ = require(script.Parent.ReactInternalTypes)
-local reactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
+local ReactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
 local _ = require(script.Parent.ReactFiberLane)
-local reactWorkTagsModule = require(script.Parent.ReactWorkTags)
-local suspenseComponent = reactWorkTagsModule.SuspenseComponent
-local suspenseListComponent = reactWorkTagsModule.SuspenseListComponent
-local reactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
-local noFlags = reactFiberFlagsModule.NoFlags
-local didCapture = reactFiberFlagsModule.DidCapture
-local isSuspenseInstancePending = reactFiberHostConfigModule.isSuspenseInstancePending
-local isSuspenseInstanceFallback = reactFiberHostConfigModule.isSuspenseInstanceFallback
+local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
+local SuspenseComponent = ReactWorkTagsModule.SuspenseComponent
+local SuspenseListComponent = ReactWorkTagsModule.SuspenseListComponent
+local ReactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
+local NoFlags = ReactFiberFlagsModule.NoFlags
+local DidCapture = ReactFiberFlagsModule.DidCapture
+local IsSuspenseInstancePendingFunction = ReactFiberHostConfigModule.isSuspenseInstancePending
+local IsSuspenseInstanceFallbackFunction = ReactFiberHostConfigModule.isSuspenseInstanceFallback
 
 return {
-	shouldCaptureSuspense = function(p1, p2)
-		local memoizedState = p1.memoizedState
+	shouldCaptureSuspense = function(p1, p2): boolean --[[ Line: 84 ]]
+		local MemoizedState = p1.memoizedState
 		
-		if memoizedState then
-			return memoizedState.dehydrated ~= nil
+		if MemoizedState then
+			return MemoizedState.dehydrated ~= nil
+		else
+			local MemoizedProps = p1.memoizedProps
+			
+			return MemoizedProps.fallback ~= nil and (MemoizedProps.unstable_avoidThisFallback ~= true or not p2)
 		end
-		local memoizedProps = p1.memoizedProps
-		
-		return if memoizedProps.fallback == nil then false elseif memoizedProps.unstable_avoidThisFallback == true then p2 else true
 	end,
-	findFirstSuspended = function(p1)
-		-- upvalues: suspenseComponent (ref), isSuspenseInstancePending (ref), isSuspenseInstanceFallback (ref), suspenseListComponent (ref), didCapture (ref), noFlags (ref)
-		local var1 = p1
-		while var1 ~= nil do
-			if var1.tag == suspenseComponent then
-				local memoizedState = var1.memoizedState
+	findFirstSuspended = function(Child) --[[ Line: 116 ]]
+		-- upvalues: SuspenseComponent (copy), IsSuspenseInstancePendingFunction (copy), IsSuspenseInstanceFallbackFunction (copy), SuspenseListComponent (copy), DidCapture (copy), NoFlags (copy)
+		local Child1 = Child
+		while Child1 ~= nil do
+			if Child1.tag == SuspenseComponent then
+				local MemoizedState = Child1.memoizedState
 				
-				if memoizedState then
-					local dehydrated = memoizedState.dehydrated
+				if MemoizedState then
+					local Dehydrated = MemoizedState.dehydrated
 					
-					if dehydrated ~= nil and not isSuspenseInstancePending(dehydrated) and not isSuspenseInstanceFallback(dehydrated) then
-						if var1 ~= p1 then
-							while var1.sibling == nil do
-								if var1.return_ ~= nil and var1.return_ ~= p1 then
-									var1 = var1.return_
-									continue
-								end
-								return nil
-							end
-							var1.sibling.return_ = var1.return_
-							var1 = var1.sibling
-						end
-						return nil
+					if Dehydrated == nil or IsSuspenseInstancePendingFunction(Dehydrated) or IsSuspenseInstanceFallbackFunction(Dehydrated) then
+						return Child1
 					end
-					return var1
 				end
-			elseif var1.tag == suspenseListComponent and var1.memoizedProps.revealOrder ~= nil then
-				if bit32.band(var1.flags, didCapture) == noFlags then
+			elseif Child1.tag ~= SuspenseListComponent or Child1.memoizedProps.revealOrder == nil then
+				if Child1.child ~= nil then
+					Child1.child.return_ = Child1
+					Child1 = Child1.child
+					continue
 				end
-				return var1
-			elseif var1.child == nil then
-			else
-				var1.child.return_ = var1
-				var1 = var1.child
+			elseif bit32.band(Child1.flags, DidCapture) ~= NoFlags then
+				return Child1
 			end
+			if Child1 == Child then
+				return nil
+			end
+			while Child1.sibling == nil do
+				if Child1.return_ == nil or Child1.return_ == Child then
+					return nil
+				end
+				Child1 = Child1.return_
+			end
+			Child1.sibling.return_ = Child1.return_
+			Child1 = Child1.sibling
 		end
 		return nil
 	end

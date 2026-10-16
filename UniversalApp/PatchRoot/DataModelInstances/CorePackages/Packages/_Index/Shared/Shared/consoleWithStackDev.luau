@@ -1,39 +1,39 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local console = luauPolyfillModule.console
-local array = luauPolyfillModule.Array
-local reactSharedInternalsModule = require(script.Parent.ReactSharedInternals)
-local printWarning = nil
-local t = {
-	warn = function(p1, ...)
-		-- upvalues: reactGlobalsModule (ref), printWarning (write)
-		if reactGlobalsModule.__DEV__ then
-			printWarning("warn", p1, { ... })
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Console = LuauPolyfillModule.console
+local Array = LuauPolyfillModule.Array
+local ReactSharedInternalsModule = require(script.Parent.ReactSharedInternals)
+local Callback = nil
+local ConsoleWithStackDevModule = {
+	warn = function(p1, ...) --[[ Line: 26 ]]
+		-- upvalues: ReactGlobalsModule (copy), Callback (ref)
+		if ReactGlobalsModule.__DEV__ then
+			Callback("warn", p1, { ... })
 		end
 	end,
-	error = function(p1, ...)
-		-- upvalues: reactGlobalsModule (ref), printWarning (write)
-		if reactGlobalsModule.__DEV__ then
-			printWarning("error", p1, { ... })
+	error = function(p1, ...) --[[ Line: 31 ]]
+		-- upvalues: ReactGlobalsModule (copy), Callback (ref)
+		if ReactGlobalsModule.__DEV__ then
+			Callback("error", p1, { ... })
 		end
 	end
 }
 
-printWarning = function(p1, p2, p3)
-	-- upvalues: reactGlobalsModule (ref), reactSharedInternalsModule (ref), array (ref), console (ref)
-	if reactGlobalsModule.__DEV__ then
-		local stackAddendum = reactSharedInternalsModule.ReactDebugCurrentFrame.getStackAddendum()
+Callback = function(p1, Text: string, List) --[[ Line: 37 | Named "printWarning" ]]
+	-- upvalues: ReactGlobalsModule (copy), ReactSharedInternalsModule (copy), Array (copy), Console (copy)
+	if ReactGlobalsModule.__DEV__ then
+		local StackAddendum = ReactSharedInternalsModule.ReactDebugCurrentFrame.getStackAddendum()
 		
-		if stackAddendum ~= "" then
-			p2 ..= "%s"
-			p3 = array.slice(p3, 1)
-			table.insert(p3, stackAddendum)
+		if StackAddendum ~= "" then
+			Text ..= "%s"
+			List = Array.slice(List, 1)
+			table.insert(List, StackAddendum)
 		end
-		local var1 = array.map(p3, tostring)
-		table.insert(var1, 1, "Warning: " .. p3)
-		console[p1](unpack(var1))
+		local MapResult = Array.map(List, tostring)
+		table.insert(MapResult, 1, "Warning: " .. Text)
+		Console[p1](unpack(MapResult))
 	end
 end
 
-return t
+return ConsoleWithStackDevModule

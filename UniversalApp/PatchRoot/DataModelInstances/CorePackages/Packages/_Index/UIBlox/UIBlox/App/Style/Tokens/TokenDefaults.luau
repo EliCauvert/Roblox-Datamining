@@ -1,5 +1,5 @@
-﻿local t = { Transparency = 0, Color3 = Color3.new() }
-local t_1 = {
+﻿local Color = { Transparency = 0, Color3 = Color3.new() }
+local Typography = {
 	FontSize = 0,
 	LineHeight = 0,
 	LetterSpacing = 0,
@@ -90,78 +90,78 @@ return {
 		Opacity_92 = 0,
 		Opacity_100 = 0,
 		Color = {
-			Black = t,
-			White = t,
-			Green = t,
-			Red = t,
-			Blue = t,
-			Carbon = t,
-			Flint = t,
-			Graphite = t,
-			Obsidian = t,
-			Pumice = t,
-			Slate = t,
-			Alabaster = t,
-			Ash = t,
-			Chalk = t,
-			Smoke = t,
-			None = t
+			Black = Color,
+			White = Color,
+			Green = Color,
+			Red = Color,
+			Blue = Color,
+			Carbon = Color,
+			Flint = Color,
+			Graphite = Color,
+			Obsidian = Color,
+			Pumice = Color,
+			Slate = Color,
+			Alabaster = Color,
+			Ash = Color,
+			Chalk = Color,
+			Smoke = Color,
+			None = Color
 		}
 	},
 	Semantic = {
 		Typography = {
-			Title = t_1,
-			Header = t_1,
-			Subheader = t_1,
-			Body = t_1,
-			CaptionHeader = t_1,
-			CaptionBody = t_1,
-			Footer = t_1
+			Title = Typography,
+			Header = Typography,
+			Subheader = Typography,
+			Body = Typography,
+			CaptionHeader = Typography,
+			CaptionBody = Typography,
+			Footer = Typography
 		},
 		Color = {
 			Background = {
-				Default = t,
-				Contrast = t,
-				Muted = t,
-				OnHover = t,
-				OnPress = t
+				Default = Color,
+				Contrast = Color,
+				Muted = Color,
+				OnHover = Color,
+				OnPress = Color
 			},
-			BackgroundUi = { Default = t, Contrast = t },
-			Ui = { Default = t, Muted = t, Emphasis = t },
+			BackgroundUi = { Default = Color, Contrast = Color },
+			Ui = { Default = Color, Muted = Color, Emphasis = Color },
 			Text = {
-				Default = t,
-				Muted = t,
-				Emphasis = t,
-				Link = t,
-				Inverse = t
+				Default = Color,
+				Muted = Color,
+				Emphasis = Color,
+				Link = Color,
+				Inverse = Color
 			},
-			Icon = { Default = t, Emphasis = t, OnHover = t },
+			Icon = { Default = Color, Emphasis = Color, OnHover = Color },
 			Action = {
-				Primary = { Background = t, Border = t, Content = t },
-				PrimaryBrand = { Background = t, Border = t, Content = t },
-				Secondary = { Background = t, Border = t, Content = t },
-				Alert = { Background = t, Border = t, Content = t },
-				Subtle = { Background = t, Border = t, Content = t }
+				Primary = { Background = Color, Border = Color, Content = Color },
+				PrimaryBrand = { Background = Color, Border = Color, Content = Color },
+				Secondary = { Background = Color, Border = Color, Content = Color },
+				Alert = { Background = Color, Border = Color, Content = Color },
+				Subtle = { Background = Color, Border = Color, Content = Color }
 			},
 			State = {
-				Standard = { Default = t, Hover = t, Pressed = t },
-				Lighten = { Default = t, Hover = t, Pressed = t },
-				Inverse = { Default = t, Hover = t, Pressed = t },
-				Darken = { Default = t, Hover = t, Pressed = t }
+				Standard = { Default = Color, Hover = Color, Pressed = Color },
+				Lighten = { Default = Color, Hover = Color, Pressed = Color },
+				Inverse = { Default = Color, Hover = Color, Pressed = Color },
+				Darken = { Default = Color, Hover = Color, Pressed = Color }
 			},
-			Focus = { Start = t, End = t, Gradient = t },
+			Focus = { Start = Color, End = Color, Gradient = Color },
 			Common = {
-				Divider = t,
-				Overlay = t,
-				DropShadow = t,
-				NavigationBar = t,
-				Badge = t,
-				BadgeContent = t,
-				Placeholder = t,
-				Online = t,
-				Offline = t,
-				Alert = t,
-				Success = t
+				Divider = Color,
+				Overlay = Color,
+				DropShadow = Color,
+				NavigationBar = Color,
+				Badge = Color,
+				BadgeContent = Color,
+				Placeholder = Color,
+				Online = Color,
+				Offline = Color,
+				Alert = Color,
+				Success = Color
 			}
 		},
 		Radius = {
@@ -195,9 +195,9 @@ return {
 			Base = {
 				Container = {
 					BorderWidth = 0,
-					Background = t,
-					BorderColor = t,
-					DropShadow = { X = 0, Y = 0, Blur = 0, Color = t },
+					Background = Color,
+					BorderColor = Color,
+					DropShadow = { X = 0, Y = 0, Blur = 0, Color = Color },
 					BorderRadius = {
 						LeadingTop = 0,
 						TrailingTop = 0,
@@ -223,18 +223,18 @@ return {
 					Size = 0,
 					BorderRadius = 0,
 					BorderWidth = 0,
-					BackgroundColor = t,
-					BorderColor = t
+					BackgroundColor = Color,
+					BorderColor = Color
 				},
 				Status = {
 					Size = 0,
 					BorderWidth = 0,
-					BackgroundColor = t,
-					BorderColor = t
+					BackgroundColor = Color,
+					BorderColor = Color
 				},
-				Content = { Gap = 0, Typography = t_1, ContentColor = t },
+				Content = { Gap = 0, Typography = Typography, ContentColor = Color },
 				Icon = { Size = 0 },
-				Presence = { ContentColor = t }
+				Presence = { ContentColor = Color }
 			}
 		},
 		Facepile = {
@@ -245,8 +245,8 @@ return {
 				BorderRadius = 0,
 				Width = 0,
 				Height = 0,
-				BackgroundColor = t,
-				BorderColor = t
+				BackgroundColor = Color,
+				BorderColor = Color
 			},
 			Badge = {
 				BorderWidth = 0,
@@ -254,16 +254,16 @@ return {
 				Spacing = 0,
 				Height = 0,
 				MinWidth = 0,
-				BackgroundColor = t,
-				BorderColor = t,
-				ContentColor = t,
-				Typography = t_1
+				BackgroundColor = Color,
+				BorderColor = Color,
+				ContentColor = Color,
+				Typography = Typography
 			},
-			Label = { ContentColor = t, Typography = t_1 }
+			Label = { ContentColor = Color, Typography = Typography }
 		},
 		ControllerBar = {
 			Gap = 0,
-			BackgroundColor = t,
+			BackgroundColor = Color,
 			BorderRadius = {
 				LeadingTop = 0,
 				TrailingTop = 0,
@@ -273,53 +273,53 @@ return {
 			Spacing = { Top = 0, Trailing = 0, Bottom = 0, Leading = 0 }
 		},
 		ControllerBarShortcut = {
-			Container = { Gap = 0, ContentColor = t },
+			Container = { Gap = 0, ContentColor = Color },
 			Icon = { Size = 0 },
-			Label = { Typography = t_1 }
+			Label = { Typography = Typography }
 		},
 		SelectionCursor = {
 			BorderWidth = 0,
 			Offset = 0,
 			Inset = 0,
-			Gradient = { Start = t, End = t }
+			Gradient = { Start = Color, End = Color }
 		},
 		StateLayer = {
 			Base = { BorderWidth = 0 },
 			Standard = {
-				Initialize = { Color = t },
-				Default = { Color = t },
-				Hover = { Color = t },
-				Pressed = { Color = t },
-				Selected = { Color = t },
-				SelectedPressed = { Color = t },
-				Disabled = { Color = t }
+				Initialize = { Color = Color },
+				Default = { Color = Color },
+				Hover = { Color = Color },
+				Pressed = { Color = Color },
+				Selected = { Color = Color },
+				SelectedPressed = { Color = Color },
+				Disabled = { Color = Color }
 			},
 			Lighten = {
-				Initialize = { Color = t },
-				Default = { Color = t },
-				Hover = { Color = t },
-				Pressed = { Color = t },
-				Selected = { Color = t },
-				SelectedPressed = { Color = t },
-				Disabled = { Color = t }
+				Initialize = { Color = Color },
+				Default = { Color = Color },
+				Hover = { Color = Color },
+				Pressed = { Color = Color },
+				Selected = { Color = Color },
+				SelectedPressed = { Color = Color },
+				Disabled = { Color = Color }
 			},
 			Inverse = {
-				Initialize = { Color = t },
-				Default = { Color = t },
-				Hover = { Color = t },
-				Pressed = { Color = t },
-				Selected = { Color = t },
-				SelectedPressed = { Color = t },
-				Disabled = { Color = t }
+				Initialize = { Color = Color },
+				Default = { Color = Color },
+				Hover = { Color = Color },
+				Pressed = { Color = Color },
+				Selected = { Color = Color },
+				SelectedPressed = { Color = Color },
+				Disabled = { Color = Color }
 			},
 			Darken = {
-				Initialize = { Color = t },
-				Default = { Color = t },
-				Hover = { Color = t },
-				Pressed = { Color = t },
-				Selected = { Color = t },
-				SelectedPressed = { Color = t },
-				Disabled = { Color = t }
+				Initialize = { Color = Color },
+				Default = { Color = Color },
+				Hover = { Color = Color },
+				Pressed = { Color = Color },
+				Selected = { Color = Color },
+				SelectedPressed = { Color = Color },
+				Disabled = { Color = Color }
 			}
 		},
 		MenuCell = {
@@ -327,9 +327,9 @@ return {
 				Container = {
 					Height = 0,
 					BorderWidth = 0,
-					ContentColor = t,
-					BackgroundColor = t,
-					BorderColor = t,
+					ContentColor = Color,
+					BackgroundColor = Color,
+					BorderColor = Color,
 					BorderRadius = {
 						TopLeading = 0,
 						TopTrailing = 0,
@@ -342,11 +342,11 @@ return {
 				TextFrame = {
 					Spacing = { Top = 0, Trailing = 0, Bottom = 0, Leading = 0 }
 				},
-				Text = { Typography = t_1 },
+				Text = { Typography = Typography },
 				CheckFrame = { Size = 0 }
 			},
 			Divider = { Container = { BorderWidth = 0 } },
-			Disabled = { Container = { ContentColor = t } },
+			Disabled = { Container = { ContentColor = Color } },
 			HasRoundBottom = {
 				Container = { BorderRadius = { BottomTrailing = 0, BottomLeading = 0 } }
 			},
@@ -354,36 +354,40 @@ return {
 				Container = { BorderRadius = { TopLeading = 0, TopTrailing = 0 } }
 			}
 		},
-		BaseMenu = { BorderRadius = 0, BackgroundColor = t },
+		BaseMenu = { BorderRadius = 0, BackgroundColor = Color },
 		StatGroup = { Gap = 0 },
 		StatItem = {
-			Container = { Gap = 0, ContentColor = t },
+			Container = { Gap = 0, ContentColor = Color },
 			Icon = { Size = 0 },
-			Label = { Typography = t_1 }
+			Label = { Typography = Typography }
 		},
 		MediaTile = { Container = { BorderRadius = 0 }, Icon = { Size = 0 } },
 		StatWidget = {
-			Container = { Gap = 0, ContentColor = t },
+			Container = { Gap = 0, ContentColor = Color },
 			Icon = { Size = 0 },
 			DataGroup = { Gap = 0 },
-			Data = { Typography = t_1 },
-			Label = { Typography = t_1 }
+			Data = { Typography = Typography },
+			Label = { Typography = Typography }
 		},
 		RateCount = {
 			Container = {
 				Spacing = 0,
 				Gap = 0,
 				BorderRadius = 0,
-				BackgroundColor = t
+				BackgroundColor = Color
 			},
 			ButtonGroup = { Gap = 0 }
 		},
 		PlayerCount = {
-			Container = { Spacing = 0, BorderRadius = 0, BackgroundColor = t }
+			Container = { Spacing = 0, BorderRadius = 0, BackgroundColor = Color }
 		},
 		VerticalScrollView = {
 			Base = {
-				Handle = { BorderRadius = 0, BackgroundColor = t, ContentColor = t },
+				Handle = {
+					BorderRadius = 0,
+					BackgroundColor = Color,
+					ContentColor = Color
+				},
 				Icon = { Size = 0 },
 				Track = { Opacity = 0, Spacing = { Top = 0, Bottom = 0 } }
 			},
@@ -397,22 +401,22 @@ return {
 					BorderRadius = 0,
 					Gap = 0,
 					Opacity = 0,
-					BorderColor = t,
-					Typography = t_1,
+					BorderColor = Color,
+					Typography = Typography,
 					Spacing = { Leading = 0, Trailing = 0 }
 				},
-				PlaceholderText = { ContentColor = t },
-				FieldValue = { ContentColor = t },
-				IconLeading = { Size = 0, ContentColor = t }
+				PlaceholderText = { ContentColor = Color },
+				FieldValue = { ContentColor = Color },
+				IconLeading = { Size = 0, ContentColor = Color }
 			},
-			Error = { Field = { BorderColor = t } },
+			Error = { Field = { BorderColor = Color } },
 			Disabled = { Field = { Opacity = 0 } }
 		},
 		InputLabel = {
 			Base = {
 				Opacity = 0,
-				Typography = t_1,
-				ContentColor = t,
+				Typography = Typography,
+				ContentColor = Color,
 				Spacing = { Bottom = 0 }
 			},
 			Disabled = { Opacity = 0 }
@@ -420,11 +424,11 @@ return {
 		HelperText = {
 			Base = {
 				Opacity = 0,
-				Typography = t_1,
-				ContentColor = t,
+				Typography = Typography,
+				ContentColor = Color,
 				Padding = { Top = 0 }
 			},
-			Error = { ContentColor = t }
+			Error = { ContentColor = Color }
 		}
 	}
 }

@@ -1,38 +1,38 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(0)
+return function(Delay, p1, Callback) --[[ Line: 6 | Named "useDelayedActionHandler" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(0)
 	
-	local function handleAction()
-		-- upvalues: p2 (ref), var2 (ref), var1 (ref), p1 (ref), p3 (ref)
-		local processTime = os.clock()
+	local function handleAction() --[[ Line: 15 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy), UseRefResult (copy), Delay (copy), Callback (copy)
+		local ClockTime = os.clock()
 		
-		if p2 ~= nil and var2.current ~= nil and processTime - var2.current < p2 then return end
-		var2.current = processTime
-		local current = var1.current
+		if p1 ~= nil and UseRefResult1.current ~= nil and ClockTime - UseRefResult1.current < p1 then return end
+		UseRefResult1.current = ClockTime
+		local Current = UseRefResult.current
 		
-		if current ~= nil then
-			task.cancel(current)
+		if Current ~= nil then
+			task.cancel(Current)
 		end
-		var1.current = task.delay(p1, function()
-			-- upvalues: p3 (copy)
-			p3()
+		UseRefResult.current = task.delay(Delay, function() --[[ Line: 33 ]]
+			-- upvalues: Callback (upval)
+			Callback()
 		end)
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		return function()
-			-- upvalues: var1 (copy)
-			local current = var1.current
+	ReactModule.useEffect(function() --[[ Line: 38 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 39 ]]
+			-- upvalues: UseRefResult (upval)
+			local Current = UseRefResult.current
 			
-			if current ~= nil then
-				task.cancel(current)
+			if Current ~= nil then
+				task.cancel(Current)
 			end
 		end
-	end, { var1 })
+	end, { UseRefResult })
 	
 	return handleAction
 end

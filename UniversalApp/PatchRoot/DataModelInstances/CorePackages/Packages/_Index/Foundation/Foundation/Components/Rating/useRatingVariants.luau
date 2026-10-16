@@ -1,13 +1,13 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local iconSizeModule = require(foundation.Enums.IconSize)
-local chipSizeModule = require(foundation.Enums.ChipSize)
-local _ = require(foundation.Components.Types)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local ChipSizeModule = require(Foundation.Enums.ChipSize)
+local _ = require(Foundation.Components.Types)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1)
-	-- upvalues: chipSizeModule (ref), iconSizeModule (ref)
+local function variantsFactory(p1) --[[ Line: 40 ]]
+	-- upvalues: ChipSizeModule (copy), IconSizeModule (copy)
 	return {
 		common = {
 			container = {
@@ -23,7 +23,7 @@ local function variantsFactory(p1)
 			text = { contentStyle = p1.Color.ActionStandard.Foreground }
 		},
 		sizes = {
-			[chipSizeModule.Small] = {
+			[ChipSizeModule.Small] = {
 				thumbSegment = { tag = "size-0-600" },
 				dividerContainer = {
 					tag = "align-y-center size-0-600 auto-x padding-y-xsmall"
@@ -33,9 +33,9 @@ local function variantsFactory(p1)
 				text = {
 					tag = "shrink size-0-full auto-x text-label-small text-truncate-end padding-right-small"
 				},
-				iconSize = iconSizeModule.XSmall
+				iconSize = IconSizeModule.XSmall
 			},
-			[chipSizeModule.Medium] = {
+			[ChipSizeModule.Medium] = {
 				thumbSegment = { tag = "size-0-800" },
 				dividerContainer = { tag = "align-y-center size-0-800 auto-x padding-y-small" },
 				thumbUpIcon = { tag = "auto-xy padding-left-medium padding-right-xsmall" },
@@ -43,9 +43,9 @@ local function variantsFactory(p1)
 				text = {
 					tag = "shrink size-0-full auto-x text-label-medium text-truncate-end padding-right-medium"
 				},
-				iconSize = iconSizeModule.Small
+				iconSize = IconSizeModule.Small
 			},
-			[chipSizeModule.Large] = {
+			[ChipSizeModule.Large] = {
 				thumbSegment = { tag = "size-0-1000" },
 				dividerContainer = {
 					tag = "align-y-center size-0-1000 auto-x padding-y-small"
@@ -55,33 +55,33 @@ local function variantsFactory(p1)
 				text = {
 					tag = "shrink size-0-full auto-x text-label-medium text-truncate-end padding-right-large"
 				},
-				iconSize = iconSizeModule.Medium
+				iconSize = IconSizeModule.Medium
 			}
 		}
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local rating = variantsContextModule.useVariants("Rating", variantsFactory, p1)
-	local var1 = rating.sizes[p2]
-	local var2 = composeStyleVariantModule(rating.common, {
-		thumbUpSegment = var1.thumbSegment,
-		thumbDownSegment = var1.thumbSegment,
-		text = var1.text
+return function(p1, p2) --[[ Line: 90 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local Rating = VariantsContextModule.useVariants("Rating", variantsFactory, p1)
+	local Size = Rating.sizes[p2]
+	local ComposeStyleVariantModuleResult = ComposeStyleVariantModule(Rating.common, {
+		thumbUpSegment = Size.thumbSegment,
+		thumbDownSegment = Size.thumbSegment,
+		text = Size.text
 	})
 	
 	return {
-		container = var2.container,
-		thumbUpSegment = var2.thumbUpSegment,
-		thumbDownSegment = var2.thumbDownSegment,
-		dividerContainer = var1.dividerContainer,
-		thumbUpIcon = var1.thumbUpIcon,
-		thumbDownIcon = var1.thumbDownIcon,
+		container = ComposeStyleVariantModuleResult.container,
+		thumbUpSegment = ComposeStyleVariantModuleResult.thumbUpSegment,
+		thumbDownSegment = ComposeStyleVariantModuleResult.thumbDownSegment,
+		dividerContainer = Size.dividerContainer,
+		thumbUpIcon = Size.thumbUpIcon,
+		thumbDownIcon = Size.thumbDownIcon,
 		text = {
-			tag = var2.text.tag,
-			contentStyle = var2.text.contentStyle
+			tag = ComposeStyleVariantModuleResult.text.tag,
+			contentStyle = ComposeStyleVariantModuleResult.text.contentStyle
 		},
-		iconSize = var1.iconSize
+		iconSize = Size.iconSize
 	}
 end

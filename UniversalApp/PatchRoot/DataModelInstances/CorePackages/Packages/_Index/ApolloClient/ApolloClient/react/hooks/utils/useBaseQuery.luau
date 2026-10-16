@@ -1,96 +1,94 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local promiseModule = require(parent_1.Promise)
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local reactModule = require(parent_1.React)
-local useContext = reactModule.useContext
-local useEffect = reactModule.useEffect
-local useReducer = reactModule.useReducer
-local useRef = reactModule.useRef
-local _ = require(parent_1.GraphQL)
-local _ = require(parent.jsutils.typedDocumentNode)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local PromiseModule = require(Parent1.Promise)
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local ReactModule = require(Parent1.React)
+local UseContextFunction = ReactModule.useContext
+local UseEffectFunction = ReactModule.useEffect
+local UseReducerFunction = ReactModule.useReducer
+local UseRefFunction = ReactModule.useRef
+local _ = require(Parent1.GraphQL)
+local _ = require(Parent.jsutils.typedDocumentNode)
 local _ = require(script.Parent.Parent.Parent.types.types)
-local queryData = require(script.Parent.Parent.Parent.data).QueryData
-local useDeepMemo = require(script.Parent.useDeepMemo).useDeepMemo
+local QueryData = require(script.Parent.Parent.Parent.data).QueryData
+local UseDeepMemoFunction = require(script.Parent.useDeepMemo).useDeepMemo
 local _ = require(script.Parent.Parent.Parent.Parent.core)
-local getApolloContext = require(script.Parent.Parent.Parent.context).getApolloContext
-local useAfterFastRefresh = require(script.Parent.useAfterFastRefresh).useAfterFastRefresh
-local t_1 = { __value = "nil placeholder" }
+local GetApolloContextFunction = require(script.Parent.Parent.Parent.context).getApolloContext
+local UseAfterFastRefreshFunction = require(script.Parent.useAfterFastRefresh).useAfterFastRefresh
+local config = { __value = "nil placeholder" }
 
-function t.useBaseQuery(p1, p2, p3)
-	-- upvalues: useContext (ref), getApolloContext (ref), useReducer (ref), boolean (ref), object (ref), useRef (ref), queryData (ref), promiseModule (ref), useDeepMemo (ref), useAfterFastRefresh (ref), useEffect (ref), t_1 (ref)
-	if p3 == nil then
-		p3 = false
-	end
-	local var1 = useContext(getApolloContext())
-	local var2, var3 = useReducer(function(p4)
-		return p4 + 1
-	end, 0)
-	local var4 = boolean.toJSBoolean(p2) and object.assign({}, p2, { query = p1 }) or { query = p1 }
-	local var5 = useRef(nil)
-	local var6 = nil
-	local current = var5.current
-	
-	if not current then
-		var5.current = queryData.new({
-			options = var4,
-			context = var1,
-			onNewData = function(_)
-				-- upvalues: boolean (copy), var6 (write), promiseModule (copy), var5 (ref), var3 (ref)
-				if boolean.toJSBoolean(var6:ssrInitiated()) then
-					var3(nil)
-					
-					return
-				end
-				promiseModule.delay(0):andThen(function()
-					-- upvalues: var5 (copy), var3 (copy)
-					if var5.current == nil or not var5.current.isMounted then
-						return
-					end
-					return var3(nil)
-				end)
-			end
-		})
-		current = var5.current
-	end
-	var6 = current
-	var6:setOptions(var4)
-	var6.context = var1
-	local var7 = useDeepMemo(function()
-		-- upvalues: p3 (write), var6 (write)
-		return if p3 then var6:executeLazy() else var6:execute()
-	end, {
-		options = object.assign({}, var4, { onError = object.None, onCompleted = object.None }),
-		context = var1,
-		tick = var2
-	})
-	local var8 = if p3 then var7[2] else var7
-	
-	if _G.__DEV__ then
-		useAfterFastRefresh(var3)
-	end
-	useEffect(function()
-		-- upvalues: var6 (write), var5 (ref)
-		return function()
-			-- upvalues: var6 (copy), var5 (copy)
-			var6:cleanup()
-			var5.current = nil
+return {
+	useBaseQuery = function(Query, p1, Lazy: boolean) --[[ Line: 48 ]]
+		-- upvalues: UseContextFunction (copy), GetApolloContextFunction (copy), UseReducerFunction (copy), Boolean (copy), Object (copy), UseRefFunction (copy), QueryData (copy), PromiseModule (copy), UseDeepMemoFunction (copy), UseAfterFastRefreshFunction (copy), UseEffectFunction (copy), config (copy)
+		if Lazy == nil then
+			Lazy = false
 		end
-	end, {})
-	useEffect(function()
-		-- upvalues: var6 (write), p3 (write)
-		return var6:afterExecute({ lazy = p3 })
-	end, {
-		if var8.loading ~= nil then var8.loading else t_1,
-		if var8.networkStatus ~= nil then var8.networkStatus else t_1,
-		if var8.error ~= nil then var8.error else t_1,
-		if var8.data ~= nil then var8.data else t_1
-	})
-	
-	return var7
-end
-
-return t
+		local UseContextResult = UseContextFunction(GetApolloContextFunction())
+		local UseReducerResult, UseReducerResult2 = UseReducerFunction(function(p2: number): number --[[ Line: 58 ]]
+			return p2 + 1
+		end, 0)
+		local AssignResult = Boolean.toJSBoolean(p1) and Object.assign({}, p1, { query = Query }) or { query = Query }
+		local UseRefResult = UseRefFunction(nil)
+		local v1 = nil
+		local Current = UseRefResult.current
+		
+		if not Current then
+			UseRefResult.current = QueryData.new({
+				options = AssignResult,
+				context = UseContextResult,
+				onNewData = function(_) --[[ Line: 70 ]]
+					-- upvalues: Boolean (upval), v1 (ref), PromiseModule (upval), UseRefResult (copy), UseReducerResult2 (copy)
+					if Boolean.toJSBoolean(v1:ssrInitiated()) then
+						UseReducerResult2(nil)
+						
+						return
+					else
+						PromiseModule.delay(0):andThen(function() --[[ Line: 78 ]]
+							-- upvalues: UseRefResult (upval), UseReducerResult2 (upval)
+							if UseRefResult.current == nil or not UseRefResult.current.isMounted then return end
+							return UseReducerResult2(nil)
+						end)
+					end
+				end
+			})
+			Current = UseRefResult.current
+		end
+		v1 = Current
+		v1:setOptions(AssignResult)
+		v1.context = UseContextResult
+		local UseDeepMemoResult = UseDeepMemoFunction(function() --[[ Line: 114 ]]
+			-- upvalues: Lazy (ref), v1 (ref)
+			return if Lazy then v1:executeLazy() else v1:execute()
+		end, {
+			options = Object.assign({}, AssignResult, { onError = Object.None, onCompleted = Object.None }),
+			context = UseContextResult,
+			tick = UseReducerResult
+		})
+		local UseDeepMemoResultEntry = if Lazy then UseDeepMemoResult[2] else UseDeepMemoResult
+		
+		if _G.__DEV__ then
+			UseAfterFastRefreshFunction(UseReducerResult2)
+		end
+		UseEffectFunction(function() --[[ Line: 131 ]]
+			-- upvalues: v1 (ref), UseRefResult (copy)
+			return function() --[[ Line: 132 ]]
+				-- upvalues: v1 (upval), UseRefResult (upval)
+				v1:cleanup()
+				UseRefResult.current = nil
+			end
+		end, {})
+		UseEffectFunction(function() --[[ Line: 140 ]]
+			-- upvalues: v1 (ref), Lazy (ref)
+			return v1:afterExecute({ lazy = Lazy })
+		end, {
+			if UseDeepMemoResultEntry.loading == nil then config else UseDeepMemoResultEntry.loading or config,
+			if UseDeepMemoResultEntry.networkStatus == nil then config else UseDeepMemoResultEntry.networkStatus or config,
+			if UseDeepMemoResultEntry.error == nil then config else UseDeepMemoResultEntry.error or config,
+			if UseDeepMemoResultEntry.data == nil then config else UseDeepMemoResultEntry.data or config
+		})
+		
+		return UseDeepMemoResult
+	end
+}

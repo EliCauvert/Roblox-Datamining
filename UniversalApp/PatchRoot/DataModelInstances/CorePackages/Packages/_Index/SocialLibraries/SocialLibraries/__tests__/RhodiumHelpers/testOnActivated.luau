@@ -1,26 +1,26 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local packages = script:FindFirstAncestor("Packages")
-local rhodiumModule = require(packages.Dev.Rhodium)
-local roactModule = require(packages.Roact)
-local element = rhodiumModule.Element
-local xPath = rhodiumModule.XPath
-local mockStyleModule = require(script.Parent.Parent.UnitTestHelpers.mockStyle)
+﻿local CoreGui = game:GetService("CoreGui")
+local Packages = script:FindFirstAncestor("Packages")
+local RhodiumModule = require(Packages.Dev.Rhodium)
+local RoactModule = require(Packages.Roact)
+local Element = RhodiumModule.Element
+local XPath = RhodiumModule.XPath
+local MockStyleModule = require(script.Parent.Parent.UnitTestHelpers.mockStyle)
 
-return function(p1)
-	-- upvalues: roactModule (ref), mockStyleModule (ref), coreGuiService (ref), xPath (ref), element (ref)
-	local var1 = false
-	local testRoot = roactModule.mount(mockStyleModule(roactModule.createElement("ScreenGui", {}, {
-		buttonElement = roactModule.createElement(p1, {
-			onActivated = function()
-				-- upvalues: var1 (write)
-				var1 = true
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: RoactModule (copy), MockStyleModule (copy), CoreGui (copy), XPath (copy), Element (copy)
+	local Enabled = false
+	local TestRoot = RoactModule.mount(MockStyleModule((RoactModule.createElement("ScreenGui", {}, {
+		buttonElement = RoactModule.createElement(p1, {
+			onActivated = function() --[[ Line: 16 ]]
+				-- upvalues: Enabled (ref)
+				Enabled = true
 			end
 		})
-	})), coreGuiService, "TestRoot")
-	local var2 = element.new(xPath.new("game.CoreGui.Children.buttonElement"))
-	assert(var2:getRbxInstance() ~= nil, "button was nil")
-	var2:click()
+	}))), CoreGui, "TestRoot")
+	local NewElement = Element.new((XPath.new("game.CoreGui.Children.buttonElement")))
+	assert(NewElement:getRbxInstance() ~= nil, "button was nil")
+	NewElement:click()
 	wait(0)
-	assert(var1 == true, "button was not activated")
-	roactModule.unmount(testRoot)
+	assert(Enabled == true, "button was not activated")
+	RoactModule.unmount(TestRoot)
 end

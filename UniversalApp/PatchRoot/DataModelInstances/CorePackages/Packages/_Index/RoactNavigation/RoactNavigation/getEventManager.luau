@@ -1,47 +1,47 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 3 | Named "getEventManager" ]]
 	local t = {}
 	
-	local function _(p2, p3)
-		-- upvalues: t (ref), p1 (ref)
-		local var1 = t[p2]
-		local var2 = if var1 then var1[p1] else nil
+	local function _(p2, Value) --[[ Line: 6 | Named "removeListener" ]]
+		-- upvalues: t (copy), p1 (copy)
+		local Entry = t[p2]
+		local List = if Entry then Entry[p1] else nil
 		
-		if var2 then
-			table.remove(var2, table.find(var2, p3))
+		if List then
+			table.remove(List, (table.find(List, Value)))
 			
 			return
 		end
 	end
 	
 	return {
-		addListener = function(p2, p3)
-			-- upvalues: t (ref), p1 (ref)
-			t[p2] = t[p2] or {}
-			t[p2][p1] = t[p2][p1] or {}
-			table.insert(t[p2][p1], p3)
+		addListener = function(Key, Value) --[[ Line: 18 ]]
+			-- upvalues: t (copy), p1 (copy)
+			t[Key] = t[Key] or {}
+			t[Key][p1] = t[Key][p1] or {}
+			table.insert(t[Key][p1], Value)
 			
 			return {
-				remove = function()
-					-- upvalues: p2 (ref), p3 (ref), t (copy), p1 (copy)
-					local var1 = t[p2]
-					local var2 = if var1 then var1[p1] else nil
+				remove = function() --[[ Line: 25 ]]
+					-- upvalues: Key (copy), Value (copy), t (upval), p1 (upval)
+					local Entry = t[Key]
+					local List = if Entry then Entry[p1] else nil
 					
-					if var2 then
-						table.remove(var2, table.find(var2, p3))
+					if List then
+						table.remove(List, (table.find(List, Value)))
 						
 						return
 					end
 				end
 			}
 		end,
-		emit = function(p2, p3)
-			-- upvalues: t (ref), p1 (ref)
-			local var1 = t[p2] or {}
-			local var2 = if var1[p1] then table.clone(var1[p1]) else nil
+		emit = function(p2, p3) --[[ Line: 33 ]]
+			-- upvalues: t (copy), p1 (copy)
+			local Entry = t[p2] or {}
+			local Copy = if Entry[p1] then table.clone(Entry[p1]) else nil
 			
-			if var2 then
-				for i, v in var2 do
-					v(p3)
+			if Copy then
+				for _, value in Copy do
+					value(p3)
 				end
 			end
 		end

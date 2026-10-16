@@ -1,30 +1,32 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-local function _(p1, p2)
-	if type(p1) == "function" then
-		p1(p2)
+local function _(Callback: (any) -> (), Current) --[[ Line: 9 | Named "forwardRefValue" ]]
+	if type(Callback) == "function" then
+		Callback(Current)
 		
 		return
-	elseif type(p1) == "table" then
-		p1.current = p2
+	end
+	if type(Callback) == "table" then
+		Callback.current = Current
 	end
 end
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	return reactModule.useCallback(function(p3)
-		-- upvalues: p1 (ref), p2 (ref)
-		if type(p1) == "function" then
-			p1(p3)
-		elseif type(p1) == "table" then
-			p1.current = p3
+return function(Callback, Callback1) --[[ Line: 22 | Named "useComposedRef" ]]
+	-- upvalues: ReactModule (copy)
+	return (ReactModule.useCallback(function(Current) --[[ Line: 23 ]]
+		-- upvalues: Callback (copy), Callback1 (copy)
+		if type(Callback) == "function" then
+			Callback(Current)
+		elseif type(Callback) == "table" then
+			Callback.current = Current
 		end
-		if type(p2) == "function" then
-			p2(p3)
+		if type(Callback1) == "function" then
+			Callback1(Current)
 			
 			return
-		elseif type(p2) == "table" then
-			p2.current = p3
 		end
-	end, { p1, p2 })
+		if type(Callback1) == "table" then
+			Callback1.current = Current
+		end
+	end, { Callback, Callback1 }))
 end

@@ -1,59 +1,64 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
-local t = {
-	map = function(p1, p2)
-		return p1:map(p2)
+﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+local BindingsModule = {
+	map = function(BindingResult, p1) --[[ Line: 27 ]]
+		return BindingResult:map(p1)
 	end,
-	binding = function(p1)
-		return p1
+	binding = function(JoinBindingsResult) --[[ Line: 32 ]]
+		return JoinBindingsResult
 	end
 }
 
-function t.useBinding(p1)
-	-- upvalues: reactModule (ref), t (ref)
-	local var1, var2 = reactModule.useBinding(p1)
+function BindingsModule.useBinding(p1) --[[ Line: 36 ]]
+	-- upvalues: ReactModule (copy), BindingsModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(p1)
 	
-	return t.binding(var1), var2
+	return BindingsModule.binding(UseBindingResult), UseBindingResult2
 end
 
-function t.createBinding(p1)
-	-- upvalues: reactModule (ref), t (ref)
-	local var1, var2 = reactModule.createBinding(p1)
+function BindingsModule.createBinding(p1) --[[ Line: 41 ]]
+	-- upvalues: ReactModule (copy), BindingsModule (copy)
+	local Binding, Binding2 = ReactModule.createBinding(p1)
 	
-	return t.binding(var1), var2
+	return BindingsModule.binding(Binding), Binding2
 end
 
-function t.joinBindings2(p1, p2)
-	-- upvalues: t (ref), reactModule (ref)
-	return t.binding(reactModule.joinBindings({ first = p1, second = p2 }))
+function BindingsModule.joinBindings2(First, Second) --[[ Line: 46 ]]
+	-- upvalues: BindingsModule (copy), ReactModule (copy)
+	return BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second }))
 end
 
-function t.mapBindings2(p1, p2, p3)
-	-- upvalues: t (ref), reactModule (ref)
-	return t.map(t.binding(reactModule.joinBindings({ first = p1, second = p2 })), function(p4)
-		-- upvalues: p3 (ref)
-		return p3(p4.first, p4.second)
+function BindingsModule.mapBindings2(First, Second, Callback) --[[ Line: 53 ]]
+	-- upvalues: BindingsModule (copy), ReactModule (copy)
+	return BindingsModule.map(BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second })), function(p1) --[[ Line: 59 ]]
+		-- upvalues: Callback (copy)
+		return Callback(p1.first, p1.second)
 	end)
 end
 
-function t.joinBindings3(p1, p2, p3)
-	-- upvalues: t (ref), reactModule (ref)
-	return t.binding(reactModule.joinBindings({ first = p1, second = p2, third = p3 }))
+function BindingsModule.joinBindings3(First, Second, Third) --[[ Line: 65 ]]
+	-- upvalues: BindingsModule (copy), ReactModule (copy)
+	return BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second, third = Third }))
 end
 
-function t.mapBindings3(p1, p2, p3, p4)
-	-- upvalues: t (ref), reactModule (ref)
-	return t.map(t.binding(reactModule.joinBindings({ first = p1, second = p2, third = p3 })), function(p5)
-		-- upvalues: p4 (ref)
-		return p4(p5.first, p5.second, p5.third)
+function BindingsModule.mapBindings3(First, Second, Third, Callback) --[[ Line: 77 ]]
+	-- upvalues: BindingsModule (copy), ReactModule (copy)
+	return BindingsModule.map(BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second, third = Third })), function(p1) --[[ Line: 89 ]]
+		-- upvalues: Callback (copy)
+		return Callback(p1.first, p1.second, p1.third)
 	end)
 end
 
-function t.mapBindings4(p1, p2, p3, p4, p5)
-	-- upvalues: t (ref), reactModule (ref)
-	return t.map(t.binding(reactModule.joinBindings({ first = p1, second = p2, third = p3, fourth = p4 })), function(p6)
-		-- upvalues: p5 (ref)
-		return p5(p6.first, p6.second, p6.third, p6.fourth)
+function BindingsModule.mapBindings4(First, Second, Third, Fourth, Callback) --[[ Line: 95 ]]
+	-- upvalues: BindingsModule (copy), ReactModule (copy)
+	return BindingsModule.map(BindingsModule.binding(ReactModule.joinBindings({
+		first = First,
+		second = Second,
+		third = Third,
+		fourth = Fourth
+	})), function(p1) --[[ Line: 109 ]]
+		-- upvalues: Callback (copy)
+		return Callback(p1.first, p1.second, p1.third, p1.fourth)
 	end)
 end
 
-return t
+return BindingsModule

@@ -1,149 +1,169 @@
-﻿local cryoModule = require(script.Parent.Parent.Cryo)
-local focusControllerInternalApiModule = require(script.Parent.FocusControllerInternalApi)
-local inputBindingsEqualModule = require(script.Parent.inputBindingsEqual)
-local debugPrintModule = require(script.Parent.debugPrint)
-local configModule = require(script.Parent.Config)
-local t = {}
-t.__index = t
+﻿local CryoModule = require(script.Parent.Parent.Cryo)
+local FocusControllerInternalApiModule = require(script.Parent.FocusControllerInternalApi)
+local InputBindingsEqualModule = require(script.Parent.inputBindingsEqual)
+local DebugPrintModule = require(script.Parent.debugPrint)
+local ConfigModule = require(script.Parent.Config)
+local FocusNodeModule = {}
+FocusNodeModule.__index = FocusNodeModule
 
-function t.new(p1, p2)
-	-- upvalues: t (ref)
-	local focusController = nil
+function FocusNodeModule.new(p1, Ref) --[[ Line: 17 ]]
+	-- upvalues: FocusNodeModule (copy)
+	local FocusController = nil
 	
-	if p1.parentFocusNode ~= nil then
-		focusController = p1.parentFocusNode.focusController
-	elseif p1.focusController == nil then
-		error("Cannot create node without focus manager")
+	if p1.parentFocusNode == nil then
+		if p1.focusController == nil then
+			error("Cannot create node without focus manager")
+		else
+			FocusController = p1.focusController
+		end
 	else
-		focusController = p1.focusController
+		FocusController = p1.parentFocusNode.focusController
 	end
-	local tbl = setmetatable({
+	local self = setmetatable({
 		lastFocused = nil,
-		focusController = focusController,
-		ref = p2
-	}, t)
-	tbl:updateNavProps(p1)
+		focusController = FocusController,
+		ref = Ref
+	}, FocusNodeModule)
+	self:updateNavProps(p1)
 	
-	return tbl
+	return self
 end
 
-function t:__getFocusControllerInternal()
-	-- upvalues: focusControllerInternalApiModule (ref)
-	return self.focusController[focusControllerInternalApiModule]
+function FocusNodeModule:__getFocusControllerInternal() --[[ Line: 40 ]]
+	-- upvalues: FocusControllerInternalApiModule (copy)
+	return self.focusController[FocusControllerInternalApiModule]
 end
 
-function t:__findDefaultChildNode()
-	local layoutOrder
-	local var1 = 1e999
-	local var2 = nil
-	local var3 = self:__getFocusControllerInternal():getChildren(self)
-	local value = self.ref:getValue()
+function FocusNodeModule:__findDefaultChildNode() --[[ Line: 44 ]]
+	local v1 = 1e999
+	local v2 = nil
+	local Children = self:__getFocusControllerInternal():getChildren(self)
+	local Value = self.ref:getValue()
+	local LayoutOrder = nil
 	
-	for i, v in pairs(var3) do
-		local value_1 = i:getValue()
+	for i, child in pairs(Children) do
+		local Value1 = i:getValue()
+		while Value1 ~= Value and Value1 ~= nil do
+			if Value1:isA("GuiObject") then
+				LayoutOrder = Value1.LayoutOrder
+				
+				if LayoutOrder ~= 0 then
+					if LayoutOrder >= v1 then break end
+					v1 = LayoutOrder
+					v2 = child
+					break
+				end
+			end
+			Value1 = Value1.Parent
+		end
 	end
-	if var2 ~= nil then
-		return var2
+	if v2 ~= nil then
+		return v2
 	end
-	for i_1, v_1 in pairs(var3) do
-		if i_1:getValue() ~= nil then
-			return v_1
+	for i1, child1 in pairs(Children) do
+		if i1:getValue() ~= nil then
+			return child1
 		end
 	end
 	return nil
 end
 
-function t:updateNavProps(p1)
-	-- upvalues: inputBindingsEqualModule (ref)
-	local var4 = p1.restorePreviousChildFocus ~= nil and p1.restorePreviousChildFocus
-	local inputBindings = self.inputBindings
+function FocusNodeModule:updateNavProps(p1) --[[ Line: 98 ]]
+	-- upvalues: InputBindingsEqualModule (copy)
+	local RestorePreviousChildFocus = p1.restorePreviousChildFocus ~= nil and p1.restorePreviousChildFocus
+	local InputBindings = self.inputBindings
 	self.defaultChildRef = p1.defaultChild
-	self.restorePreviousChildFocus = var4
+	self.restorePreviousChildFocus = RestorePreviousChildFocus
 	self.inputBindings = p1.inputBindings or {}
-	local focusControllerInternal = self:__getFocusControllerInternal()
+	local FocusControllerInternal = self:__getFocusControllerInternal()
 	
-	if focusControllerInternal:isNodeFocused(self) and not inputBindingsEqualModule(inputBindings, self.inputBindings) then
-		focusControllerInternal:updateInputBindings()
+	if FocusControllerInternal:isNodeFocused(self) and not InputBindingsEqualModule(InputBindings, self.inputBindings) then
+		FocusControllerInternal:updateInputBindings()
 	end
 end
 
-function t:focus()
-	-- upvalues: configModule (ref), cryoModule (ref), debugPrintModule (ref)
-	if not configModule.Enabled then return end
-	local focusControllerInternal = self:__getFocusControllerInternal()
+function FocusNodeModule:focus() --[[ Line: 116 ]]
+	-- upvalues: ConfigModule (copy), CryoModule (copy), DebugPrintModule (copy)
+	if not ConfigModule.Enabled then return end
+	local FocusControllerInternal = self:__getFocusControllerInternal()
 	
-	if not focusControllerInternal:isInitialized() then return end
-	focusControllerInternal:setInProgressFocus(self)
+	if not FocusControllerInternal:isInitialized() then return end
+	FocusControllerInternal:setInProgressFocus(self)
 	
-	if cryoModule.isEmpty(focusControllerInternal:getChildren(self)) then
-		focusControllerInternal:setSelection(self.ref:getValue())
+	if CryoModule.isEmpty((FocusControllerInternal:getChildren(self))) then
+		FocusControllerInternal:setSelection(self.ref:getValue())
 		
 		return
 	end
-	local processTime = os.clock()
-	local var4 = self.defaultChildRef ~= nil and (focusControllerInternal.allNodes[self.defaultChildRef] ~= nil and self.defaultChildRef:getValue() ~= nil)
-	local var5 = if self.timeout ~= nil then processTime < self.timeout else true
+	local ClockTime = os.clock()
+	local HasValue: boolean = self.defaultChildRef ~= nil and (FocusControllerInternal.allNodes[self.defaultChildRef] ~= nil and self.defaultChildRef:getValue() ~= nil)
+	local NoTimeout: boolean = self.timeout == nil or ClockTime < self.timeout
 	
 	if self.restorePreviousChildFocus and self.lastFocused ~= nil and self.lastFocused:getValue() then
-		debugPrintModule("[FOCUS] Restore previous focus:", self.lastFocused)
-		focusControllerInternal:moveFocusTo(self.lastFocused)
+		DebugPrintModule("[FOCUS] Restore previous focus:", self.lastFocused)
+		FocusControllerInternal:moveFocusTo(self.lastFocused)
 		
 		return
-	elseif self.defaultChildRef and (var5 or var4) then
-		if var4 then
-			debugPrintModule("[FOCUS] Found valid default child", self.defaultChildRef, "for", self.ref)
+	end
+	if self.defaultChildRef and (NoTimeout or HasValue) then
+		if HasValue then
+			DebugPrintModule("[FOCUS] Found valid default child", self.defaultChildRef, "for", self.ref)
 			self.timeout = nil
-			focusControllerInternal:moveFocusTo(self.defaultChildRef)
+			FocusControllerInternal:moveFocusTo(self.defaultChildRef)
 			
 			return
-		elseif self.timeout == nil then
-			debugPrintModule("[FOCUS] Default child specified is not valid. Wait for it to be assigned...")
-			self.timeout = processTime + 0.5
 		end
-		task.delay(0, function()
-			-- upvalues: focusControllerInternal (ref), self (ref)
-			if focusControllerInternal:isInProgressFocus(self) then
+		if self.timeout == nil then
+			DebugPrintModule("[FOCUS] Default child specified is not valid. Wait for it to be assigned...")
+			self.timeout = ClockTime + 0.5
+		end
+		task.delay(0, function() --[[ Line: 155 ]]
+			-- upvalues: FocusControllerInternal (copy), self (copy)
+			if FocusControllerInternal:isInProgressFocus(self) then
 				self:focus()
 			end
 		end)
 		
 		return
-	elseif self.timeout ~= nil then
-		debugPrintModule("[FOCUS] Timeout for default child of", self.ref)
-		self.timeout = nil
-	end
-	local var6 = self:__findDefaultChildNode()
-	
-	if var6 == nil then
-		focusControllerInternal:setFocusedLeaf(self)
-		focusControllerInternal:setInProgressFocus(nil)
+	else
+		if self.timeout ~= nil then
+			DebugPrintModule("[FOCUS] Timeout for default child of", self.ref)
+			self.timeout = nil
+		end
+		local DefaultChildNode = self:__findDefaultChildNode()
 		
-		return
+		if DefaultChildNode == nil then
+			FocusControllerInternal:setFocusedLeaf(self)
+			FocusControllerInternal:setInProgressFocus(nil)
+			
+			return
+		else
+			DebugPrintModule("[FOCUS] No default, use fallback logic to focus", DefaultChildNode.ref)
+			DefaultChildNode:focus()
+		end
 	end
-	debugPrintModule("[FOCUS] No default, use fallback logic to focus", var6.ref)
-	var6:focus()
 end
 
-function t:attachToTree(p1, p2)
-	-- upvalues: cryoModule (ref)
-	local focusControllerInternal = self:__getFocusControllerInternal()
-	focusControllerInternal:registerNode(p1, self.ref, self)
-	self.parent = p1
-	self.disconnectSelectionListener = focusControllerInternal:subscribeToSelectionChange(function()
-		-- upvalues: focusControllerInternal (ref), self (ref), p2 (ref), cryoModule (copy)
-		local var4 = focusControllerInternal:isNodeFocused(self)
-		p2(var4)
+function FocusNodeModule:attachToTree(Parent, Callback) --[[ Line: 180 ]]
+	-- upvalues: CryoModule (copy)
+	local FocusControllerInternal = self:__getFocusControllerInternal()
+	FocusControllerInternal:registerNode(Parent, self.ref, self)
+	self.parent = Parent
+	self.disconnectSelectionListener = FocusControllerInternal:subscribeToSelectionChange(function() --[[ Line: 185 ]]
+		-- upvalues: FocusControllerInternal (copy), self (copy), Callback (copy), CryoModule (upval)
+		local IsNodeFocused = FocusControllerInternal:isNodeFocused(self)
+		Callback(IsNodeFocused)
 		
-		if self.parent ~= nil and var4 then
+		if self.parent ~= nil and IsNodeFocused then
 			self.parent.lastFocused = self.ref
 		end
-		if not cryoModule.isEmpty(focusControllerInternal:getChildren(self)) and var4 and focusControllerInternal:getSelection() == self.ref:getValue() then
+		if not CryoModule.isEmpty((FocusControllerInternal:getChildren(self))) and IsNodeFocused and FocusControllerInternal:getSelection() == self.ref:getValue() then
 			self:focus()
 		end
 	end)
 end
 
-function t:detachFromTree()
+function FocusNodeModule:detachFromTree() --[[ Line: 209 ]]
 	self:__getFocusControllerInternal():deregisterNode(self.parent, self.ref)
 	
 	if self.disconnectSelectionListener ~= nil then
@@ -152,4 +172,4 @@ function t:detachFromTree()
 	end
 end
 
-return t
+return FocusNodeModule

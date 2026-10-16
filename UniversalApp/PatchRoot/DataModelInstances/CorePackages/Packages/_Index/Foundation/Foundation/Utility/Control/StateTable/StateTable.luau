@@ -1,71 +1,71 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Enums.ControlState)
-local _ = require(foundation.Enums.ControlStateEvent)
-local loggerModule = require(foundation.Utility.Logger)
-local t = {}
-t.__index = t
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Enums.ControlState)
+local _ = require(Foundation.Enums.ControlStateEvent)
+local LoggerModule = require(Foundation.Utility.Logger)
+local StateTableModule = {}
+StateTableModule.__index = StateTableModule
 
-function t.new(p1, p2, p3)
-	-- upvalues: t (ref)
-	assert(#p1 > 0, "name must not be an empty string")
-	assert(p3[p2] ~= nil, "initialState must be present in transitionTable")
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.name = p1
-	t_1.currentState = p2
-	t_1.transitionTable = {}
-	t_1.events = {}
+function StateTableModule.new(Name, CurrentState, List) --[[ Line: 53 ]]
+	-- upvalues: StateTableModule (copy)
+	assert(#Name > 0, "name must not be an empty string")
+	assert(List[CurrentState] ~= nil, "initialState must be present in transitionTable")
+	local t = {}
+	setmetatable(t, StateTableModule)
+	t.name = Name
+	t.currentState = CurrentState
+	t.transitionTable = {}
+	t.events = {}
 	
-	for i, v in p3 do
-		local t_2 = {}
+	for i, value in List do
+		local t1 = {}
 		
-		for i_1, v_1 in v do
-			local nextState = v_1.nextState
+		for i1, value1 in value do
+			local NextState = value1.nextState
 			
-			if nextState ~= nil then
-				assert(p3[nextState] ~= nil, "nextState does not exist in transitionTable")
+			if NextState ~= nil then
+				assert(List[NextState] ~= nil, "nextState does not exist in transitionTable")
 			end
-			t_2[i_1] = v_1
+			t1[i1] = value1
 			
-			if t_1.events[i_1] == nil then
-				t_1.events[i_1] = function()
-					-- upvalues: t_1 (ref), i_1 (ref)
-					return t_1:handleEvent(i_1)
+			if t.events[i1] == nil then
+				t.events[i1] = function() --[[ Line: 79 ]]
+					-- upvalues: t (copy), i1 (copy)
+					return t:handleEvent(i1)
 				end
 			end
 		end
-		t_1.transitionTable[i] = t_2
+		t.transitionTable[i] = t1
 	end
-	setmetatable(t_1.events, {
-		__index = function(_, p4)
-			-- upvalues: t_1 (ref)
-			error(string.format("'%s' is not a valid event in StateTable '%s'", tostring(p4), t_1.name), 2)
+	setmetatable(t.events, {
+		__index = function(_, p1) --[[ Line: 90 ]]
+			-- upvalues: t (copy)
+			error(string.format("'%s' is not a valid event in StateTable '%s'", tostring(p1), t.name), 2)
 		end
 	})
 	
-	return t_1
+	return t
 end
 
-function t:handleEvent(p4)
-	-- upvalues: loggerModule (ref)
-	local currentState = self.currentState
-	local var1 = self.transitionTable[currentState][p4]
+function StateTableModule:handleEvent(Text) --[[ Line: 109 ]]
+	-- upvalues: LoggerModule (copy)
+	local CurrentState = self.currentState
+	local TransitionEntry = self.transitionTable[CurrentState][Text]
 	
-	if var1 == nil then
-		loggerModule:debug("No transition found for event " .. p4 .. " in state " .. currentState)
+	if TransitionEntry == nil then
+		LoggerModule:debug("No transition found for event " .. Text .. " in state " .. CurrentState)
 		
 		return
 	end
-	local nextState = var1.nextState
-	self.currentState = nextState
+	local NextState = TransitionEntry.nextState
+	self.currentState = NextState
 	
 	if self.stateChangeHandler ~= nil then
-		self.stateChangeHandler(nextState)
+		self.stateChangeHandler(NextState)
 	end
 end
 
-function t:onStateChange(p4)
-	self.stateChangeHandler = p4
+function StateTableModule:onStateChange(StateChangeHandler) --[[ Line: 137 ]]
+	self.stateChangeHandler = StateChangeHandler
 end
 
-return t
+return StateTableModule

@@ -1,114 +1,114 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local autoScrollModule = require(script.Parent.AutoScroll)
-local autoScrollPolicyModule = require(viewRecycler.Core.Enums.AutoScrollPolicy)
-local paginationEdgesModule = require(script.Parent.PaginationEdges)
-local _ = require(viewRecycler.Core.Enums.ScrollAlignment)
-local _ = require(viewRecycler.Core.Types)
-local initialScrollPositionModule = require(script.Parent.InitialScrollPosition)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local AutoScrollModule = require(script.Parent.AutoScroll)
+local AutoScrollPolicyModule = require(ViewRecycler.Core.Enums.AutoScrollPolicy)
+local PaginationEdgesModule = require(script.Parent.PaginationEdges)
+local _ = require(ViewRecycler.Core.Enums.ScrollAlignment)
+local _ = require(ViewRecycler.Core.Types)
+local InitialScrollPositionModule = require(script.Parent.InitialScrollPosition)
 
-return function(p1)
-	-- upvalues: initialScrollPositionModule (ref), autoScrollModule (ref), paginationEdgesModule (ref), autoScrollPolicyModule (ref)
-	local var1 = initialScrollPositionModule()
-	local var2 = autoScrollModule.create()
-	local var3 = paginationEdgesModule.create()
+return function(p1) --[[ Line: 38 | Named "createScrollPolicyCoordinator" ]]
+	-- upvalues: InitialScrollPositionModule (copy), AutoScrollModule (copy), PaginationEdgesModule (copy), AutoScrollPolicyModule (copy)
+	local InitialScrollPositionModuleResult = InitialScrollPositionModule()
+	local NewAutoScroll = AutoScrollModule.create()
+	local NewPaginationEdges = PaginationEdgesModule.create()
 	
-	local function _(p2)
-		-- upvalues: p1 (ref)
+	local function _(p2) --[[ Line: 43 | Named "applyScrollAnchor" ]]
+		-- upvalues: p1 (copy)
 		p1.applyScrollAnchorOffset(p2)
 	end
 	
-	local _ = function()
-		-- upvalues: p1 (ref), var2 (ref), autoScrollPolicyModule (copy)
-		var2.onScrollOffsetChanged(p1.getScrollState().atEnd, p1.getAutoScrollPolicy() == autoScrollPolicyModule.WhenAtEnd)
+	local _ = function() --[[ Line: 47 | Named "updateAutoScrollFromCurrentOffset" ]]
+		-- upvalues: p1 (copy), NewAutoScroll (copy), AutoScrollPolicyModule (upval)
+		NewAutoScroll.onScrollOffsetChanged(p1.getScrollState().atEnd, p1.getAutoScrollPolicy() == AutoScrollPolicyModule.WhenAtEnd)
 	end
 	
-	local function checkEdges(p2)
-		-- upvalues: p1 (ref), var3 (ref)
-		local onStartReached = p1.getOnStartReached()
-		local onEndReached = p1.getOnEndReached()
+	local function checkEdges(RearmAfterStructureChange) --[[ Line: 52 ]]
+		-- upvalues: p1 (copy), NewPaginationEdges (copy)
+		local OnStartReached: () -> () = p1.getOnStartReached()
+		local OnEndReached: () -> () = p1.getOnEndReached()
 		
-		if onStartReached == nil and onEndReached == nil then return end
-		local viewportState = p1.getViewportState()
+		if OnStartReached == nil and OnEndReached == nil then return end
+		local ViewportState = p1.getViewportState()
 		
-		if viewportState == nil then return end
-		local scrollState = p1.getScrollState()
+		if ViewportState == nil then return end
+		local ScrollState = p1.getScrollState()
 		
-		if p1.getItemCount() > 0 and scrollState.contentLength == 0 then return end
-		local var4 = var3.check({
-			scrollOffset = viewportState.scrollOffset,
-			viewportLength = viewportState.viewportLength,
-			contentLength = scrollState.contentLength,
+		if p1.getItemCount() > 0 and ScrollState.contentLength == 0 then return end
+		local CheckResult = NewPaginationEdges.check({
+			scrollOffset = ViewportState.scrollOffset,
+			viewportLength = ViewportState.viewportLength,
+			contentLength = ScrollState.contentLength,
 			startThreshold = p1.getStartReachedThreshold() or 0,
-			atEnd = scrollState.atEnd,
-			canReachStart = onStartReached ~= nil,
-			canReachEnd = onEndReached ~= nil,
-			rearmAfterStructureChange = p2
+			atEnd = ScrollState.atEnd,
+			canReachStart = OnStartReached ~= nil,
+			canReachEnd = OnEndReached ~= nil,
+			rearmAfterStructureChange = RearmAfterStructureChange
 		})
 		
-		if var4.startReached then
-			onStartReached()
+		if CheckResult.startReached then
+			OnStartReached()
 		end
-		if var4.endReached then
-			onEndReached()
+		if CheckResult.endReached then
+			OnEndReached()
 		end
 	end
 	
 	return {
 		checkEdges = checkEdges,
-		onContentLengthChanged = function(p2)
-			-- upvalues: p1 (ref), var2 (ref)
-			local viewportState = p1.getViewportState()
+		onContentLengthChanged = function(p2) --[[ Line: 84 ]]
+			-- upvalues: p1 (copy), NewAutoScroll (copy)
+			local ViewportState = p1.getViewportState()
 			
-			if viewportState ~= nil then
-				local contentLengthCorrection = var2.getContentLengthCorrection(p2, viewportState.viewportLength)
+			if ViewportState ~= nil then
+				local ContentLengthCorrection = NewAutoScroll.getContentLengthCorrection(p2, ViewportState.viewportLength)
 				
-				if contentLengthCorrection ~= nil then
-					p1.applyScrollAnchorOffset(contentLengthCorrection)
+				if ContentLengthCorrection ~= nil then
+					p1.applyScrollAnchorOffset(ContentLengthCorrection)
 				end
 			end
 			if p1.onContentLengthChanged ~= nil then
 				p1.onContentLengthChanged(p2)
 			end
 		end,
-		onDataSourceChanged = function(p2, p3)
-			-- upvalues: var1 (ref), p1 (ref), var2 (ref), autoScrollModule (copy), checkEdges (ref), paginationEdgesModule (copy)
-			local var4 = var1.onDataSourceChange(p1.getItemCount(), p1.getInitialScrollAlignment(), p1.getScrollOffsetForItem)
+		onDataSourceChanged = function(ResolveTargetResult, p2) --[[ Line: 97 ]]
+			-- upvalues: InitialScrollPositionModuleResult (copy), p1 (copy), NewAutoScroll (copy), AutoScrollModule (upval), checkEdges (copy), PaginationEdgesModule (upval)
+			local OnDataSourceChangeResult = InitialScrollPositionModuleResult.onDataSourceChange(p1.getItemCount(), p1.getInitialScrollAlignment(), p1.getScrollOffsetForItem)
 			
-			if var4 ~= nil then
-				p1.applyScrollAnchorOffset(var4)
+			if OnDataSourceChangeResult ~= nil then
+				p1.applyScrollAnchorOffset(OnDataSourceChangeResult)
 			end
-			local var5 = var2.onDataSourceChanged(autoScrollModule.resolveTarget(p1.getAutoScrollPolicy(), p2, p3))
+			local OnDataSourceChangedResult = NewAutoScroll.onDataSourceChanged(AutoScrollModule.resolveTarget(p1.getAutoScrollPolicy(), ResolveTargetResult, p2))
 			
-			if var5 ~= false then
-				local viewportState = p1.getViewportState()
+			if OnDataSourceChangedResult ~= false then
+				local ViewportState = p1.getViewportState()
 				
-				if viewportState ~= nil then
-					p1.applyScrollAnchorOffset(autoScrollModule.getTargetOffset(var5, p1.getScrollState().contentLength, viewportState.viewportLength))
+				if ViewportState ~= nil then
+					p1.applyScrollAnchorOffset((AutoScrollModule.getTargetOffset(OnDataSourceChangedResult, p1.getScrollState().contentLength, ViewportState.viewportLength)))
 				end
 			end
-			checkEdges(paginationEdgesModule.hasStructuralChange(p2))
+			checkEdges(PaginationEdgesModule.hasStructuralChange(ResolveTargetResult))
 		end,
-		onDataSourceReplaced = function()
-			-- upvalues: var1 (ref), p1 (ref), var2 (ref), autoScrollPolicyModule (copy)
-			p1.applyScrollAnchorOffset(var1.onDataSourceReplaced(p1.getItemCount(), p1.getInitialScrollAlignment(), p1.getScrollOffsetForItem))
-			var2.onScrollOffsetChanged(p1.getScrollState().atEnd, p1.getAutoScrollPolicy() == autoScrollPolicyModule.WhenAtEnd)
+		onDataSourceReplaced = function() --[[ Line: 123 ]]
+			-- upvalues: InitialScrollPositionModuleResult (copy), p1 (copy), NewAutoScroll (copy), AutoScrollPolicyModule (upval)
+			p1.applyScrollAnchorOffset((InitialScrollPositionModuleResult.onDataSourceReplaced(p1.getItemCount(), p1.getInitialScrollAlignment(), p1.getScrollOffsetForItem)))
+			NewAutoScroll.onScrollOffsetChanged(p1.getScrollState().atEnd, p1.getAutoScrollPolicy() == AutoScrollPolicyModule.WhenAtEnd)
 		end,
-		onViewportChanged = function()
-			-- upvalues: p1 (ref), var1 (ref), var2 (ref), autoScrollPolicyModule (copy)
-			local itemCount = p1.getItemCount()
+		onViewportChanged = function() --[[ Line: 134 ]]
+			-- upvalues: p1 (copy), InitialScrollPositionModuleResult (copy), NewAutoScroll (copy), AutoScrollPolicyModule (upval)
+			local ItemCount = p1.getItemCount()
 			
-			if itemCount == 0 or p1.getScrollState().contentLength > 0 then
-				local var4 = var1.onViewportChanged(itemCount, p1.getInitialScrollAlignment(), p1.getScrollOffsetForItem)
+			if ItemCount == 0 or p1.getScrollState().contentLength > 0 then
+				local OnViewportChangedResult = InitialScrollPositionModuleResult.onViewportChanged(ItemCount, p1.getInitialScrollAlignment(), p1.getScrollOffsetForItem)
 				
-				if var4 ~= nil then
-					p1.applyScrollAnchorOffset(var4)
+				if OnViewportChangedResult ~= nil then
+					p1.applyScrollAnchorOffset(OnViewportChangedResult)
 				end
 			end
-			var2.onScrollOffsetChanged(p1.getScrollState().atEnd, p1.getAutoScrollPolicy() == autoScrollPolicyModule.WhenAtEnd)
+			NewAutoScroll.onScrollOffsetChanged(p1.getScrollState().atEnd, p1.getAutoScrollPolicy() == AutoScrollPolicyModule.WhenAtEnd)
 		end,
-		onScrollOffsetChanged = function()
-			-- upvalues: p1 (ref), var2 (ref), autoScrollPolicyModule (copy)
-			var2.onScrollOffsetChanged(p1.getScrollState().atEnd, p1.getAutoScrollPolicy() == autoScrollPolicyModule.WhenAtEnd)
+		onScrollOffsetChanged = function() --[[ Line: 152 ]]
+			-- upvalues: p1 (copy), NewAutoScroll (copy), AutoScrollPolicyModule (upval)
+			NewAutoScroll.onScrollOffsetChanged(p1.getScrollState().atEnd, p1.getAutoScrollPolicy() == AutoScrollPolicyModule.WhenAtEnd)
 		end
 	}
 end

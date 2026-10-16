@@ -1,48 +1,48 @@
-﻿local parent = script.Parent
-local noneModule = require(parent.None)
-local _ = require(parent.Parent.Parent.ES7Types)
+﻿local Parent = script.Parent
+local NoneModule = require(Parent.None)
+local _ = require(Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3, p4, ...)
-	-- upvalues: noneModule (ref)
-	if p2 ~= nil and typeof(p2) == "table" then
-		for i, v in pairs(p2) do
-			if v == noneModule then
-				p1[i] = nil
+return function(NoneModules, List, List1, List2, ...) --[[ Line: 30 ]]
+	-- upvalues: NoneModule (copy)
+	if List ~= nil and typeof(List) == "table" then
+		for i, value in pairs(List) do
+			if value == NoneModule then
+				NoneModules[i] = nil
 			else
-				p1[i] = v
+				NoneModules[i] = value
 			end
 		end
 	end
-	if p3 ~= nil and typeof(p3) == "table" then
-		for i, v in pairs(p3) do
-			if v == noneModule then
-				p1[i] = nil
+	if List1 ~= nil and typeof(List1) == "table" then
+		for i1, value1 in pairs(List1) do
+			if value1 == NoneModule then
+				NoneModules[i1] = nil
 			else
-				p1[i] = v
+				NoneModules[i1] = value1
 			end
 		end
 	end
-	if p4 ~= nil and typeof(p4) == "table" then
-		for i, v in pairs(p4) do
-			if v == noneModule then
-				p1[i] = nil
+	if List2 ~= nil and typeof(List2) == "table" then
+		for i3, value2 in pairs(List2) do
+			if value2 == NoneModule then
+				NoneModules[i3] = nil
 			else
-				p1[i] = v
+				NoneModules[i3] = value2
 			end
 		end
 	end
-	for i = 1, select("#", ...) do
-		local var1 = select(i, ...)
+	for i2 = 1, select("#", ...) do
+		local Selected = select(i2, ...)
 		
-		if var1 ~= nil and typeof(var1) == "table" then
-			for i, v in pairs(var1) do
-				if v == noneModule then
-					p1[i] = nil
+		if Selected ~= nil and typeof(Selected) == "table" then
+			for i4, value3 in pairs(Selected) do
+				if value3 == NoneModule then
+					NoneModules[i4] = nil
 				else
-					p1[i] = v
+					NoneModules[i4] = value3
 				end
 			end
 		end
 	end
-	return p1
+	return NoneModules
 end

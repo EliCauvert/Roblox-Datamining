@@ -1,23 +1,24 @@
-﻿local collectionService = game:GetService("CollectionService")
-local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local _ = require(parent.util.Types)
+﻿local CollectionService = game:GetService("CollectionService")
+local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local _ = require(Parent.util.Types)
 
-return function(p1, p2)
-	-- upvalues: collectionService (ref), analyticsModule (ref)
-	local descendants = p1:GetDescendants()
-	table.insert(descendants, p1)
-	local t = {}
+return function(Object, p1) --[[ Line: 8 | Named "validateTags" ]]
+	-- upvalues: CollectionService (copy), AnalyticsModule (copy)
+	local Descendants = Object:GetDescendants()
+	table.insert(Descendants, Object)
+	local List = {}
 	
-	for i, v in ipairs(descendants) do
-		if #collectionService:GetTags(v) > 0 then
-			table.insert(t, v)
+	for _, descendant in ipairs(Descendants) do
+		if #CollectionService:GetTags(descendant) > 0 then
+			table.insert(List, descendant)
 		end
 	end
-	if #t > 0 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateTags, nil, p2)
+	if #List > 0 then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateTags, nil, p1)
 		
 		return false, {}
+	else
+		return true
 	end
-	return true
 end

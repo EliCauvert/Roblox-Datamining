@@ -1,10 +1,10 @@
-﻿local builderIconsModule = require(script:FindFirstAncestor("Foundation").Parent.BuilderIcons)
-local font = builderIconsModule.Font
-local iconVariant = builderIconsModule.IconVariant
+﻿local BuilderIconsModule = require(script:FindFirstAncestor("Foundation").Parent.BuilderIcons)
+local BuilderIconsModuleFont = BuilderIconsModule.Font
+local IconVariant = BuilderIconsModule.IconVariant
 
-return function(p1, p2)
-	-- upvalues: iconVariant (ref), font (ref)
-	local var1 = font[p2 or iconVariant.Regular]
+return function(p1, p2): string --[[ Line: 8 | Named "getIconRichText" ]]
+	-- upvalues: IconVariant (copy), BuilderIconsModuleFont (copy)
+	local BuilderIconsModuleFontEntry = BuilderIconsModuleFont[p2 or IconVariant.Regular]
 	
-	return `<font family="{var1.Family}" weight="{var1.Weight.Value}">{p1}</font>`
+	return `<font family="{BuilderIconsModuleFontEntry.Family}" weight="{BuilderIconsModuleFontEntry.Weight.Value}">{p1}</font>`
 end

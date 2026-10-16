@@ -1,118 +1,91 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 45 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
 		creator_name = if p1 == nil or p1.creator_name == nil then nil else p1.creator_name,
 		creator_has_verified_badge = if p1 == nil or p1.creator_has_verified_badge == nil then nil else p1.creator_has_verified_badge,
 		price = if p1 == nil or p1.price == nil then nil else p1.price
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 56 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.id ~= nil and self.id ~= "" then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var2, var7 = protoModule.writeString(var2, var3, self.id)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.id)
 	end
 	if self.creator_name ~= nil then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var4, var9 = protoModule.writeString(var4, var5, self.creator_name)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.creator_name)
 	end
 	if self.creator_has_verified_badge ~= nil then
-		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.varint)
-		var6, var11 = protoModule.writeVarInt(var6, var7, if self.creator_has_verified_badge then 1 else 0)
-		buff = var6
-		var1 = var7
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, if self.creator_has_verified_badge then 1 else 0)
 	end
 	if self.price ~= nil then
-		local var8, var9 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.varint)
-		var8, var13 = protoModule.writeVarInt(var8, var9, self.price)
-		buff = var8
-		var1 = var9
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult4, WriteTagResult2_3, self.price)
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 85 ]]
+	-- upvalues: Module (copy), ProtoModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v15 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			if var7 == 3 then
-				local _ = nil
-				local var8, var9 = protoModule.readVarInt(p1, var2)
-				var2 = var9
-				var1.creator_has_verified_badge = var8 ~= 0
-			elseif var7 == 4 then
-				local _ = nil
-				local var10, var11 = protoModule.readVarIntI64(p1, var2)
-				var2 = var11
-				var1.price = var10
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 3 then
+				local VarInt
+				VarInt, v15 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.creator_has_verified_badge = VarInt ~= 0
+			elseif Tag == 4 then
+				NewModule.price, v15 = ProtoModule.readVarIntI64(Buf, v1)
 			else
-				local _ = nil
-				local var12, var13 = protoModule.readVarInt(p1, var2)
-				local _ = var12
-				var2 = var13
+				local _
+				_, v15 = ProtoModule.readVarInt(Buf, v1)
 			end
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 1 then
-				local _ = nil
-				local var14, var15 = protoModule.readBuffer(p1, var2)
-				var2 = var15
-				var1.id = buffer.tostring(var14)
-			elseif var7 == 2 then
-				local _ = nil
-				local var16, var17 = protoModule.readBuffer(p1, var2)
-				var2 = var17
-				var1.creator_name = buffer.tostring(var16)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v15 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.id = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v15 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.creator_name = buffer.tostring(Buffer2)
 			else
-				local _ = nil
-				local var18, var19 = protoModule.readVarInt(p1, var2)
-				var2 = var19 + var18
+				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt1
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var20, var21 = protoModule.readFixed32(p1, var2)
-			local _ = var20
-			var2 = var21
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var22, var23 = protoModule.readFixed64(p1, var2)
-			local _ = var22
-			var2 = var23
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v15 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v15 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var17)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 143 ]]
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -130,36 +103,36 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref)
-	local var24 = t_1.new()
+function Module:jsonDecode() --[[ Line: 165 ]]
+	-- upvalues: Module (copy)
+	local NewModule = Module.new()
 	
 	if self.id ~= nil then
-		var24.id = self.id
+		NewModule.id = self.id
 	end
 	if self.creator_name ~= nil then
-		var24.creator_name = self.creator_name
+		NewModule.creator_name = self.creator_name
 	end
 	if self.creatorName ~= nil then
-		var24.creator_name = self.creatorName
+		NewModule.creator_name = self.creatorName
 	end
 	if self.creator_has_verified_badge ~= nil then
-		var24.creator_has_verified_badge = self.creator_has_verified_badge
+		NewModule.creator_has_verified_badge = self.creator_has_verified_badge
 	end
 	if self.creatorHasVerifiedBadge ~= nil then
-		var24.creator_has_verified_badge = self.creatorHasVerifiedBadge
+		NewModule.creator_has_verified_badge = self.creatorHasVerifiedBadge
 	end
 	if self.price ~= nil then
-		var24.price = self.price
+		NewModule.price = self.price
 	end
-	return var24
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "MarketplaceLookData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.MarketplaceLookData"
 }
-t.MarketplaceLookData = t_1
-typeRegistryModule.default:register(t.MarketplaceLookData)
+local config = { MarketplaceLookData = Module }
+TypeRegistryModule.default:register(config.MarketplaceLookData)
 
-return { MarketplaceLookData = t.MarketplaceLookData }
+return { MarketplaceLookData = config.MarketplaceLookData }

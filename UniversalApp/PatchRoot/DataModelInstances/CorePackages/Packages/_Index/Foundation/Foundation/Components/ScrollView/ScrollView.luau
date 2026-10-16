@@ -1,13 +1,13 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local scrollingFrameModule = require(script.Parent.ScrollingFrame)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useDefaultTagsModule = require(foundation.Utility.useDefaultTags)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local useStyleTagsModule = require(foundation.Providers.Style.useStyleTags)
-local controlStateModule = require(foundation.Enums.ControlState)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ScrollingFrameModule = require(script.Parent.ScrollingFrame)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseDefaultTagsModule = require(Foundation.Utility.useDefaultTags)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local UseStyleTagsModule = require(Foundation.Providers.Style.useStyleTags)
+local ControlStateModule = require(Foundation.Enums.ControlState)
+local config = {
 	AutoLocalize = false,
 	BorderSizePixel = 0,
 	ClipsDescendants = true,
@@ -15,74 +15,73 @@ local t = {
 	testId = "--foundation-scroll-view",
 	layout = { SortOrder = Enum.SortOrder.LayoutOrder },
 	scroll = {
-		scrollBarVisibility = require(foundation.Enums.Visibility).Auto
+		scrollBarVisibility = require(Foundation.Enums.Visibility).Auto
 	}
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), reactModule (ref), controlStateModule (ref), viewModule (ref), scrollingFrameModule (ref)
-	local children
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useStyleTagsModule(useDefaultTagsModule(var1.tag, "gui-object-defaults"))
-	local var3, var4 = reactModule.useState(controlStateModule.Initialize)
-	local cloned = table.clone(var1)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 62 | Named "ScrollView" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseDefaultTagsModule (copy), UseStyleTagsModule (copy), ReactModule (copy), ControlStateModule (copy), ViewModule (copy), ScrollingFrameModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseStyleTagsModuleResult = UseStyleTagsModule((UseDefaultTagsModule(WithDefaultsModuleResult.tag, "gui-object-defaults")))
+	local UseStateResult, UseStateResult2 = ReactModule.useState(ControlStateModule.Initialize)
+	local Copy = table.clone(WithDefaultsModuleResult)
 	
-	function cloned.onStateChanged(p3)
-		-- upvalues: var4 (ref), var1 (ref)
-		var4(p3)
+	function Copy.onStateChanged(p2) --[[ Line: 74 ]]
+		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
+		UseStateResult2(p2)
 		
-		if var1.onStateChanged ~= nil then
-			var1.onStateChanged(p3)
+		if WithDefaultsModuleResult.onStateChanged ~= nil then
+			WithDefaultsModuleResult.onStateChanged(p2)
 		end
 	end
 	
-	cloned.stateLayer = if var1.onStateChanged or var1.onActivated then var1.stateLayer else { affordance = "None" }
-	cloned.selection = { Selectable = false }
-	cloned.ref = p2
-	cloned[reactModule.Tag] = var2
-	cloned.scroll = nil
-	cloned.layout = nil
-	local t_1 = {
-		ListLayout = reactModule.createElement("UIListLayout", {
-			FillDirection = var1.layout.FillDirection,
-			ItemLineAlignment = var1.layout.ItemLineAlignment,
-			HorizontalAlignment = var1.layout.HorizontalAlignment,
-			HorizontalFlex = var1.layout.HorizontalFlex,
-			VerticalAlignment = var1.layout.VerticalAlignment,
-			VerticalFlex = var1.layout.VerticalFlex,
-			Padding = var1.layout.Padding,
-			SortOrder = var1.layout.SortOrder,
-			Wraps = var1.layout.Wraps
+	Copy.stateLayer = if WithDefaultsModuleResult.onStateChanged or WithDefaultsModuleResult.onActivated then WithDefaultsModuleResult.stateLayer else { affordance = "None" }
+	Copy.selection = { Selectable = false }
+	Copy.ref = Ref
+	Copy[ReactModule.Tag] = UseStyleTagsModuleResult
+	Copy.scroll = nil
+	Copy.layout = nil
+	local config1 = {
+		ListLayout = ReactModule.createElement("UIListLayout", {
+			FillDirection = WithDefaultsModuleResult.layout.FillDirection,
+			ItemLineAlignment = WithDefaultsModuleResult.layout.ItemLineAlignment,
+			HorizontalAlignment = WithDefaultsModuleResult.layout.HorizontalAlignment,
+			HorizontalFlex = WithDefaultsModuleResult.layout.HorizontalFlex,
+			VerticalAlignment = WithDefaultsModuleResult.layout.VerticalAlignment,
+			VerticalFlex = WithDefaultsModuleResult.layout.VerticalFlex,
+			Padding = WithDefaultsModuleResult.layout.Padding,
+			SortOrder = WithDefaultsModuleResult.layout.SortOrder,
+			Wraps = WithDefaultsModuleResult.layout.Wraps
 		})
 	}
-	local _ = nil
+	local Children = nil
 	
-	if var1.children and typeof(var1.children) == "table" and (var1.layout ~= nil and var1.layout.FillDirection ~= nil) then
-		children = t_1
+	if WithDefaultsModuleResult.children and typeof(WithDefaultsModuleResult.children) == "table" and WithDefaultsModuleResult.layout ~= nil and WithDefaultsModuleResult.layout.FillDirection ~= nil then
+		Children = config1
 		
-		for i, v in var1.children do
-			children[i] = v
+		for i, child in WithDefaultsModuleResult.children do
+			Children[i] = child
 		end
 	else
-		children = var1.children
+		Children = WithDefaultsModuleResult.children
 	end
-	return reactModule.createElement(viewModule, cloned, {
-		ScrollingFrame = reactModule.createElement(scrollingFrameModule, {
+	return ReactModule.createElement(ViewModule, Copy, {
+		ScrollingFrame = ReactModule.createElement(ScrollingFrameModule, {
 			ClipsDescendants = false,
-			controlState = var3,
-			selection = var1.selection,
-			scrollBarVisibility = var1.scroll.scrollBarVisibility,
-			onCanvasPositionChanged = var1.onCanvasPositionChanged,
-			onAbsoluteCanvasSizeChanged = var1.onAbsoluteCanvasSizeChanged,
-			onAbsoluteWindowSizeChanged = var1.onAbsoluteWindowSizeChanged,
-			AutomaticSize = var1.scroll.AutomaticSize,
-			AutomaticCanvasSize = var1.scroll.AutomaticCanvasSize,
-			CanvasSize = var1.scroll.CanvasSize,
-			ScrollingDirection = var1.scroll.ScrollingDirection,
-			ScrollingEnabled = var1.scroll.ScrollingEnabled,
-			VerticalScrollBarInset = var1.scroll.VerticalScrollBarInset,
-			HorizontalScrollBarInset = var1.scroll.HorizontalScrollBarInset,
-			ref = var1.scrollingFrameRef
-		}, children)
+			controlState = UseStateResult,
+			selection = WithDefaultsModuleResult.selection,
+			scrollBarVisibility = WithDefaultsModuleResult.scroll.scrollBarVisibility,
+			onCanvasPositionChanged = WithDefaultsModuleResult.onCanvasPositionChanged,
+			onAbsoluteCanvasSizeChanged = WithDefaultsModuleResult.onAbsoluteCanvasSizeChanged,
+			onAbsoluteWindowSizeChanged = WithDefaultsModuleResult.onAbsoluteWindowSizeChanged,
+			AutomaticSize = WithDefaultsModuleResult.scroll.AutomaticSize,
+			AutomaticCanvasSize = WithDefaultsModuleResult.scroll.AutomaticCanvasSize,
+			CanvasSize = WithDefaultsModuleResult.scroll.CanvasSize,
+			ScrollingDirection = WithDefaultsModuleResult.scroll.ScrollingDirection,
+			ScrollingEnabled = WithDefaultsModuleResult.scroll.ScrollingEnabled,
+			VerticalScrollBarInset = WithDefaultsModuleResult.scroll.VerticalScrollBarInset,
+			HorizontalScrollBarInset = WithDefaultsModuleResult.scroll.HorizontalScrollBarInset,
+			ref = WithDefaultsModuleResult.scrollingFrameRef
+		}, Children)
 	})
 end))

@@ -1,29 +1,30 @@
-﻿return function(p1, p2, p3)
-	if not p2 then
-		p2 = "%s"
+﻿return function(p1, Text1: string, p2) --[[ Line: 3 | Named "StringTrim" ]]
+	if not Text1 then
+		Text1 = "%s"
 	end
-	if #p2 == 0 then
+	if #Text1 == 0 then
 		return p1
-	elseif not p3 then
-		p3 = { left = true, right = true }
 	end
-	local var1 = p1
+	if not p2 then
+		p2 = { left = true, right = true }
+	end
+	local Text: string = p1
 	
-	if p3.left then
-		local matchIndex = string.find(var1, "[^" .. p1 .. "]")
+	if p2.left then
+		local FoundAt: number? = string.find(Text, "[^" .. Text1 .. "]")
 		
-		if not matchIndex then
+		if not FoundAt then
 			return ""
 		end
-		var1 = string.sub(var1, matchIndex)
+		Text = string.sub(Text, FoundAt)
 	end
-	if p3.right then
-		local matchIndex = string.find(var1, "[" .. p1 .. "]+$")
+	if p2.right then
+		local FoundAt: number? = string.find(Text, "[" .. Text1 .. "]+$")
 		
-		if not matchIndex then
-			return var1
+		if not FoundAt then
+			return Text
 		end
-		var1 = string.sub(var1, 1, matchIndex - 1)
+		Text = string.sub(Text, 1, FoundAt - 1)
 	end
-	return var1
+	return Text
 end

@@ -1,62 +1,65 @@
-﻿local parent = script.Parent
-local object = require(parent.Parent.LuauPolyfill).Object
-local eventsModule = require(parent.Events)
-local getNavigationActionCreatorsModule = require(parent.routers.getNavigationActionCreators)
-local getChildNavigationModule = require(parent.getChildNavigation)
-local getChildrenNavigationCacheModule = require(parent.getChildrenNavigationCache)
+﻿local Parent = script.Parent
+local Object = require(Parent.Parent.LuauPolyfill).Object
+local EventsModule = require(Parent.Events)
+local GetNavigationActionCreatorsModule = require(Parent.routers.getNavigationActionCreators)
+local GetChildNavigationModule = require(Parent.getChildNavigation)
+local GetChildrenNavigationCacheModule = require(Parent.getChildrenNavigationCache)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: getChildrenNavigationCacheModule (ref), getChildNavigationModule (ref), eventsModule (ref), object (ref), getNavigationActionCreatorsModule (ref)
-	local actionCreators = p1.getActionCreators(p2, nil)
-	local t = {
-		actions = actionCreators,
-		router = p1,
-		state = p2,
-		dispatch = p3,
-		getScreenProps = p5,
-		_dangerouslyGetParent = function()
+return function(Router, State, Dispatch, p1, GetScreenProps, Callback) --[[ Line: 13 ]]
+	-- upvalues: GetChildrenNavigationCacheModule (copy), GetChildNavigationModule (copy), EventsModule (copy), Object (copy), GetNavigationActionCreatorsModule (copy)
+	local ActionCreators = Router.getActionCreators(State, nil)
+	local config = {
+		actions = ActionCreators,
+		router = Router,
+		state = State,
+		dispatch = Dispatch,
+		getScreenProps = GetScreenProps,
+		_dangerouslyGetParent = function() --[[ Line: 24 ]]
 			return nil
 		end,
-		isFirstRouteInParent = function()
+		isFirstRouteInParent = function(): boolean --[[ Line: 27 ]]
 			return true
 		end,
-		_childrenNavigation = getChildrenNavigationCacheModule(p6())
+		_childrenNavigation = GetChildrenNavigationCacheModule(Callback())
 	}
 	
-	function t.getChildNavigation(p7)
-		-- upvalues: getChildNavigationModule (copy), t (ref), p6 (ref)
-		return getChildNavigationModule(t, p7, p6)
+	function config.getChildNavigation(p2) --[[ Line: 33 ]]
+		-- upvalues: GetChildNavigationModule (upval), config (copy), Callback (copy)
+		return GetChildNavigationModule(config, p2, Callback)
 	end
 	
-	function t.isFocused(p7)
-		-- upvalues: p6 (ref)
-		local state = p6().state
+	function config.isFocused(Key): boolean --[[ Line: 37 ]]
+		-- upvalues: Callback (copy)
+		local State = Callback().state
+		local Routes = State.routes
+		local Index = State.index
 		
-		return if p7 ~= nil then state.routes[state.index].key == p7 else true
+		return Key == nil or Routes[Index].key == Key
 	end
 	
-	function t.addListener(p7, p8)
-		-- upvalues: eventsModule (copy), p4 (ref)
-		if p7 == eventsModule.Action then
-			p4[p8] = true
+	function config.addListener(Action, Key) --[[ Line: 45 ]]
+		-- upvalues: EventsModule (upval), p1 (copy)
+		if Action == EventsModule.Action then
+			p1[Key] = true
 			
 			return {
-				remove = function()
-					-- upvalues: p4 (copy), p8 (ref)
-					p4[p8] = nil
+				remove = function() --[[ Line: 51 ]]
+					-- upvalues: p1 (upval), Key (copy)
+					p1[Key] = nil
 				end
 			}
-		end
-		return { remove = function() end }
-	end
-	
-	local var1 = object.assign(getNavigationActionCreatorsModule(t.state), actionCreators)
-	
-	for i, v in var1 do
-		t[i] = function(...)
-			-- upvalues: t (ref), var1 (ref), i (ref)
-			t.dispatch(var1[i](...))
+		else
+			return { remove = function() --[[ Line: 47 ]] end }
 		end
 	end
-	return t
+	
+	local AssignResult = Object.assign(GetNavigationActionCreatorsModule(config.state), ActionCreators)
+	
+	for i, _ in AssignResult do
+		config[i] = function(...) --[[ Line: 61 ]]
+			-- upvalues: config (copy), AssignResult (copy), i (copy)
+			config.dispatch(AssignResult[i](...))
+		end
+	end
+	return config
 end

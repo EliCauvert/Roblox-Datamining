@@ -1,90 +1,92 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local luauPolyfillModule = require(parent.Parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local nullModule = require(parent_1.luaUtils.null)
-local formatValue = nil
-local formatObjectValue = nil
-local formatArray = nil
-local formatObject = nil
-local getObjectTag = nil
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script.Parent
+local LuauPolyfillModule = require(Parent.Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local NullModule = require(Parent.Parent.luaUtils.null)
+local Callback = nil
+local Callback1 = nil
+local Callback3 = nil
+local Callback2 = nil
+local Callback4 = nil
 
-local function inspect(p1)
-	-- upvalues: formatValue (write)
-	return formatValue(p1, {})
+local function inspect(p1) --[[ Line: 33 ]]
+	-- upvalues: Callback (ref)
+	return Callback(p1, {})
 end
 
-formatValue = function(p1, p2)
-	-- upvalues: httpService (ref), nullModule (ref), formatObjectValue (write)
-	local var1 = typeof(p1)
+Callback = function(JSON, p1) --[[ Line: 37 | Named "formatValue" ]]
+	-- upvalues: HttpService (copy), NullModule (copy), Callback1 (ref)
+	local ValueType = typeof(JSON)
 	
-	return if var1 == "string" then httpService:JSONEncode(p1) elseif var1 == "number" then if p1 == p1 then if p1 == 1e999 then "Infinity" elseif p1 == -1e999 then "-Infinity" else tostring(p1) else "NaN" elseif var1 == "function" then "[function]" elseif var1 == "table" then if p1 == nullModule then "null" else formatObjectValue(p1, p2) else tostring(p1)
+	return if ValueType == "string" then HttpService:JSONEncode(JSON) elseif ValueType == "number" then if JSON == JSON then if JSON == 1e999 then "Infinity" elseif JSON == -1e999 then "-Infinity" else tostring(JSON) else "NaN" elseif ValueType == "function" then "[function]" elseif ValueType == "table" then if JSON == NullModule then "null" else Callback1(JSON, p1) else tostring(JSON)
 end
 
-formatObjectValue = function(p1, p2)
-	-- upvalues: formatValue (write), array (ref), formatArray (write), formatObject (write)
-	if table.find(p2, p1) ~= nil then
+Callback1 = function(Value, List) --[[ Line: 65 | Named "formatObjectValue" ]]
+	-- upvalues: Callback (ref), Array (copy), Callback3 (ref), Callback2 (ref)
+	if table.find(List, Value) ~= nil then
 		return "[Circular]"
 	end
-	local list = { unpack(p2) }
-	table.insert(list, p1)
+	local List1 = { unpack(List) }
+	table.insert(List1, Value)
 	
-	if typeof(p1.toJSON) == "function" then
-		local var1 = p1:toJSON(p1)
+	if typeof(Value.toJSON) == "function" then
+		local JSON = Value:toJSON(Value)
 		
-		if var1 == p1 then
+		if JSON ~= Value then
+			return if typeof(JSON) == "string" then JSON else Callback(JSON, List1)
 		end
-		return if typeof(var1) == "string" then var1 else formatValue(var1, list)
-	else
-		return if array.isArray(p1) then formatArray(p1, list) else formatObject(p1, list)
+	elseif Array.isArray(Value) then
+		return Callback3(Value, List1)
 	end
+	return Callback2(Value, List1)
 end
 
-formatObject = function(p1, p2)
-	-- upvalues: object (ref), getObjectTag (write), formatValue (write)
-	local var1 = object.keys(p1)
+Callback2 = function(p1, p2): string --[[ Line: 90 | Named "formatObject" ]]
+	-- upvalues: Object (copy), Callback4 (ref), Callback (ref)
+	local KeysResult = Object.keys(p1)
 	
-	if #var1 == 0 then
+	if #KeysResult == 0 then
 		return "{}"
-	elseif #p2 > 2 then
-		return "[" .. getObjectTag(p1) .. "]"
 	end
-	local t = {}
+	if #p2 > 2 then
+		return "[" .. Callback4(p1) .. "]"
+	end
+	local List = {}
 	
-	for i = 1, #var1 do
-		local var2 = var1[i]
-		t[i] = var2 .. ": " .. formatValue(p1[var2], p2)
+	for i = 1, #KeysResult do
+		local KeysResultEntry = KeysResult[i]
+		List[i] = KeysResultEntry .. ": " .. Callback(p1[KeysResultEntry], p2)
 	end
-	return "{ " .. table.concat(t, ", ") .. " }"
+	return "{ " .. table.concat(List, ", ") .. " }"
 end
 
-formatArray = function(p3, p4)
-	-- upvalues: formatValue (write)
-	local p7Count = #p3
+Callback3 = function(p3, p4): string --[[ Line: 111 | Named "formatArray" ]]
+	-- upvalues: Callback (ref)
+	local CountP5 = #p3
 	
-	if p7Count == 0 then
+	if CountP5 == 0 then
 		return "[]"
-	elseif #p4 > 2 then
+	end
+	if #p4 > 2 then
 		return "[Array]"
 	end
-	local minValue = math.min(10, p7Count)
-	local var3 = p7Count - minValue
-	local t = {}
+	local Smallest = math.min(10, CountP5)
+	local CountPDelta = CountP5 - Smallest
+	local List = {}
 	
-	for i = 1, minValue do
-		t[i] = formatValue(p3[i], p4)
+	for i = 1, Smallest do
+		List[i] = Callback(p3[i], p4)
 	end
-	if var3 == 1 then
-		table.insert(t, "... 1 more item")
-	elseif var3 > 1 then
-		table.insert(t, ("... %d more items"):format(var3))
+	if CountPDelta == 1 then
+		table.insert(List, "... 1 more item")
+	elseif CountPDelta > 1 then
+		table.insert(List, ("... %d more items"):format(CountPDelta))
 	end
-	return "[" .. table.concat(t, ", ") .. "]"
+	return "[" .. table.concat(List, ", ") .. "]"
 end
 
-getObjectTag = function(_)
+Callback4 = function(_): string --[[ Line: 137 | Named "getObjectTag" ]]
 	return "Object"
 end
 

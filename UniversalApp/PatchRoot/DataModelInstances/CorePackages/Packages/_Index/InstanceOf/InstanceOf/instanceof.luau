@@ -1,38 +1,37 @@
-﻿local dEV = _G.__DEV__
+﻿local DEV = _G.__DEV__
 
-return function(p1, p2)
-	-- upvalues: dEV (ref)
-	if dEV then
-		assert(typeof(p2) == "table", "Received a non-table as the second argument for instanceof")
+return function(Index, Index1): boolean --[[ Line: 20 | Named "instanceof" ]]
+	-- upvalues: DEV (copy)
+	if DEV then
+		assert(typeof(Index1) == "table", "Received a non-table as the second argument for instanceof")
 	end
-	if typeof(p1) ~= "table" then
+	if typeof(Index) ~= "table" then
 		return false
 	end
-	local ok, status = pcall(function()
-		-- upvalues: p2 (ref), p1 (write)
-		return p2.new ~= nil and p1.new == p2.new
+	local Success, Result = pcall(function(): boolean --[[ Line: 29 ]]
+		-- upvalues: Index1 (copy), Index (ref)
+		return Index1.new ~= nil and Index.new == Index1.new
 	end)
 	
-	if ok and status then
+	if Success and Result then
 		return true
 	end
-	local t = { [p1] = true }
-	while p1 and typeof(p1) == "table" do
-		p1 = getmetatable(p1)
+	local config = { [Index] = true }
+	while Index and typeof(Index) == "table" do
+		Index = getmetatable(Index)
 		
-		if typeof(p1) == "table" then
-			p1 = p1.__index
+		if typeof(Index) == "table" then
+			Index = Index.__index
 			
-			if p1 ~= p2 then
-				if typeof(p1) ~= "table" then continue end
-				if not t[p1] then
-					t[p1] = true
-					continue
-				end
-				return false
+			if Index == Index1 then
+				return true
 			end
-			return true
 		end
+		if typeof(Index) ~= "table" then continue end
+		if config[Index] then
+			return false
+		end
+		config[Index] = true
 	end
 	return false
 end

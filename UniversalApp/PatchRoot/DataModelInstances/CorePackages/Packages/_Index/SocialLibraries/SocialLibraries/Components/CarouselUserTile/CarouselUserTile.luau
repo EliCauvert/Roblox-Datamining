@@ -1,99 +1,99 @@
-﻿local socialLibraries = script:FindFirstAncestor("SocialLibraries")
-local dependenciesModule = require(socialLibraries.dependencies)
-local roact = dependenciesModule.Roact
-local llama = dependenciesModule.llama
-local UIBlox = dependenciesModule.UIBlox
-local playerTile = UIBlox.App.Tile.PlayerTile
-local interactable = UIBlox.Core.Control.Interactable
-local getUserAvatarImageModule = require(socialLibraries.User.getUserAvatarImage)
-local playerNameModule = require(script.Parent.PlayerName)
+﻿local SocialLibraries = script:FindFirstAncestor("SocialLibraries")
+local DependenciesModule = require(SocialLibraries.dependencies)
+local Roact = DependenciesModule.Roact
+local Llama = DependenciesModule.llama
+local UIBlox = DependenciesModule.UIBlox
+local PlayerTile = UIBlox.App.Tile.PlayerTile
+local Interactable = UIBlox.Core.Control.Interactable
+local GetUserAvatarImageModule = require(SocialLibraries.User.getUserAvatarImage)
+local PlayerNameModule = require(script.Parent.PlayerName)
 local _ = require(script.Parent.StyleTypes)
-local constantsModule = require(script.Parent.Constants)
+local ConstantsModule = require(script.Parent.Constants)
 
-local var1 = function() end
+local function OnStateChanged() --[[ Line: 16 ]] end
 
-local t = {
-	tileSize = constantsModule.TILE_SIZE,
-	nameTopPadding = constantsModule.NAME_TOP_PADDING,
-	contextualTopPadding = constantsModule.CONTEXTUAL_TOP_PADDING
+local config = {
+	tileSize = ConstantsModule.TILE_SIZE,
+	nameTopPadding = ConstantsModule.NAME_TOP_PADDING,
+	contextualTopPadding = ConstantsModule.CONTEXTUAL_TOP_PADDING
 }
 
-return function(p1)
-	-- upvalues: llama (ref), t (ref), roact (ref), playerTile (ref), getUserAvatarImageModule (ref), playerNameModule (ref), interactable (ref), var1 (ref)
-	local var2 = llama.Dictionary.join(t, p1)
-	local tileSize = var2.tileSize
+return function(p1) --[[ Line: 49 ]]
+	-- upvalues: Llama (copy), config (copy), Roact (copy), PlayerTile (copy), GetUserAvatarImageModule (copy), PlayerNameModule (copy), Interactable (copy), OnStateChanged (copy)
+	local JoinResult = Llama.Dictionary.join(config, p1)
+	local TileSize = JoinResult.tileSize
 	
-	local _ = function()
-		-- upvalues: var2 (ref)
-		return if var2.renderButtons then var2.renderButtons() else nil
+	local function _() --[[ Line: 53 ]]
+		-- upvalues: JoinResult (copy)
+		return if JoinResult.renderButtons then JoinResult.renderButtons() else nil
 	end
 	
-	local _ = function()
-		-- upvalues: var2 (ref)
-		return if var2.renderContextualInfo then var2.renderContextualInfo() else nil
+	local _ = function() --[[ Line: 70 ]]
+		-- upvalues: JoinResult (copy)
+		return if JoinResult.renderContextualInfo then JoinResult.renderContextualInfo() else nil
 	end
 	
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = var2.layoutOrder,
-		Size = UDim2.fromOffset(tileSize, 0)
+		LayoutOrder = JoinResult.layoutOrder,
+		Size = UDim2.fromOffset(TileSize, 0)
 	}, {
-		UIListLayout = roact.createElement("UIListLayout", {
+		UIListLayout = Roact.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		PlayerTileFrame = roact.createElement("Frame", {
+		PlayerTileFrame = Roact.createElement("Frame", {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
-			Size = UDim2.fromOffset(tileSize, tileSize)
+			Size = UDim2.fromOffset(TileSize, TileSize)
 		}, {
-			PlayerTile = (function()
-				-- upvalues: var2 (ref), roact (copy), playerTile (copy), getUserAvatarImageModule (copy)
-				return if var2.renderPlayerTile then var2.renderPlayerTile() else roact.createElement(playerTile, {
-					tileSize = UDim2.fromOffset(var2.tileSize, var2.tileSize),
-					thumbnail = getUserAvatarImageModule(var2.userId),
-					onActivated = var2.onActivatedTile,
-					buttons = if var2.renderButtons then var2.renderButtons() else nil
+			PlayerTile = (function() --[[ Line: 59 ]]
+				-- upvalues: JoinResult (copy), Roact (upval), PlayerTile (upval), GetUserAvatarImageModule (upval)
+				return if JoinResult.renderPlayerTile then JoinResult.renderPlayerTile() else Roact.createElement(PlayerTile, {
+					tileSize = UDim2.fromOffset(JoinResult.tileSize, JoinResult.tileSize),
+					thumbnail = GetUserAvatarImageModule(JoinResult.userId),
+					onActivated = JoinResult.onActivatedTile,
+					buttons = if JoinResult.renderButtons then JoinResult.renderButtons() else nil
 				})
 			end)()
 		}),
-		NameTopPadding = if var2.nameTopPadding then roact.createElement("Frame", {
+		NameTopPadding = if JoinResult.nameTopPadding then Roact.createElement("Frame", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
-			Size = UDim2.fromOffset(0, var2.nameTopPadding)
+			Size = UDim2.fromOffset(0, JoinResult.nameTopPadding)
 		}) else nil,
-		UserInfo = roact.createElement(interactable, {
+		UserInfo = Roact.createElement(Interactable, {
 			LayoutOrder = 3,
-			[roact.Event.Activated] = var2.onActivatedContextual,
+			[Roact.Event.Activated] = JoinResult.onActivatedContextual,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			onStateChanged = var1,
+			onStateChanged = OnStateChanged,
 			BackgroundTransparency = 1
 		}, {
-			UIListLayout = roact.createElement("UIListLayout", {
+			UIListLayout = Roact.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			PlayerNameFrame = roact.createElement("Frame", {
+			PlayerNameFrame = Roact.createElement("Frame", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, {
-				PlayerName = (function()
-					-- upvalues: var2 (ref), roact (copy), playerNameModule (copy)
-					return if var2.renderPlayerName then var2.renderPlayerName() else var2.userName and roact.createElement(playerNameModule, { name = var2.userName, width = var2.tileSize }) or nil
+				PlayerName = (function() --[[ Line: 76 ]]
+					-- upvalues: JoinResult (copy), Roact (upval), PlayerNameModule (upval)
+					return if JoinResult.renderPlayerName then JoinResult.renderPlayerName() else JoinResult.userName and Roact.createElement(PlayerNameModule, { name = JoinResult.userName, width = JoinResult.tileSize }) or nil
 				end)()
 			}),
-			ContextualTopPadding = if var2.contextualTopPadding then roact.createElement("Frame", {
+			ContextualTopPadding = if JoinResult.contextualTopPadding then Roact.createElement("Frame", {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(0, var2.contextualTopPadding)
+				Size = UDim2.fromOffset(0, JoinResult.contextualTopPadding)
 			}) else nil,
-			ContextualInfoFrame = roact.createElement("Frame", {
+			ContextualInfoFrame = Roact.createElement("Frame", {
 				LayoutOrder = 3,
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, {
-				ContextualInfo = if var2.renderContextualInfo then var2.renderContextualInfo() else nil
+				ContextualInfo = if JoinResult.renderContextualInfo then JoinResult.renderContextualInfo() else nil
 			})
 		})
 	})

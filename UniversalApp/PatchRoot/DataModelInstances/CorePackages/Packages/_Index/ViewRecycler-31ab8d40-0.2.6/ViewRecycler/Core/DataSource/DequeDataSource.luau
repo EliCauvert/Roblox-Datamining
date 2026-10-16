@@ -1,166 +1,173 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Types)
-local itemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
-local mutationControllerModule = require(script.Parent.MutationController)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Types)
+local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
+local MutationControllerModule = require(script.Parent.MutationController)
 
-local function getItems(p1, p2, p3, p4)
-	local list = table.create(math.max(0, p4 - p3 + 1))
+local function getItems(Count: number, Callback, p1: number, p2: number) --[[ Line: 28 ]]
+	local Buffer = table.create((math.max(0, p2 - p1 + 1)))
 	
-	for i = p3, math.min(p4, p1) do
-		table.insert(list, p2(i))
+	for i = p1, math.min(p2, Count) do
+		table.insert(Buffer, Callback(i))
 	end
-	return list
+	return Buffer
 end
 
-return function(p5, p6)
-	-- upvalues: itemKeyRegistryModule (ref), mutationControllerModule (ref), getItems (ref), dataSourceChangeTypeModule (ref)
-	p5 = p5 or {}
-	local t = {}
-	local t_1 = {}
-	local var1 = itemKeyRegistryModule.create(p6, "DataSource.deque")
-	local var2 = var1.rebuild(p5)
-	local maxValue = math.max(8, #p5)
-	local var3 = 1
-	local p4Count = #p5
+return function(p3, p4) --[[ Line: 36 | Named "createDequeDataSource" ]]
+	-- upvalues: ItemKeyRegistryModule (copy), MutationControllerModule (copy), getItems (copy), DataSourceChangeTypeModule (copy)
+	local P3 = p3 or {}
+	local Values = {}
+	local ClaimResults = {}
+	local DataSourceDeque = ItemKeyRegistryModule.create(p4, "DataSource.deque")
+	local RebuildResult = DataSourceDeque.rebuild(P3)
+	local Largest = math.max(8, #P3)
+	local Head = 1
+	local CountP3 = #P3
 	
-	for i, v in p5 do
-		t[i] = v
-		t_1[i] = var2[i]
+	for i, value in P3 do
+		Values[i] = value
+		ClaimResults[i] = RebuildResult[i]
 	end
-	local var4 = mutationControllerModule(function()
-		-- upvalues: p4Count (write)
-		return p4Count
-	end, function()
-		-- upvalues: t (write), t_1 (write), maxValue (write), var3 (write), p4Count (write), var1 (ref)
+	local MutationControllerModuleResult = MutationControllerModule(function() --[[ Line: 50 ]]
+		-- upvalues: CountP3 (ref)
+		return CountP3
+	end, function() --[[ Line: 52 ]]
+		-- upvalues: Values (ref), ClaimResults (ref), Largest (ref), Head (ref), CountP3 (ref), DataSourceDeque (copy)
 		return {
-			values = table.clone(t),
-			keys = table.clone(t_1),
-			capacity = maxValue,
-			head = var3,
-			count = p4Count,
-			keyRegistry = var1.snapshot()
+			values = table.clone(Values),
+			keys = table.clone(ClaimResults),
+			capacity = Largest,
+			head = Head,
+			count = CountP3,
+			keyRegistry = DataSourceDeque.snapshot()
 		}
-	end, function(p7)
-		-- upvalues: t (write), t_1 (write), maxValue (write), var3 (write), p4Count (write), var1 (ref)
-		t = p7.values
-		t_1 = p7.keys
-		maxValue = p7.capacity
-		var3 = p7.head
-		p4Count = p7.count
-		var1.restore(p7.keyRegistry)
+	end, function(p5) --[[ Line: 61 ]]
+		-- upvalues: Values (ref), ClaimResults (ref), Largest (ref), Head (ref), CountP3 (ref), DataSourceDeque (copy)
+		Values = p5.values
+		ClaimResults = p5.keys
+		Largest = p5.capacity
+		Head = p5.head
+		CountP3 = p5.count
+		DataSourceDeque.restore(p5.keyRegistry)
 	end)
 	
-	local function _(p7)
-		-- upvalues: var3 (write), maxValue (write)
-		return (var3 + p7 - 2) % maxValue + 1
+	local function _(p5): number --[[ Line: 70 | Named "physical" ]]
+		-- upvalues: Head (ref), Largest (ref)
+		return (Head + p5 - 2) % Largest + 1
 	end
 	
-	local function ensureCapacity()
-		-- upvalues: p4Count (write), maxValue (write), t (write), var3 (write), t_1 (write)
-		if p4Count < maxValue then return end
-		local var5 = maxValue * 2
-		local t_2 = {}
-		local t_3 = {}
+	local function ensureCapacity() --[[ Line: 74 ]]
+		-- upvalues: CountP3 (ref), Largest (ref), Values (ref), Head (ref), ClaimResults (ref)
+		if CountP3 < Largest then return end
+		local ScaledLargest = Largest * 2
+		local t = {}
+		local t1 = {}
 		
-		for i = 1, p4Count do
-			t_2[i] = t[(var3 + i - 2) % maxValue + 1]
-			t_3[i] = t_1[(var3 + i - 2) % maxValue + 1]
+		for i = 1, CountP3 do
+			t[i] = Values[(Head + i - 2) % Largest + 1]
+			t1[i] = ClaimResults[(Head + i - 2) % Largest + 1]
 		end
-		t = t_2
-		t_1 = t_3
-		maxValue = var5
-		var3 = 1
+		Values = t
+		ClaimResults = t1
+		Largest = ScaledLargest
+		Head = 1
 	end
 	
-	local var6 = nil
-	
-	return {
-		getItemCount = function()
-			-- upvalues: p4Count (write)
-			return p4Count
+	local v1 = nil
+	v1 = {
+		getItemCount = function() --[[ Line: 93 ]]
+			-- upvalues: CountP3 (ref)
+			return CountP3
 		end,
-		getItem = function(p7)
-			-- upvalues: t (write), var3 (write), maxValue (write)
-			return t[(var3 + p7 - 2) % maxValue + 1]
+		getItem = function(p5) --[[ Line: 96 ]]
+			-- upvalues: Values (ref), Head (ref), Largest (ref)
+			return Values[(Head + p5 - 2) % Largest + 1]
 		end,
-		getItemKey = function(p7)
-			-- upvalues: t_1 (write), var3 (write), maxValue (write)
-			return t_1[(var3 + p7 - 2) % maxValue + 1]
+		getItemKey = function(p5) --[[ Line: 99 ]]
+			-- upvalues: ClaimResults (ref), Head (ref), Largest (ref)
+			return ClaimResults[(Head + p5 - 2) % Largest + 1]
 		end,
-		getItems = function(p7, p8)
-			-- upvalues: getItems (copy), p4Count (write), var6 (write)
-			return getItems(p4Count, var6.getItem, p7, p8)
+		getItems = function(p5, p6) --[[ Line: 102 ]]
+			-- upvalues: getItems (upval), CountP3 (ref), v1 (ref)
+			return (getItems(CountP3, v1.getItem, p5, p6))
 		end,
-		subscribe = var4.subscribe,
-		transaction = var4.transaction,
-		pushFront = function(p7)
-			-- upvalues: p4Count (write), var1 (ref), ensureCapacity (ref), var3 (write), maxValue (write), t (write), t_1 (write), var4 (ref), dataSourceChangeTypeModule (copy)
-			local var7 = var1.claim(p7, 1)
+		subscribe = MutationControllerModuleResult.subscribe,
+		transaction = MutationControllerModuleResult.transaction,
+		pushFront = function(p5) --[[ Line: 109 ]]
+			-- upvalues: CountP3 (ref), DataSourceDeque (copy), ensureCapacity (copy), Head (ref), Largest (ref), Values (ref), ClaimResults (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+			local Count: number = CountP3
+			local ClaimResult = DataSourceDeque.claim(p5, 1)
 			ensureCapacity()
-			var3 = (var3 - 2) % maxValue + 1
-			t[var3] = p7
-			t_1[var3] = var7
-			p4Count += 1
-			var4.emit({
+			Head = (Head - 2) % Largest + 1
+			Values[Head] = p5
+			ClaimResults[Head] = ClaimResult
+			CountP3 += 1
+			MutationControllerModuleResult.emit({
 				index = 1,
-				type = dataSourceChangeTypeModule.Insert,
-				keys = { var7 }
-			}, p4Count)
+				type = DataSourceChangeTypeModule.Insert,
+				keys = { ClaimResult }
+			}, Count)
 		end,
-		pushBack = function(p7)
-			-- upvalues: p4Count (write), var1 (ref), ensureCapacity (ref), var3 (write), maxValue (write), t (write), t_1 (write), var4 (ref), dataSourceChangeTypeModule (copy)
-			local var7 = var1.claim(p7, p4Count + 1)
+		pushBack = function(p5) --[[ Line: 120 ]]
+			-- upvalues: CountP3 (ref), DataSourceDeque (copy), ensureCapacity (copy), Head (ref), Largest (ref), Values (ref), ClaimResults (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+			local Count: number = CountP3
+			local ClaimResult = DataSourceDeque.claim(p5, CountP3 + 1)
 			ensureCapacity()
-			local var8 = (var3 + (p4Count + 1) - 2) % maxValue + 1
-			t[var8] = p7
-			t_1[var8] = var7
-			p4Count += 1
-			var4.emit({
-				type = dataSourceChangeTypeModule.Insert,
-				index = p4Count,
-				keys = { var7 }
-			}, p4Count)
+			local NewHead = (Head + (CountP3 + 1) - 2) % Largest + 1
+			Values[NewHead] = p5
+			ClaimResults[NewHead] = ClaimResult
+			CountP3 += 1
+			MutationControllerModuleResult.emit({
+				type = DataSourceChangeTypeModule.Insert,
+				index = CountP3,
+				keys = { ClaimResult }
+			}, Count)
 		end,
-		popFront = function()
-			-- upvalues: p4Count (write), t (write), var3 (write), t_1 (write), var1 (ref), maxValue (write), var4 (ref), dataSourceChangeTypeModule (copy)
-			if p4Count == 0 then
+		popFront = function() --[[ Line: 131 ]]
+			-- upvalues: CountP3 (ref), Values (ref), Head (ref), ClaimResults (ref), DataSourceDeque (copy), Largest (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+			if CountP3 == 0 then
 				return nil
+			else
+				local Count: number = CountP3
+				local Value = Values[Head]
+				Values[Head] = nil
+				local ClaimResult = ClaimResults[Head]
+				ClaimResults[Head] = nil
+				DataSourceDeque.release(ClaimResult)
+				Head = Head % Largest + 1
+				CountP3 -= 1
+				MutationControllerModuleResult.emit({
+					index = 1,
+					type = DataSourceChangeTypeModule.Remove,
+					keys = { ClaimResult }
+				}, Count)
+				
+				return Value
 			end
-			local var7 = t[var3]
-			t[var3] = nil
-			local var8 = t_1[var3]
-			t_1[var3] = nil
-			var1.release(var8)
-			var3 = var3 % maxValue + 1
-			p4Count -= 1
-			var4.emit({
-				index = 1,
-				type = dataSourceChangeTypeModule.Remove,
-				keys = { var8 }
-			}, p4Count)
-			
-			return var7
 		end,
-		popBack = function()
-			-- upvalues: p4Count (write), var3 (write), maxValue (write), t (write), t_1 (write), var1 (ref), var4 (ref), dataSourceChangeTypeModule (copy)
-			if p4Count == 0 then
+		popBack = function() --[[ Line: 147 ]]
+			-- upvalues: CountP3 (ref), Head (ref), Largest (ref), Values (ref), ClaimResults (ref), DataSourceDeque (copy), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
+			if CountP3 == 0 then
 				return nil
+			else
+				local Index: number = CountP3
+				local NewHead = (Head + CountP3 - 2) % Largest + 1
+				local Value = Values[NewHead]
+				Values[NewHead] = nil
+				local ClaimResult = ClaimResults[NewHead]
+				ClaimResults[NewHead] = nil
+				DataSourceDeque.release(ClaimResult)
+				CountP3 -= 1
+				MutationControllerModuleResult.emit({
+					type = DataSourceChangeTypeModule.Remove,
+					index = Index,
+					keys = { ClaimResult }
+				}, Index)
+				
+				return Value
 			end
-			local var7 = (var3 + p4Count - 2) % maxValue + 1
-			local var8 = t[var7]
-			t[var7] = nil
-			local var9 = t_1[var7]
-			t_1[var7] = nil
-			var1.release(var9)
-			p4Count -= 1
-			var4.emit({
-				type = dataSourceChangeTypeModule.Remove,
-				index = p4Count,
-				keys = { var9 }
-			}, p4Count)
-			
-			return var8
 		end
 	}
+	
+	return v1
 end

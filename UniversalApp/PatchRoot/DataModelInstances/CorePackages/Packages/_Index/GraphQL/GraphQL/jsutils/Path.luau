@@ -1,17 +1,17 @@
-﻿local array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
+﻿local Array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
 
 return {
-	addPath = function(p1, p2, p3)
-		return { prev = p1, key = p2, typename = p3 }
+	addPath = function(Prev, Key, Typename) --[[ Line: 21 ]]
+		return { prev = Prev, key = Key, typename = Typename }
 	end,
-	pathToArray = function(p1)
-		-- upvalues: array (ref)
-		local t = {}
-		local var1 = p1
-		while var1 do
-			table.insert(t, var1.key)
-			var1 = var1.prev
+	pathToArray = function(Prev) --[[ Line: 29 ]]
+		-- upvalues: Array (copy)
+		local Keys = {}
+		local Prev1 = Prev
+		while Prev1 do
+			table.insert(Keys, Prev1.key)
+			Prev1 = Prev1.prev
 		end
-		return array.reverse(t)
+		return Array.reverse(Keys)
 	end
 }

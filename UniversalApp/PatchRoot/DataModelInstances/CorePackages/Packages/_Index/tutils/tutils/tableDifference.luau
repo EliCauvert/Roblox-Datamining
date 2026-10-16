@@ -1,14 +1,14 @@
-﻿return function(p1, p2)
+﻿return function(List, List1) --[[ Line: 5 ]]
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		if p2[i] ~= p1[i] then
-			t[i] = v
+	for i, value in pairs(List) do
+		if List1[i] ~= List[i] then
+			t[i] = value
 		end
 	end
-	for i_1, v_1 in pairs(p2) do
-		if p2[i_1] ~= p1[i_1] then
-			t[i_1] = v_1
+	for i1, value1 in pairs(List1) do
+		if List1[i1] ~= List[i1] then
+			t[i1] = value1
 		end
 	end
 	return t

@@ -1,87 +1,89 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local interactableModule = require(foundation.Components.Interactable)
-local flagsModule = require(foundation.Utility.Flags)
-local guiObjectChildrenModule = require(foundation.Utility.GuiObjectChildren)
-local _ = require(foundation.Components.Types)
-local indexBindableModule = require(foundation.Utility.indexBindable)
-local normalizeFontFaceModule = require(foundation.Utility.normalizeFontFace)
-local useDefaultTagsModule = require(foundation.Utility.useDefaultTags)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local withGuiObjectPropsModule = require(foundation.Utility.withGuiObjectProps)
-local useStyleTagsModule = require(foundation.Providers.Style.useStyleTags)
-local fontScalesModule = require(script.Parent.FontScales)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local InteractableModule = require(Foundation.Components.Interactable)
+local FlagsModule = require(Foundation.Utility.Flags)
+local GuiObjectChildrenModule = require(Foundation.Utility.GuiObjectChildren)
+local _ = require(Foundation.Components.Types)
+local IndexBindableModule = require(Foundation.Utility.indexBindable)
+local NormalizeFontFaceModule = require(Foundation.Utility.normalizeFontFace)
+local UseDefaultTagsModule = require(Foundation.Utility.useDefaultTags)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local WithGuiObjectPropsModule = require(Foundation.Utility.withGuiObjectProps)
+local UseStyleTagsModule = require(Foundation.Providers.Style.useStyleTags)
+local FontScalesModule = require(script.Parent.FontScales)
+local config = {
 	AutoLocalize = false,
 	AutoButtonColor = false,
 	BorderSizePixel = 0,
 	isDisabled = false
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), reactModule (ref), flagsModule (ref), normalizeFontFaceModule (ref), reactIsModule (ref), fontScalesModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = if var1.onStateChanged == nil then if var1.onActivated == nil then var1.onSecondaryActivated ~= nil else true else true
-	local var3 = if var1.backgroundStyle ~= nil then "gui-object-defaults text-defaults text-size-defaults text-color-defaults" else "gui-object-defaults text-defaults text-size-defaults text-color-defaults x-default-transparency"
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 | Named "Text" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseDefaultTagsModule (copy), UseStyleTagsModule (copy), ReactModule (copy), FlagsModule (copy), NormalizeFontFaceModule (copy), ReactIsModule (copy), FontScalesModule (copy), WithGuiObjectPropsModule (copy), IndexBindableModule (copy), InteractableModule (copy), GuiObjectChildrenModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local HasOnStateChanged: boolean = WithDefaultsModuleResult.onStateChanged ~= nil or WithDefaultsModuleResult.onActivated ~= nil or WithDefaultsModuleResult.onSecondaryActivated ~= nil
+	local GuiObjectDefaultsTextDefaultsTextSizeDefaultsTextColorDefaults: string = if WithDefaultsModuleResult.backgroundStyle == nil then "gui-object-defaults text-defaults text-size-defaults text-color-defaults" else "gui-object-defaults text-defaults text-size-defaults text-color-defaults x-default-transparency"
 	
-	if var1.fontStyle and var1.fontStyle.FontSize then
-		var3 ..= " x-default-text-size"
+	if WithDefaultsModuleResult.fontStyle and WithDefaultsModuleResult.fontStyle.FontSize then
+		GuiObjectDefaultsTextDefaultsTextSizeDefaultsTextColorDefaults ..= " x-default-text-size"
 	end
-	local var4 = useStyleTagsModule(useDefaultTagsModule(var1.tag, var3))
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: flagsModule (copy), var1 (ref), normalizeFontFaceModule (copy), reactIsModule (copy)
-		if flagsModule.FoundationFontFaceMigration then
-			return normalizeFontFaceModule(if var1.fontStyle ~= nil then nil else var1.fontStyle.Font)
+	local UseStyleTagsModuleResult = UseStyleTagsModule((UseDefaultTagsModule(WithDefaultsModuleResult.tag, GuiObjectDefaultsTextDefaultsTextSizeDefaultsTextColorDefaults)))
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 65 ]]
+		-- upvalues: FlagsModule (upval), WithDefaultsModuleResult (copy), NormalizeFontFaceModule (upval), ReactIsModule (upval)
+		if FlagsModule.FoundationFontFaceMigration then
+			return NormalizeFontFaceModule(if WithDefaultsModuleResult.fontStyle == nil then nil else WithDefaultsModuleResult.fontStyle.Font)
+		else
+			local FontStyleFont = if WithDefaultsModuleResult.fontStyle == nil then nil else WithDefaultsModuleResult.fontStyle.Font
+			
+			return if typeof(FontStyleFont) == "table" and not ReactIsModule.isBinding(FontStyleFont) then Font.new(FontStyleFont.Family, FontStyleFont.Weight, FontStyleFont.Style) elseif typeof(FontStyleFont) == "EnumItem" then Font.fromEnum(FontStyleFont) else FontStyleFont
 		end
-		local var6 = if var1.fontStyle ~= nil then nil else var1.fontStyle.Font
-		
-		return if typeof(var6) == "table" and not reactIsModule.isBinding(var6) then Font.new(var6.Family, var6.Weight, var6.Style) elseif typeof(var6) == "EnumItem" then Font.fromEnum(var6) else var6
-	end, { var1.fontStyle })
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var5 (ref), reactIsModule (copy), fontScalesModule (copy)
-		if var1.fontStyle == nil or var1.fontStyle.LineHeight == nil or (var1.fontStyle.FontSize == nil or var5 == nil) then
+	end, { WithDefaultsModuleResult.fontStyle })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), UseMemoResult (copy), ReactIsModule (upval), FontScalesModule (upval)
+		if WithDefaultsModuleResult.fontStyle == nil or WithDefaultsModuleResult.fontStyle.LineHeight == nil or WithDefaultsModuleResult.fontStyle.FontSize == nil or UseMemoResult == nil then
 			return 0
+		else
+			local FontScalesModuleEntry = FontScalesModule[if ReactIsModule.isBinding(UseMemoResult) then UseMemoResult:getValue().Family else UseMemoResult.Family]
+			
+			return if FontScalesModuleEntry == nil then 0 else (WithDefaultsModuleResult.fontStyle.FontSize / FontScalesModuleEntry * (WithDefaultsModuleResult.fontStyle.LineHeight * FontScalesModuleEntry) - WithDefaultsModuleResult.fontStyle.FontSize) / 2
 		end
-		local var7 = fontScalesModule[if reactIsModule.isBinding(var5) then var5:getValue().Family else var5.Family]
-		
-		return if var7 == nil then 0 else (var1.fontStyle.FontSize / var7 * (var1.fontStyle.LineHeight * var7) - var1.fontStyle.FontSize) / 2
-	end, { var5, var1.fontStyle })
+	end, { UseMemoResult, WithDefaultsModuleResult.fontStyle })
 	
-	if var1.padding == nil and var6 ~= 0 then
-		var1.padding = Vector2.new(0, var6)
+	if WithDefaultsModuleResult.padding == nil and UseMemoResult1 ~= 0 then
+		WithDefaultsModuleResult.padding = Vector2.new(0, UseMemoResult1)
 	end
-	local var8 = if var2 then "TextButton" else "TextLabel"
-	local var9 = withGuiObjectPropsModule(var1, {
-		AutoButtonColor = if var8 == "TextButton" then var1.AutoButtonColor else nil,
-		FontFace = var5,
-		LineHeight = if var1.fontStyle ~= nil then nil else var1.fontStyle.LineHeight,
-		RichText = var1.RichText,
-		Text = var1.Text,
-		TextColor3 = if var1.textStyle then indexBindableModule(var1.textStyle, "Color3") else nil,
-		TextTransparency = if var1.textStyle then indexBindableModule(var1.textStyle, "Transparency") else nil,
-		TextDirection = var1.TextDirection,
-		TextScaled = var1.TextScaled,
-		TextSize = if var1.fontStyle ~= nil then nil else var1.fontStyle.FontSize,
-		TextTruncate = var1.TextTruncate,
-		TextWrapped = var1.TextWrapped,
-		TextXAlignment = var1.TextXAlignment,
-		TextYAlignment = var1.TextYAlignment,
-		ref = p2,
-		[reactModule.Tag] = var4
+	local TextButton: string = if HasOnStateChanged then "TextButton" else "TextLabel"
+	local WithGuiObjectPropsModuleResult = WithGuiObjectPropsModule(WithDefaultsModuleResult, {
+		AutoButtonColor = if TextButton == "TextButton" then WithDefaultsModuleResult.AutoButtonColor else nil,
+		FontFace = UseMemoResult,
+		LineHeight = if WithDefaultsModuleResult.fontStyle == nil then nil else WithDefaultsModuleResult.fontStyle.LineHeight,
+		RichText = WithDefaultsModuleResult.RichText,
+		Text = WithDefaultsModuleResult.Text,
+		TextColor3 = if WithDefaultsModuleResult.textStyle then IndexBindableModule(WithDefaultsModuleResult.textStyle, "Color3") else nil,
+		TextTransparency = if WithDefaultsModuleResult.textStyle then IndexBindableModule(WithDefaultsModuleResult.textStyle, "Transparency") else nil,
+		TextDirection = WithDefaultsModuleResult.TextDirection,
+		TextScaled = WithDefaultsModuleResult.TextScaled,
+		TextSize = if WithDefaultsModuleResult.fontStyle == nil then nil else WithDefaultsModuleResult.fontStyle.FontSize,
+		TextTruncate = WithDefaultsModuleResult.TextTruncate,
+		TextWrapped = WithDefaultsModuleResult.TextWrapped,
+		TextXAlignment = WithDefaultsModuleResult.TextXAlignment,
+		TextYAlignment = WithDefaultsModuleResult.TextYAlignment,
+		ref = Ref,
+		[ReactModule.Tag] = UseStyleTagsModuleResult
 	})
-	local var10 = var8
+	local TextButton1: string = TextButton
 	
-	if var2 then
-		var10 = interactableModule
-		var9.component = var8
-		var9.onActivated = var1.onActivated
-		var9.onSecondaryActivated = var1.onSecondaryActivated
-		var9.onStateChanged = var1.onStateChanged
-		var9.stateLayer = var1.stateLayer
-		var9.isDisabled = var1.isDisabled
-		var9.cursor = var1.cursor
+	if HasOnStateChanged then
+		TextButton1 = InteractableModule
+		WithGuiObjectPropsModuleResult.component = TextButton
+		WithGuiObjectPropsModuleResult.onActivated = WithDefaultsModuleResult.onActivated
+		WithGuiObjectPropsModuleResult.onSecondaryActivated = WithDefaultsModuleResult.onSecondaryActivated
+		WithGuiObjectPropsModuleResult.onStateChanged = WithDefaultsModuleResult.onStateChanged
+		WithGuiObjectPropsModuleResult.stateLayer = WithDefaultsModuleResult.stateLayer
+		WithGuiObjectPropsModuleResult.isDisabled = WithDefaultsModuleResult.isDisabled
+		WithGuiObjectPropsModuleResult.cursor = WithDefaultsModuleResult.cursor
 	end
-	return reactModule.createElement(var10, var9, guiObjectChildrenModule(var1))
+	return ReactModule.createElement(TextButton1, WithGuiObjectPropsModuleResult, GuiObjectChildrenModule(WithDefaultsModuleResult))
 end))

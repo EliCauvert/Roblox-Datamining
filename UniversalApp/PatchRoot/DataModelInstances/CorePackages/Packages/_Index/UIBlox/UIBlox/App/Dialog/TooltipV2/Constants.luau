@@ -1,11 +1,10 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local _ = require(parent.Types)
-local tooltipOrientationModule = require(parent_1.Tooltip.Enum.TooltipOrientation)
-local imagesModule = require(parent_2.ImageSet.Images)
-local uDim2 = UDim2.fromOffset(16, 8)
-local var1 = uDim2.Y.Offset - 1
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local _ = require(Parent.Types)
+local TooltipOrientationModule = require(Parent1.Tooltip.Enum.TooltipOrientation)
+local ImagesModule = require(Parent1.Parent.ImageSet.Images)
+local _UDim2 = UDim2.fromOffset(16, 8)
+local OffsetDelta = _UDim2.Y.Offset - 1
 
 return table.freeze({
 	DEFAULT_PADDING = 12,
@@ -18,52 +17,52 @@ return table.freeze({
 	SCREEN_MARGIN = 12,
 	DEFAULT_DELAY_TIME = 0.4,
 	CORNER_RADIUS = UDim.new(0, 8),
-	CONTENT_TO_CARET_TIP = var1,
-	CONTENT_TO_CARET_CENTER = var1 - uDim2.Y.Offset / 2,
-	CARET_IMAGE = imagesModule["component_assets/triangleDown_16"],
+	CONTENT_TO_CARET_TIP = OffsetDelta,
+	CONTENT_TO_CARET_CENTER = OffsetDelta - _UDim2.Y.Offset / 2,
+	CARET_IMAGE = ImagesModule["component_assets/triangleDown_16"],
 	CARET_ROTATION = {
-		[tooltipOrientationModule.Top] = 0,
-		[tooltipOrientationModule.Bottom] = 180,
-		[tooltipOrientationModule.Right] = 90,
-		[tooltipOrientationModule.Left] = 270
+		[TooltipOrientationModule.Top] = 0,
+		[TooltipOrientationModule.Bottom] = 180,
+		[TooltipOrientationModule.Right] = 90,
+		[TooltipOrientationModule.Left] = 270
 	},
-	CARET_SIZE = uDim2,
+	CARET_SIZE = _UDim2,
 	DropShadow = {
 		Small = {
-			IMAGE = imagesModule["component_assets/dropshadow_17_4"],
+			IMAGE = ImagesModule["component_assets/dropshadow_17_4"],
 			SLICE_CENTER = Rect.new(12, 12, 13, 13),
 			OFFSET = {
-				[tooltipOrientationModule.Top] = 2,
-				[tooltipOrientationModule.Bottom] = 6,
-				[tooltipOrientationModule.Right] = 4,
-				[tooltipOrientationModule.Left] = 4
+				[TooltipOrientationModule.Top] = 2,
+				[TooltipOrientationModule.Bottom] = 6,
+				[TooltipOrientationModule.Right] = 4,
+				[TooltipOrientationModule.Left] = 4
 			}
 		},
 		Large = {
-			IMAGE = imagesModule["component_assets/dropshadow_17_16"],
+			IMAGE = ImagesModule["component_assets/dropshadow_17_16"],
 			SLICE_CENTER = Rect.new(36, 36, 37, 37),
 			OFFSET = {
-				[tooltipOrientationModule.Top] = 28,
-				[tooltipOrientationModule.Bottom] = 28,
-				[tooltipOrientationModule.Right] = 28,
-				[tooltipOrientationModule.Left] = 28
+				[TooltipOrientationModule.Top] = 28,
+				[TooltipOrientationModule.Bottom] = 28,
+				[TooltipOrientationModule.Right] = 28,
+				[TooltipOrientationModule.Left] = 28
 			}
 		}
 	},
 	ORIENTATION_VECTOR = {
-		[tooltipOrientationModule.Top] = Vector2.new(0, -1),
-		[tooltipOrientationModule.Bottom] = Vector2.new(0, 1),
-		[tooltipOrientationModule.Left] = Vector2.new(-1, 0),
-		[tooltipOrientationModule.Right] = Vector2.new(1, 0)
+		[TooltipOrientationModule.Top] = Vector2.new(0, -1),
+		[TooltipOrientationModule.Bottom] = Vector2.new(0, 1),
+		[TooltipOrientationModule.Left] = Vector2.new(-1, 0),
+		[TooltipOrientationModule.Right] = Vector2.new(1, 0)
 	},
 	OPPOSITE_ORIENTATION = {
-		[tooltipOrientationModule.Top] = tooltipOrientationModule.Bottom,
-		[tooltipOrientationModule.Bottom] = tooltipOrientationModule.Top,
-		[tooltipOrientationModule.Right] = tooltipOrientationModule.Left,
-		[tooltipOrientationModule.Left] = tooltipOrientationModule.Right
+		[TooltipOrientationModule.Top] = TooltipOrientationModule.Bottom,
+		[TooltipOrientationModule.Bottom] = TooltipOrientationModule.Top,
+		[TooltipOrientationModule.Right] = TooltipOrientationModule.Left,
+		[TooltipOrientationModule.Left] = TooltipOrientationModule.Right
 	},
-	DISTANCE_TO_CONTENT = 4 + var1,
-	MIN_DISTANCE_TO_CARET_MIDDLE = 12 + uDim2.X.Offset / 2,
+	DISTANCE_TO_CONTENT = 4 + OffsetDelta,
+	MIN_DISTANCE_TO_CARET_MIDDLE = 12 + _UDim2.X.Offset / 2,
 	INACTIVE_ANIMATION_TARGETS = { distanceOffset = -4, transparency = 1 },
 	ACTIVE_ANIMATION_TARGETS = { distanceOffset = 0, transparency = 0 },
 	ANIMATION_OPTIONS = { frequency = 5 }

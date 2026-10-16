@@ -1,31 +1,34 @@
-﻿local symbolsModule = require(script.Parent.symbols)
+﻿local SymbolsModule = require(script.Parent.symbols)
+local SpyModule = {}
+SpyModule.__index = SpyModule
 local t = {}
-t.__index = t
-local t_1 = {}
-setmetatable(t_1, { __mode = "kv" })
+setmetatable(t, { __mode = "kv" })
 
-function t.new(p1)
-	-- upvalues: symbolsModule (ref), t (ref), t_1 (ref)
-	local t_2 = { [symbolsModule.Calls] = {} }
-	setmetatable(t_2, t)
+function SpyModule.new(Callback) --[[ Line: 12 ]]
+	-- upvalues: SymbolsModule (copy), SpyModule (copy), t (copy)
+	local config = { [SymbolsModule.Calls] = {} }
+	setmetatable(config, SpyModule)
 	
-	local var1 = function(...)
-		-- upvalues: p1 (ref), t_2 (ref), symbolsModule (copy)
-		local t = { args = table.pack(...), result = table.pack(p1(...)) }
-		table.insert(t_2[symbolsModule.Calls], t)
+	local function Inner(...) --[[ Line: 18 ]]
+		-- upvalues: Callback (copy), config (copy), SymbolsModule (upval)
+		local config1 = {
+			args = table.pack(...),
+			result = table.pack(Callback(...))
+		}
+		table.insert(config[SymbolsModule.Calls], config1)
 		
-		return table.unpack(t.result)
+		return table.unpack(config1.result)
 	end
 	
-	t_2.inner = var1
-	t_1[var1] = t_2
+	config.inner = Inner
+	t[Inner] = config
 	
-	return t_2, var1
+	return config, Inner
 end
 
-function t.lookup(p1)
-	-- upvalues: t_1 (ref)
-	return t_1[p1]
+function SpyModule.lookup(p1) --[[ Line: 33 ]]
+	-- upvalues: t (copy)
+	return t[p1]
 end
 
-return t
+return SpyModule

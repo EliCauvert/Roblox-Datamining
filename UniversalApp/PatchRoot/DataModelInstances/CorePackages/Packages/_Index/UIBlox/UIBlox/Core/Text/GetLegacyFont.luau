@@ -1,48 +1,47 @@
-﻿local constantsModule = require(script.Parent.Parent.Parent.App.Style.Constants)
-local t = {}
-local family = Font.fromEnum(Enum.Font.Cartoon).Family
-local comicNeueFontFamily = constantsModule.ComicNeueFontFamily
+﻿local Unknowns = {}
+local Family = Font.fromEnum(Enum.Font.Cartoon).Family
+local ComicNeueFontFamily = require(script.Parent.Parent.Parent.App.Style.Constants).ComicNeueFontFamily
 
-local function _(p1)
+local function _(p1): string --[[ Line: 8 | Named "getFaceKey" ]]
 	return `{p1.Family}|{p1.Weight.Value}|{p1.Style.Value}`
 end
 
-for i, v in Enum.Font:GetEnumItems() do
-	if v ~= Enum.Font.Unknown then
-		local ok, status = pcall(Font.fromEnum, v)
+for _, enumItem in Enum.Font:GetEnumItems() do
+	if enumItem ~= Enum.Font.Unknown then
+		local Success, Result = pcall(Font.fromEnum, enumItem)
 		
-		if ok then
-			t[`{status.Family}|{status.Weight.Value}|{status.Style.Value}`] = v
+		if Success then
+			Unknowns[`{Result.Family}|{Result.Weight.Value}|{Result.Style.Value}`] = enumItem
 		end
 	end
 end
-local function getBuilderSansFallback(p1)
-	return if Enum.FontWeight.ExtraBold.Value <= p1.Value then Enum.Font.BuilderSansExtraBold elseif Enum.FontWeight.SemiBold.Value <= p1.Value then Enum.Font.BuilderSansBold elseif Enum.FontWeight.Medium.Value <= p1.Value then Enum.Font.BuilderSansMedium else Enum.Font.BuilderSans
+local function getBuilderSansFallback(Weight) --[[ Line: 21 ]]
+	return if Enum.FontWeight.ExtraBold.Value <= Weight.Value then Enum.Font.BuilderSansExtraBold elseif Enum.FontWeight.SemiBold.Value <= Weight.Value then Enum.Font.BuilderSansBold elseif Enum.FontWeight.Medium.Value <= Weight.Value then Enum.Font.BuilderSansMedium else Enum.Font.BuilderSans
 end
 
-local _ = function(p1)
-	-- upvalues: comicNeueFontFamily (ref), family (ref)
-	return if p1.Family == comicNeueFontFamily or p1.Family == family then Enum.Font.Cartoon else nil
+local _ = function(p1) --[[ Line: 32 | Named "getComicNeueFallback" ]]
+	-- upvalues: ComicNeueFontFamily (copy), Family (copy)
+	return if p1.Family == ComicNeueFontFamily or p1.Family == Family then Enum.Font.Cartoon else nil
 end
 
-return function(p1)
-	-- upvalues: t (ref), comicNeueFontFamily (ref), family (ref), getBuilderSansFallback (ref)
-	if typeof(p1) == "EnumItem" then
-		if p1 == Enum.Font.Unknown then
-			return nil, false
+return function(Unknown) --[[ Line: 42 | Named "getLegacyFont" ]]
+	-- upvalues: Unknowns (copy), ComicNeueFontFamily (copy), Family (copy), getBuilderSansFallback (copy)
+	if typeof(Unknown) ~= "EnumItem" then
+		local Unknown1 = Unknowns[`{Unknown.Family}|{Unknown.Weight.Value}|{Unknown.Style.Value}`]
+		
+		if Unknown1 then
+			return Unknown1, false
 		end
-		return p1, false
+		local Cartoon = if Unknown.Family == ComicNeueFontFamily or Unknown.Family == Family then Enum.Font.Cartoon else nil
+		
+		if Cartoon then
+			return Cartoon, true
+		else
+			return getBuilderSansFallback(Unknown.Weight), true
+		end
+	elseif Unknown == Enum.Font.Unknown then
+		return nil, false
 	else
-		local family_1 = t[`{p1.Family}|{p1.Weight.Value}|{p1.Style.Value}`]
-		
-		if family_1 then
-			return family_1, false
-		end
-		local var1 = if p1.Family == comicNeueFontFamily or p1.Family == family then Enum.Font.Cartoon else nil
-		
-		if var1 then
-			return var1, true
-		end
-		return getBuilderSansFallback(p1.Weight), true
+		return Unknown, false
 	end
 end

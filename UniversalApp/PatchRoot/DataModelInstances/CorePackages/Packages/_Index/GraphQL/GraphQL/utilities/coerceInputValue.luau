@@ -1,114 +1,118 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local jsutils = parent.jsutils
-local luaUtils = parent.luaUtils
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local inspect = require(jsutils.inspect).inspect
-local invariant = require(jsutils.invariant).invariant
-local didYouMean = require(jsutils.didYouMean).didYouMean
-local isObjectLike = require(jsutils.isObjectLike).isObjectLike
-local suggestionList = require(jsutils.suggestionList).suggestionList
-local printPathArray = require(jsutils.printPathArray).printPathArray
-local addPath = require(jsutils.Path).addPath
-local instanceOfModule = require(jsutils.instanceOf)
-local nullModule = require(luaUtils.null)
-local isNillishModule = require(luaUtils.isNillish)
-local isNillish = isNillishModule.isNillish
-local isNotNillish = isNillishModule.isNotNillish
-local pathToArray = require(jsutils.Path).pathToArray
-local isIteratableObject = require(jsutils.isIteratableObject).isIteratableObject
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local definitionModule = require(parent.type.definition)
-local isLeafType = definitionModule.isLeafType
-local isInputObjectType = definitionModule.isInputObjectType
-local isListType = definitionModule.isListType
-local isNonNullType = definitionModule.isNonNullType
-local coerceInputValueImpl = nil
-local defaultOnError = nil
+﻿local Parent = script.Parent.Parent
+local Jsutils = Parent.jsutils
+local LuaUtils = Parent.luaUtils
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local InspectFunction = require(Jsutils.inspect).inspect
+local InvariantFunction = require(Jsutils.invariant).invariant
+local DidYouMeanFunction = require(Jsutils.didYouMean).didYouMean
+local IsObjectLikeFunction = require(Jsutils.isObjectLike).isObjectLike
+local SuggestionListFunction = require(Jsutils.suggestionList).suggestionList
+local PrintPathArrayFunction = require(Jsutils.printPathArray).printPathArray
+local AddPathFunction = require(Jsutils.Path).addPath
+local InstanceOfModule = require(Jsutils.instanceOf)
+local NullModule = require(LuaUtils.null)
+local IsNillishModule = require(LuaUtils.isNillish)
+local IsNillishFunction = IsNillishModule.isNillish
+local IsNotNillishFunction = IsNillishModule.isNotNillish
+local PathToArrayFunction = require(Jsutils.Path).pathToArray
+local IsIteratableObjectFunction = require(Jsutils.isIteratableObject).isIteratableObject
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local DefinitionModule = require(Parent.type.definition)
+local IsLeafTypeFunction = DefinitionModule.isLeafType
+local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
+local IsListTypeFunction = DefinitionModule.isListType
+local IsNonNullTypeFunction = DefinitionModule.isNonNullType
+local Callback = nil
+local DefaultOnError = nil
 
-local function coerceInputValue(p1, p2, p3)
-	-- upvalues: defaultOnError (write), coerceInputValueImpl (write)
-	return coerceInputValueImpl(p1, p2, p3 or defaultOnError)
+local function coerceInputValue(p1, p2, p3) --[[ Line: 55 ]]
+	-- upvalues: DefaultOnError (ref), Callback (ref)
+	return Callback(p1, p2, if p3 then p3 else DefaultOnError)
 end
 
-defaultOnError = function(p1, p2, p3)
-	-- upvalues: inspect (ref), printPathArray (ref)
-	local text = "Invalid value " .. inspect(p2)
+DefaultOnError = function(p1, p2, p3) --[[ Line: 60 | Named "defaultOnError" ]]
+	-- upvalues: InspectFunction (copy), PrintPathArrayFunction (copy)
+	local Text = "Invalid value " .. InspectFunction(p2)
 	
 	if #p1 > 0 then
-		text ..= " at \"value" .. printPathArray(p1) .. "\""
+		Text ..= " at \"value" .. PrintPathArrayFunction(p1) .. "\""
 	end
-	p3.message = text .. ": " .. p5.message
+	p3.message = Text .. ": " .. p3.message
 	error(p3)
 end
 
-coerceInputValueImpl = function(p1, p2, p3, p4)
-	-- upvalues: isNonNullType (ref), isNotNillish (ref), coerceInputValueImpl (write), pathToArray (ref), graphQLError (ref), inspect (ref), isNillish (ref), nullModule (ref), isListType (ref), isIteratableObject (ref), array (ref), addPath (ref), isInputObjectType (ref), isObjectLike (ref), object (ref), suggestionList (ref), didYouMean (ref), isLeafType (ref), instanceOfModule (ref), invariant (ref)
-	if isNonNullType(p2) then
-		if isNotNillish(p1) then
-			return coerceInputValueImpl(p1, p2.ofType, p3, p4)
+Callback = function(p1, OfType, Callback1: (any, any, any) -> (), p2) --[[ Line: 69 | Named "coerceInputValueImpl" ]]
+	-- upvalues: IsNonNullTypeFunction (copy), IsNotNillishFunction (copy), Callback (ref), PathToArrayFunction (copy), GraphQLError (copy), InspectFunction (copy), IsNillishFunction (copy), NullModule (copy), IsListTypeFunction (copy), IsIteratableObjectFunction (copy), Array (copy), AddPathFunction (copy), IsInputObjectTypeFunction (copy), IsObjectLikeFunction (copy), Object (copy), SuggestionListFunction (copy), DidYouMeanFunction (copy), IsLeafTypeFunction (copy), InstanceOfModule (copy), InvariantFunction (copy)
+	if not IsNonNullTypeFunction(OfType) then
+		if IsNillishFunction(p1) then
+			return NullModule
 		end
-		p3(pathToArray(p4), p1, graphQLError.new("Expected non-nullable type \"" .. inspect(p2) .. "\" not to be null."))
-		
-		return
-	elseif isNillish(p1) then
-		return nullModule
-	elseif isListType(p2) then
-		local ofType = p2.ofType
-		
-		return if isIteratableObject(p1) then array.from(p1, function(p5, p6)
-			-- upvalues: addPath (copy), p4 (ref), coerceInputValueImpl (copy), ofType (ref), p3 (ref)
-			return coerceInputValueImpl(p5, ofType, p3, addPath(p4, p6, nil))
-		end) else { coerceInputValueImpl(p1, ofType, p3, p4) }
-	elseif isInputObjectType(p2) then
-		if not isObjectLike(p1) then
-			p3(pathToArray(p4), p1, graphQLError.new("Expected type \"" .. p7.name .. "\" to be an object."))
+		if IsListTypeFunction(OfType) then
+			local OfType1 = OfType.ofType
 			
-			return
+			return if IsIteratableObjectFunction(p1) then Array.from(p1, function(p3, p4) --[[ Line: 97 ]]
+				-- upvalues: AddPathFunction (upval), p2 (copy), Callback (upval), OfType1 (copy), Callback1 (copy)
+				return Callback(p3, OfType1, Callback1, (AddPathFunction(p2, p4, nil)))
+			end) else { Callback(p1, OfType1, Callback1, p2) }
 		end
-		local t = {}
-		local fields = p2:getFields()
-		
-		for i, v in ipairs(fields:values()) do
-			local name = p1[v.name]
+		if IsInputObjectTypeFunction(OfType) then
+			if not IsObjectLikeFunction(p1) then
+				Callback1(PathToArrayFunction(p2), p1, GraphQLError.new("Expected type \"" .. OfType.name .. "\" to be an object."))
+				
+				return
+			end
+			local DefaultValues = {}
+			local Fields = OfType:getFields()
 			
-			if name ~= nil then
-				t[v.name] = coerceInputValueImpl(name, v.type, p3, addPath(p4, v.name, p2.name))
-			elseif v.defaultValue ~= nil then
-				t[v.name] = v.defaultValue
-			elseif isNonNullType(v.type) then
-				p3(pathToArray(p4), p1, graphQLError.new("Field \"" .. v.name .. "\" of required type \"" .. inspect(v.type) .. "\" was not provided."))
+			for _, value in ipairs(Fields:values()) do
+				local v1 = p1[value.name]
+				
+				if v1 ~= nil then
+					DefaultValues[value.name] = Callback(v1, value.type, Callback1, AddPathFunction(p2, value.name, OfType.name))
+					continue
+				end
+				if value.defaultValue ~= nil then
+					DefaultValues[value.name] = value.defaultValue
+				elseif IsNonNullTypeFunction(value.type) then
+					Callback1(PathToArrayFunction(p2), p1, GraphQLError.new("Field \"" .. value.name .. "\" of required type \"" .. InspectFunction(value.type) .. "\" was not provided."))
+				end
+			end
+			for _, value1 in ipairs(Object.keys(p1)) do
+				if not Fields:get(value1) then
+					Callback1(PathToArrayFunction(p2), p1, GraphQLError.new(("Field \"%s\" is not defined by type \"%s\".%s"):format(value1, OfType.name, DidYouMeanFunction((SuggestionListFunction(value1, OfType:getFields():keys()))))))
+				end
+			end
+			return DefaultValues
+		else
+			if not IsLeafTypeFunction(OfType) then
+				InvariantFunction(false, "Unexpected input type: " .. InspectFunction(OfType))
+				
+				return
+			end
+			local Success, Result = pcall(OfType.parseValue, OfType, p1)
+			
+			if Success then
+				if Result == nil then
+					Callback1(PathToArrayFunction(p2), p1, GraphQLError.new(("Expected type \"%s\"."):format(OfType.name)))
+				end
+				return Result
+			elseif InstanceOfModule(Result, GraphQLError) then
+				Callback1(PathToArrayFunction(p2), p1, Result)
+				
+				return
+			else
+				Callback1(PathToArrayFunction(p2), p1, GraphQLError.new("Expected type \"" .. OfType.name .. "\". " .. Result.message, nil, nil, nil, nil, Result))
+				
+				return
 			end
 		end
-		for i, v_1 in ipairs(object.keys(p1)) do
-			if not fields:get(v_1) then
-				p3(pathToArray(p4), p1, graphQLError.new(("Field \"%s\" is not defined by type \"%s\".%s"):format(v_1, p2.name, didYouMean(suggestionList(v_1, p2:getFields():keys())))))
-			end
-		end
-		return t
-	elseif not isLeafType(p2) then
-		invariant(false, "Unexpected input type: " .. inspect(p2))
-		
-		return
+	elseif IsNotNillishFunction(p1) then
+		return Callback(p1, OfType.ofType, Callback1, p2)
+	else
+		Callback1(PathToArrayFunction(p2), p1, GraphQLError.new("Expected non-nullable type \"" .. InspectFunction(OfType) .. "\" not to be null."))
 	end
-	local _ = nil
-	local ok, status = pcall(p2.parseValue, p2, p1)
-	
-	if ok then
-		local var1 = status
-		
-		if var1 == nil then
-			p3(pathToArray(p4), p1, graphQLError.new(("Expected type \"%s\"."):format(p2.name)))
-		end
-		return var1
-	elseif instanceOfModule(status, graphQLError) then
-		p3(pathToArray(p4), p1, status)
-		
-		return
-	end
-	p3(pathToArray(p4), p1, graphQLError.new("Expected type \"" .. p7.name .. "\". " .. status.message, nil, nil, nil, nil, status))
 end
 
 return { coerceInputValue = coerceInputValue }

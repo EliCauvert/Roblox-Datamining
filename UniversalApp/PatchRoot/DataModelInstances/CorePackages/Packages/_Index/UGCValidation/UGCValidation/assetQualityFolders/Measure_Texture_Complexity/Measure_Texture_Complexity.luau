@@ -1,36 +1,35 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.FULL_BODY,
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.FULL_BODY,
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
-	fflag = require(parent.flags.getFFlagUGCValidateAQTextureQuality),
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref)
-		local measureTextureComplexity = p2.aqsSummaryData.Measure_Texture_Complexity
+	fflag = require(Parent.flags.getFFlagUGCValidateAQTextureQuality),
+	run = function(p1, p2) --[[ Line: 17 ]]
+		-- upvalues: ErrorSourceStringsModule (copy)
+		local MeasureTextureComplexity = p2.aqsSummaryData.Measure_Texture_Complexity
 		
-		if measureTextureComplexity == nil then
-			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Complexity" })
+		if MeasureTextureComplexity == nil then
+			p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Complexity" })
 			
 			return
 		end
-		for i, v in measureTextureComplexity do
-			if i ~= "measurement_score" then
-				if v ~= nil and v.score ~= nil then
-					if tonumber(v.score) ~= 100 then
-						p1:warn(errorSourceStringsModule.Keys.AQSWarn_TextureComplexity, { textureName = i })
-					end
+		for TextureName, value in MeasureTextureComplexity do
+			if TextureName ~= "measurement_score" then
+				if value == nil or value.score == nil then
+					p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Complexity" })
+					break
 				end
-				p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Texture_Complexity" })
-				
-				return
+				if tonumber(value.score) ~= 100 then
+					p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_TextureComplexity, { textureName = TextureName })
+				end
 			end
 		end
 	end

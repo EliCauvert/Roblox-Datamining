@@ -1,28 +1,28 @@
-﻿local actionModule = require(script.Parent.Action)
+﻿local ActionModule = require(script.Parent.Action)
 
-return function(p1)
-	-- upvalues: actionModule (ref)
-	local var1 = if type(p1) == "string" then p1 else p1.Name
+return function(p1) --[[ Line: 5 ]]
+	-- upvalues: ActionModule (copy)
+	local Name = if type(p1) == "string" then p1 else p1.Name
 	
 	return {
-		Succeeded = actionModule(var1 .. "_Succeeded", function(p2, p3, p4, p5, p6)
+		Succeeded = ActionModule(Name .. "_Succeeded", function(Ids, ResponseBody, NamedIds, p2, AdditionalData) --[[ Line: 14 ]]
 			return {
-				ids = p2,
-				responseBody = p3,
-				namedIds = p4,
-				postBody = if p5 then p5.postBody else nil,
-				queryArgs = p5 and p5.queryArgs,
-				additionalData = p6
+				ids = Ids,
+				responseBody = ResponseBody,
+				namedIds = NamedIds,
+				postBody = p2 and p2.postBody or nil,
+				queryArgs = p2 and p2.queryArgs,
+				additionalData = AdditionalData
 			}
 		end),
-		Failed = actionModule(var1 .. "_Failed", function(p2, p3, p4, p5, p6)
+		Failed = ActionModule(Name .. "_Failed", function(Ids, p2, NamedIds, p3, AdditionalData) --[[ Line: 24 ]]
 			return {
-				ids = p2,
-				error = p3,
-				namedIds = p4,
-				postBody = if p5 then p5.postBody else nil,
-				queryArgs = if p5 then p5.queryArgs else nil,
-				additionalData = p6
+				ids = Ids,
+				error = p2,
+				namedIds = NamedIds,
+				postBody = p3 and p3.postBody or nil,
+				queryArgs = p3 and p3.queryArgs or nil,
+				additionalData = AdditionalData
 			}
 		end)
 	}

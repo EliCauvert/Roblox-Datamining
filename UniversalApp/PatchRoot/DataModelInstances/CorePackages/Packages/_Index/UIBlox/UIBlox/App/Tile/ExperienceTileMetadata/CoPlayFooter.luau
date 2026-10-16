@@ -1,24 +1,24 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local UIBloxConfigModule = require(parent.UIBloxConfig)
-local cryoModule = require(parent_1.Cryo)
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local label = require(parent.Core.ImageSet.ImageSetComponent).Label
-local genericTextLabelModule = require(parent.Core.Text.GenericTextLabel.GenericTextLabel)
-local useStyleModule = require(parent.Core.Style.useStyle)
-local _ = require(parent.App.Style.StyleTypes)
-local _ = require(parent.App.Style.Fonts)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local t = {
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local UIBloxConfigModule = require(Parent.UIBloxConfig)
+local CryoModule = require(Parent1.Cryo)
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local Label = require(Parent.Core.ImageSet.ImageSetComponent).Label
+local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
+local UseStyleModule = require(Parent.Core.Style.useStyle)
+local _ = require(Parent.App.Style.StyleTypes)
+local _ = require(Parent.App.Style.Fonts)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local config = {
 	faceGroupCount = 3,
 	maxBadgeDisplayNumber = 99,
 	showEmphasisBorder = false,
 	size = UDim2.fromScale(1, 1),
 	styleProps = {}
 }
-local t_1 = {
+local config1 = {
 	containerGap = 6,
 	faceGroupGap = -9,
 	faceBorderWidth = 3,
@@ -32,15 +32,15 @@ local t_1 = {
 	badgeHeight = 24
 }
 
-local function _(p1)
-	return string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150", tostring(p1))
+local function _(p1): string --[[ Line: 140 | Named "getAvatarImage" ]]
+	return string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150", (tostring(p1)))
 end
 
-local function renderCornerStroke(p1)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.borderRadius) }),
-		Stroke = reactModule.createElement("UIStroke", {
+local function renderCornerStroke(p1) --[[ Line: 144 ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.borderRadius) }),
+		Stroke = ReactModule.createElement("UIStroke", {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 			Color = p1.borderColor.Color,
 			Transparency = p1.borderColor.Transparency,
@@ -49,234 +49,227 @@ local function renderCornerStroke(p1)
 	})
 end
 
-local function renderEmphasisBorder(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), renderCornerStroke (ref)
-	local theme = p3.Theme
-	local var1 = p1 - 1
-	local var2 = (1 - p1) / 2
+local function renderEmphasisBorder(BadgeBorderWidth: number, p1, p2, NewZIndex) --[[ Line: 158 ]]
+	-- upvalues: ReactModule (copy), renderCornerStroke (copy)
+	local XOffset1 = BadgeBorderWidth - 1
+	local XOffset = (1 - BadgeBorderWidth) / 2
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Position = UDim2.new(0, var2, 0, var2),
-		Size = UDim2.new(1, var1, 1, var1),
-		ZIndex = p4
+		Position = UDim2.new(0, XOffset, 0, XOffset),
+		Size = UDim2.new(1, XOffset1, 1, XOffset1),
+		ZIndex = NewZIndex
 	}, {
 		renderCornerStroke({
 			borderWidth = 1,
-			borderColor = theme.ContextualPrimaryDefault,
-			borderRadius = p2.badgeBorderRadius
+			borderColor = p2.Theme.ContextualPrimaryDefault,
+			borderRadius = p1.badgeBorderRadius
 		})
 	})
 end
 
-local function renderBadge(p1, p2, p3)
-	-- upvalues: reactModule (ref), renderCornerStroke (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), renderEmphasisBorder (ref)
-	local var1 = if p1.maxDisplayNumber < p1.usersCount then tostring(p1.maxDisplayNumber) .. "+" else tostring(p1.usersCount)
-	local theme = p3.Theme
-	local font = p3.Font
-	local badgeBackgroundColor = p2.badgeBackgroundColor or theme.BackgroundUIDefault
-	local badgeBorderWidth = p2.badgeBorderWidth
-	local badgeBorderColor = p2.badgeBorderColor or p3.Theme.BackgroundDefault
-	local badgeBorderRadius = p2.badgeBorderRadius
-	local badgeSpacingLeading = p2.badgeSpacingLeading
-	local badgeSpacingTrailing = p2.badgeSpacingTrailing
-	local badgeHeight = p2.badgeHeight
-	local badgeContentColor = p2.badgeContentColor or theme.TextMuted
+local function renderBadge(p1, p2, p3) --[[ Line: 181 ]]
+	-- upvalues: ReactModule (copy), renderCornerStroke (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), renderEmphasisBorder (copy)
+	local Theme = p3.Theme
+	local _Font = p3.Font
+	local BadgeBackgroundColor = p2.badgeBackgroundColor or Theme.BackgroundUIDefault
+	local BadgeBorderWidth = p2.badgeBorderWidth
+	local BadgeHeight = p2.badgeHeight
+	local BadgeContentColor = p2.badgeContentColor or Theme.TextMuted
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
 		ZIndex = p1.ZIndex,
-		Size = UDim2.fromOffset(0, badgeHeight),
-		BackgroundColor3 = badgeBackgroundColor.Color,
+		Size = UDim2.fromOffset(0, BadgeHeight),
+		BackgroundColor3 = BadgeBackgroundColor.Color,
 		AutomaticSize = Enum.AutomaticSize.X
 	}, {
-		BadgeContainer = reactModule.createElement("Frame", {
+		BadgeContainer = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			LayoutOrder = p1.layoutOrder,
 			ZIndex = p1.ZIndex,
-			Size = UDim2.fromOffset(0, badgeHeight),
-			BackgroundColor3 = badgeBackgroundColor.Color,
-			BackgroundTransparency = badgeBackgroundColor.Transparency,
+			Size = UDim2.fromOffset(0, BadgeHeight),
+			BackgroundColor3 = BadgeBackgroundColor.Color,
+			BackgroundTransparency = BadgeBackgroundColor.Transparency,
 			AutomaticSize = Enum.AutomaticSize.X
 		}, {
 			renderCornerStroke({
-				borderWidth = badgeBorderWidth,
-				borderColor = badgeBorderColor,
-				borderRadius = badgeBorderRadius
+				borderWidth = BadgeBorderWidth,
+				borderColor = p2.badgeBorderColor or p3.Theme.BackgroundDefault,
+				borderRadius = p2.badgeBorderRadius
 			}),
-			SizeConstraint = reactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(badgeHeight, 0) }),
-			Content = reactModule.createElement("TextLabel", {
+			SizeConstraint = ReactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(BadgeHeight, 0) }),
+			Content = ReactModule.createElement("TextLabel", {
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
-				Text = var1,
+				Text = if p1.maxDisplayNumber < p1.usersCount then tostring(p1.maxDisplayNumber) .. "+" else tostring(p1.usersCount),
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Font = if foundationFontFaceMigration then nil else font.CaptionHeader.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(font.CaptionHeader.Font) else nil,
-				TextSize = font.BaseSize * font.CaptionHeader.RelativeSize,
-				TextColor3 = badgeContentColor.Color,
-				TextTransparency = badgeContentColor.Transparency,
+				Font = if FoundationFontFaceMigration then nil else _Font.CaptionHeader.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font.CaptionHeader.Font) else nil,
+				TextSize = _Font.BaseSize * _Font.CaptionHeader.RelativeSize,
+				TextColor3 = BadgeContentColor.Color,
+				TextTransparency = BadgeContentColor.Transparency,
 				AutomaticSize = Enum.AutomaticSize.X,
 				ZIndex = p1.ZIndex + 1
 			}, {
-				Padding = reactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, badgeSpacingLeading),
-					PaddingRight = UDim.new(0, badgeSpacingTrailing)
+				Padding = ReactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, p2.badgeSpacingLeading),
+					PaddingRight = UDim.new(0, p2.badgeSpacingTrailing)
 				})
 			})
 		}),
-		emphasisBorder = if p1.showEmphasisBorder then renderEmphasisBorder(badgeBorderWidth, p2, p3, p1.ZIndex + 1) else nil
+		emphasisBorder = if p1.showEmphasisBorder then renderEmphasisBorder(BadgeBorderWidth, p2, p3, p1.ZIndex + 1) else nil
 	})
 end
 
-local function renderFaceImage(p1, p2, p3)
-	-- upvalues: reactModule (ref), label (ref), renderCornerStroke (ref), renderEmphasisBorder (ref)
-	local faceBackgroundColor = p2.faceBackgroundColor or p3.Theme.TextDefault
-	local faceBorderWidth = p2.faceBorderWidth
+local function renderFaceImage(p1, p2, p3) --[[ Line: 256 ]]
+	-- upvalues: ReactModule (copy), Label (copy), renderCornerStroke (copy), renderEmphasisBorder (copy)
+	local FaceBackgroundColor = p2.faceBackgroundColor or p3.Theme.TextDefault
+	local FaceBorderWidth = p2.faceBorderWidth
 	
-	return reactModule.createElement(label, {
+	return ReactModule.createElement(Label, {
 		BorderSizePixel = 0,
 		LayoutOrder = p1.layoutOrder,
 		ZIndex = p1.ZIndex,
 		Size = UDim2.fromOffset(p2.faceWidth, p2.faceHeight),
-		Image = string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150", tostring(p1.user)),
-		BackgroundColor3 = faceBackgroundColor.Color,
-		BackgroundTransparency = faceBackgroundColor.Transparency
+		Image = string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150", (tostring(p1.user))),
+		BackgroundColor3 = FaceBackgroundColor.Color,
+		BackgroundTransparency = FaceBackgroundColor.Transparency
 	}, {
 		renderCornerStroke({
-			borderWidth = faceBorderWidth,
+			borderWidth = FaceBorderWidth,
 			borderColor = p2.faceBorderColor or p3.Theme.BackgroundDefault,
 			borderRadius = p2.faceBorderRadius
 		}),
-		emphasisBorder = if p1.showEmphasisBorder then renderEmphasisBorder(faceBorderWidth, p2, p3, p1.ZIndex + 1) else nil
+		emphasisBorder = if p1.showEmphasisBorder then renderEmphasisBorder(FaceBorderWidth, p2, p3, p1.ZIndex + 1) else nil
 	})
 end
 
-local function renderFaces(p1, p2, p3, p4, p5, p6)
-	-- upvalues: reactModule (ref), renderBadge (ref), renderFaceImage (ref)
-	local users = p1.users
-	local faceGroupGap = p2.faceGroupGap
-	local badgeBorderWidth = p2.badgeBorderWidth
-	local faceBorderWidth = p2.faceBorderWidth
-	local maxValue = math.max(badgeBorderWidth, faceBorderWidth)
-	local t = {
-		ListLayout = reactModule.createElement("UIListLayout", {
+local function renderFaces(JoinResult, JoinResult1, p1, p2: number, p3, FaceGroupCount: number) --[[ Line: 283 ]]
+	-- upvalues: ReactModule (copy), renderBadge (copy), renderFaceImage (copy)
+	local Users = JoinResult.users
+	local BadgeBorderWidth: number = JoinResult1.badgeBorderWidth
+	local FaceBorderWidth: number = JoinResult1.faceBorderWidth
+	local Largest = math.max(BadgeBorderWidth, FaceBorderWidth)
+	local config = {
+		ListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, faceGroupGap)
+			Padding = UDim.new(0, JoinResult1.faceGroupGap)
 		}),
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, badgeBorderWidth),
-			PaddingTop = UDim.new(0, maxValue),
-			PaddingRight = UDim.new(0, faceBorderWidth),
-			PaddingBottom = UDim.new(0, maxValue)
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingLeft = UDim.new(0, BadgeBorderWidth),
+			PaddingTop = UDim.new(0, Largest),
+			PaddingRight = UDim.new(0, FaceBorderWidth),
+			PaddingBottom = UDim.new(0, Largest)
 		}),
-		Badge = if p5 then renderBadge({
+		Badge = if p3 then renderBadge({
 			layoutOrder = 0,
-			usersCount = #users,
-			ZIndex = p4 + 1,
-			maxDisplayNumber = p1.maxBadgeDisplayNumber,
-			showEmphasisBorder = p1.showEmphasisBorder
-		}, p2, p3) else nil
+			usersCount = #Users,
+			ZIndex = p2 + 1,
+			maxDisplayNumber = JoinResult.maxBadgeDisplayNumber,
+			showEmphasisBorder = JoinResult.showEmphasisBorder
+		}, JoinResult1, p1) else nil
 	}
 	
-	for i = 1, math.min(p6, #users) do
-		t["Face_" .. i] = renderFaceImage({
-			user = users[i],
+	for i = 1, math.min(FaceGroupCount, #Users) do
+		config["Face_" .. i] = renderFaceImage({
+			user = Users[i],
 			layoutOrder = i,
-			ZIndex = p4 - i,
-			showEmphasisBorder = p1.showEmphasisBorder
-		}, p2, p3)
+			ZIndex = p2 - i,
+			showEmphasisBorder = JoinResult.showEmphasisBorder
+		}, JoinResult1, p1)
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.XY
-	}, t)
+	}, config)
 end
 
-return function(p7)
-	-- upvalues: cryoModule (ref), t (ref), UIBloxConfigModule (ref), useStyleModule (ref), reactModule (ref), t_1 (ref), renderFaces (ref), genericTextLabelModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p7)
+return function(p4) --[[ Line: 337 | Named "CoPlayFooter" ]]
+	-- upvalues: CryoModule (copy), config (copy), UIBloxConfigModule (copy), UseStyleModule (copy), ReactModule (copy), config1 (copy), renderFaces (copy), GenericTextLabelModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p4)
 	
-	if not UIBloxConfigModule.fixCoplayFooterConditionalHooks and (not var1.users or #var1.users == 0) then
+	if not UIBloxConfigModule.fixCoplayFooterConditionalHooks and (not JoinResult.users or #JoinResult.users == 0) then
 		return nil
 	end
-	local var2 = useStyleModule()
-	local var3, var4 = reactModule.useBinding(Vector2.new(0, 0))
-	local var5 = cryoModule.Dictionary.join(t_1, var1.styleProps)
-	local var6 = nil
+	local UseStyleModuleResult = UseStyleModule()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	local JoinResult1 = CryoModule.Dictionary.join(config1, JoinResult.styleProps)
+	local UseResult = nil
 	
 	if UIBloxConfigModule.fixCoplayFooterConditionalHooks then
-		var6 = reactModule.useCallback(function(p8)
-			-- upvalues: var4 (ref)
-			var4(p8.AbsoluteSize)
-		end, { var4 })
+		UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 351 ]]
+			-- upvalues: UseBindingResult2 (copy)
+			UseBindingResult2(Frame.AbsoluteSize)
+		end, { UseBindingResult2 })
 		
-		if not var1.users or #var1.users == 0 then
+		if not JoinResult.users or #JoinResult.users == 0 then
 			return nil
 		end
 	end
-	local containerGap = var5.containerGap
-	local labelContentColor = var5.labelContentColor or var2.Theme.TextMuted
-	local faceGroupCount = var1.faceGroupCount
-	local var7 = faceGroupCount + 1 < #var1.users
+	local ContainerGap = JoinResult1.containerGap
+	local LabelContentColor = JoinResult1.labelContentColor or UseStyleModuleResult.Theme.TextMuted
+	local FaceGroupCount = JoinResult.faceGroupCount
+	local IsFaceGroupCountBelow = #JoinResult.users > FaceGroupCount + 1
 	
-	if not var7 then
-		faceGroupCount += 1
+	if not IsFaceGroupCountBelow then
+		FaceGroupCount += 1
 	end
-	local var8 = faceGroupCount + 1
+	local NewFaceGroupCount = FaceGroupCount + 1
 	
 	if not UIBloxConfigModule.fixCoplayFooterConditionalHooks then
-		var6 = reactModule.useCallback(function(p8)
-			-- upvalues: var4 (ref)
-			var4(p8.AbsoluteSize)
-		end, { var4 })
+		UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 372 ]]
+			-- upvalues: UseBindingResult2 (copy)
+			UseBindingResult2(Frame.AbsoluteSize)
+		end, { UseBindingResult2 })
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = var1.size,
-		Position = var1.position,
-		AnchorPoint = var1.anchorPoint,
-		LayoutOrder = var1.layoutOrder
+		Size = JoinResult.size,
+		Position = JoinResult.position,
+		AnchorPoint = JoinResult.anchorPoint,
+		LayoutOrder = JoinResult.layoutOrder
 	}, {
-		ListLayout = reactModule.createElement("UIListLayout", {
+		ListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, containerGap)
+			Padding = UDim.new(0, ContainerGap)
 		}),
-		FacesFrame = reactModule.createElement("Frame", {
+		FacesFrame = ReactModule.createElement("Frame", {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			[reactModule.Change.AbsoluteSize] = var6
+			[ReactModule.Change.AbsoluteSize] = UseResult
 		}, {
-			Faces = renderFaces(var1, var5, var2, var8, var7, faceGroupCount)
+			Faces = renderFaces(JoinResult, JoinResult1, UseStyleModuleResult, NewFaceGroupCount, IsFaceGroupCountBelow, FaceGroupCount)
 		}),
-		LabelFrame = if var1.labelText then reactModule.createElement("Frame", {
+		LabelFrame = if JoinResult.labelText then ReactModule.createElement("Frame", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = var3:map(function(p8)
-				-- upvalues: containerGap (ref)
-				return UDim2.new(1, (-p8.X) - containerGap, 1, 0)
+			Size = UseBindingResult:map(function(p5): UDim2 --[[ Line: 402 ]]
+				-- upvalues: ContainerGap (copy)
+				return UDim2.new(1, -p5.X - ContainerGap, 1, 0)
 			end)
 		}, {
-			Label = reactModule.createElement(genericTextLabelModule, {
+			Label = ReactModule.createElement(GenericTextLabelModule, {
 				TextWrapped = false,
 				Size = UDim2.fromScale(1, 1),
-				Text = var1.labelText,
+				Text = JoinResult.labelText,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				TextTruncate = Enum.TextTruncate.AtEnd,
-				fontStyle = var5.fontStyle or var2.Font.CaptionBody,
-				colorStyle = labelContentColor
+				fontStyle = JoinResult1.fontStyle or UseStyleModuleResult.Font.CaptionBody,
+				colorStyle = LabelContentColor
 			})
 		}) else nil
 	})

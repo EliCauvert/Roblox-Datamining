@@ -1,190 +1,160 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local icon = require(parent.BuilderIcons).Icon
-local calendarModule = require(script.Parent.Calendar.Calendar)
-local dateTimeParsingUtilitiesModule = require(script.Parent.Utilities.DateTimeParsingUtilities)
-local dateTimePickerBetaModule = require(script.Parent.DateTimePickerBeta)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local Icon = require(Parent.BuilderIcons).Icon
+local CalendarModule = require(script.Parent.Calendar.Calendar)
+local DateTimeParsingUtilitiesModule = require(script.Parent.Utilities.DateTimeParsingUtilities)
+local DateTimePickerBetaModule = require(script.Parent.DateTimePickerBeta)
 local _ = require(script.Parent.DateTimePickerProps)
-local dateTimeUtilitiesModule = require(script.Parent.DateTimeUtilities)
-local buttonModule = require(foundation.Components.Button)
-local buttonVariantModule = require(foundation.Enums.ButtonVariant)
-local dateTimePickerVariantModule = require(foundation.Enums.DateTimePickerVariant)
-local flagsModule = require(foundation.Utility.Flags)
-local guiService = require(foundation.Utility.Wrappers.Services).GuiService
-local inputSizeModule = require(foundation.Enums.InputSize)
-local popoverModule = require(foundation.Components.Popover)
-local popoverSideModule = require(foundation.Enums.PopoverSide)
-local textInputModule = require(foundation.Components.TextInput)
-local translatorModule = require(foundation.Utility.Localization.Translator)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+local DateTimeUtilitiesModule = require(script.Parent.DateTimeUtilities)
+local ButtonModule = require(Foundation.Components.Button)
+local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
+local DateTimePickerVariantModule = require(Foundation.Enums.DateTimePickerVariant)
+local FlagsModule = require(Foundation.Utility.Flags)
+local GuiService = require(Foundation.Utility.Wrappers.Services).GuiService
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local PopoverModule = require(Foundation.Components.Popover)
+local PopoverSideModule = require(Foundation.Enums.PopoverSide)
+local TextInputModule = require(Foundation.Components.TextInput)
+local TranslatorModule = require(Foundation.Utility.Localization.Translator)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	testId = "--foundation-date-time-picker",
-	variant = dateTimePickerVariantModule.Single
+	variant = DateTimePickerVariantModule.Single
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: flagsModule (ref), reactModule (ref), dateTimePickerBetaModule (ref), withDefaultsModule (ref), t (ref), useTokensModule (ref), dateTimePickerVariantModule (ref), dateTimeUtilitiesModule (ref), guiService (ref), dateTimeParsingUtilitiesModule (ref), popoverModule (ref), textInputModule (ref), withCommonPropsModule (ref), icon (ref), translatorModule (ref), inputSizeModule (ref), popoverSideModule (ref), viewModule (ref), calendarModule (ref), buttonModule (ref), buttonVariantModule (ref)
-	if flagsModule.FoundationDateTimePickerBetaUpdate then
-		return reactModule.createElement(dateTimePickerBetaModule, p1)
-	end
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		local defaultDates = var1.defaultDates
-		
-		return if defaultDates then if typeof(defaultDates) == "table" then defaultDates else { defaultDates } else nil
-	end, { var1.defaultDates })
-	local var7, var8 = reactModule.useState(if var6 then if var1.variant == dateTimePickerVariantModule.Dual then `{dateTimeUtilitiesModule.formatLocalTime(var6[1])} - {if var6[2] then dateTimeUtilitiesModule.formatLocalTime(var6[2]) else ""}` else dateTimeUtilitiesModule.formatLocalTime(var6[1], var1.variant == dateTimePickerVariantModule.SingleWithTime) else "")
-	local var9, var10 = reactModule.useState(var6)
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		var4(false)
-	end, {})
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		var4(true)
-	end, {})
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: guiService (copy), var12 (ref)
-		if guiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
-			var12()
-		end
-	end, { var12, guiService.ViewportDisplaySize })
-	local var14 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref), var1 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), dateTimeParsingUtilitiesModule (copy)
-		var8(p2)
-		
-		if p2:match("^%s*$") then return end
-		if var1.variant == dateTimePickerVariantModule.Dual then
-			local var15 = p2:split("-")
-			var1.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(var15[1]), dateTimeUtilitiesModule.getDateTimeFromText(var15[2]))
+return ReactModule.memo(function(p1) --[[ Line: 37 | Named "DateTimePicker" ]]
+	-- upvalues: FlagsModule (copy), ReactModule (copy), DateTimePickerBetaModule (copy), WithDefaultsModule (copy), config (copy), UseTokensModule (copy), DateTimePickerVariantModule (copy), DateTimeUtilitiesModule (copy), GuiService (copy), DateTimeParsingUtilitiesModule (copy), PopoverModule (copy), TextInputModule (copy), WithCommonPropsModule (copy), Icon (copy), TranslatorModule (copy), InputSizeModule (copy), PopoverSideModule (copy), ViewModule (copy), CalendarModule (copy), ButtonModule (copy), ButtonVariantModule (copy)
+	if FlagsModule.FoundationDateTimePickerBetaUpdate then
+		return ReactModule.createElement(DateTimePickerBetaModule, p1)
+	else
+		local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+		local UseTokensModuleResult = UseTokensModule()
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+		local UseRefResult = ReactModule.useRef(nil)
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 48 ]]
+			-- upvalues: WithDefaultsModuleResult (copy)
+			local DefaultDates = WithDefaultsModuleResult.defaultDates
 			
-			return
-		end
-		var1.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(dateTimeParsingUtilitiesModule.trimInputText(p2)))
-	end, { var1.onChanged, var1.variant })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), var9 (ref), var8 (ref), var11 (ref)
-		if var1.variant == dateTimePickerVariantModule.Dual then
-			var8(dateTimeUtilitiesModule.formatLocalTime(var9[1]) .. " - " .. (if var9[2] then dateTimeUtilitiesModule.formatLocalTime(var9[2]) else ""))
-		else
-			var8(dateTimeUtilitiesModule.formatLocalTime(var9[1], var1.variant == dateTimePickerVariantModule.SingleWithTime))
-		end
-		var11()
-	end, { var9, var11, var1.variant })
-	
-	local _ = function()
-		-- upvalues: var9 (ref), var1 (ref), dateTimePickerVariantModule (copy)
-		return if var9 then if var1.variant == dateTimePickerVariantModule.Single or var1.variant == dateTimePickerVariantModule.SingleWithTime then var9[1] == nil else var1.variant == dateTimePickerVariantModule.Dual and (if var9[1] ~= nil then if var9[2] ~= nil then var9[2].UnixTimestamp < var9[1].UnixTimestamp else true else true) else false
-	end
-	
-	local createElement = reactModule.createElement
-	local root = popoverModule.Root
-	local t_1 = { isOpen = var3, testId = var1.testId }
-	local t_2 = {
-		DateInput = reactModule.createElement(textInputModule, withCommonPropsModule(var1, {
-			key = "date-input",
-			hasError = var1.hasError,
-			hint = var1.hint,
-			iconTrailing = { name = icon.Calendar, onActivated = var12 },
-			isDisabled = var1.isDisabled,
-			isRequired = var1.isRequired,
-			label = var1.label,
-			onChanged = var14,
-			onFocusGained = var13,
-			placeholder = translatorModule:FormatByKey("CommonUI.Controls.Label.SelectDate"),
-			ref = var5,
-			selectableDateRange = var1.selectableDateRange,
-			size = inputSizeModule.Medium,
-			text = var7,
-			testId = `{var1.testId}--text-input`,
-			width = var1.width
-		})),
-		Anchor = reactModule.createElement(popoverModule.Anchor, { anchorRef = var5 })
-	}
-	local createElement_1 = reactModule.createElement
-	local content = popoverModule.Content
-	local t_3 = {
-		hasArrow = false,
-		onPressedOutside = var11,
-		side = {
-			position = popoverSideModule.Bottom,
-			offset = var2.Stroke.Standard + var2.Padding.Small
-		},
-		selection = var1.selection,
-		selectionGroup = var1.selectionGroup
-	}
-	local var16 = var3
-	
-	if var16 then
-		local var17
-		var16 = reactModule.createElement
-		local var18 = viewModule
-		local t_4 = {
-			tag = "col auto-xy padding-large stroke-default radius-medium"
-		}
-		local t_5 = {
-			Calendar = reactModule.createElement(calendarModule, {
-				LayoutOrder = 1,
-				testId = "--foundation-calendar",
-				defaultDates = var9,
-				onSelectedDateChanged = var10,
-				selectableDateRange = var1.selectableDateRange,
-				showStartDateTimeCalendarInput = var1.variant ~= dateTimePickerVariantModule.SingleWithTime,
-				showEndDateTimeCalendarInput = var1.variant == dateTimePickerVariantModule.Dual,
-				showTimeDropdown = var1.variant == dateTimePickerVariantModule.SingleWithTime
-			})
-		}
-		local createElement_2 = reactModule.createElement
-		local var19 = viewModule
-		local t_6 = {
-			LayoutOrder = 2,
-			tag = "row flex-fill gap-small size-full-0 auto-y padding-top-large"
-		}
-		local t_7 = {}
-		local createElement_3 = reactModule.createElement
-		local t_8 = {}
-		
-		if not var9 then
-			var17 = false
-		elseif var1.variant == dateTimePickerVariantModule.Single or var1.variant == dateTimePickerVariantModule.SingleWithTime then
-			local _ = var9[1] == nil
-		elseif var1.variant == dateTimePickerVariantModule.Dual then
-			var17 = true
-			
-			if var9[1] ~= nil then
-				var17 = true
-				
-				if var9[2] ~= nil then
-					local _ = var9[2].UnixTimestamp < var9[1].UnixTimestamp
-				end
+			return if DefaultDates then if typeof(DefaultDates) == "table" then DefaultDates else { DefaultDates } else nil
+		end, { WithDefaultsModuleResult.defaultDates })
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(if UseMemoResult then if WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Dual then `{DateTimeUtilitiesModule.formatLocalTime(UseMemoResult[1])} - {if UseMemoResult[2] then DateTimeUtilitiesModule.formatLocalTime(UseMemoResult[2]) else ""}` else DateTimeUtilitiesModule.formatLocalTime(UseMemoResult[1], WithDefaultsModuleResult.variant == DateTimePickerVariantModule.SingleWithTime) else "")
+		local UseStateResult3, UseStateResult2_2 = ReactModule.useState(UseMemoResult)
+		local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
+		end, {})
+		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 81 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(true)
+		end, {})
+		local UseResult2 = ReactModule.useCallback(function() --[[ Line: 114 ]]
+			-- upvalues: WithDefaultsModuleResult (copy), DateTimePickerVariantModule (upval), DateTimeUtilitiesModule (upval), UseStateResult3 (copy), UseStateResult2_1 (copy), UseResult (copy)
+			if WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Dual then
+				UseStateResult2_1(DateTimeUtilitiesModule.formatLocalTime(UseStateResult3[1]) .. " - " .. (if UseStateResult3[2] then DateTimeUtilitiesModule.formatLocalTime(UseStateResult3[2]) else ""))
+			else
+				UseStateResult2_1(DateTimeUtilitiesModule.formatLocalTime(UseStateResult3[1], WithDefaultsModuleResult.variant == DateTimePickerVariantModule.SingleWithTime))
 			end
-		else
-			var17 = false
-		end
-		t_8.isDisabled = var17
-		t_8.onActivated = var15
-		t_8.text = translatorModule:FormatByKey("CommonUI.Controls.Action.Apply")
-		t_8.variant = buttonVariantModule.Emphasis
-		t_8.testId = `{var1.testId}--apply-button`
-		t_7.ApplyButton = createElement_3(buttonModule, t_8)
-		t_7.CancelButton = reactModule.createElement(buttonModule, {
-			onActivated = var11,
-			text = translatorModule:FormatByKey("CommonUI.Controls.Action.Cancel"),
-			variant = buttonVariantModule.Standard,
-			testId = `{var1.testId}--cancel-button`
+			UseResult()
+		end, {
+			UseStateResult3,
+			UseResult,
+			WithDefaultsModuleResult.variant
 		})
-		t_5.BottomBar = createElement_2(var19, t_6, t_7)
-		var16 = var16(var18, t_4, t_5)
+		
+		local function _(): boolean --[[ Line: 139 ]]
+			-- upvalues: UseStateResult3 (copy), WithDefaultsModuleResult (copy), DateTimePickerVariantModule (upval)
+			return if UseStateResult3 then if WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Single or WithDefaultsModuleResult.variant == DateTimePickerVariantModule.SingleWithTime then UseStateResult3[1] == nil else WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Dual and (UseStateResult3[1] == nil or (UseStateResult3[2] == nil or UseStateResult3[2].UnixTimestamp < UseStateResult3[1].UnixTimestamp)) else false
+		end
+		
+		return ReactModule.createElement(PopoverModule.Root, {
+			isOpen = UseStateResult,
+			testId = WithDefaultsModuleResult.testId
+		}, {
+			DateInput = ReactModule.createElement(TextInputModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+				key = "date-input",
+				hasError = WithDefaultsModuleResult.hasError,
+				hint = WithDefaultsModuleResult.hint,
+				iconTrailing = { name = Icon.Calendar, onActivated = UseResult1 },
+				isDisabled = WithDefaultsModuleResult.isDisabled,
+				isRequired = WithDefaultsModuleResult.isRequired,
+				label = WithDefaultsModuleResult.label,
+				onChanged = ReactModule.useCallback(function(Text: string) --[[ Line: 92 ]]
+					-- upvalues: UseStateResult2_1 (copy), WithDefaultsModuleResult (copy), DateTimePickerVariantModule (upval), DateTimeUtilitiesModule (upval), DateTimeParsingUtilitiesModule (upval)
+					UseStateResult2_1(Text)
+					
+					if Text:match("^%s*$") then return end
+					if WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Dual then
+						local v1 = Text:split("-")
+						WithDefaultsModuleResult.onChanged(DateTimeUtilitiesModule.getDateTimeFromText(v1[1]), (DateTimeUtilitiesModule.getDateTimeFromText(v1[2])))
+						
+						return
+					else
+						WithDefaultsModuleResult.onChanged((DateTimeUtilitiesModule.getDateTimeFromText(DateTimeParsingUtilitiesModule.trimInputText(Text))))
+					end
+				end, {
+					WithDefaultsModuleResult.onChanged,
+					WithDefaultsModuleResult.variant
+				}),
+				onFocusGained = ReactModule.useCallback(function() --[[ Line: 85 ]]
+					-- upvalues: GuiService (upval), UseResult1 (copy)
+					if GuiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
+						UseResult1()
+					end
+				end, { UseResult1, GuiService.ViewportDisplaySize }),
+				placeholder = TranslatorModule:FormatByKey("CommonUI.Controls.Label.SelectDate"),
+				ref = UseRefResult,
+				selectableDateRange = WithDefaultsModuleResult.selectableDateRange,
+				size = InputSizeModule.Medium,
+				text = UseStateResult1,
+				testId = `{WithDefaultsModuleResult.testId}--text-input`,
+				width = WithDefaultsModuleResult.width
+			})),
+			Anchor = ReactModule.createElement(PopoverModule.Anchor, { anchorRef = UseRefResult }),
+			Calendar = ReactModule.createElement(PopoverModule.Content, {
+				hasArrow = false,
+				onPressedOutside = UseResult,
+				side = {
+					position = PopoverSideModule.Bottom,
+					offset = UseTokensModuleResult.Stroke.Standard + UseTokensModuleResult.Padding.Small
+				},
+				selection = WithDefaultsModuleResult.selection,
+				selectionGroup = WithDefaultsModuleResult.selectionGroup
+			}, UseStateResult and ReactModule.createElement(ViewModule, {
+				tag = "col auto-xy padding-large stroke-default radius-medium"
+			}, {
+				Calendar = ReactModule.createElement(CalendarModule, {
+					LayoutOrder = 1,
+					testId = "--foundation-calendar",
+					defaultDates = UseStateResult3,
+					onSelectedDateChanged = UseStateResult2_2,
+					selectableDateRange = WithDefaultsModuleResult.selectableDateRange,
+					showStartDateTimeCalendarInput = WithDefaultsModuleResult.variant ~= DateTimePickerVariantModule.SingleWithTime,
+					showEndDateTimeCalendarInput = WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Dual,
+					showTimeDropdown = WithDefaultsModuleResult.variant == DateTimePickerVariantModule.SingleWithTime
+				}),
+				BottomBar = ReactModule.createElement(ViewModule, {
+					LayoutOrder = 2,
+					tag = "row flex-fill gap-small size-full-0 auto-y padding-top-large"
+				}, {
+					ApplyButton = ReactModule.createElement(ButtonModule, {
+						isDisabled = if UseStateResult3 then if WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Single or WithDefaultsModuleResult.variant == DateTimePickerVariantModule.SingleWithTime then UseStateResult3[1] == nil else WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Dual and (UseStateResult3[1] == nil or (UseStateResult3[2] == nil or UseStateResult3[2].UnixTimestamp < UseStateResult3[1].UnixTimestamp)) else false,
+						onActivated = UseResult2,
+						text = TranslatorModule:FormatByKey("CommonUI.Controls.Action.Apply"),
+						variant = ButtonVariantModule.Emphasis,
+						testId = `{WithDefaultsModuleResult.testId}--apply-button`
+					}),
+					CancelButton = ReactModule.createElement(ButtonModule, {
+						onActivated = UseResult,
+						text = TranslatorModule:FormatByKey("CommonUI.Controls.Action.Cancel"),
+						variant = ButtonVariantModule.Standard,
+						testId = `{WithDefaultsModuleResult.testId}--cancel-button`
+					})
+				})
+			}))
+		})
 	end
-	t_2.Calendar = createElement_1(content, t_3, var16)
-	
-	return createElement(root, t_1, t_2)
 end)

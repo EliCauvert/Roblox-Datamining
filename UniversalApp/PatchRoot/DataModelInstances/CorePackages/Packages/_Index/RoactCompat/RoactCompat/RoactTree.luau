@@ -1,74 +1,77 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local inspect = require(parent.LuauPolyfill).util.inspect
-local reactRobloxModule = require(parent.ReactRoblox)
-local warnOnceModule = require(script.Parent.warnOnce)
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local InspectFunction = require(Parent.LuauPolyfill).util.inspect
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local WarnOnceModule = require(script.Parent.warnOnce)
 
 return {
-	mount = function(p1, p2, p3)
-		-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), inspect (ref), reactRobloxModule (ref)
-		if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
-			warnOnceModule("mount", "Please use the createRoot API in ReactRoblox")
+	mount = function(p1, Folder: Folder, Key: string) --[[ Line: 31 ]]
+		-- upvalues: ReactGlobalsModule (copy), WarnOnceModule (copy), InspectFunction (copy), ReactRobloxModule (copy)
+		if ReactGlobalsModule.__DEV__ and ReactGlobalsModule.__COMPAT_WARNINGS__ then
+			WarnOnceModule("mount", "Please use the createRoot API in ReactRoblox")
 		end
-		if p2 ~= nil and typeof(p2) ~= "Instance" then
-			error(string.format("Cannot mount element (`%s`) into a parent that is not a Roblox Instance (got type `%s`) \n%s", if p1 then tostring(p1.type) else "<unknown>", typeof(p2), (function()
-				-- upvalues: p2 (write), inspect (copy)
-				return if p2 == nil then "" else inspect(p2)
+		if Folder ~= nil and typeof(Folder) ~= "Instance" then
+			error(string.format("Cannot mount element (`%s`) into a parent that is not a Roblox Instance (got type `%s`) \n%s", if p1 then tostring(p1.type) else "<unknown>", typeof(Folder), (function() --[[ Line: 47 ]]
+				-- upvalues: Folder (ref), InspectFunction (upval)
+				return if Folder == nil then "" else InspectFunction(Folder)
 			end)()))
 		end
-		local var1 = if _G.__ROACT_17_COMPAT_LEGACY_ROOT__ then reactRobloxModule.createLegacyRoot(Instance.new("Folder")) else reactRobloxModule.createRoot(Instance.new("Folder"))
+		local LegacyRoot = nil
+		LegacyRoot = if _G.__ROACT_17_COMPAT_LEGACY_ROOT__ then ReactRobloxModule.createLegacyRoot(Instance.new("Folder")) else ReactRobloxModule.createRoot(Instance.new("Folder"))
 		
-		if p2 == nil then
-			local target = Instance.new("Folder")
-			target.Name = "Target"
-			p2 = target
+		if Folder == nil then
+			local Target = Instance.new("Folder")
+			Target.Name = "Target"
+			Folder = Target
 		end
-		if p3 == nil then
-			p3 = if _G.__ROACT_17_COMPAT_LEGACY_ROOT__ then "ReactLegacyRoot" else "ReactRoot"
+		if Key == nil then
+			Key = if _G.__ROACT_17_COMPAT_LEGACY_ROOT__ then "ReactLegacyRoot" else "ReactRoot"
 		end
-		if reactGlobalsModule.__ROACT_17_INLINE_ACT__ then
-			reactRobloxModule.act(function()
-				-- upvalues: var1 (write), reactRobloxModule (copy), p3 (write), p1 (ref), p2 (write)
-				var1:render(reactRobloxModule.createPortal({ [p3] = p1 }, p2))
+		if ReactGlobalsModule.__ROACT_17_INLINE_ACT__ then
+			ReactRobloxModule.act(function() --[[ Line: 82 ]]
+				-- upvalues: LegacyRoot (ref), ReactRobloxModule (upval), Key (ref), p1 (copy), Folder (ref)
+				LegacyRoot:render(ReactRobloxModule.createPortal({ [Key] = p1 }, Folder))
 			end)
 		else
-			var1:render(reactRobloxModule.createPortal({ [p3] = p1 }, p2))
+			LegacyRoot:render(ReactRobloxModule.createPortal({ [Key] = p1 }, Folder))
 		end
-		return { root = var1, parent = p2, key = p3 }
+		return { root = LegacyRoot, parent = Folder, key = Key }
 	end,
-	update = function(p1, p2)
-		-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), reactRobloxModule (ref)
-		if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
-			warnOnceModule("update", "Please use the createRoot API in ReactRoblox")
+	update = function(p1, p2) --[[ Line: 98 ]]
+		-- upvalues: ReactGlobalsModule (copy), WarnOnceModule (copy), ReactRobloxModule (copy)
+		if ReactGlobalsModule.__DEV__ and ReactGlobalsModule.__COMPAT_WARNINGS__ then
+			WarnOnceModule("update", "Please use the createRoot API in ReactRoblox")
 		end
-		local key = p1.key
-		local parent = p1.parent
+		local Key = p1.key
+		local Parent = p1.parent
 		
-		if reactGlobalsModule.__ROACT_17_INLINE_ACT__ then
-			reactRobloxModule.act(function()
-				-- upvalues: p1 (ref), reactRobloxModule (copy), key (ref), p2 (ref), parent (ref)
-				p1.root:render(reactRobloxModule.createPortal({ [key] = p2 }, parent))
+		if ReactGlobalsModule.__ROACT_17_INLINE_ACT__ then
+			ReactRobloxModule.act(function() --[[ Line: 108 ]]
+				-- upvalues: p1 (copy), ReactRobloxModule (upval), Key (copy), p2 (copy), Parent (copy)
+				p1.root:render(ReactRobloxModule.createPortal({ [Key] = p2 }, Parent))
 			end)
 			
 			return p1
+		else
+			p1.root:render(ReactRobloxModule.createPortal({ [Key] = p2 }, Parent))
+			
+			return p1
 		end
-		p1.root:render(reactRobloxModule.createPortal({ [key] = p2 }, parent))
-		
-		return p1
 	end,
-	unmount = function(p1)
-		-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), reactRobloxModule (ref)
-		if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
-			warnOnceModule("unmount", "Please use the createRoot API in ReactRoblox")
+	unmount = function(p1) --[[ Line: 122 ]]
+		-- upvalues: ReactGlobalsModule (copy), WarnOnceModule (copy), ReactRobloxModule (copy)
+		if ReactGlobalsModule.__DEV__ and ReactGlobalsModule.__COMPAT_WARNINGS__ then
+			WarnOnceModule("unmount", "Please use the createRoot API in ReactRoblox")
 		end
-		if reactGlobalsModule.__ROACT_17_INLINE_ACT__ then
-			reactRobloxModule.act(function()
-				-- upvalues: p1 (ref)
+		if ReactGlobalsModule.__ROACT_17_INLINE_ACT__ then
+			ReactRobloxModule.act(function() --[[ Line: 130 ]]
+				-- upvalues: p1 (copy)
 				p1.root:unmount()
 			end)
 			
 			return
+		else
+			p1.root:unmount()
 		end
-		p1.root:unmount()
 	end
 }

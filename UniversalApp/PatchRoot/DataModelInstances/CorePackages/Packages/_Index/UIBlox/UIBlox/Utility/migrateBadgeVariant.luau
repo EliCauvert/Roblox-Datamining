@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent
-local foundationModule = require(parent.Parent.Foundation)
-local flags = foundationModule.Utility.Flags
-local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
-local badgeVariantModule = require(parent.App.Indicator.Enum.BadgeVariant)
+﻿local Parent = script.Parent.Parent
+local FoundationModule = require(Parent.Parent.Foundation)
+local Flags = FoundationModule.Utility.Flags
+local StatusIndicatorVariant = FoundationModule.Enums.StatusIndicatorVariant
+local BadgeVariantModule = require(Parent.App.Indicator.Enum.BadgeVariant)
 
-return function(p1)
-	-- upvalues: flags (ref), badgeVariantModule (ref), statusIndicatorVariant (ref)
-	return if flags.FoundationStatusIndicatorVariantExperiment then if p1 == badgeVariantModule.Alert then statusIndicatorVariant.Alert else statusIndicatorVariant.Contrast_Experiment else statusIndicatorVariant.Emphasis
+return function(Alert) --[[ Line: 9 | Named "migrateBadgeVariantToStatusIndicatorVariant" ]]
+	-- upvalues: Flags (copy), BadgeVariantModule (copy), StatusIndicatorVariant (copy)
+	return if Flags.FoundationStatusIndicatorVariantExperiment then if Alert == BadgeVariantModule.Alert then StatusIndicatorVariant.Alert else StatusIndicatorVariant.Contrast_Experiment else StatusIndicatorVariant.Emphasis
 end

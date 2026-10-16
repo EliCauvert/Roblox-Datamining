@@ -1,26 +1,24 @@
-﻿local equalObjectsModule = require(script.Parent.Parent.equalObjects)
+﻿local EqualObjectsModule = require(script.Parent.Parent.equalObjects)
 
-return function(...)
-	-- upvalues: equalObjectsModule (ref)
-	if equalObjectsModule(...) then
+return function(...): boolean --[[ Line: 4 | Named "equals" ]]
+	-- upvalues: EqualObjectsModule (copy)
+	if EqualObjectsModule(...) then
 		return true
 	end
-	local var1 = select("#", ...)
+	local Selected = select("#", ...)
 	
-	for i_2 = 1, var1 do
-		local var2 = select(i_2, ...)
+	for i = 1, Selected do
+		local Selected1 = select(i, ...)
 		
-		for i_1 = 1, var1 do
-			if i_1 == i_2 then
-				continue
-			end
-			local var3 = select(i_1, ...)
-			
-			for i = 1, #var2 do
-				if var2[i] == var3[i] then
-					continue
+		for i1 = 1, Selected do
+			if i1 ~= i then
+				local Selected2 = select(i1, ...)
+				
+				for i2 = 1, #Selected1 do
+					if Selected1[i2] ~= Selected2[i2] then
+						return false
+					end
 				end
-				return false
 			end
 		end
 	end

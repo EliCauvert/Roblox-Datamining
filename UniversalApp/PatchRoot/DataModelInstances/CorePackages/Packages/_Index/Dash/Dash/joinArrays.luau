@@ -1,11 +1,11 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(...)
+return function(...) --[[ Line: 10 | Named "joinArrays" ]]
 	local t = {}
 	
-	for i, v in { ... } do
-		if v then
-			table.move(v, 1, #v, #t + 1, t)
+	for _, value in { ... } do
+		if value then
+			table.move(value, 1, #value, #t + 1, t)
 		end
 	end
 	return t

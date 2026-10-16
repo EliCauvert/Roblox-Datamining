@@ -1,1 +1,1 @@
-﻿return require(script.Toast)
+﻿return (require(script.Toast))

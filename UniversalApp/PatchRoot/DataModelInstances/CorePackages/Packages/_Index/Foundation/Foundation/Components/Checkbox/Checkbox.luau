@@ -1,58 +1,58 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local constantsModule = require(foundation.Constants)
-local components = foundation.Components
-local internalInputModule = require(components.InternalInput)
-local textModule = require(components.Text)
-local _ = require(components.Types)
-local useUncontrolledStateModule = require(components.InternalInput.useUncontrolledState)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local useCheckboxVariantsModule = require(script.Parent.useCheckboxVariants)
-local useInputGroupDefaultsModule = require(components.InternalInputGroup.useInputGroupDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local ReactModule = require(Parent.React)
+local ConstantsModule = require(Foundation.Constants)
+local Components = Foundation.Components
+local InternalInputModule = require(Components.InternalInput)
+local TextModule = require(Components.Text)
+local _ = require(Components.Types)
+local UseUncontrolledStateModule = require(Components.InternalInput.useUncontrolledState)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local UseCheckboxVariantsModule = require(script.Parent.useCheckboxVariants)
+local UseInputGroupDefaultsModule = require(Components.InternalInputGroup.useInputGroupDefaults)
+local config = {
 	Selectable = true,
 	testId = "--foundation-checkbox",
-	size = require(foundation.Enums.InputSize).Medium,
-	placement = require(foundation.Enums.InputPlacement).Start
+	size = require(Foundation.Enums.InputSize).Medium,
+	placement = require(Foundation.Enums.InputPlacement).Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useInputGroupDefaultsModule (ref), t (ref), useTokensModule (ref), useCheckboxVariantsModule (ref), useUncontrolledStateModule (ref), reactModule (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), textModule (ref), builderIconsModule (ref)
-	local var1 = useInputGroupDefaultsModule(p1, t)
-	local var2 = useCheckboxVariantsModule(useTokensModule(), var1.size)
-	local var3, var4 = useUncontrolledStateModule(var1.isChecked, var1.onActivated)
-	local isIndeterminate = var1.isIndeterminate or false
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 56 | Named "Checkbox" ]]
+	-- upvalues: UseInputGroupDefaultsModule (copy), config (copy), UseTokensModule (copy), UseCheckboxVariantsModule (copy), UseUncontrolledStateModule (copy), ReactModule (copy), InternalInputModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), TextModule (copy), BuilderIconsModule (copy)
+	local UseInputGroupDefaultsModuleResult = UseInputGroupDefaultsModule(p1, config)
+	local UseCheckboxVariantsModuleResult = UseCheckboxVariantsModule(UseTokensModule(), UseInputGroupDefaultsModuleResult.size)
+	local UseUncontrolledStateModuleResult, UseUncontrolledStateModuleResult2 = UseUncontrolledStateModule(UseInputGroupDefaultsModuleResult.isChecked, UseInputGroupDefaultsModuleResult.onActivated)
+	local IsIndeterminate = UseInputGroupDefaultsModuleResult.isIndeterminate or false
 	
-	return reactModule.createElement(internalInputModule, withCommonPropsModule(var1, {
-		isChecked = var3,
-		isIndeterminate = isIndeterminate,
-		isDisabled = var1.isDisabled,
-		onActivated = var4,
+	return ReactModule.createElement(InternalInputModule, WithCommonPropsModule(UseInputGroupDefaultsModuleResult, {
+		isChecked = UseUncontrolledStateModuleResult,
+		isIndeterminate = IsIndeterminate,
+		isDisabled = UseInputGroupDefaultsModuleResult.isDisabled,
+		onActivated = UseUncontrolledStateModuleResult2,
 		label = {
-			text = var1.label,
-			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var1.placement],
-			hint = var1.hint
+			text = UseInputGroupDefaultsModuleResult.label,
+			position = ConstantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[UseInputGroupDefaultsModuleResult.placement],
+			hint = UseInputGroupDefaultsModuleResult.hint
 		},
-		customVariantProps = var2.input,
-		size = var1.size,
-		Selectable = var1.Selectable,
-		NextSelectionUp = var1.NextSelectionUp,
-		NextSelectionDown = var1.NextSelectionDown,
-		NextSelectionLeft = var1.NextSelectionLeft,
-		NextSelectionRight = var1.NextSelectionRight,
-		ref = p2
+		customVariantProps = UseCheckboxVariantsModuleResult.input,
+		size = UseInputGroupDefaultsModuleResult.size,
+		Selectable = UseInputGroupDefaultsModuleResult.Selectable,
+		NextSelectionUp = UseInputGroupDefaultsModuleResult.NextSelectionUp,
+		NextSelectionDown = UseInputGroupDefaultsModuleResult.NextSelectionDown,
+		NextSelectionLeft = UseInputGroupDefaultsModuleResult.NextSelectionLeft,
+		NextSelectionRight = UseInputGroupDefaultsModuleResult.NextSelectionRight,
+		ref = Ref
 	}), {
-		Checkmark = if var3 or isIndeterminate then reactModule.createElement(textModule, {
+		Checkmark = if UseUncontrolledStateModuleResult or IsIndeterminate then ReactModule.createElement(TextModule, {
 			TextScaled = true,
-			Text = if isIndeterminate then builderIconsModule.Icon.Minus else builderIconsModule.Icon.Check,
+			Text = if IsIndeterminate then BuilderIconsModule.Icon.Minus else BuilderIconsModule.Icon.Check,
 			fontStyle = {
-				Font = builderIconsModule.Font[builderIconsModule.IconVariant.Filled]
+				Font = BuilderIconsModule.Font[BuilderIconsModule.IconVariant.Filled]
 			},
-			tag = var2.checkmark.tag,
-			testId = `{var1.testId}--checkmark`
+			tag = UseCheckboxVariantsModuleResult.checkmark.tag,
+			testId = `{UseInputGroupDefaultsModuleResult.testId}--checkmark`
 		}) else nil
 	})
 end))

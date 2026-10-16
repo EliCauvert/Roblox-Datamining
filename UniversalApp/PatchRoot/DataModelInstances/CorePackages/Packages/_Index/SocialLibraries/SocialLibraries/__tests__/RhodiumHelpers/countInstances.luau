@@ -1,10 +1,10 @@
-﻿return function(p1, p2)
-	local var1 = 0
+﻿return function(Object, ClassName): number --[[ Line: 7 ]]
+	local Count = 0
 	
-	for i, v in pairs(p1:GetChildren()) do
-		if not p2 or v:IsA(p2) then
-			var1 += 1
+	for _, child in pairs(Object:GetChildren()) do
+		if not ClassName or child:IsA(ClassName) then
+			Count += 1
 		end
 	end
-	return var1
+	return Count
 end

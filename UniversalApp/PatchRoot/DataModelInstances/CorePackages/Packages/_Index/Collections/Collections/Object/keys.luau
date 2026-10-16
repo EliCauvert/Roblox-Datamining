@@ -1,34 +1,36 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local setModule = require(parent.Parent.Set)
-local _ = require(parent_1.ES7Types)
-local instanceOfModule = require(parent_1.InstanceOf)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local SetModule = require(Parent.Parent.Set)
+local _ = require(Parent1.ES7Types)
+local InstanceOfModule = require(Parent1.InstanceOf)
 
-return function(p1)
-	-- upvalues: instanceOfModule (ref), setModule (ref)
-	if p1 == nil then
+return function(Text) --[[ Line: 26 ]]
+	-- upvalues: InstanceOfModule (copy), SetModule (copy)
+	if Text == nil then
 		error("cannot extract keys from a nil value")
 	end
-	local var1 = typeof(p1)
-	local list = nil
+	local ValueType = typeof(Text)
+	local List = nil
 	
-	if var1 == "table" then
-		list = {}
+	if ValueType == "table" then
+		List = {}
 		
-		if instanceOfModule(p1, setModule) then
-			return list
+		if InstanceOfModule(Text, SetModule) then
+			return List
 		end
-		for i in pairs(p1) do
-			table.insert(list, i)
+		for i in pairs(Text) do
+			table.insert(List, i)
 		end
-		return list
-	elseif var1 == "string" then
-		local var2 = p1:len()
-		list = table.create(var2)
-		
-		for i = 1, var2 do
-			list[i] = tostring(i)
+		return List
+	else
+		if ValueType == "string" then
+			local Length = Text:len()
+			List = table.create(Length)
+			
+			for i1 = 1, Length do
+				List[i1] = tostring(i1)
+			end
 		end
+		return List
 	end
-	return list
 end

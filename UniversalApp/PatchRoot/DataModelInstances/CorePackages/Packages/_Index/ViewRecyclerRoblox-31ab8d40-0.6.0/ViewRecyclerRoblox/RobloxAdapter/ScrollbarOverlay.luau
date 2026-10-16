@@ -1,30 +1,34 @@
-﻿local viewRecyclerModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
+﻿local ViewRecyclerModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
 
 return {
-	connect = function(p1, p2, p3)
-		-- upvalues: viewRecyclerModule (ref)
-		local var1 = false
+	connect = function(Object, p1, X) --[[ Line: 6 ]]
+		-- upvalues: ViewRecyclerModule (copy)
+		local Flag = false
 		
-		local function synchronize()
-			-- upvalues: var1 (write), p1 (ref), p2 (ref), p3 (ref), viewRecyclerModule (copy)
-			if var1 then return end
-			local scrollBarThickness = p1.ScrollBarThickness
-			p2.Position = UDim2.fromOffset(if p3 == viewRecyclerModule.Axis.Y and p1.VerticalScrollBarPosition == Enum.VerticalScrollBarPosition.Left then scrollBarThickness else 0, 0)
-			p2.Size = if p3 == viewRecyclerModule.Axis.X then UDim2.new(1, 0, 1, -scrollBarThickness) else UDim2.new(1, -scrollBarThickness, 1, 0)
+		local function synchronize() --[[ Line: 9 ]]
+			-- upvalues: Flag (ref), Object (copy), p1 (copy), X (copy), ViewRecyclerModule (upval)
+			if not Flag then
+				local ScrollBarThickness = Object.ScrollBarThickness
+				p1.Position = UDim2.fromOffset(if X == ViewRecyclerModule.Axis.Y and Object.VerticalScrollBarPosition == Enum.VerticalScrollBarPosition.Left then ScrollBarThickness else 0, 0)
+				p1.Size = if X == ViewRecyclerModule.Axis.X then UDim2.new(1, 0, 1, -ScrollBarThickness) else UDim2.new(1, -ScrollBarThickness, 1, 0)
+				
+				return
+			end
 		end
 		
 		synchronize()
-		local var2 = p1:GetPropertyChangedSignal("ScrollBarThickness"):Connect(synchronize)
-		local var3 = p1:GetPropertyChangedSignal("VerticalScrollBarPosition"):Connect(synchronize)
+		local Connection = Object:GetPropertyChangedSignal("ScrollBarThickness"):Connect(synchronize)
+		local Connection1 = Object:GetPropertyChangedSignal("VerticalScrollBarPosition"):Connect(synchronize)
 		
-		return function()
-			-- upvalues: var1 (write), var2 (ref), var3 (ref)
-			if var1 then
+		return function() --[[ Line: 28 ]]
+			-- upvalues: Flag (ref), Connection (copy), Connection1 (copy)
+			if not Flag then
+				Flag = true
+				Connection:Disconnect()
+				Connection1:Disconnect()
+				
 				return
 			end
-			var1 = true
-			var2:Disconnect()
-			var3:Disconnect()
 		end
 	end
 }

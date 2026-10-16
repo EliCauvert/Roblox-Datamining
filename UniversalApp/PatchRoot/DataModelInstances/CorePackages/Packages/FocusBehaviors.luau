@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.FocusBehaviors.FocusBehaviors)
+﻿return (require(script.Parent._Index.FocusBehaviors.FocusBehaviors))

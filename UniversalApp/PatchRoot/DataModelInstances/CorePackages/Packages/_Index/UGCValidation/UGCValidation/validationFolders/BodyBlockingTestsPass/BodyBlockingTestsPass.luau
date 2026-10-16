@@ -1,40 +1,38 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local floatEqualsModule = require(parent.util.floatEquals)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		validationEnumsModule.UploadCategory.FULL_BODY
-	},
-	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.renderMeshesData
-	},
-	expectedFailures = {}
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local FloatEqualsModule = require(Parent.util.floatEquals)
 
-local function validateMeshMin(a, b, p1)
-	-- upvalues: floatEqualsModule (ref), errorSourceStringsModule (ref)
-	local t = {}
+local function validateMeshMin(p1, OriginalSize, MeshName) --[[ Line: 31 ]]
+	-- upvalues: FloatEqualsModule (copy), ErrorSourceStringsModule (copy)
+	local List = {}
 	
-	for i, v in { "X", "Y", "Z" } do
-		if floatEqualsModule(b[v], 0, 0.0001) then
-			table.insert(t, "Size on " .. v .. " axis is zero")
+	for _, value in { "X", "Y", "Z" } do
+		if FloatEqualsModule(OriginalSize[value], 0, 0.0001) then
+			table.insert(List, "Size on " .. value .. " axis is zero")
 		end
 	end
-	if #t > 0 then
-		a:fail(errorSourceStringsModule.Keys.BodyBlocking_ZeroMeshSize, { meshName = p1, details = table.concat(t, ". ") })
+	if #List > 0 then
+		p1:fail(ErrorSourceStringsModule.Keys.BodyBlocking_ZeroMeshSize, { meshName = MeshName, details = table.concat(List, ". ") })
 	end
 end
 
-function t.run(p2, p3)
-	-- upvalues: validateMeshMin (ref)
-	for i, v in p3.renderMeshesData do
-		validateMeshMin(p2, v.originalSize, i)
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+		ValidationEnumsModule.UploadCategory.FULL_BODY
+	},
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.renderMeshesData
+	},
+	expectedFailures = {},
+	run = function(p2, p3) --[[ Line: 49 ]]
+		-- upvalues: validateMeshMin (copy)
+		for i, value in p3.renderMeshesData do
+			validateMeshMin(p2, value.originalSize, i)
+		end
 	end
-end
-
-return t
+}

@@ -1,64 +1,62 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local avatarModule = require(foundation.Components.Avatar)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local internalAvatarGroupModule = require(foundation.Components.InternalAvatarGroup)
-local _ = require(foundation.Components.Types)
-local _ = require(foundation.Enums.UserPresence)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local avatarGroupTypeModule = require(foundation.Enums.AvatarGroupType)
-local usePresentationContext = require(foundation.Providers.Style.PresentationContext).usePresentationContext
-local getAvatarSizeModule = require(foundation.Components.Avatar.getAvatarSize)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local AvatarModule = require(Foundation.Components.Avatar)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local InternalAvatarGroupModule = require(Foundation.Components.InternalAvatarGroup)
+local _ = require(Foundation.Components.Types)
+local _ = require(Foundation.Enums.UserPresence)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local AvatarGroupTypeModule = require(Foundation.Enums.AvatarGroupType)
+local UsePresentationContextFunction = require(Foundation.Providers.Style.PresentationContext).usePresentationContext
+local GetAvatarSizeModule = require(Foundation.Components.Avatar.getAvatarSize)
+local config = {
 	max = 1e999,
 	testId = "--foundation-avatar-group",
-	type = avatarGroupTypeModule.Spread,
-	size = inputSizeModule.Medium
+	type = AvatarGroupTypeModule.Spread,
+	size = InputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), usePresentationContext (ref), useTokensModule (ref), avatarGroupTypeModule (ref), inputSizeModule (ref), getAvatarSizeModule (ref), reactModule (ref), avatarModule (ref), internalAvatarGroupModule (ref), withCommonPropsModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = usePresentationContext()
-	local var3 = useTokensModule()
-	local size = var1.size
-	local _ = nil
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 44 | Named "AvatarGroup" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UsePresentationContextFunction (copy), UseTokensModule (copy), AvatarGroupTypeModule (copy), InputSizeModule (copy), GetAvatarSizeModule (copy), ReactModule (copy), AvatarModule (copy), InternalAvatarGroupModule (copy), WithCommonPropsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UsePresentationContextResult = UsePresentationContextFunction()
+	local UseTokensModuleResult = UseTokensModule()
+	local Size = WithDefaultsModuleResult.size
 	
-	return reactModule.createElement(internalAvatarGroupModule, withCommonPropsModule(var1, {
-		ref = p2,
-		type = var1.type,
-		max = var1.max,
-		resolvedSize = getAvatarSizeModule(var3, size, var2.isIconSize),
-		isEllipsedOverflow = if size ~= inputSizeModule.XSmall then var2.isIconSize and size == inputSizeModule.Small else true,
-		gap = if var1.type == avatarGroupTypeModule.Spread then var3.Size.Size_200 elseif not var2.isIconSize then if size == inputSizeModule.Large or size == inputSizeModule.Medium then -var3.Size.Size_50 else -var3.Size.Size_0 elseif size == inputSizeModule.XSmall then -var3.Size.Size_50 else -var3.Size.Size_100,
-		backplateStyle = var1.backplateStyle or var3.Color.Surface.Surface_0,
-		avatars = var1.avatars,
-		renderAvatar = reactModule.useCallback(function(p3, p4)
-			-- upvalues: reactModule (copy), avatarModule (copy), var1 (ref)
-			local userId
-			local userPresence = nil
-			local _ = nil
+	return (ReactModule.createElement(InternalAvatarGroupModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		ref = Ref,
+		type = WithDefaultsModuleResult.type,
+		max = WithDefaultsModuleResult.max,
+		resolvedSize = GetAvatarSizeModule(UseTokensModuleResult, Size, UsePresentationContextResult.isIconSize),
+		isEllipsedOverflow = Size == InputSizeModule.XSmall or UsePresentationContextResult.isIconSize and Size == InputSizeModule.Small,
+		gap = if WithDefaultsModuleResult.type == AvatarGroupTypeModule.Spread then UseTokensModuleResult.Size.Size_200 elseif UsePresentationContextResult.isIconSize then if Size == InputSizeModule.Large or Size == InputSizeModule.Medium then -UseTokensModuleResult.Size.Size_50 else -UseTokensModuleResult.Size.Size_0 elseif Size == InputSizeModule.XSmall then -UseTokensModuleResult.Size.Size_50 else -UseTokensModuleResult.Size.Size_100,
+		backplateStyle = WithDefaultsModuleResult.backplateStyle or UseTokensModuleResult.Color.Surface.Surface_0,
+		avatars = WithDefaultsModuleResult.avatars,
+		renderAvatar = ReactModule.useCallback(function(p2, Frame) --[[ Line: 64 ]]
+			-- upvalues: ReactModule (upval), AvatarModule (upval), WithDefaultsModuleResult (copy)
+			local UserPresence = nil
+			local UserId = nil
 			
-			if typeof(p3) == "table" then
-				userPresence = p3.userPresence
-				userId = p3.userId
+			if typeof(p2) == "table" then
+				UserPresence = p2.userPresence
+				UserId = p2.userId
 			else
-				userId = p3
+				UserId = p2
 			end
-			return reactModule.createElement(avatarModule, {
-				userId = userId,
-				key = p4.key,
-				backgroundStyle = p4.backgroundStyle,
-				backplateStyle = p4.backplateStyle,
-				size = var1.size,
-				userPresence = userPresence,
-				LayoutOrder = p4.LayoutOrder,
-				Position = p4.Position,
-				ZIndex = p4.ZIndex,
-				testId = p4.testId
+			return ReactModule.createElement(AvatarModule, {
+				userId = UserId,
+				key = Frame.key,
+				backgroundStyle = Frame.backgroundStyle,
+				backplateStyle = Frame.backplateStyle,
+				size = WithDefaultsModuleResult.size,
+				userPresence = UserPresence,
+				LayoutOrder = Frame.LayoutOrder,
+				Position = Frame.Position,
+				ZIndex = Frame.ZIndex,
+				testId = Frame.testId
 			})
-		end, { var1.size })
-	}))
+		end, { WithDefaultsModuleResult.size })
+	})))
 end))

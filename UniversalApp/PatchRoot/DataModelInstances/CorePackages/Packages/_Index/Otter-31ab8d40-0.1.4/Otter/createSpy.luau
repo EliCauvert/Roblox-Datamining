@@ -1,33 +1,31 @@
-﻿return function(p1)
-	local t = { callCount = 0, valuesLength = 0, values = {} }
+﻿return function(Callback) --[[ Line: 1 | Named "createSpy" ]]
+	local config = { callCount = 0, valuesLength = 0, values = {} }
 	
-	function t.value(...)
-		-- upvalues: t (ref), p1 (ref)
-		t.callCount += 1
-		t.values = { ... }
-		t.valuesLength = select("#", ...)
+	function config.value(...) --[[ Line: 8 ]]
+		-- upvalues: config (copy), Callback (copy)
+		config.callCount += 1
+		config.values = { ... }
+		config.valuesLength = select("#", ...)
 		
-		if p1 == nil then
-			return
-		end
-		return p1(...)
+		if Callback == nil then return end
+		return Callback(...)
 	end
 	
-	function t.assertCalledWith(_, ...)
-		-- upvalues: t (ref)
-		local var1 = select("#", ...)
-		assert(t.valuesLength, var1, "length of expected values differs from stored values")
+	function config:assertCalledWith(...) --[[ Line: 18 ]]
+		-- upvalues: config (copy)
+		local Selected = select("#", ...)
+		assert(config.valuesLength, Selected, "length of expected values differs from stored values")
 		
-		for i = 1, var1 do
-			assert(t.values[i], select(i, ...), "value differs")
+		for i = 1, Selected do
+			assert(config.values[i], select(i, ...), "value differs")
 		end
 	end
 	
-	setmetatable(t, {
-		__index = function(_, p2)
-			error(("%q is not a valid member of spy"):format(p2))
+	setmetatable(config, {
+		__index = function(_, p1) --[[ Line: 30 ]]
+			error(("%q is not a valid member of spy"):format(p1))
 		end
 	})
 	
-	return t
+	return config
 end

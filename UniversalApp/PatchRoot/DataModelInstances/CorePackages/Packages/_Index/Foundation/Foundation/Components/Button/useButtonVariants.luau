@@ -1,16 +1,16 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Enums.ButtonVariant)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local _ = require(foundation.Components.Types)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local getSharedVariantsModule = require(script.Parent.getSharedVariants)
-local _ = require(foundation.Providers.Style.Tokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local _ = require(Foundation.Enums.ButtonVariant)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
+local _ = require(Foundation.Components.Types)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local GetSharedVariantsModule = require(script.Parent.getSharedVariants)
+local _ = require(Foundation.Providers.Style.Tokens)
 
-local var1 = function(p1)
-	-- upvalues: getSharedVariantsModule (ref), inputSizeModule (ref)
-	local var2 = getSharedVariantsModule(p1)
+local function v9(p1) --[[ Line: 47 ]]
+	-- upvalues: GetSharedVariantsModule (copy), InputSizeModule (copy)
+	local SharedVariantsModule = GetSharedVariantsModule(p1)
 	
 	return {
 		common = {
@@ -18,44 +18,44 @@ local var1 = function(p1)
 			text = { tag = "shrink size-0-full auto-x text-truncate-end" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				container = {
 					tag = "gap-xsmall padding-small",
-					radius = var2.sizes[inputSizeModule.XSmall].container.radius,
-					height = var2.sizes[inputSizeModule.XSmall].container.height
+					radius = SharedVariantsModule.sizes[InputSizeModule.XSmall].container.radius,
+					height = SharedVariantsModule.sizes[InputSizeModule.XSmall].container.height
 				},
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_300, p1.Size.Size_300)
 				},
 				text = { tag = "text-label-small" }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				container = {
 					tag = "gap-xsmall padding-small",
-					radius = var2.sizes[inputSizeModule.Small].container.radius,
-					height = var2.sizes[inputSizeModule.Small].container.height
+					radius = SharedVariantsModule.sizes[InputSizeModule.Small].container.radius,
+					height = SharedVariantsModule.sizes[InputSizeModule.Small].container.height
 				},
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
 				},
 				text = { tag = "text-label-small" }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = {
 					tag = "gap-small padding-medium",
-					radius = var2.sizes[inputSizeModule.Medium].container.radius,
-					height = var2.sizes[inputSizeModule.Medium].container.height
+					radius = SharedVariantsModule.sizes[InputSizeModule.Medium].container.radius,
+					height = SharedVariantsModule.sizes[InputSizeModule.Medium].container.height
 				},
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
 				},
 				text = { tag = "text-label-medium" }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				container = {
 					tag = "gap-small padding-medium",
-					radius = var2.sizes[inputSizeModule.Large].container.radius,
-					height = var2.sizes[inputSizeModule.Large].container.height
+					radius = SharedVariantsModule.sizes[InputSizeModule.Large].container.radius,
+					height = SharedVariantsModule.sizes[InputSizeModule.Large].container.height
 				},
 				icon = {
 					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
@@ -63,13 +63,13 @@ local var1 = function(p1)
 				text = { tag = "text-label-large" }
 			}
 		},
-		types = var2.types
+		types = SharedVariantsModule.types
 	}
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: variantsContextModule (ref), var1 (ref), composeStyleVariantModule (ref), colorNamespaceModule (ref)
-	local button = variantsContextModule.useVariants("Button", var1, p1)
+return function(p1, p2, p3, p4) --[[ Line: 117 ]]
+	-- upvalues: VariantsContextModule (copy), v9 (copy), ComposeStyleVariantModule (copy), ColorNamespaceModule (copy)
+	local Button = VariantsContextModule.useVariants("Button", v9, p1)
 	
-	return composeStyleVariantModule(button.common, button.sizes[p2], button.types[p3][p4 or colorNamespaceModule.Color])
+	return ComposeStyleVariantModule(Button.common, Button.sizes[p2], Button.types[p3][p4 or ColorNamespaceModule.Color])
 end

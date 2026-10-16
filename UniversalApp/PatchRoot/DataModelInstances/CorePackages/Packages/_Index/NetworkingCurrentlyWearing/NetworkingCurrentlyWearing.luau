@@ -1,13 +1,13 @@
-﻿local networkRequests = script.networkRequests
-local createGetCurrentlyWearingModule = require(networkRequests.createGetCurrentlyWearing)
-local createGetItemDetailsModule = require(networkRequests.createGetItemDetails)
+﻿local NetworkRequests = script.networkRequests
+local CreateGetCurrentlyWearingModule = require(NetworkRequests.createGetCurrentlyWearing)
+local CreateGetItemDetailsModule = require(NetworkRequests.createGetItemDetails)
 
 return {
-	config = function(p1)
-		-- upvalues: createGetCurrentlyWearingModule (ref), createGetItemDetailsModule (ref)
+	config = function(p1) --[[ Line: 9 ]]
+		-- upvalues: CreateGetCurrentlyWearingModule (copy), CreateGetItemDetailsModule (copy)
 		return {
-			GetCurrentlyWearing = createGetCurrentlyWearingModule(p1),
-			GetItemDetails = createGetItemDetailsModule(p1)
+			GetCurrentlyWearing = CreateGetCurrentlyWearingModule(p1),
+			GetItemDetails = CreateGetItemDetailsModule(p1)
 		}
 	end
 }

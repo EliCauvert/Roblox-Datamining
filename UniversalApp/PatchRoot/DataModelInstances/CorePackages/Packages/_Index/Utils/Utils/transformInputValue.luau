@@ -1,73 +1,71 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local getNullableType = graphQLModule.getNullableType
-local isLeafType = graphQLModule.isLeafType
-local isListType = graphQLModule.isListType
-local isInputObjectType = graphQLModule.isInputObjectType
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local GraphQLModule = require(Parent.GraphQL)
+local GetNullableTypeFunction = GraphQLModule.getNullableType
+local IsLeafTypeFunction = GraphQLModule.isLeafType
+local IsListTypeFunction = GraphQLModule.isListType
+local IsInputObjectTypeFunction = GraphQLModule.isInputObjectType
 local _ = require(script.Parent.types)
 
-local function transformInputValue(a, b, p1, p2)
-	-- upvalues: getNullableType (ref), boolean (ref), isLeafType (ref), isListType (ref), array (ref), transformInputValue (ref), isInputObjectType (ref)
-	local var1 = if p1 ~= nil then nil else p1
-	local var2 = if p2 ~= nil then nil else p2
+local function transformInputValue(OfType, List, p1, p2) --[[ Line: 34 ]]
+	-- upvalues: GetNullableTypeFunction (copy), Boolean (copy), IsLeafTypeFunction (copy), IsListTypeFunction (copy), Array (copy), transformInputValue (copy), IsInputObjectTypeFunction (copy)
+	local Callback = if p1 == nil then nil else p1
+	local Callback1 = if p2 == nil then nil else p2
 	
-	if b == nil then
-		return b
+	if List == nil then
+		return List
 	end
-	local var3 = getNullableType(a)
+	local NullableType = GetNullableTypeFunction(OfType)
 	
-	if boolean.toJSBoolean(isLeafType(var3)) then
-		return if var1 == nil then b else var1(var3, b)
-	elseif boolean.toJSBoolean(isListType(var3)) then
-		return array.map(b, function(p3)
-			-- upvalues: transformInputValue (copy), var3 (ref), var1 (ref), var2 (ref)
-			return transformInputValue(var3.ofType, p3, var1, var2)
+	if Boolean.toJSBoolean(IsLeafTypeFunction(NullableType)) then
+		return if Callback == nil then List else Callback(NullableType, List)
+	end
+	if Boolean.toJSBoolean(IsListTypeFunction(NullableType)) then
+		return Array.map(List, function(p3) --[[ Line: 61 ]]
+			-- upvalues: transformInputValue (upval), NullableType (copy), Callback (copy), Callback1 (copy)
+			return transformInputValue(NullableType.ofType, p3, Callback, Callback1)
 		end)
-	elseif not boolean.toJSBoolean(isInputObjectType(var3)) then
+	end
+	if not Boolean.toJSBoolean(IsInputObjectTypeFunction(NullableType)) then
 		return nil
 	end
-	local fields = var3:getFields()
+	local Fields = NullableType:getFields()
 	local t = {}
 	
-	for i in b do
-		local var4 = fields[tostring(i)]
+	for i in List do
+		local Field = Fields[tostring(i)]
 		
-		if var4 ~= nil then
-			t[tostring(i)] = transformInputValue(var4.type, b[tostring(i)], var1, var2)
+		if Field ~= nil then
+			t[tostring(i)] = transformInputValue(Field.type, List[tostring(i)], Callback, Callback1)
 		end
 	end
-	return if var2 == nil then t else var2(var3, t)
+	return if Callback1 == nil then t else Callback1(NullableType, t)
 end
 
-t.transformInputValue = transformInputValue
-
-function t.serializeInputValue(p3, p4)
-	-- upvalues: transformInputValue (ref)
-	return transformInputValue(p3, p4, function(p5, p6)
-		local ok, status = pcall(p5.serialize, p5, p6)
-		
-		return if ok then status else p6
-	end)
-end
-
-function t.parseInputValue(p3, p4)
-	-- upvalues: transformInputValue (ref)
-	return transformInputValue(p3, p4, function(p5, p6)
-		local ok, status = pcall(p5.parseValue, p5, p6)
-		
-		return if ok then status else p6
-	end)
-end
-
-function t.parseInputValueLiteral(p3, p4)
-	-- upvalues: transformInputValue (ref)
-	return transformInputValue(p3, p4, function(p5, p6)
-		return p5:parseLiteral(p6, {})
-	end)
-end
-
-return t
+return {
+	transformInputValue = transformInputValue,
+	serializeInputValue = function(p3, p4) --[[ Line: 95 ]]
+		-- upvalues: transformInputValue (copy)
+		return transformInputValue(p3, p4, function(p5, p6) --[[ Line: 96 ]]
+			local Success, Result = pcall(p5.serialize, p5, p6)
+			
+			return if Success then Result else p6
+		end)
+	end,
+	parseInputValue = function(p3, p4) --[[ Line: 117 ]]
+		-- upvalues: transformInputValue (copy)
+		return transformInputValue(p3, p4, function(p5, p6) --[[ Line: 118 ]]
+			local Success, Result = pcall(p5.parseValue, p5, p6)
+			
+			return if Success then Result else p6
+		end)
+	end,
+	parseInputValueLiteral = function(p3, p4) --[[ Line: 139 ]]
+		-- upvalues: transformInputValue (copy)
+		return transformInputValue(p3, p4, function(p5, p6) --[[ Line: 140 ]]
+			return p5:parseLiteral(p6, {})
+		end)
+	end
+}

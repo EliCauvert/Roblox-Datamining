@@ -1,18 +1,18 @@
-﻿local valueToStringModule = require(script.Parent.valueToString)
-local floatEqualsModule = require(script.Parent.Parent.util.floatEquals)
+﻿local ValueToStringModule = require(script.Parent.valueToString)
+local FloatEqualsModule = require(script.Parent.Parent.util.floatEquals)
 
 return {
-	fuzzyEq = function(p1, p2, p3)
-		-- upvalues: floatEqualsModule (ref)
-		local components, components_1, components_2, components_3, components_4, components_5, components_6, components_7, components_8, components_9, components_10, components_11 = p1:GetComponents()
-		local components_12, components_13, components_14, components_15, components_16, components_17, components_18, components_19, components_20, components_21, components_22, components_23 = p2:GetComponents()
+	fuzzyEq = function(CF, CF1, p1) --[[ Line: 7 ]]
+		-- upvalues: FloatEqualsModule (copy)
+		local Components, Components2, Components3, Components4, Components5, Components6, Components7, Components8, Components9, Components10, Components11, Components12 = CF:GetComponents()
+		local Components1, Components2_1, Components3_1, Components4_1, Components5_1, Components6_1, Components7_1, Components8_1, Components9_1, Components10_1, Components11_1, Components12_1 = CF1:GetComponents()
 		
-		return floatEqualsModule(components, components_12, p3) and (floatEqualsModule(components_1, components_13, p3) and (floatEqualsModule(components_2, components_14, p3) and (floatEqualsModule(components_3, components_15, p3) and (floatEqualsModule(components_4, components_16, p3) and (floatEqualsModule(components_5, components_17, p3) and (floatEqualsModule(components_6, components_18, p3) and (floatEqualsModule(components_7, components_19, p3) and (floatEqualsModule(components_8, components_20, p3) and (floatEqualsModule(components_9, components_21, p3) and (floatEqualsModule(components_10, components_22, p3) and floatEqualsModule(components_11, components_23, p3)))))))))))
+		return FloatEqualsModule(Components, Components1, p1) and (FloatEqualsModule(Components2, Components2_1, p1) and (FloatEqualsModule(Components3, Components3_1, p1) and (FloatEqualsModule(Components4, Components4_1, p1) and (FloatEqualsModule(Components5, Components5_1, p1) and (FloatEqualsModule(Components6, Components6_1, p1) and (FloatEqualsModule(Components7, Components7_1, p1) and (FloatEqualsModule(Components8, Components8_1, p1) and (FloatEqualsModule(Components9, Components9_1, p1) and (FloatEqualsModule(Components10, Components10_1, p1) and (FloatEqualsModule(Components11, Components11_1, p1) and FloatEqualsModule(Components12, Components12_1, p1)))))))))))
 	end,
-	getRotationString = function(p1)
-		-- upvalues: valueToStringModule (ref)
-		local vector3 = Vector3.new(p1:ToOrientation())
+	getRotationString = function(CF) --[[ Line: 24 ]]
+		-- upvalues: ValueToStringModule (copy)
+		local _Vector3 = Vector3.new(CF:ToOrientation())
 		
-		return valueToStringModule(Vector3.new(math.deg(vector3.X), math.deg(vector3.Y), math.deg(vector3.Z)))
+		return ValueToStringModule((Vector3.new(math.deg(_Vector3.X), math.deg(_Vector3.Y), (math.deg(_Vector3.Z)))))
 	end
 }

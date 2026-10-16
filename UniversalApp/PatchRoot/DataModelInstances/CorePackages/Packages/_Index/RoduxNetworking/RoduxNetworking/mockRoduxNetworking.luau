@@ -1,23 +1,23 @@
-﻿local makeActionCreatorModule = require(script.Parent.makeActionCreator)
+﻿local MakeActionCreatorModule = require(script.Parent.makeActionCreator)
 
-local function makeMockRequestObject(p1)
-	-- upvalues: makeActionCreatorModule (ref)
-	local var1 = makeActionCreatorModule(p1)
+local function makeMockRequestObject(p1) --[[ Line: 3 ]]
+	-- upvalues: MakeActionCreatorModule (copy)
+	local ActionCreatorModule = MakeActionCreatorModule(p1)
 	
-	local var2 = function() end
+	local function Clear() --[[ Line: 5 ]] end
 	
-	function var2.API()
-		-- upvalues: var1 (ref)
-		return var1.Succeeded()
+	function ActionCreatorModule.API() --[[ Line: 6 ]]
+		-- upvalues: ActionCreatorModule (copy)
+		return ActionCreatorModule.Succeeded()
 	end
 	
-	var1.Mock = { reply = var2, clear = var2, replyWithError = var2 }
+	ActionCreatorModule.Mock = { reply = Clear, clear = Clear, replyWithError = Clear }
 	
-	return var1
+	return ActionCreatorModule
 end
 
-return function()
-	-- upvalues: makeMockRequestObject (ref)
+return function() --[[ Line: 19 ]]
+	-- upvalues: makeMockRequestObject (copy)
 	return {
 		GET = makeMockRequestObject,
 		POST = makeMockRequestObject,

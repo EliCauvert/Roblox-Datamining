@@ -1,14 +1,14 @@
-﻿return function(p1, p2)
-	local ok, _ = pcall(Instance.new, p2)
-	assert(ok, `{p2} does not exist. Did you make a typo?`)
-	local descendants = p1:GetDescendants()
-	table.insert(descendants, p1)
-	local t = {}
+﻿return function(Object, ClassName) --[[ Line: 1 ]]
+	local Success, _ = pcall(Instance.new, ClassName)
+	assert(Success, `{ClassName} does not exist. Did you make a typo?`)
+	local Descendants = Object:GetDescendants()
+	table.insert(Descendants, Object)
+	local List = {}
 	
-	for i, v in descendants do
-		if v:IsA(p2) then
-			table.insert(t, v)
+	for _, descendant in Descendants do
+		if descendant:IsA(ClassName) then
+			table.insert(List, descendant)
 		end
 	end
-	return t
+	return List
 end

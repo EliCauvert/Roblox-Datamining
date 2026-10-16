@@ -1,6 +1,6 @@
-﻿local var1 = require(script.Parent.makeUseExperiment)("OnUserLayerLoadingStatusChanged", "GetUserLayerLoadingStatus", "GetUserLayerVariables", "LogUserLayerExposure", "GetUserStatusForLayer")
+﻿local OnUserLayerLoadingStatusChanged = require(script.Parent.makeUseExperiment)("OnUserLayerLoadingStatusChanged", "GetUserLayerLoadingStatus", "GetUserLayerVariables", "LogUserLayerExposure", "GetUserStatusForLayer")
 
-return function(p1, p2, p3)
-	-- upvalues: var1 (ref)
-	return var1(p1, p2, p3)
+return function(p1, p2, p3) --[[ Line: 35 ]]
+	-- upvalues: OnUserLayerLoadingStatusChanged (copy)
+	return OnUserLayerLoadingStatusChanged(p1, p2, p3)
 end

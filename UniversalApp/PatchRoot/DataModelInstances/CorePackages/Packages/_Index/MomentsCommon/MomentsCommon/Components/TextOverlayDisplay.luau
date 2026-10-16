@@ -1,64 +1,63 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useCallback = reactModule.useCallback
-local useMemo = reactModule.useMemo
-local view = foundationModule.View
-local textOverlayModule = require(momentsCommon.Components.TextOverlay)
-local getCropSizeModule = require(momentsCommon.Utils.getCropSize)
-local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
-local getScaleModule = require(momentsCommon.Utils.getScale)
-local _ = require(momentsCommon.Types)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local UseCallbackFunction = ReactModule.useCallback
+local UseMemoFunction = ReactModule.useMemo
+local View = require(Parent.Foundation).View
+local TextOverlayModule = require(MomentsCommon.Components.TextOverlay)
+local GetCropSizeModule = require(MomentsCommon.Utils.getCropSize)
+local GetFitSizeModule = require(MomentsCommon.Utils.getFitSize)
+local GetScaleModule = require(MomentsCommon.Utils.getScale)
+local _ = require(MomentsCommon.Types)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useMemo (ref), getFitSizeModule (ref), getCropSizeModule (ref), getScaleModule (ref), useCallback (ref), dashModule (ref), textOverlayModule (ref), view (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = if p1.textOverlayEdits then p1.textOverlayEdits[1] else nil
-	local var4, var5 = useMemo(function()
-		-- upvalues: p1 (ref), getFitSizeModule (copy), getCropSizeModule (copy), getScaleModule (copy)
+return function(p1) --[[ Line: 33 | Named "TextOverlayDisplay" ]]
+	-- upvalues: ReactModule (copy), UseMemoFunction (copy), GetFitSizeModule (copy), GetCropSizeModule (copy), GetScaleModule (copy), UseCallbackFunction (copy), DashModule (copy), TextOverlayModule (copy), View (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local TextOverlayEdit = p1.textOverlayEdits and p1.textOverlayEdits[1] or nil
+	local UseMemoResult, UseMemoResult2 = UseMemoFunction(function() --[[ Line: 39 ]]
+		-- upvalues: p1 (copy), GetFitSizeModule (upval), GetCropSizeModule (upval), GetScaleModule (upval)
 		if not p1.itemResolution then
 			return UDim2.fromScale(1, 1), 1
 		end
-		local var6 = getFitSizeModule(p1.itemSize, p1.itemResolution)
-		local var7 = getCropSizeModule(p1.itemSize, p1.itemResolution)
-		local var8 = getScaleModule(p1.itemSize, p1.itemResolution, p1.scaleType)
+		local FitSizeModule = GetFitSizeModule(p1.itemSize, p1.itemResolution)
+		local CropSizeModule = GetCropSizeModule(p1.itemSize, p1.itemResolution)
+		local ScaleModule = GetScaleModule(p1.itemSize, p1.itemResolution, p1.scaleType)
 		
 		if p1.scaleType == Enum.ScaleType.Fit then
-			return var6, var8
+			return FitSizeModule, ScaleModule
+		else
+			return CropSizeModule, ScaleModule
 		end
-		return var7, var8
 	end, { p1.scaleType, p1.itemResolution, p1.itemSize })
-	local var6 = useCallback(function()
-		-- upvalues: var2 (ref), p1 (ref), dashModule (copy), var3 (ref)
-		if var2.current and p1.onTextOverlayDragEnd then
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 55 ]]
+		-- upvalues: UseRefResult1 (copy), p1 (copy), DashModule (upval), TextOverlayEdit (copy)
+		if UseRefResult1.current and p1.onTextOverlayDragEnd then
 			p1.onTextOverlayDragEnd({
-				dashModule.joinDeep(var3, { position = var2.current.Position })
+				(DashModule.joinDeep(TextOverlayEdit, { position = UseRefResult1.current.Position }))
 			})
 			
 			return
 		end
-	end, { p1.onTextOverlayDragEnd, var3 })
+	end, { p1.onTextOverlayDragEnd, TextOverlayEdit })
+	local UseCallbackResult1 = UseCallbackFunction(function(TextOverlayEdit) --[[ Line: 65 ]]
+		-- upvalues: ReactModule (upval), TextOverlayModule (upval), UseMemoResult2 (copy), UseRefResult (copy), UseRefResult1 (copy), p1 (copy), UseCallbackResult (copy)
+		return ReactModule.createElement(TextOverlayModule, {
+			additionalScale = UseMemoResult2,
+			boundingUI = UseRefResult.current,
+			containerRef = UseRefResult1,
+			draggable = p1.draggable,
+			onActivated = p1.onTextOverlayActivated,
+			onDragEnd = UseCallbackResult,
+			textOverlayEdit = TextOverlayEdit
+		})
+	end, { p1.draggable, p1.onTextOverlayActivated, UseMemoResult2 })
 	
-	return if p1.textOverlayEdits and #p1.textOverlayEdits ~= 0 then reactModule.createElement(view, {
+	return if p1.textOverlayEdits and #p1.textOverlayEdits ~= 0 then ReactModule.createElement(View, {
 		tag = "anchor-center-center position-center-center",
-		ref = var1,
-		Size = var4,
+		ref = UseRefResult,
+		Size = UseMemoResult,
 		ZIndex = p1.zIndex or 1
-	}, {
-		TextOverlay = useCallback(function(p2)
-			-- upvalues: reactModule (copy), textOverlayModule (copy), var5 (ref), var1 (ref), var2 (ref), p1 (ref), var6 (ref)
-			return reactModule.createElement(textOverlayModule, {
-				additionalScale = var5,
-				boundingUI = var1.current,
-				containerRef = var2,
-				draggable = p1.draggable,
-				onActivated = p1.onTextOverlayActivated,
-				onDragEnd = var6,
-				textOverlayEdit = p2
-			})
-		end, { p1.draggable, p1.onTextOverlayActivated, var5 })(var3)
-	}) else nil
+	}, { TextOverlay = UseCallbackResult1(TextOverlayEdit) }) else nil
 end

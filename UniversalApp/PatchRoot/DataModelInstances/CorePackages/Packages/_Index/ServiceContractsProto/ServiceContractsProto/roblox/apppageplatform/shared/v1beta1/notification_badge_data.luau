@@ -1,91 +1,71 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 44 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		count = if p1 == nil or p1.count == nil then 0 else p1.count,
-		is_visible = if p1 == nil or p1.is_visible == nil then false else p1.is_visible
-	}, t_1)
+		is_visible = p1 ~= nil and p1.is_visible ~= nil and p1.is_visible
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 51 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.count ~= nil and self.count ~= 0 then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.varint)
-		var2, var7 = protoModule.writeVarInt(var2, var3, self.count)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, self.count)
 	end
 	if self.is_visible then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.varint)
-		var4, var9 = protoModule.writeVarInt(var4, var5, if self.is_visible then 1 else 0)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, if self.is_visible then 1 else 0)
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local _ = nil
-		local var3, var4, var5 = protoModule.readTag(p1, var2)
-		local var6 = var3
-		local var7 = var4
-		var2 = var5
+function Module.decode(Buf) --[[ Line: 70 ]]
+	-- upvalues: Module (copy), ProtoModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v11 = ProtoModule.readTag(Buf, v1)
 		
-		if var7 == protoModule.wireTypes.varint then
-			if var6 == 1 then
-				local _ = nil
-				local var8, var9 = protoModule.readVarIntI32(p1, var2)
-				var2 = var9
-				var1.count = var8
-			elseif var6 == 2 then
-				local _ = nil
-				local var10, var11 = protoModule.readVarInt(p1, var2)
-				var2 = var11
-				var1.is_visible = var10 ~= 0
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 1 then
+				NewModule.count, v11 = ProtoModule.readVarIntI32(Buf, v1)
+			elseif Tag == 2 then
+				local VarInt
+				VarInt, v11 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.is_visible = VarInt ~= 0
 			else
-				local _ = nil
-				local var12, var13 = protoModule.readVarInt(p1, var2)
-				local _ = var12
-				var2 = var13
+				local _
+				_, v11 = ProtoModule.readVarInt(Buf, v1)
 			end
-		elseif var7 == protoModule.wireTypes.lengthDelimited then
-			local _ = nil
-			local var14, var15 = protoModule.readVarInt(p1, var2)
-			var2 = var15 + var14
-		elseif var7 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var16, var17 = protoModule.readFixed32(p1, var2)
-			local _ = var16
-			var2 = var17
-		elseif var7 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var18, var19 = protoModule.readFixed64(p1, var2)
-			local _ = var18
-			var2 = var19
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+			v1 = VarInt2 + VarInt1
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v11 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v11 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var17)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 118 ]]
 	local t = {}
 	
 	if self.count ~= nil and self.count ~= 0 then
@@ -97,27 +77,27 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref)
-	local var20 = t_1.new()
+function Module:jsonDecode() --[[ Line: 132 ]]
+	-- upvalues: Module (copy)
+	local NewModule = Module.new()
 	
 	if self.count ~= nil then
-		var20.count = self.count
+		NewModule.count = self.count
 	end
 	if self.is_visible ~= nil then
-		var20.is_visible = self.is_visible
+		NewModule.is_visible = self.is_visible
 	end
 	if self.isVisible ~= nil then
-		var20.is_visible = self.isVisible
+		NewModule.is_visible = self.isVisible
 	end
-	return var20
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "NotificationBadgeData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.NotificationBadgeData"
 }
-t.NotificationBadgeData = t_1
-typeRegistryModule.default:register(t.NotificationBadgeData)
+local config = { NotificationBadgeData = Module }
+TypeRegistryModule.default:register(config.NotificationBadgeData)
 
-return { NotificationBadgeData = t.NotificationBadgeData }
+return { NotificationBadgeData = config.NotificationBadgeData }

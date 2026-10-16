@@ -1,88 +1,88 @@
-﻿local parent = script.Parent.Parent.Parent
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local fetchEditablesModule = require(parent.validationSystem.dataFetchModules.FetchEditables)
-local fetchCurveAnimationsModule = require(parent.validationSystem.dataFetchModules.FetchCurveAnimations)
-local fetchCurveAnimComputedFramesModule = require(parent.validationSystem.dataFetchModules.FetchCurveAnimComputedFrames)
-local fetchContentIdsModule = require(parent.validationSystem.dataFetchModules.FetchContentIds)
-local fetchHSRAssetsModule = require(parent.validationSystem.dataFetchModules.FetchHSRAssets)
-local fetchCurveAnimBoneDataModule = require(parent.validationSystem.dataFetchModules.FetchCurveAnimBoneData)
-local fetchFullBodyPartsMetricsModule = require(parent.validationSystem.dataFetchModules.FetchFullBodyPartsMetrics)
-local _ = require(parent.util.Types)
-local sharedDataMember = validationEnumsModule.SharedDataMember
-local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
-local getFFlagUGCValidateHeadAboveTorsoModule = require(parent.flags.getFFlagUGCValidateHeadAboveTorso)
-local resetPhysicsDataModule = require(parent.util.resetPhysicsData)
+﻿local Parent = script.Parent.Parent.Parent
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local FetchEditablesModule = require(Parent.validationSystem.dataFetchModules.FetchEditables)
+local FetchCurveAnimationsModule = require(Parent.validationSystem.dataFetchModules.FetchCurveAnimations)
+local FetchCurveAnimComputedFramesModule = require(Parent.validationSystem.dataFetchModules.FetchCurveAnimComputedFrames)
+local FetchContentIdsModule = require(Parent.validationSystem.dataFetchModules.FetchContentIds)
+local FetchHSRAssetsModule = require(Parent.validationSystem.dataFetchModules.FetchHSRAssets)
+local FetchCurveAnimBoneDataModule = require(Parent.validationSystem.dataFetchModules.FetchCurveAnimBoneData)
+local FetchFullBodyPartsMetricsModule = require(Parent.validationSystem.dataFetchModules.FetchFullBodyPartsMetrics)
+local _ = require(Parent.util.Types)
+local SharedDataMember = ValidationEnumsModule.SharedDataMember
+local GetFFlagUGCValidationAllowFullVaasModule = require(Parent.flags.getFFlagUGCValidationAllowFullVaas)
+local GetFFlagUGCValidateHeadAboveTorsoModule = require(Parent.flags.getFFlagUGCValidateHeadAboveTorso)
+local ResetPhysicsDataModule = require(Parent.util.resetPhysicsData)
 local list = {
-	sharedDataMember.renderMeshesData,
-	sharedDataMember.innerCagesData,
-	sharedDataMember.outerCagesData,
-	sharedDataMember.meshTextures
+	SharedDataMember.renderMeshesData,
+	SharedDataMember.innerCagesData,
+	SharedDataMember.outerCagesData,
+	SharedDataMember.meshTextures
 }
-local t = { DATA_FETCH_FAILURE = {} }
+local FetchAllDesiredDataModule = { DATA_FETCH_FAILURE = {} }
 
-function t.storeDesiredData(p1, p2)
-	-- upvalues: getFFlagUGCValidationAllowFullVaasModule (ref), validationEnumsModule (ref), resetPhysicsDataModule (ref), list (ref), fetchEditablesModule (ref), t (ref), sharedDataMember (ref), fetchCurveAnimationsModule (ref), fetchCurveAnimComputedFramesModule (ref), fetchContentIdsModule (ref), fetchHSRAssetsModule (ref), fetchCurveAnimBoneDataModule (ref), getFFlagUGCValidateHeadAboveTorsoModule (ref), fetchFullBodyPartsMetricsModule (ref)
-	local rootInstance = p1.rootInstance
-	local preloadedEditableMeshes = p1.consumerConfig.preloadedEditableMeshes or {}
-	local preloadedEditableImages = p1.consumerConfig.preloadedEditableImages or {}
+function FetchAllDesiredDataModule.storeDesiredData(DATAFETCHFAILUREs, p1) --[[ Line: 32 ]]
+	-- upvalues: GetFFlagUGCValidationAllowFullVaasModule (copy), ValidationEnumsModule (copy), ResetPhysicsDataModule (copy), list (copy), FetchEditablesModule (copy), FetchAllDesiredDataModule (copy), SharedDataMember (copy), FetchCurveAnimationsModule (copy), FetchCurveAnimComputedFramesModule (copy), FetchContentIdsModule (copy), FetchHSRAssetsModule (copy), FetchCurveAnimBoneDataModule (copy), GetFFlagUGCValidateHeadAboveTorsoModule (copy), FetchFullBodyPartsMetricsModule (copy)
+	local RootInstance = DATAFETCHFAILUREs.rootInstance
+	local PreloadedEditableMeshes = DATAFETCHFAILUREs.consumerConfig.preloadedEditableMeshes or {}
+	local PreloadedEditableImages = DATAFETCHFAILUREs.consumerConfig.preloadedEditableImages or {}
 	
-	if not getFFlagUGCValidationAllowFullVaasModule() and p1.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC then
-		pcall(resetPhysicsDataModule, { rootInstance }, {
-			isServer = p1.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
+	if not GetFFlagUGCValidationAllowFullVaasModule() and DATAFETCHFAILUREs.consumerConfig.consumerEnv ~= ValidationEnumsModule.ConsumerEnv.IEC then
+		pcall(ResetPhysicsDataModule, { RootInstance }, {
+			isServer = DATAFETCHFAILUREs.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.Backend,
 			bypassFlags = {}
 		})
 	end
-	local var1 = p1.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
-	
-	for i, v in list do
-		if p2[v] then
-			local ok, status = pcall(function()
-				-- upvalues: fetchEditablesModule (copy), rootInstance (ref), v (ref), var1 (ref), preloadedEditableMeshes (ref), preloadedEditableImages (ref)
-				return fetchEditablesModule.getDatas(rootInstance, v, var1, preloadedEditableMeshes, preloadedEditableImages)
+	local IsConsumerEnvMatch = DATAFETCHFAILUREs.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC
+	for _, value in list do
+		if p1[value] then
+			local Success, Result = pcall(function() --[[ Line: 49 ]]
+				-- upvalues: FetchEditablesModule (upval), RootInstance (copy), value (copy), IsConsumerEnvMatch (copy), PreloadedEditableMeshes (copy), PreloadedEditableImages (copy)
+				return (FetchEditablesModule.getDatas(RootInstance, value, IsConsumerEnvMatch, PreloadedEditableMeshes, PreloadedEditableImages))
 			end)
 			
-			if ok and status then
-				p1[v] = status
+			if Success and Result then
+				DATAFETCHFAILUREs[value] = Result
 			else
-				p1[v] = t.DATA_FETCH_FAILURE
+				DATAFETCHFAILUREs[value] = FetchAllDesiredDataModule.DATA_FETCH_FAILURE
 			end
 		end
 	end
-	if p2[sharedDataMember.curveAnimations] then
-		p1.curveAnimations = fetchCurveAnimationsModule.getData(rootInstance) or t.DATA_FETCH_FAILURE
+	if p1[SharedDataMember.curveAnimations] then
+		DATAFETCHFAILUREs.curveAnimations = FetchCurveAnimationsModule.getData(RootInstance, DATAFETCHFAILUREs.consumerConfig) or FetchAllDesiredDataModule.DATA_FETCH_FAILURE
 	end
-	if p2[sharedDataMember.curveAnimComputedFrames] then
-		if p1.curveAnimations and p1.curveAnimations ~= t.DATA_FETCH_FAILURE then
-			p1.curveAnimComputedFrames = fetchCurveAnimComputedFramesModule.getData(p1.curveAnimations) or t.DATA_FETCH_FAILURE
+	if p1[SharedDataMember.curveAnimComputedFrames] then
+		if DATAFETCHFAILUREs.curveAnimations and DATAFETCHFAILUREs.curveAnimations ~= FetchAllDesiredDataModule.DATA_FETCH_FAILURE then
+			DATAFETCHFAILUREs.curveAnimComputedFrames = FetchCurveAnimComputedFramesModule.getData(DATAFETCHFAILUREs.curveAnimations) or FetchAllDesiredDataModule.DATA_FETCH_FAILURE
 		else
-			p1.curveAnimComputedFrames = t.DATA_FETCH_FAILURE
+			DATAFETCHFAILUREs.curveAnimComputedFrames = FetchAllDesiredDataModule.DATA_FETCH_FAILURE
 		end
 	end
-	if p2[sharedDataMember.contentIds] then
-		p1.contentIds = fetchContentIdsModule.getData(p1)
+	if p1[SharedDataMember.contentIds] then
+		DATAFETCHFAILUREs.contentIds = FetchContentIdsModule.getData(DATAFETCHFAILUREs)
 	end
-	if p2[sharedDataMember.hsrAssets] then
-		p1.hsrAssets = fetchHSRAssetsModule.getData(rootInstance, p1.consumerConfig) or t.DATA_FETCH_FAILURE
+	if p1[SharedDataMember.hsrAssets] then
+		DATAFETCHFAILUREs.hsrAssets = FetchHSRAssetsModule.getData(RootInstance, DATAFETCHFAILUREs.consumerConfig) or FetchAllDesiredDataModule.DATA_FETCH_FAILURE
 	end
-	if p2[sharedDataMember.curveAnimBoneData] then
-		p1[sharedDataMember.curveAnimBoneData] = fetchCurveAnimBoneDataModule.getData(p1[sharedDataMember.curveAnimations])
+	if p1[SharedDataMember.curveAnimBoneData] then
+		DATAFETCHFAILUREs[SharedDataMember.curveAnimBoneData] = FetchCurveAnimBoneDataModule.getData(DATAFETCHFAILUREs[SharedDataMember.curveAnimations])
 	end
-	if getFFlagUGCValidateHeadAboveTorsoModule() and p2[sharedDataMember.fullBodyPartsMetrics] then
-		if p1.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY and p1.renderMeshesData and p1.renderMeshesData ~= t.DATA_FETCH_FAILURE then
-			local ok, status = pcall(fetchFullBodyPartsMetricsModule.getData, p1)
+	if GetFFlagUGCValidateHeadAboveTorsoModule() and p1[SharedDataMember.fullBodyPartsMetrics] then
+		if DATAFETCHFAILUREs.uploadCategory == ValidationEnumsModule.UploadCategory.FULL_BODY and DATAFETCHFAILUREs.renderMeshesData and DATAFETCHFAILUREs.renderMeshesData ~= FetchAllDesiredDataModule.DATA_FETCH_FAILURE then
+			local Success1, Result1 = pcall(FetchFullBodyPartsMetricsModule.getData, DATAFETCHFAILUREs)
 			
-			if ok and status then
-				p1.fullBodyPartsMetrics = status
+			if Success1 and Result1 then
+				DATAFETCHFAILUREs.fullBodyPartsMetrics = Result1
+				
+				return
+			else
+				DATAFETCHFAILUREs.fullBodyPartsMetrics = {}
 				
 				return
 			end
-			p1.fullBodyPartsMetrics = {}
-			
-			return
 		else
-			p1.fullBodyPartsMetrics = {}
+			DATAFETCHFAILUREs.fullBodyPartsMetrics = {}
 		end
 	end
 end
 
-return t
+return FetchAllDesiredDataModule

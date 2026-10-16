@@ -1,14 +1,14 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
-local _ = require(foundation.Components.InternalInput)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Enums.ControlState)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
+local _ = require(Foundation.Components.InternalInput)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local _ = require(Foundation.Enums.ControlState)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1)
-	-- upvalues: inputSizeModule (ref)
+local function variantsFactory(p1) --[[ Line: 29 ]]
+	-- upvalues: InputSizeModule (copy)
 	return {
 		common = {
 			input = {
@@ -21,25 +21,25 @@ local function variantsFactory(p1)
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				input = {
 					size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
 				},
 				checkmark = { tag = "size-400" }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				input = {
 					size = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500)
 				},
 				checkmark = { tag = "size-500" }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				input = {
 					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
 				},
 				checkmark = { tag = "size-600" }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				input = {
 					size = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
 				},
@@ -49,9 +49,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local checkbox = variantsContextModule.useVariants("Checkbox", variantsFactory, p1)
+return function(p1, p2) --[[ Line: 67 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local Checkbox = VariantsContextModule.useVariants("Checkbox", variantsFactory, p1)
 	
-	return composeStyleVariantModule(checkbox.common, checkbox.sizes[p2])
+	return ComposeStyleVariantModule(Checkbox.common, Checkbox.sizes[p2])
 end

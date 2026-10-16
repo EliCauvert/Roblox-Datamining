@@ -1,10 +1,10 @@
-﻿local parent = script.Parent
-local createGetPhoneInformationModule = require(parent.networkRequests.createGetPhoneInformation)
-local _ = require(parent.Types.networkRequestsTypes)
+﻿local Parent = script.Parent
+local CreateGetPhoneInformationModule = require(Parent.networkRequests.createGetPhoneInformation)
+local _ = require(Parent.Types.networkRequestsTypes)
 
-return function(p1)
-	-- upvalues: createGetPhoneInformationModule (ref)
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: CreateGetPhoneInformationModule (copy)
 	return {
-		GetPhoneInformation = createGetPhoneInformationModule(p1)
+		GetPhoneInformation = CreateGetPhoneInformationModule(p1)
 	}
 end

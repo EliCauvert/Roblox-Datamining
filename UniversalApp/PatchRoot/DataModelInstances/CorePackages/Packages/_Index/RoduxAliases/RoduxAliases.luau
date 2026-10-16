@@ -1,27 +1,27 @@
-﻿local _script = script
-local parent = _script.Parent
-local llamaModule = require(parent.llama)
-local roduxNetworkingModule = require(parent.RoduxNetworking)
-local aliasNetworkingModule = require(parent.AliasNetworking)
-local aliasesReducerModule = require(_script.Reducers.AliasesReducer)
-local actionsModule = require(_script.Actions)
-local selectorsModule = require(_script.Selectors)
-local _ = require(_script.RoduxAliasesTypes)
+﻿local v1 = script
+local Parent = v1.Parent
+local LlamaModule = require(Parent.llama)
+local RoduxNetworkingModule = require(Parent.RoduxNetworking)
+local AliasNetworkingModule = require(Parent.AliasNetworking)
+local AliasesReducerModule = require(v1.Reducers.AliasesReducer)
+local ActionsModule = require(v1.Actions)
+local SelectorsModule = require(v1.Selectors)
+local _ = require(v1.RoduxAliasesTypes)
 
 return {
-	config = function(p1)
-		-- upvalues: llamaModule (ref), aliasNetworkingModule (ref), roduxNetworkingModule (ref), aliasesReducerModule (ref), actionsModule (ref), selectorsModule (ref)
-		p1 = llamaModule.Dictionary.join(p1, {
-			aliasNetworking = aliasNetworkingModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
+	config = function(p1) --[[ Line: 16 ]]
+		-- upvalues: LlamaModule (copy), AliasNetworkingModule (copy), RoduxNetworkingModule (copy), AliasesReducerModule (copy), ActionsModule (copy), SelectorsModule (copy)
+		local JoinResult = LlamaModule.Dictionary.join(p1, {
+			aliasNetworking = AliasNetworkingModule.config({ roduxNetworking = RoduxNetworkingModule.mock() })
 		})
 		
 		return {
-			installReducer = function()
-				-- upvalues: aliasesReducerModule (copy), p1 (write)
-				return aliasesReducerModule(p1)
+			installReducer = function() --[[ Line: 24 ]]
+				-- upvalues: AliasesReducerModule (upval), JoinResult (ref)
+				return AliasesReducerModule(JoinResult)
 			end,
-			Actions = actionsModule,
-			Selectors = selectorsModule(p1)
+			Actions = ActionsModule,
+			Selectors = SelectorsModule(JoinResult)
 		}
 	end
 }

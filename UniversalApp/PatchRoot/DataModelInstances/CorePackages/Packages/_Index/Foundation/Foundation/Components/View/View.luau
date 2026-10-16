@@ -1,73 +1,71 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local loggerModule = require(foundation.Utility.Logger)
-local interactableModule = require(foundation.Components.Interactable)
-local flagsModule = require(foundation.Utility.Flags)
-local guiObjectChildrenModule = require(foundation.Utility.GuiObjectChildren)
-local _ = require(foundation.Components.Types)
-local useDefaultTagsModule = require(foundation.Utility.useDefaultTags)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local withGuiObjectPropsModule = require(foundation.Utility.withGuiObjectProps)
-local useStyleTagsModule = require(foundation.Providers.Style.useStyleTags)
-local _ = require(foundation.Enums.ControlState)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local LoggerModule = require(Foundation.Utility.Logger)
+local InteractableModule = require(Foundation.Components.Interactable)
+local FlagsModule = require(Foundation.Utility.Flags)
+local GuiObjectChildrenModule = require(Foundation.Utility.GuiObjectChildren)
+local _ = require(Foundation.Components.Types)
+local UseDefaultTagsModule = require(Foundation.Utility.useDefaultTags)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local WithGuiObjectPropsModule = require(Foundation.Utility.withGuiObjectProps)
+local UseStyleTagsModule = require(Foundation.Providers.Style.useStyleTags)
+local _ = require(Foundation.Enums.ControlState)
+local config = {
 	AutoLocalize = false,
 	BorderSizePixel = 0,
 	isDisabled = false,
 	layout = { SortOrder = Enum.SortOrder.LayoutOrder }
 }
-local var1 = false
+local Flag = false
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), flagsModule (ref), reactModule (ref), var1 (write), loggerModule (ref), withGuiObjectPropsModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
-	local var2
-	local var3 = withDefaultsModule(p1, t)
-	local var4 = useStyleTagsModule(useDefaultTagsModule(var3.tag, if var3.backgroundStyle ~= nil then "gui-object-defaults" else "gui-object-defaults x-default-transparency"))
-	local var5 = if var3.onStateChanged == nil then if var3.onActivated == nil then var3.onSecondaryActivated ~= nil else true else true
-	local _ = nil
-	local var6 = if flagsModule.FoundationViewMemoizationChanges then var3.GroupTransparency ~= nil and (if type(var3.GroupTransparency) ~= "table" then var3.GroupTransparency > 0 else true) else reactModule.useMemo(function()
-		-- upvalues: var3 (ref)
-		return if var3.GroupTransparency == nil then false else type(var3.GroupTransparency) == "table" or var3.GroupTransparency > 0
-	end, { var3.GroupTransparency })
-	local _ = nil
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 45 | Named "View" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseDefaultTagsModule (copy), UseStyleTagsModule (copy), FlagsModule (copy), ReactModule (copy), Flag (ref), LoggerModule (copy), WithGuiObjectPropsModule (copy), InteractableModule (copy), GuiObjectChildrenModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseStyleTagsModuleResult = UseStyleTagsModule((UseDefaultTagsModule(WithDefaultsModuleResult.tag, if WithDefaultsModuleResult.backgroundStyle == nil then "gui-object-defaults" else "gui-object-defaults x-default-transparency")))
+	local HasOnStateChanged: boolean = WithDefaultsModuleResult.onStateChanged ~= nil or WithDefaultsModuleResult.onActivated ~= nil or WithDefaultsModuleResult.onSecondaryActivated ~= nil
+	local IsTable = nil
+	IsTable = if FlagsModule.FoundationViewMemoizationChanges then WithDefaultsModuleResult.GroupTransparency ~= nil and (type(WithDefaultsModuleResult.GroupTransparency) == "table" or WithDefaultsModuleResult.GroupTransparency > 0) else ReactModule.useMemo(function(): boolean --[[ Line: 64 ]]
+		-- upvalues: WithDefaultsModuleResult (copy)
+		return WithDefaultsModuleResult.GroupTransparency ~= nil and (type(WithDefaultsModuleResult.GroupTransparency) == "table" or WithDefaultsModuleResult.GroupTransparency > 0)
+	end, { WithDefaultsModuleResult.GroupTransparency })
+	local CanvasGroup = nil
 	
-	if flagsModule.FoundationViewMemoizationChanges then
-		var2 = if var6 then "CanvasGroup" elseif var5 then "ImageButton" else "Frame"
+	if FlagsModule.FoundationViewMemoizationChanges then
+		CanvasGroup = if IsTable then "CanvasGroup" elseif HasOnStateChanged then "ImageButton" else "Frame"
 		
-		if var6 and var5 and (not var3.isDisabled and not var1) then
-			var1 = true
-			loggerModule:warning("Some state changes are not supported with GroupTransparency")
+		if IsTable and HasOnStateChanged and not WithDefaultsModuleResult.isDisabled and not Flag then
+			Flag = true
+			LoggerModule:warning("Some state changes are not supported with GroupTransparency")
 		end
 	else
-		var2 = reactModule.useMemo(function()
-			-- upvalues: var6 (write), var5 (ref), var3 (ref), loggerModule (copy)
-			if var6 then
-				if var5 and not var3.isDisabled then
-					loggerModule:warning("Some state changes are not supported with GroupTransparency")
-				end
-				return "CanvasGroup"
-			else
-				return if var5 then "ImageButton" else "Frame"
+		CanvasGroup = ReactModule.useMemo(function(): string --[[ Line: 91 ]]
+			-- upvalues: IsTable (ref), HasOnStateChanged (copy), WithDefaultsModuleResult (copy), LoggerModule (upval)
+			if not IsTable then
+				return if HasOnStateChanged then "ImageButton" else "Frame"
 			end
-		end, { var6, var5 })
+			if HasOnStateChanged and not WithDefaultsModuleResult.isDisabled then
+				LoggerModule:warning("Some state changes are not supported with GroupTransparency")
+			end
+			return "CanvasGroup"
+		end, { IsTable, HasOnStateChanged })
 	end
-	local var7 = withGuiObjectPropsModule(var3, {
-		AutoButtonColor = if var2 == "ImageButton" then false else nil,
-		GroupTransparency = if var6 then var3.GroupTransparency else nil,
-		ref = p2,
-		[reactModule.Tag] = var4
+	local WithGuiObjectPropsModuleResult = WithGuiObjectPropsModule(WithDefaultsModuleResult, {
+		AutoButtonColor = CanvasGroup ~= "ImageButton" and nil,
+		GroupTransparency = if IsTable then WithDefaultsModuleResult.GroupTransparency else nil,
+		ref = Ref,
+		[ReactModule.Tag] = UseStyleTagsModuleResult
 	})
-	local var8 = var2
+	local CanvasGroup1: string = CanvasGroup
 	
-	if var5 then
-		var8 = interactableModule
-		var7.component = var2
-		var7.onActivated = var3.onActivated
-		var7.onSecondaryActivated = var3.onSecondaryActivated
-		var7.onStateChanged = var3.onStateChanged
-		var7.stateLayer = var3.stateLayer
-		var7.isDisabled = var3.isDisabled
-		var7.cursor = var3.cursor
+	if HasOnStateChanged then
+		CanvasGroup1 = InteractableModule
+		WithGuiObjectPropsModuleResult.component = CanvasGroup
+		WithGuiObjectPropsModuleResult.onActivated = WithDefaultsModuleResult.onActivated
+		WithGuiObjectPropsModuleResult.onSecondaryActivated = WithDefaultsModuleResult.onSecondaryActivated
+		WithGuiObjectPropsModuleResult.onStateChanged = WithDefaultsModuleResult.onStateChanged
+		WithGuiObjectPropsModuleResult.stateLayer = WithDefaultsModuleResult.stateLayer
+		WithGuiObjectPropsModuleResult.isDisabled = WithDefaultsModuleResult.isDisabled
+		WithGuiObjectPropsModuleResult.cursor = WithDefaultsModuleResult.cursor
 	end
-	return reactModule.createElement(var8, var7, guiObjectChildrenModule(var3))
+	return ReactModule.createElement(CanvasGroup1, WithGuiObjectPropsModuleResult, GuiObjectChildrenModule(WithDefaultsModuleResult))
 end))

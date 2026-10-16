@@ -1,10 +1,10 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
 
 return {
 	name = "Markdown",
 	exclude = { "_Index" },
-	storyRoots = { parent },
-	mapStory = require(parent_1.MarkdownCore).StoryMiddleware,
-	roact = require(parent_1.Dev.Roact)
+	storyRoots = { Parent },
+	mapStory = require(Parent1.MarkdownCore).StoryMiddleware,
+	roact = require(Parent1.Dev.Roact)
 }

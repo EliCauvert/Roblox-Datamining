@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.Scheduler.Scheduler)
+﻿return (require(script.Parent._Index.Scheduler.Scheduler))

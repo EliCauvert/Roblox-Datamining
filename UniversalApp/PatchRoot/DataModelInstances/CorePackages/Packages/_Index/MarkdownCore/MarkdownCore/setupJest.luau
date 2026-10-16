@@ -1,69 +1,68 @@
-﻿local jestGlobalsModule = require(script:FindFirstAncestor("MarkdownCore").Parent.Dev.JestGlobals)
-local beforeAll = jestGlobalsModule.beforeAll
-local expect = jestGlobalsModule.expect
-local jest = jestGlobalsModule.jest
+﻿local JestGlobalsModule = require(script:FindFirstAncestor("MarkdownCore").Parent.Dev.JestGlobals)
+local ExpectFunction = JestGlobalsModule.expect
+local Jest = JestGlobalsModule.jest
 
-local function toWarnWith(_, p1, p2)
-	-- upvalues: jest (ref), expect (ref)
-	local var1 = false
-	local var2 = ""
-	local var3 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p3)
-		-- upvalues: expect (copy), p2 (ref), var1 (write), var2 (write)
+local function toWarnWith(_, p1, p2) --[[ Line: 7 ]]
+	-- upvalues: Jest (copy), ExpectFunction (copy)
+	local Pass = false
+	local v1 = ""
+	local MockImplementationResult = Jest.spyOn(Jest.globalEnv, "warn").mockImplementation(function(p3) --[[ Line: 10 ]]
+		-- upvalues: ExpectFunction (upval), p2 (copy), Pass (ref), v1 (ref)
 		print("WARN", p3)
-		local ok, status = pcall(function()
-			-- upvalues: expect (copy), p3 (ref), p2 (copy)
-			expect(p3).toEqual(p2)
+		local Success, Result = pcall(function() --[[ Line: 12 ]]
+			-- upvalues: ExpectFunction (upval), p3 (copy), p2 (upval)
+			ExpectFunction(p3).toEqual(p2)
 		end)
 		
-		if ok then
-			var1 = true
-			var2 = status
+		if Success then
+			Pass = true
+			v1 = Result
 		end
 	end)
-	local ok, status = pcall(p1)
+	local Success, Result = pcall(p1)
 	
-	if not ok then
-		var3:mockRestore()
-		error(status)
+	if not Success then
+		MockImplementationResult:mockRestore()
+		error(Result)
 	end
-	local var4 = if var1 then function()
-		-- upvalues: p2 (ref), var2 (write)
-		return `Expected never to warn with string containing "{p1}" but got "{var4}"`
-	end else function()
-		-- upvalues: p2 (ref)
-		return `Expected to warn with string containing "{p1}" but did not find a match`
+	local Message = if Pass then function(): string --[[ Line: 29 ]]
+		-- upvalues: p2 (copy), v1 (ref)
+		return `Expected never to warn with string containing "{p2}" but got "{v5}"`
+	end else function(): string --[[ Line: 33 ]]
+		-- upvalues: p2 (copy)
+		return `Expected to warn with string containing "{p2}" but did not find a match`
 	end
-	var3:mockRestore()
+	MockImplementationResult:mockRestore()
 	
-	return { message = var4, pass = var1 }
+	return { message = Message, pass = Pass }
 end
 
-local function toWarn(_, p1)
-	-- upvalues: jest (ref)
-	local var1 = 0
-	local var2 = jest.spyOn(jest.globalEnv, "warn").mockImplementation(function(p2)
-		-- upvalues: var1 (write)
+local function toWarn(_, p1) --[[ Line: 44 ]]
+	-- upvalues: Jest (copy)
+	local Count = 0
+	local MockImplementationResult = Jest.spyOn(Jest.globalEnv, "warn").mockImplementation(function(p2) --[[ Line: 46 ]]
+		-- upvalues: Count (ref)
 		print("WARN", p2)
-		var1 += 1
+		Count += 1
 	end)
-	local ok, status = pcall(p1)
+	local Success, Result = pcall(p1)
 	
-	if not ok then
-		var2:mockRestore()
-		error(status)
+	if not Success then
+		MockImplementationResult:mockRestore()
+		error(Result)
 	end
-	local var3 = if var1 > 0 then function()
-		-- upvalues: var1 (write)
-		return `Expected never to warn but got {var1} warnings`
-	end else function()
+	local Message = if Count > 0 then function(): string --[[ Line: 59 ]]
+		-- upvalues: Count (ref)
+		return `Expected never to warn but got {Count} warnings`
+	end else function(): string --[[ Line: 63 ]]
 		return "Expected to warn but never did"
 	end
-	var2:mockRestore()
+	MockImplementationResult:mockRestore()
 	
-	return { message = var3, pass = var1 > 0 }
+	return { message = Message, pass = Count > 0 }
 end
 
-beforeAll(function()
-	-- upvalues: expect (ref), toWarnWith (ref), toWarn (ref)
-	expect.extend({ toWarnWith = toWarnWith, toWarn = toWarn })
+JestGlobalsModule.beforeAll(function() --[[ Line: 75 ]]
+	-- upvalues: ExpectFunction (copy), toWarnWith (copy), toWarn (copy)
+	ExpectFunction.extend({ toWarnWith = toWarnWith, toWarn = toWarn })
 end)

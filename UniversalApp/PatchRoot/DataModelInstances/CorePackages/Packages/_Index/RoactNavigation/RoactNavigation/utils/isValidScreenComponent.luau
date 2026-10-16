@@ -1,5 +1,5 @@
-﻿return function(p1)
-	local var1 = type(p1)
+﻿return function(p1): boolean --[[ Line: 2 ]]
+	local ValueType = type(p1)
 	
-	return if var1 ~= "function" then var1 == "table" and type(p1.render) == "function" else true
+	return ValueType == "function" or ValueType == "table" and type(p1.render) == "function"
 end

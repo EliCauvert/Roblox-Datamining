@@ -1,175 +1,179 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local otterModule = require(parent.Otter)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local useAnimatedBinding = require(parent.ReactOtter).useAnimatedBinding
-local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local flagsModule = require(foundation.Utility.Flags)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local useOverlayModule = require(foundation.Providers.Overlay.useOverlay)
-local useScaledValueModule = require(foundation.Utility.useScaledValue)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local DIALOG_SIZES = require(foundation.Components.Dialog.useDialogVariants).DIALOG_SIZES
-local constantsModule = require(foundation.Constants)
-local dialogSizeModule = require(foundation.Enums.DialogSize)
-local elevationLayerModule = require(foundation.Enums.ElevationLayer)
-local useElevationModule = require(foundation.Providers.Elevation.useElevation)
-local elevationOwnerScope = require(foundation.Providers.Elevation.ElevationProvider).ElevationOwnerScope
-local usePreferencesModule = require(foundation.Providers.Preferences.usePreferences)
-local sheetContextModule = require(script.Parent.SheetContext)
-local typesModule = require(script.Parent.Types)
-local sheetTypeModule = require(script.Parent.SheetType)
-local childrenHasFullBleedModule = require(script.Parent.childrenHasFullBleed)
-local closeAffordanceModule = require(foundation.Components.CloseAffordance)
-local imageModule = require(foundation.Components.Image)
-local viewModule = require(foundation.Components.View)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local OtterModule = require(Parent.Otter)
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local UseAnimatedBindingFunction = require(Parent.ReactOtter).useAnimatedBinding
+local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
+local FlagsModule = require(Foundation.Utility.Flags)
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local UseOverlayModule = require(Foundation.Providers.Overlay.useOverlay)
+local UseScaledValueModule = require(Foundation.Utility.useScaledValue)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local DIALOGSIZES = require(Foundation.Components.Dialog.useDialogVariants).DIALOG_SIZES
+local ConstantsModule = require(Foundation.Constants)
+local ElevationLayerModule = require(Foundation.Enums.ElevationLayer)
+local UseElevationModule = require(Foundation.Providers.Elevation.useElevation)
+local ElevationOwnerScope = require(Foundation.Providers.Elevation.ElevationProvider).ElevationOwnerScope
+local UsePreferencesModule = require(Foundation.Providers.Preferences.usePreferences)
+local SheetContextModule = require(script.Parent.SheetContext)
+local TypesModule = require(script.Parent.Types)
+local SheetTypeModule = require(script.Parent.SheetType)
+local ChildrenHasFullBleedModule = require(script.Parent.childrenHasFullBleed)
+local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
+local ImageModule = require(Foundation.Components.Image)
+local ViewModule = require(Foundation.Components.View)
+local config = {
 	testId = "--foundation-sheet",
-	size = dialogSizeModule.Medium
+	size = require(Foundation.Enums.DialogSize).Medium
 }
-local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
-local SHADOW_SIZE = constantsModule.SHADOW_SIZE
+local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
+local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useOverlayModule (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), usePreferencesModule (ref), useScaledValueModule (ref), DIALOG_SIZES (ref), reactModule (ref), useAnimatedBinding (ref), childrenHasFullBleedModule (ref), otterModule (ref), dashModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), typesModule (ref), sheetContextModule (ref), elevationOwnerScope (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), reactRobloxModule (ref), flagsModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useOverlayModule()
-	local var3 = useTokensModule()
-	local var4 = useElevationModule(elevationLayerModule.Sheet, { stackAboveOwner = false })
-	local reducedMotion = usePreferencesModule().reducedMotion
-	local var5 = useScaledValueModule(DIALOG_SIZES[var1.size])
-	local var6 = useScaledValueModule(600)
-	local size800 = var3.Size.Size_800
-	local var7, var8 = reactModule.useBinding(var6)
-	local var9 = if var7 then var7:map(function(p3)
-		-- upvalues: var1 (ref)
-		if var1.centerSheetHeight then
-			return if var1.centerSheetHeight > 0 and var1.centerSheetHeight <= 1 then p3 * var1.centerSheetHeight elseif var1.centerSheetHeight > 1 then math.min(var1.centerSheetHeight, p3) else nil
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 51 | Named "CenterSheet" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScaledValueModule (copy), DIALOGSIZES (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), DashModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), ReactRobloxModule (copy), FlagsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseOverlayModuleResult = UseOverlayModule()
+	local UseTokensModuleResult = UseTokensModule()
+	local UseElevationModuleResult = UseElevationModule(ElevationLayerModule.Sheet, { stackAboveOwner = false })
+	local ReducedMotion = UsePreferencesModule().reducedMotion
+	local UseScaledValueModuleResult = UseScaledValueModule(DIALOGSIZES[WithDefaultsModuleResult.size])
+	local UseScaledValueModuleResult1 = UseScaledValueModule(600)
+	local Size800 = UseTokensModuleResult.Size.Size_800
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UseScaledValueModuleResult1)
+	local MapResult = if UseBindingResult then UseBindingResult:map(function(p2: number) --[[ Line: 68 ]]
+		-- upvalues: WithDefaultsModuleResult (copy)
+		if WithDefaultsModuleResult.centerSheetHeight then
+			if WithDefaultsModuleResult.centerSheetHeight > 0 and WithDefaultsModuleResult.centerSheetHeight <= 1 then
+				return p2 * WithDefaultsModuleResult.centerSheetHeight
+			elseif WithDefaultsModuleResult.centerSheetHeight > 1 then
+				return (math.min(WithDefaultsModuleResult.centerSheetHeight, p2))
+			end
 		end
+		return nil
 	end) else nil
-	local var10, var11 = reactModule.useState(true)
-	local var12 = reactModule.useRef(false)
-	local var13, var14 = useAnimatedBinding(1, function()
-		-- upvalues: var12 (ref), var1 (ref)
-		if var12.current then
-			var1.onClose()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(1, function() --[[ Line: 83 ]]
+		-- upvalues: UseRefResult (copy), WithDefaultsModuleResult (copy)
+		if UseRefResult.current then
+			WithDefaultsModuleResult.onClose()
 		end
 	end)
-	local var15, var16 = useAnimatedBinding(size800, function()
-		-- upvalues: var11 (ref)
-		var11(false)
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(Size800, function() --[[ Line: 89 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end)
-	local var17, var18 = reactModule.useBinding(false)
-	local var19, var20 = reactModule.useBinding(false)
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var21 = childrenHasFullBleedModule(var1.children)
-	local var22, var23 = reactModule.useBinding(0)
-	local var24 = var22
-	local var25 = var23
-	local var26, var27 = reactModule.useBinding(0)
-	local var28, var29 = reactModule.useBinding(0)
-	local var30 = reactModule.useRef(nil)
-	local var31, var32 = reactModule.useState(nil)
-	local var33 = reactModule.useMemo(function()
-		local frame = Instance.new("Frame")
-		frame.BackgroundTransparency = 1
-		frame.BorderSizePixel = 0
-		frame.AutomaticSize = Enum.AutomaticSize.XY
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
+	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(false)
+	local ChildrenHasFullBleedModuleResult = nil
+	local UseBindingResult4 = nil
+	local UseBindingResult2_3 = nil
+	ChildrenHasFullBleedModuleResult = ChildrenHasFullBleedModule(WithDefaultsModuleResult.children)
+	UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(0)
+	local UseBindingResult5, UseBindingResult2_4 = ReactModule.useBinding(0)
+	local UseBindingResult6, UseBindingResult2_5 = ReactModule.useBinding(0)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 108 ]]
+		local Frame = Instance.new("Frame")
+		Frame.BackgroundTransparency = 1
+		Frame.BorderSizePixel = 0
+		Frame.AutomaticSize = Enum.AutomaticSize.XY
 		
-		return frame
+		return Frame
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var33 (ref)
-		return function()
-			-- upvalues: var33 (copy)
-			var33:Destroy()
+	ReactModule.useEffect(function() --[[ Line: 115 ]]
+		-- upvalues: UseMemoResult (copy)
+		return function() --[[ Line: 116 ]]
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult:Destroy()
 		end
 	end, {})
-	local var34 = reactModule.useCallback(function(p3)
-		-- upvalues: var33 (ref)
-		if p3 then
-			var33.Parent = p3
+	local UseResult = ReactModule.useCallback(function(Parent) --[[ Line: 122 ]]
+		-- upvalues: UseMemoResult (copy)
+		if Parent then
+			UseMemoResult.Parent = Parent
 			
 			return
+		else
+			UseMemoResult.Parent = nil
 		end
-		var33.Parent = nil
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: reducedMotion (ref), var16 (ref), otterModule (copy), var14 (ref), var3 (ref)
-		if reducedMotion then
-			var16(otterModule.instant(0))
-			var14(otterModule.instant(0))
+	ReactModule.useEffect(function() --[[ Line: 133 ]]
+		-- upvalues: ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), OtterModule (upval), UseAnimatedBindingResult2 (copy), UseTokensModuleResult (copy)
+		if ReducedMotion then
+			UseAnimatedBindingResult2_1((OtterModule.instant(0)))
+			UseAnimatedBindingResult2((OtterModule.instant(0)))
 			
 			return
+		else
+			UseAnimatedBindingResult2_1(OtterModule.ease(0, {
+				easingStyle = UseTokensModuleResult.Ease.StandardOut,
+				duration = UseTokensModuleResult.Time.Time_300
+			}))
+			UseAnimatedBindingResult2(OtterModule.ease(0, { duration = UseTokensModuleResult.Time.Time_100 }))
 		end
-		var16(otterModule.ease(0, {
-			easingStyle = var3.Ease.StandardOut,
-			duration = var3.Time.Time_300
-		}))
-		var14(otterModule.ease(0, { duration = var3.Time.Time_100 }))
 	end, {})
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), reducedMotion (ref), var16 (ref), otterModule (copy), size800 (ref), var14 (ref), var3 (ref), var11 (ref)
-		if var12.current then return end
-		if reducedMotion then
-			var12.current = true
-			var16(otterModule.instant(size800))
-			var14(otterModule.instant(1))
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 149 ]]
+		-- upvalues: UseRefResult (copy), ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), OtterModule (upval), Size800 (copy), UseAnimatedBindingResult2 (copy), UseTokensModuleResult (copy), UseStateResult2 (copy)
+		if UseRefResult.current then return end
+		if ReducedMotion then
+			UseRefResult.current = true
+			UseAnimatedBindingResult2_1(OtterModule.instant(Size800))
+			UseAnimatedBindingResult2(OtterModule.instant(1))
 			
 			return
+		else
+			UseAnimatedBindingResult2_1(OtterModule.ease(Size800, {
+				easingStyle = UseTokensModuleResult.Ease.StandardIn,
+				duration = UseTokensModuleResult.Time.Time_100
+			}))
+			UseAnimatedBindingResult2(OtterModule.ease(1, { duration = UseTokensModuleResult.Time.Time_100 }))
+			UseStateResult2(true)
+			UseRefResult.current = true
 		end
-		var16(otterModule.ease(size800, {
-			easingStyle = var3.Ease.StandardIn,
-			duration = var3.Time.Time_100
-		}))
-		var14(otterModule.ease(1, { duration = var3.Time.Time_100 }))
-		var11(true)
-		var12.current = true
-	end, { size800, reducedMotion })
-	reactModule.useImperativeHandle(var1.sheetRef, function()
-		-- upvalues: var35 (ref)
-		return { close = var35 }
+	end, { Size800, ReducedMotion })
+	ReactModule.useImperativeHandle(WithDefaultsModuleResult.sheetRef, function() --[[ Line: 170 ]]
+		-- upvalues: UseResult1 (copy)
+		return { close = UseResult1 }
 	end, {})
-	local createElement = reactModule.createElement
-	createElement = createElement(viewModule, {
+	local Element = ReactModule.createElement(ViewModule, {
 		ClipsDescendants = true,
 		ZIndex = 2,
-		Size = if var1.centerSheetHeight and var9 then var9:map(function(p3)
-			return if p3 then UDim2.new(1, 0, 0, p3) else nil
+		Size = if WithDefaultsModuleResult.centerSheetHeight and MapResult then MapResult:map(function(YOffset) --[[ Line: 212 ]]
+			return if YOffset then UDim2.new(1, 0, 0, YOffset) else nil
 		end) else nil,
-		sizeConstraint = if var1.centerSheetHeight and var7 then {
-			MaxSize = var7:map(function(p3)
-				return Vector2.new(1e999, p3)
+		sizeConstraint = if WithDefaultsModuleResult.centerSheetHeight and UseBindingResult then {
+			MaxSize = UseBindingResult:map(function(Y): Vector2 --[[ Line: 218 ]]
+				return Vector2.new(1e999, Y)
 			end)
 		} else nil,
-		stateLayer = { affordance = stateLayerAffordanceModule.None },
-		onActivated = dashModule.noop,
-		onAbsoluteSizeChanged = function(value)
-			-- upvalues: var29 (ref)
-			var29(value.AbsoluteSize.Y)
+		stateLayer = { affordance = StateLayerAffordanceModule.None },
+		onActivated = DashModule.noop,
+		onAbsoluteSizeChanged = function(Frame) --[[ Line: 229 ]]
+			-- upvalues: UseBindingResult2_5 (copy)
+			UseBindingResult2_5(Frame.AbsoluteSize.Y)
 		end,
-		ref = p2,
-		selection = typesModule.nonSelectable,
-		selectionGroup = typesModule.isolatedSelectionGroup,
+		ref = Ref,
+		selection = TypesModule.nonSelectable,
+		selectionGroup = TypesModule.isolatedSelectionGroup,
 		tag = {
 			["bg-surface-100 stroke-default stroke-standard radius-large"] = true,
-			["size-full-0 auto-y"] = var1.centerSheetHeight == nil
+			["size-full-0 auto-y"] = WithDefaultsModuleResult.centerSheetHeight == nil
 		},
-		testId = var1.testId
+		testId = WithDefaultsModuleResult.testId
 	}, {
-		Content = reactModule.createElement(viewModule, {
+		Content = ReactModule.createElement(ViewModule, {
 			tag = "col items-center size-full-0 auto-y clip",
-			Size = if var1.centerSheetHeight and var9 then var9:map(function(p3)
-				return if p3 then UDim2.new(1, 0, 0, p3) else nil
+			Size = if WithDefaultsModuleResult.centerSheetHeight and MapResult then MapResult:map(function(YOffset) --[[ Line: 245 ]]
+				return if YOffset then UDim2.new(1, 0, 0, YOffset) else nil
 			end) else nil
-		}, reactModule.createElement(sheetContextModule.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: dashModule (copy), var17 (ref), var18 (ref), var9 (ref), var26 (ref), var27 (ref), var19 (ref), var20 (ref), var21 (write), var24 (write), var25 (write), var35 (ref), sheetTypeModule (copy), var1 (ref), var30 (ref), var31 (ref), var32 (ref)
+		}, ReactModule.createElement(SheetContextModule.Provider, {
+			value = ReactModule.useMemo(function() --[[ Line: 177 ]]
+				-- upvalues: DashModule (upval), UseBindingResult1 (copy), UseBindingResult2_1 (copy), MapResult (copy), UseBindingResult5 (copy), UseBindingResult2_4 (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), ChildrenHasFullBleedModuleResult (ref), UseBindingResult4 (ref), UseBindingResult2_3 (ref), UseResult1 (copy), SheetTypeModule (upval), WithDefaultsModuleResult (copy), UseRefResult1 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
 				return {
 					actionsHeight = 0,
 					sheetHeightAvailable = 0,
@@ -177,104 +181,102 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 					bottomPadding = 0,
 					innerScrollingEnabled = true,
 					hasRadius = true,
-					setActionsHeight = dashModule.noop,
-					hasActionsDivider = var17,
-					setHasActionsDivider = var18,
-					sheetContentHeight = var9,
-					setSheetContentHeight = dashModule.noop,
-					setSheetHeightAvailable = dashModule.noop,
-					innerScrollY = var26,
-					setInnerScrollY = var27,
-					hasHeader = var19,
-					setHasHeader = var20,
-					hasFullBleed = var21,
-					fullBleedHeight = var24,
-					setFullBleedHeight = var25,
-					closeSheet = var35,
-					sheetType = sheetTypeModule.Center,
-					testId = var1.testId,
-					closeAffordanceRef = var30,
-					contentStartRef = var31,
-					setContentStartRef = var32
+					setActionsHeight = DashModule.noop,
+					hasActionsDivider = UseBindingResult1,
+					setHasActionsDivider = UseBindingResult2_1,
+					sheetContentHeight = MapResult,
+					setSheetContentHeight = DashModule.noop,
+					setSheetHeightAvailable = DashModule.noop,
+					innerScrollY = UseBindingResult5,
+					setInnerScrollY = UseBindingResult2_4,
+					hasHeader = UseBindingResult3,
+					setHasHeader = UseBindingResult2_2,
+					hasFullBleed = ChildrenHasFullBleedModuleResult,
+					fullBleedHeight = UseBindingResult4,
+					setFullBleedHeight = UseBindingResult2_3,
+					closeSheet = UseResult1,
+					sheetType = SheetTypeModule.Center,
+					testId = WithDefaultsModuleResult.testId,
+					closeAffordanceRef = UseRefResult1,
+					contentStartRef = UseStateResult1,
+					setContentStartRef = UseStateResult2_1
 				}
 			end, {
-				var1.testId, var35, var31, var30, var9, var21
+				WithDefaultsModuleResult.testId, UseResult1, UseStateResult1, UseRefResult1,
+				MapResult, ChildrenHasFullBleedModuleResult
 			})
-		}, reactModule.createElement(elevationOwnerScope, { owner = var4 }, var1.children))),
-		CloseAffordance = reactModule.createElement(closeAffordanceModule, {
-			onActivated = var35,
-			ref = var30,
-			NextSelectionDown = var31,
-			variant = if var21 then closeAffordanceVariantModule.OverMedia else closeAffordanceVariantModule.Utility,
-			Position = UDim2.new(1, -var3.Margin.Small, 0, var3.Margin.Small),
+		}, ReactModule.createElement(ElevationOwnerScope, { owner = UseElevationModuleResult }, WithDefaultsModuleResult.children))),
+		CloseAffordance = ReactModule.createElement(CloseAffordanceModule, {
+			onActivated = UseResult1,
+			ref = UseRefResult1,
+			NextSelectionDown = UseStateResult1,
+			variant = if ChildrenHasFullBleedModuleResult then CloseAffordanceVariantModule.OverMedia else CloseAffordanceVariantModule.Utility,
+			Position = UDim2.new(1, -UseTokensModuleResult.Margin.Small, 0, UseTokensModuleResult.Margin.Small),
 			AnchorPoint = Vector2.new(1, 0),
-			Visible = var19:map(function(p3)
-				return not p3
+			Visible = UseBindingResult3:map(function(p2): boolean --[[ Line: 262 ]]
+				return not p2
 			end),
-			testId = `{var1.testId}--close-affordance`
+			testId = `{WithDefaultsModuleResult.testId}--close-affordance`
 		})
 	})
-	local var36 = reactModule.createElement(imageModule, {
+	local Element1 = ReactModule.createElement(ImageModule, {
 		ZIndex = 1,
 		tag = "anchor-center-left",
-		Image = SHADOW_IMAGE,
-		Size = var28:map(function(p3)
-			-- upvalues: SHADOW_SIZE (copy)
-			return UDim2.new(1, SHADOW_SIZE * 2, 0, p3 + SHADOW_SIZE * 2)
+		Image = SHADOWIMAGE,
+		Size = UseBindingResult6:map(function(p2): UDim2 --[[ Line: 271 ]]
+			-- upvalues: SHADOWSIZE (upval)
+			return UDim2.new(1, SHADOWSIZE * 2, 0, p2 + SHADOWSIZE * 2)
 		end),
-		Position = UDim2.new(0, -SHADOW_SIZE, 0.5, 0),
+		Position = UDim2.new(0, -SHADOWSIZE, 0.5, 0),
 		slice = {
 			scale = 2,
-			center = Rect.new(SHADOW_SIZE, SHADOW_SIZE, SHADOW_SIZE + 1, SHADOW_SIZE + 1)
+			center = Rect.new(SHADOWSIZE, SHADOWSIZE, SHADOWSIZE + 1, SHADOWSIZE + 1)
 		},
-		imageStyle = var3.Color.Extended.Black.Black_10
+		imageStyle = UseTokensModuleResult.Color.Extended.Black.Black_10
 	})
-	local var37 = var2
 	
-	if var37 then
-		var37 = reactModule.createElement
-		var37 = var37(reactModule.Fragment, nil, {
-			OverlayPortal = reactRobloxModule.createPortal(reactModule.createElement(viewModule, {
-				tag = "size-full",
-				ZIndex = var4.zIndex,
-				testId = `{var1.testId}--surface`
-			}, {
-				SheetContainer = reactModule.createElement(viewModule, {
-					ZIndex = 2,
-					tag = "col align-y-center anchor-center-center size-full padding-medium",
-					ref = var34,
-					sizeConstraint = { MaxSize = Vector2.new(var5, var6) },
-					Position = var15:map(function(p3)
-						return UDim2.new(0.5, 0, 0.5, p3)
-					end),
-					testId = `{var1.testId}--center-sheet-container`,
-					GroupTransparency = if var10 then var15:map(function(p3)
-						-- upvalues: size800 (ref)
-						return p3 / size800
-					end) else nil,
-					onAbsoluteSizeChanged = if flagsModule.FoundationCenterSheetHeightFix or var1.centerSheetHeight and var8 then function(p3)
-						-- upvalues: var3 (ref), var8 (ref), var6 (ref)
-						var8(math.min(p3.AbsoluteSize.Y - var3.Margin.Medium * 2, var6))
-					end else nil
-				}, nil),
-				Backdrop = reactModule.createElement(viewModule, {
-					ZIndex = 1,
-					Size = UDim2.fromScale(2, 2),
-					Position = UDim2.fromScale(-0.5, -0.5),
-					stateLayer = { affordance = stateLayerAffordanceModule.None },
-					backgroundStyle = var13:map(function(p3)
-						-- upvalues: var3 (ref)
-						return {
-							Color3 = var3.Color.Common.Backdrop.Color3,
-							Transparency = math.lerp(var3.Color.Common.Backdrop.Transparency, 1, p3)
-						}
-					end),
-					onActivated = var35,
-					testId = `{var1.testId}--backdrop`
-				})
-			}), var2),
-			SheetContent = reactRobloxModule.createPortal({ Sheet = createElement, Shadow = var36 }, var33)
-		})
-	end
-	return var37
+	return UseOverlayModuleResult and ReactModule.createElement(ReactModule.Fragment, nil, {
+		OverlayPortal = ReactRobloxModule.createPortal(ReactModule.createElement(ViewModule, {
+			tag = "size-full",
+			ZIndex = UseElevationModuleResult.zIndex,
+			testId = `{WithDefaultsModuleResult.testId}--surface`
+		}, {
+			SheetContainer = ReactModule.createElement(ViewModule, {
+				ZIndex = 2,
+				tag = "col align-y-center anchor-center-center size-full padding-medium",
+				ref = UseResult,
+				sizeConstraint = {
+					MaxSize = Vector2.new(UseScaledValueModuleResult, UseScaledValueModuleResult1)
+				},
+				Position = UseAnimatedBindingResult1:map(function(YOffset): UDim2 --[[ Line: 298 ]]
+					return UDim2.new(0.5, 0, 0.5, YOffset)
+				end),
+				testId = `{WithDefaultsModuleResult.testId}--center-sheet-container`,
+				GroupTransparency = if UseStateResult then UseAnimatedBindingResult1:map(function(p2) --[[ Line: 304 ]]
+					-- upvalues: Size800 (copy)
+					return p2 / Size800
+				end) else nil,
+				onAbsoluteSizeChanged = if FlagsModule.FoundationCenterSheetHeightFix or WithDefaultsModuleResult.centerSheetHeight and UseBindingResult2 then function(Frame) --[[ Line: 310 ]]
+					-- upvalues: UseTokensModuleResult (copy), UseBindingResult2 (copy), UseScaledValueModuleResult1 (copy)
+					UseBindingResult2((math.min(Frame.AbsoluteSize.Y - UseTokensModuleResult.Margin.Medium * 2, UseScaledValueModuleResult1)))
+				end else nil
+			}, nil),
+			Backdrop = ReactModule.createElement(ViewModule, {
+				ZIndex = 1,
+				Size = UDim2.fromScale(2, 2),
+				Position = UDim2.fromScale(-0.5, -0.5),
+				stateLayer = { affordance = StateLayerAffordanceModule.None },
+				backgroundStyle = UseAnimatedBindingResult:map(function(Alpha: number) --[[ Line: 323 ]]
+					-- upvalues: UseTokensModuleResult (copy)
+					return {
+						Color3 = UseTokensModuleResult.Color.Common.Backdrop.Color3,
+						Transparency = math.lerp(UseTokensModuleResult.Color.Common.Backdrop.Transparency, 1, Alpha)
+					}
+				end),
+				onActivated = UseResult1,
+				testId = `{WithDefaultsModuleResult.testId}--backdrop`
+			})
+		}), UseOverlayModuleResult),
+		SheetContent = ReactRobloxModule.createPortal({ Sheet = Element, Shadow = Element1 }, UseMemoResult)
+	})
 end))

@@ -1,7 +1,7 @@
-﻿return function(p1)
-	local thread = coroutine.create(p1)
+﻿return function(Callback) --[[ Line: 1 ]]
+	local Thread = coroutine.create(Callback)
 	
-	return (function(p2, p3, ...)
-		return if p3 then if coroutine.status(p2) == "dead" then ... else nil else nil
-	end)(thread, coroutine.resume(thread))
+	return (function(Thread, p1, ...) --[[ Line: 2 ]]
+		return if p1 and coroutine.status(Thread) == "dead" then ... else nil
+	end)(Thread, coroutine.resume(Thread))
 end

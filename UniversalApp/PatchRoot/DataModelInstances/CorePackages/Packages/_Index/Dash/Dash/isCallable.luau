@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return if not (type(p1) == "function" or type(p1) ~= "table" or not getmetatable(p1)) then getmetatable(p1).__call ~= nil else true
+﻿return function(Callback): boolean --[[ Line: 7 | Named "isCallable" ]]
+	return type(Callback) == "function" or (if type(Callback) == "table" and getmetatable(Callback) then getmetatable(Callback).__call ~= nil else false)
 end

@@ -1,47 +1,47 @@
-﻿return function(value)
+﻿return function(p1) --[[ Line: 29 | Named "createSignal" ]]
 	local t = {}
-	local t_1 = {}
-	local var1 = value
-	local var2 = false
+	local Tbl = {}
+	local v1 = p1
+	local Flag = false
 	
 	return {
-		subscribe = function(_, p1)
-			-- upvalues: var2 (write), t (ref), t_1 (ref)
-			local t_2 = { unsubscribed = false, callback = p1 }
+		subscribe = function(_, Callback) --[[ Line: 36 ]]
+			-- upvalues: Flag (ref), t (copy), Tbl (copy)
+			local config = { unsubscribed = false, callback = Callback }
 			
-			if var2 and not t[p1] then
-				t_1[p1] = t_2
+			if Flag and not t[Callback] then
+				Tbl[Callback] = config
 			else
-				t[p1] = t_2
+				t[Callback] = config
 			end
 			return {
-				unsubscribe = function(_)
-					-- upvalues: t_2 (ref), t (copy), p1 (ref), t_1 (copy)
-					t_2.unsubscribed = true
-					t[p1] = nil
-					t_1[p1] = nil
+				unsubscribe = function(_) --[[ Line: 50 ]]
+					-- upvalues: config (copy), t (upval), Callback (copy), Tbl (upval)
+					config.unsubscribed = true
+					t[Callback] = nil
+					Tbl[Callback] = nil
 				end
 			}
 		end,
-		getValue = function(_)
-			-- upvalues: var1 (write)
-			return var1
+		getValue = function(_) --[[ Line: 61 ]]
+			-- upvalues: v1 (ref)
+			return v1
 		end
-	}, function(p1)
-		-- upvalues: var1 (write), var2 (write), t (ref), t_1 (ref)
-		var1 = p1
-		var2 = true
+	}, function(p2) --[[ Line: 65 | Named "fire" ]]
+		-- upvalues: v1 (ref), Flag (ref), t (copy), Tbl (copy)
+		v1 = p2
+		Flag = true
 		
-		for i, v in t do
-			if not v.unsubscribed and not t_1[i] then
-				i(p1)
+		for i, value in t do
+			if not value.unsubscribed and not Tbl[i] then
+				i(p2)
 			end
 		end
-		var2 = false
+		Flag = false
 		
-		for i_1, v_1 in t_1 do
-			t[i_1] = v_1
+		for i1, value1 in Tbl do
+			t[i1] = value1
 		end
-		table.clear(t_1)
+		table.clear(Tbl)
 	end
 end

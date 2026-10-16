@@ -1,54 +1,53 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
-local var1 = game:DefineFastInt("UGCValidateFacialBoundsScale", 120) / 100
-local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
-local _ = require(parent.util.Types)
-local pcallDeferredModule = require(parent.util.pcallDeferred)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
-local getEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule = require(parent.flags.getEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacs)
+local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
+local UGCValidateFacialBoundsScaleRatio = game:DefineFastInt("UGCValidateFacialBoundsScale", 120) / 100
+local GetExpectedPartSizeModule = require(Parent.util.getExpectedPartSize)
+local _ = require(Parent.util.Types)
+local PcallDeferredModule = require(Parent.util.pcallDeferred)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
+local GetEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule = require(Parent.flags.getEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacs)
 
-local function validateFacialBounds(p1, p2)
-	-- upvalues: pcallDeferredModule (ref), getExpectedPartSizeModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), var1 (ref)
-	local isServer = p2.isServer
-	local var2, var3 = pcallDeferredModule(function()
-		-- upvalues: getExpectedPartSizeModule (copy), p1 (ref), p2 (ref), getEditableMeshFromContextModule (copy), UGCValidationService (copy), var1 (copy)
-		local var4 = getExpectedPartSizeModule(p1, p2)
-		local var5, var6 = getEditableMeshFromContextModule(p1, "MeshId", p2)
+local function validateFacialBounds(Object, p1) --[[ Line: 27 ]]
+	-- upvalues: PcallDeferredModule (copy), GetExpectedPartSizeModule (copy), GetEditableMeshFromContextModule (copy), UGCValidationService (copy), UGCValidateFacialBoundsScaleRatio (copy)
+	local IsServer = p1.isServer
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 33 ]]
+		-- upvalues: GetExpectedPartSizeModule (upval), Object (copy), p1 (copy), GetEditableMeshFromContextModule (upval), UGCValidationService (upval), UGCValidateFacialBoundsScaleRatio (upval)
+		local ExpectedPartSizeModule = GetExpectedPartSizeModule(Object, p1)
+		local MeshId, MeshId2 = GetEditableMeshFromContextModule(Object, "MeshId", p1)
 		
-		if not var5 then
+		if not MeshId then
 			error("Failed to retrieve MeshContent")
 		end
-		return UGCValidationService:ValidateEditableMeshFacialBounds(var6, var1, var4)
-	end, p2)
+		return UGCValidationService:ValidateEditableMeshFacialBounds(MeshId2, UGCValidateFacialBoundsScaleRatio, ExpectedPartSizeModule)
+	end, p1)
 	
-	if var2 then
-		if var3 then
-			return true
-		end
-		return false, {
-			string.format("DynamicHead (%s) when emoting surpasses the expected bounding box", p1:GetFullName())
-		}
-	else
-		local formattedText = string.format("Failed to load mesh data for '%s'. Make sure the mesh exists and try again.", p1:GetFullName())
+	if not PcallDeferredModuleResult then
+		local Formatted = string.format("Failed to load mesh data for '%s'. Make sure the mesh exists and try again.", Object:GetFullName())
 		
-		if isServer ~= nil and isServer then
-			error(formattedText)
+		if IsServer ~= nil and IsServer then
+			error(Formatted)
 		end
-		return false, { formattedText }
+		return false, { Formatted }
+	elseif PcallDeferredModuleResult2 then
+		return true
+	else
+		return false, {
+			string.format("DynamicHead (%s) when emoting surpasses the expected bounding box", Object:GetFullName())
+		}
 	end
 end
 
-return function(p1, p2)
-	-- upvalues: failureReasonsAccumulatorModule (ref), getEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule (ref), validateFacialBounds (ref), analyticsModule (ref)
-	local currentTime = tick()
-	local var2 = failureReasonsAccumulatorModule.new()
+return function(p1, p2) --[[ Line: 67 | Named "validateDynamicHeadData" ]]
+	-- upvalues: FailureReasonsAccumulatorModule (copy), GetEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule (copy), validateFacialBounds (copy), AnalyticsModule (copy)
+	local CurrentTime = tick()
+	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	
-	if not getEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule() then
-		var2:updateReasons(validateFacialBounds(p1, p2))
+	if not GetEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule() then
+		NewFailureReasonsAccumulator:updateReasons(validateFacialBounds(p1, p2))
 	end
-	analyticsModule.recordScriptTime(script.Name, currentTime, p2)
+	AnalyticsModule.recordScriptTime(script.Name, CurrentTime, p2)
 	
-	return var2:getFinalResults()
+	return NewFailureReasonsAccumulator:getFinalResults()
 end

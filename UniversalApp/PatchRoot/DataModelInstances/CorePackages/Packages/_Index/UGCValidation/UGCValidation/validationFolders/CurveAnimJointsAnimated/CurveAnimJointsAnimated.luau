@@ -1,26 +1,26 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
 	},
 	requiredData = {
-		validationEnumsModule.SharedDataMember.curveAnimations,
-		validationEnumsModule.SharedDataMember.curveAnimComputedFrames
+		ValidationEnumsModule.SharedDataMember.curveAnimations,
+		ValidationEnumsModule.SharedDataMember.curveAnimComputedFrames
 	},
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref)
-		for i, v in p2.curveAnimComputedFrames.tracks do
-			if v.pos or v.rot then return end
+	run = function(p1, p2) --[[ Line: 18 ]]
+		-- upvalues: ErrorSourceStringsModule (copy)
+		for _, track in p2.curveAnimComputedFrames.tracks do
+			if track.pos or track.rot then return end
 		end
-		p1:fail(errorSourceStringsModule.Keys.CurveAnim_NoJointManipulation)
+		p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_NoJointManipulation)
 	end
 }

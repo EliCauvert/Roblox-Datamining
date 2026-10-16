@@ -1,100 +1,99 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local core = parent_1.Core
-local parent_2 = parent_1.Parent
-local tModule = require(parent_2.t)
-local validateColorInfoModule = require(core.Style.Validator.validateColorInfo)
-local validateFontInfoModule = require(core.Style.Validator.validateFontInfo)
-local validateTypographyInfoModule = require(core.Style.Validator.validateTypographyInfo)
-local roactModule = require(parent_2.Roact)
-local reactModule = require(parent_2.React)
-local withStyleModule = require(core.Style.withStyle)
-local genericTextLabelModule = require(parent_1.Core.Text.GenericTextLabel.GenericTextLabel)
-local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
-local iconSizeModule = require(parent.ImageSet.Enum.IconSize)
-local getIconSizeModule = require(parent.ImageSet.getIconSize)
-local imagesModule = require(parent.ImageSet.Images)
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local cellTailDescription = roactModule.PureComponent:extend("CellTailDescription")
-cellTailDescription.validateProps = tModule.strictInterface({
-	text = tModule.optional(tModule.string),
-	textColor = tModule.optional(validateColorInfoModule),
-	textFont = tModule.optional(tModule.union(validateFontInfoModule, validateTypographyInfoModule)),
-	renderTextOverride = tModule.optional(tModule.callback),
-	showArrow = tModule.optional(tModule.boolean),
-	infoIcon = tModule.optional(tModule.string),
-	testId = tModule.optional(tModule.string)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Core = Parent1.Core
+local Parent2 = Parent1.Parent
+local TModule = require(Parent2.t)
+local RoactModule = require(Parent2.Roact)
+local ReactModule = require(Parent2.React)
+local WithStyleModule = require(Core.Style.withStyle)
+local GenericTextLabelModule = require(Parent1.Core.Text.GenericTextLabel.GenericTextLabel)
+local ImageSetComponentModule = require(Core.ImageSet.ImageSetComponent)
+local IconSizeModule = require(Parent.ImageSet.Enum.IconSize)
+local GetIconSizeModule = require(Parent.ImageSet.getIconSize)
+local ImagesModule = require(Parent.ImageSet.Images)
+local UIBloxConfigModule = require(Parent1.UIBloxConfig)
+local CellTailDescription = RoactModule.PureComponent:extend("CellTailDescription")
+CellTailDescription.validateProps = TModule.strictInterface({
+	text = TModule.optional(TModule.string),
+	textColor = TModule.optional((require(Core.Style.Validator.validateColorInfo))),
+	textFont = TModule.optional(TModule.union(require(Core.Style.Validator.validateFontInfo), (require(Core.Style.Validator.validateTypographyInfo)))),
+	renderTextOverride = TModule.optional(TModule.callback),
+	showArrow = TModule.optional(TModule.boolean),
+	infoIcon = TModule.optional(TModule.string),
+	testId = TModule.optional(TModule.string)
 })
-cellTailDescription.defaultProps = {
+CellTailDescription.defaultProps = {
 	showArrow = false,
 	infoIcon = nil,
 	testId = "--uiblox-cell-tail-description"
 }
 
-function cellTailDescription.init(p1)
-	-- upvalues: roactModule (ref), genericTextLabelModule (ref)
-	function p0.getDescription(p2, p3, p4, p5, p6)
-		-- upvalues: roactModule (copy), genericTextLabelModule (copy)
-		local var1 = nil
+function CellTailDescription.init(p1) --[[ Line: 44 ]]
+	-- upvalues: RoactModule (copy), GenericTextLabelModule (copy)
+	function p1.getDescription(Text, ColorStyle, FontStyle, LayoutOrder, Callback) --[[ Line: 45 ]]
+		-- upvalues: RoactModule (upval), GenericTextLabelModule (upval)
+		local Element = nil
 		
-		if p2 then
-			if p6 then
-				var1 = p6()
+		if Text then
+			if Callback then
+				Element = Callback()
 			end
-			var1 = var1 or roactModule.createElement(genericTextLabelModule, {
-				BackgroundTransparency = 1,
-				LayoutOrder = p5,
-				AutomaticSize = Enum.AutomaticSize.XY,
-				Text = p2,
-				colorStyle = p3,
-				fontStyle = p4
-			})
+			if not Element then
+				Element = RoactModule.createElement(GenericTextLabelModule, {
+					BackgroundTransparency = 1,
+					LayoutOrder = LayoutOrder,
+					AutomaticSize = Enum.AutomaticSize.XY,
+					Text = Text,
+					colorStyle = ColorStyle,
+					fontStyle = FontStyle
+				})
+			end
 		end
-		return var1
+		return Element
 	end
 end
 
-function cellTailDescription.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref), reactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), imagesModule (ref)
-	local text = p1.props.text
-	local renderTextOverride = p1.props.renderTextOverride
-	local showArrow = p1.props.showArrow
-	local var1 = p1.props.infoIcon ~= nil
+function CellTailDescription.render(p1) --[[ Line: 69 ]]
+	-- upvalues: WithStyleModule (copy), RoactModule (copy), ReactModule (copy), ImageSetComponentModule (copy), UIBloxConfigModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), ImagesModule (copy)
+	local Text = p1.props.text
+	local RenderTextOverride = p1.props.renderTextOverride
+	local ShowArrow = p1.props.showArrow
+	local HasInfoIcon = p1.props.infoIcon ~= nil
 	
-	return if text or showArrow or var1 then withStyleModule(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), reactModule (copy), text (ref), renderTextOverride (ref), showArrow (ref), imageSetComponentModule (copy), UIBloxConfigModule (copy), getIconSizeModule (copy), iconSizeModule (copy), imagesModule (copy), var1 (ref)
-		return roactModule.createElement("Frame", {
+	return if Text or ShowArrow or HasInfoIcon then WithStyleModule(function(p2) --[[ Line: 79 ]]
+		-- upvalues: p1 (copy), RoactModule (upval), ReactModule (upval), Text (copy), RenderTextOverride (copy), ShowArrow (copy), ImageSetComponentModule (upval), UIBloxConfigModule (upval), GetIconSizeModule (upval), IconSizeModule (upval), ImagesModule (upval), HasInfoIcon (copy)
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			[reactModule.Tag] = if p1.props.testId then `data-testid={p1.props.testId}` else nil
+			[ReactModule.Tag] = if p1.props.testId then `data-testid={p1.props.testId}` else nil
 		}, {
-			ListLayout = roactModule.createElement("UIListLayout", {
+			ListLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				Padding = UDim.new(0, 8)
 			}),
-			Description = p1.getDescription(text, p1.props.textColor or p2.Theme.TextDefault, p1.props.textFont or p2.Font.Body, 1, renderTextOverride),
-			RightArrow = showArrow and (roactModule.createElement(imageSetComponentModule.Label, {
+			Description = p1.getDescription(Text, p1.props.textColor or p2.Theme.TextDefault, p1.props.textFont or p2.Font.Body, 1, RenderTextOverride),
+			RightArrow = ShowArrow and RoactModule.createElement(ImageSetComponentModule.Label, {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
-				Size = if UIBloxConfigModule.enableScalingForSomeEdpIcons then UDim2.fromOffset(getIconSizeModule(iconSizeModule.Small, p2), getIconSizeModule(iconSizeModule.Small, p2)) else UDim2.fromOffset(getIconSizeModule(iconSizeModule.Small), getIconSizeModule(iconSizeModule.Small)),
-				Image = imagesModule["icons/navigation/pushRight_small"],
+				Size = if UIBloxConfigModule.enableScalingForSomeEdpIcons then UDim2.fromOffset(GetIconSizeModule(IconSizeModule.Small, p2), GetIconSizeModule(IconSizeModule.Small, p2)) else UDim2.fromOffset(GetIconSizeModule(IconSizeModule.Small), GetIconSizeModule(IconSizeModule.Small)),
+				Image = ImagesModule["icons/navigation/pushRight_small"],
 				ImageColor3 = p2.Theme.TextEmphasis.Color,
 				ImageTransparency = p2.Theme.TextEmphasis.Transparency
-			}) or nil),
-			InfoIcon = var1 and (roactModule.createElement(imageSetComponentModule.Label, {
+			}) or nil,
+			InfoIcon = HasInfoIcon and RoactModule.createElement(ImageSetComponentModule.Label, {
 				LayoutOrder = 2,
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				Size = if UIBloxConfigModule.enableScalingForSomeEdpIcons then UDim2.fromOffset(getIconSizeModule(iconSizeModule.Small, p2), getIconSizeModule(iconSizeModule.Small, p2)) else UDim2.fromOffset(getIconSizeModule(iconSizeModule.Small), getIconSizeModule(iconSizeModule.Small)),
+				Size = if UIBloxConfigModule.enableScalingForSomeEdpIcons then UDim2.fromOffset(GetIconSizeModule(IconSizeModule.Small, p2), GetIconSizeModule(IconSizeModule.Small, p2)) else UDim2.fromOffset(GetIconSizeModule(IconSizeModule.Small), GetIconSizeModule(IconSizeModule.Small)),
 				Image = p1.props.infoIcon,
 				ImageColor3 = p2.Theme.IconEmphasis.Color,
 				ImageTransparency = p2.Theme.IconEmphasis.Transparency
-			}) or nil)
+			}) or nil
 		})
 	end) else nil
 end
 
-return cellTailDescription
+return CellTailDescription

@@ -1,75 +1,76 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactUtilsModule = require(parent.ReactUtils)
-local flagsModule = require(foundation.Utility.Flags)
-local _ = require(foundation.Utility.Plugin.StudioUri)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Foundation.Utility.Plugin.StudioUri)
 local _ = require(script.Parent.Types)
 
-return function(p1)
-	-- upvalues: reactModule (ref), reactUtilsModule (ref), flagsModule (ref)
-	local var1
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactUtilsModule.useRefToState({
+return function(p1) --[[ Line: 15 | Named "usePanel" ]]
+	-- upvalues: ReactModule (copy), ReactUtilsModule (copy), FlagsModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefToStateResult = ReactUtilsModule.useRefToState({
 		anchorUri = p1.anchorUri,
 		position = p1.position,
 		depth = p1.depth,
 		parentPopoverId = p1.parentPopoverId,
-		isFocusable = if flagsModule.FoundationPopoverPluginFocusable then p1.isFocusable else nil
+		isFocusable = if FlagsModule.FoundationPopoverPluginFocusable then p1.isFocusable else nil
 	})
-	local var4 = reactModule.useRef(p1.onClose)
-	var4.current = p1.onClose
-	local var5 = reactModule.useRef(p1.registerPanelAsync)
-	var5.current = p1.registerPanelAsync
-	local _ = nil
+	local UseRefResult1 = ReactModule.useRef(p1.onClose)
+	UseRefResult1.current = p1.onClose
+	local UseRefResult2 = ReactModule.useRef(p1.registerPanelAsync)
+	UseRefResult2.current = p1.registerPanelAsync
+	local Value = nil
 	
-	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		local var6, var7 = reactModule.useState(false)
-		local var8 = reactModule.useCallback(function()
-			-- upvalues: var7 (ref), var4 (ref)
-			var7(true)
-			var4.current()
+	if FlagsModule.FoundationPopoverPluginOverlayMeasurement then
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+		local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+			-- upvalues: UseStateResult2 (copy), UseRefResult1 (copy)
+			UseStateResult2(true)
+			UseRefResult1.current()
 		end, {})
-		local var9 = reactUtilsModule.useAsync(function()
-			-- upvalues: p1 (ref), var6 (ref), var5 (ref), var3 (ref), var8 (ref), flagsModule (copy), var2 (ref)
-			if p1.isOpen and not var6 then
-				local var10, var11 = var5.current(var3.current.anchorUri, var3.current.position, var8, var3.current.depth, var3.current.parentPopoverId, if flagsModule.FoundationPopoverPluginFocusable then var3.current.isFocusable else nil)
-				var2.current = var11
+		local UseAsyncResult = ReactUtilsModule.useAsync(function() --[[ Line: 59 ]]
+			-- upvalues: p1 (copy), UseStateResult (copy), UseRefResult2 (copy), UseRefToStateResult (copy), UseResult (copy), FlagsModule (upval), UseRefResult (copy)
+			if p1.isOpen and not UseStateResult then
+				local CurrentResult, CurrentResult2 = UseRefResult2.current(UseRefToStateResult.current.anchorUri, UseRefToStateResult.current.position, UseResult, UseRefToStateResult.current.depth, UseRefToStateResult.current.parentPopoverId, if FlagsModule.FoundationPopoverPluginFocusable then UseRefToStateResult.current.isFocusable else nil)
+				UseRefResult.current = CurrentResult2
 				
-				return var10
-			elseif var2.current then
-				var2.current()
-				var2.current = nil
+				return CurrentResult
+			end
+			if UseRefResult.current then
+				UseRefResult.current()
+				UseRefResult.current = nil
 			end
 			return nil
-		end, { p1.isOpen, var3, var6 })
-		var1 = if var6 or var9.status ~= "ok" then nil else var9.value
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var7 (ref)
+		end, { p1.isOpen, UseRefToStateResult, UseStateResult })
+		Value = if UseStateResult or UseAsyncResult.status ~= "ok" then nil else UseAsyncResult.value
+		ReactModule.useEffect(function() --[[ Line: 85 ]]
+			-- upvalues: p1 (copy), UseStateResult2 (copy)
 			if not p1.isOpen then
-				var7(false)
+				UseStateResult2(false)
 			end
 		end, { p1.isOpen })
 	else
-		local var10 = reactUtilsModule.useAsync(function()
-			-- upvalues: p1 (ref), var5 (ref), var3 (ref), var4 (ref), flagsModule (copy), var2 (ref)
+		local UseAsyncResult = ReactUtilsModule.useAsync(function() --[[ Line: 91 ]]
+			-- upvalues: p1 (copy), UseRefResult2 (copy), UseRefToStateResult (copy), UseRefResult1 (copy), FlagsModule (upval), UseRefResult (copy)
 			if p1.isOpen then
-				local var11, var12 = var5.current(var3.current.anchorUri, var3.current.position, var4.current, var3.current.depth, var3.current.parentPopoverId, if flagsModule.FoundationPopoverPluginFocusable then var3.current.isFocusable else nil)
-				var2.current = var12
+				local CurrentResult, CurrentResult2 = UseRefResult2.current(UseRefToStateResult.current.anchorUri, UseRefToStateResult.current.position, UseRefResult1.current, UseRefToStateResult.current.depth, UseRefToStateResult.current.parentPopoverId, if FlagsModule.FoundationPopoverPluginFocusable then UseRefToStateResult.current.isFocusable else nil)
+				UseRefResult.current = CurrentResult2
 				
-				return var11
-			elseif var2.current then
-				var2.current()
-				var2.current = nil
+				return CurrentResult
+			end
+			if UseRefResult.current then
+				UseRefResult.current()
+				UseRefResult.current = nil
 			end
 			return nil
-		end, { p1.isOpen, var3 })
-		var1 = if var10.status == "ok" then var10.value else nil
+		end, { p1.isOpen, UseRefToStateResult })
+		Value = if UseAsyncResult.status == "ok" then UseAsyncResult.value else nil
 	end
-	reactUtilsModule.useAsync(function()
-		-- upvalues: var1 (write), p1 (ref)
-		if var1 then
-			var1.updateAsync({
+	ReactUtilsModule.useAsync(function() --[[ Line: 116 ]]
+		-- upvalues: Value (ref), p1 (copy)
+		if Value then
+			Value.updateAsync({
 				targetWidgetUri = p1.anchorUri,
 				targetAnchorPoint = p1.position.targetAnchorPoint,
 				subjectAnchorPoint = p1.position.subjectAnchorPoint,
@@ -77,18 +78,19 @@ return function(p1)
 			})
 			
 			return nil
+		else
+			return nil
 		end
-		return nil
-	end, { var1, p1.anchorUri, p1.position })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		return function()
-			-- upvalues: var2 (copy)
-			if var2.current then
-				var2.current()
+	end, { Value, p1.anchorUri, p1.position })
+	ReactModule.useEffect(function() --[[ Line: 129 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 130 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				UseRefResult.current()
 			end
 		end
 	end, {})
 	
-	return var1
+	return Value
 end

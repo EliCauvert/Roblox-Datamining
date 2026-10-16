@@ -1,26 +1,27 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-local function _(p1)
-	local replaced = string.gsub(p1, "\n\"", "\n`")
+local function _(Text: string): string --[[ Line: 11 | Named "replaceLeadingQuote" ]]
+	local Replaced = string.gsub(Text, "\n\"", "\n`")
 	
-	return if replaced:sub(1, 1) == "\"" then "`" .. string.sub(replaced, 2) else replaced
+	return if Replaced.sub(Replaced, 1, 1) == "\"" then "`" .. string.sub(Replaced, 2) else Replaced
 end
 
-local _ = function(p1)
-	local replaced = string.gsub(p1, "\"\n", "`\n")
+local _ = function(Text: string): string --[[ Line: 19 | Named "replaceTrailingQuote" ]]
+	local Replaced = string.gsub(Text, "\"\n", "`\n")
 	
-	return if replaced:sub(-1) == "\"" then string.sub(replaced, 1, -2) .. "`" else replaced
+	return if Replaced.sub(Replaced, -1) == "\"" then string.sub(Replaced, 1, -2) .. "`" else Replaced
 end
 
 return {
-	inspectStr = function(p1)
-		-- upvalues: httpService (ref)
-		if p1 == nil then
+	inspectStr = function(Input): string --[[ Line: 30 ]]
+		-- upvalues: HttpService (copy)
+		if Input == nil then
 			return "nil"
+		else
+			local Replaced = string.gsub(HttpService:JSONEncode(Input), "\n\"", "\n`")
+			local Replaced1 = string.gsub(if Replaced.sub(Replaced, 1, 1) == "\"" then "`" .. string.sub(Replaced, 2) else Replaced, "\"\n", "`\n")
+			
+			return (string.gsub(string.gsub(if Replaced1.sub(Replaced1, -1) == "\"" then string.sub(Replaced1, 1, -2) .. "`" else Replaced1, "\\\"", "\""), "\\\\", "\\"))
 		end
-		local replaced = string.gsub(httpService:JSONEncode(p1), "\n\"", "\n`")
-		local replaced_1 = string.gsub(if replaced:sub(1, 1) == "\"" then "`" .. string.sub(replaced, 2) else replaced, "\"\n", "`\n")
-		
-		return string.gsub(string.gsub(if replaced_1:sub(-1) == "\"" then string.sub(replaced_1, 1, -2) .. "`" else replaced_1, "\\\"", "\""), "\\\\", "\\")
 	end
 }

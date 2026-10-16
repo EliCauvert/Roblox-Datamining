@@ -1,54 +1,54 @@
-﻿local parent = script.Parent.Parent.Parent
-local inspect = require(parent.jsutils.inspect).inspect
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local kind = require(parent.language.kinds).Kind
-local isNonNullType = require(parent.type.definition).isNonNullType
-local utilities = parent.utilities
-local typeFromAST = require(utilities.typeFromAST).typeFromAST
-local isTypeSubTypeOf = require(utilities.typeComparators).isTypeSubTypeOf
-local t = {}
-local allowedVariableUsage = nil
-
-function t.VariablesInAllowedPositionRule(p1)
-	-- upvalues: typeFromAST (ref), allowedVariableUsage (write), inspect (ref), graphQLError (ref)
-	local t = {}
-	
-	return {
-		OperationDefinition = {
-			enter = function()
-				-- upvalues: t (write)
-				t = {}
-			end,
-			leave = function(_, p2)
-				-- upvalues: p1 (ref), t (write), typeFromAST (copy), allowedVariableUsage (copy), inspect (copy), graphQLError (copy)
-				for i, v in ipairs(p1:getRecursiveVariableUsages(p2)) do
-					local node = v.node
-					local type = v.type
-					local defaultValue = v.defaultValue
-					local value = node.name.value
-					local var1 = t[value]
-					
-					if var1 and type then
-						local schema = p1:getSchema()
-						local var2 = typeFromAST(schema, var1.type)
+﻿local Parent = script.Parent.Parent.Parent
+local InspectFunction = require(Parent.jsutils.inspect).inspect
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local Kind = require(Parent.language.kinds).Kind
+local IsNonNullTypeFunction = require(Parent.type.definition).isNonNullType
+local Utilities = Parent.utilities
+local TypeFromASTFunction = require(Utilities.typeFromAST).typeFromAST
+local IsTypeSubTypeOfFunction = require(Utilities.typeComparators).isTypeSubTypeOf
+local Callback = nil
+local VariablesInAllowedPositionRuleModule = {
+	VariablesInAllowedPositionRule = function(p1) --[[ Line: 27 ]]
+		-- upvalues: TypeFromASTFunction (copy), Callback (ref), InspectFunction (copy), GraphQLError (copy)
+		local t = {}
+		
+		return {
+			OperationDefinition = {
+				enter = function() --[[ Line: 32 ]]
+					-- upvalues: t (ref)
+					t = {}
+				end,
+				leave = function(_, p2) --[[ Line: 35 ]]
+					-- upvalues: p1 (copy), t (ref), TypeFromASTFunction (upval), Callback (upval), InspectFunction (upval), GraphQLError (upval)
+					for _, recursiveVariableUsage in ipairs((p1:getRecursiveVariableUsages(p2))) do
+						local Node = recursiveVariableUsage.node
+						local Type = recursiveVariableUsage.type
+						local DefaultValue = recursiveVariableUsage.defaultValue
+						local Value = Node.name.value
+						local Entry = t[Value]
 						
-						if var2 and not allowedVariableUsage(schema, var2, var1.defaultValue, type, defaultValue) then
-							p1:reportError(graphQLError.new(("Variable \"$%s\" of type \"%s\" used in position expecting type \"%s\"."):format(value, inspect(var2), inspect(type)), { var1, node }))
+						if Entry and Type then
+							local Schema = p1:getSchema()
+							local TypeFromASTResult = TypeFromASTFunction(Schema, Entry.type)
+							
+							if TypeFromASTResult and not Callback(Schema, TypeFromASTResult, Entry.defaultValue, Type, DefaultValue) then
+								p1:reportError(GraphQLError.new(("Variable \"$%s\" of type \"%s\" used in position expecting type \"%s\"."):format(Value, InspectFunction(TypeFromASTResult), (InspectFunction(Type))), { Entry, Node }))
+							end
 						end
 					end
 				end
+			},
+			VariableDefinition = function(_, p3) --[[ Line: 79 ]]
+				-- upvalues: t (ref)
+				t[p3.variable.name.value] = p3
 			end
-		},
-		VariableDefinition = function(_, p3)
-			-- upvalues: t (write)
-			t[p3.variable.name.value] = p3
-		end
-	}
+		}
+	end
+}
+
+Callback = function(Schema, p2, DefaultValue, Type, DefaultValue1) --[[ Line: 90 | Named "allowedVariableUsage" ]]
+	-- upvalues: IsNonNullTypeFunction (copy), Kind (copy), IsTypeSubTypeOfFunction (copy)
+	return if IsNonNullTypeFunction(Type) and not IsNonNullTypeFunction(p2) then (DefaultValue ~= nil and DefaultValue.kind ~= Kind.NULL or DefaultValue1 ~= nil) and IsTypeSubTypeOfFunction(Schema, p2, Type.ofType) else IsTypeSubTypeOfFunction(Schema, p2, Type)
 end
 
-allowedVariableUsage = function(p2, p3, p4, p5, p6)
-	-- upvalues: isNonNullType (ref), kind (ref), isTypeSubTypeOf (ref)
-	return if not (not isNonNullType(p5) or isNonNullType(p3)) then if (p4 ~= nil and p4.kind ~= kind.NULL) or p6 ~= nil then isTypeSubTypeOf(p2, p3, p5.ofType) else false else isTypeSubTypeOf(p2, p3, p5)
-end
-
-return t
+return VariablesInAllowedPositionRuleModule

@@ -1,53 +1,50 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local analyticsModule = require(parent.Analytics)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local AnalyticsModule = require(Parent.Analytics)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
 local list = { "InnerCage", "OuterCage" }
-local list_1 = { "ReferenceMeshId", "CageMeshId" }
-local list_2 = {
-	analyticsModule.ErrorType.validateLayeredClothingAccessory_NoInnerCageId,
-	analyticsModule.ErrorType.validateLayeredClothingAccessory_NoOuterCageId
+local FieldNames = { "ReferenceMeshId", "CageMeshId" }
+local list1 = {
+	AnalyticsModule.ErrorType.validateLayeredClothingAccessory_NoInnerCageId,
+	AnalyticsModule.ErrorType.validateLayeredClothingAccessory_NoOuterCageId
 }
 
-return function(p1, p2)
-	-- upvalues: list_1 (ref), list (ref), analyticsModule (ref), list_2 (ref), getEditableMeshFromContextModule (ref)
-	local wrapLayer = p1:FindFirstChild("Handle"):FindFirstChildOfClass("WrapLayer")
-	local t = {}
-	local t_1 = {}
+return function(Object, p1) --[[ Line: 17 | Named "getCageMeshInfos" ]]
+	-- upvalues: FieldNames (copy), list (copy), AnalyticsModule (copy), list1 (copy), GetEditableMeshFromContextModule (copy)
+	local WrapLayer = Object:FindFirstChild("Handle"):FindFirstChildOfClass("WrapLayer")
+	local List = {}
+	local List1 = {}
 	
-	if not wrapLayer then
+	if not WrapLayer then
 		return false, { "Missing wraplayer" }, nil
 	end
-	local list_3 = { wrapLayer.ReferenceMeshId, wrapLayer.CageMeshId }
+	local list2 = { WrapLayer.ReferenceMeshId, WrapLayer.CageMeshId }
 	
-	for i, v in list_1 do
-		local var1
-		local t_2 = {
-			fullName = string.format("%s %s", wrapLayer:GetFullName(), list[i]),
-			fieldName = v,
-			contentId = list_3[i],
-			context = p1.Name
+	for i, fieldName in FieldNames do
+		local config = {
+			fullName = string.format("%s %s", WrapLayer:GetFullName(), list[i]),
+			fieldName = fieldName,
+			contentId = list2[i],
+			context = Object.Name
 		}
 		
-		if t_2.contentId ~= "" then
-			var1 = if t_2.contentId == nil then p2.allowEditableInstances else true
+		if not (if config.contentId == "" then p1.allowEditableInstances else config.contentId ~= nil or p1.allowEditableInstances) then
+			AnalyticsModule.reportFailure(list1[i], nil, p1)
+			table.insert(List1, string.format("Missing %s (i.e. invalid %s) on layered clothing accessory '%s'. Make sure you are using a valid meshId and try again.\n", list[i], fieldName, Object.Name))
+			continue
 		end
-		if var1 then
-			local var2, var3 = getEditableMeshFromContextModule(wrapLayer, v, p2)
-			
-			if var2 then
-				t_2.editableMesh = var3
-				table.insert(t, t_2)
-			else
-				table.insert(t_1, string.format("Failed to %s for layered clothing accessory '%s'. Make sure mesh exists and try again.", list[i], p1.Name))
-			end
+		local EditableMeshFromContextModule, EditableMeshFromContextModule2 = GetEditableMeshFromContextModule(WrapLayer, fieldName, p1)
+		
+		if EditableMeshFromContextModule then
+			config.editableMesh = EditableMeshFromContextModule2
+			table.insert(List, config)
 		else
-			analyticsModule.reportFailure(list_2[i], nil, p2)
-			table.insert(t_1, string.format("Missing %s (i.e. invalid %s) on layered clothing accessory '%s'. Make sure you are using a valid meshId and try again.\n", list[i], v, p1.Name))
+			table.insert(List1, string.format("Failed to %s for layered clothing accessory '%s'. Make sure mesh exists and try again.", list[i], Object.Name))
 		end
 	end
-	if #t_1 > 0 then
-		return false, t_1, nil
+	if #List1 > 0 then
+		return false, List1, nil
+	else
+		return true, nil, List
 	end
-	return true, nil, t
 end

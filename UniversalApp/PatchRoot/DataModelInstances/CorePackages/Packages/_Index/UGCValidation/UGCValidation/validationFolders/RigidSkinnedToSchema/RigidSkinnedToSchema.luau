@@ -1,21 +1,21 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
-	fflag = require(parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning),
-	categories = { validationEnumsModule.UploadCategory.RIGID_ACCESSORY },
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref)
-		local handle = p2.renderMeshesData.Handle
+	fflag = require(Parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning),
+	categories = { ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY },
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
+	run = function(p1, p2) --[[ Line: 11 ]]
+		-- upvalues: ErrorSourceStringsModule (copy)
+		local Handle = p2.renderMeshesData.Handle
 		
-		if handle == nil then
+		if Handle == nil then
 			error("Schema should have ensured data exists for handle")
 		end
-		if #handle.editable:GetBones() > 0 then
-			p1:fail(errorSourceStringsModule.Keys.AccessorySkinning_RigidIsSkinned, nil, p2.rootInstance:FindFirstChild("Handle"))
+		if #Handle.editable:GetBones() > 0 then
+			p1:fail(ErrorSourceStringsModule.Keys.AccessorySkinning_RigidIsSkinned, nil, p2.rootInstance:FindFirstChild("Handle"))
 		end
 	end
 }

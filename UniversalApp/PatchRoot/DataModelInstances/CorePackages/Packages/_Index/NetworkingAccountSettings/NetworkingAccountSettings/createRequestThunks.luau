@@ -1,8 +1,8 @@
-﻿local parent = script.Parent
-local createGetEmailSettingsModule = require(parent.networkRequests.createGetEmailSettings)
-local _ = require(parent.Types.networkRequestsTypes)
+﻿local Parent = script.Parent
+local CreateGetEmailSettingsModule = require(Parent.networkRequests.createGetEmailSettings)
+local _ = require(Parent.Types.networkRequestsTypes)
 
-return function(p1)
-	-- upvalues: createGetEmailSettingsModule (ref)
-	return { GetEmailSettings = createGetEmailSettingsModule(p1) }
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: CreateGetEmailSettingsModule (copy)
+	return { GetEmailSettings = CreateGetEmailSettingsModule(p1) }
 end

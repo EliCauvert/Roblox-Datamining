@@ -1,12 +1,12 @@
 ﻿local _ = require(script:FindFirstAncestor("SceneUnderstanding").wiring.types)
 
-return function(p1)
-	local t = {}
+return function(p1) --[[ Line: 7 | Named "getOutputWires" ]]
+	local List = {}
 	
-	for i, v in p1:GetOutputPins() do
-		for i_1, v_1 in p1:GetConnectedWires(v) do
-			table.insert(t, v_1)
+	for _, outputPin in p1:GetOutputPins() do
+		for _, connectedWire in p1:GetConnectedWires(outputPin) do
+			table.insert(List, connectedWire)
 		end
 	end
-	return t
+	return List
 end

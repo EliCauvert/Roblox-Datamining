@@ -1,26 +1,26 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local inputSizeModule = require(foundation.Enums.InputSize)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Components.Types)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local getKnobSizeModule = require(script.Parent.getKnobSize)
-local iconSizeModule = require(foundation.Enums.IconSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Components.Types)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local GetKnobSizeModule = require(script.Parent.getKnobSize)
+local IconSizeModule = require(Foundation.Enums.IconSize)
 
-local function computeProps(p1)
-	local var1 = p1.size.X.Offset + p1.shadowPadding * 2
+local function computeProps(p1) --[[ Line: 38 ]]
+	local NewOffset = p1.size.X.Offset + p1.shadowPadding * 2
 	
 	return {
 		knob = { size = p1.size, iconSize = p1.iconSize },
 		knobShadow = {
-			size = UDim2.fromOffset(var1, var1),
+			size = UDim2.fromOffset(NewOffset, NewOffset),
 			padding = p1.shadowPadding
 		}
 	}
 end
 
-local function variantsFactory(p1)
-	-- upvalues: inputSizeModule (ref), computeProps (ref), iconSizeModule (ref), getKnobSizeModule (ref)
+local function variantsFactory(p1) --[[ Line: 57 ]]
+	-- upvalues: InputSizeModule (copy), computeProps (copy), IconSizeModule (copy), GetKnobSizeModule (copy)
 	return {
 		common = {
 			knob = {
@@ -29,24 +29,24 @@ local function variantsFactory(p1)
 			knobShadow = { tag = "position-center-center anchor-center-center" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = computeProps({
-				iconSize = iconSizeModule.XSmall,
-				size = getKnobSizeModule(p1, inputSizeModule.XSmall),
+			[InputSizeModule.XSmall] = computeProps({
+				iconSize = IconSizeModule.XSmall,
+				size = GetKnobSizeModule(p1, InputSizeModule.XSmall),
 				shadowPadding = p1.Padding.XXSmall
 			}),
-			[inputSizeModule.Small] = computeProps({
-				iconSize = iconSizeModule.Small,
-				size = getKnobSizeModule(p1, inputSizeModule.Small),
+			[InputSizeModule.Small] = computeProps({
+				iconSize = IconSizeModule.Small,
+				size = GetKnobSizeModule(p1, InputSizeModule.Small),
 				shadowPadding = p1.Padding.XSmall
 			}),
-			[inputSizeModule.Medium] = computeProps({
-				iconSize = iconSizeModule.Small,
-				size = getKnobSizeModule(p1, inputSizeModule.Medium),
+			[InputSizeModule.Medium] = computeProps({
+				iconSize = IconSizeModule.Small,
+				size = GetKnobSizeModule(p1, InputSizeModule.Medium),
 				shadowPadding = p1.Padding.Small
 			}),
-			[inputSizeModule.Large] = computeProps({
-				iconSize = iconSizeModule.Small,
-				size = getKnobSizeModule(p1, inputSizeModule.Large),
+			[InputSizeModule.Large] = computeProps({
+				iconSize = IconSizeModule.Small,
+				size = GetKnobSizeModule(p1, InputSizeModule.Large),
 				shadowPadding = p1.Padding.Small
 			})
 		},
@@ -63,9 +63,9 @@ local function variantsFactory(p1)
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local knob = variantsContextModule.useVariants("Knob", variantsFactory, p1)
+return function(p1, p2, p3) --[[ Line: 112 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local Knob = VariantsContextModule.useVariants("Knob", variantsFactory, p1)
 	
-	return composeStyleVariantModule(knob.common, knob.sizes[p2], knob.isInverse[p3])
+	return ComposeStyleVariantModule(Knob.common, Knob.sizes[p2], Knob.isInverse[p3])
 end

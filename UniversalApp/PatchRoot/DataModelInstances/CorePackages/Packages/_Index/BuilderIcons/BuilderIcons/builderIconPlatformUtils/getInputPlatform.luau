@@ -1,19 +1,19 @@
-﻿local userInputService = require(script.Parent.Parent.Services).UserInputService
-local platformModule = require(script.Parent.Platform)
-local t = {
-	ps4 = platformModule.PS4,
-	ps5 = platformModule.PS5,
-	xbox = platformModule.Xbox
+﻿local UserInputService = require(script.Parent.Parent.Services).UserInputService
+local PlatformModule = require(script.Parent.Platform)
+local config = {
+	ps4 = PlatformModule.PS4,
+	ps5 = PlatformModule.PS5,
+	xbox = PlatformModule.Xbox
 }
 
-return function()
-	-- upvalues: userInputService (ref), t (ref), platformModule (ref)
-	local buttonStartImageForKeyCode = userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonStart)
+return function() --[[ Line: 10 | Named "getInputPlatform" ]]
+	-- upvalues: UserInputService (copy), config (copy), PlatformModule (copy)
+	local ImageForKeyCode: string = UserInputService:GetImageForKeyCode(Enum.KeyCode.ButtonStart)
 	
-	for i, v in t do
-		if buttonStartImageForKeyCode:find(i) then
-			return v
+	for i, value in config do
+		if ImageForKeyCode:find(i) then
+			return value
 		end
 	end
-	return if userInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA) == "ButtonCross" then platformModule.PS5 else platformModule.Xbox
+	return if UserInputService:GetStringForKeyCode(Enum.KeyCode.ButtonA) == "ButtonCross" then PlatformModule.PS5 else PlatformModule.Xbox
 end

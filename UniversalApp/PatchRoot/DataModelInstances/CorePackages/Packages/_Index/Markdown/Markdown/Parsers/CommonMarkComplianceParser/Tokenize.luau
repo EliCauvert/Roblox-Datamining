@@ -1,29 +1,29 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
-local constantsModule = require(script.Parent.Parent.Constants)
-local postProcessTokensModule = require(script.Parent.PostProcessTokens)
-local utilsModule = require(script.Parent.Utils)
-local insert = table.insert
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local PostProcessTokensModule = require(script.Parent.PostProcessTokens)
+local UtilsModule = require(script.Parent.Utils)
+local InsertFunction = table.insert
 local list = { { "BREAK", "^\\\n" }, { "ESCAPE", "^\\(%p)" } }
-local list_1 = { { "IMAGE", "^!%[([^%]]+)%]%(([^%)]+)%)" } }
-local list_2 = {
+local list1 = { { "IMAGE", "^!%[([^%]]+)%]%(([^%)]+)%)" } }
+local list2 = {
 	{ "OPEN_CLOSE", "^<([%w-]+)%s?([^>]*)/>" },
 	{ "CLOSE", "^</([%w-]+)%s?([^>]*)>" },
 	{ "OPEN", "^<([%w-]+)%s?([^>]*)>" }
 }
-local list_3 = { { "BOLD_2", "^%*%*" }, { "BOLD", "^%*" } }
-local list_4 = { { "ITALIC_2", "^__" }, { "ITALIC", "^_" } }
-local list_5 = { { "STRIKE", "^~" } }
-local list_6 = { { "INLINE_CODE", "^`" } }
-local t = {
+local list3 = { { "BOLD_2", "^%*%*" }, { "BOLD", "^%*" } }
+local list4 = { { "ITALIC_2", "^__" }, { "ITALIC", "^_" } }
+local list5 = { { "STRIKE", "^~" } }
+local list6 = { { "INLINE_CODE", "^`" } }
+local config = {
 	["\\"] = list,
-	["!"] = list_1,
-	["<"] = list_2,
-	["*"] = list_3,
-	_ = list_4,
-	["~"] = list_5,
-	["`"] = list_6
+	["!"] = list1,
+	["<"] = list2,
+	["*"] = list3,
+	_ = list4,
+	["~"] = list5,
+	["`"] = list6
 }
-local t_1 = {
+local config1 = {
 	["\n"] = {
 		{ "LINE_BREAK", "^\n", 1 },
 		{ "HEADING", "^ ? ? ?(##?#?#?#?#?)[ \t]+", 1 },
@@ -53,12 +53,12 @@ local t_1 = {
 	["\\"] = list,
 	["-"] = { { "TABLE_HEADER", "^[-]+" } },
 	["="] = { { "TABLE_HEADER_2", "^[=]+" } },
-	["!"] = list_1,
+	["!"] = list1,
 	["|"] = { { "TABLE_DIVIDER", "^|" } },
-	["<"] = list_2,
-	["*"] = list_3,
-	_ = list_4,
-	["~"] = list_5,
+	["<"] = list2,
+	["*"] = list3,
+	_ = list4,
+	["~"] = list5,
 	["["] = {
 		{
 			"LINK",
@@ -78,126 +78,142 @@ local t_1 = {
 		{ "LINK", "^%[([^%]]*)%]%([ \t]*([^\n\t ]+)[ \t]*%)" },
 		{ "ACTION", "^%[%[([^%]]+)%]%]" }
 	},
-	["`"] = list_6
+	["`"] = list6
 }
-local t_2 = {
+local list7 = { { "LINE_BREAK", "^[ \t\r]+\n", 1 } }
+table.move(config1["\n"], 1, #config1["\n"], #list7 + 1, list7)
+local config2 = {
 	LINK = {
 		startToken = "LINK_START",
 		endToken = "LINK_END",
 		textStartOffset = 1,
-		mapToText = function(p1)
-			return if p1.capture then p1.capture[1] else ""
+		mapToText = function(p1) --[[ Line: 109 ]]
+			return p1.capture and p1.capture[1] or ""
 		end
 	}
 }
-local list_7 = { { "HEADING", "^  ? ?(#+)%s*\n", 1 } }
+local list71 = { { "HEADING", "^  ? ?(#+)%s*\n", 1 } }
 
-local function tokenizeTextSpan(p1, p2, p3, p4)
-	-- upvalues: t (ref), t_1 (ref), list_7 (ref), utilsModule (ref), constantsModule (ref), insert (ref), postProcessTokensModule (ref)
-	local var1, var2, var3, substring, var4, var5, characterContext, matchIndex_2
-	local var6 = 0
-	local var7 = 0
-	local var8 = 0
-	local t_2 = {}
-	while var6 <= #p1 do
-		var1 = if var6 == 0 and not p3 then "\n" else string.sub(p1, var6, var6)
-		local var9 = if p3 then t[var1] or {} else t_1[var1] or list_7
-		var2 = false
-		var3 = 0
+local function tokenizeTextSpan(Text: string, NewOffset: number, p1, p2) --[[ Line: 123 ]]
+	-- upvalues: config (copy), list7 (copy), config1 (copy), list71 (copy), UtilsModule (copy), ConstantsModule (copy), InsertFunction (copy), PostProcessTokensModule (copy)
+	local StartIndex = 0
+	local StartIndex1 = 0
+	local v1 = 0
+	local t = {}
+	local v2 = nil
+	local v3 = nil
+	local Segment = nil
+	local Flag = nil
+	while StartIndex <= #Text do
+		Segment = if StartIndex == 0 and not p1 then "\n" else string.sub(Text, StartIndex, StartIndex)
+		local Entry = if p1 then config[Segment] or {} elseif Segment == "\n" and v2 == "QUOTE" then list7 else config1[Segment] or list71
+		Flag = false
+		v3 = 0
 		
-		if var1 == "\n" and not p3 then
-			var3 = 1
-			var8 = var6
+		if Segment == "\n" and not p1 then
+			v3 = 1
+			v1 = StartIndex
 		end
-		for i, v in var9 do
-			local var10 = v[2]
-			local matchIndex, matchIndex_1 = string.find(p1, var10, var6 + var3)
+		local v4 = nil
+		local list1 = nil
+		local Segment1 = nil
+		local CharacterContext = nil
+		local Entry1 = nil
+		for _, value in Entry do
+			local Pattern = value[2]
+			local StartIndex2, EndIndex = string.find(Text, Pattern, StartIndex + v3)
 			
-			if matchIndex and matchIndex_1 then
-				substring = string.sub(p1, matchIndex, matchIndex_1)
-				var4 = v[1]
-				var5 = #substring - (v[3] or 0)
-				characterContext = nil
+			if StartIndex2 and EndIndex then
+				Segment1 = string.sub(Text, StartIndex2, EndIndex)
+				Entry1 = value[1]
+				v4 = #Segment1 - (value[3] or 0)
+				CharacterContext = nil
 				
-				if not p3 then
-					matchIndex_2, matchIndex_3 = string.find(substring, "\n[^\n]*$")
+				if not p1 then
+					local _, EndIndex1 = string.find(Segment1, "\n[^\n]*$")
 					
-					if matchIndex_3 then
-						var8 = matchIndex_3 + matchIndex
+					if EndIndex1 then
+						v1 = EndIndex1 + StartIndex2
 					end
 				end
-				if var4 ~= "ESCAPE" or not utilsModule.isInsideInlineCode(t_2, var8) then
-					if constantsModule.STYLED_TEXT[var4] then
-						characterContext = utilsModule.getCharacterContext(p1, var6, var3 + var5)
+				if Entry1 ~= "ESCAPE" or not UtilsModule.isInsideInlineCode(t, v1) then
+					if ConstantsModule.STYLED_TEXT[Entry1] then
+						CharacterContext = UtilsModule.getCharacterContext(Text, StartIndex, v3 + v4)
 					end
-					matchIndex_2 = { string.match(p1, var10, var6 + var3) }
+					list1 = { string.match(Text, Pattern, StartIndex + v3) }
 					
-					if not p3 or var1 ~= "<" or (#matchIndex_2 <= 0 or p4.inlineTags[matchIndex_2[1]]) then
-						if var6 ~= var7 then
-							insert(t_2, {
+					if not p1 or Segment ~= "<" or #list1 <= 0 or p2.inlineTags[list1[1]] then
+						if StartIndex ~= StartIndex1 then
+							InsertFunction(t, {
 								name = "TEXT",
-								text = string.sub(p1, var7, var6 - 1),
-								offset = var7 + p2
+								text = string.sub(Text, StartIndex1, StartIndex - 1),
+								offset = StartIndex1 + NewOffset
 							})
 						end
-						insert(t_2, {
-							name = var4,
-							text = substring,
-							capture = if #matchIndex_2 > 0 then matchIndex_2 else nil,
-							isBlock = not p3 and var1 == "\n",
-							offset = var6 + p2,
-							context = characterContext
-						})
-						var6 += var3 + var5
-						var7 = var6
-						var2 = true
+						local IsSegmentMatch: boolean = not p1 and Segment == "\n"
+						
+						if IsSegmentMatch then
+							v2 = Entry1
+						end
+						local config2 = {
+							name = Entry1,
+							text = Segment1,
+							capture = if #list1 > 0 then list1 else nil,
+							isBlock = IsSegmentMatch
+						}
+						config2.offset = StartIndex + NewOffset
+						config2.context = CharacterContext
+						InsertFunction(t, config2)
+						StartIndex += v3 + v4
+						StartIndex1 = StartIndex
+						Flag = true
 						break
 					end
 				end
 			end
 		end
-		if not var2 then
-			var6 += 1
+		if not Flag then
+			StartIndex += 1
 		end
 	end
-	if var6 ~= var7 then
-		insert(t_2, {
+	if StartIndex ~= StartIndex1 then
+		InsertFunction(t, {
 			name = "TEXT",
-			text = string.sub(p1, var7, var6 - 1),
-			offset = var7 + p2
+			text = string.sub(Text, StartIndex1, StartIndex - 1),
+			offset = StartIndex1 + NewOffset
 		})
 	end
-	return postProcessTokensModule(t_2)
+	return PostProcessTokensModule(t)
 end
 
-return function(p5, p6)
-	-- upvalues: tokenizeTextSpan (ref), t_2 (ref), insert (ref)
+return function(Text: string, p3) --[[ Line: 232 | Named "tokenize" ]]
+	-- upvalues: tokenizeTextSpan (copy), config2 (copy), InsertFunction (copy)
 	local t = {}
 	
-	for i, v in tokenizeTextSpan(p5, 0, false, p6) do
-		local name = t_2[v.name]
+	for _, value in tokenizeTextSpan(Text, 0, false, p3) do
+		local Entry = config2[value.name]
 		
-		if name then
+		if Entry then
 			local list = {
 				{
-					name = name.startToken,
-					offset = v.offset,
-					text = string.sub(p5, v.offset, v.offset + name.textStartOffset - 1),
-					capture = v.capture
+					name = Entry.startToken,
+					offset = value.offset,
+					text = string.sub(Text, value.offset, value.offset + Entry.textStartOffset - 1),
+					capture = value.capture
 				}
 			}
-			local var11 = name.mapToText(v)
-			local var12 = tokenizeTextSpan(var11, v.offset + name.textStartOffset, true, p6)
-			table.move(var12, 1, #var12, 2, list)
-			local var13 = v.offset + name.textStartOffset + #var11
-			insert(list, {
-				name = name.endToken,
-				offset = var13,
-				text = string.sub(p5, var13, v.offset + #v.text - 1)
+			local MapToTextResult = Entry.mapToText(value)
+			local KenizeTextSpan = tokenizeTextSpan(MapToTextResult, value.offset + Entry.textStartOffset, true, p3)
+			table.move(KenizeTextSpan, 1, #KenizeTextSpan, 2, list)
+			local NewOffset = value.offset + Entry.textStartOffset + #MapToTextResult
+			InsertFunction(list, {
+				name = Entry.endToken,
+				offset = NewOffset,
+				text = string.sub(Text, NewOffset, value.offset + #value.text - 1)
 			})
 			table.move(list, 1, #list, #t + 1, t)
 		else
-			insert(t, v)
+			InsertFunction(t, value)
 		end
 	end
 	return t

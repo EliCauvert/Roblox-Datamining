@@ -1,127 +1,127 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local dashModule = require(parent.Dash)
-local otterModule = require(parent.Otter)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local icon = builderIconsModule.Icon
-local iconButtonModule = require(foundation.Components.IconButton)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local scrollViewModule = require(foundation.Components.ScrollView)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local visibilityModule = require(foundation.Enums.Visibility)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local numberSequence = NumberSequence.new({
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local OtterModule = require(Parent.Otter)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local Icon = require(Parent.BuilderIcons).Icon
+local IconButtonModule = require(Foundation.Components.IconButton)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local ScrollViewModule = require(Foundation.Components.ScrollView)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local VisibilityModule = require(Foundation.Enums.Visibility)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local NumberSequence1 = NumberSequence.new({
 	NumberSequenceKeypoint.new(0, 0),
 	NumberSequenceKeypoint.new(0.8, 0),
 	NumberSequenceKeypoint.new(1, 1)
 })
-local numberSequence_1 = NumberSequence.new({
+local NumberSequence2 = NumberSequence.new({
 	NumberSequenceKeypoint.new(0, 1),
 	NumberSequenceKeypoint.new(0.2, 0),
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function OverflowButton(p1)
-	-- upvalues: reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconButtonModule (ref), inputSizeModule (ref)
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
+local function OverflowButton(p1) --[[ Line: 36 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconButtonModule (copy), InputSizeModule (copy)
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p1, {
 		tag = `col align-y-center size-0-full auto-x bg-surface-0 {p1.tag}`
 	}), {
-		UIGradient = reactModule.createElement("UIGradient", { Transparency = p1.gradient }),
-		Button = reactModule.createElement(iconButtonModule, {
+		UIGradient = ReactModule.createElement("UIGradient", { Transparency = p1.gradient }),
+		Button = ReactModule.createElement(IconButtonModule, {
 			onActivated = p1.onActivated,
-			size = if p1.size == inputSizeModule.Large or p1.size == inputSizeModule.Medium then inputSizeModule.Small else inputSizeModule.XSmall,
+			size = if p1.size == InputSizeModule.Large or p1.size == InputSizeModule.Medium then InputSizeModule.Small else InputSizeModule.XSmall,
 			icon = { name = p1.icon }
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), reactOtterModule (ref), dashModule (ref), otterModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), visibilityModule (ref), OverflowButton (ref), numberSequence (ref), icon (ref), numberSequence_1 (ref)
-	local var1, var2 = reactModule.useBinding(false)
-	local var3, var4 = reactModule.useBinding(false)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactOtterModule.useMotor(0, function(p2)
-		-- upvalues: var5 (ref)
-		local current = var5.current
+return function(p1) --[[ Line: 73 | Named "OverflowScrollContainer" ]]
+	-- upvalues: ReactModule (copy), ReactOtterModule (copy), DashModule (copy), OtterModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ScrollViewModule (copy), VisibilityModule (copy), OverflowButton (copy), NumberSequence1 (copy), Icon (copy), NumberSequence2 (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseMotorResult = ReactOtterModule.useMotor(0, function(X) --[[ Line: 77 ]]
+		-- upvalues: UseRefResult (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current.CanvasPosition = Vector2.new(p2, 0)
+		if Current then
+			Current.CanvasPosition = Vector2.new(X, 0)
 			
 			return
 		end
 	end)
-	local var7 = reactModule.useCallback(dashModule.throttle(function(p2)
-		-- upvalues: var2 (ref), var4 (ref)
-		if p2.AbsoluteWindowSize.X == 0 then
+	local UseResult = ReactModule.useCallback(DashModule.throttle(function(ScrollFrame) --[[ Line: 86 ]]
+		-- upvalues: UseBindingResult2 (copy), UseBindingResult2_1 (copy)
+		if ScrollFrame.AbsoluteWindowSize.X ~= 0 then
+			UseBindingResult2(ScrollFrame.AbsoluteWindowSize.X + ScrollFrame.CanvasPosition.X < ScrollFrame.AbsoluteCanvasSize.X - 1)
+			UseBindingResult2_1(ScrollFrame.CanvasPosition.X ~= 0)
+			
 			return
 		end
-		var2(p2.AbsoluteWindowSize.X + p2.CanvasPosition.X < p2.AbsoluteCanvasSize.X - 1)
-		var4(p2.CanvasPosition.X ~= 0)
 	end, 0.2), {})
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var5 (ref), var6 (ref), otterModule (copy)
-		local current = var5.current
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 99 ]]
+		-- upvalues: UseRefResult (copy), UseMotorResult (copy), OtterModule (upval)
+		local Current = UseRefResult.current
 		
-		if current then
-			var6(otterModule.ease(current.CanvasPosition.X + p2, { duration = 0.2, easingStyle = Enum.EasingStyle.Quad }))
+		if Current then
+			UseMotorResult(OtterModule.ease(Current.CanvasPosition.X + p2, { duration = 0.2, easingStyle = Enum.EasingStyle.Quad }))
 			
 			return
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var7 (ref)
-		if var5.current then
-			var7(var5.current)
+	ReactModule.useEffect(function() --[[ Line: 113 ]]
+		-- upvalues: UseRefResult (copy), UseResult (copy)
+		if UseRefResult.current then
+			UseResult(UseRefResult.current)
 		end
 	end, {})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, { tag = "auto-y", Size = UDim2.fromScale(1, 0) }), {
-		Scroll = reactModule.createElement(scrollViewModule, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p1, { tag = "auto-y", Size = UDim2.fromScale(1, 0) }), {
+		Scroll = ReactModule.createElement(ScrollViewModule, {
 			LayoutOrder = 1,
 			Size = UDim2.fromScale(1, 1),
-			onCanvasPositionChanged = var7,
-			onAbsoluteWindowSizeChanged = var7,
-			scrollingFrameRef = var5,
+			onCanvasPositionChanged = UseResult,
+			onAbsoluteWindowSizeChanged = UseResult,
+			scrollingFrameRef = UseRefResult,
 			selection = { Selectable = false },
 			scroll = {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				AutomaticCanvasSize = Enum.AutomaticSize.X,
 				ScrollingDirection = Enum.ScrollingDirection.X,
-				scrollBarVisibility = visibilityModule.None
+				scrollBarVisibility = VisibilityModule.None
 			}
 		}, p1.children),
-		OverflowStart = reactModule.createElement(OverflowButton, {
+		OverflowStart = ReactModule.createElement(OverflowButton, {
 			LayoutOrder = 3,
 			isStart = true,
 			ZIndex = 2,
 			tag = "padding-right-small",
 			Position = UDim2.fromScale(0, 0),
 			size = p1.size,
-			Visible = var3,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var8 (ref)
-				var8(-90)
-			end, { var8 }),
-			gradient = numberSequence,
-			icon = icon.ChevronLargeLeft,
+			Visible = UseBindingResult1,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 119 ]]
+				-- upvalues: UseResult1 (copy)
+				UseResult1(-90)
+			end, { UseResult1 }),
+			gradient = NumberSequence1,
+			icon = Icon.ChevronLargeLeft,
 			testId = `{p1.testId}--overflow-start`
 		}),
-		OverflowEnd = reactModule.createElement(OverflowButton, {
+		OverflowEnd = ReactModule.createElement(OverflowButton, {
 			LayoutOrder = 4,
 			ZIndex = 2,
 			tag = "anchor-top-right padding-left-small",
 			Position = UDim2.fromScale(1, 0),
 			size = p1.size,
-			Visible = var1,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var8 (ref)
-				var8(90)
-			end, { var8 }),
-			gradient = numberSequence_1,
-			icon = icon.ChevronLargeRight,
+			Visible = UseBindingResult,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 123 ]]
+				-- upvalues: UseResult1 (copy)
+				UseResult1(90)
+			end, { UseResult1 }),
+			gradient = NumberSequence2,
+			icon = Icon.ChevronLargeRight,
 			testId = `{p1.testId}--overflow-end`
 		})
 	})

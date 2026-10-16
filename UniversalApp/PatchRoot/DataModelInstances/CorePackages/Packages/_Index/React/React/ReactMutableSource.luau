@@ -1,19 +1,19 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local _ = require(parent.Shared)
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local _ = require(Parent.Shared)
 
-return function(p1, p2)
-	-- upvalues: reactGlobalsModule (ref)
-	local t = {
+return function(_source, _getVersion) --[[ Line: 18 | Named "createMutableSource" ]]
+	-- upvalues: ReactGlobalsModule (copy)
+	local config = {
 		_workInProgressVersionPrimary = nil,
 		_workInProgressVersionSecondary = nil,
-		_getVersion = p2,
-		_source = p1
+		_getVersion = _getVersion,
+		_source = _source
 	}
 	
-	if reactGlobalsModule.__DEV__ then
-		t._currentPrimaryRenderer = nil
-		t._currentSecondaryRenderer = nil
+	if ReactGlobalsModule.__DEV__ then
+		config._currentPrimaryRenderer = nil
+		config._currentSecondaryRenderer = nil
 	end
-	return t
+	return config
 end

@@ -1,32 +1,32 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local foundationModule = require(parent_2.Foundation)
-local controlStateModule = require(parent.Control.Enum.ControlState)
-local _ = require(parent.Control.Hooks.useGuiControlState)
-local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
-local t = {
-	affordance = foundationModule.Enums.StateLayerAffordance.None
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local ReactModule = require(Parent2.React)
+local FoundationModule = require(Parent2.Foundation)
+local ControlStateModule = require(Parent.Control.Enum.ControlState)
+local _ = require(Parent.Control.Hooks.useGuiControlState)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local StateLayer = {
+	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: imageSetComponentModule (ref), t (ref), reactModule (ref), controlStateModule (ref), foundationModule (ref)
-	local cloned = table.clone(p1)
-	cloned.isDisabled = cloned.isDisabled or cloned.userInteractionEnabled == false
-	cloned.userInteractionEnabled = nil
-	cloned.ref = p2
-	cloned.component = cloned.component or imageSetComponentModule.Button
-	cloned.stateLayer = t
-	local var1 = reactModule.useRef(controlStateModule.Initialize)
+return (ReactModule.forwardRef(function(Tbl, Ref) --[[ Line: 49 | Named "Interactable" ]]
+	-- upvalues: ImageSetComponentModule (copy), StateLayer (copy), ReactModule (copy), ControlStateModule (copy), FoundationModule (copy)
+	local Copy = table.clone(Tbl)
+	Copy.isDisabled = Copy.isDisabled or Copy.userInteractionEnabled == false
+	Copy.userInteractionEnabled = nil
+	Copy.ref = Ref
+	Copy.component = Copy.component or ImageSetComponentModule.Button
+	Copy.stateLayer = StateLayer
+	local UseRefResult = ReactModule.useRef(ControlStateModule.Initialize)
 	
-	if p1.onStateChanged then
-		function cloned.onStateChanged(p3)
-			-- upvalues: controlStateModule (copy), p1 (ref), var1 (ref)
-			local var2 = controlStateModule[p3]
-			p1.onStateChanged(var1.current, var2)
-			var1.current = var2
+	if Tbl.onStateChanged then
+		function Copy.onStateChanged(Current) --[[ Line: 59 ]]
+			-- upvalues: ControlStateModule (upval), Tbl (copy), UseRefResult (copy)
+			local ControlStateModuleEntry = ControlStateModule[Current]
+			Tbl.onStateChanged(UseRefResult.current, ControlStateModuleEntry)
+			UseRefResult.current = ControlStateModuleEntry
 		end
 	end
-	return reactModule.createElement(foundationModule.UNSTABLE.Interactable, cloned)
-end)
+	return ReactModule.createElement(FoundationModule.UNSTABLE.Interactable, Copy)
+end))

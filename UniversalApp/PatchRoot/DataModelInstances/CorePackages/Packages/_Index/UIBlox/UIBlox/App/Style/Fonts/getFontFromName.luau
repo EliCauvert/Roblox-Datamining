@@ -1,22 +1,22 @@
-﻿local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local validateFontModule = require(parent.Validator.validateFont)
-local fontLoaderModule = require(script.Parent.FontLoader)
-local _ = require(parent.StyleTypes)
+﻿local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local ValidateFontModule = require(Parent.Validator.validateFont)
+local FontLoaderModule = require(script.Parent.FontLoader)
+local _ = require(Parent.StyleTypes)
 
-return function(p1, p2)
-	-- upvalues: fontLoaderModule (ref), constantsModule (ref), validateFontModule (ref)
-	local var1 = fontLoaderModule.new(p2)
-	local t = {
-		[constantsModule.FontName.Gotham:lower()] = var1:loadFont(),
-		[constantsModule.FontName.Classic:lower()] = var1:loadFont(Enum.Font.Cartoon)
+return function(Text: string, p1) --[[ Line: 9 ]]
+	-- upvalues: FontLoaderModule (copy), ConstantsModule (copy), ValidateFontModule (copy)
+	local NewFontLoader = FontLoaderModule.new(p1)
+	local config = {
+		[ConstantsModule.FontName.Gotham:lower()] = NewFontLoader:loadFont(),
+		[ConstantsModule.FontName.Classic:lower()] = NewFontLoader:loadFont(Enum.Font.Cartoon)
 	}
-	local var2 = if not (p1 == nil or #p1 <= 0) then t[p1:lower()] else nil
+	local Entry = if Text ~= nil and #Text > 0 then config[Text:lower()] else nil
 	
-	if var2 == nil then
-		var2 = t[constantsModule.DefaultFontName:lower()]
+	if Entry == nil then
+		Entry = config[ConstantsModule.DefaultFontName:lower()]
 	end
-	assert(validateFontModule(var2))
+	assert(ValidateFontModule(Entry))
 	
-	return var2
+	return Entry
 end

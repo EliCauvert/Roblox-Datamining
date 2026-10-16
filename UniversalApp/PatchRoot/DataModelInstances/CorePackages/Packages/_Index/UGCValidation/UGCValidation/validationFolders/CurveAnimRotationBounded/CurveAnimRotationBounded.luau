@@ -1,53 +1,53 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateCurveAnimRotationSpeedModule = require(parent.flags.getFFlagUGCValidateCurveAnimRotationSpeed)
-local getFIntUGCValidateMaxAnimationFPSModule = require(parent.flags.getFIntUGCValidateMaxAnimationFPS)
-local getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule = require(parent.flags.getFIntUGCValidationMaxAnimationRotationSpeedPerSecond)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFFlagUGCValidateCurveAnimRotationSpeedModule = require(Parent.flags.getFFlagUGCValidateCurveAnimRotationSpeed)
+local GetFIntUGCValidateMaxAnimationFPSModule = require(Parent.flags.getFIntUGCValidateMaxAnimationFPS)
+local GetFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule = require(Parent.flags.getFIntUGCValidationMaxAnimationRotationSpeedPerSecond)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
 	},
 	requiredData = {
-		validationEnumsModule.SharedDataMember.curveAnimations,
-		validationEnumsModule.SharedDataMember.curveAnimComputedFrames
+		ValidationEnumsModule.SharedDataMember.curveAnimations,
+		ValidationEnumsModule.SharedDataMember.curveAnimComputedFrames
 	},
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2)
-		-- upvalues: getFFlagUGCValidateCurveAnimRotationSpeedModule (ref), getFIntUGCValidateMaxAnimationFPSModule (ref), getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule (ref), errorSourceStringsModule (ref)
-		if not getFFlagUGCValidateCurveAnimRotationSpeedModule() then return end
-		local animFrames = p2.curveAnimComputedFrames.animFrames
-		local var1 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
-		local var2 = getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule()
-		local var3 = var2 / getFIntUGCValidateMaxAnimationFPSModule()
+	run = function(p1, p2) --[[ Line: 22 ]]
+		-- upvalues: GetFFlagUGCValidateCurveAnimRotationSpeedModule (copy), GetFIntUGCValidateMaxAnimationFPSModule (copy), GetFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule (copy), ErrorSourceStringsModule (copy)
+		if not GetFFlagUGCValidateCurveAnimRotationSpeedModule() then return end
+		local AnimFrames = p2.curveAnimComputedFrames.animFrames
+		local v1 = 1 / GetFIntUGCValidateMaxAnimationFPSModule()
+		local FIntUGCValidationMaxAnimationRotationSpeedPerSecondModule = GetFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule()
+		local FIntUGCValidationMaxAnimationRotationSpeedPerSecondModuleRatio = FIntUGCValidationMaxAnimationRotationSpeedPerSecondModule / GetFIntUGCValidateMaxAnimationFPSModule()
 		local t = {}
 		
-		for i, v in animFrames do
-			for i_1, v_1 in v do
-				local var4 = t[i_1]
+		for i, animFrame in AnimFrames do
+			local Degrees = nil
+			for BodyPart, value in animFrame do
+				local Entry = t[BodyPart]
 				
-				if var4 then
-					local degrees = math.deg(math.abs(v_1:AngleBetween(var4)))
+				if Entry then
+					Degrees = math.deg((math.abs((value:AngleBetween(Entry)))))
 					
-					if var3 < degrees then
-						p1:fail(errorSourceStringsModule.Keys.CurveAnim_RotationTooFast, {
-							time = string.format("%.2f", (i - 1) * var1),
-							bodyPart = i_1,
-							speed = string.format("%.2f", degrees * getFIntUGCValidateMaxAnimationFPSModule()),
-							maxSpeed = tostring(var2)
+					if FIntUGCValidationMaxAnimationRotationSpeedPerSecondModuleRatio < Degrees then
+						p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_RotationTooFast, {
+							time = string.format("%.2f", (i - 1) * v1),
+							bodyPart = BodyPart,
+							speed = string.format("%.2f", Degrees * GetFIntUGCValidateMaxAnimationFPSModule()),
+							maxSpeed = tostring(FIntUGCValidationMaxAnimationRotationSpeedPerSecondModule)
 						})
-						
-						return
+						break
 					end
 				end
 			end
-			t = v
+			t = animFrame
 		end
 	end
 }

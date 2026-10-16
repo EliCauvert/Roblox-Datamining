@@ -1,14 +1,14 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local GetExpectedPartSizeModule = require(Parent.util.getExpectedPartSize)
 
-return function(p1, p2, p3)
-	-- upvalues: getExpectedPartSizeModule (ref)
+return function(List, Callback, p1) --[[ Line: 10 ]]
+	-- upvalues: GetExpectedPartSizeModule (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		local var1 = p2(v)
-		t[v] = getExpectedPartSizeModule(var1, p3) / getExpectedPartSizeModule(var1, p3, true)
+	for _, value in List do
+		local CallbackResult = Callback(value)
+		t[value] = GetExpectedPartSizeModule(CallbackResult, p1) / GetExpectedPartSizeModule(CallbackResult, p1, true)
 	end
 	return t
 end

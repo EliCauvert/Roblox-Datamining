@@ -1,10 +1,10 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local chatBubbleContainerModule = require(script.Parent.ChatBubbleContainer)
-local roact = dependenciesModule.Roact
-local withStyle = dependenciesModule.UIBlox.Style.withStyle
-local fitTextLabel = dependenciesModule.RoactFitComponents.FitTextLabel
-local plainText = roact.PureComponent:extend("PlainText")
-plainText.defaultProps = {
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local ChatBubbleContainerModule = require(script.Parent.ChatBubbleContainer)
+local Roact = DependenciesModule.Roact
+local WithStyleFunction = DependenciesModule.UIBlox.Style.withStyle
+local FitTextLabel = DependenciesModule.RoactFitComponents.FitTextLabel
+local PlainText = Roact.PureComponent:extend("PlainText")
+PlainText.defaultProps = {
 	text = "",
 	maxWidth = 0,
 	innerPadding = 0,
@@ -12,38 +12,39 @@ plainText.defaultProps = {
 	hasTail = false,
 	LayoutOrder = 0,
 	isPending = false,
-	[roact.Change.AbsoluteSize] = function() end
+	[Roact.Change.AbsoluteSize] = function() --[[ Line: 17 ]] end
 }
 
-function plainText.render(p1)
-	-- upvalues: withStyle (ref), roact (ref), chatBubbleContainerModule (ref), fitTextLabel (ref)
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), roact (copy), chatBubbleContainerModule (copy), fitTextLabel (copy)
-		local innerPadding = p1.props.innerPadding
-		local body = p2.Font.Body
+function PlainText.render(p1) --[[ Line: 20 ]]
+	-- upvalues: WithStyleFunction (copy), Roact (copy), ChatBubbleContainerModule (copy), FitTextLabel (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 21 ]]
+		-- upvalues: p1 (copy), Roact (upval), ChatBubbleContainerModule (upval), FitTextLabel (upval)
+		local InnerPadding = p1.props.innerPadding
+		local Body = p2.Font.Body
+		local ScaledBaseSize = p2.Font.BaseSize * Body.RelativeSize
 		
-		return roact.createElement(chatBubbleContainerModule, {
+		return Roact.createElement(ChatBubbleContainerModule, {
 			isIncoming = p1.props.isIncoming,
 			hasTail = p1.props.hasTail,
 			isPending = p1.props.isPending,
-			padding = innerPadding,
+			padding = InnerPadding,
 			LayoutOrder = p1.props.LayoutOrder,
-			[roact.Change.AbsoluteSize] = p1.props[roact.Change.AbsoluteSize]
+			[Roact.Change.AbsoluteSize] = p1.props[Roact.Change.AbsoluteSize]
 		}, {
-			textContent = roact.createElement(fitTextLabel, {
+			textContent = Roact.createElement(FitTextLabel, {
 				BackgroundTransparency = 1,
 				Text = p1.props.text,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextColor3 = p2.Theme.TextEmphasis.Color,
-				width = fitTextLabel.Width.FitToText,
-				maximumWidth = math.max(0, p1.props.maxWidth - innerPadding),
-				Font = p1.props.font or body.Font,
-				TextSize = p1.props.textSize or p2.Font.BaseSize * body.RelativeSize,
-				TextTransparency = if p1.props.isPending then p2.Theme.TextMuted.Transparency else 0,
+				width = FitTextLabel.Width.FitToText,
+				maximumWidth = math.max(0, p1.props.maxWidth - InnerPadding),
+				Font = p1.props.font or Body.Font,
+				TextSize = p1.props.textSize or ScaledBaseSize,
+				TextTransparency = p1.props.isPending and p2.Theme.TextMuted.Transparency or 0,
 				TextYAlignment = Enum.TextYAlignment.Top
 			})
 		})
 	end)
 end
 
-return plainText
+return PlainText

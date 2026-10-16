@@ -1,35 +1,37 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
-local studioUriModule = require(foundation.Utility.Plugin.StudioUri)
-local useWidgetsContextModule = require(script.Parent.useWidgetsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
+local StudioUriModule = require(Foundation.Utility.Plugin.StudioUri)
+local UseWidgetsContextModule = require(script.Parent.useWidgetsContext)
 
-return function(p1, p2)
-	-- upvalues: useWidgetsContextModule (ref), useRef (ref), studioUriModule (ref), useEffect (ref)
-	local var1 = useWidgetsContextModule()
-	p2 = p2 or useRef(nil)
-	useEffect(function()
-		-- upvalues: p2 (ref), p1 (ref), var1 (ref)
-		local current = p2.current
+return function(p1, p2) --[[ Line: 13 | Named "useWidgetRef" ]]
+	-- upvalues: UseWidgetsContextModule (copy), UseRefFunction (copy), StudioUriModule (copy), UseEffectFunction (copy)
+	local UseWidgetsContextModuleResult = UseWidgetsContextModule()
+	local UseRefResult = UseRefFunction(nil)
+	local P1 = p2 or UseRefResult
+	UseEffectFunction(function() --[[ Line: 20 ]]
+		-- upvalues: P1 (copy), p1 (copy), UseWidgetsContextModuleResult (copy)
+		local Current = P1.current
 		
-		if not current then return end
-		if p1 and typeof(current) == "Instance" then
-			var1.register(p1, current)
+		if not Current then return end
+		if p1 and typeof(Current) == "Instance" then
+			UseWidgetsContextModuleResult.register(p1, Current)
 			
-			return function()
-				-- upvalues: var1 (copy), p1 (copy), current (ref)
-				var1.deregister(p1, current)
+			return function() --[[ Line: 27 ]]
+				-- upvalues: UseWidgetsContextModuleResult (upval), p1 (upval), Current (copy)
+				UseWidgetsContextModuleResult.deregister(p1, Current)
 			end
+		else
+			return nil
 		end
-		return nil
 	end, {
-		studioUriModule.toString(p1),
-		p2.current,
+		StudioUriModule.toString(p1),
+		P1.current,
 		p1,
-		var1.register,
-		var1.deregister
+		UseWidgetsContextModuleResult.register,
+		UseWidgetsContextModuleResult.deregister
 	})
 	
-	return p2
+	return P1
 end

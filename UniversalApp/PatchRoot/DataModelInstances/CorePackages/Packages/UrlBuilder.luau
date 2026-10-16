@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.UrlBuilder.UrlBuilder)
+﻿return (require(script.Parent._Index.UrlBuilder.UrlBuilder))

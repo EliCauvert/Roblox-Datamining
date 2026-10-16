@@ -1,294 +1,292 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local videoService = game:GetService("VideoService")
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
-local view = foundationModule.View
-local playLarge = builderIconsModule.Icon.PlayLarge
-local pauseLarge = builderIconsModule.Icon.PauseLarge
-local speaker = builderIconsModule.Icon.Speaker
-local speakerSlash = builderIconsModule.Icon.SpeakerSlash
-local dragHandleModule = require(momentsCreationFlow.Components.DragHandle)
-local trimTooltipModule = require(momentsCreationFlow.Components.TrimTooltip)
-local useCallback = reactModule.useCallback
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useTokens = foundationModule.Hooks.useTokens
-local useTrimDragControllerModule = require(momentsCreationFlow.Hooks.useTrimDragController)
-local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
-local getContentFromCaptureModule = require(momentsCreationFlow.Utils.getContentFromCapture)
-local dragHandleModule_1 = require(momentsCreationFlow.Enums.DragHandle)
-local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local VideoService = game:GetService("VideoService")
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local PlayLarge = BuilderIconsModule.Icon.PlayLarge
+local PauseLarge = BuilderIconsModule.Icon.PauseLarge
+local Speaker = BuilderIconsModule.Icon.Speaker
+local SpeakerSlash = BuilderIconsModule.Icon.SpeakerSlash
+local DragHandleModule = require(MomentsCreationFlow.Components.DragHandle)
+local TrimTooltipModule = require(MomentsCreationFlow.Components.TrimTooltip)
+local UseCallbackFunction = ReactModule.useCallback
+local UseDeviceInsetsFunction = require(Parent.MomentsCommon).Hooks.useDeviceInsets
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseTrimDragControllerModule = require(MomentsCreationFlow.Hooks.useTrimDragController)
+local CreationFlowContextModule = require(MomentsCreationFlow.Context.CreationFlowContext)
+local GetContentFromCaptureModule = require(MomentsCreationFlow.Utils.getContentFromCapture)
+local DragHandleModule1 = require(MomentsCreationFlow.Enums.DragHandle)
+local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), getContentFromCaptureModule (ref), videoService (ref), useCallback (ref), useTrimDragControllerModule (ref), view (ref), button (ref), foundationModule (ref), creationFlowLocalizationModule (ref), trimTooltipModule (ref), dragHandleModule (ref), dragHandleModule_1 (ref), iconButton (ref), pauseLarge (ref), playLarge (ref), text (ref), speakerSlash (ref), speaker (ref)
-	local var1 = useDeviceInsets()
-	local var2 = useTokens()
-	local var3 = reactModule.useContext(creationFlowContextModule)
-	local var4 = reactModule.useRef(false)
-	local var5 = reactModule.useRef(false)
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = reactModule.useRef(nil)
-	local var9 = getContentFromCaptureModule(p1.selectedCapture)
-	local var10, var11 = reactModule.useState({})
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), videoService (copy), var9 (ref), p1 (ref), var11 (ref)
-		task.spawn(function()
-			-- upvalues: var8 (copy), videoService (copy), var9 (copy), p1 (copy), var11 (copy)
-			local ok, status = pcall(function()
-				-- upvalues: var8 (copy), videoService (copy), var9 (copy)
-				var8.current = videoService:CreateVideoSamplerAsync(var9)
+return function(p1) --[[ Line: 50 ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), GetContentFromCaptureModule (copy), VideoService (copy), UseCallbackFunction (copy), UseTrimDragControllerModule (copy), View (copy), Button (copy), FoundationModule (copy), CreationFlowLocalizationModule (copy), TrimTooltipModule (copy), DragHandleModule (copy), DragHandleModule1 (copy), IconButton (copy), PauseLarge (copy), PlayLarge (copy), Text (copy), SpeakerSlash (copy), Speaker (copy)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local ContentFromCaptureModule = GetContentFromCaptureModule(p1.selectedCapture)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
+	ReactModule.useEffect(function() --[[ Line: 63 ]]
+		-- upvalues: UseRefResult2 (copy), VideoService (upval), ContentFromCaptureModule (copy), p1 (copy), UseStateResult2_1 (copy)
+		task.spawn(function() --[[ Line: 64 ]]
+			-- upvalues: UseRefResult2 (upval), VideoService (upval), ContentFromCaptureModule (upval), p1 (upval), UseStateResult2_1 (upval)
+			local Success, Result = pcall(function() --[[ Line: 65 ]]
+				-- upvalues: UseRefResult2 (upval), VideoService (upval), ContentFromCaptureModule (upval)
+				UseRefResult2.current = VideoService:CreateVideoSamplerAsync(ContentFromCaptureModule)
 			end)
 			
-			if not ok then
-				warn("Failed to create VideoSampler:", status)
+			if not Success then
+				warn("Failed to create VideoSampler:", Result)
 				
 				return
 			end
-			local t = {}
+			local List = {}
 			
 			for i = 0, math.floor(p1.playbackController.timeline.timeLength) - 1 do
-				table.insert(t, i)
+				table.insert(List, i)
 			end
-			var11(var8.current:GetSamplesAtTimesAsync(t))
+			UseStateResult2_1(UseRefResult2.current:GetSamplesAtTimesAsync(List))
 		end)
 	end, { p1.selectedCapture })
-	local var12 = useTrimDragControllerModule(true, useCallback(function()
-		-- upvalues: var4 (ref), p1 (ref), var5 (ref), var7 (ref)
-		if var4.current then
+	local UseTrimDragControllerModuleResult = UseTrimDragControllerModule(true, UseCallbackFunction(function() --[[ Line: 90 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), UseRefResult1 (copy), UseStateResult2 (copy)
+		if UseRefResult.current then
 			p1.playbackController.playback.play()
 		end
-		if not var5.current then
+		if not UseRefResult1.current then
 			p1.playbackController.volume.unmute()
 		end
-		var4.current = false
-		var5.current = false
-		var7(nil)
-	end, {}), useCallback(function(p2)
-		-- upvalues: var4 (ref), p1 (ref), var5 (ref), var7 (ref)
-		var4.current = p1.playbackController.playback.isPlaying
-		var5.current = p1.playbackController.volume.isMuted
+		UseRefResult.current = false
+		UseRefResult1.current = false
+		UseStateResult2(nil)
+	end, {}), UseCallbackFunction(function(p2) --[[ Line: 82 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), UseRefResult1 (copy), UseStateResult2 (copy)
+		UseRefResult.current = p1.playbackController.playback.isPlaying
+		UseRefResult1.current = p1.playbackController.volume.isMuted
 		p1.playbackController.volume.mute()
 		p1.playbackController.playback.pause()
-		var7(p2)
+		UseStateResult2(p2)
 	end, {
 		p1.playbackController.playback.isPlaying,
 		p1.playbackController.volume.isMuted
-	}), useCallback(function(p2, p3)
-		-- upvalues: p1 (ref)
+	}), UseCallbackFunction(function(p2, p3) --[[ Line: 102 ]]
+		-- upvalues: p1 (copy)
 		p1.onTrimUpdate({
-			startTime = math.clamp(p2 or (if p1.trimEdit then p1.trimEdit.startTime else 0), 0, p1.playbackController.timeline.timeLength),
-			endTime = math.clamp(p3 or (if p1.trimEdit then p1.trimEdit.endTime else p1.playbackController.timeline.timeLength), 0, p1.playbackController.timeline.timeLength)
+			startTime = math.clamp(if p2 then p2 else p1.trimEdit and p1.trimEdit.startTime or 0, 0, p1.playbackController.timeline.timeLength),
+			endTime = math.clamp(if p3 then p3 else p1.trimEdit and p1.trimEdit.endTime or p1.playbackController.timeline.timeLength, 0, p1.playbackController.timeline.timeLength)
 		})
 		p1.playbackController.timeline.seek(0)
 	end, {
 		p1.onTrimUpdate,
 		p1.trimEdit,
 		p1.playbackController.timeline.timeLength
-	}), useCallback(function(p2)
-		-- upvalues: p1 (ref)
+	}), UseCallbackFunction(function(p2) --[[ Line: 123 ]]
+		-- upvalues: p1 (copy)
 		p1.playbackController.timeline.seek(p2 * p1.playbackController.timeline.duration)
 	end, {
 		p1.playbackController.timeline.seek,
 		p1.playbackController.timeline.duration
 	}), p1.trimEdit, p1.playbackController.timeline.timeLength)
-	local dragContainerRef = var12.dragContainerRef
-	local leftHandleRef = var12.leftHandleRef
-	local rightHandleRef = var12.rightHandleRef
-	local scrubberDisplayRef = var12.scrubberDisplayRef
-	local scrubberRef = var12.scrubberRef
-	local segmentRef = var12.segmentRef
-	local leftHandlePosition = var12.leftHandlePosition
-	local rightHandlePosition = var12.rightHandlePosition
+	local ScrubberDisplayRef = UseTrimDragControllerModuleResult.scrubberDisplayRef
+	local ScrubberRef = UseTrimDragControllerModuleResult.scrubberRef
+	local LeftHandlePosition = UseTrimDragControllerModuleResult.leftHandlePosition
+	local RightHandlePosition = UseTrimDragControllerModuleResult.rightHandlePosition
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "align-x-center auto-y align-y-bottom anchor-bottom-center col gap-large position-bottom-center size-full-0",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var2.Padding.Small),
-			PaddingBottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Small)),
-			PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
-			PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, UseTokensResult.Padding.Small),
+			PaddingBottom = UDim.new(0, (math.max(UseDeviceInsetsResult.bottom, UseTokensResult.Padding.Small))),
+			PaddingLeft = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.XLarge))),
+			PaddingRight = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge)))
 		}),
-		Nav = reactModule.createElement(view, {
+		Nav = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "align-x-center align-y-center auto-y gap-small row size-full-0 flex-x-between"
 		}, {
-			BackButton = reactModule.createElement(button, {
+			BackButton = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
-				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var3.getLocalization(creationFlowLocalizationModule.GeneralCtaBack),
-				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function()
-					-- upvalues: p1 (ref)
+				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
+				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaBack),
+				variant = FoundationModule.Enums.ButtonVariant.Text,
+				onActivated = UseCallbackFunction(function() --[[ Line: 146 ]]
+					-- upvalues: p1 (copy)
 					if p1.onTrimDiscard then
 						p1.onTrimDiscard()
 					end
 				end, { p1.onTrimDiscard }),
-				size = foundationModule.Enums.InputSize.Medium
+				size = FoundationModule.Enums.InputSize.Medium
 			}),
-			DoneButton = reactModule.createElement(button, {
+			DoneButton = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
-				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var3.getLocalization(creationFlowLocalizationModule.GeneralCtaDone),
-				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function()
-					-- upvalues: p1 (ref)
+				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
+				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaDone),
+				variant = FoundationModule.Enums.ButtonVariant.Text,
+				onActivated = UseCallbackFunction(function() --[[ Line: 152 ]]
+					-- upvalues: p1 (copy)
 					if p1.onTrimSave then
 						p1.onTrimSave()
 					end
 				end, { p1.onTrimSave }),
-				size = foundationModule.Enums.InputSize.Medium
+				size = FoundationModule.Enums.InputSize.Medium
 			})
 		}),
-		Trimmer = reactModule.createElement(view, {
+		Trimmer = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "padding-x-small size-full-1000",
 			ZIndex = 2
 		}, {
-			PaddedContainer = reactModule.createElement(view, {
+			PaddedContainer = ReactModule.createElement(View, {
 				tag = "padding-x-medium size-full-full",
 				ZIndex = 2,
-				ref = dragContainerRef
+				ref = UseTrimDragControllerModuleResult.dragContainerRef
 			}, {
-				TrimmerBar = reactModule.createElement(view, { tag = "size-full" }, {
-					TrimTooltip = reactModule.createElement(trimTooltipModule, {
-						activeHandle = var6,
-						leftHandlePosition = leftHandlePosition,
-						rightHandlePosition = rightHandlePosition,
+				TrimmerBar = ReactModule.createElement(View, { tag = "size-full" }, {
+					TrimTooltip = ReactModule.createElement(TrimTooltipModule, {
+						activeHandle = UseStateResult,
+						leftHandlePosition = LeftHandlePosition,
+						rightHandlePosition = RightHandlePosition,
 						timeLength = p1.playbackController.timeline.timeLength
 					}),
-					LeftHandle = reactModule.createElement(dragHandleModule, {
+					LeftHandle = ReactModule.createElement(DragHandleModule, {
 						anchorPoint = Vector2.new(1, 0.5),
-						position = leftHandlePosition:map(function(p2)
-							return UDim2.fromScale(p2, 0.5)
+						position = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 239 ]]
+							return UDim2.fromScale(XScale, 0.5)
 						end),
-						dragDetectorRef = leftHandleRef
+						dragDetectorRef = UseTrimDragControllerModuleResult.leftHandleRef
 					}),
-					RightHandle = reactModule.createElement(dragHandleModule, {
+					RightHandle = ReactModule.createElement(DragHandleModule, {
 						isFlipped = true,
 						anchorPoint = Vector2.new(0, 0.5),
-						position = rightHandlePosition:map(function(p2)
-							return UDim2.fromScale(p2, 0.5)
+						position = RightHandlePosition:map(function(XScale): UDim2 --[[ Line: 248 ]]
+							return UDim2.fromScale(XScale, 0.5)
 						end),
-						dragDetectorRef = rightHandleRef
+						dragDetectorRef = UseTrimDragControllerModuleResult.rightHandleRef
 					}),
-					Outline = reactModule.createElement(view, {
+					Outline = ReactModule.createElement(View, {
 						tag = "anchor-center-left",
 						ZIndex = 2,
-						Position = leftHandlePosition:map(function(p2)
-							return UDim2.fromScale(p2, 0.5)
+						Position = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 255 ]]
+							return UDim2.fromScale(XScale, 0.5)
 						end),
-						Size = reactModule.joinBindings({
-							leftHandlePosition = leftHandlePosition,
-							rightHandlePosition = rightHandlePosition
-						}):map(function(p2)
+						Size = ReactModule.joinBindings({
+							leftHandlePosition = LeftHandlePosition,
+							rightHandlePosition = RightHandlePosition
+						}):map(function(p2): UDim2 --[[ Line: 261 ]]
 							return UDim2.fromScale(p2.rightHandlePosition - p2.leftHandlePosition, 1)
 						end)
 					}, {
-						OutlineStroke = reactModule.createElement("UIStroke", {
+						OutlineStroke = ReactModule.createElement("UIStroke", {
 							ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-							Color = var2.Color.System.Contrast.Color3,
-							Transparency = var2.Color.System.Contrast.Transparency,
-							Thickness = var2.Stroke.Thicker
+							Color = UseTokensResult.Color.System.Contrast.Color3,
+							Transparency = UseTokensResult.Color.System.Contrast.Transparency,
+							Thickness = UseTokensResult.Stroke.Thicker
 						}),
-						Scrubber = if var6 and var6 ~= dragHandleModule_1.Scrubber then nil else reactModule.createElement(view, {
+						Scrubber = if UseStateResult and UseStateResult ~= DragHandleModule1.Scrubber then nil else ReactModule.createElement(View, {
 							tag = "anchor-center-center bg-system-contrast size-100-1400 radius-circle",
-							ref = scrubberDisplayRef,
+							ref = ScrubberDisplayRef,
 							Position = UDim2.fromScale(p1.playbackController.timeline.elapsed / p1.playbackController.timeline.duration, 0.5)
 						}, {
-							DragDetector = reactModule.createElement("UIDragDetector", {
+							DragDetector = ReactModule.createElement("UIDragDetector", {
 								DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
-								ref = scrubberRef,
+								ref = ScrubberRef,
 								ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale
 							})
 						}),
-						DragDetector = reactModule.createElement("UIDragDetector", {
+						DragDetector = ReactModule.createElement("UIDragDetector", {
 							DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
-							ref = segmentRef,
+							ref = UseTrimDragControllerModuleResult.segmentRef,
 							ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale
 						})
 					}),
-					ShadowBlockLeft = reactModule.createElement(view, {
+					ShadowBlockLeft = ReactModule.createElement(View, {
 						tag = "anchor-center-left position-center-left",
 						ZIndex = 0,
-						backgroundStyle = var2.Color.Extended.Black.Black_50,
-						Size = leftHandlePosition:map(function(p2)
-							return UDim2.fromScale(p2, 1)
+						backgroundStyle = UseTokensResult.Color.Extended.Black.Black_50,
+						Size = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 303 ]]
+							return UDim2.fromScale(XScale, 1)
 						end)
 					}),
-					ShadowBlockRight = reactModule.createElement(view, {
+					ShadowBlockRight = ReactModule.createElement(View, {
 						tag = "anchor-center-right position-center-right",
 						ZIndex = 0,
-						backgroundStyle = var2.Color.Extended.Black.Black_50,
-						Size = rightHandlePosition:map(function(p2)
+						backgroundStyle = UseTokensResult.Color.Extended.Black.Black_50,
+						Size = RightHandlePosition:map(function(p2: number): UDim2 --[[ Line: 312 ]]
 							return UDim2.fromScale(1 - p2, 1)
 						end)
 					})
 				})
 			}),
-			Timeline = reactModule.createElement(view, {
+			Timeline = ReactModule.createElement(View, {
 				tag = "bg-surface-100 radius-medium size-full-full",
 				ZIndex = 1
 			}, {
-				OutlineStroke = reactModule.createElement("UIStroke", {
+				OutlineStroke = ReactModule.createElement("UIStroke", {
 					ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-					Color = var2.Color.Surface.Surface_100.Color3,
-					Transparency = var2.Color.Surface.Surface_100.Transparency,
-					Thickness = var2.Stroke.Thicker
+					Color = UseTokensResult.Color.Surface.Surface_100.Color3,
+					Transparency = UseTokensResult.Color.Surface.Surface_100.Transparency,
+					Thickness = UseTokensResult.Stroke.Thicker
 				}),
-				TimelineBar = reactModule.createElement(view, {
+				TimelineBar = ReactModule.createElement(View, {
 					tag = "padding-x-medium size-full-full row",
-					layout = { Padding = UDim.new(0, var2.Size.Size_50) }
-				}, reactModule.useMemo(function()
-					-- upvalues: p1 (ref), reactModule (copy), view (copy), var10 (ref)
-					local t = {}
+					layout = { Padding = UDim.new(0, UseTokensResult.Size.Size_50) }
+				}, (ReactModule.useMemo(function() --[[ Line: 166 ]]
+					-- upvalues: p1 (copy), ReactModule (upval), View (upval), UseStateResult1 (copy)
+					local Elements = {}
 					
 					for i = 1, math.floor(p1.playbackController.timeline.timeLength) do
-						t[i] = reactModule.createElement(view, { tag = "size-full-full bg-system-neutral shrink" }, {
-							content = reactModule.createElement("ImageLabel", {
+						Elements[i] = ReactModule.createElement(View, { tag = "size-full-full bg-system-neutral shrink" }, {
+							content = ReactModule.createElement("ImageLabel", {
 								BackgroundTransparency = 1,
 								Size = UDim2.fromScale(1, 1),
-								ImageContent = var10[i] and var10[i].Image,
+								ImageContent = UseStateResult1[i] and UseStateResult1[i].Image,
 								ScaleType = Enum.ScaleType.Crop
 							})
 						})
 					end
-					return t
-				end, { p1.playbackController.timeline.timeLength, var10 }))
+					return Elements
+				end, {
+					p1.playbackController.timeline.timeLength,
+					UseStateResult1
+				})))
 			})
 		}),
-		VideoControls = reactModule.createElement(view, {
+		VideoControls = ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "align-x-center align-y-center auto-y gap-small row size-full-0 flex-x-between"
 		}, {
-			PlaybackToggle = reactModule.createElement(iconButton, {
+			PlaybackToggle = ReactModule.createElement(IconButton, {
 				LayoutOrder = 1,
-				icon = if p1.playbackController.playback.isPlaying then pauseLarge else playLarge,
-				onActivated = useCallback(function()
-					-- upvalues: p1 (ref)
+				icon = p1.playbackController.playback.isPlaying and PauseLarge or PlayLarge,
+				onActivated = UseCallbackFunction(function() --[[ Line: 158 ]]
+					-- upvalues: p1 (copy)
 					p1.playbackController.playback.toggle()
 				end, { p1.playbackController }),
-				size = foundationModule.Enums.InputSize.Medium
+				size = FoundationModule.Enums.InputSize.Medium
 			}),
-			DurationDisplay = reactModule.createElement(text, {
+			DurationDisplay = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-label-medium content-default",
-				Text = `{string.format("%.1f", math.max(0, p1.playbackController.timeline.elapsed))} / {string.format("%.1f", p1.playbackController.timeline.duration)}`
+				Text = `{string.format("%.1f", (math.max(0, p1.playbackController.timeline.elapsed)))} / {string.format("%.1f", p1.playbackController.timeline.duration)}`
 			}),
-			MuteToggle = reactModule.createElement(iconButton, {
+			MuteToggle = ReactModule.createElement(IconButton, {
 				LayoutOrder = 3,
-				icon = if p1.playbackController.volume.isMuted then speakerSlash else speaker,
-				onActivated = useCallback(function()
-					-- upvalues: p1 (ref)
+				icon = p1.playbackController.volume.isMuted and SpeakerSlash or Speaker,
+				onActivated = UseCallbackFunction(function() --[[ Line: 162 ]]
+					-- upvalues: p1 (copy)
 					p1.playbackController.volume.toggle()
 				end, { p1.playbackController }),
-				size = foundationModule.Enums.InputSize.Medium
+				size = FoundationModule.Enums.InputSize.Medium
 			})
 		})
 	})

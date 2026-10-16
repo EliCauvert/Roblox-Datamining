@@ -1,13 +1,13 @@
-﻿local reactModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), var1 (ref), p1 (ref)
-		if p2 and not var1.current then
-			p1()
-			var1.current = true
+return function(Callback, p1) --[[ Line: 6 ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 9 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), Callback (copy)
+		if p1 and not UseRefResult.current then
+			Callback()
+			UseRefResult.current = true
 		end
-	end, { p2 })
+	end, { p1 })
 end

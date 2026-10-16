@@ -1,1 +1,1 @@
-﻿return require(script.Parent.ColorMode)
+﻿return (require(script.Parent.ColorMode))

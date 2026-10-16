@@ -1,33 +1,29 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local genericTextLabelModule = require(parent.Core.Text.GenericTextLabel.GenericTextLabel)
-local validateFontInfoModule = require(parent.Core.Style.Validator.validateFontInfo)
-local validateColorInfoModule = require(parent.Core.Style.Validator.validateColorInfo)
-local validateColorTokenModule = require(parent.Core.Style.Validator.validateColorToken)
-local validateTypographyInfoModule = require(parent.Core.Style.Validator.validateTypographyInfo)
-local roactModule = require(parent_1.Roact)
-local tModule = require(parent_1.t)
-local styledTextLabel = roactModule.PureComponent:extend("StyledTextLabel")
-styledTextLabel.validateProps = tModule.strictInterface({
-	text = tModule.string,
-	fontStyle = tModule.union(validateFontInfoModule, validateTypographyInfoModule),
-	colorStyle = tModule.union(validateColorInfoModule, validateColorTokenModule),
-	textTruncate = tModule.optional(tModule.EnumItem),
-	textWrapped = tModule.optional(tModule.boolean),
-	textXAlignment = tModule.optional(tModule.EnumItem),
-	textYAlignment = tModule.optional(tModule.EnumItem),
-	size = tModule.optional(tModule.UDim2),
-	maxSize = tModule.optional(tModule.Vector2),
-	richText = tModule.optional(tModule.boolean),
-	layoutOrder = tModule.optional(tModule.number),
-	fluidSizing = tModule.optional(tModule.boolean),
-	automaticSize = tModule.optional(tModule.EnumItem),
-	lineHeight = tModule.optional(tModule.number),
-	clipsDescendants = tModule.optional(tModule.boolean),
-	onAbsoluteSizeChange = tModule.optional(tModule.callback),
-	openTypeFeatures = tModule.optional(tModule.string)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
+local RoactModule = require(Parent1.Roact)
+local TModule = require(Parent1.t)
+local StyledTextLabel = RoactModule.PureComponent:extend("StyledTextLabel")
+StyledTextLabel.validateProps = TModule.strictInterface({
+	text = TModule.string,
+	fontStyle = TModule.union(require(Parent.Core.Style.Validator.validateFontInfo), (require(Parent.Core.Style.Validator.validateTypographyInfo))),
+	colorStyle = TModule.union(require(Parent.Core.Style.Validator.validateColorInfo), (require(Parent.Core.Style.Validator.validateColorToken))),
+	textTruncate = TModule.optional(TModule.EnumItem),
+	textWrapped = TModule.optional(TModule.boolean),
+	textXAlignment = TModule.optional(TModule.EnumItem),
+	textYAlignment = TModule.optional(TModule.EnumItem),
+	size = TModule.optional(TModule.UDim2),
+	maxSize = TModule.optional(TModule.Vector2),
+	richText = TModule.optional(TModule.boolean),
+	layoutOrder = TModule.optional(TModule.number),
+	fluidSizing = TModule.optional(TModule.boolean),
+	automaticSize = TModule.optional(TModule.EnumItem),
+	lineHeight = TModule.optional(TModule.number),
+	clipsDescendants = TModule.optional(TModule.boolean),
+	onAbsoluteSizeChange = TModule.optional(TModule.callback),
+	openTypeFeatures = TModule.optional(TModule.string)
 })
-styledTextLabel.defaultProps = {
+StyledTextLabel.defaultProps = {
 	richText = true,
 	fluidSizing = true,
 	lineHeight = 1.4,
@@ -38,9 +34,9 @@ styledTextLabel.defaultProps = {
 	automaticSize = Enum.AutomaticSize.None
 }
 
-function styledTextLabel.render(p1)
-	-- upvalues: roactModule (ref), genericTextLabelModule (ref)
-	return roactModule.createElement(genericTextLabelModule, {
+function StyledTextLabel.render(p1) --[[ Line: 64 ]]
+	-- upvalues: RoactModule (copy), GenericTextLabelModule (copy)
+	return RoactModule.createElement(GenericTextLabelModule, {
 		maxSize = p1.props.maxSize,
 		fontStyle = p1.props.fontStyle,
 		colorStyle = p1.props.colorStyle,
@@ -57,8 +53,8 @@ function styledTextLabel.render(p1)
 		LineHeight = p1.props.lineHeight,
 		ClipsDescendants = p1.props.clipsDescendants,
 		openTypeFeatures = p1.props.openTypeFeatures,
-		[roactModule.Change.AbsoluteSize] = p1.props.onAbsoluteSizeChange
+		[RoactModule.Change.AbsoluteSize] = p1.props.onAbsoluteSizeChange
 	})
 end
 
-return styledTextLabel
+return StyledTextLabel

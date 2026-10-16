@@ -1,9 +1,9 @@
-﻿return function(p1, p2)
-	local localUserId = p1.LocalUserId
+﻿return function(p1, List) --[[ Line: 1 ]]
+	local LocalUserId = p1.LocalUserId
 	
-	for i, v in ipairs(p2) do
-		if v ~= localUserId then
-			return v
+	for _, value in ipairs(List) do
+		if value ~= LocalUserId then
+			return value
 		end
 	end
 end

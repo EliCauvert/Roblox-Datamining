@@ -1,62 +1,64 @@
-﻿local policyService = game:GetService("PolicyService")
-local playersService = game:GetService("Players")
-local parent = script.Parent.Parent
-local promiseModule = require(parent.Parent.Promise)
-local loggerModule = require(parent.Logger)
+﻿local PolicyService = game:GetService("PolicyService")
+local Players = game:GetService("Players")
+local Parent = script.Parent.Parent
+local PromiseModule = require(Parent.Parent.Promise)
+local LoggerModule = require(Parent.Logger)
 
-return function(p1)
-	-- upvalues: policyService (ref), playersService (ref), promiseModule (ref), loggerModule (ref)
-	p1 = p1 or {}
-	p1.PolicyService = p1.PolicyService or policyService
-	p1.PlayersService = p1.PlayersService or playersService
-	assert(p1.PolicyService, "expected dependencies.PolicyService")
-	assert(p1.PlayersService, "expected dependencies.PlayersService")
-	p1 = p1.PolicyService
-	local playersService_1 = p1.PlayersService
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: PolicyService (copy), Players (copy), PromiseModule (copy), LoggerModule (copy)
+	local P0 = p1 or {}
+	P0.PolicyService = P0.PolicyService or PolicyService
+	P0.PlayersService = P0.PlayersService or Players
+	assert(P0.PolicyService, "expected dependencies.PolicyService")
+	assert(P0.PlayersService, "expected dependencies.PlayersService")
+	local PolicyService1 = P0.PolicyService
+	local PlayersService = P0.PlayersService
 	
-	return function()
-		-- upvalues: promiseModule (copy), playersService_1 (ref), p1 (ref), loggerModule (copy)
+	return function() --[[ Line: 21 ]]
+		-- upvalues: PromiseModule (upval), PlayersService (copy), PolicyService1 (copy), LoggerModule (upval)
 		return {
-			read = function()
+			read = function() --[[ Line: 23 ]]
 				return nil
 			end,
-			onPolicyChanged = function(p2)
-				-- upvalues: promiseModule (copy), playersService_1 (copy), p1 (copy), loggerModule (copy)
-				local bindableEvent = Instance.new("BindableEvent")
-				local eventConnection = bindableEvent.Event:Connect(p2)
-				promiseModule.new(function(p3, p4)
-					-- upvalues: playersService_1 (copy), p1 (copy)
-					local localPlayer = playersService_1.LocalPlayer
+			onPolicyChanged = function(Callback) --[[ Line: 27 ]]
+				-- upvalues: PromiseModule (upval), PlayersService (upval), PolicyService1 (upval), LoggerModule (upval)
+				local BindableEvent = Instance.new("BindableEvent")
+				local EventConnection = BindableEvent.Event:Connect(Callback)
+				PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 33 ]]
+					-- upvalues: PlayersService (upval), PolicyService1 (upval)
+					local LocalPlayer = PlayersService.LocalPlayer
 					
-					if not localPlayer then
-						p4("LocalPlayer not found")
+					if not LocalPlayer then
+						Callback("LocalPlayer not found")
 						
 						return
 					end
-					local ok, status = pcall(function()
-						-- upvalues: p1 (copy), localPlayer (ref)
-						return p1:GetPolicyInfoForPlayerAsync(localPlayer)
+					local Success, Result = pcall(function() --[[ Line: 36 ]]
+						-- upvalues: PolicyService1 (upval), LocalPlayer (copy)
+						return PolicyService1:GetPolicyInfoForPlayerAsync(LocalPlayer)
 					end)
 					
-					if not ok then
-						p4("GetPolicyInfoForPlayerAsync had an error when calling")
-						
-						return
-					elseif status then
-						p3(status)
+					if not Success then
+						Callback("GetPolicyInfoForPlayerAsync had an error when calling")
 						
 						return
 					end
-					p4("GetPolicyInfoForPlayerAsync return nil value")
-				end):andThen(function(p3)
-					-- upvalues: bindableEvent (ref)
-					bindableEvent:Fire(p3)
-				end):catch(function(p3)
-					-- upvalues: loggerModule (copy)
-					loggerModule:warning("Could not fetch from PolicyService due to error: {}", p3)
+					if Result then
+						Callback1(Result)
+						
+						return
+					else
+						Callback("GetPolicyInfoForPlayerAsync return nil value")
+					end
+				end):andThen(function(Result) --[[ Line: 52 ]]
+					-- upvalues: BindableEvent (copy)
+					BindableEvent:Fire(Result)
+				end):catch(function(Err) --[[ Line: 55 ]]
+					-- upvalues: LoggerModule (upval)
+					LoggerModule:warning("Could not fetch from PolicyService due to error: {}", Err)
 				end)
 				
-				return eventConnection
+				return EventConnection
 			end
 		}
 	end

@@ -1,55 +1,53 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFStringUGCValidateAnimationHeightTolModule = require(parent.flags.GetFStringUGCValidateAnimationHeightTol)
-local getFStringUGCValidationMaxAnimationBoundsModule = require(parent.flags.GetFStringUGCValidationMaxAnimationBounds)
-local getFIntUGCValidateMaxAnimationFPSModule = require(parent.flags.getFIntUGCValidateMaxAnimationFPS)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFStringUGCValidateAnimationHeightTolModule = require(Parent.flags.GetFStringUGCValidateAnimationHeightTol)
+local GetFStringUGCValidationMaxAnimationBoundsModule = require(Parent.flags.GetFStringUGCValidationMaxAnimationBounds)
+local GetFIntUGCValidateMaxAnimationFPSModule = require(Parent.flags.getFIntUGCValidateMaxAnimationFPS)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
 	},
 	requiredData = {
-		validationEnumsModule.SharedDataMember.curveAnimations,
-		validationEnumsModule.SharedDataMember.curveAnimComputedFrames
+		ValidationEnumsModule.SharedDataMember.curveAnimations,
+		ValidationEnumsModule.SharedDataMember.curveAnimComputedFrames
 	},
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2)
-		-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), getFStringUGCValidateAnimationHeightTolModule (ref), getFStringUGCValidationMaxAnimationBoundsModule (ref), errorSourceStringsModule (ref)
-		local curveAnimComputedFrames = p2.curveAnimComputedFrames
-		local animFrames = curveAnimComputedFrames.animFrames
-		local animLength = curveAnimComputedFrames.animLength
-		local var1 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
-		local var2 = getFStringUGCValidateAnimationHeightTolModule.asNumber()
-		local var3 = getFStringUGCValidationMaxAnimationBoundsModule.asNumber()
+	run = function(p1, p2) --[[ Line: 21 ]]
+		-- upvalues: GetFIntUGCValidateMaxAnimationFPSModule (copy), GetFStringUGCValidateAnimationHeightTolModule (copy), GetFStringUGCValidationMaxAnimationBoundsModule (copy), ErrorSourceStringsModule (copy)
+		local CurveAnimComputedFrames = p2.curveAnimComputedFrames
+		local AnimFrames = CurveAnimComputedFrames.animFrames
+		local AnimLength: number = CurveAnimComputedFrames.animLength
+		local v1 = 1 / GetFIntUGCValidateMaxAnimationFPSModule()
+		local AsNumberResult = GetFStringUGCValidateAnimationHeightTolModule.asNumber()
+		local AsNumberResult1 = GetFStringUGCValidationMaxAnimationBoundsModule.asNumber()
 		
-		for i, v in animFrames do
-			for i_1, v_1 in v do
-				if v_1.Position.Y >= var2 then
-					if var3 < v_1.Position.Magnitude then
-						p1:fail(errorSourceStringsModule.Keys.CurveAnim_PartTooFar, {
-							time = string.format("%.2f", math.min(animLength, (i - 1) * var1)),
-							bodyPart = i_1,
-							distance = string.format("%.2f", v_1.Position.Magnitude),
-							maxDistance = getFStringUGCValidationMaxAnimationBoundsModule.asString()
-						})
-						
-						return
-					end
+		for i, animFrame in AnimFrames do
+			for BodyPart, value in animFrame do
+				if value.Position.Y < AsNumberResult then
+					p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_PartTooLow, {
+						time = string.format("%.2f", (math.min(AnimLength, (i - 1) * v1))),
+						bodyPart = BodyPart,
+						height = string.format("%.2f", value.Position.Y),
+						minHeight = GetFStringUGCValidateAnimationHeightTolModule.asString()
+					})
+					break
 				end
-				p1:fail(errorSourceStringsModule.Keys.CurveAnim_PartTooLow, {
-					time = string.format("%.2f", math.min(animLength, (i - 1) * var1)),
-					bodyPart = i_1,
-					height = string.format("%.2f", v_1.Position.Y),
-					minHeight = getFStringUGCValidateAnimationHeightTolModule.asString()
-				})
-				
-				return
+				if AsNumberResult1 < value.Position.Magnitude then
+					p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_PartTooFar, {
+						time = string.format("%.2f", (math.min(AnimLength, (i - 1) * v1))),
+						bodyPart = BodyPart,
+						distance = string.format("%.2f", value.Position.Magnitude),
+						maxDistance = GetFStringUGCValidationMaxAnimationBoundsModule.asString()
+					})
+					break
+				end
 			end
 		end
 	end

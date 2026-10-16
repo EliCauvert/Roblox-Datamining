@@ -1,23 +1,23 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local dataSource = require(viewRecyclerReact.Parent.ViewRecycler).DataSource
-local reactModule = require(viewRecyclerReact.Parent.React)
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local DataSource = require(ViewRecyclerReact.Parent.ViewRecycler).DataSource
+local ReactModule = require(ViewRecyclerReact.Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), dataSource (ref)
-	local var1 = reactModule.useState(function()
-		-- upvalues: dataSource (copy), p1 (ref), p2 (ref)
-		return dataSource.sequence(p1, p2)
+return function(Tbl, p1) --[[ Line: 7 | Named "useReconciledDataSource" ]]
+	-- upvalues: ReactModule (copy), DataSource (copy)
+	local UseStateResult = ReactModule.useState(function() --[[ Line: 8 ]]
+		-- upvalues: DataSource (upval), Tbl (copy), p1 (copy)
+		return DataSource.sequence(Tbl, p1)
 	end)
-	local var2 = reactModule.useRef(nil)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var2.current == nil then
-		var2.current = table.clone(p1)
+	if UseRefResult.current == nil then
+		UseRefResult.current = table.clone(Tbl)
 	end
-	reactModule.useLayoutEffect(function()
-		-- upvalues: dataSource (copy), var1 (ref), var2 (ref), p1 (ref), p2 (ref)
-		dataSource.reconcileSnapshot(var1, var2.current, p1, p2)
-		var2.current = table.clone(p1)
-	end, { var1, p1, p2 })
+	ReactModule.useLayoutEffect(function() --[[ Line: 16 ]]
+		-- upvalues: DataSource (upval), UseStateResult (copy), UseRefResult (copy), Tbl (copy), p1 (copy)
+		DataSource.reconcileSnapshot(UseStateResult, UseRefResult.current, Tbl, p1)
+		UseRefResult.current = table.clone(Tbl)
+	end, { UseStateResult, Tbl, p1 })
 	
-	return var1
+	return UseStateResult
 end

@@ -1,36 +1,36 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local alertVariantModule = require(foundation.Enums.AlertVariant)
-local alertSeverityModule = require(foundation.Enums.AlertSeverity)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
+local AlertVariantModule = require(Foundation.Enums.AlertVariant)
+local AlertSeverityModule = require(Foundation.Enums.AlertSeverity)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function createStandardVariantStyles(p1, p2)
-	-- upvalues: colorNamespaceModule (ref)
+local function createStandardVariantStyles(p1, Style) --[[ Line: 31 ]]
+	-- upvalues: ColorNamespaceModule (copy)
 	return {
 		container = {
 			tag = "bg-shift-200",
-			colorNamespace = colorNamespaceModule.Color
+			colorNamespace = ColorNamespaceModule.Color
 		},
 		title = { style = p1.Color.Content.Emphasis },
 		description = { style = p1.Color.Content.Default },
-		icon = { style = p2 }
+		icon = { style = Style }
 	}
 end
 
-local function createEmphasisVariantStyles(p1, p2, p3)
+local function createEmphasisVariantStyles(p1, Tag, DarkMode) --[[ Line: 43 ]]
 	return {
-		container = { tag = p2, colorNamespace = p3 },
-		title = { style = p1[p3].Content.Emphasis },
-		description = { style = p1[p3].Content.Default },
-		icon = { style = p1[p3].Content.Emphasis }
+		container = { tag = Tag, colorNamespace = DarkMode },
+		title = { style = p1[DarkMode].Content.Emphasis },
+		description = { style = p1[DarkMode].Content.Default },
+		icon = { style = p1[DarkMode].Content.Emphasis }
 	}
 end
 
-local function variantsFactory(p1)
-	-- upvalues: alertVariantModule (ref), alertSeverityModule (ref), createStandardVariantStyles (ref), createEmphasisVariantStyles (ref), colorNamespaceModule (ref)
+local function variantsFactory(p1) --[[ Line: 59 ]]
+	-- upvalues: AlertVariantModule (copy), AlertSeverityModule (copy), createStandardVariantStyles (copy), createEmphasisVariantStyles (copy), ColorNamespaceModule (copy)
 	return {
 		common = {
 			container = {
@@ -44,25 +44,25 @@ local function variantsFactory(p1)
 			}
 		},
 		severity = {
-			[alertVariantModule.Standard] = {
-				[alertSeverityModule.Info] = createStandardVariantStyles(p1, p1.Color.System.Emphasis),
-				[alertSeverityModule.Warning] = createStandardVariantStyles(p1, p1.Color.System.Warning),
-				[alertSeverityModule.Success] = createStandardVariantStyles(p1, p1.Color.System.Success),
-				[alertSeverityModule.Error] = createStandardVariantStyles(p1, p1.Color.System.Alert)
+			[AlertVariantModule.Standard] = {
+				[AlertSeverityModule.Info] = createStandardVariantStyles(p1, p1.Color.System.Emphasis),
+				[AlertSeverityModule.Warning] = createStandardVariantStyles(p1, p1.Color.System.Warning),
+				[AlertSeverityModule.Success] = createStandardVariantStyles(p1, p1.Color.System.Success),
+				[AlertSeverityModule.Error] = createStandardVariantStyles(p1, p1.Color.System.Alert)
 			},
-			[alertVariantModule.Emphasis] = {
-				[alertSeverityModule.Info] = createEmphasisVariantStyles(p1, "bg-system-emphasis", colorNamespaceModule.DarkMode),
-				[alertSeverityModule.Warning] = createEmphasisVariantStyles(p1, "bg-system-warning", colorNamespaceModule.LightMode),
-				[alertSeverityModule.Success] = createEmphasisVariantStyles(p1, "bg-system-success", colorNamespaceModule.LightMode),
-				[alertSeverityModule.Error] = createEmphasisVariantStyles(p1, "bg-system-alert", colorNamespaceModule.DarkMode)
+			[AlertVariantModule.Emphasis] = {
+				[AlertSeverityModule.Info] = createEmphasisVariantStyles(p1, "bg-system-emphasis", ColorNamespaceModule.DarkMode),
+				[AlertSeverityModule.Warning] = createEmphasisVariantStyles(p1, "bg-system-warning", ColorNamespaceModule.LightMode),
+				[AlertSeverityModule.Success] = createEmphasisVariantStyles(p1, "bg-system-success", ColorNamespaceModule.LightMode),
+				[AlertSeverityModule.Error] = createEmphasisVariantStyles(p1, "bg-system-alert", ColorNamespaceModule.DarkMode)
 			}
 		}
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local systemBanner = variantsContextModule.useVariants("SystemBanner", variantsFactory, p1)
+return function(p1, p2, p3) --[[ Line: 98 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local SystemBanner = VariantsContextModule.useVariants("SystemBanner", variantsFactory, p1)
 	
-	return composeStyleVariantModule(systemBanner.common, systemBanner.severity[p2][p3])
+	return ComposeStyleVariantModule(SystemBanner.common, SystemBanner.severity[p2][p3])
 end

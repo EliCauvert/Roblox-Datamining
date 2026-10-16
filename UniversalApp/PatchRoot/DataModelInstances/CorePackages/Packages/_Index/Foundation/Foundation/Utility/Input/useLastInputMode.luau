@@ -1,23 +1,23 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent.React)
-local useEventConnection = require(parent.ReactUtils).useEventConnection
-local _ = require(foundation.Utility.Input.InputMode)
-local getInputModeModule = require(foundation.Utility.Input.getInputMode)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent.React)
+local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local _ = require(Foundation.Utility.Input.InputMode)
+local GetInputModeModule = require(Foundation.Utility.Input.getInputMode)
 
-local function getLastInputMode()
-	-- upvalues: getInputModeModule (ref), userInputService (ref)
-	return getInputModeModule(userInputService:GetLastInputType())
+local function getLastInputMode() --[[ Line: 16 ]]
+	-- upvalues: GetInputModeModule (copy), UserInputService (copy)
+	return GetInputModeModule(UserInputService:GetLastInputType())
 end
 
-return function()
-	-- upvalues: reactModule (ref), getLastInputMode (ref), useEventConnection (ref), userInputService (ref)
-	local var1, var2 = reactModule.useState(getLastInputMode)
-	useEventConnection(userInputService.LastInputTypeChanged, function()
-		-- upvalues: var2 (ref), getLastInputMode (copy)
-		var2(getLastInputMode())
+return function() --[[ Line: 20 | Named "useLastInputMode" ]]
+	-- upvalues: ReactModule (copy), getLastInputMode (copy), UseEventConnectionFunction (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(getLastInputMode)
+	UseEventConnectionFunction(UserInputService.LastInputTypeChanged, function() --[[ Line: 23 ]]
+		-- upvalues: UseStateResult2 (copy), getLastInputMode (upval)
+		UseStateResult2(getLastInputMode())
 	end)
 	
-	return var1
+	return UseStateResult
 end

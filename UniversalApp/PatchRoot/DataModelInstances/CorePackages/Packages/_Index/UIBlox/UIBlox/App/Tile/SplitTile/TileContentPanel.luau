@@ -1,90 +1,88 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local core = parent.Core
-local parent_1 = parent.Parent
-local foundationModule = require(parent_1.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local reactModule = require(parent_1.React)
-local useStyleModule = require(core.Style.useStyle)
-local useTextSizeOffsetModule = require(parent.Core.Style.useTextSizeOffset)
-local _ = require(parent.App.Style.Fonts)
-local _ = require(parent.App.Style.StyleTypes)
-local setDefaultModule = require(parent.Utility.setDefault)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ReactModule = require(Parent1.React)
+local UseStyleModule = require(Parent.Core.Style.useStyle)
+local UseTextSizeOffsetModule = require(Parent.Core.Style.useTextSizeOffset)
+local _ = require(Parent.App.Style.Fonts)
+local _ = require(Parent.App.Style.StyleTypes)
+local SetDefaultModule = require(Parent.Utility.setDefault)
 
-return function(p1)
-	-- upvalues: useStyleModule (ref), useTextSizeOffsetModule (ref), setDefaultModule (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1, var2, var3, var4
-	local var5 = useStyleModule()
-	local var6 = useTextSizeOffsetModule()
-	local var7 = if var5.Settings.ReducedMotion then 6 else 8
-	local contentTitle = p1.contentTitle
-	local contentFooter = p1.contentFooter
-	local var8 = setDefaultModule(p1.textLineCount, 2)
-	local var9 = setDefaultModule(p1.hasSidePadding, true)
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
+return function(p1) --[[ Line: 47 | Named "TileContentPanel" ]]
+	-- upvalues: UseStyleModule (copy), UseTextSizeOffsetModule (copy), SetDefaultModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseStyleModuleResult = UseStyleModule()
+	local Settings = UseStyleModuleResult.Settings
+	local UseTextSizeOffsetModuleResult = UseTextSizeOffsetModule()
+	local v1: number = if Settings.ReducedMotion then 6 else 8
+	local ContentTitle: string = p1.contentTitle
+	local ContentFooter = p1.contentFooter
+	local SetDefaultModuleResult: number = SetDefaultModule(p1.textLineCount, 2)
+	local SetDefaultModuleResult1 = SetDefaultModule(p1.hasSidePadding, true)
+	local Offset3 = nil
+	local Offset2 = nil
+	local Offset1 = nil
+	local Offset = nil
 	
 	if p1.outerPadding == nil or type(p1.outerPadding) == "number" then
-		local var10 = setDefaultModule(p1.outerPadding, var7)
-		var1 = var10
-		var2 = var10
-		var3 = var10
-		var4 = var10
+		local SetDefaultModuleResult2 = SetDefaultModule(p1.outerPadding, v1)
+		Offset = SetDefaultModuleResult2
+		Offset2 = SetDefaultModuleResult2
+		Offset3 = SetDefaultModuleResult2
+		Offset1 = SetDefaultModuleResult2
 	else
-		var1 = setDefaultModule(p1.outerPadding.Left, var7)
-		var2 = setDefaultModule(p1.outerPadding.Right, var7)
-		var3 = setDefaultModule(p1.outerPadding.Top, var7)
-		var4 = setDefaultModule(p1.outerPadding.Bottom, var7)
+		Offset = SetDefaultModule(p1.outerPadding.Left, v1)
+		Offset2 = SetDefaultModule(p1.outerPadding.Right, v1)
+		Offset3 = SetDefaultModule(p1.outerPadding.Top, v1)
+		Offset1 = SetDefaultModule(p1.outerPadding.Bottom, v1)
 	end
-	local var11 = setDefaultModule(p1.titlePadding, var7)
-	local panelHeight = p1.panelHeight
-	local footerHeight = p1.footerHeight
-	local font = var5.Font
-	local var12 = setDefaultModule(p1.titleFont, font.Header2)
-	local textEmphasis = var5.Theme.TextEmphasis
+	local SetDefaultModuleResult3 = SetDefaultModule(p1.titlePadding, v1)
+	local PanelHeight = p1.panelHeight
+	local FooterHeight = p1.footerHeight
+	local UseStyleModuleResultFont = UseStyleModuleResult.Font
+	local SetDefaultModuleResult4 = SetDefaultModule(p1.titleFont, UseStyleModuleResultFont.Header2)
+	local ScaledBaseSize = (UseStyleModuleResultFont.BaseSize + UseTextSizeOffsetModuleResult) * SetDefaultModuleResult4.RelativeSize * SetDefaultModuleResult
+	local TextEmphasis = UseStyleModuleResult.Theme.TextEmphasis
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(UDim.new(1, 0), panelHeight)
+		Size = UDim2.new(UDim.new(1, 0), PanelHeight)
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var11)
+			Padding = UDim.new(0, SetDefaultModuleResult3)
 		}),
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingLeft = if var9 then UDim.new(0, var1) else nil,
-			PaddingRight = if var9 then UDim.new(0, var2) else nil,
-			PaddingTop = UDim.new(0, var3),
-			PaddingBottom = UDim.new(0, var4)
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingLeft = if SetDefaultModuleResult1 then UDim.new(0, Offset) else nil,
+			PaddingRight = if SetDefaultModuleResult1 then UDim.new(0, Offset2) else nil,
+			PaddingTop = UDim.new(0, Offset3),
+			PaddingBottom = UDim.new(0, Offset1)
 		}),
-		TitleText = if var8 > 0 and contentTitle and string.len(contentTitle) > 0 then reactModule.createElement("TextLabel", {
+		TitleText = if SetDefaultModuleResult > 0 and ContentTitle and string.len(ContentTitle) > 0 then ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Text = contentTitle,
-			Font = if foundationFontFaceMigration then nil else var12.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var12.Font) else nil,
-			TextSize = font.BaseSize * var12.RelativeSize,
-			TextTransparency = textEmphasis.Transparency,
-			TextColor3 = textEmphasis.Color,
+			Text = ContentTitle,
+			Font = if FoundationFontFaceMigration then nil else SetDefaultModuleResult4.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(SetDefaultModuleResult4.Font) else nil,
+			TextSize = UseStyleModuleResultFont.BaseSize * SetDefaultModuleResult4.RelativeSize,
+			TextTransparency = TextEmphasis.Transparency,
+			TextColor3 = TextEmphasis.Color,
 			TextTruncate = Enum.TextTruncate.AtEnd,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top
 		}, {
-			UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-				MaxSize = Vector2.new(1e999, (font.BaseSize + var6) * var12.RelativeSize * var8)
-			})
+			UISizeConstraint = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(1e999, ScaledBaseSize) })
 		}) else nil,
-		ContentFooter = if contentFooter then reactModule.createElement("Frame", {
+		ContentFooter = if ContentFooter then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 2,
-			Size = UDim2.new(UDim.new(1, 0), footerHeight)
-		}, { contentFooter }) else nil
+			Size = UDim2.new(UDim.new(1, 0), FooterHeight)
+		}, { ContentFooter }) else nil
 	})
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Text)
+﻿return (require(script.Text))

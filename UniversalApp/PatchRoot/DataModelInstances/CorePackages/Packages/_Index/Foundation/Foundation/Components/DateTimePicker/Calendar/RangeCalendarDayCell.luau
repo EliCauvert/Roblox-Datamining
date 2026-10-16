@@ -1,61 +1,60 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local calendarGridDayLabelModule = require(script.Parent.CalendarGridDayLabel)
-local dateTimeCalendarDayAppearanceUtilitiesModule = require(script.Parent.Parent.Utilities.DateTimeCalendarDayAppearanceUtilities)
-local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local CalendarGridDayLabelModule = require(script.Parent.CalendarGridDayLabel)
+local DateTimeCalendarDayAppearanceUtilitiesModule = require(script.Parent.Parent.Utilities.DateTimeCalendarDayAppearanceUtilities)
+local DateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(p1)
-	-- upvalues: useTokensModule (ref), dateTimeUtilitiesModule (ref), dateTimeCalendarDayAppearanceUtilitiesModule (ref), reactModule (ref), viewModule (ref), calendarGridDayLabelModule (ref)
-	local var1 = useTokensModule()
-	local dateTime = DateTime.fromLocalTime(p1.year, p1.month, p1.day)
-	local selectedDates = p1.selectedDates or {}
-	local t = {}
+return function(Frame) --[[ Line: 30 | Named "RangeCalendarDayCell" ]]
+	-- upvalues: UseTokensModule (copy), DateTimeUtilitiesModule (copy), DateTimeCalendarDayAppearanceUtilitiesModule (copy), ReactModule (copy), ViewModule (copy), CalendarGridDayLabelModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local _DateTime = DateTime.fromLocalTime(Frame.year, Frame.month, Frame.day)
+	local SelectedDates = Frame.selectedDates or {}
+	local List = {}
 	
-	for i, v in selectedDates do
-		table.insert(t, dateTimeUtilitiesModule.toLocalTime(v))
+	for _, selectedDate in SelectedDates do
+		table.insert(List, DateTimeUtilitiesModule.toLocalTime(selectedDate))
 	end
-	local var2 = dateTimeCalendarDayAppearanceUtilitiesModule.resolveHighlightDates(selectedDates, p1.hoveredDate)
-	local var3 = dateTimeCalendarDayAppearanceUtilitiesModule.isDaySelectable(dateTime, p1.selectableDateRange)
-	local var4 = dateTimeCalendarDayAppearanceUtilitiesModule.isDaySelected(dateTime, t, true)
-	local var5 = dateTimeCalendarDayAppearanceUtilitiesModule.isDayHighlighted(dateTime, var2, true)
-	local rangeBand, rangeBand_1, rangeBand_2 = dateTimeCalendarDayAppearanceUtilitiesModule.getRangeBand(dateTime, var2, true, var4)
+	local ResolveHighlightDatesResult = DateTimeCalendarDayAppearanceUtilitiesModule.resolveHighlightDates(SelectedDates, Frame.hoveredDate)
+	local IsDaySelectable = DateTimeCalendarDayAppearanceUtilitiesModule.isDaySelectable(_DateTime, Frame.selectableDateRange)
+	local IsDaySelected = DateTimeCalendarDayAppearanceUtilitiesModule.isDaySelected(_DateTime, List, true)
+	local IsDayHighlighted = DateTimeCalendarDayAppearanceUtilitiesModule.isDayHighlighted(_DateTime, ResolveHighlightDatesResult, true)
+	local RangeBand, RangeBand2, RangeBand3 = DateTimeCalendarDayAppearanceUtilitiesModule.getRangeBand(_DateTime, ResolveHighlightDatesResult, true, IsDaySelected)
+	local NoIsDaySelected: boolean = IsDayHighlighted and not IsDaySelected
+	local IsNotRangeBandMatch: boolean = RangeBand3 ~= nil and RangeBand3 ~= ""
 	
-	return reactModule.createElement(viewModule, {
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.fromOffset(p1.cellSize, p1.cellSize)
+	return ReactModule.createElement(ViewModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.fromOffset(Frame.cellSize, Frame.cellSize)
 	}, {
-		RangeFill = if var5 and not var4 then reactModule.createElement(viewModule, {
+		RangeFill = if NoIsDaySelected then ReactModule.createElement(ViewModule, {
 			ZIndex = 0,
-			backgroundStyle = var1.Color.ActionStandard.Background,
-			tag = {
-				["size-full"] = true,
-				[rangeBand_2] = rangeBand_2 ~= nil and rangeBand_2 ~= ""
-			}
+			backgroundStyle = UseTokensModuleResult.Color.ActionStandard.Background,
+			tag = { ["size-full"] = true, [RangeBand3] = IsNotRangeBandMatch }
 		}) else nil,
-		Day = reactModule.createElement(calendarGridDayLabelModule, {
+		Day = ReactModule.createElement(CalendarGridDayLabelModule, {
 			highlight = false,
 			LayoutOrder = 1,
-			bandPosition = if var4 then rangeBand else nil,
-			bandRadiusTag = if var4 then rangeBand_2 else nil,
-			bandSize = if var4 then rangeBand_1 else nil,
-			emphasizeText = var3 and not var4,
-			isSelectable = var3,
-			isSelected = var4,
-			label = tostring(p1.day),
-			onActivated = function()
-				-- upvalues: p1 (ref), dateTime (ref)
-				p1.onDayActivated(dateTime)
+			bandPosition = if IsDaySelected then RangeBand else nil,
+			bandRadiusTag = if IsDaySelected then RangeBand3 else nil,
+			bandSize = if IsDaySelected then RangeBand2 else nil,
+			emphasizeText = IsDaySelectable and not IsDaySelected,
+			isSelectable = IsDaySelectable,
+			isSelected = IsDaySelected,
+			label = tostring(Frame.day),
+			onActivated = function() --[[ Line: 86 ]]
+				-- upvalues: Frame (copy), _DateTime (copy)
+				Frame.onDayActivated(_DateTime)
 			end,
-			onHoverEnter = reactModule.useMemo(function()
-				-- upvalues: p1 (ref), dateTime (ref)
-				return if p1.onHoverEnter == nil then nil else function()
-					-- upvalues: p1 (copy), dateTime (copy)
-					p1.onHoverEnter(dateTime)
+			onHoverEnter = ReactModule.useMemo(function() --[[ Line: 48 ]]
+				-- upvalues: Frame (copy), _DateTime (copy)
+				return if Frame.onHoverEnter == nil then nil else function() --[[ Line: 52 ]]
+					-- upvalues: Frame (upval), _DateTime (upval)
+					Frame.onHoverEnter(_DateTime)
 				end
-			end, { p1.onHoverEnter, dateTime }),
-			testId = `{p1.testId}--day-{p0.year}-{p0.month}-{p0.day}`
+			end, { Frame.onHoverEnter, _DateTime }),
+			testId = `{Frame.testId}--day-{Frame.year}-{Frame.month}-{Frame.day}`
 		})
 	})
 end

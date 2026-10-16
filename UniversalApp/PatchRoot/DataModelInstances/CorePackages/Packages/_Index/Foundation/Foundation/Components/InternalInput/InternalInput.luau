@@ -1,148 +1,151 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local useMotion = require(parent.Motion).useMotion
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local components = foundation.Components
-local inputLabelModule = require(components.InputLabel)
-local _ = require(components.Types)
-local viewModule = require(components.View)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local inputHintModule = require(script.Parent.InputHint)
-local useInputMotionStatesModule = require(script.Parent.useInputMotionStates)
-local useInputVariantsModule = require(script.Parent.useInputVariants)
-local getInputTextSizeModule = require(foundation.Utility.getInputTextSize)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local constantsModule = require(foundation.Constants)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Enums.CursorType)
-local _ = require(foundation.Providers.Style.Tokens)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local UseMotionFunction = require(Parent.Motion).useMotion
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local Components = Foundation.Components
+local InputLabelModule = require(Components.InputLabel)
+local _ = require(Components.Types)
+local ViewModule = require(Components.View)
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local InputHintModule = require(script.Parent.InputHint)
+local UseInputMotionStatesModule = require(script.Parent.useInputMotionStates)
+local UseInputVariantsModule = require(script.Parent.useInputVariants)
+local GetInputTextSizeModule = require(Foundation.Utility.getInputTextSize)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local ConstantsModule = require(Foundation.Constants)
+local _ = require(Foundation.Enums.CursorType)
+local _ = require(Foundation.Providers.Style.Tokens)
+local config = {
 	Selectable = true,
 	testId = "--foundation-internal-input",
-	size = inputSizeModule.Medium
+	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useInputVariantsModule (ref), reactModule (ref), useInputMotionStatesModule (ref), useMotion (ref), constantsModule (ref), stateLayerAffordanceModule (ref), viewModule (ref), withCommonPropsModule (ref), dashModule (ref), inputLabelModule (ref), getInputTextSizeModule (ref), inputHintModule (ref)
-	local var1
-	local var2 = withDefaultsModule(p1, t)
-	local text = var2.label.text
-	local position = var2.label.position or Enum.HorizontalAlignment.Right
-	
-	if typeof(text) == "string" then
-		var1 = #text > 0
-		var1 = nil
-	else
-		var1 = text ~= nil
-	end
-	local var3 = useTokensModule()
-	local isChecked = var2.isChecked or var2.isIndeterminate
-	local var4 = useInputVariantsModule(var3, var2.size, position)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var3 (ref)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 81 | Named "InternalInput" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseInputVariantsModule (copy), ReactModule (copy), UseInputMotionStatesModule (copy), UseMotionFunction (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ViewModule (copy), WithCommonPropsModule (copy), DashModule (copy), InputLabelModule (copy), GetInputTextSizeModule (copy), InputHintModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local Text = WithDefaultsModuleResult.label.text
+	local Position = WithDefaultsModuleResult.label.position or Enum.HorizontalAlignment.Right
+	local HasText: boolean = if typeof(Text) == "string" then #Text > 0 else Text ~= nil
+	local UseTokensModuleResult = UseTokensModule()
+	local IsChecked = WithDefaultsModuleResult.isChecked or WithDefaultsModuleResult.isIndeterminate
+	local UseInputVariantsModuleResult = UseInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, Position)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 93 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), UseTokensModuleResult (copy)
 		return {
-			radius = var2.customVariantProps.cursorRadius or UDim.new(0, 0),
-			offset = var3.Size.Size_200,
-			borderWidth = var3.Stroke.Thicker
+			radius = WithDefaultsModuleResult.customVariantProps.cursorRadius or UDim.new(0, 0),
+			offset = UseTokensModuleResult.Size.Size_200,
+			borderWidth = UseTokensModuleResult.Stroke.Thicker
 		}
-	end, { var3, var1, var2.customVariantProps.cursorRadius })
-	local var6 = useInputMotionStatesModule(var3, var2.customVariantProps.colors)
-	local var7, var8 = useMotion(var6.Default)
-	reactModule.useEffect(function()
-		-- upvalues: isChecked (ref), var8 (ref), var6 (ref)
-		if isChecked then
-			var8(var6.Checked)
+	end, {
+		UseTokensModuleResult,
+		HasText,
+		WithDefaultsModuleResult.customVariantProps.cursorRadius
+	})
+	local UseInputMotionStatesModuleResult = UseInputMotionStatesModule(UseTokensModuleResult, WithDefaultsModuleResult.customVariantProps.colors)
+	local UseMotionResult, UseMotionResult2 = UseMotionFunction(UseInputMotionStatesModuleResult.Default)
+	ReactModule.useEffect(function() --[[ Line: 105 ]]
+		-- upvalues: IsChecked (copy), UseMotionResult2 (copy), UseInputMotionStatesModuleResult (copy)
+		if IsChecked then
+			UseMotionResult2(UseInputMotionStatesModuleResult.Checked)
+			
+			return
+		else
+			UseMotionResult2(UseInputMotionStatesModuleResult.Default)
+		end
+	end, { IsChecked, UseInputMotionStatesModuleResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 113 ]]
+		-- upvalues: WithDefaultsModuleResult (copy)
+		if not WithDefaultsModuleResult.isDisabled then
+			WithDefaultsModuleResult.onActivated(not WithDefaultsModuleResult.isChecked)
 			
 			return
 		end
-		var8(var6.Default)
-	end, { isChecked, var6 })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		if var2.isDisabled then
-			return
-		end
-		var2.onActivated(not var2.isChecked)
-	end, { var2.isDisabled, var2.isChecked, var2.onActivated })
-	local t_1 = {
-		Selectable = if var2.isDisabled then false else var2.Selectable,
-		NextSelectionUp = var2.NextSelectionUp,
-		NextSelectionDown = var2.NextSelectionDown,
-		NextSelectionLeft = var2.NextSelectionLeft,
-		NextSelectionRight = var2.NextSelectionRight
+	end, {
+		WithDefaultsModuleResult.isDisabled,
+		WithDefaultsModuleResult.isChecked,
+		WithDefaultsModuleResult.onActivated
+	})
+	local Selection = {
+		Selectable = not WithDefaultsModuleResult.isDisabled and WithDefaultsModuleResult.Selectable,
+		NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+		NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+		NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
+		NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight
 	}
-	local t_2 = {
-		Active = not var2.isDisabled,
-		GroupTransparency = if var2.isDisabled then constantsModule.DISABLED_TRANSPARENCY else 0,
-		onActivated = var9,
-		stateLayer = { affordance = stateLayerAffordanceModule.None },
-		selection = if var1 then { Selectable = false } else t_1,
-		cursor = if var1 then nil else var5,
-		isDisabled = var2.isDisabled,
-		ref = p2
+	local config1 = {
+		Active = not WithDefaultsModuleResult.isDisabled,
+		GroupTransparency = if WithDefaultsModuleResult.isDisabled then ConstantsModule.DISABLED_TRANSPARENCY else 0,
+		onActivated = UseResult,
+		stateLayer = { affordance = StateLayerAffordanceModule.None },
+		selection = if HasText then { Selectable = false } else Selection,
+		cursor = if HasText then nil else UseMemoResult,
+		isDisabled = WithDefaultsModuleResult.isDisabled,
+		ref = Ref
 	}
-	local var10 = if var2.customVariantProps.stroke and var2.customVariantProps.stroke.thickness ~= nil then var2.customVariantProps.stroke.thickness else var4.input.stroke.thickness
-	local t_3 = {
-		tag = var2.customVariantProps.tag,
-		Size = var2.customVariantProps.size - UDim2.fromOffset(var10, var10),
-		backgroundStyle = var7.backgroundStyle,
-		onActivated = var9,
-		stateLayer = reactModule.useMemo(function()
-			-- upvalues: stateLayerAffordanceModule (copy)
+	local Thickness = if WithDefaultsModuleResult.customVariantProps.stroke and WithDefaultsModuleResult.customVariantProps.stroke.thickness ~= nil then WithDefaultsModuleResult.customVariantProps.stroke.thickness else UseInputVariantsModuleResult.input.stroke.thickness
+	local config2 = {
+		tag = WithDefaultsModuleResult.customVariantProps.tag,
+		Size = WithDefaultsModuleResult.customVariantProps.size - UDim2.fromOffset(Thickness, Thickness),
+		backgroundStyle = UseMotionResult.backgroundStyle,
+		onActivated = UseResult,
+		stateLayer = ReactModule.useMemo(function() --[[ Line: 144 ]]
+			-- upvalues: StateLayerAffordanceModule (upval)
 			return {
 				inset = nil,
 				mode = nil,
-				affordance = stateLayerAffordanceModule.None
+				affordance = StateLayerAffordanceModule.None
 			}
 		end, {}),
 		stroke = {
-			Color = var7.strokeStyle:map(function(p3)
-				return p3.Color3
+			Color = UseMotionResult.strokeStyle:map(function(p2) --[[ Line: 156 ]]
+				return p2.Color3
 			end),
-			Transparency = var7.strokeStyle:map(function(p3)
-				-- upvalues: var2 (ref), var1 (ref), constantsModule (copy)
-				return if var2.isDisabled and not var1 then constantsModule.DISABLED_TRANSPARENCY else p3.Transparency
+			Transparency = UseMotionResult.strokeStyle:map(function(p2) --[[ Line: 159 ]]
+				-- upvalues: WithDefaultsModuleResult (copy), HasText (copy), ConstantsModule (upval)
+				return if WithDefaultsModuleResult.isDisabled and not HasText then ConstantsModule.DISABLED_TRANSPARENCY else p2.Transparency
 			end),
-			Thickness = var10,
+			Thickness = Thickness,
 			BorderStrokePosition = Enum.BorderStrokePosition.Inner
 		},
-		selection = t_1,
-		cursor = if var1 then var5 else nil,
-		LayoutOrder = if var1 then if position == Enum.HorizontalAlignment.Left then 1 else -1 else nil,
-		testId = `{var2.testId}--container`
+		selection = Selection,
+		cursor = if HasText then UseMemoResult else nil,
+		LayoutOrder = if HasText then if Position == Enum.HorizontalAlignment.Left then 1 else -1 else nil,
+		testId = `{WithDefaultsModuleResult.testId}--container`
 	}
 	
-	if not var1 then
-		return reactModule.createElement(viewModule, withCommonPropsModule(var2, dashModule.union(t_2, t_3)), var2.children)
-	end
-	local var11 = if typeof(text) == "string" then reactModule.createElement(inputLabelModule, {
-		Text = text,
-		textStyle = var7.labelStyle,
-		size = getInputTextSizeModule(var2.size),
-		testId = `{var2.testId}--label`
-	}) else text
-	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var2, dashModule.union({
-		tag = var4.container.tag,
-		padding = {
-			top = var4.container.padding,
-			bottom = var4.container.padding,
-			left = if position == Enum.HorizontalAlignment.Right then var4.container.padding else nil,
-			right = if position == Enum.HorizontalAlignment.Left then var4.container.padding else nil
-		}
-	}, t_2)), {
-		Input = reactModule.createElement(viewModule, t_3, var2.children),
-		InputLabel = if var2.label.hint == nil or var2.label.hint == "" then var11 else reactModule.createElement(viewModule, { tag = "col gap-xxsmall auto-xy" }, {
-			InputLabel = var11,
-			Hint = reactModule.createElement(inputHintModule, {
-				LayoutOrder = 2,
-				text = var2.label.hint,
-				size = getInputTextSizeModule(var2.size),
-				testId = `{var2.testId}--hint`
+	if HasText then
+		local Element = if typeof(Text) == "string" then ReactModule.createElement(InputLabelModule, {
+			Text = Text,
+			textStyle = UseMotionResult.labelStyle,
+			size = GetInputTextSizeModule(WithDefaultsModuleResult.size),
+			testId = `{WithDefaultsModuleResult.testId}--label`
+		}) else Text
+		
+		return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, DashModule.union({
+			tag = UseInputVariantsModuleResult.container.tag,
+			padding = {
+				top = UseInputVariantsModuleResult.container.padding,
+				bottom = UseInputVariantsModuleResult.container.padding,
+				left = if Position == Enum.HorizontalAlignment.Right then UseInputVariantsModuleResult.container.padding else nil,
+				right = if Position == Enum.HorizontalAlignment.Left then UseInputVariantsModuleResult.container.padding else nil
+			}
+		}, config1)), {
+			Input = ReactModule.createElement(ViewModule, config2, WithDefaultsModuleResult.children),
+			InputLabel = if WithDefaultsModuleResult.label.hint == nil or WithDefaultsModuleResult.label.hint == "" then Element else ReactModule.createElement(ViewModule, { tag = "col gap-xxsmall auto-xy" }, {
+				InputLabel = Element,
+				Hint = ReactModule.createElement(InputHintModule, {
+					LayoutOrder = 2,
+					text = WithDefaultsModuleResult.label.hint,
+					size = GetInputTextSizeModule(WithDefaultsModuleResult.size),
+					testId = `{WithDefaultsModuleResult.testId}--hint`
+				})
 			})
 		})
-	})
+	else
+		return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, DashModule.union(config1, config2)), WithDefaultsModuleResult.children)
+	end
 end))

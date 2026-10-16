@@ -1,70 +1,67 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
-local t = {}
 
-local function defaultMakeData()
+local function defaultMakeData() --[[ Line: 24 ]]
 	return {}
 end
 
-local t_1 = {}
-t_1.__index = t_1
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1, p2)
-	-- upvalues: defaultMakeData (ref), t_1 (ref)
-	local var1 = p1
-	local var2 = p2
+function Module.new(Weakness, MakeData) --[[ Line: 67 ]]
+	-- upvalues: defaultMakeData (copy), Module (copy)
+	local Weakness1: boolean = Weakness
+	local MakeData1 = MakeData
 	
-	if var1 == nil then
-		var1 = true
+	if Weakness1 == nil then
+		Weakness1 = true
 	end
-	if var2 == nil then
-		var2 = defaultMakeData
+	if MakeData1 == nil then
+		MakeData1 = defaultMakeData
 	end
-	local tbl = setmetatable({}, t_1)
-	tbl.weakness = var1
-	tbl.makeData = var2
+	local self = setmetatable({}, Module)
+	self.weakness = Weakness1
+	self.makeData = MakeData1
 	
-	return tbl
+	return self
 end
 
-function t_1:lookup(...)
+function Module:lookup(...) --[[ Line: 88 ]]
 	return self:lookupArray({ ... })
 end
 
-function t_1:lookupArray(p1)
-	local var1 = self
+function Module:lookupArray(Tbl) --[[ Line: 97 ]]
+	local ChildTrie1 = self
 	
-	for i, v in p1 do
-		var1 = var1:getChildTrie(v)
+	for _, value in Tbl do
+		ChildTrie1 = ChildTrie1:getChildTrie(value)
 	end
-	if not var1.data then
-		var1.data = self.makeData(table.clone(p1))
+	if not ChildTrie1.data then
+		ChildTrie1.data = self.makeData(table.clone(Tbl))
 	end
-	return var1.data
+	return ChildTrie1.data
 end
 
-function t_1:getChildTrie(p2)
-	-- upvalues: t_1 (ref)
-	local weak
-	local _ = nil
-	
+function Module:getChildTrie(Key) --[[ Line: 114 ]]
+	-- upvalues: Module (copy)
+	local Weak = nil
 	if self.weakness then
 		if self.weak == nil then
 			self.weak = setmetatable({}, { __mode = "k" })
 		end
-		weak = self.weak
-	elseif self.strong == nil then
-		self.strong = {}
+		Weak = self.weak
+	else
+		if self.strong == nil then
+			self.strong = {}
+		end
+		Weak = self.strong
 	end
-	weak = self.strong
-	local var2 = weak[p2]
+	local WeakEntry = Weak[Key]
 	
-	if not var2 then
-		var2 = t_1.new(self.weakness, self.makeData)
-		weak[p2] = var2
+	if not WeakEntry then
+		WeakEntry = Module.new(self.weakness, self.makeData)
+		Weak[Key] = WeakEntry
 	end
-	return var2
+	return WeakEntry
 end
 
-t.Trie = t_1
-
-return t
+return { Trie = Module }

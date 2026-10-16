@@ -1,104 +1,104 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local core = parent_2.Core
-local foundationModule = require(parent_3.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local getTextSizeModule = require(core.Text.GetTextSize)
-local uiblox = require(parent_3.BuilderIcons).Migration.uiblox
-local buttonTypeModule = require(parent.Enum.ButtonType)
-local standardButtonSizeModule = require(core.Button.Enum.StandardButtonSize)
-local imagesInverseModule = require(parent_1.ImageSet.ImagesInverse)
-local t = {
-	[buttonTypeModule.Alert] = buttonVariant.Alert,
-	[buttonTypeModule.PrimaryContextual] = buttonVariant.Emphasis,
-	[buttonTypeModule.PrimarySystem] = buttonVariant.SubEmphasis,
-	[buttonTypeModule.Secondary] = buttonVariant.Subtle
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local Core = Parent2.Core
+local FoundationModule = require(Parent3.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local GetTextSizeModule = require(Core.Text.GetTextSize)
+local Uiblox = require(Parent3.BuilderIcons).Migration.uiblox
+local ButtonTypeModule = require(Parent.Enum.ButtonType)
+local StandardButtonSizeModule = require(Core.Button.Enum.StandardButtonSize)
+local ImagesInverseModule = require(Parent1.ImageSet.ImagesInverse)
+local SizeMapping = {
+	[StandardButtonSizeModule.Regular] = InputSize.Large,
+	[StandardButtonSizeModule.Small] = InputSize.Small,
+	[StandardButtonSizeModule.XSmall] = InputSize.XSmall
 }
-local t_1 = {
-	[standardButtonSizeModule.Regular] = inputSize.Large,
-	[standardButtonSizeModule.Small] = inputSize.Small,
-	[standardButtonSizeModule.XSmall] = inputSize.XSmall
+local config = {
+	[StandardButtonSizeModule.Regular] = false,
+	[StandardButtonSizeModule.Small] = false,
+	[StandardButtonSizeModule.XSmall] = true
 }
-local t_2 = {
-	[standardButtonSizeModule.Regular] = false,
-	[standardButtonSizeModule.Small] = false,
-	[standardButtonSizeModule.XSmall] = true
-}
-local t_3 = {
-	[inputSize.XSmall] = {
+local config1 = {
+	[InputSize.XSmall] = {
 		padding = "Small",
 		typography = "Small",
 		height = "Size_600"
 	},
-	[inputSize.Small] = {
+	[InputSize.Small] = {
 		padding = "Small",
 		typography = "Small",
 		height = "Size_800"
 	},
-	[inputSize.Medium] = {
+	[InputSize.Medium] = {
 		padding = "Medium",
 		typography = "Medium",
 		height = "Size_1000"
 	},
-	[inputSize.Large] = {
+	[InputSize.Large] = {
 		padding = "Medium",
 		typography = "Large",
 		height = "Size_1200"
 	}
 }
-local vector2 = Vector2.new(10000, 10000)
+local _Vector2 = Vector2.new(10000, 10000)
 
 return {
-	buttonMapping = t,
-	sizeMapping = t_1,
-	findIcon = function(p1)
-		-- upvalues: uiblox (ref), imagesInverseModule (ref)
+	buttonMapping = {
+		[ButtonTypeModule.Alert] = ButtonVariant.Alert,
+		[ButtonTypeModule.PrimaryContextual] = ButtonVariant.Emphasis,
+		[ButtonTypeModule.PrimarySystem] = ButtonVariant.SubEmphasis,
+		[ButtonTypeModule.Secondary] = ButtonVariant.Subtle
+	},
+	sizeMapping = SizeMapping,
+	findIcon = function(p1) --[[ Line: 61 ]]
+		-- upvalues: Uiblox (copy), ImagesInverseModule (copy)
 		if not p1 then
 			return nil
 		end
-		local var1 = if p1.Image and uiblox[p1.Image] ~= nil then p1.Image else imagesInverseModule[p1]
+		local HasUibloxEntry: boolean = p1.Image and Uiblox[p1.Image] ~= nil
+		local Image = if HasUibloxEntry then p1.Image else ImagesInverseModule[p1]
 		
-		if var1 == nil then
+		if Image == nil then
 			warn("Icon not found")
 		end
-		return var1
+		return Image
 	end,
-	getSizeMapping = function(p1, p2, p3)
-		-- upvalues: t_1 (ref), inputSize (ref)
-		return if p1 then t_1[p1] elseif p2 then if p3.Size.Size_1200 <= p2.Y.Offset then inputSize.Large elseif p2.Y.Scale > 0 then inputSize.Medium elseif p3.Size.Size_1000 <= p2.Y.Offset then inputSize.Medium elseif p3.Size.Size_800 <= p2.Y.Offset then inputSize.Small else inputSize.XSmall else nil
+	getSizeMapping = function(p1, Vector, p2) --[[ Line: 75 ]]
+		-- upvalues: SizeMapping (copy), InputSize (copy)
+		return if p1 then SizeMapping[p1] elseif Vector then if p2.Size.Size_1200 <= Vector.Y.Offset then InputSize.Large elseif Vector.Y.Scale > 0 then InputSize.Medium elseif p2.Size.Size_1000 <= Vector.Y.Offset then InputSize.Medium elseif p2.Size.Size_800 <= Vector.Y.Offset then InputSize.Small else InputSize.XSmall else nil
 	end,
-	getWidth = function(p1, p2, p3)
-		-- upvalues: t_2 (ref)
-		if p1 then
-			local var1 = t_2[p1]
-			
-			if p3 == nil then
-				p3 = var1
-			end
-			return if p3 then nil else UDim.new(1, 0)
-		else
+	getWidth = function(p1, p2, p3) --[[ Line: 94 ]]
+		-- upvalues: config (copy)
+		if not p1 then
 			return if p2 then p2.X elseif p3 then nil else UDim.new(1, 0)
 		end
-	end,
-	getMaxWidth = function(a, b)
-		return if a == nil then nil elseif b == nil then 640 else b
-	end,
-	getFitContentSize = function(p1, p2, p3)
-		-- upvalues: t_1 (ref), t_3 (ref), getTextSizeModule (ref), vector2 (ref)
-		local var1 = if p2 then t_1[p2] else nil
-		local var2 = if var1 then t_3[var1] else nil
+		local Entry = config[p1]
 		
-		if var2 then
-			local var3 = p3.Typography["Label" .. var13.typography]
-			
-			return Vector2.new(math.ceil(getTextSizeModule(p1, var3.FontSize, var3.Font, vector2).X) + p3.Padding[var2.padding] * 2, p3.Size[var2.height])
+		if p3 == nil then
+			p3 = Entry
 		end
-		return nil
+		return if p3 then nil else UDim.new(1, 0)
 	end,
-	getTestId = function(p1)
+	getMaxWidth = function(p1, p2) --[[ Line: 115 ]]
+		return if p1 == nil then nil elseif p2 == nil then 640 else p2
+	end,
+	getFitContentSize = function(p1, p2, p3): Vector2? --[[ Line: 124 ]]
+		-- upvalues: SizeMapping (copy), config1 (copy), GetTextSizeModule (copy), _Vector2 (copy)
+		local SizeMappingEntry = if p2 then SizeMapping[p2] else nil
+		local Entry = if SizeMappingEntry then config1[SizeMappingEntry] else nil
+		
+		if Entry then
+			local TypographyEntry = p3.Typography["Label" .. Entry.typography]
+			
+			return Vector2.new(math.ceil(GetTextSizeModule(p1, TypographyEntry.FontSize, TypographyEntry.Font, _Vector2).X) + p3.Padding[Entry.padding] * 2, p3.Size[Entry.height])
+		else
+			return nil
+		end
+	end,
+	getTestId = function(p1) --[[ Line: 139 ]]
 		return if p1 and #p1 ~= 0 then p1:match("data%-testid=([^%s]+)") else nil
 	end
 }

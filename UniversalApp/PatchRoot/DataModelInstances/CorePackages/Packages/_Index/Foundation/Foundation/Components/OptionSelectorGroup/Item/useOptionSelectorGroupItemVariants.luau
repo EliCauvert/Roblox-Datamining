@@ -1,17 +1,17 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local iconSizeModule = require(foundation.Enums.IconSize)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local optionSelectorGroupSizeModule = require(foundation.Enums.OptionSelectorGroupSize)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local orientationModule = require(foundation.Enums.Orientation)
-local flagsModule = require(foundation.Utility.Flags)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local _ = require(foundation.Components.Types)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local OptionSelectorGroupSizeModule = require(Foundation.Enums.OptionSelectorGroupSize)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local OrientationModule = require(Foundation.Enums.Orientation)
+local FlagsModule = require(Foundation.Utility.Flags)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local _ = require(Foundation.Components.Types)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function legacyVariantsFactory(p1)
-	-- upvalues: flagsModule (ref), inputSizeModule (ref), iconSizeModule (ref)
+local function legacyVariantsFactory(p1) --[[ Line: 60 ]]
+	-- upvalues: FlagsModule (copy), InputSizeModule (copy), IconSizeModule (copy)
 	return {
 		common = {
 			container = {
@@ -19,43 +19,43 @@ local function legacyVariantsFactory(p1)
 				radius = p1.Radius.Medium
 			},
 			content = p1.Color.Content.Default,
-			itemInner = if flagsModule.FoundationOptionSelectorGroupFixes then nil else { tag = "col gap-xsmall size-full-0 auto-y" },
+			itemInner = if FlagsModule.FoundationOptionSelectorGroupFixes then nil else { tag = "col gap-xsmall size-full-0 auto-y" },
 			header = { tag = "row align-y-center gap-small size-full-0 auto-y" },
 			label = { tag = "fill auto-xy" },
 			metadata = { tag = "shrink auto-xy" },
 			description = { tag = "grow auto-xy" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				container = { tag = "padding-medium" },
-				icon = { size = iconSizeModule.XSmall },
+				icon = { size = IconSizeModule.XSmall },
 				label = { tag = "text-title-small" },
 				metadata = { tag = "text-caption-small" },
 				description = { tag = "text-body-small" }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				container = { tag = "padding-large" },
-				icon = { size = iconSizeModule.Small },
+				icon = { size = IconSizeModule.Small },
 				label = { tag = "text-title-small" },
 				metadata = { tag = "text-caption-small" },
 				description = { tag = "text-body-small" }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = { tag = "padding-xlarge" },
-				icon = { size = iconSizeModule.Medium },
+				icon = { size = IconSizeModule.Medium },
 				label = { tag = "text-title-medium" },
 				metadata = { tag = "text-caption-medium" },
 				description = { tag = "text-body-medium" }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				container = { tag = "padding-xxlarge" },
-				icon = { size = iconSizeModule.Large },
+				icon = { size = IconSizeModule.Large },
 				label = { tag = "text-title-large" },
 				metadata = { tag = "text-caption-large" },
 				description = { tag = "text-body-large" }
 			}
 		},
-		layouts = if flagsModule.FoundationOptionSelectorGroupFixes then {
+		layouts = if FlagsModule.FoundationOptionSelectorGroupFixes then {
 			Inline = {
 				container = { tag = "size-full-0 auto-y" },
 				itemInner = { tag = "col gap-xsmall size-full-0 auto-y" }
@@ -74,9 +74,9 @@ local function legacyVariantsFactory(p1)
 	}
 end
 
-local function groupSizeVariantsFactory(p1)
-	-- upvalues: iconSizeModule (ref), optionSelectorGroupSizeModule (ref), composeStyleVariantModule (ref)
-	local t = {
+local function groupSizeVariantsFactory(p1) --[[ Line: 133 ]]
+	-- upvalues: IconSizeModule (copy), OptionSelectorGroupSizeModule (copy), ComposeStyleVariantModule (copy)
+	local config = {
 		label = { tag = "size-full-0 auto-y" },
 		metadata = { tag = "size-full-0 auto-y" },
 		description = { tag = "size-full-0 auto-y" }
@@ -92,49 +92,49 @@ local function groupSizeVariantsFactory(p1)
 			description = { tag = "content-default" }
 		},
 		sizes = {
-			[optionSelectorGroupSizeModule.XSmall] = {
+			[OptionSelectorGroupSizeModule.XSmall] = {
 				container = {
 					tag = "padding-medium radius-small",
 					radius = p1.Radius.Small
 				},
-				icon = { size = iconSizeModule.XSmall, extent = p1.Size.Size_300 },
+				icon = { size = IconSizeModule.XSmall, extent = p1.Size.Size_300 },
 				label = { tag = "text-title-small" },
 				metadata = { tag = "text-caption-small" },
 				description = { tag = "text-body-small" }
 			},
-			[optionSelectorGroupSizeModule.Small] = {
+			[OptionSelectorGroupSizeModule.Small] = {
 				container = {
 					tag = "padding-large radius-medium",
 					radius = p1.Radius.Medium
 				},
-				icon = { size = iconSizeModule.Small, extent = p1.Size.Size_400 },
+				icon = { size = IconSizeModule.Small, extent = p1.Size.Size_400 },
 				label = { tag = "text-title-small" },
 				metadata = { tag = "text-caption-small" },
 				description = { tag = "text-body-small" }
 			},
-			[optionSelectorGroupSizeModule.Medium] = {
+			[OptionSelectorGroupSizeModule.Medium] = {
 				container = {
 					tag = "padding-xlarge radius-medium",
 					radius = p1.Radius.Medium
 				},
-				icon = { size = iconSizeModule.Medium, extent = p1.Size.Size_500 },
+				icon = { size = IconSizeModule.Medium, extent = p1.Size.Size_500 },
 				label = { tag = "text-title-medium" },
 				metadata = { tag = "text-caption-medium" },
 				description = { tag = "text-body-medium" }
 			}
 		},
 		layouts = {
-			Inline = composeStyleVariantModule({
+			Inline = ComposeStyleVariantModule({
 				container = { tag = "size-full-0 auto-y" },
 				itemInner = { tag = "row align-y-center gap-small size-full-0 auto-y" },
 				textContainer = { tag = "col fill gap-xsmall size-full-0 auto-y" }
-			}, t),
-			StackedFill = composeStyleVariantModule({
+			}, config),
+			StackedFill = ComposeStyleVariantModule({
 				container = { tag = "fill auto-y" },
 				itemInner = { tag = "col gap-small size-full-0 auto-y" },
 				textContainer = { tag = "col gap-xsmall size-full-0 auto-y" }
-			}, t),
-			StackedFit = composeStyleVariantModule({
+			}, config),
+			StackedFit = ComposeStyleVariantModule({
 				container = { tag = "auto-xy" },
 				itemInner = { tag = "col gap-small auto-xy" },
 				textContainer = { tag = "col gap-xsmall auto-xy" }
@@ -151,24 +151,31 @@ local function groupSizeVariantsFactory(p1)
 	}
 end
 
-local function variantsFactory(p1)
-	-- upvalues: legacyVariantsFactory (ref), groupSizeVariantsFactory (ref)
+local function variantsFactory(p1) --[[ Line: 247 ]]
+	-- upvalues: legacyVariantsFactory (copy), groupSizeVariantsFactory (copy)
 	return {
 		legacy = legacyVariantsFactory(p1),
 		groupSize = groupSizeVariantsFactory(p1)
 	}
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), orientationModule (ref), fillBehaviorModule (ref), composeStyleVariantModule (ref)
-	local optionSelectorGroupItem = variantsContextModule.useVariants("OptionSelectorGroupItem", variantsFactory, p1)
+return function(p1, p2, Horizontal, Fit, Enabled) --[[ Line: 254 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), FlagsModule (copy), OrientationModule (copy), FillBehaviorModule (copy), ComposeStyleVariantModule (copy)
+	local OptionSelectorGroupItem = VariantsContextModule.useVariants("OptionSelectorGroupItem", variantsFactory, p1)
 	
-	if flagsModule.FoundationOptionSelectorGroupBeta then
-		local groupSize = optionSelectorGroupItem.groupSize
+	if FlagsModule.FoundationOptionSelectorGroupBeta then
+		local GroupSize = OptionSelectorGroupItem.groupSize
+		local IsFitMatch: boolean = Horizontal == OrientationModule.Vertical and Fit == FillBehaviorModule.Fit
 		
-		return composeStyleVariantModule(groupSize.common, groupSize.sizes[p2], if p3 == orientationModule.Horizontal then groupSize.layouts.Inline elseif p3 == orientationModule.Vertical and p4 == fillBehaviorModule.Fit then groupSize.layouts.StackedFit else groupSize.layouts.StackedFill, groupSize.selection[p5 == true])
+		return (ComposeStyleVariantModule(GroupSize.common, GroupSize.sizes[p2], if Horizontal == OrientationModule.Horizontal then GroupSize.layouts.Inline elseif IsFitMatch then GroupSize.layouts.StackedFit else GroupSize.layouts.StackedFill, GroupSize.selection[Enabled == true]))
 	end
-	local legacy = optionSelectorGroupItem.legacy
+	local Legacy = OptionSelectorGroupItem.legacy
 	
-	return if flagsModule.FoundationOptionSelectorGroupFixes then composeStyleVariantModule(legacy.common, legacy.sizes[p2], if p3 == orientationModule.Horizontal then legacy.layouts.Inline elseif p3 == orientationModule.Vertical and p4 == fillBehaviorModule.Fit then legacy.layouts.StackedFit else legacy.layouts.StackedFill) else composeStyleVariantModule(legacy.common, legacy.sizes[p2])
+	if FlagsModule.FoundationOptionSelectorGroupFixes then
+		local IsFitMatch: boolean = Horizontal == OrientationModule.Vertical and Fit == FillBehaviorModule.Fit
+		
+		return (ComposeStyleVariantModule(Legacy.common, Legacy.sizes[p2], if Horizontal == OrientationModule.Horizontal then Legacy.layouts.Inline elseif IsFitMatch then Legacy.layouts.StackedFit else Legacy.layouts.StackedFill))
+	else
+		return (ComposeStyleVariantModule(Legacy.common, Legacy.sizes[p2]))
+	end
 end

@@ -1,54 +1,54 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local cryoModule = require(parent_1.Cryo)
-local interactableModule = require(parent.Core.Control.Interactable)
-local selectionModeModule = require(script.Parent.Enum.SelectionMode)
-local interactableListItem = roactModule.PureComponent:extend("InteractableListItem")
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local CryoModule = require(Parent1.Cryo)
+local InteractableModule = require(Parent.Core.Control.Interactable)
+local SelectionModeModule = require(script.Parent.Enum.SelectionMode)
+local InteractableListItem = RoactModule.PureComponent:extend("InteractableListItem")
 
-function interactableListItem.init(p1)
-	-- upvalues: selectionModeModule (ref), cryoModule (ref)
-	function p0.onStateChanged(_, p2)
-		-- upvalues: p1 (ref)
+function InteractableListItem.init(p1) --[[ Line: 20 ]]
+	-- upvalues: SelectionModeModule (copy), CryoModule (copy)
+	function p1:onStateChanged(p2) --[[ Line: 21 ]]
+		-- upvalues: p1 (copy)
 		p1.props.setInteractableState(p1.props.id, p2)
 	end
 	
-	function p0.onActivated()
-		-- upvalues: p1 (ref), selectionModeModule (copy), cryoModule (copy)
-		local selection = p1.props.selection
-		local list = { p1.props.id }
+	function p1.onActivated() --[[ Line: 24 ]]
+		-- upvalues: p1 (copy), SelectionModeModule (upval), CryoModule (upval)
+		local Selection = p1.props.selection
+		local FilterResult = { p1.props.id }
 		
-		if p1.props.selectionMode == selectionModeModule.Multiple then
-			list = cryoModule.List.filter(selection, function(p2)
-				-- upvalues: p1 (copy)
-				return p2 ~= p1.props.id
+		if p1.props.selectionMode == SelectionModeModule.Multiple then
+			FilterResult = CryoModule.List.filter(Selection, function(Id): boolean --[[ Line: 28 ]]
+				-- upvalues: p1 (upval)
+				return Id ~= p1.props.id
 			end)
 			
-			if #list == #selection then
-				table.insert(list, p1.props.id)
+			if #FilterResult == #Selection then
+				table.insert(FilterResult, p1.props.id)
 			end
 		end
 		if p1.props.onSelectionChanged then
-			p1.props.onSelectionChanged(list, selection)
+			p1.props.onSelectionChanged(FilterResult, Selection)
 		end
-		if p1.props.selectionMode ~= selectionModeModule.None then
-			p1.props.setSelection(list)
+		if p1.props.selectionMode ~= SelectionModeModule.None then
+			p1.props.setSelection(FilterResult)
 		end
 	end
 end
 
-function interactableListItem.render(p1)
-	-- upvalues: cryoModule (ref), roactModule (ref), interactableModule (ref)
-	local var1, var2 = p1.props.renderItem(p1.props.item, p1.props.interactableState, cryoModule.List.find(p1.props.selection, p1.props.id) ~= nil, p1.props.id)
+function InteractableListItem.render(p1) --[[ Line: 44 ]]
+	-- upvalues: CryoModule (copy), RoactModule (copy), InteractableModule (copy)
+	local RenderItemResult, RenderItemResult2 = p1.props.renderItem(p1.props.item, p1.props.interactableState, CryoModule.List.find(p1.props.selection, p1.props.id) ~= nil, p1.props.id)
 	
-	return roactModule.createElement(interactableModule, cryoModule.Dictionary.join({
+	return RoactModule.createElement(InteractableModule, CryoModule.Dictionary.join({
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = p1.props.itemSize
-	}, var2 or {}, {
+	}, RenderItemResult2 or {}, {
 		onStateChanged = p1.onStateChanged,
-		[roactModule.Event.Activated] = p1.onActivated
-	}), var1)
+		[RoactModule.Event.Activated] = p1.onActivated
+	}), RenderItemResult)
 end
 
-return interactableListItem
+return InteractableListItem

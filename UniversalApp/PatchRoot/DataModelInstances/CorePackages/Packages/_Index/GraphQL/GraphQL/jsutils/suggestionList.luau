@@ -1,114 +1,113 @@
-﻿local object = require(script.Parent.Parent.Parent.LuauPolyfill).Object
-local naturalCompare = require(script.Parent.naturalCompare).naturalCompare
-local t = {}
+﻿local Object = require(script.Parent.Parent.Parent.LuauPolyfill).Object
+local NaturalCompareFunction = require(script.Parent.naturalCompare).naturalCompare
+local Module = {}
 
-local function suggestionList(p1, p2)
-	-- upvalues: t (ref), object (ref), naturalCompare (ref)
-	local t_1 = {}
-	local var1 = t.new(p1)
-	local var2 = math.floor(p1:len() * 0.4) + 1
+local function suggestionList(Text, p1) --[[ Line: 34 ]]
+	-- upvalues: Module (copy), Object (copy), NaturalCompareFunction (copy)
+	local MeasureResults = {}
+	local NewModule = Module.new(Text)
+	local NewFloored = math.floor(Text:len() * 0.4) + 1
 	
-	for i = 1, #p2 do
-		local var3 = p2[i]
-		local var4 = var1:measure(var3, var2)
+	for i = 1, #p1 do
+		local v1 = p1[i]
+		local MeasureResult = NewModule:measure(v1, NewFloored)
 		
-		if var4 ~= nil then
-			t_1[var3] = var4
+		if MeasureResult ~= nil then
+			MeasureResults[v1] = MeasureResult
 		end
 	end
-	local var5 = object.keys(t_1)
-	table.sort(var5, function(p3, p4)
-		-- upvalues: t_1 (ref), naturalCompare (copy)
-		local var6 = t_1[p3] - t_1[p4]
+	local KeysResult = Object.keys(MeasureResults)
+	table.sort(KeysResult, function(A, B): boolean --[[ Line: 49 ]]
+		-- upvalues: MeasureResults (copy), NaturalCompareFunction (upval)
+		local MeasureResultDelta = MeasureResults[A] - MeasureResults[B]
 		
-		return if var6 == 0 then naturalCompare(p3, p4) < 0 else var6 < 0
+		return if MeasureResultDelta == 0 then NaturalCompareFunction(A, B) < 0 else MeasureResultDelta < 0
 	end)
 	
-	return var5
+	return KeysResult
 end
 
-local stringToArray = nil
-t.__index = t
+local Callback = nil
+Module.__index = Module
 
-function t.new(p3)
-	-- upvalues: t (ref), stringToArray (write)
-	local tbl = setmetatable({}, t)
-	tbl._input = p3
-	tbl._inputLowerCase = p3:lower()
-	tbl._inputArray = stringToArray(tbl._inputLowerCase)
-	local var6 = p3:len()
-	tbl._rows = {
-		table.create(var6 + 1, 0),
-		table.create(var6 + 1, 0),
-		table.create(var6 + 1, 0)
+function Module.new(Text: string) --[[ Line: 78 ]]
+	-- upvalues: Module (copy), Callback (ref)
+	local self = setmetatable({}, Module)
+	self._input = Text
+	self._inputLowerCase = Text:lower()
+	self._inputArray = Callback(self._inputLowerCase)
+	local Length: number = Text:len()
+	self._rows = {
+		table.create(Length + 1, 0),
+		table.create(Length + 1, 0),
+		table.create(Length + 1, 0)
 	}
 	
-	return tbl
+	return self
 end
 
-function t:measure(p3, p4)
-	-- upvalues: stringToArray (write)
-	if self._input == p3 then
+function Module:measure(Text: string, NewFloored) --[[ Line: 93 ]]
+	-- upvalues: Callback (ref)
+	if self._input == Text then
 		return 0
 	end
-	local var6 = p3:lower()
+	local Lowered = Text:lower()
 	
-	if self._inputLowerCase == var6 then
+	if self._inputLowerCase == Lowered then
 		return 1
 	end
-	local var7 = stringToArray(var6)
-	local inputArray = self._inputArray
+	local CallbackResult = Callback(Lowered)
+	local InputArray = self._inputArray
 	
-	if #var7 < #inputArray then
-		local var8 = var7
-		var7 = inputArray
-		inputArray = var8
+	if #CallbackResult < #InputArray then
+		local CallbackResult1 = CallbackResult
+		CallbackResult = InputArray
+		InputArray = CallbackResult1
 	end
-	local var13Count = #var7
-	local inputArrayCount = #inputArray
+	local CountCallbackResult = #CallbackResult
+	local CountInputArray = #InputArray
 	
-	if p4 < var13Count - inputArrayCount then
+	if NewFloored < CountCallbackResult - CountInputArray then
 		return nil
 	end
-	local rows = self._rows
+	local Rows = self._rows
 	
-	for i = 0, inputArrayCount do
-		rows[1][i + 1] = i
+	for i = 0, CountInputArray do
+		Rows[1][i + 1] = i
 	end
-	for i_2 = 1, var13Count do
-		local var9 = rows[(i_2 - 1) % 3 + 1]
-		local var10 = rows[i_2 % 3 + 1]
-		var10[1] = i_2
-		local var11 = i_2
+	for i1 = 1, CountCallbackResult do
+		local Row = Rows[(i1 - 1) % 3 + 1]
+		local Row1 = Rows[i1 % 3 + 1]
+		Row1[1] = i1
+		local i3: number = i1
 		
-		for i_1 = 1, inputArrayCount do
-			local minValue = math.min(var9[i_1 + 1] + 1, var10[i_1] + 1, var9[i_1] + (if var7[i_2] == inputArray[i_1] then 0 else 1))
+		for i2 = 1, CountInputArray do
+			local Smallest = math.min(Row[i2 + 1] + 1, Row1[i2] + 1, Row[i2] + (if CallbackResult[i1] == InputArray[i2] then 0 else 1))
 			
-			if i_2 > 1 and i_1 > 1 and (var7[i_2] == inputArray[i_1 - 1] and var7[i_2 - 1] == inputArray[i_1]) then
-				minValue = math.min(minValue, rows[(i_2 - 2) % 3 + 1][i_1 - 1] + 1)
+			if i1 > 1 and i2 > 1 and CallbackResult[i1] == InputArray[i2 - 1] and CallbackResult[i1 - 1] == InputArray[i2] then
+				Smallest = math.min(Smallest, Rows[(i1 - 2) % 3 + 1][i2 - 1] + 1)
 			end
-			if minValue < var11 then
-				var11 = minValue
+			if Smallest < i3 then
+				i3 = Smallest
 			end
-			var10[i_1 + 1] = minValue
+			Row1[i2 + 1] = Smallest
 		end
-		if p4 >= var11 then
-			continue
+		if NewFloored < i3 then
+			return nil
 		end
-		return nil
 	end
-	local var12 = rows[var13Count % 3 + 1][inputArrayCount + 1]
+	local RowEntry = Rows[CountCallbackResult % 3 + 1][CountInputArray + 1]
 	
-	return if var12 <= p4 then var12 else nil
+	return if RowEntry <= NewFloored then RowEntry else nil
 end
 
-stringToArray = function(p5)
-	local t = {}
+Callback = function(Text: string) --[[ Line: 168 | Named "stringToArray" ]]
+	local ByteValues = {}
 	
-	for i = 1, p5:len() do
-		t[i] = p5:byte(i)
+	for i = 1, Text:len() do
+		ByteValues[i] = Text:byte(i)
 	end
-	return t
+	return ByteValues
 end
 
 return { suggestionList = suggestionList }

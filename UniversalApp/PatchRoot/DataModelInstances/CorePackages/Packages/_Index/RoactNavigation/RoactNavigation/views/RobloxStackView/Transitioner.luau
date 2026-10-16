@@ -1,255 +1,254 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local reactModule = require(parent_1.React)
-local otterModule = require(parent_1.Otter)
-local scenesReducerModule = require(script.Parent.ScenesReducer)
-local invariantModule = require(parent.utils.invariant)
-local t = { frequency = 4 }
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local ReactModule = require(Parent1.React)
+local OtterModule = require(Parent1.Otter)
+local ScenesReducerModule = require(script.Parent.ScenesReducer)
+local InvariantModule = require(Parent.utils.invariant)
+local config = { frequency = 4 }
 
-local function buildTransitionProps(p1, p2)
-	-- upvalues: invariantModule (ref)
-	local navigation = p1.navigation
-	local options = p1.options
-	local layout = p2.layout
-	local position = p2.position
-	local scenes = p2.scenes
-	local var1 = nil
+local function buildTransitionProps(Props, AssignResult) --[[ Line: 17 ]]
+	-- upvalues: InvariantModule (copy)
+	local Navigation = Props.navigation
+	local Options = Props.options
+	local Layout = AssignResult.layout
+	local Position = AssignResult.position
+	local Scenes = AssignResult.scenes
+	local Scene = nil
 	
-	for i, v in scenes do
-		if v.isActive then
-			var1 = v
+	for _, scene in Scenes do
+		if scene.isActive then
+			Scene = scene
 			break
 		end
 	end
-	invariantModule(var1, "Could not find active scene")
+	InvariantModule(Scene, "Could not find active scene")
 	
 	return {
-		layout = layout,
-		navigation = navigation,
-		position = position,
-		scenes = scenes,
-		scene = var1,
-		options = options,
-		index = var1.index
+		layout = Layout,
+		navigation = Navigation,
+		position = Position,
+		scenes = Scenes,
+		scene = Scene,
+		options = Options,
+		index = Scene.index
 	}
 end
 
-local function _(p3)
-	-- upvalues: array (ref)
-	local var2 = array.filter(p3, function(p4)
-		return not p4.isStale
+local function _(p1) --[[ Line: 46 | Named "filterStale" ]]
+	-- upvalues: Array (copy)
+	local FilterResult = Array.filter(p1, function(p2): boolean --[[ Line: 47 ]]
+		return not p2.isStale
 	end)
 	
-	return if #var2 == #p3 then p3 else var2
+	return if #FilterResult == #p1 then p1 else FilterResult
 end
 
-local transitioner = reactModule.Component:extend("Transitioner")
+local Transitioner = ReactModule.Component:extend("Transitioner")
 
-function transitioner.init(p3)
-	-- upvalues: reactModule (ref), otterModule (ref), scenesReducerModule (ref), buildTransitionProps (ref)
-	local state = p3.props.navigation.state
-	local descriptors = p3.props.descriptors
-	p3._ref = reactModule.createRef()
-	p3.state = {
+function Transitioner.init(p1) --[[ Line: 60 ]]
+	-- upvalues: ReactModule (copy), OtterModule (copy), ScenesReducerModule (copy), buildTransitionProps (copy)
+	local State = p1.props.navigation.state
+	local Descriptors = p1.props.descriptors
+	p1._ref = ReactModule.createRef()
+	p1.state = {
 		layout = { initWidth = 0, initHeight = 0, isMeasured = false },
-		position = otterModule.createSingleMotor(state.index),
-		scenes = scenesReducerModule({}, state, nil, descriptors)
+		position = OtterModule.createSingleMotor(State.index),
+		scenes = ScenesReducerModule({}, State, nil, Descriptors)
 	}
 	
-	function p4._doOnAbsoluteSizeChanged(...)
-		-- upvalues: p3 (ref)
-		return p3:_onAbsoluteSizeChanged(...)
+	function p1._doOnAbsoluteSizeChanged(...) --[[ Line: 78 ]]
+		-- upvalues: p1 (copy)
+		return p1:_onAbsoluteSizeChanged(...)
 	end
 	
-	p3._positionLastValue = state.index
-	p3._prevTransitionProps = nil
-	p3._transitionProps = buildTransitionProps(p3.props, p3.state)
-	p3._isMounted = false
-	p3._isTransitionRunning = false
-	p3._transitionQueue = {}
-	p3._completeSignalDisconnector = p3.state.position:onComplete(function()
-		-- upvalues: p3 (ref)
-		if p3._isMounted then
-			p3:_onTransitionEnd()
+	p1._positionLastValue = State.index
+	p1._prevTransitionProps = nil
+	p1._transitionProps = buildTransitionProps(p1.props, p1.state)
+	p1._isMounted = false
+	p1._isTransitionRunning = false
+	p1._transitionQueue = {}
+	p1._completeSignalDisconnector = p1.state.position:onComplete(function() --[[ Line: 91 ]]
+		-- upvalues: p1 (copy)
+		if p1._isMounted then
+			p1:_onTransitionEnd()
 		end
 	end)
-	p3._stepSignalDisconnector = p3.state.position:onStep(function(p4)
-		-- upvalues: p3 (ref)
-		if p3._isMounted then
-			p3:_onPositionStep(p4)
+	p1._stepSignalDisconnector = p1.state.position:onStep(function(PositionLastValue) --[[ Line: 97 ]]
+		-- upvalues: p1 (copy)
+		if p1._isMounted then
+			p1:_onPositionStep(PositionLastValue)
 		end
 	end)
 end
 
-function transitioner.didMount(p3)
-	p3._isMounted = true
+function Transitioner.didMount(p1) --[[ Line: 104 ]]
+	p1._isMounted = true
 end
 
-function transitioner.willUnmount(p3)
-	p3._isMounted = false
+function Transitioner.willUnmount(p1) --[[ Line: 108 ]]
+	p1._isMounted = false
 	
-	if p3._completeSignalDisconnector then
-		p3._completeSignalDisconnector()
-		p3._completeSignalDisconnector = nil
+	if p1._completeSignalDisconnector then
+		p1._completeSignalDisconnector()
+		p1._completeSignalDisconnector = nil
 	end
-	if p3._stepSignalDisconnector then
-		p3._stepSignalDisconnector()
-		p3._stepSignalDisconnector = nil
+	if p1._stepSignalDisconnector then
+		p1._stepSignalDisconnector()
+		p1._stepSignalDisconnector = nil
 	end
 end
 
-function transitioner.didUpdate(p3, p4)
-	if not p3.state.layout.isMeasured and p3._ref.current then
-		p3:_onAbsoluteSizeChanged(p3._ref.current)
+function Transitioner.didUpdate(p1, PrevProps) --[[ Line: 122 ]]
+	if not p1.state.layout.isMeasured and p1._ref.current then
+		p1:_onAbsoluteSizeChanged(p1._ref.current)
 	end
-	if p3.props ~= p4 then
-		if p3._isTransitionRunning then
-			if (p3._transitionQueue[#p3._transitionQueue] or {}).prevProps ~= p4 then
-				table.insert(p3._transitionQueue, { prevProps = p4 })
-			end
-			return
-		else
-			p3:_startTransition(p4, p3.props)
+	if p1.props ~= PrevProps then
+		if not p1._isTransitionRunning then
+			p1:_startTransition(PrevProps, p1.props)
+		elseif (p1._transitionQueue[#p1._transitionQueue] or {}).prevProps ~= PrevProps then
+			table.insert(p1._transitionQueue, { prevProps = PrevProps })
 		end
+		return
 	end
 end
 
-function transitioner.render(p3)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement("Frame", {
+function Transitioner.render(p1) --[[ Line: 147 ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = false,
-		[reactModule.Change.AbsoluteSize] = p3._doOnAbsoluteSizeChanged,
-		ref = p3._ref
+		[ReactModule.Change.AbsoluteSize] = p1._doOnAbsoluteSizeChanged,
+		ref = p1._ref
 	}, {
-		TransitionerScenes = p3.props.render(p3._transitionProps, p3._prevTransitionProps, p3)
+		TransitionerScenes = p1.props.render(p1._transitionProps, p1._prevTransitionProps, p1)
 	})
 end
 
-function transitioner._onAbsoluteSizeChanged(value, p3)
-	-- upvalues: object (ref), buildTransitionProps (ref)
-	if not value._isMounted then return end
-	local x = p3.AbsoluteSize.X
-	local y = p3.AbsoluteSize.Y
+function Transitioner._onAbsoluteSizeChanged(p1, Frame: Frame) --[[ Line: 165 ]]
+	-- upvalues: Object (copy), buildTransitionProps (copy)
+	if not p1._isMounted then return end
+	local X = Frame.AbsoluteSize.X
+	local Y = Frame.AbsoluteSize.Y
 	
-	if x == value.state.layout.initWidth and y == value.state.layout.initHeight then
+	if X ~= p1.state.layout.initWidth or Y ~= p1.state.layout.initHeight then
+		local AssignResult = Object.assign(table.clone(p1.state.layout), { isMeasured = true, initWidth = X, initHeight = Y })
+		p1._transitionProps = buildTransitionProps(p1.props, (Object.assign(table.clone(p1.state), { layout = AssignResult })))
+		p1:setState({ layout = AssignResult })
+		
 		return
 	end
-	local var2 = object.assign(table.clone(value.state.layout), { isMeasured = true, initWidth = x, initHeight = y })
-	value._transitionProps = buildTransitionProps(value.props, object.assign(table.clone(value.state), { layout = var2 }))
-	value:setState({ layout = var2 })
 end
 
-function transitioner._computeScenes(p3, p4, p5)
-	-- upvalues: scenesReducerModule (ref), array (ref)
-	local var2 = scenesReducerModule(p3.state.scenes, p5.navigation.state, p4.navigation.state, p5.descriptors)
+function Transitioner._computeScenes(p1, p2, p3) --[[ Line: 194 ]]
+	-- upvalues: ScenesReducerModule (copy), Array (copy)
+	local ScenesReducerModuleResult = ScenesReducerModule(p1.state.scenes, p3.navigation.state, p2.navigation.state, p3.descriptors)
 	
-	if not p5.navigation.state.isTransitioning then
-		local var3 = var2
-		local var4 = array.filter(var3, function(p6)
-			return not p6.isStale
+	if not p3.navigation.state.isTransitioning then
+		local FilterResult = Array.filter(ScenesReducerModuleResult, function(p4): boolean --[[ Line: 47 ]]
+			return not p4.isStale
 		end)
-		var2 = if #var4 == #var3 then var3 else var4
+		ScenesReducerModuleResult = if #FilterResult == #ScenesReducerModuleResult then ScenesReducerModuleResult else FilterResult
 	end
-	if p5.screenProps ~= p3.props.screenProps then
-		p3:setState({ scenes = var2 })
+	if p3.screenProps ~= p1.props.screenProps then
+		p1:setState({ scenes = ScenesReducerModuleResult })
 	end
-	return if var2 == p3.state.scenes then nil else var2
+	return if ScenesReducerModuleResult == p1.state.scenes then nil else ScenesReducerModuleResult
 end
 
-function transitioner._startTransition(p3, p4, p5)
-	-- upvalues: object (ref), buildTransitionProps (ref), t (ref), otterModule (ref)
-	local var2 = p4.navigation.state.index ~= p5.navigation.state.index
-	local var3 = p3:_computeScenes(p4, p5)
+function Transitioner._startTransition(p1, PrevProps, Props) --[[ Line: 213 ]]
+	-- upvalues: Object (copy), buildTransitionProps (copy), config (copy), OtterModule (copy)
+	local IsNotIndexMatch = PrevProps.navigation.state.index ~= Props.navigation.state.index
+	local Scenes = p1:_computeScenes(PrevProps, Props)
 	
-	if var3 then
-		local var4 = object.assign(table.clone(p3.state), { scenes = var3 })
-		local position = var4.position
-		local index = p5.navigation.state.index
-		p3._prevTransitionProps = p3._transitionProps
-		p3._transitionProps = buildTransitionProps(p5, var4)
-		local isTransitioning = p3._transitionProps.navigation.state.isTransitioning
+	if Scenes then
+		local AssignResult = Object.assign(table.clone(p1.state), { scenes = Scenes })
+		local Position = AssignResult.position
+		local Index = Props.navigation.state.index
+		p1._prevTransitionProps = p1._transitionProps
+		p1._transitionProps = buildTransitionProps(Props, AssignResult)
+		local IsTransitioning = p1._transitionProps.navigation.state.isTransitioning
 		
-		if isTransitioning and var2 then
-			p3._isTransitionRunning = true
+		if IsTransitioning and IsNotIndexMatch then
+			p1._isTransitionRunning = true
 		end
-		p3:setState(var4, function()
-			-- upvalues: isTransitioning (ref), var2 (ref), p5 (ref), p3 (ref), index (ref), object (copy), t (copy), position (ref), otterModule (copy)
-			if isTransitioning and var2 then
-				if p5.onTransitionStart then
-					p5.onTransitionStart(p3._transitionProps, p3._prevTransitionProps)
+		p1:setState(AssignResult, function() --[[ Line: 245 ]]
+			-- upvalues: IsTransitioning (copy), IsNotIndexMatch (copy), Props (copy), p1 (copy), Index (copy), Object (upval), config (upval), Position (copy), OtterModule (upval)
+			if IsTransitioning and IsNotIndexMatch then
+				if Props.onTransitionStart then
+					Props.onTransitionStart(p1._transitionProps, p1._prevTransitionProps)
 				end
-				if p3._positionLastValue == index then
-					position:setGoal(otterModule.instant(p5.navigation.state.index))
+				if p1._positionLastValue ~= Index then
+					Position:setGoal(OtterModule.spring(Props.navigation.state.index, (Object.assign(table.clone(config), if Props.configureTransition then Props.configureTransition(p1._transitionProps, p1._prevTransitionProps) or {} else {}))))
+					
+					return
+				else
+					Position:setGoal(OtterModule.instant(Props.navigation.state.index))
 					
 					return
 				end
-				local t_1 = {}
-				
-				if p5.configureTransition then
-					t_1 = p5.configureTransition(p3._transitionProps, p3._prevTransitionProps) or {}
+			else
+				if Props.onTransitionStart then
+					Props.onTransitionStart(p1._transitionProps, p1._prevTransitionProps)
 				end
-				position:setGoal(otterModule.spring(p5.navigation.state.index, object.assign(table.clone(t), t_1)))
-				
-				return
-			elseif p5.onTransitionStart then
-				p5.onTransitionStart(p3._transitionProps, p3._prevTransitionProps)
+				Position:setGoal(OtterModule.instant(Index))
 			end
-			position:setGoal(otterModule.instant(index))
 		end)
 		
 		return
 	else
-		p3._prevTransitionProps = p3._transitionProps
+		p1._prevTransitionProps = p1._transitionProps
 		
-		if p3._isTransitionRunning then
-			p3:_onTransitionEnd()
+		if p1._isTransitionRunning then
+			p1:_onTransitionEnd()
 		end
 	end
 end
 
-function transitioner._onTransitionEnd(p3)
-	-- upvalues: array (ref), object (ref), buildTransitionProps (ref)
-	local prevTransitionProps = p3._prevTransitionProps
-	p3._prevTransitionProps = nil
-	local scenes = p3.state.scenes
-	local var2 = array.filter(scenes, function(p4)
-		return not p4.isStale
+function Transitioner._onTransitionEnd(p1) --[[ Line: 284 ]]
+	-- upvalues: Array (copy), Object (copy), buildTransitionProps (copy)
+	local PrevTransitionProps = p1._prevTransitionProps
+	p1._prevTransitionProps = nil
+	local Scenes = p1.state.scenes
+	local FilterResult = Array.filter(Scenes, function(p2): boolean --[[ Line: 47 ]]
+		return not p2.isStale
 	end)
-	scenes = object.assign(table.clone(p3.state), { scenes = if #var2 == #scenes then scenes else var2 })
-	p3._transitionProps = buildTransitionProps(p3.props, scenes)
-	p3:setState(scenes, function()
-		-- upvalues: p3 (ref), prevTransitionProps (ref)
-		if p3.props.onTransitionEnd then
-			p3.props.onTransitionEnd(p3._transitionProps, prevTransitionProps)
+	local AssignResult = Object.assign(table.clone(p1.state), {
+		scenes = if #FilterResult == #Scenes then Scenes else FilterResult
+	})
+	p1._transitionProps = buildTransitionProps(p1.props, AssignResult)
+	p1:setState(AssignResult, function() --[[ Line: 296 ]]
+		-- upvalues: p1 (copy), PrevTransitionProps (copy)
+		if p1.props.onTransitionEnd then
+			p1.props.onTransitionEnd(p1._transitionProps, PrevTransitionProps)
 		end
-		local var3 = p3._transitionQueue[1]
+		local TransitionQueueEntry = p1._transitionQueue[1]
 		
-		if var3 then
-			local prevProps = var3.prevProps
-			p3._transitionQueue = table.clone(p3._transitionQueue)
-			table.remove(p3._transitionQueue, 1)
-			p3:_startTransition(prevProps, p3.props)
+		if TransitionQueueEntry then
+			local PrevProps = TransitionQueueEntry.prevProps
+			p1._transitionQueue = table.clone(p1._transitionQueue)
+			table.remove(p1._transitionQueue, 1)
+			p1:_startTransition(PrevProps, p1.props)
 			
 			return
+		else
+			p1._isTransitionRunning = false
 		end
-		p3._isTransitionRunning = false
 	end)
 end
 
-function transitioner._onPositionStep(p3, p4)
-	p3._positionLastValue = p4
-	local index = p3._transitionProps.index
-	local var2 = if p3._prevTransitionProps then p3._prevTransitionProps.index else index
+function Transitioner._onPositionStep(p1, _positionLastValue) --[[ Line: 315 ]]
+	p1._positionLastValue = _positionLastValue
+	local Index = p1._transitionProps.index
+	local Index1 = if p1._prevTransitionProps then p1._prevTransitionProps.index else Index
 	
-	if p3.props.onTransitionStep and var2 ~= index then
-		p3.props.onTransitionStep(p3._transitionProps, p3._prevTransitionProps, (p4 - var2) / (index - var2))
+	if p1.props.onTransitionStep and Index1 ~= Index then
+		p1.props.onTransitionStep(p1._transitionProps, p1._prevTransitionProps, (_positionLastValue - Index1) / (Index - Index1))
 	end
 end
 
-return transitioner
+return Transitioner

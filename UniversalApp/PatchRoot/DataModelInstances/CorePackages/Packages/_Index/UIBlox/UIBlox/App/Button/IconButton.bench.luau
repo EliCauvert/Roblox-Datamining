@@ -1,18 +1,15 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local iconButtonModule = require(parent.IconButton)
-local describe = require(parent_2.Dev.JestGlobals).describe
-local benchmarksModule = require(parent_1.Utility.benchmarks)
-local mountComponentTimes = benchmarksModule.mountComponentTimes
-local scrollComponentTimes = benchmarksModule.scrollComponentTimes
-local var1 = reactModule.createElement(iconButtonModule, {
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local BenchmarksModule = require(Parent1.Utility.benchmarks)
+local MountComponentTimesFunction = BenchmarksModule.mountComponentTimes
+local ScrollComponentTimesFunction = BenchmarksModule.scrollComponentTimes
+local Element = require(Parent2.React).createElement(require(Parent.IconButton), {
 	icon = "rbxassetid://7173696656978",
-	onActivated = function() end
+	onActivated = function() --[[ Line: 17 ]] end
 })
-describe("IconButton", function()
-	-- upvalues: mountComponentTimes (ref), var1 (ref), scrollComponentTimes (ref)
-	mountComponentTimes(var1, 1000, "IconButton")
-	scrollComponentTimes(var1, 1000, "IconButton")
+require(Parent2.Dev.JestGlobals).describe("IconButton", function() --[[ Line: 21 ]]
+	-- upvalues: MountComponentTimesFunction (copy), Element (copy), ScrollComponentTimesFunction (copy)
+	MountComponentTimesFunction(Element, 1000, "IconButton")
+	ScrollComponentTimesFunction(Element, 1000, "IconButton")
 end)

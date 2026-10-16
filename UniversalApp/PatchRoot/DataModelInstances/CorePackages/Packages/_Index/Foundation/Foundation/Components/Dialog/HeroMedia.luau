@@ -1,1 +1,1 @@
-﻿return require(script.DialogHeroMedia)
+﻿return (require(script.DialogHeroMedia))

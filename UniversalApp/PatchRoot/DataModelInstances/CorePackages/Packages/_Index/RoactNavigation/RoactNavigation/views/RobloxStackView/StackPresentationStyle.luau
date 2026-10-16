@@ -1,7 +1,7 @@
-﻿local navigationSymbolModule = require(script.Parent.Parent.Parent.NavigationSymbol)
+﻿local NavigationSymbolModule = require(script.Parent.Parent.Parent.NavigationSymbol)
 
 return {
-	Default = navigationSymbolModule("DEFAULT"),
-	Modal = navigationSymbolModule("MODAL"),
-	Overlay = navigationSymbolModule("OVERLAY")
+	Default = NavigationSymbolModule("DEFAULT"),
+	Modal = NavigationSymbolModule("MODAL"),
+	Overlay = NavigationSymbolModule("OVERLAY")
 }

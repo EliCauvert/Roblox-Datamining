@@ -1,69 +1,68 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-function t:__tostring()
-	-- upvalues: t (ref)
-	return getmetatable(t).__tostring(self)
+function Module.__tostring(p1) --[[ Line: 29 ]]
+	-- upvalues: Module (copy)
+	return getmetatable(Module).__tostring(p1)
 end
 
-local function _(p1)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({ name = "Error", message = p1 or "" }, t)
-	t.__captureStackTrace(tbl, 4)
+local function _(p1) --[[ Line: 35 | Named "__createError" ]]
+	-- upvalues: Module (copy)
+	local self = setmetatable({ name = "Error", message = p1 or "" }, Module)
+	Module.__captureStackTrace(self, 4)
 	
-	return tbl
+	return self
 end
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({ name = "Error", message = p1 or "" }, t)
-	t.__captureStackTrace(tbl, 4)
+function Module.new(p1) --[[ Line: 44 ]]
+	-- upvalues: Module (copy)
+	local self = setmetatable({ name = "Error", message = p1 or "" }, Module)
+	Module.__captureStackTrace(self, 4)
 	
-	return tbl
+	return self
 end
 
-function t.captureStackTrace(p1, p2)
-	-- upvalues: t (ref)
-	t.__captureStackTrace(p1, 3, p2)
+function Module.captureStackTrace(p1, p2) --[[ Line: 48 ]]
+	-- upvalues: Module (copy)
+	Module.__captureStackTrace(p1, 3, p2)
 end
 
-function t:__captureStackTrace(p1, p2)
-	-- upvalues: t (ref)
+function Module:__captureStackTrace(p1, p2) --[[ Line: 52 ]]
+	-- upvalues: Module (copy)
 	if typeof(p2) == "function" then
-		local trac = debug.traceback(nil, p1)
-		local matchIndex = string.find(trac, string.gsub(debug.info(p2, "s"), "([%(%)%.%%%+%-%*%?%[%^%$])", "%%%1") .. ":%d* function " .. debug.info(p2, "n"))
-		local var1 = nil
+		local Traceback = debug.traceback(nil, p1)
+		local FoundAt: number? = string.find(Traceback, string.gsub(debug.info(p2, "s"), "([%(%)%.%%%+%-%*%?%[%^%$])", "%%%1") .. ":%d* function " .. debug.info(p2, "n"))
+		local v1: number? = nil
 		
-		if matchIndex ~= nil then
-			local matchIndex_1, matchIndex_2 = string.find(trac, "\n", matchIndex + 1)
-			matchIndex = matchIndex_1
-			var1 = matchIndex_2
+		if FoundAt ~= nil then
+			local _
+			_, v7 = string.find(Traceback, "\n", FoundAt + 1)
 		end
-		if var1 ~= nil then
-			trac = string.sub(trac, var1 + 1)
+		if v1 ~= nil then
+			Traceback = string.sub(Traceback, v1 + 1)
 		end
-		self.__stack = trac
+		self.__stack = Traceback
 	else
 		self.__stack = debug.traceback(nil, p1)
 	end
-	t.__recalculateStacktrace(self)
+	Module.__recalculateStacktrace(self)
 end
 
-function t:__recalculateStacktrace()
-	local message = self.message
-	self.stack = ((self.name or "Error") .. (if message == nil or message == "" then "" else ": " .. message)) .. "\n" .. (if self.__stack then self.__stack else "")
+function Module:__recalculateStacktrace() --[[ Line: 76 ]]
+	local Message = self.message
+	self.stack = ((self.name or "Error") .. (if Message == nil or Message == "" then "" else ": " .. Message)) .. "\n" .. (if self.__stack then self.__stack else "")
 end
 
-return setmetatable(t, {
-	__call = function(_, ...)
-		-- upvalues: t (ref)
-		local tbl = setmetatable({ name = "Error", message = ... or "" }, t)
-		t.__captureStackTrace(tbl, 4)
+return (setmetatable(Module, {
+	__call = function(_, ...) --[[ Line: 88 ]]
+		-- upvalues: Module (copy)
+		local self = setmetatable({ name = "Error", message = (...) or "" }, Module)
+		Module.__captureStackTrace(self, 4)
 		
-		return tbl
+		return self
 	end,
-	__tostring = function(p1)
-		return if p1.name == nil then tostring("Error") elseif p1.message and p1.message ~= "" then string.format("%s: %s", tostring(p1.name), tostring(p1.message)) else tostring(p1.name)
+	__tostring = function(p1): string --[[ Line: 91 ]]
+		return if p1.name == nil then tostring("Error") elseif p1.message and p1.message ~= "" then string.format("%s: %s", tostring(p1.name), (tostring(p1.message))) else tostring(p1.name)
 	end
-})
+}))

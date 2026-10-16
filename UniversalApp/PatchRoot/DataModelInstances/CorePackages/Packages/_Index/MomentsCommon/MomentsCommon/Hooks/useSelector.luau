@@ -1,117 +1,120 @@
-﻿local reactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
-local useStoreModule = require(script.Parent.useStore)
+﻿local ReactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
+local UseStoreModule = require(script.Parent.useStore)
 
-local var1 = function(p1, p2)
+local function v2(p1, p2): boolean --[[ Line: 12 ]]
 	return p1 == p2
 end
 
-function useSelectorWithStore(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	local _, var2 = reactModule.useReducer(function(p4)
-		return p4 + 1
+function useSelectorWithStore(Callback, Callback1, p1) --[[ Line: 16 ]]
+	-- upvalues: ReactModule (copy)
+	local _, UseReducerResult2 = ReactModule.useReducer(function(p2: number): number --[[ Line: 21 ]]
+		return p2 + 1
 	end, 0)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(nil)
-	local state = p3:getState()
-	local var7 = nil
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), var4 (ref), state (ref), var5 (ref), var3 (ref), var6 (ref), p2 (ref), var7 (write)
-		if p1 == var4.current and state == var5.current and not var3.current then
-			var7 = var6.current
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local State = p1:getState()
+	local Current = nil
+	local Success, Result = pcall(function() --[[ Line: 33 ]]
+		-- upvalues: Callback (copy), UseRefResult1 (copy), State (copy), UseRefResult2 (copy), UseRefResult (copy), UseRefResult3 (copy), Callback1 (copy), Current (ref)
+		if Callback == UseRefResult1.current and State == UseRefResult2.current and not UseRefResult.current then
+			Current = UseRefResult3.current
 			
 			return
 		end
-		local var8 = p1(state)
+		local CallbackResult = Callback(State)
 		
-		if var6.current == nil or not p2(var8, var6.current) then
-			var7 = var8
+		if UseRefResult3.current == nil or not Callback1(CallbackResult, UseRefResult3.current) then
+			Current = CallbackResult
 			
 			return
+		else
+			Current = UseRefResult3.current
 		end
-		var7 = var6.current
 	end)
 	
-	if not ok then
-		if var3.current then
-			status = string.format("%s\nThe error may be correlated with this previous error:\n%s\n\n", tostring(status), tostring(var3.current))
+	if not Success then
+		if UseRefResult.current then
+			Result = string.format("%s\nThe error may be correlated with this previous error:\n%s\n\n", tostring(Result), (tostring(UseRefResult.current)))
 		end
-		error(status)
+		error(Result)
 	end
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var4 (ref), p1 (ref), var5 (ref), state (ref), var6 (ref), var7 (write), var3 (ref)
-		var4.current = p1
-		var5.current = state
-		var6.current = var7
-		var3.current = nil
+	ReactModule.useLayoutEffect(function() --[[ Line: 63 ]]
+		-- upvalues: UseRefResult1 (copy), Callback (copy), UseRefResult2 (copy), State (copy), UseRefResult3 (copy), Current (ref), UseRefResult (copy)
+		UseRefResult1.current = Callback
+		UseRefResult2.current = State
+		UseRefResult3.current = Current
+		UseRefResult.current = nil
 	end)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var5 (ref), var4 (ref), p2 (ref), var6 (ref), var3 (ref), var2 (ref), p3 (ref)
-		local changedConnection = p3.changed:connect(function(p4)
-			-- upvalues: var5 (copy), var4 (copy), p2 (copy), var6 (copy), var3 (copy), var2 (copy)
-			local ok, status = pcall(function()
-				-- upvalues: p4 (ref), var5 (copy), var4 (copy), p2 (copy), var6 (copy)
-				if p4 == var5.current then
+	ReactModule.useLayoutEffect(function() --[[ Line: 70 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), Callback1 (copy), UseRefResult3 (copy), UseRefResult (copy), UseReducerResult2 (copy), p1 (copy)
+		local ChangedConnection = p1.changed:connect(function(Current) --[[ Line: 71 | Named "checkForUpdates" ]]
+			-- upvalues: UseRefResult2 (upval), UseRefResult1 (upval), Callback1 (upval), UseRefResult3 (upval), UseRefResult (upval), UseReducerResult2 (upval)
+			local Success, Result = pcall(function(): boolean --[[ Line: 72 ]]
+				-- upvalues: Current (copy), UseRefResult2 (upval), UseRefResult1 (upval), Callback1 (upval), UseRefResult3 (upval)
+				if Current == UseRefResult2.current then
 					return false
 				end
-				assert(var4.current, "latestSelector")
-				local var8 = var4.current(p4)
+				assert(UseRefResult1.current, "latestSelector")
+				local CurrentResult = UseRefResult1.current(Current)
 				
-				if p2(var8, var6.current) then
+				if Callback1(CurrentResult, UseRefResult3.current) then
 					return false
+				else
+					UseRefResult3.current = CurrentResult
+					UseRefResult2.current = Current
+					
+					return true
 				end
-				var6.current = var8
-				var5.current = p4
-				
-				return true
 			end)
 			
-			if not ok then
-				status = status or "Error"
-				var3.current = status
+			if not Success then
+				Result = Result or "Error"
+				UseRefResult.current = Result
 			end
-			if status then
-				var2(nil)
+			if Result then
+				UseReducerResult2(nil)
 			end
 		end)
-		local state = p3:getState()
-		local ok, status = pcall(function()
-			-- upvalues: state (ref), var5 (copy), var4 (copy), p2 (copy), var6 (copy)
-			if state == var5.current then
+		local State = p1:getState()
+		local Success, Result = pcall(function(): boolean --[[ Line: 72 ]]
+			-- upvalues: State (copy), UseRefResult2 (upval), UseRefResult1 (upval), Callback1 (upval), UseRefResult3 (upval)
+			if State == UseRefResult2.current then
 				return false
 			end
-			assert(var4.current, "latestSelector")
-			local var8 = var4.current(state)
+			assert(UseRefResult1.current, "latestSelector")
+			local CurrentResult = UseRefResult1.current(State)
 			
-			if p2(var8, var6.current) then
+			if Callback1(CurrentResult, UseRefResult3.current) then
 				return false
+			else
+				UseRefResult3.current = CurrentResult
+				UseRefResult2.current = State
+				
+				return true
 			end
-			var6.current = var8
-			var5.current = state
-			
-			return true
 		end)
 		
-		if not ok then
-			status = status or "Error"
-			var3.current = status
+		if not Success then
+			Result = Result or "Error"
+			UseRefResult.current = Result
 		end
-		if status then
-			var2(nil)
+		if Result then
+			UseReducerResult2(nil)
 		end
-		return function()
-			-- upvalues: changedConnection (ref)
-			changedConnection.disconnect()
+		return function() --[[ Line: 106 ]]
+			-- upvalues: ChangedConnection (copy)
+			ChangedConnection.disconnect()
 		end
-	end, { p3 })
+	end, { p1 })
 	
-	return var7
+	return Current
 end
 
-function useSelector(p1, p2)
-	-- upvalues: var1 (ref), useStoreModule (ref)
-	return useSelectorWithStore(p1, p2 or var1, useStoreModule())
+function useSelector(p1, p2) --[[ Line: 114 ]]
+	-- upvalues: v2 (copy), UseStoreModule (copy)
+	return (useSelectorWithStore(p1, p2 or v2, (UseStoreModule())))
 end
 
 return useSelector

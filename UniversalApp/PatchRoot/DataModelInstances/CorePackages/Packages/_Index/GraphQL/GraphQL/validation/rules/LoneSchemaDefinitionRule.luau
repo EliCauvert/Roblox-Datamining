@@ -1,41 +1,42 @@
-﻿local parent = script.Parent.Parent.Parent
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local isNillishModule = require(parent.luaUtils.isNillish)
-local isNillish = isNillishModule.isNillish
-local isNotNillish = isNillishModule.isNotNillish
+﻿local Parent = script.Parent.Parent.Parent
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local IsNillishModule = require(Parent.luaUtils.isNillish)
+local IsNillishFunction = IsNillishModule.isNillish
+local IsNotNillishFunction = IsNillishModule.isNotNillish
 
 return {
-	LoneSchemaDefinitionRule = function(p1)
-		-- upvalues: isNillish (ref), isNotNillish (ref), graphQLError (ref)
-		local schema = p1:getSchema()
-		local subscriptionType = nil
+	LoneSchemaDefinitionRule = function(p1) --[[ Line: 24 ]]
+		-- upvalues: IsNillishFunction (copy), IsNotNillishFunction (copy), GraphQLError (copy)
+		local Schema = p1:getSchema()
+		local AstNode = nil
 		
-		if schema then
-			subscriptionType = schema.astNode
+		if Schema then
+			AstNode = Schema.astNode
 			
-			if isNillish(subscriptionType) then
-				subscriptionType = schema:getQueryType()
+			if IsNillishFunction(AstNode) then
+				AstNode = Schema:getQueryType()
 			end
-			if isNillish(subscriptionType) then
-				subscriptionType = schema:getMutationType()
+			if IsNillishFunction(AstNode) then
+				AstNode = Schema:getMutationType()
 			end
-			if isNillish(subscriptionType) then
-				subscriptionType = schema:getSubscriptionType()
+			if IsNillishFunction(AstNode) then
+				AstNode = Schema:getSubscriptionType()
 			end
 		end
-		local var1 = 0
+		local Count = 0
 		
 		return {
-			SchemaDefinition = function(_, p2)
-				-- upvalues: isNotNillish (copy), subscriptionType (write), p1 (ref), graphQLError (copy), var1 (write)
-				if isNotNillish(subscriptionType) then
-					p1:reportError(graphQLError.new("Cannot define a new schema within a schema extension.", p2))
+			SchemaDefinition = function(_, p2) --[[ Line: 42 ]]
+				-- upvalues: IsNotNillishFunction (upval), AstNode (ref), p1 (copy), GraphQLError (upval), Count (ref)
+				if IsNotNillishFunction(AstNode) then
+					p1:reportError(GraphQLError.new("Cannot define a new schema within a schema extension.", p2))
 					
 					return
-				elseif var1 > 0 then
-					p1:reportError(graphQLError.new("Must provide only one schema definition.", p2))
 				end
-				var1 += 1
+				if Count > 0 then
+					p1:reportError(GraphQLError.new("Must provide only one schema definition.", p2))
+				end
+				Count += 1
 			end
 		}
 	end

@@ -1,18 +1,18 @@
 ﻿local _ = require(script.Parent.Types)
-local insert = table.insert
+local InsertFunction = table.insert
 
-return function(p1, p2)
-	-- upvalues: insert (ref)
+return function(List, Callback) --[[ Line: 17 | Named "groupBy" ]]
+	-- upvalues: InsertFunction (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		local var1 = if typeof(p2) == "function" then p2(v, i) else v[p2]
+	for i, value in List do
+		local CallbackResult = if typeof(Callback) == "function" then Callback(value, i) else value[Callback]
 		
-		if var1 ~= nil then
-			if t[var1] == nil then
-				t[var1] = { v }
+		if CallbackResult ~= nil then
+			if t[CallbackResult] == nil then
+				t[CallbackResult] = { value }
 			else
-				insert(t[var1], v)
+				InsertFunction(t[CallbackResult], value)
 			end
 		end
 	end

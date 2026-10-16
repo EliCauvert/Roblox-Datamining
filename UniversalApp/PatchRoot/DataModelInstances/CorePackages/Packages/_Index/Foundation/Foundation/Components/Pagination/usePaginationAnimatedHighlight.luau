@@ -1,184 +1,186 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local _ = require(parent.Otter)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local _ = require(foundation.Enums.PaginationSize)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local wrappersModule = require(foundation.Utility.Wrappers)
-local connection = wrappersModule.Connection
-local instance = wrappersModule.Instance
-local signal = wrappersModule.Signal
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local _ = require(Parent.Otter)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local _ = require(Foundation.Enums.PaginationSize)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WrappersModule = require(Foundation.Utility.Wrappers)
+local Connection = WrappersModule.Connection
+local WrappersModuleInstance = WrappersModule.Instance
+local Signal = WrappersModule.Signal
 local _ = require(script.Parent.paginationSlotsUtils)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: useTokensModule (ref), reactOtterModule (ref), reactModule (ref), signal (ref), instance (ref), connection (ref)
-	local time100 = useTokensModule().Time.Time_100
-	local var1, var2 = reactOtterModule.useAnimatedBinding(0)
-	local var3, var4 = reactOtterModule.useAnimatedBinding(0)
-	local var5, var6 = reactModule.useBinding(0)
-	local var7, var8 = reactModule.useBinding(false)
-	local var9 = reactModule.useRef(p1)
-	local var10 = reactModule.useRef(false)
-	local var11 = reactModule.useRef(false)
-	local var12 = reactModule.useRef(nil)
-	local var13 = reactModule.useRef(nil)
+return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAnimatedHighlight" ]]
+	-- upvalues: UseTokensModule (copy), ReactOtterModule (copy), ReactModule (copy), Signal (copy), WrappersModuleInstance (copy), Connection (copy)
+	local Time100 = UseTokensModule().Time.Time_100
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(0)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
+	local UseRefResult = ReactModule.useRef(Current)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseRefResult4 = ReactModule.useRef(nil)
 	
-	local function _(value)
-		-- upvalues: var12 (ref), var10 (ref), var11 (ref)
-		if var12.current then
-			task.cancel(var12.current)
-			var12.current = nil
+	local function _(p5) --[[ Line: 59 | Named "resetTransitionState" ]]
+		-- upvalues: UseRefResult3 (copy), UseRefResult1 (copy), UseRefResult2 (copy)
+		if UseRefResult3.current then
+			task.cancel(UseRefResult3.current)
+			UseRefResult3.current = nil
 		end
-		var10.current = false
+		UseRefResult1.current = false
 		
-		if value then
-			var11.current = false
+		if p5 then
+			UseRefResult2.current = false
 		end
 	end
 	
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), var10 (ref), time100 (ref), var11 (ref), var13 (ref)
-		if var12.current then
-			task.cancel(var12.current)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+		-- upvalues: UseRefResult3 (copy), UseRefResult1 (copy), Time100 (copy), UseRefResult2 (copy), UseRefResult4 (copy)
+		if UseRefResult3.current then
+			task.cancel(UseRefResult3.current)
 		end
-		var10.current = true
-		var12.current = task.delay(time100, function()
-			-- upvalues: var12 (copy), var10 (copy), var11 (copy), var13 (copy)
-			var12.current = nil
-			var10.current = false
+		UseRefResult1.current = true
+		UseRefResult3.current = task.delay(Time100, function() --[[ Line: 76 ]]
+			-- upvalues: UseRefResult3 (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseRefResult4 (upval)
+			UseRefResult3.current = nil
+			UseRefResult1.current = false
 			
-			if var11.current then
-				var11.current = false
-				local current = var13.current
+			if UseRefResult2.current then
+				UseRefResult2.current = false
+				local CurrentFunction: () -> () = UseRefResult4.current
 				
-				if current then
-					current()
+				if CurrentFunction then
+					CurrentFunction()
 				end
 			end
 		end)
-	end, { time100 })
-	local var15 = reactModule.useCallback(function(p6, p7)
-		-- upvalues: p2 (ref), var8 (ref), var10 (ref), var11 (ref), var4 (ref), reactOtterModule (copy), var2 (ref), var14 (ref), time100 (ref), var6 (ref)
-		if not p6.current or not p2.current then
-			var8(false)
+	end, { Time100 })
+	local UseResult1 = ReactModule.useCallback(function(p5, p6): boolean --[[ Line: 90 ]]
+		-- upvalues: p1 (copy), UseBindingResult2_1 (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2 (copy), UseResult (copy), Time100 (copy), UseBindingResult2 (copy)
+		if not p5.current or not p1.current then
+			UseBindingResult2_1(false)
 			
 			return false
 		end
-		local var16 = p6.current.AbsolutePosition.X - p2.current.AbsolutePosition.X
-		local x = p6.current.AbsoluteSize.X
-		local y = p6.current.AbsoluteSize.Y
+		local XDelta = p5.current.AbsolutePosition.X - p1.current.AbsolutePosition.X
+		local X: number = p5.current.AbsoluteSize.X
+		local Y: number = p5.current.AbsoluteSize.Y
 		
-		if x <= 0 or y <= 0 then
-			var8(false)
+		if X <= 0 or Y <= 0 then
+			UseBindingResult2_1(false)
 			
 			return false
-		elseif p7 and var10.current then
-			var11.current = true
-			
-			return false
-		elseif p7 then
-			var4(reactOtterModule.instant(x))
-			var2(reactOtterModule.instant(var16))
-		else
-			var11.current = false
-			var14()
-			local t = {
-				easingStyle = Enum.EasingStyle.Linear,
-				duration = time100
-			}
-			var2(reactOtterModule.ease(var16, t))
-			var4(reactOtterModule.ease(x, t))
 		end
-		var6(y)
-		var8(true)
+		if p6 and UseRefResult1.current then
+			UseRefResult2.current = true
+			
+			return false
+		end
+		if p6 then
+			UseAnimatedBindingResult2_1(ReactOtterModule.instant(X))
+			UseAnimatedBindingResult2(ReactOtterModule.instant(XDelta))
+		else
+			UseRefResult2.current = false
+			UseResult()
+			local config = {
+				easingStyle = Enum.EasingStyle.Linear,
+				duration = Time100
+			}
+			UseAnimatedBindingResult2(ReactOtterModule.ease(XDelta, config))
+			UseAnimatedBindingResult2_1(ReactOtterModule.ease(X, config))
+		end
+		UseBindingResult2(Y)
+		UseBindingResult2_1(true)
 		
 		return true
-	end, { time100, p2, var14 })
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), p3 (ref), var15 (ref)
-		if p1 then
-			local var17 = p3[p1]
+	end, { Time100, p1, UseResult })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 138 ]]
+		-- upvalues: Current (copy), p2 (copy), UseResult1 (copy)
+		if Current then
+			local v1 = p2[Current]
 			
-			if var17 then
-				var15(var17, true)
+			if v1 then
+				UseResult1(v1, true)
 			end
 		end
-	end, { p1, p3, var15 })
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), p3 (ref), var9 (ref), var12 (ref), var10 (ref), var11 (ref), p2 (ref), var15 (ref), var8 (ref)
-		if not p1 then
-			var8(false)
-			var9.current = nil
+	end, { Current, p2, UseResult1 })
+	ReactModule.useLayoutEffect(function() --[[ Line: 148 ]]
+		-- upvalues: Current (copy), p2 (copy), UseRefResult (copy), UseRefResult3 (copy), UseRefResult1 (copy), UseRefResult2 (copy), p1 (copy), UseResult1 (copy), UseBindingResult2_1 (copy)
+		if not Current then
+			UseBindingResult2_1(false)
+			UseRefResult.current = nil
 			
 			return
 		end
-		local var17 = p3[p1]
-		local var18 = p1 == var9.current
+		local v1 = p2[Current]
+		local IsCurrentMatch = Current == UseRefResult.current
 		
-		if not var18 then
-			if var12.current then
-				task.cancel(var12.current)
-				var12.current = nil
+		if not IsCurrentMatch then
+			if UseRefResult3.current then
+				task.cancel(UseRefResult3.current)
+				UseRefResult3.current = nil
 			end
-			var10.current = false
-			var11.current = false
+			UseRefResult1.current = false
+			UseRefResult2.current = false
 		end
-		if var17 and var17.current and p2.current then
-			var15(var17, var18)
+		if v1 and v1.current and p1.current then
+			UseResult1(v1, IsCurrentMatch)
 		else
-			var8(false)
+			UseBindingResult2_1(false)
 		end
-		var9.current = p1
+		UseRefResult.current = Current
 	end, {
-		p1,
+		Current,
+		p2,
+		UseResult1,
 		p3,
-		var15,
-		p4,
-		p5
+		p4
 	})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p3 (ref), p2 (ref), signal (copy), instance (copy), var16 (ref), connection (copy)
-		if p1 then
-			local var17 = p3[p1]
+	ReactModule.useEffect(function() --[[ Line: 171 ]]
+		-- upvalues: Current (copy), p2 (copy), p1 (copy), Signal (upval), WrappersModuleInstance (upval), UseResult2 (copy), Connection (upval)
+		if Current then
+			local v1 = p2[Current]
 			
-			if var17 and var17.current and p2.current then
-				local var18 = signal.Connect(instance.GetPropertyChangedSignal(var17.current, "AbsoluteSize"), var16)
-				local var19 = signal.Connect(instance.GetPropertyChangedSignal(var17.current, "AbsolutePosition"), var16)
-				local var20 = signal.Connect(instance.GetPropertyChangedSignal(p2.current, "AbsoluteSize"), var16)
-				local var21 = signal.Connect(instance.GetPropertyChangedSignal(p2.current, "AbsolutePosition"), var16)
+			if v1 and v1.current and p1.current then
+				local ConnectResult = Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(v1.current, "AbsoluteSize"), UseResult2)
+				local ConnectResult1 = Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(v1.current, "AbsolutePosition"), UseResult2)
+				local ConnectResult2 = Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(p1.current, "AbsoluteSize"), UseResult2)
+				local ConnectResult3 = Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(p1.current, "AbsolutePosition"), UseResult2)
 				
-				return function()
-					-- upvalues: connection (copy), var18 (ref), var19 (ref), var20 (ref), var21 (ref)
-					connection.Disconnect(var18)
-					connection.Disconnect(var19)
-					connection.Disconnect(var20)
-					connection.Disconnect(var21)
+				return function() --[[ Line: 193 ]]
+					-- upvalues: Connection (upval), ConnectResult (copy), ConnectResult1 (copy), ConnectResult2 (copy), ConnectResult3 (copy)
+					Connection.Disconnect(ConnectResult)
+					Connection.Disconnect(ConnectResult1)
+					Connection.Disconnect(ConnectResult2)
+					Connection.Disconnect(ConnectResult3)
 				end
 			end
 		end
-		return function() end
-	end, { p1, p3, var16 })
-	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var16 (ref)
-		var13.current = var16
-	end, { var16 })
-	reactModule.useEffect(function()
-		-- upvalues: var12 (ref)
-		return function()
-			-- upvalues: var12 (copy)
-			if var12.current then
-				task.cancel(var12.current)
-				var12.current = nil
+		return function() --[[ Line: 202 ]] end
+	end, { Current, p2, UseResult2 })
+	ReactModule.useEffect(function() --[[ Line: 206 ]]
+		-- upvalues: UseRefResult4 (copy), UseResult2 (copy)
+		UseRefResult4.current = UseResult2
+	end, { UseResult2 })
+	ReactModule.useEffect(function() --[[ Line: 210 ]]
+		-- upvalues: UseRefResult3 (copy)
+		return function() --[[ Line: 211 ]]
+			-- upvalues: UseRefResult3 (upval)
+			if UseRefResult3.current then
+				task.cancel(UseRefResult3.current)
+				UseRefResult3.current = nil
 			end
 		end
 	end, {})
 	
 	return {
-		activeItemHeight = var5,
-		highlightPosition = var1,
-		highlightWidth = var3,
-		isVisible = var7,
-		updateHighlight = var15
+		activeItemHeight = UseBindingResult,
+		highlightPosition = UseAnimatedBindingResult,
+		highlightWidth = UseAnimatedBindingResult1,
+		isVisible = UseBindingResult1,
+		updateHighlight = UseResult1
 	}
 end

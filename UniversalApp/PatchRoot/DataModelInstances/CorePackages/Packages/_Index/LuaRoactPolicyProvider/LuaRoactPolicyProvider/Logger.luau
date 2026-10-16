@@ -1,3 +1,3 @@
-﻿local lumberyakModule = require(script.Parent.Parent.Lumberyak)
+﻿local LumberyakModule = require(script.Parent.Parent.Lumberyak)
 
-return if game:DefineFastFlag("RoactPolicyLoggerName", false) then lumberyakModule.Logger.new(nil, "LuaRoactPolicyProvider") else lumberyakModule.Logger.new()
+return if game:DefineFastFlag("RoactPolicyLoggerName", false) then LumberyakModule.Logger.new(nil, "LuaRoactPolicyProvider") else LumberyakModule.Logger.new()

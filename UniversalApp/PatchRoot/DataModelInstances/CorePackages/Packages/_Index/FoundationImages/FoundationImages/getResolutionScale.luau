@@ -1,16 +1,16 @@
-﻿local guiService = game:GetService("GuiService")
-local ok, status = pcall(guiService.GetResolutionScale, guiService)
-local getImageSetDataModule = require(script.Parent.Generated.GetImageSetData)
+﻿local GuiService = game:GetService("GuiService")
+local Success, Result = pcall(GuiService.GetResolutionScale, GuiService)
+local GetImageSetDataModule = require(script.Parent.Generated.GetImageSetData)
 
-if not ok then
-	status = 1
+if not Success then
+	Result = 1
 end
-if guiService:IsTenFootInterface() then
-	status = 3
+if GuiService:IsTenFootInterface() then
+	Result = 3
 end
-return function()
-	-- upvalues: getImageSetDataModule (ref), status (write)
-	local _, var1 = getImageSetDataModule(status)
+return function() --[[ Line: 18 | Named "getResolutionScale" ]]
+	-- upvalues: GetImageSetDataModule (copy), Result (ref)
+	local _, ImageSetDataModule2 = GetImageSetDataModule(Result)
 	
-	return var1
+	return ImageSetDataModule2
 end

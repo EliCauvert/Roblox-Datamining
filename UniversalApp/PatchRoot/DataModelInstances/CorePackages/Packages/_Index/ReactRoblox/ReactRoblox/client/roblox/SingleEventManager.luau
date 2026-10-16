@@ -1,39 +1,34 @@
-﻿local console = require(script.Parent.Parent.Parent.Parent.Shared).console
-local _ = {
-	Disabled = "Disabled",
-	Suspended = "Suspended",
-	Enabled = "Enabled"
-}
-local t = {}
-t.__index = t
+﻿local Console = require(script.Parent.Parent.Parent.Parent.Shared).console
+local SingleEventManager = {}
+SingleEventManager.__index = SingleEventManager
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	return setmetatable({
+function SingleEventManager.new(_instance) --[[ Line: 49 ]]
+	-- upvalues: SingleEventManager (copy)
+	return (setmetatable({
 		_status = "Disabled",
 		_isResuming = false,
 		_suspendedEventQueue = {},
 		_connections = {},
 		_listeners = {},
-		_instance = p1
-	}, t)
+		_instance = _instance
+	}, SingleEventManager))
 end
 
-function t:connectEvent(p1, p2)
+function SingleEventManager:connectEvent(p1, p2) --[[ Line: 77 ]]
 	self:_connect(p1, self._instance[p1], p2)
 end
 
-function t:connectPropertyChange(p1, p2)
-	local ok, status = pcall(self._instance.GetPropertyChangedSignal, self._instance, p1)
+function SingleEventManager:connectPropertyChange(Text, p1) --[[ Line: 81 ]]
+	local Success, Result = pcall(self._instance.GetPropertyChangedSignal, self._instance, Text)
 	
-	if not ok then
-		error(string.format("Cannot get changed signal on property %q: %s", tostring(p1), status), 0)
+	if not Success then
+		error(string.format("Cannot get changed signal on property %q: %s", tostring(Text), Result), 0)
 	end
-	self:_connect("Change." .. p3, status, p2)
+	self:_connect("Change." .. Text, Result, p1)
 end
 
-function t:_connect(p1, p2, p3)
-	if p3 == nil then
+function SingleEventManager:_connect(p1, Signal, p2) --[[ Line: 99 ]]
+	if p2 == nil then
 		if self._connections[p1] ~= nil then
 			self._connections[p1]:Disconnect()
 			self._connections[p1] = nil
@@ -41,40 +36,46 @@ function t:_connect(p1, p2, p3)
 		self._listeners[p1] = nil
 		
 		return
-	elseif self._connections[p1] == nil then
-		self._connections[p1] = p2:Connect(function(...)
-			-- upvalues: self (ref), p1 (ref)
-			if self._status == "Enabled" then
-				self._listeners[p1](self._instance, ...)
-				
-				return
-			elseif self._status == "Suspended" then
-				table.insert(self._suspendedEventQueue, { p1, select("#", ...), ... })
-			end
-		end)
+	else
+		if self._connections[p1] == nil then
+			self._connections[p1] = Signal:Connect(function(...) --[[ Line: 110 ]]
+				-- upvalues: self (copy), p1 (copy)
+				if self._status == "Enabled" then
+					self._listeners[p1](self._instance, ...)
+					
+					return
+				end
+				if self._status == "Suspended" then
+					table.insert(self._suspendedEventQueue, { p1, select("#", ...), ... })
+				end
+			end)
+		end
+		self._listeners[p1] = p2
 	end
-	self._listeners[p1] = p3
 end
 
-function t:suspend()
+function SingleEventManager:suspend() --[[ Line: 130 ]]
 	self._status = "Suspended"
 end
 
-function t:resume()
-	-- upvalues: console (ref)
+function SingleEventManager:resume() --[[ Line: 134 ]]
+	-- upvalues: Console (copy)
 	if self._isResuming then return end
 	self._isResuming = true
 	
-	for i, v in self._suspendedEventQueue do
-		local var1 = self._listeners[v[1]]
-		local var2 = v[2]
+	for _, value in self._suspendedEventQueue do
+		local Listener = self._listeners[value[1]]
+		local v1: number = value[2]
+		local NoListener = Listener == nil
+		local Result = nil
 		
-		if var1 ~= nil then
-			local var3, var4 = coroutine.resume(coroutine.create(var1), self._instance, unpack(v, 3, 2 + var2))
-			
-			if not var3 then
-				console.warn("%s", var4)
-			end
+		if not NoListener then
+			local Success
+			Success, Result = coroutine.resume(coroutine.create(Listener), self._instance, unpack(value, 3, 2 + v1))
+			NoListener = Success
+		end
+		if not NoListener then
+			Console.warn("%s", Result)
 		end
 	end
 	self._isResuming = false
@@ -82,4 +83,4 @@ function t:resume()
 	table.clear(self._suspendedEventQueue)
 end
 
-return t
+return SingleEventManager

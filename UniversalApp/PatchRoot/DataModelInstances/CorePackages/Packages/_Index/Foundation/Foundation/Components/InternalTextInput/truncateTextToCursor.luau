@@ -1,26 +1,26 @@
-﻿local function _(p1, p2)
-	return p1:sub(p2, p2)
+﻿local function _(Text: string, p1): string --[[ Line: 10 | Named "charAt" ]]
+	return Text:sub(p1, p1)
 end
 
-return function(p1)
-	local cursorPosition = p1.CursorPosition
+return function(Frame): string --[[ Line: 27 | Named "truncateTextToCursor" ]]
+	local CursorPosition: number = Frame.CursorPosition
 	
-	if cursorPosition == -1 then
+	if CursorPosition == -1 then
 		return ""
 	end
-	local text = p1.Text
-	local var1 = cursorPosition + p1.AbsoluteSize.X / (p1.TextSize * p1.LineHeight / 1.4)
-	local minValue = math.min((string.find(text, "\n", cursorPosition) or 1e999) - 1, string.find(text, "[ \t\f\11]", cursorPosition) or 1e999, #text)
-	local var2 = text:sub(cursorPosition, cursorPosition):match("\n")
+	local Text: string = Frame.Text
+	local NewCursorPosition = CursorPosition + Frame.AbsoluteSize.X / (Frame.TextSize * Frame.LineHeight / 1.4)
+	local Smallest = math.min((string.find(Text, "\n", CursorPosition) or 1e999) - 1, string.find(Text, "[ \t\f\11]", CursorPosition) or 1e999, #Text)
+	local v1 = Text:sub(CursorPosition, CursorPosition):match("\n")
 	
-	if var2 then
-		local var3 = cursorPosition - 1
-		var2 = text:sub(var3, var3):match("\n") or cursorPosition == 1
+	if v1 then
+		local CursorPositionDelta = CursorPosition - 1
+		v1 = Text:sub(CursorPositionDelta, CursorPositionDelta):match("\n") or CursorPosition == 1
 	end
-	if var2 then
-		minValue = cursorPosition - 1
-	elseif var1 < minValue then
-		minValue = cursorPosition
+	if v1 then
+		Smallest = CursorPosition - 1
+	elseif NewCursorPosition < Smallest then
+		Smallest = CursorPosition
 	end
-	return utf8.char(utf8.codepoint(text, 1, minValue))
+	return utf8.char(utf8.codepoint(Text, 1, Smallest))
 end

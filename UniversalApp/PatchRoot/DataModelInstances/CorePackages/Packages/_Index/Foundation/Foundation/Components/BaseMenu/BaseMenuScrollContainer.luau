@@ -1,35 +1,37 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local scrollViewModule = require(foundation.Components.ScrollView)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ScrollViewModule = require(Foundation.Components.ScrollView)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 
-local function computeAutomaticSize(p1)
+local function computeAutomaticSize(p1) --[[ Line: 38 ]]
 	return if p1.autoSize then if p1.isOverMaxHeight then Enum.AutomaticSize.X else Enum.AutomaticSize.XY elseif p1.isOverMaxHeight then Enum.AutomaticSize.None else Enum.AutomaticSize.Y
 end
 
-local function computeSize(p1)
-	local var1 = if p1.isOverMaxHeight and p1.maxHeight then UDim.new(0, p1.maxHeight) else UDim.new()
+local function computeSize(p1): UDim2 --[[ Line: 44 ]]
+	local _UDim: UDim = if p1.isOverMaxHeight and p1.maxHeight then UDim.new(0, p1.maxHeight) else UDim.new()
 	
-	return if p1.autoSize then UDim2.new(UDim.new(), var1) else UDim2.new(p1.width or UDim.new(), var1)
+	return if p1.autoSize then UDim2.new(UDim.new(), _UDim) else UDim2.new(p1.width or UDim.new(), _UDim)
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), computeAutomaticSize (ref), scrollViewModule (ref), withCommonPropsModule (ref), computeSize (ref), viewModule (ref)
-	local autoSize = p1.autoSize or reactModule.useBinding(true)
-	local width = p1.width or reactModule.useBinding(nil)
-	local maxHeight = p1.maxHeight
-	local var1, var2 = reactModule.useBinding(UDim2.fromScale(0, 1))
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var1 (ref), maxHeight (ref)
-		return reactModule.joinBindings({ canvasSize = var1, maxHeight = maxHeight }):map(function(p2)
+return function(p1) --[[ Line: 62 | Named "BaseMenuScrollContainer" ]]
+	-- upvalues: ReactModule (copy), computeAutomaticSize (copy), ScrollViewModule (copy), WithCommonPropsModule (copy), computeSize (copy), ViewModule (copy)
+	local UseBindingResult = ReactModule.useBinding(true)
+	local UseBindingResult1 = ReactModule.useBinding(nil)
+	local AutoSize = p1.autoSize or UseBindingResult
+	local Width = p1.width or UseBindingResult1
+	local MaxHeight = p1.maxHeight
+	local UseBindingResult2, UseBindingResult21 = ReactModule.useBinding(UDim2.fromScale(0, 1))
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 71 ]]
+		-- upvalues: ReactModule (upval), UseBindingResult2 (copy), MaxHeight (copy)
+		return ReactModule.joinBindings({ canvasSize = UseBindingResult2, maxHeight = MaxHeight }):map(function(p2): boolean --[[ Line: 73 ]]
 			return p2.maxHeight ~= nil and p2.maxHeight < p2.canvasSize.Y.Offset
 		end)
-	end, { maxHeight })
-	local var4 = reactModule.joinBindings({ autoSize = autoSize, isOverMaxHeight = var3 }):map(computeAutomaticSize)
+	end, { MaxHeight })
+	local MapResult = ReactModule.joinBindings({ autoSize = AutoSize, isOverMaxHeight = UseMemoResult }):map(computeAutomaticSize)
 	
-	return reactModule.createElement(scrollViewModule, withCommonPropsModule(p1.scrollViewProps, {
+	return ReactModule.createElement(ScrollViewModule, WithCommonPropsModule(p1.scrollViewProps, {
 		ref = p1.scrollViewProps.ref,
 		sizeConstraint = p1.scrollViewProps.sizeConstraint,
 		tag = p1.scrollViewProps.tag,
@@ -37,22 +39,22 @@ return function(p1)
 		scrollingFrameRef = p1.scrollViewProps.scrollingFrameRef,
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			AutomaticSize = var4,
+			AutomaticSize = MapResult,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
-			CanvasSize = var1
+			CanvasSize = UseBindingResult2
 		},
-		AutomaticSize = var4,
-		Size = reactModule.joinBindings({
-			autoSize = autoSize,
-			width = width,
-			isOverMaxHeight = var3,
-			maxHeight = maxHeight
+		AutomaticSize = MapResult,
+		Size = ReactModule.joinBindings({
+			autoSize = AutoSize,
+			width = Width,
+			isOverMaxHeight = UseMemoResult,
+			maxHeight = MaxHeight
 		}):map(computeSize)
-	}), reactModule.createElement(viewModule, {
+	}), ReactModule.createElement(ViewModule, {
 		tag = "col size-full-0 auto-y",
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var2 (ref)
-			return var2(UDim2.fromOffset(p2.AbsoluteSize.X, p2.AbsoluteSize.Y))
-		end, { var2 })
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 78 ]]
+			-- upvalues: UseBindingResult21 (copy)
+			return UseBindingResult21(UDim2.fromOffset(Frame.AbsoluteSize.X, Frame.AbsoluteSize.Y))
+		end, { UseBindingResult21 })
 	}, p1.children))
 end

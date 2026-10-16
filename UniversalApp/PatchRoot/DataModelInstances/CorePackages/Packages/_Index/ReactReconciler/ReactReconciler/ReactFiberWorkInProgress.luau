@@ -1,19 +1,20 @@
-﻿local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
-local noLanes = reactFiberLaneModule.NoLanes
-local mergeLanes = reactFiberLaneModule.mergeLanes
+﻿local ReactFiberLaneModule = require(script.Parent.ReactFiberLane)
+local NoLanes = ReactFiberLaneModule.NoLanes
+local MergeLanesFunction = ReactFiberLaneModule.mergeLanes
 
 return {
-	workInProgressRootSkippedLanes = function(p1)
-		-- upvalues: noLanes (write)
+	workInProgressRootSkippedLanes = function(p1) --[[ Line: 24 ]]
+		-- upvalues: NoLanes (ref)
 		if p1 == nil then
-			return noLanes
+			return NoLanes
+		else
+			NoLanes = p1
+			
+			return NoLanes
 		end
-		noLanes = p1
-		
-		return noLanes
 	end,
-	markSkippedUpdateLanes = function(p1)
-		-- upvalues: noLanes (write), mergeLanes (ref)
-		noLanes = mergeLanes(p1, noLanes)
+	markSkippedUpdateLanes = function(p1) --[[ Line: 34 ]]
+		-- upvalues: NoLanes (ref), MergeLanesFunction (copy)
+		NoLanes = MergeLanesFunction(p1, NoLanes)
 	end
 }

@@ -1,15 +1,19 @@
-﻿local function _(p1)
+﻿local function _(p1) --[[ Line: 14 | Named "TypeError" ]]
 	return p1
 end
 
-return function(p1, p2)
-	if type(p1) ~= "string" or type(p2) ~= "string" then
+return function(Text: string, Text1: string) --[[ Line: 18 | Named "splitOnFirst" ]]
+	if type(Text) ~= "string" or type(Text1) ~= "string" then
 		error("Expected the arguments to be of type `string`")
 	end
-	if p2 == "" then
-		return { p1 }
+	if Text1 == "" then
+		return { Text }
+	else
+		local StartIndex: number = Text:find(Text1, 1, true)
+		
+		return if StartIndex == nil then { Text } else {
+			Text:sub(1, StartIndex - 1),
+			Text:sub(StartIndex + Text1:len())
+		}
 	end
-	local var1 = p1:find(p2, 1, true)
-	
-	return if var1 == nil then { p1 } else { p1:sub(1, var1 - 1), p1:sub(var1 + p2:len()) }
 end

@@ -1,160 +1,171 @@
-﻿local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local reactModule = require(script.Parent.Parent.Parent.Parent.Parent.React)
+﻿local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local ReactModule = require(script.Parent.Parent.Parent.Parent.Parent.React)
 local _ = require(script.Parent.Types)
-local progressIconModule = require(script.Parent.ProgressIcon)
+local ProgressIconModule = require(script.Parent.ProgressIcon)
 
-local function useRenderStepped(p1, p2, p3)
-	-- upvalues: reactModule (ref), runService (ref)
-	local var1 = reactModule.useRef(0)
-	local var2 = reactModule.useRef(0)
-	local isAnimationRunning = p1.isAnimationRunning
-	local isKeyPressed = p1.isKeyPressed
-	local isKeyHolding = p1.isKeyHolding
-	local onKeyHolding = p2.onKeyHolding
-	local onAnimationRunning = p2.onAnimationRunning
-	local onComplete = p2.onComplete
-	local onReset = p2.onReset
-	local animationTriggerTime = p3.animationTriggerTime
-	local animationKeyHoldingTime = p3.animationKeyHoldingTime
-	local animationCoolDownTime = p3.animationCoolDownTime
-	local var3 = reactModule.useCallback(function(p4)
-		-- upvalues: var2 (ref), animationTriggerTime (ref), onKeyHolding (ref)
-		var2.current += p4
+local function useRenderStepped(p1, p2, p3) --[[ Line: 33 ]]
+	-- upvalues: ReactModule (copy), RunService (copy)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local IsAnimationRunning = p1.isAnimationRunning
+	local IsKeyPressed = p1.isKeyPressed
+	local IsKeyHolding = p1.isKeyHolding
+	local OnKeyHoldingFunction = p2.onKeyHolding
+	local OnAnimationRunningFunction = p2.onAnimationRunning
+	local OnCompleteFunction = p2.onComplete
+	local OnResetFunction = p2.onReset
+	local AnimationTriggerTime = p3.animationTriggerTime
+	local AnimationKeyHoldingTime = p3.animationKeyHoldingTime
+	local AnimationCoolDownTime = p3.animationCoolDownTime
+	local UseResult = ReactModule.useCallback(function(p4) --[[ Line: 54 ]]
+		-- upvalues: UseRefResult1 (copy), AnimationTriggerTime (copy), OnKeyHoldingFunction (copy)
+		UseRefResult1.current += p4
 		
-		if animationTriggerTime <= var2.current then
-			onKeyHolding()
+		if AnimationTriggerTime <= UseRefResult1.current then
+			OnKeyHoldingFunction()
 		end
-	end, { onKeyHolding, animationTriggerTime })
-	local var4 = reactModule.useCallback(function(p4)
-		-- upvalues: var1 (ref), animationKeyHoldingTime (ref), onAnimationRunning (ref), onComplete (ref)
-		var1.current = math.clamp(var1.current + p4 / animationKeyHoldingTime, 0, 1)
-		onAnimationRunning(var1.current)
+	end, { OnKeyHoldingFunction, AnimationTriggerTime })
+	local UseResult1 = ReactModule.useCallback(function(p4) --[[ Line: 61 ]]
+		-- upvalues: UseRefResult (copy), AnimationKeyHoldingTime (copy), OnAnimationRunningFunction (copy), OnCompleteFunction (copy)
+		UseRefResult.current = math.clamp(UseRefResult.current + p4 / AnimationKeyHoldingTime, 0, 1)
+		OnAnimationRunningFunction(UseRefResult.current)
 		
-		if var1.current >= 1 then
-			onComplete()
+		if UseRefResult.current >= 1 then
+			OnCompleteFunction()
 		end
-	end, { onAnimationRunning, animationKeyHoldingTime, onComplete })
-	local var5 = reactModule.useCallback(function(p4)
-		-- upvalues: var1 (ref), animationCoolDownTime (ref), onAnimationRunning (ref), onReset (ref)
-		var1.current = math.clamp(var1.current - p4 / animationCoolDownTime, 0, 1)
-		onAnimationRunning(var1.current)
-		
-		if var1.current <= 0 then
-			onReset()
-		end
-	end, { onAnimationRunning, animationCoolDownTime, onReset })
-	reactModule.useEffect(function()
-		-- upvalues: isKeyHolding (ref), var1 (ref), var4 (ref), isKeyPressed (ref), var3 (ref), isAnimationRunning (ref), var5 (ref), runService (copy), var2 (ref)
-		local renderSteppedConnection = nil
-		local var6 = nil
-		
-		if isKeyHolding then
-			var1.current = 0
-			var6 = var4
-		elseif isKeyPressed then
-			var6 = var3
-		elseif isAnimationRunning then
-			var6 = var5
-		end
-		if var6 then
-			renderSteppedConnection = runService.RenderStepped:Connect(var6)
-		end
-		return if renderSteppedConnection then function()
-			-- upvalues: isKeyPressed (copy), var2 (copy), renderSteppedConnection (write)
-			if isKeyPressed then
-				var2.current = 0
-			end
-			renderSteppedConnection:Disconnect()
-		end else function() end
 	end, {
-		isKeyPressed, isKeyHolding, isAnimationRunning, var3, var4, var5
+		OnAnimationRunningFunction,
+		AnimationKeyHoldingTime,
+		OnCompleteFunction
+	})
+	local UseResult2 = ReactModule.useCallback(function(p4) --[[ Line: 69 ]]
+		-- upvalues: UseRefResult (copy), AnimationCoolDownTime (copy), OnAnimationRunningFunction (copy), OnResetFunction (copy)
+		UseRefResult.current = math.clamp(UseRefResult.current - p4 / AnimationCoolDownTime, 0, 1)
+		OnAnimationRunningFunction(UseRefResult.current)
+		
+		if UseRefResult.current <= 0 then
+			OnResetFunction()
+		end
+	end, {
+		OnAnimationRunningFunction,
+		AnimationCoolDownTime,
+		OnResetFunction
+	})
+	ReactModule.useEffect(function() --[[ Line: 77 ]]
+		-- upvalues: IsKeyHolding (copy), UseRefResult (copy), UseResult1 (copy), IsKeyPressed (copy), UseResult (copy), IsAnimationRunning (copy), UseResult2 (copy), RunService (upval), UseRefResult1 (copy)
+		local Connection = nil
+		local Callback = nil
+		
+		if IsKeyHolding then
+			UseRefResult.current = 0
+			Callback = UseResult1
+		elseif IsKeyPressed then
+			Callback = UseResult
+		elseif IsAnimationRunning then
+			Callback = UseResult2
+		end
+		if Callback then
+			Connection = RunService.RenderStepped:Connect(Callback)
+		end
+		return if Connection then function() --[[ Line: 94 ]]
+			-- upvalues: IsKeyPressed (upval), UseRefResult1 (upval), Connection (ref)
+			if IsKeyPressed then
+				UseRefResult1.current = 0
+			end
+			Connection:Disconnect()
+		end else function() --[[ Line: 102 ]] end
+	end, {
+		IsKeyPressed, IsKeyHolding, IsAnimationRunning, UseResult, UseResult1,
+		UseResult2
 	})
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), useRenderStepped (ref), userInputService (ref), progressIconModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(false)
-	local var9, var10 = reactModule.useBinding(nil)
+return function(p1) --[[ Line: 113 | Named "ProgressIconAnimated" ]]
+	-- upvalues: ReactModule (copy), useRenderStepped (copy), UserInputService (copy), ProgressIconModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
 	useRenderStepped({
-		isKeyPressed = var1,
-		isKeyHolding = var3,
-		isAnimationRunning = var5
+		isKeyPressed = UseStateResult,
+		isKeyHolding = UseStateResult1,
+		isAnimationRunning = UseStateResult3
 	}, {
-		onKeyHolding = reactModule.useCallback(function()
-			-- upvalues: var4 (ref), var6 (ref)
-			var4(true)
-			var6(true)
+		onKeyHolding = ReactModule.useCallback(function() --[[ Line: 121 ]]
+			-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+			UseStateResult2_1(true)
+			UseStateResult2_2(true)
 		end, {}),
-		onAnimationRunning = reactModule.useCallback(function(p2)
-			-- upvalues: var10 (ref)
-			var10(p2)
+		onAnimationRunning = ReactModule.useCallback(function(p2) --[[ Line: 126 ]]
+			-- upvalues: UseBindingResult2 (copy)
+			UseBindingResult2(p2)
 		end, {}),
-		onComplete = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), var4 (ref), var6 (ref), var8 (ref), p1 (ref)
-			var2(false)
-			var4(false)
-			var6(false)
-			var8(true)
+		onComplete = ReactModule.useCallback(function() --[[ Line: 130 ]]
+			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), p1 (copy)
+			UseStateResult2(false)
+			UseStateResult2_1(false)
+			UseStateResult2_2(false)
+			UseStateResult2_3(true)
 			
 			if p1.onHoldComplete then
 				p1.onHoldComplete()
 			end
 		end, { p1.onHoldComplete }),
-		onReset = reactModule.useCallback(function()
-			-- upvalues: var6 (ref), var10 (ref)
-			var6(false)
-			var10(nil)
+		onReset = ReactModule.useCallback(function() --[[ Line: 140 ]]
+			-- upvalues: UseStateResult2_2 (copy), UseBindingResult2 (copy)
+			UseStateResult2_2(false)
+			UseBindingResult2(nil)
 		end, {})
 	}, {
 		animationTriggerTime = p1.animationTriggerTime,
 		animationKeyHoldingTime = p1.animationKeyHoldingTime,
 		animationCoolDownTime = p1.animationCoolDownTime
 	})
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), var2 (ref), var8 (ref), var5 (ref), var4 (ref), var10 (ref)
-		if p2.UserInputType ~= Enum.UserInputType.Keyboard and p2.UserInputType ~= Enum.UserInputType.Gamepad1 then return end
-		if p2.KeyCode == p1.keyCode then
-			if p2.UserInputState == Enum.UserInputState.Begin then
-				var2(true)
-				var8(false)
+	local UseResult = ReactModule.useCallback(function(Input) --[[ Line: 160 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy), UseStateResult3 (copy), UseStateResult2_1 (copy), UseBindingResult2 (copy)
+		if Input.UserInputType ~= Enum.UserInputType.Keyboard and Input.UserInputType ~= Enum.UserInputType.Gamepad1 then return end
+		if Input.KeyCode == p1.keyCode then
+			if Input.UserInputState == Enum.UserInputState.Begin then
+				UseStateResult2(true)
+				UseStateResult2_3(false)
 				
-				if var5 then
-					var4(true)
+				if UseStateResult3 then
+					UseStateResult2_1(true)
+					
+					return
+				else
+					UseBindingResult2(nil)
 					
 					return
 				end
-				var10(nil)
-				
-				return
-			elseif p2.UserInputState == Enum.UserInputState.End then
-				var2(false)
-				var4(false)
+			elseif Input.UserInputState == Enum.UserInputState.End then
+				UseStateResult2(false)
+				UseStateResult2_1(false)
 			end
 		end
-	end, { p1.keyCode, var5 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), userInputService (copy), var11 (ref)
+	end, { p1.keyCode, UseStateResult3 })
+	ReactModule.useEffect(function() --[[ Line: 184 ]]
+		-- upvalues: p1 (copy), UserInputService (upval), UseResult (copy)
 		if p1.progress then
-			return function() end
+			return function() --[[ Line: 186 ]] end
+		else
+			local InputBeganConnection = UserInputService.InputBegan:Connect(UseResult)
+			local InputEndedConnection = UserInputService.InputEnded:Connect(UseResult)
+			
+			return function() --[[ Line: 191 ]]
+				-- upvalues: InputBeganConnection (copy), InputEndedConnection (copy)
+				InputBeganConnection:Disconnect()
+				InputEndedConnection:Disconnect()
+			end
 		end
-		local inputBeganConnection = userInputService.InputBegan:Connect(var11)
-		local inputEndedConnection = userInputService.InputEnded:Connect(var11)
-		
-		return function()
-			-- upvalues: inputBeganConnection (ref), inputEndedConnection (ref)
-			inputBeganConnection:Disconnect()
-			inputEndedConnection:Disconnect()
-		end
-	end, { var11, p1.progress })
+	end, { UseResult, p1.progress })
 	
-	return reactModule.createElement(progressIconModule, {
-		progress = p1.progress or var9,
+	return ReactModule.createElement(ProgressIconModule, {
+		progress = p1.progress or UseBindingResult,
 		icon = p1.icon,
 		iconHolding = p1.iconHolding,
-		isHolding = if p1.progress or var3 or (var5 or var7) then true else false
+		isHolding = if p1.progress or UseStateResult1 or UseStateResult3 or UseStateResult4 then true else false
 	})
 end

@@ -1,74 +1,69 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local useStyleModule = require(parent_1.Core.Style.useStyle)
-local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
-local imagesModule = require(parent_2.UIBlox.App.ImageSet.Images)
-local _ = require(parent.ImageSet.ImagesTypes)
-local _ = require(parent_1.App.Style.StyleTypes)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local ReactModule = require(Parent2.React)
+local UseStyleModule = require(Parent1.Core.Style.useStyle)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local ImagesModule = require(Parent2.UIBlox.App.ImageSet.Images)
+local _ = require(Parent.ImageSet.ImagesTypes)
+local _ = require(Parent1.App.Style.StyleTypes)
 
-local function renderHalfCircle(p1, p2)
-	-- upvalues: reactModule (ref), imageSetComponentModule (ref)
-	local layoutOrder = p1.layoutOrder
-	local isLeft = p1.isLeft
-	local rotation = p1.rotation
-	local progressImage = p1.progressImage
-	local iconDefault = p2.Theme.IconDefault
-	local divider = p2.Theme.Divider
+local function renderHalfCircle(p1, p2) --[[ Line: 38 ]]
+	-- upvalues: ReactModule (copy), ImageSetComponentModule (copy)
+	local IconDefault = p2.Theme.IconDefault
+	local Divider = p2.Theme.Divider
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
-		LayoutOrder = layoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.fromScale(0.5, 1)
 	}, {
-		CircleImage = reactModule.createElement(imageSetComponentModule.Label, {
+		CircleImage = ReactModule.createElement(ImageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(2, 1),
-			AnchorPoint = if isLeft then nil else Vector2.new(0.5, 0),
-			Image = progressImage
+			AnchorPoint = if p1.isLeft then nil else Vector2.new(0.5, 0),
+			Image = p1.progressImage
 		}, {
-			UIGradient = reactModule.createElement("UIGradient", {
-				Rotation = rotation,
+			UIGradient = ReactModule.createElement("UIGradient", {
+				Rotation = p1.rotation,
 				Color = ColorSequence.new({
-					ColorSequenceKeypoint.new(0, iconDefault.Color),
-					ColorSequenceKeypoint.new(0.499, iconDefault.Color),
-					ColorSequenceKeypoint.new(0.5, divider.Color),
-					ColorSequenceKeypoint.new(1, divider.Color)
+					ColorSequenceKeypoint.new(0, IconDefault.Color),
+					ColorSequenceKeypoint.new(0.499, IconDefault.Color),
+					ColorSequenceKeypoint.new(0.5, Divider.Color),
+					ColorSequenceKeypoint.new(1, Divider.Color)
 				}),
 				Transparency = NumberSequence.new({
-					NumberSequenceKeypoint.new(0, iconDefault.Transparency),
-					NumberSequenceKeypoint.new(0.499, iconDefault.Transparency),
-					NumberSequenceKeypoint.new(0.5, divider.Transparency),
-					NumberSequenceKeypoint.new(1, divider.Transparency)
+					NumberSequenceKeypoint.new(0, IconDefault.Transparency),
+					NumberSequenceKeypoint.new(0.499, IconDefault.Transparency),
+					NumberSequenceKeypoint.new(0.5, Divider.Transparency),
+					NumberSequenceKeypoint.new(1, Divider.Transparency)
 				})
 			})
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: imagesModule (ref), useStyleModule (ref), reactModule (ref), renderHalfCircle (ref), imageSetComponentModule (ref)
-	local progress = p1.progress
-	local isHolding = p1.isHolding
-	local var1 = if isHolding then p1.iconHolding else p1.icon
-	local var2 = if isHolding then imagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_RadialFill"] else imagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_RadialFill"]
-	local var3 = useStyleModule()
+return function(p1) --[[ Line: 79 | Named "ProgressIcon" ]]
+	-- upvalues: ImagesModule (copy), UseStyleModule (copy), ReactModule (copy), renderHalfCircle (copy), ImageSetComponentModule (copy)
+	local Progress = p1.progress
+	local IsHolding = p1.isHolding
+	local IconsControlsKeysHoldButtonAssetsHoldPressedRadialFill = if IsHolding then ImagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_RadialFill"] else ImagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_RadialFill"]
+	local UseStyleModuleResult = UseStyleModule()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1)
 	}, {
-		Progress = reactModule.createElement("Frame", {
+		Progress = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Center
@@ -76,49 +71,49 @@ return function(p1)
 			Left = renderHalfCircle({
 				layoutOrder = 1,
 				isLeft = true,
-				progressImage = var2,
-				rotation = reactModule.useMemo(function()
-					-- upvalues: progress (ref)
-					return progress:map(function(p2)
-						return math.clamp((p2 or 0) * 314 + 23, 180, 337)
+				progressImage = IconsControlsKeysHoldButtonAssetsHoldPressedRadialFill,
+				rotation = ReactModule.useMemo(function() --[[ Line: 87 ]]
+					-- upvalues: Progress (copy)
+					return Progress:map(function(p2): number --[[ Line: 88 ]]
+						return (math.clamp((p2 or 0) * 314 + 23, 180, 337))
 					end)
-				end, { progress })
-			}, var3),
+				end, { Progress })
+			}, UseStyleModuleResult),
 			Right = renderHalfCircle({
 				layoutOrder = 2,
-				progressImage = var2,
-				rotation = reactModule.useMemo(function()
-					-- upvalues: progress (ref)
-					return progress:map(function(p2)
-						return math.clamp((p2 or 0) * 314 + 23, 23, 180)
+				progressImage = IconsControlsKeysHoldButtonAssetsHoldPressedRadialFill,
+				rotation = ReactModule.useMemo(function() --[[ Line: 94 ]]
+					-- upvalues: Progress (copy)
+					return Progress:map(function(p2): number --[[ Line: 95 ]]
+						return (math.clamp((p2 or 0) * 314 + 23, 23, 180))
 					end)
-				end, { progress })
-			}, var3)
+				end, { Progress })
+			}, UseStyleModuleResult)
 		}),
-		Icon = reactModule.createElement(imageSetComponentModule.Label, {
+		Icon = ReactModule.createElement(ImageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Image = var1,
-			ImageColor3 = var3.Theme.IconEmphasis.Color,
-			ImageTransparency = reactModule.useMemo(function()
-				-- upvalues: progress (ref)
-				return progress:map(function(p2)
+			Image = if IsHolding then p1.iconHolding else p1.icon,
+			ImageColor3 = UseStyleModuleResult.Theme.IconEmphasis.Color,
+			ImageTransparency = ReactModule.useMemo(function() --[[ Line: 101 ]]
+				-- upvalues: Progress (copy)
+				return Progress:map(function(p2: number): number --[[ Line: 102 ]]
 					return if p2 then math.clamp(0.8 - p2 * 0.8, 0, 0.8) else 0
 				end)
-			end, { progress })
+			end, { Progress })
 		}),
-		Arrow = reactModule.createElement(imageSetComponentModule.Label, {
+		Arrow = ReactModule.createElement(ImageSetComponentModule.Label, {
 			ImageTransparency = 0,
 			BackgroundTransparency = 1,
 			ZIndex = 3,
 			Size = UDim2.fromScale(1, 1),
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.fromScale(0.5, 0),
-			Image = if isHolding then imagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_Arrow"] else imagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_Arrow"],
-			ImageColor3 = var3.Theme.IconEmphasis.Color
+			Image = if IsHolding then ImagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_Arrow"] else ImagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_Arrow"],
+			ImageColor3 = UseStyleModuleResult.Theme.IconEmphasis.Color
 		})
 	})
 end

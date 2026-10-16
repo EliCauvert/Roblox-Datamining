@@ -1,52 +1,52 @@
-﻿local graphing = script:FindFirstAncestor("Graphing")
-local parent = graphing.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local canvasContextModule = require(graphing.CanvasContext)
-local _ = require(graphing.Types)
+﻿local Graphing = script:FindFirstAncestor("Graphing")
+local Parent = Graphing.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local CanvasContextModule = require(Graphing.CanvasContext)
+local _ = require(Graphing.Types)
 
 return {
-	useViewportBinding = function(p1, p2)
-		-- upvalues: reactModule (ref), canvasContextModule (ref), signalsModule (ref), signalsReactModule (ref)
-		local var1 = reactModule.useContext(canvasContextModule)
-		local viewportRectGetter = var1.viewportRectGetter
-		local list = { viewportRectGetter }
+	useViewportBinding = function(Callback, List) --[[ Line: 10 ]]
+		-- upvalues: ReactModule (copy), CanvasContextModule (copy), SignalsModule (copy), SignalsReactModule (copy)
+		local UseContextResult = ReactModule.useContext(CanvasContextModule)
+		local ViewportRectGetterFunction = UseContextResult.viewportRectGetter
+		local List1 = { ViewportRectGetterFunction }
 		
-		if p2 then
-			for i, v in p2 do
-				table.insert(list, v)
+		if List then
+			for _, value in List do
+				table.insert(List1, value)
 			end
 		end
-		return signalsReactModule.useSignalBinding(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), viewportRectGetter (ref), p1 (ref), var1 (ref)
-			return signalsModule.createComputed(function(p3)
-				-- upvalues: viewportRectGetter (copy), p1 (copy), var1 (copy)
-				viewportRectGetter(p3)
+		return SignalsReactModule.useSignalBinding((ReactModule.useMemo(function() --[[ Line: 21 ]]
+			-- upvalues: SignalsModule (upval), ViewportRectGetterFunction (copy), Callback (copy), UseContextResult (copy)
+			return SignalsModule.createComputed(function(p1) --[[ Line: 22 ]]
+				-- upvalues: ViewportRectGetterFunction (upval), Callback (upval), UseContextResult (upval)
+				ViewportRectGetterFunction(p1)
 				
-				return p1(var1)
+				return Callback(UseContextResult)
 			end)
-		end, list))
+		end, List1)))
 	end,
-	useViewportVisibility = function(p3, p4)
-		-- upvalues: reactModule (ref), canvasContextModule (ref), signalsModule (ref), signalsReactModule (ref)
-		local var2 = reactModule.useContext(canvasContextModule)
-		local viewportRectGetter = var2.viewportRectGetter
-		local list = { viewportRectGetter }
+	useViewportVisibility = function(Callback, List) --[[ Line: 31 ]]
+		-- upvalues: ReactModule (copy), CanvasContextModule (copy), SignalsModule (copy), SignalsReactModule (copy)
+		local UseContextResult = ReactModule.useContext(CanvasContextModule)
+		local ViewportRectGetterFunction = UseContextResult.viewportRectGetter
+		local List1 = { ViewportRectGetterFunction }
 		
-		if p4 then
-			for i, v in p4 do
-				table.insert(list, v)
+		if List then
+			for _, value in List do
+				table.insert(List1, value)
 			end
 		end
-		return signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), viewportRectGetter (ref), p3 (ref), var2 (ref)
-			return signalsModule.createComputed(function(p5)
-				-- upvalues: viewportRectGetter (copy), p3 (copy), var2 (copy)
-				viewportRectGetter(p5)
+		return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 42 ]]
+			-- upvalues: SignalsModule (upval), ViewportRectGetterFunction (copy), Callback (copy), UseContextResult (copy)
+			return SignalsModule.createComputed(function(p1) --[[ Line: 43 ]]
+				-- upvalues: ViewportRectGetterFunction (upval), Callback (upval), UseContextResult (upval)
+				ViewportRectGetterFunction(p1)
 				
-				return p3(var2)
+				return Callback(UseContextResult)
 			end)
-		end, list))
+		end, List1)))
 	end
 }

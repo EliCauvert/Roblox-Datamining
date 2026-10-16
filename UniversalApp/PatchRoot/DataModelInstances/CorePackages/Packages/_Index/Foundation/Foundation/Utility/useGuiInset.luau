@@ -1,45 +1,45 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local wrappersModule = require(foundation.Utility.Wrappers)
-local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
-local connection = wrappersModule.Connection
-local instance = wrappersModule.Instance
-local signal = wrappersModule.Signal
-local guiService = wrappersModule.Services.GuiService
-local userInputService = wrappersModule.Services.UserInputService
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local WrappersModule = require(Foundation.Utility.Wrappers)
+local IsPluginSecurityModule = require(Foundation.Utility.isPluginSecurity)
+local Connection = WrappersModule.Connection
+local WrappersModuleInstance = WrappersModule.Instance
+local Signal = WrappersModule.Signal
+local GuiService = WrappersModule.Services.GuiService
+local UserInputService = WrappersModule.Services.UserInputService
 
-local function getGuiInset()
-	-- upvalues: guiService (ref)
-	local guiInset, guiInset_1 = guiService:GetGuiInset()
+local function getGuiInset(): Rect --[[ Line: 14 ]]
+	-- upvalues: GuiService (copy)
+	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 	
-	return Rect.new(guiInset, guiInset_1)
+	return Rect.new(GuiInset, GuiInset2)
 end
 
-return function()
-	-- upvalues: reactModule (ref), getGuiInset (ref), isPluginSecurityModule (ref), signal (ref), guiService (ref), instance (ref), userInputService (ref), connection (ref)
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: getGuiInset (copy)
+return function() --[[ Line: 20 | Named "useGuiInset" ]]
+	-- upvalues: ReactModule (copy), getGuiInset (copy), IsPluginSecurityModule (copy), Signal (copy), GuiService (copy), WrappersModuleInstance (copy), UserInputService (copy), Connection (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 21 ]]
+		-- upvalues: getGuiInset (upval)
 		return getGuiInset()
 	end)
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), getGuiInset (copy)
-		var2(getGuiInset())
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 25 ]]
+		-- upvalues: UseStateResult2 (copy), getGuiInset (upval)
+		UseStateResult2(getGuiInset())
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: isPluginSecurityModule (copy), signal (copy), guiService (copy), var3 (ref), instance (copy), userInputService (copy), connection (copy)
-		local var4 = if isPluginSecurityModule() then {
-			signal.Connect(guiService.SafeZoneOffsetsChanged, var3),
-			signal.Connect(instance.GetPropertyChangedSignal(userInputService, "BottomBarSize"), var3),
-			signal.Connect(instance.GetPropertyChangedSignal(userInputService, "RightBarSize"), var3)
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: IsPluginSecurityModule (upval), Signal (upval), GuiService (upval), UseResult (copy), WrappersModuleInstance (upval), UserInputService (upval), Connection (upval)
+		local List = if IsPluginSecurityModule() then {
+			Signal.Connect(GuiService.SafeZoneOffsetsChanged, UseResult),
+			Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(UserInputService, "BottomBarSize"), UseResult),
+			Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(UserInputService, "RightBarSize"), UseResult)
 		} else {}
 		
-		return function()
-			-- upvalues: var4 (write), connection (copy)
-			for i, v in var4 do
-				connection.Disconnect(v)
+		return function() --[[ Line: 40 ]]
+			-- upvalues: List (ref), Connection (upval)
+			for _, value in List do
+				Connection.Disconnect(value)
 			end
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

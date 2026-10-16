@@ -1,13 +1,13 @@
 ﻿game:DefineFastString("UGCValidateCurveAnimationMinLength", "0")
-local t = {
-	asString = function()
+local GetFStringUGCValidateCurveAnimationMinLengthModule = {
+	asString = function() --[[ Line: 9 ]]
 		return game:GetFastString("UGCValidateCurveAnimationMinLength")
 	end
 }
 
-function t.asNumber()
-	-- upvalues: t (ref)
-	return tonumber(t.asString())
+function GetFStringUGCValidateCurveAnimationMinLengthModule.asNumber(): number --[[ Line: 13 ]]
+	-- upvalues: GetFStringUGCValidateCurveAnimationMinLengthModule (copy)
+	return (tonumber(GetFStringUGCValidateCurveAnimationMinLengthModule.asString()))
 end
 
-return t
+return GetFStringUGCValidateCurveAnimationMinLengthModule

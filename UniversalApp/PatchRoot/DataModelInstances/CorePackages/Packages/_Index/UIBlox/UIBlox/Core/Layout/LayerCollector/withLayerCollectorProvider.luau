@@ -1,7 +1,7 @@
-﻿local roactModule = require(script.Parent.Parent.Parent.Parent.Parent.Roact)
-local layerCollectorContextModule = require(script.Parent.LayerCollectorContext)
+﻿local RoactModule = require(script.Parent.Parent.Parent.Parent.Parent.Roact)
+local LayerCollectorContextModule = require(script.Parent.LayerCollectorContext)
 
-return function(p1)
-	-- upvalues: roactModule (ref), layerCollectorContextModule (ref)
-	return roactModule.createElement(layerCollectorContextModule.Consumer, { render = p1 })
+return function(Render) --[[ Line: 9 | Named "LayerCollectorConsumer" ]]
+	-- upvalues: RoactModule (copy), LayerCollectorContextModule (copy)
+	return RoactModule.createElement(LayerCollectorContextModule.Consumer, { render = Render })
 end

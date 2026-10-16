@@ -1,153 +1,155 @@
-﻿local dEV = _G.__DEV__
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local forEachModule = require(parent.Array.forEach)
-local mapModule = require(parent.Array.map)
-local isArrayModule = require(parent.Array.isArray)
-local instanceOfModule = require(parent_1.InstanceOf)
-local _ = require(parent_1.ES7Types)
-local t = {}
+﻿local DEV = _G.__DEV__
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ForEachModule = require(Parent.Array.forEach)
+local MapModule1 = require(Parent.Array.map)
+local IsArrayModule = require(Parent.Array.isArray)
+local InstanceOfModule = require(Parent1.InstanceOf)
+local _ = require(Parent1.ES7Types)
+local MapModule = {}
 
-function t.new(p1)
-	-- upvalues: isArrayModule (ref), dEV (ref), instanceOfModule (ref), t (ref)
-	local cloned = nil
-	local cloned_1 = nil
+function MapModule.new(Entry) --[[ Line: 39 ]]
+	-- upvalues: IsArrayModule (copy), DEV (copy), InstanceOfModule (copy), MapModule (copy)
+	local List = nil
+	local _map = nil
 	
-	if p1 == nil then
-		cloned = {}
-		cloned_1 = {}
-	elseif isArrayModule(p1) then
-		if dEV and #p1 > 0 and typeof(p1[1]) ~= "table" then
-			error("Value `" .. typeof(p1[1]) .. "` is not an entry object.\n " .. "Cannot create Map from {K, V} form, it must be { {K, V}... }")
+	if Entry == nil then
+		List = {}
+		_map = {}
+	elseif IsArrayModule(Entry) then
+		if DEV and #Entry > 0 and typeof(Entry[1]) ~= "table" then
+			error("Value `" .. typeof(Entry[1]) .. "` is not an entry object.\n " .. "Cannot create Map from {K, V} form, it must be { {K, V}... }")
 		end
-		cloned = table.create(#p1)
-		cloned_1 = {}
+		List = table.create(#Entry)
+		_map = {}
 		
-		for i, v in p1 do
-			local var1 = v[1]
+		for _, value in Entry do
+			local v1 = value[1]
 			
-			if dEV and var1 == nil then
+			if DEV and v1 == nil then
 				error("cannot create Map from a table that isn't an array.")
 			end
-			local var2 = v[2]
+			local Entry1 = value[2]
 			
-			if cloned_1[var1] == nil then
-				table.insert(cloned, var1)
+			if _map[v1] == nil then
+				table.insert(List, v1)
 			end
-			cloned_1[var1] = var2
+			_map[v1] = Entry1
 		end
-	elseif instanceOfModule(p1, t) then
-		cloned = table.clone(p1._array)
-		cloned_1 = table.clone(p1._map)
+	elseif InstanceOfModule(Entry, MapModule) then
+		List = table.clone(Entry._array)
+		_map = table.clone(Entry._map)
 	else
-		error(("`%s` `%s` is not iterable, cannot make Map using it"):format(typeof(p1), tostring(p1)))
+		error(("`%s` `%s` is not iterable, cannot make Map using it"):format(typeof(Entry), (tostring(Entry))))
 	end
-	return setmetatable({ size = #cloned, _map = cloned_1, _array = cloned }, t)
+	return (setmetatable({ size = #List, _map = _map, _array = List }, MapModule))
 end
 
-function t:set(p2, p3)
-	if self._map[p2] == nil then
+function MapModule:set(p1, p2) --[[ Line: 88 ]]
+	if self._map[p1] == nil then
 		self.size += 1
-		table.insert(self._array, p2)
+		table.insert(self._array, p1)
 	end
-	self._map[p2] = p3
+	self._map[p1] = p2
 	
 	return self
 end
 
-function t:get(p2)
-	return self._map[p2]
+function MapModule:get(p1) --[[ Line: 100 ]]
+	return self._map[p1]
 end
 
-function t:clear()
-	local _table = table
+function MapModule:clear() --[[ Line: 104 ]]
+	local v2 = table
 	self.size = 0
-	_table.clear(self._map)
-	_table.clear(self._array)
+	v2.clear(self._map)
+	v2.clear(self._array)
 end
 
-function t:delete(p2)
-	if self._map[p2] == nil then
+function MapModule:delete(Value): boolean --[[ Line: 111 ]]
+	if self._map[Value] == nil then
 		return false
 	end
 	self.size -= 1
-	self._map[p2] = nil
-	local index = table.find(self._array, p2)
+	self._map[Value] = nil
+	local FoundIndex: number? = table.find(self._array, Value)
 	
-	if index then
-		table.remove(self._array, index)
+	if FoundIndex then
+		table.remove(self._array, FoundIndex)
 	end
 	return true
 end
 
-function t:forEach(p2, p3)
-	-- upvalues: dEV (ref), forEachModule (ref)
-	if dEV and typeof(p2) ~= "function" then
+function MapModule:forEach(Callback, p1) --[[ Line: 127 ]]
+	-- upvalues: DEV (copy), ForEachModule (copy)
+	if DEV and typeof(Callback) ~= "function" then
 		error("callback is not a function")
 	end
-	forEachModule(self._array, function(p4)
-		-- upvalues: self (ref), p3 (ref), p2 (ref)
-		local var3 = self._map[p4]
+	ForEachModule(self._array, function(p2) --[[ Line: 134 ]]
+		-- upvalues: self (copy), p1 (copy), Callback (copy)
+		local MapEntry = self._map[p2]
 		
-		if p3 == nil then
-			p2(var3, p4, self)
+		if p1 == nil then
+			Callback(MapEntry, p2, self)
 			
 			return
+		else
+			Callback(p1, MapEntry, p2, self)
 		end
-		p2(p3, var3, p4, self)
 	end)
 end
 
-function t:has(p2)
-	return self._map[p2] ~= nil
+function MapModule:has(p1): boolean --[[ Line: 145 ]]
+	return self._map[p1] ~= nil
 end
 
-function t:keys()
+function MapModule:keys() --[[ Line: 149 ]]
 	return self._array
 end
 
-function t:values()
-	-- upvalues: mapModule (ref)
-	return mapModule(self._array, function(p2)
-		-- upvalues: self (ref)
-		return self._map[p2]
+function MapModule:values() --[[ Line: 153 ]]
+	-- upvalues: MapModule1 (copy)
+	return MapModule1(self._array, function(p1) --[[ Line: 154 ]]
+		-- upvalues: self (copy)
+		return self._map[p1]
 	end)
 end
 
-function t:entries()
-	-- upvalues: mapModule (ref)
-	return mapModule(self._array, function(p2)
-		-- upvalues: self (ref)
-		return { p2, self._map[p2] }
+function MapModule:entries() --[[ Line: 159 ]]
+	-- upvalues: MapModule1 (copy)
+	return MapModule1(self._array, function(p1) --[[ Line: 160 ]]
+		-- upvalues: self (copy)
+		return { p1, self._map[p1] }
 	end)
 end
 
-function t:ipairs()
-	-- upvalues: dEV (ref)
-	if dEV then
+function MapModule:ipairs() --[[ Line: 165 ]]
+	-- upvalues: DEV (copy)
+	if DEV then
 		warn(debug.traceback("`for _,_ in myMap:ipairs() do` is deprecated and will be removed in a future release, please use `for _,_ in myMap do` instead\n", 2))
 	end
 	return ipairs(self:entries())
 end
 
-function t:__iter()
+function MapModule:__iter() --[[ Line: 177 ]]
 	return next, self:entries()
 end
 
-function t:__index(p2)
-	-- upvalues: t (ref), dEV (ref)
-	local var3 = rawget(t, p2)
+function MapModule.__index(p1, p2) --[[ Line: 181 ]]
+	-- upvalues: MapModule (copy), DEV (copy)
+	local RawValue = rawget(MapModule, p2)
 	
-	if var3 ~= nil then
-		return var3
-	elseif dEV then
-		assert(rawget(self, "_map"), "Map has been corrupted, and is missing private state! Did you accidentally call table.clear() instead of map:clear()?")
+	if RawValue ~= nil then
+		return RawValue
 	end
-	return t.get(self, p2)
+	if DEV then
+		assert(rawget(p1, "_map"), "Map has been corrupted, and is missing private state! Did you accidentally call table.clear() instead of map:clear()?")
+	end
+	return MapModule.get(p1, p2)
 end
 
-function t:__newindex(p2, p3)
-	self:set(p2, p3)
+function MapModule:__newindex(p1, p2) --[[ Line: 197 ]]
+	self:set(p1, p2)
 end
 
-return t
+return MapModule

@@ -1,143 +1,151 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.DataSource)
-local placementTypesModule = require(viewRecycler.Core.Placement.PlacementTypes)
-local shallowTableModule = require(viewRecycler.Internal.ShallowTable)
-local _ = require(viewRecycler.Core.Types)
-local buildPlacementPlanModule = require(viewRecycler.Core.PinnedItems.buildPlacementPlan)
-local stickyIndexResolverModule = require(viewRecycler.Core.PinnedItems.StickyIndexResolver)
-local frozen = table.freeze({ "key", "value", "itemViewType" })
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local _ = require(ViewRecycler.Core.DataSource)
+local PlacementTypesModule = require(ViewRecycler.Core.Placement.PlacementTypes)
+local ShallowTableModule = require(ViewRecycler.Internal.ShallowTable)
+local _ = require(ViewRecycler.Core.Types)
+local BuildPlacementPlanModule = require(ViewRecycler.Core.PinnedItems.buildPlacementPlan)
+local StickyIndexResolverModule = require(ViewRecycler.Core.PinnedItems.StickyIndexResolver)
+local Frozen = table.freeze({ "key", "value", "itemViewType" })
 
-local function _(p1, p2)
-	-- upvalues: shallowTableModule (ref), frozen (ref)
-	return if p1 ~= p2 then p1 ~= nil and (p2 ~= nil and shallowTableModule.containsEqual(p1, p2, frozen)) else true
+local function _(p1, p2) --[[ Line: 45 | Named "sameItem" ]]
+	-- upvalues: ShallowTableModule (copy), Frozen (copy)
+	return p1 == p2 or p1 ~= nil and (p2 ~= nil and ShallowTableModule.containsEqual(p1, p2, Frozen))
 end
 
-return function(p1, p2)
-	-- upvalues: stickyIndexResolverModule (ref), shallowTableModule (ref), frozen (ref), buildPlacementPlanModule (ref), placementTypesModule (ref)
-	local var1 = p2
-	local var2 = stickyIndexResolverModule(p1, var1.isItemStickyHeader)
-	local t = { revision = 1, length = 0, item = var1.pinnedStartItem }
-	local t_1 = { revision = 1, length = 0, item = var1.pinnedEndItem }
+return function(p1, Options) --[[ Line: 49 | Named "createPinnedItemPlanner" ]]
+	-- upvalues: StickyIndexResolverModule (copy), ShallowTableModule (copy), Frozen (copy), BuildPlacementPlanModule (copy), PlacementTypesModule (copy)
+	local Options1 = Options
+	local StickyIndexResolverModuleResult = StickyIndexResolverModule(p1, Options1.isItemStickyHeader)
+	local config = {
+		revision = 1,
+		length = 0,
+		item = Options1.pinnedStartItem
+	}
+	local config1 = { revision = 1, length = 0, item = Options1.pinnedEndItem }
 	
-	local function _(value, p3)
-		-- upvalues: shallowTableModule (copy), frozen (copy)
-		local item = value.item
+	local function _(p2, Item): boolean --[[ Line: 66 | Named "setItem" ]]
+		-- upvalues: ShallowTableModule (upval), Frozen (upval)
+		local Item1 = p2.item
 		
-		if if item ~= p3 then item ~= nil and (p3 ~= nil and shallowTableModule.containsEqual(item, p3, frozen)) else true then
+		if Item1 == Item or Item1 ~= nil and (Item ~= nil and ShallowTableModule.containsEqual(Item1, Item, Frozen)) then
 			return false
+		else
+			p2.item = Item
+			p2.revision += 1
+			p2.length = 0
+			
+			return true
 		end
-		value.item = p3
-		value.revision += 1
-		value.length = 0
-		
-		return true
 	end
 	
-	local _ = function(p3, p4)
-		local item = p3.item
+	local _ = function(p2, Position) --[[ Line: 83 | Named "resolvedItem" ]]
+		local Item = p2.item
 		
-		return if item == nil then nil else {
-			key = item.key,
-			value = item.value,
-			itemViewType = item.itemViewType,
-			revision = p3.revision,
-			length = p3.length,
-			position = p4
+		return if Item == nil then nil else {
+			key = Item.key,
+			value = Item.value,
+			itemViewType = Item.itemViewType,
+			revision = p2.revision,
+			length = p2.length,
+			position = Position
 		}
 	end
 	
 	return {
-		getContentInsets = function()
-			-- upvalues: t (ref), t_1 (ref)
+		getContentInsets = function() --[[ Line: 76 ]]
+			-- upvalues: config (copy), config1 (copy)
 			return {
-				start = if t.item == nil then 0 else t.length,
-				finish = if t_1.item == nil then 0 else t_1.length
+				start = if config.item == nil then 0 else config.length,
+				finish = if config1.item == nil then 0 else config1.length
 			}
 		end,
-		update = function(p3)
-			-- upvalues: var2 (ref), buildPlacementPlanModule (copy), t (ref), placementTypesModule (copy), t_1 (ref)
-			var2.setDataSource(p3.dataSource)
-			local t_2 = {
-				dataSource = p3.dataSource,
-				layout = p3.layout,
-				stickyIndices = var2.resolve(),
-				scrollOffset = p3.scrollOffset,
-				viewportLength = p3.viewportLength,
-				contentStartOffset = p3.contentStartOffset
+		update = function(p2) --[[ Line: 103 ]]
+			-- upvalues: StickyIndexResolverModuleResult (copy), BuildPlacementPlanModule (upval), config (copy), PlacementTypesModule (upval), config1 (copy)
+			StickyIndexResolverModuleResult.setDataSource(p2.dataSource)
+			local Start = PlacementTypesModule.PinnedPosition.Start
+			local Item = config.item
+			local Config = if Item == nil then nil else {
+				key = Item.key,
+				value = Item.value,
+				itemViewType = Item.itemViewType,
+				revision = config.revision,
+				length = config.length,
+				position = Start
 			}
-			local item = t.item
-			t_2.pinnedStartItem = if item == nil then nil else {
-				key = item.key,
-				value = item.value,
-				itemViewType = item.itemViewType,
-				revision = t.revision,
-				length = t.length,
-				position = placementTypesModule.PinnedPosition.Start
-			}
-			local item_1 = t_1.item
-			t_2.pinnedEndItem = if item_1 == nil then nil else {
-				key = item_1.key,
-				value = item_1.value,
-				itemViewType = item_1.itemViewType,
-				revision = t_1.revision,
-				length = t_1.length,
-				position = placementTypesModule.PinnedPosition.Finish
-			}
+			local Finish = PlacementTypesModule.PinnedPosition.Finish
+			local Item1 = config1.item
 			
-			return buildPlacementPlanModule(t_2)
+			return BuildPlacementPlanModule({
+				dataSource = p2.dataSource,
+				layout = p2.layout,
+				stickyIndices = StickyIndexResolverModuleResult.resolve(),
+				scrollOffset = p2.scrollOffset,
+				viewportLength = p2.viewportLength,
+				contentStartOffset = p2.contentStartOffset,
+				pinnedStartItem = Config,
+				pinnedEndItem = if Item1 == nil then nil else {
+					key = Item1.key,
+					value = Item1.value,
+					itemViewType = Item1.itemViewType,
+					revision = config1.revision,
+					length = config1.length,
+					position = Finish
+				}
+			})
 		end,
-		applyDataSourceChange = function(p3)
-			-- upvalues: var2 (ref)
-			var2.applyDataSourceChange(p3)
+		applyDataSourceChange = function(p2) --[[ Line: 116 ]]
+			-- upvalues: StickyIndexResolverModuleResult (copy)
+			StickyIndexResolverModuleResult.applyDataSourceChange(p2)
 		end,
-		updatePinnedMeasurement = function(p3, p4, p5, p6)
-			-- upvalues: placementTypesModule (copy), t (ref), t_1 (ref)
-			assert(p6 >= 0 and p6 < 1e999, "PinnedItems: measured length must be finite and non-negative")
-			local var3 = if p3 == placementTypesModule.PinnedPosition.Start then t else t_1
-			local item = var3.item
+		updatePinnedMeasurement = function(Start, Key, Revision, Length: number) --[[ Line: 119 ]]
+			-- upvalues: PlacementTypesModule (upval), config (copy), config1 (copy)
+			assert(Length >= 0 and Length < 1e999, "PinnedItems: measured length must be finite and non-negative")
+			local Config = if Start == PlacementTypesModule.PinnedPosition.Start then config else config1
+			local Item = Config.item
 			
-			if item == nil or item.key ~= p4 or (var3.revision ~= p5 or var3.length == p6) then
+			if Item == nil or Item.key ~= Key or Config.revision ~= Revision or Config.length == Length then
 				return nil
-			end
-			var3.length = p6
-			
-			return {
-				start = if t.item == nil then 0 else t.length,
-				finish = if t_1.item == nil then 0 else t_1.length
-			}
-		end,
-		setOptions = function(value)
-			-- upvalues: var1 (write), var2 (ref), t (ref), shallowTableModule (copy), frozen (copy), t_1 (ref)
-			local var3
-			var1 = value
-			local var4 = var2.setPredicate(value.isItemStickyHeader)
-			local pinnedStartItem = value.pinnedStartItem
-			local item = t.item
-			
-			if if item ~= pinnedStartItem then item ~= nil and (pinnedStartItem ~= nil and shallowTableModule.containsEqual(item, pinnedStartItem, frozen)) else true then
-				var3 = false
 			else
-				t.item = pinnedStartItem
-				t.revision += 1
-				t.length = 0
-				var3 = true
+				Config.length = Length
+				
+				return {
+					start = if config.item == nil then 0 else config.length,
+					finish = if config1.item == nil then 0 else config1.length
+				}
 			end
-			local var5
-			var4 = var3 or var4
-			local pinnedEndItem = value.pinnedEndItem
-			local item_1 = t_1.item
-			
-			if if item_1 ~= pinnedEndItem then item_1 ~= nil and (pinnedEndItem ~= nil and shallowTableModule.containsEqual(item_1, pinnedEndItem, frozen)) else true then
-				var5 = false
-			else
-				t_1.item = pinnedEndItem
-				t_1.revision += 1
-				t_1.length = 0
-				var5 = true
-			end
-			return var5 or var4
 		end,
-		setDataSource = var2.setDataSource,
-		destroy = function() end
+		setOptions = function(Value) --[[ Line: 129 ]]
+			-- upvalues: Options1 (ref), StickyIndexResolverModuleResult (copy), config (copy), ShallowTableModule (upval), Frozen (upval), config1 (copy)
+			Options1 = Value
+			local SetPredicateResult = StickyIndexResolverModuleResult.setPredicate(Value.isItemStickyHeader)
+			local PinnedStartItem = Value.pinnedStartItem
+			local Item = config.item
+			local Flag = nil
+			
+			if Item == PinnedStartItem or Item ~= nil and (PinnedStartItem ~= nil and ShallowTableModule.containsEqual(Item, PinnedStartItem, Frozen)) then
+				Flag = false
+			else
+				config.item = PinnedStartItem
+				config.revision += 1
+				config.length = 0
+				Flag = true
+			end
+			local Flag1 = Flag or SetPredicateResult
+			local PinnedEndItem = Value.pinnedEndItem
+			local Item1 = config1.item
+			local Flag2 = nil
+			
+			if Item1 == PinnedEndItem or Item1 ~= nil and (PinnedEndItem ~= nil and ShallowTableModule.containsEqual(Item1, PinnedEndItem, Frozen)) then
+				Flag2 = false
+			else
+				config1.item = PinnedEndItem
+				config1.revision += 1
+				config1.length = 0
+				Flag2 = true
+			end
+			return Flag2 or Flag1
+		end,
+		setDataSource = StickyIndexResolverModuleResult.setDataSource,
+		destroy = function() --[[ Line: 137 ]] end
 	}
 end

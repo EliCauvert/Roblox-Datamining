@@ -1,14 +1,14 @@
-﻿return function(p1, p2)
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), p2 (ref)
-		game:DefineFastString(p1, p2)
+﻿return function(Name, DefaultValue) --[[ Line: 1 | Named "createGetFString" ]]
+	local Success, Result = pcall(function() --[[ Line: 2 ]]
+		-- upvalues: Name (copy), DefaultValue (copy)
+		game:DefineFastString(Name, DefaultValue)
 	end)
 	
-	return if ok or not status:match("The current thread cannot call") then function()
-		-- upvalues: p1 (ref)
-		return game:GetFastString(p1)
-	end else function()
-		-- upvalues: p2 (ref)
-		return p2
+	return if Success or not Result:match("The current thread cannot call") then function() --[[ Line: 12 ]]
+		-- upvalues: Name (copy)
+		return game:GetFastString(Name)
+	end else function() --[[ Line: 7 ]]
+		-- upvalues: DefaultValue (copy)
+		return DefaultValue
 	end
 end

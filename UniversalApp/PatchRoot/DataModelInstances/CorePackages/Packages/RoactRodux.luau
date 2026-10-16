@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.RoactRodux.RoactRodux)
+﻿return (require(script.Parent._Index.RoactRodux.RoactRodux))

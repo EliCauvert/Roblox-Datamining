@@ -1,70 +1,71 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent.Parent
-local parent_3 = parent_2.Parent
-local reactModule = require(parent_3.React)
-local cryoModule = require(parent_3.Cryo)
-local tModule = require(parent_3.t)
-local imagesModule = require(parent_2.App.ImageSet.Images)
-local itemRestrictionStatusModule = require(parent.ItemRestrictionStatus)
-local itemTileStatusIconModule = require(parent.ItemTileStatusIcon)
-local itemTileStatusModule = require(parent.ItemTileStatus)
-local itemTileEnumsModule = require(parent_1.Enum.ItemTileEnums)
-local itemIconModule = require(parent.ItemIcon)
-local tileModule = require(parent_1.BaseTile.Tile)
-local itemTile = reactModule.PureComponent:extend("ItemTile")
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent.Parent
+local Parent3 = Parent2.Parent
+local ReactModule = require(Parent3.React)
+local CryoModule = require(Parent3.Cryo)
+local TModule = require(Parent3.t)
+local ImagesModule = require(Parent2.App.ImageSet.Images)
+local ItemRestrictionStatusModule = require(Parent.ItemRestrictionStatus)
+local ItemTileStatusIconModule = require(Parent.ItemTileStatusIcon)
+local ItemTileStatusModule = require(Parent.ItemTileStatus)
+local ItemTileEnumsModule = require(Parent1.Enum.ItemTileEnums)
+local ItemIconModule = require(Parent.ItemIcon)
+local TileModule = require(Parent1.BaseTile.Tile)
+local ItemTile = ReactModule.PureComponent:extend("ItemTile")
 
-local function tileBannerUseValidator(p1)
-	if p1.bannerText and p1.footer then
+local function tileBannerUseValidator(Props) --[[ Line: 22 ]]
+	if Props.bannerText and Props.footer then
 		return false, "A custom footer and bannerText can't be used together"
+	else
+		return true
 	end
-	return true
 end
 
-itemTile.validateProps = tModule.strictInterface({
-	footer = tModule.optional(tModule.table),
-	name = tModule.optional(tModule.string),
-	nameTextColor = tModule.optional(tModule.Color3),
-	nameTextTransparency = tModule.optional(tModule.number),
-	subtitle = tModule.optional(tModule.string),
-	titleTextLineCount = tModule.optional(tModule.integer),
-	innerPadding = tModule.optional(tModule.integer),
-	titleTopPadding = tModule.optional(tModule.integer),
-	subtitleTopPadding = tModule.optional(tModule.integer),
-	footerTopPadding = tModule.optional(tModule.integer),
-	onActivated = tModule.optional(tModule.callback),
-	thumbnail = tModule.optional(tModule.string),
-	backgroundImage = tModule.optional(tModule.union(tModule.string, tModule.table)),
-	bannerText = tModule.optional(tModule.string),
-	itemIconType = tModule.optional(itemTileEnumsModule.ItemIconType.isEnumValue),
-	isSelected = tModule.optional(tModule.boolean),
-	Selectable = tModule.optional(tModule.boolean),
-	multiSelect = tModule.optional(tModule.boolean),
-	isPremium = tModule.optional(tModule.boolean),
-	restrictionTypes = tModule.optional(tModule.map(itemTileEnumsModule.Restriction.isEnumValue, tModule.boolean)),
-	restrictionInfo = tModule.optional(tModule.table),
-	hasRoundedCorners = tModule.optional(tModule.boolean),
-	statusText = tModule.optional(tModule.string),
-	statusStyle = tModule.optional(itemTileEnumsModule.StatusStyle.isEnumValue),
-	NextSelectionLeft = tModule.optional(tModule.table),
-	NextSelectionRight = tModule.optional(tModule.table),
-	NextSelectionUp = tModule.optional(tModule.table),
-	NextSelectionDown = tModule.optional(tModule.table),
-	thumbnailRef = tModule.optional(tModule.table),
-	textButtonRef = tModule.optional(tModule.table),
-	inputBindings = tModule.optional(tModule.table),
-	useMaxTitleHeight = tModule.optional(tModule.boolean),
-	addSubtitleSpace = tModule.optional(tModule.boolean),
-	titleFontStyle = tModule.optional(tModule.table),
-	renderTileInset = tModule.optional(tModule.callback),
-	hasVerifiedBadge = tModule.optional(tModule.boolean),
-	[reactModule.Tag] = tModule.optional(tModule.string),
-	aspectRatio = tModule.optional(tModule.number),
-	scaleType = tModule.optional(tModule.enum(Enum.ScaleType)),
-	onThumbnailLoaded = tModule.optional(tModule.callback),
-	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
+ItemTile.validateProps = TModule.strictInterface({
+	footer = TModule.optional(TModule.table),
+	name = TModule.optional(TModule.string),
+	nameTextColor = TModule.optional(TModule.Color3),
+	nameTextTransparency = TModule.optional(TModule.number),
+	subtitle = TModule.optional(TModule.string),
+	titleTextLineCount = TModule.optional(TModule.integer),
+	innerPadding = TModule.optional(TModule.integer),
+	titleTopPadding = TModule.optional(TModule.integer),
+	subtitleTopPadding = TModule.optional(TModule.integer),
+	footerTopPadding = TModule.optional(TModule.integer),
+	onActivated = TModule.optional(TModule.callback),
+	thumbnail = TModule.optional(TModule.string),
+	backgroundImage = TModule.optional(TModule.union(TModule.string, TModule.table)),
+	bannerText = TModule.optional(TModule.string),
+	itemIconType = TModule.optional(ItemTileEnumsModule.ItemIconType.isEnumValue),
+	isSelected = TModule.optional(TModule.boolean),
+	Selectable = TModule.optional(TModule.boolean),
+	multiSelect = TModule.optional(TModule.boolean),
+	isPremium = TModule.optional(TModule.boolean),
+	restrictionTypes = TModule.optional(TModule.map(ItemTileEnumsModule.Restriction.isEnumValue, TModule.boolean)),
+	restrictionInfo = TModule.optional(TModule.table),
+	hasRoundedCorners = TModule.optional(TModule.boolean),
+	statusText = TModule.optional(TModule.string),
+	statusStyle = TModule.optional(ItemTileEnumsModule.StatusStyle.isEnumValue),
+	NextSelectionLeft = TModule.optional(TModule.table),
+	NextSelectionRight = TModule.optional(TModule.table),
+	NextSelectionUp = TModule.optional(TModule.table),
+	NextSelectionDown = TModule.optional(TModule.table),
+	thumbnailRef = TModule.optional(TModule.table),
+	textButtonRef = TModule.optional(TModule.table),
+	inputBindings = TModule.optional(TModule.table),
+	useMaxTitleHeight = TModule.optional(TModule.boolean),
+	addSubtitleSpace = TModule.optional(TModule.boolean),
+	titleFontStyle = TModule.optional(TModule.table),
+	renderTileInset = TModule.optional(TModule.callback),
+	hasVerifiedBadge = TModule.optional(TModule.boolean),
+	[ReactModule.Tag] = TModule.optional(TModule.string),
+	aspectRatio = TModule.optional(TModule.number),
+	scaleType = TModule.optional(TModule.enum(Enum.ScaleType)),
+	onThumbnailLoaded = TModule.optional(TModule.callback),
+	isRoactGamepadEnabled = TModule.optional(TModule.boolean)
 })
-itemTile.defaultProps = {
+ItemTile.defaultProps = {
 	titleTextLineCount = 2,
 	innerPadding = 8,
 	isSelected = false,
@@ -75,93 +76,93 @@ itemTile.defaultProps = {
 	isRoactGamepadEnabled = true
 }
 
-local function _(p1)
-	-- upvalues: itemTileEnumsModule (ref)
-	return if p1 ~= itemTileEnumsModule.StatusStyle.PendingIcon then p1 == itemTileEnumsModule.StatusStyle.AlertIcon else true
+local function _(AlertIcon): boolean --[[ Line: 155 | Named "isIconStatusStyle" ]]
+	-- upvalues: ItemTileEnumsModule (copy)
+	return AlertIcon == ItemTileEnumsModule.StatusStyle.PendingIcon or AlertIcon == ItemTileEnumsModule.StatusStyle.AlertIcon
 end
 
-function itemTile.render(p1)
-	-- upvalues: tileBannerUseValidator (ref), reactModule (ref), itemIconModule (ref), itemRestrictionStatusModule (ref), itemTileStatusModule (ref), itemTileEnumsModule (ref), itemTileStatusIconModule (ref), tileModule (ref), imagesModule (ref)
+function ItemTile.render(p1) --[[ Line: 159 ]]
+	-- upvalues: tileBannerUseValidator (copy), ReactModule (copy), ItemIconModule (copy), ItemRestrictionStatusModule (copy), ItemTileStatusModule (copy), ItemTileEnumsModule (copy), ItemTileStatusIconModule (copy), TileModule (copy), ImagesModule (copy)
 	assert(tileBannerUseValidator(p1.props))
-	local footer = p1.props.footer
-	local bannerText = p1.props.bannerText
-	local hasRoundedCorners = p1.props.hasRoundedCorners
-	local innerPadding = p1.props.innerPadding
-	local isPremium = p1.props.isPremium
-	local isSelected = p1.props.isSelected
-	local multiSelect = p1.props.multiSelect
-	local itemIconType = p1.props.itemIconType
-	local name = p1.props.name
-	local nameTextColor = p1.props.nameTextColor
-	local nameTextTransparency = p1.props.nameTextTransparency
-	local subtitle = p1.props.subtitle
-	local titleTopPadding = p1.props.titleTopPadding
-	local subtitleTopPadding = p1.props.subtitleTopPadding
-	local footerTopPadding = p1.props.footerTopPadding
-	local onActivated = p1.props.onActivated
-	local restrictionInfo = p1.props.restrictionInfo
-	local restrictionTypes = p1.props.restrictionTypes
-	local statusStyle = p1.props.statusStyle
-	local statusText = p1.props.statusText
-	local titleTextLineCount = p1.props.titleTextLineCount
-	local thumbnail = p1.props.thumbnail
-	local backgroundImage = p1.props.backgroundImage
-	local useMaxTitleHeight = p1.props.useMaxTitleHeight
-	local addSubtitleSpace = p1.props.addSubtitleSpace
-	local selectable = p1.props.Selectable
-	local titleFontStyle = p1.props.titleFontStyle
-	local renderTileInset = p1.props.renderTileInset
-	local aspectRatio = p1.props.aspectRatio
-	local scaleType = p1.props.scaleType
-	local var1 = false
+	local Footer = p1.props.footer
+	local BannerText = p1.props.bannerText
+	local HasRoundedCorners = p1.props.hasRoundedCorners
+	local InnerPadding = p1.props.innerPadding
+	local IsPremium = p1.props.isPremium
+	local IsSelected = p1.props.isSelected
+	local MultiSelect = p1.props.multiSelect
+	local ItemIconType = p1.props.itemIconType
+	local Name = p1.props.name
+	local NameTextColor = p1.props.nameTextColor
+	local NameTextTransparency = p1.props.nameTextTransparency
+	local Subtitle = p1.props.subtitle
+	local TitleTopPadding = p1.props.titleTopPadding
+	local SubtitleTopPadding = p1.props.subtitleTopPadding
+	local FooterTopPadding = p1.props.footerTopPadding
+	local OnActivated = p1.props.onActivated
+	local RestrictionInfo = p1.props.restrictionInfo
+	local RestrictionTypes = p1.props.restrictionTypes
+	local StatusStyle = p1.props.statusStyle
+	local StatusText = p1.props.statusText
+	local TitleTextLineCount = p1.props.titleTextLineCount
+	local Thumbnail = p1.props.thumbnail
+	local BackgroundImage = p1.props.backgroundImage
+	local UseMaxTitleHeight = p1.props.useMaxTitleHeight
+	local AddSubtitleSpace = p1.props.addSubtitleSpace
+	local Selectable = p1.props.Selectable
+	local TitleFontStyle = p1.props.titleFontStyle
+	local RenderTileInset = p1.props.renderTileInset
+	local AspectRatio = p1.props.aspectRatio
+	local ScaleType = p1.props.scaleType
+	local Flag = false
 	local t = {}
 	
-	if itemIconType then
-		var1 = true
-		t.ItemIconType = reactModule.createElement(itemIconModule, { itemIconType = itemIconType })
+	if ItemIconType then
+		Flag = true
+		t.ItemIconType = ReactModule.createElement(ItemIconModule, { itemIconType = ItemIconType })
 	end
-	if restrictionTypes then
-		var1 = true
-		t.RestrictionStatus = reactModule.createElement(itemRestrictionStatusModule, {
-			restrictionInfo = restrictionInfo,
-			restrictionTypes = restrictionTypes
+	if RestrictionTypes then
+		Flag = true
+		t.RestrictionStatus = ReactModule.createElement(ItemRestrictionStatusModule, {
+			restrictionInfo = RestrictionInfo,
+			restrictionTypes = RestrictionTypes
 		})
 	end
-	if statusText then
-		var1 = true
-		t.Status = reactModule.createElement(itemTileStatusModule, { statusStyle = statusStyle, statusText = statusText })
+	if StatusText then
+		Flag = true
+		t.Status = ReactModule.createElement(ItemTileStatusModule, { statusStyle = StatusStyle, statusText = StatusText })
 	end
-	if if statusStyle ~= itemTileEnumsModule.StatusStyle.PendingIcon then statusStyle == itemTileEnumsModule.StatusStyle.AlertIcon else true then
-		var1 = true
-		t.Status = reactModule.createElement(itemTileStatusIconModule, { statusStyle = statusStyle })
+	if StatusStyle == ItemTileEnumsModule.StatusStyle.PendingIcon or StatusStyle == ItemTileEnumsModule.StatusStyle.AlertIcon then
+		Flag = true
+		t.Status = ReactModule.createElement(ItemTileStatusIconModule, { statusStyle = StatusStyle })
 	end
-	return reactModule.createElement(tileModule, {
-		bannerText = bannerText,
-		footer = footer,
-		hasRoundedCorners = hasRoundedCorners,
-		innerPadding = innerPadding,
-		isSelected = isSelected,
-		Selectable = selectable,
-		multiSelect = multiSelect,
-		name = name,
-		nameTextColor = nameTextColor,
-		nameTextTransparency = nameTextTransparency,
-		subtitle = subtitle,
-		titleTopPadding = titleTopPadding,
-		subtitleTopPadding = subtitleTopPadding,
-		footerTopPadding = footerTopPadding,
-		onActivated = onActivated,
-		thumbnail = thumbnail,
-		backgroundImage = backgroundImage,
-		thumbnailOverlayComponents = if var1 then t else nil,
-		titleIcon = if isPremium then imagesModule["icons/status/premium_small"] else nil,
-		titleTextLineCount = titleTextLineCount,
-		useMaxTitleHeight = useMaxTitleHeight,
-		addSubtitleSpace = addSubtitleSpace,
-		titleFontStyle = titleFontStyle,
-		renderTileInset = renderTileInset,
-		thumbnailAspectRatio = aspectRatio,
-		thumbnailScaleType = scaleType,
+	return ReactModule.createElement(TileModule, {
+		bannerText = BannerText,
+		footer = Footer,
+		hasRoundedCorners = HasRoundedCorners,
+		innerPadding = InnerPadding,
+		isSelected = IsSelected,
+		Selectable = Selectable,
+		multiSelect = MultiSelect,
+		name = Name,
+		nameTextColor = NameTextColor,
+		nameTextTransparency = NameTextTransparency,
+		subtitle = Subtitle,
+		titleTopPadding = TitleTopPadding,
+		subtitleTopPadding = SubtitleTopPadding,
+		footerTopPadding = FooterTopPadding,
+		onActivated = OnActivated,
+		thumbnail = Thumbnail,
+		backgroundImage = BackgroundImage,
+		thumbnailOverlayComponents = Flag and t or nil,
+		titleIcon = IsPremium and ImagesModule["icons/status/premium_small"] or nil,
+		titleTextLineCount = TitleTextLineCount,
+		useMaxTitleHeight = UseMaxTitleHeight,
+		addSubtitleSpace = AddSubtitleSpace,
+		titleFontStyle = TitleFontStyle,
+		renderTileInset = RenderTileInset,
+		thumbnailAspectRatio = AspectRatio,
+		thumbnailScaleType = ScaleType,
 		hasVerifiedBadge = p1.props.hasVerifiedBadge,
 		NextSelectionLeft = p1.props.NextSelectionLeft,
 		NextSelectionRight = p1.props.NextSelectionRight,
@@ -170,13 +171,13 @@ function itemTile.render(p1)
 		textButtonRef = p1.props.textButtonRef,
 		inputBindings = p1.props.inputBindings,
 		ref = p1.props.thumbnailRef,
-		[reactModule.Tag] = p1.props[reactModule.Tag],
+		[ReactModule.Tag] = p1.props[ReactModule.Tag],
 		onThumbnailLoaded = p1.props.onThumbnailLoaded,
 		isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled
 	})
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), itemTile (ref), cryoModule (ref)
-	return reactModule.createElement(itemTile, cryoModule.Dictionary.join(p1, { thumbnailRef = p2 }))
+return ReactModule.forwardRef(function(p1, ThumbnailRef) --[[ Line: 270 ]]
+	-- upvalues: ReactModule (copy), ItemTile (copy), CryoModule (copy)
+	return ReactModule.createElement(ItemTile, CryoModule.Dictionary.join(p1, { thumbnailRef = ThumbnailRef }))
 end)

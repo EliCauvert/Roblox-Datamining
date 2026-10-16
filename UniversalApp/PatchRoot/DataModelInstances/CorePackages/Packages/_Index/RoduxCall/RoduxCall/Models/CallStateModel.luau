@@ -1,39 +1,39 @@
-﻿local roduxCall = script:FindFirstAncestor("RoduxCall")
-local status = require(roduxCall.Enums).Status
-local tModule = require(roduxCall.Parent.t)
-local t = {}
+﻿local RoduxCall = script:FindFirstAncestor("RoduxCall")
+local Status = require(RoduxCall.Enums).Status
+local TModule = require(RoduxCall.Parent.t)
+local CallStateModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function CallStateModelModule.new(p1) --[[ Line: 10 ]]
+	-- upvalues: CallStateModelModule (copy)
+	assert(CallStateModelModule.isValid(p1))
+	CallStateModelModule.__index = CallStateModelModule
+	setmetatable(p1, CallStateModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: t (ref), status (ref)
-	p1 = p1 or {}
+function CallStateModelModule.mock(p1) --[[ Line: 22 ]]
+	-- upvalues: CallStateModelModule (copy), Status (copy)
+	local P1 = p1 or {}
 	
-	return t.new({
-		status = p1.status or status.Active,
-		callerId = p1.callerId or 123,
-		calleeId = p1.calleeId or 456,
-		placeId = p1.placeId or 789,
-		reservedServerAccessCode = p1.reservedServerAccessCode or nil,
-		callId = p1.callId or nil,
-		callerCombinedName = p1.callerCombinedName or nil,
-		calleeCombinedName = p1.calleeCombinedName or nil,
-		instanceId = p1.instanceId or nil,
-		createdUtc = p1.createdUtc or 0,
-		activeUtc = p1.activeUtc or 0
-	})
+	return (CallStateModelModule.new({
+		status = P1.status or Status.Active,
+		callerId = P1.callerId or 123,
+		calleeId = P1.calleeId or 456,
+		placeId = P1.placeId or 789,
+		reservedServerAccessCode = P1.reservedServerAccessCode or nil,
+		callId = P1.callId or nil,
+		callerCombinedName = P1.callerCombinedName or nil,
+		calleeCombinedName = P1.calleeCombinedName or nil,
+		instanceId = P1.instanceId or nil,
+		createdUtc = P1.createdUtc or 0,
+		activeUtc = P1.activeUtc or 0
+	}))
 end
 
-function t.format(p1)
-	-- upvalues: t (ref)
-	return t.new({
+function CallStateModelModule.format(p1) --[[ Line: 42 ]]
+	-- upvalues: CallStateModelModule (copy)
+	return (CallStateModelModule.new({
 		status = p1.status,
 		callerId = p1.callerId,
 		calleeId = p1.calleeId,
@@ -45,21 +45,21 @@ function t.format(p1)
 		instanceId = p1.instanceId,
 		createdUtc = p1.createdUtc,
 		activeUtc = p1.activeUtc
-	})
+	}))
 end
 
-t.isValid = tModule.strictInterface({
-	status = tModule.string,
-	callerId = tModule.optional(tModule.number),
-	calleeId = tModule.optional(tModule.number),
-	placeId = tModule.optional(tModule.number),
-	reservedServerAccessCode = tModule.optional(tModule.string),
-	callId = tModule.optional(tModule.string),
-	callerCombinedName = tModule.optional(tModule.string),
-	calleeCombinedName = tModule.optional(tModule.string),
-	instanceId = tModule.optional(tModule.string),
-	createdUtc = tModule.optional(tModule.number),
-	activeUtc = tModule.optional(tModule.number)
+CallStateModelModule.isValid = TModule.strictInterface({
+	status = TModule.string,
+	callerId = TModule.optional(TModule.number),
+	calleeId = TModule.optional(TModule.number),
+	placeId = TModule.optional(TModule.number),
+	reservedServerAccessCode = TModule.optional(TModule.string),
+	callId = TModule.optional(TModule.string),
+	callerCombinedName = TModule.optional(TModule.string),
+	calleeCombinedName = TModule.optional(TModule.string),
+	instanceId = TModule.optional(TModule.string),
+	createdUtc = TModule.optional(TModule.number),
+	activeUtc = TModule.optional(TModule.number)
 })
 
-return t
+return CallStateModelModule

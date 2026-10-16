@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.ReactReconciler.ReactReconciler)
+﻿return (require(script.Parent._Index.ReactReconciler.ReactReconciler))

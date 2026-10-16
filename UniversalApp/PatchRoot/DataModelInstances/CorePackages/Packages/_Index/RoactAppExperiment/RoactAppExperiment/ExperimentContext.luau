@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Roact).createContext(nil)
+﻿return (require(script.Parent.Parent.Roact).createContext(nil))

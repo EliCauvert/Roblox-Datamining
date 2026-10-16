@@ -1,225 +1,246 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local motionModule = require(parent.Motion)
-local useMotion = motionModule.useMotion
-local animatePresence = motionModule.AnimatePresence
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local spinnerModule = require(script.Parent.Spinner)
-local endAlignedIconsModule = require(script.Parent.endAlignedIcons)
-local buttonVariantModule = require(foundation.Enums.ButtonVariant)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local controlStateModule = require(foundation.Enums.ControlState)
-local buttonIconModule = require(script.Parent.ButtonIcon)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local constantsModule = require(foundation.Constants)
-local flagsModule = require(foundation.Utility.Flags)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local useButtonMotionStatesModule = require(script.Parent.useButtonMotionStates)
-local useButtonVariantsModule = require(script.Parent.useButtonVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local usePresentationContext = require(foundation.Providers.Style.PresentationContext).usePresentationContext
-local t = {
-	[buttonVariantModule.Link] = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local MotionModule = require(Parent.Motion)
+local UseMotionFunction = MotionModule.useMotion
+local AnimatePresence = MotionModule.AnimatePresence
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local SpinnerModule = require(script.Parent.Spinner)
+local EndAlignedIconsModule = require(script.Parent.endAlignedIcons)
+local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local ControlStateModule = require(Foundation.Enums.ControlState)
+local ButtonIconModule = require(script.Parent.ButtonIcon)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local ConstantsModule = require(Foundation.Constants)
+local FlagsModule = require(Foundation.Utility.Flags)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local UseButtonMotionStatesModule = require(script.Parent.useButtonMotionStates)
+local UseButtonVariantsModule = require(script.Parent.useButtonVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local UsePresentationContextFunction = require(Foundation.Providers.Style.PresentationContext).usePresentationContext
+local config = {
+	[ButtonVariantModule.Link] = {
 		format = "<u>%s</u>",
-		controlState = { controlStateModule.Hover, controlStateModule.Pressed }
+		controlState = { ControlStateModule.Hover, ControlStateModule.Pressed }
 	}
 }
 
-local function onProgressChange(p1)
-	-- upvalues: constantsModule (ref)
+local function onProgressChange(p1: number): NumberSequence --[[ Line: 52 ]]
+	-- upvalues: ConstantsModule (copy)
 	return NumberSequence.new({
 		NumberSequenceKeypoint.new(0, 0),
 		NumberSequenceKeypoint.new(math.max(0, p1 - 0.0001), 0),
-		NumberSequenceKeypoint.new(math.min(1, p1 + 0.0001), constantsModule.DISABLED_TRANSPARENCY),
-		NumberSequenceKeypoint.new(1, constantsModule.DISABLED_TRANSPARENCY)
+		NumberSequenceKeypoint.new(math.min(1, p1 + 0.0001), ConstantsModule.DISABLED_TRANSPARENCY),
+		NumberSequenceKeypoint.new(1, ConstantsModule.DISABLED_TRANSPARENCY)
 	})
 end
 
-local function _(p1, p2)
-	return p2:map(function(p3)
-		-- upvalues: p1 (ref)
+local function _(p1, p2) --[[ Line: 61 | Named "getTransparency" ]]
+	return p2:map(function(p3) --[[ Line: 65 ]]
+		-- upvalues: p1 (copy)
 		return if p1 == nil then p3 else p1 + (1 - p1) * p3
 	end)
 end
 
-local t_1 = {
+local config1 = {
 	isDisabled = false,
 	isLoading = false,
 	inputDelay = 0,
 	testId = "--foundation-button",
-	variant = buttonVariantModule.Standard,
-	size = inputSizeModule.Medium,
+	variant = ButtonVariantModule.Standard,
+	size = require(Foundation.Enums.InputSize).Medium,
 	width = UDim.new(0, 0)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), reactModule (ref), controlStateModule (ref), reactOtterModule (ref), endAlignedIconsModule (ref), useTokensModule (ref), usePresentationContext (ref), useButtonVariantsModule (ref), useButtonMotionStatesModule (ref), constantsModule (ref), useMotion (ref), t (ref), viewModule (ref), withCommonPropsModule (ref), fillBehaviorModule (ref), animatePresence (ref), spinnerModule (ref), flagsModule (ref), buttonIconModule (ref), textModule (ref), onProgressChange (ref)
-	local var1
-	local var2 = withDefaultsModule(p1, t_1)
-	local inputDelay = var2.inputDelay
-	local var3, var4 = reactModule.useBinding(controlStateModule.Initialize)
-	local var5, var6 = reactModule.useState(inputDelay > 0)
-	local var7, var8 = reactOtterModule.useAnimatedBinding(0, function()
-		-- upvalues: var6 (ref)
-		var6(false)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 | Named "Button" ]]
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), ReactModule (copy), ControlStateModule (copy), ReactOtterModule (copy), EndAlignedIconsModule (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseButtonVariantsModule (copy), UseButtonMotionStatesModule (copy), ConstantsModule (copy), UseMotionFunction (copy), config (copy), ViewModule (copy), WithCommonPropsModule (copy), FillBehaviorModule (copy), AnimatePresence (copy), SpinnerModule (copy), FlagsModule (copy), ButtonIconModule (copy), TextModule (copy), onProgressChange (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
+	local InputDelay: number = WithDefaultsModuleResult.inputDelay
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ControlStateModule.Initialize)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(InputDelay > 0)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function() --[[ Line: 106 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end)
-	local icon = var2.icon and endAlignedIconsModule[var2.icon]
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var8 (ref), reactOtterModule (copy)
-		if var5 == false then
-			var8(reactOtterModule.instant(0))
+	local EndAlignedIconsModuleEntry = WithDefaultsModuleResult.icon and EndAlignedIconsModule[WithDefaultsModuleResult.icon]
+	ReactModule.useEffect(function() --[[ Line: 112 ]]
+		-- upvalues: UseStateResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		if UseStateResult == false then
+			UseAnimatedBindingResult2(ReactOtterModule.instant(0))
 		end
-	end, { var5 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var6 (ref), inputDelay (ref), var8 (ref), reactOtterModule (copy)
-		if var5 then
-			var6(false)
+	end, { UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 118 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), InputDelay (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		if UseStateResult then
+			UseStateResult2(false)
 		end
-		if inputDelay > 0 then
-			var6(true)
-			var8(reactOtterModule.ease(1, {
-				duration = inputDelay,
+		if InputDelay > 0 then
+			UseStateResult2(true)
+			UseAnimatedBindingResult2((ReactOtterModule.ease(1, {
+				duration = InputDelay,
 				easingStyle = Enum.EasingStyle.Quad
-			}))
+			})))
 		end
-	end, { inputDelay })
-	local var9 = useTokensModule()
-	local var10 = usePresentationContext()
-	local var11 = useButtonVariantsModule(var9, var2.size, var2.variant, if var10 then var10.colorNamespace else nil)
-	local var12 = useButtonMotionStatesModule(var11.content.style.Transparency, constantsModule.DISABLED_TRANSPARENCY)
-	local var13, var14 = useMotion(var12.Default)
-	local var15, var16 = useMotion(var12.Default)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var16 (ref), var12 (ref)
-		if var2.isLoading then
-			var16(var12.Loading)
+	end, { InputDelay })
+	local UseTokensModuleResult = UseTokensModule()
+	local UsePresentationContextResult = UsePresentationContextFunction()
+	local UseButtonVariantsModuleResult = UseButtonVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant, if UsePresentationContextResult then UsePresentationContextResult.colorNamespace else nil)
+	local UseButtonMotionStatesModuleResult = UseButtonMotionStatesModule(UseButtonVariantsModuleResult.content.style.Transparency, ConstantsModule.DISABLED_TRANSPARENCY)
+	local UseMotionResult, UseMotionResult2 = UseMotionFunction(UseButtonMotionStatesModuleResult.Default)
+	local UseMotionResult1, UseMotionResult2_1 = UseMotionFunction(UseButtonMotionStatesModuleResult.Default)
+	ReactModule.useEffect(function() --[[ Line: 147 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), UseMotionResult2_1 (copy), UseButtonMotionStatesModuleResult (copy)
+		if WithDefaultsModuleResult.isLoading then
+			UseMotionResult2_1(UseButtonMotionStatesModuleResult.Loading)
 			
 			return
+		else
+			UseMotionResult2_1(UseButtonMotionStatesModuleResult.Default)
 		end
-		var16(var12.Default)
-	end, { var2.isLoading })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var14 (ref), var12 (ref)
-		if var2.isDisabled then
-			var14(var12.Disabled)
+	end, { WithDefaultsModuleResult.isLoading })
+	ReactModule.useEffect(function() --[[ Line: 155 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), UseMotionResult2 (copy), UseButtonMotionStatesModuleResult (copy)
+		if WithDefaultsModuleResult.isDisabled then
+			UseMotionResult2(UseButtonMotionStatesModuleResult.Disabled)
 			
 			return
+		else
+			UseMotionResult2(UseButtonMotionStatesModuleResult.Default)
 		end
-		var14(var12.Default)
-	end, { var2.isDisabled })
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var11 (ref), var9 (ref)
+	end, { WithDefaultsModuleResult.isDisabled })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 163 ]]
+		-- upvalues: UseButtonVariantsModuleResult (copy), UseTokensModuleResult (copy)
 		return {
-			radius = UDim.new(0, var11.container.radius),
-			offset = var9.Size.Size_200,
-			borderWidth = var9.Stroke.Thicker
+			radius = UDim.new(0, UseButtonVariantsModuleResult.container.radius),
+			offset = UseTokensModuleResult.Size.Size_200,
+			borderWidth = UseTokensModuleResult.Stroke.Thicker
 		}
-	end, { var9, var11.container.radius })
-	local var18 = var2.text and var2.text ~= ""
-	local var19 = reactModule.useCallback(function(p3)
-		-- upvalues: t (copy), var2 (ref), var18 (ref)
-		local variant = t[var2.variant]
+	end, {
+		UseTokensModuleResult,
+		UseButtonVariantsModuleResult.container.radius
+	})
+	local IsNotTextMatch: boolean = WithDefaultsModuleResult.text and WithDefaultsModuleResult.text ~= ""
+	local UseResult = ReactModule.useCallback(function(Value) --[[ Line: 173 ]]
+		-- upvalues: config (upval), WithDefaultsModuleResult (copy), IsNotTextMatch (copy)
+		local Entry = config[WithDefaultsModuleResult.variant]
 		
-		return if var18 and variant and table.find(variant.controlState, p3) then variant.format:format(var2.text) else var2.text
-	end, { var2.text, var2.variant, var18 })
-	local createElement = reactModule.createElement
-	local t_2 = {
-		AutomaticSize = if var2.width.Scale == 0 and var2.width.Offset == 0 then Enum.AutomaticSize.X else nil,
-		cornerRadius = UDim.new(0, var11.container.radius)
+		return if IsNotTextMatch and Entry and table.find(Entry.controlState, Value) then Entry.format:format(WithDefaultsModuleResult.text) else WithDefaultsModuleResult.text
+	end, {
+		WithDefaultsModuleResult.text,
+		WithDefaultsModuleResult.variant,
+		IsNotTextMatch
+	})
+	local CreateElementFunction = ReactModule.createElement
+	local config2 = {
+		AutomaticSize = if WithDefaultsModuleResult.width.Scale == 0 and WithDefaultsModuleResult.width.Offset == 0 then Enum.AutomaticSize.X else nil,
+		cornerRadius = UDim.new(0, UseButtonVariantsModuleResult.container.radius)
 	}
+	local MapResult = nil
 	
-	if var11.container.style then
-		local transparency = var11.container.style.Transparency
-		var1 = var13.transparency:map(function(p3)
-			-- upvalues: transparency (ref)
-			return if transparency == nil then p3 else transparency + (1 - transparency) * p3
-		end):map(function(p3)
-			-- upvalues: var11 (ref)
-			return { Color3 = var11.container.style.Color3, Transparency = p3 }
+	if UseButtonVariantsModuleResult.container.style then
+		local Transparency = UseButtonVariantsModuleResult.container.style.Transparency
+		MapResult = UseMotionResult.transparency:map(function(p2) --[[ Line: 65 ]]
+			-- upvalues: Transparency (copy)
+			return if Transparency == nil then p2 else Transparency + (1 - Transparency) * p2
+		end):map(function(Transparency) --[[ Line: 188 ]]
+			-- upvalues: UseButtonVariantsModuleResult (copy)
+			return {
+				Color3 = UseButtonVariantsModuleResult.container.style.Color3,
+				Transparency = Transparency
+			}
 		end)
 	else
-		var1 = nil
+		MapResult = nil
 	end
-	local t_3
-	t_2.backgroundStyle = var1
-	t_2.flexItem = if var2.fillBehavior then {
-		FlexMode = if var2.fillBehavior == fillBehaviorModule.Fill then Enum.UIFlexMode.Fill else Enum.UIFlexMode.Shrink
+	config2.backgroundStyle = MapResult
+	config2.flexItem = if WithDefaultsModuleResult.fillBehavior then {
+		FlexMode = if WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill then Enum.UIFlexMode.Fill else Enum.UIFlexMode.Shrink
 	} else nil
+	local Stroke = nil
 	
-	if var11.container.stroke then
-		t_3 = { Color = var11.container.stroke.Color }
-		local transparency = var11.container.stroke.Transparency
-		t_3.Transparency = var13.transparency:map(function(p3)
-			-- upvalues: transparency (ref)
-			return if transparency == nil then p3 else transparency + (1 - transparency) * p3
-		end)
+	if UseButtonVariantsModuleResult.container.stroke then
+		local Transparency1 = UseButtonVariantsModuleResult.container.stroke.Transparency
+		Stroke = {
+			Color = UseButtonVariantsModuleResult.container.stroke.Color,
+			Transparency = UseMotionResult.transparency:map(function(p2) --[[ Line: 65 ]]
+				-- upvalues: Transparency1 (copy)
+				return if Transparency1 == nil then p2 else Transparency1 + (1 - Transparency1) * p2
+			end)
+		}
 	else
-		t_3 = nil
+		Stroke = nil
 	end
-	t_2.stroke = t_3
-	t_2.Size = UDim2.new(if var2.fillBehavior == fillBehaviorModule.Fill then 1 else var2.width.Scale, if var2.fillBehavior == fillBehaviorModule.Fill then 0 else var2.width.Offset, 0, var11.container.height)
-	t_2.selection = {
-		Selectable = if var2.isDisabled then false else var2.Selectable,
-		NextSelectionUp = var2.NextSelectionUp,
-		NextSelectionDown = var2.NextSelectionDown,
-		NextSelectionLeft = var2.NextSelectionLeft,
-		NextSelectionRight = var2.NextSelectionRight
+	config2.stroke = Stroke
+	config2.Size = UDim2.new(if WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill then 1 else WithDefaultsModuleResult.width.Scale, if WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill then 0 else WithDefaultsModuleResult.width.Offset, 0, UseButtonVariantsModuleResult.container.height)
+	config2.selection = {
+		Selectable = not WithDefaultsModuleResult.isDisabled and WithDefaultsModuleResult.Selectable,
+		NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+		NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+		NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
+		NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight
 	}
-	t_2.cursor = var17
-	t_2.onActivated = var2.onActivated
-	t_2.onStateChanged = var4
-	t_2.isDisabled = var2.isDisabled or (var2.isLoading or var5)
-	t_2.stateLayer = var11.container.stateLayer
-	t_2.tag = var11.container.tag
-	t_2.ref = p2
+	config2.cursor = UseMemoResult
+	config2.onActivated = WithDefaultsModuleResult.onActivated
+	config2.onStateChanged = UseBindingResult2
+	config2.isDisabled = WithDefaultsModuleResult.isDisabled or (WithDefaultsModuleResult.isLoading or UseStateResult)
+	config2.stateLayer = UseButtonVariantsModuleResult.container.stateLayer
+	config2.tag = UseButtonVariantsModuleResult.container.tag
+	config2.ref = Ref
 	
-	return createElement(viewModule, withCommonPropsModule(var2, t_2), {
-		Loading = if var2.isLoading then reactModule.createElement("Folder", {}, {
-			PresenceWrapper = reactModule.createElement(animatePresence, {}, {
-				Spinner = reactModule.createElement(spinnerModule, {
-					Size = var11.icon.size - (if flagsModule.FoundationUsePath2DSpinner then UDim2.fromOffset(var9.Padding.XSmall, var9.Padding.XSmall) else UDim2.fromOffset(0, 0)),
-					style = var13.transparency:map(function(p3)
-						-- upvalues: var11 (ref)
-						return { Color3 = var11.content.style.Color3, Transparency = p3 }
+	return CreateElementFunction(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, config2), {
+		Loading = if WithDefaultsModuleResult.isLoading then ReactModule.createElement("Folder", {}, {
+			PresenceWrapper = ReactModule.createElement(AnimatePresence, {}, {
+				Spinner = ReactModule.createElement(SpinnerModule, {
+					Size = UseButtonVariantsModuleResult.icon.size - (if FlagsModule.FoundationUsePath2DSpinner then UDim2.fromOffset(UseTokensModuleResult.Padding.XSmall, UseTokensModuleResult.Padding.XSmall) else UDim2.fromOffset(0, 0)),
+					style = UseMotionResult.transparency:map(function(Transparency) --[[ Line: 242 ]]
+						-- upvalues: UseButtonVariantsModuleResult (copy)
+						return {
+							Color3 = UseButtonVariantsModuleResult.content.style.Color3,
+							Transparency = Transparency
+						}
 					end),
-					testId = `{var2.testId}--spinner`
+					testId = `{WithDefaultsModuleResult.testId}--spinner`
 				})
 			})
 		}) else nil,
-		IconWrapper = if var2.icon then reactModule.createElement(viewModule, {
-			Size = if var2.icon then var11.icon.size else nil,
-			LayoutOrder = if var2.icon then if icon then 3 else 1 else nil,
-			testId = if var2.icon then `{var2.testId}--icon-wrapper` else nil
+		IconWrapper = if WithDefaultsModuleResult.icon then ReactModule.createElement(ViewModule, {
+			Size = if WithDefaultsModuleResult.icon then UseButtonVariantsModuleResult.icon.size else nil,
+			LayoutOrder = if WithDefaultsModuleResult.icon then if EndAlignedIconsModuleEntry then 3 else 1 else nil,
+			testId = if WithDefaultsModuleResult.icon then `{WithDefaultsModuleResult.testId}--icon-wrapper` else nil
 		}, {
-			Icon = reactModule.createElement(buttonIconModule, {
-				icon = var2.icon,
-				isLoading = var2.isLoading,
-				variant = var2.variant,
-				size = var2.size,
-				disabledTransparencyBinding = var13.transparency,
-				textTransparencyBinding = var15.textTransparency,
-				testId = var2.testId
+			Icon = ReactModule.createElement(ButtonIconModule, {
+				icon = WithDefaultsModuleResult.icon,
+				isLoading = WithDefaultsModuleResult.isLoading,
+				variant = WithDefaultsModuleResult.variant,
+				size = WithDefaultsModuleResult.size,
+				disabledTransparencyBinding = UseMotionResult.transparency,
+				textTransparencyBinding = UseMotionResult1.textTransparency,
+				testId = WithDefaultsModuleResult.testId
 			})
 		}) else nil,
-		Text = if var18 then reactModule.createElement(textModule, {
+		Text = if IsNotTextMatch then ReactModule.createElement(TextModule, {
 			LayoutOrder = 2,
-			Text = var3:map(var19),
-			RichText = t[var2.variant] == nil,
-			tag = var11.text.tag,
-			textStyle = reactModule.joinBindings({ var13.transparency, var15.textTransparency }):map(function(p3)
-				-- upvalues: var11 (ref)
+			Text = UseBindingResult:map(UseResult),
+			RichText = config[WithDefaultsModuleResult.variant] ~= nil,
+			tag = UseButtonVariantsModuleResult.text.tag,
+			textStyle = ReactModule.joinBindings({
+				UseMotionResult.transparency,
+				UseMotionResult1.textTransparency
+			}):map(function(Entry) --[[ Line: 280 ]]
+				-- upvalues: UseButtonVariantsModuleResult (copy)
 				return {
-					Color3 = var11.content.style.Color3,
-					Transparency = p3[2] + p3[1]
+					Color3 = UseButtonVariantsModuleResult.content.style.Color3,
+					Transparency = Entry[2] + Entry[1]
 				}
 			end),
-			testId = `{var2.testId}--text`
+			testId = `{WithDefaultsModuleResult.testId}--text`
 		}) else nil,
-		Gradient = if var5 then reactModule.createElement("UIGradient", { Transparency = var7:map(onProgressChange) }) else nil
+		Gradient = if UseStateResult then ReactModule.createElement("UIGradient", {
+			Transparency = UseAnimatedBindingResult:map(onProgressChange)
+		}) else nil
 	})
 end))

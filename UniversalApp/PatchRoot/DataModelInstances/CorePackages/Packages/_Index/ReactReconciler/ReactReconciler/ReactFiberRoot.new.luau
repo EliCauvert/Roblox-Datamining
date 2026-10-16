@@ -1,32 +1,31 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local set = luauPolyfillModule.Set
-local map = luauPolyfillModule.Map
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Set = LuauPolyfillModule.Set
+local Map = LuauPolyfillModule.Map
 local _ = require(script.Parent.ReactInternalTypes)
-local reactRootTagsModule = require(script.Parent.ReactRootTags)
-local reactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
-local noTimeout = reactFiberHostConfigModule.noTimeout
-local supportsHydration = reactFiberHostConfigModule.supportsHydration
-local createHostRootFiber = require(script.Parent["ReactFiber.new"]).createHostRootFiber
-local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
-local noLanes = reactFiberLaneModule.NoLanes
-local noLanePriority = reactFiberLaneModule.NoLanePriority
-local noTimestamp = reactFiberLaneModule.NoTimestamp
-local createLaneMap = reactFiberLaneModule.createLaneMap
-local reactFeatureFlags = require(parent.Shared).ReactFeatureFlags
-local enableSchedulerTracing = reactFeatureFlags.enableSchedulerTracing
-local enableSuspenseCallback = reactFeatureFlags.enableSuspenseCallback
-local unstableGetThreadID = require(parent.Scheduler).tracing.unstable_getThreadID
-local initializeUpdateQueue = require(script.Parent["ReactUpdateQueue.new"]).initializeUpdateQueue
-local legacyRoot = reactRootTagsModule.LegacyRoot
-local blockingRoot = reactRootTagsModule.BlockingRoot
-local concurrentRoot = reactRootTagsModule.ConcurrentRoot
-local t = {}
+local ReactRootTagsModule = require(script.Parent.ReactRootTags)
+local ReactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
+local NoTimeout = ReactFiberHostConfigModule.noTimeout
+local SupportsHydration = ReactFiberHostConfigModule.supportsHydration
+local CreateHostRootFiberFunction = require(script.Parent["ReactFiber.new"]).createHostRootFiber
+local ReactFiberLaneModule = require(script.Parent.ReactFiberLane)
+local NoLanes = ReactFiberLaneModule.NoLanes
+local NoLanePriority = ReactFiberLaneModule.NoLanePriority
+local NoTimestamp = ReactFiberLaneModule.NoTimestamp
+local CreateLaneMapFunction = ReactFiberLaneModule.createLaneMap
+local ReactFeatureFlags = require(Parent.Shared).ReactFeatureFlags
+local EnableSchedulerTracing = ReactFeatureFlags.enableSchedulerTracing
+local EnableSuspenseCallback = ReactFeatureFlags.enableSuspenseCallback
+local UnstableGetThreadIDFunction = require(Parent.Scheduler).tracing.unstable_getThreadID
+local InitializeUpdateQueueFunction = require(script.Parent["ReactUpdateQueue.new"]).initializeUpdateQueue
+local LegacyRoot = ReactRootTagsModule.LegacyRoot
+local BlockingRoot = ReactRootTagsModule.BlockingRoot
+local ConcurrentRoot = ReactRootTagsModule.ConcurrentRoot
 
-local function FiberRootNode(p1, p2, p3)
-	-- upvalues: noTimeout (ref), noLanePriority (ref), createLaneMap (ref), noLanes (ref), noTimestamp (ref), supportsHydration (ref), enableSchedulerTracing (ref), unstableGetThreadID (ref), set (ref), map (ref), enableSuspenseCallback (ref), reactGlobalsModule (ref), blockingRoot (ref), concurrentRoot (ref), legacyRoot (ref)
-	local t = {
+local function FiberRootNode(ContainerInfo, Tag, Hydrate) --[[ Line: 49 ]]
+	-- upvalues: NoTimeout (copy), NoLanePriority (copy), CreateLaneMapFunction (copy), NoLanes (copy), NoTimestamp (copy), SupportsHydration (copy), EnableSchedulerTracing (copy), UnstableGetThreadIDFunction (copy), Set (copy), Map (copy), EnableSuspenseCallback (copy), ReactGlobalsModule (copy), BlockingRoot (copy), ConcurrentRoot (copy), LegacyRoot (copy)
+	local config = {
 		pendingChildren = nil,
 		current = nil,
 		pingCache = nil,
@@ -34,63 +33,65 @@ local function FiberRootNode(p1, p2, p3)
 		context = nil,
 		pendingContext = nil,
 		callbackNode = nil,
-		tag = p2,
-		containerInfo = p1,
-		timeoutHandle = noTimeout,
-		hydrate = p3,
-		callbackPriority = noLanePriority,
-		eventTimes = createLaneMap(noLanes),
-		expirationTimes = createLaneMap(noTimestamp),
-		pendingLanes = noLanes,
-		suspendedLanes = noLanes,
-		pingedLanes = noLanes,
-		expiredLanes = noLanes,
-		mutableReadLanes = noLanes,
-		finishedLanes = noLanes,
-		entangledLanes = noLanes,
-		entanglements = createLaneMap(noLanes)
+		tag = Tag,
+		containerInfo = ContainerInfo,
+		timeoutHandle = NoTimeout,
+		hydrate = Hydrate,
+		callbackPriority = NoLanePriority,
+		eventTimes = CreateLaneMapFunction(NoLanes),
+		expirationTimes = CreateLaneMapFunction(NoTimestamp),
+		pendingLanes = NoLanes,
+		suspendedLanes = NoLanes,
+		pingedLanes = NoLanes,
+		expiredLanes = NoLanes,
+		mutableReadLanes = NoLanes,
+		finishedLanes = NoLanes,
+		entangledLanes = NoLanes,
+		entanglements = CreateLaneMapFunction(NoLanes)
 	}
 	
-	if supportsHydration then
-		t.mutableSourceEagerHydrationData = nil
+	if SupportsHydration then
+		config.mutableSourceEagerHydrationData = nil
 	end
-	if enableSchedulerTracing then
-		t.interactionThreadID = unstableGetThreadID()
-		t.memoizedInteractions = set.new()
-		t.pendingInteractionMap = map.new()
+	if EnableSchedulerTracing then
+		config.interactionThreadID = UnstableGetThreadIDFunction()
+		config.memoizedInteractions = Set.new()
+		config.pendingInteractionMap = Map.new()
 	end
-	if enableSuspenseCallback then
-		t.hydrationCallbacks = nil
+	if EnableSuspenseCallback then
+		config.hydrationCallbacks = nil
 	end
-	if reactGlobalsModule.__DEV__ then
-		if p2 == blockingRoot then
-			t._debugRootType = "createBlockingRoot()"
+	if ReactGlobalsModule.__DEV__ then
+		if Tag == BlockingRoot then
+			config._debugRootType = "createBlockingRoot()"
 			
-			return t
-		elseif p2 == concurrentRoot then
-			t._debugRootType = "createRoot()"
+			return config
+		end
+		if Tag == ConcurrentRoot then
+			config._debugRootType = "createRoot()"
 			
-			return t
-		elseif p2 == legacyRoot then
-			t._debugRootType = "createLegacyRoot()"
+			return config
+		end
+		if Tag == LegacyRoot then
+			config._debugRootType = "createLegacyRoot()"
 		end
 	end
-	return t
+	return config
 end
 
-function t.createFiberRoot(p1, p2, p3, p4)
-	-- upvalues: FiberRootNode (ref), enableSuspenseCallback (ref), createHostRootFiber (ref), initializeUpdateQueue (ref)
-	local var1 = FiberRootNode(p1, p2, p3)
-	
-	if enableSuspenseCallback then
-		var1.hydrationCallbacks = p4
+return {
+	createFiberRoot = function(ContainerInfo, Tag, Hydrate, HydrationCallbacks) --[[ Line: 105 ]]
+		-- upvalues: FiberRootNode (copy), EnableSuspenseCallback (copy), CreateHostRootFiberFunction (copy), InitializeUpdateQueueFunction (copy)
+		local FiberRootNodeResult = FiberRootNode(ContainerInfo, Tag, Hydrate)
+		
+		if EnableSuspenseCallback then
+			FiberRootNodeResult.hydrationCallbacks = HydrationCallbacks
+		end
+		local HostRootFiber = CreateHostRootFiberFunction(Tag)
+		FiberRootNodeResult.current = HostRootFiber
+		HostRootFiber.stateNode = FiberRootNodeResult
+		InitializeUpdateQueueFunction(HostRootFiber)
+		
+		return FiberRootNodeResult
 	end
-	local var2 = createHostRootFiber(p2)
-	var1.current = var2
-	var2.stateNode = var1
-	initializeUpdateQueue(var2)
-	
-	return var1
-end
-
-return t
+}

@@ -1,5 +1,5 @@
-﻿return function(value)
-	assert(value, "attachmentName cannot be nil")
+﻿return function(Name) --[[ Line: 2 | Named "createLegacyAccessoryMeshPartAssetFormatSchema" ]]
+	assert(Name, "attachmentName cannot be nil")
 	
 	return {
 		ClassName = "Accessory",
@@ -20,7 +20,7 @@
 				Name = "Handle",
 				ClassName = "MeshPart",
 				_children = {
-					{ ClassName = "Attachment", Name = value },
+					{ ClassName = "Attachment", Name = Name },
 					{
 						ClassName = "SurfaceAppearance",
 						Name = "SurfaceAppearance",

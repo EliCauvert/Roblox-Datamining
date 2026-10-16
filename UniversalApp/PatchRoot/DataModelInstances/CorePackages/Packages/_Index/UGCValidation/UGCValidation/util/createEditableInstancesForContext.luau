@@ -1,177 +1,191 @@
-﻿local parent = script.Parent.Parent
-local t = {}
-local assetService = game:GetService("AssetService")
+﻿local Parent = script.Parent.Parent
+local AssetService = game:GetService("AssetService")
 local UGCValidationService = game:GetService("UGCValidationService")
-local _ = require(parent.util.Types)
-local destroyEditableInstancesModule = require(parent.util.destroyEditableInstances)
+local _ = require(Parent.util.Types)
+local DestroyEditableInstancesModule = require(Parent.util.destroyEditableInstances)
 
-local function _(p1, p2, p3, p4, p5)
-	local var1 = if p5 == "EditableImage" then p1.editableImages else p1.editableMeshes
+local function _(p1, Key, p2, p3, p4) --[[ Line: 13 | Named "addEditableInstance" ]]
+	local EditableImages = if p4 == "EditableImage" then p1.editableImages else p1.editableMeshes
 	
-	if not var1[p2] then
-		var1[p2] = {}
+	if not EditableImages[Key] then
+		EditableImages[Key] = {}
 	end
-	var1[p2][p3] = p4
+	EditableImages[Key][p2] = p3
 end
 
-local function createEditableInstanceFromId(p1, p2, p3)
-	-- upvalues: assetService (ref), UGCValidationService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: p3 (ref), assetService (copy), p1 (ref), UGCValidationService (copy)
-		return if p3 == "EditableMesh" then assetService:CreateEditableMeshAsync(p1) else UGCValidationService:CreateEditableImageOriginalSizeAsync(p1.Uri)
+local function createEditableInstanceFromId(Content1, p1, p2) --[[ Line: 26 ]]
+	-- upvalues: AssetService (copy), UGCValidationService (copy)
+	local Success, Result = pcall(function() --[[ Line: 27 ]]
+		-- upvalues: p2 (copy), AssetService (upval), Content1 (copy), UGCValidationService (upval)
+		return if p2 == "EditableMesh" then AssetService:CreateEditableMeshAsync(Content1) else UGCValidationService:CreateEditableImageOriginalSizeAsync(Content1.Uri)
 	end)
 	
-	if ok then
-		p2[p1.Uri] = status
+	if Success then
+		p1[Content1.Uri] = Result
 		
-		return true, { created = true, instance = status }
+		return true, { created = true, instance = Result }
+	else
+		return Success, Result
 	end
-	return ok, status
 end
 
-function t.getEditableInstanceInfo(p1, p2, p3, p4)
-	-- upvalues: createEditableInstanceFromId (ref)
-	local var1 = if p4 then p1.Object else nil
-	
-	if not var1 then
-		local uri = p1.Uri
+local CreateEditableInstancesForContextModule = {
+	getEditableInstanceInfo = function(Content1, p1, ContentType, p2) --[[ Line: 46 ]]
+		-- upvalues: createEditableInstanceFromId (copy)
+		local Object = if p2 then Content1.Object else nil
 		
-		if uri and uri ~= "" then
-			var1 = p2[uri]
+		if not Object then
+			local Uri = Content1.Uri
 			
-			if var1 then
-				return true, { created = false, instance = var1 }
-			else
-				return createEditableInstanceFromId(p1, p2, p3)
+			if Uri and Uri ~= "" then
+				Object = p1[Uri]
+				
+				if not Object then
+					return createEditableInstanceFromId(Content1, p1, ContentType)
+				end
 			end
 		end
+		return true, { created = false, instance = Object }
 	end
+}
+
+local _ = function(p1, Key, Content1, ContentType) --[[ Line: 72 | Named "addContent" ]]
+	p1[Key] = { content = Content1, contentType = ContentType }
 end
 
-local _ = function(p1, p2, p3, p4)
-	p1[p2] = { content = p3, contentType = p4 }
-end
-
-local function getTextureContentMap(p1, p2)
-	if p1:IsA("MeshPart") then
-		p2.TextureID = {
+local function getTextureContentMap(Object, p1) --[[ Line: 79 ]]
+	if Object:IsA("MeshPart") then
+		p1.TextureID = {
 			contentType = "EditableImage",
-			content = p1.TextureContent
+			content = Object.TextureContent
 		}
 		
 		return
-	elseif p1:IsA("SpecialMesh") then
-		p2.TextureId = {
+	end
+	if Object:IsA("SpecialMesh") then
+		p1.TextureId = {
 			contentType = "EditableImage",
-			content = Content.fromUri(p1.TextureId)
+			content = Content.fromUri(Object.TextureId)
 		}
 		
 		return
-	elseif p1:IsA("SurfaceAppearance") or p1:IsA("Decal") then
-		p2.ColorMap = {
+	end
+	if Object:IsA("SurfaceAppearance") or Object:IsA("Decal") then
+		p1.ColorMap = {
 			contentType = "EditableImage",
-			content = p1.ColorMapContent
+			content = Object.ColorMapContent
 		}
-		p2.MetalnessMap = {
+		p1.MetalnessMap = {
 			contentType = "EditableImage",
-			content = p1.MetalnessMapContent
+			content = Object.MetalnessMapContent
 		}
-		p2.NormalMap = {
+		p1.NormalMap = {
 			contentType = "EditableImage",
-			content = p1.NormalMapContent
+			content = Object.NormalMapContent
 		}
-		p2.RoughnessMap = {
+		p1.RoughnessMap = {
 			contentType = "EditableImage",
-			content = p1.RoughnessMapContent
+			content = Object.RoughnessMapContent
 		}
 	end
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 118 | Named "getCageMeshContent" ]]
 	return p1.CageMeshContent
 end
 
-local function getMeshContentMap(p1, p2)
-	if p1:IsA("MeshPart") then
-		p2.MeshId = { contentType = "EditableMesh", content = p1.MeshContent }
-		
-		return
-	elseif p1:IsA("WrapTarget") then
-		p2.CageMeshId = {
+local function getMeshContentMap(Object, p1) --[[ Line: 122 ]]
+	if Object:IsA("MeshPart") then
+		p1.MeshId = {
 			contentType = "EditableMesh",
-			content = p1.CageMeshContent
+			content = Object.MeshContent
 		}
 		
 		return
-	elseif p1:IsA("WrapLayer") then
-		p2.CageMeshId = {
+	end
+	if Object:IsA("WrapTarget") then
+		p1.CageMeshId = {
 			contentType = "EditableMesh",
-			content = p1.CageMeshContent
-		}
-		p2.ReferenceMeshId = {
-			contentType = "EditableMesh",
-			content = p1.ReferenceMeshContent
+			content = Object.CageMeshContent
 		}
 		
 		return
-	elseif p1:IsA("SpecialMesh") then
-		p2.MeshId = {
+	end
+	if Object:IsA("WrapLayer") then
+		p1.CageMeshId = {
 			contentType = "EditableMesh",
-			content = Content.fromUri(p1.MeshId)
+			content = Object.CageMeshContent
+		}
+		p1.ReferenceMeshId = {
+			contentType = "EditableMesh",
+			content = Object.ReferenceMeshContent
 		}
 		
 		return
-	elseif p1:IsA("WrapTextureTransfer") then
-		p2.ReferenceCageMeshContent = {
+	end
+	if Object:IsA("SpecialMesh") then
+		p1.MeshId = {
 			contentType = "EditableMesh",
-			content = p1.ReferenceCageMeshContent
+			content = Content.fromUri(Object.MeshId)
+		}
+		
+		return
+	end
+	if Object:IsA("WrapTextureTransfer") then
+		p1.ReferenceCageMeshContent = {
+			contentType = "EditableMesh",
+			content = Object.ReferenceCageMeshContent
 		}
 	end
 end
 
-function t.getOrCreateEditableInstances(p1, p2, p3, p4)
-	-- upvalues: getMeshContentMap (ref), getTextureContentMap (ref), t (ref)
-	local t_1 = {}
-	getMeshContentMap(p1, t_1)
-	getTextureContentMap(p1, t_1)
+function CreateEditableInstancesForContextModule.getOrCreateEditableInstances(Key, p1, p2, p3) --[[ Line: 143 ]]
+	-- upvalues: getMeshContentMap (copy), getTextureContentMap (copy), CreateEditableInstancesForContextModule (copy)
+	local t = {}
+	getMeshContentMap(Key, t)
+	getTextureContentMap(Key, t)
+	local EditableInstanceInfo = nil
+	local EditableInstanceInfo2 = nil
 	
-	for i, v in t_1 do
-		local contentType = v.contentType
-		local editableInstanceInfo, editableInstanceInfo_1 = t.getEditableInstanceInfo(v.content, p2, contentType, p4)
+	for i, TextureID in t do
+		local ContentType = TextureID.contentType
+		EditableInstanceInfo, EditableInstanceInfo2 = CreateEditableInstancesForContextModule.getEditableInstanceInfo(TextureID.content, p1, ContentType, p3)
 		
-		if editableInstanceInfo then
-			local var1 = if contentType == "EditableImage" then p3.editableImages else p3.editableMeshes
-			
-			if not var1[p1] then
-				var1[p1] = {}
-			end
-			var1[p1][i] = editableInstanceInfo_1
+		if not EditableInstanceInfo then
+			return EditableInstanceInfo, EditableInstanceInfo2
 		end
-		return editableInstanceInfo, editableInstanceInfo_1
+		local EditableImages = if ContentType == "EditableImage" then p2.editableImages else p2.editableMeshes
+		
+		if not EditableImages[Key] then
+			EditableImages[Key] = {}
+		end
+		EditableImages[Key][i] = EditableInstanceInfo2
 	end
 	return true
 end
 
-function t.processAll(p5, p6)
-	-- upvalues: t (ref), destroyEditableInstancesModule (ref)
-	local t_1 = { editableMeshes = {}, editableImages = {} }
-	local t_2 = {}
+function CreateEditableInstancesForContextModule.processAll(List, p4) --[[ Line: 171 ]]
+	-- upvalues: CreateEditableInstancesForContextModule (copy), DestroyEditableInstancesModule (copy)
+	local config = { editableMeshes = {}, editableImages = {} }
+	local t = {}
 	
-	for i, v in p5 do
-		local descendants = v:GetDescendants()
-		table.insert(descendants, v)
+	for _, value in List do
+		local Descendants = value:GetDescendants()
+		table.insert(Descendants, value)
+		local OrCreateEditableInstances2 = nil
 		
-		for i_1, v_1 in pairs(descendants) do
-			local orCreateEditableInstances, orCreateEditableInstances_1 = t.getOrCreateEditableInstances(v_1, t_2, t_1, p6)
+		for _, descendant in pairs(Descendants) do
+			local OrCreateEditableInstances
+			OrCreateEditableInstances, OrCreateEditableInstances2 = CreateEditableInstancesForContextModule.getOrCreateEditableInstances(descendant, t, config, p4)
 			
-			if not orCreateEditableInstances then
-				destroyEditableInstancesModule(t_1.editableMeshes, t_1.editableImages)
+			if not OrCreateEditableInstances then
+				DestroyEditableInstancesModule(config.editableMeshes, config.editableImages)
 				
-				return false, { orCreateEditableInstances_1 }
+				return false, { OrCreateEditableInstances2 }
 			end
 		end
 	end
-	return true, t_1
+	return true, config
 end
 
-return t
+return CreateEditableInstancesForContextModule

@@ -1,44 +1,44 @@
-﻿local viewportQueryOptionsModule = require(script:FindFirstAncestor("SceneUnderstanding").options.ViewportQueryOptions)
+﻿local ViewportQueryOptionsModule = require(script:FindFirstAncestor("SceneUnderstanding").options.ViewportQueryOptions)
 
-return function(p1, p2, p3)
-	-- upvalues: viewportQueryOptionsModule (ref)
-	local var1 = viewportQueryOptionsModule.new(p3)
-	local var2 = 0
-	local var3 = 1
-	local var4 = 0
-	local var5 = 0
-	local var6 = 1
-	local var7 = 0
-	local maxScreenDivisions = var1.maxScreenDivisions
-	local var8 = math.ceil(maxScreenDivisions / 2) - 1
-	local t = {}
+return function(Camera: Camera, Callback, p1) --[[ Line: 8 | Named "queryViewport" ]]
+	-- upvalues: ViewportQueryOptionsModule (copy)
+	local NewViewportQueryOptions = ViewportQueryOptionsModule.new(p1)
+	local Total = 0
+	local Amount = 1
+	local Total1 = 0
+	local Amount1 = 0
+	local Count = 1
+	local Count1 = 0
+	local MaxScreenDivisions: number = NewViewportQueryOptions.maxScreenDivisions
+	local CeiledDelta = math.ceil(MaxScreenDivisions / 2) - 1
+	local List = {}
 	
-	for _ = 1, maxScreenDivisions * maxScreenDivisions do
-		local vector2 = Vector2.new((var2 + 0.5 + var8) * (p1.ViewportSize.X / maxScreenDivisions), (var4 + 0.5 + var8) * (p1.ViewportSize.Y / maxScreenDivisions))
-		local x = p1:ScreenPointToRay(vector2.X, vector2.Y)
-		local origin = workspace:Raycast(x.Origin, x.Direction * var1.maxDistance, var1.raycastParams)
+	for _ = 1, MaxScreenDivisions * MaxScreenDivisions do
+		local _Vector2 = Vector2.new((Total + 0.5 + CeiledDelta) * (Camera.ViewportSize.X / MaxScreenDivisions), (Total1 + 0.5 + CeiledDelta) * (Camera.ViewportSize.Y / MaxScreenDivisions))
+		local v1 = Camera:ScreenPointToRay(_Vector2.X, _Vector2.Y)
+		local RaycastResult = workspace:Raycast(v1.Origin, v1.Direction * NewViewportQueryOptions.maxDistance, NewViewportQueryOptions.raycastParams)
 		
-		if origin and origin.Instance and (not table.find(t, origin.Instance) and p2(origin.Instance)) then
-			table.insert(t, origin.Instance)
+		if RaycastResult and RaycastResult.Instance and not table.find(List, RaycastResult.Instance) and Callback(RaycastResult.Instance) then
+			table.insert(List, RaycastResult.Instance)
 			
-			if var1.limit > #t then
-				var2 += var3
-				var4 += var5
-				var7 += 1
-				
-				if var7 == var6 then
-					var7 = 0
-					local var9 = var3
-					var3 = -var5
-					var5 = var9
-					
-					if var5 == 0 then
-						var6 += 1
-					end
-				end
+			if NewViewportQueryOptions.limit <= #List then
+				return List
 			end
-			return t
+		end
+		Total += Amount
+		Total1 += Amount1
+		Count1 += 1
+		
+		if Count1 == Count then
+			Count1 = 0
+			local Amount2: number = Amount
+			Amount = -Amount1
+			Amount1 = Amount2
+			
+			if Amount1 == 0 then
+				Count += 1
+			end
 		end
 	end
-	return t
+	return List
 end

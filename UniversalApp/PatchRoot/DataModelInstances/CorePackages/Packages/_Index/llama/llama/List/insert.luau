@@ -1,21 +1,20 @@
-﻿return function(p1, p2, ...)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var0)
-	local p0Count = #p1
-	assert(p2 >= 1 and p2 <= p0Count + 1, "index must be in bounds of list")
+﻿return function(p1, p2: number, ...) --[[ Line: 2 | Named "insert" ]]
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
+	local CountP0 = #p1
+	assert(p2 >= 1 and p2 <= CountP0 + 1, "index must be in bounds of list")
 	local t = {}
-	local var2 = 1
+	local Count = 1
 	
-	for i_1 = 1, p0Count do
-		if i_1 ~= p2 then
-			t[var2] = p1[i_1]
-			var2 += 1
-			continue
+	for i = 1, CountP0 do
+		if i == p2 then
+			for i1 = 1, select("#", ...) do
+				t[Count] = select(i1, ...)
+				Count += 1
+			end
 		end
-		for i = 1, select("#", ...) do
-			t[var2] = select(i, ...)
-			var2 += 1
-		end
+		t[Count] = p1[i]
+		Count += 1
 	end
 	return t
 end

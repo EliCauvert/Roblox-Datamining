@@ -1,30 +1,29 @@
-﻿local parent = script.Parent
-local _ = require(parent.Types)
-local classModule = require(parent.class)
-local formatModule = require(parent.format)
-local joinModule = require(parent.join)
-local var1 = classModule("Error", function(p1, p2, p3)
+﻿local Parent = script.Parent
+local _ = require(Parent.Types)
+local FormatModule = require(Parent.format)
+local JoinModule = require(Parent.join)
+local Error1 = require(Parent.class)("Error", function(Name, p1, p2) --[[ Line: 18 ]]
 	return {
-		name = p1,
-		message = p2 or "An error occurred",
-		tags = p3 or {}
+		name = Name,
+		message = p1 or "An error occurred",
+		tags = p2 or {}
 	}
 end)
 
-function var3.toString(p1)
-	-- upvalues: formatModule (ref)
-	return formatModule("{}: {}\n{}", p1.name, formatModule(p1.message, p1.tags), p1.stack)
+function Error1.toString(p1) --[[ Line: 26 ]]
+	-- upvalues: FormatModule (copy)
+	return FormatModule("{}: {}\n{}", p1.name, FormatModule(p1.message, p1.tags), p1.stack)
 end
 
-function var3.joinTags(p1, p2)
-	-- upvalues: var1 (ref), joinModule (ref)
-	return var1.new(p1.name, p1.message, joinModule(p1.tags, p2 or {}))
+function Error1.joinTags(p1, p2) --[[ Line: 36 ]]
+	-- upvalues: Error1 (copy), JoinModule (copy)
+	return Error1.new(p1.name, p1.message, JoinModule(p1.tags, p2 or {}))
 end
 
-function var3.throw(p1, p2)
-	local var2 = p1:joinTags(p2)
-	var2.stack = debug.traceback()
-	error(var2)
+function Error1.throw(p1, p2) --[[ Line: 49 ]]
+	local JoinTagsResult = p1:joinTags(p2)
+	JoinTagsResult.stack = debug.traceback()
+	error(JoinTagsResult)
 end
 
-return var1
+return Error1

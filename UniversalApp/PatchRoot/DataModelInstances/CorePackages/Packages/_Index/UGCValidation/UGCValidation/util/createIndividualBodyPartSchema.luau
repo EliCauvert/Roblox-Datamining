@@ -1,16 +1,16 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local constantsModule = require(parent.Constants)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local getFFlagUGCValidationEnforceHRDUploadModule = require(parent.flags.getFFlagUGCValidationEnforceHRDUpload)
-local t = { LeftHand = "LeftHand", RightHand = "RightHand" }
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local ConstantsModule = require(Parent.Constants)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local GetFFlagUGCValidationEnforceHRDUploadModule = require(Parent.flags.getFFlagUGCValidationEnforceHRDUpload)
+local config = { LeftHand = "LeftHand", RightHand = "RightHand" }
 
-return function(p1, p2, _)
-	-- upvalues: constantsModule (ref), r15plusUtilsModule (ref), getFFlagUGCValidationEnforceHRDUploadModule (ref), t (ref)
-	local var1 = constantsModule.ASSET_TYPE_INFO[p1].subParts[p2]
-	local t_1 = {
+return function(p1, Text, _) --[[ Line: 14 | Named "createIndividualBodyPartSchema" ]]
+	-- upvalues: ConstantsModule (copy), R15plusUtilsModule (copy), GetFFlagUGCValidationEnforceHRDUploadModule (copy), config (copy)
+	local SubPart = ConstantsModule.ASSET_TYPE_INFO[p1].subParts[Text]
+	local config1 = {
 		ClassName = "MeshPart",
-		Name = { p2 },
+		Name = { Text },
 		_children = {
 			{
 				ClassName = "StringValue",
@@ -18,7 +18,7 @@ return function(p1, p2, _)
 			},
 			{
 				ClassName = "WrapTarget",
-				Name = { p2, p2 .. "WrapTarget", "WrapTarget" }
+				Name = { Text, Text .. "WrapTarget", "WrapTarget" }
 			},
 			{
 				ClassName = "SurfaceAppearance",
@@ -27,56 +27,56 @@ return function(p1, p2, _)
 			}
 		}
 	}
-	table.insert(t_1._children, {
+	table.insert(config1._children, {
 		ClassName = "Attachment",
-		Name = { var1.rigAttachmentToParent.name }
+		Name = { SubPart.rigAttachmentToParent.name }
 	})
 	
-	for i in pairs(var1.otherAttachments) do
-		table.insert(t_1._children, { ClassName = "Attachment", Name = { i } })
+	for otherAttachment in pairs(SubPart.otherAttachments) do
+		table.insert(config1._children, { ClassName = "Attachment", Name = { otherAttachment } })
 	end
-	if r15plusUtilsModule.checkFlagEnabledForAllowHrd() then
-		table.insert(t_1._children, {
+	if R15plusUtilsModule.checkFlagEnabledForAllowHrd() then
+		table.insert(config1._children, {
 			ClassName = "HumanoidRigDescription",
 			Name = { "HumanoidRigDescription" },
-			_optional = not getFFlagUGCValidationEnforceHRDUploadModule()
+			_optional = not GetFFlagUGCValidationEnforceHRDUploadModule()
 		})
 		
-		if t[p2] ~= nil then
-			table.insert(t_1._children, {
+		if config[Text] ~= nil then
+			table.insert(config1._children, {
 				ClassName = "DigitsRigDescription",
 				_optional = true,
-				Name = { "DigitsRigDescription", `{t[p2]}Description` }
+				Name = { "DigitsRigDescription", `{config[Text]}Description` }
 			})
 		end
-		local avatarBoneSchema = r15plusUtilsModule.getAvatarBoneSchema(p2)
-		local attachment = r15plusUtilsModule.getNameWhitelistOfClassInSchema(avatarBoneSchema, "Attachment")
+		local AvatarBoneSchema = R15plusUtilsModule.getAvatarBoneSchema(Text)
+		local AttachmentNameWhitelistOfClassInSchema = R15plusUtilsModule.getNameWhitelistOfClassInSchema(AvatarBoneSchema, "Attachment")
 		
-		for i_1, v in t_1._children do
-			if v.ClassName == "Attachment" and attachment[v.Name[1]] then
-				v._optional = true
+		for _, Attachment in config1._children do
+			if Attachment.ClassName == "Attachment" and AttachmentNameWhitelistOfClassInSchema[Attachment.Name[1]] then
+				Attachment._optional = true
 			end
-			if string.find(v.Name[1], "ShoulderRigAttachment") then
-				if v._children == nil then
-					v._children = {}
+			if string.find(Attachment.Name[1], "ShoulderRigAttachment") then
+				if Attachment._children == nil then
+					Attachment._children = {}
 				end
-				table.insert(v._children, {
+				table.insert(Attachment._children, {
 					ClassName = "Attachment",
 					_optional = true,
-					Name = { r15plusUtilsModule.JointRotationName }
+					Name = { R15plusUtilsModule.JointRotationName }
 				})
 			end
 		end
-		for i_2, v_1 in r15plusUtilsModule.getNameWhitelistOfClassInSchema(avatarBoneSchema, "Bone") do
-			if v_1 then
-				table.insert(t_1._children, {
+		for i, value in R15plusUtilsModule.getNameWhitelistOfClassInSchema(AvatarBoneSchema, "Bone") do
+			if value then
+				table.insert(config1._children, {
 					ClassName = "Bone",
 					_optional = true,
 					_ignoreDescendants = true,
-					Name = { i_2 }
+					Name = { i }
 				})
 			end
 		end
 	end
-	return t_1
+	return config1
 end

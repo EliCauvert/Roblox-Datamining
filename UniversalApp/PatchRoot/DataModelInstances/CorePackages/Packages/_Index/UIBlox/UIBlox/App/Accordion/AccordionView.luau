@@ -1,185 +1,179 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local tModule = require(parent_1.t)
-local springAnimatedItemModule = require(parent.Utility.SpringAnimatedItem)
-local t = { dampingRatio = 1, frequency = 3.5 }
-local accordionView = roactModule.PureComponent:extend("AccordionView")
-accordionView.validateProps = tModule.strictInterface({
-	items = tModule.table,
-	itemWidth = tModule.number,
-	itemHeight = tModule.number,
-	renderItem = tModule.callback,
-	placeholderColor = tModule.Color3,
-	placeholderBaseTransparency = tModule.number,
-	collapseButtonSize = tModule.number,
-	renderCollapseButton = tModule.callback,
-	LayoutOrder = tModule.optional(tModule.integer),
-	maxItemsInCompactView = tModule.numberPositive,
-	onExpand = tModule.optional(tModule.callback),
-	onCollapse = tModule.optional(tModule.callback)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local TModule = require(Parent1.t)
+local SpringAnimatedItemModule = require(Parent.Utility.SpringAnimatedItem)
+local SpringOptions = { dampingRatio = 1, frequency = 3.5 }
+local AccordionView = RoactModule.PureComponent:extend("AccordionView")
+AccordionView.validateProps = TModule.strictInterface({
+	items = TModule.table,
+	itemWidth = TModule.number,
+	itemHeight = TModule.number,
+	renderItem = TModule.callback,
+	placeholderColor = TModule.Color3,
+	placeholderBaseTransparency = TModule.number,
+	collapseButtonSize = TModule.number,
+	renderCollapseButton = TModule.callback,
+	LayoutOrder = TModule.optional(TModule.integer),
+	maxItemsInCompactView = TModule.numberPositive,
+	onExpand = TModule.optional(TModule.callback),
+	onCollapse = TModule.optional(TModule.callback)
 })
-accordionView.defaultProps = { maxItemsInCompactView = 3 }
+AccordionView.defaultProps = { maxItemsInCompactView = 3 }
 
-function accordionView.init(p1)
-	-- upvalues: roactModule (ref)
+function AccordionView.init(p1) --[[ Line: 48 ]]
+	-- upvalues: RoactModule (copy)
 	p1.state = { expanded = false, isExpandButtonPressed = false }
 	
-	function p0.onExpandButtonActivated()
-		-- upvalues: p1 (ref)
+	function p1.onExpandButtonActivated() --[[ Line: 54 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.onExpand then
 			p1.props.onExpand()
 		end
 		p1:setState({ expanded = true, isExpandButtonPressed = false })
 	end
 	
-	function p0.onCollapseButtonActivated()
-		-- upvalues: p1 (ref)
+	function p1.onCollapseButtonActivated() --[[ Line: 64 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.onCollapse then
 			p1.props.onCollapse()
 		end
 		p1:setState({ expanded = false })
 	end
 	
-	function p0.onExpandButtonInputBegan(_, p2)
-		-- upvalues: p1 (ref)
-		if p2.UserInputState == Enum.UserInputState.Begin and (p2.UserInputType == Enum.UserInputType.Touch or p2.UserInputType == Enum.UserInputType.MouseButton1) then
+	function p1:onExpandButtonInputBegan(Input) --[[ Line: 73 ]]
+		-- upvalues: p1 (copy)
+		if Input.UserInputState == Enum.UserInputState.Begin and (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) then
 			p1:setState({ isExpandButtonPressed = true })
 		end
 	end
 	
-	function p0.onExpandButtonInputEnded()
-		-- upvalues: p1 (ref)
+	function p1.onExpandButtonInputEnded() --[[ Line: 87 ]]
+		-- upvalues: p1 (copy)
 		if p1.state.isExpandButtonPressed then
 			p1:setState({ isExpandButtonPressed = false })
 		end
 	end
 	
-	p1.rootFrameRef = roactModule.createRef()
+	p1.rootFrameRef = RoactModule.createRef()
 	
-	function p0.onListLayoutAbsoluteContentSizeChanged(p2)
-		-- upvalues: p1 (ref)
+	function p1.onListLayoutAbsoluteContentSizeChanged(p2) --[[ Line: 97 ]]
+		-- upvalues: p1 (copy)
 		if p1.rootFrameRef.current then
-			p1.rootFrameRef.current.Size = UDim2.new(0, p1.props.itemWidth, 0, math.max(p2.AbsoluteContentSize.Y, p1:getCompactTotalHeight()))
+			p1.rootFrameRef.current.Size = UDim2.new(0, p1.props.itemWidth, 0, (math.max(p2.AbsoluteContentSize.Y, (p1:getCompactTotalHeight()))))
 		end
 	end
 end
 
-function accordionView.getCompactTotalHeight(p1)
-	local itemsCount = #p1.props.items
+function AccordionView.getCompactTotalHeight(p1): number --[[ Line: 108 ]]
+	local ItemHeight = p1.props.itemHeight
+	local MaxItemsInCompactView: number = p1.props.maxItemsInCompactView
+	local CountItems = #p1.props.items
 	
-	return if itemsCount == 0 then 0 else p1.props.itemHeight + (math.min(p1.props.maxItemsInCompactView, itemsCount) - 1) * 10
+	return if CountItems == 0 then 0 else ItemHeight + (math.min(MaxItemsInCompactView, CountItems) - 1) * 10
 end
 
-function accordionView.getLayoutInfo(p1)
-	local items = p1.props.items
-	local itemWidth = p1.props.itemWidth
-	local itemHeight = p1.props.itemHeight
-	local placeholderBaseTransparency = p1.props.placeholderBaseTransparency
-	local maxItemsInCompactView = p1.props.maxItemsInCompactView
-	local expanded = p1.state.expanded
+function AccordionView.getLayoutInfo(p1) --[[ Line: 121 ]]
+	local ItemWidth = p1.props.itemWidth
+	local ItemHeight = p1.props.itemHeight
+	local PlaceholderBaseTransparency: number = p1.props.placeholderBaseTransparency
+	local MaxItemsInCompactView: number = p1.props.maxItemsInCompactView
+	local Expanded = p1.state.expanded
 	local t = {}
-	local itemsCount = #items
-	local minValue = math.min(maxItemsInCompactView, itemsCount)
-	local var1 = if minValue > 1 then (1 - placeholderBaseTransparency) / (minValue - 1) else 0
-	
-	for i = 1, itemsCount do
-		if expanded then
+	local CountItems = #p1.props.items
+	local Smallest = math.min(MaxItemsInCompactView, CountItems)
+	local PlaceholderBaseTransparencyRatio: number = if Smallest > 1 then (1 - PlaceholderBaseTransparency) / (Smallest - 1) else 0
+	for i = 1, CountItems do
+		if Expanded then
 			t[i] = {
 				placeholderTransparency = 1,
 				itemTransparency = 0,
-				width = itemWidth,
-				height = itemHeight
+				width = ItemWidth,
+				height = ItemHeight
 			}
-			continue
-		end
-		if i == 1 then
+		elseif i == 1 then
 			t[i] = {
 				placeholderTransparency = 1,
 				itemTransparency = 0,
-				width = itemWidth,
-				height = itemHeight
+				width = ItemWidth,
+				height = ItemHeight
 			}
-		elseif i <= maxItemsInCompactView then
+		elseif i <= MaxItemsInCompactView then
 			t[i] = {
 				height = 10,
 				itemTransparency = 1,
-				width = itemWidth - (i - 1) * 20,
-				placeholderTransparency = placeholderBaseTransparency + var1 * (i - 2)
+				width = ItemWidth - (i - 1) * 20,
+				placeholderTransparency = PlaceholderBaseTransparency + PlaceholderBaseTransparencyRatio * (i - 2)
 			}
 		else
 			t[i] = {
 				height = 0,
 				placeholderTransparency = 1,
 				itemTransparency = 1,
-				width = itemWidth - (i - 1) * 20
+				width = ItemWidth - (i - 1) * 20
 			}
 		end
 	end
 	return t
 end
 
-function accordionView.render(p2)
-	-- upvalues: roactModule (ref), springAnimatedItemModule (ref), t (ref)
-	local items = p2.props.items
-	local itemsCount = #items
+function AccordionView.render(p2) --[[ Line: 175 ]]
+	-- upvalues: RoactModule (copy), SpringAnimatedItemModule (copy), SpringOptions (copy)
+	local Items = p2.props.items
+	local CountItems = #Items
 	
-	if itemsCount == 0 then
+	if CountItems == 0 then
 		return nil
 	end
-	local layoutOrder = p2.props.LayoutOrder
-	local itemWidth = p2.props.itemWidth
-	local renderItem = p2.props.renderItem
-	local placeholderColor = p2.props.placeholderColor
-	local collapseButtonSize = p2.props.collapseButtonSize
-	local renderCollapseButton = p2.props.renderCollapseButton
-	local expanded = p2.state.expanded
-	local layoutInfo = p2:getLayoutInfo()
-	local t_1 = {
-		Layout = roactModule.createElement("UIListLayout", {
+	local LayoutOrder = p2.props.LayoutOrder
+	local ItemWidth = p2.props.itemWidth
+	local RenderItemFunction = p2.props.renderItem
+	local PlaceholderColor = p2.props.placeholderColor
+	local CollapseButtonSize: number = p2.props.collapseButtonSize
+	local Expanded = p2.state.expanded
+	local IsExpandButtonPressed = p2.state.isExpandButtonPressed
+	local LayoutInfo = p2:getLayoutInfo()
+	local config = {
+		Layout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if expanded then 10 else 0),
-			[roactModule.Change.AbsoluteContentSize] = p2.onListLayoutAbsoluteContentSizeChanged
+			Padding = UDim.new(0, if Expanded then 10 else 0),
+			[RoactModule.Change.AbsoluteContentSize] = p2.onListLayoutAbsoluteContentSizeChanged
 		}),
-		Scaler = roactModule.createElement(springAnimatedItemModule.AnimatedUIScale, {
-			springOptions = t,
-			animatedValues = {
-				scale = if p2.state.isExpandButtonPressed then 0.9 else 1
-			},
-			mapValuesToProps = function(p3)
+		Scaler = RoactModule.createElement(SpringAnimatedItemModule.AnimatedUIScale, {
+			springOptions = SpringOptions,
+			animatedValues = { scale = if IsExpandButtonPressed then 0.9 else 1 },
+			mapValuesToProps = function(p3) --[[ Line: 208 ]]
 				return { Scale = p3.scale }
 			end
 		}),
-		CollapseButton = roactModule.createElement(springAnimatedItemModule.AnimatedFrame, {
-			springOptions = t,
-			animatedValues = {
-				sizeOffsetY = if expanded then collapseButtonSize + 1 else 0
-			},
-			mapValuesToProps = function(p3)
-				-- upvalues: collapseButtonSize (ref)
+		CollapseButton = RoactModule.createElement(SpringAnimatedItemModule.AnimatedFrame, {
+			springOptions = SpringOptions,
+			animatedValues = { sizeOffsetY = Expanded and CollapseButtonSize + 1 or 0 },
+			mapValuesToProps = function(p3) --[[ Line: 221 ]]
+				-- upvalues: CollapseButtonSize (copy)
 				return {
-					Size = UDim2.new(0, collapseButtonSize, 0, p3.sizeOffsetY)
+					Size = UDim2.new(0, CollapseButtonSize, 0, p3.sizeOffsetY)
 				}
 			end,
 			regularProps = {
 				BackgroundTransparency = 1,
 				ClipsDescendants = true,
-				[roactModule.Children] = {
-					ButtonMoveContainer = roactModule.createElement(springAnimatedItemModule.AnimatedFrame, {
-						springOptions = t,
+				[RoactModule.Children] = {
+					ButtonMoveContainer = RoactModule.createElement(SpringAnimatedItemModule.AnimatedFrame, {
+						springOptions = SpringOptions,
 						animatedValues = {
-							positionOffsetY = if expanded then 0 else collapseButtonSize / 2
+							positionOffsetY = if Expanded then 0 else CollapseButtonSize / 2
 						},
-						mapValuesToProps = function(p3)
+						mapValuesToProps = function(p3) --[[ Line: 235 ]]
 							return { Position = UDim2.new(0, 0, 0, p3.positionOffsetY) }
 						end,
 						regularProps = {
-							Size = UDim2.new(0, collapseButtonSize, 0, collapseButtonSize),
+							Size = UDim2.new(0, CollapseButtonSize, 0, CollapseButtonSize),
 							BackgroundTransparency = 1,
-							[roactModule.Children] = {
-								Button = renderCollapseButton(p2.onCollapseButtonActivated)
+							[RoactModule.Children] = {
+								Button = p2.props.renderCollapseButton(p2.onCollapseButtonActivated)
 							}
 						}
 					})
@@ -188,12 +182,12 @@ function accordionView.render(p2)
 		})
 	}
 	
-	for i, v in ipairs(items) do
-		local var2 = layoutInfo[i]
-		t_1["Item" .. tostring(i)] = roactModule.createElement(springAnimatedItemModule.AnimatedFrame, {
-			springOptions = t,
-			animatedValues = { width = var2.width, height = var2.height },
-			mapValuesToProps = function(p3)
+	for i, _ in ipairs(Items) do
+		local Layout = LayoutInfo[i]
+		config["Item" .. tostring(i)] = RoactModule.createElement(SpringAnimatedItemModule.AnimatedFrame, {
+			springOptions = SpringOptions,
+			animatedValues = { width = Layout.width, height = Layout.height },
+			mapValuesToProps = function(p3) --[[ Line: 262 ]]
 				return { Size = UDim2.new(0, p3.width, 0, p3.height) }
 			end,
 			regularProps = {
@@ -201,51 +195,51 @@ function accordionView.render(p2)
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				LayoutOrder = i + 1,
-				ZIndex = itemsCount + 1 - i,
+				ZIndex = CountItems + 1 - i,
 				ClipsDescendants = true,
-				[roactModule.Children] = {
-					Item = renderItem(items[i], var2.itemTransparency, t),
-					Placeholder = roactModule.createElement(springAnimatedItemModule.AnimatedFrame, {
+				[RoactModule.Children] = {
+					Item = RenderItemFunction(Items[i], Layout.itemTransparency, SpringOptions),
+					Placeholder = RoactModule.createElement(SpringAnimatedItemModule.AnimatedFrame, {
 						key = "Placeholder",
-						springOptions = t,
-						animatedValues = { transparency = var2.placeholderTransparency },
-						mapValuesToProps = function(p3)
+						springOptions = SpringOptions,
+						animatedValues = { transparency = Layout.placeholderTransparency },
+						mapValuesToProps = function(p3) --[[ Line: 282 ]]
 							return { BackgroundTransparency = p3.transparency }
 						end,
 						regularProps = {
 							BorderSizePixel = 0,
 							Size = UDim2.new(1, 0, 1, 0),
-							BackgroundColor3 = placeholderColor
+							BackgroundColor3 = PlaceholderColor
 						}
 					})
 				}
 			}
 		})
 	end
-	return roactModule.createElement("Frame", {
-		Size = UDim2.new(0, itemWidth, 0, 0),
+	return RoactModule.createElement("Frame", {
+		Size = UDim2.new(0, ItemWidth, 0, 0),
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		LayoutOrder = layoutOrder,
-		[roactModule.Ref] = p2.rootFrameRef
+		LayoutOrder = LayoutOrder,
+		[RoactModule.Ref] = p2.rootFrameRef
 	}, {
-		ContentFrame = roactModule.createElement("Frame", {
+		ContentFrame = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5)
-		}, t_1),
-		ClickToExpandButton = itemsCount > 1 and not expanded and roactModule.createElement("TextButton", {
+		}, config),
+		ClickToExpandButton = CountItems > 1 and not Expanded and RoactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			ZIndex = itemsCount + 1,
+			ZIndex = CountItems + 1,
 			Text = "",
-			[roactModule.Event.Activated] = p2.onExpandButtonActivated,
-			[roactModule.Event.InputBegan] = p2.onExpandButtonInputBegan,
-			[roactModule.Event.InputEnded] = p2.onExpandButtonInputEnded
+			[RoactModule.Event.Activated] = p2.onExpandButtonActivated,
+			[RoactModule.Event.InputBegan] = p2.onExpandButtonInputBegan,
+			[RoactModule.Event.InputEnded] = p2.onExpandButtonInputEnded
 		})
 	})
 end
 
-return accordionView
+return AccordionView

@@ -1,66 +1,67 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local avatarModule = require(foundation.Components.Avatar)
-local badgeModule = require(foundation.Components.Badge)
-local iconModule = require(foundation.Components.Icon)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
-local _ = require(foundation.Providers.Style.Tokens)
-local accessoryTypeModule = require(foundation.Enums.AccessoryType)
-local _ = require(foundation.Enums.InputSize)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local AvatarModule = require(Foundation.Components.Avatar)
+local BadgeModule = require(Foundation.Components.Badge)
+local IconModule = require(Foundation.Components.Icon)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local PresentationContextModule = require(Foundation.Providers.Style.PresentationContext)
+local _ = require(Foundation.Providers.Style.Tokens)
+local AccessoryTypeModule = require(Foundation.Enums.AccessoryType)
+local _ = require(Foundation.Enums.InputSize)
+local config = {
 	isIconSize = true,
-	colorNamespace = require(foundation.Enums.ColorNamespace).Color
+	colorNamespace = require(Foundation.Enums.ColorNamespace).Color
 }
 
-return function(p1)
-	-- upvalues: accessoryTypeModule (ref), reactModule (ref), viewModule (ref), presentationContextModule (ref), t (ref), avatarModule (ref), textModule (ref), badgeModule (ref), iconModule (ref)
-	local accessory = p1.accessory
+return function(Frame: Frame) --[[ Line: 48 | Named "Accessory" ]]
+	-- upvalues: AccessoryTypeModule (copy), ReactModule (copy), ViewModule (copy), PresentationContextModule (copy), config (copy), AvatarModule (copy), TextModule (copy), BadgeModule (copy), IconModule (copy)
+	local Accessory = Frame.accessory
 	
-	if accessory == nil then
+	if Accessory == nil then
 		return nil
-	end
-	local tag = `align-x-center align-y-center {p1.iconVariant.tag}`
-	
-	return if accessory.type == accessoryTypeModule.Avatar then reactModule.createElement(viewModule, {
-		LayoutOrder = p1.LayoutOrder,
-		tag = tag,
-		testId = p1.testId
-	}, {
-		Avatar = reactModule.createElement(presentationContextModule.Provider, { value = t }, {
-			Avatar = reactModule.createElement(avatarModule, {
-				userId = accessory.userId,
-				backplateStyle = p1.tokens.Color.Shift.Shift_200,
-				size = p1.size
+	else
+		local CenterName: string = `align-x-center align-y-center {Frame.iconVariant.tag}`
+		
+		return if Accessory.type == AccessoryTypeModule.Avatar then ReactModule.createElement(ViewModule, {
+			LayoutOrder = Frame.LayoutOrder,
+			tag = CenterName,
+			testId = Frame.testId
+		}, {
+			Avatar = ReactModule.createElement(PresentationContextModule.Provider, { value = config }, {
+				Avatar = ReactModule.createElement(AvatarModule, {
+					userId = Accessory.userId,
+					backplateStyle = Frame.tokens.Color.Shift.Shift_200,
+					size = Frame.size
+				})
+			})
+		}) elseif Accessory.type == "Hint" then ReactModule.createElement(ViewModule, {
+			tag = "row align-y-center auto-xy padding-x-xsmall radius-small bg-shift-200",
+			LayoutOrder = Frame.LayoutOrder,
+			testId = Frame.testId
+		}, {
+			Text = ReactModule.createElement(TextModule, {
+				tag = "auto-xy text-caption-medium content-muted",
+				Text = Accessory.text
+			})
+		}) elseif Accessory.type == "Badge" then ReactModule.createElement(BadgeModule, {
+			LayoutOrder = Frame.LayoutOrder,
+			text = Accessory.text,
+			icon = Accessory.icon,
+			variant = Accessory.variant,
+			testId = Frame.testId
+		}) else ReactModule.createElement(ViewModule, {
+			LayoutOrder = Frame.LayoutOrder,
+			tag = CenterName,
+			testId = Frame.testId
+		}, {
+			Icon = ReactModule.createElement(IconModule, {
+				name = Accessory.iconName,
+				variant = Accessory.iconVariant,
+				style = Frame.iconVariant.style,
+				size = Frame.iconVariant.size
 			})
 		})
-	}) elseif accessory.type == "Hint" then reactModule.createElement(viewModule, {
-		tag = "row align-y-center auto-xy padding-x-xsmall radius-small bg-shift-200",
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
-	}, {
-		Text = reactModule.createElement(textModule, {
-			tag = "auto-xy text-caption-medium content-muted",
-			Text = accessory.text
-		})
-	}) elseif accessory.type == "Badge" then reactModule.createElement(badgeModule, {
-		LayoutOrder = p1.LayoutOrder,
-		text = accessory.text,
-		icon = accessory.icon,
-		variant = accessory.variant,
-		testId = p1.testId
-	}) else reactModule.createElement(viewModule, {
-		LayoutOrder = p1.LayoutOrder,
-		tag = tag,
-		testId = p1.testId
-	}, {
-		Icon = reactModule.createElement(iconModule, {
-			name = accessory.iconName,
-			variant = accessory.iconVariant,
-			style = p1.iconVariant.style,
-			size = p1.iconVariant.size
-		})
-	})
+	end
 end

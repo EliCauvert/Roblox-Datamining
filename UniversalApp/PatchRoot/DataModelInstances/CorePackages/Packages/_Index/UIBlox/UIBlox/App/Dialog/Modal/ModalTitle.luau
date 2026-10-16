@@ -1,62 +1,62 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local core = parent_1.Core
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local cryoModule = require(parent_2.Cryo)
-local imagesModule = require(parent.ImageSet.Images)
-local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
-local controllableModule = require(core.Control.Controllable)
-local genericTextLabelModule = require(core.Text.GenericTextLabel.GenericTextLabel)
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local closeButtonIconModule = require(script.Parent.Enum.CloseButtonIcon)
-local modalTitle = roactModule.PureComponent:extend("ModalTitle")
-modalTitle.validateProps = tModule.strictInterface({
-	title = tModule.string,
-	position = tModule.optional(tModule.UDim2),
-	anchor = tModule.optional(tModule.Vector2),
-	closeButtonIcon = tModule.optional(closeButtonIconModule.isEnumValue),
-	onCloseClicked = tModule.optional(tModule.callback),
-	titleBackgroundImageProps = tModule.optional(tModule.strictInterface({
-		image = tModule.string,
-		imageHeight = tModule.number,
-		text = tModule.optional(tModule.string)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Core = Parent1.Core
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local CryoModule = require(Parent2.Cryo)
+local ImagesModule = require(Parent.ImageSet.Images)
+local ImageSetComponentModule = require(Core.ImageSet.ImageSetComponent)
+local ControllableModule = require(Core.Control.Controllable)
+local GenericTextLabelModule = require(Core.Text.GenericTextLabel.GenericTextLabel)
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local CloseButtonIconModule = require(script.Parent.Enum.CloseButtonIcon)
+local ModalTitle = RoactModule.PureComponent:extend("ModalTitle")
+ModalTitle.validateProps = TModule.strictInterface({
+	title = TModule.string,
+	position = TModule.optional(TModule.UDim2),
+	anchor = TModule.optional(TModule.Vector2),
+	closeButtonIcon = TModule.optional(CloseButtonIconModule.isEnumValue),
+	onCloseClicked = TModule.optional(TModule.callback),
+	titleBackgroundImageProps = TModule.optional(TModule.strictInterface({
+		image = TModule.string,
+		imageHeight = TModule.number,
+		text = TModule.optional(TModule.string)
 	})),
-	onTitleSizeChanged = tModule.optional(tModule.callback)
+	onTitleSizeChanged = TModule.optional(TModule.callback)
 })
-modalTitle.defaultProps = {
+ModalTitle.defaultProps = {
 	title = "",
 	position = UDim2.new(0.5, 0, 0, 0),
 	anchor = Vector2.new(0.5, 0),
-	closeButtonIcon = closeButtonIconModule.Close
+	closeButtonIcon = CloseButtonIconModule.Close
 }
 
-function modalTitle.GetHeight(_)
+function ModalTitle:GetHeight(): number --[[ Line: 53 ]]
 	return 48
 end
 
-local function _(p1)
-	-- upvalues: closeButtonIconModule (ref)
-	return if p1 == closeButtonIconModule.Close then "icons/navigation/close" elseif p1 == closeButtonIconModule.Back then "icons/actions/cycleLeft" else nil
+local function _(Back) --[[ Line: 57 | Named "getCloseButtonIcon" ]]
+	-- upvalues: CloseButtonIconModule (copy)
+	return if Back == CloseButtonIconModule.Close then "icons/navigation/close" elseif Back == CloseButtonIconModule.Back then "icons/actions/cycleLeft" else nil
 end
 
-local function renderBackgroundImage(value, p1, p2)
-	-- upvalues: cryoModule (ref), roactModule (ref), genericTextLabelModule (ref), imageSetComponentModule (ref)
-	local text = value.text
-	local var1 = text and #text > 0
-	local var2 = text and #text > 0
-	local clampedValue = math.clamp(value.imageHeight, 48, 261)
+local function renderBackgroundImage(TitleBackgroundImageProps, p1, JoinResult) --[[ Line: 67 ]]
+	-- upvalues: CryoModule (copy), RoactModule (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy)
+	local Text = TitleBackgroundImageProps.text
+	local v1: boolean = Text and #Text > 0
+	local v2: boolean = Text and #Text > 0
+	local ClampedValue = math.clamp(TitleBackgroundImageProps.imageHeight, 48, 261)
 	
-	if var1 then
-		clampedValue += 8
-		p2 = cryoModule.Dictionary.join(p2, {
-			UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
+	if v1 then
+		ClampedValue += 8
+		JoinResult = CryoModule.Dictionary.join(JoinResult, {
+			UICorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 		})
 	end
-	if text and #text > 0 then
-		p2 = cryoModule.Dictionary.join(p2, {
-			BackgroundText = roactModule.createElement(genericTextLabelModule, {
+	if Text and #Text > 0 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, {
+			BackgroundText = RoactModule.createElement(GenericTextLabelModule, {
 				RichText = true,
 				ZIndex = 2,
 				Size = UDim2.new(1, 0, 1, -56),
@@ -64,20 +64,20 @@ local function renderBackgroundImage(value, p1, p2)
 				Position = UDim2.new(0.5, 0, 0, 48),
 				fontStyle = p1.Font.Body,
 				colorStyle = p1.Theme.TextEmphasis,
-				Text = text,
+				Text = Text,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			})
 		})
 	end
-	if var2 then
-		p2 = cryoModule.Dictionary.join(p2, {
-			BackgroundTextShadow = roactModule.createElement("Frame", {
+	if v2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, {
+			BackgroundTextShadow = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				ZIndex = 1,
-				Size = UDim2.new(1, 0, 1, if var1 then -8 else 0),
+				Size = UDim2.new(1, 0, 1, if v1 then -8 else 0),
 				Position = UDim2.new(0, 0, 0, 0)
 			}, {
-				UIGradient = roactModule.createElement("UIGradient", {
+				UIGradient = RoactModule.createElement("UIGradient", {
 					Rotation = 90,
 					Color = ColorSequence.new(Color3.new(0, 0, 0)),
 					Transparency = NumberSequence.new({
@@ -89,116 +89,110 @@ local function renderBackgroundImage(value, p1, p2)
 			})
 		})
 	end
-	local var3 = roactModule.createElement(imageSetComponentModule.Label, {
+	local Element = RoactModule.createElement(ImageSetComponentModule.Label, {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(0, 0),
-		Size = UDim2.new(1, 0, 0, clampedValue),
+		Size = UDim2.new(1, 0, 0, ClampedValue),
 		Position = UDim2.new(0, 0, 0, 0),
 		ScaleType = Enum.ScaleType.Crop,
-		Image = value.image,
+		Image = TitleBackgroundImageProps.image,
 		ImageColor3 = Color3.fromRGB(255, 255, 255)
-	}, p2)
+	}, JoinResult)
 	
-	if var1 then
-		var3 = roactModule.createElement("Frame", {
+	if v1 then
+		Element = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Size = UDim2.new(1, 0, 0, clampedValue - 8),
+			Size = UDim2.new(1, 0, 0, ClampedValue - 8),
 			Position = UDim2.new(0.5, 0, 0.5, 0)
-		}, { TitleBackground = var3 })
+		}, { TitleBackground = Element })
 	end
-	return var3
+	return Element
 end
 
-function modalTitle.render(p1)
-	-- upvalues: withStyleModule (ref), roactModule (ref), controllableModule (ref), imageSetComponentModule (ref), imagesModule (ref), closeButtonIconModule (ref), genericTextLabelModule (ref), renderBackgroundImage (ref)
-	local titleBackgroundImageProps = p1.props.titleBackgroundImageProps
+function ModalTitle.render(p1) --[[ Line: 147 ]]
+	-- upvalues: WithStyleModule (copy), RoactModule (copy), ControllableModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), CloseButtonIconModule (copy), GenericTextLabelModule (copy), renderBackgroundImage (copy)
+	local TitleBackgroundImageProps = p1.props.titleBackgroundImageProps
 	
-	return withStyleModule(function(p2)
-		-- upvalues: roactModule (copy), p1 (ref), controllableModule (copy), imageSetComponentModule (copy), imagesModule (copy), closeButtonIconModule (copy), genericTextLabelModule (copy), titleBackgroundImageProps (ref), renderBackgroundImage (copy)
-		local createElement_1
-		local font = p2.Font
-		local theme = p2.Theme
-		local var1 = font.BaseSize * font.Header1.RelativeSize
-		local createElement = roactModule.createElement
-		local var2 = "Frame"
-		local t = {
+	return WithStyleModule(function(p2) --[[ Line: 150 ]]
+		-- upvalues: RoactModule (upval), p1 (copy), ControllableModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), CloseButtonIconModule (upval), GenericTextLabelModule (upval), TitleBackgroundImageProps (copy), renderBackgroundImage (upval)
+		local _Font = p2.Font
+		local Theme = p2.Theme
+		local ScaledBaseSize = _Font.BaseSize * _Font.Header1.RelativeSize
+		local CreateElementFunction = RoactModule.createElement
+		local v1 = "Frame"
+		local config = {
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 48),
 			BackgroundTransparency = 1,
-			[roactModule.Change.AbsoluteSize] = p1.props.onTitleSizeChanged
+			[RoactModule.Change.AbsoluteSize] = p1.props.onTitleSizeChanged
 		}
-		local t_1 = {}
+		local t = {}
+		local Element = nil
 		
 		if p1.props.onCloseClicked then
-			createElement_1 = roactModule.createElement
-			local var3 = controllableModule
-			local t_2 = {}
-			local t_3 = {
-				component = imageSetComponentModule.Button,
-				props = {
-					BackgroundTransparency = 1,
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = UDim2.new(0, 32, 0.5, 0),
-					Size = UDim2.new(0, 48, 0, 48),
-					[roactModule.Event.Activated] = p1.props.onCloseClicked
-				}
-			}
-			local t_4 = {}
-			local createElement_2 = roactModule.createElement
-			local label = imageSetComponentModule.Label
-			local t_5 = {
-				BackgroundTransparency = 1,
-				Size = UDim2.new(0, 36, 0, 36)
-			}
-			local closeButtonIcon = p1.props.closeButtonIcon
-			t_5.Image = imagesModule[if closeButtonIcon == closeButtonIconModule.Close then "icons/navigation/close" elseif closeButtonIcon == closeButtonIconModule.Back then "icons/actions/cycleLeft" else nil]
-			t_5.ImageColor3 = theme.IconEmphasis.Color
-			t_5.ImageTransparency = theme.IconEmphasis.Transparency
-			t_5.AnchorPoint = Vector2.new(0.5, 0.5)
-			t_5.Position = UDim2.new(0.5, 0, 0.5, 0)
-			t_4.InputFillImage = createElement_2(label, t_5)
-			t_3.children = t_4
-			t_2.controlComponent = t_3
-			
-			function t_2.onStateChanged(...) end
-			
-			createElement_1 = createElement_1(var3, t_2) or nil
+			local CloseButtonIcon = p1.props.closeButtonIcon
+			Element = RoactModule.createElement(ControllableModule, {
+				controlComponent = {
+					component = ImageSetComponentModule.Button,
+					props = {
+						BackgroundTransparency = 1,
+						AnchorPoint = Vector2.new(0.5, 0.5),
+						Position = UDim2.new(0, 32, 0.5, 0),
+						Size = UDim2.new(0, 48, 0, 48),
+						[RoactModule.Event.Activated] = p1.props.onCloseClicked
+					},
+					children = {
+						InputFillImage = RoactModule.createElement(ImageSetComponentModule.Label, {
+							BackgroundTransparency = 1,
+							Size = UDim2.new(0, 36, 0, 36),
+							Image = ImagesModule[if CloseButtonIcon == CloseButtonIconModule.Close then "icons/navigation/close" elseif CloseButtonIcon == CloseButtonIconModule.Back then "icons/actions/cycleLeft" else nil],
+							ImageColor3 = Theme.IconEmphasis.Color,
+							ImageTransparency = Theme.IconEmphasis.Transparency,
+							AnchorPoint = Vector2.new(0.5, 0.5),
+							Position = UDim2.new(0.5, 0, 0.5, 0)
+						})
+					}
+				},
+				onStateChanged = function(...) --[[ Line: 184 ]] end
+			}) or nil
+		else
+			Element = nil
 		end
-		t_1.CloseButton = createElement_1
-		t_1.Title = roactModule.createElement(genericTextLabelModule, {
+		t.CloseButton = Element
+		t.Title = RoactModule.createElement(GenericTextLabelModule, {
 			LayoutOrder = 1,
 			TextWrapped = true,
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.new(0.5, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, -104, 1, 0),
-			colorStyle = theme.TextEmphasis,
-			fontStyle = font.Header1,
+			colorStyle = Theme.TextEmphasis,
+			fontStyle = _Font.Header1,
 			Text = p1.props.title,
-			TextSize = var1,
+			TextSize = ScaledBaseSize,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}, {
-			Padding = roactModule.createElement("UIPadding", {
+			Padding = RoactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 8),
 				PaddingBottom = UDim.new(0, 8)
 			})
 		})
-		t_1.Underline = not titleBackgroundImageProps and roactModule.createElement("Frame", {
+		t.Underline = not TitleBackgroundImageProps and RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			LayoutOrder = 2,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 0, 1, 0),
-			BackgroundColor3 = theme.Divider.Color,
-			BackgroundTransparency = theme.Divider.Transparency,
+			BackgroundColor3 = Theme.Divider.Color,
+			BackgroundTransparency = Theme.Divider.Transparency,
 			Size = UDim2.new(1, 0, 0, 1)
 		})
-		createElement = createElement(var2, t, t_1)
+		local Element1 = CreateElementFunction(v1, config, t)
 		
-		return if titleBackgroundImageProps then renderBackgroundImage(titleBackgroundImageProps, p2, { TitleText = createElement }) else createElement
+		return if TitleBackgroundImageProps then renderBackgroundImage(TitleBackgroundImageProps, p2, { TitleText = Element1 }) else Element1
 	end)
 end
 
-return modalTitle
+return ModalTitle

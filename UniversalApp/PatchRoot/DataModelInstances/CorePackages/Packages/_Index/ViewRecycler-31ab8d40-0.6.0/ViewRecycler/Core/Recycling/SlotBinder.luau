@@ -1,215 +1,214 @@
 ﻿local _ = require(script:FindFirstAncestor("ViewRecycler").Core.Recycling.RecyclingScope)
-local frozen = table.freeze({})
-local frozen_1 = table.freeze({ entered = frozen, updated = frozen, departed = frozen })
+local Frozen = table.freeze({})
+local Frozen1 = table.freeze({ entered = Frozen, updated = Frozen, departed = Frozen })
 
-return function(p1)
-	-- upvalues: frozen_1 (ref), frozen (ref)
-	local recyclingScope = p1.recyclingScope
-	local prepareDesiredAssignment = p1.prepareDesiredAssignment
-	local t = {}
-	local t_1 = {}
-	local var1 = false
-	local t_2 = {}
-	local t_3 = {}
-	local t_4 = {}
+return function(p1) --[[ Line: 66 | Named "createSlotBinder" ]]
+	-- upvalues: Frozen1 (copy), Frozen (copy)
+	local RecyclingScope = p1.recyclingScope
+	local PrepareDesiredAssignmentFunction = p1.prepareDesiredAssignment
+	local Tbl = {}
+	local Frozens = {}
+	local Flag = false
+	local Tbl1 = {}
+	local Tbl2 = {}
+	local Tbl3 = {}
 	
-	local function makeAssignment(value, p2)
-		-- upvalues: prepareDesiredAssignment (ref)
-		if prepareDesiredAssignment == nil then
-			return table.freeze({ key = value, value = p2 })
+	local function makeAssignment(Key, Value) --[[ Line: 77 ]]
+		-- upvalues: PrepareDesiredAssignmentFunction (copy)
+		if PrepareDesiredAssignmentFunction == nil then
+			return table.freeze({ key = Key, value = Value })
+		else
+			local PrepareDesiredAssignmentResult = PrepareDesiredAssignmentFunction({ key = Key, value = Value })
+			
+			return table.freeze({
+				key = PrepareDesiredAssignmentResult.key,
+				value = PrepareDesiredAssignmentResult.value
+			})
 		end
-		local var2 = prepareDesiredAssignment({ key = value, value = p2 })
-		
-		return table.freeze({ key = var2.key, value = var2.value })
 	end
 	
-	local function _(p2)
-		-- upvalues: t_1 (ref)
-		local var2 = t_1[p2]
+	local function _(ViewType) --[[ Line: 85 | Named "requestFor" ]]
+		-- upvalues: Frozens (copy)
+		local Frozen = Frozens[ViewType]
 		
-		if var2 == nil then
-			var2 = table.freeze({ viewType = p2 })
-			t_1[p2] = var2
+		if Frozen == nil then
+			Frozen = table.freeze({ viewType = ViewType })
+			Frozens[ViewType] = Frozen
 		end
-		return var2
+		return Frozen
 	end
 	
-	local function apply(p2, p3)
-		-- upvalues: var1 (write), t (ref), t_2 (ref), t_3 (ref), t_1 (ref), frozen_1 (copy), frozen (copy), recyclingScope (ref), makeAssignment (ref), t_4 (ref)
-		assert(not var1, "SlotBinder: cannot apply after destruction")
-		local t_5 = {}
-		local var2 = false
+	local function apply(List1, List2) --[[ Line: 94 ]]
+		-- upvalues: Flag (ref), Tbl (copy), Tbl1 (copy), Tbl2 (copy), Frozens (copy), Frozen1 (upval), Frozen (upval), RecyclingScope (copy), makeAssignment (copy), Tbl3 (copy)
+		assert(not Flag, "SlotBinder: cannot apply after destruction")
+		local List3 = {}
+		local Flag1 = false
 		
-		for i, v in p2 do
-			local var3 = t[v]
+		for _, value in List1 do
+			local Entry = Tbl[value]
 			
-			if var3 ~= nil then
-				table.insert(t_5, var3.view)
-				t_2[v] = true
-				var2 = true
+			if Entry ~= nil then
+				table.insert(List3, Entry.view)
+				Tbl1[value] = true
+				Flag1 = true
 			end
 		end
-		local v_3
-		local t_6 = {}
-		local t_7 = {}
-		local var4 = nil
-		local var5 = #p3 > 1
-		
-		for i_1, v_1 in p3 do
-			local key = v_1.key
+		local Requests = {}
+		local List4 = {}
+		local List = nil
+		local v1 = #List2 > 1
+		for _, value1 in List2 do
+			local Key = value1.key
 			
-			if var5 then
-				if t_3[key] then
-					table.clear(t_3)
-					table.clear(t_2)
-					error(`Virtualizer: duplicate key "{key}"`, 0)
+			if v1 then
+				if Tbl2[Key] then
+					table.clear(Tbl2)
+					table.clear(Tbl1)
+					error(`Virtualizer: duplicate key "{Key}"`, 0)
 				end
-				t_3[key] = true
+				Tbl2[Key] = true
 			end
-			local var6 = t[key]
-			v_3 = false
+			local Entry = Tbl[Key]
+			local Inverted: boolean = Entry ~= nil and not (Flag1 and Tbl1[Key])
 			
-			if var6 ~= nil then
-				v_3 = not (var2 and t_2[key])
-			end
-			if not v_3 or var6.viewType ~= v_1.viewType then
-				if v_3 then
-					table.insert(t_5, var6.view)
+			if not Inverted or Entry.viewType ~= value1.viewType then
+				if Inverted then
+					table.insert(List3, Entry.view)
 				end
-				table.insert(t_7, v_1)
-				local viewType = v_1.viewType
-				local var7 = t_1[viewType]
+				table.insert(List4, value1)
+				local ViewType = value1.viewType
+				local Frozen2 = Frozens[ViewType]
 				
-				if var7 == nil then
-					var7 = table.freeze({ viewType = viewType })
-					t_1[viewType] = var7
+				if Frozen2 == nil then
+					Frozen2 = table.freeze({ viewType = ViewType })
+					Frozens[ViewType] = Frozen2
 				end
-				table.insert(t_6, var7)
-			elseif v_1.changed or var6.value ~= v_1.value then
-				var4 = var4 or {}
-				table.insert(var4, v_1)
+				table.insert(Requests, Frozen2)
+			elseif value1.changed or Entry.value ~= value1.value then
+				List = List or {}
+				table.insert(List, value1)
 			end
 		end
-		if var5 then
-			table.clear(t_3)
+		if v1 then
+			table.clear(Tbl2)
 		end
-		if #t_5 == 0 and #t_6 == 0 and var4 == nil then
-			return frozen_1
+		if #List3 == 0 and #Requests == 0 and List == nil then
+			return Frozen1
 		end
-		local var8 = frozen
+		local Acquired = Frozen
 		
-		if #t_5 > 0 or #t_6 > 0 then
-			local ok, status = pcall(recyclingScope.bind, { releases = t_5, requests = t_6 })
+		if #List3 > 0 or #Requests > 0 then
+			local Success, Result = pcall(RecyclingScope.bind, { releases = List3, requests = Requests })
 			
-			if not ok then
-				table.clear(t_2)
-				error(status, 0)
+			if not Success then
+				table.clear(Tbl1)
+				error(Result, 0)
 			end
-			var8 = status.acquired
+			Acquired = Result.acquired
 		end
-		if var2 then
-			for v_1 in t_2 do
-				t[v_1] = nil
+		if Flag1 then
+			for i in Tbl1 do
+				Tbl[i] = nil
 			end
-			table.clear(t_2)
+			table.clear(Tbl1)
 		end
-		local var9 = #t_5 > 0 and #t_7 > 0
-		
-		for i_3, v_2 in t_7 do
-			v_3 = var8[i_3]
-			v_2.view = v_3
-			v_2.assignment = makeAssignment(v_2.key, v_2.value)
-			t[v_2.key] = v_2
+		local v2: boolean = #List3 > 0 and #List4 > 0
+		for i1, value2 in List4 do
+			local AcquiredEntry = Acquired[i1]
+			value2.view = AcquiredEntry
+			value2.assignment = makeAssignment(value2.key, value2.value)
+			Tbl[value2.key] = value2
 			
-			if var9 then
-				t_4[v_3] = true
+			if v2 then
+				Tbl3[AcquiredEntry] = true
 			end
 		end
-		local var10 = frozen
+		local Updated = Frozen
 		
-		if var4 ~= nil then
-			var10 = table.create(#var4)
+		if List ~= nil then
+			Updated = table.create(#List)
 			
-			for i_4, v_3 in var4 do
-				local key = t[v_3.key]
-				key.value = v_3.value
-				key.assignment = makeAssignment(v_3.key, v_3.value)
-				var10[i_4] = key
+			for i2, value3 in List do
+				local Entry = Tbl[value3.key]
+				Entry.value = value3.value
+				Entry.assignment = makeAssignment(value3.key, value3.value)
+				Updated[i2] = Entry
 			end
 		end
-		local var11 = frozen
+		local Departed = Frozen
 		
-		if #t_5 > 0 then
-			if var9 then
-				var11 = {}
+		if #List3 > 0 then
+			if v2 then
+				Departed = {}
 				
-				for v_3, v_4 in t_5 do
-					if not t_4[v_4] then
-						table.insert(var11, v_4)
+				for _, value4 in List3 do
+					if not Tbl3[value4] then
+						table.insert(Departed, value4)
 					end
 				end
-				table.clear(t_4)
+				table.clear(Tbl3)
 			else
-				var11 = t_5
+				Departed = List3
 			end
 		end
 		return {
-			entered = if #t_7 == 0 then frozen else t_7,
-			updated = var10,
-			departed = var11
+			entered = if #List4 == 0 then Frozen else List4,
+			updated = Updated,
+			departed = Departed
 		}
 	end
 	
-	local function releaseAll()
-		-- upvalues: t (ref), recyclingScope (ref)
-		local t_1 = {}
+	local function releaseAll() --[[ Line: 207 ]]
+		-- upvalues: Tbl (copy), RecyclingScope (copy)
+		local Releases = {}
 		
-		for i, v in t do
-			table.insert(t_1, v.view)
+		for _, value in Tbl do
+			table.insert(Releases, value.view)
 		end
-		table.clear(t)
+		table.clear(Tbl)
 		
-		if #t_1 > 0 then
-			recyclingScope.bind({ releases = t_1, requests = {} })
+		if #Releases > 0 then
+			RecyclingScope.bind({ releases = Releases, requests = {} })
 		end
-		return t_1
+		return Releases
 	end
 	
 	return {
 		apply = apply,
-		sync = function(p4)
-			-- upvalues: t (ref), apply (ref)
-			local t_1 = {}
+		sync = function(List) --[[ Line: 221 ]]
+			-- upvalues: Tbl (copy), apply (copy)
+			local t = {}
 			
-			for i, v in p4 do
-				t_1[v.key] = true
+			for _, value in List do
+				t[value.key] = true
 			end
-			local t_2 = {}
+			local List1 = {}
 			
-			for i_1 in t do
-				if not t_1[i_1] then
-					table.insert(t_2, i_1)
+			for i in Tbl do
+				if not t[i] then
+					table.insert(List1, i)
 				end
 			end
-			return apply(t_2, p4)
+			return (apply(List1, List))
 		end,
-		get = function(p5)
-			-- upvalues: t (ref)
-			return t[p5]
+		get = function(p2) --[[ Line: 234 ]]
+			-- upvalues: Tbl (copy)
+			return Tbl[p2]
 		end,
-		releaseAll = function()
-			-- upvalues: var1 (write), releaseAll (ref)
-			assert(not var1, "SlotBinder: cannot release after destruction")
+		releaseAll = function() --[[ Line: 237 ]]
+			-- upvalues: Flag (ref), releaseAll (copy)
+			assert(not Flag, "SlotBinder: cannot release after destruction")
 			
-			return releaseAll()
+			return (releaseAll())
 		end,
-		destroy = function()
-			-- upvalues: var1 (write), releaseAll (ref)
-			if var1 then
+		destroy = function() --[[ Line: 241 ]]
+			-- upvalues: Flag (ref), releaseAll (copy)
+			if not Flag then
+				releaseAll()
+				Flag = true
+				
 				return
 			end
-			releaseAll()
-			var1 = true
 		end
 	}
 end

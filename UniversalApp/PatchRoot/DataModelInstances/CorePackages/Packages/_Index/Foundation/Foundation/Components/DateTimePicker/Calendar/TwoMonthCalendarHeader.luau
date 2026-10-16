@@ -1,50 +1,50 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local icon = require(parent.BuilderIcons).Icon
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local Icon = require(Parent.BuilderIcons).Icon
 local _ = require(script.Parent.Parent.Utilities.DateTimeCalendarViewUtilities)
-local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
-local buttonVariantModule = require(foundation.Enums.ButtonVariant)
-local iconButtonModule = require(foundation.Components.IconButton)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
+local DateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
+local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
+local IconButtonModule = require(Foundation.Components.IconButton)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
 
-return function(p1)
-	-- upvalues: reactModule (ref), viewModule (ref), iconButtonModule (ref), icon (ref), inputSizeModule (ref), buttonVariantModule (ref), textModule (ref), dateTimeUtilitiesModule (ref)
-	return reactModule.createElement(viewModule, {
+return function(p1) --[[ Line: 28 | Named "TwoMonthCalendarHeader" ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), IconButtonModule (copy), Icon (copy), InputSizeModule (copy), ButtonVariantModule (copy), TextModule (copy), DateTimeUtilitiesModule (copy)
+	return ReactModule.createElement(ViewModule, {
 		LayoutOrder = 1,
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-x-large padding-y-medium"
 	}, {
-		PreviousMonthButton = reactModule.createElement(iconButtonModule, {
+		PreviousMonthButton = ReactModule.createElement(IconButtonModule, {
 			isCircular = false,
 			LayoutOrder = 1,
-			icon = icon.ChevronSmallLeft,
+			icon = Icon.ChevronSmallLeft,
 			onActivated = p1.onPreviousMonth,
-			size = inputSizeModule.Small,
+			size = InputSizeModule.Small,
 			testId = `{p1.testId}--previous-month-button`,
-			variant = buttonVariantModule.Utility
+			variant = ButtonVariantModule.Utility
 		}),
-		FirstMonthLabel = reactModule.createElement(textModule, {
+		FirstMonthLabel = ReactModule.createElement(TextModule, {
 			LayoutOrder = 2,
 			tag = "grow auto-y text-title-small text-align-x-center",
 			testId = `{p1.testId}--first-month-label`,
-			Text = `{dateTimeUtilitiesModule.monthMap[p1.currViewDate.month]} {p1.currViewDate.year}`
+			Text = `{DateTimeUtilitiesModule.monthMap[p1.currViewDate.month]} {p1.currViewDate.year}`
 		}),
-		SecondMonthLabel = reactModule.createElement(textModule, {
+		SecondMonthLabel = ReactModule.createElement(TextModule, {
 			LayoutOrder = 3,
 			tag = "grow auto-y text-title-small text-align-x-center",
 			testId = `{p1.testId}--second-month-label`,
-			Text = `{dateTimeUtilitiesModule.monthMap[p1.secondMonth]} {p1.secondYear}`
+			Text = `{DateTimeUtilitiesModule.monthMap[p1.secondMonth]} {p1.secondYear}`
 		}),
-		NextMonthButton = reactModule.createElement(iconButtonModule, {
+		NextMonthButton = ReactModule.createElement(IconButtonModule, {
 			isCircular = false,
 			LayoutOrder = 4,
-			icon = icon.ChevronSmallRight,
+			icon = Icon.ChevronSmallRight,
 			onActivated = p1.onNextMonth,
-			size = inputSizeModule.Small,
+			size = InputSizeModule.Small,
 			testId = `{p1.testId}--next-month-button`,
-			variant = buttonVariantModule.Utility
+			variant = ButtonVariantModule.Utility
 		})
 	})
 end

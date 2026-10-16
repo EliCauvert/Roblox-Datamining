@@ -1,98 +1,104 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local _ = require(viewRecycler.Core.Types)
-local translatedDataSourceModule = require(script.Parent.TranslatedDataSource)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local _ = require(ViewRecycler.Core.Types)
+local TranslatedDataSourceModule = require(script.Parent.TranslatedDataSource)
 
-local function _(p1)
-	local list = table.create(#p1)
+local function _(List) --[[ Line: 17 | Named "reversedKeys" ]]
+	local Buffer = table.create(#List)
 	
-	for i, v in p1 do
-		list[#p1 - i + 1] = v
+	for i, value in List do
+		Buffer[#List - i + 1] = value
 	end
-	return list
+	return Buffer
 end
 
-return function(p2)
-	-- upvalues: translatedDataSourceModule (ref), dataSourceChangeTypeModule (ref)
-	return translatedDataSourceModule(p2.getItemCount, function(p3)
-		-- upvalues: p2 (ref)
-		return p2.getItem(p2.getItemCount() - p3 + 1)
-	end, function(p3)
-		-- upvalues: p2 (ref)
-		return p2.getItemKey(p2.getItemCount() - p3 + 1)
-	end, function(p3)
-		-- upvalues: p2 (ref), dataSourceChangeTypeModule (copy)
-		return p2.subscribe(function(p4)
-			-- upvalues: dataSourceChangeTypeModule (copy), p3 (ref)
-			local previousItemCount = p4.previousItemCount
-			local t = {}
+return function(p1) --[[ Line: 25 | Named "createReverseDataSource" ]]
+	-- upvalues: TranslatedDataSourceModule (copy), DataSourceChangeTypeModule (copy)
+	return TranslatedDataSourceModule(p1.getItemCount, function(p2) --[[ Line: 26 ]]
+		-- upvalues: p1 (copy)
+		return p1.getItem(p1.getItemCount() - p2 + 1)
+	end, function(p2) --[[ Line: 28 ]]
+		-- upvalues: p1 (copy)
+		return p1.getItemKey(p1.getItemCount() - p2 + 1)
+	end, function(Callback) --[[ Line: 30 ]]
+		-- upvalues: p1 (copy), DataSourceChangeTypeModule (upval)
+		return p1.subscribe(function(p2) --[[ Line: 31 ]]
+			-- upvalues: DataSourceChangeTypeModule (upval), Callback (copy)
+			local PreviousItemCount = p2.previousItemCount
+			local List = {}
 			
-			for i, v in p4.changes do
-				if v.type ~= dataSourceChangeTypeModule.Insert then
-					if v.type == dataSourceChangeTypeModule.Remove then
-						local t_1 = {
-							type = dataSourceChangeTypeModule.Remove,
-							index = previousItemCount - v.index - #v.keys + 2
-						}
-						local keys = v.keys
-						local list = table.create(#keys)
-						
-						for i_1, v_1 in keys do
-							list[#keys - i_1 + 1] = v_1
-						end
-						t_1.keys = list
-						table.insert(t, t_1)
-						previousItemCount -= #v.keys
-					elseif v.type == dataSourceChangeTypeModule.Update then
-						table.insert(t, {
-							type = dataSourceChangeTypeModule.Update,
-							keys = table.clone(v.keys)
+			for _, change in p2.changes do
+				if change.type == DataSourceChangeTypeModule.Insert then
+					local config = {
+						type = DataSourceChangeTypeModule.Insert,
+						index = PreviousItemCount - change.index + 2
+					}
+					local Keys = change.keys
+					local Buffer = table.create(#Keys)
+					
+					for i, key in Keys do
+						Buffer[#Keys - i + 1] = key
+					end
+					config.keys = Buffer
+					table.insert(List, config)
+					PreviousItemCount += #change.keys
+					continue
+				elseif change.type == DataSourceChangeTypeModule.Remove then
+					local config = {
+						type = DataSourceChangeTypeModule.Remove,
+						index = PreviousItemCount - change.index - #change.keys + 2
+					}
+					local Keys = change.keys
+					local Buffer = table.create(#Keys)
+					
+					for i1, key1 in Keys do
+						Buffer[#Keys - i1 + 1] = key1
+					end
+					config.keys = Buffer
+					table.insert(List, config)
+					PreviousItemCount -= #change.keys
+					continue
+				else
+					if change.type == DataSourceChangeTypeModule.Update then
+						table.insert(List, {
+							type = DataSourceChangeTypeModule.Update,
+							keys = table.clone(change.keys)
 						})
-					elseif v.type == dataSourceChangeTypeModule.Move then
-						table.insert(t, {
-							type = dataSourceChangeTypeModule.Move,
-							fromIndex = previousItemCount - v.fromIndex + 1,
-							toIndex = previousItemCount - v.toIndex + 1,
-							key = v.key
+						continue
+					elseif change.type == DataSourceChangeTypeModule.Move then
+						table.insert(List, {
+							type = DataSourceChangeTypeModule.Move,
+							fromIndex = PreviousItemCount - change.fromIndex + 1,
+							toIndex = PreviousItemCount - change.toIndex + 1,
+							key = change.key
 						})
-					elseif v.type == dataSourceChangeTypeModule.Reorder then
-						local keys = v.keys
-						local list = table.create(#keys)
+						continue
+					elseif change.type == DataSourceChangeTypeModule.Reorder then
+						local Keys = change.keys
+						local Buffer = table.create(#Keys)
 						
-						for i_3, v_3 in keys do
-							list[#keys - i_3 + 1] = v_3
+						for i2, key2 in Keys do
+							Buffer[#Keys - i2 + 1] = key2
 						end
-						table.insert(t, { type = dataSourceChangeTypeModule.Reorder, keys = list })
-					elseif v.type == dataSourceChangeTypeModule.Reset then
-						local keys = v.keys
-						local list = table.create(#keys)
+						table.insert(List, { type = DataSourceChangeTypeModule.Reorder, keys = Buffer })
+						continue
+					elseif change.type == DataSourceChangeTypeModule.Reset then
+						local Keys = change.keys
+						local Buffer = table.create(#Keys)
 						
-						for i_3, v_3 in keys do
-							list[#keys - i_3 + 1] = v_3
+						for i3, key3 in Keys do
+							Buffer[#Keys - i3 + 1] = key3
 						end
-						local var1 = list
-						table.insert(t, { type = dataSourceChangeTypeModule.Reset, keys = var1 })
-						previousItemCount = #var1
+						table.insert(List, { type = DataSourceChangeTypeModule.Reset, keys = Buffer })
+						PreviousItemCount = #Buffer
+						continue
 					end
 				end
-				local t_1 = {
-					type = dataSourceChangeTypeModule.Insert,
-					index = previousItemCount - v.index + 2
-				}
-				local keys = v.keys
-				local list = table.create(#keys)
-				
-				for i_1, v_1 in keys do
-					list[#keys - i_1 + 1] = v_1
-				end
-				t_1.keys = list
-				table.insert(t, t_1)
-				previousItemCount += #v.keys
 			end
-			p3({
-				changes = t,
-				previousItemCount = p4.previousItemCount,
-				itemCount = p4.itemCount
+			Callback({
+				changes = List,
+				previousItemCount = p2.previousItemCount,
+				itemCount = p2.itemCount
 			})
 		end)
 	end)

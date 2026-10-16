@@ -1,28 +1,33 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local popoverContextModule = require(script.Parent.PopoverContext)
-local _ = require(foundation.Utility.Plugin.StudioUri)
-local _ = require(foundation.Components.Types)
-local t = { testId = "--foundation-popover" }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local PopoverContextModule = require(script.Parent.PopoverContext)
+local _ = require(Foundation.Utility.Plugin.StudioUri)
+local _ = require(Foundation.Components.Types)
+local config = { testId = "--foundation-popover" }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), popoverContextModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2, var3 = reactModule.useState(nil)
-	local var4, var5 = reactModule.useState(nil)
+return function(p1) --[[ Line: 25 | Named "Popover" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), PopoverContextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	
-	return reactModule.createElement(popoverContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), var3 (ref), var4 (ref), var5 (ref), var1 (ref)
+	return ReactModule.createElement(PopoverContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 30 ]]
+			-- upvalues: UseStateResult (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy)
 			return {
-				anchor = var2,
-				setAnchor = var3,
-				anchorUri = var4,
-				setAnchorUri = var5,
-				isOpen = var1.isOpen,
-				testId = var1.testId
+				anchor = UseStateResult,
+				setAnchor = UseStateResult2,
+				anchorUri = UseStateResult1,
+				setAnchorUri = UseStateResult2_1,
+				isOpen = WithDefaultsModuleResult.isOpen,
+				testId = WithDefaultsModuleResult.testId
 			}
-		end, { var2, var4, var1.isOpen, var1.testId })
-	}, var1.children)
+		end, {
+			UseStateResult,
+			UseStateResult1,
+			WithDefaultsModuleResult.isOpen,
+			WithDefaultsModuleResult.testId
+		})
+	}, WithDefaultsModuleResult.children)
 end

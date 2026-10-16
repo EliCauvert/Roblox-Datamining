@@ -1,29 +1,27 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local getNamedType = graphQLModule.getNamedType
-local isObjectType = graphQLModule.isObjectType
+﻿local Parent = script.Parent.Parent
+local GraphQLModule = require(Parent.GraphQL)
+local GetNamedTypeFunction = GraphQLModule.getNamedType
+local IsObjectTypeFunction = GraphQLModule.isObjectType
 local _ = require(script.Parent.Interfaces)
-local string = luauPolyfillModule.String
+local String = require(Parent.LuauPolyfill).String
 
-function t.forEachField(p1, p2)
-	-- upvalues: string (ref), getNamedType (ref), isObjectType (ref)
-	local typeMap = p1:getTypeMap()
-	
-	for i, v in typeMap do
-		local var1 = v[1]
-		local var2 = typeMap:get(var1)
+return {
+	forEachField = function(p1, Callback: (any, any, any) -> ()) --[[ Line: 25 ]]
+		-- upvalues: String (copy), GetNamedTypeFunction (copy), IsObjectTypeFunction (copy)
+		local TypeMap = p1:getTypeMap()
 		
-		if not string.startsWith(getNamedType(var2).name, "__") and isObjectType(var2) then
-			local fields = var2:getFields()
+		for _, value in TypeMap do
+			local v1 = value[1]
+			local GetResult = TypeMap:get(v1)
 			
-			for i_1, v_1 in fields do
-				local var3 = v_1[1]
-				p2(fields:get(var3), var1, var3)
+			if not String.startsWith(GetNamedTypeFunction(GetResult).name, "__") and IsObjectTypeFunction(GetResult) then
+				local Fields = GetResult:getFields()
+				
+				for _, field in Fields do
+					local v2 = field[1]
+					Callback(Fields:get(v2), v1, v2)
+				end
 			end
 		end
 	end
-end
-
-return t
+}

@@ -1,74 +1,74 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roduxModule = require(parent_1.Rodux)
-local llamaModule = require(parent_1.llama)
-local actions = parent.Actions
-local aliasUpdatedModule = require(actions.AliasUpdated)
-local aliasRemovedModule = require(actions.AliasRemoved)
-local receivedCanShowUserAliasModule = require(actions.ReceivedCanShowUserAlias)
-local _ = require(parent.RoduxAliasesTypes)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoduxModule = require(Parent1.Rodux)
+local LlamaModule = require(Parent1.llama)
+local Actions = Parent.Actions
+local AliasUpdatedModule = require(Actions.AliasUpdated)
+local AliasRemovedModule = require(Actions.AliasRemoved)
+local ReceivedCanShowUserAliasModule = require(Actions.ReceivedCanShowUserAlias)
+local _ = require(Parent.RoduxAliasesTypes)
 
-local function addUserIdsToState(p1, p2)
-	-- upvalues: llamaModule (ref)
-	return llamaModule.Dictionary.join(p1, p2)
+local function addUserIdsToState(p1, TargetUserTags) --[[ Line: 17 ]]
+	-- upvalues: LlamaModule (copy)
+	return LlamaModule.Dictionary.join(p1, TargetUserTags)
 end
 
-local function addUsersIdsToInternalState(p1, p2)
-	-- upvalues: llamaModule (ref)
-	return llamaModule.Dictionary.join(p1, {
-		_INTERNAL_HIDDEN_DATA = llamaModule.Dictionary.join(p1._INTERNAL_HIDDEN_DATA, p2)
+local function addUsersIdsToInternalState(p1, TargetUserTags) --[[ Line: 21 ]]
+	-- upvalues: LlamaModule (copy)
+	return LlamaModule.Dictionary.join(p1, {
+		_INTERNAL_HIDDEN_DATA = LlamaModule.Dictionary.join(p1._INTERNAL_HIDDEN_DATA, TargetUserTags)
 	})
 end
 
-local t = { ShowUserAlias = true }
+local config = { ShowUserAlias = true }
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref), aliasUpdatedModule (ref), addUserIdsToState (ref), addUsersIdsToInternalState (ref), aliasRemovedModule (ref), llamaModule (ref), receivedCanShowUserAliasModule (ref)
-	local aliasNetworking = p1.aliasNetworking
+return function(p1) --[[ Line: 33 ]]
+	-- upvalues: RoduxModule (copy), config (copy), AliasUpdatedModule (copy), addUserIdsToState (copy), addUsersIdsToInternalState (copy), AliasRemovedModule (copy), LlamaModule (copy), ReceivedCanShowUserAliasModule (copy)
+	local AliasNetworking = p1.aliasNetworking
 	
-	return roduxModule.createReducer(t, {
-		[aliasUpdatedModule.name] = function(p2, p3)
-			-- upvalues: addUserIdsToState (copy), addUsersIdsToInternalState (copy)
+	return RoduxModule.createReducer(config, {
+		[AliasUpdatedModule.name] = function(p2, p3) --[[ Line: 37 ]]
+			-- upvalues: addUserIdsToState (upval), addUsersIdsToInternalState (upval)
 			assert(type(p3.payload.userId) == "string", "Expected userId to be a string")
 			assert(type(p3.payload.newAlias) == "string", "Expected newAlias to be a string")
-			local t = { [p3.payload.userId] = p3.payload.newAlias }
+			local config = { [p3.payload.userId] = p3.payload.newAlias }
 			
-			return if p2.ShowUserAlias or p2.ShowUserAlias == nil then addUserIdsToState(p2, t) else addUsersIdsToInternalState(p2, t)
+			return if p2.ShowUserAlias or p2.ShowUserAlias == nil then addUserIdsToState(p2, config) else addUsersIdsToInternalState(p2, config)
 		end,
-		[aliasRemovedModule.name] = function(p2, p3)
-			-- upvalues: llamaModule (copy), addUserIdsToState (copy), addUsersIdsToInternalState (copy)
+		[AliasRemovedModule.name] = function(p2, p3) --[[ Line: 51 ]]
+			-- upvalues: LlamaModule (upval), addUserIdsToState (upval), addUsersIdsToInternalState (upval)
 			assert(type(p3.payload.userId) == "string", "Expected userId to be a string")
-			local t = { [p3.payload.userId] = llamaModule.None }
+			local config = { [p3.payload.userId] = LlamaModule.None }
 			
-			return if p2.ShowUserAlias or p2.ShowUserAlias == nil then addUserIdsToState(p2, t) else addUsersIdsToInternalState(p2, t)
+			return if p2.ShowUserAlias or p2.ShowUserAlias == nil then addUserIdsToState(p2, config) else addUsersIdsToInternalState(p2, config)
 		end,
-		[receivedCanShowUserAliasModule.name] = function(p2, p3)
-			-- upvalues: llamaModule (copy)
+		[ReceivedCanShowUserAliasModule.name] = function(p2, p3) --[[ Line: 64 ]]
+			-- upvalues: LlamaModule (upval)
 			assert(type(p3.payload.showUserAlias) == "boolean", "Expected showUserAlias to be a boolean")
 			
-			return if p3.payload.showUserAlias == p2.ShowUserAlias then p2 elseif p3.payload.showUserAlias then llamaModule.Dictionary.join(p2._INTERNAL_HIDDEN_DATA or {}, {
+			return if p3.payload.showUserAlias == p2.ShowUserAlias then p2 elseif p3.payload.showUserAlias then LlamaModule.Dictionary.join(p2._INTERNAL_HIDDEN_DATA or {}, {
 				ShowUserAlias = p3.payload.showUserAlias,
-				_INTERNAL_HIDDEN_DATA = llamaModule.None
+				_INTERNAL_HIDDEN_DATA = LlamaModule.None
 			}) else {
 				ShowUserAlias = p3.payload.showUserAlias,
-				_INTERNAL_HIDDEN_DATA = llamaModule.Dictionary.join(p2, {
-					ShowUserAlias = llamaModule.None,
-					_INTERNAL_HIDDEN_DATA = llamaModule.None
+				_INTERNAL_HIDDEN_DATA = LlamaModule.Dictionary.join(p2, {
+					ShowUserAlias = LlamaModule.None,
+					_INTERNAL_HIDDEN_DATA = LlamaModule.None
 				})
 			}
 		end,
-		[aliasNetworking.GetTagsFromUserIds.Succeeded.name] = function(p2, p3)
-			-- upvalues: addUserIdsToState (copy), addUsersIdsToInternalState (copy)
-			local t = {}
+		[AliasNetworking.GetTagsFromUserIds.Succeeded.name] = function(p2, p3) --[[ Line: 88 ]]
+			-- upvalues: addUserIdsToState (upval), addUsersIdsToInternalState (upval)
+			local TargetUserTags = {}
 			
-			for i, v in ipairs(p3.responseBody) do
-				t[tostring(v.targetUserId)] = v.targetUserTag
+			for _, value in ipairs(p3.responseBody) do
+				TargetUserTags[tostring(value.targetUserId)] = value.targetUserTag
 			end
-			return if p2.ShowUserAlias or p2.ShowUserAlias == nil then addUserIdsToState(p2, t) else addUsersIdsToInternalState(p2, t)
+			return if p2.ShowUserAlias or p2.ShowUserAlias == nil then addUserIdsToState(p2, TargetUserTags) else addUsersIdsToInternalState(p2, TargetUserTags)
 		end,
-		[aliasNetworking.SetUserTag.Succeeded.name] = function(p4, p5)
-			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p4, {
+		[AliasNetworking.SetUserTag.Succeeded.name] = function(p4, p5) --[[ Line: 102 ]]
+			-- upvalues: LlamaModule (upval)
+			return LlamaModule.Dictionary.join(p4, {
 				[tostring(p5.postBody.targetUserId)] = p5.postBody.userTag
 			})
 		end

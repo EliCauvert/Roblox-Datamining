@@ -1,25 +1,25 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local getGridSizeTagModule = require(foundation.Utility.getGridSizeTag)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = { size = 1, testId = "--foundation-grid--cell" }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local GetGridSizeTagModule = require(Foundation.Utility.getGridSizeTag)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = { size = 1, testId = "--foundation-grid--cell" }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), dashModule (ref), reactModule (ref), getGridSizeTagModule (ref), viewModule (ref)
-	local var1 = withDefaultsModule(p1, t)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 26 | Named "GridCell" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), DashModule (copy), ReactModule (copy), GetGridSizeTagModule (copy), ViewModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	
-	return reactModule.createElement(viewModule, dashModule.assign(dashModule.omit(var1, { "size" }), {
+	return ReactModule.createElement(ViewModule, DashModule.assign(DashModule.omit(WithDefaultsModuleResult, { "size" }), {
 		tag = table.concat({
-			reactModule.useMemo(function()
-				-- upvalues: getGridSizeTagModule (copy), var1 (ref)
-				return getGridSizeTagModule(var1.size)
-			end, { var1.size }),
-			var1.tag
+			ReactModule.useMemo(function() --[[ Line: 30 ]]
+				-- upvalues: GetGridSizeTagModule (upval), WithDefaultsModuleResult (copy)
+				return GetGridSizeTagModule(WithDefaultsModuleResult.size)
+			end, { WithDefaultsModuleResult.size }),
+			WithDefaultsModuleResult.tag
 		}, " "),
-		ref = p2
-	}), var1.children)
+		ref = Ref
+	}), WithDefaultsModuleResult.children)
 end))

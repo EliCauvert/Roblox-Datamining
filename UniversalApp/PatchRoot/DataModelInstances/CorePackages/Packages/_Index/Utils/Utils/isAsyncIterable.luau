@@ -1,10 +1,10 @@
-﻿local symbol = require(script.Parent.Parent.LuauPolyfill).Symbol
+﻿local Symbol = require(script.Parent.Parent.LuauPolyfill).Symbol
 
 return {
-	isAsyncIterable = function(p1)
-		-- upvalues: symbol (ref)
-		local asyncIterator = symbol.asyncIterator
+	isAsyncIterable = function(p1): boolean --[[ Line: 12 ]]
+		-- upvalues: Symbol (copy)
+		local AsyncIterator = Symbol.asyncIterator
 		
-		return typeof(p1) == "table" and (p1 ~= nil and (asyncIterator and (p1[asyncIterator] and typeof(p1[asyncIterator]) == "function")))
+		return typeof(p1) == "table" and (p1 ~= nil and (AsyncIterator and (p1[AsyncIterator] and typeof(p1[AsyncIterator]) == "function")))
 	end
 }

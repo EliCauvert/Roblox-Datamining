@@ -1,1 +1,1 @@
-﻿return require(script.Slider)
+﻿return (require(script.Slider))

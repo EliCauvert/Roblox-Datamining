@@ -1,5 +1,5 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local _ = require(viewRecyclerReact.Parent.ViewRecycler)
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local _ = require(ViewRecyclerReact.Parent.ViewRecycler)
 local _ = require(script.Parent.RecyclingRoot)
 
-return require(viewRecyclerReact.Parent.React).createContext(nil)
+return require(ViewRecyclerReact.Parent.React).createContext(nil)

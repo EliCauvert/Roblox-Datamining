@@ -1,14 +1,14 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local loggerModule = require(foundation.Utility.Logger)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local LoggerModule = require(Foundation.Utility.Logger)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(p1)
-	-- upvalues: useTokensModule (ref), loggerModule (ref)
-	local var1 = useTokensModule()
-	local var2 = p1 * var1.Config.UI.Scale
+return function(p1) --[[ Line: 6 | Named "useScaledValue" ]]
+	-- upvalues: UseTokensModule (copy), LoggerModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local ScaledScale = p1 * UseTokensModuleResult.Config.UI.Scale
 	
-	if var2 <= var1.Size.Size_3000 then
-		loggerModule:warning("useScaledValue should be used for values larger than Size tokens. For smaller values, please align to a Size or derivative token.")
+	if ScaledScale <= UseTokensModuleResult.Size.Size_3000 then
+		LoggerModule:warning("useScaledValue should be used for values larger than Size tokens. For smaller values, please align to a Size or derivative token.")
 	end
-	return var2
+	return ScaledScale
 end

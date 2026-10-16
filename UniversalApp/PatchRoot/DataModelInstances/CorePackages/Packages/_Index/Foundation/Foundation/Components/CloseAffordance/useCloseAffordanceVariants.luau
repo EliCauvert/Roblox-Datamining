@@ -1,38 +1,38 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local dashModule = require(foundation.Parent.Dash)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Components.Types)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local constantsModule = require(foundation.Constants)
-local getSharedVariantsModule = require(foundation.Components.Button.getSharedVariants)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local DashModule = require(Foundation.Parent.Dash)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local _ = require(Foundation.Components.Types)
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local ConstantsModule = require(Foundation.Constants)
+local GetSharedVariantsModule = require(Foundation.Components.Button.getSharedVariants)
 
-local var1 = function(p1)
-	-- upvalues: getSharedVariantsModule (ref), inputSizeModule (ref), iconSizeModule (ref), closeAffordanceVariantModule (ref), dashModule (ref), colorNamespaceModule (ref), constantsModule (ref)
-	local var2 = getSharedVariantsModule(p1)
+local function v12(p1) --[[ Line: 45 ]]
+	-- upvalues: GetSharedVariantsModule (copy), InputSizeModule (copy), IconSizeModule (copy), CloseAffordanceVariantModule (copy), DashModule (copy), ColorNamespaceModule (copy), ConstantsModule (copy)
+	local SharedVariantsModule = GetSharedVariantsModule(p1)
 	
 	return {
 		common = {
 			container = { tag = "row align-x-center align-y-center auto-xy clip" }
 		},
 		types = {
-			[closeAffordanceVariantModule.OverMedia] = dashModule.map(colorNamespaceModule, function()
-				-- upvalues: p1 (ref)
+			[CloseAffordanceVariantModule.OverMedia] = DashModule.map(ColorNamespaceModule, function() --[[ Line: 101 ]]
+				-- upvalues: p1 (copy)
 				return {
 					container = { tag = "bg-over-media-100" },
 					content = { style = p1.Color.Content.Emphasis }
 				}
 			end),
-			[closeAffordanceVariantModule.Utility] = dashModule.map(colorNamespaceModule, function(p2)
-				-- upvalues: constantsModule (copy), p1 (ref)
+			[CloseAffordanceVariantModule.Utility] = DashModule.map(ColorNamespaceModule, function(p2) --[[ Line: 107 ]]
+				-- upvalues: ConstantsModule (upval), p1 (copy)
 				return {
 					container = {
 						stateLayer = {
-							mode = constantsModule.COLOR_NAMESPACE_TO_STATE_LAYER_MODE[false][p2]
+							mode = ConstantsModule.COLOR_NAMESPACE_TO_STATE_LAYER_MODE[false][p2]
 						}
 					},
 					content = { style = p1[p2].Content.Emphasis }
@@ -41,32 +41,32 @@ local var1 = function(p1)
 		},
 		sizes = {
 			[true] = {
-				[inputSizeModule.XSmall] = {
+				[InputSizeModule.XSmall] = {
 					container = {
-						size = UDim2.fromOffset(var2.sizes[inputSizeModule.XSmall].container.height, var2.sizes[inputSizeModule.XSmall].container.height),
+						size = UDim2.fromOffset(SharedVariantsModule.sizes[InputSizeModule.XSmall].container.height, SharedVariantsModule.sizes[InputSizeModule.XSmall].container.height),
 						padding = UDim.new(0, p1.Size.Size_100)
 					},
-					content = { iconSize = iconSizeModule.Small }
+					content = { iconSize = IconSizeModule.Small }
 				},
-				[inputSizeModule.Small] = {
+				[InputSizeModule.Small] = {
 					container = {
-						size = UDim2.fromOffset(var2.sizes[inputSizeModule.Small].container.height, var2.sizes[inputSizeModule.Small].container.height),
+						size = UDim2.fromOffset(SharedVariantsModule.sizes[InputSizeModule.Small].container.height, SharedVariantsModule.sizes[InputSizeModule.Small].container.height),
 						padding = UDim.new(0, p1.Size.Size_150)
 					},
-					content = { iconSize = iconSizeModule.Medium }
+					content = { iconSize = IconSizeModule.Medium }
 				},
-				[inputSizeModule.Medium] = {
+				[InputSizeModule.Medium] = {
 					container = {
-						size = UDim2.fromOffset(var2.sizes[inputSizeModule.Medium].container.height, var2.sizes[inputSizeModule.Medium].container.height),
+						size = UDim2.fromOffset(SharedVariantsModule.sizes[InputSizeModule.Medium].container.height, SharedVariantsModule.sizes[InputSizeModule.Medium].container.height),
 						padding = UDim.new(0, p1.Size.Size_200)
 					},
-					content = { iconSize = iconSizeModule.Large }
+					content = { iconSize = IconSizeModule.Large }
 				}
 			},
 			[false] = {
-				[inputSizeModule.XSmall] = { content = { iconSize = iconSizeModule.XSmall } },
-				[inputSizeModule.Small] = { content = { iconSize = iconSizeModule.Small } },
-				[inputSizeModule.Medium] = { content = { iconSize = iconSizeModule.Large } }
+				[InputSizeModule.XSmall] = { content = { iconSize = IconSizeModule.XSmall } },
+				[InputSizeModule.Small] = { content = { iconSize = IconSizeModule.Small } },
+				[InputSizeModule.Medium] = { content = { iconSize = IconSizeModule.Large } }
 			}
 		},
 		padding = {
@@ -80,9 +80,9 @@ local var1 = function(p1)
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: variantsContextModule (ref), var1 (ref), closeAffordanceVariantModule (ref), composeStyleVariantModule (ref), colorNamespaceModule (ref)
-	local closeAffordance = variantsContextModule.useVariants("CloseAffordance", var1, p1)
+return function(p1, p2, OverMedia, p3, p4, p5) --[[ Line: 138 ]]
+	-- upvalues: VariantsContextModule (copy), v12 (copy), CloseAffordanceVariantModule (copy), ComposeStyleVariantModule (copy), ColorNamespaceModule (copy)
+	local CloseAffordance = VariantsContextModule.useVariants("CloseAffordance", v12, p1)
 	
-	return composeStyleVariantModule(closeAffordance.common, closeAffordance.types[p3][p4 or colorNamespaceModule.Color], closeAffordance.sizes[p5][p2], closeAffordance.padding[p5], closeAffordance.circular[if p3 ~= closeAffordanceVariantModule.OverMedia then p6 else true])
+	return ComposeStyleVariantModule(CloseAffordance.common, CloseAffordance.types[OverMedia][p3 or ColorNamespaceModule.Color], CloseAffordance.sizes[p4][p2], CloseAffordance.padding[p4], CloseAffordance.circular[OverMedia == CloseAffordanceVariantModule.OverMedia or p5])
 end

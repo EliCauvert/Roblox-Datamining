@@ -1,161 +1,165 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local constantsModule = require(script.Parent.constants)
-local flagsModule = require(foundation.Utility.Flags)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local getTestIdTagModule = require(foundation.Utility.getTestIdTag)
-local mapBindableModule = require(foundation.Utility.mapBindable)
-local usePreferencesModule = require(foundation.Providers.Preferences.usePreferences)
-local useProgressBindingModule = require(script.Parent.useProgressBinding)
-local useProgressVariantsModule = require(script.Parent.useProgressVariants)
-local usePulseBindingModule = require(foundation.Utility.usePulseBinding)
-local useRotationModule = require(foundation.Utility.useRotation)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local _ = require(foundation.Enums.ProgressShape)
-local progressSizeModule = require(foundation.Enums.ProgressSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ConstantsModule = require(script.Parent.constants)
+local FlagsModule = require(Foundation.Utility.Flags)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
+local MapBindableModule = require(Foundation.Utility.mapBindable)
+local UsePreferencesModule = require(Foundation.Providers.Preferences.usePreferences)
+local UseProgressBindingModule = require(script.Parent.useProgressBinding)
+local UseProgressVariantsModule = require(script.Parent.useProgressVariants)
+local UsePulseBindingModule = require(Foundation.Utility.usePulseBinding)
+local UseRotationModule = require(Foundation.Utility.useRotation)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Enums.ProgressShape)
+local ProgressSizeModule = require(Foundation.Enums.ProgressSize)
 
-local function getBarSequenceFromProgress(p1)
-	p1 = p1 or 0
+local function getBarSequenceFromProgress(p1): NumberSequence --[[ Line: 32 ]]
+	local P0 = p1 or 0
 	
-	if p1 == 0 then
+	if P0 == 0 then
 		return NumberSequence.new(1)
-	elseif p1 == 1 then
+	end
+	if P0 == 1 then
 		return NumberSequence.new(0)
 	end
-	local list = {
+	local List = {
 		NumberSequenceKeypoint.new(0, 0),
-		NumberSequenceKeypoint.new(p1, 0),
-		NumberSequenceKeypoint.new(math.min(p1 + 0.001, 1), 1)
+		NumberSequenceKeypoint.new(P0, 0),
+		NumberSequenceKeypoint.new(math.min(P0 + 0.001, 1), 1)
 	}
 	
-	if p1 < 0.999 then
-		table.insert(list, NumberSequenceKeypoint.new(1, 1))
+	if P0 < 0.999 then
+		table.insert(List, NumberSequenceKeypoint.new(1, 1))
 	end
-	return NumberSequence.new(list)
+	return NumberSequence.new(List)
 end
 
-local function getFillSizeFromProgress(p1)
+local function getFillSizeFromProgress(p1): UDim2 --[[ Line: 52 ]]
 	return UDim2.fromScale(p1 or 0, 1)
 end
 
-local function getIndeterminateShimmerTransparency(a, b, p1)
-	return if b then NumberSequence.new(a) else NumberSequence.new({
+local function getIndeterminateShimmerTransparency(p1, ReducedMotion, EmphasisTransparency): NumberSequence --[[ Line: 56 ]]
+	return if ReducedMotion then NumberSequence.new(p1) else NumberSequence.new({
 		NumberSequenceKeypoint.new(0, 1),
 		NumberSequenceKeypoint.new(0.2, 1),
-		NumberSequenceKeypoint.new(0.5, p1),
+		NumberSequenceKeypoint.new(0.5, EmphasisTransparency),
 		NumberSequenceKeypoint.new(0.8, 1),
 		NumberSequenceKeypoint.new(1, 1)
 	})
 end
 
-local function getIndeterminateShimmerOffset(a, b)
-	-- upvalues: constantsModule (ref)
-	return if b then Vector2.new(0, 0) else Vector2.new(a * constantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
+local function getIndeterminateShimmerOffset(p1, ReducedMotion): Vector2 --[[ Line: 74 ]]
+	-- upvalues: ConstantsModule (copy)
+	return if ReducedMotion then Vector2.new(0, 0) else Vector2.new(p1 * ConstantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
 end
 
-local function ProgressBarIndeterminateGradient(a)
-	-- upvalues: useRotationModule (ref), usePulseBindingModule (ref), constantsModule (ref), reactModule (ref), getIndeterminateShimmerTransparency (ref), getIndeterminateShimmerOffset (ref), getTestIdTagModule (ref)
-	return reactModule.createElement("UIGradient", {
-		Color = ColorSequence.new(a.emphasisColor3),
-		Transparency = usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p1)
-			-- upvalues: getIndeterminateShimmerTransparency (copy), a (ref)
-			return getIndeterminateShimmerTransparency(p1, a.reducedMotion, a.emphasisTransparency)
+local function ProgressBarIndeterminateGradient(p1) --[[ Line: 89 ]]
+	-- upvalues: UseRotationModule (copy), UsePulseBindingModule (copy), ConstantsModule (copy), ReactModule (copy), getIndeterminateShimmerTransparency (copy), getIndeterminateShimmerOffset (copy), GetTestIdTagModule (copy)
+	return ReactModule.createElement("UIGradient", {
+		Color = ColorSequence.new(p1.emphasisColor3),
+		Transparency = UsePulseBindingModule(1 / ConstantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p2) --[[ Line: 95 ]]
+			-- upvalues: getIndeterminateShimmerTransparency (upval), p1 (copy)
+			return getIndeterminateShimmerTransparency(p2, p1.reducedMotion, p1.emphasisTransparency)
 		end),
-		Offset = useRotationModule(1):map(function(p1)
-			-- upvalues: getIndeterminateShimmerOffset (copy), a (ref)
-			return getIndeterminateShimmerOffset(p1, a.reducedMotion)
+		Offset = UseRotationModule(1):map(function(p2) --[[ Line: 98 ]]
+			-- upvalues: getIndeterminateShimmerOffset (upval), p1 (copy)
+			return getIndeterminateShimmerOffset(p2, p1.reducedMotion)
 		end),
-		[reactModule.Tag] = getTestIdTagModule(a.testId)
+		[ReactModule.Tag] = GetTestIdTagModule(p1.testId)
 	})
 end
 
-local t = {
+local config = {
 	showLabel = false,
 	minValueLabel = "0",
 	maxValueLabel = "100",
-	size = progressSizeModule.Medium,
+	size = ProgressSizeModule.Medium,
 	width = UDim.new(1, 0)
 }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), useProgressVariantsModule (ref), flagsModule (ref), progressSizeModule (ref), useProgressBindingModule (ref), useRotationModule (ref), usePulseBindingModule (ref), constantsModule (ref), mapBindableModule (ref), getBarSequenceFromProgress (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), getFillSizeFromProgress (ref), ProgressBarIndeterminateGradient (ref), textModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3 = usePreferencesModule()
-	local var4 = useProgressVariantsModule(var2, if flagsModule.FoundationProgressBarBetaUpdate then if var1.size == progressSizeModule.Small then progressSizeModule.Small else progressSizeModule.Medium else var1.size)
-	local var5, var6 = useProgressBindingModule(var1.value)
+return function(p1) --[[ Line: 130 | Named "ProgressBar" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseProgressVariantsModule (copy), FlagsModule (copy), ProgressSizeModule (copy), UseProgressBindingModule (copy), UseRotationModule (copy), UsePulseBindingModule (copy), ConstantsModule (copy), MapBindableModule (copy), getBarSequenceFromProgress (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), getFillSizeFromProgress (copy), ProgressBarIndeterminateGradient (copy), TextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UsePreferencesModuleResult = UsePreferencesModule()
+	local UseProgressVariantsModuleResult = UseProgressVariantsModule(UseTokensModuleResult, if FlagsModule.FoundationProgressBarBetaUpdate then if WithDefaultsModuleResult.size == ProgressSizeModule.Small then ProgressSizeModule.Small else ProgressSizeModule.Medium else WithDefaultsModuleResult.size)
+	local UseProgressBindingModuleResult, UseProgressBindingModuleResult2 = UseProgressBindingModule(WithDefaultsModuleResult.value)
+	local UseRotationModuleResult = UseRotationModule(1)
+	local UsePulseBindingModuleResult = UsePulseBindingModule(1 / ConstantsModule.INDETERMINATE_SHIMMER_SPEED)
+	local MapBindableModuleResult = MapBindableModule(UseProgressBindingModuleResult, getBarSequenceFromProgress)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
-		tag = if flagsModule.FoundationProgressBarBetaUpdate then "col gap-xsmall size-full-0 auto-y" else "radius-small bg-shift-400",
-		Size = if flagsModule.FoundationProgressBarBetaUpdate then UDim2.new(var1.width, UDim.new(0, 0)) else UDim2.new(var1.width, UDim.new(0, var4.bar.height)),
-		ref = var1.ref
-	}), if flagsModule.FoundationProgressBarBetaUpdate then {
-		Track = reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = if FlagsModule.FoundationProgressBarBetaUpdate then "col gap-xsmall size-full-0 auto-y" else "radius-small bg-shift-400",
+		Size = if FlagsModule.FoundationProgressBarBetaUpdate then UDim2.new(WithDefaultsModuleResult.width, UDim.new(0, 0)) else UDim2.new(WithDefaultsModuleResult.width, UDim.new(0, UseProgressVariantsModuleResult.bar.height)),
+		ref = WithDefaultsModuleResult.ref
+	}), if FlagsModule.FoundationProgressBarBetaUpdate then {
+		Track = ReactModule.createElement(ViewModule, {
 			tag = "size-full-0 clip bg-shift-400",
 			LayoutOrder = 1,
-			Size = UDim2.new(UDim.new(1, 0), UDim.new(0, var4.bar.height)),
-			cornerRadius = UDim.new(0, var2.Radius.Circle),
-			testId = `{var1.testId}--track`
+			Size = UDim2.new(UDim.new(1, 0), UDim.new(0, UseProgressVariantsModuleResult.bar.height)),
+			cornerRadius = UDim.new(0, UseTokensModuleResult.Radius.Circle),
+			testId = `{WithDefaultsModuleResult.testId}--track`
 		}, {
-			Fill = reactModule.createElement(viewModule, {
-				backgroundStyle = var2.Color.Content.Emphasis,
-				cornerRadius = UDim.new(0, var2.Radius.Circle),
-				Size = if var6 then UDim2.fromScale(1, 1) else mapBindableModule(var5, getFillSizeFromProgress),
-				tag = if var6 then "size-full" else nil,
-				testId = `{var1.testId}--fill`
-			}, if var6 then {
-				Gradient = reactModule.createElement(ProgressBarIndeterminateGradient, {
-					emphasisColor3 = var2.Color.Content.Emphasis.Color3,
-					emphasisTransparency = var2.Color.Content.Emphasis.Transparency,
-					reducedMotion = var3.reducedMotion,
-					testId = `{var1.testId}--fill--gradient`
+			Fill = ReactModule.createElement(ViewModule, {
+				backgroundStyle = UseTokensModuleResult.Color.Content.Emphasis,
+				cornerRadius = UDim.new(0, UseTokensModuleResult.Radius.Circle),
+				Size = if UseProgressBindingModuleResult2 then UDim2.fromScale(1, 1) else MapBindableModule(UseProgressBindingModuleResult, getFillSizeFromProgress),
+				tag = if UseProgressBindingModuleResult2 then "size-full" else nil,
+				testId = `{WithDefaultsModuleResult.testId}--fill`
+			}, if UseProgressBindingModuleResult2 then {
+				Gradient = ReactModule.createElement(ProgressBarIndeterminateGradient, {
+					emphasisColor3 = UseTokensModuleResult.Color.Content.Emphasis.Color3,
+					emphasisTransparency = UseTokensModuleResult.Color.Content.Emphasis.Transparency,
+					reducedMotion = UsePreferencesModuleResult.reducedMotion,
+					testId = `{WithDefaultsModuleResult.testId}--fill--gradient`
 				})
 			} else nil)
 		}),
-		Labels = if var1.showLabel and not var6 then reactModule.createElement(viewModule, {
+		Labels = if WithDefaultsModuleResult.showLabel and not UseProgressBindingModuleResult2 then ReactModule.createElement(ViewModule, {
 			tag = "row size-full-0 auto-y",
 			LayoutOrder = 2,
-			testId = `{var1.testId}--labels`
+			testId = `{WithDefaultsModuleResult.testId}--labels`
 		}, {
-			MinValue = reactModule.createElement(textModule, {
+			MinValue = ReactModule.createElement(TextModule, {
 				tag = "fill auto-xy text-label-medium text-align-x-left content-default",
 				LayoutOrder = 1,
-				Text = var1.minValueLabel,
-				testId = `{var1.testId}--label-min`
+				Text = WithDefaultsModuleResult.minValueLabel,
+				testId = `{WithDefaultsModuleResult.testId}--label-min`
 			}),
-			MaxValue = reactModule.createElement(textModule, {
+			MaxValue = ReactModule.createElement(TextModule, {
 				tag = "fill auto-xy text-label-medium text-align-x-right content-default",
 				LayoutOrder = 2,
-				Text = var1.maxValueLabel,
-				testId = `{var1.testId}--label-max`
+				Text = WithDefaultsModuleResult.maxValueLabel,
+				testId = `{WithDefaultsModuleResult.testId}--label-max`
 			})
 		}) else nil
 	} else {
-		Fill = reactModule.createElement(viewModule, {
+		Fill = ReactModule.createElement(ViewModule, {
 			tag = "size-full radius-small",
-			backgroundStyle = var2.Color.Content.Emphasis,
-			ref = var1.ref,
-			testId = `{var1.testId}--fill`
+			backgroundStyle = UseTokensModuleResult.Color.Content.Emphasis,
+			ref = WithDefaultsModuleResult.ref,
+			testId = `{WithDefaultsModuleResult.testId}--fill`
 		}, {
-			Gradient = reactModule.createElement("UIGradient", {
-				Color = ColorSequence.new(var2.Color.Content.Emphasis.Color3),
-				Transparency = if var6 then usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p2)
-					-- upvalues: var3 (ref), var2 (ref)
-					return if var3.reducedMotion then NumberSequence.new(p2) else NumberSequence.new({
+			Gradient = ReactModule.createElement("UIGradient", {
+				Color = ColorSequence.new(UseTokensModuleResult.Color.Content.Emphasis.Color3),
+				Transparency = if UseProgressBindingModuleResult2 then UsePulseBindingModuleResult:map(function(p2): NumberSequence --[[ Line: 221 ]]
+					-- upvalues: UsePreferencesModuleResult (copy), UseTokensModuleResult (copy)
+					return if UsePreferencesModuleResult.reducedMotion then NumberSequence.new(p2) else NumberSequence.new({
 						NumberSequenceKeypoint.new(0, 1),
 						NumberSequenceKeypoint.new(0.2, 1),
-						NumberSequenceKeypoint.new(0.5, var2.Color.Content.Emphasis.Transparency),
+						NumberSequenceKeypoint.new(0.5, UseTokensModuleResult.Color.Content.Emphasis.Transparency),
 						NumberSequenceKeypoint.new(0.8, 1),
 						NumberSequenceKeypoint.new(1, 1)
 					})
-				end) else mapBindableModule(var5, getBarSequenceFromProgress),
-				Offset = if var6 then useRotationModule(1):map(function(p2)
-					-- upvalues: var3 (ref), constantsModule (copy)
-					return if var3.reducedMotion then Vector2.new(0, 0) else Vector2.new(p2 * constantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
+				end) else MapBindableModuleResult,
+				Offset = if UseProgressBindingModuleResult2 then UseRotationModuleResult:map(function(p2): Vector2 --[[ Line: 236 ]]
+					-- upvalues: UsePreferencesModuleResult (copy), ConstantsModule (upval)
+					return if UsePreferencesModuleResult.reducedMotion then Vector2.new(0, 0) else Vector2.new(p2 * ConstantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
 				end) else nil
 			})
 		})

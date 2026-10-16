@@ -1,179 +1,176 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local map = luauPolyfillModule.Map
-local object = luauPolyfillModule.Object
-local set = luauPolyfillModule.Set
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local getNamedType = graphQLModule.getNamedType
-local isObjectType = graphQLModule.isObjectType
-local isInterfaceType = graphQLModule.isInterfaceType
-local isUnionType = graphQLModule.isUnionType
-local isInputObjectType = graphQLModule.isInputObjectType
-local isSpecifiedScalarType = graphQLModule.isSpecifiedScalarType
-local isScalarType = graphQLModule.isScalarType
-local isEnumType = graphQLModule.isEnumType
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Map = LuauPolyfillModule.Map
+local Object = LuauPolyfillModule.Object
+local Set = LuauPolyfillModule.Set
+local GraphQLModule = require(Parent.GraphQL)
+local GetNamedTypeFunction = GraphQLModule.getNamedType
+local IsObjectTypeFunction = GraphQLModule.isObjectType
+local IsInterfaceTypeFunction = GraphQLModule.isInterfaceType
+local IsUnionTypeFunction = GraphQLModule.isUnionType
+local IsInputObjectTypeFunction = GraphQLModule.isInputObjectType
+local IsSpecifiedScalarTypeFunction = GraphQLModule.isSpecifiedScalarType
+local IsScalarTypeFunction = GraphQLModule.isScalarType
+local IsEnumTypeFunction = GraphQLModule.isEnumType
 local _ = require(script.Parent.types)
-local mapSchema = require(script.Parent.mapSchema).mapSchema
-local mapperKind = require(script.Parent.Interfaces).MapperKind
-local getRootTypes = require(script.Parent.rootTypes).getRootTypes
-local getImplementingTypes = require(script.Parent["get-implementing-types"]).getImplementingTypes
-local string = luauPolyfillModule.String
-local visitSchema = nil
-local visitQueue = nil
-local getDirectivesArgumentsTypeNames = nil
-
-function t.pruneSchema(p1, p2)
-	-- upvalues: visitSchema (write), string (ref), visitQueue (write), mapSchema (ref), mapperKind (ref), boolean (ref), isSpecifiedScalarType (ref), isUnionType (ref), isInputObjectType (ref), isInterfaceType (ref), isObjectType (ref), isScalarType (ref), object (ref)
-	local var1 = if p2 ~= nil then {} else p2
-	local skipEmptyCompositeTypePruning = var1.skipEmptyCompositeTypePruning
-	local skipEmptyUnionPruning = var1.skipEmptyUnionPruning
-	local skipPruning = var1.skipPruning
-	local skipUnimplementedInterfacesPruning = var1.skipUnimplementedInterfacesPruning
-	local skipUnusedTypesPruning = var1.skipUnusedTypesPruning
-	local _ = {}
-	local var2 = p1
-	local t
-	repeat
-		local var3 = visitSchema(var2)
-		if not skipPruning then
-			t = {}
-			var2 = mapSchema(var2, {
-				[mapperKind.TYPE] = function(p3)
-					-- upvalues: boolean (copy), var3 (write), isSpecifiedScalarType (copy), isUnionType (copy), isInputObjectType (copy), isInterfaceType (copy), isObjectType (copy), isScalarType (copy), skipUnusedTypesPruning (ref), skipEmptyUnionPruning (ref), skipEmptyCompositeTypePruning (ref), skipUnimplementedInterfacesPruning (ref), t (write), object (copy)
-					if boolean.toJSBoolean(var3:has(p3.name)) or boolean.toJSBoolean(isSpecifiedScalarType(p3)) then
+local MapSchemaFunction = require(script.Parent.mapSchema).mapSchema
+local MapperKind = require(script.Parent.Interfaces).MapperKind
+local GetRootTypesFunction = require(script.Parent.rootTypes).getRootTypes
+local GetImplementingTypesFunction = require(script.Parent["get-implementing-types"]).getImplementingTypes
+local String = LuauPolyfillModule.String
+local Callback1 = nil
+local Callback = nil
+local Callback2 = nil
+local PruneModule = {
+	pruneSchema = function(p1, p2) --[[ Line: 69 ]]
+		-- upvalues: Callback1 (ref), String (copy), Callback (ref), MapSchemaFunction (copy), MapperKind (copy), Boolean (copy), IsSpecifiedScalarTypeFunction (copy), IsUnionTypeFunction (copy), IsInputObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsObjectTypeFunction (copy), IsScalarTypeFunction (copy), Object (copy)
+		local T = if p2 == nil then {} else p2
+		local SkipEmptyCompositeTypePruning = T.skipEmptyCompositeTypePruning
+		local SkipEmptyUnionPruning = T.skipEmptyUnionPruning
+		local SkipPruningFunction = T.skipPruning
+		local SkipUnimplementedInterfacesPruning = T.skipUnimplementedInterfacesPruning
+		local SkipUnusedTypesPruning = T.skipUnusedTypesPruning
+		local List = {}
+		local v1 = p1
+		repeat
+			local CallbackResult = Callback1(v1)
+			if SkipPruningFunction then
+				local ConcatResult = {}
+				
+				for _, value in v1:getTypeMap() do
+					local v2 = value[1]
+					
+					if not String.startsWith(v2, "__") then
+						local Type = v1:getType(v2)
+						
+						if Type and SkipPruningFunction(Type) then
+							table.insert(ConcatResult, v2)
+						end
+					end
+				end
+				CallbackResult = Callback(ConcatResult, v1, CallbackResult)
+			end
+			List = {}
+			v1 = MapSchemaFunction(v1, {
+				[MapperKind.TYPE] = function(p3) --[[ Line: 111 ]]
+					-- upvalues: Boolean (upval), CallbackResult (ref), IsSpecifiedScalarTypeFunction (upval), IsUnionTypeFunction (upval), IsInputObjectTypeFunction (upval), IsInterfaceTypeFunction (upval), IsObjectTypeFunction (upval), IsScalarTypeFunction (upval), SkipUnusedTypesPruning (copy), SkipEmptyUnionPruning (copy), SkipEmptyCompositeTypePruning (copy), SkipUnimplementedInterfacesPruning (copy), List (ref), Object (upval)
+					if Boolean.toJSBoolean(CallbackResult:has(p3.name)) or Boolean.toJSBoolean(IsSpecifiedScalarTypeFunction(p3)) then
 						return p3
-					elseif isUnionType(p3) or isInputObjectType(p3) or (isInterfaceType(p3) or isObjectType(p3)) or isScalarType(p3) then
-						if boolean.toJSBoolean(skipUnusedTypesPruning) then
+					elseif IsUnionTypeFunction(p3) or IsInputObjectTypeFunction(p3) or IsInterfaceTypeFunction(p3) or IsObjectTypeFunction(p3) or IsScalarTypeFunction(p3) then
+						if Boolean.toJSBoolean(SkipUnusedTypesPruning) then
 							return p3
-						elseif isUnionType(p3) and skipEmptyUnionPruning and not boolean.toJSBoolean(#p3:getTypes()) then
+						elseif IsUnionTypeFunction(p3) and SkipEmptyUnionPruning and not Boolean.toJSBoolean(#p3.getTypes(p3)) then
 							return p3
-						elseif (isInputObjectType(p3) or isInterfaceType(p3) or isObjectType(p3)) and (skipEmptyCompositeTypePruning and not boolean.toJSBoolean(#p3:getFields():keys())) then
+						elseif (IsInputObjectTypeFunction(p3) or IsInterfaceTypeFunction(p3) or IsObjectTypeFunction(p3)) and SkipEmptyCompositeTypePruning and not Boolean.toJSBoolean(#p3.getFields(p3):keys()) then
 							return p3
-						elseif isInterfaceType(p3) and skipUnimplementedInterfacesPruning then
+						elseif IsInterfaceTypeFunction(p3) and SkipUnimplementedInterfacesPruning then
 							return p3
 						end
 					end
-					table.insert(t, p3.name)
-					var3:delete(p3.name)
+					table.insert(List, p3.name)
+					CallbackResult:delete(p3.name)
 					
-					return object.None
+					return Object.None
 				end
 			})
-			continue
-		end
-		local t = {}
-		
-		for i, v in var2:getTypeMap() do
-			local var4 = v[1]
-			
-			if not string.startsWith(var4, "__") then
-				local var5 = var2:getType(var4)
-				
-				if var5 and skipPruning(var5) then
-					table.insert(t, var4)
-				end
-			end
-		end
-		var3 = visitQueue(t, var2, var3)
-	until #t == 0
-	return var2
-end
-
-visitSchema = function(p1)
-	-- upvalues: getRootTypes (ref), visitQueue (write)
-	local t = {}
-	
-	for i, v in getRootTypes(p1) do
-		table.insert(t, v.name)
+		until #List == 0
+		return v1
 	end
-	return visitQueue(t, p1)
+}
+
+Callback1 = function(p1) --[[ Line: 216 | Named "visitSchema" ]]
+	-- upvalues: GetRootTypesFunction (copy), Callback (ref)
+	local ConcatResult = {}
+	
+	for _, value in GetRootTypesFunction(p1) do
+		table.insert(ConcatResult, value.name)
+	end
+	return Callback(ConcatResult, p1)
 end
 
-visitQueue = function(p2, p3, p4)
-	-- upvalues: set (ref), map (ref), boolean (ref), isUnionType (ref), array (ref), isInterfaceType (ref), getImplementingTypes (ref), isEnumType (ref), getDirectivesArgumentsTypeNames (write), isObjectType (ref), getNamedType (ref)
-	local var1 = if p4 ~= nil then set.new() else p4
-	local var2 = map.new()
-	while #p2 ~= 0 do
-		local removed = table.remove(p2)
+Callback = function(List, p2, p3) --[[ Line: 227 | Named "visitQueue" ]]
+	-- upvalues: Set (copy), Map (copy), Boolean (copy), IsUnionTypeFunction (copy), Array (copy), IsInterfaceTypeFunction (copy), GetImplementingTypesFunction (copy), IsEnumTypeFunction (copy), Callback2 (ref), IsObjectTypeFunction (copy), GetNamedTypeFunction (copy)
+	local NewSet = if p3 == nil then Set.new() else p3
+	local NewMap = Map.new()
+	while #List ~= 0 do
+		local Removed = table.remove(List)
 		
-		if var1:has(removed) and var2[removed] ~= true then continue end
-		local var3 = p3:getType(removed)
+		if NewSet:has(Removed) and NewMap[Removed] ~= true then continue end
+		local Type = p2:getType(Removed)
 		
-		if not boolean.toJSBoolean(var3) or not var3 then continue end
-		if boolean.toJSBoolean(isUnionType(var3)) then
-			p2 = array.concat(p2, array.map(var3:getTypes(), function(p5)
-				return p5.name
+		if not Boolean.toJSBoolean(Type) or not Type then continue end
+		if Boolean.toJSBoolean(IsUnionTypeFunction(Type)) then
+			List = Array.concat(List, Array.map(Type:getTypes(), function(p4) --[[ Line: 262 ]]
+				return p4.name
 			end))
 		end
-		if isInterfaceType(var3) and var2[removed] == true then
-			p2 = array.concat(p2, getImplementingTypes(var3.name, p3))
-			var2[tostring(removed)] = false
+		if IsInterfaceTypeFunction(Type) and NewMap[Removed] == true then
+			List = Array.concat(List, GetImplementingTypesFunction(Type.name, p2))
+			NewMap[tostring(Removed)] = false
 		end
-		if boolean.toJSBoolean(isEnumType(var3)) then
-			p2 = array.concat(p2, array.flatMap(var3:getValues(), function(p5)
-				-- upvalues: getDirectivesArgumentsTypeNames (copy), p3 (ref)
-				return if p5.astNode then getDirectivesArgumentsTypeNames(p3, p5.astNode) else {}
+		if Boolean.toJSBoolean(IsEnumTypeFunction(Type)) then
+			List = Array.concat(List, Array.flatMap(Type:getValues(), function(p4) --[[ Line: 301 ]]
+				-- upvalues: Callback2 (upval), p2 (copy)
+				return if p4.astNode then Callback2(p2, p4.astNode) else {}
 			end))
 		end
-		if var3.getInterfaces ~= nil then
-			p2 = array.concat(p2, array.map(var3:getInterfaces(), function(p5)
-				return p5.name
+		if Type.getInterfaces ~= nil then
+			List = Array.concat(List, Array.map(Type:getInterfaces(), function(p4) --[[ Line: 322 ]]
+				return p4.name
 			end))
 		end
-		if var3.getFields == nil then
-			if boolean.toJSBoolean(var3.astNode) then
-				p2 = array.concat(p2, getDirectivesArgumentsTypeNames(p3, var3.astNode))
-			end
-			var1:add(removed)
-		else
-			local var4 = var3:getFields():entries()
+		if Type.getFields ~= nil then
+			local EntriesResult = Type:getFields():entries()
 			
-			if #var4 == 0 then continue end
-			for i, v in var4 do
-				local var5 = v[2]
+			if #EntriesResult == 0 then continue end
+			for _, value in EntriesResult do
+				local v1 = value[2]
 				
-				if boolean.toJSBoolean(isObjectType(var3)) then
-					p2 = array.concat(p2, array.flatMap(var5.args, function(p5)
-						-- upvalues: getNamedType (copy), array (copy), getDirectivesArgumentsTypeNames (copy), p3 (ref)
-						local list = { getNamedType(p5.type).name }
+				if Boolean.toJSBoolean(IsObjectTypeFunction(Type)) then
+					List = Array.concat(List, Array.flatMap(v1.args, function(p4) --[[ Line: 368 ]]
+						-- upvalues: GetNamedTypeFunction (upval), Array (upval), Callback2 (upval), p2 (copy)
+						local ConcatResult = { GetNamedTypeFunction(p4.type).name }
 						
-						if p5.astNode then
-							list = array.concat(list, getDirectivesArgumentsTypeNames(p3, p5.astNode))
+						if p4.astNode then
+							ConcatResult = Array.concat(ConcatResult, Callback2(p2, p4.astNode))
 						end
-						return list
+						return ConcatResult
 					end))
 				end
-				local var6 = getNamedType(var5.type)
-				table.insert(p2, var6.name)
+				local NamedType = GetNamedTypeFunction(v1.type)
+				table.insert(List, NamedType.name)
 				
-				if boolean.toJSBoolean(var5.astNode) then
-					p2 = array.concat(p2, getDirectivesArgumentsTypeNames(p3, var5.astNode))
+				if Boolean.toJSBoolean(v1.astNode) then
+					List = Array.concat(List, Callback2(p2, v1.astNode))
 				end
-				if isInterfaceType(var6) and not var2:has(var6.name) then
-					var2[tostring(var6.name)] = true
+				if IsInterfaceTypeFunction(NamedType) and not NewMap:has(NamedType.name) then
+					NewMap[tostring(NamedType.name)] = true
 				end
 			end
 		end
+		if Boolean.toJSBoolean(Type.astNode) then
+			List = Array.concat(List, Callback2(p2, Type.astNode))
+		end
+		NewSet:add(Removed)
 	end
-	return var1
+	return NewSet
 end
 
-getDirectivesArgumentsTypeNames = function(p5, p6)
-	-- upvalues: array (ref), getNamedType (ref)
-	return array.flatMap(p6.directives or {}, function(p7)
-		-- upvalues: p5 (ref), array (copy), getNamedType (copy)
-		local valueDirective = p5:getDirective(p7.name.value)
-		local var7 = if typeof(valueDirective) == "table" then valueDirective.args else nil
-		local var8 = if var7 ~= nil then nil else array.map(var7, function(p8)
-			-- upvalues: getNamedType (copy)
-			return getNamedType(p8.type).name
+Callback2 = function(p4, AstNode) --[[ Line: 421 | Named "getDirectivesArgumentsTypeNames" ]]
+	-- upvalues: Array (copy), GetNamedTypeFunction (copy)
+	return Array.flatMap(AstNode.directives or {}, function(p5) --[[ Line: 432 ]]
+		-- upvalues: p4 (copy), Array (upval), GetNamedTypeFunction (upval)
+		local Directive = p4:getDirective(p5.name.value)
+		local Args = if typeof(Directive) == "table" then Directive.args else nil
+		local MapResult = if Args == nil then nil else Array.map(Args, function(p6) --[[ Line: 436 ]]
+			-- upvalues: GetNamedTypeFunction (upval)
+			return GetNamedTypeFunction(p6.type).name
 		end)
 		
-		return if var8 == nil then {} else var8
+		return if MapResult == nil then {} else MapResult
 	end)
 end
 
-return t
+return PruneModule

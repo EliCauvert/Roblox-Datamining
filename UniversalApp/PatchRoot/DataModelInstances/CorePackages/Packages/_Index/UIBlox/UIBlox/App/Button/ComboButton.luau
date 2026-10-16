@@ -1,93 +1,93 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local core = parent_1.Core
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local reactModule = require(parent_2.React)
-local tModule = require(parent_2.t)
-local cryoModule = require(parent_2.Cryo)
-local imagesModule = require(parent.ImageSet.Images)
-local useCursorModule = require(parent.SelectionCursor.useCursor)
-local controlStateModule = require(core.Control.Enum.ControlState)
-local genericButtonModule = require(core.Button.GenericButton)
-local validateImageModule = require(core.ImageSet.Validator.validateImage)
-local withStyleModule = require(core.Style.withStyle)
-local comboButton = roactModule.PureComponent:extend("ComboButton")
-local uDim = UDim.new(0, 8)
-local t = {
-	[controlStateModule.Default] = "ContextualPrimaryDefault",
-	[controlStateModule.Hover] = "ContextualPrimaryOnHover"
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Core = Parent1.Core
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local ReactModule = require(Parent2.React)
+local TModule = require(Parent2.t)
+local CryoModule = require(Parent2.Cryo)
+local ImagesModule = require(Parent.ImageSet.Images)
+local UseCursorModule = require(Parent.SelectionCursor.useCursor)
+local ControlStateModule = require(Core.Control.Enum.ControlState)
+local GenericButtonModule = require(Core.Button.GenericButton)
+local ValidateImageModule = require(Core.ImageSet.Validator.validateImage)
+local WithStyleModule = require(Core.Style.withStyle)
+local ComboButton = RoactModule.PureComponent:extend("ComboButton")
+local _UDim = UDim.new(0, 8)
+local ButtonStateColorMap = {
+	[ControlStateModule.Default] = "ContextualPrimaryDefault",
+	[ControlStateModule.Hover] = "ContextualPrimaryOnHover"
 }
-local t_1 = {
-	[controlStateModule.Default] = "ContextualPrimaryContent"
+local ContentStateColorMap = {
+	[ControlStateModule.Default] = "ContextualPrimaryContent"
 }
-comboButton.validateProps = tModule.strictInterface({
-	button = tModule.strictInterface({
-		icon = tModule.optional(validateImageModule),
-		text = tModule.optional(tModule.string),
-		isDisabled = tModule.optional(tModule.boolean),
-		onActivated = tModule.callback
+ComboButton.validateProps = TModule.strictInterface({
+	button = TModule.strictInterface({
+		icon = TModule.optional(ValidateImageModule),
+		text = TModule.optional(TModule.string),
+		isDisabled = TModule.optional(TModule.boolean),
+		onActivated = TModule.callback
 	}),
-	overflow = tModule.strictInterface({
-		icon = tModule.optional(validateImageModule),
-		isDisabled = tModule.optional(tModule.boolean),
-		onActivated = tModule.callback
+	overflow = TModule.strictInterface({
+		icon = TModule.optional(ValidateImageModule),
+		isDisabled = TModule.optional(TModule.boolean),
+		onActivated = TModule.callback
 	}),
-	position = tModule.optional(tModule.UDim2),
-	size = tModule.optional(tModule.UDim2),
-	layoutOrder = tModule.optional(tModule.number),
-	cursor = tModule.optional(tModule.table),
-	testId = tModule.optional(tModule.string)
+	position = TModule.optional(TModule.UDim2),
+	size = TModule.optional(TModule.UDim2),
+	layoutOrder = TModule.optional(TModule.number),
+	cursor = TModule.optional(TModule.table),
+	testId = TModule.optional(TModule.string)
 })
-comboButton.defaultProps = {
+ComboButton.defaultProps = {
 	testId = "--uiblox-combo-button",
 	size = UDim2.fromScale(1, 1)
 }
 
-function comboButton.init(p1)
-	-- upvalues: controlStateModule (ref)
+function ComboButton.init(p1) --[[ Line: 77 ]]
+	-- upvalues: ControlStateModule (copy)
 	p1:setState({
-		buttonControlState = controlStateModule.Initialize,
-		overflowControlState = controlStateModule.Initialize
+		buttonControlState = ControlStateModule.Initialize,
+		overflowControlState = ControlStateModule.Initialize
 	})
 	
-	function p0.onButtonStateChanged(_, p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ buttonControlState = p2 })
+	function p1:onButtonStateChanged(ButtonControlState) --[[ Line: 80 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ buttonControlState = ButtonControlState })
 	end
 	
-	function p0.onOverflowStateChanged(_, p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ overflowControlState = p2 })
+	function p1:onOverflowStateChanged(OverflowControlState) --[[ Line: 84 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ overflowControlState = OverflowControlState })
 	end
 end
 
-function comboButton.render(p1)
-	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref)
+function ComboButton.render(p1) --[[ Line: 89 ]]
+	-- upvalues: WithStyleModule (copy)
+	return WithStyleModule(function(p2) --[[ Line: 90 ]]
+		-- upvalues: p1 (copy)
 		return p1:renderWithProviders(p2, nil, nil)
 	end)
 end
 
-function comboButton.renderWithProviders(p1, _, _, _)
-	-- upvalues: roactModule (ref), reactModule (ref), genericButtonModule (ref), imagesModule (ref), t (ref), t_1 (ref)
-	return roactModule.createElement("Frame", {
+function ComboButton.renderWithProviders(p1, _, _, _) --[[ Line: 95 ]]
+	-- upvalues: RoactModule (copy), ReactModule (copy), GenericButtonModule (copy), ImagesModule (copy), ButtonStateColorMap (copy), ContentStateColorMap (copy)
+	return RoactModule.createElement("Frame", {
 		LayoutOrder = p1.props.layoutOrder,
 		Position = p1.props.position,
 		Size = p1.props.size,
 		BackgroundTransparency = 1,
-		[reactModule.Tag] = if p1.props.testId then `data-testid={p1.props.testId}` else nil
+		[ReactModule.Tag] = if p1.props.testId then `data-testid={p1.props.testId}` else nil
 	}, {
-		Button = roactModule.createElement(genericButtonModule, {
+		Button = RoactModule.createElement(GenericButtonModule, {
 			isHoverBackgroundEnabled = true,
 			ZIndex = 0,
 			Position = UDim2.fromScale(0, 0),
 			Size = UDim2.new(1, -40, 1, 0),
-			buttonImage = imagesModule["component_assets/bulletLeft_17"],
-			buttonStateColorMap = t,
-			contentStateColorMap = t_1,
-			hoverImage = imagesModule["component_assets/bulletLeft_17"],
+			buttonImage = ImagesModule["component_assets/bulletLeft_17"],
+			buttonStateColorMap = ButtonStateColorMap,
+			contentStateColorMap = ContentStateColorMap,
+			hoverImage = ImagesModule["component_assets/bulletLeft_17"],
 			icon = p1.props.button.icon,
 			isDisabled = p1.props.button.isDisabled,
 			onActivated = p1.props.button.onActivated,
@@ -95,17 +95,17 @@ function comboButton.renderWithProviders(p1, _, _, _)
 			SelectionImageObject = p1.props.cursor,
 			text = p1.props.button.text
 		}),
-		Overflow = roactModule.createElement(genericButtonModule, {
+		Overflow = RoactModule.createElement(GenericButtonModule, {
 			ZIndex = 0,
 			isHoverBackgroundEnabled = true,
 			AnchorPoint = Vector2.new(1, 0),
 			Position = UDim2.fromScale(1, 0),
 			Size = UDim2.new(0, 39, 1, 0),
-			buttonImage = imagesModule["component_assets/bulletRight_17"],
-			buttonStateColorMap = t,
-			contentStateColorMap = t_1,
-			hoverImage = imagesModule["component_assets/bulletRight_17"],
-			icon = p1.props.overflow.icon or imagesModule["icons/actions/truncationExpand"],
+			buttonImage = ImagesModule["component_assets/bulletRight_17"],
+			buttonStateColorMap = ButtonStateColorMap,
+			contentStateColorMap = ContentStateColorMap,
+			hoverImage = ImagesModule["component_assets/bulletRight_17"],
+			icon = p1.props.overflow.icon or ImagesModule["icons/actions/truncationExpand"],
 			isDisabled = p1.props.overflow.isDisabled,
 			onActivated = p1.props.overflow.onActivated,
 			onStateChanged = p1.onOverflowStateChanged,
@@ -114,17 +114,17 @@ function comboButton.renderWithProviders(p1, _, _, _)
 	})
 end
 
-function ComboButtonFunctionalWrapper(p1)
-	-- upvalues: useCursorModule (ref), uDim (ref), roactModule (ref), comboButton (ref), cryoModule (ref)
-	return roactModule.createElement(comboButton, cryoModule.Dictionary.join(p1, { cursor = useCursorModule(uDim) }))
+function ComboButtonFunctionalWrapper(p1) --[[ Line: 142 ]]
+	-- upvalues: UseCursorModule (copy), _UDim (copy), RoactModule (copy), ComboButton (copy), CryoModule (copy)
+	return RoactModule.createElement(ComboButton, CryoModule.Dictionary.join(p1, { cursor = UseCursorModule(_UDim) }))
 end
 
-local comboButtonOuterWrapper = roactModule.PureComponent:extend("ComboButtonOuterWrapper")
-comboButtonOuterWrapper.validateProps = comboButton.validateProps
+local ComboButtonOuterWrapper = RoactModule.PureComponent:extend("ComboButtonOuterWrapper")
+ComboButtonOuterWrapper.validateProps = ComboButton.validateProps
 
-function comboButtonOuterWrapper.render(p1)
-	-- upvalues: roactModule (ref)
-	return roactModule.createElement(ComboButtonFunctionalWrapper, p1.props)
+function ComboButtonOuterWrapper.render(p1) --[[ Line: 156 ]]
+	-- upvalues: RoactModule (copy)
+	return RoactModule.createElement(ComboButtonFunctionalWrapper, p1.props)
 end
 
-return comboButtonOuterWrapper
+return ComboButtonOuterWrapper

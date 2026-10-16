@@ -1,126 +1,125 @@
-﻿local dEV = _G.__DEV__
-local parent = script.Parent
-local parent_1 = parent.Parent
-local inspectModule = require(parent.inspect)
-local isArrayModule = require(parent.Array.isArray)
-local forEachModule = require(parent.Array.forEach)
-local fromStringModule = require(parent.Array.from.fromString)
-local _ = require(parent_1.ES7Types)
-local t = {
-	__iter = function(p1)
+﻿local DEV = _G.__DEV__
+local Parent = script.Parent
+local InspectModule = require(Parent.inspect)
+local IsArrayModule = require(Parent.Array.isArray)
+local ForEachModule = require(Parent.Array.forEach)
+local FromStringModule = require(Parent.Array.from.fromString)
+local _ = require(Parent.Parent.ES7Types)
+local SetModule = {
+	__iter = function(p1) --[[ Line: 39 ]]
 		return next, p1._array
 	end,
-	__tostring = function(p1)
-		-- upvalues: inspectModule (ref)
-		local var1 = "Set "
+	__tostring = function(p1): string --[[ Line: 42 ]]
+		-- upvalues: InspectModule (copy)
+		local Text = "Set "
 		
 		if #p1._array > 0 then
-			var1 ..= "(" .. tostring(#p1._array) .. ") "
+			Text ..= "(" .. tostring(#p1._array) .. ") "
 		end
-		return var1 .. inspectModule(p1._array)
+		return Text .. InspectModule(p1._array)
 	end
 }
-t.__index = t
+SetModule.__index = SetModule
 
-function t.new(p1)
-	-- upvalues: isArrayModule (ref), dEV (ref), fromStringModule (ref), t (ref)
-	local list
-	local _ = nil
-	local t_1 = {}
+function SetModule.new(Tbl) --[[ Line: 54 ]]
+	-- upvalues: IsArrayModule (copy), DEV (copy), FromStringModule (copy), SetModule (copy)
+	local _map = {}
+	local _array = nil
 	
-	if p1 == nil then
-		list = {}
+	if Tbl == nil then
+		_array = {}
 	else
-		local var1 = nil
+		local v1 = nil
 		
-		if typeof(p1) == "table" then
-			if isArrayModule(p1) then
-				var1 = table.clone(p1)
+		if typeof(Tbl) == "table" then
+			if IsArrayModule(Tbl) then
+				v1 = table.clone(Tbl)
 			else
-				local var2 = getmetatable(p1)
+				local Meta = getmetatable(Tbl)
 				
-				if var2 and rawget(var2, "__iter") then
-					var1 = p1
-				elseif dEV then
+				if Meta and rawget(Meta, "__iter") then
+					v1 = Tbl
+				elseif DEV then
 					error("cannot create array from an object-like table")
 				end
 			end
-		elseif typeof(p1) == "string" then
-			var1 = fromStringModule(p1)
+		elseif typeof(Tbl) == "string" then
+			v1 = FromStringModule(Tbl)
 		else
-			error(("cannot create array from value of type `%s`"):format(typeof(p1)))
+			error(("cannot create array from value of type `%s`"):format((typeof(Tbl))))
 		end
-		if var1 then
-			list = table.create(#var1)
+		if v1 then
+			_array = table.create(#v1)
 			
-			for i, v in var1 do
-				if not t_1[v] then
-					t_1[v] = true
-					table.insert(list, v)
+			for _, value in v1 do
+				if not _map[value] then
+					_map[value] = true
+					table.insert(_array, value)
 				end
 			end
 		else
-			list = {}
+			_array = {}
 		end
 	end
-	return setmetatable({ size = #list, _map = t_1, _array = list }, t)
+	return (setmetatable({ size = #_array, _map = _map, _array = _array }, SetModule))
 end
 
-function t:add(p2)
-	if not self._map[p2] then
+function SetModule:add(p1) --[[ Line: 100 ]]
+	if not self._map[p1] then
 		self.size += 1
-		self._map[p2] = true
-		table.insert(self._array, p2)
+		self._map[p1] = true
+		table.insert(self._array, p1)
 	end
 	return self
 end
 
-function t:clear()
+function SetModule:clear() --[[ Line: 110 ]]
 	self.size = 0
 	table.clear(self._map)
 	table.clear(self._array)
 end
 
-function t:delete(p2)
-	if not self._map[p2] then
+function SetModule:delete(Value): boolean --[[ Line: 116 ]]
+	if not self._map[Value] then
 		return false
 	end
 	self.size -= 1
-	self._map[p2] = nil
-	local index = table.find(self._array, p2)
+	self._map[Value] = nil
+	local FoundIndex: number? = table.find(self._array, Value)
 	
-	if index then
-		table.remove(self._array, index)
+	if FoundIndex then
+		table.remove(self._array, FoundIndex)
 	end
 	return true
 end
 
-function t:forEach(p2, p3)
-	-- upvalues: forEachModule (ref)
-	if typeof(p2) ~= "function" then
+function SetModule:forEach(Callback, p1) --[[ Line: 132 ]]
+	-- upvalues: ForEachModule (copy)
+	if typeof(Callback) ~= "function" then
 		error("callback is not a function")
 	end
-	forEachModule(self._array, function(p4)
-		-- upvalues: p3 (ref), p2 (ref), self (ref)
-		if p3 == nil then
-			p2(p4, p4, self)
+	ForEachModule(self._array, function(p2) --[[ Line: 138 ]]
+		-- upvalues: p1 (copy), Callback (copy), self (copy)
+		if p1 == nil then
+			Callback(p2, p2, self)
 			
 			return
+		else
+			Callback(p1, p2, p2, self)
 		end
-		p2(p3, p4, p4, self)
 	end)
 end
 
-function t:has(p2)
-	return self._map[p2] ~= nil
+function SetModule:has(p1): boolean --[[ Line: 147 ]]
+	return self._map[p1] ~= nil
 end
 
-function t:ipairs()
-	-- upvalues: dEV (ref)
-	if dEV then
+function SetModule:ipairs() --[[ Line: 151 ]]
+	-- upvalues: DEV (copy)
+	if DEV then
 		warn(debug.traceback("`for _,_ in mySet:ipairs() do` is deprecated and will be removed in a future release, please use `for _,_ in mySet do` instead\n", 2))
 	end
 	return ipairs(self._array)
 end
 
-return t
+return SetModule

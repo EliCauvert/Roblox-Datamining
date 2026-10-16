@@ -21,26 +21,28 @@ return require(script:FindFirstAncestor("Foundation").Parent.React).createContex
 	closeAffordanceRef = nil,
 	contentStartRef = nil,
 	isVerticalSheetGesture = nil,
-	setSheetHeightAvailable = function(_)
+	contentRevealOffset = nil,
+	setIsContentReversed = nil,
+	setSheetHeightAvailable = function(_) --[[ Line: 11 ]]
 		error("No SheetContext available")
 	end,
-	setActionsHeight = function(_)
+	setActionsHeight = function(_) --[[ Line: 15 ]]
 		error("No SheetContext available")
 	end,
-	setHasActionsDivider = function(_)
+	setHasActionsDivider = function(_) --[[ Line: 19 ]]
 		error("No SheetContext available")
 	end,
-	setSheetContentHeight = function(_)
+	setSheetContentHeight = function(_) --[[ Line: 23 ]]
 		error("No SheetContext available")
 	end,
-	setInnerScrollY = function(_)
+	setInnerScrollY = function(_) --[[ Line: 31 ]]
 		error("No SheetContext available")
 	end,
-	setHasHeader = function(_)
+	setHasHeader = function(_) --[[ Line: 35 ]]
 		error("No SheetContext available")
 	end,
-	setFullBleedHeight = function(_)
+	setFullBleedHeight = function(_) --[[ Line: 40 ]]
 		error("No SheetContext available")
 	end,
-	setContentStartRef = function(_) end
+	setContentStartRef = function(_) --[[ Line: 50 ]] end
 })

@@ -1,111 +1,104 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local usePrevious = require(parent.ReactUtils).usePrevious
-local instance = require(foundation.Utility.Wrappers).Instance
-local _ = require(foundation.Enums.Breakpoint)
-local constantsModule = require(foundation.Constants)
-local _ = require(foundation.Providers.Responsive.ResponsiveContext)
-local useResponsiveModule = require(foundation.Providers.Responsive.useResponsive)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local UsePreviousFunction = require(Parent.ReactUtils).usePrevious
+local _Instance = require(Foundation.Utility.Wrappers).Instance
+local _ = require(Foundation.Enums.Breakpoint)
+local ConstantsModule = require(Foundation.Constants)
+local _ = require(Foundation.Providers.Responsive.ResponsiveContext)
+local UseResponsiveModule = require(Foundation.Providers.Responsive.useResponsive)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 
-local function _(p1, p2)
-	local var1 = p1.order[#p1.order]
+local function _(p1, p2) --[[ Line: 28 | Named "calculateBreakpointFromWidth" ]]
+	local OrderEntry = p1.order[#p1.order]
 	
-	for i, v in p1.order do
-		if p2 <= p1.widths[v] then
-			var1 = v
+	for _, value in p1.order do
+		if p2 <= p1.widths[value] then
+			OrderEntry = value
 			
-			return var1
+			return OrderEntry
 		end
 	end
-	return var1
+	return OrderEntry
 end
 
-local _ = function(p3, p4)
-	-- upvalues: dashModule (ref)
-	return dashModule.findIndex(p3.order, function(p5)
-		-- upvalues: p4 (ref)
-		return p5 == p4
+local _ = function(p3, p4) --[[ Line: 41 | Named "getBreakpointIndex" ]]
+	-- upvalues: DashModule (copy)
+	return DashModule.findIndex(p3.order, function(OrderEntry): boolean --[[ Line: 42 ]]
+		-- upvalues: p4 (copy)
+		return OrderEntry == p4
 	end)
 end
 
-local _ = function(p3, p4, p5, p6)
-	-- upvalues: dashModule (ref)
-	return if p6 then if p5 == p6 then false elseif dashModule.findIndex(p3.order, function(p7)
-		-- upvalues: p6 (ref)
-		return p7 == p6
-	end) < dashModule.findIndex(p3.order, function(p7)
-		-- upvalues: p5 (ref)
-		return p7 == p5
-	end) then p3.widths[p6] + 5 < p4 else p4 < p3.widths[p5] - 5 else true
+local _ = function(p3, p4, p5, p6): boolean --[[ Line: 47 | Named "shouldChangeBreakpoint" ]]
+	-- upvalues: DashModule (copy)
+	return not p6 or p5 ~= p6 and (if DashModule.findIndex(p3.order, function(OrderEntry): boolean --[[ Line: 42 ]]
+		-- upvalues: p6 (copy)
+		return OrderEntry == p6
+	end) < DashModule.findIndex(p3.order, function(OrderEntry): boolean --[[ Line: 42 ]]
+		-- upvalues: p5 (copy)
+		return OrderEntry == p5
+	end) then p3.widths[p6] + 5 < p4 else p4 < p3.widths[p5] - 5)
 end
 
-return function(p3, p4)
-	-- upvalues: withDefaultsModule (ref), constantsModule (ref), useResponsiveModule (ref), reactModule (ref), usePrevious (ref), dashModule (ref), instance (ref)
-	local var2 = withDefaultsModule(p4 or {}, { throttleTime = constantsModule.DEFAULT_DELAY_TIME })
-	local breakpoint = useResponsiveModule().config.breakpoint
-	local var3, var4 = reactModule.useState(Vector2.zero)
-	local x = var3.X
-	local var5 = breakpoint.order[#breakpoint.order]
+return function(Frame: Frame, p3) --[[ Line: 74 | Named "useBreakpoint" ]]
+	-- upvalues: WithDefaultsModule (copy), ConstantsModule (copy), UseResponsiveModule (copy), ReactModule (copy), UsePreviousFunction (copy), DashModule (copy), _Instance (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p3 or {}, { throttleTime = ConstantsModule.DEFAULT_DELAY_TIME })
+	local Breakpoint = UseResponsiveModule().config.breakpoint
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
+	local X = UseStateResult.X
+	local OrderEntry = Breakpoint.order[#Breakpoint.order]
 	
-	for i, v in breakpoint.order do
-		if x <= breakpoint.widths[v] then
-			var5 = v
+	for _, value in Breakpoint.order do
+		if X <= Breakpoint.widths[value] then
+			OrderEntry = value
 			break
 		end
 	end
-	var11, var10 = reactModule.useState(var5)
-	local var6 = usePrevious(var11)
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: dashModule (copy), var4 (ref), var2 (ref)
-		return dashModule.throttle(var4, var2.throttleTime, { leading = true, trailing = true })
-	end, { var2.throttleTime })
-	reactModule.useEffect(function()
-		-- upvalues: p3 (ref), instance (copy), var7 (ref), var4 (ref)
-		local var8 = nil
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(OrderEntry)
+	local UsePreviousResult = UsePreviousFunction(UseStateResult1)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 87 ]]
+		-- upvalues: DashModule (upval), UseStateResult2 (copy), WithDefaultsModuleResult (copy)
+		return DashModule.throttle(UseStateResult2, WithDefaultsModuleResult.throttleTime, { leading = true, trailing = true })
+	end, { WithDefaultsModuleResult.throttleTime })
+	ReactModule.useEffect(function() --[[ Line: 94 ]]
+		-- upvalues: Frame (copy), _Instance (upval), UseMemoResult (copy), UseStateResult2 (copy)
+		local Connection = nil
 		
-		if p3 then
-			var8 = instance.GetPropertyChangedSignal(p3, "AbsoluteSize"):Connect(function()
-				-- upvalues: var7 (copy), p3 (copy)
-				var7(p3.AbsoluteSize)
+		if Frame then
+			Connection = _Instance.GetPropertyChangedSignal(Frame, "AbsoluteSize"):Connect(function() --[[ Line: 98 ]]
+				-- upvalues: UseMemoResult (upval), Frame (upval)
+				UseMemoResult(Frame.AbsoluteSize)
 			end)
-			var4(p3.AbsoluteSize)
+			UseStateResult2(Frame.AbsoluteSize)
 		end
-		return function()
-			-- upvalues: var8 (write)
-			if var8 then
-				var8:Disconnect()
+		return function() --[[ Line: 104 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
-	end, { p3 })
-	reactModule.useEffect(function()
-		-- upvalues: breakpoint (ref), var3 (ref), var5 (ref), var6 (ref), dashModule (copy), var5 (ref)
-		local var8
-		local var9 = breakpoint
-		local x = var3.X
+	end, { Frame })
+	ReactModule.useEffect(function() --[[ Line: 111 ]]
+		-- upvalues: Breakpoint (copy), UseStateResult (copy), OrderEntry (copy), UsePreviousResult (copy), DashModule (upval), UseStateResult2_1 (copy)
+		local X = UseStateResult.X
 		
-		if not var6 then
-			var8 = true
-		elseif var5 == var6 then
-			var8 = false
-		elseif dashModule.findIndex(var9.order, function(p5)
-			-- upvalues: var6 (ref)
-			return p5 == var6
-		end) < dashModule.findIndex(var9.order, function(p5)
-			-- upvalues: var5 (ref)
-			return p5 == var5
-		end) then
-			var8 = var9.widths[var6] + 5 < x
-			var8 = nil
-		else
-			var8 = x < var9.widths[var5] - 5
+		if not UsePreviousResult or OrderEntry ~= UsePreviousResult and (if DashModule.findIndex(Breakpoint.order, function(OrderEntry): boolean --[[ Line: 42 ]]
+			-- upvalues: UsePreviousResult (copy)
+			return OrderEntry == UsePreviousResult
+		end) < DashModule.findIndex(Breakpoint.order, function(OrderEntry): boolean --[[ Line: 42 ]]
+			-- upvalues: OrderEntry (copy)
+			return OrderEntry == OrderEntry
+		end) then Breakpoint.widths[UsePreviousResult] + 5 < X else X < Breakpoint.widths[OrderEntry] - 5) then
+			UseStateResult2_1(OrderEntry)
 		end
-		if var8 then
-			var5(var5)
-		end
-	end, { breakpoint, var3.X, var5, var6 })
+	end, {
+		Breakpoint,
+		UseStateResult.X,
+		OrderEntry,
+		UsePreviousResult
+	})
 	
-	return var11, var3
+	return UseStateResult1, UseStateResult
 end

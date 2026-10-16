@@ -1,41 +1,51 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local components = foundation.Components
-local textModule = require(components.Text)
-local _ = require(components.Types)
-local viewModule = require(components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local inputPlacementModule = require(foundation.Enums.InputPlacement)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputGroupContextModule = require(script.Parent.InputGroupContext)
-local useInputGroupVariantsModule = require(script.Parent.useInputGroupVariants)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local Components = Foundation.Components
+local TextModule = require(Components.Text)
+local _ = require(Components.Types)
+local ViewModule = require(Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local InputGroupContextModule = require(script.Parent.InputGroupContext)
+local UseInputGroupVariantsModule = require(script.Parent.useInputGroupVariants)
+local config = {
 	testId = "--foundation-internal-input-group",
-	size = inputSizeModule.Medium,
-	placement = inputPlacementModule.Start
+	size = require(Foundation.Enums.InputSize).Medium,
+	placement = require(Foundation.Enums.InputPlacement).Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useInputGroupVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), inputGroupContextModule (ref), textModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useInputGroupVariantsModule(useTokensModule(), var1.size)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 29 | Named "InternalInputGroup" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseInputGroupVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), InputGroupContextModule (copy), TextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseInputGroupVariantsModuleResult = UseInputGroupVariantsModule(UseTokensModule(), WithDefaultsModuleResult.size)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = var2.container.tag, ref = p2 }), {
-		InputGroupContext = reactModule.createElement(inputGroupContextModule.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: var1 (ref)
-				return { size = var1.size, placement = var1.placement }
-			end, { var1.size, var1.placement })
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseInputGroupVariantsModuleResult.container.tag,
+		ref = Ref
+	}), {
+		InputGroupContext = ReactModule.createElement(InputGroupContextModule.Provider, {
+			value = ReactModule.useMemo(function() --[[ Line: 34 ]]
+				-- upvalues: WithDefaultsModuleResult (copy)
+				return {
+					size = WithDefaultsModuleResult.size,
+					placement = WithDefaultsModuleResult.placement
+				}
+			end, {
+				WithDefaultsModuleResult.size,
+				WithDefaultsModuleResult.placement
+			})
 		}, {
-			GroupLabel = if var1.legend == nil or var1.legend == "" then nil else reactModule.createElement(textModule, {
+			GroupLabel = if WithDefaultsModuleResult.legend == nil or WithDefaultsModuleResult.legend == "" then nil else ReactModule.createElement(TextModule, {
 				LayoutOrder = 0,
-				Text = var1.legend,
-				tag = var2.legend.tag,
-				testId = `{var1.testId}--label`
+				Text = WithDefaultsModuleResult.legend,
+				tag = UseInputGroupVariantsModuleResult.legend.tag,
+				testId = `{WithDefaultsModuleResult.testId}--label`
 			}),
-			Children = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = var2.children.tag }, var1.children)
+			Children = ReactModule.createElement(ViewModule, {
+				LayoutOrder = 1,
+				tag = UseInputGroupVariantsModuleResult.children.tag
+			}, WithDefaultsModuleResult.children)
 		})
 	})
 end))

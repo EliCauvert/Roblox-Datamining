@@ -1,45 +1,45 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local accordionContextModule = require(script.Parent.AccordionContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local AccordionContextModule = require(script.Parent.AccordionContext)
 local _ = require(script.Parent.useAccordion)
-local t = {
+local config = {
 	isContained = false,
 	testId = "--foundation-accordion",
-	chevronPosition = require(foundation.Enums.InputPlacement).End,
-	size = require(foundation.Enums.InputSize).Medium,
+	chevronPosition = require(Foundation.Enums.InputPlacement).End,
+	size = require(Foundation.Enums.InputSize).Medium,
 	width = UDim.new(1, 0)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), accordionContextModule (ref)
-	local var1 = withDefaultsModule(p1, t)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 43 | Named "Accordion" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), AccordionContextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = "col flex-y-evenly auto-y",
-		Size = UDim2.new(var1.width, UDim.new(0, 0)),
-		ref = p2
+		Size = UDim2.new(WithDefaultsModuleResult.width, UDim.new(0, 0)),
+		ref = Ref
 	}), {
-		AccordionContext = reactModule.createElement(accordionContextModule.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: var1 (ref)
+		AccordionContext = ReactModule.createElement(AccordionContextModule.Provider, {
+			value = ReactModule.useMemo(function() --[[ Line: 47 ]]
+				-- upvalues: WithDefaultsModuleResult (copy)
 				return {
-					onAccordionItemActivated = var1.onActivated,
-					itemSize = var1.size,
-					isContained = var1.isContained,
-					chevronPosition = var1.chevronPosition,
-					testId = var1.testId
+					onAccordionItemActivated = WithDefaultsModuleResult.onActivated,
+					itemSize = WithDefaultsModuleResult.size,
+					isContained = WithDefaultsModuleResult.isContained,
+					chevronPosition = WithDefaultsModuleResult.chevronPosition,
+					testId = WithDefaultsModuleResult.testId
 				}
 			end, {
-				var1.onActivated,
-				var1.size,
-				var1.isContained,
-				var1.chevronPosition,
-				var1.testId
+				WithDefaultsModuleResult.onActivated,
+				WithDefaultsModuleResult.size,
+				WithDefaultsModuleResult.isContained,
+				WithDefaultsModuleResult.chevronPosition,
+				WithDefaultsModuleResult.testId
 			})
-		}, var1.children)
+		}, WithDefaultsModuleResult.children)
 	})
 end))

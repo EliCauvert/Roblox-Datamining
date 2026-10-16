@@ -1,28 +1,29 @@
-﻿local noneModule = require(script.Parent.Parent.None)
+﻿local NoneModule = require(script.Parent.Parent.None)
 
-return function(...)
-	-- upvalues: noneModule (ref)
-	local var1 = select("#", ...)
+return function(...) --[[ Line: 12 | Named "join" ]]
+	-- upvalues: NoneModule (copy)
+	local Selected = select("#", ...)
 	
-	if var1 == 0 then
+	if Selected == 0 then
 		return {}
-	elseif var1 == 1 then
-		local cloned = table.clone(...)
-		setmetatable(cloned, nil)
-		
-		return cloned
 	end
-	local cloned = table.clone(select(1, ...))
-	setmetatable(cloned, nil)
+	if Selected == 1 then
+		local Copy = table.clone(...)
+		setmetatable(Copy, nil)
+		
+		return Copy
+	end
+	local Copy = table.clone(select(1, ...))
+	setmetatable(Copy, nil)
 	
-	for i_1 = 2, var1 do
-		for i, v in pairs(select(i_1, ...)) do
-			if v == noneModule then
-				cloned[i] = nil
+	for i = 2, Selected do
+		for i1, value in pairs((select(i, ...))) do
+			if value == NoneModule then
+				Copy[i1] = nil
 			else
-				cloned[i] = v
+				Copy[i1] = value
 			end
 		end
 	end
-	return cloned
+	return Copy
 end

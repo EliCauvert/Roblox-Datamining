@@ -1,145 +1,144 @@
-﻿local t = {}
-local parent = script.Parent.Parent
-local object = require(parent.LuauPolyfill).Object
-local enableSchedulerTracing = require(parent.Shared).ReactFeatureFlags.enableSchedulerTracing
-local subscriberRef = require(script.Parent.Tracing).__subscriberRef
-local var1 = if enableSchedulerTracing then {} else {}
-
-function t.unstable_subscribe(p1)
-	-- upvalues: enableSchedulerTracing (ref), var1 (write), object (ref), subscriberRef (ref)
-	if enableSchedulerTracing then
-		var1[p1] = true
-		
-		if #object.keys(var1) == 1 then
-			subscriberRef.current = {
-				onInteractionScheduledWorkCompleted = onInteractionScheduledWorkCompleted,
-				onInteractionTraced = onInteractionTraced,
-				onWorkCanceled = onWorkCanceled,
-				onWorkScheduled = onWorkScheduled,
-				onWorkStarted = onWorkStarted,
-				onWorkStopped = onWorkStopped
-			}
+﻿local Parent = script.Parent.Parent
+local Object = require(Parent.LuauPolyfill).Object
+local EnableSchedulerTracing = require(Parent.Shared).ReactFeatureFlags.enableSchedulerTracing
+local SubscriberRef = require(script.Parent.Tracing).__subscriberRef
+local T = if EnableSchedulerTracing then {} else {}
+local TracingSubscriptionsModule = {
+	unstable_subscribe = function(Key) --[[ Line: 30 ]]
+		-- upvalues: EnableSchedulerTracing (copy), T (ref), Object (copy), SubscriberRef (copy)
+		if EnableSchedulerTracing then
+			T[Key] = true
+			
+			if #Object.keys(T) == 1 then
+				SubscriberRef.current = {
+					onInteractionScheduledWorkCompleted = onInteractionScheduledWorkCompleted,
+					onInteractionTraced = onInteractionTraced,
+					onWorkCanceled = onWorkCanceled,
+					onWorkScheduled = onWorkScheduled,
+					onWorkStarted = onWorkStarted,
+					onWorkStopped = onWorkStopped
+				}
+			end
+		end
+	end,
+	unstable_unsubscribe = function(Key) --[[ Line: 47 ]]
+		-- upvalues: EnableSchedulerTracing (copy), T (ref), Object (copy), SubscriberRef (copy)
+		if EnableSchedulerTracing then
+			T[Key] = nil
+			
+			if #Object.keys(T) == 0 then
+				SubscriberRef.current = nil
+			end
 		end
 	end
-end
+}
 
-function t.unstable_unsubscribe(p1)
-	-- upvalues: enableSchedulerTracing (ref), var1 (write), object (ref), subscriberRef (ref)
-	if enableSchedulerTracing then
-		var1[p1] = nil
-		
-		if #object.keys(var1) == 0 then
-			subscriberRef.current = nil
-		end
-	end
-end
-
-function onInteractionTraced(p1)
-	-- upvalues: var1 (write)
-	local var2 = false
-	local var3 = nil
+function onInteractionTraced(p1) --[[ Line: 57 ]]
+	-- upvalues: T (ref)
+	local Flag = false
+	local v1 = nil
 	
-	for i, v in var1 do
-		local ok, status = pcall(i.onInteractionTraced, p1)
+	for i, _ in T do
+		local Success, Result = pcall(i.onInteractionTraced, p1)
 		
-		if not ok and not var2 then
-			var2 = true
-			var3 = status
+		if not Success and not Flag then
+			Flag = true
+			v1 = Result
 		end
 	end
-	if var2 then
-		error(var3)
+	if Flag then
+		error(v1)
 	end
 end
 
-function onInteractionScheduledWorkCompleted(p2)
-	-- upvalues: var1 (write)
-	local var4 = false
-	local var5 = nil
+function onInteractionScheduledWorkCompleted(p2) --[[ Line: 79 ]]
+	-- upvalues: T (ref)
+	local Flag = false
+	local v2 = nil
 	
-	for i, v in var1 do
-		local ok, status = pcall(i.onInteractionScheduledWorkCompleted, p2)
+	for i, _ in T do
+		local Success, Result = pcall(i.onInteractionScheduledWorkCompleted, p2)
 		
-		if not ok and not var4 then
-			var4 = true
-			var5 = status
+		if not Success and not Flag then
+			Flag = true
+			v2 = Result
 		end
 	end
-	if var4 then
-		error(var5)
+	if Flag then
+		error(v2)
 	end
 end
 
-function onWorkScheduled(p3, p4)
-	-- upvalues: var1 (write)
-	local var6 = false
-	local var7 = nil
+function onWorkScheduled(p3, p4) --[[ Line: 102 ]]
+	-- upvalues: T (ref)
+	local Flag = false
+	local v3 = nil
 	
-	for i, v in var1 do
-		local ok, status = pcall(i.onWorkScheduled, p3, p4)
+	for i, _ in T do
+		local Success, Result = pcall(i.onWorkScheduled, p3, p4)
 		
-		if not ok and not var6 then
-			var6 = true
-			var7 = status
+		if not Success and not Flag then
+			Flag = true
+			v3 = Result
 		end
 	end
-	if var6 then
-		error(var7)
+	if Flag then
+		error(v3)
 	end
 end
 
-function onWorkStarted(p5, p6)
-	-- upvalues: var1 (write)
-	local var8 = false
-	local var9 = nil
+function onWorkStarted(p5, p6) --[[ Line: 124 ]]
+	-- upvalues: T (ref)
+	local Flag = false
+	local v4 = nil
 	
-	for i, v in var1 do
-		local ok, status = pcall(i.onWorkStarted, p5, p6)
+	for i, _ in T do
+		local Success, Result = pcall(i.onWorkStarted, p5, p6)
 		
-		if not ok and not var8 then
-			var8 = true
-			var9 = status
+		if not Success and not Flag then
+			Flag = true
+			v4 = Result
 		end
 	end
-	if var8 then
-		error(var9)
+	if Flag then
+		error(v4)
 	end
 end
 
-function onWorkStopped(p7, p8)
-	-- upvalues: var1 (write)
-	local var10 = false
-	local var11 = nil
+function onWorkStopped(p7, p8) --[[ Line: 146 ]]
+	-- upvalues: T (ref)
+	local Flag = false
+	local v5 = nil
 	
-	for i, v in var1 do
-		local ok, status = pcall(i.onWorkStopped, p7, p8)
+	for i, _ in T do
+		local Success, Result = pcall(i.onWorkStopped, p7, p8)
 		
-		if not ok and not var10 then
-			var10 = true
-			var11 = status
+		if not Success and not Flag then
+			Flag = true
+			v5 = Result
 		end
 	end
-	if var10 then
-		error(var11)
+	if Flag then
+		error(v5)
 	end
 end
 
-function onWorkCanceled(p9, p10)
-	-- upvalues: var1 (write)
-	local var12 = false
-	local var13 = nil
+function onWorkCanceled(p9, p10) --[[ Line: 168 ]]
+	-- upvalues: T (ref)
+	local Flag = false
+	local v6 = nil
 	
-	for i, v in var1 do
-		local ok, status = pcall(i.onWorkCanceled, p9, p10)
+	for i, _ in T do
+		local Success, Result = pcall(i.onWorkCanceled, p9, p10)
 		
-		if not ok and not var12 then
-			var12 = true
-			var13 = status
+		if not Success and not Flag then
+			Flag = true
+			v6 = Result
 		end
 	end
-	if var12 then
-		error(var13)
+	if Flag then
+		error(v6)
 	end
 end
 
-return t
+return TracingSubscriptionsModule

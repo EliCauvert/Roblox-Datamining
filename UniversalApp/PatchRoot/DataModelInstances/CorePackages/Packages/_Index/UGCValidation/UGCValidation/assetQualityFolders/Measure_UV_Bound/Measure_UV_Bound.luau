@@ -1,53 +1,50 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFFlagUGCValidateAQMeshQualityBlockUploadModule = require(parent.flags.getFFlagUGCValidateAQMeshQualityBlockUpload)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFFlagUGCValidateAQMeshQualityBlockUploadModule = require(Parent.flags.getFFlagUGCValidateAQMeshQualityBlockUpload)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.FULL_BODY,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.FULL_BODY,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
-	fflag = require(parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p1, p2)
-		-- upvalues: getFFlagUGCValidateAQMeshQualityBlockUploadModule (ref), errorSourceStringsModule (ref)
-		local measureUVBound = p2.aqsSummaryData.Measure_UV_Bound
+	fflag = require(Parent.flags.getFFlagUGCValidateAQMeshQuality),
+	run = function(p1, p2) --[[ Line: 18 ]]
+		-- upvalues: GetFFlagUGCValidateAQMeshQualityBlockUploadModule (copy), ErrorSourceStringsModule (copy)
+		local MeasureUVBound = p2.aqsSummaryData.Measure_UV_Bound
 		
-		if measureUVBound == nil then
-			if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
-				error("Measure_UV_Bound: AQS summary data is nil")
-				
-				return
+		if MeasureUVBound ~= nil then
+			for PartName, value in MeasureUVBound do
+				if PartName ~= "measurement_score" then
+					if value == nil or value.score == nil then
+						p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_UV_Bound" })
+						break
+					end
+					if tonumber(value.score) ~= 100 then
+						local config = {
+							partName = PartName,
+							uv_outside_bound_vert_percent = string.format("%.2f", (tonumber(value.uv_outside_bound_vert_percent) or 0) * 100)
+						}
+						
+						if GetFFlagUGCValidateAQMeshQualityBlockUploadModule() then
+							p1:fail(ErrorSourceStringsModule.Keys.AQSWarn_UVBound, config)
+						else
+							p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_UVBound, config)
+						end
+					end
+				end
 			end
-			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_UV_Bound" })
+			return
+		elseif GetFFlagUGCValidateAQMeshQualityBlockUploadModule() then
+			error("Measure_UV_Bound: AQS summary data is nil")
 			
 			return
 		else
-			for i, v in measureUVBound do
-				if i ~= "measurement_score" then
-					if v ~= nil and v.score ~= nil then
-						if tonumber(v.score) ~= 100 then
-							local t = {
-								partName = i,
-								uv_outside_bound_vert_percent = string.format("%.2f", (tonumber(v.uv_outside_bound_vert_percent) or 0) * 100)
-							}
-							
-							if getFFlagUGCValidateAQMeshQualityBlockUploadModule() then
-								p1:fail(errorSourceStringsModule.Keys.AQSWarn_UVBound, t)
-							else
-								p1:warn(errorSourceStringsModule.Keys.AQSWarn_UVBound, t)
-							end
-						end
-					end
-					p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_UV_Bound" })
-					
-					return
-				end
-			end
+			p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_UV_Bound" })
 		end
 	end
 }

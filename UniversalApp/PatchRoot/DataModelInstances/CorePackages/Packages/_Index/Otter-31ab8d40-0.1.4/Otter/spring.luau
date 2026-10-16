@@ -1,74 +1,75 @@
-﻿local assignModule = require(script.Parent.assign)
-local abs = math.abs
-local exp = math.exp
-local sin = math.sin
-local cos = math.cos
-local sqrt = math.sqrt
+﻿local AssignModule = require(script.Parent.assign)
+local AbsFunction = math.abs
+local ExpFunction = math.exp
+local SinFunction = math.sin
+local CosFunction = math.cos
+local SqrtFunction = math.sqrt
 
-local function step(p1, p2, p3)
-	-- upvalues: exp (ref), sqrt (ref), cos (ref), sin (ref), abs (ref)
-	local var1, var2
-	local dampingRatio = p1.__dampingRatio
-	local var3 = p1.__frequency * 2 * 3.14159265359
-	local goalPosition = p1.__goalPosition
-	local restingVelocityLimit = p1.__restingVelocityLimit
-	local restingPositionLimit = p1.__restingPositionLimit
-	local velocity = p2.velocity or 0
-	local var4 = p2.value - goalPosition
-	local var5 = exp(-p3 * dampingRatio * var3)
-	local _ = nil
-	local _ = nil
+local function step(p1, p2, p3) --[[ Line: 20 ]]
+	-- upvalues: ExpFunction (copy), SqrtFunction (copy), CosFunction (copy), SinFunction (copy), AbsFunction (copy)
+	local DampingRatio: number = p1.__dampingRatio
+	local ScaledFrequency = p1.__frequency * 2 * 3.141592653589793
+	local GoalPosition = p1.__goalPosition
+	local RestingVelocityLimit = p1.__restingVelocityLimit
+	local RestingPositionLimit = p1.__restingPositionLimit
+	local Velocity = p2.velocity or 0
+	local ValueDelta = p2.value - GoalPosition
+	local ExpResult = ExpFunction(-p3 * DampingRatio * ScaledFrequency)
+	local ScaledVelocity = nil
+	local NewVelocity = nil
 	
-	if dampingRatio == 1 then
-		var1 = (velocity * p3 + var4 * (var3 * p3 + 1)) * var5 + goalPosition
-		var2 = (velocity - var3 * p3 * (var4 * var3 + velocity)) * var5
-	elseif dampingRatio < 1 then
-		local var6
-		local var7 = sqrt(1 - dampingRatio * dampingRatio)
-		local var8 = cos(var3 * var7 * p3)
-		local var9 = sin(var3 * var7 * p3)
-		local _ = nil
+	if DampingRatio == 1 then
+		NewVelocity = (Velocity * p3 + ValueDelta * (ScaledFrequency * p3 + 1)) * ExpResult + GoalPosition
+		ScaledVelocity = (Velocity - ScaledFrequency * p3 * (ValueDelta * ScaledFrequency + Velocity)) * ExpResult
+	elseif DampingRatio < 1 then
+		local SqrtResult: number = SqrtFunction(1 - DampingRatio * DampingRatio)
+		local CosResult = CosFunction(ScaledFrequency * SqrtResult * p3)
+		local SinResult = SinFunction(ScaledFrequency * SqrtResult * p3)
+		local SinResultRatio = nil
 		
-		if var7 > 0.0001 then
-			var6 = var9 / var7
+		if SqrtResult > 0.0001 then
+			SinResultRatio = SinResult / SqrtResult
 		else
-			local var10 = p3 * var3
-			var6 = var10 + (var10 * var10 * (var7 * var7) * (var7 * var7) / 20 - var7 * var7) * (var10 * var10 * var10) / 6
+			local ScaledScaledFrequency = p3 * ScaledFrequency
+			SinResultRatio = ScaledScaledFrequency + (ScaledScaledFrequency * ScaledScaledFrequency * (SqrtResult * SqrtResult) * (SqrtResult * SqrtResult) / 20 - SqrtResult * SqrtResult) * (ScaledScaledFrequency * ScaledScaledFrequency * ScaledScaledFrequency) / 6
 		end
-		local var11
-		local _ = nil
-		
-		if var3 * var7 > 0.0001 then
-			var11 = var9 / (var3 * var7)
+		local SinResultRatio1 = nil
+		if ScaledFrequency * SqrtResult > 0.0001 then
+			SinResultRatio1 = SinResult / (ScaledFrequency * SqrtResult)
 		else
-			local var12 = var3 * var7
-			var11 = p3 + (p3 * p3 * (var12 * var12) * (var12 * var12) / 20 - var12 * var12) * (p3 * p3 * p3) / 6
+			local ScaledScaledFrequency = ScaledFrequency * SqrtResult
+			SinResultRatio1 = p3 + (p3 * p3 * (ScaledScaledFrequency * ScaledScaledFrequency) * (ScaledScaledFrequency * ScaledScaledFrequency) / 20 - ScaledScaledFrequency * ScaledScaledFrequency) * (p3 * p3 * p3) / 6
 		end
-		var1 = (var4 * (var8 + dampingRatio * var6) + velocity * var11) * var5 + goalPosition
-		var2 = (velocity * (var8 - var6 * dampingRatio) - var4 * (var6 * var3)) * var5
+		NewVelocity = (ValueDelta * (CosResult + DampingRatio * SinResultRatio) + Velocity * SinResultRatio1) * ExpResult + GoalPosition
+		ScaledVelocity = (Velocity * (CosResult - SinResultRatio * DampingRatio) - ValueDelta * (SinResultRatio * ScaledFrequency)) * ExpResult
 	else
-		local var13 = sqrt(dampingRatio * dampingRatio - 1)
-		local var14 = -var3 * (dampingRatio - var13)
-		local var15 = -var3 * (dampingRatio + var13)
-		local var16 = (velocity - var14 * var4) / (2 * var3 * var13)
-		local var17 = (var4 - var16) * exp(var14 * p3)
-		local var18 = var16 * exp(var15 * p3)
-		var1 = var17 + var18 + goalPosition
-		var2 = var14 * var17 + var15 * var18
+		local SqrtResult1: number = SqrtFunction(DampingRatio * DampingRatio - 1)
+		local ScaledDampingRatio = -ScaledFrequency * (DampingRatio - SqrtResult1)
+		local ScaledDampingRatio1 = -ScaledFrequency * (DampingRatio + SqrtResult1)
+		local VelocityRatio = (Velocity - ScaledDampingRatio * ValueDelta) / (2 * ScaledFrequency * SqrtResult1)
+		local ScaledValueDelta = (ValueDelta - VelocityRatio) * ExpFunction(ScaledDampingRatio * p3)
+		local ScaledVelocityRatio = VelocityRatio * ExpFunction(ScaledDampingRatio1 * p3)
+		NewVelocity = ScaledValueDelta + ScaledVelocityRatio + GoalPosition
+		ScaledVelocity = ScaledDampingRatio * ScaledValueDelta + ScaledDampingRatio1 * ScaledVelocityRatio
 	end
-	local var19 = abs(var2) < restingVelocityLimit and abs(var1 - p1.__goalPosition) < restingPositionLimit
+	local AbsResult = AbsFunction(NewVelocity - p1.__goalPosition)
+	local IsRestingPositionLimitAbove: boolean = AbsFunction(ScaledVelocity) < RestingVelocityLimit and RestingPositionLimit > AbsResult
 	
-	if var19 then
-		var1 = p1.__goalPosition
-		var2 = 0
+	if IsRestingPositionLimitAbove then
+		NewVelocity = p1.__goalPosition
+		ScaledVelocity = 0
 	end
-	return { value = var1, velocity = var2, complete = var19 }
+	return {
+		value = NewVelocity,
+		velocity = ScaledVelocity,
+		complete = IsRestingPositionLimitAbove
+	}
 end
 
-return function(p1, p2)
-	-- upvalues: assignModule (ref), step (ref)
+return function(p1, p2) --[[ Line: 117 | Named "spring" ]]
+	-- upvalues: AssignModule (copy), step (copy)
 	assert(typeof(p1) == "number")
-	local t = {
+	local config = {
 		dampingRatio = 1,
 		frequency = 1,
 		restingVelocityLimit = 0.001,
@@ -77,24 +78,24 @@ return function(p1, p2)
 	
 	if p2 ~= nil then
 		assert(typeof(p2) == "table")
-		assignModule(t, p2)
+		AssignModule(config, p2)
 	end
-	local dampingRatio = t.dampingRatio
-	local frequency = t.frequency
-	local restingVelocityLimit = t.restingVelocityLimit
-	local restingPositionLimit = t.restingPositionLimit
-	assert(typeof(dampingRatio) == "number")
-	assert(typeof(frequency) == "number")
-	assert(typeof(restingVelocityLimit) == "number")
-	assert(typeof(restingPositionLimit) == "number")
-	assert(restingVelocityLimit >= 0, "Expected restingVelocityLimit >= 0")
-	assert(restingPositionLimit >= 0, "Expected restingPositionLimit >= 0")
+	local DampingRatio = config.dampingRatio
+	local Frequency = config.frequency
+	local RestingVelocityLimit: number = config.restingVelocityLimit
+	local RestingPositionLimit: number = config.restingPositionLimit
+	assert(typeof(DampingRatio) == "number")
+	assert(typeof(Frequency) == "number")
+	assert(typeof(RestingVelocityLimit) == "number")
+	assert(typeof(RestingPositionLimit) == "number")
+	assert(RestingVelocityLimit >= 0, "Expected restingVelocityLimit >= 0")
+	assert(RestingPositionLimit >= 0, "Expected restingPositionLimit >= 0")
 	
 	return {
-		__dampingRatio = dampingRatio,
-		__frequency = frequency,
-		__restingVelocityLimit = restingVelocityLimit,
-		__restingPositionLimit = restingPositionLimit,
+		__dampingRatio = DampingRatio,
+		__frequency = Frequency,
+		__restingVelocityLimit = RestingVelocityLimit,
+		__restingPositionLimit = RestingPositionLimit,
 		__goalPosition = p1,
 		step = step
 	}

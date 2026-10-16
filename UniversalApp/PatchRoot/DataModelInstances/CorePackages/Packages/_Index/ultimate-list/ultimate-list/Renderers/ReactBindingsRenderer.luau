@@ -1,149 +1,148 @@
-﻿local var1 = script:FindFirstAncestor("ultimate-list")
-local _ = require(var1.Dimensions)
-local dimensionsMethodsModule = require(var1.Dimensions.DimensionsMethods)
-local reactModule = require(var1.Parent.React)
-local adjustPositionToScrollAxisModule = require(var1.Dimensions.adjustPositionToScrollAxis)
-local createDebugLoggerModule = require(var1.Util.createDebugLogger)
-local _ = require(var1.createVirtualizedListController)
-local joinAndMapBindingsModule = require(var1.Util.joinAndMapBindings)
-local createElement = reactModule.createElement
-local var2 = createDebugLoggerModule("ReactBindingsRenderer")
+﻿local UltimateList = script:FindFirstAncestor("ultimate-list")
+local _ = require(UltimateList.Dimensions)
+local DimensionsMethodsModule = require(UltimateList.Dimensions.DimensionsMethods)
+local ReactModule = require(UltimateList.Parent.React)
+local AdjustPositionToScrollAxisModule = require(UltimateList.Dimensions.adjustPositionToScrollAxis)
+local _ = require(UltimateList.createVirtualizedListController)
+local JoinAndMapBindingsModule = require(UltimateList.Util.joinAndMapBindings)
+local CreateElementFunction = ReactModule.createElement
+local ReactBindingsRenderer = require(UltimateList.Util.createDebugLogger)("ReactBindingsRenderer")
 
-local function getKeyDefault(_, p1)
-	return tostring(p1)
+local function getKeyDefault(_, p1): string --[[ Line: 15 ]]
+	return (tostring(p1))
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), dimensionsMethodsModule (ref), getKeyDefault (ref), var2 (ref), createElement (ref), joinAndMapBindingsModule (ref), adjustPositionToScrollAxisModule (ref)
-	local var3, var4 = reactModule.useState(function()
-		-- upvalues: dimensionsMethodsModule (copy), p1 (ref), reactModule (copy)
-		local t = {}
-		local var5 = dimensionsMethodsModule.elementsDisplayedHint(p1.dimensions, p1.virtualizedListController.getWindowSize(), p1.direction)
+return (ReactModule.memo(function(p1) --[[ Line: 35 | Named "ReactBindingsRenderer" ]]
+	-- upvalues: ReactModule (copy), DimensionsMethodsModule (copy), getKeyDefault (copy), ReactBindingsRenderer (copy), CreateElementFunction (copy), JoinAndMapBindingsModule (copy), AdjustPositionToScrollAxisModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 48 ]]
+		-- upvalues: DimensionsMethodsModule (upval), p1 (copy), ReactModule (upval)
+		local List = {}
+		local ElementsDisplayedHintResult = DimensionsMethodsModule.elementsDisplayedHint(p1.dimensions, p1.virtualizedListController.getWindowSize(), p1.direction)
 		
-		if var5 == nil then
-			return t
+		if ElementsDisplayedHintResult == nil then
+			return List
 		end
-		for _ = 1, var5 do
-			local var6, var7 = reactModule.createBinding({ contents = { type = "vacant" } })
-			table.insert(t, { binding = var6, set = var7 })
+		for _ = 1, ElementsDisplayedHintResult do
+			local Binding, Binding2 = ReactModule.createBinding({ contents = { type = "vacant" } })
+			table.insert(List, { binding = Binding, set = Binding2 })
 		end
-		return t
+		return List
 	end)
-	local getKey = p1.getKey or getKeyDefault
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), getKey (ref), var3 (ref), var2 (copy), reactModule (copy), var4 (ref)
-		return p1.virtualizedListController.bindToUpdate(function()
-			-- upvalues: p1 (copy), getKey (copy), var3 (copy), var2 (copy), reactModule (copy), var4 (copy)
-			local var8 = p1.virtualizedListController.get()
-			local range = p1.virtualizedListController.getRange()
+	local GetKey = p1.getKey or getKeyDefault
+	ReactModule.useEffect(function() --[[ Line: 79 ]]
+		-- upvalues: p1 (copy), GetKey (copy), UseStateResult (copy), ReactBindingsRenderer (upval), ReactModule (upval), UseStateResult2 (copy)
+		return p1.virtualizedListController.bindToUpdate(function() --[[ Line: 80 ]]
+			-- upvalues: p1 (upval), GetKey (upval), UseStateResult (upval), ReactBindingsRenderer (upval), ReactModule (upval), UseStateResult2 (upval)
+			local GetResult = p1.virtualizedListController.get()
+			local Range = p1.virtualizedListController.getRange()
 			local t = {}
 			
-			for i, v in var8 do
-				t[getKey(v, i + (range.X - 1))] = i
+			for i, value in GetResult do
+				t[GetKey(value, i + (Range.X - 1))] = i
 			end
-			local t_1 = {}
-			local t_2 = {}
-			local t_3 = {}
+			local List = {}
+			local List1 = {}
+			local List2 = {}
 			
-			for i_1, v_1 in var3 do
-				local value = v_1.binding:getValue()
+			for Key, value1 in UseStateResult do
+				local Value = value1.binding:getValue()
 				
-				if value.contents.type == "vacant" then
-					table.insert(t_2, v_1.set)
+				if Value.contents.type == "vacant" then
+					table.insert(List1, value1.set)
 				else
-					local key = value.contents.key
-					local var9 = t[key]
+					local Key1 = Value.contents.key
+					local Entry = t[Key1]
 					
-					if var9 == nil then
-						var2("%s is now dead", key)
-						table.insert(t_1, v_1.set)
+					if Entry == nil then
+						ReactBindingsRenderer("%s is now dead", Key1)
+						table.insert(List, value1.set)
 					else
-						t[key] = nil
-						local var10 = var8[var9]
+						t[Key1] = nil
+						local GetResultEntry = GetResult[Entry]
 						
-						if value.contents.value ~= var10 then
-							var2("%s existed, but changed", key)
-							v_1.set({
+						if Value.contents.value ~= GetResultEntry then
+							ReactBindingsRenderer("%s existed, but changed", Key1)
+							value1.set({
 								contents = {
 									type = "full",
-									index = var9 + (range.X - 1),
-									key = key,
-									value = var10
+									index = Entry + (Range.X - 1),
+									key = Key1,
+									value = GetResultEntry
 								}
 							})
 						end
 					end
 				end
 			end
-			var2("%d total setters, %d dead setters, %d vacant setters", #var3, #t_1, #t_2)
+			ReactBindingsRenderer("%d total setters, %d dead setters, %d vacant setters", #UseStateResult, #List, #List1)
 			
-			for i_2, v_2 in t do
-				assert(v_2 ~= nil, "Luau")
-				local t_4 = {
+			for Key, value2 in t do
+				assert(value2 ~= nil, "Luau")
+				local config = {
 					contents = {
 						type = "full",
-						index = v_2 + (range.X - 1),
-						key = i_2,
-						value = var8[v_2]
+						index = value2 + (Range.X - 1),
+						key = Key,
+						value = GetResult[value2]
 					}
 				}
-				local removed = table.remove(t_1)
+				local Removed: (any) -> () = table.remove(List)
 				
-				if removed == nil then
-					local removed_1 = table.remove(t_2)
-					
-					if removed_1 == nil then
-						local var11, var12 = reactModule.createBinding(t_4)
-						table.insert(t_3, { binding = var11, set = var12 })
-					else
-						var2("%s is filling vacant spot", i_2)
-						removed_1(t_4)
-					end
+				if Removed ~= nil then
+					ReactBindingsRenderer("%s is filling dead spot", Key)
+					Removed(config)
+					continue
+				end
+				local Removed1: (any) -> () = table.remove(List1)
+				
+				if Removed1 == nil then
+					local Binding, Binding2 = ReactModule.createBinding(config)
+					table.insert(List2, { binding = Binding, set = Binding2 })
 				else
-					var2("%s is filling dead spot", i_2)
-					removed(t_4)
+					ReactBindingsRenderer("%s is filling vacant spot", Key)
+					Removed1(config)
 				end
 			end
-			if #t_3 > 0 then
-				var2("Needed to create %d more bindings to fit, there will be %d setters", #t_3, #t_3 + #var3)
-				var4(function(p2)
-					-- upvalues: t_3 (ref)
-					local cloned = table.clone(p2)
-					table.move(t_3, 1, #t_3, #cloned + 1, cloned)
+			if #List2 > 0 then
+				ReactBindingsRenderer("Needed to create %d more bindings to fit, there will be %d setters", #List2, #List2 + #UseStateResult)
+				UseStateResult2(function(Tbl) --[[ Line: 177 ]]
+					-- upvalues: List2 (copy)
+					local Copy = table.clone(Tbl)
+					table.move(List2, 1, #List2, #Copy + 1, Copy)
 					
-					return cloned
+					return Copy
 				end)
 			end
-			for i_3, v_3 in t_1 do
-				v_3({ contents = { type = "vacant" } })
+			for _, value3 in List do
+				value3({ contents = { type = "vacant" } })
 			end
 		end)
-	end, { p1.virtualizedListController, getKey, var3 })
-	local t = {}
+	end, { p1.virtualizedListController, GetKey, UseStateResult })
+	local Frames = {}
 	
-	for i, v in var3 do
-		local binding = v.binding
-		local var13 = binding:map(function(p2)
-			-- upvalues: dimensionsMethodsModule (copy), p1 (ref)
-			return if p2.contents.type == "vacant" then { size = UDim2.new(), position = UDim2.new() } else dimensionsMethodsModule.getUDimRect(p1.dimensions, p2.contents.value, p2.contents.index, p1.virtualizedListController.getWindowSize(), p1.direction)
+	for i, value in UseStateResult do
+		local Binding = value.binding
+		local MapResult = Binding:map(function(p2) --[[ Line: 199 ]]
+			-- upvalues: DimensionsMethodsModule (upval), p1 (copy)
+			return if p2.contents.type == "vacant" then { size = UDim2.new(), position = UDim2.new() } else DimensionsMethodsModule.getUDimRect(p1.dimensions, p2.contents.value, p2.contents.index, p1.virtualizedListController.getWindowSize(), p1.direction)
 		end)
-		t[`Item{i}`] = createElement("Frame", {
+		Frames[`Item{i}`] = CreateElementFunction("Frame", {
 			BackgroundTransparency = 1,
-			Position = joinAndMapBindingsModule(function(p2, p3)
-				-- upvalues: adjustPositionToScrollAxisModule (copy), p1 (ref)
-				return adjustPositionToScrollAxisModule(p2.position, p3, p1.direction)
-			end, var13, p1.scrollAxisBinding),
-			Size = var13:map(function(p2)
+			Position = JoinAndMapBindingsModule(function(p2, p3) --[[ Line: 219 ]]
+				-- upvalues: AdjustPositionToScrollAxisModule (upval), p1 (copy)
+				return AdjustPositionToScrollAxisModule(p2.position, p3, p1.direction)
+			end, MapResult, p1.scrollAxisBinding),
+			Size = MapResult:map(function(p2) --[[ Line: 223 ]]
 				return p2.size
 			end),
-			Visible = binding:map(function(p2)
+			Visible = Binding:map(function(p2): boolean --[[ Line: 227 ]]
 				return p2.contents.type == "full"
 			end)
 		}, {
-			Content = p1.callback(binding:map(function(p2)
+			Content = p1.callback(Binding:map(function(p2) --[[ Line: 231 ]]
 				return if p2.contents.type == "full" then p2.contents.value else nil
 			end))
 		})
 	end
-	return createElement(reactModule.Fragment, {}, t)
-end)
+	return CreateElementFunction(ReactModule.Fragment, {}, Frames)
+end))

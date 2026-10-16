@@ -1,19 +1,19 @@
-﻿local networkRequests = script.Parent.networkRequests
-local createGetSkinnyUsersFromUserIdsModule = require(networkRequests.createGetSkinnyUsersFromUserIds)
-local createGetUsernameHistoryFromUserIdModule = require(networkRequests.createGetUsernameHistoryFromUserId)
-local createGetUserV2FromUserIdModule = require(networkRequests.createGetUserV2FromUserId)
-local createGetDisplayNameValidationModule = require(networkRequests.createGetDisplayNameValidation)
-local createSetDisplayNameModule = require(networkRequests.createSetDisplayName)
-local createSetDescriptionModule = require(networkRequests.createSetDescription)
+﻿local NetworkRequests = script.Parent.networkRequests
+local CreateGetSkinnyUsersFromUserIdsModule = require(NetworkRequests.createGetSkinnyUsersFromUserIds)
+local CreateGetUsernameHistoryFromUserIdModule = require(NetworkRequests.createGetUsernameHistoryFromUserId)
+local CreateGetUserV2FromUserIdModule = require(NetworkRequests.createGetUserV2FromUserId)
+local CreateGetDisplayNameValidationModule = require(NetworkRequests.createGetDisplayNameValidation)
+local CreateSetDisplayNameModule = require(NetworkRequests.createSetDisplayName)
+local CreateSetDescriptionModule = require(NetworkRequests.createSetDescription)
 
-return function(p1)
-	-- upvalues: createGetSkinnyUsersFromUserIdsModule (ref), createGetUsernameHistoryFromUserIdModule (ref), createGetUserV2FromUserIdModule (ref), createGetDisplayNameValidationModule (ref), createSetDisplayNameModule (ref), createSetDescriptionModule (ref)
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: CreateGetSkinnyUsersFromUserIdsModule (copy), CreateGetUsernameHistoryFromUserIdModule (copy), CreateGetUserV2FromUserIdModule (copy), CreateGetDisplayNameValidationModule (copy), CreateSetDisplayNameModule (copy), CreateSetDescriptionModule (copy)
 	return {
-		GetSkinnyUsersFromUserIds = createGetSkinnyUsersFromUserIdsModule(p1),
-		GetUsernameHistoryFromUserId = createGetUsernameHistoryFromUserIdModule(p1),
-		GetUserV2FromUserId = createGetUserV2FromUserIdModule(p1),
-		GetDisplayNameValidation = createGetDisplayNameValidationModule(p1),
-		SetDisplayName = createSetDisplayNameModule(p1),
-		SetDescription = createSetDescriptionModule(p1)
+		GetSkinnyUsersFromUserIds = CreateGetSkinnyUsersFromUserIdsModule(p1),
+		GetUsernameHistoryFromUserId = CreateGetUsernameHistoryFromUserIdModule(p1),
+		GetUserV2FromUserId = CreateGetUserV2FromUserIdModule(p1),
+		GetDisplayNameValidation = CreateGetDisplayNameValidationModule(p1),
+		SetDisplayName = CreateSetDisplayNameModule(p1),
+		SetDescription = CreateSetDescriptionModule(p1)
 	}
 end

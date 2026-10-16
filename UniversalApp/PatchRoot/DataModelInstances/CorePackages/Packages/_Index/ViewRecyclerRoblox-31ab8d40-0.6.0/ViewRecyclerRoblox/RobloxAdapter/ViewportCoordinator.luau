@@ -1,165 +1,179 @@
-﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
-local _ = require(viewRecyclerRoblox.Parent.ViewRecycler).Axis
-local signalsExperimentalModule = require(viewRecyclerRoblox.Parent.SignalsExperimental)
-local axisMapModule = require(viewRecyclerRoblox.RobloxAdapter.axisMap)
-local runService = game:GetService("RunService")
+﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler).Axis
+local SignalsExperimentalModule = require(ViewRecyclerRoblox.Parent.SignalsExperimental)
+local AxisMapModule = require(ViewRecyclerRoblox.RobloxAdapter.axisMap)
+local RunService = game:GetService("RunService")
 
-local function _(p1)
-	for i, v in p1 do
-		v:Disconnect()
+local function _(Tbl) --[[ Line: 35 | Named "disconnectAll" ]]
+	for _, Connection in Tbl do
+		Connection:Disconnect()
 	end
-	table.clear(p1)
+	table.clear(Tbl)
 end
 
 return {
-	new = function(p2)
-		-- upvalues: axisMapModule (ref), signalsExperimentalModule (ref), runService (ref)
-		local axis = p2.axis
-		local activationMargin = p2.activationMargin or 0
-		local retentionMargin = p2.retentionMargin or activationMargin
-		assert(activationMargin >= 0, "activationMargin must be non-negative")
-		assert(activationMargin <= retentionMargin, "retentionMargin must be at least activationMargin")
-		local var1 = nil
+	new = function(p1) --[[ Line: 42 ]]
+		-- upvalues: AxisMapModule (copy), SignalsExperimentalModule (copy), RunService (copy)
+		local Axis = p1.axis
+		local ActivationMargin = p1.activationMargin or 0
+		local RetentionMargin = p1.retentionMargin or ActivationMargin
+		assert(ActivationMargin >= 0, "activationMargin must be non-negative")
+		assert(ActivationMargin <= RetentionMargin, "retentionMargin must be at least activationMargin")
+		local v1 = nil
+		local List = {}
 		local t = {}
-		local t_1 = {}
-		local t_2 = {}
-		local var2 = nil
-		local var3 = false
+		local Tbl = {}
+		local HeartbeatConnection = nil
+		local Flag = false
 		
-		local function updateTargetGeometry(p3)
-			-- upvalues: var1 (write), axisMapModule (copy), axis (ref)
-			if var1 == nil or not p3.target:IsDescendantOf(var1) then
-				p3.contentStart = nil
-				p3.contentEnd = nil
+		local function updateTargetGeometry(p2) --[[ Line: 56 ]]
+			-- upvalues: v1 (ref), AxisMapModule (upval), Axis (copy)
+			local Frame = v1
+			
+			if Frame == nil or not p2.target:IsDescendantOf(Frame) then
+				p2.contentStart = nil
+				p2.contentEnd = nil
+				
+				return
+			else
+				local MainOfResultDelta = AxisMapModule.mainOf(Frame.CanvasPosition, Axis) + AxisMapModule.mainOf(p2.target.AbsolutePosition, Axis) - AxisMapModule.mainOf(Frame.AbsolutePosition, Axis)
+				p2.contentStart = MainOfResultDelta
+				p2.contentEnd = MainOfResultDelta + AxisMapModule.mainOf(p2.target.AbsoluteSize, Axis)
+			end
+		end
+		
+		local function _(p2, p3) --[[ Line: 72 | Named "dispatch" ]]
+			-- upvalues: SignalsExperimentalModule (upval)
+			if p2 ~= nil or p3 ~= nil then
+				SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+					-- upvalues: p2 (copy), p3 (copy)
+					if p2 ~= nil then
+						for _, value in p2 do
+							value.setActive(false)
+						end
+					end
+					if p3 ~= nil then
+						for _, value1 in p3 do
+							value1.setActive(true)
+						end
+					end
+				end)
 				
 				return
 			end
-			local var4 = axisMapModule.mainOf(var1.CanvasPosition, axis) + axisMapModule.mainOf(p3.target.AbsolutePosition, axis) - axisMapModule.mainOf(var1.AbsolutePosition, axis)
-			p3.contentStart = var4
-			p3.contentEnd = var4 + axisMapModule.mainOf(p3.target.AbsoluteSize, axis)
 		end
 		
-		local function _(p3, p4)
-			-- upvalues: signalsExperimentalModule (copy)
-			if p3 == nil and p4 == nil then
-				return
-			end
-			signalsExperimentalModule.batch(function()
-				-- upvalues: p3 (ref), p4 (ref)
-				if p3 ~= nil then
-					for i, v in p3 do
-						v.setActive(false)
-					end
-				end
-				if p4 ~= nil then
-					for i, v in p4 do
-						v.setActive(true)
-					end
-				end
-			end)
-		end
-		
-		local function deactivateAll()
-			-- upvalues: t_1 (ref), signalsExperimentalModule (copy)
-			local var4 = nil
+		local function deactivateAll() --[[ Line: 90 ]]
+			-- upvalues: t (copy), SignalsExperimentalModule (upval)
+			local List = nil
 			
-			for i, v in t_1 do
-				if v.active then
-					v.active = false
-					var4 = var4 or {}
-					table.insert(var4, v)
+			for _, value in t do
+				if value.active then
+					value.active = false
+					List = List or {}
+					table.insert(List, value)
 				end
 			end
-			if var4 == nil then
+			local List1 = List
+			
+			if List1 ~= nil then
+				local v2 = nil
+				SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+					-- upvalues: List1 (copy), v2 (copy)
+					if List1 ~= nil then
+						for _, value in List1 do
+							value.setActive(false)
+						end
+					end
+					if v2 ~= nil then
+						for _, value1 in v2 do
+							value1.setActive(true)
+						end
+					end
+				end)
+				
 				return
 			end
-			local var5 = nil
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var4 (ref), var5 (ref)
-				if var4 ~= nil then
-					for i, v in var4 do
-						v.setActive(false)
-					end
-				end
-				if var5 ~= nil then
-					for i, v in var5 do
-						v.setActive(true)
-					end
-				end
-			end)
 		end
 		
-		local function evaluate()
-			-- upvalues: var3 (write), var1 (write), deactivateAll (ref), axisMapModule (copy), axis (ref), t_1 (ref), retentionMargin (ref), activationMargin (ref), signalsExperimentalModule (copy)
-			if var3 then return end
-			if var1 == nil then
+		local function evaluate() --[[ Line: 102 ]]
+			-- upvalues: Flag (ref), v1 (ref), deactivateAll (copy), AxisMapModule (upval), Axis (copy), t (copy), RetentionMargin (copy), ActivationMargin (copy), SignalsExperimentalModule (upval)
+			if Flag then return end
+			local ScrollFrame = v1
+			
+			if ScrollFrame == nil then
 				deactivateAll()
 				
 				return
 			end
-			local var6 = axisMapModule.mainOf(var1.CanvasPosition, axis)
-			local var7 = var6 + axisMapModule.mainOf(var1.AbsoluteWindowSize, axis)
-			local var8 = nil
-			local var9 = nil
+			local MainOfResult = AxisMapModule.mainOf(ScrollFrame.CanvasPosition, Axis)
+			local NewMainOfResult = MainOfResult + AxisMapModule.mainOf(ScrollFrame.AbsoluteWindowSize, Axis)
+			local List1 = nil
+			local List = nil
 			
-			for i, v in t_1 do
-				local var10 = false
-				local contentStart = v.contentStart
-				local contentEnd = v.contentEnd
+			for _, value in t do
+				local Active = false
+				local ContentStart = value.contentStart
+				local ContentEnd = value.contentEnd
 				
-				if contentStart ~= nil and contentEnd ~= nil then
-					local var11 = if v.active then retentionMargin else activationMargin
-					var10 = var6 - var11 < contentEnd and contentStart < var7 + var11
+				if ContentStart ~= nil and ContentEnd ~= nil then
+					local RetentionMargin1 = if value.active then RetentionMargin else ActivationMargin
+					Active = MainOfResult - RetentionMargin1 < ContentEnd and ContentStart < NewMainOfResult + RetentionMargin1
 				end
-				if var10 ~= v.active then
-					v.active = var10
+				if Active ~= value.active then
+					value.active = Active
 					
-					if var10 then
-						var9 = var9 or {}
-						table.insert(var9, v)
+					if Active then
+						List = List or {}
+						table.insert(List, value)
 					else
-						var8 = var8 or {}
-						table.insert(var8, v)
+						List1 = List1 or {}
+						table.insert(List1, value)
 					end
 				end
 			end
-			if var8 == nil and var9 == nil then
+			local List2 = List1
+			local List3 = List
+			
+			if List2 ~= nil or List3 ~= nil then
+				SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+					-- upvalues: List2 (copy), List3 (copy)
+					if List2 ~= nil then
+						for _, value in List2 do
+							value.setActive(false)
+						end
+					end
+					if List3 ~= nil then
+						for _, value1 in List3 do
+							value1.setActive(true)
+						end
+					end
+				end)
+				
 				return
 			end
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var8 (ref), var9 (ref)
-				if var8 ~= nil then
-					for i, v in var8 do
-						v.setActive(false)
-					end
-				end
-				if var9 ~= nil then
-					for i, v in var9 do
-						v.setActive(true)
-					end
-				end
-			end)
 		end
 		
-		local function scheduleSettledEvaluation(value)
-			-- upvalues: var3 (write), t_2 (ref), var2 (write), runService (copy), t_1 (ref), updateTargetGeometry (ref), evaluate (ref)
-			if var3 then return end
-			if value ~= nil then
-				t_2[value] = true
+		local function scheduleSettledEvaluation(Key) --[[ Line: 142 ]]
+			-- upvalues: Flag (ref), Tbl (copy), HeartbeatConnection (ref), RunService (upval), t (copy), updateTargetGeometry (copy), evaluate (copy)
+			if Flag then return end
+			if Key ~= nil then
+				Tbl[Key] = true
 			end
-			if var2 == nil then
-				var2 = runService.Heartbeat:Connect(function()
-					-- upvalues: var2 (copy), var3 (copy), t_2 (copy), t_1 (copy), updateTargetGeometry (copy), evaluate (copy)
-					var2 = nil
+			if HeartbeatConnection == nil then
+				HeartbeatConnection = RunService.Heartbeat:Connect(function() --[[ Line: 152 ]]
+					-- upvalues: HeartbeatConnection (upval), Flag (upval), Tbl (upval), t (upval), updateTargetGeometry (upval), evaluate (upval)
+					local Connection = HeartbeatConnection
+					HeartbeatConnection = nil
 					
-					if var2 ~= nil then
-						var2:Disconnect()
+					if Connection ~= nil then
+						Connection:Disconnect()
 					end
-					if var3 then return end
-					for i in t_2 do
-						t_2[i] = nil
+					if Flag then return end
+					for i in Tbl do
+						Tbl[i] = nil
 						
-						if t_1[i.target] == i then
+						if t[i.target] == i then
 							updateTargetGeometry(i)
 						end
 					end
@@ -172,173 +186,177 @@ return {
 		
 		local _ = nil
 		
-		local var12 = function(p5)
-			-- upvalues: var3 (write), var1 (write), t (ref), deactivateAll (ref), evaluate (ref), scheduleSettledEvaluation (ref), var12 (write), t_1 (ref), updateTargetGeometry (ref)
-			if var3 or p5 == var1 then return end
-			for i, v in t do
-				v:Disconnect()
+		local function SetViewport(Object) --[[ Line: 172 ]]
+			-- upvalues: Flag (ref), v1 (ref), List (copy), deactivateAll (copy), evaluate (copy), scheduleSettledEvaluation (copy), SetViewport (ref), t (copy), updateTargetGeometry (copy)
+			if Flag or Object == v1 then return end
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
-			table.clear(t)
+			table.clear(List)
 			deactivateAll()
-			var1 = p5
+			v1 = Object
 			
-			if p5 == nil then return end
-			table.insert(t, p5:GetPropertyChangedSignal("CanvasPosition"):Connect(evaluate))
-			table.insert(t, p5:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(scheduleSettledEvaluation))
-			table.insert(t, p5.Destroying:Connect(function()
-				-- upvalues: var12 (copy)
-				var12(nil)
+			if Object == nil then return end
+			table.insert(List, Object:GetPropertyChangedSignal("CanvasPosition"):Connect(evaluate))
+			table.insert(List, Object:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(scheduleSettledEvaluation))
+			table.insert(List, Object.Destroying:Connect(function() --[[ Line: 191 ]]
+				-- upvalues: SetViewport (upval)
+				SetViewport(nil)
 			end))
 			
-			for i_1, v_1 in t_1 do
-				updateTargetGeometry(v_1)
+			for _, value in t do
+				updateTargetGeometry(value)
 			end
 			evaluate()
 		end
 		
 		return {
-			setViewport = var12,
-			register = function(p6, p7)
-				-- upvalues: var3 (write), t_1 (ref), signalsExperimentalModule (copy), t_2 (ref), var2 (write), runService (copy), updateTargetGeometry (ref), evaluate (ref)
-				if var3 then
-					return function() end
-				end
-				assert(t_1[p6] == nil, "target is already registered")
-				local t = {
-					active = false,
-					contentStart = nil,
-					contentEnd = nil,
-					target = p6,
-					setActive = p7,
-					connections = {}
-				}
-				t_1[p6] = t
-				local var13 = false
-				
-				local function unregister()
-					-- upvalues: var13 (write), t_1 (copy), p6 (ref), t (ref), signalsExperimentalModule (copy)
-					if var13 then return end
-					var13 = true
+			setViewport = SetViewport,
+			register = function(Object, SetActive) --[[ Line: 201 ]]
+				-- upvalues: Flag (ref), t (copy), SignalsExperimentalModule (upval), Tbl (copy), HeartbeatConnection (ref), RunService (upval), updateTargetGeometry (copy), evaluate (copy)
+				if Flag then
+					return function() --[[ Line: 203 ]] end
+				else
+					assert(t[Object] == nil, "target is already registered")
+					local config = {
+						active = false,
+						contentStart = nil,
+						contentEnd = nil,
+						target = Object,
+						setActive = SetActive,
+						connections = {}
+					}
+					t[Object] = config
+					local Flag1 = false
 					
-					if t_1[p6] ~= t then return end
-					t_1[p6] = nil
-					local connections = t.connections
-					
-					for i, v in connections do
-						v:Disconnect()
-					end
-					table.clear(connections)
-					
-					if t.active then
-						t.active = false
-						local list = { t }
+					local function unregister() --[[ Line: 218 ]]
+						-- upvalues: Flag1 (ref), t (upval), Object (copy), config (copy), SignalsExperimentalModule (upval)
+						if Flag1 then return end
+						Flag1 = true
 						
-						if list == nil then return end
-						local var14 = nil
-						signalsExperimentalModule.batch(function()
-							-- upvalues: list (ref), var14 (ref)
-							if list ~= nil then
-								for i, v in list do
-									v.setActive(false)
-								end
-							end
-							if var14 ~= nil then
-								for i, v in var14 do
-									v.setActive(true)
-								end
-							end
-						end)
-					end
-				end
-				
-				local function updateGeometry()
-					-- upvalues: t (ref), var3 (copy), t_2 (copy), var2 (copy), runService (copy), t_1 (copy), updateTargetGeometry (copy), evaluate (copy)
-					if var3 then return end
-					if t ~= nil then
-						t_2[t] = true
-					end
-					if var2 == nil then
-						var2 = runService.Heartbeat:Connect(function()
-							-- upvalues: var2 (copy), var3 (copy), t_2 (copy), t_1 (copy), updateTargetGeometry (copy), evaluate (copy)
-							var2 = nil
+						if t[Object] ~= config then return end
+						t[Object] = nil
+						local Connections = config.connections
+						
+						for _, connection in Connections do
+							connection:Disconnect()
+						end
+						table.clear(Connections)
+						
+						if config.active then
+							config.active = false
+							local list = { config }
 							
-							if var2 ~= nil then
-								var2:Disconnect()
-							end
-							if var3 then return end
-							for i in t_2 do
-								t_2[i] = nil
-								
-								if t_1[i.target] == i then
-									updateTargetGeometry(i)
+							if list == nil then return end
+							local v3 = nil
+							SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+								-- upvalues: list (copy), v3 (copy)
+								if list ~= nil then
+									for _, value in list do
+										value.setActive(false)
+									end
 								end
-							end
-							evaluate()
-						end)
-						
-						return
+								if v3 ~= nil then
+									for _, value1 in v3 do
+										value1.setActive(true)
+									end
+								end
+							end)
+						end
 					end
+					
+					local function updateGeometry() --[[ Line: 234 ]]
+						-- upvalues: config (copy), Flag (upval), Tbl (upval), HeartbeatConnection (upval), RunService (upval), t (upval), updateTargetGeometry (upval), evaluate (upval)
+						if Flag then return end
+						if config ~= nil then
+							Tbl[config] = true
+						end
+						if HeartbeatConnection == nil then
+							HeartbeatConnection = RunService.Heartbeat:Connect(function() --[[ Line: 152 ]]
+								-- upvalues: HeartbeatConnection (upval), Flag (upval), Tbl (upval), t (upval), updateTargetGeometry (upval), evaluate (upval)
+								local Connection = HeartbeatConnection
+								HeartbeatConnection = nil
+								
+								if Connection ~= nil then
+									Connection:Disconnect()
+								end
+								if Flag then return end
+								for i in Tbl do
+									Tbl[i] = nil
+									
+									if t[i.target] == i then
+										updateTargetGeometry(i)
+									end
+								end
+								evaluate()
+							end)
+							
+							return
+						end
+					end
+					
+					table.insert(config.connections, Object:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateGeometry))
+					table.insert(config.connections, Object:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateGeometry))
+					table.insert(config.connections, Object.Destroying:Connect(unregister))
+					updateTargetGeometry(config)
+					evaluate()
+					
+					return unregister
 				end
-				
-				table.insert(t.connections, p6:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateGeometry))
-				table.insert(t.connections, p6:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateGeometry))
-				table.insert(t.connections, p6.Destroying:Connect(unregister))
-				updateTargetGeometry(t)
-				evaluate()
-				
-				return unregister
 			end,
-			destroy = function()
-				-- upvalues: var3 (write), var2 (write), t_2 (ref), t (ref), t_1 (ref), var1 (write), signalsExperimentalModule (copy)
-				if var3 then return end
-				var3 = true
+			destroy = function() --[[ Line: 245 ]]
+				-- upvalues: Flag (ref), HeartbeatConnection (ref), Tbl (copy), List (copy), t (copy), v1 (ref), SignalsExperimentalModule (upval)
+				if Flag then return end
+				Flag = true
 				
-				if var2 ~= nil then
-					var2:Disconnect()
-					var2 = nil
+				if HeartbeatConnection ~= nil then
+					HeartbeatConnection:Disconnect()
+					HeartbeatConnection = nil
 				end
-				table.clear(t_2)
+				table.clear(Tbl)
 				
-				for i, v in t do
-					v:Disconnect()
+				for _, Connection in List do
+					Connection:Disconnect()
 				end
-				table.clear(t)
-				local var15 = nil
+				table.clear(List)
+				local List1 = nil
 				
-				for i_1, v_1 in t_1 do
-					t_1[i_1] = nil
-					local connections = v_1.connections
+				for i, value in t do
+					t[i] = nil
+					local Connections = value.connections
 					
-					for i_2, v_2 in connections do
-						v_2:Disconnect()
+					for _, connection in Connections do
+						connection:Disconnect()
 					end
-					table.clear(connections)
+					table.clear(Connections)
 					
-					if v_1.active then
-						v_1.active = false
-						var15 = var15 or {}
-						table.insert(var15, v_1)
+					if value.active then
+						value.active = false
+						List1 = List1 or {}
+						table.insert(List1, value)
 					end
 				end
-				var1 = nil
+				v1 = nil
+				local List2 = List1
 				
-				if var15 == nil then
+				if List2 ~= nil then
+					local v4 = nil
+					SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+						-- upvalues: List2 (copy), v4 (copy)
+						if List2 ~= nil then
+							for _, value in List2 do
+								value.setActive(false)
+							end
+						end
+						if v4 ~= nil then
+							for _, value1 in v4 do
+								value1.setActive(true)
+							end
+						end
+					end)
+					
 					return
 				end
-				local var16 = nil
-				signalsExperimentalModule.batch(function()
-					-- upvalues: var15 (ref), var16 (ref)
-					if var15 ~= nil then
-						for i, v in var15 do
-							v.setActive(false)
-						end
-					end
-					if var16 ~= nil then
-						for i, v in var16 do
-							v.setActive(true)
-						end
-					end
-				end)
 			end
 		}
 	end

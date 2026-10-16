@@ -1,11 +1,11 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Enums.InputPlacement)
-local _ = require(foundation.Enums.InputSize)
-local _ = require(foundation.Components.Types)
-local accordionContextModule = require(script.Parent.AccordionContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Enums.InputPlacement)
+local _ = require(Foundation.Enums.InputSize)
+local _ = require(Foundation.Components.Types)
+local AccordionContextModule = require(script.Parent.AccordionContext)
 
-return function()
-	-- upvalues: reactModule (ref), accordionContextModule (ref)
-	return reactModule.useContext(accordionContextModule)
+return function() --[[ Line: 26 ]]
+	-- upvalues: ReactModule (copy), AccordionContextModule (copy)
+	return ReactModule.useContext(AccordionContextModule)
 end

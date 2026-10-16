@@ -1,7 +1,7 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local builderIconsModule = require(foundation.Parent.BuilderIcons)
-local inputPlatformModule = require(foundation.Enums.InputPlatform)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local BuilderIconsModule = require(Foundation.Parent.BuilderIcons)
+local InputPlatformModule = require(Foundation.Enums.InputPlatform)
+local Tbl = {
 	ButtonA = "PsX",
 	ButtonB = "PsCircle",
 	ButtonX = "PsSquare",
@@ -24,39 +24,39 @@ local t = {
 	ButtonRight = "PsDpadRight"
 }
 
-local function _(p1, p2)
-	local cloned = table.clone(p1)
+local function _(Tbl, List) --[[ Line: 47 | Named "merge" ]]
+	local Copy = table.clone(Tbl)
 	
-	for i, v in p2 do
-		cloned[i] = v
+	for i, value in List do
+		Copy[i] = value
 	end
-	return cloned
+	return Copy
 end
 
-local t_1 = {}
-local pS4 = inputPlatformModule.PS4
-local cloned = table.clone(t)
+local IconKeysByPlatform = {}
+local PS4 = InputPlatformModule.PS4
+local Copy = table.clone(Tbl)
 
-for i, v in {
+for i, value in {
 	ButtonStart = "Ps4Options",
 	ButtonSelect = "Ps4Share",
 	ButtonBack = "Ps4Share"
 } do
-	cloned[i] = v
+	Copy[i] = value
 end
-t_1[pS4] = cloned
-local pS5 = inputPlatformModule.PS5
-local cloned_1 = table.clone(t)
+IconKeysByPlatform[PS4] = Copy
+local PS5 = InputPlatformModule.PS5
+local Copy1 = table.clone(Tbl)
 
-for i_1, v_1 in {
+for i1, value1 in {
 	ButtonStart = "Ps5Options",
 	ButtonSelect = "Ps5Share",
 	ButtonBack = "Ps5Share"
 } do
-	cloned_1[i_1] = v_1
+	Copy1[i1] = value1
 end
-t_1[pS5] = cloned_1
-t_1[inputPlatformModule.Xbox] = {
+IconKeysByPlatform[PS5] = Copy1
+IconKeysByPlatform[InputPlatformModule.Xbox] = {
 	ButtonA = "XboxA",
 	ButtonB = "XboxB",
 	ButtonX = "XboxX",
@@ -81,7 +81,7 @@ t_1[inputPlatformModule.Xbox] = {
 	ButtonLeft = "XboxDpadLeft",
 	ButtonRight = "XboxDpadRight"
 }
-t_1[inputPlatformModule.Default] = {
+IconKeysByPlatform[InputPlatformModule.Default] = {
 	Backspace = "KeyBackspace",
 	CapsLock = "KeyCapsLock",
 	Escape = "SquareTextEsc",
@@ -117,39 +117,39 @@ t_1[inputPlatformModule.Default] = {
 	MouseWheel = "MouseScrollwheel"
 }
 
-local _ = function(value)
-	-- upvalues: builderIconsModule (ref)
-	local var1 = builderIconsModule.Icon[value]
+local _ = function(p1) --[[ Line: 132 | Named "resolveIconAsset" ]]
+	-- upvalues: BuilderIconsModule (copy)
+	local IconEntry = BuilderIconsModule.Icon[p1]
 	
-	return if typeof(var1) == "string" and var1 ~= "" then var1 else nil
+	return if typeof(IconEntry) == "string" and IconEntry ~= "" then IconEntry else nil
 end
 
-local t_2 = {}
+local t = {}
 
-for i_2, v_2 in t_1 do
-	local t_3 = {}
+for i2, value2 in IconKeysByPlatform do
+	local t1 = {}
 	
-	for i_3, v_3 in v_2 do
-		local var1 = builderIconsModule.Icon[v_3]
-		local var2 = if typeof(var1) == "string" and var1 ~= "" then var1 else nil
+	for i3, value3 in value2 do
+		local IconEntry = BuilderIconsModule.Icon[value3]
+		local IconEntry1 = if typeof(IconEntry) == "string" and IconEntry ~= "" then IconEntry else nil
 		
-		if var2 then
-			t_3[i_3] = var2
+		if IconEntry1 then
+			t1[i3] = IconEntry1
 		end
 	end
-	t_2[i_2] = t_3
+	t[i2] = t1
 end
-local _ = function(p3)
-	-- upvalues: inputPlatformModule (ref)
-	return if p3 == inputPlatformModule.Default then inputPlatformModule.Xbox else inputPlatformModule.Default
+local _ = function(Default) --[[ Line: 153 | Named "getFallbackPlatform" ]]
+	-- upvalues: InputPlatformModule (copy)
+	return if Default == InputPlatformModule.Default then InputPlatformModule.Xbox else InputPlatformModule.Default
 end
 
 return {
-	getIconForKeyName = function(p3, p4)
-		-- upvalues: t_2 (ref), inputPlatformModule (ref)
-		local var3 = t_2[p4][p3]
+	getIconForKeyName = function(p1, Default) --[[ Line: 157 ]]
+		-- upvalues: t (copy), InputPlatformModule (copy)
+		local Entry = t[Default][p1]
 		
-		return var3 or t_2[if p4 == inputPlatformModule.Default then inputPlatformModule.Xbox else inputPlatformModule.Default][p3]
+		return if Entry then Entry else t[if Default == InputPlatformModule.Default then InputPlatformModule.Xbox else InputPlatformModule.Default][p1]
 	end,
-	iconKeysByPlatform = t_1
+	iconKeysByPlatform = IconKeysByPlatform
 }

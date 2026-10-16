@@ -1,21 +1,21 @@
-﻿local function flatten(p1)
-	-- upvalues: flatten (ref)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var1)
+﻿local function flatten(p1) --[[ Line: 2 ]]
+	-- upvalues: flatten (copy)
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local t = {}
-	local var2 = 1
+	local Count = 1
 	
-	for i_1 = 1, #p1 do
-		if type(p1[i_1]) ~= "table" then
-			t[var2] = p1[i_1]
-			var2 += 1
+	for i = 1, #p1 do
+		if type(p1[i]) ~= "table" then
+			t[Count] = p1[i]
+			Count += 1
 			continue
 		end
-		local var3 = flatten(p1[i_1])
+		local FlattenResult = flatten(p1[i])
 		
-		for i = 1, #var3 do
-			t[var2] = var3[i]
-			var2 += 1
+		for i1 = 1, #FlattenResult do
+			t[Count] = FlattenResult[i1]
+			Count += 1
 		end
 	end
 	return t

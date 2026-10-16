@@ -1,14 +1,14 @@
-﻿local components = script.Components
-local lists = script.Lists
-local _ = require(lists.ViewabilityHelper)
+﻿local Components = script.Components
+local Lists = script.Lists
+local _ = require(Lists.ViewabilityHelper)
 
 return {
-	ScrollView = require(components.ScrollView.ScrollView),
-	VirtualizedList = require(lists.VirtualizedList),
-	SectionList = require(lists.SectionList).default,
-	FlatList = require(lists.FlatList),
-	BidirectionalFlatList = require(lists.BidirectionalFlatList).BidirectionalFlatList,
-	View = require(components.View.View),
-	AnimatedFlatList = require(lists.AnimatedFlatList),
-	Hooks = require(lists.Hooks)
+	ScrollView = require(Components.ScrollView.ScrollView),
+	VirtualizedList = require(Lists.VirtualizedList),
+	SectionList = require(Lists.SectionList).default,
+	FlatList = require(Lists.FlatList),
+	BidirectionalFlatList = require(Lists.BidirectionalFlatList).BidirectionalFlatList,
+	View = require(Components.View.View),
+	AnimatedFlatList = require(Lists.AnimatedFlatList),
+	Hooks = require(Lists.Hooks)
 }

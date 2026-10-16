@@ -1,103 +1,103 @@
-﻿local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local analyticsModule = require(parent.Analytics)
-local util = parent.util
-local floatEqualsModule = require(parent.util.floatEquals)
-local _ = require(util.Types)
-local pcallDeferredModule = require(util.pcallDeferred)
-local getMeshSizeModule = require(util.getMeshSize)
-local getEditableMeshFromContextModule = require(util.getEditableMeshFromContext)
-local failureReasonsAccumulatorModule = require(util.FailureReasonsAccumulator)
-local t = {}
+﻿local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local AnalyticsModule = require(Parent.Analytics)
+local Util = Parent.util
+local FloatEqualsModule = require(Parent.util.floatEquals)
+local _ = require(Util.Types)
+local PcallDeferredModule = require(Util.pcallDeferred)
+local GetMeshSizeModule = require(Util.getMeshSize)
+local GetEditableMeshFromContextModule = require(Util.getEditableMeshFromContext)
+local FailureReasonsAccumulatorModule = require(Util.FailureReasonsAccumulator)
 
-local function reportFailure(p1, p2, p3, p4)
-	-- upvalues: analyticsModule (ref)
-	if p4 and p3.isServer ~= nil and p3.isServer then
-		error(p1)
+local function reportFailure(Formatted, ValidateMeshSizePropertyFailedToLoadMesh, p1, p2) --[[ Line: 21 ]]
+	-- upvalues: AnalyticsModule (copy)
+	if p2 and p1.isServer ~= nil and p1.isServer then
+		error(Formatted)
 	end
-	analyticsModule.reportFailure(p2, nil, p3)
+	AnalyticsModule.reportFailure(ValidateMeshSizePropertyFailedToLoadMesh, nil, p1)
 	
-	return false, { p1 }
+	return false, { Formatted }
 end
 
-local function _(p1, p2)
-	-- upvalues: floatEqualsModule (ref)
-	return floatEqualsModule(p1.X, p2.X, 0.00001) and (floatEqualsModule(p1.Y, p2.Y, 0.00001) and floatEqualsModule(p1.Z, p2.Z, 0.00001))
+local function _(Vector, Vector1) --[[ Line: 40 | Named "vector3Equals" ]]
+	-- upvalues: FloatEqualsModule (copy)
+	return FloatEqualsModule(Vector.X, Vector1.X, 0.00001) and (FloatEqualsModule(Vector.Y, Vector1.Y, 0.00001) and FloatEqualsModule(Vector.Z, Vector1.Z, 0.00001))
 end
 
-local function calculateMeshSize(p1, p2)
-	-- upvalues: getEditableMeshFromContextModule (ref), reportFailure (ref), analyticsModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref)
-	local t = {
+local function calculateMeshSize(Object, p1) --[[ Line: 45 ]]
+	-- upvalues: GetEditableMeshFromContextModule (copy), reportFailure (copy), AnalyticsModule (copy), PcallDeferredModule (copy), GetMeshSizeModule (copy)
+	local config = {
 		fieldName = "MeshId",
-		fullName = p1:GetFullName(),
-		contentId = p1.MeshId,
-		context = p1.Name
+		fullName = Object:GetFullName(),
+		contentId = Object.MeshId,
+		context = Object.Name
 	}
-	local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p2)
+	local MeshId, MeshId2 = GetEditableMeshFromContextModule(Object, "MeshId", p1)
 	
-	if not var1 then
-		return reportFailure(string.format("Mesh for '%s' failed to load. Make sure the mesh exists and try again.", p1.Name), analyticsModule.ErrorType.validateMeshSizeProperty_FailedToLoadMesh, p2, false)
+	if not MeshId then
+		return reportFailure(string.format("Mesh for '%s' failed to load. Make sure the mesh exists and try again.", Object.Name), AnalyticsModule.ErrorType.validateMeshSizeProperty_FailedToLoadMesh, p1, false)
 	end
-	t.editableMesh = var2
-	local var3, var4 = pcallDeferredModule(function()
-		-- upvalues: getMeshSizeModule (copy), t (ref)
-		return getMeshSizeModule(t)
-	end, p2)
+	config.editableMesh = MeshId2
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 68 ]]
+		-- upvalues: GetMeshSizeModule (upval), config (copy)
+		return GetMeshSizeModule(config)
+	end, p1)
 	
-	if var3 then
-		return true, nil, var4
+	if PcallDeferredModuleResult then
+		return true, nil, PcallDeferredModuleResult2
+	else
+		return reportFailure(string.format("Mesh for '%s' failed to load. Make sure the mesh exists and try again.", Object.Name), AnalyticsModule.ErrorType.validateMeshSizeProperty_FailedToLoadMesh, p1, true)
 	end
-	return reportFailure(string.format("Mesh for '%s' failed to load. Make sure the mesh exists and try again.", p1.Name), analyticsModule.ErrorType.validateMeshSizeProperty_FailedToLoadMesh, p2, true)
 end
 
-local function validateInternal(p1, p2)
-	-- upvalues: calculateMeshSize (ref), floatEqualsModule (ref), reportFailure (ref), analyticsModule (ref)
-	local currentTime = tick()
-	local var1, var2, var3 = calculateMeshSize(p1, p2)
+local function validateInternal(Child, p1) --[[ Line: 83 ]]
+	-- upvalues: calculateMeshSize (copy), FloatEqualsModule (copy), reportFailure (copy), AnalyticsModule (copy)
+	local CurrentTime = tick()
+	local MeshSize, MeshSize2, MeshSize3 = calculateMeshSize(Child, p1)
 	
-	if not var1 or not var3 then
-		return var1, var2
+	if not MeshSize or not MeshSize3 then
+		return MeshSize, MeshSize2
 	end
-	local meshSize = p1.MeshSize
+	local MeshSize1 = Child.MeshSize
 	
-	if floatEqualsModule(meshSize.X, var3.X, 0.00001) and (floatEqualsModule(meshSize.Y, var3.Y, 0.00001) and floatEqualsModule(meshSize.Z, var3.Z, 0.00001)) then
-		analyticsModule.recordScriptTime(script.Name, currentTime, p2)
+	if FloatEqualsModule(MeshSize1.X, MeshSize3.X, 0.00001) and (FloatEqualsModule(MeshSize1.Y, MeshSize3.Y, 0.00001) and FloatEqualsModule(MeshSize1.Z, MeshSize3.Z, 0.00001)) then
+		AnalyticsModule.recordScriptTime(script.Name, CurrentTime, p1)
 		
 		return true
+	else
+		return reportFailure(string.format("Calculated mesh size for %s does not match MeshSize property value", Child.Name), AnalyticsModule.ErrorType.validateMeshSizeProperty_Mismatch, p1, false)
 	end
-	return reportFailure(string.format("Calculated mesh size for %s does not match MeshSize property value", p1.Name), analyticsModule.ErrorType.validateMeshSizeProperty_Mismatch, p2, false)
 end
 
-function t.validateSingleMeshPart(p1, p2)
-	-- upvalues: validateInternal (ref)
-	return if p2.allowEditableInstances then true else validateInternal(p1, p2)
-end
-
-function t.validateBodyAsset(value, p1)
-	-- upvalues: validateInternal (ref), analyticsModule (ref), failureReasonsAccumulatorModule (ref), constantsModule (ref)
-	local currentTime = tick()
-	
-	if p1.allowEditableInstances then
-		return true
-	end
-	local assetTypeEnum = p1.assetTypeEnum
-	
-	if Enum.AssetType.DynamicHead == assetTypeEnum then
-		local var1, var2 = validateInternal(value, p1)
-		analyticsModule.recordScriptTime(script.Name, currentTime, p1)
+return {
+	validateSingleMeshPart = function(p1, p2) --[[ Line: 107 ]]
+		-- upvalues: validateInternal (copy)
+		return if p2.allowEditableInstances then true else validateInternal(p1, p2)
+	end,
+	validateBodyAsset = function(Object, p1) --[[ Line: 117 ]]
+		-- upvalues: validateInternal (copy), AnalyticsModule (copy), FailureReasonsAccumulatorModule (copy), ConstantsModule (copy)
+		local CurrentTime = tick()
 		
-		return var1, var2
+		if p1.allowEditableInstances then
+			return true
+		end
+		local AssetTypeEnum = p1.assetTypeEnum
+		
+		if Enum.AssetType.DynamicHead == AssetTypeEnum then
+			local ValidateInternalResult, ValidateInternalResult2 = validateInternal(Object, p1)
+			AnalyticsModule.recordScriptTime(script.Name, CurrentTime, p1)
+			
+			return ValidateInternalResult, ValidateInternalResult2
+		end
+		local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
+		
+		for subPart in ConstantsModule.ASSET_TYPE_INFO[AssetTypeEnum].subParts do
+			local Child = Object:FindFirstChild(subPart)
+			assert(Child)
+			NewFailureReasonsAccumulator:updateReasons(validateInternal(Child, p1))
+		end
+		AnalyticsModule.recordScriptTime(script.Name, CurrentTime, p1)
+		
+		return NewFailureReasonsAccumulator:getFinalResults()
 	end
-	local var3 = failureReasonsAccumulatorModule.new()
-	
-	for i in constantsModule.ASSET_TYPE_INFO[assetTypeEnum].subParts do
-		local var4 = value:FindFirstChild(i)
-		assert(var4)
-		var3:updateReasons(validateInternal(var4, p1))
-	end
-	analyticsModule.recordScriptTime(script.Name, currentTime, p1)
-	
-	return var3:getFinalResults()
-end
-
-return t
+}

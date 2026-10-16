@@ -1,22 +1,21 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local breakpointModule = require(foundation.Enums.Breakpoint)
-local gridStyleSheetModule = require(script.Parent.GridStyleSheet)
-local reactModule = require(parent.React)
-local _ = require(foundation.Providers.Responsive.ResponsiveContext)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local getGridMetricsModule = require(foundation.Utility.getGridMetrics)
-local useBreakpointModule = require(foundation.Providers.Responsive.Hooks.useBreakpoint)
-local useResponsiveModule = require(foundation.Providers.Responsive.useResponsive)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local BreakpointModule = require(Foundation.Enums.Breakpoint)
+local GridStyleSheetModule = require(script.Parent.GridStyleSheet)
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Providers.Responsive.ResponsiveContext)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local GetGridMetricsModule = require(Foundation.Utility.getGridMetrics)
+local UseBreakpointModule = require(Foundation.Providers.Responsive.Hooks.useBreakpoint)
+local UseResponsiveModule = require(Foundation.Providers.Responsive.useResponsive)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	[Enum.ItemLineAlignment.Start] = "items-start",
 	[Enum.ItemLineAlignment.Center] = "items-center",
 	[Enum.ItemLineAlignment.End] = "items-end"
 }
-local t_1 = {
+local config1 = {
 	tag = "size-full-0 auto-y",
 	Wraps = true,
 	testId = "--foundation-grid",
@@ -24,40 +23,43 @@ local t_1 = {
 	SortOrder = Enum.SortOrder.LayoutOrder
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), useResponsiveModule (ref), reactModule (ref), useBreakpointModule (ref), getGridMetricsModule (ref), breakpointModule (ref), t (ref), viewModule (ref), withCommonPropsModule (ref), gridStyleSheetModule (ref)
-	local var1 = withDefaultsModule(p1, t_1)
-	local var2 = useResponsiveModule()
-	local var3, var4 = reactModule.useState(nil)
-	local var5, var6 = useBreakpointModule(var3)
-	local var7 = getGridMetricsModule(var2.config, var5, var6.X)
-	local xLarge = var2.config.breakpoint.widths[breakpointModule.XLarge]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 44 | Named "Grid" ]]
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseResponsiveModule (copy), ReactModule (copy), UseBreakpointModule (copy), GetGridMetricsModule (copy), BreakpointModule (copy), config (copy), ViewModule (copy), WithCommonPropsModule (copy), GridStyleSheetModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
+	local UseResponsiveModuleResult = UseResponsiveModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseBreakpointModuleResult, UseBreakpointModuleResult2 = UseBreakpointModule(UseStateResult)
+	local GridMetricsModule = GetGridMetricsModule(UseResponsiveModuleResult.config, UseBreakpointModuleResult, UseBreakpointModuleResult2.X)
+	local Width = UseResponsiveModuleResult.config.breakpoint.widths[BreakpointModule.XLarge]
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = var1.tag, ref = p2 }), {
-		GridMeasure = reactModule.createElement(viewModule, { tag = "size-full-0", ref = var4 }, {
-			GridMeasureSizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(xLarge, 1e999) })
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = WithDefaultsModuleResult.tag, ref = Ref }), {
+		GridMeasure = ReactModule.createElement(ViewModule, { tag = "size-full-0", ref = UseStateResult2 }, {
+			GridMeasureSizeConstraint = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(Width, 1e999) })
 		}),
-		GridAlignment = reactModule.createElement(viewModule, {
-			tag = `col flex-x-fill size-full-0 auto-y {t[var1.align]}`
+		GridAlignment = ReactModule.createElement(ViewModule, {
+			tag = `col flex-x-fill size-full-0 auto-y {config[WithDefaultsModuleResult.align]}`
 		}, {
-			GridStyleSheet = reactModule.createElement(gridStyleSheetModule, { breakpoint = var5, containerWidth = var6.X }),
-			Grid = reactModule.createElement(viewModule, {
+			GridStyleSheet = ReactModule.createElement(GridStyleSheetModule, {
+				breakpoint = UseBreakpointModuleResult,
+				containerWidth = UseBreakpointModuleResult2.X
+			}),
+			Grid = ReactModule.createElement(ViewModule, {
 				tag = "auto-y",
-				Size = UDim2.fromOffset(var6.X, 0),
+				Size = UDim2.fromOffset(UseBreakpointModuleResult2.X, 0),
 				layout = {
-					Padding = if not var1.Wraps then UDim.new(0, var7.gutterWidth) else nil,
-					SortOrder = var1.SortOrder,
+					Padding = if WithDefaultsModuleResult.Wraps then nil else UDim.new(0, GridMetricsModule.gutterWidth),
+					SortOrder = WithDefaultsModuleResult.SortOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
-					HorizontalFlex = if var1.Wraps then Enum.UIFlexAlignment.SpaceBetween else nil,
-					Wraps = var1.Wraps
+					HorizontalFlex = if WithDefaultsModuleResult.Wraps then Enum.UIFlexAlignment.SpaceBetween else nil,
+					Wraps = WithDefaultsModuleResult.Wraps
 				}
 			}, {
-				GridSizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(xLarge, 1e999) }),
-				GridMargin = reactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, var7.margin),
-					PaddingRight = UDim.new(0, var7.margin)
+				GridSizeConstraint = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(Width, 1e999) }),
+				GridMargin = ReactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, GridMetricsModule.margin),
+					PaddingRight = UDim.new(0, GridMetricsModule.margin)
 				})
-			}, var1.children)
+			}, WithDefaultsModuleResult.children)
 		})
 	})
 end))

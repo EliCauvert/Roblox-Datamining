@@ -1,20 +1,20 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-assert(viewRecyclerReact ~= nil, "LayoutScrollPlayground must be mounted under view-recycler-react")
-local jumpControlsModule = require(script.Parent.Harness.JumpControls)
-local reactModule = require(viewRecyclerReact.Parent.React)
-local recyclingStatsModule = require(script.Parent.Harness.RecyclingStats)
-local rowFixturesModule = require(script.Parent.Harness.RowFixtures)
-local storyControlsModule = require(script.Parent.Harness.StoryControls)
-local storyShellModule = require(script.Parent.Harness.StoryShell)
-local unknownModule = require(viewRecyclerReact)
-local useManagedLayoutModule = require(script.Parent.Harness.useManagedLayout)
-local createElement = reactModule.createElement
-local frozen = table.freeze({
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+assert(ViewRecyclerReact ~= nil, "LayoutScrollPlayground must be mounted under view-recycler-react")
+local JumpControlsModule = require(script.Parent.Harness.JumpControls)
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local RecyclingStatsModule = require(script.Parent.Harness.RecyclingStats)
+local RowFixturesModule = require(script.Parent.Harness.RowFixtures)
+local StoryControlsModule = require(script.Parent.Harness.StoryControls)
+local StoryShellModule = require(script.Parent.Harness.StoryShell)
+local Module = require(ViewRecyclerReact)
+local UseManagedLayoutModule = require(script.Parent.Harness.useManagedLayout)
+local CreateElementFunction = ReactModule.createElement
+local Frozen = table.freeze({
 	Fixed = "fixed",
 	KnownVariable = "knownVariable",
 	Measured = "measured"
 })
-local frozen_1 = table.freeze({
+local Frozen1 = table.freeze({
 	itemCount = 1000,
 	overscan = 2,
 	axis = "vertical",
@@ -27,309 +27,303 @@ local frozen_1 = table.freeze({
 	longLength = 96,
 	measuredEstimate = 72,
 	presentationMode = "immediate",
-	scenario = frozen.Fixed
+	scenario = Frozen.Fixed
 })
-local t = {
-	scenario = { frozen.Fixed, frozen.KnownVariable, frozen.Measured },
-	itemCount = storyControlsModule.options(frozen_1.itemCount, { 100, 5000, 10000, 100000 }),
-	overscan = storyControlsModule.OverscanOptions,
-	axis = storyControlsModule.AxisOptions,
-	jumpTarget = frozen_1.jumpTarget,
-	alignment = storyControlsModule.AlignmentOptions,
-	diagnostics = frozen_1.diagnostics,
-	itemLength = frozen_1.itemLength,
-	spacing = frozen_1.spacing,
-	shortLength = frozen_1.shortLength,
-	longLength = frozen_1.longLength,
-	measuredEstimate = frozen_1.measuredEstimate,
-	presentationMode = storyControlsModule.PresentationModeOptions
-}
-local frozen_2 = table.freeze({
+local Frozen2 = table.freeze({
 	itemCount = 100000,
 	jumpTarget = 50000,
 	itemLength = 44,
 	spacing = 4,
-	scenario = frozen.Fixed
+	scenario = Frozen.Fixed
 })
-local frozen_3 = table.freeze({
+local Frozen3 = table.freeze({
 	itemCount = 1000,
 	jumpTarget = 500,
 	itemLength = 44,
 	spacing = 4,
-	scenario = frozen.Fixed
+	scenario = Frozen.Fixed
 })
-local frozen_4 = table.freeze({
+local Frozen4 = table.freeze({
 	itemCount = 1000,
 	jumpTarget = 500,
 	shortLength = 48,
 	longLength = 96,
 	spacing = 6,
-	scenario = frozen.KnownVariable
+	scenario = Frozen.KnownVariable
 })
-local frozen_5 = table.freeze({
+local Frozen5 = table.freeze({
 	itemCount = 5000,
 	jumpTarget = 2500,
 	axis = "vertical",
 	measuredEstimate = 72,
 	spacing = 6,
-	scenario = frozen.Measured
+	scenario = Frozen.Measured
 })
-local t_1 = {
+local Presets = {
 	FixedFocused = {
 		name = "Fixed Sizes",
 		summary = "Provides a focused uniform-row scenario for tuning fixed item geometry and scroll alignment.",
 		details = {
 			title = "Fixed Sizes",
 			instructions = "Tune item length, spacing, alignment, and overscan while scrolling a focused uniform list.",
-			itemUpdate = "Comparison \226\128\148 render-driven ReadyOnCommit or binding-driven ReadyOnAssignment rows.",
+			itemUpdate = "Comparison — render-driven ReadyOnCommit or binding-driven ReadyOnAssignment rows.",
 			acceptanceCriteria = "Uniform rows remain aligned and mounted hosts stay bounded near the rendered range."
 		},
-		values = frozen_3,
+		values = Frozen3,
 		controls = {
 			diagnostics = true,
-			itemCount = storyControlsModule.options(frozen_3.itemCount, { 100, 5000, 10000 }),
-			overscan = storyControlsModule.OverscanOptions,
-			axis = storyControlsModule.AxisOptions,
-			jumpTarget = frozen_3.jumpTarget,
-			alignment = storyControlsModule.AlignmentOptions,
-			itemLength = frozen_3.itemLength,
-			spacing = frozen_3.spacing,
-			presentationMode = storyControlsModule.PresentationModeOptions
+			itemCount = StoryControlsModule.options(Frozen3.itemCount, { 100, 5000, 10000 }),
+			overscan = StoryControlsModule.OverscanOptions,
+			axis = StoryControlsModule.AxisOptions,
+			jumpTarget = Frozen3.jumpTarget,
+			alignment = StoryControlsModule.AlignmentOptions,
+			itemLength = Frozen3.itemLength,
+			spacing = Frozen3.spacing,
+			presentationMode = StoryControlsModule.PresentationModeOptions
 		}
 	},
 	Fixed = {
 		name = "100K Row Viewport",
 		summary = "Demonstrates bounded recycling and random access across 100,000 uniform log rows.",
-		values = frozen_2,
+		values = Frozen2,
 		controls = {
 			diagnostics = true,
-			itemCount = storyControlsModule.options(frozen_2.itemCount, { 1000, 10000, 50000 }),
-			overscan = storyControlsModule.OverscanOptions,
-			axis = storyControlsModule.AxisOptions,
-			jumpTarget = frozen_2.jumpTarget,
-			alignment = storyControlsModule.AlignmentOptions,
-			itemLength = frozen_2.itemLength,
-			spacing = frozen_2.spacing,
-			presentationMode = storyControlsModule.PresentationModeOptions
+			itemCount = StoryControlsModule.options(Frozen2.itemCount, { 1000, 10000, 50000 }),
+			overscan = StoryControlsModule.OverscanOptions,
+			axis = StoryControlsModule.AxisOptions,
+			jumpTarget = Frozen2.jumpTarget,
+			alignment = StoryControlsModule.AlignmentOptions,
+			itemLength = Frozen2.itemLength,
+			spacing = Frozen2.spacing,
+			presentationMode = StoryControlsModule.PresentationModeOptions
 		}
 	},
 	KnownVariable = {
 		name = "Known Variable Sizes",
 		summary = "Uses exact alternating row geometry for measurement-free distant jumps.",
-		values = frozen_4,
+		values = Frozen4,
 		controls = {
 			diagnostics = true,
-			itemCount = storyControlsModule.options(frozen_4.itemCount, { 100, 500, 5000 }),
-			overscan = storyControlsModule.OverscanOptions,
-			axis = storyControlsModule.AxisOptions,
-			jumpTarget = frozen_4.jumpTarget,
-			alignment = storyControlsModule.AlignmentOptions,
-			shortLength = frozen_4.shortLength,
-			longLength = frozen_4.longLength,
-			spacing = frozen_4.spacing,
-			presentationMode = storyControlsModule.PresentationModeOptions
+			itemCount = StoryControlsModule.options(Frozen4.itemCount, { 100, 500, 5000 }),
+			overscan = StoryControlsModule.OverscanOptions,
+			axis = StoryControlsModule.AxisOptions,
+			jumpTarget = Frozen4.jumpTarget,
+			alignment = StoryControlsModule.AlignmentOptions,
+			shortLength = Frozen4.shortLength,
+			longLength = Frozen4.longLength,
+			spacing = Frozen4.spacing,
+			presentationMode = StoryControlsModule.PresentationModeOptions
 		}
 	},
 	Measured = {
 		name = "Dynamic Measured Rows",
 		summary = "Shows estimated row geometry correcting as wrapped text is measured.",
-		values = frozen_5,
+		values = Frozen5,
 		controls = {
 			diagnostics = true,
-			itemCount = storyControlsModule.options(frozen_5.itemCount, { 100, 1000, 10000 }),
-			overscan = storyControlsModule.OverscanOptions,
-			jumpTarget = frozen_5.jumpTarget,
-			alignment = storyControlsModule.AlignmentOptions,
-			measuredEstimate = frozen_5.measuredEstimate,
-			spacing = frozen_5.spacing,
-			presentationMode = storyControlsModule.PresentationModeOptions
+			itemCount = StoryControlsModule.options(Frozen5.itemCount, { 100, 1000, 10000 }),
+			overscan = StoryControlsModule.OverscanOptions,
+			jumpTarget = Frozen5.jumpTarget,
+			alignment = StoryControlsModule.AlignmentOptions,
+			measuredEstimate = Frozen5.measuredEstimate,
+			spacing = Frozen5.spacing,
+			presentationMode = StoryControlsModule.PresentationModeOptions
 		}
 	}
 }
-local t_2 = {
-	[frozen.Fixed] = {
+local ScenarioDetails = {
+	[Frozen.Fixed] = {
 		title = "100K Row Viewport",
 		instructions = "Scroll the event log, jump to the middle and either boundary, then vary alignment, row geometry, and overscan.",
-		itemUpdate = "Comparison \226\128\148 render-driven ReadyOnCommit or binding-driven ReadyOnAssignment rows.",
+		itemUpdate = "Comparison — render-driven ReadyOnCommit or binding-driven ReadyOnAssignment rows.",
 		acceptanceCriteria = "Random access remains immediate, rows stay aligned, and mounted hosts remain bounded near the visible range regardless of total row count."
 	},
-	[frozen.KnownVariable] = {
+	[Frozen.KnownVariable] = {
 		title = "Known Variable Sizes",
 		instructions = "Jump between distant alternating short/long rows, then vary both exact lengths and spacing.",
-		itemUpdate = "Comparison \226\128\148 render-driven ReadyOnCommit or binding-driven ReadyOnAssignment rows.",
+		itemUpdate = "Comparison — render-driven ReadyOnCommit or binding-driven ReadyOnAssignment rows.",
 		acceptanceCriteria = "Alternating geometry has no overlap or gaps beyond spacing, and start/center/end jumps land exactly without measurement correction."
 	},
-	[frozen.Measured] = {
+	[Frozen.Measured] = {
 		title = "Dynamic Measured Rows",
 		instructions = "Use a vertical axis, vary row spacing, jump deep into wrapped content, and compare the initial estimate with the corrected scroll position.",
-		itemUpdate = "Comparison \226\128\148 measured render-driven or fully binding-driven rows.",
+		itemUpdate = "Comparison — measured render-driven or fully binding-driven rows.",
 		acceptanceCriteria = "A deep jump may land from estimated geometry, then its target reaches the requested start, center, or end alignment as measurements settle; scrolling manually releases that target anchor."
 	}
 }
 
-local function resolveControls(p1)
-	-- upvalues: storyControlsModule (ref), frozen_1 (ref), t_2 (ref), unknownModule (ref)
-	local var1 = storyControlsModule.merge(frozen_1, p1)
-	var1 = if t_2[var1.scenario] ~= nil then frozen_1.scenario else var1.scenario
-	local var2 = storyControlsModule.positiveInteger(var1.itemCount, frozen_1.itemCount)
-	local var3 = if var1.axis == "horizontal" then "horizontal" else "vertical"
-	local var4 = storyControlsModule.resolveAxis(var3, unknownModule)
-	local lowerText = string.lower(tostring(var1.alignment))
+local function resolveControls(Controls) --[[ Line: 177 ]]
+	-- upvalues: StoryControlsModule (copy), Frozen1 (copy), ScenarioDetails (copy), Module (copy)
+	local MergeResult = StoryControlsModule.merge(Frozen1, Controls)
+	local Scenario = if ScenarioDetails[MergeResult.scenario] == nil then Frozen1.scenario else MergeResult.scenario
+	local PositiveIntegerResult: number = StoryControlsModule.positiveInteger(MergeResult.itemCount, Frozen1.itemCount)
+	local Horizontal: string = if MergeResult.axis == "horizontal" then "horizontal" else "vertical"
+	local ResolveAxisResult = StoryControlsModule.resolveAxis(Horizontal, Module)
+	local Lowered = string.lower((tostring(MergeResult.alignment)))
 	
-	if lowerText ~= "start" and lowerText ~= "end" then
-		lowerText = "center"
+	if Lowered ~= "start" and Lowered ~= "end" then
+		Lowered = "center"
 	end
 	return {
-		scenario = var1,
-		itemCount = var2,
-		overscan = storyControlsModule.nonNegativeNumber(var1.overscan, frozen_1.overscan),
-		axis = var4,
-		axisName = var3,
-		jumpTarget = math.clamp(storyControlsModule.positiveInteger(var1.jumpTarget, frozen_1.jumpTarget), 1, var2),
-		alignment = storyControlsModule.resolveAlignment(lowerText, unknownModule),
-		alignmentName = lowerText,
-		diagnostics = var1.diagnostics ~= false,
-		itemLength = storyControlsModule.positiveInteger(var1.itemLength, frozen_1.itemLength),
-		spacing = storyControlsModule.nonNegativeNumber(var1.spacing, frozen_1.spacing),
-		shortLength = storyControlsModule.positiveInteger(var1.shortLength, frozen_1.shortLength),
-		longLength = storyControlsModule.positiveInteger(var1.longLength, frozen_1.longLength),
-		measuredEstimate = storyControlsModule.positiveInteger(var1.measuredEstimate, frozen_1.measuredEstimate),
-		presentationMode = storyControlsModule.resolvePresentationMode(var1.presentationMode, unknownModule)
+		scenario = Scenario,
+		itemCount = PositiveIntegerResult,
+		overscan = StoryControlsModule.nonNegativeNumber(MergeResult.overscan, Frozen1.overscan),
+		axis = ResolveAxisResult,
+		axisName = Horizontal,
+		jumpTarget = math.clamp(StoryControlsModule.positiveInteger(MergeResult.jumpTarget, Frozen1.jumpTarget), 1, PositiveIntegerResult),
+		alignment = StoryControlsModule.resolveAlignment(Lowered, Module),
+		alignmentName = Lowered,
+		diagnostics = MergeResult.diagnostics ~= false,
+		itemLength = StoryControlsModule.positiveInteger(MergeResult.itemLength, Frozen1.itemLength),
+		spacing = StoryControlsModule.nonNegativeNumber(MergeResult.spacing, Frozen1.spacing),
+		shortLength = StoryControlsModule.positiveInteger(MergeResult.shortLength, Frozen1.shortLength),
+		longLength = StoryControlsModule.positiveInteger(MergeResult.longLength, Frozen1.longLength),
+		measuredEstimate = StoryControlsModule.positiveInteger(MergeResult.measuredEstimate, Frozen1.measuredEstimate),
+		presentationMode = StoryControlsModule.resolvePresentationMode(MergeResult.presentationMode, Module)
 	}
 end
 
-local function mergeControls(...)
-	-- upvalues: frozen_1 (ref), storyControlsModule (ref)
-	local cloned = table.clone(frozen_1)
+local function mergeControls(...) --[[ Line: 210 ]]
+	-- upvalues: Frozen1 (copy), StoryControlsModule (copy)
+	local Copy = table.clone(Frozen1)
 	
-	for i, v in { ... } do
-		cloned = storyControlsModule.merge(cloned, v)
+	for _, value in { ... } do
+		Copy = StoryControlsModule.merge(Copy, value)
 	end
-	return cloned
+	return Copy
 end
 
-local function createLayout(p1)
-	-- upvalues: frozen (ref), unknownModule (ref)
-	if p1.scenario == frozen.KnownVariable then
-		local var1 = p1.shortLength + p1.longLength + 2 * p1.spacing
+local function createLayout(Current) --[[ Line: 218 ]]
+	-- upvalues: Frozen (copy), Module (copy)
+	if Current.scenario == Frozen.KnownVariable then
+		local NewShortLength = Current.shortLength + Current.longLength + 2 * Current.spacing
 		
-		return unknownModule.Layout.create({
-			getItemLayout = function(p2)
-				-- upvalues: var1 (ref), p1 (ref)
-				local var2 = p2 % 2 == 1
+		return Module.Layout.create({
+			getItemLayout = function(p1: number) --[[ Line: 222 ]]
+				-- upvalues: NewShortLength (copy), Current (copy)
+				local v1 = p1 % 2 == 1
 				
 				return {
-					startOffset = (p2 - 1) // 2 * var1 + (if var2 then 0 else p1.shortLength + p1.spacing),
-					length = if var2 then p1.shortLength else p1.longLength
+					startOffset = (p1 - 1) // 2 * NewShortLength + (if v1 then 0 else Current.shortLength + Current.spacing),
+					length = if v1 then Current.shortLength else Current.longLength
 				}
 			end
 		})
+	else
+		return if Current.scenario == Frozen.Measured then Module.Layout.measured({ estimatedItemLength = Current.measuredEstimate }) else Module.Layout.uniform({
+			itemLength = Current.itemLength,
+			spacing = Current.spacing
+		})
 	end
-	return if p1.scenario == frozen.Measured then unknownModule.Layout.measured({ estimatedItemLength = p1.measuredEstimate }) else unknownModule.Layout.uniform({ itemLength = p1.itemLength, spacing = p1.spacing })
 end
 
-local function createItems(p1, p2, p3, p4, p5)
-	-- upvalues: frozen (ref), rowFixturesModule (ref)
-	return if p1 == frozen.KnownVariable then rowFixturesModule.buildKnownVariableRows(p2, p3, p4) elseif p1 == frozen.Measured then rowFixturesModule.buildMeasuredRows(p2, p5) elseif p1 == frozen.Fixed then rowFixturesModule.buildLogRows(p2) else rowFixturesModule.buildSimpleRows(p2)
+local function createItems(Scenario, ItemCount, ShortLength, LongLength, Spacing) --[[ Line: 243 ]]
+	-- upvalues: Frozen (copy), RowFixturesModule (copy)
+	return if Scenario == Frozen.KnownVariable then RowFixturesModule.buildKnownVariableRows(ItemCount, ShortLength, LongLength) elseif Scenario == Frozen.Measured then RowFixturesModule.buildMeasuredRows(ItemCount, Spacing) elseif Scenario == Frozen.Fixed then RowFixturesModule.buildLogRows(ItemCount) else RowFixturesModule.buildSimpleRows(ItemCount)
 end
 
-local function LayoutScrollPlayground(value)
-	-- upvalues: resolveControls (ref), reactModule (ref), useManagedLayoutModule (ref), createLayout (ref), createItems (ref), recyclingStatsModule (ref), frozen (ref), t_2 (ref), createElement (ref), storyShellModule (ref), jumpControlsModule (ref), unknownModule (ref), rowFixturesModule (ref)
-	local var1 = resolveControls(value.controls)
-	local var2, var3 = reactModule.useState(0)
-	local var4 = useManagedLayoutModule(reactModule, function()
-		-- upvalues: createLayout (copy), var1 (ref)
-		return createLayout(var1)
+local function LayoutScrollPlayground(p1) --[[ Line: 255 ]]
+	-- upvalues: resolveControls (copy), ReactModule (copy), UseManagedLayoutModule (copy), createLayout (copy), createItems (copy), RecyclingStatsModule (copy), Frozen (copy), ScenarioDetails (copy), CreateElementFunction (copy), StoryShellModule (copy), JumpControlsModule (copy), Module (copy), RowFixturesModule (copy)
+	local ResolveControlsResult = resolveControls(p1.controls)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseManagedLayoutModuleResult = UseManagedLayoutModule(ReactModule, function() --[[ Line: 258 ]]
+		-- upvalues: createLayout (upval), ResolveControlsResult (copy)
+		return createLayout(ResolveControlsResult)
 	end, {
-		var1.itemLength, var1.longLength, var1.measuredEstimate, var1.scenario,
-		var1.shortLength, var1.spacing, var2
+		ResolveControlsResult.itemLength, ResolveControlsResult.longLength,
+		ResolveControlsResult.measuredEstimate, ResolveControlsResult.scenario,
+		ResolveControlsResult.shortLength, ResolveControlsResult.spacing,
+		UseStateResult
 	})
-	local scenario = var1.scenario
-	local itemCount = var1.itemCount
-	local shortLength = var1.shortLength
-	local longLength = var1.longLength
-	local spacing = var1.spacing
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: createItems (copy), scenario (ref), itemCount (ref), shortLength (ref), longLength (ref), spacing (ref)
-		return createItems(scenario, itemCount, shortLength, longLength, spacing)
+	local Scenario = ResolveControlsResult.scenario
+	local ItemCount = ResolveControlsResult.itemCount
+	local ShortLength = ResolveControlsResult.shortLength
+	local LongLength = ResolveControlsResult.longLength
+	local Spacing = ResolveControlsResult.spacing
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 274 ]]
+		-- upvalues: createItems (upval), Scenario (copy), ItemCount (copy), ShortLength (copy), LongLength (copy), Spacing (copy)
+		return createItems(Scenario, ItemCount, ShortLength, LongLength, Spacing)
 	end, {
-		itemCount,
-		longLength,
-		scenario,
-		shortLength,
-		spacing
+		ItemCount,
+		LongLength,
+		Scenario,
+		ShortLength,
+		Spacing
 	})
-	local var6, var7 = recyclingStatsModule.useStats()
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(0)
-	local var10 = reactModule.useRef(0)
-	local var11 = reactModule.useRef("")
-	local var12 = reactModule.useRef(var1)
-	var12.current = var1
-	var11.current = recyclingStatsModule.format(var6)
-	local var13, var14 = reactModule.useBinding("")
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), frozen (copy), var9 (ref), var14 (ref), var11 (ref), var10 (ref)
-		local current = var12.current
-		local var16 = ""
+	local UseStatsResult, UseStatsResult2 = RecyclingStatsModule.useStats()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseRefResult2 = ReactModule.useRef(0)
+	local UseRefResult3 = ReactModule.useRef("")
+	local UseRefResult4 = ReactModule.useRef(ResolveControlsResult)
+	UseRefResult4.current = ResolveControlsResult
+	UseRefResult3.current = RecyclingStatsModule.format(UseStatsResult)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding("")
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 287 ]]
+		-- upvalues: UseRefResult4 (copy), Frozen (upval), UseRefResult1 (copy), UseBindingResult2 (copy), UseRefResult3 (copy), UseRefResult2 (copy)
+		local Current = UseRefResult4.current
+		local Message = ""
 		
-		if current.scenario == frozen.Fixed then
-			local var17 = current.itemLength + current.spacing
-			local clampedValue = math.clamp(math.floor(var9.current / var17) + 1, 1, current.itemCount)
-			var16 = `   Visible: {clampedValue}\226\128\147{math.min(current.itemCount, clampedValue + math.ceil(500 / var17))} / {current.itemCount}   Range: {math.round(current.itemCount * var17 - current.spacing)}px`
+		if Current.scenario == Frozen.Fixed then
+			local NewItemLength = Current.itemLength + Current.spacing
+			local ClampedValue = math.clamp(math.floor(UseRefResult1.current / NewItemLength) + 1, 1, Current.itemCount)
+			Message = `   Visible: {ClampedValue}–{math.min(Current.itemCount, ClampedValue + math.ceil(500 / NewItemLength))} / {Current.itemCount}   Range: {math.round(Current.itemCount * NewItemLength - Current.spacing)}px`
 		end
-		var14(`{var11.current}   Offset: {math.round(var9.current)}px{var16}   Diagnostics: {var10.current}`)
-	end, { var14 })
-	local var16 = reactModule.useCallback(function(p1)
-		-- upvalues: var9 (ref), var15 (ref)
-		var9.current = p1
-		var15()
-	end, { var15 })
-	local var17 = reactModule.useCallback(function(_)
-		-- upvalues: var10 (ref), var15 (ref)
-		var10.current += 1
-		var15()
-	end, { var15 })
-	reactModule.useEffect(var15, { var6, var15 })
-	local details = value.details or t_2[var1.scenario]
+		UseBindingResult2(`{UseRefResult3.current}   Offset: {math.round(UseRefResult1.current)}px{Message}   Diagnostics: {UseRefResult2.current}`)
+	end, { UseBindingResult2 })
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 301 ]]
+		-- upvalues: UseRefResult1 (copy), UseResult (copy)
+		UseRefResult1.current = Current
+		UseResult()
+	end, { UseResult })
+	local UseResult2 = ReactModule.useCallback(function(_) --[[ Line: 305 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult (copy)
+		UseRefResult2.current += 1
+		UseResult()
+	end, { UseResult })
+	ReactModule.useEffect(UseResult, { UseStatsResult, UseResult })
+	local Details = p1.details or ScenarioDetails[ResolveControlsResult.scenario]
 	
-	return createElement(recyclingStatsModule.Provider, { actions = var7 }, {
-		Shell = createElement(storyShellModule.Component, {
-			acceptanceCriteria = details.acceptanceCriteria,
-			instructions = details.instructions,
-			itemUpdate = details.itemUpdate,
+	return CreateElementFunction(RecyclingStatsModule.Provider, { actions = UseStatsResult2 }, {
+		Shell = CreateElementFunction(StoryShellModule.Component, {
+			acceptanceCriteria = Details.acceptanceCriteria,
+			instructions = Details.instructions,
+			itemUpdate = Details.itemUpdate,
 			size = UDim2.fromOffset(760, 700),
-			status = var13,
-			title = `Layout & Scroll Playground \226\128\148 {details.title}`,
-			toolbar = createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-				Jumps = createElement(jumpControlsModule, {
-					alignment = var1.alignment,
-					itemCount = var1.itemCount,
-					listRef = var8,
-					target = var1.jumpTarget
+			status = UseBindingResult,
+			title = `Layout & Scroll Playground — {Details.title}`,
+			toolbar = CreateElementFunction("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+				Jumps = CreateElementFunction(JumpControlsModule, {
+					alignment = ResolveControlsResult.alignment,
+					itemCount = ResolveControlsResult.itemCount,
+					listRef = UseRefResult,
+					target = ResolveControlsResult.jumpTarget
 				}),
-				ResetEstimate = if var1.scenario == frozen.Measured then createElement("TextButton", {
+				ResetEstimate = if ResolveControlsResult.scenario == Frozen.Measured then CreateElementFunction("TextButton", {
 					Position = UDim2.fromOffset(424, 6),
 					Size = UDim2.fromOffset(132, 30),
 					Text = "Reset estimate",
-					[reactModule.Event.Activated] = function()
-						-- upvalues: var3 (ref)
-						var3(function(p1)
-							return p1 + 1
+					[ReactModule.Event.Activated] = function() --[[ Line: 337 ]]
+						-- upvalues: UseStateResult2 (copy)
+						UseStateResult2(function(p2: number): number --[[ Line: 338 ]]
+							return p2 + 1
 						end)
 					end
 				}) else nil
 			})
 		}, {
-			List = createElement(unknownModule.VirtualList, {
-				axis = var1.axis,
-				data = { items = var5, getItemKey = rowFixturesModule.getItemKey },
-				diagnostics = if var1.diagnostics then var17 else nil,
-				itemType = if var1.scenario == frozen.Measured then if var1.presentationMode == unknownModule.RecyclableViewReadiness.ReadyOnAssignment then rowFixturesModule.ImmediateMeasuredRow else rowFixturesModule.MeasuredRow elseif var1.presentationMode == unknownModule.RecyclableViewReadiness.ReadyOnAssignment then rowFixturesModule.ImmediateSimpleRow else rowFixturesModule.SimpleRow,
-				layout = var4,
-				listRef = var8,
-				onScrollOffsetChanged = var16,
-				overscan = var1.overscan
+			List = CreateElementFunction(Module.VirtualList, {
+				axis = ResolveControlsResult.axis,
+				data = {
+					items = UseMemoResult,
+					getItemKey = RowFixturesModule.getItemKey
+				},
+				diagnostics = if ResolveControlsResult.diagnostics then UseResult2 else nil,
+				itemType = if ResolveControlsResult.scenario == Frozen.Measured then if ResolveControlsResult.presentationMode == Module.RecyclableViewReadiness.ReadyOnAssignment then RowFixturesModule.ImmediateMeasuredRow else RowFixturesModule.MeasuredRow elseif ResolveControlsResult.presentationMode == Module.RecyclableViewReadiness.ReadyOnAssignment then RowFixturesModule.ImmediateSimpleRow else RowFixturesModule.SimpleRow,
+				layout = UseManagedLayoutModuleResult,
+				listRef = UseRefResult,
+				onScrollOffsetChanged = UseResult1,
+				overscan = ResolveControlsResult.overscan
 			})
 		})
 	})
@@ -337,31 +331,45 @@ end
 
 return {
 	Component = LayoutScrollPlayground,
-	controls = t,
-	defaultValues = frozen_1,
-	presets = t_1,
-	Scenario = frozen,
+	controls = {
+		scenario = { Frozen.Fixed, Frozen.KnownVariable, Frozen.Measured },
+		itemCount = StoryControlsModule.options(Frozen1.itemCount, { 100, 5000, 10000, 100000 }),
+		overscan = StoryControlsModule.OverscanOptions,
+		axis = StoryControlsModule.AxisOptions,
+		jumpTarget = Frozen1.jumpTarget,
+		alignment = StoryControlsModule.AlignmentOptions,
+		diagnostics = Frozen1.diagnostics,
+		itemLength = Frozen1.itemLength,
+		spacing = Frozen1.spacing,
+		shortLength = Frozen1.shortLength,
+		longLength = Frozen1.longLength,
+		measuredEstimate = Frozen1.measuredEstimate,
+		presentationMode = StoryControlsModule.PresentationModeOptions
+	},
+	defaultValues = Frozen1,
+	presets = Presets,
+	Scenario = Frozen,
 	mergeControls = mergeControls,
 	resolveControls = resolveControls,
-	scenarioDetails = t_2,
-	createPreset = function(value)
-		-- upvalues: t_1 (ref), createElement (ref), LayoutScrollPlayground (ref), mergeControls (ref), reactModule (ref)
-		local var1 = t_1[value]
-		assert(var1 ~= nil, `Unknown LayoutScrollPlayground preset {value}`)
+	scenarioDetails = ScenarioDetails,
+	createPreset = function(p1) --[[ Line: 380 ]]
+		-- upvalues: Presets (copy), CreateElementFunction (copy), LayoutScrollPlayground (copy), mergeControls (copy), ReactModule (copy)
+		local Preset = Presets[p1]
+		assert(Preset ~= nil, `Unknown LayoutScrollPlayground preset {p1}`)
 		
 		return {
-			name = var1.name,
-			summary = var1.summary,
-			roact = reactModule,
-			story = function(value)
-				-- upvalues: createElement (copy), LayoutScrollPlayground (copy), mergeControls (copy), var1 (ref)
-				return createElement(LayoutScrollPlayground, {
-					controls = mergeControls(var1.values, value and value.controls),
-					details = var1.details
+			name = Preset.name,
+			summary = Preset.summary,
+			roact = ReactModule,
+			story = function(p2) --[[ Line: 384 ]]
+				-- upvalues: CreateElementFunction (upval), LayoutScrollPlayground (upval), mergeControls (upval), Preset (copy)
+				return CreateElementFunction(LayoutScrollPlayground, {
+					controls = mergeControls(Preset.values, p2 and p2.controls),
+					details = Preset.details
 				})
 			end,
-			controls = var1.controls,
-			presetControls = var1.values
+			controls = Preset.controls,
+			presetControls = Preset.values
 		}
 	end
 }

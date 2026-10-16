@@ -1,14 +1,13 @@
-﻿return function(...)
+﻿return function(...) --[[ Line: 1 | Named "join" ]]
 	local t = {}
 	
 	for i = 1, select("#", ...) do
-		local var1 = select(i, ...)
+		local Selected = select(i, ...)
 		
-		if var1 == nil then
-			continue
-		end
-		for i, v in pairs(var1) do
-			t[i] = v
+		if Selected ~= nil then
+			for i1, value in pairs(Selected) do
+				t[i1] = value
+			end
 		end
 	end
 	return t

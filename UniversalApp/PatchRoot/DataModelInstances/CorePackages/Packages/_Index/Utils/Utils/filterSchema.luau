@@ -1,134 +1,121 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local graphQLInputObjectType = graphQLModule.GraphQLInputObjectType
-local graphQLInterfaceType = graphQLModule.GraphQLInterfaceType
-local graphQLObjectType = graphQLModule.GraphQLObjectType
-local mapperKind = require(script.Parent.Interfaces).MapperKind
-local mapSchema = require(script.Parent.mapSchema).mapSchema
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local GraphQLModule = require(Parent.GraphQL)
+local GraphQLInputObjectType = GraphQLModule.GraphQLInputObjectType
+local GraphQLInterfaceType = GraphQLModule.GraphQLInterfaceType
+local GraphQLObjectType = GraphQLModule.GraphQLObjectType
+local MapperKind = require(script.Parent.Interfaces).MapperKind
+local MapSchemaFunction = require(script.Parent.mapSchema).mapSchema
 local _ = require(script.Parent.types)
-local filterRootFields = nil
-local filterElementFields = nil
+local Callback = nil
+local Callback1 = nil
+local FilterSchemaModule = {
+	filterSchema = function(p1) --[[ Line: 64 ]]
+		-- upvalues: MapSchemaFunction (copy), MapperKind (copy), Callback (ref), Boolean (copy), Callback1 (ref), GraphQLObjectType (copy), Object (copy), GraphQLInterfaceType (copy), GraphQLInputObjectType (copy)
+		local TypeFilter = if p1.typeFilter == nil then function(...): boolean --[[ Line: 82 ]]
+			return true
+		end else p1.typeFilter
+		local FieldFilter = if p1.fieldFilter == nil then nil else p1.fieldFilter
+		local RootFieldFilter = if p1.rootFieldFilter == nil then nil else p1.rootFieldFilter
+		local ObjectFieldFilter = if p1.objectFieldFilter == nil then nil else p1.objectFieldFilter
+		local InterfaceFieldFilter = if p1.interfaceFieldFilter == nil then nil else p1.interfaceFieldFilter
+		local InputObjectFieldFilter = if p1.inputObjectFieldFilter == nil then nil else p1.inputObjectFieldFilter
+		local ArgumentFilter = if p1.argumentFilter == nil then nil else p1.argumentFilter
+		
+		return (MapSchemaFunction(p1.schema, {
+			[MapperKind.QUERY] = function(p2) --[[ Line: 100 ]]
+				-- upvalues: Callback (upval), RootFieldFilter (copy), ArgumentFilter (copy)
+				return Callback(p2, "Query", RootFieldFilter, ArgumentFilter)
+			end,
+			[MapperKind.MUTATION] = function(p2) --[[ Line: 106 ]]
+				-- upvalues: Callback (upval), RootFieldFilter (copy), ArgumentFilter (copy)
+				return Callback(p2, "Mutation", RootFieldFilter, ArgumentFilter)
+			end,
+			[MapperKind.SUBSCRIPTION] = function(p2) --[[ Line: 112 ]]
+				-- upvalues: Callback (upval), RootFieldFilter (copy), ArgumentFilter (copy)
+				return Callback(p2, "Subscription", RootFieldFilter, ArgumentFilter)
+			end,
+			[MapperKind.OBJECT_TYPE] = function(p2) --[[ Line: 118 ]]
+				-- upvalues: Boolean (upval), TypeFilter (copy), Callback1 (upval), GraphQLObjectType (upval), ObjectFieldFilter (copy), FieldFilter (copy), ArgumentFilter (copy), Object (upval)
+				return if Boolean.toJSBoolean(TypeFilter(p2.name, p2)) then Callback1(GraphQLObjectType, p2, Boolean.toJSBoolean(ObjectFieldFilter) and ObjectFieldFilter or FieldFilter, ArgumentFilter) else Object.None
+			end,
+			[MapperKind.INTERFACE_TYPE] = function(p2) --[[ Line: 134 ]]
+				-- upvalues: Boolean (upval), TypeFilter (copy), Callback1 (upval), GraphQLInterfaceType (upval), InterfaceFieldFilter (copy), FieldFilter (copy), ArgumentFilter (copy), Object (upval)
+				return if Boolean.toJSBoolean(TypeFilter(p2.name, p2)) then Callback1(GraphQLInterfaceType, p2, Boolean.toJSBoolean(InterfaceFieldFilter) and InterfaceFieldFilter or FieldFilter, ArgumentFilter) else Object.None
+			end,
+			[MapperKind.INPUT_OBJECT_TYPE] = function(p2) --[[ Line: 150 ]]
+				-- upvalues: Boolean (upval), TypeFilter (copy), Callback1 (upval), GraphQLInputObjectType (upval), InputObjectFieldFilter (copy), FieldFilter (copy), Object (upval)
+				return if Boolean.toJSBoolean(TypeFilter(p2.name, p2)) then Callback1(GraphQLInputObjectType, p2, Boolean.toJSBoolean(InputObjectFieldFilter) and InputObjectFieldFilter or FieldFilter) else Object.None
+			end,
+			[MapperKind.UNION_TYPE] = function(p2) --[[ Line: 165 ]]
+				-- upvalues: Boolean (upval), TypeFilter (copy), Object (upval)
+				return if Boolean.toJSBoolean(TypeFilter(p2.name, p2)) then nil else Object.None
+			end,
+			[MapperKind.ENUM_TYPE] = function(p2) --[[ Line: 174 ]]
+				-- upvalues: Boolean (upval), TypeFilter (copy), Object (upval)
+				return if Boolean.toJSBoolean(TypeFilter(p2.name, p2)) then nil else Object.None
+			end,
+			[MapperKind.SCALAR_TYPE] = function(p2) --[[ Line: 183 ]]
+				-- upvalues: Boolean (upval), TypeFilter (copy), Object (upval)
+				return if Boolean.toJSBoolean(TypeFilter(p2.name, p2)) then nil else Object.None
+			end
+		}))
+	end
+}
 
-function t.filterSchema(p1)
-	-- upvalues: mapSchema (ref), mapperKind (ref), filterRootFields (write), boolean (ref), filterElementFields (write), graphQLObjectType (ref), object (ref), graphQLInterfaceType (ref), graphQLInputObjectType (ref)
-	local schema = p1.schema
-	local var1 = if p1.typeFilter == nil then function(...)
-		return true
-	end else p1.typeFilter
-	local var2 = if p1.fieldFilter == nil then nil else p1.fieldFilter
-	local var3 = if p1.rootFieldFilter == nil then nil else p1.rootFieldFilter
-	local var4 = if p1.objectFieldFilter == nil then nil else p1.objectFieldFilter
-	local var5 = if p1.interfaceFieldFilter == nil then nil else p1.interfaceFieldFilter
-	local var6 = if p1.inputObjectFieldFilter == nil then nil else p1.inputObjectFieldFilter
-	local var7 = if p1.argumentFilter == nil then nil else p1.argumentFilter
-	
-	return mapSchema(schema, {
-		[mapperKind.QUERY] = function(p2)
-			-- upvalues: filterRootFields (copy), var3 (ref), var7 (ref)
-			return filterRootFields(p2, "Query", var3, var7)
-		end,
-		[mapperKind.MUTATION] = function(p2)
-			-- upvalues: filterRootFields (copy), var3 (ref), var7 (ref)
-			return filterRootFields(p2, "Mutation", var3, var7)
-		end,
-		[mapperKind.SUBSCRIPTION] = function(p2)
-			-- upvalues: filterRootFields (copy), var3 (ref), var7 (ref)
-			return filterRootFields(p2, "Subscription", var3, var7)
-		end,
-		[mapperKind.OBJECT_TYPE] = function(p2)
-			-- upvalues: boolean (copy), var1 (ref), filterElementFields (copy), graphQLObjectType (copy), var4 (ref), var2 (ref), var7 (ref), object (copy)
-			return if boolean.toJSBoolean(var1(p2.name, p2)) then filterElementFields(graphQLObjectType, p2, if boolean.toJSBoolean(var4) then var4 else var2, var7) else object.None
-		end,
-		[mapperKind.INTERFACE_TYPE] = function(p2)
-			-- upvalues: boolean (copy), var1 (ref), filterElementFields (copy), graphQLInterfaceType (copy), var5 (ref), var2 (ref), var7 (ref), object (copy)
-			return if boolean.toJSBoolean(var1(p2.name, p2)) then filterElementFields(graphQLInterfaceType, p2, if boolean.toJSBoolean(var5) then var5 else var2, var7) else object.None
-		end,
-		[mapperKind.INPUT_OBJECT_TYPE] = function(p2)
-			-- upvalues: boolean (copy), var1 (ref), filterElementFields (copy), graphQLInputObjectType (copy), var6 (ref), var2 (ref), object (copy)
-			return if boolean.toJSBoolean(var1(p2.name, p2)) then filterElementFields(graphQLInputObjectType, p2, if boolean.toJSBoolean(var6) then var6 else var2) else object.None
-		end,
-		[mapperKind.UNION_TYPE] = function(p2)
-			-- upvalues: boolean (copy), var1 (ref), object (copy)
-			return if boolean.toJSBoolean(var1(p2.name, p2)) then nil else object.None
-		end,
-		[mapperKind.ENUM_TYPE] = function(p2)
-			-- upvalues: boolean (copy), var1 (ref), object (copy)
-			return if boolean.toJSBoolean(var1(p2.name, p2)) then nil else object.None
-		end,
-		[mapperKind.SCALAR_TYPE] = function(p2)
-			-- upvalues: boolean (copy), var1 (ref), object (copy)
-			return if boolean.toJSBoolean(var1(p2.name, p2)) then nil else object.None
-		end
-	})
-end
-
-filterRootFields = function(p1, p2, p3, p4)
-	-- upvalues: boolean (ref), graphQLObjectType (ref)
-	if not boolean.toJSBoolean(if boolean.toJSBoolean(p3) then p3 else p4) then
+Callback = function(p1, p2, Callback, Callback1) --[[ Line: 199 | Named "filterRootFields" ]]
+	-- upvalues: Boolean (copy), GraphQLObjectType (copy)
+	if not Boolean.toJSBoolean(Boolean.toJSBoolean(Callback) and Callback or Callback1) then
 		return p1
 	end
-	local var1 = p1:toConfig()
+	local Config = p1:toConfig()
 	
-	for i, v in var1.fields do
-		local unpacked = table.unpack(v)
-		local var2 = var1.fields:get(unpacked)
+	for _, field in Config.fields do
+		local Unpacked = table.unpack(field)
+		local GetResult = Config.fields:get(Unpacked)
 		
-		if p3 and not p3(p2, unpacked, var1.fields:get(unpacked)) then
-			var1.fields:delete(unpacked)
-		elseif boolean.toJSBoolean(if boolean.toJSBoolean(p4) then var2.args else p4) then
-			for i_1, v_1 in var2.args do
-				local unpacked_1 = table.unpack(v_1)
+		if if Callback then not Callback(p2, Unpacked, (Config.fields:get(Unpacked))) else Callback then
+			Config.fields:delete(Unpacked)
+		elseif Boolean.toJSBoolean(if Boolean.toJSBoolean(Callback1) then GetResult.args else Callback1) then
+			for _, arg in GetResult.args do
+				local Unpacked1 = table.unpack(arg)
 				
-				if not p4(p2, unpacked, unpacked_1, var2.args:get(unpacked_1)) then
-					var2.args:delete(unpacked_1)
+				if not Callback1(p2, Unpacked, Unpacked1, GetResult.args:get(Unpacked1)) then
+					GetResult.args:delete(Unpacked1)
 				end
 			end
 		end
 	end
-	return graphQLObjectType.new(var1)
+	return GraphQLObjectType.new(Config)
 end
 
-filterElementFields = function(p5, p6, p7, p8)
-	-- upvalues: boolean (ref), array (ref), object (ref)
-	if not boolean.toJSBoolean(if boolean.toJSBoolean(p7) then p7 else p8) then
+Callback1 = function(GraphQLInputObjectType, p3, Callback, Callback1) --[[ Line: 273 | Named "filterElementFields" ]]
+	-- upvalues: Boolean (copy), Array (copy), Object (copy)
+	if not Boolean.toJSBoolean(Boolean.toJSBoolean(Callback) and Callback or Callback1) then
 		return nil
 	end
-	local unpacked
-	local var3 = p6:toConfig()
+	local Config = p3:toConfig()
 	
-	for i, v in var3.fields do
-		unpacked = table.unpack(v)
-		local var4 = var3.fields:get(unpacked)
+	for _, field in Config.fields do
+		local Unpacked = table.unpack(field)
+		local GetResult = Config.fields:get(Unpacked)
 		
-		if boolean.toJSBoolean(p7 and not p7(p6.name, unpacked, var3.fields:get(unpacked))) then
-			var3.fields:delete(unpacked)
-			continue
-		end
-		local var5
-		local toJSBoolean = boolean.toJSBoolean
-		
-		if boolean.toJSBoolean(p8) then
-			var5 = array.indexOf(object.keys(var4), "args") ~= -1
-			var5 = nil
-		else
-			var5 = p8
-		end
-		if toJSBoolean(var5) then
-			for i_1, v_1 in var4.args do
-				local unpacked_1 = table.unpack(v_1)
+		if Boolean.toJSBoolean(if Callback then not Callback(p3.name, Unpacked, Config.fields:get(Unpacked)) else Callback) then
+			Config.fields:delete(Unpacked)
+		elseif Boolean.toJSBoolean(if Boolean.toJSBoolean(Callback1) then Array.indexOf(Object.keys(GetResult), "args") ~= -1 else Callback1) then
+			for _, arg in GetResult.args do
+				local Unpacked1 = table.unpack(arg)
 				
-				if not boolean.toJSBoolean(p8(p6.name, unpacked, unpacked_1, var4.args:get(unpacked_1))) then
-					var4.args:delete(unpacked_1)
+				if not Boolean.toJSBoolean(Callback1(p3.name, Unpacked, Unpacked1, GetResult.args:get(Unpacked1))) then
+					GetResult.args:delete(Unpacked1)
 				end
 			end
 		end
 	end
-	return p5.new(var3)
+	return GraphQLInputObjectType.new(Config)
 end
 
-return t
+return FilterSchemaModule

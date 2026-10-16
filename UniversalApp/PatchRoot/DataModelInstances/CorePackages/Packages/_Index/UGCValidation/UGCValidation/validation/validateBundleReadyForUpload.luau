@@ -1,30 +1,30 @@
-﻿local parent = script.Parent.Parent
-local promiseModule = require(parent.Parent.Promise)
-local constantsInterfaceModule = require(parent.ConstantsInterface)
-local _ = require(parent.util.BundlesMetadata)
-local _ = require(parent.util.Types)
-local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
-local destroyEditableInstancesModule = require(parent.util.destroyEditableInstances)
-local createUGCBodyPartFoldersModule = require(parent.util.createUGCBodyPartFolders)
-local fixUpPreValidationModule = require(parent.util.fixUpPreValidation)
-local validateInternalModule = require(parent.validation.validateInternal)
-local validateFullBodyModule = require(parent.validation.validateFullBody)
-local legacyValidationAdapterModule = require(parent.util.LegacyValidationAdapter)
-local httpService = game:GetService("HttpService")
-local list = {
+﻿local Parent = script.Parent.Parent
+local PromiseModule = require(Parent.Parent.Promise)
+local ConstantsInterfaceModule = require(Parent.ConstantsInterface)
+local _ = require(Parent.util.BundlesMetadata)
+local _ = require(Parent.util.Types)
+local CreateEditableInstancesForContextModule = require(Parent.util.createEditableInstancesForContext)
+local DestroyEditableInstancesModule = require(Parent.util.destroyEditableInstances)
+local CreateUGCBodyPartFoldersModule = require(Parent.util.createUGCBodyPartFolders)
+local FixUpPreValidationModule = require(Parent.util.fixUpPreValidation)
+local ValidateInternalModule = require(Parent.validation.validateInternal)
+local ValidateFullBodyModule = require(Parent.validation.validateFullBody)
+local LegacyValidationAdapterModule = require(Parent.util.LegacyValidationAdapter)
+local HttpService = game:GetService("HttpService")
+local List = {
 	Enum.AssetType.DynamicHead, Enum.AssetType.Torso, Enum.AssetType.LeftArm,
 	Enum.AssetType.RightArm, Enum.AssetType.LeftLeg, Enum.AssetType.RightLeg,
 	Enum.AssetType.HairAccessory, Enum.AssetType.EyebrowAccessory,
 	Enum.AssetType.EyelashAccessory
 }
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: promiseModule (ref), fixUpPreValidationModule (ref), createUGCBodyPartFoldersModule (ref), list (ref), httpService (ref), createEditableInstancesForContextModule (ref), validateInternalModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref), constantsInterfaceModule (ref), validateFullBodyModule (ref)
-	p4 = p4 or function() end
-	assert(p4 ~= nil, "Luau")
+return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) --[[ Line: 56 | Named "validateBundleReadyForUpload" ]]
+	-- upvalues: PromiseModule (copy), FixUpPreValidationModule (copy), CreateUGCBodyPartFoldersModule (copy), List (copy), HttpService (copy), CreateEditableInstancesForContextModule (copy), ValidateInternalModule (copy), LegacyValidationAdapterModule (copy), DestroyEditableInstancesModule (copy), ConstantsInterfaceModule (copy), ValidateFullBodyModule (copy)
+	local Callback: (any) -> () = p3 or function() --[[ Line: 64 ]] end
+	assert(Callback ~= nil, "Luau")
 	
-	if not p1:IsA("Model") then
-		return promiseModule.resolve({
+	if not Model:IsA("Model") then
+		return PromiseModule.resolve({
 			errors = {
 				{
 					assetType = nil,
@@ -37,157 +37,152 @@ return function(p1, p2, p3, p4, p5, p6)
 			pieces = {}
 		})
 	end
-	local var1 = createUGCBodyPartFoldersModule(fixUpPreValidationModule(p1), p2, p3, false)
-	local t = {}
-	local t_1 = {}
+	local UGCBodyPartFoldersModule = CreateUGCBodyPartFoldersModule(FixUpPreValidationModule(Model), p1, p2, false)
+	local Errors = {}
+	local List1 = {}
 	
-	for i, v in p2[p3].allowedAssetTypeSettings do
-		local var2 = assert(Enum.AssetType[i], "Asset type name doesn't map to an enum item")
+	for i, allowedAssetTypeSetting in p1[p2].allowedAssetTypeSettings do
+		local AssetTypeNameDoesnTMapToAnEnumItem = assert(Enum.AssetType[i], "Asset type name doesn't map to an enum item")
 		
-		if v.isEligibleForUpload then
-			assert(if v.minimumQuantity ~= 0 then v.minimumQuantity == 1 else true, "Invalid minimum quantity, createUGCBodyParts folder is a dictionary and will only ever give one.")
-			assert(if v.maximumQuantity ~= 0 then v.maximumQuantity == 1 else true, "Invalid maximum quantity, createUGCBodyParts folder is a dictionary and will only ever give one.")
-			local var3 = var1[var2]
-			local var4 = var3 and var3[1]
+		if allowedAssetTypeSetting.isEligibleForUpload then
+			assert(allowedAssetTypeSetting.minimumQuantity == 0 or allowedAssetTypeSetting.minimumQuantity == 1, "Invalid minimum quantity, createUGCBodyParts folder is a dictionary and will only ever give one.")
+			assert(allowedAssetTypeSetting.maximumQuantity == 0 or allowedAssetTypeSetting.maximumQuantity == 1, "Invalid maximum quantity, createUGCBodyParts folder is a dictionary and will only ever give one.")
+			local UGCBodyPartFoldersModuleEntry = UGCBodyPartFoldersModule[AssetTypeNameDoesnTMapToAnEnumItem]
+			local UGCBodyPartFoldersModuleEntry1 = UGCBodyPartFoldersModuleEntry and UGCBodyPartFoldersModuleEntry[1]
 			
-			if v.minimumQuantity ~= 0 or var4 ~= nil then
-				table.insert(t_1, {
-					assetType = var2,
-					instance = var4,
-					settings = v,
-					status = if var4 == nil then "finished" else "pending"
+			if allowedAssetTypeSetting.minimumQuantity ~= 0 or UGCBodyPartFoldersModuleEntry1 ~= nil then
+				table.insert(List1, {
+					assetType = AssetTypeNameDoesnTMapToAnEnumItem,
+					instance = UGCBodyPartFoldersModuleEntry1,
+					settings = allowedAssetTypeSetting,
+					status = if UGCBodyPartFoldersModuleEntry1 == nil then "finished" else "pending"
 				})
 				
-				if var4 == nil then
-					table.insert(t, { assetType = var2, error = { type = "notFound" } })
+				if UGCBodyPartFoldersModuleEntry1 == nil then
+					table.insert(Errors, {
+						assetType = AssetTypeNameDoesnTMapToAnEnumItem,
+						error = { type = "notFound" }
+					})
 				end
 			end
 		end
 	end
-	table.sort(t_1, function(p7, p8)
-		-- upvalues: list (copy)
-		return (table.find(list, p7.assetType) or 1e999) < (table.find(list, p8.assetType) or 1e999)
+	table.sort(List1, function(A, B): boolean --[[ Line: 141 ]]
+		-- upvalues: List (upval)
+		return (table.find(List, A.assetType) or 1e999) < (table.find(List, B.assetType) or 1e999)
 	end)
-	local t_2 = { errors = t, pieces = t_1 }
-	p4(t_2)
-	local var5 = httpService:GenerateGUID()
+	local Tbl = { errors = Errors, pieces = List1 }
+	Callback(Tbl)
+	local Guid = HttpService:GenerateGUID()
 	
-	return promiseModule.each(t_1, function(p7, p8)
-		-- upvalues: p5 (ref), p6 (ref), createEditableInstancesForContextModule (copy), validateInternalModule (copy), legacyValidationAdapterModule (copy), var5 (ref), destroyEditableInstancesModule (copy), t_2 (write), p4 (write)
-		if p7.status == "finished" then return end
-		local var6, var7
-		assert(p7.instance ~= nil, "Unfinished piece doesn't have an instnace")
-		local _ = nil
-		local _ = nil
-		local list = { p7.instance }
-		local t = {
+	return PromiseModule.each(List1, function(p4, p5) --[[ Line: 157 ]]
+		-- upvalues: AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), ValidateInternalModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Tbl (ref), Callback (ref)
+		if p4.status == "finished" then return end
+		assert(p4.instance ~= nil, "Unfinished piece doesn't have an instnace")
+		local Instances = { p4.instance }
+		local config = {
 			allowUnreviewedAssets = false,
 			isServer = false,
 			isAsync = false,
 			validateMeshPartAccessories = true,
 			requireAllFolders = false,
-			instances = list,
-			assetTypeEnum = p7.assetType,
-			allowEditableInstances = p5,
-			bypassFlags = p6
+			instances = Instances,
+			assetTypeEnum = p4.assetType,
+			allowEditableInstances = AllowEditableInstances,
+			bypassFlags = BypassFlags
 		}
-		local var8, var9 = createEditableInstancesForContextModule.processAll(list, p5)
+		local ProcessAllResult, ProcessAllResult2 = CreateEditableInstancesForContextModule.processAll(Instances, AllowEditableInstances)
+		local v1 = nil
+		local Messages = nil
 		
-		if var8 then
-			t.editableMeshes = var9.editableMeshes
-			t.editableImages = var9.editableImages
-			local var10, var11 = validateInternalModule(t)
-			var10, var37 = legacyValidationAdapterModule.studioRFUAssetValidation(t, var5, var10, var11)
-			var7 = var10
-			var6 = var11
-			destroyEditableInstancesModule(t.editableMeshes, t.editableImages)
+		if ProcessAllResult then
+			config.editableMeshes = ProcessAllResult2.editableMeshes
+			config.editableImages = ProcessAllResult2.editableImages
+			local ValidateInternalModuleResult, ValidateInternalModuleResult2 = ValidateInternalModule(config)
+			v1, Messages = LegacyValidationAdapterModule.studioRFUAssetValidation(config, Guid, ValidateInternalModuleResult, ValidateInternalModuleResult2)
+			DestroyEditableInstancesModule(config.editableMeshes, config.editableImages)
 		else
-			var6 = var9
-			var7 = false
+			Messages = ProcessAllResult2
+			v1 = false
 		end
-		t_2 = table.clone(t_2)
-		t_2.errors = table.clone(t_2.errors)
+		Tbl = table.clone(Tbl)
+		Tbl.errors = table.clone(Tbl.errors)
 		
-		if not var7 then
-			assert(var6 ~= nil, "Failure without errors")
+		if not v1 then
+			assert(Messages ~= nil, "Failure without errors")
 			
-			for i, v in var6 do
-				table.insert(t_2.errors, {
-					assetType = p7.assetType,
-					error = { type = "message", message = v }
+			for _, message in Messages do
+				table.insert(Tbl.errors, {
+					assetType = p4.assetType,
+					error = { type = "message", message = message }
 				})
 			end
 		end
-		t_2.pieces = table.clone(t_2.pieces)
-		t_2.pieces[p8].status = "finished"
-		p4(t_2)
-	end):andThen(function()
-		-- upvalues: p3 (ref), constantsInterfaceModule (copy), t_2 (write), p5 (ref), p6 (ref), createEditableInstancesForContextModule (copy), validateFullBodyModule (copy), legacyValidationAdapterModule (copy), var5 (ref), destroyEditableInstancesModule (copy), p4 (write)
-		if p3 == "Body" then
-			local function createFullBodyData(p9)
-				-- upvalues: constantsInterfaceModule (copy)
-				local t = {}
+		Tbl.pieces = table.clone(Tbl.pieces)
+		Tbl.pieces[p5].status = "finished"
+		Callback(Tbl)
+	end):andThen(function() --[[ Line: 222 ]]
+		-- upvalues: p2 (copy), ConstantsInterfaceModule (upval), Tbl (ref), AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), ValidateFullBodyModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Callback (ref)
+		if p2 == "Body" then
+			local FullBodyData = (function(List) --[[ Line: 224 | Named "createFullBodyData" ]]
+				-- upvalues: ConstantsInterfaceModule (upval)
+				local List1 = {}
 				
-				for i, v in p9 do
-					if constantsInterfaceModule.isBodyPart(v.assetType) then
-						table.insert(t, {
-							assetTypeEnum = v.assetType,
-							allSelectedInstances = if v.instance then { v.instance } else {}
+				for _, value in List do
+					if ConstantsInterfaceModule.isBodyPart(value.assetType) then
+						table.insert(List1, {
+							assetTypeEnum = value.assetType,
+							allSelectedInstances = if value.instance then { value.instance } else {}
 						})
 					end
 				end
-				return t
-			end
-			
-			local _ = nil
-			local _ = nil
-			local var12 = createFullBodyData(t_2.pieces)
-			local t = {
+				return List1
+			end)(Tbl.pieces)
+			local config = {
 				isServer = false,
 				validateMeshPartAccessories = false,
 				requireAllFolders = false,
-				fullBodyData = var12,
-				allowEditableInstances = p5,
-				bypassFlags = p6
+				fullBodyData = FullBodyData,
+				allowEditableInstances = AllowEditableInstances,
+				bypassFlags = BypassFlags
 			}
-			local t_1 = {}
+			local List = {}
 			
-			for i, v in var12 do
-				for i_1, v_1 in v.allSelectedInstances do
-					table.insert(t_1, v_1)
+			for _, value in FullBodyData do
+				for _, allSelectedInstance in value.allSelectedInstances do
+					table.insert(List, allSelectedInstance)
 				end
 			end
-			local var13, var14
-			local var15, var16 = createEditableInstancesForContextModule.processAll(t_1, p5)
+			local ProcessAllResult, ProcessAllResult2 = CreateEditableInstancesForContextModule.processAll(List, AllowEditableInstances)
+			local Messages = nil
+			local v2 = nil
 			
-			if var15 then
-				t.editableMeshes = var16.editableMeshes
-				t.editableImages = var16.editableImages
-				local var17, var18 = validateFullBodyModule(t)
-				var17, var28 = legacyValidationAdapterModule.studioRFUBundleValidation(var12, Enum.BundleType.BodyParts, t, var5, var17, var18)
-				var14 = var17
-				var13 = var18
-				destroyEditableInstancesModule(t.editableMeshes, t.editableImages)
+			if ProcessAllResult then
+				config.editableMeshes = ProcessAllResult2.editableMeshes
+				config.editableImages = ProcessAllResult2.editableImages
+				local ValidateFullBodyModuleResult, ValidateFullBodyModuleResult2 = ValidateFullBodyModule(config)
+				v2, Messages = LegacyValidationAdapterModule.studioRFUBundleValidation(FullBodyData, Enum.BundleType.BodyParts, config, Guid, ValidateFullBodyModuleResult, ValidateFullBodyModuleResult2)
+				DestroyEditableInstancesModule(config.editableMeshes, config.editableImages)
 			else
-				var13 = var16
-				var14 = false
+				Messages = ProcessAllResult2
+				v2 = false
 			end
-			if not var14 then
-				t_2 = table.clone(t_2)
-				t_2.errors = table.clone(t_2.errors)
-				assert(var13 and #var13 > 0, "There should always be a reason for failure")
+			if not v2 then
+				Tbl = table.clone(Tbl)
+				Tbl.errors = table.clone(Tbl.errors)
+				assert(Messages and #Messages > 0, "There should always be a reason for failure")
 				
-				for i_1, v_1 in var13 do
-					table.insert(t_2.errors, {
+				for _, message in Messages do
+					table.insert(Tbl.errors, {
 						assetType = nil,
-						error = { type = "message", message = v_1 }
+						error = { type = "message", message = message }
 					})
 				end
 			end
-			p4(t_2)
+			Callback(Tbl)
 		end
-	end):andThen(function()
-		-- upvalues: t_2 (write)
-		return t_2
+	end):andThen(function() --[[ Line: 303 ]]
+		-- upvalues: Tbl (ref)
+		return Tbl
 	end)
 end

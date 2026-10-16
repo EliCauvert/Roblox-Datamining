@@ -1,86 +1,86 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local react = dependenciesModule.React
-local UIBlox = dependenciesModule.UIBlox
-local object = dependenciesModule.LuauPolyfill.Object
-local rect = Rect.new(10, 10, 11, 11)
-local t = {
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local React = DependenciesModule.React
+local UIBlox = DependenciesModule.UIBlox
+local Object = DependenciesModule.LuauPolyfill.Object
+local _Rect = Rect.new(10, 10, 11, 11)
+local Frame = {
 	isIncoming = false,
 	hasTail = false,
 	padding = 12,
 	LayoutOrder = 0,
 	isPending = false,
-	[react.Change.AbsoluteSize] = function(_) end,
+	[React.Change.AbsoluteSize] = function(_) --[[ Line: 21 ]] end,
 	overrideImageColor = false
 }
 
-return function(p1)
-	-- upvalues: react (ref), t (ref), UIBlox (ref), rect (ref), object (ref)
-	local var1, var2 = react.useState(0)
-	local absoluteSize = p1[react.Change.AbsoluteSize] or t[react.Change.AbsoluteSize]
+return function(Frame1: Frame) --[[ Line: 26 | Named "ChatBubbleContainer" ]]
+	-- upvalues: React (copy), Frame (copy), UIBlox (copy), _Rect (copy), Object (copy)
+	local UseStateResult, UseStateResult2 = React.useState(0)
+	local Callback = Frame1[React.Change.AbsoluteSize] or Frame[React.Change.AbsoluteSize]
 	
-	return UIBlox.Style.withStyle(function(p2)
-		-- upvalues: p1 (ref), t (copy), react (copy), var1 (ref), rect (copy), absoluteSize (ref), object (copy), var2 (ref)
-		local children = p1.children or {}
-		local hasTail = p1.hasTail or t.hasTail
-		local isIncoming = p1.isIncoming or t.isIncoming
-		local isPending = p1.isPending or t.isPending
-		local var3 = if isIncoming then p2.Theme.UIDefault elseif isPending then p2.Theme.UIMuted else p2.Theme.UIEmphasis
-		local color = var3.Color
-		local transparency = var3.Transparency
+	return UIBlox.Style.withStyle(function(p1) --[[ Line: 30 ]]
+		-- upvalues: Frame1 (copy), Frame (upval), React (upval), UseStateResult (copy), _Rect (upval), Callback (copy), Object (upval), UseStateResult2 (copy)
+		local Children = Frame1.children or {}
+		local HasTail = Frame1.hasTail or Frame.hasTail
+		local IsIncoming = Frame1.isIncoming or Frame.isIncoming
+		local IsPending = Frame1.isPending or Frame.isPending
+		local UIDefault = if IsIncoming then p1.Theme.UIDefault elseif IsPending then p1.Theme.UIMuted else p1.Theme.UIEmphasis
+		local Color = UIDefault.Color
+		local Transparency = UIDefault.Transparency
 		
-		if p1.overrideImageColor or t.overrideImageColor then
-			color = nil
+		if Frame1.overrideImageColor or Frame.overrideImageColor then
+			Color = nil
 			
-			if not isPending then
-				transparency = nil
+			if not IsPending then
+				Transparency = nil
 			end
 		end
-		local uDim = UDim.new(0, p1.padding or t.padding)
+		local _UDim = UDim.new(0, Frame1.padding or Frame.padding)
 		
-		return react.createElement("Frame", {
+		return React.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			Size = UDim2.new(0, var1 + 6, 0, 0),
-			LayoutOrder = p1.LayoutOrder or t.LayoutOrder
+			Size = UDim2.new(0, UseStateResult + 6, 0, 0),
+			LayoutOrder = Frame1.LayoutOrder or Frame.LayoutOrder
 		}, {
-			bubble = react.createElement("ImageLabel", {
+			bubble = React.createElement("ImageLabel", {
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Size = UDim2.new(0, var1, 0, 0),
-				AnchorPoint = isIncoming and Vector2.new(0, 0) or Vector2.new(1, 0),
+				Size = UDim2.new(0, UseStateResult, 0, 0),
+				AnchorPoint = IsIncoming and Vector2.new(0, 0) or Vector2.new(1, 0),
 				BackgroundTransparency = 1,
-				ImageColor3 = color,
-				Image = if hasTail then if isIncoming then "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self2.png",
+				ImageColor3 = Color,
+				Image = if HasTail then if IsIncoming then "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self2.png",
 				ScaleType = Enum.ScaleType.Slice,
-				SliceCenter = rect,
-				ImageTransparency = transparency,
-				Position = isIncoming and UDim2.new(0, 6, 0, 0) or UDim2.new(1, -6, 0, 0),
-				[react.Change.AbsoluteSize] = function(p3)
-					-- upvalues: absoluteSize (copy)
-					absoluteSize(p3)
+				SliceCenter = _Rect,
+				ImageTransparency = Transparency,
+				Position = IsIncoming and UDim2.new(0, 6, 0, 0) or UDim2.new(1, -6, 0, 0),
+				[React.Change.AbsoluteSize] = function(p2) --[[ Line: 82 ]]
+					-- upvalues: Callback (upval)
+					Callback(p2)
 				end
-			}, object.assign(table.clone(children), {
-				["$margin"] = react.createElement("UIPadding", {
-					PaddingBottom = uDim,
-					PaddingTop = uDim,
-					PaddingRight = uDim,
-					PaddingLeft = uDim
+			}, Object.assign(table.clone(Children), {
+				["$margin"] = React.createElement("UIPadding", {
+					PaddingBottom = _UDim,
+					PaddingTop = _UDim,
+					PaddingRight = _UDim,
+					PaddingLeft = _UDim
 				}),
-				["$layout"] = react.createElement("UIListLayout", {
-					[react.Change.AbsoluteContentSize] = function(p3)
-						-- upvalues: var2 (copy), uDim (ref)
-						var2(p3.AbsoluteContentSize.X + uDim.Offset * 2)
+				["$layout"] = React.createElement("UIListLayout", {
+					[React.Change.AbsoluteContentSize] = function(p2) --[[ Line: 93 ]]
+						-- upvalues: UseStateResult2 (upval), _UDim (copy)
+						UseStateResult2(p2.AbsoluteContentSize.X + _UDim.Offset * 2)
 					end
 				})
 			})),
-			tail = react.createElement("ImageLabel", {
+			tail = React.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
-				AnchorPoint = isIncoming and Vector2.new(0, 0) or Vector2.new(1, 0),
+				AnchorPoint = IsIncoming and Vector2.new(0, 0) or Vector2.new(1, 0),
 				Size = UDim2.new(0, 6, 0, 6),
-				ImageColor3 = color,
-				Position = isIncoming and UDim2.new(0, 0, 0, 0) or UDim2.new(1, 0, 0, 0),
-				Image = if isIncoming then "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-tip.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self-tip.png",
-				ImageTransparency = transparency,
-				Visible = hasTail
+				ImageColor3 = Color,
+				Position = IsIncoming and UDim2.new(0, 0, 0, 0) or UDim2.new(1, 0, 0, 0),
+				Image = if IsIncoming then "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-tip.png" else "rbxasset://textures/ui/LuaChat/9-slice/chat-bubble-self-tip.png",
+				ImageTransparency = Transparency,
+				Visible = HasTail
 			})
 		})
 	end)

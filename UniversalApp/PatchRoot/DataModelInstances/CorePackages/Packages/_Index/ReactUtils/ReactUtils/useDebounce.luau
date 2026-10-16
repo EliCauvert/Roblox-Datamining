@@ -1,27 +1,27 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(p1)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), p2 (ref)
-		local function updateValue()
-			-- upvalues: var2 (copy), p1 (copy)
-			var2(p1)
+return function(p1, Delay) --[[ Line: 7 | Named "useDebounce" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1)
+	ReactModule.useLayoutEffect(function() --[[ Line: 10 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy), Delay (copy)
+		local function updateValue() --[[ Line: 11 ]]
+			-- upvalues: UseStateResult2 (upval), p1 (upval)
+			UseStateResult2(p1)
 		end
 		
-		if p2 == nil or p2 == 0 then
-			var2(p1)
+		if Delay == nil or Delay == 0 then
+			UseStateResult2(p1)
 			
 			return
 		end
-		local delayedThread = task.delay(p2, updateValue)
+		local DelayedThread = task.delay(Delay, updateValue)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		return function() --[[ Line: 22 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
-	end, { p1, p2 })
+	end, { p1, Delay })
 	
-	return var1
+	return UseStateResult
 end

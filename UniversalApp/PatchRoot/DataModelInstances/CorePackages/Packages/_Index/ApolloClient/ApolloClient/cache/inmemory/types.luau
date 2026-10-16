@@ -1,9 +1,9 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local _ = require(parent_1.LuauPolyfill)
-local _ = require(parent_1.GraphQL)
-local _ = require(parent.utilities.graphql.types)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local _ = require(Parent1.LuauPolyfill)
+local _ = require(Parent1.GraphQL)
+local _ = require(Parent.utilities.graphql.types)
 local _ = require(script.Parent.policies_types)
-local _ = require(parent.cache.core.types.common)
+local _ = require(Parent.cache.core.types.common)
 
 return {}

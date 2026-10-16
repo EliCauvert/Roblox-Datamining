@@ -1,25 +1,26 @@
 ﻿return {
-	new = function(p1)
-		p1 = p1 or {}
-		local sampleInterval = p1.sampleInterval or 8
-		local driftThreshold = p1.driftThreshold or 8
-		local var1 = 0
-		local initialAverage = p1.initialAverage or 0
+	new = function(p1) --[[ Line: 37 ]]
+		local P0 = p1 or {}
+		local SampleInterval = P0.sampleInterval or 8
+		local DriftThreshold = P0.driftThreshold or 8
+		local Count = 0
+		local InitialAverage = P0.initialAverage or 0
 		
 		return {
-			recordMeasurementAndShouldUpdateEstimates = function(p2)
-				-- upvalues: var1 (write), sampleInterval (ref), initialAverage (write), driftThreshold (ref)
-				var1 += 1
+			recordMeasurementAndShouldUpdateEstimates = function(p2): boolean --[[ Line: 45 ]]
+				-- upvalues: Count (ref), SampleInterval (copy), InitialAverage (ref), DriftThreshold (copy)
+				Count += 1
 				
-				if var1 < sampleInterval then
+				if Count < SampleInterval then
 					return false
-				elseif math.abs(p2 - initialAverage) < driftThreshold then
+				elseif math.abs(p2 - InitialAverage) < DriftThreshold then
 					return false
+				else
+					InitialAverage = p2
+					Count = 0
+					
+					return true
 				end
-				initialAverage = p2
-				var1 = 0
-				
-				return true
 			end
 		}
 	end

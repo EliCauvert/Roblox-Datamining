@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	[Enum.KeyCode.Thumbstick1] = {
 		directional = "rbxasset://textures/ui/Controls/DesignSystem/Thumbstick1Directional.png",
 		horizontal = "rbxasset://textures/ui/Controls/DesignSystem/Thumbstick1Horizontal.png",
@@ -12,7 +12,7 @@
 }
 
 return {
-	DIRECTIONAL_GAMEPAD_ICONS = t,
+	DIRECTIONAL_GAMEPAD_ICONS = config,
 	GAMEPAD_ICONS = {
 		[Enum.KeyCode.ButtonX] = "rbxasset://textures/ui/Controls/DesignSystem/ButtonX.png",
 		[Enum.KeyCode.ButtonY] = "rbxasset://textures/ui/Controls/DesignSystem/ButtonY.png",
@@ -30,7 +30,7 @@ return {
 		[Enum.KeyCode.ButtonL2] = "rbxasset://textures/ui/Controls/DesignSystem/ButtonL2.png",
 		[Enum.KeyCode.ButtonR3] = "rbxasset://textures/ui/Controls/DesignSystem/ButtonR3.png",
 		[Enum.KeyCode.ButtonL3] = "rbxasset://textures/ui/Controls/DesignSystem/ButtonL3.png",
-		[Enum.KeyCode.Thumbstick1] = t[Enum.KeyCode.Thumbstick1].directional,
-		[Enum.KeyCode.Thumbstick2] = t[Enum.KeyCode.Thumbstick2].directional
+		[Enum.KeyCode.Thumbstick1] = config[Enum.KeyCode.Thumbstick1].directional,
+		[Enum.KeyCode.Thumbstick2] = config[Enum.KeyCode.Thumbstick2].directional
 	}
 }

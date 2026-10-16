@@ -1,27 +1,27 @@
 ﻿local _ = require(script.Parent.Parent.FocusNavigation)
 
-return function(...)
+return function(...) --[[ Line: 5 | Named "composeFocusBehaviors" ]]
 	local list = { ... }
 	
 	return {
-		onDescendantFocusChanged = function(p1)
-			-- upvalues: list (ref)
-			for i, v in list do
-				if v.onDescendantFocusChanged then
-					v.onDescendantFocusChanged(p1)
+		onDescendantFocusChanged = function(p1) --[[ Line: 8 ]]
+			-- upvalues: list (copy)
+			for _, value in list do
+				if value.onDescendantFocusChanged then
+					value.onDescendantFocusChanged(p1)
 				end
 			end
 		end,
-		getTargets = function()
-			-- upvalues: list (ref)
-			local t = {}
+		getTargets = function() --[[ Line: 15 ]]
+			-- upvalues: list (copy)
+			local List = {}
 			
-			for i, v in list do
-				for i_1, v_1 in v.getTargets() do
-					table.insert(t, v_1)
+			for _, value in list do
+				for _, value1 in value.getTargets() do
+					table.insert(List, value1)
 				end
 			end
-			return t
+			return List
 		end
 	}
 end

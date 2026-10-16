@@ -1,68 +1,68 @@
-﻿local t = {}
-local parent = script.Parent
-local parent_1 = parent.Parent
+﻿local UtilitiesModule = {}
+local Parent = script.Parent
+local Parent1 = Parent.Parent
 local DEV = require(script.globals).DEV
-require(parent.jsutils.invariant).invariant(typeof(DEV) == "boolean", tostring(DEV))
-t.DEV = DEV
-local object = require(parent_1.LuauPolyfill).Object
-t.NULL = require(script.globals).NULL
-local directivesModule = require(script.graphql.directives)
-t.shouldInclude = directivesModule.shouldInclude
-t.hasDirectives = directivesModule.hasDirectives
-t.hasClientExports = directivesModule.hasClientExports
-t.getDirectiveNames = directivesModule.getDirectiveNames
-t.getInclusionDirectives = directivesModule.getInclusionDirectives
-local fragmentsModule = require(script.graphql.fragments)
-t.createFragmentMap = fragmentsModule.createFragmentMap
-t.getFragmentQueryDocument = fragmentsModule.getFragmentQueryDocument
-t.getFragmentFromSelection = fragmentsModule.getFragmentFromSelection
-local getFromASTModule = require(script.graphql.getFromAST)
-t.checkDocument = getFromASTModule.checkDocument
-t.getOperationDefinition = getFromASTModule.getOperationDefinition
-t.getOperationName = getFromASTModule.getOperationName
-t.getFragmentDefinitions = getFromASTModule.getFragmentDefinitions
-t.getQueryDefinition = getFromASTModule.getQueryDefinition
-t.getFragmentDefinition = getFromASTModule.getFragmentDefinition
-t.getMainDefinition = getFromASTModule.getMainDefinition
-t.getDefaultValues = getFromASTModule.getDefaultValues
-local storeUtilsModule = require(script.graphql.storeUtils)
-t.makeReference = storeUtilsModule.makeReference
-t.isDocumentNode = storeUtilsModule.isDocumentNode
-t.isReference = storeUtilsModule.isReference
-t.isField = storeUtilsModule.isField
-t.isInlineFragment = storeUtilsModule.isInlineFragment
-t.valueToObjectRepresentation = storeUtilsModule.valueToObjectRepresentation
-t.storeKeyNameFromField = storeUtilsModule.storeKeyNameFromField
-t.argumentsObjectFromField = storeUtilsModule.argumentsObjectFromField
-t.resultKeyNameFromField = storeUtilsModule.resultKeyNameFromField
-t.getStoreKeyName = storeUtilsModule.getStoreKeyName
-t.getTypenameFromResult = storeUtilsModule.getTypenameFromResult
-local transformModule = require(script.graphql.transform)
-t.addTypenameToDocument = transformModule.addTypenameToDocument
-t.buildQueryFromSelectionSet = transformModule.buildQueryFromSelectionSet
-t.removeDirectivesFromDocument = transformModule.removeDirectivesFromDocument
-t.removeConnectionDirectiveFromDocument = transformModule.removeConnectionDirectiveFromDocument
-t.removeArgumentsFromDocument = transformModule.removeArgumentsFromDocument
-t.removeFragmentSpreadFromDocument = transformModule.removeFragmentSpreadFromDocument
-t.removeClientSetsFromDocument = transformModule.removeClientSetsFromDocument
-local paginationModule = require(script.policies.pagination)
-t.concatPagination = paginationModule.concatPagination
-t.offsetLimitPagination = paginationModule.offsetLimitPagination
-t.relayStylePagination = paginationModule.relayStylePagination
-t.Observable = require(script.observables.Observable).Observable
-object.assign(t, require(script.common.mergeDeep))
-object.assign(t, require(script.common.cloneDeep))
-object.assign(t, require(script.common.maybeDeepFreeze))
-object.assign(t, require(script.common.stringifyForDisplay))
-object.assign(t, require(script.observables.iteration))
-object.assign(t, require(script.observables.asyncMap))
-object.assign(t, require(script.observables.Concast))
-object.assign(t, require(script.observables.subclassing))
-object.assign(t, require(script.common.arrays))
-object.assign(t, require(script.common.objects))
-object.assign(t, require(script.common.errorHandling))
-object.assign(t, require(script.common.canUse))
-object.assign(t, require(script.common.compact))
-object.assign(t, require(script.common.makeUniqueId))
+require(Parent.jsutils.invariant).invariant(typeof(DEV) == "boolean", (tostring(DEV)))
+UtilitiesModule.DEV = DEV
+local Object = require(Parent1.LuauPolyfill).Object
+UtilitiesModule.NULL = require(script.globals).NULL
+local DirectivesModule = require(script.graphql.directives)
+UtilitiesModule.shouldInclude = DirectivesModule.shouldInclude
+UtilitiesModule.hasDirectives = DirectivesModule.hasDirectives
+UtilitiesModule.hasClientExports = DirectivesModule.hasClientExports
+UtilitiesModule.getDirectiveNames = DirectivesModule.getDirectiveNames
+UtilitiesModule.getInclusionDirectives = DirectivesModule.getInclusionDirectives
+local FragmentsModule = require(script.graphql.fragments)
+UtilitiesModule.createFragmentMap = FragmentsModule.createFragmentMap
+UtilitiesModule.getFragmentQueryDocument = FragmentsModule.getFragmentQueryDocument
+UtilitiesModule.getFragmentFromSelection = FragmentsModule.getFragmentFromSelection
+local GetFromASTModule = require(script.graphql.getFromAST)
+UtilitiesModule.checkDocument = GetFromASTModule.checkDocument
+UtilitiesModule.getOperationDefinition = GetFromASTModule.getOperationDefinition
+UtilitiesModule.getOperationName = GetFromASTModule.getOperationName
+UtilitiesModule.getFragmentDefinitions = GetFromASTModule.getFragmentDefinitions
+UtilitiesModule.getQueryDefinition = GetFromASTModule.getQueryDefinition
+UtilitiesModule.getFragmentDefinition = GetFromASTModule.getFragmentDefinition
+UtilitiesModule.getMainDefinition = GetFromASTModule.getMainDefinition
+UtilitiesModule.getDefaultValues = GetFromASTModule.getDefaultValues
+local StoreUtilsModule = require(script.graphql.storeUtils)
+UtilitiesModule.makeReference = StoreUtilsModule.makeReference
+UtilitiesModule.isDocumentNode = StoreUtilsModule.isDocumentNode
+UtilitiesModule.isReference = StoreUtilsModule.isReference
+UtilitiesModule.isField = StoreUtilsModule.isField
+UtilitiesModule.isInlineFragment = StoreUtilsModule.isInlineFragment
+UtilitiesModule.valueToObjectRepresentation = StoreUtilsModule.valueToObjectRepresentation
+UtilitiesModule.storeKeyNameFromField = StoreUtilsModule.storeKeyNameFromField
+UtilitiesModule.argumentsObjectFromField = StoreUtilsModule.argumentsObjectFromField
+UtilitiesModule.resultKeyNameFromField = StoreUtilsModule.resultKeyNameFromField
+UtilitiesModule.getStoreKeyName = StoreUtilsModule.getStoreKeyName
+UtilitiesModule.getTypenameFromResult = StoreUtilsModule.getTypenameFromResult
+local TransformModule = require(script.graphql.transform)
+UtilitiesModule.addTypenameToDocument = TransformModule.addTypenameToDocument
+UtilitiesModule.buildQueryFromSelectionSet = TransformModule.buildQueryFromSelectionSet
+UtilitiesModule.removeDirectivesFromDocument = TransformModule.removeDirectivesFromDocument
+UtilitiesModule.removeConnectionDirectiveFromDocument = TransformModule.removeConnectionDirectiveFromDocument
+UtilitiesModule.removeArgumentsFromDocument = TransformModule.removeArgumentsFromDocument
+UtilitiesModule.removeFragmentSpreadFromDocument = TransformModule.removeFragmentSpreadFromDocument
+UtilitiesModule.removeClientSetsFromDocument = TransformModule.removeClientSetsFromDocument
+local PaginationModule = require(script.policies.pagination)
+UtilitiesModule.concatPagination = PaginationModule.concatPagination
+UtilitiesModule.offsetLimitPagination = PaginationModule.offsetLimitPagination
+UtilitiesModule.relayStylePagination = PaginationModule.relayStylePagination
+UtilitiesModule.Observable = require(script.observables.Observable).Observable
+Object.assign(UtilitiesModule, require(script.common.mergeDeep))
+Object.assign(UtilitiesModule, require(script.common.cloneDeep))
+Object.assign(UtilitiesModule, require(script.common.maybeDeepFreeze))
+Object.assign(UtilitiesModule, require(script.common.stringifyForDisplay))
+Object.assign(UtilitiesModule, require(script.observables.iteration))
+Object.assign(UtilitiesModule, require(script.observables.asyncMap))
+Object.assign(UtilitiesModule, (require(script.observables.Concast)))
+Object.assign(UtilitiesModule, require(script.observables.subclassing))
+Object.assign(UtilitiesModule, require(script.common.arrays))
+Object.assign(UtilitiesModule, require(script.common.objects))
+Object.assign(UtilitiesModule, require(script.common.errorHandling))
+Object.assign(UtilitiesModule, require(script.common.canUse))
+Object.assign(UtilitiesModule, require(script.common.compact))
+Object.assign(UtilitiesModule, require(script.common.makeUniqueId))
 
-return t
+return UtilitiesModule

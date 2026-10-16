@@ -1,40 +1,41 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local getNamedType = graphQLModule.getNamedType
-local isObjectType = graphQLModule.isObjectType
-local isInputObjectType = graphQLModule.isInputObjectType
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local GraphQLModule = require(Parent.GraphQL)
+local GetNamedTypeFunction = GraphQLModule.getNamedType
+local IsObjectTypeFunction = GraphQLModule.isObjectType
+local IsInputObjectTypeFunction = GraphQLModule.isInputObjectType
 local _ = require(script.Parent.Interfaces)
-local string = luauPolyfillModule.String
+local String = LuauPolyfillModule.String
 
-function t.forEachDefaultValue(p1, p2)
-	-- upvalues: string (ref), getNamedType (ref), boolean (ref), isObjectType (ref), isInputObjectType (ref)
-	local typeMap = p1:getTypeMap()
-	
-	for i, v in typeMap do
-		local var1 = typeMap:get(v[1])
+return {
+	forEachDefaultValue = function(p1, Callback) --[[ Line: 26 ]]
+		-- upvalues: String (copy), GetNamedTypeFunction (copy), Boolean (copy), IsObjectTypeFunction (copy), IsInputObjectTypeFunction (copy)
+		local TypeMap = p1:getTypeMap()
 		
-		if not string.startsWith(getNamedType(var1).name, "__") then
-			if boolean.toJSBoolean(isObjectType(var1)) then
-				local fields = var1:getFields()
-				
-				for i_1, v_1 in fields do
-					for i_2, v_2 in fields:get(v_1[1]).args do
-						v_2.defaultValue = p2(v_2.type, v_2.defaultValue)
+		for _, value in TypeMap do
+			local GetResult = TypeMap:get(value[1])
+			
+			if not String.startsWith(GetNamedTypeFunction(GetResult).name, "__") then
+				if not Boolean.toJSBoolean(IsObjectTypeFunction(GetResult)) then
+					if Boolean.toJSBoolean(IsInputObjectTypeFunction(GetResult)) then
+						local Fields = GetResult:getFields()
+						
+						for _, field1 in Fields do
+							local GetResult1 = Fields:get(field1[1])
+							GetResult1.defaultValue = Callback(GetResult1.type, GetResult1.defaultValue)
+						end
 					end
+					continue
 				end
-			elseif boolean.toJSBoolean(isInputObjectType(var1)) then
-				local fields = var1:getFields()
+				local Fields = GetResult:getFields()
 				
-				for i_1, v_1 in fields do
-					local var2 = fields:get(v_1[1])
-					var2.defaultValue = p2(var2.type, var2.defaultValue)
+				for _, field in Fields do
+					for _, arg in Fields:get(field[1]).args do
+						arg.defaultValue = Callback(arg.type, arg.defaultValue)
+					end
 				end
 			end
 		end
 	end
-end
-
-return t
+}

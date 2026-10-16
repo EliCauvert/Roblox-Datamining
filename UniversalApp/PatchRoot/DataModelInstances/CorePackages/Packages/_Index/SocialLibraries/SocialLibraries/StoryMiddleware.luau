@@ -1,16 +1,16 @@
-﻿local dependenciesModule = require(script.Parent.dependencies)
-local roact = dependenciesModule.Roact
-local appStyleProvider = dependenciesModule.UIBlox.App.Style.AppStyleProvider
-local t = {
+﻿local DependenciesModule = require(script.Parent.dependencies)
+local Roact = DependenciesModule.Roact
+local AppStyleProvider = DependenciesModule.UIBlox.App.Style.AppStyleProvider
+local config = {
 	Default = { themeName = "Light", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
 
-return function(p1)
-	-- upvalues: roact (ref), appStyleProvider (ref), t (ref)
-	return function(p2)
-		-- upvalues: roact (copy), appStyleProvider (copy), t (copy), p1 (ref)
-		return roact.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = roact.createElement(p1, p2) })
+return function(p1) --[[ Line: 21 | Named "StoryMiddleware" ]]
+	-- upvalues: Roact (copy), AppStyleProvider (copy), config (copy)
+	return function(p2) --[[ Line: 22 ]]
+		-- upvalues: Roact (upval), AppStyleProvider (upval), config (upval), p1 (copy)
+		return Roact.createElement(AppStyleProvider, { style = p2 and config[p2.theme] or config.Default }, { Child = Roact.createElement(p1, p2) })
 	end
 end

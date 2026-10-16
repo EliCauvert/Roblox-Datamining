@@ -1,1 +1,1 @@
-﻿return require(script.Parent.ThumbnailType)
+﻿return (require(script.Parent.ThumbnailType))
