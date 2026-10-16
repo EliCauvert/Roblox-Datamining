@@ -3,15 +3,15 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "d6cdf847-5015-2485-0e6a-d3103d65137d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "71732783-dd9a-c414-5571-4872367ec935")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 29929, e => {
     "use strict";
-    var a, t, r, s, o, i, n, l, d, c, u, b, g, m, f, p, h, v = e.i(650502),
+    var t, a, r, s, o, i, n, l, c, d, u, f, b, g, m, p, h, v = e.i(650502),
         x = e.i(864392),
-        _ = ((a = {}).ShowVrDeviceOption = "showVrDeviceOption", a.ShowIXPClientTest = "showIXPClientTest", a.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", a.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", a.EnableIA = "enableIA", a.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", a.EnableDevexEarnedRobux = "enableDevexEarnedRobux", a.EnableExperienceGenre = "enableExperienceGenre", a.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", a.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", a.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", a.EnableEventRequestFeaturing = "enableEventRequestFeaturing", a.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", a),
-        k = ((t = {}).EnableRightsManager = "enableRightsManager", t.EnableBulkFiling = "enableBulkFiling", t.EnableOnDemandSearch = "enableOnDemandSearch", t.EnableEditRegistration = "enableEditRegistration", t.EnableImageSearch = "enableImageSearch", t.EnableClaimsAgainstMe = "enableClaimsAgainstMe", t.EnableGenAiOptOut = "enableGenAiOptOut", t.EnableInExperienceIpReporting = "enableInExperienceIpReporting", t.EnableIpContentSearch = "enableIpContentSearch", t.EnableTrademark = "enableTrademark", t),
+        _ = ((t = {}).ShowVrDeviceOption = "showVrDeviceOption", t.ShowIXPClientTest = "showIXPClientTest", t.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", t.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", t.EnableIA = "enableIA", t.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", t.EnableDevexEarnedRobux = "enableDevexEarnedRobux", t.EnableExperienceGenre = "enableExperienceGenre", t.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", t.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", t.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", t.EnableEventRequestFeaturing = "enableEventRequestFeaturing", t.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", t),
+        k = ((a = {}).EnableRightsManager = "enableRightsManager", a.EnableBulkFiling = "enableBulkFiling", a.EnableOnDemandSearch = "enableOnDemandSearch", a.EnableEditRegistration = "enableEditRegistration", a.EnableImageSearch = "enableImageSearch", a.EnableClaimsAgainstMe = "enableClaimsAgainstMe", a.EnableGenAiOptOut = "enableGenAiOptOut", a.EnableInExperienceIpReporting = "enableInExperienceIpReporting", a.EnableIpContentSearch = "enableIpContentSearch", a.EnableTrademark = "enableTrademark", a),
         C = ((r = {}).EnableIPRecommender = "enableIPRecommender", r),
         y = ((s = y || {}).EnableVideoOnboarding = "enableVideoOnboarding", s),
         S = ((o = S || {}).EnableSignalLookup = "enableSignalLookup", o.AlwaysShow = "alwaysShow", o),
@@ -20,13 +20,13 @@
         q = q || {},
         P = ((n = {}).ShowEditInStudioButton = "showEditInStudioButton", n.EnableCreationsNavLayout = "enableCreationsIPNavLayout", n),
         A = ((l = {}).EnableMultiAssetSearch = "enableMultiAssetSearch", l),
-        H = ((d = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", d.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", d.EnableAudienceControls = "enableAudienceControls", d.EnableNewBadgePattern = "enableNewBadgePattern", d.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", d.EnableAudiencesReplacement = "enableAudiencesReplacement", d),
-        j = ((c = {}).EnableTalentHubV2 = "enableTalentHubV2", c.EnableTalentHubV2M2 = "enableTalentHubV2M2", c),
+        H = ((c = {}).EnableAudienceReachOnOverview = "enableAudienceReachOnOverviewPage", c.EnableAudienceReachGrowthOpportunitiesBanner = "enableAudienceReachGrowthOpportunitiesBanner", c.EnableAudienceControls = "enableAudienceControls", c.EnableNewBadgePattern = "enableNewBadgePattern", c.EnableAtRiskAnnotationOnExperiences = "enableAtRiskAnnotationOnExperiences", c.EnableAudiencesReplacement = "enableAudiencesReplacement", c),
+        j = ((d = {}).EnableTalentHubV2 = "enableTalentHubV2", d.EnableTalentHubV2M2 = "enableTalentHubV2M2", d),
         I = ((u = I || {}).EnableExperienceWebhooks = "enableExperienceWebhooks", u),
-        R = ((b = R || {}).GameAppealsEnabled = "gameAppealsEnabled", b),
-        T = ((g = T || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", g),
-        M = ((m = M || {}).EnableChangelogCMS = "enableChangelogCMS", m),
-        z = ((f = {}).CreatorDashboard = "CreatorDashboard", f.CreatorHubHomePage = "CreatorHub.HomePage.UserId", f.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", f.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", f.CreatorHubLandingPage = "CreatorHub.LandingPage", f.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", f.CreatorHubNavigation = "CreatorHub.Navigation", f.CreatorHubNavigationUser = "CreatorHub.Navigation.User", f.CreatorHubPublishing = "CreatorHub.Publishing.UserId", f.LicenseManager = "CreatorDashboard.LicenseManager", f.RightsManager = "CreatorDashboard.RightsManager", f.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", f.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", f.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", f.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", f.CreatorHubGameAppeals = "CreatorHub.GameAppeals.UserId", f.CreatorHubChangelog = "CreatorHub.Changelog", f.TalentHub = "CreatorHub.TalentHub.UserId", f),
+        R = ((f = R || {}).GameAppealsEnabled = "gameAppealsEnabled", f),
+        T = ((b = T || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", b),
+        M = ((g = M || {}).EnableChangelogCMS = "enableChangelogCMS", g),
+        z = ((m = {}).CreatorDashboard = "CreatorDashboard", m.CreatorHubHomePage = "CreatorHub.HomePage.UserId", m.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", m.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", m.CreatorHubLandingPage = "CreatorHub.LandingPage", m.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", m.CreatorHubNavigation = "CreatorHub.Navigation", m.CreatorHubNavigationUser = "CreatorHub.Navigation.User", m.CreatorHubPublishing = "CreatorHub.Publishing.UserId", m.LicenseManager = "CreatorDashboard.LicenseManager", m.RightsManager = "CreatorDashboard.RightsManager", m.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", m.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", m.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", m.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", m.CreatorHubGameAppeals = "CreatorHub.GameAppeals.UserId", m.CreatorHubChangelog = "CreatorHub.Changelog", m.TalentHub = "CreatorHub.TalentHub.UserId", m),
         L = ((p = L || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", p.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", p.ShowSecrets = "showSecrets", p.ShowQualitySignalCards = "showQualitySignalCards", p);
     let N = {
         CreatorDashboard: _,
@@ -49,9 +49,9 @@
         "CreatorHub.TalentHub.UserId": j
     };
     async function O(e) {
-        let a = (0, v.getBEDEV2ServiceBasePath)("product-experimentation-platform"),
-            t = Object.values(N[e]).join(","),
-            r = "".concat(a, "/v1/projects/1/layers/").concat(e, "/values?parameters=").concat(t);
+        let t = (0, v.getBEDEV2ServiceBasePath)("product-experimentation-platform"),
+            a = Object.values(N[e]).join(","),
+            r = "".concat(t, "/v1/projects/1/layers/").concat(e, "/values?parameters=").concat(a);
         return (await fetch(r, {
             credentials: "include"
         })).json()
@@ -61,30 +61,30 @@
 }, 864392, e => {
     "use strict";
     e.s(["default", 0, function(e) {
-        let a = new Map;
-        return t => {
-            if (a.has(t)) return a.get(t);
-            let r = e(t);
-            return a.set(t, r), r
+        let t = new Map;
+        return a => {
+            if (t.has(a)) return t.get(a);
+            let r = e(a);
+            return t.set(a, r), r
         }
     }])
 }, 493924, 938429, 321623, e => {
     "use strict";
-    var a = e.i(221628),
-        t = e.i(623983),
+    var t = e.i(221628),
+        a = e.i(623983),
         r = e.i(697973),
         s = e.i(776344),
         o = e.i(462863),
         i = e.i(343885),
         n = e.i(609794),
         l = e.i(57561),
-        d = e.i(509747),
-        c = e.i(475555),
+        c = e.i(509747),
+        d = e.i(475555),
         u = e.i(538302),
-        b = e.i(387707),
-        g = e.i(262135),
-        m = e.i(240731),
-        f = e.i(956923),
+        f = e.i(387707),
+        b = e.i(262135),
+        g = e.i(240731),
+        m = e.i(956923),
         p = e.i(84362),
         h = e.i(214665),
         v = e.i(455506),
@@ -124,16 +124,16 @@
         Y = e.i(564908),
         $ = e.i(663412),
         ee = e.i(215887),
-        ea = e.i(962803),
-        et = e.i(914865),
+        et = e.i(962803),
+        ea = e.i(914865),
         er = e.i(818392),
         es = e.i(173034),
         eo = e.i(780078),
         ei = e.i(756885),
         en = e.i(260123),
         el = e.i(507792),
-        ed = e.i(850994);
-    let ec = {
+        ec = e.i(850994);
+    let ed = {
         secrets: {
             light: M.default,
             dark: T.default
@@ -151,7 +151,7 @@
             dark: en.default
         },
         shareLinks: {
-            light: ea.default,
+            light: et.default,
             dark: ee.default
         },
         eventsAndUpdates: {
@@ -160,7 +160,7 @@
         },
         avatarItem: {
             light: u.default,
-            dark: c.default
+            dark: d.default
         },
         models: {
             light: G.default,
@@ -171,7 +171,7 @@
             dark: V.default
         },
         audio: {
-            light: d.default,
+            light: c.default,
             dark: l.default
         },
         decals: {
@@ -183,7 +183,7 @@
             dark: w.default
         },
         videos: {
-            light: ed.default,
+            light: ec.default,
             dark: ei.default
         },
         meshes: {
@@ -219,8 +219,8 @@
             dark: H.default
         },
         badge: {
-            light: g.default,
-            dark: b.default
+            light: b.default,
+            dark: f.default
         },
         apiKeys: {
             light: n.default,
@@ -228,7 +228,7 @@
         },
         signin: {
             light: er.default,
-            dark: et.default
+            dark: ea.default
         },
         oAuthApps: {
             light: X.default,
@@ -239,8 +239,8 @@
             dark: z.default
         },
         barGraph: {
-            light: f.default,
-            dark: m.default
+            light: m.default,
+            dark: g.default
         },
         leaderboard: {
             light: A.default,
@@ -255,9 +255,9 @@
             dark: N.default
         }
     };
-    e.s(["default", 0, ec], 938429);
-    let eu = "".concat("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/assets", "/spot_illustrations"),
-        eb = {
+    e.s(["default", 0, ed], 938429);
+    let eu = "".concat("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/assets", "/spot_illustrations"),
+        ef = {
             small: {
                 analytics: "".concat(eu, "/small/analytics.svg"),
                 animations: "".concat(eu, "/small/animations.svg"),
@@ -300,8 +300,8 @@
                 emptyExperiments: "".concat(eu, "/large/empty_experiments.svg")
             }
         };
-    e.s(["default", 0, eb], 321623);
-    let eg = (0, r.makeStyles)()(() => ({
+    e.s(["default", 0, ef], 321623);
+    let eb = (0, r.makeStyles)()(() => ({
             smallContainer: {
                 margin: "48px 0",
                 padding: "0 24px",
@@ -322,25 +322,25 @@
                 marginBottom: 24
             }
         })),
-        em = e => {
+        eg = e => {
             let {
-                illustration: t,
+                illustration: a,
                 size: r = "large"
-            } = e, s = t && ec[t];
-            if (s) return (0, a.jsx)(o.default, {
+            } = e, s = a && ed[a];
+            if (s) return (0, t.jsx)(o.default, {
                 lightSrc: s.light,
                 darkSrc: s.dark,
-                alt: t
+                alt: a
             });
-            let i = t ? eb[r][t] : null;
-            return i && (0, a.jsx)("img", {
+            let i = a ? ef[r][a] : null;
+            return i && (0, t.jsx)("img", {
                 height: "large" === r ? 240 : 96,
                 width: "large" === r ? 320 : 96,
                 src: i,
-                alt: t
+                alt: a
             })
         },
-        ef = e => {
+        em = e => {
             let {
                 children: r,
                 title: o,
@@ -349,40 +349,40 @@
                 illustration: l
             } = e, {
                 classes: {
-                    smallContainer: d,
-                    largeContainer: c,
+                    smallContainer: c,
+                    largeContainer: d,
                     smallText: u,
-                    largeText: b
+                    largeText: f
                 },
-                cx: g
-            } = eg();
-            return (0, a.jsxs)(s.default, {
+                cx: b
+            } = eb();
+            return (0, t.jsxs)(s.default, {
                 classes: {
-                    root: g({
-                        [d]: "small" === n,
-                        [c]: "large" === n
+                    root: b({
+                        [c]: "small" === n,
+                        [d]: "large" === n
                     })
                 },
                 flexDirection: "column",
                 alignItems: "center",
-                children: [(0, a.jsx)(em, {
+                children: [(0, t.jsx)(eg, {
                     illustration: l,
                     size: n
-                }), (0, a.jsxs)(s.default, {
+                }), (0, t.jsxs)(s.default, {
                     classes: {
-                        root: g({
+                        root: b({
                             [u]: "small" === n,
-                            [b]: "large" === n
+                            [f]: "large" === n
                         })
                     },
                     flexDirection: "column",
                     alignItems: "center",
-                    children: [(0, a.jsx)(t.Typography, {
+                    children: [(0, t.jsx)(a.Typography, {
                         textAlign: "center",
                         variant: "h4",
                         color: "primary",
                         children: o
-                    }), i && (0, a.jsx)(t.Typography, {
+                    }), i && (0, t.jsx)(a.Typography, {
                         textAlign: "center",
                         color: "secondary",
                         children: i
@@ -390,38 +390,38 @@
                 }), r]
             })
         };
-    ef.displayName = "EmptyState", e.s(["EmptyStateIllustration", 0, em, "default", 0, ef], 493924)
+    em.displayName = "EmptyState", e.s(["EmptyStateIllustration", 0, eg, "default", 0, em], 493924)
 }, 198528, e => {
     "use strict";
-    var a = e.i(416340),
-        t = e.i(589624);
+    var t = e.i(416340),
+        a = e.i(589624);
     e.s(["default", 0, (e, r) => {
-        let s = (0, t.useRouter)(),
+        let s = (0, a.useRouter)(),
             o = s.query;
-        return [(0, a.useMemo)(() => {
-            let a = null != o ? o : {},
-                t = {};
-            for (let r of e) t[r] = a[r];
-            return t
-        }, [e, o]), (0, a.useCallback)(function(a) {
-            var t;
+        return [(0, t.useMemo)(() => {
+            let t = null != o ? o : {},
+                a = {};
+            for (let r of e) a[r] = t[r];
+            return a
+        }, [e, o]), (0, t.useCallback)(function(t) {
+            var a;
             let o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {
                     skipHistory: !1
                 },
-                i = null != (t = s.query) ? t : {},
+                i = null != (a = s.query) ? a : {},
                 n = {
                     ...i
                 };
             e.forEach(e => {
-                if (!Object.hasOwn(a, e)) return;
-                let t = a[e];
-                null == t ? delete n[e] : Array.isArray(t) ? n[e] = t.map(e => e.toString()) : n[e] = t.toString()
-            }), Array.from(new Set([...Object.keys(i), ...Object.keys(n)])).every(e => ((e, a) => {
-                if (null == e && null == a) return !0;
-                if (null == e || null == a) return !1;
-                let t = Array.isArray(e) ? e : [e],
-                    r = Array.isArray(a) ? a : [a];
-                return t.length === r.length && t.every((e, a) => e === r[a])
+                if (!Object.hasOwn(t, e)) return;
+                let a = t[e];
+                null == a ? delete n[e] : Array.isArray(a) ? n[e] = a.map(e => e.toString()) : n[e] = a.toString()
+            }), Array.from(new Set([...Object.keys(i), ...Object.keys(n)])).every(e => ((e, t) => {
+                if (null == e && null == t) return !0;
+                if (null == e || null == t) return !1;
+                let a = Array.isArray(e) ? e : [e],
+                    r = Array.isArray(t) ? t : [t];
+                return a.length === r.length && a.every((e, t) => e === r[t])
             })(i[e], n[e])) || (o.skipHistory ? s.replace({
                 pathname: s.pathname,
                 query: n
@@ -431,43 +431,43 @@
             }, void 0, r))
         }, [s, e, r])]
     }, "normalizeSingleQueryParam", 0, e => {
-        let a = Array.isArray(e) ? e[0] : e;
-        return "" === a || null == a ? void 0 : a
+        let t = Array.isArray(e) ? e[0] : e;
+        return "" === t || null == t ? void 0 : t
     }])
 }, 426546, e => {
     "use strict";
-    var a = e.i(191685);
-    e.s(["www", 0, a])
+    var t = e.i(191685);
+    e.s(["www", 0, t])
 }, 927868, e => {
     "use strict";
-    e.s(["getEnumKeyByValue", 0, (e, a) => {
-        let t = Object.entries(e).find(e => {
-            let [, t] = e;
-            return t === a
+    e.s(["getEnumKeyByValue", 0, (e, t) => {
+        let a = Object.entries(e).find(e => {
+            let [, a] = e;
+            return a === t
         });
-        return t ? t[0] : null
-    }, "isValidArrayEnumValue", 0, (e, a) => e.includes(a), "isValidEnumValue", 0, (e, a) => Object.values(e).includes(a)])
+        return a ? a[0] : null
+    }, "isValidArrayEnumValue", 0, (e, t) => e.includes(t), "isValidEnumValue", 0, (e, t) => Object.values(e).includes(t)])
 }, 745873, 67262, e => {
     "use strict";
-    var a = e.i(221628),
-        t = e.i(416340),
+    var t = e.i(221628),
+        a = e.i(416340),
         r = e.i(458451),
         s = e.i(533414),
         o = e.i(157310),
         i = e.i(279149),
         n = e.i(602635),
         l = e.i(814975);
-    let d = (0, e.i(272593).createClientConfiguration)("creator-home-api", "bedev2"),
-        c = new i.UserScreenApi(d),
-        u = new i.GroupsApi(d),
-        b = {
+    let c = (0, e.i(272593).createClientConfiguration)("creator-home-api", "bedev2"),
+        d = new i.UserScreenApi(c),
+        u = new i.GroupsApi(c),
+        f = {
             groupsApi: u,
-            userScreenApi: c,
-            creatorHomeContentApi: new i.CreatorHomeContentApi(d),
-            signalsApi: new i.SignalsApi(d)
+            userScreenApi: d,
+            creatorHomeContentApi: new i.CreatorHomeContentApi(c),
+            signalsApi: new i.SignalsApi(c)
         };
-    e.s(["CreatorHomeClient", 0, b], 67262);
-    let g = function() {
+    e.s(["CreatorHomeClient", 0, f], 67262);
+    let b = function() {
             let {
                 user: e
             } = (0, l.useAuthentication)();
@@ -478,11 +478,11 @@
                     let e;
                     return e = {
                         surface: i.GroupListSurface.CreatorHub
-                    }, b.groupsApi.groupsListGroups(e)
+                    }, f.groupsApi.groupsListGroups(e)
                 }
             })
         },
-        m = (0, t.createContext)(null);
+        g = (0, a.createContext)(null);
     e.s(["GroupsProvider", 0, e => {
         let {
             children: o
@@ -491,73 +491,73 @@
         } = (0, r.useRobloxAuthentication)(), {
             data: n,
             isLoading: l,
-            refetch: d
-        } = g(), [c, u] = (0, s.useLocalStorage)("creatorHubGroups.".concat(null == i ? void 0 : i.id), null), [b, f] = (0, s.useLocalStorage)("creatorHubGroup.".concat(null == i ? void 0 : i.id), null), [p, h] = (0, s.useLocalStorage)("creatorHubGroupData.".concat(null == i ? void 0 : i.id), {}), v = (0, t.useCallback)(e => {
-            f(e);
-            let a = null != e ? e : "user";
+            refetch: c
+        } = b(), [d, u] = (0, s.useLocalStorage)("creatorHubGroups.".concat(null == i ? void 0 : i.id), null), [f, m] = (0, s.useLocalStorage)("creatorHubGroup.".concat(null == i ? void 0 : i.id), null), [p, h] = (0, s.useLocalStorage)("creatorHubGroupData.".concat(null == i ? void 0 : i.id), {}), v = (0, a.useCallback)(e => {
+            m(e);
+            let t = null != e ? e : "user";
             h(e => {
-                let t = {
+                let a = {
                     lastSelected: Date.now(),
                     priority: 1
                 };
-                if (e[a]) {
+                if (e[t]) {
                     let {
                         priority: r,
                         lastSelected: s
-                    } = e[a];
-                    "number" != typeof r || Number.isNaN(r) || "number" != typeof s || Number.isNaN(s) || (t.priority = r * (1 + Math.log10(1 + 10 / Math.max(Date.now() - s, 864e5))))
+                    } = e[t];
+                    "number" != typeof r || Number.isNaN(r) || "number" != typeof s || Number.isNaN(s) || (a.priority = r * (1 + Math.log10(1 + 10 / Math.max(Date.now() - s, 864e5))))
                 }
                 return {
                     ...e,
-                    [a]: t
+                    [t]: a
                 }
             })
-        }, [f, h]), x = (0, t.useMemo)(() => {
+        }, [m, h]), x = (0, a.useMemo)(() => {
             if (null == n ? void 0 : n.groups) return null == n ? void 0 : n.groups;
-            if (null === c) return [];
+            if (null === d) return [];
             try {
-                let e = "string" == typeof c ? JSON.parse(c) : c;
+                let e = "string" == typeof d ? JSON.parse(d) : d;
                 return Array.isArray(e) && e.every(e => "object" == typeof e && null !== e && "id" in e && "number" == typeof e.id && "name" in e && "string" == typeof e.name && "roleSetName" in e && "string" == typeof e.roleSetName) ? e : []
             } catch (e) {
                 return []
             }
-        }, [c, null == n ? void 0 : n.groups]), _ = (0, t.useMemo)(() => {
+        }, [d, null == n ? void 0 : n.groups]), _ = (0, a.useMemo)(() => {
             var e;
-            return b && null != (e = x.find(e => {
+            return f && null != (e = x.find(e => {
                 let {
-                    id: a
+                    id: t
                 } = e;
-                return a === b
+                return t === f
             })) ? e : null
-        }, [b, x]);
-        (0, t.useEffect)(() => {
+        }, [f, x]);
+        (0, a.useEffect)(() => {
             (null == i ? void 0 : i.id) && (null == n ? void 0 : n.groups) && !l && u(null == n ? void 0 : n.groups)
         }, [null == n ? void 0 : n.groups, x, l, u, null == i ? void 0 : i.id]);
-        let k = (0, t.useMemo)(() => ({
+        let k = (0, a.useMemo)(() => ({
             groups: x,
             currentGroup: _,
             groupData: p,
             isFetched: !l && !!(null == i ? void 0 : i.id),
-            refreshGroups: d,
+            refreshGroups: c,
             setCurrentGroup: v
-        }), [_, p, x, l, d, v, null == i ? void 0 : i.id]);
-        return (0, a.jsx)(m.Provider, {
+        }), [_, p, x, l, c, v, null == i ? void 0 : i.id]);
+        return (0, t.jsx)(g.Provider, {
             value: k,
             children: o
         })
     }, "useCurrentGroup", 0, () => {
-        let e = (0, t.useContext)(m);
+        let e = (0, a.useContext)(g);
         if (null === e) throw Error("useCurrentGroup must be used within a GroupsProvider");
         return e.currentGroup
     }, "useGroups", 0, () => {
-        let e = (0, t.useContext)(m);
+        let e = (0, a.useContext)(g);
         if (null === e) throw Error("useGroups must be used within a GroupsProvider");
         return e
     }], 745873)
 }, 486736, e => {
     "use strict";
-    var a = e.i(221628),
-        t = e.i(416340),
+    var t = e.i(221628),
+        a = e.i(416340),
         r = e.i(639102);
     let s = {
             enableImageTranslationEnrollment: !1,
@@ -572,20 +572,20 @@
             try {
                 let {
                     applicationSettings: e = {}
-                } = await r.settingsClient.getApplicationSettings(), a = {};
+                } = await r.settingsClient.getApplicationSettings(), t = {};
                 return Object.entries(e).forEach(e => {
-                    let [t, r] = e;
+                    let [a, r] = e;
                     try {
-                        let e = typeof s[t];
-                        a[t] = "boolean" === e || "number" === e ? JSON.parse(r) : r
+                        let e = typeof s[a];
+                        t[a] = "boolean" === e || "number" === e ? JSON.parse(r) : r
                     } catch (e) {
                         console.error(e)
                     }
-                }), a
+                }), t
             } catch (e) {
                 return s
             }
-        }, n = (0, t.createContext)({
+        }, n = (0, a.createContext)({
             settings: {
                 ...o
             },
@@ -595,168 +595,168 @@
     e.s(["SettingsProvider", 0, e => {
         let {
             children: r
-        } = e, [s, l] = (0, t.useState)(() => ({
+        } = e, [s, l] = (0, a.useState)(() => ({
             settings: {
                 ...o
             },
             status: "initial",
             isFetched: !1
         }));
-        return (0, t.useEffect)(() => {
+        return (0, a.useEffect)(() => {
             (async () => {
                 let e = await Promise.allSettled([i()]);
                 l({
-                    settings: e.reduce((e, a) => ({
+                    settings: e.reduce((e, t) => ({
                         ...e,
-                        ..."fulfilled" === a.status ? a.value : {}
+                        ..."fulfilled" === t.status ? t.value : {}
                     }), o),
                     isFetched: !0,
                     status: e.find(e => "rejected" === e.status) ? "error" : "success"
                 })
             })()
-        }, []), (0, a.jsx)(n.Provider, {
+        }, []), (0, t.jsx)(n.Provider, {
             value: s,
             children: r
         })
     }, "useSettings", 0, () => {
         let {
             settings: e,
-            status: a,
+            status: t,
             isFetched: r
-        } = (0, t.useContext)(n), s = (0, t.useRef)(e);
+        } = (0, a.useContext)(n), s = (0, a.useRef)(e);
         return {
-            settings: (0, t.useMemo)(() => {
-                let a = s.current;
-                return Object.keys(e).some(t => e[t] !== a[t]) && (s.current = e), s.current
+            settings: (0, a.useMemo)(() => {
+                let t = s.current;
+                return Object.keys(e).some(a => e[a] !== t[a]) && (s.current = e), s.current
             }, [e]),
-            status: a,
+            status: t,
             isFetched: r
         }
     }], 486736)
 }, 127792, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
 }, 858517, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
 }, 343885, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
 }, 609794, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/api_key_light.06t4q4202-77s.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/api_key_light.06t4q4202-77s.svg")
 }, 57561, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/audio_dark.16razgllw2ska.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/audio_dark.16razgllw2ska.svg")
 }, 509747, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/audio_light.3ra073_18pbj-.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/audio_light.3ra073_18pbj-.svg")
 }, 475555, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
 }, 538302, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
 }, 387707, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/badge_dark.3m45r-3favo3f.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/badge_dark.3m45r-3favo3f.svg")
 }, 262135, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
 }, 240731, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
 }, 956923, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
 }, 84362, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
 }, 214665, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
 }, 455506, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/decals_dark.2jpntsljojhzc.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/decals_dark.2jpntsljojhzc.svg")
 }, 918290, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
 }, 716933, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
 }, 347319, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/envelope_light.1me9hqye66z7w.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/envelope_light.1me9hqye66z7w.svg")
 }, 543657, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
 }, 850412, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
 }, 103329, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
 }, 692706, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
 }, 405654, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/image_dark.2giew28wx4z86.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/image_dark.2giew28wx4z86.svg")
 }, 891409, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/image_light.0ouq8tcgpznz7.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/image_light.0ouq8tcgpznz7.svg")
 }, 758060, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
 }, 710005, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
 }, 495550, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
 }, 320429, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
 }, 106017, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
 }, 821978, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
 }, 766389, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
 }, 374717, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
 }, 756733, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
 }, 251697, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
 }, 411118, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
 }, 839596, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
 }, 729733, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
 }, 66217, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/meshes_light.36wh96flp2o3r.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/meshes_light.36wh96flp2o3r.svg")
 }, 148865, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/models_dark.30suu5lj5-ua5.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/models_dark.30suu5lj5-ua5.svg")
 }, 45512, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
 }, 706478, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
 }, 166181, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
 }, 37474, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
 }, 147189, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
 }, 105897, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
 }, 123524, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
 }, 752739, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
 }, 331105, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
 }, 564908, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/run_dark.1sun4tvxh_arh.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/run_dark.1sun4tvxh_arh.svg")
 }, 663412, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/run_light.29f-3jyw910_v.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/run_light.29f-3jyw910_v.svg")
 }, 215887, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
 }, 962803, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
 }, 914865, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
 }, 818392, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
 }, 173034, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
 }, 780078, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/token_light.2xc00j5zp1q8_.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/token_light.2xc00j5zp1q8_.svg")
 }, 756885, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
 }, 260123, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
 }, 507792, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/video_game_light.3l155817mjupj.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/video_game_light.3l155817mjupj.svg")
 }, 850994, e => {
-    e.q("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/_next/static/media/video_light.1fum3vlxctp7w.svg")
+    e.q("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/_next/static/media/video_light.1fum3vlxctp7w.svg")
 }, 607895, e => {
     "use strict";
-    var a = e.i(197649),
-        t = e.i(416340),
+    var t = e.i(197649),
+        a = e.i(416340),
         r = e.i(23342);
     let s = new Set(["_self", "_parent", "_top"]),
         o = {
@@ -769,43 +769,43 @@
             Emphasis: "content-emphasis",
             Inverse: "content-inverse-default"
         },
-        n = (0, t.forwardRef)((e, n) => {
-            var l, d, c;
+        n = (0, a.forwardRef)((e, n) => {
+            var l, c, d;
             let {
                 children: u,
-                className: b,
-                size: g,
-                color: m = "Emphasis",
-                variant: f = "Standalone",
+                className: f,
+                size: b,
+                color: g = "Emphasis",
+                variant: m = "Standalone",
                 underline: p = "hover",
                 isExternal: h,
                 asChild: v,
                 ...x
-            } = e, _ = (d = null != (l = x.as) ? l : "a", c = "button" === x.as ? void 0 : x.target, void 0 !== h ? h : "button" !== d && void 0 !== c && !s.has(c)), k = (0, a.default)("foundation-web-link", "button" === x.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === f || _) && "inline-flex items-center gap-xsmall", void 0 !== g && o[g], i[m], "always" === p ? "underline" : "no-underline", "hover" === p && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", b), C = _ ? t.default.createElement("span", {
+            } = e, _ = (c = null != (l = x.as) ? l : "a", d = "button" === x.as ? void 0 : x.target, void 0 !== h ? h : "button" !== c && void 0 !== d && !s.has(d)), k = (0, t.default)("foundation-web-link", "button" === x.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === m || _) && "inline-flex items-center gap-xsmall", void 0 !== b && o[b], i[g], "always" === p ? "underline" : "no-underline", "hover" === p && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", f), C = _ ? a.default.createElement("span", {
                 "aria-hidden": !0,
                 "data-testid": "foundation-web-icon",
-                className: (0, a.default)("grow-0 shrink-0 basis-auto icon size-[1em]", "icon-regular-arrow-up-right-from-square")
+                className: (0, t.default)("grow-0 shrink-0 basis-auto icon size-[1em]", "icon-regular-arrow-up-right-from-square")
             }) : null;
             if (v) {
                 let {
                     as: e,
-                    ...a
-                } = x, s = t.default.Children.only(u);
-                return t.default.isValidElement(s) ? t.default.createElement(r.Slot, {
+                    ...t
+                } = x, s = a.default.Children.only(u);
+                return a.default.isValidElement(s) ? a.default.createElement(r.Slot, {
                     ref: n,
-                    ...a,
+                    ...t,
                     className: k
-                }, t.default.cloneElement(s, {}, t.default.createElement(t.default.Fragment, null, s.props.children, C))) : null
+                }, a.default.cloneElement(s, {}, a.default.createElement(a.default.Fragment, null, s.props.children, C))) : null
             }
             if ("button" === x.as) {
                 let {
                     as: e,
-                    type: a,
+                    type: t,
                     ...r
                 } = x;
-                return t.default.createElement("button", {
+                return a.default.createElement("button", {
                     ref: n,
-                    type: null != a ? a : "button",
+                    type: null != t ? t : "button",
                     ...r,
                     className: k
                 }, u, C)
@@ -814,7 +814,7 @@
                 as: y,
                 ...S
             } = x;
-            return t.default.createElement("a", {
+            return a.default.createElement("a", {
                 ref: n,
                 ...S,
                 className: k
@@ -823,57 +823,57 @@
     n.displayName = "Link", e.s(["Link", 0, n])
 }, 367808, e => {
     "use strict";
-    var a = e.i(194250),
-        t = e.i(416340),
+    var t = e.i(194250),
+        a = e.i(416340),
         r = e.i(863605),
         s = e.i(154502),
         o = e.i(945146),
         i = e.i(690569),
         n = e.i(251635),
         l = e.i(787802),
-        d = e.i(221628),
-        c = e.i(396249),
+        c = e.i(221628),
+        d = e.i(396249),
         u = e.i(121880);
 
-    function b(e) {
+    function f(e) {
         return (0, i.g)("MuiAlertTitle", e)
     }(0, l.g)("MuiAlertTitle", ["root"]);
-    let g = ["className"],
-        m = (0, n.s)(c.T, {
+    let b = ["className"],
+        g = (0, n.s)(d.T, {
             name: "MuiAlertTitle",
             slot: "Root",
-            overridesResolver: (e, a) => a.root
+            overridesResolver: (e, t) => t.root
         })(e => {
             let {
-                theme: a
+                theme: t
             } = e;
             return {
-                fontWeight: a.typography.fontWeightMedium,
+                fontWeight: t.typography.fontWeightMedium,
                 marginTop: -2
             }
         }),
-        f = t.forwardRef(function(e, a) {
-            let t = (0, u.u)({
+        m = a.forwardRef(function(e, t) {
+            let a = (0, u.u)({
                     props: e,
                     name: "MuiAlertTitle"
                 }),
                 {
                     className: r
-                } = t,
-                s = (0, i._)(t, g),
+                } = a,
+                s = (0, i._)(a, b),
                 l = (e => {
                     let {
-                        classes: a
+                        classes: t
                     } = e;
                     return (0, n.a)({
                         root: ["root"]
-                    }, b, a)
-                })(t);
-            return (0, d.jsx)(m, (0, o._)({
+                    }, f, t)
+                })(a);
+            return (0, c.jsx)(g, (0, o._)({
                 gutterBottom: !0,
                 component: "div",
-                ownerState: t,
-                ref: a,
+                ownerState: a,
+                ref: t,
                 className: (0, n.c)(l.root, r)
             }, s))
         });
@@ -881,21 +881,21 @@
             name: "AlertTitle"
         })(function(e) {
             return {
-                root: (0, a._)((0, a._)({}, e.typography.alertTitle), {
+                root: (0, t._)((0, t._)({}, e.typography.alertTitle), {
                     margin: "-1px 0"
                 })
             }
         }),
-        h = (0, t.forwardRef)(function(e, r) {
+        h = (0, a.forwardRef)(function(e, r) {
             var o = e.classes,
                 i = e.className,
-                n = (0, a.a)(e, ["classes", "className"]),
+                n = (0, t.a)(e, ["classes", "className"]),
                 l = p(void 0, {
                     props: {
                         classes: (0, s.default)(o, i)
                     }
                 });
-            return t.default.createElement(f, (0, a._)({}, n, {
+            return a.default.createElement(m, (0, t._)({}, n, {
                 classes: l.classes,
                 ref: r
             }))
@@ -903,25 +903,25 @@
     e.s(["AlertTitle", 0, h], 367808)
 }, 957474, e => {
     "use strict";
-    var a = e.i(194250),
-        t = e.i(416340),
+    var t = e.i(194250),
+        a = e.i(416340),
         r = e.i(863605),
         s = e.i(154502),
         o = e.i(787802),
         i = e.i(690569),
         n = e.i(945146),
         l = e.i(251635),
-        d = e.i(51928),
-        c = e.i(634034),
+        c = e.i(51928),
+        d = e.i(634034),
         u = e.i(221628),
-        b = e.i(176595),
-        g = e.i(121880),
-        m = e.i(105006);
+        f = e.i(176595),
+        b = e.i(121880),
+        g = e.i(105006);
     e.i(465957);
-    var f = (0, c.c)((0, u.jsx)("path", {
+    var m = (0, d.c)((0, u.jsx)("path", {
             d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
         }), "RadioButtonUnchecked"),
-        p = (0, c.c)((0, u.jsx)("path", {
+        p = (0, d.c)((0, u.jsx)("path", {
             d: "M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
         }), "RadioButtonChecked");
     let h = (0, l.s)("span", {
@@ -931,7 +931,7 @@
             position: "relative",
             display: "flex"
         }),
-        v = (0, l.s)(f, {
+        v = (0, l.s)(m, {
             name: "MuiRadioButtonIcon"
         })({
             transform: "scale(1)"
@@ -940,44 +940,44 @@
             name: "MuiRadioButtonIcon"
         })(e => {
             let {
-                theme: a,
-                ownerState: t
+                theme: t,
+                ownerState: a
             } = e;
             return (0, n._)({
                 left: 0,
                 position: "absolute",
                 transform: "scale(0)",
-                transition: a.transitions.create("transform", {
-                    easing: a.transitions.easing.easeIn,
-                    duration: a.transitions.duration.shortest
+                transition: t.transitions.create("transform", {
+                    easing: t.transitions.easing.easeIn,
+                    duration: t.transitions.duration.shortest
                 })
-            }, t.checked && {
+            }, a.checked && {
                 transform: "scale(1)",
-                transition: a.transitions.create("transform", {
-                    easing: a.transitions.easing.easeOut,
-                    duration: a.transitions.duration.shortest
+                transition: t.transitions.create("transform", {
+                    easing: t.transitions.easing.easeOut,
+                    duration: t.transitions.duration.shortest
                 })
             })
         });
 
     function _(e) {
         let {
-            checked: a = !1,
-            classes: t = {},
+            checked: t = !1,
+            classes: a = {},
             fontSize: r
         } = e, s = (0, n._)({}, e, {
-            checked: a
+            checked: t
         });
         return (0, u.jsxs)(h, {
-            className: t.root,
+            className: a.root,
             ownerState: s,
             children: [(0, u.jsx)(v, {
                 fontSize: r,
-                className: t.background,
+                className: a.background,
                 ownerState: s
             }), (0, u.jsx)(x, {
                 fontSize: r,
-                className: t.dot,
+                className: a.dot,
                 ownerState: s
             })]
         })
@@ -988,37 +988,37 @@
     }
     var C = (0, o.g)("MuiRadio", ["root", "checked", "disabled", "colorPrimary", "colorSecondary", "sizeSmall"]);
     let y = ["checked", "checkedIcon", "color", "icon", "name", "onChange", "size", "className"],
-        S = (0, l.s)(d.S, {
+        S = (0, l.s)(c.S, {
             shouldForwardProp: e => (0, l.r)(e) || "classes" === e,
             name: "MuiRadio",
             slot: "Root",
-            overridesResolver: (e, a) => {
+            overridesResolver: (e, t) => {
                 let {
-                    ownerState: t
+                    ownerState: a
                 } = e;
-                return [a.root, "medium" !== t.size && a["size".concat((0, i.a)(t.size))], a["color".concat((0, i.a)(t.color))]]
+                return [t.root, "medium" !== a.size && t["size".concat((0, i.a)(a.size))], t["color".concat((0, i.a)(a.color))]]
             }
         })(e => {
             let {
-                theme: a,
-                ownerState: t
+                theme: t,
+                ownerState: a
             } = e;
             return (0, n._)({
-                color: (a.vars || a).palette.text.secondary
-            }, !t.disableRipple && {
+                color: (t.vars || t).palette.text.secondary
+            }, !a.disableRipple && {
                 "&:hover": {
-                    backgroundColor: a.vars ? "rgba(".concat("default" === t.color ? a.vars.palette.action.activeChannel : a.vars.palette[t.color].mainChannel, " / ").concat(a.vars.palette.action.hoverOpacity, ")") : (0, i.b)("default" === t.color ? a.palette.action.active : a.palette[t.color].main, a.palette.action.hoverOpacity),
+                    backgroundColor: t.vars ? "rgba(".concat("default" === a.color ? t.vars.palette.action.activeChannel : t.vars.palette[a.color].mainChannel, " / ").concat(t.vars.palette.action.hoverOpacity, ")") : (0, i.b)("default" === a.color ? t.palette.action.active : t.palette[a.color].main, t.palette.action.hoverOpacity),
                     "@media (hover: none)": {
                         backgroundColor: "transparent"
                     }
                 }
-            }, "default" !== t.color && {
+            }, "default" !== a.color && {
                 ["&.".concat(C.checked)]: {
-                    color: (a.vars || a).palette[t.color].main
+                    color: (t.vars || t).palette[a.color].main
                 }
             }, {
                 ["&.".concat(C.disabled)]: {
-                    color: (a.vars || a).palette.action.disabled
+                    color: (t.vars || t).palette.action.disabled
                 }
             })
         }),
@@ -1026,14 +1026,14 @@
             checked: !0
         }),
         w = (0, u.jsx)(_, {}),
-        q = t.forwardRef(function(e, a) {
-            var r, s, o, d;
-            let c = (0, g.u)({
+        q = a.forwardRef(function(e, t) {
+            var r, s, o, c;
+            let d = (0, b.u)({
                     props: e,
                     name: "MuiRadio"
                 }),
                 {
-                    checked: f,
+                    checked: m,
                     checkedIcon: p = E,
                     color: h = "primary",
                     icon: v = w,
@@ -1041,32 +1041,32 @@
                     onChange: _,
                     size: C = "medium",
                     className: q
-                } = c,
-                P = (0, i._)(c, y),
-                A = (0, n._)({}, c, {
+                } = d,
+                P = (0, i._)(d, y),
+                A = (0, n._)({}, d, {
                     color: h,
                     size: C
                 }),
                 H = (e => {
                     let {
-                        classes: a,
-                        color: t,
+                        classes: t,
+                        color: a,
                         size: r
                     } = e, s = {
-                        root: ["root", "color".concat((0, i.a)(t)), "medium" !== r && "size".concat((0, i.a)(r))]
+                        root: ["root", "color".concat((0, i.a)(a)), "medium" !== r && "size".concat((0, i.a)(r))]
                     };
-                    return (0, n._)({}, a, (0, l.a)(s, k, a))
+                    return (0, n._)({}, t, (0, l.a)(s, k, t))
                 })(A),
-                j = t.useContext(b.R),
-                I = f,
-                R = (0, m.c)(_, j && j.onChange),
+                j = a.useContext(f.R),
+                I = m,
+                R = (0, g.c)(_, j && j.onChange),
                 T = x;
-            return j && (void 0 === I && (o = j.value, I = "object" == typeof(d = c.value) && null !== d ? o === d : String(o) === String(d)), void 0 === T && (T = j.name)), (0, u.jsx)(S, (0, n._)({
+            return j && (void 0 === I && (o = j.value, I = "object" == typeof(c = d.value) && null !== c ? o === c : String(o) === String(c)), void 0 === T && (T = j.name)), (0, u.jsx)(S, (0, n._)({
                 type: "radio",
-                icon: t.cloneElement(v, {
+                icon: a.cloneElement(v, {
                     fontSize: null != (r = w.props.fontSize) ? r : C
                 }),
-                checkedIcon: t.cloneElement(p, {
+                checkedIcon: a.cloneElement(p, {
                     fontSize: null != (s = E.props.fontSize) ? s : C
                 }),
                 ownerState: A,
@@ -1074,50 +1074,50 @@
                 name: T,
                 checked: I,
                 onChange: R,
-                ref: a,
+                ref: t,
                 className: (0, l.c)(H.root, q)
             }, P))
         });
     var P = (0, r.default)({
             name: "Radio"
         })(function(e) {
-            var a, t;
+            var t, a;
             return {
                 root: {
                     color: e.palette.states.active
                 },
-                colorPrimary: ((a = {
+                colorPrimary: ((t = {
                     color: e.palette.content.muted
                 })["&.".concat(C.checked)] = {
                     color: e.palette.actionV2.primaryBrand.fill
-                }, a),
+                }, t),
                 colorSecondary: {
                     color: e.palette.actionV2.primary.fill
                 },
-                disabled: ((t = {
+                disabled: ((a = {
                     color: e.palette.states.disabled
                 })["&.".concat(C.colorPrimary, ".").concat(C.checked)] = {
                     color: e.palette.states.disabled
-                }, t)
+                }, a)
             }
         }),
-        A = (0, t.forwardRef)(function(e, r) {
+        A = (0, a.forwardRef)(function(e, r) {
             var o = e.classes,
                 i = e.color,
                 n = e.inputProps,
                 l = e["aria-label"],
-                d = e.className,
-                c = (0, a.a)(e, ["classes", "color", "inputProps", "aria-label", "className"]),
+                c = e.className,
+                d = (0, t.a)(e, ["classes", "color", "inputProps", "aria-label", "className"]),
                 u = P(void 0, {
                     props: {
-                        classes: (0, s.default)(o, d)
+                        classes: (0, s.default)(o, c)
                     }
                 });
-            return t.default.createElement(q, (0, a._)({}, c, {
+            return a.default.createElement(q, (0, t._)({}, d, {
                 classes: u.classes,
                 color: void 0 === i ? "primary" : i,
                 ref: r,
-                inputProps: (0, a._)({
+                inputProps: (0, t._)({
                     "aria-label": l
                 }, n)
             }))
@@ -1125,15 +1125,15 @@
     e.s(["Radio", 0, A], 957474)
 }, 176595, e => {
     "use strict";
-    let a = e.i(416340).createContext(void 0);
-    e.s(["R", 0, a])
+    let t = e.i(416340).createContext(void 0);
+    e.s(["R", 0, t])
 }, 990729, e => {
     "use strict";
-    var a = e.i(194250),
-        t = e.i(416340),
+    var t = e.i(194250),
+        a = e.i(416340),
         r = e.i(863762);
     e.i(221628), e.i(149285);
-    var s = (0, t.createContext)({
+    var s = (0, a.createContext)({
         ref: {
             current: null
         },
@@ -1145,58 +1145,58 @@
         }
     });
     e.s(["default", 0, function(e) {
-        var o, i, n, l, d = e.children,
-            c = (0, a.a)(e, ["children"]),
-            u = (0, t.useRef)(null),
-            b = (0, t.useState)(!1),
-            g = b[0],
-            m = b[1],
-            f = (0, t.useState)([]),
-            p = f[0],
-            h = f[1],
-            v = (0, t.useCallback)(function(e, t) {
-                void 0 === e && (e = {}), void 0 === t && (t = function() {
+        var o, i, n, l, c = e.children,
+            d = (0, t.a)(e, ["children"]),
+            u = (0, a.useRef)(null),
+            f = (0, a.useState)(!1),
+            b = f[0],
+            g = f[1],
+            m = (0, a.useState)([]),
+            p = m[0],
+            h = m[1],
+            v = (0, a.useCallback)(function(e, a) {
+                void 0 === e && (e = {}), void 0 === a && (a = function() {
                     return !0
                 }), h(function(r) {
-                    return (0, a.b)((0, a.b)([], r, !0), [{
+                    return (0, t.b)((0, t.b)([], r, !0), [{
                         props: e,
-                        shouldClose: t
+                        shouldClose: a
                     }], !1)
                 })
             }, [h]),
-            x = (0, t.useCallback)(function() {
-                m(!1)
-            }, [m]);
-        (0, t.useEffect)(function() {
-            p.length > 0 && m(!0)
+            x = (0, a.useCallback)(function() {
+                g(!1)
+            }, [g]);
+        (0, a.useEffect)(function() {
+            p.length > 0 && g(!0)
         }, [p.length]);
-        var _ = (0, t.useMemo)(function() {
+        var _ = (0, a.useMemo)(function() {
             return {
                 ref: u,
                 enqueue: v,
                 close: x
             }
         }, [x, v]);
-        return t.default.createElement(t.default.Fragment, null, t.default.createElement(s.Provider, {
+        return a.default.createElement(a.default.Fragment, null, a.default.createElement(s.Provider, {
             value: _
-        }, d), t.default.createElement(r.S, (0, a._)({}, (null == (o = p[0]) ? void 0 : o.props) || {}, c, {
-            TransitionProps: (0, a._)((0, a._)({}, (null == (n = null == (i = p[0]) ? void 0 : i.props) ? void 0 : n.TransitionProps) || {}), {
+        }, c), a.default.createElement(r.S, (0, t._)({}, (null == (o = p[0]) ? void 0 : o.props) || {}, d, {
+            TransitionProps: (0, t._)((0, t._)({}, (null == (n = null == (i = p[0]) ? void 0 : i.props) ? void 0 : n.TransitionProps) || {}), {
                 onExited: function(e) {
-                    var t, r, s, o;
+                    var a, r, s, o;
                     h(function(e) {
-                        var t = e.slice(1);
-                        return (0, a.b)([], t, !0)
-                    }), (null == (r = null == (t = p[0]) ? void 0 : t.props.TransitionProps) ? void 0 : r.onExited) && (null == (o = null == (s = p[0]) ? void 0 : s.props.TransitionProps) || o.onExited(e))
+                        var a = e.slice(1);
+                        return (0, t.b)([], a, !0)
+                    }), (null == (r = null == (a = p[0]) ? void 0 : a.props.TransitionProps) ? void 0 : r.onExited) && (null == (o = null == (s = p[0]) ? void 0 : s.props.TransitionProps) || o.onExited(e))
                 }
             }),
-            onClose: function(e, a) {
-                var t, r, s;
-                (null == (t = p[0]) ? void 0 : t.shouldClose(a)) && m(!1), (null == (r = p[0]) ? void 0 : r.props.onClose) && (null == (s = p[0]) || s.props.onClose(e, a))
+            onClose: function(e, t) {
+                var a, r, s;
+                (null == (a = p[0]) ? void 0 : a.shouldClose(t)) && g(!1), (null == (r = p[0]) ? void 0 : r.props.onClose) && (null == (s = p[0]) || s.props.onClose(e, t))
             },
-            open: g
+            open: b
         }), null == (l = p[0]) ? void 0 : l.props.children))
     }, "useSnackbar", 0, function() {
-        var e = (0, t.useContext)(s);
+        var e = (0, a.useContext)(s);
         return {
             ref: e.ref,
             enqueue: e.enqueue,
@@ -1218,14 +1218,14 @@
     }])
 }, 823062, e => {
     "use strict";
-    var a = e.i(416340);
-    let t = (0, a.createContext)(null),
+    var t = e.i(416340);
+    let a = (0, t.createContext)(null),
         r = [],
         s = ["pageload", "click", "impression", "hover", "webvitals", "apivitals", "formvitals", "error", "session"],
         o = new Set(["TTFB", "FCP", "LCP", "FID", "CLS", "INP"]);
 
     function i() {
-        let e = (0, a.useContext)(t);
+        let e = (0, t.useContext)(a);
         if (null === e) throw Error("useUnifiedLoggerProvider must be used within a UnifiedLoggerProvider");
         return e
     }
@@ -1235,73 +1235,73 @@
         let {
             children: n,
             unifiedLogger: l,
-            pageLoggerConfig: d,
-            path: c,
+            pageLoggerConfig: c,
+            path: d,
             url: u,
-            isReady: b = !0
-        } = e, g = null != (i = null == d ? void 0 : d.tags) ? i : r, m = null == d ? void 0 : d.rosId, f = (0, a.useMemo)(() => ({
-            tags: g,
-            rosId: m,
-            path: c,
+            isReady: f = !0
+        } = e, b = null != (i = null == c ? void 0 : c.tags) ? i : r, g = null == c ? void 0 : c.rosId, m = (0, t.useMemo)(() => ({
+            tags: b,
+            rosId: g,
+            path: d,
             url: u,
-            isReady: b
-        }), [g, m, c, u, b]), p = (0, a.useRef)(f), h = (0, a.useRef)(f);
-        (0, a.useLayoutEffect)(() => {
-            h.current = f, void 0 === p.current.path && void 0 !== f.path && (p.current = {
+            isReady: f
+        }), [b, g, d, u, f]), p = (0, t.useRef)(m), h = (0, t.useRef)(m);
+        (0, t.useLayoutEffect)(() => {
+            h.current = m, void 0 === p.current.path && void 0 !== m.path && (p.current = {
                 ...p.current,
-                path: f.path
+                path: m.path
             })
-        }, [f]), (0, a.useLayoutEffect)(() => {
+        }, [m]), (0, t.useLayoutEffect)(() => {
             let e = e => {
-                var a;
-                let t, r = (t = null == (a = e.parameters) ? void 0 : a.metricName, "webvitals" === e.eventType && void 0 !== t && o.has(t)) ? p.current : h.current;
+                var t;
+                let a, r = (a = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== a && o.has(a)) ? p.current : h.current;
                 void 0 !== r.path && (e.parameters = {
                     ...e.parameters,
                     path: r.path
-                }), r.tags.forEach(a => e.addTag(a)), void 0 !== r.rosId && e.addTag("owner: ".concat(r.rosId))
+                }), r.tags.forEach(t => e.addTag(t)), void 0 !== r.rosId && e.addTag("owner: ".concat(r.rosId))
             };
-            return s.forEach(a => {
-                l.events.on(a, e)
+            return s.forEach(t => {
+                l.events.on(t, e)
             }), () => {
-                s.forEach(a => {
-                    l.events.off(a, e)
+                s.forEach(t => {
+                    l.events.off(t, e)
                 })
             }
         }, [l]);
-        let v = (0, a.useMemo)(() => ({
+        let v = (0, t.useMemo)(() => ({
             unifiedLogger: l,
-            pageContext: f
-        }), [l, f]);
-        return a.default.createElement(t.Provider, {
+            pageContext: m
+        }), [l, m]);
+        return t.default.createElement(a.Provider, {
             value: v
         }, n)
     }, "useOptionalUnifiedLoggerProvider", 0, function() {
-        return (0, a.useContext)(t)
+        return (0, t.useContext)(a)
     }, "usePageSettled", 0, e => {
         let {
-            unifiedLogger: t,
+            unifiedLogger: a,
             pageContext: r
         } = i(), {
             path: s,
             url: o,
             isReady: l
-        } = r, d = t.pageSettledTracker, c = (0, a.useSyncExternalStore)(d.subscribe, d.getSnapshot, n);
-        (0, a.useEffect)(() => {
-            if (!c || c.isNavigating || !l || !s || !o || !e || c.url.split(/[?#]/)[0] !== o.split(/[?#]/)[0]) return;
-            let a = new URL(s, window.location.origin).pathname,
+        } = r, c = a.pageSettledTracker, d = (0, t.useSyncExternalStore)(c.subscribe, c.getSnapshot, n);
+        (0, t.useEffect)(() => {
+            if (!d || d.isNavigating || !l || !s || !o || !e || d.url.split(/[?#]/)[0] !== o.split(/[?#]/)[0]) return;
+            let t = new URL(s, window.location.origin).pathname,
                 r = requestAnimationFrame(() => {
                     r = requestAnimationFrame(() => {
-                        t.logPageSettledEvent({
-                            navigationId: c.id,
-                            page: a,
+                        a.logPageSettledEvent({
+                            navigationId: d.id,
+                            page: t,
                             outcome: e
                         })
                     })
                 });
             return () => cancelAnimationFrame(r)
-        }, [c, l, o, s, e, t])
+        }, [d, l, o, s, e, a])
     }, "useUnifiedLoggerProvider", 0, i])
 }]);
 
-//# debugId=d6cdf847-5015-2485-0e6a-d3103d65137d
-//# sourceMappingURL=3enph-409kfqn.js.map
+//# debugId=71732783-dd9a-c414-5571-4872367ec935
+//# sourceMappingURL=1fxkhxuz4boc4.js.map

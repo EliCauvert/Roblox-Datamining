@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "3e3d4931-0272-cc1d-e807-15ce26e05c95")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "eb48e06d-e2db-430a-451f-3bd0c4793f36")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 779433, e => {
@@ -22,12 +22,18 @@
     e.s(["questionnaireV2Allowlist", 0, s, "questionnaireV2Q1Release", 0, n])
 }, 787617, e => {
     "use strict";
-    let t = (0, e.i(157700).defineFlag)({
-        namespace: "creator-platform",
-        name: "isUpdatedPublishingFlowEnabled",
-        defaultValue: !1
-    });
-    e.s(["isUpdatedPublishingFlowEnabled", 0, t])
+    var t = e.i(157700);
+    let s = (0, t.defineFlag)({
+            namespace: "creator-platform",
+            name: "isUpdatedPublishingFlowEnabled",
+            defaultValue: !1
+        }),
+        n = (0, t.defineFlag)({
+            namespace: "creator-platform",
+            name: "tryOnWebButtonEnabled",
+            defaultValue: !1
+        });
+    e.s(["isUpdatedPublishingFlowEnabled", 0, s, "tryOnWebButtonEnabled", 0, n])
 }, 261482, 858148, 966956, 719743, 477749, e => {
     "use strict";
     var t, s = e.i(157310),
@@ -5228,5 +5234,5 @@
     }])
 }]);
 
-//# debugId=3e3d4931-0272-cc1d-e807-15ce26e05c95
-//# sourceMappingURL=3ighejp2klehv.js.map
+//# debugId=eb48e06d-e2db-430a-451f-3bd0c4793f36
+//# sourceMappingURL=3b29jlhtkr4r4.js.map

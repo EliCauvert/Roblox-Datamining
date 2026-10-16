@@ -207,6 +207,8 @@ Roblox.LangDynamic["Authentication.Login"] = {
     "Heading.OpeningRoblox": "Opening Roblox...",
     "Description.OpenRobloxManually": "If Roblox doesn't open automatically, {startTag}click here{endTag}.",
     "Description.CloseTab": "You can close this tab after Roblox opens.",
-    "Message.UnexpectedSSOError": "An unexpected error occurred. Go back to {startTag}roblox.com{endTag}."
+    "Message.UnexpectedSSOError": "An unexpected error occurred. Go back to {startTag}roblox.com{endTag}.",
+    "Message.GenericSsoError": "Close this window, then try signing in again from where you started.",
+    "Header.SomethingWentWrong": "Something went wrong"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.Login");

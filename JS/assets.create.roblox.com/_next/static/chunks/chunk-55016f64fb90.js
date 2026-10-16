@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "750b8227-6231-1792-9725-8733c1323c9c")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "5eebdb5e-c674-5fce-73a3-40a370d61550")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -153,7 +153,7 @@
             children: r
         } = e, {
             user: l
-        } = (0, s.useAuthentication)(), c = (0, o.useCurrentGroup)(), [m, p] = (0, a.useState)(void 0), [f, h] = (0, a.useState)(), [y, g] = (0, a.useState)(), [v, A] = (0, a.useState)(), [b, T] = (0, a.useState)(), I = (0, a.useMemo)(() => {
+        } = (0, s.useAuthentication)(), c = (0, o.useCurrentGroup)(), [m, p] = (0, a.useState)(void 0), [f, h] = (0, a.useState)(), [y, v] = (0, a.useState)(), [g, A] = (0, a.useState)(), [b, T] = (0, a.useState)(), I = (0, a.useMemo)(() => {
             var e;
             return (null != (e = null == c ? void 0 : c.id) ? e : 0) !== 0
         }, [c]), [x, E] = (0, a.useState)(void 0), S = void 0 === m || void 0 === f || void 0 === y && I, C = (0, a.useCallback)(async () => {
@@ -184,14 +184,14 @@
         }, [x, I]), k = (0, a.useCallback)(async () => {
             if (I && (null == c ? void 0 : c.id)) try {
                 let e = await (0, u.getGroupEligibility)(c.id);
-                g(e.isEligible)
+                v(e.isEligible)
             } catch (e) {
-                g(!1)
+                v(!1)
             }
         }, [c, I]);
         (0, a.useEffect)(() => {
-            S ? T(void 0) : I && !x ? T(!1) : T(!1 === v)
-        }, [I, x, v, S]), (0, a.useEffect)(() => {
+            S ? T(void 0) : I && !x ? T(!1) : T(!1 === g)
+        }, [I, x, g, S]), (0, a.useEffect)(() => {
             (async () => {
                 if (I && (null == c ? void 0 : c.id)) {
                     var e;
@@ -212,12 +212,12 @@
         let N = (0, a.useMemo)(() => ({
             isAffiliateProgramLoading: S,
             requiresActionToJoinProgram: b,
-            compliantWithAllUserRequirements: v,
+            compliantWithAllUserRequirements: g,
             creatorMetadata: null != m ? m : void 0,
             requirements: null != f ? f : void 0,
             isCurrentUserGroupOwner: x,
             isGroupEligible: null != y ? y : void 0
-        }), [S, b, v, m, f, x, y]);
+        }), [S, b, g, m, f, x, y]);
         return (0, t.jsx)(d.Provider, {
             value: N,
             children: r
@@ -262,8 +262,8 @@
         f = e.i(823062),
         h = e.i(881670),
         y = e.i(904969),
-        g = e.i(906791);
-    let v = (0, e.i(697973).makeStyles)()(e => ({
+        v = e.i(906791);
+    let g = (0, e.i(697973).makeStyles)()(e => ({
         alertContainer: {
             marginBottom: "16px",
             [e.breakpoints.down("Medium")]: {
@@ -299,7 +299,7 @@
             backgroundColor: "rgba(255, 255, 255, 0.1)"
         }
     }));
-    e.s(["default", 0, v], 540082);
+    e.s(["default", 0, g], 540082);
     var A = ((t = {}).Home = "home", t.Creations = "creations", t);
     let b = (0, r.withTranslation)(e => {
         let t, h, A, b, {
@@ -311,10 +311,10 @@
                 isHighPriority: E,
                 variant: S,
                 dismissBanner: C
-            } = (0, g.useAgeVerificationUpsellContext)(),
+            } = (0, v.useAgeVerificationUpsellContext)(),
             {
                 classes: w
-            } = v(),
+            } = g(),
             k = (0, n.useRef)(null),
             {
                 unifiedLogger: N
@@ -466,8 +466,8 @@
         let {
             children: i
         } = e, [o, u] = (0, a.useState)(!0), [h, y] = (0, a.useState)("doNotShow"), {
-            isFetched: g,
-            user: v
+            isFetched: v,
+            user: g
         } = (0, n.useRobloxAuthentication)(), {
             unifiedLogger: A
         } = (0, s.useUnifiedLoggerProvider)(), {
@@ -486,7 +486,7 @@
             await c(), u(!0)
         }, [u]);
         (0, a.useEffect)(() => {
-            T && g && (null == v ? void 0 : v.id) && (async () => {
+            T && v && (null == g ? void 0 : g.id) && (async () => {
                 let e = !1;
                 try {
                     e = await d()
@@ -522,7 +522,7 @@
                     }
                 })
             })
-        }, [T, g, v, A]);
+        }, [T, v, g, A]);
         let x = (0, a.useMemo)(() => {
             let e = T && "doNotShow" !== h;
             return {
@@ -686,9 +686,9 @@
         f = e.i(114209),
         h = e.i(373736),
         y = e.i(917852),
-        g = e.i(576069),
-        v = e.i(663563);
-    let A = "".concat("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/assets", "/home/publish_eligibility_banner.webp"),
+        v = e.i(576069),
+        g = e.i(663563);
+    let A = "".concat("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/assets", "/home/publish_eligibility_banner.webp"),
         b = (0, l.withTranslation)(e => {
             var b;
             let {
@@ -705,7 +705,7 @@
                 data: M,
                 isLoading: L,
                 isFetching: P
-            } = (0, g.useCreatorEligibility)(), U = (0, a.useRef)(!1), [F, _] = (0, a.useState)(!1), R = (null == M ? void 0 : M.ageBracket) === r.AgeBracketEnum.Over18, V = (null == M ? void 0 : M.ageBracket) === r.AgeBracketEnum.Between13And18, B = null != (b = null == M ? void 0 : M.creatorEligibility.includes(r.CreatorEligibilityEnum.IdVerified)) && b, O = R || V, j = C && w && !(L || P) && !!M && !B;
+            } = (0, v.useCreatorEligibility)(), U = (0, a.useRef)(!1), [F, _] = (0, a.useState)(!1), R = (null == M ? void 0 : M.ageBracket) === r.AgeBracketEnum.Over18, V = (null == M ? void 0 : M.ageBracket) === r.AgeBracketEnum.Between13And18, B = null != (b = null == M ? void 0 : M.creatorEligibility.includes(r.CreatorEligibilityEnum.IdVerified)) && b, O = R || V, j = C && w && !(L || P) && !!M && !B;
             (0, a.useEffect)(() => {
                 j && !U.current && (U.current = !0, c.default.logImpressionEvent({
                     eventName: d.default.AudienceReachGrowthOpportunitiesBannerImpression,
@@ -739,7 +739,7 @@
                 direction: "row",
                 paddingBottom: 4,
                 children: [(0, t.jsxs)("div", {
-                    className: (0, i.clsx)(v.default.heroBanner, "relative width-full flex items-center bg-surface-200 radius-large"),
+                    className: (0, i.clsx)(g.default.heroBanner, "relative width-full flex items-center bg-surface-200 radius-large"),
                     children: [(0, t.jsx)("img", {
                         src: A,
                         alt: "",
@@ -753,7 +753,7 @@
                             e.currentTarget.style.display = "none"
                         }
                     }), (0, t.jsxs)("div", {
-                        className: (0, i.clsx)(v.default.heroTextContent, "dark-theme relative flex flex-col gap-medium padding-[32px]"),
+                        className: (0, i.clsx)(g.default.heroTextContent, "dark-theme relative flex flex-col gap-medium padding-[32px]"),
                         children: [(0, t.jsxs)("div", {
                             children: [(0, t.jsxs)("div", {
                                 className: "text-heading-medium content-emphasis",
@@ -763,7 +763,7 @@
                                 children: E(p.TranslationNamespace.AudienceReach, "Description.ExpandGrowthOpportunities")
                             })]
                         }), (0, t.jsx)("div", {
-                            className: (0, i.clsx)(v.default.buttonRow, "flex gap-small"),
+                            className: (0, i.clsx)(g.default.buttonRow, "flex gap-small"),
                             children: I ? R ? (0, t.jsx)(s.Button, {
                                 as: "a",
                                 href: y.idVerificationActionUrl,
@@ -801,7 +801,26 @@
         s = ((t = {}).Animation = "Animation", t.Audio = "Audio", t.Decal = "Decal", t.Image = "Image", t.Mesh = "Mesh", t.MeshPart = "MeshPart", t.Model = "Model", t.Plugin = "Plugin", t.TextDocument = "TextDocument", t.Video = "Video", t),
         i = ((a = {}).Group = "groups", a.User = "users", a);
     let l = new n.CreatorInventoryApi((0, r.createClientConfiguration)("creator-inventory-api", "bedev2"));
-    e.s(["CreatorInventoryAssetType", () => s, "CreatorInventoryScopeType", () => i, "default", 0, l])
+    e.s(["CreatorInventoryAssetType", () => s, "CreatorInventoryScopeType", () => i, "searchCreatorInventoryItems", 0, (e, t, a) => (null == t.isArchived && null == t.orderBy ? l : l.withPreMiddleware(async e => {
+        let {
+            url: a,
+            init: n
+        } = e;
+        return {
+            url: ((e, t) => {
+                let {
+                    isArchived: a,
+                    orderBy: n
+                } = t;
+                if (null == a && null == n) return e;
+                let r = e.indexOf("?"),
+                    s = -1 === r ? e : e.slice(0, r),
+                    i = (-1 === r ? [] : e.slice(r + 1).split("&")).map(e => null != a && e.startsWith("filter=") ? "".concat(e).concat(encodeURIComponent(";isArchived=".concat(a))) : e);
+                return null != n && i.push("orderBy=".concat(encodeURIComponent(n))), "".concat(s, "?").concat(i.join("&"))
+            })(a, t),
+            init: n
+        }
+    })).creatorInventorySearchCreatorInventoryItems(e, a)])
 }, 445550, e => {
     "use strict";
     var t = e.i(721281),
@@ -973,14 +992,14 @@
             l1Options: m,
             categories: p,
             isLoading: f
-        } = c(e), h = (0, s.isAllAssetTypesActiveTab)(u) || (0, s.isRecentsActiveTab)(u) || (0, s.isAvatarLooksActiveTab)(u) ? void 0 : null != (i = (0, s.parseTaxonomyActiveTab)(u)) ? i : null == (o = m[0]) ? void 0 : o.taxonomyKey, y = (0, t.useMemo)(() => (0, r.findL1Category)(p, h), [p, h]), g = (0, t.useMemo)(() => (0, r.buildTaxonomyL2Options)(y), [y]), v = parseInt(null != (l = null == d ? void 0 : d.toString()) ? l : "", 10), A = (0, n.isValidIndex)(v, g) ? v : 0, b = (0, t.useMemo)(() => {
-            if (y) return g.length > 0 ? g[A] : y.webStableId ? (0, r.categoryToDropdown)(y) : void 0
-        }, [y, g, A]);
+        } = c(e), h = (0, s.isAllAssetTypesActiveTab)(u) || (0, s.isRecentsActiveTab)(u) || (0, s.isAvatarLooksActiveTab)(u) ? void 0 : null != (i = (0, s.parseTaxonomyActiveTab)(u)) ? i : null == (o = m[0]) ? void 0 : o.taxonomyKey, y = (0, t.useMemo)(() => (0, r.findL1Category)(p, h), [p, h]), v = (0, t.useMemo)(() => (0, r.buildTaxonomyL2Options)(y), [y]), g = parseInt(null != (l = null == d ? void 0 : d.toString()) ? l : "", 10), A = (0, n.isValidIndex)(g, v) ? g : 0, b = (0, t.useMemo)(() => {
+            if (y) return v.length > 0 ? v[A] : y.webStableId ? (0, r.categoryToDropdown)(y) : void 0
+        }, [y, v, A]);
         return {
             l1Options: m,
             activeL1Key: h,
             activeL1Node: y,
-            l2Options: g,
+            l2Options: v,
             filterIndex: A,
             selection: b,
             isLoading: f
@@ -1210,97 +1229,100 @@
     }])
 }, 211461, e => {
     "use strict";
-    var t, a = e.i(102211),
-        n = e.i(899441),
-        r = e.i(361738),
-        s = e.i(671376),
-        i = ((t = {}).All = "All", t);
-    let l = [n.CreatorInventoryAssetType.Model, n.CreatorInventoryAssetType.Plugin, n.CreatorInventoryAssetType.Audio, n.CreatorInventoryAssetType.Decal, n.CreatorInventoryAssetType.Image, n.CreatorInventoryAssetType.Video, n.CreatorInventoryAssetType.Mesh, n.CreatorInventoryAssetType.MeshPart, n.CreatorInventoryAssetType.Animation],
-        o = [...l, n.CreatorInventoryAssetType.TextDocument],
-        u = new Set([n.CreatorInventoryAssetType.Audio, n.CreatorInventoryAssetType.Decal, n.CreatorInventoryAssetType.MeshPart, n.CreatorInventoryAssetType.TextDocument, n.CreatorInventoryAssetType.Video]),
-        d = new Set([...u, n.CreatorInventoryAssetType.Image]),
-        c = new Set(o),
-        m = new Set([n.CreatorInventoryAssetType.TextDocument]),
-        p = new Set(["All", r.CreatorInventorySourceType.Created, r.CreatorInventorySourceType.Purchased, r.CreatorInventorySourceType.Shared]),
-        f = new Set([s.Asset.Animation, s.Asset.Audio, s.Asset.Decal, s.Asset.Image, s.Asset.Mesh, s.Asset.MeshPart, s.Asset.Model, s.Asset.Plugin, s.Asset.Video]),
-        h = {
-            [n.CreatorInventoryAssetType.Animation]: s.Asset.Animation,
-            [n.CreatorInventoryAssetType.Audio]: s.Asset.Audio,
-            [n.CreatorInventoryAssetType.Decal]: s.Asset.Decal,
-            [n.CreatorInventoryAssetType.Image]: s.Asset.Image,
-            [n.CreatorInventoryAssetType.Mesh]: s.Asset.Mesh,
-            [n.CreatorInventoryAssetType.MeshPart]: s.Asset.MeshPart,
-            [n.CreatorInventoryAssetType.Model]: s.Asset.Model,
-            [n.CreatorInventoryAssetType.Plugin]: s.Asset.Plugin,
-            [n.CreatorInventoryAssetType.TextDocument]: s.Asset.TextDocument,
-            [n.CreatorInventoryAssetType.Video]: s.Asset.Video
-        },
-        y = {
-            [n.CreatorInventoryAssetType.Animation]: a.AssetType.Animation,
-            [n.CreatorInventoryAssetType.Audio]: a.AssetType.Audio,
-            [n.CreatorInventoryAssetType.Decal]: a.AssetType.Decal,
-            [n.CreatorInventoryAssetType.Image]: a.AssetType.Image,
-            [n.CreatorInventoryAssetType.Mesh]: a.AssetType.Mesh,
-            [n.CreatorInventoryAssetType.MeshPart]: a.AssetType.MeshPart,
-            [n.CreatorInventoryAssetType.Model]: a.AssetType.Model,
-            [n.CreatorInventoryAssetType.Plugin]: a.AssetType.Plugin,
-            [n.CreatorInventoryAssetType.TextDocument]: a.AssetType.TextDocument,
-            [n.CreatorInventoryAssetType.Video]: a.AssetType.Video
+    var t, a, n = e.i(102211),
+        r = e.i(899441),
+        s = e.i(361738),
+        i = e.i(671376),
+        l = ((t = {}).All = "All", t),
+        o = ((a = {}).All = "All", a);
+    let u = [r.CreatorInventoryAssetType.Model, r.CreatorInventoryAssetType.Plugin, r.CreatorInventoryAssetType.Audio, r.CreatorInventoryAssetType.Decal, r.CreatorInventoryAssetType.Image, r.CreatorInventoryAssetType.Video, r.CreatorInventoryAssetType.Mesh, r.CreatorInventoryAssetType.MeshPart, r.CreatorInventoryAssetType.Animation],
+        d = [...u, r.CreatorInventoryAssetType.TextDocument],
+        c = new Set([r.CreatorInventoryAssetType.Audio, r.CreatorInventoryAssetType.Decal, r.CreatorInventoryAssetType.MeshPart, r.CreatorInventoryAssetType.TextDocument, r.CreatorInventoryAssetType.Video]),
+        m = new Set([...c, r.CreatorInventoryAssetType.Image]),
+        p = new Set(d),
+        f = new Set([r.CreatorInventoryAssetType.TextDocument]),
+        h = new Set(["All", s.CreatorInventorySourceType.Created, s.CreatorInventorySourceType.Purchased, s.CreatorInventorySourceType.Shared]),
+        y = new Set([i.Asset.Animation, i.Asset.Audio, i.Asset.Decal, i.Asset.Image, i.Asset.Mesh, i.Asset.MeshPart, i.Asset.Model, i.Asset.Plugin, i.Asset.Video]),
+        v = {
+            [r.CreatorInventoryAssetType.Animation]: i.Asset.Animation,
+            [r.CreatorInventoryAssetType.Audio]: i.Asset.Audio,
+            [r.CreatorInventoryAssetType.Decal]: i.Asset.Decal,
+            [r.CreatorInventoryAssetType.Image]: i.Asset.Image,
+            [r.CreatorInventoryAssetType.Mesh]: i.Asset.Mesh,
+            [r.CreatorInventoryAssetType.MeshPart]: i.Asset.MeshPart,
+            [r.CreatorInventoryAssetType.Model]: i.Asset.Model,
+            [r.CreatorInventoryAssetType.Plugin]: i.Asset.Plugin,
+            [r.CreatorInventoryAssetType.TextDocument]: i.Asset.TextDocument,
+            [r.CreatorInventoryAssetType.Video]: i.Asset.Video
         },
         g = {
-            3: n.CreatorInventoryAssetType.Audio,
-            10: n.CreatorInventoryAssetType.Model,
-            13: n.CreatorInventoryAssetType.Decal,
-            24: n.CreatorInventoryAssetType.Animation,
-            38: n.CreatorInventoryAssetType.Plugin,
-            40: n.CreatorInventoryAssetType.MeshPart,
-            62: n.CreatorInventoryAssetType.Video,
-            93: n.CreatorInventoryAssetType.TextDocument,
-            ANIMATION: n.CreatorInventoryAssetType.Animation,
-            ASSET_TYPE_ANIMATION: n.CreatorInventoryAssetType.Animation,
-            ASSET_TYPE_AUDIO: n.CreatorInventoryAssetType.Audio,
-            ASSET_TYPE_DECAL: n.CreatorInventoryAssetType.Decal,
-            ASSET_TYPE_IMAGE: n.CreatorInventoryAssetType.Image,
-            ASSET_TYPE_MESH: n.CreatorInventoryAssetType.Mesh,
-            ASSET_TYPE_MESH_PART: n.CreatorInventoryAssetType.MeshPart,
-            ASSET_TYPE_MODEL: n.CreatorInventoryAssetType.Model,
-            ASSET_TYPE_PLUGIN: n.CreatorInventoryAssetType.Plugin,
-            ASSET_TYPE_TEXT_DOCUMENT: n.CreatorInventoryAssetType.TextDocument,
-            ASSET_TYPE_VIDEO: n.CreatorInventoryAssetType.Video,
-            AUDIO: n.CreatorInventoryAssetType.Audio,
-            DECAL: n.CreatorInventoryAssetType.Decal,
-            IMAGE: n.CreatorInventoryAssetType.Image,
-            MESH: n.CreatorInventoryAssetType.Mesh,
-            MESHPART: n.CreatorInventoryAssetType.MeshPart,
-            MODEL: n.CreatorInventoryAssetType.Model,
-            PLUGIN: n.CreatorInventoryAssetType.Plugin,
-            TEXTDOCUMENT: n.CreatorInventoryAssetType.TextDocument,
-            VIDEO: n.CreatorInventoryAssetType.Video
-        },
-        v = {
-            createdDetails: r.CreatorInventorySourceType.Created,
-            purchasedDetails: r.CreatorInventorySourceType.Purchased,
-            sharedDetails: r.CreatorInventorySourceType.Shared
+            [r.CreatorInventoryAssetType.Animation]: n.AssetType.Animation,
+            [r.CreatorInventoryAssetType.Audio]: n.AssetType.Audio,
+            [r.CreatorInventoryAssetType.Decal]: n.AssetType.Decal,
+            [r.CreatorInventoryAssetType.Image]: n.AssetType.Image,
+            [r.CreatorInventoryAssetType.Mesh]: n.AssetType.Mesh,
+            [r.CreatorInventoryAssetType.MeshPart]: n.AssetType.MeshPart,
+            [r.CreatorInventoryAssetType.Model]: n.AssetType.Model,
+            [r.CreatorInventoryAssetType.Plugin]: n.AssetType.Plugin,
+            [r.CreatorInventoryAssetType.TextDocument]: n.AssetType.TextDocument,
+            [r.CreatorInventoryAssetType.Video]: n.AssetType.Video
         },
         A = {
-            [a.State.Active]: "Active",
-            [a.State.Archived]: "Archived"
+            3: r.CreatorInventoryAssetType.Audio,
+            10: r.CreatorInventoryAssetType.Model,
+            13: r.CreatorInventoryAssetType.Decal,
+            24: r.CreatorInventoryAssetType.Animation,
+            38: r.CreatorInventoryAssetType.Plugin,
+            40: r.CreatorInventoryAssetType.MeshPart,
+            62: r.CreatorInventoryAssetType.Video,
+            93: r.CreatorInventoryAssetType.TextDocument,
+            ANIMATION: r.CreatorInventoryAssetType.Animation,
+            ASSET_TYPE_ANIMATION: r.CreatorInventoryAssetType.Animation,
+            ASSET_TYPE_AUDIO: r.CreatorInventoryAssetType.Audio,
+            ASSET_TYPE_DECAL: r.CreatorInventoryAssetType.Decal,
+            ASSET_TYPE_IMAGE: r.CreatorInventoryAssetType.Image,
+            ASSET_TYPE_MESH: r.CreatorInventoryAssetType.Mesh,
+            ASSET_TYPE_MESH_PART: r.CreatorInventoryAssetType.MeshPart,
+            ASSET_TYPE_MODEL: r.CreatorInventoryAssetType.Model,
+            ASSET_TYPE_PLUGIN: r.CreatorInventoryAssetType.Plugin,
+            ASSET_TYPE_TEXT_DOCUMENT: r.CreatorInventoryAssetType.TextDocument,
+            ASSET_TYPE_VIDEO: r.CreatorInventoryAssetType.Video,
+            AUDIO: r.CreatorInventoryAssetType.Audio,
+            DECAL: r.CreatorInventoryAssetType.Decal,
+            IMAGE: r.CreatorInventoryAssetType.Image,
+            MESH: r.CreatorInventoryAssetType.Mesh,
+            MESHPART: r.CreatorInventoryAssetType.MeshPart,
+            MODEL: r.CreatorInventoryAssetType.Model,
+            PLUGIN: r.CreatorInventoryAssetType.Plugin,
+            TEXTDOCUMENT: r.CreatorInventoryAssetType.TextDocument,
+            VIDEO: r.CreatorInventoryAssetType.Video
         },
-        b = e => !0 === e ? o : l,
-        T = e => {
+        b = {
+            createdDetails: s.CreatorInventorySourceType.Created,
+            purchasedDetails: s.CreatorInventorySourceType.Purchased,
+            sharedDetails: s.CreatorInventorySourceType.Shared
+        },
+        T = {
+            [n.State.Active]: "Active",
+            [n.State.Archived]: "Archived"
+        },
+        I = e => !0 === e ? d : u,
+        x = e => {
             if (null == e) return;
             let t = e instanceof Date ? e : new Date(e);
             return Number.isNaN(t.getTime()) ? void 0 : t
         };
-    e.s(["DevelopmentItemsSourceFilter", () => i, "buildCreatorInventoryScope", 0, (e, t) => null != t ? {
-        type: n.CreatorInventoryScopeType.Group,
+    e.s(["DevelopmentItemsAssetTypeFilter", () => o, "DevelopmentItemsSourceFilter", () => l, "buildCreatorInventoryScope", 0, (e, t) => null != t ? {
+        type: r.CreatorInventoryScopeType.Group,
         id: t
     } : null != e ? {
-        type: n.CreatorInventoryScopeType.User,
+        type: r.CreatorInventoryScopeType.User,
         id: e
     } : void 0, "buildCreatorInventorySearchFilter", 0, (e, t, a) => ({
-        assetTypes: [y[t]],
-        ...e.type === n.CreatorInventoryScopeType.Group ? {
+        ...0 === t.length ? {} : {
+            assetTypes: t.map(e => g[e])
+        },
+        ...e.type === r.CreatorInventoryScopeType.Group ? {
             groupIds: [e.id]
         } : {
             userIds: [e.id]
@@ -1308,14 +1330,14 @@
         ..."All" === a ? {} : {
             sources: [a]
         }
-    }), "canConfigureDevelopmentItem", 0, e => e.sources.includes(r.CreatorInventorySourceType.Created), "filterDevelopmentItemsByArchivedState", 0, (e, t) => e.filter(e => t ? "Archived" === e.state : "Archived" !== e.state), "getDevelopmentItemsAssetTypes", 0, b, "getDevelopmentItemsSearchAssetTypes", 0, (e, t) => [e, ...b(t).filter(t => t !== e)], "getLegacyDevelopmentItemsAssetType", 0, e => h[e], "hasActiveDevelopmentItemsInventoryFilters", 0, e => {
+    }), "canConfigureDevelopmentItem", 0, e => e.sources.includes(s.CreatorInventorySourceType.Created), "filterDevelopmentItemsByArchivedState", 0, (e, t) => e.filter(e => t ? "Archived" === e.state : "Archived" !== e.state), "getDevelopmentItemsAssetTypes", 0, I, "getDevelopmentItemsSearchAssetTypes", 0, (e, t) => [e, ...I(t).filter(t => t !== e)], "getLegacyDevelopmentItemsAssetType", 0, e => v[e], "hasActiveDevelopmentItemsInventoryFilters", 0, e => {
         let {
             query: t,
             showArchived: a,
             source: n
         } = e;
-        return t.trim().length > 0 || a || n !== r.CreatorInventorySourceType.Created
-    }, "hasDevelopmentItemCreatorStorePage", 0, e => e !== n.CreatorInventoryAssetType.TextDocument, "hasDevelopmentItemThumbnail", 0, e => e !== n.CreatorInventoryAssetType.TextDocument, "isDevelopmentItemArchivedViewAvailable", 0, e => null != e && d.has(e), "isDevelopmentItemAsset", 0, (e, t) => e === s.Asset.TextDocument ? !0 === t : f.has(e), "isDevelopmentItemDirectlyArchivable", 0, e => null != e && u.has(e), "isDevelopmentItemsAssetTypeSelection", 0, (e, t) => null != e && !!c.has(e) && (!m.has(e) || !0 === t), "isDevelopmentItemsSourceSelection", 0, e => null != e && p.has(e), "isDevelopmentItemsView", 0, e => "grid" === e || "list" === e, "mapCreatorInventoryItem", 0, e => {
+        return t.trim().length > 0 || a || n !== s.CreatorInventorySourceType.Created
+    }, "hasDevelopmentItemCreatorStorePage", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "hasDevelopmentItemThumbnail", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "isDevelopmentItemArchivedViewAvailable", 0, e => null != e && m.has(e), "isDevelopmentItemAsset", 0, (e, t) => e === i.Asset.TextDocument ? !0 === t : y.has(e), "isDevelopmentItemDirectlyArchivable", 0, e => null != e && c.has(e), "isDevelopmentItemsAssetType", 0, (e, t) => null != e && !!p.has(e) && (!f.has(e) || !0 === t), "isDevelopmentItemsSourceSelection", 0, e => null != e && h.has(e), "isDevelopmentItemsView", 0, e => "grid" === e || "list" === e, "mapCreatorInventoryItem", 0, e => {
         var t, a, n, r, s, i, l;
         let o, u = null == (n = e.assetItem) ? void 0 : n.asset;
         if (null == u) return;
@@ -1326,25 +1348,25 @@
             id: null != (a = e.path) ? a : d.toString(),
             assetId: d,
             assetType: (e => {
-                if (null != e) return g[e.toString().toUpperCase()]
+                if (null != e) return A[e.toString().toUpperCase()]
             })(u.assetType),
-            created: T(u.createTime),
+            created: x(u.createTime),
             isPackage: (null == (s = e.assetItem) ? void 0 : s.isPackage) === !0,
             name: null == c || 0 === c.length ? d.toString() : c,
             sources: (l = null == (i = e.assetItem) ? void 0 : i.sources, o = new Set, null == l || l.forEach(e => {
                 Object.entries(e).forEach(e => {
                     let [t, a] = e;
                     if (null == a) return;
-                    let n = v[t];
+                    let n = b[t];
                     null != n && o.add(n)
                 })
             }), [...o]),
-            state: null == u.state ? void 0 : A[u.state],
-            updated: T(u.updateTime)
+            state: null == u.state ? void 0 : T[u.state],
+            updated: x(u.updateTime)
         }
     }, "mergeOptimisticArchivedDevelopmentItems", 0, (e, t, a) => {
         let n = new Set(e.map(e => e.assetId));
-        return [...e, ...[...t.values()].filter(e => e.assetType === a && !n.has(e.assetId))]
+        return [...e, ...[...t.values()].filter(e => null != e.assetType && (0 === a.length || a.includes(e.assetType)) && !n.has(e.assetId))]
     }])
 }, 494601, e => {
     "use strict";
@@ -1428,7 +1450,7 @@
         },
         getValidMenuState(e, t, a, n, r, s, i, l, o) {
             var d, m, p, f, h, y;
-            let g, v, A = (null == (d = t.submenuItem) ? void 0 : d.type) !== u && (null == (m = t.submenuItem) ? void 0 : m.type) !== c || void 0 !== s;
+            let v, g, A = (null == (d = t.submenuItem) ? void 0 : d.type) !== u && (null == (m = t.submenuItem) ? void 0 : m.type) !== c || void 0 !== s;
             if (void 0 === t.menuItem || this.isMenuItemEnabled(t.menuItem, a, n, r, s, i, l, o)) {
                 if (void 0 !== t.submenuItem && A && !this.isMenuItemEnabled(t.submenuItem, a, n, r, s, i, l, o))
                     if (void 0 !== t.menuItem.submenuItems) {
@@ -1441,12 +1463,12 @@
                             }
                             u += 1
                         }
-                        g = t.menuItem, v = null == (h = t.menuItem.submenuItems) ? void 0 : h[e]
-                    } else g = t.menuItem, v = null == (y = t.menuItem.submenuItems) ? void 0 : y[0]
-            } else [g] = e, v = null == (p = e[0].submenuItems) ? void 0 : p[0];
-            return g ? {
-                menuItem: g,
-                submenuItem: v
+                        v = t.menuItem, g = null == (h = t.menuItem.submenuItems) ? void 0 : h[e]
+                    } else v = t.menuItem, g = null == (y = t.menuItem.submenuItems) ? void 0 : y[0]
+            } else [v] = e, g = null == (p = e[0].submenuItems) ? void 0 : p[0];
+            return v ? {
+                menuItem: v,
+                submenuItem: g
             } : t
         },
         isAssetTypeDirectlyArchivable: e => i.allowedAssetTypesForDirectArchiving.has(e),
@@ -1643,12 +1665,12 @@
             medium: 16,
             large: 20
         },
-        g = {
+        v = {
             compact: 32,
             medium: 48,
             large: 64
         },
-        v = {
+        g = {
             compact: 4,
             medium: 6,
             large: 8
@@ -1668,10 +1690,10 @@
                     marginRight: y[a]
                 },
                 userBorderRadius: {
-                    borderRadius: g[a]
+                    borderRadius: v[a]
                 },
                 nonUserBorderRadius: {
-                    borderRadius: v[a]
+                    borderRadius: g[a]
                 },
                 thumbnailItemContainer: {
                     display: "flex",
@@ -1709,8 +1731,8 @@
     e.s(["default", 0, e => {
         let l, {
                 target: y,
-                targetType: g,
-                displayNameOverride: v,
+                targetType: v,
+                displayNameOverride: g,
                 adornment: b,
                 label: T,
                 disabled: I,
@@ -1743,20 +1765,20 @@
             {
                 translate: G
             } = (0, n.useTranslation)(),
-            H = (0, a.useMemo)(() => g === p.default.User ? r.ThumbnailTypes.avatarHeadshot : g === p.default.Group ? r.ThumbnailTypes.groupIcon : "Ugc" === g ? r.ThumbnailTypes.assetThumbnail : r.ThumbnailTypes.universeThumbnail, [g]),
+            H = (0, a.useMemo)(() => v === p.default.User ? r.ThumbnailTypes.avatarHeadshot : v === p.default.Group ? r.ThumbnailTypes.groupIcon : "Ugc" === v ? r.ThumbnailTypes.assetThumbnail : r.ThumbnailTypes.universeThumbnail, [v]),
             K = (0, a.useMemo)(() => {
                 if (!E && y.id && !S) {
-                    if (g === p.default.User) return f.www.getUserUrl(y.id);
-                    if (g === p.default.Group) return f.www.getGroupUrl(y.id);
-                    if ("Experience" === g) {
+                    if (v === p.default.User) return f.www.getUserUrl(y.id);
+                    if (v === p.default.Group) return f.www.getGroupUrl(y.id);
+                    if ("Experience" === v) {
                         let e = "rootPlaceId" in y ? y.rootPlaceId : void 0;
                         return e ? f.www.getGameDetailsUrl(e) : void 0
                     }
-                    if ("Ugc" === g) return f.www.getCatalogUrl(y.id)
+                    if ("Ugc" === v) return f.www.getCatalogUrl(y.id)
                 }
-            }, [E, y, S, g]);
-        v ? l = v : g === p.default.User ? l = "displayName" in y ? y.displayName : void 0 : "Ugc" !== g && (l = "name" in y ? y.name : void 0);
-        let z = !v && (g === p.default.User && !("displayName" in y && y.displayName) || "Ugc" === g),
+            }, [E, y, S, v]);
+        g ? l = g : v === p.default.User ? l = "displayName" in y ? y.displayName : void 0 : "Ugc" !== v && (l = "name" in y ? y.name : void 0);
+        let z = !g && (v === p.default.User && !("displayName" in y && y.displayName) || "Ugc" === v),
             q = (0, a.useMemo)(() => {
                 let e;
                 return (0, t.jsxs)(i.Grid, {
@@ -1794,7 +1816,7 @@
                             })
                         })]
                     }), !w && (0, t.jsxs)(t.Fragment, {
-                        children: [g === p.default.User && (0, t.jsx)(t.Fragment, {
+                        children: [v === p.default.User && (0, t.jsx)(t.Fragment, {
                             children: "name" in y && !y.name ? (0, t.jsx)(d.Skeleton, {
                                 animate: !0,
                                 variant: "text",
@@ -1811,7 +1833,7 @@
                                     children: e
                                 }) : e)
                             })
-                        }), (g === p.default.Group || "Experience" === g) && (0, t.jsx)(s.Typography, {
+                        }), (v === p.default.Group || "Experience" === v) && (0, t.jsx)(s.Typography, {
                             variant: "captionBody",
                             className: j(O, {
                                 [V]: void 0 === D && ("secondary" === k || "compact" === x)
@@ -1824,7 +1846,7 @@
                         })]
                     })]
                 })
-            }, [z, l, g, y, O, I, S, G, T, w, j, V, k, x, N, D]);
+            }, [z, l, v, y, O, I, S, G, T, w, j, V, k, x, N, D]);
         return (0, t.jsx)(i.Grid, {
             container: !0,
             direction: "row",
@@ -1848,8 +1870,8 @@
                             variant: "rounded",
                             alt: "avatar",
                             className: j(L, {
-                                [F]: g === p.default.User,
-                                [_]: g !== p.default.User,
+                                [F]: v === p.default.User,
+                                [_]: v !== p.default.User,
                                 [B]: I
                             }),
                             children: (0, t.jsx)(r.Thumbnail2d, {
@@ -2634,8 +2656,8 @@
                 variant: f = "System",
                 severity: h = "Info",
                 primaryActionLabel: y,
-                primaryActionHref: g,
-                primaryActionLinkTarget: v,
+                primaryActionHref: v,
+                primaryActionLinkTarget: g,
                 onPrimaryAction: A,
                 secondaryActionLabel: b,
                 secondaryActionHref: T,
@@ -2650,14 +2672,14 @@
             } = e, D = (0, n.default)("foundation-web-alert-message-"), M = !!y, L = !!b, P = !!(E && C), U = "Feedback" === f && (M || L || P), F = "Warning" === h || "Error" === h ? "alert" : "status", _ = null;
             M && (_ = L ? l.default.createElement(m, {
                 label: y || "",
-                href: g,
-                linkTarget: v,
+                href: v,
+                linkTarget: g,
                 onAction: A,
                 variant: "Standard"
             }) : l.default.createElement(p, {
                 label: y || "",
-                href: g,
-                linkTarget: v,
+                href: v,
+                linkTarget: g,
                 onAction: A
             }));
             let R = L ? l.default.createElement(m, {
@@ -2736,7 +2758,7 @@
         p = e.i(221628),
         f = "Checkbox",
         [h, y] = (0, i.createContextScope)(f),
-        [g, v] = h(f);
+        [v, g] = h(f);
 
     function A(e) {
         let {
@@ -2751,7 +2773,7 @@
             required: c,
             value: m = "on",
             internal_do_not_use_render: h
-        } = e, [y, v] = (0, o.useControllableState)({
+        } = e, [y, g] = (0, o.useControllableState)({
             prop: a,
             defaultProp: null != s && s,
             onChange: d,
@@ -2759,7 +2781,7 @@
         }), [A, b] = r.useState(null), [T, I] = r.useState(null), x = r.useRef(!1), E = !A || !!l || !!A.closest("form"), S = {
             checked: y,
             disabled: i,
-            setChecked: v,
+            setChecked: g,
             control: A,
             setControl: b,
             name: u,
@@ -2772,7 +2794,7 @@
             bubbleInput: T,
             setBubbleInput: I
         };
-        return (0, p.jsx)(g, {
+        return (0, p.jsx)(v, {
             scope: t,
             ...S,
             children: "function" == typeof h ? h(S) : n
@@ -2792,18 +2814,18 @@
                 checked: f,
                 required: h,
                 setControl: y,
-                setChecked: g,
+                setChecked: v,
                 hasConsumerStoppedPropagationRef: A,
                 isFormControl: T,
                 bubbleInput: I
-            } = v(b, a), x = (0, s.useComposedRefs)(t, y), E = r.useRef(f);
+            } = g(b, a), x = (0, s.useComposedRefs)(t, y), E = r.useRef(f);
             return r.useEffect(() => {
                 let e = null == u ? void 0 : u.form;
                 if (e) {
-                    let t = () => g(E.current);
+                    let t = () => v(E.current);
                     return e.addEventListener("reset", t), () => e.removeEventListener("reset", t)
                 }
-            }, [u, g]), (0, p.jsx)(m.Primitive.button, {
+            }, [u, v]), (0, p.jsx)(m.Primitive.button, {
                 type: "button",
                 role: "checkbox",
                 "aria-checked": w(f) ? "mixed" : f,
@@ -2818,7 +2840,7 @@
                     "Enter" === e.key && e.preventDefault()
                 }),
                 onClick: (0, l.composeEventHandlers)(i, e => {
-                    g(e => !!w(e) || !e), I && T && (A.current = e.isPropagationStopped(), A.current || e.stopPropagation())
+                    v(e => !!w(e) || !e), I && T && (A.current = e.isPropagationStopped(), A.current || e.stopPropagation())
                 })
             })
         });
@@ -2869,7 +2891,7 @@
                 __scopeCheckbox: a,
                 forceMount: n,
                 ...r
-            } = e, s = v(x, a);
+            } = e, s = g(x, a);
             return (0, p.jsx)(c.Presence, {
                 present: n || w(s.checked) || !0 === s.checked,
                 children: (0, p.jsx)(m.Primitive.span, {
@@ -2898,11 +2920,11 @@
                 required: f,
                 disabled: h,
                 name: y,
-                value: g,
+                value: v,
                 form: A,
                 bubbleInput: b,
                 setBubbleInput: T
-            } = v(S, a), I = (0, s.useComposedRefs)(t, T), x = (0, u.usePrevious)(o), E = (0, d.useSize)(i);
+            } = g(S, a), I = (0, s.useComposedRefs)(t, T), x = (0, u.usePrevious)(o), E = (0, d.useSize)(i);
             r.useEffect(() => {
                 if (!b) return;
                 let e = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "checked").set,
@@ -2922,7 +2944,7 @@
                 required: f,
                 disabled: h,
                 name: y,
-                value: g,
+                value: v,
                 form: A,
                 ...n,
                 tabIndex: -1,
@@ -2983,7 +3005,7 @@
             onCheckedChange: m,
             id: p,
             ...f
-        } = e, h = (0, a.default)(), y = p || h, g = s && r.default.createElement("label", {
+        } = e, h = (0, a.default)(), y = p || h, v = s && r.default.createElement("label", {
             htmlFor: y,
             className: (0, n.default)("flex flex-col grow-1 gap-xsmall", !o && "cursor-pointer")
         }, r.default.createElement("span", {
@@ -2993,7 +3015,7 @@
         }, d));
         return r.default.createElement("div", {
             className: (0, n.default)("foundation-web-checkbox flex gap-medium", o && "opacity-[0.5]", !o && "cursor-pointer", i)
-        }, "End" === c && g, r.default.createElement("div", {
+        }, "End" === c && v, r.default.createElement("div", {
             className: (0, n.default)(D[u])
         }, r.default.createElement(I, {
             "data-slot": "checkbox",
@@ -3007,7 +3029,7 @@
         }, r.default.createElement(t.StateLayer, null), r.default.createElement(E, {
             "data-slot": "checkbox-indicator",
             className: (0, n.default)(N[u], "content-[var(--inverse-content-emphasis)] icon", "data-[state=indeterminate]:icon-filled-minus", "data-[state=checked]:icon-filled-check")
-        }))), "Start" === c && g)
+        }))), "Start" === c && v)
     }], 904451)
 }, 517359, e => {
     "use strict";
@@ -3117,8 +3139,8 @@
                 mobileLandscapeClassName: f,
                 largeScreenClassName: h,
                 onOpenAutoFocus: y,
-                onCloseAutoFocus: g,
-                onPointerDownOutside: v,
+                onCloseAutoFocus: v,
+                onPointerDownOutside: g,
                 onEscapeKeyDown: A,
                 onInteractOutside: b
             } = e,
@@ -3143,8 +3165,8 @@
             centerSheetSize: s,
             contentClassName: E,
             onOpenAutoFocus: null != y ? y : l,
-            onCloseAutoFocus: g,
-            onPointerDownOutside: v,
+            onCloseAutoFocus: v,
+            onPointerDownOutside: g,
             onEscapeKeyDown: A,
             onInteractOutside: b
         }, a))
@@ -3236,8 +3258,8 @@
                 value: f,
                 defaultValue: h,
                 isDisabled: y,
-                hasError: g,
-                helperText: v,
+                hasError: v,
+                helperText: g,
                 className: A,
                 style: b,
                 textareaClassName: T,
@@ -3258,19 +3280,19 @@
                 id: C,
                 "data-testid": "text-area-container",
                 style: I,
-                className: (0, r.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", n.INPUT_BACKGROUND_BY_VARIANT[m], n.INPUT_STROKE_BY_VARIANT[m], g ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", u[k], i[k], l[k], T),
+                className: (0, r.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", n.INPUT_BACKGROUND_BY_VARIANT[m], n.INPUT_STROKE_BY_VARIANT[m], v ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", u[k], i[k], l[k], T),
                 value: f,
                 defaultValue: null == f ? h : void 0,
                 disabled: y,
-                "aria-describedby": v ? w : void 0,
+                "aria-describedby": g ? w : void 0,
                 ...E
-            }), v && s.default.createElement("span", {
+            }), g && s.default.createElement("span", {
                 id: w,
                 className: (0, r.default)("text-caption-small", {
-                    "content-system-alert": g,
-                    "content-default": !g
+                    "content-system-alert": v,
+                    "content-default": !v
                 })
-            }, v))
+            }, g))
         });
     d.displayName = "TextArea", e.s(["TextArea", 0, d])
 }, 395203, e => {
@@ -3322,8 +3344,8 @@
             let {
                 label: h,
                 labelTooltip: y,
-                leadingIconName: g,
-                trailingIconName: v,
+                leadingIconName: v,
+                trailingIconName: g,
                 leadingIconNode: A,
                 trailingIconNode: b,
                 hasError: T,
@@ -3339,17 +3361,17 @@
                 inputContainerClassStyle: M,
                 id: L,
                 ...P
-            } = e, U = (0, n.default)(), F = L || U, _ = "".concat(F, "-description"), R = null != E ? E : "Large", V = T || !!I, B = I || x, O = (0, l.useMemo)(() => g ? l.default.createElement(a.Icon, {
-                name: g,
-                size: R,
-                className: "content-emphasis",
-                "data-testid": "text-input-leading-icon"
-            }) : A, [g, A, R]), j = (0, l.useMemo)(() => v ? l.default.createElement(a.Icon, {
+            } = e, U = (0, n.default)(), F = L || U, _ = "".concat(F, "-description"), R = null != E ? E : "Large", V = T || !!I, B = I || x, O = (0, l.useMemo)(() => v ? l.default.createElement(a.Icon, {
                 name: v,
                 size: R,
                 className: "content-emphasis",
+                "data-testid": "text-input-leading-icon"
+            }) : A, [v, A, R]), j = (0, l.useMemo)(() => g ? l.default.createElement(a.Icon, {
+                name: g,
+                size: R,
+                className: "content-emphasis",
                 "data-testid": "text-input-trailing-icon"
-            }) : b, [R, v, b]), G = h ? l.default.createElement("label", {
+            }) : b, [R, g, b]), G = h ? l.default.createElement("label", {
                 htmlFor: F,
                 className: (0, i.default)(m[R], "content-emphasis")
             }, h, C && l.default.createElement(l.default.Fragment, null, " ", l.default.createElement("span", {
@@ -3399,5 +3421,5 @@
     e.s(["ArrowUpwardIcon", () => t.ArrowUpward])
 }]);
 
-//# debugId=750b8227-6231-1792-9725-8733c1323c9c
-//# sourceMappingURL=0qwsu6v6wv_lb.js.map
+//# debugId=5eebdb5e-c674-5fce-73a3-40a370d61550
+//# sourceMappingURL=33vb0oxawkd3l.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "35bac514-5ca5-7355-07df-bf392f40ef0e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "dae6a336-c22e-d7b0-4544-3bbbd7385fe5")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 138726, e => {
@@ -222,12 +222,13 @@
     e.s(["default", 0, l])
 }, 191685, e => {
     "use strict";
-    var t = e.i(17829);
-    let n = "https://www.".concat("roblox.com"),
-        r = "https://advertise.".concat("roblox.com"),
-        i = e => "".concat(n, "/groups/").concat(e),
-        o = e => "".concat(n, "/users/").concat(e, "/profile");
-    e.s(["AdsManagerUrl", 0, r, "BUY_ROBUX_CTX_CREATOR_HUB", 0, "creatorhub", "getAccountSecurityUrl", 0, () => "".concat(n, "/my/account#!/security"), "getAccountSettingsUrl", 0, () => "".concat(n, "/my/account#!/info"), "getAppealsPortalUrl", 0, () => "".concat(n, "/report-appeals#"), "getBadgeUrl", 0, e => "".concat(n, "/badges/").concat(e), "getBundleUrl", 0, e => "".concat(n, "/bundles/").concat(e), "getBuyRobuxUrl", 0, e => "".concat(n, "/upgrades/robux?ctx=").concat(encodeURIComponent(e)), "getCatalogUrl", 0, e => "".concat(n, "/catalog/").concat(e), "getCommunitiesUrl", 0, e => "".concat(n, "/communities/").concat(e), "getConfigureGroupRevenueSalesUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getConfigureGroupRolesUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/roles"), "getCreatorUrl", 0, (e, n) => e === t.default.Group ? i(n) : o(n), "getEventUrl", 0, e => "".concat(n, "/events/").concat(e), "getGameDetailsUrl", 0, e => "".concat(n, "/games/").concat(e), "getGamePassUrl", 0, e => "".concat(n, "/game-pass/").concat(e), "getGroupUrl", 0, i, "getHomeUrl", 0, () => "".concat(n, "/home"), "getLegacyGroupTransactionsUrl", 0, e => "".concat(n, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getLegacyTransactionsUrl", 0, () => "".concat(n, "/transactions"), "getLookUrl", 0, e => "".concat(n, "/looks/").concat(e), "getSponsorAvatarItemsUrl", 0, () => "".concat(n, "/sponsorships/list#!/avatar-items"), "getSponsorExperienceCreateUrl", 0, e => "".concat(r, "/create?universeId=").concat(e), "getSponsorExperienceUrl", 0, e => "".concat(r, "?universeId=").concat(e), "getSupportFormUrl", 0, () => "".concat(n, "/support"), "getTermsUrl", 0, () => "".concat(n, "/info/terms"), "getTransactionsUrl", 0, () => "".concat(n, "/transactions"), "getUrl", 0, () => n, "getUserUrl", 0, o])
+    var t = e.i(260022),
+        n = e.i(17829);
+    let r = "https://www.".concat("roblox.com"),
+        i = "https://advertise.".concat("roblox.com"),
+        o = e => "".concat(r, "/groups/").concat(e),
+        s = e => "".concat(r, "/users/").concat(e, "/profile");
+    e.s(["AdsManagerUrl", 0, i, "BUY_ROBUX_CTX_CREATOR_HUB", 0, "creatorhub", "getAccountSecurityUrl", 0, () => "".concat(r, "/my/account#!/security"), "getAccountSettingsUrl", 0, () => "".concat(r, "/my/account#!/info"), "getAppealsPortalUrl", 0, () => "".concat(r, "/report-appeals#"), "getBadgeUrl", 0, e => "".concat(r, "/badges/").concat(e), "getBundleUrl", 0, e => "".concat(r, "/bundles/").concat(e), "getBuyRobuxUrl", 0, e => "".concat(r, "/upgrades/robux?ctx=").concat(encodeURIComponent(e)), "getCatalogUrl", 0, e => "".concat(r, "/catalog/").concat(e), "getCommunitiesUrl", 0, e => "".concat(r, "/communities/").concat(e), "getConfigureGroupRevenueSalesUrl", 0, e => "".concat(r, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getConfigureGroupRolesUrl", 0, e => "".concat(r, "/groups/configure?id=").concat(e, "#!/roles"), "getCreatorUrl", 0, (e, t) => e === n.default.Group ? o(t) : s(t), "getEventUrl", 0, e => "".concat(r, "/events/").concat(e), "getGameDetailsUrl", 0, e => "".concat(r, "/games/").concat(e), "getGamePassUrl", 0, e => "".concat(r, "/game-pass/").concat(e), "getGroupUrl", 0, o, "getHomeUrl", 0, () => "".concat(r, "/home"), "getLegacyGroupTransactionsUrl", 0, e => "".concat(r, "/groups/configure?id=").concat(e, "#!/revenue/sales"), "getLegacyTransactionsUrl", 0, () => "".concat(r, "/transactions"), "getLookUrl", 0, e => "".concat(r, "/looks/").concat(e), "getPlayOnWebUrl", 0, e => "".concat((0, t.resolveUrl)("playRobloxUrl", "production", "global"), "/games/start?placeId=").concat(e), "getSponsorAvatarItemsUrl", 0, () => "".concat(r, "/sponsorships/list#!/avatar-items"), "getSponsorExperienceCreateUrl", 0, e => "".concat(i, "/create?universeId=").concat(e), "getSponsorExperienceUrl", 0, e => "".concat(i, "?universeId=").concat(e), "getSupportFormUrl", 0, () => "".concat(r, "/support"), "getTermsUrl", 0, () => "".concat(r, "/info/terms"), "getTransactionsUrl", 0, () => "".concat(r, "/transactions"), "getUrl", 0, () => r, "getUserUrl", 0, s])
 }, 982690, e => {
     "use strict";
     var t = e.i(851439);
@@ -833,17 +834,17 @@
             var t;
             return null != (t = Object.values(d.Locale).find(t => t === e)) ? t : null
         },
-        k = () => {
+        U = () => {
             var e, t, n;
             (null == (e = window.rbx) ? void 0 : e.postMessage) && !M && (M = !0, null == (n = window.rbx) || null == (t = n.postMessage) || t.call(n, "loadprogress", "afterInteractive"))
         },
-        _ = () => {
-            "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", k, {
+        k = () => {
+            "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", U, {
                 once: !0
-            }) : k()
+            }) : U()
         };
-    (null == (t = window.rbx) ? void 0 : t.postMessage) && (null == (r = window.rbx) || null == (n = r.postMessage) || n.call(r, "loadprogress", "beforeInteractive"), y() || _());
-    let U = [],
+    (null == (t = window.rbx) ? void 0 : t.postMessage) && (null == (r = window.rbx) || null == (n = r.postMessage) || n.call(r, "loadprogress", "beforeInteractive"), y() || k());
+    let _ = [],
         W = !1;
 
     function F() {}
@@ -886,7 +887,7 @@
         let {
             children: r,
             useContextHook: i,
-            capabilities: o = U,
+            capabilities: o = _,
             isReadyToInitialize: s
         } = e, {
             isWebView: a,
@@ -934,7 +935,7 @@
             }
             return () => {}
         }, [x, b, a, v, d, h]), (0, f.useEffect)(() => {
-            !a || W || y() && !1 === s || (W = !0, _(), c({
+            !a || W || y() && !1 === s || (W = !0, k(), c({
                 capabilities: o
             }))
         }, [a, c, o, s]), f.default.createElement(f.default.Fragment, null, r)
@@ -982,12 +983,12 @@
                 }, [y]), C = (0, f.useCallback)(() => y.getStudioConfiguration(), [y]), [L, T] = (0, f.useState)(null), M = (0, f.useCallback)(async e => {
                     let t = await y.initHandshake(e);
                     return T(t), t
-                }, [y]), k = (0, f.useCallback)(() => {
+                }, [y]), U = (0, f.useCallback)(() => {
                     y.loadWebView()
-                }, [y]), _ = (0, f.useMemo)(() => {
+                }, [y]), k = (0, f.useMemo)(() => {
                     var e;
                     return !!(null == (e = window.rbx) ? void 0 : e.studio.isPrewarm)
-                }, []), U = (0, f.useMemo)(() => {
+                }, []), _ = (0, f.useMemo)(() => {
                     var e, t;
                     let n;
                     return void 0 === (n = null == (t = window) || null == (e = t.navigator) ? void 0 : e.deviceMemory) || n >= 8
@@ -999,15 +1000,15 @@
                     return r && r.length > 1 ? r[1] : ""
                 })(), []), F = (0, f.useCallback)((e, t) => y.setListener(e, t), [y]), A = (0, f.useCallback)((e, t) => {
                     y.removeListener(e, t)
-                }, [y]), [N, B] = (0, h.useSessionStorage)("web_view_theme_override", null), [D, O] = (0, h.useSessionStorage)("web_view_locale_override", null), R = u.get("locale"), V = I(R);
+                }, [y]), [N, O] = (0, h.useSessionStorage)("web_view_theme_override", null), [R, B] = (0, h.useSessionStorage)("web_view_locale_override", null), D = u.get("locale"), V = I(D);
                 (0, f.useEffect)(() => {
                     let e = u.get("mockWebview"),
                         t = "true" === l.default.env.NEXT_PUBLIC_MOCK_WEB_VIEW || "true" === e;
                     if (a || (t ? g(!0) : "false" === e && g(!1)), m) {
                         let e = u.get("theme");
-                        e && B(e.includes("light") ? p.LightFoundation : p.DarkFoundation), V ? O(V) : R && console.warn("Ignoring unsupported mocked Studio locale: ".concat(R))
+                        e && O(e.includes("light") ? p.LightFoundation : p.DarkFoundation), V ? B(V) : D && console.warn("Ignoring unsupported mocked Studio locale: ".concat(D))
                     }
-                }, [a, u, g, R, V, O, B, m]);
+                }, [a, u, g, D, V, B, O, m]);
                 let j = (0, f.useMemo)(() => {
                         let e = x && 1 ? C().theme : w;
                         return null != N ? N : e
@@ -1015,8 +1016,8 @@
                     P = (0, f.useMemo)(() => {
                         var e;
                         let t = x && 1 ? C().locale : d.Locale.English;
-                        return m && null != (e = null != V ? V : I(D)) ? e : t
-                    }, [C, m, x, V, D]),
+                        return m && null != (e = null != V ? V : I(R)) ? e : t
+                    }, [C, m, x, V, R]),
                     q = (0, f.useMemo)(() => ({
                         call: E,
                         currentStudioLocale: P,
@@ -1025,16 +1026,16 @@
                         getStudioConfiguration: C,
                         initHandshake: M,
                         initHandshakeResponse: L,
-                        isPrewarm: _,
-                        isRecommendedSpecOrAbove: U,
+                        isPrewarm: k,
+                        isRecommendedSpecOrAbove: _,
                         isWebView: x,
                         isWebViewAvailable: x,
-                        loadWebView: k,
+                        loadWebView: U,
                         removeListener: A,
                         setListener: F,
-                        setStudioThemeOverride: B,
+                        setStudioThemeOverride: O,
                         studioVersion: W
-                    }), [E, P, S, C, M, L, _, U, x, k, A, F, B, j, W]);
+                    }), [E, P, S, C, M, L, k, _, x, U, A, F, O, j, W]);
                 return f.default.createElement(t.Provider, {
                     value: q
                 }, s)
@@ -1059,5 +1060,5 @@
     }])
 }]);
 
-//# debugId=35bac514-5ca5-7355-07df-bf392f40ef0e
-//# sourceMappingURL=1egs974esj4a3.js.map
+//# debugId=dae6a336-c22e-d7b0-4544-3bbbd7385fe5
+//# sourceMappingURL=1z5okd0o-b4ph.js.map

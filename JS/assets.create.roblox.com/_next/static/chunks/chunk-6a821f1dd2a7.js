@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "cb6d63e4-750c-70da-df09-92259a0d116e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "cefd8a61-6aa3-191b-a098-b61b73a8bc3b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -10719,7 +10719,7 @@
             name: "isExperimentMetricsV2Enabled",
             defaultValue: !1,
             valueType: "boolean",
-            contextType: "universe"
+            contextType: "static"
         }
     }, {
         flag: l3.isClientSessionDetailsV2Enabled,
@@ -10924,6 +10924,15 @@
         metadata: {
             namespace: "creator-platform",
             name: "isUpdatedPublishingFlowEnabled",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
+        flag: l9.tryOnWebButtonEnabled,
+        metadata: {
+            namespace: "creator-platform",
+            name: "tryOnWebButtonEnabled",
             defaultValue: !1,
             valueType: "boolean",
             contextType: "static"
@@ -11401,7 +11410,7 @@
     };
     var cL = t.i(37819),
         cN = t.i(532045);
-    let cO = "".concat("".concat("https://assets.create.roblox.com/a98bdab78e1790de30ea22f4463837f3edb87629/assets", "/opengraph"), "/global_og_image.png"),
+    let cO = "".concat("".concat("https://assets.create.roblox.com/2f5f9ec8d8218d8b20dca26b2f6c7f2e6bf1e35b/assets", "/opengraph"), "/global_og_image.png"),
         cD = (0, oT.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -14465,5 +14474,5 @@
     n.exports = t.r(816657)
 }]);
 
-//# debugId=cb6d63e4-750c-70da-df09-92259a0d116e
-//# sourceMappingURL=3do6actqlgjzb.js.map
+//# debugId=cefd8a61-6aa3-191b-a098-b61b73a8bc3b
+//# sourceMappingURL=071eawtj90r-b.js.map

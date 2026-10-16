@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "d6a36e65-a0d4-971b-ad3e-d77bb6f9a297")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "e88a1899-3846-09b5-ef32-1891b00bdbf0")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -633,8 +633,13 @@
                 return "".concat(c(e, t), "/").concat(a, "/servers")
             },
             getServerManagementDetailsUrl: function(e, a, t) {
-                let r = arguments.length > 3 && void 0 !== arguments[3] && arguments[3];
-                return "".concat(c(e, r), "/").concat(a, "/servers/").concat(t, "/details")
+                let r = arguments.length > 3 && void 0 !== arguments[3] && arguments[3],
+                    o = arguments.length > 4 ? arguments[4] : void 0,
+                    n = arguments.length > 5 ? arguments[5] : void 0,
+                    s = new URLSearchParams;
+                (null != o || null != n) && s.set("logRange", "custom"), null != o && s.set("logStart", String(o)), null != n && s.set("logEnd", String(n));
+                let i = s.toString();
+                return "".concat(c(e, r), "/").concat(a, "/servers/").concat(t, "/details").concat(i ? "?".concat(i) : "")
             },
             getClientSessionsUrl: e => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions"),
             getClientSessionDetailsUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions/").concat(a),
@@ -765,5 +770,5 @@
     e.s(["creatorHub", 0, a])
 }]);
 
-//# debugId=d6a36e65-a0d4-971b-ad3e-d77bb6f9a297
-//# sourceMappingURL=3c1dyn_v32680.js.map
+//# debugId=e88a1899-3846-09b5-ef32-1891b00bdbf0
+//# sourceMappingURL=2vcfsr_a-a2tf.js.map
