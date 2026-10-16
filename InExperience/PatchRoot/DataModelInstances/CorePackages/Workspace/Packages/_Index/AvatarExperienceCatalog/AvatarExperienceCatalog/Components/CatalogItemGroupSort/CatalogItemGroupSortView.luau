@@ -11,7 +11,6 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
 local fFlagAXCatalogUseFixedWidgetPadding = avatarExperienceFlagsModule.FFlagAXCatalogUseFixedWidgetPadding
 local fFlagAXSduiSeeAllClickLogging = avatarExperienceFlagsModule.FFlagAXSduiSeeAllClickLogging
-local fFlagAXSduiSortLegacyBottomPadding = avatarExperienceFlagsModule.FFlagAXSduiSortLegacyBottomPadding
 local widgetConstantsModule = require(avatarExperienceCatalog.WidgetConstants)
 local resolveWidgetListItemBottomPaddingPxModule = require(avatarExperienceCatalog.Utils.resolveWidgetListItemBottomPaddingPx)
 local widgetHeader = avatarExperienceUIKitModule.WidgetComponents.WidgetHeader
@@ -20,7 +19,7 @@ local widgetListItem = avatarExperienceUIKitModule.WidgetComponents.WidgetListIt
 local grid = avatarExperienceUIKitModule.GridComponents.Grid
 
 return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useImpressionsTagger (ref), widgetConstantsModule (ref), useTokens (ref), reactModule (ref), widgetListItem (ref), fFlagAXSduiSortLegacyBottomPadding (ref), fFlagAXCatalogUseFixedWidgetPadding (ref), resolveWidgetListItemBottomPaddingPxModule (ref), widgetLayout (ref), widgetHeader (ref), fFlagAXCatalogItemInformationPopover (ref), fFlagAXSduiSeeAllClickLogging (ref), grid (ref), screenSizeImpressionsDetector (ref)
+	-- upvalues: useImpressionsTagger (ref), widgetConstantsModule (ref), useTokens (ref), reactModule (ref), widgetListItem (ref), fFlagAXCatalogUseFixedWidgetPadding (ref), resolveWidgetListItemBottomPaddingPxModule (ref), widgetLayout (ref), widgetHeader (ref), fFlagAXCatalogItemInformationPopover (ref), fFlagAXSduiSeeAllClickLogging (ref), grid (ref), screenSizeImpressionsDetector (ref)
 	local var1
 	useImpressionsTagger(p1.containerRef, widgetConstantsModule.WidgetExposureMetadata.TagName, p1.widgetRow)
 	local var2 = useTokens()
@@ -36,7 +35,7 @@ return reactModule.forwardRef(function(p1, p2)
 		return reactModule.createElement(widgetListItem, {
 			ref = p2,
 			padding = {
-				bottom = UDim.new(0, if fFlagAXSduiSortLegacyBottomPadding then var2.Size.Size_600 elseif fFlagAXCatalogUseFixedWidgetPadding then var2.Size.Size_800 else resolveWidgetListItemBottomPaddingPxModule(var2))
+				bottom = UDim.new(0, if fFlagAXCatalogUseFixedWidgetPadding then var2.Size.Size_800 else resolveWidgetListItemBottomPaddingPxModule(var2))
 			},
 			horizontalMargin = p1.horizontalMargin
 		}, {
@@ -51,7 +50,7 @@ return reactModule.forwardRef(function(p1, p2)
 					seeAllRef = if fFlagAXSduiSeeAllClickLogging then p1.seeAllRef else nil
 				}) else nil,
 				contentSlot = reactModule.createElement(reactModule.Fragment, nil, {
-					["Widget_" .. p0.widgetId] = reactModule.createElement(grid, {
+					["Widget_" .. p1.widgetId] = reactModule.createElement(grid, {
 						itemsPerRow = p1.itemsPerRow,
 						renderItem = function(p3)
 							-- upvalues: p1 (ref)

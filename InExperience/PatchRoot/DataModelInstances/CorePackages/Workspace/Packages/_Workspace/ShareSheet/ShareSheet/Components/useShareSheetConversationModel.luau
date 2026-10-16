@@ -1,15 +1,16 @@
 ﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
 local parent = shareSheet.Parent
+local appChatModule = require(parent.AppChat)
 local reactModule = require(parent.React)
-local fFlagShareSheetFriendsSort = require(parent.SharedFlags).FFlagShareSheetFriendsSort
+local fFlagShareSheetHoldRecipientsWhileSendingModule = require(shareSheet.Flags.FFlagShareSheetHoldRecipientsWhileSending)
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 local _ = require(parent.AppChat.GetConversationListStore)
 local _ = require(parent.AppChat.GetExternalChatMessageSenderStore)
 local fetchConversationListPageToSignalsModule = require(parent.AppChat.fetchConversationListPageToSignals)
 local useExternalChatConversationEligibilityModule = require(parent.AppChat.useExternalChatConversationEligibility)
 local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
-local _ = require(shareSheet.Types)
-local useConversationListModule = require(parent.AppChat.useConversationList)
+local _ = require(script.Parent.ShareSheetSocialRow)
+local useConversationList = appChatModule.Hooks.useConversationList
 
 local function getCompactConversations(p1, p2, p3, p4)
 	-- upvalues: shareSheetConstantsModule (ref)
@@ -31,15 +32,18 @@ local function getCompactConversations(p1, p2, p3, p4)
 end
 
 return function(p5)
-	-- upvalues: useConversationListModule (ref), reactModule (ref), useExternalChatConversationEligibilityModule (ref), shareSheetConstantsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), getCompactConversations (ref), fFlagShareSheetFriendsSort (ref), fetchConversationListPageToSignalsModule (ref)
+	-- upvalues: useConversationList (ref), fFlagShareSheetHoldRecipientsWhileSendingModule (ref), reactModule (ref), useExternalChatConversationEligibilityModule (ref), shareSheetConstantsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), getCompactConversations (ref), fetchConversationListPageToSignalsModule (ref)
 	local var2 = p5.chatShare ~= nil
-	local var3 = useConversationListModule(var2)
-	local var4 = reactModule.useRef(var3)
+	local var3 = useConversationList(var2)
 	
-	if p5.isSending then
-		var3 = var4.current
-	else
-		var4.current = var3
+	if fFlagShareSheetHoldRecipientsWhileSendingModule then
+		local var4 = reactModule.useRef(var3)
+		
+		if p5.isSending then
+			var3 = var4.current
+		else
+			var4.current = var3
+		end
 	end
 	local var5
 	local var6 = #var3.items > 0
@@ -74,17 +78,16 @@ return function(p5)
 			isLoading = var3.listStatus.error ~= nil and var5.isLoading
 		}
 	end
-	if not fFlagShareSheetFriendsSort then
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), fetchConversationListPageToSignalsModule (copy)
-			if var2 then
-				fetchConversationListPageToSignalsModule()
-			end
-		end, { var2 })
-	end
+	reactModule.useEffect(function()
+		-- upvalues: var2 (ref), fetchConversationListPageToSignalsModule (copy)
+		if var2 then
+			fetchConversationListPageToSignalsModule()
+		end
+	end, { var2 })
 	var5 = var2 and (not var6 and (var3.listStatus.error == nil and (if var3.listStatus.isFetchingConversations ~= true then var3.listStatus.hasFetchedInitialPage ~= true else true)))
 	
 	return {
+		conversations = if fFlagShareSheetHoldRecipientsWhileSendingModule then nil else var3.items,
 		conversationEligibility = var11,
 		isSocialRowLoading = var7 and var5,
 		listStatus = var3.listStatus,

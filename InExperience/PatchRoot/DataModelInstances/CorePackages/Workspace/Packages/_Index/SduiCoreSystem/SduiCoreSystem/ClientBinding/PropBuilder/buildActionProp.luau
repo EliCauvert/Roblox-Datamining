@@ -15,6 +15,7 @@ local sduiActionTypeModule = require(sduiCoreSystem.SduiActionType)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local _ = require(sduiCoreSystem.SduiConfigTypes)
 local _ = require(sduiCoreSystem.SduiComponentType)
+local fFlagSduiActionSkipUnifiedLogging = require(parent.SharedFlags).FFlagSduiActionSkipUnifiedLogging
 local fFlagSduiExperimentalComponent = require(parent.SharedFlags).FFlagSduiExperimentalComponent
 
 local function mergeTemplateParamsWithOverrides(p1, p2)
@@ -30,14 +31,14 @@ local function mergeTemplateParamsWithOverrides(p1, p2)
 end
 
 local function buildActionProp(p3, p4, p5, p6, p7, p8)
-	-- upvalues: fFlagSduiExperimentalComponent (ref), sduiActionTypeModule (ref), protoVariableMapperModule (ref), getSduiActionHandlerRegistryModule (ref), getSduiServiceDependenciesStoreModule (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), buildPropTable (ref), mergeTemplateParamsWithOverrides (ref), logActionTelemetryModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiPropUtilsModule (ref), buildActionProp (ref)
+	-- upvalues: fFlagSduiExperimentalComponent (ref), sduiActionTypeModule (ref), protoVariableMapperModule (ref), getSduiActionHandlerRegistryModule (ref), getSduiServiceDependenciesStoreModule (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), fFlagSduiActionSkipUnifiedLogging (ref), buildPropTable (ref), mergeTemplateParamsWithOverrides (ref), logActionTelemetryModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiPropUtilsModule (ref), buildActionProp (ref)
 	local currentComponentType = p7.currentComponentType
 	local currentParserName = p7.currentParserName
 	
 	if p3 == "value" then
 		local var2 = nil
 		local ok, status = pcall(function()
-			-- upvalues: p7 (ref), p4 (ref), fFlagSduiExperimentalComponent (copy), var2 (write), sduiActionTypeModule (copy), protoVariableMapperModule (copy), getSduiActionHandlerRegistryModule (copy), getSduiServiceDependenciesStoreModule (copy), sduiClientBindingBuilderModule (copy), p5 (ref), p6 (ref), p8 (ref), propResultCategory (copy), buildPropTable (copy), mergeTemplateParamsWithOverrides (copy), logActionTelemetryModule (copy)
+			-- upvalues: p7 (ref), p4 (ref), fFlagSduiExperimentalComponent (copy), var2 (write), sduiActionTypeModule (copy), protoVariableMapperModule (copy), getSduiActionHandlerRegistryModule (copy), getSduiServiceDependenciesStoreModule (copy), sduiClientBindingBuilderModule (copy), p5 (ref), p6 (ref), p8 (ref), propResultCategory (copy), fFlagSduiActionSkipUnifiedLogging (copy), buildPropTable (copy), mergeTemplateParamsWithOverrides (copy), logActionTelemetryModule (copy)
 			local appPage = p7.appPage
 			local value = typeof(p4) == "table" and (p4.kind and (p4.kind.value or nil))
 			local var3 = if fFlagSduiExperimentalComponent and value then value.experimental_type else nil
@@ -52,7 +53,7 @@ local function buildActionProp(p3, p4, p5, p6, p7, p8)
 				error(`Could not find action for actionType: {var2}`)
 			end
 			return function(_, p9, p10)
-				-- upvalues: getSduiServiceDependenciesStoreModule (copy), appPage (ref), p7 (copy), p4 (copy), sduiClientBindingBuilderModule (copy), p5 (copy), p6 (copy), p8 (copy), propResultCategory (copy), value (ref), var2 (copy), buildPropTable (copy), mergeTemplateParamsWithOverrides (copy), logActionTelemetryModule (copy), actionHandlerConfig (ref)
+				-- upvalues: getSduiServiceDependenciesStoreModule (copy), appPage (ref), p7 (copy), p4 (copy), sduiClientBindingBuilderModule (copy), p5 (copy), p6 (copy), p8 (copy), propResultCategory (copy), fFlagSduiActionSkipUnifiedLogging (copy), value (ref), var2 (copy), buildPropTable (copy), mergeTemplateParamsWithOverrides (copy), logActionTelemetryModule (copy), actionHandlerConfig (ref)
 				local t = {
 					dependencies = getSduiServiceDependenciesStoreModule().getDependencies(appPage),
 					appPage = appPage,
@@ -70,7 +71,7 @@ local function buildActionProp(p3, p4, p5, p6, p7, p8)
 				end
 				local var7 = nil
 				
-				if p4 and p4.skip_unified_logging then
+				if fFlagSduiActionSkipUnifiedLogging and p4 and p4.skip_unified_logging then
 					local skipUnifiedLogging = p4.skip_unified_logging
 					
 					if skipUnifiedLogging.kind and skipUnifiedLogging.kind.type then

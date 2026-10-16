@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("UserSearch").Parent.SharedFlags).FFlagUserSearchPresenceStoreMigration

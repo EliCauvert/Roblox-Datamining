@@ -1,17 +1,12 @@
-﻿local textChatService = game:GetService("TextChatService")
-local userInputService = game:GetService("UserInputService")
+﻿local userInputService = game:GetService("UserInputService")
 local expChat = script:FindFirstAncestor("ExpChat")
 local parent = expChat.Parent
 local reactModule = require(parent.React)
 local roactModule = require(parent.Roact)
 local roactRoduxModule = require(parent.RoactRodux)
-local cryoModule = require(parent.Cryo)
-local signalsReactModule = require(parent.SignalsReact)
 local analytics = require(parent.ExpChatShared).Analytics
 local configModule = require(expChat.Config)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
-local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConfigStore
+local fFlagExpChatUseChatConfigStore = require(parent.SharedFlags).FFlagExpChatUseChatConfigStore
 local fFlagExpChatLogGlobalChatTabClickedModule = require(expChat.Flags.FFlagExpChatLogGlobalChatTabClicked)
 local fFlagGlobalTextChatAddPlaySessionFieldModule = require(expChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
 local getChatConfigurationStoreModule = require(expChat.Stores.GetChatConfigurationStore)
@@ -20,8 +15,7 @@ local fFlagDebugFriendsChatModule = require(parent.FriendsChat.FFlagDebugFriends
 local localTextChannelParticipantAddedModule = require(expChat.Actions.LocalTextChannelParticipantAdded)
 local channelTabsConfigurationEnabledModule = require(expChat.Actions.ChannelTabsConfigurationEnabled)
 local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local signalsModule = require(parent.Signals)
-local createEffect = signalsModule.createEffect
+local createEffect = require(parent.Signals).createEffect
 local channelBarModule = require(script.Parent.UI.ChannelBar)
 local channelBarApp = roactModule.Component:extend("ChannelBarApp")
 
@@ -95,8 +89,8 @@ function channelBarApp.render(p1)
 	})
 end
 
-channelBarApp = roactRoduxModule.connect(function(p1)
-	-- upvalues: fFlagExpChatUseChatConfigStore (ref), configModule (ref), fFlagExpChatUseChannelTabsStore (ref)
+return roactRoduxModule.connect(function(p1)
+	-- upvalues: fFlagExpChatUseChatConfigStore (ref), configModule (ref)
 	return {
 		channelTabsSettings = if fFlagExpChatUseChatConfigStore then nil else p1.ChatLayout.ChannelTabsSettings or {
 			BackgroundTransparency = configModule.ChannelTabsSettings.BackgroundTransparency,
@@ -109,12 +103,12 @@ channelBarApp = roactRoduxModule.connect(function(p1)
 			TextStrokeColor3 = configModule.ChannelTabsSettings.TextStrokeColor3,
 			TextStrokeTransparency = configModule.ChannelTabsSettings.TextStrokeTransparency
 		},
-		allChannelTabs = if fFlagExpChatUseChannelTabsStore then nil else p1.ChannelTabs.allChannelTabs or {},
-		selectedTabName = if fFlagExpChatUseChannelTabsStore then nil else p1.ChannelTabs.selectedTabName or "",
+		allChannelTabs = p1.ChannelTabs.allChannelTabs or {},
+		selectedTabName = p1.ChannelTabs.selectedTabName or "",
 		allTextChannels = p1.TextChannels.allTextChannels
 	}
 end, function(p1)
-	-- upvalues: selectTabByTypeModule (ref), fFlagDebugFriendsChatModule (ref), channelTabsConfigurationEnabledModule (ref), getChannelTabsStoreModule (ref), textChatService (ref), localTextChannelParticipantAddedModule (ref)
+	-- upvalues: selectTabByTypeModule (ref), fFlagDebugFriendsChatModule (ref), channelTabsConfigurationEnabledModule (ref), getChannelTabsStoreModule (ref), localTextChannelParticipantAddedModule (ref)
 	return {
 		onTabSelected = function(value, p2, p3, p4)
 			-- upvalues: selectTabByTypeModule (copy), p1 (ref)
@@ -126,57 +120,17 @@ end, function(p1)
 			})
 		end,
 		debugAddFakeTabs = if fFlagDebugFriendsChatModule then function(p2)
-			-- upvalues: p1 (ref), channelTabsConfigurationEnabledModule (copy), getChannelTabsStoreModule (copy), textChatService (copy), localTextChannelParticipantAddedModule (copy)
+			-- upvalues: p1 (ref), channelTabsConfigurationEnabledModule (copy), getChannelTabsStoreModule (copy), localTextChannelParticipantAddedModule (copy)
 			p1(channelTabsConfigurationEnabledModule(true))
 			local var1 = getChannelTabsStoreModule(false)
-			var1.setChannelTabsConfigurationEnabled(true)
 			
 			for i = 1, p2 do
 				local text = "D" .. tostring(i)
 				local textChannel = Instance.new("TextChannel")
 				textChannel.Name = text
-				textChannel.Parent = textChatService:FindFirstChild("TextChannels") or textChatService
 				p1(localTextChannelParticipantAddedModule(textChannel))
 				var1.addChannelTab({ type = "TextChat", name = text }, nil)
 			end
 		end else nil
 	}
 end)(channelBarApp)
-
-local function areChannelTabsEqual(value, p2)
-	if value == p2 then
-		return true
-	end
-	for i, v in value do
-		local var1 = p2[i]
-		
-		if var1 == nil or var1.tabIndex ~= v.tabIndex or (var1.type ~= v.type or var1.HasUnreadMessages ~= v.HasUnreadMessages) then
-			return false
-		end
-	end
-	for i_1 in p2 do
-		if value[i_1] == nil then
-			return false
-		end
-	end
-	return true
-end
-
-return if fFlagExpChatUseChannelTabsStore then reactModule.memo(function(value)
-	-- upvalues: reactModule (ref), signalsModule (ref), getChannelTabsStoreModule (ref), areChannelTabsEqual (ref), signalsReactModule (ref), channelBarApp (write), cryoModule (ref)
-	return reactModule.createElement(channelBarApp, cryoModule.Dictionary.union(value, signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), getChannelTabsStoreModule (copy), areChannelTabsEqual (copy)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: getChannelTabsStoreModule (copy)
-			local channelTabsState = getChannelTabsStoreModule(false).getChannelTabsState(p3)
-			
-			return {
-				allChannelTabs = channelTabsState.allChannelTabs,
-				selectedTabName = channelTabsState.selectedTabName or ""
-			}
-		end, function(p3, p4)
-			-- upvalues: areChannelTabsEqual (copy)
-			return p3.selectedTabName == p4.selectedTabName and areChannelTabsEqual(p3.allChannelTabs, p4.allChannelTabs)
-		end)
-	end, {}))))
-end) else channelBarApp

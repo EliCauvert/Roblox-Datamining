@@ -17,7 +17,7 @@ local function renderUserEntry(p1, p2, p3, p4, _)
 	-- upvalues: reactModule (ref), foundationModule (ref), userCellWithCheckboxModule (ref)
 	return reactModule.createElement(foundationModule.View, {
 		tag = "size-full-0 auto-y",
-		key = if p2 then "search_" .. p0 else p1
+		key = if p2 then "search_" .. p1 else p1
 	}, {
 		cellContent = reactModule.createElement(userCellWithCheckboxModule, { style = p4, userId = p1 }),
 		debugId = p3.isDebugEnabled and reactModule.createElement(foundationModule.Text, {

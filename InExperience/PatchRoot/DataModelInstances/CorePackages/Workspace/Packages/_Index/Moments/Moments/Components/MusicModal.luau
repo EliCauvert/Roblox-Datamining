@@ -15,7 +15,7 @@ local sendAudioPlayerAnalytics = songbirdModule.Analytics.sendAudioPlayerAnalyti
 local analyticActions = songbirdModule.Analytics.AnalyticActions
 local musicThumbnailIcon = momentsCommonModule.Components.MusicThumbnailIcon
 local musicThumbnailIconSize = momentsCommonModule.Enums.MusicThumbnailIconSize
-local fFlagMomentsAudioSaveButton = momentsCommonModule.Flags.FFlagMomentsAudioSaveButton
+local fFlagMomentsAudioSaveButtonModule = require(moments.Flags.FFlagMomentsAudioSaveButton)
 local fFlagMomentsAudioSaveSongbirdAnalyticsModule = require(moments.Flags.FFlagMomentsAudioSaveSongbirdAnalytics)
 local _ = require(moments.Hooks.useMusicInfo)
 local t = { title = "Feature.Moments.Label.Music" }
@@ -46,7 +46,7 @@ local function SaveButtonWithAnalytics(p1)
 end
 
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), sheet (ref), text (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref), fFlagMomentsAudioSaveButton (ref), fFlagMomentsAudioSaveSongbirdAnalyticsModule (ref), SaveButtonWithAnalytics (ref), iconButton (ref), builderIconsModule (ref), foundationModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), sheet (ref), text (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref), fFlagMomentsAudioSaveButtonModule (ref), fFlagMomentsAudioSaveSongbirdAnalyticsModule (ref), SaveButtonWithAnalytics (ref), iconButton (ref), builderIconsModule (ref), foundationModule (ref)
 	local musicInfo = p1.musicInfo
 	
 	return reactModule.createElement(sheet.Root, {
@@ -83,7 +83,7 @@ return function(p1)
 						Text = musicInfo.Artist
 					}) else nil
 				}),
-				SaveButton = if fFlagMomentsAudioSaveButton and fFlagMomentsAudioSaveSongbirdAnalyticsModule then reactModule.createElement(SaveButtonWithAnalytics, { assetId = musicInfo.AssetId }) elseif fFlagMomentsAudioSaveButton then reactModule.createElement(iconButton, {
+				SaveButton = if fFlagMomentsAudioSaveButtonModule and fFlagMomentsAudioSaveSongbirdAnalyticsModule then reactModule.createElement(SaveButtonWithAnalytics, { assetId = musicInfo.AssetId }) elseif fFlagMomentsAudioSaveButtonModule then reactModule.createElement(iconButton, {
 					LayoutOrder = 3,
 					testId = "MomentsMusicSaveButton",
 					icon = builderIconsModule.Icon.Bookmark,

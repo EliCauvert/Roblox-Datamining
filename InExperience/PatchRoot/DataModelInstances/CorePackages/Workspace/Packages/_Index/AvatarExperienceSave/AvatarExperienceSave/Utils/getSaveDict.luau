@@ -2,8 +2,9 @@
 local parent = avatarExperienceSave.Parent
 local tutilsModule = require(parent.tutils)
 local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
-local fFlagAXBackgroundsPersistence = require(parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
-local AXFixEmptyDictionaryKeysForSaveDict2 = game:DefineFastFlag("AXFixEmptyDictionaryKeysForSaveDict2", false)
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXBackgroundsPersistence = avatarExperienceFlagsModule.FFlagAXBackgroundsPersistence
+local AXFixEmptyDictionaryKeysForSaveDict2 = avatarExperienceFlagsModule.FFlagAXRootSlotBasedEditorFlag and game:DefineFastFlag("AXFixEmptyDictionaryKeysForSaveDict2", false)
 
 local function filterEmptyDicts(p1)
 	local cloned = table.clone(p1)

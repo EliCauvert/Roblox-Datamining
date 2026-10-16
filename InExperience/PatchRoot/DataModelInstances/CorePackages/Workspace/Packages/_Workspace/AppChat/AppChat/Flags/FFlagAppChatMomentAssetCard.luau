@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AppChatMomentAssetCard", false) and require(script.Parent.FFlagAppChatMomentShareCard)

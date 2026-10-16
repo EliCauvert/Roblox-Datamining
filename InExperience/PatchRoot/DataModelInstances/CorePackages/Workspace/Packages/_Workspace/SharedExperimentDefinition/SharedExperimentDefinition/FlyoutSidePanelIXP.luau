@@ -18,7 +18,6 @@ local fFlagSubTabRemoveFlyoutDependency = require(parent.SharedFlags).FFlagSubTa
 local fFlagHiddenFriendsSortHeaderRemoveFlyoutDependency = require(parent.SharedFlags).FFlagHiddenFriendsSortHeaderRemoveFlyoutDependency
 local hiddenFriendsSortHeaderAddSubTabDependency = game:DefineFastFlag("HiddenFriendsSortHeaderAddSubTabDependency", false)
 local fFlagAppIaHomeSubTab = require(parent.SharedFlags).FFlagAppIaHomeSubTab
-local fFlagEnableChartsInFlyout = require(parent.SharedFlags).FFlagEnableChartsInFlyout
 local flyoutAmpGatedVariant = game:DefineFastInt("FlyoutAmpGatedVariant", 2)
 local fFlagFlyoutSidePanelUseAppPolicy = require(parent.SharedFlags).FFlagFlyoutSidePanelUseAppPolicy
 local var1 = if fFlagFlyoutSidePanelUseAppPolicy then require(parent.UniversalAppPolicy) else nil
@@ -95,24 +94,10 @@ return {
 		return if flyoutHamburgerEnableProfileEntry and var4 == ixpFlyoutVariantHamburger then false elseif flyoutFacepileEnableProfileEntry and (var4 == ixpFlyoutVariantAlternateEntry or var4 == ixpFlyoutVariantNoSubTabs) then false else var4 ~= ixpFlyoutControl
 	end,
 	isFriendsSortHeaderHiddenInFlyoutIxp = function()
-		-- upvalues: fFlagHiddenFriendsSortHeaderRemoveFlyoutDependency (ref), fFlagEnableChartsInFlyout (ref), fFlagFlyoutSidePanelUseAppPolicy (ref), var3 (write), var1 (ref), flyoutAmpGatedVariant (ref), getIXPVariant (ref), ixpFlyoutControl (ref), hiddenFriendsSortHeaderAddSubTabDependency (ref), fFlagAppIaHomeSubTab (ref), flyoutShowFriendsSortForCurrentVariant (ref)
+		-- upvalues: fFlagHiddenFriendsSortHeaderRemoveFlyoutDependency (ref), hiddenFriendsSortHeaderAddSubTabDependency (ref), fFlagAppIaHomeSubTab (ref), flyoutShowFriendsSortForCurrentVariant (ref), fFlagFlyoutSidePanelUseAppPolicy (ref), var3 (write), var1 (ref), flyoutAmpGatedVariant (ref), getIXPVariant (ref), ixpFlyoutControl (ref)
 		local var4
 		if fFlagHiddenFriendsSortHeaderRemoveFlyoutDependency then
-			local var5 = fFlagEnableChartsInFlyout
-			
-			if var5 then
-				local var6
-				if not fFlagFlyoutSidePanelUseAppPolicy then
-					var6 = getIXPVariant()
-				elseif var3 == nil then
-					var3 = if fFlagFlyoutSidePanelUseAppPolicy and var1.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then flyoutAmpGatedVariant else getIXPVariant()
-					var6 = var3
-				else
-					var6 = var3
-				end
-				var5 = var6 ~= ixpFlyoutControl
-			end
-			return if var5 then false elseif hiddenFriendsSortHeaderAddSubTabDependency then fFlagAppIaHomeSubTab and not flyoutShowFriendsSortForCurrentVariant else not flyoutShowFriendsSortForCurrentVariant
+			return if hiddenFriendsSortHeaderAddSubTabDependency then fFlagAppIaHomeSubTab and not flyoutShowFriendsSortForCurrentVariant else not flyoutShowFriendsSortForCurrentVariant
 		elseif not fFlagFlyoutSidePanelUseAppPolicy then
 			var4 = getIXPVariant()
 		elseif var3 == nil then
@@ -181,25 +166,9 @@ return {
 		return var4 ~= ixpFlyoutControl
 	end,
 	isHomeSubTabEnabled = function()
-		-- upvalues: fFlagEnableChartsInFlyout (ref), fFlagFlyoutSidePanelUseAppPolicy (ref), var3 (write), var1 (ref), flyoutAmpGatedVariant (ref), getIXPVariant (ref), ixpFlyoutControl (ref), fFlagSubTabRemoveFlyoutDependency (ref), ixpFlyoutVariantAlternateEntry (ref), ixpFlyoutVariantHamburger (ref)
+		-- upvalues: fFlagSubTabRemoveFlyoutDependency (ref), fFlagFlyoutSidePanelUseAppPolicy (ref), var3 (write), var1 (ref), flyoutAmpGatedVariant (ref), getIXPVariant (ref), ixpFlyoutVariantAlternateEntry (ref), ixpFlyoutVariantHamburger (ref)
 		local var4
-		local var5 = fFlagEnableChartsInFlyout
-		
-		if var5 then
-			local var6
-			if not fFlagFlyoutSidePanelUseAppPolicy then
-				var6 = getIXPVariant()
-			elseif var3 == nil then
-				var3 = if fFlagFlyoutSidePanelUseAppPolicy and var1.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then flyoutAmpGatedVariant else getIXPVariant()
-				var6 = var3
-			else
-				var6 = var3
-			end
-			var5 = var6 ~= ixpFlyoutControl
-		end
-		if var5 then
-			return false
-		elseif fFlagSubTabRemoveFlyoutDependency then
+		if fFlagSubTabRemoveFlyoutDependency then
 			return true
 		elseif not fFlagFlyoutSidePanelUseAppPolicy then
 			var4 = getIXPVariant()
@@ -210,23 +179,5 @@ return {
 			var4 = var3
 		end
 		return if var4 ~= ixpFlyoutVariantAlternateEntry then var4 == ixpFlyoutVariantHamburger else true
-	end,
-	isChartsInFlyoutEnabled = function()
-		-- upvalues: fFlagEnableChartsInFlyout (ref), fFlagFlyoutSidePanelUseAppPolicy (ref), var3 (write), var1 (ref), flyoutAmpGatedVariant (ref), getIXPVariant (ref), ixpFlyoutControl (ref)
-		local var4 = fFlagEnableChartsInFlyout
-		
-		if var4 then
-			local var5
-			if not fFlagFlyoutSidePanelUseAppPolicy then
-				var5 = getIXPVariant()
-			elseif var3 == nil then
-				var3 = if fFlagFlyoutSidePanelUseAppPolicy and var1.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then flyoutAmpGatedVariant else getIXPVariant()
-				var5 = var3
-			else
-				var5 = var3
-			end
-			var4 = var5 ~= ixpFlyoutControl
-		end
-		return var4
 	end
 }

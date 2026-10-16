@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXFixMakeupLookGrantOutfitHoisting", false) and require(script.Parent.FFlagAXCatalogMakeupSupport)

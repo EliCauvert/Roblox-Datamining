@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("BuildExperiencePromptFirstResponseMsThrottleHundredthsPercent", 10000)

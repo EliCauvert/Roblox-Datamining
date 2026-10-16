@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppEnableGamePassFreeTrials3", false)
+﻿return game:DefineFastFlag("LuaAppEnableGamePassFreeTrials", false)

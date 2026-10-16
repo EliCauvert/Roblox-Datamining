@@ -1,12 +1,14 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local policyProvider = require(corePackagesService.Packages.InGameMenuDependencies).PolicyProvider
-local getFFlagGateEducationalPopupVisibilityViaGUAC = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagGateEducationalPopupVisibilityViaGUAC
+local sharedFlags = corePackagesService.Workspace.Packages.SharedFlags
+local getFFlagUseVoiceExitBetaLanguage = require(sharedFlags).GetFFlagUseVoiceExitBetaLanguage
+local getFFlagGateEducationalPopupVisibilityViaGUAC = require(sharedFlags).GetFFlagGateEducationalPopupVisibilityViaGUAC
 local var1 = policyProvider.withGetPolicyImplementation(policyProvider.GetPolicyImplementations.MemStorageService("app-policy"))
 local getFIntEducationalPopupDisplayMaxCountModule = require(script.Parent.Parent.Flags.GetFIntEducationalPopupDisplayMaxCount)
 local isSubjectToDesktopPolicies = require(corePackagesService.Workspace.Packages.SharedFlags).isSubjectToDesktopPolicies
 
 function var1.Mapper(p1)
-	-- upvalues: isSubjectToDesktopPolicies (ref), getFFlagGateEducationalPopupVisibilityViaGUAC (ref), getFIntEducationalPopupDisplayMaxCountModule (ref)
+	-- upvalues: isSubjectToDesktopPolicies (ref), getFFlagGateEducationalPopupVisibilityViaGUAC (ref), getFIntEducationalPopupDisplayMaxCountModule (ref), getFFlagUseVoiceExitBetaLanguage (ref)
 	return {
 		enableInGameHomeIcon = function()
 			-- upvalues: isSubjectToDesktopPolicies (copy)
@@ -21,7 +23,8 @@ function var1.Mapper(p1)
 			return isSubjectToDesktopPolicies() and getFIntEducationalPopupDisplayMaxCountModule() or 0
 		end,
 		getGameInfoShowChatFeatures = function()
-			return false
+			-- upvalues: getFFlagUseVoiceExitBetaLanguage (copy), p1 (ref)
+			return if getFFlagUseVoiceExitBetaLanguage() then p1.GameInfoShowChatFeatures or false else false
 		end,
 		enableFullscreenTitleBar = function()
 			-- upvalues: p1 (ref)

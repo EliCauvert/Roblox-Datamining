@@ -42,23 +42,11 @@ local function variantsFactory(p1)
 				[chipSizeModule.Medium] = UDim2.fromOffset(p1.Size.Size_500, p1.Size.Size_500),
 				[chipSizeModule.Large] = UDim2.fromOffset(p1.Size.Size_600, p1.Size.Size_600)
 			}
-		},
-		iconOnlySpacing = {
-			Default = {
-				[chipSizeModule.Small] = UDim.new(0, p1.Size.Size_150),
-				[chipSizeModule.Medium] = UDim.new(0, p1.Size.Size_200),
-				[chipSizeModule.Large] = UDim.new(0, p1.Size.Size_250)
-			},
-			Circular = {
-				[chipSizeModule.Small] = UDim.new(0, p1.Padding.XSmall),
-				[chipSizeModule.Medium] = UDim.new(0, p1.Size.Size_150),
-				[chipSizeModule.Large] = UDim.new(0, p1.Padding.Small)
-			}
 		}
 	}
 end
 
-return function(p1, p2, p3, p4, p5)
+return function(p1, p2, p3, p4)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local chipAccessory = variantsContextModule.useVariants("ChipAccessory", variantsFactory, p1)
 	local var1 = if p4 then "Circular" else "Default"
@@ -67,10 +55,7 @@ return function(p1, p2, p3, p4, p5)
 	return composeStyleVariantModule({
 		accessory = {
 			Size = chipAccessory.accessorySize[var1][p2],
-			padding = if p5 then {
-				left = chipAccessory.iconOnlySpacing[var1][p2],
-				right = chipAccessory.iconOnlySpacing[var1][p2]
-			} elseif p3 then {
+			padding = if p3 then {
 				left = chipAccessory.accessorySpacing[var1][p2],
 				right = chipAccessory.textSpacing[var2][p2]
 			} else {

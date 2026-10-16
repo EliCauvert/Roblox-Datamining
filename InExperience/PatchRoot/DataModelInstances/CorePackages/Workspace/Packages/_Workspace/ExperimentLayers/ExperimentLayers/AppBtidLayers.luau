@@ -6,7 +6,6 @@ game:DefineFastString("LuaAppIosPasswordSavingLayer", "PlayerApp.PasswordSaving.
 game:DefineFastString("LuaAppAuthenticationStylingLayer", "PlayerApp.Authentication.Styling")
 game:DefineFastString("AccountRecoveryUILayer", "AccountSecurity.SelfRecovery.RecoveryUI")
 game:DefineFastString("ConsumerPlatformsIOSUIRefactor", "ConsumerPlatforms.IOSUIRefactor")
-game:DefineFastString("LuaAppUniversalAppAuthEntryLayer", "PlayerApp.UniversalAppAuthEntry")
 
 return {
 	LoginLayer = "PlayerApp.Login",
@@ -20,6 +19,5 @@ return {
 	IosPasswordSavingLayer = game:GetFastString("LuaAppIosPasswordSavingLayer"),
 	AuthenticationStylingLayer = game:GetFastString("LuaAppAuthenticationStylingLayer"),
 	AccountRecoveryUILayer = game:GetFastString("AccountRecoveryUILayer"),
-	ConsumerPlatformsIOSUIRefactor = game:GetFastString("ConsumerPlatformsIOSUIRefactor"),
-	UniversalAppAuthEntryLayer = game:GetFastString("LuaAppUniversalAppAuthEntryLayer")
+	ConsumerPlatformsIOSUIRefactor = game:GetFastString("ConsumerPlatformsIOSUIRefactor")
 }

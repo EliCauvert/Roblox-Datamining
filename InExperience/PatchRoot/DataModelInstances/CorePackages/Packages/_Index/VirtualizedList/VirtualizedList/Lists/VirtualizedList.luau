@@ -1,14 +1,12 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent
 local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local safeFlagsModule = require(parent_1.SafeFlags)
 local array = luauPolyfillModule.Array
 local boolean = luauPolyfillModule.Boolean
 local map = luauPolyfillModule.Map
 local object = luauPolyfillModule.Object
 local set = luauPolyfillModule.Set
 local console = luauPolyfillModule.console
-local var1 = safeFlagsModule.createGetFFlag("VirtualizedListStableCells")()
 
 local function _(p1)
 	return p1 ~= nil and p1 ~= 1
@@ -27,7 +25,7 @@ local styleSheetModule = require(parent.StyleSheet.StyleSheet)
 local viewModule = require(parent.Components.View.View)
 local viewabilityHelperModule = require(script.Parent.ViewabilityHelper)
 
-local var2 = function(...)
+local var1 = function(...)
 	return {}
 end
 
@@ -43,7 +41,7 @@ local virtualizedListCellContextProvider = virtualizedListContextModule.Virtuali
 local virtualizedListContext = virtualizedListContextModule.VirtualizedListContext
 local virtualizedListContextProvider = virtualizedListContextModule.VirtualizedListContextProvider
 local describeNestedLists = nil
-local var3 = nil
+local var2 = nil
 local cellRenderer = nil
 
 local function RefreshControl(p1)
@@ -51,8 +49,8 @@ local function RefreshControl(p1)
 	return reactModule.createElement("Frame", { Name = "RCTRefreshControl" }, p1.children)
 end
 
-local var4 = false
-local var5 = ""
+local var3 = false
+local var4 = ""
 
 local _ = function(p1)
 	return if p1 == nil then false else p1
@@ -88,14 +86,12 @@ local virtualizedList = reactModule.PureComponent:extend("VirtualizedList")
 virtualizedList.contextType = virtualizedListContext
 
 function virtualizedList.init(p1, p2)
-	-- upvalues: map (ref), invariantModule (ref), fillRateHelperModule (ref), boolean (ref), computeWindowedRenderLimits (ref), batchinatorModule (ref), array (ref), viewabilityHelperModule (ref), object (ref), set (ref), console (ref), describeNestedLists (write), reactModule (ref), viewModule (ref), scrollViewModule (ref), RefreshControl (write), var1 (ref), infoLogModule (ref)
+	-- upvalues: map (ref), invariantModule (ref), fillRateHelperModule (ref), boolean (ref), computeWindowedRenderLimits (ref), batchinatorModule (ref), array (ref), viewabilityHelperModule (ref), object (ref), set (ref), console (ref), describeNestedLists (write), reactModule (ref), viewModule (ref), scrollViewModule (ref), RefreshControl (write), infoLogModule (ref)
 	p1.props = p2
 	p1._viewabilityTuples = {}
 	p1._averageCellLength = 0
 	p1._cellKeysToChildListKeys = map.new()
 	p1._cellRefs = {}
-	p1._cellLayoutHandlers = {}
-	p1._cellRefHandlers = {}
 	p1._frames = {}
 	p1._footerLength = 0
 	p1._hasDoneInitialScroll = false
@@ -126,53 +122,53 @@ function virtualizedList.init(p1, p2)
 	p1._canvasSize = UDim2.new(0, 0, 0, 0)
 	p1._invertedCanvasLength = if p1.props.getItemLayout then 0 else p1.props.invertedCanvasLength or 1000
 	
-	function p10._getFrameMetrics(p3)
+	function p1._getFrameMetrics(p3)
 		-- upvalues: p1 (ref), invariantModule (copy)
 		local data = p1.props.data
 		local getItem = p1.props.getItem
 		local getItemLayout = p1.props.getItemLayout
 		invariantModule(p3 <= p1.props.getItemCount(data), "Tried to get frame for out of range index " .. tostring(p3))
-		local var6 = getItem(data, p3)
-		local var7 = if var6 ~= nil then var6 else p1._frames[p1:_keyExtractor(var6, p3)]
+		local var5 = getItem(data, p3)
+		local var6 = if var5 ~= nil then var5 else p1._frames[p1:_keyExtractor(var5, p3)]
 		
-		if (not var7 or var7.index ~= p3) and getItemLayout then
-			var7 = getItemLayout(data, p3)
+		if (not var6 or var6.index ~= p3) and getItemLayout then
+			var6 = getItemLayout(data, p3)
 		end
-		return var7
+		return var6
 	end
 	
 	local windowSize = p2.windowSize
 	invariantModule((if windowSize == nil then 21 else windowSize) > 0, "VirtualizedList: The windowSize prop must be present and set to a value greater than 0.")
 	p1._fillRateHelper = fillRateHelperModule.new(p1._getFrameMetrics)
 	
-	function p10._updateCellsToRender()
+	function p1._updateCellsToRender()
 		-- upvalues: p1 (ref), boolean (copy), computeWindowedRenderLimits (copy)
 		local data = p1.props.data
 		local getItemCount = p1.props.getItemCount
 		local onEndReachedThreshold = p1.props.onEndReachedThreshold
-		local var6 = if onEndReachedThreshold == nil then 2 else onEndReachedThreshold
-		local var7 = p1:_isVirtualizationDisabled()
+		local var5 = if onEndReachedThreshold == nil then 2 else onEndReachedThreshold
+		local var6 = p1:_isVirtualizationDisabled()
 		p1:_updateViewableItems(data)
 		
 		if boolean.toJSBoolean(data) then
 			p1:setState(function(p3)
-				-- upvalues: p1 (copy), var7 (ref), boolean (copy), computeWindowedRenderLimits (copy), var6 (ref), getItemCount (ref), data (ref)
+				-- upvalues: p1 (copy), var6 (ref), boolean (copy), computeWindowedRenderLimits (copy), var5 (ref), getItemCount (ref), data (ref)
 				local t = nil
 				local contentLength = p1._scrollMetrics.contentLength
 				local offset = p1._scrollMetrics.offset
 				local visibleLength = p1._scrollMetrics.visibleLength
 				
-				if var7 then
-					local var8
-					if contentLength - visibleLength - offset < var6 * visibleLength then
+				if var6 then
+					local var7
+					if contentLength - visibleLength - offset < var5 * visibleLength then
 						local maxToRenderPerBatch = p1.props.maxToRenderPerBatch
-						var8 = if maxToRenderPerBatch == nil then 10 else maxToRenderPerBatch
+						var7 = if maxToRenderPerBatch == nil then 10 else maxToRenderPerBatch
 					else
-						var8 = 0
+						var7 = 0
 					end
 					t = {
 						first = 1,
-						last = math.min(p3.last + var8, getItemCount(data))
+						last = math.min(p3.last + var7, getItemCount(data))
 					}
 				elseif visibleLength > 0 and contentLength > 0 then
 					local initialScrollIndex = p1.props.initialScrollIndex
@@ -186,25 +182,25 @@ function virtualizedList.init(p1, p2)
 					end
 				end
 				if t ~= nil and p1._nestedChildLists.size > 0 then
-					local var9
+					local var8
 					local last = t.last
 					local first = t.first
 					while first <= last do
-						local var10 = p1._indicesToKeys:get(first)
-						var9 = if boolean.toJSBoolean(var10) then p1._cellKeysToChildListKeys:get(var10) else var10
+						local var9 = p1._indicesToKeys:get(first)
+						var8 = if boolean.toJSBoolean(var9) then p1._cellKeysToChildListKeys:get(var9) else var9
 						
-						if not boolean.toJSBoolean(var9) then continue end
-						local var11 = false
+						if not boolean.toJSBoolean(var8) then continue end
+						local var10 = false
 						
-						for i, v in ipairs(var9) do
-							local var12 = p1._nestedChildLists:get(v)
+						for i, v in ipairs(var8) do
+							local var11 = p1._nestedChildLists:get(v)
 							
-							if var12 and var12.ref and var12.ref:hasMore() then
-								var11 = true
+							if var11 and var11.ref and var11.ref:hasMore() then
+								var10 = true
 								break
 							end
 						end
-						if var11 then
+						if var10 then
 							t.last = first
 							break
 						end
@@ -245,11 +241,11 @@ function virtualizedList.init(p1, p2)
 	local t = { scrollPositionDelta = 0 }
 	local initialScrollIndex = p1.props.initialScrollIndex
 	t.first = if initialScrollIndex ~= nil and initialScrollIndex ~= 1 then p1.props.initialScrollIndex else 1
-	local var8 = p1.props.getItemCount(p1.props.data) + 1
+	local var7 = p1.props.getItemCount(p1.props.data) + 1
 	local initialScrollIndex_1 = p1.props.initialScrollIndex
-	local var9 = initialScrollIndex_1 ~= nil and initialScrollIndex_1 ~= 1
+	local var8 = initialScrollIndex_1 ~= nil and initialScrollIndex_1 ~= 1
 	local initialNumToRender = p1.props.initialNumToRender
-	t.last = math.min(var8, (if var9 then p1.props.initialScrollIndex else 1) + (if initialNumToRender == nil then 10 else initialNumToRender)) - 1
+	t.last = math.min(var7, (if var8 then p1.props.initialScrollIndex else 1) + (if initialNumToRender == nil then 10 else initialNumToRender)) - 1
 	t.firstItemTracked = if p1.props.data and p1.props.getItemCount(p1.props.data) > 0 then p1.props.getItem(p1.props.data, 1) else object.None
 	
 	if p1:_isNestedWithSameOrientation() then
@@ -263,24 +259,24 @@ function virtualizedList.init(p1, p2)
 	end
 	p1.state = t
 	
-	function p10._getScrollMetrics()
+	function p1._getScrollMetrics()
 		-- upvalues: p1 (ref)
 		return p1._scrollMetrics
 	end
 	
-	function p10._getOutermostParentListRef()
+	function p1._getOutermostParentListRef()
 		-- upvalues: p1 (ref)
 		return if p1:_isNestedWithSameOrientation() then p1.context.getOutermostParentListRef() else p1
 	end
 	
-	function p10._getNestedChildState(p3)
+	function p1._getNestedChildState(p3)
 		-- upvalues: p1 (ref)
-		local var10 = p1._nestedChildLists:get(p3)
+		local var9 = p1._nestedChildLists:get(p3)
 		
-		return var10 and var10.state
+		return var9 and var9.state
 	end
 	
-	function p10._registerAsNestedChild(p3)
+	function p1._registerAsNestedChild(p3)
 		-- upvalues: p1 (ref), set (copy), console (copy), describeNestedLists (copy), object (copy), boolean (copy)
 		local cellKey = p1._cellKeysToChildListKeys:get(p3.cellKey) or set.new()
 		cellKey:add(p3.key)
@@ -300,33 +296,33 @@ function virtualizedList.init(p1, p2)
 		return nil
 	end
 	
-	function p10._unregisterAsNestedChild(p3)
+	function p1._unregisterAsNestedChild(p3)
 		-- upvalues: p1 (ref)
 		p1._nestedChildLists:set(p3.key, { ref = nil, state = p3.state })
 	end
 	
-	function p10._onUpdateSeparators(p3, p4)
+	function p1._onUpdateSeparators(p3, p4)
 		-- upvalues: array (copy), p1 (ref), boolean (copy)
 		array.forEach(p3, function(p5)
 			-- upvalues: p1 (copy), boolean (copy), p4 (ref)
-			local var10 = p5 ~= nil and p1._cellRefs[tostring(p5)]
+			local var9 = p5 ~= nil and p1._cellRefs[tostring(p5)]
 			
-			if boolean.toJSBoolean(var10) then
-				return var10:updateSeparatorProps(p4)
+			if boolean.toJSBoolean(var9) then
+				return var9:updateSeparatorProps(p4)
 			end
 		end)
 	end
 	
-	function p10._getSpacerKey(p3)
+	function p1._getSpacerKey(p3)
 		return if p3 then "height" else "width"
 	end
 	
-	function p10._captureScrollRef(p3)
+	function p1._captureScrollRef(p3)
 		-- upvalues: p1 (ref)
 		p1._scrollRef = p3
 	end
 	
-	function p10._defaultRenderScrollComponent(p3)
+	function p1._defaultRenderScrollComponent(p3)
 		-- upvalues: p1 (ref), reactModule (copy), viewModule (copy), invariantModule (copy), scrollViewModule (copy), object (copy), RefreshControl (copy)
 		local onRefresh = p3.onRefresh
 		
@@ -346,20 +342,16 @@ function virtualizedList.init(p1, p2)
 		return reactModule.createElement(scrollViewModule, p3)
 	end
 	
-	function p10._onCellUnmount(p3)
-		-- upvalues: p1 (ref), object (copy), var1 (copy)
-		local var10 = p1._frames[p3]
+	function p1._onCellUnmount(p3)
+		-- upvalues: p1 (ref), object (copy)
+		local var9 = p1._frames[p3]
 		
-		if var10 ~= nil then
-			p1._frames[p3] = object.assign({}, var10, { inLayout = false })
-		end
-		if var1 then
-			p1._cellLayoutHandlers[p3] = nil
-			p1._cellRefHandlers[p3] = nil
+		if var9 ~= nil then
+			p1._frames[p3] = object.assign({}, var9, { inLayout = false })
 		end
 	end
 	
-	function p10._onLayout(p3)
+	function p1._onLayout(p3)
 		-- upvalues: p1 (ref)
 		if p1:_isNestedWithSameOrientation() then
 			p1:measureLayoutRelativeToContainingList()
@@ -373,25 +365,25 @@ function virtualizedList.init(p1, p2)
 		p1:_maybeCallOnEndReached()
 	end
 	
-	function p10._onLayoutEmpty(p3)
+	function p1._onLayoutEmpty(p3)
 		-- upvalues: p1 (ref)
 		if p1.props.onLayout then
 			p1.props.onLayout(p3)
 		end
 	end
 	
-	function p10._onLayoutFooter(p3)
+	function p1._onLayoutFooter(p3)
 		-- upvalues: p1 (ref)
 		p1:_triggerRemeasureForChildListsInCell(p1:_getFooterCellKey())
 		p1._footerLength = p1:_selectLength({ height = p3.AbsoluteSize.Y, width = p3.AbsoluteSize.X })
 	end
 	
-	function p10._onLayoutHeader(p3)
+	function p1._onLayoutHeader(p3)
 		-- upvalues: p1 (ref)
 		p1._headerLength = p1:_selectLength({ height = p3.AbsoluteSize.Y, width = p3.AbsoluteSize.X })
 	end
 	
-	function p10._onContentSizeChange(p3, p4)
+	function p1._onContentSizeChange(p3, p4)
 		-- upvalues: p1 (ref)
 		if p3 > 0 and p4 > 0 and (p1.props.initialScrollIndex ~= nil and p1.props.initialScrollIndex > 1) and not p1._hasDoneInitialScroll then
 			if p1.props.contentOffset == nil then
@@ -425,19 +417,19 @@ function virtualizedList.init(p1, p2)
 		p1:_maybeCallOnEndReached()
 	end
 	
-	function p10._convertParentScrollMetrics(p5)
+	function p1._convertParentScrollMetrics(p5)
 		-- upvalues: p1 (ref)
-		local var10 = p5.offset - p1._offsetFromParentVirtualizedList
+		local var9 = p5.offset - p1._offsetFromParentVirtualizedList
 		
 		return {
 			visibleLength = p5.visibleLength,
 			contentLength = p1._scrollMetrics.contentLength,
-			offset = var10,
-			dOffset = var10 - p1._scrollMetrics.offset
+			offset = var9,
+			dOffset = var9 - p1._scrollMetrics.offset
 		}
 	end
 	
-	function p10._onScroll(p5)
+	function p1._onScroll(p5)
 		-- upvalues: p1 (ref), boolean (copy), infoLogModule (copy)
 		p1._nestedChildLists:forEach(function(p6)
 			-- upvalues: p5 (ref)
@@ -450,45 +442,45 @@ function virtualizedList.init(p1, p2)
 			p1.props.onScroll(p5)
 		end
 		local processTime = os.clock()
-		local var10 = p5:GetChildren()[1]
-		local var11 = p1:_selectLength({ height = p5.AbsoluteSize.Y, width = p5.AbsoluteSize.X })
-		local var12 = p1:_selectLength({
-			height = var10.AbsoluteSize.Y,
-			width = var10.AbsoluteSize.X
+		local var9 = p5:GetChildren()[1]
+		local var10 = p1:_selectLength({ height = p5.AbsoluteSize.Y, width = p5.AbsoluteSize.X })
+		local var11 = p1:_selectLength({
+			height = var9.AbsoluteSize.Y,
+			width = var9.AbsoluteSize.X
 		})
-		local var13 = if p1.props.inverted then p1:_selectOffset({
-			x = p5.AbsoluteCanvasSize.X - p5.CanvasPosition.X - var11,
-			y = p5.AbsoluteCanvasSize.Y - p5.CanvasPosition.Y - var11
+		local var12 = if p1.props.inverted then p1:_selectOffset({
+			x = p5.AbsoluteCanvasSize.X - p5.CanvasPosition.X - var10,
+			y = p5.AbsoluteCanvasSize.Y - p5.CanvasPosition.Y - var10
 		}) else p1:_selectOffset({ x = p5.CanvasPosition.X, y = p5.CanvasPosition.Y })
-		local var14 = var13 - p1._scrollMetrics.offset
+		local var13 = var12 - p1._scrollMetrics.offset
 		
 		if p1:_isNestedWithSameOrientation() then
 			if p1._scrollMetrics.contentLength == 0 then return end
-			local var15 = p1._convertParentScrollMetrics({ var11, var13 })
-			var11 = var15.visibleLength
-			var12 = var15.contentLength
-			var13 = var15.offset
-			var14 = var15.dOffset
+			local var14 = p1._convertParentScrollMetrics({ var10, var12 })
+			var10 = var14.visibleLength
+			var11 = var14.contentLength
+			var12 = var14.offset
+			var13 = var14.dOffset
 		end
-		local var16 = if boolean.toJSBoolean(p1._scrollMetrics.timestamp) then math.max(1, (processTime - p1._scrollMetrics.timestamp) * 1000) else 1
-		local var17 = var14 / var16
+		local var15 = if boolean.toJSBoolean(p1._scrollMetrics.timestamp) then math.max(1, (processTime - p1._scrollMetrics.timestamp) * 1000) else 1
+		local var16 = var13 / var15
 		
-		if var16 > 500 and p1._scrollMetrics.dt > 500 and (5 * var11 < var12 and not p1._hasWarned.perf) then
+		if var15 > 500 and p1._scrollMetrics.dt > 500 and (5 * var10 < var11 and not p1._hasWarned.perf) then
 			infoLogModule("VirtualizedList: You have a large list that is slow to update - make sure your renderItem function renders components that follow React performance best practices like PureComponent, shouldComponentUpdate, etc.", {
-				dt = var16,
+				dt = var15,
 				prevDt = p1._scrollMetrics.dt,
-				contentLength = var12
+				contentLength = var11
 			})
 			p1._hasWarned.perf = true
 		end
 		p1._scrollMetrics = {
-			contentLength = var12,
-			dt = var16,
-			dOffset = var14,
-			offset = var13,
+			contentLength = var11,
+			dt = var15,
+			dOffset = var13,
+			offset = var12,
 			timestamp = processTime,
-			velocity = var17,
-			visibleLength = var11
+			velocity = var16,
+			visibleLength = var10
 		}
 		local scrollPositionDelta = p1.state.scrollPositionDelta
 		
@@ -507,14 +499,14 @@ function virtualizedList.init(p1, p2)
 		if not p1.props then return end
 		p1:_maybeCallOnEndReached()
 		
-		if var17 ~= 0 then
+		if var16 ~= 0 then
 			p1._fillRateHelper:activate()
 		end
 		p1:_computeBlankness()
 		p1:_scheduleCellsToRenderUpdate()
 	end
 	
-	function p10._onScrollBeginDrag(p5)
+	function p1._onScrollBeginDrag(p5)
 		-- upvalues: p1 (ref), array (copy)
 		p1._nestedChildLists:forEach(function(p6)
 			-- upvalues: p5 (ref)
@@ -532,7 +524,7 @@ function virtualizedList.init(p1, p2)
 		end
 	end
 	
-	function p10._onScrollEndDrag(p5)
+	function p1._onScrollEndDrag(p5)
 		-- upvalues: p1 (ref), boolean (copy)
 		p1._nestedChildLists:forEach(function(p6)
 			-- upvalues: p5 (ref)
@@ -551,7 +543,7 @@ function virtualizedList.init(p1, p2)
 		end
 	end
 	
-	function p10._onMomentumScrollBegin(p5)
+	function p1._onMomentumScrollBegin(p5)
 		-- upvalues: p1 (ref)
 		p1._nestedChildLists:forEach(function(p6)
 			-- upvalues: p5 (ref)
@@ -565,7 +557,7 @@ function virtualizedList.init(p1, p2)
 		end
 	end
 	
-	function p10._onMomentumScrollEnd(p5)
+	function p1._onMomentumScrollEnd(p5)
 		-- upvalues: p1 (ref)
 		p1._nestedChildLists:forEach(function(p6)
 			-- upvalues: p5 (ref)
@@ -581,7 +573,7 @@ function virtualizedList.init(p1, p2)
 		end
 	end
 	
-	function p10._createViewToken(p5, p6)
+	function p1._createViewToken(p5, p6)
 		-- upvalues: p1 (ref)
 		local item = p1.props.getItem(p1.props.data, p5)
 		
@@ -593,7 +585,7 @@ function virtualizedList.init(p1, p2)
 		}
 	end
 	
-	function p10._getFrameMetricsApprox(p5)
+	function p1._getFrameMetricsApprox(p5)
 		-- upvalues: p1 (ref), invariantModule (copy)
 		local frameMetrics = p1._getFrameMetrics(p5)
 		
@@ -611,9 +603,9 @@ end
 
 function virtualizedList.scrollToEnd(p3, p4)
 	-- upvalues: console (ref)
-	local var10 = p4 ~= nil or p4.animated
+	local var9 = p4 ~= nil or p4.animated
 	local frameMetricsApprox = p3._getFrameMetricsApprox(p3.props.getItemCount(p3.props.data))
-	local var11 = if p3.props.inverted then 0 else math.max(0, frameMetricsApprox.offset + frameMetricsApprox.length + p3._footerLength - p3._scrollMetrics.visibleLength)
+	local var10 = if p3.props.inverted then 0 else math.max(0, frameMetricsApprox.offset + frameMetricsApprox.length + p3._footerLength - p3._scrollMetrics.visibleLength)
 	
 	if p3._scrollRef == nil then return end
 	if p3._scrollRef.scrollTo == nil then
@@ -622,7 +614,7 @@ function virtualizedList.scrollToEnd(p3, p4)
 		return
 	end
 	local horizontal = p3.props.horizontal
-	p3._scrollRef.scrollTo(if if horizontal == nil then false else horizontal then { x = var11, animated = var10 } else { y = var11, animated = var10 })
+	p3._scrollRef.scrollTo(if if horizontal == nil then false else horizontal then { x = var10, animated = var9 } else { y = var10, animated = var9 })
 end
 
 function virtualizedList.scrollToIndex(p3, p4)
@@ -650,13 +642,13 @@ function virtualizedList.scrollToIndex(p3, p4)
 		
 		return
 	end
-	local var10 = if p3:getScrollRef() then p3:getScrollRef()._nativeRef.current else nil
+	local var9 = if p3:getScrollRef() then p3:getScrollRef()._nativeRef.current else nil
 	
-	if var10 == nil then return end
-	local absoluteCanvasSize = var10.AbsoluteCanvasSize
-	local absoluteSize = var10.AbsoluteSize
+	if var9 == nil then return end
+	local absoluteCanvasSize = var9.AbsoluteCanvasSize
+	local absoluteSize = var9.AbsoluteSize
 	local frameMetricsApprox = p3._getFrameMetricsApprox(index)
-	local var11 = math.max(0, if p3.props.inverted then (if horizontal then absoluteCanvasSize.X else absoluteCanvasSize.Y) - (if horizontal then absoluteSize.X else absoluteSize.Y) - frameMetricsApprox.offset - (if boolean.toJSBoolean(viewPosition) then viewPosition else 0) * (p3._scrollMetrics.visibleLength - frameMetricsApprox.length) else frameMetricsApprox.offset - (if boolean.toJSBoolean(viewPosition) then viewPosition else 0) * (p3._scrollMetrics.visibleLength - frameMetricsApprox.length)) - (if boolean.toJSBoolean(viewOffset) then viewOffset else 0)
+	local var10 = math.max(0, if p3.props.inverted then (if horizontal then absoluteCanvasSize.X else absoluteCanvasSize.Y) - (if horizontal then absoluteSize.X else absoluteSize.Y) - frameMetricsApprox.offset - (if boolean.toJSBoolean(viewPosition) then viewPosition else 0) * (p3._scrollMetrics.visibleLength - frameMetricsApprox.length) else frameMetricsApprox.offset - (if boolean.toJSBoolean(viewPosition) then viewPosition else 0) * (p3._scrollMetrics.visibleLength - frameMetricsApprox.length)) - (if boolean.toJSBoolean(viewOffset) then viewOffset else 0)
 	
 	if p3._scrollRef == nil then return end
 	if p3._scrollRef.scrollTo == nil then
@@ -664,7 +656,7 @@ function virtualizedList.scrollToIndex(p3, p4)
 		
 		return
 	end
-	p3._scrollRef.scrollTo(if horizontal then { x = var11, animated = animated } else { y = var11, animated = animated })
+	p3._scrollRef.scrollTo(if horizontal then { x = var10, animated = animated } else { y = var10, animated = animated })
 end
 
 function virtualizedList.scrollToItem(p3, p4)
@@ -673,13 +665,13 @@ function virtualizedList.scrollToItem(p3, p4)
 	local data = p3.props.data
 	local getItem = p3.props.getItem
 	local itemCount = p3.props.getItemCount(data)
-	local var10 = 1
-	while var10 <= itemCount do
-		if getItem(data, var10) ~= item then
-			var10 += 1
+	local var9 = 1
+	while var9 <= itemCount do
+		if getItem(data, var9) ~= item then
+			var9 += 1
 			continue
 		end
-		p3:scrollToIndex(object.assign({}, p4, { index = var10 }))
+		p3:scrollToIndex(object.assign({}, p4, { index = var9 }))
 		
 		return
 	end
@@ -687,16 +679,16 @@ end
 
 function virtualizedList.scrollToOffset(value, p5)
 	-- upvalues: console (ref)
-	local var11 = if value:getScrollRef() then value:getScrollRef()._nativeRef.current else nil
+	local var10 = if value:getScrollRef() then value:getScrollRef()._nativeRef.current else nil
 	
-	if var11 == nil then return end
+	if var10 == nil then return end
 	local animated = p5.animated
 	local offset = p5.offset
 	
 	if value._scrollRef == nil then return end
 	if value.props.inverted then
-		local absoluteCanvasSize = var11.AbsoluteCanvasSize
-		local absoluteSize = var11.AbsoluteSize
+		local absoluteCanvasSize = var10.AbsoluteCanvasSize
+		local absoluteSize = var10.AbsoluteSize
 		offset = (if value.props.horizontal then absoluteCanvasSize.X else absoluteCanvasSize.Y) - offset - (if value.props.horizontal then absoluteSize.X else absoluteSize.Y)
 	end
 	if value._scrollRef.scrollTo == nil then
@@ -808,96 +800,96 @@ function virtualizedList.getDerivedStateFromProps(p5, p6)
 	local firstItemTracked = p6.firstItemTracked
 	local scrollPositionDelta = p6.scrollPositionDelta
 	local compareItemData = p5.compareItemData
-	local var11 = if compareItemData == nil then function(p7, p8)
+	local var10 = if compareItemData == nil then function(p7, p8)
 		return p7 == p8
 	end else compareItemData
-	local var12 = if data and getItemCount(data) > 0 then p5.getItem(data, 1) else nil
+	local var11 = if data and getItemCount(data) > 0 then p5.getItem(data, 1) else nil
 	
 	local function findItem(p7, p8)
-		-- upvalues: var11 (ref)
-		local var13 = nil
+		-- upvalues: var10 (ref)
+		local var12 = nil
 		
 		for i = 1, #p7 do
-			if not var11(p7[i], p8) then
+			if not var10(p7[i], p8) then
 				continue
 			end
-			var13 = i
+			var12 = i
 			break
 		end
-		return if var13 == nil then 1 else var13
+		return if var12 == nil then 1 else var12
 	end
 	
-	if maintainVisibleContentPosition and scrollPositionDelta == 0 and (firstItemTracked ~= nil and var12 ~= nil) then
-		scrollPositionDelta = if var11(firstItemTracked, var12) then 0 else findItem(data, firstItemTracked) - 1
+	if maintainVisibleContentPosition and scrollPositionDelta == 0 and (firstItemTracked ~= nil and var11 ~= nil) then
+		scrollPositionDelta = if var10(firstItemTracked, var11) then 0 else findItem(data, firstItemTracked) - 1
 	end
-	local var14 = getItemCount(data)
+	local var13 = getItemCount(data)
 	local maxToRenderPerBatch = p5.maxToRenderPerBatch
-	maxToRenderPerBatch = math.max(1, math.min(p6.first, var14 - (if maxToRenderPerBatch == nil then 10 else maxToRenderPerBatch)))
+	maxToRenderPerBatch = math.max(1, math.min(p6.first, var13 - (if maxToRenderPerBatch == nil then 10 else maxToRenderPerBatch)))
 	
-	if var14 > 0 and var14 < maxToRenderPerBatch + scrollPositionDelta then
+	if var13 > 0 and var13 < maxToRenderPerBatch + scrollPositionDelta then
 		scrollPositionDelta = 0
 		console.warn("WARNING: maintainVisibleContentPosition failed because scrollPositionDelta was out of bounds. This could indicate that items in `data` are getting removed, items are getting added to the middle of `data`, or a different `data` array is getting passed in. Consider changing the `key` prop of the List if the `data` prop is significantly altered.")
 	end
 	if scrollPositionDelta > 0 then
-		for i = 1, math.min(scrollPositionDelta, var14) do
+		for i = 1, math.min(scrollPositionDelta, var13) do
 			p5.getItem(data, i).shouldResizeOnMount = true
 		end
 	end
 	return {
 		first = maxToRenderPerBatch,
-		last = math.max(1, math.min(p6.last, var14)),
-		firstItemTracked = var12 or object.None,
+		last = math.max(1, math.min(p6.last, var13)),
+		firstItemTracked = var11 or object.None,
 		scrollPositionDelta = scrollPositionDelta
 	}
 end
 
 function virtualizedList._pushCells(p9, p10, p11, p12, p13, p14, p15)
-	-- upvalues: reactModule (ref), cellRenderer (write), var1 (ref)
+	-- upvalues: reactModule (ref), cellRenderer (write)
 	local cellRendererComponent = p9.props.CellRendererComponent
 	local itemSeparatorComponent = p9.props.ItemSeparatorComponent
 	local data = p9.props.data
 	local getItem = p9.props.getItem
 	local getItemCount = p9.props.getItemCount
 	local horizontal = p9.props.horizontal
-	local var15 = if p9.props.ListHeaderComponent then 1 else 0
-	local var16 = getItemCount(data)
-	local var17 = nil
-	local minValue = math.min(var16, p14)
+	local var14 = if p9.props.ListHeaderComponent then 1 else 0
+	local var15 = getItemCount(data)
+	local var16 = nil
+	local minValue = math.min(var15, p14)
 	minValue = p13
 	while minValue <= minValue do
-		local var18 = getItem(data, minValue)
-		local var19 = p9:_keyExtractor(var18, minValue)
-		p9._indicesToKeys:set(minValue, var19)
+		local var17 = getItem(data, minValue)
+		local var18 = p9:_keyExtractor(var17, minValue)
+		p9._indicesToKeys:set(minValue, var18)
 		
-		if p12:has(minValue + var15) then
+		if p12:has(minValue + var14) then
 			table.insert(p11, #p10)
 		end
-		local var20 = minValue
+		local var19 = minValue
 		table.insert(p10, reactModule.createElement(cellRenderer, {
 			CellRendererComponent = cellRendererComponent,
-			ItemSeparatorComponent = if minValue < var16 then itemSeparatorComponent else nil,
-			cellKey = var19,
+			ItemSeparatorComponent = if minValue < var15 then itemSeparatorComponent else nil,
+			cellKey = var18,
 			fillRateHelper = p9._fillRateHelper,
 			horizontal = horizontal,
 			index = minValue,
 			inversionStyle = p15,
-			item = var18,
-			key = var19,
-			prevCellKey = var17,
+			item = var17,
+			key = var18,
+			prevCellKey = var16,
 			onUpdateSeparators = p9._onUpdateSeparators,
-			onLayout = if var1 then p9:_getCellLayoutHandler(var19, var20) else function(p16)
-				-- upvalues: p9 (ref), var19 (ref), var20 (ref)
-				return p9:_onCellLayout(p16, var19, var20)
+			onLayout = function(p16)
+				-- upvalues: p9 (ref), var18 (ref), var19 (ref)
+				return p9:_onCellLayout(p16, var18, var19)
 			end,
 			onUnmount = p9._onCellUnmount,
 			parentProps = p9.props,
-			ref = if var1 then p9:_getCellRefHandler(var19) else function(p16)
-				-- upvalues: p9 (ref), var19 (ref)
-				p9._cellRefs[tostring(var19)] = p16
+			ref = function(p16)
+				-- upvalues: p9 (ref), var18 (ref)
+				p9._cellRefs[tostring(var18)] = p16
 			end,
 			isSequentiallySelectable = p9.props.isSequentiallySelectable
 		}))
-		var17 = var19
+		var16 = var18
 		minValue += 1
 	end
 end
@@ -909,61 +901,61 @@ end
 function virtualizedList._isNestedWithSameOrientation(p16)
 	-- upvalues: boolean (ref)
 	local context = p16.context
-	local var21 = false
+	local var20 = false
 	
 	if context ~= nil then
 		local horizontal = p16.props.horizontal
-		var21 = boolean.toJSBoolean(context.horizontal) == (if horizontal == nil then false else horizontal)
+		var20 = boolean.toJSBoolean(context.horizontal) == (if horizontal == nil then false else horizontal)
 	end
-	return var21
+	return var20
 end
 
 function virtualizedList._keyExtractor(p16, p17, p18)
-	-- upvalues: keyExtractor (ref), var4 (write), boolean (ref), var5 (write)
+	-- upvalues: keyExtractor (ref), var3 (write), boolean (ref), var4 (write)
 	if p16.props.keyExtractor ~= nil then
 		return p16.props.keyExtractor(p17, p18)
 	end
-	local var21 = keyExtractor(p17, p18)
+	local var20 = keyExtractor(p17, p18)
 	
-	if var21 == tostring(p18) then
-		var4 = true
+	if var20 == tostring(p18) then
+		var3 = true
 		
 		if p17.type ~= nil and boolean.toJSBoolean(p17.type.displayName) then
-			var5 = p17.type.displayName
+			var4 = p17.type.displayName
 		end
 	end
-	return var21
+	return var20
 end
 
 function virtualizedList.render(p16)
-	-- upvalues: var2 (ref), console (ref), var3 (write), set (ref), reactModule (ref), virtualizedListCellContextProvider (ref), viewModule (ref), styleSheetModule (ref), var4 (write), var5 (write), object (ref), virtualizedListContextProvider (ref), scrollViewModule (ref)
+	-- upvalues: var1 (ref), console (ref), var2 (write), set (ref), reactModule (ref), virtualizedListCellContextProvider (ref), viewModule (ref), styleSheetModule (ref), var3 (write), var4 (write), object (ref), virtualizedListContextProvider (ref), scrollViewModule (ref)
 	if _G.__DEV__ then
-		local var21 = var2(p16.props.contentContainerStyle)
+		local var20 = var1(p16.props.contentContainerStyle)
 		
-		if var21 ~= nil and var21.flexWrap == "wrap" then
+		if var20 ~= nil and var20.flexWrap == "wrap" then
 			console.warn("`flexWrap: `wrap`` is not supported with the `VirtualizedList` components.Consider using `numColumns` with `FlatList` instead.")
 		end
 	end
-	local var22
+	local var21
 	local listEmptyComponent = p16.props.ListEmptyComponent
 	local listFooterComponent = p16.props.ListFooterComponent
 	local listHeaderComponent = p16.props.ListHeaderComponent
 	local data = p16.props.data
 	local horizontal = p16.props.horizontal
-	local var23 = p16:_isVirtualizationDisabled()
+	local var22 = p16:_isVirtualizationDisabled()
 	
 	if p16.props.inverted then
 		local horizontal_1 = p16.props.horizontal
-		var22 = if if horizontal_1 == nil then false else horizontal_1 then var3.horizontallyInverted else var3.verticallyInverted
+		var21 = if if horizontal_1 == nil then false else horizontal_1 then var2.horizontallyInverted else var2.verticallyInverted
 	else
-		var22 = nil
+		var21 = nil
 	end
 	local t = {}
-	local var24 = set.new(p16.props.stickyHeaderIndices)
+	local var23 = set.new(p16.props.stickyHeaderIndices)
 	local t_1 = {}
 	
 	if listHeaderComponent then
-		if var24:has(0) then
+		if var23:has(0) then
 			table.insert(t_1, 0)
 		end
 		table.insert(t, reactModule.createElement(virtualizedListCellContextProvider, {
@@ -973,7 +965,7 @@ function virtualizedList.render(p16)
 		}, reactModule.createElement(viewModule, {
 			Name = "ListHeaderComponent",
 			onLayout = p16._onLayoutHeader,
-			style = styleSheetModule.compose(var22, p16.props.ListHeaderComponentStyle),
+			style = styleSheetModule.compose(var21, p16.props.ListHeaderComponentStyle),
 			LayoutOrder = if p16.props.inverted then 999999998 else -999999998,
 			AutomaticSize = if horizontal then Enum.AutomaticSize.X else Enum.AutomaticSize.Y,
 			Size = if horizontal then UDim2.new(0, 0, 1, 0) else UDim2.new(1, 0, 0, 0)
@@ -982,19 +974,19 @@ function virtualizedList.render(p16)
 	local itemCount = p16.props.getItemCount(data)
 	
 	if itemCount > 0 then
-		local var25
-		var4 = false
-		var5 = ""
+		local var24
+		var3 = false
+		var4 = ""
 		local spacerKey = p16._getSpacerKey(not horizontal)
 		local initialScrollIndex = p16.props.initialScrollIndex
 		
 		if initialScrollIndex ~= nil and initialScrollIndex ~= 1 then
-			var25 = -1
+			var24 = -1
 		else
 			local initialNumToRender = p16.props.initialNumToRender
-			var25 = (if initialNumToRender == nil then 10 else initialNumToRender) - 1
+			var24 = (if initialNumToRender == nil then 10 else initialNumToRender) - 1
 		end
-		local var26 = var25 + 1
+		local var25 = var24 + 1
 		local first = p16.state.first
 		local last = p16.state.last
 		local scrollPositionDelta = p16.state.scrollPositionDelta
@@ -1003,85 +995,85 @@ function virtualizedList.render(p16)
 			first += scrollPositionDelta
 			last += scrollPositionDelta
 		end
-		p16:_pushCells(t, t_1, var24, 1, var26, var22)
-		local maxValue = math.max(var26 + 1, first)
+		p16:_pushCells(t, t_1, var23, 1, var25, var21)
+		local maxValue = math.max(var25 + 1, first)
 		
-		if not var23 and var26 + 1 < first then
-			local var27 = false
+		if not var22 and var25 + 1 < first then
+			local var26 = false
 			
-			if var24.size > 0 then
-				local var28 = if listHeaderComponent then 1 else 0
-				local var29 = maxValue - 1
-				while var26 < var29 do
-					if not var24:has(var29 + var28) then
-						var29 -= 1
+			if var23.size > 0 then
+				local var27 = if listHeaderComponent then 1 else 0
+				local var28 = maxValue - 1
+				while var25 < var28 do
+					if not var23:has(var28 + var27) then
+						var28 -= 1
 						continue
 					end
-					local frameMetricsApprox = p16._getFrameMetricsApprox(var26)
-					local frameMetricsApprox_1 = p16._getFrameMetricsApprox(var29)
+					local frameMetricsApprox = p16._getFrameMetricsApprox(var25)
+					local frameMetricsApprox_1 = p16._getFrameMetricsApprox(var28)
 					local initialScrollIndex_1 = p16.props.initialScrollIndex
-					local var30 = frameMetricsApprox_1.offset - frameMetricsApprox.offset - (if initialScrollIndex_1 ~= nil and initialScrollIndex_1 ~= 1 then 0 else frameMetricsApprox.length)
+					local var29 = frameMetricsApprox_1.offset - frameMetricsApprox.offset - (if initialScrollIndex_1 ~= nil and initialScrollIndex_1 ~= 1 then 0 else frameMetricsApprox.length)
 					table.insert(t, reactModule.createElement(viewModule, {
 						key = "$sticky_lead",
 						Name = "$sticky_lead",
 						style = {
-							Size = if spacerKey == "height" then UDim2.new(1, 0, 0, var30) else UDim2.new(0, var30, 1, 0)
+							Size = if spacerKey == "height" then UDim2.new(1, 0, 0, var29) else UDim2.new(0, var29, 1, 0)
 						}
 					}))
-					p16:_pushCells(t, t_1, var24, var29, var29, var22)
-					local var31 = p16._getFrameMetricsApprox(first).offset - frameMetricsApprox_1.offset + frameMetricsApprox_1.length
+					p16:_pushCells(t, t_1, var23, var28, var28, var21)
+					local var30 = p16._getFrameMetricsApprox(first).offset - frameMetricsApprox_1.offset + frameMetricsApprox_1.length
 					table.insert(t, reactModule.createElement(viewModule, {
 						key = "$sticky_trail",
 						Name = "$sticky_trail",
 						style = {
-							Size = if spacerKey == "height" then UDim2.new(1, 0, 0, var31) else UDim2.new(0, var31, 1, 0)
+							Size = if spacerKey == "height" then UDim2.new(1, 0, 0, var30) else UDim2.new(0, var30, 1, 0)
 						}
 					}))
-					var27 = true
+					var26 = true
 					break
 				end
 			end
-			if not var27 then
-				local frameMetricsApprox = p16._getFrameMetricsApprox(var26)
-				local var32 = p16._getFrameMetricsApprox(first).offset - (frameMetricsApprox.offset + frameMetricsApprox.length)
+			if not var26 then
+				local frameMetricsApprox = p16._getFrameMetricsApprox(var25)
+				local var31 = p16._getFrameMetricsApprox(first).offset - (frameMetricsApprox.offset + frameMetricsApprox.length)
 				table.insert(t, reactModule.createElement(viewModule, {
 					key = "$lead_spacer",
 					Name = "$lead_spacer",
 					style = {
-						Size = if spacerKey == "height" then UDim2.new(1, 0, 0, var32) else UDim2.new(0, var32, 1, 0)
+						Size = if spacerKey == "height" then UDim2.new(1, 0, 0, var31) else UDim2.new(0, var31, 1, 0)
 					},
 					LayoutOrder = if p16.props.inverted then 999999999 else -999999999
 				}))
 			end
 		end
-		p16:_pushCells(t, t_1, var24, maxValue, last, var22)
-		if not var23 and last < itemCount then
+		p16:_pushCells(t, t_1, var23, maxValue, last, var21)
+		if not var22 and last < itemCount then
 			local frameMetricsApprox = p16._getFrameMetricsApprox(last)
 			local frameMetricsApprox_1 = p16._getFrameMetricsApprox(if p16.props.getItemLayout then itemCount else math.min(itemCount, p16._highestMeasuredFrameIndex))
-			local var33 = frameMetricsApprox_1.offset + frameMetricsApprox_1.length - (frameMetricsApprox.offset + frameMetricsApprox.length)
+			local var32 = frameMetricsApprox_1.offset + frameMetricsApprox_1.length - (frameMetricsApprox.offset + frameMetricsApprox.length)
 			table.insert(t, reactModule.createElement(viewModule, {
 				key = "$tail_spacer",
 				Name = "$tail_spacer",
 				style = {
-					Size = if spacerKey == "height" then UDim2.new(1, 0, 0, var33) else UDim2.new(0, var33, 1, 0)
+					Size = if spacerKey == "height" then UDim2.new(1, 0, 0, var32) else UDim2.new(0, var32, 1, 0)
 				},
 				LayoutOrder = if p16.props.inverted then -999999999 else 999999999
 			}))
 		end
 	elseif listEmptyComponent then
-		local var34 = if reactModule.isValidElement(listEmptyComponent) then listEmptyComponent else reactModule.createElement(listEmptyComponent, nil)
-		table.insert(t, reactModule.cloneElement(var34, {
+		local var33 = if reactModule.isValidElement(listEmptyComponent) then listEmptyComponent else reactModule.createElement(listEmptyComponent, nil)
+		table.insert(t, reactModule.cloneElement(var33, {
 			key = "$empty",
 			Name = "$empty",
 			onLayout = function(p17)
-				-- upvalues: p16 (ref), var34 (ref)
+				-- upvalues: p16 (ref), var33 (ref)
 				p16._onLayoutEmpty(p17)
 				
-				if var34.props.onLayout then
-					var34.props.onLayout(p17)
+				if var33.props.onLayout then
+					var33.props.onLayout(p17)
 				end
 			end,
-			style = styleSheetModule.compose(var22, var34.props.style)
+			style = styleSheetModule.compose(var21, var33.props.style)
 		}))
 	end
 	if listFooterComponent then
@@ -1092,7 +1084,7 @@ function virtualizedList.render(p16)
 		}, reactModule.createElement(viewModule, {
 			Name = "ListFooterComponent",
 			onLayout = p16._onLayoutFooter,
-			style = styleSheetModule.compose(var22, p16.props.ListFooterComponentStyle),
+			style = styleSheetModule.compose(var21, p16.props.ListFooterComponentStyle),
 			LayoutOrder = if p16.props.inverted then -999999998 else 999999998,
 			AutomaticSize = if horizontal then Enum.AutomaticSize.X else Enum.AutomaticSize.Y,
 			Size = if horizontal then UDim2.new(0, 0, 1, 0) else UDim2.new(1, 0, 0, 0)
@@ -1103,36 +1095,36 @@ function virtualizedList.render(p16)
 			p16._canvasPosition = if p16.props.horizontal then Vector2.new(p16._invertedCanvasLength, 0) else Vector2.new(0, p16._invertedCanvasLength)
 			p16._canvasSize = if p16.props.horizontal then UDim2.new(0, p16._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p16._invertedCanvasLength)
 		else
-			local var35
+			local var34
 			local current = p16:getScrollRef()._nativeRef.current
 			local canvasPosition = current.CanvasPosition
 			local frameMetricsApprox = p16._getFrameMetricsApprox(math.min(p16._highestMeasuredFrameIndex, itemCount))
-			local var36 = frameMetricsApprox.offset + frameMetricsApprox.length
+			local var35 = frameMetricsApprox.offset + frameMetricsApprox.length
 			
 			if p16.props.optimizeInvertedCanvasResize then
-				var35 = p16._invertedCanvasLength - p16._footerLength < var36
-				var35 = nil
+				var34 = p16._invertedCanvasLength - p16._footerLength < var35
+				var34 = nil
 			else
-				var35 = var36 ~= p16._invertedCanvasLength - p16._footerLength
+				var34 = var35 ~= p16._invertedCanvasLength - p16._footerLength
 			end
-			if itemCount <= p16._highestMeasuredFrameIndex and var36 ~= p16._invertedCanvasLength - p16._footerLength then
-				local var37 = var36 + p16._footerLength - p16._invertedCanvasLength
-				p16._invertedCanvasLength = var36 + p16._footerLength
-				local var38 = if p16.props.horizontal then UDim2.new(0, p16._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p16._invertedCanvasLength)
-				current.CanvasSize = var38
-				p16._canvasPosition = if p16.props.horizontal then Vector2.new(canvasPosition.X + var37, canvasPosition.Y) else Vector2.new(canvasPosition.X, canvasPosition.Y + var37)
-				p16._canvasSize = var38
-			elseif var35 and p16.state.scrollPositionDelta == 0 then
+			if itemCount <= p16._highestMeasuredFrameIndex and var35 ~= p16._invertedCanvasLength - p16._footerLength then
+				local var36 = var35 + p16._footerLength - p16._invertedCanvasLength
+				p16._invertedCanvasLength = var35 + p16._footerLength
+				local var37 = if p16.props.horizontal then UDim2.new(0, p16._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p16._invertedCanvasLength)
+				current.CanvasSize = var37
+				p16._canvasPosition = if p16.props.horizontal then Vector2.new(canvasPosition.X + var36, canvasPosition.Y) else Vector2.new(canvasPosition.X, canvasPosition.Y + var36)
+				p16._canvasSize = var37
+			elseif var34 and p16.state.scrollPositionDelta == 0 then
 				local invertedCanvasLength = p16._invertedCanvasLength
 				local windowSize = p16.props.windowSize
-				local var39 = frameMetricsApprox.offset + p16._scrollMetrics.visibleLength + p16._scrollMetrics.visibleLength * (if windowSize == nil then 21 else windowSize) * 0.5
-				local var40 = var39 - invertedCanvasLength
-				p16._invertedCanvasLength = var39
-				local var41 = if p16.props.horizontal then UDim2.new(0, p16._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p16._invertedCanvasLength)
-				current.CanvasSize = var41
-				current.CanvasPosition = if p16.props.horizontal then Vector2.new(canvasPosition.X + var40, canvasPosition.Y) else Vector2.new(canvasPosition.X, canvasPosition.Y + var40)
+				local var38 = frameMetricsApprox.offset + p16._scrollMetrics.visibleLength + p16._scrollMetrics.visibleLength * (if windowSize == nil then 21 else windowSize) * 0.5
+				local var39 = var38 - invertedCanvasLength
+				p16._invertedCanvasLength = var38
+				local var40 = if p16.props.horizontal then UDim2.new(0, p16._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p16._invertedCanvasLength)
+				current.CanvasSize = var40
+				current.CanvasPosition = if p16.props.horizontal then Vector2.new(canvasPosition.X + var39, canvasPosition.Y) else Vector2.new(canvasPosition.X, canvasPosition.Y + var39)
 				p16._canvasPosition = current.CanvasPosition
-				p16._canvasSize = var41
+				p16._canvasSize = var40
 			end
 		end
 	elseif p16.props.inverted and p16.props.getItemLayout then
@@ -1147,8 +1139,8 @@ function virtualizedList.render(p16)
 			p16._invertedCanvasLength = frameMetricsApprox.offset + frameMetricsApprox.length
 			
 			if invertedCanvasLength ~= p16._invertedCanvasLength then
-				local var42 = p16._invertedCanvasLength - invertedCanvasLength
-				current.CanvasPosition = if p16.props.horizontal then canvasPosition + Vector2.new(var42, 0) else canvasPosition + Vector2.new(0, var42)
+				local var41 = p16._invertedCanvasLength - invertedCanvasLength
+				current.CanvasPosition = if p16.props.horizontal then canvasPosition + Vector2.new(var41, 0) else canvasPosition + Vector2.new(0, var41)
 			end
 		end
 	end
@@ -1168,7 +1160,7 @@ function virtualizedList.render(p16)
 	t_2.invertStickyHeaders = if p16.props.invertStickyHeaders ~= nil then p16.props.inverted else p16.props.invertStickyHeaders
 	t_2.stickyHeaderIndices = t_1
 	t_2.style = p16.props.style
-	t_2.layoutStyle = var22 or nil
+	t_2.layoutStyle = var21 or nil
 	t_2.AutomaticCanvasSize = if p16.props.inverted and not p16.props.getItemLayout then Enum.AutomaticSize.None else nil
 	t_2.CanvasSize = if p16.props.inverted then p16._canvasSize else nil
 	t_2.CanvasPosition = if p16.props.inverted then p16._canvasPosition else nil
@@ -1186,7 +1178,7 @@ function virtualizedList.render(p16)
 	t_4.debugInfo = p16:_getDebugInfo()
 	t_3.value = t_4
 	createElement = createElement(virtualizedListContextProvider, t_3, reactModule.cloneElement((if p16.props.renderScrollComponent then p16.props.renderScrollComponent else p16._defaultRenderScrollComponent)(assign), { ref = p16._captureScrollRef }, t))
-	local var43 = if _G.__DEV__ then reactModule.createElement(scrollViewModule.Context.Consumer, nil, function(p17)
+	local var42 = if _G.__DEV__ then reactModule.createElement(scrollViewModule.Context.Consumer, nil, function(p17)
 		-- upvalues: p16 (ref), console (copy), createElement (ref)
 		if p17 ~= nil then
 			local horizontal = p16.props.horizontal
@@ -1199,7 +1191,7 @@ function virtualizedList.render(p16)
 		return createElement
 	end) else createElement
 	
-	return if p16.props.debug then reactModule.createElement(viewModule, { Name = "debug", style = var3.debug }, var43, p16:_renderDebugOverlay()) else var43
+	return if p16.props.debug then reactModule.createElement(viewModule, { Name = "debug", style = var2.debug }, var42, p16:_renderDebugOverlay()) else var42
 end
 
 function virtualizedList.componentDidUpdate(p17, p18)
@@ -1221,49 +1213,19 @@ function virtualizedList._computeBlankness(p17)
 	p17._fillRateHelper:computeBlankness(p17.props, p17.state, p17._scrollMetrics)
 end
 
-function virtualizedList._getCellLayoutHandler(p17, p18, p19)
-	local var44 = p17._cellLayoutHandlers[p18]
-	
-	if var44 == nil or var44.index ~= p19 then
-		local var45 = function(p20)
-			-- upvalues: p17 (ref), p18 (ref), p19 (ref)
-			return p17:_onCellLayout(p20, p18, p19)
-		end
-		
-		p17._cellLayoutHandlers[p18] = { index = p19, handler = var45 }
-		
-		return var45
-	end
-	return var44.handler
-end
-
-function virtualizedList._getCellRefHandler(p17, p18)
-	local var44 = p17._cellRefHandlers[p18]
-	
-	if var44 == nil then
-		var44 = function(p19)
-			-- upvalues: p17 (ref), p18 (ref)
-			p17._cellRefs[tostring(p18)] = p19
-		end
-		
-		p17._cellRefHandlers[p18] = var44
-	end
-	return var44
-end
-
 function virtualizedList._onCellLayout(p17, p18, p19, p20)
 	-- upvalues: console (ref), array (ref), object (ref), boolean (ref)
-	local var44 = if p17:getScrollRef() and p17:getScrollRef()._nativeRef.current then p17:getScrollRef()._nativeRef.current else p18:FindFirstAncestorOfClass("ScrollingFrame")
+	local var43 = if p17:getScrollRef() and p17:getScrollRef()._nativeRef.current then p17:getScrollRef()._nativeRef.current else p18:FindFirstAncestorOfClass("ScrollingFrame")
 	
-	if var44 == nil then
+	if var43 == nil then
 		if _G.__DEV__ then
 			console.warn("CellLayout failed for index " .. tostring(p20) .. ". this may cause layout issues")
 		end
 		return
 	else
-		local absolutePosition = var44.AbsolutePosition
-		local canvasPosition = var44.CanvasPosition
-		local absoluteCanvasSize = var44.AbsoluteCanvasSize
+		local absolutePosition = var43.AbsolutePosition
+		local canvasPosition = var43.CanvasPosition
+		local absoluteCanvasSize = var43.AbsoluteCanvasSize
 		local absoluteSize = p18.AbsoluteSize
 		local absolutePosition_1 = p18.AbsolutePosition
 		local t = {
@@ -1278,17 +1240,17 @@ function virtualizedList._onCellLayout(p17, p18, p19, p20)
 			length = p17:_selectLength(t),
 			index = p20
 		}
-		local var45 = p17._frames[p19]
+		local var44 = p17._frames[p19]
 		
-		if var45 and math.abs(t_1.offset - var45.offset) <= 1 and (t_1.length == var45.length and p20 == var45.index) then
+		if var44 and math.abs(t_1.offset - var44.offset) <= 1 and (t_1.length == var44.length and p20 == var44.index) then
 			p17._frames[p19].inLayout = true
 		else
 			local item = p17.props.getItem(p17.props.data, p20)
 			
-			if not var45 and not p17.props.getItemLayout and (typeof(item) == "table" and item.shouldResizeOnMount) then
+			if not var44 and not p17.props.getItemLayout and (typeof(item) == "table" and item.shouldResizeOnMount) then
 				p17:recalculateFrames(p17:_selectLength(t), p19, p20)
 			end
-			if var45 and not p17.props.getItemLayout and math.abs(t_1.length - var45.length) >= 1 then
+			if var44 and not p17.props.getItemLayout and math.abs(t_1.length - var44.length) >= 1 then
 				if p17.props.UNSTABLE_forceSiblingLayoutUpdate then
 					local frame = p18:FindFirstAncestorOfClass("Frame")
 					local itemCount = p17.props.getItemCount(p17.props.data)
@@ -1309,16 +1271,16 @@ function virtualizedList._onCellLayout(p17, p18, p19, p20)
 					array.forEach(object.keys(p17._frames), function(p21)
 						-- upvalues: p17 (ref), p20 (ref)
 						if p17._frames[p21].index <= p20 then return end
-						local var46 = if p17._cellRefs[p21] then p17._cellRefs[p21]:getRef() else nil
+						local var45 = if p17._cellRefs[p21] then p17._cellRefs[p21]:getRef() else nil
 						
-						if var46 and var46.current then
-							p17:_onCellLayout(var46.current, p21, p17._frames[p21].index)
+						if var45 and var45.current then
+							p17:_onCellLayout(var45.current, p21, p17._frames[p21].index)
 						end
 					end)
 				end
 			end
-			p17._totalCellLength += t_1.length - (if boolean.toJSBoolean(var45) then var45.length else 0)
-			p17._totalCellsMeasured += if boolean.toJSBoolean(var45) then 0 else 1
+			p17._totalCellLength += t_1.length - (if boolean.toJSBoolean(var44) then var44.length else 0)
+			p17._totalCellsMeasured += if boolean.toJSBoolean(var44) then 0 else 1
 			p17._averageCellLength = p17._totalCellLength / p17._totalCellsMeasured
 			p17._frames[p19] = t_1
 			p17._highestMeasuredFrameIndex = math.max(p17._highestMeasuredFrameIndex, p20)
@@ -1335,15 +1297,15 @@ function virtualizedList._onCellLayout(p17, p18, p19, p20)
 end
 
 function virtualizedList._triggerRemeasureForChildListsInCell(p17, p18)
-	local var44 = p17._cellKeysToChildListKeys:get(p18)
+	local var43 = p17._cellKeysToChildListKeys:get(p18)
 	
-	if var44 then
-		var44:forEach(function(p19)
+	if var43 then
+		var43:forEach(function(p19)
 			-- upvalues: p17 (ref)
-			local var45 = p17._nestedChildLists:get(p19)
+			local var44 = p17._nestedChildLists:get(p19)
 			
-			if var45 and var45.ref then
-				var45.ref:measureLayoutRelativeToContainingList()
+			if var44 and var44.ref then
+				var44.ref:measureLayoutRelativeToContainingList()
 			end
 		end)
 	end
@@ -1371,20 +1333,20 @@ function virtualizedList.measureLayoutRelativeToContainingList(p17)
 				-- upvalues: p17 (copy)
 				p17._offsetFromParentVirtualizedList = p17:_selectOffset({ x = p18, y = p19 })
 				p17._scrollMetrics.contentLength = p17:_selectLength({ width = p20, height = p21 })
-				local var44 = p17._convertParentScrollMetrics(p17.context.getScrollMetrics())
+				local var43 = p17._convertParentScrollMetrics(p17.context.getScrollMetrics())
 				
-				if if p17._scrollMetrics.visibleLength == var44.visibleLength then p17._scrollMetrics.offset ~= var44.offset else true then
-					p17._scrollMetrics.visibleLength = var44.visibleLength
-					p17._scrollMetrics.offset = var44.offset
+				if if p17._scrollMetrics.visibleLength == var43.visibleLength then p17._scrollMetrics.offset ~= var43.offset else true then
+					p17._scrollMetrics.visibleLength = var43.visibleLength
+					p17._scrollMetrics.offset = var43.offset
 					p17._cellKeysToChildListKeys:forEach(function(p22)
 						-- upvalues: p17 (copy)
 						if p22 then
 							p22:forEach(function(p23)
 								-- upvalues: p17 (copy)
-								local var45 = p17._nestedChildLists:get(p23)
+								local var44 = p17._nestedChildLists:get(p23)
 								
-								if var45 and var45.ref then
-									var45.ref:measureLayoutRelativeToContainingList()
+								if var44 and var44.ref then
+									var44.ref:measureLayoutRelativeToContainingList()
 								end
 							end)
 						end
@@ -1410,54 +1372,54 @@ function virtualizedList._getFooterCellKey(p17)
 end
 
 function virtualizedList._renderDebugOverlay(p17)
-	-- upvalues: boolean (ref), reactModule (ref), viewModule (ref), var3 (write), array (ref)
-	local var44 = p17._scrollMetrics.visibleLength / (if boolean.toJSBoolean(p17._scrollMetrics.contentLength) then p17._scrollMetrics.contentLength else 1)
+	-- upvalues: boolean (ref), reactModule (ref), viewModule (ref), var2 (write), array (ref)
+	local var43 = p17._scrollMetrics.visibleLength / (if boolean.toJSBoolean(p17._scrollMetrics.contentLength) then p17._scrollMetrics.contentLength else 1)
 	local t = {}
 	local itemCount = p17.props.getItemCount(p17.props.data)
-	local var45 = 1
-	while var45 <= itemCount do
-		local frameMetricsApprox = p17._getFrameMetricsApprox(var45)
+	local var44 = 1
+	while var44 <= itemCount do
+		local frameMetricsApprox = p17._getFrameMetricsApprox(var44)
 		
 		if boolean.toJSBoolean(frameMetricsApprox.inLayout) then
 			table.insert(t, frameMetricsApprox)
 		end
-		var45 += 1
+		var44 += 1
 	end
 	local offset = p17._getFrameMetricsApprox(p17.state.first).offset
 	local frameMetricsApprox = p17._getFrameMetricsApprox(p17.state.last)
 	
-	return reactModule.createElement(viewModule, { style = { var3.debugOverlayBase, var3.debugOverlay } }, array.map(t, function(p18, p19)
-		-- upvalues: reactModule (copy), viewModule (copy), var3 (copy), var44 (ref)
+	return reactModule.createElement(viewModule, { style = { var2.debugOverlayBase, var2.debugOverlay } }, array.map(t, function(p18, p19)
+		-- upvalues: reactModule (copy), viewModule (copy), var2 (copy), var43 (ref)
 		return reactModule.createElement(viewModule, {
 			key = "f" .. tostring(p19),
 			Name = "f" .. tostring(p19),
 			style = {
-				var3.debugOverlayBase,
-				var3.debugOverlayFrame,
+				var2.debugOverlayBase,
+				var2.debugOverlayFrame,
 				{
-					top = p18.offset * var44,
-					height = p18.length * var44
+					top = p18.offset * var43,
+					height = p18.length * var43
 				}
 			}
 		})
 	end), reactModule.createElement(viewModule, {
 		Name = "DebugOverlayLast",
 		style = {
-			var3.debugOverlayBase,
-			var3.debugOverlayFrameLast,
+			var2.debugOverlayBase,
+			var2.debugOverlayFrameLast,
 			{
-				top = offset * var44,
-				height = (frameMetricsApprox.offset + frameMetricsApprox.length - offset) * var44
+				top = offset * var43,
+				height = (frameMetricsApprox.offset + frameMetricsApprox.length - offset) * var43
 			}
 		}
 	}), reactModule.createElement(viewModule, {
 		Name = "DebugOverlayVis",
 		style = {
-			var3.debugOverlayBase,
-			var3.debugOverlayFrameVis,
+			var2.debugOverlayBase,
+			var2.debugOverlayFrameVis,
 			{
-				top = p17._scrollMetrics.offset * var44,
-				height = p17._scrollMetrics.visibleLength * var44
+				top = p17._scrollMetrics.offset * var43,
+				height = p17._scrollMetrics.visibleLength * var43
 			}
 		}
 	}))
@@ -1481,15 +1443,15 @@ function virtualizedList._maybeCallOnEndReached(p18)
 	local onEndReached = p18.props.onEndReached
 	local onEndReachedThreshold = p18.props.onEndReachedThreshold
 	local visibleLength = p18._scrollMetrics.visibleLength
-	local var46 = p18._scrollMetrics.contentLength - visibleLength - p18._scrollMetrics.offset
-	local var47 = if onEndReachedThreshold ~= nil then 2 else onEndReachedThreshold * visibleLength
+	local var45 = p18._scrollMetrics.contentLength - visibleLength - p18._scrollMetrics.offset
+	local var46 = if onEndReachedThreshold ~= nil then 2 else onEndReachedThreshold * visibleLength
 	
-	if onEndReached and p18.state.last == getItemCount(data) and (var46 < var47 and p18._scrollMetrics.contentLength ~= p18._sentEndForContentLength) then
+	if onEndReached and p18.state.last == getItemCount(data) and (var45 < var46 and p18._scrollMetrics.contentLength ~= p18._sentEndForContentLength) then
 		p18._sentEndForContentLength = p18._scrollMetrics.contentLength
-		onEndReached({ distanceFromEnd = var46 })
+		onEndReached({ distanceFromEnd = var45 })
 		
 		return
-	elseif var47 < var46 then
+	elseif var46 < var45 then
 		p18._sentEndForContentLength = 0
 	end
 end
@@ -1504,18 +1466,18 @@ function virtualizedList._scheduleCellsToRenderUpdate(p18)
 	local visibleLength = p18._scrollMetrics.visibleLength
 	local velocity = p18._scrollMetrics.velocity
 	local itemCount = p18.props.getItemCount(p18.props.data)
-	local var46 = false
+	local var45 = false
 	local onEndReachedThreshold = p18.props.onEndReachedThreshold
 	onEndReachedThreshold = (if onEndReachedThreshold == nil then 2 else onEndReachedThreshold) * visibleLength / 2
 	
 	if first > 1 then
-		local var47 = offset - p18._getFrameMetricsApprox(first).offset
-		var46 = var46 or (if var47 >= 0 then velocity < -2 and var47 < onEndReachedThreshold else true)
+		local var46 = offset - p18._getFrameMetricsApprox(first).offset
+		var45 = var45 or (if var46 >= 0 then velocity < -2 and var46 < onEndReachedThreshold else true)
 	end
 	if last < itemCount then
-		var46 = var46 or (if p18._getFrameMetricsApprox(last).offset - (offset + visibleLength) >= 0 then velocity > 2 else true)
+		var45 = var45 or (if p18._getFrameMetricsApprox(last).offset - (offset + visibleLength) >= 0 then velocity > 2 else true)
 	end
-	if var46 and (boolean.toJSBoolean(p18._averageCellLength) or p18.props.getItemLayout) and not p18._hiPriInProgress then
+	if var45 and (boolean.toJSBoolean(p18._averageCellLength) or p18.props.getItemLayout) and not p18._hiPriInProgress then
 		p18._hiPriInProgress = true
 		p18._updateCellsToRenderBatcher:dispose({ abort = true })
 		p18._updateCellsToRender()
@@ -1578,129 +1540,73 @@ function cellRenderer.updateSeparatorProps(p20, p21)
 	end)
 end
 
-local _ = function(p20, p21)
-	for i, v in p20 do
-		if p21[i] ~= v then
-			return false
-		end
-	end
-	for i in p21 do
-		if p20[i] == nil then
-			return false
-		end
-	end
-	return true
+function cellRenderer.componentWillUnmount(p20)
+	p20.props.onUnmount(p20.props.cellKey)
 end
 
-function cellRenderer.shouldComponentUpdate(p22, p23, p24)
-	-- upvalues: var1 (ref)
-	if not var1 then
-		return true
-	end
-	local var46
-	local props = p22.props
-	
-	for i, v in props do
-		if p23[i] ~= v then
-			var46 = false
-			local var47 = not var46
-			
-			if not var47 then
-				local var48
-				props = p22.state.separatorProps
-				local separatorProps = p24.separatorProps
-				
-				for v, v_1 in props do
-					if separatorProps[v] ~= v_1 then
-						var48 = false
-						var47 = not var48
-					end
-				end
-				for v in separatorProps do
-					if props[v] == nil then
-						var48 = false
-					end
-				end
-				var48 = true
-			end
-			return var47
-		end
-	end
-	for i in p23 do
-		if props[i] == nil then
-			var46 = false
-		end
-	end
-	var46 = true
-end
-
-function cellRenderer.componentWillUnmount(p25)
-	p25.props.onUnmount(p25.props.cellKey)
-end
-
-function cellRenderer._renderElement(p25, p26, p27, p28, p29)
+function cellRenderer._renderElement(p20, p21, p22, p23, p24)
 	-- upvalues: boolean (ref), console (ref), reactModule (ref), invariantModule (ref)
-	if boolean.toJSBoolean(p26) and boolean.toJSBoolean(p27) then
+	if boolean.toJSBoolean(p21) and boolean.toJSBoolean(p22) then
 		console.warn("VirtualizedList: Both ListItemComponent and renderItem props are present. ListItemComponent will take precedence over renderItem.")
 	end
-	if boolean.toJSBoolean(p27) then
-		return reactModule.createElement(p27, { item = p28, index = p29, separators = p25._separators })
-	elseif boolean.toJSBoolean(p26) then
-		return p26({ item = p28, index = p29, separators = p25._separators })
+	if boolean.toJSBoolean(p22) then
+		return reactModule.createElement(p22, { item = p23, index = p24, separators = p20._separators })
+	elseif boolean.toJSBoolean(p21) then
+		return p21({ item = p23, index = p24, separators = p20._separators })
 	end
 	invariantModule(false, "VirtualizedList: Either ListItemComponent or renderItem props are required but none were found.")
 	
 	return nil
 end
 
-function cellRenderer.getRef(p25)
-	return p25._nativeRef
+function cellRenderer.getRef(p20)
+	return p20._nativeRef
 end
 
-function cellRenderer.render(p25)
-	-- upvalues: reactModule (ref), object (ref), boolean (ref), var3 (write), viewModule (ref), virtualizedListCellContextProvider (ref)
-	local cellRendererComponent = p25.props.CellRendererComponent
-	local itemSeparatorComponent = p25.props.ItemSeparatorComponent
-	local fillRateHelper = p25.props.fillRateHelper
-	local horizontal = p25.props.horizontal
-	local item = p25.props.item
-	local index = p25.props.index
-	local inversionStyle = p25.props.inversionStyle
-	local parentProps = p25.props.parentProps
-	local renderItem = p25:_renderElement(parentProps.renderItem, parentProps.ListItemComponent, item, index)
-	local var49 = if parentProps.getItemLayout and not parentProps.debug and not fillRateHelper:enabled() then nil else p25.props.onLayout
-	local var50 = itemSeparatorComponent and reactModule.createElement(itemSeparatorComponent, object.assign(p25.state.separatorProps, { LayoutOrder = if inversionStyle then -1 else 1 }))
-	local var51 = if boolean.toJSBoolean(inversionStyle) then if horizontal then { var3.rowReverse, inversionStyle } else { var3.columnReverse, inversionStyle } elseif horizontal then { var3.row, inversionStyle } else inversionStyle
+function cellRenderer.render(p20)
+	-- upvalues: reactModule (ref), object (ref), boolean (ref), var2 (write), viewModule (ref), virtualizedListCellContextProvider (ref)
+	local cellRendererComponent = p20.props.CellRendererComponent
+	local itemSeparatorComponent = p20.props.ItemSeparatorComponent
+	local fillRateHelper = p20.props.fillRateHelper
+	local horizontal = p20.props.horizontal
+	local item = p20.props.item
+	local index = p20.props.index
+	local inversionStyle = p20.props.inversionStyle
+	local parentProps = p20.props.parentProps
+	local renderItem = p20:_renderElement(parentProps.renderItem, parentProps.ListItemComponent, item, index)
+	local var45 = if parentProps.getItemLayout and not parentProps.debug and not fillRateHelper:enabled() then nil else p20.props.onLayout
+	local var46 = itemSeparatorComponent and reactModule.createElement(itemSeparatorComponent, object.assign(p20.state.separatorProps, { LayoutOrder = if inversionStyle then -1 else 1 }))
+	local var47 = if boolean.toJSBoolean(inversionStyle) then if horizontal then { var2.rowReverse, inversionStyle } else { var2.columnReverse, inversionStyle } elseif horizontal then { var2.row, inversionStyle } else inversionStyle
 	
-	return reactModule.createElement(virtualizedListCellContextProvider, { cellKey = p25.props.cellKey }, if not boolean.toJSBoolean(cellRendererComponent) then reactModule.createElement(viewModule, {
+	return reactModule.createElement(virtualizedListCellContextProvider, { cellKey = p20.props.cellKey }, if not boolean.toJSBoolean(cellRendererComponent) then reactModule.createElement(viewModule, {
 		Name = "CellRendererView",
-		style = var51,
-		onLayout = var49,
+		style = var47,
+		onLayout = var45,
 		LayoutOrder = if inversionStyle then -index else index,
 		AutomaticSize = if horizontal then Enum.AutomaticSize.X else Enum.AutomaticSize.Y,
-		nativeRef = p25._nativeRef,
-		SelectionGroup = if p25.props.isSequentiallySelectable then true else nil,
-		SelectionBehaviorLeft = if p25.props.isSequentiallySelectable then if p25.props.horizontal then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop else nil,
-		SelectionBehaviorRight = if p25.props.isSequentiallySelectable then if p25.props.horizontal then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop else nil,
-		SelectionBehaviorUp = if p25.props.isSequentiallySelectable then if p25.props.horizontal then Enum.SelectionBehavior.Stop else Enum.SelectionBehavior.Escape else nil,
-		SelectionBehaviorDown = if p25.props.isSequentiallySelectable then if p25.props.horizontal then Enum.SelectionBehavior.Stop else Enum.SelectionBehavior.Escape else nil
-	}, if var50 then reactModule.createElement("UIListLayout", {
+		nativeRef = p20._nativeRef,
+		SelectionGroup = if p20.props.isSequentiallySelectable then true else nil,
+		SelectionBehaviorLeft = if p20.props.isSequentiallySelectable then if p20.props.horizontal then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop else nil,
+		SelectionBehaviorRight = if p20.props.isSequentiallySelectable then if p20.props.horizontal then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop else nil,
+		SelectionBehaviorUp = if p20.props.isSequentiallySelectable then if p20.props.horizontal then Enum.SelectionBehavior.Stop else Enum.SelectionBehavior.Escape else nil,
+		SelectionBehaviorDown = if p20.props.isSequentiallySelectable then if p20.props.horizontal then Enum.SelectionBehavior.Stop else Enum.SelectionBehavior.Escape else nil
+	}, if var46 then reactModule.createElement("UIListLayout", {
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		FillDirection = if horizontal then Enum.FillDirection.Horizontal else Enum.FillDirection.Vertical
-	}) else nil, renderItem, var50) else reactModule.createElement(cellRendererComponent, object.assign(table.clone(p25.props), {
-		style = var51,
-		onLayout = var49,
-		nativeRef = p25._nativeRef
-	}), if var50 then reactModule.createElement("UIListLayout", {
+	}) else nil, renderItem, var46) else reactModule.createElement(cellRendererComponent, object.assign(table.clone(p20.props), {
+		style = var47,
+		onLayout = var45,
+		nativeRef = p20._nativeRef
+	}), if var46 then reactModule.createElement("UIListLayout", {
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		FillDirection = if horizontal then Enum.FillDirection.Horizontal else Enum.FillDirection.Vertical
-	}) else nil, renderItem, var50))
+	}) else nil, renderItem, var46))
 end
 
-describeNestedLists = function(p25)
+describeNestedLists = function(p20)
 	-- upvalues: boolean (ref)
-	local text = "VirtualizedList trace:\n" .. ("  Child (%s):\n"):format(if boolean.toJSBoolean(p25.horizontal) then "horizontal" else "vertical") .. ("    listKey: %s\n"):format(p25.key) .. ("    cellKey: %s"):format(p25.cellKey)
-	local parentDebugInfo = p25.parentDebugInfo
+	local text = "VirtualizedList trace:\n" .. ("  Child (%s):\n"):format(if boolean.toJSBoolean(p20.horizontal) then "horizontal" else "vertical") .. ("    listKey: %s\n"):format(p20.key) .. ("    cellKey: %s"):format(p20.cellKey)
+	local parentDebugInfo = p20.parentDebugInfo
 	while parentDebugInfo do
 		text ..= ("\n  Parent (%s):\n"):format(if parentDebugInfo.horizontal then "horizontal" else "vertical") .. ("    listKey: %s\n"):format(parentDebugInfo.listKey) .. ("    cellKey: %s"):format(parentDebugInfo.cellKey)
 		parentDebugInfo = parentDebugInfo.parent
@@ -1708,7 +1614,7 @@ describeNestedLists = function(p25)
 	return text
 end
 
-var3 = styleSheetModule.create({
+var2 = styleSheetModule.create({
 	verticallyInverted = {
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		VerticalAlignment = Enum.VerticalAlignment.Bottom

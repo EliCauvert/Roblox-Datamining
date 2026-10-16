@@ -14,7 +14,6 @@ local _ = require(purchasePrompt.types)
 local debugLogModule = require(purchasePrompt.Utils.debugLog)
 local serializeTableModule = require(purchasePrompt.Utils.serializeTable)
 local isGenericChallengeResponseModule = require(purchasePrompt.Utils.isGenericChallengeResponse)
-local isGetPassOwnershipApiEnabledModule = require(purchasePrompt.Utils.isGetPassOwnershipApiEnabled)
 local enablePlayerOwnsBundleApiEngineFeature = game:GetEngineFeature("EnablePlayerOwnsBundleApi")
 local enableDevSubscriptionPurchaseWithRobuxEngineFeature = game:GetEngineFeature("EnableDevSubscriptionPurchaseWithRobux")
 local getFFlagEnablePromptPurchaseRequestedV2Module = require(purchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2)
@@ -47,14 +46,14 @@ local function request(p1, p2, p3)
 	-- upvalues: debugLogModule (ref), serializeTableModule (ref), httpService (ref)
 	debugLogModule(function()
 		-- upvalues: p1 (ref), serializeTableModule (copy)
-		return "Request " .. p0.Url .. "\n" .. serializeTableModule(p1)
+		return "Request " .. p1.Url .. "\n" .. serializeTableModule(p1)
 	end)
 	
 	return httpService:RequestInternal(p1):Start(function(p4, p5)
 		-- upvalues: debugLogModule (copy), p1 (ref), serializeTableModule (copy), httpService (copy), p2 (ref), p3 (ref)
 		debugLogModule(function()
 			-- upvalues: p1 (copy), serializeTableModule (copy), p5 (ref)
-			return "Response " .. p0.Url .. "\n" .. serializeTableModule(p5)
+			return "Response " .. p1.Url .. "\n" .. serializeTableModule(p5)
 		end)
 		
 		if not p4 then
@@ -136,28 +135,8 @@ local function getPremiumProductInfo()
 end
 
 local function getPlayerOwns(p1, p2, p3)
-	-- upvalues: marketplaceService (ref), enablePlayerOwnsBundleApiEngineFeature (ref), fFlagUseGetGamePassOwnershipApi (ref), isGetPassOwnershipApiEnabledModule (ref)
-	if p3 == Enum.InfoType.Asset then
-		return marketplaceService:PlayerOwnsAssetAsync(p1, p2)
-	elseif enablePlayerOwnsBundleApiEngineFeature and p3 == Enum.InfoType.Bundle then
-		return marketplaceService:PlayerOwnsBundleAsync(p1, p2)
-	elseif p3 == Enum.InfoType.GamePass then
-		if fFlagUseGetGamePassOwnershipApi then
-			local ok, status = pcall(function()
-				-- upvalues: marketplaceService (copy), p1 (ref), p2 (ref)
-				return marketplaceService:GetPassOwnershipAsync(p1, p2)
-			end)
-			
-			if ok then
-				return typeof(status) == "table" and status.Owned == true
-			elseif isGetPassOwnershipApiEnabledModule() then
-				error(status, 0)
-			end
-		end
-		return marketplaceService:UserOwnsGamePassAsync(p1.UserId, p2)
-	else
-		return p3 == Enum.InfoType.Subscription and marketplaceService:IsPlayerSubscribed(p1, p2)
-	end
+	-- upvalues: marketplaceService (ref), enablePlayerOwnsBundleApiEngineFeature (ref), fFlagUseGetGamePassOwnershipApi (ref)
+	return if p3 == Enum.InfoType.Asset then marketplaceService:PlayerOwnsAssetAsync(p1, p2) elseif enablePlayerOwnsBundleApiEngineFeature and p3 == Enum.InfoType.Bundle then marketplaceService:PlayerOwnsBundleAsync(p1, p2) elseif p3 == Enum.InfoType.GamePass then if fFlagUseGetGamePassOwnershipApi then false else marketplaceService:UserOwnsGamePassAsync(p1.UserId, p2) else p3 == Enum.InfoType.Subscription and marketplaceService:IsPlayerSubscribed(p1, p2)
 end
 
 local function performPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
@@ -530,22 +509,6 @@ local function getExperienceProductInfo(p1)
 	end)
 end
 
-local function getUniversePrivateServerSettings(value)
-	-- upvalues: replaced_1 (ref), promiseModule (ref), request (ref)
-	local t = {
-		Method = "GET",
-		Url = ("%sprivate-servers-api/universe-private-server-settings?universeId=%d"):format(replaced_1, value)
-	}
-	
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p1 (ref), p2 (ref)
-			request(t, p1, p2)
-		end)
-	end)
-end
-
 local function performExperiencePurchase(p1, p2)
 	-- upvalues: replaced_5 (ref), httpService (ref), promiseModule (ref), request (ref)
 	local t = {
@@ -668,7 +631,7 @@ end
 
 return {
 	new = function()
-		-- upvalues: promiseModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), performPurchaseV2 (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), performCreatorStorePurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getAssetInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetails (ref), getResellers (ref), getCreatorStoreProductInfo (ref), getPremiumProductInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getSubscriptionPurchaseInfo (ref), performSubscriptionPurchase (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getVngShopUrl (ref), performDevProductEdpPurchase (ref), getExperienceProductInfo (ref), performExperiencePurchase (ref), getUniversePrivateServerSettings (ref), performLookPurchase (ref), getUnifiedPurchaseFlowUserEligibility (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), performLookPurchaseBulkPurchase (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchase (ref), getSubscriptionProductInfo (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), GetLookDetailsV2ProductInfo (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), postCartPricing (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), postInGameItemCartPricing (ref)
+		-- upvalues: promiseModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), performPurchaseV2 (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), performCreatorStorePurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getAssetInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetails (ref), getResellers (ref), getCreatorStoreProductInfo (ref), getPremiumProductInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getSubscriptionPurchaseInfo (ref), performSubscriptionPurchase (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getVngShopUrl (ref), performDevProductEdpPurchase (ref), getExperienceProductInfo (ref), performExperiencePurchase (ref), performLookPurchase (ref), getUnifiedPurchaseFlowUserEligibility (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), performLookPurchaseBulkPurchase (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchase (ref), getSubscriptionProductInfo (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), GetLookDetailsV2ProductInfo (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), postCartPricing (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), postInGameItemCartPricing (ref)
 		local t = {
 			getABTestGroup = promiseModule.promisify(getABTestGroup),
 			getProductInfo = promiseModule.promisify(getProductInfo),
@@ -697,7 +660,6 @@ return {
 			performDevProductEdpPurchase = promiseModule.promisify(performDevProductEdpPurchase),
 			getExperienceProductInfo = promiseModule.promisify(getExperienceProductInfo),
 			performExperiencePurchase = promiseModule.promisify(performExperiencePurchase),
-			getUniversePrivateServerSettings = promiseModule.promisify(getUniversePrivateServerSettings),
 			performLookPurchase = promiseModule.promisify(performLookPurchase),
 			getUnifiedPurchaseFlowUserEligibility = promiseModule.promisify(getUnifiedPurchaseFlowUserEligibility),
 			performLookPurchaseBulkPurchase = if fFlagPurchasePromptFetchCartPricingForLooks then promiseModule.promisify(performLookPurchaseBulkPurchase) else nil,

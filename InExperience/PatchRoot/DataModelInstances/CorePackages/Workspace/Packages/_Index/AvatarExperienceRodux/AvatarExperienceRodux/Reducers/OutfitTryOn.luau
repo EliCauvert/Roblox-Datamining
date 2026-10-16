@@ -48,6 +48,7 @@ local LAYERED_CLOTHING_ORDER = constants.LAYERED_CLOTHING_ORDER
 local LAYERED_ASSET_TYPES = constants.LAYERED_ASSET_TYPES
 local ASSET_TYPE_TO_ACCESSORY_TYPE = constants.ASSET_TYPE_TO_ACCESSORY_TYPE
 local characterHistoryStateChangeButtonActivated = avatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated
+local fFlagAXRootSlotBasedEditorFlag = avatarExperienceFlagsModule.FFlagAXRootSlotBasedEditorFlag
 local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
@@ -816,7 +817,8 @@ return roduxModule.createReducer(t, {
 		return var18
 	end,
 	[characterHistoryStateChangeButtonActivated.name] = function(p20, p21)
-		return if p21.tryOn and p21.tryOn.OutfitTryOn then table.clone(p21.tryOn.OutfitTryOn) else p20
+		-- upvalues: fFlagAXRootSlotBasedEditorFlag (ref)
+		return if fFlagAXRootSlotBasedEditorFlag and p21.tryOn and p21.tryOn.OutfitTryOn then table.clone(p21.tryOn.OutfitTryOn) else p20
 	end,
 	[setLastToggledLookTypeModule.name] = if fFlagAXMISEnableMultiShopping then function(p20, p21)
 		-- upvalues: t (ref), cryoModule (ref)

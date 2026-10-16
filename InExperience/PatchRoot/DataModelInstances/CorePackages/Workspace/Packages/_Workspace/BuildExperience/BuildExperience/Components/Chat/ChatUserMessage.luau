@@ -11,7 +11,6 @@ local fFlagBuildExperienceUserMessageHapticFeedbackModule = require(buildExperie
 local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local fFlagBuildExperienceChatResourceAttachments = require(parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local escapeRichTextModule = require(buildExperience.utils.escapeRichText)
 local var1 = if fFlagBuildExperienceChatImageAttachmentsModule then require(script.Parent.ChatImagePreviewList) else nil
 local var2 = if fFlagBuildExperienceChatResourceAttachments then require(script.Parent.ChatResourceAttachmentList) else nil
 local var3 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then require(parent.InteractionFeedback).useTriggerFeedback else nil
@@ -26,17 +25,24 @@ local useTokens = foundationModule.Hooks.useTokens
 local t = {
 	affordance = foundationModule.Enums.StateLayerAffordance.None
 }
+local t_1 = {
+	["&"] = "&amp;",
+	["<"] = "&lt;",
+	[">"] = "&gt;",
+	["\""] = "&quot;",
+	["'"] = "&apos;"
+}
 
 local function _(p1)
-	-- upvalues: reactModule (ref), escapeRichTextModule (ref)
+	-- upvalues: reactModule (ref), t_1 (ref)
 	return reactModule.useMemo(function()
-		-- upvalues: escapeRichTextModule (copy), p1 (ref)
-		return escapeRichTextModule(p1)
+		-- upvalues: p1 (ref), t_1 (copy)
+		return string.gsub(p1, "[&<>\"']", t_1)
 	end, { p1 })
 end
 
 local function UserMessageBubble(p1)
-	-- upvalues: useTokens (ref), fFlagBuildExperienceRichTextUserMessagesModule (ref), reactModule (ref), escapeRichTextModule (ref), text (ref), t (ref), view (ref)
+	-- upvalues: useTokens (ref), fFlagBuildExperienceRichTextUserMessagesModule (ref), reactModule (ref), t_1 (ref), text (ref), t (ref), view (ref)
 	local var4 = useTokens()
 	
 	if fFlagBuildExperienceRichTextUserMessagesModule then
@@ -50,8 +56,8 @@ local function UserMessageBubble(p1)
 			onSecondaryActivated = p1.onSecondaryActivated,
 			stateLayer = if p1.onSecondaryActivated ~= nil then nil else t,
 			Text = reactModule.useMemo(function()
-				-- upvalues: escapeRichTextModule (copy), messageText (ref)
-				return escapeRichTextModule(messageText)
+				-- upvalues: messageText (ref), t_1 (copy)
+				return string.gsub(messageText, "[&<>\"']", t_1)
 			end, { messageText }),
 			testId = p1.testId
 		})

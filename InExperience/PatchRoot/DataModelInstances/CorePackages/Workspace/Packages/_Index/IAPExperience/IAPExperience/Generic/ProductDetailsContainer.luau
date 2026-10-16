@@ -10,7 +10,6 @@ local unifiedPurchaseModalTypeEnumModule = require(IAPExperience.Enums.UnifiedPu
 local _ = require(IAPExperience.ProductPurchase.PricingTypes)
 local _ = require(IAPExperience.Enums.VirtualItemBadgeType)
 local fFlagPurchasePromptFetchCartPricing = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
-local fFlagLuaAppsEnablePromptVIPServerPurchase = require(parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
 local function _(p1)
 	if p1 then
@@ -23,7 +22,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: fFlagPurchasePromptFetchCartPricing (ref), multiItemPriceShowsDiscountAccordionModule (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), view (ref), unifiedProductDetailsModule (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), discountSummaryModule (ref), priceSummaryV2Module (ref)
+	-- upvalues: fFlagPurchasePromptFetchCartPricing (ref), multiItemPriceShowsDiscountAccordionModule (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), view (ref), unifiedProductDetailsModule (ref), discountSummaryModule (ref), priceSummaryV2Module (ref)
 	local var1
 	local itemPrice = p1.product and p1.product.itemPrice
 	
@@ -53,9 +52,7 @@ return function(p1)
 				subtitleView = p1.subtitleView,
 				itemDisplayPrice = p1.product.itemDisplayPrice,
 				isLoading = p1.isLoading,
-				priceSuffix = p1.priceSuffix,
-				includePriceSuffixOnOriginal = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.includePriceSuffixOnOriginal else nil,
-				priceText = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.priceText else nil
+				priceSuffix = p1.priceSuffix
 			}),
 			DiscountSummary = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y padding-xxsmall",
@@ -122,9 +119,7 @@ return function(p1)
 			subtitleView = p1.subtitleView,
 			itemDisplayPrice = p1.product.itemDisplayPrice,
 			isLoading = p1.isLoading,
-			priceSuffix = p1.priceSuffix,
-			includePriceSuffixOnOriginal = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.includePriceSuffixOnOriginal else nil,
-			priceText = if fFlagLuaAppsEnablePromptVIPServerPurchase then p1.priceText else nil
+			priceSuffix = p1.priceSuffix
 		}),
 		DiscountSummary = var3
 	})

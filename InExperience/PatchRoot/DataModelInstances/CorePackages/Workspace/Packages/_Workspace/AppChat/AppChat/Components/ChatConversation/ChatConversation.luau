@@ -13,7 +13,6 @@ local userInputService = game:GetService("UserInputService")
 local IXPService = game:GetService("IXPService")
 local roactNavigationModule = require(parent.RoactNavigation)
 local messageListModule = require(script.Parent.MessageList)
-local signalsMigrationConfigModule = require(appChat.Flags.SignalsMigrationConfig)
 local replyComposeBarContainerModule = require(script.Parent.ReplyComposeBarContainer)
 local var1 = if require(appChat.Flags.FFlagAppChatNewChatInputBar) then require(script.Parent.ChatInputBar) else require(script.Parent.ChatInputBarDeprecated)
 local userTypingIndicatorModule = require(script.Parent.UserTypingIndicator)
@@ -111,7 +110,7 @@ function chatConversation.init(p1)
 	p1.conversationViewRef = roactModule.createRef()
 	p1.messageListRef = roactModule.createRef()
 	
-	function p0.getKeyboardOffset()
+	function p1.getKeyboardOffset()
 		-- upvalues: userInputService (copy), p1 (ref)
 		if userInputService.OnScreenKeyboardVisible and p1.inputBoxRef:getValue() and p1.inputBoxRef:getValue():IsFocused() then
 			if p1.props.keyboardOffset ~= nil then
@@ -123,7 +122,7 @@ function chatConversation.init(p1)
 		end
 	end
 	
-	function p0.updateKeyboardOffset()
+	function p1.updateKeyboardOffset()
 		-- upvalues: p1 (ref)
 		if not p1.isMounted then return end
 		local keyboardOffset = p1.getKeyboardOffset()
@@ -133,7 +132,7 @@ function chatConversation.init(p1)
 		end
 	end
 	
-	function p0.onKeyboardOffsetChanged(p2)
+	function p1.onKeyboardOffsetChanged(p2)
 		-- upvalues: p1 (ref)
 		if not p1.isMounted then return end
 		if not p1.inputBoxRef:getValue() or not p1.inputBoxRef:getValue():IsFocused() then
@@ -144,7 +143,7 @@ function chatConversation.init(p1)
 		end
 	end
 	
-	function p0.clearKeyboardOffset()
+	function p1.clearKeyboardOffset()
 		-- upvalues: p1 (ref)
 		p1:setState({ keyboardOffset = 0 })
 	end
@@ -173,7 +172,7 @@ function chatConversation.init(p1)
 		end
 	end)
 	
-	function p0.showNetworkErrorToast()
+	function p1.showNetworkErrorToast()
 		-- upvalues: p1 (ref)
 		p1.props.navigateToToast({
 			toastProps = {
@@ -189,14 +188,14 @@ function chatConversation.init(p1)
 			local var3
 			if p6 and p6.source == "friends" then
 				name:info("Creating a conversation for friend conversation {} via onSendChat", p3)
-				var3, var42 = p7(p3, p5):await()
+				var3, var41 = p7(p3, p5):await()
 				
-				if var3 and var42 then
-					name:debug("Created conversation {} for friend conversation {} via onSendChat", var42.id, p3)
-					p3 = var42.id
-					p8(var42.id)
+				if var3 and var41 then
+					name:debug("Created conversation {} for friend conversation {} via onSendChat", var41.id, p3)
+					p3 = var41.id
+					p8(var41.id)
 				else
-					name:error("Could not create conversation. Error: {}", tostring(var42))
+					name:error("Could not create conversation. Error: {}", tostring(var41))
 					
 					return
 				end
@@ -301,7 +300,7 @@ function chatConversation.init(p1)
 		end
 	end)
 	
-	function p0.isMoreMenuEnabled()
+	function p1.isMoreMenuEnabled()
 		-- upvalues: p1 (ref)
 		return p1.props.moreMenuEnabled
 	end
@@ -313,7 +312,7 @@ function chatConversation.init(p1)
 		end
 	end else nil
 	
-	function p0.onHeightChanged(p2)
+	function p1.onHeightChanged(p2)
 		-- upvalues: fFlagAppChatPerfTrackingModule (copy), p1 (ref)
 		if fFlagAppChatPerfTrackingModule then
 			p1.reportInputBarReady(p2.AbsoluteSize.Y)
@@ -326,7 +325,7 @@ function chatConversation.init(p1)
 	
 	p1.lastTypingRequest = 0
 	
-	function p0.chatInputTextChanged()
+	function p1.chatInputTextChanged()
 		-- upvalues: p1 (ref)
 		if p1.props.conversation and p1.props.conversation.source == "friends" then return end
 		local currentTime = tick()
@@ -339,20 +338,20 @@ function chatConversation.init(p1)
 	
 	p1.exitTypeForAnalytics = conversationExitTypeModule.Default
 	
-	function p0.fireAnalyticsEventOnUnmount()
+	function p1.fireAnalyticsEventOnUnmount()
 		-- upvalues: p1 (ref), conversationExitTypeModule (copy)
 		p1.props.onConversationUnmount(p1.exitTypeForAnalytics)
 		p1.exitTypeForAnalytics = conversationExitTypeModule.Default
 	end
 	
-	function p0.closeKeyboard()
+	function p1.closeKeyboard()
 		-- upvalues: p1 (ref)
 		if p1.inputBoxRef:getValue() then
 			p1.inputBoxRef:getValue():ReleaseFocus()
 		end
 	end
 	
-	function p0.closeReplying()
+	function p1.closeReplying()
 		-- upvalues: fFlagAppChatSignalsReplyStoreModule (copy), getReplyingToStoreModule (copy), p1 (ref)
 		if fFlagAppChatSignalsReplyStoreModule then
 			getReplyingToStoreModule(false).clear()
@@ -362,32 +361,32 @@ function chatConversation.init(p1)
 		p1.props.replyingToMessageDispatch(nil)
 	end
 	
-	function p0.onPointerInput()
+	function p1.onPointerInput()
 		-- upvalues: globalLongPressSignalModule (copy), p1 (ref)
 		globalLongPressSignalModule.dismiss()
 		p1.closeKeyboard()
 	end
 	
-	function p0.onSizeChange()
+	function p1.onSizeChange()
 		-- upvalues: p1 (ref)
 		p1.updateKeyboardOffset()
 	end
 	
-	function p0.calculateScrollOffset(p2)
+	function p1.calculateScrollOffset(p2)
 		return p2.AbsoluteCanvasSize.Y - p2.CanvasPosition.Y - p2.AbsoluteWindowSize.Y
 	end
 	
-	function p0.setBannerHeight(p2)
+	function p1.setBannerHeight(p2)
 		-- upvalues: p1 (ref)
 		p1:setState({ conversationBannerHeight = p2 })
 	end
 	
-	function p0.setBottomModalHeight(p2)
+	function p1.setBottomModalHeight(p2)
 		-- upvalues: p1 (ref)
 		p1:setState({ bottomModalHeight = p2 })
 	end
 	
-	function p0.onMessageListSizeChange(p2)
+	function p1.onMessageListSizeChange(p2)
 		-- upvalues: p1 (ref)
 		p1:setState({ messageListHeight = p2.AbsoluteSize.Y })
 	end
@@ -469,7 +468,7 @@ function chatConversation.willUnmount(p1)
 end
 
 function chatConversation.render(p1)
-	-- upvalues: signalsMigrationConfigModule (ref), roactModule (ref), appChat (ref), withRoactChatAnalyticsModule (ref), withStyle (ref), withChatPagePaddingModule (ref), keyboardOffsetEventHandlerModule (ref), var2 (ref), fFlagAppChatEnableDoubleOptIn (ref), messageListModule (ref), userTypingIndicatorModule (ref), reactModule (ref), foundationModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), fFlagAppChatSmartSuggestionsModule (ref), smartSuggestionsChipRowContainerModule (ref), replyComposeBarContainerModule (ref), chatConversationMoreMenuModule (ref), var1 (ref), conversationBottomModalContainerModule (ref)
+	-- upvalues: withRoactChatAnalyticsModule (ref), withStyle (ref), withChatPagePaddingModule (ref), roactModule (ref), keyboardOffsetEventHandlerModule (ref), var2 (ref), fFlagAppChatEnableDoubleOptIn (ref), messageListModule (ref), userTypingIndicatorModule (ref), reactModule (ref), foundationModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), fFlagAppChatSmartSuggestionsModule (ref), smartSuggestionsChipRowContainerModule (ref), replyComposeBarContainerModule (ref), chatConversationMoreMenuModule (ref), var1 (ref), conversationBottomModalContainerModule (ref)
 	local isFriends
 	local var3 = #p1.props.usersTyping > 0 and p1.props.displayNamesAvailable
 	
@@ -480,40 +479,17 @@ function chatConversation.render(p1)
 		isFriends = false
 	end
 	local text = "MessageList" .. tostring(p1.props.conversationId)
-	local var4 = if signalsMigrationConfigModule.shouldUseViewRecyclerMessageList and p1.props.conversationId ~= nil then roactModule.createElement(require(appChat.Components.MessageListV2.MessageListV2Container), {
-		conversationId = p1.props.conversationId,
-		itemList = p1.props.itemList,
-		loadNext = if isFriends then nil else p1.loadNext(p1.props.getOlderMessages, p1.props.conversationId),
-		markAsRead = p1.markAsRead(p1.props.markConversationAsRead, p1.props.conversationId),
-		closeKeyboard = p1.closeKeyboard,
-		onDetailsOpened = p1.closeKeyboard,
-		inputBoxRef = p1.inputBoxRef,
-		openGameDetailsPage = p1.props.openGameDetailsPage,
-		openMomentsDeepLink = p1.props.openMomentsDeepLink,
-		openViewProfile = p1.props.openViewProfile,
-		viewProfileOnAvatarPressed = p1.props.viewProfileOnAvatarPressed,
-		wideMode = p1.props.wideMode,
-		isDebugEnabled = p1.props.isDebugEnabled,
-		readingMessagesIsEnabled = p1.props.readingMessagesIsEnabled,
-		isInitialMessageLoading = p1.props.isInitialMessageLoading,
-		openAtStart = p1.props.openMessageListAtStart,
-		invalidMessageTypeText = p1.props.invalidMessageTypeText,
-		messageDefaultNoticeText = p1.props.messageDefaultNoticeText,
-		messageModeratedNoticeText = p1.props.messageModeratedNoticeText,
-		messageHiddenNoticeText = p1.props.messageHiddenNoticeText,
-		unknownUserText = p1.props.unknownUserText
-	}) else nil
 	
 	return withRoactChatAnalyticsModule(function(p2)
-		-- upvalues: withStyle (copy), withChatPagePaddingModule (copy), p1 (ref), roactModule (copy), keyboardOffsetEventHandlerModule (copy), var2 (copy), fFlagAppChatEnableDoubleOptIn (copy), var4 (ref), text (ref), messageListModule (copy), isFriends (ref), var3 (ref), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var1 (copy), conversationBottomModalContainerModule (copy)
+		-- upvalues: withStyle (copy), withChatPagePaddingModule (copy), p1 (ref), roactModule (copy), keyboardOffsetEventHandlerModule (copy), var2 (copy), fFlagAppChatEnableDoubleOptIn (copy), text (ref), messageListModule (copy), isFriends (ref), var3 (ref), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var1 (copy), conversationBottomModalContainerModule (copy)
 		return withStyle(function(p3)
-			-- upvalues: withChatPagePaddingModule (copy), p1 (copy), roactModule (copy), keyboardOffsetEventHandlerModule (copy), var2 (copy), fFlagAppChatEnableDoubleOptIn (copy), var4 (copy), text (copy), messageListModule (copy), isFriends (copy), var3 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var1 (copy), p2 (ref), conversationBottomModalContainerModule (copy)
+			-- upvalues: withChatPagePaddingModule (copy), p1 (copy), roactModule (copy), keyboardOffsetEventHandlerModule (copy), var2 (copy), fFlagAppChatEnableDoubleOptIn (copy), text (copy), messageListModule (copy), isFriends (copy), var3 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var1 (copy), p2 (ref), conversationBottomModalContainerModule (copy)
 			return withChatPagePaddingModule(function(p4)
-				-- upvalues: p1 (copy), roactModule (copy), p3 (ref), keyboardOffsetEventHandlerModule (copy), var2 (copy), fFlagAppChatEnableDoubleOptIn (copy), var4 (copy), text (copy), messageListModule (copy), isFriends (copy), var3 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var1 (copy), p2 (copy), conversationBottomModalContainerModule (copy)
+				-- upvalues: p1 (copy), roactModule (copy), p3 (ref), keyboardOffsetEventHandlerModule (copy), var2 (copy), fFlagAppChatEnableDoubleOptIn (copy), text (copy), messageListModule (copy), isFriends (copy), var3 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var1 (copy), p2 (copy), conversationBottomModalContainerModule (copy)
 				local replyingToMessage
-				local var5 = if p1.isMoreMenuEnabled() then if p1.props.shouldDisableChatInputBar then UDim.new(0, p4.right) else UDim.new(0, math.max(p4.right - 6, 0)) else nil
+				local var4 = if p1.isMoreMenuEnabled() then if p1.props.shouldDisableChatInputBar then UDim.new(0, p4.right) else UDim.new(0, math.max(p4.right - 6, 0)) else nil
 				local createElement = roactModule.createElement
-				local var6 = "TextButton"
+				local var5 = "TextButton"
 				local t = {
 					AutoButtonColor = false,
 					BackgroundColor3 = p3.Theme.BackgroundDefault.Color,
@@ -549,8 +525,7 @@ function chatConversation.render(p1)
 						[roactModule.Change.AbsoluteSize] = p1.onMessageListSizeChange,
 						Size = UDim2.new(1, 0, 1, (-p1.state.inputBarHeight) - p1.state.keyboardOffset - p1.state.conversationBannerHeight - p1.state.bottomModalHeight)
 					}, {
-						MessageListV2 = var4,
-						[text] = var4 == nil and roactModule.createElement(messageListModule, {
+						[text] = roactModule.createElement(messageListModule, {
 							bottomMargin = 28,
 							Size = UDim2.new(1, 0, 1, 0),
 							conversationId = p1.props.conversationId,
@@ -605,7 +580,7 @@ function chatConversation.render(p1)
 				t_3["bg-surface-100"] = replyingToMessage
 				t_2.tag = t_3
 				t_2.onAbsoluteSizeChanged = p1.onHeightChanged
-				t_2.padding = { left = UDim.new(0, p4.left), right = var5 }
+				t_2.padding = { left = UDim.new(0, p4.left), right = var4 }
 				t_1.ReplyAndInputContainer = createElement_1(view, t_2, {
 					SmartSuggestionsChipRow = if fFlagAppChatSmartSuggestionsModule then reactModule.createElement(smartSuggestionsChipRowContainerModule, {
 						LayoutOrder = 0,
@@ -682,7 +657,7 @@ function chatConversation.render(p1)
 					shouldShowChatInputBar = p1.props.shouldShowChatInputBar
 				})
 				
-				return createElement(var6, t, t_1)
+				return createElement(var5, t, t_1)
 			end)
 		end)
 	end)

@@ -18,28 +18,26 @@ local var1 = if expChatReconcileOnAgeVerifiedChange then require(script.Parent.E
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local var2 = if fFlagExpChatEnableFriendsTab then require(script.Parent.FriendsChatEventReceiverConnector) else nil
 local shortcutNavReceiverModule = require(script.Parent.ShortcutNav.ShortcutNavReceiver)
-local expChatPresetChatEmojiTabExperimentation = require(parent.SocialExperiments).ExpChatPresetChatEmojiTabExperimentation
-local var3 = if expChatPresetChatEmojiTabExperimentation.isExperimentEnabled then require(script.Parent.PresetChat.PresetChatEmojiTabExposureLogger) else nil
 local getFFlagExpChatTelemetryEventTriggerModule = require(expChat.Flags.getFFlagExpChatTelemetryEventTrigger)
 
 local function computePresetBitmap(value)
 	-- upvalues: getPresetChatStoreModule (ref), constantsModule (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), textChatService (ref)
-	local var4 = getPresetChatStoreModule(false)
+	local var3 = getPresetChatStoreModule(false)
 	
-	if not var4.getIsEnabled() or var4.getAccessLevel() ~= constantsModule.AccessLevel.Enabled then
+	if not var3.getIsEnabled() or var3.getAccessLevel() ~= constantsModule.AccessLevel.Enabled then
 		return 0
 	end
-	local var5 = 0
+	local var4 = 0
 	
 	for i in pairs(value) do
 		if i ~= "RBXSystem" then
-			var5 = if i == "RBXGeneral" then bit32.bor(var5, 1) else bit32.bor(var5, 4)
+			var4 = if i == "RBXGeneral" then bit32.bor(var4, 1) else bit32.bor(var4, 4)
 		end
 	end
 	if fFlagExpChatUniverseChatPresetEnabledModule and textChatService:HasAllocatedUniverseChatContext("global") then
-		var5 = bit32.bor(var5, 2)
+		var4 = bit32.bor(var4, 2)
 	end
-	return var5
+	return var4
 end
 
 local app = roactModule.Component:extend("App")
@@ -63,14 +61,13 @@ app.defaultProps = {
 }
 
 function app.render(p1)
-	-- upvalues: roactModule (ref), roactRoduxModule (ref), localizationModule (ref), gameLocalizationModule (ref), expChatReconcileOnAgeVerifiedChange (ref), var1 (ref), fFlagExpChatEnableFriendsTab (ref), var2 (ref), shortcutNavReceiverModule (ref), expChatPresetChatEmojiTabExperimentation (ref), var3 (ref), appContainerModule (ref)
+	-- upvalues: roactModule (ref), roactRoduxModule (ref), localizationModule (ref), gameLocalizationModule (ref), expChatReconcileOnAgeVerifiedChange (ref), var1 (ref), fFlagExpChatEnableFriendsTab (ref), var2 (ref), shortcutNavReceiverModule (ref), appContainerModule (ref)
 	return p1.props.isDefaultChatEnabled and roactModule.createElement(roactRoduxModule.StoreProvider, { store = p1.props.store }, {
 		localization = roactModule.createElement(localizationModule.Provider, { value = p1.props.translator }, {
 			gameLocalization = roactModule.createElement(gameLocalizationModule.Provider, { value = p1.props.gameTranslator }, {
 				eventReceiver = if expChatReconcileOnAgeVerifiedChange then roactModule.createElement(var1) else nil,
 				friendsChatEventReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(var2) else nil,
 				shortcutNavReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(shortcutNavReceiverModule) else nil,
-				presetChatEmojiTabExposureLogger = if expChatPresetChatEmojiTabExperimentation.isExperimentEnabled then roactModule.createElement(var3) else nil,
 				container = roactModule.createElement(appContainerModule, {
 					isChatInputBarVisible = p1.props.isChatInputBarVisible,
 					isChatWindowVisible = p1.props.isChatWindowVisible,
@@ -98,16 +95,16 @@ if getFFlagExpChatTelemetryEventTriggerModule() then
 		
 		if expChatLoadStartTime then
 			if fFlagExpChatPresetChatEnabled then
-				local var6 = os.clock() - expChatLoadStartTime
-				local var7 = getPresetChatStoreModule(false)
+				local var5 = os.clock() - expChatLoadStartTime
+				local var6 = getPresetChatStoreModule(false)
 				task.spawn(function()
-					-- upvalues: var7 (ref), expChatPresetChatLoadAnalyticsTimeoutMs (copy), p1 (ref), textChatService (copy), var6 (ref), computePresetBitmap (copy)
+					-- upvalues: var6 (ref), expChatPresetChatLoadAnalyticsTimeoutMs (copy), p1 (ref), textChatService (copy), var5 (ref), computePresetBitmap (copy)
 					local processTime = os.clock()
-					while var7.getIsLoading() and os.clock() - processTime < expChatPresetChatLoadAnalyticsTimeoutMs / 1000 do
+					while var6.getIsLoading() and os.clock() - processTime < expChatPresetChatLoadAnalyticsTimeoutMs / 1000 do
 						task.wait()
 					end
 					local state = p1.props.store:getState()
-					textChatService:SendExpChatLoadSuccess(var6, {
+					textChatService:SendExpChatLoadSuccess(var5, {
 						preset_bitmap = computePresetBitmap(if state.TextChannels then state.TextChannels.allTextChannels else {})
 					})
 				end)

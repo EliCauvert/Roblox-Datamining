@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("ChatUIPrimitives").Parent.AppCommonLib).Signal.new()

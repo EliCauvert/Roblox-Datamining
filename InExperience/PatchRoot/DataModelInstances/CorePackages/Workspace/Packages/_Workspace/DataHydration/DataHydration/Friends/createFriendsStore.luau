@@ -11,7 +11,6 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local localUserIdStore = require(parent.LocalUserIdStore).LocalUserIdStore
 local fFlagSduiRequestFriendshipAction = sharedFlagsModule.FFlagSduiRequestFriendshipAction
 local fFlagEnableGetFriendshipStatus = sharedFlagsModule.FFlagEnableGetFriendshipStatus
-local fFlagEnableFriendsStoreChallengeInterceptor = sharedFlagsModule.FFlagEnableFriendsStoreChallengeInterceptor
 local fFlagFriendSortedByPresenceSignalsImplementation = sharedFlagsModule.FFlagFriendSortedByPresenceSignalsImplementation
 local fFlagFriendsStoreSortOnlineFriendsByRank = sharedFlagsModule.FFlagFriendsStoreSortOnlineFriendsByRank
 local fFlagPresenceRefetchTelemetryEnabledModule = require(dataHydration.Flags.FFlagPresenceRefetchTelemetryEnabled)
@@ -147,7 +146,7 @@ local _ = function(p5)
 end
 
 return function()
-	-- upvalues: presenceStoreModule (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), getLocalPlayerUserId (ref), createDataCacheModule (ref), onlineFriendsCacheTtlSec (ref), isFriendsWithCacheTtlSec (ref), allFriendsCacheTtlSec (ref), fFlagEnableGetFriendshipStatus (ref), fFlagSduiRequestFriendshipAction (ref), friendshipStatusCacheTtlSec (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), friendsCountCacheTtlSec (ref), localUserIdStore (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), mergeListsWithoutDuplicates (ref), mergeListsWithoutDuplicates_1 (ref), normalizePresenceRawDataModule (ref), presenceTypeModule (ref), normalizeStoredOnlineFriendRow (ref), normalizePresenceFromOnlineFriendsRow (ref), createDataResolverModule (ref), requestsModule (ref), mapFriendshipStatusToEnumModule (ref), cryoModule (ref), friendsPageSize (ref), initialFriendsPageSize (ref), findFriendsSortModule (ref), normalizeFindFriendsPageResponse (ref), mergeAllFriendsPage (ref), signalsModule (ref), fFlagFriendsStoreSortOnlineFriendsByRank (ref), dataStatus (ref), fFlagEnableFriendsStoreChallengeInterceptor (ref), fFlagPresenceRefetchTelemetryEnabledModule (ref)
+	-- upvalues: presenceStoreModule (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), getLocalPlayerUserId (ref), createDataCacheModule (ref), onlineFriendsCacheTtlSec (ref), isFriendsWithCacheTtlSec (ref), allFriendsCacheTtlSec (ref), fFlagEnableGetFriendshipStatus (ref), fFlagSduiRequestFriendshipAction (ref), friendshipStatusCacheTtlSec (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), friendsCountCacheTtlSec (ref), localUserIdStore (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), mergeListsWithoutDuplicates (ref), mergeListsWithoutDuplicates_1 (ref), normalizePresenceRawDataModule (ref), presenceTypeModule (ref), normalizeStoredOnlineFriendRow (ref), normalizePresenceFromOnlineFriendsRow (ref), createDataResolverModule (ref), requestsModule (ref), mapFriendshipStatusToEnumModule (ref), cryoModule (ref), friendsPageSize (ref), initialFriendsPageSize (ref), findFriendsSortModule (ref), normalizeFindFriendsPageResponse (ref), mergeAllFriendsPage (ref), signalsModule (ref), fFlagFriendsStoreSortOnlineFriendsByRank (ref), dataStatus (ref), fFlagPresenceRefetchTelemetryEnabledModule (ref)
 	local var5, var6
 	local var7 = presenceStoreModule.get()
 	local var8 = if fFlagFriendSortedByPresenceSignalsImplementation then nil else tostring(getLocalPlayerUserId())
@@ -174,7 +173,7 @@ return function()
 	end
 	var5 = {}
 	
-	local function var42(p5)
+	local function var14(p5)
 		-- upvalues: fFlagFriendSortedByPresenceSignalsImplementation (copy), localUserIdStore (copy), getLocalPlayerUserId (copy), var8 (ref), var12 (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy), mergeListsWithoutDuplicates (copy), mergeListsWithoutDuplicates_1 (copy)
 		local var15
 		if fFlagFriendSortedByPresenceSignalsImplementation then
@@ -848,11 +847,9 @@ return function()
 				return
 			end
 		end,
-		RequestFriendship = function(p20, p21, p22, p23)
-			-- upvalues: fFlagEnableFriendsStoreChallengeInterceptor (copy), fFlagEnableGetFriendshipStatus (copy), requestsModule (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
-			local var60 = if fFlagEnableFriendsStoreChallengeInterceptor then p23 else nil
-			
-			return (if fFlagEnableGetFriendshipStatus and p22 and p22.isContact then requestsModule.RequestFriendshipFromContactId(p20, var60) else requestsModule.RequestFriendshipFromUserId(p20, p21, var60)):andThen(function()
+		RequestFriendship = function(p20, p21, p22)
+			-- upvalues: fFlagEnableGetFriendshipStatus (copy), requestsModule (copy), fFlagSduiRequestFriendshipAction (copy), var6 (ref), UpdateIsFriendsWith (ref)
+			return (if fFlagEnableGetFriendshipStatus and p22 and p22.isContact then requestsModule.RequestFriendshipFromContactId(p20) else requestsModule.RequestFriendshipFromUserId(p20, p21)):andThen(function()
 				-- upvalues: p20 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
 				local friendRequestSent = Enum.FriendStatus.FriendRequestSent
 				
@@ -862,19 +859,19 @@ return function()
 					
 					return
 				end
-			end):catch(function(p24)
+			end):catch(function(p23)
 				-- upvalues: p20 (ref), fFlagEnableGetFriendshipStatus (copy), fFlagSduiRequestFriendshipAction (copy), var6 (copy), UpdateIsFriendsWith (copy)
-				if (if type(p24) == "table" then p24.firstErrorCode else nil) ~= 5 then
-					error(p24)
+				if (if type(p23) == "table" then p23.firstErrorCode else nil) ~= 5 then
+					error(p23)
 					
 					return
 				end
-				local var61 = p20
+				local var60 = p20
 				local friend = Enum.FriendStatus.Friend
 				
 				if fFlagEnableGetFriendshipStatus or fFlagSduiRequestFriendshipAction then
-					var6.replaceItem(var61, friend)
-					UpdateIsFriendsWith(var61, friend == Enum.FriendStatus.Friend)
+					var6.replaceItem(var60, friend)
+					UpdateIsFriendsWith(var60, friend == Enum.FriendStatus.Friend)
 					
 					return
 				end

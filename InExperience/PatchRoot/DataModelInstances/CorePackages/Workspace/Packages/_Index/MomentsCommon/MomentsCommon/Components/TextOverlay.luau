@@ -3,7 +3,6 @@ local parent = momentsCommon.Parent
 local textService = game:GetService("TextService")
 local fFlagMomentsTextOverlayFixedContrastModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayFixedContrast)
 local fFlagMomentsTextOverlayChipGrowAboveKeyboardModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayChipGrowAboveKeyboard)
-local fFlagMomentsTextOverlayEdgeClipFixModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayEdgeClipFix)
 local fFlagMomentsTextOverlayV2RedesignModule = require(momentsCommon.Flags.FFlagMomentsTextOverlayV2Redesign)
 local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagMomentsStickerButton)
 local foundationModule = require(parent.Foundation)
@@ -27,7 +26,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: getFFlagMomentsStickerButtonModule (ref), fFlagMomentsTextOverlayFixedContrastModule (ref), foundationModule (ref), fFlagMomentsTextOverlayV2RedesignModule (ref), useState (ref), responsiveModule (ref), reactModule (ref), useCallback (ref), t (ref), t_1 (ref), fFlagMomentsTextOverlayEdgeClipFixModule (ref), textService (ref), fFlagMomentsTextOverlayChipGrowAboveKeyboardModule (ref), insertNewlineAtCursorModule (ref), view (ref), hexColor (ref), textOverlaySelectionControlsModule (ref)
+	-- upvalues: getFFlagMomentsStickerButtonModule (ref), fFlagMomentsTextOverlayFixedContrastModule (ref), foundationModule (ref), fFlagMomentsTextOverlayV2RedesignModule (ref), useState (ref), responsiveModule (ref), reactModule (ref), useCallback (ref), t (ref), t_1 (ref), textService (ref), fFlagMomentsTextOverlayChipGrowAboveKeyboardModule (ref), insertNewlineAtCursorModule (ref), view (ref), hexColor (ref), textOverlaySelectionControlsModule (ref)
 	local _ = nil
 	local var1 = if getFFlagMomentsStickerButtonModule() then p1.overlayEdit or p1.textOverlayEdit else p1.textOverlayEdit
 	local var2 = if fFlagMomentsTextOverlayFixedContrastModule then foundationModule.Hooks.useTokens().DarkMode.System.Contrast else nil
@@ -95,22 +94,15 @@ return function(p1)
 	local var15 = if fFlagMomentsTextOverlayV2RedesignModule and p1.editable == true then reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(300, 1e999) }) else nil
 	local var16 = if fFlagMomentsTextOverlayV2RedesignModule then t[var1.textOverlayStyle.font] else nil
 	local var17 = if var16 then math.ceil(var1.textOverlayStyle.fontSize * var16) else 0
-	local var18 = if p1.fitToContent ~= nil then p1.size == nil else p1.fitToContent
-	local var19 = 0
-	local var20 = 0
+	local var18 = 0
 	
-	if fFlagMomentsTextOverlayV2RedesignModule and var18 then
-		var19 = math.ceil(var1.textOverlayStyle.fontSize * (t_1[var1.textOverlayStyle.font] or 0.03))
-		
-		if fFlagMomentsTextOverlayEdgeClipFixModule then
-			var20 = math.ceil(textService:GetTextSize(" ", var1.textOverlayStyle.fontSize, var1.textOverlayStyle.font, Vector2.new(1000000, 1000000)).X)
-		end
-		local textTextSize = textService:GetTextSize(var1.text, var1.textOverlayStyle.fontSize, var1.textOverlayStyle.font, Vector2.new(276 - var19 - var20 * 2, 1000000))
-		size = UDim2.fromOffset(math.ceil(textTextSize.X) + var19 + var20 * 2, math.ceil(textTextSize.Y) + var17)
+	if fFlagMomentsTextOverlayV2RedesignModule and (if p1.fitToContent ~= nil then p1.size == nil else p1.fitToContent) then
+		var18 = math.ceil(var1.textOverlayStyle.fontSize * (t_1[var1.textOverlayStyle.font] or 0.03))
+		local textTextSize = textService:GetTextSize(var1.text, var1.textOverlayStyle.fontSize, var1.textOverlayStyle.font, Vector2.new(276 - var18, 1000000))
+		size = UDim2.fromOffset(math.ceil(textTextSize.X) + var18, math.ceil(textTextSize.Y) + var17)
 		var15 = nil
 	end
-	local var21 = var19 + var20
-	local var22 = fFlagMomentsTextOverlayV2RedesignModule and (fFlagMomentsTextOverlayChipGrowAboveKeyboardModule and (p1.editable == true and var5 == responsiveModule.Input.Touch))
+	local var19 = fFlagMomentsTextOverlayV2RedesignModule and (fFlagMomentsTextOverlayChipGrowAboveKeyboardModule and (p1.editable == true and var5 == responsiveModule.Input.Touch))
 	local textBox = reactModule.createElement("TextBox", {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
@@ -119,9 +111,9 @@ return function(p1)
 		Font = var1.textOverlayStyle.font,
 		Interactable = p1.editable == true,
 		MultiLine = fFlagMomentsTextOverlayV2RedesignModule and p1.editable == true,
-		ManualFocusRelease = if var22 then true else nil,
-		ShouldEmitReturnEvents = if var22 then true else nil,
-		[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = if var22 then useCallback(function(p2)
+		ManualFocusRelease = if var19 then true else nil,
+		ShouldEmitReturnEvents = if var19 then true else nil,
+		[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = if var19 then useCallback(function(p2)
 			-- upvalues: insertNewlineAtCursorModule (copy)
 			local text = p2.Text
 			task.defer(function()
@@ -129,9 +121,9 @@ return function(p1)
 				if p2.Parent == nil or p2.Text ~= text then
 					return
 				end
-				local var23, var24 = insertNewlineAtCursorModule(p2.Text, p2.CursorPosition)
-				p2.Text = var23
-				p2.CursorPosition = var24
+				local var20, var21 = insertNewlineAtCursorModule(p2.Text, p2.CursorPosition)
+				p2.Text = var20
+				p2.CursorPosition = var21
 			end)
 		end, {}) else nil,
 		Text = var1.text,
@@ -142,16 +134,14 @@ return function(p1)
 		TextWrapped = true,
 		Selectable = p1.editable == true,
 		Size = size,
-		Visible = if p1.textVisible == false then false else nil,
 		ZIndex = var1.zIndex,
 		ref = p1.textBoxRef,
 		[reactModule.Change.Text] = p1.onTextChanged
 	}, {
 		WrapWidth = var15,
-		FontQuirkPadding = if var16 or var21 > 0 then reactModule.createElement("UIPadding", {
-			PaddingLeft = if var20 > 0 then UDim.new(0, var20) else nil,
+		FontQuirkPadding = if var16 or var18 > 0 then reactModule.createElement("UIPadding", {
 			PaddingTop = if var16 then UDim.new(0, var17) else nil,
-			PaddingRight = if var21 > 0 then UDim.new(0, var21) else nil
+			PaddingRight = if var18 > 0 then UDim.new(0, var18) else nil
 		}) else nil
 	})
 	local t_2 = {
@@ -174,7 +164,7 @@ return function(p1)
 	local vector2 = Vector2.new(300, 1e999)
 	
 	if fFlagMomentsTextOverlayV2RedesignModule and p1.selected == true then
-		local var23 = var5 == responsiveModule.Input.Pointer and not var3
+		local var20 = var5 == responsiveModule.Input.Pointer and not var3
 		local t_3 = {
 			tag = "auto-xy padding-medium radius-medium bg-contrast",
 			GroupTransparency = var6,
@@ -189,7 +179,7 @@ return function(p1)
 			t_3.backgroundStyle = var2
 			t_3.tag = "auto-xy padding-medium radius-medium"
 		end
-		local var24 = reactModule.createElement(view, {
+		local var21 = reactModule.createElement(view, {
 			tag = "auto-xy radius-medium",
 			ZIndex = 1,
 			padding = {
@@ -204,7 +194,7 @@ return function(p1)
 			stroke = {
 				Thickness = 1.5,
 				Color = hexColor,
-				Transparency = if var23 then 0.45 else 1
+				Transparency = if var20 then 0.45 else 1
 			}
 		}, {
 			Chip = reactModule.createElement(view, t_3, { TextInput = textBox })
@@ -214,7 +204,7 @@ return function(p1)
 		
 		return reactModule.createElement(view, t_2, {
 			UIDragDetector = var14,
-			Selection = var24,
+			Selection = var21,
 			SelectionControls = reactModule.createElement(textOverlaySelectionControlsModule, {
 				borderGap = 4,
 				containerRef = p1.containerRef,
@@ -222,7 +212,7 @@ return function(p1)
 				onScaleChanged = p1.onScaleChanged,
 				rotation = var1.rotation,
 				scale = var1.scale,
-				visible = var23
+				visible = var20
 			})
 		})
 	elseif fFlagMomentsTextOverlayV2RedesignModule then
@@ -240,11 +230,11 @@ return function(p1)
 			t_3.backgroundStyle = var2
 			t_3.tag = "auto-xy padding-medium radius-medium"
 		end
-		local var25 = reactModule.createElement(view, t_3, { TextInput = textBox })
+		local var22 = reactModule.createElement(view, t_3, { TextInput = textBox })
 		t_2.scale = nil
 		t_2.tag = "position-center-center anchor-center-center auto-xy"
 		
-		return reactModule.createElement(view, t_2, { UIDragDetector = var14, Chip = var25 })
+		return reactModule.createElement(view, t_2, { UIDragDetector = var14, Chip = var22 })
 	else
 		t_2.tag = "position-center-center anchor-center-center auto-xy padding-medium radius-medium bg-contrast"
 		t_2.sizeConstraint = { MaxSize = vector2 }

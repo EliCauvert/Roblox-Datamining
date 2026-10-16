@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXLeaveCatalogToAvatarPromptHandleSubcategoryFilters", false)
+﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXLeaveCatalogToAvatarPromptHandleSubcategoryFilters", false)

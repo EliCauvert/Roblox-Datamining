@@ -5,7 +5,7 @@ local analyticsUnitModule = require(buildExperience.Analytics.AnalyticsUnit)
 return {
 	templateFor = function(p1)
 		-- upvalues: analyticsUnitModule (ref), analyticsKeysModule (ref)
-		return if p1 == analyticsUnitModule.Percent then analyticsKeysModule.ANALYTICS_PERCENT_TEMPLATE elseif p1 == analyticsUnitModule.Minutes then analyticsKeysModule.ANALYTICS_DURATION_MINUTES_TEMPLATE elseif p1 == analyticsUnitModule.Temporal then analyticsKeysModule.ANALYTICS_DURATION_TEMPLATE else nil
+		return if p1 == analyticsUnitModule.Percent then analyticsKeysModule.ANALYTICS_PERCENT_TEMPLATE elseif p1 == analyticsUnitModule.Temporal then analyticsKeysModule.ANALYTICS_DURATION_TEMPLATE else nil
 	end,
 	fillTemplate = function(p1, p2)
 		return string.gsub(p1, "{number}", function()

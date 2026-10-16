@@ -14,7 +14,6 @@ local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
 local fFlagAXMISSmallUIChanges = avatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
 local fFlagAXMISWithOffers = avatarExperienceFlagsModule.FFlagAXMISWithOffers
-local fFlagAXGifting = avatarExperienceFlagsModule.FFlagAXGifting
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 local getItemPurchaseActionType = avatarExperienceCommonModule.Utils.getItemPurchaseActionType
@@ -38,7 +37,7 @@ local _ = {
 }
 
 local function getItemCartData(p1, p2)
-	-- upvalues: constants (ref), fFlagAXMISWithOffers (ref), fFlagAXMISSmallUIChanges (ref), purchaseItemsErrorStatusMapModule (ref), tutilsModule (ref), getItemPurchaseActionType (ref), itemPurchaseActionTypeEnum (ref), fFlagAXDurablesForMIS (ref), itemTileEnums (ref), fFlagAXGifting (ref)
+	-- upvalues: constants (ref), fFlagAXMISWithOffers (ref), fFlagAXMISSmallUIChanges (ref), purchaseItemsErrorStatusMapModule (ref), tutilsModule (ref), getItemPurchaseActionType (ref), itemPurchaseActionTypeEnum (ref), fFlagAXDurablesForMIS (ref), itemTileEnums (ref)
 	if p1.itemId == constants.AVATAR_BLOCKY_DEFAULT_BUNDLE_ID then
 		return {
 			itemSubType = "1",
@@ -120,7 +119,7 @@ local function getItemCartData(p1, p2)
 	t.creatorName = if fFlagAXMISSmallUIChanges then nil else name
 	t.creatorVerified = if fFlagAXMISSmallUIChanges then nil else hasVerifiedBadge
 	t.collectibleProductId = var4
-	t.collectibleItemId = if fFlagAXMISWithOffers or fFlagAXGifting then collectibleItemId else nil
+	t.collectibleItemId = if fFlagAXMISWithOffers then collectibleItemId else nil
 	t.status = QUANTITY_LIMIT_EXCEEDED
 	t.priceInRobux = var3
 	t.name = name_1

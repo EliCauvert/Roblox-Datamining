@@ -94,7 +94,6 @@ local function buildFromLegacy(p3, p4)
 		} else nil,
 		cards = if getFFlagEnableSocialCards() then p3.cards else nil,
 		filtered_for_receivers = p3.filteredForReceivers,
-		is_previewable = p3.isPreviewable,
 		conversationId = p4,
 		status = if p3.isSending then messageStatus.Pending elseif p3.failed then messageStatus.Failed elseif p3.moderated then messageStatus.Moderated elseif p3.visibility == messageVisibility.Hidden then messageStatus.Hidden else messageStatus.Default,
 		stableKey = p3.stableKey or (p3.stable_key or (p3.id or p3.messageId))

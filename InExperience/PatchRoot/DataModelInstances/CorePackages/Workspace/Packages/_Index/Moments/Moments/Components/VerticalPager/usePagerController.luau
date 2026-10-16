@@ -132,7 +132,7 @@ return function(p1)
 			return
 		end
 	end, { scrollingFrame, var28, var25 })
-	local var30 = reactModule.useCallback(function(p2, p3, p4)
+	local var30 = reactModule.useCallback(function(p2, p3)
 		-- upvalues: scrollingFrame (ref), var1 (ref), snapMathModule (copy), var6 (ref), var17 (ref), var2 (ref), var3 (ref), var8 (ref), var28 (ref), var26 (ref), var25 (ref), var11 (ref), var29 (ref)
 		if not scrollingFrame then return end
 		local current = var1.current
@@ -140,15 +140,11 @@ return function(p1)
 		local currentIndex = current.getCurrentIndex(false)
 		local current_1 = var6.current
 		local var32 = if var31 == currentIndex or current_1 == nil then nil else current_1.onTargetCommitted
-		local var33 = if p4 and var31 ~= currentIndex and current_1 ~= nil then current_1.onUserStep else nil
 		
 		local function _()
-			-- upvalues: var32 (ref), currentIndex (ref), var31 (ref), current (ref), var33 (ref)
+			-- upvalues: var32 (ref), currentIndex (ref), var31 (ref), current (ref)
 			if var32 ~= nil then
 				var32(currentIndex, var31, current.getItems(false)[var31])
-			end
-			if var33 ~= nil then
-				var33(currentIndex, var31)
 			end
 			current.goToItem(var31)
 		end
@@ -159,25 +155,19 @@ return function(p1)
 			if var32 ~= nil then
 				var32(currentIndex, var31, current.getItems(false)[var31])
 			end
-			if var33 ~= nil then
-				var33(currentIndex, var31)
-			end
 			current.goToItem(var31)
 			
 			return
 		else
-			local var34 = snapMathModule.offsetForIndex(var31, var3.current)
+			local var33 = snapMathModule.offsetForIndex(var31, var3.current)
 			
 			if var8.current then
 				if var32 ~= nil then
 					var32(currentIndex, var31, current.getItems(false)[var31])
 				end
-				if var33 ~= nil then
-					var33(currentIndex, var31)
-				end
 				current.goToItem(var31)
 				var28()
-				scrollingFrame.CanvasPosition = Vector2.new(0, var34)
+				scrollingFrame.CanvasPosition = Vector2.new(0, var33)
 				var26(var31)
 				var25("Idle")
 				
@@ -188,12 +178,9 @@ return function(p1)
 			if var32 ~= nil then
 				var32(currentIndex, var31, current.getItems(false)[var31])
 			end
-			if var33 ~= nil then
-				var33(currentIndex, var31)
-			end
 			current.goToItem(var31)
 			var11.current = p3
-			var29(var34)
+			var29(var33)
 		end
 	end, {
 		scrollingFrame,
@@ -220,7 +207,7 @@ return function(p1)
 				velocity = p2
 			})
 		end
-		var30(var32, -p2, true)
+		var30(var32, -p2)
 	end, { scrollingFrame, var30 })
 	local var32 = reactModule.useCallback(function(p2)
 		-- upvalues: var30 (ref)
@@ -228,11 +215,11 @@ return function(p1)
 	end, { var30 })
 	local var33 = reactModule.useCallback(function()
 		-- upvalues: var30 (ref), var1 (ref)
-		var30(var1.current.getCurrentIndex(false) + 1, 0, true)
+		var30(var1.current.getCurrentIndex(false) + 1, 0)
 	end, { var30 })
 	local var34 = reactModule.useCallback(function()
 		-- upvalues: var30 (ref), var1 (ref)
-		var30(var1.current.getCurrentIndex(false) - 1, 0, true)
+		var30(var1.current.getCurrentIndex(false) - 1, 0)
 	end, { var30 })
 	local var35 = reactModule.useCallback(function(p2)
 		-- upvalues: var1 (ref), var22 (ref), snapMathModule (copy), var2 (ref), scrollingFrame (ref), var8 (ref), var17 (ref), var11 (ref), var29 (ref), var3 (ref)
@@ -299,7 +286,7 @@ return function(p1)
 					local var37 = snapMathModule.resolveSettleIndex(currentIndex, y, current, var1.current.getCount(false), constantsModule.WHEEL_PAGE_TURN_FRACTION, 1)
 					
 					if var37 ~= currentIndex or constantsModule.POSITION_THRESHOLD < math.abs(y - snapMathModule.offsetForIndex(currentIndex, current)) then
-						var30(var37, 0, true)
+						var30(var37, 0)
 					end
 				end
 				
@@ -381,7 +368,7 @@ return function(p1)
 			var16.current = var38
 			
 			if var37 then
-				var30(var1.current.getCurrentIndex(false) + p2, 0, true)
+				var30(var1.current.getCurrentIndex(false) + p2, 0)
 			end
 		end
 		
@@ -401,7 +388,7 @@ return function(p1)
 						var16.current = var38
 						
 						if var37 then
-							var30(var1.current.getCurrentIndex(false) + -1, 0, true)
+							var30(var1.current.getCurrentIndex(false) + -1, 0)
 							
 							return
 						end
@@ -410,7 +397,7 @@ return function(p1)
 						var16.current = var40
 						
 						if var39 then
-							var30(var1.current.getCurrentIndex(false) + 1, 0, true)
+							var30(var1.current.getCurrentIndex(false) + 1, 0)
 						end
 					end
 					return

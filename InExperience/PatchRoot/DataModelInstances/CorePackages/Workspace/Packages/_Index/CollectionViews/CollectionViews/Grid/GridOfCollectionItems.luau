@@ -4,6 +4,8 @@ local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local argCheckModule = require(parent.ArgCheck)
 local calculateRelativeColumnGapModule = require(collectionViews.Grid.calculateRelativeColumnGap)
+local calculateSpacePerItemModule = require(collectionViews.calculateSpacePerItem)
+local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
 local luaAppFixCollectionGridWindowAbsoluteCanvasSize = game:DefineFastFlag("LuaAppFixCollectionGridWindowAbsoluteCanvasSize", false)
 local luaAppGridReuseUnchangedTileElements = game:DefineFastFlag("LuaAppGridReuseUnchangedTileElements", false)
 local t = {
@@ -18,7 +20,7 @@ local t = {
 }
 
 return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), luaAppFixCollectionGridWindowAbsoluteCanvasSize (ref), luaAppGridReuseUnchangedTileElements (ref), argCheckModule (ref), calculateRelativeColumnGapModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), luaAppFixCollectionGridWindowAbsoluteCanvasSize (ref), luaAppGridReuseUnchangedTileElements (ref), argCheckModule (ref), fFlagCollectionViewMathChanges (ref), calculateSpacePerItemModule (ref), calculateRelativeColumnGapModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = reactModule.useRef(nil)
 	local minValue = math.min(math.ceil(#var1.items / var1.numColumns), var1.maxNumRows)
@@ -140,7 +142,7 @@ return reactModule.memo(function(p1)
 		LayoutOrder = var1.LayoutOrder,
 		Position = var1.Position
 	}, reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var6 (write), maxValue (ref), maxValue_1 (ref), var1 (ref), minValue (ref), argCheckModule (copy), reactModule (copy), calculateRelativeColumnGapModule (copy), luaAppGridReuseUnchangedTileElements (copy), var13 (ref), var8 (ref)
+		-- upvalues: var4 (ref), var6 (write), maxValue (ref), maxValue_1 (ref), var1 (ref), minValue (ref), argCheckModule (copy), reactModule (copy), fFlagCollectionViewMathChanges (copy), calculateSpacePerItemModule (copy), calculateRelativeColumnGapModule (copy), luaAppGridReuseUnchangedTileElements (copy), var13 (ref), var8 (ref)
 		local t = {}
 		
 		if var4 <= 0 or var6 < var4 then
@@ -162,18 +164,31 @@ return reactModule.memo(function(p1)
 				end)
 			})
 		end
-		local var15
+		local uDim2, var15
 		local var16 = minValue - var4 + 1
 		argCheckModule.assert(var16 >= 1)
 		argCheckModule.assert(var1.numColumns >= 1)
-		local var17 = var1.numColumns - 1
-		t.Layout = reactModule.createElement("UIGridLayout", {
-			FillDirectionMaxCells = var1.numColumns,
-			CellPadding = if var1.disableRelativeGap then UDim2.new(0, var1.columnGap + (math.floor(var17 / var1.numColumns * var1.columnGap) * var1.numColumns - var1.columnGap * var17) / var17, 0, var1.verticalPadding) else var1.itemSizeBinding:map(function(p2)
+		local _ = nil
+		local _ = nil
+		
+		if fFlagCollectionViewMathChanges then
+			local var17 = calculateSpacePerItemModule(var1.numColumns, var1.columnGap)
+			local var18 = calculateSpacePerItemModule(var16, var1.verticalPadding)
+			uDim2 = UDim2.new(1 / var1.numColumns, -var17.gapOffsetPerItem, 1 / var16, -var18.gapOffsetPerItem)
+			var15 = UDim2.new(0, var17.adjustedGap, 0, var18.adjustedGap)
+		else
+			local var19 = var1.numColumns - 1
+			uDim2 = UDim2.new(1 / var1.numColumns, math.floor(-(var19 / var1.numColumns) * var1.columnGap), 1 / var16, math.floor(-((var16 - 1) / var16) * var1.verticalPadding))
+			var15 = if var1.disableRelativeGap then UDim2.new(0, var1.columnGap + (math.floor(var19 / var1.numColumns * var1.columnGap) * var1.numColumns - var1.columnGap * var19) / var19, 0, var1.verticalPadding) else var1.itemSizeBinding:map(function(p2)
 				-- upvalues: calculateRelativeColumnGapModule (copy), var1 (copy)
 				return UDim2.new(calculateRelativeColumnGapModule(var1.numColumns, var1.columnGap, p2.X, var1.sideMargin), 0, 0, var1.verticalPadding)
-			end),
-			CellSize = UDim2.new(1 / var1.numColumns, math.floor(-(var17 / var1.numColumns) * var1.columnGap), 1 / var16, math.floor(-((var16 - 1) / var16) * var1.verticalPadding)),
+			end)
+		end
+		local var20
+		t.Layout = reactModule.createElement("UIGridLayout", {
+			FillDirectionMaxCells = var1.numColumns,
+			CellPadding = var15,
+			CellSize = uDim2,
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
@@ -190,29 +205,29 @@ return reactModule.memo(function(p1)
 				if i > #var1.items then
 					continue
 				end
-				local var18, var19
+				local var21, var22
 				local ceiled = math.ceil(i / var1.numColumns)
-				var15 = var1.items[i]
-				local var20 = current[i]
+				var20 = var1.items[i]
+				local var23 = current[i]
 				local _ = nil
 				local _ = nil
 				
-				if var20 and var20.entry == var15 and (var20.renderItem == var1.renderItem and var20.rowNum == ceiled) then
-					var18 = var20.element
-					var19 = var20.keyPrefix
+				if var23 and var23.entry == var20 and (var23.renderItem == var1.renderItem and var23.rowNum == ceiled) then
+					var21 = var23.element
+					var22 = var23.keyPrefix
 				else
-					local var21, var22 = var1.renderItem(var15, i, UDim2.fromScale(1, 1), ceiled)
-					var18 = var21
-					var19 = var22
+					local var24, var25 = var1.renderItem(var20, i, UDim2.fromScale(1, 1), ceiled)
+					var21 = var24
+					var22 = var25
 				end
 				t_1[i] = {
-					entry = var15,
+					entry = var20,
 					renderItem = var1.renderItem,
 					rowNum = ceiled,
-					element = var18,
-					keyPrefix = var19
+					element = var21,
+					keyPrefix = var22
 				}
-				t[`{var19}{i % (var8 * var1.numColumns)}`] = var18
+				t[`{var22}{i % (var8 * var1.numColumns)}`] = var21
 			end
 			var13.current = t_1
 			
@@ -220,8 +235,8 @@ return reactModule.memo(function(p1)
 		else
 			for i_1 = maxValue, maxValue_1 do
 				if i_1 <= #var1.items then
-					var49, var43 = var1.renderItem(var1.items[i_1], i_1, UDim2.fromScale(1, 1), math.ceil(i_1 / var1.numColumns))
-					t[`{var15}{i_1 % (var8 * var1.numColumns)}`] = var49
+					var54, var48 = var1.renderItem(var1.items[i_1], i_1, UDim2.fromScale(1, 1), math.ceil(i_1 / var1.numColumns))
+					t[`{var20}{i_1 % (var8 * var1.numColumns)}`] = var54
 				end
 			end
 			return t
@@ -229,6 +244,8 @@ return reactModule.memo(function(p1)
 	end, {
 		var1.columnGap, var1.numColumns, var1.itemSizeBinding, var4, var6,
 		var1.items, var1.renderItem, var1.verticalPadding, var8, minValue,
-		var1.sideMargin, maxValue, maxValue_1, var1.disableRelativeGap
+		if not fFlagCollectionViewMathChanges then var1.sideMargin else nil, maxValue,
+		maxValue_1,
+		if not fFlagCollectionViewMathChanges then var1.disableRelativeGap else nil
 	}))
 end)

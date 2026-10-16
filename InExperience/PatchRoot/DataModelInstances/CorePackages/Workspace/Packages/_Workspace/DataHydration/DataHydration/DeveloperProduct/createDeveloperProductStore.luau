@@ -37,21 +37,12 @@ return function(p1)
 		}
 	end
 	
-	local function readBackMutation(p2, p3, p4, p5)
-		-- upvalues: fetchDeveloperProductModule (copy), t (ref), var1 (ref), promiseModule (copy)
+	local function readBackMutation(p2, p3, p4)
+		-- upvalues: fetchDeveloperProductModule (copy), t (ref), promiseModule (copy), var1 (ref)
 		local var2 = fetchDeveloperProductModule.get(p2, p3.productId, t)
 		
 		return (if p4 == nil then var2:catch(function()
-			-- upvalues: p5 (ref), var1 (copy), p2 (ref), promiseModule (copy), p3 (ref)
-			if p5 then
-				var1.fetch(p2)
-				
-				return promiseModule.reject({
-					errorMessage = "The developer product update may have saved, but its text could not be verified because the follow-up read failed. List the product before retrying.",
-					outcome = "unverified",
-					product = { productId = p3.productId }
-				})
-			end
+			-- upvalues: p3 (ref)
 			return p3
 		end) else var2:catch(function()
 			-- upvalues: promiseModule (copy), p3 (ref)
@@ -59,12 +50,12 @@ return function(p1)
 				errorMessage = ("Developer product %s was created, but its uploaded image could not be verified because %s. Do not create another product; inspect the existing product before retrying."):format(tostring(p3.productId), "the product could not be read back"),
 				product = p3
 			})
-		end)):andThen(function(p6)
+		end)):andThen(function(p5)
 			-- upvalues: var1 (copy), p2 (ref), p4 (ref), promiseModule (copy), p3 (ref)
 			var1.fetch(p2)
 			
-			if p4 == nil or p6.iconImageAssetId == p4 then
-				return p6
+			if p4 == nil or p5.iconImageAssetId == p4 then
+				return p5
 			end
 			local var3 = p3
 			
@@ -79,7 +70,6 @@ return function(p1)
 		getProducts = var1.get,
 		fetchProducts = var1.fetch,
 		getAndFetchProducts = var1.getAndFetch,
-		getAccountResetGeneration = var1.getAccountResetGeneration,
 		list = list,
 		get = get,
 		create = function(p2, p3)
@@ -92,11 +82,11 @@ return function(p1)
 				})
 			end)
 		end,
-		update = function(p2, p3, p4, p5)
+		update = function(p2, p3, p4)
 			-- upvalues: fetchDeveloperProductModule (copy), t (ref), readBackMutation (ref)
-			return fetchDeveloperProductModule.update(p2, p3, p4, t):andThen(function(p6)
-				-- upvalues: readBackMutation (copy), p2 (ref), p5 (ref)
-				return readBackMutation(p2, p6, nil, p5)
+			return fetchDeveloperProductModule.update(p2, p3, p4, t):andThen(function(p5)
+				-- upvalues: readBackMutation (copy), p2 (ref)
+				return readBackMutation(p2, p5)
 			end)
 		end,
 		activate = function(p2, p3)

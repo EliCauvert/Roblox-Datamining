@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXBackgroundsHidePlusUpsellsWhenGuacDisabled", false) and require(script.Parent.FFlagAXBackgroundGeneration)

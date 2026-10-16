@@ -15,7 +15,6 @@ local clientServerButtonModule = require(parent.ClientServerButton)
 local checkboxContainerModule = require(parent.CheckboxContainer)
 local tabRowContainerModule = require(parent.TabRowContainer)
 local searchBarModule = require(parent.SearchBar)
-local getFFlagVoiceDebugConsoleV2Module = require(parent.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
 local utilAndTab = roactModule.Component:extend("UtilAndTab")
 
 function utilAndTab.init(p1)
@@ -28,12 +27,12 @@ function utilAndTab.init(p1)
 		var1 += textService:GetTextSize(i, constantsModule.DefaultFontSize.TabBar, constantsModule.Font.TabBar, Vector2.new(0, 0)).X
 		var2 += 1
 	end
-	function p0.showSearchBar()
+	function p1.showSearchBar()
 		-- upvalues: p1 (ref)
 		p1:setState({ activeSearchTerm = true })
 	end
 	
-	function p0.cancelInput(_, p2)
+	function p1.cancelInput(_, p2)
 		-- upvalues: p1 (ref)
 		if p2.UserInputType == Enum.UserInputType.MouseButton1 or p2.UserInputType == Enum.UserInputType.Touch and p2.UserInputState == Enum.UserInputState.End then
 			if p1.searchRef.current then
@@ -48,7 +47,7 @@ function utilAndTab.init(p1)
 		end
 	end
 	
-	function p0.focusLost(p2, p3, _)
+	function p1.focusLost(p2, p3, _)
 		-- upvalues: p1 (ref)
 		if p3 then
 			local text = p2.text
@@ -75,7 +74,7 @@ function utilAndTab.init(p1)
 end
 
 function utilAndTab.render(p2)
-	-- upvalues: tabOverlapThreshold (ref), constantsModule (ref), smallFrameHeight (ref), frameHeight_1 (ref), roactModule (ref), clientServerButtonWidth (ref), mainRowPadding (ref), smallUtilPadding (ref), tabDropDownWidth (ref), clientServerDropDownWidth (ref), textService (ref), tabRowContainerModule (ref), clientServerButtonModule (ref), checkboxContainerModule (ref), getFFlagVoiceDebugConsoleV2Module (ref), searchBarModule (ref), frameHeight (ref)
+	-- upvalues: tabOverlapThreshold (ref), constantsModule (ref), smallFrameHeight (ref), frameHeight_1 (ref), roactModule (ref), clientServerButtonWidth (ref), mainRowPadding (ref), smallUtilPadding (ref), tabDropDownWidth (ref), clientServerDropDownWidth (ref), textService (ref), tabRowContainerModule (ref), clientServerButtonModule (ref), checkboxContainerModule (ref), searchBarModule (ref), frameHeight (ref)
 	local windowWidth = p2.props.windowWidth
 	local formFactor = p2.props.formFactor
 	local tabList = p2.props.tabList
@@ -174,8 +173,7 @@ function utilAndTab.render(p2)
 					Visible = not activeSearchTerm,
 					[roactModule.Event.Activated] = p2.showSearchBar
 				}),
-				Buttons = frame,
-				ExtraContent = if getFFlagVoiceDebugConsoleV2Module() then p2.props.extraContent else nil
+				Buttons = frame
 			}),
 			SearchBarFrame = roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
@@ -267,8 +265,7 @@ function utilAndTab.render(p2)
 					cancelInput = p2.cancelInput,
 					focusLost = p2.focusLost
 				}),
-				Buttons = frame,
-				ExtraContent = if getFFlagVoiceDebugConsoleV2Module() then p2.props.extraContent else nil
+				Buttons = frame
 			})
 		})
 	end

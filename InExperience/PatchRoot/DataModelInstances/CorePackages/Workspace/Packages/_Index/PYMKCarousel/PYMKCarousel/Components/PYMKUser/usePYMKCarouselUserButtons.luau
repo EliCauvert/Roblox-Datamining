@@ -21,8 +21,6 @@ local getFFlagPYMKDisableButtonsOnFetchModule = require(parent.Flags.getFFlagPYM
 local fFlagMigrateFriendshipStatusesPYMKModule = require(parent.Flags.FFlagMigrateFriendshipStatusesPYMK)
 local fFlagLuaAppEnableSduiHomePage = require(parent_1.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local useGetFriendshipStatus = require(parent_1.FriendsHydrationReact).useGetFriendshipStatus
-local friendsStoreChallengeNetworkModule = require(parent.friendsStoreChallengeNetwork)
-local fFlagEnableFriendsStoreChallengeInterceptor = require(parent_1.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local var1 = require(parent_1.DataHydration).Friends.FriendsStore.get()
 local focusNavigationEventNameEnum = require(parent_1.FocusNavigationUtils).FocusNavigationEventNameEnum
 local _ = require(parent_1.UserList)
@@ -35,7 +33,7 @@ local _ = function(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useSelector (ref), fFlagMigrateFriendshipStatusesPYMKModule (ref), useGetFriendshipStatus (ref), t (ref), roduxFriends (ref), fFlagLuaAppEnableSduiHomePage (ref), getDeepValue (ref), getFFlagPYMKDisableButtonsOnFetchModule (ref), networkingFriends (ref), networkStatus (ref), react (ref), images (ref), eventNames (ref), var1 (ref), textKeysModule (ref), focusNavigationEventNameEnum (ref), httpService (ref), contextualInfoTypes (ref), friendshipOriginSourceType (ref), t_1 (ref), fFlagEnableFriendsStoreChallengeInterceptor (ref), friendsStoreChallengeNetworkModule (ref)
+	-- upvalues: useDispatch (ref), useSelector (ref), fFlagMigrateFriendshipStatusesPYMKModule (ref), useGetFriendshipStatus (ref), t (ref), roduxFriends (ref), fFlagLuaAppEnableSduiHomePage (ref), getDeepValue (ref), getFFlagPYMKDisableButtonsOnFetchModule (ref), networkingFriends (ref), networkStatus (ref), react (ref), images (ref), eventNames (ref), var1 (ref), textKeysModule (ref), focusNavigationEventNameEnum (ref), httpService (ref), contextualInfoTypes (ref), friendshipOriginSourceType (ref), t_1 (ref)
 	local var2, var3
 	local var4 = tostring(p1.userId)
 	local var5 = useDispatch()
@@ -70,7 +68,7 @@ return function(p1)
 		}
 	end) else nil
 	local var9 = react.useMemo(function()
-		-- upvalues: var7 (write), images (copy), var3 (write), fFlagMigrateFriendshipStatusesPYMKModule (copy), getFFlagPYMKDisableButtonsOnFetchModule (copy), var8 (ref), p1 (ref), eventNames (copy), var2 (write), var4 (ref), var1 (copy), var5 (ref), networkingFriends (copy), var6 (ref), textKeysModule (copy), focusNavigationEventNameEnum (copy), httpService (copy), contextualInfoTypes (copy), friendshipOriginSourceType (copy), t_1 (copy), fFlagEnableFriendsStoreChallengeInterceptor (copy), friendsStoreChallengeNetworkModule (copy)
+		-- upvalues: var7 (write), images (copy), var3 (write), fFlagMigrateFriendshipStatusesPYMKModule (copy), getFFlagPYMKDisableButtonsOnFetchModule (copy), var8 (ref), p1 (ref), eventNames (copy), var2 (write), var4 (ref), var1 (copy), var5 (ref), networkingFriends (copy), var6 (ref), textKeysModule (copy), focusNavigationEventNameEnum (copy), httpService (copy), contextualInfoTypes (copy), friendshipOriginSourceType (copy), t_1 (copy)
 		return if var7 == Enum.FriendStatus.FriendRequestSent then {
 			{
 				isSecondary = true,
@@ -114,7 +112,7 @@ return function(p1)
 				icon = images["icons/actions/friends/friendAdd"],
 				isDisabled = if getFFlagPYMKDisableButtonsOnFetchModule() then if var8 then var8.RequestFriendshipFromUserId else false else false,
 				onActivated = function()
-					-- upvalues: p1 (copy), eventNames (copy), var2 (copy), var4 (copy), httpService (copy), fFlagMigrateFriendshipStatusesPYMKModule (copy), networkingFriends (copy), var6 (copy), contextualInfoTypes (copy), friendshipOriginSourceType (copy), var5 (copy), var1 (copy), t_1 (copy), fFlagEnableFriendsStoreChallengeInterceptor (copy), friendsStoreChallengeNetworkModule (copy), textKeysModule (copy)
+					-- upvalues: p1 (copy), eventNames (copy), var2 (copy), var4 (copy), httpService (copy), fFlagMigrateFriendshipStatusesPYMKModule (copy), networkingFriends (copy), var6 (copy), contextualInfoTypes (copy), friendshipOriginSourceType (copy), var5 (copy), var1 (copy), t_1 (copy), textKeysModule (copy)
 					p1.fireAnalyticsEvent(eventNames.RequestFriendship, {
 						recommendationContextType = var2.contextType,
 						requestedId = var4,
@@ -135,7 +133,7 @@ return function(p1)
 						currentUserId = var6,
 						targetUserId = var4,
 						friendshipOriginSourceType = friendshipOriginSourceType.FriendRecommendations.rawValue()
-					})) elseif p1.contactId then var1.RequestFriendship(p1.contactId, friendshipOriginSourceType.FriendRecommendations.rawValue(), t_1, if fFlagEnableFriendsStoreChallengeInterceptor then friendsStoreChallengeNetworkModule else nil) else var1.RequestFriendship(var4, friendshipOriginSourceType.FriendRecommendations.rawValue(), nil, if fFlagEnableFriendsStoreChallengeInterceptor then friendsStoreChallengeNetworkModule else nil)):andThen(function()
+					})) elseif p1.contactId then var1.RequestFriendship(p1.contactId, friendshipOriginSourceType.FriendRecommendations.rawValue(), t_1) else var1.RequestFriendship(var4, friendshipOriginSourceType.FriendRecommendations.rawValue())):andThen(function()
 						-- upvalues: p1 (copy), textKeysModule (copy)
 						p1.showToast(textKeysModule.ConnectionRequestSentToast)
 					end):catch(function()

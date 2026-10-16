@@ -69,7 +69,6 @@
 		THUMBNAIL_HEIGHT = 144,
 		FOOTER_HEIGHT = 64
 	},
-	AssetCard = { WIDTH = 256 },
 	NavProps = { WIDE_MODE = "wideMode", TOP_BAR_HEIGHT = "topBarHeight" },
 	OptInVariant = {
 		OsaContextCard = "OsaContextCard",

@@ -3,25 +3,21 @@ local reactModule = require(parent.React)
 local impressionsTrackerModule = require(script.Parent.ImpressionsTracker)
 local useViewportBounds = require(parent.ViewportUtils).useViewportBounds
 local sharedFlagsModule = require(parent.SharedFlags)
-local signalsReactModule = require(parent.SignalsReact)
-local getShortcutBarStatusStore = require(parent.AppShortcutBarStore).GetShortcutBarStatusStore
 local fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
 local fFlagLuaAppRespectClipAncestorImpressions = sharedFlagsModule.FFlagLuaAppRespectClipAncestorImpressions
-local fFlagUnifyShortcutBarFixImpressions = sharedFlagsModule.FFlagUnifyShortcutBarFixImpressions
 
 return function(p1)
-	-- upvalues: fFlagUnifyShortcutBarFixImpressions (ref), signalsReactModule (ref), getShortcutBarStatusStore (ref), fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref), useViewportBounds (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), reactModule (ref), impressionsTrackerModule (ref)
+	-- upvalues: fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref), useViewportBounds (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), reactModule (ref), impressionsTrackerModule (ref)
 	local var1
-	local var2 = if fFlagUnifyShortcutBarFixImpressions then signalsReactModule.useSignalState(getShortcutBarStatusStore(false).getShortcutBarReservedHeight) else nil
 	local _ = nil
-	local var3 = nil
+	local var2 = nil
 	
 	if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then
-		local var4, var5 = useViewportBounds(p1.parentRef, nil, if fFlagLuaAppRespectClipAncestorImpressions then p1.respectClipAncestors else nil, if fFlagUnifyShortcutBarFixImpressions then var2 else nil)
-		var1 = var4
-		var3 = var5
+		local var3, var4 = useViewportBounds(p1.parentRef, nil, if fFlagLuaAppRespectClipAncestorImpressions then p1.respectClipAncestors else nil)
+		var1 = var3
+		var2 = var4
 	else
-		var1 = useViewportBounds(p1.parentRef, nil, if fFlagLuaAppRespectClipAncestorImpressions then p1.respectClipAncestors else nil, if fFlagUnifyShortcutBarFixImpressions then var2 else nil)
+		var1 = useViewportBounds(p1.parentRef, nil, if fFlagLuaAppRespectClipAncestorImpressions then p1.respectClipAncestors else nil)
 	end
 	return reactModule.createElement(impressionsTrackerModule, {
 		pageContext = p1.pageContext,
@@ -31,6 +27,6 @@ return function(p1)
 		sendImpressions = p1.sendImpressions,
 		dataUpdatedTimestamp = p1.dataUpdatedTimestamp,
 		viewPortBounds = var1,
-		viewPortFillBounds = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then var3 else nil
+		viewPortFillBounds = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then var2 else nil
 	})
 end

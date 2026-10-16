@@ -1,18 +1,15 @@
 ﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local signalsModule = require(parent.Signals)
+local signalsModule = require(shareSheet.Parent.Signals)
 local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
-local fFlagShareSheetFriendsSort = require(parent.SharedFlags).FFlagShareSheetFriendsSort
-local recipientSourceModule = require(shareSheet.Recipients.RecipientSource)
 local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
 
 return function()
-	-- upvalues: signalsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), shareSheetTelemetryModule (ref), fFlagShareSheetFriendsSort (ref), recipientSourceModule (ref)
+	-- upvalues: signalsModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), shareSheetTelemetryModule (ref)
 	local var1, var2 = signalsModule.createSignal(false)
 	local var3, var4 = signalsModule.createSignal(nil)
 	
 	local function hide(p1)
-		-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (copy), var2 (ref), var3 (ref), var4 (ref), shareSheetTelemetryModule (copy), fFlagShareSheetFriendsSort (copy)
+		-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (copy), var2 (ref), var3 (ref), var4 (ref), shareSheetTelemetryModule (copy)
 		if fFlagShareSheetPeoplePickerEnabledModule then
 			var2(false)
 		end
@@ -24,8 +21,7 @@ return function()
 			context = var5.context,
 			telemetryId = var5.telemetryId or "",
 			lifecycleType = shareSheetTelemetryModule.LifecycleType.Close,
-			closeReason = p1 or shareSheetTelemetryModule.CloseReason.Programmatic,
-			recipientSource = if fFlagShareSheetFriendsSort then var5.recipientSource else nil
+			closeReason = p1 or shareSheetTelemetryModule.CloseReason.Programmatic
 		})
 		
 		if var5.onHidden then
@@ -38,17 +34,13 @@ return function()
 		getRequest = var3,
 		setIsPeoplePickerDisplayed = var2,
 		show = function(p1)
-			-- upvalues: fFlagShareSheetFriendsSort (copy), recipientSourceModule (copy), hide (ref), shareSheetTelemetryModule (copy), var4 (ref)
-			if fFlagShareSheetFriendsSort and p1.recipientSource ~= nil and not recipientSourceModule.isValidRecipientSource(p1.recipientSource) then
-				error(`Invalid recipient source {p1.recipientSource}`)
-			end
+			-- upvalues: hide (ref), shareSheetTelemetryModule (copy), var4 (ref)
 			hide(shareSheetTelemetryModule.CloseReason.Replaced)
 			var4(table.clone(p1))
 			shareSheetTelemetryModule.logLifecycle({
 				context = p1.context,
 				telemetryId = p1.telemetryId or "",
-				lifecycleType = shareSheetTelemetryModule.LifecycleType.Open,
-				recipientSource = if fFlagShareSheetFriendsSort then p1.recipientSource else nil
+				lifecycleType = shareSheetTelemetryModule.LifecycleType.Open
 			})
 			
 			if p1.onShown then

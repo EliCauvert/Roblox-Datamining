@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("DebugForceEnableMoments", false)

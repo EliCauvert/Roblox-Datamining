@@ -1,1 +1,0 @@
-﻿return require(script.Parent.Parent.Parent._Index.UserSearch.UserSearch)

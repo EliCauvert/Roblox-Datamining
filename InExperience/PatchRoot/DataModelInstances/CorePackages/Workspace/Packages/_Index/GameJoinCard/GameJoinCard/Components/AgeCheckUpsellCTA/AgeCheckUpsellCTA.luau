@@ -14,8 +14,7 @@ local iconSize = foundationModule.Enums.IconSize
 local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local useLocalization = localizationModule.Hooks.useLocalization
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagMobileGameJoinCardGamepadSupport = sharedFlagsModule.FFlagMobileGameJoinCardGamepadSupport or sharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
+local fFlagMobileGameJoinCardGamepadSupport = require(parent.SharedFlags).FFlagMobileGameJoinCardGamepadSupport
 
 return function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), divider (ref), dividerVariant (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), text (ref), button (ref), fFlagMobileGameJoinCardGamepadSupport (ref), buttonVariant (ref), inputSize (ref)

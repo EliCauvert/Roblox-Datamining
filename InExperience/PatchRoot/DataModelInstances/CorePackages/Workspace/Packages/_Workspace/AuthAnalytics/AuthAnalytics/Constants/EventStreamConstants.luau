@@ -123,8 +123,7 @@
 		BirthdayPickerAgeCalculatorShown = "birthdayPickerAgeCalculatorShown",
 		LoginV2Modal = "loginV2Modal",
 		LoginV2QuickLoginModal = "loginV2QuickLoginModal",
-		LoginV2OtherSignInOptionsModal = "loginV2OtherSignInOptionsModal",
-		LoginOtherSignInOptionsModal = "loginOtherSignInOptionsModal"
+		LoginV2OtherSignInOptionsModal = "loginV2OtherSignInOptionsModal"
 	},
 	Context = {
 		AccountPickerLandingScreen = "accountPickerLandingScreen",
@@ -161,7 +160,6 @@
 		AccountSwitcherMismatch = "accountSwitcherMismatch",
 		AccountLinking = "accountLinking",
 		AccountUpgrade = "accountUpgrade",
-		AccountUpgradeCloseWarning = "accountUpgradeCloseWarning",
 		PasskeyLogin = "passkeyLogin",
 		PasskeySignup = "passkeySignup",
 		SignupPasskeyCreated = "signupPasskeyCreated",
@@ -231,10 +229,7 @@
 		MoreMenu = "moreMenu",
 		FlyoutSidePanel = "flyoutSidePanel",
 		LoginV2Fullscreen = "loginV2Fullscreen",
-		LoginV2Modalized = "loginV2Modalized",
-		DesktopSignupDialog = "desktopSignupDialog",
-		AccountUpgradeOAuthDialog = "accountUpgradeOAuthDialog",
-		AccountUpgradeOAuthFullPage = "accountUpgradeOAuthFullPage"
+		LoginV2Modalized = "loginV2Modalized"
 	},
 	AuthEventName = {
 		AuthButtonShown = "authButtonShown",

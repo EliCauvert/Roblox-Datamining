@@ -11,6 +11,7 @@ local launchPlaytestWithLoadingStateModule = require(parent.BuildExperiencePlayt
 local getPrivatePlaytestersStore = require(parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.FFlagBuildExperiencePrivateInvites)
+local fFlagBuildShareDisabledOnPrivateModule = require(buildExperience.Flags.FFlagBuildShareDisabledOnPrivate)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
 local fFlagBuildExperienceMenuImprovementsModule = require(buildExperience.Flags.FFlagBuildExperienceMenuImprovements)
@@ -72,15 +73,17 @@ local function isShareUnavailable(p1)
 end
 
 local function onShareActivated(p1)
-	-- upvalues: privacyType (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref)
+	-- upvalues: fFlagBuildShareDisabledOnPrivateModule (ref), privacyType (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref)
 	if p1.placeId == nil then
 		return nil
-	elseif if p1.shareAudience ~= nil then p1.shareAudience == privacyType.Private else true then
-		return nil
+	elseif fFlagBuildShareDisabledOnPrivateModule then
+		if if p1.shareAudience ~= nil then p1.shareAudience == privacyType.Private else true then
+			return nil
+		end
 	end
 	local audience = gameConfigurationLabelsModule.getAudience(universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId).data())
 	
-	return if audience == privacyType.FriendsOnly then { type = "confirmFriendsShare", placeId = p1.placeId } elseif audience == privacyType.Public then { type = "share", placeId = p1.placeId } else nil
+	return if audience == privacyType.Private then { type = "showPrivateShareTooltip" } elseif audience == privacyType.FriendsOnly then { type = "confirmFriendsShare", placeId = p1.placeId } elseif audience == privacyType.Public then { type = "share", placeId = p1.placeId } else nil
 end
 
 local function onAssistantActivated(_)
@@ -122,7 +125,7 @@ local t = {
 }
 
 return function()
-	-- upvalues: localizationStringsModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), isShareUnavailable (ref), onShareActivated (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
+	-- upvalues: localizationStringsModule (ref), fFlagBuildShareDisabledOnPrivateModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), isShareUnavailable (ref), onShareActivated (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
 	local list
 	local t_1 = {
 		id = "settings",
@@ -134,7 +137,7 @@ return function()
 	local t_2 = {
 		id = "share",
 		text = localizationStringsModule.BUILD_MENU_SHARE,
-		isDisabled = if not fFlagBuildExperiencePrivateInvitesModule then isShareUnavailable else nil,
+		isDisabled = if fFlagBuildShareDisabledOnPrivateModule and not fFlagBuildExperiencePrivateInvitesModule then isShareUnavailable else nil,
 		onActivated = function(p1)
 			-- upvalues: fFlagBuildExperiencePrivateInvitesModule (copy), onShareActivated (copy)
 			return if fFlagBuildExperiencePrivateInvitesModule then { type = "share" } else onShareActivated(p1)

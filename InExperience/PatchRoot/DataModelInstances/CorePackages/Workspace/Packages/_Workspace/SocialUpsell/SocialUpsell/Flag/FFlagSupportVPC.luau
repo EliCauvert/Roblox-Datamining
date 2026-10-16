@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("SupportVPC", false) and require(script:FindFirstAncestor("SocialUpsell").Parent.SharedFlags).FFlagMakeVPCFAECheckMoreGeneric

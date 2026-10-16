@@ -38,7 +38,6 @@ local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
 local plusRobux = foundationCloudAssetsModule.Assets["pictograms/plus_robux"]
 foundationCloudAssetsModule.preloadAsset("pictograms/plus_robux")
 local fFlagRobloxPlusDynamicFreeTrialLengthModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
-local fFlagEnablePlusReferralLegalDisclosureModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralLegalDisclosure)
 local guiService = game:GetService("GuiService")
 local t = {
 	[promptStateModule.SubscriptionPurchaseInProgress] = true,
@@ -46,7 +45,7 @@ local t = {
 }
 
 return function()
-	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), fFlagEnablePlusReferralLandingSheet (ref), useReferrerNameModule (ref), useLocalization (ref), fIntPlusReferralRewardRobux (ref), isRobloxSubscriptionProductFreeTrialModule (ref), fFlagRobloxPlusDynamicFreeTrialLengthModule (ref), getFreeTrialOfferModule (ref), reactModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), promptStateModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref), performRobloxSubscriptionPurchaseModule (ref), t (ref), guiService (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref), handleBackButtonActionModule (ref), plusHeroContentModule (ref), plusRobux (ref), robloxSubscriptionPriceRowModule (ref), robloxSubscriptionFeatureListModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), legalDisclosureModule (ref), fFlagSupportFreeTrialModule (ref), fFlagEnablePlusReferralLegalDisclosureModule (ref)
+	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), fFlagEnablePlusReferralLandingSheet (ref), useReferrerNameModule (ref), useLocalization (ref), fIntPlusReferralRewardRobux (ref), isRobloxSubscriptionProductFreeTrialModule (ref), fFlagRobloxPlusDynamicFreeTrialLengthModule (ref), getFreeTrialOfferModule (ref), reactModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), promptStateModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref), performRobloxSubscriptionPurchaseModule (ref), t (ref), guiService (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref), handleBackButtonActionModule (ref), plusHeroContentModule (ref), plusRobux (ref), robloxSubscriptionPriceRowModule (ref), robloxSubscriptionFeatureListModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), legalDisclosureModule (ref), fFlagSupportFreeTrialModule (ref)
 	local var1
 	local var2 = robloxSubscriptionStoreModule.get()
 	local onCtaOverride = var2.getOnCtaOverride()
@@ -191,7 +190,6 @@ return function()
 			layoutOrder = 2,
 			ctaText = if var3.ctaText then var3.ctaText else var12,
 			isFreeTrial = if fFlagSupportFreeTrialModule then var8 else nil,
-			isReferral = if fFlagEnablePlusReferralLegalDisclosureModule then var17 else nil,
 			shortenFreeTrialTerms = var14,
 			trialDuration = if var9 then var9.Duration else nil,
 			trialPeriodType = if var9 then var9.PeriodType else nil,

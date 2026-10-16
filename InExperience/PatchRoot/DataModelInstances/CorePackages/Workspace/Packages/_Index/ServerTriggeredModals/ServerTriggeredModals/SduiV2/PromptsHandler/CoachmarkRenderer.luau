@@ -1,7 +1,6 @@
 ﻿local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
 local parent = serverTriggeredModals.Parent
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local sduiFeatureEntryPoint = require(parent.SduiSharedUtilities).SduiFeatureEntryPoint
 local loggerModule = require(serverTriggeredModals.Logger)
 local reportPromptImpressionModule = require(serverTriggeredModals.reportPromptImpression)
@@ -10,10 +9,9 @@ local promptStyleModule = require(serverTriggeredModals.SduiV2.PromptStyle)
 local usePromptEntriesModule = require(serverTriggeredModals.SduiV2.usePromptEntries)
 local useModalSignalStoreModule = require(serverTriggeredModals.SignalStores.useModalSignalStore)
 local fFlagPromptsActionEventLoggingModule = require(serverTriggeredModals.Flags.FFlagPromptsActionEventLogging)
-local fFlagPromptsCoachmarkImpressionOnShow = sharedFlagsModule.FFlagPromptsCoachmarkImpressionOnShow
 
 return reactModule.memo(function(p1)
-	-- upvalues: useModalSignalStoreModule (ref), reactModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), fFlagPromptsCoachmarkImpressionOnShow (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), sduiFeatureEntryPoint (ref), fFlagPromptsActionEventLoggingModule (ref)
+	-- upvalues: useModalSignalStoreModule (ref), reactModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), sduiFeatureEntryPoint (ref), fFlagPromptsActionEventLoggingModule (ref)
 	local surfaceConfig = p1.surfaceConfig
 	local hasShownKey = p1.hasShownKey
 	local var1 = useModalSignalStoreModule()
@@ -31,36 +29,34 @@ return reactModule.memo(function(p1)
 		end
 	end, { var2, hasShownKey, var1 })
 	local var4 = usePromptEntriesModule(surfaceConfig.configKey, promptStyleModule.Coachmark)
+	local var5 = reactModule.useMemo(function()
+		-- upvalues: var2 (ref), var4 (ref)
+		if not var2 then
+			return ""
+		end
+		local t = {}
+		
+		for i, v in var4 do
+			if v.identifier and v.title and v.config then
+				table.insert(t, `{v.identifier}:{v.title}`)
+			end
+		end
+		return table.concat(t, "|")
+	end, { var2, var4 })
+	reactModule.useEffect(function()
+		-- upvalues: var5 (ref), var4 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
+		if var5 == "" then return end
+		for i, v in var4 do
+			if v.identifier and v.title and v.config then
+				reportPromptImpressionModule(v.title, v.identifier):catch(function()
+					-- upvalues: loggerModule (copy)
+					loggerModule:warning("Failed to report coachmark prompt impression")
+				end)
+				sendModalImpressionEvent(v.identifier, v.title)
+			end
+		end
+	end, { var5 })
 	
-	if not fFlagPromptsCoachmarkImpressionOnShow then
-		local var5 = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), var4 (ref)
-			if not var2 then
-				return ""
-			end
-			local t = {}
-			
-			for i, v in var4 do
-				if v.identifier and v.title and v.config then
-					table.insert(t, `{v.identifier}:{v.title}`)
-				end
-			end
-			return table.concat(t, "|")
-		end, { var2, var4 })
-		reactModule.useEffect(function()
-			-- upvalues: var5 (ref), var4 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
-			if var5 == "" then return end
-			for i, v in var4 do
-				if v.identifier and v.title and v.config then
-					reportPromptImpressionModule(v.title, v.identifier):catch(function()
-						-- upvalues: loggerModule (copy)
-						loggerModule:warning("Failed to report coachmark prompt impression")
-					end)
-					sendModalImpressionEvent(v.identifier, v.title)
-				end
-			end
-		end, { var5 })
-	end
 	if not var2 then
 		return nil
 	end
@@ -76,16 +72,6 @@ return reactModule.memo(function(p1)
 				appPage = surfaceConfig.appPage,
 				additionalAnalyticsData = if fFlagPromptsActionEventLoggingModule then {
 					promptInstanceId = if v.identifier then v.identifier else nil
-				} else nil,
-				extraLocalProps = if fFlagPromptsCoachmarkImpressionOnShow then {
-					onShown = function()
-						-- upvalues: reportPromptImpressionModule (copy), v (ref), loggerModule (copy), sendModalImpressionEvent (copy)
-						reportPromptImpressionModule(v.title, v.identifier):catch(function()
-							-- upvalues: loggerModule (copy)
-							loggerModule:warning("Failed to report coachmark prompt impression")
-						end)
-						sendModalImpressionEvent(v.identifier, v.title)
-					end
 				} else nil
 			})
 		end

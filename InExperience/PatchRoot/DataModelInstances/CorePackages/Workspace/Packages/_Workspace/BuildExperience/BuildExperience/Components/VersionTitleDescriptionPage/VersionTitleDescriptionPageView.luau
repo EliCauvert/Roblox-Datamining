@@ -4,6 +4,7 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local iconButton = foundationModule.IconButton
 local text = foundationModule.Text
 local textArea = foundationModule.TextArea
@@ -14,7 +15,7 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), textInput (ref), textArea (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), textInput (ref), textArea (ref)
 	local var1 = useLocalization({
 		descriptionLabel = localizationStringsModule.TITLE_DESCRIPTION_DESCRIPTION_LABEL,
 		titleLabel = localizationStringsModule.TITLE_DESCRIPTION_TITLE_LABEL,
@@ -30,7 +31,7 @@ return function(p1)
 		return reactModule.createElement(view, {
 			LayoutOrder = p1.layoutOrder,
 			tag = {
-				["composition-layout-detail"] = true,
+				["composition-layout-detail"] = fFlagBuildDesktopReadinessModule,
 				["col align-x-center size-full bg-surface-0"] = true
 			},
 			testId = testId

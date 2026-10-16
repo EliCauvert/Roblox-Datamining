@@ -95,8 +95,6 @@
 	MomentCommentReportClicked = "MomentCommentReportClicked",
 	MomentCommentsSettingToggled = "MomentCommentsSettingToggled",
 	MomentViewBegan = "MomentViewBegan",
-	MomentsNavigationEvent = "MomentsNavigationEvent",
-	MomentsPlayEvent = "MomentsPlayEvent",
 	MyCreationButtonPressed = "MyCreationButtonPressed",
 	MyCreationScreenCreationStarted = "MyCreationScreenCreationStarted",
 	MyCreationItemSelected = "MyCreationItemSelected",

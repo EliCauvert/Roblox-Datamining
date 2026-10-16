@@ -2,7 +2,6 @@
 local appStorageService = game:GetService("AppStorageService")
 local httpService = game:GetService("HttpService")
 local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
-local fFlagBuildAdUpsellPinnedModule = require(buildExperience.Flags.FFlagBuildAdUpsellPinned)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local createAdCampaignCardStorageModule = require(script.Parent.createAdCampaignCardStorage)
 
@@ -23,10 +22,9 @@ local _ = function(p1, p2)
 end
 
 local function makeEmptyAdUpsellScheduler()
-	-- upvalues: fFlagBuildAdUpsellPinnedModule (ref)
 	return {
+		version = 3,
 		nextOrder = 1,
-		version = if fFlagBuildAdUpsellPinnedModule then 4 else 3,
 		universes = {},
 		anchors = {},
 		pendingMilestones = {},
@@ -70,7 +68,7 @@ local function sanitizeAdUpsellScheduler(p2)
 	-- upvalues: makeEmptyAdUpsellScheduler (ref), pruneUniverseCap (ref)
 	if type(p2) ~= "table" then
 		return makeEmptyAdUpsellScheduler()
-	elseif p2.version ~= 4 and p2.version ~= 3 then
+	elseif p2.version ~= 3 then
 		return makeEmptyAdUpsellScheduler()
 	end
 	local lastTouchedOrder, v
@@ -95,14 +93,14 @@ local function sanitizeAdUpsellScheduler(p2)
 	end
 	if type(p2.anchors) == "table" then
 		for i, v in p2.anchors do
-			if type(v) == "table" and type(v.id) == "string" and (type(v.universeId) == "number" and type(v.sessionId) == "string") and type(v.order) == "number" then
+			if type(v) == "table" and type(v.id) == "string" and (type(v.universeId) == "number" and type(v.sessionId) == "string") and (type(v.afterMessageKey) == "string" and type(v.order) == "number") then
 				local maxValue = math.max(1, math.floor(v.order))
 				var6 = math.max(var6, maxValue)
 				table.insert(var5.anchors, {
 					id = v.id,
 					universeId = v.universeId,
 					sessionId = v.sessionId,
-					afterMessageKey = if type(v.afterMessageKey) == "string" then v.afterMessageKey else nil,
+					afterMessageKey = v.afterMessageKey,
 					order = maxValue,
 					impressed = v.impressed == true
 				})
@@ -168,7 +166,7 @@ local function sanitizeAdUpsellScheduler(p2)
 end
 
 local function createBuildAppStorage(p3, p4)
-	-- upvalues: createAdCampaignCardStorageModule (ref), fFlagBuildAdUpsellModule (ref), makeEmptyAdUpsellScheduler (ref), sanitizeAdUpsellScheduler (ref), fFlagBuildAdUpsellPinnedModule (ref), pruneUniverseCap (ref), fFlagBuildAgentAdCampaignCardModule (ref)
+	-- upvalues: createAdCampaignCardStorageModule (ref), fFlagBuildAdUpsellModule (ref), makeEmptyAdUpsellScheduler (ref), sanitizeAdUpsellScheduler (ref), pruneUniverseCap (ref), fFlagBuildAgentAdCampaignCardModule (ref)
 	local var9 = nil
 	local var10 = false
 	local var11 = 0
@@ -658,14 +656,14 @@ local function createBuildAppStorage(p3, p4)
 	end
 	
 	local function addMilestone(p10, p11, p12, p13, p14, p15)
-		-- upvalues: fFlagBuildAdUpsellPinnedModule (copy), pruneAnchorCaps (ref)
-		if p13 ~= nil and (fFlagBuildAdUpsellPinnedModule or p14 ~= nil) then
+		-- upvalues: pruneAnchorCaps (ref)
+		if p13 ~= nil and p14 ~= nil then
 			table.insert(p10.anchors, {
 				impressed = false,
 				id = p11,
 				universeId = p12,
 				sessionId = p13,
-				afterMessageKey = if fFlagBuildAdUpsellPinnedModule then nil else p14,
+				afterMessageKey = p14,
 				order = p15
 			})
 			pruneAnchorCaps(p10, p12, p13)
@@ -728,7 +726,7 @@ local function createBuildAppStorage(p3, p4)
 	
 	return {
 		STORAGE_KEY = "BuildAppStorageKey",
-		AD_UPSELL_SCHEDULER_VERSION = 4,
+		AD_UPSELL_SCHEDULER_VERSION = 3,
 		getAdCampaignCardStorage = if fFlagBuildAgentAdCampaignCardModule then getAdCampaignCardStorage else nil,
 		getChatDraft = getChatDraft,
 		setChatDraft = setChatDraft,
@@ -794,7 +792,7 @@ local function createBuildAppStorage(p3, p4)
 			return recordAdUpsellEvent(p18)
 		end,
 		attachPendingAdUpsellMilestones = function(p18, p19, p20)
-			-- upvalues: loadAdUpsell (ref), fFlagBuildAdUpsellPinnedModule (copy), pruneAnchorCaps (ref), persistAdUpsellMutation (ref)
+			-- upvalues: loadAdUpsell (ref), pruneAnchorCaps (ref), persistAdUpsellMutation (ref)
 			local var25, var26, scheduler
 			local var27, var28 = loadAdUpsell()
 			
@@ -816,13 +814,13 @@ local function createBuildAppStorage(p3, p4)
 			local var29 = false
 			
 			for i, v in scheduler.pendingMilestones do
-				if v.universeId == p18 and (v.sessionId == nil or v.sessionId == p19) and (fFlagBuildAdUpsellPinnedModule or p20 ~= nil) then
+				if v.universeId == p18 and (v.sessionId == nil or v.sessionId == p19) then
 					table.insert(scheduler.anchors, {
 						impressed = false,
 						id = v.id,
 						universeId = p18,
 						sessionId = p19,
-						afterMessageKey = if fFlagBuildAdUpsellPinnedModule then nil else p20,
+						afterMessageKey = p20,
 						order = v.order
 					})
 					var29 = true
@@ -842,10 +840,7 @@ local function createBuildAppStorage(p3, p4)
 			return true
 		end,
 		pruneAdUpsellAnchors = function(p21, p22, p23)
-			-- upvalues: fFlagBuildAdUpsellPinnedModule (copy), loadAdUpsell (ref), persistAdUpsellMutation (ref)
-			if fFlagBuildAdUpsellPinnedModule then
-				return true, false
-			end
+			-- upvalues: loadAdUpsell (ref), persistAdUpsellMutation (ref)
 			local var30, var31, scheduler
 			local var32, var33 = loadAdUpsell()
 			
@@ -865,7 +860,7 @@ local function createBuildAppStorage(p3, p4)
 			local var34 = false
 			
 			for i, v in scheduler.anchors do
-				if v.universeId == p21 and v.sessionId == p22 and (v.afterMessageKey == nil or not p23[v.afterMessageKey]) then
+				if v.universeId == p21 and v.sessionId == p22 and not p23[v.afterMessageKey] then
 					var34 = true
 				else
 					table.insert(var32, v)
@@ -1076,7 +1071,7 @@ local var50 = createBuildAppStorage(appStorageService, httpService)
 
 return {
 	STORAGE_KEY = "BuildAppStorageKey",
-	AD_UPSELL_SCHEDULER_VERSION = 4,
+	AD_UPSELL_SCHEDULER_VERSION = 3,
 	getAdCampaignCardStorage = if fFlagBuildAgentAdCampaignCardModule then var50.getAdCampaignCardStorage else nil,
 	getChatDraft = var50.getChatDraft,
 	setChatDraft = var50.setChatDraft,

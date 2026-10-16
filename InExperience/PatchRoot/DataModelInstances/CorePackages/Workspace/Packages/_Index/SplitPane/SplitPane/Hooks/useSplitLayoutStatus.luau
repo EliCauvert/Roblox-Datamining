@@ -1,6 +1,5 @@
 ﻿local parent = script:FindFirstAncestor("SplitPane").Parent
 local reactModule = require(parent.React)
-local fFlagEnableSplitPaneTelemetry = require(parent.SharedFlags).FFlagEnableSplitPaneTelemetry
 local roactNavigationModule = require(parent.RoactNavigation)
 local signalsReactModule = require(parent.SignalsReact)
 local appSplitViewModule = require(parent.AppSplitView)
@@ -8,7 +7,6 @@ local viewState = require(parent.Navigation).ViewState
 local constants = require(parent.NavigationRodux).Constants
 local splitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
 local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
-local useInitializeSplitPaneTelemetrySessionModule = require(script.Parent.useInitializeSplitPaneTelemetrySession)
 local computeSplitEligibilityModule = require(script.Parent.Parent.Utils.computeSplitEligibility)
 local splitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
 local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
@@ -16,7 +14,7 @@ local splitPaneSlot = appSplitViewModule.Enums.SplitPaneSlot
 local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
 return function(p1, p2)
-	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), computeSplitEligibilityModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneVariantModule (ref), supportPaneMode (ref), splitPaneSlot (ref), viewState (ref), roactNavigationModule (ref), fFlagEnableSplitPaneTelemetry (ref), useInitializeSplitPaneTelemetrySessionModule (ref)
+	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), computeSplitEligibilityModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneVariantModule (ref), supportPaneMode (ref), splitPaneSlot (ref), viewState (ref), roactNavigationModule (ref)
 	local options, v
 	local store = splitPaneStoreModule.getStore()
 	local var1 = signalsReactModule.useSignalState(store.getIsBreakpointEnabled)
@@ -113,9 +111,6 @@ return function(p1, p2)
 		end
 	end, { var6, options, p1, store })
 	
-	if fFlagEnableSplitPaneTelemetry then
-		useInitializeSplitPaneTelemetrySessionModule(var6)
-	end
 	return {
 		isSplitLayoutEnabled = options,
 		isRouteActiveOnPane = var10,

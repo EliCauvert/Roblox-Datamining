@@ -3,6 +3,7 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local fFlagBuildBackButtonChevronModule = require(buildExperience.Flags.FFlagBuildBackButtonChevron)
+local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local useScrollPerformanceTrackerModule = require(buildExperience.Telemetry.useScrollPerformanceTracker)
 local iconButton = foundationModule.IconButton
 local divider = foundationModule.Divider
@@ -14,7 +15,7 @@ local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
 return function(p1)
-	-- upvalues: reactModule (ref), useScrollPerformanceTrackerModule (ref), view (ref), iconButton (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), scrollView (ref), divider (ref)
+	-- upvalues: reactModule (ref), useScrollPerformanceTrackerModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), scrollView (ref), divider (ref)
 	local testId = p1.testId or "overflow-menu-page"
 	local var1 = reactModule.useRef(nil)
 	useScrollPerformanceTrackerModule(p1.scrollPerformanceIntervalName or "BuildOverflowMenuPageShell", var1)
@@ -30,7 +31,7 @@ return function(p1)
 	return reactModule.createElement(view, {
 		LayoutOrder = p1.layoutOrder,
 		tag = {
-			["composition-layout-detail"] = true,
+			["composition-layout-detail"] = fFlagBuildDesktopReadinessModule,
 			["col align-x-center size-full bg-surface-0"] = true
 		},
 		testId = testId
@@ -48,7 +49,7 @@ return function(p1)
 				isCircular = true,
 				icon = p1.closeIcon or (if fFlagBuildBackButtonChevronModule then iconName.ChevronLargeLeft else iconName.X),
 				onActivated = p1.onClose,
-				size = inputSize.Large,
+				size = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium,
 				testId = `{testId}-close`,
 				variant = buttonVariant.Utility
 			}),

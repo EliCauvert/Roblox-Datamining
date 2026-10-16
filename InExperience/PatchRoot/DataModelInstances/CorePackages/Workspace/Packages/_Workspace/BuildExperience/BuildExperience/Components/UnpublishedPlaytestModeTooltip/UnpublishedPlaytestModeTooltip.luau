@@ -7,6 +7,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local buildAppStorageModule = require(buildExperience.Storage.BuildAppStorage)
 local buildModeLaunchModule = require(parent.BuildExperiencePlaytestLaunch.BuildModeLaunch)
+local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
 local educationalTooltip = foundationModule.EducationalTooltip
 local overlayProvider = foundationModule.OverlayProvider
 local popoverSide = foundationModule.Enums.PopoverSide
@@ -19,7 +20,7 @@ local function _(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fIntUnpublishedPlaytestModeTooltipDisplayLimit (ref), buildModeLaunchModule (ref), buildAppStorageModule (ref), overlayProvider (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fIntUnpublishedPlaytestModeTooltipDisplayLimit (ref), buildModeLaunchModule (ref), buildAppStorageModule (ref), overlayProvider (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref)
 	local var1 = useLocalization({
 		description = localizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_DESCRIPTION,
 		title = localizationStringsModule.UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_TITLE
@@ -27,7 +28,7 @@ return reactModule.memo(function(p1)
 	local useState = reactModule.useState
 	local anchorRef = p1.anchorRef
 	local var2 = fIntUnpublishedPlaytestModeTooltipDisplayLimit > 0 and (buildModeLaunchModule:hasBuildMode() and (buildAppStorageModule.getUnpublishedPlaytestModeTooltipDisplayCount() < fIntUnpublishedPlaytestModeTooltipDisplayLimit and (anchorRef ~= nil and anchorRef.current ~= nil)))
-	useState, var8 = useState(var2)
+	useState, var9 = useState(var2)
 	local var3 = reactModule.useRef(false)
 	local var4 = reactModule.useCallback(function()
 		-- upvalues: var2 (ref)
@@ -56,7 +57,7 @@ return reactModule.memo(function(p1)
 			align = popoverAlign.Start,
 			isOpen = useState,
 			onClose = var4,
-			onPressedOutside = var4,
+			onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then var4 else nil,
 			Visible = p1.isVisible
 		})
 	}) else nil

@@ -82,7 +82,7 @@ Traceback:
 		return if login then consoleAuthRequestWrapper(p1, login(), "POST", {
 			maxRetryCount = 0,
 			postBody = if var1.linkingPlatform then httpService:JSONEncode({ identityProvider = var1.linkingPlatform }) else "{}"
-		}, true) else promiseModule.reject({ errorCode = loginErrorCodesModule.ServiceUnavailable })
+		}) else promiseModule.reject({ errorCode = loginErrorCodesModule.ServiceUnavailable })
 	end,
 	singleSignOnConnectWithCode = function(p1, p2, p3)
 		-- upvalues: getSingleSignOnUrlsModule (ref), httpService (ref), consoleAuthRequestWrapper (ref), promiseModule (ref), loginErrorCodesModule (ref)

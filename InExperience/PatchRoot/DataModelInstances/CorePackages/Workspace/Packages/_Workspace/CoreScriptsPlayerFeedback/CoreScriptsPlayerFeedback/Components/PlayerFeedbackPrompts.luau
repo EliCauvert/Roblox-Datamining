@@ -11,12 +11,8 @@ local playerSupportPromptModule = require(coreScriptsPlayerFeedback.Components.P
 local unavailablePromptModule = require(coreScriptsPlayerFeedback.Components.UnavailablePrompt)
 local playerSupportUnavailablePromptModule = require(coreScriptsPlayerFeedback.Components.PlayerSupportUnavailablePrompt)
 local playerSupportToastModule = require(coreScriptsPlayerFeedback.Components.PlayerSupportToast)
-local getFFlagEnablePlayerSupportPromptModule = require(coreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)
-local fFlagPlayerSupportPromptEventIngestModule = require(coreScriptsPlayerFeedback.Flags.FFlagPlayerSupportPromptEventIngest)
-local playerSupportPromptTelemetryModule = require(coreScriptsPlayerFeedback.Telemetry.PlayerSupportPromptTelemetry)
-local constantsModule = require(coreScriptsPlayerFeedback.constants)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
-local var1 = getFFlagEnablePlayerSupportPromptModule()
+local var1 = require(coreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)()
 local t = {
 	TICKET_CREATION_SUBMITTED = "ToastSubmitted",
 	TICKET_CREATION_FAILED = "ToastFailed"
@@ -124,7 +120,7 @@ local var2 = reactModule.memo(function(p1)
 	})
 end)
 local var3 = reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), cryoModule (ref), fFlagPlayerSupportPromptEventIngestModule (ref), playerSupportPromptTelemetryModule (ref), constantsModule (ref), t (ref), unavailablePromptModule (ref), playerSupportUnavailablePromptModule (ref), t_1 (ref), playerSupportPromptModule (ref), playerFeedbackPromptModule (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerSupportToastModule (ref)
+	-- upvalues: useLocalization (ref), reactModule (ref), cryoModule (ref), t (ref), unavailablePromptModule (ref), playerSupportUnavailablePromptModule (ref), t_1 (ref), playerSupportPromptModule (ref), playerFeedbackPromptModule (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerSupportToastModule (ref)
 	local var4 = useLocalization({
 		ToastSubmitted = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted",
 		ToastFailed = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Failed"
@@ -215,14 +211,7 @@ local var3 = reactModule.memo(function(p1)
 		end)
 	end, {})
 	local var21 = reactModule.useCallback(function(p2)
-		-- upvalues: fFlagPlayerSupportPromptEventIngestModule (copy), playerSupportPromptTelemetryModule (copy), var11 (ref), constantsModule (copy), var13 (ref), var9 (ref), t (copy), var15 (ref), var8 (ref), var4 (ref), var6 (ref), cryoModule (copy)
-		if fFlagPlayerSupportPromptEventIngestModule then
-			playerSupportPromptTelemetryModule.logTicketResult(p2, {
-				category = var11,
-				shareUserId = if constantsModule.PLAYER_SUPPORT_CATEGORIES_REQUIRING_USER_ID[var11] ~= true then var13 else true,
-				descriptionLength = #var9
-			})
-		end
+		-- upvalues: t (copy), var15 (ref), var8 (ref), var4 (ref), var6 (ref), cryoModule (copy)
 		local var22 = t[p2]
 		
 		if var22 then
@@ -248,13 +237,7 @@ local var3 = reactModule.memo(function(p1)
 				})
 			}
 		end)
-	end, if fFlagPlayerSupportPromptEventIngestModule then {
-		var4,
-		var15,
-		var11,
-		var13,
-		var9
-	} else { var4, var15 })
+	end, { var4, var15 })
 	local var22 = nil
 	
 	if promptType then

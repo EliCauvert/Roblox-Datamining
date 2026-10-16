@@ -1,28 +1,7 @@
 ﻿return table.freeze({
 	CATEGORY = "ExperienceLoading",
 	PAGE = "TiltLoadingScreen",
-	EVENT_NAME = "ExperienceLoadingScreen",
-	Host = table.freeze({
-		InExperience = "InExperience",
-		DeferredJoin = "DeferredJoin"
-	}),
-	DismissSource = table.freeze({
-		NormalReady = "NormalReady",
-		DeveloperOverride = "DeveloperOverride"
-	}),
-	ContentId = table.freeze({
-		Title = "Title",
-		Creator = "Creator",
-		Thumbnail = "Thumbnail"
-	}),
-	Milestone = table.freeze({
-		ScreenVisible = "ScreenVisible",
-		ContentVisible = "ContentVisible",
-		DismissRequested = "DismissRequested",
-		DismissGateReleased = "DismissGateReleased",
-		DismissStarted = "DismissStarted",
-		ScreenHidden = "ScreenHidden"
-	}),
+	TILT_EVENT_NAME = "ExperienceLoadingScreen_Tilt",
 	AbortReason = table.freeze({
 		Cancelled = "cancelled",
 		VRHandoff = "vr_handoff",

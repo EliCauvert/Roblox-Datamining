@@ -2,8 +2,6 @@
 local parent = buildExperience.Parent
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local fFlagBuildExperienceToolResultFailureRecoveryModule = require(buildExperience.Flags.FFlagBuildExperienceToolResultFailureRecovery)
-local fFlagBuildExperienceDevProductModerationReadbackModule = require(buildExperience.Flags.FFlagBuildExperienceDevProductModerationReadback)
-local wasDeveloperProductTextModeratedModule = require(buildExperience.utils.wasDeveloperProductTextModerated)
 local _ = require(script.Parent.chatTypes)
 local chatConstantsModule = require(script.Parent.chatConstants)
 local _ = require(script.Parent.localToolOverlay)
@@ -39,7 +37,7 @@ local function awaitPromise(p1)
 	p1:cancel()
 	var3 = "The request timed out and its outcome is unknown. List developer products before retrying."
 	
-	return var2, u428
+	return var2, u420
 end
 
 local function _(p2)
@@ -53,7 +51,7 @@ local function detailCodeForFailure(p2, p3)
 end
 
 local function awaitMutation(p2)
-	-- upvalues: awaitPromise (ref), fFlagBuildExperienceDevProductModerationReadbackModule (ref)
+	-- upvalues: awaitPromise (ref)
 	local var6, var7 = awaitPromise(p2)
 	
 	if var6 ~= nil then
@@ -61,7 +59,7 @@ local function awaitMutation(p2)
 	end
 	local var8 = if typeof(var7) == "table" then var7.product else nil
 	
-	return var8, if typeof(var7) == "table" and typeof(var7.errorMessage) == "string" then var7.errorMessage elseif var7 == nil then "The request timed out." else tostring(var7), var8 == nil and (if typeof(var7) == "table" then var7.responseCode else nil) == 429, if fFlagBuildExperienceDevProductModerationReadbackModule and typeof(var7) == "table" and var7.outcome == "unverified" then "readback_unverified" else nil
+	return var8, if typeof(var7) == "table" and typeof(var7.errorMessage) == "string" then var7.errorMessage elseif var7 == nil then "The request timed out." else tostring(var7), var8 == nil and (if typeof(var7) == "table" then var7.responseCode else nil) == 429
 end
 
 local function proposalFromFlow(p2, p3, p4)
@@ -84,26 +82,11 @@ local function proposalFromFlow(p2, p3, p4)
 end
 
 local function moderationError(p2, p3)
-	-- upvalues: fFlagBuildExperienceDevProductModerationReadbackModule (ref), wasDeveloperProductTextModeratedModule (ref)
-	if p2.action ~= "create" and p2.action ~= "update" then
-		return nil
-	end
-	local var6, var7
-	local _ = nil
-	local _ = nil
-	
-	if fFlagBuildExperienceDevProductModerationReadbackModule then
-		var6 = wasDeveloperProductTextModeratedModule(p2.name, p3.name)
-		var7 = wasDeveloperProductTextModeratedModule(p2.description, p3.description)
-	else
-		var6 = p2.name ~= nil and (p3.name ~= nil and p3.name ~= p2.name)
-		var7 = p2.description ~= nil and (p2.description ~= "" and (p3.description ~= nil and p3.description ~= p2.description))
-	end
-	return if var6 or var7 then ("Roblox moderation altered this product's text. Product %s already exists; do not create another. Ask the creator for plainer wording and update this product."):format(tostring(p3.productId or (p2.productId or "unknown"))) else nil
+	return if not (p2.action ~= "create" and p2.action ~= "update") then if (p2.name ~= nil and (p3.name ~= nil and p3.name ~= p2.name)) or (p2.description ~= nil and (p2.description ~= "" and (p3.description ~= nil and p3.description ~= p2.description))) then ("Roblox moderation altered this product's text. Product %s already exists; do not create another. Ask the creator for plainer wording and update this product."):format(tostring(p3.productId or (p2.productId or "unknown"))) else nil else nil
 end
 
 return function(p2, p3, p4, p5)
-	-- upvalues: var1 (ref), fFlagBuildExperienceRemoveDevProductPriceCap (ref), awaitMutation (ref), downloadGeneratedImageAsyncModule (ref), fFlagBuildExperienceDevProductRecoveryModule (ref), fFlagBuildExperienceDevProductModerationReadbackModule (ref), proposalFromFlow (ref), debug (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), moderationError (ref), detailCodeForFailure (ref), studioManageDevProductTool (ref), getToolCallOrder (ref)
+	-- upvalues: var1 (ref), fFlagBuildExperienceRemoveDevProductPriceCap (ref), downloadGeneratedImageAsyncModule (ref), awaitPromise (ref), fFlagBuildExperienceDevProductRecoveryModule (ref), awaitMutation (ref), proposalFromFlow (ref), debug (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), moderationError (ref), detailCodeForFailure (ref), studioManageDevProductTool (ref), getToolCallOrder (ref)
 	local var6 = nil
 	local t = {}
 	local var7 = nil
@@ -111,7 +94,7 @@ return function(p2, p3, p4, p5)
 	local _ = nil
 	
 	local function performMutation(p6)
-		-- upvalues: fFlagBuildExperienceRemoveDevProductPriceCap (copy), awaitMutation (copy), downloadGeneratedImageAsyncModule (copy), fFlagBuildExperienceDevProductRecoveryModule (copy), var1 (ref), fFlagBuildExperienceDevProductModerationReadbackModule (copy)
+		-- upvalues: fFlagBuildExperienceRemoveDevProductPriceCap (copy), downloadGeneratedImageAsyncModule (copy), awaitPromise (copy), fFlagBuildExperienceDevProductRecoveryModule (copy), awaitMutation (copy), var1 (ref)
 		local universeId = p6.universeId
 		
 		if universeId == nil then
@@ -125,16 +108,27 @@ return function(p2, p3, p4, p5)
 			local var8 = nil
 			
 			if p6.imageAssetId ~= nil then
+				local var9, var10
 				local _ = nil
-				local var9, var10 = awaitMutation(downloadGeneratedImageAsyncModule(p6.imageAssetId))
+				local var11, var12 = awaitPromise(downloadGeneratedImageAsyncModule(p6.imageAssetId))
+				
+				if var11 == nil then
+					local var13 = if typeof(var12) == "table" then var12.product else nil
+					local _ = var13 == nil and (if typeof(var12) == "table" then var12.responseCode else nil) == 429
+					var9 = var13
+					var10 = if typeof(var12) == "table" and typeof(var12.errorMessage) == "string" then var12.errorMessage elseif var12 == nil then "The request timed out." else tostring(var12)
+				else
+					var9 = var11
+					var10 = nil
+				end
 				var8 = var9
-				local var11 = var10
+				local var14 = var10
 				
 				if var8 == nil then
 					if fFlagBuildExperienceDevProductRecoveryModule then
 						return nil, "The product image could not be loaded. No product was created.", true
 					end
-					return nil, var11
+					return nil, var14
 				else
 					return awaitMutation(var1.create(universeId, {
 						name = p6.name,
@@ -151,7 +145,7 @@ return function(p2, p3, p4, p5)
 				name = p6.name,
 				description = p6.description,
 				priceInRobux = p6.priceInRobux
-			}, fFlagBuildExperienceDevProductModerationReadbackModule))
+			}))
 		elseif p6.action == "activate" then
 			return awaitMutation(var1.activate(universeId, p6.productId))
 		elseif p6.action == "deactivate" then
@@ -250,38 +244,37 @@ return function(p2, p3, p4, p5)
 	
 	local function submitApproval(p6)
 		-- upvalues: performMutation (ref), moderationError (copy), detailCodeForFailure (copy), fFlagBuildExperienceDevProductRecoveryModule (copy), var6 (write), p4 (ref), proposalFromFlow (copy), studioManageDevProductTool (copy), submitResult (ref)
-		local result, resultError, resultDetailCode
+		local result, resultError
 		local _ = nil
 		local _ = nil
-		local _ = nil
+		local var8 = nil
 		
 		if p6.attempted then
 			result = p6.result
 			resultError = p6.resultError
-			resultDetailCode = p6.resultDetailCode
+			var8 = p6.resultDetailCode
 		else
 			p6.attempted = true
 			local _ = nil
-			local var8, var9, var10, var11 = performMutation(p6)
-			result = var8
-			resultError = var9
-			local var12 = var10
-			resultDetailCode = var11
+			local var9, var10, var11 = performMutation(p6)
+			result = var9
+			resultError = var10
+			local var12 = var11
 			
 			if result ~= nil and resultError == nil then
 				resultError = moderationError(p6, result)
 				
 				if resultError ~= nil then
-					resultDetailCode = "name_moderated"
+					var8 = "name_moderated"
 				end
 			end
 			p6.result = result
 			p6.resultError = resultError
 			
-			if resultError ~= nil and resultDetailCode == nil then
-				resultDetailCode = detailCodeForFailure(p6.action, resultError)
+			if resultError ~= nil and var8 == nil then
+				var8 = detailCodeForFailure(p6.action, resultError)
 			end
-			p6.resultDetailCode = resultDetailCode
+			p6.resultDetailCode = var8
 			
 			if fFlagBuildExperienceDevProductRecoveryModule and resultError ~= nil and (var12 and p6.action == "create") and var6 == p6 then
 				p6.attempted = false
@@ -307,7 +300,7 @@ return function(p2, p3, p4, p5)
 				var13 = studioManageDevProductTool.formatResultContent({
 					status = "error",
 					action = p6.action,
-					detailCode = resultDetailCode,
+					detailCode = var8,
 					message = resultError or "The developer product change failed.",
 					product = result
 				})
@@ -362,7 +355,7 @@ return function(p2, p3, p4, p5)
 	end
 	
 	local function runListRequest(p6, p7, p8, p9)
-		-- upvalues: p2 (ref), awaitMutation (copy), var1 (ref), studioManageDevProductTool (copy), t (ref), p3 (ref), awaitRequestState (copy), chatConstantsModule (copy), debug (copy)
+		-- upvalues: p2 (ref), var1 (ref), awaitPromise (copy), studioManageDevProductTool (copy), t (ref), p3 (ref), awaitRequestState (copy), chatConstantsModule (copy), debug (copy)
 		local var8
 		local universeId = p2.universeId
 		local var9 = nil
@@ -371,24 +364,35 @@ return function(p2, p3, p4, p5)
 		if universeId == nil then
 			var8 = "No universe is associated with this session."
 		else
-			local var10, var11 = awaitMutation(var1.list(universeId))
+			local var10, var11
+			local var12, var13 = awaitPromise(var1.list(universeId))
+			
+			if var12 == nil then
+				local var14 = if typeof(var13) == "table" then var13.product else nil
+				local _ = var14 == nil and (if typeof(var13) == "table" then var13.responseCode else nil) == 429
+				var10 = var14
+				var11 = if typeof(var13) == "table" and typeof(var13.errorMessage) == "string" then var13.errorMessage elseif var13 == nil then "The request timed out." else tostring(var13)
+			else
+				var10 = var12
+				var11 = nil
+			end
 			var9 = var10
 			var8 = var11
 		end
-		local var12, var13
+		local var15, var16
 		local _ = nil
 		local _ = nil
 		
 		if var9 == nil then
-			var12 = studioManageDevProductTool.formatResultContent({
+			var15 = studioManageDevProductTool.formatResultContent({
 				status = "error",
 				action = "list",
 				detailCode = "list_failed",
 				message = var8 or "Could not list developer products."
 			})
-			var13 = true
+			var16 = true
 		else
-			local var14, var15 = studioManageDevProductTool.formatResultContent({
+			local var17, var18 = studioManageDevProductTool.formatResultContent({
 				status = "ok",
 				action = "list",
 				count = #var9.developerProducts,
@@ -396,29 +400,29 @@ return function(p2, p3, p4, p5)
 				nextPageToken = var9.nextPageToken,
 				truncated = var9.nextPageToken ~= nil
 			})
-			var12 = var14
-			var13 = var15
+			var15 = var17
+			var16 = var18
 		end
-		local var16 = p2.submitActiveToolResult(var12, var13, p7, p8)
+		local var19 = p2.submitActiveToolResult(var15, var16, p7, p8)
 		t[p6] = nil
 		
-		if var16 == nil then
+		if var19 == nil then
 			p3[p6] = nil
 			
 			return
 		end
-		local var17 = awaitRequestState(var16.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+		local var20 = awaitRequestState(var19.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
 		
-		if var17.status ~= "succeeded" then
+		if var20.status ~= "succeeded" then
 			p3[p6] = nil
 			
-			if var17.status == "pending" then
-				var16.dispose()
+			if var20.status == "pending" then
+				var19.dispose()
 			end
 			debug.log("warn", "manage_developer_product list submit failed", {
 				sessionId = p9,
 				toolCallId = p6,
-				state = debug.formatRequestState(var17)
+				state = debug.formatRequestState(var20)
 			})
 		end
 	end

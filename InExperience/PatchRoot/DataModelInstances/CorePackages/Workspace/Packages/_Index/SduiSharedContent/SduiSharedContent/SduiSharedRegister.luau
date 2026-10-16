@@ -20,12 +20,11 @@ local parseVector2Prop = sduiParsers.parseVector2Prop_
 local getLuaTableEnumParser = sduiParsers.getLuaTableEnumParser
 local fFlagSduiCardComponent = require(parent.SharedFlags).FFlagSduiCardComponent
 local fFlagSduiContentRowStateLayerModule = require(sduiSharedContent.Flags.FFlagSduiContentRowStateLayer)
-local fFlagSDUIContentRowSelectableModule = require(sduiSharedContent.Flags.FFlagSDUIContentRowSelectable)
 local fFlagSduiListComponents = require(parent.SharedFlags).FFlagSduiListComponents
-local fFlagSduiAccordionComponent = require(parent.SharedFlags).FFlagSduiAccordionComponent
 local fFlagSduiSystemBannerComponent = require(parent.SharedFlags).FFlagSduiSystemBannerComponent
 local fFlagSduiBannerContextComponent = require(parent.SharedFlags).FFlagSduiBannerContextComponent
 local fFlagSduiViewportVisibilityComponent = require(parent.SharedFlags).FFlagSduiViewportVisibilityComponent
+local fFlagLuaAppUnlockUpsellSupport = require(parent.SharedFlags).FFlagLuaAppUnlockUpsellSupport
 local fFlagSduiDevStoreSeeAllSupport = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllSupport
 local fFlagSduiPlayWithReward = require(parent.SharedFlags).FFlagSduiPlayWithReward
 local fFlagSduiPlayWithRewardRefactor = require(parent.SharedFlags).FFlagSduiPlayWithRewardRefactor
@@ -41,12 +40,11 @@ local fFlagSduiCollectionCarouselPlaceholderItem = require(parent.SharedFlags).F
 local fFlagSduiShowToastAction = require(parent.SharedFlags).FFlagSduiShowToastAction
 local fFlagSduiActionSequence = require(parent.SharedFlags).FFlagSduiActionSequence
 local fFlagSduiNavigate = require(parent.SharedFlags).FFlagSduiNavigate
-local fFlagSduiSetPageScopeFieldActionModule = require(sduiSharedContent.Flags.FFlagSduiSetPageScopeFieldAction)
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local fFlagEnableGameJoinEarlyAccess = require(parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 
 local function registerSharedActions()
-	-- upvalues: sduiActionType (ref), sduiSharedContent (ref), fFlagSduiDismissPromptAction (ref), fFlagLuaAppSduiMovePromptsActions (ref), fFlagSduiShowToastAction (ref), fFlagSduiActionSequence (ref), fFlagSduiNavigate (ref), fFlagSduiSetPageScopeFieldActionModule (ref), getSduiActionHandlerRegistry (ref)
+	-- upvalues: sduiActionType (ref), sduiSharedContent (ref), fFlagSduiDismissPromptAction (ref), fFlagLuaAppSduiMovePromptsActions (ref), fFlagSduiShowToastAction (ref), fFlagSduiActionSequence (ref), fFlagSduiNavigate (ref), getSduiActionHandlerRegistry (ref)
 	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
 		[sduiActionType.CustomAnalyticsEvent] = {
 			skipUnifiedLogging = true,
@@ -109,18 +107,12 @@ local function registerSharedActions()
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Actions.SduiNavigateAction)
 			end
-		} else nil,
-		[sduiActionType.SetPageScopeField] = if fFlagSduiSetPageScopeFieldActionModule then {
-			lazyHandler = function()
-				-- upvalues: sduiSharedContent (copy)
-				return require(sduiSharedContent.Actions.SduiSetPageScopeFieldAction)
-			end
 		} else nil
 	})
 end
 
 local function registerSharedUiComponents()
-	-- upvalues: sduiComponentType (ref), sduiSharedContent (ref), fFlagSduiCardComponent (ref), fFlagSduiSystemBannerComponent (ref), fFlagSduiBannerContextComponent (ref), fFlagSduiViewportVisibilityComponent (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseColorTokenProp (ref), parseVector2Prop (ref), parseIntegerProp (ref), parseUDim2Prop (ref), parseBooleanProp (ref), parseNumberProp (ref), parseStringProp (ref), fFlagSduiShimmerTextComponentEnabled (ref), fFlagSduiRevealTextComponentEnabled (ref), fFlagSduiPreferredTextSizeLineBudgets (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagEnableGameJoinEarlyAccess (ref), fFlagSduiPlayWithRewardRefactor (ref), fFlagSduiPlayWithReward (ref), parseUiComponentProp (ref), parseCallbackProp (ref), fFlagSduiContentRowStateLayerModule (ref), fFlagSDUIContentRowSelectableModule (ref), fFlagSduiListComponents (ref), fFlagSduiAccordionComponent (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiTooltipComponentEnabled (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiAiOverviewEnabled (ref), fFlagSduiVerticalListWithImpressionsEnabled (ref), getSduiComponentRegistry (ref)
+	-- upvalues: sduiComponentType (ref), sduiSharedContent (ref), fFlagSduiCardComponent (ref), fFlagSduiSystemBannerComponent (ref), fFlagSduiBannerContextComponent (ref), fFlagSduiViewportVisibilityComponent (ref), fFlagLuaAppUnlockUpsellSupport (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseColorTokenProp (ref), parseVector2Prop (ref), parseIntegerProp (ref), parseUDim2Prop (ref), parseBooleanProp (ref), parseNumberProp (ref), parseStringProp (ref), fFlagSduiShimmerTextComponentEnabled (ref), fFlagSduiRevealTextComponentEnabled (ref), fFlagSduiPreferredTextSizeLineBudgets (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagEnableGameJoinEarlyAccess (ref), fFlagSduiPlayWithRewardRefactor (ref), fFlagSduiPlayWithReward (ref), parseUiComponentProp (ref), parseCallbackProp (ref), fFlagSduiContentRowStateLayerModule (ref), fFlagSduiListComponents (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiTooltipComponentEnabled (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiAiOverviewEnabled (ref), fFlagSduiVerticalListWithImpressionsEnabled (ref), getSduiComponentRegistry (ref)
 	getSduiComponentRegistry().registerComponentDefinitions({
 		[sduiComponentType.DetailsPageImageHeader] = {
 			getLazyComponent = function()
@@ -175,7 +167,7 @@ local function registerSharedUiComponents()
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiIcon)
 			end,
-			propParsers = {
+			propParsers = if fFlagLuaAppUnlockUpsellSupport then {
 				name = getLuaTableEnumParser(foundationModule.Enums.IconName, "string"),
 				style = parseColorTokenProp,
 				size = getLuaTableEnumParser(foundationModule.Enums.IconSize, "string"),
@@ -186,7 +178,7 @@ local function registerSharedUiComponents()
 				visible = parseBooleanProp,
 				zIndex = parseNumberProp,
 				testId = parseStringProp
-			}
+			} else nil
 		},
 		[sduiComponentType.IconButton] = {
 			getLazyComponent = function()
@@ -265,13 +257,12 @@ local function registerSharedUiComponents()
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiContentRow)
 			end,
-			propParsers = {
+			propParsers = if fFlagLuaAppUnlockUpsellSupport then {
 				leading = parseUiComponentProp,
 				content = parseUiComponentProp,
 				trailing = parseUiComponentProp,
 				onActivated = parseCallbackProp,
 				stateLayerAffordance = if fFlagSduiContentRowStateLayerModule then getLuaTableEnumParser(foundationModule.Enums.StateLayerAffordance, "string") else nil,
-				selectable = if fFlagSDUIContentRowSelectableModule then parseBooleanProp else nil,
 				tag = parseStringProp,
 				leadingTag = parseStringProp,
 				contentTag = parseStringProp,
@@ -280,7 +271,7 @@ local function registerSharedUiComponents()
 				position = parseUDim2Prop,
 				zIndex = parseNumberProp,
 				testId = parseStringProp
-			}
+			} else nil
 		},
 		[sduiComponentType.ListRoot] = if fFlagSduiListComponents then {
 			getLazyComponent = function()
@@ -292,18 +283,6 @@ local function registerSharedUiComponents()
 			getLazyComponent = function()
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiListItem)
-			end
-		} else nil,
-		[sduiComponentType.Accordion] = if fFlagSduiAccordionComponent then {
-			getLazyComponent = function()
-				-- upvalues: sduiSharedContent (copy)
-				return require(sduiSharedContent.Components.SduiAccordion)
-			end
-		} else nil,
-		[sduiComponentType.AccordionItem] = if fFlagSduiAccordionComponent then {
-			getLazyComponent = function()
-				-- upvalues: sduiSharedContent (copy)
-				return require(sduiSharedContent.Components.SduiAccordionItem)
 			end
 		} else nil,
 		[sduiComponentType.SubscriptionCell] = if fFlagSduiDevStoreSeeAllSupport then {

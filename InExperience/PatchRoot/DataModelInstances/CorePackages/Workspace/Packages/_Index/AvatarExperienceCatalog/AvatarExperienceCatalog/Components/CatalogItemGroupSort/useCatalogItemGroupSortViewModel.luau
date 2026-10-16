@@ -12,7 +12,6 @@ local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAX
 local fFlagAXDeferLookImpressionsForHydration = avatarExperienceFlagsModule.FFlagAXDeferLookImpressionsForHydration
 local fFlagAXSduiSortSessionImpressionDedup = avatarExperienceFlagsModule.FFlagAXSduiSortSessionImpressionDedup
 local fFlagAXSduiSeeAllClickLogging = avatarExperienceFlagsModule.FFlagAXSduiSeeAllClickLogging
-local fFlagAXSduiSponsoredItemClickTracking = avatarExperienceFlagsModule.FFlagAXSduiSponsoredItemClickTracking
 local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
 local widgetConstantsModule = require(avatarExperienceCatalog.WidgetConstants)
 local getFooterVisibilityFromItemFootersModule = require(avatarExperienceCatalog.Utils.getFooterVisibilityFromItemFooters)
@@ -38,7 +37,7 @@ local function _(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: useCatalogPageMonolithDependenciesModule (ref), useTokens (ref), reactModule (ref), useOnRequestImpressionsSignalModule (ref), fFlagAXSduiSeeAllClickLogging (ref), useCatalogSortSeeAllLoggingModule (ref), useFirstSeenImpressionFilterModule (ref), fFlagAXSduiSortSessionImpressionDedup (ref), useSessionSeenImpressionFilterModule (ref), useDeferLooksWithoutHydrationFilterModule (ref), useComposedImpressionFilterModule (ref), fFlagAXDeferLookImpressionsForHydration (ref), useStore (ref), useHydrateCatalogSortOnDemandEffectModule (ref), useLocalization (ref), fFlagAXCatalogItemInformationPopover (ref), useOpenInformationPopoverModule (ref), getFooterVisibilityFromItemFootersModule (ref), unifiedEventLogEnums (ref), useAddUnifiedLoggingToCatalogSortEffectModule (ref), itemTypeEnum (ref), selectHydratedLookTypeModule (ref), cryoModule (ref), widgetConstantsModule (ref), fFlagAXSduiSponsoredItemClickTracking (ref), useOnCatalogSortImpressionsDetectedCallbackModule (ref)
+	-- upvalues: useCatalogPageMonolithDependenciesModule (ref), useTokens (ref), reactModule (ref), useOnRequestImpressionsSignalModule (ref), fFlagAXSduiSeeAllClickLogging (ref), useCatalogSortSeeAllLoggingModule (ref), useFirstSeenImpressionFilterModule (ref), fFlagAXSduiSortSessionImpressionDedup (ref), useSessionSeenImpressionFilterModule (ref), useDeferLooksWithoutHydrationFilterModule (ref), useComposedImpressionFilterModule (ref), fFlagAXDeferLookImpressionsForHydration (ref), useStore (ref), useHydrateCatalogSortOnDemandEffectModule (ref), useLocalization (ref), fFlagAXCatalogItemInformationPopover (ref), useOpenInformationPopoverModule (ref), getFooterVisibilityFromItemFootersModule (ref), unifiedEventLogEnums (ref), useAddUnifiedLoggingToCatalogSortEffectModule (ref), itemTypeEnum (ref), selectHydratedLookTypeModule (ref), cryoModule (ref), widgetConstantsModule (ref), useOnCatalogSortImpressionsDetectedCallbackModule (ref)
 	local widgetTileWithImpressionsTagging = useCatalogPageMonolithDependenciesModule().WidgetTileWithImpressionsTagging
 	local var1 = useTokens()
 	local widgetInfo = p1.widgetInfo
@@ -56,7 +55,7 @@ return function(p1)
 		var5 = var7
 	end
 	local var8 = if widgetInfo then widgetInfo.id else ""
-	local text = "WIDGET_ITEM_GROUP" .. "_" .. var27
+	local text = "WIDGET_ITEM_GROUP" .. "_" .. var8
 	local var9 = if fFlagAXSduiSortSessionImpressionDedup then useSessionSeenImpressionFilterModule(var8) else useFirstSeenImpressionFilterModule(var8)
 	local var10 = if fFlagAXDeferLookImpressionsForHydration then useComposedImpressionFilterModule({
 		useDeferLooksWithoutHydrationFilterModule(widgetInfo),
@@ -122,7 +121,6 @@ return function(p1)
 		})
 	end
 	
-	local adTrackingDataByItemId = p1.adTrackingDataByItemId
 	local var19 = if widgetInfo then widgetInfo.content else nil
 	
 	return {
@@ -139,7 +137,7 @@ return function(p1)
 			return cryoModule.List.getRange(var19 or {}, 1, rowCount * itemsPerRow)
 		end, { var19, rowCount, itemsPerRow }),
 		renderTile = function(p2, p3)
-			-- upvalues: buildPerTileAnalyticsInfo (ref), reactModule (copy), widgetTileWithImpressionsTagging (ref), floored (ref), widgetInfo (ref), widgetConstantsModule (copy), var11 (ref), p1 (ref), itemsPerRow (ref), var18 (ref), text (ref), fFlagAXSduiSponsoredItemClickTracking (copy), adTrackingDataByItemId (ref)
+			-- upvalues: buildPerTileAnalyticsInfo (ref), reactModule (copy), widgetTileWithImpressionsTagging (ref), floored (ref), widgetInfo (ref), widgetConstantsModule (copy), var11 (ref), p1 (ref), itemsPerRow (ref), var18 (ref), text (ref)
 			return reactModule.createElement(widgetTileWithImpressionsTagging, {
 				size = UDim2.new(0, floored, 0, 0),
 				cardStyle = if widgetInfo and widgetInfo.template then widgetInfo.template.cardStyle else nil,
@@ -157,8 +155,7 @@ return function(p1)
 				isPriceVisible = var18.isPriceVisible,
 				impressionsTag = text,
 				widgetAnalyticsInfo = buildPerTileAnalyticsInfo(p2, p3),
-				onThumbnailLoaded = p1.onThumbnailLoaded,
-				adTrackingData = if fFlagAXSduiSponsoredItemClickTracking and adTrackingDataByItemId and p2.id then adTrackingDataByItemId[p2.id] else nil
+				onThumbnailLoaded = p1.onThumbnailLoaded
 			})
 		end,
 		containerRef = var2,

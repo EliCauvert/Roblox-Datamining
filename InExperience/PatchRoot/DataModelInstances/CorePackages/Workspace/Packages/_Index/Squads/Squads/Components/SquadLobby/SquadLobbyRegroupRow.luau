@@ -23,15 +23,11 @@ local squadExperienceInviteSource = enumsModule.SquadExperienceInviteSource
 local squadRegroupEntryPoint = enumsModule.SquadRegroupEntryPoint
 local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local regroupTextTruncationFix = game:DefineFastFlag("RegroupTextTruncationFix", false)
-local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local fFlagSquadsPresenceStoreMigration = require(parent.SquadsCore.Flags).FFlagSquadsPresenceStoreMigration
-local fFlagUseSignalsForSquadExperienceInvite = dependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInvite
-local getSquadExperienceInviteStore = require(parent.SquadsCore.Stores).GetSquadExperienceInviteStore
-local useSignalState = require(parent.SignalsReact).useSignalState
 local var1 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
 
 return function(p1)
-	-- upvalues: useDispatch (ref), react (ref), squadExternalContractContext (ref), useLocalization (ref), fFlagUseSignalsForSquadExperienceInvite (ref), useSignalState (ref), getSquadExperienceInviteStore (ref), useSelector (ref), useCurrentSquadId (ref), useIsExperienceInviteRetryBlocked (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), foundation (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), image (ref), regroupTextTruncationFix (ref), buttonSize (ref), buttonVariant (ref), loggerModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), eventNamesModule (ref), rbxAnalyticsService (ref), squadToastActionsAndStates (ref), squadRegroupEntryPoint (ref)
+	-- upvalues: useDispatch (ref), react (ref), squadExternalContractContext (ref), useLocalization (ref), useSelector (ref), useCurrentSquadId (ref), useIsExperienceInviteRetryBlocked (ref), fFlagSquadsPresenceStoreMigration (ref), var1 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), foundation (ref), image (ref), regroupTextTruncationFix (ref), buttonSize (ref), buttonVariant (ref), loggerModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), eventNamesModule (ref), rbxAnalyticsService (ref), squadToastActionsAndStates (ref), squadRegroupEntryPoint (ref)
 	local var2 = useDispatch()
 	local var3 = react.useContext(squadExternalContractContext)
 	local var4 = useLocalization({
@@ -39,9 +35,9 @@ return function(p1)
 		Body = "Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer",
 		Join = "Notifications.SquadRegroupPrompt.ToastAction.Join"
 	})
-	local var5 = if fFlagUseSignalsForSquadExperienceInvite then useSignalState(getSquadExperienceInviteStore(false).getHasCurrentExperienceInvite) else useSelector(react.useCallback(function(p2)
+	local var5 = useSelector(react.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
-	end, {})) ~= nil
+	end, {}))
 	local var6 = useCurrentSquadId()
 	local var7 = useIsExperienceInviteRetryBlocked(var6)
 	local var8 = if fFlagSquadsPresenceStoreMigration then var1(tostring(p1.localUserId)) else useSelector(react.useCallback(function(p2)
@@ -53,14 +49,12 @@ return function(p1)
 	local var11 = if var10 ~= nil then nil else getRbxthumbWithTypeSizeAndOptions(tostring(var10), constants.RbxthumbTypes.GameIcon, 150, false)
 	
 	return react.createElement(foundation.View, {
-		tag = "align-y-center row auto-none size-full radius-medium gap-medium gui-object-defaults padding-x-xlarge padding-y-medium",
-		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-regroup-row" else nil
+		tag = "align-y-center row auto-none size-full radius-medium gap-medium gui-object-defaults padding-x-xlarge padding-y-medium"
 	}, {
 		Thumbnail = if var11 then react.createElement(image, {
 			tag = "radius-small bg-surface-100 size-1000",
 			LayoutOrder = 1,
-			Image = var11,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-regroup-row--thumbnail" else nil
+			Image = var11
 		}) else nil,
 		TextContainer = react.createElement(foundation.View, {
 			tag = "auto-y fill col gap-xsmall align-x-left gui-object-defaults",
@@ -72,8 +66,7 @@ return function(p1)
 					["auto-y text-align-x-left text-no-wrap text-title-medium content-emphasis"] = true,
 					["size-full-0 text-truncate-end"] = regroupTextTruncationFix
 				},
-				Text = var4.Title,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-regroup-row--title" else nil
+				Text = var4.Title
 			}),
 			Body = react.createElement(foundation.Text, {
 				LayoutOrder = 2,
@@ -81,8 +74,7 @@ return function(p1)
 					["auto-y content-default text-body-medium text-align-x-left text-no-wrap gui-object-defaults"] = true,
 					["size-full-0 text-truncate-end"] = regroupTextTruncationFix
 				},
-				Text = var4.Body,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-regroup-row--body" else nil
+				Text = var4.Body
 			})
 		}),
 		JoinButton = react.createElement(foundation.Button, {
@@ -90,8 +82,7 @@ return function(p1)
 			text = var4.Join,
 			size = buttonSize.Medium,
 			variant = buttonVariant.Standard,
-			isDisabled = var5 or var7,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-regroup-row--join-button" else nil,
+			isDisabled = if var5 == nil then var7 else true,
 			onActivated = react.useCallback(function()
 				-- upvalues: var9 (ref), loggerModule (copy), var2 (ref), createExperienceInviteModule (copy), var3 (ref), squadExperienceInviteSource (copy), eventNamesModule (copy), var6 (ref), p1 (ref), fFlagSquadsPresenceStoreMigration (copy), var8 (ref), rbxAnalyticsService (copy), squadToastActionsAndStates (copy), squadRegroupEntryPoint (copy)
 				if var9 == nil then

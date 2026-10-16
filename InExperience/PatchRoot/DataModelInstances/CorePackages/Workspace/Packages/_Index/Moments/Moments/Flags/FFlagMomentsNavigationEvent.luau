@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("MomentsNavigationEvent", false) and require(script.Parent.FFlagMomentsFlushDwellBeforeNavigation)

@@ -3,7 +3,6 @@ local parent = foundation.Parent
 local reactModule = require(parent.React)
 local iconVariant = require(parent.BuilderIcons).IconVariant
 local constantsModule = require(foundation.Constants)
-local flagsModule = require(foundation.Utility.Flags)
 local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
 local textModule = require(foundation.Components.Text)
 local _ = require(foundation.Components.Types)
@@ -27,22 +26,21 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), iconPositionModule (ref), iconVariant (ref), flagsModule (ref), useChipVariantsModule (ref), colorNamespaceModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerModeModule (ref), constantsModule (ref), presentationContextModule (ref), accessoryModule (ref), textModule (ref)
-	local var1
-	local var2 = withDefaultsModule(p1, t)
-	local var3 = useTokensModule()
-	local var4, var5 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), iconPositionModule (copy), iconVariant (copy)
-		local leading = var2.leading
-		local trailing = var2.trailing
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), iconPositionModule (ref), iconVariant (ref), useChipVariantsModule (ref), colorNamespaceModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerModeModule (ref), constantsModule (ref), presentationContextModule (ref), accessoryModule (ref), textModule (ref)
+	local var1 = withDefaultsModule(p1, t)
+	local var2 = useTokensModule()
+	local var3, var4 = reactModule.useMemo(function()
+		-- upvalues: var1 (ref), iconPositionModule (copy), iconVariant (copy)
+		local leading = var1.leading
+		local trailing = var1.trailing
 		
-		if var2.icon ~= nil then
-			if typeof(var2.icon) == "string" then
-				leading = { iconName = var2.icon }
+		if var1.icon ~= nil then
+			if typeof(var1.icon) == "string" then
+				leading = { iconName = var1.icon }
 			else
-				local t = { iconName = var2.icon.name }
+				local t = { iconName = var1.icon.name }
 				
-				if var2.icon.position == iconPositionModule.Left then
+				if var1.icon.position == iconPositionModule.Left then
 					leading = t
 				else
 					trailing = t
@@ -56,79 +54,65 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			trailing.iconVariant = iconVariant.Filled
 		end
 		return leading, trailing
-	end, { var2.leading, var2.icon, var2.trailing })
-	local var6 = var2.text ~= nil and var2.text ~= ""
+	end, { var1.leading, var1.icon, var1.trailing })
+	local var5 = useChipVariantsModule(var2, var1.size, var1.variant, var1.isChecked, var3 ~= nil, var4 ~= nil)
+	local floored = math.floor(var2.Stroke.Thicker)
 	
-	if flagsModule.FoundationFixChipAccessoryLayout then
-		var1 = not var6
-		
-		if var1 then
-			var1 = var4 == nil ~= (var5 == nil)
-			var1 = nil
-		end
-	else
-		var1 = nil
-	end
-	local var7 = useChipVariantsModule(var3, var2.size, var2.variant, var2.isChecked, var4 ~= nil, var5 ~= nil)
-	local floored = math.floor(var3.Stroke.Thicker)
-	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var2, {
-		isDisabled = var2.isDisabled,
+	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+		isDisabled = var1.isDisabled,
 		selection = {
-			Selectable = if var2.isDisabled then false else var2.Selectable,
-			NextSelectionUp = var2.NextSelectionUp,
-			NextSelectionDown = var2.NextSelectionDown,
-			NextSelectionLeft = var2.NextSelectionLeft,
-			NextSelectionRight = var2.NextSelectionRight
+			Selectable = if var1.isDisabled then false else var1.Selectable,
+			NextSelectionUp = var1.NextSelectionUp,
+			NextSelectionDown = var1.NextSelectionDown,
+			NextSelectionLeft = var1.NextSelectionLeft,
+			NextSelectionRight = var1.NextSelectionRight
 		},
-		onActivated = var2.onActivated,
-		stateLayer = if var2.isChecked then { mode = stateLayerModeModule.Inverse } else nil,
-		backgroundStyle = var7.chip.backgroundStyle,
-		padding = var7.chip.padding,
+		onActivated = var1.onActivated,
+		stateLayer = if var1.isChecked then { mode = stateLayerModeModule.Inverse } else nil,
+		backgroundStyle = var5.chip.backgroundStyle,
+		padding = var5.chip.padding,
 		cursor = {
-			radius = UDim.new(0, var3.Radius.Circle),
+			radius = UDim.new(0, var2.Radius.Circle),
 			offset = floored * 2,
 			borderWidth = floored
 		},
-		tag = var7.chip.tag,
+		tag = var5.chip.tag,
 		ref = p2,
-		GroupTransparency = if var2.isDisabled then constantsModule.DISABLED_TRANSPARENCY else 0
+		GroupTransparency = if var1.isDisabled then constantsModule.DISABLED_TRANSPARENCY else 0
 	}), reactModule.createElement(presentationContextModule.Provider, {
 		value = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), colorNamespaceModule (copy)
+			-- upvalues: var1 (ref), colorNamespaceModule (copy)
 			return {
 				isIconSize = true,
-				colorNamespace = if var2.isChecked then colorNamespaceModule.Inverse else colorNamespaceModule.Color
+				colorNamespace = if var1.isChecked then colorNamespaceModule.Inverse else colorNamespaceModule.Color
 			}
-		end, { var2.isChecked })
+		end, { var1.isChecked })
 	}, {
-		Leading = if var4 then reactModule.createElement(accessoryModule, {
+		Leading = if var3 then reactModule.createElement(accessoryModule, {
 			isLeading = true,
-			config = var4,
-			size = var2.size,
-			chipBackgroundStyle = var7.chip.backgroundStyle,
-			contentStyle = var7.text.contentStyle,
-			isDisabled = var2.isDisabled,
-			isIconOnly = var1,
-			testId = `{var2.testId}--leading-accessory`
+			config = var3,
+			size = var1.size,
+			chipBackgroundStyle = var5.chip.backgroundStyle,
+			contentStyle = var5.text.contentStyle,
+			isDisabled = var1.isDisabled,
+			testId = `{var1.testId}--leading-accessory`
 		}) else nil,
-		Text = if var6 then reactModule.createElement(textModule, {
+		Text = if var1.text and var1.text ~= "" then reactModule.createElement(textModule, {
 			LayoutOrder = 2,
-			Text = var2.text,
-			textStyle = var7.text.contentStyle,
-			tag = var7.text.tag,
-			padding = var7.text.padding,
-			testId = `{var2.testId}--text`
+			Text = var1.text,
+			textStyle = var5.text.contentStyle,
+			tag = var5.text.tag,
+			padding = var5.text.padding,
+			testId = `{var1.testId}--text`
 		}) else nil,
-		Trailing = if var5 then reactModule.createElement(accessoryModule, {
+		Trailing = if var4 then reactModule.createElement(accessoryModule, {
 			isLeading = false,
-			config = var5,
-			size = var2.size,
-			chipBackgroundStyle = var7.chip.backgroundStyle,
-			contentStyle = var7.text.contentStyle,
-			isDisabled = var2.isDisabled,
-			isIconOnly = var1,
-			testId = `{var2.testId}--trailing-accessory`
+			config = var4,
+			size = var1.size,
+			chipBackgroundStyle = var5.chip.backgroundStyle,
+			contentStyle = var5.text.contentStyle,
+			isDisabled = var1.isDisabled,
+			testId = `{var1.testId}--trailing-accessory`
 		}) else nil
 	}))
 end))

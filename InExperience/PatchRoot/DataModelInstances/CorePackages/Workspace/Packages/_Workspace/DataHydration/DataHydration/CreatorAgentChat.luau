@@ -13,7 +13,6 @@ return {
 	SubagentTasks = require(script.SubagentTasks),
 	SubagentTaskStatus = typesModule.SubagentTaskStatus,
 	SubagentTaskCategory = typesModule.SubagentTaskCategory,
-	RequestFailureKind = typesModule.RequestFailureKind,
 	StudioClientLogsTool = require(script.StudioClientLogsTool),
 	StudioClientDataModelTools = require(script.StudioClientDataModelTools),
 	StudioManageDevProductTool = require(script.StudioManageDevProductTool),

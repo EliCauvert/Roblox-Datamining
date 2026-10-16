@@ -7,7 +7,6 @@ local view = foundationModule.View
 local _ = require(momentsCommon.Media.MediaTypes)
 local _ = require(momentsCommon.Media.mediaNodeRegistry)
 local preloadFastIntsModule = require(momentsCommon.Media.Preload.preloadFastInts)
-local fFlagMomentsPreloadScreenshotImageLabelModule = require(momentsCommon.Flags.FFlagMomentsPreloadScreenshotImageLabel)
 
 local function _(p1)
 	-- upvalues: reactModule (ref)
@@ -17,7 +16,7 @@ end
 return {
 	kind = "screenshot",
 	create = function(p1, p2)
-		-- upvalues: preloadFastIntsModule (ref), signalsModule (ref), fFlagMomentsPreloadScreenshotImageLabelModule (ref), reactModule (ref), view (ref)
+		-- upvalues: preloadFastIntsModule (ref), signalsModule (ref), reactModule (ref), view (ref)
 		local image = p1.image
 		assert(if image == nil then p1.imageContent ~= nil else true, "createScreenshotNode: screenshot content is required")
 		local poster = p1.poster
@@ -67,49 +66,27 @@ return {
 				return if posterContent == nil then { imageContent } else { imageContent, posterContent }
 			end,
 			download = function()
-				-- upvalues: var8 (write), fFlagMomentsPreloadScreenshotImageLabelModule (copy), imageContent (ref), posterContent (ref), p2 (ref)
+				-- upvalues: var8 (write), posterContent (ref), imageContent (ref), p2 (ref)
 				if var8 then return end
-				if fFlagMomentsPreloadScreenshotImageLabelModule then
-					local t = {}
-					local var11 = nil
-					
-					if imageContent.Uri ~= nil then
-						local imageLabel = Instance.new("ImageLabel")
-						imageLabel.Image = imageContent.Uri
-						var11 = imageLabel
-						table.insert(t, imageLabel)
-					end
-					if posterContent ~= nil and posterContent.Uri ~= nil then
-						table.insert(t, posterContent.Uri)
-					end
-					if #t > 0 then
-						p2.contentProvider:PreloadAsync(t)
-					end
-					if var11 ~= nil then
-						var11:Destroy()
-					end
-					return
+				local list, var11, var12
+				local t = {}
+				
+				if posterContent == nil then
+					list = { imageContent }
+					var11 = nil
+					var12 = nil
 				else
-					local list, var12, var13
-					local t = {}
-					
-					if posterContent == nil then
-						list = { imageContent }
-						var12 = nil
-						var13 = nil
-					else
-						list = { imageContent, posterContent }
-						var12 = nil
-						var13 = nil
+					list = { imageContent, posterContent }
+					var11 = nil
+					var12 = nil
+				end
+				for i, v in list, var11, var12 do
+					if v.Uri ~= nil then
+						table.insert(t, v.Uri)
 					end
-					for i, v in list, var12, var13 do
-						if v.Uri ~= nil then
-							table.insert(t, v.Uri)
-						end
-					end
-					if #t > 0 then
-						p2.contentProvider:PreloadAsync(t)
-					end
+				end
+				if #t > 0 then
+					p2.contentProvider:PreloadAsync(t)
 				end
 			end,
 			render = function(p3)
@@ -123,7 +100,7 @@ return {
 					createElement_1 = nil
 				else
 					createElement_1 = reactModule.createElement
-					local var14 = "ImageLabel"
+					local var13 = "ImageLabel"
 					local t_2 = {
 						BackgroundTransparency = 1,
 						ZIndex = 1,
@@ -134,11 +111,11 @@ return {
 					local t_3 = {}
 					local cornerRadius = p3.cornerRadius
 					t_3.Corner = if cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = cornerRadius })
-					createElement_1 = createElement_1(var14, t_2, t_3)
+					createElement_1 = createElement_1(var13, t_2, t_3)
 				end
 				t_1.Poster = createElement_1
 				local createElement_2 = reactModule.createElement
-				local var15 = "ImageLabel"
+				local var14 = "ImageLabel"
 				local t_2 = {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
@@ -150,7 +127,7 @@ return {
 				local t_3 = {}
 				local cornerRadius = p3.cornerRadius
 				t_3.Corner = if cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = cornerRadius })
-				t_1.Base = createElement_2(var15, t_2, t_3)
+				t_1.Base = createElement_2(var14, t_2, t_3)
 				
 				return createElement(view, t, t_1)
 			end,

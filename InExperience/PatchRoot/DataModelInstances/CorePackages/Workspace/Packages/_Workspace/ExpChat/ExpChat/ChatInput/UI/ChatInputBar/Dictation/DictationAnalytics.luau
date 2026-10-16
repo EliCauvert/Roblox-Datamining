@@ -15,8 +15,7 @@ local t = {
 	FtuxDismiss = "dictation_ftux_dismiss",
 	MicToastShown = "dictation_mic_toast_shown",
 	MicToastActivated = "dictation_mic_toast_activated",
-	MicToastDismiss = "dictation_mic_toast_dismiss",
-	SafetyReminderTriggered = "dictation_safety_reminder_triggered"
+	MicToastDismiss = "dictation_mic_toast_dismiss"
 }
 local t_1 = {
 	SttMode = "stt_mode",
@@ -48,8 +47,7 @@ local t_4 = {
 	UserManual = "user_manual",
 	TimeUp = "time_up",
 	AutoPause = "auto_pause",
-	AutoChunk = "auto_chunk",
-	SafetyIntervention = "safety_intervention"
+	AutoChunk = "auto_chunk"
 }
 local t_5 = {
 	Granted = "granted",
@@ -119,13 +117,6 @@ local t_9 = {
 		links = "",
 		backends = { "RobloxTelemetryCounter" },
 		lastUpdated = { 2026, 9, 9 }
-	},
-	SafetyReminder = {
-		eventName = "ExpChatDictationSafetyReminder",
-		description = "A continuous-dictation message came back fully text-filtered and the once-per-session \"use kind words\" reminder was requested.",
-		links = "",
-		backends = { "RobloxTelemetryCounter" },
-		lastUpdated = { 2026, 9, 30 }
 	},
 	MessageSent = {
 		eventName = "ExpChatDictationMessageSent",
@@ -215,15 +206,6 @@ return {
 		
 		if var1 then
 			var1:LogCounter(messageSent, { customFields = t }, 1)
-		end
-	end,
-	reportSafetyReminderCounter = function()
-		-- upvalues: t_9 (ref), var1 (write)
-		local safetyReminder = t_9.SafetyReminder
-		local t = {}
-		
-		if var1 then
-			var1:LogCounter(safetyReminder, { customFields = t }, 1)
 		end
 	end
 }

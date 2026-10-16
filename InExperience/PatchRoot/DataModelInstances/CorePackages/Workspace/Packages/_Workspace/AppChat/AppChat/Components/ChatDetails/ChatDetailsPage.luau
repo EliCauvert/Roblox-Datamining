@@ -21,6 +21,7 @@ local appChatDetailsPageAutomaticCanvasSize = game:DefineFastFlag("AppChatDetail
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 local useIsChatUserMessagesEnabledModule = require(appChat.Hooks.useIsChatUserMessagesEnabled)
+local fFlagHideConversationTypeInfoIfNoWebViewModule = require(appChat.Flags.FFlagHideConversationTypeInfoIfNoWebView)
 local t = {
 	localUserId = nil,
 	conversation = nil,
@@ -76,7 +77,7 @@ local t = {
 }
 
 function ChatDetailsPage(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTextSizeOffset (ref), useTokens (ref), useIsAppChatVerticallyConstrainedModule (ref), loggerModule (ref), useCallback (ref), useIsChatUserMessagesEnabledModule (ref), reactModule (ref), appChatDetailsPageAutomaticCanvasSize (ref), sectionHeaderModule (ref), groupNameEntryCellModule (ref), images (ref), addFriendsEntryModule (ref), participantListModule (ref), leaveGroupCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationTypeCellModule (ref), createUnfilteredChatCellModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useTextSizeOffset (ref), useTokens (ref), useIsAppChatVerticallyConstrainedModule (ref), loggerModule (ref), useCallback (ref), useIsChatUserMessagesEnabledModule (ref), reactModule (ref), appChatDetailsPageAutomaticCanvasSize (ref), sectionHeaderModule (ref), groupNameEntryCellModule (ref), images (ref), addFriendsEntryModule (ref), participantListModule (ref), leaveGroupCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationTypeCellModule (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), createUnfilteredChatCellModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local style = var1.style
 	local var2 = useTokens().Size.Size_1200 + 2 * useTextSizeOffset()
@@ -237,7 +238,7 @@ function ChatDetailsPage(p1)
 				bodyText = var1.conversationTypeText,
 				iconImage = images["icons/actions/info"],
 				onIconActivated = var1.onConversationTypeIconActivated,
-				shouldShowIcon = var1.shouldShowConversationTypeInfo,
+				shouldShowIcon = if fFlagHideConversationTypeInfoIfNoWebViewModule then var1.shouldShowConversationTypeInfo else nil,
 				style = var1.style
 			}) else nil,
 			CreateUnfilteredChatCell = if var11 and var1.shouldShowCreateUnfilteredChat then reactModule.createElement(createUnfilteredChatCellModule, {

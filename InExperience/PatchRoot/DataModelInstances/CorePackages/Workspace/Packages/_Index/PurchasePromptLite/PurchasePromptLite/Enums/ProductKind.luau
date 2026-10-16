@@ -8,6 +8,5 @@
 	DeveloperSubscription = "DeveloperSubscription",
 	AvatarCreationFee = "AvatarCreationFee",
 	Unknown = "Unknown",
-	RobuxUpsell = "RobuxUpsell",
-	VIPServer = "VIPServer"
+	RobuxUpsell = "RobuxUpsell"
 }

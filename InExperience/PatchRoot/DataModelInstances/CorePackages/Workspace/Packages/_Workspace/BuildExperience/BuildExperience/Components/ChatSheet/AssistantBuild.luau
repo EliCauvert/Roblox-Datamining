@@ -8,6 +8,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local getAssistantBuildStoreModule = require(buildExperience.Stores.GetAssistantBuildStore)
 local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
+local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
 local educationalTooltip = foundationModule.EducationalTooltip
 local iconButton = foundationModule.IconButton
 local iconName = foundationModule.Enums.IconName
@@ -17,7 +18,7 @@ local popoverSide = foundationModule.Enums.PopoverSide
 local view = foundationModule.View
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), fFlagBuildExperienceInGameShell (ref), reactModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), fFlagBuildExperienceInGameShell (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
 	local var1 = useLocalization({
 		disabledTitle = localizationStringsModule.CHAT_ASSISTANT_DISABLED,
 		portraitRequired = localizationStringsModule.CHAT_PORTRAIT_REQUIRED
@@ -37,10 +38,10 @@ return reactModule.memo(function(p1)
 		var2.setIsDisabledTooltipOpen(false)
 		var3.setIsActive(true)
 	end, { var2, var4, var5, var3 })
-	local var8 = reactModule.useCallback(function()
+	local var8 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
 		-- upvalues: var2 (ref)
 		var2.setIsDisabledTooltipOpen(false)
-	end, { var2 })
+	end, { var2 }) else nil
 	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), var3 (ref), var2 (ref)
 		if var4 then

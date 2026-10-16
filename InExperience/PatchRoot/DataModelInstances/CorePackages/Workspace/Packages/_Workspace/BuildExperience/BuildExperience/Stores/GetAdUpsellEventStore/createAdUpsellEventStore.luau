@@ -5,7 +5,6 @@ local signalsModule = require(parent.Signals)
 local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
 local chatTypesModule = require(buildExperience.Chat.chatTypes)
 local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local fFlagBuildAdUpsellPinnedModule = require(buildExperience.Flags.FFlagBuildAdUpsellPinned)
 local getAdUpsellEligibilityModule = require(buildExperience.Components.Ads.getAdUpsellEligibility)
 local observeAdUpsellEligibilityModule = require(buildExperience.Components.Ads.observeAdUpsellEligibility)
 local gameConfigurationLabelsModule = require(buildExperience.utils.GameConfigurationLabels)
@@ -56,15 +55,14 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: defaultDependencies (ref), signalsModule (ref), fFlagBuildAdUpsellPinnedModule (ref), chatTypesModule (ref), creatorAgentChatModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
+	-- upvalues: defaultDependencies (ref), signalsModule (ref), chatTypesModule (ref), creatorAgentChatModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
 	p1 = p1 or defaultDependencies()
 	local var2, var3 = signalsModule.createSignal(0)
 	local var4, var5 = signalsModule.createSignal(0)
 	local t = {}
 	local t_1 = {}
-	local t_2 = {}
 	local var6 = nil
-	local t_3 = {}
+	local t_2 = {}
 	local var7 = 0
 	local var8 = nil
 	local _ = nil
@@ -105,23 +103,23 @@ return function(p1)
 	end
 	
 	local _ = function(p2)
-		-- upvalues: t_3 (ref)
-		local var9 = t_3[p2]
+		-- upvalues: t_2 (ref)
+		local var9 = t_2[p2]
 		
 		if var9 == nil then
 			return
 		end
-		t_3[p2] = nil
+		t_2[p2] = nil
 		var9()
 	end
 	
 	local _ = function(p2)
-		-- upvalues: t (ref), t_3 (ref), t_1 (ref)
+		-- upvalues: t (ref), t_2 (ref), t_1 (ref)
 		if t[p2] == nil then return end
-		local var9 = t_3[p2]
+		local var9 = t_2[p2]
 		
 		if var9 ~= nil then
-			t_3[p2] = nil
+			t_2[p2] = nil
 			var9()
 		end
 		t[p2] = nil
@@ -133,7 +131,7 @@ return function(p1)
 	end
 	
 	local function retainPending(p2)
-		-- upvalues: t (ref), t_1 (ref), t_3 (ref)
+		-- upvalues: t (ref), t_1 (ref), t_2 (ref)
 		local id = t[p2.id]
 		
 		if id ~= nil then
@@ -145,10 +143,10 @@ return function(p1)
 			local removed = table.remove(t_1, 1)
 			
 			if removed == nil then continue end
-			local var9 = t_3[removed]
+			local var9 = t_2[removed]
 			
 			if var9 ~= nil then
-				t_3[removed] = nil
+				t_2[removed] = nil
 				var9()
 			end
 			t[removed] = nil
@@ -279,10 +277,10 @@ return function(p1)
 	end
 	
 	local function persistEvent(p3)
-		-- upvalues: p1 (ref), fFlagBuildAdUpsellPinnedModule (copy), t_2 (ref), var3 (ref), t (ref), t_3 (ref), t_1 (ref), var12 (write)
+		-- upvalues: p1 (ref), var3 (ref), t (ref), t_2 (ref), t_1 (ref), var12 (write)
 		if p1 == nil then return end
 		local var16, var17
-		local t_4 = {
+		local t_3 = {
 			universeId = p3.universeId,
 			sessionId = p3.sessionId,
 			eventId = p3.id,
@@ -293,18 +291,15 @@ return function(p1)
 		local _ = nil
 		
 		if p3.isCompletedTurn then
-			local var18, var19 = p1.recordCompletedTurn(t_4)
+			local var18, var19 = p1.recordCompletedTurn(t_3)
 			var16 = var18
 			var17 = var19
 		else
-			local var20, var21 = p1.recordPublish(t_4)
+			local var20, var21 = p1.recordPublish(t_3)
 			var16 = var20
 			var17 = var21
 		end
 		if var17 then
-			if fFlagBuildAdUpsellPinnedModule and p3.afterMessageKey ~= nil then
-				t_2[p3.id] = p3.afterMessageKey
-			end
 			var3(function(p4)
 				return p4 + 1
 			end)
@@ -313,10 +308,10 @@ return function(p1)
 			local id = p3.id
 			
 			if t[id] == nil then return end
-			local var22 = t_3[id]
+			local var22 = t_2[id]
 			
 			if var22 ~= nil then
-				t_3[id] = nil
+				t_2[id] = nil
 				var22()
 			end
 			t[id] = nil
@@ -349,7 +344,7 @@ return function(p1)
 	end
 	
 	local function awaitEligibility(p3, p4)
-		-- upvalues: p1 (ref), var7 (write), t (ref), t_3 (ref), persistEvent (ref)
+		-- upvalues: p1 (ref), var7 (write), t (ref), t_2 (ref), persistEvent (ref)
 		if p1 == nil then return end
 		p3.isVerifyingAudience = false
 		
@@ -358,7 +353,7 @@ return function(p1)
 		local var16 = nil
 		local var17 = false
 		local var18 = p1.observeEligibility(p3.universeId, function()
-			-- upvalues: var7 (copy), var7 (ref), t (copy), p3 (ref), p1 (copy), var16 (write), t_3 (copy), var17 (write), p4 (ref), persistEvent (copy)
+			-- upvalues: var7 (copy), var7 (ref), t (copy), p3 (ref), p1 (copy), var16 (write), t_2 (copy), var17 (write), p4 (ref), persistEvent (copy)
 			if var7 ~= var7 or t[p3.id] ~= p3 then return end
 			local eligibility = p1.getEligibility(p3.universeId)
 			
@@ -369,10 +364,10 @@ return function(p1)
 				var17 = true
 			else
 				local id = p3.id
-				local var19 = t_3[id]
+				local var19 = t_2[id]
 				
 				if var19 ~= nil then
-					t_3[id] = nil
+					t_2[id] = nil
 					var19()
 				end
 			end
@@ -380,7 +375,7 @@ return function(p1)
 			persistEvent(p3)
 		end)
 		var16 = var18
-		t_3[p3.id] = var18
+		t_2[p3.id] = var18
 	end
 	
 	var8 = function(p3)
@@ -430,39 +425,23 @@ return function(p1)
 	end
 	
 	local function disposeAllEligibilitySubscriptions()
-		-- upvalues: t_3 (ref)
+		-- upvalues: t_2 (ref)
 		local t = {}
 		
-		for i in t_3 do
+		for i in t_2 do
 			table.insert(t, i)
 		end
 		for i_1, v in t do
-			local var16 = t_3[v]
+			local var16 = t_2[v]
 			
 			if var16 ~= nil then
-				t_3[v] = nil
+				t_2[v] = nil
 				var16()
 			end
 		end
 	end
 	
 	return {
-		recordAdCampaignAttempt = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4)
-			-- upvalues: p1 (ref), var5 (ref), var3 (ref)
-			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
-			
-			if var17 == nil or not var17.saveAttempt(p3, p4) then
-				return false
-			end
-			var5(function(p5)
-				return p5 + 1
-			end)
-			var3(function(p5)
-				return p5 + 1
-			end)
-			
-			return true
-		end else nil,
 		getAdCampaignCard = if fFlagBuildAgentAdCampaignCardModule then function(p3, p4)
 			-- upvalues: p1 (ref)
 			local var17 = if p1 ~= nil then nil else p1.getAdCampaignCardStorage()
@@ -620,8 +599,8 @@ return function(p1)
 			end
 		end,
 		pruneAnchors = function(p3, p4, p5)
-			-- upvalues: fFlagBuildAdUpsellPinnedModule (copy), p1 (ref), var3 (ref)
-			if fFlagBuildAdUpsellPinnedModule or p1 == nil then
+			-- upvalues: p1 (ref), var3 (ref)
+			if p1 == nil then
 				return false
 			end
 			local var19, var20 = p1.pruneAnchors(p3, p4, p5)
@@ -632,10 +611,6 @@ return function(p1)
 				end)
 			end
 			return var19
-		end,
-		getTransientCongratsMessageKey = function(p3)
-			-- upvalues: fFlagBuildAdUpsellPinnedModule (copy), t_2 (ref)
-			return if fFlagBuildAdUpsellPinnedModule then t_2[p3] else nil
 		end,
 		markAnchorImpressed = function(p3, p4, p5)
 			-- upvalues: p1 (ref), var3 (ref)
@@ -652,16 +627,16 @@ return function(p1)
 			return var19
 		end,
 		dismissPermanently = function(p3)
-			-- upvalues: p1 (ref), t_1 (ref), t (ref), t_3 (ref), var3 (ref)
+			-- upvalues: p1 (ref), t_1 (ref), t (ref), t_2 (ref), var3 (ref)
 			if p1 ~= nil then
 				for i, v in table.clone(t_1) do
 					local var19 = t[v]
 					
 					if var19 ~= nil and var19.universeId == p3 and t[v] ~= nil then
-						local var20 = t_3[v]
+						local var20 = t_2[v]
 						
 						if var20 ~= nil then
-							t_3[v] = nil
+							t_2[v] = nil
 							var20()
 						end
 						t[v] = nil
@@ -679,7 +654,7 @@ return function(p1)
 			end
 		end,
 		reset = function()
-			-- upvalues: var7 (write), p1 (ref), var6 (write), disposeAllEligibilitySubscriptions (ref), t (ref), t_1 (ref), fFlagBuildAdUpsellPinnedModule (copy), t_2 (ref), var3 (ref), var5 (ref)
+			-- upvalues: var7 (write), p1 (ref), var6 (write), disposeAllEligibilitySubscriptions (ref), t (ref), t_1 (ref), var3 (ref), var5 (ref)
 			var7 += 1
 			
 			if p1 ~= nil and var6 ~= nil then
@@ -689,10 +664,6 @@ return function(p1)
 			disposeAllEligibilitySubscriptions()
 			table.clear(t)
 			table.clear(t_1)
-			
-			if fFlagBuildAdUpsellPinnedModule then
-				table.clear(t_2)
-			end
 			var3(0)
 			var5(0)
 		end

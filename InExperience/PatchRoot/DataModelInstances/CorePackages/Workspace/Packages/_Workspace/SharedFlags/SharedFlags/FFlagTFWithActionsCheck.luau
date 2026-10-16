@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("TFWithActionsCheck_4", false)

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXMakeupLayeringTooltipFTUX", false)
+﻿return game:DefineFastFlag("AXMakeupLayeringTooltipFTUX", false) and require(script.Parent.FFlagAXMoveContextualActionButtons)

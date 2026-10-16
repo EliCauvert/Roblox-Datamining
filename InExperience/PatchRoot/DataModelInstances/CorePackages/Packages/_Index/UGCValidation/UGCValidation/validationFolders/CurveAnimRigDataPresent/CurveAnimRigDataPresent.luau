@@ -3,6 +3,8 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local curveAnimBoneHierarchyUtilsModule = require(parent.util.CurveAnimBoneHierarchyUtils)
+local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
+local getFFlagUGCValidateCurveAnimRigDataR15PlusModule = require(parent.flags.getFFlagUGCValidateCurveAnimRigDataR15Plus)
 local getEngineFeatureIsValidR15PlusModule = require(parent.flags.getEngineFeatureIsValidR15Plus)
 
 return {
@@ -16,7 +18,7 @@ return {
 		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
 	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref), curveAnimBoneHierarchyUtilsModule (ref), getEngineFeatureIsValidR15PlusModule (ref)
+		-- upvalues: errorSourceStringsModule (ref), getFFlagUGCValidateEmotesBonesAllowedModule (ref), curveAnimBoneHierarchyUtilsModule (ref), getFFlagUGCValidateCurveAnimRigDataR15PlusModule (ref), getEngineFeatureIsValidR15PlusModule (ref)
 		for i, v in p2.curveAnimations do
 			local var1 = 0
 			
@@ -32,17 +34,17 @@ return {
 				end
 			end
 			if var1 ~= 0 then
-				if not curveAnimBoneHierarchyUtilsModule.hasBoneFolders(v) then
-					for i_1, v_1 in v:GetChildren() do
-						if v_1:IsA("AnimationRigData") and not v_1:IsValidR15() then
+				if not getFFlagUGCValidateEmotesBonesAllowedModule() or not curveAnimBoneHierarchyUtilsModule.hasBoneFolders(v) then
+					for v_1, v_2 in v:GetChildren() do
+						if v_2:IsA("AnimationRigData") and not v_2:IsValidR15() then
 							p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidRigData)
 							
 							return
 						end
 					end
-				elseif getEngineFeatureIsValidR15PlusModule() then
-					for i_1, v_1 in v:GetChildren() do
-						if v_1:IsA("AnimationRigData") and not v_1:IsValidR15Plus() then
+				elseif getFFlagUGCValidateCurveAnimRigDataR15PlusModule() and getEngineFeatureIsValidR15PlusModule() then
+					for v_1, v_2 in v:GetChildren() do
+						if v_2:IsA("AnimationRigData") and not v_2:IsValidR15Plus() then
 							p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidRigDataR15Plus)
 							
 							return

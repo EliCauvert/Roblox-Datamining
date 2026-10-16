@@ -6,14 +6,11 @@ local reactModule = require(parent.React)
 local _ = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local fFlagAppChatUseProfileFrameThumbnailModule = require(appChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
-local fFlagAppChatBindingFacePileUserTileParityModule = require(appChat.Flags.FFlagAppChatBindingFacePileUserTileParity)
 local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local getStandardSizeAvatarHeadShotRbxthumb = require(parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
 local avatar = foundationModule.Avatar
 local avatarSize = foundationModule.Enums.AvatarSize
 local image = foundationModule.Image
 local view = foundationModule.View
-local useCumulativeBackground = foundationModule.Hooks.useCumulativeBackground
 local var1 = dataHydrationModule.Presence.PresenceStore.get()
 local presenceType = dataHydrationModule.Presence.PresenceEnums.PresenceType
 
@@ -61,13 +58,8 @@ local _ = function(p3, p4)
 	return { primary = var7[1] or "", secondary = var7[2] }
 end
 
-local function getHeadshotImage(p3, p4, p5)
-	-- upvalues: getStandardSizeAvatarHeadShotRbxthumb (ref)
-	return if p4 and p3 ~= 0 then getStandardSizeAvatarHeadShotRbxthumb(tostring(p3), p5) else ""
-end
-
 return function(p3)
-	-- upvalues: foundationModule (ref), reactModule (ref), getParticipantIds (ref), var1 (ref), presenceType (ref), signalsReactModule (ref), fFlagAppChatBindingFacePileUserTileParityModule (ref), useCumulativeBackground (ref), image (ref), getHeadshotImage (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref), view (ref), avatar (ref), avatarSize (ref)
+	-- upvalues: foundationModule (ref), reactModule (ref), getParticipantIds (ref), var1 (ref), presenceType (ref), signalsReactModule (ref), view (ref), avatar (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref), avatarSize (ref), image (ref)
 	local var7 = foundationModule.Hooks.useTokens()
 	local shift300 = var7.Color.Shift.Shift_300
 	local var8 = reactModule.useCallback(function(p4, p5)
@@ -108,88 +100,10 @@ return function(p3)
 		return var8(p3.itemSignal(p6), p6)
 	end)
 	local var14 = signalsReactModule.useSignalBinding(function(p6)
-		-- upvalues: var9 (ref), p3 (ref)
-		return var9(p3.itemSignal(p6), p6)
-	end)
-	local var15 = signalsReactModule.useSignalBinding(function(p6)
 		-- upvalues: var10 (ref), p3 (ref)
 		return var10(p3.itemSignal(p6), p6)
 	end)
-	local var16 = signalsReactModule.useSignalBinding(function(p6)
-		-- upvalues: var11 (ref), p3 (ref)
-		return var11(p3.itemSignal(p6), p6)
-	end)
-	local var17 = var15:map(function(p6)
-		return not p6
-	end)
-	local var18 = if fFlagAppChatBindingFacePileUserTileParityModule then useCumulativeBackground(var7.Color.Surface.Surface_0, shift300) else nil
-	local var19 = reactModule.createElement(image, {
-		Image = "component_assets/circle_16",
-		ZIndex = 3,
-		tag = "anchor-center-center radius-circle bg-surface-100",
-		testId = "conversation-face-pile-presence",
-		Position = UDim2.new(0.8536, var7.Stroke.Thicker, 0.8536, var7.Stroke.Thicker),
-		Size = UDim2.new(0.125, 4, 0.125, 4),
-		Visible = var16,
-		imageStyle = var7.Color.System.Success,
-		stroke = {
-			Thickness = var7.Stroke.Thicker,
-			Color = var7.Color.Surface.Surface_100.Color3
-		}
-	})
 	
-	if fFlagAppChatBindingFacePileUserTileParityModule then
-		local var20 = reactModule.joinBindings({ userId = var13, hasSecondary = var15 })
-		
-		return reactModule.createElement(view, {
-			tag = "position-center-center anchor-center-center size-full"
-		}, {
-			Primary = reactModule.createElement(view, {
-				tag = "size-full",
-				testId = "conversation-face-pile-primary",
-				Visible = var17
-			}, {
-				Image = reactModule.createElement(image, {
-					tag = "position-center-center anchor-center-center size-full aspect-1-1 radius-circle",
-					testId = "conversation-face-pile-primary--image",
-					backgroundStyle = shift300,
-					Image = var20:map(function(p6)
-						-- upvalues: getHeadshotImage (copy), fFlagAppChatUseProfileFrameThumbnailModule (copy)
-						return getHeadshotImage(p6.userId, not p6.hasSecondary, fFlagAppChatUseProfileFrameThumbnailModule)
-					end)
-				})
-			}),
-			Group = reactModule.createElement(view, {
-				tag = "size-full",
-				testId = "conversation-face-pile-group",
-				Visible = var15
-			}, {
-				Primary = reactModule.createElement(image, {
-					tag = "position-bottom-left anchor-bottom-left aspect-1-1 radius-circle",
-					testId = "conversation-face-pile-group-primary--image",
-					ZIndex = 2,
-					backgroundStyle = var18,
-					Image = var20:map(function(p6)
-						-- upvalues: getHeadshotImage (copy)
-						return getHeadshotImage(p6.userId, p6.hasSecondary)
-					end),
-					Size = UDim2.fromScale(0.7, 0.7)
-				}),
-				Secondary = reactModule.createElement(image, {
-					tag = "position-top-right anchor-top-right aspect-1-1 radius-circle",
-					testId = "conversation-face-pile-group-secondary--image",
-					ZIndex = 1,
-					backgroundStyle = var18,
-					Image = reactModule.joinBindings({ userId = var14, hasSecondary = var15 }):map(function(p6)
-						-- upvalues: getHeadshotImage (copy)
-						return getHeadshotImage(p6.userId, p6.hasSecondary)
-					end),
-					Size = UDim2.fromScale(0.7, 0.7)
-				})
-			}),
-			Presence = var19
-		})
-	end
 	return reactModule.createElement(view, {
 		tag = "position-center-center anchor-center-center size-full"
 	}, {
@@ -199,12 +113,14 @@ return function(p3)
 			includeProfileFrame = fFlagAppChatUseProfileFrameThumbnailModule,
 			size = avatarSize.Medium,
 			userId = var13,
-			Visible = var17
+			Visible = var14:map(function(p6)
+				return not p6
+			end)
 		}),
 		Group = reactModule.createElement(view, {
 			tag = "size-full",
 			testId = "conversation-face-pile-group",
-			Visible = var15
+			Visible = var14
 		}, {
 			Primary = reactModule.createElement(avatar, {
 				testId = "conversation-face-pile-group-primary",
@@ -224,9 +140,28 @@ return function(p3)
 				backgroundStyle = shift300,
 				Position = UDim2.fromScale(1, 0),
 				size = avatarSize.Small,
-				userId = var14
+				userId = signalsReactModule.useSignalBinding(function(p6)
+					-- upvalues: var9 (ref), p3 (ref)
+					return var9(p3.itemSignal(p6), p6)
+				end)
 			})
 		}),
-		Presence = var19
+		Presence = reactModule.createElement(image, {
+			Image = "component_assets/circle_16",
+			ZIndex = 3,
+			tag = "anchor-center-center radius-circle bg-surface-100",
+			testId = "conversation-face-pile-presence",
+			Position = UDim2.new(0.8536, var7.Stroke.Thicker, 0.8536, var7.Stroke.Thicker),
+			Size = UDim2.new(0.125, 4, 0.125, 4),
+			Visible = signalsReactModule.useSignalBinding(function(p6)
+				-- upvalues: var11 (ref), p3 (ref)
+				return var11(p3.itemSignal(p6), p6)
+			end),
+			imageStyle = var7.Color.System.Success,
+			stroke = {
+				Thickness = var7.Stroke.Thicker,
+				Color = var7.Color.Surface.Surface_100.Color3
+			}
+		})
 	})
 end

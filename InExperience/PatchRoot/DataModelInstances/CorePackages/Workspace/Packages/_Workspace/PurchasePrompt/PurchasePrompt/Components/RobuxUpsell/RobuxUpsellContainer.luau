@@ -46,7 +46,6 @@ local robuxUpsellOverlayModule = require(script.Parent.RobuxUpsellOverlay)
 local appPage = require(parent.RobloxAppEnums).AppPage
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableInExperienceOffersPurchaseFlow = sharedFlagsModule.FFlagEnableInExperienceOffersPurchaseFlow
-local fFlagLuaAppsEnablePromptVIPServerPurchase = sharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 local fFlagEnableRobuxUpsellPlusButtonExperiment = IAPExperienceModule.Flags.FFlagEnableRobuxUpsellPlusButtonExperiment
 local fFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal = sharedFlagsModule.FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
@@ -60,7 +59,7 @@ function name.init(p1)
 	p1.state = { screenSize = Vector2.new(0, 0) }
 	p1.isRobloxPlusUpsellStarting = false
 	
-	function p0.changeScreenSize(p2)
+	function p1.changeScreenSize(p2)
 		-- upvalues: p1 (ref)
 		if p1.state.screenSize ~= p2.AbsoluteSize then
 			p1:setState({ screenSize = p2.AbsoluteSize })
@@ -68,7 +67,7 @@ function name.init(p1)
 	end
 	
 	if fFlagPurchasePromptCartPricingEnabledModule then
-		function p0.fetchCartPricingForPurchasePrompt(_, p2)
+		function p1.fetchCartPricingForPurchasePrompt(_, p2)
 			-- upvalues: p1 (ref), fFlagEnableInExperienceOffersPurchaseFlow (copy), requestTypeModule (copy)
 			if p2 == nil then
 				return nil
@@ -78,17 +77,17 @@ function name.init(p1)
 			return if fFlagEnableInExperienceOffersPurchaseFlow and (requestType == requestTypeModule.GamePass or requestType == requestTypeModule.Product) then p1.props.fetchInGameItemCartPricing(p2) else p1.props.fetchCartPricing(p2)
 		end
 	end
-	function p0.navigateToBuyRobux()
+	function p1.navigateToBuyRobux()
 		-- upvalues: p1 (ref), appPage (copy)
 		p1.props.navigation.navigate(appPage.PurchaseRobux)
 	end
 	
-	function p0.navigateToTermsOfUse()
+	function p1.navigateToTermsOfUse()
 		-- upvalues: p1 (ref)
 		p1.props.openTermsOfUse(p1.props.navigation)
 	end
 	
-	function p0.openRobloxPlusUpsell()
+	function p1.openRobloxPlusUpsell()
 		-- upvalues: p1 (ref), startRobuxUpsellPlusPurchaseModule (copy)
 		if p1.isRobloxPlusUpsellStarting then
 			return
@@ -133,7 +132,7 @@ function name.isRobuxUpsellModalVisible(p1)
 end
 
 function name.createElement(p1)
-	-- upvalues: getUpsellSuggestionsTypes (ref), getBlackbirdUpsellBannerProductInfoModule (ref), purchaseFlowModule (ref), fFlagEnableRobuxUpsellPlusButtonExperiment (ref), promptStateModule (ref), isLinksAllowedModule (ref), roact (ref), robuxUpsellOverlayModule (ref), upsellSuggestionsAPIMaxPackages (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), getPlayerPriceModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
+	-- upvalues: getUpsellSuggestionsTypes (ref), getBlackbirdUpsellBannerProductInfoModule (ref), purchaseFlowModule (ref), fFlagEnableRobuxUpsellPlusButtonExperiment (ref), promptStateModule (ref), isLinksAllowedModule (ref), roact (ref), robuxUpsellOverlayModule (ref), upsellSuggestionsAPIMaxPackages (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getPlayerPriceModule (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
 	local props = p1.props
 	local state = p1.state
 	local var1 = (if p1:isRobuxUpsellModalVisible() then p1:getRobloxPlusPromptKey() else nil) ~= nil and (props.isUserEligibleForUnifiedPurchaseFlow and props.experimentVariant == getUpsellSuggestionsTypes.ExperimentVariant.PlusPromotion)
@@ -179,7 +178,6 @@ function name.createElement(p1)
 			setPostPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.setPostPurchaseActions else nil,
 			onRobloxPlusButtonActivated = if var1 then p1.openRobloxPlusUpsell else nil,
 			robloxPlusDiscountPercentage = var4,
-			isMonthlyPrice = if fFlagLuaAppsEnablePromptVIPServerPurchase then props.productInfo.isMonthlyPrice else nil,
 			robuxProviderId = props.robuxProductId,
 			robuxProductId = props.productId,
 			itemIcon = if string.find(props.productInfo.imageUrl, "assetid=0") then nil else props.productInfo.imageUrl,

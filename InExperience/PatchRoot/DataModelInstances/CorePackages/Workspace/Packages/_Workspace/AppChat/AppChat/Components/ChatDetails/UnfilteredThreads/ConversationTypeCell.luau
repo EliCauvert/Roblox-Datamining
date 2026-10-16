@@ -11,6 +11,7 @@ local baseCellModule = require(appChat.Components.Cells.BaseCell)
 local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
 local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
+local fFlagHideConversationTypeInfoIfNoWebViewModule = require(appChat.Flags.FFlagHideConversationTypeInfoIfNoWebView)
 local t = {
 	bodyText = "Placeholder body",
 	iconImage = nil,
@@ -22,7 +23,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), reactModule (ref), baseCellModule (ref), foundationModule (ref), iconButton (ref)
+	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), reactModule (ref), baseCellModule (ref), foundationModule (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), iconButton (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local style = var1.style or useStyle()
 	local theme = style.Theme
@@ -59,14 +60,14 @@ return function(p1)
 				Text = var1.bodyText,
 				sizeConstraint = {
 					MaxSize = var4:map(function(p2)
-						-- upvalues: var1 (ref)
-						local var6 = p2 - (if var1.shouldShowIcon then var1.iconCellWidth else 0)
+						-- upvalues: fFlagHideConversationTypeInfoIfNoWebViewModule (copy), var1 (ref)
+						local var6 = p2 - (if fFlagHideConversationTypeInfoIfNoWebViewModule and not var1.shouldShowIcon then 0 else var1.iconCellWidth)
 						
 						return Vector2.new(if var6 > 0 then var6 else 1e999, 1e999)
 					end)
 				}
 			}),
-			InfoIcon = if var1.shouldShowIcon then reactModule.createElement(iconButton, {
+			InfoIcon = if fFlagHideConversationTypeInfoIfNoWebViewModule and not var1.shouldShowIcon then nil else reactModule.createElement(iconButton, {
 				backgroundTransparency = 1,
 				layoutOrder = 2,
 				icon = var1.iconImage,
@@ -75,7 +76,7 @@ return function(p1)
 				iconTransparency = theme.IconDefault.Transparency,
 				size = UDim2.fromOffset(var1.iconCellWidth, var1.iconCellWidth),
 				onActivated = var1.onIconActivated
-			}) else nil
+			})
 		})
 	})
 end

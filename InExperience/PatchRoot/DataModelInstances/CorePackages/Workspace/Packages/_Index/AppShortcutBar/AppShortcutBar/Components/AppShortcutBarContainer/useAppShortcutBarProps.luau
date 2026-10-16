@@ -7,10 +7,12 @@ local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusN
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local _ = require(appShortcutBar.Components.AppShortcutBar)
 local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
+local uiMode = require(parent.RobloxAppEnums).UiMode
 local responsiveModule = require(parent.Responsive)
 local useHeldProgressByEvent = require(appShortcutBar.Hooks.AppShortcutBarContext).useHeldProgressByEvent
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useLastInputMethod = require(parent.FocusNavigationUtils).useLastInputMethod
+local useUiModeInfo = require(parent.RobloxAppHooks).useUiModeInfo
 local useDesignTokens = require(parent.Style).useDesignTokens
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local useSignalState = require(parent.SignalsReact).useSignalState
@@ -25,7 +27,9 @@ local fFlagAXMigrateManageOutfitPageInputBindingsToFocusNavigation = sharedFlags
 local fFlagAXMigrateCatalogPageInputBindings = sharedFlagsModule.FFlagAXMigrateCatalogPageInputBindings
 local fFlagAXMigrateLookDetailsPeekViewToFocusNavigation = sharedFlagsModule.FFlagAXMigrateLookDetailsPeekViewToFocusNavigation
 local fFlagLuaAppResponsiveEnginePreferredInput = sharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
+local fFlagEnableLeftNavOnConsole = sharedFlagsModule.FFlagEnableLeftNavOnConsole
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
+local fFlagSocialCarouselPressXToViewProfile = sharedFlagsModule.FFlagSocialCarouselPressXToViewProfile
 local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
 local fFlagEnableStickyShortcutBarOnAllPlatforms = sharedFlagsModule.FFlagEnableStickyShortcutBarOnAllPlatforms
 local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
@@ -149,7 +153,7 @@ local t_5 = {
 		[focusNavigationEventNameEnum.UpdateOutfit] = t_3[Enum.KeyCode.ButtonX],
 		[focusNavigationEventNameEnum.IgnoreTrustedFriendRequest] = t_3[Enum.KeyCode.ButtonX],
 		[focusNavigationEventNameEnum.IgnoreFriendRequest] = t_3[Enum.KeyCode.ButtonX],
-		[focusNavigationEventNameEnum.ViewProfile] = t_3[Enum.KeyCode.ButtonX]
+		[focusNavigationEventNameEnum.ViewProfile] = if fFlagSocialCarouselPressXToViewProfile then t_3[Enum.KeyCode.ButtonX] else nil
 	},
 	[Enum.KeyCode.ButtonA] = {
 		[focusNavigationEventNameEnum.PlayVideo] = if fFlagLuaAppMediaGalleryGamepadSupport then t_3[Enum.KeyCode.ButtonA] else nil,
@@ -277,7 +281,7 @@ local t_7 = {
 	[focusNavigationEventNameEnum.MoveClothingTile] = "Feature.Avatar.Title.Move",
 	[focusNavigationEventNameEnum.RemoveClothingTile] = "Feature.Catalog.Action.Remove",
 	[focusNavigationEventNameEnum.CancelAndReset] = "Feature.Catalog.Action.Cancel",
-	[focusNavigationEventNameEnum.ViewProfile] = "Feature.Profile.Action.ViewProfile",
+	[focusNavigationEventNameEnum.ViewProfile] = if fFlagSocialCarouselPressXToViewProfile then "Feature.Profile.Action.ViewProfile" else nil,
 	[focusNavigationEventNameEnum.CollapseAvatar] = if fFlagEnableSplitPane then "Feature.SplitPane.Label.CollapseAvatar" else nil,
 	[focusNavigationEventNameEnum.ExpandAvatar] = if fFlagEnableSplitPane then "Feature.SplitPane.Label.ExpandAvatar" else nil
 }
@@ -426,11 +430,12 @@ local function getKeyboardItems(p6, p7, p8, p9)
 end
 
 local function useShortcutBarFrameProps()
-	-- upvalues: useDesignTokens (ref), useSignalState (ref), displayModule (ref)
-	local var18 = useDesignTokens()
+	-- upvalues: useUiModeInfo (ref), useDesignTokens (ref), uiMode (ref), fFlagEnableLeftNavOnConsole (ref), useSignalState (ref), displayModule (ref)
+	local var18 = useUiModeInfo()
+	local var19 = useDesignTokens()
 	
-	return {
-		Position = UDim2.new(0.5, 0, 1, if var18 then -var18.Size.Size_200 + useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding).bottom else 0),
+	return if (if var18 then var18.uiMode else nil) == uiMode.TenFoot and not fFlagEnableLeftNavOnConsole then {} else {
+		Position = UDim2.new(0.5, 0, 1, if var19 then -var19.Size.Size_200 + (if fFlagEnableLeftNavOnConsole then (if fFlagEnableLeftNavOnConsole then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil).bottom else 0) else 0),
 		AnchorPoint = Vector2.new(0.5, 1)
 	}
 end

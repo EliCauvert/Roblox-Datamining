@@ -13,12 +13,11 @@ local getLibraryStoreModule = require(buildExperience.Stores.GetLibraryStore)
 local getCurrentExperienceProjectModule = require(buildExperience.utils.getCurrentExperienceProject)
 local useLibraryChatComposerModule = require(script.Parent.useLibraryChatComposer)
 local chatTypesModule = require(buildExperience.Chat.chatTypes)
-local fFlagBuildExperienceAnswerFormModule = require(buildExperience.Flags.FFlagBuildExperienceAnswerForm)
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (ref), signalsReactModule (ref), getAssistantBuildStoreModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), getLibraryStoreModule (ref), useChatPlaytestFooterModule (ref), useLibraryChatComposerModule (ref), reactModule (ref), chatTypesModule (ref), foundationModule (ref), fFlagBuildExperienceAnswerFormModule (ref)
+	-- upvalues: noop (ref), signalsReactModule (ref), getAssistantBuildStoreModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), getLibraryStoreModule (ref), useChatPlaytestFooterModule (ref), useLibraryChatComposerModule (ref), reactModule (ref), chatTypesModule (ref), foundationModule (ref)
 	local onClose = p1.onClose or noop
 	local var1 = p1.isOpen == nil or p1.isOpen
 	local var2 = signalsReactModule.useSignalState(getAssistantBuildStoreModule().getIsDisabled)
@@ -59,6 +58,9 @@ return function(p1)
 	local sendMessage = var5.sendMessage
 	
 	return {
+		tracksExternalComposerText = true,
+		allowsComposerTypingWhileResponding = true,
+		reservesHandleSpace = true,
 		isOpen = var1,
 		onClose = onClose,
 		sheetComponent = foundationModule.Sheet,
@@ -66,8 +68,6 @@ return function(p1)
 		defaultSnapPointIndex = p1.defaultSnapPointIndex,
 		messages = var5.messages,
 		localToolActions = var5.localToolActions,
-		answerForm = if fFlagBuildExperienceAnswerFormModule then var5.answerForm else nil,
-		onSubmitAnswerText = if fFlagBuildExperienceAnswerFormModule then var5.submitAnswerText else nil,
 		clockBinding = var5.clockBinding,
 		onPlaytest = var6.onPlaytest,
 		isPlaytestLoading = var6.isPlaytestLoading,
@@ -93,22 +93,11 @@ return function(p1)
 			composerResourceAttachments,
 			removeComposerResourceAttachmentAtIndex
 		}),
-		onActivateComposerResourceAttachment = reactModule.useCallback(function(p2)
-			-- upvalues: composerResourceAttachments (ref), getLibraryStoreModule (copy), chatTypesModule (copy)
-			local var8 = composerResourceAttachments[p2]
-			
-			if var8 ~= nil then
-				getLibraryStoreModule().reportChipEvent("Activated", { chatTypesModule.getResourceAttachmentUri(var8) })
-			end
-		end, { composerResourceAttachments }),
 		isComposerSendBlocked = var7,
-		tracksExternalComposerText = true,
 		textBoxRef = var5.textBoxRef,
 		isAssistantResponding = var5.isAssistantResponding,
 		canStopAssistantResponse = var5.canStopAssistantResponse,
 		canSendWhileResponding = var5.canSendWhileResponding,
-		allowsComposerTypingWhileResponding = true,
-		reservesHandleSpace = true,
 		onSend = reactModule.useCallback(function(p2)
 			-- upvalues: composerResourceAttachments (ref), chatTypesModule (copy), sendMessage (ref), getLibraryStoreModule (copy)
 			local t = {}

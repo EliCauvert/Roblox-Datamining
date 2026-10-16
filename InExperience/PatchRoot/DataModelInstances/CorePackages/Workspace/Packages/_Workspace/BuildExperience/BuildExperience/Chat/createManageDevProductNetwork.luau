@@ -1,7 +1,5 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local _ = require(parent.HttpClient)
-local creatorApiHttpModule = require(parent.DataHydration.CreatorApiHttp)
+local _ = require(buildExperience.Parent.HttpClient)
 local fFlagBuildExperienceManageDevProduct = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct) or require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 
 local function getHeader(p1, p2)
@@ -199,72 +197,124 @@ local _ = function(p10, p11)
 	}
 end
 
-return function(p16, p17)
-	-- upvalues: creatorApiHttpModule (ref), getHeader (ref), reportResponse (ref), classifyStartFailure (ref), fFlagBuildExperienceManageDevProduct (ref)
-	local var9 = creatorApiHttpModule.withoutRestrictedAcceptHeader(p16)
+local _ = function(p16)
+	return {
+		request = function(p17, p18)
+			-- upvalues: p16 (ref)
+			local var9 = nil
+			
+			if p17.headers ~= nil then
+				local t = {}
+				
+				for i, v in p17.headers do
+					if string.lower(i) ~= "accept" then
+						t[i] = v
+					end
+				end
+				var9 = t
+			end
+			return p16.request({
+				url = p17.url,
+				method = p17.method,
+				headers = var9,
+				body = p17.body,
+				onMessage = p17.onMessage,
+				priority = p17.priority
+			}, p18)
+		end
+	}
+end
+
+return function(p17, p18)
+	-- upvalues: getHeader (ref), reportResponse (ref), classifyStartFailure (ref), fFlagBuildExperienceManageDevProduct (ref)
+	local t = {
+		request = function(p19, p20)
+			-- upvalues: p17 (ref)
+			local var9 = nil
+			
+			if p19.headers ~= nil then
+				local t = {}
+				
+				for i, v in p19.headers do
+					if string.lower(i) ~= "accept" then
+						t[i] = v
+					end
+				end
+				var9 = t
+			end
+			return p17.request({
+				url = p19.url,
+				method = p19.method,
+				headers = var9,
+				body = p19.body,
+				onMessage = p19.onMessage,
+				priority = p19.priority
+			}, p20)
+		end
+	}
 	
 	return {
-		request = function(p18, p19)
-			-- upvalues: p17 (ref), getHeader (copy), var9 (ref), reportResponse (copy), classifyStartFailure (copy), fFlagBuildExperienceManageDevProduct (copy)
+		request = function(p21, p22)
+			-- upvalues: p18 (ref), getHeader (copy), t (ref), reportResponse (copy), classifyStartFailure (copy), fFlagBuildExperienceManageDevProduct (copy)
 			local var10 = false
 			local t = {}
 			
-			local function startAttempt(p20, p21)
-				-- upvalues: p17 (copy), getHeader (copy), var9 (copy), var10 (write), reportResponse (copy), startAttempt (ref), p19 (ref), classifyStartFailure (copy), fFlagBuildExperienceManageDevProduct (copy), t (ref)
-				local url = p20.url
-				local var11 = `[{if p17 == nil or p17.label == nil then "DeveloperProduct" else p17.label}] request transport=RequestInternal method={p20.method} url={string.match(url, "^[^?]+") or url} contentType={getHeader(p20.headers, "content-type") or "<none>"} retryCount={p21}`
-				local var12 = if p17 ~= nil then nil else p17.log
+			local function startAttempt(p23, p24)
+				-- upvalues: p18 (copy), getHeader (copy), t (copy), var10 (write), reportResponse (copy), startAttempt (ref), p22 (ref), classifyStartFailure (copy), fFlagBuildExperienceManageDevProduct (copy), t (ref)
+				local url = p23.url
+				local var11 = `[{if p18 == nil or p18.label == nil then "DeveloperProduct" else p18.label}] request transport=RequestInternal method={p23.method} url={string.match(url, "^[^?]+") or url} contentType={getHeader(p23.headers, "content-type") or "<none>"} retryCount={p24}`
+				local var12 = if p18 ~= nil then nil else p18.log
 				
 				if var12 ~= nil then
 					pcall(var12, var11)
 				end
 				local var13 = false
-				local ok, status = pcall(var9.request, p20, function(p22, p23)
-					-- upvalues: var13 (write), var10 (copy), p21 (ref), getHeader (copy), reportResponse (copy), p17 (copy), p20 (ref), startAttempt (copy), p19 (copy)
+				local ok, status = pcall(t.request, p23, function(p25, p26)
+					-- upvalues: var13 (write), var10 (copy), p24 (ref), getHeader (copy), reportResponse (copy), p18 (copy), p23 (ref), startAttempt (copy), p22 (copy)
 					var13 = true
 					
 					if var10 then return end
 					local var14
-					local var15 = if p22 and typeof(p23) == "table" and p21 == 0 then getHeader(p23.headers, "x-csrf-token") else nil
+					local var15 = if p25 and typeof(p26) == "table" and p24 == 0 then getHeader(p26.headers, "x-csrf-token") else nil
 					
-					if p22 and typeof(p23) == "table" then
+					if p25 and typeof(p26) == "table" then
 						var14 = false
 						
-						if p23.statusCode == 403 then
+						if p26.statusCode == 403 then
 							local _ = var15 ~= nil
 						end
 					else
 						var14 = false
 					end
-					reportResponse(p17, p20, p21, p22, p23, var14)
+					reportResponse(p18, p23, p24, p25, p26, var14)
 					
 					if not var14 then
-						p19(p22, p23)
+						p22(p25, p26)
 						
 						return
 					end
 					local t = {}
 					
-					if p20.headers ~= nil then
-						for i, v in p20.headers do
+					if p23.headers ~= nil then
+						for i, v in p23.headers do
 							t[i] = v
 						end
 					end
 					t["x-csrf-token"] = var15
 					startAttempt({
-						url = p20.url,
-						method = p20.method,
+						url = p23.url,
+						method = p23.method,
 						headers = t,
-						body = p20.body,
-						onMessage = p20.onMessage,
-						priority = p20.priority
-					}, p21 + 1)
+						body = p23.body,
+						onMessage = p23.onMessage,
+						priority = p23.priority
+					}, p24 + 1)
 				end)
 				
 				if not ok then
-					local var16 = p17
-					local url_1 = p20.url
-					local var17 = `[{if var16 == nil or var16.label == nil then "DeveloperProduct" else var16.label}] request transport=RequestInternal method={p20.method} url={string.match(url_1, "^[^?]+") or url_1} retryCount={p21} startFailure={classifyStartFailure(status)}`
+					local var16 = p18
+					local url_1 = p23.url
+					local var17 = `[{if var16 == nil or var16.label == nil then "DeveloperProduct" else var16.label}] request transport=RequestInternal method={p23.method} url={string.match(url_1, "^[^?]+") or url_1} retryCount={p24} startFailure={classifyStartFailure(status)}`
 					local var18 = if var16 ~= nil then nil else var16.log
 					
 					if var18 ~= nil then
@@ -277,7 +327,7 @@ return function(p16, p17)
 				table.insert(t, status)
 			end
 			
-			startAttempt(p18, 0)
+			startAttempt(p21, 0)
 			
 			return function()
 				-- upvalues: var10 (write), t (ref)

@@ -57,10 +57,10 @@ return function()
 			var12(false)
 			var2(true)
 		end,
-		close = function(p1)
+		close = function()
 			-- upvalues: fFlagMomentsComments (copy), var14 (write), var13 (write), var12 (ref), var2 (ref)
 			if fFlagMomentsComments and var14 ~= nil then
-				var14.finishView(p1 or "closed")
+				var14.finishView("closed")
 			end
 			if fFlagMomentsComments and var13 ~= nil then
 				var13.finishView()

@@ -19,7 +19,6 @@ local friendTileWithTrustedIndicatorModule = require(script.Parent.FriendTileWit
 local fFlagFriendsPageUserListEnabled = require(parent.SharedFlags).FFlagFriendsPageUserListEnabled
 local fFlagFriendsPageViewBtnEnabled = require(parent.SharedFlags).FFlagFriendsPageViewBtnEnabled
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local fFlagFriendsPageUserListCtaEnabledModule = require(friendsLanding.Flags.FFlagFriendsPageUserListCtaEnabled)
 local friendTile = roact.PureComponent:extend("FriendTile")
 friendTile.validateProps = t.strictInterface({
 	user = t.table,
@@ -55,7 +54,7 @@ function friendTile.init(p1)
 	p1.makeRelevancyInfo = memoize(createRelevancyInfoModule)
 	p1.playerTileRef = roact.createRef()
 	
-	function p0.checkAndSetSelected()
+	function p1.checkAndSetSelected()
 		-- upvalues: p1 (ref)
 		if p1.props.selected and p1.props.focusGuiObject then
 			local value = p1.playerTileRef:getValue()
@@ -71,7 +70,7 @@ function friendTile.init(p1)
 		return string.gsub(tostring(p2 or ""), "PresenceType%.", "") or socialCommonModule.Enums.PresenceTypes.Offline
 	end else nil
 	
-	function p0.openProfilePeekViewHandle()
+	function p1.openProfilePeekViewHandle()
 		-- upvalues: p1 (ref)
 		return p1.props.openPlayerProfileHandle(p1.props.user.id, p1.props.index, p1.props.user)
 	end
@@ -85,7 +84,7 @@ function friendTile.didMount(p1)
 end
 
 function friendTile.render(p1)
-	-- upvalues: getCorrectUserPresenceModule (ref), userPresenceTextModule (ref), userPresenceIconModule (ref), withStyle (ref), withLocalization (ref), fFlagFriendsPageUserListEnabled (ref), fFlagFriendsPageUserListCtaEnabledModule (ref), fFlagFriendsPageViewBtnEnabled (ref), buttonTypes (ref), buttonVariant (ref), userProfilesModule (ref), react (ref), friendTileWithTrustedIndicatorModule (ref), fFlagEnableBlackbirdCheck (ref)
+	-- upvalues: getCorrectUserPresenceModule (ref), userPresenceTextModule (ref), userPresenceIconModule (ref), withStyle (ref), withLocalization (ref), fFlagFriendsPageUserListEnabled (ref), fFlagFriendsPageViewBtnEnabled (ref), buttonTypes (ref), buttonVariant (ref), userProfilesModule (ref), react (ref), friendTileWithTrustedIndicatorModule (ref), fFlagEnableBlackbirdCheck (ref)
 	local user = p1.props.user
 	local var1 = getCorrectUserPresenceModule(user)
 	local var2 = userPresenceTextModule[var1]
@@ -95,13 +94,13 @@ function friendTile.render(p1)
 		p1:setState({ isFirstRender = false })
 	end
 	return withStyle(function(p2)
-		-- upvalues: withLocalization (copy), var2 (ref), fFlagFriendsPageUserListEnabled (copy), p1 (ref), user (ref), var3 (ref), var1 (ref), fFlagFriendsPageUserListCtaEnabledModule (copy), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
+		-- upvalues: withLocalization (copy), var2 (ref), fFlagFriendsPageUserListEnabled (copy), p1 (ref), user (ref), var3 (ref), var1 (ref), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
 		return withLocalization({
 			accountDeletedText = "Feature.Friends.Action.AccountDeleted",
 			trustedText = "Feature.Friends.TrustedConnection.Label.Trusted",
 			presenceText = var2
 		})(function(p3)
-			-- upvalues: fFlagFriendsPageUserListEnabled (copy), p1 (copy), user (copy), var3 (copy), p2 (ref), var1 (copy), fFlagFriendsPageUserListCtaEnabledModule (copy), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
+			-- upvalues: fFlagFriendsPageUserListEnabled (copy), p1 (copy), user (copy), var3 (copy), p2 (ref), var1 (copy), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
 			local presenceText = p3.presenceText or nil
 			local accountDeletedText = p3.accountDeletedText
 			
@@ -112,7 +111,7 @@ function friendTile.render(p1)
 					onRowActivated = p1.openProfilePeekViewHandle,
 					contextualInfo = var4 and { text = var4.text, icon = var4.icon },
 					presence = p1.getPresenceType(var1),
-					primaryCta = if fFlagFriendsPageUserListCtaEnabledModule then nil elseif fFlagFriendsPageViewBtnEnabled then {
+					primaryCta = if fFlagFriendsPageViewBtnEnabled then {
 						minWidth = 64,
 						maxWidth = 90,
 						type = buttonTypes.View,

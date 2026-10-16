@@ -43,7 +43,6 @@ local fFlagLuaAppSduiHomeFeedStats = sharedFlagsModule.FFlagLuaAppSduiHomeFeedSt
 local fFlagLuaAppAddHasOneByTwoFieldSdui = sharedFlagsModule.FFlagLuaAppAddHasOneByTwoFieldSdui
 local fFlagSduiPerSectionPoolSizing = sharedFlagsModule.FFlagSduiPerSectionPoolSizing
 local fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui = sharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui
-local fFlagLuaAppHomeMomentVideoFallback = sharedFlagsModule.FFlagLuaAppHomeMomentVideoFallback
 
 local function _(p1, p2)
 	-- upvalues: homeConstantsModule (ref)
@@ -192,7 +191,7 @@ local function setHomePageDataStatuses(value)
 end
 
 local function fetchHomePage(p3, p4)
-	-- upvalues: fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (ref), var3 (write), sduiPoolStore (ref), homeConstantsModule (ref), oneByTwoTileTelemetry (ref), getSduiApiStore (ref), setHomePageDataStatuses (ref), retrievalStatus (ref), fFlagEnableHomePageSduiPrefetch (ref), homePageSessionModule (ref), prefetchProtocol (ref), parent (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), fFlagSduiPerSectionPoolSizing (ref), fFlagLuaAppHomeMomentVideoFallback (ref), measureHomeCollectionLayoutModule (ref), homePageFocusedFetchUtilsModule (ref), promiseModule (ref), createHomePageRequestConfig (ref), sduiSharedUtilitiesModule (ref), fFlagLuaAppSduiHomePageSupport (ref), friendRecommendations (ref), readFriendRecommendations (ref), commitHomeSession (ref), fFlagLuaAppSduiHomeFeedStats (ref), sduiLogger (ref), buildHomeFeedStatsModule (ref), appPage (ref), fFlagLuaAppAddHasOneByTwoFieldSdui (ref), hasOneByTwoInResponse (ref), logOneByTwoTileResponseReceivedFromDecodedResponse (ref), sduiErrors (ref), sduiParseHelpers (ref), fFlagHomeSduiOfflineCache (ref), sduiHomePageCachePayloadModule (ref), homeOmniFeedCache (ref), discoveryAvailabilityModule (ref), fFlagHomePageSduiPrefetchExtendedClientCapabilities (ref), writeHomePageSduiPrefetchClientCapabilitiesModule (ref), writeHomePageSduiPrefetchDescriptorModule (ref), fetchHomePage (ref)
+	-- upvalues: fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (ref), var3 (write), sduiPoolStore (ref), homeConstantsModule (ref), oneByTwoTileTelemetry (ref), getSduiApiStore (ref), setHomePageDataStatuses (ref), retrievalStatus (ref), fFlagEnableHomePageSduiPrefetch (ref), homePageSessionModule (ref), prefetchProtocol (ref), parent (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), fFlagSduiPerSectionPoolSizing (ref), measureHomeCollectionLayoutModule (ref), homePageFocusedFetchUtilsModule (ref), promiseModule (ref), createHomePageRequestConfig (ref), sduiSharedUtilitiesModule (ref), fFlagLuaAppSduiHomePageSupport (ref), friendRecommendations (ref), readFriendRecommendations (ref), commitHomeSession (ref), fFlagLuaAppSduiHomeFeedStats (ref), sduiLogger (ref), buildHomeFeedStatsModule (ref), appPage (ref), fFlagLuaAppAddHasOneByTwoFieldSdui (ref), hasOneByTwoInResponse (ref), logOneByTwoTileResponseReceivedFromDecodedResponse (ref), sduiErrors (ref), sduiParseHelpers (ref), fFlagHomeSduiOfflineCache (ref), sduiHomePageCachePayloadModule (ref), homeOmniFeedCache (ref), discoveryAvailabilityModule (ref), fFlagHomePageSduiPrefetchExtendedClientCapabilities (ref), writeHomePageSduiPrefetchClientCapabilitiesModule (ref), writeHomePageSduiPrefetchDescriptorModule (ref), fetchHomePage (ref)
 	if fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui then
 		var3 = sduiPoolStore.getSduiPoolStore(homeConstantsModule.ConfigKey)
 		var3.setOneByTwoTileFunnelListener({
@@ -237,8 +236,7 @@ local function fetchHomePage(p3, p4)
 	else
 		enabledCapabilityNumbersWithoutExtendedMarker = sduiCapabilities.getEnabledCapabilityNumbers({
 			"CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS",
-			if fFlagSduiPerSectionPoolSizing then "CAPABILITY_SUPPORTS_MULTI_SIZE_POOL" else nil,
-			if fFlagLuaAppHomeMomentVideoFallback then "CAPABILITY_SUPPORTS_VIDEO_PLAYER_ACCESS_CONTEXT" else nil
+			if fFlagSduiPerSectionPoolSizing then "CAPABILITY_SUPPORTS_MULTI_SIZE_POOL" else nil
 		})
 		var11 = clientCapabilities.new({
 			enabled_capabilities = enabledCapabilityNumbersWithoutExtendedMarker
@@ -268,7 +266,7 @@ local function fetchHomePage(p3, p4)
 		homePageFocusedFetchUtilsModule.applyToRequestConfig(var13, var12)
 	end
 	if var12 == nil then
-		function var47.onSuccess(p5, p6)
+		function var13.onSuccess(p5, p6)
 			-- upvalues: fFlagLuaAppSduiHomePageSupport (copy), friendRecommendations (copy), readFriendRecommendations (copy), commitHomeSession (copy), fFlagLuaAppSduiHomeFeedStats (copy), sduiLogger (copy), buildHomeFeedStatsModule (copy), appPage (copy), fFlagLuaAppAddHasOneByTwoFieldSdui (copy), hasOneByTwoInResponse (copy), fFlagLuaAppEnableOneByTwoTileFunnelTelemetrySdui (copy), logOneByTwoTileResponseReceivedFromDecodedResponse (copy), sduiErrors (copy), sduiParseHelpers (copy), setHomePageDataStatuses (copy), retrievalStatus (copy), fFlagHomeSduiOfflineCache (copy), sduiHomePageCachePayloadModule (copy), homeOmniFeedCache (copy), discoveryAvailabilityModule (copy), fFlagEnableHomePageSduiPrefetch (copy), fFlagHomePageSduiPrefetchExtendedClientCapabilities (copy), writeHomePageSduiPrefetchClientCapabilitiesModule (copy), var11 (write), writeHomePageSduiPrefetchDescriptorModule (copy), enabledCapabilityNumbersWithoutExtendedMarker (write)
 			if fFlagLuaAppSduiHomePageSupport then
 				friendRecommendations.getStore().replaceFriendRecommendations(readFriendRecommendations(p6))
@@ -329,7 +327,7 @@ local function fetchHomePage(p3, p4)
 			end
 		} else nil
 		
-		function var47.refresh(p5)
+		function var13.refresh(p5)
 			-- upvalues: fetchHomePage (copy), var6 (ref)
 			return fetchHomePage(p5, { forceRefresh = true, contextualFeatures = var6 })
 		end

@@ -36,13 +36,13 @@ function scrollViewStickyHeader.init(p1, p2)
 	p1._haveReceivedInitialZeroTranslateY = true
 	p1._debounceTimeout = 64
 	
-	function p0.setNextHeaderY(_, p3)
+	function p1.setNextHeaderY(_, p3)
 		-- upvalues: p1 (ref)
 		p1._shouldRecreateTranslateY = true
 		p1.setState({ nextHeaderLayoutY = p3 })
 	end
 	
-	function p0._onLayout(_, p3)
+	function p1._onLayout(_, p3)
 		-- upvalues: p1 (ref), reactModule (copy)
 		local y = p3.nativeEvent.layout.y
 		local height = p3.nativeEvent.layout.height
@@ -59,7 +59,7 @@ function scrollViewStickyHeader.init(p1, p2)
 		end
 	end
 	
-	function p0._setComponentRef(_, p3)
+	function p1._setComponentRef(_, p3)
 		-- upvalues: p1 (ref)
 		p1._ref = p3
 	end
@@ -91,7 +91,7 @@ function scrollViewStickyHeader.updateTranslateListener(p1, p2, p3, p4)
 	
 	if not p3 then return end
 	if not p1._animatedValueListener then
-		function p8._animatedValueListener(p5)
+		function p1._animatedValueListener(p5)
 			-- upvalues: p1 (ref), boolean (copy), clearTimeout (copy), setTimeout (copy)
 			local value = p5.value
 			

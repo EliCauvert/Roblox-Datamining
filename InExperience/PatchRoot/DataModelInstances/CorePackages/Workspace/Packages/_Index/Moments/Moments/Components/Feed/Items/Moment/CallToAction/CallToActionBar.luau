@@ -24,7 +24,6 @@ local feedContextModule = require(moments.Components.Feed.FeedContext)
 local momentContextModule = require(script.Parent.Parent.MomentContext)
 local getExperienceDetailsSheetStoreModule = require(moments.ExperienceDetailsSheet.Sheet.getExperienceDetailsSheetStore)
 local joinButtonModule = require(moments.ExperienceDetailsSheet.Join.JoinButton)
-local fFlagMomentsServeEDPVideos = require(parent.SharedFlags).FFlagMomentsServeEDPVideos
 local momentsFixExperienceHandleVerifiedSpacing = game:DefineFastFlag("MomentsFixExperienceHandleVerifiedSpacing", false)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 local fFlagMomentsUpdateExperienceActionLabelTextModule = require(moments.Flags.FFlagMomentsUpdateExperienceActionLabelText)
@@ -36,7 +35,7 @@ local t = {
 local char = utf8.char(57344)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useTokens (ref), momentContextModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsAndroidTvEnabledModule (ref), useIsTvRemoteDevice (ref), useExperienceDetailsModule (ref), fFlagMomentsServeEDPVideos (ref), useScaledValue (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), getRbxThumb (ref), foundationModule (ref), momentsFixExperienceHandleVerifiedSpacing (ref), char (ref), reactModule (ref), imageWithSkeletonModule (ref), radius (ref), view (ref), text (ref), skeleton (ref), var1 (ref), iconSize (ref), getExperienceDetailsSheetStoreModule (ref), button (ref), joinButtonModule (ref), fFlagMomentsJoinImpressionModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), useTokens (ref), momentContextModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsAndroidTvEnabledModule (ref), useIsTvRemoteDevice (ref), useExperienceDetailsModule (ref), useScaledValue (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), getRbxThumb (ref), foundationModule (ref), momentsFixExperienceHandleVerifiedSpacing (ref), char (ref), reactModule (ref), imageWithSkeletonModule (ref), radius (ref), view (ref), text (ref), skeleton (ref), var1 (ref), iconSize (ref), getExperienceDetailsSheetStoreModule (ref), button (ref), joinButtonModule (ref), fFlagMomentsJoinImpressionModule (ref)
 	local var2 = useLocalization(t)
 	local var3 = useTokens()
 	local store = momentContextModule.useMoment().store
@@ -50,24 +49,22 @@ return reactModule.memo(function(p1)
 	local var9 = getFFlagMomentsAndroidTvEnabledModule()
 	local var10 = useIsTvRemoteDevice()
 	local var11 = useExperienceDetailsModule(if isAd then nil else var6)
-	local var12 = if fFlagMomentsServeEDPVideos and var5 == 0 and var11.rootPlaceId ~= nil then var11.rootPlaceId else var5
-	local var13 = fFlagMomentsServeEDPVideos and (not isAd and (var6 ~= 0 and var12 == 0))
-	local var14 = useScaledValue(160)
-	local var15 = if fFlagMomentsFixRecommendationImpressionLifecycleModule then feedContextModule.useFeedOptional() else nil
-	local var16 = if isAd then if var4 then var4.iconImage else nil elseif var6 ~= 0 then getRbxThumb(foundationModule.Enums.ThumbnailType.Asset, var12) else getRbxThumb(foundationModule.Enums.ThumbnailType.GameIcon, var6)
+	local var12 = useScaledValue(160)
+	local var13 = if fFlagMomentsFixRecommendationImpressionLifecycleModule then feedContextModule.useFeedOptional() else nil
+	local var14 = if isAd then if var4 then var4.iconImage else nil elseif var6 ~= 0 then getRbxThumb(foundationModule.Enums.ThumbnailType.Asset, var5) else getRbxThumb(foundationModule.Enums.ThumbnailType.GameIcon, var6)
 	
-	if not isAd and var12 == 0 and not var13 then
+	if not isAd and var5 == 0 then
 		return nil
 	end
-	local var17 = if fFlagMomentsServeEDPVideos and var13 then nil elseif isAd then if var4 then var4.title else nil else var11.name
-	local var18 = if fFlagMomentsServeEDPVideos and var13 then nil elseif isAd then if var4 then var4.subtitle else nil else var11.creatorName
-	local var19 = if isAd then var4 ~= nil and var4.isVerified else var11.isCreatorVerified == true
-	local var20 = if isAd and var4 then var4.ctaText else var2.join
-	local var21 = if momentsFixExperienceHandleVerifiedSpacing or not var18 or not var19 then var18 else `{var18} {char}`
+	local var15 = if isAd then if var4 then var4.title else nil else var11.name
+	local var16 = if isAd then if var4 then var4.subtitle else nil else var11.creatorName
+	local var17 = if isAd then var4 ~= nil and var4.isVerified else var11.isCreatorVerified == true
+	local var18 = if isAd and var4 then var4.ctaText else var2.join
+	local var19 = if momentsFixExperienceHandleVerifiedSpacing or not var16 or not var17 then var16 else `{var16} {char}`
 	local size1000 = var3.Size.Size_1000
-	local var22 = reactModule.createElement(imageWithSkeletonModule, {
+	local var20 = reactModule.createElement(imageWithSkeletonModule, {
 		LayoutOrder = 1,
-		Image = var16,
+		Image = var14,
 		Size = UDim2.fromOffset(size1000, size1000),
 		radius = radius.Medium,
 		backgroundStyle = var3.Color.Shift.Shift_300
@@ -77,16 +74,15 @@ return reactModule.memo(function(p1)
 		LayoutOrder = 2,
 		tag = "col align-x-left align-y-center grow gap-xsmall auto-y"
 	}, {
-		Title = if var17 then reactModule.createElement(text, {
+		Title = if var15 then reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-align-x-left text-align-y-top text-truncate-end content-emphasis",
-			Text = var17
+			Text = var15
 		}) else reactModule.createElement(skeleton, {
 			LayoutOrder = 1,
-			Size = UDim2.fromOffset(var14, var3.Size.Size_400),
-			testId = if fFlagMomentsServeEDPVideos then "moments-experience-title-skeleton" else nil
+			Size = UDim2.fromOffset(var12, var3.Size.Size_400)
 		}),
-		Subtitle = if momentsFixExperienceHandleVerifiedSpacing and var21 then reactModule.createElement(view, {
+		Subtitle = if momentsFixExperienceHandleVerifiedSpacing and var19 then reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = "row align-x-left align-y-center gap-xsmall size-full-0 auto-y",
 			testId = "moments-experience-handle"
@@ -94,17 +90,17 @@ return reactModule.memo(function(p1)
 			Handle = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				tag = "shrink auto-xy text-body-medium text-align-x-left text-align-y-center text-truncate-end content-default",
-				Text = var21
+				Text = var19
 			}),
-			VerifiedBadge = if var19 then reactModule.createElement(var1, {
+			VerifiedBadge = if var17 then reactModule.createElement(var1, {
 				LayoutOrder = 2,
 				testId = "moments-experience-verified-badge",
 				size = iconSize.XSmall
 			}) else nil
-		}) elseif var21 then reactModule.createElement(text, {
+		}) elseif var19 then reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "auto-xy text-body-medium text-align-x-left text-align-y-center text-truncate-end content-default",
-			Text = var21
+			Text = var19
 		}) else nil
 	})
 	local createElement_1 = reactModule.createElement
@@ -112,21 +108,21 @@ return reactModule.memo(function(p1)
 		LayoutOrder = 1,
 		tag = "row align-x-left align-y-center grow gap-medium auto-y",
 		testId = "moments-experience-row",
-		onActivated = if isAd or var8 or fFlagMomentsServeEDPVideos and var12 == 0 then nil else function()
-			-- upvalues: getExperienceDetailsSheetStoreModule (copy), var12 (ref), var6 (ref), data (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var15 (write)
+		onActivated = if isAd or var8 then nil else function()
+			-- upvalues: getExperienceDetailsSheetStoreModule (copy), var5 (ref), var6 (ref), data (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var13 (write)
 			getExperienceDetailsSheetStoreModule(false).open({
-				placeId = var12,
+				placeId = var5,
 				universeId = var6,
 				feedItemId = data.feedItemId,
 				tracingId = data.feedSessionId,
-				onBeforeJoin = if fFlagMomentsFixRecommendationImpressionLifecycleModule and var15 ~= nil then var15.flushView else nil
+				onBeforeJoin = if fFlagMomentsFixRecommendationImpressionLifecycleModule and var13 ~= nil then var13.flushView else nil
 			})
 		end,
-		stateLayer = if isAd or var8 or fFlagMomentsServeEDPVideos and var12 == 0 then nil else {
+		stateLayer = if isAd or var8 then nil else {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
 		},
 		selection = if var9 and var10 then { Selectable = false } else nil
-	}, { Thumbnail = var22, Metadata = createElement })
+	}, { Thumbnail = var20, Metadata = createElement })
 	
 	return reactModule.createElement(view, {
 		tag = "row align-x-left align-y-center gap-medium size-full-0 auto-y",
@@ -138,18 +134,18 @@ return reactModule.memo(function(p1)
 			isDisabled = var7 or var8,
 			onActivated = function() end,
 			size = foundationModule.Enums.InputSize.Medium,
-			text = var20,
+			text = var18,
 			variant = foundationModule.Enums.ButtonVariant.Emphasis
-		}) elseif fFlagMomentsServeEDPVideos and var12 == 0 then nil else reactModule.createElement(joinButtonModule, {
+		}) else reactModule.createElement(joinButtonModule, {
 			LayoutOrder = 2,
 			context = {
-				placeId = var12,
+				placeId = var5,
 				universeId = var6,
 				feedItemId = data.feedItemId,
 				tracingId = data.feedSessionId
 			},
-			text = var20,
-			isDisabled = var8 or not fFlagMomentsServeEDPVideos and var12 == 0,
+			text = var18,
+			isDisabled = var8,
 			reportsImpression = fFlagMomentsJoinImpressionModule
 		})
 	})

@@ -30,10 +30,9 @@ local useSduiPageContentModule = require(sduiSharedUtilities.hooks.useSduiPageCo
 local usePageEntrySnackbarModule = require(sduiSharedUtilities.usePageEntrySnackbar)
 local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
-local fFlagAppThemeHalloween2026HomeBackground = require(parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), useDispatch (ref), useComponentConfigModule (ref), useUiStatusModule (ref), uiStatus (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), signal (ref), useStatefulRefModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), fFlagAppPageShellScrollToTopFocus (ref), usePageEntrySnackbarModule (ref), useDataUpdatedTimestampModule (ref), useCreateClientBindingSduiContextModule (ref), useSduiPageContentModule (ref), fFlagLuaAppsDefaultSelection (ref), getSduiComponentWrapper (ref), foundationModule (ref), loading (ref), sduiPageErrorStateModule (ref), visibilityControl (ref), page (ref), fFlagAppThemeHalloween2026HomeBackground (ref), reactRobloxModule (ref), snackbar (ref), coreGuiService (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), useComponentConfigModule (ref), useUiStatusModule (ref), uiStatus (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), signal (ref), useStatefulRefModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), fFlagAppPageShellScrollToTopFocus (ref), usePageEntrySnackbarModule (ref), useDataUpdatedTimestampModule (ref), useCreateClientBindingSduiContextModule (ref), useSduiPageContentModule (ref), fFlagLuaAppsDefaultSelection (ref), getSduiComponentWrapper (ref), foundationModule (ref), loading (ref), sduiPageErrorStateModule (ref), visibilityControl (ref), page (ref), reactRobloxModule (ref), snackbar (ref), coreGuiService (ref)
 	local appPage = p1.appPage
 	local configKey = p1.configKey or appPage
 	local var2 = `SduiPageWrapperEntryPoint-{configKey}`
@@ -175,7 +174,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 						liveHeightBinding = var27
 					}
 				end, { pageTopPadding, scrollAway }),
-				stickyBackgroundStyle = if fFlagAppThemeHalloween2026HomeBackground then p1.stickyBackgroundStyle or p1.backgroundStyle else p1.backgroundStyle,
+				stickyBackgroundStyle = p1.backgroundStyle,
 				onScrollToEnd = p1.onScrollToEnd,
 				onScrollToEndThreshold = p1.onScrollToEndThreshold,
 				onRefresh = if refresh then var11 else nil,

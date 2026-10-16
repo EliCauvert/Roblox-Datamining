@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("LuaAppHomeMomentVideoPrecedence", false) and require(script.Parent.FFlagLuaAppHomeMomentVideoFallback)

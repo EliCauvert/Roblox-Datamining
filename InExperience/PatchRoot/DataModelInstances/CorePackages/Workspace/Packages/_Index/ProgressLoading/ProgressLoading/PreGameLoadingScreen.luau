@@ -12,7 +12,6 @@ local uiModeStyleProvider = require(parent.Style).UiModeStyleProvider
 local responsiveModule = require(parent.Responsive)
 local cachedPolicyServiceModule = require(parent.CachedPolicyService)
 local loadingScreenViewModule = require(script.Parent.LoadingScreenView)
-local fFlagEnableTiltLoadingScreen = require(parent.SharedFlags).FFlagEnableTiltLoadingScreen
 local getDeferredAssetStoreModule = require(script.Parent.Stores.GetDeferredAssetStore)
 local pregameOverrideModule = require(script.Parent.Stores.PregameOverride)
 local getJoiningPlaceModule = require(script.Parent.getJoiningPlace)
@@ -54,7 +53,7 @@ local function PregameOverrideScreen(p1)
 end
 
 return reactModule.memo(function(_)
-	-- upvalues: signalsReactModule (ref), getIsLoadingAssets (ref), getJoiningPlaceModule (ref), reactModule (ref), fFlagBuildExperienceLibrary (ref), pregameOverrideModule (ref), responsiveModule (ref), fFlagEnableTiltLoadingScreen (ref), marketplaceService (ref), url (ref), createNetworkingModule (ref), cachedPolicyServiceModule (ref), PregameOverrideScreen (ref), var1 (ref), onCancel (ref), roactRoduxModule (ref), var2 (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), loadingScreenViewModule (ref)
+	-- upvalues: signalsReactModule (ref), getIsLoadingAssets (ref), getJoiningPlaceModule (ref), reactModule (ref), fFlagBuildExperienceLibrary (ref), pregameOverrideModule (ref), responsiveModule (ref), marketplaceService (ref), url (ref), createNetworkingModule (ref), cachedPolicyServiceModule (ref), PregameOverrideScreen (ref), roactRoduxModule (ref), var2 (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), loadingScreenViewModule (ref), onCancel (ref)
 	local var3 = signalsReactModule.useSignalState(getIsLoadingAssets)
 	local var4 = if var3 then getJoiningPlaceModule.getJoiningPlaceId() else 0
 	local var5 = if var3 then getJoiningPlaceModule.getJoiningUniverseId() else 0
@@ -82,8 +81,7 @@ return reactModule.memo(function(_)
 	var9.current = responsiveModule.usePreferredInput()
 	local var10, var11 = reactModule.useState(nil)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableTiltLoadingScreen (copy), var4 (ref), var11 (ref), marketplaceService (copy)
-		if fFlagEnableTiltLoadingScreen then return end
+		-- upvalues: var4 (ref), var11 (ref), marketplaceService (copy)
 		if var4 <= 0 then
 			var11(nil)
 			
@@ -109,8 +107,7 @@ return reactModule.memo(function(_)
 	end, { var4 })
 	local var12, var13 = reactModule.useState(0)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableTiltLoadingScreen (copy), var4 (ref), var5 (ref), var13 (ref), url (copy), createNetworkingModule (copy)
-		if fFlagEnableTiltLoadingScreen then return end
+		-- upvalues: var4 (ref), var5 (ref), var13 (ref), url (copy), createNetworkingModule (copy)
 		if var4 <= 0 or var5 > 0 then
 			var13(0)
 			
@@ -131,10 +128,7 @@ return reactModule.memo(function(_)
 	end, { var4, var5 })
 	local var14, var15 = reactModule.useState(false)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableTiltLoadingScreen (copy), cachedPolicyServiceModule (copy), var15 (ref)
-		if fFlagEnableTiltLoadingScreen then
-			return
-		end
+		-- upvalues: cachedPolicyServiceModule (copy), var15 (ref)
 		local var16 = false
 		task.spawn(function()
 			-- upvalues: cachedPolicyServiceModule (copy), var16 (write), var15 (copy)
@@ -151,16 +145,7 @@ return reactModule.memo(function(_)
 		end
 	end, {})
 	
-	return if not (not var3 or var4 <= 0) then if fFlagBuildExperienceLibrary and var6 ~= nil and (var7.current ~= nil and pregameOverrideModule.claims(var6, var4, var7.current)) then reactModule.createElement(PregameOverrideScreen, { override = var6 }) elseif fFlagEnableTiltLoadingScreen then reactModule.createElement(require(script.Parent.TiltLoadingScreen.TiltLoadingScreenContainer), {
-		key = tostring(var4),
-		placeId = var4,
-		deferredJoin = {
-			displayOrder = 9999,
-			universeId = var5,
-			assetService = var1
-		},
-		onCancel = onCancel
-	}) else reactModule.createElement(roactRoduxModule.StoreProvider, { store = var2 }, {
+	return if not (not var3 or var4 <= 0) then if fFlagBuildExperienceLibrary and var6 ~= nil and (var7.current ~= nil and pregameOverrideModule.claims(var6, var4, var7.current)) then reactModule.createElement(PregameOverrideScreen, { override = var6 }) else reactModule.createElement(roactRoduxModule.StoreProvider, { store = var2 }, {
 		StyleProvider = reactModule.createElement(uiModeStyleProvider, {
 			style = {
 				themeName = colorMode.Dark,

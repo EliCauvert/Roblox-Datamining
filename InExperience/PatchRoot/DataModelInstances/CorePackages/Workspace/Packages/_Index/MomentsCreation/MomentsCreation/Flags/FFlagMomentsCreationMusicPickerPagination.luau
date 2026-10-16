@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("MomentsCreation").Parent.MusicPicker).FFlagMomentsCreationMusicPickerPagination

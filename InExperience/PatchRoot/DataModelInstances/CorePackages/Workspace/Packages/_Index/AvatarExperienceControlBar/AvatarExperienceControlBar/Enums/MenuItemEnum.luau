@@ -27,6 +27,12 @@
 		MultiTryOn = "MultiTryOn",
 		ProfilePhoto = "ProfilePhoto"
 	},
+	Photobooth = {
+		Photobooth = "Photobooth",
+		Animations = "PhotoboothAnimations",
+		Scenes = "PhotoboothScenes",
+		Screenshot = "PhotoboothScreenshot"
+	},
 	PhotoboothMoments = {
 		MyAvatars = "PhotoboothMomentsMyAvatars",
 		Backgrounds = "PhotoboothMomentsBackgrounds",

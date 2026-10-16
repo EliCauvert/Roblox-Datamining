@@ -4,7 +4,5 @@
 	AuthTextInputValidator = require(script.AuthTextInputValidator),
 	UsernameSuggestionScrollView = require(script.UsernameSuggestionScrollView),
 	SignUpExitModal = require(script.SignUpExitModal),
-	BirthdayDropdown = require(script.BirthdayDropdown),
-	SignUpBirthdayField = require(script.SignUpBirthdayField),
-	SignUpGenderChips = require(script.SignUpGenderChips)
+	BirthdayDropdown = require(script.BirthdayDropdown)
 }

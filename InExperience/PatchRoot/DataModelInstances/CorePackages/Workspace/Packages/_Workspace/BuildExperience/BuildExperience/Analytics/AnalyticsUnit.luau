@@ -1,5 +1,4 @@
 ﻿return {
-	Minutes = "Minutes",
 	Percent = "Percent",
 	Scalar = "Scalar",
 	Temporal = "Temporal"

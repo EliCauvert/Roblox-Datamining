@@ -518,7 +518,7 @@ return {
 							current_1.onPermissionResolved(p5.status, p4)
 						end
 						if p5.status == permissionStatus.Denied then
-							handleError(t_1.PermissionDenied, if p5.error then "microphone permission denied: " .. p25.error else "microphone permission denied")
+							handleError(t_1.PermissionDenied, if p5.error then "microphone permission denied: " .. p5.error else "microphone permission denied")
 							
 							return
 						elseif p4 == dictationModeModule.Continuous then

@@ -25,6 +25,9 @@ local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local linkOpenedSource = analyticsServiceModule.LinkOpenedSource
 local submitSource = analyticsServiceModule.SubmitSource
 local formatErrorDetailForAnalytics = analyticsServiceModule.formatErrorDetailForAnalytics
+local fFlagEnableReportingFlowForMomentsFeed = require(parent.SharedFlags).FFlagEnableReportingFlowForMomentsFeed
+local fFlagAbuseReportSceneSelectionNextOnFailureModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionNextOnFailure)
+local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 local fFlagAbuseReportSubmissionTargetV4 = require(parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4
 local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
@@ -56,7 +59,7 @@ local function useAbuseSheetAnalytics(p1, p2, p3, p4)
 end
 
 return function(p1, p2)
-	-- upvalues: reactModule (ref), resolveStartNode (ref), reducer (ref), getInitialState (ref), getNewRunId (ref), useOpenLinkModule (ref), useRoactService (ref), roactNetworking (ref), useAbuseSheetAnalytics (ref), selectStore (ref), resolveArConfig (ref), telemetryEventType (ref), dashModule (ref), fFlagAbuseReportImproveErrorEventsModule (ref), linkOpenedSource (ref), fFlagAbuseReportSubmissionTargetV4 (ref), getSubmissionTargetTelemetry (ref), sendReportModule (ref), promiseModule (ref), abuseVectorModule (ref), submitSource (ref), formatErrorDetailForAnalytics (ref), contentNodeModule (ref)
+	-- upvalues: reactModule (ref), resolveStartNode (ref), reducer (ref), getInitialState (ref), getNewRunId (ref), useOpenLinkModule (ref), useRoactService (ref), roactNetworking (ref), useAbuseSheetAnalytics (ref), selectStore (ref), resolveArConfig (ref), telemetryEventType (ref), dashModule (ref), fFlagAbuseReportImproveErrorEventsModule (ref), linkOpenedSource (ref), fFlagAbuseReportSubmissionTargetV4 (ref), getSubmissionTargetTelemetry (ref), sendReportModule (ref), promiseModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), abuseVectorModule (ref), fFlagAbuseReportSceneSelectionNextOnFailureModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), formatErrorDetailForAnalytics (ref), contentNodeModule (ref)
 	local var1 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), resolveStartNode (copy)
 		return if p1 then resolveStartNode(p1) else "root"
@@ -251,7 +254,7 @@ return function(p1, p2)
 	end
 	
 	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), nodeId (ref), var2 (ref), dashModule (copy), p2 (ref), var3 (ref), var11 (ref), telemetryEventType (copy), linkOpenedSource (copy), var4 (ref), notifyFinish (ref), reset (ref), fFlagAbuseReportSubmissionTargetV4 (copy), getSubmissionTargetTelemetry (copy), sendReportModule (copy), var5 (ref), promiseModule (copy), abuseVectorModule (copy), var6 (ref), submitSource (copy), var12 (ref), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy)
+		-- upvalues: var8 (ref), nodeId (ref), var2 (ref), dashModule (copy), p2 (ref), var3 (ref), var11 (ref), telemetryEventType (copy), linkOpenedSource (copy), var4 (ref), notifyFinish (ref), reset (ref), fFlagAbuseReportSubmissionTargetV4 (copy), getSubmissionTargetTelemetry (copy), sendReportModule (copy), var5 (ref), promiseModule (copy), fFlagEnableReportingFlowForMomentsFeed (copy), abuseVectorModule (copy), fFlagAbuseReportSceneSelectionNextOnFailureModule (copy), var6 (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var12 (ref), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy)
 		if not var8 or not nodeId then return end
 		if var2.navigationState ~= "gotoNext" and var2.navigationState ~= "gotoFailure" then return end
 		local var14 = dashModule.last(var2.stack)
@@ -346,7 +349,7 @@ return function(p1, p2)
 		local var16 = nil
 		
 		local function onSubmitForm()
-			-- upvalues: fFlagAbuseReportSubmissionTargetV4 (copy), target (ref), sendReportModule (copy), var5 (copy), submission (ref), p2 (copy), var16 (write), promiseModule (copy), abuseVectorModule (copy)
+			-- upvalues: fFlagAbuseReportSubmissionTargetV4 (copy), target (ref), sendReportModule (copy), var5 (copy), submission (ref), p2 (copy), var16 (write), promiseModule (copy), fFlagEnableReportingFlowForMomentsFeed (copy), abuseVectorModule (copy)
 			if fFlagAbuseReportSubmissionTargetV4 then
 				if type(target) == "table" and target.type == "default" then
 					return sendReportModule(var5, "abuse-reporting/v1/abuse-report", submission.data)
@@ -366,7 +369,7 @@ return function(p1, p2)
 					return promiseModule.reject("Unsupported submission target")
 				end
 			elseif p2.onCustomSubmit then
-				if p2.abuseVector ~= abuseVectorModule.MomentsFeed then
+				if not fFlagEnableReportingFlowForMomentsFeed or p2.abuseVector ~= abuseVectorModule.MomentsFeed then
 					return p2.onCustomSubmit(submission)
 				end
 				local var18 = p2.onCustomSubmit(submission)
@@ -378,31 +381,31 @@ return function(p1, p2)
 		local var17 = if var2.navigationState == "gotoFailure" then nodeId_1.nextOnFailure else nodeId.next
 		
 		if not var17 then
-			warn("Navigation target is nil, closing")
+			warn(if fFlagAbuseReportSceneSelectionNextOnFailureModule then "Navigation target is nil, closing" else "currentNode.next is nil, closing")
 			p2.onClose()
 		elseif type(var17) == "table" and var17.type == "submitForm" then
 			local unixTimestampMillis = DateTime.now().UnixTimestampMillis
 			var6({
 				sub_event_type = telemetryEventType.Submit,
-				submit_detail = {
-					submit_source = submitSource.Flow,
+				submit_detail = if fFlagAbuseReportSceneSelectionSubmitTrackingModule or fFlagAbuseReportSubmissionTargetV4 then {
+					submit_source = if fFlagAbuseReportSceneSelectionSubmitTrackingModule then submitSource.Flow else nil,
 					target_type = var15.target_type,
 					client_action_name = var15.client_action_name
-				}
+				} else nil
 			})
 			var3({ type = "startedSubmission" });
 			(if fFlagAbuseReportSubmissionTargetV4 then promiseModule.try(function()
 				-- upvalues: onSubmitForm (ref)
 				return onSubmitForm()
 			end) else onSubmitForm()):andThen(function(p3)
-				-- upvalues: var3 (copy), var6 (copy), telemetryEventType (copy), unixTimestampMillis (ref), submitSource (copy), var15 (ref), var12 (copy), handleNextSimple (ref), var17 (ref)
+				-- upvalues: var3 (copy), var6 (copy), telemetryEventType (copy), unixTimestampMillis (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var15 (ref), var12 (copy), handleNextSimple (ref), var17 (ref)
 				var3({ type = "completedSubmission" })
 				var6({
 					sub_event_type = telemetryEventType.SubmitSuccess,
 					submit_detail = {
 						report_id = p3.responseBody and p3.responseBody.reportId,
 						submit_api_duration = DateTime.now().UnixTimestampMillis - unixTimestampMillis,
-						submit_source = submitSource.Flow,
+						submit_source = if fFlagAbuseReportSceneSelectionSubmitTrackingModule then submitSource.Flow else nil,
 						target_type = var15.target_type,
 						client_action_name = var15.client_action_name
 					}
@@ -410,13 +413,13 @@ return function(p1, p2)
 				var12.current = "completed"
 				handleNextSimple(var17.onSuccess)
 			end):catch(function(p3)
-				-- upvalues: var3 (copy), var6 (copy), telemetryEventType (copy), unixTimestampMillis (ref), submitSource (copy), var15 (ref), var16 (write), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy), dashModule (copy), var12 (copy), var17 (ref), handleNextSimple (ref)
+				-- upvalues: var3 (copy), var6 (copy), telemetryEventType (copy), unixTimestampMillis (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var15 (ref), var16 (write), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy), dashModule (copy), var12 (copy), var17 (ref), handleNextSimple (ref)
 				var3({ type = "submissionFailed" })
 				var6({
 					sub_event_type = telemetryEventType.SubmitFail,
 					submit_detail = {
 						submit_api_duration = DateTime.now().UnixTimestampMillis - unixTimestampMillis,
-						submit_source = submitSource.Flow,
+						submit_source = if fFlagAbuseReportSceneSelectionSubmitTrackingModule then submitSource.Flow else nil,
 						target_type = var15.target_type,
 						client_action_name = var15.client_action_name,
 						target_failure_reason = var16
@@ -463,7 +466,7 @@ return function(p1, p2)
 		end
 	end
 	
-	return if var8 and nodeId and var13 then {
+	return if not (not var8 or not nodeId or not var13) then {
 		config = var8,
 		canGoBack = var18,
 		goBack = goBack,
@@ -499,7 +502,7 @@ return function(p1, p2)
 					}
 				})
 			end else nil,
-			onFailure = if nodeId and nodeId.nextOnFailure ~= nil then function()
+			onFailure = if fFlagAbuseReportSceneSelectionNextOnFailureModule and (nodeId and nodeId.nextOnFailure ~= nil) then function()
 				-- upvalues: var8 (ref), nodeId (ref), var13 (ref), var3 (ref), var6 (ref), telemetryEventType (copy)
 				if var8 and nodeId and var13 then
 					local unixTimestampMillis = DateTime.now().UnixTimestampMillis
@@ -521,7 +524,7 @@ return function(p1, p2)
 				end
 			end else nil,
 			goBack = goBack,
-			onExternalSubmit = onExternalSubmit,
+			onExternalSubmit = if fFlagAbuseReportSceneSelectionSubmitTrackingModule then onExternalSubmit else nil,
 			store = var7,
 			isSubmitting = var2.submissionState == "submitting"
 		}),

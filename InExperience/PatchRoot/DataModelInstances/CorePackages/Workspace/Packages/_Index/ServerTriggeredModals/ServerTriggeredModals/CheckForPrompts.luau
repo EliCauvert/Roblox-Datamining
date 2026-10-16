@@ -41,7 +41,6 @@ return reactModule.memo(roactNavigationModule.withNavigationFocus(function(p1)
 			configKey = "HomepagePrompts",
 			clearOnEmptyResponse = true,
 			clientAttributes = nil,
-			replaceOnFetch = nil,
 			entryPoint = promptsEntryPointModule.HomepageLaunch,
 			allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then true else nil,
 			loadTimer = sduiLoadTimer.createLoadTimer("HomepagePrompts")

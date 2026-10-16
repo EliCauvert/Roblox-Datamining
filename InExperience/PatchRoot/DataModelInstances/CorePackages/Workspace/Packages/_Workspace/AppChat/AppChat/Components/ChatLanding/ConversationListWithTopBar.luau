@@ -31,7 +31,7 @@ local shouldUseFoundationConversationRow = signalsMigrationConfigModule.shouldUs
 local fFlagAppChatUseUltimateListConversationListModule_1 = shouldUseFoundationConversationRow and fFlagAppChatUseUltimateListConversationListModule
 local fFlagAppChatUseViewRecyclerConversationListModule_1 = shouldUseFoundationConversationRow and fFlagAppChatUseViewRecyclerConversationListModule
 local conversationListModule = require(script.Parent.ConversationList)
-local searchLoadingModule = require(script.Parent.SearchLoading)
+local chatLoadingContainerModule = require(script.Parent.ChatLoading.ChatLoadingContainer)
 local searchNoResultsModule = require(script.Parent.SearchNoResults)
 local var2 = false
 local var3 = nil
@@ -98,12 +98,12 @@ end
 
 function conversationListWithTopBar.init(p1)
 	-- upvalues: memoize (ref), roactPaginator (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), cryoModule (ref), httpService (ref), chatLandingTelemetryEventsModule (ref)
-	function p2.showErrorToast(p2)
+	function p1.showErrorToast(p2)
 		-- upvalues: p1 (ref)
 		p1.props.navigateToToast({ toastProps = { toastContent = { toastTitle = p2 } } })
 	end
 	
-	function p2.reportAnalytics(p2)
+	function p1.reportAnalytics(p2)
 		-- upvalues: p1 (ref)
 		if not p1.props.conversationsIsFetching and not p1.props.oldestConversationIsFetched then
 			p2:userFetchedOlderConversations(p1.props.localUserId)
@@ -134,7 +134,7 @@ function conversationListWithTopBar.init(p1)
 		return index or 0
 	end)
 	
-	function p2.formatParticipantIds(p2)
+	function p1.formatParticipantIds(p2)
 		-- upvalues: cryoModule (copy), httpService (copy)
 		local var6 = cryoModule.List.filterMap(p2 or {}, function(p3)
 			return if p3.id then tonumber(p3.id) else nil
@@ -147,7 +147,7 @@ function conversationListWithTopBar.init(p1)
 		return if ok then status else "[]"
 	end
 	
-	function p2.fireClickEvent(p2, p3, p4)
+	function p1.fireClickEvent(p2, p3, p4)
 		-- upvalues: chatLandingTelemetryEventsModule (copy), p1 (ref)
 		local id = p2.id
 		p3.emit(chatLandingTelemetryEventsModule.ConversationClicked, {
@@ -189,7 +189,7 @@ function conversationListWithTopBar.init(p1)
 		end
 	end)
 	
-	function p2.onActivated(p2)
+	function p1.onActivated(p2)
 		-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy), p1 (ref)
 		if fFlagAppChatPerfTrackingModule then
 			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = tostring(p2.id) })
@@ -199,11 +199,11 @@ function conversationListWithTopBar.init(p1)
 end
 
 function conversationListWithTopBar.render(p1)
-	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), fFlagEnableStickyShortcutBarOnAllPlatforms (ref), partyPageCarouselExperimentation (ref), shouldUseFoundationConversationRow (ref), fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), fFlagAppChatUseViewRecyclerConversationListModule_1 (ref), conversationListModule (ref), var4 (write), var5 (write), var2 (write), var3 (write), roactModule (ref), searchLoadingModule (ref), searchNoResultsModule (ref)
+	-- upvalues: withAnalyticsModule (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), fFlagEnableStickyShortcutBarOnAllPlatforms (ref), partyPageCarouselExperimentation (ref), shouldUseFoundationConversationRow (ref), fFlagAppChatConsoleFocusFixesModule (ref), fFlagAppIaScrollAway (ref), fFlagAppChatUseUltimateListConversationListModule_1 (ref), fFlagAppChatUseViewRecyclerConversationListModule_1 (ref), conversationListModule (ref), var4 (write), var5 (write), var2 (write), var3 (write), roactModule (ref), chatLoadingContainerModule (ref), searchNoResultsModule (ref)
 	return withAnalyticsModule(function(p2)
-		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p1 (ref), fFlagEnableStickyShortcutBarOnAllPlatforms (copy), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var4 (copy), var5 (copy), var2 (copy), var3 (copy), roactModule (copy), searchLoadingModule (copy), searchNoResultsModule (copy)
+		-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), p1 (ref), fFlagEnableStickyShortcutBarOnAllPlatforms (copy), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var4 (copy), var5 (copy), var2 (copy), var3 (copy), roactModule (copy), chatLoadingContainerModule (copy), searchNoResultsModule (copy)
 		return withTelemetryModule(chatLandingTelemetryLayerModule.Context)(function(p3)
-			-- upvalues: p1 (copy), fFlagEnableStickyShortcutBarOnAllPlatforms (copy), p2 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var4 (copy), var5 (copy), var2 (copy), var3 (copy), roactModule (copy), searchLoadingModule (copy), searchNoResultsModule (copy)
+			-- upvalues: p1 (copy), fFlagEnableStickyShortcutBarOnAllPlatforms (copy), p2 (ref), partyPageCarouselExperimentation (copy), shouldUseFoundationConversationRow (copy), fFlagAppChatConsoleFocusFixesModule (copy), fFlagAppIaScrollAway (copy), fFlagAppChatUseUltimateListConversationListModule_1 (copy), fFlagAppChatUseViewRecyclerConversationListModule_1 (copy), conversationListModule (copy), var4 (copy), var5 (copy), var2 (copy), var3 (copy), roactModule (copy), chatLoadingContainerModule (copy), searchNoResultsModule (copy)
 			local var6 = if fFlagEnableStickyShortcutBarOnAllPlatforms then p1.props.isShortcutBarVisible else false
 			local t = {
 				Size = UDim2.fromScale(1, 1),
@@ -285,8 +285,8 @@ function conversationListWithTopBar.render(p1)
 			local var10 = roactModule.createElement(var7, t)
 			
 			if p1.props.isSearchActive and p1.props.isSearchAwaitingResults and #p1.props.itemList == 0 then
-				var10 = roactModule.createElement(searchLoadingModule, {
-					entryHeight = p1.props.entryHeight,
+				var10 = roactModule.createElement(chatLoadingContainerModule, {
+					cellHeight = p1.props.entryHeight,
 					topPadding = p1.props.canvasTopPadding
 				})
 			elseif p1.props.isSearchActive and not p1.props.isSearchAwaitingResults and (#p1.props.itemList == 0 and p1.props.oldestConversationIsFetched) then

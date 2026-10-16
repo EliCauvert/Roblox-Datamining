@@ -5,7 +5,6 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local colorModeModule = require(foundation.Enums.ColorMode)
 local deviceModule = require(foundation.Enums.Device)
 local foundationModule = require(foundation.Providers.Foundation)
-local themeNameModule = require(foundation.Enums.ThemeName)
 local typesModule = require(foundation.Utility.Stories.Types)
 local tokenOverridesStoreModule = require(script.Parent.TokenOverridesStore)
 local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
@@ -66,21 +65,19 @@ local function useCreateOverlay(p1)
 end
 
 return function(p1)
-	-- upvalues: useCreateOverlay (ref), colorModeModule (ref), themeNameModule (ref), useTokenOverrides (ref), typesModule (ref), deviceModule (ref), reactModule (ref), foundationModule (ref), isPluginSecurityModule (ref), StyleLinkPortal (ref)
+	-- upvalues: useCreateOverlay (ref), colorModeModule (ref), useTokenOverrides (ref), typesModule (ref), deviceModule (ref), reactModule (ref), foundationModule (ref), isPluginSecurityModule (ref), StyleLinkPortal (ref)
 	return function(p2)
-		-- upvalues: useCreateOverlay (copy), colorModeModule (copy), themeNameModule (copy), useTokenOverrides (copy), typesModule (copy), deviceModule (copy), reactModule (copy), foundationModule (copy), isPluginSecurityModule (copy), p1 (ref), StyleLinkPortal (copy)
+		-- upvalues: useCreateOverlay (copy), colorModeModule (copy), useTokenOverrides (copy), typesModule (copy), deviceModule (copy), reactModule (copy), foundationModule (copy), isPluginSecurityModule (copy), p1 (ref), StyleLinkPortal (copy)
 		local var1 = useCreateOverlay(p2)
-		local colorMode = p2.colorMode or p2.theme
-		local var2 = if colorMode ~= nil then nil else colorModeModule[colorMode]
-		local var3 = if p2.themeName ~= nil then nil else themeNameModule[p2.themeName]
-		local var4 = useTokenOverrides()
-		local var5 = typesModule.toDeveloperStorybookStoryProps(p2)
+		local theme = colorModeModule[p2.theme]
+		local var2 = useTokenOverrides()
+		local var3 = typesModule.toDeveloperStorybookStoryProps(p2)
 		local platform = nil
 		local settings = nil
 		
-		if var5 then
-			platform = deviceModule[var5.platform]
-			settings = var5.settings
+		if var3 then
+			platform = deviceModule[var3.platform]
+			settings = var3.settings
 		end
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -94,14 +91,13 @@ return function(p1)
 				PaddingRight = UDim.new(0, 10)
 			}),
 			FoundationContext = reactModule.createElement(foundationModule, {
-				themeName = var3,
-				colorMode = var2,
+				colorMode = theme,
 				device = platform,
 				preferences = settings,
 				scale = settings and settings.scale,
 				overlayGui = var1,
 				plugin = if isPluginSecurityModule() then p2.plugin else nil,
-				tokenOverrides = var4
+				tokenOverrides = var2
 			}, {
 				Child = reactModule.createElement(p1, p2),
 				StyleLink = reactModule.createElement(StyleLinkPortal, if var1 then { overlay = var1 } else nil)

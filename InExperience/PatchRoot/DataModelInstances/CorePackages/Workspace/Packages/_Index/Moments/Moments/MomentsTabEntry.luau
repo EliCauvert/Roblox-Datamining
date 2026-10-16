@@ -13,6 +13,7 @@ local getDeepLinkStoreModule = require(moments.Stores.GetDeepLinkStore)
 local createMomentsStoreModule = require(moments.Stores.GetMomentsStore.createMomentsStore)
 local getImmersiveChromeStoreModule = require(moments.Stores.GetImmersiveChromeStore)
 local getFFlagMomentsFixDeeplinkRefocusModule = require(moments.Flags.GetFFlagMomentsFixDeeplinkRefocus)
+local getFFlagMomentsFixPeekReturnChromeModule = require(moments.Flags.GetFFlagMomentsFixPeekReturnChrome)
 local fFlagMomentsEmojiSetsApiModule = require(moments.Flags.FFlagMomentsEmojiSetsApi)
 local fStringMomentsExperienceJoinActionTextIxpLayerModule = require(moments.Flags.FStringMomentsExperienceJoinActionTextIxpLayer)
 local useMomentsTabIsVisibleModule = require(moments.Hooks.useMomentsTabIsVisible)
@@ -37,7 +38,6 @@ local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMome
 local fFlagMomentsSessionHeartbeat = momentsCommonModule.Flags.FFlagMomentsSessionHeartbeat
 local t = {}
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
-local fFlagMomentsAvatarLookTryOn = sharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 local getActiveRoutes = navigationModule.getActiveRoutes
 
@@ -217,7 +217,7 @@ local _ = function(p4, p5, p6)
 end
 
 local function MomentsTabEntry(p4)
-	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), useResetTeleportingOnGameLeaveModule (ref), getFFlagMomentsFixDeeplinkRefocusModule (ref), getDeepLinkRequest (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), robloxAppEventsModule (ref), appPage (ref), consumeEntrySourceModule (ref), logMomentsLayerExposure (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), moments (ref), fFlagMomentsEmojiSetsApiModule (ref), momentsGetMomentsReactionsStoreModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), t (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), momentsSurfaceLoadManager (ref), getExperienceDetailsSheetStoreModule (ref), getImmersiveChromeStoreModule (ref), roactNavigationModule (ref), useMomentsTabIsVisibleModule (ref), fFlagMomentsAvatarLookTryOn (ref), useMomentsGating (ref), canRenderNativeMoments (ref), momentsHostShellModule (ref), innerNavigatorModule (ref)
+	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), useResetTeleportingOnGameLeaveModule (ref), getFFlagMomentsFixDeeplinkRefocusModule (ref), getDeepLinkRequest (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), robloxAppEventsModule (ref), appPage (ref), consumeEntrySourceModule (ref), logMomentsLayerExposure (ref), fStringMomentsExperienceJoinActionTextIxpLayerModule (ref), moments (ref), fFlagMomentsEmojiSetsApiModule (ref), momentsGetMomentsReactionsStoreModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), t (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), momentsSurfaceLoadManager (ref), getExperienceDetailsSheetStoreModule (ref), getImmersiveChromeStoreModule (ref), roactNavigationModule (ref), useMomentsTabIsVisibleModule (ref), getFFlagMomentsFixPeekReturnChromeModule (ref), useMomentsGating (ref), canRenderNativeMoments (ref), momentsHostShellModule (ref), innerNavigatorModule (ref)
 	local var9 = reactModule.useRef(p4)
 	var9.current = p4
 	local var10 = reactModule.useRef(false)
@@ -384,13 +384,13 @@ local function MomentsTabEntry(p4)
 	end, { var21, var22, var23 })
 	local var24 = useMomentsTabIsVisibleModule()
 	reactModule.useEffect(function()
-		-- upvalues: var24 (ref), var23 (ref)
-		if var24 then
+		-- upvalues: getFFlagMomentsFixPeekReturnChromeModule (copy), var24 (ref), var23 (ref)
+		if getFFlagMomentsFixPeekReturnChromeModule() and var24 then
 			var23()
 		end
 	end, { var24, var23 })
 	local var25 = reactModule.useMemo(function()
-		-- upvalues: p4 (ref), getImmersiveChromeStoreModule (copy), fFlagMomentsAvatarLookTryOn (copy)
+		-- upvalues: p4 (ref), getImmersiveChromeStoreModule (copy)
 		local openProfile = p4.openProfile
 		local openOwnMoments = p4.openOwnMoments
 		
@@ -406,14 +406,15 @@ local function MomentsTabEntry(p4)
 				openOwnMoments()
 			end else nil,
 			openMomentsFeedReport = p4.openMomentsFeedReport,
-			openAvatarLookTryOn = if fFlagMomentsAvatarLookTryOn then p4.openAvatarLookTryOn else nil,
 			openMomentCommentReport = p4.openMomentCommentReport,
 			openBlockUser = p4.openBlockUser
 		}
 	end, {
-		p4.openProfile, p4.openOwnMoments, p4.openMomentsFeedReport,
-		p4.openMomentCommentReport, p4.openBlockUser,
-		if fFlagMomentsAvatarLookTryOn then p4.openAvatarLookTryOn else nil
+		p4.openProfile,
+		p4.openOwnMoments,
+		p4.openMomentsFeedReport,
+		p4.openMomentCommentReport,
+		p4.openBlockUser
 	})
 	
 	return if canRenderNativeMoments(useMomentsGating()) then reactModule.createElement(momentsHostShellModule, {
@@ -421,7 +422,6 @@ local function MomentsTabEntry(p4)
 		openProfile = var25.openProfile,
 		openOwnMoments = var25.openOwnMoments,
 		openMomentsFeedReport = var25.openMomentsFeedReport,
-		openAvatarLookTryOn = if fFlagMomentsAvatarLookTryOn then var25.openAvatarLookTryOn else nil,
 		openMomentCommentReport = var25.openMomentCommentReport,
 		openBlockUser = var25.openBlockUser
 	}, reactModule.createElement(innerNavigatorModule, { navigation = p4.navigation })) else nil

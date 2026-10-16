@@ -15,6 +15,7 @@ local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigu
 local formatErrorModule = require(buildExperience.utils.formatError)
 local refreshPublishEligibilityModule = require(buildExperience.utils.refreshPublishEligibility)
 local refreshAdCampaignEligibilityModule = require(buildExperience.utils.refreshAdCampaignEligibility)
+local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
 local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
 local debug = creatorAgentChatModule.debug
 local icon = foundationModule.Icon
@@ -225,7 +226,7 @@ local _ = function(p3)
 end
 
 local function useAudienceController(p3)
-	-- upvalues: useAudienceStores (ref), reactModule (ref), useAudienceData (ref), useQuestionnaireHandler (ref), getAudiencesForValue (ref), gameConfigurationActionsModule (ref), fFlagEnableBuildAdPromotionModule (ref), refreshAdCampaignEligibilityModule (ref), debug (ref), formatErrorModule (ref), contentMaturityUtilsModule (ref)
+	-- upvalues: useAudienceStores (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), useAudienceData (ref), useQuestionnaireHandler (ref), getAudiencesForValue (ref), gameConfigurationActionsModule (ref), fFlagEnableBuildAdPromotionModule (ref), refreshAdCampaignEligibilityModule (ref), debug (ref), formatErrorModule (ref), contentMaturityUtilsModule (ref)
 	local var1 = useAudienceStores()
 	local var2, var3 = reactModule.useState(nil)
 	local var4, var5 = reactModule.useState(false)
@@ -245,10 +246,10 @@ local function useAudienceController(p3)
 		end
 	end, { var6, p3 })
 	local var8, var9 = reactModule.useState(nil)
-	local var10 = reactModule.useCallback(function()
+	local var10 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
 		-- upvalues: var9 (ref)
 		var9(nil)
-	end, {})
+	end, {}) else nil
 	local var11 = useAudienceData(p3, var1.universeActivationStore, var1.universeConfigurationStore, var2)
 	local var12 = useQuestionnaireHandler(p3, var1.questionnaireStore)
 	local configurationData = var11.configurationData
@@ -449,7 +450,7 @@ local function AudienceList(p3)
 end
 
 local function EligibilityTooltip(p3)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useScaledValue (ref), buildExperienceAudienceTooltipMaxWidth (ref), reactModule (ref), popover (ref), popoverAlign (ref), radius (ref), popoverSide (ref), view (ref), text (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useScaledValue (ref), buildExperienceAudienceTooltipMaxWidth (ref), reactModule (ref), popover (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), radius (ref), popoverSide (ref), view (ref), text (ref)
 	local var1 = useLocalization({
 		notEligible = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE,
 		notEligibleDescription = localizationStringsModule.GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION,
@@ -468,7 +469,7 @@ local function EligibilityTooltip(p3)
 			selectionGroup = false,
 			align = popoverAlign.Center,
 			backgroundStyle = useTokens().Color.System.Contrast,
-			onPressedOutside = p3.onPressedOutside,
+			onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then p3.onPressedOutside else nil,
 			radius = radius.Small,
 			side = popoverSide.Left
 		}, {

@@ -89,30 +89,27 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Je e-mailadres is
 Authentication.Login.WeChat.AntiAddictionText,"Boycot slechte ervaringen, weiger illegale ervaringen. Wees voorzichtig en zorg dat je niet bedrogen wordt. Ervaringen bezoeken is goed voor je hersenen, maar te veel ervaringen bezoeken kan je gezondheid schaden. Let op de tijd die je aan ervaringen besteed en zorg voor een gezonde levensstijl."
 Authentication.SignUp.Action.ApplyOnNextRespawn,Toepassen bij de volgende respawn
 Authentication.SignUp.Action.Cancel,
-Authentication.SignUp.Action.ContinueSetup,Doorgaan met instellen
-Authentication.SignUp.Action.Create,Maken
-Authentication.SignUp.Action.CreateAccountSentenceCase,Account aanmaken
 Authentication.SignUp.Action.ExitModalLeave,Afsluiten
 Authentication.SignUp.Action.RespawnNow,Nu respawnen
+Authentication.SignUp.Action.StartPlay,Beginnen met spelen
 Authentication.SignUp.Button.OKCaptialized,Oké
 Authentication.SignUp.Button.RetryLogIn,Opnieuw proberen inloggen
 Authentication.SignUp.Description.AccountAlreadyLinked,Je account op {platformAccountName} is al gekoppeld aan een Roblox-account. Probeer opnieuw in te loggen.
 Authentication.SignUp.Description.BirthdayHint,Datum invoeren
-Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Door een account aan te maken, ga je akkoord met onze {startTermsTag}Gebruiksvoorwaarden{endTermsTag}, inclusief arbitrage, en erken je ons {startPrivacyTag}Privacybeleid{endPrivacyTag}. Als je jonger bent dan 18, moet je ouder of voogd toestemming geven voor je account en akkoord gaan met onze Gebruiksvoorwaarden."
 Authentication.SignUp.Description.Try,Proberen
 Authentication.SignUp.Description.UsernameChanged,"Alles is geregeld! Je account is klaar en gekoppeld aan {platform}. Respawn nu om je bijgewerkte gebruikersnaam in het spel te zien, anders wordt deze de volgende keer toegepast."
 Authentication.SignUp.Description.UsernameUnchanged,Gelukt! Je account is klaar en gekoppeld aan{platform}. Chat met vrienden en speel miljoenen Roblox-spellen.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"Je Roblox-account wordt gekoppeld aan je account op {platform}. Je kunt de koppeling op elk moment ongedaan maken via het scherm Instellingen. Er kan een afkoelperiode zijn voordat je kunt koppelen aan een ander account op {platform}. Door op {ctaButton} te klikken, ga je akkoord met de Gebruiksvoorwaarden, inclusief de arbitrageclausule, en erken je het Privacybeleid."
-Authentication.SignUp.Header.CancelAccountCreation,Aanmaken van account annuleren?
+Authentication.SignUp.Header.CloseWithoutFinishing,Afsluiten zonder af te ronden?
 Authentication.SignUp.Header.OneLastThing,Nog één ding
 Authentication.SignUp.Header.SetUpYourRobloxAccount,Je Roblox-account instellen
 Authentication.SignUp.Heading.CountryCodeSelector,Land selecteren
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,Verjaardag
-Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} jaar)
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,Dag
 Authentication.SignUp.Label.EnterYourEmail,Voer je e-mailadres in
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,Je moet ouder zijn om dit spel te spelen
 Authentication.SignUp.Label.ErrorsWithPassword,Er zijn fouten in het wachtwoord.
 Authentication.SignUp.Label.ErrorsWithUsername,Er zijn fouten in de gebruikersnaam.
 Authentication.SignUp.Label.ExitModalSubtitle,"Je account is bijna gemaakt. Als je stopt, verlies je je voortgang."
@@ -252,7 +249,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation bevat Curve
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation bevat meer dan {maxAllowed} MarkerCurve(s). Zorg ervoor dat er niet meer dan {maxAllowed} MarkerCurve-descendant(s) zijn.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation bevat een MarkerCurve met {count} markers. {maxAllowed} is het maximum per MarkerCurve. Corrigeer de animatie.
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation bevat een onverwacht child: {childName}
-Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Asset {AssetId} ({InstanceFullName}.{FieldName}) is niet gepubliceerd. Publiceer de asset en probeer het opnieuw.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische hoofden op de marktplaats moeten de juiste cage hebben, zodat de oog- en mondhoekpunten op de cage overeenkomen met de mesh-hoekpunten. Verbeter je cage en de uitlijning ervan met de mesh."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Kan de glimlachuitdrukking van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor de mond aan zodat ze overeenkomen met de positie van de mond op het hoofd en zorg dat deze een glimlachuitdrukking kan weergeven.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Kan de uitdrukking voor het sluiten van het linkeroog van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor het linkeroog aan zodat ze overeenkomen met de positie van het linkeroog op het hoofd en zorg dat het oog kan worden gesloten.
@@ -265,6 +261,7 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,Emissief gebied bove
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissivePercentage}%, moet {maxEmissivePercentage}% of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,Emissief gebied overschreden.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} straalt te veel. Het stralende gebied × de intensiteit overschrijdt de limiet (momenteel {emissiveArea}, moet {maxEmissiveArea} of minder zijn). Verklein het stralende gebied of verlaag de EmissiveStrength."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Dit item maakt gebruik van emissieve maps die alleen beschikbaar zijn voor makers in het Trusted Creator-programma. Verwijder alle inhoud van emissieve maps of word lid van het programma voordat je gaat uploaden.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,Er ontbreekt een geldige maximale translatiewaarde van het onderdeel in de gepubliceerde animatie. Publiceer de animatie opnieuw.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,Er ontbreekt een geldige UGC-emotemarker in de gepubliceerde animatie. Publiceer de animatie opnieuw.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,De maximale translatie van het onderdeel kon niet worden berekend op basis van de gepubliceerde animatiegegevens. Publiceer de animatie opnieuw.
@@ -272,7 +269,6 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"De ge
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Het hoofd moet boven UpperTorso worden geplaatst. Het middelpunt van het hoofd bevindt zich onder de bovenkant van de romp, wat aangeeft dat de hoofdmesh is ingeklapt of verkeerd is geplaatst."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,De eigenschap InternalOverrideFACSData op FaceControls moet leeg zijn bij het uploaden.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Er is gedetecteerd dat FACS je hoofd vergroot tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
-Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamische hoofden mogen maximaal {maxFacsJointCount} FACS-joints hebben, maar dit hoofd heeft er {actualJointCount}. Verminder het aantal FACS-joints en probeer het opnieuw."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Er is gedetecteerd dat FACS je hoofd verkleint tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,Het uploadformaat komt niet overeen met de verwachte mappenstructuur. Probeer het opnieuw of dien een bugrapport in.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"Bot {bonePath} is te ver buiten het mesh-onderdeel {partName}, plaats het dichter bij de grens van de mesh-onderdeelgrootte."
@@ -417,10 +413,9 @@ CommonUI.Features.Label.Connections,Connecties
 CommonUI.Features.Label.ControllerBar.HoldPrefix,Ingedrukt houden
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,om te spelen
-CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.CreateGames,Maken
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,Ervaringen
-CommonUI.Features.Label.Games,Spelletjes
 CommonUI.Features.Label.GiftCards,Cadeaubonnen kopen
 CommonUI.Features.Label.Groups,Community's
 CommonUI.Features.Label.HelpAndSafety,Help en veiligheid
@@ -447,7 +442,7 @@ CommonUI.Features.Label.TermsOfUse,Gebruiksvoorwaarden
 CommonUI.Features.Label.Thanks,Bedankt
 CommonUI.Features.Label.TheHunt,Roblox-evenementen
 CommonUI.Features.Label.Trades,Ruilen
-CommonUI.Features.Label.Unchecked,Niet geverifieerd
+CommonUI.Features.Label.Unchecked,Niet aangevinkt
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,Verbinding maken met
@@ -661,18 +656,15 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,Oorspronkelijke tekst ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Wat is het probleem met deze vertaling?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Probleem met de nauwkeurigheid
-CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,Beeldkwaliteit
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Ongepast of denigrerend
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,Spelling- of grammaticaprobleem
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,Niet vertaald
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,Indienen
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,Geselecteerde tekst
 CoreScripts.Feedback.Help.Instructions,Selecteer een tekst om feedback te geven over onjuiste of ontbrekende vertalingen.
-CoreScripts.Feedback.Help.InstructionsWithImage,Selecteer een tekst of afbeelding om feedback te geven over onjuiste of ontbrekende vertalingen.
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
-CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,Vertel ons wat er mis is
 CoreScripts.Feedback.Onboarding.Start,Start
 CoreScripts.Feedback.SubmissionToastBody,Roblox zal deze informatie gebruiken om de vertaalkwaliteit van deze experience te verbeteren
@@ -709,7 +701,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Categorie *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,Overig
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Selecteer een categorie
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Probleem met aankoop
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,Suggestie
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Maximaal {MAX} tekens
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Details *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Deselecteren
@@ -717,7 +708,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Vermeld al
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Beschrijf wat er ontbreekt en wanneer je het voor het laatst hebt gezien. Als je account is gehackt, vermeld dan je ticketnummer bij de klantenservice van Roblox, en alle relevante gegevens."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Beschrijf hier je verzoek of probleem. Geef zoveel mogelijk details zodat wij de situatie kunnen begrijpen.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Laat ons weten wat je probeerde te kopen, wanneer het gebeurde en de totale waarde (bijv. 500 Robux/$ 4,99). Vermeld eventuele foutmeldingen die je te zien kreeg."
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,"Laat weten welke nieuwe functies of verbeteringen je graag zou zien, en waarom deze het spel beter zouden maken."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Probeer je misbruik te melden?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>In plaats hiervan een melding inzenden.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Selecteren
@@ -910,9 +900,6 @@ CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,Vaste camera in
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,Weergave en spelbesturing
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR-vignette ingeschakeld
 CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,Volume van spraakchat
-CoreScripts.InGameMenu.GameSettings.VoiceTypingMode,Modus spraakgestuurd typen
-CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous,Automatisch verzenden
-CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard,Handmatig verzenden
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,VR-SPELBESTURING
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,Er is een fout opgetreden. Probeer het opnieuw.
@@ -1119,7 +1106,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,Transcriberen...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Dat hebben we niet opgepikt! Probeer het opnieuw.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,We ondersteunen die taal nog niet!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,Tik hier om je apparaatinstellingen bij te werken om je microfoon te gebruiken.
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Om je microfoon te gebruiken, tik je hier om je apparaatinstellingen bij te werken."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate,"Om je microfoon te gebruiken, ga je naar je apparaatinstellingen en geef je Roblox toegang tot de microfoon."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Geen toegang tot microfoon
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Om berichten met je stem te verzenden, verwerken we je audio en verwijderen we deze meteen, in overeenstemming met ons privacybeleid."
@@ -1244,19 +1231,6 @@ Corescripts.AvatarContextMenu.FriendRequestPending,Vriendschapsverzoek in behand
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,Persoon geblokkeerd
 Corescripts.AvatarContextMenu.Wave,Zwaaien
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,Grafieken
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,Doorgaan met spelen
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,Teleporteren
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Uitgelicht door Roblox
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,Overige startpagina
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,Aanbeveling voor startpagina
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,Portaaladvertenties
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,Zoekadvertenties
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,Gesponsorde advertenties
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Omlaag scrollen
 Feature.Accessibility.Action.ScrollUp,Omhoog scrollen
@@ -1933,7 +1907,6 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} blokkeren?
 Feature.BlockingModal.Message.BlockConfirmation,"Als je deze gebruiker blokkeert, wordt deze verwijderd als connectie of volger. De gebruiker kan je geen berichten, verzoeken of uitnodigingen sturen.<br /><br />De gebruiker krijgt geen melding dat je die hebt geblokkeerd."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Als je deze gebruiker blokkeert, wordt deze verwijderd als vriend of volger. De gebruiker kan je geen berichten, verzoeken of uitnodigingen sturen.<br /><br />De gebruiker krijgt geen melding dat je die hebt geblokkeerd."
 Feature.Build.Action.Add,
-Feature.Build.Action.AddCustomOption,Een aangepaste optie toevoegen...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Vroege tester uitnodigen
 Feature.Build.Action.AddPlaytesters,Vroege testers uitnodigen
@@ -1949,7 +1922,6 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Tekst kopiëren
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
-Feature.Build.Action.CreateNewGame,Nieuwe game maken
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Niet meer vragen
@@ -2003,18 +1975,6 @@ Feature.Build.Analytics.Description.PayerConversion,De conversie van betalende g
 Feature.Build.Analytics.Description.PlaythroughRate,Het playthrough-percentage is het percentage bezoeken waarbij een volledige speelsessie is voltooid. Hogere percentages wijzen erop dat spelers je ervaring gemakkelijk toegankelijk vinden en het de moeite waard vinden om te voltooien.
 Feature.Build.Analytics.Description.TotalPlaytime,De totale speeltijd is de som van de tijd die alle spelers gedurende de periode in je ervaring hebben doorgebracht. Een toenemende speeltijd duidt meestal op boeiendere sessies.
 Feature.Build.Analytics.DurationHours,{number} uur
-Feature.Build.Analytics.DurationMinutes,{number} minuten
-Feature.Build.Analytics.Goal.Action.CreateAd,Een advertentie maken
-Feature.Build.Analytics.Goal.Action.SellItems,Items verkopen
-Feature.Build.Analytics.Goal.Action.ShareWithFriends,Delen met vrienden
-Feature.Build.Analytics.Goal.EarnRobux,
-Feature.Build.Analytics.Goal.FirstImpression,Een goede eerste indruk maken
-Feature.Build.Analytics.Goal.GetMorePlayers,Bereik meer spelers
-Feature.Build.Analytics.Goal.KeepPlayersComingBack,Zorg dat spelers terugkomen
-Feature.Build.Analytics.Goal.Locked.EarnRobux,Verdien Robux in je game om deze statistieken te zien.
-Feature.Build.Analytics.Goal.Locked.FirstImpression,Zorg voor je eerste speler om deze statistieken te zien.
-Feature.Build.Analytics.Goal.Locked.GetMorePlayers,Zorg voor meer spelers om deze statistieken te zien.
-Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,Zorg voor je eerste terugkerende speler om deze statistieken te zien.
 Feature.Build.Analytics.KeyStats,Belangrijkste statistieken
 Feature.Build.Analytics.LastMonth,Afgelopen maand
 Feature.Build.Analytics.LastWeek,
@@ -2046,14 +2006,9 @@ Feature.Build.Analytics.Summary.TotalPlaytime,Totaal aantal uren dat spelers in 
 Feature.Build.Analytics.Title.Arppu,ARPPU (Gemiddelde omzet per betalende gebruiker)
 Feature.Build.Analytics.Title.ConcurrentUsers,Totaal aantal spelers
 Feature.Build.Analytics.Title.D1Retention,Retentie (dag 1)
-Feature.Build.Analytics.Title.D7Retention,Retentie (7 dagen)
 Feature.Build.Analytics.Title.DailyActiveUsers,Dagelijks actieve gebruikers
-Feature.Build.Analytics.Title.NewUserSessionTime,Sessietijd van nieuwe gebruiker
 Feature.Build.Analytics.Title.PayerConversion,Conversie betalende gebruikers/spelers
 Feature.Build.Analytics.Title.PlaythroughRate,Playthrough-percentage
-Feature.Build.Analytics.Title.RobuxSpent,
-Feature.Build.Analytics.Title.TopAcquisitionSource,Topbron
-Feature.Build.Analytics.Title.TopDropOffStep,Grootste verlies
 Feature.Build.Analytics.Title.TotalPlaytime,Totale speeltijd
 Feature.Build.Analytics.Visits,Bezoeken
 Feature.Build.Content.NewGame,Nieuw spel
@@ -2097,6 +2052,7 @@ Feature.Build.Description.PlaytestLatest,Je bent je nieuwste versie aan het test
 Feature.Build.Description.PlaytestLocked,Je kunt beginnen met playtesten nadat je je eerste spel hebt gemaakt.
 Feature.Build.Description.PlaytesterAccess,Nodig vrienden uit als vroege testers of wijzig de instelling Doelgroep van je spel om meer mensen te laten spelen.
 Feature.Build.Description.PricingRules,Prijsregels instellen
+Feature.Build.Description.PrivateShare,Wijzig de instelling Doelgroep van je spel om deze te delen.
 Feature.Build.Description.PromoteGameFree,Breng je spel met één tik onder de aandacht van meer spelers.
 Feature.Build.Description.PromoteGamePaid,Maak een advertentie om je spel onder de aandacht te brengen van miljoenen spelers.
 Feature.Build.Description.PromoteGameWithAdCampaign,Vergroot je doelgroep met een advertentiecampagne van {durationDays} dagen en zorg ervoor dat je spel wordt ontdekt.
@@ -2126,7 +2082,6 @@ Feature.Build.Error.MonetizationOptionsLoad,Opties konden niet worden geladen. P
 Feature.Build.Error.MonetizationPermissionDenied,Je hebt geen toestemming om de opties voor inkomsten genereren te wijzigen.
 Feature.Build.Header.AccessSharing,Toegang en delen
 Feature.Build.Header.AllVersions,Alle versies
-Feature.Build.Header.Answers,Antwoorden
 Feature.Build.Header.ContentMaturity,Contentclassificatie
 Feature.Build.Header.CustomAnswer,Aangepast antwoord
 Feature.Build.Header.GameConfiguration,Spelconfiguratie
@@ -2141,7 +2096,6 @@ Feature.Build.Label.AdditionalUsage,Extra Build-tegoed
 Feature.Build.Label.AdditionalUsed,{USED} van {LIMIT} gebruikt
 Feature.Build.Label.AdsManager,Ads Manager
 Feature.Build.Label.All,
-Feature.Build.Label.AllGames,Alle games
 Feature.Build.Label.AmountAvailable,{AMOUNT} beschikbaar
 Feature.Build.Label.Autosaved,Automatisch opgeslagen
 Feature.Build.Label.Available,beschikbaar
@@ -2166,15 +2120,12 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Eenvoudig prestatierapport
 Feature.Build.Label.Error,
-Feature.Build.Label.Filters,
 Feature.Build.Label.Free,Gratis
 Feature.Build.Label.FreeBuildUsage,Gratis Build-tegoed
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,Speelsessies van het spel
 Feature.Build.Label.GetMoreBuildUsage,Koop meer Build-tegoed
-Feature.Build.Label.GroupGames,Games van de groep
-Feature.Build.Label.Groups,Groepen
 Feature.Build.Label.Hi,Hallo
 Feature.Build.Label.IconThumbnails,Pictogram en miniaturen
 Feature.Build.Label.Images2D,2D-afbeeldingen
@@ -2188,7 +2139,6 @@ Feature.Build.Label.ManagedPricing,Beheerde prijzen
 Feature.Build.Label.ManagedPricingMixed,Gemengd over huidige producten
 Feature.Build.Label.MaximizeForGamePlays,Speelsessies van het spel maximaliseren
 Feature.Build.Label.Models3D,3D-modellen
-Feature.Build.Label.MyGames,Mijn games
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Geen limiet
 Feature.Build.Label.NotStarted,Niet gestart
@@ -2228,15 +2178,6 @@ Feature.Build.Label.Thinking,Aan het denken
 Feature.Build.Label.Title,Titel
 Feature.Build.Label.TitleDescription,Titel en beschrijving
 Feature.Build.Label.Tool,tool
-Feature.Build.Label.ToolAdEligibilityDone,Geschiktheid van advertentie gecontroleerd
-Feature.Build.Label.ToolAdEligibilityFailed,Kan geschiktheid van advertentie niet controleren
-Feature.Build.Label.ToolAdEligibilityRunning,Geschiktheid van advertentie controleren
-Feature.Build.Label.ToolAnalyticsDone,De statistieken zijn geanalyseerd
-Feature.Build.Label.ToolAnalyticsFailed,Kan de statistieken niet analyseren
-Feature.Build.Label.ToolAnalyticsRunning,De statistieken worden geanalyseerd
-Feature.Build.Label.ToolApiDocsDone,API-documentatie opgezocht
-Feature.Build.Label.ToolApiDocsFailed,Kan API-documentatie niet opzoeken
-Feature.Build.Label.ToolApiDocsRunning,API-documentatie opzoeken
 Feature.Build.Label.ToolAssetDone,Asset ingevoegd
 Feature.Build.Label.ToolAssetFailed,Kan asset niet invoegen
 Feature.Build.Label.ToolAssetRunning,Bezig met het invoeren van de asset…
@@ -2246,9 +2187,6 @@ Feature.Build.Label.ToolAssetSearchRunning,Bezig met doorzoeken van de assetbibl
 Feature.Build.Label.ToolClientDMDone,Client DataModel doorzocht
 Feature.Build.Label.ToolClientDMFailed,Kan client DataModel niet doorzoeken
 Feature.Build.Label.ToolClientDMRunning,Client DataModel doorzoeken
-Feature.Build.Label.ToolCompileDone,De code is gecompileerd
-Feature.Build.Label.ToolCompileFailed,Kan de code niet compileren
-Feature.Build.Label.ToolCompileRunning,Bezig met het compileren van de code
 Feature.Build.Label.ToolGameInfoDone,Spelinformatie bijgewerkt
 Feature.Build.Label.ToolGameInfoFailed,Kan spelinformatie niet bijwerken
 Feature.Build.Label.ToolGameInfoRunning,Bezig met het bijwerken van de spelinformatie…
@@ -2285,9 +2223,6 @@ Feature.Build.Label.ToolQuestionRunning,Bezig met een vraag stellen…
 Feature.Build.Label.ToolReqUpdateDone,Vereisten bijgewerkt
 Feature.Build.Label.ToolReqUpdateFailed,Kan vereisten niet bijwerken
 Feature.Build.Label.ToolReqUpdateRunning,Bezig met het bijwerken van de vereisten…
-Feature.Build.Label.ToolRestoreVersionDone,Versie hersteld
-Feature.Build.Label.ToolRestoreVersionFailed,Kan versie niet herstellen
-Feature.Build.Label.ToolRestoreVersionRunning,Versie wordt hersteld
 Feature.Build.Label.ToolScriptDone,Script uitgevoerd
 Feature.Build.Label.ToolScriptFailed,Kan script niet uitvoeren
 Feature.Build.Label.ToolScriptRunning,Bezig met het uitvoeren van het script…
@@ -2303,9 +2238,6 @@ Feature.Build.Label.ToolTasksPlanRunning,Bezig met het plannen van je taken…
 Feature.Build.Label.ToolThumbnailDone,Spelminiatuur ingesteld
 Feature.Build.Label.ToolThumbnailFailed,Kan spelminiatuur niet instellen
 Feature.Build.Label.ToolThumbnailRunning,Bezig met het instellen van de spelminiatuur…
-Feature.Build.Label.ToolVerifyDone,Op fouten gecontroleerd
-Feature.Build.Label.ToolVerifyFailed,Kan niet controleren op fouten
-Feature.Build.Label.ToolVerifyRunning,Controleren op fouten
 Feature.Build.Label.UniverseNumber,Universum-{UNIVERSE_ID}
 Feature.Build.Label.Unknown,Onbekend
 Feature.Build.Label.UnlimitedUsed,{USED} gebruikt • Geen limiet
@@ -2336,12 +2268,12 @@ Feature.Build.Message.BuildInternalError,Build is op een probleem gestuit. Probe
 Feature.Build.Message.BuildResponseFailed,Build reageerde niet. Probeer het nog een keer.
 Feature.Build.Message.BuildStillWorking,"We zijn ermee bezig. Je kunt de app afsluiten, Roblox spelen of een ander project starten terwijl je wacht."
 Feature.Build.Message.BuildStopped,Je hebt Build gestopt.
-Feature.Build.Message.BuildTakingLonger,Dit duurt langer dan verwacht. Je kunt blijven wachten of iets anders beginnen.
 Feature.Build.Message.BuildTemporarilyDown,Build is tijdelijk niet beschikbaar. Probeer het over een minuut nog een keer.
 Feature.Build.Message.CompletedTasks,{COUNT} taken voltooid
 Feature.Build.Message.ConversationGone,Dit gesprek is niet meer beschikbaar. Start een nieuw gesprek.
 Feature.Build.Message.ConversationNotFound,We konden dit gesprek niet vinden. Start een nieuw gesprek.
 Feature.Build.Message.CreateGameToUseBuild,Maak een nieuw spel om Build te gebruiken.
+Feature.Build.Message.CreatedRevertedVer,Er is een teruggezette versie aangemaakt.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Breid je geschiktheid voor doelgroepen uit in de Creator Hub
 Feature.Build.Message.ExperiencesLoadFailed,Kan ervaringen niet laden
@@ -2368,13 +2300,17 @@ Feature.Build.Message.NoSearchResultsFound,Geen zoekresultaten gevonden
 Feature.Build.Message.NoVersionHistory,Nog geen versiegeschiedenis.
 Feature.Build.Message.OneTaskCompleted,1 taak voltooid
 Feature.Build.Message.OutOfBuildUsage,Je hebt geen Build-tegoed meer. Bekijk je opties om Robux te gebruiken om content te blijven maken.
+Feature.Build.Message.PlaytestInviteSendFailedBody,Je kon geen uitnodigingslink voor de chat verzenden naar de volgende gebruikers:
+Feature.Build.Message.PlaytestInviteSendFailedHint,Gebruik de knop Delen om een link te ontvangen.
 Feature.Build.Message.PlaytesterRequestFailed,We konden je aanvraag niet voltooien. Probeer het opnieuw.
 Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} van {MAX_INVITES} vroege testers uitgenodigd
+Feature.Build.Message.PrivatePlaytestInvite,{username} heeft je uitgenodigd om een vroege tester te zijn voor {experienceName}
 Feature.Build.Message.PublicPublishFailed,"Je spel is gepubliceerd, maar kon niet openbaar worden gemaakt. Probeer het nog een keer."
 Feature.Build.Message.PublishExpandAudience,Publiceer om je doelgroep te vergroten
 Feature.Build.Message.PublishNotReverted,Je publicatie is niet teruggedraaid. Probeer het nog een keer.
 Feature.Build.Message.PublishPromotionUpsell,Gefeliciteerd met het publiceren van je spel. Je hebt {promotionCount} gratis promoties beschikbaar om meer spelers op Roblox te krijgen.
 Feature.Build.Message.PublishPromotionUpsellSingular,Gefeliciteerd met het publiceren van je spel. Je hebt 1 gratis promotie beschikbaar om meer spelers op Roblox te krijgen.
+Feature.Build.Message.PublishReverted,Publicatie teruggedraaid.
 Feature.Build.Message.QuestionnaireNeeded,Deze game is buiten Build om bewerkt. Vul de contentvragenlijst in om te publiceren.
 Feature.Build.Message.ReadyToPlay,Je spel is klaar om te worden gespeeld op Roblox!
 Feature.Build.Message.ResetHours,Wordt over {HOURS} uur gereset
@@ -2432,12 +2368,14 @@ Feature.Build.Title.ExperienceAudience,Doelgroep van de ervaring
 Feature.Build.Title.FreeUsageReached,Limiet voor gratis Build-tegoed bereikt
 Feature.Build.Title.FriendsOnlyPlay,Alleen vrienden kunnen spelen
 Feature.Build.Title.GameCreationDone,Spel gecreëerd
+Feature.Build.Title.GamePrivate,Dit spel is privé
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Gebruikers ophalen
 Feature.Build.Title.ManagedPricingAcknowledgement,Beheerde prijzen inschakelen?
 Feature.Build.Title.NoMonetizationProducts,Begin met verdienen in je spel
 Feature.Build.Title.NoRobuxForUsage,Geen Robux meer over voor Build-tegoed
 Feature.Build.Title.PickCampaign,Kies een lengte
+Feature.Build.Title.PlaytestInviteSendFailed,Kan uitnodigingen niet verzenden
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,Kon de volgende gebruikers niet toevoegen:
 Feature.Build.Title.PlaytestersOnlyPlay,Alleen playtesters kunnen spelen
@@ -3207,7 +3145,7 @@ Feature.FaceChat.Subtitle.UnsupportedDevice,Je hardware voldoet niet aan de vere
 Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,Je camera uitschakelen kan je ervaring verbeteren.
 Feature.FaceChat.Subtitle.VideoUnsupported,Roblox kan je avatar niet animeren met je camera.
 Feature.Favorites.Label.Favorite,Markeren als favoriet
-Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Action.ContinuePlaying,Doorgaan met spelen
 Feature.FlyoutSidePanel.Label.TooltipBody,"Je profiel, content en instellingen zijn verplaatst."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> is verplaatst
 Feature.Friends.Action.AcceptFriend,Vriend accepteren
@@ -3573,7 +3511,6 @@ Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired,"Je s
 Feature.InExperienceIntervention.Description.ChatSuspension.Minutes,"Je kunt de chat gedurende de komende {number} minuten niet gebruiken omdat een of meer van je berichten in strijd waren met de regels. Als je de regels opnieuw overtreedt, kun je worden verbannen."
 Feature.InExperienceIntervention.Description.Disclaimer,Hebben we een fout gemaakt? {startLink}Laat het ons weten{endLink}
 Feature.InExperienceIntervention.Description.FeedbackHelps,Je feedback helpt om onze systemen te verbeteren.
-Feature.InExperienceIntervention.Description.KeepWordsKindCommunitySafe,Gebruik vriendelijke woorden en houd je community veilig.
 Feature.InExperienceIntervention.Description.LoseAccess,"Als dit opnieuw gebeurt, kun je de toegang tot je account verliezen."
 Feature.InExperienceIntervention.Description.MayLoseAccess,"Als je opnieuw de regels overtreedt, kun je de toegang tot je account verliezen."
 Feature.InExperienceIntervention.Description.Mistake,Hebben we een fout gemaakt?
@@ -3593,7 +3530,6 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,Deel geen 
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,Chat is opgeschorst gedurende {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,We zullen ernaar kijken
 Feature.InExperienceIntervention.Heading.TextChatSuspension,Schorsing van tekstchat
-Feature.InExperienceIntervention.Heading.VoiceTypingMayBeTurnedOff,Spraakgestuurd typen kan worden uitgeschakeld als je de regels overtreedt
 Feature.InExperienceIntervention.Label.Complete,Afgelopen
 Feature.InExperienceIntervention.Label.EndsOn,Eindigt op:
 Feature.InExperienceIntervention.Label.Player,{username}: {evidence}
@@ -3601,11 +3537,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Nog {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Door Robux te kopen, ga je akkoord met onze {termsLinkStart}Gebruiksvoorwaarden{termsLinkEnd}, inclusief de arbitrageclausule en het herroepingsbeleid."
-Feature.InExperienceShop.GamePass,Game Pass
 Feature.InExperienceShop.Label.BonusItem,Bonusitem
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Eindigt over {timeRemaining}
-Feature.InExperienceShop.Label.FreeTrial,Gratis proefperiode
 Feature.InExperienceShop.Label.NoDescription,Geen beschrijving
 Feature.InExperienceShop.Label.OfferEndTime,{offer} eindigt over {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,Dit is een voorbeeld van je winkel in Roblox Studio. Spelers zien dit voorbeeld niet.
@@ -3613,11 +3547,10 @@ Feature.InExperienceShop.Label.Timer.Day.Plural,{number} dagen
 Feature.InExperienceShop.Label.Timer.Day.Singular,1 dag
 Feature.InExperienceShop.Label.Timer.Hour.Plural,
 Feature.InExperienceShop.Label.Timer.Hour.Singular,1 uur
-Feature.InExperienceShop.Label.Timer.Minute.Plural,
+Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} minuten
 Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minuut
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
-Feature.InExperienceShop.Label.Trial,Proefperiode
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Je hebt met {ROBUX_AMOUNT} Robux gekocht
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Weet je zeker dat je dit item permanent uit je inventaris wilt verwijderen? Als je van gedachten verandert, moet je het opnieuw verdienen in een ervaring."
 Feature.Item.Label.DeleteItemUndercase,Item verwijderen
@@ -3672,7 +3605,7 @@ Feature.Moments.Description.HowToCaptureStep2,Schakel de besturing voor opnames 
 Feature.Moments.Description.HowToCaptureStep3,Leg foto's en video's van het spel vast
 Feature.Moments.Description.LeaveMomentsCreation,"Al je wijzigingen gaan verloren, maar je kunt deze opname nog steeds vinden in je galerij met <b>Opnames</b>."
 Feature.Moments.Description.NoMusicResults,Geen muziek gevonden
-Feature.Moments.Description.NonInfiniteScrollEndBody,We hebben je feed gepauzeerd. Je kunt beslissen of je wilt blijven kijken.
+Feature.Moments.Description.NonInfiniteScrollEndBody,Je hebt een stoppunt bereikt in Momenten. Tik hieronder om verder te kijken.
 Feature.Moments.Description.NothingHereYet,Hier is nog niets te zien...
 Feature.Moments.Description.PublishMoment,Beschrijf je moment
 Feature.Moments.Description.StayFriendly,Laten we het vriendelijk houden
@@ -3731,14 +3664,12 @@ Feature.Moments.Label.MomentFailedToPostTitle,Moment kon niet worden gepost
 Feature.Moments.Label.MomentNoLongerAvailable,Dit moment is niet meer beschikbaar.
 Feature.Moments.Label.MomentPublishedBody,Het publiceren van je moment is geslaagd.
 Feature.Moments.Label.MomentPublishedTitle,Moment gepubliceerd
-Feature.Moments.Label.MomentRemovedBody,"Het was in strijd met onze veiligheidsregels, dus het is niet meer beschikbaar."
-Feature.Moments.Label.MomentRemovedTitle,We hebben dit moment verwijderd
 Feature.Moments.Label.MomentUnavailable,Moment niet beschikbaar
 Feature.Moments.Label.MomentUnavailableDefault,Dit moment is niet beschikbaar.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Nog geen reacties
-Feature.Moments.Label.NonInfiniteScrollEndTitle,Er zijn meer momenten om te bekijken
+Feature.Moments.Label.NonInfiniteScrollEndTitle,Je bent voorlopig weer helemaal bij
 Feature.Moments.Label.Photos,Foto's
 Feature.Moments.Label.PostDeleted,Moment verwijderd
 Feature.Moments.Label.PostRemovedBody,"Het moment dat je hebt gepost, is in strijd met onze Communityrichtlijnen."
@@ -3778,7 +3709,6 @@ Feature.Moments.Label.VoiceLimitReachedBody,Wacht even en probeer het nog een ke
 Feature.Moments.Label.VoiceModerationError,Je script moet voldoen aan de veiligheidsregels
 Feature.Moments.Label.VoicePlaceholder,Voer het script van je voice-over in. De tekenlimiet is {maxCount} tekens
 Feature.Moments.Label.VoiceTimeoutBody,De tijdslimiet voor het genereren van de voice-over is bereikt.
-Feature.Moments.Label.VoiceTooManyNumbersError,Script bevat te veel getallen
 Feature.Moments.Label.WriteComment,Schrijf een reactie
 Feature.Moments.Title.Comments,
 Feature.Moments.Title.CommentsWithCappedCount,Reacties ({count}+)
@@ -3789,8 +3719,6 @@ Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Tooltip.Creation,Iedereen in de ervaring kan je momenten zien.
-Feature.Moments.Tooltip.ShareFirstMomentBody,Maak een moment van je opnames
-Feature.Moments.Tooltip.ShareFirstMomentTitle,Je eerste moment delen
 Feature.NativeAds.Label.Ad,Advertentie
 Feature.NotApproved.Action.ReportMistake,Een fout melden
 Feature.NotApproved.Label.AbuseType.Advertising,Adverteren
@@ -3887,17 +3815,10 @@ Feature.Parents.Title.EnterParentEmailV2,Voer het e-mailadres van je ouder in
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,Van zoekopdrachten
-Feature.PlayerSearchResults.Label.NewUsername,Nieuwe gebruikersnaam
 Feature.PlayerSearchResults.Label.Previously,Eerder
 Feature.PlayerSearchResults.Label.ThisIsYou,Dit ben jij
-Feature.PlayerSearchResults.Label.You,Jij
-Feature.PlayerSearchResults.Label.YouAreConnections,Jullie zijn connecties
 Feature.PlayerSearchResults.Label.YouAreFollowing,Je volgt
-Feature.PlayerSearchResults.Label.YouAreFriends,Jullie zijn vrienden
-Feature.PrivateServers.Action.CreatePrivateServer,Privéserver maken
-Feature.PrivateServers.Action.FreeWithBlackbird,Gratis met Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Aankopen van privéservers worden niet ondersteund in Studio.
-Feature.PrivateServers.Description.VipServersNotSupported,Deze game ondersteunt geen privéservers.
 Feature.Profile.Action.AboutThisProfile,Over dit profiel
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4147,12 +4068,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% korting op de eer
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% korting op de eerste {trialUnlockDays} dagen, daarna 20% korting op items en avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Meer plezier voor minder Robux. Abonneer je op Roblox Plus.
 Feature.RobloxSubscription.Description.JoinEarly,Doe eerder mee met Plus
-Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,Deze doorverwijslink is niet langer geldig.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} heeft je uitgenodigd voor Plus. Jullie krijgen allebei {amount} Robux wanneer je Plus afsluit.
-Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"Door op \u{201C}{ctaText}\u{201D} te klikken, ga je akkoord met de <a href=""{referralTermsUrl}"">Voorwaarden van het Doorverwijzingsprogramma</a> en de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Door op {201C}{ctaText} te klikken{201D}, ga je akkoord met de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
 Feature.RobloxSubscription.Heading.ReferralEntry,Deel Plus om {amount} Robux te krijgen
-Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Word lid van Plus om {amount} Robux te krijgen
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,"Word lid van Plus, krijg"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Gratis privéservers
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4169,7 +4087,6 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 maand gratis
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} gratis,{boldEnd} daarna {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,maand
 Feature.RobloxSubscription.Label.months,maanden
-Feature.RobloxSubscription.Message.AlreadySubscribed,Je hebt al Plus. Deze link is voor nieuwe leden. Deel je eigen link om vrienden uit te nodigen en beloningen te ontvangen.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Ontvang 1 gratis week Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Goed nieuws
 Feature.RobloxSubscription.Title.GenericError,
@@ -4414,19 +4331,8 @@ Feature.SongDetails.Action.ReportAudio,Audio melden
 Feature.SongDetails.Label.InappropriateAudio,Ongepaste audio
 Feature.SongDetails.Label.InappropriateThumbnail,Ongepaste miniatuur
 Feature.SongDetails.Label.SongPreview,Voorbeeld nummer
-Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,Avatar inklappen
 Feature.SplitPane.Label.ExpandAvatar,Avatar uitklappen
-Feature.SplitPane.Tour.Button.Continue,
-Feature.SplitPane.Tour.Button.FinishTour,Rondleiding voltooien
-Feature.SplitPane.Tour.Button.SkipTour,Rondleiding overslaan
-Feature.SplitPane.Tour.Step1.Description.Collapsed,Opgeslagen avatars zijn nu zichtbaar op de startpagina. Vouw deze ruimte uit om ze te bekijken.
-Feature.SplitPane.Tour.Step1.Description.Expanded,Opgeslagen avatars zijn nu zichtbaar op de startpagina. Draai ze rond of zoom in om elk detail te zien.
-Feature.SplitPane.Tour.Step1.Title,Jezelf bekijken op de startpagina
-Feature.SplitPane.Tour.Step2.Description,Kies hoe je eruit wilt zien. Wissel tussen je opgeslagen avatars vlak voordat je aan een spel begint.
-Feature.SplitPane.Tour.Step2.Title,Wijzig je look op elk gewenst moment
-Feature.SplitPane.Tour.Step3.Description,Verberg deze ruimte wanneer je wilt om je te concentreren op het ontdekken van nieuwe spellen. Je opgeslagen avatar blijft hier.
-Feature.SplitPane.Tour.Step3.Title,Kies wat je ziet
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Anderen toevoegen
 Feature.Squads.Action.ConnectToVoice,Verbinding maken met spraak

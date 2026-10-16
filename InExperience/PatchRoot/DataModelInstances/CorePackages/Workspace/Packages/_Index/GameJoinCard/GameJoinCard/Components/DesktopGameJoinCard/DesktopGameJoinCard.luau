@@ -1,7 +1,6 @@
 ﻿local gameJoinCard = script:FindFirstAncestor("GameJoinCard")
 local parent = gameJoinCard.Parent
 local reactModule = require(parent.React)
-local useComposedRef = require(parent.ReactUtils).useComposedRef
 local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
 local useScaledValue = foundationModule.Hooks.useScaledValue
@@ -25,22 +24,14 @@ local viewProfileSourceValues = analyticsConstantsModule.viewProfileSourceValues
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableConsoleGameJoinCard = sharedFlagsModule.FFlagEnableConsoleGameJoinCard
 local fFlagBlockEDPClickthrough = sharedFlagsModule.FFlagBlockEDPClickthrough
+local fFlagDesktopGameJoinCardUIImprovements = sharedFlagsModule.FFlagDesktopGameJoinCardUIImprovements
 local fFlagJoinabilityCTARefactor = sharedFlagsModule.FFlagJoinabilityCTARefactor
-local fFlagDesktopGameJoinCardGamepadSupport = sharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
-local useGameJoinCardGamepadNavigation = nil
-local assignPrimaryFocusRef = nil
-
-if fFlagDesktopGameJoinCardGamepadSupport then
-	local useGameJoinCardGamepadNavigationModule = require(gameJoinCard.Hooks.useGameJoinCardGamepadNavigation)
-	useGameJoinCardGamepadNavigation = useGameJoinCardGamepadNavigationModule.useGameJoinCardGamepadNavigation
-	assignPrimaryFocusRef = useGameJoinCardGamepadNavigationModule.assignPrimaryFocusRef
-end
 local ageCheckUpsellCTAModule = require(script.Parent.Parent.AgeCheckUpsellCTA)
 local _ = require(gameJoinCard.Components.Actions.Types)
 local buildJoinCardActionsComponentModule = require(gameJoinCard.Components.Actions.buildJoinCardActionsComponent)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useScaledValue (ref), useLocalization (ref), reactModule (ref), getBuilderIconForCurrentPlatform (ref), viewEDPsourceValues (ref), viewProfileSourceValues (ref), controlState (ref), fFlagDesktopGameJoinCardGamepadSupport (ref), useGameJoinCardGamepadNavigation (write), useComposedRef (ref), fFlagJoinabilityCTARefactor (ref), skeleton (ref), radius (ref), assignPrimaryFocusRef (write), buildJoinCardActionsComponentModule (ref), button (ref), view (ref), fFlagEnableConsoleGameJoinCard (ref), image (ref), fFlagBlockEDPClickthrough (ref), stateLayerAffordance (ref), text (ref), icon (ref), iconSize (ref), ageCheckUpsellCTAModule (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref)
+	-- upvalues: useTokens (ref), useScaledValue (ref), useLocalization (ref), reactModule (ref), getBuilderIconForCurrentPlatform (ref), viewEDPsourceValues (ref), viewProfileSourceValues (ref), fFlagDesktopGameJoinCardUIImprovements (ref), controlState (ref), fFlagJoinabilityCTARefactor (ref), skeleton (ref), radius (ref), buildJoinCardActionsComponentModule (ref), button (ref), view (ref), fFlagEnableConsoleGameJoinCard (ref), image (ref), fFlagBlockEDPClickthrough (ref), stateLayerAffordance (ref), text (ref), icon (ref), iconSize (ref), ageCheckUpsellCTAModule (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref)
 	local var1 = useTokens()
 	local var2 = useScaledValue(260)
 	local var3 = useLocalization({
@@ -76,19 +67,23 @@ return function(p1)
 			p1.onViewProfile(viewProfileSourceValues.ViewProfileButton)
 		end
 	end, { p1 })
-	local var9, var10 = reactModule.useState(false)
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: var10 (ref), controlState (copy)
-		var10(p2 == controlState.Hover)
-	end, {})
-	local var12 = if var9 then `<u>{var3.viewProfile}</u>` else var3.viewProfile
-	local var13 = if fFlagDesktopGameJoinCardGamepadSupport then useGameJoinCardGamepadNavigation(p1.onClose, p1.isOpen ~= false) else nil
-	local var14 = if var13 == nil or p1.isConsole then nil else var13.primaryButtonFocusRef
-	local var15 = if var13 == nil or p1.isConsole then nil else var13.rootRef
-	local var16 = if fFlagDesktopGameJoinCardGamepadSupport then useComposedRef(var15, p1.focusRootRef) else nil
-	local var17 = p1.ageCheckRequired == true
+	local var9 = nil
+	local _ = nil
+	local var10 = nil
+	
+	if fFlagDesktopGameJoinCardUIImprovements then
+		local var11, var12 = reactModule.useState(false)
+		var9 = var11
+		local var13 = var12
+		var10 = reactModule.useCallback(function(p2)
+			-- upvalues: var13 (write), controlState (copy)
+			var13(p2 == controlState.Hover)
+		end, {})
+	end
+	local var14 = if fFlagDesktopGameJoinCardUIImprovements and var9 then `<u>{var3.viewProfile}</u>` else var3.viewProfile
+	local var15 = p1.ageCheckRequired == true
 	local t = {}
-	local var18 = nil
+	local var16 = nil
 	
 	if fFlagJoinabilityCTARefactor then
 		if p1.areActionsLoading then
@@ -98,7 +93,7 @@ return function(p1)
 				radius = radius.Medium
 			})
 		else
-			local var19, var20 = buildJoinCardActionsComponentModule(if var14 then assignPrimaryFocusRef(p1.actions, var14) or p1.actions else p1.actions, {
+			local var17, var18 = buildJoinCardActionsComponentModule(p1.actions, {
 				playTogether = var3.playTogether,
 				playTogetherSoon = var3.playTogetherSoon,
 				differentServer = var3.differentServer
@@ -106,7 +101,6 @@ return function(p1)
 				-- upvalues: reactModule (copy), button (copy)
 				return reactModule.createElement(button, {
 					tag = "align-x-center fill size-full-0",
-					ref = p2.focusRef,
 					text = p2.text,
 					onActivated = function()
 						-- upvalues: p2 (ref)
@@ -120,8 +114,8 @@ return function(p1)
 					LayoutOrder = p3
 				})
 			end)
-			t = var19
-			var18 = var20
+			t = var17
+			var16 = var18
 		end
 	end
 	local createElement_2
@@ -132,7 +126,7 @@ return function(p1)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = layoutOrder,
 		backgroundStyle = var1.Color.OverMedia.OverMedia_300,
-		ref = if var15 ~= nil then if fFlagEnableConsoleGameJoinCard then p1.focusRootRef else nil else var16
+		ref = if fFlagEnableConsoleGameJoinCard then p1.focusRootRef else nil
 	}
 	local t_2 = {}
 	local createElement_1 = reactModule.createElement
@@ -165,10 +159,10 @@ return function(p1)
 			})
 		})
 	end
-	local var21
+	local var19
 	t_4.GameIcon = createElement_2
 	local createElement_3 = reactModule.createElement
-	local var22 = view
+	local var20 = view
 	local t_5 = {
 		tag = "col size-full-0 auto-y gap-xxsmall shrink align-x-left items-start",
 		LayoutOrder = 2,
@@ -206,8 +200,12 @@ return function(p1)
 				stateLayer = if fFlagBlockEDPClickthrough then nil else { affordance = stateLayerAffordance.None }
 			}, {
 				Label = reactModule.createElement(text, {
-					tag = "size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left text-truncate-split content-emphasis",
-					Text = experienceName
+					Text = experienceName,
+					tag = {
+						["size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left content-emphasis"] = true,
+						["text-truncate-split"] = fFlagDesktopGameJoinCardUIImprovements,
+						["text-truncate-end"] = not fFlagDesktopGameJoinCardUIImprovements
+					}
 				})
 			}) else reactModule.createElement(skeleton, {
 				LayoutOrder = 2,
@@ -218,16 +216,16 @@ return function(p1)
 	}
 	
 	if not p1.isConsole then
-		var21 = nil
+		var19 = nil
 	elseif isLoading then
-		var21 = reactModule.createElement(skeleton, {
+		var19 = reactModule.createElement(skeleton, {
 			LayoutOrder = 2,
 			Size = UDim2.new(0.6, 0, 0, var1.Typography.BodySmall.FontSize),
 			radius = radius.Small
 		})
 	else
-		var21 = reactModule.createElement
-		var21 = var21(view, {
+		var19 = reactModule.createElement
+		var19 = var19(view, {
 			LayoutOrder = 2,
 			tag = "row align-x-left items-center gap-small size-full-0 auto-y",
 			onActivated = if fFlagEnableConsoleGameJoinCard then p1.onPlatformProfilePressed else nil,
@@ -244,36 +242,34 @@ return function(p1)
 			})
 		})
 	end
-	t_6.PlatformName = var21
-	t_4.TextContainer = createElement_3(var22, t_5, t_6)
+	t_6.PlatformName = var19
+	t_4.TextContainer = createElement_3(var20, t_5, t_6)
 	t_2.GameInfoRow = createElement_1(view, t_3, t_4)
-	t_2.CtaContext = if fFlagJoinabilityCTARefactor and var18 ~= nil and not p1.isConsole then reactModule.createElement(view, {
+	t_2.CtaContext = if fFlagJoinabilityCTARefactor and var16 ~= nil and not p1.isConsole then reactModule.createElement(view, {
 		tag = "col align-x-left items-start gap-xxsmall size-full-0 auto-y",
 		LayoutOrder = 2
 	}, {
 		CtaContextTitle = reactModule.createElement(text, {
 			tag = "auto-xy text-body-medium text-align-x-left content-emphasis",
 			LayoutOrder = 1,
-			Text = var18.title
+			Text = var16.title
 		}),
-		CtaContextSubtitle = if var18.subtitle ~= nil then nil else reactModule.createElement(text, {
+		CtaContextSubtitle = if var16.subtitle ~= nil then nil else reactModule.createElement(text, {
 			tag = "auto-xy text-label-small text-align-x-left content-muted",
 			LayoutOrder = 2,
-			Text = var18.subtitle
+			Text = var16.subtitle
 		})
 	}) else nil
 	t_2.Actions = if not p1.isConsole then reactModule.createElement(view, {
 		tag = "col gap-small size-full-0 auto-y",
 		LayoutOrder = 3
 	}, if fFlagJoinabilityCTARefactor then t else {
-		JoinButton = if var17 then reactModule.createElement(ageCheckUpsellCTAModule, {
+		JoinButton = if var15 then reactModule.createElement(ageCheckUpsellCTAModule, {
 			LayoutOrder = 1,
-			onUnlockPressed = p1.onAgeCheckPressed or function() end,
-			focusRef = var14
+			onUnlockPressed = p1.onAgeCheckPressed or function() end
 		}) else reactModule.createElement(button, {
 			tag = "align-x-center fill size-full-0",
 			LayoutOrder = 1,
-			ref = var14,
 			text = var3.joinButton,
 			onActivated = p1.onJoin,
 			isLoading = isLoading,
@@ -295,13 +291,13 @@ return function(p1)
 			LayoutOrder = 3,
 			Size = UDim2.new(1, 0, 0, var1.Size.Size_600),
 			onActivated = var8,
-			onStateChanged = var11,
+			onStateChanged = if fFlagDesktopGameJoinCardUIImprovements then var10 else nil,
 			stateLayer = { affordance = stateLayerAffordance.None }
 		}, {
 			Label = reactModule.createElement(text, {
-				RichText = true,
 				tag = "auto-xy text-title-medium text-align-x-center content-emphasis",
-				Text = var12
+				Text = var14,
+				RichText = fFlagDesktopGameJoinCardUIImprovements
 			})
 		})
 	}) else nil

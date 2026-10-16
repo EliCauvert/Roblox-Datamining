@@ -2,7 +2,7 @@
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring(p1))
-	error("FIXME (roblox): " .. p0 .. " is unimplemented", 2)
+	error("FIXME (roblox): " .. p1 .. " is unimplemented", 2)
 end
 
 local collectionService = game:GetService("CollectionService")
@@ -142,7 +142,6 @@ t.scheduleTimeout = setTimeout
 t.cancelTimeout = clearTimeout
 t.noTimeout = -1
 t.supportsMutation = true
-t.supportsChildOrdering = false
 
 function t.commitMount(_, _, _, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")

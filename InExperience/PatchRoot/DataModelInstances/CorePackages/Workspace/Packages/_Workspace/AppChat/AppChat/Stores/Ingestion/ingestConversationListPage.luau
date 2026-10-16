@@ -11,21 +11,21 @@ local ingestBatchModule = require(script.Parent.ingestBatch)
 local ingestOperationModule = require(script.Parent.IngestOperation)
 local fFlagAppChatIngestConversationMessagesModule = require(appChat.Flags.FFlagAppChatIngestConversationMessages)
 local searchIntroducedConversationIdsModule = require(appChat.Stores.searchIntroducedConversationIds)
-local fFlagAppChatAnyServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatAnyServerSideConversationSearch)
+local fFlagAppChatServerSideConversationSearchModule = require(appChat.Flags.FFlagAppChatServerSideConversationSearch)
 
 local function _(p1)
 	return if p1 ~= nil then p1 == "" else true
 end
 
 local function upsertConversationResponse(p1, p2)
-	-- upvalues: conversationChannelsModule (ref), fFlagAppChatAnyServerSideConversationSearchModule (ref), signalsExperimentalModule (ref), searchIntroducedConversationIdsModule (ref), fFlagAppChatIngestConversationMessagesModule (ref), buildValidMessagesModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
+	-- upvalues: conversationChannelsModule (ref), fFlagAppChatServerSideConversationSearchModule (ref), signalsExperimentalModule (ref), searchIntroducedConversationIdsModule (ref), fFlagAppChatIngestConversationMessagesModule (ref), buildValidMessagesModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 	if p2 == nil or p2.status == "failed" then return end
 	if p2.source == conversationChannelsModule.Source.Channels and p2.type == conversationChannelsModule.Type.OneToOne and p2.participant_user_ids ~= nil then
 		p1.removeConversation(conversationChannelsModule.getFriendConversationId(p2.participant_user_ids))
 	end
 	local var1 = conversationChannelsModule.fromChannelsApi(p2)
 	
-	if fFlagAppChatAnyServerSideConversationSearchModule then
+	if fFlagAppChatServerSideConversationSearchModule then
 		signalsExperimentalModule.batch(function()
 			-- upvalues: p1 (ref), var1 (ref), searchIntroducedConversationIdsModule (copy)
 			p1.upsertConversation(var1)

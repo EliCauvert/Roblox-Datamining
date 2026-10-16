@@ -22,19 +22,16 @@ local function onActiveConversationMessageReceived()
 	getTransparencyStoreModule(false).resetAllTransparency()
 end
 
-local var1 = if fFlagExpChatUseChannelTabsStore then function()
-	-- upvalues: signalsReactModule (ref), getChannelTabsStoreModule (ref)
-	return signalsReactModule.useSignalState(getChannelTabsStoreModule(false).getSelectedTabName)
-end else function()
-	-- upvalues: useSelector (ref), selectSelectedTabNameModule (ref)
-	return useSelector(selectSelectedTabNameModule)
+local function _()
+	-- upvalues: useSelector (ref), selectSelectedTabNameModule (ref), fFlagExpChatUseChannelTabsStore (ref), signalsReactModule (ref), getChannelTabsStoreModule (ref)
+	return if fFlagExpChatUseChannelTabsStore then signalsReactModule.useSignalState(getChannelTabsStoreModule(false).getSelectedTabName) else useSelector(selectSelectedTabNameModule)
 end
 
 return function()
-	-- upvalues: var1 (ref), useSelector (ref), selectIsChatWindowVisible (ref), useChannelTabUnreadWriterModule (ref), friendsChatTabNameModule (ref), reactModule (ref), friendsChatEventReceiverModule (ref), onActiveConversationMessageReceived (ref)
+	-- upvalues: useSelector (ref), selectSelectedTabNameModule (ref), fFlagExpChatUseChannelTabsStore (ref), signalsReactModule (ref), getChannelTabsStoreModule (ref), selectIsChatWindowVisible (ref), useChannelTabUnreadWriterModule (ref), friendsChatTabNameModule (ref), reactModule (ref), friendsChatEventReceiverModule (ref), onActiveConversationMessageReceived (ref)
 	return reactModule.createElement(friendsChatEventReceiverModule, {
 		setTabUnread = useChannelTabUnreadWriterModule(friendsChatTabNameModule),
-		selectedTabName = var1(),
+		selectedTabName = if fFlagExpChatUseChannelTabsStore then signalsReactModule.useSignalState(getChannelTabsStoreModule(false).getSelectedTabName) else useSelector(selectSelectedTabNameModule),
 		isChatWindowVisible = useSelector(selectIsChatWindowVisible),
 		onActiveConversationMessageReceived = onActiveConversationMessageReceived
 	})

@@ -23,7 +23,7 @@ return {
 		commitAnalyticsEvent = eventNames.EditingFlowTextOverlayDoneButtonPressed,
 		cancelAnalyticsEvent = eventNames.EditingFlowTextOverlayBackButtonPressed
 	},
-	supportedCaptureTypes = if require(momentsCreation.Flags.FFlagMomentsTextOverlayOnPhotos) then { Enum.CaptureType.Video, Enum.CaptureType.Screenshot } else { Enum.CaptureType.Video },
+	supportedCaptureTypes = { Enum.CaptureType.Video },
 	createSession = function()
 		-- upvalues: createEditSessionModule (ref)
 		return createEditSessionModule()

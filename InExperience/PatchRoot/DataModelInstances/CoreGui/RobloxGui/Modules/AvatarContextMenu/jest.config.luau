@@ -3,7 +3,6 @@
 return {
 	displayName = "AvatarContextMenu",
 	testMatch = { "**/*.test" },
-	testPathIgnorePatterns = { "ContextMenuItems.test" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.UIBloxInitializer,
 		jestConfigsModule.setupFiles.createPromiseRejectionHandler(10, 10),

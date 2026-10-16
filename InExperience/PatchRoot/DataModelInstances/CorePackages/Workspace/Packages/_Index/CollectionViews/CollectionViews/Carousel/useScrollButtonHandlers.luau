@@ -1,11 +1,14 @@
 ﻿local tweenService = game:GetService("TweenService")
 local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local parent = script:FindFirstAncestor("CollectionViews").Parent
+local collectionViews = script:FindFirstAncestor("CollectionViews")
+local parent = collectionViews.Parent
 local reactModule = require(parent.React)
 local argCheckModule = require(parent.ArgCheck)
+local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
+local _ = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: argCheckModule (ref), reactModule (ref), userGameSettingsService (ref), tweenService (ref)
+return function(p1, p2, p3, p4, p5, p6, p7, p8)
+	-- upvalues: argCheckModule (ref), reactModule (ref), fFlagCollectionViewMathChanges (ref), userGameSettingsService (ref), tweenService (ref)
 	argCheckModule.assert(p4 >= 1)
 	argCheckModule.assert(p2 >= 0)
 	local var1, var2 = reactModule.useState(false)
@@ -13,9 +16,9 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 	local var5 = reactModule.useRef(0)
 	local maxValue = math.max(0, p2 - p4)
 	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useCallback(function(p8)
+	local var7 = reactModule.useCallback(function(p9)
 		-- upvalues: var5 (ref), maxValue (ref)
-		var5.current = math.max(0, math.min(maxValue, p8))
+		var5.current = math.max(0, math.min(maxValue, p9))
 		
 		return var5.current
 	end, { maxValue, var5 })
@@ -30,14 +33,27 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 		var2(false)
 		var4(false)
 	end, { p3, maxValue, var5 })
-	local var9 = reactModule.useCallback(function(p8, p9)
-		-- upvalues: p1 (ref), p5 (ref), p6 (ref), userGameSettingsService (copy), var6 (ref), tweenService (copy), p7 (ref), var8 (ref)
+	local var9 = reactModule.useCallback(function(p9, p10)
+		-- upvalues: p1 (ref), fFlagCollectionViewMathChanges (copy), p4 (ref), p8 (ref), p5 (ref), p6 (ref), userGameSettingsService (copy), var6 (ref), tweenService (copy), p7 (ref), var8 (ref)
 		local current = p1.current
 		
 		if current ~= nil then
-			local vector2 = Vector2.new(p8 * (p5:getValue().X + p6), current.CanvasPosition.Y)
+			local floored
+			local _ = nil
+			local _ = nil
 			
-			if p9 and not userGameSettingsService.ReducedMotion then
+			if fFlagCollectionViewMathChanges then
+				if p4 < 1 then return end
+				floored = math.floor(p9 * p8:getValue().stride + 0.5)
+			else
+				floored = p9 * (p5:getValue().X + p6)
+			end
+			local canvasPosition = current.CanvasPosition
+			
+			if fFlagCollectionViewMathChanges and math.abs(canvasPosition.X - floored) < 1 then return end
+			local vector2 = Vector2.new(floored, canvasPosition.Y)
+			
+			if p10 and not userGameSettingsService.ReducedMotion then
 				if var6.current then
 					var6.current:Cancel()
 				end
@@ -50,7 +66,8 @@ return function(p1, p2, p3, p4, p5, p6, p7)
 			end
 		end
 	end, {
-		var8, p5, p6, var6, p7, p1
+		var8, if fFlagCollectionViewMathChanges then p8 else p5,
+		if fFlagCollectionViewMathChanges then p4 else p6, var6, p7, p1
 	})
 	local var10 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref), var5 (ref), p4 (ref), var9 (ref)

@@ -2,7 +2,7 @@
 local getAppFeaturePolicies = require(authCommon.Parent.UniversalAppPolicy).getAppFeaturePolicies
 local loginErrorCodesModule = require(authCommon.Enums.LoginErrorCodes)
 local loginErrorCodeSSOModule = require(authCommon.Enums.LoginErrorCodeSSO)
-local fFlagEnableIllegalChildAccountLinkingErrorMessageOnSSOModule = require(authCommon.Flags.FFlagEnableIllegalChildAccountLinkingErrorMessageOnSSO)
+local enableIllegalChildAccountLinkingErrorMessageOnSSO = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnSSO", false)
 local platformAccountName = getAppFeaturePolicies().getPlatformAccountName()
 local t = {
 	[loginErrorCodeSSOModule.AuthError] = "Authentication.Login.Response.SomethingWentWrong",
@@ -29,7 +29,7 @@ local t = {
 	}
 }
 
-if fFlagEnableIllegalChildAccountLinkingErrorMessageOnSSOModule then
+if enableIllegalChildAccountLinkingErrorMessageOnSSO then
 	t[loginErrorCodesModule.IllegalChildAccountLinking] = "Authentication.Login.LinkIllegalChildAccountLinking"
 end
 return function(p1)

@@ -64,7 +64,7 @@ local function getServerChannel_1()
 	return runService:GetRobloxClientChannel()
 end
 
-function getServerVersion.DebugFreeCameraForAdmins()
+function getServerVersion.getServerVersion()
 	-- upvalues: runService (ref)
 	local robloxVersion = runService:GetRobloxVersion()
 	local var1 = if robloxVersion == "?" then "DEBUG_SERVER" elseif runService:IsStudio() then "ROBLOX Studio" else robloxVersion
@@ -113,9 +113,6 @@ if game:DefineFastFlag("VersionedFlags_Dev", false) then
 end
 if game:DefineFastFlag("AppBuildReloadRemote", false) then
 	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerBuildExperiencePlaytestTeleport", script.Parent)
-end
-if game:DefineFastFlag("RoCaptchaServerHandlerEnabled", false) and require(robloxGui.Modules.Common.Flags.FStringRoCaptchaUniverseIds) ~= "" then
-	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerRoCaptchaHandler", script.Parent)
 end
 scriptContextService:AddCoreScriptLocal("ServerCoreScripts/PlayerViewCapability", script.Parent)
 

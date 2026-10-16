@@ -12,15 +12,12 @@ local getBuildPromptDraftStoreModule = require(buildExperience.Stores.GetBuildPr
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local formatErrorModule = require(buildExperience.utils.formatError)
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
-local fFlagBuildExperienceMonetizationMultiKindModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationMultiKind)
 local fFlagBuildExperienceDeveloperProductContextModule = require(buildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
 local fFlagBuildExperienceMonetizationProductEditingModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationProductEditing)
 local fFlagBuildExperienceRemoveDevProductPriceCap = require(parent.SharedFlags).FFlagBuildExperienceRemoveDevProductPriceCap
 local _ = require(script.Parent.MonetizationPageView)
 local t = {}
 local var1 = if fFlagBuildExperienceDeveloperProductContextModule then urlBuilder.fromString("apis:developer-products/v2/universes/{universeId}/developer-products/{productId}/creator") else nil
-local fFlagBuildExperienceDevProductModerationReadbackModule = require(buildExperience.Flags.FFlagBuildExperienceDevProductModerationReadback)
-local wasDeveloperProductTextModeratedModule = require(buildExperience.utils.wasDeveloperProductTextModerated)
 
 local function _(p1, p2, p3)
 	-- upvalues: fFlagBuildExperienceMonetizationNativeUIModule (ref), formatErrorModule (ref)
@@ -112,182 +109,71 @@ local _ = function(p1)
 	return utf8.len(p1) or #p1
 end
 
-local _ = function(p1)
-	return p1.identity or p1.id
-end
-
-local _ = function(p1)
-	return not (p1 == nil or p1.productKind == nil) and (p1.productKind == "DeveloperProduct" and p1.canManage ~= false)
-end
-
-local _ = function(p1, p2)
-	if p2 == nil then
-		return nil
-	end
-	for i, v in p1 do
-		if (v.identity or v.id) == p2 then
-			return v
-		end
-	end
-	return nil
-end
-
-local t_3 = {
-	managedPricing = { "isManagedPricingEnabled" },
-	saleStatus = { "isForSale" },
-	details = { "name", "description", "priceInRobux", "price" }
-}
-
-local _ = function(p3, p4)
-	return function(p5)
-		-- upvalues: p3 (ref), p4 (ref)
-		local identity = p3.identity or p3.id
-		local cloned = table.clone(p5[identity] or {})
-		cloned[p4] = p3
-		local cloned_1 = table.clone(p5)
-		cloned_1[identity] = cloned
-		
-		return cloned_1
-	end
-end
-
-local _ = function(p3, p4)
-	return function(p5)
-		-- upvalues: p3 (ref), p4 (ref)
-		if (p5[p3] or {})[p4] == nil then
-			return p5
-		end
-		local cloned = table.clone(p5[p3])
-		cloned[p4] = nil
-		local cloned_1 = table.clone(p5)
-		cloned_1[p3] = cloned
-		
-		if next(cloned) == nil then
-			cloned_1[p3] = nil
-		end
-		return cloned_1
-	end
-end
-
-local function withoutToggleOverrides(p3)
-	local var2 = p3
-	
-	for i in p3 do
-		local var3 = "saleStatus"
-		local var4 = "managedPricing"
-		var2 = (function(p4)
-			-- upvalues: i (ref), var3 (ref)
-			if (p4[i] or {})[var3] == nil then
-				return p4
-			end
-			local cloned = table.clone(p4[i])
-			cloned[var3] = nil
-			local cloned_1 = table.clone(p4)
-			cloned_1[i] = cloned
-			
-			if next(cloned) == nil then
-				cloned_1[i] = nil
-			end
-			return cloned_1
-		end)((function(p4)
-			-- upvalues: i (ref), var4 (ref)
-			if (p4[i] or {})[var4] == nil then
-				return p4
-			end
-			local cloned = table.clone(p4[i])
-			cloned[var4] = nil
-			local cloned_1 = table.clone(p4)
-			cloned_1[i] = cloned
-			
-			if next(cloned) == nil then
-				cloned_1[i] = nil
-			end
-			return cloned_1
-		end)(var2))
-	end
-	return var2
-end
-
-local function applyProductOverrides(p4, p5)
-	-- upvalues: t_3 (ref)
-	if p5 == nil then
-		return p4
-	end
-	local cloned = table.clone(p4)
-	
-	for i, v in p5 do
-		for i_1, v_1 in t_3[i] do
-			cloned[v_1] = v[v_1]
-		end
-	end
-	return cloned
-end
-
-local function useManageProductState(p6)
+local function useManageProductState(p1)
 	-- upvalues: reactModule (ref)
-	local var5 = reactModule.useRef(if p6 ~= nil then nil else p6.identity or p6.id)
-	local var6, var7 = reactModule.useState(false)
-	local var8, var9 = reactModule.useState(false)
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useState(nil)
-	local var14, var15 = reactModule.useState(if p6 ~= nil then "" else p6.name)
-	local var16, var17 = reactModule.useState(if p6 ~= nil then "" else p6.description)
+	local var2 = reactModule.useRef(if p1 ~= nil then nil else p1.id)
+	local var3, var4 = reactModule.useState(false)
+	local var5, var6 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
+	local var9, var10 = reactModule.useState(nil)
+	local var11, var12 = reactModule.useState(if p1 ~= nil then "" else p1.name)
+	local var13, var14 = reactModule.useState(if p1 ~= nil then "" else p1.description)
 	local useState = reactModule.useState
-	local var18 = if p6 == nil or p6.priceInRobux == nil then "" else tostring(p6.priceInRobux)
-	useState, var47 = useState(var18)
+	local var15 = if p1 == nil or p1.priceInRobux == nil then "" else tostring(p1.priceInRobux)
+	useState, var32 = useState(var15)
 	
 	return {
-		selectedProductIdRef = var5,
-		isProductSaleStatusPending = var6,
-		setIsProductSaleStatusPending = var7,
-		productSaleStatusError = var8,
-		setProductSaleStatusError = var9,
-		isProductEditPending = var10,
-		setIsProductEditPending = var11,
-		productEditError = var12,
-		setProductEditError = var13,
-		editName = var14,
-		setEditName = var15,
-		editDescription = var16,
-		setEditDescription = var17,
+		selectedProductIdRef = var2,
+		isProductSaleStatusPending = var3,
+		setIsProductSaleStatusPending = var4,
+		productSaleStatusError = var5,
+		setProductSaleStatusError = var6,
+		isProductEditPending = var7,
+		setIsProductEditPending = var8,
+		productEditError = var9,
+		setProductEditError = var10,
+		editName = var11,
+		setEditName = var12,
+		editDescription = var13,
+		setEditDescription = var14,
 		editPrice = useState,
-		setEditPrice = var18
+		setEditPrice = var15
 	}
 end
 
-local function getEligibleProducts(p6)
+local function getEligibleProducts(p1)
 	local t = {}
 	
-	for i, v in p6 do
-		if (not (v == nil or v.productKind == nil) and (v.productKind == "DeveloperProduct" and v.canManage ~= false)) and v.isForSale == true and (v.isArchived ~= true and v.isImmutable ~= true) and (v.isInActivePriceOptimizationExperiment ~= true and v.priceInRobux ~= nil and v.priceInRobux > 0) then
+	for i, v in p1 do
+		if v.isForSale == true and v.isArchived ~= true and (v.isImmutable ~= true and v.isInActivePriceOptimizationExperiment ~= true) and (v.priceInRobux ~= nil and v.priceInRobux > 0) then
 			table.insert(t, v)
 		end
 	end
 	return t
 end
 
-local _ = function(p7)
-	return p7 ~= nil and (if p7.isArchived ~= true then if p7.isImmutable ~= true then p7.isInActivePriceOptimizationExperiment == true else true else true)
+local _ = function(p2)
+	return p2 ~= nil and (if p2.isArchived ~= true then if p2.isImmutable ~= true then p2.isInActivePriceOptimizationExperiment == true else true else true)
 end
 
-local _ = function(p7, p8)
-	if p7 == nil or p7 == "Disabled" then
+local _ = function(p2, p3)
+	if p2 == nil or p2 == "Disabled" then
 		return "Unavailable"
 	end
-	local var5 = 0
+	local var2 = 0
 	
-	for i, v in p8 do
+	for i, v in p3 do
 		if v.isManagedPricingEnabled == true then
-			var5 += 1
+			var2 += 1
 		end
 	end
-	return if var5 == 0 then "AllOff" elseif var5 == #p8 then "AllOn" else "Mixed"
+	return if var2 == 0 then "AllOff" elseif var2 == #p3 then "AllOn" else "Mixed"
 end
 
-local function getShopButtonEnabled(p9)
-	local var6 = if p9 ~= nil then nil else p9[1]
+local function getShopButtonEnabled(p4)
+	local var3 = if p4 ~= nil then nil else p4[1]
 	
-	for i, v in if var6 == nil or var6.entryPoints == nil then {} else var6.entryPoints do
+	for i, v in if var3 == nil or var3.entryPoints == nil then {} else var3.entryPoints do
 		if v.name == "InExperienceGlobalIconEnabled" then
 			return v.isEnabled == true
 		end
@@ -295,13 +181,13 @@ local function getShopButtonEnabled(p9)
 	return false
 end
 
-local _ = function(p10)
-	for i, v in p10 do
+local _ = function(p5)
+	for i, v in p5 do
 		if v == "Failed" then
 			return "Failed"
 		end
 	end
-	for i, v in p10 do
+	for i, v in p5 do
 		if v ~= "Ready" then
 			return "NotReady"
 		end
@@ -309,14 +195,14 @@ local _ = function(p10)
 	return "Ready"
 end
 
-local _ = function(p11, p12)
-	return if p11 == nil then p12 elseif p11 then "AllOn" else "AllOff"
+local _ = function(p6, p7)
+	return if p6 == nil then p7 elseif p6 then "AllOn" else "AllOff"
 end
 
-local function useOptionsState(p11, p12, p13, p14, p15)
+local function useOptionsState(p6, p7, p8, p9, p10)
 	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getEligibleProducts (ref), getShopButtonEnabled (ref), reactModule (ref), sendBuildExperienceEventModule (ref), formatErrorModule (ref)
-	local var7
-	local var8 = useLocalization({
+	local var4
+	local var5 = useLocalization({
 		options = localizationStringsModule.MONETIZATION_OPTIONS,
 		pricingOptions = localizationStringsModule.MONETIZATION_PRICING_OPTIONS,
 		pricingOptionsDescription = localizationStringsModule.MONETIZATION_PRICING_OPTIONS_DESCRIPTION,
@@ -336,215 +222,215 @@ local function useOptionsState(p11, p12, p13, p14, p15)
 		acknowledgementDescription = localizationStringsModule.MONETIZATION_MANAGED_PRICING_ACK_DESCRIPTION,
 		agree = localizationStringsModule.MONETIZATION_AGREE
 	})
-	local var9 = getEligibleProducts(p12)
-	local managedPricingStatus = p11.managedPricingStatus
+	local var6 = getEligibleProducts(p7)
+	local managedPricingStatus = p6.managedPricingStatus
 	
 	if managedPricingStatus == nil or managedPricingStatus == "Disabled" then
-		var7 = "Unavailable"
+		var4 = "Unavailable"
 	else
-		local var10 = 0
+		local var7 = 0
 		
-		for i, v in var9 do
+		for i, v in var6 do
 			if v.isManagedPricingEnabled == true then
-				var10 += 1
+				var7 += 1
 			end
 		end
-		var7 = if var10 == 0 then "AllOff" elseif var10 == #var9 then "AllOn" else "Mixed"
+		var4 = if var7 == 0 then "AllOff" elseif var7 == #var6 then "AllOn" else "Mixed"
 	end
-	local var11, v
-	managedPricingStatus = getShopButtonEnabled(p11.shops)
+	local var8, v
+	managedPricingStatus = getShopButtonEnabled(p6.shops)
 	local list = {
-		p11.managedPricingLoadStatus or "NotReady",
-		p11.shopsLoadStatus or "NotReady",
-		p11.permissionLoadStatus or "NotReady"
+		p6.managedPricingLoadStatus or "NotReady",
+		p6.shopsLoadStatus or "NotReady",
+		p6.permissionLoadStatus or "NotReady"
 	}
 	
 	for i, v in list do
 		if v == "Failed" then
-			var11 = "Failed"
-			local var12 = var11 == "Ready" and p11.permissionCanMonetize == true
-			local var13, var14 = reactModule.useState(false)
-			var60, v = reactModule.useState(false)
-			local var15, var16 = reactModule.useState(nil)
-			local var17, var18 = reactModule.useState(nil)
-			local var19, var20 = reactModule.useState(nil)
-			local var21, var22 = reactModule.useState(nil)
-			local var23, var24 = reactModule.useState(false)
-			local var25 = reactModule.useRef(nil)
-			local var26 = reactModule.useRef(nil)
+			var8 = "Failed"
+			local var9 = var8 == "Ready" and p6.permissionCanMonetize == true
+			local var10, var11 = reactModule.useState(false)
+			var45, v = reactModule.useState(false)
+			local var12, var13 = reactModule.useState(nil)
+			local var14, var15 = reactModule.useState(nil)
+			local var16, var17 = reactModule.useState(nil)
+			local var18, var19 = reactModule.useState(nil)
+			local var20, var21 = reactModule.useState(false)
+			local var22 = reactModule.useRef(nil)
+			local var23 = reactModule.useRef(nil)
 			reactModule.useLayoutEffect(function()
-				-- upvalues: var25 (ref), var26 (ref), var14 (ref), v (ref), var16 (ref), var18 (ref), var20 (ref), var22 (ref), var24 (ref)
-				var25.current = nil
-				var26.current = nil
-				var14(false)
+				-- upvalues: var22 (ref), var23 (ref), var11 (ref), v (ref), var13 (ref), var15 (ref), var17 (ref), var19 (ref), var21 (ref)
+				var22.current = nil
+				var23.current = nil
+				var11(false)
 				v(false)
-				var16(nil)
-				var18(nil)
-				var20(nil)
-				var22(nil)
-				var24(false)
-			end, { p11.universeId or 0 })
+				var13(nil)
+				var15(nil)
+				var17(nil)
+				var19(nil)
+				var21(false)
+			end, { p6.universeId or 0 })
 			reactModule.useEffect(function()
-				-- upvalues: var15 (ref), var7 (ref), var16 (ref)
-				if var15 ~= nil and (var15 and var7 == "AllOn" or not var15 and var7 == "AllOff") then
-					var16(nil)
+				-- upvalues: var12 (ref), var4 (ref), var13 (ref)
+				if var12 ~= nil and (var12 and var4 == "AllOn" or not var12 and var4 == "AllOff") then
+					var13(nil)
 				end
-			end, { var7, var15 })
+			end, { var4, var12 })
 			reactModule.useEffect(function()
-				-- upvalues: var17 (ref), managedPricingStatus (ref), var18 (ref)
-				if var17 ~= nil and var17 == managedPricingStatus then
-					var18(nil)
+				-- upvalues: var14 (ref), managedPricingStatus (ref), var15 (ref)
+				if var14 ~= nil and var14 == managedPricingStatus then
+					var15(nil)
 				end
-			end, { var17, managedPricingStatus })
-			local var27 = reactModule.useCallback(function(p16, p17)
-				-- upvalues: p11 (ref), p14 (ref), p15 (ref), var25 (ref), var13 (ref), var12 (ref), var9 (ref), var24 (ref), var20 (ref), var16 (ref), var14 (ref), p13 (ref), sendBuildExperienceEventModule (copy), var8 (ref), formatErrorModule (copy)
-				local onUpdateManagedPricing = p11.onUpdateManagedPricing
+			end, { var14, managedPricingStatus })
+			local var24 = reactModule.useCallback(function(p11, p12)
+				-- upvalues: p6 (ref), p9 (ref), p10 (ref), var22 (ref), var10 (ref), var9 (ref), var6 (ref), var21 (ref), var17 (ref), var13 (ref), var11 (ref), p8 (ref), sendBuildExperienceEventModule (copy), var5 (ref), formatErrorModule (copy)
+				local onUpdateManagedPricing = p6.onUpdateManagedPricing
 				
-				if p14.current ~= p15 or var25.current ~= nil or (var13 or not var12) or (onUpdateManagedPricing == nil or p11.managedPricingStatus == nil or (p11.managedPricingStatus == "Disabled" or #var9 == 0)) then return end
+				if p9.current ~= p10 or var22.current ~= nil or (var10 or not var9) or (onUpdateManagedPricing == nil or p6.managedPricingStatus == nil or (p6.managedPricingStatus == "Disabled" or #var6 == 0)) then return end
 				local t = {}
 				
-				for i, v in var9 do
-					local var28 = tonumber(v.id)
+				for i, v in var6 do
+					local var25 = tonumber(v.id)
 					
-					if var28 ~= nil then
-						table.insert(t, var28)
+					if var25 ~= nil then
+						table.insert(t, var25)
 					end
 				end
 				if #t == 0 then
-					var24(false)
+					var21(false)
 					
 					return
 				end
 				local t_1 = {}
-				var25.current = t_1
-				var20(nil)
-				var16(p16)
-				var14(true);
-				(if p17 and p11.onAcceptManagedPricing ~= nil then p11.onAcceptManagedPricing():andThen(function()
-					-- upvalues: p14 (copy), p15 (copy), var25 (copy), t_1 (ref), onUpdateManagedPricing (ref), t (ref), p16 (ref)
-					return if p14.current == p15 and var25.current == t_1 then onUpdateManagedPricing(t, p16) else nil
-				end) else onUpdateManagedPricing(t, p16)):andThen(function(p18)
-					-- upvalues: p14 (copy), p15 (copy), var25 (copy), t_1 (ref), var24 (copy), p13 (copy), sendBuildExperienceEventModule (copy), var16 (copy), var20 (copy), var8 (copy)
-					if p14.current ~= p15 or var25.current ~= t_1 then return end
-					var24(false)
+				var22.current = t_1
+				var17(nil)
+				var13(p11)
+				var11(true);
+				(if p12 and p6.onAcceptManagedPricing ~= nil then p6.onAcceptManagedPricing():andThen(function()
+					-- upvalues: p9 (copy), p10 (copy), var22 (copy), t_1 (ref), onUpdateManagedPricing (ref), t (ref), p11 (ref)
+					return if p9.current == p10 and var22.current == t_1 then onUpdateManagedPricing(t, p11) else nil
+				end) else onUpdateManagedPricing(t, p11)):andThen(function(p13)
+					-- upvalues: p9 (copy), p10 (copy), var22 (copy), t_1 (ref), var21 (copy), p8 (copy), sendBuildExperienceEventModule (copy), var13 (copy), var17 (copy), var5 (copy)
+					if p9.current ~= p10 or var22.current ~= t_1 then return end
+					var21(false)
 					
-					if type(p18) == "table" and type(p18.errors) == "table" and #p18.errors > 0 then
-						warn(`[MonetizationOptions] Managed Pricing update partially failed (universeId={tostring(p13.universeId)})`)
+					if type(p13) == "table" and type(p13.errors) == "table" and #p13.errors > 0 then
+						warn(`[MonetizationOptions] Managed Pricing update partially failed (universeId={tostring(p8.universeId)})`)
 						local t = { action = "managed_pricing", failureType = "partial" }
 						
 						if t == nil then
-							sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p13)
+							sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p8)
 						else
-							sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p13, t)
+							sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p8, t)
 						end
-						var16(nil)
-						var20(var8.partialUpdateError)
+						var13(nil)
+						var17(var5.partialUpdateError)
 						
 						return
 					else
 						local t = { action = "managed_pricing" }
 						
 						if t == nil then
-							sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_SUCCESS", p13)
+							sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_SUCCESS", p8)
 							
 							return
 						end
-						sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_SUCCESS", p13, t)
+						sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_SUCCESS", p8, t)
 					end
-				end):catch(function(p18)
-					-- upvalues: p14 (copy), p15 (copy), var25 (copy), t_1 (ref), p13 (copy), formatErrorModule (copy), sendBuildExperienceEventModule (copy), var24 (copy), var16 (copy), var20 (copy), var8 (copy)
-					if p14.current ~= p15 or var25.current ~= t_1 then return end
-					warn(`[MonetizationOptions] Managed Pricing update failed (universeId={tostring(p13.universeId)}): {string.sub(string.gsub(formatErrorModule(p18), "[\r\n]+", " "), 1, 200)}`)
+				end):catch(function(p13)
+					-- upvalues: p9 (copy), p10 (copy), var22 (copy), t_1 (ref), p8 (copy), formatErrorModule (copy), sendBuildExperienceEventModule (copy), var21 (copy), var13 (copy), var17 (copy), var5 (copy)
+					if p9.current ~= p10 or var22.current ~= t_1 then return end
+					warn(`[MonetizationOptions] Managed Pricing update failed (universeId={tostring(p8.universeId)}): {string.sub(string.gsub(formatErrorModule(p13), "[\r\n]+", " "), 1, 200)}`)
 					local t = { action = "managed_pricing", failureType = "request" }
 					
 					if t == nil then
-						sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p13)
+						sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p8)
 					else
-						sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p13, t)
+						sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p8, t)
 					end
-					var24(false)
-					var16(nil)
-					var20(var8.optionsUpdateError)
+					var21(false)
+					var13(nil)
+					var17(var5.optionsUpdateError)
 				end):finally(function()
-					-- upvalues: p14 (copy), p15 (copy), var25 (copy), t_1 (ref), var14 (copy)
-					if p14.current == p15 and var25.current == t_1 then
-						var25.current = nil
-						var14(false)
+					-- upvalues: p9 (copy), p10 (copy), var22 (copy), t_1 (ref), var11 (copy)
+					if p9.current == p10 and var22.current == t_1 then
+						var22.current = nil
+						var11(false)
 					end
 				end)
 			end, {
-				var12, var9, var13, var8.optionsUpdateError, var8.partialUpdateError,
-				p11.managedPricingStatus, p11.onAcceptManagedPricing,
-				p11.onUpdateManagedPricing, p13, p15
+				var9, var6, var10, var5.optionsUpdateError, var5.partialUpdateError,
+				p6.managedPricingStatus, p6.onAcceptManagedPricing,
+				p6.onUpdateManagedPricing, p8, p10
 			})
-			local var29 = if var15 == nil then var7 elseif var15 then "AllOn" else "AllOff"
+			local var26 = if var12 == nil then var4 elseif var12 then "AllOn" else "AllOff"
 			
 			return {
-				loadStatus = var11,
-				canMonetize = var12,
-				canChangeManagedPricing = var12 and (p11.onUpdateManagedPricing ~= nil and (#var9 > 0 and var29 ~= "Unavailable")),
-				managedPricingState = var29,
-				managedPricingSupportingText = if #var9 == 0 and var29 ~= "Unavailable" then var8.noEligibleProducts else nil,
-				shopButtonEnabled = if var17 ~= nil then managedPricingStatus else var17,
-				isManagedPricingPending = var13,
-				isShopButtonPending = var60,
-				managedPricingError = var19,
-				shopButtonError = var21,
-				showAcknowledgement = var23,
-				onManagedPricingChanged = reactModule.useCallback(function(p18)
-					-- upvalues: p14 (ref), p15 (ref), var12 (ref), p11 (ref), var9 (ref), var24 (ref), var27 (ref)
-					if p14.current ~= p15 or not var12 or (p11.onUpdateManagedPricing == nil or p11.managedPricingStatus == nil) or (p11.managedPricingStatus == "Disabled" or #var9 == 0) then return end
-					if p11.managedPricingStatus == "Pending" and p18 then
-						var24(true)
+				loadStatus = var8,
+				canMonetize = var9,
+				canChangeManagedPricing = var9 and (p6.onUpdateManagedPricing ~= nil and (#var6 > 0 and var26 ~= "Unavailable")),
+				managedPricingState = var26,
+				managedPricingSupportingText = if #var6 == 0 and var26 ~= "Unavailable" then var5.noEligibleProducts else nil,
+				shopButtonEnabled = if var14 ~= nil then managedPricingStatus else var14,
+				isManagedPricingPending = var10,
+				isShopButtonPending = var45,
+				managedPricingError = var16,
+				shopButtonError = var18,
+				showAcknowledgement = var20,
+				onManagedPricingChanged = reactModule.useCallback(function(p13)
+					-- upvalues: p9 (ref), p10 (ref), var9 (ref), p6 (ref), var6 (ref), var21 (ref), var24 (ref)
+					if p9.current ~= p10 or not var9 or (p6.onUpdateManagedPricing == nil or p6.managedPricingStatus == nil) or (p6.managedPricingStatus == "Disabled" or #var6 == 0) then return end
+					if p6.managedPricingStatus == "Pending" and p13 then
+						var21(true)
 						
 						return
 					end
-					var27(p18, false)
+					var24(p13, false)
 				end, {
-					var12,
 					var9,
-					p11.managedPricingStatus,
-					p11.onUpdateManagedPricing,
-					var27
+					var6,
+					p6.managedPricingStatus,
+					p6.onUpdateManagedPricing,
+					var24
 				}),
-				onShopButtonChanged = reactModule.useCallback(function(p18)
-					-- upvalues: p11 (ref), p14 (ref), p15 (ref), var26 (ref), var60 (ref), var12 (ref), var22 (ref), var18 (ref), v (ref), p13 (ref), sendBuildExperienceEventModule (copy), formatErrorModule (copy), var8 (ref)
-					local onSetShopButton = p11.onSetShopButton
+				onShopButtonChanged = reactModule.useCallback(function(p13)
+					-- upvalues: p6 (ref), p9 (ref), p10 (ref), var23 (ref), var45 (ref), var9 (ref), var19 (ref), var15 (ref), v (ref), p8 (ref), sendBuildExperienceEventModule (copy), formatErrorModule (copy), var5 (ref)
+					local onSetShopButton = p6.onSetShopButton
 					
-					if p14.current == p15 and var26.current == nil and (not var60 and var12) and onSetShopButton ~= nil then
+					if p9.current == p10 and var23.current == nil and (not var45 and var9) and onSetShopButton ~= nil then
 						local t = {}
-						var26.current = t
-						var22(nil)
-						var18(p18)
+						var23.current = t
+						var19(nil)
+						var15(p13)
 						v(true)
-						onSetShopButton(p18):andThen(function()
-							-- upvalues: p14 (copy), p15 (copy), var26 (copy), t (ref), p13 (copy), sendBuildExperienceEventModule (copy)
-							if p14.current ~= p15 or var26.current ~= t then return end
+						onSetShopButton(p13):andThen(function()
+							-- upvalues: p9 (copy), p10 (copy), var23 (copy), t (ref), p8 (copy), sendBuildExperienceEventModule (copy)
+							if p9.current ~= p10 or var23.current ~= t then return end
 							local t_1 = { action = "shop_button" }
 							
 							if t_1 == nil then
-								sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_SUCCESS", p13)
+								sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_SUCCESS", p8)
 								
 								return
 							end
-							sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_SUCCESS", p13, t_1)
-						end):catch(function(p19)
-							-- upvalues: p14 (copy), p15 (copy), var26 (copy), t (ref), p13 (copy), formatErrorModule (copy), sendBuildExperienceEventModule (copy), var18 (copy), var22 (copy), var8 (copy)
-							if p14.current ~= p15 or var26.current ~= t then return end
-							warn(`[MonetizationOptions] Shop button update failed (universeId={tostring(p13.universeId)}): {string.sub(string.gsub(formatErrorModule(p19), "[\r\n]+", " "), 1, 200)}`)
+							sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_SUCCESS", p8, t_1)
+						end):catch(function(p14)
+							-- upvalues: p9 (copy), p10 (copy), var23 (copy), t (ref), p8 (copy), formatErrorModule (copy), sendBuildExperienceEventModule (copy), var15 (copy), var19 (copy), var5 (copy)
+							if p9.current ~= p10 or var23.current ~= t then return end
+							warn(`[MonetizationOptions] Shop button update failed (universeId={tostring(p8.universeId)}): {string.sub(string.gsub(formatErrorModule(p14), "[\r\n]+", " "), 1, 200)}`)
 							local t_1 = { action = "shop_button", failureType = "request" }
 							
 							if t_1 == nil then
-								sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p13)
+								sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p8)
 							else
-								sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p13, t_1)
+								sendBuildExperienceEventModule("MONETIZATION_OPTIONS_UPDATE_FAILURE", p8, t_1)
 							end
-							var18(nil)
-							var22(var8.optionsUpdateError)
+							var15(nil)
+							var19(var5.optionsUpdateError)
 						end):finally(function()
-							-- upvalues: p14 (copy), p15 (copy), var26 (copy), t (ref), v (copy)
-							if p14.current == p15 and var26.current == t then
-								var26.current = nil
+							-- upvalues: p9 (copy), p10 (copy), var23 (copy), t (ref), v (copy)
+							if p9.current == p10 and var23.current == t then
+								var23.current = nil
 								v(false)
 							end
 						end)
@@ -552,35 +438,34 @@ local function useOptionsState(p11, p12, p13, p14, p15)
 						return
 					end
 				end, {
-					var12, var60, var8.optionsUpdateError, p11.onSetShopButton, p13, p15
+					var9, var45, var5.optionsUpdateError, p6.onSetShopButton, p8, p10
 				}),
 				onConfirmManagedPricing = function()
-					-- upvalues: var27 (ref)
-					var27(true, true)
+					-- upvalues: var24 (ref)
+					var24(true, true)
 				end,
 				onCancelManagedPricing = function()
-					-- upvalues: var13 (ref), var24 (ref)
-					if not var13 then
-						var24(false)
+					-- upvalues: var10 (ref), var21 (ref)
+					if not var10 then
+						var21(false)
 					end
 				end,
-				onRetry = p11.onRetryOptions or function() end,
-				labels = var8
+				onRetry = p6.onRetryOptions or function() end,
+				labels = var5
 			}
 		end
 	end
 	for i_1, v in list do
 		if v ~= "Ready" then
-			var11 = "NotReady"
+			var8 = "NotReady"
 		end
 	end
-	var11 = "Ready"
+	var8 = "Ready"
 end
 
-return function(p16)
-	-- upvalues: useLocalization (ref), fFlagBuildExperienceDeveloperProductContextModule (ref), localizationStringsModule (ref), t (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), reactModule (ref), t_2 (ref), useOptionsState (ref), fFlagBuildExperienceMonetizationMultiKindModule (ref), fFlagBuildExperienceMonetizationProductEditingModule (ref), noop (ref), applyProductOverrides (ref), t_1 (ref), useManageProductState (ref), sendBuildExperienceEventModule (ref), withoutToggleOverrides (ref), formatErrorModule (ref), fFlagBuildExperienceRemoveDevProductPriceCap (ref), fFlagBuildExperienceDevProductModerationReadbackModule (ref), wasDeveloperProductTextModeratedModule (ref), useOnScreenKeyboardHeightModule (ref), getBuildPromptDraftStoreModule (ref), var1 (ref)
-	local var28, var29, v
-	local var30 = useLocalization({
+return function(p11)
+	-- upvalues: useLocalization (ref), fFlagBuildExperienceDeveloperProductContextModule (ref), localizationStringsModule (ref), t (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), reactModule (ref), t_2 (ref), useOptionsState (ref), fFlagBuildExperienceMonetizationProductEditingModule (ref), t_1 (ref), useManageProductState (ref), sendBuildExperienceEventModule (ref), formatErrorModule (ref), fFlagBuildExperienceRemoveDevProductPriceCap (ref), useOnScreenKeyboardHeightModule (ref), getBuildPromptDraftStoreModule (ref), var1 (ref)
+	local var25 = useLocalization({
 		composerPlaceholder = if fFlagBuildExperienceDeveloperProductContextModule then localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER else nil,
 		title = localizationStringsModule.MONETIZATION_TITLE,
 		emptyTitle = localizationStringsModule.MONETIZATION_EMPTY_TITLE,
@@ -609,885 +494,627 @@ return function(p16)
 		priceRequiredForSale = localizationStringsModule.MONETIZATION_PRICE_REQUIRED_FOR_SALE,
 		moderationError = localizationStringsModule.MONETIZATION_MODERATION_ERROR
 	})
-	local products = p16.products or t
-	local var31 = if fFlagBuildExperienceMonetizationNativeUIModule or p16.initialMode ~= "options" then p16.initialMode else nil
-	local var32 = reactModule.useMemo(function()
-		-- upvalues: p16 (ref)
+	local products = p11.products or t
+	local var26 = if fFlagBuildExperienceMonetizationNativeUIModule or p11.initialMode ~= "options" then p11.initialMode else nil
+	local var27 = reactModule.useMemo(function()
+		-- upvalues: p11 (ref)
 		return {
 			messageId = nil,
 			turnId = nil,
-			universeId = p16.universeId,
-			placeId = p16.placeId,
-			conversationId = p16.sessionId
+			universeId = p11.universeId,
+			placeId = p11.placeId,
+			conversationId = p11.sessionId
 		}
 	end, {
-		p16.placeId or 0,
-		p16.sessionId or "",
-		p16.universeId or 0
+		p11.placeId or 0,
+		p11.sessionId or "",
+		p11.universeId or 0
 	})
-	local var33 = reactModule.useMemo(function()
+	local var28 = reactModule.useMemo(function()
 		return {}
-	end, { p16.universeId or 0 })
-	local var34 = reactModule.useRef(nil)
+	end, { p11.universeId or 0 })
+	local var29 = reactModule.useRef(nil)
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var34 (ref), var33 (ref)
-		var34.current = var33
+		-- upvalues: var29 (ref), var28 (ref)
+		var29.current = var28
 		
 		return function()
-			-- upvalues: var34 (copy), var33 (copy)
-			if var34.current == var33 then
-				var34.current = nil
+			-- upvalues: var29 (copy), var28 (copy)
+			if var29.current == var28 then
+				var29.current = nil
 			end
 		end
-	end, { var33 })
-	local var35 = if fFlagBuildExperienceMonetizationNativeUIModule then useOptionsState(p16, products, var32, var34, var33) else t_2
-	local var36 = not fFlagBuildExperienceMonetizationMultiKindModule or (p16.permissionLoadStatus == "Ready" and p16.permissionCanMonetize == true)
-	local var37 = if #products > 0 then "catalog" else "empty"
-	local var38 = if var31 == "detail" or fFlagBuildExperienceMonetizationProductEditingModule and var31 == "edit" then products[1] else nil
-	local var39, var40 = reactModule.useState(var31 or var37)
-	local var41, var42 = reactModule.useState(var38)
-	local var43 = nil
-	local var44 = noop
-	local t_3 = {}
-	local var45 = noop
-	
-	if fFlagBuildExperienceMonetizationMultiKindModule then
-		local var46, var47 = reactModule.useState(if var38 ~= nil then nil else var38.identity or var38.id)
-		var43 = var46
-		var44 = var47
-		local var48, var49 = reactModule.useState({})
-		t_3 = var48
-		var45 = var49
-	end
-	if fFlagBuildExperienceMonetizationMultiKindModule then
-		var28 = var43
-		
-		if var28 == nil then
-			var29 = nil
-		else
-			for i, v in products do
-				if (v.identity or v.id) == var28 then
-					var29 = v
-				end
-			end
-			var29 = nil
-		end
-	else
-		var29 = nil
-	end
-	var28 = if fFlagBuildExperienceMonetizationMultiKindModule then if var29 ~= nil then nil else applyProductOverrides(var29, if var43 ~= nil then nil else t_3[var43]) else var41
-	local var50, var51 = reactModule.useState(false)
-	local var52, var53 = reactModule.useState(false)
-	v = reactModule.useRef(nil)
-	local var54 = if fFlagBuildExperienceMonetizationProductEditingModule then useManageProductState(var38) else t_1
-	local selectedProductIdRef = var54.selectedProductIdRef
-	local isProductSaleStatusPending = var54.isProductSaleStatusPending
-	local setIsProductSaleStatusPending = var54.setIsProductSaleStatusPending
-	local productSaleStatusError = var54.productSaleStatusError
-	local setProductSaleStatusError = var54.setProductSaleStatusError
-	local isProductEditPending = var54.isProductEditPending
-	local setIsProductEditPending = var54.setIsProductEditPending
-	local productEditError = var54.productEditError
-	local setProductEditError = var54.setProductEditError
-	local editName = var54.editName
-	local setEditName = var54.setEditName
-	local editDescription = var54.editDescription
-	local setEditDescription = var54.setEditDescription
-	local editPrice = var54.editPrice
-	local setEditPrice = var54.setEditPrice
+	end, { var28 })
+	local var30 = if fFlagBuildExperienceMonetizationNativeUIModule then useOptionsState(p11, products, var27, var29, var28) else t_2
+	local var31 = if #products > 0 then "catalog" else "empty"
+	local var32 = if var26 == "detail" or fFlagBuildExperienceMonetizationProductEditingModule and var26 == "edit" then products[1] else nil
+	local var33, var34 = reactModule.useState(var26 or var31)
+	local var35, var36 = reactModule.useState(var32)
+	local var37, var38 = reactModule.useState(false)
+	local var39, var40 = reactModule.useState(false)
+	local var41 = reactModule.useRef(nil)
+	local var42 = if fFlagBuildExperienceMonetizationProductEditingModule then useManageProductState(var32) else t_1
+	local selectedProductIdRef = var42.selectedProductIdRef
+	local isProductSaleStatusPending = var42.isProductSaleStatusPending
+	local setIsProductSaleStatusPending = var42.setIsProductSaleStatusPending
+	local productSaleStatusError = var42.productSaleStatusError
+	local setProductSaleStatusError = var42.setProductSaleStatusError
+	local isProductEditPending = var42.isProductEditPending
+	local setIsProductEditPending = var42.setIsProductEditPending
+	local productEditError = var42.productEditError
+	local setProductEditError = var42.setProductEditError
+	local editName = var42.editName
+	local setEditName = var42.setEditName
+	local editDescription = var42.editDescription
+	local setEditDescription = var42.setEditDescription
+	local editPrice = var42.editPrice
+	local setEditPrice = var42.setEditPrice
 	reactModule.useLayoutEffect(function()
-		-- upvalues: v (ref), var40 (ref), var31 (ref), var37 (ref), fFlagBuildExperienceMonetizationMultiKindModule (copy), var44 (write), var38 (ref), var45 (write), var42 (ref), var51 (ref), var53 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), selectedProductIdRef (ref), setIsProductSaleStatusPending (ref), setProductSaleStatusError (ref), setIsProductEditPending (ref), setProductEditError (ref), setEditName (ref), setEditDescription (ref), setEditPrice (ref)
-		v.current = nil
-		var40(var31 or var37)
-		
-		if fFlagBuildExperienceMonetizationMultiKindModule then
-			local var55 = if var38 == nil then var38 else nil
-			local identity = var38 == nil and (var55.identity or var55.id)
-			var44(identity)
-			var45({})
-		else
-			var42(var38)
-		end
-		var51(false)
-		var53(false)
+		-- upvalues: var41 (ref), var34 (ref), var26 (ref), var31 (ref), var36 (ref), var32 (ref), var38 (ref), var40 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), selectedProductIdRef (ref), setIsProductSaleStatusPending (ref), setProductSaleStatusError (ref), setIsProductEditPending (ref), setProductEditError (ref), setEditName (ref), setEditDescription (ref), setEditPrice (ref)
+		var41.current = nil
+		var34(var26 or var31)
+		var36(var32)
+		var38(false)
+		var40(false)
 		
 		if fFlagBuildExperienceMonetizationProductEditingModule then
-			local var56 = if var38 == nil then var38 else nil
-			local identity = var38 == nil and (var56.identity or var56.id)
-			selectedProductIdRef.current = identity
+			selectedProductIdRef.current = if var32 ~= nil then nil else var32.id
 			setIsProductSaleStatusPending(false)
 			setProductSaleStatusError(false)
 			setIsProductEditPending(false)
 			setProductEditError(nil)
-			setEditName(if var38 ~= nil then "" else var38.name)
-			setEditDescription(if var38 ~= nil then "" else var38.description)
-			setEditPrice(if var38 == nil or var38.priceInRobux == nil then "" else tostring(var38.priceInRobux))
+			setEditName(if var32 ~= nil then "" else var32.name)
+			setEditDescription(if var32 ~= nil then "" else var32.description)
+			setEditPrice(if var32 == nil or var32.priceInRobux == nil then "" else tostring(var32.priceInRobux))
 		end
-	end, { p16.universeId or 0 })
+	end, { p11.universeId or 0 })
 	reactModule.useEffect(function()
-		-- upvalues: var32 (ref), sendBuildExperienceEventModule (copy)
+		-- upvalues: var27 (ref), sendBuildExperienceEventModule (copy)
 		local t = { source = "monetization_page" }
 		
 		if t == nil then
-			sendBuildExperienceEventModule("MONETIZATION_ENTRY_CLICK", var32)
+			sendBuildExperienceEventModule("MONETIZATION_ENTRY_CLICK", var27)
 		else
-			sendBuildExperienceEventModule("MONETIZATION_ENTRY_CLICK", var32, t)
+			sendBuildExperienceEventModule("MONETIZATION_ENTRY_CLICK", var27, t)
 		end
-		sendBuildExperienceEventModule("MONETIZATION_PAGE_IMPRESSION", var32)
-	end, { var32 })
+		sendBuildExperienceEventModule("MONETIZATION_PAGE_IMPRESSION", var27)
+	end, { var27 })
 	reactModule.useEffect(function()
-		-- upvalues: var31 (ref), var39 (ref), var37 (ref), var40 (ref)
-		if var31 == nil and (var39 == "catalog" or var39 == "empty") and var39 ~= var37 then
-			var40(var37)
+		-- upvalues: var26 (ref), var33 (ref), var31 (ref), var34 (ref)
+		if var26 == nil and (var33 == "catalog" or var33 == "empty") and var33 ~= var31 then
+			var34(var31)
 		end
-	end, { var37, var31, var39 })
-	
-	if fFlagBuildExperienceMonetizationMultiKindModule then
-		reactModule.useEffect(function()
-			-- upvalues: var43 (write), products (ref), selectedProductIdRef (ref), var44 (write), var40 (ref), var37 (ref), t_3 (write), var45 (write)
-			if var43 ~= nil then
-				local var55
-				local var56 = products
-				local var57 = var43
-				
-				if var57 == nil then
-					var55 = nil
-				else
-					for i, v in var56 do
-						if (v.identity or v.id) == var57 then
-							var55 = v
-						end
-					end
-					var55 = nil
-				end
-				if var55 == nil then
-					selectedProductIdRef.current = nil
-					var44(nil)
-					var40(var37)
-				end
-			end
-			for i, v in t_3 do
-				local var58
-				if i == nil then
-					var58 = nil
-					local details = v.details
-					
-					if var58 ~= nil and details ~= nil and (var58.name == details.name and var58.description == details.description) and var58.priceInRobux == details.priceInRobux then
-						local var59 = "details"
-						var45(function(p17)
-							-- upvalues: i (ref), var59 (ref)
-							if (p17[i] or {})[var59] == nil then
-								return p17
-							end
-							local cloned = table.clone(p17[i])
-							cloned[var59] = nil
-							local cloned_1 = table.clone(p17)
-							cloned_1[i] = cloned
-							
-							if next(cloned) == nil then
-								cloned_1[i] = nil
-							end
-							return cloned_1
-						end)
-					end
-				end
-				for i_1, v_1 in products do
-					if (v_1.identity or v_1.id) == i then
-						var58 = v_1
-					end
-				end
-				var58 = nil
-			end
-		end, { var37, t_3, products, var43 })
-		reactModule.useEffect(function()
-			-- upvalues: var50 (ref), isProductSaleStatusPending (ref), var45 (write), withoutToggleOverrides (copy)
-			if not var50 and not isProductSaleStatusPending then
-				var45(withoutToggleOverrides)
-			end
-		end, { products })
-	end
-	local var60
-	local var61 = reactModule.useCallback(function()
-		-- upvalues: var32 (ref), var39 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationProductEditingModule (copy), isProductEditPending (ref), v (ref), setProductEditError (ref), var40 (ref), selectedProductIdRef (ref), fFlagBuildExperienceMonetizationMultiKindModule (copy), var44 (write), var42 (ref), var37 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var31 (ref), p16 (ref)
-		local t = { mode = tostring(var39) }
+	end, { var31, var26, var33 })
+	local var43 = reactModule.useCallback(function()
+		-- upvalues: var27 (ref), var33 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationProductEditingModule (copy), isProductEditPending (ref), var41 (ref), setProductEditError (ref), var34 (ref), selectedProductIdRef (ref), var36 (ref), var31 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var26 (ref), p11 (ref)
+		local t = { mode = tostring(var33) }
 		
 		if t == nil then
-			sendBuildExperienceEventModule("MONETIZATION_CLOSE_CLICK", var32)
+			sendBuildExperienceEventModule("MONETIZATION_CLOSE_CLICK", var27)
 		else
-			sendBuildExperienceEventModule("MONETIZATION_CLOSE_CLICK", var32, t)
+			sendBuildExperienceEventModule("MONETIZATION_CLOSE_CLICK", var27, t)
 		end
-		if fFlagBuildExperienceMonetizationProductEditingModule and var39 == "edit" then
-			if isProductEditPending or v.current ~= nil then
+		if fFlagBuildExperienceMonetizationProductEditingModule and var33 == "edit" then
+			if isProductEditPending or var41.current ~= nil then
 				return
 			end
 			setProductEditError(nil)
-			var40("detail")
+			var34("detail")
 			
 			return
-		elseif var39 == "detail" then
+		elseif var33 == "detail" then
 			if fFlagBuildExperienceMonetizationProductEditingModule then
 				selectedProductIdRef.current = nil
 			end
-			if fFlagBuildExperienceMonetizationMultiKindModule then
-				var44(nil)
-			else
-				var42(nil)
-			end
-			var40(var37)
+			var36(nil)
+			var34(var31)
 			
 			return
-		elseif fFlagBuildExperienceMonetizationNativeUIModule and var39 == "options" and var31 ~= "options" then
-			var40(var37)
+		elseif fFlagBuildExperienceMonetizationNativeUIModule and var33 == "options" and var26 ~= "options" then
+			var34(var31)
 			
 			return
 		end
-		p16.onClose()
+		p11.onClose()
 	end, {
-		var37,
+		var31,
 		if fFlagBuildExperienceMonetizationProductEditingModule then isProductEditPending else nil,
-		var39, var31, p16.onClose, var32, setProductEditError
+		var33, var26, p11.onClose, var27, setProductEditError
 	})
-	local var62 = reactModule.useCallback(function(p17)
-		-- upvalues: products (ref), fFlagBuildExperienceMonetizationMultiKindModule (copy), var32 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationProductEditingModule (copy), var53 (ref), setProductSaleStatusError (ref), setProductEditError (ref), selectedProductIdRef (ref), var44 (write), var42 (ref), var40 (ref)
+	local var44 = reactModule.useCallback(function(p12)
+		-- upvalues: products (ref), var27 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationProductEditingModule (copy), var40 (ref), setProductSaleStatusError (ref), setProductEditError (ref), selectedProductIdRef (ref), var36 (ref), var34 (ref)
 		for i, v in products do
-			if (v.identity or v.id) == p17 then
+			if v.id == p12 then
 				local t = { productId = v.id }
 				
-				if fFlagBuildExperienceMonetizationMultiKindModule then
-					t.productKind = v.productKind
-				end
 				if t == nil then
-					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_CLICK", var32)
+					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_CLICK", var27)
 				else
-					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_CLICK", var32, t)
+					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_CLICK", var27, t)
 				end
 				if fFlagBuildExperienceMonetizationProductEditingModule then
-					var53(false)
+					var40(false)
 					setProductSaleStatusError(false)
 					setProductEditError(nil)
 				end
 				if fFlagBuildExperienceMonetizationProductEditingModule then
-					selectedProductIdRef.current = v.identity or v.id
+					selectedProductIdRef.current = v.id
 				end
-				if fFlagBuildExperienceMonetizationMultiKindModule then
-					var44(p17)
-				else
-					var42(v)
-				end
-				var40("detail")
+				var36(v)
+				var34("detail")
 				
 				return
 			end
 		end
-	end, {
-		products,
-		setProductEditError,
-		setProductSaleStatusError,
-		var32
-	})
-	local var63 = if fFlagBuildExperienceMonetizationNativeUIModule then reactModule.useCallback(function()
-		-- upvalues: var40 (ref)
-		var40("options")
+	end, { products, var27 })
+	local var45 = if fFlagBuildExperienceMonetizationNativeUIModule then reactModule.useCallback(function()
+		-- upvalues: var34 (ref)
+		var34("options")
 	end, {}) else function() end
-	local var64 = reactModule.useCallback(function(p18)
-		-- upvalues: var28 (ref), p16 (ref), var34 (ref), var33 (ref), v (ref), var36 (ref), var50 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), isProductSaleStatusPending (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var53 (ref), var32 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationMultiKindModule (copy), var45 (write), var42 (ref), var51 (ref), formatErrorModule (copy), selectedProductIdRef (ref)
-		local var65
-		local var66 = if var28 ~= nil then nil else tonumber(var28.id)
-		local onUpdateProductManagedPricing = p16.onUpdateProductManagedPricing
+	local var46 = reactModule.useCallback(function(p13)
+		-- upvalues: var35 (ref), p11 (ref), var29 (ref), var28 (ref), var41 (ref), var37 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), isProductSaleStatusPending (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), var40 (ref), var27 (ref), sendBuildExperienceEventModule (copy), var36 (ref), var38 (ref), formatErrorModule (copy), selectedProductIdRef (ref)
+		local var47 = if var35 ~= nil then nil else tonumber(var35.id)
+		local onUpdateProductManagedPricing = p11.onUpdateProductManagedPricing
 		
-		if var34.current == var33 and v.current == nil and var28 ~= nil then
-			var65 = not (var28 == nil or var28.productKind == nil) and (var28.productKind == "DeveloperProduct" and var28.canManage ~= false)
-			
-			if var65 and var36 and (var66 ~= nil and onUpdateProductManagedPricing ~= nil) and (not var50 and (not fFlagBuildExperienceMonetizationProductEditingModule or not isProductSaleStatusPending)) then
-				var65 = var28 ~= nil and (if var28.isArchived ~= true then if var28.isImmutable ~= true then var28.isInActivePriceOptimizationExperiment == true else true else true)
-				
-				if var65 then return end
-				if fFlagBuildExperienceMonetizationNativeUIModule and p18 and var28.priceInRobux == nil then
-					var53(true)
-					
-					return
-				end
-				var65 = {}
-				v.current = var65
-				local t = { isEnabled = tostring(p18), productId = var28.id }
-				
-				if t == nil then
-					sendBuildExperienceEventModule("MONETIZATION_MANAGED_PRICING_CLICK", var32)
-				else
-					sendBuildExperienceEventModule("MONETIZATION_MANAGED_PRICING_CLICK", var32, t)
-				end
-				local cloned = table.clone(var28)
-				cloned.isManagedPricingEnabled = p18
-				
-				if fFlagBuildExperienceMonetizationMultiKindModule then
-					local var67 = "managedPricing"
-					var45(function(p19)
-						-- upvalues: cloned (ref), var67 (ref)
-						local identity = cloned.identity or cloned.id
-						local cloned = table.clone(p19[identity] or {})
-						cloned[var67] = cloned
-						local cloned_1 = table.clone(p19)
-						cloned_1[identity] = cloned
-						
-						return cloned_1
-					end)
-				else
-					var42(cloned)
-				end
-				var53(false)
-				var51(true)
-				onUpdateProductManagedPricing(var66, p18):andThen(function()
-					-- upvalues: var34 (copy), var33 (copy), v (copy), var65 (ref), var32 (copy), var28 (ref), sendBuildExperienceEventModule (copy)
-					if var34.current ~= var33 or v.current ~= var65 then return end
-					local t = { action = "managed_pricing", productId = var28.id }
-					
-					if t == nil then
-						sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var32)
-						
-						return
-					end
-					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var32, t)
-				end):catch(function(p19)
-					-- upvalues: var34 (copy), var33 (copy), v (copy), var65 (ref), var28 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy), fFlagBuildExperienceMonetizationMultiKindModule (copy), var45 (copy), var32 (copy), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationProductEditingModule (copy), selectedProductIdRef (copy), var42 (copy), var53 (copy)
-					if var34.current ~= var33 or v.current ~= var65 then return end
-					local id = var28.id
-					
-					if fFlagBuildExperienceMonetizationNativeUIModule then
-						warn(`[DeveloperProduct] action=managed_pricing productId={id} failed={string.sub(string.gsub(formatErrorModule(p19), "[\r\n]+", " "), 1, 200)}`)
-					end
-					if fFlagBuildExperienceMonetizationMultiKindModule then
-						local var68 = var45
-						local identity = var28.identity or var28.id
-						local var69 = "managedPricing"
-						var68(function(p20)
-							-- upvalues: identity (ref), var69 (ref)
-							if (p20[identity] or {})[var69] == nil then
-								return p20
-							end
-							local cloned = table.clone(p20[identity])
-							cloned[var69] = nil
-							local cloned_1 = table.clone(p20)
-							cloned_1[identity] = cloned
-							
-							if next(cloned) == nil then
-								cloned_1[identity] = nil
-							end
-							return cloned_1
-						end)
-					end
-					local t = { action = "managed_pricing", productId = var28.id }
-					
-					if t == nil then
-						sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var32)
-					else
-						sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var32, t)
-					end
-					if fFlagBuildExperienceMonetizationProductEditingModule then
-						local var70 = var28
-						
-						if selectedProductIdRef.current == (var70.identity or var70.id) then
-							if not fFlagBuildExperienceMonetizationMultiKindModule then
-								var42(var28)
-							end
-							var53(true)
-						end
-					end
-				end):finally(function()
-					-- upvalues: var34 (copy), var33 (copy), v (copy), var65 (ref), var51 (copy)
-					if var34.current == var33 and v.current == var65 then
-						v.current = nil
-						var51(false)
-					end
-				end)
+		if var29.current == var28 and var41.current == nil and (var35 ~= nil and var47 ~= nil) and (onUpdateProductManagedPricing ~= nil and not var37 and (not fFlagBuildExperienceMonetizationProductEditingModule or not isProductSaleStatusPending)) then
+			if var35 ~= nil and (if var35.isArchived ~= true then if var35.isImmutable ~= true then var35.isInActivePriceOptimizationExperiment == true else true else true) then return end
+			if fFlagBuildExperienceMonetizationNativeUIModule and p13 and var35.priceInRobux == nil then
+				var40(true)
 				
 				return
 			end
-		end
-	end, {
-		var36, var50,
-		if fFlagBuildExperienceMonetizationProductEditingModule then isProductSaleStatusPending else nil,
-		p16.onUpdateProductManagedPricing, var28, var32, var33
-	})
-	local var65 = reactModule.useCallback(function(p18)
-		-- upvalues: var28 (ref), p16 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), var34 (ref), var33 (ref), v (ref), var36 (ref), isProductSaleStatusPending (ref), var50 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), setProductSaleStatusError (ref), var32 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationMultiKindModule (copy), var45 (write), var42 (ref), setIsProductSaleStatusPending (ref), formatErrorModule (copy), selectedProductIdRef (ref)
-		local var66
-		local var67 = if var28 ~= nil then nil else tonumber(var28.id)
-		local onUpdateProductSaleStatus = p16.onUpdateProductSaleStatus
-		
-		if fFlagBuildExperienceMonetizationProductEditingModule and var34.current == var33 and (v.current == nil and var28 ~= nil) then
-			var66 = not (var28 == nil or var28.productKind == nil) and (var28.productKind == "DeveloperProduct" and var28.canManage ~= false)
+			local t = {}
+			var41.current = t
+			local t_1 = { isEnabled = tostring(p13), productId = var35.id }
 			
-			if var66 and var36 and (var67 ~= nil and onUpdateProductSaleStatus ~= nil) and (not isProductSaleStatusPending and not var50) then
-				var66 = var28 ~= nil and (if var28.isArchived ~= true then if var28.isImmutable ~= true then var28.isInActivePriceOptimizationExperiment == true else true else true)
-				
-				if var66 then return end
-				if fFlagBuildExperienceMonetizationNativeUIModule and p18 and var28.priceInRobux == nil then
-					setProductSaleStatusError(true)
-					
-					return
-				end
-				var66 = {}
-				v.current = var66
-				local t = { isEnabled = tostring(p18), productId = var28.id }
-				
-				if t == nil then
-					sendBuildExperienceEventModule("MONETIZATION_SALE_STATUS_CLICK", var32)
-				else
-					sendBuildExperienceEventModule("MONETIZATION_SALE_STATUS_CLICK", var32, t)
-				end
-				local cloned = table.clone(var28)
-				cloned.isForSale = p18
-				
-				if fFlagBuildExperienceMonetizationMultiKindModule then
-					local var68 = "saleStatus"
-					var45(function(p19)
-						-- upvalues: cloned (ref), var68 (ref)
-						local identity = cloned.identity or cloned.id
-						local cloned = table.clone(p19[identity] or {})
-						cloned[var68] = cloned
-						local cloned_1 = table.clone(p19)
-						cloned_1[identity] = cloned
-						
-						return cloned_1
-					end)
-				else
-					var42(cloned)
-				end
-				setProductSaleStatusError(false)
-				setIsProductSaleStatusPending(true)
-				onUpdateProductSaleStatus(var67, p18):andThen(function()
-					-- upvalues: var34 (copy), var33 (copy), v (copy), var66 (ref), var32 (copy), var28 (ref), sendBuildExperienceEventModule (copy)
-					if var34.current ~= var33 or v.current ~= var66 then return end
-					local t = { action = "sale_status", productId = var28.id }
-					
-					if t == nil then
-						sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var32)
-						
-						return
-					end
-					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var32, t)
-				end):catch(function(p19)
-					-- upvalues: var34 (copy), var33 (copy), v (copy), var66 (ref), var28 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy), fFlagBuildExperienceMonetizationMultiKindModule (copy), var45 (copy), var32 (copy), sendBuildExperienceEventModule (copy), selectedProductIdRef (copy), var42 (copy), setProductSaleStatusError (copy)
-					if var34.current ~= var33 or v.current ~= var66 then return end
-					local id = var28.id
-					
-					if fFlagBuildExperienceMonetizationNativeUIModule then
-						warn(`[DeveloperProduct] action=sale_status productId={id} failed={string.sub(string.gsub(formatErrorModule(p19), "[\r\n]+", " "), 1, 200)}`)
-					end
-					if fFlagBuildExperienceMonetizationMultiKindModule then
-						local var69 = var45
-						local identity = var28.identity or var28.id
-						local var70 = "saleStatus"
-						var69(function(p20)
-							-- upvalues: identity (ref), var70 (ref)
-							if (p20[identity] or {})[var70] == nil then
-								return p20
-							end
-							local cloned = table.clone(p20[identity])
-							cloned[var70] = nil
-							local cloned_1 = table.clone(p20)
-							cloned_1[identity] = cloned
-							
-							if next(cloned) == nil then
-								cloned_1[identity] = nil
-							end
-							return cloned_1
-						end)
-					end
-					local t = { action = "sale_status", productId = var28.id }
-					
-					if t == nil then
-						sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var32)
-					else
-						sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var32, t)
-					end
-					if selectedProductIdRef.current == (var28.identity or var28.id) then
-						if not fFlagBuildExperienceMonetizationMultiKindModule then
-							var42(var28)
-						end
-						setProductSaleStatusError(true)
-					end
-				end):finally(function()
-					-- upvalues: var34 (copy), var33 (copy), v (copy), var66 (ref), setIsProductSaleStatusPending (copy)
-					if var34.current == var33 and v.current == var66 then
-						v.current = nil
-						setIsProductSaleStatusPending(false)
-					end
-				end)
-				
-				return
-			end
-		end
-	end, {
-		var36, var50, isProductSaleStatusPending, p16.onUpdateProductSaleStatus,
-		var28, setIsProductSaleStatusPending, setProductSaleStatusError, var32, var33
-	})
-	local var66 = reactModule.useCallback(function()
-		-- upvalues: var28 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), var36 (ref), var32 (ref), sendBuildExperienceEventModule (copy), setEditName (ref), setEditDescription (ref), setEditPrice (ref), setProductEditError (ref), var40 (ref)
-		if fFlagBuildExperienceMonetizationProductEditingModule and var28 ~= nil then
-			local var67 = not (var28 == nil or var28.productKind == nil) and (var28.productKind == "DeveloperProduct" and var28.canManage ~= false)
-			
-			if var67 and var36 then
-				var67 = var28 ~= nil and (if var28.isArchived ~= true then if var28.isImmutable ~= true then var28.isInActivePriceOptimizationExperiment == true else true else true)
-				
-				if var67 then return end
-				local t = { productId = var28.id }
-				
-				if t == nil then
-					sendBuildExperienceEventModule("MONETIZATION_EDIT_CLICK", var32)
-				else
-					sendBuildExperienceEventModule("MONETIZATION_EDIT_CLICK", var32, t)
-				end
-				setEditName(var28.name)
-				setEditDescription(var28.description)
-				setEditPrice(if var28.priceInRobux ~= nil then "" else tostring(var28.priceInRobux))
-				setProductEditError(nil)
-				var40("edit")
-				
-				return
-			end
-		end
-	end, {
-		var36, var28, setEditDescription, setEditName, setEditPrice,
-		setProductEditError, var32
-	})
-	local var67 = reactModule.useCallback(function(p18)
-		-- upvalues: setEditName (ref), setProductEditError (ref)
-		setEditName(p18)
-		setProductEditError(nil)
-	end, {})
-	local var68 = reactModule.useCallback(function(p18)
-		-- upvalues: setEditDescription (ref), setProductEditError (ref)
-		setEditDescription(p18)
-		setProductEditError(nil)
-	end, {})
-	local var69 = reactModule.useCallback(function(p18)
-		-- upvalues: setEditPrice (ref), setProductEditError (ref)
-		setEditPrice(p18)
-		setProductEditError(nil)
-	end, {})
-	local var70 = reactModule.useCallback(function()
-		-- upvalues: isProductEditPending (ref), v (ref), var28 (ref), var32 (ref), sendBuildExperienceEventModule (copy), setProductEditError (ref), var40 (ref)
-		if isProductEditPending or v.current ~= nil then return end
-		local var71 = if var28 ~= nil then nil else { productId = var28.id }
-		
-		if var71 == nil then
-			sendBuildExperienceEventModule("MONETIZATION_EDIT_CANCEL_CLICK", var32)
-		else
-			sendBuildExperienceEventModule("MONETIZATION_EDIT_CANCEL_CLICK", var32, var71)
-		end
-		setProductEditError(nil)
-		var40("detail")
-	end, { isProductEditPending, var28, var32 })
-	local var71 = reactModule.useCallback(function()
-		-- upvalues: var28 (ref), p16 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), var34 (ref), var33 (ref), v (ref), var36 (ref), isProductEditPending (ref), var32 (ref), sendBuildExperienceEventModule (copy), editName (ref), setProductEditError (ref), var30 (ref), editDescription (ref), editPrice (ref), fFlagBuildExperienceRemoveDevProductPriceCap (copy), setIsProductEditPending (ref), fFlagBuildExperienceDevProductModerationReadbackModule (copy), fFlagBuildExperienceMonetizationMultiKindModule (copy), var45 (write), var42 (ref), var53 (ref), setProductSaleStatusError (ref), wasDeveloperProductTextModeratedModule (copy), selectedProductIdRef (ref), var40 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy)
-		local var72
-		local var73 = if var28 ~= nil then nil else tonumber(var28.id)
-		local onUpdateProduct = p16.onUpdateProduct
-		
-		if fFlagBuildExperienceMonetizationProductEditingModule and var34.current == var33 and (v.current == nil and var28 ~= nil) then
-			var72 = not (var28 == nil or var28.productKind == nil) and (var28.productKind == "DeveloperProduct" and var28.canManage ~= false)
-			
-			if not var72 or not var36 or (var73 == nil or onUpdateProduct == nil) or isProductEditPending then return end
-			local t = { productId = var28.id }
-			
-			if t == nil then
-				sendBuildExperienceEventModule("MONETIZATION_EDIT_SAVE_CLICK", var32)
+			if t_1 == nil then
+				sendBuildExperienceEventModule("MONETIZATION_MANAGED_PRICING_CLICK", var27)
 			else
-				sendBuildExperienceEventModule("MONETIZATION_EDIT_SAVE_CLICK", var32, t)
+				sendBuildExperienceEventModule("MONETIZATION_MANAGED_PRICING_CLICK", var27, t_1)
 			end
-			var72 = string.match(editName, "^%s*(.-)%s*$") or ""
-			
-			if var72 == "" then
-				setProductEditError(var30.nameRequiredError)
+			local cloned = table.clone(var35)
+			cloned.isManagedPricingEnabled = p13
+			var36(cloned)
+			var40(false)
+			var38(true)
+			onUpdateProductManagedPricing(var47, p13):andThen(function()
+				-- upvalues: var29 (copy), var28 (copy), var41 (copy), t (ref), var27 (copy), var35 (ref), sendBuildExperienceEventModule (copy)
+				if var29.current ~= var28 or var41.current ~= t then return end
+				local t_1 = { action = "managed_pricing", productId = var35.id }
 				
-				return
-			elseif (utf8.len(var72) or #var72) > 50 then
-				setProductEditError(var30.nameLengthError)
-				
-				return
-			elseif (utf8.len(editDescription) or #editDescription) > 1000 then
-				setProductEditError(var30.descriptionLengthError)
-				
-				return
-			end
-			local var74 = tonumber(editPrice)
-			
-			if editPrice == "" and var28.isForSale == true or editPrice ~= "" and var74 == nil or (var74 ~= nil and var74 % 1 ~= 0 or var74 ~= nil and var74 < 1) or not fFlagBuildExperienceRemoveDevProductPriceCap and var74 ~= nil and var74 > 1000000000 then
-				setProductEditError(var30.priceError)
-				
-				return
-			end
-			local t_1 = {}
-			v.current = t_1
-			setProductEditError(nil)
-			setIsProductEditPending(true)
-			onUpdateProduct(var73, {
-				name = var72,
-				description = editDescription,
-				priceInRobux = var74
-			}):andThen(function(_)
-				-- upvalues: var34 (copy), var33 (copy), v (copy), t_1 (ref), var32 (copy), var28 (ref), sendBuildExperienceEventModule (copy), fFlagBuildExperienceDevProductModerationReadbackModule (copy), var72 (ref), editDescription (copy), var74 (ref), fFlagBuildExperienceMonetizationMultiKindModule (copy), var45 (copy), var42 (copy), var53 (copy), setProductSaleStatusError (copy), wasDeveloperProductTextModeratedModule (copy), setProductEditError (copy), var30 (copy), selectedProductIdRef (copy), var40 (copy)
--- FATAL: Failed to generate AST for `unnamed` function:
-runtime : [KeyError] :11990: 716
-Traceback:
-	runtime : [lunaux]:11990 function decompile_function
-	runtime : [lunaux]:1933 function normalize_cfg
-	runtime : [lunaux]:1320 function match_weird_patterns
-			end):catch(function(p18)
-				-- upvalues: var34 (copy), var33 (copy), v (copy), t_1 (ref), var28 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy), var32 (copy), sendBuildExperienceEventModule (copy), setProductEditError (copy), var30 (copy)
-				if var34.current ~= var33 or v.current ~= t_1 then return end
-				local id = var28.id
+				if t_1 == nil then
+					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var27)
+					
+					return
+				end
+				sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var27, t_1)
+			end):catch(function(p14)
+				-- upvalues: var29 (copy), var28 (copy), var41 (copy), t (ref), var35 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy), var27 (copy), sendBuildExperienceEventModule (copy), fFlagBuildExperienceMonetizationProductEditingModule (copy), selectedProductIdRef (copy), var36 (copy), var40 (copy)
+				if var29.current ~= var28 or var41.current ~= t then return end
+				local id = var35.id
 				
 				if fFlagBuildExperienceMonetizationNativeUIModule then
-					warn(`[DeveloperProduct] action=product_details productId={id} failed={string.sub(string.gsub(formatErrorModule(p18), "[\r\n]+", " "), 1, 200)}`)
+					warn(`[DeveloperProduct] action=managed_pricing productId={id} failed={string.sub(string.gsub(formatErrorModule(p14), "[\r\n]+", " "), 1, 200)}`)
 				end
-				local t = { action = "product_details", productId = var28.id }
+				local t_1 = { action = "managed_pricing", productId = var35.id }
 				
-				if t == nil then
-					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var32)
+				if t_1 == nil then
+					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var27)
 				else
-					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var32, t)
+					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var27, t_1)
 				end
-				setProductEditError(var30.updateError)
+				if not fFlagBuildExperienceMonetizationProductEditingModule or selectedProductIdRef.current == var35.id then
+					var36(var35)
+					var40(true)
+				end
 			end):finally(function()
-				-- upvalues: var34 (copy), var33 (copy), v (copy), t_1 (ref), setIsProductEditPending (copy)
-				if var34.current == var33 and v.current == t_1 then
-					v.current = nil
-					setIsProductEditPending(false)
+				-- upvalues: var29 (copy), var28 (copy), var41 (copy), t (ref), var38 (copy)
+				if var29.current == var28 and var41.current == t then
+					var41.current = nil
+					var38(false)
 				end
 			end)
 			
 			return
 		end
 	end, {
-		var36, editDescription, editName, editPrice, isProductEditPending,
-		var30.descriptionLengthError, var30.moderationError, var30.nameLengthError,
-		var30.nameRequiredError, var30.priceError, var30.updateError,
-		p16.onUpdateProduct, var28, setIsProductEditPending, setProductEditError,
-		setProductSaleStatusError, var32, var33
+		var37,
+		if fFlagBuildExperienceMonetizationProductEditingModule then isProductSaleStatusPending else nil,
+		p11.onUpdateProductManagedPricing, var35, var27, var28
 	})
-	local onComposerActivated = p16.onComposerActivated or p16.onClose
-	local var75 = nil
-	local var76 = nil
-	
-	if fFlagBuildExperienceDeveloperProductContextModule then
-		local var77, var78 = reactModule.useBinding("")
-		local var79 = reactModule.useRef(nil)
-		var76 = useOnScreenKeyboardHeightModule()
-		reactModule.useEffect(function()
-			-- upvalues: var78 (ref)
-			var78("")
-		end, {
-			p16.universeId or 0,
-			p16.sessionId or "",
-			if var28 ~= nil then "" else var28.id,
-			var78
-		})
-		local var80 = reactModule.useCallback(function()
-			-- upvalues: var77 (ref), var39 (ref), var28 (ref), p16 (ref), getBuildPromptDraftStoreModule (copy), var1 (copy), var78 (ref), var79 (ref), onComposerActivated (ref)
-			local var81 = string.match(var77:getValue(), "^%s*(.-)%s*$") or ""
-			
-			if var81 == "" or var39 ~= "detail" or (var28 == nil or p16.universeId == nil) then
-				return false
-			end
-			getBuildPromptDraftStoreModule().queueDraft({
-				autoSend = true,
-				universeId = p16.universeId,
-				sessionId = p16.sessionId,
-				text = var81,
-				resourceAttachments = {
-					{
-						type = "resource_link",
-						mimeType = "application/json",
-						name = var28.name,
-						uri = var1({ universeId = p16.universeId, productId = var28.id })
-					}
-				}
-			})
-			var78("")
-			
-			if var79.current ~= nil then
-				var79.current.releaseFocus()
-			end
-			onComposerActivated()
-			
-			return true
-		end, {
-			var77, onComposerActivated, var39, p16.sessionId, p16.universeId, var28,
-			var78
-		})
+	local var47 = reactModule.useCallback(function(p13)
+		-- upvalues: var35 (ref), p11 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), var29 (ref), var28 (ref), var41 (ref), isProductSaleStatusPending (ref), var37 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), setProductSaleStatusError (ref), var27 (ref), sendBuildExperienceEventModule (copy), var36 (ref), setIsProductSaleStatusPending (ref), formatErrorModule (copy), selectedProductIdRef (ref)
+		local var48 = if var35 ~= nil then nil else tonumber(var35.id)
+		local onUpdateProductSaleStatus = p11.onUpdateProductSaleStatus
 		
-		if var39 == "detail" and var28 ~= nil then
-			var60 = not (var28 == nil or var28.productKind == nil) and (var28.productKind == "DeveloperProduct" and var28.canManage ~= false)
-			var75 = if var60 and p16.universeId ~= nil then {
-				isAssistantResponding = false,
-				canSendWhileResponding = false,
-				allowImageAttachments = false,
-				tracksExternalText = true,
-				composerText = var77,
-				onComposerChanged = var78,
-				placeholder = var30.composerPlaceholder,
-				textBoxRef = var79,
-				onSend = var80,
-				onStop = function() end
-			} else nil
-		end
-	end
-	local var81 = reactModule.useCallback(function()
-		-- upvalues: var36 (ref), var32 (ref), sendBuildExperienceEventModule (copy), p16 (ref), getBuildPromptDraftStoreModule (copy), var30 (ref), onComposerActivated (ref)
-		if not var36 then return end
-		sendBuildExperienceEventModule("MONETIZATION_CREATE_CLICK", var32)
-		
-		if p16.onCreateProduct == nil then
-			getBuildPromptDraftStoreModule().queueDraft({
-				universeId = p16.universeId,
-				sessionId = p16.sessionId,
-				text = var30.createProductPrompt
-			})
-			onComposerActivated()
+		if fFlagBuildExperienceMonetizationProductEditingModule and var29.current == var28 and (var41.current == nil and var35 ~= nil) and (var48 ~= nil and onUpdateProductSaleStatus ~= nil and (not isProductSaleStatusPending and not var37)) then
+			if var35 ~= nil and (if var35.isArchived ~= true then if var35.isImmutable ~= true then var35.isInActivePriceOptimizationExperiment == true else true else true) then return end
+			if fFlagBuildExperienceMonetizationNativeUIModule and p13 and var35.priceInRobux == nil then
+				setProductSaleStatusError(true)
+				
+				return
+			end
+			local t = {}
+			var41.current = t
+			local t_1 = { isEnabled = tostring(p13), productId = var35.id }
+			
+			if t_1 == nil then
+				sendBuildExperienceEventModule("MONETIZATION_SALE_STATUS_CLICK", var27)
+			else
+				sendBuildExperienceEventModule("MONETIZATION_SALE_STATUS_CLICK", var27, t_1)
+			end
+			local cloned = table.clone(var35)
+			cloned.isForSale = p13
+			var36(cloned)
+			setProductSaleStatusError(false)
+			setIsProductSaleStatusPending(true)
+			onUpdateProductSaleStatus(var48, p13):andThen(function()
+				-- upvalues: var29 (copy), var28 (copy), var41 (copy), t (ref), var27 (copy), var35 (ref), sendBuildExperienceEventModule (copy)
+				if var29.current ~= var28 or var41.current ~= t then return end
+				local t_1 = { action = "sale_status", productId = var35.id }
+				
+				if t_1 == nil then
+					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var27)
+					
+					return
+				end
+				sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var27, t_1)
+			end):catch(function(p14)
+				-- upvalues: var29 (copy), var28 (copy), var41 (copy), t (ref), var35 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy), var27 (copy), sendBuildExperienceEventModule (copy), selectedProductIdRef (copy), var36 (copy), setProductSaleStatusError (copy)
+				if var29.current ~= var28 or var41.current ~= t then return end
+				local id = var35.id
+				
+				if fFlagBuildExperienceMonetizationNativeUIModule then
+					warn(`[DeveloperProduct] action=sale_status productId={id} failed={string.sub(string.gsub(formatErrorModule(p14), "[\r\n]+", " "), 1, 200)}`)
+				end
+				local t_1 = { action = "sale_status", productId = var35.id }
+				
+				if t_1 == nil then
+					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var27)
+				else
+					sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var27, t_1)
+				end
+				if selectedProductIdRef.current == var35.id then
+					var36(var35)
+					setProductSaleStatusError(true)
+				end
+			end):finally(function()
+				-- upvalues: var29 (copy), var28 (copy), var41 (copy), t (ref), setIsProductSaleStatusPending (copy)
+				if var29.current == var28 and var41.current == t then
+					var41.current = nil
+					setIsProductSaleStatusPending(false)
+				end
+			end)
 			
 			return
 		end
-		p16.onCreateProduct()
 	end, {
-		onComposerActivated, var30.createProductPrompt, var36, p16.onCreateProduct,
-		p16.sessionId, p16.universeId, var32
+		var37, isProductSaleStatusPending, p11.onUpdateProductSaleStatus, var35, var27,
+		var28
 	})
-	local var82 = reactModule.useCallback(function()
-		-- upvalues: var32 (ref), sendBuildExperienceEventModule (copy), p16 (ref)
-		sendBuildExperienceEventModule("MONETIZATION_RETRY_CLICK", var32)
-		
-		if p16.onRetryCatalog ~= nil then
-			p16.onRetryCatalog()
+	local var48 = reactModule.useCallback(function()
+		-- upvalues: var35 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), var27 (ref), sendBuildExperienceEventModule (copy), setEditName (ref), setEditDescription (ref), setEditPrice (ref), setProductEditError (ref), var34 (ref)
+		if fFlagBuildExperienceMonetizationProductEditingModule and var35 ~= nil then
+			if var35 ~= nil and (if var35.isArchived ~= true then if var35.isImmutable ~= true then var35.isInActivePriceOptimizationExperiment == true else true else true) then return end
+			local t = { productId = var35.id }
+			
+			if t == nil then
+				sendBuildExperienceEventModule("MONETIZATION_EDIT_CLICK", var27)
+			else
+				sendBuildExperienceEventModule("MONETIZATION_EDIT_CLICK", var27, t)
+			end
+			setEditName(var35.name)
+			setEditDescription(var35.description)
+			setEditPrice(if var35.priceInRobux ~= nil then "" else tostring(var35.priceInRobux))
+			setProductEditError(nil)
+			var34("edit")
+			
+			return
 		end
-	end, { p16.onRetryCatalog, var32 })
-	local var83 = if fFlagBuildExperienceMonetizationMultiKindModule then reactModule.useCallback(function(p18)
-		-- upvalues: var32 (ref), sendBuildExperienceEventModule (copy), p16 (ref)
-		local t = { catalogKind = tostring(p18) }
+	end, { var35, var27 })
+	local var49 = reactModule.useCallback(function(p13)
+		-- upvalues: setEditName (ref), setProductEditError (ref)
+		setEditName(p13)
+		setProductEditError(nil)
+	end, {})
+	local var50 = reactModule.useCallback(function(p13)
+		-- upvalues: setEditDescription (ref), setProductEditError (ref)
+		setEditDescription(p13)
+		setProductEditError(nil)
+	end, {})
+	local var51 = reactModule.useCallback(function(p13)
+		-- upvalues: setEditPrice (ref), setProductEditError (ref)
+		setEditPrice(p13)
+		setProductEditError(nil)
+	end, {})
+	local var52 = reactModule.useCallback(function()
+		-- upvalues: isProductEditPending (ref), var41 (ref), var35 (ref), var27 (ref), sendBuildExperienceEventModule (copy), setProductEditError (ref), var34 (ref)
+		if isProductEditPending or var41.current ~= nil then return end
+		local var53 = if var35 ~= nil then nil else { productId = var35.id }
+		
+		if var53 == nil then
+			sendBuildExperienceEventModule("MONETIZATION_EDIT_CANCEL_CLICK", var27)
+		else
+			sendBuildExperienceEventModule("MONETIZATION_EDIT_CANCEL_CLICK", var27, var53)
+		end
+		setProductEditError(nil)
+		var34("detail")
+	end, { isProductEditPending, var35, var27 })
+	local var53 = reactModule.useCallback(function()
+		-- upvalues: var35 (ref), p11 (ref), fFlagBuildExperienceMonetizationProductEditingModule (copy), var29 (ref), var28 (ref), var41 (ref), isProductEditPending (ref), var27 (ref), sendBuildExperienceEventModule (copy), editName (ref), setProductEditError (ref), var25 (ref), editDescription (ref), editPrice (ref), fFlagBuildExperienceRemoveDevProductPriceCap (copy), setIsProductEditPending (ref), var36 (ref), var40 (ref), setProductSaleStatusError (ref), var34 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy)
+		local var54 = if var35 ~= nil then nil else tonumber(var35.id)
+		local onUpdateProduct = p11.onUpdateProduct
+		
+		if not fFlagBuildExperienceMonetizationProductEditingModule or var29.current ~= var28 or (var41.current ~= nil or var35 == nil) or (var54 == nil or onUpdateProduct == nil or isProductEditPending) then return end
+		local t = { productId = var35.id }
 		
 		if t == nil then
-			sendBuildExperienceEventModule("MONETIZATION_RETRY_CLICK", var32)
+			sendBuildExperienceEventModule("MONETIZATION_EDIT_SAVE_CLICK", var27)
 		else
-			sendBuildExperienceEventModule("MONETIZATION_RETRY_CLICK", var32, t)
+			sendBuildExperienceEventModule("MONETIZATION_EDIT_SAVE_CLICK", var27, t)
 		end
-		if p16.onRetryCatalogSource ~= nil then
-			p16.onRetryCatalogSource(p18)
+		local var55 = string.match(editName, "^%s*(.-)%s*$") or ""
+		
+		if var55 == "" then
+			setProductEditError(var25.nameRequiredError)
+			
+			return
+		elseif (utf8.len(var55) or #var55) > 50 then
+			setProductEditError(var25.nameLengthError)
+			
+			return
+		elseif (utf8.len(editDescription) or #editDescription) > 1000 then
+			setProductEditError(var25.descriptionLengthError)
+			
+			return
 		end
-	end, { p16.onRetryCatalogSource, var32 }) else nil
-	local t_4 = {
-		mode = var39,
-		keyboardHeight = if fFlagBuildExperienceDeveloperProductContextModule then if var39 == "detail" then var76 else 0 else nil,
-		chatActions = var75,
+		local var56 = tonumber(editPrice)
+		
+		if editPrice == "" and var35.isForSale == true or editPrice ~= "" and var56 == nil or (var56 ~= nil and var56 % 1 ~= 0 or var56 ~= nil and var56 < 1) or not fFlagBuildExperienceRemoveDevProductPriceCap and var56 ~= nil and var56 > 1000000000 then
+			setProductEditError(var25.priceError)
+			
+			return
+		end
+		local t_1 = {}
+		var41.current = t_1
+		setProductEditError(nil)
+		setIsProductEditPending(true)
+		onUpdateProduct(var54, {
+			name = var55,
+			description = editDescription,
+			priceInRobux = var56
+		}):andThen(function(p13)
+			-- upvalues: var29 (copy), var28 (copy), var41 (copy), t_1 (ref), var27 (copy), var35 (ref), sendBuildExperienceEventModule (copy), var55 (ref), editDescription (copy), var56 (ref), var36 (copy), var40 (copy), setProductSaleStatusError (copy), setProductEditError (copy), var25 (copy), var34 (copy)
+			if var29.current ~= var28 or var41.current ~= t_1 then return end
+			local t = { action = "product_details", productId = var35.id }
+			
+			if t == nil then
+				sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var27)
+			else
+				sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_SUCCESS", var27, t)
+			end
+			local cloned = table.clone(var35)
+			cloned.name = p13.name or var55
+			cloned.description = if p13.description ~= nil then editDescription else p13.description
+			local var57 = (if p13.priceInformation ~= nil then nil else p13.priceInformation.defaultPriceInRobux) or (var56 or var35.priceInRobux)
+			cloned.priceInRobux = var57
+			cloned.price = if var57 ~= nil then var35.price else tostring(var57)
+			var36(cloned)
+			var40(false)
+			setProductSaleStatusError(false)
+			
+			if (p13.name == nil or p13.name == var55) and (p13.description == nil or p13.description == editDescription) then
+				var34("detail")
+				
+				return
+			end
+			setProductEditError(var25.moderationError)
+		end):catch(function(p13)
+			-- upvalues: var29 (copy), var28 (copy), var41 (copy), t_1 (ref), var35 (ref), fFlagBuildExperienceMonetizationNativeUIModule (copy), formatErrorModule (copy), var27 (copy), sendBuildExperienceEventModule (copy), setProductEditError (copy), var25 (copy)
+			if var29.current ~= var28 or var41.current ~= t_1 then return end
+			local id = var35.id
+			
+			if fFlagBuildExperienceMonetizationNativeUIModule then
+				warn(`[DeveloperProduct] action=product_details productId={id} failed={string.sub(string.gsub(formatErrorModule(p13), "[\r\n]+", " "), 1, 200)}`)
+			end
+			local t = { action = "product_details", productId = var35.id }
+			
+			if t == nil then
+				sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var27)
+			else
+				sendBuildExperienceEventModule("MONETIZATION_PRODUCT_UPDATE_FAILURE", var27, t)
+			end
+			setProductEditError(var25.updateError)
+		end):finally(function()
+			-- upvalues: var29 (copy), var28 (copy), var41 (copy), t_1 (ref), setIsProductEditPending (copy)
+			if var29.current == var28 and var41.current == t_1 then
+				var41.current = nil
+				setIsProductEditPending(false)
+			end
+		end)
+	end, {
+		editDescription, editName, editPrice, isProductEditPending,
+		var25.descriptionLengthError, var25.moderationError, var25.nameLengthError,
+		var25.nameRequiredError, var25.priceError, var25.updateError,
+		p11.onUpdateProduct, var35, var27, var28
+	})
+	local onComposerActivated = p11.onComposerActivated or p11.onClose
+	local var54 = nil
+	local var55 = nil
+	
+	if fFlagBuildExperienceDeveloperProductContextModule then
+		local var56, var57 = reactModule.useBinding("")
+		local var58 = reactModule.useRef(nil)
+		var55 = useOnScreenKeyboardHeightModule()
+		reactModule.useEffect(function()
+			-- upvalues: var57 (ref)
+			var57("")
+		end, {
+			p11.universeId or 0,
+			p11.sessionId or "",
+			if var35 ~= nil then "" else var35.id,
+			var57
+		})
+		var54 = if var33 == "detail" and var35 ~= nil and p11.universeId ~= nil then {
+			isAssistantResponding = false,
+			canSendWhileResponding = false,
+			allowImageAttachments = false,
+			tracksExternalText = true,
+			composerText = var56,
+			onComposerChanged = var57,
+			placeholder = var25.composerPlaceholder,
+			textBoxRef = var58,
+			onSend = reactModule.useCallback(function()
+				-- upvalues: var56 (ref), var33 (ref), var35 (ref), p11 (ref), getBuildPromptDraftStoreModule (copy), var1 (copy), var57 (ref), var58 (ref), onComposerActivated (ref)
+				local var59 = string.match(var56:getValue(), "^%s*(.-)%s*$") or ""
+				
+				if var59 == "" or var33 ~= "detail" or (var35 == nil or p11.universeId == nil) then
+					return false
+				end
+				getBuildPromptDraftStoreModule().queueDraft({
+					autoSend = true,
+					universeId = p11.universeId,
+					sessionId = p11.sessionId,
+					text = var59,
+					resourceAttachments = {
+						{
+							type = "resource_link",
+							mimeType = "application/json",
+							name = var35.name,
+							uri = var1({ universeId = p11.universeId, productId = var35.id })
+						}
+					}
+				})
+				var57("")
+				
+				if var58.current ~= nil then
+					var58.current.releaseFocus()
+				end
+				onComposerActivated()
+				
+				return true
+			end, {
+				var56, onComposerActivated, var33, p11.sessionId, p11.universeId, var35,
+				var57
+			}),
+			onStop = function() end
+		} else nil
+	end
+	return {
+		mode = var33,
+		keyboardHeight = if fFlagBuildExperienceDeveloperProductContextModule then if var33 == "detail" then var55 else 0 else nil,
+		chatActions = var54,
 		products = products,
-		catalogSources = p16.catalogSources,
-		showOptions = fFlagBuildExperienceMonetizationNativeUIModule and p16.showOptions == true,
-		optionsLoadStatus = var35.loadStatus,
-		canMonetize = var35.canMonetize,
-		canCreateProduct = var36,
-		canChangeManagedPricing = var35.canChangeManagedPricing,
-		managedPricingState = var35.managedPricingState,
-		managedPricingSupportingText = var35.managedPricingSupportingText,
-		shopButtonEnabled = var35.shopButtonEnabled,
-		isOptionsManagedPricingPending = var35.isManagedPricingPending,
-		isShopButtonPending = var35.isShopButtonPending,
-		managedPricingError = var35.managedPricingError,
-		shopButtonError = var35.shopButtonError,
-		showManagedPricingAcknowledgement = var35.showAcknowledgement,
-		disableDialogPortal = p16.disableDialogPortal,
-		selectedProduct = var28
+		showOptions = fFlagBuildExperienceMonetizationNativeUIModule and p11.showOptions == true,
+		optionsLoadStatus = var30.loadStatus,
+		canMonetize = var30.canMonetize,
+		canChangeManagedPricing = var30.canChangeManagedPricing,
+		managedPricingState = var30.managedPricingState,
+		managedPricingSupportingText = var30.managedPricingSupportingText,
+		shopButtonEnabled = var30.shopButtonEnabled,
+		isOptionsManagedPricingPending = var30.isManagedPricingPending,
+		isShopButtonPending = var30.isShopButtonPending,
+		managedPricingError = var30.managedPricingError,
+		shopButtonError = var30.shopButtonError,
+		showManagedPricingAcknowledgement = var30.showAcknowledgement,
+		disableDialogPortal = p11.disableDialogPortal,
+		selectedProduct = var35,
+		isProductDisabled = if p11.isProductDisabled ~= true then var35 ~= nil and (if var35.isArchived ~= true then if var35.isImmutable ~= true then var35.isInActivePriceOptimizationExperiment == true else true else true) else true,
+		isProductManagedPricingPending = var37,
+		isProductSaleStatusPending = isProductSaleStatusPending,
+		isProductEditPending = isProductEditPending,
+		canUpdateProductManagedPricing = p11.onUpdateProductManagedPricing ~= nil,
+		canManageProduct = fFlagBuildExperienceMonetizationProductEditingModule and (p11.onUpdateProductSaleStatus ~= nil and p11.onUpdateProduct ~= nil),
+		productManagedPricingError = var39,
+		productSaleStatusError = productSaleStatusError,
+		productEditError = productEditError,
+		editName = editName,
+		editDescription = editDescription,
+		editPrice = editPrice,
+		catalogStatus = p11.catalogStatus or "Ready",
+		emptyTitle = var25.emptyTitle,
+		emptyDescription = var25.emptyDescription,
+		onClose = var43,
+		onOpenCreate = reactModule.useCallback(function()
+			-- upvalues: var27 (ref), sendBuildExperienceEventModule (copy), p11 (ref), getBuildPromptDraftStoreModule (copy), var25 (ref), onComposerActivated (ref)
+			sendBuildExperienceEventModule("MONETIZATION_CREATE_CLICK", var27)
+			
+			if p11.onCreateProduct == nil then
+				getBuildPromptDraftStoreModule().queueDraft({
+					universeId = p11.universeId,
+					sessionId = p11.sessionId,
+					text = var25.createProductPrompt
+				})
+				onComposerActivated()
+				
+				return
+			end
+			p11.onCreateProduct()
+		end, {
+			onComposerActivated, var25.createProductPrompt, p11.onCreateProduct,
+			p11.sessionId, p11.universeId, var27
+		}),
+		onOpenOptions = var45,
+		onManagedPricingChanged = var30.onManagedPricingChanged,
+		onShopButtonChanged = var30.onShopButtonChanged,
+		onConfirmManagedPricing = var30.onConfirmManagedPricing,
+		onCancelManagedPricing = var30.onCancelManagedPricing,
+		onRetryOptions = var30.onRetry,
+		onProductActivated = var44,
+		onProductManagedPricingChanged = var46,
+		onProductSaleStatusChanged = var47,
+		onOpenProductEdit = var48,
+		onEditNameChanged = var49,
+		onEditDescriptionChanged = var50,
+		onEditPriceChanged = var51,
+		onCancelProductEdit = var52,
+		onSaveProductEdit = var53,
+		onRetryCatalog = reactModule.useCallback(function()
+			-- upvalues: var27 (ref), sendBuildExperienceEventModule (copy), p11 (ref)
+			sendBuildExperienceEventModule("MONETIZATION_RETRY_CLICK", var27)
+			
+			if p11.onRetryCatalog ~= nil then
+				p11.onRetryCatalog()
+			end
+		end, { p11.onRetryCatalog, var27 }),
+		labels = {
+			title = var25.title,
+			options = var30.labels.options,
+			pricingOptions = var30.labels.pricingOptions,
+			pricingOptionsDescription = var30.labels.pricingOptionsDescription,
+			managedPricing = var30.labels.managedPricing,
+			managedPricingDescription = var30.labels.managedPricingDescription,
+			shopUI = var30.labels.shopUI,
+			shopButton = var30.labels.shopButton,
+			shopButtonDescription = var30.labels.shopButtonDescription,
+			optionsLoadError = var30.labels.optionsLoadError,
+			permissionDenied = var30.labels.permissionDenied,
+			mixed = var30.labels.mixed,
+			unavailable = var30.labels.unavailable,
+			noEligibleProducts = var30.labels.noEligibleProducts,
+			optionsUpdateError = var30.labels.optionsUpdateError,
+			partialUpdateError = var30.labels.partialUpdateError,
+			acknowledgementTitle = var30.labels.acknowledgementTitle,
+			acknowledgementDescription = var30.labels.acknowledgementDescription,
+			agree = var30.labels.agree,
+			emptyCreateProduct = var25.emptyCreateProduct,
+			pricing = var25.pricing,
+			regionalPricing = var25.regionalPricing,
+			loading = var25.loading,
+			loadErrorTitle = var25.loadErrorTitle,
+			loadErrorDescription = var25.loadErrorDescription,
+			retry = var25.retry,
+			updateError = var25.updateError,
+			availableForPurchase = var25.availableForPurchase,
+			edit = var25.edit,
+			editProduct = var25.editProduct,
+			name = var25.name,
+			description = var25.description,
+			price = var25.price,
+			priceError = var25.priceError,
+			priceRequiredForSale = var25.priceRequiredForSale,
+			cancel = var25.cancel,
+			save = var25.save
+		}
 	}
-	var60 = true
-	
-	if p16.isProductDisabled ~= true then
-		var60 = not (var28 == nil or var28.productKind == nil) and (var28.productKind == "DeveloperProduct" and var28.canManage ~= false)
-		
-		if var60 then
-			var60 = var28 ~= nil and (if var28.isArchived ~= true then if var28.isImmutable ~= true then var28.isInActivePriceOptimizationExperiment == true else true else true)
-		end
-	end
-	t_4.isProductDisabled = var60
-	t_4.isProductManagedPricingPending = var50
-	t_4.isProductSaleStatusPending = isProductSaleStatusPending
-	t_4.isProductEditPending = isProductEditPending
-	t_4.canUpdateProductManagedPricing = p16.onUpdateProductManagedPricing ~= nil
-	var60 = fFlagBuildExperienceMonetizationProductEditingModule
-	
-	if var60 then
-		var60 = not (var28 == nil or var28.productKind == nil) and (var28.productKind == "DeveloperProduct" and var28.canManage ~= false)
-		
-		if var60 then
-			var60 = var36 and (p16.onUpdateProductSaleStatus ~= nil and p16.onUpdateProduct ~= nil)
-		end
-	end
-	t_4.canManageProduct = var60
-	t_4.productManagedPricingError = var52
-	t_4.productSaleStatusError = productSaleStatusError
-	t_4.productEditError = productEditError
-	t_4.editName = editName
-	t_4.editDescription = editDescription
-	t_4.editPrice = editPrice
-	t_4.catalogStatus = p16.catalogStatus or "Ready"
-	t_4.emptyTitle = var30.emptyTitle
-	t_4.emptyDescription = var30.emptyDescription
-	t_4.onClose = var61
-	t_4.onOpenCreate = var81
-	t_4.onOpenOptions = var63
-	t_4.onManagedPricingChanged = var35.onManagedPricingChanged
-	t_4.onShopButtonChanged = var35.onShopButtonChanged
-	t_4.onConfirmManagedPricing = var35.onConfirmManagedPricing
-	t_4.onCancelManagedPricing = var35.onCancelManagedPricing
-	t_4.onRetryOptions = var35.onRetry
-	t_4.onProductActivated = var62
-	t_4.onProductManagedPricingChanged = var64
-	t_4.onProductSaleStatusChanged = var65
-	t_4.onOpenProductEdit = var66
-	t_4.onEditNameChanged = var67
-	t_4.onEditDescriptionChanged = var68
-	t_4.onEditPriceChanged = var69
-	t_4.onCancelProductEdit = var70
-	t_4.onSaveProductEdit = var71
-	t_4.onRetryCatalog = var82
-	t_4.onRetryCatalogSource = var83
-	t_4.labels = {
-		title = var30.title,
-		options = var35.labels.options,
-		pricingOptions = var35.labels.pricingOptions,
-		pricingOptionsDescription = var35.labels.pricingOptionsDescription,
-		managedPricing = var35.labels.managedPricing,
-		managedPricingDescription = var35.labels.managedPricingDescription,
-		shopUI = var35.labels.shopUI,
-		shopButton = var35.labels.shopButton,
-		shopButtonDescription = var35.labels.shopButtonDescription,
-		optionsLoadError = var35.labels.optionsLoadError,
-		permissionDenied = var35.labels.permissionDenied,
-		mixed = var35.labels.mixed,
-		unavailable = var35.labels.unavailable,
-		noEligibleProducts = var35.labels.noEligibleProducts,
-		optionsUpdateError = var35.labels.optionsUpdateError,
-		partialUpdateError = var35.labels.partialUpdateError,
-		acknowledgementTitle = var35.labels.acknowledgementTitle,
-		acknowledgementDescription = var35.labels.acknowledgementDescription,
-		agree = var35.labels.agree,
-		emptyCreateProduct = var30.emptyCreateProduct,
-		pricing = var30.pricing,
-		regionalPricing = var30.regionalPricing,
-		loading = var30.loading,
-		loadErrorTitle = var30.loadErrorTitle,
-		loadErrorDescription = var30.loadErrorDescription,
-		retry = var30.retry,
-		updateError = var30.updateError,
-		availableForPurchase = var30.availableForPurchase,
-		edit = var30.edit,
-		editProduct = var30.editProduct,
-		name = var30.name,
-		description = var30.description,
-		price = var30.price,
-		priceError = var30.priceError,
-		priceRequiredForSale = var30.priceRequiredForSale,
-		cancel = var30.cancel,
-		save = var30.save
-	}
-	
-	return t_4
 end

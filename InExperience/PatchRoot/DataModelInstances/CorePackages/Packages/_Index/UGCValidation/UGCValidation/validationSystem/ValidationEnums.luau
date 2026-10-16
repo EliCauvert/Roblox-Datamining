@@ -5,7 +5,7 @@ local function createEnumMetatable(p1)
 		__metatable = "This metatable is protected",
 		__index = function(_, p2)
 			-- upvalues: p1 (ref)
-			error("Invalid ValidationEnums." .. p0 .. " enum value: " .. tostring(p2))
+			error("Invalid ValidationEnums." .. p1 .. " enum value: " .. tostring(p2))
 		end,
 		__newindex = function(_, _, _)
 			error("Cannot add new keys to ValidationEnums")
@@ -40,7 +40,6 @@ t.ValidationModule = {
 	PropertiesSensible = "PropertiesSensible",
 	InstanceTreeMatchesSchema = "InstanceTreeMatchesSchema",
 	DescendantIdsAllowed = "DescendantIdsAllowed",
-	DescendantIdsPublished = "DescendantIdsPublished",
 	ScaleTypeValid = "ScaleTypeValid",
 	CollisionFidelityCorrect = "CollisionFidelityCorrect",
 	AttachmentBoundsValid = "AttachmentBoundsValid",
@@ -55,7 +54,6 @@ t.ValidationModule = {
 	DynamicHeadFacsPresent = "DynamicHeadFacsPresent",
 	DynamicHeadControlsActive = "DynamicHeadControlsActive",
 	FacsJointBoundsValid = "FacsJointBoundsValid",
-	FacsJointCountBounded = "FacsJointCountBounded",
 	HrdBonesFollowSchema = "HrdBonesFollowSchema",
 	HrdPropertiesSensible = "HrdPropertiesSensible",
 	TposeAdjustmentSensible = "TposeAdjustmentSensible",

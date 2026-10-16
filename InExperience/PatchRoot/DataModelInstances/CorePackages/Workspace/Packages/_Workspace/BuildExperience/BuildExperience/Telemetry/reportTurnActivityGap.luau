@@ -1,7 +1,4 @@
 ﻿local telemetryService = game:GetService("TelemetryService")
-local buildExperience = script:FindFirstAncestor("BuildExperience")
-local sendBuildExperienceStatModule = require(buildExperience.Telemetry.sendBuildExperienceStat)
-local fFlagBuildExperiencePromptFailureTelemetry = require(buildExperience.Parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
 game:DefineFastInt("BuildExperienceTurnActivityGapMsThrottleHundredthsPercent", 0)
 local t = {
 	eventName = "buildExperienceTurnActivityGapMs",
@@ -16,17 +13,7 @@ end
 
 return {
 	log = function(p1, p2, p3)
-		-- upvalues: fFlagBuildExperiencePromptFailureTelemetry (ref), sendBuildExperienceStatModule (ref), t (ref), telemetryService (ref)
-		if fFlagBuildExperiencePromptFailureTelemetry then
-			sendBuildExperienceStatModule({
-				config = t,
-				sampleHundredthsPercent = game:GetFastInt("BuildExperienceTurnActivityGapMsThrottleHundredthsPercent"),
-				value = math.max(0, math.round(p1)),
-				customFields = { universeId = p3, isFirstActivity = p2 }
-			})
-			
-			return
-		end
+		-- upvalues: telemetryService (ref), t (ref)
 		local buildExperienceTurnActivityGapMsThrottleHundredthsPercentFastInt = game:GetFastInt("BuildExperienceTurnActivityGapMsThrottleHundredthsPercent")
 		
 		if if buildExperienceTurnActivityGapMsThrottleHundredthsPercentFastInt <= 0 then false else buildExperienceTurnActivityGapMsThrottleHundredthsPercentFastInt >= 10000 or math.random(1, 10000) <= buildExperienceTurnActivityGapMsThrottleHundredthsPercentFastInt then

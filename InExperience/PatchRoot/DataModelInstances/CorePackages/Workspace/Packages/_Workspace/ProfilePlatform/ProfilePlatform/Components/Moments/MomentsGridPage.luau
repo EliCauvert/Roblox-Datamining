@@ -53,6 +53,7 @@ local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptim
 local fFlagAXEnableProfileTab = sharedFlagsModule.FFlagAXEnableProfileTab
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local fFlagProfileMomentsFeedRootRoute = sharedFlagsModule.FFlagProfileMomentsFeedRootRoute
+local fFlagMomentsProfileGridInfiniteLoad = momentsCommonModule.Flags.FFlagMomentsProfileGridInfiniteLoad
 local fFlagProfileMomentsLoadFailureAnalyticsModule = require(profilePlatform.Flags.FFlagProfileMomentsLoadFailureAnalytics)
 local profileMomentsGridMeTabTopInset = game:DefineFastFlag("ProfileMomentsGridMeTabTopInset", false)
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
@@ -64,7 +65,7 @@ local chevronLargeLeft = foundationModule.Enums.IconName.ChevronLargeLeft
 local frozen = table.freeze({})
 
 return function()
-	-- upvalues: useNavigation (ref), fFlagProfileMomentsFeedRootRoute (ref), useDispatch (ref), useStyle (ref), useTokens (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagAXEnableProfileTab (ref), useProfileWrapperContextModule (ref), useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), profileMomentsGridMeTabTopInset (ref), useStatusBarHeight (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), reactModule (ref), useUserProfilesFetch (ref), userProfilesModule (ref), useUserMomentsModule (ref), useLocalization (ref), textKeysModule (ref), useAppPolicy (ref), fFlagMomentsOptimisticProfilePending (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagProfileMomentsLoadFailureAnalyticsModule (ref), makeProfileTileFieldsModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), momentGridItemModule (ref), view (ref), iconButton (ref), chevronLargeLeft (ref), buttonSize (ref), userTile (ref), layoutMode (ref), fFlagProfileMomentsVideoPlaybackFix (ref), useNavigationFocus (ref), foundationModule (ref), scrollingGridView (ref), momentsCarouselMediaProviderModule (ref), frozen (ref), profileModalViewModule (ref), fullscreenPageWithSafeArea (ref)
+	-- upvalues: useNavigation (ref), fFlagProfileMomentsFeedRootRoute (ref), useDispatch (ref), useStyle (ref), useTokens (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagAXEnableProfileTab (ref), useProfileWrapperContextModule (ref), useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), profileMomentsGridMeTabTopInset (ref), useStatusBarHeight (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), reactModule (ref), useUserProfilesFetch (ref), userProfilesModule (ref), useUserMomentsModule (ref), fFlagMomentsProfileGridInfiniteLoad (ref), useLocalization (ref), textKeysModule (ref), useAppPolicy (ref), fFlagMomentsOptimisticProfilePending (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagProfileMomentsLoadFailureAnalyticsModule (ref), makeProfileTileFieldsModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), momentGridItemModule (ref), view (ref), iconButton (ref), chevronLargeLeft (ref), buttonSize (ref), userTile (ref), layoutMode (ref), fFlagProfileMomentsVideoPlaybackFix (ref), useNavigationFocus (ref), foundationModule (ref), scrollingGridView (ref), momentsCarouselMediaProviderModule (ref), frozen (ref), profileModalViewModule (ref), fullscreenPageWithSafeArea (ref)
 	local var2
 	local var3 = useNavigation()
 	local var4 = if fFlagProfileMomentsFeedRootRoute then useDispatch() else nil
@@ -98,10 +99,15 @@ return function()
 	local moments = var14.moments
 	local hasMore = var14.hasMore
 	local loadMore = var14.loadMore
-	local var15 = useLocalization({ feedEndTitle = textKeysModule.MomentsFeedEndTitle })
-	local var16 = useAppPolicy(function(p1)
-		return p1.getEnableContinuousLoad()
-	end)
+	local var15 = nil
+	local var16 = false
+	
+	if fFlagMomentsProfileGridInfiniteLoad then
+		var15 = useLocalization({ feedEndTitle = textKeysModule.MomentsFeedEndTitle })
+		var16 = useAppPolicy(function(p1)
+			return p1.getEnableContinuousLoad()
+		end)
+	end
 	local var17, var18 = reactModule.useState(nil)
 	local var19 = if fFlagMomentsOptimisticProfilePending then reactModule.useRef(nil) else nil
 	local var20 = reactModule.useRef(false)
@@ -248,7 +254,7 @@ return function()
 			shouldShowShowMoreButton = hasMore,
 			onShowMoreCallback = loadMore,
 			enableInfiniteScroll = if var16 then true else nil,
-			footer = if #moments > 0 then reactModule.createElement(foundationModule.Text, {
+			footer = if fFlagMomentsProfileGridInfiniteLoad and #moments > 0 then reactModule.createElement(foundationModule.Text, {
 				tag = "auto-xy padding-large text-body-medium text-align-x-center content-muted",
 				Text = var15.feedEndTitle
 			}) else nil

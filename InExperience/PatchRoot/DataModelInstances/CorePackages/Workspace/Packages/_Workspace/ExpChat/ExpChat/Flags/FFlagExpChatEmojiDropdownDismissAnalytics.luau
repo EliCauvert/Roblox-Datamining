@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatEmojiDropdownDismissAnalytics", false) and require(script.Parent.FFlagExpChatEmojiDropdownShowAnalytics)

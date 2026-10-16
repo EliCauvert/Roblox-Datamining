@@ -7,10 +7,9 @@ local getLibraryStoreModule = require(buildExperience.Stores.GetLibraryStore)
 local _ = require(buildExperience.Stores.GetLibraryStore.createLibraryStore)
 local libraryTypesModule = require(script.Parent.LibraryTypes)
 local _ = require(buildExperience.Chat.chatTypes)
-local fFlagBuildExperienceAnswerFormModule = require(buildExperience.Flags.FFlagBuildExperienceAnswerForm)
 
 return function(p1, p2)
-	-- upvalues: getLibraryStoreModule (ref), signalsReactModule (ref), reactModule (ref), libraryTypesModule (ref), fFlagBuildExperienceAnswerFormModule (ref)
+	-- upvalues: getLibraryStoreModule (ref), signalsReactModule (ref), reactModule (ref), libraryTypesModule (ref)
 	local var1 = getLibraryStoreModule()
 	local var2 = signalsReactModule.useSignalState(var1.getChatResourceRequest)
 	local var3 = reactModule.useRef(0)
@@ -42,11 +41,8 @@ return function(p1, p2)
 		return true
 	end, {})
 	local isComposerSendBlocked = p1.isComposerSendBlocked or p1.isAssistantResponding and #p1.composerResourceAttachments > 0
-	local var8 = if fFlagBuildExperienceAnswerFormModule then p1.answerForm else nil
-	local var9 = if fFlagBuildExperienceAnswerFormModule then p1.localToolActions else nil
-	local var10 = if fFlagBuildExperienceAnswerFormModule then p1.submitAnswerText else nil
 	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var3 (ref), var7 (ref), var6 (ref), var1 (ref), p2 (ref), var8 (ref), p1 (ref)
+		-- upvalues: var2 (ref), var3 (ref), var7 (ref), var6 (ref), var1 (ref), p2 (ref), p1 (ref)
 		if var2 == nil or var2.token <= var3.current then return end
 		var3.current = var2.token
 		
@@ -62,19 +58,16 @@ return function(p1, p2)
 		end
 		var1.consumeChatResourceRequest(var2.token)
 		
-		if p2 and var8 == nil and (var2.action == "Add" and var2.focusComposer ~= false) and p1.textBoxRef.current ~= nil then
+		if p2 and var2.action == "Add" and (var2.focusComposer ~= false and p1.textBoxRef.current ~= nil) then
 			p1.textBoxRef.current.focus()
 		end
 	end, {
-		var1, var2, p2, var8, var6, var7, p1.textBoxRef
+		var1, var2, p2, var6, var7, p1.textBoxRef
 	})
 	reactModule.useLayoutEffect(function()
-		-- upvalues: var8 (ref), var9 (ref), var10 (ref), p1 (ref), var6 (ref), var7 (ref), isComposerSendBlocked (ref), var4 (ref), var1 (ref)
+		-- upvalues: p1 (ref), var6 (ref), var7 (ref), isComposerSendBlocked (ref), var4 (ref), var1 (ref)
 		local t = {
 			tracksExternalText = true,
-			answerForm = var8,
-			localToolActions = var9,
-			onSubmitAnswerText = var10,
 			composerText = p1.composerText,
 			composerErrorText = p1.composerErrorText,
 			onComposerChanged = p1.setComposerText,
@@ -96,9 +89,9 @@ return function(p1, p2)
 		var4.current = t
 		var1.setChatComposerState(t)
 	end, {
-		var1, p1.composerText, var8, var9, var10, p1.composerErrorText,
-		p1.setComposerText, p1.composerImages, p1.setComposerImages,
-		p1.retryComposerImage, p1.composerResourceAttachments, var6,
+		var1, p1.composerText, p1.composerErrorText, p1.setComposerText,
+		p1.composerImages, p1.setComposerImages, p1.retryComposerImage,
+		p1.composerResourceAttachments, var6,
 		p1.removeComposerResourceAttachmentAtIndex, var7, isComposerSendBlocked,
 		p1.textBoxRef, p1.isAssistantResponding, p1.canStopAssistantResponse,
 		p1.canSendWhileResponding, p1.sendMessage, p1.stopAssistantResponse

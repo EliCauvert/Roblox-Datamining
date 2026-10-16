@@ -12,6 +12,7 @@ local _ = require(songbird.types)
 local analyticActionsModule = require(songbird.Analytics.AnalyticActions)
 local sendAudioPlayerAnalyticsModule = require(songbird.Analytics.sendAudioPlayerAnalytics)
 local useStopSongOnPageNavigationModule = require(songbird.Hooks.useStopSongOnPageNavigation)
+local getFFlagLuaAppPersistentMusicPlayer = require(songbird.Parent.SharedFlags).GetFFlagLuaAppPersistentMusicPlayer
 local getFFlagAudioPlayerCanSkipTracks = require(songbird.Parent.SharedFlags).GetFFlagAudioPlayerCanSkipTracks
 local getFFlagAudioPreviewLua = mediaPlaybackModule.getFFlagAudioPreviewLua
 local getAudioPlaybackStore = mediaPlaybackModule.getAudioPlaybackStore
@@ -27,7 +28,7 @@ local t = { isNavigationFocus = true }
 local vector2 = Vector2.new(320, 320)
 
 return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), createNextOrder (ref), useLocalization (ref), useAudioStore (ref), getFFlagAudioPreviewLua (ref), useSignalState (ref), useSignalBinding (ref), getFFlagAudioPlayerCanSkipTracks (ref), getAudioPlaybackStore (ref), useCallback (ref), sendAudioPlayerAnalyticsModule (ref), analyticActionsModule (ref), useRef (ref), useStopSongOnPageNavigationModule (ref), usePrevious (ref), useEffect (ref), reactModule (ref), foundationModule (ref), vector2 (ref), audioPlaybackTimelineModule (ref), roundIconButtonModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), createNextOrder (ref), useLocalization (ref), useAudioStore (ref), getFFlagAudioPreviewLua (ref), useSignalState (ref), useSignalBinding (ref), getFFlagAudioPlayerCanSkipTracks (ref), getAudioPlaybackStore (ref), useCallback (ref), sendAudioPlayerAnalyticsModule (ref), analyticActionsModule (ref), useRef (ref), getFFlagLuaAppPersistentMusicPlayer (ref), useStopSongOnPageNavigationModule (ref), usePrevious (ref), useEffect (ref), reactModule (ref), foundationModule (ref), vector2 (ref), audioPlaybackTimelineModule (ref), roundIconButtonModule (ref)
 	local var1 = cryoModule.Dictionary.join(t, p1)
 	local var2 = createNextOrder()
 	local var3 = useLocalization({ songPreview = "Feature.SongDetails.Label.SongPreview" })
@@ -99,18 +100,20 @@ return function(p1)
 		var5,
 		if getFFlagAudioPlayerCanSkipTracks() then var9 else nil
 	})
-	useStopSongOnPageNavigationModule(var1.isNavigationFocus, useCallback(function()
-		-- upvalues: var13 (ref), analyticActionsModule (copy)
-		var13(analyticActionsModule.AudioStopped)
-	end, { var13 }))
-	local var20 = usePrevious(var6)
-	useEffect(function()
-		-- upvalues: var6 (ref), var20 (ref), var14 (ref)
-		if var6 and not var20 then
-			var14()
-		end
-	end, { var6 })
 	
+	if not getFFlagLuaAppPersistentMusicPlayer() then
+		useStopSongOnPageNavigationModule(var1.isNavigationFocus, useCallback(function()
+			-- upvalues: var13 (ref), analyticActionsModule (copy)
+			var13(analyticActionsModule.AudioStopped)
+		end, { var13 }))
+		local var20 = usePrevious(var6)
+		useEffect(function()
+			-- upvalues: var6 (ref), var20 (ref), var14 (ref)
+			if var6 and not var20 then
+				var14()
+			end
+		end, { var6 })
+	end
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-xy col align-x-center gap-large",
 		LayoutOrder = var1.LayoutOrder

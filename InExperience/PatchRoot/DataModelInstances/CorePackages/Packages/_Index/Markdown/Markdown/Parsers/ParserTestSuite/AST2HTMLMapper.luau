@@ -40,7 +40,7 @@ local _ = function(p2)
 			error(`No handler found for node {v.name}`)
 			var2 = nil
 		end
-		var1 = var3 .. var7
+		var1 = var3 .. var2
 	end
 	return var1
 end
@@ -65,7 +65,7 @@ local function emptyHandler(p3)
 			error(`No handler found for node {v.name}`)
 			var5 = nil
 		end
-		var4 = var6 .. var10
+		var4 = var6 .. var5
 	end
 	return var4
 end
@@ -91,7 +91,7 @@ t_1 = {
 				error(`No handler found for node {v.name}`)
 				var8 = nil
 			end
-			var7 = var9 .. var13
+			var7 = var9 .. var8
 		end
 		return var7
 	end,
@@ -116,7 +116,7 @@ t_1 = {
 					error(`No handler found for node {v.name}`)
 					var14 = nil
 				end
-				var13 = var15 .. var19
+				var13 = var15 .. var14
 			end
 			var10 = var13
 		else
@@ -144,7 +144,7 @@ t_1 = {
 					error(`No handler found for node {v.name}`)
 					var19 = nil
 				end
-				var18 = var20 .. var24
+				var18 = var20 .. var19
 			end
 			var16 = var18
 		else
@@ -179,7 +179,7 @@ t_1 = {
 						error(`No handler found for node {v.name}`)
 						var25 = nil
 					end
-					var24 = var26 .. var30
+					var24 = var26 .. var25
 				end
 				var22 = var24
 			else
@@ -205,7 +205,7 @@ t_1 = {
 						error(`No handler found for node {v.name}`)
 						var30 = nil
 					end
-					var29 = var31 .. var35
+					var29 = var31 .. var30
 				end
 				var27 = var29
 			else
@@ -214,7 +214,7 @@ t_1 = {
 			return var28:format(var27)
 		elseif var21 == "STRIKE" then
 			local var32
-			local var33 = "<s>%*</s>"
+			local var33 = "<u>%*</u>"
 			local children = p7.children
 			
 			if children then
@@ -231,7 +231,7 @@ t_1 = {
 						error(`No handler found for node {v.name}`)
 						var35 = nil
 					end
-					var34 = var36 .. var40
+					var34 = var36 .. var35
 				end
 				var32 = var34
 			else
@@ -257,7 +257,7 @@ t_1 = {
 						error(`No handler found for node {v.name}`)
 						var40 = nil
 					end
-					var39 = var41 .. var45
+					var39 = var41 .. var40
 				end
 				var37 = var39
 			else
@@ -287,7 +287,7 @@ t_1 = {
 				error(`No handler found for node {v.name}`)
 				var43 = nil
 			end
-			var42 = var44 .. var48
+			var42 = var44 .. var43
 		end
 		return var42
 	end,
@@ -314,7 +314,7 @@ t_1 = {
 					error(`No handler found for node {v.name}`)
 					var48 = nil
 				end
-				var47 = var49 .. var53
+				var47 = var49 .. var48
 			end
 			var45 = var47
 		else
@@ -326,7 +326,7 @@ t_1 = {
 		local t = {}
 		
 		if p9.attributes and p9.attributes.language and p9.attributes.language ~= "" then
-			table.insert(t, "language-" .. p12.attributes.language)
+			table.insert(t, "language-" .. p9.attributes.language)
 		end
 		local t_1 = {}
 		
@@ -356,7 +356,7 @@ t_1 = {
 					error(`No handler found for node {v.name}`)
 					var54 = nil
 				end
-				var53 = var55 .. var61
+				var53 = var55 .. var54
 			end
 			var50 = var53
 		else
@@ -384,7 +384,7 @@ t_1 = {
 					error(`No handler found for node {v.name}`)
 					var59 = nil
 				end
-				var58 = var60 .. var66
+				var58 = var60 .. var59
 			end
 			var56 = var58
 		else
@@ -413,7 +413,7 @@ t_1 = {
 					error(`No handler found for node {v.name}`)
 					var65 = nil
 				end
-				var64 = var66 .. var72
+				var64 = var66 .. var65
 			end
 			var61 = var64
 		else
@@ -463,7 +463,7 @@ t_1 = {
 					error(`No handler found for node {v.name}`)
 					var73 = nil
 				end
-				var72 = var74 .. var80
+				var72 = var74 .. var73
 			end
 			var68 = var72
 		else

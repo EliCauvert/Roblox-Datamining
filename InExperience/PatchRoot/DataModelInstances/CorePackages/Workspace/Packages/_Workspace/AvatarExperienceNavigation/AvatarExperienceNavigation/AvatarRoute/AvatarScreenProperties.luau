@@ -15,7 +15,6 @@ local fFlagAXPhotoboothMomentsPage = avatarExperienceFlagsModule.FFlagAXPhotoboo
 local fFlagAXPhotoboothMomentsLogging = avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsLogging
 local AXKeepTryOnsInAvatarEditor = game:DefineFastFlag("AXKeepTryOnsInAvatarEditor", false)
 local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
-local fFlagAXGifting = avatarExperienceFlagsModule.FFlagAXGifting
 local fFlagAXMakeupReleaseFTUX = avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
 local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
@@ -382,10 +381,6 @@ if fFlagAXEnableExpiredUserLookCheckout then
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	}
-end
-if fFlagAXGifting then
-	t_1[avatarScreenModule.SendGiftRecipientPicker] = { isTransparent = true, VRPanelPlacement = "Left" }
-	t_1[avatarScreenModule.SendGiftReview] = { isTransparent = true, VRPanelPlacement = "Left" }
 end
 if fFlagEditProfileImageV2Enabled then
 	t_1[avatarScreenModule.EditProfileImage] = { isTryOnOutfitResetPage = true }

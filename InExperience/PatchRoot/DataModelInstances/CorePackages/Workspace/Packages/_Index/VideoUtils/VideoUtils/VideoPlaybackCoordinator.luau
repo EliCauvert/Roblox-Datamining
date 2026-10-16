@@ -8,7 +8,6 @@ local _ = require(videoUtils.Analytics.VideoAnalyticsTypes)
 local getIsInstanceVisibleModule = require(videoUtils.getIsInstanceVisible)
 local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
 local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
-local fFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback
 local t = {}
 t.__index = t
 t.preferredFramerateThrottling = false
@@ -106,7 +105,7 @@ function t:cancelPlayback(p1, p2, p3, p4)
 end
 
 function t:reset(p1, _, p2, _)
-	-- upvalues: var1 (write), t (ref), fFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (ref)
+	-- upvalues: var1 (write), t (ref)
 	if self.playingVideoKey ~= nil then
 		self:__cancelCurrentPlayback(p1, self.playingVideoItemIndex, p2, self.videoAnalytics)
 	end
@@ -119,9 +118,6 @@ function t:reset(p1, _, p2, _)
 	
 	if var1 == 0 then
 		self:__setRunServiceThrottleFramerateEnabled(t.preferredFramerateThrottling)
-	end
-	if fFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and self.onPlaybackReset then
-		self.onPlaybackReset(p1, p2)
 	end
 end
 

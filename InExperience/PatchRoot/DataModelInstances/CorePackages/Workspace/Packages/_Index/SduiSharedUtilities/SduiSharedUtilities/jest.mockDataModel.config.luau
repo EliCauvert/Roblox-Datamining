@@ -3,10 +3,7 @@
 return {
 	displayName = "SduiSharedUtilities-MockDataModel",
 	mockDataModel = true,
-	testMatch = {
-		"**/SduiPageAnalytics.test",
-		"**/createSduiApiStore.test"
-	},
+	testMatch = { "**/SduiPageAnalytics.test" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,

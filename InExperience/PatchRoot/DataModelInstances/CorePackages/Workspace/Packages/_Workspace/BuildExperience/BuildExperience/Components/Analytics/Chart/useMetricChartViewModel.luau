@@ -18,7 +18,6 @@ local metricValueRoundsToZeroModule = require(buildExperience.Analytics.metricVa
 local _ = require(buildExperience.Analytics.metricUnitTemplate)
 local scaleValueToUnitModule = require(buildExperience.Analytics.scaleValueToUnit)
 local _ = require(script.Parent.MetricChartView)
-local fFlagBuildAnalyticsGoalsModule = require(buildExperience.Flags.FFlagBuildAnalyticsGoals)
 local noDataPlaceholderModule = require(buildExperience.Components.Analytics.noDataPlaceholder)
 local list = {
 	analyticsKeysModule.ANALYTICS_MONTH_JAN,
@@ -36,7 +35,7 @@ local list = {
 }
 
 return function(p1)
-	-- upvalues: foundationModule (ref), localizationService (ref), foundationFontFaceMigration (ref), reactModule (ref), analyticsKeysModule (ref), fFlagBuildAnalyticsGoalsModule (ref), analyticsUnitModule (ref), list (ref), useLocalization (ref), fillMetricSeriesGapsModule (ref), deriveChartAxesModule (ref), formatMetricValueModule (ref), scaleValueToUnitModule (ref), formatMetricTimestampModule (ref), noDataPlaceholderModule (ref), metricValueRoundsToZeroModule (ref)
+	-- upvalues: foundationModule (ref), localizationService (ref), foundationFontFaceMigration (ref), reactModule (ref), analyticsKeysModule (ref), list (ref), useLocalization (ref), fillMetricSeriesGapsModule (ref), deriveChartAxesModule (ref), formatMetricValueModule (ref), scaleValueToUnitModule (ref), formatMetricTimestampModule (ref), noDataPlaceholderModule (ref), metricValueRoundsToZeroModule (ref), analyticsUnitModule (ref)
 	local var1 = foundationModule.Hooks.useTokens()
 	local var2 = foundationModule.Hooks.useTextSizeOffset()
 	local robloxLocaleId = localizationService.RobloxLocaleId
@@ -51,7 +50,7 @@ return function(p1)
 	local t = {
 		title = metric.titleKey,
 		percent = analyticsKeysModule.ANALYTICS_PERCENT_TEMPLATE,
-		duration = if fFlagBuildAnalyticsGoalsModule and unit == analyticsUnitModule.Minutes then analyticsKeysModule.ANALYTICS_DURATION_MINUTES_TEMPLATE else analyticsKeysModule.ANALYTICS_DURATION_TEMPLATE
+		duration = analyticsKeysModule.ANALYTICS_DURATION_TEMPLATE
 	}
 	
 	for i, v in list do

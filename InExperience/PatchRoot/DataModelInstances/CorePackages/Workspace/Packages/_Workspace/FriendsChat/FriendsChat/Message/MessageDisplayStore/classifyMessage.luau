@@ -1,4 +1,6 @@
-﻿local function isPartySystemMessage(p1)
+﻿local fFlagChatModeratedMaskRandomLength = require(script:FindFirstAncestor("FriendsChat").Parent.SharedFlags).FFlagChatModeratedMaskRandomLength
+
+local function isPartySystemMessage(p1)
 	local cards = p1.cards
 	
 	if type(cards) ~= "table" then
@@ -39,7 +41,7 @@ local _ = function(p2)
 end
 
 return function(p2)
-	-- upvalues: isPartySystemMessage (ref)
+	-- upvalues: isPartySystemMessage (ref), fFlagChatModeratedMaskRandomLength (ref)
 	local var1
 	if p2.type == "system" or p2.sender_user_id == nil then
 		local t = {}
@@ -74,7 +76,7 @@ return function(p2)
 			senderUserId = senderUserId,
 			body = p2.content or "",
 			moderated = var1,
-			messageId = p2.id
+			messageId = if fFlagChatModeratedMaskRandomLength then p2.id else nil
 		})
 	end
 	if var1 then

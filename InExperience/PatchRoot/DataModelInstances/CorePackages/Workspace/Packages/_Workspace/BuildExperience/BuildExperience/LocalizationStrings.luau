@@ -1,9 +1,7 @@
 ﻿local localizationService = game:GetService("LocalizationService")
 local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
-local fFlagBuildExperienceToolLocalizationModule = require(buildExperience.Flags.FFlagBuildExperienceToolLocalization)
-local sharedFlagsModule = require(parent.SharedFlags)
+local sharedFlagsModule = require(buildExperience.Parent.SharedFlags)
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
@@ -158,38 +156,6 @@ if fFlagBuildExperienceClientDataModelTools then
 		running = "Feature.Build.Label.ToolClientDMRunning"
 	}
 end
-if fFlagBuildExperienceToolLocalizationModule then
-	t.ask_analytics_agent = {
-		completed = "Feature.Build.Label.ToolAnalyticsDone",
-		failed = "Feature.Build.Label.ToolAnalyticsFailed",
-		running = "Feature.Build.Label.ToolAnalyticsRunning"
-	}
-	t.check_ad_campaign_eligibility = {
-		completed = "Feature.Build.Label.ToolAdEligibilityDone",
-		failed = "Feature.Build.Label.ToolAdEligibilityFailed",
-		running = "Feature.Build.Label.ToolAdEligibilityRunning"
-	}
-	t.compile_luau = {
-		completed = "Feature.Build.Label.ToolCompileDone",
-		failed = "Feature.Build.Label.ToolCompileFailed",
-		running = "Feature.Build.Label.ToolCompileRunning"
-	}
-	t.verify_luau = {
-		completed = "Feature.Build.Label.ToolVerifyDone",
-		failed = "Feature.Build.Label.ToolVerifyFailed",
-		running = "Feature.Build.Label.ToolVerifyRunning"
-	}
-	t.lookup_engine_api_docs = {
-		completed = "Feature.Build.Label.ToolApiDocsDone",
-		failed = "Feature.Build.Label.ToolApiDocsFailed",
-		running = "Feature.Build.Label.ToolApiDocsRunning"
-	}
-	t.restore_version = {
-		completed = "Feature.Build.Label.ToolRestoreVersionDone",
-		failed = "Feature.Build.Label.ToolRestoreVersionFailed",
-		running = "Feature.Build.Label.ToolRestoreVersionRunning"
-	}
-end
 return {
 	AD_UPSELL_CARD_CREATE = "Feature.Build.Action.Create",
 	AD_UPSELL_CARD_DESC = "Feature.Build.Description.BoostAudienceForPlays",
@@ -235,8 +201,6 @@ return {
 	ADS_STATS_PAGE_TITLE = "Feature.Build.Title.GetUsers",
 	ADS_STATS_PAST_CAMPAIGNS = "Feature.Build.Header.PastCampaigns",
 	ADS_STATS_PLAY_TIME = "Feature.Build.Label.PlayTime",
-	ANSWER_FORM_CUSTOM_OPTION = "Feature.Build.Action.AddCustomOption",
-	ANSWER_FORM_ANSWERS = "Feature.Build.Header.Answers",
 	ANSWER_STACK_CUSTOM_ANSWER = "Feature.Build.Header.CustomAnswer",
 	ANSWER_STACK_NEXT = "Feature.Build.Action.Next",
 	ANSWER_STACK_SELECT_AN_OPTION = "Feature.Build.Label.SelectOption",
@@ -338,7 +302,6 @@ return {
 	CHAT_ASSISTANT_RESPONSE_FAILED = "Feature.Build.Message.BuildResponseFailed",
 	CHAT_ASSISTANT_STILL_WORKING = "Feature.Build.Message.BuildStillWorking",
 	CHAT_ASSISTANT_STOPPED = "Feature.Build.Message.BuildStopped",
-	CHAT_ASSISTANT_TAKING_LONGER = "Feature.Build.Message.BuildTakingLonger",
 	CHAT_BUILD_CHAT_PAGE_TITLE = "New Game",
 	CHAT_COMPLETED_GAME_CREATION_DESCRIPTION = if fFlagEnableTeamTestLua then "Feature.Build.Description.GameSavedPlaytest" else "Feature.Build.Description.GameCreationDone",
 	CHAT_COMPLETED_GAME_CREATION_TITLE = "Feature.Build.Title.GameCreationDone",
@@ -382,6 +345,7 @@ return {
 	CHAT_REVERT_CONFIRMATION_TITLE = "Feature.Build.Title.RevertLastChange",
 	CHAT_REVERT_TO_VERSION = "Feature.Build.Description.RevertToVersion",
 	CHAT_REVERT_FAILURE = if fFlagEnableTeamTestLua then "Feature.Build.Message.RevertVersionFail" else "Feature.Build.Message.PublishNotReverted",
+	CHAT_REVERT_SUCCESS = if fFlagEnableTeamTestLua then "Feature.Build.Message.CreatedRevertedVer" else "Feature.Build.Message.PublishReverted",
 	CHAT_STOP_CONFIRMATION_ACTION = "Feature.Build.Action.Stop",
 	CHAT_STOP_CONFIRMATION_CANCEL = "Feature.Build.Action.KeepBuilding",
 	CHAT_STOP_CONFIRMATION_DESCRIPTION = "Feature.Build.Description.StopBuild",
@@ -450,7 +414,6 @@ return {
 	MEDIA_SELECTION_VIDEO = "Feature.Build.Label.Video",
 	MY_CREATIONS_BUILD_WITH_AI = "Feature.Build.Description.BuildIdeaGame",
 	MY_CREATIONS_BUILDING = "Feature.Build.Label.Building",
-	MY_CREATIONS_CREATE_NEW_GAME = "Feature.Build.Action.CreateNewGame",
 	MY_CREATIONS_INPUT_NEEDED = "Feature.Build.Label.InputNeeded",
 	MY_CREATIONS_LOAD_ERROR = "Feature.Build.Message.ExperiencesLoadFailed",
 	MY_CREATIONS_NEW_GAME = "Feature.Build.Content.NewGame",
@@ -461,16 +424,6 @@ return {
 	MY_CREATIONS_READY = "Feature.Build.Label.Ready",
 	MY_CREATIONS_RESTRICTED = "Feature.Build.Label.Limited",
 	MY_CREATIONS_UNIVERSE_NAME = "Feature.Build.Label.UniverseNumber",
-	MY_CREATIONS_FILTER_ALL = "Feature.Build.Label.All",
-	MY_CREATIONS_FILTER_ALL_GAMES = "Feature.Build.Label.AllGames",
-	MY_CREATIONS_FILTER_APPLY = "CommonUI.Messages.Action.Apply",
-	MY_CREATIONS_FILTER_GAMES = "CommonUI.Features.Label.Games",
-	MY_CREATIONS_FILTER_GROUP_GAMES = "Feature.Build.Label.GroupGames",
-	MY_CREATIONS_FILTER_GROUPS = "Feature.Build.Label.Groups",
-	MY_CREATIONS_FILTER_MY_GAMES = "Feature.Build.Label.MyGames",
-	MY_CREATIONS_FILTER_RESET = "CommonUI.Messages.Action.Reset",
-	MY_CREATIONS_FILTER_SEARCH_GROUPS = "Feature.Build.Label.Search",
-	MY_CREATIONS_FILTER_TITLE = "Feature.Build.Label.Filters",
 	PLAYTEST_DISABLED_TOOLTIP = "Feature.Build.Description.PlaytestLocked",
 	PLAYTEST_TITLE = "Feature.Build.Action.Playtest",
 	PRIVATE_INVITES_ADD_ERROR = "Feature.Build.Message.PlaytesterRequestFailed",
@@ -482,6 +435,7 @@ return {
 	PRIVATE_INVITES_ALL_FRIENDS_ADDED = "Feature.Build.Message.AllFriendsAdded",
 	PRIVATE_INVITES_FRIENDS_LOAD_ERROR = "Feature.Build.Message.FriendsLoadFailed",
 	PRIVATE_INVITES_INVITE_BUTTON = "Feature.Build.Action.AddFriends",
+	PRIVATE_INVITES_INVITE_MESSAGE = "Feature.Build.Message.PrivatePlaytestInvite",
 	PRIVATE_INVITES_COUNT = "Feature.Build.Label.InviteCount",
 	PRIVATE_INVITES_NO_FRIENDS = "Feature.Build.Message.NoFriendsToAdd",
 	PRIVATE_INVITES_PAGE_TITLE = "Feature.Build.Title.Playtesters",
@@ -490,6 +444,9 @@ return {
 	PRIVATE_INVITES_ROW_TITLE = "Feature.Build.Title.Playtesters",
 	PRIVATE_INVITES_ROW_TITLE_EMPTY = "Feature.Build.Action.AddToPlaytest",
 	PRIVATE_INVITES_SEARCH_PLACEHOLDER = "Feature.Build.Label.Search",
+	PRIVATE_INVITES_SEND_FAILURE_BODY = "Feature.Build.Message.PlaytestInviteSendFailedBody",
+	PRIVATE_INVITES_SEND_FAILURE_HINT = "Feature.Build.Message.PlaytestInviteSendFailedHint",
+	PRIVATE_INVITES_SEND_FAILURE_TITLE = "Feature.Build.Title.PlaytestInviteSendFailed",
 	PRIVATE_INVITES_SENT = "Feature.Build.Message.PlaytestersAdded",
 	PRIVATE_INVITES_SHARE_LINK = "Feature.Build.Action.ShareLink",
 	PRIVATE_INVITES_SHARE_LINK_ERROR = "Feature.Build.Message.ShareLinkFailed",
@@ -507,6 +464,8 @@ return {
 	SHARE_AUDIENCE_FRIENDS_ONLY_TITLE = "Feature.Build.Title.FriendsOnlyPlay",
 	SHARE_AUDIENCE_PLAYTESTERS_ONLY_DESCRIPTION = "Feature.Build.Description.PlaytesterAccess",
 	SHARE_AUDIENCE_PLAYTESTERS_ONLY_TITLE = "Feature.Build.Title.PlaytestersOnlyPlay",
+	SHARE_AUDIENCE_PRIVATE_DESCRIPTION = "Feature.Build.Description.PrivateShare",
+	SHARE_AUDIENCE_PRIVATE_TITLE = "Feature.Build.Title.GamePrivate",
 	SHARE_AUDIENCE_SHARE = "Feature.Build.Action.Share",
 	SHARE_EXPERIENCE = "Feature.Build.Message.ShareExperience",
 	SHARE_GAME_SHARED = "Feature.Build.Message.GameShared",
@@ -601,7 +560,6 @@ return {
 	MONETIZATION_LOADING = "Feature.Build.Label.Loading",
 	MONETIZATION_RETRY = "Feature.Build.Action.Retry",
 	MONETIZATION_DEFAULT_PRODUCT_NAME = "Feature.Build.Label.DefaultDeveloperProduct",
-	MONETIZATION_GAME_PASS = "Feature.InExperienceShop.GamePass",
 	MONETIZATION_PRICE_UNAVAILABLE = "Feature.Build.Label.PriceUnavailable",
 	MONETIZATION_ON_SALE = "Feature.Build.Label.OnSale",
 	MONETIZATION_OFF_SALE = "Feature.Build.Label.OffSale",

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AccountUpgradeFullPageOnPhone", false)

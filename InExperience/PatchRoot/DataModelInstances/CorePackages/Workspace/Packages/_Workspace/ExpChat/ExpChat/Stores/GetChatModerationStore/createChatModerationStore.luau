@@ -4,18 +4,18 @@ local signalsModule = require(script:FindFirstAncestor("ExpChat").Parent.Signals
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 local getChatStatusStoreModule = require(script.Parent.Parent.GetChatStatusStore)
-local enableChatModerationModeLoggingRefactorEngineFeature = game:GetEngineFeature("EnableChatModerationModeLoggingRefactor")
+local enableChatModerationModeLoggingRefactor = game:DefineFastFlag("EnableModerateChatUseChatService", false) and game:GetEngineFeature("EnableChatModerationModeLoggingRefactor")
 
 return function()
-	-- upvalues: createSignal (ref), getChatStatusStoreModule (ref), enableChatModerationModeLoggingRefactorEngineFeature (ref), chatService (ref), robloxReplicatedStorageService (ref), createComputed (ref)
+	-- upvalues: createSignal (ref), getChatStatusStoreModule (ref), enableChatModerationModeLoggingRefactor (ref), chatService (ref), robloxReplicatedStorageService (ref), createComputed (ref)
 	local var1, var2 = createSignal(false)
 	local var3, var4 = createSignal(false)
 	local var5 = getChatStatusStoreModule(false)
 	local var6 = nil
 	
 	local function setIsSettingEnabled(value)
-		-- upvalues: enableChatModerationModeLoggingRefactorEngineFeature (copy), chatService (copy), var6 (write)
-		if enableChatModerationModeLoggingRefactorEngineFeature then
+		-- upvalues: enableChatModerationModeLoggingRefactor (copy), chatService (copy), var6 (write)
+		if enableChatModerationModeLoggingRefactor then
 			chatService:RequestModerationModeEnabled(value)
 			
 			return
@@ -25,8 +25,8 @@ return function()
 	end
 	
 	local function initialize()
-		-- upvalues: enableChatModerationModeLoggingRefactorEngineFeature (copy), chatService (copy), var6 (write)
-		if enableChatModerationModeLoggingRefactorEngineFeature then
+		-- upvalues: enableChatModerationModeLoggingRefactor (copy), chatService (copy), var6 (write)
+		if enableChatModerationModeLoggingRefactor then
 			chatService:RequestModerationModeEnabled(false)
 			
 			return
@@ -37,7 +37,7 @@ return function()
 	
 	local var7 = nil
 	
-	if enableChatModerationModeLoggingRefactorEngineFeature then
+	if enableChatModerationModeLoggingRefactor then
 		var7 = chatService:GetPropertyChangedSignal("ModerationMode"):Connect(function()
 			-- upvalues: var2 (ref), chatService (copy), var4 (ref)
 			var2(chatService.ModerationMode ~= "Unsupported")

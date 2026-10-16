@@ -3,12 +3,12 @@ local parent = trustedContacts.Parent
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local useOverlay = require(parent.Foundation).Hooks.useOverlay
-local trustedFriendsCardWithActionsCheckModule = require(script.Parent.TrustedFriendsCardWithActionsCheck)
+local var1 = if require(parent.SharedFlags).FFlagTFWithActionsCheck then require(script.Parent.TrustedFriendsCardWithActionsCheck) else require(script.Parent.TrustedContactsModalContainer)
 local fFlagTCModalUseFoundationOverlay = require(parent.SharedFlags).FFlagTCModalUseFoundationOverlay
 local _ = require(trustedContacts.Common.Types)
 
 return function(p1)
-	-- upvalues: fFlagTCModalUseFoundationOverlay (ref), useOverlay (ref), reactRobloxModule (ref), reactModule (ref), trustedFriendsCardWithActionsCheckModule (ref)
+	-- upvalues: fFlagTCModalUseFoundationOverlay (ref), useOverlay (ref), reactRobloxModule (ref), reactModule (ref), var1 (ref)
 	local modalProps = p1.screenProps.modalProps
 	local externalNavigation = p1.screenProps.externalNavigation
 	
@@ -18,7 +18,7 @@ return function(p1)
 			DisplayOrder = 11,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
-			reactModule.createElement(trustedFriendsCardWithActionsCheckModule, {
+			reactModule.createElement(var1, {
 				userId = modalProps.userId,
 				onRequestAccepted = modalProps.onRequestAccepted,
 				onRequestSent = modalProps.onRequestSent,
@@ -32,9 +32,9 @@ return function(p1)
 			})
 		})
 	end
-	local var1 = useOverlay()
+	local var2 = useOverlay()
 	
-	return if var1 then reactRobloxModule.createPortal(reactModule.createElement(trustedFriendsCardWithActionsCheckModule, {
+	return if var2 then reactRobloxModule.createPortal(reactModule.createElement(var1, {
 		userId = modalProps.userId,
 		onRequestAccepted = modalProps.onRequestAccepted,
 		onRequestSent = modalProps.onRequestSent,
@@ -45,5 +45,5 @@ return function(p1)
 		isVerticallyConstrained = modalProps.isVerticallyConstrained,
 		onAcknowledged = modalProps.onAcknowledged,
 		externalNavigation = externalNavigation
-	}), var1) else nil
+	}), var2) else nil
 end

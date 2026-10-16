@@ -19,19 +19,4 @@ function t.draftFromText(p1)
 	return { plainText = { text = p1 } }
 end
 
-function t.getDetail(p1)
-	return p1.plainText
-end
-
-function t.getDraft(p1)
-	return p1.plainText
-end
-
-function t.fromDraft(p1)
-	-- upvalues: t (ref)
-	local draft = t.getDraft(p1)
-	
-	return if draft == nil then nil else t.fromText(draft.text)
-end
-
 return t

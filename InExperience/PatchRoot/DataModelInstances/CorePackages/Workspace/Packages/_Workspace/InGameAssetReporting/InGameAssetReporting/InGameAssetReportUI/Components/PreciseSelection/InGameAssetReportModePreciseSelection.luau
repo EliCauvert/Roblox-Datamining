@@ -25,10 +25,11 @@ local inGameAssetReportAnalyticsModule = require(inGameAssetReporting.InGameAsse
 local getHighlightModeVariantModule = require(inGameAssetReporting.Utility.getHighlightModeVariant)
 local preciseSelectionBugfixesEnabled = game:DefineFastFlag("PreciseSelectionBugfixesEnabled", false)
 local fFlagPrefillPreciseSelectionChoices = require(parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
+local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
 local text = string.gsub(string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www."), "http:", "https:"), "https://www", "https://apis") .. "rights-management-api/rights/v1/snapshots"
 
 return function(p1)
-	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), setTimeout (ref), clearTimeout (ref), preciseSelectionBugfixesEnabled (ref), screenshotManager (ref), sceneAnalysisModule (ref), inGameAssetReportAnalyticsModule (ref), experienceStateCaptureService (ref), userInputService (ref), httpService (ref), text (ref), getHighlightModeVariantModule (ref), buildReportModule (ref), playersService (ref), withLocalization (ref), reportPreciseSelectionPortraitHeaderFooterModule (ref), reportPreciseSelectionLandscapeHeaderModule (ref), inGameAssetReportSubmitDialogModule (ref), fFlagPrefillPreciseSelectionChoices (ref), inGameAssetReportCompleteModalModule (ref), inGameAssetReportIPInfringementModalModule (ref), inGameAssetIPInfringementErrorModalModule (ref)
+	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), setTimeout (ref), clearTimeout (ref), preciseSelectionBugfixesEnabled (ref), screenshotManager (ref), sceneAnalysisModule (ref), inGameAssetReportAnalyticsModule (ref), experienceStateCaptureService (ref), userInputService (ref), httpService (ref), text (ref), getHighlightModeVariantModule (ref), buildReportModule (ref), playersService (ref), withLocalization (ref), fFlagUpdateInGameAssetReportingCTAs (ref), reportPreciseSelectionPortraitHeaderFooterModule (ref), reportPreciseSelectionLandscapeHeaderModule (ref), inGameAssetReportSubmitDialogModule (ref), fFlagPrefillPreciseSelectionChoices (ref), inGameAssetReportCompleteModalModule (ref), inGameAssetReportIPInfringementModalModule (ref), inGameAssetIPInfringementErrorModalModule (ref)
 	local var1, var2 = reactModule.useState(false)
 	local var3, var4 = reactModule.useState(false)
 	local var5, var6 = reactModule.useState(false)
@@ -310,9 +311,9 @@ return function(p1)
 	
 	return withLocalization({
 		mainTitle = "Feature.ReportAbuse.Label.HighlightProblemPrecise",
-		next = "CommonUI.Controls.Action.Continue",
 		coachmarkTitle = "Feature.ReportAbuse.Label.CantSelectTitle",
-		coachmarkText = "Feature.ReportAbuse.Label.CantSelectSubtitle"
+		coachmarkText = "Feature.ReportAbuse.Label.CantSelectSubtitle",
+		next = if fFlagUpdateInGameAssetReportingCTAs then "CommonUI.Controls.Action.Continue" else "Feature.ReportAbuse.Action.Next"
 	})(function(p5)
 		-- upvalues: reactModule (copy), var41 (ref), isSmallPortraitMode (ref), reportPreciseSelectionPortraitHeaderFooterModule (copy), var34 (ref), reportPreciseSelectionLandscapeHeaderModule (copy), var33 (ref), var21 (ref), var31 (ref), var1 (ref), inGameAssetReportSubmitDialogModule (copy), viewportSize (ref), var35 (ref), var39 (ref), var14 (ref), fFlagPrefillPreciseSelectionChoices (copy), var9 (ref), var3 (ref), inGameAssetReportCompleteModalModule (copy), var40 (ref), var5 (ref), inGameAssetReportIPInfringementModalModule (copy), var25 (ref), var27 (ref), inGameAssetIPInfringementErrorModalModule (copy), var42 (ref), var43 (ref), var29 (ref)
 		return reactModule.createElement("Frame", {

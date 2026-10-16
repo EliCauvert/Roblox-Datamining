@@ -3,7 +3,6 @@ local parent = buildExperience.Parent
 local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local chatTypesModule = require(buildExperience.Chat.chatTypes)
-local fFlagBuildExperienceAnswerFormModule = require(buildExperience.Flags.FFlagBuildExperienceAnswerForm)
 local useChatPlaytestFooterModule = require(buildExperience.Chat.useChatPlaytestFooter)
 local useBuildPromptDraftModule = require(buildExperience.Chat.useBuildPromptDraft)
 local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
@@ -23,7 +22,7 @@ local fFlagBuildExperienceChatImageAttachments = sharedFlagsModule.FFlagBuildExp
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), useBuildPromptDraftModule (ref), fFlagBuildExperienceDeveloperProductContextModule (ref), useChatPlaytestFooterModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), getPlayButtonStoreModule (ref), reactModule (ref), chatTypesModule (ref), fFlagBuildExperienceChatImageAttachments (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceAnswerFormModule (ref)
+	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), useBuildPromptDraftModule (ref), fFlagBuildExperienceDeveloperProductContextModule (ref), useChatPlaytestFooterModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), getPlayButtonStoreModule (ref), reactModule (ref), chatTypesModule (ref), fFlagBuildExperienceChatImageAttachments (ref), fFlagBuildExperienceAnalytics (ref)
 	local onClose = p1.onClose or noop
 	local var1 = p1.isOpen == nil or p1.isOpen
 	local var2 = signalsReactModule.useSignalState(getAssistantBuildStoreModule().getIsDisabled)
@@ -129,8 +128,6 @@ return function(p1)
 		defaultSnapPointIndex = p1.defaultSnapPointIndex,
 		messages = var5.messages,
 		localToolActions = var5.localToolActions,
-		answerForm = if fFlagBuildExperienceAnswerFormModule then var5.answerForm else nil,
-		onSubmitAnswerText = if fFlagBuildExperienceAnswerFormModule then var5.submitAnswerText else nil,
 		clockBinding = var5.clockBinding,
 		onPlaytest = var6.onPlaytest,
 		isPlaytestLoading = var6.isPlaytestLoading,

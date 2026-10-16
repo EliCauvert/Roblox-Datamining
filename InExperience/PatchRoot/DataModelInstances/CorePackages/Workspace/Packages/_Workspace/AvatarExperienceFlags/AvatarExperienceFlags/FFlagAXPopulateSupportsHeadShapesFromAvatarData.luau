@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXPopulateSupportsHeadShapesFromAvatarData", false) and require(script.Parent.FFlagParseHeadShapeFromAPIResponse)

@@ -9,6 +9,7 @@ local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVari
 local splitDottedPathModule = require(sduiCoreSystem.ClientBinding.splitDottedPath)
 local parsePymkItemsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.parsePymkItems)
 local fFlagSduiPropParsersShouldHandleTokens = require(parent.SharedFlags).FFlagSduiPropParsersShouldHandleTokens
+local fFlagLuaAppSduiColorPropMigration = require(parent.SharedFlags).FFlagLuaAppSduiColorPropMigration
 local fFlagSduiUnwrapStructPropEnvelope = require(parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
 local fFlagSduiParseProtoGradientFields = require(parent.SharedFlags).FFlagSduiParseProtoGradientFields
 
@@ -319,7 +320,7 @@ return {
 	parsePymkItems = parsePymkItemsModule,
 	parseStringArray = parseStringArray,
 	parseToString = parseToString,
-	parseColor3 = parseColor3,
+	parseColor3 = if fFlagLuaAppSduiColorPropMigration then parseColor3 else nil,
 	parseGradient = if fFlagSduiParseProtoGradientFields then function(p8)
 		-- upvalues: parseStruct (ref), t (ref), parseColor3 (ref)
 		local var9 = parseStruct(p8)
@@ -350,9 +351,9 @@ return {
 			degree = if var9.degree == nil then t.degree else var9.degree
 		}
 	end else nil,
-	parseColorPropLegacy = function(p8)
+	parseColorPropLegacy = if fFlagLuaAppSduiColorPropMigration then function(p8)
 		return if typeof(p8) == "string" then Color3.fromHex(p8) else p8
-	end,
+	end else nil,
 	parseFocusNavActions = function(p8)
 		-- upvalues: inputHandlersModule (ref)
 		if typeof(p8) ~= "table" then

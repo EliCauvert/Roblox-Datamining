@@ -7,7 +7,6 @@
 	ContentPostScreenshot = "content_post_screenshot",
 	DeveloperProduct = "developer_product",
 	GamePass = "game_pass",
-	GameTile = "game_tile",
 	Group = "group",
 	InExperience = "in_experience",
 	InExperienceShop = "in_experience_shop",

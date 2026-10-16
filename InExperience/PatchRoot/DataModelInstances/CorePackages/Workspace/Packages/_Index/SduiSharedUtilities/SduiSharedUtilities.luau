@@ -5,6 +5,7 @@ local sduiSurfaceLoadTimeTrackerModule = require(script.SduiSurfaceLoadTimeTrack
 local _ = require(script.SduiIntegrationTypes)
 local parent = script.Parent
 local _ = require(parent.SduiCoreSystem)
+local fFlagSduiClientDrivenTemplates = require(parent.SharedFlags).FFlagSduiClientDrivenTemplates
 
 return {
 	["jest.config"] = script["jest.config"],
@@ -37,14 +38,12 @@ return {
 	end,
 	createSduiApiStore = require(script.createSduiApiStore),
 	getSduiApiStore = require(script.getSduiApiStore),
-	SduiInputDataUpdates = if require(parent.SharedFlags).FFlagSduiApiStoreUpdateInputData then require(script.SduiInputDataUpdates) else nil,
-	useDataHydrationAccountGeneration = if require(parent.SharedFlags).FFlagHomePageRefetchOnDataHydrationAccountReset then require(script.hooks.useDataHydrationAccountGeneration) else nil,
-	fetchSduiTemplates = function(p1, p2)
+	fetchSduiTemplates = if fFlagSduiClientDrivenTemplates then function(p1, p2)
 		return require(script.fetchSduiTemplates)(p1, p2)
-	end,
-	createTemplateApiRequestConfig = function(p1)
+	end else nil,
+	createTemplateApiRequestConfig = if fFlagSduiClientDrivenTemplates then function(p1)
 		return require(script.createTemplateApiRequestConfig)(p1)
-	end,
+	end else nil,
 	handleSduiApiResponse = require(script.handleSduiApiResponse),
 	prewarmAppTemplatesOnLaunch = function()
 		return require(script.prewarmAppTemplatesOnLaunch)()

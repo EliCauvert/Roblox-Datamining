@@ -3,8 +3,6 @@ local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).DebugVis
 local debugVisualizationsStaticContentModule = require(script.Parent.DebugVisualizationsStaticContent)
 local slimDevConsole2 = game:DefineFastFlag("SlimDevConsole2", false)
 local slimTintContextFilter = game:DefineFastFlag("SlimTintContextFilter", false)
-local slimTintModeTelemetry = game:DefineFastFlag("SlimTintModeTelemetry", false)
-local debugVisualizationsTelemetryModule = require(script.Parent.DebugVisualizationsTelemetry)
 local t = {
 	[chartHeaderNames[1]] = function(p1, p2)
 		return p1.name < p2.name
@@ -95,7 +93,7 @@ function t_1:isRunning()
 end
 
 function t_1:_toggleValue(p3, p4)
-	-- upvalues: slimDevConsole2 (ref), slimTintModeTelemetry (ref), debugVisualizationsTelemetryModule (ref), t (ref)
+	-- upvalues: slimDevConsole2 (ref), t (ref)
 	if slimDevConsole2 then
 		local var1 = self._visualizationsData[p3]
 		
@@ -103,32 +101,27 @@ function t_1:_toggleValue(p3, p4)
 			local service = settings():GetService(var1.Service)
 			service[var1.Setter](service, p4)
 			var1.Value = p4
-			
-			if slimTintModeTelemetry and p3 == "SlimTintMode" then
-				debugVisualizationsTelemetryModule.logSlimTintModeSelected(p4)
-			end
 			table.sort(self._sortedVisualizationData, t[self._sortType])
 			self._visualizationsUpdated:Fire(self._sortedVisualizationData)
 			
 			return
-		else
-			local physics = settings().Physics
-			
-			if physics[p3] ~= nil then
-				if p4 and self._visualizationsData[p3].Type == "Box" then
-					for i, v in pairs(self._visualizationsData) do
-						if v.Type == "Box" and physics[v.Name] ~= nil then
-							physics[v.Name] = false
-							self._visualizationsData[v.Name].Value = false
-						end
-					end
+		end
+	end
+	local physics = settings().Physics
+	
+	if physics[p3] ~= nil then
+		if p4 and self._visualizationsData[p3].Type == "Box" then
+			for i, v in pairs(self._visualizationsData) do
+				if v.Type == "Box" and physics[v.Name] ~= nil then
+					physics[v.Name] = false
+					self._visualizationsData[v.Name].Value = false
 				end
-				physics[p3] = p4
-				self._visualizationsData[p3].Value = p4
-				table.sort(self._sortedVisualizationData, t[self._sortType])
-				self._visualizationsUpdated:Fire(self._sortedVisualizationData)
 			end
 		end
+		physics[p3] = p4
+		self._visualizationsData[p3].Value = p4
+		table.sort(self._sortedVisualizationData, t[self._sortType])
+		self._visualizationsUpdated:Fire(self._sortedVisualizationData)
 	end
 end
 

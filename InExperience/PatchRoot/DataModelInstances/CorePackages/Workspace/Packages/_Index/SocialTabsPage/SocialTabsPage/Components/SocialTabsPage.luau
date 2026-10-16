@@ -7,9 +7,6 @@ local useTokens = foundationModule.Hooks.useTokens
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSafeArea
 local useNavigation = require(parent.Navigation).useNavigation
-local displayModule = require(parent.Display)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local fFlagSocialTabsPageDockedPanelSafeAreaModule = require(socialTabsPage.Flags.FFlagSocialTabsPageDockedPanelSafeArea)
 local socialTabsHeaderModule = require(socialTabsPage.Components.SocialTabsHeader)
 local socialTabBarModule = require(socialTabsPage.Components.SocialTabBar)
 local socialTabsContextModule = require(socialTabsPage.Contexts.SocialTabsContext)
@@ -17,7 +14,7 @@ local useLocalizedTabsModule = require(socialTabsPage.Hooks.useLocalizedTabs)
 local _ = require(socialTabsPage.Common.Types)
 
 return function(value)
-	-- upvalues: reactModule (ref), useLocalizedTabsModule (ref), useTokens (ref), useNavigation (ref), fFlagSocialTabsPageDockedPanelSafeAreaModule (ref), useSignalState (ref), displayModule (ref), view (ref), socialTabsHeaderModule (ref), socialTabBarModule (ref), stateLayerAffordance (ref), socialTabsContextModule (ref), fullscreenPageWithSafeArea (ref)
+	-- upvalues: reactModule (ref), useLocalizedTabsModule (ref), useTokens (ref), useNavigation (ref), view (ref), socialTabsHeaderModule (ref), socialTabBarModule (ref), stateLayerAffordance (ref), socialTabsContextModule (ref), fullscreenPageWithSafeArea (ref)
 	local color3, var1, t_1
 	local renderNavigator = value.renderNavigator
 	local renderHeader = value.renderHeader
@@ -33,32 +30,31 @@ return function(value)
 	local var3 = useLocalizedTabsModule(tabConfig)
 	local var4 = useTokens()
 	local var5 = useNavigation()
-	local var6 = if fFlagSocialTabsPageDockedPanelSafeAreaModule then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
-	local var7 = reactModule.useRef(false)
-	local var8 = reactModule.useCallback(function()
+	local var6 = reactModule.useRef(false)
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref)
 		var5.goBack()
 	end, { var5 })
 	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), initialTabId (ref), tabConfig (ref), var5 (ref)
-		if var7.current then return end
+		-- upvalues: var6 (ref), initialTabId (ref), tabConfig (ref), var5 (ref)
+		if var6.current then return end
 		if not initialTabId or #tabConfig == 0 then return end
-		local var9 = false
+		local var8 = false
 		
 		for i, v in tabConfig do
 			if v.id == initialTabId then
-				var9 = true
+				var8 = true
 				break
 			end
 		end
-		local var10 = if var9 then initialTabId else tabConfig[1].id
+		local var9 = if var8 then initialTabId else tabConfig[1].id
 		
-		if var5.state.routes[var5.state.index].routeName ~= var10 then
-			var5.navigate(var10)
+		if var5.state.routes[var5.state.index].routeName ~= var9 then
+			var5.navigate(var9)
 		end
-		var7.current = true
+		var6.current = true
 	end, { initialTabId, tabConfig, var5 })
-	local var11 = reactModule.createElement(view, { tag = "col size-full" }, {
+	local var10 = reactModule.createElement(view, { tag = "col size-full" }, {
 		HeaderSection = reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y bg-surface-0",
 			LayoutOrder = 1
@@ -75,28 +71,19 @@ return function(value)
 	if pageWidth == nil then
 		color3 = var4.Color.Surface.Surface_0.Color3
 		var1 = var4.Color.Surface.Surface_0.Transparency
-		t_1 = { SocialTabsPageContent = var11 }
+		t_1 = { SocialTabsPageContent = var10 }
 	else
 		local t = { affordance = stateLayerAffordance.None }
 		color3 = var4.Color.Surface.Surface_0.Color3
 		var1 = 1
 		t_1 = {
-			ScrimClickHandler = reactModule.createElement(view, { tag = "size-full", stateLayer = t, onActivated = var8 }, {
+			ScrimClickHandler = reactModule.createElement(view, { tag = "size-full", stateLayer = t, onActivated = var7 }, {
 				Panel = reactModule.createElement(view, {
-					tag = {
-						["col anchor-top-right bg-surface-0"] = true,
-						["position-top-right padding-top-xxlarge"] = not fFlagSocialTabsPageDockedPanelSafeAreaModule
-					},
-					Position = if fFlagSocialTabsPageDockedPanelSafeAreaModule then UDim2.new(1, var6.right, 0, -var6.top) else nil,
-					Size = if fFlagSocialTabsPageDockedPanelSafeAreaModule then UDim2.new(0, pageWidth, 1, var6.top + var6.bottom) else UDim2.new(0, pageWidth, 1, 0),
-					padding = if fFlagSocialTabsPageDockedPanelSafeAreaModule then {
-						top = UDim.new(0, var6.top + var4.Padding.XXLarge),
-						right = UDim.new(0, var6.right),
-						bottom = UDim.new(0, var6.bottom)
-					} else nil,
+					tag = "col position-top-right anchor-top-right padding-top-xxlarge bg-surface-0",
+					Size = UDim2.new(0, pageWidth, 1, 0),
 					stateLayer = t,
 					onActivated = function() end
-				}, { Content = var11 })
+				}, { Content = var10 })
 			})
 		}
 	end

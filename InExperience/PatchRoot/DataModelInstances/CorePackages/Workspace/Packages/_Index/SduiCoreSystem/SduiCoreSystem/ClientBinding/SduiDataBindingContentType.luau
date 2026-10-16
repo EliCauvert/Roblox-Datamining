@@ -28,6 +28,5 @@
 	communityUserMembership = "communityUserMembership",
 	clientPageScope = "clientPageScope",
 	capability = "capability",
-	notificationBadge = "notificationBadge",
-	leaderboardStats = "leaderboardStats"
+	notificationBadge = "notificationBadge"
 }

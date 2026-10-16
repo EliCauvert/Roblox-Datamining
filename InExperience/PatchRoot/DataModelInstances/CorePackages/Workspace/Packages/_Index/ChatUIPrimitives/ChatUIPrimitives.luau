@@ -2,7 +2,6 @@
 
 return {
 	ChatInputBarView = require(script.Components.ChatInputBar.ChatInputBarView),
-	chatTabNavigationSignal = require(script.chatTabNavigationSignal),
 	["jest.config"] = script["jest.config"],
 	["jest.bench.config"] = script["jest.bench.config"],
 	MessageLayoutContainer = require(script.Components.MessageLayoutContainer.MessageLayoutContainer),
@@ -18,7 +17,6 @@ return {
 		usePropSignal = require(script.Hooks.usePropSignal),
 		useFinishChatWindowMessageRenderIntervals = require(script.Hooks.useFinishChatWindowMessageRenderIntervals),
 		useFocusInputBar = require(script.Hooks.useFocusInputBar),
-		useInputBarTabNavigation = require(script.Hooks.useInputBarTabNavigation),
 		useInExperienceLocalization = require(script.Hooks.useInExperienceLocalization),
 		useLastInputGroup = require(script.Hooks.useLastInputGroup),
 		usePortalSelectionLinks = require(script.Hooks.usePortalSelectionLinks)
@@ -29,8 +27,6 @@ return {
 	},
 	Flags = {
 		FFlagExpChatAddressFrame0Flash = require(script.Flags.FFlagExpChatAddressFrame0Flash),
-		FFlagExpChatExpressionTrayReducedMotion = require(script.Flags.FFlagExpChatExpressionTrayReducedMotion),
-		FFlagExpChatPerfTrackerTabName = require(script.Flags.FFlagExpChatPerfTrackerTabName),
-		FFlagTCWTranslationSupport = require(script.Flags.FFlagTCWTranslationSupport)
+		FFlagExpChatPerfTrackerTabName = require(script.Flags.FFlagExpChatPerfTrackerTabName)
 	}
 }

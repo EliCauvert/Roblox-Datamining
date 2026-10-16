@@ -32,12 +32,12 @@
 			Chat = "Chat",
 			Moments = "Moments",
 			MomentsImmersive = "Moments",
-			Build = "Build",
 			More = "More",
 			Landing = "Landing",
 			Startup = "Startup",
 			PlayingGame = "PlayingGame",
-			Unknown = "Unknown"
+			Unknown = "Unknown",
+			Build = if require(script:FindFirstAncestor("RobloxAppSessionization").Parent.SharedFlags).FFlagBuildExperienceSessionization then "Build" else nil
 		},
 		Level2b = {
 			AvatarExperienceLandingPage = "AvatarExperienceLandingPage",

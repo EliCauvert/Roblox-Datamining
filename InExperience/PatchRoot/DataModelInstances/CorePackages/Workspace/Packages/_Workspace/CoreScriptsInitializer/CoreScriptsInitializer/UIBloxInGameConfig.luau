@@ -9,5 +9,6 @@ return {
 	didMountUpdateFullPageModal = UIBlox.GetFFlagUIBloxDidMountUpdateFullPageModal(),
 	useFoundationToastButtonSizing = UIBlox.FFlagUIBloxToastFoundationButtonSizing,
 	useTokenizedShortcutBar = sharedFlagsModule.FFlagEnableConsoleExpControls,
-	disableTokenScaling = UIBlox.FFlagUIBloxDisableTokenScaling
+	disableTokenScaling = UIBlox.FFlagUIBloxDisableTokenScaling,
+	deprecateComponentGlobalSemanticTokenUse = UIBlox.FFlagUIBloxDeprecateComponentGlobalSemanticTokenUse
 }

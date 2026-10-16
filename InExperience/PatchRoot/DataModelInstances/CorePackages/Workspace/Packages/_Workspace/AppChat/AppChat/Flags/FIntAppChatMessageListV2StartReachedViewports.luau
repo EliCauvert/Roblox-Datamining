@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("AppChatMessageListV2StartReachedViewports", 3)

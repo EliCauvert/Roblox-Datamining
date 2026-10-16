@@ -17,12 +17,7 @@ local hoverGreen = constantsModule.Color.HoverGreen
 local warningYellow = constantsModule.Color.WarningYellow
 local errorRed = constantsModule.Color.ErrorRed
 local unselectedGray = constantsModule.Color.UnselectedGray
-local t = {
-	complete = true,
-	completed = true,
-	connected = true,
-	stable = true
-}
+local t = { complete = true, connected = true, stable = true }
 local t_1 = { checking = true, connecting = true, new = true }
 local t_2 = { failed = true, disconnected = true, closed = true }
 local t_3 = {
@@ -150,13 +145,9 @@ local function LegCell(p1)
 	})
 end
 
-local function formatSelectedCandidatePair(p1, p2, p3)
-	return if p1 == nil or p1 == "" or (p2 == nil or p2 == "") then nil elseif p3 and p3 ~= "" then string.format("%s \226\134\148 %s (%s)", p1, p2, p3) else string.format("%s \226\134\148 %s", p1, p2)
-end
-
 local function TransportStateTable(p1)
-	-- upvalues: getFFlagVoiceDebugConsoleV2Module (ref), t (ref), hoverGreen (ref), t_1 (ref), warningYellow (ref), t_2 (ref), errorRed (ref), unselectedGray (ref), roactModule (ref), constantsModule (ref), cellLabelModule (ref), uDim_3 (ref), LegCell (ref), uDim_4 (ref), formatSelectedCandidatePair (ref), GroupHeader (ref), HeaderCell (ref)
-	local createElement_2, t_6
+	-- upvalues: getFFlagVoiceDebugConsoleV2Module (ref), t (ref), hoverGreen (ref), t_1 (ref), warningYellow (ref), t_2 (ref), errorRed (ref), unselectedGray (ref), roactModule (ref), constantsModule (ref), cellLabelModule (ref), uDim_3 (ref), LegCell (ref), uDim_4 (ref), GroupHeader (ref), HeaderCell (ref)
+	local t_6
 	local connectivity = p1.connectivity or {}
 	local layoutOrder = p1.layoutOrder
 	local var1 = getFFlagVoiceDebugConsoleV2Module()
@@ -180,12 +171,12 @@ local function TransportStateTable(p1)
 	local t_3 = {}
 	
 	for i, v in list do
-		local var2
+		local publish, var2
 		if var1 then
-			createElement_2 = v.publish
+			publish = v.publish
 			
-			if createElement_2 ~= nil then
-				var2 = if t[createElement_2] then hoverGreen elseif t_1[createElement_2] then warningYellow elseif t_2[createElement_2] then errorRed else unselectedGray
+			if publish ~= nil then
+				var2 = if t[publish] then hoverGreen elseif t_1[publish] then warningYellow elseif t_2[publish] then errorRed else unselectedGray
 			end
 			var2 = var2 or nil
 		end
@@ -193,9 +184,9 @@ local function TransportStateTable(p1)
 			t_6 = v.subscribe
 			
 			if t_6 ~= nil then
-				createElement_2 = if t[t_6] then hoverGreen elseif t_1[t_6] then warningYellow elseif t_2[t_6] then errorRed else unselectedGray
+				publish = if t[t_6] then hoverGreen elseif t_1[t_6] then warningYellow elseif t_2[t_6] then errorRed else unselectedGray
 			end
-			createElement_2 = createElement_2 or nil
+			publish = publish or nil
 		end
 		t_6 = var1
 		
@@ -203,7 +194,7 @@ local function TransportStateTable(p1)
 			t_6 = if var2 ~= warningYellow then var2 == errorRed else true
 			
 			if not t_6 then
-				t_6 = if createElement_2 ~= warningYellow then createElement_2 == errorRed else true
+				t_6 = if publish ~= warningYellow then publish == errorRed else true
 			end
 		end
 		local text = "row" .. i
@@ -231,22 +222,22 @@ local function TransportStateTable(p1)
 		}
 		local createElement_1 = roactModule.createElement
 		local t_7 = {}
-		local publish = v.publish
-		t_7.text = if publish == nil or publish == "" then "\226\128\148" else publish
+		local publish_1 = v.publish
+		t_7.text = if publish_1 == nil or publish_1 == "" then "\226\128\148" else publish_1
 		t_7.color = var2
 		t_7.size = UDim2.new(uDim_4, UDim.new(1, 0))
 		t_7.pos = UDim2.new(uDim_3, UDim.new(0, 0))
 		t_5.Publish = createElement_1(LegCell, t_7)
-		local createElement_3 = roactModule.createElement
+		local createElement_2 = roactModule.createElement
 		local var4 = LegCell
 		local t_8 = {
-			text = if publish == nil or publish == "" then "\226\128\148" else publish,
-			color = createElement_2,
+			text = if publish_1 == nil or publish_1 == "" then "\226\128\148" else publish_1,
+			color = publish,
 			size = UDim2.new(uDim_4, UDim.new(1, 0)),
 			pos = UDim2.new(uDim_3 + uDim_4, UDim.new(0, 0))
 		}
-		publish = v.subscribe
-		t_5.Subscribe = createElement_3(var4, t_8)
+		publish_1 = v.subscribe
+		t_5.Subscribe = createElement_2(var4, t_8)
 		t_3[text] = createElement(var3, t_4, t_5)
 	end
 	local rebootCount = connectivity.rebootCount and tostring(connectivity.rebootCount) or nil
@@ -278,63 +269,6 @@ local function TransportStateTable(p1)
 	}
 	t_5.Subscribe = roactModule.createElement(LegCell, t_6)
 	t_3.restartRow = createElement(var5, t_4, t_5)
-	local var6 = if connectivity.timeToConnectedMs and connectivity.timeToConnectedMs > 0 then string.format("%.0f ms", connectivity.timeToConnectedMs) else nil
-	local createElement_1 = roactModule.createElement
-	local var7 = "Frame"
-	local t_7 = {
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, 20),
-		LayoutOrder = #list + 2
-	}
-	local t_8 = {
-		Label = roactModule.createElement(cellLabelModule, {
-			text = "Time to connected",
-			size = UDim2.new(uDim_3, UDim.new(1, 0)),
-			pos = UDim2.new(0, 0, 0, 0),
-			textTruncate = Enum.TextTruncate.AtEnd
-		})
-	}
-	createElement_2 = roactModule.createElement
-	t_8.Publish = createElement_2(LegCell, {
-		text = if var6 == nil or var6 == "" then "\226\128\148" else var6,
-		size = UDim2.new(uDim_4, UDim.new(1, 0)),
-		pos = UDim2.new(uDim_3, UDim.new(0, 0))
-	})
-	createElement_2 = roactModule.createElement
-	t_8.Subscribe = createElement_2(LegCell, {
-		text = if var6 == nil or var6 == "" then "\226\128\148" else var6,
-		size = UDim2.new(uDim_4, UDim.new(1, 0)),
-		pos = UDim2.new(uDim_3 + uDim_4, UDim.new(0, 0))
-	})
-	t_3.timeToConnectedRow = createElement_1(var7, t_7, t_8)
-	local var8 = formatSelectedCandidatePair(connectivity.selectedCandidatePairLocalTypePublish, connectivity.selectedCandidatePairRemoteTypePublish, connectivity.selectedCandidatePairLocalProtocolPublish)
-	local var9 = formatSelectedCandidatePair(connectivity.selectedCandidatePairLocalTypeSubscribe, connectivity.selectedCandidatePairRemoteTypeSubscribe, connectivity.selectedCandidatePairLocalProtocolSubscribe)
-	local createElement_3 = roactModule.createElement
-	local var10 = "Frame"
-	createElement_2 = {
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, 20),
-		LayoutOrder = #list + 3
-	}
-	t_6 = {
-		Label = roactModule.createElement(cellLabelModule, {
-			text = "Selected candidate pair",
-			size = UDim2.new(uDim_3, UDim.new(1, 0)),
-			pos = UDim2.new(0, 0, 0, 0),
-			textTruncate = Enum.TextTruncate.AtEnd
-		}),
-		Publish = roactModule.createElement(LegCell, {
-			text = if var8 == nil or var8 == "" then "\226\128\148" else var8,
-			size = UDim2.new(uDim_4, UDim.new(1, 0)),
-			pos = UDim2.new(uDim_3, UDim.new(0, 0))
-		}),
-		Subscribe = roactModule.createElement(LegCell, {
-			text = if var9 == nil or var9 == "" then "\226\128\148" else var9,
-			size = UDim2.new(uDim_4, UDim.new(1, 0)),
-			pos = UDim2.new(uDim_3 + uDim_4, UDim.new(0, 0))
-		})
-	}
-	t_3.selectedCandidatePairRow = createElement_3(var10, createElement_2, t_6)
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -418,7 +352,7 @@ end
 local function TypePill(p2)
 	-- upvalues: t_3 (ref), t_4 (ref), roactModule (ref), constantsModule (ref)
 	local candidateType = p2.candidateType
-	local var11 = if candidateType then t_3[candidateType] else t_4
+	local var6 = if candidateType then t_3[candidateType] else t_4
 	
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -431,7 +365,7 @@ local function TypePill(p2)
 			Position = UDim2.new(0, 0, 0.5, 0),
 			Size = UDim2.new(0, 0, 0, 16),
 			AutomaticSize = Enum.AutomaticSize.X,
-			BackgroundColor3 = var11.background
+			BackgroundColor3 = var6.background
 		}, {
 			Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
 			Padding = roactModule.createElement("UIPadding", {
@@ -445,7 +379,7 @@ local function TypePill(p2)
 				AutomaticSize = Enum.AutomaticSize.X,
 				Font = constantsModule.Font.MainWindow,
 				TextSize = constantsModule.DefaultFontSize.MainWindow - 2,
-				TextColor3 = var11.text,
+				TextColor3 = var6.text,
 				TextXAlignment = Enum.TextXAlignment.Center
 			})
 		})
@@ -459,13 +393,13 @@ local _ = function(p2)
 	if not p2 then
 		return iceCandidateParserModule(p2)
 	end
-	local var11 = t_5[p2]
+	local var6 = t_5[p2]
 	
-	if var11 == nil then
-		var11 = iceCandidateParserModule(p2)
-		t_5[p2] = var11
+	if var6 == nil then
+		var6 = iceCandidateParserModule(p2)
+		t_5[p2] = var6
 	end
-	return var11
+	return var6
 end
 
 local function CandidateTable(p2)
@@ -473,14 +407,14 @@ local function CandidateTable(p2)
 	local title = p2.title
 	local candidates = p2.candidates or {}
 	local layoutOrder = p2.layoutOrder
-	local var11 = getFFlagVoiceDebugConsoleV2Module()
+	local var6 = getFFlagVoiceDebugConsoleV2Module()
 	local t = {}
 	
 	for i, v in candidates do
-		if not var11 then
+		if not var6 then
 			local text = "candidate" .. i
 			local createElement = roactModule.createElement
-			local var12 = "Frame"
+			local var7 = "Frame"
 			local t_1 = {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 20),
@@ -501,33 +435,33 @@ local function CandidateTable(p2)
 				})
 			}
 			local createElement_1 = roactModule.createElement
-			local var13 = cellLabelModule
+			local var8 = cellLabelModule
 			local t_3 = {}
 			local sdpMLineIndex = v.sdpMLineIndex
 			t_3.text = if sdpMLineIndex == nil then "\226\128\148" else tostring(sdpMLineIndex)
 			t_3.size = UDim2.new(uDim_2, UDim.new(1, 0))
 			t_3.pos = UDim2.new(uDim + uDim_1, UDim.new(0, 0))
-			t_2.SdpMLineIndex = createElement_1(var13, t_3)
-			t[text] = createElement(var12, t_1, t_2)
+			t_2.SdpMLineIndex = createElement_1(var8, t_3)
+			t[text] = createElement(var7, t_1, t_2)
 			continue
 		end
-		local var14
+		local var9
 		local candidate = v.candidate
 		
 		if candidate then
-			local var15 = t_5[candidate]
+			local var10 = t_5[candidate]
 			
-			if var15 == nil then
-				var15 = iceCandidateParserModule(candidate)
-				t_5[candidate] = var15
+			if var10 == nil then
+				var10 = iceCandidateParserModule(candidate)
+				t_5[candidate] = var10
 			end
-			var14 = var15
+			var9 = var10
 		else
-			var14 = iceCandidateParserModule(candidate)
+			var9 = iceCandidateParserModule(candidate)
 		end
 		local text = "candidate" .. i
 		local createElement = roactModule.createElement
-		local var16 = "Frame"
+		local var11 = "Frame"
 		local t_1 = {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 20),
@@ -535,14 +469,14 @@ local function CandidateTable(p2)
 		}
 		local t_2 = {
 			Type = roactModule.createElement(TypePill, {
-				candidateType = var14.candidateType,
+				candidateType = var9.candidateType,
 				size = UDim2.new(uDim_5, UDim.new(1, 0)),
 				pos = UDim2.new(0, 0, 0, 0)
 			})
 		}
 		local createElement_1 = roactModule.createElement
 		local t_3 = {}
-		local protocol = var14.protocol
+		local protocol = var9.protocol
 		t_3.text = if protocol == nil or protocol == "" then "\226\128\148" else protocol
 		t_3.size = UDim2.new(uDim_6, UDim.new(1, 0))
 		t_3.pos = UDim2.new(uDim_5, UDim.new(0, 0))
@@ -553,7 +487,7 @@ local function CandidateTable(p2)
 			size = UDim2.new(uDim_7, UDim.new(1, 0)),
 			pos = UDim2.new(uDim_5 + uDim_6, UDim.new(0, 0))
 		}
-		protocol = var14.priority
+		protocol = var9.priority
 		t_2.Priority = createElement_2(cellLabelModule, t_4)
 		local createElement_3 = roactModule.createElement
 		local t_6 = {
@@ -561,7 +495,7 @@ local function CandidateTable(p2)
 			size = UDim2.new(uDim_8, UDim.new(1, 0)),
 			pos = UDim2.new(uDim_5 + uDim_6 + uDim_7, UDim.new(0, 0))
 		}
-		protocol = var14.component
+		protocol = var9.component
 		t_2.Comp = createElement_3(cellLabelModule, t_6)
 		local createElement_4 = roactModule.createElement
 		local t_7 = {
@@ -573,15 +507,15 @@ local function CandidateTable(p2)
 		protocol = v.sdpMid
 		t_2.Mid = createElement_4(cellLabelModule, t_7)
 		local createElement_5 = roactModule.createElement
-		local var17 = cellLabelModule
+		local var12 = cellLabelModule
 		local t_8 = {
 			text = if protocol == nil then "\226\128\148" else tostring(protocol),
 			size = UDim2.new(uDim_10, UDim.new(1, 0)),
 			pos = UDim2.new(uDim_5 + uDim_6 + uDim_7 + uDim_8 + uDim_9, UDim.new(0, 0))
 		}
 		protocol = v.sdpMLineIndex
-		t_2.Idx = createElement_5(var17, t_8)
-		t[text] = createElement(var16, t_1, t_2)
+		t_2.Idx = createElement_5(var12, t_8)
+		t[text] = createElement(var11, t_1, t_2)
 	end
 	if next(t) == nil then
 		t.placeholder = roactModule.createElement(cellLabelModule, {
@@ -598,7 +532,7 @@ local function CandidateTable(p2)
 		LayoutOrder = layoutOrder
 	}, {
 		UIListLayout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-		Title = var11 and roactModule.createElement(GroupHeader, {
+		Title = var6 and roactModule.createElement(GroupHeader, {
 			layoutOrder = 1,
 			title = title,
 			subtitle = string.format("%d local", #candidates)
@@ -609,7 +543,7 @@ local function CandidateTable(p2)
 			size = UDim2.new(1, 0, 0, 20),
 			pos = UDim2.new()
 		}),
-		Header = if var11 then roactModule.createElement("Frame", {
+		Header = if var6 then roactModule.createElement("Frame", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 20)
@@ -695,7 +629,7 @@ local sdpSection = roactModule.PureComponent:extend("SdpSection")
 function sdpSection.init(p3)
 	p3.state = { expanded = false }
 	
-	function p16.onButtonPress()
+	function p3.onButtonPress()
 		-- upvalues: p3 (ref)
 		p3:setState(function(p4)
 			return { expanded = not p4.expanded }
@@ -705,15 +639,15 @@ end
 
 function sdpSection.render(p3)
 	-- upvalues: getFFlagVoiceDebugConsoleV2Module (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), constantsModule (ref)
-	local var18
+	local var13
 	local label = p3.props.label
 	local sdp = p3.props.sdp
 	local layoutOrder = p3.props.layoutOrder
-	local var19 = getFFlagVoiceDebugConsoleV2Module()
-	local var20 = sdp ~= nil and sdp ~= ""
+	local var14 = getFFlagVoiceDebugConsoleV2Module()
+	local var15 = sdp ~= nil and sdp ~= ""
 	
-	if var19 and var20 then
-		var18 = (if sdp == nil then nil else string.gsub(string.gsub(sdp, "[<>&\"']", {
+	if var14 and var15 then
+		var13 = (if sdp == nil then nil else string.gsub(string.gsub(sdp, "[<>&\"']", {
 			["<"] = "&lt;",
 			[">"] = "&gt;",
 			["&"] = "&amp;",
@@ -733,22 +667,22 @@ function sdpSection.render(p3)
 			layoutOrder = 1,
 			size = UDim2.new(1, 0, 0, 20),
 			isExpanded = p3.state.expanded,
-			isExpandable = var20,
-			onButtonPress = if var20 then p3.onButtonPress else nil
+			isExpandable = var15,
+			onButtonPress = if var15 then p3.onButtonPress else nil
 		}, {
 			Label = roactModule.createElement(cellLabelModule, {
-				text = if var20 then label else string.format("%s: \226\128\148", label),
+				text = if var15 then label else string.format("%s: \226\128\148", label),
 				size = UDim2.new(1, -20, 1, 0),
 				pos = UDim2.new(0, 20, 0, 0)
 			})
 		}),
-		Content = var20 and (p3.state.expanded and (roactModule.createElement("TextLabel", {
+		Content = var15 and (p3.state.expanded and (roactModule.createElement("TextLabel", {
 			TextWrapped = true,
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Text = var18,
-			RichText = var19,
-			TextSize = if var19 then constantsModule.DefaultFontSize.MainWindow - 3 else constantsModule.DefaultFontSize.MainWindow,
+			Text = var13,
+			RichText = var14,
+			TextSize = if var14 then constantsModule.DefaultFontSize.MainWindow - 3 else constantsModule.DefaultFontSize.MainWindow,
 			TextColor3 = constantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
@@ -764,9 +698,9 @@ return function(p3)
 	-- upvalues: getFFlagVoiceDebugConsoleV2Module (ref), roactModule (ref), TransportStateTable (ref), CandidateTable (ref), GroupHeader (ref), sdpSection (ref), collapsibleSectionModule (ref), mainRowPadding (ref), cellLabelModule (ref)
 	local connectivity = p3.connectivity or {}
 	local layoutOrder = p3.layoutOrder
-	local var18 = getFFlagVoiceDebugConsoleV2Module()
+	local var13 = getFFlagVoiceDebugConsoleV2Module()
 	local t = {
-		TransportState = var18 and roactModule.createElement(TransportStateTable, { layoutOrder = 1, connectivity = connectivity }) or nil,
+		TransportState = var13 and roactModule.createElement(TransportStateTable, { layoutOrder = 1, connectivity = connectivity }) or nil,
 		PublishCandidates = roactModule.createElement(CandidateTable, {
 			title = "Publish ICE candidates",
 			layoutOrder = 2,
@@ -777,7 +711,7 @@ return function(p3)
 			layoutOrder = 3,
 			candidates = connectivity.iceSubscribeCandidates
 		}),
-		SessionDescriptionsHeader = var18 and roactModule.createElement(GroupHeader, {
+		SessionDescriptionsHeader = var13 and roactModule.createElement(GroupHeader, {
 			title = "Session descriptions",
 			subtitle = "addresses redacted",
 			layoutOrder = 4
@@ -804,7 +738,7 @@ return function(p3)
 		})
 	}
 	
-	if var18 then
+	if var13 then
 		return roactModule.createElement(collapsibleSectionModule, { title = "Connectivity", layoutOrder = layoutOrder }, t)
 	end
 	t.UIListLayout = roactModule.createElement("UIListLayout", {

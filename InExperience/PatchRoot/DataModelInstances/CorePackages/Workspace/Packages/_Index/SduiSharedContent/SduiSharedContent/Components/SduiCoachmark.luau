@@ -8,7 +8,6 @@ local roactUtilsModule = require(parent.RoactUtils)
 local signalsReactModule = require(parent.SignalsReact)
 local streamNotificationsModule = require(parent.StreamNotifications)
 local sendCoachmarkImpressionModule = require(sduiSharedContent.Analytics.sendCoachmarkImpression)
-local fFlagPromptsCoachmarkImpressionOnShow = require(parent.SharedFlags).FFlagPromptsCoachmarkImpressionOnShow
 local luaAppUseNavFocusInSduiCoachmark = game:DefineFastFlag("LuaAppUseNavFocusInSduiCoachmark", false)
 local luaAppCoachmarkImpression = game:DefineFastFlag("LuaAppCoachmarkImpression", false)
 local luaAppHideSduiCoachmarkWhenFlyoutOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenFlyoutOpen", false)
@@ -23,7 +22,7 @@ local streamNotificationStore = streamNotificationsModule.StreamNotificationStor
 local collectionService = game:GetService("CollectionService")
 
 return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), luaAppUseNavFocusInSduiCoachmark (ref), useNavigationFocus (ref), luaAppHideSduiCoachmarkWhenFlyoutOpen (ref), useDrawerVisible (ref), luaAppHideSduiCoachmarkWhenCentralOverlayOpen (ref), useSelector (ref), luaAppHideSduiCoachmarkWhenNotificationStreamOpen (ref), useSignalState (ref), streamNotificationStore (ref), collectionService (ref), luaAppCoachmarkImpression (ref), fFlagPromptsCoachmarkImpressionOnShow (ref), sendCoachmarkImpressionModule (ref), coachmark (ref)
+	-- upvalues: reactModule (ref), luaAppUseNavFocusInSduiCoachmark (ref), useNavigationFocus (ref), luaAppHideSduiCoachmarkWhenFlyoutOpen (ref), useDrawerVisible (ref), luaAppHideSduiCoachmarkWhenCentralOverlayOpen (ref), useSelector (ref), luaAppHideSduiCoachmarkWhenNotificationStreamOpen (ref), useSignalState (ref), streamNotificationStore (ref), collectionService (ref), luaAppCoachmarkImpression (ref), sendCoachmarkImpressionModule (ref), coachmark (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2, var3 = reactModule.useState(false)
 	local var4, var5 = reactModule.useState(false)
@@ -77,26 +76,16 @@ return reactModule.memo(function(p1)
 		end
 	end, { p1.onClose })
 	
-	if luaAppCoachmarkImpression or fFlagPromptsCoachmarkImpressionOnShow then
+	if luaAppCoachmarkImpression then
 		local var13 = reactModule.useRef(false)
 		local var14 = var4 and (not var2 and (not (luaAppUseNavFocusInSduiCoachmark and not var6) and (not (luaAppHideSduiCoachmarkWhenFlyoutOpen and var7) and (not (luaAppHideSduiCoachmarkWhenCentralOverlayOpen and var8) and not (luaAppHideSduiCoachmarkWhenNotificationStreamOpen and var9)))))
 		reactModule.useEffect(function()
-			-- upvalues: var14 (ref), var13 (ref), fFlagPromptsCoachmarkImpressionOnShow (copy), p1 (ref), luaAppCoachmarkImpression (copy), sendCoachmarkImpressionModule (copy)
+			-- upvalues: var14 (ref), var13 (ref), p1 (ref), sendCoachmarkImpressionModule (copy)
 			if not var14 or var13.current then return end
-			if fFlagPromptsCoachmarkImpressionOnShow and p1.onShown then
-				p1.onShown()
-			end
-			if luaAppCoachmarkImpression then
-				local media = p1.media
-				sendCoachmarkImpressionModule(p1.collectionServiceAnchorTag, if typeof(media) == "table" and next(media) == nil then false else media ~= nil)
-			end
+			local media = p1.media
+			sendCoachmarkImpressionModule(p1.collectionServiceAnchorTag, if typeof(media) == "table" and next(media) == nil then false else media ~= nil)
 			var13.current = true
-		end, {
-			var14,
-			p1.collectionServiceAnchorTag,
-			p1.media,
-			if fFlagPromptsCoachmarkImpressionOnShow then p1.onShown else nil
-		})
+		end, { var14, p1.collectionServiceAnchorTag, p1.media })
 		
 		return if var14 then reactModule.createElement(coachmark, {
 			title = p1.title,

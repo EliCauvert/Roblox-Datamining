@@ -4,10 +4,11 @@ local profileInsightsStoreModule = require(profileInsights["data-hydration"].Pro
 local signalsReactModule = require(parent.SignalsReact)
 local reactModule = require(parent.React)
 local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
+local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
 
 return function(value)
-	-- upvalues: reactModule (ref), profileInsightsStoreModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), signalsReactModule (ref)
-	local var1 = reactModule.useMemo(function()
+	-- upvalues: fFlagTFProfileInsightsBypassCache (ref), reactModule (ref), profileInsightsStoreModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), signalsReactModule (ref)
+	local var1 = if fFlagTFProfileInsightsBypassCache then reactModule.useMemo(function()
 		-- upvalues: profileInsightsStoreModule (copy), value (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy)
 		return profileInsightsStoreModule(false).getProfileInsightsByUserId({
 			userIds = { value.userId },
@@ -20,6 +21,10 @@ return function(value)
 		value.rankingStrategy,
 		value.skipFetch,
 		value.forceFetch
+	}) else profileInsightsStoreModule(false).getProfileInsightsByUserId({
+		userIds = { value.userId },
+		rankingStrategy = value.rankingStrategy,
+		skipFetch = if fFlagAddFriendsPageTrustedFriendRequestSection then value.skipFetch else nil
 	})
 	local var2 = signalsReactModule.useSignalState(var1(false).data.getProfileInsights)
 	

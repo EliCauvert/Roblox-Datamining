@@ -10,39 +10,37 @@ return function(p1)
 	local var3 = utf8.len(var2) or 0
 	var2 = var2 ~= p1.lastGeneratedText
 	local var4 = isError and (p1.errorReason == "moderated" and not var2)
-	local var5 = isError and (p1.errorReason == "tooManyDigits" and not var2)
 	local text = utf8.len(p1.text) or 0
-	local var6 = p1.maxChars < text
-	local var7 = var3 == 0 and ((p1.hasGenerated or p1.lastSavedText ~= "") and var2)
-	local var8 = var3 > 0 and (not var6 and var2:match("%w") ~= nil)
-	local var9 = isError and (not var4 and not var5)
+	local var5 = p1.maxChars < text
+	local var6 = var3 == 0 and ((p1.hasGenerated or p1.lastSavedText ~= "") and var2)
+	local var7 = var3 > 0 and (not var5 and var2:match("%w") ~= nil)
+	local var8 = isError and not var4
 	
-	if not var7 then
-		var1 = var8
+	if not var6 then
+		var1 = var7
 		
 		if var1 then
 			if not var2 then
-				var1 = var9 and not isLoading
+				var1 = var8 and not isLoading
 			end
 		end
 		local hasGenerated = p1.hasGenerated or p1.hasCleared
-		local var10 = p1.lastGeneratedText ~= p1.lastSavedText
-		local var11 = p1.hasGenerated and (p1.startTime or 0) ~= (p1.lastSavedStartTime or 0)
-		local var12 = p1.hasGenerated and (p1.voiceId or 0) ~= (p1.lastSavedVoiceId or 0)
-		local var13 = hasGenerated
+		local var9 = p1.lastGeneratedText ~= p1.lastSavedText
+		local var10 = p1.hasGenerated and (p1.startTime or 0) ~= (p1.lastSavedStartTime or 0)
+		local var11 = p1.hasGenerated and (p1.voiceId or 0) ~= (p1.lastSavedVoiceId or 0)
+		local var12 = hasGenerated
 		
-		if var13 and not var10 and not var11 then
-			var13 = var12 and (not var2 and (not isLoading and not isError))
+		if var12 and not var9 and not var10 then
+			var12 = var11 and (not var2 and (not isLoading and not isError))
 		end
 		return {
 			isGenerating = isLoading,
 			isError = isError,
 			charCount = text,
-			isOverLimit = var6,
+			isOverLimit = var5,
 			canGenerate = var1,
 			isModerated = var4,
-			isTooManyDigits = var5,
-			showSave = var13
+			showSave = var12
 		}
 	end
 end

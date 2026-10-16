@@ -1,6 +1,5 @@
 ﻿local squads = script:FindFirstAncestor("Squads")
 local parent = squads.Parent
-local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local responsiveModule = require(parent.Responsive)
 local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local dependenciesModule = require(squads.dependencies)
@@ -25,7 +24,7 @@ local noResponseInviteAgainOrAddOthersEnumModule = require(squads.Enums.NoRespon
 local squadInvitePageNavSourceEnumModule = require(squads.Enums.SquadInvitePageNavSourceEnum)
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useTokens (ref), responsiveModule (ref), useLocalUserId (ref), useLocalization (ref), useCurrentSquadSelector (ref), useCurrentSquadId (ref), react (ref), networkingSquads (ref), useSelector (ref), squadExternalContractContext (ref), foundation (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), avatarGroup (ref), inputSize (ref), avatarGroupType (ref), useEffectOnce (ref), eventNamesModule (ref), noResponseInviteAgainOrAddOthersEnumModule (ref), reinviteToSquad (ref), squadInvitePageNavSourceEnumModule (ref), networkStatus (ref)
+	-- upvalues: useDispatch (ref), useTokens (ref), responsiveModule (ref), useLocalUserId (ref), useLocalization (ref), useCurrentSquadSelector (ref), useCurrentSquadId (ref), react (ref), networkingSquads (ref), useSelector (ref), squadExternalContractContext (ref), foundation (ref), avatarGroup (ref), inputSize (ref), avatarGroupType (ref), useEffectOnce (ref), eventNamesModule (ref), noResponseInviteAgainOrAddOthersEnumModule (ref), reinviteToSquad (ref), squadInvitePageNavSourceEnumModule (ref), networkStatus (ref)
 	local var1 = useDispatch()
 	local var2 = useTokens()
 	local var3 = responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.XSmall)
@@ -47,7 +46,7 @@ return function(p1)
 	local var11 = react.useContext(squadExternalContractContext)
 	local var12 = var11.useGetConversationFromId(var8 or "")
 	local var13 = react.useMemo(function()
-		-- upvalues: react (copy), foundation (copy), var2 (ref), var6 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy)
+		-- upvalues: react (copy), foundation (copy), var2 (ref), var6 (ref)
 		return react.createElement(foundation.Text, {
 			LayoutOrder = 1,
 			TextWrapped = true,
@@ -56,12 +55,11 @@ return function(p1)
 			fontStyle = var2.Typography.BodyLarge,
 			Text = var6.upsellText,
 			textStyle = var2.Color.Content.Default,
-			TextXAlignment = Enum.TextXAlignment.Center,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card--label" else nil
+			TextXAlignment = Enum.TextXAlignment.Center
 		})
 	end, { var2, var6.upsellText })
 	local var14 = react.useMemo(function()
-		-- upvalues: var12 (ref), var5 (ref), var4 (ref), var3 (ref), react (copy), avatarGroup (copy), inputSize (copy), avatarGroupType (copy), var2 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy)
+		-- upvalues: var12 (ref), var5 (ref), var4 (ref), var3 (ref), react (copy), avatarGroup (copy), inputSize (copy), avatarGroupType (copy), var2 (ref)
 		local t = {}
 		
 		if var12 and var12.participants then
@@ -84,8 +82,7 @@ return function(p1)
 			imageBorderStyle = {
 				Color = var2.Color.Surface.Surface_0.Color3,
 				Transparency = var2.Color.Surface.Surface_0.Transparency
-			},
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card--facepile" else nil
+			}
 		})
 	end, { var12 and var12.participants, var5, var4, var3 })
 	useEffectOnce(function()
@@ -150,8 +147,7 @@ return function(p1)
 				Color = var2.Color.Stroke.Default.Color3,
 				Transparency = var2.Color.Stroke.Default.Transparency,
 				Thickness = var2.Stroke.Standard
-			},
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card" else nil
+			}
 		}, {
 			UpsellInformation = react.createElement(foundation.View, {
 				LayoutOrder = 1,
@@ -166,7 +162,7 @@ return function(p1)
 				}
 			}, {
 				InviteAgainButton = react.useMemo(function()
-					-- upvalues: react (copy), foundation (copy), var10 (ref), networkStatus (copy), var15 (ref), var6 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy)
+					-- upvalues: react (copy), foundation (copy), var10 (ref), networkStatus (copy), var15 (ref), var6 (ref)
 					return react.createElement(foundation.Button, {
 						LayoutOrder = 1,
 						fillBehavior = foundation.Enums.FillBehavior.Fill,
@@ -174,20 +170,18 @@ return function(p1)
 						onActivated = var15,
 						text = var6.inviteAgain,
 						size = foundation.Enums.InputSize.Medium,
-						variant = foundation.Enums.ButtonVariant.Standard,
-						testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card--invite-again-button" else nil
+						variant = foundation.Enums.ButtonVariant.Standard
 					})
 				end, { var15, var6.inviteAgain, var10 }),
 				AddOthersButton = react.useMemo(function()
-					-- upvalues: react (copy), foundation (copy), var16 (ref), var6 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy)
+					-- upvalues: react (copy), foundation (copy), var16 (ref), var6 (ref)
 					return react.createElement(foundation.Button, {
 						LayoutOrder = 2,
 						fillBehavior = foundation.Enums.FillBehavior.Fill,
 						onActivated = var16,
 						text = var6.addOthers,
 						size = foundation.Enums.ButtonSize.Medium,
-						variant = foundation.Enums.ButtonVariant.Standard,
-						testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card--add-others-button" else nil
+						variant = foundation.Enums.ButtonVariant.Standard
 					})
 				end, { var16, var6.addOthers })
 			})

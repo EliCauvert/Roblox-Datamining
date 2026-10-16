@@ -6,10 +6,9 @@ local friendsChatTabNameModule = require(parent.FriendsChat.FriendsChatTabName)
 local requestSelectTabModule = require(expChat.ExternalNavigation.requestSelectTab)
 local friendsChatChannelSelected = expChatSharedModule.Actions.FriendsChatChannelSelected
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
-local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
 return function()
-	-- upvalues: fFlagExpChatEnableFriendsTab (ref), expChatSharedModule (ref), requestSelectTabModule (ref), friendsChatTabNameModule (ref), fFlagExpChatUseChannelTabsStore (ref), friendsChatChannelSelected (ref)
+	-- upvalues: fFlagExpChatEnableFriendsTab (ref), expChatSharedModule (ref), requestSelectTabModule (ref), friendsChatTabNameModule (ref), friendsChatChannelSelected (ref)
 	if not fFlagExpChatEnableFriendsTab then
 		return false
 	end
@@ -17,10 +16,10 @@ return function()
 	
 	if store == nil then
 		return false
-	elseif not requestSelectTabModule(friendsChatTabNameModule) then
-		return false
-	elseif not fFlagExpChatUseChannelTabsStore then
+	elseif requestSelectTabModule(friendsChatTabNameModule) then
 		store:dispatch(friendsChatChannelSelected(friendsChatTabNameModule))
+		
+		return true
 	end
-	return true
+	return false
 end

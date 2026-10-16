@@ -14,7 +14,7 @@ local t = {
 		gameSetTypeId = tModule.string,
 		gameSetTargetId = tModule.optional(tModule.number),
 		sortPos = tModule.number,
-		isActive = tModule.optional(tModule.boolean)
+		isActive = if require(parent.SharedFlags).FFlagLuaAppChartsActiveFilterChips then tModule.optional(tModule.boolean) else nil
 	})
 }
 

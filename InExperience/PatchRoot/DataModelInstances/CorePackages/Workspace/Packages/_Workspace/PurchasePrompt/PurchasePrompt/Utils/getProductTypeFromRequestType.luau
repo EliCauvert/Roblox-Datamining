@@ -10,8 +10,7 @@ local t = {
 	[requestTypeModule.AvatarCreationFee] = productTypeEnum.AvatarCreationFee,
 	[requestTypeModule.Experience] = productTypeEnum.Experience,
 	[requestTypeModule.Look] = productTypeEnum.Look,
-	[requestTypeModule.DeveloperSubscription] = productTypeEnum.DeveloperSubscription,
-	[requestTypeModule.VIPServer] = productTypeEnum.VIPServer
+	[requestTypeModule.DeveloperSubscription] = productTypeEnum.DeveloperSubscription
 }
 
 function getProductTypeFromRequestType(p1)

@@ -142,7 +142,6 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local var6 = viewModule
 	local t_6 = {
 		onActivated = var31,
-		onSecondaryActivated = var23.onSecondaryActivated,
 		tag = {
 			["size-full-0 auto-y radius-medium"] = true,
 			["margin-x-small"] = var24.hasMargin,

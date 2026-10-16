@@ -20,7 +20,6 @@ local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local constantsModule = require(squads.Common.Constants)
 local dependenciesModule = require(squads.dependencies)
 local squadPartySheetActionEnumModule = require(squads.Enums.SquadPartySheetActionEnum)
-local fFlagSquadLobbyActionBarFixMicLevelRerenderModule = require(squads.Flags.FFlagSquadLobbyActionBarFixMicLevelRerender)
 local sharedFlags = dependenciesModule.SharedFlags
 local squadCoordinationExperienceJoinExperimentation = dependenciesModule.SocialExperiments.SquadCoordinationExperienceJoinExperimentation
 local squadLobbySessionProvider = require(parent.SquadsCore.SquadSessionProvider).SquadLobbySessionProvider
@@ -53,7 +52,6 @@ local useVoiceStatus = crossExperienceVoiceModule.Hooks.useVoiceStatus
 local crossExperienceVoiceManager = crossExperienceVoiceModule.CrossExperienceVoiceManager
 local getFFlagEnableCrossExpVoice = sharedFlags.GetFFlagEnableCrossExpVoice
 local enableCrossExpVoiceDebug = game:DefineFastFlag("EnableCrossExpVoiceDebug", false)
-local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local audioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
 local squadExperiencePickerTooltipSeenStorageValue = game:DefineFastString("SquadExperiencePickerTooltipSeenStorageValue", "True")
 local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlags.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
@@ -203,7 +201,7 @@ local _ = function(p1)
 	}
 end
 
-local function renderStandardImage(p1, p2, p3, p4, p5)
+local function renderStandardImage(p1, p2, p3, p4)
 	-- upvalues: t (ref), reactModule (ref), foundationModule (ref)
 	local var4 = t[p2]
 	
@@ -218,8 +216,7 @@ local function renderStandardImage(p1, p2, p3, p4, p5)
 			style = if p1 then p4.Color.Content.Muted else p4.Color.Content.Emphasis,
 			size = t_1[p3] or t_1["size-600-600"],
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.fromScale(0.5, 0.5),
-			testId = p5
+			Position = UDim2.fromScale(0.5, 0.5)
 		})
 	end
 	return reactModule.createElement(foundationModule.Image, {
@@ -227,9 +224,8 @@ local function renderStandardImage(p1, p2, p3, p4, p5)
 		tag = {
 			["content-emphasis"] = not p1,
 			["content-muted"] = p1,
-			["anchor-center-center position-center-center " .. p13] = true
-		},
-		testId = p5
+			["anchor-center-center position-center-center " .. p3] = true
+		}
 	})
 end
 
@@ -241,7 +237,7 @@ local function getLoadingIndicatorIcon(p1, p2, p3, p4, p5)
 end
 
 local function renderToggleAudioFocusButton(p1, p2, p3, p4, p5)
-	-- upvalues: reactModule (ref), var3 (ref), squadCoordinationExperienceJoinExperimentation (ref), foundationModule (ref), fFlagSquadsEnableFoundationTestIdsModule (ref)
+	-- upvalues: reactModule (ref), var3 (ref), squadCoordinationExperienceJoinExperimentation (ref), foundationModule (ref)
 	return reactModule.createElement(var3, {
 		isDisabled = false,
 		layoutOrder = 0,
@@ -266,19 +262,17 @@ local function renderToggleAudioFocusButton(p1, p2, p3, p4, p5)
 		}),
 		ToggleFocusButtonIcon = reactModule.createElement(foundationModule.Image, {
 			Image = "icons/controls/headphone",
-			tag = "anchor-center-center position-center-center size-900 content-emphasis",
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--audio-focus-button--icon" else nil
+			tag = "anchor-center-center position-center-center size-900 content-emphasis"
 		}),
 		CaretIcon = reactModule.createElement(foundationModule.Image, {
 			Image = "icons/actions/truncationCollapse_small",
-			tag = "anchor-center-center position-center-center size-300-300 content-emphasis",
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--audio-focus-button--caret" else nil
+			tag = "anchor-center-center position-center-center size-300-300 content-emphasis"
 		})
 	})
 end
 
 return function(p1)
-	-- upvalues: useDispatch (ref), useLocalization (ref), squadCoordinationExperienceJoinExperimentation (ref), useTokens (ref), useCurrentSquadParentChannelId (ref), useCurrentSquadSelector (ref), useVoiceStatus (ref), reactModule (ref), useAppPolicy (ref), httpService (ref), squadLobbySessionProvider (ref), squadExternalContractContext (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), sessionType (ref), leaveSquad (ref), squadState (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), var3 (ref), badge (ref), badgeVariant (ref), renderStandardImage (ref), var2 (ref), var1 (ref), getFFlagEnableCrossExpVoice (ref), useLocalUserId (ref), useBackgroundExperience (ref), useParticipant (ref), useIsVoiceConnected (ref), useIsVoiceDisconnected (ref), useIsVoiceFocused (ref), useParticipants (ref), useIsActiveParticipant (ref), audioFocusManagementEngineFeature (ref), crossExperienceVoiceManager (ref), fFlagSquadLobbyActionBarFixMicLevelRerenderModule (ref), runService (ref), renderToggleAudioFocusButton (ref), enableCrossExpVoiceDebug (ref), getLoadingIndicatorIcon (ref), foundationModule (ref), constantsModule (ref)
+	-- upvalues: useDispatch (ref), useLocalization (ref), squadCoordinationExperienceJoinExperimentation (ref), useTokens (ref), useCurrentSquadParentChannelId (ref), useCurrentSquadSelector (ref), useVoiceStatus (ref), reactModule (ref), useAppPolicy (ref), httpService (ref), squadLobbySessionProvider (ref), squadExternalContractContext (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), sessionType (ref), leaveSquad (ref), squadState (ref), var3 (ref), badge (ref), badgeVariant (ref), renderStandardImage (ref), var2 (ref), var1 (ref), getFFlagEnableCrossExpVoice (ref), useLocalUserId (ref), useBackgroundExperience (ref), useParticipant (ref), useIsVoiceConnected (ref), useIsVoiceDisconnected (ref), useIsVoiceFocused (ref), useParticipants (ref), useIsActiveParticipant (ref), audioFocusManagementEngineFeature (ref), crossExperienceVoiceManager (ref), runService (ref), renderToggleAudioFocusButton (ref), enableCrossExpVoiceDebug (ref), getLoadingIndicatorIcon (ref), foundationModule (ref), constantsModule (ref)
 	local var4 = useDispatch()
 	local var5 = useLocalization({
 		audioText = "Feature.Squads.Label.Audio",
@@ -375,7 +369,7 @@ return function(p1)
 	})
 	local var22 = p1.squadState ~= squadState.Active
 	local var23 = reactModule.useMemo(function()
-		-- upvalues: fFlagSquadsEnableFoundationTestIdsModule (copy), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var22 (ref), var19 (ref), var12 (ref), var5 (ref), p1 (ref), badge (copy), var6 (ref), badgeVariant (copy), renderStandardImage (copy)
+		-- upvalues: reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var22 (ref), var19 (ref), var12 (ref), var5 (ref), p1 (ref), badge (copy), var6 (ref), badgeVariant (copy), renderStandardImage (copy)
 		return reactModule.createElement(var3, {
 			layoutOrder = 2,
 			triggerPointName = "ChatButton",
@@ -391,10 +385,9 @@ return function(p1)
 			UnreadMessagesBadge = if p1.hasUnreadMessages then reactModule.createElement(badge, {
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(1, -var6.Size.Size_250, 0, var6.Size.Size_250),
-				variant = badgeVariant.Alert,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--chat-button--unread-badge" else nil
+				variant = badgeVariant.Alert
 			}) else nil,
-			renderStandardImage(var22, "icons/menu/platformChatOff", "size-800-800", var6, if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--chat-button--icon" else nil)
+			renderStandardImage(var22, "icons/menu/platformChatOff", "size-800-800", var6)
 		})
 	end, {
 		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
@@ -403,13 +396,11 @@ return function(p1)
 		p1.hasUnreadMessages
 	})
 	local var24 = reactModule.useMemo(function()
-		-- upvalues: fFlagSquadsEnableFoundationTestIdsModule (copy), p1 (ref), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var22 (ref), var20 (ref), var12 (ref), var13 (ref), var5 (ref), renderStandardImage (copy), var2 (copy), var1 (copy), var6 (ref)
-		local var25 = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--pick-experience-button--icon" else nil
-		
+		-- upvalues: p1 (ref), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var22 (ref), var20 (ref), var12 (ref), var13 (ref), var5 (ref), renderStandardImage (copy), var2 (copy), var1 (copy), var6 (ref)
 		if p1.isInExperience then
 			return nil
 		end
-		local var26
+		local var25
 		local createElement = reactModule.createElement
 		local t = {
 			layoutOrder = 3,
@@ -423,15 +414,15 @@ return function(p1)
 		}
 		
 		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then
-			var26 = var13 >= 2
-			var26 = nil
+			var25 = var13 >= 2
+			var25 = nil
 		else
-			var26 = nil
+			var25 = nil
 		end
-		t.showFtuxCustomConditionsMet = var26
+		t.showFtuxCustomConditionsMet = var25
 		t.tooltipText = var5.findExperiencesText
 		
-		return createElement(var3, t, renderStandardImage(var22, var2, var1, var6, var25))
+		return createElement(var3, t, renderStandardImage(var22, var2, var1, var6))
 	end, {
 		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 		var6, var22, var5.findExperiencesText,
@@ -440,7 +431,7 @@ return function(p1)
 		p1.isInExperience, p1.navigateToHomePage
 	})
 	local var25 = reactModule.useMemo(function()
-		-- upvalues: var22 (ref), var6 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var21 (ref), var12 (ref), var5 (ref), renderStandardImage (copy)
+		-- upvalues: var22 (ref), var6 (ref), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var21 (ref), var12 (ref), var5 (ref), renderStandardImage (copy)
 		return reactModule.createElement(var3, {
 			layoutOrder = 4,
 			triggerPointName = "EndCallButton",
@@ -453,7 +444,7 @@ return function(p1)
 			onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 			showFtuxCustomConditionsMet = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 			tooltipText = var5.leavePartyText
-		}, renderStandardImage(var22, "icons/navigation/close", "size-600-600", var6, if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--end-call-button--icon" else nil))
+		}, renderStandardImage(var22, "icons/navigation/close", "size-600-600", var6))
 	end, {
 		if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 		var6, var22, var5.leavePartyText, var21,
@@ -495,14 +486,9 @@ return function(p1)
 				crossExperienceVoiceManager.default:muteVoiceParticipant(var32.userId)
 			end
 		end, { var32 })
-		local var43 = not var22 and (var33 and (var32 ~= nil and (not var32.isMuted and var37 == true)))
 		reactModule.useEffect(function()
-			-- upvalues: fFlagSquadLobbyActionBarFixMicLevelRerenderModule (copy), var43 (ref), p1 (ref), runService (copy), var15 (ref), var30 (ref), var39 (ref)
-			if fFlagSquadLobbyActionBarFixMicLevelRerenderModule and not var43 then
-				return nil
-			end
-			local renderStepService = p1.renderStepService or runService
-			renderStepService:BindToRenderStep(var15, 1, function()
+			-- upvalues: runService (copy), var15 (ref), var30 (ref), var39 (ref)
+			runService:BindToRenderStep(var15, 1, function()
 				-- upvalues: var30 (copy), var39 (copy)
 				if var30.current > 3 then
 					var39(math.random())
@@ -514,10 +500,10 @@ return function(p1)
 			end)
 			
 			return function()
-				-- upvalues: renderStepService (ref), var15 (copy)
-				renderStepService:UnbindFromRenderStep(var15)
+				-- upvalues: runService (copy), var15 (copy)
+				runService:UnbindFromRenderStep(var15)
 			end
-		end, if fFlagSquadLobbyActionBarFixMicLevelRerenderModule then { var43, p1.renderStepService } else { p1.renderStepService })
+		end, {})
 		var26 = reactModule.useMemo(function()
 			-- upvalues: var22 (ref), var40 (ref), var33 (ref), renderToggleAudioFocusButton (copy), var6 (ref), var5 (ref), p1 (ref), var10 (ref), var12 (ref)
 			return if var22 or not var40 or not var33 then nil else renderToggleAudioFocusButton(var6, var5.audioText, p1.toggleVoiceChatMenu, var10, var12)
@@ -528,7 +514,7 @@ return function(p1)
 		
 		if enableCrossExpVoiceDebug then
 			var27 = reactModule.useMemo(function()
-				-- upvalues: fFlagSquadsEnableFoundationTestIdsModule (copy), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var22 (ref), var41 (ref), var12 (ref), renderStandardImage (copy), var6 (ref)
+				-- upvalues: reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var22 (ref), var41 (ref), var12 (ref), renderStandardImage (copy), var6 (ref)
 				return reactModule.createElement(var3, {
 					layoutOrder = 5,
 					tooltipText = "Debug voice",
@@ -540,7 +526,7 @@ return function(p1)
 					onActivated = var41,
 					onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 					showFtuxCustomConditionsMet = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil
-				}, renderStandardImage(var22, "icons/status/player/developer", "size-600-600", var6, if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--debug-voice-button--icon" else nil))
+				}, renderStandardImage(var22, "icons/status/player/developer", "size-600-600", var6))
 			end, {
 				if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 				var6,
@@ -549,20 +535,20 @@ return function(p1)
 				if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil
 			})
 		end
-		local var44 = reactModule.useMemo(function()
+		local var43 = reactModule.useMemo(function()
 			-- upvalues: getLoadingIndicatorIcon (copy), var6 (ref), var32 (ref), var33 (ref), var22 (ref), var37 (ref), var38 (ref)
 			return getLoadingIndicatorIcon(var6, var32, var33, not var22 and var37, var38)
 		end, {
 			var37, var22, var33, var38, var32, var6
 		})
 		var28 = reactModule.useMemo(function()
-			-- upvalues: var34 (ref), var22 (ref), audioFocusManagementEngineFeature (copy), var35 (ref), var33 (ref), var32 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var42 (ref), var12 (ref), var5 (ref), renderStandardImage (copy), var44 (ref), var6 (ref)
+			-- upvalues: var34 (ref), var22 (ref), audioFocusManagementEngineFeature (copy), var35 (ref), var33 (ref), var32 (ref), reactModule (copy), var3 (copy), squadCoordinationExperienceJoinExperimentation (copy), var10 (ref), var42 (ref), var12 (ref), var5 (ref), renderStandardImage (copy), var43 (ref), var6 (ref)
 			if var34 then
 				return nil
 			elseif not var22 and audioFocusManagementEngineFeature and not var35 then
 				return nil
 			end
-			local var45 = if var33 then if var32 ~= nil then var22 else true else not var33
+			local var44 = if var33 then if var32 ~= nil then var22 else true else not var33
 			
 			return reactModule.createElement(var3, {
 				layoutOrder = 1,
@@ -570,15 +556,15 @@ return function(p1)
 				currentHoveredButton = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
 				enableFirstTimeTooltip = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 				ftuxAppStorageKey = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then "" else nil,
-				isDisabled = var45,
+				isDisabled = var44,
 				onActivated = var42,
 				onHoverCalled = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 				showFtuxCustomConditionsMet = if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then false else nil,
 				tooltipText = if not var33 or (not var32 or var32.isMuted) then var5.unmuteMicText else var5.muteMicText
-			}, renderStandardImage(var45, var44, "size-800-800", var6, if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--mic-button--icon" else nil))
+			}, renderStandardImage(var44, var43, "size-800-800", var6))
 		end, {
 			if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var10 else nil,
-			var6, var44, var22, var35, var33, var5.muteMicText, var5.unmuteMicText,
+			var6, var43, var22, var35, var33, var5.muteMicText, var5.unmuteMicText,
 			if squadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then var12 else nil,
 			var42, var32, var34
 		})
@@ -595,8 +581,7 @@ return function(p1)
 			Padding = UDim.new(0, var6.Gap.Large),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
-		padding = var6.Padding.Small,
-		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar" else nil
+		padding = var6.Padding.Small
 	}, {
 		ToggleAudioFocusButton = var26,
 		ToggleMicButton = var28,

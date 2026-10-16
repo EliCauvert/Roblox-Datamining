@@ -10,7 +10,7 @@ function collapsibleSection.init(p1)
 		expanded = p1.props.defaultExpanded == nil or p1.props.defaultExpanded
 	}
 	
-	function p0.onButtonPress()
+	function p1.onButtonPress()
 		-- upvalues: p1 (ref)
 		p1:setState(function(p2)
 			return { expanded = not p2.expanded }
@@ -19,7 +19,7 @@ function collapsibleSection.init(p1)
 end
 
 function collapsibleSection.render(p1)
-	-- upvalues: roactModule (ref), mainRowPadding (ref), bannerButtonModule (ref), cellLabelModule (ref)
+	-- upvalues: roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), mainRowPadding (ref)
 	local expanded = p1.state.expanded
 	
 	return roactModule.createElement("Frame", {
@@ -28,10 +28,7 @@ function collapsibleSection.render(p1)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p1.props.layoutOrder
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, mainRowPadding)
-		}),
+		UIListLayout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
 		Header = roactModule.createElement(bannerButtonModule, {
 			isExpandable = true,
 			layoutOrder = 1,

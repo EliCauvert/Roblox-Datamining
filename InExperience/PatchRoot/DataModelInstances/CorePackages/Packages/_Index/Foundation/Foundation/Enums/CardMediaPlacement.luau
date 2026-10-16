@@ -1,1 +1,0 @@
-﻿return { End = "End", Bottom = "Bottom" }

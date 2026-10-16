@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("CategoryLoggingInShopPurchase", false) and require(script.Parent.FFlagEnableCategoryLoggingInShop)

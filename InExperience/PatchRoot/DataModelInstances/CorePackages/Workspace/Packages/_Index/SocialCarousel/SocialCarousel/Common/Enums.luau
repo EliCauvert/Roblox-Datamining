@@ -1,5 +1,4 @@
 ﻿return {
-	MarqueePlayStatus = { Playing = "Playing", Paused = "Paused", Idle = "Idle" },
 	Tile = {
 		Friend = "Friend",
 		AddFriends = "AddFriends",

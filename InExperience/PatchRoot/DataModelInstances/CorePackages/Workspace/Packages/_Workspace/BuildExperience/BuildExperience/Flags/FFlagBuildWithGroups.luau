@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildWithGroups and require(script.Parent.FFlagBuildExperienceMyCreationsUseUniverseList)

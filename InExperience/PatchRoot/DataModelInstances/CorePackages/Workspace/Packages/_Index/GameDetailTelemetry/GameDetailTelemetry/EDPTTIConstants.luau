@@ -9,6 +9,5 @@
 	EDP_ENTRY_PATH = {
 		MONOLITH_OPEN_GAME_DETAILS = "Monolith_OpenGameDetails",
 		GAME_DETAIL_OPEN_GAME_DETAILS = "GameDetail_OpenGameDetails"
-	},
-	EDP_MILESTONE = { FIRST_MEDIA_RESOLVED = "FirstMediaResolved" }
+	}
 }

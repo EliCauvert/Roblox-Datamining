@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppHomeMomentVideoFallback3", false)
+﻿return game:DefineFastFlag("LuaAppHomeMomentVideoFallback", false)

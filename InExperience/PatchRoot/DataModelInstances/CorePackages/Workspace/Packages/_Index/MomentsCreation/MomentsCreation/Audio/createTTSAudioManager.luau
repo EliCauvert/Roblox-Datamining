@@ -12,21 +12,20 @@ local playersService = game:GetService("Players")
 local runService = game:GetService("RunService")
 local createSignal = signalsModule.createSignal
 
-local function defaultCreateTtsInstance(p1)
+local function defaultCreateTtsInstance()
 	-- upvalues: playersService (ref), audioDuckingFastInts (ref)
 	if not game:GetEngineFeature("TextToSpeechPlatformPreview") then
 		return nil
-	elseif p1 == nil then
-		local localPlayer = playersService.LocalPlayer
-		
-		if localPlayer == nil then
-			return nil
-		end
-		p1 = localPlayer:FindFirstChildOfClass("PlayerGui")
-		
-		if p1 == nil then
-			return nil
-		end
+	end
+	local localPlayer = playersService.LocalPlayer
+	
+	if localPlayer == nil then
+		return nil
+	end
+	local playerGui = localPlayer:FindFirstChildOfClass("PlayerGui")
+	
+	if playerGui == nil then
+		return nil
 	end
 	local TTSSharedGraph = Instance.new("Folder")
 	TTSSharedGraph.Name = "TTSSharedGraph"
@@ -39,17 +38,14 @@ local function defaultCreateTtsInstance(p1)
 	wire.SourceInstance = audioTextToSpeech
 	wire.TargetInstance = audioDeviceOutput
 	wire.Parent = TTSSharedGraph
-	TTSSharedGraph.Parent = p1
+	TTSSharedGraph.Parent = playerGui
 	
 	return audioTextToSpeech
 end
 
-return function(p1, p2)
+return function(p1)
 	-- upvalues: defaultCreateTtsInstance (ref), createSignal (ref), runService (ref), classifyTTSErrorModule (ref), getFIntMomentsTTSWaveformSamplesPerSecondModule (ref), getFIntMomentsTTSWaveformMinSamplesModule (ref), getFIntMomentsTTSWaveformMaxSamplesModule (ref), normalizeWaveformModule (ref)
-	p1 = p1 or function()
-		-- upvalues: defaultCreateTtsInstance (copy), p2 (ref)
-		return defaultCreateTtsInstance(p2)
-	end
+	p1 = p1 or defaultCreateTtsInstance
 	local var1, var2 = createSignal("idle")
 	local var3, var4 = createSignal(nil)
 	local var5, var6 = createSignal(0)
@@ -114,14 +110,14 @@ return function(p1, p2)
 		return var23
 	end
 	
-	local function failGeneration(p3)
+	local function failGeneration(p2)
 		-- upvalues: var12 (ref), var14 (ref), var10 (ref), var6 (ref), var16 (ref), var4 (ref), var2 (ref)
 		var12("")
 		var14(0)
 		var10(false)
 		var6(0)
 		var16({})
-		var4(p3)
+		var4(p2)
 		var2("error")
 	end
 	
@@ -134,11 +130,11 @@ return function(p1, p2)
 		getLoadedText = var11,
 		getLoadedVoiceId = var13,
 		getWaveform = var15,
-		generate = function(p3, p4)
+		generate = function(p2, p3)
 			-- upvalues: var22 (write), var11 (ref), var13 (ref), var1 (ref), var17 (write), p1 (ref), var18 (write), var21 (write), var2 (ref), var8 (ref), var20 (write), var4 (ref), var19 (write), var16 (ref), var12 (ref), var14 (ref), failGeneration (ref), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var6 (ref), var10 (ref), normalizeWaveformModule (copy)
 			local var23
 			if var22 then return end
-			if p3 == var11(false) and p4 == var13(false) and var1(false) ~= "error" then return end
+			if p2 == var11(false) and p3 == var13(false) and var1(false) ~= "error" then return end
 			if var17 == nil then
 				local var24 = p1()
 				
@@ -184,10 +180,10 @@ return function(p1, p2)
 			var12("")
 			var14(0)
 			task.spawn(function()
-				-- upvalues: var22 (copy), var23 (ref), p3 (ref), p4 (ref), var19 (copy), var25 (ref), failGeneration (copy), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var12 (copy), var14 (copy), var6 (copy), var10 (copy), var8 (copy), var16 (copy), normalizeWaveformModule (copy), var2 (copy)
+				-- upvalues: var22 (copy), var23 (ref), p2 (ref), p3 (ref), var19 (copy), var25 (ref), failGeneration (copy), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var12 (copy), var14 (copy), var6 (copy), var10 (copy), var8 (copy), var16 (copy), normalizeWaveformModule (copy), var2 (copy)
 				if var22 then return end
-				var23.Text = p3
-				var23.VoiceId = tostring(p4)
+				var23.Text = p2
+				var23.VoiceId = tostring(p3)
 				local ok, status = pcall(function()
 					-- upvalues: var23 (copy)
 					return var23:LoadPlatformAsync()
@@ -210,8 +206,8 @@ return function(p1, p2)
 				end)
 				
 				if var22 or var19 ~= var25 then return end
-				var12(p3)
-				var14(p4)
+				var12(p2)
+				var14(p3)
 				var6(var23.TimeLength)
 				var10(true)
 				var8(0)
@@ -256,11 +252,11 @@ return function(p1, p2)
 				end
 			end
 		end,
-		seek = function(p3)
+		seek = function(p2)
 			-- upvalues: var22 (write), var17 (write), var5 (ref), var8 (ref)
 			if var22 then return end
 			if var17 then
-				local clampedValue = math.clamp(p3, 0, var5(false))
+				local clampedValue = math.clamp(p2, 0, var5(false))
 				var17.TimePosition = clampedValue
 				var8(clampedValue)
 			end

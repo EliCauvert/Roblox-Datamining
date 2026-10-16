@@ -1,1 +1,0 @@
-﻿return require(script.Parent.Parent.AppCommonLib).Signal.new()

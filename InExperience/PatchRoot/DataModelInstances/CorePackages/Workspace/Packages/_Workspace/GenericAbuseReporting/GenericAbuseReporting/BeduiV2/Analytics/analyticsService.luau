@@ -6,6 +6,7 @@ local localPlayer = game:GetService("Players").LocalPlayer
 local runService = game:GetService("RunService")
 local telemetryService = game:GetService("TelemetryService")
 local dashModule = require(parent.Dash)
+local fFlagAbuseReportClientVersionModule = require(genericAbuseReporting.Flags.FFlagAbuseReportClientVersion)
 local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 local t = {
 	ReportStarted = "OpenDialog",
@@ -313,7 +314,9 @@ local _ = function()
 	return if ok then status else nil
 end
 
-if game:GetEngineFeature("CoreScriptVersionEnabled") then
+if not fFlagAbuseReportClientVersionModule then
+	var1 = nil
+elseif game:GetEngineFeature("CoreScriptVersionEnabled") then
 	local ok, status = pcall(function()
 		-- upvalues: runService (ref)
 		return runService:GetCoreScriptVersion()
@@ -324,11 +327,15 @@ else
 end
 return {
 	sendAnalyticsEvent = function(p9, p10)
-		-- upvalues: localPlayer (ref), var1 (ref), flattenForTelemetry (ref), dashModule (ref), fFlagAbuseReportImproveErrorEventsModule (ref), httpService (ref), telemetryService (ref), t_3 (ref)
-		local var35 = flattenForTelemetry(dashModule.join(p9, p10, {
-			user_id = if localPlayer then localPlayer.UserId else nil,
-			client_version = var1
-		}))
+		-- upvalues: localPlayer (ref), fFlagAbuseReportClientVersionModule (ref), var1 (ref), flattenForTelemetry (ref), dashModule (ref), fFlagAbuseReportImproveErrorEventsModule (ref), httpService (ref), telemetryService (ref), t_3 (ref)
+		local t = {
+			user_id = if localPlayer then localPlayer.UserId else nil
+		}
+		
+		if fFlagAbuseReportClientVersionModule then
+			t.client_version = var1
+		end
+		local var35 = flattenForTelemetry(dashModule.join(p9, p10, t))
 		
 		if fFlagAbuseReportImproveErrorEventsModule and p10.sub_event_type == "Error" and p10.error_detail.error_metadata ~= nil then
 			local ok, status = pcall(httpService.JSONEncode, httpService, p10.error_detail.error_metadata)

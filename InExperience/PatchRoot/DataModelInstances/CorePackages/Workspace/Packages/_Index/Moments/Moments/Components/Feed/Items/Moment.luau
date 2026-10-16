@@ -8,11 +8,9 @@ local _ = require(script.createMomentStore)
 local momentsCommonModule = require(parent.MomentsCommon)
 local momentsTypesModule = require(parent.MomentsTypes)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagMomentsServeEDPVideos = sharedFlagsModule.FFlagMomentsServeEDPVideos
 local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
-local fFlagMomentsAvatarLookTryOn = sharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local makeRecommendationAttributionModule = require(moments.Analytics.makeRecommendationAttribution)
 local toMediaItemModule = require(moments.Components.Feed.Media.toMediaItem)
 local commentsModule = require(moments.Components.Comments)
@@ -50,7 +48,7 @@ return {
 			return momentAttribution(p1.moment)
 		end,
 		render = function(p1, _)
-			-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsAvatarLookTryOn (ref), fFlagMomentsOptimisticProfilePending (ref), momentsTypesModule (ref), sharedFlagsModule (ref), commentsModule (ref), momentItemModule (ref), createMediaSurface (ref), fFlagMomentsServeEDPVideos (ref), momentItemSkeletonModule (ref)
+			-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsOptimisticProfilePending (ref), momentsTypesModule (ref), sharedFlagsModule (ref), commentsModule (ref), momentItemModule (ref), createMediaSurface (ref)
 			local moment = p1.moment
 			
 			if moment == nil then
@@ -72,7 +70,8 @@ return {
 				end
 			end
 			local recommendationMetadata = moment.recommendationMetadata
-			local var3 = reactModule.createElement(momentItemModule, {
+			
+			return reactModule.createElement(momentItemModule, {
 				data = {
 					kind = "experience",
 					creatorIsVerified = nil,
@@ -80,7 +79,6 @@ return {
 					creatorId = moment.creatorId,
 					placeId = moment.metadata.placeId or 0,
 					universeId = moment.metadata.universeId or 0,
-					outfitId = if fFlagMomentsAvatarLookTryOn then moment.metadata.outfitId else nil,
 					isSponsored = moment.metadata.partnerUploadType == "influencer",
 					description = moment.metadata.description,
 					isModerated = moment.isModerated == true,
@@ -93,13 +91,6 @@ return {
 				renderMediaSurface = if getFFlagMomentsRenderPostAssetsModule() then createMediaSurface else nil,
 				moment = moment
 			})
-			
-			return if fFlagMomentsServeEDPVideos and moment.entityType == "edpVideo" then reactModule.createElement(require(script.EdpVideoEligibility.EdpVideoEligibilityContainer), {
-				momentId = moment.momentId,
-				universeId = moment.metadata.universeId,
-				content = var3,
-				loadingContent = reactModule.createElement(momentItemSkeletonModule)
-			}) else var3
 		end
 	},
 	{

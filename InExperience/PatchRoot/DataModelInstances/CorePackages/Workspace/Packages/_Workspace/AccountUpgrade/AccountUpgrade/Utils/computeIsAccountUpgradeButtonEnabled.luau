@@ -17,5 +17,5 @@ return function(p1)
 	for i, v in ipairs(p1.requiredFields or list) do
 		t[v] = true
 	end
-	return if t[accountUpgradeFieldModule.Birthday] and p1.birthday == nil then false elseif t[accountUpgradeFieldModule.Username] and ((p1.username or "") == "" or p1.usernameValid ~= inputValidity.Valid) then false elseif t[accountUpgradeFieldModule.Password] and ((p1.password or "") == "" or p1.passwordValid ~= inputValidity.Valid) then false else (p1.email or "") == "" or p1.emailValid == true
+	return if t[accountUpgradeFieldModule.Birthday] and p1.birthday == nil then false elseif t[accountUpgradeFieldModule.Birthday] and p1.isBirthdayOldEnough == false then false elseif t[accountUpgradeFieldModule.Username] and ((p1.username or "") == "" or p1.usernameValid ~= inputValidity.Valid) then false elseif t[accountUpgradeFieldModule.Password] and ((p1.password or "") == "" or p1.passwordValid ~= inputValidity.Valid) then false else (p1.email or "") == "" or p1.emailValid == true
 end

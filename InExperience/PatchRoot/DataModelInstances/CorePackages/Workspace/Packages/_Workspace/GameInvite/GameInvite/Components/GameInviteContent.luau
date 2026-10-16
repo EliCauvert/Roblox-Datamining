@@ -15,7 +15,6 @@ local gameInviteAnalyticsManagerModule = require(gameInvite.analytics.GameInvite
 local gameInviteTitleModule = require(components.GameInviteTitle)
 local gameInviteRewardsBannerModule = require(components.GameInviteRewardsBanner)
 local gameInviteCustomTextModule = require(components.GameInviteCustomText)
-local gameInviteFriendsListContainerModule = require(components.GameInviteFriendsList.GameInviteFriendsListContainer)
 local gameInviteConstantsModule = require(gameInvite.GameInviteConstants)
 local gameInviteModalLayoutContextModule = require(context.GameInviteModalLayoutContext)
 local gameDetailsContextModule = require(context.GameDetailsContext)
@@ -24,12 +23,11 @@ local getFFlagEnableCommonFriendsMenu = require(parent.SharedFlags).GetFFlagEnab
 local getFFlagEnableGameInviteRewardsBanner = require(parent.SharedFlags).GetFFlagEnableGameInviteRewardsBanner
 local name = require(parent.Loggers).Logger:new(script.Name)
 local getRewardMetadataModule = require(gameInvite.Requests.GetRewardMetadata)
-local fFlagGameInviteInExpUserListRendererModule = require(gameInvite.Flags.FFlagGameInviteInExpUserListRenderer)
 local sidePadding = gameInviteConstantsModule.Layout.SidePadding
 local titleHeight = gameInviteConstantsModule.Layout.TitleHeight
 
 local var1 = function(p1)
-	-- upvalues: reactModule (ref), gameInviteModalLayoutContextModule (ref), gameDetailsContextModule (ref), getFFlagEnableGameInviteRewardsBanner (ref), getRewardMetadataModule (ref), name (ref), useSelector (ref), deviceInfo (ref), titleHeight (ref), gameInviteTitleModule (ref), sidePadding (ref), friendsMenuSearch (ref), gameInviteAnalyticsManagerModule (ref), gameInviteCustomTextModule (ref), gameInviteRewardsBannerModule (ref), fFlagGameInviteInExpUserListRendererModule (ref), gameInviteFriendsListContainerModule (ref), friendsMenuFriendsList (ref), gameInviteConstantsModule (ref), friendMenuType (ref)
+	-- upvalues: reactModule (ref), gameInviteModalLayoutContextModule (ref), gameDetailsContextModule (ref), getFFlagEnableGameInviteRewardsBanner (ref), getRewardMetadataModule (ref), name (ref), useSelector (ref), deviceInfo (ref), titleHeight (ref), gameInviteTitleModule (ref), sidePadding (ref), friendsMenuSearch (ref), gameInviteAnalyticsManagerModule (ref), gameInviteCustomTextModule (ref), gameInviteRewardsBannerModule (ref), friendsMenuFriendsList (ref), gameInviteConstantsModule (ref), friendMenuType (ref)
 	local var2 = reactModule.useContext(gameInviteModalLayoutContextModule)
 	local var3 = reactModule.useContext(gameDetailsContextModule)
 	local var4, var5 = reactModule.useState(nil)
@@ -140,7 +138,7 @@ local var1 = function(p1)
 		var12 = reactModule.createElement(gameInviteRewardsBannerModule, { layoutOrder = 2, rewardMetadata = var4 }) or nil
 	end
 	t_1.RewardsBanner = var12
-	t_1.FriendsList = if fFlagGameInviteInExpUserListRendererModule and var3.isCoreScript then reactModule.createElement(gameInviteFriendsListContainerModule, { layoutOrder = 3, size = UDim2.new(1, 0, 1, -var9) }) else reactModule.createElement(friendsMenuFriendsList, {
+	t_1.FriendsList = reactModule.createElement(friendsMenuFriendsList, {
 		layoutOrder = 3,
 		size = UDim2.new(1, 0, 1, -var9),
 		parentComponentName = gameInviteConstantsModule.ParentComponentName,

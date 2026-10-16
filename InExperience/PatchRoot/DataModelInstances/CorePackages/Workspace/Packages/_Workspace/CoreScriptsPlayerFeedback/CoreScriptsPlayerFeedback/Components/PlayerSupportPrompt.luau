@@ -20,10 +20,7 @@ local iconVariant = builderIconsModule.IconVariant
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local constantsModule = require(coreScriptsPlayerFeedback.constants)
 local useEscapeDismissModule = require(coreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
-local fFlagPlayerSupportPromptEventIngestModule = require(coreScriptsPlayerFeedback.Flags.FFlagPlayerSupportPromptEventIngest)
-local playerSupportPromptTelemetryModule = require(coreScriptsPlayerFeedback.Telemetry.PlayerSupportPromptTelemetry)
 local fFlagEnablePlayerSupportCaptureAttachmentsModule = require(coreScriptsPlayerFeedback.Flags.FFlagEnablePlayerSupportCaptureAttachments)
-local fFlagEnablePlayerSupportSuggestionCategoryModule = require(coreScriptsPlayerFeedback.Flags.FFlagEnablePlayerSupportSuggestionCategory)
 local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
 local useCaptureUploadsModule = require(coreScriptsPlayerFeedback.Hooks.useCaptureUploads)
 local useGalleryCapturesModule = require(coreScriptsPlayerFeedback.Hooks.useGalleryCaptures)
@@ -171,10 +168,13 @@ local var1 = reactModule.memo(function(p1)
 		}) else nil
 	})
 end)
-local PLAYER_SUPPORT_CATEGORIES_REQUIRING_USER_ID = constantsModule.PLAYER_SUPPORT_CATEGORIES_REQUIRING_USER_ID
+local t = {
+	TICKET_CATEGORY_DATA_RESTORE_REQUEST = true,
+	TICKET_CATEGORY_PURCHASING_ISSUE = true
+}
 
 return reactModule.memo(function(p2)
-	-- upvalues: useTokens (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (ref), useCaptureUploadsModule (ref), useGalleryCapturesModule (ref), reactModule (ref), constantsModule (ref), useLocalization (ref), fFlagEnablePlayerSupportSuggestionCategoryModule (ref), PLAYER_SUPPORT_CATEGORIES_REQUIRING_USER_ID (ref), getCaptureKeyModule (ref), fFlagPlayerSupportPromptEventIngestModule (ref), playerSupportPromptTelemetryModule (ref), useEscapeDismissModule (ref), dialog (ref), capturePickerPreviewModule (ref), capturePickerGridModule (ref), view (ref), text (ref), dropdown (ref), inputSize (ref), inputVariant (ref), textArea (ref), var1 (ref), checkbox (ref), buttonVariant (ref)
+	-- upvalues: useTokens (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (ref), useCaptureUploadsModule (ref), useGalleryCapturesModule (ref), reactModule (ref), constantsModule (ref), useLocalization (ref), t (ref), getCaptureKeyModule (ref), useEscapeDismissModule (ref), dialog (ref), capturePickerPreviewModule (ref), capturePickerGridModule (ref), view (ref), text (ref), dropdown (ref), inputSize (ref), inputVariant (ref), textArea (ref), var1 (ref), checkbox (ref), buttonVariant (ref)
 	local var8 = useTokens()
 	local description = p2.description
 	local setDescription = p2.setDescription
@@ -215,13 +215,11 @@ return reactModule.memo(function(p2)
 		CategoryItemBugReport = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport",
 		CategoryItemDataRestoreRequest = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest",
 		CategoryItemPurchasingIssue = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue",
-		CategoryItemSuggestion = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion",
 		CategoryItemOther = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other",
 		DescriptionLabel = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label",
 		DescriptionPlaceholderBugReport = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport",
 		DescriptionPlaceholderDataRestoreRequest = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest",
 		DescriptionPlaceholderPurchasingIssue = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue",
-		DescriptionPlaceholderSuggestion = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion",
 		DescriptionPlaceholderOther = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other",
 		ShareUserIdLabel = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label",
 		ShareUserIdLabelRequired = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.LabelRequired",
@@ -249,30 +247,19 @@ return reactModule.memo(function(p2)
 		{
 			id = "TICKET_CATEGORY_PURCHASING_ISSUE",
 			text = var23.CategoryItemPurchasingIssue
+		},
+		{
+			id = "TICKET_CATEGORY_OTHER",
+			text = var23.CategoryItemOther
 		}
 	}
-	
-	if fFlagEnablePlayerSupportSuggestionCategoryModule then
-		table.insert(list, {
-			id = "TICKET_CATEGORY_SUGGESTION",
-			text = var23.CategoryItemSuggestion
-		})
-	end
-	table.insert(list, {
-		id = "TICKET_CATEGORY_OTHER",
-		text = var23.CategoryItemOther
-	})
-	local t = {
+	local t_1 = {
 		TICKET_CATEGORY_BUG_REPORT = var23.DescriptionPlaceholderBugReport,
 		TICKET_CATEGORY_DATA_RESTORE_REQUEST = var23.DescriptionPlaceholderDataRestoreRequest,
 		TICKET_CATEGORY_PURCHASING_ISSUE = var23.DescriptionPlaceholderPurchasingIssue,
 		TICKET_CATEGORY_OTHER = var23.DescriptionPlaceholderOther
 	}
-	
-	if fFlagEnablePlayerSupportSuggestionCategoryModule then
-		t.TICKET_CATEGORY_SUGGESTION = var23.DescriptionPlaceholderSuggestion
-	end
-	local var24 = PLAYER_SUPPORT_CATEGORIES_REQUIRING_USER_ID[category] == true
+	local var24 = t[category] == true
 	local var25 = var24 or shareUserId
 	local _ = {}
 	local var26 = 0
@@ -365,63 +352,43 @@ return reactModule.memo(function(p2)
 			}
 		})
 	end
-	local var34 = MIN_FEEDBACK_LENGTH <= #description and (#description <= MAX_PLAYER_SUPPORT_LENGTH and (category ~= "" and (var9 and (not var9.anyUploading and (not var9 or not var9.hasNonModerationFailure)))))
-	
-	if fFlagPlayerSupportPromptEventIngestModule then
-		reactModule.useEffect(function()
-			-- upvalues: playerSupportPromptTelemetryModule (copy), category (ref), var25 (ref), description (ref)
-			playerSupportPromptTelemetryModule.log({
-				action = playerSupportPromptTelemetryModule.Action.Opened,
-				category = category,
-				shareUserId = var25,
-				descriptionLength = #description
-			})
-		end, {})
-	end
-	local var35
+	local var34
+	local var35 = MIN_FEEDBACK_LENGTH <= #description and (#description <= MAX_PLAYER_SUPPORT_LENGTH and (category ~= "" and (var9 and (not var9.anyUploading and (not var9 or not var9.hasNonModerationFailure)))))
 	local var36 = reactModule.useCallback(function()
-		-- upvalues: var34 (ref), fFlagPlayerSupportPromptEventIngestModule (copy), playerSupportPromptTelemetryModule (copy), category (ref), var25 (ref), var24 (ref), description (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (write), p2 (ref)
-		if not var34 then return end
-		if fFlagPlayerSupportPromptEventIngestModule then
-			playerSupportPromptTelemetryModule.log({
-				action = playerSupportPromptTelemetryModule.Action.Submitted,
-				category = category,
-				shareUserId = var25,
-				shareUserIdRequired = var24,
-				descriptionLength = #description
-			})
-		end
-		pcall(function()
-			-- upvalues: description (copy), category (copy), var25 (copy), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (copy)
-			local socialService = game:GetService("SocialService")
-			
-			if socialService.SignalFeedbackSubmissionCompleted then
-				local t = {
-					Description = description,
-					Category = category,
-					ShareUserIdPreference = if var25 then "SHARE_USER_ID_PREFERENCE_SHARE" else "SHARE_USER_ID_PREFERENCE_DO_NOT_SHARE"
-				}
+		-- upvalues: var35 (ref), description (ref), category (ref), var25 (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (write), p2 (ref)
+		if var35 then
+			pcall(function()
+				-- upvalues: description (copy), category (copy), var25 (copy), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (copy)
+				local socialService = game:GetService("SocialService")
 				
-				if fFlagEnablePlayerSupportCaptureAttachmentsModule then
-					local t_1 = {}
+				if socialService.SignalFeedbackSubmissionCompleted then
+					local t = {
+						Description = description,
+						Category = category,
+						ShareUserIdPreference = if var25 then "SHARE_USER_ID_PREFERENCE_SHARE" else "SHARE_USER_ID_PREFERENCE_DO_NOT_SHARE"
+					}
 					
-					for i, v in var9.uploadStatuses do
-						if v.status == "succeeded" and v.assetId ~= nil then
-							table.insert(t_1, v.assetId)
+					if fFlagEnablePlayerSupportCaptureAttachmentsModule then
+						local t_1 = {}
+						
+						for i, v in var9.uploadStatuses do
+							if v.status == "succeeded" and v.assetId ~= nil then
+								table.insert(t_1, v.assetId)
+							end
+						end
+						if #t_1 > 0 then
+							t.AssetIds = t_1
 						end
 					end
-					if #t_1 > 0 then
-						t.AssetIds = t_1
-					end
+					socialService:SignalFeedbackSubmissionCompleted("", t)
 				end
-				socialService:SignalFeedbackSubmissionCompleted("", t)
-			end
-		end)
-		p2.closePrompt()
-	end, if fFlagPlayerSupportPromptEventIngestModule then {
-		description, category, var25, var24, var34, var9 or false, p2.closePrompt
-	} else {
-		description, category, var25, var34, var9 or false, p2.closePrompt
+			end)
+			p2.closePrompt()
+			
+			return
+		end
+	end, {
+		description, category, var25, var35, var9 or false, p2.closePrompt
 	})
 	local var37 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref)
@@ -435,38 +402,8 @@ return reactModule.memo(function(p2)
 		p2.onFormAbandoned()
 		p2.closePrompt()
 	end, { p2.closePrompt, p2.onFormAbandoned })
-	local var38 = if fFlagPlayerSupportPromptEventIngestModule then reactModule.useCallback(function()
-		-- upvalues: playerSupportPromptTelemetryModule (copy), category (ref), var25 (ref), description (ref), var37 (ref)
-		playerSupportPromptTelemetryModule.log({
-			action = playerSupportPromptTelemetryModule.Action.Dismissed,
-			dismissMethod = playerSupportPromptTelemetryModule.DismissMethod.DialogClose,
-			category = category,
-			shareUserId = var25,
-			descriptionLength = #description
-		})
-		var37()
-	end, { var37, category, var25, description }) else var37
-	local var39 = if fFlagPlayerSupportPromptEventIngestModule then reactModule.useCallback(function()
-		-- upvalues: playerSupportPromptTelemetryModule (copy), category (ref), var25 (ref), description (ref), var37 (ref)
-		playerSupportPromptTelemetryModule.log({
-			action = playerSupportPromptTelemetryModule.Action.Dismissed,
-			dismissMethod = playerSupportPromptTelemetryModule.DismissMethod.Escape,
-			category = category,
-			shareUserId = var25,
-			descriptionLength = #description
-		})
-		var37()
-	end, { var37, category, var25, description }) else var37
-	local var40 = reactModule.useCallback(function()
-		-- upvalues: fFlagPlayerSupportPromptEventIngestModule (copy), playerSupportPromptTelemetryModule (copy), category (ref), var25 (ref), description (ref), p2 (ref)
-		if fFlagPlayerSupportPromptEventIngestModule then
-			playerSupportPromptTelemetryModule.log({
-				action = playerSupportPromptTelemetryModule.Action.ReportAbuseClicked,
-				category = category,
-				shareUserId = var25,
-				descriptionLength = #description
-			})
-		end
+	local var38 = reactModule.useCallback(function()
+		-- upvalues: p2 (ref)
 		pcall(function()
 			local socialService = game:GetService("SocialService")
 			
@@ -489,15 +426,9 @@ return reactModule.memo(function(p2)
 				return
 			end
 		end)
-	end, if fFlagPlayerSupportPromptEventIngestModule then {
-		category,
-		var25,
-		description,
-		p2.closePrompt,
-		p2.onFormAbandoned
-	} else { p2.closePrompt, p2.onFormAbandoned })
+	end, { p2.closePrompt, p2.onFormAbandoned })
 	useEscapeDismissModule("PlayerSupportPromptCancel", if fFlagEnablePlayerSupportCaptureAttachmentsModule then reactModule.useCallback(function()
-		-- upvalues: var15 (write), var16 (write), var11 (write), var12 (write), var39 (ref)
+		-- upvalues: var15 (write), var16 (write), var11 (write), var12 (write), var37 (ref)
 		if var15 then
 			var16(nil)
 			
@@ -507,12 +438,12 @@ return reactModule.memo(function(p2)
 			
 			return
 		end
-		var39()
-	end, { var15, var11, var39 }) else var39)
+		var37()
+	end, { var15, var11, var37 }) else var37)
 	local createElement = reactModule.createElement
 	local root = dialog.Root
-	local t_1 = { hasBackdrop = true, onClose = var38 }
-	local t_2 = {
+	local t_2 = { hasBackdrop = true, onClose = var37 }
+	local t_3 = {
 		Title = reactModule.createElement(dialog.Title, {
 			text = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 and var15 ~= nil then if var15.CaptureTime ~= nil then var23.CapturesAdd else var32.dateTime elseif fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then var23.CapturesAdd else var23.Title
 		}),
@@ -546,7 +477,7 @@ return reactModule.memo(function(p2)
 						tag = "auto-xy",
 						LayoutOrder = 2,
 						Text = var23.ReportAbuseLink,
-						onActivated = var40,
+						onActivated = var38,
 						selection = { Selectable = true }
 					})
 				}),
@@ -618,7 +549,7 @@ return reactModule.memo(function(p2)
 								numLines = 4,
 								text = description,
 								onChanged = setDescription,
-								placeholder = t[category] or "",
+								placeholder = t_1[category] or "",
 								width = UDim.new(1, 0),
 								variant = inputVariant.Utility,
 								size = inputSize.Medium,
@@ -674,9 +605,9 @@ return reactModule.memo(function(p2)
 	
 	if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then
 		local list_1
-		var35 = reactModule.createElement
+		var34 = reactModule.createElement
 		local actions = dialog.Actions
-		local t_3 = { LayoutOrder = 2 }
+		local t_4 = { LayoutOrder = 2 }
 		
 		if var15 == nil then
 			list_1 = {
@@ -696,13 +627,13 @@ return reactModule.memo(function(p2)
 				}
 			}
 		else
-			local var41 = var13[getCaptureKeyModule(var15)] == true
-			local var42 = var41 or not var27
+			local var39 = var13[getCaptureKeyModule(var15)] == true
+			local var40 = var39 or not var27
 			list_1 = {
 				{
-					text = if var41 then var23.Deselect else var23.Select,
-					variant = if var41 then buttonVariant.SoftEmphasis elseif var42 then buttonVariant.Emphasis else buttonVariant.Standard,
-					isDisabled = not var42 and not var41,
+					text = if var39 then var23.Deselect else var23.Select,
+					variant = if var39 then buttonVariant.SoftEmphasis elseif var40 then buttonVariant.Emphasis else buttonVariant.Standard,
+					isDisabled = not var40 and not var39,
 					onActivated = function()
 						-- upvalues: var29 (write), var15 (write), var16 (write)
 						var29(var15)
@@ -719,22 +650,22 @@ return reactModule.memo(function(p2)
 				}
 			}
 		end
-		t_3.actions = list_1
-		var35 = var35(actions, t_3)
+		t_4.actions = list_1
+		var34 = var34(actions, t_4)
 	else
-		var35 = reactModule.createElement(dialog.Actions, {
+		var34 = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 2,
 			actions = {
 				{
 					text = var23.Send,
-					variant = if var34 then buttonVariant.Emphasis else buttonVariant.Standard,
+					variant = if var35 then buttonVariant.Emphasis else buttonVariant.Standard,
 					onActivated = var36,
-					isDisabled = not var34
+					isDisabled = not var35
 				}
 			}
 		})
 	end
-	t_2.Actions = var35
+	t_3.Actions = var34
 	
-	return createElement(root, t_1, t_2)
+	return createElement(root, t_2, t_3)
 end)

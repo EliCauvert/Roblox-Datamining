@@ -5,6 +5,7 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local fetchAllDesiredDataModule = require(parent.validationSystem.dataFetchModules.FetchAllDesiredData)
+local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local t = {
 	ColorMap = game:DefineFastInt("AccessoryColorMapMaxSize", 1024),
 	MetalnessMap = game:DefineFastInt("AccessoryMetalnessMapMaxSize", 256),
@@ -22,7 +23,7 @@ return {
 	conditionalData = { validationEnumsModule.SharedDataMember.meshTextures },
 	expectedFailures = {},
 	run = function(p1, p2)
-		-- upvalues: fetchAllDesiredDataModule (ref), validationEnumsModule (ref), constantsInterfaceModule (ref), t (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
+		-- upvalues: fetchAllDesiredDataModule (ref), validationEnumsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), constantsInterfaceModule (ref), t (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
 		local rootInstance = p2.rootInstance
 		local assetType = p2.uploadEnum.assetType
 		local meshTextures = p2.meshTextures
@@ -45,13 +46,12 @@ return {
 					local name = meshTextures[v.Name]
 					
 					if name and name.isPBR then
-						for i_1, v_1 in {
-							"ColorMap",
-							"MetalnessMap",
-							"NormalMap",
-							"RoughnessMap",
-							"EmissiveMask"
-						} do
+						local list = { "ColorMap", "MetalnessMap", "NormalMap", "RoughnessMap" }
+						
+						if getFFlagUGCValidateAllowEmissivesModule() then
+							table.insert(list, "EmissiveMask")
+						end
+						for i_1, v_1 in list do
 							local var2 = name[v_1]
 							
 							if var2 and var2.editable then

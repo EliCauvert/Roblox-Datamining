@@ -19,7 +19,6 @@ local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBui
 local getBuildOverflowMenuStoreModule = require(buildExperience.Stores.GetBuildOverflowMenuStore)
 local getCreatorAgentResumeStoreModule = require(buildExperience.Stores.GetCreatorAgentResumeStore)
 local _ = require(script.Parent.BuildChatPageView)
-local fFlagBuildExperienceAnswerFormModule = require(buildExperience.Flags.FFlagBuildExperienceAnswerForm)
 local useCreatorCreditChatUpsellViewModelModule = require(script.Parent.useCreatorCreditChatUpsellViewModel)
 local fFlagBuildExperienceLibrary = require(parent.SharedFlags).FFlagBuildExperienceLibrary
 local fFlagBuildExperienceAnalytics = require(parent.SharedFlags).FFlagBuildExperienceAnalytics
@@ -32,7 +31,6 @@ local var3 = if fFlagBuildAdUpsellModule or fFlagEnableBuildAdPromotionModule th
 local var4 = if fFlagBuildAdUpsellModule then require(script.Parent.useAdUpsellChatViewModel) else nil
 local fFlagBuildExperienceFocusNewGameComposerModule = require(buildExperience.Flags.FFlagBuildExperienceFocusNewGameComposer)
 local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
-local fFlagBuildExperiencePlaytestCardPublishCtaModule = require(buildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
 local fFlagBuildExperienceDontAskAgainPushUpsellModule = require(buildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
 local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
@@ -43,7 +41,6 @@ local useTokens = foundationModule.Hooks.useTokens
 local realtimeMessageId = messageBusService:GetMessageId("Realtime", "appResume")
 local t = { allComplete = false, groups = {} }
 local t_1 = {
-	adUpsellCongratsAnchorIndex = nil,
 	adUpsellFreePromotionsRemaining = 0,
 	isAdUpsellCreatePending = false,
 	isAdCampaignSheetOpen = false,
@@ -130,9 +127,9 @@ local _ = function(p4, p5)
 end
 
 return function(_)
-	-- upvalues: useTokens (ref), useUniverseSummary (ref), getBuildOverflowMenuStoreModule (ref), getCreatorAgentResumeStoreModule (ref), reactModule (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref), buildAppStorageKeyEngineFeature (ref), var5 (ref), userInputService (ref), guiService (ref), permissionsProtocol (ref), messageBusService (ref), realtimeMessageId (ref), default (ref), creatorAgentChatModule (ref), fFlagBuildAdUpsellModule (ref), var2 (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceFocusNewGameComposerModule (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), useBuildPromptDraftModule (ref), fFlagBuildExperienceDeveloperProductContextModule (ref), fFlagBuildExperienceManageDevProductModule (ref), useChatPlaytestFooterModule (ref), universeConfigurationModule (ref), fFlagEnableBuildAdPromotionModule (ref), useCreatorCreditChatUpsellViewModelModule (ref), var3 (ref), fFlagBuildExperienceLibrary (ref), getResolvedSessionId (ref), var4 (ref), t_1 (ref), fFlagBuildAgentAdCampaignCardModule (ref), var1 (ref), t_2 (ref), fFlagBuildExperiencePlaytestCardPublishCtaModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), t (ref), fFlagBuildExperienceAnswerFormModule (ref)
+	-- upvalues: useTokens (ref), useUniverseSummary (ref), getBuildOverflowMenuStoreModule (ref), getCreatorAgentResumeStoreModule (ref), reactModule (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref), buildAppStorageKeyEngineFeature (ref), var5 (ref), userInputService (ref), guiService (ref), permissionsProtocol (ref), messageBusService (ref), realtimeMessageId (ref), default (ref), creatorAgentChatModule (ref), fFlagBuildAdUpsellModule (ref), var2 (ref), useChatSessionCoreModule (ref), fFlagBuildExperienceFocusNewGameComposerModule (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), useBuildPromptDraftModule (ref), fFlagBuildExperienceDeveloperProductContextModule (ref), fFlagBuildExperienceManageDevProductModule (ref), useChatPlaytestFooterModule (ref), universeConfigurationModule (ref), fFlagEnableBuildAdPromotionModule (ref), useCreatorCreditChatUpsellViewModelModule (ref), var3 (ref), fFlagBuildExperienceLibrary (ref), getResolvedSessionId (ref), var4 (ref), t_1 (ref), fFlagBuildAgentAdCampaignCardModule (ref), var1 (ref), t_2 (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), t (ref)
 -- FATAL: Failed to generate AST for `useBuildChatPageViewModel` function:
-runtime : [KeyError] :11990: 285
+runtime : [KeyError] :11990: 282
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

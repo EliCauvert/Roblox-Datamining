@@ -5,28 +5,20 @@ local discoveryVideoEndEvent = discoveryAnalyticsModule.Events.discoveryVideoEnd
 local discoveryVideoLoadEvent = discoveryAnalyticsModule.Events.discoveryVideoLoadEvent
 local discoveryVideoLoopEvent = discoveryAnalyticsModule.Events.discoveryVideoLoopEvent
 local discoveryVideoPlayEvent = discoveryAnalyticsModule.Events.discoveryVideoPlayEvent
-local discoveryUtilsModule = require(parent.DiscoveryUtils)
-local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
-local parseBooleanString = discoveryUtilsModule.parseBooleanString
+local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local findAnalyticsFieldInAncestors = require(parent.SduiCoreSystem).findAnalyticsFieldInAncestors
 local videoUtilsModule = require(parent.VideoUtils)
 local videoActions = videoUtilsModule.AnalyticsEnums.VideoActions
 local videoLogger = videoUtilsModule.VideoLogger
 local fFlagLuaAppBroadenVideoAnalytics = require(parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
-local fFlagLuaAppDiscoveryMomentVideoTelemetry = require(parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 
 local function _(p1)
 	return if p1 == nil then nil else tostring(p1)
 end
 
-local _ = function(p1)
-	-- upvalues: parseBooleanString (ref)
-	return if type(p1) == "boolean" then p1 elseif type(p1) == "string" then parseBooleanString(p1) else nil
-end
-
 local _ = function(value, p1, p2, p3)
 	-- upvalues: discoveryEventErrorLogger (ref)
-	discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "{value}" is missing videoAssetId on page "{p2}"`, {
+	discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "{value}" is missing videoAssetId on page "{p1}"`, {
 		actionType = value,
 		pageContext = p1,
 		universeId = p2,
@@ -35,9 +27,9 @@ local _ = function(value, p1, p2, p3)
 end
 
 return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), findAnalyticsFieldInAncestors (ref), fFlagLuaAppBroadenVideoAnalytics (ref), fFlagLuaAppDiscoveryMomentVideoTelemetry (ref), parseBooleanString (ref), discoveryEventErrorLogger (ref), discoveryVideoPlayEvent (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref)
+	-- upvalues: reactModule (ref), findAnalyticsFieldInAncestors (ref), fFlagLuaAppBroadenVideoAnalytics (ref), discoveryEventErrorLogger (ref), discoveryVideoPlayEvent (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref)
 	local var1 = reactModule.useCallback(function(p4)
-		-- upvalues: p1 (ref), findAnalyticsFieldInAncestors (copy), p3 (ref), fFlagLuaAppBroadenVideoAnalytics (copy), fFlagLuaAppDiscoveryMomentVideoTelemetry (copy), parseBooleanString (copy)
+		-- upvalues: p1 (ref), findAnalyticsFieldInAncestors (copy), p3 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
 		local var2
 		local var3 = if p1.getCollectionData then p1.getCollectionData() else nil
 		local var4 = findAnalyticsFieldInAncestors("videoAssetId", p1)
@@ -76,16 +68,7 @@ return function(p1, p2, p3)
 		else
 			var8 = nil
 		end
-		local var10
 		t.contentType = var8
-		
-		if fFlagLuaAppDiscoveryMomentVideoTelemetry then
-			local var11 = findAnalyticsFieldInAncestors("isMoment", p1)
-			var10 = if type(var11) == "boolean" then var11 elseif type(var11) == "string" then parseBooleanString(var11) else nil
-		else
-			var10 = nil
-		end
-		t.isMoment = var10
 		
 		return t
 	end, { p1, p3.universeId, p3.placeId })
@@ -95,7 +78,7 @@ return function(p1, p2, p3)
 		
 		if not var3.videoAssetId then
 			local var4 = p2
-			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "play" is missing videoAssetId on page "{var22}"`, {
+			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "play" is missing videoAssetId on page "{var19}"`, {
 				actionType = "play",
 				pageContext = var4,
 				universeId = p3.universeId,
@@ -105,12 +88,12 @@ return function(p1, p2, p3)
 		discoveryVideoPlayEvent(p2, var3)
 	end, { var1, p2, p3.universeId, p3.placeId })
 	local var3 = reactModule.useCallback(function(_, p4, p5, p6)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoLoadEvent (copy), fFlagLuaAppDiscoveryMomentVideoTelemetry (copy), videoLogger (copy), videoActions (copy)
+		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoLoadEvent (copy), videoLogger (copy), videoActions (copy)
 		local var4 = var1(p4)
 		
 		if not var4.videoAssetId then
 			local var5 = p2
-			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "load" is missing videoAssetId on page "{var24}"`, {
+			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "load" is missing videoAssetId on page "{var21}"`, {
 				actionType = "load",
 				pageContext = var5,
 				universeId = p3.universeId,
@@ -128,8 +111,7 @@ return function(p1, p2, p3)
 			sortPos = var4.sortPos,
 			nativeAdData = var4.nativeAdData,
 			tileType = var4.tileType,
-			contentType = var4.contentType,
-			isMoment = if fFlagLuaAppDiscoveryMomentVideoTelemetry then var4.isMoment else nil
+			contentType = var4.contentType
 		})
 		
 		if var4.videoAssetId and p3.sourceId then
@@ -149,7 +131,7 @@ return function(p1, p2, p3)
 		
 		if not var5.videoAssetId then
 			local var6 = p2
-			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "loop" is missing videoAssetId on page "{var26}"`, {
+			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "loop" is missing videoAssetId on page "{var23}"`, {
 				actionType = "loop",
 				pageContext = var6,
 				universeId = p3.universeId,
@@ -159,12 +141,12 @@ return function(p1, p2, p3)
 		discoveryVideoLoopEvent(p2, var5)
 	end, { var1, p2, p3.universeId, p3.placeId })
 	local var5 = reactModule.useCallback(function(_, p4, p5, p6, p7)
-		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoEndEvent (copy), fFlagLuaAppDiscoveryMomentVideoTelemetry (copy)
+		-- upvalues: var1 (ref), p2 (ref), p3 (ref), discoveryEventErrorLogger (copy), discoveryVideoEndEvent (copy)
 		local var6 = var1(p5)
 		
 		if not var6.videoAssetId then
 			local var7 = p2
-			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "end" is missing videoAssetId on page "{var28}"`, {
+			discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingVideoAssetId", `SDUI video analytics "end" is missing videoAssetId on page "{var25}"`, {
 				actionType = "end",
 				pageContext = var7,
 				universeId = p3.universeId,
@@ -183,8 +165,7 @@ return function(p1, p2, p3)
 			targetUniverseId = p7,
 			nativeAdData = var6.nativeAdData,
 			tileType = var6.tileType,
-			contentType = var6.contentType,
-			isMoment = if fFlagLuaAppDiscoveryMomentVideoTelemetry then var6.isMoment else nil
+			contentType = var6.contentType
 		})
 	end, { var1, p2, p3.universeId, p3.placeId })
 	

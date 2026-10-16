@@ -8,7 +8,8 @@ local _ = require(parent.DataHydration.MomentsStoreTypes)
 local signalsReactModule = require(parent.SignalsReact)
 local toMediaItemModule = require(parent.Moments.ToMediaItem)
 local momentEngagementCountModule = require(script.Parent.MomentEngagementCount)
-local fFlagProfileMomentsOrderingAndReactions = require(parent.SharedFlags).FFlagProfileMomentsOrderingAndReactions
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagProfileMomentsOrderingAndReactions = sharedFlagsModule.FFlagProfileMomentsOrderingAndReactions
 local fFlagMomentsEngagementMetricsFeature = momentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local view = foundationModule.View
 local controlState = foundationModule.Enums.ControlState
@@ -25,12 +26,12 @@ local gradientBackdrop = momentsCommonModule.Components.GradientBackdrop
 local thumbUp = builderIconsModule.Icon.ThumbUp
 
 return function(p1)
-	-- upvalues: useTokens (ref), fFlagMomentsEngagementMetricsFeature (ref), useSignalState (ref), getMomentsCapabilities (ref), reactModule (ref), makeProfileTileFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), toMediaItemModule (ref), controlState (ref), fFlagProfileMomentsOrderingAndReactions (ref), view (ref), stateLayerAffordance (ref), momentMediaTile (ref), gradientBackdrop (ref), momentEngagementCountModule (ref), thumbUp (ref)
+	-- upvalues: useTokens (ref), fFlagMomentsEngagementMetricsFeature (ref), sharedFlagsModule (ref), useSignalState (ref), getMomentsCapabilities (ref), reactModule (ref), makeProfileTileFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), toMediaItemModule (ref), controlState (ref), fFlagProfileMomentsOrderingAndReactions (ref), view (ref), stateLayerAffordance (ref), momentMediaTile (ref), gradientBackdrop (ref), momentEngagementCountModule (ref), thumbUp (ref)
 	local var1
 	local moment = p1.moment
 	local onHoverChanged = p1.onHoverChanged
 	local var2 = useTokens()
-	local var3 = if fFlagMomentsEngagementMetricsFeature then useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
+	local var3 = if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList then useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
 	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), moment (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy)
 		if p1.userId and moment.recommendationMetadata then
@@ -50,7 +51,7 @@ return function(p1)
 		onHoverChanged(p2 == controlState.Hover)
 	end, { onHoverChanged })
 	
-	if fFlagMomentsEngagementMetricsFeature then
+	if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList then
 		var1 = var3
 		
 		if var1 then

@@ -65,9 +65,11 @@ local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppCha
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local getFFlagEnableAppChatInExperience = require(parent.SharedFlags).GetFFlagEnableAppChatInExperience
 local fFlagTCUpsellModalEnabledDEV = require(parent.SharedFlags).FFlagTCUpsellModalEnabled_DEV
+local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagDebugEnableTCDoubleOptInDEV = require(parent.SharedFlags).FFlagDebugEnableTCDoubleOptIn_DEV
 local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 local fFlagAppChatShowOSAOnPageEntry = require(parent.SharedFlags).FFlagAppChatShowOSAOnPageEntry
+local fFlagFriendsChatPlaceholderRenameFix = require(parent.SharedFlags).FFlagFriendsChatPlaceholderRenameFix
 local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local fFlagAppChatUniversalFeatureRestriction = require(parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
 local appChatGetAllMessagesDepth = game:DefineFastInt("AppChatGetAllMessagesDepth", 100)
@@ -113,7 +115,6 @@ local t = {
 	severalUsersTyping = "Feature.Chat.Message.SeveralUsersTyping",
 	pendingStateBodyKey = "Feature.Chat.Message.ChatIsUnfiltered",
 	connectUnavailableWithUserKey = "Feature.Chat.RobloxConnectUnavailableWithUser",
-	chatUnavailableWithUserKey = "Feature.Chat.Message.ChatUnavailableWithUser",
 	inputBarDisabledKey = "Feature.Chat.Label.ChatDisabled",
 	getCanAccessParty = true,
 	oneUserTyping = { "Feature.Chat.Message.OneUserTyping", DISPLAY_NAME = "" },
@@ -122,6 +123,7 @@ local t = {
 		DISPLAY_NAME_1 = "",
 		DISPLAY_NAME_2 = ""
 	},
+	chatUnavailableWithUserKey = if getFFlagIsSquadEnabled() and not fFlagFriendsChatPlaceholderRenameFix then "Feature.Chat.Message.PartyUnavailableWithUser" else "Feature.Chat.Message.ChatUnavailableWithUser",
 	getReadingMessagesIsEnabled = function() end,
 	updateConversationTitle = function(_) end,
 	navigateToScreen = function() end,
@@ -894,7 +896,6 @@ function ChatConversationContainer(p1)
 		inputBarDisabledEndTimestampDisplay = timeoutEndTimestamp,
 		onDisabledInputBarActivated = var65,
 		scrollToTopOnInitialOsaLoad = var22.shouldShowOsaCardOnInitialLoad and var22.fetchedOldestMessage,
-		openMessageListAtStart = var22.shouldShowOsaCardOnInitialLoad,
 		navigateToSquadLobby = if getCanAccessParty then var2.navigateToSquadLobby else nil,
 		shouldHideMoreMenuButton = if getCanAccessParty then not var58 else nil,
 		isInitialMessageLoading = if fFlagAppChatConversationLoadingSkeletonModule then var24 else nil
@@ -933,7 +934,6 @@ function ChatConversationContainer(p1)
 		inputBarDisabledEndTimestampDisplay = timeoutEndTimestamp,
 		onDisabledInputBarActivated = var65,
 		scrollToTopOnInitialOsaLoad = var22.shouldShowOsaCardOnInitialLoad and var22.fetchedOldestMessage,
-		openMessageListAtStart = var22.shouldShowOsaCardOnInitialLoad,
 		navigateToSquadLobby = if getCanAccessParty then var2.navigateToSquadLobby else nil,
 		shouldHideMoreMenuButton = if getCanAccessParty then not var58 else nil,
 		isInitialMessageLoading = if fFlagAppChatConversationLoadingSkeletonModule then var24 else nil

@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("AXBackgroundGenerationPostPublishRefetchMaxAttempts", 4)

@@ -14,10 +14,9 @@ local lastDeferredSingleItemStoreModule = require(script.Parent.Store.LastDeferr
 local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 local fFlagAXFixSingleItemPurchaseWidgetLogging = avatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
 local fFlagAXFixUnifiedPurchaseFieldLanding = avatarExperienceFlagsModule.FFlagAXFixUnifiedPurchaseFieldLanding
-local fFlagAXFixDeferredItemIdTypeMatch = avatarExperienceFlagsModule.FFlagAXFixDeferredItemIdTypeMatch
 
 return function(p1)
-	-- upvalues: fFlagAXFixUnifiedPurchaseFieldLanding (ref), mapAnalyticsMetadataFieldsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixDeferredItemIdTypeMatch (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), lastDeferredSingleItemStoreModule (ref), unifiedEventLoggingUtilsModule (ref), sendUnifiedEventLogModule (ref), cryoModule (ref), collectionService (ref), sendUnifiedEventLogForInstanceModule (ref)
+	-- upvalues: fFlagAXFixUnifiedPurchaseFieldLanding (ref), mapAnalyticsMetadataFieldsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), lastDeferredSingleItemStoreModule (ref), unifiedEventLoggingUtilsModule (ref), sendUnifiedEventLogModule (ref), cryoModule (ref), collectionService (ref), sendUnifiedEventLogForInstanceModule (ref)
 	if fFlagAXFixUnifiedPurchaseFieldLanding then
 		p1 = mapAnalyticsMetadataFieldsModule(p1)
 	end
@@ -28,14 +27,7 @@ return function(p1)
 		local var1 = nil
 		
 		for i, v in selectionList do
-			local var2
-			if fFlagAXFixDeferredItemIdTypeMatch then
-				var2 = tostring(v[text]) == tostring(p1.itemId)
-				var2 = nil
-			else
-				var2 = v[text] == p1.itemId
-			end
-			if var2 and tostring(v[text_1]) == tostring(p1.itemType) then
+			if v[text] == p1.itemId and tostring(v[text_1]) == tostring(p1.itemType) then
 				var1 = v
 				break
 			end

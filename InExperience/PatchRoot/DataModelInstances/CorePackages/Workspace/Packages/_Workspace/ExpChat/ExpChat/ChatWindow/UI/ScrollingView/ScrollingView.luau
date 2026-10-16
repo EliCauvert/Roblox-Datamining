@@ -20,8 +20,7 @@ function scrollingView.render(p1)
 		isSpatialUIEnabled = p1.props.isSpatialUIEnabled,
 		chatWindowTransparencyBindable = p1.props.chatWindowTransparencyBindable,
 		visible = p1.props.visible,
-		selectedChannelName = if getFFlagTextChatEnableUniverseChatTabs() then p1.props.selectedChannelName else nil,
-		historicalMessageCountSignal = p1.props.historicalMessageCountSignal
+		selectedChannelName = if getFFlagTextChatEnableUniverseChatTabs() then p1.props.selectedChannelName else nil
 	} else {}
 	var1.messageComponentsSignal = p1.props.messageComponentsSignal
 	

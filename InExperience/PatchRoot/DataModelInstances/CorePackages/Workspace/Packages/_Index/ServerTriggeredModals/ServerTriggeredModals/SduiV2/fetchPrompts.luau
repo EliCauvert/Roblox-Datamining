@@ -13,11 +13,9 @@ local fFlagSduiAllowNoConfigsBuilt = require(parent.SharedFlags).FFlagSduiAllowN
 local fFlagEdpGameLeavePromptsHandlerEnabled = require(parent.SharedFlags).FFlagEdpGameLeavePromptsHandlerEnabled
 local fFlagEdpOpenPromptsHandlerEnabled = require(parent.SharedFlags).FFlagEdpOpenPromptsHandlerEnabled
 local fFlagHomepagePromptsHandlerPassClientAttributes = require(parent.SharedFlags).FFlagHomepagePromptsHandlerPassClientAttributes
-local fFlagSduiExtendedCapabilitiesPrompts = require(parent.SharedFlags).FFlagSduiExtendedCapabilitiesPrompts
 local fFlagPushNotificationsUpsellHomePromptsExperiment = require(parent.SharedFlags).FFlagPushNotificationsUpsellHomePromptsExperiment
 local fFlagSplitPaneEducationalTour = require(parent.SharedFlags).FFlagSplitPaneEducationalTour
 local var1 = if fFlagSplitPaneEducationalTour then require(script.Parent.SplitPaneTourPrompt) else nil
-local fFlagPromptsEdpOpenReplaceOnFetch = require(parent.SharedFlags).FFlagPromptsEdpOpenReplaceOnFetch
 
 local function getPromptsUrl(p1, p2)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref)
@@ -31,12 +29,10 @@ local function getPromptsUrl(p1, p2)
 end
 
 return function(p1, p2)
-	-- upvalues: parent (ref), fFlagSduiExtendedCapabilitiesPrompts (ref), sduiSharedUtilitiesModule (ref), getSduiApiStore (ref), sduiResponseType (ref), urlBuilder (ref), urlBase (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), fFlagEdpOpenPromptsHandlerEnabled (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), getPromptsUrl (ref), fFlagPromptsEdpOpenReplaceOnFetch (ref), fFlagSduiAllowNoConfigsBuilt (ref), promptsEntryPointModule (ref), fFlagPushNotificationsUpsellHomePromptsExperiment (ref), nativePushNotificationPermissionPrompt (ref), fFlagSplitPaneEducationalTour (ref), var1 (ref), parsePageEntriesFromResponse (ref)
-	local serviceContractsProtoModule = require(parent.ServiceContractsProto)
-	local getEligiblePromptsRequest = serviceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsRequest
+	-- upvalues: parent (ref), getSduiApiStore (ref), sduiResponseType (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), fFlagEdpOpenPromptsHandlerEnabled (ref), fFlagHomepagePromptsHandlerPassClientAttributes (ref), getPromptsUrl (ref), urlBuilder (ref), urlBase (ref), fFlagSduiAllowNoConfigsBuilt (ref), promptsEntryPointModule (ref), fFlagPushNotificationsUpsellHomePromptsExperiment (ref), nativePushNotificationPermissionPrompt (ref), fFlagSplitPaneEducationalTour (ref), var1 (ref), parsePageEntriesFromResponse (ref)
 	getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.ProtobufJson,
-		url = if fFlagSduiExtendedCapabilitiesPrompts then urlBuilder.new({ path = "modals-api/v1/prompts", base = urlBase.APIS })() elseif fFlagEdpGameLeavePromptsHandlerEnabled or fFlagEdpOpenPromptsHandlerEnabled or fFlagHomepagePromptsHandlerPassClientAttributes then getPromptsUrl(p1.entryPoint, p1.clientAttributes) else urlBuilder.new({
+		url = if fFlagEdpGameLeavePromptsHandlerEnabled or fFlagEdpOpenPromptsHandlerEnabled or fFlagHomepagePromptsHandlerPassClientAttributes then getPromptsUrl(p1.entryPoint, p1.clientAttributes) else urlBuilder.new({
 			path = "modals-api/v1/prompts",
 			base = urlBase.APIS,
 			query = { entryPoint = p1.entryPoint }
@@ -44,10 +40,9 @@ return function(p1, p2)
 		surfaceKey = p1.surfaceKey,
 		configKey = p1.configKey,
 		clearOnEmptyResponse = p1.clearOnEmptyResponse,
-		replaceOnFetch = if fFlagPromptsEdpOpenReplaceOnFetch then p1.replaceOnFetch else nil,
 		allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then p1.allowNoConfigsBuilt else nil,
 		loadTimer = p1.loadTimer,
-		apiProto = serviceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsResponse,
+		apiProto = require(parent.ServiceContractsProto).apppageplatform.prompts.prompts.GetEligiblePromptsResponse,
 		parsePageEntriesFromResponse = if p1.entryPoint == promptsEntryPointModule.HomepageLaunch and (fFlagPushNotificationsUpsellHomePromptsExperiment and nativePushNotificationPermissionPrompt.isEnabled() or fFlagSplitPaneEducationalTour) then function(p3)
 			-- upvalues: fFlagPushNotificationsUpsellHomePromptsExperiment (copy), nativePushNotificationPermissionPrompt (copy), fFlagSplitPaneEducationalTour (copy), var1 (copy), parsePageEntriesFromResponse (copy)
 			if fFlagPushNotificationsUpsellHomePromptsExperiment and nativePushNotificationPermissionPrompt.isEnabled() then
@@ -57,15 +52,6 @@ return function(p1, p2)
 				var1.handlePromptsResponse(p3)
 			end
 			return parsePageEntriesFromResponse(p3)
-		end else nil,
-		postConfig = if fFlagSduiExtendedCapabilitiesPrompts then {
-			contentType = sduiSharedUtilitiesModule.SduiApiStorePostConfigContentType.Proto,
-			protoMessage = getEligiblePromptsRequest,
-			body = getEligiblePromptsRequest.new({
-				entry_points = { p1.entryPoint },
-				client_attributes = p1.clientAttributes,
-				client_capabilities = if fFlagSduiExtendedCapabilitiesPrompts then sduiSharedUtilitiesModule.SduiCapabilities.buildClientCapabilities() else nil
-			})
-		} else nil
+		end else nil
 	}, p2)
 end

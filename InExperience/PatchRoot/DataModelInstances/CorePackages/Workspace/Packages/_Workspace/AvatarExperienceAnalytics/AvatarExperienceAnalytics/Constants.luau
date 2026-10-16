@@ -22,10 +22,7 @@ return {
 		CatalogPurchaseCompletedTwoStepAuth = "CatalogPurchaseCompletedTwoStepAuth",
 		CatalogPurchaseInvalidatedTwoStepAuth = "CatalogPurchaseInvalidatedTwoStepAuth",
 		CatalogPurchaseAbandonedTwoStepAuth = "CatalogPurchaseAbandonedTwoStepAuth",
-		CatalogPurchaseLoadFailedTwoStepAuth = "CatalogPurchaseLoadFailedTwoStepAuth",
-		SupportRegionAvatarOverlayControlPressed = "SupportRegionAvatarOverlay_ControlPressed",
-		SupportRegionAvatarOverlayDialogShown = "SupportRegionAvatarOverlay_DialogShown",
-		SupportRegionAvatarOverlayPageView = "SupportRegionAvatarOverlay_PageView"
+		CatalogPurchaseLoadFailedTwoStepAuth = "CatalogPurchaseLoadFailedTwoStepAuth"
 	},
 	AVATAR_EDITOR_SERVICE_ERRORS = {
 		GetRecommendedAssets = "AvatarEditorServiceGetRecommendedAssetsError",

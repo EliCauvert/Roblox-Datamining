@@ -8,9 +8,7 @@ local intervalPerformanceTracker = require(parent.IntervalPerformanceTracker).In
 local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
 local constantsModule = require(purchasePrompt.Misc.Constants)
 local productPurchaseContainerFPSDuration = game:DefineFastInt("ProductPurchaseContainerFPSDuration", 2)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fIntTTIUnifiedPurchaseSamplingRate = sharedFlagsModule.FIntTTIUnifiedPurchaseSamplingRate
-local fFlagEnableEdpPreviewPurchaseSurface = sharedFlagsModule.FFlagEnableEdpPreviewPurchaseSurface
+local fIntTTIUnifiedPurchaseSamplingRate = require(parent.SharedFlags).FIntTTIUnifiedPurchaseSamplingRate
 local t = {
 	[enums.ProductPurchaseSurface.Catalog] = true,
 	[enums.ProductPurchaseSurface.EDP] = true
@@ -18,9 +16,6 @@ local t = {
 
 if require(purchasePrompt.Flags.FFlagEnableInExperiencePurchaseModalMetrics) then
 	t[enums.ProductPurchaseSurface.InExperience] = true
-end
-if fFlagEnableEdpPreviewPurchaseSurface then
-	t[enums.ProductPurchaseSurface.EDPPreview] = true
 end
 function emitPerformanceMetrics(p1, p2)
 	-- upvalues: t (ref)
@@ -32,8 +27,8 @@ end
 
 function emitFPSMetrics(p1, p2)
 	-- upvalues: intervalPerformanceTracker (ref), constantsModule (ref), productPurchaseContainerFPSDuration (ref)
-	intervalPerformanceTracker:startTracking(constantsModule.PerformanceMetrics.Prefix.UnifiedPurchaseModal .. "_" .. p2 .. "_" .. p3, productPurchaseContainerFPSDuration, nil, true, true)
-	intervalPerformanceTracker:startTracking(constantsModule.PerformanceMetrics.Prefix.PurchaseModal .. "_" .. p2 .. "_" .. p3, productPurchaseContainerFPSDuration, nil, true, true)
+	intervalPerformanceTracker:startTracking(constantsModule.PerformanceMetrics.Prefix.UnifiedPurchaseModal .. "_" .. p1 .. "_" .. p2, productPurchaseContainerFPSDuration, nil, true, true)
+	intervalPerformanceTracker:startTracking(constantsModule.PerformanceMetrics.Prefix.PurchaseModal .. "_" .. p1 .. "_" .. p2, productPurchaseContainerFPSDuration, nil, true, true)
 end
 
 function emitTTIMetrics(p1)

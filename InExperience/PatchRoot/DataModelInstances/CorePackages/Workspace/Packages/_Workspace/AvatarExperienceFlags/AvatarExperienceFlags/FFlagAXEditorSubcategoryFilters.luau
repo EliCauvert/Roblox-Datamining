@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXEditorSubcategoryFilters2", false)
+﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXEditorSubcategoryFilters2", false)

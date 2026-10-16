@@ -2,7 +2,6 @@
 local signalsModule = require(parent.Signals)
 local sharedFlagsModule = require(parent.SharedFlags)
 local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
-local classifyRequestFailureModule = require(script.Parent.classifyRequestFailure)
 local experimentOverrideModule = require(script.Parent.experimentOverride)
 local sessionHistoryMergeModule = require(script.Parent.sessionHistoryMerge)
 local _ = require(script.Parent.types)
@@ -15,10 +14,9 @@ local sessionHistoryCacheModule = require(script.Parent.ChatSession.sessionHisto
 local sessionScalarStateModule = require(script.Parent.ChatSession.sessionScalarState)
 local _ = require(script.Parent.ChatSession.sessionDeps)
 local fFlagBuildExperiencePinForBuild = sharedFlagsModule.FFlagBuildExperiencePinForBuild
-local fFlagBuildExperiencePromptFailureTelemetry = sharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 
 return function(p1, p2, p3, p4)
-	-- upvalues: sessionScalarStateModule (ref), constantsModule (ref), sessionHistoryCacheModule (ref), experimentOverrideModule (ref), sessionHistoryMergeModule (ref), signalsModule (ref), historyPageUtilsModule (ref), historyLoaderModule (ref), historyPollingModule (ref), acpProtocolModule (ref), fFlagBuildExperiencePromptFailureTelemetry (ref), classifyRequestFailureModule (ref), fFlagBuildExperiencePinForBuild (ref), sendPromptModule (ref)
+	-- upvalues: sessionScalarStateModule (ref), constantsModule (ref), sessionHistoryCacheModule (ref), experimentOverrideModule (ref), sessionHistoryMergeModule (ref), signalsModule (ref), historyPageUtilsModule (ref), historyLoaderModule (ref), historyPollingModule (ref), acpProtocolModule (ref), fFlagBuildExperiencePinForBuild (ref), sendPromptModule (ref)
 	local t = {}
 	local t_1 = {}
 	local var1 = sessionScalarStateModule.createSessionScalarState(p4)
@@ -253,30 +251,24 @@ return function(p1, p2, p3, p4)
 	})
 	
 	local function ensureInitialized()
-		-- upvalues: var1 (ref), p1 (ref), acpProtocolModule (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref), fFlagBuildExperiencePromptFailureTelemetry (copy), classifyRequestFailureModule (copy)
+		-- upvalues: var1 (ref), p1 (ref), acpProtocolModule (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref)
 		if var1.getInitialized(false) then
-			return true, nil, nil
+			return true, nil
 		end
 		local var11 = historyPageUtilsModule.awaitRequestState(p1.initialize({ protocolVersion = acpProtocolModule.ProtocolVersion }).state, os.clock() + rpcTimeoutSeconds)
 		
 		if var11.status == "succeeded" then
 			var1.setInitialized(true)
 			
-			return true, nil, nil
+			return true, nil
 		end
-		local var12 = false
-		local errorCode = var11.errorCode
-		
-		if fFlagBuildExperiencePromptFailureTelemetry then
-			return var12, errorCode, classifyRequestFailureModule(var11)
-		end
-		return var12, errorCode, nil
+		return false, var11.errorCode
 	end
 	
 	local var11 = sendPromptModule.createSendPrompt({
 		ensureInitialized = ensureInitialized,
 		ensureCasSession = function()
-			-- upvalues: var1 (ref), p2 (ref), p3 (ref), ensureInitialized (ref), fFlagBuildExperiencePromptFailureTelemetry (copy), p1 (ref), var6 (write), fFlagBuildExperiencePinForBuild (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref), classifyRequestFailureModule (copy), experimentOverrideModule (copy), var5 (write), setCasSessionIdInternal (ref)
+			-- upvalues: var1 (ref), p2 (ref), p3 (ref), ensureInitialized (ref), p1 (ref), var6 (write), fFlagBuildExperiencePinForBuild (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref), experimentOverrideModule (copy), var5 (write), setCasSessionIdInternal (ref)
 			local casSessionId = var1.getCasSessionId(false)
 			
 			if casSessionId ~= nil then
@@ -284,35 +276,27 @@ return function(p1, p2, p3, p4)
 			elseif p2 == nil or p3 == nil then
 				return nil, { stage = "missing_project" }
 			end
-			local var12, var13, var14 = ensureInitialized()
+			local var12, var13 = ensureInitialized()
 			
 			if not var12 then
-				return nil, {
-					stage = "initialize",
-					errorCode = var13,
-					requestFailure = if fFlagBuildExperiencePromptFailureTelemetry then var14 else nil
-				}
+				return nil, { stage = "initialize", errorCode = var13 }
 			end
-			local var15 = historyPageUtilsModule.awaitRequestState(p1.sessionNew({
+			local var14 = historyPageUtilsModule.awaitRequestState(p1.sessionNew({
 				project = { universeId = p2, placeId = p3 },
 				experiment = var6,
 				application = if fFlagBuildExperiencePinForBuild then "build" else nil
 			}).state, os.clock() + rpcTimeoutSeconds)
 			
-			if var15.status ~= "succeeded" then
-				return nil, {
-					stage = "session_new",
-					errorCode = var15.errorCode,
-					requestFailure = if fFlagBuildExperiencePromptFailureTelemetry then classifyRequestFailureModule(var15) else nil
-				}
+			if var14.status ~= "succeeded" then
+				return nil, { stage = "session_new", errorCode = var14.errorCode }
 			end
-			local result = var15.result
-			local var16 = if typeof(result) == "table" then result.sessionId else nil
+			local result = var14.result
+			local var15 = if typeof(result) == "table" then result.sessionId else nil
 			
-			if typeof(var16) ~= "string" or var16 == "" then
+			if typeof(var15) ~= "string" or var15 == "" then
 				return nil, { stage = "session_new" }
 			elseif experimentOverrideModule.isEnabled() then
-				local key = experimentOverrideModule.getKey(var16)
+				local key = experimentOverrideModule.getKey(var15)
 				
 				if experimentOverrideModule.has(var5) then
 					experimentOverrideModule.move(var5, key)
@@ -321,9 +305,9 @@ return function(p1, p2, p3, p4)
 				end
 				experimentOverrideModule.consumePending(key)
 			end
-			setCasSessionIdInternal(var16)
+			setCasSessionIdInternal(var15)
 			
-			return var16, nil
+			return var15, nil
 		end,
 		getLatestObservedHistorySequenceId = function()
 			-- upvalues: var1 (ref)

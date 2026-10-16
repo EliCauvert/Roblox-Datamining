@@ -10,6 +10,8 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiComponentType = sduiCoreSystemModule.SduiComponentType
 local sduiParsers = sduiCoreSystemModule.SduiParsers
 local getSduiComponentRegistry = sduiCoreSystemModule.getSduiComponentRegistry
+local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFlags).FFlagLuaAppResetHoverOnSduiPlayButtonActivation
+local fFlagSduiGlobalRegistryFallback = require(parent.SharedFlags).FFlagSduiGlobalRegistryFallback
 local fFlagLuaAppRespectClipAncestorImpressions = require(parent.SharedFlags).FFlagLuaAppRespectClipAncestorImpressions
 local parseCallbackProp = sduiParsers.parseCallbackProp_
 local parseUiComponentProp = sduiParsers.parseUiComponentProp_
@@ -32,6 +34,7 @@ local parseFocusNavActionsProp = sduiParsers.parseFocusNavActionsProp_
 local getArrayMetatableParser = sduiParsers.getArrayMetatableParser
 local getEngineEnumParser = sduiParsers.getEngineEnumParser
 local getLuaTableEnumParser = sduiParsers.getLuaTableEnumParser
+local sduiBadgeComponent = game:DefineFastFlag("SduiBadgeComponent", false)
 local fFlagSduiTileDisableLegacyHover = require(serverDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
 local fFlagSduiEnableHeroUnitBottomRow = require(serverDrivenUi.Flags).FFlagSduiEnableHeroUnitBottomRow
 local fFlagSduiAttributionRowV2 = require(parent.SharedFlags).FFlagSduiAttributionRowV2
@@ -50,7 +53,7 @@ local t_1 = {}
 t_1.__index = t_1
 
 function t_1.new()
-	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), fFlagSduiCollectionGridRevealRows (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiGameTileDirectAction (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiExperienceDetailsSocialProof (ref), fFlagSduiIndividualFeedItemSpacing (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
+	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), fFlagSduiCollectionGridRevealRows (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiGameTileDirectAction (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiExperienceDetailsSocialProof (ref), fFlagSduiIndividualFeedItemSpacing (ref), sduiBadgeComponent (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
 	local t = {
 		anchorPoint = parseVector2Prop,
 		automaticSize = getEngineEnumParser(Enum.AutomaticSize),
@@ -322,7 +325,7 @@ function t_1.new()
 					position = parseUDim2Prop,
 					tag = parseStringProp,
 					width = parseUDimProp,
-					onActivatedEffect = parseCallbackProp
+					onActivatedEffect = if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then parseCallbackProp else nil
 				},
 				propInterface = {
 					universeId = tModule.union(tModule.string, tModule.number)
@@ -768,19 +771,22 @@ function t_1.new()
 			imagePadding = parseNumberProp
 		})
 	}
-	t_3._registeredComponents[sduiComponentType.Badge] = {
-		component = require(parent.SduiSharedContent).SduiBadge,
-		propParsers = {
-			anchorPoint = parseVector2Prop,
-			layoutOrder = parseIntegerProp,
-			position = parseUDim2Prop,
-			visible = parseBooleanProp,
-			zIndex = parseNumberProp,
-			text = parseStringProp,
-			icon = parseStringProp,
-			variant = getLuaTableEnumParser(foundationModule.Enums.BadgeVariant, "string")
+	
+	if sduiBadgeComponent then
+		t_3._registeredComponents[sduiComponentType.Badge] = {
+			component = require(parent.SduiSharedContent).SduiBadge,
+			propParsers = {
+				anchorPoint = parseVector2Prop,
+				layoutOrder = parseIntegerProp,
+				position = parseUDim2Prop,
+				visible = parseBooleanProp,
+				zIndex = parseNumberProp,
+				text = parseStringProp,
+				icon = parseStringProp,
+				variant = getLuaTableEnumParser(foundationModule.Enums.BadgeVariant, "string")
+			}
 		}
-	}
+	end
 	t_3._registeredComponents[sduiComponentType.SongTile] = { component = require(serverDrivenUi.Content.SduiSongTile) }
 	t_3._registeredComponents[sduiComponentType.InfoTable] = {
 		component = require(parent.SduiSharedContent).SduiInfoTable,
@@ -868,8 +874,16 @@ function t_1.new()
 end
 
 function t_1:getComponentDefinition(p1)
-	-- upvalues: getSduiComponentRegistry (ref)
-	return self._registeredComponents[p1] or getSduiComponentRegistry().getComponentDefinition(p1)
+	-- upvalues: fFlagSduiGlobalRegistryFallback (ref), getSduiComponentRegistry (ref)
+	local var1 = self._registeredComponents[p1]
+	
+	if not var1 then
+		if fFlagSduiGlobalRegistryFallback then
+			return getSduiComponentRegistry().getComponentDefinition(p1)
+		end
+		var1 = nil
+	end
+	return var1
 end
 
 function t_1:doesComponentManageChildren(p1)

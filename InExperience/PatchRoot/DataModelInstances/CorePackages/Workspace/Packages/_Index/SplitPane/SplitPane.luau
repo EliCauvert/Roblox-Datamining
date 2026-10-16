@@ -2,7 +2,6 @@
 
 return {
 	SplitPaneStore = require(script.Stores.SplitPaneStore),
-	SplitPaneTelemetry = require(script.Telemetry.SplitPaneTelemetry),
 	useSplitLayoutStatus = require(script.Hooks.useSplitLayoutStatus),
 	useSplitPaneRender = require(script.Hooks.useSplitPaneRender),
 	SplitPaneContext = require(script.Context.SplitPaneContext),
@@ -17,6 +16,5 @@ return {
 	SupportPaneMode = appSplitViewModule.Enums.SupportPaneMode,
 	["jest.config"] = script["jest.config"],
 	getSplitPaneEducationalTourStore = require(script.Stores.getSplitPaneEducationalTourStore),
-	SplitPaneEducationalTourCollapsedControl = require(script.Components.SplitPaneEducationalTourCollapsedControl),
 	isSplitPaneTourSupported = require(script.Utils.isSplitPaneTourSupported)
 }

@@ -9,6 +9,7 @@ return {
 		validationEnumsModule.SharedDataMember.curveAnimations,
 		validationEnumsModule.SharedDataMember.uploadEnum
 	},
+	fflag = require(parent.flags.getFFlagUGCValidateCurveAnimLoopingRequired),
 	expectedFailures = {},
 	prereqTests = {
 		validationEnumsModule.ValidationModule.CurveAnimDataAvailable

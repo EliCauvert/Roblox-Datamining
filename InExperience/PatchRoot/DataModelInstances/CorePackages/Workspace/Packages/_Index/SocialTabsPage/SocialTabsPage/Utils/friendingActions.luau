@@ -3,8 +3,6 @@ local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
 local parent = socialTabsPage.Parent
 local dataHydrationModule = require(parent.DataHydration)
 local profileCTAStore = dataHydrationModule.Profile.ProfileCTAStore
-local friendsStoreChallengeNetworkModule = require(socialTabsPage.Networking.friendsStoreChallengeNetwork)
-local fFlagEnableFriendsStoreChallengeInterceptor = require(parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local var1 = dataHydrationModule.Friends.FriendsStore.get()
 local friendingErrorCodesModule = require(socialTabsPage.Enums.FriendingErrorCodes)
 local images = require(parent.UIBlox).App.ImageSet.Images
@@ -59,8 +57,8 @@ end
 
 return {
 	executeAddFriend = function(p1)
-		-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), fFlagEnableFriendsStoreChallengeInterceptor (ref), friendsStoreChallengeNetworkModule (ref), networkingFriendsModule (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return (if fFlagMigrateFriendshipStatusesRemainingActions then var1.RequestFriendship(p1.targetUserId, p1.friendshipOriginSourceType, nil, if fFlagEnableFriendsStoreChallengeInterceptor then friendsStoreChallengeNetworkModule else nil) else p1.dispatch(networkingFriendsModule.RequestFriendshipFromUserId.API({
+		-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), networkingFriendsModule (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
+		return (if fFlagMigrateFriendshipStatusesRemainingActions then var1.RequestFriendship(p1.targetUserId, p1.friendshipOriginSourceType) else p1.dispatch(networkingFriendsModule.RequestFriendshipFromUserId.API({
 			currentUserId = p1.currentUserId,
 			targetUserId = p1.targetUserId,
 			friendshipOriginSourceType = p1.friendshipOriginSourceType

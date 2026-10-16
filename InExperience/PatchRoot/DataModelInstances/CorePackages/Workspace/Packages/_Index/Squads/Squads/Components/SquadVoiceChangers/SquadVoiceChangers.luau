@@ -1,6 +1,5 @@
 ﻿local squads = script:FindFirstAncestor("Squads")
 local parent = squads.Parent
-local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local foundationModule = require(parent.Foundation)
 local crossExperienceVoiceModule = require(parent.CrossExperienceVoice)
 local crossExperienceVoiceManager = crossExperienceVoiceModule.CrossExperienceVoiceManager
@@ -23,7 +22,7 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: cryo (ref), t (ref), useNavigation (ref), useLocalUserId (ref), useParticipant (ref), reactModule (ref), voicePackButtonModule (ref), crossExperienceVoiceManager (ref), foundationModule (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), builderIconsModule (ref), iconSize (ref), enums (ref), inputSize (ref)
+	-- upvalues: cryo (ref), t (ref), useNavigation (ref), useLocalUserId (ref), useParticipant (ref), reactModule (ref), voicePackButtonModule (ref), crossExperienceVoiceManager (ref), foundationModule (ref), builderIconsModule (ref), iconSize (ref), enums (ref), inputSize (ref)
 	local var1 = cryo.Dictionary.join(t, p1)
 	local var2 = useNavigation()
 	local var3 = tonumber(useLocalUserId()) or -1
@@ -49,8 +48,8 @@ return function(p1)
 	local function makeButton(p2, p3)
 		-- upvalues: list (ref), var1 (ref), reactModule (copy), voicePackButtonModule (copy), var6 (ref), var5 (ref), crossExperienceVoiceManager (copy), var3 (ref)
 		local var10
-		local var11 = list[p2] or { name = "Voicepack " .. p1 }
-		local var12 = if var1.fillListWithExtraVoicePacks then var11.name or "Voicepack " .. p1 else var11.name
+		local var11 = list[p2] or { name = "Voicepack " .. p2 }
+		local var12 = if var1.fillListWithExtraVoicePacks then var11.name or "Voicepack " .. p2 else var11.name
 		local createElement = reactModule.createElement
 		local t = {
 			LayoutOrder = p3,
@@ -86,21 +85,18 @@ return function(p1)
 		t_1["VoicePackButton_" .. i] = makeButton(i, i)
 	end
 	return reactModule.createElement(foundationModule.View, {
-		tag = "size-full-full col align-x-center align-y-top gap-large padding-large radius-medium stroke-emphasis " .. var17,
-		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changers" else nil
+		tag = "size-full-full col align-x-center align-y-top gap-large padding-large radius-medium stroke-emphasis " .. var8
 	}, {
 		TopBar = if wideMode then reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 1 }, {
 			Title = reactModule.createElement(foundationModule.Text, {
 				Text = "Choose voice pack",
 				LayoutOrder = 1,
-				tag = "position-center-center anchor-center-center text-align-x-center text-align-y-center size-full-0 auto-xy text-heading-small radius-medium " .. var18,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changers--title" else nil
+				tag = "position-center-center anchor-center-center text-align-x-center text-align-y-center size-full-0 auto-xy text-heading-small radius-medium " .. var9
 			}),
 			CloseButton = reactModule.createElement(foundationModule.View, {
 				tag = "position-center-left anchor-center-left auto-xy radius-circle bg-action-subtle padding-xsmall",
 				ZIndex = 2,
-				onActivated = var1.closeSquadVoiceChangers,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changers--close-button" else nil
+				onActivated = var1.closeSquadVoiceChangers
 			}, {
 				Icon = reactModule.createElement(foundationModule.Icon, {
 					tag = "position-center-center anchor-center-center auto-xy",
@@ -112,22 +108,19 @@ return function(p1)
 				Text = "Done",
 				tag = "position-center-right anchor-center-right text-align-x-center text-align-y-center size-2200-0 auto-y text-label-large radius-medium padding-small text-wrap bg-action-subtle",
 				LayoutOrder = 2,
-				onActivated = var1.closeSquadVoiceChangers,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changers--done-button" else nil
+				onActivated = var1.closeSquadVoiceChangers
 			})
 		}) else reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 1 }, {
 			Title = reactModule.createElement(foundationModule.Text, {
 				Text = "Choose voice pack",
 				LayoutOrder = 1,
-				tag = "position-center-left anchor-center-left text-align-x-left text-align-y-center size-full-0 auto-xy text-heading-small radius-medium " .. var18,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changers--title" else nil
+				tag = "position-center-left anchor-center-left text-align-x-left text-align-y-center size-full-0 auto-xy text-heading-small radius-medium " .. var9
 			}),
 			CloseButton = reactModule.createElement(foundationModule.View, {
 				tag = "position-center-right anchor-center-right auto-xy radius-circle bg-action-subtle padding-xsmall",
 				LayoutOrder = 2,
 				ZIndex = 2,
-				onActivated = var1.closeSquadVoiceChangers,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changers--close-button" else nil
+				onActivated = var1.closeSquadVoiceChangers
 			}, {
 				Icon = reactModule.createElement(foundationModule.Icon, {
 					tag = "position-center-center anchor-center-center auto-xy",
@@ -147,8 +140,7 @@ return function(p1)
 			HearMyselfLabel = reactModule.createElement(foundationModule.Text, {
 				Text = "Hear myself",
 				tag = "text-align-x-left text-align-y-center size-0-0 auto-xy fill text-label-medium padding-left-large radius-medium text-wrap bg-action-subtle",
-				LayoutOrder = 1,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changers--hear-myself-label" else nil
+				LayoutOrder = 1
 			}),
 			HearMyselfToggleHolder = reactModule.createElement(foundationModule.View, {
 				tag = "row align-x-center align-y-center size-0-0 auto-xy padding-right-large",
@@ -166,14 +158,13 @@ return function(p1)
 						end
 						crossExperienceVoiceManager.default:enableHearMyself(var3)
 					end,
-					isChecked = var7,
-					testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changers--hear-myself-toggle" else nil
+					isChecked = var7
 				})
 			})
 		}),
 		ButtonsView = reactModule.createElement(foundationModule.View, {
 			LayoutOrder = 4,
-			tag = "fill padding-left-medium padding-right-medium padding-bottom-medium radius-medium size-full-full auto-y col align-x-center align-y-top " .. var18
+			tag = "fill padding-left-medium padding-right-medium padding-bottom-medium radius-medium size-full-full auto-y col align-x-center align-y-top " .. var9
 		}, {
 			ButtonsScroller = reactModule.createElement(foundationModule.ScrollView, {
 				tag = "size-full-0 fill bg-action-subtle",
@@ -192,8 +183,7 @@ return function(p1)
 			Text = "Done",
 			tag = "position-center-center anchor-center-center text-align-x-center text-align-y-center size-full-0 auto-y text-label-large radius-medium padding-small text-wrap bg-action-subtle",
 			LayoutOrder = 5,
-			onActivated = var1.closeSquadVoiceChangers,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-voice-changers--done-button" else nil
+			onActivated = var1.closeSquadVoiceChangers
 		}) else nil
 	})
 end

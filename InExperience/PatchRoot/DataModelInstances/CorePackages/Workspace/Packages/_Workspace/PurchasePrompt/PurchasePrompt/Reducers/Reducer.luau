@@ -26,6 +26,6 @@ return require(parent.PurchasePromptDeps).Rodux.combineReducers({
 	isUserEligibleForUnifiedPurchaseFlow = require(script.Parent.UnifiedPurchaseEligibilityReducer),
 	purchaseAnalyticsMetadata = require(script.Parent.PurchaseAnalyticsMetadataReducer),
 	purchaseOptions = if require(purchasePrompt.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then require(script.Parent.PurchaseOptionsReducer) else nil,
-	robloxSubscriptionProducts = require(script.Parent.RobloxSubscriptionProductsReducer),
+	robloxSubscriptionProducts = if require(purchasePrompt.Parent.SharedFlags).FFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then require(script.Parent.RobloxSubscriptionProductsReducer) else nil,
 	cartPricing = if require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled) then require(script.Parent.CartPricingReducer) else nil
 })

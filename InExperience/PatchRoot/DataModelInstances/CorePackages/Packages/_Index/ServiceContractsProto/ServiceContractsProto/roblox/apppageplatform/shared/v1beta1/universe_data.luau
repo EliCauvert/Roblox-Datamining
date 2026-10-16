@@ -37,8 +37,7 @@ function t_1.new(p1)
 		preview_video_id = if p1 == nil or p1.preview_video_id == nil then nil else p1.preview_video_id,
 		creation_source = if p1 == nil or p1.creation_source == nil then nil else p1.creation_source,
 		promotional_text = if p1 == nil or p1.promotional_text == nil then nil else p1.promotional_text,
-		moment_video_asset_id = if p1 == nil or p1.moment_video_asset_id == nil then nil else p1.moment_video_asset_id,
-		is_community_licensed = if p1 == nil or p1.is_community_licensed == nil then nil else p1.is_community_licensed
+		moment_video_asset_id = if p1 == nil or p1.moment_video_asset_id == nil then nil else p1.moment_video_asset_id
 	}, t_1)
 end
 
@@ -227,12 +226,6 @@ function t_1:encode()
 		buff = var60
 		var1 = var61
 	end
-	if self.is_community_licensed ~= nil then
-		local var62, var63 = protoModule.writeTag(buff, var1, 31, protoModule.wireTypes.varint)
-		var62, var67 = protoModule.writeVarInt(var62, var63, if self.is_community_licensed then 1 else 0)
-		buff = var62
-		var1 = var63
-	end
 	local buff_1 = buffer.create(var1)
 	buffer.copy(buff_1, 0, buff, 0, var1)
 	
@@ -327,111 +320,106 @@ function t_1.decode(p1)
 				local var36, var37 = protoModule.readVarIntI64(p1, var2)
 				var2 = var37
 				var1.moment_video_asset_id = var36
-			elseif var7 == 31 then
-				local _ = nil
-				local var38, var39 = protoModule.readVarInt(p1, var2)
-				var2 = var39
-				var1.is_community_licensed = var38 ~= 0
 			else
 				local _ = nil
-				local var40, var41 = protoModule.readVarInt(p1, var2)
-				local _ = var40
-				var2 = var41
+				local var38, var39 = protoModule.readVarInt(p1, var2)
+				local _ = var38
+				var2 = var39
 			end
 		end
 		if var3 == protoModule.wireTypes.lengthDelimited then
 			if var7 == 2 then
 				local _ = nil
+				local var40, var41 = protoModule.readBuffer(p1, var2)
+				var2 = var41
+				var1.name = buffer.tostring(var40)
+			elseif var7 == 3 then
+				local _ = nil
 				local var42, var43 = protoModule.readBuffer(p1, var2)
 				var2 = var43
-				var1.name = buffer.tostring(var42)
-			elseif var7 == 3 then
+				var1.description = buffer.tostring(var42)
+			elseif var7 == 5 then
 				local _ = nil
 				local var44, var45 = protoModule.readBuffer(p1, var2)
 				var2 = var45
-				var1.description = buffer.tostring(var44)
-			elseif var7 == 5 then
+				var1.creator_type = buffer.tostring(var44)
+			elseif var7 == 12 then
 				local _ = nil
 				local var46, var47 = protoModule.readBuffer(p1, var2)
 				var2 = var47
-				var1.creator_type = buffer.tostring(var46)
-			elseif var7 == 12 then
+				var1.localized_fiat_price = buffer.tostring(var46)
+			elseif var7 == 13 then
 				local _ = nil
 				local var48, var49 = protoModule.readBuffer(p1, var2)
 				var2 = var49
-				var1.localized_fiat_price = buffer.tostring(var48)
-			elseif var7 == 13 then
+				var1.genre_l1 = buffer.tostring(var48)
+			elseif var7 == 14 then
 				local _ = nil
 				local var50, var51 = protoModule.readBuffer(p1, var2)
 				var2 = var51
-				var1.genre_l1 = buffer.tostring(var50)
-			elseif var7 == 14 then
+				var1.genre_l2 = buffer.tostring(var50)
+			elseif var7 == 16 then
 				local _ = nil
 				local var52, var53 = protoModule.readBuffer(p1, var2)
 				var2 = var53
-				var1.genre_l2 = buffer.tostring(var52)
-			elseif var7 == 16 then
+				var1.created_date = buffer.tostring(var52)
+			elseif var7 == 17 then
 				local _ = nil
 				local var54, var55 = protoModule.readBuffer(p1, var2)
 				var2 = var55
-				var1.created_date = buffer.tostring(var54)
-			elseif var7 == 17 then
+				var1.updated_date = buffer.tostring(var54)
+			elseif var7 == 20 then
 				local _ = nil
 				local var56, var57 = protoModule.readBuffer(p1, var2)
 				var2 = var57
-				var1.updated_date = buffer.tostring(var56)
-			elseif var7 == 20 then
+				var1.canonical_url_path = buffer.tostring(var56)
+			elseif var7 == 22 then
 				local _ = nil
 				local var58, var59 = protoModule.readBuffer(p1, var2)
 				var2 = var59
-				var1.canonical_url_path = buffer.tostring(var58)
-			elseif var7 == 22 then
+				var1.game_age_display_name = buffer.tostring(var58)
+			elseif var7 == 23 then
 				local _ = nil
 				local var60, var61 = protoModule.readBuffer(p1, var2)
 				var2 = var61
-				var1.game_age_display_name = buffer.tostring(var60)
-			elseif var7 == 23 then
+				var1.content_maturity = buffer.tostring(var60)
+			elseif var7 == 25 then
 				local _ = nil
 				local var62, var63 = protoModule.readBuffer(p1, var2)
 				var2 = var63
-				var1.content_maturity = buffer.tostring(var62)
-			elseif var7 == 25 then
+				var1.refund_policy_text = buffer.tostring(var62)
+			elseif var7 == 26 then
 				local _ = nil
 				local var64, var65 = protoModule.readBuffer(p1, var2)
 				var2 = var65
-				var1.refund_policy_text = buffer.tostring(var64)
-			elseif var7 == 26 then
+				var1.refund_article_id = buffer.tostring(var64)
+			elseif var7 == 28 then
 				local _ = nil
 				local var66, var67 = protoModule.readBuffer(p1, var2)
 				var2 = var67
-				var1.refund_article_id = buffer.tostring(var66)
-			elseif var7 == 28 then
+				var1.creation_source = buffer.tostring(var66)
+			elseif var7 == 29 then
 				local _ = nil
 				local var68, var69 = protoModule.readBuffer(p1, var2)
 				var2 = var69
-				var1.creation_source = buffer.tostring(var68)
-			elseif var7 == 29 then
-				local _ = nil
-				local var70, var71 = protoModule.readBuffer(p1, var2)
-				var2 = var71
-				var1.promotional_text = buffer.tostring(var70)
+				var1.promotional_text = buffer.tostring(var68)
 			else
 				local _ = nil
-				local var72, var73 = protoModule.readVarInt(p1, var2)
-				var2 = var73 + var72
+				local var70, var71 = protoModule.readVarInt(p1, var2)
+				var2 = var71 + var70
 			end
 		elseif var3 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var74, var75 = protoModule.readFixed32(p1, var2)
-			local _ = var74
-			var2 = var75
+			local var72, var73 = protoModule.readFixed32(p1, var2)
+			local _ = var72
+			var2 = var73
 		elseif var3 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var76, var77 = protoModule.readFixed64(p1, var2)
-			local _ = var76
-			var2 = var77
+			local var74, var75 = protoModule.readFixed64(p1, var2)
+			local _ = var74
+			var2 = var75
 		else
-			error("Unsupported wire type: " .. var71)
+			error("Unsupported wire type: " .. var3)
 		end
 	end
 	return var1
@@ -530,194 +518,185 @@ function t_1:jsonEncode()
 	if self.moment_video_asset_id ~= nil then
 		t.momentVideoAssetId = self.moment_video_asset_id
 	end
-	if self.is_community_licensed ~= nil then
-		t.isCommunityLicensed = self.is_community_licensed
-	end
 	return t
 end
 
 function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
-	local var78 = t_1.new()
+	local var76 = t_1.new()
 	
 	if self.id ~= nil then
-		var78.id = self.id
+		var76.id = self.id
 	end
 	if self.name ~= nil then
-		var78.name = self.name
+		var76.name = self.name
 	end
 	if self.description ~= nil then
-		var78.description = self.description
+		var76.description = self.description
 	end
 	if self.root_place_id ~= nil then
-		var78.root_place_id = self.root_place_id
+		var76.root_place_id = self.root_place_id
 	end
 	if self.rootPlaceId ~= nil then
-		var78.root_place_id = self.rootPlaceId
+		var76.root_place_id = self.rootPlaceId
 	end
 	if self.creator_type ~= nil then
-		var78.creator_type = self.creator_type
+		var76.creator_type = self.creator_type
 	end
 	if self.creatorType ~= nil then
-		var78.creator_type = self.creatorType
+		var76.creator_type = self.creatorType
 	end
 	if self.creator_id ~= nil then
-		var78.creator_id = self.creator_id
+		var76.creator_id = self.creator_id
 	end
 	if self.creatorId ~= nil then
-		var78.creator_id = self.creatorId
+		var76.creator_id = self.creatorId
 	end
 	if self.player_count ~= nil then
-		var78.player_count = self.player_count
+		var76.player_count = self.player_count
 	end
 	if self.playerCount ~= nil then
-		var78.player_count = self.playerCount
+		var76.player_count = self.playerCount
 	end
 	if self.total_up_votes ~= nil then
-		var78.total_up_votes = self.total_up_votes
+		var76.total_up_votes = self.total_up_votes
 	end
 	if self.totalUpVotes ~= nil then
-		var78.total_up_votes = self.totalUpVotes
+		var76.total_up_votes = self.totalUpVotes
 	end
 	if self.total_down_votes ~= nil then
-		var78.total_down_votes = self.total_down_votes
+		var76.total_down_votes = self.total_down_votes
 	end
 	if self.totalDownVotes ~= nil then
-		var78.total_down_votes = self.totalDownVotes
+		var76.total_down_votes = self.totalDownVotes
 	end
 	if self.is_voice_supported ~= nil then
-		var78.is_voice_supported = self.is_voice_supported
+		var76.is_voice_supported = self.is_voice_supported
 	end
 	if self.isVoiceSupported ~= nil then
-		var78.is_voice_supported = self.isVoiceSupported
+		var76.is_voice_supported = self.isVoiceSupported
 	end
 	if self.is_camera_supported ~= nil then
-		var78.is_camera_supported = self.is_camera_supported
+		var76.is_camera_supported = self.is_camera_supported
 	end
 	if self.isCameraSupported ~= nil then
-		var78.is_camera_supported = self.isCameraSupported
+		var76.is_camera_supported = self.isCameraSupported
 	end
 	if self.localized_fiat_price ~= nil then
-		var78.localized_fiat_price = self.localized_fiat_price
+		var76.localized_fiat_price = self.localized_fiat_price
 	end
 	if self.localizedFiatPrice ~= nil then
-		var78.localized_fiat_price = self.localizedFiatPrice
+		var76.localized_fiat_price = self.localizedFiatPrice
 	end
 	if self.genre_l1 ~= nil then
-		var78.genre_l1 = self.genre_l1
+		var76.genre_l1 = self.genre_l1
 	end
 	if self.genreL1 ~= nil then
-		var78.genre_l1 = self.genreL1
+		var76.genre_l1 = self.genreL1
 	end
 	if self.genre_l2 ~= nil then
-		var78.genre_l2 = self.genre_l2
+		var76.genre_l2 = self.genre_l2
 	end
 	if self.genreL2 ~= nil then
-		var78.genre_l2 = self.genreL2
+		var76.genre_l2 = self.genreL2
 	end
 	if self.maximum_server_size ~= nil then
-		var78.maximum_server_size = self.maximum_server_size
+		var76.maximum_server_size = self.maximum_server_size
 	end
 	if self.maximumServerSize ~= nil then
-		var78.maximum_server_size = self.maximumServerSize
+		var76.maximum_server_size = self.maximumServerSize
 	end
 	if self.created_date ~= nil then
-		var78.created_date = self.created_date
+		var76.created_date = self.created_date
 	end
 	if self.createdDate ~= nil then
-		var78.created_date = self.createdDate
+		var76.created_date = self.createdDate
 	end
 	if self.updated_date ~= nil then
-		var78.updated_date = self.updated_date
+		var76.updated_date = self.updated_date
 	end
 	if self.updatedDate ~= nil then
-		var78.updated_date = self.updatedDate
+		var76.updated_date = self.updatedDate
 	end
 	if self.favorite_count ~= nil then
-		var78.favorite_count = self.favorite_count
+		var76.favorite_count = self.favorite_count
 	end
 	if self.favoriteCount ~= nil then
-		var78.favorite_count = self.favoriteCount
+		var76.favorite_count = self.favoriteCount
 	end
 	if self.total_visits ~= nil then
-		var78.total_visits = self.total_visits
+		var76.total_visits = self.total_visits
 	end
 	if self.totalVisits ~= nil then
-		var78.total_visits = self.totalVisits
+		var76.total_visits = self.totalVisits
 	end
 	if self.canonical_url_path ~= nil then
-		var78.canonical_url_path = self.canonical_url_path
+		var76.canonical_url_path = self.canonical_url_path
 	end
 	if self.canonicalUrlPath ~= nil then
-		var78.canonical_url_path = self.canonicalUrlPath
+		var76.canonical_url_path = self.canonicalUrlPath
 	end
 	if self.game_minimum_age ~= nil then
-		var78.game_minimum_age = self.game_minimum_age
+		var76.game_minimum_age = self.game_minimum_age
 	end
 	if self.gameMinimumAge ~= nil then
-		var78.game_minimum_age = self.gameMinimumAge
+		var76.game_minimum_age = self.gameMinimumAge
 	end
 	if self.game_age_display_name ~= nil then
-		var78.game_age_display_name = self.game_age_display_name
+		var76.game_age_display_name = self.game_age_display_name
 	end
 	if self.gameAgeDisplayName ~= nil then
-		var78.game_age_display_name = self.gameAgeDisplayName
+		var76.game_age_display_name = self.gameAgeDisplayName
 	end
 	if self.content_maturity ~= nil then
-		var78.content_maturity = self.content_maturity
+		var76.content_maturity = self.content_maturity
 	end
 	if self.contentMaturity ~= nil then
-		var78.content_maturity = self.contentMaturity
+		var76.content_maturity = self.contentMaturity
 	end
 	if self.is_officially_licensed ~= nil then
-		var78.is_officially_licensed = self.is_officially_licensed
+		var76.is_officially_licensed = self.is_officially_licensed
 	end
 	if self.isOfficiallyLicensed ~= nil then
-		var78.is_officially_licensed = self.isOfficiallyLicensed
+		var76.is_officially_licensed = self.isOfficiallyLicensed
 	end
 	if self.refund_policy_text ~= nil then
-		var78.refund_policy_text = self.refund_policy_text
+		var76.refund_policy_text = self.refund_policy_text
 	end
 	if self.refundPolicyText ~= nil then
-		var78.refund_policy_text = self.refundPolicyText
+		var76.refund_policy_text = self.refundPolicyText
 	end
 	if self.refund_article_id ~= nil then
-		var78.refund_article_id = self.refund_article_id
+		var76.refund_article_id = self.refund_article_id
 	end
 	if self.refundArticleId ~= nil then
-		var78.refund_article_id = self.refundArticleId
+		var76.refund_article_id = self.refundArticleId
 	end
 	if self.preview_video_id ~= nil then
-		var78.preview_video_id = self.preview_video_id
+		var76.preview_video_id = self.preview_video_id
 	end
 	if self.previewVideoId ~= nil then
-		var78.preview_video_id = self.previewVideoId
+		var76.preview_video_id = self.previewVideoId
 	end
 	if self.creation_source ~= nil then
-		var78.creation_source = self.creation_source
+		var76.creation_source = self.creation_source
 	end
 	if self.creationSource ~= nil then
-		var78.creation_source = self.creationSource
+		var76.creation_source = self.creationSource
 	end
 	if self.promotional_text ~= nil then
-		var78.promotional_text = self.promotional_text
+		var76.promotional_text = self.promotional_text
 	end
 	if self.promotionalText ~= nil then
-		var78.promotional_text = self.promotionalText
+		var76.promotional_text = self.promotionalText
 	end
 	if self.moment_video_asset_id ~= nil then
-		var78.moment_video_asset_id = self.moment_video_asset_id
+		var76.moment_video_asset_id = self.moment_video_asset_id
 	end
 	if self.momentVideoAssetId ~= nil then
-		var78.moment_video_asset_id = self.momentVideoAssetId
+		var76.moment_video_asset_id = self.momentVideoAssetId
 	end
-	if self.is_community_licensed ~= nil then
-		var78.is_community_licensed = self.is_community_licensed
-	end
-	if self.isCommunityLicensed ~= nil then
-		var78.is_community_licensed = self.isCommunityLicensed
-	end
-	return var78
+	return var76
 end
 
 t_1.descriptor = {

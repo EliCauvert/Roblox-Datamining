@@ -6,10 +6,11 @@ local sduiResponseType = sduiSharedUtilitiesModule.SduiResponseType
 local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local getBadgesSeeAllUrlModule = require(badges.BadgesSeeAllPage.getBadgesSeeAllUrl)
 local getBadgesSeeAllPageKeyModule = require(badges.BadgesSeeAllPage.getBadgesSeeAllPageKey)
+local fFlagSduiProtobufJsonDecode = require(parent.SharedFlags).FFlagSduiProtobufJsonDecode
 local fFlagSduiExtendedCapabilitiesDiscovery = require(parent.SharedFlags).FFlagSduiExtendedCapabilitiesDiscovery
 
 return function(p1, p2, p3)
-	-- upvalues: fFlagSduiExtendedCapabilitiesDiscovery (ref), getBadgesSeeAllPageKeyModule (ref), parent (ref), badges (ref), sduiSharedUtilitiesModule (ref), getSduiApiStore (ref), sduiResponseType (ref), appPage (ref), getBadgesSeeAllUrlModule (ref)
+	-- upvalues: fFlagSduiExtendedCapabilitiesDiscovery (ref), getBadgesSeeAllPageKeyModule (ref), parent (ref), badges (ref), sduiSharedUtilitiesModule (ref), getSduiApiStore (ref), fFlagSduiProtobufJsonDecode (ref), sduiResponseType (ref), appPage (ref), getBadgesSeeAllUrlModule (ref)
 	if fFlagSduiExtendedCapabilitiesDiscovery then
 		local var1 = getBadgesSeeAllPageKeyModule(p1)
 		local serviceContractsProtoModule = require(parent.ServiceContractsProto)
@@ -39,7 +40,7 @@ return function(p1, p2, p3)
 		end
 		
 		getSduiApiStore().fetchIfNeeded({
-			responseType = sduiResponseType.Protobuf,
+			responseType = if fFlagSduiProtobufJsonDecode then sduiResponseType.Protobuf else nil,
 			url = var2,
 			surfaceKey = appPage.BadgesSeeAll,
 			configKey = var1,
@@ -69,7 +70,7 @@ return function(p1, p2, p3)
 	end
 	local var3 = getBadgesSeeAllUrlModule(p1)
 	getSduiApiStore().fetchIfNeeded({
-		responseType = sduiResponseType.Protobuf,
+		responseType = if fFlagSduiProtobufJsonDecode then sduiResponseType.Protobuf else nil,
 		url = var3,
 		surfaceKey = appPage.BadgesSeeAll,
 		configKey = getBadgesSeeAllPageKeyModule(p1),

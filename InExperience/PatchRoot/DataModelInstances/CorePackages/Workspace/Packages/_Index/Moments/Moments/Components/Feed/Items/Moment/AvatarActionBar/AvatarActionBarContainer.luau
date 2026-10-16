@@ -4,5 +4,7 @@ local useAvatarActionBarViewModelModule = require(script.Parent.useAvatarActionB
 
 return reactModule.memo(function(p1)
 	-- upvalues: useAvatarActionBarViewModelModule (ref), reactModule (ref), avatarActionBarModule (ref)
-	return reactModule.createElement(avatarActionBarModule, useAvatarActionBarViewModelModule(p1))
+	local var1 = useAvatarActionBarViewModelModule(p1)
+	
+	return if var1 == nil then nil else reactModule.createElement(avatarActionBarModule, var1)
 end)

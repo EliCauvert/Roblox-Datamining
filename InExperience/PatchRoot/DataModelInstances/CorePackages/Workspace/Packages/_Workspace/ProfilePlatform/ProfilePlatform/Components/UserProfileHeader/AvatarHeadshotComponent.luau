@@ -19,6 +19,7 @@ local contexts = require(parent.SocialLuaAnalytics).Analytics.Enums.Contexts
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
 local textKeysModule = require(profilePlatform.Common.TextKeys)
 local fFlagEnableFontStylisticAlternativesOnSocialScreens = require(parent.SharedFlags).FFlagEnableFontStylisticAlternativesOnSocialScreens
+local fFlagUserTileTextTCIndicator = require(parent.SharedFlags).FFlagUserTileTextTCIndicator
 local fFlagAddPlatformNameToProfileHeader = require(parent.SharedFlags).FFlagAddPlatformNameToProfileHeader
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
 local fFlagDisableCopyUsernameOnConsole = require(parent.SharedFlags).FFlagDisableCopyUsernameOnConsole
@@ -30,14 +31,14 @@ local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubs
 local getBuilderIconForCurrentPlatform = foundationModule.Utility.getBuilderIconForCurrentPlatform
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDynamicSizeMarginModule (ref), useLocalUserId (ref), convertToFoundationPresenceEnum (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagAddPlatformNameToProfileHeader (ref), getBuilderIconForCurrentPlatform (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagDisableCopyUsernameOnConsole (ref), responsiveModule (ref), fFlagEnableUserRecentActivityEntryPoint (ref), useCurrentProfileFriendStatusModule (ref), enumsModule (ref), useNavigation (ref), appPage (ref), default (ref), contexts (ref), setCurrentToastMessage (ref), copy (ref), constantsModule (ref), userTile (ref), layoutMode (ref)
+	-- upvalues: useTokens (ref), useDynamicSizeMarginModule (ref), useLocalUserId (ref), convertToFoundationPresenceEnum (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagAddPlatformNameToProfileHeader (ref), getBuilderIconForCurrentPlatform (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagDisableCopyUsernameOnConsole (ref), responsiveModule (ref), fFlagEnableUserRecentActivityEntryPoint (ref), useCurrentProfileFriendStatusModule (ref), enumsModule (ref), useNavigation (ref), appPage (ref), default (ref), contexts (ref), setCurrentToastMessage (ref), copy (ref), constantsModule (ref), userTile (ref), layoutMode (ref), fFlagUserTileTextTCIndicator (ref)
 	local var1
 	local var2 = useTokens()
 	local var3, var4 = useDynamicSizeMarginModule()
 	local userId = p1.userId
 	local var5 = userId == tostring(useLocalUserId())
 	local var6 = if var5 or not p1.userPresenceType then nil else convertToFoundationPresenceEnum(p1.userPresenceType)
-	local var7 = if p1.username and p1.username ~= "" then if fFlagEnableFontStylisticAlternativesOnSocialScreens then `<font features="zero, ss03">@{p1.username}</font>` else "@" .. p0.username else ""
+	local var7 = if p1.username and p1.username ~= "" then if fFlagEnableFontStylisticAlternativesOnSocialScreens then `<font features="zero, ss03">@{p1.username}</font>` else "@" .. p1.username else ""
 	local var8 = useDispatch()
 	local var9 = useLocalization({
 		usernameCopied = textKeysModule.UsernameCopied,
@@ -83,7 +84,6 @@ return function(p1)
 		}),
 		UserTile = reactModule.createElement(userTile, {
 			layoutOrder = 1,
-			trustedConnectionIndicatorEnabled = true,
 			userId = p1.userId,
 			title = p1.primaryName,
 			isVerified = p1.isVerified,
@@ -105,6 +105,7 @@ return function(p1)
 					toastIcon = copy
 				}))
 			end),
+			trustedConnectionIndicatorEnabled = if fFlagUserTileTextTCIndicator then true else nil,
 			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var11 else nil,
 			extraInfo = if var12 then var9.viewRecentActivity else nil,
 			onExtraInfoClicked = if var12 then if fFlagEnableUserRecentActivityEntryPoint then reactModule.useCallback(function()

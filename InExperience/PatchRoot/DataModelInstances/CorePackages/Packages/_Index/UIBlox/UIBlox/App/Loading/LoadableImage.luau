@@ -16,6 +16,7 @@ local debugPropsModule = require(parent.Enum.DebugProps)
 local loadingStrategyModule = require(parent.Enum.LoadingStrategy)
 local withStyleModule = require(parent_2.Core.Style.withStyle)
 local getClosestRadiusModule = require(parent_1.Loading.getClosestRadius)
+local UIBloxConfigModule = require(parent_2.UIBloxConfig)
 local imagesModule = require(parent_2.App.ImageSet.Images)
 local imageSetComponentModule = require(parent_2.Core.ImageSet.ImageSetComponent)
 local validateImageSetDataModule = require(core.ImageSet.Validator.validateImageSetData)
@@ -73,7 +74,7 @@ function loadableImage.init(p1)
 end
 
 function loadableImage.renderShimmer(p1, p2, p3, p4)
-	-- upvalues: roactModule (ref), skeleton (ref), getClosestRadiusModule (ref)
+	-- upvalues: roactModule (ref), skeleton (ref), getClosestRadiusModule (ref), UIBloxConfigModule (ref)
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		AnchorPoint = p1.props.AnchorPoint,
@@ -86,14 +87,14 @@ function loadableImage.renderShimmer(p1, p2, p3, p4)
 	}, {
 		Shimmer = roactModule.createElement(skeleton, {
 			Size = UDim2.fromScale(1, 1),
-			radius = getClosestRadiusModule({
+			radius = getClosestRadiusModule(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then {
 				None = p4.Radius.None,
 				Small = p4.Radius.Small,
 				Medium = p4.Radius.Medium,
 				Large = p4.Size.Size_300,
 				XLarge = p4.Radius.Large,
 				Circle = p4.Radius.Circle
-			}, p1.props.cornerRadius)
+			} else p4.Semantic.Radius, p1.props.cornerRadius)
 		}),
 		UISizeConstraint = p3,
 		UICorner = roactModule.createElement("UICorner", { CornerRadius = p1.props.cornerRadius }) or nil
@@ -302,7 +303,7 @@ function loadableImage.maybeReportCounter(_, p1, p2)
 	-- upvalues: var1 (write)
 	pcall(function()
 		-- upvalues: p1 (ref), p2 (ref), var1 (copy)
-		var1:ReportCounter("UIBlox_LoadableImage_" .. p26 .. "_" .. tostring(p2))
+		var1:ReportCounter("UIBlox_LoadableImage_" .. p1 .. "_" .. tostring(p2))
 	end)
 end
 

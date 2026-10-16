@@ -6,19 +6,19 @@ local getSupportedActionsForProfileTypeModule = require(profilePlatform.Hooks.ge
 local fFlagAddSocialLinksToCommunityProfile = require(parent.SharedFlags).FFlagAddSocialLinksToCommunityProfile
 local fFlagAddCommunityLockedToCommunityProfile = require(parent.SharedFlags).FFlagAddCommunityLockedToCommunityProfile
 local fFlagAddEventsToCommunityProfileModule = require(profilePlatform.Flags.FFlagAddEventsToCommunityProfile)
-local fFlagGroupAnnouncementsSdui = require(parent.SharedFlags).FFlagGroupAnnouncementsSdui
+local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 
 return function()
-	-- upvalues: enumsModule (ref), getSupportedActionsForProfileTypeModule (ref), fFlagAddSocialLinksToCommunityProfile (ref), fFlagAddCommunityLockedToCommunityProfile (ref), fFlagAddEventsToCommunityProfileModule (ref), fFlagGroupAnnouncementsSdui (ref)
+	-- upvalues: enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref), fFlagAddSocialLinksToCommunityProfile (ref), fFlagAddCommunityLockedToCommunityProfile (ref), fFlagAddEventsToCommunityProfileModule (ref)
 	local list = {
 		{
 			component = enumsModule.Components.CommunityProfileHeader
 		},
 		{ component = enumsModule.Components.About },
 		{
-			isActionsV2Supported = true,
 			component = enumsModule.Components.Actions,
-			supportedActions = getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.Community)
+			supportedActions = if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.Community) else nil,
+			isActionsV2Supported = if fFlagProfilePlatformCTAsRefactorModule then true else nil
 		},
 		{ component = enumsModule.Components.Experiences },
 		{ component = enumsModule.Components.Store },
@@ -34,9 +34,6 @@ return function()
 	end
 	if fFlagAddEventsToCommunityProfileModule then
 		table.insert(list, { component = enumsModule.Components.Events })
-	end
-	if fFlagGroupAnnouncementsSdui then
-		table.insert(list, { component = enumsModule.Components.Announcements })
 	end
 	return list
 end

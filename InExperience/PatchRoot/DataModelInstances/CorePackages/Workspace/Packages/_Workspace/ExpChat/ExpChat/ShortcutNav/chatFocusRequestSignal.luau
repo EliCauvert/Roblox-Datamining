@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.AppCommonLib).Signal.new()

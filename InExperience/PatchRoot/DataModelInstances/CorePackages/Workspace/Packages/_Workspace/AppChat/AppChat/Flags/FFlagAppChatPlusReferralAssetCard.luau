@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AppChatPlusReferralAssetCard", false) and (require(script.Parent.FFlagAppChatResolveShareLinkV2) and require(script:FindFirstAncestor("AppChat").Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet)

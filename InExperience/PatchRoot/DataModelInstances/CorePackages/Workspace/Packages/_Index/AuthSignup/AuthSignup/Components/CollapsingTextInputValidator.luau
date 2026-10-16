@@ -9,7 +9,6 @@ local openTypeSupport = UIBloxModule.Utility.OpenTypeSupport
 local withStyle = UIBloxModule.Style.withStyle
 local withLocalization = require(parent.Localization).withLocalization
 local authCommonModule = require(parent.AuthCommon)
-local formatBoldRichText = authCommonModule.Utils.formatBoldRichText
 local fitChildren = authCommonModule.Components.FitChildren
 local fitTextLabel = authCommonModule.Components.FitTextLabel
 local authStatefulRoundCornerBorder = authCommonModule.Components.AuthStatefulRoundCornerBorder
@@ -59,7 +58,7 @@ function collapsingTextInputValidator.init(p1)
 		p1.foundationProxyText = p1.props.prefilledText or ""
 		p1.foundationTextBoxProxy = nil
 	end
-	function p2.getFrameRef()
+	function p1.getFrameRef()
 		-- upvalues: p1 (ref)
 		return p1.props.frameRef or p1.frameRef
 	end
@@ -77,7 +76,7 @@ function collapsingTextInputValidator.init(p1)
 	p1.issueTrackerHeight = var7
 	p1.updateIssueTrackerHeight = var8
 	
-	function p2.getContentGap()
+	function p1.getContentGap()
 		-- upvalues: fFlagAuthValidatorStyleOverrides (copy), p1 (ref), getFFlagLuaAppEnable10ftSignUpView (copy)
 		return if fFlagAuthValidatorStyleOverrides and p1.props.contentGapOverride then p1.props.contentGapOverride elseif getFFlagLuaAppEnable10ftSignUpView() and p1.props.tokens then p1.props.tokens.boxPadding else 5
 	end
@@ -88,7 +87,7 @@ function collapsingTextInputValidator.init(p1)
 	end)
 	p1.springOptions = { frequency = 3 }
 	
-	function p2.onSizeChange(p2, p3)
+	function p1.onSizeChange(p2, p3)
 		-- upvalues: p1 (ref)
 		local absoluteSize = p3.AbsoluteSize
 		
@@ -102,17 +101,17 @@ function collapsingTextInputValidator.init(p1)
 		end
 	end
 	
-	function p2.onIssueSummarySizeChange(p2)
+	function p1.onIssueSummarySizeChange(p2)
 		-- upvalues: p1 (ref)
 		p1.onSizeChange("issueSummaryHeight", p2)
 	end
 	
-	function p2.onIssueFullListSizeChange(p2)
+	function p1.onIssueFullListSizeChange(p2)
 		-- upvalues: p1 (ref)
 		p1.onSizeChange("issueFullListHeight", p2)
 	end
 	
-	function p2.textInputChangedCallback(p2)
+	function p1.textInputChangedCallback(p2)
 		-- upvalues: p1 (ref), inputValidity (copy)
 		spawn(function()
 			-- upvalues: p1 (copy), p2 (ref), inputValidity (copy)
@@ -132,13 +131,13 @@ function collapsingTextInputValidator.init(p1)
 		end)
 	end
 	
-	function p2.foundationTextInputChangedCallback(p2)
+	function p1.foundationTextInputChangedCallback(p2)
 		-- upvalues: p1 (ref)
 		p1.foundationProxyText = p2
 		p1.textInputChangedCallback({ Text = p2 })
 	end
 	
-	function p2.bindFoundationTextBoxProxy()
+	function p1.bindFoundationTextBoxProxy()
 		-- upvalues: p1 (ref)
 		local textBoxRef = p1.props.textBoxRef
 		
@@ -190,7 +189,7 @@ function collapsingTextInputValidator.init(p1)
 		textBoxRef.current = t
 	end
 	
-	function p2.onTextValidated(p2, p3, p4)
+	function p1.onTextValidated(p2, p3, p4)
 		-- upvalues: p1 (ref), fFlagSignUpTrackFailedRequest (copy)
 		spawn(function()
 			-- upvalues: p1 (copy), p2 (ref), fFlagSignUpTrackFailedRequest (copy), p3 (ref), p4 (ref)
@@ -209,7 +208,7 @@ function collapsingTextInputValidator.init(p1)
 		end)
 	end
 	
-	function p2.onTextInputBoxFocused()
+	function p1.onTextInputBoxFocused()
 		-- upvalues: p1 (ref)
 		spawn(function()
 			-- upvalues: p1 (copy)
@@ -224,21 +223,21 @@ function collapsingTextInputValidator.init(p1)
 		end)
 	end
 	
-	function p2.onMouseEnter()
+	function p1.onMouseEnter()
 		-- upvalues: p1 (ref)
 		if p1.isMounted then
 			p1:setState({ textBoxHover = true })
 		end
 	end
 	
-	function p2.onMouseLeave()
+	function p1.onMouseLeave()
 		-- upvalues: p1 (ref)
 		if p1.isMounted then
 			p1:setState({ textBoxHover = false })
 		end
 	end
 	
-	function p2.onTextInputBoxFocusLost()
+	function p1.onTextInputBoxFocusLost()
 		-- upvalues: p1 (ref)
 		spawn(function()
 			-- upvalues: p1 (copy)
@@ -251,7 +250,7 @@ function collapsingTextInputValidator.init(p1)
 		end)
 	end
 	
-	function p2.onPositionChanged()
+	function p1.onPositionChanged()
 		-- upvalues: p1 (ref)
 		spawn(function()
 			-- upvalues: p1 (copy)
@@ -265,7 +264,7 @@ function collapsingTextInputValidator.init(p1)
 		end)
 	end
 	
-	function p2.isInErrorState()
+	function p1.isInErrorState()
 		-- upvalues: p1 (ref), fFlagSignUpTrackFailedRequest (copy), inputValidity (copy)
 		local textBoxFocused
 		local props = p1.props
@@ -291,7 +290,7 @@ function collapsingTextInputValidator.init(p1)
 		end
 	end
 	
-	function p2.textInputBoxWithBorder()
+	function p1.textInputBoxWithBorder()
 		-- upvalues: withStyle (copy), p1 (ref), getFFlagLuaAppEnable10ftSignUpView (copy), enableAndroidPasswordSuggestionEngineFeature (copy), roactModule (copy), passwordBox (copy), genericTextBox (copy), getFFlagLuaAppEnableOpenTypeSupport (copy), getFFlagLuaAppEnableOpenTypeSignUpPageFix (copy), openTypeSupport (copy)
 		return withStyle(function(p2)
 			-- upvalues: p1 (copy), getFFlagLuaAppEnable10ftSignUpView (copy), enableAndroidPasswordSuggestionEngineFeature (copy), roactModule (copy), passwordBox (copy), genericTextBox (copy), getFFlagLuaAppEnableOpenTypeSupport (copy), getFFlagLuaAppEnableOpenTypeSignUpPageFix (copy), openTypeSupport (copy)
@@ -365,7 +364,7 @@ function collapsingTextInputValidator.init(p1)
 		end)
 	end
 	
-	function p2.textInputBoxFoundation()
+	function p1.textInputBoxFoundation()
 		-- upvalues: fFlagAuthValidatorStyleOverrides (copy), p1 (ref), roactModule (copy), textInput (copy)
 		local foundationInputSize = nil
 		local foundationIconTrailing = nil
@@ -539,7 +538,7 @@ function collapsingTextInputValidator.willUnmount(p1)
 end
 
 function collapsingTextInputValidator.render(p1)
-	-- upvalues: authStatefulRoundCornerBorder (ref), fFlagAuthValidatorStyleOverrides (ref), withStyle (ref), getFFlagLuaAppEnable10ftSignUpView (ref), withLocalization (ref), roactModule (ref), fitChildren (ref), inputLabel (ref), formatBoldRichText (ref), fitTextLabel (ref), loading (ref), iconSize (ref), getFFlagEnableAuditForSinglePageSignUp (ref), registerAuditContent (ref), getFFlagEnableAuthStatefulTextInputUpdates (ref), issueTracker (ref), fFlagSignUpTrackFailedRequest (ref)
+	-- upvalues: authStatefulRoundCornerBorder (ref), fFlagAuthValidatorStyleOverrides (ref), withStyle (ref), getFFlagLuaAppEnable10ftSignUpView (ref), withLocalization (ref), roactModule (ref), fitChildren (ref), inputLabel (ref), fitTextLabel (ref), loading (ref), iconSize (ref), getFFlagEnableAuditForSinglePageSignUp (ref), registerAuditContent (ref), getFFlagEnableAuthStatefulTextInputUpdates (ref), issueTracker (ref), fFlagSignUpTrackFailedRequest (ref)
 	local layoutOrder = p1.props.layoutOrder
 	local titleTextKey = p1.props.titleTextKey
 	local summaryErrorTextKey = p1.props.summaryErrorTextKey
@@ -567,7 +566,6 @@ function collapsingTextInputValidator.render(p1)
 	local useFoundationTitle = nil
 	local foundationTitleSize = nil
 	local foundationTitleIsRequired = nil
-	local var2 = nil
 	
 	if fFlagAuthValidatorStyleOverrides then
 		paddingTopOverride = p1.props.paddingTopOverride
@@ -576,27 +574,135 @@ function collapsingTextInputValidator.render(p1)
 		useFoundationTitle = p1.props.useFoundationTitle
 		foundationTitleSize = p1.props.foundationTitleSize
 		foundationTitleIsRequired = p1.props.foundationTitleIsRequired
-		var2 = p1.props.foundationTitleIsBold == true
 	end
 	return withStyle(function(p2)
-		-- upvalues: p1 (ref), getFFlagLuaAppEnable10ftSignUpView (copy), tokens (ref), withLocalization (copy), titleTextKey (ref), summaryErrorTextKey (ref), roactModule (copy), fitChildren (copy), layoutOrder (ref), paddingTopOverride (write), useTrailingPadding (write), useFoundationTitle (write), inputLabel (copy), var2 (write), formatBoldRichText (copy), foundationTitleIsRequired (write), foundationTitleSize (write), fitTextLabel (copy), var1 (ref), authStatefulRoundCornerBorder (copy), default (write), loading (copy), iconSize (copy), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContent (copy), getFFlagEnableAuthStatefulTextInputUpdates (copy), issueTracker (copy), validator (ref), validatorAdditionalProps (ref), inputTextToValidate (write), fFlagSignUpTrackFailedRequest (copy), colorContentOverride (write)
-		local var3 = p2.Font.BaseSize * p2.Font.CaptionHeader.RelativeSize
+		-- upvalues: p1 (ref), getFFlagLuaAppEnable10ftSignUpView (copy), tokens (ref), withLocalization (copy), titleTextKey (ref), summaryErrorTextKey (ref), roactModule (copy), fitChildren (copy), layoutOrder (ref), paddingTopOverride (write), useTrailingPadding (write), useFoundationTitle (write), inputLabel (copy), foundationTitleIsRequired (write), foundationTitleSize (write), fitTextLabel (copy), var1 (ref), authStatefulRoundCornerBorder (copy), default (write), loading (copy), iconSize (copy), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContent (copy), getFFlagEnableAuthStatefulTextInputUpdates (copy), issueTracker (copy), validator (ref), validatorAdditionalProps (ref), inputTextToValidate (write), fFlagSignUpTrackFailedRequest (copy), colorContentOverride (write)
+		local var2 = p2.Font.BaseSize * p2.Font.CaptionHeader.RelativeSize
 		local contentGap = p1.getContentGap()
 		
 		if getFFlagLuaAppEnable10ftSignUpView() and tokens then
-			var3 = tokens.textCaptionHeaderSize
+			var2 = tokens.textCaptionHeaderSize
 		end
 		return withLocalization({
 			titleText = titleTextKey,
 			summaryErrorText = summaryErrorTextKey
-		})(function(_)
-			-- upvalues: roactModule (copy), fitChildren (copy), layoutOrder (copy), p1 (copy), contentGap (ref), paddingTopOverride (copy), useTrailingPadding (copy), useFoundationTitle (copy), inputLabel (copy), var2 (copy), formatBoldRichText (copy), foundationTitleIsRequired (copy), foundationTitleSize (copy), fitTextLabel (copy), p2 (ref), var3 (write), var1 (copy), authStatefulRoundCornerBorder (copy), getFFlagLuaAppEnable10ftSignUpView (copy), tokens (copy), default (copy), loading (copy), iconSize (copy), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContent (copy), titleTextKey (copy), getFFlagEnableAuthStatefulTextInputUpdates (copy), issueTracker (copy), validator (copy), validatorAdditionalProps (copy), inputTextToValidate (copy), fFlagSignUpTrackFailedRequest (copy), colorContentOverride (copy)
--- FATAL: Failed to generate AST for `unnamed` function:
-runtime : [KeyError] :11990: 279
-Traceback:
-	runtime : [lunaux]:11990 function decompile_function
-	runtime : [lunaux]:1933 function normalize_cfg
-	runtime : [lunaux]:1320 function match_weird_patterns
+		})(function(p3)
+			-- upvalues: roactModule (copy), fitChildren (copy), layoutOrder (copy), p1 (copy), contentGap (ref), paddingTopOverride (copy), useTrailingPadding (copy), useFoundationTitle (copy), inputLabel (copy), foundationTitleIsRequired (copy), foundationTitleSize (copy), fitTextLabel (copy), p2 (ref), var2 (write), var1 (copy), authStatefulRoundCornerBorder (copy), getFFlagLuaAppEnable10ftSignUpView (copy), tokens (copy), default (copy), loading (copy), iconSize (copy), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContent (copy), titleTextKey (copy), getFFlagEnableAuthStatefulTextInputUpdates (copy), issueTracker (copy), validator (copy), validatorAdditionalProps (copy), inputTextToValidate (copy), fFlagSignUpTrackFailedRequest (copy), colorContentOverride (copy)
+			local createElement_1
+			local createElement = roactModule.createElement
+			local fitFrame = fitChildren.FitFrame
+			local t = {
+				LayoutOrder = layoutOrder,
+				Size = UDim2.new(1, 0, 0, 0),
+				fitAxis = fitChildren.FitAxis.Height,
+				BackgroundTransparency = 1,
+				[roactModule.Ref] = p1.getFrameRef(),
+				[roactModule.Change.AbsolutePosition] = p1.onPositionChanged
+			}
+			local t_1 = {
+				UIListLayout = roactModule.createElement("UIListLayout", {
+					FillDirection = Enum.FillDirection.Vertical,
+					SortOrder = Enum.SortOrder.LayoutOrder,
+					Padding = UDim.new(0, contentGap)
+				}),
+				Padding = roactModule.createElement("UIPadding", {
+					PaddingTop = UDim.new(0, paddingTopOverride or 5),
+					PaddingBottom = if useTrailingPadding then p1.issueTrailingPadding else UDim.new(0, if p1.props.paddingBottomOverride then p1.props.paddingBottomOverride else 5)
+				}),
+				Title = if useFoundationTitle then roactModule.createElement(inputLabel, {
+					LayoutOrder = 0,
+					Text = p3.titleText or "",
+					isRequired = foundationTitleIsRequired,
+					size = foundationTitleSize
+				}) else roactModule.createElement(fitTextLabel, {
+					LayoutOrder = 0,
+					BackgroundTransparency = 1,
+					TextWrapped = true,
+					Size = UDim2.new(1, 0, 0, 0),
+					fitAxis = fitChildren.FitAxis.Height,
+					Text = p3.titleText or "",
+					Font = p2.Font.CaptionHeader.Font,
+					TextSize = var2,
+					TextColor3 = p2.Theme.TextEmphasis.Color,
+					TextTransparency = p2.Theme.TextEmphasis.Transparency,
+					TextXAlignment = Enum.TextXAlignment.Left
+				})
+			}
+			
+			if var1 then
+				createElement_1 = roactModule.createElement(p1.textInputBoxFoundation)
+			else
+				createElement_1 = roactModule.createElement
+				createElement_1 = createElement_1(authStatefulRoundCornerBorder, {
+					layoutOrder = 1,
+					size = UDim2.new(1, 0, 0, if getFFlagLuaAppEnable10ftSignUpView() and tokens then tokens.textboxHeight else 36),
+					borderState = default
+				}, {
+					textbox = roactModule.createElement(p1.textInputBoxWithBorder),
+					loadingSpinner = if p1.props.shouldShowLoadingIcon then roactModule.createElement(loading, {
+						size = iconSize.Small,
+						Position = UDim2.new(1, -22, 0.5, 0),
+						AnchorPoint = Vector2.new(0.5, 0.5)
+					}) else nil
+				})
+			end
+			t_1.TextInputBox = createElement_1
+			t_1.RegisterTitleAuditContent = if getFFlagEnableAuditForSinglePageSignUp() and p1.props.enableAuditContentCapture and registerAuditContent then roactModule.createElement(registerAuditContent, {
+				translationKey = titleTextKey,
+				translatedSourceString = p3.titleText
+			}) else nil
+			t_1.AnimatedWrapper = roactModule.createElement("Frame", {
+				LayoutOrder = 2,
+				BackgroundTransparency = 1,
+				ClipsDescendants = true,
+				Size = p1.issueTrackerHeight
+			}, {
+				Padding = roactModule.createElement("UIPadding", {
+					PaddingRight = UDim.new(0, 12),
+					PaddingLeft = if getFFlagEnableAuthStatefulTextInputUpdates() then UDim.new(0, 0) else UDim.new(0, 12)
+				}),
+				IssueSummaryWrapper = roactModule.createElement(fitChildren.FitFrame, {
+					LayoutOrder = 2,
+					Size = UDim2.new(1, 0, 0, 0),
+					fitAxis = fitChildren.FitAxis.Height,
+					BackgroundTransparency = 1,
+					[roactModule.Change.AbsoluteSize] = p1.onIssueSummarySizeChange
+				}, {
+					IssueSummaryText = p1.isInErrorState() and roactModule.createElement(fitTextLabel, {
+						BackgroundTransparency = 1,
+						TextWrapped = true,
+						Size = UDim2.new(1, 0, 0, 0),
+						fitAxis = fitChildren.FitAxis.Height,
+						Text = p3.summaryErrorText or "",
+						Font = p2.Font.CaptionBody.Font,
+						TextSize = p2.Font.BaseSize * p2.Font.CaptionBody.RelativeSize,
+						TextColor3 = p2.Theme.Alert.Color,
+						TextTransparency = p1.issueSummaryTextTransparency,
+						TextXAlignment = Enum.TextXAlignment.Left
+					})
+				}),
+				IssueTrackerWrapper = roactModule.createElement(fitChildren.FitFrame, {
+					LayoutOrder = 2,
+					Size = UDim2.new(1, 0, 0, 0),
+					fitAxis = fitChildren.FitAxis.Height,
+					BackgroundTransparency = 1,
+					[roactModule.Change.AbsoluteSize] = p1.onIssueFullListSizeChange
+				}, {
+					IssueTracker = roactModule.createElement(issueTracker, {
+						validator = validator,
+						validatorAdditionalProps = validatorAdditionalProps,
+						textToValidate = inputTextToValidate,
+						onTextValidated = p1.onTextValidated,
+						contentTransparency = p1.issueFullListTextTransparency,
+						checkmarkTransparency = p1.issueCheckmarkTransparency,
+						updateIssueCondition = p1.props.updateIssueCondition,
+						debounceTime = if fFlagSignUpTrackFailedRequest then p1.props.debounceTime else nil,
+						colorContentOverride = colorContentOverride
+					})
+				})
+			})
+			
+			return createElement(fitFrame, t, t_1)
 		end)
 	end)
 end

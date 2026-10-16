@@ -17,7 +17,6 @@ local function createUserMessage(p1)
 		status = p1.status,
 		wasRewritten = p1.wasRewritten,
 		originalText = p1.originalText,
-		translation = p1.translation,
 		textChatMessageInstance = p1.textChatMessageInstance,
 		presetId = p1.presetId
 	}
@@ -55,17 +54,15 @@ return {
 	end,
 	createUserMessage = createUserMessage,
 	createUserMessageFromTextChatMessage = function(p1, p2)
-		-- upvalues: getTextAndTranslationModule (ref), createUserMessage (ref), getFFlagExpChatProtectedChatInternalAPIs (ref)
+		-- upvalues: createUserMessage (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), getTextAndTranslationModule (ref)
 		local textSource = p1.TextSource
-		local var1, var2 = getTextAndTranslationModule(p1)
 		
 		return createUserMessage({
 			status = nil,
 			messageId = p1.MessageId,
 			senderUserId = tostring(textSource.UserId),
 			prefixText = if getFFlagExpChatProtectedChatInternalAPIs() then p1.PrefixTextInternal else p1.PrefixText,
-			content = var1,
-			translation = var2,
+			content = getTextAndTranslationModule(p1),
 			wasRewritten = if p1.WasRewritten then true else nil,
 			originalText = if p1.WasRewritten then p1.OriginalText else nil,
 			timestamp = p1.Timestamp,

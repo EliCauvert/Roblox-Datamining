@@ -6,12 +6,7 @@
 		ForwardD1Retention = "ForwardD1Retention",
 		PayingUsersCVR = "PayingUsersCVR",
 		AverageRevenuePerPayingUser = "AverageRevenuePerPayingUser",
-		UniqueUsersWithPlaySessions = "UniqueUsersWithPlaySessions",
-		TotalSessionsEndedInBucket = "TotalSessionsEndedInBucket",
-		FunnelUserChurnRate = "FunnelUserChurnRate",
-		AveragePlayTimeMinutesPerDAU = "AveragePlayTimeMinutesPerDAU",
-		ForwardD7Retention = "ForwardD7Retention",
-		DailyRevenue = "DailyRevenue"
+		UniqueUsersWithPlaySessions = "UniqueUsersWithPlaySessions"
 	},
 	MetricGranularity = {
 		OneMinute = "OneMinute",

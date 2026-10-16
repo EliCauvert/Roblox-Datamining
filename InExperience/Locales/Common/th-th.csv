@@ -89,30 +89,27 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,อีเมล�
 Authentication.Login.WeChat.AntiAddictionText,คว่ำบาตรประสบการณ์แย่ๆ ปฏิเสธประสบการณ์ที่ละเมิดลิขสิทธิ์ รู้จักการป้องกันตัวและระวังไม่ให้ถูกหลอกลวง การเยี่ยมชมประสบการณ์ต่างๆ นั้นดีต่อสมองของคุณ แต่หากเยี่ยมชมหลายประสบการณ์มากเกินไปอาจก่อให้เกิดอันตรายต่อสุขภาพของคุณได้ บริหารเวลาของคุณให้ดีและสนุกกับการใช้ชีวิตแบบเฮลธ์ตี้
 Authentication.SignUp.Action.ApplyOnNextRespawn,ใช้เมื่อเกิดใหม่ครั้งต่อไป
 Authentication.SignUp.Action.Cancel,
-Authentication.SignUp.Action.ContinueSetup,ตั้งค่าต่อ
-Authentication.SignUp.Action.Create,สร้าง
-Authentication.SignUp.Action.CreateAccountSentenceCase,สร้างบัญชี
 Authentication.SignUp.Action.ExitModalLeave,ออก
 Authentication.SignUp.Action.RespawnNow,เกิดใหม่ตอนนี้เลย
+Authentication.SignUp.Action.StartPlay,เริ่มเล่น
 Authentication.SignUp.Button.OKCaptialized,ตกลง
 Authentication.SignUp.Button.RetryLogIn,ลองเข้าสู่ระบบอีกครั้ง
 Authentication.SignUp.Description.AccountAlreadyLinked,บัญชีสำหรับ {platformAccountName} ของคุณเชื่อมโยงกับบัญชี Roblox อยู่แล้ว โปรดลองลงชื่อเข้าใช้อีกครั้ง
 Authentication.SignUp.Description.BirthdayHint,กรอกวันที่
-Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,การสร้างบัญชีถือว่าคุณยอมรับ{startTermsTag}ข้อกำหนด{endTermsTag}ของเรา รวมถึงอนุญาโตตุลาการ และรับทราบ{startPrivacyTag}นโยบายความเป็นส่วนตัว{endPrivacyTag}ของเรา หากคุณมีอายุต่ำกว่า 18 ปี พ่อแม่หรือผู้ปกครองของคุณต้องอนุญาตให้คุณสร้างบัญชีและยอมรับข้อกำหนดของเรา
 Authentication.SignUp.Description.Try,
 Authentication.SignUp.Description.UsernameChanged,เรียบร้อยแล้ว! บัญชีของคุณพร้อมใช้งานและเชื่อมโยงกับ {platform} แล้ว เกิดใหม่ตอนนี้เลย แล้วมาดูชื่อผู้ใช้ที่อัปเดตในเกมกัน หรือจะใช้ในครั้งต่อไปก็ได้
 Authentication.SignUp.Description.UsernameUnchanged,คุณเข้าร่วมแล้ว! บัญชีของคุณพร้อมใช้งานและเชื่อมโยงกับ {platform} แล้ว มาแชทกับเพื่อนและเล่นเกม Roblox นับล้านกัน
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,บัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชีสำหรับ {platform}  คุณสามารถยกเลิกการเชื่อมโยงได้ตลอดเวลาที่หน้าจอการตั้งค่า โดยอาจมีช่วงคูลดาวน์ก่อนที่จะสามารถเชื่อมโยงกับบัญชี Roblox ของคุณจะเชื่อมโยงกับบัญชีสำหรับ {platform}  ได้ การคลิก{ctaButton} จะถือว่าคุณยอมรับข้อกําหนดการใช้งานรวม ซึ่งรวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและรับทราบถึงนโยบายความเป็นส่วนตัว
-Authentication.SignUp.Header.CancelAccountCreation,ต้องการยกเลิกการสร้างบัญชีใช่ไหม?
+Authentication.SignUp.Header.CloseWithoutFinishing,ปิดโดยยังดำเนินการไม่เสร็จใช่ไหม?
 Authentication.SignUp.Header.OneLastThing,ขั้นสุดท้าย
 Authentication.SignUp.Header.SetUpYourRobloxAccount,ตั้งค่าบัญชี Roblox ของคุณ
 Authentication.SignUp.Heading.CountryCodeSelector,เลือกประเทศ
 Authentication.SignUp.Heading.RetryLogIn,ลองลงชื่อเข้าใช้อีกครั้ง
 Authentication.SignUp.Label.Birthday,วันเกิด
-Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} ({yearsOld} ปี)
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,วัน
 Authentication.SignUp.Label.EnterYourEmail,กรอกอีเมลของคุณ
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,ต้องมีอายุมากกว่านี้เพื่อเล่นเกมนี้
 Authentication.SignUp.Label.ErrorsWithPassword,มีข้อผิดพลาดเกิดขึ้นกับรหัสผ่าน
 Authentication.SignUp.Label.ErrorsWithUsername,มีข้อผิดพลาดเกิดขึ้นกับชื่อผู้ใช้
 Authentication.SignUp.Label.ExitModalSubtitle,คุณสร้างบัญชีเกือบเสร็จแล้ว หากออกตอนนี้ ความคืบหน้าที่ทำไว้จะหายไป
@@ -264,6 +261,7 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,พื้นที�
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,{meshName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissivePercentage}% และต้องไม่เกิน {maxEmissivePercentage}%) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,พื้นที่การเปล่งแสงเกินขีดจำกัด
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,{assetTypeName} เปล่งแสงมากเกินไป พื้นที่เปล่งแสง × ความเข้มเกินขีดจำกัด (ปัจจุบันอยู่ที่ {emissiveArea} ต้องไม่เกิน {maxEmissiveArea}) โปรดลดขนาดพื้นที่เปล่งแสงหรือลดค่า EmissiveStrength ลง
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,ทรัพยากรนี้ใช้แผนที่แบบเปล่งแสง ซึ่งมีให้เฉพาะครีเอเตอร์ในโปรแกรมสำหรับครีเอเตอร์ที่เชื่อได้เท่านั้น โปรดลบเนื้อหาแผนที่แบบเปล่งแสงออกทั้งหมด หรือเข้าร่วมโปรแกรมก่อนอัปโหลด
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,แอนิเมชันที่เผยแพร่ไม่มีค่าระยะการขยับชิ้นส่วนสูงสุดที่ถูกต้อง โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,แอนิเมชันที่เผยแพร่ไม่มีมาร์กเกอร์ท่าทาง UGC ที่ถูกต้อง โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,ไม่สามารถคำนวณระยะการขยับชิ้นส่วนสูงสุดจากข้อมูลแอนิเมชันที่เผยแพร่ได้ โปรดเผยแพร่แอนิเมชันอีกครั้ง
@@ -271,7 +269,6 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,แอ
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,ต้องวางศีรษะให้อยู่เหนือ UpperTorso ศูนย์กลางของศีรษะอยู่ต่ำกว่าส่วนบนของลำตัว ซึ่งบ่งชี้ว่าเมชของศีรษะยุบตัวหรือวางผิดตำแหน่ง
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,คุณสมบัติ InternalOverrideFACSData บน FaceControls ต้องว่างเปล่าเมื่ออัปโหลด
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำให้ใหญ่ขึ้นเป็น {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
-Common.UGCValidation.ErrorLabel.FacsJointCountBounded,ศีรษะแบบเคลื่อนไหวมีข้อต่อ FACS ได้สูงสุด {maxFacsJointCount} จุด แต่ศีรษะนี้มีข้อต่อ {actualJointCount} จุด โปรดลดจำนวนข้อต่อ FACS แล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำเล็กลงเหลือ {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,รูปแบบการอัปโหลดไม่ตรงกับโครงสร้างโฟลเดอร์ที่คาดไว้ โปรดลองอีกครั้งหรือรายงานจุดบกพร่อง
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,กระดูก {bonePath} อยู่ห่างจาก Meshpart {partName} มากเกินไป โปรดปรับให้อยู่ใกล้ขอบเขตขนาดของ Meshpart มากขึ้น
@@ -418,7 +415,6 @@ CommonUI.Features.Label.ControllerBar.ToPlaySuffix,เพื่อเล่น
 CommonUI.Features.Label.CreateGames,สร้างสรรค์
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,ประสบการณ์
-CommonUI.Features.Label.Games,เกม
 CommonUI.Features.Label.GiftCards,ซื้อบัตรของขวัญ
 CommonUI.Features.Label.Groups,ชุมชน
 CommonUI.Features.Label.HelpAndSafety,ความช่วยเหลือและความปลอดภัย
@@ -449,7 +445,7 @@ CommonUI.Features.Label.Unchecked,ไม่ได้ตรวจสอบ
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,เชื่อมต่อกับ
-CommonUI.Features.NavBar.Build,
+CommonUI.Features.NavBar.Build,สร้าง
 CommonUI.Features.StudioCTA.Tooltip.Body,ดาวน์โหลด Studio ฟรี!
 CommonUI.Features.StudioCTA.Tooltip.Title,เริ่มสร้างประสบการณ์บน Roblox
 CommonUI.Messages.Action.Apply,
@@ -659,18 +655,15 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,โปรดให้ข้
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,ข้อความเดิม ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,คำแปลนี้มีปัญหาตรงไหน?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,ปัญหาเกี่ยวกับความถูกต้องแม่นยำ
-CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,คุณภาพของภาพ
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,ไม่เหมาะสมหรือทำให้เสื่อมเสีย
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,ปัญหาเกี่ยวกับการสะกดหรือไวยากรณ์
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,ยังไม่ได้แปล
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,ข้อความที่เลือก
 CoreScripts.Feedback.Help.Instructions,เลือกข้อความเพื่อให้ข้อเสนอแนะเกี่ยวกับคำแปลที่ไม่ถูกต้องหรือขาดหายไป
-CoreScripts.Feedback.Help.InstructionsWithImage,เลือกข้อความหรือภาพเพื่อให้ข้อเสนอแนะเกี่ยวกับคำแปลที่ไม่ถูกต้องหรือไม่ครบ
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
-CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,แจ้งให้เราทราบเกี่ยวกับข้อผิดพลาด
 CoreScripts.Feedback.Onboarding.Start,เริ่ม
 CoreScripts.Feedback.SubmissionToastBody,Roblox จะใช้ข้อมูลนี้เพื่อช่วยปรับปรุงคุณภาพของคำแปลสำหรับประสบการณ์นี้
@@ -707,7 +700,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,หมวดหม
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,อื่นๆ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,เลือกหมวดหมู่
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,ปัญหาในการซื้อ
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,ข้อเสนอแนะ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ความยาวสูงสุด {MAX} อักขระ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,รายละเอียด *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,ยกเลิกการเลือก
@@ -715,7 +707,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,ระบ�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,อธิบายว่ามีอะไรไม่ครบและคุณเห็นครั้งสุดท้ายเมื่อใด หากบัญชีของคุณถูกแฮ็ก โปรดระบุหมายเลขตั๋ว Roblox CS ของคุณและรายละเอียดที่เกี่ยวข้อง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,อธิบายคำขอหรือปัญหาของคุณที่นี่ โปรดระบุรายละเอียดให้มากที่สุดเพื่อช่วยให้เราเข้าใจสถานการณ์
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,ระบุว่าคุณพยายามซื้ออะไร เวลาเกิดเหตุการณ์ และมูลค่ารวม (เช่น 500 Robux / $4.99) รวมถึงข้อความแสดงข้อผิดพลาดที่คุณเห็น
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,แชร์ว่าคุณอยากให้เพิ่มหรือปรับปรุงอะไร และสิ่งนั้นจะช่วยให้เกมดีขึ้นได้อย่างไร
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,พยายามรายงานการกระทำผิดอยู่ใช่ไหม?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>ส่งรายงานแทน</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,เลือก
@@ -1241,19 +1232,6 @@ Corescripts.AvatarContextMenu.FriendRequestPending,คำขอเป็นเ�
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,ผู้ใช้ที่ถูกบล็อค
 Corescripts.AvatarContextMenu.Wave,ทักทาย
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,แผนภูมิ
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,เทเลพอร์ต
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,แนะนำโดย Roblox
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,อื่นๆ ในหน้าหลัก
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,การแนะนำในหน้าหลัก
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,พอร์ทัลโฆษณา
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,โฆษณาผ่านผลการค้นหา
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,โฆษณาที่ได้รับการสนับสนุน
 Feature.AbuseReportDialog.Label.GeneralError,มีบางอย่างผิดปกติ กรุณาลองใหม่อีกครั้ง
 Feature.Accessibility.Action.ScrollDown,เลื่อนลง
 Feature.Accessibility.Action.ScrollUp,เลื่อนขึ้น
@@ -1930,7 +1908,6 @@ Feature.BlockingModal.Heading.BlockUser,บล็อค {DisplayName} ไหม?
 Feature.BlockingModal.Message.BlockConfirmation,การบล็อคผู้ใช้รายนี้จะเป็นการลบออกจากคนรู้จักหรือผู้ติดตาม โดยผู้ใช้ดังกล่าวจะไม่สามารถส่งข้อความ คำขอ หรือคำเชิญถึงคุณได้<br /><br />ผู้ใช้จะไม่ได้รับแจ้งว่าคุณบล็อค
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,การบล็อคผู้ใช้รายนี้จะเป็นการลบออกจากเพื่อนหรือผู้ติดตาม โดยผู้ใช้ดังกล่าวจะไม่สามารถส่งข้อความ คำขอ หรือคำเชิญถึงคุณได้<br /><br />และจะไม่ได้รับแจ้งว่าคุณบล็อค
 Feature.Build.Action.Add,
-Feature.Build.Action.AddCustomOption,เพิ่มตัวเลือกที่กำหนดเอง...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,เชิญผู้ทดลองเล่นระยะแรก
 Feature.Build.Action.AddPlaytesters,
@@ -1946,7 +1923,6 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,คัดลอกข้อความ
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
-Feature.Build.Action.CreateNewGame,สร้างเกมใหม่
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,ไม่ต้องถามอีก
@@ -2000,17 +1976,6 @@ Feature.Build.Analytics.Description.PayerConversion,อัตราคอนเ�
 Feature.Build.Analytics.Description.PlaythroughRate,อัตราการเล่นจนจบคือ เปอร์เซ็นต์การเยี่ยมชมเซสชันเต็มรูปแบบที่มีการเล่นจนจบ อัตราที่สูงบ่งชี้ว่าผู้เล่นพบว่าประสบการณ์ของคุณเข้าถึงได้ง่ายและคุ้มค่าที่จะเล่นจนจบ
 Feature.Build.Analytics.Description.TotalPlaytime,เวลาเล่นรวมคือผลรวมเวลาที่ผู้เล่นทุกคนใช้ไปในประสบการณ์ของคุณตลอดช่วงเวลาดังกล่าว เวลาเล่นที่เพิ่มขึ้นมักบ่งบอกถึงเซสชันที่มีส่วนร่วมมากขึ้น
 Feature.Build.Analytics.DurationHours,{number} ชม.
-Feature.Build.Analytics.Goal.Action.CreateAd,สร้างโฆษณา
-Feature.Build.Analytics.Goal.Action.SellItems,ขายไอเท็ม
-Feature.Build.Analytics.Goal.Action.ShareWithFriends,แชร์กับเพื่อน
-Feature.Build.Analytics.Goal.EarnRobux,สร้างรายได้เป็น Robux
-Feature.Build.Analytics.Goal.FirstImpression,สร้างความประทับใจแรกที่ดี
-Feature.Build.Analytics.Goal.GetMorePlayers,ดึงดูดผู้เล่นให้มากขึ้น
-Feature.Build.Analytics.Goal.KeepPlayersComingBack,ทำให้ผู้เล่นกลับมาเล่นอีก
-Feature.Build.Analytics.Goal.Locked.EarnRobux,รับ Robux ในเกมของคุณเพื่อดูสถิติเหล่านี้
-Feature.Build.Analytics.Goal.Locked.FirstImpression,เมื่อมีผู้เล่นคนแรกเข้ามาในเกม คุณจะดูสถิติเหล่านี้ได้
-Feature.Build.Analytics.Goal.Locked.GetMorePlayers,ดึงดูดผู้เล่นให้มากขึ้นเพื่อให้ดูสถิติเหล่านี้ได้
-Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,เมื่อมีผู้เล่นกลับมาเล่นเกมของคุณคนแรก คุณจะดูสถิติเหล่านี้ได้
 Feature.Build.Analytics.KeyStats,สถิติสำคัญ
 Feature.Build.Analytics.LastMonth,เดือนที่ผ่านมา
 Feature.Build.Analytics.LastWeek,
@@ -2042,14 +2007,9 @@ Feature.Build.Analytics.Summary.TotalPlaytime,จำนวนชั่วโม�
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,ผู้เล่นทั้งหมด
 Feature.Build.Analytics.Title.D1Retention,ผู้ที่กลับมาใช้งานในวันที่ 1
-Feature.Build.Analytics.Title.D7Retention,จำนวนผู้ที่กลับมาใช้งานในวันที่ 7
 Feature.Build.Analytics.Title.DailyActiveUsers,
-Feature.Build.Analytics.Title.NewUserSessionTime,ระยะเวลาเซสชันของผู้ใช้ใหม่
 Feature.Build.Analytics.Title.PayerConversion,
 Feature.Build.Analytics.Title.PlaythroughRate,
-Feature.Build.Analytics.Title.RobuxSpent,Robux ที่ใช้จ่าย
-Feature.Build.Analytics.Title.TopAcquisitionSource,แหล่งที่มายอดนิยม
-Feature.Build.Analytics.Title.TopDropOffStep,ลดลงมากที่สุด
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,การเยี่ยมชม
 Feature.Build.Content.NewGame,เกมใหม่
@@ -2093,6 +2053,7 @@ Feature.Build.Description.PlaytestLatest,คุณกำลังทดลอง
 Feature.Build.Description.PlaytestLocked,คุณสามารถเริ่มทดลองเล่นได้หลังจากที่สร้างเกมแรกของคุณ
 Feature.Build.Description.PlaytesterAccess,เชิญเพื่อนเป็นผู้ทดลองเล่นระยะแรก หรือเปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกมเพื่อให้ผู้ใช้มาเล่นมากขึ้น
 Feature.Build.Description.PricingRules,ตั้งกฎการตั้งราคา
+Feature.Build.Description.PrivateShare,เปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกมเพื่อแชร์
 Feature.Build.Description.PromoteGameFree,นำเสนอเกมของคุณให้ผู้เล่นเห็นมากขึ้นได้ในคลิกเดียว
 Feature.Build.Description.PromoteGamePaid,สร้างโฆษณาเพื่อเปิดโอกาสให้ผู้เล่นนับล้านคนเห็นเกมของคุณ
 Feature.Build.Description.PromoteGameWithAdCampaign,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณา {durationDays} วันและทำให้เกมของคุณเป็นที่รู้จัก
@@ -2122,7 +2083,6 @@ Feature.Build.Error.MonetizationOptionsLoad,ไม่สามารถโหล
 Feature.Build.Error.MonetizationPermissionDenied,คุณไม่มีสิทธิ์เปลี่ยนตัวเลือกการสร้างรายได้
 Feature.Build.Header.AccessSharing,การเข้าถึงและการแชร์
 Feature.Build.Header.AllVersions,ทุกเวอร์ชัน
-Feature.Build.Header.Answers,คำตอบ
 Feature.Build.Header.ContentMaturity,ระดับความเหมาะสมของเนื้อหา
 Feature.Build.Header.CustomAnswer,คำตอบที่กำหนดเอง
 Feature.Build.Header.GameConfiguration,การกำหนดค่าเกม
@@ -2137,7 +2097,6 @@ Feature.Build.Label.AdditionalUsage,โควต้าการใช้งา�
 Feature.Build.Label.AdditionalUsed,ใช้ไปแล้ว {USED} จาก {LIMIT}
 Feature.Build.Label.AdsManager,เครื่องมือจัดการโฆษณา
 Feature.Build.Label.All,
-Feature.Build.Label.AllGames,เกมทั้งหมด
 Feature.Build.Label.AmountAvailable,พร้อมใช้งาน {AMOUNT} ครั้ง
 Feature.Build.Label.Autosaved,บันทึกอัตโนมัติ
 Feature.Build.Label.Available,พร้อมใช้งาน
@@ -2162,15 +2121,12 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,เสร็จ
 Feature.Build.Label.EasyPerformanceReport,รายงานประสิทธิภาพที่ใช้งานง่าย
 Feature.Build.Label.Error,
-Feature.Build.Label.Filters,
 Feature.Build.Label.Free,ฟรี
 Feature.Build.Label.FreeBuildUsage,โควต้าการใช้งาน Build ฟรี
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,จำนวนการเล่นเกม
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
-Feature.Build.Label.GroupGames,เกมของกลุ่ม
-Feature.Build.Label.Groups,กลุ่ม
 Feature.Build.Label.Hi,สวัสดี
 Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาดย่อ
 Feature.Build.Label.Images2D,ภาพ 2D
@@ -2184,7 +2140,6 @@ Feature.Build.Label.ManagedPricing,การตั้งราคาแบบม
 Feature.Build.Label.ManagedPricingMixed,ราคาคละกันในผลิตภัณฑ์ปัจจุบันทั้งหมด
 Feature.Build.Label.MaximizeForGamePlays,เพิ่มจำนวนการเล่นเกมให้สูงสุด
 Feature.Build.Label.Models3D,โมเดล 3D
-Feature.Build.Label.MyGames,เกมของฉัน
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,ไม่จำกัด
 Feature.Build.Label.NotStarted,ยังไม่ได้เริ่ม
@@ -2224,15 +2179,6 @@ Feature.Build.Label.Thinking,กำลังคิด
 Feature.Build.Label.Title,
 Feature.Build.Label.TitleDescription,ชื่อและคำอธิบาย
 Feature.Build.Label.Tool,เครื่องมือ
-Feature.Build.Label.ToolAdEligibilityDone,ตรวจสอบคุณสมบัติของโฆษณาแล้ว
-Feature.Build.Label.ToolAdEligibilityFailed,ไม่สามารถตรวจสอบคุณสมบัติของโฆษณาได้
-Feature.Build.Label.ToolAdEligibilityRunning,กำลังตรวจสอบคุณสมบัติของโฆษณา
-Feature.Build.Label.ToolAnalyticsDone,วิเคราะห์สถิติแล้ว
-Feature.Build.Label.ToolAnalyticsFailed,ไม่สามารถวิเคราะห์สถิติได้
-Feature.Build.Label.ToolAnalyticsRunning,กำลังวิเคราะห์สถิติ
-Feature.Build.Label.ToolApiDocsDone,ค้นหาเอกสารประกอบ API แล้ว
-Feature.Build.Label.ToolApiDocsFailed,ไม่สามารถค้นหาเอกสารประกอบ API ได้
-Feature.Build.Label.ToolApiDocsRunning,กำลังค้นหาเอกสารประกอบ API
 Feature.Build.Label.ToolAssetDone,แทรกทรัพยากรแล้ว
 Feature.Build.Label.ToolAssetFailed,ไม่สามารถแทรกทรัพยากรได้
 Feature.Build.Label.ToolAssetRunning,กำลังแทรกทรัพยากร
@@ -2242,9 +2188,6 @@ Feature.Build.Label.ToolAssetSearchRunning,กำลังค้นหาใน�
 Feature.Build.Label.ToolClientDMDone,ค้นหา DataModel ของไคลเอนต์แล้ว
 Feature.Build.Label.ToolClientDMFailed,ไม่สามารถค้นหา DataModel ของไคลเอนต์ได้
 Feature.Build.Label.ToolClientDMRunning,กำลังค้นหา DataModel ของไคลเอนต์
-Feature.Build.Label.ToolCompileDone,คอมไพล์โค้ดแล้ว
-Feature.Build.Label.ToolCompileFailed,ไม่สามารถคอมไพล์โค้ดได้
-Feature.Build.Label.ToolCompileRunning,กำลังคอมไพล์โค้ด
 Feature.Build.Label.ToolGameInfoDone,อัปเดตข้อมูลเกมแล้ว
 Feature.Build.Label.ToolGameInfoFailed,ไม่สามารถอัปเดตข้อมูลเกมได้
 Feature.Build.Label.ToolGameInfoRunning,กำลังอัปเดตข้อมูลเกม
@@ -2281,9 +2224,6 @@ Feature.Build.Label.ToolQuestionRunning,กำลังถามคำถาม
 Feature.Build.Label.ToolReqUpdateDone,อัปเดตข้อกำหนดแล้ว
 Feature.Build.Label.ToolReqUpdateFailed,ไม่สามารถอัปเดตข้อกำหนดได้
 Feature.Build.Label.ToolReqUpdateRunning,กำลังอัปเดตข้อกำหนด
-Feature.Build.Label.ToolRestoreVersionDone,กู้คืนเวอร์ชันแล้ว
-Feature.Build.Label.ToolRestoreVersionFailed,ไม่สามารถกู้คืนเวอร์ชันได้
-Feature.Build.Label.ToolRestoreVersionRunning,กำลังกู้คืนเวอร์ชัน
 Feature.Build.Label.ToolScriptDone,เรียกใช้สคริปต์แล้ว
 Feature.Build.Label.ToolScriptFailed,ไม่สามารถเรียกใช้สคริปต์ได้
 Feature.Build.Label.ToolScriptRunning,กำลังเรียกใช้สคริปต์
@@ -2299,9 +2239,6 @@ Feature.Build.Label.ToolTasksPlanRunning,กำลังวางแผนงา
 Feature.Build.Label.ToolThumbnailDone,ตั้งค่าภาพขนาดย่อของเกมแล้ว
 Feature.Build.Label.ToolThumbnailFailed,ไม่สามารถตั้งค่าภาพขนาดย่อของเกมได้
 Feature.Build.Label.ToolThumbnailRunning,กำลังตั้งค่าภาพขนาดย่อของเกม
-Feature.Build.Label.ToolVerifyDone,ตรวจสอบข้อผิดพลาดแล้ว
-Feature.Build.Label.ToolVerifyFailed,ไม่สามารถตรวจสอบข้อผิดพลาดได้
-Feature.Build.Label.ToolVerifyRunning,กำลังตรวจสอบข้อผิดพลาด
 Feature.Build.Label.UniverseNumber,ยูนิเวิร์ส {UNIVERSE_ID}
 Feature.Build.Label.Unknown,ไม่ทราบ
 Feature.Build.Label.UnlimitedUsed,ใช้ไปแล้ว {USED} • ไม่จำกัด
@@ -2332,12 +2269,12 @@ Feature.Build.Message.BuildInternalError,Build ประสบปัญหา �
 Feature.Build.Message.BuildResponseFailed,Build ไม่ตอบสนอง โปรดลองอีกครั้ง
 Feature.Build.Message.BuildStillWorking,กำลังดำเนินการ คุณสามารถออกจากแอป เล่น Roblox หรือเริ่มโปรเจกต์อื่นระหว่างรอได้
 Feature.Build.Message.BuildStopped,คุณหยุด Build แล้ว
-Feature.Build.Message.BuildTakingLonger,ขั้นตอนนี้ใช้เวลานานกว่าที่คาดไว้ คุณจะรอต่อหรือเริ่มทำอย่างอื่นก็ได้
 Feature.Build.Message.BuildTemporarilyDown,ไม่สามารถใช้ Build ได้ชั่วคราว โปรดลองอีกครั้งในอีกสักครู่
 Feature.Build.Message.CompletedTasks,{COUNT} งานที่เสร็จแล้ว
 Feature.Build.Message.ConversationGone,การสนทนานี้ใช้ไม่ได้อีกต่อไป โปรดเริ่มการสนทนาใหม่
 Feature.Build.Message.ConversationNotFound,ไม่พบการสนทนานี้ โปรดเริ่มการสนทนาใหม่
 Feature.Build.Message.CreateGameToUseBuild,สร้างเกมใหม่เพื่อเริ่มใช้ Build
+Feature.Build.Message.CreatedRevertedVer,สร้างเวอร์ชันที่แปลงกลับแล้ว
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,ขยายคุณสมบัติของกลุ่มเป้าหมายของคุณในศูนย์กลางครีเอเตอร์
 Feature.Build.Message.ExperiencesLoadFailed,ไม่สามารถโหลดประสบการณ์ได้
@@ -2364,13 +2301,17 @@ Feature.Build.Message.NoSearchResultsFound,
 Feature.Build.Message.NoVersionHistory,ยังไม่มีประวัติเวอร์ชัน
 Feature.Build.Message.OneTaskCompleted,เสร็จแล้ว 1 งาน
 Feature.Build.Message.OutOfBuildUsage,คุณใช้โควต้าการใช้งาน Build หมดแล้ว ดูตัวเลือกของคุณเพื่อใช้ Robux สร้างต่อ
+Feature.Build.Message.PlaytestInviteSendFailedBody,คุณไม่สามารถส่งลิงก์เชิญเข้าร่วมแชทให้ผู้ใช้ต่อไปนี้ได้:
+Feature.Build.Message.PlaytestInviteSendFailedHint,โปรดใช้ปุ่มแชร์เพื่อรับลิงก์
 Feature.Build.Message.PlaytesterRequestFailed,เราไม่สามารถดำเนินการตามคำขอของคุณได้ โปรดลองอีกครั้ง
 Feature.Build.Message.PlaytestersAdded,เชิญผู้ทดลองเล่นระยะแรกแล้ว {INVITED_COUNT} จาก {MAX_INVITES} คน
+Feature.Build.Message.PrivatePlaytestInvite,{username} ชวนคุณมาเป็นผู้ทดลองเล่นระยะแรกสำหรับ {experienceName}
 Feature.Build.Message.PublicPublishFailed,เผยแพร่เกมของคุณแล้ว แต่ไม่สามารถตั้งค่าเป็นสาธารณะได้ โปรดลองอีกครั้ง
 Feature.Build.Message.PublishExpandAudience,เผยแพร่เพื่อขยายกลุ่มเป้าหมายของคุณ
 Feature.Build.Message.PublishNotReverted,ย้อนกลับการเผยแพร่ของคุณไม่สำเร็จ โปรดลองอีกครั้ง
 Feature.Build.Message.PublishPromotionUpsell,ยินดีด้วยที่เผยแพร่เกมแล้ว! คุณมีโปรโมชันฟรี {promotionCount} ครั้งเพื่อเพิ่มผู้เล่นบน Roblox
 Feature.Build.Message.PublishPromotionUpsellSingular,ยินดีด้วยที่เผยแพร่เกมแล้ว! คุณมีโปรโมชันฟรี 1 ครั้งเพื่อเพิ่มผู้เล่นบน Roblox
+Feature.Build.Message.PublishReverted,แปลงการเผยแพร่กลับแล้ว
 Feature.Build.Message.QuestionnaireNeeded,เกมนี้ได้รับการแก้ไขนอก Build กรอกแบบสอบถามเกี่ยวกับเนื้อหาให้ครบถ้วนเพื่อเผยแพร่
 Feature.Build.Message.ReadyToPlay,เกมของคุณพร้อมให้เล่นบน Roblox แล้ว!
 Feature.Build.Message.ResetHours,รีเซ็ตใน {HOURS} ชั่วโมง
@@ -2428,12 +2369,14 @@ Feature.Build.Title.ExperienceAudience,กลุ่มเป้าหมาย�
 Feature.Build.Title.FreeUsageReached,ใช้โควต้าการใช้งาน Build ฟรีหมดแล้ว
 Feature.Build.Title.FriendsOnlyPlay,เฉพาะเพื่อนเท่านั้นที่เล่นได้
 Feature.Build.Title.GameCreationDone,สร้างเกมเรียบร้อยแล้ว
+Feature.Build.Title.GamePrivate,เกมนี้เป็นแบบส่วนตัว
 Feature.Build.Title.GenericError,มีบางอย่างผิดปกติ
 Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
 Feature.Build.Title.ManagedPricingAcknowledgement,เปิดการตั้งราคาแบบมีการจัดการใช่ไหม?
 Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรายได้ในเกมของคุณ
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
 Feature.Build.Title.PickCampaign,เลือกระยะเวลา
+Feature.Build.Title.PlaytestInviteSendFailed,ไม่สามารถส่งคำเชิญได้
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,ไม่สามารถเพิ่มผู้ใช้ต่อไปนี้ได้:
 Feature.Build.Title.PlaytestersOnlyPlay,เฉพาะผู้ทดลองเล่นเท่านั้นที่เล่นได้
@@ -2585,7 +2528,7 @@ Feature.Catalog.Heading.PremiumOnly,Roblox Plus เท่านั้น
 Feature.Catalog.Heading.QuantityLimitReached,ถึงขีดจำกัดที่ครีเอเตอร์กำหนดไว้แล้ว
 Feature.Catalog.Heading.QuickMenu,เมนูด่วน
 Feature.Catalog.Heading.Resellers,ผู้ขายต่อ
-Feature.Catalog.Heading.SellItem,
+Feature.Catalog.Heading.SellItem,ขายไอเท็ม
 Feature.Catalog.Heading.Sellers,ผู้ขาย
 Feature.Catalog.Heading.SetPrice,ตั้งราคา
 Feature.Catalog.Heading.ShowBodyParts,แสดงส่วนของร่างกาย
@@ -3595,11 +3538,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,เหลืออีก {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,เมื่อคุณซื้อ Robux จะถือว่าคุณยอมรับ{termsLinkStart}ข้อกำหนดการใช้งาน{termsLinkEnd} รวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและนโยบายเกี่ยวกับการเพิกถอน
-Feature.InExperienceShop.GamePass,บัตรผ่านเกม
 Feature.InExperienceShop.Label.BonusItem,ไอเท็มโบนัส
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,สิ้นสุดใน {timeRemaining}
-Feature.InExperienceShop.Label.FreeTrial,ทดลองใช้ฟรี
 Feature.InExperienceShop.Label.NoDescription,
 Feature.InExperienceShop.Label.OfferEndTime,{offer} จะสิ้นสุดใน {timeRemaining}
 Feature.InExperienceShop.Label.PreviewBanner,นี่คือตัวอย่างร้านค้าของคุณใน Roblox Studio ผู้เล่นจะไม่เห็นตัวอย่างนี้
@@ -3611,7 +3552,6 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} นาที
 Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} วินาที
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 วินาที
-Feature.InExperienceShop.Label.Trial,ทดลองใช้
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,คุณซื้อ {ROBUX_AMOUNT} Robux สำเร็จเรียบร้อยแล้ว
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"คุณแน่ใจหรือไม่ว่าคุณต้องการ ""ลบ"" ไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร? หากเปลี่ยนใจ จะต้องทำเพื่อให้ได้รับอีกครั้งในประสบการณ์"
 Feature.Item.Label.DeleteItemUndercase,ลบไอเท็ม
@@ -3666,7 +3606,7 @@ Feature.Moments.Description.HowToCaptureStep2,เปิดใช้งานก�
 Feature.Moments.Description.HowToCaptureStep3,จับภาพและวิดีโอการเล่นเกม
 Feature.Moments.Description.LeaveMomentsCreation,ข้อมูลที่เปลี่ยนแปลงทั้งหมดจะหายไป แต่คุณยังค้นหาภาพที่จับนี้ได้ในแกลเลอรี<b>การจับภาพ</b>
 Feature.Moments.Description.NoMusicResults,ไม่พบดนตรี
-Feature.Moments.Description.NonInfiniteScrollEndBody,เราหยุดฟีดของคุณชั่วคราว คุณเลือกได้ว่าจะดูต่อหรือไม่
+Feature.Moments.Description.NonInfiniteScrollEndBody,คุณมาถึงจุดพักในโมเมนต์แล้ว แตะด้านล่างเพื่อดูต่อ
 Feature.Moments.Description.NothingHereYet,ยังไม่มีอะไรในนี้...
 Feature.Moments.Description.PublishMoment,อธิบายเกี่ยวกับโมเมนต์ของคุณ
 Feature.Moments.Description.StayFriendly,มาสร้างบรรยากาศที่เป็นมิตรกัน
@@ -3725,14 +3665,12 @@ Feature.Moments.Label.MomentFailedToPostTitle,โพสต์โมเมนต�
 Feature.Moments.Label.MomentNoLongerAvailable,ไม่สามารถใช้โมเมนต์นี้ได้อีกต่อไป
 Feature.Moments.Label.MomentPublishedBody,เผยแพร่ช่วงเวลาของคุณสำเร็จแล้ว
 Feature.Moments.Label.MomentPublishedTitle,เผยแพร่ช่วงเวลาแล้ว
-Feature.Moments.Label.MomentRemovedBody,เนื่องจากฝ่าฝืนกฎความปลอดภัยของเรา จึงไม่สามารถใช้ได้อีกต่อไป
-Feature.Moments.Label.MomentRemovedTitle,เราลบโมเมนต์นี้ออกแล้ว
 Feature.Moments.Label.MomentUnavailable,โมเมนต์ไม่พร้อมใช้งาน
 Feature.Moments.Label.MomentUnavailableDefault,โมเมนต์นี้ไม่สามารถใช้ได้
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,ยังไม่มีความคิดเห็น
-Feature.Moments.Label.NonInfiniteScrollEndTitle,ยังมีโมเมนต์ให้ดูอีกเพียบ
+Feature.Moments.Label.NonInfiniteScrollEndTitle,ดูหมดแล้วในตอนนี้
 Feature.Moments.Label.Photos,รูปภาพ
 Feature.Moments.Label.PostDeleted,ลบโมเมนต์แล้ว
 Feature.Moments.Label.PostRemovedBody,โมเมนต์ที่คุณโพสต์ขัดต่อมาตรฐานชุมชนของเรา
@@ -3772,7 +3710,6 @@ Feature.Moments.Label.VoiceLimitReachedBody,โปรดรอสักครู
 Feature.Moments.Label.VoiceModerationError,สคริปต์ของคุณต้องเป็นไปตามกฎความปลอดภัย
 Feature.Moments.Label.VoicePlaceholder,พิมพ์สคริปต์เสียงบรรยายของคุณ สูงสุด {maxCount} อักขระ
 Feature.Moments.Label.VoiceTimeoutBody,การสร้างเสียงบรรยายหมดเวลา
-Feature.Moments.Label.VoiceTooManyNumbersError,สคริปต์มีตัวเลขมากเกินไป
 Feature.Moments.Label.WriteComment,เขียนความคิดเห็น
 Feature.Moments.Title.Comments,ความคิดเห็น
 Feature.Moments.Title.CommentsWithCappedCount,ความคิดเห็น ({count}+)
@@ -3879,17 +3816,10 @@ Feature.Parents.Title.EnterParentEmailV2,กรอกอีเมลของผ
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,จากการค้นหา
-Feature.PlayerSearchResults.Label.NewUsername,ชื่อผู้ใช้ใหม่
 Feature.PlayerSearchResults.Label.Previously,
 Feature.PlayerSearchResults.Label.ThisIsYou,ตัวคุณเอง
-Feature.PlayerSearchResults.Label.You,คุณ
-Feature.PlayerSearchResults.Label.YouAreConnections,คุณเป็นคนรู้จักกัน
 Feature.PlayerSearchResults.Label.YouAreFollowing,คุณกำลังติดตาม
-Feature.PlayerSearchResults.Label.YouAreFriends,คุณเป็นเพื่อนกันแล้ว
-Feature.PrivateServers.Action.CreatePrivateServer,สร้างเซิร์ฟเวอร์ส่วนตัว
-Feature.PrivateServers.Action.FreeWithBlackbird,ฟรีเมื่อสมัคร Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ไม่รองรับการซื้อเซิร์ฟเวอร์ส่วนตัว
-Feature.PrivateServers.Description.VipServersNotSupported,เกมนี้ไม่รองรับเซิร์ฟเวอร์ส่วนตัว
 Feature.Profile.Action.AboutThisProfile,เกี่ยวกับโปรไฟล์นี้
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4139,12 +4069,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,ส่วนลด 10%
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,ส่วนลด 10% ใน {trialUnlockDays} วันแรก จากนั้นลด 20% สำหรับไอเท็มและอวาตาร์
 Feature.RobloxSubscription.Description.ExclusiveBenefits,สนุกมากขึ้น แต่ใช้ Robux น้อยลง สมัครสมาชิก Roblox Plus เลย
 Feature.RobloxSubscription.Description.JoinEarly,เข้าร่วมได้ก่อนใครเมื่อสมัคร Plus
-Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,ลิงก์แนะนำนี้ใช้ไม่ได้อีกต่อไป
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} ชวนคุณมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อคุณซื้อ Plus
-Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"การคลิก\u{201C}{ctaText}\u{201D}ถือว่าคุณยอมรับ<a href=""{referralTermsUrl}"">ข้อกำหนดของโปรแกรมการแนะนำ</a> และ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Heading.ReferralEntry,แชร์ Plus แล้วรับ {amount} Robux
-Feature.RobloxSubscription.Heading.ReferralRecipientEntry,เข้าร่วม Plus แล้วรับ {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,เข้าร่วม Plus แล้วรับ
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,เซิร์ฟเวอร์ส่วนตัวฟรี
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4155,13 +4082,12 @@ Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,ลด {discountPerce
 Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"การคลิก ""ดำเนินการต่อ"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd}"
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก 1 เดือน โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติและคุณยกเลิกได้ทุกเมื่อ"
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก {trialDuration} {trialPeriodLabel} โดยจะมีการเรียกเก็บเงินในแต่ละ{billingPeriodLabel}โดยอัตโนมัติ และคุณยกเลิกได้ทุกเมื่อ"
-Feature.RobloxSubscription.Label.FreeTrialText,
+Feature.RobloxSubscription.Label.FreeTrialText,ทดลองใช้ฟรี
 Feature.RobloxSubscription.Label.New,
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}ฟรี 1 เดือน{boldEnd} จากนั้น {price}/{periodType}
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration} {trialPeriodLabel}ฟรี {boldEnd}จากนั้น {price}/{periodType}
 Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,
-Feature.RobloxSubscription.Message.AlreadySubscribed,คุณใช้ Plus อยู่แล้ว ลิงก์นี้มีไว้สำหรับสมาชิกใหม่ แชร์ลิงก์ของคุณเองเพื่อเชิญเพื่อนและรับรางวัล
 Feature.RobloxSubscription.Title.AgeCheckTrial,รับ Plus ฟรี 1 สัปดาห์
 Feature.RobloxSubscription.Title.AlreadySubscribed,ข่าวดี
 Feature.RobloxSubscription.Title.GenericError,
@@ -4406,19 +4332,8 @@ Feature.SongDetails.Action.ReportAudio,รายงานเกี่ยวก�
 Feature.SongDetails.Label.InappropriateAudio,เสียงไม่เหมาะสม
 Feature.SongDetails.Label.InappropriateThumbnail,ภาพขนาดย่อไม่เหมาะสม
 Feature.SongDetails.Label.SongPreview,ฟังตัวอย่างเพลง
-Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,ย่ออวาตาร์
 Feature.SplitPane.Label.ExpandAvatar,ขยายอวาตาร์
-Feature.SplitPane.Tour.Button.Continue,
-Feature.SplitPane.Tour.Button.FinishTour,เสร็จสิ้นการทัวร์
-Feature.SplitPane.Tour.Button.SkipTour,ข้ามการทัวร์
-Feature.SplitPane.Tour.Step1.Description.Collapsed,ตอนนี้จะมองเห็นอวาตาร์ที่บันทึกไว้ได้บนหน้าหลัก ขยายพื้นที่นี้เพื่อดูอวาตาร์
-Feature.SplitPane.Tour.Step1.Description.Expanded,ตอนนี้จะมองเห็นอวาตาร์ที่บันทึกไว้ได้บนหน้าหลัก หมุนอวาตาร์หรือซูมเข้าเพื่อดูทุกรายละเอียด
-Feature.SplitPane.Tour.Step1.Title,ดูตัวเองในหน้าหลัก
-Feature.SplitPane.Tour.Step2.Description,ปรับเปลี่ยนลุคได้ตามใจชอบ โดยเลือกจากอวตารที่บันทึกไว้ก่อนกดเข้าเกม
-Feature.SplitPane.Tour.Step2.Title,เปลี่ยนลุคได้ทุกเมื่อ
-Feature.SplitPane.Tour.Step3.Description,ปิดพื้นที่นี้ได้ทุกเมื่อเพื่อโฟกัสกับการสำรวจเกมใหม่ๆ อวตารที่บันทึกไว้จะยังอยู่ตรงนี้
-Feature.SplitPane.Tour.Step3.Title,เลือกสิ่งที่อยากดู
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,เพิ่มผู้ใช้คนอื่น
 Feature.Squads.Action.ConnectToVoice,เชื่อมต่อกับเสียง

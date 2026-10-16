@@ -20,8 +20,5 @@
 		Pending = "Pending",
 		View = "View"
 	},
-	CtaSurfaces = {
-		SocialTabsPage = "SocialTabsPage",
-		FriendsLandingPage = "FriendsLandingPage"
-	}
+	CtaSurfaces = { SocialTabsPage = "SocialTabsPage" }
 }

@@ -1,5 +1,5 @@
-﻿local conversationUtilsModule = require(script.Parent.ConversationUtils)
-local _ = require(script:FindFirstAncestor("ShareSheet").Types)
+﻿local _ = require(script:FindFirstAncestor("ShareSheet").Parent.AppChat.GetConversationListStore)
+local conversationUtilsModule = require(script.Parent.ConversationUtils)
 
 return function(p1, p2, p3, p4)
 	-- upvalues: conversationUtilsModule (ref)

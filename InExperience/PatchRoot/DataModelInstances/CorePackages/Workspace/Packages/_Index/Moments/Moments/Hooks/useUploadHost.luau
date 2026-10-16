@@ -26,7 +26,6 @@ local fFlagMomentsRefreshProfileOnPostStatus = sharedFlagsModule.FFlagMomentsRef
 local fFlagMomentsResolvePublishedPostFeedItem = sharedFlagsModule.FFlagMomentsResolvePublishedPostFeedItem
 local getUploadStoreModule = require(moments.Stores.GetUploadStore)
 local getToastStoreModule = require(moments.Stores.GetToastStore)
-local _ = require(moments.Stores.GetToastStore.createToastStore)
 local isStudioModule = require(parent.MomentsCommon.isStudio)
 local getLocalUserIdModule = require(moments.Utils.getLocalUserId)
 local t = {

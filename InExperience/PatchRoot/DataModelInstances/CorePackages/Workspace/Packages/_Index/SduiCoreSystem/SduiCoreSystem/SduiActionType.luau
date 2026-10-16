@@ -36,7 +36,6 @@
 	OpenSponsoredTooltip = "OpenSponsoredTooltip",
 	OpenWhyThisAd = "OpenWhyThisAd",
 	SetGameTileNotInterested = "SetGameTileNotInterested",
-	SetPageScopeField = "SetPageScopeField",
 	UndoGameTileNotInterested = "UndoGameTileNotInterested",
 	PlayButtonClick = "PlayButtonClick",
 	DismissDialog = "DismissDialog",

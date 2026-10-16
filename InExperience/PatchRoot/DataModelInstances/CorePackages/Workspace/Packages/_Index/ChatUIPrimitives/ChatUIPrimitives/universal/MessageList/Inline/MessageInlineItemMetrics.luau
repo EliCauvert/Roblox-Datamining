@@ -1,1 +1,0 @@
-﻿return table.freeze({ MIN_HEIGHT = 24 })

@@ -12,8 +12,8 @@ local dynamicReportModule = require(genericAbuseReporting.UXFlow.DynamicReport.D
 local dynamicReportV2ContainerModule = require(genericAbuseReporting.UXFlow.DynamicReportV2.DynamicReportV2Container)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAddThumbnailSelectorReport = sharedFlagsModule.FFlagAddThumbnailSelectorReport
+local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
 local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
-local fFlagEnableNewReportFlowGameTile = sharedFlagsModule.FFlagEnableNewReportFlowGameTile
 local fFlagAbuseReportAttributes = sharedFlagsModule.FFlagAbuseReportAttributes
 
 local function DynamicReportV2Adapter(p1)
@@ -41,11 +41,11 @@ local function DynamicReportV2Adapter(p1)
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagAbuseReportAttributes (ref), abuseVectorModule (ref), fFlagEnableMomentsCommentReporting (ref), fFlagEnableNewReportFlowGameTile (ref), reactModule (ref), DynamicReportV2Adapter (ref), dynamicReportV2ContainerModule (ref), layerCollectorProvider (ref), abuseReportBeduiProviderModule (ref), abuseReportFormDataProviderModule (ref), fFlagAddThumbnailSelectorReport (ref), abuseReportAnalyticsProviderModule (ref), dynamicReportModule (ref)
+	-- upvalues: fFlagAbuseReportAttributes (ref), abuseVectorModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagEnableMomentsCommentReporting (ref), reactModule (ref), DynamicReportV2Adapter (ref), dynamicReportV2ContainerModule (ref), layerCollectorProvider (ref), abuseReportBeduiProviderModule (ref), abuseReportFormDataProviderModule (ref), fFlagAddThumbnailSelectorReport (ref), abuseReportAnalyticsProviderModule (ref), dynamicReportModule (ref)
 	if fFlagAbuseReportAttributes and p1.targetId ~= nil and (p1.attributes ~= nil or p1.analyticsTargetId ~= nil) then
 		error("targetId is mutually exclusive with attributes and analyticsTargetId")
 	end
-	if p1.abuseVector == abuseVectorModule.UserProfile or p1.abuseVector == abuseVectorModule.MomentsFeed or fFlagEnableMomentsCommentReporting and p1.abuseVector == abuseVectorModule.MomentComment or fFlagEnableNewReportFlowGameTile and p1.abuseVector == abuseVectorModule.GameTile then
+	if p1.abuseVector == abuseVectorModule.UserProfile or fFlagEnableReportingFlowForMomentsFeed and p1.abuseVector == abuseVectorModule.MomentsFeed or fFlagEnableMomentsCommentReporting and p1.abuseVector == abuseVectorModule.MomentComment then
 		return if fFlagAbuseReportAttributes then reactModule.createElement(DynamicReportV2Adapter, p1) else reactModule.createElement(dynamicReportV2ContainerModule, {
 			abuseVector = p1.abuseVector,
 			targetId = p1.targetId,

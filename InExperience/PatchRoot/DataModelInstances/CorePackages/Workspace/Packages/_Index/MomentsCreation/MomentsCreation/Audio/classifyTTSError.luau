@@ -1,6 +1,4 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local fFlagMomentsTTSTooManyDigitsErrorModule = require(momentsCreation.Flags.FFlagMomentsTTSTooManyDigitsError)
+﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Types.CreationFlowTypes)
 local t = {
 	FilteredText = "moderated",
 	FilteredAudio = "moderated",
@@ -10,6 +8,6 @@ local t = {
 }
 
 return function(p1)
-	-- upvalues: fFlagMomentsTTSTooManyDigitsErrorModule (ref), t (ref)
-	return if p1 == nil then "failure" elseif fFlagMomentsTTSTooManyDigitsErrorModule and p1 == "TooManyDigits" then "tooManyDigits" else t[p1] or "failure"
+	-- upvalues: t (ref)
+	return if p1 == nil then "failure" else t[p1] or "failure"
 end

@@ -6,6 +6,7 @@ local profileInsightsModelModule = require(script.Parent.ProfileInsightsModel)
 local httpService = game:GetService("HttpService")
 local profileInsightsStoreHttpTimeout = game:DefineFastInt("ProfileInsightsStoreHttpTimeout", 1500)
 local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
+local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
 local fFlagProfileInsightsSkipFetchNoCacheEntry = require(parent.SharedFlags).FFlagProfileInsightsSkipFetchNoCacheEntry
 local fFlagUserSearchClassmatesInsight = require(parent.SharedFlags).FFlagUserSearchClassmatesInsight
 local urlBuilderModule = require(parent.UrlBuilder)
@@ -54,7 +55,7 @@ local function _(p1, p2)
 end
 
 return createComputed(function(_)
-	-- upvalues: profileInsightsModelModule (ref), createSignal (ref), fFlagProfileInsightsSkipFetchNoCacheEntry (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), makeHttpCall (ref), httpService (ref)
+	-- upvalues: profileInsightsModelModule (ref), createSignal (ref), fFlagProfileInsightsSkipFetchNoCacheEntry (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), fFlagTFProfileInsightsBypassCache (ref), makeHttpCall (ref), httpService (ref)
 	local t = {}
 	local t_1 = {}
 	local var2 = profileInsightsModelModule.createProfileInsightsSignalList()
@@ -89,7 +90,7 @@ return createComputed(function(_)
 	
 	return {
 		getProfileInsightsByUserId = function(p3)
-			-- upvalues: createSignal (copy), fFlagProfileInsightsSkipFetchNoCacheEntry (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy), t (ref), var2 (ref), profileInsightsModelModule (copy), makeHttpCall (copy)
+			-- upvalues: createSignal (copy), fFlagProfileInsightsSkipFetchNoCacheEntry (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy), t (ref), var2 (ref), fFlagTFProfileInsightsBypassCache (copy), profileInsightsModelModule (copy), makeHttpCall (copy)
 			local userIds = p3.userIds
 			local count = p3.count
 			local rankingStrategy = p3.rankingStrategy
@@ -101,24 +102,33 @@ return createComputed(function(_)
 			
 			if fFlagProfileInsightsSkipFetchNoCacheEntry and fFlagAddFriendsPageTrustedFriendRequestSection and (p3.skipFetch and not t[text]) then
 				return createSignal({ status = "success", data = var2 })
-			elseif t[text] and not p3.forceFetch then
+			elseif fFlagTFProfileInsightsBypassCache then
+				if t[text] and not p3.forceFetch then
+					return createSignal({ status = "success", data = t[text] })
+				elseif not t[text] then
+					t[text] = profileInsightsModelModule.createProfileInsightsSignalList()
+				end
+			elseif t[text] then
 				return createSignal({ status = "success", data = t[text] })
-			elseif not t[text] then
-				t[text] = profileInsightsModelModule.createProfileInsightsSignalList()
 			end
+			t[text] = profileInsightsModelModule.createProfileInsightsSignalList()
 			if fFlagAddFriendsPageTrustedFriendRequestSection and p3.skipFetch then
 				return createSignal({ status = "success", data = t[text] })
 			end
 			local var5, var6 = createSignal({ status = "fetching", data = t[text] })
 			makeHttpCall(userIds, count, rankingStrategy, function(p4, p5)
-				-- upvalues: t (copy), text (ref), profileInsightsModelModule (copy), var6 (ref)
+				-- upvalues: t (copy), text (ref), profileInsightsModelModule (copy), var6 (ref), fFlagTFProfileInsightsBypassCache (copy)
 				if p4 and p5.userInsights then
 					t[text].setProfileInsights(profileInsightsModelModule.createProfileInsightsList(p5.userInsights))
 					var6({ status = "success", data = t[text] })
 					
 					return
+				elseif fFlagTFProfileInsightsBypassCache then
+					var6({ status = "failed", data = t[text] })
+					
+					return
 				end
-				var6({ status = "failed", data = t[text] })
+				var6({ status = "failed", data = {} })
 			end)
 			
 			return var5

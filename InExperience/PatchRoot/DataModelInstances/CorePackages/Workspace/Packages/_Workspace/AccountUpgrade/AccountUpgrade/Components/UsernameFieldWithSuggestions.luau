@@ -1,12 +1,10 @@
-﻿local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
-local parent = accountUpgrade.Parent
+﻿local parent = script:FindFirstAncestor("AccountUpgrade").Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local authAnalyticsModule = require(parent.AuthAnalytics)
 local authSignupModule = require(parent.AuthSignup)
 local eventStreamConstants = authAnalyticsModule.EventStreamConstants
 local usernameSuggestionShown = authAnalyticsModule.Events.usernameSuggestionShown
-local fFlagAccountUpgradeOAuthTelemetryModule = require(accountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
 local collapsingTextInputValidator = authSignupModule.Components.CollapsingTextInputValidator
 local usernameValidator = authSignupModule.Thunks.UsernameValidator
 local view = foundationModule.View
@@ -53,34 +51,17 @@ local function UsernameSuggestionList(p1)
 end
 
 return function(p2)
-	-- upvalues: reactModule (ref), view (ref), collapsingTextInputValidator (ref), usernameValidator (ref), inputSize (ref), inputLabelSize (ref), UsernameSuggestionList (ref), fFlagAccountUpgradeOAuthTelemetryModule (ref), eventStreamConstants (ref)
-	local var1
-	local var2 = reactModule.useRef(nil)
+	-- upvalues: reactModule (ref), view (ref), collapsingTextInputValidator (ref), usernameValidator (ref), inputSize (ref), inputLabelSize (ref), UsernameSuggestionList (ref), eventStreamConstants (ref)
+	local var1 = reactModule.useRef(nil)
 	local onSuggestionSelected = p2.onSuggestionSelected
 	local updatePillClicked = p2.updatePillClicked
-	local var3 = reactModule.useCallback(function(p3)
-		-- upvalues: updatePillClicked (ref), var2 (ref), onSuggestionSelected (ref)
-		if updatePillClicked ~= nil then
-			updatePillClicked()
-		end
-		local current = var2.current
-		
-		if current ~= nil then
-			current.Text = p3
-		end
-		if onSuggestionSelected ~= nil then
-			onSuggestionSelected(p3)
-		end
-	end, { onSuggestionSelected, updatePillClicked })
 	local suggestions = p2.suggestions or {}
-	local var4 = #suggestions > 0 and onSuggestionSelected ~= nil
-	local createElement = reactModule.createElement
-	local t = {
+	
+	return reactModule.createElement(view, {
 		tag = "col size-full-0 auto-y",
 		testId = "AccountUpgradeUsernameField",
 		LayoutOrder = p2.LayoutOrder
-	}
-	local t_1 = {
+	}, {
 		Validator = reactModule.createElement(collapsingTextInputValidator, {
 			layoutOrder = 1,
 			useFoundationTitle = true,
@@ -98,34 +79,36 @@ return function(p2)
 			validatorAdditionalProps = p2.validatorAdditionalProps,
 			onInputTextChanged = p2.onTextChanged,
 			onInputTextValidated = p2.onTextValidated,
-			textBoxFocusedCallback = p2.onFocused,
 			updateIssueCondition = p2.onIssueConditionChanged,
-			textBoxRef = var2,
+			textBoxRef = var1,
 			pillClicked = p2.pillClicked,
 			resetPillClicked = p2.resetPillClicked,
 			useFoundationTextInput = p2.useFoundationTextInput,
-			foundationInputSize = p2.inputSize or inputSize.Medium,
-			foundationTitleSize = p2.titleSize or inputLabelSize.Medium,
-			foundationTitleIsBold = p2.isTitleBold,
+			foundationInputSize = inputSize.Medium,
+			foundationTitleSize = inputLabelSize.Medium,
 			contentGapOverride = p2.contentGap,
 			colorContentOverride = p2.colorContentOverride
-		})
-	}
-	
-	if var4 then
-		var1 = reactModule.createElement
-		var1 = var1(UsernameSuggestionList, {
+		}),
+		Suggestions = if #suggestions > 0 and onSuggestionSelected ~= nil then reactModule.createElement(UsernameSuggestionList, {
 			LayoutOrder = 2,
 			inputUsername = p2.username,
 			suggestionUsernames = suggestions,
 			promptText = p2.suggestionPrompt,
-			eventContext = if fFlagAccountUpgradeOAuthTelemetryModule and p2.eventContext then p2.eventContext else eventStreamConstants.Context.SinglePageSignUpScreen,
-			onUsernameSelected = var3
-		})
-	else
-		var1 = nil
-	end
-	t_1.Suggestions = var1
-	
-	return createElement(view, t, t_1)
+			eventContext = eventStreamConstants.Context.SinglePageSignUpScreen,
+			onUsernameSelected = reactModule.useCallback(function(p3)
+				-- upvalues: updatePillClicked (ref), var1 (ref), onSuggestionSelected (ref)
+				if updatePillClicked ~= nil then
+					updatePillClicked()
+				end
+				local current = var1.current
+				
+				if current ~= nil then
+					current.Text = p3
+				end
+				if onSuggestionSelected ~= nil then
+					onSuggestionSelected(p3)
+				end
+			end, { onSuggestionSelected, updatePillClicked })
+		}) else nil
+	})
 end

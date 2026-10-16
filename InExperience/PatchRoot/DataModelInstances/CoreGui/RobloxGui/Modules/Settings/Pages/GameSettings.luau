@@ -65,7 +65,6 @@ local deferProgrammaticChange = game:DefineFastFlag("DeferProgrammaticChange", f
 local fFlagRenameVolumeToMainVolumeModule = require(robloxGui.Modules.Flags.FFlagRenameVolumeToMainVolume)
 local fFlagAIRephraseSettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAIRephraseSettingEnabled
 local fFlagChatSummariesSettingEnabled = sharedFlagsModule.FFlagChatSummariesSettingEnabled
-local fFlagExpChatDictation = sharedFlagsModule.FFlagExpChatDictationVoiceTypingModeSetting and (sharedFlagsModule.FFlagExpChatDictation or sharedFlagsModule.FFlagExpChatContinuousDictation)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 local fFlagVoiceRewarmTelemetry = sharedFlagsModule.FFlagVoiceRewarmTelemetry
 local debounceVoiceSelectorIndexChange = game:DefineFastFlag("DebounceVoiceSelectorIndexChange", false)
@@ -154,7 +153,6 @@ local textChatServiceSettingsSavedEngineFeature = game:GetEngineFeature("TextCha
 local chatTranslationOptionsWithChatLanguageSwitcherInitializerModule = require(robloxGui.Modules.Settings.Pages.GameSettingsRowInitializers.ChatTranslationOptionsWithChatLanguageSwitcherInitializer)
 local gameBasicSettingsFramerateCapEngineFeature = game:GetEngineFeature("GameBasicSettingsFramerateCap")
 local RUUserScalePreferenceAPIEngineFeature = game:GetEngineFeature("RUUserScalePreferenceAPI")
-local framerateCapIOSOptions = game:DefineFastFlag("FramerateCapIOSOptions", false)
 local utilityModule = require(robloxGui.Modules.Settings.Utility)
 local coreUtilityModule = require(robloxGui.Modules.CoreUtility)
 local playerPermissionsModule = require(robloxGui.Modules.PlayerPermissionsModule)
@@ -323,7 +321,7 @@ local function getFirstValueChangerFrame(p2)
 end
 
 return (function()
-	-- upvalues: IGMEnableGFXReset (ref), gfxResetModule (ref), robloxGui (ref), getFFlagLazyInitiateExperienceLanguageSwitcherModule (ref), VRService (ref), gameSettings (ref), utilityModule (ref), SETTINGS_MENU_LAYOUT_ORDER (ref), guiService (ref), getFFlagFixCyclicFullscreenIndexEventModule (ref), getFFlagEnableExplicitSettingsChangeAnalyticsModule (ref), reportSettingsChangeForAnalytics (ref), reportSettingsForAnalytics (ref), rbxAnalyticsService (ref), constantsModule (ref), gameBasicSettingsFramerateCapEngineFeature (ref), framerateCapIOSOptions (ref), platform (ref), eraseFPSFromDefaultSetting (ref), robloxTranslatorModule (ref), romarkStartWithGraphicQualityLevelFastInt (ref), t (ref), updateVisibilitySettingsCopy (ref), fFlagUpdatePeopleNamesSettingCopyModule (ref), t_6 (ref), userGameSettingsService (ref), var3 (write), userInputService (ref), create (ref), themeModule (ref), centerShiftLockOverride (ref), microProfilerReadOnlyInformationLabel (ref), touchEnabled (ref), var15 (ref), var14 (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), localPlayer (ref), coreUtilityModule (ref), t_3 (ref), getFFlagAlwaysShowVRToggleModule (ref), getAppFeaturePolicies (ref), t_5 (ref), var7 (ref), t_2 (ref), t_1 (ref), url (ref), httpService (ref), feedbackEntryPointImprovedStrictnessCheck (ref), safetyService (ref), var2 (write), feedbackEntryPointButtonSizeAdjustment2 (ref), var9 (ref), disableFeedbackSoothsayerCheck (ref), name (ref), playersService (ref), var8 (ref), runService (ref), getFFlagChatTranslationWaitForIXPModule (ref), IXPServiceWrapper (ref), getFFlagChatTranslationNewDefaultsModule (ref), fFlagRenameVolumeToMainVolumeModule (ref), getFFlagEnablePartyVoiceVolumeOnlyWhenInEligibleParty (ref), default_3 (ref), voiceVolumeControlsDisableInteractionWhenNoMasterVolume (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), corePackagesService (ref), contextActionService (ref), fixDeveloperConsoleButtonSizeAndPositioning (ref), playerPermissionsModule (ref), userFreecamGuiDestabilization (ref), userShowGuiHideToggles (ref), soundService (ref), getFIntVoiceChatDeviceChangeDebounceDelayModule (ref), default_2 (ref), getFFlagEnableCrossExpVoice (ref), signalsModule (ref), getFIntDebounceAIRephraseSettingDelayModule (ref), textChatService (ref), expChatDebounceRephraseIndexSelection (ref), throttleFunctionCallModule (ref), getFIntDebounceChatSummariesSettingDelayModule (ref), var12 (ref), getFFlagVoiceChatUILoggingModule (ref), videoCaptureService (ref), var11 (ref), RUUserScalePreferenceAPIEngineFeature (ref), differentiateVoiceSelectorSystemAndUser (ref), voiceSelectorAvailableAfterFae (ref), getFIntDebounceDisconnectButtonDelayModule (ref), fFlagVoiceRewarmTelemetry (ref), constantsModule_1 (ref), voiceSelectorIgnoreFailedStateDisconnect (ref), voiceConnectSelectorDebounce (ref), debounceModule (ref), voiceChatSelectorReconnectFocus2AEGIS2 (ref), debounceVoiceSelectorIndexChange (ref), deferProgrammaticChange (ref), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (ref), isVoiceFocused (ref), getFFlagEnableVrVoiceConnectDisconnect (ref), getFFlagEnableVoiceUxUpdates (ref), hideVoiceChatSelectorForFaeAEGIS2 (ref), observeIsVoiceFocused (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (ref), voiceVolumeControlsEligibility (ref), getFFlagEnableUniveralVoiceToastsModule (ref), t_4 (ref), getFFlagSelfViewCameraSettings (ref), isCamEnabledForUserAndPlaceModule (ref), getCamMicPermissionsModule (ref), default (ref), cameraDevicePermissionGrantedSignalModule (ref), var10 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var6 (ref), showAntiHarassmentSettings (ref), getFFlagEnablePlayerNamesEnabledSettingModule (ref), playerChoiceTranslationSettingInitializerModule (ref), cachedPolicyServiceModule (ref), var4 (ref), fFlagBadgeVisibilitySettingEnabled (ref), fFlagEnableModerateChatRemoteEvent (ref), fFlagAIRephraseSettingEnabled (ref), fFlagChatSummariesSettingEnabled (ref), fFlagExpChatDictation (ref), fFlagExpChatEnableFriendsTab (ref), getHasGuiHidingPermissionModule (ref), var5 (write), fFlagIEMSettingsGroupsModule (ref), renderSettingsHeaderModule (write), renderSettingsDividerModule (write), migration (ref), builderIconsModule (ref), enableTFFeedbackModeEntryCheck (ref), getFFlagEnableLocalesForExperienceLanguageSwitcherModule (ref), experienceLanguageSwitcherInitializerModule (ref), getLastValueChangerFrame (ref), fFlagIEMTabFocusNav (ref), getFirstValueChangerFrame (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFFlagChatTranslationHoldoutEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), textChatServiceSettingsSavedEngineFeature (ref), getFFlagChatTranslationForceSettingModule (ref), chatTranslationOptionsWithChatLanguageSwitcherInitializerModule (ref)
+	-- upvalues: IGMEnableGFXReset (ref), gfxResetModule (ref), robloxGui (ref), getFFlagLazyInitiateExperienceLanguageSwitcherModule (ref), VRService (ref), gameSettings (ref), utilityModule (ref), SETTINGS_MENU_LAYOUT_ORDER (ref), guiService (ref), getFFlagFixCyclicFullscreenIndexEventModule (ref), getFFlagEnableExplicitSettingsChangeAnalyticsModule (ref), reportSettingsChangeForAnalytics (ref), reportSettingsForAnalytics (ref), rbxAnalyticsService (ref), constantsModule (ref), gameBasicSettingsFramerateCapEngineFeature (ref), eraseFPSFromDefaultSetting (ref), robloxTranslatorModule (ref), romarkStartWithGraphicQualityLevelFastInt (ref), t (ref), updateVisibilitySettingsCopy (ref), fFlagUpdatePeopleNamesSettingCopyModule (ref), t_6 (ref), userGameSettingsService (ref), var3 (write), userInputService (ref), create (ref), themeModule (ref), centerShiftLockOverride (ref), microProfilerReadOnlyInformationLabel (ref), touchEnabled (ref), var15 (ref), var14 (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), localPlayer (ref), coreUtilityModule (ref), t_3 (ref), getFFlagAlwaysShowVRToggleModule (ref), getAppFeaturePolicies (ref), t_5 (ref), var7 (ref), t_2 (ref), t_1 (ref), url (ref), httpService (ref), feedbackEntryPointImprovedStrictnessCheck (ref), safetyService (ref), var2 (write), feedbackEntryPointButtonSizeAdjustment2 (ref), var9 (ref), disableFeedbackSoothsayerCheck (ref), name (ref), playersService (ref), var8 (ref), runService (ref), getFFlagChatTranslationWaitForIXPModule (ref), IXPServiceWrapper (ref), getFFlagChatTranslationNewDefaultsModule (ref), fFlagRenameVolumeToMainVolumeModule (ref), getFFlagEnablePartyVoiceVolumeOnlyWhenInEligibleParty (ref), default_3 (ref), voiceVolumeControlsDisableInteractionWhenNoMasterVolume (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), corePackagesService (ref), contextActionService (ref), fixDeveloperConsoleButtonSizeAndPositioning (ref), playerPermissionsModule (ref), userFreecamGuiDestabilization (ref), userShowGuiHideToggles (ref), soundService (ref), getFIntVoiceChatDeviceChangeDebounceDelayModule (ref), default_2 (ref), getFFlagEnableCrossExpVoice (ref), signalsModule (ref), getFIntDebounceAIRephraseSettingDelayModule (ref), textChatService (ref), expChatDebounceRephraseIndexSelection (ref), throttleFunctionCallModule (ref), getFIntDebounceChatSummariesSettingDelayModule (ref), var12 (ref), getFFlagVoiceChatUILoggingModule (ref), videoCaptureService (ref), var11 (ref), RUUserScalePreferenceAPIEngineFeature (ref), differentiateVoiceSelectorSystemAndUser (ref), voiceSelectorAvailableAfterFae (ref), getFIntDebounceDisconnectButtonDelayModule (ref), fFlagVoiceRewarmTelemetry (ref), constantsModule_1 (ref), voiceSelectorIgnoreFailedStateDisconnect (ref), voiceConnectSelectorDebounce (ref), debounceModule (ref), voiceChatSelectorReconnectFocus2AEGIS2 (ref), debounceVoiceSelectorIndexChange (ref), deferProgrammaticChange (ref), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (ref), isVoiceFocused (ref), getFFlagEnableVrVoiceConnectDisconnect (ref), getFFlagEnableVoiceUxUpdates (ref), hideVoiceChatSelectorForFaeAEGIS2 (ref), observeIsVoiceFocused (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (ref), voiceVolumeControlsEligibility (ref), getFFlagEnableUniveralVoiceToastsModule (ref), t_4 (ref), getFFlagSelfViewCameraSettings (ref), isCamEnabledForUserAndPlaceModule (ref), getCamMicPermissionsModule (ref), default (ref), cameraDevicePermissionGrantedSignalModule (ref), var10 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var6 (ref), showAntiHarassmentSettings (ref), getFFlagEnablePlayerNamesEnabledSettingModule (ref), playerChoiceTranslationSettingInitializerModule (ref), cachedPolicyServiceModule (ref), var4 (ref), fFlagBadgeVisibilitySettingEnabled (ref), fFlagEnableModerateChatRemoteEvent (ref), fFlagAIRephraseSettingEnabled (ref), fFlagChatSummariesSettingEnabled (ref), fFlagExpChatEnableFriendsTab (ref), getHasGuiHidingPermissionModule (ref), var5 (write), fFlagIEMSettingsGroupsModule (ref), renderSettingsHeaderModule (write), renderSettingsDividerModule (write), migration (ref), builderIconsModule (ref), enableTFFeedbackModeEntryCheck (ref), getFFlagEnableLocalesForExperienceLanguageSwitcherModule (ref), experienceLanguageSwitcherInitializerModule (ref), getLastValueChangerFrame (ref), fFlagIEMTabFocusNav (ref), getFirstValueChangerFrame (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFFlagChatTranslationHoldoutEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), textChatServiceSettingsSavedEngineFeature (ref), getFFlagChatTranslationForceSettingModule (ref), chatTranslationOptionsWithChatLanguageSwitcherInitializerModule (ref)
 	if IGMEnableGFXReset then
 		gfxResetModule.RunGfxReset()
 	end
@@ -355,7 +353,7 @@ return (function()
 		end
 	end)
 	local function createGraphicsOptions()
-		-- upvalues: gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), t_7 (ref), guiService (copy), getFFlagFixCyclicFullscreenIndexEventModule (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), rbxAnalyticsService (copy), constantsModule (copy), gameBasicSettingsFramerateCapEngineFeature (copy), VRService (copy), framerateCapIOSOptions (copy), platform (copy), eraseFPSFromDefaultSetting (copy), robloxTranslatorModule (copy), IGMEnableGFXReset (copy), gfxResetModule (copy), romarkStartWithGraphicQualityLevelFastInt (copy), t (copy)
+		-- upvalues: gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), t_7 (ref), guiService (copy), getFFlagFixCyclicFullscreenIndexEventModule (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), rbxAnalyticsService (copy), constantsModule (copy), gameBasicSettingsFramerateCapEngineFeature (copy), VRService (copy), eraseFPSFromDefaultSetting (copy), robloxTranslatorModule (copy), IGMEnableGFXReset (copy), gfxResetModule (copy), romarkStartWithGraphicQualityLevelFastInt (copy), t (copy)
 		local var17, var18, var19 = utilityModule:AddNewRow(gameSettingsTab, "Fullscreen", "Selector", { "On", "Off" }, if not gameSettings:InFullScreen() then 2 else 1)
 		gameSettingsTab.FullscreenFrame = var17
 		gameSettingsTab.FullscreenLabel = var18
@@ -419,7 +417,7 @@ return (function()
 		gameSettingsTab.GraphicsQualitySlider:SetMinStep(1)
 		
 		if gameBasicSettingsFramerateCapEngineFeature and not VRService.VREnabled then
-			local cloned = table.clone(if framerateCapIOSOptions and platform == Enum.Platform.IOS then constantsModule.FramerateCapsIOS else constantsModule.FramerateCaps)
+			local cloned = table.clone(constantsModule.FramerateCaps)
 			local list = {
 				if eraseFPSFromDefaultSetting then robloxTranslatorModule:FormatByKey("CoreScripts.InGameMenu.GameSettings.Default") else robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.FramerateCapDefaultEntry", { Frames = gameSettings:GetDefaultFramerateCap() })
 			}
@@ -429,8 +427,8 @@ return (function()
 			end
 			table.insert(cloned, 1, -1)
 			task.defer(function()
-				-- upvalues: gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), list (ref), framerateCapIOSOptions (copy), cloned (ref), gameSettings (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
-				local var28, var29, var30 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.MaximumFramerate"), "DropDown", list, if framerateCapIOSOptions then table.find(cloned, gameSettings.FramerateCap) or 1 else table.find(cloned, gameSettings.FramerateCap), nil, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.MaximumFramerate.Description"))
+				-- upvalues: gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), list (ref), cloned (ref), gameSettings (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
+				local var28, var29, var30 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.MaximumFramerate"), "DropDown", list, table.find(cloned, gameSettings.FramerateCap), nil, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.MaximumFramerate.Description"))
 				gameSettingsTab.FramerateCapFrame = var28
 				gameSettingsTab.FramerateCapLabel = var29
 				gameSettingsTab.FramerateCapMode = var30
@@ -1838,7 +1836,7 @@ return (function()
 			elseif p5.StatusCode == 401 then
 				var68 = "Roles Api Request: Unauthorized"
 			elseif p5.StatusCode < 200 or p5.StatusCode >= 400 then
-				var68 = "Roles Api Status code: " .. p35.StatusCode
+				var68 = "Roles Api Status code: " .. p5.StatusCode
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p5 (ref), var69 (write)
@@ -1852,7 +1850,7 @@ return (function()
 				var68 = status
 			end
 			if not var70 then
-				name:warning("Feedback Mode initialization api call failed with url: " .. text .. " and with error message: " .. var373)
+				name:warning("Feedback Mode initialization api call failed with url: " .. text .. " and with error message: " .. var68)
 			end
 			rolesCheckCallback(var69)
 		end)
@@ -1948,7 +1946,7 @@ return (function()
 								localPlayer:SetExperienceSettingsLocaleId(t_2[t_1[t_4[p5]]].localeCode)
 							end
 						else
-							name:warning("Request to update user experience language status failed, keeping language toggle disabled for the remainder of the session. Error: " .. p39)
+							name:warning("Request to update user experience language status failed, keeping language toggle disabled for the remainder of the session. Error: " .. p7)
 							var70 = true
 							gameSettingsTab.LanguageSelectorMode:SetSelectionIndex(var69)
 						end
@@ -1977,9 +1975,9 @@ return (function()
 							elseif p7.StatusCode == 401 then
 								text_1 = "User Experience Language Settings Update Request: Unauthorized"
 							elseif p7.StatusCode < 200 or p7.StatusCode >= 400 then
-								text_1 = "User Experience Language Settings Update Request Status Code: " .. p41.StatusCode
+								text_1 = "User Experience Language Settings Update Request Status Code: " .. p7.StatusCode
 							else
-								name:info("User Experience Language Settings Update Request succeeded with code: " .. p41.StatusCode)
+								name:info("User Experience Language Settings Update Request succeeded with code: " .. p7.StatusCode)
 								var86 = true
 							end
 							if not var86 then
@@ -2005,7 +2003,7 @@ return (function()
 			elseif p4 == nil then
 				p4 = "Execution path did not set earliest error to non-nil value."
 			end
-			name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. p36)
+			name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. p4)
 			local var83, var84, var85 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 			gameSettingsTab.LanguageSelectorFrame = var83
 			gameSettingsTab.LanguageSelectorLabel = var84
@@ -2028,7 +2026,7 @@ return (function()
 					elseif p8.StatusCode == 401 then
 						var86 = "User Experience Language Setting Request: Unauthorized"
 					elseif p8.StatusCode < 200 or p8.StatusCode >= 400 then
-						var86 = "User Experience Language Setting Request Status code: " .. p45.StatusCode
+						var86 = "User Experience Language Setting Request Status code: " .. p8.StatusCode
 					else
 						local ok, status = pcall(function()
 							-- upvalues: httpService (copy), p8 (ref), var74 (copy), var73 (copy), var71 (copy), t_3 (copy)
@@ -2054,7 +2052,7 @@ return (function()
 						var86 = status
 					end
 					if not var87 then
-						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var414)
+						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var86)
 					end
 					userExperienceLanguageSettingsCallback(var87, var86)
 				end)
@@ -2066,7 +2064,7 @@ return (function()
 			if var86 == nil then
 				var86 = "Execution path did not set earliest error to non-nil value."
 			end
-			name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var409)
+			name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var86)
 			local var87, var88, var89 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 			gameSettingsTab.LanguageSelectorFrame = var87
 			gameSettingsTab.LanguageSelectorLabel = var88
@@ -2089,7 +2087,7 @@ return (function()
 					elseif p8.StatusCode == 401 then
 						var86 = "Experience Supported Language Request: Unauthorized"
 					elseif p8.StatusCode < 200 or p8.StatusCode >= 400 then
-						var86 = "Experience Supported Language Request Status code: " .. p49.StatusCode
+						var86 = "Experience Supported Language Request Status code: " .. p8.StatusCode
 					else
 						local ok, status = pcall(function()
 							-- upvalues: httpService (copy), p8 (ref), t (copy)
@@ -2101,7 +2099,7 @@ return (function()
 						var86 = status
 					end
 					if not var87 then
-						name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var420)
+						name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var86)
 					end
 					if p6 == nil then
 						p6 = var86
@@ -2120,7 +2118,7 @@ return (function()
 							elseif p10.StatusCode == 401 then
 								var89 = "User Experience Language Setting Request: Unauthorized"
 							elseif p10.StatusCode < 200 or p10.StatusCode >= 400 then
-								var89 = "User Experience Language Setting Request Status code: " .. p51.StatusCode
+								var89 = "User Experience Language Setting Request Status code: " .. p10.StatusCode
 							else
 								local ok, status = pcall(function()
 									-- upvalues: httpService (copy), p10 (ref), var74 (copy), var73 (copy), var71 (copy), t_3 (copy)
@@ -2146,7 +2144,7 @@ return (function()
 								var89 = status
 							end
 							if not var90 then
-								name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var414)
+								name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var89)
 							end
 							userExperienceLanguageSettingsCallback(var90, var89)
 						end)
@@ -2158,7 +2156,7 @@ return (function()
 					if var89 == nil then
 						var89 = "Execution path did not set earliest error to non-nil value."
 					end
-					name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var422)
+					name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var89)
 					local var90, var91, var92 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 					gameSettingsTab.LanguageSelectorFrame = var90
 					gameSettingsTab.LanguageSelectorLabel = var91
@@ -2172,7 +2170,7 @@ return (function()
 				if var93 == nil then
 					var93 = "Execution path did not set earliest error to non-nil value."
 				end
-				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var415)
+				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var93)
 				local var94, var95, var96 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 				gameSettingsTab.LanguageSelectorFrame = var94
 				gameSettingsTab.LanguageSelectorLabel = var95
@@ -2196,7 +2194,7 @@ return (function()
 					elseif p10.StatusCode == 401 then
 						var86 = "Experience Source Language Request: Unauthorized"
 					elseif p10.StatusCode < 200 or p10.StatusCode >= 400 then
-						var86 = "Experience Source Language Status code: " .. p55.StatusCode
+						var86 = "Experience Source Language Status code: " .. p10.StatusCode
 					else
 						local ok, status = pcall(function()
 							-- upvalues: httpService (copy), p10 (ref), var71 (copy), var72 (copy), t_2 (copy)
@@ -2207,7 +2205,7 @@ return (function()
 						var86 = status
 					end
 					if not var87 then
-						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_1 .. " with error message: " .. var431)
+						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_1 .. " with error message: " .. var86)
 					end
 					if p8 == nil then
 						p8 = var86
@@ -2227,7 +2225,7 @@ return (function()
 							elseif p13.StatusCode == 401 then
 								var89 = "Experience Supported Language Request: Unauthorized"
 							elseif p13.StatusCode < 200 or p13.StatusCode >= 400 then
-								var89 = "Experience Supported Language Request Status code: " .. p57.StatusCode
+								var89 = "Experience Supported Language Request Status code: " .. p13.StatusCode
 							else
 								local ok, status = pcall(function()
 									-- upvalues: httpService (copy), p13 (ref), t (copy)
@@ -2239,7 +2237,7 @@ return (function()
 								var89 = status
 							end
 							if not var90 then
-								name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var420)
+								name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var89)
 							end
 							if p6 == nil then
 								p6 = var89
@@ -2256,7 +2254,7 @@ return (function()
 									elseif p15.StatusCode == 401 then
 										var91 = "User Experience Language Setting Request: Unauthorized"
 									elseif p15.StatusCode < 200 or p15.StatusCode >= 400 then
-										var91 = "User Experience Language Setting Request Status code: " .. p59.StatusCode
+										var91 = "User Experience Language Setting Request Status code: " .. p15.StatusCode
 									else
 										local ok, status = pcall(function()
 											-- upvalues: httpService (copy), p15 (ref), var74 (copy), var73 (copy), var71 (copy), t_3 (copy)
@@ -2282,7 +2280,7 @@ return (function()
 										var91 = status
 									end
 									if not var92 then
-										name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var414)
+										name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var91)
 									end
 									userExperienceLanguageSettingsCallback(var92, var91)
 								end)
@@ -2294,7 +2292,7 @@ return (function()
 							if var91 == nil then
 								var91 = "Execution path did not set earliest error to non-nil value."
 							end
-							name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var422)
+							name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var91)
 							local var92, var93, var94 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 							gameSettingsTab.LanguageSelectorFrame = var92
 							gameSettingsTab.LanguageSelectorLabel = var93
@@ -2308,7 +2306,7 @@ return (function()
 						if var95 == nil then
 							var95 = "Execution path did not set earliest error to non-nil value."
 						end
-						name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var434)
+						name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var95)
 						local var96, var97, var98 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 						gameSettingsTab.LanguageSelectorFrame = var96
 						gameSettingsTab.LanguageSelectorLabel = var97
@@ -2323,7 +2321,7 @@ return (function()
 				if var89 == nil then
 					var89 = "Execution path did not set earliest error to non-nil value."
 				end
-				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var426)
+				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var89)
 				local var90, var91, var92 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 				gameSettingsTab.LanguageSelectorFrame = var90
 				gameSettingsTab.LanguageSelectorLabel = var91
@@ -2344,7 +2342,7 @@ return (function()
 			elseif p10.StatusCode == 401 then
 				var86 = "Locale Code to Language Code Mapping Request: Unauthorized"
 			elseif p10.StatusCode < 200 or p10.StatusCode >= 400 then
-				var86 = "Locale Code to Language Code Mapping Request Status code: " .. p61.StatusCode
+				var86 = "Locale Code to Language Code Mapping Request Status code: " .. p10.StatusCode
 			else
 				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p10 (ref), t_2 (copy), t_3 (copy), t_1 (copy), localeId (copy), var73 (copy)
@@ -2366,7 +2364,7 @@ return (function()
 				var86 = status
 			end
 			if not var87 then
-				name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text .. " with error message: " .. var439)
+				name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text .. " with error message: " .. var86)
 			end
 			local var88 = var86
 			
@@ -2382,7 +2380,7 @@ return (function()
 					elseif p12.StatusCode == 401 then
 						var89 = "Experience Source Language Request: Unauthorized"
 					elseif p12.StatusCode < 200 or p12.StatusCode >= 400 then
-						var89 = "Experience Source Language Status code: " .. p63.StatusCode
+						var89 = "Experience Source Language Status code: " .. p12.StatusCode
 					else
 						local ok, status = pcall(function()
 							-- upvalues: httpService (copy), p12 (ref), var71 (copy), var72 (copy), t_2 (copy)
@@ -2393,7 +2391,7 @@ return (function()
 						var89 = status
 					end
 					if not var90 then
-						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_1 .. " with error message: " .. var431)
+						name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_1 .. " with error message: " .. var89)
 					end
 					if p8 == nil then
 						p8 = var89
@@ -2412,7 +2410,7 @@ return (function()
 							elseif p15.StatusCode == 401 then
 								var91 = "Experience Supported Language Request: Unauthorized"
 							elseif p15.StatusCode < 200 or p15.StatusCode >= 400 then
-								var91 = "Experience Supported Language Request Status code: " .. p65.StatusCode
+								var91 = "Experience Supported Language Request Status code: " .. p15.StatusCode
 							else
 								local ok, status = pcall(function()
 									-- upvalues: httpService (copy), p15 (ref), t (copy)
@@ -2424,7 +2422,7 @@ return (function()
 								var91 = status
 							end
 							if not var92 then
-								name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var420)
+								name:warning("GameSettings language selector initialization: Failed to get response from Localization API for " .. text_2 .. " with error message: " .. var91)
 							end
 							if p6 == nil then
 								p6 = var91
@@ -2441,7 +2439,7 @@ return (function()
 									elseif p17.StatusCode == 401 then
 										var93 = "User Experience Language Setting Request: Unauthorized"
 									elseif p17.StatusCode < 200 or p17.StatusCode >= 400 then
-										var93 = "User Experience Language Setting Request Status code: " .. p67.StatusCode
+										var93 = "User Experience Language Setting Request Status code: " .. p17.StatusCode
 									else
 										local ok, status = pcall(function()
 											-- upvalues: httpService (copy), p17 (ref), var74 (copy), var73 (copy), var71 (copy), t_3 (copy)
@@ -2467,7 +2465,7 @@ return (function()
 										var93 = status
 									end
 									if not var94 then
-										name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var414)
+										name:warning("GameSettings language selector initialization: Failed to get response from GameInternationalization API for " .. text_3 .. " with error message: " .. var93)
 									end
 									userExperienceLanguageSettingsCallback(var94, var93)
 								end)
@@ -2479,7 +2477,7 @@ return (function()
 							if var93 == nil then
 								var93 = "Execution path did not set earliest error to non-nil value."
 							end
-							name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var422)
+							name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var93)
 							local var94, var95, var96 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 							gameSettingsTab.LanguageSelectorFrame = var94
 							gameSettingsTab.LanguageSelectorLabel = var95
@@ -2493,7 +2491,7 @@ return (function()
 						if var97 == nil then
 							var97 = "Execution path did not set earliest error to non-nil value."
 						end
-						name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var434)
+						name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var97)
 						local var98, var99, var100 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 						gameSettingsTab.LanguageSelectorFrame = var98
 						gameSettingsTab.LanguageSelectorLabel = var99
@@ -2508,7 +2506,7 @@ return (function()
 				if var91 == nil then
 					var91 = "Execution path did not set earliest error to non-nil value."
 				end
-				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var441)
+				name:warning("GameSettings language selector initialization failed to get all required information; defaulting to player locale and disabling language selection toggle. Earliest error message: " .. var91)
 				local var92, var93, var94 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", { var8 }, 1)
 				gameSettingsTab.LanguageSelectorFrame = var92
 				gameSettingsTab.LanguageSelectorLabel = var93
@@ -3361,94 +3359,6 @@ return (function()
 		end
 	end
 	
-	local function createVoiceTypingModeSettingOptions()
-		-- upvalues: var3 (copy), name (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), corePackagesService (copy), signalsModule (copy), reportSettingsChangeForAnalytics (copy)
-		local var103
-		local list = { "standard", "continuous" }
-		
-		local function _(p11, p12)
-			-- upvalues: var3 (copy), name (copy)
-			local ok, status = pcall(function()
-				-- upvalues: var3 (copy), p11 (ref)
-				return var3:Format(p11)
-			end)
-			
-			if ok then
-				return status
-			end
-			name:debug("[GameSettings] createVoiceTypingModeSettingOptions missing translation for {}", p11)
-			
-			return p12
-		end
-		
-		local var104 = "CoreScripts.InGameMenu.GameSettings.VoiceTypingMode"
-		local ok, status = pcall(function()
-			-- upvalues: var3 (copy), var104 (ref)
-			return var3:Format(var104)
-		end)
-		
-		if ok then
-			var103 = status
-		else
-			name:debug("[GameSettings] createVoiceTypingModeSettingOptions missing translation for {}", "CoreScripts.InGameMenu.GameSettings.VoiceTypingMode")
-			var103 = "Voice typing mode"
-		end
-		local var105
-		local var106 = "Selector"
-		local t = {}
-		local var107 = "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard"
-		local ok_1, status_1 = pcall(function()
-			-- upvalues: var3 (copy), var107 (ref)
-			return var3:Format(var107)
-		end)
-		
-		if ok_1 then
-			var105 = status_1
-		else
-			name:debug("[GameSettings] createVoiceTypingModeSettingOptions missing translation for {}", "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeStandard")
-			var105 = "Manual Send"
-		end
-		local var108
-		local var109 = "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous"
-		local ok_2, status_2 = pcall(function()
-			-- upvalues: var3 (copy), var109 (ref)
-			return var3:Format(var109)
-		end)
-		
-		if ok_2 then
-			var108 = status_2
-		else
-			name:debug("[GameSettings] createVoiceTypingModeSettingOptions missing translation for {}", "CoreScripts.InGameMenu.GameSettings.VoiceTypingModeContinuous")
-			var108 = "Auto Send"
-		end
-		-- Unknown statement at pc 0: <SetList>
-		local var110, var111, var112 = utilityModule:AddNewRow(gameSettingsTab, var103, var106, t, 1)
-		gameSettingsTab.VoiceTypingModeFrame = var110
-		_ = var111
-		gameSettingsTab.VoiceTypingModeSelector = var112
-		gameSettingsTab.VoiceTypingModeFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.VoiceTypingModeFrame
-		local dictationModeSettingStore = require(corePackagesService.Workspace.Packages.ExpChat).Stores.GetDictationModeSettingStore(false)
-		gameSettingsTab.VoiceTypingModeDisposeEffect = signalsModule.createEffect(function(p11)
-			-- upvalues: list (ref), dictationModeSettingStore (ref), gameSettingsTab (copy)
-			local var113 = table.find(list, dictationModeSettingStore.getMode(p11)) or 1
-			
-			if gameSettingsTab.VoiceTypingModeSelector:GetSelectedIndex() ~= var113 then
-				gameSettingsTab.VoiceTypingModeSelector:SetSelectionIndex(var113)
-			end
-		end)
-		gameSettingsTab.VoiceTypingModeSelector.IndexChanged:connect(function(p11)
-			-- upvalues: dictationModeSettingStore (ref), list (ref), reportSettingsChangeForAnalytics (copy)
-			local mode = dictationModeSettingStore.getMode(false)
-			local var113 = list[p11]
-			
-			if var113 == nil or var113 == mode then
-				return
-			end
-			dictationModeSettingStore.setMode(var113)
-			reportSettingsChangeForAnalytics("voice_typing_mode", mode, var113)
-		end)
-	end
-	
 	local function createChatNotificationsSettingOptions()
 		-- upvalues: corePackagesService (copy), robloxTranslatorModule (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), reportSettingsChangeForAnalytics (copy)
 		local toastNotificationModule = require(corePackagesService.Workspace.Packages.ToastNotification)
@@ -3969,8 +3879,8 @@ return (function()
 						end
 					end)
 				elseif fFlagVoiceRewarmTelemetry then
-					var116, var658, var659, var660 = default_2:GetConnectDisconnectButtonAnalyticsData(false)
-					default_2.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", var116, var658, var659, var660, default_2.joinVoiceButtonContext)
+					var116, var639, var640, var641 = default_2:GetConnectDisconnectButtonAnalyticsData(false)
+					default_2.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", var116, var639, var640, var641, default_2.joinVoiceButtonContext)
 				else
 					default_2.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", default_2:GetConnectDisconnectButtonAnalyticsData(false))
 				end
@@ -4690,9 +4600,6 @@ return (function()
 	if fFlagChatSummariesSettingEnabled then
 		createChatSummariesSettingOptions()
 	end
-	if fFlagExpChatDictation then
-		createVoiceTypingModeSettingOptions()
-	end
 	if fFlagExpChatEnableFriendsTab then
 		createChatNotificationsSettingOptions()
 	end
@@ -4872,7 +4779,7 @@ return (function()
 		end
 	end
 	
-	function gameSettingsTab.V1MenuLanguageSelectionFeaturePerMillageRollout()
+	function gameSettingsTab.CloseSettingsPage()
 		-- upvalues: gameSettingsTab (ref), isInExperienceUIVREnabled (copy), isSpatial (copy), soundService (copy), var104 (write), RUUserScalePreferenceAPIEngineFeature (copy), var106 (write), var107 (write), var33 (write), var34 (write), getFFlagEnableCrossExpVoice (copy), var123 (write), getFFlagSelfViewCameraSettings (copy), videoCaptureService (copy), var105 (write), var124 (write), default_2 (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy)
 		gameSettingsTab.PageOpen = false
 		

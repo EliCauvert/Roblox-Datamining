@@ -13,8 +13,6 @@ local builderIconsModule = require(parent.BuilderIcons)
 local iconVariant = builderIconsModule.IconVariant
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useEscapeDismissModule = require(coreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
-local fFlagPlayerSupportPromptEventIngestModule = require(coreScriptsPlayerFeedback.Flags.FFlagPlayerSupportPromptEventIngest)
-local playerSupportPromptTelemetryModule = require(coreScriptsPlayerFeedback.Telemetry.PlayerSupportPromptTelemetry)
 local t = {
 	TICKET_CREATION_TEXT_FILTER_ERROR = {
 		titleKey = "TextFilterTitle",
@@ -55,7 +53,7 @@ local function _()
 end
 
 return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), t_1 (ref), fFlagPlayerSupportPromptEventIngestModule (ref), reactModule (ref), playerSupportPromptTelemetryModule (ref), useEscapeDismissModule (ref), dialog (ref), view (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconVariant (ref), text (ref), buttonVariant (ref)
+	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), t_1 (ref), reactModule (ref), useEscapeDismissModule (ref), dialog (ref), view (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconVariant (ref), text (ref), buttonVariant (ref)
 	local var1 = useTokens()
 	local var2 = useLocalization({
 		BackButton = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton",
@@ -80,36 +78,16 @@ return reactModule.memo(function(p1)
 		body = var2[var3.bodyKey],
 		hasReportLink = var3.hasReportLink
 	}
-	local reason = p1.reason or ""
-	
-	if fFlagPlayerSupportPromptEventIngestModule then
-		reactModule.useEffect(function()
-			-- upvalues: playerSupportPromptTelemetryModule (copy), reason (ref)
-			playerSupportPromptTelemetryModule.logUnavailableShown(reason)
-		end, { reason })
-	end
 	local var4 = reactModule.useCallback(function()
-		-- upvalues: fFlagPlayerSupportPromptEventIngestModule (copy), p1 (ref), playerSupportPromptTelemetryModule (copy), reason (ref)
-		if fFlagPlayerSupportPromptEventIngestModule and p1.openPlayerSupportPrompt then
-			playerSupportPromptTelemetryModule.log({
-				action = playerSupportPromptTelemetryModule.Action.RejectionRetry,
-				reason = reason
-			})
-		end
+		-- upvalues: p1 (ref)
 		p1.closePrompt()
 		
 		if p1.openPlayerSupportPrompt then
 			p1.openPlayerSupportPrompt()
 		end
-	end, if fFlagPlayerSupportPromptEventIngestModule then { p1.closePrompt, p1.openPlayerSupportPrompt, reason } else { p1.closePrompt, p1.openPlayerSupportPrompt })
+	end, { p1.closePrompt, p1.openPlayerSupportPrompt })
 	local var5 = reactModule.useCallback(function()
-		-- upvalues: fFlagPlayerSupportPromptEventIngestModule (copy), playerSupportPromptTelemetryModule (copy), reason (ref), p1 (ref)
-		if fFlagPlayerSupportPromptEventIngestModule then
-			playerSupportPromptTelemetryModule.log({
-				action = playerSupportPromptTelemetryModule.Action.ReportAbuseClicked,
-				reason = reason
-			})
-		end
+		-- upvalues: p1 (ref)
 		p1.closePrompt()
 		pcall(function()
 			local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
@@ -124,7 +102,7 @@ return reactModule.memo(function(p1)
 				return
 			end
 		end)
-	end, if fFlagPlayerSupportPromptEventIngestModule then { p1.closePrompt, reason } else { p1.closePrompt })
+	end, { p1.closePrompt })
 	useEscapeDismissModule("PlayerSupportUnavailableCancel", var4)
 	
 	return reactModule.createElement(dialog.Root, { hasBackdrop = true }, {

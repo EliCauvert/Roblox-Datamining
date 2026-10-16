@@ -31,12 +31,12 @@ function flatList.init(p1, _)
 	-- upvalues: keyExtractor (ref), array (ref), invariantModule (ref), reactModule (ref), viewModule (ref), styleSheetModule (ref), object (ref)
 	p1._virtualizedListPairs = {}
 	
-	function p2._captureRef(p2)
+	function p1._captureRef(p2)
 		-- upvalues: p1 (ref)
 		p1._listRef = p2
 	end
 	
-	function p2._getItem(p2, p3)
+	function p1._getItem(p2, p3)
 		-- upvalues: p1 (ref)
 		local numColumns = p1.props.numColumns
 		local var1 = if numColumns ~= nil then 1 else numColumns
@@ -56,7 +56,7 @@ function flatList.init(p1, _)
 		return t
 	end
 	
-	function p2._getItemCount(p4)
+	function p1._getItemCount(p4)
 		-- upvalues: p1 (ref)
 		if p4 == nil then
 			return 0
@@ -67,7 +67,7 @@ function flatList.init(p1, _)
 		return if var3 > 1 then math.ceil(#p4 / var3) else #p4
 	end
 	
-	function p2._keyExtractor(p4, p5)
+	function p1._keyExtractor(p4, p5)
 		-- upvalues: p1 (ref), keyExtractor (copy), array (copy), invariantModule (copy)
 		local numColumns = p1.props.numColumns
 		local var3 = if numColumns ~= nil then 1 else numColumns
@@ -86,7 +86,7 @@ function flatList.init(p1, _)
 		return nil
 	end
 	
-	function p2._renderer()
+	function p1._renderer()
 		-- upvalues: p1 (ref), reactModule (copy), invariantModule (copy), array (copy), viewModule (copy), styleSheetModule (copy), object (copy)
 		local listItemComponent = p1.props.ListItemComponent
 		local renderItem = p1.props.renderItem

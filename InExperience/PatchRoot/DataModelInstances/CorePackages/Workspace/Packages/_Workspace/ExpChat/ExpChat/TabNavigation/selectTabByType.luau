@@ -13,7 +13,7 @@ local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
 local fFlagExpChatGlobalTabDefaultModule = require(expChat.Flags.FFlagExpChatGlobalTabDefault)
 
 return function(p1, p2)
-	-- upvalues: fFlagExpChatGlobalTabDefaultModule (ref), universeChatChannelSelected (ref), fFlagExpChatUseChannelTabsStore (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatChannelSelected (ref), fFlagExpChatSelectTextChatTabByName (ref), textChatChannelSelected (ref), targetTextChannelPropertyChanged (ref), getChannelTabsStoreModule (ref)
+	-- upvalues: fFlagExpChatGlobalTabDefaultModule (ref), universeChatChannelSelected (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatChannelSelected (ref), fFlagExpChatSelectTextChatTabByName (ref), textChatChannelSelected (ref), targetTextChannelPropertyChanged (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref)
 	local channelName = p2.channelName
 	local tabType = p2.tabType
 	local shouldReorderTabs = p2.shouldReorderTabs
@@ -24,7 +24,7 @@ return function(p1, p2)
 		else
 			p1(universeChatChannelSelected(channelName))
 		end
-	elseif not fFlagExpChatUseChannelTabsStore and fFlagExpChatEnableFriendsTab and tabType == "FriendsChat" then
+	elseif fFlagExpChatEnableFriendsTab and tabType == "FriendsChat" then
 		p1(friendsChatChannelSelected(channelName))
 	elseif fFlagExpChatSelectTextChatTabByName and tabType == "TextChat" then
 		p1(textChatChannelSelected(channelName, shouldReorderTabs))

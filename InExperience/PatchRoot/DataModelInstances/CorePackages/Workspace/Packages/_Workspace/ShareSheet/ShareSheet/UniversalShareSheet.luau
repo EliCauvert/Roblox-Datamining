@@ -2,7 +2,6 @@
 local getUniversalShareSheetStoreModule = require(script.Parent.Stores.GetUniversalShareSheetStore)
 
 return {
-	RecipientSource = require(script.Parent.Recipients.RecipientSource).RecipientSource,
 	show = function(p1)
 		-- upvalues: getUniversalShareSheetStoreModule (ref)
 		getUniversalShareSheetStoreModule().show(p1)

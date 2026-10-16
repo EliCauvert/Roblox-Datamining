@@ -4,12 +4,13 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
 local educationalTooltip = foundationModule.EducationalTooltip
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), educationalTooltip (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), popoverSide (ref)
 	local var1 = useLocalization({
 		text = localizationStringsModule.PLAYTEST_DISABLED_TOOLTIP,
 		title = localizationStringsModule.PLAYTEST_TITLE
@@ -23,7 +24,7 @@ return function(p1)
 		LayoutOrder = p1.LayoutOrder,
 		align = popoverAlign.End,
 		isOpen = p1.isOpen,
-		onPressedOutside = p1.onPressedOutside,
+		onPressedOutside = if fFlagBuildExperienceTooltipsLightDismissModule then p1.onPressedOutside else nil,
 		side = popoverSide.Bottom,
 		text = var1.text,
 		title = var1.title

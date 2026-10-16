@@ -70,7 +70,7 @@ return function(p1)
 				size = foundationModule.Enums.IconSize.Small,
 				variant = foundationModule.Enums.ButtonVariant.Standard
 			}),
-			SaveButton = if var1.showSaveButton then reactModule.createElement(iconButton, {
+			SaveButton = reactModule.createElement(iconButton, {
 				isCircular = true,
 				LayoutOrder = 2,
 				icon = {
@@ -83,7 +83,7 @@ return function(p1)
 				end, { var1.toggleSaved, item.id }),
 				size = foundationModule.Enums.IconSize.Small,
 				variant = foundationModule.Enums.ButtonVariant.Utility
-			}) else nil
+			})
 		})
 	})
 end

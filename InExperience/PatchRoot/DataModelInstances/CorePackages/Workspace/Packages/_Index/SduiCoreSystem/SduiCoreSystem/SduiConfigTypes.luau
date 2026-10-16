@@ -21,7 +21,7 @@ return {
 		actionType = tModule.string,
 		actionParams = tModule.optional(tModule.table),
 		telemetryHandler = tModule.optional(tModule.string),
-		skipUnifiedLogging = tModule.optional(tModule.boolean)
+		skipUnifiedLogging = if require(parent.SharedFlags).FFlagSduiActionSkipUnifiedLogging then tModule.optional(tModule.boolean) else nil
 	},
 	UiComponentInterface = t,
 	SduiTemplateInterface = cryoModule.Dictionary.join(t, { componentType = tModule.optional(tModule.string) })

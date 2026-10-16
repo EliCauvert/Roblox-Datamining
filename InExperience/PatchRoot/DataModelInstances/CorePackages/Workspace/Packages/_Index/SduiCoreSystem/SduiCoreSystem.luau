@@ -53,9 +53,6 @@ return {
 	getProtoVariableMapper = function()
 		return require(script.ClientBinding.ProtoVariableMapper)
 	end,
-	getDefaultHydrationIdPaths = function()
-		return require(script.ClientBinding.defaultHydrationIdPaths)
-	end,
 	createBuilderConfig = function(p1)
 		return require(script.ClientBinding.createBuilderConfig)(p1)
 	end,

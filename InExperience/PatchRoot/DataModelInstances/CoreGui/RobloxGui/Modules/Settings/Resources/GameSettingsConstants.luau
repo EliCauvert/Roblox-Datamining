@@ -10,7 +10,6 @@ local fFlagAIRephraseSettingEnabled = require(corePackagesService.Workspace.Pack
 local updateRephraseSettingUI = game:DefineFastFlag("UpdateRephraseSettingUI", false)
 local fFlagChatSummariesSettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagChatSummariesSettingEnabled
 local fFlagExpChatEnableFriendsTab = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagExpChatEnableFriendsTab
-local fFlagExpChatDictationVoiceTypingModeSetting = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagExpChatDictationVoiceTypingModeSetting
 local fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule = require(modules.Settings.Flags.FFlagVoiceVolumeControlsEnableVoiceChatVolumeSlider)
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local reactUtilsModule = require(corePackagesService.Packages.ReactUtils)
@@ -102,9 +101,6 @@ end
 if fFlagChatSummariesSettingEnabled then
 	t.ChatSummariesFrame = 20
 end
-if fFlagExpChatDictationVoiceTypingModeSetting then
-	t.VoiceTypingModeFrame = 16
-end
 t.UiToggleRow = 200
 t.UiToggleRowCustom = 200
 t.UiToggleRowBillboards = 201
@@ -125,7 +121,6 @@ if fFlagIEMSettingsGroupsModule then
 		DeviceFrameOutput = var1(),
 		AudioDivider = var1(),
 		LanguageHeader = var1(),
-		VoiceTypingModeFrame = if fFlagExpChatDictationVoiceTypingModeSetting then var1() else nil,
 		ChatModerationFrame = var1(),
 		VoiceConnectDisconnectSelector = var1(),
 		VoiceConnectFrame = var1(),

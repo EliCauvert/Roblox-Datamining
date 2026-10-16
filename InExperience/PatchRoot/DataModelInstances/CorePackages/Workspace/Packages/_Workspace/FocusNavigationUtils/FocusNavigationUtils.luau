@@ -24,8 +24,6 @@
 	useLastInputMode = require(script.useLastInputMode),
 	useGamepadCursorEnabled = require(script.useGamepadCursorEnabled),
 	useLastInputMethod = require(script.useLastInputMethod),
-	getInputMethod = require(script.getInputMethod),
 	useButtonHold = require(script.useButtonHold),
-	ButtonHoldStateEnum = require(script.ButtonHoldStateEnum),
-	ButtonHoldCompletedSignal = require(script.ButtonHoldCompletedSignal)
+	ButtonHoldStateEnum = require(script.ButtonHoldStateEnum)
 }

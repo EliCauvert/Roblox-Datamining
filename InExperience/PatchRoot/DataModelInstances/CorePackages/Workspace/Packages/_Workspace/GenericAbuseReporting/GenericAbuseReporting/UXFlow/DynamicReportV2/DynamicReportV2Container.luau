@@ -35,11 +35,12 @@ local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local fixDynamicReportV2VRAsync = game:DefineFastFlag("FixDynamicReportV2VRAsync", false)
 local fFlagEnableInlineSurveyOnUserReport = require(parent.SharedFlags).FFlagEnableInlineSurveyOnUserReport
 local fFlagSurvBloxEventTypeEnabled = require(parent.SharedFlags).FFlagSurvBloxEventTypeEnabled
+local fFlagEnableReportingFlowForMomentsFeed = require(parent.SharedFlags).FFlagEnableReportingFlowForMomentsFeed
 local fFlagAbuseReportAttributes = require(parent.SharedFlags).FFlagAbuseReportAttributes
 local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
 return reactModule.memo(function(p1)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), reactModule (ref), fFlagAbuseReportAttributes (ref), fFlagEnableInlineSurveyOnUserReport (ref), dashModule (ref), fetchConfigWithAttributesModule (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), getNewRunId (ref), fFlagAbuseReportImproveErrorEventsModule (ref), formatErrorDetailForAnalytics (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), abuseVectorModule (ref), sendBoundaryErrorTelemetryModule (ref), useFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), coreGuiService (ref), useIsSpatial (ref), fixDynamicReportV2VRAsync (ref), useVrOverlayModule (ref), sheet (ref), dialogSize (ref), abuseReportErrorBoundaryModule (ref), abuseReportContentModule (ref), dynamicReportV2LoadingModule (ref), dynamicReportV2ErrorModule (ref), overlayProvider (ref), inlineSurveyModule (ref), inlineEventTypeModule (ref)
+	-- upvalues: useRoactService (ref), roactNetworking (ref), reactModule (ref), fFlagAbuseReportAttributes (ref), fFlagEnableInlineSurveyOnUserReport (ref), dashModule (ref), fetchConfigWithAttributesModule (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), getNewRunId (ref), fFlagAbuseReportImproveErrorEventsModule (ref), formatErrorDetailForAnalytics (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), abuseVectorModule (ref), sendBoundaryErrorTelemetryModule (ref), useFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), coreGuiService (ref), useIsSpatial (ref), fixDynamicReportV2VRAsync (ref), useVrOverlayModule (ref), sheet (ref), dialogSize (ref), abuseReportErrorBoundaryModule (ref), abuseReportContentModule (ref), dynamicReportV2LoadingModule (ref), dynamicReportV2ErrorModule (ref), overlayProvider (ref), inlineSurveyModule (ref), inlineEventTypeModule (ref)
 	local var1 = useRoactService(roactNetworking)
 	local var2, var3 = reactModule.useState(nil)
 	local var4, var5 = reactModule.useState(false)
@@ -135,11 +136,11 @@ return reactModule.memo(function(p1)
 	if fFlagEnableInlineSurveyOnUserReport then
 		var19 = reactModule.useRef(false)
 		var20 = reactModule.useCallback(function(p2)
-			-- upvalues: var19 (write), p1 (ref)
+			-- upvalues: var19 (write), fFlagEnableReportingFlowForMomentsFeed (copy), p1 (ref)
 			if p2.didSubmit then
 				var19.current = true
 				
-				if p1.onSubmit then
+				if fFlagEnableReportingFlowForMomentsFeed and p1.onSubmit then
 					p1.onSubmit()
 				end
 			end

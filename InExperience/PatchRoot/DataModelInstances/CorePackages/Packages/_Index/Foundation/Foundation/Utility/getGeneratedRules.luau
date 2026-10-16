@@ -70,16 +70,6 @@ local t_1 = {
 			return require(foundation.Generated.StyleRules.ElectricLime.LightAttribute)
 		end
 	},
-	[themeNameModule.Halloween2026] = {
-		Dark = function()
-			-- upvalues: foundation (ref)
-			return require(foundation.Generated.StyleRules.Halloween2026.DarkAttribute)
-		end,
-		Light = function()
-			-- upvalues: foundation (ref)
-			return require(foundation.Generated.StyleRules.Halloween2026.LightAttribute)
-		end
-	},
 	[themeNameModule.HyperPlum] = {
 		Dark = function()
 			-- upvalues: foundation (ref)
@@ -108,6 +98,16 @@ local t_1 = {
 		Light = function()
 			-- upvalues: foundation (ref)
 			return require(foundation.Generated.StyleRules.Kids.LightAttribute)
+		end
+	},
+	[themeNameModule.KidsClassic] = {
+		Dark = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.KidsClassic.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: foundation (ref)
+			return require(foundation.Generated.StyleRules.KidsClassic.LightAttribute)
 		end
 	},
 	[themeNameModule.KineticEnergy] = {

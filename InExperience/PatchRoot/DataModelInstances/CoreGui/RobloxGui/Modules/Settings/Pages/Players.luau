@@ -35,7 +35,6 @@ local uiblox = builderIconsModule.Migration.uiblox
 local getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule = require(robloxGui.Modules.Flags.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification)
 local var1 = if getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule() then require(corePackagesService.Workspace.Packages.GameInvite).GameInviteAnalyticsManager else nil
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagUserProfilePlatformProfile = sharedFlagsModule.FFlagUserProfilePlatformProfile
 local getFFlagLuaAppEnableOpenTypeSupport = sharedFlagsModule.GetFFlagLuaAppEnableOpenTypeSupport
 local fFlagIEMTabFocusNav = sharedFlagsModule.FFlagIEMTabFocusNav
 local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
@@ -80,7 +79,7 @@ local muteStatusIcons = default.MuteStatusIcons
 local playerMuteStatusIcons = default.PlayerMuteStatusIcons
 
 return (function()
-	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), localizationService (ref), localization (ref), uiblox (ref), builderIconsModule (ref), localPlayer (write), utilityModule (ref), blockingUtilityModule (ref), themeModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule_1 (ref), getFFlagDefaultFriendingLabelTextNonEmptyModule (ref), voiceAnalyticsModule (ref), settingsHubPlayersButtonsResponsiveThreshold (ref), getFFlagEnableConsoleJoinVoiceModule (ref), getFFlagCleanupMuteSelfButtonModule (ref), checkButtonFrameBeforeDestroy (ref), guiService (ref), blockingAnalyticsModule (ref), onBlockButtonActivatedModule (ref), robloxTranslatorModule (ref), muteStatusIcons (ref), luaFlagVoiceChatDisableSubscribeRetryForMultistream (ref), voiceChatMultistreamSubscriptionsEnabledEngineFeature (ref), default (ref), constantsModule (ref), create (ref), isSideSheetEnabledModule (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), getFFlagEnableLeaveGameUpsellEntrypointModule (ref), fFlagIEMTabFocusNav (ref), playerMuteStatusIcons (ref), reportAbuseMenuContainerPageModule (ref), var2 (ref), uDim2 (ref), enableConsoleJoinVoiceTranslation (ref), status (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), checkForNilUserIdOnPlayerList (ref), userProfileStore (ref), isEngineTruncationEnabledForIngameSettingsModule (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), playersService (ref), userInputService (ref), fFlagHidePeoplePageInviteFriends (ref), fFlagAddInviteFriendsIntegration (ref), runService (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), var1 (write), gameInviteAnalytics (ref), eventStream (ref), diag (ref), socialUtilModule (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref), checkShareGameButtonInMuteAllLayout (ref), cryoModule (ref), fFlagUserProfilePlatformProfile (ref), onlyCaptureFocusIfOnPlayerPage (ref), getFFlagDestroyPlayerCardOnLeaveModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), fFlagMenuButtonsMountWithIEMModule (ref)
+	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), localizationService (ref), localization (ref), uiblox (ref), builderIconsModule (ref), localPlayer (write), utilityModule (ref), blockingUtilityModule (ref), themeModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule_1 (ref), getFFlagDefaultFriendingLabelTextNonEmptyModule (ref), voiceAnalyticsModule (ref), settingsHubPlayersButtonsResponsiveThreshold (ref), getFFlagEnableConsoleJoinVoiceModule (ref), getFFlagCleanupMuteSelfButtonModule (ref), checkButtonFrameBeforeDestroy (ref), guiService (ref), blockingAnalyticsModule (ref), onBlockButtonActivatedModule (ref), robloxTranslatorModule (ref), muteStatusIcons (ref), luaFlagVoiceChatDisableSubscribeRetryForMultistream (ref), voiceChatMultistreamSubscriptionsEnabledEngineFeature (ref), default (ref), constantsModule (ref), create (ref), isSideSheetEnabledModule (ref), fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), getFFlagEnableLeaveGameUpsellEntrypointModule (ref), fFlagIEMTabFocusNav (ref), playerMuteStatusIcons (ref), reportAbuseMenuContainerPageModule (ref), var2 (ref), uDim2 (ref), enableConsoleJoinVoiceTranslation (ref), status (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), checkForNilUserIdOnPlayerList (ref), userProfileStore (ref), isEngineTruncationEnabledForIngameSettingsModule (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), playersService (ref), userInputService (ref), fFlagHidePeoplePageInviteFriends (ref), fFlagAddInviteFriendsIntegration (ref), runService (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), var1 (write), gameInviteAnalytics (ref), eventStream (ref), diag (ref), socialUtilModule (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref), checkShareGameButtonInMuteAllLayout (ref), cryoModule (ref), onlyCaptureFocusIfOnPlayerPage (ref), getFFlagDestroyPlayerCardOnLeaveModule (ref), reactRobloxModule (ref), reactModule (ref), menuButtonsContainerModule (ref), fFlagMenuButtonsMountWithIEMModule (ref)
 	local players = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	players.PageListLayout.Padding = UDim.new(0, 16)
 	players.playSessionId = ""
@@ -371,7 +370,7 @@ return (function()
 			friendStatus_1.Name = "FriendStatus"
 			friendStatus_1.LayoutOrder = 5
 			friendStatus_1.Selectable = true
-			utilityModule:MakeFocusState(friendStatus_1, "utility-focus-state" .. "-friendstatuslabel-" .. p10.Name)
+			utilityModule:MakeFocusState(friendStatus_1, "utility-focus-state" .. "-friendstatuslabel-" .. p2.Name)
 			friendStatus_1.Parent = p1
 		end
 	end
@@ -396,7 +395,7 @@ return (function()
 	localPlayer.FriendStatusChanged:connect(function(p3, _)
 		-- upvalues: players (ref), friendStatusCreate (ref)
 		if p3 then
-			local var14 = players.Page:FindFirstChild("PlayerLabel" .. p15.Name)
+			local var14 = players.Page:FindFirstChild("PlayerLabel" .. p3.Name)
 			
 			if var14 then
 				friendStatusCreate(var14, p3)
@@ -468,7 +467,7 @@ return (function()
 			blockButton_1.Name = "BlockButton"
 			blockButton_1.LayoutOrder = 4
 			blockButton_1.Selectable = true
-			utilityModule:MakeFocusState(blockButton_1, "utility-focus-state" .. "-blockbutton-" .. p22.Name)
+			utilityModule:MakeFocusState(blockButton_1, "utility-focus-state" .. "-blockbutton-" .. p4.Name)
 			blockButton_1.Parent = p3
 		end
 		return blockButton_1
@@ -548,7 +547,7 @@ return (function()
 				muteStatus_1.ZIndex = 3
 				muteStatus_1.Position += uDim2_1
 				muteStatus_1.ImageTransparency = var18
-				utilityModule:MakeFocusState(muteStatus, "utility-focus-state" .. "-mutestatusbutton-" .. p26.userId)
+				utilityModule:MakeFocusState(muteStatus, "utility-focus-state" .. "-mutestatusbutton-" .. p4.userId)
 				muteStatus.Parent = var17
 			end
 		end
@@ -761,7 +760,7 @@ return (function()
 				reportPlayer_2.Position = UDim2.new(1, -260, 0, 7)
 				reportPlayer_2.LayoutOrder = 3
 				reportPlayer_2.Selectable = true
-				utilityModule:MakeFocusState(reportPlayer_2, "utility-focus-state" .. "-reportplayer-" .. p33.Name)
+				utilityModule:MakeFocusState(reportPlayer_2, "utility-focus-state" .. "-reportplayer-" .. p4.Name)
 				reportPlayer_2.Parent = rightSideButtons
 			end
 		end
@@ -1227,7 +1226,7 @@ return (function()
 		inspect_1.LayoutOrder = 2
 		inspect_1.Selectable = true
 		inspect_1.Parent = p3
-		utilityModule:MakeFocusState(inspect_1, "utility-focus-state" .. "-inspect-" .. p45.Name)
+		utilityModule:MakeFocusState(inspect_1, "utility-focus-state" .. "-inspect-" .. p4.Name)
 	end
 	
 	local function resizePlatformName(p3, p4, p5)
@@ -1388,7 +1387,7 @@ return (function()
 			-- upvalues: var25 (write), p3 (ref), p4 (ref)
 			if p6 == "AbsolutePosition" and var25 then
 				local var26 = p5.AbsolutePosition.X - 20 - p3.NameLabel.AbsolutePosition.X
-				p3.NameLabel.Text = "@" .. p54.Name
+				p3.NameLabel.Text = "@" .. p4.Name
 				p3.DisplayNameLabel.Text = p4.DisplayName
 				
 				if p7 then
@@ -1403,7 +1402,7 @@ return (function()
 					end
 					var27 -= 1
 				end
-				local text = "@" .. p54.Name
+				local text = "@" .. p4.Name
 				local var28 = string.len(text)
 				while var26 < p3.NameLabel.TextBounds.X and var28 > 0 do
 					p3.NameLabel.Text = string.sub(text, 1, var28) .. "..."
@@ -1485,7 +1484,7 @@ return (function()
 						return
 					end
 				elseif not p3:FindFirstChild("NameLabel") then return end
-				p3.NameLabel.Text = "@" .. p54.Name
+				p3.NameLabel.Text = "@" .. p4.Name
 				
 				if checkForNilUserIdOnPlayerList and not p4.UserId then
 					p3.DisplayNameLabel.Text = p4.DisplayName
@@ -1548,7 +1547,7 @@ return (function()
 			local var31 = if var30 then UDim2.new(0, var30 - p3.NameLabel.AbsolutePosition.X - 20, 0, 0) else UDim2.new(1, -20, 0, 0)
 			p3.NameLabel.Size = var31
 			p3.DisplayNameLabel.Size = var31
-			p3.NameLabel.Text = if playerListRefactorUsernameFormatting then formatUsername(p4.Name) else "@" .. p54.Name
+			p3.NameLabel.Text = if playerListRefactorUsernameFormatting then formatUsername(p4.Name) else "@" .. p4.Name
 			
 			if checkForNilUserIdOnPlayerList and not p4.UserId then
 				p3.DisplayNameLabel.Text = p4.DisplayName
@@ -1664,7 +1663,7 @@ return (function()
 	end
 	
 	local var33 = function(_)
-		-- upvalues: players (ref), fFlagIEMTabFocusNav (copy), var29 (write), playersService (copy), var2 (copy), localPlayer (copy), utilityModule (copy), var19 (write), var4 (write), default (copy), fFlagHidePeoplePageInviteFriends (copy), fFlagAddInviteFriendsIntegration (copy), isSideSheetEnabledModule (copy), var3 (write), runService (copy), var8 (write), create (copy), var9 (write), uDim2 (copy), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (copy), var1 (copy), gameInviteAnalytics (copy), eventStream (copy), rbxAnalyticsService (copy), diag (copy), var21 (write), getFFlagEnableConsoleJoinVoiceModule (copy), shouldShowJoinVoiceButton (ref), var6 (write), var18 (write), var11 (write), guiService (copy), t_3 (ref), t_4 (ref), var24 (write), muteButtonUpdate (ref), socialUtilModule (copy), playerListRefactorUsernameFormatting (copy), formatUsername (copy), isEngineTruncationEnabledForIngameSettingsModule (copy), managePlayerNameCutoff (ref), friendStatusCreate (ref), resizeFriendButton (ref), resizeBlockButton (write), resizeInspectButton (ref), reportAbuseButtonCreate (ref), var22 (write), var16 (write), robloxTranslatorModule (copy), getFFlagVoiceChatUILoggingModule (copy), name (copy), players_1 (ref), constantsModule (copy), updateAllMuteButtons (ref), checkShareGameButtonInMuteAllLayout (copy), checkForNilUserIdOnPlayerList (copy), cryoModule (copy), userProfileStore (copy), resizePlatformName (ref), fFlagUserProfilePlatformProfile (copy), var30 (write), getFFlagCleanupMuteSelfButtonModule (copy), pollImage (ref), userInputService (copy), onlyCaptureFocusIfOnPlayerPage (copy)
+		-- upvalues: players (ref), fFlagIEMTabFocusNav (copy), var29 (write), playersService (copy), var2 (copy), localPlayer (copy), utilityModule (copy), var19 (write), var4 (write), default (copy), fFlagHidePeoplePageInviteFriends (copy), fFlagAddInviteFriendsIntegration (copy), isSideSheetEnabledModule (copy), var3 (write), runService (copy), var8 (write), create (copy), var9 (write), uDim2 (copy), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (copy), var1 (copy), gameInviteAnalytics (copy), eventStream (copy), rbxAnalyticsService (copy), diag (copy), var21 (write), getFFlagEnableConsoleJoinVoiceModule (copy), shouldShowJoinVoiceButton (ref), var6 (write), var18 (write), var11 (write), guiService (copy), t_3 (ref), t_4 (ref), var24 (write), muteButtonUpdate (ref), socialUtilModule (copy), playerListRefactorUsernameFormatting (copy), formatUsername (copy), isEngineTruncationEnabledForIngameSettingsModule (copy), managePlayerNameCutoff (ref), friendStatusCreate (ref), resizeFriendButton (ref), resizeBlockButton (write), resizeInspectButton (ref), reportAbuseButtonCreate (ref), var22 (write), var16 (write), robloxTranslatorModule (copy), getFFlagVoiceChatUILoggingModule (copy), name (copy), players_1 (ref), constantsModule (copy), updateAllMuteButtons (ref), checkShareGameButtonInMuteAllLayout (copy), checkForNilUserIdOnPlayerList (copy), cryoModule (copy), userProfileStore (copy), resizePlatformName (ref), var30 (write), getFFlagCleanupMuteSelfButtonModule (copy), pollImage (ref), userInputService (copy), onlyCaptureFocusIfOnPlayerPage (copy)
 		players.LastSelectableObjects = {}
 		
 		if fFlagIEMTabFocusNav and not players.ButtonsContainer.Visible then
@@ -1782,13 +1781,13 @@ return (function()
 				var39.Parent = players.Page
 				t_3[var38.Name] = var39
 			end
-			var39.Name = "PlayerLabel" .. var218.Name
+			var39.Name = "PlayerLabel" .. var38.Name
 			
 			if var19 then
 				muteButtonUpdate(var39, default.participants[tostring(var38.UserId)])
 			end
 			var39.Icon.Image = socialUtilModule.GetPlayerImage(math.max(1, var38.UserId), Enum.ThumbnailSize.Size100x100, Enum.ThumbnailType.AvatarThumbnail)
-			var39.NameLabel.Text = if playerListRefactorUsernameFormatting then formatUsername(var38.Name) else "@" .. var218.Name
+			var39.NameLabel.Text = if playerListRefactorUsernameFormatting then formatUsername(var38.Name) else "@" .. var38.Name
 			var39.ImageTransparency = 0.85
 			var39.LayoutOrder = i_1 + 1
 			
@@ -1945,7 +1944,7 @@ return (function()
 					end
 				end
 			end
-		end, fFlagUserProfilePlatformProfile)
+		end)
 		local var44 = 0
 		
 		if var19 and not var30 then

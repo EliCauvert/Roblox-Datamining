@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("UnifiedPurchasePassInProductInfoEDP2", false)
+﻿return game:DefineFastFlag("UnifiedPurchasePassInProductInfoEDP2", false) and require(script.Parent.FFlagAddFetchProductInfoAsACallback)

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXPhotoboothMomentsButtonUnderRobuxBalance", false) and require(script.Parent.FFlagAXAvatarPreviewPhotoboothMomentsButton)

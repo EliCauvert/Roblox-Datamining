@@ -15,14 +15,12 @@ local function flatten(p1)
 	for i, v in p1 do
 		for i_1, v_1 in v.categories do
 			for i_2, v_2 in if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_1.contents else v_1.messages do
-				if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint or v_2.kind ~= "Emoji" then
-					local var3 = if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_2.text else v_2.value
-					
-					if t_2[var3] == nil then
-						t_2[var3] = v_2.presetId
-						table.insert(t, var3)
-						table.insert(t_1, string.lower(var3))
-					end
+				local var3 = if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then v_2.text else v_2.value
+				
+				if t_2[var3] == nil then
+					t_2[var3] = v_2.presetId
+					table.insert(t, var3)
+					table.insert(t_1, string.lower(var3))
 				end
 			end
 		end

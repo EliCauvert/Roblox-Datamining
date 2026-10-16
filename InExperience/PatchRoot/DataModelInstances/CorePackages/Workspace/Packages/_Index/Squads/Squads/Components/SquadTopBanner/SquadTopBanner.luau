@@ -7,7 +7,6 @@ local userProfilesModule = require(parent.UserProfiles)
 local horizontalFacepileGroupModule = require(squads.Common.HorizontalFacepileGroup)
 local dependenciesModule = require(squads.dependencies)
 local fFlagIntroduceTopBannerPartyStatesModule = require(squads.Flags.FFlagIntroduceTopBannerPartyStates)
-local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local _ = require(squads.Enums.SquadActivityEnum)
 local foundation = dependenciesModule.Foundation
 local react = dependenciesModule.React
@@ -25,7 +24,7 @@ local _ = nil
 local var1 = if getFFlagEnableCrossExpVoice() then require(parent.CrossExperienceVoice).Hooks.useLastActiveParticipant else nil
 
 function SquadTopBanner(p1)
-	-- upvalues: react (ref), squadCoordinationUIChangesExperimentation (ref), fFlagIntroduceTopBannerPartyStatesModule (ref), getFFlagEnableCrossExpVoice (ref), var1 (write), useTokens (ref), useCurrentSquadParentChannelId (ref), squadExternalContractContext (ref), useLocalUserId (ref), constantsModule (ref), userProfilesModule (ref), useLocalization (ref), cryoModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), foundation (ref), fFlagDebugAppChatEnableDomLocators (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), view (ref), horizontalFacepileGroupModule (ref)
+	-- upvalues: react (ref), squadCoordinationUIChangesExperimentation (ref), fFlagIntroduceTopBannerPartyStatesModule (ref), getFFlagEnableCrossExpVoice (ref), var1 (write), useTokens (ref), useCurrentSquadParentChannelId (ref), squadExternalContractContext (ref), useLocalUserId (ref), constantsModule (ref), userProfilesModule (ref), useLocalization (ref), cryoModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), foundation (ref), fFlagDebugAppChatEnableDomLocators (ref), view (ref), horizontalFacepileGroupModule (ref)
 	local var2
 	react.useEffect(function()
 		-- upvalues: squadCoordinationUIChangesExperimentation (copy)
@@ -132,8 +131,7 @@ function SquadTopBanner(p1)
 				name = "three-people",
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				style = var5.Color.Extended.Gray.Gray_100,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-top-banner--icon" else nil
+				style = var5.Color.Extended.Gray.Gray_100
 			})
 		}) else nil,
 		HorizontalFacepileGroup = if fFlagIntroduceTopBannerPartyStatesModule then react.createElement(view, {
@@ -141,11 +139,7 @@ function SquadTopBanner(p1)
 			BackgroundTransparency = 1,
 			LayoutOrder = 1
 		}, {
-			react.createElement(horizontalFacepileGroupModule, {
-				avatarSize = var5.Size.Size_600,
-				images = var11,
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-top-banner--facepile" else nil
-			})
+			react.createElement(horizontalFacepileGroupModule, { avatarSize = var5.Size.Size_600, images = var11 })
 		}) else nil,
 		Title = react.createElement(foundation.Text, {
 			LayoutOrder = 2,
@@ -155,8 +149,7 @@ function SquadTopBanner(p1)
 			backgroundStyle = var5.Color.None,
 			Text = if fFlagIntroduceTopBannerPartyStatesModule then var10 else var6,
 			TextTruncate = Enum.TextTruncate.AtEnd,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-top-banner--title" else nil
+			TextXAlignment = Enum.TextXAlignment.Left
 		}, {
 			UIFlexItem = react.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill })
 		}),
@@ -165,8 +158,7 @@ function SquadTopBanner(p1)
 			Size = UDim2.fromOffset(24, 24),
 			backgroundStyle = var5.Color.Extended.Gray.Gray_700,
 			cornerRadius = UDim.new(0, var5.Radius.Circle),
-			Image = getStandardSizeAvatarHeadShotRbxthumb(tostring(var4)),
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-top-banner--last-active-avatar" else nil
+			Image = getStandardSizeAvatarHeadShotRbxthumb(tostring(var4))
 		})
 	})
 end

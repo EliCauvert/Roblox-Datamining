@@ -3,6 +3,8 @@ local t = {}
 t.__index = t
 t.DiagCounters = {
 	FetchedOlderConversation = game:DefineFastString("RoactChatFetchedOlderConversationCounter", "RoactChatFetchedOlderConversation"),
+	LuaShareGameInputBarEntry = game:DefineFastString("LuaShareGameRoactChatInputBarEntryCounter", "LuaShareGameRoactChatInputBarEntry"),
+	LuaShareGameInputBarInvite = game:DefineFastString("LuaShareGameRoactChatInputBarInviteCounter", "LuaShareGameRoactChatInputBarInvite"),
 	UserLoadedChat = game:DefineFastString("RoactChatUserLoadedCounter", "RoactChatUserLoaded")
 }
 t.DiagCounters.ChatDetailsProfile = game:DefineFastString("RoactChatNavigationChatDetailsProfileCounter", "RoactChatNavigationChatDetailsProfile")
@@ -38,6 +40,18 @@ function t.new(p1, p2)
 	return t_1
 end
 
+function t:withEventStream(p1)
+	self._eventStreamImpl = p1
+	
+	return self
+end
+
+function t:withDiag(p1)
+	self._diagImpl = p1
+	
+	return self
+end
+
 function t:userFetchedOlderConversations()
 	-- upvalues: t (ref)
 	if self.hasAlreadyFetchedOlderConversations then
@@ -46,6 +60,29 @@ function t:userFetchedOlderConversations()
 	self.hasAlreadyFetchedOlderConversations = true
 	self._eventStreamImpl:setRBXEventStream("roactChat", "userFetchedOlderConversations", { uid = self.localUserId })
 	self._diagImpl:reportCounter(t.DiagCounters.FetchedOlderConversation, 1)
+end
+
+function t:inputShareGameInviteSent(p1, p2, p3, p4, p5)
+	-- upvalues: t (ref)
+	self._eventStreamImpl:setRBXEventStream("touch", "inputShareGameInviteSent", {
+		btn = "roactChatInputBar",
+		placeId = tostring(p1),
+		gameId = tostring(p2),
+		senderId = p3,
+		conversationId = tostring(p4),
+		participants = table.concat(p5, ",")
+	})
+	self._diagImpl:reportCounter(t.DiagCounters.LuaShareGameInputBarInvite, 1)
+end
+
+function t:inputShareGameEntryPoint(p1)
+	-- upvalues: t (ref)
+	self._eventStreamImpl:setRBXEventStream("touch", "inputShareGameInviteSent", {
+		btn = "roactChatInputBar",
+		uid = self.localUserId,
+		cid = tostring(p1)
+	})
+	self._diagImpl:reportCounter(t.DiagCounters.LuaShareGameInputBarEntry, 1)
 end
 
 function t:loadGameLinkCardInChat(p1, p2)

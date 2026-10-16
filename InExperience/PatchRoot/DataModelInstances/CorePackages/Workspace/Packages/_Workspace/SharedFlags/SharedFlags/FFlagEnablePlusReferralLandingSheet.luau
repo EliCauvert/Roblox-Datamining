@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnablePlusReferralLandingSheet4", false) and game:GetEngineFeature("EnableSubscriptionPurchaseReferrerId")
+﻿return game:DefineFastFlag("EnablePlusReferralLandingSheet2", false) and game:GetEngineFeature("EnableSubscriptionPurchaseReferrerId")

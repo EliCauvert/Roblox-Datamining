@@ -89,30 +89,27 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,आपके ई�
 Authentication.Login.WeChat.AntiAddictionText,"बुरे एक्सपीरिएंस से बचें. पायरेटेड का इस्तेमाल न करें. खुद को सुरक्षित रखने और धोखाधड़ी से बचने के लिए सतर्क रहें. नए एक्सपीरिएंस की खोज करना, आपके दिमाग के लिए अच्छा है, लेकिन बहुत ज़्यादा आपके स्वास्थ्य को नुकसान पहुँचा सकता है. अपना समय अच्छी तरह से मैनेज करें और स्वस्थ रहें."
 Authentication.SignUp.Action.ApplyOnNextRespawn,अगली बार रीस्पॉन करने पर लागू करें
 Authentication.SignUp.Action.Cancel,
-Authentication.SignUp.Action.ContinueSetup,सेटअप जारी रखें
-Authentication.SignUp.Action.Create,क्रिएट करें
-Authentication.SignUp.Action.CreateAccountSentenceCase,अकाउंट बनाएँ
 Authentication.SignUp.Action.ExitModalLeave,छोड़ें
 Authentication.SignUp.Action.RespawnNow,अभी रीस्पॉन करें
+Authentication.SignUp.Action.StartPlay,खेलना शुरू करें
 Authentication.SignUp.Button.OKCaptialized,ठीक है
 Authentication.SignUp.Button.RetryLogIn,फिर से लॉग इन करने की कोशिश करें
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} पर मौजूद आपका अकाउंट पहले से ही Roblox अकाउंट से लिंक किया हुआ है. दोबारा लॉग इन करने की कोशिश करें.
 Authentication.SignUp.Description.BirthdayHint,तारीख डालें
-Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"अकाउंट बनाने का मतलब है कि आप आर्बिट्रेशन सहित हमारी {startTermsTag}शर्तों{endTermsTag} से सहमत हैं और आपको हमारी {startPrivacyTag}प्राइवेसी पॉलिसी{endPrivacyTag} स्वीकार है. अगर आपकी उम्र 18 साल से कम है, तो आपके पेरेंट या गार्जियन को आपके अकाउंट के लिए अनुमति देनी होगी और हमारी शर्तों से सहमत होना होगा."
 Authentication.SignUp.Description.Try,आज़माएँ
 Authentication.SignUp.Description.UsernameChanged,सब हो गया! आपका अकाउंट तैयार है और {platform} से लिंक किया हआ है. गेम में अपना अपडेट किया हुआ यूज़रनेम देखने के लिए अभी रीस्पॉन करें या यह अगली बार लागू होगा.
 Authentication.SignUp.Description.UsernameUnchanged,आप शामिल हो गए हैं! आपका अकाउंट तैयार है और {platform} से लिंक किया हुआ है. फ़्रेंड्स के साथ चैट करें और लाखों Roblox गेम्स खेलें.
 Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName,"आपका Roblox अकाउंट, {platform} पर आपके अकाउंट से लिंक हो जाएगा. कभी भी सेटिंग स्क्रीन से अनलिंक किया जा सकता है. {platform} पर किसी दूसरे अकाउंट से लिंक करने से पहले कुछ इंतज़ार करना पड़ सकता है. {ctaButton} पर क्लिक करने का मतलब है कि आप आर्बिट्रेशन क्लॉज़ सहित उपयोग की शर्तों से सहमत हैं और आपने प्राइवेसी पॉलिसी को स्वीकार किया है."
-Authentication.SignUp.Header.CancelAccountCreation,अकाउंट क्रिएट करने का प्रोसेस कैंसिल करना है?
+Authentication.SignUp.Header.CloseWithoutFinishing,पूरा किए बिना बंद करना है?
 Authentication.SignUp.Header.OneLastThing,बस एक और काम बाकी है
 Authentication.SignUp.Header.SetUpYourRobloxAccount,अपना Roblox अकाउंट सेट अप करें
 Authentication.SignUp.Heading.CountryCodeSelector,देश चुनें
 Authentication.SignUp.Heading.RetryLogIn,
 Authentication.SignUp.Label.Birthday,जन्मदिन
-Authentication.SignUp.Label.BirthdayPickerWithDateAndAge,{date} (उम्र {yearsOld} साल)
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,दिन
 Authentication.SignUp.Label.EnterYourEmail,अपना ईमेल पता डालें
+Authentication.SignUp.Label.Error.MinimumAgeNotMet,इस गेम को खेलने के लिए उम्र ज़्यादा होनी चाहिए
 Authentication.SignUp.Label.ErrorsWithPassword,पासवर्ड में कुछ गड़बड़ियाँ हैं.
 Authentication.SignUp.Label.ErrorsWithUsername,यूज़रनेम में कुछ गड़बड़ियाँ हैं.
 Authentication.SignUp.Label.ExitModalSubtitle,"आपका अकाउंट लगभग बन चुका है. छोड़ देने पर, पूरा नहीं होगा."
@@ -264,6 +261,7 @@ Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThreshold,एमिसिव �
 Common.UGCValidation.ErrorLabel.EmissiveArea_AboveThresholdNew,"{meshName} बहुत ज़्यादा एमिसिव है. एमिसिव एरिया × इंटेंसिटी, लिमिट से ज़्यादा है (फ़िलहाल {emissivePercentage}% को {maxEmissivePercentage}% या इससे कम होना चाहिए). चमक रहे एरिया को छोटा करें या इसकी EmissiveStrength कम करें."
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceeded,एमिसिव एरिया अपनी सीमा से ऊपर जा चुका है.
 Common.UGCValidation.ErrorLabel.EmissiveArea_SurfaceAreaExceededNew,"{assetTypeName} बहुत ज़्यादा एमिसिव है. एमिसिव एरिया × इंटेंसिटी, लिमिट से ज़्यादा है (फ़िलहाल {emissiveArea} को {maxEmissiveArea} या इससे कम होना चाहिए). चमक रहे एरिया को छोटा करें या इसकी EmissiveStrength कम करें."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"यह ऐसेट एमिसिव मैप का इस्तेमाल करता है, जो सिर्फ़ 'भरोसेमंद क्रिएटर प्रोग्राम' में शामिल क्रिएटर्स के लिए उपलब्ध हैं. कृपया सभी एमिसिव मैप कॉन्टेंट हटा दें या अपलोड करने से पहले प्रोग्राम में शामिल हो जाएँ."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidMaxPartTranslationAttribute,"पब्लिश किए गए ऐनिमेशन में, एक 'मैक्सिमम पार्ट ट्रांसलेशन' की मान्य वैल्यू मौजूद नहीं है. कृपया ऐनिमेशन को फिर से पब्लिश करें."
 Common.UGCValidation.ErrorLabel.EmoteAnimation_InvalidUGCAttribute,पब्लिश किए गए ऐनिमेशन में एक मान्य UGC emote मार्कर मौजूद नहीं है. कृपया ऐनिमेशन को फिर से पब्लिश करें.
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,पब्लिश किए गए ऐनिमेशन डेटा से 'मैक्सिमम पार्ट ट्रांसलेशन' का हिसाब नहीं लगाया जा सका. कृपया ऐनिमेशन को फिर से पब्लिश करें.
@@ -271,7 +269,6 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"प�
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"सिर को टॉर्सो के ऊपरी हिस्से पर रखा जाना चाहिए. सिर के बीच का हिस्सा टॉर्सो के ऊपरी हिस्से से नीचे है, जिसका मतलब है कि हेड मेश दब गया है या गलत जगह पर है."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls पर InternalOverrideFACSData प्रॉपर्टी अपलोड के समय खाली होनी चाहिए.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs को आपके सिर को {modPercent}% तक फैलाते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
-Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"डायनैमिक हेड में ज़्यादा-से-ज़्यादा {maxFacsJointCount} FACS जॉइंट हो सकते हैं, लेकिन इस हेड में {actualJointCount} हैं. कृपया FACS जॉइंट की संख्या कम करके फिर से कोशिश करें."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs को आपके सिर को {modPercent}% तक सिकोड़ते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
 Common.UGCValidation.ErrorLabel.FolderStructureMismatch,अपलोड किया गया फ़ॉर्मेट सही फ़ोल्डर स्ट्रक्चर से मैच नहीं करता है. कृपया फिर से कोशिश करें या बग रिपोर्ट फ़ाइल करें.
 Common.UGCValidation.ErrorLabel.HrdBone_OutOfBounds,"बोन {bonePath}, मेशपार्ट {partName} से बहुत दूर है, कृपया इसे मेशपार्ट के साइज़ की सीमा के करीब रखें."
@@ -414,10 +411,9 @@ CommonUI.Features.Label.Connections,कनेक्शंस
 CommonUI.Features.Label.ControllerBar.HoldPrefix,होल्ड करें
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,खेलने के लिए
-CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.CreateGames,क्रिएट करें
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,एक्सपीरिएंस
-CommonUI.Features.Label.Games,गेम्स
 CommonUI.Features.Label.GiftCards,गिफ़्ट कार्ड्स खरीदें
 CommonUI.Features.Label.Groups,कम्यूनिटी
 CommonUI.Features.Label.HelpAndSafety,हेल्प और सेफ़्टी
@@ -658,18 +654,15 @@ CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
 CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,ओरिजनल टेक्स्ट ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,इस अनुवाद में क्या समस्या है?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,गलत अनुवाद
-CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.ImageQuality,इमेज की क्वालिटी
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,अनुचित या अपमानजनक
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,स्पेलिंग या व्याकरण की समस्या
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.Untranslated,अनुवाद नहीं किया गया
 CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback,
 CoreScripts.Feedback.FeedbackReportDialog.TextSelectionHeader,चुना गया टेक्स्ट
 CoreScripts.Feedback.Help.Instructions,"गलत या अनुपलब्ध अनुवाद की रिपोर्ट करने के लिए, किसी भी टेक्स्ट पर टैप या क्लिक करें."
-CoreScripts.Feedback.Help.InstructionsWithImage,"किसी भी टेक्स्ट या इमेज को चुनकर, ऐसे किसी अनुवाद पर फ़ीडबैक दें, जो गलत है या उपलब्ध नहीं है."
 CoreScripts.Feedback.Help.MainHeader,
 CoreScripts.Feedback.Onboarding.Cancel,
 CoreScripts.Feedback.Onboarding.Instructions,
-CoreScripts.Feedback.Onboarding.InstructionsWithImage,
 CoreScripts.Feedback.Onboarding.MainHeader,हमें बताएँ कि क्या गलत है
 CoreScripts.Feedback.Onboarding.Start,शुरू करें
 CoreScripts.Feedback.SubmissionToastBody,"Roblox इस जानकारी का इस्तेमाल, एक्सपीरिएंस की अनुवाद क्वालिटी को बेहतर बनाने में करेगा"
@@ -706,7 +699,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,कैटगरी
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other,अन्य
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,कोई कैटगरी चुनें
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,खरीदारी से जुड़ी समस्या
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion,सुझाव
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ज़्यादा से ज़्यादा {MAX} कैरेक्टर
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,जानकारी *
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,चुने गए का निशान हटाएँ
@@ -714,7 +706,6 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"समस�
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"बताएँ कि क्या गायब है और आपने उसे आखिरी बार कब देखा था. अगर आपका अकाउंट हैक कर लिया गया था, तो कृपया अपना Roblox CS टिकट नंबर और कोई भी संबंधित जानकारी शामिल करें."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,अपनी रिक्वेस्ट या समस्या की जानकारी यहाँ दें. स्थिति को समझने में हमारी मदद करने के लिए ज़्यादा से ज़्यादा जानकारी दें.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"हमें बताएँ कि आपने क्या खरीदने की कोशिश की, यह कब हुआ और कुल कीमत क्या थी (जैसे कि 500 Robux / $4.99). आपको दिख रहा कोई भी गड़बड़ी मैसेज शामिल करें."
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion,यह शेयर करें कि आपको क्या जोड़ने या बेहतर बनाने का मन है और यह भी कि ऐसा करने से गेम कैसे बेहतर बनेगा.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,दुर्व्यवहार की रिपोर्ट करने की कोशिश की जा रही है?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>इसके बजाय रिपोर्ट सबमिट करें.</u>
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,चुनें
@@ -1239,19 +1230,6 @@ Corescripts.AvatarContextMenu.FriendRequestPending,फ़्रेंड रि�
 Corescripts.AvatarContextMenu.Friends,
 Corescripts.AvatarContextMenu.PlayerBlocked,ब्लॉक किया गया व्यक्ति
 Corescripts.AvatarContextMenu.Wave,वेव करें
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Charts,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.ContinueToPlay,खेलना जारी रखें
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.CrossGame,टेलीपोर्ट करें
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Curation,Roblox ने फ़ीचर किया है
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Friends,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeNonRecommendation,होम पेज पर अन्य
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.HomeRecommendation,होम पेज का सुझाव
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Moments,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Others,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.PortalAds,पोर्टल ऐड्स
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.Search,
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds,ऐड्स सर्च करें
-CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds,स्पॉन्सर्ड ऐड
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,नीचे स्क्रोल करें
 Feature.Accessibility.Action.ScrollUp,ऊपर स्क्रोल करें
@@ -1928,7 +1906,6 @@ Feature.BlockingModal.Heading.BlockUser,{DisplayName} को ब्लॉक क
 Feature.BlockingModal.Message.BlockConfirmation,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक किया है."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक कर दिया है."
 Feature.Build.Action.Add,
-Feature.Build.Action.AddCustomOption,कस्टम विकल्प जोड़ें...
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,अर्ली टेस्टर को इनवाइट करें
 Feature.Build.Action.AddPlaytesters,अर्ली टेस्टर्स को इनवाइट करें
@@ -1944,7 +1921,6 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,टेक्स्ट कॉपी करें
 Feature.Build.Action.Create,
 Feature.Build.Action.CreateDeveloperProduct,
-Feature.Build.Action.CreateNewGame,नया गेम क्रिएट करें
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,दोबारा न पूछें
@@ -1998,17 +1974,6 @@ Feature.Build.Analytics.Description.PayerConversion,"पेमेंट कर�
 Feature.Build.Analytics.Description.PlaythroughRate,"प्ले-थ्रू रेट उन विज़िट का प्रतिशत है, जिनमें पूरा प्ले सेशन पूरा किया गया. ज़्यादा रेट से पता चलता है कि प्लेयर्स को आपके एक्सपीरिएंस में शामिल होना आसान और उन्हें पूरा करना फ़ायदेमंद लगता है."
 Feature.Build.Analytics.Description.TotalPlaytime,"कुल प्लेटाइम वह कुल समय है, जिसे सभी खिलाड़ियों ने उस अवधि में आपके एक्सपीरिएंस में बिताया. आम तौर पर, प्लेटाइम बढ़ने का मतलब है कि सेशन ज़्यादा इंगेजिंग हैं."
 Feature.Build.Analytics.DurationHours,{number} घंटे
-Feature.Build.Analytics.Goal.Action.CreateAd,ऐड क्रिएट करें
-Feature.Build.Analytics.Goal.Action.SellItems,आइटम बेचें
-Feature.Build.Analytics.Goal.Action.ShareWithFriends,फ़्रेंड्स के साथ शेयर करें
-Feature.Build.Analytics.Goal.EarnRobux,
-Feature.Build.Analytics.Goal.FirstImpression,पहला इंप्रेशन अच्छा बनाएँ
-Feature.Build.Analytics.Goal.GetMorePlayers,और ज़्यादा प्लेयर्स पाएँ
-Feature.Build.Analytics.Goal.KeepPlayersComingBack,प्लेयर्स को बार-बार वापस आने के लिए प्रेरित करें
-Feature.Build.Analytics.Goal.Locked.EarnRobux,"ये आँकड़े देखने के लिए, अपने गेम में Robux कमाएँ."
-Feature.Build.Analytics.Goal.Locked.FirstImpression,"ये आँकड़े देखने के लिए, आपके पास आपका पहला प्लेयर होना चाहिए."
-Feature.Build.Analytics.Goal.Locked.GetMorePlayers,"इन आँकड़ों को देखने के लिए, आपके पास और ज़्यादा प्लेयर्स होने चाहिए."
-Feature.Build.Analytics.Goal.Locked.KeepPlayersComingBack,"ये आँकड़े देखने के लिए, आपके पास वापस आपका गेम खेलने वाला पहला प्लेयर होना चाहिए."
 Feature.Build.Analytics.KeyStats,मुख्य आँकड़े
 Feature.Build.Analytics.LastMonth,पिछले महीने
 Feature.Build.Analytics.LastWeek,
@@ -2040,14 +2005,9 @@ Feature.Build.Analytics.Summary.TotalPlaytime,प्लेयर्स द्व
 Feature.Build.Analytics.Title.Arppu,ARPPU (ऐवरेज रेवेन्यू/पेइंग यूज़र)
 Feature.Build.Analytics.Title.ConcurrentUsers,कुल प्लेयर्स
 Feature.Build.Analytics.Title.D1Retention,D1 रिटेंशन
-Feature.Build.Analytics.Title.D7Retention,D7 रिटेंशन
 Feature.Build.Analytics.Title.DailyActiveUsers,रोज़ के ऐक्टिव यूज़र्स
-Feature.Build.Analytics.Title.NewUserSessionTime,नए यूज़र का सेशन टाइम
 Feature.Build.Analytics.Title.PayerConversion,पेमेंट करने वाले यूज़र का कन्वर्ज़न
 Feature.Build.Analytics.Title.PlaythroughRate,
-Feature.Build.Analytics.Title.RobuxSpent,खर्च किए गए Robux
-Feature.Build.Analytics.Title.TopAcquisitionSource,टॉप सोर्स
-Feature.Build.Analytics.Title.TopDropOffStep,सबसे बड़ी गिरावट
 Feature.Build.Analytics.Title.TotalPlaytime,
 Feature.Build.Analytics.Visits,विज़िट
 Feature.Build.Content.NewGame,नया गेम
@@ -2091,6 +2051,7 @@ Feature.Build.Description.PlaytestLatest,"आपने अपने सबसे
 Feature.Build.Description.PlaytestLocked,"अपना पहला गेम क्रिएट करने के बाद, प्लेटेस्टिंग शुरू की जा सकती है."
 Feature.Build.Description.PlaytesterAccess,फ़्रेंड्स को अर्ली टेस्टर के रूप में इनवाइट करें या अपने गेम की ऑडियंस सेटिंग बदलकर ज़्यादा लोगों को अपना गेम खेलने दें.
 Feature.Build.Description.PricingRules,कीमत तय करने के नियम सेट करें
+Feature.Build.Description.PrivateShare,"इसे शेयर करने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
 Feature.Build.Description.PromoteGameFree,बस एक टैप में अपने गेम को ज़्यादा प्लेयर्स की नज़रों में लाएँ.
 Feature.Build.Description.PromoteGamePaid,"अपना गेम लाखों प्लेयर्स की नज़रों में लाने के लिए, एक ऐड क्रिएट करें."
 Feature.Build.Description.PromoteGameWithAdCampaign,"{durationDays}-दिन के ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ."
@@ -2120,7 +2081,6 @@ Feature.Build.Error.MonetizationOptionsLoad,विकल्प लोड नह�
 Feature.Build.Error.MonetizationPermissionDenied,आपके पास मॉनेटाइज़ेशन के विकल्प बदलने की परमिशन नहीं है.
 Feature.Build.Header.AccessSharing,ऐक्सेस और शेयरिंग
 Feature.Build.Header.AllVersions,सभी वर्ज़न
-Feature.Build.Header.Answers,जवाब
 Feature.Build.Header.ContentMaturity,कॉन्टेंट मैच्योरिटी
 Feature.Build.Header.CustomAnswer,कस्टम जवाब
 Feature.Build.Header.GameConfiguration,गेम कॉन्फ़िगरेशन
@@ -2135,7 +2095,6 @@ Feature.Build.Label.AdditionalUsage,अतिरिक्त बिल्ड क
 Feature.Build.Label.AdditionalUsed,{LIMIT} में से {USED} इस्तेमाल किया गया
 Feature.Build.Label.AdsManager,Ads Manager
 Feature.Build.Label.All,
-Feature.Build.Label.AllGames,सभी गेम्स
 Feature.Build.Label.AmountAvailable,{AMOUNT} उपलब्ध हैं
 Feature.Build.Label.Autosaved,ऑटो-सेव किया गया
 Feature.Build.Label.Available,उपलब्ध है
@@ -2160,15 +2119,12 @@ Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,आसान परफ़ॉर्मेंस रिपोर्ट
 Feature.Build.Label.Error,
-Feature.Build.Label.Filters,
 Feature.Build.Label.Free,फ़्री
 Feature.Build.Label.FreeBuildUsage,मुफ़्त बिल्ड का इस्तेमाल
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,सिर्फ़ फ़्रेंड्स के लिए
 Feature.Build.Label.GamePlays,गेम प्ले
 Feature.Build.Label.GetMoreBuildUsage,बिल्ड का और इस्तेमाल पाएँ
-Feature.Build.Label.GroupGames,ग्रुप गेम्स
-Feature.Build.Label.Groups,ग्रुप
 Feature.Build.Label.Hi,हैलो
 Feature.Build.Label.IconThumbnails,आइकॉन और थंबनेल
 Feature.Build.Label.Images2D,2D इमेज
@@ -2182,7 +2138,6 @@ Feature.Build.Label.ManagedPricing,मैनेज की जा रही क�
 Feature.Build.Label.ManagedPricingMixed,मौजूदा प्रॉडक्ट्स में मिला-जुला
 Feature.Build.Label.MaximizeForGamePlays,गेम प्ले की संख्या ज़्यादा से ज़्यादा बढ़ाएँ
 Feature.Build.Label.Models3D,3D मॉडल
-Feature.Build.Label.MyGames,मेरे गेम्स
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,कोई लिमिट नहीं
 Feature.Build.Label.NotStarted,शुरू नहीं हुआ
@@ -2222,15 +2177,6 @@ Feature.Build.Label.Thinking,प्रोसेस कर रहा है
 Feature.Build.Label.Title,टाइटल
 Feature.Build.Label.TitleDescription,टाइटल और विवरण
 Feature.Build.Label.Tool,टूल
-Feature.Build.Label.ToolAdEligibilityDone,"चेक कर लिया गया कि ऐड, शर्तों के मुताबिक है या नहीं"
-Feature.Build.Label.ToolAdEligibilityFailed,"चेक नहीं किया जा सका कि ऐड, शर्तों के मुताबिक है या नहीं"
-Feature.Build.Label.ToolAdEligibilityRunning,"चेक किया जा रहा है कि ऐड, शर्तों के मुताबिक है या नहीं"
-Feature.Build.Label.ToolAnalyticsDone,आँकड़ों का विश्लेषण कर लिया गया
-Feature.Build.Label.ToolAnalyticsFailed,आँकड़ों का विश्लेषण नहीं किया जा सका
-Feature.Build.Label.ToolAnalyticsRunning,आँकड़ों का विश्लेषण किया जा रहा है
-Feature.Build.Label.ToolApiDocsDone,API डॉक्यूमेंट्स में खोजा गया
-Feature.Build.Label.ToolApiDocsFailed,API डॉक्यूमेंट्स में खोजा नहीं जा सका
-Feature.Build.Label.ToolApiDocsRunning,API डॉक्यूमेंट्स में खोजा जा रहा है
 Feature.Build.Label.ToolAssetDone,ऐसेट डाला गया
 Feature.Build.Label.ToolAssetFailed,ऐसेट डाला नहीं जा सका
 Feature.Build.Label.ToolAssetRunning,ऐसेट डाला जा रहा है
@@ -2240,9 +2186,6 @@ Feature.Build.Label.ToolAssetSearchRunning,ऐसेट लाइब्रेर
 Feature.Build.Label.ToolClientDMDone,क्लाइंट DataModel सर्च किया गया
 Feature.Build.Label.ToolClientDMFailed,क्लाइंट DataModel सर्च नहीं किया जा सका
 Feature.Build.Label.ToolClientDMRunning,क्लाइंट DataModel सर्च किया जा रहा है
-Feature.Build.Label.ToolCompileDone,कोड को कंपाइल कर लिया गया
-Feature.Build.Label.ToolCompileFailed,कोड को कंपाइल नहीं किया जा सका
-Feature.Build.Label.ToolCompileRunning,कोड को कंपाइल किया जा रहा है
 Feature.Build.Label.ToolGameInfoDone,गेम की जानकारी अपडेट की गई
 Feature.Build.Label.ToolGameInfoFailed,गेम की जानकारी अपडेट नहीं की जा सकी
 Feature.Build.Label.ToolGameInfoRunning,गेम की जानकारी अपडेट की जा रही है
@@ -2279,9 +2222,6 @@ Feature.Build.Label.ToolQuestionRunning,एक सवाल पूछा जा 
 Feature.Build.Label.ToolReqUpdateDone,शर्तें अपडेट की गईं
 Feature.Build.Label.ToolReqUpdateFailed,शर्तें अपडेट नहीं की जा सकीं
 Feature.Build.Label.ToolReqUpdateRunning,शर्तें अपडेट की जा रही हैं
-Feature.Build.Label.ToolRestoreVersionDone,वर्ज़न को रीस्टोर किया गया
-Feature.Build.Label.ToolRestoreVersionFailed,वर्ज़न को रीस्टोर नहीं किया जा सका
-Feature.Build.Label.ToolRestoreVersionRunning,वर्ज़न को रीस्टोर किया जा रहा है
 Feature.Build.Label.ToolScriptDone,स्क्रिप्ट रन की गई
 Feature.Build.Label.ToolScriptFailed,स्क्रिप्ट रन नहीं हो सकी
 Feature.Build.Label.ToolScriptRunning,स्क्रिप्ट रन हो रही है
@@ -2297,9 +2237,6 @@ Feature.Build.Label.ToolTasksPlanRunning,आपके टास्क प्ल�
 Feature.Build.Label.ToolThumbnailDone,गेम थंबनेल सेट हो गया
 Feature.Build.Label.ToolThumbnailFailed,गेम थंबनेल सेट नहीं किया जा सका
 Feature.Build.Label.ToolThumbnailRunning,गेम थंबनेल सेट किया जा रहा है
-Feature.Build.Label.ToolVerifyDone,गड़बड़ियाँ चेक कर ली गईं
-Feature.Build.Label.ToolVerifyFailed,गड़बड़ियाँ चेक नहीं की जा सकीं
-Feature.Build.Label.ToolVerifyRunning,गड़बड़ियाँ चेक की जा रही हैं
 Feature.Build.Label.UniverseNumber,यूनिवर्स {UNIVERSE_ID}
 Feature.Build.Label.Unknown,अज्ञात
 Feature.Build.Label.UnlimitedUsed,{USED} इस्तेमाल किए गए • कोई लिमिट नहीं
@@ -2330,12 +2267,12 @@ Feature.Build.Message.BuildInternalError,बिल्ड में कोई स
 Feature.Build.Message.BuildResponseFailed,Build ने जवाब नहीं दिया. फिर से कोशिश करें.
 Feature.Build.Message.BuildStillWorking,"इस पर काम चल रहा है. इंतज़ार करते समय ऐप से बाहर निकला जा सकता है, Roblox खेला जा सकता है या कोई दूसरा प्रोजेक्ट शुरू किया जा सकता है."
 Feature.Build.Message.BuildStopped,आपने बिल्ड रोक दिया.
-Feature.Build.Message.BuildTakingLonger,इसमें थोड़ा ज़्यादा समय लग रहा है. इंतज़ार करें या कुछ और शुरू करें.
 Feature.Build.Message.BuildTemporarilyDown,बिल्ड फ़िलहाल उपलब्ध नहीं है. एक मिनट बाद फिर से कोशिश करें.
 Feature.Build.Message.CompletedTasks,पूरे हो चुके {COUNT} टास्क
 Feature.Build.Message.ConversationGone,यह बातचीत अब उपलब्ध नहीं है. नई बातचीत शुरू करें.
 Feature.Build.Message.ConversationNotFound,यह बातचीत नहीं मिली. नई बातचीत शुरू करें.
 Feature.Build.Message.CreateGameToUseBuild,"बिल्ड का इस्तेमाल शुरू करने के लिए, नया गेम क्रिएट करें."
+Feature.Build.Message.CreatedRevertedVer,रिवर्ट किया गया वर्ज़न क्रिएट हुआ.
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Creator Hub पर अपने कॉन्टेंट के लिए ऑडियंस के दायरे को बड़ा करें
 Feature.Build.Message.ExperiencesLoadFailed,एक्सपीरिएंस लोड नहीं हो सके
@@ -2362,13 +2299,17 @@ Feature.Build.Message.NoSearchResultsFound,कोई सर्च रिज़�
 Feature.Build.Message.NoVersionHistory,अभी तक कोई वर्ज़न हिस्ट्री नहीं है.
 Feature.Build.Message.OneTaskCompleted,1 टास्क पूरा हुआ
 Feature.Build.Message.OutOfBuildUsage,"आपके बिल्ड का इस्तेमाल खत्म हो गया है. क्रिएट करना जारी रखने के लिए, Robux का इस्तेमाल करने के अपने विकल्प देखें."
+Feature.Build.Message.PlaytestInviteSendFailedBody,इन यूज़र्स को इनवाइट चैट लिंक नहीं भेजा जा सका :
+Feature.Build.Message.PlaytestInviteSendFailedHint,"लिंक पाने के लिए, 'शेयर करें' बटन का इस्तेमाल करें."
 Feature.Build.Message.PlaytesterRequestFailed,हम आपकी रिक्वेस्ट पूरी नहीं कर सके. कृपया फिर से कोशिश करें.
 Feature.Build.Message.PlaytestersAdded,{MAX_INVITES} में से {INVITED_COUNT} अर्ली टेस्टर्स को इनवाइट किया गया
+Feature.Build.Message.PrivatePlaytestInvite,{username} ने आपको {experienceName} का अर्ली टेस्टर बनने के लिए इनवाइट किया है
 Feature.Build.Message.PublicPublishFailed,"आपका गेम पब्लिश किया गया, लेकिन पब्लिक नहीं किया जा सका. फिर से कोशिश करें."
 Feature.Build.Message.PublishExpandAudience,अपनी ऑडियंस बढ़ाने के लिए पब्लिश करें
 Feature.Build.Message.PublishNotReverted,आपका पब्लिश रिवर्ट नहीं हुआ. फिर से कोशिश करें.
 Feature.Build.Message.PublishPromotionUpsell,"अपना गेम पब्लिश करने पर आपको बधाई! Roblox पर ज़्यादा प्लेयर्स पाने के लिए, आपके पास {promotionCount} फ़्री प्रमोशन उपलब्ध हैं."
 Feature.Build.Message.PublishPromotionUpsellSingular,"अपना गेम पब्लिश करने पर आपको बधाई! Roblox पर ज़्यादा प्लेयर्स पाने के लिए, आपके पास 1 फ़्री प्रमोशन उपलब्ध है."
+Feature.Build.Message.PublishReverted,पब्लिश कॉन्टेंट रिवर्ट किया गया.
 Feature.Build.Message.QuestionnaireNeeded,"इस गेम को बिल्ड के बाहर एडिट किया गया था. पब्लिश करने के लिए, कॉन्टेंट क्वेश्चनेयर पूरा करें."
 Feature.Build.Message.ReadyToPlay,आपका गेम Roblox पर खेलने के लिए तैयार है!
 Feature.Build.Message.ResetHours,{HOURS} घंटे में रीसेट होगा
@@ -2426,12 +2367,14 @@ Feature.Build.Title.ExperienceAudience,एक्सपीरिएंस की 
 Feature.Build.Title.FreeUsageReached,मुफ़्त बिल्ड के इस्तेमाल की लिमिट पूरी हो गई
 Feature.Build.Title.FriendsOnlyPlay,सिर्फ़ फ़्रेंड्स ही खेल सकते हैं
 Feature.Build.Title.GameCreationDone,गेम क्रिएशन पूरा हुआ
+Feature.Build.Title.GamePrivate,यह गेम प्राइवेट है
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,यूज़र्स पाएँ
 Feature.Build.Title.ManagedPricingAcknowledgement,'मैनेज की जा रही कीमतें' फ़ीचर चालू करना है?
 Feature.Build.Title.NoMonetizationProducts,अपने गेम में कमाना शुरू करें
 Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
 Feature.Build.Title.PickCampaign,अवधि चुनें
+Feature.Build.Title.PlaytestInviteSendFailed,इनवाइट नहीं भेजे जा सके
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,इन यूज़र्स को नहीं जोड़ा जा सका :
 Feature.Build.Title.PlaytestersOnlyPlay,सिर्फ़ प्लेटेस्टर्स खेल सकते हैं
@@ -2583,7 +2526,7 @@ Feature.Catalog.Heading.PremiumOnly,सिर्फ़ Roblox Plus
 Feature.Catalog.Heading.QuantityLimitReached,क्रिएटर लिमिट पूरी हो गई
 Feature.Catalog.Heading.QuickMenu,क्विक मेन्यू
 Feature.Catalog.Heading.Resellers,रीसेलर्स
-Feature.Catalog.Heading.SellItem,
+Feature.Catalog.Heading.SellItem,आइटम बेचें
 Feature.Catalog.Heading.Sellers,विक्रेता
 Feature.Catalog.Heading.SetPrice,कीमत सेट करें
 Feature.Catalog.Heading.ShowBodyParts,बॉडी पार्ट्स दिखाएँ
@@ -3201,7 +3144,7 @@ Feature.FaceChat.Subtitle.UnsupportedDevice,"आपका हार्डवे�
 Feature.FaceChat.Subtitle.VideoPerformancePromptDisable,कैमरा बंद करने से एक्सपीरिएंस की परफ़ॉर्मेंस बेहतर हो सकती है.
 Feature.FaceChat.Subtitle.VideoUnsupported,"Roblox आपके अवतार को ऐनिमेट करने के लिए, आपके कैमरे का इस्तेमाल नहीं कर पा रहा है."
 Feature.Favorites.Label.Favorite,
-Feature.FlyoutSidePanel.Action.ContinuePlaying,
+Feature.FlyoutSidePanel.Action.ContinuePlaying,खेलना जारी रखें
 Feature.FlyoutSidePanel.Label.TooltipBody,"आपकी प्रोफ़ाइल, कॉन्टेंट और सेटिंग नई जगह चली गई हैं."
 Feature.FlyoutSidePanel.Label.TooltipTitle,<b>{itemName}</b> को मूव कर दिया गया है
 Feature.Friends.Action.AcceptFriend,
@@ -3593,11 +3536,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural,
 Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} बाकी हैं
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Robux खरीदने का मतलब है कि आप हमारी {termsLinkStart}उपयोग की शर्तों{termsLinkEnd} से सहमत हैं, जिसमें आर्बिट्रेशन क्लॉज़ और वापसी से जुड़ी पॉलिसी शामिल हैं."
-Feature.InExperienceShop.GamePass,गेम पास
 Feature.InExperienceShop.Label.BonusItem,बोनस आइटम
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा
-Feature.InExperienceShop.Label.FreeTrial,फ़्री ट्रायल
 Feature.InExperienceShop.Label.NoDescription,कोई विवरण नहीं है
 Feature.InExperienceShop.Label.OfferEndTime,"{offer}, {timeRemaining} में खत्म हो जाएगा"
 Feature.InExperienceShop.Label.PreviewBanner,यह Roblox Studio में आपकी शॉप का प्रीव्यू है. प्लेयर्स को यह प्रीव्यू नहीं दिखता है.
@@ -3609,7 +3550,6 @@ Feature.InExperienceShop.Label.Timer.Minute.Plural,{number} मिनट
 Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} सेकंड
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 सेकंड
-Feature.InExperienceShop.Label.Trial,ट्रायल
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,आपने {ROBUX_AMOUNT} Robux खरीद लिए हैं
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"क्या आपको वाकई अपनी इन्वेंट्री से इस आइटम को हमेशा के लिए डिलीट करना है? अपना फ़ैसला बदलने पर, आपको इसे किसी एक्सपीरिएंस में फिर से हासिल करना होगा."
 Feature.Item.Label.DeleteItemUndercase,आइटम डिलीट करें
@@ -3664,7 +3604,7 @@ Feature.Moments.Description.HowToCaptureStep2,कैप्चर कंट्र
 Feature.Moments.Description.HowToCaptureStep3,गेमप्ले की फ़ोटो और वीडियो कैप्चर करें
 Feature.Moments.Description.LeaveMomentsCreation,"आपके सभी बदलाव हट जाएँगे, लेकिन आप अभी भी इस कैप्चर को अपनी <b>कैप्चर</b> गैलरी में देख सकते हैं."
 Feature.Moments.Description.NoMusicResults,कोई म्यूज़िक नहीं मिला
-Feature.Moments.Description.NonInfiniteScrollEndBody,हमने आपकी फ़ीड को रोक दिया है. आपको तय करना है कि आपको देखना जारी रखना है या नहीं.
+Feature.Moments.Description.NonInfiniteScrollEndBody,"आप Moments में स्टॉपिंग पॉइंट पर हैं. देखते रहने के लिए, नीचे टैप करें."
 Feature.Moments.Description.NothingHereYet,अभी तक यहाँ कुछ भी नहीं है...
 Feature.Moments.Description.PublishMoment,अपने Moment के बारे में बताएँ
 Feature.Moments.Description.StayFriendly,चलो दोस्ताना माहौल बनाए रखते हैं
@@ -3723,14 +3663,12 @@ Feature.Moments.Label.MomentFailedToPostTitle,Moment पोस्ट नही�
 Feature.Moments.Label.MomentNoLongerAvailable,यह Moment अब उपलब्ध नहीं है.
 Feature.Moments.Label.MomentPublishedBody,आपका Moment पब्लिश हो गया है.
 Feature.Moments.Label.MomentPublishedTitle,Moment पब्लिश हो गया
-Feature.Moments.Label.MomentRemovedBody,"हमारे सुरक्षा नियमों का उल्लंघन करने की वजह से, इसे हटा दिया गया है."
-Feature.Moments.Label.MomentRemovedTitle,हमने इस Moment को हटा दिया है
 Feature.Moments.Label.MomentUnavailable,Moment उपलब्ध नहीं है
 Feature.Moments.Label.MomentUnavailableDefault,यह Moment उपलब्ध नहीं है.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,अभी तक कोई कमेंट नहीं है
-Feature.Moments.Label.NonInfiniteScrollEndTitle,देखने के लिए और भी कई Moments हैं
+Feature.Moments.Label.NonInfiniteScrollEndTitle,अभी कुछ नया नहीं है
 Feature.Moments.Label.Photos,फ़ोटो
 Feature.Moments.Label.PostDeleted,Moment डिलीट किया गया
 Feature.Moments.Label.PostRemovedBody,आपका पोस्ट किया गया Moment हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है.
@@ -3770,7 +3708,6 @@ Feature.Moments.Label.VoiceLimitReachedBody,"थोड़ी देर इंत
 Feature.Moments.Label.VoiceModerationError,आपकी स्क्रिप्ट में सुरक्षा संबंधी नियमों का पालन किया जाना चाहिए
 Feature.Moments.Label.VoicePlaceholder,अपनी वॉइसओवर स्क्रिप्ट टाइप करें. ज़्यादा-से-ज़्यादा {maxCount} कैरेक्टर होने चाहिए
 Feature.Moments.Label.VoiceTimeoutBody,वॉइसओवर जेनरेशन टाइम आउट हो गया.
-Feature.Moments.Label.VoiceTooManyNumbersError,स्क्रिप्ट में बहुत ज़्यादा नंबर हैं
 Feature.Moments.Label.WriteComment,कमेंट लिखें
 Feature.Moments.Title.Comments,कमेंट्स
 Feature.Moments.Title.CommentsWithCappedCount,कमेंट ({count}+)
@@ -3877,17 +3814,10 @@ Feature.Parents.Title.EnterParentEmailV2,पेरेंट का ईमेल 
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
 Feature.PlayerSearchResults.Label.FromSearch,सर्च से
-Feature.PlayerSearchResults.Label.NewUsername,नया यूज़रनेम
 Feature.PlayerSearchResults.Label.Previously,पहले
 Feature.PlayerSearchResults.Label.ThisIsYou,यह आप हैं
-Feature.PlayerSearchResults.Label.You,आप
-Feature.PlayerSearchResults.Label.YouAreConnections,आप दोनों एक-दूसरे के कनेक्शन में हैं
 Feature.PlayerSearchResults.Label.YouAreFollowing,आप इन्हें फ़ॉलो कर रहे/रही हैं
-Feature.PlayerSearchResults.Label.YouAreFriends,आप फ़्रेंड्स हैं
-Feature.PrivateServers.Action.CreatePrivateServer,प्राइवेट सर्वर क्रिएट करें
-Feature.PrivateServers.Action.FreeWithBlackbird,Plus सब्सक्रिप्शन के साथ फ़्री
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio में प्राइवेट सर्वर नहीं खरीदे जा सकते.
-Feature.PrivateServers.Description.VipServersNotSupported,इस गेम के लिए प्राइवेट सर्वर इस्तेमाल नहीं किए जा सकते.
 Feature.Profile.Action.AboutThisProfile,इस प्रोफ़ाइल के बारे में जानकारी
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4137,12 +4067,9 @@ Feature.RobloxSubscription.Description.Benefit.DiscountV2,"अलग-अलग �
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"आइटम और अवतार पर, पहले {trialUnlockDays} दिनों में 10% और उसके बाद 20% की छूट"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,कम Robux में ज़्यादा मज़ा. Roblox Plus को सब्सक्राइब करें.
 Feature.RobloxSubscription.Description.JoinEarly,Plus के साथ जल्दी जॉइन करें
-Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError,यह रेफ़रल लिंक अब मान्य नहीं है.
 Feature.RobloxSubscription.Description.ReferralRecipientInvite,{username} ने आपको Plus जॉइन करने के लिए इन्वाइट किया है. आपके Plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.
-Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{referralTermsUrl}"">रेफ़रल प्रोग्राम की शर्तों</a> और <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने का शुल्क अपने-आप ले लिया जाएगा."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने अपने आप शुल्क ले लिया जाएगा."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus शेयर करें और {amount} Robux पाएँ
-Feature.RobloxSubscription.Heading.ReferralRecipientEntry,Plus जॉइन करें और {amount} Robux पाएँ
 Feature.RobloxSubscription.Heading.ReferralRecipientJoin,Plus में शामिल हों और पाएँ
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,फ़्री प्राइवेट सर्वर्स
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
@@ -4159,7 +4086,6 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 महीन
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration} {trialPeriodLabel} फ़्री,{boldEnd} फिर {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,महीने
-Feature.RobloxSubscription.Message.AlreadySubscribed,आपके पास पहले से ही Plus का सब्सक्रिप्शन है. यह लिंक नए मेंबर्स के लिए है. फ़्रेंड्स को इनवाइट करने और रिवॉर्ड पाने के लिए अपना लिंक शेयर करें.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Plus का 1 हफ़्ते का फ़्री ट्रायल पाएँ
 Feature.RobloxSubscription.Title.AlreadySubscribed,अच्छी खबर
 Feature.RobloxSubscription.Title.GenericError,
@@ -4405,19 +4331,8 @@ Feature.SongDetails.Action.ReportAudio,ऑडियो रिपोर्ट क
 Feature.SongDetails.Label.InappropriateAudio,अनुचित ऑडियो
 Feature.SongDetails.Label.InappropriateThumbnail,अनुचित थंबनेल
 Feature.SongDetails.Label.SongPreview,गाने का प्रीव्यू
-Feature.SplitPane.EditAvatarButtonText,
 Feature.SplitPane.Label.CollapseAvatar,अवतार छोटा करें
 Feature.SplitPane.Label.ExpandAvatar,अवतार बड़ा करें
-Feature.SplitPane.Tour.Button.Continue,
-Feature.SplitPane.Tour.Button.FinishTour,टूर पूरा करें
-Feature.SplitPane.Tour.Button.SkipTour,टूर छोड़ें
-Feature.SplitPane.Tour.Step1.Description.Collapsed,सेव किए गए अवतार अब होम पेज पर दिखते हैं. उन्हें देखने के लिए इस स्पेस को बड़ा करें.
-Feature.SplitPane.Tour.Step1.Description.Expanded,"सेव किए गए अवतार अब होम पेज पर दिखते हैं. हर छोटी-से-छोटी जानकारी देखने के लिए, उन्हें घुमाएँ या ज़ूम इन करें."
-Feature.SplitPane.Tour.Step1.Title,खुद को होम पेज पर देखें
-Feature.SplitPane.Tour.Step2.Description,"चुनें कि आपको कैसा दिखना है. कोई गेम जॉइन करने से ठीक पहले, अपने सेव किए गए अवतारों के बीच स्विच करें."
-Feature.SplitPane.Tour.Step2.Title,अपना लुक कभी भी बदलें
-Feature.SplitPane.Tour.Step3.Description,"नए गेम्स खोजने पर फ़ोकस करने के लिए, इस स्पेस को कभी भी छिपाएँ. आपका सेव किया गया अवतार ठीक यहीं रहेगा."
-Feature.SplitPane.Tour.Step3.Title,चुनें कि आपको क्या देखना है
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,दूसरों को जोड़ें
 Feature.Squads.Action.ConnectToVoice,वॉइस से कनेक्ट करें

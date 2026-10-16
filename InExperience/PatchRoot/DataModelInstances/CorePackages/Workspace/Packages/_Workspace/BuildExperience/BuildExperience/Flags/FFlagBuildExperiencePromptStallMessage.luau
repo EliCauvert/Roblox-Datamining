@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("BuildExperiencePromptStallMessage2", false)

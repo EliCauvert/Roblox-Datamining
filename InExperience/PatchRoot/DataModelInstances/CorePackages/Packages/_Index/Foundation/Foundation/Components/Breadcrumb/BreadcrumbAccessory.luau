@@ -37,7 +37,8 @@ return reactModule.memo(function(p1)
 		testId = p1.testId
 	}) else reactModule.createElement(imageModule, {
 		Image = iconName,
-		tag = variant.tag,
+		Size = variant.size,
+		cornerRadius = variant.cornerRadius,
 		LayoutOrder = p1.LayoutOrder,
 		testId = p1.testId
 	})

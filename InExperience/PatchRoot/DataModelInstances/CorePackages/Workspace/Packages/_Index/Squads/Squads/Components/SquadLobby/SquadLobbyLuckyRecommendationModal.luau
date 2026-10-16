@@ -1,6 +1,5 @@
 ﻿local squads = script:FindFirstAncestor("Squads")
 local parent = squads.Parent
-local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local dependenciesModule = require(squads.dependencies)
 local react = dependenciesModule.React
 local foundation = dependenciesModule.Foundation
@@ -36,13 +35,10 @@ local hooksModule = require(parent.SquadsCore.Hooks)
 local useLuckyRecommendation = hooksModule.useLuckyRecommendation
 local useLuckyRecommendationAnalytics = hooksModule.useLuckyRecommendationAnalytics
 local useIsExperienceInviteRetryBlocked = hooksModule.useIsExperienceInviteRetryBlocked
-local fFlagUseSignalsForSquadExperienceInvite = dependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInvite
-local getSquadExperienceInviteStore = require(parent.SquadsCore.Stores).GetSquadExperienceInviteStore
-local useSignalState = require(parent.SignalsReact).useSignalState
 local eventNamesModule = require(parent.SquadsCore.EventNames)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), fFlagUseSignalsForSquadExperienceInvite (ref), useSignalState (ref), getSquadExperienceInviteStore (ref), useIsExperienceInviteRetryBlocked (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
+	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), useIsExperienceInviteRetryBlocked (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
 	local var1 = useTokens()
 	local var2 = useDispatch()
 	local size300 = var1.Size.Size_300
@@ -72,9 +68,9 @@ return function(p1)
 	local var12 = useSelector(react.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and (p2.Squad.Squad.currentSquad and p2.Squad.Squad.currentSquad.squadId))
 	end, {}))
-	local var13 = if fFlagUseSignalsForSquadExperienceInvite then useSignalState(getSquadExperienceInviteStore(false).getHasCurrentExperienceInvite) else useSelector(react.useCallback(function(p2)
+	local var13 = useSelector(react.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
-	end, {})) ~= nil
+	end, {}))
 	local var14 = useIsExperienceInviteRetryBlocked(var12)
 	local var15 = react.useCallback(function()
 		-- upvalues: var5 (ref), eventNamesModule (copy), phase (ref), p1 (ref)
@@ -158,7 +154,7 @@ return function(p1)
 		subtitle = var6.revealedSubtitle,
 		actionText = var6.joinText,
 		onAction = var17,
-		isActionDisabled = var13 or var14
+		isActionDisabled = if var13 == nil then var14 else true
 	} elseif not var9 then {
 		title = var6.rollingTitle,
 		subtitle = var6.rollingSubtitle,
@@ -173,8 +169,7 @@ return function(p1)
 		Title = react.createElement(text, {
 			tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
 			LayoutOrder = 1,
-			Text = var20.title,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--title" else nil
+			Text = var20.title
 		})
 	}
 	
@@ -182,8 +177,7 @@ return function(p1)
 		t.Subtitle = react.createElement(text, {
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 			LayoutOrder = 2,
-			Text = var20.subtitle,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--subtitle" else nil
+			Text = var20.subtitle
 		})
 	end
 	local t_1 = {
@@ -202,8 +196,7 @@ return function(p1)
 				tag = "radius-small",
 				LayoutOrder = 1,
 				Image = var11,
-				Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000),
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--game-thumbnail" else nil
+				Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000)
 			}) else nil,
 			GameInfo = react.createElement(view, {
 				tag = "col align-y-center fill",
@@ -213,8 +206,7 @@ return function(p1)
 				GameName = react.createElement(text, {
 					tag = "size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left text-truncate-end content-emphasis",
 					LayoutOrder = 1,
-					Text = var10.universeName,
-					testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--game-name" else nil
+					Text = var10.universeName
 				})
 			})
 		})
@@ -229,8 +221,7 @@ return function(p1)
 				shape = progressShape.Bar,
 				size = progressSize.Medium,
 				value = var18,
-				width = UDim.new(1, 0),
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--progress" else nil
+				width = UDim.new(1, 0)
 			})
 		})
 	end
@@ -239,8 +230,7 @@ return function(p1)
 			onClose = var15,
 			size = dialogSize.Small,
 			hasBackdrop = p1.hasBackdrop ~= nil or p1.hasBackdrop,
-			disablePortal = if p1.disablePortal ~= nil then false else p1.disablePortal,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog" else nil
+			disablePortal = if p1.disablePortal ~= nil then false else p1.disablePortal
 		}, {
 			Content = react.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 1 }, {
 				Main = react.createElement(view, {
@@ -257,8 +247,7 @@ return function(p1)
 						text = var20.actionText,
 						variant = buttonVariant.Standard,
 						width = UDim.new(1, 0),
-						isDisabled = var20.isActionDisabled,
-						testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--action-button" else nil
+						isDisabled = var20.isActionDisabled
 					})
 				}),
 				ResetButton = if var8 then react.createElement(view, {
@@ -267,8 +256,7 @@ return function(p1)
 					onActivated = var16,
 					Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000),
 					AnchorPoint = Vector2.new(1, 0),
-					Position = UDim2.new(1, -var1.Size.Size_1000, 0, size300),
-					testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lucky-recommendation-dialog--reroll-button" else nil
+					Position = UDim2.new(1, -var1.Size.Size_1000, 0, size300)
 				}, {
 					Icon = react.createElement(icon, {
 						name = "arrow-spin-clockwise",

@@ -101,7 +101,6 @@ return reactModule.memo(function(p1)
 						creatorName = if p1.gameData then p1.gameData.creator else nil,
 						isCreatorVerified = if p1.gameData then p1.gameData.verified else nil,
 						thumbnailUrl = p1.thumbnailUrl,
-						onThumbnailLoaded = p1.onThumbnailLoaded,
 						animation = p1.animation
 					}),
 					AutoTranslate = if p1.isAutoTranslated then reactModule.createElement(view, {

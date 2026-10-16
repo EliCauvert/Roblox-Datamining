@@ -1,14 +1,11 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
 local parent = moments.Parent
-local builderIconsModule = require(parent.BuilderIcons)
 local foundationModule = require(parent.Foundation)
-local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
 local localizationModule = require(parent.Localization)
 local momentsCommonModule = require(parent.MomentsCommon)
 local reactModule = require(parent.React)
 local button = foundationModule.Button
 local icon = foundationModule.Icon
-local iconButton = foundationModule.IconButton
 local image = foundationModule.Image
 local text = foundationModule.Text
 local view = foundationModule.View
@@ -22,7 +19,6 @@ local howToCaptureModalModule = require(moments.Components.HowToCaptureModal)
 local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
-local fFlagMomentsFtuxEducationScreenRefreshModule = require(moments.Flags.FFlagMomentsFtuxEducationScreenRefresh)
 local t = {
 	title = "Feature.Moments.Label.CaptureLibrary",
 	description = "Feature.Moments.Description.EmptyCapturesLibrary",
@@ -30,11 +26,8 @@ local t = {
 	back = "Feature.Moments.Action.Back"
 }
 
-if fFlagMomentsFtuxEducationScreenRefreshModule then
-	foundationCloudAssetsModule.preloadAsset("pictograms/captures")
-end
 return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), view (ref), formFactor (ref), fFlagMomentsFtuxEducationScreenRefreshModule (ref), iconButton (ref), builderIconsModule (ref), foundationModule (ref), icon (ref), image (ref), foundationCloudAssetsModule (ref), constantsModule (ref), text (ref), button (ref), howToCaptureModalModule (ref)
+	-- upvalues: useLocalization (ref), t (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), view (ref), formFactor (ref), icon (ref), foundationModule (ref), image (ref), constantsModule (ref), text (ref), button (ref), howToCaptureModalModule (ref)
 	local var1 = useLocalization(t)
 	local var2 = useDeviceInsets()
 	local var3 = useTokens()
@@ -62,13 +55,7 @@ return function(p1)
 					right = UDim.new(0, var2.right + var3.Padding.Medium)
 				}
 			}, {
-				CloseButton = if fFlagMomentsFtuxEducationScreenRefreshModule then reactModule.createElement(iconButton, {
-					isCircular = true,
-					icon = builderIconsModule.Icon.X,
-					onActivated = p1.onClose,
-					size = foundationModule.Enums.InputSize.Large,
-					variant = foundationModule.Enums.ButtonVariant.Utility
-				}) else reactModule.createElement(view, {
+				CloseButton = reactModule.createElement(view, {
 					tag = "size-1100-1100 padding-medium radius-circle bg-over-media-0",
 					onActivated = p1.onClose
 				}, {
@@ -93,8 +80,7 @@ return function(p1)
 			}, {
 				Graphic = reactModule.createElement(image, {
 					LayoutOrder = 1,
-					Image = if fFlagMomentsFtuxEducationScreenRefreshModule then foundationCloudAssetsModule.Assets["pictograms/captures"].assetId else constantsModule.CapturesAssetId,
-					imageStyle = if fFlagMomentsFtuxEducationScreenRefreshModule then var3.Color.Content.Emphasis else nil,
+					Image = constantsModule.CapturesAssetId,
 					ScaleType = Enum.ScaleType.Fit,
 					Size = if var4 == formFactor.Wide then UDim2.fromScale(0.7, 0.39375) else UDim2.fromScale(0.6, 0.3375),
 					SizeConstraint = Enum.SizeConstraint.RelativeXX
@@ -115,7 +101,7 @@ return function(p1)
 				}, {
 					HowToCaptureButton = reactModule.createElement(button, {
 						LayoutOrder = 1,
-						fillBehavior = if fFlagMomentsFtuxEducationScreenRefreshModule then nil else foundationModule.Enums.FillBehavior.Fill,
+						fillBehavior = foundationModule.Enums.FillBehavior.Fill,
 						onActivated = reactModule.useCallback(function()
 							-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var6 (ref)
 							fireAnalyticsEvent(eventNames.FTUXHowToCaptureButtonPressed)
@@ -124,9 +110,9 @@ return function(p1)
 						size = foundationModule.Enums.InputSize.Large,
 						text = var1.howToCapture,
 						variant = foundationModule.Enums.ButtonVariant.Emphasis,
-						width = if fFlagMomentsFtuxEducationScreenRefreshModule then nil else UDim.new(1, 0)
+						width = UDim.new(1, 0)
 					}),
-					BackButton = if not fFlagMomentsFtuxEducationScreenRefreshModule then reactModule.createElement(button, {
+					BackButton = reactModule.createElement(button, {
 						LayoutOrder = 2,
 						fillBehavior = foundationModule.Enums.FillBehavior.Fill,
 						onActivated = p1.onClose,
@@ -134,7 +120,7 @@ return function(p1)
 						text = var1.back,
 						variant = foundationModule.Enums.ButtonVariant.Standard,
 						width = UDim.new(1, 0)
-					}) else nil
+					})
 				})
 			})
 		}) else nil,

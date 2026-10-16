@@ -4,7 +4,6 @@ local otterModule = require(parent.Otter)
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
 local controlStateModule = require(foundation.Enums.ControlState)
-local flagsModule = require(foundation.Utility.Flags)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local scrimModule = require(script.Parent.Scrim)
 local scrollViewModule = require(foundation.Components.ScrollView)
@@ -24,7 +23,7 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), usePreferredInputModule (ref), useClippingRectModule (ref), reactOtterModule (ref), otterModule (ref), controlStateModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), flagsModule (ref), stateLayerAffordanceModule (ref), visibilityModule (ref), scrimModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), usePreferredInputModule (ref), useClippingRectModule (ref), reactOtterModule (ref), otterModule (ref), controlStateModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), stateLayerAffordanceModule (ref), visibilityModule (ref), scrimModule (ref)
 	local var1 = withDefaultsModule(p1, t)
 	local var2 = useTokensModule()
 	local var3, var4 = reactModule.useState(false)
@@ -35,9 +34,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	local forceHovered = var1.forceHovered or (var7 or (var9 or var11))
 	local forcePreferredInput = var1.forcePreferredInput or usePreferredInputModule()
 	local var13 = reactModule.useRef(nil)
-	local var14, var15 = useClippingRectModule(var13)
-	local var16, var17 = reactModule.useBinding(0)
-	local var18 = reactOtterModule.useMotor(0, function(p3)
+	local var14 = useClippingRectModule(var13)
+	local var15, var16 = reactModule.useBinding(0)
+	local var17 = reactOtterModule.useMotor(0, function(p3)
 		-- upvalues: var13 (ref)
 		local current = var13.current
 		
@@ -47,9 +46,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			return
 		end
 	end)
-	local var19 = reactModule.useCallback(function(p3)
-		-- upvalues: var17 (ref), var6 (ref), var4 (ref)
-		var17(p3.AbsoluteWindowSize.Y)
+	local var18 = reactModule.useCallback(function(p3)
+		-- upvalues: var16 (ref), var6 (ref), var4 (ref)
+		var16(p3.AbsoluteWindowSize.Y)
 		
 		if p3.AbsoluteWindowSize.X == 0 then
 			return
@@ -57,62 +56,62 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		var6(p3.CanvasPosition.X > 0)
 		var4(p3.AbsoluteWindowSize.X + p3.CanvasPosition.X < p3.AbsoluteCanvasSize.X - 1)
 	end, {})
-	local var20 = reactModule.useCallback(function(p3)
-		-- upvalues: var13 (ref), var18 (ref), otterModule (copy), var2 (ref)
+	local var19 = reactModule.useCallback(function(p3)
+		-- upvalues: var13 (ref), var17 (ref), otterModule (copy), var2 (ref)
 		local current = var13.current
 		
 		if not current then return end
 		local maxValue = math.max(current.AbsoluteCanvasSize.X - current.AbsoluteWindowSize.X, 0)
-		local var21 = current.AbsoluteWindowSize.X * 0.2
-		local var22 = current.CanvasPosition.X + p3 * (current.AbsoluteWindowSize.X * 0.8)
+		local var20 = current.AbsoluteWindowSize.X * 0.2
+		local var21 = current.CanvasPosition.X + p3 * (current.AbsoluteWindowSize.X * 0.8)
 		
-		if p3 > 0 and maxValue - var22 <= var21 then
-			var22 = maxValue
-		elseif p3 < 0 and var22 <= var21 then
-			var22 = 0
+		if p3 > 0 and maxValue - var21 <= var20 then
+			var21 = maxValue
+		elseif p3 < 0 and var21 <= var20 then
+			var21 = 0
 		end
-		var18(otterModule.ease(math.clamp(var22, 0, maxValue), {
+		var17(otterModule.ease(math.clamp(var21, 0, maxValue), {
 			duration = var2.Time.Time_200,
 			easingStyle = Enum.EasingStyle.Quad,
 			startingValue = current.CanvasPosition.X
 		}))
 	end, { var2 })
+	local var20 = reactModule.useCallback(function()
+		-- upvalues: var19 (ref)
+		var19(-1)
+	end, { var19 })
 	local var21 = reactModule.useCallback(function()
-		-- upvalues: var20 (ref)
-		var20(-1)
-	end, { var20 })
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var20 (ref)
-		var20(1)
-	end, { var20 })
-	local var23 = reactModule.useCallback(function(p3)
+		-- upvalues: var19 (ref)
+		var19(1)
+	end, { var19 })
+	local var22 = reactModule.useCallback(function(p3)
 		-- upvalues: var8 (ref), controlStateModule (copy)
 		var8(if p3 ~= controlStateModule.Hover then p3 == controlStateModule.Pressed else true)
 	end, {})
-	local var24 = reactModule.useCallback(function(p3)
+	local var23 = reactModule.useCallback(function(p3)
 		-- upvalues: var10 (ref), controlStateModule (copy)
 		var10(if p3 ~= controlStateModule.Hover then p3 == controlStateModule.Pressed else true)
 	end, {})
-	local var25 = reactModule.useCallback(function(p3)
+	local var24 = reactModule.useCallback(function(p3)
 		-- upvalues: var12 (ref), controlStateModule (copy)
 		var12(if p3 ~= controlStateModule.Hover then p3 == controlStateModule.Pressed else true)
 	end, {})
 	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var19 (ref)
+		-- upvalues: var13 (ref), var18 (ref)
 		if var13.current then
-			var19(var13.current)
+			var18(var13.current)
 		end
 	end, {})
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "size-full-0 auto-y", ref = p2 }), {
 		Scroll = reactModule.createElement(scrollViewModule, {
 			tag = "size-full-0 auto-y",
-			ClipsDescendants = if flagsModule.FoundationUnifiedScrimScrolling then not var15 else false,
-			onStateChanged = var23,
+			ClipsDescendants = false,
+			onStateChanged = var22,
 			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			onCanvasPositionChanged = var19,
-			onAbsoluteCanvasSizeChanged = var19,
-			onAbsoluteWindowSizeChanged = var19,
+			onCanvasPositionChanged = var18,
+			onAbsoluteCanvasSizeChanged = var18,
+			onAbsoluteWindowSizeChanged = var18,
 			scrollingFrameRef = var13,
 			selection = { Selectable = false },
 			layout = { FillDirection = Enum.FillDirection.Horizontal },
@@ -140,25 +139,25 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			ScrimStart = reactModule.createElement(scrimModule, {
 				LayoutOrder = 1,
 				size = var1.size,
-				rowHeight = var16,
+				rowHeight = var15,
 				alignment = Enum.HorizontalAlignment.Left,
 				isHovered = forceHovered,
 				preferredInput = forcePreferredInput,
 				isVisible = var1.forceScrimsVisible or var5,
-				onActivated = var21,
-				onStateChanged = var24,
+				onActivated = var20,
+				onStateChanged = var23,
 				testId = `{var1.testId}--scrim-start`
 			}),
 			ScrimEnd = reactModule.createElement(scrimModule, {
 				LayoutOrder = 2,
 				size = var1.size,
-				rowHeight = var16,
+				rowHeight = var15,
 				alignment = Enum.HorizontalAlignment.Right,
 				isHovered = forceHovered,
 				preferredInput = forcePreferredInput,
 				isVisible = var1.forceScrimsVisible or var3,
-				onActivated = var22,
-				onStateChanged = var25,
+				onActivated = var21,
+				onStateChanged = var24,
 				testId = `{var1.testId}--scrim-end`
 			})
 		})

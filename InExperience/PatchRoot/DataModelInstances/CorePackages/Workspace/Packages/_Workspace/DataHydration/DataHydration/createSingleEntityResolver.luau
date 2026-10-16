@@ -9,7 +9,7 @@ return function(p1, p2)
 	-- upvalues: t (ref), t_1 (ref), createDataCacheModule (ref), createDataResolverModule (ref)
 	local var1 = if p2 then p2.cache else t
 	local var2 = if p2 then p2.resolver else t_1
-	local var3 = createDataCacheModule(var1.ttlSeconds, var1.failedTtlSeconds, { ttlSecondsForItem = var1.ttlSecondsForItem })
+	local var3 = createDataCacheModule(var1.ttlSeconds, var1.failedTtlSeconds)
 	local var4 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = var3,
@@ -42,7 +42,6 @@ return function(p1, p2)
 			-- upvalues: var3 (ref)
 			var3.updateItem(tostring(p3), p4)
 		end,
-		getAccountResetGeneration = var4.getAccountResetGeneration,
 		clear = var4.clear,
 		dispose = var4.dispose
 	}

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ExpChatTabShortcutNavRC1", false)
+﻿return game:DefineFastFlag("ExpChatTabShortcutNav", false)

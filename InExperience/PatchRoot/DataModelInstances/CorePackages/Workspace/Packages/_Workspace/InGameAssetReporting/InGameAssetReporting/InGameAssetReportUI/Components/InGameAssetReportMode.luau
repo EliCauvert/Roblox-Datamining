@@ -18,6 +18,7 @@ local inGameAssetReportPortraitHeaderFooterModule = require(inGameAssetReporting
 local screenshotHighlighterModule = require(inGameAssetReporting.InGameAssetReportUI.Components.ScreenshotHighlighter)
 local buildReportModule = require(inGameAssetReporting.Utility.buildReport)
 local inGameAssetReportAnalyticsModule = require(inGameAssetReporting.InGameAssetReportUI.Resources.InGameAssetReportAnalytics)
+local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
 
 local var1 = function(p1)
 	return p1.point
@@ -28,7 +29,7 @@ local var2 = function(p1)
 end
 
 return function(p1)
-	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), sceneAnalysisModule (ref), experienceStateCaptureService (ref), screenshotManager (ref), cryoModule (ref), var2 (ref), inGameAssetReportAnalyticsModule (ref), var1 (ref), buildReportModule (ref), playersService (ref), userInputService (ref), withLocalization (ref), inGameAssetReportPortraitHeaderFooterModule (ref), inGameAssetReportLandscapeHeaderModule (ref), screenshotHighlighterModule (ref), inGameAssetReportErrorModalModule (ref), inGameAssetReportSubmitDialogModule (ref), inGameAssetReportCompleteModalModule (ref)
+	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), sceneAnalysisModule (ref), experienceStateCaptureService (ref), screenshotManager (ref), cryoModule (ref), var2 (ref), inGameAssetReportAnalyticsModule (ref), var1 (ref), buildReportModule (ref), playersService (ref), userInputService (ref), withLocalization (ref), fFlagUpdateInGameAssetReportingCTAs (ref), inGameAssetReportPortraitHeaderFooterModule (ref), inGameAssetReportLandscapeHeaderModule (ref), screenshotHighlighterModule (ref), inGameAssetReportErrorModalModule (ref), inGameAssetReportSubmitDialogModule (ref), inGameAssetReportCompleteModalModule (ref)
 	local var3, var4 = reactModule.useState({})
 	local var5, var6 = reactModule.useState({})
 	local var7, var8 = reactModule.useState(false)
@@ -222,7 +223,7 @@ return function(p1)
 	
 	return withLocalization({
 		mainTitle = "Feature.ReportAbuse.Label.HighlightProblem",
-		next = "CommonUI.Controls.Action.Continue"
+		next = if fFlagUpdateInGameAssetReportingCTAs then "CommonUI.Controls.Action.Continue" else "Feature.ReportAbuse.Action.Next"
 	})(function(p4)
 		-- upvalues: reactModule (copy), var36 (ref), isSmallPortraitMode (ref), inGameAssetReportPortraitHeaderFooterModule (copy), var29 (ref), var26 (ref), var27 (ref), var38 (ref), var37 (ref), var3 (ref), inGameAssetReportLandscapeHeaderModule (copy), var28 (ref), screenshotHighlighterModule (copy), var30 (ref), var25 (ref), var34 (ref), var11 (ref), inGameAssetReportErrorModalModule (copy), viewportSize (ref), var35 (ref), var7 (ref), inGameAssetReportSubmitDialogModule (copy), var31 (ref), var32 (ref), var22 (ref), var9 (ref), inGameAssetReportCompleteModalModule (copy), var33 (ref)
 		return reactModule.createElement("Frame", {

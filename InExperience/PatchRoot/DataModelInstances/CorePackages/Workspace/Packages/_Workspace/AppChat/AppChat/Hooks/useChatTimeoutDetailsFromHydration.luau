@@ -10,7 +10,7 @@ local setTimeout = luauPolyfillModule.setTimeout
 local _ = require(appChat.Models.ConversationChannels)
 local getChatModerationStatusDataHydrationModule = require(appChat.Stores.GetChatModerationStatusDataHydration)
 local getEffectiveChatTimeoutDetailsModule = require(appChat.Utils.getEffectiveChatTimeoutDetails)
-local toTimeoutEntryModule = require(appChat.Utils.toTimeoutEntry)
+local _ = require(appChat.Utils.serializeChatTimeoutRange)
 local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local name = require(appChat.Logger):new(script.Name)
 
@@ -19,8 +19,17 @@ local function areChatTimeoutDetailsEqual(p1, p2)
 	return p1.isTimedOut == p2.isTimedOut and (p1.timeoutEndTimestamp == p2.timeoutEndTimestamp and (p1.decisionEventId == p2.decisionEventId and (p1.duration == p2.duration and (not fFlagAppChatReactiveFeatureRestrictions or p1.requiresAcknowledgement == p2.requiresAcknowledgement))))
 end
 
+local function _(p1)
+	return if p1 == nil or p1.status ~= "active" then nil else {
+		endTimestamp = p1.endTimestamp,
+		decisionEventId = p1.decisionEventId,
+		duration = p1.duration,
+		requiresAcknowledgement = p1.requiresAcknowledgement
+	}
+end
+
 return function(p1)
-	-- upvalues: reactModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), createCurrentTimeSignal (ref), getChatModerationStatusDataHydrationModule (ref), name (ref), signalsModule (ref), getEffectiveChatTimeoutDetailsModule (ref), dataHydrationModule (ref), toTimeoutEntryModule (ref), areChatTimeoutDetailsEqual (ref), clearTimeout (ref), setTimeout (ref)
+	-- upvalues: reactModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), createCurrentTimeSignal (ref), getChatModerationStatusDataHydrationModule (ref), name (ref), signalsModule (ref), getEffectiveChatTimeoutDetailsModule (ref), dataHydrationModule (ref), areChatTimeoutDetailsEqual (ref), clearTimeout (ref), setTimeout (ref)
 	local var1
 	local var2 = reactModule.useMemo(function()
 		-- upvalues: fFlagAppChatReactiveFeatureRestrictions (copy), createCurrentTimeSignal (copy)
@@ -62,10 +71,23 @@ return function(p1)
 		end
 	end, { conversationId, var6, var3, var4 })
 	local var7 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var1 (write), var5 (write), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), toTimeoutEntryModule (copy), conversationId (ref), p1 (ref), var2 (ref), areChatTimeoutDetailsEqual (copy)
+		-- upvalues: signalsModule (copy), var1 (write), var5 (write), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), conversationId (ref), p1 (ref), var2 (ref), areChatTimeoutDetailsEqual (copy)
 		return signalsModule.createComputed(function(p2)
-			-- upvalues: var1 (copy), var5 (copy), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), toTimeoutEntryModule (copy), conversationId (copy), p1 (copy), var2 (copy)
-			return getEffectiveChatTimeoutDetailsModule(if var1.status(p2) ~= dataHydrationModule.DataStatus.Failed then nil else toTimeoutEntryModule(var1.data(p2)), if conversationId and var5.status(p2) ~= dataHydrationModule.DataStatus.Failed then toTimeoutEntryModule(var5.data(p2)) else nil, p1.conversationModerationType, var2(p2))
+			-- upvalues: var1 (copy), var5 (copy), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), conversationId (copy), p1 (copy), var2 (copy)
+			local var8 = var1.data(p2)
+			local var9 = var5.data(p2)
+			
+			return getEffectiveChatTimeoutDetailsModule(if var1.status(p2) == dataHydrationModule.DataStatus.Failed then nil elseif var8 == nil or var8.status ~= "active" then nil else {
+				endTimestamp = var8.endTimestamp,
+				decisionEventId = var8.decisionEventId,
+				duration = var8.duration,
+				requiresAcknowledgement = var8.requiresAcknowledgement
+			}, if not conversationId or var5.status(p2) == dataHydrationModule.DataStatus.Failed then if var9 == nil or var9.status ~= "active" then nil else {
+				endTimestamp = var9.endTimestamp,
+				decisionEventId = var9.decisionEventId,
+				duration = var9.duration,
+				requiresAcknowledgement = var9.requiresAcknowledgement
+			} else nil, p1.conversationModerationType, var2(p2))
 		end, areChatTimeoutDetailsEqual)
 	end, {
 		conversationId, var5.data, var5.status, var2, p1.conversationModerationType,

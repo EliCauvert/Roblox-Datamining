@@ -31,12 +31,10 @@ local fFlagLuaAppCompositionAlways = sharedFlagsModule.FFlagLuaAppCompositionAlw
 local fFlagLuaAppLayoutParamsInContext = sharedFlagsModule.FFlagLuaAppLayoutParamsInContext
 local fFlagLuaAppRespectClipAncestorImpressions = sharedFlagsModule.FFlagLuaAppRespectClipAncestorImpressions
 local fFlagLuaAppUseFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseFrameBoundsImpressions
-local fFlagSduiOptionSelectorHeaderComponent = sharedFlagsModule.FFlagSduiOptionSelectorHeaderComponent
-local fFlagSduiOptionSelectorAnchorTag = sharedFlagsModule.FFlagSduiOptionSelectorAnchorTag
 local t = {}
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), t (ref), useTokens (ref), reactModule (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsReactModule (ref), useCollectionLayoutParams (ref), findAnalyticsField (ref), sduiBuilder (ref), sduiComponentType (ref), useCollectionAnalyticsContext (ref), useCollectionImpressionsSignal (ref), getImpressionsTagModule (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), useScrollTelemetryCallbackModule (ref), sduiCollectionAnalyticsBuilder (ref), getSduiComponentWrapper (ref), sduiCollectionItemModule (ref), fFlagSduiOptionSelectorAnchorTag (ref), variableItemWidthCarousel (ref), fFlagSduiOptionSelectorHeaderComponent (ref), waitForPropWrapper (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), scrollDetector (ref)
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), t (ref), useTokens (ref), reactModule (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsReactModule (ref), useCollectionLayoutParams (ref), findAnalyticsField (ref), sduiBuilder (ref), sduiComponentType (ref), useCollectionAnalyticsContext (ref), useCollectionImpressionsSignal (ref), getImpressionsTagModule (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), useScrollTelemetryCallbackModule (ref), sduiCollectionAnalyticsBuilder (ref), getSduiComponentWrapper (ref), sduiCollectionItemModule (ref), variableItemWidthCarousel (ref), waitForPropWrapper (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), scrollDetector (ref)
 	local sduiContext = p1.sduiContext
 	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or sduiContext.appCompositionEnabled)
 	local items = p1.items or t
@@ -81,7 +79,6 @@ return reactModule.memo(function(p1)
 			Position = p1.position,
 			title = p1.title or "",
 			subtitle = p1.subtitle,
-			headerComponent = if fFlagSduiOptionSelectorHeaderComponent then p1.headerComponent else nil,
 			calculateItemWidth = reactModule.useCallback(function(p2)
 				-- upvalues: var8 (ref)
 				return var8[p2] or 0
@@ -93,7 +90,7 @@ return reactModule.memo(function(p1)
 			itemPadding = itemPadding,
 			onCanvasPositionChanged = var12,
 			renderItem = reactModule.useCallback(function(p2, p3)
-				-- upvalues: sduiContext (ref), sduiErrors (copy), var13 (ref), reactModule (copy), findAnalyticsField (copy), t (copy), sduiBuilder (copy), var7 (ref), sduiCollectionAnalyticsBuilder (copy), getSduiComponentWrapper (copy), var5 (ref), p1 (ref), sduiCollectionItemModule (copy), itemHeight (ref), var14 (ref), fFlagSduiOptionSelectorAnchorTag (copy)
+				-- upvalues: sduiContext (ref), sduiErrors (copy), var13 (ref), reactModule (copy), findAnalyticsField (copy), t (copy), sduiBuilder (copy), var7 (ref), sduiCollectionAnalyticsBuilder (copy), getSduiComponentWrapper (copy), var5 (ref), p1 (ref), sduiCollectionItemModule (copy), itemHeight (ref), var14 (ref)
 				if not p2 then
 					sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilItem, {
 						componentType = "VariableItemWidthCarousel",
@@ -105,49 +102,47 @@ return reactModule.memo(function(p1)
 				end
 				local componentType = findAnalyticsField("componentType", p2.analyticsData or t) or sduiBuilder.getComponentType(p2, sduiContext)
 				
-				if not componentType then
-					sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentType, {
-						componentType = "VariableItemWidthCarousel",
-						name = var13,
-						message = `Nil componentType in VariableItemWidthCarousel.renderItem at index {p3}`
-					}, sduiContext.appPage)
+				if componentType then
+					local t_1 = {
+						itemPosition = p3,
+						itemComponentType = componentType,
+						componentType = componentType
+					}
+					var7.current[p3] = sduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(sduiContext, p2.analyticsData, nil, t_1, componentType)
 					
-					return reactModule.createElement(reactModule.Fragment)
-				end
-				local t_1 = {
-					itemPosition = p3,
-					itemComponentType = componentType,
-					componentType = componentType
-				}
-				var7.current[p3] = sduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(sduiContext, p2.analyticsData, nil, t_1, componentType)
-				
-				return reactModule.createElement(sduiCollectionItemModule, {
-					index = p3,
-					impressionsTag = var13,
-					automaticSize = Enum.AutomaticSize.X,
-					size = UDim2.new(0, 0, 0, itemHeight),
-					onItemSizeChanged = var14,
-					tag = if fFlagSduiOptionSelectorAnchorTag and p1.itemTags then p1.itemTags[p3] else nil
-				}, {
-					Item = reactModule.createElement(getSduiComponentWrapper(p2), {
-						componentConfig = p2,
-						sduiContext = sduiContext,
-						parentAnalyticsContext = if p2.__isClientBinding then nil else var5,
-						extraLocalProps = {
-							index = p3,
-							scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
-							verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
-							selectionOrder = if p1.selectionOrderBase then p1.selectionOrderBase + p3 else nil
-						},
-						debugName = `{componentType}_{p3}`,
-						localAnalyticsData = t_1
+					return reactModule.createElement(sduiCollectionItemModule, {
+						index = p3,
+						impressionsTag = var13,
+						automaticSize = Enum.AutomaticSize.X,
+						size = UDim2.new(0, 0, 0, itemHeight),
+						onItemSizeChanged = var14
+					}, {
+						Item = reactModule.createElement(getSduiComponentWrapper(p2), {
+							componentConfig = p2,
+							sduiContext = sduiContext,
+							parentAnalyticsContext = if p2.__isClientBinding then nil else var5,
+							extraLocalProps = {
+								index = p3,
+								scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal,
+								verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
+								selectionOrder = if p1.selectionOrderBase then p1.selectionOrderBase + p3 else nil
+							},
+							debugName = `{componentType}_{p3}`,
+							localAnalyticsData = t_1
+						})
 					})
-				})
+				end
+				sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentType, {
+					componentType = "VariableItemWidthCarousel",
+					name = var13,
+					message = `Nil componentType in VariableItemWidthCarousel.renderItem at index {p3}`
+				}, sduiContext.appPage)
+				
+				return reactModule.createElement(reactModule.Fragment)
 			end, {
 				sduiContext, var5, var13, itemHeight, var14,
 				p1.scrollViewPositionChangedSignal, p1.verticalScrollingFrameRef,
-				p1.selectionOrderBase,
-				if fFlagSduiOptionSelectorAnchorTag then p1.itemTags else nil
+				p1.selectionOrderBase
 			}),
 			scrollingFrameRef = var10,
 			sideMargin = var4

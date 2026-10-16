@@ -1,6 +1,4 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local _ = require(momentsCreation.Parent.MomentsTypes)
-local fFlagMomentsTTSDraftRestoreModule = require(momentsCreation.Flags.FFlagMomentsTTSDraftRestore)
+﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsTypes)
 
 local function _(p1)
 	return {
@@ -56,16 +54,8 @@ local _ = function(p1)
 	return t
 end
 
-local _ = function(p1)
-	return {
-		text = p1.text,
-		voiceId = p1.voiceId,
-		startTime = p1.startTime
-	}
-end
-
 local function serialize(p1)
-	-- upvalues: encodeTextOverlay (ref), fFlagMomentsTTSDraftRestoreModule (ref)
+	-- upvalues: encodeTextOverlay (ref)
 	local edits = p1.edits
 	local t = { trim = edits.trim, music = edits.music }
 	
@@ -96,14 +86,6 @@ local function serialize(p1)
 			table.insert(t_1, t_2)
 		end
 		t.sticker = t_1
-	end
-	if fFlagMomentsTTSDraftRestoreModule and edits.voice then
-		local voice = edits.voice
-		t.voice = {
-			text = voice.text,
-			voiceId = voice.voiceId,
-			startTime = voice.startTime
-		}
 	end
 	return {
 		userId = p1.userId,
@@ -212,18 +194,10 @@ local function decodeMusic(p2)
 	return if type(p2) == "table" then if type(p2.assetId) == "number" and type(p2.startTime) == "number" then { assetId = p2.assetId, startTime = p2.startTime } else nil else nil
 end
 
-local function decodeVoice(p2)
-	return if type(p2) == "table" then if type(p2.text) == "string" and p2.text ~= "" and (type(p2.voiceId) == "number" and type(p2.startTime) == "number") then {
-		text = p2.text,
-		voiceId = p2.voiceId,
-		startTime = p2.startTime
-	} else nil else nil
-end
-
 return {
 	serialize = serialize,
 	deserialize = function(p2)
-		-- upvalues: decodeTrim (ref), decodeMusic (ref), decodeTextOverlay (ref), decodeStickerOverlay (ref), fFlagMomentsTTSDraftRestoreModule (ref), decodeVoice (ref)
+		-- upvalues: decodeTrim (ref), decodeMusic (ref), decodeTextOverlay (ref), decodeStickerOverlay (ref)
 		if type(p2) ~= "table" then
 			return nil
 		end
@@ -305,9 +279,6 @@ return {
 				return nil
 			end
 			t.sticker = t_1
-		end
-		if fFlagMomentsTTSDraftRestoreModule and edits.voice ~= nil then
-			t.voice = decodeVoice(edits.voice)
 		end
 		return if type(p2.userId) == "string" then if not (p2.description ~= nil and type(p2.description) ~= "string") then if not (p2.commentsEnabled ~= nil and type(p2.commentsEnabled) ~= "boolean") then if type(p2.lastSaveTime) == "number" then {
 			userId = p2.userId,

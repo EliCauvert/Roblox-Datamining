@@ -17,33 +17,32 @@ local momentLayoutModule = require(script.Parent.momentLayout)
 local momentOverlayInsetContextModule = require(script.Parent.MomentOverlayInsetContext)
 local momentPushedFeedSafeAreaContextModule = require(script.Parent.MomentPushedFeedSafeAreaContext)
 local momentsFixSkeletonNavBarInset = game:DefineFastFlag("MomentsFixSkeletonNavBarInset", false)
-local fFlagMomentsFeedAboveNavBarModule = require(moments.Flags.FFlagMomentsFeedAboveNavBar)
+local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
 
 return function(p1)
-	-- upvalues: useTokens (ref), useFormFactor (ref), useCompositionLayout (ref), useDeviceInsets (ref), formFactor (ref), reactModule (ref), momentPushedFeedSafeAreaContextModule (ref), momentOverlayInsetContextModule (ref), momentsFixSkeletonNavBarInset (ref), fFlagMomentsFeedAboveNavBarModule (ref), view (ref), skeleton (ref), radius (ref), momentLayoutModule (ref), gradientBackdrop (ref)
+	-- upvalues: useTokens (ref), useFormFactor (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), formFactor (ref), reactModule (ref), momentPushedFeedSafeAreaContextModule (ref), momentOverlayInsetContextModule (ref), momentsFixSkeletonNavBarInset (ref), view (ref), skeleton (ref), radius (ref), momentLayoutModule (ref), gradientBackdrop (ref)
 	local var1 = useTokens()
 	local var2 = useFormFactor()
-	local var3 = useCompositionLayout()
-	local var4 = useDeviceInsets()
-	local var5 = var2 == formFactor.Wide
-	local margin = var3.margin
-	local var6, var7 = reactModule.useBinding(UDim2.fromScale(1, 0))
-	local var8 = 2 * var1.Padding.XLarge
-	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref), var8 (ref)
-		var7(UDim2.new(1, 0, 0, p2.AbsoluteSize.Y + var8))
-	end, { var8 })
-	local var10 = momentPushedFeedSafeAreaContextModule.useMomentPushedFeedSafeArea()
-	local var11 = if var10 ~= nil then var4 else var10
-	local var12 = momentOverlayInsetContextModule.useMomentOverlayInset()
-	local var13 = if momentsFixSkeletonNavBarInset then var12 else 0
-	local var14 = var13 > 0
+	local var3 = nil
+	local var4 = nil
 	
-	if fFlagMomentsFeedAboveNavBarModule then
-		var13 = 0
-		var14 = var12 > 0
+	if fFlagMomentsUseCompositionLibraryModule then
+		var3 = useCompositionLayout()
+		var4 = useDeviceInsets()
 	end
-	local var15 = if var14 then var1.Padding.Medium + var13 else math.max(var1.Padding.XLarge, if var11 ~= nil then 0 else var11.bottom) + var13
+	local var5 = var2 == formFactor.Wide
+	local var6 = if var3 ~= nil then var1.Padding.XLarge else var3.margin
+	local var7, var8 = reactModule.useBinding(UDim2.fromScale(1, 0))
+	local var9 = 2 * var1.Padding.XLarge
+	local var10 = reactModule.useCallback(function(p2)
+		-- upvalues: var8 (ref), var9 (ref)
+		var8(UDim2.new(1, 0, 0, p2.AbsoluteSize.Y + var9))
+	end, { var9 })
+	local var11 = momentPushedFeedSafeAreaContextModule.useMomentPushedFeedSafeArea()
+	local var12 = if var11 ~= nil then var4 else var11
+	local var13 = if momentsFixSkeletonNavBarInset then momentOverlayInsetContextModule.useMomentOverlayInset() else 0
+	local maxValue = math.max(var1.Padding.XLarge, if var12 ~= nil then 0 else var12.bottom)
+	maxValue = if fFlagMomentsUseCompositionLibraryModule and var13 > 0 then var1.Padding.Medium + var13 else maxValue + var13
 	local t = {
 		CreatorRow = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -71,7 +70,7 @@ return function(p1)
 			Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_1000)
 		})
 	}
-	local BOTTOM_UI_MAX_SIZE = momentLayoutModule.BOTTOM_UI_MAX_SIZE
+	local var14 = if fFlagMomentsUseCompositionLibraryModule then momentLayoutModule.BOTTOM_UI_MAX_SIZE elseif var5 then momentLayoutModule.BOTTOM_UI_MAX_SIZE else nil
 	
 	return reactModule.createElement(view, {
 		tag = "size-full clip bg-surface-0",
@@ -87,32 +86,32 @@ return function(p1)
 			Backdrop = reactModule.createElement(gradientBackdrop, {
 				rotation = 270,
 				color3 = var1.Color.Common.Scrim.Color3,
-				size = var6
+				size = var7
 			}),
-			InfoFrame = if var11 ~= nil then reactModule.createElement(view, {
+			InfoFrame = if var12 ~= nil then reactModule.createElement(view, {
 				tag = "col align-x-left align-y-bottom gap-medium position-bottom-center anchor-bottom-center size-full-0 auto-y",
 				testId = "--moments-moment-item-skeleton-info-frame",
 				ZIndex = 2,
 				padding = {
 					top = UDim.new(0, var1.Padding.XLarge),
-					left = UDim.new(0, margin),
-					right = UDim.new(0, margin),
-					bottom = UDim.new(0, var15)
+					left = UDim.new(0, var6),
+					right = UDim.new(0, var6),
+					bottom = UDim.new(0, maxValue)
 				},
-				sizeConstraint = { MaxSize = BOTTOM_UI_MAX_SIZE },
-				onAbsoluteSizeChanged = var9
+				sizeConstraint = { MaxSize = var14 },
+				onAbsoluteSizeChanged = var10
 			}, t) else reactModule.createElement(view, {
 				tag = "col align-x-left align-y-bottom gap-medium position-bottom-center anchor-bottom-center size-full-0 auto-y",
 				testId = "--moments-moment-item-skeleton-info-frame",
 				ZIndex = 2,
 				padding = {
 					top = UDim.new(0, var1.Padding.XLarge),
-					left = UDim.new(0, math.max(margin, var11.left)),
-					right = UDim.new(0, math.max(margin, var11.right)),
-					bottom = UDim.new(0, var15)
+					left = UDim.new(0, math.max(var6, var12.left)),
+					right = UDim.new(0, math.max(var6, var12.right)),
+					bottom = UDim.new(0, maxValue)
 				},
-				sizeConstraint = { MaxSize = BOTTOM_UI_MAX_SIZE },
-				onAbsoluteSizeChanged = var9
+				sizeConstraint = { MaxSize = var14 },
+				onAbsoluteSizeChanged = var10
 			}, t)
 		})
 	})

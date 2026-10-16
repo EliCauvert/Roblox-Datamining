@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildExperienceChatCardEmphasis2", false)
+﻿return game:DefineFastFlag("BuildExperienceChatCardEmphasis", false)

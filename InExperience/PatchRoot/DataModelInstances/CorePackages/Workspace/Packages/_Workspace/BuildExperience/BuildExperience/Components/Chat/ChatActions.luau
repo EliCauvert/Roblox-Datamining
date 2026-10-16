@@ -111,8 +111,7 @@ return function(p1)
 			LayoutOrder = 1,
 			testId = "ChatActions.ResourceAttachments",
 			attachments = resourceAttachments,
-			onRemove = p1.onRemoveResourceAttachment,
-			onActivateAttachment = p1.onActivateResourceAttachment
+			onRemove = p1.onRemoveResourceAttachment
 		}) else nil,
 		Images = if var6 then reactModule.createElement(var4, {
 			testId = "ChatActions.Images",

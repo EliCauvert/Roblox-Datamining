@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("BuildExperienceChatSheetReversedContent", false) and require(script.Parent.FFlagBuildExperienceUseFoundationSheet)

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXSduiSortLegacyBottomPadding", false)

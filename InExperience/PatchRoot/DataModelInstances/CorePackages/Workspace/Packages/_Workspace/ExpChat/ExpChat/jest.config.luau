@@ -6,7 +6,7 @@ return {
 	testMatch = { "**/*.test" },
 	testPathIgnorePatterns = { "GetChatModerationStore", "GetUserChatSettingsStore" },
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.ErrorLogHandler,
+		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,
 		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
 		jestConfigsModule.setupFiles.RetryTimes,

@@ -8,16 +8,14 @@ local roduxContacts = dependenciesModule.RoduxContacts
 local promise = dependenciesModule.Promise
 local llama = dependenciesModule.llama
 local fFlagMigrateFriendshipStatusesRemainingActions = require(parent_1.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
-local friendsStoreChallengeNetworkModule = require(parent.Networking.friendsStoreChallengeNetwork)
-local fFlagEnableFriendsStoreChallengeInterceptor = require(parent_1.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local var1 = require(parent_1.DataHydration).Friends.FriendsStore.get()
 
 return function(p1)
-	-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), fFlagEnableFriendsStoreChallengeInterceptor (ref), friendsStoreChallengeNetworkModule (ref), networkingFriends (ref), networkingContacts (ref), llama (ref), promise (ref), roduxContacts (ref)
+	-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (ref), var1 (ref), networkingFriends (ref), networkingContacts (ref), llama (ref), promise (ref), roduxContacts (ref)
 	return {
 		requestFriendship = function(p2)
-			-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (copy), var1 (copy), fFlagEnableFriendsStoreChallengeInterceptor (copy), friendsStoreChallengeNetworkModule (copy), p1 (ref), networkingFriends (copy)
-			return if fFlagMigrateFriendshipStatusesRemainingActions then var1.RequestFriendship(p2.contactId, nil, { isContact = true }, if fFlagEnableFriendsStoreChallengeInterceptor then friendsStoreChallengeNetworkModule else nil) else p1(networkingFriends.RequestFriendshipFromContactId.API(p2))
+			-- upvalues: fFlagMigrateFriendshipStatusesRemainingActions (copy), var1 (copy), p1 (ref), networkingFriends (copy)
+			return if fFlagMigrateFriendshipStatusesRemainingActions then var1.RequestFriendship(p2.contactId, nil, { isContact = true }) else p1(networkingFriends.RequestFriendshipFromContactId.API(p2))
 		end,
 		findContacts = function()
 			-- upvalues: p1 (ref), networkingContacts (copy)

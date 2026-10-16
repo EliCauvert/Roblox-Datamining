@@ -10,24 +10,26 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
+local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local mediaSelectorModule = require(script.Parent.MediaSelector)
 local _ = require(script.Parent.types)
 
 return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), mediaSelectorModule (ref)
+	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), mediaSelectorModule (ref)
 	local var1 = reactModule.useRef(nil)
 	
 	return reactModule.createElement(view, { tag = "col size-full bg-surface-0" }, {
 		Header = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = {
-				["composition-content-header row align-y-center gap-small size-full-0 auto-y padding-y-medium"] = true
+				["composition-content-header row align-y-center gap-small size-full-0 auto-y padding-y-medium"] = true,
+				["padding-x-medium"] = not fFlagBuildDesktopReadinessModule
 			}
 		}, {
 			Back = reactModule.createElement(iconButton, {
 				LayoutOrder = 1,
 				isCircular = true,
-				icon = iconName.ChevronLargeLeft,
+				icon = if fFlagBuildDesktopReadinessModule then iconName.ChevronLargeLeft else iconName.ArrowLargeLeft,
 				onActivated = reactModule.useCallback(function()
 					-- upvalues: var1 (ref), p1 (ref)
 					if var1.current then
@@ -37,7 +39,7 @@ return function(p1)
 					end
 					p1.onClose()
 				end, { p1.onClose }),
-				size = inputSize.Large,
+				size = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium,
 				variant = buttonVariant.Utility
 			}),
 			Title = reactModule.createElement(text, {
@@ -46,7 +48,13 @@ return function(p1)
 				Text = useLocalization({ title = localizationStringsModule.MEDIA_SELECTION_TITLE }).title
 			})
 		}),
-		Content = reactModule.createElement(view, { LayoutOrder = 2, tag = { ["shrink size-full"] = true } }, {
+		Content = reactModule.createElement(view, {
+			LayoutOrder = 2,
+			tag = {
+				["shrink size-full"] = true,
+				["composition-content-body col gap-xlarge padding-large"] = not fFlagBuildDesktopReadinessModule
+			}
+		}, {
 			MediaSelector = reactModule.createElement(mediaSelectorModule, {
 				universeId = p1.universeId,
 				onBack = p1.onClose,

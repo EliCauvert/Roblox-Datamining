@@ -6,11 +6,10 @@ local useFeed = require(moments.Components.Feed.FeedContext).useFeed
 local momentOverlayInsetContextModule = require(moments.Components.Feed.Items.Moment.MomentOverlayInsetContext)
 local momentUnavailableViewModule = require(script.Parent.MomentUnavailableView)
 local useIsPagerItemActive = require(moments.Components.VerticalPager).useIsPagerItemActive
-local fFlagMomentsFeedAboveNavBarModule = require(moments.Flags.FFlagMomentsFeedAboveNavBar)
 local usePreferences = foundationModule.Hooks.usePreferences
 
 return function(p1)
-	-- upvalues: useFeed (ref), usePreferences (ref), momentOverlayInsetContextModule (ref), fFlagMomentsFeedAboveNavBarModule (ref), useIsPagerItemActive (ref), reactModule (ref), momentUnavailableViewModule (ref)
+	-- upvalues: useFeed (ref), usePreferences (ref), momentOverlayInsetContextModule (ref), useIsPagerItemActive (ref), reactModule (ref), momentUnavailableViewModule (ref)
 	local var1 = useFeed()
 	local scrollToNext = var1.scrollToNext
 	
@@ -24,6 +23,6 @@ return function(p1)
 			end
 		end, { scrollToNext }),
 		animate = var1.isActiveFeed and (var1.isPlaybackActive and (useIsPagerItemActive() and not usePreferences().reducedMotion)),
-		bottomInset = if fFlagMomentsFeedAboveNavBarModule then 0 else momentOverlayInsetContextModule.useMomentOverlayInset()
+		bottomInset = momentOverlayInsetContextModule.useMomentOverlayInset()
 	})
 end

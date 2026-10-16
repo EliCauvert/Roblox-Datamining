@@ -44,6 +44,7 @@ return {
 	FallAnimations = "FallAnimations",
 	ClimbAnimations = "ClimbAnimations",
 	SwimAnimations = "SwimAnimations",
+	Photobooth = "Photobooth",
 	MakeupLooks = "MakeupLooks",
 	EyeMakeup = "EyeMakeup",
 	FaceMakeup = "FaceMakeup",

@@ -4,12 +4,11 @@ local guiService = game:GetService("GuiService")
 local userInputService = game:GetService("UserInputService")
 local expChat = script:FindFirstAncestor("ExpChat")
 local parent = expChat.Parent
+local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local expChatSharedModule = require(parent.ExpChatShared)
 local focusUtils = require(parent.Chrome).FocusUtils
-local useFocusInputBar = require(parent.ChatUIPrimitives).Hooks.useFocusInputBar
-local useInputBarTabNavigation = require(parent.ChatUIPrimitives).Hooks.useInputBarTabNavigation
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
 local IXPServiceWrapper = require(parent.IxpServiceWrapper).IXPServiceWrapper
 local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
@@ -49,8 +48,6 @@ local chatInputBarV2DictationModule = require(script.Parent.ChatInputBarV2Dictat
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local fFlagExpChatPresetChatAutocompleteEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatAutocompleteEnabled)
 local fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatAutocompleteAnalyticsEnabled)
-local fFlagExpChatEmojiDropdownShowAnalyticsModule = require(expChat.Flags.FFlagExpChatEmojiDropdownShowAnalytics)
-local fFlagExpChatEmojiDropdownDismissAnalyticsModule = require(expChat.Flags.FFlagExpChatEmojiDropdownDismissAnalytics)
 local fFlagExpChatUniverseChatPresetEnabledModule = require(expChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
 local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 local fFlagExpChatNewInputBarModule = require(expChat.Flags.FFlagExpChatNewInputBar)
@@ -70,13 +67,13 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local fFlagChromeChatGamepadSupportFix = sharedFlagsModule.FFlagChromeChatGamepadSupportFix
 local fFlagConsoleChatUseChromeFocusUtils = sharedFlagsModule.FFlagConsoleChatUseChromeFocusUtils
+local fFlagExpChatFocusViaLastModeFixModule = require(expChat.Flags.FFlagExpChatFocusViaLastModeFix)
 local chatOptimizeCommandProcessing = game:DefineFastFlag("ChatOptimizeCommandProcessing", false)
 local expChatDoNotSetCursorPosition = game:DefineFastFlag("ExpChatDoNotSetCursorPosition", false)
 local fFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule = require(expChat.Flags.FFlagExpChatBackspaceExitsTargetChannelInGlobalTabs)
 local fFlagExpChatFixBackspaceNilTargetChannel = expChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local fFlagExpChatDictation = sharedFlagsModule.FFlagExpChatDictation
-local fFlagExpChatTabShortcutNav = sharedFlagsModule.FFlagExpChatTabShortcutNav
 local fFlagExpChatDictation_1 = fFlagExpChatDictation or sharedFlagsModule.FFlagExpChatContinuousDictation
 local dictationInputBarModule = require(script.Parent.Dictation.DictationInputBar)
 local useSendTelemetryModule = require(script.Parent.Dictation.useSendTelemetry)
@@ -250,7 +247,7 @@ return reactModule.memo(localizationModule.connect(function(p4)
 	end
 	return { targetTextChannelDisplayName = list }
 end)(function(p5)
-	-- upvalues: reactModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStoreModule (ref), expChatMainInputBarClickAnalytics (ref), fFlagExpChatDictation_1 (ref), useSendTelemetryModule (ref), fFlagExpChatEmojiDropdownDismissAnalyticsModule (ref), reactFocusNavigationModule (ref), signalsReactModule (ref), var2 (ref), getMessagesStoreModule (ref), fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), fFlagExpChatTabShortcutNav (ref), useFocusInputBar (ref), useInputBarTabNavigation (ref), signalsModule (ref), textChatService (ref), var5 (write), autocompleteTextModule (ref), initializeCommandsModule (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), var4 (write), initializeEmojisModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), var6 (write), initializeGlobalCommandsModule (ref), initialCommandsModule (ref), var1 (ref), fFlagExpChatDictation (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), guiService (ref), fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (ref), usePresetAutocompleteAnalyticsModule (ref), presetSearchModule (ref), var3 (ref), sendPresetModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), presetEntryTextModule (ref), expChatDoNotSetCursorPosition (ref), expChatPresetChatIXPExposure (ref), IXPServiceWrapper (ref), expChatPresetChatIXPLayerName (ref), fFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), playersService (ref), fFlagEnableConsoleExpControls (ref), fFlagChromeChatGamepadSupportFix (ref), onChatInputBarFocusLost (ref), actionBindableEvent (ref), useEffectChatInputBarFocus (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), expChatPresetAutocompleteSearchVariants (ref), expChatPresetChatAutocompleteExperimentation (ref), sortCommandResultsCallbackModule (ref), sortEmojiResultsCallbackModule (ref), list (ref), var7 (write), RBXTeamCommand (ref), var8 (write), RBXWhisperCommand (ref), chatOptimizeCommandProcessing (ref), autoCastCommand (ref), promiseModule (ref), useCursor (ref), expChatDictationIXPExposure (ref), expChatDictationIXPLayerName (ref), expChatPresetAutocompleteIxpEnabled (ref), expChatPresetAutocompleteIxpLayer (ref), fFlagExpChatPresetChatSendEnabled (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatNewInputBarModule (ref), autocompleteDropdownModule (ref), setTransparency (ref), fFlagExpChatEmojiDropdownShowAnalyticsModule (ref), fFlagExpChatNewInputBarDictationModule (ref), chatInputBarV2DictationModule (ref), chatInputBarV2Module (ref), dictationInputBarModule (ref), channelChipModule (ref), imageSetLabel (ref), images (ref)
+	-- upvalues: reactModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStoreModule (ref), expChatMainInputBarClickAnalytics (ref), fFlagExpChatDictation_1 (ref), useSendTelemetryModule (ref), reactFocusNavigationModule (ref), fFlagExpChatFocusViaLastModeFixModule (ref), focusNavigationUtilsModule (ref), signalsReactModule (ref), var2 (ref), getMessagesStoreModule (ref), fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), textChatService (ref), var5 (write), autocompleteTextModule (ref), initializeCommandsModule (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), var4 (write), initializeEmojisModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), var6 (write), initializeGlobalCommandsModule (ref), initialCommandsModule (ref), var1 (ref), fFlagExpChatDictation (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), guiService (ref), fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (ref), usePresetAutocompleteAnalyticsModule (ref), presetSearchModule (ref), var3 (ref), sendPresetModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), presetEntryTextModule (ref), expChatDoNotSetCursorPosition (ref), expChatPresetChatIXPExposure (ref), IXPServiceWrapper (ref), expChatPresetChatIXPLayerName (ref), fFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), playersService (ref), fFlagEnableConsoleExpControls (ref), fFlagChromeChatGamepadSupportFix (ref), onChatInputBarFocusLost (ref), actionBindableEvent (ref), useEffectChatInputBarFocus (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), expChatPresetAutocompleteSearchVariants (ref), expChatPresetChatAutocompleteExperimentation (ref), sortCommandResultsCallbackModule (ref), sortEmojiResultsCallbackModule (ref), list (ref), var7 (write), RBXTeamCommand (ref), var8 (write), RBXWhisperCommand (ref), chatOptimizeCommandProcessing (ref), autoCastCommand (ref), promiseModule (ref), useCursor (ref), expChatDictationIXPExposure (ref), expChatDictationIXPLayerName (ref), expChatPresetAutocompleteIxpEnabled (ref), expChatPresetAutocompleteIxpLayer (ref), fFlagExpChatPresetChatSendEnabled (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatNewInputBarModule (ref), autocompleteDropdownModule (ref), setTransparency (ref), fFlagExpChatNewInputBarDictationModule (ref), chatInputBarV2DictationModule (ref), chatInputBarV2Module (ref), dictationInputBarModule (ref), channelChipModule (ref), imageSetLabel (ref), images (ref)
 	local var11 = reactModule.useRef("")
 	
 	if fFlagExpChatUseUnifiedTooltipStore then
@@ -293,12 +290,12 @@ end)(function(p5)
 	}) else nil
 	local var32 = reactModule.useRef(nil)
 	local var33 = reactModule.useRef(nil)
-	local var34 = if fFlagExpChatEmojiDropdownDismissAnalyticsModule then reactModule.useRef(nil) else nil
+	local var34 = reactModule.useRef(nil)
 	local var35 = reactModule.useRef(nil)
-	local var36 = reactModule.useRef(nil)
-	local var37 = reactModule.useRef(false)
-	local var38 = reactFocusNavigationModule.useFocusGuiObject()
-	local var39 = signalsReactModule.useSignalState(var2.getChatInputBarFocused)
+	local var36 = reactModule.useRef(false)
+	local var37 = reactFocusNavigationModule.useFocusGuiObject()
+	local var38 = if not fFlagExpChatFocusViaLastModeFixModule then focusNavigationUtilsModule.useLastInputMode() else nil
+	local var39 = if fFlagExpChatFocusViaLastModeFixModule then signalsReactModule.useSignalState(var2.getChatInputBarFocused) else nil
 	local var40 = signalsReactModule.useSignalState(getMessagesStoreModule(false).getCanLocalUserChat)
 	local var41 = if fFlagExpChatPresetChatEnabled then signalsReactModule.useSignalState(getPresetChatStoreModule(false).getIsTrayOpen) else nil
 	local var42 = if fFlagExpChatPresetChatEnabled then signalsReactModule.useSignalState(getPresetChatStoreModule(false).getIsEnabled) else nil
@@ -309,28 +306,6 @@ end)(function(p5)
 	end, {
 		if p5.chatInputBarSettings.TextBox ~= nil then "nil" else p5.chatInputBarSettings.TextBox
 	})
-	local focus = nil
-	
-	if fFlagExpChatTabShortcutNav then
-		local var44 = if p5.chatInputBarSettings.TextBox ~= nil then var29 else var30
-		focus = useFocusInputBar(var44).focus
-		useInputBarTabNavigation(var44, p5.userInputService)
-	end
-	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), signalsModule (copy), var2 (copy), focus (write)
-		if fFlagExpChatTabShortcutNav then
-			return signalsModule.createEffect(function(p6)
-				-- upvalues: var2 (copy), focus (copy)
-				local chatInputBarFocusRequestTime = var2.getChatInputBarFocusRequestTime(p6)
-				
-				if chatInputBarFocusRequestTime == nil then return end
-				if os.clock() - chatInputBarFocusRequestTime <= 5 then
-					focus()
-				end
-				var2.clearChatInputBarFocusRequest()
-			end)
-		end
-	end, { focus })
 	reactModule.useEffect(function()
 		-- upvalues: p5 (ref), textChatService (copy), var5 (copy), autocompleteTextModule (copy), initializeCommandsModule (copy), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), var4 (copy), initializeEmojisModule (copy), getFFlagTextChatEnableUniverseChatTabs (copy), var6 (copy), initializeGlobalCommandsModule (copy), initialCommandsModule (copy)
 		if not p5.autocompleteEnabled then return end
@@ -359,10 +334,10 @@ end)(function(p5)
 			if getFFlagTextChatEnableUniverseChatTabs() then
 				var6 = autocompleteTextModule.new(initializeGlobalCommandsModule)
 			end
-			local var45 = initialCommandsModule()
+			local var44 = initialCommandsModule()
 			
-			if var45 then
-				for i, v in var45 do
+			if var44 then
+				for i, v in var44 do
 					table.insert(t, v:GetPropertyChangedSignal("AutocompleteVisible"):Connect(function()
 						-- upvalues: var5 (copy), autocompleteTextModule (copy), initializeCommandsModule (copy)
 						var5 = autocompleteTextModule.new(initializeCommandsModule)
@@ -383,8 +358,8 @@ end)(function(p5)
 			table.clear(t)
 		end
 	end, {})
-	local var46 = reactModule.useCallback(function()
-		-- upvalues: var1 (copy), var12 (ref), var40 (ref), var28 (ref), var29 (ref), var30 (ref), var31 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), p5 (ref), fFlagExpChatDictation (copy), var13 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy), var37 (ref)
+	local var45 = reactModule.useCallback(function()
+		-- upvalues: var1 (copy), var12 (ref), var40 (ref), var28 (ref), var29 (ref), var30 (ref), var31 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), p5 (ref), fFlagExpChatDictation (copy), var13 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy), var36 (ref)
 		var1:trace("onSendActivated with input text: '{}'", var12)
 		
 		if not var28.current or not var40 then
@@ -392,16 +367,16 @@ end)(function(p5)
 			
 			return
 		elseif var29.current or var30.current then
-			local var47 = if var30.current then var30.current.Text else var29.current.Text
-			local var48 = if var31 then var31.consumeOnSend(var47) else nil
-			local var49 = if getFFlagTextChatEnableUniverseChatTabs() and p5.isGlobalChatTabActive and p5.onSendGlobalChat then p5.onSendGlobalChat else p5.onSendChat
+			local var46 = if var30.current then var30.current.Text else var29.current.Text
+			local var47 = if var31 then var31.consumeOnSend(var46) else nil
+			local var48 = if getFFlagTextChatEnableUniverseChatTabs() and p5.isGlobalChatTabActive and p5.onSendGlobalChat then p5.onSendGlobalChat else p5.onSendChat
 			
-			if not var49 or string.find(var47, "%S") == nil then
-				var1:debug("onSendActivated could not send message. text: '{}' canLocalUserChat: {}", var47, var40)
+			if not var48 or string.find(var46, "%S") == nil then
+				var1:debug("onSendActivated could not send message. text: '{}' canLocalUserChat: {}", var46, var40)
 			elseif fFlagExpChatDictation then
-				var49(var47, var48, var48 ~= nil)
+				var48(var46, var47, var47 ~= nil)
 			else
-				var49(var47)
+				var48(var46)
 			end
 			if var30.current then
 				var30.current.Text = ""
@@ -421,7 +396,7 @@ end)(function(p5)
 				end
 			end
 			if p5.targetTextChannel and p5.targetTextChannelDisplayName ~= "" then
-				var37.current = true
+				var36.current = true
 				
 				return
 			end
@@ -434,14 +409,14 @@ end)(function(p5)
 		p5.targetTextChannel or false, p5.targetTextChannelDisplayName,
 		if var31 then var31.consumeOnSend else false
 	})
-	local var47 = if fFlagExpChatDictation_1 then reactModule.useCallback(function(p6)
-		-- upvalues: var40 (ref), var28 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), p5 (ref), var30 (ref), var29 (ref), var13 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy), var37 (ref)
+	local var46 = if fFlagExpChatDictation_1 then reactModule.useCallback(function(p6)
+		-- upvalues: var40 (ref), var28 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), p5 (ref), var30 (ref), var29 (ref), var13 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy), var36 (ref)
 		if not var28.current or not var40 then return end
-		local var48 = if p6 then p6.textSent else ""
-		local var49 = if getFFlagTextChatEnableUniverseChatTabs() and p5.isGlobalChatTabActive and p5.onSendGlobalChat then p5.onSendGlobalChat else p5.onSendChat
+		local var47 = if p6 then p6.textSent else ""
+		local var48 = if getFFlagTextChatEnableUniverseChatTabs() and p5.isGlobalChatTabActive and p5.onSendGlobalChat then p5.onSendGlobalChat else p5.onSendChat
 		
-		if var49 and string.find(var48, "%S") ~= nil then
-			var49(var48, p6, true)
+		if var48 and string.find(var47, "%S") ~= nil then
+			var48(var47, p6, true)
 		end
 		if var30.current then
 			var30.current.Text = ""
@@ -461,14 +436,14 @@ end)(function(p5)
 			end
 		end
 		if p5.targetTextChannel and p5.targetTextChannelDisplayName ~= "" then
-			var37.current = true
+			var36.current = true
 		end
 	end, {
 		var30.current, var40, p5.canLocalUserChat, p5.isGlobalChatTabActive,
 		p5.onSendChat or false, p5.onSendGlobalChat or false,
 		p5.targetTextChannel or false, p5.targetTextChannelDisplayName
 	}) else nil
-	local var48 = if fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule then usePresetAutocompleteAnalyticsModule({
+	local var47 = if fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule then usePresetAutocompleteAnalyticsModule({
 		isFocused = var23,
 		autocompleteEnabled = p5.autocompleteEnabled,
 		autocompleteDropdownReducer = p5.autocompleteDropdownReducer
@@ -476,18 +451,18 @@ end)(function(p5)
 	
 	local function sendSelectedPreset(value)
 		-- upvalues: getPresetChatStoreModule (copy), presetSearchModule (copy), var1 (copy), var3 (copy), sendPresetModule (copy), p5 (ref), expChatSharedModule (copy), constantsModule (copy), fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (copy)
-		local var49 = getPresetChatStoreModule(false)
-		local presetIdForValue = presetSearchModule.getPresetIdForValue(var49, value)
+		local var48 = getPresetChatStoreModule(false)
+		local presetIdForValue = presetSearchModule.getPresetIdForValue(var48, value)
 		
 		if presetIdForValue == nil then
 			var1:warning("Could not resolve a preset id for autocomplete entry '{}'; skipping send.", value)
 			
 			return
 		end
-		var49.setPresetCooldownEndsAt(os.clock() + var3)
-		local var50 = sendPresetModule(presetIdForValue, p5.targetTextChannel)
+		var48.setPresetCooldownEndsAt(os.clock() + var3)
+		local var49 = sendPresetModule(presetIdForValue, p5.targetTextChannel)
 		
-		if var50 == "Sent" then
+		if var49 == "Sent" then
 			expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
 				event_type = constantsModule.Analytics.EventTypes.Click,
 				component = if fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule then constantsModule.Analytics.Components.AutocompleteDropdown else constantsModule.Analytics.Components.PresetAutocomplete,
@@ -496,58 +471,59 @@ end)(function(p5)
 			
 			return
 		end
-		var49.setPresetCooldownEndsAt(nil)
-		var1:warning("Could not send preset {} from autocomplete: {}", presetIdForValue, var50)
+		var48.setPresetCooldownEndsAt(nil)
+		var1:warning("Could not send preset {} from autocomplete: {}", presetIdForValue, var49)
 	end
 	
-	local var49 = reactModule.useCallback(function(p6)
-		-- upvalues: fFlagExpChatPresetChatAutocompleteEnabledModule (copy), p5 (ref), presetEntryTextModule (copy), fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (copy), var48 (write), fFlagExpChatEmojiDropdownDismissAnalyticsModule (copy), var34 (write), var30 (ref), var29 (ref), var16 (write), var13 (ref), var28 (ref), expChatMainInputBarClickAnalytics (copy), var22 (ref), var39 (ref), var38 (ref), expChatDoNotSetCursorPosition (copy), sendSelectedPreset (ref), var1 (copy)
-		local var50 = if fFlagExpChatPresetChatAutocompleteEnabledModule and p5.autocompleteDropdownReducer.autocompleteType == "presets" then presetEntryTextModule.undecorate(p6.TextLabel.Text, p5.chatInputBarSettings.TextSize) else nil
+	local var48 = reactModule.useCallback(function(p6)
+		-- upvalues: fFlagExpChatPresetChatAutocompleteEnabledModule (copy), p5 (ref), presetEntryTextModule (copy), fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (copy), var47 (write), var30 (ref), var29 (ref), var16 (write), var13 (ref), var28 (ref), expChatMainInputBarClickAnalytics (copy), var22 (ref), fFlagExpChatFocusViaLastModeFixModule (copy), var39 (ref), var37 (ref), var38 (ref), expChatDoNotSetCursorPosition (copy), sendSelectedPreset (ref), var1 (copy)
+		local var49 = if fFlagExpChatPresetChatAutocompleteEnabledModule and p5.autocompleteDropdownReducer.autocompleteType == "presets" then presetEntryTextModule.undecorate(p6.TextLabel.Text, p5.chatInputBarSettings.TextSize) else nil
 		
-		if fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule and var48 ~= nil and var50 ~= nil then
-			var48(var50)
-		end
-		if fFlagExpChatEmojiDropdownDismissAnalyticsModule and var34 and p5.autocompleteDropdownReducer.autocompleteType == "emojis" then
-			var34.current = p6.TextLabel.Text
+		if fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule and var47 ~= nil and var49 ~= nil then
+			var47(var49)
 		end
 		p5.autocompleteDropdownActivated(false)
 		p5.autocompleteDropdownResultsChanged({})
-		local var51 = if var30.current then var30.current else var29.current
+		local var50 = if var30.current then var30.current else var29.current
 		
-		if var51 then
-			local text = var51.Text
+		if var50 then
+			local text = var50.Text
 			local substring = string.sub(text, 1, var16 - 1)
-			local var52 = if fFlagExpChatPresetChatAutocompleteEnabledModule and var50 ~= nil then "" else string.sub(text, var16, #text)
-			local var53 = ""
+			local var51 = if fFlagExpChatPresetChatAutocompleteEnabledModule and var49 ~= nil then "" else string.sub(text, var16, #text)
+			local var52 = ""
 			
 			if p5.autocompleteDropdownReducer.autocompleteType == "emojis" then
-				var53 = string.gsub(substring, ":[^:]*$", p6.EmojiLabel.Text)
+				var52 = string.gsub(substring, ":[^:]*$", p6.EmojiLabel.Text)
 			elseif p5.autocompleteDropdownReducer.autocompleteType == "commands" then
-				var53 = string.gsub(substring, "(/.*)", p6.TextLabel.Text)
+				var52 = string.gsub(substring, "(/.*)", p6.TextLabel.Text)
 			end
-			if var52 ~= "" then
-				var53 ..= var52
+			if var51 ~= "" then
+				var52 ..= var51
 			end
-			var51.Text = var53
-			var13(var53)
+			var50.Text = var52
+			var13(var52)
 			
 			if var28.current then
-				if expChatMainInputBarClickAnalytics and var22 and not var51:IsFocused() then
+				if expChatMainInputBarClickAnalytics and var22 and not var50:IsFocused() then
 					var22.current = true
 				end
-				var51:CaptureFocus()
+				var50:CaptureFocus()
 				
-				if var39 then
-					var38(var51)
+				if fFlagExpChatFocusViaLastModeFixModule then
+					if var39 then
+						var37(var50)
+					end
+				elseif var38 == "Focus" then
+					var37(var50)
 				end
-				if var52 ~= "" and not expChatDoNotSetCursorPosition then
-					var51.CursorPosition = #var53 - #var52 + 1
+				if var51 ~= "" and not expChatDoNotSetCursorPosition then
+					var50.CursorPosition = #var52 - #var51 + 1
 				end
 			end
 			p5.autocompleteDropdownDeactivated()
 			
-			if fFlagExpChatPresetChatAutocompleteEnabledModule and var50 ~= nil then
-				sendSelectedPreset(var50)
+			if fFlagExpChatPresetChatAutocompleteEnabledModule and var49 ~= nil then
+				sendSelectedPreset(var49)
 				
 				return
 			end
@@ -555,22 +531,22 @@ end)(function(p5)
 			var1:error("Could not find textBox")
 		end
 	end, {
-		var39, var38, var25, var16, p5.autocompleteDropdownActivated,
-		p5.autocompleteDropdownDeactivated,
+		if fFlagExpChatFocusViaLastModeFixModule then var39 else nil, var37, var25,
+		var16, if fFlagExpChatFocusViaLastModeFixModule then nil else var38,
+		p5.autocompleteDropdownActivated, p5.autocompleteDropdownDeactivated,
 		p5.autocompleteDropdownReducer and p5.autocompleteDropdownReducer.autocompleteType,
 		p5.autocompleteDropdownResultsChanged,
 		if fFlagExpChatPresetChatAutocompleteEnabledModule then p5.targetTextChannel or false else nil,
 		if fFlagExpChatPresetChatAutocompleteEnabledModule then p5.chatInputBarSettings.TextSize else nil,
-		if fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule then var48 else nil,
-		if fFlagExpChatEmojiDropdownDismissAnalyticsModule then var34 else nil
+		if fFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule then var47 else nil
 	})
 	reactModule.useEffect(function()
 		-- upvalues: var28 (ref), var30 (ref), var29 (ref), var1 (copy)
 		if var28.current then
-			local var50 = if var30.current then var30.current else var29.current
+			local var49 = if var30.current then var30.current else var29.current
 			
-			if var50 then
-				var50:CaptureFocus()
+			if var49 then
+				var49:CaptureFocus()
 				
 				return
 			end
@@ -582,10 +558,10 @@ end)(function(p5)
 		reactModule.useEffect(function()
 			-- upvalues: var41 (ref), var30 (ref), var29 (ref)
 			if not var41 then return end
-			local var50 = if var30.current then var30.current else var29.current
+			local var49 = if var30.current then var30.current else var29.current
 			
-			if var50 and var50:IsFocused() then
-				var50:ReleaseFocus()
+			if var49 and var49:IsFocused() then
+				var49:ReleaseFocus()
 			end
 		end, { var41 })
 	end
@@ -606,15 +582,15 @@ end)(function(p5)
 	end, {})
 	reactModule.useEffect(function()
 		-- upvalues: p5 (ref), var30 (ref), var29 (ref), var17 (write)
-		local var50 = nil
+		local var49 = nil
 		
 		if p5.autocompleteEnabled then
-			local var51 = if var30.current then var30.current else var29.current
+			local var50 = if var30.current then var30.current else var29.current
 			
-			if var51 then
-				var50 = var51:GetPropertyChangedSignal("CursorPosition"):Connect(function()
-					-- upvalues: var51 (ref), var17 (copy)
-					local cursorPosition = var51.CursorPosition
+			if var50 then
+				var49 = var50:GetPropertyChangedSignal("CursorPosition"):Connect(function()
+					-- upvalues: var50 (ref), var17 (copy)
+					local cursorPosition = var50.CursorPosition
 					
 					if cursorPosition and cursorPosition ~= -1 then
 						var17(cursorPosition)
@@ -623,16 +599,16 @@ end)(function(p5)
 			end
 		end
 		return function()
-			-- upvalues: var50 (write)
-			if var50 then
-				var50:Disconnect()
+			-- upvalues: var49 (write)
+			if var49 then
+				var49:Disconnect()
 			end
 		end
 	end, { var30.current })
 	reactModule.useEffect(function()
-		-- upvalues: p5 (ref), var36 (ref)
+		-- upvalues: p5 (ref), var35 (ref)
 		if p5.autocompleteEnabled then
-			var36.current = p5.userInputService.InputBegan:connect(function(p6, _)
+			var35.current = p5.userInputService.InputBegan:connect(function(p6, _)
 				-- upvalues: p5 (copy)
 				if p5.autocompleteDropdownReducer.activated and (Enum.KeyCode.Up or Enum.KeyCode.Down) then
 					if p6 and p6.KeyCode == Enum.KeyCode.Up and p5.autocompleteDropdownReducer.selectedIndex > 1 then
@@ -645,22 +621,22 @@ end)(function(p5)
 			end)
 			
 			return function()
-				-- upvalues: var36 (copy)
-				local current = var36.current
+				-- upvalues: var35 (copy)
+				local current = var35.current
 				
 				if current and current.Connected then
 					current:Disconnect()
 				end
-				var36.current = nil
+				var35.current = nil
 			end
 		end
 		return function() end
 	end, { p5.userInputService, p5.autocompleteDropdownReducer })
 	reactModule.useEffect(function()
-		-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), p5 (ref), fFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (copy), var35 (ref), var30 (ref), var29 (ref), var37 (ref), fFlagExpChatFixBackspaceNilTargetChannel (copy), var1 (copy), var12 (ref)
-		local var50 = if fFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule then not p5.isChannelBarVisible or getFFlagTextChatEnableUniverseChatTabs() and not p5.developerChannelTabsEnabled else not p5.isChannelBarVisible
-		var35.current = p5.userInputService.InputEnded:connect(function(p6, _)
-			-- upvalues: var30 (copy), var29 (copy), p5 (copy), var37 (copy), var50 (ref), fFlagExpChatFixBackspaceNilTargetChannel (copy), var1 (copy), var12 (copy)
+		-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), p5 (ref), fFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (copy), var34 (ref), var30 (ref), var29 (ref), var36 (ref), fFlagExpChatFixBackspaceNilTargetChannel (copy), var1 (copy), var12 (ref)
+		local var49 = if fFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule then not p5.isChannelBarVisible or getFFlagTextChatEnableUniverseChatTabs() and not p5.developerChannelTabsEnabled else not p5.isChannelBarVisible
+		var34.current = p5.userInputService.InputEnded:connect(function(p6, _)
+			-- upvalues: var30 (copy), var29 (copy), p5 (copy), var36 (copy), var49 (ref), fFlagExpChatFixBackspaceNilTargetChannel (copy), var1 (copy), var12 (copy)
 			local current
 			if var30.current then
 				current = var30.current
@@ -681,28 +657,28 @@ end)(function(p5)
 				current = var29.current and (var29.current:IsFocused() and (p6 and p6.KeyCode == Enum.KeyCode.Backspace))
 			end
 			if current then
-				local var51 = (p5.targetTextChannelDisplayName or "") ~= ""
+				local var50 = (p5.targetTextChannelDisplayName or "") ~= ""
 				
-				if var37.current and var50 and (if fFlagExpChatFixBackspaceNilTargetChannel then var51 else true) then
+				if var36.current and var49 and (if fFlagExpChatFixBackspaceNilTargetChannel then var50 else true) then
 					p5.resetTargetChannel(if fFlagExpChatFixBackspaceNilTargetChannel then p5.isGlobalChatTabActive else nil)
 					var1:debug("ChatInputBar ChatInputBarResetTargetChannel()")
-					var37.current = false
+					var36.current = false
 					
 					return
-				elseif var12 == "" and (if fFlagExpChatFixBackspaceNilTargetChannel then var51 else p5.targetTextChannelDisplayName ~= "") then
-					var37.current = true
+				elseif var12 == "" and (if fFlagExpChatFixBackspaceNilTargetChannel then var50 else p5.targetTextChannelDisplayName ~= "") then
+					var36.current = true
 				end
 			end
 		end)
 		
 		return function()
-			-- upvalues: var35 (copy)
-			local current = var35.current
+			-- upvalues: var34 (copy)
+			local current = var34.current
 			
 			if current and current.Connected then
 				current:Disconnect()
 			end
-			var35.current = nil
+			var34.current = nil
 		end
 	end, {
 		p5.userInputService, var30.current, p5.isChannelBarVisible,
@@ -715,12 +691,12 @@ end)(function(p5)
 		p5.contextActionService:BindCoreAction("FocusChat", function(_, p6, p7)
 			-- upvalues: p5 (copy), configModule (copy), var30 (copy), var29 (copy), var43 (copy)
 			if p5.isChatHotkeyEnabled and p7 and (p7.KeyCode == configModule.ChatInputBarDefaultFocusKeyCode or p7.KeyCode == p5.devDefinedFocusKeyCode) then
-				local var50 = if var30.current then var30.current else var29.current
+				local var49 = if var30.current then var30.current else var29.current
 				
-				if var50 and p6 == Enum.UserInputState.Begin and (var50 and not var50:IsFocused()) then
+				if var49 and p6 == Enum.UserInputState.Begin and (var49 and not var49:IsFocused()) then
 					task.delay(0, function()
-						-- upvalues: var50 (ref)
-						var50:CaptureFocus()
+						-- upvalues: var49 (ref)
+						var49:CaptureFocus()
 					end)
 					p5.focusChatHotKeyActivated()
 					var43.current = true
@@ -751,7 +727,7 @@ end)(function(p5)
 		end
 	end
 	
-	local var50 = reactModule.useCallback(function()
+	local var49 = reactModule.useCallback(function()
 		-- upvalues: var24 (ref), p5 (ref), textChatService (copy), expChatMainInputBarClickAnalytics (copy), var22 (ref), expChatSharedModule (copy), constantsModule (copy)
 		var24(true)
 		p5.onFocus()
@@ -772,8 +748,8 @@ end)(function(p5)
 			}, constantsModule.Analytics.ExtendedStandardizedFields)
 		end
 	end, { p5.onFocus })
-	local var51 = reactModule.useCallback(function(_, p6, p7)
-		-- upvalues: var1 (copy), var33 (ref), p5 (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (copy), var49 (ref), var46 (ref), var28 (ref), var30 (ref), var29 (ref), var16 (write), expChatMainInputBarClickAnalytics (copy), var22 (ref), expChatDoNotSetCursorPosition (copy), var24 (ref), textChatService (copy), var43 (ref), playersService (copy)
+	local var50 = reactModule.useCallback(function(_, p6, p7)
+		-- upvalues: var1 (copy), var33 (ref), p5 (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (copy), var48 (ref), var45 (ref), var28 (ref), var30 (ref), var29 (ref), var16 (write), expChatMainInputBarClickAnalytics (copy), var22 (ref), expChatDoNotSetCursorPosition (copy), var24 (ref), textChatService (copy), var43 (ref), playersService (copy)
 		local v
 		var1:debug("Focus lost with enter: {}", tostring(p6))
 		local current = var33.current
@@ -782,14 +758,14 @@ end)(function(p5)
 			if p5.autocompleteEnabled and current and (p5.autocompleteDropdownReducer.activated and #p5.autocompleteDropdownReducer.results > 0) and (not fFlagExpChatPresetChatAutocompleteEnabledModule or p5.autocompleteDropdownReducer.selectedIndex > 0) then
 				for i, v in ipairs(current.ScrollBarFrame.ScrollViewFrame.ScrollView.OffsetFrame:GetChildren()) do
 					if v.ClassName == "Frame" and v.LayoutOrder == p5.autocompleteDropdownReducer.selectedIndex then
-						var49(v.TextLabelButton)
+						var48(v.TextLabelButton)
 						
 						return
 					end
 				end
 			else
 				local x, y
-				var46()
+				var45()
 				
 				if fFlagExpChatPresetChatAutocompleteEnabledModule and p5.autocompleteEnabled and p5.autocompleteDropdownReducer.autocompleteType == "presets" then
 					p5.autocompleteDropdownDeactivated()
@@ -802,18 +778,18 @@ end)(function(p5)
 			elseif p7 then
 				if p7.KeyCode == Enum.KeyCode.Escape then
 					p5.autocompleteDropdownActivated(false)
-					local var52 = if var30.current then var30.current else var29.current
+					local var51 = if var30.current then var30.current else var29.current
 					
-					if var52 then
-						local var53 = var16
+					if var51 then
+						local var52 = var16
 						
-						if expChatMainInputBarClickAnalytics and var22 and not var52:IsFocused() then
+						if expChatMainInputBarClickAnalytics and var22 and not var51:IsFocused() then
 							var22.current = true
 						end
-						var52:CaptureFocus()
+						var51:CaptureFocus()
 						
 						if not expChatDoNotSetCursorPosition then
-							var52.CursorPosition = var53
+							var51.CursorPosition = var52
 						end
 						return
 					else
@@ -823,11 +799,11 @@ end)(function(p5)
 					x = p7.Position.X
 					y = p7.Position.Y
 					local x_1 = current.AbsolutePosition.X
-					local var54 = x_1 + current.AbsoluteSize.X
+					local var53 = x_1 + current.AbsoluteSize.X
 					local y_1 = current.AbsolutePosition.Y
 					v = y_1 + current.AbsoluteSize.Y
 					
-					if x < x_1 or var54 < x or (y < y_1 or v < y) then
+					if x < x_1 or var53 < x or (y < y_1 or v < y) then
 						p5.autocompleteDropdownActivated(false)
 					end
 				end
@@ -854,61 +830,61 @@ end)(function(p5)
 		end
 	end)
 	reactModule.useEffect(function()
-		-- upvalues: fFlagEnableConsoleExpControls (copy), var30 (ref), var29 (ref), fFlagChromeChatGamepadSupportFix (copy), guiService (copy), var50 (ref), onChatInputBarFocusLost (copy), var51 (ref), actionBindableEvent (copy)
+		-- upvalues: fFlagEnableConsoleExpControls (copy), var30 (ref), var29 (ref), fFlagChromeChatGamepadSupportFix (copy), guiService (copy), var49 (ref), onChatInputBarFocusLost (copy), var50 (ref), actionBindableEvent (copy)
+		local var54 = nil
 		local var55 = nil
-		local var56 = nil
 		local eventConnection = actionBindableEvent.Event:Connect(function(p8)
-			-- upvalues: fFlagEnableConsoleExpControls (copy), var30 (copy), var29 (copy), fFlagChromeChatGamepadSupportFix (copy), guiService (copy), var50 (copy), var56 (write), var55 (write), onChatInputBarFocusLost (copy), var51 (copy)
-			local var57 = if fFlagEnableConsoleExpControls then if var30.current then var30.current else var29.current else nil
+			-- upvalues: fFlagEnableConsoleExpControls (copy), var30 (copy), var29 (copy), fFlagChromeChatGamepadSupportFix (copy), guiService (copy), var49 (copy), var55 (write), var54 (write), onChatInputBarFocusLost (copy), var50 (copy)
+			local var56 = if fFlagEnableConsoleExpControls then if var30.current then var30.current else var29.current else nil
 			
 			if p8.type == "ChatTopBarFocusActivated" then
 				if not fFlagEnableConsoleExpControls then
-					var57 = if var30.current then var30.current else var29.current
+					var56 = if var30.current then var30.current else var29.current
 				end
-				if var57 then
+				if var56 then
 					task.delay(0, function()
-						-- upvalues: var57 (write)
-						var57:CaptureFocus()
+						-- upvalues: var56 (write)
+						var56:CaptureFocus()
 					end)
 				end
-			elseif not fFlagChromeChatGamepadSupportFix and fFlagEnableConsoleExpControls and (p8.type == "ChatTopBarFocusSelect" and var57) then
+			elseif not fFlagChromeChatGamepadSupportFix and fFlagEnableConsoleExpControls and (p8.type == "ChatTopBarFocusSelect" and var56) then
 				guiService:SetMenuIsOpen(true, "ExperienceChat")
-				var50()
-				guiService.SelectedCoreObject = var57
-				var56 = task.delay(0, function()
-					-- upvalues: var56 (copy), var55 (copy), onChatInputBarFocusLost (copy), p8 (ref), var51 (copy)
-					var56 = nil
+				var49()
+				guiService.SelectedCoreObject = var56
+				var55 = task.delay(0, function()
+					-- upvalues: var55 (copy), var54 (copy), onChatInputBarFocusLost (copy), p8 (ref), var50 (copy)
+					var55 = nil
 					
-					if var55 then
-						var55:Disconnect()
+					if var54 then
+						var54:Disconnect()
 					end
-					var55 = onChatInputBarFocusLost(p8.onSelectionLost, p8.keybinds, var51)
+					var54 = onChatInputBarFocusLost(p8.onSelectionLost, p8.keybinds, var50)
 				end)
 			end
 		end)
 		
 		return function()
-			-- upvalues: eventConnection (ref), var56 (write), var55 (write)
+			-- upvalues: eventConnection (ref), var55 (write), var54 (write)
 			eventConnection:disconnect()
 			
-			if var56 then
-				task.cancel(var56)
-				var56 = nil
-			end
 			if var55 then
-				var55:Disconnect()
+				task.cancel(var55)
 				var55 = nil
+			end
+			if var54 then
+				var54:Disconnect()
+				var54 = nil
 			end
 		end
 	end, { var29.current, var30.current })
-	useEffectChatInputBarFocus(var29, var30, var32, var50, var51)
+	useEffectChatInputBarFocus(var29, var30, var32, var49, var50)
 	
 	local function handlePresetAutocomplete(value, p8)
 		-- upvalues: p5 (ref), fFlagExpChatUniverseChatPresetEnabledModule (copy), presetSearchModule (copy), getPresetChatStoreModule (copy), expChatPresetAutocompleteSearchVariants (copy), expChatPresetChatAutocompleteExperimentation (copy)
 		if p8 < 1 then return end
-		local var55 = if not (p5.targetTextChannel == nil and not fFlagExpChatUniverseChatPresetEnabledModule) then presetSearchModule.findMatchingPresets(getPresetChatStoreModule(false), string.sub(value, 1, p8 - 1), if expChatPresetAutocompleteSearchVariants then expChatPresetChatAutocompleteExperimentation.getSearchVariant() else nil) else {}
+		local var54 = if not (p5.targetTextChannel == nil and not fFlagExpChatUniverseChatPresetEnabledModule) then presetSearchModule.findMatchingPresets(getPresetChatStoreModule(false), string.sub(value, 1, p8 - 1), if expChatPresetAutocompleteSearchVariants then expChatPresetChatAutocompleteExperimentation.getSearchVariant() else nil) else {}
 		
-		if #var55 == 0 then
+		if #var54 == 0 then
 			if p5.autocompleteDropdownReducer.autocompleteType == "presets" then
 				p5.autocompleteDropdownDeactivated()
 			end
@@ -916,13 +892,13 @@ end)(function(p5)
 		else
 			p5.autocompleteDropdownTypeChanged("presets")
 			p5.autocompleteDropdownActivated(true)
-			p5.autocompleteDropdownResultsChanged(var55)
+			p5.autocompleteDropdownResultsChanged(var54)
 			p5.autocompleteDropdownSelectionChanged(0)
 		end
 	end
 	
 	local function handleAutocomplete(p8, p9, p10)
-		-- upvalues: p5 (ref), var6 (copy), var5 (copy), sortCommandResultsCallbackModule (copy), var4 (copy), sortEmojiResultsCallbackModule (copy), var20 (write), list (copy), var13 (ref), expChatDoNotSetCursorPosition (copy), var33 (ref), var49 (ref), var21 (write), fFlagExpChatPresetChatAutocompleteEnabledModule (copy), handlePresetAutocomplete (ref)
+		-- upvalues: p5 (ref), var6 (copy), var5 (copy), sortCommandResultsCallbackModule (copy), var4 (copy), sortEmojiResultsCallbackModule (copy), var20 (write), list (copy), var13 (ref), expChatDoNotSetCursorPosition (copy), var33 (ref), var48 (ref), var21 (write), fFlagExpChatPresetChatAutocompleteEnabledModule (copy), handlePresetAutocomplete (ref)
 		if p10 == "/" and p8.CursorPosition == 2 or p5.autocompleteDropdownReducer.autocompleteType == "commands" and p10 ~= ":" then
 			p5.autocompleteDropdownTypeChanged("commands")
 			p5.autocompleteDropdownActivated(true)
@@ -930,11 +906,11 @@ end)(function(p5)
 			if p10 == "" or p10 == " " then
 				p5.autocompleteDropdownDeactivated()
 			else
-				local var55 = string.sub(p9, 1, p8.CursorPosition - 1):lower()
-				local var56 = (if p5.isGlobalChatTabActive and var6 then var6 else var5):getResults(var55, sortCommandResultsCallbackModule)
-				p5.autocompleteDropdownResultsChanged(var56)
+				local var54 = string.sub(p9, 1, p8.CursorPosition - 1):lower()
+				local var55 = (if p5.isGlobalChatTabActive and var6 then var6 else var5):getResults(var54, sortCommandResultsCallbackModule)
+				p5.autocompleteDropdownResultsChanged(var55)
 				
-				if var55 == var56[1] then
+				if var54 == var55[1] then
 					p5.autocompleteDropdownActivated(false)
 					p5.autocompleteDropdownResultsChanged({})
 					
@@ -953,9 +929,9 @@ end)(function(p5)
 						
 						return
 					end
-					local var57 = string.sub(p9, var20 + 1, p8.CursorPosition - 2):lower()
+					local var56 = string.sub(p9, var20 + 1, p8.CursorPosition - 2):lower()
 					
-					if list.includes(p5.autocompleteDropdownReducer.results, var57) then
+					if list.includes(p5.autocompleteDropdownReducer.results, var56) then
 						local text = string.sub(p9, 1, p8.CursorPosition - 2) .. string.sub(p9, p8.CursorPosition, #p9)
 						p8.Text = text
 						var13(text)
@@ -973,8 +949,8 @@ end)(function(p5)
 									if textLabelButton then
 										local textLabel = textLabelButton:FindFirstChild("TextLabel")
 										
-										if textLabel and textLabel.Text and textLabel.Text == var57 then
-											var49(textLabelButton)
+										if textLabel and textLabel.Text and textLabel.Text == var56 then
+											var48(textLabelButton)
 											
 											return
 										end
@@ -1000,8 +976,8 @@ end)(function(p5)
 				
 				return
 			else
-				local var58 = string.sub(p9, matchIndex + 1, p8.CursorPosition - 1):lower()
-				p5.autocompleteDropdownResultsChanged(if var58 and string.len(var58) > 1 then var4:getResults(var58, sortEmojiResultsCallbackModule) else {})
+				local var57 = string.sub(p9, matchIndex + 1, p8.CursorPosition - 1):lower()
+				p5.autocompleteDropdownResultsChanged(if var57 and string.len(var57) > 1 then var4:getResults(var57, sortEmojiResultsCallbackModule) else {})
 				
 				return
 			end
@@ -1028,28 +1004,28 @@ end)(function(p5)
 			var8 = textChatService:FindFirstChild(RBXWhisperCommand.name, true)
 		end
 	end, {})
-	local var59 = reactModule.useCallback(function(p11)
-		-- upvalues: p5 (ref), var13 (ref), var1 (copy), var12 (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), handleAutocomplete (ref), var37 (ref), chatOptimizeCommandProcessing (copy), var11 (ref), var7 (copy), autoCastCommand (copy), RBXTeamCommand (copy), var8 (copy), RBXWhisperCommand (copy), promiseModule (copy)
+	local var58 = reactModule.useCallback(function(p11)
+		-- upvalues: p5 (ref), var13 (ref), var1 (copy), var12 (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), handleAutocomplete (ref), var36 (ref), chatOptimizeCommandProcessing (copy), var11 (ref), var7 (copy), autoCastCommand (copy), RBXTeamCommand (copy), var8 (copy), RBXWhisperCommand (copy), promiseModule (copy)
 		local text = p11.Text
 		
 		if p5.autocompleteEnabled then
-			local var60 = p11.CursorPosition < #text + 1
+			local var59 = p11.CursorPosition < #text + 1
 			
 			if string.find(text, "\r") then
 				local replaced = string.gsub(text, "\r", "")
 				p11.Text = replaced
 				var13(replaced)
 				
-				if var60 then
+				if var59 then
 					p11.CursorPosition -= 1
 				end
 				return
 			else
 				local substring = string.sub(text, p11.CursorPosition - 1, p11.CursorPosition - 1)
 				var1:trace("Input: {}", text)
-				local var61 = if utf8.len(text) then utf8.len(utf8.nfcnormalize(text)) else string.len(text)
+				local var60 = if utf8.len(text) then utf8.len(utf8.nfcnormalize(text)) else string.len(text)
 				
-				if var61 and p5.messageCharacterLimit < var61 then
+				if var60 and p5.messageCharacterLimit < var60 then
 					var1:debug("Message is over the character limit of {}", tostring(p5.messageCharacterLimit))
 					p11.Text = var12
 					
@@ -1060,7 +1036,7 @@ end)(function(p5)
 				if getEnableChatInputBarConfigurationAutocompleteEnabledModule() and p5.autocompleteEnabled then
 					handleAutocomplete(p11, text, substring)
 				end
-				var37.current = #text == 0 and var37.current
+				var36.current = #text == 0 and var36.current
 				
 				if chatOptimizeCommandProcessing then
 					if string.sub(text, 1, 1) == "/" and p5.localPlayer and text ~= var11.current then
@@ -1078,10 +1054,10 @@ end)(function(p5)
 							t = { promiseModule.reject() }
 						end
 						promiseModule.any(t):andThen(function()
-							-- upvalues: p11 (ref), var13 (copy), var37 (copy)
+							-- upvalues: p11 (ref), var13 (copy), var36 (copy)
 							p11.Text = ""
 							var13("")
-							var37.current = true
+							var36.current = true
 						end):catch(function(p12)
 							-- upvalues: var1 (copy)
 							var1:trace("Could not send autoCastCommand. Error: {}", p12)
@@ -1109,10 +1085,10 @@ end)(function(p5)
 						t = { promiseModule.reject() }
 					end
 					promiseModule.any(t):andThen(function()
-						-- upvalues: p11 (ref), var13 (copy), var37 (copy)
+						-- upvalues: p11 (ref), var13 (copy), var36 (copy)
 						p11.Text = ""
 						var13("")
-						var37.current = true
+						var36.current = true
 					end):catch(function(p12)
 						-- upvalues: var1 (copy)
 						var1:trace("Could not send autoCastCommand. Error: {}", p12)
@@ -1121,41 +1097,41 @@ end)(function(p5)
 			end
 		end
 	end)
-	local var60 = reactModule.useCallback(function()
+	local var59 = reactModule.useCallback(function()
 		-- upvalues: var30 (ref), var29 (ref)
-		local var61 = if var30.current then var30.current else var29.current
+		local var60 = if var30.current then var30.current else var29.current
 		
-		if var61 then
-			var61:ReleaseFocus(true)
+		if var60 then
+			var60:ReleaseFocus(true)
 		end
 	end, { var29.current, var30.current })
-	local var61 = reactModule.useCallback(function(p11)
+	local var60 = reactModule.useCallback(function(p11)
 		-- upvalues: var27 (ref)
 		var27(if p11.Visible then p11.AbsoluteSize.X else 0)
 	end)
-	local var62 = useCursor()
-	local var63 = reactModule.useCallback(function(p11)
+	local var61 = useCursor()
+	local var62 = reactModule.useCallback(function(p11)
 		-- upvalues: p5 (ref)
 		p5.autocompleteDropdownSelectionChanged(p11.LayoutOrder)
 	end)
-	local var64 = var12 == ""
-	local var65 = var64 and not var23
+	local var63 = var12 == ""
+	local var64 = var63 and not var23
 	local chatInputBarSettings = p5.chatInputBarSettings
 	local chatWindowSettings = p5.chatWindowSettings
-	local var66 = if var40 ~= nil then p5.canLocalUserChat else var40
+	local var65 = if var40 ~= nil then p5.canLocalUserChat else var40
 	reactModule.useEffect(function()
-		-- upvalues: expChatDictationIXPExposure (copy), var66 (ref), IXPServiceWrapper (copy), expChatDictationIXPLayerName (copy)
-		if expChatDictationIXPExposure and var66 then
+		-- upvalues: expChatDictationIXPExposure (copy), var65 (ref), IXPServiceWrapper (copy), expChatDictationIXPLayerName (copy)
+		if expChatDictationIXPExposure and var65 then
 			IXPServiceWrapper:LogUserLayerExposure(expChatDictationIXPLayerName)
 		end
-	end, { var66 })
+	end, { var65 })
 	reactModule.useEffect(function()
 		-- upvalues: expChatPresetAutocompleteIxpEnabled (copy), var23 (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), p5 (ref), getPresetChatStoreModule (copy), constantsModule (copy), IXPServiceWrapper (copy), expChatPresetAutocompleteIxpLayer (copy)
 		if not expChatPresetAutocompleteIxpEnabled or not var23 then return end
 		if not getEnableChatInputBarConfigurationAutocompleteEnabledModule() or not p5.autocompleteEnabled then return end
-		local var67 = getPresetChatStoreModule(false)
+		local var66 = getPresetChatStoreModule(false)
 		
-		if var67.getIsEnabled(false) and var67.getAccessLevel(false) == constantsModule.AccessLevel.Enabled then
+		if var66.getIsEnabled(false) and var66.getAccessLevel(false) == constantsModule.AccessLevel.Enabled then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(expChatPresetAutocompleteIxpLayer)
 			
 			return
@@ -1165,9 +1141,9 @@ end)(function(p5)
 		-- upvalues: fFlagExpChatPresetChatSendEnabled (copy), var23 (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), p5 (ref), getPresetChatStoreModule (copy), constantsModule (copy), expChatPresetChatAutocompleteExperimentation (copy)
 		if not fFlagExpChatPresetChatSendEnabled or not var23 then return end
 		if not getEnableChatInputBarConfigurationAutocompleteEnabledModule() or not p5.autocompleteEnabled then return end
-		local var67 = getPresetChatStoreModule(false)
+		local var66 = getPresetChatStoreModule(false)
 		
-		if var67.getIsEnabled(false) and var67.getAccessLevel(false) == constantsModule.AccessLevel.Enabled then
+		if var66.getIsEnabled(false) and var66.getAccessLevel(false) == constantsModule.AccessLevel.Enabled then
 			expChatPresetChatAutocompleteExperimentation.logExposure()
 			
 			return
@@ -1178,7 +1154,7 @@ end)(function(p5)
 	local backgroundColor3 = useInterpolatedClientSettingsModule(chatWindowSettings).BackgroundColor3
 	local isSpatialUIEnabled = p5.isSpatialUIEnabled
 	local createElement = reactModule.createElement
-	local var67 = "Frame"
+	local var66 = "Frame"
 	local t = {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundColor3 = backgroundColor3,
@@ -1217,13 +1193,11 @@ end)(function(p5)
 			setTransparency = setTransparency,
 			transparencyValue = p5.transparencyValue,
 			activated = p5.autocompleteDropdownReducer.activated and var23,
-			isChatInputBarVisible = if fFlagExpChatEmojiDropdownShowAnalyticsModule then p5.visible else nil,
-			chosenEmojiForAnalyticsRef = if fFlagExpChatEmojiDropdownDismissAnalyticsModule then var34 else nil,
 			results = p5.autocompleteDropdownReducer.results,
 			selectedIndex = p5.autocompleteDropdownReducer.selectedIndex,
 			autocompleteType = p5.autocompleteDropdownReducer.autocompleteType,
-			onAutocompleteDropdownHover = var63,
-			onAutocompleteSelected = var49,
+			onAutocompleteDropdownHover = var62,
+			onAutocompleteSelected = var48,
 			autocompleteDropdownRef = var33,
 			textBoxRef = if chatInputBarSettings.TextBox then var30 else var29
 		}) or nil)),
@@ -1236,7 +1210,7 @@ end)(function(p5)
 			PaddingTop = p5.addTopPadding and UDim.new(0, 8) or UDim.new(0, 0),
 			PaddingBottom = UDim.new(0, 1)
 		}),
-		ChatInputBarV2 = if not fFlagExpChatNewInputBarModule then if fFlagExpChatNewInputBarDictationModule and fFlagExpChatDictation_1 and var66 then reactModule.createElement(chatInputBarV2DictationModule, {
+		ChatInputBarV2 = if not fFlagExpChatNewInputBarModule then if fFlagExpChatNewInputBarDictationModule and fFlagExpChatDictation_1 and var65 then reactModule.createElement(chatInputBarV2DictationModule, {
 			transparencyValue = p5.transparencyValue,
 			sendButtonContainerWidth = p5.sendButtonContainerWidth,
 			resetTargetChannel = p5.resetTargetChannel,
@@ -1253,20 +1227,20 @@ end)(function(p5)
 			isSpatialUIEnabled = isSpatialUIEnabled,
 			canLocalUserChatDerived = var40,
 			targetChannelWidth = var26,
-			showPlaceholderText = var65,
-			hasEmptyInputText = var64,
+			showPlaceholderText = var64,
+			hasEmptyInputText = var63,
 			shouldTruncatePlaceholder = if fFlagExpChatPresetChatEnabled then var42 else nil,
-			cursor = var62,
+			cursor = var61,
 			placeholderRef = var32,
 			textBoxRef = var29,
 			customTextBoxRef = var30,
-			onAbsoluteSizeChanged = var61,
-			onFocused = var50,
-			onFocusLost = var51,
-			onTextChanged = var59,
-			onReturnPressedFromOnScreenKeyboard = var60,
-			onSendActivated = var46,
-			onSendRecordingTap = var47,
+			onAbsoluteSizeChanged = var60,
+			onFocused = var49,
+			onFocusLost = var50,
+			onTextChanged = var58,
+			onReturnPressedFromOnScreenKeyboard = var59,
+			onSendActivated = var45,
+			onSendRecordingTap = var46,
 			onTranscriptionStaged = if var31 then var31.stageTranscription else nil,
 			inputText = var12,
 			setInputText = var13,
@@ -1289,46 +1263,46 @@ end)(function(p5)
 			isSpatialUIEnabled = isSpatialUIEnabled,
 			canLocalUserChatDerived = var40,
 			targetChannelWidth = var26,
-			showPlaceholderText = var65,
-			hasEmptyInputText = var64,
+			showPlaceholderText = var64,
+			hasEmptyInputText = var63,
 			shouldTruncatePlaceholder = if fFlagExpChatPresetChatEnabled then var42 else nil,
-			cursor = var62,
+			cursor = var61,
 			placeholderRef = var32,
 			textBoxRef = var29,
 			customTextBoxRef = var30,
-			onAbsoluteSizeChanged = var61,
-			onFocused = var50,
-			onFocusLost = var51,
-			onTextChanged = var59,
-			onReturnPressedFromOnScreenKeyboard = var60,
-			onSendActivated = var46,
+			onAbsoluteSizeChanged = var60,
+			onFocused = var49,
+			onFocusLost = var50,
+			onTextChanged = var58,
+			onReturnPressedFromOnScreenKeyboard = var59,
+			onSendActivated = var45,
 			isGlobalChatTabActive = if fFlagExpChatFixBackspaceNilTargetChannel then p5.isGlobalChatTabActive else nil
 		}) else nil
 	}
 	
 	if fFlagExpChatNewInputBarModule then
 		createElement_1 = nil
-	elseif fFlagExpChatDictation_1 and var66 then
+	elseif fFlagExpChatDictation_1 and var65 then
 		createElement_1 = reactModule.createElement(dictationInputBarModule, {
 			chatInputBarSettings = chatInputBarSettings,
 			transparencyValue = p5.transparencyValue,
 			chatInputBarBackgroundTransparency = backgroundTransparency,
 			inputText = var12,
 			setInputText = var13,
-			canLocalUserChat = var66,
+			canLocalUserChat = var65,
 			disabledChatPlaceholderText = p5.disabledChatPlaceholderText,
 			targetChannelWidth = var26,
-			showPlaceholderText = var65,
+			showPlaceholderText = var64,
 			placeholderText = p5.placeholderText,
-			cursor = var62,
+			cursor = var61,
 			placeholderRef = var32,
 			textBoxRef = var29,
 			customTextBoxRef = var30,
-			onFocused = var50,
-			onFocusLost = var51,
-			onTextChanged = var59,
-			onReturnPressedFromOnScreenKeyboard = var60,
-			onChannelChipAbsoluteSizeChanged = var61,
+			onFocused = var49,
+			onFocusLost = var50,
+			onTextChanged = var58,
+			onReturnPressedFromOnScreenKeyboard = var59,
+			onChannelChipAbsoluteSizeChanged = var60,
 			onChannelChipActivated = if fFlagExpChatFixBackspaceNilTargetChannel then function()
 				-- upvalues: p5 (ref)
 				p5.resetTargetChannel(p5.isGlobalChatTabActive)
@@ -1339,17 +1313,17 @@ end)(function(p5)
 			isGlobalChatTabActive = p5.isGlobalChatTabActive,
 			developerChannelTabsEnabled = p5.developerChannelTabsEnabled,
 			onDictationActivityChanged = p5.onDictationActivityChanged,
-			onSendActivated = var46,
-			onSendRecordingTap = var47,
+			onSendActivated = var45,
+			onSendRecordingTap = var46,
 			onTranscriptionStaged = if var31 then var31.stageTranscription else nil,
 			isSpatialUIEnabled = isSpatialUIEnabled,
 			isTextBoxSelectable = if fFlagEnableConsoleExpControls then true else nil,
 			isPlaceholderSelectable = true,
-			placeholderSelectionImageObject = var62
+			placeholderSelectionImageObject = var61
 		})
 	else
 		createElement_1 = reactModule.createElement
-		local var68 = "Frame"
+		local var67 = "Frame"
 		local t_2 = {
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundColor3 = chatInputBarSettings.BackgroundColor3,
@@ -1361,7 +1335,7 @@ end)(function(p5)
 		}
 		local t_3 = {}
 		local createElement_2 = reactModule.createElement
-		local var69 = "UIStroke"
+		local var68 = "UIStroke"
 		local t_4 = {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 			Color = configModule.ChatInputBarBorderColor3
@@ -1371,10 +1345,10 @@ end)(function(p5)
 			-- upvalues: chatInputBarBorderTransparency (ref)
 			return chatInputBarBorderTransparency + p11 * (1 - chatInputBarBorderTransparency)
 		end)
-		t_3.Border = createElement_2(var69, t_4)
+		t_3.Border = createElement_2(var68, t_4)
 		t_3.Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 3) })
 		local createElement_3 = reactModule.createElement
-		local var70 = "Frame"
+		local var69 = "Frame"
 		local t_5 = {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -1382,7 +1356,7 @@ end)(function(p5)
 		}
 		local t_6 = {}
 		local createElement_4 = reactModule.createElement
-		local var71 = "Frame"
+		local var70 = "Frame"
 		local t_7 = {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -1390,14 +1364,14 @@ end)(function(p5)
 		}
 		local t_8 = {}
 		local createElement_5 = reactModule.createElement
-		local var72 = channelChipModule
+		local var71 = channelChipModule
 		local t_9 = {}
-		local var73 = 0
+		local var72 = 0
 		t_9.transparency = p5.transparencyValue:map(function(p11)
-			-- upvalues: var73 (ref)
-			return var73 + p11 * (1 - var73)
+			-- upvalues: var72 (ref)
+			return var72 + p11 * (1 - var72)
 		end)
-		t_9.onAbsoluteSizeChanged = var61
+		t_9.onAbsoluteSizeChanged = var60
 		t_9.onChannelChipActivated = if fFlagExpChatFixBackspaceNilTargetChannel then function()
 			-- upvalues: p5 (ref)
 			p5.resetTargetChannel(p5.isGlobalChatTabActive)
@@ -1405,12 +1379,12 @@ end)(function(p5)
 		t_9.targetTextChannelDisplayName = p5.targetTextChannelDisplayName or ""
 		t_9.isChannelBarVisible = p5.isChannelBarVisible
 		t_9.developerChannelTabsEnabled = p5.developerChannelTabsEnabled
-		t_8.TargetChannelChip = createElement_5(var72, t_9)
-		local var74 = not var40
+		t_8.TargetChannelChip = createElement_5(var71, t_9)
+		local var73 = not var40
 		
-		if var74 then
-			var74 = reactModule.createElement
-			local var75 = "TextLabel"
+		if var73 then
+			var73 = reactModule.createElement
+			local var74 = "TextLabel"
 			local t_10 = {
 				BackgroundTransparency = 1,
 				Selectable = true,
@@ -1423,26 +1397,26 @@ end)(function(p5)
 				Size = var26:map(function(p11)
 					return UDim2.new(1, -(p11 + 8), 0, 0)
 				end),
-				TextColor3 = if var65 then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3,
+				TextColor3 = if var64 then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3,
 				TextSize = if isSpatialUIEnabled then chatInputBarSettings.SpatialPanelTextSize else chatInputBarSettings.TextSize
 			}
-			local var76 = if var65 then 0.5 else 0
+			local var75 = if var64 then 0.5 else 0
 			t_10.TextTransparency = p5.transparencyValue:map(function(p11)
-				-- upvalues: var76 (ref)
-				return var76 + p11 * (1 - var76)
+				-- upvalues: var75 (ref)
+				return var75 + p11 * (1 - var75)
 			end)
-			t_10.SelectionImageObject = var62
+			t_10.SelectionImageObject = var61
 			t_10.TextXAlignment = Enum.TextXAlignment.Left
 			t_10.TextYAlignment = Enum.TextYAlignment.Top
 			t_10.ref = var32
-			var74 = var74(var75, t_10)
+			var73 = var73(var74, t_10)
 		end
-		t_8.DisabledPlaceholderLabel = var74
-		local var77 = var40
+		t_8.DisabledPlaceholderLabel = var73
+		local var76 = var40
 		
-		if var77 then
-			var77 = reactModule.createElement
-			local var78 = "Frame"
+		if var76 then
+			var76 = reactModule.createElement
+			local var77 = "Frame"
 			local t_10 = {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
@@ -1453,30 +1427,30 @@ end)(function(p5)
 				end)
 			}
 			local t_11 = {}
-			local var79 = var40
+			local var78 = var40
 			
-			if var79 then
-				var79 = reactModule.createElement
-				local var80 = "TextBox"
+			if var78 then
+				var78 = reactModule.createElement
+				local var79 = "TextBox"
 				local t_12 = {
 					AnchorPoint = Vector2.new(0, 0),
 					AutomaticSize = Enum.AutomaticSize.XY,
 					BackgroundTransparency = 1,
 					ClearTextOnFocus = false,
 					FontFace = chatInputBarSettings.FontFace,
-					PlaceholderText = if var65 then p5.placeholderText else "",
+					PlaceholderText = if var64 then p5.placeholderText else "",
 					Selectable = if fFlagEnableConsoleExpControls then true else nil,
-					SelectionImageObject = var62,
+					SelectionImageObject = var61,
 					Size = UDim2.fromScale(1, 0),
 					Text = "",
 					PlaceholderColor3 = chatInputBarSettings.PlaceholderColor3,
 					TextColor3 = chatInputBarSettings.TextColor3,
 					TextSize = if isSpatialUIEnabled then chatInputBarSettings.SpatialPanelTextSize else chatInputBarSettings.TextSize
 				}
-				local var81 = if var65 then 0.5 else 0
+				local var80 = if var64 then 0.5 else 0
 				t_12.TextTransparency = p5.transparencyValue:map(function(p11)
-					-- upvalues: var81 (ref)
-					return var81 + p11 * (1 - var81)
+					-- upvalues: var80 (ref)
+					return var80 + p11 * (1 - var80)
 				end)
 				local textStrokeTransparency = chatInputBarSettings.TextStrokeTransparency
 				t_12.TextStrokeTransparency = p5.transparencyValue:map(function(p11)
@@ -1488,26 +1462,26 @@ end)(function(p5)
 				t_12.TextXAlignment = Enum.TextXAlignment.Left
 				t_12.TextYAlignment = Enum.TextYAlignment.Top
 				t_12.ZIndex = 2
-				t_12[reactModule.Event.Focused] = var50
-				t_12[reactModule.Event.FocusLost] = var51
-				t_12[reactModule.Change.Text] = var59
-				t_12[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = var60
+				t_12[reactModule.Event.Focused] = var49
+				t_12[reactModule.Event.FocusLost] = var50
+				t_12[reactModule.Change.Text] = var58
+				t_12[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = var59
 				t_12.ref = if chatInputBarSettings.TextBox then var30 else var29
-				var79 = var79(var80, t_12)
+				var78 = var78(var79, t_12)
 			end
-			t_11.TextBox = var79
-			var77 = var77(var78, t_10, t_11)
+			t_11.TextBox = var78
+			var76 = var76(var77, t_10, t_11)
 		end
-		t_8.TextBoxContainer = var77
+		t_8.TextBoxContainer = var76
 		t_8.UIPadding = reactModule.createElement("UIPadding", {
 			PaddingBottom = UDim.new(0, 10),
 			PaddingLeft = UDim.new(0, 10),
 			PaddingRight = UDim.new(0, 10),
 			PaddingTop = UDim.new(0, 10)
 		})
-		t_6.TextContainer = createElement_4(var71, t_7, t_8)
+		t_6.TextContainer = createElement_4(var70, t_7, t_8)
 		local createElement_6 = reactModule.createElement
-		local var82 = "TextButton"
+		local var81 = "TextButton"
 		local t_10 = {
 			AnchorPoint = Vector2.new(1, 0),
 			BackgroundTransparency = 1,
@@ -1516,7 +1490,7 @@ end)(function(p5)
 			Selectable = false,
 			Size = UDim2.new(0, p5.sendButtonContainerWidth, 1, 0),
 			Text = "",
-			[reactModule.Event.Activated] = var46
+			[reactModule.Event.Activated] = var45
 		}
 		local t_11 = {
 			Layout = reactModule.createElement("UIListLayout", {
@@ -1525,25 +1499,25 @@ end)(function(p5)
 			})
 		}
 		local createElement_7 = reactModule.createElement
-		local var83 = imageSetLabel
+		local var82 = imageSetLabel
 		local t_12 = {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
-			ImageColor3 = if var64 then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3
+			ImageColor3 = if var63 then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3
 		}
-		local var84 = if var64 then 0.5 else 0
+		local var83 = if var63 then 0.5 else 0
 		t_12.ImageTransparency = p5.transparencyValue:map(function(p11)
-			-- upvalues: var84 (ref)
-			return var84 + p11 * (1 - var84)
+			-- upvalues: var83 (ref)
+			return var83 + p11 * (1 - var83)
 		end)
 		t_12.Image = images["icons/actions/send"]
 		t_12.Size = UDim2.new(0, 30, 0, 30)
-		t_11.SendIcon = createElement_7(var83, t_12)
-		t_6.SendButton = createElement_6(var82, t_10, t_11)
-		t_3.Container = createElement_3(var70, t_5, t_6)
-		createElement_1 = createElement_1(var68, t_2, t_3)
+		t_11.SendIcon = createElement_7(var82, t_12)
+		t_6.SendButton = createElement_6(var81, t_10, t_11)
+		t_3.Container = createElement_3(var69, t_5, t_6)
+		createElement_1 = createElement_1(var67, t_2, t_3)
 	end
 	t_1.Background = createElement_1
 	
-	return createElement(var67, t, t_1)
+	return createElement(var66, t, t_1)
 end))

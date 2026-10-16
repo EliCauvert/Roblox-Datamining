@@ -1,82 +1,74 @@
 ﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
 local parent = chatUIPrimitives.Parent
 local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
+local _ = require(parent.Foundation)
 local _ = require(script.Parent.Parent.Types)
 local messageDraftModelModule = require(script.Parent.Parent.MessageDraftModel)
 local _ = require(chatUIPrimitives.UniversalMessage.Types)
-local messageDraftFromExpressionContentModule = require(script.Parent.messageDraftFromExpressionContent)
 local _ = require(chatUIPrimitives.Components.ChatInputBar.ChatInputBarView)
-local moderationTimeoutModule = require(script.Parent.ModerationTimeout)
+
+local function _(p1)
+	return if p1.altText == nil then if p1.kind == "preset" or p1.kind == "plain-text" then p1.text or "" else "" else p1.altText
+end
 
 return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), messageDraftModelModule (ref), messageDraftFromExpressionContentModule (ref), moderationTimeoutModule (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = foundationModule.Hooks.useCursor(foundationModule.Enums.CursorType.RoundedRect)
-	local moderationTimeout = p1.moderationTimeout
-	local transparency = p1.transparency
-	local var3 = moderationTimeout ~= nil and moderationTimeout.status ~= "none"
-	local var4 = moderationTimeout ~= nil and moderationTimeout.status == "active"
-	local var5 = p1.chatAvailability.canSend and not var3
+	-- upvalues: reactModule (ref), messageDraftModelModule (ref)
+	local canSend = p1.chatAvailability.canSend
 	local sendMessageDraft = p1.messageDelivery.sendMessageDraft
+	local onMessageDeliveryReceipt = p1.messageDelivery.onMessageDeliveryReceipt
 	local onFocusChanged = p1.onFocusChanged
 	local expressionTray = p1.expressionTray
 	local destinationSubtitle = p1.destinationSubtitle
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: sendMessageDraft (ref), messageDraftModelModule (copy)
-		sendMessageDraft(messageDraftModelModule.fromPlainText(p2))
-	end, { sendMessageDraft })
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: messageDraftFromExpressionContentModule (copy), sendMessageDraft (ref)
-		local var8 = messageDraftFromExpressionContentModule(p2)
+	local var1 = reactModule.useCallback(function(p2)
+		-- upvalues: sendMessageDraft (ref), messageDraftModelModule (copy), onMessageDeliveryReceipt (ref)
+		local var2 = sendMessageDraft(messageDraftModelModule.fromPlainText(p2))
+		onMessageDeliveryReceipt(var2)
 		
-		if var8 == nil then
-			return false
-		end
-		sendMessageDraft(var8)
-		
-		return true
-	end, { sendMessageDraft })
-	local var8 = reactModule.useCallback(function()
+		return var2
+	end, { sendMessageDraft, onMessageDeliveryReceipt })
+	local var2 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref)
+		var1(p2)
+	end, { var1 })
+	local var3 = reactModule.useCallback(function(p2)
+		-- upvalues: var1 (ref)
+		return var1(if p2.altText ~= nil then if p2.kind == "preset" or p2.kind == "plain-text" then p2.text or "" else "" else p2.altText).accepted
+	end, { var1 })
+	local var4 = reactModule.useCallback(function()
 		-- upvalues: onFocusChanged (ref)
 		if onFocusChanged then
 			onFocusChanged(true)
 		end
 	end, { onFocusChanged })
-	local var9 = reactModule.useCallback(function()
+	local var5 = reactModule.useCallback(function()
 		-- upvalues: onFocusChanged (ref)
 		if onFocusChanged then
 			onFocusChanged(false)
 		end
 	end, { onFocusChanged })
-	local var10 = if expressionTray then expressionTray.fetchExpressionItems else nil
-	local var11 = if expressionTray then expressionTray.onKeyboardActivated else nil
-	local var12 = if expressionTray then expressionTray.cooldownDurationSeconds else nil
-	local var13 = expressionTray ~= nil
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), reactModule (copy), moderationTimeoutModule (copy), moderationTimeout (ref), transparency (ref)
-		return if var3 then reactModule.createElement(moderationTimeoutModule, { state = moderationTimeout, transparency = transparency }) else nil
-	end, { var3, moderationTimeout, transparency })
+	local var6 = if expressionTray then expressionTray.fetchExpressionItems else nil
+	local var7 = if expressionTray then expressionTray.onKeyboardActivated else nil
+	local var8 = if expressionTray then expressionTray.cooldownDurationSeconds else nil
+	local var9 = expressionTray ~= nil
 	
 	return {
 		composerLayout = true,
 		themedColors = true,
-		onSend = var6,
-		canLocalUserChat = var5,
-		disabledOverlay = var14 or (if var5 then nil else p1.chatAvailability.upsell),
-		pillStrokeStyle = if var4 then var1.Color.System.Alert else nil,
+		onSend = var2,
+		canLocalUserChat = canSend,
+		disabledOverlay = if canSend then nil else p1.chatAvailability.upsell,
 		expressionTray = reactModule.useMemo(function()
-			-- upvalues: var13 (ref), var7 (ref), var5 (ref), var10 (ref), var11 (ref), var12 (ref)
-			return if var13 then {
-				sendExpression = var7,
-				canLocalUserChat = var5,
-				canSend = var5,
-				fetchExpressionItems = var10,
-				onKeyboardActivated = var11,
-				cooldownDurationSeconds = var12
+			-- upvalues: var9 (ref), var3 (ref), canSend (ref), var6 (ref), var7 (ref), var8 (ref)
+			return if var9 then {
+				sendExpression = var3,
+				canLocalUserChat = canSend,
+				canSend = canSend,
+				fetchExpressionItems = var6,
+				onKeyboardActivated = var7,
+				cooldownDurationSeconds = var8
 			} else nil
 		end, {
-			var13, var7, var5, var10, var11, var12
+			var9, var3, canSend, var6, var7, var8
 		}),
 		sideChipText = if destinationSubtitle then destinationSubtitle.text else nil,
 		showSideChip = destinationSubtitle ~= nil,
@@ -84,10 +76,9 @@ return function(p1)
 		placeholderText = p1.placeholderText,
 		maximumCharacterLimit = p1.maximumCharacterLimit,
 		textBoxRef = p1.textBoxRef,
-		selectionImageObject = var2,
 		fontFace = p1.fontFace,
-		transparencyValue = transparency,
-		onFocusGained = if onFocusChanged then var8 else nil,
-		onFocusLost = if onFocusChanged then var9 else nil
+		transparencyValue = p1.transparency,
+		onFocusGained = if onFocusChanged then var4 else nil,
+		onFocusLost = if onFocusChanged then var5 else nil
 	}
 end

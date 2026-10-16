@@ -23,12 +23,13 @@ local accessResponseEnum = ampUpsellModule.AmpEnums.AccessResponseEnum
 local fFlagProfilePlatformAddTC = require(parent.SharedFlags).FFlagProfilePlatformAddTC
 local fStringParentLinkAmpNameSpace = require(parent.SharedFlags).FStringParentLinkAmpNameSpace
 local getFFlagEnableProfileInsightsApolloMigration = require(parent.SharedFlags).GetFFlagEnableProfileInsightsApolloMigration
+local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
 local fFlagTFClassmatesProfileInsight = require(parent.SharedFlags).FFlagTFClassmatesProfileInsight
 local socialMetadataSectionMigrateUserProfileToSignals = game:DefineFastFlag("SocialMetadataSectionMigrateUserProfileToSignals", false)
 local var1 = if socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Stores.UserProfileStore.get() else nil
 
 return function(p1)
-	-- upvalues: socialMetadataSectionMigrateUserProfileToSignals (ref), userProfilesModule (ref), reactModule (ref), signalsModule (ref), var1 (ref), signalsReactModule (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), isCustomNilModule (ref), useLocalization (ref), ampApiProvider (ref), fStringParentLinkAmpNameSpace (ref), accessResponseEnum (ref), foundationModule (ref), view (ref), userTile (ref), layoutMode (ref), fFlagTFClassmatesProfileInsight (ref), skeleton (ref), fFlagProfilePlatformAddTC (ref), socialMetadataIconsAndTextsSectionModule (ref)
+	-- upvalues: socialMetadataSectionMigrateUserProfileToSignals (ref), userProfilesModule (ref), reactModule (ref), signalsModule (ref), var1 (ref), signalsReactModule (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), fFlagTFProfileInsightsBypassCache (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), isCustomNilModule (ref), useLocalization (ref), ampApiProvider (ref), fStringParentLinkAmpNameSpace (ref), accessResponseEnum (ref), foundationModule (ref), view (ref), userTile (ref), layoutMode (ref), fFlagTFClassmatesProfileInsight (ref), skeleton (ref), fFlagProfilePlatformAddTC (ref), socialMetadataIconsAndTextsSectionModule (ref)
 	local var2 = if not socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { p1.userId },
 		query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
@@ -65,8 +66,8 @@ return function(p1)
 	if getFFlagEnableProfileInsightsApolloMigration() then
 		local var7, var8 = useSignalProfileInsightsByUserId({
 			rankingStrategy = "tc_info_boost",
-			forceFetch = true,
-			userId = p1.userId
+			userId = p1.userId,
+			forceFetch = fFlagTFProfileInsightsBypassCache
 		})
 		t = var7
 		var6 = var8

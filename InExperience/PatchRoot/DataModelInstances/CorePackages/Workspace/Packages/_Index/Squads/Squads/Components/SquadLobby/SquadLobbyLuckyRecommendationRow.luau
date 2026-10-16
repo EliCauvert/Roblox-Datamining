@@ -1,7 +1,6 @@
 ﻿local httpService = game:GetService("HttpService")
 local squads = script:FindFirstAncestor("Squads")
 local parent = squads.Parent
-local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local dependenciesModule = require(squads.dependencies)
 local react = dependenciesModule.React
 local foundation = dependenciesModule.Foundation
@@ -19,7 +18,7 @@ local eventNamesModule = require(parent.SquadsCore.EventNames)
 local squadLobbyLuckyRecommendationModalModule = require(script.Parent.SquadLobbyLuckyRecommendationModal)
 
 return function(_)
-	-- upvalues: useTokens (ref), react (ref), useLocalization (ref), useLocalUserId (ref), squadExternalContractContext (ref), useCurrentSquadMembers (ref), useEffectOnce (ref), eventNamesModule (ref), httpService (ref), view (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), text (ref), icon (ref), iconSize (ref), squadLobbyLuckyRecommendationModalModule (ref)
+	-- upvalues: useTokens (ref), react (ref), useLocalization (ref), useLocalUserId (ref), squadExternalContractContext (ref), useCurrentSquadMembers (ref), useEffectOnce (ref), eventNamesModule (ref), httpService (ref), view (ref), text (ref), icon (ref), iconSize (ref), squadLobbyLuckyRecommendationModalModule (ref)
 	local var1 = useTokens()
 	local var2, var3 = react.useState(false)
 	local var4 = useLocalization({
@@ -59,21 +58,18 @@ return function(_)
 						clientTimestamp = os.time()
 					})
 					var3(true)
-				end, { var5, var6 }),
-				testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-lucky-recommendation-row" else nil
+				end, { var5, var6 })
 			}, {
 				Content = react.createElement(view, { tag = "col fill gap-xsmall auto-y", LayoutOrder = 1 }, {
 					Title = react.createElement(text, {
 						tag = "size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left text-truncate-end content-emphasis",
 						LayoutOrder = 1,
-						Text = var4.title,
-						testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-lucky-recommendation-row--title" else nil
+						Text = var4.title
 					}),
 					Body = react.createElement(text, {
 						tag = "size-full-0 auto-y text-body-medium text-no-wrap text-align-x-left text-truncate-end content-default",
 						LayoutOrder = 2,
-						Text = var4.body,
-						testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-lucky-recommendation-row--body" else nil
+						Text = var4.body
 					})
 				}),
 				Chevron = react.createElement(icon, {

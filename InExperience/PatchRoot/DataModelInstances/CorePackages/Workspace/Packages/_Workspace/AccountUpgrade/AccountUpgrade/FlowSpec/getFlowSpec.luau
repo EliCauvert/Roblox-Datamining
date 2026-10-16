@@ -38,31 +38,10 @@ local t = {
 		upgradeType = "OAuth",
 		titleTextKey = "Authentication.SignUp.Header.OneLastThing",
 		subtitleTextKey = "Authentication.SignUp.Subtitle.AddYourBirthday",
-		submitTextKey = "Authentication.SignUp.Action.CreateAccountSentenceCase",
-		legalTextKey = "Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount",
-		fitsDialogToContent = true,
+		submitTextKey = "Authentication.SignUp.Action.StartPlay",
 		requiredFields = {
 			accountUpgradeFieldModule.Birthday,
 			accountUpgradeFieldModule.Username
-		},
-		optionalFields = { accountUpgradeFieldModule.Gender }
-	},
-	[accountUpgradeFlowModule.Signup] = {
-		canDismiss = true,
-		signsOutOnDismiss = false,
-		upgradeType = "Signup",
-		titleTextKey = "Authentication.SignUp.Action.CreateAccountSentenceCase",
-		subtitleTextKey = nil,
-		submitTextKey = "Authentication.SignUp.Action.Create",
-		legalTextKey = "Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount",
-		linkedAccountLegalTextKey = "Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName",
-		boldFieldLabels = true,
-		capturesAuditContent = true,
-		hostReportsSubmit = true,
-		requiredFields = {
-			accountUpgradeFieldModule.Birthday,
-			accountUpgradeFieldModule.Username,
-			accountUpgradeFieldModule.Password
 		},
 		optionalFields = { accountUpgradeFieldModule.Gender }
 	}

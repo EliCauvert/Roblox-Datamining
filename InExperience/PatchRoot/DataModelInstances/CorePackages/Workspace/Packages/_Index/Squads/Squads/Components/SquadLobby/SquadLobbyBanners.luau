@@ -27,7 +27,6 @@ local squadPromptType = require(parent.SquadsCore.Enums).SquadPromptType
 local squadExternalContractContext = require(parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
 local getFFlagEnableCrossExpVoiceMemoryCheck = sharedFlags.getFFlagEnableCrossExpVoiceMemoryCheck
 local fFlagEnableVoiceEuConsentPrompt = sharedFlags.FFlagEnableVoiceEuConsentPrompt
-local fFlagSquadsEnableFoundationTestIdsModule = require(squads.Flags.FFlagSquadsEnableFoundationTestIds)
 local useIsAnyOtherUserPartyVoiceEligibleModule = require(squads.Hooks.useIsAnyOtherUserPartyVoiceEligible)
 local useIsLocalPlayerPartyVoiceEligible = require(parent.SquadsCore.Hooks).useIsLocalPlayerPartyVoiceEligible
 local useIsCurrentSquadPartyVoiceEligible = require(parent.SquadsCore.Hooks).useIsCurrentSquadPartyVoiceEligible
@@ -50,7 +49,7 @@ function openWebview(p1, p2)
 end
 
 local var1 = function(p1)
-	-- upvalues: useTokens (ref), disallowSquadLobbyBannersInlineButtons (ref), react (ref), foundation (ref), fFlagSquadsEnableFoundationTestIdsModule (ref)
+	-- upvalues: useTokens (ref), disallowSquadLobbyBannersInlineButtons (ref), react (ref), foundation (ref)
 	local var2 = useTokens()
 	local var3 = p1.isButtonInline and not disallowSquadLobbyBannersInlineButtons
 	
@@ -77,12 +76,8 @@ local var1 = function(p1)
 			HorizontalFlex = if var3 then Enum.UIFlexAlignment.SpaceBetween else Enum.UIFlexAlignment.Fill,
 			VerticalFlex = if var3 then Enum.UIFlexAlignment.Fill else Enum.UIFlexAlignment.None
 		}),
-		TextFrame = react.createElement(foundation.View, {
-			tag = "col auto-xy gap-small wrap",
-			LayoutOrder = 1,
-			testId = p1.testId
-		}, react.useMemo(function()
-			-- upvalues: react (copy), foundation (copy), var2 (ref), p1 (ref), fFlagSquadsEnableFoundationTestIdsModule (copy)
+		TextFrame = react.createElement(foundation.View, { tag = "col auto-xy gap-small wrap", LayoutOrder = 1 }, react.useMemo(function()
+			-- upvalues: react (copy), foundation (copy), var2 (ref), p1 (ref)
 			local list = {
 				react.createElement(foundation.Text, {
 					LayoutOrder = 1,
@@ -94,8 +89,7 @@ local var1 = function(p1)
 					Text = p1.label,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					TextTruncate = Enum.TextTruncate.None,
-					testId = if fFlagSquadsEnableFoundationTestIdsModule then `{p1.testId}--label` else nil
+					TextTruncate = Enum.TextTruncate.None
 				})
 			}
 			
@@ -113,21 +107,19 @@ local var1 = function(p1)
 							Text = v,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextYAlignment = Enum.TextYAlignment.Center,
-							TextTruncate = Enum.TextTruncate.None,
-							testId = if fFlagSquadsEnableFoundationTestIdsModule then `{p1.testId}--sublabel-{i}` else nil
+							TextTruncate = Enum.TextTruncate.None
 						}))
 					end
 				end
 			end
 			return list
-		end, { p1.label, p1.sublabels, p1.testId })),
+		end, { p1.label, p1.sublabels })),
 		InlineButton = if p1.onActivated and var3 then react.createElement(foundation.Button, {
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			text = p1.buttonLabel,
 			variant = foundation.Enums.ButtonVariant.Link,
-			onActivated = p1.onActivated,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then `{p1.testId}--button` else nil
+			onActivated = p1.onActivated
 		}) else nil,
 		BottomButton = if p1.onActivated and not var3 then react.createElement(foundation.Button, {
 			LayoutOrder = 2,
@@ -135,14 +127,13 @@ local var1 = function(p1)
 			variant = foundation.Enums.ButtonVariant.Standard,
 			size = foundation.Enums.ButtonSize.Small,
 			onActivated = p1.onActivated,
-			fillBehavior = foundation.Enums.FillBehavior.Fill,
-			testId = if fFlagSquadsEnableFoundationTestIdsModule then `{p1.testId}--button` else nil
+			fillBehavior = foundation.Enums.FillBehavior.Fill
 		}) else nil
 	})
 end
 
 local var4 = function(p2)
-	-- upvalues: useLocalUserId (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), getTableAppStorageKey (ref), SQUAD_VOICE_EU_MODAL_SEEN_KEY (ref), SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY (ref), httpService (ref), default (ref), var1 (ref), fFlagSquadsEnableFoundationTestIdsModule (ref), displayEuConsentPromptModule (ref)
+	-- upvalues: useLocalUserId (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), getTableAppStorageKey (ref), SQUAD_VOICE_EU_MODAL_SEEN_KEY (ref), SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY (ref), httpService (ref), default (ref), var1 (ref), displayEuConsentPromptModule (ref)
 	local var5 = useLocalUserId()
 	local var6 = useDispatch()
 	local var7 = react.useContext(squadExternalContractContext)
@@ -181,7 +172,6 @@ local var4 = function(p2)
 		buttonLabel = "Connect",
 		isButtonInline = true,
 		LayoutOrder = p2.LayoutOrder,
-		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-banner-eu-consent" else nil,
 		onActivated = function()
 			-- upvalues: var6 (ref), displayEuConsentPromptModule (copy), var7 (ref), var5 (ref), var10 (ref), var11 (ref)
 			var6(displayEuConsentPromptModule(var7.setSquadPrompt, tostring(var5), var10, var11))
@@ -190,7 +180,7 @@ local var4 = function(p2)
 end
 
 local var5 = function(p2)
-	-- upvalues: useDispatch (ref), useStore (ref), react (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useVoiceStatus (ref), crossExperienceModule (ref), voiceStatus (ref), useLocalization (ref), voiceStatusChanged (ref), default (ref), getFFlagEnableCrossExpVoiceMemoryCheck (ref), squadPromptType (ref), var1 (ref), fFlagSquadsEnableFoundationTestIdsModule (ref)
+	-- upvalues: useDispatch (ref), useStore (ref), react (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useVoiceStatus (ref), crossExperienceModule (ref), voiceStatus (ref), useLocalization (ref), voiceStatusChanged (ref), default (ref), getFFlagEnableCrossExpVoiceMemoryCheck (ref), squadPromptType (ref), var1 (ref)
 	local var6 = useDispatch()
 	local var7 = useStore()
 	local var8 = react.useContext(squadExternalContractContext)
@@ -253,13 +243,12 @@ local var5 = function(p2)
 			elseif voiceStatus.isVoiceRetriableErrorByVoiceJoin(var10) then
 				default:rejoinVoice()
 			end
-		end, { var10, var9, var11 }),
-		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-banner-voice-error" else nil
+		end, { var10, var9, var11 })
 	}) else nil
 end
 
 local var6 = function(p2)
-	-- upvalues: useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsAnyOtherUserPartyVoiceEligibleModule (ref), useLocalization (ref), useAppPolicy (ref), react (ref), partyVoiceBannerErrorUserNotEligibleURL (ref), var1 (ref), fFlagSquadsEnableFoundationTestIdsModule (ref)
+	-- upvalues: useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsAnyOtherUserPartyVoiceEligibleModule (ref), useLocalization (ref), useAppPolicy (ref), react (ref), partyVoiceBannerErrorUserNotEligibleURL (ref), var1 (ref)
 	local var7 = useLocalization({
 		errorText = "Feature.Squads.Label.VoiceErrorUserIneligible",
 		errorButton = "Feature.Squads.Action.VoiceErrorUserIneligible"
@@ -277,13 +266,12 @@ local var6 = function(p2)
 			if partyVoiceBannerErrorUserNotEligibleURL ~= "" then
 				openWebview(var7.errorButton, partyVoiceBannerErrorUserNotEligibleURL)
 			end
-		end, { var7.errorButton }) else nil,
-		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-banner-user-voice-ineligible" else nil
+		end, { var7.errorButton }) else nil
 	}) else nil
 end
 
 local var7 = function(p2)
-	-- upvalues: useVoiceStatus (ref), useCurrentSquadId (ref), react (ref), voiceChatModule (ref), useAppPolicy (ref), useLocalization (ref), voiceStatus (ref), var1 (ref), fFlagSquadsEnableFoundationTestIdsModule (ref)
+	-- upvalues: useVoiceStatus (ref), useCurrentSquadId (ref), react (ref), voiceChatModule (ref), useAppPolicy (ref), useLocalization (ref), voiceStatus (ref), var1 (ref)
 	local var8 = useVoiceStatus()
 	local var9 = useCurrentSquadId() or ""
 	local var10 = react.useMemo(function()
@@ -318,13 +306,12 @@ local var7 = function(p2)
 				-- upvalues: voiceChatModule (copy)
 				voiceChatModule.Utils.SwitchToMicrophoneSettings()
 			end)
-		end, {}),
-		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-banner-mic-permissions" else nil
+		end, {})
 	}) else nil
 end
 
 local var8 = function(p2)
-	-- upvalues: useNavigation (ref), useCurrentSquadParentChannelId (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useLocalization (ref), react (ref), var1 (ref), fFlagSquadsEnableFoundationTestIdsModule (ref)
+	-- upvalues: useNavigation (ref), useCurrentSquadParentChannelId (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useLocalization (ref), react (ref), var1 (ref)
 	local var9 = useNavigation()
 	local var10 = useCurrentSquadParentChannelId() or ""
 	local var11 = useLocalization({
@@ -345,8 +332,7 @@ local var8 = function(p2)
 					var9.navigate("CreateUnfilteredChatPartialModal", { conversationId = var10 })
 				end)
 			end
-		end, { var10, var9 }),
-		testId = if fFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-banner-party-voice-ineligible" else nil
+		end, { var10, var9 })
 	}) else nil
 end
 

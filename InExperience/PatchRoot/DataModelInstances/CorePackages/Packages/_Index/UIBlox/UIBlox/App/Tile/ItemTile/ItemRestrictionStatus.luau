@@ -1,6 +1,7 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent.Parent
 local parent_2 = parent_1.Parent
+local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
 local foundationModule = require(parent_2.Foundation)
@@ -26,7 +27,7 @@ local function _(p1, p2)
 	if p1[itemTileEnumsModule.Restriction.Collectible] then
 		return "#"
 	elseif p2 and p2.limitedSerialNumber then
-		var1 ..= " " .. p1.limitedSerialNumber
+		var1 ..= " " .. p2.limitedSerialNumber
 	end
 	return var1
 end
@@ -37,9 +38,9 @@ local _ = function(p1)
 end
 
 function itemRestrictionStatus.render(p1)
-	-- upvalues: withStyleModule (ref), itemTileEnumsModule (ref), getTextSizeModule (ref), vector2 (ref), imagesModule (ref), vector2_1 (ref), roactModule (ref), imageSetComponentModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
+	-- upvalues: withStyleModule (ref), itemTileEnumsModule (ref), getTextSizeModule (ref), vector2 (ref), imagesModule (ref), vector2_1 (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
 	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), itemTileEnumsModule (copy), getTextSizeModule (copy), vector2 (copy), imagesModule (copy), vector2_1 (copy), roactModule (copy), imageSetComponentModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
+		-- upvalues: p1 (ref), itemTileEnumsModule (copy), getTextSizeModule (copy), vector2 (copy), imagesModule (copy), vector2_1 (copy), roactModule (copy), imageSetComponentModule (copy), UIBloxConfigModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
 		local var1
 		local theme = p2.Theme
 		local font = p2.Font
@@ -68,7 +69,7 @@ function itemRestrictionStatus.render(p1)
 			ImageTransparency = theme.UIDefault.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(8, 8, 9, 9),
-			Position = UDim2.new(0, tokens.Size.Size_200, 1, -tokens.Size.Size_200),
+			Position = UDim2.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100, 1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_200 else -tokens.Global.Size_100),
 			Size = UDim2.new(0, var6.X + var4.X + vector2_1.X, 0, math.max(var6.Y, var4.Y) + vector2_1.Y)
 		}, {
 			Icon = var5 and roactModule.createElement(imageSetComponentModule.Label, {

@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagPPVEnabledOnConsole) and game:DefineFastFlag("SocialCarouselPressXToViewProfile", false)

@@ -34,19 +34,18 @@ local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.SharedF
 local fFlagAddPerformanceMetricsToUnifiedPurchaseModal = require(parent.SharedFlags).FFlagAddPerformanceMetricsToUnifiedPurchaseModal
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local fFlagSkipBuyDelayForExperienceShopModule = require(purchasePrompt.Flags.FFlagSkipBuyDelayForExperienceShop)
-local fFlagLuaAppsEnablePromptVIPServerPurchase = require(parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local _ = require(parent.IAPExperience)
 
 function name.init(p1)
 	-- upvalues: fFlagSkipBuyDelayForExperienceShopModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), unifiedPurchaseEventNameEnumModule (ref), playersService (ref), promptStateModule (ref), purchaseErrorModule (ref), fFlagFixCountersForUpsellModalShownModule (ref), fFlagAddPerformanceMetricsToUnifiedPurchaseModal (ref), emitPerformanceMetricsModule (ref), constantsModule (ref)
-	function p0.shouldUseDelayedInput()
+	function p1.shouldUseDelayedInput()
 		-- upvalues: fFlagSkipBuyDelayForExperienceShopModule (copy), p1 (ref)
 		return fFlagSkipBuyDelayForExperienceShopModule and p1.props.isFromInExperienceShop
 	end
 	
 	p1.state = { canAcceptInput = not p1.shouldUseDelayedInput() }
 	
-	function p0.dispatchFetchPurchaseWarning()
+	function p1.dispatchFetchPurchaseWarning()
 		-- upvalues: p1 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), unifiedPurchaseEventNameEnumModule (copy)
 		local props = p1.props
 		
@@ -58,23 +57,23 @@ function name.init(p1)
 		return p1.props.dispatchFetchPurchaseWarning(props.robuxProviderId)
 	end
 	
-	function p0.promptRobuxPurchase()
+	function p1.promptRobuxPurchase()
 		-- upvalues: p1 (ref)
 		local props = p1.props
 		p1.props.promptRobuxPurchase(p1.props.networking, props.robuxProviderId, props.robuxProductId)
 	end
 	
-	function p0.onDelayedInputComplete()
+	function p1.onDelayedInputComplete()
 		-- upvalues: p1 (ref)
 		p1:setState({ canAcceptInput = true })
 	end
 	
-	function p0.canAcceptInput()
+	function p1.canAcceptInput()
 		-- upvalues: p1 (ref), playersService (copy)
 		return if playersService and playersService.LocalPlayer and playersService.LocalPlayer.GameplayPaused then false else p1.state.canAcceptInput
 	end
 	
-	function p0.confirmButtonPressed()
+	function p1.confirmButtonPressed()
 		-- upvalues: p1 (ref), promptStateModule (copy), purchaseErrorModule (copy)
 		local props = p1.props
 		local promptState = props.promptState
@@ -106,12 +105,12 @@ function name.init(p1)
 		props.endPurchase()
 	end
 	
-	function p0.cancelButtonPressed()
+	function p1.cancelButtonPressed()
 		-- upvalues: p1 (ref)
 		p1.props.endPurchase()
 	end
 	
-	function p0.onBuyItemButtonMounted(_)
+	function p1.onBuyItemButtonMounted(_)
 		-- upvalues: p1 (ref), fFlagFixCountersForUpsellModalShownModule (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagAddPerformanceMetricsToUnifiedPurchaseModal (copy), emitPerformanceMetricsModule (copy), constantsModule (copy)
 		local purchaseAnalyticsMetadata = p1.props.purchaseAnalyticsMetadata or {}
 		
@@ -201,7 +200,7 @@ function name.emitUnifiedPurchaseTelemetry(value, p1)
 end
 
 function name.render(p1)
-	-- upvalues: externalSettingsModule (ref), roact (ref), robuxUpsellFlow (ref), getUnifiedPurchaseModalTypeModule (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fFlagLuaAppsEnablePromptVIPServerPurchase (ref), getFFlagDisablePurchasePromptFunctionForMaquettesModule (ref), getPaymentPlatformModule (ref), paymentPlatformModule (ref)
+	-- upvalues: externalSettingsModule (ref), roact (ref), robuxUpsellFlow (ref), getUnifiedPurchaseModalTypeModule (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getFFlagDisablePurchasePromptFunctionForMaquettesModule (ref), getPaymentPlatformModule (ref), paymentPlatformModule (ref)
 	local purchaseAnalyticsMetadata
 	local props = p1.props
 	local var1 = externalSettingsModule.new()
@@ -249,7 +248,6 @@ function name.render(p1)
 	t.setPostPurchaseActions = if fFlagPurchasePromptCartPricingEnabledModule then props.setPostPurchaseActions else nil
 	t.onRobloxPlusButtonActivated = props.onRobloxPlusButtonActivated
 	t.robloxPlusDiscountPercentage = props.robloxPlusDiscountPercentage
-	t.isMonthlyPrice = if fFlagLuaAppsEnablePromptVIPServerPurchase then props.isMonthlyPrice else nil
 	t.purchaseState = p1:getFlowState()
 	t.errorType = p1:getErrorType()
 	t.economicRestrictionError = props.economicRestrictionError

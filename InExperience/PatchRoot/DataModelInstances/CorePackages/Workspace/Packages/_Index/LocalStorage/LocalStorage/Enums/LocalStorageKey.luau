@@ -33,6 +33,5 @@
 	IosAuthServiceEnabled = "IosAuthServiceEnabled",
 	ScheduledSquadTooltipSeen = "ScheduledSquadTooltipSeen",
 	MeTabBadgeDismissed = "MeTabBadgeDismissed",
-	MeTabBadgeSessionCount = "MeTabBadgeSessionCount",
-	AppFirstLaunchTimestamps = "AppFirstLaunchTimestamps"
+	MeTabBadgeSessionCount = "MeTabBadgeSessionCount"
 }

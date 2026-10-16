@@ -7,8 +7,6 @@ local momentsCommonModule = require(parent.MomentsCommon)
 local verticalPagerModule = require(moments.Components.VerticalPager)
 local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
 local makeJoinImpressionFieldsModule = require(moments.Analytics.makeJoinImpressionFields)
-local momentImpressionMemoryModule = require(moments.Components.Feed.Items.Moment.MomentImpressionMemory)
-local fFlagMomentsFixOverlayRemountImpressionsModule = require(moments.Flags.FFlagMomentsFixOverlayRemountImpressions)
 local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local useSignalState = signalsReactModule.useSignalState
@@ -16,7 +14,7 @@ local useVerticalPager = verticalPagerModule.useVerticalPager
 local usePagerItem = verticalPagerModule.usePagerItem
 
 return function(p1, p2)
-	-- upvalues: useVerticalPager (ref), usePagerItem (ref), useMomentsSession (ref), reactModule (ref), signalsModule (ref), useSignalState (ref), fFlagMomentsFixOverlayRemountImpressionsModule (ref), momentImpressionMemoryModule (ref), makeJoinImpressionFieldsModule (ref), analytics (ref), eventNames (ref)
+	-- upvalues: useVerticalPager (ref), usePagerItem (ref), useMomentsSession (ref), reactModule (ref), signalsModule (ref), useSignalState (ref), makeJoinImpressionFieldsModule (ref), analytics (ref), eventNames (ref)
 	local var1 = useVerticalPager()
 	local var2 = useMomentsSession()
 	local item = usePagerItem().item
@@ -27,7 +25,7 @@ return function(p1, p2)
 			return if item == nil then false else var1.store.getCurrentItem(p3) == item
 		end)
 	end, { var1, item }))
-	local var4 = if fFlagMomentsFixOverlayRemountImpressionsModule then momentImpressionMemoryModule.useImpressionRef("joinCta") else reactModule.useRef(false)
+	local var4 = reactModule.useRef(false)
 	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), var3 (ref), p2 (ref), p1 (ref), item (ref), makeJoinImpressionFieldsModule (copy), var2 (ref), analytics (copy), eventNames (copy)
 		local current = var4.current

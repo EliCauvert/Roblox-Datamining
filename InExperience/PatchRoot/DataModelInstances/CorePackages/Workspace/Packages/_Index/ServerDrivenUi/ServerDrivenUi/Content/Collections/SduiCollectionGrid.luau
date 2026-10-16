@@ -35,6 +35,7 @@ local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppComp
 local fFlagSduiFixSearchTelemetry = require(parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local fFlagSduiPreferredTextSizeLineBudgets = require(parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
 local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor
 
 local function _(p1, p2, p3)
 	local colSpan = p1.colSpan or 1
@@ -46,7 +47,7 @@ end
 local t = {}
 
 return reactModule.memo(function(p1)
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), reactModule (ref), t (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsReactModule (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), cryoModule (ref), useCollectionLayout (ref), findAnalyticsField (ref), sduiBuilder (ref), useCollectionAnalyticsContext (ref), useCollectionImpressionsSignal (ref), getImpressionsTagModule (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), sendLegacyGameImpressionsForSduiModule (ref), useTokens (ref), fFlagSduiPreferredTextSizeLineBudgets (ref), usePreferredTextSizeLineBudget (ref), fFlagSduiFixSearchTelemetry (ref), sduiCollectionAnalyticsBuilder (ref), getSduiComponentWrapper (ref), sduiCollectionItemModule (ref), fFlagSduiCollectionGridMaxNumRows (ref), fFlagSduiCollectionGridRevealRows (ref), sduiCollectionGridRevealRowsModule (ref), collectionGrid (ref), waitForPropWrapper (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), reactModule (ref), t (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsReactModule (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), cryoModule (ref), useCollectionLayout (ref), findAnalyticsField (ref), sduiBuilder (ref), useCollectionAnalyticsContext (ref), useCollectionImpressionsSignal (ref), getImpressionsTagModule (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), sendLegacyGameImpressionsForSduiModule (ref), useTokens (ref), fFlagSduiPreferredTextSizeLineBudgets (ref), usePreferredTextSizeLineBudget (ref), fFlagSduiFixSearchTelemetry (ref), sduiCollectionAnalyticsBuilder (ref), getSduiComponentWrapper (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), sduiCollectionItemModule (ref), fFlagSduiCollectionGridMaxNumRows (ref), fFlagSduiCollectionGridRevealRows (ref), sduiCollectionGridRevealRowsModule (ref), collectionGrid (ref), waitForPropWrapper (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
 	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
 	local layoutOrder = p1.layoutOrder
 	local sduiContext = p1.sduiContext
@@ -151,7 +152,7 @@ return reactModule.memo(function(p1)
 		}),
 		items = var1,
 		renderItem = reactModule.useCallback(function(p3, p4, p5, _)
-			-- upvalues: reactModule (copy), sduiContext (ref), sduiErrors (copy), impressionsTag (ref), findAnalyticsField (copy), t (copy), sduiBuilder (copy), fFlagSduiFixSearchTelemetry (copy), var13 (ref), sduiCollectionAnalyticsBuilder (copy), getSduiComponentWrapper (copy), var11 (ref), p1 (ref), var10 (ref), sduiCollectionItemModule (copy), var9 (ref)
+			-- upvalues: reactModule (copy), sduiContext (ref), sduiErrors (copy), impressionsTag (ref), findAnalyticsField (copy), t (copy), sduiBuilder (copy), fFlagSduiFixSearchTelemetry (copy), var13 (ref), sduiCollectionAnalyticsBuilder (copy), getSduiComponentWrapper (copy), var11 (ref), p1 (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (copy), var10 (ref), sduiCollectionItemModule (copy), var9 (ref)
 			if p3 and p3.isBlank then
 				return reactModule.createElement("Frame", { BackgroundTransparency = 1, LayoutOrder = p4 }), "blank"
 			elseif not p3 then
@@ -193,8 +194,8 @@ return reactModule.memo(function(p1)
 					verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
 					index = p4,
 					selectionOrder = if p1.disableSelectionOrder or not p1.selectionOrderBase then nil else p1.selectionOrderBase + p4,
-					alignmentType = if p3.spanOverride ~= nil then nil else p3.spanOverride.alignmentType,
-					cellVerticalPadding = if p3.spanOverride ~= nil then nil else var10
+					alignmentType = if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor and p3.spanOverride ~= nil then p3.spanOverride.alignmentType else nil,
+					cellVerticalPadding = if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor and p3.spanOverride ~= nil then var10 else nil
 				},
 				debugName = `{componentType}_{p4}`,
 				localAnalyticsData = t_1

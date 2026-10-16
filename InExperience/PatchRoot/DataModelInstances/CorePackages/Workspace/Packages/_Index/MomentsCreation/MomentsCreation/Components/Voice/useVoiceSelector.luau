@@ -31,10 +31,7 @@ return function(p1)
 	local canGenerate = p1.canGenerate
 	local onCreateVoiceover = p1.onCreateVoiceover
 	local lastGeneratedTextRef = p1.lastGeneratedTextRef
-	local createPreviewAudio = p1.createPreviewAudio or function()
-		-- upvalues: createTTSAudioManagerModule (copy), controller (ref)
-		return createTTSAudioManagerModule(nil, controller.ttsAudioParent)
-	end
+	local createPreviewAudio = p1.createPreviewAudio or createTTSAudioManagerModule
 	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(nil)
 	local var3 = reactModule.useRef(false)
