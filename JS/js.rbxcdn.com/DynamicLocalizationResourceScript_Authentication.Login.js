@@ -165,7 +165,7 @@ Roblox.LangDynamic["Authentication.Login"] = {
     "Action.UseAnotherDeviceSentenceCase": "Use another device",
     "Authentication.QuickSignInLowercase": "Quick sign in",
     "Authentication.Login.Response.NoLoginMethods": "No sign-in methods are available for this account. It may be connected to Google or Apple. Try one of those or use account recovery.",
-    "Response.NoLoginMethods": "No sign-in methods are available for this account. Please try account recovery or contact support.",
+    "Response.NoLoginMethods": "No sign-in methods are available for this account. It may be connected to Google or Apple. Try one of those or use account recovery.",
     "Response.EnterEmailForLoginCode": "To sign in, please enter your email address instead",
     "Title.NewPlaceVersionLiveErrorReportBanner": "{placeName}: V{versionNumber} is live.",
     "Description.LinkExpired": "The link you have clicked is no longer valid. To login, continue to Roblox and request an email one-time code.",

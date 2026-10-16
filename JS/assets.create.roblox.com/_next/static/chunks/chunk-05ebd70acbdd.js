@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "14d6985d-111b-69fa-e9ef-c8c200b4d9aa")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d6a36e65-a0d4-971b-ad3e-d77bb6f9a297")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -679,6 +679,7 @@
         getExperienceDetailsPageRewardedAdsUrl: () => "".concat(n, "/production/monetization/immersive-ads"),
         getCreatorStorePublishingUrl: () => "".concat(n, "/production/creator-store#distribute-and-sell-assets"),
         getDecalReferenceUrl: () => "".concat(n, "/reference/engine/classes/Decal"),
+        getIntegrityServiceReferenceUrl: () => "".concat(n, "/reference/engine/classes/IntegrityService"),
         getOpenCloudReferenceUrl: () => "".concat(n, "/reference/cloud"),
         getAudioAssetsUrl: () => "".concat(n, "/building-and-visuals/audio/audio-assets"),
         getAssetsUrl: () => "".concat(n, "/projects/assets"),
@@ -764,5 +765,5 @@
     e.s(["creatorHub", 0, a])
 }]);
 
-//# debugId=14d6985d-111b-69fa-e9ef-c8c200b4d9aa
-//# sourceMappingURL=09lg67oeubk-a.js.map
+//# debugId=d6a36e65-a0d4-971b-ad3e-d77bb6f9a297
+//# sourceMappingURL=3c1dyn_v32680.js.map

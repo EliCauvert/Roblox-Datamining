@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "3f34304d71c616d3a79bf51ffa42a07b200e19f7"
+            id: "d7258ccb5b7d57624de8381df62568c6d6d655e6"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "164bf634-f6ae-4f1a-a654-b78e39b3a074", e._sentryDebugIdIdentifier = "sentry-dbid-164bf634-f6ae-4f1a-a654-b78e39b3a074")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "00d592dc-d93a-451d-888c-0e793d4a04cc", e._sentryDebugIdIdentifier = "sentry-dbid-00d592dc-d93a-451d-888c-0e793d4a04cc")
     } catch (e) {}
 }(),
 function() {
@@ -122,24 +122,24 @@ function() {
             var e = document.body.classList;
             e.add("dark-theme"), e.remove("light-theme")
         },
-        b = function(e) {
+        h = function(e) {
             e ? y() : v()
         },
-        h = function(e) {
-            b(e.matches)
-        },
         g = function(e) {
+            h(e.matches)
+        },
+        b = function(e) {
             f = e;
             var t = document.body.classList;
             switch (t.remove("color-mode-system", "color-mode-light", "color-mode-dark"), e) {
                 case "system":
-                    t.add("color-mode-system"), b(m.matches), m.addEventListener("change", h);
+                    t.add("color-mode-system"), h(m.matches), m.addEventListener("change", g);
                     break;
                 case "light":
-                    t.add("color-mode-light"), m.removeEventListener("change", h), v();
+                    t.add("color-mode-light"), m.removeEventListener("change", g), v();
                     break;
                 case "dark":
-                    t.add("color-mode-dark"), m.removeEventListener("change", h), y()
+                    t.add("color-mode-dark"), m.removeEventListener("change", g), y()
             }
         },
         p = function() {
@@ -170,7 +170,7 @@ function() {
         },
         I = function(e) {
             var t, r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
-            g(e);
+            b(e);
             var n = p();
             if (void 0 !== n) {
                 var o = null == n ? 0 : S(n),
@@ -198,7 +198,7 @@ function() {
                 if (null == n) return;
                 var o = k(n);
                 if (null == o) return;
-                g(o)
+                b(o)
             }
         },
         E = function(e) {
@@ -206,14 +206,14 @@ function() {
                 case "system":
                 case "light":
                 case "dark":
-                    g(e);
+                    b(e);
                     break;
                 case "none":
                 case "":
-                    g("system");
+                    b("system");
                     break;
                 default:
-                    console.warn("Unknown mode: ".concat(e)), g("system")
+                    console.warn("Unknown mode: ".concat(e)), b("system")
             }
         },
         O = function() {
@@ -267,9 +267,9 @@ function() {
         ! function(e) {
             var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
                 r = document.body.classList;
-            if (r.contains("color-mode-system")) return g("system");
-            if (r.contains("color-mode-light") || r.contains("light-theme")) return g("light");
-            if (r.contains("color-mode-dark") || r.contains("dark-theme")) return g("dark");
+            if (r.contains("color-mode-system") || r.contains("system-theme")) return b("system");
+            if (r.contains("color-mode-light") || r.contains("light-theme")) return b("light");
+            if (r.contains("color-mode-dark") || r.contains("dark-theme")) return b("dark");
             var n = a("RBXThemeOverride");
             if (null != n) return E(n.value);
             s = e;
@@ -279,7 +279,7 @@ function() {
                 I(t.defaultMode, 1), window.addEventListener("storage", A);
                 return
             }
-            null === l ? I(d) : void 0 === l ? g(d) : g(l), window.addEventListener("storage", A)
+            null === l ? I(d) : void 0 === l ? b(d) : b(l), window.addEventListener("storage", A)
         }(null != (j = function() {
             var e, t = null == (e = document.querySelector('meta[name="user-data"]')) ? void 0 : e.dataset.userid;
             if (null == t) return null;
@@ -292,4 +292,4 @@ function() {
         console.error(e)
     }
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Theme");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/theme-2bb0baa5d132361f.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/theme-26b203d436d70ca9.js.map

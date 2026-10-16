@@ -267,6 +267,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Header.PendingPlanChangeDialogTitle": "Subscription changing",
     "Description.PendingPlanChangeDialog": "Your subscription will update to {productName} for {price} on {date}. You may cancel this change to keep your current Plus subscription.",
     "Action.CancelPendingPlanChange": "Cancel pending change",
-    "Message.CancelPlanChangeFailed": "Something went wrong. Please try again."
+    "Message.CancelPlanChangeFailed": "Something went wrong. Please try again.",
+    "Description.BillingInfoWithFreeTrialOfferV3": "{boldTagStart}{trialPeriodType, select, Week {{trialPeriod, plural, one {{trialPeriod} week} other {{trialPeriod} weeks}}} Month {{trialPeriod, plural, one {{trialPeriod} month} other {{trialPeriod} months}}} Year {{trialPeriod, plural, one {{trialPeriod} year} other {{trialPeriod} years}}} other {{trialPeriod} {trialPeriodType}} } free{boldTagEnd}, then {price}{periodType, select, Week {{periodCount, plural, one {/week} other { every {periodCount} weeks}}} Month {{periodCount, plural, one {/month} other { every {periodCount} months}}} Year {{periodCount, plural, one {/year} other { every {periodCount} years}}} other {/{periodType}} }"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");
