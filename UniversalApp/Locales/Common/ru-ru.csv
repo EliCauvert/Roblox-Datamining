@@ -1953,8 +1953,7 @@ Feature.Friends.OneMutualFriend,— общий друг
 Feature.Friends.OneOtherMutualFriend,
 Feature.Friends.PluralMutualFriends,— общие друзья
 Feature.Friends.PluralOtherMutualFriends,
-Feature.Friends.Subtitle.ConnectionsEducation,"Проще играть и общаться с контактами. Ты можешь в любое время удалить контакт, заблокировать или пожаловаться на него."
-Feature.Friends.Subtitle.FriendsEducation,
+Feature.Friends.Subtitle.FriendsEducation,"Проще играть и общаться с контактами. Ты можешь в любое время удалить контакт, заблокировать или пожаловаться на него."
 Feature.Friends.TCEducation.Title,Добавить знакомых
 Feature.Friends.TCFeature.AndMore,и многое другое
 Feature.Friends.TCFeature.ChatWithoutFilters,Чат без фильтров

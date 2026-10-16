@@ -3629,7 +3629,6 @@ Feature.Friends.OneMutualFriend,est un ami commun
 Feature.Friends.OneOtherMutualFriend,autre ami commun
 Feature.Friends.PluralMutualFriends,sont des amis communs
 Feature.Friends.PluralOtherMutualFriends,d'autres amis communs
-Feature.Friends.Subtitle.ConnectionsEducation,"C'est plus facile de jouer et de discuter avec des Connexions. Tu peux supprimer, bloquer ou signaler une connexion à tout moment."
 Feature.Friends.Subtitle.FriendsEducation,"C'est plus facile de jouer et de discuter avec ses copains. Tu peux supprimer quelqu'un de ta liste, le bloquer ou le signaler à tout moment."
 Feature.Friends.TCEducation.Title,Ajouter des personnes que tu connais
 Feature.Friends.TCFeature.AndMore,et plus encore à venir
