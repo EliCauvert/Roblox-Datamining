@@ -21,26 +21,22 @@ local validateShoesBundleReadyForUploadModule = require(_script.validation.valid
 local validateAnimationBundleReadyForUploadModule = require(_script.validation.validateAnimationBundleReadyForUpload)
 local validateDynamicHeadMeshPartFormatModule = require(_script.validation.validateDynamicHeadMeshPartFormat)
 local validationManagerModule = require(_script.validationSystem.ValidationManager)
-local getFFlagDebugUGCDisableAssetQualityChecksModule = require(_script.flags.getFFlagDebugUGCDisableAssetQualityChecks)
-local getFFlagUGCValidateBackendInExperienceViaCanPublishModule = require(_script.flags.getFFlagUGCValidateBackendInExperienceViaCanPublish)
-local getFFlagUGCValidationAllowFullVaasModule = require(_script.flags.getFFlagUGCValidationAllowFullVaas)
 local legacyValidationAdapterModule = require(_script.util.LegacyValidationAdapter)
-local unpublishedDependenciesModule = require(_script.util.UnpublishedDependencies)
 local t = {
 	ValidateAsset = validationManagerModule.ValidateAsset,
 	ValidateFinalizedBundle = validationManagerModule.ValidateFinalizedBundle,
 	combineResultsIntoLegacy = legacyValidationAdapterModule.combineResultsIntoLegacy,
 	mergeLegacyIntoModern = legacyValidationAdapterModule.mergeLegacyIntoModern,
-	isBackendInExperienceViaCanPublishEnabled = getFFlagUGCValidateBackendInExperienceViaCanPublishModule,
-	shouldSkipAssetQualityChecks = getFFlagDebugUGCDisableAssetQualityChecksModule,
-	isFullVaasEnabled = getFFlagUGCValidationAllowFullVaasModule,
+	isBackendInExperienceViaCanPublishEnabled = require(_script.flags.getFFlagUGCValidateBackendInExperienceViaCanPublish),
+	shouldSkipAssetQualityChecks = require(_script.flags.getFFlagDebugUGCDisableAssetQualityChecks),
+	isFullVaasEnabled = require(_script.flags.getFFlagUGCValidationAllowFullVaas),
 	SplitHrdInUpload = require(_script.util.SplitHumanoidRigDescriptionForUpload).fixUploadInstance,
 	AssetQualityValidationClient = require(_script.util.AssetQualityValidationClient)
 }
 
 if getEngineFeatureUGCValidationWithContextEntrypointModule() then
 	function t.validateWithContext(p1)
-		-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), unpublishedDependenciesModule (ref), validateInternalModule (ref), destroyEditableInstancesModule (ref)
+		-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateInternalModule (ref), destroyEditableInstancesModule (ref)
 		assert(p1.instances ~= nil, "instances required in validationContext for validateWithContext")
 		assert(p1.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateWithContext")
 		local instances = p1.instances
@@ -56,12 +52,11 @@ if getEngineFeatureUGCValidationWithContextEntrypointModule() then
 		local var1, var2 = createEditableInstancesForContextModule.processAll(instances, allowEditableInstances)
 		
 		if not var1 then
-			if not isServer then
+			if isServer then
+				error(var2[1])
+			else
 				return var1, var2
-			elseif unpublishedDependenciesModule.shouldReturnOnLoadFailure(p1) then
-				return false, {}
 			end
-			error(var2[1])
 		end
 		p1.editableMeshes = var2.editableMeshes
 		p1.editableImages = var2.editableImages
@@ -331,7 +326,7 @@ t.util.isRigidAccessoryAllowed = rigidOrLayeredAllowedModule.isRigidAccessoryAll
 
 if getEngineFeatureUGCValidationWithContextEntrypointModule() then
 	function t.validateFullBodyWithContext(p1)
-		-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), unpublishedDependenciesModule (ref), validateFullBodyModule (ref), destroyEditableInstancesModule (ref)
+		-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateFullBodyModule (ref), destroyEditableInstancesModule (ref)
 		assert(p1.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBodyWithContext")
 		local isServer = p1.isServer
 		local fullBodyData = p1.fullBodyData
@@ -352,12 +347,11 @@ if getEngineFeatureUGCValidationWithContextEntrypointModule() then
 		local var1, var2 = createEditableInstancesForContextModule.processAll(t, allowEditableInstances)
 		
 		if not var1 then
-			if not isServer then
+			if isServer then
+				error(var2[1])
+			else
 				return var1, var2
-			elseif unpublishedDependenciesModule.shouldReturnOnLoadFailure(p1) then
-				return false, {}
 			end
-			error(var2[1])
 		end
 		p1.editableMeshes = var2.editableMeshes
 		p1.editableImages = var2.editableImages
@@ -427,7 +421,7 @@ function t.validateFullBody(p2, p3, p4, p5, p6, p7)
 end
 
 function t.validateShoesWithContext(p8)
-	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), unpublishedDependenciesModule (ref), validateShoesModule (ref), destroyEditableInstancesModule (ref)
+	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateShoesModule (ref), destroyEditableInstancesModule (ref)
 	assert(p8.fullBodyData ~= nil, "fullBodyData required in validationContext for validateShoes")
 	local isServer = p8.isServer
 	local fullBodyData = p8.fullBodyData
@@ -448,12 +442,11 @@ function t.validateShoesWithContext(p8)
 	local var9, var10 = createEditableInstancesForContextModule.processAll(t, allowEditableInstances)
 	
 	if not var9 then
-		if not isServer then
+		if isServer then
+			error(var10[1])
+		else
 			return var9, var10
-		elseif unpublishedDependenciesModule.shouldReturnOnLoadFailure(p8) then
-			return false, {}
 		end
-		error(var10[1])
 	end
 	p8.editableMeshes = var10.editableMeshes
 	p8.editableImages = var10.editableImages

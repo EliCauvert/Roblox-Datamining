@@ -49,7 +49,7 @@ function t.storeDesiredData(p1, p2)
 		end
 	end
 	if p2[sharedDataMember.curveAnimations] then
-		p1.curveAnimations = fetchCurveAnimationsModule.getData(rootInstance, p1.consumerConfig) or t.DATA_FETCH_FAILURE
+		p1.curveAnimations = fetchCurveAnimationsModule.getData(rootInstance) or t.DATA_FETCH_FAILURE
 	end
 	if p2[sharedDataMember.curveAnimComputedFrames] then
 		if p1.curveAnimations and p1.curveAnimations ~= t.DATA_FETCH_FAILURE then

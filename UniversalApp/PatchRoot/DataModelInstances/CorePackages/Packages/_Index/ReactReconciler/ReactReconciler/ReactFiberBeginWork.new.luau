@@ -2,7 +2,7 @@
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring(p1))
-	error("FIXME (roblox): " .. p0 .. " is unimplemented", 2)
+	error("FIXME (roblox): " .. p1 .. " is unimplemented", 2)
 end
 
 local parent = script.Parent.Parent
@@ -225,25 +225,14 @@ if dEV then
 	t_1.didWarnAboutReassigningProps = false
 	t_2.didWarnAboutDefaultPropsOnFunctionComponent = {}
 end
-local function reconcileChildren(p1, p2, p3, p4)
-	-- upvalues: mountChildFibers (ref), reactFeatureFlags (ref), reconcileChildFibers (ref)
+local _ = function(p1, p2, p3, p4)
+	-- upvalues: mountChildFibers (ref), reconcileChildFibers (ref)
 	if p1 == nil then
 		p2.child = mountChildFibers(p2, nil, p3, p4)
 		
 		return
-	elseif reactFeatureFlags.enableWorkLoopTrims then
-		local var3 = reconcileChildFibers(p2, p1.child, p3, p4)
-		
-		if var3 == nil and p2.child == nil then
-			return
-		else
-			p2.child = var3
-			
-			return
-		end
-	else
-		p2.child = reconcileChildFibers(p2, p1.child, p3, p4)
 	end
+	p2.child = reconcileChildFibers(p2, p1.child, p3, p4)
 end
 
 local _ = function(p1, p2, p3, p4)
@@ -253,7 +242,7 @@ local _ = function(p1, p2, p3, p4)
 end
 
 local function updateForwardRef(p1, p2, p3, p4, p5)
-	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), prepareToReadContext (ref), t_1 (ref), reactCurrentOwner (ref), setIsRendering (ref), renderWithHooks (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), var2 (write), bailoutHooks (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), reconcileChildren (ref)
+	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), prepareToReadContext (ref), t_1 (ref), reactCurrentOwner (ref), setIsRendering (ref), renderWithHooks (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), var2 (write), bailoutHooks (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	local propTypes
 	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and p2.type ~= p2.elementType then
 		propTypes = p3.propTypes
@@ -291,15 +280,19 @@ local function updateForwardRef(p1, p2, p3, p4, p5)
 	else
 		var3 = renderWithHooks(p1, p2, propTypes, p4, ref, p5)
 	end
-	if p1 == nil or var2 then
-		p2.flags = bit32.bor(p2.flags, performedWork)
-		reconcileChildren(p1, p2, var3, p5)
+	if p1 ~= nil and not var2 then
+		bailoutHooks(p1, p2, p5)
 		
-		return p2.child
+		return bailoutOnAlreadyFinishedWork(p1, p2, p5)
 	end
-	bailoutHooks(p1, p2, p5)
+	p2.flags = bit32.bor(p2.flags, performedWork)
 	
-	return bailoutOnAlreadyFinishedWork(p1, p2, p5)
+	if p1 == nil then
+		p2.child = mountChildFibers(p2, nil, var3, p5)
+	else
+		p2.child = reconcileChildFibers(p2, p1.child, var3, p5)
+	end
+	return p2.child
 end
 
 local function updateMemoComponent(p1, p2, p3, p4, p5, p6)
@@ -408,7 +401,7 @@ updateSimpleMemoComponent = function(p1, p2, p3, p4, p5, p6)
 end
 
 local function updateOffscreenComponent(p1, p2, p3)
-	-- upvalues: concurrentMode (ref), noMode (ref), reactFiberLaneModule (ref), pushRenderLanes (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), reconcileChildren (ref)
+	-- upvalues: concurrentMode (ref), noMode (ref), reactFiberLaneModule (ref), pushRenderLanes (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	local pendingProps = p2.pendingProps
 	local children = pendingProps.children
 	local var3 = if p1 ~= nil then p1.memoizedState else nil
@@ -443,34 +436,52 @@ local function updateOffscreenComponent(p1, p2, p3)
 		
 		return nil
 	end
-	reconcileChildren(p1, p2, children, p3)
-	
+	if p1 == nil then
+		p2.child = mountChildFibers(p2, nil, children, p3)
+	else
+		p2.child = reconcileChildFibers(p2, p1.child, children, p3)
+	end
 	return p2.child
 end
 
 function updateFragment(p1, p2, p3)
-	-- upvalues: reconcileChildren (ref)
-	reconcileChildren(p1, p2, p2.pendingProps, p3)
+	-- upvalues: mountChildFibers (ref), reconcileChildFibers (ref)
+	local pendingProps = p2.pendingProps
 	
+	if p1 == nil then
+		p2.child = mountChildFibers(p2, nil, pendingProps, p3)
+	else
+		p2.child = reconcileChildFibers(p2, p1.child, pendingProps, p3)
+	end
 	return p2.child
 end
 
 function updateMode(p1, p2, p3)
-	-- upvalues: reconcileChildren (ref)
-	reconcileChildren(p1, p2, p2.pendingProps.children, p3)
+	-- upvalues: mountChildFibers (ref), reconcileChildFibers (ref)
+	local children = p2.pendingProps.children
 	
+	if p1 == nil then
+		p2.child = mountChildFibers(p2, nil, children, p3)
+	else
+		p2.child = reconcileChildFibers(p2, p1.child, children, p3)
+	end
 	return p2.child
 end
 
 function updateProfiler(p1, p2, p3)
-	-- upvalues: enableProfilerTimer (ref), reconcileChildren (ref)
+	-- upvalues: enableProfilerTimer (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	if enableProfilerTimer then
 		local stateNode = p2.stateNode
 		stateNode.effectDuration = 0
 		stateNode.passiveEffectDuration = 0
 	end
-	reconcileChildren(p1, p2, p2.pendingProps.children, p3)
+	local children = p2.pendingProps.children
 	
+	if p1 == nil then
+		p2.child = mountChildFibers(p2, nil, children, p3)
+	else
+		p2.child = reconcileChildFibers(p2, p1.child, children, p3)
+	end
 	return p2.child
 end
 
@@ -484,7 +495,7 @@ local _ = function(p1, p2)
 end
 
 updateFunctionComponent = function(p1, p2, p3, p4, p5)
-	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), disableLegacyContext (ref), getUnmaskedContext (ref), getMaskedContext (ref), prepareToReadContext (ref), t_1 (ref), reactCurrentOwner (ref), setIsRendering (ref), renderWithHooks (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), var2 (write), bailoutHooks (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), reconcileChildren (ref)
+	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), disableLegacyContext (ref), getUnmaskedContext (ref), getMaskedContext (ref), prepareToReadContext (ref), t_1 (ref), reactCurrentOwner (ref), setIsRendering (ref), renderWithHooks (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), var2 (write), bailoutHooks (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	local propTypes
 	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and (type(p3) ~= "function" and p2.type ~= p2.elementType) then
 		propTypes = nil
@@ -523,15 +534,19 @@ updateFunctionComponent = function(p1, p2, p3, p4, p5)
 	else
 		var3 = renderWithHooks(p1, p2, p3, p4, propTypes, p5)
 	end
-	if p1 == nil or var2 then
-		p2.flags = bit32.bor(p2.flags, performedWork)
-		reconcileChildren(p1, p2, var3, p5)
+	if p1 ~= nil and not var2 then
+		bailoutHooks(p1, p2, p5)
 		
-		return p2.child
+		return bailoutOnAlreadyFinishedWork(p1, p2, p5)
 	end
-	bailoutHooks(p1, p2, p5)
+	p2.flags = bit32.bor(p2.flags, performedWork)
 	
-	return bailoutOnAlreadyFinishedWork(p1, p2, p5)
+	if p1 == nil then
+		p2.child = mountChildFibers(p2, nil, var3, p5)
+	else
+		p2.child = reconcileChildFibers(p2, p1.child, var3, p5)
+	end
+	return p2.child
 end
 
 local function updateClassComponent(p1, p2, p3, p4, p5)
@@ -583,7 +598,7 @@ local function updateClassComponent(p1, p2, p3, p4, p5)
 end
 
 function finishClassComponent(p1, p2, p3, p4, p5, p6)
-	-- upvalues: ref (ref), didCapture (ref), noFlags (ref), invalidateContextProvider (ref), bailoutOnAlreadyFinishedWork (write), reactCurrentOwner (ref), enableProfilerTimer (ref), stopProfilerTimerIfRunning (ref), dEV (ref), setIsRendering (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), performedWork (ref), reconcileChildFibers (ref), reconcileChildren (ref)
+	-- upvalues: ref (ref), didCapture (ref), noFlags (ref), invalidateContextProvider (ref), bailoutOnAlreadyFinishedWork (write), reactCurrentOwner (ref), enableProfilerTimer (ref), stopProfilerTimerIfRunning (ref), dEV (ref), setIsRendering (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), performedWork (ref), reconcileChildFibers (ref), mountChildFibers (ref)
 	local ref_1 = p2.ref
 	
 	if p1 == nil and ref_1 ~= nil or p1 ~= nil and p1.ref ~= ref_1 then
@@ -623,11 +638,17 @@ function finishClassComponent(p1, p2, p3, p4, p5, p6)
 		p2.flags = bit32.bor(p2.flags, performedWork)
 		
 		if p1 == nil or not ref_1 then
-			reconcileChildren(p1, p2, var3, p6)
-		else
 			local var4 = var3
+			
+			if p1 == nil then
+				p2.child = mountChildFibers(p2, nil, var4, p6)
+			else
+				p2.child = reconcileChildFibers(p2, p1.child, var4, p6)
+			end
+		else
+			local var5 = var3
 			p2.child = reconcileChildFibers(p2, p1.child, nil, p6)
-			p2.child = reconcileChildFibers(p2, nil, var4, p6)
+			p2.child = reconcileChildFibers(p2, nil, var5, p6)
 		end
 		p2.memoizedState = stateNode.state
 		
@@ -654,7 +675,7 @@ local _ = function(p1)
 end
 
 local function updateHostRoot(p1, p2, p3)
-	-- upvalues: pushTopLevelContextObject (ref), pushHostContainer (ref), invariant (ref), cloneUpdateQueue (ref), processUpdateQueue (ref), resetHydrationState (ref), bailoutOnAlreadyFinishedWork (write), enterHydrationState (ref), supportsHydration (ref), setWorkInProgressVersion (ref), mountChildFibers (ref), placement (ref), hydrating (ref), reconcileChildren (ref)
+	-- upvalues: pushTopLevelContextObject (ref), pushHostContainer (ref), invariant (ref), cloneUpdateQueue (ref), processUpdateQueue (ref), resetHydrationState (ref), bailoutOnAlreadyFinishedWork (write), enterHydrationState (ref), supportsHydration (ref), setWorkInProgressVersion (ref), mountChildFibers (ref), placement (ref), hydrating (ref), reconcileChildFibers (ref)
 	local stateNode = p2.stateNode
 	
 	if stateNode.pendingContext then
@@ -695,15 +716,17 @@ local function updateHostRoot(p1, p2, p3)
 			var5.flags = bit32.bor(bit32.band(var5.flags, bit32.bnot(placement)), hydrating)
 			var5 = var5.sibling
 		end
+	elseif p1 == nil then
+		p2.child = mountChildFibers(p2, nil, element, p3)
 	else
-		reconcileChildren(p1, p2, element, p3)
-		resetHydrationState()
+		p2.child = reconcileChildFibers(p2, p1.child, element, p3)
 	end
+	resetHydrationState()
 	return p2.child
 end
 
 local function updateHostComponent(p4, p5, p6)
-	-- upvalues: pushHostContext (ref), tryToClaimNextHydratableInstance (ref), shouldSetTextContent (ref), contentReset (ref), performedWork (ref), ref (ref), reconcileChildren (ref)
+	-- upvalues: pushHostContext (ref), tryToClaimNextHydratableInstance (ref), shouldSetTextContent (ref), contentReset (ref), performedWork (ref), ref (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	pushHostContext(p5)
 	
 	if p4 == nil then
@@ -725,8 +748,11 @@ local function updateHostComponent(p4, p5, p6)
 	if p4 == nil and ref_1 ~= nil or p4 ~= nil and p4.ref ~= ref_1 then
 		p5.flags = bit32.bor(p5.flags, ref)
 	end
-	reconcileChildren(p4, p5, children, p6)
-	
+	if p4 == nil then
+		p5.child = mountChildFibers(p5, nil, children, p6)
+	else
+		p5.child = reconcileChildFibers(p5, p4.child, children, p6)
+	end
 	return p5.child
 end
 
@@ -895,7 +921,7 @@ local function mountIndeterminateComponent(a, b, p4, p5)
 		local var11 = getComponentName(p4) or "Unknown"
 		
 		if not t_2.didWarnAboutModulePatternComponent[var11] then
-			console.error("The <%s /> component appears to be a function component that returns a class instance. " .. "Change %s to a class that extends React.Component instead. " .. var76, var11)
+			console.error("The <%s /> component appears to be a function component that returns a class instance. " .. "Change %s to a class that extends React.Component instead. " .. var11, var11)
 			t_2.didWarnAboutModulePatternComponent[var11] = true
 		end
 	end
@@ -932,7 +958,7 @@ function validateFunctionComponentInDev(p4, p5)
 			local var7 = getCurrentFiberOwnerNameInDevOrNull()
 			
 			if var7 then
-				var6 ..= "\n\nCheck the render method of `" .. var80 .. "`."
+				var6 ..= "\n\nCheck the render method of `" .. var7 .. "`."
 			end
 			local var8 = var7 or (p4._debugID or "")
 			local debugSource = p4._debugSource
@@ -1370,14 +1396,16 @@ updateDehydratedSuspenseComponent = function(p4, p5, p6, p7, p8)
 end
 
 function updatePortalComponent(p4, p5, p6)
-	-- upvalues: pushHostContainer (ref), reconcileChildFibers (ref), reconcileChildren (ref)
+	-- upvalues: pushHostContainer (ref), reconcileChildFibers (ref), mountChildFibers (ref)
 	pushHostContainer(p5, p5.stateNode.containerInfo)
 	local pendingProps = p5.pendingProps
 	
 	if p4 == nil then
 		p5.child = reconcileChildFibers(p5, nil, pendingProps, p6)
+	elseif p4 == nil then
+		p5.child = mountChildFibers(p5, nil, pendingProps, p6)
 	else
-		reconcileChildren(p4, p5, pendingProps, p6)
+		p5.child = reconcileChildFibers(p5, p4.child, pendingProps, p6)
 	end
 	return p5.child
 end
@@ -1385,7 +1413,8 @@ end
 local var6 = false
 
 local function updateContextProvider(p4, p5, p6)
-	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), array (ref), object (ref), var6 (write), console (ref), checkPropTypes (ref), pushProvider (ref), calculateChangedBits (ref), hasContextChanged (ref), bailoutOnAlreadyFinishedWork (write), propagateContextChange (ref), reconcileChildren (ref)
+	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), array (ref), object (ref), var6 (write), console (ref), checkPropTypes (ref), pushProvider (ref), calculateChangedBits (ref), hasContextChanged (ref), bailoutOnAlreadyFinishedWork (write), propagateContextChange (ref), mountChildFibers (ref), reconcileChildFibers (ref)
+	local propTypes
 	local context = p5.type._context
 	local pendingProps = p5.pendingProps
 	local memoizedProps = p5.memoizedProps
@@ -1396,7 +1425,7 @@ local function updateContextProvider(p4, p5, p6)
 			var6 = true
 			console.error("The `value` prop is required for the `<Context.Provider>`. Did you misspell it or forget to pass it?")
 		end
-		local propTypes = p5.type.propTypes
+		propTypes = p5.type.propTypes
 		local validateProps = p5.type.validateProps
 		
 		if propTypes or validateProps then
@@ -1416,8 +1445,13 @@ local function updateContextProvider(p4, p5, p6)
 			propagateContextChange(p5, context, var7, p6)
 		end
 	end
-	reconcileChildren(p4, p5, pendingProps.children, p6)
+	propTypes = pendingProps.children
 	
+	if p4 == nil then
+		p5.child = mountChildFibers(p5, nil, propTypes, p6)
+	else
+		p5.child = reconcileChildFibers(p5, p4.child, propTypes, p6)
+	end
 	return p5.child
 end
 
@@ -1427,7 +1461,7 @@ local t_4 = {
 }
 
 function updateContextConsumer(p4, p5, p6)
-	-- upvalues: dEV (ref), t_4 (ref), console (ref), cOMPATWARNINGS (ref), prepareToReadContext (ref), t_1 (ref), readContext (ref), reactCurrentOwner (ref), setIsRendering (ref), performedWork (ref), reconcileChildren (ref)
+	-- upvalues: dEV (ref), t_4 (ref), console (ref), cOMPATWARNINGS (ref), prepareToReadContext (ref), t_1 (ref), readContext (ref), reactCurrentOwner (ref), setIsRendering (ref), performedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	local type = p5.type
 	
 	if dEV then
@@ -1468,8 +1502,12 @@ function updateContextConsumer(p4, p5, p6)
 		var7 = render(var8)
 	end
 	p5.flags = bit32.bor(p5.flags, performedWork)
-	reconcileChildren(p4, p5, var7, p6)
 	
+	if p4 == nil then
+		p5.child = mountChildFibers(p5, nil, var7, p6)
+	else
+		p5.child = reconcileChildFibers(p5, p4.child, var7, p6)
+	end
 	return p5.child
 end
 

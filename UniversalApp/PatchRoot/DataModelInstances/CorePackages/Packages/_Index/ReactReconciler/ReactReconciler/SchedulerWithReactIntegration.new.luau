@@ -3,8 +3,7 @@ local reactGlobalsModule = require(parent.ReactGlobals)
 local array = require(parent.LuauPolyfill).Array
 local _ = require(script.Parent.ReactInternalTypes)
 local schedulerModule = require(parent.Scheduler)
-local reactFeatureFlags = require(parent.Shared).ReactFeatureFlags
-local decoupleUpdatePriorityFromScheduler = reactFeatureFlags.decoupleUpdatePriorityFromScheduler
+local decoupleUpdatePriorityFromScheduler = require(parent.Shared).ReactFeatureFlags.decoupleUpdatePriorityFromScheduler
 local invariant = require(parent.Shared).invariant
 local describeError = require(parent.Shared).describeError
 local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
@@ -120,7 +119,7 @@ local function flushSyncCallbackQueue()
 end
 
 var1 = function()
-	-- upvalues: var5 (write), var3 (write), decoupleUpdatePriorityFromScheduler (ref), getCurrentUpdateLanePriority (ref), reactGlobalsModule (ref), setCurrentUpdateLanePriority (ref), syncLanePriority (ref), runWithPriority (ref), describeError (ref), immediatePriority (ref), reactFeatureFlags (ref), unstableRunWithPriority (ref), array (ref), unstableScheduleCallback (ref), unstableImmediatePriority (ref), flushSyncCallbackQueue (ref)
+	-- upvalues: var5 (write), var3 (write), decoupleUpdatePriorityFromScheduler (ref), getCurrentUpdateLanePriority (ref), reactGlobalsModule (ref), setCurrentUpdateLanePriority (ref), syncLanePriority (ref), runWithPriority (ref), describeError (ref), immediatePriority (ref), unstableRunWithPriority (ref), array (ref), unstableScheduleCallback (ref), unstableImmediatePriority (ref), flushSyncCallbackQueue (ref)
 	if var5 or var3 == nil then
 		return false
 	end
@@ -155,12 +154,7 @@ var1 = function()
 			end)
 			var8 = ok
 			var10 = status
-			
-			if not reactFeatureFlags.keepSyncQueueOnError then
-				var3 = nil
-			elseif var8 then
-				var3 = nil
-			end
+			var3 = nil
 		end
 		setCurrentUpdateLanePriority(var9)
 		var5 = false
@@ -197,12 +191,7 @@ var1 = function()
 			end)
 			var13 = ok
 			var14 = status
-			
-			if not reactFeatureFlags.keepSyncQueueOnError then
-				var3 = nil
-			elseif var13 then
-				var3 = nil
-			end
+			var3 = nil
 		end
 		var5 = false
 		

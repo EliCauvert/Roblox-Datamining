@@ -6,6 +6,7 @@ local var1 = if runService:IsStudio() then game:GetService("StudioService") else
 local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local getEngineFeatureEngineUGCValidationReportScriptTimeModule = require(parent.flags.getEngineFeatureEngineUGCValidationReportScriptTime)
 local getEngineFeatureEngineUGCValidationIECTelemetryModule = require(parent.flags.getEngineFeatureEngineUGCValidationIECTelemetry)
+local getEngineFeatureEngineUGCValidateRigidNonSkinnedModule = require(parent.flags.getEngineFeatureEngineUGCValidateRigidNonSkinned)
 local getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule = require(parent.flags.getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBounds)
 local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 local getFFlagUGCValidationEyebrowEyelashSupportModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
@@ -120,6 +121,10 @@ if getFFlagUGCValidateTexturePackModule() then
 	t.ErrorType.validateTexturePack_InvalidTexturePackURL = "validateTexturePack_InvalidTexturePackURL"
 	t.ErrorType.validateTexturePack_FailedToDownloadTexturePack = "validateTexturePack_FailedToDownloadTexturePack"
 	t.ErrorType.validateTexturePack_TexturePackMismatch = "validateTexturePack_TexturePackMismatch"
+end
+if getEngineFeatureEngineUGCValidateRigidNonSkinnedModule() then
+	t.ErrorType.validateRigidMeshSkinning_FailedToDownload = "validateRigidMeshSkinning_FailedToDownload"
+	t.ErrorType.validateRigidMeshSkinning_BonesFoundInMesh = "validateRigidMeshSkinning_BonesFoundInMesh"
 end
 t.ErrorType.validateMeshSizeProperty_FailedToLoadMesh = "validateMeshSizeProperty_FailedToLoadMesh"
 t.ErrorType.validateMeshSizeProperty_Mismatch = "validateMeshSizeProperty_Mismatch"

@@ -1,26 +1,25 @@
 ﻿local parent = script.Parent.Parent.Parent
 local object = require(parent.LuauPolyfill).Object
-local var1 = require(parent.SafeFlags).createGetFFlag("MemoizeVirtualizedListContext")()
 local reactModule = require(parent.React)
 local useMemo = reactModule.useMemo
 local useContext = reactModule.useContext
 local t = {}
-local var2 = reactModule.createContext(nil)
-t.VirtualizedListContext = var2
+local var1 = reactModule.createContext(nil)
+t.VirtualizedListContext = var1
 
 if _G.__DEV__ then
-	var2.displayName = "VirtualizedListContext"
+	var1.displayName = "VirtualizedListContext"
 end
 function t.VirtualizedListContextResetter(value)
-	-- upvalues: reactModule (ref), var2 (ref)
-	return reactModule.createElement(var2.Provider, { value = nil }, value.children)
+	-- upvalues: reactModule (ref), var1 (ref)
+	return reactModule.createElement(var1.Provider, { value = nil }, value.children)
 end
 
 function t.VirtualizedListContextProvider(p1)
-	-- upvalues: useMemo (ref), reactModule (ref), var2 (ref)
+	-- upvalues: useMemo (ref), reactModule (ref), var1 (ref)
 	local value = p1.value
 	
-	return reactModule.createElement(var2.Provider, {
+	return reactModule.createElement(var1.Provider, {
 		value = useMemo(function()
 			-- upvalues: value (ref)
 			return {
@@ -48,15 +47,11 @@ function t.VirtualizedListContextProvider(p1)
 end
 
 function t.VirtualizedListCellContextProvider(p1)
-	-- upvalues: useContext (ref), var2 (ref), var1 (ref), useMemo (ref), object (ref), reactModule (ref)
-	local cellKey = p1.cellKey
-	local var3 = useContext(var2)
+	-- upvalues: useContext (ref), var1 (ref), reactModule (ref), object (ref)
+	local var2 = useContext(var1)
 	
-	return reactModule.createElement(var2.Provider, {
-		value = if var1 then if var1 then useMemo(function()
-			-- upvalues: var3 (ref), object (copy), cellKey (ref)
-			return if var3 == nil then nil else object.assign(table.clone(var3), { cellKey = cellKey })
-		end, { var3, cellKey }) else nil elseif var3 == nil then nil else object.assign(table.clone(var3), { cellKey = cellKey })
+	return reactModule.createElement(var1.Provider, {
+		value = if var2 == nil then nil else object.assign(table.clone(var2), { cellKey = p1.cellKey })
 	}, p1.children)
 end
 

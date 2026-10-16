@@ -1,5 +1,5 @@
-﻿game:DefineFastFlag("UGCValidateEmissiveMapAllowed2", false)
+﻿game:DefineFastFlag("UGCValidateEmissiveMapAllowed", false)
 
 return function()
-	return game:GetFastFlag("UGCValidateEmissiveMapAllowed2")
+	return game:GetFastFlag("UGCValidateEmissiveMapAllowed")
 end

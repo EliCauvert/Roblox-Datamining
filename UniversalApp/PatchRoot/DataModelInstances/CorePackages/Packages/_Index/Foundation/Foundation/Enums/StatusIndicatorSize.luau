@@ -2,6 +2,5 @@
 	XSmall = "XSmall",
 	Small = "Small",
 	Medium = "Medium",
-	Large = "Large",
 	Pictogram = "Pictogram"
 }

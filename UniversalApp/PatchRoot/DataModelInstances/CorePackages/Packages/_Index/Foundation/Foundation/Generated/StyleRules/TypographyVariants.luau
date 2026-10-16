@@ -1,5 +1,5 @@
 ﻿return {
-	ElectricLime = "BuilderSans",
+	KidsClassic = "Cartoon",
 	NebulaDrift = "BuilderSans",
 	PixelPop = "BuilderSans",
 	SuperCharge = "BuilderSans",
@@ -12,9 +12,9 @@
 	PolarFreeze = "BuilderSans",
 	Classic = "Cartoon",
 	QuantumPulse = "BuilderSans",
-	Halloween2026 = "BuilderSans",
 	Default = "BuilderSans",
 	Kids = "BuilderSans",
+	ElectricLime = "BuilderSans",
 	InfernoBlast = "BuilderSans",
 	HyperPlum = "BuilderSans"
 }

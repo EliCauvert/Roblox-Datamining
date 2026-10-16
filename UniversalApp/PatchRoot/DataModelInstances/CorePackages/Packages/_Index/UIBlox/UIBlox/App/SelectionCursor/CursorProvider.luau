@@ -47,22 +47,22 @@ return function(p2)
 	local var11 = reactModule.createRef()
 	local var12, var13 = reactModule.useState(nil)
 	local var14 = roactGamepadModule.useRefCache()
-	local tokens = useStyleModule().Tokens
+	local selectionCursor = useStyleModule().Tokens.Component.SelectionCursor
 	
 	local var15 = function(p3, p4, p5)
-		-- upvalues: tokens (ref), var7 (ref), var8 (ref), cryoModule (copy), var14 (ref)
+		-- upvalues: selectionCursor (ref), var7 (ref), var8 (ref), cryoModule (copy), var14 (ref)
 		local var16
 		warn("UIBlox's SelectionCursor is deprecated and should not be used anymore.")
 		local var17 = if p3 ~= nil then p3 else UDim.new(0, 0)
 		local _ = 0
 		
 		if p5 == nil then
-			var16 = tokens.Stroke.Thick
+			var16 = selectionCursor.BorderWidth
 		else
 			assert(p5 > 0, "Error! borderWidth should be larger than 0.")
 			var16 = p5
 		end
-		local formattedText = string.format("%f %f %f %f", var17.Scale, var17.Offset, if p4 ~= nil then tokens.Size.Size_150 - var16 else p4 - var16, var16)
+		local formattedText = string.format("%f %f %f %f", var17.Scale, var17.Offset, if p4 ~= nil then selectionCursor.Offset - var16 else p4 - var16, var16)
 		
 		if var7[formattedText] == nil then
 			var8(cryoModule.Dictionary.join(var7, { [formattedText] = true }))

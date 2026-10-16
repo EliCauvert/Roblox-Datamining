@@ -164,32 +164,32 @@ function scrollView.init(p1, p2)
 		end
 	})
 	
-	function p3.getScrollResponder()
+	function p1.getScrollResponder()
 		-- upvalues: p1 (ref)
 		return p1
 	end
 	
-	function p3.getScrollableNode()
+	function p1.getScrollableNode()
 		-- upvalues: t_3 (copy), p1 (ref)
 		return t_3:findNodeHandle(p1._scrollViewRef)
 	end
 	
-	function p3.getInnerViewNode()
+	function p1.getInnerViewNode()
 		-- upvalues: t_3 (copy), p1 (ref)
 		return t_3:findNodeHandle(p1._innerViewRef)
 	end
 	
-	function p3.getInnerViewRef()
+	function p1.getInnerViewRef()
 		-- upvalues: p1 (ref)
 		return p1._innerViewRef
 	end
 	
-	function p3.getNativeScrollRef()
+	function p1.getNativeScrollRef()
 		-- upvalues: p1 (ref)
 		return p1._scrollViewRef
 	end
 	
-	function p3.scrollTo(p3)
+	function p1.scrollTo(p3)
 		-- upvalues: p1 (ref), default_1 (copy), boolean (copy)
 		local x = nil
 		local y = nil
@@ -206,7 +206,7 @@ function scrollView.init(p1, p2)
 		default_1.scrollTo(p1._scrollViewRef, if boolean.toJSBoolean(x) then x else 0, if boolean.toJSBoolean(y) then y else 0, not not animated)
 	end
 	
-	function p3.scrollToEnd(p3)
+	function p1.scrollToEnd(p3)
 		-- upvalues: p1 (ref), default_1 (copy)
 		local var3 = (p3 ~= nil and p3.animated) ~= false
 		
@@ -216,7 +216,7 @@ function scrollView.init(p1, p2)
 		default_1.scrollToEnd(p1._scrollViewRef, var3)
 	end
 	
-	function p3.flashScrollIndicators()
+	function p1.flashScrollIndicators()
 		-- upvalues: p1 (ref), default_1 (copy)
 		if p1._scrollViewRef == nil then
 			return
@@ -224,7 +224,7 @@ function scrollView.init(p1, p2)
 		default_1.flashScrollIndicators(p1._scrollViewRef)
 	end
 	
-	function p3.scrollResponderScrollNativeHandleToKeyboard(p3, p4, p5)
+	function p1.scrollResponderScrollNativeHandleToKeyboard(p3, p4, p5)
 		-- upvalues: p1 (ref), boolean (copy), t_4 (copy), t_3 (copy)
 		p1._additionalScrollOffset = if boolean.toJSBoolean(p4) then p4 else 0
 		p1._preventNegativeScrollOffset = boolean.toJSBoolean(p5)
@@ -238,7 +238,7 @@ function scrollView.init(p1, p2)
 		p3:measureLayout(p1._innerViewRef, p1._inputMeasureAndScrollToKeyboard, p1._textInputFocusError)
 	end
 	
-	function p3.scrollResponderZoomTo(p3, p4)
+	function p1.scrollResponderZoomTo(p3, p4)
 		-- upvalues: invariantModule (copy), t_2 (copy), array (copy), object (copy), p1 (ref), console (copy), default_1 (copy)
 		invariantModule(t_2.OS == "ios", "zoomToRect is not implemented")
 		
@@ -254,7 +254,7 @@ function scrollView.init(p1, p2)
 		default_1.zoomToRect(p1._scrollViewRef, p3, p4 ~= false)
 	end
 	
-	function p3._inputMeasureAndScrollToKeyboard(_, p3, _, p4)
+	function p1._inputMeasureAndScrollToKeyboard(_, p3, _, p4)
 		-- upvalues: t_1 (copy), p1 (ref), setTimeout (copy)
 		local height = t_1:get("window").height
 		
@@ -283,7 +283,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleScroll(p3)
+	function p1._handleScroll(p3)
 		-- upvalues: p1 (ref), t_2 (copy), console (copy)
 		if _G.__DEV__ and p1.props.onScroll and (p1.props.scrollEventThrottle == nil and t_2.OS == "ios") then
 			console.log("You specified `onScroll` on a <ScrollView> but not `scrollEventThrottle`. You will only receive one event. Using `16` you get all the events but be aware that it may cause frame drops, use a bigger number if you don't need as much precision.")
@@ -295,7 +295,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleLayout(p3)
+	function p1._handleLayout(p3)
 		-- upvalues: p1 (ref)
 		if p1.props.invertStickyHeaders == true then
 			p1:setState({ layoutHeight = p3.AbsoluteWindowSize.Y })
@@ -305,7 +305,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._overrideAutomaticCanvasSize(p3, p4)
+	function p1._overrideAutomaticCanvasSize(p3, p4)
 		-- upvalues: p1 (ref)
 		if p1._scrollViewRef == nil then return end
 		local current = p1._scrollViewRef._nativeRef.current
@@ -324,7 +324,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleContentOnLayout(p3)
+	function p1._handleContentOnLayout(p3)
 		-- upvalues: p1 (ref)
 		local x = p3.AbsoluteSize.X
 		local y = p3.AbsoluteSize.Y
@@ -352,7 +352,7 @@ function scrollView.init(p1, p2)
 		end
 	})
 	
-	function p3.scrollResponderKeyboardWillShow(p3)
+	function p1.scrollResponderKeyboardWillShow(p3)
 		-- upvalues: p1 (ref)
 		p1._keyboardWillOpenTo = p3
 		
@@ -361,7 +361,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3.scrollResponderKeyboardWillHide(p3)
+	function p1.scrollResponderKeyboardWillHide(p3)
 		-- upvalues: p1 (ref)
 		p1._keyboardWillOpenTo = nil
 		
@@ -370,7 +370,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3.scrollResponderKeyboardDidShow(p3)
+	function p1.scrollResponderKeyboardDidShow(p3)
 		-- upvalues: boolean (copy), p1 (ref)
 		if boolean.toJSBoolean(p3) then
 			p1._keyboardWillOpenTo = p3
@@ -380,7 +380,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3.scrollResponderKeyboardDidHide(p3)
+	function p1.scrollResponderKeyboardDidHide(p3)
 		-- upvalues: p1 (ref)
 		p1._keyboardWillOpenTo = nil
 		
@@ -389,7 +389,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleMomentumScrollBegin(p3)
+	function p1._handleMomentumScrollBegin(p3)
 		-- upvalues: p1 (ref)
 		p1._lastMomentumScrollBeginTime = os.clock() * 1000
 		
@@ -398,7 +398,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleMomentumScrollEnd(p3)
+	function p1._handleMomentumScrollEnd(p3)
 		-- upvalues: t_6 (copy), p1 (ref)
 		t_6:endScroll()
 		p1._lastMomentumScrollEndTime = os.clock() * 1000
@@ -408,7 +408,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleScrollBeginDrag(p3)
+	function p1._handleScrollBeginDrag(p3)
 		-- upvalues: t_6 (copy), t_2 (copy), p1 (ref)
 		t_6:beginScroll()
 		
@@ -420,7 +420,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleScrollEndDrag(p3, p4)
+	function p1._handleScrollEndDrag(p3, p4)
 		-- upvalues: p1 (ref), boolean (copy), t_6 (copy)
 		if not p1:_isAnimating() and (not boolean.toJSBoolean(nil) or (nil).x == 0 and (nil).y == 0) then
 			t_6:endScroll()
@@ -430,12 +430,12 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._isAnimating()
+	function p1._isAnimating()
 		-- upvalues: p1 (ref)
 		return os.clock() * 1000 - p1._lastMomentumScrollEndTime < 16
 	end
 	
-	function p3._handleResponderGrant(p3)
+	function p1._handleResponderGrant(p3)
 		-- upvalues: p1 (ref)
 		p1._observedScrollSinceBecomingResponder = false
 		
@@ -445,9 +445,9 @@ function scrollView.init(p1, p2)
 		p1._becameResponderWhileAnimating = p1:_isAnimating()
 	end
 	
-	function p3._handleResponderReject() end
+	function p1._handleResponderReject() end
 	
-	function p3._handleResponderRelease(p3)
+	function p1._handleResponderRelease(p3)
 		-- upvalues: p1 (ref), console (copy), t_7 (copy)
 		p1._isTouching = #p3.nativeEvent.touches ~= 0
 		
@@ -468,22 +468,22 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleResponderTerminationRequest()
+	function p1._handleResponderTerminationRequest()
 		-- upvalues: p1 (ref)
 		return not p1._observedScrollSinceBecomingResponder
 	end
 	
-	function p3._handleScrollShouldSetResponder()
+	function p1._handleScrollShouldSetResponder()
 		-- upvalues: p1 (ref)
 		return if p1.props.disableScrollViewPanResponder == true then false else p1._isTouching
 	end
 	
-	function p3._handleStartShouldSetResponder(p3)
+	function p1._handleStartShouldSetResponder(p3)
 		-- upvalues: p1 (ref), t_7 (copy)
 		return if p1.props.disableScrollViewPanResponder == true then false else p1.props.keyboardShouldPersistTaps == "handled" and p1:_keyboardIsDismissible() and p3.target ~= t_7:currentlyFocusedInput()
 	end
 	
-	function p3._handleStartShouldSetResponderCapture(p3)
+	function p1._handleStartShouldSetResponderCapture(p3)
 		-- upvalues: p1 (ref), boolean (copy), console (copy), t_7 (copy)
 		if p1:_isAnimating() then
 			return true
@@ -503,14 +503,14 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._keyboardIsDismissible()
+	function p1._keyboardIsDismissible()
 		-- upvalues: t_7 (copy), p1 (ref), t_2 (copy)
 		local var3 = t_7:currentlyFocusedInput()
 		
 		return (var3 ~= nil and t_7:isTextInput(var3)) and (if p1._keyboardWillOpenTo == nil then t_2.OS == "android" else true)
 	end
 	
-	function p3._handleTouchEnd(p3, p4)
+	function p1._handleTouchEnd(p3, p4)
 		-- upvalues: p1 (ref)
 		p1._isTouching = false
 		
@@ -519,7 +519,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleTouchCancel(p3, p4)
+	function p1._handleTouchCancel(p3, p4)
 		-- upvalues: p1 (ref)
 		p1._isTouching = false
 		
@@ -528,7 +528,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleTouchStart(p3, p4)
+	function p1._handleTouchStart(p3, p4)
 		-- upvalues: p1 (ref)
 		p1._isTouching = true
 		
@@ -537,7 +537,7 @@ function scrollView.init(p1, p2)
 		end
 	end
 	
-	function p3._handleTouchMove(p3, p4)
+	function p1._handleTouchMove(p3, p4)
 		-- upvalues: p1 (ref)
 		if p1.props.onTouchMove then
 			p1.props.onTouchMove(p3, p4)

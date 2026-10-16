@@ -17,7 +17,7 @@ local function getStepForKeyCode(p1, p2)
 			return { sign = -1, size = sliderStepSizeModule.Page }
 		end
 	end
-	local var1 = if p2 then "vertical" else "horizontal"
+	local var1 = if flagsModule.FoundationSliderBeta and p2 then "vertical" else "horizontal"
 	
 	return if table.find(constantsModule.stepIncrement[var1], p1) then { sign = 1, size = sliderStepSizeModule.Step } elseif table.find(constantsModule.stepDecrement[var1], p1) then { sign = -1, size = sliderStepSizeModule.Step } else nil
 end
@@ -111,7 +111,7 @@ return function(p1, p2, p3, p4, p5)
 						
 						return
 					elseif table.find(constantsModule.analogStep, p9.KeyCode) then
-						local var8 = if p4 then p9.Position.Y else p9.Position.X
+						local var8 = if flagsModule.FoundationSliderBeta and p4 then p9.Position.Y else p9.Position.X
 						
 						if constantsModule.thumbstickDeadzone <= math.abs(var8) then
 							local var9 = if var8 > 0 then 1 else -1

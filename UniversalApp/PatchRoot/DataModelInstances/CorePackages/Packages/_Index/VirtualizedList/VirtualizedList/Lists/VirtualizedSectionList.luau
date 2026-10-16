@@ -19,19 +19,19 @@ function virtualizedSectionList.init(p1)
 	p1._updatePropsMap = {}
 	p1._listRef = nil
 	
-	function p0._captureRef(p2)
+	function p1._captureRef(p2)
 		-- upvalues: p1 (ref)
 		p1._listRef = p2
 	end
 	
-	function p0._keyExtractor(_, p2)
+	function p1._keyExtractor(_, p2)
 		-- upvalues: p1 (ref)
 		local var1 = p1:_subExtractor(p2)
 		
 		return if var1 then var1.key else tostring(p2)
 	end
 	
-	function p0._convertViewable(p2)
+	function p1._convertViewable(p2)
 		-- upvalues: invariantModule (copy), p1 (ref), keyExtractor (copy), object (copy)
 		invariantModule(p2.index ~= nil, "Received a broken ViewToken")
 		local index = p1:_subExtractor(p2.index)
@@ -48,7 +48,7 @@ function virtualizedSectionList.init(p1)
 		return nil
 	end
 	
-	function p0._onViewableItemsChanged(p2)
+	function p1._onViewableItemsChanged(p2)
 		-- upvalues: p1 (ref), array (copy), boolean (copy)
 		local viewableItems = p2.viewableItems
 		local changed = p2.changed
@@ -62,7 +62,7 @@ function virtualizedSectionList.init(p1)
 		end
 	end
 	
-	function p0._renderItem(p2)
+	function p1._renderItem(p2)
 		-- upvalues: p1 (ref), boolean (copy), invariantModule (copy), reactModule (copy), ItemWithSeparator (copy)
 		return function(p3)
 			-- upvalues: p1 (copy), boolean (copy), p2 (ref), invariantModule (copy), reactModule (copy), ItemWithSeparator (copy)
@@ -114,7 +114,7 @@ function virtualizedSectionList.init(p1)
 		end
 	end
 	
-	function p0._updatePropsFor(p2, p3)
+	function p1._updatePropsFor(p2, p3)
 		-- upvalues: p1 (ref)
 		local var1 = p1._updatePropsMap[p2]
 		
@@ -123,7 +123,7 @@ function virtualizedSectionList.init(p1)
 		end
 	end
 	
-	function p0._updateHighlightFor(p2, p3)
+	function p1._updateHighlightFor(p2, p3)
 		-- upvalues: p1 (ref)
 		local var1 = p1._updateHighlightMap[p2]
 		
@@ -132,7 +132,7 @@ function virtualizedSectionList.init(p1)
 		end
 	end
 	
-	function p0._setUpdateHighlightFor(p2, p3)
+	function p1._setUpdateHighlightFor(p2, p3)
 		-- upvalues: p1 (ref)
 		if p3 == nil then
 			p1._updateHighlightMap[p2] = nil
@@ -142,7 +142,7 @@ function virtualizedSectionList.init(p1)
 		p1._updateHighlightMap[p2] = p3
 	end
 	
-	function p0._setUpdatePropsFor(p2, p3)
+	function p1._setUpdatePropsFor(p2, p3)
 		-- upvalues: p1 (ref)
 		if p3 == nil then
 			p1._updatePropsMap[p2] = nil

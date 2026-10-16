@@ -3,6 +3,7 @@ local parent = script.Parent
 local parent_1 = parent.Parent
 local parent_2 = parent_1.Parent
 local parent_3 = parent_2.Parent
+local UIBloxConfigModule = require(parent_2.UIBloxConfig)
 local roactModule = require(parent_3.Roact)
 local tModule = require(parent_3.t)
 local cryoModule = require(parent_3.Cryo)
@@ -35,7 +36,7 @@ function genericButton.init(p1)
 		isButtonUnfocused = runService:GetRobloxGuiFocused()
 	})
 	
-	function p0.onStateChanged(p2, p3)
+	function p1.onStateChanged(p2, p3)
 		-- upvalues: p1 (ref)
 		p1:setState({ controlState = p3 })
 		
@@ -44,7 +45,7 @@ function genericButton.init(p1)
 		end
 	end
 	
-	function p0.onAbsoluteSizeChanged(p2)
+	function p1.onAbsoluteSizeChanged(p2)
 		-- upvalues: p1 (ref), roactModule (copy)
 		p1:setState({ absoluteSize = p2.AbsoluteSize })
 		
@@ -53,7 +54,7 @@ function genericButton.init(p1)
 		end
 	end
 	
-	function p0.onRobloxGuiFocusedChanged(p2)
+	function p1.onRobloxGuiFocusedChanged(p2)
 		-- upvalues: p1 (ref)
 		if p2 then
 			p1:setState({ targetLoadingProgress = 1, isButtonUnfocused = true })
@@ -129,9 +130,9 @@ function genericButton.render(p1)
 end
 
 function genericButton.renderButton(p1, p2)
-	-- upvalues: withStyleModule (ref), tModule (ref), var1 (ref), getContentStyleModule (ref), controlStateModule (ref), standardButtonSizeModule (ref), roactModule (ref), skeleton (ref), getClosestRadiusModule (ref), getIconSizeModule (ref), iconSizeModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), cryoModule (ref), interactableModule (ref), hoverButtonBackgroundModule (ref), eventConnection (ref), runService (ref)
+	-- upvalues: withStyleModule (ref), tModule (ref), var1 (ref), getContentStyleModule (ref), controlStateModule (ref), standardButtonSizeModule (ref), roactModule (ref), skeleton (ref), getClosestRadiusModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), cryoModule (ref), interactableModule (ref), hoverButtonBackgroundModule (ref), eventConnection (ref), runService (ref)
 	return withStyleModule(function(p3)
-		-- upvalues: tModule (copy), p1 (ref), var1 (copy), p2 (ref), getContentStyleModule (copy), controlStateModule (copy), standardButtonSizeModule (copy), roactModule (copy), skeleton (copy), getClosestRadiusModule (copy), getIconSizeModule (copy), iconSizeModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), cryoModule (copy), interactableModule (copy), hoverButtonBackgroundModule (copy), eventConnection (copy), runService (copy)
+		-- upvalues: tModule (copy), p1 (ref), var1 (copy), p2 (ref), getContentStyleModule (copy), controlStateModule (copy), standardButtonSizeModule (copy), roactModule (copy), skeleton (copy), getClosestRadiusModule (copy), UIBloxConfigModule (copy), getIconSizeModule (copy), iconSizeModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), cryoModule (copy), interactableModule (copy), hoverButtonBackgroundModule (copy), eventConnection (copy), runService (copy)
 		assert(tModule.table(p3), "Style provider is missing.")
 		local controlState = p1.state.controlState
 		local text = p1.props.text
@@ -221,14 +222,14 @@ function genericButton.renderButton(p1, p2)
 				isLoadingShimmer = roactModule.createElement(skeleton, {
 					Size = if standardSize then UDim2.new(1, var8 * 2, 1, 0) else UDim2.new(1, 0, 1, 0),
 					Position = if standardSize then UDim2.new(0, -var8, 0, 0) else nil,
-					radius = getClosestRadiusModule({
+					radius = getClosestRadiusModule(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then {
 						None = p3.Tokens.Radius.None,
 						Small = p3.Tokens.Radius.Small,
 						Medium = p3.Tokens.Radius.Medium,
 						Large = p3.Tokens.Size.Size_300,
 						XLarge = p3.Tokens.Radius.Large,
 						Circle = p3.Tokens.Radius.Circle
-					}, UDim.new(0, 8))
+					} else p3.Tokens.Semantic.Radius, UDim.new(0, 8))
 				})
 			}
 		else
